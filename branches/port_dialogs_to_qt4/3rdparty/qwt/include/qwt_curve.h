@@ -17,14 +17,16 @@
 #include "qwt_data.h"
 #include "qwt_spline.h"
 #include "qwt_symbol.h"
+//Added by qt3to4:
+#include <Q3PointArray>
 
 class QPainter;
 class QwtDiMap;
 
 #if defined(QWT_TEMPLATEDLL)
-// MOC_SKIP_BEGIN
+#ifndef Q_MOC_RUN
 template class QWT_EXPORT QwtArray<double>;
-// MOC_SKIP_END
+#endif
 #endif
 
 /*!
@@ -172,7 +174,7 @@ protected:
         const QwtDiMap &xMap, const QwtDiMap &yMap);
 
     void closePolyline(const QwtDiMap &, const QwtDiMap &,
-        QPointArray &) const;
+        Q3PointArray &) const;
 
     virtual void curveChanged();
 

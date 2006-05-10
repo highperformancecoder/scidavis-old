@@ -10,12 +10,20 @@
 #include <qapplication.h>
 #include <qevent.h>
 #include <qpainter.h>
-#include <qframe.h>
+#include <q3frame.h>
 #include <qcursor.h>
 #include "qwt_text.h"
 #include "qwt_painter.h"
 #include "qwt_picker_machine.h"
 #include "qwt_picker.h"
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QPaintEvent>
+#include <Q3PointArray>
+#include <QKeyEvent>
+#include <Q3ValueList>
+#include <QResizeEvent>
+#include <QMouseEvent>
 
 /*!
   Constructor
@@ -74,8 +82,8 @@ void QwtPicker::init(QWidget *parent, int selectionFlags,
 
     if ( parent )
     {
-        if ( parent->focusPolicy() == QWidget::NoFocus )
-            parent->setFocusPolicy(QWidget::WheelFocus);
+        if ( parent->focusPolicy() == Qt::NoFocus )
+            parent->setFocusPolicy(Qt::WheelFocus);
 
         d_cursorLabelFont = parent->font();
         d_mouseTracking = parent->hasMouseTracking();
@@ -448,7 +456,7 @@ void QwtPicker::drawRubberBand(const QRect &clipRect) const
     QPainter painter(widget);
     painter.setClipRect(clipRect.isValid() ? clipRect : pickRect());
     painter.setClipping(TRUE);
-    painter.setRasterOp(XorROP);
+    //painter.setRasterOp(XorROP);
 
     QPen pen = d_rubberBandPen;
     pen.setColor(QColor(bg.rgb() ^ pen.color().rgb()));
@@ -470,7 +478,7 @@ void QwtPicker::drawRubberBand(const QRect &clipRect) const
 */
 
 void QwtPicker::drawRubberBand(QPainter *painter,
-    const QRect &pickRect, const QPointArray &pa) const
+    const QRect &pickRect, const Q3PointArray &pa) const
 {
     if ( rubberBand() == NoRubberBand )
         return;
@@ -597,7 +605,7 @@ void QwtPicker::drawCursorLabel(const QRect &clipRect) const
     QPainter painter(widget);
     painter.setClipRect(clipRect.isValid() ? clipRect : pickRect());
     painter.setClipping(TRUE);
-    painter.setRasterOp(XorROP);
+    //painter.setRasterOp(XorROP);
 
     QPen pen = d_cursorLabelPen;
     pen.setColor(QColor((bg.rgb() ^ pen.color().rgb())));
@@ -625,7 +633,7 @@ void QwtPicker::drawCursorLabel(const QRect &clipRect) const
    \sa rubberBand(), RubberBand, selectionFlags()
 */
 void QwtPicker::drawCursorLabel(QPainter *painter, const QRect &pickRect,
-        const QPoint &pos, const QPointArray &pa) const
+        const QPoint &pos, const Q3PointArray &pa) const
 {
     int alignment = 0;
     if ( isActive() && pa.count() > 1 && rubberBand() != NoRubberBand )
@@ -972,7 +980,7 @@ void QwtPicker::transition(const QEvent *e)
     if ( !d_stateMachine )
         return;
 
-    QValueList<QwtPickerMachine::Command> commandList =
+    Q3ValueList<QwtPickerMachine::Command> commandList =
         d_stateMachine->transition(*this, e);
 
     const QPoint pos = parentWidget()->mapFromGlobal(QCursor::pos());
@@ -1121,7 +1129,7 @@ void QwtPicker::move(const QPoint &pos)
     }
 }
 
-bool QwtPicker::accept(QPointArray &) const
+bool QwtPicker::accept(Q3PointArray &) const
 {
     return TRUE;
 }
@@ -1136,7 +1144,7 @@ bool QwtPicker::isActive() const
 }
 
 //!  Return Selected points
-const QPointArray &QwtPicker::selection() const
+const Q3PointArray &QwtPicker::selection() const
 {
     return d_selection;
 }
@@ -1211,7 +1219,7 @@ QRect QwtPicker::pickRect() const
         return rect;
 
     if ( widget->inherits("QFrame") )
-        rect = ((QFrame *)widget)->contentsRect();
+        rect = ((Q3Frame *)widget)->contentsRect();
     else
         rect = widget->rect();
 

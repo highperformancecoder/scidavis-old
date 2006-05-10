@@ -12,7 +12,7 @@
 #ifndef QWT_PLOT_H
 #define QWT_PLOT_H
 
-#include <qframe.h>
+#include <q3frame.h>
 #include "qwt_global.h"
 #include "qwt_array.h"
 #include "qwt_grid.h"
@@ -25,6 +25,11 @@
 #include "qwt_plot_printfilter.h"
 #include "qwt_plot_classes.h"
 #include "qwt_plot_dict.h"
+//Added by qt3to4:
+#include <QResizeEvent>
+#include <QMouseEvent>
+#include <QEvent>
+#include <QLabel>
 
 class QLabel;
 class QwtPlotLayout;
@@ -82,7 +87,7 @@ myPlot->replot();
 \endverbatim
 */
 
-class QWT_EXPORT QwtPlot: public QFrame
+class QWT_EXPORT QwtPlot: public Q3Frame
 {
     friend class QwtPlotItem;
     friend class QwtPlotCanvas;

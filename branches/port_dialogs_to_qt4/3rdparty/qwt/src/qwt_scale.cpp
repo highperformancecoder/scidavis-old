@@ -16,6 +16,9 @@
 #include "qwt_math.h"
 #include "qwt_paint_buffer.h"
 #include "qwt_text.h"
+//Added by qt3to4:
+#include <QPaintEvent>
+#include <QResizeEvent>
 
 /*!
   \brief Create a scale with the position QwtScale::Left
@@ -25,7 +28,7 @@
   \warning Workaround of a designer problem
 */
 QwtScale::QwtScale(QWidget *parent, const char *name):
-    QWidget(parent, name, Qt::WRepaintNoErase|Qt::WResizeNoErase)
+    QWidget(parent, name, Qt::WNoAutoErase|Qt::WResizeNoErase)
 {
     initScale(QwtScale::Left);
 }
@@ -39,7 +42,7 @@ QwtScale::QwtScale(QWidget *parent, const char *name):
   \param name passed to QWidget's CTOR
 */
 QwtScale::QwtScale(QwtScale::Position pos, QWidget *parent, const char *name):
-    QWidget(parent,name, Qt::WRepaintNoErase|Qt::WResizeNoErase)
+    QWidget(parent,name, Qt::WNoAutoErase|Qt::WResizeNoErase)
 {
     initScale(pos);
 }
@@ -80,10 +83,10 @@ void QwtScale::initScale(QwtScale::Position pos)
     }
 
     d_scaleDraw = new QwtScaleDraw;
-    d_scaleDraw->setGeometry(0, 0, 10, sdo);
+    d_scaleDraw->setGeometry(0, 0, 10, Qt::Horizontal);
 
     d_title = new QwtPlainText( QString::null, font(), 
-                Qt::AlignHCenter | Qt::WordBreak | Qt::ExpandTabs);
+                Qt::AlignHCenter | Qt::TextWordWrap | Qt::TextExpandTabs);
 }
 
 /*!
@@ -132,7 +135,7 @@ void QwtScale::setPosition(Position pos)
     }
     
     if (d_scaleDraw)
-        d_scaleDraw->setGeometry(0,0,10,sdo);
+        d_scaleDraw->setGeometry(0,0,10,Qt::Horizontal);
     layoutScale();
 }
 
@@ -483,7 +486,7 @@ void QwtScale::layoutScale( bool update_geometry )
     {
     case QwtScaleDraw::Bottom:
         d_scaleDraw->setGeometry(r.x() + bd0, r.y() + d_baseDist,
-            r.width() - bd0 - bd1, QwtScaleDraw::Bottom);
+            r.width() - bd0 - bd1,Qt::Horizontal );
 
         d_titleOffset = d_titleDist + d_baseDist +
             d_scaleDraw->maxHeight(QPen(), fm);
@@ -491,21 +494,21 @@ void QwtScale::layoutScale( bool update_geometry )
 
     case QwtScaleDraw::Top:
         d_scaleDraw->setGeometry(r.x() + bd0, r.bottom() - d_baseDist,
-               r.width() - bd0 - bd1, QwtScaleDraw::Top);
+               r.width() - bd0 - bd1, Qt::Horizontal);
         d_titleOffset =  d_titleDist + d_baseDist +
                            d_scaleDraw->maxHeight(QPen(), fm);
         break;
 
     case QwtScaleDraw::Left:
         d_scaleDraw->setGeometry(r.right() - d_baseDist, r.y() + bd0,
-                            r.height() - bd0 - bd1, QwtScaleDraw::Left);
+                            r.height() - bd0 - bd1, Qt::Horizontal);
         d_titleOffset = d_baseDist + d_titleDist +
                         d_scaleDraw->maxWidth(QPen(), fm);
         break;
 
     case QwtScaleDraw::Right:
         d_scaleDraw->setGeometry(r.x() + d_baseDist, r.y() + bd0,
-                            r.height() - bd0 - bd1, QwtScaleDraw::Right);
+                            r.height() - bd0 - bd1, Qt::Horizontal);
         d_titleOffset = d_baseDist + d_titleDist +
                           d_scaleDraw->maxWidth(QPen(), fm);
         break;

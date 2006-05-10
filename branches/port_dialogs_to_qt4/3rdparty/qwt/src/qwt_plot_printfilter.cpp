@@ -42,21 +42,21 @@ protected:
     QColor scaleTitleColor[4];
     QFont scaleTitleFont[4];
 
-    QIntDict<QFont> legendFonts;
+    Q3IntDict<QFont> legendFonts;
 
     QColor widgetBackground;
     QColor canvasBackground;
     QColor gridColors[2];
 
-    QIntDict<QColor> curveColors;
-    QIntDict<QColor> curveSymbolBrushColors;
-    QIntDict<QColor> curveSymbolPenColors;
+    Q3IntDict<QColor> curveColors;
+    Q3IntDict<QColor> curveSymbolBrushColors;
+    Q3IntDict<QColor> curveSymbolPenColors;
 
-    QIntDict<QFont> markerFonts;
-    QIntDict<QColor> markerLabelColors;
-    QIntDict<QColor> markerLineColors;
-    QIntDict<QColor> markerSymbolBrushColors;
-    QIntDict<QColor> markerSymbolPenColors;
+    Q3IntDict<QFont> markerFonts;
+    Q3IntDict<QColor> markerLabelColors;
+    Q3IntDict<QColor> markerLineColors;
+    Q3IntDict<QColor> markerSymbolBrushColors;
+    Q3IntDict<QColor> markerSymbolPenColors;
 };
 
 /*!
@@ -144,7 +144,7 @@ void QwtPlotPrintFilter::apply(QwtPlot *plot) const
     }
     if ( plot->d_legend )
     {
-        QIntDictIterator<QWidget> it = plot->d_legend->itemIterator();
+        Q3IntDictIterator<QWidget> it = plot->d_legend->itemIterator();
         for ( QWidget *w = it.toFirst(); w != 0; w = ++it)
         {
             const int key = it.currentKey();
@@ -218,7 +218,7 @@ void QwtPlotPrintFilter::apply(QwtPlot *plot) const
     pen.setColor(color(pen.color(), MinorGrid));
     plot->d_grid->setMinPen(pen);
     
-    QIntDictIterator<QwtPlotCurve> itc(*plot->d_curves);
+    Q3IntDictIterator<QwtPlotCurve> itc(*plot->d_curves);
     for (QwtPlotCurve *c = itc.toFirst(); c != 0; c = ++itc )
     {
         const int key = itc.currentKey();
@@ -243,7 +243,7 @@ void QwtPlotPrintFilter::apply(QwtPlot *plot) const
         c->setPen(pen);
     }
 
-    QIntDictIterator<QwtPlotMarker> itm(*plot->d_markers);
+    Q3IntDictIterator<QwtPlotMarker> itm(*plot->d_markers);
     for (QwtPlotMarker *m = itm.toFirst(); m != 0; m = ++itm )
     {
         const int key = itm.currentKey();
@@ -301,7 +301,7 @@ void QwtPlotPrintFilter::reset(QwtPlot *plot) const
 
     if ( plot->d_legend )
     {
-        QIntDictIterator<QWidget> it = plot->d_legend->itemIterator();
+        Q3IntDictIterator<QWidget> it = plot->d_legend->itemIterator();
         for ( QWidget *w = it.toFirst(); w != 0; w = ++it)
         {
             const int key = it.currentKey();
@@ -373,7 +373,7 @@ void QwtPlotPrintFilter::reset(QwtPlot *plot) const
     pen.setColor(d_cache->gridColors[1]);
     plot->d_grid->setMinPen(pen);
     
-    QIntDictIterator<QwtPlotCurve> itc(*plot->d_curves);
+    Q3IntDictIterator<QwtPlotCurve> itc(*plot->d_curves);
     for (QwtPlotCurve *c = itc.toFirst(); c != 0; c = ++itc )
     {
         const int key = itc.currentKey();
@@ -406,7 +406,7 @@ void QwtPlotPrintFilter::reset(QwtPlot *plot) const
         }
     }
 
-    QIntDictIterator<QwtPlotMarker> itm(*plot->d_markers);
+    Q3IntDictIterator<QwtPlotMarker> itm(*plot->d_markers);
     for (QwtPlotMarker *m = itm.toFirst(); m != 0; m = ++itm )
     {
         const int key = itm.currentKey();

@@ -14,6 +14,9 @@
 #include <qevent.h>
 #include "qwt_counter.h"
 #include "qwt_arrbtn.h"
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <QKeyEvent>
 
 /*!
   The default number of buttons is set to 2. The default increments are:
@@ -33,7 +36,7 @@ QwtCounter::QwtCounter(QWidget *parent, const char *name ):
     d_increment[Button2] = 10;
     d_increment[Button3] = 100;
 
-    QHBoxLayout *layout = new QHBoxLayout(this);
+    Q3HBoxLayout *layout = new Q3HBoxLayout(this);
     layout->setAutoAdd(TRUE);
 
     int i;
@@ -41,7 +44,7 @@ QwtCounter::QwtCounter(QWidget *parent, const char *name ):
     {
         QwtArrowButton *btn =
             new QwtArrowButton(i+1, Qt::DownArrow,this);
-        btn->setFocusPolicy(QWidget::StrongFocus);
+        btn->setFocusPolicy(Qt::StrongFocus);
         btn->installEventFilter(this);
 
         connect(btn, SIGNAL(released()), SLOT(btnReleased()));
@@ -52,7 +55,7 @@ QwtCounter::QwtCounter(QWidget *parent, const char *name ):
 
     d_valueEdit = new QLineEdit(this);
     d_valueEdit->setReadOnly(TRUE);
-    d_valueEdit->setFocusPolicy(QWidget::NoFocus);
+    d_valueEdit->setFocusPolicy(Qt::NoFocus);
 
     layout->setStretchFactor(d_valueEdit, 10);
 
@@ -60,7 +63,7 @@ QwtCounter::QwtCounter(QWidget *parent, const char *name ):
     {
         QwtArrowButton *btn =
             new QwtArrowButton(i+1, Qt::UpArrow, this);
-        btn->setFocusPolicy(QWidget::StrongFocus);
+        btn->setFocusPolicy(Qt::StrongFocus);
         btn->installEventFilter(this);
 
         connect(btn, SIGNAL(released()), SLOT(btnReleased()));

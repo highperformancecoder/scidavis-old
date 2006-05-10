@@ -11,7 +11,7 @@
 
 #include <qlabel.h>
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include "qwt_painter.h"
 #include "qwt_legend.h"
 #include "qwt_plot.h"
@@ -22,6 +22,8 @@
 #include "qwt_scale.h"
 #include "qwt_text.h"
 #include "qwt_math.h"
+//Added by qt3to4:
+#include <Q3ValueList>
 
 /*!
   \brief Print the plot to a \c QPaintDevice (\c QPrinter)
@@ -72,7 +74,7 @@
 void QwtPlot::print(QPaintDevice &paintDev,
    const QwtPlotPrintFilter &pfilter) const
 {
-    QPaintDeviceMetrics mpr(&paintDev);
+    Q3PaintDeviceMetrics mpr(&paintDev);
 
     QRect rect(0, 0, mpr.width(), mpr.height());
     double aspect = double(rect.width())/double(rect.height());
@@ -111,7 +113,7 @@ void QwtPlot::print(QPainter *painter, const QRect &plotRect,
 #if QT_VERSION < 300 
     if ( painter->device()->isExtDev() )
     {
-        QPaintDeviceMetrics metrics(painter->device());
+        Q3PaintDeviceMetrics metrics(painter->device());
         if ( metrics.logicalDpiX() == 72 && metrics.logicalDpiY() == 72 )
         {
             // In Qt 2.x QPrinter returns hardcoded wrong metrics.
@@ -302,7 +304,7 @@ void QwtPlot::printLegend(QPainter *painter, const QRect &rect) const
     QwtDynGridLayout *legendLayout = (QwtDynGridLayout *)l;
 
     uint numCols = legendLayout->columnsForWidth(rect.width());
-    QValueList<QRect> itemRects = 
+    Q3ValueList<QRect> itemRects = 
         legendLayout->layoutItems(rect, numCols);
 
     int index = 0;
@@ -427,9 +429,9 @@ void QwtPlot::printScale(QPainter *painter,
     int ySd = sd->y();
     int lengthSd = sd->length();
 
-    sd->setGeometry(x, y, w, o);
+    sd->setGeometry(x, y, w, Qt::Horizontal);
     sd->draw(painter);
-    sd->setGeometry(xSd, ySd, lengthSd, o); // reset previous values
+    sd->setGeometry(xSd, ySd, lengthSd, Qt::Horizontal); // reset previous values
     painter->restore();
 }
 

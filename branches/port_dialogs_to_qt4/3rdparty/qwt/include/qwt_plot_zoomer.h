@@ -12,14 +12,18 @@
 #ifndef QWT_PLOT_ZOOMER
 #define QWT_PLOT_ZOOMER
 
-#include <qvaluestack.h>
+#include <q3valuestack.h>
 #include "qwt_double_rect.h"
 #include "qwt_plot_picker.h"
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <Q3PointArray>
+#include <QKeyEvent>
 
 #if defined(QWT_TEMPLATEDLL)
-// MOC_SKIP_BEGIN
-template class QWT_EXPORT QValueStack<QwtDoubleRect>;
-// MOC_SKIP_END
+#ifndef Q_MOC_RUN
+template class QWT_EXPORT Q3ValueStack<QwtDoubleRect>;
+#endif
 #endif
 
 /*!
@@ -77,7 +81,7 @@ public:
     void setMaxStackDepth(int);
     int maxStackDepth() const;
 
-    const QValueStack<QwtDoubleRect> &zoomStack() const;
+    const Q3ValueStack<QwtDoubleRect> &zoomStack() const;
     uint zoomRectIndex() const;
 
     virtual void setSelectionFlags(int);
@@ -102,7 +106,7 @@ signals:
     void zoomed(const QwtDoubleRect &rect);
 
 protected:
-    QValueStack<QwtDoubleRect> &zoomStack();
+    Q3ValueStack<QwtDoubleRect> &zoomStack();
 
     virtual void rescale();
 
@@ -113,14 +117,14 @@ protected:
 
     virtual void begin();
     virtual bool end(bool ok = TRUE);
-    virtual bool accept(QPointArray &) const;
+    virtual bool accept(Q3PointArray &) const;
 
 private:
     void init(int selectionFlags = RectSelection & ClickSelection, 
         DisplayMode cursorLabelMode = ActiveOnly);
 
     uint d_zoomRectIndex;
-    QValueStack<QwtDoubleRect> d_zoomStack;
+    Q3ValueStack<QwtDoubleRect> d_zoomStack;
 
     int d_maxStackDepth;
 };

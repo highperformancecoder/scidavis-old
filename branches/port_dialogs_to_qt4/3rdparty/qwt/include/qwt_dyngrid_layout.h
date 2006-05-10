@@ -13,7 +13,7 @@
 #include <qlayout.h>
 #include <qsize.h>
 #include "qwt_array.h"
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include "qwt_global.h"
 
 class QwtDynGridLayoutPrivate;
@@ -66,8 +66,14 @@ public:
 
     virtual uint columnsForWidth(int width) const;
 
-    QValueList<QRect> layoutItems(const QRect &, uint numCols) const;
+    Q3ValueList<QRect> layoutItems(const QRect &, uint numCols) const;
 
+
+	virtual QLayoutItem* itemAt(int) const {}
+	virtual QLayoutItem* takeAt(int) {}
+	virtual int count() const {}
+	
+	
 protected:
 
     void layoutGrid(uint numCols,

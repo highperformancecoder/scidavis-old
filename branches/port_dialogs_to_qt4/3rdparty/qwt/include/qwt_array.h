@@ -22,8 +22,8 @@
 #include <qarray.h>
 #define QwtArray QArray
 #else
-#include <qmemarray.h>
-#define QwtArray QMemArray
+#include <q3memarray.h>
+#define QwtArray Q3MemArray
 #endif
 
 #endif

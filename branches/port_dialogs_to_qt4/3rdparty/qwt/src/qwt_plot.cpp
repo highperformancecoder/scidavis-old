@@ -14,7 +14,7 @@
 #include <qapplication.h>
 #include <qlabel.h>
 #include <qpainter.h>
-#include <qfocusdata.h>
+//#include <qfocusdata.h>
 #include <qevent.h>
 #include "qwt_plot.h"
 #include "qwt_plot_layout.h"
@@ -27,6 +27,10 @@
 #include "qwt_plot_canvas.h"
 #include "qwt_math.h"
 #include "qwt_paint_buffer.h"
+//Added by qt3to4:
+#include <QResizeEvent>
+#include <QMouseEvent>
+#include <Q3Frame>
 
 /*!
   \brief Constructor
@@ -35,7 +39,7 @@
  */
 
 QwtPlot::QwtPlot(QWidget *parent, const char *name) :
-    QFrame(parent, name, Qt::WRepaintNoErase|Qt::WResizeNoErase)
+    Q3Frame(parent, name, Qt::WNoAutoErase|Qt::WResizeNoErase)
 {
     initPlot();
 }
@@ -48,7 +52,7 @@ QwtPlot::QwtPlot(QWidget *parent, const char *name) :
   \param name Widget name
  */
 QwtPlot::QwtPlot(const QString &title, QWidget *parent, const char *name) :
-    QFrame(parent, name, Qt::WRepaintNoErase|Qt::WResizeNoErase)
+    Q3Frame(parent, name, Qt::WNoAutoErase|Qt::WResizeNoErase)
 {
     initPlot(title);
 }
@@ -77,7 +81,7 @@ void QwtPlot::initPlot(const QString &title)
 
     d_lblTitle = new QLabel(title, this);
     d_lblTitle->setFont(QFont(fontInfo().family(), 14, QFont::Bold));
-    d_lblTitle->setAlignment(Qt::AlignCenter|Qt::WordBreak|Qt::ExpandTabs);
+    d_lblTitle->setAlignment(Qt::AlignCenter|Qt::TextWordWrap|Qt::TextExpandTabs);
 
     d_legend = new QwtLegend(this);
     d_autoLegend = FALSE;
@@ -96,7 +100,7 @@ void QwtPlot::initPlot(const QString &title)
     d_grid->setAxis(xBottom, yLeft);
 
     d_canvas = new QwtPlotCanvas(this);
-    d_canvas->setFrameStyle(QFrame::Panel|QFrame::Sunken);
+    d_canvas->setFrameStyle(Q3Frame::Panel|Q3Frame::Sunken);
     d_canvas->setLineWidth(2);
     d_canvas->setMidLineWidth(0);
 
@@ -149,14 +153,14 @@ void QwtPlot::initAxes()
 */
 bool QwtPlot::event(QEvent *e)
 {
-    bool ok = QFrame::event(e);
+    bool ok = Q3Frame::event(e);
     switch(e->type())
     {
 #if 0
-        case QEvent::ChildInserted:
+        case QEvent::ChildAdded:
         case QEvent::ChildRemoved:
 #endif
-        case QEvent::LayoutHint:
+        case QEvent::LayoutRequest:
             updateLayout();
             break;
         default:;
@@ -354,7 +358,7 @@ QSize QwtPlot::minimumSizeHint() const
 //! Resize and update internal layout
 void QwtPlot::resizeEvent(QResizeEvent *e)
 {
-    QFrame::resizeEvent(e);
+    Q3Frame::resizeEvent(e);
     updateLayout();
 }
 
@@ -376,7 +380,7 @@ void QwtPlot::replot()
     updateAxes();
 	// Force the scales to resize to prevent that
     // the scales and canvas are drawn with different maps.
-    QApplication::sendPostedEvents(this, QEvent::LayoutHint);
+    QApplication::sendPostedEvents(this, QEvent::LayoutRequest);
 
     d_canvas->invalidateCache();
     d_canvas->repaint(d_canvas->contentsRect(), FALSE);
@@ -522,25 +526,25 @@ void QwtPlot::updateTabOrder()
     // the first one. The following code seems much too
     // complicated but is there a better implementation ?
 
-    if ( d_canvas->focusPolicy() == QWidget::NoFocus || focusData() == NULL )
-        return;
+ //   if ( d_canvas->focusPolicy() == Qt::NoFocus || focusData() == NULL )
+   //     return;
 
     // move the cursor to the canvas
 
-    for ( int i = 0; i < focusData()->count(); i++ )
+/*    for ( int i = 0; i < focusData()->count(); i++ )
     {
         if ( focusData()->next() == d_canvas )
             break;
     }
-
+*/
     const bool canvasFirst = d_layout->legendPosition() == QwtPlot::Bottom ||
         d_layout->legendPosition() == QwtPlot::Right;
 
-    for ( int j = 0; j < focusData()->count(); j++ )
+/*    for ( int j = 0; j < focusData()->count(); j++ )
     {
         QWidget *w = canvasFirst ? focusData()->next() : focusData()->prev();
 
-        if ( w->focusPolicy() != QWidget::NoFocus 
+        if ( w->focusPolicy() != Qt::NoFocus 
             && w->parent() && w->parent() == d_legend->contentsWidget() )
         {
             if ( canvasFirst )
@@ -548,14 +552,14 @@ void QwtPlot::updateTabOrder()
                 do // go back to last non legend item
                 {
                     w = focusData()->prev(); // before the first legend item
-                } while ( w->focusPolicy() == QWidget::NoFocus );
+                } while ( w->focusPolicy() == Qt::NoFocus );
             }
 
             if ( w != d_canvas )
                 setTabOrder(w, d_canvas);
             break;
         }
-    }
+    }*/
 }
 
 //! drawContents

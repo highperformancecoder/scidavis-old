@@ -173,37 +173,39 @@ SOURCES = \
 ##############################################
 
 HEADERS += \
-    include/qwt_arrbtn.h \
+#    include/qwt_arrbtn.h \
     #include/qwt_analog_clock.h \
     #include/qwt_compass.h \
     #include/qwt_compass_rose.h \
     #include/qwt_dial.h \
     #include/qwt_dial_needle.h \
-    include/qwt_counter.h \
-    include/qwt_drange.h \
+#    include/qwt_counter.h \
+#    include/qwt_drange.h \
     #include/qwt_knob.h \
     #include/qwt_sclif.h \
     #include/qwt_sldbase.h \
     #include/qwt_slider.h \
-    include/qwt_text.h \
+#    include/qwt_text.h \
     #include/qwt_thermo.h \
     #include/qwt_wheel.h
 
 SOURCES += \
-    src/qwt_arrbtn.cpp \
+#    src/qwt_arrbtn.cpp \
     #src/qwt_analog_clock.cpp \
     #src/qwt_compass.cpp \
     #src/qwt_compass_rose.cpp \
     #src/qwt_dial.cpp \
     #src/qwt_dial_needle.cpp \
-    src/qwt_counter.cpp \
-    src/qwt_drange.cpp \
+#    src/qwt_counter.cpp \
+#    src/qwt_drange.cpp \
     #src/qwt_knob.cpp \
     #src/qwt_sclif.cpp \
     #src/qwt_sldbase.cpp \
     #src/qwt_slider.cpp \
-    src/qwt_text.cpp \
+#    src/qwt_text.cpp \
     #src/qwt_thermo.cpp \
     #src/qwt_wheel.cpp
 
 #debug:DEFINES += QWT_DEBUG
+#The following line was inserted by qt3to4
+QT +=  qt3support 

@@ -45,7 +45,7 @@ QwtScaleDraw::QwtScaleDraw():
     // snprintf is C99 and therefore not portable :-(
     // fieldwidth and precision must be in the range 0, 1, .., 99.
     sprintf(d_formatBuffer, "%%%d.%d%c", d_fieldwidth, d_prec, d_fmt);
-    setGeometry(0,0,100,Bottom);
+    setGeometry(0,0,100,Qt::Horizontal);
     setScale(0,100,0,0,10);
 }
 
@@ -214,7 +214,7 @@ void QwtScaleDraw::drawLabel(QPainter *p, double val) const
         const QString txt = label(val);
         if ( !txt.isEmpty() )
         {
-            QWMatrix m = labelWorldMatrix(QFontMetrics(p->font()),
+            QMatrix m = labelWorldMatrix(QFontMetrics(p->font()),
                 pos, alignment, rotation, txt);
 
             p->save();
@@ -248,7 +248,7 @@ void QwtScaleDraw::labelPlacement( const QFontMetrics &fm, double val,
 
     switch(d_orient)
     {
-        case Right:
+    /*    case Qt::DockRight:
         {
             x = d_xorg + d_majLen + d_hpad + 1;
             y = tval;
@@ -256,8 +256,8 @@ void QwtScaleDraw::labelPlacement( const QFontMetrics &fm, double val,
             if ( align == 0 )
                 align = Qt::AlignRight | Qt::AlignVCenter;
             break;
-        }
-        case Left:
+        }*/
+        case Qt::DockLeft:
         {
             x = d_xorg - d_majLen - d_hpad - 1;
             y = tval;
@@ -266,7 +266,7 @@ void QwtScaleDraw::labelPlacement( const QFontMetrics &fm, double val,
                 align = Qt::AlignLeft | Qt::AlignVCenter;
             break;
         }
-        case Bottom:
+        case Qt::DockBottom:
         {
             x = tval;
             y = d_yorg + d_majLen + d_vpad + 1;
@@ -275,7 +275,7 @@ void QwtScaleDraw::labelPlacement( const QFontMetrics &fm, double val,
                 align = Qt::AlignHCenter | Qt::AlignBottom;
             break;
         }
-        case Top:
+        case Qt::DockTop:
         {
             x = tval;
             y = d_yorg - d_majLen - d_vpad - 1;
@@ -333,7 +333,7 @@ void QwtScaleDraw::labelPlacement( const QFontMetrics &fm, double val,
 
 //! Return the world matrix for painting the label 
 
-QWMatrix QwtScaleDraw::labelWorldMatrix(const QFontMetrics &fm,
+QMatrix QwtScaleDraw::labelWorldMatrix(const QFontMetrics &fm,
     const QPoint &pos, int alignment, 
 #ifdef QT_NO_TRANSFORMATIONS
     double,
@@ -361,7 +361,7 @@ QWMatrix QwtScaleDraw::labelWorldMatrix(const QFontMetrics &fm,
     else // Qt::AlignVCenter
         y = h / 2;
     
-    QWMatrix m;
+    QMatrix m;
     m.translate(pos.x(), pos.y());
 #ifndef QT_NO_TRANSFORMATIONS
     m.rotate(rotation);
@@ -447,7 +447,7 @@ void QwtScaleDraw::drawBackbone(QPainter *p) const
   \param o The orientation
 */
 void QwtScaleDraw::setGeometry(int xorigin, int yorigin, 
-    int length, Orientation o)
+    int length, Qt::Orientation o)
 {
     static int minLen = 10;
 
@@ -462,7 +462,7 @@ void QwtScaleDraw::setGeometry(int xorigin, int yorigin,
     else
        d_len = minLen;
     
-    d_orient = o;
+    //d_orient = o;
     
     switch(d_orient)
     {
@@ -819,7 +819,7 @@ QRect QwtScaleDraw::labelBoundingRect(
             QCOORD_MAX, QCOORD_MAX, 0, txt).width();
         const int h = -(fm.ascent() - 2);
 
-        QWMatrix m = labelWorldMatrix(fm, pos, alignment, rotation, txt);
+        QMatrix m = labelWorldMatrix(fm, pos, alignment, rotation, txt);
         br = QwtMetricsMap::translate(m, QRect(0, 0, w, h));
         br.moveBy(-pos.x(), -pos.y());
     }

@@ -9,12 +9,14 @@
 
 #include <qapplication.h>
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h> 
-#include <qsimplerichtext.h> 
+#include <q3paintdevicemetrics.h> 
+#include <q3simplerichtext.h> 
 #if QT_VERSION >= 300
 #include <qdesktopwidget.h> 
 #endif
 #include "qwt_layout_metrics.h"
+//Added by qt3to4:
+#include <Q3PointArray>
 
 QwtMetricsMap::QwtMetricsMap()
 {
@@ -22,10 +24,10 @@ QwtMetricsMap::QwtMetricsMap()
         d_deviceToLayoutX = d_deviceToLayoutY = 1.0;
 }
 
-void QwtMetricsMap::setMetrics(const QPaintDeviceMetrics &layoutMetrics, 
-    const QPaintDeviceMetrics &deviceMetrics)
+void QwtMetricsMap::setMetrics(const Q3PaintDeviceMetrics &layoutMetrics, 
+    const Q3PaintDeviceMetrics &deviceMetrics)
 {
-    const QPaintDeviceMetrics screenMetrics(QApplication::desktop());
+    const Q3PaintDeviceMetrics screenMetrics(QApplication::desktop());
 
     d_screenToLayoutX = double(layoutMetrics.logicalDpiX()) / 
         double(screenMetrics.logicalDpiX());
@@ -178,24 +180,24 @@ QRect QwtMetricsMap::screenToLayout(const QRect &rect) const
 }
 
 #ifndef QT_NO_TRANSFORMATIONS
-QPointArray QwtMetricsMap::layoutToDevice(const QPointArray &pa, 
+Q3PointArray QwtMetricsMap::layoutToDevice(const Q3PointArray &pa, 
     const QPainter *painter) const
 #else
-QPointArray QwtMetricsMap::layoutToDevice(const QPointArray &pa, 
+Q3PointArray QwtMetricsMap::layoutToDevice(const Q3PointArray &pa, 
     const QPainter *) const
 #endif
 {
     if ( isIdentity() )
         return pa;
     
-    QPointArray mappedPa(pa);
+    Q3PointArray mappedPa(pa);
 
 #ifndef QT_NO_TRANSFORMATIONS
     if ( painter )
         mappedPa = translate(painter->worldMatrix(), mappedPa);
 #endif
 
-    QWMatrix m;
+    QMatrix m;
     m.scale(1.0 / d_deviceToLayoutX, 1.0 / d_deviceToLayoutY);
     mappedPa = translate(m, mappedPa);
 
@@ -209,24 +211,24 @@ QPointArray QwtMetricsMap::layoutToDevice(const QPointArray &pa,
 }
 
 #ifndef QT_NO_TRANSFORMATIONS
-QPointArray QwtMetricsMap::deviceToLayout(const QPointArray &pa, 
+Q3PointArray QwtMetricsMap::deviceToLayout(const Q3PointArray &pa, 
     const QPainter *painter) const
 #else
-QPointArray QwtMetricsMap::deviceToLayout(const QPointArray &pa, 
+Q3PointArray QwtMetricsMap::deviceToLayout(const Q3PointArray &pa, 
     const QPainter *) const
 #endif
 {
     if ( isIdentity() )
         return pa;
     
-    QPointArray mappedPa(pa);
+    Q3PointArray mappedPa(pa);
 
 #ifndef QT_NO_TRANSFORMATIONS
     if ( painter )
         mappedPa = translate(painter->worldMatrix(), mappedPa);
 #endif
 
-    QWMatrix m;
+    QMatrix m;
     m.scale(d_deviceToLayoutX, d_deviceToLayoutY);
     mappedPa = translate(m, mappedPa);
 
@@ -243,7 +245,7 @@ QPointArray QwtMetricsMap::deviceToLayout(const QPointArray &pa,
 */
 
 QRect QwtMetricsMap::translate(
-    const QWMatrix &m, const QRect &rect) 
+    const QMatrix &m, const QRect &rect) 
 {
 #if QT_VERSION < 300
     return m.map(rect.normalize());
@@ -257,8 +259,8 @@ QRect QwtMetricsMap::translate(
   Hides Qt2/3 incompatibilities.
 */
 
-QPointArray QwtMetricsMap::translate(
-    const QWMatrix &m, const QPointArray &pa) 
+Q3PointArray QwtMetricsMap::translate(
+    const QMatrix &m, const Q3PointArray &pa) 
 {
 #if QT_VERSION < 300
     return m.map(pa);
@@ -320,32 +322,32 @@ QRect QwtLayoutMetrics::boundingRect(const QString &text,
 
 #ifndef QT_NO_RICHTEXT
 
-int QwtLayoutMetrics::heightForWidth(QSimpleRichText &text, int width) const
+int QwtLayoutMetrics::heightForWidth(Q3SimpleRichText &text, int width) const
 {
     text.setWidth(d_map.layoutToScreenX(width));
     return d_map.screenToLayoutY(text.height());
 }
 
 QRect QwtLayoutMetrics::boundingRect(
-    const QSimpleRichText &text, int flags, QPainter *painter) const
+    const Q3SimpleRichText &text, int flags, QPainter *painter) const
 {
     const int tw = text.width();
 
     int w, h;
     if ( painter )
     {
-        ((QSimpleRichText &)text).setWidth(painter, QCOORD_MAX);
+        ((Q3SimpleRichText &)text).setWidth(painter, QCOORD_MAX);
         w = d_map.deviceToLayoutX(text.widthUsed());
         h = d_map.deviceToLayoutY(text.height());
     }
     else
     {
-        ((QSimpleRichText &)text).setWidth(QCOORD_MAX);
+        ((Q3SimpleRichText &)text).setWidth(QCOORD_MAX);
         w = d_map.screenToLayoutX(text.widthUsed());
         h = d_map.screenToLayoutY(text.height());
     }
 
-    ((QSimpleRichText &)text).setWidth(tw); // reset width
+    ((Q3SimpleRichText &)text).setWidth(tw); // reset width
 
     int x = 0; 
     int y = 0;

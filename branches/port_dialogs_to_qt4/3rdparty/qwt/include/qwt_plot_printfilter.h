@@ -12,8 +12,8 @@
 
 #include <qcolor.h>
 #include <qfont.h>
-#include <qintdict.h>
-#include <qvaluelist.h>
+#include <q3intdict.h>
+#include <q3valuelist.h>
 #include "qwt_global.h"
 
 class QwtPlot;

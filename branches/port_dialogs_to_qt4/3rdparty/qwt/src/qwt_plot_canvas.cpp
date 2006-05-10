@@ -17,13 +17,17 @@
 #include "qwt_plot.h"
 #include "qwt_paint_buffer.h"
 #include "qwt_plot_canvas.h"
+//Added by qt3to4:
+#include <QPixmap>
+#include <QMouseEvent>
+#include <Q3Frame>
 
 static const int dim = 5000;
 
 //! Sets a cross cursor, and an invisible red outline
 
 QwtPlotCanvas::QwtPlotCanvas(QwtPlot *plot):
-    QFrame(plot, "canvas", Qt::WRepaintNoErase|Qt::WResizeNoErase),
+    Q3Frame(plot, "canvas", Qt::WNoAutoErase|Qt::WResizeNoErase),
     d_focusIndicator(CanvasFocusIndicator),
     d_cacheMode(TRUE),
     d_cache(NULL)
@@ -127,7 +131,7 @@ QwtPlotCanvas::FocusIndicator QwtPlotCanvas::focusIndicator() const
 //! Requires layout updates of the parent plot
 void QwtPlotCanvas::frameChanged()
 {
-    QFrame::frameChanged();
+    Q3Frame::frameChanged();
 
     // frame changes change the size of the contents rect, what
     // is related to the axes. So we have to update the layout.
@@ -220,12 +224,13 @@ void QwtPlotCanvas::drawCanvas(QPainter *painter)
 //! Draw the focus indication
 void QwtPlotCanvas::drawFocusIndicator(QPainter *painter, const QRect &rect)
 {
+	/*
 #if QT_VERSION < 300
         style().drawFocusRect(painter, rect, colorGroup());
 #else
         style().drawPrimitive(QStyle::PE_FocusRect, painter,
             rect, colorGroup());
-#endif
+#endif */
 }
 
 #ifndef QWT_NO_COMPAT
@@ -451,7 +456,7 @@ void QwtPlotCanvas::drawOutline(QPainter &p)
     pn.setColor(QColor(bg.rgb() ^ d_pen.color().rgb()));
 
     p.setPen(pn);
-    p.setRasterOp(XorROP);
+    //p.setRasterOp(XorROP);
     p.setClipRect(r);
     p.setClipping(TRUE);
 

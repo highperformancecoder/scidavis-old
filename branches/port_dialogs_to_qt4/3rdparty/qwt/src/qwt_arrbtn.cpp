@@ -12,6 +12,10 @@
 #include <qevent.h>
 #include "qwt_math.h"
 #include "qwt_arrbtn.h"
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3PointArray>
+#include <QKeyEvent>
 
 #if 1
 static const int MaxNum = 3;
@@ -160,7 +164,7 @@ void QwtArrowButton::drawButtonLabel(QPainter *p)
 void QwtArrowButton::drawArrow(QPainter *p, 
     const QRect &r, Qt::ArrowType arrowType) const 
 {
-    QPointArray pa(3);
+    Q3PointArray pa(3);
 
     switch(arrowType)
     {

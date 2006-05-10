@@ -20,6 +20,9 @@
 #include "qwt_global.h"
 #include "qwt_scldiv.h"
 #include "qwt_scldraw.h"
+//Added by qt3to4:
+#include <QPaintEvent>
+#include <QResizeEvent>
 
 class QPainter;
 class QwtText;

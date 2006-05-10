@@ -13,6 +13,10 @@
 #include "qwt_plot.h"
 #include "qwt_plot_canvas.h"
 #include "qwt_plot_zoomer.h"
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <Q3PointArray>
+#include <QKeyEvent>
 
 /*!
   \brief Create a zoomer for a plot canvas.
@@ -165,7 +169,7 @@ int QwtPlotZoomer::maxStackDepth() const
   Return the zoom stack. zoomStack()[0] is the zoom base,
   zoomStack()[1] the first zoomed rectangle.
 */
-const QValueStack<QwtDoubleRect> &QwtPlotZoomer::zoomStack() const
+const Q3ValueStack<QwtDoubleRect> &QwtPlotZoomer::zoomStack() const
 {
     return d_zoomStack;
 }
@@ -174,7 +178,7 @@ const QValueStack<QwtDoubleRect> &QwtPlotZoomer::zoomStack() const
   Return the zoom stack. zoomStack()[0] is the zoom base,
   zoomStack()[1] the first zoomed rectangle.
 */
-QValueStack<QwtDoubleRect> &QwtPlotZoomer::zoomStack() 
+Q3ValueStack<QwtDoubleRect> &QwtPlotZoomer::zoomStack() 
 {
     return d_zoomStack;
 }
@@ -453,7 +457,7 @@ void QwtPlotZoomer::move(double x, double y)
           to a accepted rectangle. 
 */
 
-bool QwtPlotZoomer::accept(QPointArray &pa) const
+bool QwtPlotZoomer::accept(Q3PointArray &pa) const
 {
     if ( pa.count() < 2 )
         return FALSE;
@@ -546,7 +550,7 @@ bool QwtPlotZoomer::end(bool ok)
     if ( !plot )
         return FALSE;
 
-    const QPointArray &pa = selection();
+    const Q3PointArray &pa = selection();
     if ( pa.count() < 2 )
         return FALSE;
 

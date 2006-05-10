@@ -12,14 +12,16 @@
 
 #include <qsize.h>
 #include "qwt_global.h"
+//Added by qt3to4:
+#include <Q3PointArray>
 
 class QPainter;
 class QRect;
 class QPoint;
-class QPointArray;
+class Q3PointArray;
 class QString;
-class QSimpleRichText;
-class QPaintDeviceMetrics;
+class Q3SimpleRichText;
+class Q3PaintDeviceMetrics;
 
 class QWT_EXPORT QwtMetricsMap
 {
@@ -28,8 +30,8 @@ public:
 
     bool isIdentity() const;
 
-    void setMetrics(const QPaintDeviceMetrics &layoutMetrics,
-        const QPaintDeviceMetrics &deviceMetrics);
+    void setMetrics(const Q3PaintDeviceMetrics &layoutMetrics,
+        const Q3PaintDeviceMetrics &deviceMetrics);
 
     int layoutToDeviceX(int x) const;
     int deviceToLayoutX(int x) const;
@@ -53,13 +55,13 @@ public:
     QRect deviceToLayout(const QRect &, const QPainter * = NULL) const;
     QRect screenToLayout(const QRect &) const;
 
-    QPointArray layoutToDevice(const QPointArray &, 
+    Q3PointArray layoutToDevice(const Q3PointArray &, 
         const QPainter * = NULL) const;
-    QPointArray deviceToLayout(const QPointArray &, 
+    Q3PointArray deviceToLayout(const Q3PointArray &, 
         const QPainter * = NULL) const;
 
-    static QRect translate(const QWMatrix &, const QRect &);
-    static QPointArray translate(const QWMatrix &, const QPointArray &);
+    static QRect translate(const QMatrix &, const QRect &);
+    static Q3PointArray translate(const QMatrix &, const Q3PointArray &);
 
 private:
     double d_screenToLayoutX;
@@ -87,9 +89,9 @@ public:
         int width, int flags, QPainter *) const;
 
 #ifndef QT_NO_RICHTEXT
-    QRect boundingRect(const QSimpleRichText &, 
+    QRect boundingRect(const Q3SimpleRichText &, 
         int flags, QPainter * = NULL) const;
-    int heightForWidth(QSimpleRichText &, int width) const;
+    int heightForWidth(Q3SimpleRichText &, int width) const;
 #endif
 
 private:

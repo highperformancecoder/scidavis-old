@@ -9,6 +9,9 @@
 
 #include <qevent.h>
 #include "qwt_event_pattern.h"
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <QKeyEvent>
 
 /*! 
   Constructor
@@ -44,15 +47,15 @@ void QwtEventPattern::initMousePattern(int numButtons)
         case 1:
         {
             setMousePattern(MouseSelect1, Qt::LeftButton);
-            setMousePattern(MouseSelect2, Qt::LeftButton, Qt::ControlButton);
-            setMousePattern(MouseSelect3, Qt::LeftButton, Qt::AltButton);
+            setMousePattern(MouseSelect2, Qt::LeftButton, Qt::ControlModifier);
+            setMousePattern(MouseSelect3, Qt::LeftButton, Qt::AltModifier);
             break;
         }
         case 2:
         {
             setMousePattern(MouseSelect1, Qt::LeftButton);
             setMousePattern(MouseSelect2, Qt::RightButton);
-            setMousePattern(MouseSelect3, Qt::LeftButton, Qt::AltButton);
+            setMousePattern(MouseSelect3, Qt::LeftButton, Qt::AltModifier);
             break;
         }
         default:
@@ -66,7 +69,7 @@ void QwtEventPattern::initMousePattern(int numButtons)
     {
         setMousePattern(MouseSelect4 + i, 
             d_mousePattern[MouseSelect1 + i].button,
-            d_mousePattern[MouseSelect1 + i].state | Qt::ShiftButton);
+            d_mousePattern[MouseSelect1 + i].state | Qt::ShiftModifier);
     }
 }
 
@@ -208,7 +211,7 @@ bool QwtEventPattern::mouseMatch(const MousePattern &pattern,
     const QMouseEvent *e) const
 {
     return (e->button() == pattern.button) &&
-        ((e->state() & Qt::KeyButtonMask) == (pattern.state & Qt::KeyButtonMask));
+        ((e->state() & Qt::KeyboardModifierMask) == (pattern.state & Qt::KeyboardModifierMask));
 }
 
 /*!
@@ -252,5 +255,5 @@ bool QwtEventPattern::keyMatch(
     const KeyPattern &pattern, const QKeyEvent *e) const
 {
     return (e->key() == pattern.key) &&
-        ((e->state() & Qt::KeyButtonMask) == (pattern.state & Qt::KeyButtonMask));
+        ((e->state() & Qt::KeyboardModifierMask) == (pattern.state & Qt::KeyboardModifierMask));
 }

@@ -7,7 +7,7 @@
  * modify it under the terms of the Qwt License, Version 1.0
  *****************************************************************************/
 
-#include <qpointarray.h>
+#include <q3pointarray.h>
 #include "qwt_rect.h"
 
 //! Constructor
@@ -75,7 +75,7 @@ const QwtRect& QwtRect::cutMargin(int mLeft, int mRight, int mTop, int mBottom)
     return *this;
 }
 
-inline void addPoint(QPointArray &pa, uint pos, const QPoint &point)
+inline void addPoint(Q3PointArray &pa, uint pos, const QPoint &point)
 {
     if ( pa.size() <= pos ) 
         pa.resize(pos + 5);
@@ -85,16 +85,16 @@ inline void addPoint(QPointArray &pa, uint pos, const QPoint &point)
 
 //! Sutherland-Hodgman polygon clipping
 
-QPointArray QwtRect::clip(const QPointArray &pa) const
+Q3PointArray QwtRect::clip(const Q3PointArray &pa) const
 {
     if ( contains( pa.boundingRect() ) )
         return pa;
 
-    QPointArray cpa(pa.size());
+    Q3PointArray cpa(pa.size());
 
     for ( uint edge = 0; edge < NEdges; edge++ ) 
     {
-        const QPointArray rpa = (edge == 0) ? pa : cpa.copy();
+        const Q3PointArray rpa = (edge == 0) ? pa : cpa.copy();
         clipEdge((Edge)edge, rpa, cpa);
     }
 
@@ -158,7 +158,7 @@ QPoint QwtRect::intersectEdge(const QPoint &p1,
     return QPoint(x,y);
 }
 
-void QwtRect::clipEdge(Edge edge, const QPointArray &pa, QPointArray &cpa) const
+void QwtRect::clipEdge(Edge edge, const Q3PointArray &pa, Q3PointArray &cpa) const
 {
     if ( pa.count() == 0 )
     {

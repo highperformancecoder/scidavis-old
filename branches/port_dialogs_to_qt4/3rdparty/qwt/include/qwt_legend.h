@@ -13,11 +13,14 @@
 #define QWT_LEGEND_H
 
 #include <qpen.h>
-#include <qscrollview.h>
+#include <q3scrollview.h>
 #include <qlabel.h>
 #include "qwt_global.h"
 #include "qwt_symbol.h"
 #include "qwt_push_button.h"
+//Added by qt3to4:
+#include <QEvent>
+#include <QResizeEvent>
 
 #if QT_VERSION < 0x040000
 #include <qwidgetintdict.h>
@@ -28,7 +31,7 @@ class QWT_EXPORT QWidgetIntDict: public QwtSeqDict<QWidget>
 public:
     QWidgetIntDict() {}
 };
-typedef QIntDictIterator<QWidget> QWidgetIntDictIt;
+typedef Q3IntDictIterator<QWidget> QWidgetIntDictIt;
 #endif
 
 class QPainter;
@@ -155,7 +158,7 @@ private:
   \sa QwtLegendButton, QwtPlot
 */
 
-class QWT_EXPORT QwtLegend : public QScrollView
+class QWT_EXPORT QwtLegend : public Q3ScrollView
 {
     Q_OBJECT
 

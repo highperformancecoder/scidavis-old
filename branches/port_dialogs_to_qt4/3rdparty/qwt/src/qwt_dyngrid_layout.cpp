@@ -10,14 +10,17 @@
 #include "qwt_dyngrid_layout.h"
 
 #if QT_VERSION >= 300
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 #else
 #include <qlist.h>
-#ifndef QPtrList
-#define QPtrList QList
-#define QPtrListIterator QListIterator
+//Added by qt3to4:
+#include <Q3ValueList>
+#ifndef Q3PtrList
+#define Q3PtrList QList
+#define Q3PtrListIterator QListIterator
 #endif
 #endif
+#include <QWidget>
 
 class QwtDynGridLayoutPrivate
 {
@@ -27,13 +30,14 @@ public:
     {
     }
 
-    QPtrList<QLayoutItem> itemList;
+    Q3PtrList<QLayoutItem> itemList;
 
     bool isDirty;
     QwtArray<QSize> itemSizeHints;
 };
 
-class QwtDynGridLayoutIterator: public QGLayoutIterator
+class QwtDynGridLayoutIterator
+//: public QGLayoutIterator
 {
 public:
     QwtDynGridLayoutIterator(QwtDynGridLayoutPrivate *);
@@ -114,9 +118,9 @@ void QwtDynGridLayout::init()
 {
     d_layoutData = new QwtDynGridLayoutPrivate;
     d_maxCols = d_numRows = d_numCols = 0;
-    d_expanding = QSizePolicy::NoDirection;
+    //d_expanding = QSizePolicy::NoDirection;
 
-    setSupportsMargin(TRUE);
+    // setSupportsMargin(TRUE);
 }
 
 //! Destructor
@@ -139,7 +143,7 @@ void QwtDynGridLayout::updateLayoutCache()
 
     int index = 0;
 
-    QPtrListIterator<QLayoutItem> it(d_layoutData->itemList);
+    Q3PtrListIterator<QLayoutItem> it(d_layoutData->itemList);
     for (const QLayoutItem *item = it.toFirst(); item != 0;
         item = ++it, index++ )
     {
@@ -203,8 +207,9 @@ uint QwtDynGridLayout::itemCount() const
 
 QLayoutIterator QwtDynGridLayout::iterator()
 {       
-    return QLayoutIterator( 
-        new QwtDynGridLayoutIterator(d_layoutData) );
+    return QLayoutIterator(0);
+    //return QLayoutIterator( 
+        //new QwtDynGridLayoutIterator(d_layoutData) );
 }
 
 /*!
@@ -224,12 +229,12 @@ void QwtDynGridLayout::setGeometry(const QRect &rect)
     if ( itemCount() % d_numCols )
         d_numRows++;
 
-    QValueList<QRect> itemGeometries = layoutItems(rect, d_numCols);
+    Q3ValueList<QRect> itemGeometries = layoutItems(rect, d_numCols);
 
     int index;
 
     QLayoutItem *item;
-    QPtrListIterator<QLayoutItem> it(d_layoutData->itemList);
+    Q3PtrListIterator<QLayoutItem> it(d_layoutData->itemList);
     for ( index = 0, item = it.toFirst(); item != 0; item = ++it )
     {
         QWidget *w = item->widget();
@@ -332,10 +337,10 @@ int QwtDynGridLayout::maxItemWidth() const
   \return item geometries
 */
 
-QValueList<QRect> QwtDynGridLayout::layoutItems(const QRect &rect,
+Q3ValueList<QRect> QwtDynGridLayout::layoutItems(const QRect &rect,
     uint numCols) const
 {
-    QValueList<QRect> itemGeometries;
+    Q3ValueList<QRect> itemGeometries;
     if ( numCols == 0 || isEmpty() )
         return itemGeometries;
 
@@ -358,9 +363,9 @@ QValueList<QRect> QwtDynGridLayout::layoutItems(const QRect &rect,
     that->d_maxCols = maxCols;
 
 #if QT_VERSION < 300
-    const int xOffset = ( expanding() & QSizePolicy::Horizontal ) 
+    const int xOffset = ( expanding() & QSizePolicy::Horizontally ) 
         ? 0 : alignedRect.x();
-    const int yOffset = ( expanding() & QSizePolicy::Vertical ) 
+    const int yOffset = ( expanding() & QSizePolicy::Vertically ) 
         ? 0 : alignedRect.y();
 #else
     const int xOffset = ( expanding() & QSizePolicy::Horizontally ) 
@@ -385,7 +390,7 @@ QValueList<QRect> QwtDynGridLayout::layoutItems(const QRect &rect,
     int index;
     QLayoutItem *item;
 
-    QPtrListIterator<QLayoutItem> it(d_layoutData->itemList);
+    Q3PtrListIterator<QLayoutItem> it(d_layoutData->itemList);
     for ( item = it.toFirst(), index = 0; item != 0; item = ++it, index++ )
     {
         const int row = index / numCols;
@@ -509,7 +514,7 @@ void QwtDynGridLayout::stretchGrid(const QRect &rect,
         return;
 
 #if QT_VERSION < 300
-    if ( expanding() & QSizePolicy::Horizontal )
+    if ( expanding() & QSizePolicy::Horizontally )
 #else
     if ( expanding() & QSizePolicy::Horizontally )
 #endif
@@ -530,7 +535,7 @@ void QwtDynGridLayout::stretchGrid(const QRect &rect,
     }
 
 #if QT_VERSION < 300
-    if ( expanding() & QSizePolicy::Vertical )
+    if ( expanding() & QSizePolicy::Vertically )
 #else
     if ( expanding() & QSizePolicy::Vertically )
 #endif

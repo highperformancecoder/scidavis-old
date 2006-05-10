@@ -25,26 +25,26 @@ class QWT_EXPORT QwtPushButton: public QPushButton
 {
     Q_OBJECT
 
-    Q_PROPERTY(TextFormat textFormat READ textFormat WRITE setTextFormat)
-    Q_PROPERTY(Alignment alignment READ alignment WRITE setAlignment)
+    Q_PROPERTY(Qt::TextFormat textFormat READ textFormat WRITE setTextFormat)
+//    Q_PROPERTY(Alignment alignment READ alignment WRITE setAlignment)
     Q_PROPERTY(int indent READ indent WRITE setIndent)
 
 public:
     QwtPushButton(QWidget * = NULL, const char * name = NULL);
     QwtPushButton(const QString &text, 
         QWidget * = NULL, const char *name = NULL);
-    QwtPushButton(const QIconSet &, const QString &, 
+    QwtPushButton(const QIcon &, const QString &, 
         QWidget * = NULL, const char *name = NULL);
 
     // The second technology preview release of Qt-4 needs Qt::TextFormat
     // but moc accepts only TextFormat
-    TextFormat textFormat() const;
-    void setTextFormat(TextFormat);
+    Qt::TextFormat textFormat() const;
+    void setTextFormat(Qt::TextFormat);
 
     virtual Qt::TextFormat usedTextFormat() const;
 
-    int alignment() const;
-    virtual void setAlignment(int alignment);
+//    int alignment() const;
+//    virtual void setAlignment(int alignment);
 
     void setIndent(int);
     int indent() const;

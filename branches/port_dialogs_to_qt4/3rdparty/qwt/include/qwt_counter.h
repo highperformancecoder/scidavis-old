@@ -15,6 +15,8 @@
 #include <qwidget.h>
 #include "qwt_global.h"
 #include "qwt_drange.h"
+//Added by qt3to4:
+#include <QEvent>
 
 class QwtArrowButton;
 class QLineEdit;

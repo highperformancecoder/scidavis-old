@@ -14,6 +14,8 @@
 #include "qwt_painter.h"
 #include "qwt_array.h"
 #include "qwt_plot_picker.h"
+//Added by qt3to4:
+#include <Q3PointArray>
 
 /*!
   \brief Create a plot picker
@@ -297,7 +299,7 @@ bool QwtPlotPicker::end(bool ok)
     if ( !plot )
         return FALSE;
 
-    const QPointArray &pa = selection();
+    const Q3PointArray &pa = selection();
     if ( pa.count() == 0 )
         return FALSE;
 

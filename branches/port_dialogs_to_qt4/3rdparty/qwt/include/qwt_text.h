@@ -17,7 +17,7 @@
 #include <qnamespace.h>
 #include <qpen.h>
 #include <qbrush.h>
-#include <qsimplerichtext.h>
+#include <q3simplerichtext.h>
 #include <qstring.h>
 
 #include "qwt_global.h"
@@ -131,7 +131,7 @@ class QWT_EXPORT QwtPlainText: public QwtText
 {
 public:
     QwtPlainText(const QString &text, const QFont &,
-        int align = Qt::AlignCenter | Qt::WordBreak | Qt::ExpandTabs,
+        int align = Qt::AlignCenter | Qt::TextWordWrap | Qt::TextExpandTabs,
         const QColor &color = QColor(), const QPen &pen = QPen(Qt::NoPen),
         const QBrush &brush = QBrush(Qt::NoBrush));
 
@@ -156,7 +156,7 @@ class QWT_EXPORT QwtRichText: public QwtText
 {
 public:
     QwtRichText(const QString &text, const QFont &font,
-        int align = Qt::AlignCenter | Qt::WordBreak | Qt::ExpandTabs,
+        int align = Qt::AlignCenter | Qt::TextWordWrap | Qt::TextExpandTabs,
         const QColor &color = QColor(),
         const QPen &pen = QPen(Qt::NoPen),
         const QBrush &brush = QBrush(Qt::NoBrush));
@@ -179,7 +179,7 @@ public:
 private:
     QString taggedText(const QString &text, int alignment) const;
 
-    QSimpleRichText *d_doc;
+    Q3SimpleRichText *d_doc;
 };
 
 #endif

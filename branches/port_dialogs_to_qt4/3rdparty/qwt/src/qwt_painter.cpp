@@ -14,13 +14,15 @@
 #include <qpainter.h>
 #include <qpalette.h>
 #include <qpaintdevice.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qpixmap.h>
-#include <qsimplerichtext.h>
+#include <q3simplerichtext.h>
 
 #include "qwt_painter.h"
 #include "qwt_rect.h"
 #include "qwt_math.h"
+//Added by qt3to4:
+#include <Q3PointArray>
 
 #if defined(Q_WS_X11)
 bool QwtPainter::d_deviceClipping = TRUE;
@@ -255,7 +257,7 @@ void QwtPainter::drawText(QPainter *painter, const QPoint &pos,
 #if QT_VERSION < 300
         int flags = Qt::AlignLeft;
 #else
-        int flags = Qt::AlignAuto; // OK for QwtScaleDraw, but ???
+        int flags = Qt::AlignLeft; // OK for QwtScaleDraw, but ???
 #endif 
         QFontMetrics fm = painter->fontMetrics();
         QPixmap pixmap(fm.boundingRect(
@@ -355,7 +357,7 @@ void QwtPainter::drawText(QPainter *painter, const QRect &rect,
   Wrapper for QSimpleRichText::draw()
 */
 void QwtPainter::drawSimpleRichText(QPainter *painter, const QRect &rect,
-    int flags, QSimpleRichText &text)
+    int flags, Q3SimpleRichText &text)
 {
     QColorGroup cg;
     cg.setColor(QColorGroup::Text, painter->pen().color());
@@ -443,7 +445,7 @@ void QwtPainter::drawSimpleRichText(QPainter *painter, const QRect &rect,
 void QwtPainter::drawLine(QPainter *painter, 
     const QPoint &p1, const QPoint &p2) 
 {
-    QPointArray pa(2);
+    Q3PointArray pa(2);
 
     if ( d_deviceClipping && 
         !(deviceClipRect().contains(p1) && deviceClipRect().contains(p2)) )
@@ -457,7 +459,8 @@ void QwtPainter::drawLine(QPainter *painter,
         pa.setPoint(0, d_metricsMap.layoutToDevice(p1));
         pa.setPoint(1, d_metricsMap.layoutToDevice(p2));
 
-#if QT_VERSION >= 0x030200
+#ifdef SOMETHINGUNDEF
+//#if QT_VERSION >= 0x030200
         if ( painter->device()->isExtDev() )
         {
             // Strange: the postscript driver of QPrinter adds an offset 
@@ -487,9 +490,9 @@ void QwtPainter::drawLine(QPainter *painter, int x1, int y1, int x2, int y2)
   Wrapper for QPainter::drawPolygon()
 */
 
-void QwtPainter::drawPolygon(QPainter *painter, const QPointArray &pa)
+void QwtPainter::drawPolygon(QPainter *painter, const Q3PointArray &pa)
 {
-    QPointArray cpa = d_metricsMap.layoutToDevice(pa);
+    Q3PointArray cpa = d_metricsMap.layoutToDevice(pa);
     if ( d_deviceClipping )
         cpa = clip(cpa);
     painter->drawPolygon(cpa);
@@ -498,9 +501,9 @@ void QwtPainter::drawPolygon(QPainter *painter, const QPointArray &pa)
 /*!
     Wrapper for QPainter::drawPolyline()
 */
-void QwtPainter::drawPolyline(QPainter *painter, const QPointArray &pa)
+void QwtPainter::drawPolyline(QPainter *painter, const Q3PointArray &pa)
 {
-    QPointArray cpa = d_metricsMap.layoutToDevice(pa);
+    Q3PointArray cpa = d_metricsMap.layoutToDevice(pa);
     if ( d_deviceClipping )
         cpa = clip(cpa);
     painter->drawPolyline(cpa);
@@ -521,7 +524,7 @@ void QwtPainter::drawPoint(QPainter *painter, int x, int y)
 }
 
 //! Clip a point array
-QPointArray QwtPainter::clip(const QPointArray &pa)
+Q3PointArray QwtPainter::clip(const Q3PointArray &pa)
 {
     const QwtRect rect(deviceClipRect());
     return rect.clip(pa);

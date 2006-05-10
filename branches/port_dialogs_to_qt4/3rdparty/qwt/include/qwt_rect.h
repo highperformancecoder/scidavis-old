@@ -12,9 +12,11 @@
 
 #include <qrect.h>
 #include "qwt_global.h"
+//Added by qt3to4:
+#include <Q3PointArray>
 
 class QPoint;
-class QPointArray;
+class Q3PointArray;
 
 /*!
   \brief Some extensions for QRect
@@ -32,12 +34,12 @@ public:
     QRect cutRight(int w, int distLeft = 0, int distRight = 0);
     const QwtRect &cutMargin(int mLeft, int mRight, int Top, int mBottom);
 
-    QPointArray clip(const QPointArray &) const;
+    Q3PointArray clip(const Q3PointArray &) const;
 
 private:
     enum Edge { Left, Top, Right, Bottom, NEdges };
 
-    void clipEdge(Edge, const QPointArray &, QPointArray &) const;
+    void clipEdge(Edge, const Q3PointArray &, Q3PointArray &) const;
     bool insideEdge(const QPoint &, Edge edge) const;
     QPoint intersectEdge(const QPoint &p1, 
         const QPoint &p2, Edge edge) const;

@@ -17,10 +17,10 @@
 #include "qwt_double_rect.h"
 
 #if defined(QWT_TEMPLATEDLL)
-// MOC_SKIP_BEGIN
+#ifndef Q_MOC_RUN
 template class QWT_EXPORT QwtArray<QwtDoublePoint>;
 template class QWT_EXPORT QwtArray<double>;
-// MOC_SKIP_END
+#endif
 #endif
 
 /*!

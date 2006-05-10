@@ -17,6 +17,13 @@
 #include "qwt_legend.h"
 #include "qwt_painter.h"
 #include "qwt_dyngrid_layout.h"
+//Added by qt3to4:
+#include <QPixmap>
+#include <QChildEvent>
+#include <QEvent>
+#include <QLabel>
+#include <Q3ValueList>
+#include <QResizeEvent>
 
 static const int IdentifierWidth = 8;
 static const int Margin = 2;
@@ -238,8 +245,8 @@ QwtLegendButton::QwtLegendButton(
 void QwtLegendButton::init()
 {
     setFlat(TRUE);
-    setAlignment(Qt::AlignLeft | Qt::AlignVCenter | 
-        Qt::ExpandTabs | Qt::WordBreak);
+  //  setAlignment(Qt::AlignLeft | Qt::AlignVCenter | 
+   //     Qt::TextExpandTabs | Qt::TextWordWrap);
     setIndent(2 * Margin);
     updateIconset();
 }
@@ -265,7 +272,7 @@ void QwtLegendButton::updateIconset()
 
     pm.setMask(pm.createHeuristicMask());
 
-    setIconSet(QIconSet(pm));
+    setIconSet(QIcon(pm));
 }
 
 /*! 
@@ -295,7 +302,7 @@ QString QwtLegendButton::title() const
 QwtText *QwtLegendButton::titleText() const
 {
     return QwtText::makeText(text(), usedTextFormat(),
-        alignment(), font());
+        0, font());
 }
 
 /*!
@@ -327,7 +334,7 @@ QwtLegendLabel::QwtLegendLabel(const QwtSymbol &symbol,
 void QwtLegendLabel::init()
 {
     setAlignment(Qt::AlignLeft | Qt::AlignVCenter | 
-        Qt::ExpandTabs | Qt::WordBreak);
+        Qt::TextExpandTabs | Qt::TextWordWrap);
     setIndent(Margin + IdentifierWidth + 2 * Margin);
     setMargin(Margin);
 }
@@ -367,7 +374,7 @@ QwtText *QwtLegendLabel::titleText() const
 */
 void QwtLegendLabel::drawContents(QPainter *painter)
 {
-    QLabel::drawContents(painter);
+    //QLabel::drawContents(painter);
 
     QRect rect = contentsRect();
     rect.setX(rect.x() + Margin);
@@ -386,7 +393,7 @@ void QwtLegendLabel::updateItem()
   \param name Widget name
 */
 QwtLegend::QwtLegend(QWidget *parent, const char *name): 
-    QScrollView(parent, name),
+    Q3ScrollView(parent, name),
     d_readOnly(FALSE),
     d_displayPolicy(QwtLegend::Auto),
     d_identifierMode(QwtLegendButton::ShowLine
@@ -396,7 +403,7 @@ QwtLegend::QwtLegend(QWidget *parent, const char *name):
     setFrameStyle(NoFrame);
     setResizePolicy(Manual);
 
-    viewport()->setBackgroundMode(NoBackground); // Avoid flicker
+    viewport()->setBackgroundMode(Qt::NoBackground); // Avoid flicker
 
     d_contentsWidget = new QWidget(viewport());
     d_contentsWidget->installEventFilter(this);
@@ -568,7 +575,7 @@ void QwtLegend::clear()
     // through the iterator. So we collect them in
     // a list first.
 
-    QValueList<QWidget *> clearList;
+    Q3ValueList<QWidget *> clearList;
     
     QWidgetIntDictIt it(d_items);
     for ( QWidget *item = it.toFirst(); item != 0; item = ++it)
@@ -672,7 +679,7 @@ bool QwtLegend::eventFilter(QObject *o, QEvent *e)
                     (void)takeItem(key((QWidget *)ce->child()));
                 break;
             }
-            case QEvent::LayoutHint:
+            case QEvent::LayoutRequest:
             {
                 layoutContents();
                 break;
@@ -682,7 +689,7 @@ bool QwtLegend::eventFilter(QObject *o, QEvent *e)
         }
     }
     
-    return QScrollView::eventFilter(o, e);
+    return Q3ScrollView::eventFilter(o, e);
 }
 
 /*!
@@ -691,11 +698,11 @@ bool QwtLegend::eventFilter(QObject *o, QEvent *e)
 */
 void QwtLegend::viewportResizeEvent(QResizeEvent *e)
 {
-    QScrollView::viewportResizeEvent(e);
+    Q3ScrollView::viewportResizeEvent(e);
 
     // It's not safe to update the layout now, because
     // we are in an internal update of the scrollview framework.
     // So we delay the update by posting a LayoutHint.
 
-    QApplication::postEvent(d_contentsWidget, new QEvent(QEvent::LayoutHint));
+    QApplication::postEvent(d_contentsWidget, new QEvent(QEvent::LayoutRequest));
 }

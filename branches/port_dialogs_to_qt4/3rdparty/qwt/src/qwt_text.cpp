@@ -11,7 +11,7 @@
 
 #include <qpainter.h>
 #include <qpalette.h>
-#include <qstylesheet.h>
+#include <q3stylesheet.h>
 #include "qwt_painter.h"
 #include "qwt_text.h"
 
@@ -84,7 +84,7 @@ QwtText *QwtText::makeText(const QString &text, Qt::TextFormat format,
 {
 #ifndef QT_NO_RICHTEXT
     if (format == Qt::RichText || ((format == Qt::AutoText)
-            && QStyleSheet::mightBeRichText(text)))
+            && Q3StyleSheet::mightBeRichText(text)))
     {
         return new QwtRichText(text, font, align, color, pen, brush);
     }
@@ -216,7 +216,7 @@ QwtPlainText::QwtPlainText(const QString &text, const QFont &font,
 QwtPlainText::QwtPlainText(const QString &text, 
         const QFont &font, const QColor &color):
     QwtText(text, font, 
-        Qt::AlignCenter | Qt::WordBreak | Qt::ExpandTabs, color) 
+        Qt::AlignCenter | Qt::TextWordWrap | Qt::TextExpandTabs, color) 
 {
 }
 
@@ -291,7 +291,7 @@ QRect QwtPlainText::boundingRect(QPainter *painter) const
 QwtRichText::QwtRichText(const QString &text, const QFont &font,
         int align, const QColor &color, const QPen &pen, const QBrush &brush):
     QwtText(text, font, align, color, pen, brush),
-    d_doc(new QSimpleRichText(text, font))
+    d_doc(new Q3SimpleRichText(text, font))
 { 
     setText(text); 
 }
@@ -306,8 +306,8 @@ QwtRichText::QwtRichText(const QString &text, const QFont &font,
 QwtRichText::QwtRichText(const QString &text, const QFont &font,
         const QColor &color):
     QwtText(text, font,
-        Qt::AlignCenter | Qt::WordBreak | Qt::ExpandTabs, color),
-    d_doc(new QSimpleRichText(text, font))
+        Qt::AlignCenter | Qt::TextWordWrap | Qt::TextExpandTabs, color),
+    d_doc(new Q3SimpleRichText(text, font))
 { 
     setText(text); 
 }
@@ -331,7 +331,7 @@ void QwtRichText::setText(const QString &text)
     QwtText::setText(text);
 
     delete d_doc;
-    d_doc = new QSimpleRichText(taggedText(text, alignment()), font());
+    d_doc = new Q3SimpleRichText(taggedText(text, alignment()), font());
 }
 
 //! Set the font
@@ -349,7 +349,7 @@ void QwtRichText::setAlignment(int align)
     QwtText::setAlignment(align);
 
     delete d_doc;
-    d_doc = new QSimpleRichText(taggedText(text(), align), font());
+    d_doc = new Q3SimpleRichText(taggedText(text(), align), font());
 }
 
 /*!

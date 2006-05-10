@@ -10,14 +10,16 @@
 #ifndef QWT_H
 #define QWT_H
 
+
 #include "qwt_global.h"
 
-#undef Left
-#undef Right
-#undef Top
-#undef Bottom
+/*
+#undef Qt::DockLeft
+#undef Qt::DockRight
+#undef Qt::DockTop
+#undef Qt::DockBottom
 #undef Center
-
+*/
 /*!
   Some constants for use within Qwt.
 */

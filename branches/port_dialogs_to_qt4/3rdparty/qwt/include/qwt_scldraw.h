@@ -63,7 +63,7 @@ public:
     void setOptions(int opt);
     int options() const;
 
-    void setGeometry(int xorigin, int yorigin, int length, Orientation o);
+    void setGeometry(int xorigin, int yorigin, int length, Qt::Orientation o);
     int x() const;
     int y() const;
     int length() const;
@@ -111,7 +111,7 @@ protected:
     virtual void drawTick(QPainter *p, double val, int len) const;
     virtual void drawBackbone(QPainter *p) const;
     virtual void drawLabel(QPainter *p, double val) const;
-    virtual QWMatrix labelWorldMatrix(const QFontMetrics &,
+    virtual QMatrix labelWorldMatrix(const QFontMetrics &,
         const QPoint &, int alignment, double rotation, 
         const QString &) const;
         

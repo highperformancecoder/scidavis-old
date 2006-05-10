@@ -8,10 +8,12 @@
  *****************************************************************************/
 
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qapplication.h>
 #include "qwt_painter.h"
 #include "qwt_symbol.h"
+//Added by qt3to4:
+#include <Q3PointArray>
 
 /*!
   Default Constructor
@@ -128,7 +130,7 @@ void QwtSymbol::draw(QPainter *painter, const QRect& r) const
             break;
         case QwtSymbol::Diamond:
         {
-            QPointArray pa(4);
+            Q3PointArray pa(4);
             pa.setPoint(0, r.x() + w2, r.y());
             pa.setPoint(1, r.right(), r.y() + h2);
             pa.setPoint(2, r.x() + w2, r.bottom());
@@ -151,7 +153,7 @@ void QwtSymbol::draw(QPainter *painter, const QRect& r) const
         case QwtSymbol::Triangle:
         case QwtSymbol::UTriangle:
         {
-            QPointArray pa(3);
+            Q3PointArray pa(3);
             pa.setPoint(0, r.x() + w2, r.y());
             pa.setPoint(1, r.right(), r.bottom());
             pa.setPoint(2, r.x(), r.bottom());
@@ -160,7 +162,7 @@ void QwtSymbol::draw(QPainter *painter, const QRect& r) const
         }
         case QwtSymbol::DTriangle:
         {
-            QPointArray pa(3);
+            Q3PointArray pa(3);
             pa.setPoint(0, r.x(), r.y());
             pa.setPoint(1, r.right(), r.y());
             pa.setPoint(2, r.x() +  w2, r.bottom());
@@ -169,7 +171,7 @@ void QwtSymbol::draw(QPainter *painter, const QRect& r) const
         }
         case QwtSymbol::RTriangle:
         {
-            QPointArray pa(3);
+            Q3PointArray pa(3);
             pa.setPoint(0, r.x(), r.y());
             pa.setPoint(1, r.right(), r.y() + h2);
             pa.setPoint(2, r.x(), r.bottom());
@@ -178,7 +180,7 @@ void QwtSymbol::draw(QPainter *painter, const QRect& r) const
         }
         case QwtSymbol::LTriangle:
         {
-            QPointArray pa(3);
+            Q3PointArray pa(3);
             pa.setPoint(0, r.right(), r.y());
             pa.setPoint(1, r.x(), r.y() + h2);
             pa.setPoint(2, r.right(), r.bottom());

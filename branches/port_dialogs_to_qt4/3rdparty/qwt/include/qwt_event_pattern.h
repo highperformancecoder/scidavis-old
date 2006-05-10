@@ -11,6 +11,9 @@
 #define QWT_EVENT_PATTERN 1
 
 #include "qwt_array.h"
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <QKeyEvent>
 
 class QMouseEvent;
 class QKeyEvent;
@@ -197,10 +200,10 @@ private:
 };
 
 #if defined(QWT_TEMPLATEDLL)
-// MOC_SKIP_BEGIN
+#ifndef Q_MOC_RUN
 template class QWT_EXPORT QwtArray<QwtEventPattern::MousePattern>;
 template class QWT_EXPORT QwtArray<QwtEventPattern::KeyPattern>;
-// MOC_SKIP_END
+#endif
 #endif
 
 #endif

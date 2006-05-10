@@ -10,16 +10,18 @@
 // vim: expandtab
 
 #include <qpainter.h>
-#include <qpicture.h>
-#include <qsimplerichtext.h>
-#include <qstylesheet.h>
+#include <q3picture.h>
+#include <q3simplerichtext.h>
+#include <q3stylesheet.h>
 #include <qstyle.h>
 #include "qwt_text.h"
 #include "qwt_push_button.h"
+//Added by qt3to4:
+#include <QPixmap>
 
 #ifndef QT_NO_PICTURE
-
-class QwtPBPaintFilter: public QPicture
+/*
+class QwtPBPaintFilter: public Q3Picture
 {
     // A helper class that filters the QPushButton paint commands
     // and changes them according the additional features of QwtPushButton 
@@ -60,7 +62,7 @@ bool QwtPBPaintFilter::cmd(int c, QPainter *painter, QPDevCmdParam *param)
                 QRect &r = *((QRect *)param[0].rect);
                 r = indentRect(r);
 
-                return QPicture::cmd(c, painter, param);
+                return Q3Picture::cmd(c, painter, param);
             }
             if ( textFormat == Qt::RichText )
             {
@@ -161,7 +163,7 @@ bool QwtPBPaintFilter::cmd(int c, QPainter *painter, QPDevCmdParam *param)
             break;
         }
     }
-    return QPicture::cmd(c, painter, param);
+    return Q3Picture::cmd(c, painter, param);
 }
 
 QRect QwtPBPaintFilter::indentRect(const QRect &rect) const
@@ -210,7 +212,7 @@ bool QwtPBPaintFilter::isLabel(const QPixmap *pixmap) const
 }
 
 #endif // !QT_NO_PICTURE
-
+*/
 /*! 
   Constructs a push button with no text. 
 */
@@ -234,7 +236,7 @@ QwtPushButton::QwtPushButton(const QString &text,
 /*!
   Constructs a push button with an icon and a text. 
 */
-QwtPushButton::QwtPushButton(const QIconSet &iconSet, const QString &text, 
+QwtPushButton::QwtPushButton(const QIcon &iconSet, const QString &text, 
         QWidget *parent, const char *name):
     QPushButton(iconSet, text, parent, name)
 {
@@ -245,7 +247,7 @@ QwtPushButton::QwtPushButton(const QIconSet &iconSet, const QString &text,
 void QwtPushButton::init()
 {
     d_textFormat = Qt::AutoText;
-    d_alignment = Qt::AlignCenter | Qt::ExpandTabs | Qt::WordBreak;
+    d_alignment = Qt::AlignCenter | Qt::TextExpandTabs | Qt::TextWordWrap;
     d_indent = 4;
 }
 
@@ -261,10 +263,11 @@ void QwtPushButton::init()
 
 Qt::TextFormat QwtPushButton::usedTextFormat() const
 {
+	/*
 #ifndef QT_NO_PICTURE
-    if ( d_textFormat == Qt::AutoText && QStyleSheet::mightBeRichText(text()) )
+    if ( d_textFormat == Qt::AutoText && Q3StyleSheet::mightBeRichText(text()) )
         return Qt::RichText;
-#endif
+#endif */
 
     return Qt::PlainText;
 }
@@ -288,7 +291,7 @@ Qt::TextFormat QwtPushButton::textFormat() const
   \sa QwtPushButton::textFormat()
 */
 
-void QwtPushButton::setTextFormat(TextFormat textFormat)
+void QwtPushButton::setTextFormat(Qt::TextFormat textFormat)
 {
     d_textFormat = textFormat;
 }
@@ -297,11 +300,11 @@ void QwtPushButton::setTextFormat(TextFormat textFormat)
   \return Alignment of the button label's contents.
   \sa QwtPushButton::setAlignment
 */
-
+/*
 int QwtPushButton::alignment() const
 {
     return d_alignment;
-}
+}*/
 
 /*! 
   \brief Sets the alignment of the button label´s contents
@@ -311,12 +314,12 @@ int QwtPushButton::alignment() const
   \param alignment Bitwise OR of Qt::AlignmentFlags and Qt::TextFlags values.
 
   \sa QwtPushButton::alignment()
-*/
+*//*
 void QwtPushButton::setAlignment(int alignment)
 {
     d_alignment = alignment;
 }
-
+*/
 /*!
   \return Indent of the button label's contents.
   \sa QwtPushButton::setIndent
@@ -393,14 +396,14 @@ QSize QwtPushButton::sizeHint() const
     {
         QwtRichText richText(text(), font(), d_alignment);
 
-        const QSize sizeText = fontMetrics().size(Qt::ShowPrefix, text());
+        const QSize sizeText = fontMetrics().size(Qt::TextShowMnemonic, text());
         const QSize sizeRichText(richText.boundingRect().size());
 
         int iconHeight = 0;
         if ( iconSet() && !iconSet()->isNull() )
         {
-            iconHeight = iconSet()->pixmap(QIconSet::Small,
-                QIconSet::Normal).height();
+            iconHeight = iconSet()->pixmap(QIcon::Small,
+                QIcon::Normal).height();
         }
 
         const int heightText = QMAX(iconHeight, sizeText.height());
@@ -416,6 +419,7 @@ QSize QwtPushButton::sizeHint() const
 //! Draws the button text or pixmap. 
 void QwtPushButton::drawButtonLabel(QPainter *painter)
 {
+	/*
 #ifndef QT_NO_PICTURE
     // Unfortunately QStyle doesn´t offer an API to add
     // the alignment and rich text features. But we don´t want
@@ -436,15 +440,15 @@ void QwtPushButton::drawButtonLabel(QPainter *painter)
     // So we don´t set the Style_HasFocus flag and paint the focus rect
     // later directly to the button.
 
-    QStyle::SFlags flags = QStyle::Style_Default;
+    QStyle::State flags = QStyle::State_None;
     if (isEnabled())
-        flags |= QStyle::Style_Enabled;
+        flags |= QStyle::State_Enabled;
     if (isDown())
-        flags |= QStyle::Style_Down;
+        flags |= QStyle::State_DownArrow;
     if (isOn())
-        flags |= QStyle::Style_On;
+        flags |= QStyle::State_On;
     if (! isFlat() && ! isDown())
-        flags |= QStyle::Style_Raised;
+        flags |= QStyle::State_Raised;
     if (isDefault())
         flags |= QStyle::Style_ButtonDefault;
 
@@ -467,15 +471,15 @@ void QwtPushButton::drawButtonLabel(QPainter *painter)
     {
         // Paint the focus rect on top of the button label.
 
-        flags |= QStyle::Style_HasFocus;
+        flags |= QStyle::State_HasFocus;
         style().drawPrimitive(QStyle::PE_FocusRect, painter, 
             style().subRect(QStyle::SR_PushButtonFocusRect, this), 
             colorGroup(), flags);
     }
 #endif
-
+*/
 #else // QT_NO_PICTURE
-    QPushButton::drawButtonLabel(painter);
+   // QPushButton::drawButtonLabel(painter);
 #endif
 }
 

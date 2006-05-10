@@ -10,6 +10,8 @@
 #include <qwidget.h>
 #include <qpainter.h>
 #include "qwt_paint_buffer.h"
+//Added by qt3to4:
+#include <QPixmap>
 
 bool QwtPaintBuffer::d_enabled = TRUE;
 
@@ -139,8 +141,8 @@ void QwtPaintBuffer::open(QPaintDevice *device,
         if ( d_device->devType() == QInternal::Widget )
         {
             QWidget *w = (QWidget *)d_device;
-            if ( w->testWFlags( Qt::WRepaintNoErase | Qt::WResizeNoErase) )
-                d_painter->eraseRect(d_rect);
+  //          if ( w->testWFlags( Qt::WNoAutoErase | Qt::WResizeNoErase) )
+   //             d_painter->eraseRect(d_rect);
         }
     }
 }
@@ -162,9 +164,9 @@ void QwtPaintBuffer::flush()
             p = d_devicePainter;
 
         QPaintDevice *device = p->device();
-        if ( device->isExtDev() )
+   /*     if ( device->isExtDev() )
             d_devicePainter->drawPixmap(d_rect.topLeft(), d_pixBuffer);
-        else
+        else*/
             bitBlt(device, d_rect.topLeft(), &d_pixBuffer );
 
         if ( d_devicePainter == 0 )

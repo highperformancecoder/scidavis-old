@@ -15,6 +15,8 @@
 #include "qwt_double_rect.h"
 #include "qwt_math.h"
 #include "qwt_painter.h"
+//Added by qt3to4:
+#include <Q3PointArray>
 
 /*!
   \brief Initialize data members
@@ -441,7 +443,7 @@ void QwtCurve::drawCurve(QPainter *painter, int style,
 void QwtCurve::drawLines(QPainter *painter,
     const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
 {
-    QPointArray polyline(to - from + 1);
+    Q3PointArray polyline(to - from + 1);
     for (int i = from; i <= to; i++)
     {
         int xi = xMap.transform(x(i));
@@ -504,7 +506,7 @@ void QwtCurve::drawDots(QPainter *painter,
 {
     const bool doFill = painter->brush().style() != Qt::NoBrush;
 
-    QPointArray polyline;
+    Q3PointArray polyline;
     if ( doFill )
         polyline.resize(to - from + 1);
 
@@ -539,7 +541,7 @@ void QwtCurve::drawDots(QPainter *painter,
 void QwtCurve::drawSteps(QPainter *painter,
     const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
 {
-    QPointArray polyline(2 * (to - from) + 1);
+    Q3PointArray polyline(2 * (to - from) + 1);
 
     bool inverted = d_options & Yfx;
     if ( d_options & Inverted )
@@ -597,7 +599,7 @@ void QwtCurve::drawSpline(QPainter *painter,
         return;
     }
 
-    QPointArray polyline(d_splineSize);
+    Q3PointArray polyline(d_splineSize);
 
     //
     // Transform x and y values to window coordinates
@@ -829,7 +831,7 @@ int QwtCurve::splineSize() const
 */
 
 void QwtCurve::closePolyline(const QwtDiMap &xMap, const QwtDiMap &yMap,
-    QPointArray &pa) const
+    Q3PointArray &pa) const
 {
     const int sz = pa.size();
     if ( sz < 2 )

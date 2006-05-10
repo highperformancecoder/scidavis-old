@@ -10,6 +10,10 @@
 #include <qevent.h>
 #include "qwt_event_pattern.h"
 #include "qwt_picker_machine.h"
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <Q3ValueList>
+#include <QKeyEvent>
 
 //! Constructor
 QwtPickerMachine::QwtPickerMachine():
@@ -41,10 +45,10 @@ void QwtPickerMachine::reset()
 }
 
 //! Transition
-QValueList<QwtPickerMachine::Command> QwtPickerClickPointMachine::transition(
+Q3ValueList<QwtPickerMachine::Command> QwtPickerClickPointMachine::transition(
     const QwtEventPattern &eventPattern, const QEvent *e)
 {   
-    QValueList<QwtPickerMachine::Command> cmdList;
+    Q3ValueList<QwtPickerMachine::Command> cmdList;
 
     switch(e->type())
     {
@@ -78,10 +82,10 @@ QValueList<QwtPickerMachine::Command> QwtPickerClickPointMachine::transition(
 }
 
 //! Transition
-QValueList<QwtPickerMachine::Command> QwtPickerDragPointMachine::transition(
+Q3ValueList<QwtPickerMachine::Command> QwtPickerDragPointMachine::transition(
     const QwtEventPattern &eventPattern, const QEvent *e)
 {   
-    QValueList<QwtPickerMachine::Command> cmdList;
+    Q3ValueList<QwtPickerMachine::Command> cmdList;
 
     switch(e->type())
     {
@@ -142,10 +146,10 @@ QValueList<QwtPickerMachine::Command> QwtPickerDragPointMachine::transition(
 }
 
 //! Transition
-QValueList<QwtPickerMachine::Command> QwtPickerClickRectMachine::transition(
+Q3ValueList<QwtPickerMachine::Command> QwtPickerClickRectMachine::transition(
     const QwtEventPattern &eventPattern, const QEvent *e)
 {   
-    QValueList<QwtPickerMachine::Command> cmdList;
+    Q3ValueList<QwtPickerMachine::Command> cmdList;
 
     switch(e->type())
     {
@@ -231,10 +235,10 @@ QValueList<QwtPickerMachine::Command> QwtPickerClickRectMachine::transition(
 }
 
 //! Transition
-QValueList<QwtPickerMachine::Command> QwtPickerDragRectMachine::transition(
+Q3ValueList<QwtPickerMachine::Command> QwtPickerDragRectMachine::transition(
     const QwtEventPattern &eventPattern, const QEvent *e)
 {   
-    QValueList<QwtPickerMachine::Command> cmdList;
+    Q3ValueList<QwtPickerMachine::Command> cmdList;
 
     switch(e->type())
     {
@@ -297,10 +301,10 @@ QValueList<QwtPickerMachine::Command> QwtPickerDragRectMachine::transition(
 }
 
 //! Transition
-QValueList<QwtPickerMachine::Command> QwtPickerPolygonMachine::transition(
+Q3ValueList<QwtPickerMachine::Command> QwtPickerPolygonMachine::transition(
     const QwtEventPattern &eventPattern, const QEvent *e)
 {
-    QValueList<QwtPickerMachine::Command> cmdList;
+    Q3ValueList<QwtPickerMachine::Command> cmdList;
 
     switch(e->type())
     {

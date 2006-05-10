@@ -14,9 +14,14 @@
 #include <qpen.h>
 #include <qfont.h>
 #include <qrect.h>
-#include <qpointarray.h>
+#include <q3pointarray.h>
 #include "qwt_event_pattern.h"
 #include "qwt_global.h"
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QKeyEvent>
+#include <QEvent>
+#include <QMouseEvent>
 
 class QWidget;
 class QMouseEvent;
@@ -283,7 +288,7 @@ public:
     const QWidget *parentWidget() const;
 
     virtual QRect pickRect() const;
-    const QPointArray &selection() const; 
+    const Q3PointArray &selection() const; 
 
     virtual bool event(QEvent *);
 
@@ -294,7 +299,7 @@ signals:
 
       \param pa Selected points
     */
-    void selected(const QPointArray &pa);
+    void selected(const Q3PointArray &pa);
 
     /*!
       A signal emitted when a point has been appended to the selection
@@ -320,7 +325,7 @@ signals:
       \param pa Changed selection
       \sa stretchSelection()
     */
-    void changed(const QPointArray &pa);
+    void changed(const Q3PointArray &pa);
 
 protected:
     /*!
@@ -331,7 +336,7 @@ protected:
       \param selection Selection to validate and fixup
       \return TRUE, when accepted, FALSE otherwise
     */
-    virtual bool accept(QPointArray &selection) const;
+    virtual bool accept(Q3PointArray &selection) const;
 
     virtual void transition(const QEvent *);
 
@@ -350,11 +355,11 @@ protected:
 
     virtual void drawRubberBand(const QRect &clipRect = QRect()) const;
     virtual void drawRubberBand(QPainter *, 
-        const QRect &rect, const QPointArray &) const;
+        const QRect &rect, const Q3PointArray &) const;
 
     virtual void drawCursorLabel(const QRect &clipRect = QRect()) const;
     virtual void drawCursorLabel(QPainter *, const QRect &rect, 
-        const QPoint &, const QPointArray &) const;
+        const QPoint &, const Q3PointArray &) const;
 
     virtual void stretchSelection(const QSize &oldSize, 
         const QSize &newSize);
@@ -386,7 +391,7 @@ private:
     QPen d_cursorLabelPen;
     QFont d_cursorLabelFont;
 
-    QPointArray d_selection;
+    Q3PointArray d_selection;
     bool d_isActive;
     QPoint d_labelPosition;
 

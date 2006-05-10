@@ -11,7 +11,7 @@
 #define QWT_PAINTER_H
 
 #include <qpoint.h>
-#include <qpointarray.h>
+#include <q3pointarray.h>
 #include <qrect.h>
 #include "qwt_global.h"
 #include "qwt_layout_metrics.h"
@@ -85,7 +85,7 @@ public:
 
 #ifndef QT_NO_RICHTEXT
     static void drawSimpleRichText(QPainter *, const QRect &,
-        int flags, QSimpleRichText &);
+        int flags, Q3SimpleRichText &);
 #endif
 
     static void drawRect(QPainter *, int x, int y, int w, int h);
@@ -96,14 +96,14 @@ public:
 
     static void drawLine(QPainter *, int x1, int y1, int x2, int y2);
     static void drawLine(QPainter *, const QPoint &p1, const QPoint &p2);
-    static void drawPolygon(QPainter *, const QPointArray &pa);
-    static void drawPolyline(QPainter *, const QPointArray &pa);
+    static void drawPolygon(QPainter *, const Q3PointArray &pa);
+    static void drawPolyline(QPainter *, const Q3PointArray &pa);
     static void drawPoint(QPainter *, int x, int y);
 
     static void drawRoundFrame(QPainter *, const QRect &,
         int width, const QColorGroup &cg, bool sunken);
 
-    static QPointArray clip(const QPointArray &);
+    static Q3PointArray clip(const Q3PointArray &);
 
     static int textXorRopMode();
     static int setTextXorRopMode(TextXorRopMode mode);

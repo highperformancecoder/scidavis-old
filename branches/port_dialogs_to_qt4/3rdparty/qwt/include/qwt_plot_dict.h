@@ -12,23 +12,23 @@
 
 #include "qwt_global.h"
 #include "qwt_plot_classes.h"
-#include <qintdict.h>
+#include <q3intdict.h>
 
 //
 //   Template classes used by QwtPlot
 //
 
 template<class type>
-class QWT_EXPORT QwtSeqDict : public QIntDict<type>
+class QWT_EXPORT QwtSeqDict : public Q3IntDict<type>
 {
 public:
-    QwtSeqDict(): QIntDict<type>() {}
+    QwtSeqDict(): Q3IntDict<type>() {}
     void insert(long key, const type *item) 
     {
         uint prime;
         if ((uint(key) >= this->size()) && (prime = nextPrime(uint(key))))
             this->resize(prime);
-        QIntDict<type>::insert(key, item);
+        Q3IntDict<type>::insert(key, item);
     }
 private:
     uint nextPrime(uint i) 
@@ -72,7 +72,7 @@ public:
     QwtMarkerDict() { setAutoDelete(TRUE); }
 };
 
-typedef QIntDictIterator<QwtPlotCurve> QwtPlotCurveIterator;
-typedef QIntDictIterator<QwtPlotMarker> QwtPlotMarkerIterator;
+typedef Q3IntDictIterator<QwtPlotCurve> QwtPlotCurveIterator;
+typedef Q3IntDictIterator<QwtPlotMarker> QwtPlotMarkerIterator;
 
 #endif

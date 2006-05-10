@@ -12,6 +12,8 @@
 
 #include <qpushbutton.h>
 #include "qwt_global.h"
+//Added by qt3to4:
+#include <QKeyEvent>
 
 /*!
   \brief Arrow Button

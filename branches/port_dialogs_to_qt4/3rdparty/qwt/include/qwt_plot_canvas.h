@@ -12,10 +12,13 @@
 #ifndef QWT_PLOT_CANVAS_H
 #define QWT_PLOT_CANVAS_H
 
-#include <qframe.h>
+#include <q3frame.h>
 #include <qpen.h>
 #include "qwt_global.h"
 #include "qwt.h"
+//Added by qt3to4:
+#include <QPixmap>
+#include <QMouseEvent>
 
 class QwtPlot;
 class QPixmap;
@@ -26,7 +29,7 @@ class QPixmap;
   \sa  QwtPlot 
 */
 
-class QWT_EXPORT QwtPlotCanvas : public QFrame
+class QWT_EXPORT QwtPlotCanvas : public Q3Frame
 {
     Q_OBJECT
     friend class QwtPlot;
