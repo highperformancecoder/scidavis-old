@@ -3,8 +3,10 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <QLabel>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
 class QLineEdit;
 class QComboBox;
@@ -17,12 +19,12 @@ class expDecayDialog : public QDialog
     Q_OBJECT
 
 public:
-    expDecayDialog( int type, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    expDecayDialog( int type, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~expDecayDialog();
 
 	QPushButton* buttonFit;
 	QPushButton* buttonCancel;
-    QButtonGroup* GroupBox1, *GroupBox2;
+    Q3ButtonGroup* GroupBox1, *GroupBox2;
 	QComboBox* boxName;
 	QLineEdit* boxFirst;
 	QLineEdit* boxSecond;

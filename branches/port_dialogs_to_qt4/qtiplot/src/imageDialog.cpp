@@ -5,8 +5,11 @@
 #include <qspinbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
-#include <qvbox.h>
+#include <q3buttongroup.h>
+#include <q3vbox.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
+#include <QPixmap>
 
 /* XPM */
 static const char * up_xpm[] = {
@@ -101,7 +104,7 @@ static const char * unchain_xpm[] = {
 ".+&@&#.",
 " ..... "};
 
-imageDialog::imageDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
+imageDialog::imageDialog( QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -109,11 +112,12 @@ imageDialog::imageDialog( QWidget* parent, const char* name, bool modal, WFlags 
     setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, 0, 0, sizePolicy().hasHeightForWidth() ) );
     setSizeGripEnabled( FALSE );
 	
-	GroupBox4 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),this,"GroupBox4" );
+	GroupBox4 = new Q3ButtonGroup( 2,Qt::Horizontal,tr(""),this,"GroupBox4" );
 	GroupBox4->setFlat (TRUE);
-	GroupBox4->setLineWidth (0);
+	// FIXME: replace next line with Qt4 equivalent
+//X	GroupBox4->setLineWidth (0);
 	
-	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr("Origin"),GroupBox4,"GroupBox1" );
+	GroupBox1 = new Q3ButtonGroup( 2,Qt::Horizontal,tr("Origin"),GroupBox4,"GroupBox1" );
 
     new QLabel( tr( "X= " ), GroupBox1, "TextLabel1",0 );
 	boxX = new QSpinBox(0,2000,1,GroupBox1, "boxX" );
@@ -123,32 +127,34 @@ imageDialog::imageDialog( QWidget* parent, const char* name, bool modal, WFlags 
 	boxY = new QSpinBox(0,2000,1,GroupBox1, "boxY" );
 	boxY->setSuffix(tr(" pixels"));
 
-	GroupBox3 = new QButtonGroup(2,QGroupBox::Horizontal,tr("Size"),GroupBox4,"GroupBox3" );
-	QGroupBox *box1 = new QGroupBox ( 2, QGroupBox::Horizontal, GroupBox3);
+	GroupBox3 = new Q3ButtonGroup(2,Qt::Horizontal,tr("Size"),GroupBox4,"GroupBox3" );
+	Q3GroupBox *box1 = new Q3GroupBox ( 2, Qt::Horizontal, GroupBox3);
 	box1->setFlat (true);
-	box1->setLineWidth (0);
+	// FIXME: replace next line with Qt4 equivalent
+//X	box1->setLineWidth (0);
 	box1->setInsideMargin (0);
 
-    new QLabel( tr( "width= " ), box1, "TextLabel3",0 );
+    new QLabel( tr( "width= " ), box1);
 	boxWidth = new QSpinBox(0,2000,1,box1, "boxX" );
 	boxWidth->setSuffix(tr(" pixels"));
 
-	new QLabel( tr( "height= " ), box1, "TextLabel4",0 );
+	new QLabel( tr( "height= " ), box1);
 	boxHeight = new QSpinBox(0,2000,1,box1, "boxY" );
 	boxHeight->setSuffix(tr(" pixels"));
 
-	QVBox *box2 = new QVBox (GroupBox3);
-	QLabel *up = new QLabel(box2, 0,0 );
+	Q3VBox *box2 = new Q3VBox (GroupBox3);
+	QLabel *up = new QLabel(box2);
 	up->setPixmap(QPixmap(up_xpm));
 
 	linkButton = new ChainButton(box2);
 
-	QLabel *down = new QLabel(box2, 0,0 );
+	QLabel *down = new QLabel(box2 );
 	down->setPixmap(QPixmap(down_xpm));
 
-	GroupBox2 = new QButtonGroup(3,QGroupBox::Horizontal,tr(""),this,"GroupBox2" );
+	GroupBox2 = new Q3ButtonGroup(3,Qt::Horizontal,tr(""),this,"GroupBox2" );
 	GroupBox2->setFlat (TRUE);
-	GroupBox2->setLineWidth (0);
+	// FIXME: replace next line with Qt4 equivalent
+//X	GroupBox2->setLineWidth (0);
 	
 	buttonApply = new QPushButton(GroupBox2, "buttonApply" );
 	
@@ -159,7 +165,7 @@ imageDialog::imageDialog( QWidget* parent, const char* name, bool modal, WFlags 
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
     buttonCancel->setAutoDefault( TRUE );
 	
-	QVBoxLayout* hlayout = new QVBoxLayout(this,5,5, "hlayout");
+	Q3VBoxLayout* hlayout = new Q3VBoxLayout(this,5,5, "hlayout");
     hlayout->addWidget(GroupBox4);
 	hlayout->addWidget(GroupBox2);
 

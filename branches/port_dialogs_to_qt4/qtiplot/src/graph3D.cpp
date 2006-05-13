@@ -6,11 +6,11 @@
 
 #include <qapplication.h>
 #include <qmessagebox.h>
-#include <qfiledialog.h>
+#include <q3filedialog.h>
 #include <qprinter.h>
 #include <qimage.h>
 #include <qclipboard.h>
-#include <qdragobject.h> 
+#include <q3dragobject.h> 
 
 #include <qwt3d_surfaceplot.h>
 #include <qwt3d_function.h>
@@ -18,9 +18,16 @@
 #include <qwt3d_io_gl2ps.h>
 #include <qwt3d_io_reader.h>
 #include <qwt3d_coordsys.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3MemArray>
+#include <QEvent>
+#include <QContextMenuEvent>
+#include <QResizeEvent>
 
 #include <gsl/gsl_vector.h>
 #include <math.h>
+#include <QDateTime>
 
 using namespace Qwt3D;
 
@@ -47,7 +54,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0,"QtiPlot - Input function error",e.GetMsg());
+	QMessageBox::critical(0,"QtiPlot - Input function error",QString::fromStdString(e.GetMsg()));
 	}
 return result;
 }
@@ -56,7 +63,7 @@ UserFunction::~UserFunction()
 {
 }
 
-Graph3D::Graph3D(const QString& label, QWidget* parent, const char* name, WFlags f)
+Graph3D::Graph3D(const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
         : myWidget(label,parent,name,f)
 {
 initPlot();
@@ -71,8 +78,8 @@ void Graph3D::initPlot()
 	setBirthDate(dt.toString(Qt::LocalDate));
 
 	ignoreFonts = false;
-
-  	sp=new SurfacePlot(this,"3D SurfacePlot");
+/*//X disabling this until I find the problem with SurfacePlot
+  	sp=new SurfacePlot(this);
   	sp->resize(500,400);
   	sp->installEventFilter(this);
 	sp->setRotation(30,0,15);
@@ -86,7 +93,7 @@ void Graph3D::initPlot()
 	title=QString::null;
 	sp->setTitle(title);
 
-	titleCol=QColor(black);
+	titleCol=QColor(Qt::black);
 	sp->setTitleColor(Qt2GL(titleCol));
 
 	titleFnt= QFont("Times New Roman",14);
@@ -95,14 +102,14 @@ void Graph3D::initPlot()
 	sp->setTitleFont(titleFnt.family(),titleFnt.pointSize(),
 					titleFnt.weight(),titleFnt.italic());
 
-	axesCol=QColor(black);
-	labelsCol=QColor(black);
-	numCol=QColor(black);
-	meshCol=QColor(black);
-	gridCol=QColor(black);
+	axesCol=QColor(Qt::black);
+	labelsCol=QColor(Qt::black);
+	numCol=QColor(Qt::black);
+	meshCol=QColor(Qt::black);
+	gridCol=QColor(Qt::black);
 	bgCol=QColor(255, 255, 255);
-	fromColor=QColor(red);
-	toColor=QColor(blue);
+	fromColor=QColor(Qt::red);
+	toColor=QColor(Qt::blue);
 
 	col_ = 0;
 	
@@ -114,7 +121,7 @@ void Graph3D::initPlot()
 
 	labelsDist=0;
 
-	scaleType=QMemArray<int>(3);
+	scaleType=Q3MemArray<int>(3);
 	for (int j=0;j<3;j++)
 		scaleType[j]=0;
 
@@ -133,6 +140,7 @@ void Graph3D::initPlot()
 	connect(sp,SIGNAL(zoomChanged(double)),this,SLOT(zoomChanged(double)));
 	connect(sp,SIGNAL(scaleChanged(double, double, double)),this,SLOT(scaleChanged(double, double, double)));
 	connect(sp,SIGNAL(shiftChanged(double, double, double)),this,SLOT(shiftChanged(double, double, double)));
+	*/
 }
 
 void Graph3D::initCoord()
@@ -1373,7 +1381,7 @@ emit modified();
 
 void Graph3D::updateScales(double xl, double xr, double yl, double yr, double zl, double zr)
 {
-QApplication::setOverrideCursor(waitCursor);
+QApplication::setOverrideCursor(Qt::waitCursor);
 
 if (matrix_)
 	updateScalesFromMatrix(xl, xr, yl, yr, zl, zr);
@@ -1885,7 +1893,7 @@ void Graph3D::setConesMesh()
 if (!sp  || pointStyle == Cones )
 	return;
 
-QApplication::setOverrideCursor(waitCursor);
+QApplication::setOverrideCursor(Qt::waitCursor);
 
 pointStyle=Cones;
 style_=Qwt3D::USER;
@@ -1936,7 +1944,7 @@ void Graph3D::setBarsPlot()
 if (pointStyle == VerticalBars)
 	return;
 
-QApplication::setOverrideCursor(waitCursor);
+QApplication::setOverrideCursor(Qt::waitCursor);
 
 pointStyle=VerticalBars;
 style_=Qwt3D::USER;
@@ -2082,7 +2090,7 @@ if (ok)
 	QPixmap p;
 	p.load ("qtiplot.png","PNG", QPixmap::Auto );		
 	QImage image= p.convertToImage();		
-	QApplication::clipboard()->setData( new QImageDrag (image,sp,0) );
+	QApplication::clipboard()->setData( new Q3ImageDrag (image,sp,0) );
 	QFile f("qtiplot.png");
 	f.remove();
 	}
@@ -2107,7 +2115,7 @@ for (i=0;i<(int)list.count();i++)
 	filter+=aux;
 	}
 	
-QString fname = QFileDialog::getSaveFileName( QString::null,filter,0,"file dialog",
+QString fname = Q3FileDialog::getSaveFileName( QString::null,filter,0,"file dialog",
 	tr("Choose a filename to save under"),&selectedFilter,TRUE);
 if ( !fname.isEmpty() ) 
 	{ 	
@@ -2131,7 +2139,7 @@ if ( !fname.isEmpty() )
 	 else
 		{
 		QFile f(fname);
-		if ( !f.open( IO_WriteOnly ) ) 
+		if ( !f.open( QIODevice::WriteOnly ) ) 
 			{
 			QMessageBox::critical(0, tr("QtiPlot - Export Error"),tr("Could not write to file: <br><h4>"+fname+ "</h4><p>Please verify that you have the right to write to this location!").arg(fname));
    			 return;
@@ -2450,7 +2458,7 @@ void Graph3D::updateZoom(double  val)
 if (sp->zoom() == val)
 	return;
 
-QApplication::setOverrideCursor(waitCursor);
+QApplication::setOverrideCursor(Qt::waitCursor);
 
 sp->makeCurrent();
 sp->setZoom(val);
@@ -2465,7 +2473,7 @@ void Graph3D::updateScaling(double  xVal,double  yVal,double  zVal)
 if (sp->xScale() == xVal && sp->yScale() == yVal && sp->zScale() == zVal)
 	return;
 
-QApplication::setOverrideCursor(waitCursor);
+QApplication::setOverrideCursor(Qt::waitCursor);
 
 sp->setScale(xVal,yVal,zVal);
 sp->updateData();

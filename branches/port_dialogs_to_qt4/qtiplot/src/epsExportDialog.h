@@ -5,7 +5,7 @@
 #include <qdialog.h>
 #include <qprinter.h>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
 class QCheckBox;
 class QSpinBox;
@@ -16,12 +16,12 @@ class epsExportDialog : public QDialog
     Q_OBJECT
 
 public:
-    epsExportDialog(const QString& fileName, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    epsExportDialog(const QString& fileName, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~epsExportDialog();
 
     QPushButton* buttonOk;
 	QPushButton* buttonCancel;
-    QButtonGroup* GroupBox1, *GroupBox2;
+    Q3ButtonGroup* GroupBox1, *GroupBox2;
     QCheckBox* boxColor;
 	QSpinBox * boxResolution;
 	QComboBox *boxPageSize, *boxOrientation;

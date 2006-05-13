@@ -4,15 +4,18 @@
 #include <qspinbox.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qvariant.h>
 #include <qcolordialog.h>
 #include <qtabwidget.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
+#include <Q3HBoxLayout>
 
-lineDialog::lineDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+lineDialog::lineDialog( QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -21,7 +24,7 @@ lineDialog::lineDialog( QWidget* parent,  const char* name, bool modal, WFlags f
 
 	tw = new QTabWidget( this, "tw" );
 	options = new QWidget( tw, "options" );
-    GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal, QString::null,options,"GroupBox1" );
+    GroupBox1 = new Q3ButtonGroup( 2,Qt::Horizontal, QString::null,options,"GroupBox1" );
 
 	new QLabel(tr( "Color" ), GroupBox1, "TextLabel1",0);
 	colorBox = new ColorButton(GroupBox1);
@@ -51,13 +54,13 @@ lineDialog::lineDialog( QWidget* parent,  const char* name, bool modal, WFlags f
     endBox->setText( tr( "Arrow at &end" ) );
 	endBox->setChecked(TRUE);
 
-	QHBoxLayout* hl1 = new QHBoxLayout(options,5,5, "hl1");
+	Q3HBoxLayout* hl1 = new Q3HBoxLayout(options,5,5, "hl1");
     hl1->addWidget(GroupBox1);
 	
 	tw->insertTab(options, tr( "Opti&ons" ) );
 	
 	head = new QWidget( tw, "head" );
-    QButtonGroup *GroupBox4 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),head,"GroupBox4" );
+    Q3ButtonGroup *GroupBox4 = new Q3ButtonGroup( 2,Qt::Horizontal,tr(""),head,"GroupBox4" );
 
 	new QLabel(tr( "Length" ), GroupBox4, "TextLabel111",0);
 	boxHeadLength = new QSpinBox( 0,100,1,GroupBox4, "boxHeadLength" );
@@ -68,13 +71,13 @@ lineDialog::lineDialog( QWidget* parent,  const char* name, bool modal, WFlags f
 	filledBox = new QCheckBox(GroupBox4, "filledBox" ); 
     filledBox->setText( tr( "&Filled" ) );
 	
-	QHBoxLayout* hl3 = new QHBoxLayout(head,5,5, "hl3");
+	Q3HBoxLayout* hl3 = new Q3HBoxLayout(head,5,5, "hl3");
     hl3->addWidget(GroupBox4);
 
 	tw->insertTab(head, tr( "Arrow &Head" ) );
 
 	geometry = new QWidget( tw, "geometry" );
-    QButtonGroup *GroupBox2 = new QButtonGroup( 2,QGroupBox::Horizontal,tr("Start Point"),geometry,"GroupBox2" );
+    Q3ButtonGroup *GroupBox2 = new Q3ButtonGroup( 2,Qt::Horizontal,tr("Start Point"),geometry,"GroupBox2" );
 
 	new QLabel(tr( "X" ), GroupBox2, "TextLabel11",0);
 	xStartBox = new QSpinBox( 0,10000,1,GroupBox2, "xstart" );
@@ -82,7 +85,7 @@ lineDialog::lineDialog( QWidget* parent,  const char* name, bool modal, WFlags f
 	new QLabel(tr( "Y" ),GroupBox2, "TextLabel111",0 );
 	yStartBox = new QSpinBox(0,10000,1,GroupBox2, "ystart" );
 
-	QButtonGroup *GroupBox3 = new QButtonGroup( 2,QGroupBox::Horizontal,tr("End Point"),geometry,"GroupBox3" );
+	Q3ButtonGroup *GroupBox3 = new Q3ButtonGroup( 2,Qt::Horizontal,tr("End Point"),geometry,"GroupBox3" );
 
 	new QLabel(tr( "X" ), GroupBox3, "TextLabel11",0);
 	xEndBox = new QSpinBox(0,10000,1,GroupBox3, "xstart" );
@@ -90,14 +93,15 @@ lineDialog::lineDialog( QWidget* parent,  const char* name, bool modal, WFlags f
 	new QLabel(tr( "Y" ),GroupBox3, "TextLabel111",0 );
 	yEndBox = new QSpinBox(0,10000,1,GroupBox3, "ystart" );
 
-	QHBoxLayout* hl2 = new QHBoxLayout(geometry,5,5, "hl2");
+	Q3HBoxLayout* hl2 = new Q3HBoxLayout(geometry,5,5, "hl2");
     hl2->addWidget(GroupBox2);
 	hl2->addWidget(GroupBox3);
 
 	tw->insertTab(geometry, tr( "&Geometry" ) );
 
-	GroupBox2 = new QButtonGroup(3,QGroupBox::Horizontal, QString::null,this,"GroupBox2" );
-	GroupBox2->setLineWidth (0);
+	GroupBox2 = new Q3ButtonGroup(3,Qt::Horizontal, QString::null,this,"GroupBox2" );
+	// FIXME: replace next line with Qt4 equivalent
+//X	GroupBox2->setLineWidth (0);
 	
     btnOk = new QPushButton(GroupBox2, "btnOk" );
     btnOk->setText( tr( "&Ok" ) );
@@ -108,7 +112,7 @@ lineDialog::lineDialog( QWidget* parent,  const char* name, bool modal, WFlags f
     btnCancel = new QPushButton(GroupBox2, "btnCancel" );
     btnCancel->setText( tr( "&Cancel" ) );
 	
-	QVBoxLayout* hlayout = new QVBoxLayout(this,5,5, "hlayout");
+	Q3VBoxLayout* hlayout = new Q3VBoxLayout(this,5,5, "hlayout");
     hlayout->addWidget(tw);
 	hlayout->addWidget(GroupBox2);
 

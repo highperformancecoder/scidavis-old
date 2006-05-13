@@ -13,7 +13,7 @@ class matrixDialog : public QDialog
     Q_OBJECT
 
 public:
-    matrixDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    matrixDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~matrixDialog();
 
     QPushButton* buttonOk;

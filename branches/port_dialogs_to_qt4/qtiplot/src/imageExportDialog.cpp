@@ -7,11 +7,14 @@
 #include <qcombobox.h>
 #include <qspinbox.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qimage.h>
+#include <QPicture>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
 
 imageExportDialog::imageExportDialog( bool exportAllPlots, QWidget* parent, 
-																const char* name, bool modal, WFlags fl )
+																const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -22,14 +25,14 @@ imageExportDialog::imageExportDialog( bool exportAllPlots, QWidget* parent,
     setMouseTracking( TRUE );
     setSizeGripEnabled( FALSE );
 	
-	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),this,"GroupBox1" );
+	GroupBox1 = new Q3ButtonGroup( 2,Qt::Horizontal,tr(""),this,"GroupBox1" );
 
 	expAll = exportAllPlots;
 	if (expAll)
 		{
 		formatLabel = new QLabel( tr( "Image format" ), GroupBox1, "TextLabel11",0 );
 	
-		QStringList outputFormatList = QImage::outputFormatList ();
+		QStringList outputFormatList = QPicture::outputFormatList ();
 
 		#ifdef Q_OS_WIN
 			;
@@ -51,9 +54,10 @@ imageExportDialog::imageExportDialog( bool exportAllPlots, QWidget* parent,
     boxTransparency->setChecked( false );
 	boxTransparency->setEnabled(false);
 	
-	GroupBox2 = new QButtonGroup(1,QGroupBox::Horizontal,tr(""),this,"GroupBox2" );
+	GroupBox2 = new Q3ButtonGroup(1,Qt::Horizontal,tr(""),this,"GroupBox2" );
 	GroupBox2->setFlat (TRUE);
-	GroupBox2->setLineWidth (0);
+	// FIXME: replace this with Qt4 equivalent
+	//X GroupBox2->setLineWidth (0);
 	
 	buttonOk = new QPushButton(GroupBox2, "buttonOk" );
     buttonOk->setAutoDefault( TRUE );
@@ -62,7 +66,7 @@ imageExportDialog::imageExportDialog( bool exportAllPlots, QWidget* parent,
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
     buttonCancel->setAutoDefault( TRUE );
 	
-	QHBoxLayout* hlayout = new QHBoxLayout(this,5,5, "hlayout");
+	Q3HBoxLayout* hlayout = new Q3HBoxLayout(this,5,5, "hlayout");
     hlayout->addWidget(GroupBox1);
 	hlayout->addWidget(GroupBox2);
 

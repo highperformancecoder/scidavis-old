@@ -3,8 +3,10 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <QLabel>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
 class QComboBox;
 class QSpinBox;
@@ -16,13 +18,13 @@ class importDialog : public QDialog
     Q_OBJECT
 
 public:
-    importDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    importDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~importDialog();
 
     QPushButton* buttonOk;
 	QPushButton* buttonCancel;
 	QPushButton* buttonHelp;
-    QButtonGroup* GroupBox1, *GroupBox2;
+    Q3ButtonGroup* GroupBox1, *GroupBox2;
     QComboBox* boxSeparator;
 	QSpinBox* boxLines;
 	QCheckBox *boxRenameCols, *boxSimplifySpaces, *boxStripSpaces;

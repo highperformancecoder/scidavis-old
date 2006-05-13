@@ -9,17 +9,19 @@
 #include <qvariant.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
-#include <qhbox.h>
+#include <q3hbox.h>
 #include <qlabel.h>
 #include <qcombobox.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qlineedit.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 #include <qcheckbox.h>
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
 
-FFTDialog::FFTDialog(int type, QWidget* parent, const char* name, bool modal, WFlags fl )
+FFTDialog::FFTDialog(int type, QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -30,11 +32,11 @@ FFTDialog::FFTDialog(int type, QWidget* parent, const char* name, bool modal, WF
 	graph = 0;
 	d_type = type;
 
-	QVBox *box = new QVBox (this, "vbox");
+	Q3VBox *box = new Q3VBox (this, "vbox");
 	box->setSpacing(5);
 	box->setMargin(5);
 
-	QButtonGroup *GroupFFT = new QButtonGroup(2,QGroupBox::Horizontal,tr(""), box, "GroupBox3" );
+	Q3ButtonGroup *GroupFFT = new Q3ButtonGroup(2,Qt::Horizontal,tr(""), box, "GroupBox3" );
 	GroupFFT->setRadioButtonExclusive ( TRUE );
 	
     forwardBtn = new QRadioButton(GroupFFT, "forwardBtn" );
@@ -42,7 +44,7 @@ FFTDialog::FFTDialog(int type, QWidget* parent, const char* name, bool modal, WF
 
     backwardBtn = new QRadioButton(GroupFFT, "backwardBtn" );
 
-	QButtonGroup *GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""), box,"GroupBox1" );
+	Q3ButtonGroup *GroupBox1 = new Q3ButtonGroup( 2,Qt::Horizontal,tr(""), box,"GroupBox1" );
 
 	if (d_type == onGraph)
 		new QLabel( tr("Curve"), GroupBox1, "TextLabel1",0 );
@@ -69,16 +71,17 @@ FFTDialog::FFTDialog(int type, QWidget* parent, const char* name, bool modal, WF
 	boxOrder = new QCheckBox(box, "boxOrder" );
 	boxOrder->setChecked(true);
 
-	QButtonGroup *GroupBox2 = new QButtonGroup(1,QGroupBox::Horizontal,tr(""),this,"GroupBox2" );
+	Q3ButtonGroup *GroupBox2 = new Q3ButtonGroup(1,Qt::Horizontal,tr(""),this,"GroupBox2" );
 	GroupBox2->setFlat (TRUE);
-	GroupBox2->setLineWidth (0);
+// FIXME: replace this with Qt4 equivalent
+//X	GroupBox2->setLineWidth (0);
 
 	buttonOK = new QPushButton(GroupBox2, "buttonFit" );
     buttonOK->setDefault( TRUE );
    
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
 	
-	QHBoxLayout* hlayout = new QHBoxLayout(this,5,5, "hlayout");
+	Q3HBoxLayout* hlayout = new Q3HBoxLayout(this,5,5, "hlayout");
     hlayout->addWidget(box);
 	hlayout->addWidget(GroupBox2);
 
@@ -117,7 +120,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(this, tr("QtiPlot - Sampling value error"), e.GetMsg());
+	QMessageBox::critical(this, tr("QtiPlot - Sampling value error"), QString::fromStdString(e.GetMsg()));
 	boxSampling->setFocus();
 	return;
 	}		

@@ -1,6 +1,7 @@
 TARGET  = qtiplot
 TEMPLATE     = app
-CONFIG      += qt warn_on release thread opengl
+#CONFIG      += qt warn_on release thread opengl
+CONFIG      += qt warn_on debug thread opengl
 MOC_DIR      = ../tmp/qtiplot
 OBJECTS_DIR  = ../tmp/qtiplot
 DESTDIR           = ./
@@ -19,7 +20,7 @@ win32:INCLUDEPATH += C:/WinGsl
 win32:INCLUDEPATH += ../3rdparty/zlib123/include
 
 unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
-unix:LIBS         += -L /usr/lib -lgsl -lgslcblas -lqwtplot3d -lz
+unix:LIBS         += -L /usr/lib -L /usr/local/lib -lgsl -lgslcblas -lqwtplot3d -lz -lqwt
 
 win32:LIBS        += ../3rdparty/qwtplot3d/lib/qwtplot3d.lib
 win32:LIBS        += ../3rdparty/qwt/lib/qwt.lib  
@@ -203,3 +204,5 @@ SOURCES+=../3rdparty/liborigin/OPJFile.cpp
 
 #Compression (zlib123)
 SOURCES+=../3rdparty/zlib123/minigzip.c
+#The following line was inserted by qt3to4
+QT +=  opengl qt3support 

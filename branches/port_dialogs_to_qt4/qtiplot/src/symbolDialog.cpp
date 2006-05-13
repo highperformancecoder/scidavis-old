@@ -3,10 +3,12 @@
 #include <qvariant.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
-#include <qaccel.h>
+#include <q3buttongroup.h>
+#include <q3accel.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
 
-symbolDialog::symbolDialog(CharSet charsSet, QWidget* parent, const char* name, bool modal, WFlags fl )
+symbolDialog::symbolDialog(CharSet charsSet, QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -14,25 +16,27 @@ symbolDialog::symbolDialog(CharSet charsSet, QWidget* parent, const char* name, 
     setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, 0, 0, sizePolicy().hasHeightForWidth() ) );
     setSizeGripEnabled( FALSE );
 
-	GroupBox1 = new QButtonGroup(5, QGroupBox::Horizontal,tr(""), this,"GroupBox1" );
+	GroupBox1 = new Q3ButtonGroup(5, Qt::Horizontal,tr(""), this,"GroupBox1" );
 	GroupBox1->setFlat ( true );
-	GroupBox1->setLineWidth ( 0 );
-	GroupBox1->moveFocus (0);
+// FIXME: replace this with Qt4 equivalent
+//X	GroupBox1->setLineWidth ( 0 );
+// FIXME: replace this with Qt4 equivalent
+//X	GroupBox1->moveFocus (0);
 
 	if (!charsSet)
 		initMinGreekChars();
 	else
 		initMajGreekChars();
 
-	QHBoxLayout* hlayout = new QHBoxLayout(this, 0, 0, "hlayout2");
+	Q3HBoxLayout* hlayout = new Q3HBoxLayout(this, 0, 0, "hlayout2");
     hlayout->addWidget(GroupBox1);
 
     languageChange();
 
 	connect (GroupBox1, SIGNAL(clicked(int)), this, SLOT(getChar(int)));
 
-	QAccel *accel = new QAccel(this);
-	accel->connectItem( accel->insertItem( Key_Return ),
+	Q3Accel *accel = new Q3Accel(this);
+	accel->connectItem( accel->insertItem( Qt::Key_Return ),
                             this, SLOT(addCurrentChar()) );
 }
 

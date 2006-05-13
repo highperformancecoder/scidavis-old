@@ -6,7 +6,7 @@
 class QwtBarCurve: public QwtPlotCurve
 {
 public:
-	enum BarStyle{Vertical = 0, Horizontal=1};
+	typedef enum Qt::Orientation BarStyle;
 	QwtBarCurve(QwtPlot *parent, const char *name=0);
 	QwtBarCurve(BarStyle style, QwtPlot *parent, const char *name=0);
 

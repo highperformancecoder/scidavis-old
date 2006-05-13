@@ -6,41 +6,43 @@
 #include <qlabel.h>
 #include <qcombobox.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qmessagebox.h>
 #include <qregexp.h>
 #include <qspinbox.h>
 #include <qcheckbox.h>
-#include <qvbox.h>
-#include <qwhatsthis.h>
+#include <q3vbox.h>
+#include <q3whatsthis.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
-importDialog::importDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
+importDialog::importDialog( QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
 		setName( "importDialog" );
     setSizeGripEnabled( true );
 
-	QVBox  *box=new QVBox (this, "box2"); 
+	Q3VBox  *box=new Q3VBox (this, "box2"); 
 	box->setMargin (5);
 	box->setSpacing (5);
 
-	QHBox  *hbox1=new QHBox (box, "hbox1"); 
+	Q3HBox  *hbox1=new Q3HBox (box, "hbox1"); 
 	hbox1->setSpacing (5);
 
-	sepText = new QLabel(hbox1, "TextLabel1",0 );
+	sepText = new QLabel(hbox1);
     boxSeparator = new QComboBox(true, hbox1, "boxSeparator" );
 	boxSeparator->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
 
 	QString help = tr("The column separator can be customized. The following special codes can be used:\n\\t for a TAB character \n\\s for a SPACE");
 	help += "\n"+tr("The separator must not contain the following characters: 0-9eE.+-");
-	QWhatsThis::add(boxSeparator, help);
-	QWhatsThis::add(sepText, help);
+	Q3WhatsThis::add(boxSeparator, help);
+	Q3WhatsThis::add(sepText, help);
 
-	QHBox  *hbox2=new QHBox (box, "hbox2");
+	Q3HBox  *hbox2=new Q3HBox (box, "hbox2");
 	hbox2->setSpacing (5);
 
-	ignoreLabel = new QLabel(hbox2, "TextLabel2",0 );
+	ignoreLabel = new QLabel(hbox2);
     boxLines = new QSpinBox(0,10000, 1, hbox2, "boxLines" );
 	boxLines->setSuffix(" " + tr("lines"));
 	
@@ -51,17 +53,18 @@ importDialog::importDialog( QWidget* parent, const char* name, bool modal, WFlag
 	help +="\n\n"+tr("Warning: checking this option leads to column overlaping if the columns in the ASCII file don't have the same number of rows.");
 	help +="\n"+tr("To avoid this problem you should precisely define the column separator using TAB and SPACE characters.");
 
-	QWhatsThis::add(boxStripSpaces, help);
+	Q3WhatsThis::add(boxStripSpaces, help);
 
 	boxSimplifySpaces = new QCheckBox(box, "boxSimplifySpaces" );
 	help = tr("By checking this option all white spaces will be removed from the beginning and the end of the lines and each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.");
 	help +="\n\n"+tr("Warning: checking this option leads to column overlaping if the columns in the ASCII file don't have the same number of rows.");
 	help +="\n"+tr("To avoid this problem you should precisely define the column separator using TAB and SPACE characters.");
-	QWhatsThis::add(boxSimplifySpaces, help);
+	Q3WhatsThis::add(boxSimplifySpaces, help);
 
-	GroupBox2 = new QButtonGroup(3,QGroupBox::Horizontal,QString::null,this,"GroupBox2" );
+	GroupBox2 = new Q3ButtonGroup(3,Qt::Horizontal,QString::null,this,"GroupBox2" );
 	GroupBox2->setFlat(TRUE);
-	GroupBox2->setLineWidth(0);
+	// FIXME: replace the next line with Qt4 version
+	//X GroupBox2->setLineWidth(0);
 	GroupBox2->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
 	buttonOk = new QPushButton(GroupBox2, "buttonOk" );
@@ -70,7 +73,7 @@ importDialog::importDialog( QWidget* parent, const char* name, bool modal, WFlag
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
 	buttonHelp = new QPushButton(GroupBox2, "buttonHelp" );
 	
-	QVBoxLayout* hlayout = new QVBoxLayout(this,5,5, "hlayout");
+	Q3VBoxLayout* hlayout = new Q3VBoxLayout(this,5,5, "hlayout");
     hlayout->addWidget(box);
 	hlayout->addWidget(GroupBox2);
 

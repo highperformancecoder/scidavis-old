@@ -4,8 +4,10 @@
 #include <qvariant.h>
 #include <qdialog.h>
 #include <qpushbutton.h>
+//Added by qt3to4:
+#include <QEvent>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QSpinBox;
 class ChainButton;
 
@@ -14,7 +16,7 @@ class imageDialog : public QDialog
     Q_OBJECT
 
 public:
-    imageDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    imageDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~imageDialog();
 	void setOrigin(const QPoint& o);
 	void setSize(const QSize& size);
@@ -22,7 +24,7 @@ public:
     QPushButton* buttonOk;
 	QPushButton* buttonCancel;
 	QPushButton* buttonApply;
-    QButtonGroup* GroupBox1, *GroupBox2, *GroupBox3, *GroupBox4;
+    Q3ButtonGroup* GroupBox1, *GroupBox2, *GroupBox3, *GroupBox4;
     QSpinBox* boxX, *boxY, *boxWidth, *boxHeight;
 	ChainButton *linkButton;
 

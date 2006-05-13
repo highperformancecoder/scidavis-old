@@ -7,9 +7,18 @@
 #include <qwidget.h>
 #include <qpushbutton.h>
 #include <qobject.h>
-#include <qhbox.h>
-#include <qptrlist.h>
+#include <q3hbox.h>
+#include <q3ptrlist.h>
 #include <qprinter.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QPixmap>
+#include <QKeyEvent>
+#include <QEvent>
+#include <QLabel>
+#include <QContextMenuEvent>
+#include <QResizeEvent>
+#include <QMouseEvent>
 
 #include <gsl/gsl_vector.h>
 
@@ -26,7 +35,7 @@ class MultiLayer: public myWidget
 	Q_OBJECT
 
 public:
-    MultiLayer (const QString& label, QWidget* parent=0, const char* name=0, WFlags f=0);
+    MultiLayer (const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
 	QWidgetList* graphPtrs(){return graphsList;};
 	LayerButton* addLayerButton();	
 
@@ -46,7 +55,7 @@ public:
 	void releaseLayer();
 	
 	QWidgetList *buttonsList, *graphsList;
-	QHBox  *hbox1;
+	Q3HBox  *hbox1;
 	QWidget *canvas;
 
 public slots:

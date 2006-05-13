@@ -5,21 +5,20 @@
 #include <qlabel.h>
 #include <qcombobox.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
-#include <qhbuttongroup.h>
+#include <q3buttongroup.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
-sortDialog::sortDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl )
+sortDialog::sortDialog( QWidget* parent, Qt::WFlags fl )
+    : QDialog( parent, fl )
 {
-    if ( !name )
-		setName( "sortDialog" );
 	setCaption(tr("QtiPlot - Sorting Options"));
     setMinimumSize( QSize( 310, 140 ) );
 	setMaximumSize( QSize( 310, 140 ) );
     setMouseTracking( TRUE );
     setSizeGripEnabled( FALSE );
 	
-	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal, QString::null,this,"GroupBox1" );
+	GroupBox1 = new Q3ButtonGroup( 2,Qt::Horizontal, QString::null,this,"GroupBox1" );
 
 	new QLabel( tr("Sort columns"), GroupBox1, "TextLabel1",0 );
 	boxType = new QComboBox(GroupBox1, "boxShow" );
@@ -31,16 +30,17 @@ sortDialog::sortDialog( QWidget* parent, const char* name, bool modal, WFlags fl
 	columnsList = new QComboBox(GroupBox1, "listBox" );
 	columnsList->setEnabled(FALSE);	
 	
-	GroupBox2 = new QHButtonGroup(this,"GroupBox2" );
+	GroupBox2 = new Q3HButtonGroup(this,"GroupBox2" );
 	GroupBox2->setFlat (TRUE);
-	GroupBox2->setLineWidth (0);
+	// TODO: Replace this when porting the dialog to Qt4
+	//X GroupBox2->setLineWidth (0);
 	
 	buttonOk = new QPushButton(GroupBox2, "buttonOk" );
     buttonOk->setDefault( TRUE );
    
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );    
     
-	QVBoxLayout* vlayout = new QVBoxLayout(this,5,5, "vlayout");
+	Q3VBoxLayout* vlayout = new Q3VBoxLayout(this,5,5, "vlayout");
     vlayout->addWidget(GroupBox1);
 	vlayout->addWidget(GroupBox2);
 

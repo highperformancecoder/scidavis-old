@@ -9,13 +9,15 @@
 #include <qlabel.h>
 #include <qcombobox.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qlineedit.h>
 #include <qspinbox.h>
 #include <qmessagebox.h>
-#include <qhbuttongroup.h>
+#include <q3buttongroup.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
-intDialog::intDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
+intDialog::intDialog( QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -24,7 +26,7 @@ intDialog::intDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
     setSizeGripEnabled( true );
 	setFixedHeight(sizeHint().height());
 
-	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),this,"GroupBox1" );
+	GroupBox1 = new Q3ButtonGroup( 2,Qt::Horizontal,tr(""),this,"GroupBox1" );
 
 	new QLabel( tr("Integration of"), GroupBox1, "TextLabel1",0 );
 	boxName = new QComboBox(GroupBox1, "boxShow" );
@@ -46,9 +48,10 @@ intDialog::intDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
 	new QLabel( tr("Upper limit"), GroupBox1, "TextLabel6",0 );
 	boxEnd = new QLineEdit(GroupBox1, "boxEnd" );
 
-	GroupBox2 = new QHButtonGroup(this,"GroupBox2" );
+	GroupBox2 = new Q3HButtonGroup(this,"GroupBox2" );
 	GroupBox2->setFlat (TRUE);
-	GroupBox2->setLineWidth (0);
+	// TODO: Replace this when porting the dialog to Qt4
+	//X GroupBox2->setLineWidth (0);
 	
 	buttonOk = new QPushButton(GroupBox2, "buttonOk" );
     buttonOk->setAutoDefault( TRUE );
@@ -60,7 +63,7 @@ intDialog::intDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
     buttonCancel->setAutoDefault( TRUE );
         
-	QVBoxLayout* vlayout = new QVBoxLayout(this,5,5, "vlayout");
+	Q3VBoxLayout* vlayout = new Q3VBoxLayout(this,5,5, "vlayout");
     vlayout->addWidget(GroupBox1);
 	vlayout->addWidget(GroupBox2);
 
@@ -118,7 +121,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0,tr("QtiPlot - Tolerance value error"),e.GetMsg());
+	QMessageBox::critical(0,tr("QtiPlot - Tolerance value error"),QString::fromStdString(e.GetMsg()));
 	boxTol->clear();
 	boxTol->setFocus();
 	return;
@@ -166,7 +169,7 @@ else
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0,tr("QtiPlot - Start limit error"),e.GetMsg());
+		QMessageBox::critical(0,tr("QtiPlot - Start limit error"),QString::fromStdString(e.GetMsg()));
 		boxStart->clear();
 		boxStart->setFocus();
 		return;
@@ -211,7 +214,7 @@ else
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0,tr("QtiPlot - End limit error"),e.GetMsg());
+		QMessageBox::critical(0,tr("QtiPlot - End limit error"),QString::fromStdString(e.GetMsg()));
 		boxEnd->clear();
 		boxEnd->setFocus();
 		return;

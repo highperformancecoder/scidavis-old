@@ -5,15 +5,17 @@
 #include <qvariant.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qlineedit.h>
-#include <qtextedit.h>
+#include <q3textedit.h>
 #include <qradiobutton.h>
 #include <qmessagebox.h>
 #include <qaction.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
 
-renameWindowDialog::renameWindowDialog(QWidget* parent, const char* name, bool modal, WFlags fl )
+renameWindowDialog::renameWindowDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -21,21 +23,22 @@ renameWindowDialog::renameWindowDialog(QWidget* parent, const char* name, bool m
 		
 	setCaption(tr("QtiPlot - Rename Window"));
 	
-	GroupBox1 = new QButtonGroup( 2, QGroupBox::Horizontal,tr("Window Title"),this,"GroupBox1" );
+	GroupBox1 = new Q3ButtonGroup( 2, Qt::Horizontal,tr("Window Title"),this,"GroupBox1" );
 
 	boxName = new QRadioButton(tr("&Name (single word)"), GroupBox1, "boxName" );
 	boxNameLine = new QLineEdit(GroupBox1, "boxNameLine");
 	setFocusProxy(boxNameLine);
 
 	boxLabel = new QRadioButton(tr("&Label"), GroupBox1, "boxLabel" );
-	boxLabelEdit = new QTextEdit(GroupBox1, "boxLabelEdit");
+	boxLabelEdit = new Q3TextEdit(GroupBox1, "boxLabelEdit");
 	boxLabelEdit->setMaximumHeight(100);
 
 	boxBoth = new QRadioButton(tr("&Both Name and Label"), GroupBox1, "boxBoth" );
 	
-	GroupBox2 = new QButtonGroup(1,QGroupBox::Horizontal,tr(""),this,"GroupBox2" );
+	GroupBox2 = new Q3ButtonGroup(1,Qt::Horizontal,tr(""),this,"GroupBox2" );
 	GroupBox2->setFlat (TRUE);
-	GroupBox2->setLineWidth (0);
+// FIXME: replace this with Qt4 equivalent
+//X	GroupBox2->setLineWidth (0);
 	
 	buttonOk = new QPushButton(GroupBox2, "buttonOk" );
     buttonOk->setAutoDefault( TRUE );
@@ -44,7 +47,7 @@ renameWindowDialog::renameWindowDialog(QWidget* parent, const char* name, bool m
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
     buttonCancel->setAutoDefault( TRUE );
 	
-	QHBoxLayout* hlayout = new QHBoxLayout(this,5,5, "hlayout");
+	Q3HBoxLayout* hlayout = new Q3HBoxLayout(this,5,5, "hlayout");
     hlayout->addWidget(GroupBox1);
 	hlayout->addWidget(GroupBox2);
 

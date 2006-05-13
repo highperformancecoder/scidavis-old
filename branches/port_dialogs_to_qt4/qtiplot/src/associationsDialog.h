@@ -3,13 +3,16 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-#include <qwidgetlist.h>
+#include <qwidget.h>
+//Added by qt3to4:
+#include <QLabel>
+#include <QEvent>
 
 class QLabel;
-class QListBox;
+class Q3ListBox;
 class QPushButton;
-class QTable;
-class QTableItem;
+class Q3Table;
+class Q3TableItem;
 class QStringList;
 class Table;
 class Graph;
@@ -19,14 +22,14 @@ class associationsDialog : public QDialog
     Q_OBJECT
 
 public:
-    associationsDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    associationsDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~associationsDialog();
 
 
 	QLabel* tableCaptionLabel;
-	QTable *table;
+	Q3Table *table;
 	QPushButton *btnOK, *btnCancel, *btnApply;
-    QListBox* associations;
+    Q3ListBox* associations;
 
 public slots:
 	Table * findTable(int index);

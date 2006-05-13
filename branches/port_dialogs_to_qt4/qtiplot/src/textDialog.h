@@ -3,15 +3,20 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
+#include <Q3HBoxLayout>
+#include <QLabel>
+#include <Q3GridLayout>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class QComboBox;
 class QLabel;
-class QMultiLineEdit;
+class Q3MultiLineEdit;
 class QPushButton;
-class QButtonGroup;
+class Q3ButtonGroup;
 class ColorButton;
 
 class TextDialog : public QDialog
@@ -21,7 +26,7 @@ class TextDialog : public QDialog
 public:
 	enum TextType{TextMarker, AxisTitle};
 
-    TextDialog(TextType type, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    TextDialog(TextType type, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~TextDialog();
 
     ColorButton *colorBox, *backgroundBtn;
@@ -38,8 +43,8 @@ public:
     QPushButton* buttonI;
     QPushButton* buttonU;
 	QPushButton* buttonCurve;
-    QMultiLineEdit* LineEdit;
-	QButtonGroup *GroupBox1, *GroupBox2;
+    Q3MultiLineEdit* LineEdit;
+	Q3ButtonGroup *GroupBox1, *GroupBox2;
 	QPushButton* buttonMinGreek, *buttonMajGreek;
 	QComboBox* alignementBox;
 

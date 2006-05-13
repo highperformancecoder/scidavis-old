@@ -1,7 +1,10 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include <qtable.h>
+#include <q3table.h>
+//Added by qt3to4:
+#include <QContextMenuEvent>
+#include <QEvent>
 #include "widget.h"
 	
 class Matrix: public myWidget
@@ -10,7 +13,7 @@ class Matrix: public myWidget
 
 public:
 
-	Matrix(int r, int c, const QString& label, QWidget* parent=0, const char* name=0, WFlags f=0);
+	Matrix(int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
 	~Matrix(){};
 	
 	int numRows();
@@ -88,7 +91,7 @@ signals:
 	void showContextMenu();
 
 private:
-	QTable *table;
+	Q3Table *table;
 	QString formula_str;
 	QChar txt_format;
 	int selectedCol, lastSelectedCol, num_precision;

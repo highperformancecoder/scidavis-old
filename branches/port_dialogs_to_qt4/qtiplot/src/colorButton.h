@@ -2,9 +2,11 @@
 #define COLORBUTTON_H
 
 #include <qwidget.h>
+//Added by qt3to4:
+#include <Q3Frame>
 
 class QPushButton;
-class QFrame;
+class Q3Frame;
 
 class ColorButton : public QWidget
 {
@@ -16,7 +18,7 @@ public:
   QColor color() const;
 
   QPushButton *selectButton;
-  QFrame *display;
+  Q3Frame *display;
 
 signals:
   void clicked();

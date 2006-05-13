@@ -1,6 +1,8 @@
 #include "BoxCurve.h"
 #include <qpainter.h>
 #include <qwt_symbol.h>
+//Added by qt3to4:
+#include <Q3PointArray>
 #include <gsl/gsl_statistics.h>
 
 BoxCurve::BoxCurve(QwtPlot *parent, const char *name):
@@ -107,7 +109,7 @@ if (b_style == Rect)
 	}
 else if (b_style == Diamond)
 	{
-	const QPointArray pa(4);	
+	Q3PointArray pa(4);	
 	pa[0] = QPoint(px, b_upperq);	
 	pa[1] = QPoint(px + hbw, median);
 	pa[2] = QPoint(px, b_lowerq);
@@ -120,7 +122,7 @@ else if (b_style == WindBox)
 	{
 	const int lowerq = yMap.transform(gsl_stats_quantile_from_sorted_data (dat, 1, size, 0.25));
 	const int upperq = yMap.transform(gsl_stats_quantile_from_sorted_data (dat, 1, size, 0.75));
-	const QPointArray pa(8);	
+	Q3PointArray pa(8);	
 	pa[0] = QPoint(px + hbw, b_upperq);	
 	pa[1] = QPoint(int(px + 0.4*box_width), upperq);
 	pa[2] = QPoint(int(px + 0.4*box_width), lowerq);
@@ -140,7 +142,7 @@ else if (b_style == Notch)
 	const int lowerCI = yMap.transform(dat[j]);
 	const int upperCI = yMap.transform(dat[k]);
 
-	const QPointArray pa(10);	
+	Q3PointArray pa(10);	
 	pa[0] = QPoint(px + hbw, b_upperq);	
 	pa[1] = QPoint(px + hbw, upperCI);
 	pa[2] = QPoint(int(px + 0.25*hbw), median);

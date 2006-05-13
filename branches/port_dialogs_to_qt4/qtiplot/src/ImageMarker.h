@@ -1,7 +1,7 @@
 #ifndef IMAGEMARKER_H
 #define IMAGEMARKER_H
 
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qpixmap.h>
 #include <qwt_plot_classes.h>
 #include <qwt_marker.h>

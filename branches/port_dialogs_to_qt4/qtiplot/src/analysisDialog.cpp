@@ -6,11 +6,12 @@
 #include <qlabel.h>
 #include <qcombobox.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qlineedit.h>
-#include <qhbuttongroup.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
-analysisDialog::analysisDialog( QWidget* parent, const QString& text, const char* name, bool modal, WFlags fl )
+analysisDialog::analysisDialog( QWidget* parent, const QString& text, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -19,14 +20,15 @@ analysisDialog::analysisDialog( QWidget* parent, const QString& text, const char
 	
 	operation = QString::null;
 
-	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),this,"GroupBox1" );
+	GroupBox1 = new Q3ButtonGroup( 2,Qt::Horizontal,tr(""),this,"GroupBox1" );
 
 	new QLabel( tr(text), GroupBox1, "TextLabel1",0 );
 	boxName = new QComboBox(GroupBox1, "boxShow" );
 	
-	GroupBox2 = new QHButtonGroup(this,"GroupBox2" );
+	GroupBox2 = new Q3HButtonGroup(this,"GroupBox2" );
 	GroupBox2->setFlat (TRUE);
-	GroupBox2->setLineWidth (0);
+	// TODO: Replace this when porting the dialog to Qt4
+	//X GroupBox2->setLineWidth (0);
 	
 	buttonOk = new QPushButton(GroupBox2, "buttonOk" );
     buttonOk->setAutoDefault( TRUE );
@@ -35,7 +37,7 @@ analysisDialog::analysisDialog( QWidget* parent, const QString& text, const char
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
     buttonCancel->setAutoDefault( TRUE );
 	
-    QVBoxLayout* vlayout = new QVBoxLayout(this,5,5, "vlayout");
+    Q3VBoxLayout* vlayout = new Q3VBoxLayout(this,5,5, "vlayout");
 	vlayout->addWidget(GroupBox1);
 	vlayout->addWidget(GroupBox2);
 	

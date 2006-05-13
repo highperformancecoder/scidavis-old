@@ -2,7 +2,7 @@
 #define NOTE_H
 
 #include "widget.h"	
-#include <qtextedit.h>
+#include <q3textedit.h>
 
 class Note: public myWidget
 {
@@ -10,17 +10,17 @@ class Note: public myWidget
 
 public:
 
-	Note(const QString& label, QWidget* parent=0, const char* name=0, WFlags f=0);
+	Note(const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
 	~Note(){};
 
-	QTextEdit *te;
+	Q3TextEdit *te;
 		
 	void init();
 
 public slots:
 	QString saveToString(const QString &info);
 
-	QTextEdit* textWidget(){return te;};
+	Q3TextEdit* textWidget(){return te;};
 	QString text(){return te->text();};
 	void setText(const QString &s){te->setText(s);};
 	void modifiedNote();

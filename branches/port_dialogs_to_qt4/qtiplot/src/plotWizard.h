@@ -34,9 +34,9 @@
 #include <qvariant.h>
 #include <qdialog.h>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
-class QListBox;
+class Q3ListBox;
 class QComboBox;
 
 //! A wizard type dialog class to create new plots
@@ -52,7 +52,7 @@ public:
 	 * \param modal flag: decides wheather the dialog is model or not
 	 * \param fl Qt window flags
 	 */
-    plotWizard( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    plotWizard( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
 	//! Destructor
     ~plotWizard();
 
@@ -75,7 +75,7 @@ public:
 				//! Button "<->Z" 
 				*buttonZ;
 				//! Button group defining the layout
-    QButtonGroup* GroupBox1, 
+    Q3ButtonGroup* GroupBox1, 
 				//! Button group defining the layout
 				*GroupBox2, 
 				//! Button group defining the layout
@@ -83,7 +83,7 @@ public:
 				//! Combo box to select the table
     QComboBox* boxTables;
 				//! List of the columns in the selected table
-	QListBox *columnsList, 
+	Q3ListBox *columnsList, 
 				//! List of the plots to generate
 			 *plotAssociations;
 

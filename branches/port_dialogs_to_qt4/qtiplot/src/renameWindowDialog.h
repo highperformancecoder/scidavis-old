@@ -6,11 +6,11 @@
 
 #include "widget.h"
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
 class QLineEdit;
 class QRadioButton;
-class QTextEdit;
+class Q3TextEdit;
 class myWidget;
 
 class renameWindowDialog : public QDialog
@@ -18,17 +18,17 @@ class renameWindowDialog : public QDialog
     Q_OBJECT
 
 public:
-    renameWindowDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    renameWindowDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~renameWindowDialog();
 
     QPushButton* buttonOk;
 	QPushButton* buttonCancel;
-    QButtonGroup* GroupBox1, *GroupBox2;
+    Q3ButtonGroup* GroupBox1, *GroupBox2;
 	QRadioButton* boxName;
 	QRadioButton* boxLabel;
 	QRadioButton* boxBoth;
 	QLineEdit* boxNameLine;
-	QTextEdit* boxLabelEdit;
+	Q3TextEdit* boxLabelEdit;
 
 public slots:
 	void setWidget(myWidget *w);

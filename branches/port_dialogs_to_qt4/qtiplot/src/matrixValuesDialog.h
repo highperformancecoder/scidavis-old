@@ -5,7 +5,7 @@
 #include <qdialog.h>
 
 class QComboBox;
-class QTextEdit;
+class Q3TextEdit;
 class QSpinBox;
 class QPushButton;
 	
@@ -14,7 +14,7 @@ class matrixValuesDialog : public QDialog
     Q_OBJECT
 
 public:
-    matrixValuesDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    matrixValuesDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~matrixValuesDialog();
 	
 	QSize sizeHint() const ;
@@ -23,8 +23,8 @@ public:
     QPushButton* PushButton3; 
     QPushButton* btnOk, *btnAddCell;
     QPushButton* btnCancel;
-    QTextEdit* commandes;
-    QTextEdit* explain;
+    Q3TextEdit* commandes;
+    Q3TextEdit* explain;
 	QSpinBox *startRow, *endRow, *startCol, *endCol;
 	QPushButton *btnApply;
 

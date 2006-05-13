@@ -2,7 +2,10 @@
 
 #include <qpushbutton.h>
 #include <qlayout.h>
-#include <qframe.h>
+#include <q3frame.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3HBoxLayout>
 
 /* XPM */
 static const char * palette_xpm[] = {
@@ -294,12 +297,12 @@ selectButton = new QPushButton(QPixmap(palette_xpm), QString::null, this, 0);
 selectButton->setMaximumWidth(btn_size);
 selectButton->setMaximumHeight(btn_size);
 
-display = new QFrame(this);
+display = new Q3Frame(this);
 display->setLineWidth(2);
-display->setFrameStyle (QFrame::Panel | QFrame::Sunken);
-display->setPaletteBackgroundColor ( QColor(white) ) ;
+display->setFrameStyle (Q3Frame::Panel | Q3Frame::Sunken);
+display->setPaletteBackgroundColor ( QColor(Qt::white) ) ;
 
-QHBoxLayout *l = new QHBoxLayout(this,0,0,0);
+Q3HBoxLayout *l = new Q3HBoxLayout(this,0,0,0);
 l->addWidget( display );
 l->addWidget( selectButton );
 

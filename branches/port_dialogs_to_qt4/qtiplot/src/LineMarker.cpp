@@ -1,13 +1,15 @@
 #include "LineMarker.h"
 
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 
 #include <qwt_plot.h>
 #include <qwt_scale.h>
 #include <qwt_painter.h>
 #include <qwt_plot_canvas.h>
 #include <qwt_plot_layout.h>
+//Added by qt3to4:
+#include <Q3PointArray>
 
 #include <math.h>
 #include <stdlib.h>
@@ -30,7 +32,9 @@ d_headLength=4;
 void LineMarker::draw(QPainter *p, int, int, const QRect &rect)
 {	
 	int x0,y0,x1,y1;
-	if ( p->device()->isExtDev() )
+		// FIXME: printing stuff disabled, not easy to port to Qt4
+//X	if ( p->device()->isExtDev() )
+	if ( false )
 		{	
 		QwtPlot *plot = (QwtPlot *)parentPlot();
 		const QwtDiMap xMap = plot->canvasMap(QwtPlot::xBottom);
@@ -60,7 +64,7 @@ void LineMarker::draw(QPainter *p, int, int, const QRect &rect)
 	
 	p->save();
 	p->setPen(pen);
-	QBrush brush=QBrush(pen.color(), QBrush::SolidPattern);
+	QBrush brush=QBrush(pen.color(), Qt::SolidPattern);
 	QwtPainter::drawLine(p,x0,y0,x1,y1);
 	p->restore();
 		
@@ -71,7 +75,7 @@ void LineMarker::draw(QPainter *p, int, int, const QRect &rect)
 		double t=teta();
 		p->rotate(-t);
 
-		const QPointArray endArray(3);	
+		Q3PointArray endArray(3);	
 		endArray[0] = QPoint(0,0);
 			
 		int d=(int)floor(d_headLength*tan(M_PI*d_headAngle/180.0)+0.5);				
@@ -93,7 +97,7 @@ void LineMarker::draw(QPainter *p, int, int, const QRect &rect)
 		double t=teta();
 		p->rotate(-t);
 
-		const QPointArray startArray(3);	
+		Q3PointArray startArray(3);	
 		startArray[0] = QPoint(0,0);
 			
 		int d=(int)floor(d_headLength*tan(M_PI*d_headAngle/180.0)+0.5);
@@ -277,8 +281,8 @@ QwtDiMap LineMarker::mapCanvasToDevice(QPainter *p, QwtPlot *plot, int axis)
 {
 QwtPlotLayout *pl=plot->plotLayout ();
 	
-QPaintDeviceMetrics pdmFrom(plot);
-QPaintDeviceMetrics pdmTo(p->device());	
+Q3PaintDeviceMetrics pdmFrom(plot);
+Q3PaintDeviceMetrics pdmTo(p->device());	
 	
 QwtMetricsMap metricsMap;
 metricsMap.setMetrics(pdmFrom, pdmTo);

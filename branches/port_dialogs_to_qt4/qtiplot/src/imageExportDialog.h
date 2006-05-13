@@ -3,8 +3,10 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <QLabel>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
 class QCheckBox;
 class QSpinBox;
@@ -17,12 +19,12 @@ class imageExportDialog : public QDialog
 
 public:
     imageExportDialog( bool exportAllPlots, QWidget* parent = 0, 
-									const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+									const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~imageExportDialog();
 
     QPushButton* buttonOk;
 	QPushButton* buttonCancel;
-    QButtonGroup* GroupBox1, *GroupBox2;
+    Q3ButtonGroup* GroupBox1, *GroupBox2;
     QCheckBox* boxTransparency;
 	QSpinBox * boxQuality;
 	QLabel *formatLabel;

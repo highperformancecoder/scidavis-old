@@ -3,15 +3,18 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <QLabel>
+#include <QCloseEvent>
 #include "worksheet.h"
 
 class QPushButton;
 class QLineEdit;
 class QCheckBox;
-class QButtonGroup;
+class Q3ButtonGroup;
 class QComboBox;
 class QLabel;
-class QTextEdit;
+class Q3TextEdit;
 class QSpinBox;
 
 class tableDialog : public QDialog
@@ -19,7 +22,7 @@ class tableDialog : public QDialog
     Q_OBJECT
 
 public:
-    tableDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    tableDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~tableDialog();
 
     QPushButton* buttonCancel;
@@ -29,7 +32,7 @@ public:
     QLineEdit* colName;
     QCheckBox* enumerateAllBox;
     QPushButton* buttonOk;
- 	QButtonGroup* GroupBox2;
+ 	Q3ButtonGroup* GroupBox2;
     QCheckBox* applyToRightCols;
     QComboBox* formatBox;
 	QComboBox* displayBox;
@@ -37,7 +40,7 @@ public:
     QSpinBox* colWidth, *precisionBox;
     QCheckBox* applyToAllBox;
 	QLabel *labelNumeric, *labelFormat;
-	QTextEdit *comments;
+	Q3TextEdit *comments;
 
 protected slots:
     virtual void languageChange();

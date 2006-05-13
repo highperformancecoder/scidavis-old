@@ -3,7 +3,7 @@
 
 #include <qwt_painter.h>
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 
 QwtPieCurve::QwtPieCurve(QwtPlot *parent, const char *name):
     QwtPlotCurve(parent,name)
@@ -36,10 +36,11 @@ void QwtPieCurve::drawPie(QPainter *painter,
 	int x_center = rect.x() + rect.width()/2;
 	int y_center = rect.y() + rect.height()/2;
 
-	if (painter->device()->isExtDev()) 
+// FIXME: Printer stuff diabled for now since it's not easily to port to Qt4
+/*	if (painter->device()->isExtDev()) 
 		{//draw on printer
-		QPaintDeviceMetrics pdmFrom(plot);
-		QPaintDeviceMetrics pdmTo(painter->device());
+		Q3PaintDeviceMetrics pdmFrom(plot);
+		Q3PaintDeviceMetrics pdmTo(painter->device());
 		
 		double dx = (double)pdmTo.width()/(double)pdmFrom.width();
 		double dy = (double)pdmTo.height()/(double)pdmFrom.height();
@@ -48,7 +49,7 @@ void QwtPieCurve::drawPie(QPainter *painter,
 		y_center = int(y_center*dy);
 		d = int(d*QMIN(dx, dy));
 		}
-
+*/
 	QRect pieRect;
 	pieRect.setX(x_center - d/2);
 	pieRect.setY(y_center - d/2);

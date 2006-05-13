@@ -69,7 +69,10 @@ public:
 	
 	void drawTick(QPainter *p, double val, int len) const
 	{
-	bool print = p->device()->isExtDev();
+		// paint devices work totally differen in Qt4
+		// disabling printing for now
+		bool print = false;
+	//X bool print = p->device()->isExtDev();
 		
 	if (options() && !print)
 		QwtScaleDraw::drawTick(p, val, len);
@@ -176,8 +179,8 @@ public:
         	case Right:
 				{
 				int bw2 = pw / 2;
-				if (p->device()->isExtDev() && pw == 1)
-					bw2 = 1;
+				//X if (p->device()->isExtDev() && pw == 1)
+				//X	bw2 = 1;
 					
 				QwtPainter::drawLine(p, xorg + bw2, yorg, xorg + bw2, yorg + l - 1);
             	break;
@@ -370,7 +373,7 @@ void drawLabel(QPainter *p, double val) const
     const QString txt = label(val);
     if ( !txt.isEmpty() )
         {
-            QWMatrix m = labelWorldMatrix(d_font, pos, alignment, rotation, txt);
+            QMatrix m = labelWorldMatrix(d_font, pos, alignment, rotation, txt);
 			
             p->save();
 #ifndef QT_NO_TRANSFORMATIONS
@@ -427,7 +430,7 @@ QRect labelBoundingRect(const QFontMetrics &fm, double val) const
        const int w = ltxt->boundingRect().width();
        const int h = ltxt->boundingRect().height();
 				
-        QWMatrix m = labelWorldMatrix(fm, pos, alignment, rotation, lbl);
+        QMatrix m = labelWorldMatrix(fm, pos, alignment, rotation, lbl);
         br = QwtMetricsMap::translate(m, QRect(0, 0, w, h));
         br.moveBy(-pos.x(), -pos.y());
 		}
@@ -437,7 +440,7 @@ QRect labelBoundingRect(const QFontMetrics &fm, double val) const
 	};
 	
 //! Return the world matrix for painting the label 
- QWMatrix labelWorldMatrix(const QFontMetrics &,
+ QMatrix labelWorldMatrix(const QFontMetrics &,
     const QPoint &pos, int alignment, 
 #ifdef QT_NO_TRANSFORMATIONS
     double,
@@ -467,7 +470,7 @@ QRect labelBoundingRect(const QFontMetrics &fm, double val) const
     else // Qt::AlignVCenter
         y = - (h/2);
 	
-    QWMatrix m;
+    QMatrix m;
     m.translate(pos.x(), pos.y());
 #ifndef QT_NO_TRANSFORMATIONS
     m.rotate(rotation);

@@ -4,7 +4,7 @@
 #include <qvariant.h>
 #include <qdialog.h>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
 class QCheckBox;
 class QLineEdit;
@@ -18,12 +18,12 @@ class polynomFitDialog : public QDialog
     Q_OBJECT
 
 public:
-    polynomFitDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    polynomFitDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~polynomFitDialog();
 
 	QPushButton* buttonFit;
 	QPushButton* buttonCancel;
-    QButtonGroup* GroupBox1, *GroupBox2;
+    Q3ButtonGroup* GroupBox1, *GroupBox2;
     QCheckBox* boxShowFormula;
 	QComboBox* boxName;
 	QSpinBox* boxOrder;

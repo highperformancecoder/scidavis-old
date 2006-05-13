@@ -4,25 +4,25 @@
 #include <qvariant.h>
 #include <qdialog.h>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
 class QCheckBox;
 class QLineEdit;
 class QComboBox;
-class QHButtonGroup;
+class Q3HButtonGroup;
 	
 class analysisDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    analysisDialog( QWidget* parent = 0, const QString& text="Curve", const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    analysisDialog( QWidget* parent = 0, const QString& text="Curve", const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~analysisDialog();
 
     QPushButton* buttonOk;
 	QPushButton* buttonCancel;
-    QButtonGroup* GroupBox1;
-    QHButtonGroup* GroupBox2;
+    Q3ButtonGroup* GroupBox1;
+    Q3HButtonGroup* GroupBox2;
     QCheckBox* boxShowFormula;
 	QComboBox* boxName;
 

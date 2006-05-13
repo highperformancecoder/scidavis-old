@@ -2,6 +2,9 @@
 #define WIDGET_H
 
 #include <qwidget.h>
+//Added by qt3to4:
+#include <QResizeEvent>
+#include <QCloseEvent>
 
 class myWidget: public QWidget
 {
@@ -9,7 +12,7 @@ class myWidget: public QWidget
 
 public:	
 	
-	myWidget(const QString& label, QWidget * parent, const char * name, WFlags f);
+	myWidget(const QString& label, QWidget * parent, const char * name, Qt::WFlags f);
 	~myWidget(){};
 
 	enum CaptionPolicy{Name = 0, Label = 1, Both = 2};

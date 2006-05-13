@@ -8,11 +8,13 @@
 #include <qlabel.h>
 #include <qcombobox.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
 
-expDecayDialog::expDecayDialog(int type, QWidget* parent, const char* name, bool modal, WFlags fl )
+expDecayDialog::expDecayDialog(int type, QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -24,7 +26,7 @@ expDecayDialog::expDecayDialog(int type, QWidget* parent, const char* name, bool
     setMinimumSize( QSize( 310, 140 ) );
 	setMaximumSize( QSize( 310, 140 ) );
 	
-	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),this,"GroupBox1" );
+	GroupBox1 = new Q3ButtonGroup( 2,Qt::Horizontal,tr(""),this,"GroupBox1" );
 
 	new QLabel( tr("Exponential Fit of"), GroupBox1, "TextLabel1",0 );
 	boxName = new QComboBox(GroupBox1, "boxName" );
@@ -75,11 +77,12 @@ expDecayDialog::expDecayDialog(int type, QWidget* parent, const char* name, bool
 
 	new QLabel( tr("Color"), GroupBox1, "TextLabel52",0 );
 	boxColor = new ColorBox( FALSE, GroupBox1);
-	boxColor->setColor(QColor(red));
+	boxColor->setColor(QColor(Qt::red));
 	
-	GroupBox2 = new QButtonGroup(1,QGroupBox::Horizontal,tr(""),this,"GroupBox2" );
+	GroupBox2 = new Q3ButtonGroup(1,Qt::Horizontal,tr(""),this,"GroupBox2" );
 	GroupBox2->setFlat (TRUE);
-	GroupBox2->setLineWidth (0);
+	// FIXME: replace the next line with Qt4 version
+	//X GroupBox2->setLineWidth (0);
 	
 	buttonFit = new QPushButton(GroupBox2, "buttonFit" );
     buttonFit->setAutoDefault( TRUE );
@@ -88,7 +91,7 @@ expDecayDialog::expDecayDialog(int type, QWidget* parent, const char* name, bool
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
     buttonCancel->setAutoDefault( TRUE );
 	
-	QHBoxLayout* hlayout = new QHBoxLayout(this,5,5, "hlayout");
+	Q3HBoxLayout* hlayout = new Q3HBoxLayout(this,5,5, "hlayout");
     hlayout->addWidget(GroupBox1);
 	hlayout->addWidget(GroupBox2);
 

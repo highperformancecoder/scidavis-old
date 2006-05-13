@@ -5,12 +5,14 @@
 #include <qapplication.h>
 #include <qprinter.h>
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
-#include <qsimplerichtext.h>
+#include <q3paintdevicemetrics.h>
+#include <q3simplerichtext.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
 #include <math.h>
 
-Note::Note(const QString& label, QWidget* parent, const char* name, WFlags f)
+Note::Note(const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
 				: myWidget(label, parent, name, f)
 {
 init();	
@@ -21,8 +23,8 @@ void Note::init()
 QDateTime dt = QDateTime::currentDateTime ();
 setBirthDate(dt.toString(Qt::LocalDate));
 
-te = new QTextEdit(this);
-QVBoxLayout* hlayout = new QVBoxLayout(this,0,0, "hlayout1");
+te = new Q3TextEdit(this);
+Q3VBoxLayout* hlayout = new Q3VBoxLayout(this,0,0, "hlayout1");
 hlayout->addWidget(te);
 
 setGeometry(0, 0, 500, 200);
@@ -56,11 +58,11 @@ if (printer.setup())
     if ( !painter.begin(&printer ) )
          return;
 
-	QPaintDeviceMetrics metrics( painter.device() );
+	Q3PaintDeviceMetrics metrics( painter.device() );
 	int dpiy = metrics.logicalDpiY();
 	int margin = (int) ( (1/2.54)*dpiy ); // 1 cm margins
 	QRect body( margin, margin, metrics.width() - 2*margin, metrics.height() - 2*margin );
-	QSimpleRichText richText(QStyleSheet::convertFromPlainText(te->text()), QFont(), 
+	Q3SimpleRichText richText(Q3StyleSheet::convertFromPlainText(te->text()), QFont(), 
 							te->context(), te->styleSheet(), te->mimeSourceFactory(), body.height());
 	richText.setWidth( &painter, body.width() );
   	QRect view( body );

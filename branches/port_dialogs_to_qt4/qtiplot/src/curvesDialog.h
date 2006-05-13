@@ -3,15 +3,20 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <QLabel>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class QLabel;
-class QListBox;
-class QListBoxItem;
+class Q3ListBox;
+class Q3ListBoxItem;
 class QPushButton;
 class QComboBox;
-class QWidgetList;
+#include <QWidgetList>
 
 class Graph;
 class Table;
@@ -21,7 +26,7 @@ class curvesDialog : public QDialog
     Q_OBJECT
 
 public:
-    curvesDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    curvesDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~curvesDialog();
 
 	QSize sizeHint() const;
@@ -34,8 +39,8 @@ public:
 	QPushButton* btnAssociations;
 	QPushButton* btnEditFunction;
     QLabel* TextLabel1;
-    QListBox* available;
-    QListBox* contents;
+    Q3ListBox* available;
+    Q3ListBox* contents;
 	QComboBox* boxStyle;
 
 	void initTablesList(QWidgetList* lst){tables = lst;};
@@ -52,8 +57,8 @@ public slots:
 	void removeSelectedCurve();
 	void clear();
 	void enableRemoveBtn();
-	void deletePopupMenu(QListBoxItem *it, const QPoint &point);
-	void addPopupMenu(QListBoxItem *it, const QPoint &point);
+	void deletePopupMenu(Q3ListBoxItem *it, const QPoint &point);
+	void addPopupMenu(Q3ListBoxItem *it, const QPoint &point);
 	int curveStyle();
 	void showPlotAssociations();
 	void showFunctionDialog();

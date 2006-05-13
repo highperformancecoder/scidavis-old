@@ -5,7 +5,7 @@
 #include "VectorCurve.h"
 
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 
 #include <qwt_plot.h>
 #include <qwt_scale.h>
@@ -13,6 +13,8 @@
 #include <qwt_plot_layout.h>
 #include <qwt_plot_canvas.h>
 #include <qwt_layout_metrics.h>
+//Added by qt3to4:
+#include <Q3PointArray>
 
 LegendMarker::LegendMarker(QwtPlot *plot):
     QwtPlotMarker(plot)
@@ -150,7 +152,7 @@ if (!v)
 
 p->save();
 
-QPen pen(v->color(), v->width(), QPen::SolidLine);
+QPen pen(v->color(), v->width(), Qt::SolidLine);
 p->setPen(pen);
 QwtPainter::drawLine(p, x, y, x + l, y);
 
@@ -160,13 +162,13 @@ double pi=4*atan(-1.0);
 int headLength = v->headLength();	
 int d=qRound(headLength*tan(pi*(double)v->headAngle()/180.0));	
 	
-const QPointArray endArray(3);	
+Q3PointArray endArray(3);	
 endArray[0] = QPoint(0, 0);
 endArray[1] = QPoint(-headLength, d);
 endArray[2] = QPoint(-headLength, -d);
 
 if (v->filledArrowHead())
-	p->setBrush(QBrush(pen.color(), QBrush::SolidPattern));
+	p->setBrush(QBrush(pen.color(), Qt::SolidPattern));
 
 QwtPainter::drawPolygon(p,endArray);
 p->restore();
@@ -299,6 +301,8 @@ int hspace=30;//determines distance between symbols and legend text
 QRect copy= rect;	
 copy.moveBy(canvas_origin.x(), canvas_origin.y());
 
+// FIXME: printer stuff disabled, not easy to port to Qt4
+/*
 if (p->device()->isExtDev())
 	{	
 	QwtPlot *plot = (QwtPlot *)parentPlot();		
@@ -313,6 +317,7 @@ if (p->device()->isExtDev())
 	map=LineMarker::mapCanvasToDevice(p, plot, QwtPlot::yLeft);	
 	copy.setY(map.transform(dy));
 	}
+	*/
 
 QwtText *text_copy= d_text->clone();
 QString text=d_text->text();

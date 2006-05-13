@@ -13,6 +13,9 @@
 #include <qmessagebox.h>
 #include <qfile.h>
 #include <qlibrary.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3MemArray>
 
 #include <math.h>
 #include <stdlib.h>
@@ -51,7 +54,7 @@ if (cv->autoBinning() && automatic)
 int ycol=w->colIndex(curveName);
 int r=w->tableRows();
 	
-QMemArray<double> Y(1);
+Q3MemArray<double> Y(1);
 int it=0;
 for (i = 0;i<r;i++ )
 	{
@@ -66,7 +69,7 @@ for (i = 0;i<r;i++ )
 
 if(it<2 || (it==2 && Y[0] == Y[1]))
 	{//non valid histogram
-	QMemArray<double> X(2); 
+	Q3MemArray<double> X(2); 
 	Y.resize(2);
 	for (i = 0;i<2;i++ )
 		{
@@ -124,7 +127,7 @@ else
 for (i = 0;i<it;i++ )
 	gsl_histogram_increment (h, Y[i]);
 
-QMemArray<double> X(n); //stores ranges (x) and bins (y)
+Q3MemArray<double> X(n); //stores ranges (x) and bins (y)
 Y.resize(n);
 for (i = 0;i<n;i++ )
 	{
@@ -151,7 +154,7 @@ if (!cv)
 int ycol=w->colIndex(curveName);
 int r=w->tableRows();
 	
-QMemArray<double> Y(1);
+Q3MemArray<double> Y(1);
 int it=0;
 for (i = 0;i<r;i++ )
 	{
@@ -169,7 +172,7 @@ if (!it)
 
 if(it<2 || (it==2 && Y[0] == Y[1]))
 	{//non valid histogram data
-	QMemArray<double> X(2); 
+	Q3MemArray<double> X(2); 
 	Y.resize(2);
 	for (i = 0;i<2;i++ )
 		{
@@ -231,7 +234,7 @@ else
 for (i = 0;i<it;i++ )
 	gsl_histogram_increment (h, Y[i]);
 
-QMemArray<double> X(n); //stores ranges (x) and bins (y)
+Q3MemArray<double> X(n); //stores ranges (x) and bins (y)
 Y.resize(n);
 for (i = 0;i<n;i++ )
 	{
@@ -257,7 +260,7 @@ if (!cv)
 int ycol=w->colIndex(curveName);
 int r=w->tableRows();
 	
-QMemArray<double> Y(1);
+Q3MemArray<double> Y(1);
 int it=0;
 for (i = 0;i<r;i++ )
 	{
@@ -321,7 +324,7 @@ else
 for (i = 0;i<it;i++ )
 	gsl_histogram_increment (h, Y[i]);
 
-QMemArray<double> X(n); //stock ranges (x) and bins (y)
+Q3MemArray<double> X(n); //stock ranges (x) and bins (y)
 Y.resize(n);
 for (i = 0;i<n;i++ )
 	{
@@ -361,12 +364,12 @@ emit createHistogramTable(caption, n, 4, text);
 return info;
 }
 
-void Graph::initHistogram(long curveID, const QMemArray<double>& Y, int it)
+void Graph::initHistogram(long curveID, const Q3MemArray<double>& Y, int it)
 {
 int i;
 if(it<2 || (it==2 && Y[0] == Y[1]))
 	{//non valid histogram data
-	QMemArray<double> x(2),y(2); 
+	Q3MemArray<double> x(2),y(2); 
 	for (i = 0;i<2;i++ )
 		{
 		y[i] = 0;
@@ -383,7 +386,7 @@ if (!hc)
 	return;
 
 int n=10;//default value
-QMemArray<double> x(n),y(n); //store ranges (x) and bins (y)
+Q3MemArray<double> x(n),y(n); //store ranges (x) and bins (y)
 gsl_histogram * h = gsl_histogram_alloc (n); 
 if (!h)  
 	return;
@@ -425,7 +428,7 @@ QwtPlotCurve *curve=d_plot->curve(curveKey);
 if (!curve)
 	return;
 
-QApplication::setOverrideCursor(waitCursor);
+QApplication::setOverrideCursor(Qt::waitCursor);
 
 int i, i2, n=curve->dataSize();
 int n2 = n/2;
@@ -2696,7 +2699,7 @@ QwtPlotCurve *curve=d_plot->curve(curveKey);
 if (!curve)
 	return;
 
-QApplication::setOverrideCursor(waitCursor);
+QApplication::setOverrideCursor(Qt::waitCursor);
 
 int i,n=curve->dataSize();
 double *x = vector(0,n-1);
@@ -2757,7 +2760,7 @@ QwtPlotCurve *curve=d_plot->curve(curveKey);
 if (!curve)
 	return;
 
-QApplication::setOverrideCursor(waitCursor);
+QApplication::setOverrideCursor(Qt::waitCursor);
 
 int i, n=curve->dataSize();
 double *x = vector(0,n-1);
@@ -2798,7 +2801,7 @@ QwtPlotCurve *curve=d_plot->curve(curveKey);
 if (!curve)
 	return;
 
-QApplication::setOverrideCursor(waitCursor);
+QApplication::setOverrideCursor(Qt::waitCursor);
 
 int i,j, n=curve->dataSize();
 double *x = vector(0,n-1);
@@ -2853,7 +2856,7 @@ QwtPlotCurve *curve=d_plot->curve(curveKey);
 if (!curve)
 	return;
 
-QApplication::setOverrideCursor(waitCursor);
+QApplication::setOverrideCursor(Qt::waitCursor);
 
 int i, n=curve->dataSize();
 double *x = vector(0,n-1);

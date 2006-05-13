@@ -1,7 +1,9 @@
 #include "widget.h"
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <QCloseEvent>
 
-myWidget::myWidget(const QString& label, QWidget * parent, const char * name, WFlags f):
+myWidget::myWidget(const QString& label, QWidget * parent, const char * name, Qt::WFlags f):
 		QWidget (parent, name, f)
 {
 w_label = label;

@@ -5,40 +5,42 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qspinbox.h>
-#include <qhbox.h>
+#include <q3hbox.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
-matrixSizeDialog::matrixSizeDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
+matrixSizeDialog::matrixSizeDialog( QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
 	setName( "matrixSizeDialog" );
     setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, 0, 0, sizePolicy().hasHeightForWidth() ) );
 		
-	QButtonGroup *GroupBox1 = new QButtonGroup(4, QGroupBox::Horizontal,tr("Dimensions"),this,"GroupBox1" );
-	new QLabel( tr( "Rows" ), GroupBox1, "TextLabel2",0 );
+	Q3ButtonGroup *GroupBox1 = new Q3ButtonGroup(4, Qt::Horizontal,tr("Dimensions"),this,"GroupBox1" );
+	new QLabel( tr( "Rows" ), GroupBox1);
     boxRows = new QSpinBox(0,1000000,1, GroupBox1, "boxRows" );
 
-	new QLabel( tr( "Columns" ), GroupBox1, "TextLabel2",0 );
+	new QLabel( tr( "Columns" ), GroupBox1);
     boxCols = new QSpinBox(0,1000000,1, GroupBox1, "boxCols" );
 
-	QButtonGroup *GroupBox2 = new QButtonGroup(3,QGroupBox::Horizontal,tr("Coordinates"),this,"GroupBox2" );
-	new QLabel(GroupBox2, "TextLabel2",0 );
-	new QLabel( tr( "X (Columns)" ), GroupBox2, "TextLabel2",0 );
-	new QLabel( tr( "Y (Rows)" ), GroupBox2, "TextLabel2",0 );
+	Q3ButtonGroup *GroupBox2 = new Q3ButtonGroup(3,Qt::Horizontal,tr("Coordinates"),this,"GroupBox2" );
+	new QLabel(GroupBox2);
+	new QLabel( tr( "X (Columns)" ), GroupBox2);
+	new QLabel( tr( "Y (Rows)" ), GroupBox2);
 
-	new QLabel( tr( "First" ), GroupBox2, "TextLabel2",0 );
+	new QLabel( tr( "First" ), GroupBox2);
     boxXStart = new QLineEdit(GroupBox2, "boxXStart" );
     boxYStart = new QLineEdit(GroupBox2, "boxYStart" );
 
-	new QLabel( tr( "Last" ), GroupBox2, "TextLabel2",0 );
+	new QLabel( tr( "Last" ), GroupBox2);
     boxXEnd = new QLineEdit(GroupBox2, "boxXStart" );
     boxYEnd = new QLineEdit(GroupBox2, "boxYStart" );
 
-	QHBox  *hbox1=new QHBox (this, "hbox1"); 
+	Q3HBox  *hbox1=new Q3HBox (this, "hbox1"); 
 	hbox1->setMargin (5);
 	hbox1->setSpacing (5);
 	
@@ -47,7 +49,7 @@ matrixSizeDialog::matrixSizeDialog( QWidget* parent, const char* name, bool moda
    
     buttonCancel = new QPushButton(hbox1, "buttonCancel" );
 	
-	QVBoxLayout* hlayout = new QVBoxLayout(this,5,5, "hlayout");
+	Q3VBoxLayout* hlayout = new Q3VBoxLayout(this,5,5, "hlayout");
     hlayout->addWidget(GroupBox1);
 	hlayout->addWidget(GroupBox2);
 	hlayout->addWidget(hbox1);
@@ -99,7 +101,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Input error"), e.GetMsg());
+	QMessageBox::critical(0, tr("QtiPlot - Input error"), QString::fromStdString(e.GetMsg()));
 	boxXStart->setFocus();
 	return;
 	}
@@ -110,7 +112,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Input error"), e.GetMsg());
+	QMessageBox::critical(0, tr("QtiPlot - Input error"), QString::fromStdString(e.GetMsg()));
 	boxXEnd->setFocus();
 	return;
 	}
@@ -121,7 +123,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Input error"), e.GetMsg());
+	QMessageBox::critical(0, tr("QtiPlot - Input error"), QString::fromStdString(e.GetMsg()));
 	boxYStart->setFocus();
 	return;
 	}
@@ -132,7 +134,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Input error"), e.GetMsg());
+	QMessageBox::critical(0, tr("QtiPlot - Input error"), QString::fromStdString(e.GetMsg()));
 	boxYEnd->setFocus();
 	return;
 	}

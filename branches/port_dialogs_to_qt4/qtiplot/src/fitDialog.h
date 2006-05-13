@@ -3,16 +3,18 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <QLabel>
 
 class QPushButton;
 class QLineEdit;
 class QComboBox;
-class QWidgetStack;
+class Q3WidgetStack;
 class QWidget;
-class QTextEdit;
-class QListBox;
+class Q3TextEdit;
+class Q3ListBox;
 class QCheckBox;
-class QTable;
+class Q3Table;
 class QSpinBox;
 class QLabel;
 class Graph;
@@ -23,28 +25,28 @@ class fitDialog : public QDialog
     Q_OBJECT
 
 public:
-    fitDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    fitDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~fitDialog();
 
 	void initFitPage();
 	void initEditPage();
 
 	QCheckBox* boxUseBuiltIn;
-	QWidgetStack* tw;
+	Q3WidgetStack* tw;
     QPushButton* buttonOk;
 	QPushButton* buttonCancel;
 	QPushButton* buttonClear;
 	QPushButton* buttonPlugins;
 	QComboBox* boxCurve;
 	QComboBox* boxSolver;
-	QTable* boxParams;
+	Q3Table* boxParams;
 	QLineEdit* boxFrom;
 	QLineEdit* boxTo;
 	QLineEdit* boxTolerance;
 	QSpinBox* boxPoints;
 	QWidget *fitPage, *editPage;
-	QTextEdit *editBox, *explainBox, *boxFunction;
-	QListBox *categoryBox, *funcBox;
+	Q3TextEdit *editBox, *explainBox, *boxFunction;
+	Q3ListBox *categoryBox, *funcBox;
 	QLineEdit *boxName, *boxParam;
 	QLabel *lblFunction;
 	QPushButton *btnAddFunc, *btnDelFunc, *btnContinue;

@@ -1,4 +1,7 @@
 #include <qobject.h>
+//Added by qt3to4:
+#include <QLabel>
+#include <QEvent>
 
 class QwtPlot;
 class QwtScale;

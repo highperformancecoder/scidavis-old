@@ -2,9 +2,11 @@
 #include "LineMarker.h"
 
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qwt_plot.h>
 #include <qwt_plot_canvas.h>
+//Added by qt3to4:
+#include <QPixmap>
 
 /*#include <math.h>
 #include <stdlib.h>
@@ -19,7 +21,9 @@ pic=p;
 
 void ImageMarker::draw(QPainter *p, int, int, const QRect& rect)
 {
-	if (p->device()->isExtDev())
+	// FIXME: printer stuff disabled, not easy to port to Qt4
+//X	if (p->device()->isExtDev())
+	if ( false )
 		{
 		QwtPlot *plot = (QwtPlot *)parentPlot();				
 		const QwtDiMap xMap = plot->canvasMap(QwtPlot::xBottom);

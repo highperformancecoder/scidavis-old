@@ -4,22 +4,22 @@
 #include <algorithm>
 
 const QColor ColorBox::colors[] = {
-  QColor(black),
-  QColor(red),
-  QColor(green),
-  QColor(blue),
-  QColor(cyan),
-  QColor(magenta),
-  QColor(yellow),
-  QColor(darkYellow),
-  QColor(darkBlue),
-  QColor(darkMagenta),
-  QColor(darkRed),
-  QColor(darkGreen),
-  QColor(darkCyan),
-  QColor(white),
-  QColor(lightGray),
-  QColor(darkGray),
+  QColor(Qt::black),
+  QColor(Qt::red),
+  QColor(Qt::green),
+  QColor(Qt::blue),
+  QColor(Qt::cyan),
+  QColor(Qt::magenta),
+  QColor(Qt::yellow),
+  QColor(Qt::darkYellow),
+  QColor(Qt::darkBlue),
+  QColor(Qt::darkMagenta),
+  QColor(Qt::darkRed),
+  QColor(Qt::darkGreen),
+  QColor(Qt::darkCyan),
+  QColor(Qt::white),
+  QColor(Qt::lightGray),
+  QColor(Qt::darkGray),
 };
 
 ColorBox::ColorBox(bool rw, QWidget *parent) : QComboBox(rw, parent)
@@ -85,7 +85,7 @@ QColor ColorBox::color() const
   if (i < sizeof(colors))
     return colors[this->currentItem()];
   else
-    return QColor(black); // default color is black.
+    return QColor(Qt::black); // default color is black.
 }
 
 int ColorBox::colorIndex(const QColor& c)
@@ -99,5 +99,5 @@ QColor ColorBox::color(int colorIndex)
   if (colorIndex < (int)sizeof(colors))
     return colors[colorIndex];
   else
-    return QColor(black); // default color is black.
+    return QColor(Qt::black); // default color is black.
 }

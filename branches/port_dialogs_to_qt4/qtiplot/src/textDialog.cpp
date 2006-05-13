@@ -5,14 +5,17 @@
 
 #include <qcombobox.h>
 #include <qlabel.h>
-#include <qmultilineedit.h>
+#include <q3multilineedit.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qvariant.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qfont.h>
 #include <qfontdialog.h>
 #include <qcolordialog.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
+#include <QPixmap>
 
 static const char * lineSymbol_xpm[] = {
 "16 16 4 1",
@@ -37,7 +40,7 @@ static const char * lineSymbol_xpm[] = {
 "                ",
 "                "};
 
-TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool modal, WFlags fl )
+TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -47,7 +50,7 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
     setSizeGripEnabled( true );
 	
 	text_type = type;
-	GroupBox1 = new QButtonGroup(3,QGroupBox::Horizontal, QString::null,this, "GroupBox1" );
+	GroupBox1 = new Q3ButtonGroup(3,Qt::Horizontal, QString::null,this, "GroupBox1" );
 
 	new QLabel(tr( "Color" ), GroupBox1, "TextLabel2",0 );
 	
@@ -113,7 +116,7 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
 	rotateBox->setCurrentItem(0);
 	rotateBox->hide();
 	
-	GroupBox2= new QButtonGroup(8, QGroupBox::Horizontal, QString::null,this, "GroupBox2" );
+	GroupBox2= new Q3ButtonGroup(8, Qt::Horizontal, QString::null,this, "GroupBox2" );
 
 	if (!text_type)
 		{
@@ -154,13 +157,13 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
 	buttonU->setFont(font);
 	buttonU->setMaximumWidth(40);
 
-    LineEdit = new QMultiLineEdit( this, "LineEdit" );
+    LineEdit = new Q3MultiLineEdit( this, "LineEdit" );
     LineEdit->setFont(QFont("Arial",12,QFont::Normal,FALSE));
 
-	setFocusPolicy(QWidget::StrongFocus);
+	setFocusPolicy(Qt::StrongFocus);
 	setFocusProxy(LineEdit);
 	
-	QVBoxLayout* vlayout = new QVBoxLayout(this,5,5, "vlayout");
+	Q3VBoxLayout* vlayout = new Q3VBoxLayout(this,5,5, "vlayout");
     vlayout->addWidget(GroupBox1);
 	vlayout->addWidget(GroupBox2);
 	vlayout->addWidget(LineEdit);
@@ -183,7 +186,7 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
 void TextDialog::showMinGreek()
 {
 symbolDialog *greekLetters = new symbolDialog(symbolDialog::minGreek, this,"greekLetters",
-											  false, WStyle_Tool|WDestructiveClose);
+											  false, Qt::WStyle_Tool|Qt::WDestructiveClose);
 connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 greekLetters->show();
 greekLetters->setActiveWindow();
@@ -192,7 +195,7 @@ greekLetters->setActiveWindow();
 void TextDialog::showMajGreek()
 {
 symbolDialog *greekLetters = new symbolDialog(symbolDialog::majGreek, this, "greekLetters",
-											  false, WStyle_Tool|WDestructiveClose);
+											  false, Qt::WStyle_Tool|Qt::WDestructiveClose);
 connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 greekLetters->show();
 greekLetters->setActiveWindow();

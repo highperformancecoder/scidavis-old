@@ -4,7 +4,7 @@
 #include <qvariant.h>
 #include <qdialog.h>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
 
 class symbolDialog : public QDialog
@@ -14,13 +14,13 @@ class symbolDialog : public QDialog
 public:
 	enum CharSet{minGreek = 0, majGreek = 1};
 
-    symbolDialog(CharSet charsSet, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    symbolDialog(CharSet charsSet, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~symbolDialog();
 
 	void initMinGreekChars();
 	void initMajGreekChars();
 
-    QButtonGroup *GroupBox1;
+    Q3ButtonGroup *GroupBox1;
 
 public slots:
     virtual void languageChange();

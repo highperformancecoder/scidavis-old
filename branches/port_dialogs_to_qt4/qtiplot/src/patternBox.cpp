@@ -38,84 +38,84 @@ void PatternBox::init()
   icon.fill ( QColor (Qt::white) );
   const QRect r= QRect(0, 0, 28, 14);
   QPainter p(&icon);
-  QBrush br = QBrush(QColor(darkGray), Qt::SolidPattern);
+  QBrush br = QBrush(QColor(Qt::darkGray), Qt::SolidPattern);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "Solid" ) );
 
-  br = QBrush(QColor(darkGray), Qt::HorPattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::HorPattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "Horizontal" ) );
 
-  br = QBrush(QColor(darkGray), Qt::VerPattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::VerPattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "Vertical" ) );
 
-  br = QBrush(QColor(darkGray), Qt::CrossPattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::CrossPattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "Cross" ) );
 
-  br = QBrush(QColor(darkGray), Qt::BDiagPattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::BDiagPattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "BDiagonal" ) );
 
-  br = QBrush(QColor(darkGray), Qt::FDiagPattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::FDiagPattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "FDiagonal" ) );
 
-  br = QBrush(QColor(darkGray), Qt::DiagCrossPattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::DiagCrossPattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "DiagCross" ) );
 
-  br = QBrush(QColor(darkGray), Qt::Dense1Pattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::Dense1Pattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "Dense1" ) );
 
-  br = QBrush(QColor(darkGray), Qt::Dense2Pattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::Dense2Pattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "Dense2" ) );
 
-  br = QBrush(QColor(darkGray), Qt::Dense3Pattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::Dense3Pattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "Dense3" ) );
 
-  br = QBrush(QColor(darkGray), Qt::Dense4Pattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::Dense4Pattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "Dense4" ) );
 
-  br = QBrush(QColor(darkGray), Qt::Dense5Pattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::Dense5Pattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "Dense5" ) );
 
-  br = QBrush(QColor(darkGray), Qt::Dense6Pattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::Dense6Pattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);
   this->insertItem(icon, tr( "Dense6" ) );
 
-  br = QBrush(QColor(darkGray), Qt::Dense7Pattern);
+  br = QBrush(QColor(Qt::darkGray), Qt::Dense7Pattern);
   p.eraseRect(r);
   p.fillRect(r, br);
   p.drawRect(r);

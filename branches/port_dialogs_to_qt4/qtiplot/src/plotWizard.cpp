@@ -2,14 +2,16 @@
 
 #include <qvariant.h>
 #include <qpushbutton.h>
-#include <qlistbox.h>
+#include <q3listbox.h>
 #include <qlabel.h>
 #include <qcombobox.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
-plotWizard::plotWizard( QWidget* parent, const char* name, bool modal, WFlags fl )
+plotWizard::plotWizard( QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -18,18 +20,19 @@ plotWizard::plotWizard( QWidget* parent, const char* name, bool modal, WFlags fl
     setMouseTracking( TRUE );
     setSizeGripEnabled( TRUE );
 	
-	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),this,"GroupBox1" );
+	GroupBox1 = new Q3ButtonGroup( 2,Qt::Horizontal,tr(""),this,"GroupBox1" );
 
     new QLabel( tr( "Worksheet" ), GroupBox1, "TextLabel3",0 );
 	
     boxTables = new QComboBox( FALSE,GroupBox1, "boxTables" );
 	
-	columnsList = new QListBox(GroupBox1, "listBox" );
+	columnsList = new Q3ListBox(GroupBox1, "listBox" );
 	columnsList->setSizePolicy(QSizePolicy (QSizePolicy::Expanding, QSizePolicy::Fixed, 2, 0, FALSE ));
 
-	GroupBox3 = new QButtonGroup(2,QGroupBox::Horizontal,tr(""),GroupBox1,"GroupBox3" );
+	GroupBox3 = new Q3ButtonGroup(2,Qt::Horizontal,tr(""),GroupBox1,"GroupBox3" );
 	GroupBox3->setFlat (TRUE);
-	GroupBox3->setLineWidth (0);
+	// FIXME: replace the next line with Qt4 version
+	//X GroupBox3->setLineWidth (0);
 	
 	buttonX = new QPushButton(GroupBox3, "buttonX" );
     buttonX->setText("<->&X");
@@ -54,11 +57,12 @@ plotWizard::plotWizard( QWidget* parent, const char* name, bool modal, WFlags fl
 	buttonDelete = new QPushButton(GroupBox1, "buttonDelete" );
     buttonDelete->setText(tr("&Delete curve"));
 	
-	plotAssociations = new QListBox(this, "listBox" );
+	plotAssociations = new Q3ListBox(this, "listBox" );
 	
-	GroupBox2 = new QButtonGroup(2,QGroupBox::Horizontal,tr(""),this,"GroupBox2" );
+	GroupBox2 = new Q3ButtonGroup(2,Qt::Horizontal,tr(""),this,"GroupBox2" );
 	GroupBox2->setFlat (TRUE);
-	GroupBox2->setLineWidth (0);
+	// FIXME: replace the next line with Qt4 version
+//X	GroupBox2->setLineWidth (0);
 	
 	buttonOk = new QPushButton(GroupBox2, "buttonOk" );
     buttonOk->setText(tr("&Plot"));
@@ -67,7 +71,7 @@ plotWizard::plotWizard( QWidget* parent, const char* name, bool modal, WFlags fl
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
     buttonCancel->setText(tr("&Cancel"));
 	
-	QVBoxLayout* vlayout = new QVBoxLayout(this,5,5, "hlayout");
+	Q3VBoxLayout* vlayout = new Q3VBoxLayout(this,5,5, "hlayout");
     vlayout->addWidget(GroupBox1);
 	vlayout->addWidget(plotAssociations);
 	vlayout->addWidget(GroupBox2);

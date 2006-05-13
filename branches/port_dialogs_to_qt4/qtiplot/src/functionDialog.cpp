@@ -6,14 +6,16 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
 #include <qcombobox.h>
 #include <qspinbox.h>
-#include <qwidgetstack.h>
+#include <q3widgetstack.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 
-fDialog::fDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
+fDialog::fDialog( QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : functionDialogui( parent, name, modal, fl )
 {
     if ( !name )
@@ -32,7 +34,7 @@ void fDialog::setCurveToModify(const QString& s, int curve)
 {
 curveID = curve;
 
-int equations = s.contains("=");
+int equations = s.count("=");
 if (equations == 1)
 	{
 	uint pos = s.find("=", 0);
@@ -132,7 +134,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Start limit error"), e.GetMsg());
+	QMessageBox::critical(0, tr("QtiPlot - Start limit error"), QString::fromStdString(e.GetMsg()));
 	boxFrom->setFocus();
 	return;
 	}	
@@ -144,7 +146,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - End limit error"), e.GetMsg());
+	QMessageBox::critical(0, tr("QtiPlot - End limit error"), QString::fromStdString(e.GetMsg()));
 	boxTo->setFocus();
 	return;
 	}
@@ -174,7 +176,7 @@ if (start>=end)
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0, tr("QtiPlot - Input function error"), e.GetMsg());
+		QMessageBox::critical(0, tr("QtiPlot - Input function error"), QString::fromStdString(e.GetMsg()));
 		boxFunction->setFocus();
 		error=TRUE;	
 		}	
@@ -183,8 +185,8 @@ if (start>=end)
 	QString type=QString("Function");
 	QStringList formulas;
 	QStringList variables;	
-	QValueList<double> ranges;
-	QValueList<int> varpoints;
+	Q3ValueList<double> ranges;
+	Q3ValueList<int> varpoints;
 	formulas+=formula;
 	variables+="x";
 	ranges+=start;
@@ -223,7 +225,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Start limit error"), e.GetMsg());
+	QMessageBox::critical(0, tr("QtiPlot - Start limit error"), QString::fromStdString(e.GetMsg()));
 	boxParFrom->setFocus();
 	return;
 	}	
@@ -236,7 +238,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - End limit error"), e.GetMsg());
+	QMessageBox::critical(0, tr("QtiPlot - End limit error"), QString::fromStdString(e.GetMsg()));
 	boxParTo->setFocus();
 	return;
 	}	
@@ -267,7 +269,7 @@ if (start>=end)
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0, tr("QtiPlot - Input function error"), e.GetMsg());
+		QMessageBox::critical(0, tr("QtiPlot - Input function error"), QString::fromStdString(e.GetMsg()));
 		boxXFunction->setFocus();
 		error=TRUE;	
 		}	
@@ -284,7 +286,7 @@ if (start>=end)
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0, tr("QtiPlot - Input function error"), e.GetMsg());
+		QMessageBox::critical(0, tr("QtiPlot - Input function error"), QString::fromStdString(e.GetMsg()));
 		boxYFunction->setFocus();
 		error=TRUE;	
 		}
@@ -292,8 +294,8 @@ if (start>=end)
 	QString type=QString("Parametric plot");
 	QStringList formulas;
 	QStringList variables;	
-	QValueList<double> ranges;
-	QValueList<int> varpoints;
+	Q3ValueList<double> ranges;
+	Q3ValueList<int> varpoints;
 	formulas+=xformula;
 	formulas+=yformula;
 	variables+=boxParameter->text();
@@ -333,7 +335,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Start limit error"), e.GetMsg());
+	QMessageBox::critical(0, tr("QtiPlot - Start limit error"), QString::fromStdString(e.GetMsg()));
 	boxPolarFrom->setFocus();
 	return;
 	}
@@ -346,7 +348,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - End limit error"), e.GetMsg());
+	QMessageBox::critical(0, tr("QtiPlot - End limit error"), QString::fromStdString(e.GetMsg()));
 	boxPolarTo->setFocus();
 	return;
 	}
@@ -377,7 +379,7 @@ if (start>=end)
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0, tr("QtiPlot - Input function error"), e.GetMsg());
+		QMessageBox::critical(0, tr("QtiPlot - Input function error"), QString::fromStdString(e.GetMsg()));
 		boxPolarRadius->setFocus();
 		error=TRUE;	
 		}	
@@ -394,7 +396,7 @@ if (start>=end)
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0, tr("QtiPlot - Input function error"), e.GetMsg());
+		QMessageBox::critical(0, tr("QtiPlot - Input function error"), QString::fromStdString(e.GetMsg()));
 		boxPolarTheta->setFocus();
 		error=TRUE;	
 		}
@@ -402,8 +404,8 @@ if (start>=end)
 	QString type=QString("Polar plot");
 	QStringList formulas;
 	QStringList variables;	
-	QValueList<double> ranges;
-	QValueList<int> varpoints;
+	Q3ValueList<double> ranges;
+	Q3ValueList<int> varpoints;
 	formulas+=rformula;
 	formulas+=tformula;
 	variables+=boxPolarParameter->text();

@@ -31,12 +31,12 @@ SymbolBox::SymbolBox(QWidget *parent) : QComboBox(parent)
 void SymbolBox::init()
 {
 	QPixmap icon = QPixmap(14, 14);
-	icon.fill ( QColor (gray) );
+	icon.fill ( QColor (Qt::gray) );
 	const QRect r= QRect(0, 0, 14, 14);
 	QPainter p(&icon);
-	p.setBackgroundColor(QColor(gray));
+	p.setBackgroundColor(QColor(Qt::gray));
 	QwtSymbol symb;
-	p.setBrush(QBrush(QColor(white)));
+	p.setBrush(QBrush(QColor(Qt::white)));
 
 	this->insertItem(tr("No Symbol" ));
 

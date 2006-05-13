@@ -3,27 +3,29 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <QLabel>
 
 class QLabel;
 class QComboBox;
-class QGroupBox;
+class Q3GroupBox;
 class QRadioButton;
 class QLineEdit;
 class QPushButton;
-class QButtonGroup;
+class Q3ButtonGroup;
 	
 class errDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    errDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    errDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~errDialog();
 
     QLabel* TextLabel1;
     QComboBox* nameLabel, *colNamesBox;
-    QGroupBox *GroupBox2;
-	QButtonGroup *GroupBox1, *GroupBox3;
+    Q3GroupBox *GroupBox2;
+	Q3ButtonGroup *GroupBox1, *GroupBox3;
     QRadioButton* standardBox, *columnBox;
     QRadioButton* percentBox;
     QLineEdit* valueBox;

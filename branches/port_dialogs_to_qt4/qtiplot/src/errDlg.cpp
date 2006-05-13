@@ -4,33 +4,35 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qcombobox.h>
-#include <qgroupbox.h>
+#include <q3groupbox.h>
 #include <qradiobutton.h>
 #include <qlineedit.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qhbox.h>
-#include <qvbox.h>
-#include <qbuttongroup.h>
+#include <q3whatsthis.h>
+#include <q3hbox.h>
+#include <q3vbox.h>
+#include <q3buttongroup.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
 
-errDialog::errDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
+errDialog::errDialog( QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
 	setName( "errDialog" );
 
-    setFocusPolicy( QDialog::StrongFocus );
+    setFocusPolicy( Qt::StrongFocus );
     setSizeGripEnabled( true );
 
-	QVBox *vbox1=new QVBox (this,"vbox1");
+	Q3VBox *vbox1=new Q3VBox (this,"vbox1");
 	vbox1->setSpacing (5);
 	
-	QHBox *hbox1=new QHBox (vbox1,"hbox1");
+	Q3HBox *hbox1=new Q3HBox (vbox1,"hbox1");
     TextLabel1 = new QLabel(hbox1, "TextLabel1" );
     nameLabel = new QComboBox( FALSE,hbox1, "nameLabel" );
 
-    GroupBox1 = new QButtonGroup(2,QGroupBox::Horizontal,tr(""), vbox1 , "GroupBox1" );
+    GroupBox1 = new Q3ButtonGroup(2,Qt::Horizontal,tr(""), vbox1 , "GroupBox1" );
 	GroupBox1->setRadioButtonExclusive ( TRUE );
 	
 	columnBox = new QRadioButton( GroupBox1, "columnBox" );
@@ -42,12 +44,12 @@ errDialog::errDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
     percentBox->setChecked( FALSE );
 
     valueBox = new QLineEdit( GroupBox1, "valueBox" );
-    valueBox->setAlignment( int( QLineEdit::AlignHCenter ) );
+    valueBox->setAlignment( Qt::AlignHCenter );
 	valueBox->setEnabled(false);
 
 	standardBox = new QRadioButton( GroupBox1, "standardBox" );
 
-	GroupBox3 = new QButtonGroup(2,QGroupBox::Horizontal,tr(""), vbox1 , "GroupBox3" );
+	GroupBox3 = new Q3ButtonGroup(2,Qt::Horizontal,tr(""), vbox1 , "GroupBox3" );
 	GroupBox3->setRadioButtonExclusive ( TRUE );
 	
     xErrBox = new QRadioButton(GroupBox3, "xErrBox" );
@@ -55,8 +57,9 @@ errDialog::errDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
     yErrBox = new QRadioButton(GroupBox3, "yErrBox" );
     yErrBox->setChecked( TRUE );
 
-    GroupBox2 = new QGroupBox(3, QGroupBox::Vertical,tr(""), this , "GroupBox2" );
-	GroupBox2->setLineWidth(0);
+    GroupBox2 = new Q3GroupBox(3, Qt::Vertical,tr(""), this , "GroupBox2" );
+	// FIXME: replace next line with Qt4 equivalent
+//X	GroupBox2->setLineWidth(0);
 	GroupBox2->setFlat(TRUE);
 	
 	buttonAdd = new QPushButton(GroupBox2 , "buttonAdd" );
@@ -64,7 +67,7 @@ errDialog::errDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
 
     buttonCancel = new QPushButton( GroupBox2, "buttonCancel" );
 	
-	QHBoxLayout* hlayout1 = new QHBoxLayout(this,5,5, "hlayout1");
+	Q3HBoxLayout* hlayout1 = new Q3HBoxLayout(this,5,5, "hlayout1");
 	hlayout1->addWidget(vbox1);
     hlayout1->addWidget(GroupBox2);
 	

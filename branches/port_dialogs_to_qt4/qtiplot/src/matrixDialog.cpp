@@ -5,10 +5,12 @@
 #include <qlabel.h>
 #include <qcombobox.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qspinbox.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
-matrixDialog::matrixDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
+matrixDialog::matrixDialog( QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
@@ -16,9 +18,10 @@ matrixDialog::matrixDialog( QWidget* parent, const char* name, bool modal, WFlag
     setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, 0, 0, sizePolicy().hasHeightForWidth() ) );
     setMouseTracking( false );
 
-	QButtonGroup *GroupBox1 = new QButtonGroup(3, QGroupBox::Horizontal,QString::null,this,"GroupBox1" );
+	Q3ButtonGroup *GroupBox1 = new Q3ButtonGroup(3, Qt::Horizontal,QString::null,this,"GroupBox1" );
 	GroupBox1->setFlat(TRUE);
-	GroupBox1->setLineWidth(0);
+// FIXME: replace this with Qt4 equivalent
+//X	GroupBox1->setLineWidth(0);
 
 	new QLabel( tr( "Cell Width" ), GroupBox1, "TextLabel2",0 );
     boxColWidth = new QSpinBox(0,1000,10, GroupBox1, "boxColWidth" );
@@ -33,9 +36,10 @@ matrixDialog::matrixDialog( QWidget* parent, const char* name, bool modal, WFlag
 	boxPrecision = new QSpinBox(0,100,1, GroupBox1, "boxPrecision");
 	boxPrecision->hide();
 
-	QButtonGroup *GroupBox2 = new QButtonGroup( 3,QGroupBox::Horizontal,QString::null,this,"GroupBox2" );
+	Q3ButtonGroup *GroupBox2 = new Q3ButtonGroup( 3,Qt::Horizontal,QString::null,this,"GroupBox2" );
 	GroupBox2->setFlat(TRUE);
-	GroupBox2->setLineWidth(0);
+// FIXME: replace this with Qt4 equivalent
+//X	GroupBox2->setLineWidth(0);
 	
 	buttonApply = new QPushButton(GroupBox2, "buttonApply" );
     buttonApply->setAutoDefault( TRUE );
@@ -47,7 +51,7 @@ matrixDialog::matrixDialog( QWidget* parent, const char* name, bool modal, WFlag
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
     buttonCancel->setAutoDefault( TRUE );
 	
-	QVBoxLayout* hlayout = new QVBoxLayout(this, 5, 5, "hlayout");
+	Q3VBoxLayout* hlayout = new Q3VBoxLayout(this, 5, 5, "hlayout");
     hlayout->addWidget(GroupBox1);
 	hlayout->addWidget(GroupBox2);
 

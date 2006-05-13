@@ -3,8 +3,15 @@
 
 #include <qprinter.h>
 #include <qpainter.h>
-#include <qpointarray.h>
+#include <q3pointarray.h>
 #include <qwt_plot.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3MemArray>
+#include <QCloseEvent>
+#include <Q3ValueList>
+#include <QContextMenuEvent>
+#include <QResizeEvent>
 #include <gsl/gsl_multifit_nlin.h>
 #include <gsl/gsl_multimin.h>
 
@@ -28,7 +35,7 @@ class Graph: public QWidget
 	Q_OBJECT
 
 public:
-    Graph (QWidget* parent=0, const char* name=0, WFlags f=0);
+    Graph (QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
 	~Graph();
 
 	enum AxisType{Numeric = 0, Txt = 1, Day = 2, Month = 3, Time = 4, Date = 5, ColHeader = 6};
@@ -265,8 +272,8 @@ public slots:
 	 void deselectMarker();
 
 	 // axes 
-	 QValueList<int> axesType();
-	 void setAxesType(const QValueList<int> tl); 
+	 Q3ValueList<int> axesType();
+	 void setAxesType(const Q3ValueList<int> tl); 
 	 	
 	 QStringList scalesTitles();
 	 void setXAxisTitle(const QString& text);
@@ -306,8 +313,8 @@ public slots:
 				   int ticksType, bool labelsOn, const QColor& c, int format, int prec, 
 				   int rotation, int baselineDist, const QString& formula);
 
-	 QMemArray<bool> enabledAxes();
-	 void enableAxes(QMemArray<bool> axesOn);
+	 Q3MemArray<bool> enabledAxes();
+	 void enableAxes(Q3MemArray<bool> axesOn);
 	 void enableAxes(const QStringList& list);	
 
 	int labelsRotation(int axis);
@@ -324,12 +331,12 @@ public slots:
 	bool axesBackbones(){return drawAxesBackbone;};
 	void loadAxesOptions(const QString& s);//used when opening a project file
 
-	QValueList<int> axesBaseline();
-	void setAxesBaseline(const QValueList<int> &lst);
+	Q3ValueList<int> axesBaseline();
+	void setAxesBaseline(const Q3ValueList<int> &lst);
 	void setAxesBaseline(QStringList &lst);
 
-	QValueList<int> ticksType();
-	void setTicksType(const QValueList<int>& list);
+	Q3ValueList<int> ticksType();
+	void setTicksType(const Q3ValueList<int>& list);
 	void setTicksType(const QStringList& list); 
 	
 	int minorTickLength();
@@ -520,7 +527,7 @@ public slots:
 
 
 	//histograms
-	void initHistogram(long curveID, const QMemArray<double>& Y, int it);
+	void initHistogram(long curveID, const Q3MemArray<double>& Y, int it);
 	void updateHistogram(Table* w, const QString& curveName, int curve);
 	void updateHistogram(Table* w, const QString& curveName, int curve, bool automatic, 
 							double binSize, double begin, double end);
@@ -535,8 +542,8 @@ public slots:
 	 void showIntensityTable();
 	 
 	 //user defined functions
-	 void modifyFunctionCurve(int curve, QString& type,QStringList &formulas,QStringList &vars,QValueList<double> &ranges,QValueList<int> &points);
-	 void addFunctionCurve(QString& type,QStringList &formulas,QStringList &vars,QValueList<double> &ranges,QValueList<int> &points);	 
+	 void modifyFunctionCurve(int curve, QString& type,QStringList &formulas,QStringList &vars,Q3ValueList<double> &ranges,Q3ValueList<int> &points);
+	 void addFunctionCurve(QString& type,QStringList &formulas,QStringList &vars,Q3ValueList<double> &ranges,Q3ValueList<int> &points);	 
 	 //when reading from file
 	 void insertFunctionCurve(const QString& formula, double from, double to, int points);
 	 //for versions <0.4.3
@@ -656,17 +663,17 @@ private:
 	int selectedAxis;
 	QStringList axesFormulas;
 	QStringList axesFormatInfo;//stores columns used for axes with text labels or  time/date format info
-	QValueList <int> axisType;
-	QValueList <int> lblFormat; //stores label format used for the axes
+	Q3ValueList <int> axisType;
+	Q3ValueList <int> lblFormat; //stores label format used for the axes
 	QwtDiMap xCanvasMap, yCanvasMap;
 	gridOptions grid;
 	MarkerType selectedMarkerType;
 	QwtMarker::LineStyle mrklStyle;
 	QStringList scales,associations;
-	QMemArray<int> c_type; //curve types
-	QMemArray<long> c_keys; // arrows on plot keys
-	QMemArray<long> lines; // arrows on plot keys
-	QMemArray<long> images; // images on plot keys
+	Q3MemArray<int> c_type; //curve types
+	Q3MemArray<long> c_keys; // arrows on plot keys
+	Q3MemArray<long> lines; // arrows on plot keys
+	Q3MemArray<long> images; // images on plot keys
 	QStringList tickLabelsOn;// tells wich axes have tick labels enabled
 	QPen mrkLinePen;
 	QFont auxMrkFont, defaultMarkerFont;

@@ -1,14 +1,15 @@
 #ifndef MYFILESDIALOGS_H
 #define MYFILESDIALOGS_H
 
-#include <qfiledialog.h>
+#include <q3filedialog.h>
 #include <qlabel.h>
 #include <qcombobox.h>
 #include <qspinbox.h>
 #include <qcheckbox.h>
 #include <qimage.h>
+#include <QPicture>
 
-class ImportFilesDialog: public QFileDialog
+class ImportFilesDialog: public Q3FileDialog
 {
 public:
 	QComboBox* importType;
@@ -20,7 +21,7 @@ public:
 		QString filter="All files *;;Text (*.TXT *.txt);;Data (*DAT *.dat);;";
 		setFilters( filter );
 
-		setMode( QFileDialog::ExistingFiles );
+		setMode( Q3FileDialog::ExistingFiles );
 
 		if (importTypeEnabled)
 			{
@@ -40,7 +41,7 @@ public:
 //	~ImportFilesDialog(){};
 };
 
-class ImageExportDialog: public QFileDialog
+class ImageExportDialog: public Q3FileDialog
 {
 public:
 	QCheckBox* boxOptions;
@@ -49,7 +50,7 @@ public:
 		{
 		setCaption( tr( "QtiPlot - Choose a filename to save under" ) );
 
-		QStringList list=QImage::outputFormatList ();
+		QStringList list=QPicture::outputFormatList ();
 		list<<"EPS";
 		//list<<"WMF";
 		list.sort();
@@ -61,7 +62,7 @@ public:
 			filter+=aux;
 			}
 		setFilters( filter );
-		setMode( QFileDialog::AnyFile );
+		setMode( Q3FileDialog::AnyFile );
 	
 		boxOptions = new QCheckBox(this, "boxOptions" );
 		boxOptions->setText( "Show export &options" );

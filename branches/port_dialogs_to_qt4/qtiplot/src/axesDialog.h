@@ -3,21 +3,25 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <Q3MemArray>
+#include <QLabel>
+#include <Q3ValueList>
 
-class QTextEdit;
+class Q3TextEdit;
 class QCheckBox;
 class QComboBox;
 class QLabel;
 class QLineEdit;
-class QListBox;
-class QListBoxItem;
+class Q3ListBox;
+class Q3ListBoxItem;
 class QPushButton;
 class QRadioButton;
 class QSpinBox;
 class QTabWidget;
 class QWidget;
 class QStringList;
-class QButtonGroup;
+class Q3ButtonGroup;
 class ColorBox;
 class ColorButton;
 class MultiLayer;
@@ -43,7 +47,7 @@ class axesDialog : public QDialog
     Q_OBJECT
 
 public:
-    axesDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    axesDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~axesDialog();
 
 	void initAxesPage();
@@ -66,7 +70,7 @@ public:
     QCheckBox* btnStep, *btnInvert;
     QSpinBox* boxMajorValue;
     QCheckBox* btnMinor;
-    QListBox* axesList;
+    Q3ListBox* axesList;
     QWidget* gridPage;
     QCheckBox* boxMajorGrid;
     QCheckBox* boxMinorGrid;
@@ -78,22 +82,22 @@ public:
     QSpinBox* boxWidthMinor;
     QCheckBox* boxXLine;
     QCheckBox* boxYLine;
-    QListBox* axesGridList;
+    Q3ListBox* axesGridList;
     QWidget* axesPage, *frame;
-    QListBox* axesTitlesList;
+    Q3ListBox* axesTitlesList;
     QCheckBox* boxShowAxis, *boxShowLabels;
     QLineEdit* boxTitle;
-	QTextEdit *boxFormula;
+	Q3TextEdit *boxFormula;
 	QSpinBox *boxFrameWidth, *boxPrecision, *boxAngle, *boxBaseline, *boxAxesLinewidth;
     QPushButton* btnAxesFont;
 	QCheckBox *boxBackbones, *boxAll, *boxShowFormula;
 	ColorButton* boxAxisColor;
 	QComboBox* boxTicksType, *boxFormat, *boxAxisType, *boxColName;
-	QButtonGroup* GroupBox0;
-	QButtonGroup* GroupBox1;
-	QButtonGroup* GroupBox2;
-	QButtonGroup* GroupBox3;
-	QButtonGroup *boxFramed, *GroupBox6;
+	Q3ButtonGroup* GroupBox0;
+	Q3ButtonGroup* GroupBox1;
+	Q3ButtonGroup* GroupBox2;
+	Q3ButtonGroup* GroupBox3;
+	Q3ButtonGroup *boxFramed, *GroupBox6;
 	QLabel *label1, *label2, *label3, *boxScaleTypeLabel, *minorBoxLabel, *labelTable;
 	QSpinBox *boxMajorTicksLength, *boxMinorTicksLength, *boxBorderWidth, *boxMargin;
 	QComboBox *boxUnit, *boxTableName;
@@ -102,7 +106,7 @@ public:
 public slots:
 	QStringList scaleLimits(int axis, double start, double end, double step, 
 							const QString& majors, const QString&minors);
-	void setAxesType(const QValueList<int>& list);
+	void setAxesType(const Q3ValueList<int>& list);
 	void setAxisType(int axis);
 	void updateAxisType(int axis);
 	void setAxisTitles(QStringList t);
@@ -123,7 +127,7 @@ public slots:
 	void customAxisFont();
 	void showAxis();
 	void updateShowBox(int axis);
-	void setEnabledAxes(QMemArray<bool> ok);
+	void setEnabledAxes(Q3MemArray<bool> ok);
 	void drawFrame(bool framed);
 
 	void pickAxisColor();
@@ -133,7 +137,7 @@ public slots:
 	int mapToQwtAxisId();
 	void setEnabledTickLabels(const QStringList& labelsOn);
 	void updateTickLabelsList();
-	void setTicksType(const QValueList<int>& list);
+	void setTicksType(const Q3ValueList<int>& list);
 	void setTicksType(int);
 	void setCurrentScale(int axisPos);
 	void initAxisFonts(const QFont& xB, const QFont& yL, const QFont& xT, const QFont& yR );
@@ -151,7 +155,7 @@ public slots:
 	void showAxisFormatOptions(int format);
 	void setBaselineDist(int);
 	void changeBaselineDist(int baseline);
-	void setAxesBaseline(const QValueList<int>& lst);
+	void setAxesBaseline(const Q3ValueList<int>& lst);
 	void changeMinorTicksLength (int minLength);
 	void changeMajorTicksLength (int majLength);
 	void updateBackbones (bool on);
@@ -176,7 +180,7 @@ signals:
 
 protected:
 	QStringList titles,scales,axesColors, tickLabelsOn, formatInfo, labelsNumericFormat, tablesList;
-	QValueList<int> ticks, axesType, axesBaseline;
+	Q3ValueList<int> ticks, axesType, axesBaseline;
 	QFont xBottomFont, yLeftFont, xTopFont, yRightFont;
 	gridOptions grid;
 	bool xAxisOn,yAxisOn,topAxisOn,rightAxisOn;

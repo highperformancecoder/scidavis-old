@@ -3,27 +3,29 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-#include <qhbox.h> 
+#include <q3hbox.h> 
 #include <qlayout.h>
+//Added by qt3to4:
+#include <QLabel>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
-class QWidgetStack;
+class Q3WidgetStack;
 class QWidget;
 class QCheckBox;
 class QComboBox;
 class QSpinBox;
-class QListBox;
+class Q3ListBox;
 class QLabel;
 class ColorButton;
-class QGroupBox;
+class Q3GroupBox;
 	
 class configDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    configDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    configDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~configDialog();
 
 	void initPlotsPage();
@@ -39,8 +41,8 @@ public:
 	ColorButton *buttonBackground, *buttonText, *buttonHeader;
     QPushButton *buttonOk, *buttonCancel, *buttonApply;
 	QPushButton* buttonTextFont, *buttonHeaderFont;
-    QButtonGroup* GroupBox1, *GroupBox2, *GroupBox3;
-    QWidgetStack* generalDialog;
+    Q3ButtonGroup* GroupBox1, *GroupBox2, *GroupBox3;
+    Q3WidgetStack* generalDialog;
 	QWidget *tables, *plots, *confirm, *application, *curves, *plots3D;
 	QPushButton* buttonAxesFont, *buttonNumbersFont, *buttonLegendFont, *buttonTitleFont, *fontsBtn;
 	QCheckBox* boxTitle, *boxFrame, *boxPlots3D, *boxPlots2D, *boxTables, *boxNotes;
@@ -50,14 +52,14 @@ public:
 	QSpinBox *boxMinutes, *boxLinewidth, *boxFrameWidth, *boxResolution, *boxMargin;
 	QSpinBox *boxCurveLineWidth, *boxSymbolSize, *boxMinorTicks, *boxMajorTicks;
 	ColorButton *btnWorkspace, *btnPanels, *btnPanelsText;
-	QListBox *itemsList;
+	Q3ListBox *itemsList;
 	QLabel *labelFrameWidth, *lblLanguage, *lblWorkspace, *lblPanels;
 	QLabel *lblPanelsText, *lblFonts, *lblStyle;
-	QGroupBox *GroupBoxConfirm, *GroupBoxAppCol, *GroupBoxApp;
-	QGroupBox *GroupBoxTableFonts, *GroupBoxTableCol;
+	Q3GroupBox *GroupBoxConfirm, *GroupBoxAppCol, *GroupBoxApp;
+	Q3GroupBox *GroupBoxTableFonts, *GroupBoxTableCol;
 	QLabel *lblSeparator, *lblTableBackground, *lblTextColor, *lblHeaderColor;
 	QLabel *lblSymbSize, *lblLineWidth, *lblCurveStyle, *lblResolution;
-	QGroupBox *GroupBox3DFonts, *GroupBox3DCol, *GroupBoxOptions, *GroupBox2DFonts;
+	Q3GroupBox *GroupBox3DFonts, *GroupBox3DCol, *GroupBoxOptions, *GroupBox2DFonts;
 	QLabel *lblLegend, *lblMargin, *lblTicks, *lblMajTicks, *lblLinewidth, *lblMinTicks;
 
 public slots:

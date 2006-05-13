@@ -3,15 +3,17 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-#include <qmemarray.h>
+#include <q3memarray.h>
 #include <qstring.h>
+//Added by qt3to4:
+#include <QLabel>
  
 class QCheckBox;
 class QComboBox;
 class QLabel;
 class QLineEdit;
-class QListBox;
-class QListBoxItem;
+class Q3ListBox;
+class Q3ListBoxItem;
 class QPushButton;
 class QRadioButton;
 class QSpinBox;
@@ -28,7 +30,7 @@ class pieDialog : public QDialog
     Q_OBJECT
 
 public:
-    pieDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    pieDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~pieDialog();
 
 	void initPiePage();
@@ -41,7 +43,7 @@ public:
     QTabWidget* generalDialog;
 	QWidget* frame, *pieOptions;
 
-    QListBox *curvesList;
+    Q3ListBox *curvesList;
     QSpinBox *boxFrameWidth;
 	QSpinBox *boxRay, *boxMargin;
 	QCheckBox *boxFramed, *boxAll;
@@ -60,7 +62,7 @@ public slots:
 	void setFrameColor(const QColor& c);
 	void setFrameWidth(int w);
 	void insertCurveName(const QString& name);
-	void showPopupMenu(QListBoxItem *it, const QPoint &point);
+	void showPopupMenu(Q3ListBoxItem *it, const QPoint &point);
 	void removeCurve();
 	void setBorderColor(const QColor& c);
 	void setBorderWidth(int width);

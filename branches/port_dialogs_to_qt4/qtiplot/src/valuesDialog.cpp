@@ -4,45 +4,48 @@
 
 #include <qcombobox.h>
 #include <qlineedit.h>
-#include <qtextedit.h>
+#include <q3textedit.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qvariant.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qimage.h>
 #include <qpixmap.h>
 #include <qmessagebox.h>
 #include <qlabel.h>
-#include <qvbox.h>
-#include <qhbox.h>
-#include <qbuttongroup.h>
+#include <q3vbox.h>
+#include <q3hbox.h>
+#include <q3buttongroup.h>
+//Added by qt3to4:
+#include <Q3Frame>
+#include <Q3VBoxLayout>
 
-setColValuesDialog::setColValuesDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+setColValuesDialog::setColValuesDialog( QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
 	setName( "setColValuesDialog" );
     setCaption( tr( "QtiPlot - Set column values" ) );
-    setFocusPolicy( QDialog::StrongFocus );
+    setFocusPolicy( Qt::StrongFocus );
 	
-	QHBox *hbox1=new QHBox (this, "hbox1"); 
+	Q3HBox *hbox1=new Q3HBox (this, "hbox1"); 
 	hbox1->setSpacing (5);
 	
-	QVBox *box1=new QVBox (hbox1, "box2"); 
+	Q3VBox *box1=new Q3VBox (hbox1, "box2"); 
 	box1->setSpacing (5);
 
-	explain = new QTextEdit(box1, "explain" );
+	explain = new Q3TextEdit(box1, "explain" );
 	explain->setReadOnly (true);
 	explain->setPaletteBackgroundColor(QColor(197, 197, 197));
 	
 	colNameLabel = new QLabel(box1, "colNameLabel" );
 
-	QVBox *box2=new QVBox (hbox1, "box2"); 
+	Q3VBox *box2=new Q3VBox (hbox1, "box2"); 
 	box2->setMargin(5);
-	box2->setFrameStyle (QFrame::Box);
+	box2->setFrameStyle (Q3Frame::Box);
 
-	QHBox *hbox2=new QHBox (box2, "hbox2"); 
+	Q3HBox *hbox2=new Q3HBox (box2, "hbox2"); 
 	hbox2->setMargin(5);
 	hbox2->setSpacing (5);
 	
@@ -56,8 +59,9 @@ setColValuesDialog::setColValuesDialog( QWidget* parent,  const char* name, bool
 
     end = new QLineEdit(hbox2, "end" );
   
-	QButtonGroup *GroupBox0 = new QButtonGroup(2,QGroupBox::Horizontal,tr( "" ),box2, "GroupBox0" );
-	GroupBox0->setLineWidth(0);
+	Q3ButtonGroup *GroupBox0 = new Q3ButtonGroup(2,Qt::Horizontal,tr( "" ),box2, "GroupBox0" );
+	// TODO: Replace this when porting the dialog to Qt4
+	//X GroupBox0->setLineWidth(0);
 	GroupBox0->setFlat(true);
 
     functions = new QComboBox( FALSE, GroupBox0, "functions" );
@@ -70,7 +74,7 @@ setColValuesDialog::setColValuesDialog( QWidget* parent,  const char* name, bool
     PushButton4 = new QPushButton(GroupBox0, "PushButton4" );
     PushButton4->setText( tr( "Add column" ) );
 
-	QHBox *hbox6=new QHBox (GroupBox0, "hbox6"); 
+	Q3HBox *hbox6=new Q3HBox (GroupBox0, "hbox6"); 
 	hbox6->setSpacing (5);
 
 	buttonPrev = new QPushButton( hbox6, "buttonPrev" );
@@ -82,15 +86,15 @@ setColValuesDialog::setColValuesDialog( QWidget* parent,  const char* name, bool
 	addCellButton = new QPushButton(GroupBox0, "addCellButton" );
     addCellButton->setText( tr( "Add cell" ) );
 
-	QHBox *hbox3=new QHBox (this, "hbox3"); 
+	Q3HBox *hbox3=new Q3HBox (this, "hbox3"); 
 	hbox3->setSpacing (5);
 	
-	commandes = new QTextEdit( hbox3, "commandes" );
+	commandes = new Q3TextEdit( hbox3, "commandes" );
 	commandes->setTextFormat(Qt::PlainText);
     commandes->setGeometry( QRect(10, 100, 260, 70) );
 	commandes->setFocus();
 	
-	QVBox *box3=new QVBox (hbox3,"box3"); 
+	Q3VBox *box3=new Q3VBox (hbox3,"box3"); 
 	box3->setSpacing (5);
 	
     btnOk = new QPushButton(box3, "btnOk" );
@@ -102,7 +106,7 @@ setColValuesDialog::setColValuesDialog( QWidget* parent,  const char* name, bool
     btnCancel = new QPushButton( box3, "btnCancel" );
     btnCancel->setText( tr( "Cancel" ) );
 	
-	QVBoxLayout* layout = new QVBoxLayout(this,5,5, "hlayout3");
+	Q3VBoxLayout* layout = new Q3VBoxLayout(this,5,5, "hlayout3");
     layout->addWidget(hbox1);
 	layout->addWidget(hbox3);
 
@@ -149,7 +153,7 @@ colNameLabel->setText("col("+table->colLabel(sc)+")= ");
 
 QStringList com = table->getCommandes();
 commandes->setText(com[sc]);
-commandes->moveCursor ( QTextEdit::MoveEnd, true );
+commandes->moveCursor ( Q3TextEdit::MoveEnd, true );
 }
 
 QSize setColValuesDialog::sizeHint() const 
@@ -189,7 +193,7 @@ if (numeric)
 
 int pos1,pos2,pos3,i;
 QStringList variables, rowIndexes, columns, colNames=table->colNames();
-int n=aux.contains("col(");
+int n=aux.count("col(");
 for (i=0;i<n;i++)
 	{
 	pos1=aux.find("col(",0,TRUE);
@@ -239,7 +243,7 @@ try
 				}
 			catch(mu::ParserError &e)
 				{
-				QMessageBox::critical(0,"QtiPlot - Input function error", e.GetMsg());
+				QMessageBox::critical(0,"QtiPlot - Input function error", QString::fromStdString(e.GetMsg()));
 				return false;
    				}
 			}			
@@ -253,7 +257,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QString errString=e.GetMsg();
+	QString errString=QString::fromStdString(e.GetMsg());
 	for (i=0;i<m;i++)
 		errString.replace(variables[i], columns[i], TRUE);
 

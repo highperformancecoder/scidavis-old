@@ -5,6 +5,8 @@
 #include <qwt_painter.h>
 #include <qwt_double_rect.h>
 #include <qpainter.h>
+//Added by qt3to4:
+#include <Q3PointArray>
 
 VectorCurve::VectorCurve(VectorStyle style, QwtPlot *parent, const char *name):
     QwtPlotCurve(parent,name)
@@ -118,13 +120,13 @@ p->rotate(-t);
 double pi=4*atan(-1.0);	
 int d=qRound(d_headLength*tan(pi*(double)d_headAngle/180.0));	
 	
-const QPointArray endArray(3);	
+Q3PointArray endArray(3);	
 endArray[0] = QPoint(0, 0);
 endArray[1] = QPoint(-d_headLength, d);
 endArray[2] = QPoint(-d_headLength, -d);
 
 if (filledArrow)
-	p->setBrush(QBrush(pen.color(), QBrush::SolidPattern));
+	p->setBrush(QBrush(pen.color(), Qt::SolidPattern));
 
 QwtPainter::drawPolygon(p,endArray);
 p->restore();

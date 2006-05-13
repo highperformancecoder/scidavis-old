@@ -6,7 +6,7 @@ QwtBarCurve::QwtBarCurve(QwtPlot *parent, const char *name):
 {
 bar_offset=0;
 bar_gap=0;
-bar_style=Vertical;
+bar_style=Qt::Vertical;
 
 setPen(QPen(Qt::black,1,Qt::SolidLine));
 setBrush(QBrush(Qt::red));
@@ -49,13 +49,13 @@ void QwtBarCurve::draw(QPainter *painter,
 			
 		int dx,dy,ref,bar_width;
 			
-		if (bar_style == Vertical)
+		if (bar_style == Qt::Vertical)
 			ref= yMap.transform(1e-100); //smalest positive value for log scales
 		else
 			ref= xMap.transform(1e-100);	
 				
 		int i;
-		if (bar_style == Vertical)
+		if (bar_style == Qt::Vertical)
 			{
 			dx = abs(xMap.transform(x(from+1))-xMap.transform(x(from)));
 			for (i=from+2; i<to; i++)
@@ -85,7 +85,7 @@ void QwtBarCurve::draw(QPainter *painter,
             const int px = xMap.transform(x(i));
             const int py = yMap.transform(y(i));
 			
-			if (bar_style == Vertical)
+			if (bar_style == Qt::Vertical)
 				{
 				if (y(i) < 0)
 					painter->drawRect(px-half_width, ref, bw1, (py-ref));
@@ -109,7 +109,7 @@ QwtDoubleRect QwtBarCurve::boundingRect() const
 QwtDoubleRect rect = QwtCurve::boundingRect();
 double n= (double)dataSize();
 
-if (bar_style == Vertical)
+if (bar_style == Qt::Vertical)
 	{	
 	double dx=(rect.x2()-rect.x1())/n;
 	rect.setX1(rect.x1()-dx);

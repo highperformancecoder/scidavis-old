@@ -4,6 +4,9 @@
 #include <qobject.h>
 
 #include <qwt_plot.h>
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <Q3ValueList>
 
 class Plot: public QwtPlot
 {	
@@ -14,7 +17,7 @@ public:
 	
 	enum TicksType{In=-1, None = 0, Out=1, Both=2};
 	
-	QValueList <int> getTicksType(){return ticksType;};
+	Q3ValueList <int> getTicksType(){return ticksType;};
 	void setTicksType(int axis, int type);
 
 	int minorTickLength(){return minTickLength;};
@@ -55,7 +58,7 @@ signals:
 
 protected:
 	int minTickLength, majTickLength, d_lineWidth;
-	QValueList <int> ticksType;
+	Q3ValueList <int> ticksType;
 	bool movedGraph, ShiftButton, graphToResize;
 };
 

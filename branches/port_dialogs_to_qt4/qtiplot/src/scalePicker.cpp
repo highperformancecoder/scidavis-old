@@ -4,6 +4,11 @@
 #include <qwt_scale.h>
 
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <QLabel>
+#include <QKeyEvent>
+#include <QEvent>
 
 ScalePicker::ScalePicker(QwtPlot *plot):
     QObject(plot)
@@ -29,7 +34,7 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 	if ( object->inherits("QwtScale") && e->type() == QEvent::MouseButtonPress)
     	{
 		const QMouseEvent *me = (const QMouseEvent *)e;	
-		if (me->button()==QEvent::LeftButton)
+		if (me->button()==Qt::LeftButton)
 			{
 			emit clicked();	
 
@@ -42,7 +47,7 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 				}
 			return TRUE;
 			}
-		else if (me->button() == QEvent::RightButton)
+		else if (me->button() == Qt::RightButton)
 			{
 			mouseRightClicked((const QwtScale *)object, me->pos());
 			return TRUE;
@@ -249,7 +254,7 @@ TitlePicker::TitlePicker(QwtPlot *plot):
 movedGraph=FALSE;
 
 title = (QLabel *)plot->titleLabel();
-title->setFocusPolicy(QWidget::StrongFocus);
+title->setFocusPolicy(Qt::StrongFocus);
 if (title)
 	title->installEventFilter(this);
 }
@@ -270,7 +275,7 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
 		emit clicked();
 
 		const QMouseEvent *me = (const QMouseEvent *)e;	
-		if (me->button()==QEvent::RightButton)
+		if (me->button()==Qt::RightButton)
 			emit showTitleMenu();
 
 		QwtPlot *plot = (QwtPlot *)title->parent();
@@ -297,7 +302,7 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
 	if ( object->inherits("QLabel") && e->type() == QEvent::MouseButtonRelease)
 		{
 		const QMouseEvent *me = (const QMouseEvent *)e;
-		if (me->button()== QEvent::LeftButton)
+		if (me->button()== Qt::LeftButton)
 			{
 			emit clicked();
 			if (movedGraph)

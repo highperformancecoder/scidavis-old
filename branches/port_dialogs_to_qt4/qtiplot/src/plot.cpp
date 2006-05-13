@@ -6,6 +6,10 @@
 #include <qwt_plot_canvas.h>
 #include <qwt_plot_layout.h>
 #include <qwt_scale.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3Frame>
+#include <QMouseEvent>
 
 Plot::Plot(QWidget *parent, const char *name)
 		: QwtPlot(parent,name)
@@ -40,18 +44,18 @@ QwtPlotLayout *pLayout=plotLayout();
 pLayout->setCanvasMargin(0);
 
 QwtPlotCanvas* plCanvas=canvas();
-plCanvas->setFocusPolicy(QWidget::StrongFocus);
+plCanvas->setFocusPolicy(Qt::StrongFocus);
 plCanvas->setFocusIndicator(QwtPlotCanvas::ItemFocusIndicator);
 plCanvas->setFocus();
 plCanvas->setFrameShadow( QwtPlot::Plain);
 plCanvas->setCursor(Qt::arrowCursor);
 plCanvas->setLineWidth(0);
 
-setFocusPolicy(QWidget::StrongFocus);
+setFocusPolicy(Qt::StrongFocus);
 setFocusProxy(plCanvas);
 
-setFrameShape (QFrame::Box);
-setFrameShadow(QFrame::Plain);
+setFrameShape (Q3Frame::Box);
+setFrameShadow(Q3Frame::Plain);
 setLineWidth(0);
 }
 
@@ -135,7 +139,7 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
 		
     painter->save();	
-    painter->setPen(QPen(color,d_lineWidth,QPainter::SolidLine));
+    painter->setPen(QPen(color,d_lineWidth,Qt::SolidLine));
 		
 	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScale(axis);
 	int minTicks=scDiv->minCnt();
@@ -237,7 +241,7 @@ void Plot::drawInwardMinorTicks(QPainter *painter, const QRect &rect,
 	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
 		
     painter->save();	
-    painter->setPen(QPen(color, d_lineWidth, QPainter::SolidLine));
+    painter->setPen(QPen(color, d_lineWidth, Qt::SolidLine));
 		
 	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScale(axis);
 	int minTicks=scDiv->minCnt();
@@ -323,7 +327,7 @@ ticksType[axis]=type;
 
 void Plot::mousePressEvent ( QMouseEvent * e )
 {
-if(e->state()==Qt::ShiftButton)
+if(e->state()==Qt::ShiftModifier)
 		ShiftButton=TRUE;
 			
 emit selectPlot();
@@ -414,7 +418,7 @@ void Plot::drawPixmap(QPainter *painter, const QRect &rect)
 			cr.setHeight(cr.height() - clw);
 			}
 
-		QPixmap pix = QPixmap (cr.width(), cr.height(), -1);
+		QPixmap pix = QPixmap (cr.width(), cr.height());
 		copyBlt (&pix, 0, 0, canvasPix, 0, 0, -1, -1);
 		painter->drawPixmap (cr, pix);
 		}
@@ -441,7 +445,7 @@ void Plot::print(QPainter *painter, const QRect &plotRect,
 #if QT_VERSION < 300 
     if ( painter->device()->isExtDev() )
     {
-        QPaintDeviceMetrics metrics(painter->device());
+        Q3PaintDeviceMetrics metrics(painter->device());
         if ( metrics.logicalDpiX() == 72 && metrics.logicalDpiY() == 72 )
         {
             // In Qt 2.x QPrinter returns hardcoded wrong metrics.

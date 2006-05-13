@@ -7,23 +7,25 @@
 #include <qcombobox.h>
 #include <qlayout.h>
 #include <qregexp.h>
-#include <qvbox.h>
-#include <qhbox.h>
+#include <q3vbox.h>
+#include <q3hbox.h>
 #include <qmessagebox.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
-exportDialog::exportDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
+exportDialog::exportDialog( QWidget* parent, const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
 		setName( "exportDialog" );
 	setSizeGripEnabled( true );
 
-	QVBox *GroupBox1 = new QVBox(this, "GroupBox1" );
+	Q3VBox *GroupBox1 = new Q3VBox(this, "GroupBox1" );
 	GroupBox1->setSpacing (5);
 	GroupBox1->setMargin (5);
 
-	QHBox *hbox1 = new QHBox(GroupBox1, "hbox1");
+	Q3HBox *hbox1 = new Q3HBox(GroupBox1, "hbox1");
 	hbox1->setSpacing (5);
 
 	new QLabel( tr( "Table" ), hbox1, "TextLabel1", 0 );
@@ -39,7 +41,7 @@ exportDialog::exportDialog( QWidget* parent, const char* name, bool modal, WFlag
     boxSelection = new QCheckBox(GroupBox1, "boxSelection" );
     boxSelection->setChecked( FALSE );
 	
-	QHBox *hbox2 = new QHBox(GroupBox1, "hbox2");
+	Q3HBox *hbox2 = new Q3HBox(GroupBox1, "hbox2");
 	hbox2->setSpacing (5);
 
     QLabel *sepText = new QLabel( tr( "Separator" ), hbox2, "TextLabel3",0 );
@@ -48,10 +50,10 @@ exportDialog::exportDialog( QWidget* parent, const char* name, bool modal, WFlag
 	
 	QString help = tr("The column separator can be customized. The following special codes can be used:\n\\t for a TAB character \n\\s for a SPACE");
 	help += "\n"+tr("The separator must not contain the following characters: 0-9eE.+-");
-	QWhatsThis::add(boxSeparator, help);
-	QWhatsThis::add(sepText, help);
+	Q3WhatsThis::add(boxSeparator, help);
+	Q3WhatsThis::add(sepText, help);
 
-	QHBox *hbox3 = new QHBox(GroupBox1, "hbox3" );
+	Q3HBox *hbox3 = new Q3HBox(GroupBox1, "hbox3" );
 	hbox3->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 	hbox3->setSpacing(10);
 	hbox3->setMargin (10);
@@ -62,7 +64,7 @@ exportDialog::exportDialog( QWidget* parent, const char* name, bool modal, WFlag
     buttonCancel = new QPushButton(hbox3, "buttonCancel" );
 	buttonHelp = new QPushButton(hbox3, "buttonHelp" );
 	
-	QVBoxLayout* hlayout = new QVBoxLayout(this, 5, 5, "hlayout");
+	Q3VBoxLayout* hlayout = new Q3VBoxLayout(this, 5, 5, "hlayout");
     hlayout->addWidget(GroupBox1);
 	hlayout->addWidget(hbox3);
 

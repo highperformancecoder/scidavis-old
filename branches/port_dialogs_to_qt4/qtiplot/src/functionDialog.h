@@ -4,6 +4,8 @@
 #include "functionDialogui.h"
 #include <qvariant.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 
 class Graph;
 	
@@ -12,7 +14,7 @@ class fDialog : public functionDialogui
     Q_OBJECT
 
 public:
-    fDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    fDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~fDialog();
 
 public slots:
@@ -28,7 +30,7 @@ public slots:
 	void setGraph(Graph *g){graph = g;};
 
 signals:
-	void newFunctionPlot(QString& ,QStringList &,QStringList &,QValueList<double> &,QValueList<int> &);
+	void newFunctionPlot(QString& ,QStringList &,QStringList &,Q3ValueList<double> &,Q3ValueList<int> &);
 	void clearFunctionsList();
 	void clearParamFunctionsList();
 	void clearPolarFunctionsList();

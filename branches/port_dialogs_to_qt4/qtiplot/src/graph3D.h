@@ -3,6 +3,11 @@
 
 #include <qwt3d_surfaceplot.h>
 #include <qwt3d_function.h> 
+//Added by qt3to4:
+#include <QContextMenuEvent>
+#include <QResizeEvent>
+#include <QEvent>
+#include <Q3MemArray>
 
 #include "worksheet.h"
 #include "matrix.h"
@@ -16,7 +21,7 @@ class Graph3D: public myWidget
 	Q_OBJECT
 
 public:
-	Graph3D (const QString& label, QWidget* parent, const char* name, WFlags f);
+	Graph3D (const QString& label, QWidget* parent, const char* name, Qt::WFlags f);
 	~Graph3D();
 
 	enum PlotType{Scatter=0, Trajectory = 1, Bars = 2};
@@ -282,7 +287,7 @@ private:
 	QStringList labels;
 	QFont titleFnt;
 	bool legendOn, smoothMesh;
-	QMemArray<int> scaleType;
+	Q3MemArray<int> scaleType;
 	QColor axesCol,labelsCol,titleCol,meshCol,bgCol,numCol,gridCol;
 	QColor fromColor, toColor;//custom data colors
 	int labelsDist, legendMajorTicks;

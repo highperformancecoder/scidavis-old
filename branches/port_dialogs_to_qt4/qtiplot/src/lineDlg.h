@@ -6,7 +6,7 @@
 
 class QCheckBox;
 class QComboBox;
-class QButtonGroup;
+class Q3ButtonGroup;
 class QPushButton;
 class QTabWidget;
 class QWidget;
@@ -18,10 +18,10 @@ class lineDialog : public QDialog
     Q_OBJECT
 
 public:
-    lineDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0);
+    lineDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
     ~lineDialog();
 
-    QButtonGroup* GroupBox1, *GroupBox2;
+    Q3ButtonGroup* GroupBox1, *GroupBox2;
     ColorButton* colorBox;
     QComboBox* styleBox;
     QComboBox* widthBox;

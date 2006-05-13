@@ -3,14 +3,16 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <QLabel>
 
 class QLabel;
-class QWidgetStack;
+class Q3WidgetStack;
 class QWidget;
 class QLineEdit;
 class QComboBox;
 class QPushButton;
-class QButtonGroup;
+class Q3ButtonGroup;
 class QSpinBox;
 
 class functionDialogui : public QDialog
@@ -18,11 +20,11 @@ class functionDialogui : public QDialog
     Q_OBJECT
 
 public:
-    functionDialogui( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    functionDialogui( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
     ~functionDialogui();
 
     QLabel* textFunction_2;
-    QWidgetStack* optionStack;
+    Q3WidgetStack* optionStack;
     QWidget* functionPage;
     QLabel* textFunction;
     QLineEdit* boxFrom;
@@ -57,7 +59,7 @@ public:
     QLabel* textPolarTheta;
     QComboBox* boxPolarTheta;
     QComboBox* boxType;
-    QButtonGroup  *GroupBox1, *GroupBox2, *GroupBox3, *GroupBox4;
+    Q3ButtonGroup  *GroupBox1, *GroupBox2, *GroupBox3, *GroupBox4;
     QPushButton* buttonCancel;
     QPushButton* buttonOk;
 	QSpinBox    *boxPoints, *boxParPoints, *boxPolarPoints;
