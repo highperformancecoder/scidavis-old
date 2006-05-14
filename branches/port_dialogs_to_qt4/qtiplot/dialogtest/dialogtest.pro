@@ -17,5 +17,5 @@ HEADERS +=  ../src/textDialog.h \
 			../src/colorButton.h \
 			../src/symbolDialog.h
 
-QT +=  opengl qt3support 
+QT +=  opengl
 CONFIG      += qt warn_on debug thread opengl

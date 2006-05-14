@@ -35,8 +35,13 @@ int main( int argc, char ** argv )
 {
 	QApplication app( argc, argv );	
 	TextDialog dlg(TextDialog::TextMarker);
+	dlg.setText("this text should not be visible");	
+	dlg.setText("enter text here\n(multiline supported)");	
+	dlg.exec();
 	
-	return dlg.exec();
+	TextDialog dlg2(TextDialog::AxisTitle);
+	dlg2.setText("enter text here\n(multiline supported)");	
+	return dlg2.exec();
 	
 	//return app.exec();
 }
