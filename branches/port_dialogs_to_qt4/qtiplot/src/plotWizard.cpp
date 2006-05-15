@@ -40,8 +40,6 @@ PlotWizard::PlotWizard( QWidget* parent, Qt::WFlags fl )
 {
 	setWindowTitle( tr("QtiPlot - Select Columns to Plot") );
 
-	// FIXME: What was mouse tracking in this wizard for?
-	//X setMouseTracking( TRUE );
 	setSizeGripEnabled( true );
 
 	// top part starts here

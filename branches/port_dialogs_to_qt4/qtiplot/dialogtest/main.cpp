@@ -31,6 +31,7 @@
 #include <QApplication>
 #include <textDialog.h>
 #include <plotWizard.h>
+#include <importDialog.h>
 
 #include <QStringList>
 #include <QString>
@@ -51,6 +52,7 @@ int main( int argc, char ** argv )
 	dlg2.setText("enter text here\n(multiline supported)");	
 	dlg2.exec();
 	*/
+	/*
 	PlotWizard dlg3;
 	QStringList tables;
 	tables.append("table 1");
@@ -64,7 +66,9 @@ int main( int argc, char ** argv )
 	dlg3.setColumnsList(columns);
 	dlg3.changeColumnsList(tables[0]);
 	dlg3.exec();
-
+	*/
+	ImportDialog dlg4;
+	dlg4.exec();
 	
 	//return app.exec();
 	return 0;
