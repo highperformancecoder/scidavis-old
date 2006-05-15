@@ -11,11 +11,13 @@ INCLUDEPATH += . ../src
 SOURCES +=  main.cpp \
 		 	../src/textDialog.cpp \
 			../src/colorButton.cpp \
-			../src/symbolDialog.cpp
+			../src/symbolDialog.cpp \
+			../src/plotWizard.cpp
 	
 HEADERS +=  ../src/textDialog.h \
 			../src/colorButton.h \
-			../src/symbolDialog.h
+			../src/symbolDialog.h \
+			../src/plotWizard.h
 
 QT +=  opengl
 CONFIG      += qt warn_on debug thread opengl

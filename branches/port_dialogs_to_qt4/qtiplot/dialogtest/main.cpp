@@ -30,19 +30,43 @@
 
 #include <QApplication>
 #include <textDialog.h>
+#include <plotWizard.h>
+
+#include <QStringList>
+#include <QString>
+
 
 int main( int argc, char ** argv )
 {
 	QApplication app( argc, argv );	
+
+	/*
 	TextDialog dlg(TextDialog::TextMarker);
 	dlg.setText("this text should not be visible");	
 	dlg.setText("enter text here\n(multiline supported)");	
 	dlg.exec();
-	
+	*/
+	/*
 	TextDialog dlg2(TextDialog::AxisTitle);
 	dlg2.setText("enter text here\n(multiline supported)");	
-	return dlg2.exec();
+	dlg2.exec();
+	*/
+	PlotWizard dlg3;
+	QStringList tables;
+	tables.append("table 1");
+	tables.append("table 2");
+	QStringList columns;
+	columns.append("table 1_col1");
+	columns.append("table 1_col2");
+	columns.append("table 2_colA");
+	columns.append("table 2_colB");
+	dlg3.insertTablesList(tables);
+	dlg3.setColumnsList(columns);
+	dlg3.changeColumnsList(tables[0]);
+	dlg3.exec();
+
 	
 	//return app.exec();
+	return 0;
 }
 
