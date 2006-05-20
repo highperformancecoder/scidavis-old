@@ -42,7 +42,7 @@ class SymbolDialog : public QDialog
     Q_OBJECT
 
 public:
-	//! Character set: lower- or uppercase Greek
+	//! Character set
 	enum CharSet{
 		lowerGreek = 0, /*!< lower case Greek letters */
 		upperGreek = 1,  /*!< upper case Greek letters */

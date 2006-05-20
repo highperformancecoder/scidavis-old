@@ -61,47 +61,24 @@ public:
 	//! Destructor
 	~TextDialog();
 
-public slots:
-
 	//! Return axis label alignment
 	/**
 	 * \sa setAlignment()
 	 */
 	int alignment();
-	//! Set axis label alignment
-	/**
-	 * \param align alignment (can be -1 for invalid,
-	 *  Qt::AlignHCenter, Qt::AlignLeft, or Qt::AlignRight)
-	 */
-	void setAlignment(int align);
-
-	//! Set the contents of the text editor box
-	void setText(const QString & t);
 	//! Return the contents of the text editor box
 	QString getText();
-
-	//! Let the user select another font
-	void customFont();
 	//! Return the current font
 	QFont font();
-	//! Set the current font to 'fnt'
-	void setFont(const QFont& fnt);
-
-	//! Let the user pick the text color
-	void pickTextColor();
-	//! Set the text color to 'c'
-	void setTextColor(QColor c);
-
-	//! Let the user pick the background color
-	void pickBackgroundColor();
-	//! Set the background color to 'c'
-	void setBackgroundColor(QColor c);
-
 	//! Get label background type
 	/**
 	 * \sa setBackgroundType()
 	 */
 	int backgroundType();
+	//! Return rotation angle (not yet implemented)
+	int angle();
+
+public slots:
 	//! Set label background type
 	/**
 	 * \param bkg label background type
@@ -110,12 +87,31 @@ public slots:
 	 * 2 -> border + shadow
 	 */
 	void setBackgroundType(int bkg);
-
 	//! Set rotation angle (not yet implemented)
 	void setAngle(int angle);
-	//! Return rotation angle (not yet implemented)
-	int angle();
+	//! Set the background color to 'c'
+	void setBackgroundColor(QColor c);
+	//! Set the text color to 'c'
+	void setTextColor(QColor c);
+	//! Set the current font to 'fnt'
+	void setFont(const QFont& fnt);
+	//! Set the contents of the text editor box
+	void setText(const QString & t);
+	//! Set axis label alignment
+	/**
+	 * \param align alignment (can be -1 for invalid,
+	 *  Qt::AlignHCenter, Qt::AlignLeft, or Qt::AlignRight)
+	 */
+	void setAlignment(int align);
 
+
+private slots:
+	//! Let the user select another font
+	void customFont();
+	//! Let the user pick the background color
+	void pickBackgroundColor();
+	//! Let the user pick the text color
+	void pickTextColor();
 	//! Accept changes and close dialog
 	void accept();
 	//! Apply changes

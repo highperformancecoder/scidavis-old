@@ -165,7 +165,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x2211-0x220F) ; i++,counter++ )
 	{
@@ -174,7 +174,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x00B1-0x00B1) ; i++,counter++ )
 	{
@@ -183,7 +183,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x2213-0x2213) ; i++,counter++ )
 	{
@@ -192,7 +192,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x221E - 0x2217) ; i++,counter++ )
 	{
@@ -201,7 +201,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x2222-0x2222) ; i++,counter++ )
 	{
@@ -210,7 +210,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x2230-0x2227) ; i++,counter++ )
 	{
@@ -219,7 +219,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x223F-0x223F) ; i++,counter++ )
 	{
@@ -228,7 +228,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x2245-0x2245) ; i++,counter++ )
 	{
@@ -237,7 +237,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x2248-0x2248) ; i++,counter++ )
 	{
@@ -246,7 +246,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x2255-0x2254) ; i++,counter++ )
 	{
@@ -255,7 +255,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x2259-0x2259) ; i++,counter++ )
 	{
@@ -264,7 +264,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x2267-0x225F) ; i++,counter++ )
 	{
@@ -273,7 +273,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x226B-0x226A) ; i++,counter++ )
 	{
@@ -282,7 +282,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	for ( i=0 ; i <= (0x2289-0x2282) ; i++,counter++ )
 	{
@@ -291,7 +291,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	// h bar
 	for ( i=0 ; i <= (0x210F-0x210F) ; i++,counter++ )
@@ -301,7 +301,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	// angstrom
 	for ( i=0 ; i <= (0x212B-0x212B) ; i++,counter++ )
@@ -311,7 +311,7 @@ void SymbolDialog::initMathSymbols()
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/10,counter%10);
+		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
 	numButtons = counter;
 }

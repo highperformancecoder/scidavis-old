@@ -54,6 +54,7 @@ public:
 	//! Get the color of the display part
 	QColor color() const;
 
+private:
 	QPushButton *selectButton;
 	QFrame *display;
 

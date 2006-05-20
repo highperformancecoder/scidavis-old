@@ -51,7 +51,8 @@ public:
 	//! Destructor
     ~ImportDialog();
 
-    QPushButton* buttonOk;
+private:
+	QPushButton* buttonOk;
 	QPushButton* buttonCancel;
 	QPushButton* buttonHelp;
     QComboBox* boxSeparator;
@@ -70,6 +71,8 @@ public slots:
 	void setLines(int lines);
 	//! Toggle whether the first column is treated as column titles
 	void renameCols(bool rename);
+
+private slots:
 	//! Accept changes
 	void accept();
 	//! Display help

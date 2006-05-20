@@ -54,6 +54,7 @@ public:
 	//! Destructor
     ~PlotWizard();
 
+private:
 				//! Button "Plot"
     QPushButton* buttonOk,
 				//! Button "<->xErr" 
@@ -85,6 +86,9 @@ public:
 				//! List of the plots to generate
 			 *plotAssociations;
 
+	//! Internal list of columns (contains all columns in all tables)
+	QStringList columns;
+
 public slots:
 	//! Slot: Update the columns list box to contain the columns of 'table'
 	void changeColumnsList(const QString &table);
@@ -108,10 +112,12 @@ public slots:
 	void addYErrCol();
 	//! Slot: Accept settings, close the dialog
 	void accept();
-	//! Slot: Display a warning that a new curve must be added first before the selection of the columns
-	bool noCurves();
 	//! Slot: Add column as Z
 	void addZCol();
+
+private:
+	//! Display a warning that a new curve must be added first before the selection of the columns
+	bool noCurves();
 
 signals:
 	//! Signal: New plots need to be created
@@ -121,9 +127,6 @@ signals:
 	//! Signal: A new 3D ribbon plot needs to be generated
 	void plot3DRibbon (const QString&);
 
-private:
-	//! Internal list of columns (contains all columns in all tables)
-	QStringList columns;
 };
 
 #endif //  PLOTWIZARD_H
