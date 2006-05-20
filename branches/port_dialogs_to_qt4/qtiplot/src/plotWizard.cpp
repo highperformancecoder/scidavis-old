@@ -50,7 +50,7 @@ PlotWizard::PlotWizard( QWidget* parent, Qt::WFlags fl )
 	topLayout->addWidget(new QLabel(tr( "Worksheet" )), 0, 0);
 
 	boxTables = new QComboBox();
-	topLayout->addWidget( boxTables, 0, 1, 1, 2 );
+	topLayout->addWidget( boxTables, 0, 2, 1, 2 );
 
 	columnsList = new QListWidget();
 	topLayout->addWidget( columnsList, 1, 0, 3, 2 );

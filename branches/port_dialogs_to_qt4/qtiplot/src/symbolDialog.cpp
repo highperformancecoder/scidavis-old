@@ -123,14 +123,160 @@ void SymbolDialog::initNumberSymbols()
 void SymbolDialog::initMathSymbols()
 {
 	int i, counter = 0;
-	for ( i=0 ; i <= (0x22FF-0x2200) ; i++,counter++ )
+	for ( i=0 ; i <= (0x220D-0x2200) ; i++,counter++ )
 	{
 		QPushButton *btn = new QPushButton(QString(QChar(i+0x2200)));
 		btn->setMaximumWidth(40);
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/20,counter%20);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x2211-0x220F) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x220F)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x00B1-0x00B1) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x00B1)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x2213-0x2213) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2213)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x221E - 0x2217) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2217)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x2222-0x2222) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2222)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x2230-0x2227) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2227)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x223F-0x223F) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x223F)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x2245-0x2245) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2245)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x2248-0x2248) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2248)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x2255-0x2254) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2254)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x2259-0x2259) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2259)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x2267-0x225F) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x225F)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x226B-0x226A) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x226A)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	for ( i=0 ; i <= (0x2289-0x2282) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2282)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	// h bar
+	for ( i=0 ; i <= (0x210F-0x210F) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x210F)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
+	}
+	// angstrom
+	for ( i=0 ; i <= (0x212B-0x212B) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x212B)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/10,counter%10);
 	}
 	numButtons = counter;
 }
@@ -138,23 +284,41 @@ void SymbolDialog::initMathSymbols()
 void SymbolDialog::initArrowSymbols()
 {
 	int i, counter = 0;
-	for ( i=0 ; i <= (0x21FF-0x2190) ; i++,counter++ )
+	for ( i=0 ; i <= (0x219B-0x2190) ; i++,counter++ )
 	{
 		QPushButton *btn = new QPushButton(QString(QChar(i+0x2190)));
 		btn->setMaximumWidth(40);
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/12,counter%12);
+		gridLayout->addWidget(btn,counter/6,counter%6);
 	}
-	for ( i=0 ; i <= (0x2B11-0x2B00) ; i++,counter++ )
+	for ( i=0 ; i <= (0x21A7-0x21A4) ; i++,counter++ )
 	{
-		QPushButton *btn = new QPushButton(QString(QChar(i+0x2B00)));
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x21A4)));
 		btn->setMaximumWidth(40);
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
 		buttons->addButton(btn,counter+1);
-		gridLayout->addWidget(btn,counter/12,counter%12);
+		gridLayout->addWidget(btn,counter/6,counter%6);
+	}
+	for ( i=0 ; i <= (0x21D5-0x21CD) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x21CD)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/6,counter%6);
+	}
+	for ( i=0 ; i <= (0x21E9-0x21E6) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x21E6)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/6,counter%6);
 	}
 	numButtons = counter;
 }

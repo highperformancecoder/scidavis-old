@@ -208,11 +208,6 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 	buttonMathSymbols->setMaximumWidth(40);
 	layoutMiddle->addWidget(buttonMathSymbols);
 
-	buttonNumberSymbols = new QPushButton(QString(QChar(0x2153))); 
-	buttonNumberSymbols->setFont(font);
-	buttonNumberSymbols->setMaximumWidth(40);
-	layoutMiddle->addWidget(buttonNumberSymbols);
-
 	buttonArrowSymbols = new QPushButton(QString(QChar(0x2192))); 
 	buttonArrowSymbols->setFont(font);
 	buttonArrowSymbols->setMaximumWidth(40);
@@ -276,7 +271,6 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 	connect(buttonLowerGreek, SIGNAL(clicked()), this, SLOT(showLowerGreek()));
 	connect(buttonUpperGreek, SIGNAL(clicked()), this, SLOT(showUpperGreek()));
 	connect(buttonMathSymbols, SIGNAL(clicked()), this, SLOT(showMathSymbols()));
-	connect(buttonNumberSymbols, SIGNAL(clicked()), this, SLOT(showNumberSymbols()));
 	connect(buttonArrowSymbols, SIGNAL(clicked()), this, SLOT(showArrowSymbols()));
 }
 
@@ -316,17 +310,6 @@ void TextDialog::showArrowSymbols()
 	arrowSymbols->setFocus();
 }
 
-void TextDialog::showNumberSymbols()
-{
-	SymbolDialog *numberSymbols = new SymbolDialog(SymbolDialog::numberSymbols, this, Qt::Tool);
-	numberSymbols->setAttribute(Qt::WA_DeleteOnClose);
-	connect(numberSymbols, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
-	numberSymbols->show();
-	numberSymbols->setFocus();
-}
-
-	
-	
 void TextDialog::addSymbol(const QString & letter)
 {
 	lineEdit->textCursor().insertText(letter);

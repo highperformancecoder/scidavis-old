@@ -142,8 +142,6 @@ public slots:
 	void showMathSymbols();
 	//! Let the user insert arrow symbols
 	void showArrowSymbols();
-	//! Let the user insert number symbols
-	void showNumberSymbols();
 	//! Insert 'letter' into the text
 	void addSymbol(const QString& letter);
 
@@ -189,7 +187,7 @@ protected:
 	QTextEdit* lineEdit;
 	QGroupBox *groupBox1, *groupBox2;
 	QPushButton* buttonLowerGreek, *buttonUpperGreek;
-	QPushButton* buttonMathSymbols, *buttonArrowSymbols, *buttonNumberSymbols;
+	QPushButton* buttonMathSymbols, *buttonArrowSymbols;
 	QComboBox* alignmentBox;
 
 private:

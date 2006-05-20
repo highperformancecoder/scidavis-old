@@ -41,19 +41,18 @@ int main( int argc, char ** argv )
 {
 	QApplication app( argc, argv );	
 
-	/*
 	TextDialog dlg(TextDialog::TextMarker);
 	dlg.setText("this text should not be visible");	
 	dlg.setText("enter text here\n(multiline supported)");	
 	dlg.exec();
-	*/
-	/*
+
+/*
 	TextDialog dlg2(TextDialog::AxisTitle);
 	dlg2.setText("enter text here\n(multiline supported)");	
 	dlg2.exec();
-	*/
-	/*
 	PlotWizard dlg3;
+*/
+/*
 	QStringList tables;
 	tables.append("table 1");
 	tables.append("table 2");
@@ -66,10 +65,11 @@ int main( int argc, char ** argv )
 	dlg3.setColumnsList(columns);
 	dlg3.changeColumnsList(tables[0]);
 	dlg3.exec();
-	*/
+*/
+/*	
 	ImportDialog dlg4;
 	dlg4.exec();
-	
+*/	
 	//return app.exec();
 	return 0;
 }
