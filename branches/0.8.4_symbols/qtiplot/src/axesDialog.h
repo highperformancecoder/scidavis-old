@@ -101,7 +101,8 @@ public:
 	ColorButton *boxBorderColor, *boxFrameColor, *boxBackgroundColor;
 	QGroupBox  *labelBox;
 	QPushButton *buttonIndice, *buttonExp, *buttonSym, *buttonB, *buttonI;
-    QPushButton *buttonU, *buttonMinGreek, *buttonMajGreek, *btnLabelFont;
+    QPushButton *buttonU, *buttonLowerGreek, *buttonUpperGreek, *btnLabelFont;
+    QPushButton *buttonArrowSymbols, *buttonMathSymbols;
 	
 public slots:
 	QStringList scaleLimits(int axis, double start, double end, double step, 
@@ -179,8 +180,10 @@ public slots:
 	void addBold();
 	void addCurve();
 
-	void showMinGreek();
-	void showMajGreek();
+	void showLowerGreek();
+	void showUpperGreek();
+	void showMathSymbols();
+	void showArrowSymbols();
 	void addSymbol(const QString& letter);
 	void customAxisLabelFont();
 

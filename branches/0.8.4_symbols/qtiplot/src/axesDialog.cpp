@@ -1234,11 +1234,17 @@ void axesDialog::initAxesPage()
     buttonExp->setPixmap (QPixmap(exp_xpm));
 	buttonExp->setMaximumWidth(40);
 
-    buttonMinGreek = new QPushButton(QChar(0x3B1), editBox); 
-	buttonMinGreek->setMaximumWidth(40);
+    buttonLowerGreek = new QPushButton(QChar(0x3B1), editBox); 
+	buttonLowerGreek->setMaximumWidth(40);
 
-	buttonMajGreek = new QPushButton(QChar(0x393), editBox); 
-	buttonMajGreek->setMaximumWidth(40);
+	buttonUpperGreek = new QPushButton(QChar(0x393), editBox); 
+	buttonUpperGreek->setMaximumWidth(40);
+
+	buttonMathSymbols = new QPushButton(QChar(0x222B), editBox); 
+	buttonMathSymbols->setMaximumWidth(40);
+
+	buttonArrowSymbols = new QPushButton(QChar(0x2192), editBox); 
+	buttonMathSymbols->setMaximumWidth(40);
 
 	QFont font = this->font();
 	font.setBold(true);
@@ -1357,8 +1363,10 @@ connect( buttonIndice, SIGNAL( clicked() ), this, SLOT(addIndex() ) );
 connect( buttonU, SIGNAL( clicked() ), this, SLOT(addUnderline() ) );
 connect( buttonI, SIGNAL( clicked() ), this, SLOT(addItalic() ) );
 connect( buttonB, SIGNAL( clicked() ), this, SLOT(addBold() ) );
-connect(buttonMinGreek, SIGNAL(clicked()), this, SLOT(showMinGreek()));
-connect(buttonMajGreek, SIGNAL(clicked()), this, SLOT(showMajGreek()));
+connect(buttonLowerGreek, SIGNAL(clicked()), this, SLOT(showLowerGreek()));
+connect(buttonUpperGreek, SIGNAL(clicked()), this, SLOT(showUpperGreek()));
+connect( buttonMathSymbols, SIGNAL(clicked()), this, SLOT(showMathSymbols()));
+connect( buttonArrowSymbols, SIGNAL(clicked()), this, SLOT(showArrowSymbols()));
 }
 
 void axesDialog::initFramePage()
@@ -2880,18 +2888,36 @@ else
 	boxFormula->hide();
 }
 
-void axesDialog::showMinGreek()
+void axesDialog::showLowerGreek()
 {
-symbolDialog *greekLetters = new symbolDialog(symbolDialog::minGreek, this,"greekLetters",
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::lowerGreek, this,"greekLetters",
 											  false, WStyle_Tool|WDestructiveClose);
 connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 greekLetters->show();
 greekLetters->setActiveWindow();
 }
 
-void axesDialog::showMajGreek()
+void axesDialog::showUpperGreek()
 {
-symbolDialog *greekLetters = new symbolDialog(symbolDialog::majGreek, this, "greekLetters",
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::upperGreek, this, "greekLetters",
+											  false, WStyle_Tool|WDestructiveClose);
+connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
+greekLetters->show();
+greekLetters->setActiveWindow();
+}
+
+void axesDialog::showMathSymbols()
+{
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::mathSymbols, this, "greekLetters",
+											  false, WStyle_Tool|WDestructiveClose);
+connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
+greekLetters->show();
+greekLetters->setActiveWindow();
+}
+
+void axesDialog::showArrowSymbols()
+{
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::arrowSymbols, this, "greekLetters",
 											  false, WStyle_Tool|WDestructiveClose);
 connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 greekLetters->show();

@@ -153,8 +153,10 @@ void plot3DDialog::initAxesPage()
 	btnLabelFont=new QPushButton(hbox, "from");
 	btnLabelFont->setText( tr( "&Choose font" ) );
 
-	buttonAxisMinGreek = new QPushButton(QChar(0x3B1), hbox, "buttonMinGreek" ); 
-	buttonAxisMajGreek = new QPushButton(QChar(0x393), hbox, "buttonMajGreek" ); 
+	buttonAxisLowerGreek = new QPushButton(QChar(0x3B1), hbox, "buttonLowerGreek" ); 
+	buttonAxisUpperGreek = new QPushButton(QChar(0x393), hbox, "buttonUpperGreek" ); 
+	buttonAxisMathSymbols = new QPushButton(QChar(0x222B), hbox, "buttonMathSymbols" ); 
+	buttonAxisArrowSymbols = new QPushButton(QChar(0x2192), hbox, "buttonArrowSymbols" ); 
 
 	new QLabel( tr( "Major Ticks Length" ), GroupBox8 , "TextLabel4888",0 );
 	boxMajorLength=new QLineEdit(GroupBox8,"boxMajL");
@@ -168,8 +170,10 @@ void plot3DDialog::initAxesPage()
   
 	generalDialog->insertTab(axes, tr( "&Axis" ) );
 
-	connect( buttonAxisMinGreek, SIGNAL(clicked()), this, SLOT(showMinGreek()));
-	connect( buttonAxisMajGreek, SIGNAL(clicked()), this, SLOT(showMajGreek()));
+	connect( buttonAxisLowerGreek, SIGNAL(clicked()), this, SLOT(showLowerGreek()));
+	connect( buttonAxisUpperGreek, SIGNAL(clicked()), this, SLOT(showUpperGreek()));
+	connect( buttonAxisMathSymbols, SIGNAL(clicked()), this, SLOT(showMathSymbols()));
+	connect( buttonAxisArrowSymbols, SIGNAL(clicked()), this, SLOT(showArrowSymbols()));
 	connect( axesList2, SIGNAL(highlighted (int) ), this, SLOT(viewAxisOptions(int) ) );
 	connect( axesList, SIGNAL(highlighted (int) ), this, SLOT(viewScaleLimits(int) ) );
 	connect( btnLabelFont, SIGNAL(clicked()), this, SLOT(pickAxisLabelFont() ) );
@@ -187,11 +191,17 @@ void plot3DDialog::initTitlePage()
 	GroupBox4->setLineWidth(0);
 	GroupBox4->setFlat (TRUE);
 
-	buttonMinGreek = new QPushButton(QChar(0x3B1), GroupBox4, "buttonMinGreek" ); 
-	buttonMinGreek->setMaximumWidth(40);
+	buttonLowerGreek = new QPushButton(QChar(0x3B1), GroupBox4, "buttonLowerGreek" ); 
+	buttonLowerGreek->setMaximumWidth(40);
 
-	buttonMajGreek = new QPushButton(QChar(0x393), GroupBox4, "buttonMajGreek" ); 
-	buttonMajGreek->setMaximumWidth(40);
+	buttonUpperGreek = new QPushButton(QChar(0x393), GroupBox4, "buttonUpperGreek" ); 
+	buttonUpperGreek->setMaximumWidth(40);
+
+	buttonMathSymbols = new QPushButton(QChar(0x222B), GroupBox4, "buttonMathSymbols" ); 
+	buttonMathSymbols->setMaximumWidth(40);
+
+	buttonArrowSymbols = new QPushButton(QChar(0x2192), GroupBox4, "buttonArrowSymbols" ); 
+	buttonArrowSymbols->setMaximumWidth(40);
 
 	btnTitleColor = new QPushButton( GroupBox4, "btnTitleColor" );
     btnTitleColor->setText( tr( "&Color" ) );
@@ -208,8 +218,10 @@ void plot3DDialog::initTitlePage()
 	
 	connect( btnTitleColor, SIGNAL(clicked()), this, SLOT(pickTitleColor() ) );
 	connect( btnTitleFont, SIGNAL(clicked()), this, SLOT(pickTitleFont() ) );
-	connect( buttonMinGreek, SIGNAL(clicked()), this, SLOT(showMinGreek()));
-	connect( buttonMajGreek, SIGNAL(clicked()), this, SLOT(showMajGreek()));
+	connect( buttonLowerGreek, SIGNAL(clicked()), this, SLOT(showLowerGreek()));
+	connect( buttonUpperGreek, SIGNAL(clicked()), this, SLOT(showUpperGreek()));
+	connect( buttonMathSymbols, SIGNAL(clicked()), this, SLOT(showMathSymbols()));
+	connect( buttonArrowSymbols, SIGNAL(clicked()), this, SLOT(showArrowSymbols()));
 }
 
 void plot3DDialog::initColorsPage()
@@ -416,18 +428,36 @@ generalDialog->insertTab(points, tr( "Points" ),4 );
 connect( boxPointStyle, SIGNAL( activated(int) ), optionStack, SLOT( raiseWidget(int) ) );
 }
 
-void plot3DDialog::showMinGreek()
+void plot3DDialog::showLowerGreek()
 {
-symbolDialog *greekLetters = new symbolDialog(symbolDialog::minGreek, this,"greekLetters",
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::lowerGreek, this,"greekLetters",
 											  false, WStyle_Tool|WDestructiveClose);
 connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 greekLetters->show();
 greekLetters->setActiveWindow();
 }
 
-void plot3DDialog::showMajGreek()
+void plot3DDialog::showUpperGreek()
 {
-symbolDialog *greekLetters = new symbolDialog(symbolDialog::majGreek, this,"greekLetters",
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::upperGreek, this,"greekLetters",
+											  false, WStyle_Tool|WDestructiveClose);
+connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
+greekLetters->show();
+greekLetters->setActiveWindow();
+}
+
+void plot3DDialog::showMathSymbols()
+{
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::mathSymbols, this,"greekLetters",
+											  false, WStyle_Tool|WDestructiveClose);
+connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
+greekLetters->show();
+greekLetters->setActiveWindow();
+}
+
+void plot3DDialog::showArrowSymbols()
+{
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::arrowSymbols, this,"greekLetters",
 											  false, WStyle_Tool|WDestructiveClose);
 connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 greekLetters->show();

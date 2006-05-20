@@ -40,7 +40,8 @@ public:
 	QPushButton* buttonCurve;
     QMultiLineEdit* LineEdit;
 	QButtonGroup *GroupBox1, *GroupBox2;
-	QPushButton* buttonMinGreek, *buttonMajGreek;
+	QPushButton* buttonLowerGreek, *buttonUpperGreek;
+	QPushButton* buttonArrowSymbols, *buttonMathSymbols;
 	QComboBox* alignementBox;
 
 public slots:
@@ -51,8 +52,8 @@ public slots:
 	void setText(const QString & t);
 
 	void customFont();
-	QFont font(){return f;};
-	void setFont(const QFont& fnt){f=fnt;};
+	QFont font();
+	void setFont(const QFont& fnt);
 
 	void pickTextColor();
 	void setTextColor(QColor c);
@@ -74,8 +75,10 @@ public slots:
 	void addBold();
 	void addCurve();
 
-	void showMinGreek();
-	void showMajGreek();
+	void showLowerGreek();
+	void showUpperGreek();
+	void showMathSymbols();
+	void showArrowSymbols();
 	void addSymbol(const QString& letter);
 
 signals:

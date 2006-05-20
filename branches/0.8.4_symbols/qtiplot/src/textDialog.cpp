@@ -128,11 +128,17 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
     buttonExp = new QPushButton( GroupBox2, "buttonExp" );
     buttonExp->setPixmap (QPixmap(exp_xpm));
 
-    buttonMinGreek = new QPushButton(QChar(0x3B1), GroupBox2, "buttonMinGreek" ); 
-	buttonMinGreek->setMaximumWidth(40);
+    buttonLowerGreek = new QPushButton(QChar(0x3B1), GroupBox2, "buttonLowerGreek" ); 
+	buttonLowerGreek->setMaximumWidth(40);
 
-	buttonMajGreek = new QPushButton(QChar(0x393), GroupBox2, "buttonMajGreek" ); 
-	buttonMajGreek->setMaximumWidth(40);
+	buttonUpperGreek = new QPushButton(QChar(0x393), GroupBox2, "buttonUpperGreek" ); 
+	buttonUpperGreek->setMaximumWidth(40);
+
+	buttonMathSymbols = new QPushButton(QChar(0x222B), GroupBox2, "buttonMathSymbols" ); 
+	buttonMathSymbols->setMaximumWidth(40);
+
+	buttonArrowSymbols = new QPushButton(QChar(0x2192), GroupBox2, "buttonArrowSymbols" ); 
+	buttonArrowSymbols->setMaximumWidth(40);
 
 	QFont font = this->font();
 	font.setBold(true);
@@ -176,22 +182,42 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
 	connect( buttonU, SIGNAL( clicked() ), this, SLOT(addUnderline() ) );
 	connect( buttonI, SIGNAL( clicked() ), this, SLOT(addItalic() ) );
 	connect( buttonB, SIGNAL( clicked() ), this, SLOT(addBold() ) );
-	connect(buttonMinGreek, SIGNAL(clicked()), this, SLOT(showMinGreek()));
-	connect(buttonMajGreek, SIGNAL(clicked()), this, SLOT(showMajGreek()));
+	connect(buttonLowerGreek, SIGNAL(clicked()), this, SLOT(showLowerGreek()));
+	connect(buttonUpperGreek, SIGNAL(clicked()), this, SLOT(showUpperGreek()));
+	connect(buttonMathSymbols, SIGNAL(clicked()), this, SLOT(showMathSymbols()));
+	connect(buttonArrowSymbols, SIGNAL(clicked()), this, SLOT(showArrowSymbols()));
 }
 
-void TextDialog::showMinGreek()
+void TextDialog::showLowerGreek()
 {
-symbolDialog *greekLetters = new symbolDialog(symbolDialog::minGreek, this,"greekLetters",
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::lowerGreek, this,"greekLetters",
 											  false, WStyle_Tool|WDestructiveClose);
 connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 greekLetters->show();
 greekLetters->setActiveWindow();
 }
 
-void TextDialog::showMajGreek()
+void TextDialog::showUpperGreek()
 {
-symbolDialog *greekLetters = new symbolDialog(symbolDialog::majGreek, this, "greekLetters",
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::upperGreek, this, "greekLetters",
+											  false, WStyle_Tool|WDestructiveClose);
+connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
+greekLetters->show();
+greekLetters->setActiveWindow();
+}
+
+void TextDialog::showMathSymbols()
+{
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::mathSymbols, this, "greekLetters",
+											  false, WStyle_Tool|WDestructiveClose);
+connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
+greekLetters->show();
+greekLetters->setActiveWindow();
+}
+
+void TextDialog::showArrowSymbols()
+{
+symbolDialog *greekLetters = new symbolDialog(symbolDialog::arrowSymbols, this, "greekLetters",
 											  false, WStyle_Tool|WDestructiveClose);
 connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 greekLetters->show();
@@ -375,8 +401,9 @@ void TextDialog::customFont()
 bool okF;
 QFont fnt = QFontDialog::getFont( &okF,f,this);
 if (okF)
-f=fnt;
+	f=fnt;
 emit changeFont (fnt);
+buttonFont->setFont(fnt);
 }
 
 void TextDialog::setAngle(int angle)
@@ -416,6 +443,18 @@ if ( !c.isValid() || c ==  backgroundBtn->color() )
 
 backgroundBtn->setColor ( c ) ;
 }
+
+QFont TextDialog::font()
+{
+	return f;
+}
+
+void TextDialog::setFont(const QFont & fnt)
+{
+	f = fnt;
+	buttonFont->setFont(fnt);
+}
+	
 
 TextDialog::~TextDialog()
 {

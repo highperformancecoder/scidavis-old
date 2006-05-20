@@ -42,11 +42,13 @@ public:
 	QSpinBox *boxMeshLineWidth;
     QPushButton* buttonApply;
     QPushButton* buttonOk;
-    QPushButton* buttonCancel, *buttonMinGreek, *buttonMajGreek;
+    QPushButton* buttonCancel, *buttonLowerGreek, *buttonUpperGreek;
+    QPushButton* buttonMathSymbols, *buttonArrowSymbols;
 	QPushButton* btnTitleColor, *btnTitleFont, *btnLabelFont, *btnGrid;
 	QPushButton *btnBackground, *btnMesh, *btnAxes, *btnTitle, *btnLabels, *btnNumbers;
 	QPushButton *btnNumbersFont, *btnFromColor, *btnToColor, *btnTable;
-	QPushButton *buttonAxisMinGreek, *buttonAxisMajGreek;
+	QPushButton *buttonAxisLowerGreek, *buttonAxisUpperGreek;
+    QPushButton* buttonAxisMathSymbols, *buttonAxisArrowSymbols;
     QTabWidget* generalDialog;
 	QWidget *scale, *colors, *general, *axes, *title, *bars, *points;
 	QLineEdit *boxTitle, *boxFrom, *boxTo, *boxLabel;
@@ -128,8 +130,10 @@ public slots:
 	void changeZoom(int);
 	void changeTransparency(int val);
 
-	void showMinGreek();
-	void showMajGreek();
+	void showLowerGreek();
+	void showUpperGreek();
+	void showMathSymbols();
+	void showArrowSymbols();
 	void addSymbol(const QString& letter);
 	void showGeneralTab();
 

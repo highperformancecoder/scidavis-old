@@ -19,10 +19,14 @@ symbolDialog::symbolDialog(CharSet charsSet, QWidget* parent, const char* name, 
 	GroupBox1->setLineWidth ( 0 );
 	GroupBox1->moveFocus (0);
 
-	if (!charsSet)
-		initMinGreekChars();
+	if (charsSet == symbolDialog::lowerGreek)
+		initLowerGreekChars();
+	else if (charsSet == symbolDialog::upperGreek)
+		initUpperGreekChars();
+	else if (charsSet == symbolDialog::mathSymbols)
+		initMathSymbols();
 	else
-		initMajGreekChars();
+		initArrowSymbols();
 
 	QHBoxLayout* hlayout = new QHBoxLayout(this, 0, 0, "hlayout2");
     hlayout->addWidget(GroupBox1);
@@ -36,36 +40,216 @@ symbolDialog::symbolDialog(CharSet charsSet, QWidget* parent, const char* name, 
                             this, SLOT(addCurrentChar()) );
 }
 
-void symbolDialog::initMinGreekChars()
+void symbolDialog::initLowerGreekChars()
 {
-for (int i=0;i<25;i++)
+	int i, counter = 0;
+	for ( i=0 ; i <= (0x3C9-0x3B1) ; i++,counter++ )
 	{
-	QPushButton *btn = new QPushButton(QChar(i+0x3B1), GroupBox1, 0);
-	btn->setMaximumWidth(30);
-	btn->setFlat ( true );
-	btn->setAutoDefault (false);
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x3B1)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x3D1-0x3D1) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x3D1)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x3D5-0x3D5) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x3D5)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x3F1-0x3F0) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x3F0)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+
+}
+
+void symbolDialog::initUpperGreekChars()
+{
+	int i, counter = 0;
+	for ( i=0 ; i <= (0x3A1-0x391) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x391)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x3A9-0x3A3) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x3A3)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
 	}
 }
 
-void symbolDialog::initMajGreekChars()
-{
-new QPushButton(QChar(0x393), GroupBox1, 0);
-new QPushButton(QChar(0x394), GroupBox1, 0);
-new QPushButton(QChar(0x398), GroupBox1, 0);
-new QPushButton(QChar(0x39B), GroupBox1, 0);
-new QPushButton(QChar(0x39E), GroupBox1, 0);
-new QPushButton(QChar(0x3A0), GroupBox1, 0);
-new QPushButton(QChar(0x3A3), GroupBox1, 0);
-new QPushButton(QChar(0x3A6), GroupBox1, 0);
-new QPushButton(QChar(0x3A8), GroupBox1, 0);
-new QPushButton(QChar(0x3A9), GroupBox1, 0);
 
-for (int i=0;i<GroupBox1->count();i++)
+void symbolDialog::initMathSymbols()
+{
+	int i, counter = 0;
+	for ( i=0 ; i <= (0x220D-0x2200) ; i++,counter++ )
 	{
-	QPushButton *btn = (QPushButton *) GroupBox1->find (i);
-	btn->setMaximumWidth(30);
-	btn->setFlat ( true );
-	btn->setAutoDefault (false);
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2200)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x2211-0x220F) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x220F)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x00B1-0x00B1) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x00B1)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x2213-0x2213) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2213)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x221E - 0x2217) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2217)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x2222-0x2222) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2222)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x2230-0x2227) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2227)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x223F-0x223F) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x223F)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x2245-0x2245) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2245)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x2248-0x2248) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2248)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x2255-0x2254) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2254)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x2259-0x2259) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2259)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x2267-0x225F) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x225F)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x226B-0x226A) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x226A)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x2289-0x2282) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2282)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	// h bar
+	for ( i=0 ; i <= (0x210F-0x210F) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x210F)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	// angstrom
+	for ( i=0 ; i <= (0x212B-0x212B) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x212B)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+}
+
+void symbolDialog::initArrowSymbols()
+{
+	int i, counter = 0;
+	for ( i=0 ; i <= (0x219B-0x2190) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2190)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x21A7-0x21A4) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x21A4)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x21D5-0x21CD) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x21CD)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+	}
+	for ( i=0 ; i <= (0x21E9-0x21E6) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x21E6)), GroupBox1, 0);
+		btn->setMaximumWidth(30);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
 	}
 }
 
