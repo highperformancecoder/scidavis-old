@@ -35,9 +35,6 @@ SymbolDialog::SymbolDialog(CharSet charSet, QWidget* parent, Qt::WFlags fl )
 	setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
 	setSizeGripEnabled( false );
 
-	QFont f("Arial", 14); // it is hard to recognize the symbols in 12 pt
-	setFont(f);
-	
 	buttons = new QButtonGroup(this);
 	mainLayout = new QVBoxLayout(this);
 	gridLayout = new QGridLayout();
@@ -53,7 +50,7 @@ SymbolDialog::SymbolDialog(CharSet charSet, QWidget* parent, Qt::WFlags fl )
 	else
 		initNumberSymbols();
 
-	closeButton = new QPushButton(tr("close window"), this);
+	closeButton = new QPushButton(tr("&Close"), this);
 	
 	mainLayout->addLayout( gridLayout );
 	mainLayout->addWidget( closeButton );
@@ -70,30 +67,68 @@ SymbolDialog::SymbolDialog(CharSet charSet, QWidget* parent, Qt::WFlags fl )
 
 void SymbolDialog::initLowerGreekChars()
 {
-	for (int i=0;i<25;i++)
+	int i, counter = 0;
+	for ( i=0 ; i <= (0x3C9-0x3B1) ; i++,counter++ )
 	{
 		QPushButton *btn = new QPushButton(QString(QChar(i+0x3B1)));
 		btn->setMaximumWidth(40);
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
-		buttons->addButton(btn,i+1);
-		gridLayout->addWidget(btn,i/5,i%5);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/5,counter%5);
 	}
-	numButtons = 25;
+	for ( i=0 ; i <= (0x3D1-0x3D1) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x3D1)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/5,counter%5);
+	}
+	for ( i=0 ; i <= (0x3D5-0x3D5) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x3D5)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/5,counter%5);
+	}
+	for ( i=0 ; i <= (0x3F1-0x3F0) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x3F0)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/5,counter%5);
+	}
+	numButtons = counter;
 }
 
 void SymbolDialog::initUpperGreekChars()
 {
-	for (int i=0;i<25;i++)
+	int i, counter = 0;
+	for ( i=0 ; i <= (0x3A1-0x391) ; i++,counter++ )
 	{
 		QPushButton *btn = new QPushButton(QString(QChar(i+0x391)));
 		btn->setMaximumWidth(40);
 		btn->setFlat ( true );
 		btn->setAutoDefault (false);
-		buttons->addButton(btn,i+1);
-		gridLayout->addWidget(btn,i/5,i%5);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/5,counter%5);
 	}
-	numButtons = 25;
+	for ( i=0 ; i <= (0x3A9-0x3A3) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x3A3)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/5,counter%5);
+	}
+	numButtons = counter;
 }
 
 void SymbolDialog::initNumberSymbols()

@@ -83,9 +83,9 @@ public slots:
 	//! Let the user select another font
 	void customFont();
 	//! Return the current font
-	QFont font(){ return selectedFont; };
+	QFont font();
 	//! Set the current font to 'fnt'
-	void setFont(const QFont& fnt){ selectedFont = fnt; };
+	void setFont(const QFont& fnt);
 
 	//! Let the user pick the text color
 	void pickTextColor();

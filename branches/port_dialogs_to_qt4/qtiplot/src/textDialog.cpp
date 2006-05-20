@@ -66,6 +66,10 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 
 	textType = type;
 
+	// initialize selectedFont with something useful to
+	// prevent error if setFont is not called before show()
+	selectedFont = this->font();
+	
 	// top groupbox
 	groupBox1 = new QGroupBox(QString());
 
@@ -90,6 +94,7 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 
 	buttonFont = new QPushButton(tr( "&Font" ));
 	buttonFont->setAutoDefault( true );
+
 	// add font button
 	layoutTop->addWidget(buttonFont, 1, 1);
 
@@ -278,6 +283,7 @@ void TextDialog::showLowerGreek()
 {
 	SymbolDialog *greekLetters = new SymbolDialog(SymbolDialog::lowerGreek, this, Qt::Tool);
 	greekLetters->setAttribute(Qt::WA_DeleteOnClose);
+	greekLetters->setFont(selectedFont);
 	connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 	greekLetters->show();
 	greekLetters->setFocus();
@@ -287,6 +293,7 @@ void TextDialog::showUpperGreek()
 {
 	SymbolDialog *greekLetters = new SymbolDialog(SymbolDialog::upperGreek, this, Qt::Tool);
 	greekLetters->setAttribute(Qt::WA_DeleteOnClose);
+	greekLetters->setFont(selectedFont);
 	connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 	greekLetters->show();
 	greekLetters->setFocus();
@@ -296,6 +303,7 @@ void TextDialog::showMathSymbols()
 {
 	SymbolDialog *mathSymbols = new SymbolDialog(SymbolDialog::mathSymbols, this, Qt::Tool);
 	mathSymbols->setAttribute(Qt::WA_DeleteOnClose);
+	mathSymbols->setFont(selectedFont);
 	connect(mathSymbols, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 	mathSymbols->show();
 	mathSymbols->setFocus();
@@ -305,6 +313,7 @@ void TextDialog::showArrowSymbols()
 {
 	SymbolDialog *arrowSymbols = new SymbolDialog(SymbolDialog::arrowSymbols, this, Qt::Tool);
 	arrowSymbols->setAttribute(Qt::WA_DeleteOnClose);
+	arrowSymbols->setFont(selectedFont);
 	connect(arrowSymbols, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 	arrowSymbols->show();
 	arrowSymbols->setFocus();
@@ -503,6 +512,17 @@ QString TextDialog::getText()
 	return lineEdit->toPlainText();
 }
 
+QFont TextDialog::font()
+{
+	return selectedFont;
+}
+
+void TextDialog::setFont(const QFont & fnt)
+{
+	selectedFont = fnt;
+	buttonFont->setFont(fnt);
+}
+	
 TextDialog::~TextDialog()
 {
 }
