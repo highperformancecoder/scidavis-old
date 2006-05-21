@@ -29,9 +29,12 @@
  ***************************************************************************/
 
 #include <QApplication>
+#include <QDialog>
+#include <QGridLayout>
 #include <textDialog.h>
 #include <plotWizard.h>
 #include <importDialog.h>
+#include <colorBox.h>
 
 #include <QStringList>
 #include <QString>
@@ -40,19 +43,19 @@
 int main( int argc, char ** argv )
 {
 	QApplication app( argc, argv );	
-
+/*
 	TextDialog dlg(TextDialog::TextMarker);
 	dlg.setText("this text should not be visible");	
 	dlg.setText("enter text here\n(multiline supported)");	
 	dlg.exec();
-
+*/
 /*
 	TextDialog dlg2(TextDialog::AxisTitle);
 	dlg2.setText("enter text here\n(multiline supported)");	
 	dlg2.exec();
-	PlotWizard dlg3;
 */
 /*
+	PlotWizard dlg3;
 	QStringList tables;
 	tables.append("table 1");
 	tables.append("table 2");
@@ -70,7 +73,15 @@ int main( int argc, char ** argv )
 	ImportDialog dlg4;
 	dlg4.exec();
 */	
-	//return app.exec();
+
+	QDialog dlg5;
+	QGridLayout * l = new QGridLayout(&dlg5);
+	ColorBox * b = new ColorBox(&dlg5);
+	l->addWidget(b);
+	dlg5.exec();
+
+
+
 	return 0;
 }
 

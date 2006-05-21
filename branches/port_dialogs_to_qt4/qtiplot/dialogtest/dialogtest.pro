@@ -13,13 +13,15 @@ SOURCES +=  main.cpp \
 			../src/colorButton.cpp \
 			../src/symbolDialog.cpp \
 			../src/plotWizard.cpp \
-			../src/importDialog.cpp
+			../src/importDialog.cpp \
+			../src/colorBox.cpp
 	
 HEADERS +=  ../src/textDialog.h \
 			../src/colorButton.h \
 			../src/symbolDialog.h \
 			../src/plotWizard.h \
-			../src/importDialog.h
+			../src/importDialog.h \
+			../src/colorBox.h
 
 QT +=  opengl
 CONFIG      += qt warn_on debug thread opengl
