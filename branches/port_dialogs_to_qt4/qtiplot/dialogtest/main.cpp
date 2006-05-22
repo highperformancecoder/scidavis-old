@@ -35,6 +35,8 @@
 #include <plotWizard.h>
 #include <importDialog.h>
 #include <colorBox.h>
+#include <errDlg.h>
+#include <fileDialogs.h>
 
 #include <QStringList>
 #include <QString>
@@ -73,14 +75,32 @@ int main( int argc, char ** argv )
 	ImportDialog dlg4;
 	dlg4.exec();
 */	
-
+/*
 	QDialog dlg5;
 	QGridLayout * l = new QGridLayout(&dlg5);
 	ColorBox * b = new ColorBox(&dlg5);
 	l->addWidget(b);
 	dlg5.exec();
+*/
+	
+	QStringList yCols;
+	yCols.append("table 1_col2");
+	yCols.append("table 2_colB");
+	QStringList errCols;
+	errCols.append("table 1_col1");
+	errCols.append("table 1_col2");
+	errCols.append("table 2_colA");
+	errCols.append("table 2_colB");
+	ErrDialog dlg6;
+	dlg6.setCurveNames(yCols);
+	dlg6.setExistingColumns(errCols);
+	dlg6.exec();
 
+	ImportFilesDialog dlg7( true );
+	dlg7.exec();
 
+	ImageExportDialog dlg8;
+	dlg8.exec();
 
 	return 0;
 }

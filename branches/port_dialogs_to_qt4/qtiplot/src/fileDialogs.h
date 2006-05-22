@@ -1,81 +1,147 @@
+/***************************************************************************
+    File                 : fileDialogs.h
+    Project              : QtiPlot
+    --------------------------------------------------------------------
+    Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
+    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Description          : 2 File dialogs: Import multiple ASCII/Export image
+                           
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *  This program is free software; you can redistribute it and/or modify   *
+ *  it under the terms of the GNU General Public License as published by   *
+ *  the Free Software Foundation; either version 2 of the License, or      *
+ *  (at your option) any later version.                                    *
+ *                                                                         *
+ *  This program is distributed in the hope that it will be useful,        *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of         *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          *
+ *  GNU General Public License for more details.                           *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the Free Software           *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor,                    *
+ *   Boston, MA  02110-1301  USA                                           *
+ *                                                                         *
+ ***************************************************************************/
 #ifndef MYFILESDIALOGS_H
 #define MYFILESDIALOGS_H
 
-#include <q3filedialog.h>
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qspinbox.h>
-#include <qcheckbox.h>
-#include <qimage.h>
+#include <QFileDialog>
+#include <QLabel>
+#include <QComboBox>
+#include <QSpinBox>
+#include <QCheckBox>
+#include <QImage>
 #include <QPicture>
+#include <QHBoxLayout>
 
-class ImportFilesDialog: public Q3FileDialog
+//! Import multiple ASCII files dialog
+class ImportFilesDialog: public QFileDialog
 {
+private:
+	QComboBox * importType;
+
 public:
-	QComboBox* importType;
+	//! Constructor
+	/**
+	 * \param importTypeEnabled flag: enable/disable import type combo box
+	 * \param parent parent widget
+	 * \param fl window flags
+	 */
+	ImportFilesDialog(bool importTypeEnabled, QWidget * parent = 0, Qt::WFlags flags = 0 ) 
+	  : QFileDialog( parent, flags )
+	{
+		setWindowTitle(tr("QtiPlot - Import Multiple ASCII Files"));
 
-	ImportFilesDialog(bool importTypeEnabled, QWidget*, const char* )
-		{
-		setCaption(tr("QtiPlot - Import Multiple ASCII Files"));
+		QStringList filters;
+		filters << "All files (*)" << "Text (*.TXT *.txt)" << "Data (*.DAT *.dat)";
+		setFilters( filters );
 
-		QString filter="All files *;;Text (*.TXT *.txt);;Data (*DAT *.dat);;";
-		setFilters( filter );
-
-		setMode( Q3FileDialog::ExistingFiles );
+		setFileMode( QFileDialog::ExistingFiles );
 
 		if (importTypeEnabled)
-			{
-			QLabel* label = new QLabel( "Import each file as: ", this );
-        
-			importType = new QComboBox( this );
-			importType->insertItem(tr("New Table"));
-			importType->insertItem(tr("New Columns"));
-			importType->insertItem(tr("New Rows"));
+		{
+			QLabel* label = new QLabel( "Import each file as: " );
 
-			addWidgets( label, importType, 0 );
-			}
-		};
+			importType = new QComboBox();
+			importType->addItem(tr("New Table"));
+			importType->addItem(tr("New Columns"));
+			importType->addItem(tr("New Rows"));
 
-	int importFileAs(){return importType->currentItem();};
+			// FIXME: The following code may not work anymore
+			// if the internal layout of QFileDialog changes
+			layout()->addWidget( label );
+			layout()->addWidget( importType );
+		}
+	};
 
-//	~ImportFilesDialog(){};
+	//! Return the selected import option
+	/**
+	 * Do not call this when the dialog was
+	 * created with importTypeEnabled == false
+	 */
+	int importFileAs()
+	{
+		return importType->currentIndex();
+	};
+
 };
 
-class ImageExportDialog: public Q3FileDialog
+
+//! Export as image dialog
+class ImageExportDialog: public QFileDialog
 {
+private:
+	QCheckBox * boxOptions;
+
 public:
-	QCheckBox* boxOptions;
+	//! Constructor
+	/**
+	 * \param parent parent widget
+	 * \param fl window flags
+	 */
+	ImageExportDialog( QWidget * parent = 0, Qt::WFlags flags = 0 )
+	  : QFileDialog( parent, flags )
+	{
+		setWindowTitle( tr( "QtiPlot - Choose a filename to save under" ) );
 
-	ImageExportDialog(QWidget*, const char* )
-		{
-		setCaption( tr( "QtiPlot - Choose a filename to save under" ) );
+		QStringList list = QPicture::outputFormatList ();
 
-		QStringList list=QPicture::outputFormatList ();
 		list<<"EPS";
-		//list<<"WMF";
 		list.sort();
-		
-		QString filter, selectedFilter,aux;			
-		for (int i=0;i<(int)list.count();i++)
-			{
-			aux="*."+(list[i]).lower()+";;";
-			filter+=aux;
-			}
-		setFilters( filter );
-		setMode( Q3FileDialog::AnyFile );
-	
-		boxOptions = new QCheckBox(this, "boxOptions" );
+
+		QStringList filters, selectedFilter;			
+		for(int i=0 ; i<list.count() ; i++)
+		{
+			filters << "*."+list[i].toLower();
+		}
+		setFilters( filters );
+		setFileMode( QFileDialog::AnyFile );
+
+		boxOptions = new QCheckBox();
 		boxOptions->setText( "Show export &options" );
-		#ifdef Q_OS_WIN // Windows systems
-			boxOptions->setChecked( true );			
-		#else
-			boxOptions->setChecked( false );
-		#endif
+#ifdef Q_OS_WIN // Windows systems
+		boxOptions->setChecked( true );			
+#else
+		boxOptions->setChecked( false );
+#endif
+		// FIXME: The following code may not work anymore
+		// if the internal layout of QFileDialog changes
+		QSpacerItem * si1 = new QSpacerItem( 20, 20 );
+		QSpacerItem * si2 = new QSpacerItem( 20, 20 );
+		layout()->addItem( si1 );
+		layout()->addItem( si2 );
+		layout()->addWidget( boxOptions );
+	};
 
-		addWidgets( 0, boxOptions, 0 );
-		};
-
-	bool showExportOptions(){return boxOptions->isChecked();};
+	//! Return whether the export options check box is checked
+	bool showExportOptions()
+	{
+		return boxOptions->isChecked();
+	};
 };
 
 #endif
