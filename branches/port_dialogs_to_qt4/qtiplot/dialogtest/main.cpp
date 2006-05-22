@@ -37,6 +37,7 @@
 #include <colorBox.h>
 #include <errDlg.h>
 #include <fileDialogs.h>
+#include <exportDialog.h>
 
 #include <QStringList>
 #include <QString>
@@ -82,7 +83,7 @@ int main( int argc, char ** argv )
 	l->addWidget(b);
 	dlg5.exec();
 */
-	
+/*	
 	QStringList yCols;
 	yCols.append("table 1_col2");
 	yCols.append("table 2_colB");
@@ -95,12 +96,24 @@ int main( int argc, char ** argv )
 	dlg6.setCurveNames(yCols);
 	dlg6.setExistingColumns(errCols);
 	dlg6.exec();
-
+*/
+/*
 	ImportFilesDialog dlg7( true );
 	dlg7.exec();
-
+*/
+/*
 	ImageExportDialog dlg8;
 	dlg8.exec();
+*/
+	QStringList tables2;
+	tables2.append("table 1");
+	tables2.append("table 2");
+	ExportDialog dlg9;
+	dlg9.setTableNames(tables2);
+	dlg9.setActiveTableName("table 2");
+	dlg9.setColumnSeparator(",");
+	dlg9.exec();
+
 
 	return 0;
 }

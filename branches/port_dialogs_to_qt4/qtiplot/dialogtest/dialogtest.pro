@@ -15,7 +15,8 @@ SOURCES +=  main.cpp \
 			../src/plotWizard.cpp \
 			../src/importDialog.cpp \
 			../src/colorBox.cpp \
-			../src/errDlg.cpp
+			../src/errDlg.cpp \
+			../src/exportDialog.cpp
 	
 HEADERS +=  ../src/textDialog.h \
 			../src/colorButton.h \
@@ -24,7 +25,8 @@ HEADERS +=  ../src/textDialog.h \
 			../src/importDialog.h \
 			../src/colorBox.h \
 			../src/errDlg.h \
-			../src/fileDialogs.h
+			../src/fileDialogs.h \
+			../src/exportDialog.h
 
 QT +=  opengl
 CONFIG      += qt warn_on debug thread opengl
