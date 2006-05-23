@@ -34,6 +34,7 @@ class fDialog;
 class Folder;
 class FolderListItem;
 class FolderListView;
+class ScriptingEnv;
 
 //! QtiPlot's main window
 class ApplicationWindow: public QMainWindow
@@ -47,8 +48,8 @@ public:
 	enum ShowWindowsPolicy{HideAll, ActiveFolder, SubFolders};
 
 	QTranslator *appTranslator, *qtTranslator;
-	QDockWindow *logWindow, *explorerWindow;
-	QTextEdit *results;
+	QDockWindow *logWindow, *explorerWindow, *consoleWindow;
+	QTextEdit *results, *console;
 	QWorkspace* ws;
     QToolBar *fileTools, *plotTools, *tableTools, *plot3DTools, *displayBar, *editTools;
     QPopupMenu *windowsMenu,*view,*graph,*file,*format,*calcul,*edit,*dataMenu,*recent, *exportPlot;
@@ -683,6 +684,12 @@ public slots:
 	 */
 	void moveFolder(FolderListItem *src, FolderListItem *dest);
 
+	// scripting
+	//! Slot: notify the user that an error occured in the scripting system
+	void scriptError(const QString &message, const QString &scriptName, int lineNumber);
+	//! Slot: execute all notes marked auto-exec
+	void executeNotes();
+
 signals:
 	void windowClosed(const QString&);
 	void modified();
@@ -746,7 +753,7 @@ public:
     QAction *actionLoad, *actionLoadMultiple, *actionUndo, *actionRedo;
     QAction *actionCopyWindow;
     QAction *actionCutSelection, *actionCopySelection, *actionPasteSelection, *actionClearSelection;
-    QAction *actionShowExplorer, *actionShowLog, *actionAddLayer, *actionShowLayerDialog;
+    QAction *actionShowExplorer, *actionShowLog, *actionShowConsole, *actionAddLayer, *actionShowLayerDialog;
 
     QAction *actionExportGraph, *actionExportAllGraphs, *actionPrint, *actionPrintAllPlots, *actionShowExportASCIIDialog;
     QAction *actionShowImportDialog;
@@ -787,6 +794,8 @@ public:
 private:
 	//!Stores the pointers to the dragged items from the FolderListViews objects
 	QPtrList<QListViewItem> draggedItems;
+	//!Scripting environment currently in use
+	ScriptingEnv *scriptEnv;
 };
 
 #endif

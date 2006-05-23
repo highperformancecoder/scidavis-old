@@ -205,7 +205,6 @@ else if (colType == Table::Time)
 void tableDialog::setWorksheet(Table * table)
 {
 w=table;
-w->storeCellsToMemory();
 updateColumn(w->selectedColumn());
 }
 
@@ -269,7 +268,6 @@ switch(colType)
 
 void tableDialog::closeEvent( QCloseEvent* ce )
 {
-w->freeMemory();
 ce->accept();
 }
 

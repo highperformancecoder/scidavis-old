@@ -1,6 +1,6 @@
 TARGET  = qtiplot
 TEMPLATE     = app
-CONFIG      += qt warn_on release thread opengl
+CONFIG      += qt warn_on debug opengl
 MOC_DIR      = ../tmp/qtiplot
 OBJECTS_DIR  = ../tmp/qtiplot
 DESTDIR           = ./
@@ -105,7 +105,10 @@ HEADERS  = src/application.h \
 	 src/fftDialog.h\
 	 src/note.h\
 	 src/folder.h\
-	 src/findDialog.h
+	 src/findDialog.h\
+	 src/Scripting.h\
+	 src/scriptedit.h\
+	 src/muParserScripting.h
      
 SOURCES  = src/application.cpp \
      src/graph.cpp \
@@ -177,7 +180,9 @@ SOURCES  = src/application.cpp \
 	 src/fftDialog.cpp\
 	 src/note.cpp\
 	 src/folder.cpp\
-	 src/findDialog.cpp
+	 src/findDialog.cpp\
+	 src/scriptedit.cpp\
+	 src/muParserScripting.cpp
 
 #parser (muParser_v1.26)
 HEADERS+=../3rdparty/muParser/muParser.h \

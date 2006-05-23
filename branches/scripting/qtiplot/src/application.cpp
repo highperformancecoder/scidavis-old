@@ -47,6 +47,8 @@
 #include "note.h"
 #include "folder.h"
 #include "findDialog.h"
+#include "Scripting.h"
+#include "muParserScripting.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -141,6 +143,8 @@ initGlobalConstants();
 QPixmapCache::setCacheLimit(20*QPixmapCache::cacheLimit ());
 
 tablesDepend = new QPopupMenu(this, 0);
+// TODO: select scripting language based on user choice / project file
+scriptEnv = new muParserScripting(this);
 
 createActions();
 initToolBars();
@@ -208,6 +212,15 @@ results->setReadOnly (TRUE);
 logWindow->setWidget(results);
 logWindow->hide();
 
+consoleWindow = new QDockWindow(this, 0, 0);
+consoleWindow->setResizeEnabled(true);
+consoleWindow->setCloseMode(QDockWindow::Always);
+addDockWindow(consoleWindow, Qt::DockTop, true);
+console=new QTextEdit(consoleWindow,"console");
+console->setReadOnly(true);
+consoleWindow->setWidget(console);
+consoleWindow->hide();
+
 ws = new QWorkspace( this );
 ws->setScrollBarsEnabled (TRUE);
 setCentralWidget( ws );
@@ -229,6 +242,8 @@ accel->connectItem( accel->insertItem( Key_Delete ), this, SLOT(clearSelection()
 connect(actionShowLog, SIGNAL(toggled(bool)), this, SLOT(showResults(bool)));
 connect(logWindow,SIGNAL(visibilityChanged(bool)),actionShowLog,SLOT(setOn(bool)));
 connect(explorerWindow,SIGNAL(visibilityChanged(bool)),actionShowExplorer,SLOT(setOn(bool)));
+connect(actionShowConsole, SIGNAL(toggled(bool)), consoleWindow, SLOT(setShown(bool)));
+connect(consoleWindow, SIGNAL(visibilityChanged(bool)), actionShowConsole, SLOT(setOn(bool)));
 connect(tablesDepend, SIGNAL(activated(int)), this, SLOT(showTable(int)));
 
 connect(this, SIGNAL(modified()),this, SLOT(modifiedProject()));
@@ -251,6 +266,7 @@ connect(lv, SIGNAL(addFolderItem()), this, SLOT(addFolder()));
 connect(lv, SIGNAL(deleteSelection()), this, SLOT(deleteSelectedItems()));
 connect(lv, SIGNAL(itemRenamed(QListViewItem *, int, const QString &)), 
 		this, SLOT(renameWindow(QListViewItem *, int, const QString &)));
+connect(scriptEnv,SIGNAL(error(const QString&,const QString&,int)),this,SLOT(scriptError(const QString&,const QString&,int)));
 
 connect(recent, SIGNAL(activated(int)),this, SLOT(openRecentProject(int)));
 }
@@ -501,6 +517,7 @@ lv->setColumnText (5, tr("Label"));
 
 explorerWindow->setCaption(tr("Project Explorer"));
 logWindow->setCaption(tr("Results Log"));
+consoleWindow->setCaption(tr("Scripting Console"));
 displayBar->setLabel(tr("Data Display"));
 tableTools->setLabel(tr("Table"));
 plotTools->setLabel(tr("Plot"));
@@ -619,6 +636,7 @@ void ApplicationWindow::initMainMenu()
 	actionShowPlotWizard->addTo(view);
 	actionShowExplorer->addTo(view);
 	actionShowLog->addTo(view);
+	actionShowConsole->addTo(view);
 	actionShowConfigureDialog->addTo(view);
 
 	graph = new QPopupMenu(this);
@@ -2488,7 +2506,7 @@ Table* ApplicationWindow::newTable(const QString& fname, const QString &sep,
 								   int lines, bool renameCols, bool stripSpaces, 
 								   bool simplifySpaces)
 {
-Table* w = new Table(fname, sep, lines, renameCols, stripSpaces, 
+Table* w = new Table(scriptEnv, fname, sep, lines, renameCols, stripSpaces, 
 					 simplifySpaces, fname, ws, 0, WDestructiveClose);	
 initTable(w, "table"+QString::number(++tables));
 w->show();
@@ -2500,7 +2518,7 @@ return w;
 */
 Table* ApplicationWindow::newTable()
 {
-Table* w = new Table(30, 2, "", ws, 0, WDestructiveClose);
+Table* w = new Table(scriptEnv, 30, 2, "", ws, 0, WDestructiveClose);
 initTable(w, "table"+QString::number(++tables));
 w->showNormal();	
 return w;
@@ -2511,7 +2529,7 @@ return w;
 */
 Table* ApplicationWindow::newTable(const QString& caption, int r, int c)
 {
-Table* w = new Table(r, c, "", ws,0,WDestructiveClose);
+Table* w = new Table(scriptEnv, r, c, "", ws,0,WDestructiveClose);
 initTable(w, caption);
 if (w->name() != caption)//the table was renamed
 	{
@@ -2529,7 +2547,7 @@ return w;
 Table* ApplicationWindow::newTable(const QString& caption, int r, int c, const QString& text)
 {
 QStringList lst = QStringList::split("\t", caption, false);
-Table* w = new Table(r, c, lst[1], ws, 0, WDestructiveClose);
+Table* w = new Table(scriptEnv, r, c, lst[1], ws, 0, WDestructiveClose);
 	
 QStringList rows=QStringList::split ("\n",text,FALSE);
 QString rlist=rows[0];
@@ -2556,7 +2574,7 @@ return w;
 Table* ApplicationWindow::newHiddenTable(const QString& caption, int r, int c, const QString& text)
 {
 QStringList lst = QStringList::split("\t", caption, false);
-Table* w = new Table(r, c, lst[1], 0, 0, WDestructiveClose);
+Table* w = new Table(scriptEnv, r, c, lst[1], 0, 0, WDestructiveClose);
 	
 QStringList rows=QStringList::split ("\n",text,FALSE);
 QString rlist=rows[0];
@@ -2611,7 +2629,7 @@ w->showMaximized();
 */
 Note* ApplicationWindow::newNote(const QString& caption)
 {
-Note* m = new Note("", ws, 0, WDestructiveClose);
+Note* m = new Note(scriptEnv, "", ws, 0, WDestructiveClose);
 if (caption.isEmpty())
 	initNote(m,"Note" + QString::number(++notes));
 else
@@ -2623,11 +2641,14 @@ return m;
 void ApplicationWindow::initNote(Note* m, const QString& caption)
 {
 QString name=caption;
-while(alreadyUsedName(name))
+QStringList noteNames;
+QPtrList<myWidget> lst = projectFolder()->windowsList();
+for (myWidget *i=lst.first(); i; i=lst.next())
+  if (i->isA("Note"))
+    noteNames << i->name();
+while(name.isEmpty() || noteNames.contains(name))
 	name = "Note"+QString::number(++notes);
 
-noteWindows<<name;
-	
 m->setCaption(name);
 m->setName(name);
 m->setIcon( QPixmap(note_xpm) );
@@ -2726,7 +2747,7 @@ QApplication::setOverrideCursor(waitCursor);
 int rows = m->numRows();
 int cols = m->numCols();
 
-Table* w = new Table(rows, cols, "", ws, 0, WDestructiveClose);
+Table* w = new Table(scriptEnv, rows, cols, "", ws, 0, WDestructiveClose);
 for (int i = 0; i<rows; i++)
 	{
 	for (int j = 0; j<cols; j++)
@@ -3580,13 +3601,14 @@ while ( !t.eof() && !progress.wasCanceled())
 			list << s;
 			}
 		Note* m = openNote(app,list);
-		QString text = QString::null;
+		QStringList cont;
 		while ( s != "</note>" )
 			{
 			s=t.readLine();
-			text += s+"\n";
+			cont << s;
 			}
-		m->setText(text.remove("</note>\n"));
+		cont.pop_back();
+		m->restore(cont);
 		progress.setProgress(aux);
 		}
 	else if  (s == "</folder>")
@@ -3756,7 +3778,28 @@ app->folders->blockSignals (false);
 app->changeFolder(cf);
 app->blockSignals (false);
 app->renamedTables.clear();
+
+app->executeNotes();
 return app;
+}
+
+void ApplicationWindow::executeNotes()
+{
+QPtrList<myWidget> lst = projectFolder()->windowsList();
+for (myWidget *i=lst.first(); i; i=lst.next())
+  if (i->isA("Note") && ((Note*)i)->autoexec())
+    ((Note*)i)->execute();
+}
+
+void ApplicationWindow::scriptError(const QString &message, const QString &scriptName, int lineNumber)
+{
+  QString st = scriptEnv->stackTraceString();
+  QString errmsg = message;
+  if (st.isNull())
+    errmsg += "\nat " + scriptName + ":" + QString::number(lineNumber);
+  else
+    errmsg += "\n" + st;
+  QMessageBox::critical(this, "QtiPlot - Script Error", errmsg);
 }
 
 void ApplicationWindow::openTemplate()
@@ -4211,6 +4254,33 @@ if (ok)
 	showResults(visible);
 	actionShowLog->setOn(visible);
 	}
+
+settings.beginGroup("/ConsoleWindow");
+int cdock = settings.readNumEntry("/dock", (int)Qt::DockBottom, &ok);
+index = settings.readNumEntry("/index", 0, &ok);
+newLine = settings.readBoolEntry("/newLine", true, &ok);
+offset = settings.readNumEntry("/offset", 0, &ok);
+x = settings.readNumEntry("/x", 0, &ok);
+y = settings.readNumEntry("/y", 0, &ok);
+int cwidth = settings.readNumEntry("/width", 0, &ok);
+int cheight = settings.readNumEntry("/height", 0, &ok);
+visible = settings.readBoolEntry("/visible", false, &ok);
+settings.endGroup();
+
+if (ok)
+	{
+	if (cdock == Qt::DockTornOff)
+		{
+		moveDockWindow(consoleWindow, (Qt::Dock)cdock);
+		consoleWindow->setGeometry(QRect(x, y, cwidth, cheight));
+		}
+	else
+		{
+		moveDockWindow(consoleWindow, (Qt::Dock)cdock, newLine, index, offset);
+		consoleWindow->setFixedExtentWidth(cwidth);
+		consoleWindow->setFixedExtentHeight(cheight);
+		}
+	}
 }
 
 void ApplicationWindow::saveSettings()
@@ -4362,6 +4432,19 @@ settings.writeEntry("/y", logWindow->y());
 settings.writeEntry("/width", logWindow->width());
 settings.writeEntry("/height", logWindow->height());
 settings.writeEntry("/visible", logWindow->isVisible());
+settings.endGroup();
+
+settings.beginGroup("/ConsoleWindow");
+getLocation(consoleWindow, dock, index, nl, offset);
+settings.writeEntry("/dock", (int)dock);
+settings.writeEntry("/index", index);
+settings.writeEntry("/newLine", nl);
+settings.writeEntry("/offset", offset);
+settings.writeEntry("/x", consoleWindow->x());
+settings.writeEntry("/y", consoleWindow->y());
+settings.writeEntry("/width", consoleWindow->width());
+settings.writeEntry("/height", consoleWindow->height());
+settings.writeEntry("/visible", consoleWindow->isVisible());
 settings.endGroup();
 }
 
@@ -4941,11 +5024,6 @@ else if (w->isA("Table"))
 	}
 else if (w->isA("Matrix"))
 	changeMatrixName(name, text);
-else if (w->isA("Note"))
-	{
-	int id=noteWindows.findIndex(name);
-	noteWindows[id]=text;
-	}
 
 w->setName(text);
 w->setCaptionPolicy(w->captionPolicy());
@@ -5328,7 +5406,7 @@ if ( w && tableWindows.contains(w->name()))
 	{
 	if (int(w->selectedColumns().count())>0)
 		{
-		setColValuesDialog* vd= new setColValuesDialog(this,"valuesDialog",TRUE,WDestructiveClose);
+		setColValuesDialog* vd= new setColValuesDialog(scriptEnv, this,"valuesDialog",TRUE,WDestructiveClose);
 		vd->setTable(w);
 		vd->showNormal();
 		vd->setActiveWindow();
@@ -5500,6 +5578,7 @@ if ( w && tableWindows.contains(w->name()))
 		Legend.insertItem(tr("Set as"),&colType);
 		Legend.insertSeparator();
 
+		Legend.insertItem(tr("Recalculate"), w, SLOT(calculate()));
 		Legend.insertItem(tr("Set column &values..."),w,SIGNAL(colValuesDialog()));
 		actionSetAscValues->addTo(&fill);
 		actionSetRandomValues->addTo(&fill);
@@ -7753,8 +7832,6 @@ else if (w->isA("Matrix"))
 	remove3DMatrixPlots((Matrix*)w);
 	matrixWindows.remove(caption);
 	}
-else if (w->isA("Note"))
-	noteWindows.remove(caption);
 
 if (hiddenWindows->containsRef(w))
 	hiddenWindows->take(hiddenWindows->find(w));
@@ -10644,6 +10721,10 @@ void ApplicationWindow::createActions()
   actionShowLog->setToggleAction(TRUE);
   actionShowLog->setOn(FALSE);
   
+  actionShowConsole = new QAction(0, tr("Scripting &Console"), QString::null, this);
+  actionShowConsole->setToggleAction(true);
+  actionShowConsole->setOn(false);
+  
   actionAddLayer = new QAction(QPixmap(newLayer_xpm), tr("Add La&yer"), tr("ALT+L"), this);
   connect(actionAddLayer, SIGNAL(activated()), this, SLOT(addLayer()));
 
@@ -11142,6 +11223,9 @@ void ApplicationWindow::translateActionsStrings()
 
   actionShowLog->setMenuText(tr("Results &Log"));
   actionShowLog->setToolTip(tr("Show calculus results"));
+
+  actionShowConsole->setMenuText(tr("&Console"));
+  actionShowConsole->setToolTip(tr("Show Scripting console"));
   
   actionAddLayer->setMenuText(tr("Add La&yer"));
   actionAddLayer->setAccel(tr("ALT+L"));
@@ -12018,8 +12102,7 @@ insertTranslatedStrings();
 bool ApplicationWindow::alreadyUsedName(const QString& label)
 {
 if (plotWindows.contains(label) || plot3DWindows.contains(label) ||
-	tableWindows.contains(label) || matrixWindows.contains(label) || 
-	noteWindows.contains(label))
+	tableWindows.contains(label) || matrixWindows.contains(label))
 	return true;
 
 return false;
@@ -12176,13 +12259,14 @@ while ( !t.eof())
 			lst << s;
 			}
 		Note* m = openNote(this, lst);
-		QString text = QString::null;
+		QStringList cont;
 		while ( s != "</note>" )
 			{
 			s=t.readLine();
-			text += s+"\n";
+			cont << s;
 			}
-		m->setText(text.remove("</note>\n"));
+		cont.pop_back();
+		m->restore(cont);
 		}
 	else if  (s == "</folder>")
 		{

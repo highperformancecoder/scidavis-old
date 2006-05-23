@@ -1,4 +1,6 @@
 #include "note.h"
+#include "Scripting.h"
+#include "scriptedit.h"
 
 #include <qdatetime.h>
 #include <qlayout.h>
@@ -10,18 +12,19 @@
 
 #include <math.h>
 
-Note::Note(const QString& label, QWidget* parent, const char* name, WFlags f)
+Note::Note(ScriptingEnv *env, const QString& label, QWidget* parent, const char* name, WFlags f)
 				: myWidget(label, parent, name, f)
 {
-init();	
+init(env);	
 }
 
-void Note::init()
+void Note::init(ScriptingEnv *env)
 {
+autoExec = false;
 QDateTime dt = QDateTime::currentDateTime ();
 setBirthDate(dt.toString(Qt::LocalDate));
 
-te = new QTextEdit(this);
+te = new ScriptEdit(env, this, name());
 QVBoxLayout* hlayout = new QVBoxLayout(this,0,0, "hlayout1");
 hlayout->addWidget(te);
 
@@ -40,45 +43,40 @@ QString s= "<note>\n";
 s+= QString(name()) + "\t" + birthDate() + "\n";
 s+= info;
 s+= "WindowLabel\t" + windowLabel() + "\t" + QString::number(captionPolicy()) + "\n";
-s+= te->text().stripWhiteSpace()+"\n";
-s+="</note>\n";
+s+= "AutoExec\t" + QString(autoExec ? "1" : "0") + "\n";
+s+= "<content>\n"+te->text().stripWhiteSpace()+"\n</content>";
+s+="\n</note>\n";
 return s;
 }
 
-void Note::print()
+void Note::restore(const QStringList& data)
 {
-QPrinter printer;
-printer.setColorMode (QPrinter::GrayScale);
-if (printer.setup()) 
-	{
-    printer.setFullPage( TRUE );
-    QPainter painter;
-    if ( !painter.begin(&printer ) )
-         return;
+  QStringList::ConstIterator line = data.begin();
+  QStringList fields;
 
-	QPaintDeviceMetrics metrics( painter.device() );
-	int dpiy = metrics.logicalDpiY();
-	int margin = (int) ( (1/2.54)*dpiy ); // 1 cm margins
-	QRect body( margin, margin, metrics.width() - 2*margin, metrics.height() - 2*margin );
-	QSimpleRichText richText(QStyleSheet::convertFromPlainText(te->text()), QFont(), 
-							te->context(), te->styleSheet(), te->mimeSourceFactory(), body.height());
-	richText.setWidth( &painter, body.width() );
-  	QRect view( body );
-	int page = 1;
-	do {
-	    richText.draw( &painter, body.left(), body.top(), view, colorGroup() );
-	    view.moveBy( 0, body.height() );
-	    painter.translate( 0 , -body.height() );
-	    painter.drawText( view.right() - painter.fontMetrics().width( QString::number( page ) ),
-			view.bottom() + painter.fontMetrics().ascent() + 5, QString::number( page ) );
-	    if ( view.top()  >= richText.height() )
-			break;
-	    printer.newPage();
-	    page++;
-		} 
-	while (TRUE);
-	}
+  fields = QStringList::split("\t", *line, true);
+  if (fields[0] == "AutoExec")
+  {
+    setAutoexec(fields[1] == "1");
+    line++;
+  }
+
+  if (*line == "<content>") line++;
+  while (line != data.end() && *line != "</content>")
+    te->append((*line++)+"\n");
 }
 
+void Note::setAutoexec(bool exec)
+{
+  autoExec = exec;
+  if (autoExec)
+    te->setPaletteBackgroundColor(QColor(255,239,185));
+  else
+    te->unsetPalette();
+}
 
+void Note::execute()
+{
+  te->executeAll();
+}
 

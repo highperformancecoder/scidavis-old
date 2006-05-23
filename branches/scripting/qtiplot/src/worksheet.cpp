@@ -1,6 +1,6 @@
 #include "worksheet.h"
 #include "sortDialog.h"
-#include "parser.h"
+#include "Scripting.h"
 #include "nrutil.h"
 
 #include <qpopupmenu.h>
@@ -28,16 +28,16 @@
 #include <gsl/gsl_fft_real.h>
 #include <gsl/gsl_fft_complex.h>
 
-Table::Table(const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
+Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 			 bool stripSpaces, bool simplifySpaces, const QString& label, 
 			 QWidget* parent, const char* name, WFlags f)
-        : myWidget(label, parent,name,f)
+        : myWidget(label, parent,name,f), scriptEnv(env)
 {
 importASCII(fname, sep, ignoredLines, renameCols, stripSpaces, simplifySpaces, true);
 }
 
-Table::Table(int r, int c, const QString& label, QWidget* parent, const char* name, WFlags f)
-        : myWidget(label,parent,name,f)
+Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, WFlags f)
+        : myWidget(label,parent,name,f), scriptEnv(env)
 {
 init(r,c);	
 }
@@ -46,6 +46,7 @@ void Table::init(int rows, int cols)
 {
 selectedCol=0;
 LeftButton=FALSE;
+savedCol=-1;
 	
 QDateTime dt = QDateTime::currentDateTime ();
 setBirthDate(dt.toString(Qt::LocalDate));
@@ -68,7 +69,7 @@ hlayout->addWidget(worksheet);
 
 for (int i=0; i<cols; i++)
 	{
-	commandes << "col(1)";
+	commandes << "";
 	colTypes << Numeric;
 	col_format << "0/6";
 	comments << "";
@@ -96,6 +97,7 @@ worksheet->verticalHeader()->setResizeEnabled(false);
 QAccel *accel = new QAccel(this);
 accel->connectItem( accel->insertItem( Key_Tab ), this, SLOT(moveCurrentCell()));
 accel->connectItem( accel->insertItem( CTRL+Key_A ), this, SLOT(selectAllTable()) );
+accel->connectItem( accel->insertItem( CTRL+Key_Return ), this, SLOT(calculate()));
 
 connect(worksheet, SIGNAL(valueChanged(int,int)),this, SLOT(cellEdited(int,int)));
 specifications = saveToString("geometry\n");
@@ -387,6 +389,94 @@ for (int i=0; i<worksheet->numCols(); i++)
 return s+"\n";
 }
 
+void Table::setCommandes(const QStringList& com)
+{
+  commandes.clear();
+  for(int i=0; i<(int)com.size() && i<tableCols(); i++)
+    commandes << com[i].stripWhiteSpace();
+}
+
+void Table::setCommand(int col, const QString com)
+{
+  if(col<(int)commandes.size())
+    commandes[col]=com.stripWhiteSpace();
+}
+
+void Table::setCommandes(const QString& com)
+{
+  QStringList lst = QStringList::split("\t",com,true);
+  lst.pop_front();
+  setCommandes(lst);
+}
+
+bool Table::calculate(int col, int startRow, int endRow)
+{
+  QApplication::setOverrideCursor(waitCursor);
+
+  Script *colscript = scriptEnv->newScript(commandes[col], this,  QString("<%1>").arg(colName(col)));
+  connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
+  
+  if (!colscript->compile())
+  {
+    QApplication::restoreOverrideCursor();
+    return false;
+  }
+  if (endRow >= tableRows())
+    resizeRows(endRow);
+ 
+  colscript->setInt(col+1, "tc");
+  colscript->setInt(startRow+1, "sr");
+  colscript->setInt(endRow+1, "er");
+  QVariant ret;
+  saveCol(col);
+  for (int i=startRow; i<=endRow; i++)
+  {
+    colscript->setInt(i+1,"i");
+    ret = colscript->eval();
+    if(ret.type()==QVariant::Double || ret.type()==QVariant::Int) {
+      int prec;
+      char f;
+      columnNumericFormat(col, f, prec);
+      worksheet->setText(i,col,QString::number(ret.toDouble(), f, prec));
+    } else if(ret.canCast(QVariant::String))
+      worksheet->setText(i, col, ret.toString());
+    else {
+      QApplication::restoreOverrideCursor();
+      return false;
+    }
+  }
+  forgetSavedCol();
+  
+  emit modifiedData(colName(col));
+  emit modifiedWindow(this);
+  QApplication::restoreOverrideCursor();
+  return true;
+}
+
+QTableSelection Table::getSelection()
+{
+  QTableSelection sel;
+  if (worksheet->numSelections()==0)
+  {
+    sel.init(worksheet->currentRow(), worksheet->currentColumn());
+    sel.expandTo(worksheet->currentRow(), worksheet->currentColumn());
+  } else if (worksheet->currentSelection()>0)
+    sel = worksheet->selection(worksheet->currentSelection());
+  else
+      sel = worksheet->selection(0);
+  return sel;
+}
+
+bool Table::calculate()
+{
+  QTableSelection sel = getSelection();
+  bool success = true;
+  for (int col=sel.leftCol(); col<=sel.rightCol(); col++)
+    if (!calculate(col, sel.topRow(), sel.bottomRow()))
+      success = false;
+  return success;
+}
+
 QString Table::saveCommandes()
 {
 QString s="com\t";
@@ -448,15 +538,6 @@ for (int j=0; j<worksheet->numCols(); j++)
 return xcol;
 }
 
-void Table::setCommandes(const QString& com)
-{
-QStringList list=QStringList::split ("\t",com,FALSE);
-for (int i=0;i<int(list.count());i++)
-	{
-	commandes[i]=list[i+1];
-	}
-}
-
 void Table::enumerateRightCols(bool checked)
 {	
 if (!checked)
@@ -469,7 +550,7 @@ int n=1;
 for (int i=selectedCol; i<(int)worksheet->numCols(); i++)
 	{
 	QString newLabel=oldLabel+QString::number(n);
-	commandes.gres("col("+colLabel(i)+")", "col("+newLabel+")", true);
+	commandes.gres("col(\""+colLabel(i)+"\")", "col(\""+newLabel+"\")", true);
 	setColName(i, newLabel);
 	emit changedColHeader(caption+oldLabels[i],colName(i));
 	n++;
@@ -529,7 +610,7 @@ if (labels.contains(text)>0)
 	return;	
 	}
 
-commandes.gres("col("+colLabel(selectedCol)+")", "col("+text+")", true);	
+commandes.gres("col(\""+colLabel(selectedCol)+"\")", "col(\""+text+"\")", true);	
 	
 setColName(selectedCol, text);	
 emit changedColHeader(oldName, newName);
@@ -670,7 +751,7 @@ for (i=0; i<cols; i++)
 max++;
 	
 QStringList::Iterator it=commandes.at(++start);
-commandes.insert(it++, count, "col(" +col_label[0]+")");
+commandes.insert(it++, count, "");
 it=col_format.at(start);
 col_format.insert(it++, count, "0/6");
 it=comments.at(start);
@@ -737,7 +818,7 @@ else
 worksheet->ensureCellVisible ( 0, cols );
 	
 comments << QString::null;
-commandes<<"col("+col_label[0]+")";
+commandes<<"";
 colTypes<<Numeric;
 col_format<<"0/6";
 col_label<< QString::number(max+1);
@@ -763,7 +844,7 @@ worksheet->insertColumns(cols,c);
 for (i=0; i<c; i++)
 	{	
 	comments << QString::null;
-	commandes<<"col("+col_label[0]+")";
+	commandes<<"";
 	colTypes<<Numeric;
 	col_format<<"0/6";
 	col_label<< QString::number(max+i);
@@ -1587,7 +1668,10 @@ return r;
 
 QString Table::text(int row, int col)
 {
-return worksheet->text(row,col).replace(",", ".");
+  if (col == savedCol)
+    return savedCells[row].replace(",",".");
+  else
+    return worksheet->text(row,col).replace(",", ".");
 }
 
 void Table::setText (int row, int col, const QString & text )
@@ -1595,53 +1679,19 @@ void Table::setText (int row, int col, const QString & text )
 worksheet->setText(row, col, text); 
 }
 
-void Table::freeMatrix()
+void Table::saveCol(int col)
 {
-int rows=worksheet->numRows();
-int cols=worksheet->numCols();
-free_matrix(wMatrix,0,rows-1,0,cols-1);
+  int rows=worksheet->numRows();
+  savedCells.clear();
+  for (int row=0; row<rows; row++)
+    savedCells << worksheet->text(row, col);
+  savedCol = col;
 }
 
-void Table::freeMemory()
+void Table::forgetSavedCol()
 {
-int rows=worksheet->numRows();
-int cols=worksheet->numCols();
-free_matrix(wMatrix,0,rows-1,0,cols-1);
-
-cells.clear();//clear cells list
-}
-
-void Table::storeCellsToMatrix()
-{
-int rows=worksheet->numRows();
-int cols=worksheet->numCols();
-wMatrix=matrix(0,rows-1,0,cols-1);
-for (int i=0;i<rows;i++)
-	{
-	for (int j=0;j<cols;j++)
-		{
-		QString s = text(i, j);
-		if (!s.isEmpty())
-			wMatrix[i][j]=s.toDouble();
-		}
-	}
-}
-
-void Table::storeCellsToMemory()
-{
-int rows=worksheet->numRows();
-int cols=worksheet->numCols();
-wMatrix=matrix(0,rows-1,0,cols-1);
-for (int i=0;i<rows;i++)
-	{
-	for (int j=0;j<cols;j++)
-		{
-		QString s = text(i, j);
-		cells << s;
-		if (!s.isEmpty())
-			wMatrix[i][j]=s.toDouble();
-		}
-	}
+  savedCells.clear();
+  savedCol = -1;
 }
 
 void Table::setTextFormat(bool applyToAll)
@@ -1685,7 +1735,7 @@ for (int i=0;i<rows;i++)
 	QString t = worksheet->text(i, col);
 	if (!t.isEmpty())
 		{
-		double val = wMatrix[i][col];
+		double val = t.toDouble();
 		if (!f) 
 			t.setNum(val, 'g', 6);
 		else if (f==1)
@@ -1757,11 +1807,10 @@ if (col_format[col] == format)
 colTypes[col] = Date;
 col_format[col] = format;
 int rows=worksheet->numRows();
-int cols=worksheet->numCols();
 
 for (int i=0; i<rows; i++)
 	{
-	QString s = cells[cols*i + col];
+	QString s = worksheet->text(i,col);
 	if (!s.isEmpty())
 		{
 		QDate d = QDate::fromString (s,Qt::ISODate);
@@ -1779,14 +1828,13 @@ if (col_format[col] == format)
 	return;
 
 int rows=worksheet->numRows();
-int cols=worksheet->numCols();
 
 colTypes[col] = Time;
 col_format[col] = format;
 
 for (int i=0; i<rows; i++)
 	{
-	QString s = cells[cols*i + col];
+	QString s = worksheet->text(i,col);
 	if (!s.isEmpty())
 		{
 		QTime t = QTime::fromString (s,Qt::TextDate);
@@ -1809,7 +1857,7 @@ if (format == "shortMonthName")
 		QString s = worksheet->text(i,col);
 		if (!s.isEmpty())
 			{
-			int month= (int(wMatrix[i][col]))%12;
+			int month= s.toInt() % 12;
 			if (!month)
 				month = 12;
 		
@@ -1824,7 +1872,7 @@ else if (format == "longMonthName")
 		QString t = worksheet->text(i,col);
 		if (!t.isEmpty())
 			{
-			int month= (int(wMatrix[i][col]))%12;
+			int month= t.toInt() % 12;
 			if (!month)
 				month = 12;
 
@@ -1845,7 +1893,7 @@ if (format == "shortDayName")
 		QString t = worksheet->text(i,col);
 		if (!t.isEmpty())
 			{
-			int day= (int(wMatrix[i][col]))%7;
+			int day= t.toInt() % 7;
 			if (!day)
 				day = 7;
 
@@ -1860,7 +1908,7 @@ else if (format == "longDayName")
 		QString t = worksheet->text(i,col);
 		if (!t.isEmpty())
 			{
-			int day= (int(wMatrix[i][col]))%7;
+			int day= t.toInt() % 7;
 			if (!day)
 				day = 7;
 		
@@ -2015,126 +2063,6 @@ for (int j=0;j<(int) list.count(); j++)
 	emit modifiedData(name);
 	}
 
-emit modifiedWindow(this);
-QApplication::restoreOverrideCursor();
-}
-
-const QString Table::parseComand(int line,const QString& comand, 
-						   const QStringList& colLabels, const QStringList& rowIndexes)
-{
-QString s,aux=comand;
-QStringList labels=colLabels;
-double result;
-
-int m=(int)colLabels.count();
-QMemArray<double> vars(m); 
-
-bool error=FALSE;
-myParser parser, rparser;
-try
-    {
-	for (int i=0; i<m; i++)
-		{	
-		parser.DefineVar(colLabels[i].ascii(), &vars[i]);	
-			
-		int row=line;
-		if (rowIndexes[i] != "i")
-			{
-			double l=(double)(line + 1);
-			rparser.ClearVar();
-			rparser.DefineVar("i", &l);
-			rparser.SetExpr(rowIndexes[i].ascii());
-	        row=qRound(rparser.Eval()) - 1;
-			if (row  < 0 && row >= worksheet->numRows())
-				return "";
-			}		
-		QStringList list=QStringList::split("_", labels[i], FALSE);	
-		int col=list[1].toInt();
-		s=worksheet->text(row, col);
-		if (!s.isEmpty())
-			vars[i]=wMatrix[row][col];
-		else 
-			vars[i] = 0.0;
-		}
-
-	double index = (double)(line+1);
-	parser.DefineVar("i", &index);
-	parser.SetExpr(aux.ascii());
-	result=parser.Eval();
-	}
-catch(mu::ParserError &e)
-	{
-	QMessageBox::critical(0,"QtiPlot - Input function error",e.GetMsg());
-	error=TRUE;	
-    }
-
-if (error)
-	return "";
-else
-	{
-	int prec;
-	char f;
-	columnNumericFormat(selectedCol, f, prec);
-	QString rs = QString::number(result, f, prec);
-	if (rs.contains ("#") || rs.contains ("inf"))//inf or undefined values
-		rs = "";
-	return rs;
-	}
-}
-
-void Table::setColValues(const QString& text, const QString& com, 
-						const QStringList& colLabels, const QStringList& rowIndexes,
-						int startRow, int endRow)
-{
-QApplication::setOverrideCursor(waitCursor);
-
-int rows=worksheet->numRows();
-if (endRow>rows) 
-	{
-	rows=endRow;
-	worksheet->setNumRows(rows);
-	}
-
-storeCellsToMatrix();
-//we store the table values in memory and we use them instead of the table 
-//cells texts which are changing during the following for loop
-
-for (int i=startRow-1; i<endRow; i++) 
-	worksheet->setText(i, selectedCol, parseComand(i, com, colLabels, rowIndexes));
-
-//we free the memory	
-freeMatrix();
-
-commandes[selectedCol]=text;
-emit modifiedData(colName(selectedCol));
-emit modifiedWindow(this);
-QApplication::restoreOverrideCursor();
-}
-
-void Table::setColValues(double val, int startRow, int endRow)
-{
-QApplication::setOverrideCursor(waitCursor);
-
-int rows=worksheet->numRows();
-if (endRow>rows) 
-	{
-	rows=endRow;
-	worksheet->setNumRows(rows);
-	}
-
-int prec;
-char f;
-columnNumericFormat(selectedCol, f, prec);
-QString	rs = QString::number(val, f, prec);
-
-if (rs.contains ("#") || rs.contains ("inf"))//inf or undefined values
-	rs = "";
-
-for (int i=startRow-1; i<endRow; i++) 
-	worksheet->setText(i, selectedCol, rs);
-
-commandes[selectedCol]=rs;
-emit modifiedData(colName(selectedCol));
 emit modifiedWindow(this);
 QApplication::restoreOverrideCursor();
 }

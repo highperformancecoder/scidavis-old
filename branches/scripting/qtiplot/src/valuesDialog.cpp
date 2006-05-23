@@ -1,6 +1,6 @@
 #include "valuesDialog.h"
 #include "worksheet.h"
-#include "parser.h"
+#include "scriptedit.h"
 
 #include <qcombobox.h>
 #include <qspinbox.h>
@@ -18,9 +18,10 @@
 #include <qhbox.h>
 #include <qbuttongroup.h>
 
-setColValuesDialog::setColValuesDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+setColValuesDialog::setColValuesDialog( ScriptingEnv *env, QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
+  scriptEnv = env;
     if ( !name )
 	setName( "setColValuesDialog" );
     setCaption( tr( "QtiPlot - Set column values" ) );
@@ -98,8 +99,7 @@ setColValuesDialog::setColValuesDialog( QWidget* parent,  const char* name, bool
 	QHBox *hbox3=new QHBox (this, "hbox3"); 
 	hbox3->setSpacing (5);
 	
-	commandes = new QTextEdit( hbox3, "commandes" );
-	commandes->setTextFormat(Qt::PlainText);
+	commandes = new ScriptEdit( env, hbox3, "commandes" );
     commandes->setGeometry( QRect(10, 100, 260, 70) );
 	commandes->setFocus();
 	
@@ -178,116 +178,27 @@ if (apply())
 
 bool setColValuesDialog::apply()
 {
-QString aux=commandes->text();	
-aux.remove("\n");
+  int startRow = start->value();
+  int endRow = end->value();
+  int col = table->selectedColumn();
+  QString formula = commandes->text();
+  QString oldFormula = table->getCommandes()[col];
 
-myParser parser;
-parser.SetExpr(aux.ascii());
-bool numeric = true;
-double val;
-try
-	{
-	val = parser.Eval();
-	}
-catch (mu::ParserError &)
-	{
-	numeric = false;
-	}
-
-if (numeric)
-	{
-	table->setColValues(val, start->value(),end->value());
-	return true;
-	}
-
-int pos1,pos2,pos3,i;
-QStringList variables, rowIndexes, columns, colNames=table->colNames();
-int n=aux.contains("col(");
-for (i=0;i<n;i++)
-	{
-	pos1=aux.find("col(",0,TRUE);
-	pos2=aux.find("(",pos1+1);
-	pos3=aux.find(")",pos2+1);
-	
-	QString aux2=aux.mid(pos2+1,pos3-pos2-1);
-	if (aux2.contains("col("))
-		{
-		QMessageBox::critical(0,tr("QtiPlot - Input function error"), tr("You can not use imbricated columns!"));
-		return false;
-   		}
-
-	QStringList items=QStringList::split(",", aux2, FALSE);
-	int index=colNames.findIndex (items[0]);	
-	if (items.count() == 2)
-		rowIndexes<<items[1];
-	else
-		rowIndexes<<"i";
-			
-	QString s="c"+ QString::number(i)+"_"+QString::number(index);
-	aux.replace(pos1,4+pos3-pos2,s);
-		
-	if (variables.contains(s)<=0)
-		{
-		variables<<s;
-		columns<<"col("+aux2+")";
-		}
-	}
-	
-int m=(int)variables.count();
-double *vars = new double[m];	
-try
-    {
-	for (i=0; i<m; i++)
-		{
-		parser.DefineVar(variables[i].ascii(), &vars[i]);
-		if (rowIndexes[i] != "i")	
-			{
-			myParser rparser;
-			double l=0;
-			try
-    			{	
-				rparser.DefineVar("i", &l);
-				rparser.SetExpr(rowIndexes[i].ascii());
-	        	rparser.Eval();
-				}
-			catch(mu::ParserError &e)
-				{
-				QMessageBox::critical(0,"QtiPlot - Input function error", e.GetMsg());
-				return false;
-   				}
-			}			
-		vars[i]=1.0;//dumy value
-		}
-
-	double index = 1;
-	parser.DefineVar("i", &index);
-	parser.SetExpr(aux.ascii());
-	parser.Eval();
-	}
-catch(mu::ParserError &e)
-	{
-	QString errString=e.GetMsg();
-	for (i=0;i<m;i++)
-		errString.replace(variables[i], columns[i], TRUE);
-
-	QMessageBox::critical(0,"QtiPlot - Input function error", errString);
-	return false;
-    }
-
-delete[] vars;
-table->setColValues(commandes->text(), aux, variables, rowIndexes, 
-				   start->value(),end->value());
-return true;
+  table->setCommand(col,formula);
+  if(table->calculate(col,startRow-1,endRow-1))
+    return true;
+  table->setCommand(col,oldFormula);
+  return false;
 }
 
 void setColValuesDialog::setFunctions()
 {
-functions->insertStringList(myParser::functionsList(), -1);
+functions->insertStringList(scriptEnv->mathFunctions(), -1);
 }
 
 void setColValuesDialog::insertExplain(int index)
 {
-explain->setText(myParser::explainFunction(index));
+explain->setText(scriptEnv->mathFunctionDoc(functions->text(index)));
 }
 
 void setColValuesDialog::insertFunction()
@@ -295,13 +206,12 @@ void setColValuesDialog::insertFunction()
 QString f=functions->currentText();
 if (commandes->hasSelectedText())
 	{	
-	f=f.remove(")");
 	QString markedText=commandes->selectedText();
-	commandes->insert(f+markedText+")");
+	commandes->insert(f+"("+markedText+")");
 	}
 else
 	{
-	commandes->insert( f );
+	commandes->insert( f.append("()") );
 	int index, para;
 	commandes->getCursorPosition (&para,&index);
 	commandes->setCursorPosition (para,index-1);

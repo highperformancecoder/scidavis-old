@@ -8,6 +8,8 @@
 #include "graph.h"
 #include "widget.h"
 
+class ScriptingEnv;
+
 class Table: public myWidget
 {
     Q_OBJECT
@@ -16,11 +18,13 @@ public:
 	enum PlotDesignation{All = -1, None = 0, X = 1, Y = 2, Z = 3};
 	enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5};
 
-   	Table(const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
+   	Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 		 bool stripSpaces, bool simplifySpaces, const QString &label, 
 		 QWidget* parent=0, const char* name=0, WFlags f=0);
-	Table(int r,int c, const QString &label, QWidget* parent=0, const char* name=0, WFlags f=0);
+	Table(ScriptingEnv *env, int r,int c, const QString &label, QWidget* parent=0, const char* name=0, WFlags f=0);
 	~Table();
+
+	QTableSelection getSelection();
 	
 public slots:
 	QTable* table(){return worksheet;};
@@ -49,14 +53,9 @@ public slots:
 	void loadHeader(QStringList header);
 	void setHeaderColType();
 	void setText(int row,int col,const QString & text);
-	void setColValues(double val, int startRow, int endRow);
-	void setColValues(const QString& text, const QString& com, 
-					const QStringList& colLabels, const QStringList& rowIndexes,
-					int startRow, int endRow);
 	void setRandomValues();
 	void setAscValues();
 
-	void setCommandes(const QString& com);
 	void cellEdited(int,int col);
 	void moveCurrentCell();
 	void clearCell(int row, int col);
@@ -94,10 +93,6 @@ public slots:
 	// event handlers 
 	bool eventFilter(QObject *object, QEvent *e);
 	void contextMenuEvent(QContextMenuEvent *e);
-	
-	// set col values
-	const QString parseComand(int line, const QString& comand, 
-								const QStringList& colLabels, const QStringList& rowIndexes);
 	
 	// column operations 
 	void removeCol();
@@ -144,7 +139,16 @@ public slots:
 	void showRowStatistics(); 
 
 	QStringList getCommandes(){return commandes;};
-	void setCommandes(const QStringList& com){commandes=com;};
+	//!Slot: Set all column formulae.
+	void setCommandes(const QStringList& com);
+	//!Slot: Set all column formulae.
+	void setCommandes(const QString& com);
+	//!Slot: Set formula for column col.
+	void setCommand(int col, const QString com);
+	//!Slot: Compute specified cells from column formula.
+	bool calculate(int col, int startRow, int endRow);
+	//!Slot: Compute selected cells from column formulae; use current cell if there's no selection.
+	bool calculate();
 	
 	// row operations 
 	void deleteSelectedRows();
@@ -189,10 +193,10 @@ public slots:
 	void setColumnTypes(QValueList<int> ctl){colTypes = ctl;};
 	void setColumnTypes(const QStringList& ctl);
 
-	void storeCellsToMatrix();
-	void freeMatrix();
-	void storeCellsToMemory();
-	void freeMemory();
+	//!Slot: Use a copy of column col when accessing it via text() until forgetSavedCol() is called.
+	void saveCol(int col);
+	//!Slot: Use spreadsheat data again for all columns after saveCol(int) was called.
+	void forgetSavedCol();
 
 	QString columnFormat(int col){return col_format[col];};
 	QStringList getColumnsFormat(){return col_format;};
@@ -278,11 +282,13 @@ signals:
 private:
 	QTable *worksheet;
 	QString specifications, newSpecifications;
-	QStringList commandes, cells, col_format, comments, col_label;
+	QStringList commandes, col_format, comments, col_label;
 	QValueList<int> colTypes, col_plot_type;
 	int selectedCol, lastSelectedCol;
-	double **wMatrix; //global matrix used to store the values of the table cells
+	QStringList savedCells;
+	int savedCol;
 	bool LeftButton;
+	ScriptingEnv *scriptEnv;
 };
 
 #endif

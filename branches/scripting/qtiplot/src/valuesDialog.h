@@ -12,13 +12,15 @@ class QSpinBox;
 class QPushButton;
 class QLabel;
 class Table;
+class ScriptingEnv;
+class ScriptEdit;
 	
 class setColValuesDialog : public QDialog
 { 
     Q_OBJECT
 
 public:
-    setColValuesDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    setColValuesDialog( ScriptingEnv *env, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
     ~setColValuesDialog();
 	
 	QSize sizeHint() const ;
@@ -29,7 +31,7 @@ public:
     QPushButton* PushButton4;
     QPushButton* btnOk;
     QPushButton* btnCancel;
-    QTextEdit* commandes;
+    ScriptEdit* commandes;
     QTextEdit* explain;
 	QSpinBox* start, *end;
 	QPushButton *buttonPrev, *buttonNext, *addCellButton, *btnApply;
@@ -50,6 +52,7 @@ public slots:
 
 private:
 	Table* table;
+	ScriptingEnv *scriptEnv;
 };
 
 #endif //
