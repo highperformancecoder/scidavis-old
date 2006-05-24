@@ -66,7 +66,7 @@ class ScriptingEnv : public QObject
     bool isInitialized() const { return initialized; }
     virtual bool isRunning() const { return false; }
     
-    virtual Script *newScript(const QString &code, QObject *context=0, const QString &name="<input>") { return 0; }
+    virtual Script *newScript(const QString &code, QObject *context, const QString &name="<input>") { return 0; }
       
     // global variables
     virtual bool setQObject(QObject *val, const char *name=0) { return false; } // name should default to val->name()

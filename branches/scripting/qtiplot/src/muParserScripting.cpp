@@ -1,5 +1,6 @@
 #include "muParserScripting.h"
 #include "worksheet.h"
+#include "matrix.h"
 
 #include <qstringlist.h>
 #include <qasciidict.h>
@@ -58,6 +59,8 @@ muParserScript::muParserScript(ScriptingEnv *env, const QString &code, QObject *
   parser.DefineConst("pi", M_PI);
   parser.DefineConst("Pi", M_PI);
   parser.DefineConst("PI", M_PI);
+  parser.DefineConst("e", M_E);
+  parser.DefineConst("E", M_E);
 
   for (const muParserScripting::mathFunction *i=muParserScripting::math_functions; i->name; i++)
     if (i->numargs == 1 && i->fun1 != NULL)
@@ -103,10 +106,9 @@ bool muParserScript::compile()
 
   if (Context->isA("Table"))
   {
-    Table *table = (Table*) Context;
     // col() hack
     int pos1, pos2, pos3;
-    QStringList colNames=table->colNames();
+    QStringList colNames=((Table*)Context)->colNames();
     int n = aux.contains("col(");
     for (int i=0; i<n; i++)
     {
@@ -133,7 +135,32 @@ bool muParserScript::compile()
       else
 	rowIndexes[s] = "i";
       aux.replace(pos1,4+pos3-pos2,s);
-      columns[s] = "col("+aux2+")";
+      substitute[s] = "col("+aux2+")";
+    }
+  } else if (Context->isA("Matrix")) {
+    // cell() hack
+    int pos1, pos2, pos3;
+    int n = aux.contains("cell(");
+    for (int i=0; i<n; i++)
+    {
+      pos1=aux.find("cell(",0,TRUE);
+      pos2=pos1+4;
+      pos3=aux.find(")",pos2+1);
+
+      QString aux2=aux.mid(pos2+1,pos3-pos2-1);
+      if (aux2.contains("cell("))
+      {
+	emit_error(tr("You can not use cells recursively!"), 0);
+	compiled = Script::compileErr;
+	return false;
+      }
+
+      QStringList items=QStringList::split(",", aux2, FALSE);
+      QString s="c"+ QString::number(i);
+      rowIndexes[s] = items[0].stripWhiteSpace();
+      colIndexes[s] = items[1].stripWhiteSpace();
+      aux.replace(pos1,5+pos3-pos2,s);
+      substitute[s] = "cell("+aux2+")";
     }
   }
  
@@ -151,7 +178,6 @@ QVariant muParserScript::eval()
     if (Context->isA("Table"))
     {
       Table *table = (Table*) Context;
-      if (!variables["i"]) return QVariant();
       for (strDict::iterator i=rowIndexes.begin(); i!=rowIndexes.end(); i++) {
 	int row;
 	if (i.data() != "i")
@@ -167,11 +193,34 @@ QVariant muParserScript::eval()
 	if (table->text(row,col).isEmpty()) return QVariant("");
 	setDouble((table->text(row,col)).toDouble(), i.key().ascii());
       }
+    } else if (Context->isA("Matrix")) {
+      Matrix *matrix = (Matrix*) Context;
+      strDict::iterator i=rowIndexes.begin(),j=colIndexes.begin();
+      while((i!=rowIndexes.end())&&(j!=colIndexes.end())) {
+	int col, row;
+	if (i.data() == "i")
+	  row = (int) *(variables["i"]) - 1;
+	else {
+	  rparser.SetExpr(i.data());
+	  row = qRound(rparser.Eval()) - 1;
+	}
+	if (j.data() == "j")
+	  col = (int) *(variables["j"]) - 1;
+	else {
+	  rparser.SetExpr(j.data());
+	  col = qRound(rparser.Eval()) - 1;
+	}
+	if (row < 0 || row >= matrix->numRows() || col < 0 || col >= matrix->numCols())
+	  return QVariant();
+	if (matrix->text(row,col).isEmpty()) return QVariant("");
+	setDouble((matrix->text(row,col)).toDouble(), i.key().ascii());
+	i++; j++;
+      }
     }
     val = parser.Eval();
   } catch (mu::ParserError &e) {
     QString errString=e.GetMsg();
-    for (strDict::iterator i=columns.begin(); i!=columns.end(); i++)
+    for (strDict::iterator i=substitute.begin(); i!=substitute.end(); i++)
       errString.replace(i.key(), i.data(), true);
     emit_error(errString, 0);
     return QVariant();

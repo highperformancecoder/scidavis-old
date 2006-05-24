@@ -2672,7 +2672,7 @@ emit modified();
 */
 Matrix* ApplicationWindow::newMatrix()
 {
-Matrix* m = new Matrix(32, 32, "", ws, 0, WDestructiveClose);
+Matrix* m = new Matrix(scriptEnv, 32, 32, "", ws, 0, WDestructiveClose);
 matrixes++;
 QString caption="Matrix" + QString::number(matrixes);
 initMatrix(m, caption);
@@ -2685,7 +2685,7 @@ return m;
 */
 Matrix* ApplicationWindow::newMatrix(const QString& caption, int r, int c)
 {
-Matrix* w = new Matrix(r, c, "", ws,0,WDestructiveClose);
+Matrix* w = new Matrix(scriptEnv, r, c, "", ws,0,WDestructiveClose);
 initMatrix(w, caption);
 if (w->name() != caption)//the matrix was renamed
 	{
@@ -2807,7 +2807,7 @@ QApplication::setOverrideCursor(waitCursor);
 int rows = m->tableRows();
 int cols = m->tableCols();
 
-Matrix* w = new Matrix(rows, cols, "", ws, 0, WDestructiveClose);
+Matrix* w = new Matrix(scriptEnv, rows, cols, "", ws, 0, WDestructiveClose);
 for (int i = 0; i<rows; i++)
 	{
 	for (int j = 0; j<cols; j++)
@@ -5714,7 +5714,7 @@ if ( w && matrixWindows.contains(w->name()))
 			 w, SLOT(setNumericFormat(const QChar&, int)));
 	connect (md, SLOT(close()), w, SLOT(freeMemory()));
 
-	w->storeCellsToMemory();
+	w->saveCellsToMemory();
 	md->setTextFormat(w->textFormat(), w->precision());
 	md->setColumnsWidth(w->columnsWidth());
 	md->showNormal();
@@ -5743,15 +5743,9 @@ void ApplicationWindow::showMatrixValuesDialog()
 Matrix* w = (Matrix*)ws->activeWindow();
 if ( w && matrixWindows.contains(w->name()))
 	{
-	matrixValuesDialog* md= new matrixValuesDialog(this,"matrixValuesDialog", false, WDestructiveClose);
-	connect (md, SIGNAL(setValues (const QString&, const QString&, const QStringList&, 
-									const QStringList&, int, int, int, int)), 
-			w, SLOT(setValues (const QString&, const QString&, const QStringList&,
-							  const QStringList&, int, int, int, int)));
+	matrixValuesDialog* md= new matrixValuesDialog(scriptEnv, this, "matrixValuesDialog", false, WDestructiveClose);
 
-	md->setFormula(w->formula());
-	md->setColumns(w->numCols());
-	md->setRows(w->numRows());
+	md->setMatrix(w);
 	md->showNormal();
 	}
 }

@@ -6,15 +6,18 @@
 
 class QComboBox;
 class QTextEdit;
+class ScriptEdit;
 class QSpinBox;
 class QPushButton;
+class Matrix;
+class ScriptingEnv;
 	
 class matrixValuesDialog : public QDialog
 { 
     Q_OBJECT
 
 public:
-    matrixValuesDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    matrixValuesDialog( ScriptingEnv *env, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
     ~matrixValuesDialog();
 	
 	QSize sizeHint() const ;
@@ -23,7 +26,7 @@ public:
     QPushButton* PushButton3; 
     QPushButton* btnOk, *btnAddCell;
     QPushButton* btnCancel;
-    QTextEdit* commandes;
+    ScriptEdit* commandes;
     QTextEdit* explain;
 	QSpinBox *startRow, *endRow, *startCol, *endCol;
 	QPushButton *btnApply;
@@ -35,13 +38,11 @@ public slots:
 	void addCell();
 	void insertFunction();
 	void insertExplain(int index);
-	void setColumns(int c);
-	void setRows(int r);
-	void setFormula(const QString& s);
+	void setMatrix(Matrix *m);
 
-signals:
-	void setValues (const QString&, const QString&, const QStringList&, 
-			   const QStringList&, int, int, int, int);
+private:
+	Matrix *matrix;
+	ScriptingEnv *scriptEnv;
 };
 
 #endif //

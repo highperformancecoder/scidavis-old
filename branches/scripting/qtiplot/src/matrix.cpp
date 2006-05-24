@@ -1,5 +1,5 @@
 #include "matrix.h"
-#include "parser.h"
+#include "Scripting.h"
 #include "nrutil.h"
 
 #include <qdatetime.h>
@@ -22,8 +22,8 @@
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_math.h>
 
-Matrix::Matrix(int r, int c, const QString& label, QWidget* parent, const char* name, WFlags f)
-				: myWidget(label, parent, name, f)
+Matrix::Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, WFlags f)
+				: myWidget(label, parent, name, f), scriptEnv(env)
 {
 init(r, c);	
 }
@@ -39,6 +39,7 @@ x_start = 1.0;
 x_end = 10.0;
 y_start = 1.0; 
 y_end = 10.0;
+dMatrix = 0;
 
 QDateTime dt = QDateTime::currentDateTime ();
 setBirthDate(dt.toString(Qt::LocalDate));
@@ -118,25 +119,14 @@ else
 
 void Matrix::cellEdited(int row,int col)
 {
-QString s = table->text(row,col);
+Script *script = scriptEnv->newScript(table->text(row,col),this,QString("<%1:%2:%3>").arg(name()).arg(row).arg(col));
+connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
 
-myParser parser;
-parser.SetExpr(s.ascii());
-bool numeric = true;
-try
-	{
-	parser.Eval();
-	}
-catch (mu::ParserError &e)
-	{
-	QString errString = "Not a valid numerical input!\n";	
-	errString+= e.GetMsg();
-	QMessageBox::critical(0, tr("QtiPlot - Input error"), tr(errString));
-	numeric = false;
-	}
-
-if (numeric)
-	table->setText(row, col, s);
+script->setInt(row+1, "row");
+script->setInt(col+1, "col");
+QVariant ret = script->eval();
+if(ret.type()==QVariant::Double || ret.type()==QVariant::Int)
+	table->setText(row, col, QString::number(ret.toDouble(), txt_format, num_precision));
 else
 	table->setText(row, col, "");
 
@@ -145,7 +135,10 @@ emit modifiedWindow(this);
 
 QString Matrix::text (int row, int col)
 {
-return table->text(row, col); 
+  if(dMatrix)
+    return QString::number(dMatrix[row][col], txt_format, num_precision);
+  else
+    return table->text(row, col); 
 }
 
 void Matrix::setText (int row, int col, const QString & text )
@@ -493,7 +486,7 @@ for (i = 0; i<cols; i++)
 delete t;
 }
 
-void Matrix::storeCellsToMemory()
+void Matrix::saveCellsToMemory()
 {
 int rows=table->numRows();
 int cols=table->numCols();
@@ -508,158 +501,56 @@ for (int i=0; i<rows; i++)
 	}
 }
 
-void Matrix::freeMemory()
+void Matrix::forgetSavedCells()
 {
 int rows=table->numRows();
 int cols=table->numCols();
 free_matrix (dMatrix, 0, rows-1, 0, cols-1);
+dMatrix = 0;
 }
 
-void Matrix::setValues (const QString& txt, const QString& formula,
-						const QStringList& rowIndexes, const QStringList& colIndexes,
-						int startRow, int endRow, int startCol, int endCol)
+bool Matrix::calculate(int startRow, int endRow, int startCol, int endCol)
 {
-QApplication::setOverrideCursor(waitCursor);
-		
-if (endCol > table->numCols())
-	table->setNumCols(endCol);	
-if (endRow > table->numRows())
-	table->setNumRows(endRow);	
+  QApplication::setOverrideCursor(waitCursor);
 
-int rows=table->numRows();
-int cols=table->numCols();
+  Script *script = scriptEnv->newScript(formula_str, this, QString("<%1>").arg(name()));
+  connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int))); 
+  if (!script->compile())
+  {
+    QApplication::restoreOverrideCursor();
+    return false;
+  }
 
-myParser parser;
-parser.SetExpr(txt.ascii());
-bool numeric = true;
-try
-	{
-	parser.Eval();
-	}
-catch (mu::ParserError &)
-	{
-	numeric = false;
-	}
+  int rows=table->numRows();
+  int cols=table->numCols();
+  if (endCol >= cols)
+    table->setNumCols(endCol+1);
+  if (endRow >= rows)
+    table->setNumRows(endRow+1);
 
-int i, j, r, c;
-if (numeric)
-	{//constant numerical value, no need to use the parser
-	for (i = startRow; i <= endRow; i++)
-		{
-		r = i - 1;
-		for (j = startCol; j <= endCol; j++)
-			{
-			c = j - 1;
-			table->setText(r, c, txt);
-			}
-		}
-	if (formula_str != txt)
-		formula_str = txt;
-
-	emit modifiedWindow(this);
+  QVariant ret;
+  saveCellsToMemory();
+  for (int row=startRow; row<=endRow; row++)
+    for (int col=startCol; col<=endCol; col++)
+    {
+      script->setInt(row+1, "i");
+      script->setInt(row+1, "row");
+      script->setInt(col+1, "j");
+      script->setInt(col+1, "col");
+      ret = script->eval();
+      if (ret.type()==QVariant::Double || ret.type()==QVariant::Int)
+	table->setText(row,col,QString::number(ret.toDouble(),txt_format, num_precision));
+      else {
+	table->setText(row,col,"");
 	QApplication::restoreOverrideCursor();
-	return;
-	}
-
-double **data_matrix = matrix(0, rows-1, 0, cols-1);
-for (i=0;i<rows;i++)
-	{
-	for (j=0;j<cols;j++)
-		{
-		QString s = text(i, j);
-		if (!s.isEmpty())
-			data_matrix[i][j] = s.toDouble();
-		}
-	}
-
-bool indexError = false;
-double ival = 1.0, jval = 1.0, cval = 1.0, rval = 1.0;
-parser.SetExpr(formula.ascii());
-parser.DefineVar("i", &ival);
-parser.DefineVar("j", &jval);
-
-myParser rparser;
-rparser.DefineVar("i", &rval);
-rparser.DefineVar("j", &cval);
-
-int m=(int)rowIndexes.count();
-double *vars = new double[m]; 
-int row, col;
-for (i = startRow; i <= endRow; i++)
-	{
-	r = i - 1;
-	for (j = startCol; j <= endCol; j++)
-		{
-		c = j - 1;
-		ival = (double) i;
-		jval = (double) j;
-
-		if (!table->text(r, c).isEmpty())
-			{
-			for (int k=0; k<m; k++)
-				{	
-				row = r;
-				col = c;
-				rval=(double) row;
-				cval=(double) col;
-				if (rowIndexes[k] != "i")
-					{
-					rparser.SetExpr(rowIndexes[k].ascii());
-					row=qRound(rparser.Eval());
-					if (row  < 0 && row >= rows)
-						{
-						table->setText(r, c, "");
-						indexError = true;
-						break;
-						}
-					}
-				if (colIndexes[k] != "j")
-					{
-					rparser.SetExpr(colIndexes[k].ascii());
-					col=qRound(rparser.Eval());
-					if (col  < 0 && col >= cols)
-						{
-						table->setText(r, c, "");
-						indexError = true;
-						break;
-						}
-					}
-				if (!table->text(row, col).isEmpty())
-					{
-					vars[k] = data_matrix[row][col];
-					parser.DefineVar("cell" + QString::number(k), &vars[k]);
-					}
-				else
-					{
-					table->setText(r, c, "");
-					indexError = true;
-					break;
-					}
-				}
-			}
-		try
-			{
-			if (!indexError)
-				{
-				double val = parser.Eval();
-				table->setText(r, c, QString::number(val, txt_format, num_precision));
-				}
-			}
-		catch (mu::ParserError &)
-			{
-			table->setText(r, c, "");
-			}
-		}
-	}
-
-if (formula_str != txt)
-	formula_str = txt;
-
-free_matrix(data_matrix, 0, rows-1, 0, cols-1);
-delete[] vars;
-
-emit modifiedWindow(this);
-QApplication::restoreOverrideCursor();
+	return false;
+      }
+    }
+  forgetSavedCells();
+  
+  emit modifiedWindow(this);
+  QApplication::restoreOverrideCursor();
+  return true;
 }
 
 void Matrix::clearSelection()

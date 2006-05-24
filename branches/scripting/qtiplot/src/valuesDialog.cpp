@@ -178,14 +178,12 @@ if (apply())
 
 bool setColValuesDialog::apply()
 {
-  int startRow = start->value();
-  int endRow = end->value();
   int col = table->selectedColumn();
   QString formula = commandes->text();
   QString oldFormula = table->getCommandes()[col];
 
   table->setCommand(col,formula);
-  if(table->calculate(col,startRow-1,endRow-1))
+  if(table->calculate(col,start->value()-1,end->value()-1))
     return true;
   table->setCommand(col,oldFormula);
   return false;
@@ -203,19 +201,7 @@ explain->setText(scriptEnv->mathFunctionDoc(functions->text(index)));
 
 void setColValuesDialog::insertFunction()
 {
-QString f=functions->currentText();
-if (commandes->hasSelectedText())
-	{	
-	QString markedText=commandes->selectedText();
-	commandes->insert(f+"("+markedText+")");
-	}
-else
-	{
-	commandes->insert( f.append("()") );
-	int index, para;
-	commandes->getCursorPosition (&para,&index);
-	commandes->setCursorPosition (para,index-1);
-	}
+  commandes->insertFunction(functions->currentText());
 }
 
 void setColValuesDialog::insertCol()

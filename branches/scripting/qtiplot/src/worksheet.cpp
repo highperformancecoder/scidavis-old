@@ -424,11 +424,11 @@ bool Table::calculate(int col, int startRow, int endRow)
   if (endRow >= tableRows())
     resizeRows(endRow);
  
-  colscript->setInt(col+1, "tc");
+  colscript->setInt(col+1, "j");
   colscript->setInt(startRow+1, "sr");
   colscript->setInt(endRow+1, "er");
   QVariant ret;
-  saveCol(col);
+  saveColToMemory(col);
   for (int i=startRow; i<=endRow; i++)
   {
     colscript->setInt(i+1,"i");
@@ -1679,7 +1679,7 @@ void Table::setText (int row, int col, const QString & text )
 worksheet->setText(row, col, text); 
 }
 
-void Table::saveCol(int col)
+void Table::saveColToMemory(int col)
 {
   int rows=worksheet->numRows();
   savedCells.clear();

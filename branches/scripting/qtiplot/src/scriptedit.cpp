@@ -9,7 +9,7 @@
 #include <qsimplerichtext.h>
 
 ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
-  : QTextEdit(parent, name)
+  : QTextEdit(parent, name), scriptEnv(env)
 {
   myScript = env->newScript("", this, name);
   connect(myScript, SIGNAL(error(const QString&,const QString&,int)), this, SLOT(insertErrorMsg(const QString&)));
@@ -48,7 +48,17 @@ QPopupMenu *ScriptEdit::createPopupMenu (const QPoint & pos)
     actionAutoexec->setOn(sp->autoexec());
     connect(actionAutoexec, SIGNAL(toggled(bool)), sp, SLOT(setAutoexec(bool)));
     actionAutoexec->addTo(menu);
-  }  
+  }
+
+  QPopupMenu *functionsMenu = new QPopupMenu(menu, "functionsMenu");
+  functionsMenu->insertTearOffHandle();
+  QStringList flist = scriptEnv->mathFunctions();
+  for (int i=0; i<flist.size(); i++)
+  {
+    int id = functionsMenu->insertItem(flist[i], this, SLOT(insertFunction(int)));
+    functionsMenu->setItemParameter(id, i);
+  }
+  menu->insertItem(tr("functions"),functionsMenu);
   
   return menu;
 }
@@ -59,6 +69,23 @@ void ScriptEdit::insertErrorMsg(const QString &message)
   err.prepend("\n").replace("\n","\n#> ");
   removeSelection();
   insert(err,(uint)QTextEdit::CheckNewLines);
+}
+
+void ScriptEdit::insertFunction(const QString &fname)
+{
+  if (hasSelectedText())
+    insert(fname+"("+selectedText()+")");
+  else {
+    insert(fname + "()");
+    int index,para;
+    getCursorPosition(&para, &index);
+    setCursorPosition(para, index-1);
+  }
+}
+
+void ScriptEdit::insertFunction(int nr)
+{
+  insertFunction(scriptEnv->mathFunctions()[nr]);
 }
 
 void ScriptEdit::execute()

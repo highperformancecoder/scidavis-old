@@ -19,11 +19,14 @@ class ScriptEdit: public QTextEdit
     void executeAll();
     void evaluate();
     void print();
+    void insertFunction(const QString &);
+    void insertFunction(int);
 
   protected:
     QPopupMenu *createPopupMenu (const QPoint & pos);
     
   private:
+    ScriptingEnv *scriptEnv;
     Script *myScript;
     QAction *actionDo, *actionDoAll, *actionEval, *actionPrint;
 

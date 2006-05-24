@@ -1,5 +1,7 @@
 #include "matrixValuesDialog.h"
-#include "parser.h"
+#include "Scripting.h"
+#include "scriptedit.h"
+#include "matrix.h"
 
 #include <qcombobox.h>
 #include <qspinbox.h>
@@ -13,9 +15,10 @@
 #include <qhbox.h>
 #include <qbuttongroup.h>
 
-matrixValuesDialog::matrixValuesDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+matrixValuesDialog::matrixValuesDialog( ScriptingEnv *env, QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
+  scriptEnv = env;
     if ( !name )
 		setName( "matrixValuesDialog" );
 
@@ -79,8 +82,7 @@ matrixValuesDialog::matrixValuesDialog( QWidget* parent,  const char* name, bool
 	QLabel *TextLabel5 = new QLabel(hbox4, "TextLabel2" );
     TextLabel5->setText( tr( "Cell(i,j)=" ) );
 
-	commandes = new QTextEdit( hbox4, "commandes" );
-	commandes->setTextFormat(Qt::PlainText);
+	commandes = new ScriptEdit( scriptEnv, hbox4, "commandes" );
     commandes->setGeometry( QRect(10, 100, 260, 70) );
 	commandes->setFocus();
 	
@@ -125,143 +127,37 @@ if (apply())
 
 bool matrixValuesDialog::apply()
 {
-QString aux=commandes->text().lower();	
-aux.remove("\n");
-	
-int pos1,pos2,pos3,i;
-QStringList variables, rowIndexes, colIndexes;
-int n=aux.contains("cell(");
-for (i=0; i<n; i++)
-	{
-	pos1=aux.find("cell(",0,TRUE);
-	pos2=aux.find("(",pos1+1);
-	pos3=aux.find(")",pos2+1);
-	
-	QString aux2=aux.mid(pos2+1,pos3-pos2-1);
-	if (aux2.contains("cell(") > 0)
-		{
-		QMessageBox::critical(0,tr("QtiPlot - Input function error"), 
-			tr("You can not use cells recursevely!"));
-		return false;
-   		}
+  QString formula = commandes->text();
+  QString oldFormula = matrix->formula();
 
-	QStringList items=QStringList::split(",", aux2, FALSE);
-	QString ir = items[0].stripWhiteSpace();
-	QString ic = items[1].stripWhiteSpace();
-	if (ir == "0" || ic == "0")
-		{
-		QMessageBox::critical(0,tr("QtiPlot - Input function error"), 
-			tr("Column and row indexes must be greater than zero!"));
-		return false;
-   		}
-
-	rowIndexes << ir;
-	colIndexes << ic;
-	
-	QString s = "cell"+ QString::number(i);
-	variables << s;
-	aux.replace(pos1,5 + pos3 - pos2, s);
-	}
-	
-int m=(int)variables.count();
-double *vars = new double[m]; 
-myParser parser;
-try
-    {
-	for (i=0; i<m; i++)
-		{
-		parser.DefineVar(variables[i].ascii(), &vars[i]);
-		myParser rparser;
-		double l = 1;
-		rparser.DefineVar("i", &l);
-		rparser.DefineVar("j", &l);
-		try
-    		{	
-			rparser.SetExpr(rowIndexes[i].ascii());
-	        rparser.Eval();
-			}
-		catch(mu::ParserError &e)
-			{
-			QMessageBox::critical(0,"QtiPlot - Row index input error", e.GetMsg());
-			return false;
-   			}	
-		
-		try
-    		{	
-			rparser.SetExpr(colIndexes[i].ascii());
-	        rparser.Eval();
-			}
-		catch(mu::ParserError &e)
-			{
-			QMessageBox::critical(0,"QtiPlot - Column index input error", e.GetMsg());
-			return false;
-			}
-
-		vars[i]=1.0;//dumy value
-		}
-
-	double index = 1;
-	parser.DefineVar("i", &index);
-	parser.DefineVar("j", &index);
-	parser.SetExpr(aux.ascii());
-	parser.Eval();
-	}
-catch(mu::ParserError &e)
-	{
-	QString errString = e.GetMsg();
-	for (i=0;i<m;i++)
-		errString.replace(variables[i], "cell(" + rowIndexes[i] + "," + colIndexes[i] + ")", TRUE);
-
-	QMessageBox::critical(0, tr("QtiPlot - Input function error"), tr(errString));
-	return false;
-    }
-delete[] vars;
-emit setValues(commandes->text(), aux, rowIndexes, colIndexes,
-			   startRow->value(), endRow->value(), startCol->value(), endCol->value());
-return true;
+  matrix->setFormula(formula);
+  if (matrix->calculate(startRow->value()-1, endRow->value()-1, startCol->value()-1, endCol->value()-1))
+    return true;
+  matrix->setFormula(oldFormula);
+  return false;
 }
 
-void matrixValuesDialog::setFormula(const QString& s)
+void matrixValuesDialog::setMatrix(Matrix* m)
 {
-	commandes->setText(s);
-}
-
-void matrixValuesDialog::setColumns(int c)
-{
-	endCol->setValue(c);
-}
-
-void matrixValuesDialog::setRows(int r)
-{
-	endRow->setValue(r);
+  matrix = m;
+  commandes->setText(m->formula());
+  endCol->setValue(m->numCols());
+  endRow->setValue(m->numRows());
 }
 
 void matrixValuesDialog::setFunctions()
 {
-functions->insertStringList(myParser::functionsList(), -1);
+functions->insertStringList(scriptEnv->mathFunctions(), -1);
 }
 
 void matrixValuesDialog::insertExplain(int index)
 {
-explain->setText(myParser::explainFunction(index));
+explain->setText(scriptEnv->mathFunctionDoc(functions->text(index)));
 }
 
 void matrixValuesDialog::insertFunction()
 {
-QString f=functions->currentText();
-if (commandes->hasSelectedText())
-	{	
-	f=f.remove(")");
-	QString markedText=commandes->selectedText();
-	commandes->insert(f+markedText+")");
-	}
-else
-	{
-	commandes->insert( f );
-	int index, para;
-	commandes->getCursorPosition (&para,&index);
-	commandes->setCursorPosition (para,index-1);
-	}
+  commandes->insertFunction(functions->currentText());
 }
 
 void matrixValuesDialog::addCell()

@@ -28,7 +28,7 @@ class muParserScript: public Script
   private:
     mu::Parser parser, rparser;
     QAsciiDict<double> variables;
-    strDict columns, rowIndexes;
+    strDict substitute, rowIndexes, colIndexes;
 };
 
 class muParserScripting: public ScriptingEnv
@@ -39,7 +39,7 @@ class muParserScripting: public ScriptingEnv
     muParserScripting(ApplicationWindow *parent) : ScriptingEnv(parent) { initialized=true; }
 
     bool isRunning() const { return true; }
-    Script *newScript(const QString &code, QObject *context=0, const QString &name="<input>")
+    Script *newScript(const QString &code, QObject *context, const QString &name="<input>")
     {
       return new muParserScript(this, code, context, name);
     }
