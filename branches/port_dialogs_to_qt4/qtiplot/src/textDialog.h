@@ -66,8 +66,6 @@ public:
 	 * \sa setAlignment()
 	 */
 	int alignment();
-	//! Return the contents of the text editor box
-	QString getText();
 	//! Return the current font
 	QFont font();
 	//! Get label background type

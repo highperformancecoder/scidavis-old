@@ -5,7 +5,7 @@
 TEMPLATE = app
 TARGET = dlgtest
 DEPENDPATH += . ../src
-INCLUDEPATH += . ../src
+INCLUDEPATH += . ../src ../../3rdparty/qwt/include
 
 # Input
 SOURCES +=  main.cpp \
@@ -31,4 +31,4 @@ HEADERS +=  ../src/textDialog.h \
 QT +=  opengl
 CONFIG      += qt warn_on debug thread opengl
 
-# QT += qt3support
+ QT += qt3support

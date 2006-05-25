@@ -246,7 +246,6 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 	layoutMiddle->addWidget(buttonU);
 
 	lineEdit = new QTextEdit();
-	lineEdit->setFont(QFont("Arial",12,QFont::Normal,FALSE));
 
 	setFocusPolicy(Qt::StrongFocus);
 	setFocusProxy(lineEdit);
@@ -283,7 +282,10 @@ void TextDialog::showLowerGreek()
 {
 	SymbolDialog *greekLetters = new SymbolDialog(SymbolDialog::lowerGreek, this, Qt::Tool);
 	greekLetters->setAttribute(Qt::WA_DeleteOnClose);
-	greekLetters->setFont(selectedFont);
+	QFont f = selectedFont;
+	if(f.pointSize()<14)
+		f.setPointSize(14);
+	greekLetters->setFont(f);
 	connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 	greekLetters->show();
 	greekLetters->setFocus();
@@ -293,7 +295,10 @@ void TextDialog::showUpperGreek()
 {
 	SymbolDialog *greekLetters = new SymbolDialog(SymbolDialog::upperGreek, this, Qt::Tool);
 	greekLetters->setAttribute(Qt::WA_DeleteOnClose);
-	greekLetters->setFont(selectedFont);
+	QFont f = selectedFont;
+	if(f.pointSize()<14)
+		f.setPointSize(14);
+	greekLetters->setFont(f);
 	connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 	greekLetters->show();
 	greekLetters->setFocus();
@@ -303,7 +308,10 @@ void TextDialog::showMathSymbols()
 {
 	SymbolDialog *mathSymbols = new SymbolDialog(SymbolDialog::mathSymbols, this, Qt::Tool);
 	mathSymbols->setAttribute(Qt::WA_DeleteOnClose);
-	mathSymbols->setFont(selectedFont);
+	QFont f = selectedFont;
+	if(f.pointSize()<14)
+		f.setPointSize(14);
+	mathSymbols->setFont(f);
 	connect(mathSymbols, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 	mathSymbols->show();
 	mathSymbols->setFocus();
@@ -314,6 +322,10 @@ void TextDialog::showArrowSymbols()
 	SymbolDialog *arrowSymbols = new SymbolDialog(SymbolDialog::arrowSymbols, this, Qt::Tool);
 	arrowSymbols->setAttribute(Qt::WA_DeleteOnClose);
 	arrowSymbols->setFont(selectedFont);
+	QFont f = selectedFont;
+	if(f.pointSize()<14)
+		f.setPointSize(14);
+	arrowSymbols->setFont(f);
 	connect(arrowSymbols, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 	arrowSymbols->show();
 	arrowSymbols->setFocus();
@@ -387,7 +399,7 @@ void TextDialog::apply()
 		emit changeColor(colorBtn->color());
 	}
 	else
-		emit values(getText(),angle(),backgroundType(),selectedFont, colorBtn->color(), backgroundBtn->color());
+		emit values(lineEdit->text(),angle(),backgroundType(),selectedFont, colorBtn->color(), backgroundBtn->color());
 }
 
 void TextDialog::accept()
@@ -442,9 +454,13 @@ void TextDialog::customFont()
 	bool okF;
 	QFont fnt = QFontDialog::getFont( &okF,selectedFont,this);
 	if (okF)
+	{
 		selectedFont = fnt;
+		buttonFont->setFont(fnt);
+		fnt.setPointSize(12);
+		lineEdit->setFont(fnt);
+	}
 	emit changeFont (fnt);
-	buttonFont->setFont(fnt);
 }
 
 void TextDialog::setAngle(int /*angle*/)
@@ -507,11 +523,6 @@ void TextDialog::pickBackgroundColor()
 	backgroundBtn->setColor ( c ) ;
 }
 
-QString TextDialog::getText()
-{
-	return lineEdit->toPlainText();
-}
-
 QFont TextDialog::font()
 {
 	return selectedFont;
@@ -521,6 +532,9 @@ void TextDialog::setFont(const QFont & fnt)
 {
 	selectedFont = fnt;
 	buttonFont->setFont(fnt);
+	QFont ftemp = fnt;
+	ftemp.setPointSize(12);
+	lineEdit->setFont(ftemp);
 }
 	
 TextDialog::~TextDialog()

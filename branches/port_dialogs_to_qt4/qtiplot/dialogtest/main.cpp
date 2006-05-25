@@ -46,17 +46,14 @@
 int main( int argc, char ** argv )
 {
 	QApplication app( argc, argv );	
-/*
 	TextDialog dlg(TextDialog::TextMarker);
 	dlg.setText("this text should not be visible");	
 	dlg.setText("enter text here\n(multiline supported)");	
 	dlg.exec();
-*/
-/*
+
 	TextDialog dlg2(TextDialog::AxisTitle);
 	dlg2.setText("enter text here\n(multiline supported)");	
 	dlg2.exec();
-*/
 /*
 	PlotWizard dlg3;
 	QStringList tables;
@@ -92,11 +89,11 @@ int main( int argc, char ** argv )
 	errCols.append("table 1_col2");
 	errCols.append("table 2_colA");
 	errCols.append("table 2_colB");
-	ErrDialog dlg6;
-	dlg6.setCurveNames(yCols);
-	dlg6.setExistingColumns(errCols);
-	dlg6.exec();
 */
+//	ErrDialog dlg6;
+//	dlg6.setCurveNames(yCols);
+//	dlg6.setExistingColumns(errCols);
+//	dlg6.exec();
 /*
 	ImportFilesDialog dlg7( true );
 	dlg7.exec();
@@ -105,6 +102,7 @@ int main( int argc, char ** argv )
 	ImageExportDialog dlg8;
 	dlg8.exec();
 */
+/*
 	QStringList tables2;
 	tables2.append("table 1");
 	tables2.append("table 2");
@@ -113,7 +111,7 @@ int main( int argc, char ** argv )
 	dlg9.setActiveTableName("table 2");
 	dlg9.setColumnSeparator(",");
 	dlg9.exec();
-
+*/
 
 	return 0;
 }

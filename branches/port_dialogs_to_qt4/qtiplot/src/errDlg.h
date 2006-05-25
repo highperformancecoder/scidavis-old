@@ -37,6 +37,8 @@
 #include <QPushButton>
 #include <QGroupBox>
 #include <QButtonGroup>
+#include <QList>
+#include <QWidget>
 	
 //! Add error bars dialog
 class ErrDialog : public QDialog
@@ -55,7 +57,7 @@ public:
 
 private:
     QLabel* textLabel1;
-    QComboBox* nameLabel, *colNamesBox;
+    QComboBox* nameLabel, *tableNamesBox, *colNamesBox;
     QGroupBox *groupBox2;
 	QGroupBox *groupBox1, *groupBox3;
 	QButtonGroup *buttonGroup1, *buttonGroup2;
@@ -66,17 +68,21 @@ private:
     QRadioButton* yErrBox;
 	QPushButton* buttonAdd;
     QPushButton* buttonCancel;
+	QList<QWidget*> *srcTables;
 
 protected slots:
 	//! Set all string in the current language
     virtual void languageChange();
 
 public slots:
+	//! Slot: add a plot definition
 	void add();
 	//! Supply the dialog with a curves list
 	void setCurveNames(const QStringList& names);
-	//! Supply the dialog with a columns list
-	void setExistingColumns(const QStringList& columns);
+	//! Supply the dialog with a tables list
+	void setSrcTables(QWidgetList* tables);
+	//! Slot: select a table
+	void selectSrcTable(int tabnr);
 
 signals:
 	//! Signal: Usually connected to the main windows defineErrorBars() slot

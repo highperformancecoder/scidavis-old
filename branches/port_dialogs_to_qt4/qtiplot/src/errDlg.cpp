@@ -31,6 +31,9 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGridLayout>
+#include <QList>
+#include "worksheet.h"
+
 
 ErrDialog::ErrDialog( QWidget* parent, Qt::WFlags fl )
     : QDialog( parent, fl )
@@ -63,8 +66,14 @@ ErrDialog::ErrDialog( QWidget* parent, Qt::WFlags fl )
 	gridLayout->addWidget(columnBox, 0, 0 );
 	
 	colNamesBox = new QComboBox();
-	gridLayout->addWidget(colNamesBox, 0, 1);
-		
+    tableNamesBox = new QComboBox();
+	
+    QHBoxLayout * comboBoxes = new QHBoxLayout();
+	comboBoxes->addWidget(tableNamesBox);
+	comboBoxes->addWidget(colNamesBox);
+
+	gridLayout->addLayout(comboBoxes, 0, 1);
+
     percentBox = new QRadioButton();
 	buttonGroup1->addButton(percentBox);
 	gridLayout->addWidget(percentBox, 1, 0 );
@@ -114,7 +123,9 @@ ErrDialog::ErrDialog( QWidget* parent, Qt::WFlags fl )
 	connect( buttonAdd, SIGNAL( clicked() ), this, SLOT( add() ) );
     connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 	connect( percentBox, SIGNAL( toggled(bool) ), valueBox, SLOT( setEnabled(bool) ) );
-	connect( columnBox, SIGNAL( toggled(bool) ), colNamesBox, SLOT( setEnabled(bool) ) );
+	connect( columnBox, SIGNAL( toggled(bool) ), tableNamesBox, SLOT( setEnabled(bool) ) );
+ 	connect( columnBox, SIGNAL( toggled(bool) ), colNamesBox, SLOT( setEnabled(bool) ) );
+	connect( tableNamesBox, SIGNAL( activated(int) ), this, SLOT( selectSrcTable(int) ));
 }
 
 void ErrDialog::setCurveNames(const QStringList& names)
@@ -122,9 +133,23 @@ void ErrDialog::setCurveNames(const QStringList& names)
 	nameLabel->addItems(names);
 }
 
-void ErrDialog::setExistingColumns(const QStringList& columns)
+void ErrDialog::setSrcTables(QWidgetList* tables)
 {
-	colNamesBox->addItems(columns);	
+	srcTables = tables;
+	tableNamesBox->clear();
+
+	QList<QWidget *>::const_iterator i;
+    for (i = srcTables->begin(); i != srcTables->end(); i++)
+		tableNamesBox->insertItem((*i)->name());
+
+	tableNamesBox->setCurrentIndex(tableNamesBox->findText(QStringList::split("_",nameLabel->currentText())[0]));
+	selectSrcTable(tableNamesBox->currentIndex());
+}
+
+void ErrDialog::selectSrcTable(int tabnr)
+{
+	colNamesBox->clear();
+	colNamesBox->addItems(((Table*)srcTables->at(tabnr))->colNames());
 }
 
 void ErrDialog::add()
@@ -136,7 +161,7 @@ void ErrDialog::add()
 		direction = 1;
 
 	if (columnBox->isChecked())
-		emit options(nameLabel->currentText(), colNamesBox->currentText(), direction);	
+		emit options(nameLabel->currentText(), tableNamesBox->currentText()+"_"+colNamesBox->currentText(), direction);	
 	else
 	{
 		int type;

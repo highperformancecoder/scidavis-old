@@ -13,14 +13,18 @@ TRANSLATIONS = translations/qtiplot_de.ts \
 			   translations/qtiplot_fr.ts 
 
 INCLUDEPATH       += ../3rdparty/qwt/include
-unix:INCLUDEPATH  += -I /usr/include/qwtplot3d
+unix:INCLUDEPATH  += -I /home/thrust/opt/qwtplot3d
 
 win32:INCLUDEPATH += ../3rdparty/qwtplot3d/include
 win32:INCLUDEPATH += C:/WinGsl
 win32:INCLUDEPATH += ../3rdparty/zlib123/include
 
+unix:LIBS 		+= -L /home/thrust/qwtplot3d
+unix:LIBS 		+= /home/thrust/opt/qwtplot3d/libqwtplot3d.so
 unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
-unix:LIBS         += -L /usr/lib -L /usr/local/lib -lgsl -lgslcblas -lqwtplot3d -lz -lqwt
+unix:LIBS         += -L ../3rdparty/qwt/lib
+#unix:LIBS         += -L /usr/lib -L /usr/local/lib -lgsl -lgslcblas -lqwtplot3d -lz -lqwt
+unix:LIBS         += -L /usr/lib -L /usr/local/lib -lgsl -lgslcblas -lz -lqwt
 
 win32:LIBS        += ../3rdparty/qwtplot3d/lib/qwtplot3d.lib
 win32:LIBS        += ../3rdparty/qwt/lib/qwt.lib  
