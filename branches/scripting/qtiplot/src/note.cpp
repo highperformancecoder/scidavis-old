@@ -4,13 +4,6 @@
 
 #include <qdatetime.h>
 #include <qlayout.h>
-#include <qapplication.h>
-#include <qprinter.h>
-#include <qpainter.h>
-#include <qpaintdevicemetrics.h>
-#include <qsimplerichtext.h>
-
-#include <math.h>
 
 Note::Note(ScriptingEnv *env, const QString& label, QWidget* parent, const char* name, WFlags f)
 				: myWidget(label, parent, name, f)

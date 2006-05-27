@@ -479,8 +479,15 @@ bool Table::calculate()
 
 QString Table::saveCommandes()
 {
-QString s="com\t";
-s+=commandes.join ("\t")+"\n";
+QString s="<com>\n";
+for (int col=0; col<tableCols(); col++)
+  if (!commandes[col].isEmpty())
+  {
+    s += "<col nr=\""+QString::number(col)+"\">\n";
+    s += commandes[col];
+    s += "\n</col>\n";
+  }
+s += "</com>\n";
 return s;
 }
 
@@ -3586,18 +3593,42 @@ return s;
 
 void Table::restore(const QStringList& lst)
 {
-QStringList l = QStringList::split ("\t", lst[0], false);
+QStringList l;
+QStringList::const_iterator i=lst.begin();
+
+l= QStringList::split ("\t", *i++, true);
 l.remove(l.first());
 loadHeader(l);
-	
-setColWidths(QStringList::split ("\t",lst[1].right(lst[1].length()-9), FALSE ));
-setCommandes(lst[2]);
 
-l = QStringList::split ("\t", lst[3], false);
+setColWidths(QStringList::split ("\t",(*i).right((*i).length()-9), FALSE ));
+i++;
+
+l = QStringList::split ("\t", *i++, true);
+if (l[0] == "com")
+{
+l.remove(l.first());
+setCommandes(l);
+} else if (l[0] == "<com>") {
+  commandes.clear();
+  for (int col=0; col<tableCols(); col++)
+    commandes << "";
+  for (; i != lst.end() && *i != "</com>"; i++)
+  {
+    int col = (*i).mid(9,(*i).length()-11).toInt();
+    QString formula;
+    for (i++; i!=lst.end() && *i != "</col>"; i++)
+      formula += *i + "\n";
+    formula.truncate(formula.length()-1);
+    commandes[col] = formula;
+  }
+  i++;
+}
+
+l = QStringList::split ("\t", *i++, true);
 l.remove(l.first());
 setColumnTypes(l);
 
-l = QStringList::split ("\t", lst[4], true);
+l = QStringList::split ("\t", *i++, true);
 l.remove(l.first());
 setColComments(l);
 }

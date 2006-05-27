@@ -1897,7 +1897,7 @@ if (boxFormat->currentItem() == 0)
 	userFormat=FALSE;
 boxPrecision->setEnabled(labels && ok && userFormat);
 	
-QString formula =  boxFormula->text().remove("\n");
+QString formula =  boxFormula->text();
 if (!boxShowFormula->isChecked())
 	formula = QString::null;
 emit showAxis(axis,boxAxisType->currentItem(), boxColName->currentText(),ok,ticksType(),
@@ -2258,7 +2258,7 @@ void axesDialog::changeBaselineDist(int baseline)
 		titles[at] = title;
 		}
 
-QString formula =  boxFormula->text().remove("\n");
+QString formula =  boxFormula->text();
 if (!boxShowFormula->isChecked())
 	formula = QString::null;
 emit showAxis(axis, boxAxisType->currentItem(), formatInfo[axis], boxShowAxis->isChecked(),ticksType(), 
@@ -2393,7 +2393,7 @@ else if (generalDialog->currentPage()==(QWidget*)axesPage)
 	else if (axis == QwtPlot::xTop)
 		xTopLabelsRotation=boxAngle->value();
 	
-	QString formula =  boxFormula->text().remove("\n");
+	QString formula =  boxFormula->text();
 	if (!boxShowFormula->isChecked())
 		formula = QString::null;
 	emit showAxis(axis, format, formatInfo[axis], boxShowAxis->isChecked(), ticksType(), 
@@ -2564,7 +2564,7 @@ boxAxisColor->setColor ( c ) ;
 
 int axis=mapToQwtAxisId();
 axesColors[axis]= c.name();
-QString formula =  boxFormula->text().remove("\n");
+QString formula =  boxFormula->text();
 if (!boxShowFormula->isChecked())
 	formula = QString::null;
 emit showAxis(axis, boxAxisType->currentItem(), formatInfo[axis], boxShowAxis->isChecked(), ticksType(), 
@@ -2638,7 +2638,7 @@ if ( ticks[axis] == type)
 	return;
 
 ticks[axis]=type;
-QString formula =  boxFormula->text().remove("\n");
+QString formula =  boxFormula->text();
 if (!boxShowFormula->isChecked())
 	formula = QString::null;
 emit showAxis(axis,boxAxisType->currentItem(),formatInfo[axis], boxShowAxis->isChecked(), type,
@@ -2682,7 +2682,7 @@ if (type > 3)
 else
 	formatInfo[axis] = boxColName->currentText();
 
-QString formula =  boxFormula->text().remove("\n");
+QString formula =  boxFormula->text();
 if (!boxShowFormula->isChecked())
 	formula = QString::null;
 emit showAxis(axis, type, formatInfo[axis], boxShowAxis->isChecked(), ticksType(), 
@@ -2802,7 +2802,7 @@ else if (type >= Graph::Time)
 else
 	formatInfo[axis] = boxColName->currentText();
 
-QString formula =  boxFormula->text().remove("\n");
+QString formula =  boxFormula->text();
 if (!boxShowFormula->isChecked())
 	formula = QString::null;
 emit showAxis(axis, type, formatInfo[axis], boxShowAxis->isChecked(), ticksType(),

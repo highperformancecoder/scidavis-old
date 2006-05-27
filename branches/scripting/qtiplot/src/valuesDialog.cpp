@@ -158,7 +158,7 @@ else
 	buttonNext->setEnabled(true);
 
 table->setSelectedCol(sc);
-colNameLabel->setText("col("+table->colLabel(sc)+")= ");
+colNameLabel->setText("col(\""+table->colLabel(sc)+"\")= ");
 
 QStringList com = table->getCommandes();
 commandes->setText(com[sc]);
@@ -221,7 +221,7 @@ table=w;
 QStringList colNames=w->colNames();
 int cols = w->tableCols();
 for (int i=0; i<cols; i++)
-	boxColumn->insertItem("col("+colNames[i]+")",i); 
+	boxColumn->insertItem("col(\""+colNames[i]+"\")",i); 
 
 start->setValue(1);
 end->setValue(w->tableRows());

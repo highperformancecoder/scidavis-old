@@ -9642,14 +9642,16 @@ return w;
 
 Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList &flist)
 {
-QStringList lst=QStringList::split ("\t",flist[0],TRUE);
-QString caption=lst[0];
-QString rows=lst[1];
-QString cols=lst[2];
+QStringList::const_iterator line = flist.begin();
 
-Matrix* w = app->newMatrix(caption, rows.toInt(), cols.toInt());
-app->setListViewDate(caption,lst[3]);
-w->setBirthDate(lst[3]);
+QStringList list=QStringList::split ("\t",*line,TRUE);
+QString caption=list[0];
+int rows = list[1].toInt();
+int cols = list[2].toInt();
+
+Matrix* w = app->newMatrix(caption, rows, cols);
+app->setListViewDate(caption,list[3]);
+w->setBirthDate(list[3]);
 
 if (caption.contains ("Matrix"))
 	{
@@ -9659,44 +9661,49 @@ if (caption.contains ("Matrix"))
 		app->matrixes = tb;
 	}
 
-restoreWindowGeometry(app, (QWidget *)w, flist[1]);
+// TODO: did all earlier versions use <data> to signify start of data?
+for (line++; line!=flist.end() && *line != "<data>"; line++)
+{
+  QStringList fields = QStringList::split("\t",*line,true);
+  if (fields[0] == "geometry") {
+    restoreWindowGeometry(app, (QWidget *)w, *line);
+  } else if (fields[0] == "ColWidth") {
+    w->setColumnsWidth(fields[1].toInt());
+  } else if (fields[0] == "Formula") {
+    w->setFormula(fields[1]);
+  } else if (fields[0] == "<formula>") {
+    QString formula;
+    for (line++; line!=flist.end() && *line != "</formula>"; line++)
+      formula += *line + "\n";
+    formula.truncate(formula.length()-1);
+    w->setFormula(formula);
+  } else if (fields[0] == "TextFormat") {
+    if (fields[1] == "f")
+      w->setTextFormat('f', fields[2].toInt());
+    else
+      w->setTextFormat('e', fields[2].toInt());
+  } else if (fields[0] == "WindowLabel") { // fileVersion > 71
+    w->setWindowLabel(fields[1]);
+    w->setCaptionPolicy((myWidget::CaptionPolicy)fields[2].toInt());
+    app->setListViewLabel(w->name(), fields[1]);
+  } else if (fields[0] == "Coordinates") { // fileVersion > 81
+    w->setCoordinates(fields[1].toDouble(), fields[2].toDouble(), fields[3].toDouble(), fields[4].toDouble());
+  }
+}
 
-lst=QStringList::split ("\t",flist[2],TRUE);
-w->setColumnsWidth((lst[1]).toInt());
-
-lst=QStringList::split ("\t",flist[3],TRUE);
-w->setFormula(lst[1]);
-
-lst=QStringList::split ("\t",flist[4],TRUE);
-if (lst[1] == "f")
-	w->setTextFormat('f', lst[2].toInt());
-else
-	w->setTextFormat('e', lst[2].toInt());
-
-if (fileVersion > 71)
-	{
-	lst=QStringList::split ("\t", flist[5], true);
-	w->setWindowLabel(lst[1]);
-	w->setCaptionPolicy((myWidget::CaptionPolicy)lst[2].toInt());
-	app->setListViewLabel(w->name(), lst[1]);
-	}
-
-if (fileVersion > 81)
-	{
-	lst=QStringList::split ("\t", flist[6], false);
-	w->setCoordinates(lst[1].toDouble(), lst[2].toDouble(), 
-					  lst[3].toDouble(), lst[4].toDouble());
-	}
 return w;
 }
 
 Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &flist)
 {
-QStringList list=QStringList::split ("\t",flist[0],TRUE);
-QString caption=list[0];
-int cols=list[2].toInt();
+QStringList::const_iterator line = flist.begin();
 
-Table* w = app->newTable(caption, list[1].toInt(),cols);
+QStringList list=QStringList::split ("\t",*line,TRUE);
+QString caption=list[0];
+int rows = list[1].toInt();
+int cols = list[2].toInt();
+
+Table* w = app->newTable(caption, rows,cols);
 app->setListViewDate(caption,list[3]);
 w->setBirthDate(list[3]);
 
@@ -9715,55 +9722,61 @@ else if (caption.contains ("Fit"))
 		app->fitNumber = tb;
 	}
 
-restoreWindowGeometry(app, (QWidget *)w, flist[1]);
-
-QString s=flist[2].right(flist[2].length()-7);
-if (fileVersion >= 78)
-	w->loadHeader(QStringList::split ("\t",s,FALSE ));
-else
-	{
-	w->setColPlotDesignation(list[4].toInt(), Table::X);
-	if (fileVersion > 50)
-		w->setColPlotDesignation(list[6].toInt(), Table::Y);
-	w->setHeader(QStringList::split ("\t",s,FALSE ));
-	}
-	
-s=flist[3].right(flist[3].length()-9);
-w->setColWidths(QStringList::split ("\t",s,FALSE ));
-w->setCommandes(flist[4]);
-
-if (fileVersion > 65)
-	{
-	QString t= flist[5];
-	w->setColumnTypes(QStringList::split ("\t", t.remove(0,7), FALSE));
-	}
-
-if (fileVersion > 71)
-	{
-	list=QStringList::split ("\t", flist[6], true);
-	list.remove(list.first());
-	w->setColComments(list);
-
-	list=QStringList::split ("\t", flist[7], true);
-	w->setWindowLabel(list[1]);
-	w->setCaptionPolicy((myWidget::CaptionPolicy)list[2].toInt());
-	app->setListViewLabel(w->name(), list[1]);
-	}
+// TODO: did all earlier versions use <data> to signify start of data?
+for (line++; line!=flist.end() && *line != "<data>"; line++)
+{
+  QStringList fields = QStringList::split("\t",*line,true);
+  if (fields[0] == "geometry") {
+    restoreWindowGeometry(app, (QWidget *)w, *line);
+  } else if (fields[0] == "header") {
+    fields.pop_front();
+    if (fileVersion >= 78)
+      w->loadHeader(fields);
+    else
+    {
+      w->setColPlotDesignation(list[4].toInt(), Table::X);
+      if (fileVersion > 50)
+	w->setColPlotDesignation(list[6].toInt(), Table::Y);
+      w->setHeader(fields);
+    }
+  } else if (fields[0] == "ColWidth") {
+    fields.pop_front();
+    w->setColWidths(fields);
+  } else if (fields[0] == "com") { // legacy code
+    w->setCommandes(*line);
+  } else if (fields[0] == "<com>") {
+    for (line++; line!=flist.end() && *line != "</com>"; line++)
+    {
+      int col = (*line).mid(9,(*line).length()-11).toInt();
+      QString formula;
+      for (line++; line!=flist.end() && *line != "</col>"; line++)
+	formula += *line + "\n";
+      formula.truncate(formula.length()-1);
+      w->setCommand(col,formula);
+    }
+  } else if (fields[0] == "ColType") { // fileVersion > 65
+    fields.pop_front();
+    w->setColumnTypes(fields);
+  } else if (fields[0] == "Comments") { // fileVersion > 71
+    fields.pop_front();
+    w->setColComments(fields);
+  } else if (fields[0] == "WindowLabel") { // fileVersion > 71
+    w->setWindowLabel(fields[1]);
+    w->setCaptionPolicy((myWidget::CaptionPolicy)fields[2].toInt());
+    app->setListViewLabel(w->name(), fields[1]);
+  }
+}
 
 if (fileVersion < 69)
-	{//read and set table values
-	int startText = 5;
-	if (fileVersion > 65)
-		startText = 6;
-
-	for (int k=startText; k<(int)flist.count()-1; k++)
-		{
-		list=QStringList::split("\t",flist[k],TRUE);
-		int line=list[0].toInt();
-		for (int i=0;i<cols;i++)
-			w->setText(line,i,list[i+1]);
-		}
-	}
+{//read and set table values
+  for (line++; line!=flist.end() && *line != "</data>"; line++)
+  {
+    QStringList fields = QStringList::split("\t",*line,true);
+    int row = fields[0].toInt();
+    for (int col=0; col<cols; col++)
+      w->setText(row,col,fields[col+1]);
+  }
+}
 return w;
 }
 
@@ -10111,6 +10124,14 @@ for (int j=0;j<(int)list.count()-1;j++)
 			fList=QStringList::split ("\t",s,TRUE);
 			fList.remove(fList.first());
 			ag->setAxesFormulas(fList);
+			}
+		else if (s.startsWith("<AxisFormula "))
+		  	{
+			  int pos = s.mid(18,s.length()-20).toInt();
+			  QString formula;
+			  for (j++; j<(int)list.count() && list[j] != "</AxisFormula>"; j++)
+			    formula += list[j] + "\n";
+			  ag->setAxisFormula(pos,formula);
 			}
 		else if (s.contains ("LabelsFormat"))
 			{

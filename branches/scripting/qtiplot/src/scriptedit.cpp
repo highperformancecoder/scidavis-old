@@ -23,9 +23,12 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
   connect(actionDoAll, SIGNAL(activated()), this, SLOT(executeAll()));
   actionEval = new QAction(NULL , "&Evaluate Expression", CTRL+Key_Return, this, "evaluate");
   connect(actionEval, SIGNAL(activated()), this, SLOT(evaluate()));
-  actionPrint = new QAction(NULL, "&Print ScratchPad", 0, this, "print");
+  actionPrint = new QAction(NULL, "&Print", 0, this, "print");
   connect(actionPrint, SIGNAL(activated()), this, SLOT(print()));
   //CTRL+Key_I -> inspect (currently "Open image file". other shutcut?)
+
+  functionsMenu = new QPopupMenu(this, "functionsMenu");
+  Q_CHECK_PTR(functionsMenu);
 }
 
 QPopupMenu *ScriptEdit::createPopupMenu (const QPoint & pos)
@@ -43,22 +46,23 @@ QPopupMenu *ScriptEdit::createPopupMenu (const QPoint & pos)
   if (parent()->isA("Note"))
   {
     Note *sp = (Note*) parent();
-    QAction *actionAutoexec = new QAction(0, tr("Auto&exec"), 0, sp);
+    QAction *actionAutoexec = new QAction(0, tr("Auto&exec"), 0, menu);
     actionAutoexec->setToggleAction(true);
     actionAutoexec->setOn(sp->autoexec());
     connect(actionAutoexec, SIGNAL(toggled(bool)), sp, SLOT(setAutoexec(bool)));
     actionAutoexec->addTo(menu);
   }
 
-  QPopupMenu *functionsMenu = new QPopupMenu(menu, "functionsMenu");
+  functionsMenu->clear();
   functionsMenu->insertTearOffHandle();
   QStringList flist = scriptEnv->mathFunctions();
   for (int i=0; i<flist.size(); i++)
   {
     int id = functionsMenu->insertItem(flist[i], this, SLOT(insertFunction(int)));
     functionsMenu->setItemParameter(id, i);
+    functionsMenu->setWhatsThis(id, scriptEnv->mathFunctionDoc(flist[i]));
   }
-  menu->insertItem(tr("functions"),functionsMenu);
+  menu->insertItem(tr("Functions"),functionsMenu);
   
   return menu;
 }

@@ -3687,9 +3687,15 @@ return s;
 
 QString Graph::saveAxesFormulas()
 {
-QString s="AxesFormulas\t";
-s+=axesFormulas.join ("\t");
-return s+"\n";
+  QString s;
+  for (int i=0; i<4; i++)
+    if (!axesFormulas[i].isEmpty())
+    {
+      s += "<AxisFormula pos=\""+QString::number(i)+"\">\n";
+      s += axesFormulas[i];
+      s += "\n</AxisFormula>\n";
+    }
+  return s;
 }
 
 QString Graph::saveScale()

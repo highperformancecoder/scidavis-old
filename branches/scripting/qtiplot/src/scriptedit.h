@@ -5,6 +5,7 @@
 #include "Scripting.h"
 
 class QAction;
+class QPopupMenu;
 
 class ScriptEdit: public QTextEdit
 {
@@ -29,6 +30,7 @@ class ScriptEdit: public QTextEdit
     ScriptingEnv *scriptEnv;
     Script *myScript;
     QAction *actionDo, *actionDoAll, *actionEval, *actionPrint;
+    QPopupMenu *functionsMenu;
 
   private slots:
     void insertErrorMsg(const QString &message);

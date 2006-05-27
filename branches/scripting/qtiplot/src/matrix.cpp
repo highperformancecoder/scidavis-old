@@ -196,7 +196,7 @@ s+= QString::number(table->numCols())+"\t";
 s+= birthDate() + "\n";
 s+= info;
 s+= "ColWidth\t" + QString::number(table->columnWidth(0))+"\n";
-s+= "Formula\t" + formula_str + "\n";
+s+= "<formula>\n" + formula_str + "\n</formula>\n";
 s+= "TextFormat\t" + QString(txt_format) + "\t" + QString::number(num_precision) + "\n";
 s+= "WindowLabel\t" + windowLabel() + "\t" + QString::number(captionPolicy()) + "\n";
 s+= "Coordinates\t" + QString::number(x_start,'g',15) + "\t" +QString::number(x_end,'g',15) + "\t";
@@ -213,32 +213,43 @@ s+= QString::number(table->numRows())+"\t";
 s+= QString::number(table->numCols())+"\n";
 s+= info;
 s+= "ColWidth\t" + QString::number(table->columnWidth(0))+"\n";
-s+= "Formula\t" + formula_str + "\n";
+s+= "<formula>\n" + formula_str + "\n</formula>\n";
 s+= "TextFormat\t" + QString(txt_format) + "\t" + QString::number(num_precision) + "\n";
 s+= "Coordinates\t" + QString::number(x_start,'g',15) + "\t" +QString::number(x_end,'g',15) + "\t";
 s+= QString::number(y_start,'g',15) + "\t" + QString::number(y_end,'g',15) + "\n";
 return s;
 }
 
-void Matrix::restore(const QStringList &l)
+void Matrix::restore(const QStringList &lst)
 {
-QStringList lst=QStringList::split ("\t",l[0],TRUE);
-setColumnsWidth((lst[1]).toInt());
+QStringList l;
+QStringList::const_iterator i=lst.begin();
 
-lst=QStringList::split ("\t",l[1],TRUE);
-formula_str = lst[1];
+l= QStringList::split ("\t", *i++, true);
+setColumnsWidth(l[1].toInt());
 
-lst=QStringList::split ("\t",l[2],TRUE);
-if (lst[1] == "f")
-	setTextFormat('f', lst[2].toInt());
+l= QStringList::split ("\t", *i++, true);
+if (l[0] == "Formula")
+  formula_str = l[1];
+else if (l[0] == "<formula>")
+{
+  for (formula_str=""; i != lst.end() && *i != "</formula>"; i++)
+    formula_str += *i + "\n";
+  formula_str.truncate(formula_str.length()-1);
+  i++;
+}
+
+l= QStringList::split ("\t", *i++, true);
+if (l[1] == "f")
+	setTextFormat('f', l[2].toInt());
 else
-	setTextFormat('e', lst[2].toInt());
+	setTextFormat('e', l[2].toInt());
 
-lst=QStringList::split ("\t",l[3],false);
-x_start = lst[1].toDouble();
-x_end = lst[2].toDouble();
-y_start = lst[3].toDouble();
-y_end = lst[4].toDouble();
+l= QStringList::split ("\t", *i++, true);
+x_start = l[1].toDouble();
+x_end = l[2].toDouble();
+y_start = l[3].toDouble();
+y_end = l[4].toDouble();
 }
 
 QString Matrix::saveText()

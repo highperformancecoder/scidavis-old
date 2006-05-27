@@ -349,6 +349,7 @@ public slots:
 
 	QStringList getAxesFormulas(){return axesFormulas;};
 	void setAxesFormulas(const QStringList& l){axesFormulas = l;};
+	void setAxisFormula(int pos, const QString &f){axesFormulas[pos] = f;};
 
 	 // canvas frame 
 	 void drawCanvasFrame(bool frameOn, int width);
