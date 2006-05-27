@@ -35,8 +35,10 @@
 #include <QSpinBox>
 #include <QCheckBox>
 #include <QImage>
+#include <QImageWriter>
 #include <QPicture>
 #include <QHBoxLayout>
+#include <QtAlgorithms>
 
 //! Import multiple ASCII files dialog
 class ImportFilesDialog: public QFileDialog
@@ -108,10 +110,10 @@ public:
 	{
 		setWindowTitle( tr( "QtiPlot - Choose a filename to save under" ) );
 
-		QStringList list = QPicture::outputFormatList ();
+		QList<QByteArray> list = QImageWriter::supportedImageFormats();
 
-		list<<"EPS";
-		list.sort();
+		list << "EPS";
+		qSort(list);
 
 		QStringList filters, selectedFilter;			
 		for(int i=0 ; i<list.count() ; i++)
