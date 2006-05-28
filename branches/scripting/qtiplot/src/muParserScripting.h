@@ -4,6 +4,7 @@
 #include "Scripting.h"
 
 #include "../3rdparty/muParser/muParser.h"
+#include "math.h"
 #include <gsl/gsl_sf.h>
 #include <qasciidict.h>
 
@@ -45,9 +46,9 @@ class muParserScripting: public ScriptingEnv
     }
 
     // we do not support global variables
-    bool setQObject(QObject *val, const char *name=0) { return false; }
-    bool setInt(int val, const char* name) { return false; }
-    bool setDouble(double val, const char* name) { return false; }
+    bool setQObject(QObject*, const char*) { return false; }
+    bool setInt(int, const char*) { return false; }
+    bool setDouble(double, const char*) { return false; }
     
     const QStringList mathFunctions() const;
     const QString mathFunctionDoc (const QString &name) const;
@@ -64,6 +65,14 @@ class muParserScripting: public ScriptingEnv
     static const mathFunction math_functions[];
 
   private:
+    static double ceil(double x)
+      { return ceil(x); }
+    static double floor(double x)
+      { return floor(x); }
+    static double mod(double x, double y)
+      { return fmod(x,y); }
+    static double pow(double x, double y)
+      { return pow(x,y); }
     static double bessel_J0(double x)
       { return gsl_sf_bessel_J0 (x); }
     static double bessel_J1(double x)

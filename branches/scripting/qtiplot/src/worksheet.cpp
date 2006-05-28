@@ -1654,14 +1654,6 @@ for (int i=0; i<rows; i++)
 return text + "</data>\n";
 }
 
-void Table::addDataRow(const QString& s, int cols)
-{
-QStringList	list=QStringList::split("\t", s, TRUE);
-int row = list[0].toInt();
-for (int i=0;i<cols;i++)
-	worksheet->setText(row, i, list[i+1]);
-}
-
 int Table::nonEmptyRows()
 {
 int r=0; 	
@@ -3161,11 +3153,27 @@ list.remove(list.first());
 if (columnWidths() != list)
 	setColWidths(list);
 
-s = t.readLine();	//commandes line
+s = t.readLine();
 list = QStringList::split ("\t", s,TRUE);
-list.remove(list.first());
-if (list != commandes)
-	commandes = list;
+if (list[0] == "com") //commandes line
+{
+  list.remove(list.first());
+  if (list != commandes)
+    commandes = list;
+} else { // commandes block
+  commandes.clear();
+  for (int i=0; i<tableCols(); i++)
+    commandes << "";
+  for (s=t.readLine(); s != "</com>"; s=t.readLine())
+  {
+    int col = s.mid(9,s.length()-11).toInt();
+    QString formula;
+    for (s=t.readLine(); s != "</col>"; s=t.readLine())
+      formula += s + "\n";
+    formula.truncate(formula.length()-1);
+    setCommand(col,formula);
+  }
+}
 
 s= t.readLine();	//colType line ?
 list = QStringList::split ("\t", s,TRUE);

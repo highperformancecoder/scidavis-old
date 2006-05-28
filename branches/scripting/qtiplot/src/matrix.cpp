@@ -146,18 +146,6 @@ void Matrix::setText (int row, int col, const QString & text )
 table->setText(row, col, text); 
 }
 
-void Matrix::addDataRow(const QString& s, int cols)
-{
-QStringList	list=QStringList::split("\t", s, TRUE);
-int row = list[0].toInt();
-for (int i=0;i<cols;i++)
-	{
-	QString s = list[i+1];
-	if ( !s.isEmpty())
-		table->setText(row, i, s);
-	}
-}
-
 bool Matrix::isEmptyRow(int row)
 {
 bool empty=TRUE;

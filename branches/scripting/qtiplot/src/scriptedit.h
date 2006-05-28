@@ -29,7 +29,7 @@ class ScriptEdit: public QTextEdit
   private:
     ScriptingEnv *scriptEnv;
     Script *myScript;
-    QAction *actionDo, *actionDoAll, *actionEval, *actionPrint;
+    QAction *actionExecute, *actionExecuteAll, *actionEval, *actionPrint;
     QPopupMenu *functionsMenu;
 
   private slots:

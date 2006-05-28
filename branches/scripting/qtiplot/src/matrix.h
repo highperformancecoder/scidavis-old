@@ -21,7 +21,6 @@ public:
 	void init(int rows, int cols);
 
 	bool isEmptyRow(int row);
-	void addDataRow(const QString& s, int cols);
 
 	//event handlers
 	bool eventFilter(QObject *object, QEvent *e);

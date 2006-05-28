@@ -153,7 +153,6 @@ public slots:
 	// row operations 
 	void deleteSelectedRows();
 	void insertRow();
-	void addDataRow(const QString& s, int cols);
 
 	// selection operations 
 	void cutSelection();

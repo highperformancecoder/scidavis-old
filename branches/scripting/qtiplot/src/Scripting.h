@@ -36,9 +36,9 @@ class Script : public QObject
     virtual bool exec() { return false; }
 
     // local variables
-    virtual bool setQObject(const QObject *val, const char *name=0) { return false; } // name should default to val->name()
-    virtual bool setInt(int val, const char* name) { return false; }
-    virtual bool setDouble(double val, const char* name) { return false; }
+    virtual bool setQObject(const QObject*, const char*) { return false; } // name should default to val->name()
+    virtual bool setInt(int, const char*) { return false; }
+    virtual bool setDouble(double, const char*) { return false; }
 
   signals:
     void codeChanged();
@@ -66,17 +66,17 @@ class ScriptingEnv : public QObject
     bool isInitialized() const { return initialized; }
     virtual bool isRunning() const { return false; }
     
-    virtual Script *newScript(const QString &code, QObject *context, const QString &name="<input>") { return 0; }
+    virtual Script *newScript(const QString&, QObject*, const QString&) { return 0; }
       
     // global variables
-    virtual bool setQObject(QObject *val, const char *name=0) { return false; } // name should default to val->name()
-    virtual bool setInt(int val, const char* name) { return false; }
-    virtual bool setDouble(double val, const char* name) { return false; }
+    virtual bool setQObject(QObject*, const char*) { return false; } // name should default to val->name()
+    virtual bool setInt(int, const char*) { return false; }
+    virtual bool setDouble(double, const char*) { return false; }
 
     virtual QString stackTraceString() { return QString::null; }
 
     virtual const QStringList mathFunctions() const { return QStringList(); }
-    virtual const QString mathFunctionDoc(const QString &name) const { return QString::null; }
+    virtual const QString mathFunctionDoc(const QString&) const { return QString::null; }
 //    virtual QSyntaxHighlighter syntaxHighlighter(QTextEdit *textEdit) const;
 
   public slots:

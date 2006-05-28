@@ -17,10 +17,10 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
   setWordWrap(QTextEdit::NoWrap);
   setTextFormat(PlainText);
   
-  actionDo = new QAction(NULL,"&Do It",CTRL+Key_J, this, "doit");
-  connect(actionDo, SIGNAL(activated()), this, SLOT(execute()));
-  actionDoAll = new QAction(NULL, "Do &All", CTRL+SHIFT+Key_J, this, "doall");
-  connect(actionDoAll, SIGNAL(activated()), this, SLOT(executeAll()));
+  actionExecute = new QAction(NULL,"E&xecute",CTRL+Key_J, this, "execute");
+  connect(actionExecute, SIGNAL(activated()), this, SLOT(execute()));
+  actionExecuteAll = new QAction(NULL, "Execute &All", CTRL+SHIFT+Key_J, this, "executeAll");
+  connect(actionExecuteAll, SIGNAL(activated()), this, SLOT(executeAll()));
   actionEval = new QAction(NULL , "&Evaluate Expression", CTRL+Key_Return, this, "evaluate");
   connect(actionEval, SIGNAL(activated()), this, SLOT(evaluate()));
   actionPrint = new QAction(NULL, "&Print", 0, this, "print");
@@ -39,8 +39,8 @@ QPopupMenu *ScriptEdit::createPopupMenu (const QPoint & pos)
   actionPrint->addTo(menu);
   menu->insertSeparator();
 
-  actionDo->addTo(menu);
-  actionDoAll->addTo(menu);
+  actionExecute->addTo(menu);
+  actionExecuteAll->addTo(menu);
   actionEval->addTo(menu);
   
   if (parent()->isA("Note"))

@@ -3545,50 +3545,28 @@ while ( !t.eof() && !progress.wasCanceled())
 		{
 		title = titleBase + QString::number(++aux)+"/"+QString::number(widgets);
 		progress.setLabelText(title);
-		if (fileVersion < 69)
+		QStringList lst;
+		while ( s!="</table>" )
 			{
-			while ( s!="</table>" )
-				{
-				s=t.readLine();
-				list<<s;
-				}
-			 openTable(app,list);
+			s=t.readLine();
+			lst<<s;
 			}
-		else
-			{
-			while ( s != "<data>" )
-				{
-				s=t.readLine();
-				list<<s;
-				}
-			Table *w = openTable(app,list);
-			int cols = w->tableCols();				
-			s = t.readLine();
-			while ( s != "</data>" )
-				{
-				w->addDataRow(s, cols);
-				s = t.readLine();
-				}				
-			}
+		lst.pop_back();
+		openTable(app,lst);
 		progress.setProgress(aux);
 		}
 	else if  (s == "<matrix>")
 		{
 		title= titleBase + QString::number(++aux)+"/"+QString::number(widgets);
 		progress.setLabelText(title);
-		while ( s != "<data>" )
+		QStringList lst;
+		while ( s != "</matrix>" )
 			{
 			s=t.readLine();
-			list<<s;
+			lst<<s;
 			}
-		Matrix *w = openMatrix(app,list);
-		int cols = w->numCols();				
-		s = t.readLine();
-		while ( s != "</data>" )
-			{
-			w->addDataRow(s, cols);
-			s = t.readLine();
-			}
+		lst.pop_back();
+		openMatrix(app, lst);
 		progress.setProgress(aux);
 		}
 	else if  (s == "<note>")
@@ -9661,8 +9639,7 @@ if (caption.contains ("Matrix"))
 		app->matrixes = tb;
 	}
 
-// TODO: did all earlier versions use <data> to signify start of data?
-for (line++; line!=flist.end() && *line != "<data>"; line++)
+for (line++; line!=flist.end(); line++)
 {
   QStringList fields = QStringList::split("\t",*line,true);
   if (fields[0] == "geometry") {
@@ -9688,7 +9665,18 @@ for (line++; line!=flist.end() && *line != "<data>"; line++)
     app->setListViewLabel(w->name(), fields[1]);
   } else if (fields[0] == "Coordinates") { // fileVersion > 81
     w->setCoordinates(fields[1].toDouble(), fields[2].toDouble(), fields[3].toDouble(), fields[4].toDouble());
-  }
+  } else // <data> or values
+    break;
+}
+if (*line == "<data>") line++;
+
+//read and set table values
+for (; line!=flist.end() && *line != "</data>"; line++)
+{
+  QStringList fields = QStringList::split("\t",*line,true);
+  int row = fields[0].toInt();
+  for (int col=0; col<cols; col++)
+    w->setText(row,col,fields[col+1]);
 }
 
 return w;
@@ -9722,8 +9710,7 @@ else if (caption.contains ("Fit"))
 		app->fitNumber = tb;
 	}
 
-// TODO: did all earlier versions use <data> to signify start of data?
-for (line++; line!=flist.end() && *line != "<data>"; line++)
+for (line++; line!=flist.end(); line++)
 {
   QStringList fields = QStringList::split("\t",*line,true);
   if (fields[0] == "geometry") {
@@ -9764,19 +9751,21 @@ for (line++; line!=flist.end() && *line != "<data>"; line++)
     w->setWindowLabel(fields[1]);
     w->setCaptionPolicy((myWidget::CaptionPolicy)fields[2].toInt());
     app->setListViewLabel(w->name(), fields[1]);
-  }
+  } else // <data> or values
+    break;
+}
+if (*line == "<data>") line++;
+
+//read and set table values
+for (; line!=flist.end() && *line != "</data>"; line++)
+{
+  QStringList fields = QStringList::split("\t",*line,true);
+  int row = fields[0].toInt();
+  for (int col=0; col<cols; col++)
+    w->setText(row,col,fields[col+1]);
 }
 
-if (fileVersion < 69)
-{//read and set table values
-  for (line++; line!=flist.end() && *line != "</data>"; line++)
-  {
-    QStringList fields = QStringList::split("\t",*line,true);
-    int row = fields[0].toInt();
-    for (int col=0; col<cols; col++)
-      w->setText(row,col,fields[col+1]);
-  }
-}
+w->setSpecifications(w->saveToString("geometry\n"));
 return w;
 }
 
@@ -12224,47 +12213,23 @@ while ( !t.eof())
 		}
 	else if  (s == "<table>")
 		{
-		if (fileVersion < 69)
-			{
-			while ( s!="</table>" )
-				{
-				s=t.readLine();
-				lst<<s;
-				}
-			 openTable(this,lst);
-			}
-		else
-			{
-			while ( s != "<data>" )
-				{
-				s=t.readLine();
-				lst<<s;
-				}
-			Table *w = openTable(this, lst);
-			int cols = w->tableCols();				
-			s = t.readLine();
-			while ( s != "</data>" )
-				{
-				w->addDataRow(s, cols);
-				s = t.readLine();
-				}				
-			}
-		}
-	else if  (s == "<matrix>")
-		{
-		while ( s != "<data>" )
+		while ( s!="</table>" )
 			{
 			s=t.readLine();
 			lst<<s;
 			}
-		Matrix *w = openMatrix(this, lst);
-		int cols = w->numCols();				
-		s = t.readLine();
-		while ( s != "</data>" )
+		lst.pop_back();
+		openTable(this,lst);
+		}
+	else if  (s == "<matrix>")
+		{
+		while ( s != "</matrix>" )
 			{
-			w->addDataRow(s, cols);
-			s = t.readLine();
+			s=t.readLine();
+			lst<<s;
 			}
+		lst.pop_back();
+		openMatrix(this, lst);
 		}
 	else if  (s == "<note>")
 		{
