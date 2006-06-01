@@ -151,15 +151,16 @@ initToolBars();
 initPlot3DToolBar();
 initMainMenu();
 
-explorerWindow = new QDockWindow (this, "explorerWindow", 0 );
+explorerWindow = new QDockWindow (this);
+explorerWindow->setCaption(tr("Project Explorer"));
 explorerWindow->setResizeEnabled (true);
 explorerWindow->setCloseMode(QDockWindow::Always);
 explorerWindow->setFixedExtentHeight(150);
 addDockWindow (explorerWindow, Qt::DockBottom);
 
-QSplitter *splitter = new QSplitter( Qt::Horizontal, explorerWindow );
+explorerSplitter = new QSplitter( Qt::Horizontal, explorerWindow );
 
-folders = new FolderListView( splitter );
+folders = new FolderListView( explorerSplitter );
 folders->header()->setClickEnabled( FALSE );
 folders->addColumn( tr("Folder") );
 folders->setRootIsDecorated( TRUE );
@@ -187,7 +188,7 @@ FolderListItem *fli = new FolderListItem(folders, current_folder);
 current_folder->setFolderListItem(fli);
 fli->setOpen( TRUE );
 
-lv = new FolderListView( splitter );
+lv = new FolderListView( explorerSplitter );
 lv->addColumn (tr("Name"),-1 );
 lv->addColumn (tr("Type"),-1 );
 lv->addColumn (tr("View"),-1 );
@@ -198,10 +199,11 @@ lv->setResizeMode(QListView::LastColumn);
 lv->setMinimumHeight(80);
 lv->setSelectionMode(QListView::Extended);
 
-explorerWindow->setWidget(splitter);
+explorerWindow->setWidget(explorerSplitter);
 explorerWindow->hide();
 
-logWindow = new QDockWindow (this, 0, 0 );
+logWindow = new QDockWindow (this);
+logWindow->setCaption(tr("Results Log"));
 logWindow->setResizeEnabled (true);
 logWindow->setCloseMode(QDockWindow::Always);
 addDockWindow (logWindow, Qt::DockTop, true);
@@ -212,7 +214,8 @@ results->setReadOnly (TRUE);
 logWindow->setWidget(results);
 logWindow->hide();
 
-consoleWindow = new QDockWindow(this, 0, 0);
+consoleWindow = new QDockWindow(this);
+consoleWindow->setCaption(tr("Scripting Console"));
 consoleWindow->setResizeEnabled(true);
 consoleWindow->setCloseMode(QDockWindow::Always);
 addDockWindow(consoleWindow, Qt::DockTop, true);
@@ -237,7 +240,6 @@ QAccel *accel = new QAccel(this);
 accel->connectItem( accel->insertItem( Key_F5 ), ws, SLOT(activateNextWindow()) );
 accel->connectItem( accel->insertItem( Key_F6 ), ws, SLOT(activatePrevWindow()) );
 accel->connectItem( accel->insertItem( Key_Delete ), this, SLOT(clearSelection()) );
-
 
 connect(actionShowLog, SIGNAL(toggled(bool)), this, SLOT(showResults(bool)));
 connect(logWindow,SIGNAL(visibilityChanged(bool)),actionShowLog,SLOT(setOn(bool)));
@@ -268,7 +270,8 @@ connect(lv, SIGNAL(itemRenamed(QListViewItem *, int, const QString &)),
 		this, SLOT(renameWindow(QListViewItem *, int, const QString &)));
 connect(scriptEnv,SIGNAL(error(const QString&,const QString&,int)),this,SLOT(scriptError(const QString&,const QString&,int)));
 
-connect(recent, SIGNAL(activated(int)),this, SLOT(openRecentProject(int)));
+connect(recent, SIGNAL(activated(int)), this, SLOT(openRecentProject(int)));
+connect(&http, SIGNAL(done(bool)), this, SLOT(getVersionDone(bool)));
 }
 
 void ApplicationWindow::initGlobalConstants()
@@ -280,7 +283,7 @@ void ApplicationWindow::initGlobalConstants()
 #endif
 
 askForSupport = true;
-majVersion = 0; minVersion = 8; patchVersion = 5;
+majVersion = 0; minVersion = 8; patchVersion = 6;
 graphs=0; tables=0; matrixes = 0; notes = 0; fitNumber=0;
 projectname="untitled";
 ignoredLines=0;
@@ -342,6 +345,7 @@ void ApplicationWindow::initToolBars()
     QPixmap openIcon, saveIcon;
 
     fileTools = new QToolBar( this, "file operations" );
+	fileTools->setCloseMode(QDockWindow::Undocked);
     addToolBar( fileTools, tr( "File" ), Top, TRUE );
 
 	actionNewProject->addTo(fileTools);
@@ -375,6 +379,7 @@ void ApplicationWindow::initToolBars()
 	actionShowLog->addTo(fileTools);
 
 	editTools = new QToolBar( this, "edit operations" );
+	editTools->setCloseMode(QDockWindow::Undocked);
     addToolBar( editTools, tr( "Edit" ));
 
 	actionUndo->addTo(editTools);
@@ -385,6 +390,7 @@ void ApplicationWindow::initToolBars()
 	actionClearSelection->addTo(editTools);
 
 	plotTools = new QToolBar( this, "file operations" );
+	plotTools->setCloseMode(QDockWindow::Undocked);
     addToolBar( plotTools, tr( "Plot" ));
 
 	actionAddLayer->addTo(plotTools);
@@ -458,6 +464,7 @@ void ApplicationWindow::initToolBars()
 	actionAddImage->addTo(plotTools);
 
 	tableTools = new QToolBar( this, "table operations" );
+	tableTools->setCloseMode(QDockWindow::Undocked);
     addToolBar( tableTools, tr( "Table" ), Top,FALSE );
 
 	actionPlotL->addTo(tableTools);
@@ -771,7 +778,7 @@ void ApplicationWindow::initMainMenu()
 	actionChooseHelpFolder->addTo(help);
 	help->insertSeparator();
 	actionHomePage->addTo(help);
-	//actionCheckUpdates->addTo(help);
+	actionCheckUpdates->addTo(help);
 	actionDownloadManual->addTo(help);
 	actionTranslations->addTo(help);
 	help->insertSeparator();
@@ -4108,7 +4115,6 @@ QStringList aux = settings.readListEntry("/plot3DColors");
 QStringList plot3DFonts = settings.readListEntry("/plot3DFonts");
 
 fitPluginsPath = settings.readEntry("/fitPluginsPath", "fitPlugins");
-settings.endGroup();
 
 if (aux.size() == 8)
 	plot3DColors = aux;
@@ -4170,95 +4176,16 @@ if (plot3DFonts.size() == 12)
 if (applicationFont.size() == 4)	
 	appFont=QFont (applicationFont[0],applicationFont[1].toInt(),applicationFont[2].toInt(),applicationFont[3].toInt());
 
-bool ok = true;
-settings.beginGroup("/ProjectExplorer");
-int edock = settings.readNumEntry("/dock", (int)Qt::DockBottom, &ok);
-int index = settings.readNumEntry("/index", 0, &ok);
-bool newLine = settings.readBoolEntry("/newLine", true, &ok);
-int offset = settings.readNumEntry("/offset", 0, &ok);
-int x = settings.readNumEntry("/x", 0, &ok);
-int y = settings.readNumEntry("/y", 0, &ok);
-int ewidth = settings.readNumEntry("/width", 0, &ok);
-int eheight = settings.readNumEntry("/height", 0, &ok);
-bool visible = settings.readBoolEntry("/visible", false, &ok);
+//restore dock windows and tool bars
+QString str = settings.readEntry("/DockWindows");
+QTextIStream in1(&str);
+in1 >> *this;
+
+str = settings.readEntry("/ExplorerSplitter");
+QTextIStream in2(&str);
+in2 >> *explorerSplitter;
+
 settings.endGroup();
-
-if (ok)
-	{
-	if (edock == Qt::DockTornOff)
-		{
-		moveDockWindow(explorerWindow, (Qt::Dock)edock);
-		explorerWindow->setGeometry(QRect(x, y, ewidth, eheight));
-		}
-	else
-		moveDockWindow(explorerWindow, (Qt::Dock)edock, newLine, index, offset);
-
-	if (visible)
-		{
-		actionShowExplorer->setOn(true);
-		explorerWindow->show();
-		}
-	}
-
-settings.beginGroup("/ResultsLog");
-int rdock = settings.readNumEntry("/dock", (int)Qt::DockBottom, &ok);
-index = settings.readNumEntry("/index", 0, &ok);
-newLine = settings.readBoolEntry("/newLine", true, &ok);
-offset = settings.readNumEntry("/offset", 0, &ok);
-x = settings.readNumEntry("/x", 0, &ok);
-y = settings.readNumEntry("/y", 0, &ok);
-int rwidth = settings.readNumEntry("/width", 0, &ok);
-int rheight = settings.readNumEntry("/height", 0, &ok);
-visible = settings.readBoolEntry("/visible", false, &ok);
-settings.endGroup();
-
-if (ok)
-	{
-	if (rdock == Qt::DockTornOff)
-		{
-		moveDockWindow(logWindow, (Qt::Dock)rdock);
-		logWindow->setGeometry(QRect(x, y, rwidth, rheight));
-		}
-	else
-		{
-		moveDockWindow(logWindow, (Qt::Dock)rdock, newLine, index, offset);
-		logWindow->setFixedExtentWidth(rwidth);
-		logWindow->setFixedExtentHeight(rheight);
-		}
-
-	explorerWindow->setFixedExtentWidth(ewidth);
-	explorerWindow->setFixedExtentHeight(eheight);
-
-	showResults(visible);
-	actionShowLog->setOn(visible);
-	}
-
-settings.beginGroup("/ConsoleWindow");
-int cdock = settings.readNumEntry("/dock", (int)Qt::DockBottom, &ok);
-index = settings.readNumEntry("/index", 0, &ok);
-newLine = settings.readBoolEntry("/newLine", true, &ok);
-offset = settings.readNumEntry("/offset", 0, &ok);
-x = settings.readNumEntry("/x", 0, &ok);
-y = settings.readNumEntry("/y", 0, &ok);
-int cwidth = settings.readNumEntry("/width", 0, &ok);
-int cheight = settings.readNumEntry("/height", 0, &ok);
-visible = settings.readBoolEntry("/visible", false, &ok);
-settings.endGroup();
-
-if (ok)
-	{
-	if (cdock == Qt::DockTornOff)
-		{
-		moveDockWindow(consoleWindow, (Qt::Dock)cdock);
-		consoleWindow->setGeometry(QRect(x, y, cwidth, cheight));
-		}
-	else
-		{
-		moveDockWindow(consoleWindow, (Qt::Dock)cdock, newLine, index, offset);
-		consoleWindow->setFixedExtentWidth(cwidth);
-		consoleWindow->setFixedExtentHeight(cheight);
-		}
-	}
 }
 
 void ApplicationWindow::saveSettings()
@@ -4380,49 +4307,16 @@ settings.writeEntry("/plot3DResolution", plot3DResolution);
 settings.writeEntry("/plot3DColors", plot3DColors);
 settings.writeEntry("/plot3DFonts", plot3DFonts);
 settings.writeEntry("/fitPluginsPath", fitPluginsPath);
-settings.endGroup();
 
-Qt::Dock dock;
-int index, offset;
-bool nl;
+QString str;
+QTextOStream out1(&str);
+out1 << *this;
+settings.writeEntry("/DockWindows", str);
 
-settings.beginGroup("/ProjectExplorer");
-getLocation(explorerWindow, dock, index, nl, offset);
-settings.writeEntry("/dock", (int)dock);
-settings.writeEntry("/index", index);
-settings.writeEntry("/newLine", nl);
-settings.writeEntry("/offset", offset);
-settings.writeEntry("/x", explorerWindow->x());
-settings.writeEntry("/y", explorerWindow->y());
-settings.writeEntry("/width", explorerWindow->width());
-settings.writeEntry("/height", explorerWindow->height());
-settings.writeEntry("/visible", explorerWindow->isVisible());
-settings.endGroup();
+QTextOStream out2(&str);
+out2 << *explorerSplitter;
+settings.writeEntry("/ExplorerSplitter", str);
 
-settings.beginGroup("/ResultsLog");
-getLocation(logWindow, dock, index, nl, offset);
-settings.writeEntry("/dock", (int)dock);
-settings.writeEntry("/index", index);
-settings.writeEntry("/newLine", nl);
-settings.writeEntry("/offset", offset);
-settings.writeEntry("/x", logWindow->x());
-settings.writeEntry("/y", logWindow->y());
-settings.writeEntry("/width", logWindow->width());
-settings.writeEntry("/height", logWindow->height());
-settings.writeEntry("/visible", logWindow->isVisible());
-settings.endGroup();
-
-settings.beginGroup("/ConsoleWindow");
-getLocation(consoleWindow, dock, index, nl, offset);
-settings.writeEntry("/dock", (int)dock);
-settings.writeEntry("/index", index);
-settings.writeEntry("/newLine", nl);
-settings.writeEntry("/offset", offset);
-settings.writeEntry("/x", consoleWindow->x());
-settings.writeEntry("/y", consoleWindow->y());
-settings.writeEntry("/width", consoleWindow->width());
-settings.writeEntry("/height", consoleWindow->height());
-settings.writeEntry("/visible", consoleWindow->isVisible());
 settings.endGroup();
 }
 
@@ -9316,6 +9210,7 @@ void ApplicationWindow::custom3DGrids(int grids)
 void ApplicationWindow::initPlot3DToolBar()
 {
 	plot3DTools = new QToolBar( this, "plot3d operations" );
+	plot3DTools->setCloseMode(QDockWindow::Undocked);
     addToolBar( plot3DTools, tr( "Surface 3D" ),Top, FALSE );
 
 	coord = new QActionGroup( this, "coord" );
@@ -11119,8 +11014,8 @@ void ApplicationWindow::createActions()
   actionMultiPeakLorentz = new QAction(tr("&Lorentzian..."), QString::null, this);
   connect(actionMultiPeakLorentz, SIGNAL(activated()), this, SLOT(fitMultiPeakLorentz()));
 
-  actionCheckUpdates = new QAction(tr("&Search for Updates"), QString::null, this);
-  connect(actionCheckUpdates, SIGNAL(activated()), this, SLOT(checkUpdates()));
+  actionCheckUpdates = new QAction(tr("Search for &Updates"), QString::null, this);
+  connect(actionCheckUpdates, SIGNAL(activated()), this, SLOT(getVersionFile()));
 
   actionHomePage = new QAction(tr("&QtiPlot Homepage"), QString::null, this);
   connect(actionHomePage, SIGNAL(activated()), this, SLOT(showHomePage()));
@@ -11449,7 +11344,7 @@ void ApplicationWindow::translateActionsStrings()
   actionMultiPeakGauss->setMenuText(tr("&Gaussian..."));
   actionMultiPeakLorentz->setMenuText(tr("&Lorentzian..."));
   actionHomePage->setMenuText(tr("&QtiPlot Homepage"));
-  actionCheckUpdates->setMenuText(tr("&Search for Updates"));
+  actionCheckUpdates->setMenuText(tr("Search for &Updates"));
   actionDownloadManual->setMenuText(tr("Download &manual"));
   actionTranslations->setMenuText(tr("&Translations"));
   actionDonate->setMenuText(tr("Make a &donation"));
@@ -11913,20 +11808,6 @@ open_browser(this, "http://soft.proindependent.com/manuals.html");
 void ApplicationWindow::downloadTranslation()
 {
 open_browser(this, "http://soft.proindependent.com/translations.html");
-}
-
-void ApplicationWindow::checkUpdates()
-{
-QUrlOperator *op = new QUrlOperator();
-connect(op, SIGNAL(finished(QNetworkOperation *)), 
-		this, SLOT(checkUpdates(QNetworkOperation *)));
-//op.get();
-op->copy("http://soft.proindependent.com/version.txt", "./tmp.txt", false, true);
-}
-
-void ApplicationWindow::checkUpdates(QNetworkOperation *op)
-{
-QMessageBox::information(this, "", QString::number(op->errorCode()));
 }
 
 void ApplicationWindow::showHomePage()
@@ -13344,6 +13225,56 @@ src_f = src->folder();
 delete src_f;
 delete src;
 folders->blockSignals(false);
+}
+
+void ApplicationWindow::getVersionDone(bool error)
+{
+if (error)
+	{
+	QMessageBox::warning(this, tr("QtiPlot - HTTP Get Version File"),
+		tr("Error while fetching version file with HTTP: %1.").arg(http.errorString()));
+	return;
+	}
+
+versionFile.close();
+
+if (versionFile.open(IO_ReadOnly))
+	{
+	QTextStream t( &versionFile );
+	t.setEncoding(QTextStream::UnicodeUTF8);
+	QString version = t.readLine();
+	versionFile.close();
+	versionFile.remove();
+
+	QString currentVersion = QString::number(majVersion) + "." + QString::number(minVersion) +
+							"." + QString::number(patchVersion);
+	if (currentVersion == version)
+		{
+		QMessageBox::information(this, tr("QtiPlot - No Updates Available"),
+			tr("No updates available. Your current version %1 is the last version available!").arg(version));
+		}
+	else
+		{
+		if(QMessageBox::question(this, tr("QtiPlot - Updates Available"),
+		tr("There is a newer version of QtiPlot (%1) available for download. Would you like to download it?").arg(version),
+		QMessageBox::Yes|QMessageBox::Default, QMessageBox::No|QMessageBox::Escape) == QMessageBox::Yes)
+			open_browser(this, "http://soft.proindependent.com/download.html");
+		}
+	}
+}
+
+void ApplicationWindow::getVersionFile()
+{
+versionFile.setName("qtiplot_last_version.txt");
+if (!versionFile.open(IO_WriteOnly))
+	{
+	QMessageBox::warning(this, tr("QtiPlot - HTTP Get Version File"),
+		tr("Cannot write file %1\n%2.").arg(versionFile.name()).arg(versionFile.errorString()));
+	return;
+	}
+http.setHost("soft.proindependent.com");
+http.get("/version.txt", &versionFile);
+http.closeConnection();
 }
 
 ApplicationWindow::~ApplicationWindow()

@@ -139,7 +139,6 @@ public slots:
 	void showAreaColor(bool show);
 
 	void showPopupMenu(QListBoxItem *it, const QPoint &point);
-	void removeCurve();
 	void removeSelectedCurve();
 	
 	/******* error bars options **************/

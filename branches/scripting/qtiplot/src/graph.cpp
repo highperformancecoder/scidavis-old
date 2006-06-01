@@ -6408,7 +6408,7 @@ else
 
 int Graph::curveType(int curveIndex)
 {
-if (curveIndex < (int)c_type.size())
+if (curveIndex < (int)c_type.size() && curveIndex >= 0)
 	return c_type[curveIndex];
 else 
 	return -1;

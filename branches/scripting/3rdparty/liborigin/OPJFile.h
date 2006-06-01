@@ -3,14 +3,23 @@
 #ifndef OPJFILE_H
 #define OPJFILE_H
 
-// if it crashes : reduce numbers here
-#define MAX_SPREADS 128
+// for htonl
+#ifndef WIN32
+    #include <sys/types.h>
+    #include <netinet/in.h>
+	#include <inttypes.h>
+#else
+	#include <windows.h>
+#endif
 
+// if it crashes : reduce numbers here
 #if defined(_MSC_VER) //MSVC Compiler
+#define MAX_SPREADS 128
 #define MAX_COLUMNS 128
 #define MAX_ENTRIES 16384
 #else
-#define MAX_COLUMNS 512
+#define MAX_SPREADS 255
+#define MAX_COLUMNS 255
 #define MAX_ENTRIES 65535
 #endif
 
@@ -48,6 +57,8 @@ public:
 		return 0;
 	}	//!< get data strings of column c/row r of spreadsheet s
 private:
+	bool IsBigEndian() { return( htonl(1)==1 ); }
+	void ByteSwap(unsigned char * b, int n);
 	char* filename;				//!< project file name
 	int version;				//!< project version
 	int nr_spreads;				//!< number of spreadsheets

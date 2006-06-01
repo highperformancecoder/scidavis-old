@@ -4,7 +4,7 @@
 #include <qregexp.h>
 
 ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
-	mw(app)
+		mw(app)
 {	
 OPJFile opj((char *)filename.latin1());
 parse_error = opj.Parse();
@@ -45,6 +45,11 @@ for (int s=0; s<opj.numSpreads(); s++)
 			}		
 		}
 	table->showNormal();
+
+	//cascade the tables
+	int dx=table->verticalHeaderWidth();
+	int dy=table->parentWidget()->frameGeometry().height() - table->height();
+	table->parentWidget()->move(QPoint(s*dx,s*dy));
 	}
 return true;
 }

@@ -15,21 +15,24 @@ If it crashes : reduce maximum numbers in OPJFile.h.
 
 ---------------------------------------------------------------------------
 FEATURES :
-	* reads any worksheets with any columns
+	* reads any worksheets with all columns
 	* supports 4.1, 5.0, 6.0, 6.1, 7.0, 7.5 projects
 
 ---------------------------------------------------------------------------
 TODO :
+	* use column name if not matching in header section ?
+	* read spreadsheet infos (LAYER section) with better method
 	* support FUNCTION : drf_spin
 	* support MATRIX tables
 	* support extra graph (no link to data) : power_cdw
-	* read spreadsheet infos (LAYER section) with better method
 	* fix various problems (check ORIGIN/README)
 	* read graphs
 
 ---------------------------------------------------------------------------
 Changelog :
 
+05-26-06	* compare only 11 chars of col label in header section
+05-24-06	* fixed byteorder on big endian systems
 05-16-06	* better method for storing label data (Entry)
 11-15-05	* read empty entries
 		* read label columns

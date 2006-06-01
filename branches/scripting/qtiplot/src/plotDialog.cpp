@@ -655,7 +655,8 @@ lastSelectedCurve=listBox->index (it);
 
 QPopupMenu contextMenu(this);
 if (listBox->count() > 1)
-	contextMenu.insertItem(tr("&Delete"), this, SLOT(removeCurve()));
+	contextMenu.insertItem(tr("&Delete"), this, SLOT(removeSelectedCurve()));
+
 if (it->text().contains("="))
 	contextMenu.insertItem(tr("&Edit..."), this, SLOT(editFunctionCurve()));
 else
@@ -672,17 +673,14 @@ if (app)
 	app->showFunctionDialog(listBox->text(curve), curve);
 }
 
-void plotDialog::removeCurve()
-{
-graph->removeCurve(lastSelectedCurve);
-listBox->removeItem (lastSelectedCurve);
-}
-
 void plotDialog::removeSelectedCurve()
 {
-int curve=listBox->currentItem ();
+int curve=listBox->currentItem();
 graph->removeCurve(curve);
 listBox->removeItem (curve);
+
+if (listBox->count() == 0)
+	close();
 }
 
 void plotDialog::changeErrorBarsPlus()
@@ -738,7 +736,11 @@ void plotDialog::updateTabWindow(int curveIndex)
 {
 int plot_type = setPlotType(curveIndex);
 if (plot_type < 0)
+	{
+	lastSelectedCurve = -1;
 	return;
+	}
+
 else if (graph->curveType(lastSelectedCurve) == plot_type)
 	{
 	setActiveCurve(curveIndex);

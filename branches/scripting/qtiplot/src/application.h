@@ -3,6 +3,8 @@
 
 #include <qmainwindow.h>
 #include <qlistview.h> 
+#include <qhttp.h> 
+#include <qfile.h> 
 
 #include "graph3D.h"
 #include "plot3DDialog.h"
@@ -21,7 +23,7 @@ class QTextBrowser;
 class QLineEdit;
 class QDockWindow;
 class QTranslator;
-class QNetworkOperation;
+class QSplitter;
 
 class Matrix;
 class Table;
@@ -567,15 +569,20 @@ public slots:
 
 	void updateRecentProjectsList();
 	
-	//open internet browser
-	void checkUpdates();
-	void checkUpdates(QNetworkOperation *op);
+	//! Slot: connected to the done(bool) signal of the http object
+	void getVersionDone(bool error);
+
+	//! Slot: called when the user presses the actionCheckUpdates
+	void getVersionFile();
+
 	void showDonationDialog();
 	void showSupportPage();
 	void showDonationsPage();
 	void showHomePage();
 	void downloadManual();
 	void downloadTranslation();
+
+	//! Opens an internet browser
 	bool open_browser(QWidget* parent, const QString& rUrl);
 
 	void parseCommandLineArgument(const QString& s, int args);
@@ -796,6 +803,12 @@ private:
 	QPtrList<QListViewItem> draggedItems;
 	//!Scripting environment currently in use
 	ScriptingEnv *scriptEnv;
+	//! Used when checking for new versions
+	QHttp http;
+	//! Used when checking for new versions
+	QFile versionFile;
+
+	QSplitter *explorerSplitter;
 };
 
 #endif

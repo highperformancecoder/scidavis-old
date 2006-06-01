@@ -5,9 +5,22 @@
 #include <string.h>
 #include <math.h>
 
+#include <algorithm> //required for std::swap
 #include "OPJFile.h"
 
 #define MAX_LEVEL 20
+#define ERROR_MSG "Please send the OPJ file and the opjfile.log to the author of liborigin!\n"
+
+#define SwapBytes(x) ByteSwap((unsigned char *) &x,sizeof(x))
+
+void OPJFile::ByteSwap(unsigned char * b, int n) {
+	register int i = 0;
+	register int j = n-1;
+	while (i<j) {       
+		std::swap(b[i], b[j]);
+		i++, j--;
+	}       
+}
 
 OPJFile::OPJFile(char *filename) 
 	: filename(filename) 
@@ -41,7 +54,7 @@ filepre +
 	+ pre + head + data	col B
 */
 
-/* parse file filename complete and save values */
+/* parse file "filename" completely and save values */
 int OPJFile::Parse() {
 	int i,j;
 	FILE *f, *debug;
@@ -109,6 +122,8 @@ int OPJFile::Parse() {
 	
 	int col_found;
 	fread(&col_found,4,1,f);
+	if(IsBigEndian()) SwapBytes(col_found);
+
 	fread(&c,1,1,f);	// skip '\n'
 	fprintf(debug,"	[column found = %d/0x%X @ 0x%X]\n",col_found,col_found,(unsigned int) ftell(f));
 
@@ -184,6 +199,7 @@ int OPJFile::Parse() {
 		} while (c != '\n');
 
 		fread(&nbytes,4,1,f);
+		if(IsBigEndian()) SwapBytes(nbytes);
 		if(fmod(nbytes,(double)valuesize)>0)
 			fprintf(debug,"WARNING: data section could not be read correct\n");
 		nr = nbytes / valuesize;
@@ -204,6 +220,7 @@ int OPJFile::Parse() {
 		for (i=0;i<nr;i++) {
 			if(valuesize <= 16) {	// value
 				fread(&a,valuesize,1,f);
+				if(IsBigEndian()) SwapBytes(a);
 				fprintf(debug,"%g ",a);
 				data[nr_spreads-1][(current_col-1)][i]=a;
 			}
@@ -229,6 +246,7 @@ int OPJFile::Parse() {
 			fread(&c,1,1,f);
 		}
 		fread(&col_found,4,1,f);
+		if(IsBigEndian()) SwapBytes(col_found);
 		fread(&c,1,1,f);	// skip '\n'
 		fprintf(debug,"	[column found = %d/0x%X (@ 0x%X)]\n",col_found,col_found,(unsigned int) ftell(f)-5);
 		fflush(debug);
@@ -238,8 +256,9 @@ int OPJFile::Parse() {
 	// TODO : use new method ('\n')
 
 	int POS = ftell(f)-11;
-	fprintf(debug,"\n[position @ 0x%X]\n",POS);
-	fprintf(debug,"		nr_spreads = %d\n",nr_spreads);
+	fprintf(debug,"\nHEADER SECTION\n");
+	fprintf(debug,"	nr_spreads = %d\n",nr_spreads);
+	fprintf(debug,"	[position @ 0x%X]\n",POS);
 	fflush(debug);
 
 ///////////////////// SPREADSHEET INFOS ////////////////////////////////////
@@ -289,7 +308,7 @@ int OPJFile::Parse() {
 			return -5;
 		}
 		
-		fprintf(debug,"	OK. Spreadsheet SECTION found	(@ 0x%X)\n",POS);
+		fprintf(debug,"	[Spreadsheet SECTION (@ 0x%X)]\n",POS);
 		fflush(debug);
 	
 		// check spreadsheet name
@@ -305,29 +324,33 @@ int OPJFile::Parse() {
 		fprintf(debug,"		SPREADSHEET %d NAME : %s	(@ 0x%X) has %d columns\n",
 			spread+1,name,POS + 0x12,nr_cols[spread]);
 	
-		int ATYPE;
+		int ATYPE=0;
 		LAYER = POS;
 		if(version == 750) {
 			// LAYER section
 			LAYER += 0x4AB;
 		 	ATYPE = 0xCF;
 			COL_JUMP = 0x1F2;
-			// seek for "L"ayerInfoStorage to find layer section
+
+			// skip until '\n'
+			fseek(f,LAYER, SEEK_SET);
+			do{
+				fread(&c,1,1,f);
+				LAYER++;
+			} while (c != '\n');
+			LAYER--;
+			fprintf(debug,"		[LAYER HEADER @ 0x%X]\n", (unsigned int) ftell(f)-1);
+
+			// check for "L"ayerInfoStorage in header section
 			fseek(f,LAYER+0x53, SEEK_SET);
 			fread(&c,1,1,f);
-			while( c != 'L' && jump < MAX_LEVEL) {	// no inf loop; number of "set column value"
-				LAYER += 0x99;
-				fseek(f,LAYER+0x53, SEEK_SET);
-				fread(&c,1,1,f);
-				jump++;
+			if( c == 'L') {
+				fprintf(debug,"		TEST : OK (LayerInfoStorage found @ 0x%X)\n",LAYER+0x53);
 			} 
-	
-			if(jump == MAX_LEVEL) {
-				fprintf(debug,"		LAYER %d SECTION not found !\nGiving up.",i+1);
+			else{
+				fprintf(debug,"ERROR : LAYER %d SECTION not found @ 0x%X\n"ERROR_MSG,i+1,LAYER+0x53);
 				return -3;
 			}
-	
-			fprintf(debug,"		[LAYER %d @ 0x%X]\n",i+1,LAYER);
 		}
 		else if (version == 700)
 			ATYPE = 0x2E4;
@@ -353,7 +376,10 @@ int OPJFile::Parse() {
 		for (j=0;j<nr_cols[spread];j++) {
 			fseek(f,LAYER+ATYPE+j*COL_JUMP, SEEK_SET);
 			fread(&name,25,1,f);
-			if(strncmp(name,colname[spread][j],strlen(colname[spread][j])) == 0) {
+
+			int length = strlen(colname[spread][j]);
+			int max_length = (length < 11) ? length : 11 ;	// only first 11 chars are saved here !
+			if(strncmp(name,colname[spread][j], max_length) == 0) {
 				fseek(f,LAYER+ATYPE+j*COL_JUMP-1, SEEK_SET);
 				fread(&c,1,1,f);
 				char type[5];
@@ -370,7 +396,8 @@ int OPJFile::Parse() {
 				fprintf(debug,"		COLUMN %s type = %s (@ 0x%X)\n",colname[spread][j],type,LAYER+ATYPE+j*COL_JUMP);
 			}
 			else {
-				fprintf(debug,"		COLUMN %d (%c) ? (@ 0x%X)\n",j+1,c,LAYER+ATYPE+j*COL_JUMP);
+				fprintf(debug,"		COLUMN %d (%s != %s) ? (@ 0x%X)\n",j+1,name,colname[spread][j],LAYER+ATYPE+j*COL_JUMP);
+				fprintf(debug,"ERROR : could not find column type\n"ERROR_MSG);
 			}
 		}
 		fflush(debug);
