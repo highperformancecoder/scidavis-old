@@ -10015,6 +10015,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 			  QString formula;
 			  for (j++; j<(int)list.count() && list[j] != "</AxisFormula>"; j++)
 			    formula += list[j] + "\n";
+			  formula.truncate(formula.length()-1);
 			  ag->setAxisFormula(pos,formula);
 			}
 		else if (s.contains ("LabelsFormat"))

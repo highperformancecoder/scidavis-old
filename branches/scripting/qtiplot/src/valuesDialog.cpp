@@ -226,6 +226,7 @@ for (int i=0; i<cols; i++)
 start->setValue(1);
 end->setValue(w->tableRows());
 updateColumn(w->selectedColumn());
+commandes->setContext(w);
 }
 
 setColValuesDialog::~setColValuesDialog()

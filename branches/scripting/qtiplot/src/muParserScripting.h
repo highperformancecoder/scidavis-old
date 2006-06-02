@@ -27,9 +27,12 @@ class muParserScript: public Script
     bool setDouble(double val, const char* name);
 
   private:
+    int setDynamicVars();
+
     mu::Parser parser, rparser;
     QAsciiDict<double> variables;
-    strDict substitute, rowIndexes, colIndexes;
+    strDict substitute, rowIndexes, colIndexes, userVariables;
+    bool returns;
 };
 
 class muParserScripting: public ScriptingEnv

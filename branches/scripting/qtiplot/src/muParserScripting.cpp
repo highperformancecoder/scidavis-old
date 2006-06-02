@@ -85,10 +85,22 @@ bool muParserScript::setDouble(double val, const char *name)
   if (!valptr)
   {
     valptr = new double;
-    if (!valptr) return false;
-    variables.insert(name, valptr);
-    parser.DefineVar(name, valptr);
-    rparser.DefineVar(name, valptr);
+    if (!valptr)
+    {
+      emit_error(tr("Out of memory"),0);
+      return false;
+    }
+    try {
+      parser.DefineVar(name, valptr);
+      rparser.DefineVar(name, valptr);
+      variables.insert(name, valptr);
+    } catch (mu::ParserError &e) {
+      QString errString=e.GetMsg();
+      for (strDict::iterator i=substitute.begin(); i!=substitute.end(); i++)
+	errString.replace(i.key(), i.data(), true);
+      emit_error(errString, 0);
+      return false;
+    }
   }
   *valptr = val;
   return  true;
@@ -107,8 +119,7 @@ bool muParserScript::setQObject(QObject*, const char*)
 bool muParserScript::compile()
 {
   QString aux(Code);
-  aux.remove("\n");
-  QStringList variables;
+  int i;
 
   if (Context->isA("Table"))
   {
@@ -116,7 +127,7 @@ bool muParserScript::compile()
     int pos1, pos2, pos3;
     QStringList colNames=((Table*)Context)->colNames();
     int n = aux.contains("col(");
-    for (int i=0; i<n; i++)
+    for (i=0; i<n; i++)
     {
       pos1=aux.find("col(",0,TRUE);
       pos2=pos1+3;
@@ -134,12 +145,12 @@ bool muParserScript::compile()
       // allow both name and "name" for compatibility
       if (items[0].startsWith("\"") && items[0].endsWith("\""))
 	items[0] = items[0].mid(1,items[0].length()-2);
-      int index=colNames.findIndex (items[0]);
-      QString s="c"+ QString::number(i)+"_"+QString::number(index);
+      QString s = "__c" + QString::number(i);
       if (items.count() == 2)
 	rowIndexes[s] = items[1];
       else
 	rowIndexes[s] = "i";
+      colIndexes[s] = QString::number(colNames.findIndex (items[0]));
       aux.replace(pos1,4+pos3-pos2,s);
       substitute[s] = "col("+aux2+")";
     }
@@ -147,7 +158,7 @@ bool muParserScript::compile()
     // cell() hack
     int pos1, pos2, pos3;
     int n = aux.contains("cell(");
-    for (int i=0; i<n; i++)
+    for (i=0; i<n; i++)
     {
       pos1=aux.find("cell(",0,TRUE);
       pos2=pos1+4;
@@ -162,66 +173,111 @@ bool muParserScript::compile()
       }
 
       QStringList items=QStringList::split(",", aux2, FALSE);
-      QString s="c"+ QString::number(i);
+      QString s = "__c" + QString::number(i);
       rowIndexes[s] = items[0].stripWhiteSpace();
       colIndexes[s] = items[1].stripWhiteSpace();
       aux.replace(pos1,5+pos3-pos2,s);
       substitute[s] = "cell("+aux2+")";
     }
   }
- 
-  parser.SetExpr(aux.ascii());
+
+  userVariables.clear();
+  returns = false;
+  QStringList lines = QStringList::split("\n", aux);
+  for (i=0; i<(int)lines.size(); i++)
+  {
+    if (lines[i].startsWith("#"))
+      continue;
+    QStringList kv = QStringList::split("=", lines[i], true);
+    if (kv.size() == 1) {
+      returns = true;
+      break;
+    }
+    if (kv.size() != 2)
+    {
+      emit_error(tr("Too many '=' in one line."),i+1);
+      return false;
+    }
+    if (kv[0].isEmpty())
+    {
+      emit_error(tr("Syntax error: '=' without variable name."),i+1);
+      return false;
+    }
+    userVariables[kv[0]]=kv[1];
+    setDouble(0,kv[0]);
+  }
+  if (returns)
+    parser.SetExpr(lines[i].ascii());
+  
   compiled = Script::isCompiled;
   return true;
 }
 
+int muParserScript::setDynamicVars()
+{
+  if (Context->isA("Table"))
+  {
+    Table *table = (Table*) Context;
+    strDict::iterator i=rowIndexes.begin(),j=colIndexes.begin();
+    while((i!=rowIndexes.end())&&(j!=colIndexes.end())) {
+      int col, row;
+      if (i.data() == "i" && variables["i"])
+	row = (int) *(variables["i"]) - 1;
+      else {
+	rparser.SetExpr(i.data());
+	row = qRound(rparser.Eval()) - 1;
+      }
+      col=j.data().toInt();
+      if (row < 0 || row >= table->tableRows() || col < 0 || col >= table->tableCols())
+	return 0;
+      if (table->text(row,col).isEmpty()) return 2;
+      setDouble((table->text(row,col)).toDouble(), i.key().ascii());
+      i++; j++;
+    }
+  } else if (Context->isA("Matrix")) {
+    Matrix *matrix = (Matrix*) Context;
+    strDict::iterator i=rowIndexes.begin(),j=colIndexes.begin();
+    while((i!=rowIndexes.end())&&(j!=colIndexes.end())) {
+      int col, row;
+      if (i.data() == "i" && variables["i"])
+	row = (int) *(variables["i"]) - 1;
+      else {
+	rparser.SetExpr(i.data());
+	row = qRound(rparser.Eval()) - 1;
+      }
+      if (j.data() == "j" && variables["j"])
+	col = (int) *(variables["j"]) - 1;
+      else {
+	rparser.SetExpr(j.data());
+	col = qRound(rparser.Eval()) - 1;
+      }
+      if (row < 0 || row >= matrix->numRows() || col < 0 || col >= matrix->numCols())
+	return 0;
+      if (matrix->text(row,col).isEmpty()) return 2;
+      setDouble((matrix->text(row,col)).toDouble(), i.key().ascii());
+      i++; j++;
+    }
+  }
+  for (strDict::iterator i=userVariables.begin(); i!=userVariables.end(); i++)
+  {
+    rparser.SetExpr(i.data());
+    if (!setDouble(rparser.Eval(), i.key().ascii()))
+      return 0;
+  }
+  return 1;
+}
+
 QVariant muParserScript::eval()
 {
-  if(compiled != Script::isCompiled && !compile())
+  if ((compiled != Script::isCompiled && !compile()) || !returns)
     return QVariant();
   double val;
   try {
-    if (Context->isA("Table"))
+    switch (setDynamicVars())
     {
-      Table *table = (Table*) Context;
-      for (strDict::iterator i=rowIndexes.begin(); i!=rowIndexes.end(); i++) {
-	int row;
-	if (i.data() != "i")
-	{
-	  rparser.SetExpr(i.data());
-	  row = qRound(rparser.Eval()) - 1;
-	} else
-	  row = (int) *(variables["i"]) - 1;
-	if (row < 0 || row >= table->tableRows())
-	  return QVariant();
-	QStringList list = QStringList::split("_", i.key(), false);
-	int col = list[1].toInt();
-	if (table->text(row,col).isEmpty()) return QVariant("");
-	setDouble((table->text(row,col)).toDouble(), i.key().ascii());
-      }
-    } else if (Context->isA("Matrix")) {
-      Matrix *matrix = (Matrix*) Context;
-      strDict::iterator i=rowIndexes.begin(),j=colIndexes.begin();
-      while((i!=rowIndexes.end())&&(j!=colIndexes.end())) {
-	int col, row;
-	if (i.data() == "i")
-	  row = (int) *(variables["i"]) - 1;
-	else {
-	  rparser.SetExpr(i.data());
-	  row = qRound(rparser.Eval()) - 1;
-	}
-	if (j.data() == "j")
-	  col = (int) *(variables["j"]) - 1;
-	else {
-	  rparser.SetExpr(j.data());
-	  col = qRound(rparser.Eval()) - 1;
-	}
-	if (row < 0 || row >= matrix->numRows() || col < 0 || col >= matrix->numCols())
-	  return QVariant();
-	if (matrix->text(row,col).isEmpty()) return QVariant("");
-	setDouble((matrix->text(row,col)).toDouble(), i.key().ascii());
-	i++; j++;
-      }
+      case 0: return QVariant();
+      case 1: break;
+      case 2: return QVariant("");
     }
     val = parser.Eval();
   } catch (mu::ParserError &e) {
@@ -236,31 +292,20 @@ QVariant muParserScript::eval()
 
 bool muParserScript::exec()
 {
-  QStringList lines = QStringList::split("\n", Code);
-  for (int i=0; i<(int)lines.size(); i++)
-  {
-    QStringList kv = QStringList::split("=", lines[i]);
-    if (kv.size() == 1) break;
-    if (kv.size() != 2)
-    {
-      emit_error(tr("Too many '=' in one line."),i+1);
-      return false;
-    }
-    Code = kv[1];
-    if(!compile())
-      return false;
-    double val;
-    try {
-      val = parser.Eval();
-    } catch (mu::ParserError &e) {
-      QString errString=e.GetMsg();
-      emit_error(errString, 0);
-      return false;
-    }
-    if (!setDouble(val, kv[0])) return false;
+  if (compiled != Script::isCompiled && !compile())
+    return false;
+  try {
+    // for error reporting
+    if (returns)
+      parser.Eval();
+    return (setDynamicVars() != 0);
+  } catch (mu::ParserError &e) {
+    QString errString=e.GetMsg();
+    for (strDict::iterator i=substitute.begin(); i!=substitute.end(); i++)
+      errString.replace(i.key(), i.data(), true);
+    emit_error(errString, 0);
+    return false;
   }
-  Code = lines.join("\n");
-  return true;
 }
  
 

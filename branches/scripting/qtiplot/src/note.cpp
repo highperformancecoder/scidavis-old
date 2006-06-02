@@ -18,6 +18,7 @@ QDateTime dt = QDateTime::currentDateTime ();
 setBirthDate(dt.toString(Qt::LocalDate));
 
 te = new ScriptEdit(env, this, name());
+te->setContext(this);
 QVBoxLayout* hlayout = new QVBoxLayout(this,0,0, "hlayout1");
 hlayout->addWidget(te);
 

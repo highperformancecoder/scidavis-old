@@ -25,7 +25,7 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
   connect(actionEval, SIGNAL(activated()), this, SLOT(evaluate()));
   actionPrint = new QAction(NULL, "&Print", 0, this, "print");
   connect(actionPrint, SIGNAL(activated()), this, SLOT(print()));
-  //CTRL+Key_I -> inspect (currently "Open image file". other shutcut?)
+  //TODO: CTRL+Key_I -> inspect (currently "Open image file". other shortcut?)
 
   functionsMenu = new QPopupMenu(this, "functionsMenu");
   Q_CHECK_PTR(functionsMenu);
@@ -62,7 +62,7 @@ QPopupMenu *ScriptEdit::createPopupMenu (const QPoint & pos)
     functionsMenu->setItemParameter(id, i);
     functionsMenu->setWhatsThis(id, scriptEnv->mathFunctionDoc(flist[i]));
   }
-  menu->insertItem(tr("Functions"),functionsMenu);
+  menu->insertItem(tr("&Functions"),functionsMenu);
   
   return menu;
 }

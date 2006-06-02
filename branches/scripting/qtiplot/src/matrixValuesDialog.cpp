@@ -143,6 +143,7 @@ void matrixValuesDialog::setMatrix(Matrix* m)
   commandes->setText(m->formula());
   endCol->setValue(m->numCols());
   endRow->setValue(m->numRows());
+  commandes->setContext(m);
 }
 
 void matrixValuesDialog::setFunctions()
