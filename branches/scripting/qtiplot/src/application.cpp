@@ -10631,7 +10631,7 @@ void ApplicationWindow::createActions()
   actionShowLayerDialog = new QAction(QPixmap(arrangeLayers_xpm), tr("Arran&ge Layers"), tr("ALT+A"), this);
   connect(actionShowLayerDialog, SIGNAL(activated()), this, SLOT(showLayerDialog()));
 
-  actionExportGraph = new QAction(tr("&Current"), tr("Ctrl+G"), this);
+  actionExportGraph = new QAction(tr("&Current"), tr("Alt+G"), this);
   connect(actionExportGraph, SIGNAL(activated()), this, SLOT(exportGraph()));
 
   actionExportAllGraphs = new QAction(tr("&All"), tr("Alt+X"), this);
@@ -10673,7 +10673,7 @@ void ApplicationWindow::createActions()
   actionAddFunctionCurve = new QAction(QPixmap(fx_xpm), tr("Add &Function..."), tr("Ctrl+Alt+F"), this);
   connect(actionAddFunctionCurve, SIGNAL(activated()), this, SLOT(addFunctionCurve()));
 
-  actionUnzoom = new QAction(QPixmap(unzoom_xpm), tr("&Rescale to show all"), tr("Ctrl+R"), this);
+  actionUnzoom = new QAction(QPixmap(unzoom_xpm), tr("&Rescale to show all"), tr("Ctrl+Shift+R"), this);
   connect(actionUnzoom, SIGNAL(activated()), this, SLOT(unzoom()));
 
   actionNewLegend = new QAction(QPixmap(legend_xpm), tr("New &Legend"), tr("Ctrl+L"), this);
@@ -11134,7 +11134,7 @@ void ApplicationWindow::translateActionsStrings()
   actionShowLayerDialog->setAccel(tr("ALT+A"));
 
   actionExportGraph->setMenuText(tr("&Current"));
-  actionExportGraph->setAccel(tr("Ctrl+G"));
+  actionExportGraph->setAccel(tr("Alt+G"));
   actionExportGraph->setToolTip(tr("Export current graph"));
 
   actionExportAllGraphs->setMenuText(tr("&All")); 
@@ -11171,7 +11171,7 @@ void ApplicationWindow::translateActionsStrings()
   actionAddFunctionCurve->setAccel(tr("Ctrl+Alt+F"));
 
   actionUnzoom->setMenuText(tr("&Rescale to show all")); 
-  actionUnzoom->setAccel(tr("Ctrl+R"));
+  actionUnzoom->setAccel(tr("Ctrl+Shift+R"));
   actionUnzoom->setToolTip(tr("Best fit"));
 
   actionNewLegend->setMenuText( tr("New &Legend")); 
