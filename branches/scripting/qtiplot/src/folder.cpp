@@ -274,7 +274,7 @@ if (item == firstChild() && item->listView()->rootIsDecorated())
 QPoint orig = viewportToContents( viewport()->mapFromGlobal( QCursor::pos() ) );
 
 QPixmap pix;
-if (item->rtti() == FolderListItem::ListItemType)
+if (item->rtti() == FolderListItem::RTTI)
 	pix = QPixmap( folder_closed_xpm );
 else
 	pix = *item->pixmap (0);
@@ -296,7 +296,7 @@ drag->drag();
 void FolderListView::contentsDropEvent( QDropEvent *e )
 {
 QListViewItem *dest = itemAt( contentsToViewport(e->pos()) );
-if ( dest && dest->rtti() == FolderListItem::ListItemType) 
+if ( dest && dest->rtti() == FolderListItem::RTTI) 
 	{
 	emit dropItems(dest);
 	e->accept();
@@ -313,7 +313,7 @@ if (isRenaming())
 	return;
 	}
 
-if (currentItem()->rtti() == FolderListItem::ListItemType &&
+if (currentItem()->rtti() == FolderListItem::RTTI &&
 	(e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return))
 	{
 	emit doubleClicked(currentItem());

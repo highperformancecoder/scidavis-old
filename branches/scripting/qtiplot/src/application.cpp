@@ -72,7 +72,6 @@
 #include <qtextview.h>
 #include <qlistview.h>
 #include <qcursor.h>
-#include <qtextbrowser.h>
 #include <qevent.h>
 #include <qaction.h>
 #include <qprogressdialog.h>
@@ -109,8 +108,12 @@ ApplicationWindow::ApplicationWindow(const QStringList& l)
 int args = (int)l.size();
 if (args > 2)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Error"),
+	ApplicationWindow *aux = new ApplicationWindow();
+	aux->hideActiveWindow();
+
+	QMessageBox::critical(aux, tr("QtiPlot - Error"),
 		tr("Too many command line options (maximum accepted is 2)!"));
+	delete aux;
 	exit(1);
 	}
 else if (args == 2)
@@ -123,8 +126,12 @@ else if (args == 2)
 		}
 	else
 		{
-		QMessageBox::critical(0, tr("QtiPlot - Error"),
+		ApplicationWindow *aux = new ApplicationWindow();
+		aux->hideActiveWindow();
+
+		QMessageBox::critical(aux, tr("QtiPlot - Error"),
 		tr("<b> %1 </b>: Unknown command line option or the file doesn't exist!").arg(l[1]));
+		delete aux;
 		exit(1);
 		}
 	}
@@ -2627,7 +2634,7 @@ emit modified();
 
 void ApplicationWindow::showHistogramTable(const QString& caption, int r, int c, const QString& text)
 {
-Table* w = newTable(caption, r, c,text);
+Table* w = newTable(caption, r, c, text);
 w->showMaximized();
 }
 
@@ -3519,6 +3526,7 @@ progress.setLabelText(title);
 progress.setTotalSteps(widgets);
 progress.setActiveWindow();
 progress.setMinimumDuration(10000);
+//progress.move(0,0);
 
 Folder *cf = app->projectFolder();
 app->folders->blockSignals (true);
@@ -7610,7 +7618,7 @@ emit modified();
 
 void ApplicationWindow::maximizeWindow(QListViewItem * lbi)
 {
-if (!lbi || lbi->rtti() == FolderListItem::ListItemType)
+if (!lbi || lbi->rtti() == FolderListItem::RTTI)
 	return;
 
 QWidget *w = ((WindowListItem*)lbi)->window();
@@ -7965,7 +7973,7 @@ for (item = lv->firstChild(); item; item = item->nextSibling())
 folders->blockSignals(true);
 for (item = lst.first(); item; item = lst.next())
 	{
-	if (item->rtti() == FolderListItem::ListItemType)
+	if (item->rtti() == FolderListItem::RTTI)
 		{
 		Folder *f = ((FolderListItem *)item)->folder();
 		if (deleteFolder(f))
@@ -8028,7 +8036,7 @@ for (item = lv->firstChild(); item; item = item->nextSibling())
 		}
 	}
 
-if (it->rtti() == FolderListItem::ListItemType)
+if (it->rtti() == FolderListItem::RTTI)
 	{
 	current_folder = ((FolderListItem *)it)->folder();
 	showFolderPopupMenu(it, p, false);
@@ -8491,16 +8499,16 @@ if (!dir.isEmpty())
 void ApplicationWindow::showHelp()
 {
 	QMainWindow *helpWindow= new QMainWindow(0, "browser",WDestructiveClose);
-	browser=new QTextBrowser (helpWindow,"helpBrowse");
+	HelpBrowser *browser = new HelpBrowser (helpWindow,"helpBrowse");
+
 	helpWindow->setFocus();
 	helpWindow->setCentralWidget(browser);
 
 	QToolBar* toolbar = new QToolBar( helpWindow );
     helpWindow->addToolBar( toolbar, "Toolbar");
-    QToolButton* button;
+    QToolButton* button = new QToolButton(QPixmap(fileprint_xpm), tr("Print"), "", browser, SLOT(print()), toolbar );
 
-	button = new QToolButton(QPixmap(fileprint_xpm), tr("Print"), "", this, SLOT(printHelp()), toolbar );
-    button = new QToolButton(QPixmap(back_xpm), tr("Backward"), "", browser, SLOT(backward()), toolbar );
+	button = new QToolButton(QPixmap(back_xpm), tr("Backward"), "", browser, SLOT(backward()), toolbar );
     connect( browser, SIGNAL( backwardAvailable(bool) ), button, SLOT( setEnabled(bool) ) );
     button->setEnabled( FALSE );
 	button = new QToolButton(QPixmap(forward_xpm), tr("Forward"), "", browser, SLOT(forward()), toolbar );
@@ -8526,48 +8534,14 @@ void ApplicationWindow::showHelp()
 			helpFilePath=fi.absFilePath();
 			}
 		else
-			return;
+			{
+			delete helpWindow;
+			exit (0);
+			}
 		}		
 	browser->setSource (helpFilePath);
 	helpWindow->setCaption(tr("QtiPlot - Help Browser"));
 	helpWindow->showMaximized();
-}
-
-void ApplicationWindow::printHelp()
-{
-#ifndef QT_NO_PRINTER
-    QPrinter printer( QPrinter::HighResolution );
-    printer.setFullPage(TRUE);
-    if ( printer.setup( this ) ) {
-	QPainter p( &printer );
-	if( !p.isActive() ) // starting printing failed
-	    return;
-	QPaintDeviceMetrics metrics(p.device());
-	int dpiy = metrics.logicalDpiY();
-	int margin = (int) ( (2/2.54)*dpiy ); // 2 cm margins
-	QRect body( margin, margin, metrics.width() - 2*margin, metrics.height() - 2*margin );
-	QSimpleRichText richText( browser->text(),
-				  QFont(),
-				  browser->context(),
-				  browser->styleSheet(),
-				  browser->mimeSourceFactory(),
-				  body.height() );
-	richText.setWidth( &p, body.width() );
-	QRect view( body );
-	int page = 1;
-	do {
-	    richText.draw( &p, body.left(), body.top(), view, colorGroup() );
-	    view.moveBy( 0, body.height() );
-	    p.translate( 0 , -body.height() );
-	    p.drawText( view.right() - p.fontMetrics().width( QString::number(page) ),
-			view.bottom() + p.fontMetrics().ascent() + 5, QString::number(page) );
-	    if ( view.top()  >= richText.height() )
-		break;
-	    printer.newPage();
-	    page++;
-	} while (TRUE);
-    }
-#endif
 }
 
 void ApplicationWindow::showPlotWizard()
@@ -9447,6 +9421,7 @@ plot->setActiveWindow();
 
 void ApplicationWindow::restoreWindowGeometry(ApplicationWindow *app, QWidget *w, const QString s)
 {
+w->blockSignals (true);
 QString caption = w->name();
 if (s.contains ("minimized"))
 	{
@@ -9458,15 +9433,7 @@ if (s.contains ("minimized"))
 else if (s.contains ("maximized"))
 	{
 	w->setGeometry(0, 0, 500, 400);
-	if (w->isA("Graph3D"))
-		((Graph3D*)w)->setIgnoreFonts(true);
-
-	w->hide();//trick used in order to avoid a resize event
 	w->showMaximized();
-
-	if (w->isA("Graph3D"))
-		((Graph3D*)w)->setIgnoreFonts(false);
-
 	((myWidget *)w)->setStatus(myWidget::Maximized);
 	app->setListView(caption, tr("Maximized"));
 	}
@@ -9480,14 +9447,9 @@ else
 	if (lst[5] == "active")
 		app->aw=(QWidget*)w;
 	else if (lst[5] == "hidden")
-		{
-		app->hiddenWindows->append(w);
-		w->hide();
-		app->setListView(caption, tr("Hidden"));
-		}
-	else
-		app->setListView(caption, tr("Normal"));
+		hideWindow((myWidget* )w);
 	}
+w->blockSignals (false);
 }
 
 Note* ApplicationWindow::openNote(ApplicationWindow* app, const QStringList &flist)
@@ -11894,10 +11856,11 @@ if (s == "-v" || s == "--version")
 	}
 else if (s == "-h" || s == "--help")
 	{
-	QMessageBox::warning(0, tr("QtiPlot - Warning"), tr("Help is not available on command line.\
-	In order to download the user manual for QtiPlot, please visit:<br><br>\
-    <font color = blue> http://soft.proindependent.com/help.html</font>"));
-	exit(0);
+	ApplicationWindow *aux = new ApplicationWindow();
+	aux->hideActiveWindow();
+	aux->showHelp();
+	aux->saveSettings();//save any changes to the help folder path
+	delete aux;
 	}
 else if (s.contains("-lang=") || s.contains("-l="))
 	{
@@ -11926,8 +11889,11 @@ else if (s.contains("-lang=") || s.contains("-l="))
 	}
 else
 	{
+	ApplicationWindow *aux = new ApplicationWindow();
+	aux->hideActiveWindow();
 	QMessageBox::critical(0, tr("QtiPlot - Error"),
 				tr("<b> %1 </b>: Unknown command line option or the file doesn't exist!").arg(s));
+	delete aux;
 	exit(1);
 	}
 }
@@ -12497,7 +12463,7 @@ if (!item || item == folders->firstChild())
 
 disconnect(folders, SIGNAL(currentChanged(QListViewItem *)), this, SLOT(folderItemChanged(QListViewItem *)));
 
-if (item->listView() == lv && item->rtti() == FolderListItem::ListItemType)
+if (item->listView() == lv && item->rtti() == FolderListItem::RTTI)
 	{
 	current_folder = ((FolderListItem *)item)->folder();
 	FolderListItem *it = current_folder->folderListItem();
@@ -12781,7 +12747,7 @@ folders->setFocus();
 
 void ApplicationWindow::folderItemDoubleClicked(QListViewItem *it)
 {
-if (!it || it->rtti() != FolderListItem::ListItemType)
+if (!it || it->rtti() != FolderListItem::RTTI)
 	return;
 
 FolderListItem *item = ((FolderListItem *)it)->folder()->folderListItem();
@@ -13115,7 +13081,7 @@ QStringList subfolders = dest_f->subfolders();
 
 for (it = draggedItems.first(); it; it = draggedItems.next())
 	{
-	if (it->rtti() == FolderListItem::ListItemType)
+	if (it->rtti() == FolderListItem::RTTI)
 		{
 		Folder *f = ((FolderListItem *)it)->folder();
 		FolderListItem *src = f->folderListItem();
@@ -13287,4 +13253,47 @@ delete hiddenWindows;
 delete outWindows;
 
 QApplication::clipboard()->clear(QClipboard::Clipboard);
+}
+
+/*****************************************************************************
+ *
+ * Class HelpBrowser
+ *
+ *****************************************************************************/
+
+HelpBrowser::HelpBrowser(QWidget * parent, const char * name)
+		:QTextBrowser (parent, name)
+{}
+
+void HelpBrowser::print()
+{
+#ifndef QT_NO_PRINTER
+    QPrinter printer( QPrinter::HighResolution );
+    printer.setFullPage(TRUE);
+    if ( printer.setup( this ) ) {
+	QPainter p( &printer );
+	if( !p.isActive() ) // starting printing failed
+	    return;
+	QPaintDeviceMetrics metrics(p.device());
+	int dpiy = metrics.logicalDpiY();
+	int margin = (int) ( (2/2.54)*dpiy ); // 2 cm margins
+	QRect body( margin, margin, metrics.width() - 2*margin, metrics.height() - 2*margin );
+	QSimpleRichText richText(text(), QFont(), context(), styleSheet(),
+							mimeSourceFactory(), body.height() );
+	richText.setWidth( &p, body.width() );
+	QRect view( body );
+	int page = 1;
+	do {
+	    richText.draw( &p, body.left(), body.top(), view, colorGroup() );
+	    view.moveBy( 0, body.height() );
+	    p.translate( 0 , -body.height() );
+	    p.drawText( view.right() - p.fontMetrics().width( QString::number(page) ),
+			view.bottom() + p.fontMetrics().ascent() + 5, QString::number(page) );
+	    if ( view.top()  >= richText.height() )
+		break;
+	    printer.newPage();
+	    page++;
+	} while (TRUE);
+    }
+#endif
 }

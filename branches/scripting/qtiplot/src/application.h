@@ -5,6 +5,7 @@
 #include <qlistview.h> 
 #include <qhttp.h> 
 #include <qfile.h> 
+#include <qtextbrowser.h>
 
 #include "graph3D.h"
 #include "plot3DDialog.h"
@@ -61,7 +62,6 @@ public:
 	FolderListView *lv, *folders;
 	QToolButton *btnResults;
 	QWidgetList *hiddenWindows, *outWindows;
-	QTextBrowser *browser;
 	QLineEdit *info;
 	QWidget *lastModified;
 
@@ -289,7 +289,6 @@ public slots:
     void print();
 	void print(QWidget* w);
 	void printAllPlots();
-	void printHelp();
 	void setImportOptions(const QString& sep, int lines, bool rename, bool strip, bool simplify);
     
 	void showExplorer();
@@ -809,6 +808,18 @@ private:
 	QFile versionFile;
 
 	QSplitter *explorerSplitter;
+};
+
+//! QtiPlot's help browser
+class HelpBrowser: public QTextBrowser
+{
+    Q_OBJECT
+
+public:
+    HelpBrowser(QWidget * parent = 0, const char * name = 0);
+
+public slots:
+	void print();
 };
 
 #endif

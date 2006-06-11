@@ -336,7 +336,7 @@ for (i = 0;i<n;i++ )
 	h_sum+=Y[i];
 
 double sum=0.0;
-QString text="Bins[X]\tCounts[Y]\tSum\tPercent\n";
+QString text=tr("Bins")+"\t"+tr("Counts")+"\t"+tr("Sum")+"\t"+tr("Percent")+"\n";
 for (i = 0;i<n;i++ )
 	{
 	sum+=Y[i];

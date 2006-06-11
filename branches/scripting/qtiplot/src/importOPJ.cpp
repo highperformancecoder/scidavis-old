@@ -51,5 +51,7 @@ for (int s=0; s<opj.numSpreads(); s++)
 	int dy=table->parentWidget()->frameGeometry().height() - table->height();
 	table->parentWidget()->move(QPoint(s*dx,s*dy));
 	}
+
+//TO DO: import matrices
 return true;
 }

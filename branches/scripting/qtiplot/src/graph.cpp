@@ -4456,6 +4456,9 @@ return c->dataSize();
 
 QwtPlotCurve *Graph::curve(int index)
 {
+if (!n_curves || index >= n_curves)
+	return 0;
+
 return (QwtPlotCurve *)d_plot->curve(c_keys[index]);
 }
 
