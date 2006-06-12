@@ -45,7 +45,7 @@ const muParserScripting::mathFunction muParserScripting::math_functions[] = {
   { "min", -1, NULL,NULL,NULL, "min(x,y,...):\n Calculate minimum of all arguments." },
   { "max", -1, NULL,NULL,NULL, "max(x,y,...):\n Calculate maximum of all arguments." },
   { "mod", 2, NULL,mod,NULL, "mod(x,y):\n Calculate rest of integer division x/y,\n x modulo y." },
-  { "pow", 2, NULL,pow,NULL, "pow(x,y):\n Raise x to the power of y, x^y." },
+  { "pow", 2, NULL,mypow,NULL, "pow(x,y):\n Raise x to the power of y, x^y." },
   { "rint", 1, NULL,NULL,NULL, "rint(x):\n Round to nearest integer." },
   { "sign", 1, NULL,NULL,NULL, "sign(x):\n Sign function: -1 if x<0; 1 if x>0." },
   { "sin", 1, NULL,NULL,NULL, "sin(x):\n Calculate sine." },

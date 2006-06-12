@@ -74,7 +74,7 @@ class muParserScripting: public ScriptingEnv
       { return floor(x); }
     static double mod(double x, double y)
       { return fmod(x,y); }
-    static double pow(double x, double y)
+    static double mypow(double x, double y)
       { return pow(x,y); }
     static double bessel_J0(double x)
       { return gsl_sf_bessel_J0 (x); }
