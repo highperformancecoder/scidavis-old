@@ -319,15 +319,6 @@ if (g)
 	active_graph=g;
 	active_graph->setFocus();
 
-	/*if (!allLayersTransparent())
-		{
-		active_graph->raise();
-
-		if (active_graph->plotWidget()->paletteBackgroundColor() == QColor(white)&&
-			overlapsLayers(active_graph))
-			updateTransparency();
-		}*/
-
 	LayerButton *btn=0;
 	int i;
 	for (i=0;i<(int)buttonsList->count();i++)
@@ -1187,6 +1178,7 @@ else
 
 void MultiLayer::connectLayer(Graph *g)
 {
+connect (g,SIGNAL(drawLineEnded(bool)), this, SIGNAL(drawLineEnded(bool)));
 connect (g,SIGNAL(drawTextOff()),this,SIGNAL(drawTextOff()));
 connect (g,SIGNAL(showPlotDialog(long)),this,SIGNAL(showPlotDialog(long)));
 connect (g,SIGNAL(createHiddenTable(const QString&,int,int,const QString&)),

@@ -183,7 +183,7 @@ public slots:
 
 	 // text markers 
 	 void drawText(bool on);
-	 bool drawTextActive();
+	 bool drawTextActive(){return drawTextOn;};
 	 
 	 void insertTextMarker(LegendMarker* mrk);
 	 long insertTextMarker(const QStringList& list);
@@ -242,8 +242,12 @@ public slots:
 	 void insertLineMarker(QStringList list);
 	 void updateLineMarker(const QColor& c,int w,Qt::PenStyle style,bool endArrow, bool startArrow);
 	 QwtArray<long> lineMarkerKeys();
-	 void drawLine(bool on);
-	 bool drawLineActive();
+
+	 //!Draws a line/arrow depending on the value of "arrow"
+	 void drawLine(bool on, bool arrow = FALSE);
+	 bool drawArrow(){return drawArrowOn;};
+	 bool drawLineActive(){return drawLineOn;};
+
 	 void setArrowHeadGeometry(int length, int angle, bool filled);
 	 void updateLineMarkerGeometry(const QPoint& sp,const QPoint& ep);
 
@@ -616,7 +620,7 @@ signals:
     void selectedGraph (Graph*);
 	void closedGraph();
 	void drawTextOff();
-	void drawLineOff();
+	void drawLineEnded(bool);
 	void cursorInfo(const QString&);
 	void showPlotDialog(long);
 	void showPieDialog();
@@ -684,7 +688,7 @@ private:
 	int axesLineWidth, translationDirection;
 	long selectedMarker,legendMarkerID, startID, endID, functions;
 	long mrkX,mrkY;//x=0 et y=0 line markers keys
-	bool startArrowOn, endArrowOn, drawTextOn, drawLineOn;
+	bool startArrowOn, endArrowOn, drawTextOn, drawLineOn, drawArrowOn;
 	
 	//the following bools tell iwhich data tool is activated by the user
 	bool removePointsEnabled,movePointsEnabled, translateOn;

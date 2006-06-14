@@ -8,15 +8,19 @@
 #include <qpixmapcache.h> 
 #include <qcursor.h> 
 #include <qapplication.h> 
+#include <qmessagebox.h> 
 
 #include <qwt_plot_canvas.h>
 
 CanvasPicker::CanvasPicker(Graph *plot):
     QObject(plot)
 {
-	moved=FALSE;
-	movedGraph=FALSE;
+	moved = FALSE;
+	movedGraph = FALSE;
 	pointSelected = false;
+	resizeLineFromStart = false;
+	resizeLineFromEnd = false;
+
 	plotWidget=plot->plotWidget();
 
     QwtPlotCanvas *canvas = plotWidget->canvas();
@@ -231,9 +235,9 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 		long selectedMarker=plot()->selectedMarkerKey();
 		
 		if (plot()->drawLineActive())
-			drawLineMarker(pos,TRUE);
-		else if (plot()->lineProfile())
-			drawLineMarker(pos,FALSE);		
+			drawLineMarker(pos, plot()->drawArrow());
+		else if (plot()->lineProfile() || resizeLineFromStart || resizeLineFromEnd)
+			drawLineMarker(pos,FALSE);	
 		else if (plot()->movePointsActivated())
 			plot()->move(pos); 	
 		else if (plot()->pickerActivated())
@@ -255,7 +259,9 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 			const QMouseEvent *me = (const QMouseEvent *)e;
 			
 			if (moved && !plot()->drawLineActive() && !plot()->lineProfile())
-				releaseMarker();	
+				releaseMarker();
+			else if (resizeLineFromStart || resizeLineFromEnd)
+				resizeLineMarker(me->pos());
 			else if (plot()->drawLineActive())
 				{ 	
 				LineMarker* mrk = new LineMarker(plotWidget);	
@@ -266,9 +272,10 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 				mrk->setWidth(1);
 				Qt::PenStyle style=Qt::SolidLine;
 				mrk->setStyle(style);
-				mrk->setEndArrow(TRUE);
+				mrk->setEndArrow(plot()->drawArrow());
 				mrk->setStartArrow(FALSE);
 				plot()->insertLineMarker(mrk);
+				plot()->drawLine(false);
 				plotWidget->replot();
 				}
 			else if (plot()->lineProfile())
@@ -601,6 +608,31 @@ plot()->drawText(FALSE);
 emit drawTextOff();
 }
 
+void CanvasPicker::resizeLineMarker(const QPoint& point)
+{	
+long selectedMarker=plot()->selectedMarkerKey();
+LineMarker* mrk=(LineMarker*)plotWidget->marker(selectedMarker);
+if (!mrk)
+	return;
+
+int clw=plotWidget->canvas()->lineWidth();	
+
+if (resizeLineFromStart)			
+	mrk->setStartPoint(QPoint(point.x() - clw, point.y() - clw));
+else if (resizeLineFromEnd)
+	mrk->setEndPoint(QPoint(point.x() - clw, point.y() - clw));
+	
+plotWidget->replot();
+plot()->highlightLineMarker(selectedMarker);
+			
+emit modified();
+	
+resizeLineFromStart = false;
+resizeLineFromEnd = false;	
+
+QApplication::restoreOverrideCursor();		
+}
+
 void CanvasPicker::drawLineMarker(const QPoint& point, bool endArrow)
 {
 plotWidget->replot();
@@ -611,8 +643,7 @@ mrk.setStartPoint(QPoint(startLinePoint.x() + clw, startLinePoint.y() + clw));
 mrk.setEndPoint(QPoint(point.x() + clw,point.y() + clw));
 
 mrk.setWidth(1);
-Qt::PenStyle style=Qt::SolidLine;
-mrk.setStyle(style);
+mrk.setStyle(Qt::SolidLine);
 mrk.setEndArrow(endArrow);
 mrk.setStartArrow(FALSE);
 
@@ -622,7 +653,10 @@ else
 	mrk.setColor(Qt::red);
 
 QPainter painter(plot()->plotWidget()->canvas());
-mrk.draw(&painter,0,0,QRect(0,0,0,0));		
+painter.save();
+painter.setRasterOp(Qt::NotXorROP);
+mrk.draw(&painter,0,0,QRect(0,0,0,0));	
+painter.restore();	
 }
 
 // Selects and highlights the marker 
@@ -649,6 +683,27 @@ for (i=0;i<m;i++)
 		if (dist <= d)
 			{
 			plot()->highlightLineMarker(lines[i]);
+
+			QRect sr = QRect (QPoint(0,0), QSize(7, 7));
+			sr.moveCenter (mrkL->startPoint());
+			if (sr.contains(point))
+				{
+				QApplication::setOverrideCursor(QCursor(Qt::SizeAllCursor), true);
+				resizeLineFromStart = true;
+				startLinePoint = mrkL->endPoint();
+				return TRUE;
+				}
+
+			QRect er = sr;
+			er.moveCenter (mrkL->endPoint());
+			if (er.contains(point))
+				{
+				QApplication::setOverrideCursor(QCursor(Qt::SizeAllCursor), true);
+				resizeLineFromEnd = true;
+				startLinePoint = mrkL->startPoint();
+				return TRUE;
+				}
+
 			return TRUE;
 			}
 		}

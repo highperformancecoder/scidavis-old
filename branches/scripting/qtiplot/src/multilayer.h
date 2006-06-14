@@ -146,6 +146,7 @@ signals:
 	void showWindowContextMenu();
 	void showCurvesDialog();
 	void drawTextOff();
+	void drawLineEnded(bool);
 	void showXAxisTitleDialog();
 	void showYAxisTitleDialog();
 	void showTopAxisTitleDialog();

@@ -134,6 +134,7 @@ axesLineWidth = 1;
 lineProfileOn=FALSE;
 drawTextOn=FALSE;
 drawLineOn=FALSE;
+drawArrowOn=FALSE;
 cursorEnabled=FALSE;
 movePointsEnabled=FALSE;
 removePointsEnabled=FALSE;
@@ -300,18 +301,23 @@ if (!mrkL)
 selectedMarker=markerID;		
 QwtPlotCanvas *canvas=d_plot->canvas ();
 
-// draw highlight rectangle 
+// draw highlight line + end resizing rectangles 
 QPainter painter(canvas);
 painter.save();
-QPoint aux=mrkL->startPoint();
-painter.translate(aux.x(),aux.y());
-double t=mrkL->teta();
-painter.rotate(-t);
+
 painter.setRasterOp(Qt::NotXorROP);
-painter.setPen(QPen(QColor(red),1,Qt::SolidLine));
-int w=mrkL->width();
-int d=w+(int)floor(mrkL->headLength()*tan(M_PI*mrkL->headAngle()/180.0)+0.5);
-painter.drawRect(-d, -d-w, int(mrkL->length()+2*d), 2*(d+w));				
+painter.setPen(QPen(QColor(red), mrkL->width(), Qt::SolidLine));
+painter.drawLine(mrkL->startPoint(), mrkL->endPoint());				
+
+painter.setPen(QPen(QColor(black), mrkL->width(), Qt::SolidLine));
+painter.setBrush(QBrush(QColor(black), QBrush::SolidPattern));
+
+QRect sr = QRect (QPoint(0,0), QSize(7, 7));
+sr.moveCenter (mrkL->startPoint());
+painter.drawRect(sr);
+
+sr.moveCenter (mrkL->endPoint());
+painter.drawRect(sr);
 painter.restore();	
 }
 
@@ -5171,6 +5177,7 @@ if (yColType == Table::Text)
 	}
 
 addLegendItem(yColName);
+updatePlot();
 return true;
 }
 
@@ -5681,19 +5688,12 @@ else
 	}
 }
 
-bool Graph::drawTextActive()
-{
-return drawTextOn;
-}
-
-void Graph::drawLine(bool on)
+void Graph::drawLine(bool on, bool arrow)
 {
 drawLineOn=on;
-}
-
-bool Graph::drawLineActive()
-{
-return drawLineOn;
+drawArrowOn=arrow;
+if (!on)
+	emit drawLineEnded(true);
 }
 
 void Graph::setFitID(int id)

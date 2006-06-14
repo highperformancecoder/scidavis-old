@@ -67,7 +67,7 @@ public:
 
 	QActionGroup* dataTools;
 	QAction *btnCursor, *btnSelect, *btnPicker, *btnRemovePoints, *btnMovePoints;
-	QAction  *btnZoom, *btnPointer, *btnLine;
+	QAction  *btnZoom, *btnPointer, *btnLine, *btnArrow;
 	
 	QActionGroup* coord;
 	QAction* Box;
@@ -301,10 +301,10 @@ public slots:
 	void rename();
 	void renameWindow();
 
-	//! Slot: called when the user presses F2 and an item is selected in lv.
+	//!  Called when the user presses F2 and an item is selected in lv.
 	void renameWindow(QListViewItem *item, int, const QString &s);
 
-	//! Slot: checks weather the new window name is valid and modifies the name. 
+	//!  Checks weather the new window name is valid and modifies the name. 
 	bool renameWindow(myWidget *w, const QString &text);
 
 	void maximizeWindow(QListViewItem * lbi);
@@ -317,7 +317,7 @@ public slots:
 	void closeActiveWindow();
 	void closeWindow(QWidget* window);
 
-	//! Slot: does all the cleaning work before actually deleting a window!
+	//!  Does all the cleaning work before actually deleting a window!
 	void removeWindowFromLists(QWidget* w);
 
 	void hideWindow(myWidget* window);
@@ -411,6 +411,7 @@ public slots:
 	void newLegend();
 	void addTimeStamp();
 	void drawLine();
+	void drawArrow();
 	void addText();
 	void disableAddText();
 	void addImage();
@@ -486,10 +487,10 @@ public slots:
 	void showWindowContextMenu();
 	void showWindowPopupMenu(QListViewItem *it, const QPoint &p, int);
 
-	//!Slot: connected to the context menu signal from lv; it's called when there are several items selected in the list
+	//! Connected to the context menu signal from lv; it's called when there are several items selected in the list
 	void showListViewSelectionMenu(const QPoint &p);
 
-	//!Slot: connected to the context menu signal from lv; it's called when there are no items selected in the list
+	//! Connected to the context menu signal from lv; it's called when there are no items selected in the list
 	void showListViewPopupMenu(const QPoint &p);
 
 	void showMoreWindows();
@@ -568,10 +569,10 @@ public slots:
 
 	void updateRecentProjectsList();
 	
-	//! Slot: connected to the done(bool) signal of the http object
+	//!  connected to the done(bool) signal of the http object
 	void getVersionDone(bool error);
 
-	//! Slot: called when the user presses the actionCheckUpdates
+	//!  called when the user presses the actionCheckUpdates
 	void getVersionFile();
 
 	void showDonationDialog();
@@ -617,7 +618,7 @@ public slots:
 	//! Changes the current folder when the user double-clicks on a folder item in the QListView "lv"
 	void folderItemDoubleClicked(QListViewItem *it);
 
-	//! Slot: creates and opens the context menu of a folder list view item
+	//!  creates and opens the context menu of a folder list view item
 	/**
 	 * \param it list view item
 	 * \param p mouse global position
@@ -626,34 +627,34 @@ public slots:
 	 */
 	void showFolderPopupMenu(QListViewItem *it, const QPoint &p, bool fromFolders);
 
-	//! Slot: connected to the SIGNAL contextMenuRequested from the list views
+	//!  connected to the SIGNAL contextMenuRequested from the list views
 	void showFolderPopupMenu(QListViewItem *it, const QPoint &p, int);
 	
-	//! Slot: starts renaming the selected folder by creating a built-in text editor
+	//!  starts renaming the selected folder by creating a built-in text editor
 	void startRenameFolder();
 
-	//! Slot: starts renaming the selected folder by creating a built-in text editor
+	//!  starts renaming the selected folder by creating a built-in text editor
 	void startRenameFolder(QListViewItem *item);
 
-	//! Slot: checks weather the new folder name is valid and modifies the name
+	//!  checks weather the new folder name is valid and modifies the name
 	void renameFolder(QListViewItem *it, int col, const QString &text);
 
-	//! Slot: forces showing all windows in the current folder and subfolders, depending on the user's viewing policy
+	//!  forces showing all windows in the current folder and subfolders, depending on the user's viewing policy
 	void showAllFolderWindows();
 
-	//! Slot: forces hidding all windows in the current folder and subfolders, depending on the user's viewing policy
+	//!  forces hidding all windows in the current folder and subfolders, depending on the user's viewing policy
 	void hideAllFolderWindows();
 
-	//! Slot: hides all windows in folder f
+	//!  hides all windows in folder f
 	void hideFolderWindows(Folder *f);
 
-	//! Slot: pop-ups folder information
+	//!  pop-ups folder information
 	void folderProperties();
 
-	//! Slot: pop-ups information about the selected window item
+	//!  pop-ups information about the selected window item
 	void windowProperties();
 
-	//! Slot: pop-ups information about the current project
+	//!  pop-ups information about the current project
 	void projectProperties();
 
 	void appendProject();
@@ -661,29 +662,29 @@ public slots:
 	void saveFolderAsProject(Folder *f);
 	void saveFolder(Folder *folder, const QString& fn);
 
-	//! Slot: adds a folder list item to the list view "lv"
+	//!  adds a folder list item to the list view "lv"
 	void addFolderListViewItem(Folder *f);
 
-	//! Slot: adds a widget list item to the list view "lv"
+	//!  adds a widget list item to the list view "lv"
 	void addListViewItem(myWidget *w);
 
-	//! Slot: hides or shows windows in the current folder and changes the view windows policy
+	//!  hides or shows windows in the current folder and changes the view windows policy
 	void setShowWindowsPolicy(int p);
 
-	//! Slot: returns a pointer to the root project folder
+	//!  returns a pointer to the root project folder
 	Folder* projectFolder();
 
-	//! Slot: used by the findDialog
+	//!  used by the findDialog
 	void find(const QString& s, bool windowNames, bool labels, bool folderNames, 
 			  bool caseSensitive, bool partialMatch, bool subfolders);
 
-	//! Slot: initializes the list of items dragged by the user
+	//!  initializes the list of items dragged by the user
 	void dragFolderItems(QPtrList<QListViewItem> items){draggedItems = items;};
 
-	//! Slot: Drop the objects in the list draggedItems to the folder of the destination item 
+	//!  Drop the objects in the list draggedItems to the folder of the destination item 
 	void dropFolderItems(QListViewItem *dest);
 
-	//! Slot: moves a folder item to another
+	//!  moves a folder item to another
 	/**
 	 * \param src source folder item
 	 * \param dest destination folder item
@@ -691,9 +692,9 @@ public slots:
 	void moveFolder(FolderListItem *src, FolderListItem *dest);
 
 	// scripting
-	//! Slot: notify the user that an error occured in the scripting system
+	//!  notify the user that an error occured in the scripting system
 	void scriptError(const QString &message, const QString &scriptName, int lineNumber);
-	//! Slot: execute all notes marked auto-exec
+	//!  execute all notes marked auto-exec
 	void executeNotes();
 
 signals:

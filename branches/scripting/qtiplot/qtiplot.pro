@@ -1,30 +1,23 @@
 TARGET  = qtiplot
 TEMPLATE     = app
-CONFIG      += qt warn_on debug opengl
+CONFIG      += qt warn_on release exceptions opengl
 MOC_DIR      = ../tmp/qtiplot
 OBJECTS_DIR  = ../tmp/qtiplot
 DESTDIR           = ./
 DEFINES += QT_PLUGIN
-win32:DEFINES  += QT_DLL QT_THREAD_SUPPORT GSL_DLL QWTPLOT3D_DLL 
 
 TRANSLATIONS = translations/qtiplot_de.ts \
 			   translations/qtiplot_es.ts \
 			   translations/qtiplot_fr.ts 
 
 INCLUDEPATH       += ../3rdparty/qwt/include
+INCLUDEPATH		  += ../3rdparty/liborigin
+
+##################### Linux (Mac OS X) settings ##################### 
+
 unix:INCLUDEPATH  += -I /usr/include/qwtplot3d
-
-win32:INCLUDEPATH += ../3rdparty/qwtplot3d/include
-win32:INCLUDEPATH += C:/WinGsl
-win32:INCLUDEPATH += ../3rdparty/zlib123/include
-
 unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
-unix:LIBS         += -L /usr/lib -lgsl -lgslcblas -lqwtplot3d -lz
-
-win32:LIBS        += ../3rdparty/qwtplot3d/lib/qwtplot3d.lib
-win32:LIBS        += ../3rdparty/qwt/lib/qwt.lib  
-win32:LIBS        += C:/WinGsl/Lib/WinGsl.lib
-win32:LIBS		  += ../3rdparty/zlib123/lib/zdll.lib
+unix:LIBS         += -L /usr/lib -lgsl -lgslcblas -lqwtplot3d -lz -lorigin
 
 unix:target.path=/usr/bin
 unix:INSTALLS += target
@@ -32,8 +25,26 @@ unix:INSTALLS += target
 unix:documentation.path = /usr/share/doc/qtiplot
 unix:documentation.files = doc/*
 unix:INSTALLS += documentation
+
+##################### Windows settings #####################
+ 
+win32:DEFINES  += QT_DLL QT_THREAD_SUPPORT GSL_DLL 
+
+win32:INCLUDEPATH += ../3rdparty/qwtplot3d/include
+win32:INCLUDEPATH += C:/GSL/include
+win32:INCLUDEPATH += ../3rdparty/zlib123/include
+
+win32:LIBS        += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
+win32:LIBS        += ../3rdparty/qwt/lib/libqwt.a  
+win32:LIBS        += C:/GSL/lib/libgsl.lib
+win32:LIBS        += C:/GSL/lib/libgslcblas.lib
+win32:LIBS		  += ../3rdparty/zlib123/lib/zdll.lib
+win32:LIBS		  += ../3rdparty/liborigin/liborigin.a
  
 win32:RC_FILE     = src/iPlot.rc
+
+###################### Project files #############################
+ 
 HEADERS  = src/application.h \
      src/graph.h \
      src/graph3D.h \
@@ -195,7 +206,6 @@ HEADERS+=../3rdparty/muParser/muParser.h \
 		 ../3rdparty/muParser/muParserCallback.h \
 		 ../3rdparty/muParser/muParserTokenReader.h \ 
 		 ../3rdparty/muParser/muParserFixes.h \
-#../3rdparty/muParser/muParserDLL.h \
 		 ../3rdparty/muParser/muParserDef.h  	   
 SOURCES+=../3rdparty/muParser/muParser.cpp \
          ../3rdparty/muParser/muParserBase.cpp \ 
@@ -203,12 +213,7 @@ SOURCES+=../3rdparty/muParser/muParser.cpp \
 		 ../3rdparty/muParser/muParserBytecode.cpp \
 		 ../3rdparty/muParser/muParserCallback.cpp \
 		 ../3rdparty/muParser/muParserTokenReader.cpp \
-#../3rdparty/muParser/muParserDLL.cpp \
 		 ../3rdparty/muParser/muParserError.cpp
-
-#Origin Import (liborigin)
-HEADERS+=../3rdparty/liborigin/OPJFile.h   
-SOURCES+=../3rdparty/liborigin/OPJFile.cpp
 
 #Compression (zlib123)
 SOURCES+=../3rdparty/zlib123/minigzip.c

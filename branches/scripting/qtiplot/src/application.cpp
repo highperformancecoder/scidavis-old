@@ -462,9 +462,14 @@ void ApplicationWindow::initToolBars()
 	connect(actionAddText, SIGNAL(activated()), this, SLOT(addText()));
 	actionAddText->addTo(plotTools);
 
-	btnLine = new QAction(tr("Draw &Arrow/Line"), tr("CTRL+ALT+L"), dataTools, "btnLine" );
+	btnArrow = new QAction(tr("Draw &Arrow"), tr("CTRL+ALT+A"), dataTools, "btnArrow" );
+    btnArrow->setToggleAction( TRUE );
+    btnArrow->setIconSet(QPixmap(arrow_xpm) );
+	btnArrow->addTo(plotTools);
+
+	btnLine = new QAction(tr("Draw &Line"), tr("CTRL+ALT+L"), dataTools, "btnLine" );
     btnLine->setToggleAction( TRUE );
-    btnLine->setIconSet(QPixmap(arrow_xpm) );
+    btnLine->setIconSet(QPixmap(lPlot_xpm) );
 	btnLine->addTo(plotTools);
 
 	actionTimeStamp->addTo(plotTools);
@@ -664,6 +669,7 @@ void ApplicationWindow::initMainMenu()
 	graph->insertSeparator();
 
 	actionAddText->addTo(graph);
+	btnArrow->addTo(graph);
 	btnLine->addTo(graph);
 	actionTimeStamp->addTo(graph);
 	actionAddImage->addTo(graph);
@@ -6872,6 +6878,30 @@ if (g)
 	}
 }
 
+void ApplicationWindow::drawArrow()
+{
+MultiLayer* plot = (MultiLayer*)ws->activeWindow();
+if (!plot || plotWindows.contains(plot->name())<=0)
+	return;
+
+if (plot->isEmpty())
+	{
+	QMessageBox::warning(this,tr("QtiPlot - Warning"),
+				tr("<h4>There are no plot layers available in this window.</h4>"
+					  "<p><h4>Please add a layer and try again!</h4>"));
+		
+	btnPointer->setOn(true);
+	return;
+	}
+	
+Graph* g = (Graph*)plot->activeGraph();
+if (g)
+	{
+	g->drawLine(true, 1);
+	emit modified();
+	}
+}
+
 void ApplicationWindow::showImageDialog()
 {
 MultiLayer* plot = (MultiLayer*)ws->activeWindow();
@@ -9433,6 +9463,7 @@ if (s.contains ("minimized"))
 else if (s.contains ("maximized"))
 	{
 	w->setGeometry(0, 0, 500, 400);
+	w->hide();//trick used in order to avoid a resize event
 	w->showMaximized();
 	((myWidget *)w)->setStatus(myWidget::Maximized);
 	app->setListView(caption, tr("Maximized"));
@@ -10367,6 +10398,8 @@ else if (action == btnRemovePoints)
 	removePoints();
 else if (action == btnZoom)
 	zoom();
+else if (action == btnArrow)
+	drawArrow();
 else if (action == btnLine)
 	drawLine();
 }
@@ -10393,7 +10426,7 @@ connect (g,SIGNAL(showAxisDialog(int)), this, SLOT(showAxisPageFromAxisDialog(in
 
 connect (g,SIGNAL(showWindowContextMenu()),this,SLOT(showWindowContextMenu()));
 connect (g,SIGNAL(showCurvesDialog()),this,SLOT(showCurvesDialog()));
-
+connect (g,SIGNAL(drawLineEnded(bool)), btnPointer, SLOT(setOn(bool)));
 connect (g,SIGNAL(drawTextOff()),this, SLOT(disableAddText()));
 connect (g,SIGNAL(showXAxisTitleDialog()),this,SLOT(showXAxisTitleDialog()));
 connect (g,SIGNAL(showYAxisTitleDialog()),this,SLOT(showYAxisTitleDialog()));
@@ -11342,7 +11375,11 @@ void ApplicationWindow::translateActionsStrings()
 	actionAddText->setMenuText(tr("Add &Text"));
 	actionAddText->setAccel(tr("ALT+T"));
 
-	btnLine->setMenuText(tr("Draw &Arrow/Line"));
+	btnArrow->setMenuText(tr("Draw &Arrow"));
+	btnArrow->setAccel(tr("CTRL+ALT+A"));
+	btnArrow->setToolTip(tr("Draw arrow"));
+
+	btnLine->setMenuText(tr("Draw &Line"));
 	btnLine->setAccel(tr("CTRL+ALT+L"));
 	btnLine->setToolTip(tr("Draw line"));
 

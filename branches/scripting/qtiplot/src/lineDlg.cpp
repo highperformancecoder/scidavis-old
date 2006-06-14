@@ -78,17 +78,21 @@ lineDialog::lineDialog( QWidget* parent,  const char* name, bool modal, WFlags f
 
 	new QLabel(tr( "X" ), GroupBox2, "TextLabel11",0);
 	xStartBox = new QSpinBox( 0,10000,1,GroupBox2, "xstart" );
+	xStartBox->setSuffix(tr(" pixels"));
 	
 	new QLabel(tr( "Y" ),GroupBox2, "TextLabel111",0 );
 	yStartBox = new QSpinBox(0,10000,1,GroupBox2, "ystart" );
+	yStartBox->setSuffix(tr(" pixels"));
 
 	QButtonGroup *GroupBox3 = new QButtonGroup( 2,QGroupBox::Horizontal,tr("End Point"),geometry,"GroupBox3" );
 
 	new QLabel(tr( "X" ), GroupBox3, "TextLabel11",0);
 	xEndBox = new QSpinBox(0,10000,1,GroupBox3, "xstart" );
-	
+	xEndBox->setSuffix(tr(" pixels"));
+
 	new QLabel(tr( "Y" ),GroupBox3, "TextLabel111",0 );
 	yEndBox = new QSpinBox(0,10000,1,GroupBox3, "ystart" );
+	yEndBox->setSuffix(tr(" pixels"));
 
 	QHBoxLayout* hl2 = new QHBoxLayout(geometry,5,5, "hl2");
     hl2->addWidget(GroupBox2);
