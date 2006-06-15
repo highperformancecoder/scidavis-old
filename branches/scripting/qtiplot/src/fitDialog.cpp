@@ -171,7 +171,7 @@ funcBox = new QListBox( vbox2, "funcBox" );
 
 QVBox *vbox3=new QVBox(hbox1,"vbox3");
 vbox3->setSpacing(5);
-new QLabel( tr("Expresion"), vbox3, "TextLabel41",0 );
+new QLabel( tr("Expression"), vbox3, "TextLabel41",0 );
 explainBox = new QTextEdit( vbox3, "explainBox" );
 explainBox->setReadOnly(true);
 
@@ -213,7 +213,7 @@ QVBox *vbox4=new QVBox(hbox2,"vbox4");
 vbox4->setSpacing(5);
 
 btnAddTxt = new QPushButton(vbox4, "btnAddTxt" );
-btnAddTxt->setText( tr( "Add &expresion" ) );
+btnAddTxt->setText( tr( "Add &expression" ) );
 
 btnAddName = new QPushButton(vbox4, "btnClose" );
 btnAddName->setText( tr( "Add &name" ) );
@@ -233,7 +233,7 @@ hlayout->addWidget(hbox2);
 connect( buttonPlugins, SIGNAL( clicked() ), this, SLOT(choosePluginsFolder()));
 connect( buttonClear, SIGNAL( clicked() ), this, SLOT(clearList()));
 connect( categoryBox, SIGNAL(highlighted(int)), this, SLOT(showFunctionsList(int) ) );
-connect( funcBox, SIGNAL(highlighted(int)), this, SLOT(showExpresion(int)));
+connect( funcBox, SIGNAL(highlighted(int)), this, SLOT(showExpression(int)));
 connect( boxUseBuiltIn, SIGNAL(toggled(bool)), this, SLOT(setFunction(bool) ) );
 connect( btnAddName, SIGNAL(clicked()), this, SLOT(addFunctionName() ) );
 connect( btnAddTxt, SIGNAL(clicked()), this, SLOT(addFunction() ) );
@@ -332,7 +332,7 @@ if (userFunctionNames.contains(name))
 	userFunctionParams[index] = boxParam->text();
 		
 	if (funcBox->currentText() == name)
-		showExpresion(index);
+		showExpression(index);
 	}
 else
 	{
@@ -548,7 +548,7 @@ switch (category)
 	}
 
 funcBox->setCurrentItem(0);
-showExpresion(0);
+showExpression(0);
 }
 
 void fitDialog::choosePluginsFolder()
@@ -635,7 +635,7 @@ void fitDialog::showParseFunctions()
 funcBox->insertStringList(myParser::functionsList(), -1);
 }
 
-void fitDialog::showExpresion(int function)
+void fitDialog::showExpression(int function)
 {
 if (categoryBox->currentItem() == 2)
 	{
