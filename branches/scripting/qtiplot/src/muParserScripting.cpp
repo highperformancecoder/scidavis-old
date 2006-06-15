@@ -215,6 +215,7 @@ bool muParserScript::compile()
 
 int muParserScript::setDynamicVars()
 {
+  bool allSourcesEmpty = !rowIndexes.isEmpty();
   if (Context->isA("Table"))
   {
     Table *table = (Table*) Context;
@@ -230,8 +231,13 @@ int muParserScript::setDynamicVars()
       col=j.data().toInt();
       if (row < 0 || row >= table->tableRows() || col < 0 || col >= table->tableCols())
 	return 0;
-      if (table->text(row,col).isEmpty()) return 2;
-      setDouble((table->text(row,col)).toDouble(), i.key().ascii());
+      if (table->text(row,col).isEmpty())
+	setDouble(0, i.key().ascii());
+      else
+      {
+	setDouble((table->text(row,col)).toDouble(), i.key().ascii());
+	allSourcesEmpty = false;
+      }
       i++; j++;
     }
   } else if (Context->isA("Matrix")) {
@@ -253,8 +259,13 @@ int muParserScript::setDynamicVars()
       }
       if (row < 0 || row >= matrix->numRows() || col < 0 || col >= matrix->numCols())
 	return 0;
-      if (matrix->text(row,col).isEmpty()) return 2;
-      setDouble((matrix->text(row,col)).toDouble(), i.key().ascii());
+      if (matrix->text(row,col).isEmpty())
+	setDouble(0, i.key().ascii());
+      else
+      {
+	setDouble((matrix->text(row,col)).toDouble(), i.key().ascii());
+	allSourcesEmpty=false;
+      }
       i++; j++;
     }
   }
@@ -264,6 +275,7 @@ int muParserScript::setDynamicVars()
     if (!setDouble(rparser.Eval(), i.key().ascii()))
       return 0;
   }
+  if (allSourcesEmpty) return 2;
   return 1;
 }
 
