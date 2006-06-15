@@ -132,6 +132,9 @@ tableDialog::tableDialog( QWidget* parent, const char* name, bool modal, WFlags 
 
 void tableDialog::enablePrecision(int f)
 {
+if(displayBox->currentItem())
+	return;//the col type != "Numeric"
+
 if (!f)
 	{
 	precisionBox->setValue(6);
@@ -241,13 +244,11 @@ switch(colType)
 	break;
 
 	case 2:
-		 w->setDateTimeFormat(colType, formatBox->currentText(), 
-								applyToRightCols->isChecked()); 
+		 w->setDateTimeFormat(colType, "yyyy-MM-dd", applyToRightCols->isChecked()); 
 	break;
 
 	case 3:
-		w->setDateTimeFormat(colType, formatBox->currentText(), 
-							applyToRightCols->isChecked()); 
+		w->setDateTimeFormat(colType, formatBox->currentText(), applyToRightCols->isChecked()); 
 	break;
 
 	case 4:

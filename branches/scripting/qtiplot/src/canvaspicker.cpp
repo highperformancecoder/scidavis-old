@@ -647,7 +647,7 @@ mrk.setStyle(Qt::SolidLine);
 mrk.setEndArrow(endArrow);
 mrk.setStartArrow(FALSE);
 
-if (endArrow)
+if (plot()->drawLineActive())
 	mrk.setColor(Qt::black);
 else
 	mrk.setColor(Qt::red);

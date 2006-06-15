@@ -5648,7 +5648,7 @@ if ( w && tableWindows.contains(w->name()))
 		td->showNormal();
 		}
 	else
-		QMessageBox::warning(this, "QtiPlot","Please select a column first!");
+		QMessageBox::warning(this, tr("QtiPlot"),tr("Please select a column first!"));
 	}
 }
 
@@ -6816,7 +6816,7 @@ Graph* g = (Graph*)plot->activeGraph();
 if (g)
 	{
 	QStringList list=QImage::inputFormatList ();
-	QString filter="Images (*.jpg *JPG ",aux;
+	QString filter=tr("Images") + " (*.jpg *JPG ",aux;
 	int i;
 	for (i=0;i<(int)list.count();i++)
 		{
@@ -6831,7 +6831,7 @@ if (g)
 		}
 
 	QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
-			"QtiPlot - Insert image from file", 0, TRUE);
+			tr("QtiPlot - Insert image from file"), 0, TRUE);
 	if ( !fn.isEmpty() )
 		{
 		QApplication::setOverrideCursor(waitCursor);
@@ -6849,6 +6849,9 @@ if (g)
 			photo.load(fn,"JPEG",QPixmap::Color);
 
 		g->insertImageMarker(photo,fn);
+
+		QFileInfo fi(fn);
+		workingDir = fi.dirPath(true);
 		QApplication::restoreOverrideCursor();
 		}
 	}
@@ -9471,8 +9474,8 @@ else if (s.contains ("maximized"))
 else
 	{
 	QStringList lst=QStringList::split ("\t",s,TRUE);
-	w->parentWidget()->setGeometry(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
 	w->showNormal();
+	w->parentWidget()->setGeometry(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
 	((myWidget *)w)->setStatus(myWidget::Normal);
 
 	if (lst[5] == "active")
@@ -9602,7 +9605,7 @@ for (line++; line!=flist.end(); line++)
 {
   QStringList fields = QStringList::split("\t",*line,true);
   if (fields[0] == "geometry") {
-    restoreWindowGeometry(app, (QWidget *)w, *line);
+		restoreWindowGeometry(app, (QWidget *)w, *line);
   } else if (fields[0] == "header") {
     fields.pop_front();
     if (fileVersion >= 78)
@@ -10866,9 +10869,6 @@ void ApplicationWindow::createActions()
   actionDeleteLayer = new QAction(QPixmap(erase_xpm), tr("&Remove Layer"), tr("Alt+R"), this);
   connect(actionDeleteLayer, SIGNAL(activated()), this, SLOT(deleteLayer()));
 
-  actionPrintHelp = new QAction(QPixmap(fileprint_xpm), tr("Print"), QString::null, this);
-  connect(actionPrintHelp, SIGNAL(activated()), this, SLOT(printHelp()));
-
   actionResizeActiveWindow = new QAction(QPixmap(resize_xpm), tr("Window &Geometry..."), QString::null, this);
   connect(actionResizeActiveWindow, SIGNAL(activated()), this, SLOT(resizeActiveWindow()));
 
@@ -11288,7 +11288,6 @@ void ApplicationWindow::translateActionsStrings()
   actionDeleteLayer->setMenuText(tr("&Remove Layer"));
   actionDeleteLayer->setAccel(tr("Alt+R"));
 
-  actionPrintHelp->setMenuText(tr("Print"));
   actionResizeActiveWindow->setMenuText(tr("Window &Geometry..."));
   actionHideActiveWindow->setMenuText(tr("&Hide Window"));
   actionShowMoreWindows->setMenuText(tr("More windows..."));

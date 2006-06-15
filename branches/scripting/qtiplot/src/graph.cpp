@@ -5014,7 +5014,6 @@ int i, it=0;
 	
 int xColType = w->columnType(xcol);
 int yColType = w->columnType(ycol);
-QString timeFormat = (w->columnFormat(xcol)); 
 
 QStringList xLabels, yLabels;// store text labels
 QTime time0;
@@ -5153,7 +5152,7 @@ if (xColType == Table::Text )
 	}
 else if (xColType == Table::Time )
 	{
-	QString fmtInfo = time0.toString(Qt::TextDate) + ";" + timeFormat;
+	QString fmtInfo = time0.toString(Qt::TextDate) + ";" + w->columnFormat(xcol); 
 	if (style == HorizontalBars)
 		setLabelsDateTimeFormat(QwtPlot::yLeft, Time, fmtInfo);
 	else
@@ -5161,7 +5160,7 @@ else if (xColType == Table::Time )
 	}
 else if (xColType == Table::Date )
 	{
-	QString fmtInfo = date.toString(Qt::ISODate ) + ";" + timeFormat;
+	QString fmtInfo = date.toString(Qt::ISODate ) + ";yyyy-MM-dd";
 	if (style == HorizontalBars)
 		setLabelsDateTimeFormat(QwtPlot::yLeft, Date, fmtInfo);
 	else

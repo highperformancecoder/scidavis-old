@@ -1812,7 +1812,7 @@ for (int i=0; i<rows; i++)
 	QString s = worksheet->text(i,col);
 	if (!s.isEmpty())
 		{
-		QDate d = QDate::fromString (s,Qt::ISODate);
+		QDate d = QDate::fromString (s, Qt::ISODate);
 		if (d.isValid())
 			worksheet->setText(i, col, d.toString(format));
 		else
