@@ -2107,26 +2107,26 @@ if (axis == 1)
 	
 if (axesType[qwt_axis] == Graph::Time)
 	{
-	int miliseconds;
+	int milliseconds;
 	switch (boxUnit->currentItem())
 		{
 		case 0:
-			miliseconds = (int)step;
+			milliseconds = (int)step;
 		break;
 		
 		case 1:
-			miliseconds = int(step*1e3);
+			milliseconds = int(step*1e3);
 		break;
 		
 		case 2:
-			miliseconds = int(step*6e4);
+			milliseconds = int(step*6e4);
 		break;
 		
 		case 3:
-			miliseconds = int(step*36e5);
+			milliseconds = int(step*36e5);
 		break;
 		}
-	scales[8*axis+2]=QString::number(miliseconds);	
+	scales[8*axis+2]=QString::number(milliseconds);	
 	}
 else if (axesType[qwt_axis] == Graph::Date)
 	{
@@ -2497,14 +2497,14 @@ boxMinorValue->setValue(scales[8*axis+4].toInt());
 	if (axesType[qwt_axis] == Graph::Time)
 		{
 		boxUnit->show();
-		boxUnit->insertItem(tr("milisec."));
+		boxUnit->insertItem(tr("millisec."));
 		boxUnit->insertItem(tr("sec."));
 		boxUnit->insertItem(tr("min."));
 		boxUnit->insertItem(tr("hours"));
 			
 		/*boxUnit->setCurrentItem (1);
-		double milisec = (scales[8*axis+2]).toDouble();
-		boxStep->setText(QString::number(milisec/1e3));*/
+		double millisec = (scales[8*axis+2]).toDouble();
+		boxStep->setText(QString::number(millisec/1e3));*/
 		}
 	else if (axesType[qwt_axis] == Graph::Date)
 		{
