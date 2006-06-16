@@ -221,6 +221,7 @@ results->setReadOnly (TRUE);
 logWindow->setWidget(results);
 logWindow->hide();
 
+#ifdef SCRIPTING_CONSOLE
 consoleWindow = new QDockWindow(this);
 consoleWindow->setCaption(tr("Scripting Console"));
 consoleWindow->setResizeEnabled(true);
@@ -230,6 +231,7 @@ console=new QTextEdit(consoleWindow,"console");
 console->setReadOnly(true);
 consoleWindow->setWidget(console);
 consoleWindow->hide();
+#endif
 
 ws = new QWorkspace( this );
 ws->setScrollBarsEnabled (TRUE);
@@ -251,8 +253,10 @@ accel->connectItem( accel->insertItem( Key_Delete ), this, SLOT(clearSelection()
 connect(actionShowLog, SIGNAL(toggled(bool)), this, SLOT(showResults(bool)));
 connect(logWindow,SIGNAL(visibilityChanged(bool)),actionShowLog,SLOT(setOn(bool)));
 connect(explorerWindow,SIGNAL(visibilityChanged(bool)),actionShowExplorer,SLOT(setOn(bool)));
+#ifdef SCRIPTING_CONSOLE
 connect(actionShowConsole, SIGNAL(toggled(bool)), consoleWindow, SLOT(setShown(bool)));
 connect(consoleWindow, SIGNAL(visibilityChanged(bool)), actionShowConsole, SLOT(setOn(bool)));
+#endif
 connect(tablesDepend, SIGNAL(activated(int)), this, SLOT(showTable(int)));
 
 connect(this, SIGNAL(modified()),this, SLOT(modifiedProject()));
@@ -536,7 +540,9 @@ lv->setColumnText (5, tr("Label"));
 
 explorerWindow->setCaption(tr("Project Explorer"));
 logWindow->setCaption(tr("Results Log"));
+#ifdef SCRIPTING_CONSOLE
 consoleWindow->setCaption(tr("Scripting Console"));
+#endif
 displayBar->setLabel(tr("Data Display"));
 tableTools->setLabel(tr("Table"));
 plotTools->setLabel(tr("Plot"));
@@ -655,7 +661,9 @@ void ApplicationWindow::initMainMenu()
 	actionShowPlotWizard->addTo(view);
 	actionShowExplorer->addTo(view);
 	actionShowLog->addTo(view);
+#ifdef SCRIPTING_CONSOLE
 	actionShowConsole->addTo(view);
+#endif
 	actionShowConfigureDialog->addTo(view);
 
 	graph = new QPopupMenu(this);
@@ -10619,9 +10627,11 @@ void ApplicationWindow::createActions()
   actionShowLog->setToggleAction(TRUE);
   actionShowLog->setOn(FALSE);
   
+#ifdef SCRIPTING_CONSOLE
   actionShowConsole = new QAction(0, tr("Scripting &Console"), QString::null, this);
   actionShowConsole->setToggleAction(true);
   actionShowConsole->setOn(false);
+#endif
   
   actionAddLayer = new QAction(QPixmap(newLayer_xpm), tr("Add La&yer"), tr("ALT+L"), this);
   connect(actionAddLayer, SIGNAL(activated()), this, SLOT(addLayer()));
@@ -11119,8 +11129,10 @@ void ApplicationWindow::translateActionsStrings()
   actionShowLog->setMenuText(tr("Results &Log"));
   actionShowLog->setToolTip(tr("Show calculus results"));
 
+#ifdef SCRIPTING_CONSOLE
   actionShowConsole->setMenuText(tr("&Console"));
   actionShowConsole->setToolTip(tr("Show Scripting console"));
+#endif
   
   actionAddLayer->setMenuText(tr("Add La&yer"));
   actionAddLayer->setAccel(tr("ALT+L"));

@@ -51,8 +51,12 @@ public:
 	enum ShowWindowsPolicy{HideAll, ActiveFolder, SubFolders};
 
 	QTranslator *appTranslator, *qtTranslator;
-	QDockWindow *logWindow, *explorerWindow, *consoleWindow;
-	QTextEdit *results, *console;
+	QDockWindow *logWindow, *explorerWindow;
+	QTextEdit *results;
+#ifdef SCRIPTING_CONSOLE
+	QDockWindow *consoleWindow;
+	QTextEdit *console;
+#endif
 	QWorkspace* ws;
     QToolBar *fileTools, *plotTools, *tableTools, *plot3DTools, *displayBar, *editTools;
     QPopupMenu *windowsMenu,*view,*graph,*file,*format,*calcul,*edit,*dataMenu,*recent, *exportPlot;
@@ -760,7 +764,10 @@ public:
     QAction *actionLoad, *actionLoadMultiple, *actionUndo, *actionRedo;
     QAction *actionCopyWindow;
     QAction *actionCutSelection, *actionCopySelection, *actionPasteSelection, *actionClearSelection;
-    QAction *actionShowExplorer, *actionShowLog, *actionShowConsole, *actionAddLayer, *actionShowLayerDialog;
+    QAction *actionShowExplorer, *actionShowLog, *actionAddLayer, *actionShowLayerDialog;
+#ifdef SCRIPTING_CONSOLE
+    QAction *actionShowConsole;
+#endif
 
     QAction *actionExportGraph, *actionExportAllGraphs, *actionPrint, *actionPrintAllPlots, *actionShowExportASCIIDialog;
     QAction *actionShowImportDialog;

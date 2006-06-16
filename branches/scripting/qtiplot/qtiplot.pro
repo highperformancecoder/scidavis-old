@@ -5,6 +5,7 @@ MOC_DIR      = ../tmp/qtiplot
 OBJECTS_DIR  = ../tmp/qtiplot
 DESTDIR           = ./
 DEFINES += QT_PLUGIN
+#DEFINES += SCRIPTING_CONSOLE
 
 TRANSLATIONS = translations/qtiplot_de.ts \
 			   translations/qtiplot_es.ts \

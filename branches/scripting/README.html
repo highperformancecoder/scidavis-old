@@ -11,18 +11,29 @@
 </center>
 
 If you want to build QtiPlot from sources, don't forget first to download and install the
-<a href="http://www.trolltech.com/products/qt/index.html">Qt</a>, <a href="http://qwtplot3d.sourceforge.net/">QwtPlot3D</a>, <a href="http://sources.redhat.com/gsl/">GSL</a> and <a href="http://www.zlib.net/">zlib</a> libraries. 
+<a href="http://www.trolltech.com/products/qt/index.html">Qt</a>, <a href="http://qwtplot3d.sourceforge.net/">QwtPlot3D</a>, <a href="http://sources.redhat.com/gsl/">GSL</a>, <a href="http://sourceforge.net/projects/liborigin/">liborigin</a> and <a href="http://www.zlib.net/">zlib</a> libraries. 
 
 
 <b>You must use the modified version of Qwt 4.2.0 which comes with the QtiPlot archive ("3rdparty" folder). This should be statically linked to QtiPlot in order to avoid conflicts on your operating system.</b>
 
-The last version of the <a href="http://muparser.sourceforge.net/">muParser (1.26 not oficially released yet)</a> library is included in QtiPlot ("3rdparty/muParser" folder), as well as the <a href="http://sourceforge.net/projects/liborigin/">liborigin</a> library, so you don't need to download and install them.
+The last version of the <a href="http://muparser.sourceforge.net/">muParser (1.26 not oficially released yet)</a> library is included in QtiPlot ("3rdparty/muParser" folder), so you don't need to download and install it.
 
 In order to build QtiPlot you also need <span class="keywordflow">qmake</span>, that is official part of Qt 3.x.<br><br>
 
-<center> <font color = darkRed size = +1> <b>Linux</b> </font><br></center>
+<center> <font color = darkRed size = +1> <b>Linux and Mac OS X</b> </font><br></center>
+While you can probably install the other dependencies from your distribution's package manager, there are no binaries and little documentation for liborigin.
+So here's how to install it:<br>
+<ol>
+  <li>download the archive (liborigin-xxxxxxxx.tar.gz) and decompress it</li>
+  <li>open a terminal (console) window</li>
+  <li>go to the main folder of the decompressed archive</li>
+  <li>type "make -f Makefile.LINUX" on Linux and "make -f Makefile.DARWIN" on Mac OS X</li>
+  <li>login as root</li>
+  <li>type "cp liborigin.so /usr/local/lib/"</li>
+  <li>type "ldconfig"</li>
+</ol>
 
-QtiPlot distributes a binary <a href="http://www.debian.org/">Debian</a> package and a <a href="http://www.rpm.org/">RPM</a> package for RadHat, Mandrake and SuSE distributions.<br>
+QtiPlot distributes a binary <a href="http://www.debian.org/">Debian</a> package and a <a href="http://www.rpm.org/">RPM</a> package for RedHat, Mandrake and SuSE distributions.<br>
 The RPM package was created on an <a href="http://www.ubuntulinux.org/">Ubuntu</a> distribution.<br>
 
 To install on Linux Debian: download the package file <a class="qindex" href="http://soft.proindependent.com/download.html">qtiplot_0.x.x_i386.deb</a>,
@@ -35,41 +46,47 @@ then login as "root" and type:<br>
 
 For all the other <font color = darkRed size = +1> <b>Linux</b> </font> distributions and for <font color = darkRed size = +1> <b>Mac OS X</b> </font>:<br>
 
-1) download the .tar.bz2 or the .zip archive and decompress it<br>
-2) open a  terminal (console) window<br>
-3) go to the main folder of the decompressed archive <br>
-4) modify the 'qtiplot/qtiplot.pro' file in order to set the INCLUDEPATH and LIBS variables to point to the location of the zlib, GSL and QwtPlot3D libraries on your system (header files and dynamic lib files).<br>
-5) type "qmake"<br>
-6) type "make" <br>
-7) login as root and type "make install" <br>
-
+<ol>
+  <li>download the .tar.bz2 or the .zip archive and decompress it</li>
+  <li>open a  terminal (console) window</li>
+  <li>go to the main folder of the decompressed archive </li>
+  <li>modify the 'qtiplot/qtiplot.pro' file in order to set the INCLUDEPATH and LIBS variables to point to the location of the zlib, GSL and QwtPlot3D libraries on your system (header files and dynamic lib files).</li>
+  <li>type "qmake"</li>
+  <li>type "make" </li>
+  <li>login as root and type "make install" </li>
+</ol>
 
 <center><font color = darkRed size = +1> <b>Windows</b> </font><br></center>
 
 QtiPlot distributes a binary Windows package. To install:<br>
 
-1. Download the <a class="qindex" href="http://soft.proindependent.com/download.html">qtiplot-0.x.x.exe</a> file.<br>
-2. Open a Windows Explorer, double click on 'qtiplot-0.x.x.exe' icon
-and follow the installation instructions.<br><br>
+<ol>
+  <li>Download the <a class="qindex" href="http://soft.proindependent.com/download.html">qtiplot-0.x.x.exe</a> file.</li>
+  <li>Open a Windows Explorer, double click on 'qtiplot-0.x.x.exe' icon
+  and follow the installation instructions.</li>
+</ol>
 
 If you want to compile the application from sources
 you need to purchase the <a href="http://www.informit.com/title/0131240722" >Qt3 official book</a>, that comes with a CD containing a non commercial version of Qt 3.2.1 or use the <a href="http://qtwin.sourceforge.net/qt3-win32/compile-mingw.php">Q..3/ Windows Free Edition</a> in order to build Qt3.<br>
 
-1. Download the <a class="qindex" href="http://soft.proindependent.com/download.html">qtiplot</a> archive and unzip it.<br>
-2. Modify the 'qtiplot.pro' file in order to set the INCLUDEPATH variable to the 'include' directory of your local build of the <a href="http://www6.in.tum.de/~kiss/WinGsl.htm">WinGSL</a>, zlib and QwtPlot3D libraries.<br>
-3. Modify the 'qtiplot.pro' file in order to set the LIBS variable, in the win32 section,  to the actual directories of your local build of the <a href="http://www6.in.tum.de/~kiss/WinGsl.htm">WinGSL</a>, zlib and QwtPlot3D libraries. <br>
-4. Open a MS-DOS command terminal, go to the 'qtiplot' folder and type:<br>
-	<b>qmake qtiplot.pro</b><br>
-5. Type:<br>
-a) For MSVC users: <b>nmake</b><br>
-b) For MinGW users: <b>mingw32-make</b><br>
-c) For Visual Studio users, qmake can also generate '.dsp' project files.
-All you need to do is type:
+<ol>
+  <li>Download the <a class="qindex" href="http://soft.proindependent.com/download.html">qtiplot</a> archive and unzip it.</li>
+  <li>Modify the 'qtiplot.pro' file in order to set the INCLUDEPATH variable to the 'include' directory of your local build of the <a href="http://www6.in.tum.de/~kiss/WinGsl.htm">WinGSL</a>, zlib and QwtPlot3D libraries.</li>
+  <li>Modify the 'qtiplot.pro' file in order to set the LIBS variable, in the win32 section,  to the actual directories of your local build of the <a href="http://www6.in.tum.de/~kiss/WinGsl.htm">WinGSL</a>, zlib and QwtPlot3D libraries. </li>
+  <li>Open a MS-DOS command terminal, go to the 'qtiplot' folder and type:<br>
+  <b>qmake qtiplot.pro</b></li>
+  <li>Type:<ol type="a">
+    <li>For MSVC users: <b>nmake</b></li>
+    <li>For MinGW users: <b>mingw32-make</b></li>
+    <li> For Visual Studio users, qmake can also generate '.dsp' project files.
+    All you need to do is type:<br>
+    <b>qmake -tp vc qtiplot.pro</b><br>
+    then open the 'qtiplot.dsp' file, go to the 'Build' menu and chose 'Set active configuration...'.
+    Choose the "qtiplot-Win32 Release' project configuration and press OK. Press the 'F7' key to build the application.
+    </li>
+  </ol></li>
+</ol>
 
-<b>qmake -tp vc qtiplot.pro</b><br>
-
-then open the 'qtiplot.dsp' file, go to the 'Build' menu and chose 'Set active configuration...'.
-Choose the "qtiplot-Win32 Release' project configuration and press OK. Press the 'F7' key to build the application. </font>
 </div>
 
 </div>

@@ -95,6 +95,7 @@ bool muParserScript::setDouble(double val, const char *name)
       rparser.DefineVar(name, valptr);
       variables.insert(name, valptr);
     } catch (mu::ParserError &e) {
+      delete valptr;
       QString errString=e.GetMsg();
       for (strDict::iterator i=substitute.begin(); i!=substitute.end(); i++)
 	errString.replace(i.key(), i.data(), true);
