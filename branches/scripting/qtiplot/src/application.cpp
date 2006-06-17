@@ -1348,7 +1348,7 @@ if (w->columnType(xcol) == Table::Numeric && w->columnType(ycol) == Table::Numer
 	}
 else
 	QMessageBox::warning(this, tr("QtiPlot - Warning"),
-	tr("This operation can not be performed on curves plotted from columns having a non-numerical format."));
+	tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
 }
 
 void ApplicationWindow::updateTableColumn(const QString& colName, double *dat, int rows)
@@ -1380,7 +1380,7 @@ if (w->columnType(col) == Table::Numeric)
 	}
 else
 	QMessageBox::warning(this, tr("QtiPlot - Warning"),
-	tr("This operation can not be performed on curves plotted from columns having a non-numerical format."));
+	tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
 }
 
 void ApplicationWindow::clearCellFromTable(const QString& name, double value)
@@ -1396,7 +1396,7 @@ if (w)
 		}
 	else
 		QMessageBox::warning(this, tr("QtiPlot - Warning"),
-	tr("This operation can not be performed on curves plotted from columns having a non-numerical format."));
+	tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
 	}
 }
 
@@ -7300,7 +7300,7 @@ if (g && plot3DWindows.contains(g->name()))
 		{
 		QApplication::restoreOverrideCursor();
 		QMessageBox::warning(this, tr("QtiPlot - Duplicate error"),
-				      tr("Empty 3D surface plots can not be duplicated!"));
+				      tr("Empty 3D surface plots cannot be duplicated!"));
 		return 0;
 		}
 

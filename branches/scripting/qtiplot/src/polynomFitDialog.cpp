@@ -103,7 +103,7 @@ int index = boxName->currentItem();
 QwtPlotCurve *c = graph->curve(index);
 if (!c || c->dataSize()<2)
 	{
-	QString s= tr("You can not fit curve:");
+	QString s= tr("You cannot fit curve:");
 	s+="<p><b>'"+boxName->text(index)+"'</b><p>";
 	s+=tr("because it has less than 2 points!");
 	QMessageBox::warning(0,tr("QtiPlot - Warning"),s);

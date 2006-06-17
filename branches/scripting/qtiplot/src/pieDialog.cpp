@@ -97,7 +97,7 @@ void pieDialog::initPiePage()
 	new QLabel( tr( "Pattern" ), GroupBox2, "TextLabel41",0 );
 	boxPattern = new PatternBox( FALSE, GroupBox2);
 	
-	new QLabel(tr( "Pie ray" ), GroupBox2, "rayLabel",0 );  
+	new QLabel(tr( "Pie radius" ), GroupBox2, "rayLabel",0 );  
     boxRay= new QSpinBox(0,2000,10,GroupBox2, "boxRay");
 	
 	QHBoxLayout* hlayout1 = new QHBoxLayout(pieOptions,5,5, "hlayout1");

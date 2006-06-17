@@ -137,7 +137,7 @@ bool muParserScript::compile()
       QString aux2=aux.mid(pos2+1,pos3-pos2-1);
       if (aux2.contains("col("))
       {
-	emit_error(tr("You can not use imbricated columns!"), 0);
+	emit_error(tr("You cannot use imbricated columns!"), 0);
 	compiled = Script::compileErr;
 	return false;
       }
@@ -168,7 +168,7 @@ bool muParserScript::compile()
       QString aux2=aux.mid(pos2+1,pos3-pos2-1);
       if (aux2.contains("cell("))
       {
-	emit_error(tr("You can not use cells recursively!"), 0);
+	emit_error(tr("You cannot use cells recursively!"), 0);
 	compiled = Script::compileErr;
 	return false;
       }
