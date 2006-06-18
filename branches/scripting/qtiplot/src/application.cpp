@@ -3959,7 +3959,7 @@ void ApplicationWindow::open()
 {
 QString filter = tr("QtiPlot project") + " (*.qti);;";
 filter += tr("Compressed QtiPlot project") + " (*.qti.gz);;";
-filter += tr("Origin project") + " (*.opj);;";
+filter += tr("Origin project") + " (*.opj *.OPJ);;";
 filter += tr("All files") + " (*);;";
 
 QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
@@ -12012,7 +12012,7 @@ void ApplicationWindow::appendProject()
 {
 QString filter = tr("QtiPlot project") + " (*.qti);;";
 filter += tr("Compressed QtiPlot project") + " (*.qti.gz);;";
-filter += tr("Origin project") + " (*.opj);;";
+filter += tr("Origin project") + " (*.opj *.OPJ);;";
 
 QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
 			tr("QtiPlot - Open Project"), 0, TRUE);
