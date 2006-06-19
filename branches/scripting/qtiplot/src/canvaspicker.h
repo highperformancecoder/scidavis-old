@@ -59,4 +59,7 @@ signals:
 	void moveGraph(const QPoint&);
 	void releasedGraph();
 	void highlightGraph();
+	
+private:
+		QPoint presspos;
 };

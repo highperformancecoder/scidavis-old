@@ -367,19 +367,69 @@ for (int i=0;i<(int)graphsList->count();i++)
 	Graph *gr=(Graph *)graphsList->at(i);
 	if (gr && gr->isVisible() && !gr->ignoresResizeEvents())
 		{
+		QwtPlot *plot=gr->plotWidget();
+		QwtPlotLayout *plotLayout=plot->plotLayout();
+		QRect cRect=plotLayout->canvasRect();			
+		double ch = (double) cRect.height();
+		double cw = (double) cRect.width();
+
 		int gx = qRound(gr->x()*w_ratio);
 		int gy = qRound(gr->y()*h_ratio);
 		int gw = qRound(gr->width()*w_ratio);
 		int gh = qRound(gr->height()*h_ratio);
 		
 		gr->setGeometry(QRect(gx,gy,gw,gh));
-		gr->plotWidget()->resize(QSize(gw, gh));	
+		gr->plotWidget()->resize(QSize(gw, gh));
+		
+		plotLayout=plot->plotLayout();
+	
+		//we try to maintain the aspect ratio of the plot canvas
+		int height = 0;
+		QRect tRect=plotLayout->titleRect ();
+		if (!tRect.isNull())
+			height+=tRect.height() + plotLayout->spacing();
+
+		QwtScale *scale=(QwtScale *) plot->axis (QwtPlot::xTop);
+		if (scale)
+			{
+			QRect sRect=plotLayout->scaleRect (QwtPlot::xTop);
+			height+= sRect.height();
+			}
+		
+		scale=(QwtScale *) plot->axis (QwtPlot::xBottom);			
+		if (scale)
+			{
+			QRect sRect=plotLayout->scaleRect (QwtPlot::xBottom);
+			height+= sRect.height();
+			}	
+			
+		height += int(h_ratio*ch);
+
+		int width = 0;
+		scale=(QwtScale *) plot->axis (QwtPlot::yLeft);			
+		if (scale)
+			{
+			QRect sRect=plotLayout->scaleRect (QwtPlot::yLeft);
+			width+= sRect.width();
+			}	
+			
+		scale=(QwtScale *) plot->axis (QwtPlot::yRight);			
+		if (scale)
+			{
+			QRect sRect=plotLayout->scaleRect (QwtPlot::yRight);
+			width+= sRect.width();
+			}
+
+		width += int(w_ratio*cw);
+
+		gr->setGeometry(QRect(gx,gy, width, height));
+		gr->plotWidget()->resize(QSize(width, height));
+
 		gr->resizeMarkers(w_ratio, h_ratio);
 		}
 	}
 
-if (hasOverlapingLayers())
-	updateTransparency();
+arrangeLayers(false, false); //restore the layout of the layers
 
 emit modifiedPlot();
 emit resizedWindow(this);
@@ -667,8 +717,8 @@ for (i=0; i<graphs; i++)
 	int col = i % cols;	
 		
 	//calculate sizes and positions for layers
-	const int w =int (l_canvas_width*(1 + gsl_vector_get(yLeftR, i) + gsl_vector_get(yRightR, i)));
-	const int h =int (l_canvas_height*(1 + gsl_vector_get(xTopR, i) + gsl_vector_get(xBottomR, i)));
+	const int w = int (l_canvas_width*(1 + gsl_vector_get(yLeftR, i) + gsl_vector_get(yRightR, i)));
+	const int h = int (l_canvas_height*(1 + gsl_vector_get(xTopR, i) + gsl_vector_get(xBottomR, i)));
 	
 	int x = left_margin + col*colsSpace;
 	if (hor_align == HCenter)
@@ -693,7 +743,7 @@ for (i=0; i<graphs; i++)
 	bool autoscaleFonts = false;
 	if (!userSize)
 		{//When the user specifies the layer canvas size, the window is resized
-		 //and the fonst must be scaled accordingly. If the size is calculated 
+		 //and the fonts must be scaled accordingly. If the size is calculated 
 		 //automatically we don't rescale the fonts in order to prevent problems 
 		 //with too small fonts when the user adds new layers or when removing layers
 
@@ -751,6 +801,9 @@ else if(NumGraph%2!=0) // NumGraph is an odd number
 
 void MultiLayer::arrangeLayers(bool fit, bool userSize)
 {
+if (!graphs)
+	return;
+
 QApplication::setOverrideCursor(waitCursor);
 
 if (fit)
@@ -949,7 +1002,9 @@ for (int i=0;i<(int)graphsList->count();i++)
 		rect.setWidth(rect.width() - 2*lw);
 		rect.setHeight(rect.height() - 2*lw);
 		}
-		
+	
+	//paint.translate(canvas->width(), 0);
+	//paint.rotate(90);
 	myPlot->print(&paint, rect, filter);
 	}
 
@@ -1334,7 +1389,7 @@ QApplication::setOverrideCursor(waitCursor);
 bool resize=FALSE;
 QPoint aux;
 QSize intSize;
-Graph *resize_graph;
+Graph *resize_graph = 0;
 // Get the position of the mouse
 xMouse=e->x();
 yMouse=e->y();
@@ -1474,13 +1529,13 @@ void MultiLayer::highlightLayer(Graph*g)
 active_graph = g;
 cache_pix = canvasPixmap();
 showLayers(false);
-aux_rect = active_graph->geometry();
+aux_rect = active_graph->geometry();	
 drawLayerFocusRect(aux_rect);
 highlightedLayer = true;
 }
 
 void MultiLayer::mousePressEvent ( QMouseEvent * e )
-{
+{	
 if (!highlightedLayer || e->button() != Qt::LeftButton)
 	return;
 
@@ -1489,10 +1544,9 @@ QRect ar = active_graph->geometry();
 ar.addCoords(-margin, -margin, margin, margin );
 QPoint pos = canvas->mapFromParent(e->pos());
 if (ar.contains(pos))
-	{
-	// Get the initial location of the mouse
+	{// Get the initial location of the mouse
 	xMouse=pos.x();
-	yMouse=pos.y();
+	yMouse=pos.y();		
 	}
 else
 	{
@@ -1541,7 +1595,7 @@ yMouse = pos.y();
 drawLayerFocusRect(aux_rect);
 }
 
-void MultiLayer::mouseReleaseEvent ( QMouseEvent * e )
+void MultiLayer::mouseReleaseEvent ( QMouseEvent *)
 {
 releaseLayer();
 }
@@ -1723,6 +1777,3 @@ else
 
 emit modifiedPlot();
 }
-
-
-

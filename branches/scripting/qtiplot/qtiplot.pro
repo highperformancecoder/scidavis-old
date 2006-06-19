@@ -35,12 +35,12 @@ win32:INCLUDEPATH += ../3rdparty/qwtplot3d/include
 win32:INCLUDEPATH += C:/GSL/include
 win32:INCLUDEPATH += ../3rdparty/zlib123/include
 
-win32:LIBS        += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
-win32:LIBS        += ../3rdparty/qwt/lib/libqwt.a  
+win32:LIBS        += ../3rdparty/qwtplot3d/lib/qwtplot3d.lib
+win32:LIBS        += ../3rdparty/qwt/lib/qwt.lib  
 win32:LIBS        += C:/GSL/lib/libgsl.lib
 win32:LIBS        += C:/GSL/lib/libgslcblas.lib
 win32:LIBS		  += ../3rdparty/zlib123/lib/zdll.lib
-win32:LIBS		  += ../3rdparty/liborigin/liborigin.a
+win32:LIBS		  += ../3rdparty/liborigin/liborigin.lib
  
 win32:RC_FILE     = src/iPlot.rc
 

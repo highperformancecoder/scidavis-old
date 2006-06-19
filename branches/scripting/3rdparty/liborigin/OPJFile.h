@@ -4,7 +4,7 @@
 #define OPJFILE_H
 
 // for htonl
-#ifdef WIN32
+#if defined (_MSC_VER) || defined (_WIN32)
 #include <windows.h>
 #else
 #include <sys/types.h>

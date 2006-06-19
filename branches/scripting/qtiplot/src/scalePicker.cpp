@@ -4,6 +4,7 @@
 #include <qwt_scale.h>
 
 #include <qmessagebox.h>
+#include <qapplication.h>
 
 ScalePicker::ScalePicker(QwtPlot *plot):
     QObject(plot)
@@ -31,6 +32,8 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 		const QMouseEvent *me = (const QMouseEvent *)e;	
 		if (me->button()==QEvent::LeftButton)
 			{
+			presspos = me->pos();
+				
 			emit clicked();	
 
 			if (plot()->margin() < 2 && plot()->lineWidth() < 2)
@@ -53,8 +56,11 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
     	{	
 		const QMouseEvent *me = (const QMouseEvent *)e;			
 
-		movedGraph=TRUE;
-		emit moveGraph(me->pos());
+		if ((presspos - me->pos()).manhattanLength() > QApplication::startDragDistance())
+			{
+			movedGraph=TRUE;
+			emit moveGraph(me->pos());
+			}
 
         return TRUE;
    	 }
@@ -267,9 +273,10 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
 
 	if ( object->inherits("QLabel") &&  e->type() == QEvent::MouseButtonPress )
 		{
+		const QMouseEvent *me = (const QMouseEvent *)e;	
+		presspos = me->pos();
 		emit clicked();
 
-		const QMouseEvent *me = (const QMouseEvent *)e;	
 		if (me->button()==QEvent::RightButton)
 			emit showTitleMenu();
 
@@ -287,10 +294,12 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
 
 	if ( object->inherits("QLabel") &&  e->type() == QEvent::MouseMove)
 		{	
-		const QMouseEvent *me = (const QMouseEvent *)e;			
-		movedGraph=TRUE;
-		emit moveGraph(me->pos());
-
+		const QMouseEvent *me = (const QMouseEvent *)e;		
+		if ((presspos - me->pos()).manhattanLength() > QApplication::startDragDistance())
+			{			
+			movedGraph=TRUE;
+			emit moveGraph(me->pos());
+			}
         return TRUE;
 		}
 	

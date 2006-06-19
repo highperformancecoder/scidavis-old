@@ -7,6 +7,8 @@
 #include <qwt_plot_layout.h>
 #include <qwt_scale.h>
 
+#include <qapplication.h>
+
 Plot::Plot(QWidget *parent, const char *name)
 		: QwtPlot(parent,name)
 {
@@ -325,7 +327,8 @@ void Plot::mousePressEvent ( QMouseEvent * e )
 {
 if(e->state()==Qt::ShiftButton)
 		ShiftButton=TRUE;
-			
+	
+presspos = e->pos();
 emit selectPlot();
 }
 
@@ -336,7 +339,7 @@ if(ShiftButton)
 	graphToResize=TRUE;
 	emit resizeGraph(e->pos());	
 	}				
-else
+else if ((presspos - e->pos()).manhattanLength() > QApplication::startDragDistance())
 	{
 	movedGraph=TRUE;
 	emit moveGraph(e->pos());
@@ -587,5 +590,3 @@ void Plot::print(QPainter *painter, const QRect &plotRect,
 
     painter->restore();
 }
-
-

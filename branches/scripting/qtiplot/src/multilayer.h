@@ -10,6 +10,7 @@
 #include <qhbox.h>
 #include <qptrlist.h>
 #include <qprinter.h>
+#include <qvaluevector.h>
 
 #include <gsl/gsl_vector.h>
 
@@ -17,6 +18,7 @@ class QWidget;
 class QLabel;
 class QPushButton;
 class QWidget;
+
 class Graph;
 class Table;
 class LayerButton;
@@ -112,6 +114,7 @@ public slots:
 	void exportToEPS(const QString& fname);
 	void exportToEPS(const QString& fname, int res, QPrinter::Orientation o, 
 					QPrinter::PageSize pageSize, QPrinter::ColorMode col);
+
 	void copyAllLayers();
 	void print();
 	void printAllLayers(QPainter *painter);

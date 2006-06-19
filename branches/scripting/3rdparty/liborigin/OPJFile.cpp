@@ -479,7 +479,7 @@ int OPJFile::Parse() {
 			// check column name
 			int max_length=11;	// only first 11 chars are saved here !
 			int name_length = colname[spread][j].length();
-            int length = (name_length < max_length) ? name_length : max_length;
+                        int length = (name_length < max_length) ? name_length : max_length;
 
 			if(colname[spread][j].substr(0,length) == name) {
 				fprintf(debug,"		TEST : column name = \"%s\". OK!\n",

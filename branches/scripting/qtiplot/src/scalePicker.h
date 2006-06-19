@@ -42,6 +42,7 @@ signals:
 
 private:
 	bool movedGraph;
+	QPoint presspos;
 };
 
 class TitlePicker: public QObject
@@ -65,4 +66,5 @@ signals:
 protected:
 	QLabel *title;
 	bool movedGraph;
+	QPoint presspos;
 };

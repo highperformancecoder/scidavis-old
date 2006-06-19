@@ -2247,8 +2247,9 @@ if (printer.setup())
 }
 
 void Graph::exportToWmf(const QString& fname) 
-{	//not working
-	
+{//not working properly
+//using Tobias Burnus's qwmf
+
 /*PrintFilter filter(d_plot); 	
 filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle |
 				  QwtPlotPrintFilter::PrintCanvasBackground);
@@ -2258,7 +2259,7 @@ m_wmf.setOutputFileName(fname);
 	
 QPainter painter( &m_wmf );	
 d_plot->print(&painter , d_plot->rect(), filter);
-painter.end(); */
+painter.end();*/
 }
 
 void Graph::movePoints(bool enabled)

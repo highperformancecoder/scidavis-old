@@ -10,9 +10,6 @@ compiling :
 Usage :
 	$ ./opj2dat <project.opj>
 
-Note :
-If it crashes : reduce maximum numbers in OPJFile.h.
-
 ---------------------------------------------------------------------------
 FEATURES :
 	* reads any worksheets with all columns
@@ -20,17 +17,29 @@ FEATURES :
 
 ---------------------------------------------------------------------------
 TODO :
-	* use column name if not matching in header section ?
 	* read spreadsheet infos (LAYER section) with better method
-	* support FUNCTION : drf_spin
+		-> check out examples
+	V crash on backup.opj
+		-> cname==0 but no matrix !
 	* support MATRIX tables
+		* get column/row numbers -> resize matrix
+			* check ws+matrix.opj
+		* check all matrix examples (also mixed)
+	* fix reading of mixed columns in file
+		-> SiGe example
+	* support FUNCTION : drf_spin
+	* read graphs
 	* support extra graph (no link to data) : power_cdw
 	* fix various problems (check ORIGIN/README)
-	* read graphs
 
 ---------------------------------------------------------------------------
 Changelog :
 
+06-07-06	* read size of matrix	
+06-02-06	* replaced arrays with vectors and char* with strings
+06-01-06	* fixed convertion of 4.1 projects
+05-30-06	* read matrix tables (testing)
+05-29-06	* read column type if names are not matching (seems to be ok)
 05-26-06	* compare only 11 chars of col label in header section
 05-24-06	* fixed byteorder on big endian systems
 05-16-06	* better method for storing label data (Entry)

@@ -17,14 +17,14 @@ public:
 		{
 		setCaption(tr("QtiPlot - Import Multiple ASCII Files"));
 
-		QString filter="All files *;;Text (*.TXT *.txt);;Data (*DAT *.dat);;";
+		QString filter=tr("All files")+" *;;"+tr("Text")+" (*.TXT *.txt);;"+tr("Data")+" (*DAT *.dat);;";
 		setFilters( filter );
 
 		setMode( QFileDialog::ExistingFiles );
 
 		if (importTypeEnabled)
 			{
-			QLabel* label = new QLabel( "Import each file as: ", this );
+			QLabel* label = new QLabel( tr("Import each file as") + ": ", this );
         
 			importType = new QComboBox( this );
 			importType->insertItem(tr("New Table"));
@@ -64,7 +64,7 @@ public:
 		setMode( QFileDialog::AnyFile );
 	
 		boxOptions = new QCheckBox(this, "boxOptions" );
-		boxOptions->setText( "Show export &options" );
+		boxOptions->setText( tr("Show export &options") );
 		#ifdef Q_OS_WIN // Windows systems
 			boxOptions->setChecked( true );			
 		#else

@@ -14,7 +14,6 @@
 #include <qcombobox.h>
 #include <qspinbox.h>
 #include <qstylefactory.h>
-#include <qlistbox.h>
 #include <qvbox.h>
 #include <qregexp.h>
 #include <qmessagebox.h>
@@ -25,8 +24,9 @@
 #include "application.h"
 #include "graph.h"
 #include "colorButton.h"
+#include "pixmaps.h"
 
-static const char * dropLines_xpm[] = {
+/*static const char * dropLines_xpm[] = {
 "16 16 3 1",
 " 	c None",
 ".	c #000000",
@@ -206,6 +206,7 @@ static const char * vertBars_xpm[] = {
 ".+++..+++..+++.",
 ".+++..+++..+++.",
 ".+++..+++..+++."};
+*/
 
 configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )
@@ -229,12 +230,24 @@ configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlag
     setMouseTracking( TRUE );
     setSizeGripEnabled( FALSE );
 
-	QHBox *box = new QHBox (this, "box"); 
+	QHBox *box = new QHBox (this); 
 	box->setSpacing (5);
 	box->setMargin(5);
+	
+	itemsList = new QListBox (box);
+	
+	QVBox *vbox = new QVBox (box); 
+	vbox->setSpacing (15);
 
-	itemsList = new QListBox (box, "itemsList");
-	generalDialog = new QWidgetStack(box, "generalDialog" );
+	lblPageHeader = new QLabel (vbox);
+	QFont fnt = this->font();
+	fnt.setPointSize(fnt.pointSize() + 3);
+	fnt.setBold(true);
+	lblPageHeader->setFont(fnt);
+	lblPageHeader->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+	lblPageHeader->setBackgroundColor(app->panelsColor);
+	
+	generalDialog = new QWidgetStack(vbox);
 	
 	initPlots3DPage();
 	initPlotsPage();
@@ -263,7 +276,7 @@ configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlag
 	boxNotes = new QCheckBox(GroupBoxConfirm, "boxNotes" );
 	boxNotes->setChecked(app->confirmCloseNotes);
 
-	QHBoxLayout* hlayout3 = new QHBoxLayout(confirm,0,5, "hlayout3");
+	QHBoxLayout* hlayout3 = new QHBoxLayout(confirm, 0, 0, "hlayout3");
     hlayout3->addWidget(GroupBoxConfirm);
 	
 	generalDialog->addWidget(application, 0);
@@ -288,11 +301,11 @@ configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlag
     hlayout->addWidget(box);
 	hlayout->addWidget(GroupBox2);
 
-    languageChange();
+    languageChange(); 
    
     // signals and slots connections
 	connect( itemsList, SIGNAL(highlighted(int)), this, SLOT(update()));
-	connect( itemsList, SIGNAL(highlighted(int)), generalDialog, SLOT(raiseWidget(int)));
+	connect( itemsList, SIGNAL(highlighted(int)), this, SLOT(changePage(int)));
     connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
 	connect( buttonApply, SIGNAL( clicked() ), this, SLOT( update() ) );
     connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -301,7 +314,15 @@ configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlag
 	connect( buttonHeader, SIGNAL( clicked() ), this, SLOT( pickHeaderColor() ) );
 	connect( buttonTextFont, SIGNAL( clicked() ), this, SLOT( pickTextFont() ) );
 	connect( buttonHeaderFont, SIGNAL( clicked() ), this, SLOT( pickHeaderFont() ) );
+
+	changePage(0);
 	}
+
+void configDialog::changePage(int index)
+{
+generalDialog->raiseWidget(index);
+lblPageHeader->setText(itemsList->currentText());
+}
 
 void configDialog::initTablesPage()
 {
@@ -333,7 +354,7 @@ GroupBoxTableFonts = new QButtonGroup(2,QGroupBox::Horizontal,tr("Fonts"),tables
 buttonTextFont= new QPushButton(GroupBoxTableFonts, "buttonTextFont" );
 buttonHeaderFont= new QPushButton(GroupBoxTableFonts, "buttonHeaderFont" );
 	
-QVBoxLayout* hlayout1 = new QVBoxLayout(tables, 10, 10, "hlayout1");
+QVBoxLayout* hlayout1 = new QVBoxLayout(tables, 0, 10, "hlayout1");
 hlayout1->addWidget(hbox1);
 hlayout1->addWidget(GroupBoxTableCol);
 hlayout1->addWidget(GroupBoxTableFonts);
@@ -483,7 +504,7 @@ void configDialog::initPlots3DPage()
 	btnLabelsFnt = new QPushButton( GroupBox3DFonts, "btnLabelsFnt" );
 	btnNumFnt = new QPushButton( GroupBox3DFonts, "btnNumFnt" );
    	
-	QVBoxLayout* hlayout2 = new QVBoxLayout(plots3D, 5, 5, "hlayout2");
+	QVBoxLayout* hlayout2 = new QVBoxLayout(plots3D, 0, 5, "hlayout2");
 	hlayout2->addWidget(box);
 	
 	connect( btnAxes, SIGNAL( clicked() ), this, SLOT(pick3DAxesColor() ) );
@@ -550,7 +571,7 @@ GroupBoxApp = new QButtonGroup( 2,QGroupBox::Horizontal,tr("General"),applicatio
 	btnPanelsText = new ColorButton(GroupBoxAppCol);
 	btnPanelsText->setColor(app->panelsTextColor);
 	
-	QVBoxLayout* hlayout4 = new QVBoxLayout(application,0,5, "hlayout4");
+	QVBoxLayout* hlayout4 = new QVBoxLayout(application, 0, 5, "hlayout4");
     hlayout4->addWidget(GroupBoxApp);
 	hlayout4->addWidget(GroupBoxAppCol);
 
@@ -576,7 +597,7 @@ boxCurveLineWidth = new QSpinBox(1,100,1,GroupBox77, "boxCurveLineWidth");
 lblSymbSize = new QLabel(GroupBox77, "lblSymbSize",0 ); 
 boxSymbolSize = new QSpinBox(1,100,1,GroupBox77, "boxSymbolSize");
 	
-QHBoxLayout* hlayout5 = new QHBoxLayout(curves,0,5, "hlayout5");
+QHBoxLayout* hlayout5 = new QHBoxLayout(curves, 0, 5, "hlayout5");
 hlayout5->addWidget(GroupBox77);
 }
 
@@ -590,13 +611,14 @@ void configDialog::languageChange()
 	ApplicationWindow *app = (ApplicationWindow *)parentWidget();
 
 	itemsList->clear();
-	itemsList->insertItem( tr( "Application" ) );
+	itemsList->insertItem( tr( "General" ) );
     itemsList->insertItem( tr( "Confirmations" ) );
-    itemsList->insertItem( tr( "Tables" ) );
-    itemsList->insertItem( tr( "2D Plots" ) );
+    itemsList->insertItem( QPixmap(worksheet_xpm), tr( "Tables" ) );
+    itemsList->insertItem( QPixmap(graph_xpm), tr( "2D Plots" ) );
 	itemsList->insertItem( tr( "2D Curves" ) );
-	itemsList->insertItem( tr( "3D Plots" ) );
-
+	itemsList->insertItem( QPixmap(logo_xpm), tr( "3D Plots" ) );
+	itemsList->setSelected(0, true);
+	
 	//plots 2D page
 	GroupBoxOptions->setTitle(tr("Options"));	
 	GroupBox2DFonts->setTitle(tr("Fonts"));
@@ -666,7 +688,7 @@ void configDialog::languageChange()
 	buttonTitleFont->setText( tr( "T&itle" ) );
 
 	//application page
-	GroupBoxApp->setTitle(tr("General"));
+	GroupBoxApp->setTitle(tr("Application"));
 	GroupBoxAppCol->setTitle(tr("Colors"));
 	lblLanguage->setText(tr("Language"));
 	lblStyle->setText(tr("Style")); 
@@ -737,6 +759,10 @@ void configDialog::languageChange()
 void configDialog::accept()
 {
 update();
+	
+ApplicationWindow *app = (ApplicationWindow *)parentWidget();
+app->saveSettings();
+	
 close();
 }
 

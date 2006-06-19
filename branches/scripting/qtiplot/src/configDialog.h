@@ -5,6 +5,7 @@
 #include <qdialog.h>
 #include <qhbox.h> 
 #include <qlayout.h>
+#include <qlistbox.h>
 
 class QButtonGroup;
 class QPushButton;
@@ -15,8 +16,8 @@ class QComboBox;
 class QSpinBox;
 class QListBox;
 class QLabel;
-class ColorButton;
 class QGroupBox;
+class ColorButton;
 	
 class configDialog : public QDialog
 {
@@ -51,7 +52,7 @@ public:
 	QSpinBox *boxCurveLineWidth, *boxSymbolSize, *boxMinorTicks, *boxMajorTicks;
 	ColorButton *btnWorkspace, *btnPanels, *btnPanelsText;
 	QListBox *itemsList;
-	QLabel *labelFrameWidth, *lblLanguage, *lblWorkspace, *lblPanels;
+	QLabel *labelFrameWidth, *lblLanguage, *lblWorkspace, *lblPanels, *lblPageHeader;
 	QLabel *lblPanelsText, *lblFonts, *lblStyle;
 	QGroupBox *GroupBoxConfirm, *GroupBoxAppCol, *GroupBoxApp;
 	QGroupBox *GroupBoxTableFonts, *GroupBoxTableCol;
@@ -66,6 +67,8 @@ public slots:
 
 	void accept();
 	void update();
+
+	void changePage(int index);
 
 	void setColumnSeparator(const QString& sep);
 	//table colors

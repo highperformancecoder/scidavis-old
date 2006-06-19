@@ -57,9 +57,7 @@ protected:
 	int minTickLength, majTickLength, d_lineWidth;
 	QValueList <int> ticksType;
 	bool movedGraph, ShiftButton, graphToResize;
+	QPoint presspos;
 };
 
-#endif 
-
-
-
+#endif

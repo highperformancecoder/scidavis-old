@@ -2191,6 +2191,14 @@ QApplication::setOverrideCursor(waitCursor);
 QPixmap photo;
 if ( fn.contains(".jpg", false))
 	photo.load(fn,"JPEG",QPixmap::Auto);
+/*else if ( fn.contains(".wmf", false))
+	{// using kwmf, the drawText function is not implemented
+	photo.resize( 1000, 1000 );
+	photo.fill(white);
+    KoWmfPaint wmf;
+    if (wmf.load( fn )) 
+       wmf.play( photo );
+	}*/
 else
 	{
 	QStringList lst=QImage::inputFormatList();
@@ -3667,10 +3675,11 @@ while ( !t.eof() && !progress.wasCanceled())
 
 		app->setListViewDate(caption,date);
 		plot->setBirthDate(date);
-		plot->blockSignals(true);	
 
 		restoreWindowGeometry(app, plot, t.readLine());
-		
+	
+		plot->blockSignals(true);	
+
 		if (fileVersion > 71)
 			{
 			QStringList lst=QStringList::split ("\t", t.readLine(), true);
@@ -3991,7 +4000,6 @@ if (!fn.isEmpty())
 			return;
 			}
 
-		saveSettings();
 		ApplicationWindow *a = open (fn);
 		if (a)
 			{
@@ -4041,7 +4049,6 @@ if (projectname != "untitled")
 
 if ( !fn.isEmpty())
 	{
-	saveSettings();
 	ApplicationWindow * a = open (fn);
 	if (a)
 		{
@@ -7886,8 +7893,6 @@ QWidget* w = windows.at( id );
 
 void ApplicationWindow::newProject()
 {
-	saveSettings();
-
 	ApplicationWindow *ed = new ApplicationWindow();
 	ed->applyUserSettings();
 	ed->newTable();
@@ -7968,18 +7973,16 @@ void ApplicationWindow::closeEvent( QCloseEvent* ce )
 if (!saved)
 	{
 	QString s= tr("Save changes to project: <p><b> %1 </b> ?").arg(projectname);
-    switch( QMessageBox::information(this,"QtiPlot", s, tr("Yes"), tr("No"), 
-			tr("Cancel"), 0, 1 ) )
+	switch( QMessageBox::information(this, tr("QtiPlot"), s, tr("Yes"), tr("No"), 
+				tr("Cancel"), 0, 2 ) )
 		{
 		case 0:
 			saveProject();
-			saveSettings();
 			ce->accept();
 		break;
 	
 		case 1:
 			default:
-			saveSettings();
 			ce->accept();
 		break;
 	
@@ -7990,7 +7993,6 @@ if (!saved)
 	}
 else
 	{
-	saveSettings();
 	ce->accept();
 	}
 }

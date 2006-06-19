@@ -84,7 +84,8 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 		case QEvent::MouseButtonPress:
 			{
 			const QMouseEvent *me = (const QMouseEvent *)e;	
-			
+			presspos = me->pos();
+				
 			bool allAxisDisabled = true;
 			for (int i=0; i < QwtPlot::axisCnt; i++)
 				{
@@ -227,11 +228,13 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 			
 		case QEvent::MouseMove:
 		{
-		if ( removePoint || moveRangeSelector || dataCursorEnabled )
-				return false;
-		
 		const QMouseEvent *me = (const QMouseEvent *)e;
 		QPoint pos = me->pos();
+
+		if ( removePoint || moveRangeSelector || dataCursorEnabled ||
+			(presspos - pos).manhattanLength() <= QApplication::startDragDistance())
+				return false;
+		
 		long selectedMarker=plot()->selectedMarkerKey();
 		
 		if (plot()->drawLineActive())
@@ -735,6 +738,3 @@ for (i=0;i<p;i++)
 	}
 return FALSE;
 }
-
-
-
