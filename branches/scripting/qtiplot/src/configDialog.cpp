@@ -305,7 +305,7 @@ configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlag
    
     // signals and slots connections
 	connect( itemsList, SIGNAL(highlighted(int)), this, SLOT(update()));
-	connect( itemsList, SIGNAL(highlighted(int)), this, SLOT(changePage(int)));
+	connect( itemsList, SIGNAL(highlighted(int)), this, SLOT(setCurrentPage(int)));
     connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
 	connect( buttonApply, SIGNAL( clicked() ), this, SLOT( update() ) );
     connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -315,10 +315,10 @@ configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlag
 	connect( buttonTextFont, SIGNAL( clicked() ), this, SLOT( pickTextFont() ) );
 	connect( buttonHeaderFont, SIGNAL( clicked() ), this, SLOT( pickHeaderFont() ) );
 
-	changePage(0);
+	setCurrentPage(0);
 	}
 
-void configDialog::changePage(int index)
+void configDialog::setCurrentPage(int index)
 {
 generalDialog->raiseWidget(index);
 lblPageHeader->setText(itemsList->currentText());
@@ -614,8 +614,8 @@ void configDialog::languageChange()
 	itemsList->insertItem( tr( "General" ) );
     itemsList->insertItem( tr( "Confirmations" ) );
     itemsList->insertItem( QPixmap(worksheet_xpm), tr( "Tables" ) );
-    itemsList->insertItem( QPixmap(graph_xpm), tr( "2D Plots" ) );
-	itemsList->insertItem( tr( "2D Curves" ) );
+    itemsList->insertItem( QPixmap(newLayer_xpm), tr( "2D Plots" ) );
+	itemsList->insertItem( QPixmap(curves_xpm), tr( "2D Curves" ) );
 	itemsList->insertItem( QPixmap(logo_xpm), tr( "3D Plots" ) );
 	itemsList->setSelected(0, true);
 	
@@ -758,11 +758,7 @@ void configDialog::languageChange()
 
 void configDialog::accept()
 {
-update();
-	
-ApplicationWindow *app = (ApplicationWindow *)parentWidget();
-app->saveSettings();
-	
+update();	
 close();
 }
 
@@ -847,6 +843,7 @@ else if (generalDialog->visibleWidget()==(QWidget*)curves)
 	app->defaultCurveLineWidth = boxCurveLineWidth->value();
 	app->defaultSymbolSize = boxSymbolSize->value();
 	}
+app->saveSettings();
 }
 
 int configDialog::curveStyle()

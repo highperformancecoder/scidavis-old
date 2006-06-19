@@ -68,7 +68,7 @@ public slots:
 	void accept();
 	void update();
 
-	void changePage(int index);
+	void setCurrentPage(int index);
 
 	void setColumnSeparator(const QString& sep);
 	//table colors
