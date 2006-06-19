@@ -223,8 +223,21 @@ int cols = w->tableCols();
 for (int i=0; i<cols; i++)
 	boxColumn->insertItem("col(\""+colNames[i]+"\")",i); 
 
-start->setValue(1);
-end->setValue(w->tableRows());
+int s = w->table()->currentSelection();
+if (s >= 0)
+	{
+	QTableSelection sel = w->table()->selection(s);
+	w->setSelectedCol(sel.leftCol());
+
+	start->setValue(sel.topRow() + 1);
+	end->setValue(sel.bottomRow() + 1);
+	}
+else
+	{
+	start->setValue(1);
+	end->setValue(w->tableRows());
+	}
+
 updateColumn(w->selectedColumn());
 commandes->setContext(w);
 }

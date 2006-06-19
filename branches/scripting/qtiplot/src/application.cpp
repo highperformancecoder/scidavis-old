@@ -3369,9 +3369,10 @@ simplify_spaces = simplify;
 
 void ApplicationWindow::loadASCII()
 {
-QString filter="All files *;;Text (*.TXT *.txt);;Data (*DAT *.dat);;";
+QString filter=tr("All files") + " *;;" + tr("Text") + " (*.TXT *.txt);;" +
+			   tr("Data")+" (*DAT *.dat);;" + tr("Coma Separated Values") + " (*.CSV *.csv);;";
 QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
-			"QtiPlot - Import ASCII File", 0, TRUE);
+			tr("QtiPlot - Import ASCII File"), 0, TRUE);
 if (!fn.isEmpty())
 	{
 	Table* t = (Table*)ws->activeWindow();
@@ -5304,10 +5305,9 @@ if ( w && tableWindows.contains(w->name()))
 void ApplicationWindow::showColumnValuesDialog()
 {
 Table* w = (Table*)ws->activeWindow();
-
-if ( w && tableWindows.contains(w->name()))
+if ( w && w->isA("Table"))
 	{
-	if (int(w->selectedColumns().count())>0)
+	if (int(w->selectedColumns().count())>0 || w->table()->currentSelection() >= 0)
 		{
 		setColValuesDialog* vd= new setColValuesDialog(scriptEnv, this,"valuesDialog",TRUE,WDestructiveClose);
 		vd->setTable(w);
