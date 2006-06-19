@@ -4000,6 +4000,7 @@ if (!fn.isEmpty())
 			return;
 			}
 
+		saveSettings();//the recent projects must be saved 
 		ApplicationWindow *a = open (fn);
 		if (a)
 			{
@@ -4049,6 +4050,7 @@ if (projectname != "untitled")
 
 if ( !fn.isEmpty())
 	{
+	saveSettings();//the recent projects must be saved 
 	ApplicationWindow * a = open (fn);
 	if (a)
 		{
@@ -7893,6 +7895,8 @@ QWidget* w = windows.at( id );
 
 void ApplicationWindow::newProject()
 {
+	saveSettings();//the recent projects must be saved 
+
 	ApplicationWindow *ed = new ApplicationWindow();
 	ed->applyUserSettings();
 	ed->newTable();
@@ -7978,11 +7982,13 @@ if (!saved)
 		{
 		case 0:
 			saveProject();
+			saveSettings();//the recent projects must be saved 
 			ce->accept();
 		break;
 	
 		case 1:
 			default:
+			saveSettings();//the recent projects must be saved 
 			ce->accept();
 		break;
 	
@@ -7993,6 +7999,7 @@ if (!saved)
 	}
 else
 	{
+	saveSettings();//the recent projects must be saved 
 	ce->accept();
 	}
 }

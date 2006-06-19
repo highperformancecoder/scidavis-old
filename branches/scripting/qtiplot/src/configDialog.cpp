@@ -611,11 +611,11 @@ void configDialog::languageChange()
 	ApplicationWindow *app = (ApplicationWindow *)parentWidget();
 
 	itemsList->clear();
-	itemsList->insertItem( tr( "General" ) );
-    itemsList->insertItem( tr( "Confirmations" ) );
+	itemsList->insertItem( QPixmap(general_xpm), tr( "General" ) );
+    itemsList->insertItem( QPixmap(confirmation_xpm), tr( "Confirmations" ) );
     itemsList->insertItem( QPixmap(worksheet_xpm), tr( "Tables" ) );
     itemsList->insertItem( QPixmap(newLayer_xpm), tr( "2D Plots" ) );
-	itemsList->insertItem( QPixmap(curves_xpm), tr( "2D Curves" ) );
+	itemsList->insertItem( QPixmap(config_curves_xpm), tr( "2D Curves" ) );
 	itemsList->insertItem( QPixmap(logo_xpm), tr( "3D Plots" ) );
 	itemsList->setSelected(0, true);
 	

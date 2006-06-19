@@ -503,10 +503,14 @@ void Plot::print(QPainter *painter, const QRect &plotRect,
 
             int startDist, endDist;
 			if ( axis == xTop || axis == yRight)
-				{
-				scale = (QwtScale *)this->axis(axis-1);
-				if (scale)
-					scale->minBorderDist(startDist, endDist);
+				{//TO DO: try to synchronize scales, it doesn't work for the moment
+				QwtScale *op_scale = (QwtScale *)this->axis(axis-1);
+				if (op_scale)
+					{
+					op_scale->minBorderDist(startDist, endDist);
+					const QwtScaleDraw *scld = 	op_scale->scaleDraw ();
+					scale->setScaleDiv (scld->scaleDiv ());
+					}
 				}
 			else
 				scale->minBorderDist(startDist, endDist);
