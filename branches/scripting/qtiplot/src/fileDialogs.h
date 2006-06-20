@@ -18,7 +18,7 @@ public:
 		setCaption(tr("QtiPlot - Import Multiple ASCII Files"));
 
 		QString filter=tr("All files") + " *;;" + tr("Text") + " (*.TXT *.txt);;" +
-					   tr("Data")+" (*DAT *.dat);;" + tr("Coma Separated Values") + " (*.CSV *.csv);;";
+					   tr("Data")+" (*DAT *.dat);;" + tr("Comma Separated Values") + " (*.CSV *.csv);;";
 		setFilters( filter );
 
 		setMode( QFileDialog::ExistingFiles );

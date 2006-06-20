@@ -900,9 +900,12 @@ void Table::deleteSelectedRows()
 {
 QTableSelection sel=worksheet->selection(worksheet->currentSelection());
 int top=sel.topRow();
-for (int i=top; i<= sel.bottomRow(); i++)
-	worksheet->removeRow(top);
-
+int bottom=sel.bottomRow();
+int numberOfRows=bottom-top+1;
+QMemArray<int> rowsToDelete(numberOfRows);
+for (int i=0; i<numberOfRows; i++)
+	rowsToDelete[i]=top+i;
+worksheet->removeRows(rowsToDelete);
 notifyChanges();
 }
 

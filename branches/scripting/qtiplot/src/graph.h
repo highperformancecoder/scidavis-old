@@ -405,6 +405,8 @@ public slots:
 	 void showPlotPicker(bool on);
 	 bool pickerActivated();
 
+	 void disableTools();
+
 	 //translating curves
 	 void translateCurve(int direction);
 	 void translateCurveTo(const QPoint& p);

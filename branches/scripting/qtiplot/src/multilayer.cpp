@@ -298,41 +298,27 @@ for (int i=0;i<(int)buttonsList->count();i++)
 		{
 		active_graph=(Graph*) graphsList->at(i);
 		active_graph->setFocus();
-		button->setOn(TRUE);	
-
-		/*if (!allLayersTransparent())
-			{
-			active_graph->raise();
-
-			if (active_graph->plotWidget()->paletteBackgroundColor() == QColor(white) &&
-				overlapsLayers(active_graph))
-				updateTransparency();
-			}*/
+		button->setOn(TRUE);
 		}
 	}
 }
 
 void MultiLayer::setActiveGraph(Graph* g)
 {
-if (g)
+if (g && active_graph != g)
 	{
-	active_graph=g;
+	active_graph = g;
 	active_graph->setFocus();
 
-	LayerButton *btn=0;
-	int i;
-	for (i=0;i<(int)buttonsList->count();i++)
-		{
-		 btn=(LayerButton*)buttonsList->at(i);
+	for (LayerButton* btn=(LayerButton*)buttonsList->first(); btn; btn=(LayerButton*)buttonsList->next())
 		 btn->setOn(FALSE);
-		}
 	
-	for (i=0;i<(int)graphsList->count();i++)
+	for (int i=0;i<(int)graphsList->count();i++)
 		{
-		Graph *gr=(Graph *)graphsList->at(i);
-		if (gr ==g)	
+		Graph *gr = (Graph *)graphsList->at(i);
+		if (gr == g)	
 			{
-			 btn=(LayerButton *)buttonsList->at(i);
+			 LayerButton *btn = (LayerButton *)buttonsList->at(i);
 			 btn->setOn(TRUE);
 			 return;
 			}

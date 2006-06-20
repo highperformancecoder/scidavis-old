@@ -3370,7 +3370,7 @@ simplify_spaces = simplify;
 void ApplicationWindow::loadASCII()
 {
 QString filter=tr("All files") + " *;;" + tr("Text") + " (*.TXT *.txt);;" +
-			   tr("Data")+" (*DAT *.dat);;" + tr("Coma Separated Values") + " (*.CSV *.csv);;";
+			   tr("Data")+" (*DAT *.dat);;" + tr("Comma Separated Values") + " (*.CSV *.csv);;";
 QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
 			tr("QtiPlot - Import ASCII File"), 0, TRUE);
 if (!fn.isEmpty())
@@ -6039,11 +6039,7 @@ if (plot->isEmpty())
 	return;
 	}
 
-Graph* g = (Graph*)plot->activeGraph();
-if (!g)
-	return;
-
-if (g->isPiePlot())
+if ((Graph*)plot->activeGraph()->isPiePlot())
 	{
 	if (btnZoom->isOn())
 			QMessageBox::warning(this,tr("QtiPlot - Warning"),
@@ -6051,8 +6047,34 @@ if (g->isPiePlot())
 	btnPointer->setOn(true);
 	return;
 	}
-else
-	g->zoom(true);
+
+QWidgetList *graphsList=plot->graphPtrs();
+for (Graph* g = (Graph*)graphsList->first(); g; g = (Graph*)graphsList->next())
+	{
+	if (!g->isPiePlot())
+		g->zoom(true);
+	}
+}
+
+void ApplicationWindow::unzoom()
+{
+    MultiLayer* plot = (MultiLayer*)ws->activeWindow();
+	if (!plot || plotWindows.contains(plot->name())<=0)
+		return;
+
+	if (plot->isEmpty())
+	{
+	QMessageBox::warning(this,tr("QtiPlot - Warning"),
+				tr("<h4>There are no plot layers available in this window.</h4>"));
+	return;
+	}
+	
+    Graph* g = (Graph*)plot->activeGraph();
+    if ( g )
+		{
+		g->setAutoScale();
+		emit modified();
+		}
 }
 
 void ApplicationWindow::removePoints()
@@ -6604,28 +6626,13 @@ if (plot->isEmpty())
 	btnPointer->setOn(true);
 	return;
 	}
-	
-Graph* g = (Graph*)plot->activeGraph();
-if (!g)
-	{
-	btnPointer->setOn(true);
-	return;
-	}
 
-if (g->isPiePlot())
-	{
-	QMessageBox::warning(this,tr("QtiPlot - Warning"),
-				tr("This functionality is not available for pie plots!"));
-	btnPointer->setOn(true);
-	return;
-	}
-else
-	{
-	activeGraph=g;
+QWidgetList *graphsList=plot->graphPtrs();
+for (Graph* g = (Graph*)graphsList->first(); g; g = (Graph*)graphsList->next())
 	g->showPlotPicker(true);
-	info->setText(tr("Click on plot or move cursor to display coordinates!"));
-	displayBar->show();
-	}
+
+info->setText(tr("Click on plot or move cursor to display coordinates!"));
+displayBar->show();
 }
 
 void ApplicationWindow::showRangeSelectors()
@@ -6685,11 +6692,7 @@ if (plot->isEmpty())
 	return;
 	}
 	
-Graph* g = (Graph*)plot->activeGraph();
-if (!g)
-	return;
-
-if (g->isPiePlot())
+if ((Graph*)plot->activeGraph()->isPiePlot())
 	{
 	QMessageBox::warning(this,tr("QtiPlot - Warning"),
 				tr("This functionality is not available for pie plots!"));
@@ -6697,34 +6700,16 @@ if (g->isPiePlot())
 	btnPointer->setOn(true);
 	return;
 	}
-else
-	{	
-	activeGraph=g;
-	g->enableCursor(true);
-	info->setText(tr("Click on plot to display information!"));
-	displayBar->show();
-	}
-}
 
-void ApplicationWindow::unzoom()
-{
-    MultiLayer* plot = (MultiLayer*)ws->activeWindow();
-	if (!plot || plotWindows.contains(plot->name())<=0)
-		return;
-
-	if (plot->isEmpty())
+QWidgetList *graphsList=plot->graphPtrs();
+for (Graph* g = (Graph*)graphsList->first(); g; g = (Graph*)graphsList->next())
 	{
-	QMessageBox::warning(this,tr("QtiPlot - Warning"),
-				tr("<h4>There are no plot layers available in this window.</h4>"));
-	return;
+	if (!g->isPiePlot())
+		g->enableCursor(true);
 	}
-	
-    Graph* g = (Graph*)plot->activeGraph();
-    if ( g )
-		{
-		g->setAutoScale();
-		emit modified();
-		}
+
+info->setText(tr("Click on data point to display information!"));
+displayBar->show();
 }
 
 void ApplicationWindow::newLegend()
@@ -10356,44 +10341,7 @@ for (int i=0; i<(int)windows.count(); i++)
 			{
 			Graph* g=(Graph*)graphsList->at(k);
 			if (g)
-				{
-				if (g->selectorsEnabled())
-					{
-					g->disableRangeSelectors();
-					return;
-					}
-				else if (g->enabledCursor())
-					{
-					g->enableCursor(false);
-					g->replot();
-					return;
-					}
-				else if (g->pickerActivated())
-					{
-					g->showPlotPicker(false);
-					return;
-					}
-				else if (g->movePointsActivated())
-					{
-					g->movePoints(false);
-					return;
-					}
-				else if (g->removePointActivated())
-					{
-					g->removePoints(false);
-					return;
-					}
-				else if (g->zoomOn())
-					{
-					g->zoom(false);
-					return;
-					}
-				else if (g->drawLineActive())
-					{
-					g->drawLine(false);
-					return;
-					}
-				}
+				g->disableTools();
 			}
 		}
 	}
@@ -10439,6 +10387,8 @@ plot->askOnCloseEvent(confirmClosePlot3D);
 
 void ApplicationWindow::connectMultilayerPlot(MultiLayer *g)
 {
+connect (g,SIGNAL(changeActiveLayer(Graph *)),this,SLOT(changeActiveGraph(Graph *)));
+
 connect (g,SIGNAL(showTextDialog()),this,SLOT(showTextDialog()));
 connect (g,SIGNAL(showPlotDialog(long)),this,SLOT(showPlotDialog(long)));
 connect (g,SIGNAL(showScaleDialog(int)), this, SLOT(showScalePageFromAxisDialog(int)));

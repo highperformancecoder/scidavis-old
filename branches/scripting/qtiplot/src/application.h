@@ -427,7 +427,7 @@ public slots:
 	void pickPointerCursor();
 	void disableTools();
 	void pickDataTool( QAction* action );
-	
+
 	void updateLog(const QString& result);
 
 	//fitting

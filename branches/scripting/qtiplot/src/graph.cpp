@@ -7041,6 +7041,46 @@ cl=QStringList::split(",", associations[index],FALSE);
 return cl[0].remove("(X)",true);
 }
 
+void Graph::disableTools()
+{
+if (selectorsEnabled())
+	{
+	disableRangeSelectors();
+	return;
+	}
+else if (enabledCursor())
+	{
+	enableCursor(false);
+	replot();
+	return;
+	}	
+else if (pickerActivated())
+	{
+	showPlotPicker(false);
+	return;
+	}
+else if (movePointsActivated())
+	{
+	movePoints(false);
+	return;
+	}
+else if (removePointActivated())
+	{
+	removePoints(false);
+	return;
+	}
+else if (zoomOn())
+	{
+	zoom(false);
+	return;
+	}
+else if (drawLineActive())
+	{
+	drawLine(false);
+	return;
+	}
+}
+
 Graph::~Graph()
 {
 delete d_zoomer;
