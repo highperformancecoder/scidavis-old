@@ -3,6 +3,8 @@
 
 #include <qwidget.h>
 
+class Folder;
+
 class myWidget: public QWidget
 {
 	Q_OBJECT
@@ -52,14 +54,22 @@ public:
 	//! Tells if a resize event was requested by the user or generated programatically
 	bool userRequested(){return user_request;};
 
+	//! Returns the pointer to the parent folder of the window
+	Folder* folder(){return parentFolder;};
+
+	//! Initializes the pointer to the parent folder of the window
+	void setFolder(Folder* f){parentFolder = f;};
+
 signals:  
-	void closedWindow(QWidget *);
+	void closedWindow(myWidget *);
 	void hiddenWindow(myWidget *);
 	void modifiedWindow(QWidget *);
 	void resizedWindow(QWidget *);
 	void statusChanged(myWidget *);
 
 private:
+	//!Pointer to the parent folder of the window
+	Folder *parentFolder;
 	QString w_label, birthdate;
 	Status w_status;
 	CaptionPolicy caption_policy;

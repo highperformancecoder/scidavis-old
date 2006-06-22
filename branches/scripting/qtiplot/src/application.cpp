@@ -85,6 +85,7 @@
 #include <qtranslator.h>
 #include <qsplitter.h>
 #include <qobjectlist.h>
+#include <qeventloop.h>
 
 #include <zlib.h>
 
@@ -260,8 +261,6 @@ connect(consoleWindow, SIGNAL(visibilityChanged(bool)), actionShowConsole, SLOT(
 connect(tablesDepend, SIGNAL(activated(int)), this, SLOT(showTable(int)));
 
 connect(this, SIGNAL(modified()),this, SLOT(modifiedProject()));
-connect(this, SIGNAL(windowClosed(const QString&)), 
-		this, SLOT(updateListView(const QString&)));
 connect(ws, SIGNAL(windowActivated (QWidget*)),this, SLOT(windowActivated(QWidget*)));
 connect(lv, SIGNAL(doubleClicked(QListViewItem *)),
 		this, SLOT(maximizeWindow(QListViewItem *)));
@@ -1400,13 +1399,6 @@ if (w)
 	}
 }
 
-void ApplicationWindow::updateListView(const QString& caption)
-{
-QListViewItem *it=lv->findItem (caption,0, Qt::ExactMatch | Qt::CaseSensitive );
-if (it)
-	lv->takeItem(it);
-}
-
 void ApplicationWindow::renameListViewItem(const QString& oldName,const QString& newName)
 {
 QListViewItem *it=lv->findItem (oldName,0, Qt::ExactMatch | Qt::CaseSensitive );
@@ -2090,6 +2082,7 @@ plot->setFocus();
 
 addListViewItem(plot);
 current_folder->addWindow(plot);
+plot->setFolder(current_folder);
 
 plot3DWindows << plot->name();
 
@@ -2445,6 +2438,7 @@ g->setFocus();
 
 addListViewItem(g);
 current_folder->addWindow(g);
+g->setFolder(current_folder);
 }
 
 void ApplicationWindow::customizeTables(const QColor& bgColor,const QColor& textColor,
@@ -2543,9 +2537,12 @@ Table* ApplicationWindow::newTable(const QString& fname, const QString &sep,
 								   bool simplifySpaces)
 {
 Table* w = new Table(scriptEnv, fname, sep, lines, renameCols, stripSpaces, 
-					 simplifySpaces, fname, ws, 0, WDestructiveClose);	
-initTable(w, "table"+QString::number(++tables));
-w->show();
+					 simplifySpaces, fname, ws, 0, WDestructiveClose);
+if (w)
+	{	
+	initTable(w, "table"+QString::number(++tables));
+	w->show();
+	}
 return w;
 }
 
@@ -2650,6 +2647,7 @@ w->setIcon( QPixmap(worksheet_xpm) );
 	
 addListViewItem(w);
 current_folder->addWindow(w);
+w->setFolder(current_folder);
 	
 emit modified();
 }
@@ -2692,11 +2690,12 @@ m->askOnCloseEvent(confirmCloseNotes);
 
 addListViewItem(m);
 current_folder->addWindow(m);
+m->setFolder(current_folder);
 
 connect(m->textWidget(), SIGNAL(undoAvailable(bool)), actionUndo, SLOT(setEnabled(bool)));
 connect(m->textWidget(), SIGNAL(redoAvailable(bool)), actionRedo, SLOT(setEnabled(bool)));
 connect(m, SIGNAL(modifiedWindow(QWidget*)), this, SLOT(modifiedProject(QWidget*)));
-connect(m, SIGNAL(closedWindow(QWidget*)), this, SLOT(closeWindow(QWidget*)));
+connect(m, SIGNAL(closedWindow(myWidget*)), this, SLOT(closeWindow(myWidget*)));
 connect(m, SIGNAL(hiddenWindow(myWidget*)), this, SLOT(hideWindow(myWidget*)));
 connect(m,SIGNAL(statusChanged(myWidget*)),this, SLOT(updateWindowStatus(myWidget*)));
 		
@@ -2821,10 +2820,11 @@ m->askOnCloseEvent(confirmCloseMatrix);
 
 addListViewItem(m);
 current_folder->addWindow(m);
+m->setFolder(current_folder);
 
 connect(m, SIGNAL(modifiedWindow(QWidget*)), this, SLOT(modifiedProject()));
 connect(m, SIGNAL(modifiedWindow(QWidget*)), this, SLOT(update3DMatrixPlots(QWidget *)));
-connect(m, SIGNAL(closedWindow(QWidget*)), this, SLOT(closeWindow(QWidget*)));
+connect(m, SIGNAL(closedWindow(myWidget*)), this, SLOT(closeWindow(myWidget*)));
 connect(m, SIGNAL(hiddenWindow(myWidget*)), this, SLOT(hideWindow(myWidget*)));
 connect(m, SIGNAL(statusChanged(myWidget*)),this, SLOT(updateWindowStatus(myWidget*)));
 connect(m, SIGNAL(showContextMenu()), this, SLOT(showWindowContextMenu()));
@@ -3376,7 +3376,7 @@ QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
 if (!fn.isEmpty())
 	{
 	Table* t = (Table*)ws->activeWindow();
-	if ( t && tableWindows.contains(t->name()))
+	if ( t && t->isA("Table"))
 		{
 		t->importASCII(fn, separator, ignoredLines, renameColumns, 
 					  strip_spaces, simplify_spaces, false);
@@ -3396,7 +3396,7 @@ if (!fn.isEmpty())
 void ApplicationWindow::loadMultiple()
 {
 Table* t = (Table*)ws->activeWindow();
-if ( t && tableWindows.contains(t->name()))
+if ( t && t->isA("Table"))
 	{
 	ImportFilesDialog *fd = new ImportFilesDialog(true, this, 0);
 	fd->setDir(workingDir);
@@ -3469,6 +3469,61 @@ else
 	}
 }
 
+void ApplicationWindow::open()
+{
+QString filter = tr("QtiPlot project") + " (*.qti);;";
+filter += tr("Compressed QtiPlot project") + " (*.qti.gz);;";
+filter += tr("Origin project") + " (*.opj *.OPJ);;";
+filter += tr("All files") + " (*);;";
+
+QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
+			tr("QtiPlot - Open Project"), 0, TRUE);
+if (!fn.isEmpty())
+	{
+	QFileInfo fi(fn);
+	workingDir = fi.dirPath(true);
+
+	if (projectname != "untitled")
+		{
+		QFileInfo fi(projectname);
+		QString pn = fi.absFilePath();
+		if (fn == pn)
+			{
+			QMessageBox::warning(this,tr("QtiPlot - File openning error"),
+				tr("The file: <b>%1</b> is the current file!").arg(fn));
+			return;
+			}
+		}
+		
+	if (fn.contains(".qti",TRUE) || fn.contains(".opj",false))
+		{
+		QFileInfo f(fn);
+		if (!f.exists ())
+			{
+			QMessageBox::critical(this, tr("QtiPlot - File openning error"),
+				tr("The file: <b>%1</b> doesn't exist!").arg(fn));
+			return;
+			}
+
+		saveSettings();//the recent projects must be saved
+
+		ApplicationWindow *a = open (fn);
+		if (a)
+			{
+			a->updatePlotsTransparency();
+			a->workingDir = workingDir;
+			this->close();
+			}
+		}
+	else
+		{
+		QMessageBox::critical(this,tr("QtiPlot - File openning error"),
+				tr("The file: <b>%1</b> is not a QtiPlot or Origin project file!").arg(fn));
+		return;
+		}
+	}
+}
+
 ApplicationWindow* ApplicationWindow::open(const QString& fn)
 {
 if (fn.contains(".opj", false))
@@ -3515,6 +3570,49 @@ f.close();
 return app;
 }
 
+void ApplicationWindow::openRecentProject(int index)
+{
+QString fn = recent->text(index);
+int pos = fn.find(" ",0);
+fn=fn.right(fn.length()-pos-1);
+
+QFile f(fn);
+if (!f.exists())
+	{
+	QMessageBox::critical(this,tr("QtiPlot - File Open Error"),
+			   tr("The file: <b> %1 </b> <p>does not exist anymore!"
+			   "<p>It will be removed from the list.").arg(fn));
+
+	recentProjects.remove(fn);
+	updateRecentProjectsList();
+	return;
+	}
+
+if (projectname != "untitled")
+	{
+	QFileInfo fi(projectname);
+	QString pn = fi.absFilePath();
+	if (fn == pn)
+		{
+		QMessageBox::warning(this, tr("QtiPlot - File openning error"),
+				tr("The file: <b> %1 </b> is the current file!").arg(fn));
+		return;
+		}
+	}
+
+if ( !fn.isEmpty())
+	{
+	saveSettings();//the recent projects must be saved 
+
+	ApplicationWindow * a = open (fn);
+	if (a)
+		{
+		a->updatePlotsTransparency();
+		this->close();
+		}
+	}
+}
+
 ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 {
 ApplicationWindow *app = new ApplicationWindow();
@@ -3539,16 +3637,16 @@ QString s = t.readLine();
 QStringList list=QStringList::split("\t",s,FALSE);
 int aux=0,widgets=list[1].toInt();
 
-QString titleBase = "Window: ";
+QString titleBase = tr("Window") + ": ";
 QString title = titleBase + "1/"+QString::number(widgets)+"  ";
 
-QProgressDialog progress(0, "progress", true, WStyle_StaysOnTop|WStyle_Tool);
+QProgressDialog progress(this, 0, true, WStyle_StaysOnTop|WStyle_Tool);
 progress.setMinimumWidth(app->width()/2);
 progress.setCaption(tr("QtiPlot - Opening file") + ": " + baseName);
 progress.setLabelText(title);
 progress.setTotalSteps(widgets);
 progress.setActiveWindow();
-progress.setMinimumDuration(10000);
+//progress.setMinimumDuration(10000);
 //progress.move(0,0);
 
 Folder *cf = app->projectFolder();
@@ -3963,102 +4061,6 @@ for (int i=0; i<c; i++)
 		}
 	}
 QApplication::restoreOverrideCursor();
-}
-
-void ApplicationWindow::open()
-{
-QString filter = tr("QtiPlot project") + " (*.qti);;";
-filter += tr("Compressed QtiPlot project") + " (*.qti.gz);;";
-filter += tr("Origin project") + " (*.opj *.OPJ);;";
-filter += tr("All files") + " (*);;";
-
-QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
-			tr("QtiPlot - Open Project"), 0, TRUE);
-if (!fn.isEmpty())
-	{
-	QFileInfo fi(fn);
-	workingDir = fi.dirPath(true);
-
-	if (projectname != "untitled")
-		{
-		QFileInfo fi(projectname);
-		QString pn = fi.absFilePath();
-		if (fn == pn)
-			{
-			QMessageBox::warning(this,tr("QtiPlot - File openning error"),
-				tr("The file: <b>%1</b> is the current file!").arg(fn));
-			return;
-			}
-		}
-		
-	if (fn.contains(".qti",TRUE) || fn.contains(".opj",false))
-		{
-		QFileInfo f(fn);
-		if (!f.exists ())
-			{
-			QMessageBox::critical(this, tr("QtiPlot - File openning error"),
-				tr("The file: <b>%1</b> doesn't exist!").arg(fn));
-			return;
-			}
-
-		saveSettings();//the recent projects must be saved 
-		ApplicationWindow *a = open (fn);
-		if (a)
-			{
-			a->updatePlotsTransparency();
-			a->workingDir = workingDir;
-			this->close();
-			}
-		}
-	else
-		{
-		QMessageBox::critical(this,tr("QtiPlot - File openning error"),
-				tr("The file: <b>%1</b> is not a QtiPlot or Origin project file!").arg(fn));
-		return;
-		}
-	}
-}
-
-void ApplicationWindow::openRecentProject(int index)
-{
-QString fn = recent->text(index);
-int pos = fn.find(" ",0);
-fn=fn.right(fn.length()-pos-1);
-
-QFile f(fn);
-if (!f.exists())
-	{
-	QMessageBox::critical(this,tr("QtiPlot - File Open Error"),
-			   tr("The file: <b> %1 </b> <p>does not exist anymore!"
-			   "<p>It will be removed from the list.").arg(fn));
-
-	recentProjects.remove(fn);
-	updateRecentProjectsList();
-	return;
-	}
-
-if (projectname != "untitled")
-	{
-	QFileInfo fi(projectname);
-	QString pn = fi.absFilePath();
-	if (fn == pn)
-		{
-		QMessageBox::warning(this, tr("QtiPlot - File openning error"),
-				tr("The file: <b> %1 </b> is the current file!").arg(fn));
-		return;
-		}
-	}
-
-if ( !fn.isEmpty())
-	{
-	saveSettings();//the recent projects must be saved 
-	ApplicationWindow * a = open (fn);
-	if (a)
-		{
-		a->updatePlotsTransparency();
-		this->close();
-		}
-	}
 }
 
 void ApplicationWindow::readSettings()
@@ -7748,17 +7750,21 @@ else if (outWindows->containsRef(w))
 	outWindows->take(outWindows->find(w));
 }
 
-void ApplicationWindow::closeWindow(QWidget* window)
+void ApplicationWindow::closeWindow(myWidget* window)
 {
 if (!window)
 	return;
 	
 removeWindowFromLists(window);
-current_folder->removeWindow((myWidget*)window);
+window->folder()->removeWindow((myWidget*)window);
 
-emit modified();
-emit windowClosed(window->name());
+//update list view in project explorer
+QListViewItem *it=lv->findItem (window->name(), 0, Qt::ExactMatch|Qt::CaseSensitive);
+if (it)
+	lv->takeItem(it);
+
 delete window;
+emit modified();
 }
 
 void ApplicationWindow::about()
@@ -9570,6 +9576,7 @@ for (; line!=flist.end() && *line != "</data>"; line++)
   int row = fields[0].toInt();
   for (int col=0; col<cols; col++)
     w->setText(row,col,fields[col+1]);
+  qApp->eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
 }
 
 return w;
@@ -9651,12 +9658,13 @@ if (*line == "<data>") line++;
 
 //read and set table values
 for (; line!=flist.end() && *line != "</data>"; line++)
-{
-  QStringList fields = QStringList::split("\t",*line,true);
-  int row = fields[0].toInt();
-  for (int col=0; col<cols; col++)
-    w->setText(row,col,fields[col+1]);
-}
+	{
+	QStringList fields = QStringList::split("\t",*line,true);
+	int row = fields[0].toInt();
+	for (int col=0; col<cols; col++)
+		w->setText(row,col,fields[col+1]);
+	qApp->eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
+	}
 
 w->setSpecifications(w->saveToString("geometry\n"));
 return w;
@@ -10376,7 +10384,7 @@ void ApplicationWindow::connectSurfacePlot(Graph3D *plot)
 {
 connect (plot,SIGNAL(showContextMenu()),this,SLOT(showWindowContextMenu()));
 connect (plot,SIGNAL(showOptionsDialog()),this,SLOT(showPlot3dDialog()));
-connect (plot,SIGNAL(closedWindow(QWidget*)),this, SLOT(closeWindow(QWidget*)));
+connect (plot,SIGNAL(closedWindow(myWidget*)), this, SLOT(closeWindow(myWidget*)));
 connect (plot,SIGNAL(hiddenWindow(myWidget*)),this, SLOT(hideWindow(myWidget*)));
 connect (plot,SIGNAL(statusChanged(myWidget*)),this, SLOT(updateWindowStatus(myWidget*)));
 connect (plot,SIGNAL(modified()),this, SIGNAL(modified()));
@@ -10403,7 +10411,7 @@ connect (g,SIGNAL(showYAxisTitleDialog()),this,SLOT(showYAxisTitleDialog()));
 connect (g,SIGNAL(showRightAxisTitleDialog()),this,SLOT(showRightAxisTitleDialog()));
 connect (g,SIGNAL(showTopAxisTitleDialog()),this,SLOT(showTopAxisTitleDialog()));
 connect (g,SIGNAL(showMarkerPopupMenu()),this,SLOT(showMarkerPopupMenu()));
-connect (g,SIGNAL(closedWindow(QWidget*)),this, SLOT(closeWindow(QWidget*)));
+connect (g,SIGNAL(closedWindow(myWidget*)), this, SLOT(closeWindow(myWidget*)));
 connect (g,SIGNAL(hiddenWindow(myWidget*)),this, SLOT(hideWindow(myWidget*)));
 connect (g,SIGNAL(statusChanged(myWidget*)),this, SLOT(updateWindowStatus(myWidget*)));
 connect (g,SIGNAL(cursorInfo(const QString&)),info,SLOT(setText(const QString&)));
@@ -10440,7 +10448,7 @@ void ApplicationWindow::connectTable(Table* w)
 {
 connect (w,SIGNAL(statusChanged(myWidget*)),this, SLOT(updateWindowStatus(myWidget*)));
 connect (w,SIGNAL(hiddenWindow(myWidget*)),this, SLOT(hideWindow(myWidget*)));
-connect (w,SIGNAL(closedWindow(QWidget*)),this, SLOT(closeWindow(QWidget*)));
+connect (w,SIGNAL(closedWindow(myWidget*)), this, SLOT(closeWindow(myWidget*)));
 connect (w,SIGNAL(removedCol(const QString&)),this,SLOT(removeCurves(const QString&)));
 connect (w,SIGNAL(modifiedData(const QString&)),this,SLOT(updateCurves(const QString&)));
 connect (w,SIGNAL(plotCol(Table*,const QStringList&, int)),this, SLOT(multilayerPlot(Table*,const QStringList&, int)));

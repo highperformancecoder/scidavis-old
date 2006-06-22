@@ -43,9 +43,9 @@ if (askOnClose)
 			tr("Do you want to hide or delete") + "<p><b>'" + QString(name()) + "'</b> ?",
 				      tr("Delete"), tr("Hide"), tr("Cancel"), 0,2)) 
 		{
-		case 0:	
-			e->accept();
+		case 0:
 			emit closedWindow(this);
+			e->accept();
 		break;
 
 		case 1:
@@ -60,8 +60,8 @@ if (askOnClose)
     }
 else 
     {
+	emit closedWindow(this);
     e->accept();
-    emit closedWindow(this);
     }
 }
 

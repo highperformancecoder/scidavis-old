@@ -319,7 +319,7 @@ public slots:
 
 	bool hidden(QWidget* window);
 	void closeActiveWindow();
-	void closeWindow(QWidget* window);
+	void closeWindow(myWidget* window);
 
 	//!  Does all the cleaning work before actually deleting a window!
 	void removeWindowFromLists(QWidget* w);
@@ -350,7 +350,6 @@ public slots:
 	void resizeWindow();
 	
 	// list view in project explorer
-	void updateListView(const QString& caption);
 	void setListView(const QString& caption,const QString& view);
 	void renameListViewItem(const QString& oldName,const QString& newName);
 	void setListViewDate(const QString& caption,const QString& date);
@@ -702,7 +701,6 @@ public slots:
 	void executeNotes();
 
 signals:
-	void windowClosed(const QString&);
 	void modified();
 	
 public:

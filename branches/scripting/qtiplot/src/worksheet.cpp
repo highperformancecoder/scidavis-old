@@ -19,6 +19,7 @@
 #include <qlayout.h>
 #include <qaccel.h>
 #include <qprogressdialog.h>
+#include <qeventloop.h>
 
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_sort.h>
@@ -2378,8 +2379,8 @@ if ( f.open(IO_ReadOnly) )
 	if (renameCols && !allNumbers)
 		rows--;
 
-	QProgressDialog progress(0, "progress", true, WStyle_StaysOnTop|WStyle_Tool);
-	progress.setCaption("Qtiplot - Reading file...");
+	QProgressDialog progress(this, 0, true, WStyle_StaysOnTop|WStyle_Tool);
+	progress.setCaption(tr("Qtiplot - Reading file..."));
 	progress.setLabelText(fname);
 	progress.setActiveWindow();
 	progress.setAutoClose(true);
@@ -2446,11 +2447,6 @@ if ( f.open(IO_ReadOnly) )
 		if (progress.wasCanceled())
 			{
 			f.close();
-			if (!importFileAs)
-				{
-				askOnCloseEvent(false);
-				this->close();
-				}
 			return;
 			}
 
@@ -2506,10 +2502,11 @@ if ( f.open(IO_ReadOnly) )
 		t.readLine();
 
 	QString s = t.readLine();//read first line after the ignored ones
-	while ( !t.atEnd() ) 
+	while ( !t.atEnd()) 
 		{
 		t.readLine(); 
 		rows++;
+		qApp->eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
 		}
 
 	if (simplifySpaces)
@@ -2531,15 +2528,14 @@ if ( f.open(IO_ReadOnly) )
 
 	if (renameCols && !allNumbers)
 		rows--;
+	int steps = int(rows/1000);
 
-	QProgressDialog progress(0, "progress", true, WStyle_StaysOnTop|WStyle_Tool);
-	progress.setCaption("Qtiplot - Reading file...");
+	QProgressDialog progress(this, 0, true, WStyle_StaysOnTop|WStyle_Tool);
+	progress.setCaption(tr("Qtiplot - Reading file..."));
 	progress.setLabelText(fname);
 	progress.setActiveWindow();
 	progress.setAutoClose(true);
 	progress.setAutoReset(true);
-
-	int steps = int(rows/1000);
 	progress.setTotalSteps(steps+1);
 
 	QApplication::restoreOverrideCursor();
@@ -2601,11 +2597,6 @@ if ( f.open(IO_ReadOnly) )
 		if (progress.wasCanceled())
 			{
 			f.close();
-			if (newTable)
-				{
-				askOnCloseEvent(false);
-				this->close();
-				}
 			return;
 			}
 
@@ -2622,6 +2613,7 @@ if ( f.open(IO_ReadOnly) )
 				worksheet->setText(start + k, j, line[j]);
 			}
 		progress.setProgress(i);
+		qApp->processEvents();
 		}
 
 	 start = steps*1000;
@@ -2637,6 +2629,7 @@ if ( f.open(IO_ReadOnly) )
 			worksheet->setText(i, j, line[j]);
 		}
 	progress.setProgress(steps+1);
+	qApp->processEvents();
 	f.close();
 		
 	if (!newTable)
