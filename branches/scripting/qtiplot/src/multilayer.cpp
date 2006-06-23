@@ -959,6 +959,12 @@ QSize size = canvas->size();
 double scaleFactorX=(double)(pdmTo.width() - 2*margin)/(double)size.width();
 double scaleFactorY=(double)(pdmTo.height() - 2*margin)/(double)size.height();
 	
+// fit graph to page maintaining the aspect ratio
+if(scaleFactorX > scaleFactorY) 
+	scaleFactorX = scaleFactorY;
+else
+	scaleFactorY = scaleFactorX;
+
 for (int i=0;i<(int)graphsList->count();i++)
 	{
 	Graph *gr=(Graph *)graphsList->at(i);
