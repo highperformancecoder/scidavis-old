@@ -17,6 +17,7 @@ class QSpinBox;
 class QListBox;
 class QLabel;
 class QGroupBox;
+class QTabWidget;
 class ColorButton;
 	
 class configDialog : public QDialog
@@ -33,6 +34,8 @@ public:
 	void initPlots3DPage();
 	void initTablesPage();
 
+	QTabWidget *plotsTabWidget;
+
 	QPushButton *btnBackground3D, *btnMesh, *btnAxes, *btnLabels, *btnNumbers;
 	QPushButton *btnFromColor, *btnToColor, *btnGrid;
 	QPushButton	*btnTitleFnt, *btnLabelsFnt, *btnNumFnt;
@@ -44,7 +47,8 @@ public:
     QWidgetStack* generalDialog;
 	QWidget *tables, *plots, *confirm, *application, *curves, *plots3D;
 	QPushButton* buttonAxesFont, *buttonNumbersFont, *buttonLegendFont, *buttonTitleFont, *fontsBtn;
-	QCheckBox* boxTitle, *boxFrame, *boxPlots3D, *boxPlots2D, *boxTables, *boxNotes, *boxFolders;
+	QCheckBox *boxSearchUpdates;
+	QCheckBox *boxTitle, *boxFrame, *boxPlots3D, *boxPlots2D, *boxTables, *boxNotes, *boxFolders;
 	QCheckBox *boxSave, *boxBackbones, *boxAllAxes, *boxShowLegend, *boxSmoothMesh;
 	QCheckBox *boxAutoscaling, *boxShowProjection, *boxMatrixes, *boxScaleFonts, *boxResize;
 	QComboBox *boxLegend, *boxTicks, *boxStyle, *boxCurveStyle, *boxSeparator, *boxLanguage;
@@ -58,7 +62,7 @@ public:
 	QGroupBox *GroupBoxTableFonts, *GroupBoxTableCol;
 	QLabel *lblSeparator, *lblTableBackground, *lblTextColor, *lblHeaderColor;
 	QLabel *lblSymbSize, *lblLineWidth, *lblCurveStyle, *lblResolution;
-	QGroupBox *GroupBox3DFonts, *GroupBox3DCol, *GroupBoxOptions, *GroupBox2DFonts;
+	QGroupBox *GroupBox3DFonts, *GroupBox3DCol, *GroupBox2DFonts;
 	QLabel *lblLegend, *lblMargin, *lblTicks, *lblMajTicks, *lblLinewidth, *lblMinTicks;
 
 public slots:
@@ -98,7 +102,6 @@ public slots:
 	
 	//2D curves
 	int curveStyle();
-	void initCurvesOptions(int style, int width, int symbolSize);
 
 	void pickDataMaxColor();
 	void pickDataMinColor();

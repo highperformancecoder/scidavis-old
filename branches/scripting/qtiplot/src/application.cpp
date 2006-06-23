@@ -292,7 +292,6 @@ void ApplicationWindow::initGlobalConstants()
 	 appStyle = "Windows";
 #endif
 
-askForSupport = true;
 majVersion = 0; minVersion = 8; patchVersion = 6;
 graphs=0; tables=0; matrixes = 0; notes = 0; fitNumber=0;
 projectname="untitled";
@@ -3155,7 +3154,6 @@ void ApplicationWindow::showPreferencesDialog()
 {
 configDialog* cd= new configDialog(this,"configDialog",TRUE,WStyle_Tool|WDestructiveClose);
 cd->setColumnSeparator(separator);
-cd->initCurvesOptions(defaultCurveStyle, defaultCurveLineWidth, defaultSymbolSize);	
 cd->showNormal();
 cd->setActiveWindow();
 }
@@ -4079,6 +4077,7 @@ helpFilePath="/usr/share/doc/qtiplot/index.html";
 #endif
 
 settings.beginGroup("/QtiPlot");
+autoSearchUpdates = settings.readBoolEntry("/autoSearchUpdates", true, 0);
 askForSupport = settings.readBoolEntry ("/askForSupport", true, 0);
 appLanguage = settings.readEntry("/appLanguage", "en");
 workingDir=settings.readEntry("/workingDir", qApp->applicationDirPath());
@@ -4285,6 +4284,7 @@ plot3DFonts<<QString::number(plot3DAxesFont.italic());
 #endif
 
 settings.beginGroup("/QtiPlot");
+settings.writeEntry("/autoSearchUpdates", autoSearchUpdates);
 settings.writeEntry("/askForSupport", askForSupport);
 settings.writeEntry("/appLanguage", appLanguage);
 settings.writeEntry("/workingDir", workingDir);

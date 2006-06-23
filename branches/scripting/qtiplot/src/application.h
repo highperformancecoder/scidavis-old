@@ -713,7 +713,7 @@ public:
 	int majVersion, minVersion, patchVersion;
 	QColor workspaceColor, panelsColor, panelsTextColor;
 	QString appStyle, workingDir;
-	bool smooth3DMesh, autoScaleFonts, autoResizeLayers, askForSupport;
+	bool smooth3DMesh, autoScaleFonts, autoResizeLayers, askForSupport, autoSearchUpdates;
 	bool confirmCloseTable, confirmCloseMatrix, confirmClosePlot2D, confirmClosePlot3D;
 	bool confirmCloseFolder, confirmCloseNotes;
 	bool canvasFrameOn, titleOn, autoSave, drawBackbones, allAxesOn, autoscale2DPlots;

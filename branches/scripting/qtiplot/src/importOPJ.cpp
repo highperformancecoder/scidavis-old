@@ -39,9 +39,15 @@ for (int s=0; s<opj.numSpreads(); s++)
 
 		for (int i=0; i<opj.numRows(s,j); i++) 
 			{
-			double val = opj.Data(s,j)[i];
-			if(fabs(val) > 2e-300 || val == 0) 
+			if(strcmp(opj.colType(s,j),"LABEL")) 
+				{// number
+				double val = opj.Data(s,j)[i];
+				if(fabs(val)<2.0e-300)// empty entry
+					continue;
 				table->setText(i, j, QString::number(val));
+				}
+			else// label? doesn't seem to work
+				table->setText(i, j, QString(opj.SData(s,j,i)));
 			}		
 		}
 	table->showNormal();
