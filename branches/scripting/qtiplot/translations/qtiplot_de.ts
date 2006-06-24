@@ -419,6 +419,10 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation>Kann nicht in Datei %1 schreiben
 %2.</translation>
     </message>
+    <message>
+        <source>Qtiplot - Reading file...</source>
+        <translation>QtiPlot - Datei lesen...</translation>
+    </message>
 </context>
 <context>
     <name>ApplicationWindow</name>
@@ -2263,7 +2267,7 @@ Wollen Sie fortfahren?</translation>
     </message>
     <message>
         <source>Click on plot to display information!</source>
-        <translation>Klicken Sie auf ein Diagramm, um Informationen anzuzeigen!</translation>
+        <translation type="obsolete">Klicken Sie auf ein Diagramm, um Informationen anzuzeigen!</translation>
     </message>
     <message>
         <source>&amp;Cascade</source>
@@ -2857,6 +2861,30 @@ Wollen Sie fortfahren?</translation>
     <message>
         <source>Draw arrow</source>
         <translation>Pfeil zeichnen</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>Daten</translation>
+    </message>
+    <message>
+        <source>Comma Separated Values</source>
+        <translation>Kommagetrennte Werte</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Import ASCII File</source>
+        <translation>QtiPlot - Importiere ASCII-Datei</translation>
+    </message>
+    <message>
+        <source>Window</source>
+        <translation>Fenster</translation>
+    </message>
+    <message>
+        <source>Click on data point to display information!</source>
+        <translation>Klicken Sie auf einen Datenpunkt, um Informationen anzuzeigen!</translation>
     </message>
 </context>
 <context>
@@ -3473,6 +3501,10 @@ Wollen Sie fortfahren?</translation>
         <source>QtiPlot - Choose a filename to save under</source>
         <translation>Dateiname zum Speichern auswählen</translation>
     </message>
+    <message>
+        <source>Show export &amp;options</source>
+        <translation>Export&amp;optionen anzeigen</translation>
+    </message>
 </context>
 <context>
     <name>ImportFilesDialog</name>
@@ -3491,6 +3523,26 @@ Wollen Sie fortfahren?</translation>
     <message>
         <source>New Rows</source>
         <translation>Neue Zeilen</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Alle Dateien</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>Daten</translation>
+    </message>
+    <message>
+        <source>Comma Separated Values</source>
+        <translation>Kommagetrennte Werte</translation>
+    </message>
+    <message>
+        <source>Import each file as</source>
+        <translation>Einzelne Dateien importieren als</translation>
     </message>
 </context>
 <context>
@@ -4551,7 +4603,7 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     </message>
     <message>
         <source>2D Curves</source>
-        <translation>2D-Kurven</translation>
+        <translation type="obsolete">2D-Kurven</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -4940,6 +4992,14 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     <message>
         <source>The separator must not contain the following characters: 0-9eE.+-</source>
         <translation>Der Spaltentrenner darf die folgenden Zeichen nicht enthalten: 0-9eE.+-</translation>
+    </message>
+    <message>
+        <source>Curves</source>
+        <translation>Kurven</translation>
+    </message>
+    <message>
+        <source>Check for new versions at startup</source>
+        <translation>Beim Starten die Verfügbarkeit einer neuen Version prüfen</translation>
     </message>
 </context>
 <context>
