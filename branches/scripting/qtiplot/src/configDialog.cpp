@@ -56,7 +56,7 @@ configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlag
 	itemsList = new QListBox (box);
 	
 	QVBox *vbox = new QVBox (box); 
-	vbox->setSpacing (15);
+	vbox->setSpacing (10);
 
 	lblPageHeader = new QLabel (vbox);
 	QFont fnt = this->font();
@@ -68,54 +68,28 @@ configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlag
 	
 	generalDialog = new QWidgetStack(vbox);
 	
-	initPlots3DPage();
-	initPlotsPage();
 	initAppPage();
-	initCurvesPage();
 	initTablesPage();
-
-	confirm = new QWidget( generalDialog, "confirm" );
+	initPlotsPage();
+	initPlots3DPage();
 	
-	GroupBoxConfirm = new QButtonGroup( 1,QGroupBox::Horizontal,tr("Prompt on closing"),confirm,"GroupBoxConfirm" );
-	boxFolders = new QCheckBox(GroupBoxConfirm);
-	boxFolders->setChecked(app->confirmCloseFolder);
-	
-	boxTables = new QCheckBox(GroupBoxConfirm);
-	boxTables->setChecked(app->confirmCloseTable);
+	generalDialog->addWidget(appTabWidget, 0);
+	generalDialog->addWidget(tables, 1);
+	generalDialog->addWidget(plotsTabWidget, 2);
+	generalDialog->addWidget(plots3D, 3);
 
-	boxMatrixes = new QCheckBox(GroupBoxConfirm);
-	boxMatrixes->setChecked(app->confirmCloseMatrix);
-
-    boxPlots2D = new QCheckBox(GroupBoxConfirm);
-	boxPlots2D->setChecked(app->confirmClosePlot2D);
-
-	boxPlots3D = new QCheckBox(GroupBoxConfirm, "boxPlots3D" );
-	boxPlots3D->setChecked(app->confirmClosePlot3D);
-
-	boxNotes = new QCheckBox(GroupBoxConfirm, "boxNotes" );
-	boxNotes->setChecked(app->confirmCloseNotes);
-
-	QHBoxLayout* hlayout3 = new QHBoxLayout(confirm, 0, 0, "hlayout3");
-    hlayout3->addWidget(GroupBoxConfirm);
-	
-	generalDialog->addWidget(application, 0);
-	generalDialog->addWidget(confirm, 1);
-	generalDialog->addWidget(tables, 2);
-	generalDialog->addWidget(plotsTabWidget, 3);
-	generalDialog->addWidget(plots3D, 4);
-
-	GroupBox2 = new QButtonGroup( 3,QGroupBox::Horizontal, QString::null,this,"GroupBox2" );
+	GroupBox2 = new QButtonGroup( 3,QGroupBox::Horizontal, QString::null,this);
 	GroupBox2->setFlat(TRUE);
 	GroupBox2->setLineWidth(0);
 	
-	buttonApply = new QPushButton(GroupBox2, "buttonApply" );
+	buttonApply = new QPushButton(GroupBox2);
 	
-	buttonOk = new QPushButton(GroupBox2, "buttonOk" );
+	buttonOk = new QPushButton(GroupBox2);
     buttonOk->setDefault( TRUE );
    
-    buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
+    buttonCancel = new QPushButton(GroupBox2);
 	
-	QVBoxLayout* hlayout = new QVBoxLayout(this,5,5, "hlayout");
+	QVBoxLayout* hlayout = new QVBoxLayout(this, 0, 0);
     hlayout->addWidget(box);
 	hlayout->addWidget(GroupBox2);
 
@@ -195,26 +169,30 @@ ApplicationWindow *app = (ApplicationWindow *)parentWidget();
 	boxScaleFonts = new QCheckBox(GroupBoxOptions,"boxScaleFonts");
 	boxScaleFonts->setChecked(app->autoScaleFonts);
 
-    boxTitle= new QCheckBox(GroupBoxOptions,"title");
+    boxTitle= new QCheckBox(GroupBoxOptions);
 	boxTitle->setChecked(app->titleOn);
 
-	boxAllAxes= new QCheckBox(GroupBoxOptions, "boxAllAxes");
+	boxAllAxes= new QCheckBox(GroupBoxOptions);
 	boxAllAxes->setChecked (app->allAxesOn);
 
-	boxFrame= new QCheckBox(GroupBoxOptions,"frame");
+	boxFrame= new QCheckBox(GroupBoxOptions);
 	boxFrame->setChecked(app->canvasFrameOn);
 
-	boxBackbones= new QCheckBox(GroupBoxOptions,"boxBackbones");
+	boxBackbones= new QCheckBox(GroupBoxOptions);
 	boxBackbones->setChecked(app->drawBackbones);
 
-	labelFrameWidth = new QLabel(GroupBoxOptions, "TextLabel69111",0 ); 
-	boxFrameWidth= new QSpinBox(1, 100, 1,GroupBoxOptions,"boxFrameWidth");	
+	labelFrameWidth = new QLabel(GroupBoxOptions); 
+	boxFrameWidth= new QSpinBox(1, 100, 1,GroupBoxOptions);	
 	boxFrameWidth->setValue(app->canvasFrameWidth);
 	if (!app->canvasFrameOn)
 		{
 		labelFrameWidth->hide();
 		boxFrameWidth->hide();
 		}
+
+	lblLinewidth = new QLabel(GroupBoxOptions);  
+	boxLinewidth= new QSpinBox(0, 100, 1,GroupBoxOptions);
+	boxLinewidth->setValue(app->axesLineWidth);
 
 	lblLegend = new QLabel(GroupBoxOptions); 
 	boxLegend = new QComboBox(GroupBoxOptions);
@@ -223,40 +201,54 @@ ApplicationWindow *app = (ApplicationWindow *)parentWidget();
 	boxMargin= new QSpinBox(0, 1000, 5, GroupBoxOptions);	
 	boxMargin->setValue(app->defaultPlotMargin);
 
-	GroupBox2DFonts = new QButtonGroup(1,QGroupBox::Horizontal,tr("Fonts"),hbox1,"GroupBox2DFonts" );
-	buttonTitleFont= new QPushButton(GroupBox2DFonts, "buttonTitleFont" );  
-	buttonLegendFont= new QPushButton(GroupBox2DFonts, "buttonLegendFont" );	 
-    buttonAxesFont= new QPushButton(GroupBox2DFonts, "buttonAxesFont" );   
-	buttonNumbersFont= new QPushButton(GroupBox2DFonts, "buttonNumbersFont" );
-
-	QButtonGroup *GroupBox6 = new QButtonGroup(4, QGroupBox::Horizontal,QString::null,plots,"GroupBox2DFonts" );
-
-	lblTicks = new QLabel(GroupBox6); 
-	boxTicks = new QComboBox(GroupBox6);
-
-	lblMajTicks = new QLabel(GroupBox6);  
-	boxMajorTicks= new QSpinBox(0, 100, 1,GroupBox6);
-	boxMajorTicks->setValue (app->majTicksLength);
-
-	lblLinewidth = new QLabel(GroupBox6);  
-	boxLinewidth= new QSpinBox(0, 100, 1,GroupBox6);
-	boxLinewidth->setValue(app->axesLineWidth);
-
-	lblMinTicks = new QLabel(GroupBox6);  
-	boxMinorTicks= new QSpinBox(0, 100, 1,GroupBox6);
-	boxMinorTicks->setValue(app->minTicksLength);
-
-	boxResize = new QCheckBox(plots, "boxResize");
+	boxResize = new QCheckBox(plots);
 	boxResize->setChecked(!app->autoResizeLayers);
 	if(boxResize->isChecked())
 		boxScaleFonts->setEnabled(false);
 
 	QVBoxLayout* hlayout2 = new QVBoxLayout(plots,5,5);
     hlayout2->addWidget(hbox1);
-	hlayout2->addWidget(GroupBox6);
 	hlayout2->addWidget(boxResize);
 
 	plotsTabWidget->insertTab( plots, tr( "Options" ) );
+
+	initCurvesPage();
+
+	plotTicks = new QWidget(plotsTabWidget);
+
+	QButtonGroup *GroupBox6 = new QButtonGroup(4, QGroupBox::Horizontal,QString::null,plotTicks);
+
+	lblTicks = new QLabel(GroupBox6); 
+	boxMajTicks = new QComboBox(GroupBox6);
+
+	lblMajTicks = new QLabel(GroupBox6);  
+	boxMajTicksLength = new QSpinBox(0, 100, 1,GroupBox6);
+	boxMajTicksLength->setValue (app->majTicksLength);
+
+	lblMinTicks = new QLabel(GroupBox6); 
+	boxMinTicks = new QComboBox(GroupBox6);
+
+	lblMinTicksLength = new QLabel(GroupBox6);  
+	boxMinTicksLength= new QSpinBox(0, 100, 1,GroupBox6);
+	boxMinTicksLength->setValue(app->minTicksLength);
+
+	QHBoxLayout* hl = new QHBoxLayout(plotTicks,5,5);
+	hl->addWidget(GroupBox6);
+
+	plotsTabWidget->insertTab(plotTicks, tr( "Ticks" ) );
+
+	plotFonts = new QWidget(plotsTabWidget);
+
+	QButtonGroup *GroupBox2DFonts = new QButtonGroup(1,QGroupBox::Horizontal,QString::null,plotFonts);
+	buttonTitleFont= new QPushButton(GroupBox2DFonts, "buttonTitleFont" );  
+	buttonLegendFont= new QPushButton(GroupBox2DFonts, "buttonLegendFont" );	 
+    buttonAxesFont= new QPushButton(GroupBox2DFonts, "buttonAxesFont" );   
+	buttonNumbersFont= new QPushButton(GroupBox2DFonts, "buttonNumbersFont" );
+
+	QHBoxLayout* hl2 = new QHBoxLayout(plotFonts,5,5);
+	hl2->addWidget(GroupBox2DFonts);
+
+	plotsTabWidget->insertTab(plotFonts, tr( "Fonts" ) );
 
 	connect( boxResize, SIGNAL( clicked() ), this, SLOT( enableScaleFonts() ) );
 	connect( boxFrame, SIGNAL( toggled(bool) ), this, SLOT( showFrameWidth(bool) ) );
@@ -346,11 +338,13 @@ void configDialog::initAppPage()
 {
 ApplicationWindow *app = (ApplicationWindow *)parentWidget();
 
-application = new QWidget( generalDialog, "application" );
-GroupBoxApp = new QButtonGroup( 2,QGroupBox::Horizontal,tr("General"),application,"GroupBoxApp" );
+appTabWidget = new QTabWidget(generalDialog);
+
+application = new QWidget( appTabWidget);
+QButtonGroup *GroupBoxApp = new QButtonGroup( 2,QGroupBox::Horizontal, QString::null, application);
     
-	lblLanguage = new QLabel(GroupBoxApp, "lblLanguage",0 ); 
-	boxLanguage = new QComboBox(GroupBoxApp, "boxLanguage" );
+	lblLanguage = new QLabel(GroupBoxApp); 
+	boxLanguage = new QComboBox(GroupBoxApp);
 	insertLanguagesList();
 
 	lblStyle = new QLabel(GroupBoxApp, "lblStyle",0 ); 
@@ -381,7 +375,39 @@ GroupBoxApp = new QButtonGroup( 2,QGroupBox::Horizontal,tr("General"),applicatio
 	boxSearchUpdates = new QCheckBox(GroupBoxApp);
 	boxSearchUpdates->setChecked(app->autoSearchUpdates);
 
-	GroupBoxAppCol = new QButtonGroup(2,QGroupBox::Horizontal, tr("Colors"),application,"GroupBoxAppCol" );
+	QVBoxLayout* hlayout4 = new QVBoxLayout(application, 5, 5, "hlayout4");
+    hlayout4->addWidget(GroupBoxApp);
+
+	appTabWidget->insertTab(application, tr( "Application" ) );
+
+	confirm = new QWidget(appTabWidget);
+	
+	GroupBoxConfirm = new QButtonGroup( 1,QGroupBox::Horizontal,tr("Prompt on closing"),confirm);
+	boxFolders = new QCheckBox(GroupBoxConfirm);
+	boxFolders->setChecked(app->confirmCloseFolder);
+	
+	boxTables = new QCheckBox(GroupBoxConfirm);
+	boxTables->setChecked(app->confirmCloseTable);
+
+	boxMatrixes = new QCheckBox(GroupBoxConfirm);
+	boxMatrixes->setChecked(app->confirmCloseMatrix);
+
+    boxPlots2D = new QCheckBox(GroupBoxConfirm);
+	boxPlots2D->setChecked(app->confirmClosePlot2D);
+
+	boxPlots3D = new QCheckBox(GroupBoxConfirm, "boxPlots3D" );
+	boxPlots3D->setChecked(app->confirmClosePlot3D);
+
+	boxNotes = new QCheckBox(GroupBoxConfirm, "boxNotes" );
+	boxNotes->setChecked(app->confirmCloseNotes);
+
+	QHBoxLayout* hlayout3 = new QHBoxLayout(confirm, 5, 5, "hlayout3");
+    hlayout3->addWidget(GroupBoxConfirm);
+
+	appTabWidget->insertTab(confirm, tr( "Confirmations" ) );
+
+	appColors = new QWidget(appTabWidget);
+	QButtonGroup *GroupBoxAppCol = new QButtonGroup(2,QGroupBox::Horizontal, QString::null,appColors);
  	
 	lblWorkspace = new QLabel(GroupBoxAppCol, "lblWorkspace",0 ); 
 	btnWorkspace = new ColorButton(GroupBoxAppCol);
@@ -391,13 +417,14 @@ GroupBoxApp = new QButtonGroup( 2,QGroupBox::Horizontal,tr("General"),applicatio
 	btnPanels = new ColorButton(GroupBoxAppCol);
 	btnPanels->setColor(app->panelsColor);
 
-	lblPanelsText = new QLabel(GroupBoxAppCol, "lblPanelsText",0 ); 
+	lblPanelsText = new QLabel(GroupBoxAppCol); 
 	btnPanelsText = new ColorButton(GroupBoxAppCol);
 	btnPanelsText->setColor(app->panelsTextColor);
 	
-	QVBoxLayout* hlayout4 = new QVBoxLayout(application, 0, 5, "hlayout4");
-    hlayout4->addWidget(GroupBoxApp);
-	hlayout4->addWidget(GroupBoxAppCol);
+	QVBoxLayout* hl = new QVBoxLayout(appColors, 5, 5);
+	hl->addWidget(GroupBoxAppCol);
+
+	appTabWidget->insertTab(appColors, tr( "Colors" ) );
 
 	connect( boxLanguage, SIGNAL( activated(int) ), this, SLOT( switchToLanguage(int) ) );
 	connect( fontsBtn, SIGNAL( clicked() ), this, SLOT( pickApplicationFont() ) );
@@ -442,7 +469,6 @@ void configDialog::languageChange()
 
 	itemsList->clear();
 	itemsList->insertItem( QPixmap(general_xpm), tr( "General" ) );
-    itemsList->insertItem( QPixmap(confirmation_xpm), tr( "Confirmations" ) );
     itemsList->insertItem( QPixmap(configTable_xpm), tr( "Tables" ) );
     itemsList->insertItem( QPixmap(config_curves_xpm), tr( "2D Plots" ) );
 	itemsList->insertItem( QPixmap(logo_xpm), tr( "3D Plots" ) );
@@ -451,13 +477,16 @@ void configDialog::languageChange()
 	//plots 2D page
 	plotsTabWidget->setTabLabel (plots, tr("Options"));
 	plotsTabWidget->setTabLabel (curves, tr("Curves"));
+	plotsTabWidget->setTabLabel (plotTicks, tr("Ticks"));
+	plotsTabWidget->setTabLabel (plotFonts, tr("Fonts"));
 
-	GroupBox2DFonts->setTitle(tr("Fonts"));
 	boxResize->setText(tr("Do not &resize layers when window size changes"));
-	lblMinTicks->setText(tr("Minor ticks length"));  
+	lblMinTicksLength->setText(tr("Length"));  
 	lblLinewidth->setText(tr("Axes linewidth" ));  
-	lblMajTicks->setText(tr("Major ticks length" ));  
-	lblTicks->setText(tr("Ticks" )); 
+	lblMajTicks->setText(tr("Length" ));  
+	lblTicks->setText(tr("Major Ticks" )); 
+	lblMinTicks->setText(tr("Minor Ticks" ));
+
 	lblMargin->setText(tr("Margin" )); 
 	lblLegend->setText(tr("Legend frame" )); 
 	labelFrameWidth->setText(tr("Frame width" )); 
@@ -475,29 +504,20 @@ void configDialog::languageChange()
     boxLegend->insertItem( tr( "Black out" ) );
 	boxLegend->setCurrentItem(app->legendFrameStyle);
 
-	boxTicks->clear();
-	boxTicks->insertItem(tr("In"));
-	boxTicks->insertItem(tr("Out"));
-	boxTicks->insertItem(tr("Both"));
-	boxTicks->insertItem(tr("None"));
-	switch (app->ticksStyle)
-		{
-		case -1:
-			boxTicks->setCurrentItem(0);
-		break;
+	boxMajTicks->clear();
+	boxMajTicks->insertItem(tr("None"));
+	boxMajTicks->insertItem(tr("Out"));
+	boxMajTicks->insertItem(tr("In & Out"));
+	boxMajTicks->insertItem(tr("In"));
 
-		case 1:
-			boxTicks->setCurrentItem(1);
-		break;
+	boxMinTicks->clear();
+	boxMinTicks->insertItem(tr("None"));
+	boxMinTicks->insertItem(tr("Out"));
+	boxMinTicks->insertItem(tr("In & Out"));
+	boxMinTicks->insertItem(tr("In"));
 
-		case 2:
-			boxTicks->setCurrentItem(2);
-		break;
-
-		case 0:
-			boxTicks->setCurrentItem(3);
-		break;	
-		}
+	boxMajTicks->setCurrentItem(app->majTicksStyle);
+	boxMinTicks->setCurrentItem(app->minTicksStyle);
 
 	//confirmations page
 	GroupBoxConfirm->setTitle(tr("Prompt on closing"));
@@ -519,8 +539,10 @@ void configDialog::languageChange()
 	buttonTitleFont->setText( tr( "T&itle" ) );
 
 	//application page
-	GroupBoxApp->setTitle(tr("Application"));
-	GroupBoxAppCol->setTitle(tr("Colors"));
+	appTabWidget->setTabLabel (application, tr("Application"));
+	appTabWidget->setTabLabel (confirm, tr("Confirmations"));
+	appTabWidget->setTabLabel (appColors, tr("Colors"));
+
 	lblLanguage->setText(tr("Language"));
 	lblStyle->setText(tr("Style")); 
 	lblFonts->setText(tr("Fonts")); 
@@ -642,8 +664,7 @@ if (generalDialog->visibleWidget()==(QWidget*)tables)
 else if (generalDialog->visibleWidget() == plotsTabWidget)
 	{
 	if (plotsTabWidget->currentPage() == plots)
-		{
-		app->ticksStyle=ticksType();
+		{		
 		app->legendFrameStyle=boxLegend->currentItem();
 		app->titleOn=boxTitle->isChecked();
 		app->allAxesOn = boxAllAxes->isChecked();
@@ -651,13 +672,8 @@ else if (generalDialog->visibleWidget() == plotsTabWidget)
 		app->canvasFrameWidth = boxFrameWidth->value();
 		app->drawBackbones = boxBackbones->isChecked();
 		app->axesLineWidth = boxLinewidth->value();
-		app->majTicksLength = boxMajorTicks->value();
-		app->minTicksLength = boxMinorTicks->value();
+		
 		app->defaultPlotMargin = boxMargin->value();
-		app->plotAxesFont=axesFont;
-		app->plotNumbersFont=numbersFont;
-		app->plotLegendFont=legendFont;
-		app->plotTitleFont=titleFont;
 		app->setGraphDefaultSettings(boxAutoscaling->isChecked(),boxScaleFonts->isChecked(),boxResize->isChecked());
 		}
 	else if (plotsTabWidget->currentPage() == curves)
@@ -666,22 +682,40 @@ else if (generalDialog->visibleWidget() == plotsTabWidget)
 		app->defaultCurveLineWidth = boxCurveLineWidth->value();
 		app->defaultSymbolSize = boxSymbolSize->value();
 		}
+	else if (plotsTabWidget->currentPage() == plotTicks)
+		{
+		app->majTicksLength = boxMajTicksLength->value();
+		app->minTicksLength = boxMinTicksLength->value();
+		app->majTicksStyle = boxMajTicks->currentItem();
+		app->minTicksStyle = boxMinTicks->currentItem();
+		}
+	else if (plotsTabWidget->currentPage() == plotFonts)
+		{
+		app->plotAxesFont=axesFont;
+		app->plotNumbersFont=numbersFont;
+		app->plotLegendFont=legendFont;
+		app->plotTitleFont=titleFont;
+		}
 	}
-else if (generalDialog->visibleWidget()==(QWidget*)application)
+else if (generalDialog->visibleWidget()==(QWidget*)appTabWidget)
 	{
-	app->changeAppFont(appFont);
-	setFont(appFont);
-	app->changeAppStyle(boxStyle->currentText());
-	app->autoSearchUpdates = boxSearchUpdates->isChecked();
-	app->setSaveSettings(boxSave->isChecked(), boxMinutes->value());
-	app->setAppColors(btnWorkspace->color(), btnPanels->color(), btnPanelsText->color());
-	}
-else if (generalDialog->visibleWidget()==(QWidget*)confirm)
-	{
-	app->confirmCloseFolder = boxFolders->isChecked();
-	app->updateConfirmOptions(boxTables->isChecked(), boxMatrixes->isChecked(),
+	if (appTabWidget->currentPage() == application)
+		{
+		app->changeAppFont(appFont);
+		setFont(appFont);
+		app->changeAppStyle(boxStyle->currentText());
+		app->autoSearchUpdates = boxSearchUpdates->isChecked();
+		app->setSaveSettings(boxSave->isChecked(), boxMinutes->value());
+		}
+	else if (appTabWidget->currentPage() == confirm)
+		{
+		app->confirmCloseFolder = boxFolders->isChecked();
+		app->updateConfirmOptions(boxTables->isChecked(), boxMatrixes->isChecked(),
 							  boxPlots2D->isChecked(), boxPlots3D->isChecked(),
 							  boxNotes->isChecked());
+		}
+	else if (appTabWidget->currentPage() == appColors)
+		app->setAppColors(btnWorkspace->color(), btnPanels->color(), btnPanelsText->color());
 	}
 else if (generalDialog->visibleWidget()==(QWidget*)plots3D)
 	{
@@ -785,29 +819,6 @@ QFont font = QFontDialog::getFont(&ok,headerFont,this);
     } else {
      return;
     }
-}
-
-int configDialog::ticksType()
-{
-int ticks=-1;
-switch (boxTicks->currentItem())
-	{
-	case 0:
-	break;
-
-	case 1:
-		ticks=1;
-	break;
-
-	case 2:
-		ticks=2;
-	break;
-
-	case 3:
-		ticks=0;
-	break;	
-	}
-return ticks;
 }
 
 void configDialog::pickLegendFont()

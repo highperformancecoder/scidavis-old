@@ -307,8 +307,8 @@ public slots:
 	 QStringList axesColors();
 	 void setAxesColors(const QStringList& colors);
 	 void showAxis(int axis, int type, const QString& formatInfo, Table *table, bool axisOn, 
-				   int ticksType, bool labelsOn, const QColor& c, int format, int prec, 
-				   int rotation, int baselineDist, const QString& formula);
+				   int majTicksType, int minTicksType, bool labelsOn, const QColor& c, 
+				   int format, int prec, int rotation, int baselineDist, const QString& formula);
 
 	 QMemArray<bool> enabledAxes();
 	 void enableAxes(QMemArray<bool> axesOn);
@@ -332,13 +332,16 @@ public slots:
 	void setAxesBaseline(const QValueList<int> &lst);
 	void setAxesBaseline(QStringList &lst);
 
-	QValueList<int> ticksType();
-	void setTicksType(const QValueList<int>& list);
-	void setTicksType(const QStringList& list); 
+	void setMajorTicksType(const QValueList<int>& lst);
+	void setMajorTicksType(const QStringList& lst);
+
+	void setMinorTicksType(const QValueList<int>& lst);
+	void setMinorTicksType(const QStringList& lst);
 	
 	int minorTickLength();
 	int majorTickLength();
-	void setAxisTicksLength(int axis, int ticksType, int minLength, int majLength);
+	void setAxisTicksLength(int axis, int majTicksType, int minTicksType,
+							int minLength, int majLength);
 	void setTicksLength(int minLength, int majLength);
 	void changeTicksLength(int minLength, int majLength);
 

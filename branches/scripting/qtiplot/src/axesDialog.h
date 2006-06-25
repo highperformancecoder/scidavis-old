@@ -89,7 +89,7 @@ public:
     QPushButton* btnAxesFont;
 	QCheckBox *boxBackbones, *boxAll, *boxShowFormula;
 	ColorButton* boxAxisColor;
-	QComboBox* boxTicksType, *boxFormat, *boxAxisType, *boxColName;
+	QComboBox *boxMajorTicksType, *boxMinorTicksType, *boxFormat, *boxAxisType, *boxColName;
 	QButtonGroup* GroupBox0;
 	QButtonGroup* GroupBox1;
 	QButtonGroup* GroupBox2;
@@ -137,12 +137,13 @@ public slots:
 	int mapToQwtAxisId();
 	void setEnabledTickLabels(const QStringList& labelsOn);
 	void updateTickLabelsList();
-	void setTicksType(const QValueList<int>& list);
+	void setTicksType(const QValueList<int>& majLst, const QValueList<int>& minLst);
 	void setTicksType(int);
 	void setCurrentScale(int axisPos);
 	void initAxisFonts(const QFont& xB, const QFont& yL, const QFont& xT, const QFont& yR );
-	int ticksType();
-	void updateTicksType(int);
+
+	void updateMajTicksType(int);
+	void updateMinTicksType(int);
 	void updateGrid(int);
 	void updateFrame(int);
 	void setLabelsNumericFormat(const QStringList& list);
@@ -187,12 +188,12 @@ public slots:
 signals:
 	void updateAxisTitle(int,const QString&);
 	void changeAxisFont(int, const QFont &);
-	void showAxis(int, int, const QString&, bool, int, bool,
+	void showAxis(int, int, const QString&, bool, int, int, bool,
 				  const QColor&, int, int, int, int, const QString&);	
 
 protected:
 	QStringList titles,scales,axesColors, tickLabelsOn, formatInfo, labelsNumericFormat, tablesList;
-	QValueList<int> ticks, axesType, axesBaseline;
+	QValueList<int> majTicks, minTicks, axesType, axesBaseline;
 	QFont xBottomFont, yLeftFont, xTopFont, yRightFont;
 	gridOptions grid;
 	bool xAxisOn,yAxisOn,topAxisOn,rightAxisOn;

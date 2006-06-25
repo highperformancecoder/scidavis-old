@@ -28,7 +28,8 @@ setAxisTitle(2, tr("X Axis Title"));
 //custom scale
 for (int i= 0; i<QwtPlot::axisCnt; i++)
 	{
-	ticksType<<Out;
+	majorTicksType<<Out;
+	minorTicksType<<Out;
 
 	QwtScale *scale = (QwtScale *) axis(i);
 	if (scale)
@@ -93,7 +94,7 @@ void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
 		painter->save();
 		painter->setPen (QPen(color,w,Qt::SolidLine));
 				
-		if (w == 1 && ticksType[QwtPlot::xBottom] == Plot::Out)
+		if (w == 1 && majorTicksType[QwtPlot::xBottom] == Plot::Out)
 			rect.setHeight(canvasRect.height() + 1);	
 						
 		QwtPainter::drawRect(painter, rect.x(), rect.y(), rect.width(), rect.height());
@@ -114,10 +115,16 @@ QwtPlot::drawCanvasItems(painter, rect, map, pfilter);
 	
 for (int i=0; i<QwtPlot::axisCnt; i++)
  	{
-	if (ticksType[i] == In)	
+	if ((majorTicksType[i] == In || majorTicksType[i] == Both) &&
+		(minorTicksType[i] == In || minorTicksType[i] == Both))	
 		drawInwardTicks(painter, rect, map[i], i);
-	else if (ticksType[i] == Both)	
-		drawInwardMinorTicks(painter, rect, map[i], i);
+	else 
+		{
+		if (majorTicksType[i] == In || majorTicksType[i] == Both)	
+			drawInwardMajorTicks(painter, rect, map[i], i);
+		if (minorTicksType[i] == In || minorTicksType[i] == Both)	
+			drawInwardMinorTicks(painter, rect, map[i], i);
+		}
  	}
 }
 
@@ -223,6 +230,71 @@ switch (axis)
 painter->restore();
 }
 
+void Plot::drawInwardMajorTicks(QPainter *painter, const QRect &rect, 
+							const QwtDiMap &map, int axis) const
+{
+	QwtScale *scale=(QwtScale *) QwtPlot::axis (axis);
+	if (!scale)
+		return;
+	
+	int x1=rect.left();
+	int x2=rect.right();	
+	int y1=rect.top();
+	int y2=rect.bottom();
+	
+	QPalette pal=scale->palette();
+	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
+		
+    painter->save();	
+    painter->setPen(QPen(color, d_lineWidth, QPainter::SolidLine));
+		
+	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScale(axis);
+	int majTicks = scDiv->majCnt();
+
+int i, x, y;
+switch (axis)
+	{
+	case QwtPlot::yLeft:
+	x=x1;
+    for (i = 0; i < majTicks; i++)
+        {
+        y = map.transform(scDiv->majMark(i));
+        QwtPainter::drawLine(painter, x, y, x+majTickLength, y);
+        }		
+	break;
+		
+	case QwtPlot::yRight:
+		{
+		x=x2;
+     	for (i = 0; i < majTicks; i++)
+       	 	{
+            y = map.transform(scDiv->majMark(i));
+            QwtPainter::drawLine(painter, x, y, x-majTickLength, y);
+        	}
+		}
+	  break;
+		
+	case QwtPlot::xBottom:
+		y=y2;
+     	for (i = 0; i < majTicks; i++)
+        	{
+            x = map.transform(scDiv->majMark(i));
+            QwtPainter::drawLine(painter, x, y, x, y-majTickLength);
+       		}	
+		break;
+	
+	case QwtPlot::xTop:
+		y=y1;
+    	for (i = 0; i < majTicks; i++)
+       		{
+            x = map.transform(scDiv->majMark(i));
+            QwtPainter::drawLine(painter, x, y, x, y + majTickLength);
+       	    }		
+	break;
+	}
+painter->restore();
+}
+
 void Plot::drawInwardMinorTicks(QPainter *painter, const QRect &rect, 
 							const QwtDiMap &map, int axis) const
 {
@@ -316,11 +388,6 @@ if (majTickLength == majLength &&
 
 majTickLength = majLength;
 minTickLength = minLength;
-}
-
-void Plot::setTicksType(int axis, int type)
-{
-ticksType[axis]=type;
 }
 
 void Plot::mousePressEvent ( QMouseEvent * e )

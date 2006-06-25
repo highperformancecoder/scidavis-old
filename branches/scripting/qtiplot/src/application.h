@@ -360,7 +360,7 @@ public slots:
 	void updateColNames(const QString& oldName, const QString& newName);
 	void updateTableNames(const QString& oldName, const QString& newName);
 	void changeMatrixName(const QString& oldName, const QString& newName);
-	void updateCurves(const QString& name);
+	void updateCurves(Table *t, const QString& name);
 	
 	void showTable(const QString& curve);
 	void showTable(int i);
@@ -540,8 +540,9 @@ public slots:
 	void disregardCol();
 
 	void updateConfirmOptions(bool askTables, bool askMatrixes, bool askPlots2D, bool askPlots3D, bool askNotes);
-	void showAxis(int axis, int type, const QString& labelsColName, bool axisOn, int ticksType,
-		bool labelsOn, const QColor& c, int format, int prec, int rotation, int baselineDist, const QString& formula);
+	void showAxis(int axis, int type, const QString& labelsColName, bool axisOn, 
+				int majTicksType, int minTicksType, bool labelsOn, const QColor& c, 
+				int format, int prec, int rotation, int baselineDist, const QString& formula);
 	
 	//plot3D tools	
 	void setFramed3DPlot();
@@ -717,7 +718,7 @@ public:
 	bool confirmCloseTable, confirmCloseMatrix, confirmClosePlot2D, confirmClosePlot3D;
 	bool confirmCloseFolder, confirmCloseNotes;
 	bool canvasFrameOn, titleOn, autoSave, drawBackbones, allAxesOn, autoscale2DPlots;
-	int ticksStyle, legendFrameStyle, autoSaveTime, axesLineWidth, canvasFrameWidth;
+	int majTicksStyle, minTicksStyle, legendFrameStyle, autoSaveTime, axesLineWidth, canvasFrameWidth;
 	int majTicksLength, minTicksLength, defaultPlotMargin;
 	int defaultCurveStyle, defaultCurveLineWidth, defaultSymbolSize;
 	QFont appFont, plot3DTitleFont, plot3DNumbersFont, plot3DAxesFont;

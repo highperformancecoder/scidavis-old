@@ -571,11 +571,6 @@ QValueList<int> Graph::axesType()
 return axisType;
 }
 
-QValueList<int> Graph::ticksType()
-{
-return d_plot->getTicksType();
-}
-
 QStringList Graph::labelsNumericFormat()
 {
 QStringList format;
@@ -684,10 +679,18 @@ return s+"\n";
 
 QString Graph::saveTicksType()
 {
-QValueList<int> ticksTypeList=d_plot->getTicksType();
-QString s="EnabledTicks\t";
-for (int i=0;i<4;i++)
+QValueList<int> ticksTypeList=d_plot->getMajorTicksType();
+QString s="MajorTicks\t";
+int i;
+for (i=0; i<4; i++)
 	s+=QString::number(ticksTypeList[i])+"\t";
+s += "\n";
+
+ticksTypeList=d_plot->getMinorTicksType();
+s += "MinorTicks\t";
+for (i=0; i<4; i++)
+	s+=QString::number(ticksTypeList[i])+"\t";
+
 return s+"\n";
 }
 
@@ -747,31 +750,57 @@ for (int axis=0; axis<QwtPlot::axisCnt; axis++)
 tickLabelsOn=labelsOn;
 }
 
-void Graph::setTicksType(const QValueList<int>& list)
+void Graph::setMajorTicksType(const QValueList<int>& lst)
 {
-if (d_plot->getTicksType() == list)
+if (d_plot->getMajorTicksType() == lst)
 	return;
 
-for (int i=0;i<4;i++)
+for (int i=0;i<(int)lst.count();i++)
 	{
-	ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (i);
-	if (list[i]==Plot::None || list[i]==Plot::In)
+	/*ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (i);
+	if (lst[i]==Plot::None || lst[i]==Plot::In)
 		sd->setTickLength(0,0,0);
-	else if (list[i]==Plot::Out)
-		sd->setTickLength(4,6,8);
-	else if (list[i] == Plot::Both)
-		sd->setTickLength (0,0,8); 
+	else
+		sd->setTickLength(d_plot->minorTickLength(), d_plot->minorTickLength(), 
+						  d_plot->majorTickLength());*/
 	
-	d_plot->setTicksType(i,list[i]);
+	d_plot->setMajorTicksType(i,lst[i]);
 	}
 }
 
-void Graph::setTicksType(const QStringList& list)
+void Graph::setMajorTicksType(const QStringList& lst)
 {
-for (int i=1;i<5;i++)
+for (int i=0;i<(int)lst.count();i++)
 	{
-	int type=list[i].toInt();
-	d_plot->setTicksType(i-1,type);
+	int type=lst[i].toInt();
+	d_plot->setMajorTicksType(i,type);
+	}
+}
+
+void Graph::setMinorTicksType(const QValueList<int>& lst)
+{
+if (d_plot->getMinorTicksType() == lst)
+	return;
+
+for (int i=0;i<(int)lst.count();i++)
+	{
+	/*ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (i);
+	if (lst[i]==Plot::None || lst[i]==Plot::In)
+		sd->setTickLength(0,0,0);
+	else
+		sd->setTickLength(d_plot->minorTickLength(), d_plot->minorTickLength(), 
+						  d_plot->majorTickLength());*/
+	
+	d_plot->setMinorTicksType(i,lst[i]);
+	}
+}
+
+void Graph::setMinorTicksType(const QStringList& lst)
+{
+for (int i=0;i<(int)lst.count();i++)
+	{
+	int type=lst[i].toInt();
+	d_plot->setMinorTicksType(i,type);
 	}
 }
 
@@ -785,29 +814,34 @@ int Graph::majorTickLength()
 	return d_plot->majorTickLength();
 }
 
-void Graph::setAxisTicksLength(int axis, int ticksType, int minLength, int majLength)
+void Graph::setAxisTicksLength(int axis, int majTicksType, int minTicksType,
+							   int minLength, int majLength)
 {
 QwtScale *scale = (QwtScale *)d_plot->axis(axis);
 if (!scale)
 	return;
 
 ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (axis);
-if (ticksType == Plot::Out)
+/*if (majTicksType == Plot::Out || majTicksType == Plot::Both)
 	sd->setTickLength(minLength, minLength, majLength);
-else if (ticksType == Plot::Both)
-	sd->setTickLength (0, 0, majLength);
-else if (ticksType == Plot::In || ticksType == Plot::None)
-	sd->setTickLength (0, 0, 0);
+else 
+	sd->setTickLength (0, 0, 0);*/
+
+if (majTicksType == Plot::None || majTicksType == Plot::In)
+	majLength = 0;
+if (minTicksType == Plot::None || minTicksType == Plot::In)
+	minLength = 0;
+
+sd->setTickLength(minLength, minLength, majLength);
 }
 
 void Graph::setTicksLength(int minLength, int majLength)
 {
-QValueList<int> ticksType = d_plot->getTicksType();
+QValueList<int> majTicksType = d_plot->getMajorTicksType();
+QValueList<int> minTicksType = d_plot->getMinorTicksType();
+
 for (int i=0; i<4; i++)
-	{
-	int type = ticksType[i];
-	setAxisTicksLength (i, type, minLength, majLength);
-	}
+	setAxisTicksLength (i, majTicksType[i], minTicksType[i], minLength, majLength);
 	
 d_plot->setTickLength (minLength, majLength);
 }
@@ -836,11 +870,12 @@ emit modifiedGraph();
 }
 
 void Graph::showAxis(int axis, int type, const QString& formatInfo, Table *table,
-					 bool axisOn, int ticksType, bool labelsOn, const QColor& c, 
-					 int format, int prec, int rotation, int baselineDist,
+					 bool axisOn, int majTicksType, int minTicksType, bool labelsOn, 
+					 const QColor& c,  int format, int prec, int rotation, int baselineDist,
 					 const QString& formula)
-{		
-QValueList<int> ticksTypeList = d_plot->getTicksType();
+{
+QValueList<int> majTicksTypeList = d_plot->getMajorTicksType();
+QValueList<int> minTicksTypeList = d_plot->getMinorTicksType();
 	
 char f;
 int pr,fw;
@@ -853,7 +888,8 @@ if (scale)
 
 if (d_plot->axisEnabled (axis) == axisOn &&
 	tickLabelsOn[axis] == QString::number(labelsOn) &&
-	ticksTypeList[axis] == ticksType &&
+	majTicksTypeList[axis] == majTicksType &&
+	minTicksTypeList[axis] == minTicksType &&
 	axesColors()[axis] == c.name() &&
 	prec == pr && format == lblFormat[axis] &&
 	labelsRotation(axis) == rotation &&
@@ -892,8 +928,10 @@ else
 		setLabelsTextFormat(axis, type, formatInfo, table);
 	}
 
-d_plot->setTicksType(axis, ticksType);	
-setAxisTicksLength(axis, ticksType, d_plot->minorTickLength(), d_plot->majorTickLength());
+d_plot->setMajorTicksType(axis, majTicksType);	
+d_plot->setMinorTicksType(axis, minTicksType);
+setAxisTicksLength(axis, majTicksType, minTicksType, 
+				   d_plot->minorTickLength(), d_plot->majorTickLength());
 
 ScaleDraw *sclDraw= (ScaleDraw *)d_plot->axisScaleDraw (axis);	
 sclDraw->setOptions(drawAxesBackbone);
@@ -6675,7 +6713,8 @@ setBorder(plot->lineWidth(), plot->frameColor());
 
 enableAxes(g->enabledAxes());
 setAxesColors(g->axesColors());
-setTicksType(g->ticksType());
+setMajorTicksType(g->plotWidget()->getMajorTicksType());
+setMinorTicksType(g->plotWidget()->getMinorTicksType());
 setAxesBaseline(g->axesBaseline());
 drawAxesBackbones(g->drawAxesBackbone);
 		

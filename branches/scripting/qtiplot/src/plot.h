@@ -12,10 +12,13 @@ class Plot: public QwtPlot
 public:	
 	Plot(QWidget *parent = 0, const char *name = 0);
 	
-	enum TicksType{In=-1, None = 0, Out=1, Both=2};
+	enum TicksType{None = 0, Out = 1, Both = 2, In = 3};
 	
-	QValueList <int> getTicksType(){return ticksType;};
-	void setTicksType(int axis, int type);
+	QValueList <int> getMajorTicksType(){return majorTicksType;};
+	void setMajorTicksType(int axis, int type){majorTicksType[axis]=type;}
+
+	QValueList <int> getMinorTicksType(){return minorTicksType;};
+	void setMinorTicksType(int axis, int type){minorTicksType[axis]=type;}
 
 	int minorTickLength(){return minTickLength;};
 	int majorTickLength(){return majTickLength;};
@@ -46,6 +49,9 @@ protected:
 
 	void drawInwardMinorTicks(QPainter *painter, const QRect &rect, 
 							const QwtDiMap &map, int axis) const;
+
+	void drawInwardMajorTicks(QPainter *painter, const QRect &rect, 
+							const QwtDiMap &map, int axis) const;
 signals:
 	void selectPlot();
 	void moveGraph(const QPoint&);
@@ -55,7 +61,8 @@ signals:
 
 protected:
 	int minTickLength, majTickLength, d_lineWidth;
-	QValueList <int> ticksType;
+	QValueList <int> minorTicksType;
+	QValueList <int> majorTicksType;
 	bool movedGraph, ShiftButton, graphToResize;
 	QPoint presspos;
 };

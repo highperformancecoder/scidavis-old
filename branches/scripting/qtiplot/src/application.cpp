@@ -1341,7 +1341,7 @@ if (w->columnType(xcol) == Table::Numeric && w->columnType(ycol) == Table::Numer
 	QStringList values=QStringList::split ("\t",text,FALSE);
 	w->setText(row,xcol,values[0]);
 	w->setText(row,ycol,values[1]);
-	updateCurves(colName);
+	updateCurves(w, colName);
 	emit modified();
 	}
 else
@@ -1372,7 +1372,7 @@ if (w->columnType(col) == Table::Numeric)
 		j++;
 		}
 	
-	updateCurves(colName);
+	updateCurves(w, colName);
 	delete[] dat;
 	emit modified();
 	}
@@ -2231,9 +2231,10 @@ void ApplicationWindow::polishGraph(Graph *g, int style)
 if (style == Graph::VerticalBars || style == Graph::HorizontalBars ||style == Graph::Histogram)
 	{
 	QValueList<int> ticksList;
-	int ticksStyle = Plot::Out;
-	ticksList<<ticksStyle<<ticksStyle<<ticksStyle<<ticksStyle;
-	g->setTicksType(ticksList);
+	int majTicksStyle = Plot::Out;
+	ticksList<<majTicksStyle<<majTicksStyle<<majTicksStyle<<majTicksStyle;
+	g->setMajorTicksType(ticksList);
+	g->setMinorTicksType(ticksList);
 	}
 if (style == Graph::HorizontalBars)
 	{
@@ -2492,8 +2493,12 @@ if (!g->isPiePlot())
 		}
 	
 	QValueList<int> ticksList;
-	ticksList<<ticksStyle<<ticksStyle<<ticksStyle<<ticksStyle;
-	g->setTicksType(ticksList);
+	ticksList<<majTicksStyle<<majTicksStyle<<majTicksStyle<<majTicksStyle;
+	g->setMajorTicksType(ticksList);
+	ticksList.clear();
+	ticksList<<minTicksStyle<<minTicksStyle<<minTicksStyle<<minTicksStyle;
+	g->setMinorTicksType(ticksList);
+
 	g->setTicksLength (minTicksLength, majTicksLength);
 	g->setAxesLinewidth(axesLineWidth);
 	g->drawAxesBackbones(drawBackbones);
@@ -3109,44 +3114,43 @@ for (int i=0; i<c; i++)
 QApplication::restoreOverrideCursor();
 }
 
-void ApplicationWindow::updateCurves(const QString& name)
+void ApplicationWindow::updateCurves(Table *t, const QString& name)
 {
 QApplication::setOverrideCursor(waitCursor);
-QWidgetList windows = ws->windowList();
-int c=(int)windows.count();
-Table *W=table(name);
-if (!W)
-	return;
-
-for (int i=0; i<c; i++)
+QWidgetList *lst = windowsList();
+for (QWidget *w = lst->first(); w; w = lst->next())
 	{
-	QString caption=windows.at(i)->name();
-	if (plotWindows.contains(caption))
+	if (w->isA("MultiLayer"))
 		{
-		MultiLayer* plot = (MultiLayer*)windows.at(i);
-		QWidgetList *graphsList=plot->graphPtrs();
+		QWidgetList *graphsList=((MultiLayer*)w)->graphPtrs();
 		for (int k=0; k<(int)graphsList->count(); k++)
 			{
 			Graph* g=(Graph*)graphsList->at(k);
-			if (g && g->curves() > 0)
+			if (g && g->curves())
 				{
+				bool modified = false;
 				QStringList as=g->plotAssociations();
 				for (int j=0; j<g->curves(); j++)
 					{
-					if (as[j].contains(name, TRUE))
-						g->updateCurveData(W, name, j);
+					if (as[j].contains(name))
+						{
+						modified = true;
+						g->updateCurveData(t, name, j);
+						}
 					}
-				 g->updatePlot();
-				 }
+				if (modified)
+					g->updatePlot();
+				}
 			}
 		}
-	else if (plot3DWindows.contains(caption))
+	else if (w->isA("Graph3D"))
 		{
-		Graph3D* g = (Graph3D*)windows.at(i);
-		if ((g->formula()).contains(name,TRUE))
-			g->updateData(W);
+		Graph3D* g = (Graph3D*)w;
+		if ((g->formula()).contains(name))
+			g->updateData(t);
 		}
 	}
+delete lst;
 QApplication::restoreOverrideCursor();
 }
 
@@ -4116,7 +4120,8 @@ defaultCurveStyle = settings.readNumEntry ("/defaultCurveStyle", Graph::LineSymb
 defaultCurveLineWidth = settings.readNumEntry("/defaultCurveLineWidth", 1, 0);
 defaultSymbolSize = settings.readNumEntry("/defaultSymbolSize", 7, 0);
 
-ticksStyle=settings.readNumEntry ("/ticksStyle", Plot::Out, 0);
+majTicksStyle=settings.readNumEntry ("/majTicksStyle", Plot::Out, 0);
+minTicksStyle=settings.readNumEntry ("/minTicksStyle", Plot::Out, 0);
 minTicksLength=settings.readNumEntry ("/minTicksLength", 5, 0);
 majTicksLength=settings.readNumEntry ("/majTicksLength", 9, 0);
 
@@ -4316,7 +4321,9 @@ settings.writeEntry("/defaultCurveStyle", defaultCurveStyle);
 settings.writeEntry("/defaultCurveLineWidth", defaultCurveLineWidth);
 settings.writeEntry("/defaultSymbolSize", defaultSymbolSize);
 
-settings.writeEntry("/ticksStyle", ticksStyle);
+//ticks
+settings.writeEntry ("/majTicksStyle", majTicksStyle);
+settings.writeEntry ("/minTicksStyle", minTicksStyle);
 settings.writeEntry("/minTicksLength", minTicksLength);
 settings.writeEntry("/majTicksLength", majTicksLength);
 
@@ -5672,14 +5679,14 @@ if ( w && tableWindows.contains(w->name()))
 }
 
 void ApplicationWindow::showAxis(int axis, int type, const QString& labelsColName, bool axisOn, 
-								 int ticksType, bool labelsOn, const QColor& c, int format, 
+								 int majTicksType, int minTicksType, bool labelsOn, const QColor& c, int format, 
 								 int prec, int rotation, int baselineDist, const QString& formula)
 {
 Table *w = table(labelsColName);
 if ((type == Graph::Txt || type == Graph::ColHeader) && !w)
 	return;
 
-activeGraph->showAxis(axis, type, labelsColName, w, axisOn, ticksType, labelsOn, 
+activeGraph->showAxis(axis, type, labelsColName, w, axisOn, majTicksType, minTicksType, labelsOn, 
 					  c, format, prec, rotation, baselineDist, formula);
 }
 
@@ -5742,8 +5749,8 @@ if (!g->isPiePlot())
 	axesDialog* ad= new axesDialog(this,"ad",TRUE,WStyle_Tool|WDestructiveClose);
 	connect (ad,SIGNAL(updateAxisTitle(int,const QString&)),g,SLOT(setAxisTitle(int,const QString&)));
 	connect (ad,SIGNAL(changeAxisFont(int, const QFont &)),g,SLOT(setAxisFont(int,const QFont &)));
-	connect (ad,SIGNAL(showAxis(int, int, const QString&, bool,int, bool,const QColor&, int, int, int, int, const QString&)),
-			this, SLOT(showAxis(int,int, const QString&, bool, int,bool,const QColor&, int, int, int, int, const QString&)));
+	connect (ad,SIGNAL(showAxis(int, int, const QString&, bool,int, int, bool,const QColor&, int, int, int, int, const QString&)),
+			this, SLOT(showAxis(int,int, const QString&, bool, int, int, bool,const QColor&, int, int, int, int, const QString&)));
 
 	ad->setMultiLayerPlot(plot);
 	ad->setLabelsNumericFormat(g->labelsNumericFormat());
@@ -5759,7 +5766,7 @@ if (!g->isPiePlot())
 	ad->updateTitleBox(0);
 	ad->putGridOptions(g->getGridOptions());
 	ad->setAxesColors(g->axesColors());
-	ad->setTicksType(g->ticksType());
+	ad->setTicksType(g->plotWidget()->getMajorTicksType(), g->plotWidget()->getMinorTicksType());
 	ad->setEnabledTickLabels(g->enabledTickLabels());
 	ad->initLabelsRotation(g->labelsRotation(QwtPlot::xBottom), g->labelsRotation(QwtPlot::xTop));
 	ad->showNormal();
@@ -9721,9 +9728,24 @@ for (int j=0;j<(int)list.count()-1;j++)
 			ag->setAxesBaseline(fList);
 			}
 	else if (s.contains ("EnabledTicks"))
-			{
+			{//version < 0.8.6
 			fList=QStringList::split ("\t",s,TRUE);
-			ag->setTicksType(fList);
+			fList.pop_front();
+			fList.gres("-1", "3");
+			ag->setMajorTicksType(fList);
+			ag->setMinorTicksType(fList);
+			}
+	else if (s.contains ("MajorTicks"))
+			{//version >= 0.8.6
+			fList=QStringList::split ("\t",s,TRUE);
+			fList.pop_front();
+			ag->setMajorTicksType(fList);
+			}
+	else if (s.contains ("MinorTicks"))
+			{//version >= 0.8.6
+			fList=QStringList::split ("\t",s,TRUE);
+			fList.pop_front();
+			ag->setMinorTicksType(fList);
 			}
 	else if (s.contains ("TicksLength"))
 			{
@@ -10450,7 +10472,8 @@ connect (w,SIGNAL(statusChanged(myWidget*)),this, SLOT(updateWindowStatus(myWidg
 connect (w,SIGNAL(hiddenWindow(myWidget*)),this, SLOT(hideWindow(myWidget*)));
 connect (w,SIGNAL(closedWindow(myWidget*)), this, SLOT(closeWindow(myWidget*)));
 connect (w,SIGNAL(removedCol(const QString&)),this,SLOT(removeCurves(const QString&)));
-connect (w,SIGNAL(modifiedData(const QString&)),this,SLOT(updateCurves(const QString&)));
+connect (w,SIGNAL(modifiedData(Table *, const QString&)),
+		 this,SLOT(updateCurves(Table *, const QString&)));
 connect (w,SIGNAL(plotCol(Table*,const QStringList&, int)),this, SLOT(multilayerPlot(Table*,const QStringList&, int)));
 connect (w,SIGNAL(modifiedWindow(QWidget*)),this,SLOT(modifiedProject(QWidget*)));
 connect (w,SIGNAL(optionsDialog()),this,SLOT(showColumnOptionsDialog()));

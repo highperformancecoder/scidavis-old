@@ -270,7 +270,7 @@ signals:
 	void plotCol(Table *,const QStringList&, int);
 	void changedColHeader(const QString&, const QString&);
 	void removedCol(const QString&);
-	void modifiedData(const QString&);
+	void modifiedData(Table *, const QString&);
 	void optionsDialog();
 	void colValuesDialog();
 	void resizedTable(QWidget*);

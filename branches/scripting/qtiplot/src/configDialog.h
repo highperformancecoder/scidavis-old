@@ -34,7 +34,7 @@ public:
 	void initPlots3DPage();
 	void initTablesPage();
 
-	QTabWidget *plotsTabWidget;
+	QTabWidget *plotsTabWidget, *appTabWidget;
 
 	QPushButton *btnBackground3D, *btnMesh, *btnAxes, *btnLabels, *btnNumbers;
 	QPushButton *btnFromColor, *btnToColor, *btnGrid;
@@ -45,24 +45,24 @@ public:
 	QPushButton* buttonTextFont, *buttonHeaderFont;
     QButtonGroup* GroupBox1, *GroupBox2, *GroupBox3;
     QWidgetStack* generalDialog;
-	QWidget *tables, *plots, *confirm, *application, *curves, *plots3D;
+	QWidget *appColors, *tables, *plots, *plotTicks, *plotFonts, *confirm, *application, *curves, *plots3D;
 	QPushButton* buttonAxesFont, *buttonNumbersFont, *buttonLegendFont, *buttonTitleFont, *fontsBtn;
 	QCheckBox *boxSearchUpdates;
 	QCheckBox *boxTitle, *boxFrame, *boxPlots3D, *boxPlots2D, *boxTables, *boxNotes, *boxFolders;
 	QCheckBox *boxSave, *boxBackbones, *boxAllAxes, *boxShowLegend, *boxSmoothMesh;
 	QCheckBox *boxAutoscaling, *boxShowProjection, *boxMatrixes, *boxScaleFonts, *boxResize;
-	QComboBox *boxLegend, *boxTicks, *boxStyle, *boxCurveStyle, *boxSeparator, *boxLanguage;
+	QComboBox *boxLegend, *boxMajTicks, *boxStyle, *boxCurveStyle, *boxSeparator, *boxLanguage, *boxMinTicks;
 	QSpinBox *boxMinutes, *boxLinewidth, *boxFrameWidth, *boxResolution, *boxMargin;
-	QSpinBox *boxCurveLineWidth, *boxSymbolSize, *boxMinorTicks, *boxMajorTicks;
+	QSpinBox *boxCurveLineWidth, *boxSymbolSize, *boxMajTicksLength, *boxMinTicksLength;
 	ColorButton *btnWorkspace, *btnPanels, *btnPanelsText;
 	QListBox *itemsList;
 	QLabel *labelFrameWidth, *lblLanguage, *lblWorkspace, *lblPanels, *lblPageHeader;
-	QLabel *lblPanelsText, *lblFonts, *lblStyle;
-	QGroupBox *GroupBoxConfirm, *GroupBoxAppCol, *GroupBoxApp;
+	QLabel *lblPanelsText, *lblFonts, *lblStyle, *lblMinTicksLength;
+	QGroupBox *GroupBoxConfirm;
 	QGroupBox *GroupBoxTableFonts, *GroupBoxTableCol;
 	QLabel *lblSeparator, *lblTableBackground, *lblTextColor, *lblHeaderColor;
 	QLabel *lblSymbSize, *lblLineWidth, *lblCurveStyle, *lblResolution;
-	QGroupBox *GroupBox3DFonts, *GroupBox3DCol, *GroupBox2DFonts;
+	QGroupBox *GroupBox3DFonts, *GroupBox3DCol;
 	QLabel *lblLegend, *lblMargin, *lblTicks, *lblMajTicks, *lblLinewidth, *lblMinTicks;
 
 public slots:
@@ -91,7 +91,6 @@ public slots:
 	void pickTitleFont();
 
 	void enableScaleFonts();
-	int ticksType();
 	void showFrameWidth(bool ok);
 
 	//application

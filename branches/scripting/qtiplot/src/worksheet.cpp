@@ -225,7 +225,7 @@ if (printer.setup())
 void Table::cellEdited(int,int col)
 {
 QString name=colName(col);
-emit modifiedData(name);
+emit modifiedData(this, name);
 emit modifiedWindow(this);
 }
 
@@ -448,7 +448,7 @@ bool Table::calculate(int col, int startRow, int endRow)
   }
   forgetSavedCol();
   
-  emit modifiedData(colName(col));
+  emit modifiedData(this, colName(col));
   emit modifiedWindow(this);
   QApplication::restoreOverrideCursor();
   return true;
@@ -868,7 +868,7 @@ for (int i=0;i<rows;i++)
 	worksheet->setText(i,selectedCol, "");
 	}
 QString name=colName(selectedCol);
-emit modifiedData(name);
+emit modifiedData(this, name);
 emit modifiedWindow(this);
 }
 
@@ -877,7 +877,7 @@ void Table::clearCell(int row, int col)
 worksheet->setText(row, col, "");
 
 QString name=colName(col);
-emit modifiedData(name);
+emit modifiedData(this, name);
 emit modifiedWindow(this);
 }
 
@@ -998,7 +998,7 @@ if (sel.isEmpty ())
 	worksheet->setText(row,col, "");
 		
 	QString name=colName(col);
-	emit modifiedData(name);		
+	emit modifiedData(this, name);		
 	}
 else
 	{	
@@ -1013,7 +1013,7 @@ else
 	for (i=left;i<=right;i++)
 		{
 		QString name=colName(i);
-		emit modifiedData(name);
+		emit modifiedData(this, name);
 		}
 	}
 }
@@ -1180,7 +1180,7 @@ for (i=top; i<top+rows; i++)
 	}
 			
 for (i=left; i<left+cols; i++)
-	emit modifiedData(colName(i));
+	emit modifiedData(this, colName(i));
 
 emit modifiedWindow(this);
 QApplication::restoreOverrideCursor();
@@ -1381,7 +1381,7 @@ for (i=0;i<rows;i++)
 	}
 
 QString name=colName(selectedCol);
-emit modifiedData(name);
+emit modifiedData(this, name);
 }
 
 void Table::sortColumnsDialog()
@@ -1470,7 +1470,7 @@ else
 				for (j=0;j<rows;j++)
 					worksheet->setText(j,scol,QString::number(r[rows-j-1], f, prec)); 
 				}
-			emit modifiedData(colName(scol));
+			emit modifiedData(this, colName(scol));
 			}
 		}
 	delete[] p;
@@ -1534,7 +1534,7 @@ for (i=0;i<rows;i++)
 	}
 gsl_vector_free (v);
 QString name=colName(selectedCol);
-emit modifiedData(name);
+emit modifiedData(this, name);
 emit modifiedWindow(this);
 }
 
@@ -1592,7 +1592,7 @@ for (i=0;i<rows;i++)
 	}
 gsl_vector_free (v);
 QString name=colName(selectedCol);
-emit modifiedData(name);
+emit modifiedData(this, name);
 emit modifiedWindow(this);
 }
 
@@ -1954,7 +1954,7 @@ for (int j=0;j<(int) list.count(); j++)
 		worksheet->setText(i,selectedCol,QString::number(r[i], f, prec));	
 		}
 
-	emit modifiedData(name);
+	emit modifiedData(this, name);
 	}
 
 emit modifiedWindow(this);
@@ -2063,7 +2063,7 @@ for (int j=0;j<(int) list.count(); j++)
 	for (int i=0;i<rows;i++) 
 		worksheet->setText(i,selectedCol,QString::number(i+1, f, prec));
 
-	emit modifiedData(name);
+	emit modifiedData(this, name);
 	}
 
 emit modifiedWindow(this);
@@ -2483,7 +2483,7 @@ if ( f.open(IO_ReadOnly) )
 	if (importFileAs)
 		{
 		for (i=0; i<worksheet->numCols(); i++)
-			emit modifiedData(colName(i));
+			emit modifiedData(this, colName(i));
 		}
 	}
 }
@@ -2638,7 +2638,7 @@ if ( f.open(IO_ReadOnly) )
 			cols = c;
 		for (i=0; i<cols; i++)
 			{
-			emit modifiedData(colName(i));			
+			emit modifiedData(this, colName(i));			
 			if (colLabel(i) != oldHeader[i])
 				emit changedColHeader(QString(name())+"_"+oldHeader[i], 
 									  QString(name())+"_"+colLabel(i));
@@ -3224,7 +3224,7 @@ while (!t.atEnd () && s != "</data>")
 	}	
 
 for (j=0; j<c; j++)
-	emit modifiedData(colName(j));	
+	emit modifiedData(this, colName(j));	
 }
 
 void Table::setNumRows(int rows)
@@ -3254,7 +3254,7 @@ if (rows > r)
 		QApplication::setOverrideCursor(waitCursor);
 		worksheet->setNumRows(r);
 		for (i=0; i<cols; i++)
-			emit modifiedData(colName(i));
+			emit modifiedData(this, colName(i));
 		
 		QApplication::restoreOverrideCursor();
 		break;
@@ -3640,7 +3640,7 @@ setColComments(l);
 void Table::notifyChanges()
 {
 for (int i=0; i<worksheet->numCols(); i++)
-	emit modifiedData(colName(i));
+	emit modifiedData(this, colName(i));
 
 emit modifiedWindow(this);
 }
