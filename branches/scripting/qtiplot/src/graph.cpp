@@ -150,7 +150,6 @@ translateOn = false;
 		
 for (int i=0; i<QwtPlot::axisCnt; i++)
 	{
-	tickLabelsOn<<"1";
 	axisType << Numeric;
 	axesFormatInfo<<QString::null;
 	lblFormat<<Automatic;
@@ -641,7 +640,8 @@ else
 
 void Graph::setLabelsNumericFormat(int axis, const QStringList& l)
 {
-if (tickLabelsOn[axis].toInt() == 0 || //labels are invisible
+QwtScaleDraw *sd = d_plot->axisScaleDraw (axis);
+if (!sd->hasComponent(QwtAbstractScaleDraw::Labels) ||
 	axisType[axis] != Numeric)	return;
 
 int format=l[2*axis].toInt();
@@ -694,14 +694,23 @@ return s+"\n";
 
 QStringList Graph::enabledTickLabels()
 {
-return tickLabelsOn;
+QStringList lst;
+for (int axis=0; axis<QwtPlot::axisCnt; axis++)
+	{
+	const QwtScaleDraw *sd = d_plot->axisScaleDraw (axis);
+	lst << QString::number(sd->hasComponent(QwtAbstractScaleDraw::Labels));
+	}
+return lst;
 }
 
 QString Graph::saveEnabledTickLabels()
 {
 QString s="EnabledTickLabels\t";
-for (int i=0;i<4;i++)
-	s+=tickLabelsOn[i]+"\t";
+for (int axis=0; axis<QwtPlot::axisCnt; axis++)
+	{
+	const QwtScaleDraw *sd = d_plot->axisScaleDraw (axis);
+	s += QString::number(sd->hasComponent(QwtAbstractScaleDraw::Labels))+"\t";
+	}
 return s+"\n";
 }
 
@@ -737,15 +746,15 @@ return s;
 
 void Graph::setEnabledTickLabels(const QStringList& labelsOn)
 {
-if (tickLabelsOn == labelsOn)
-	return;
-
 for (int axis=0; axis<QwtPlot::axisCnt; axis++)
 	{
-	if (labelsOn[axis]=="0")
-		d_plot->setAxisScaleDraw (axis, new QwtNoLabelsScaleDraw(axesLineWidth));
+	QwtScaleWidget *sc = d_plot->axisWidget(axis);
+	if (sc)
+		{
+		QwtScaleDraw *sd = d_plot->axisScaleDraw (axis);
+		sd->enableComponent (QwtAbstractScaleDraw::Labels, labelsOn[axis] == "1");
+		}
 	}
-tickLabelsOn=labelsOn;
 }
 
 void Graph::setMajorTicksType(const QValueList<int>& lst)
@@ -755,12 +764,16 @@ if (d_plot->getMajorTicksType() == lst)
 
 for (int i=0;i<(int)lst.count();i++)
 	{
-	/*ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (i);
+	ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (i);
 	if (lst[i]==Plot::None || lst[i]==Plot::In)
-		sd->setTickLength(0,0,0);
+		sd->enableComponent (QwtAbstractScaleDraw::Ticks, false);
 	else
-		sd->setTickLength(d_plot->minorTickLength(), d_plot->minorTickLength(), 
-						  d_plot->majorTickLength());*/
+		{
+		sd->enableComponent (QwtAbstractScaleDraw::Ticks);
+		sd->setTickLength  	(QwtScaleDiv::MinorTick, d_plot->minorTickLength()); 
+		sd->setTickLength  	(QwtScaleDiv::MediumTick, d_plot->minorTickLength());
+		sd->setTickLength  	(QwtScaleDiv::MajorTick, d_plot->majorTickLength());
+		}
 	
 	d_plot->setMajorTicksType(i,lst[i]);
 	}
@@ -820,17 +833,22 @@ if (!scale)
 	return;
 
 ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (axis);
-/*if (majTicksType == Plot::Out || majTicksType == Plot::Both)
-	sd->setTickLength(minLength, minLength, majLength);
-else 
-	sd->setTickLength (0, 0, 0);*/
+if (majTicksType == Plot::None && minTicksType == Plot::None)
+	sd->enableComponent (QwtAbstractScaleDraw::Ticks, false);
+else
+	{
+	sd->enableComponent (QwtAbstractScaleDraw::Ticks);
 
-if (majTicksType == Plot::None || majTicksType == Plot::In)
-	majLength = 0;
-if (minTicksType == Plot::None || minTicksType == Plot::In)
-	minLength = 0;
+	if (minTicksType == Plot::None || minTicksType == Plot::In)
+		minLength = 0;
+	
+	if (majTicksType == Plot::None || majTicksType == Plot::In)
+		majLength = 0;
 
-//sd->setTickLength(minLength, minLength, majLength);
+	sd->setTickLength  	(QwtScaleDiv::MinorTick, minLength); 
+	sd->setTickLength  	(QwtScaleDiv::MediumTick, minLength);
+	sd->setTickLength  	(QwtScaleDiv::MajorTick, majLength);
+	}	
 }
 
 void Graph::setTicksLength(int minLength, int majLength)
@@ -840,8 +858,6 @@ QValueList<int> minTicksType = d_plot->getMinorTicksType();
 
 for (int i=0; i<4; i++)
 	setAxisTicksLength (i, majTicksType[i], minTicksType[i], minLength, majLength);
-	
-d_plot->setTickLength (minLength, majLength);
 }
 
 void Graph::changeTicksLength(int minLength, int majLength)
@@ -885,7 +901,6 @@ if (scale)
 	oldBaseline = scale->margin();
 
 if (d_plot->axisEnabled (axis) == axisOn &&
-	tickLabelsOn[axis] == QString::number(labelsOn) &&
 	majTicksTypeList[axis] == majTicksType &&
 	minTicksTypeList[axis] == minTicksType &&
 	axesColors()[axis] == c.name() &&
@@ -911,11 +926,15 @@ if (scale)
 		}		
  	}
 	
-tickLabelsOn[axis]=QString::number(labelsOn);
+ScaleDraw *sclDraw= (ScaleDraw *)d_plot->axisScaleDraw (axis);	
+sclDraw->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
+
 if (!labelsOn)
-	d_plot->setAxisScaleDraw (axis, new QwtNoLabelsScaleDraw(axesLineWidth));
+	sclDraw->enableComponent (QwtAbstractScaleDraw::Labels, false);
 else
 	{
+	sclDraw->enableComponent (QwtAbstractScaleDraw::Labels);
+
 	setAxisLabelRotation(axis, rotation);
 
 	if (type == Numeric)
@@ -931,9 +950,6 @@ d_plot->setMinorTicksType(axis, minTicksType);
 setAxisTicksLength(axis, majTicksType, minTicksType, 
 				   d_plot->minorTickLength(), d_plot->majorTickLength());
 
-ScaleDraw *sclDraw= (ScaleDraw *)d_plot->axisScaleDraw (axis);	
-sclDraw->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
-
 if (axisOn && (axis == QwtPlot::xTop || axis == QwtPlot::yRight))
 	updateSecondaryAxis(axis);//synchronize scale divisions
 
@@ -944,7 +960,7 @@ emit modifiedGraph();
 
 void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName, Table *table)
 {
-if (type == Numeric || type == Time || type == Date || tickLabelsOn[axis].toInt() == 0)
+if (type == Numeric || type == Time || type == Date)
 	return;
 
 QStringList list;
@@ -1615,21 +1631,24 @@ if (axis)
 
 for (int i = a; i <= a+1; i++)
 	{
+	QwtScaleEngine *sc_engine = 0;
 	if (scaleType == 1)
-		{//Logarithmic
-		QwtLog10ScaleEngine sc_engine;// = new QwtLog10ScaleEngine();
-	
-		if (stepOn)	
-			sc_engine.autoScale (int((end-start)/step)+1, start, end, step);
-		else
-			sc_engine.divideScale (start, end, majTicks, minTicks);
+		sc_engine = new QwtLog10ScaleEngine();
+	else
+		sc_engine = new QwtLinearScaleEngine();
 
-		if (scales[8*axis+7] == "1")
-			sc_engine.setAttribute(QwtScaleEngine::Inverted);
+	if (stepOn)	
+		sc_engine->divideScale (start, end, majTicks, minTicks, step);
+		//sc_engine->autoScale (int((end-start)/step)+1, start, end, step);
+	else
+		sc_engine->divideScale (start, end, majTicks, minTicks);
 
-		d_plot->setAxisScaleEngine (i, &sc_engine);
-		}
-	else if (scaleType == 0)
+	if (scales[8*axis+7] == "1")
+		sc_engine->setAttribute(QwtScaleEngine::Inverted);
+
+	d_plot->setAxisScaleEngine (i, sc_engine);
+
+	/*else 
 		{//Liniar	
 		if (stepOn)	
 			d_plot->setAxisScale(i,start,end,step);
@@ -1639,14 +1658,7 @@ for (int i = a; i <= a+1; i++)
 			d_plot->setAxisMaxMajor(i, majTicks);
 			d_plot->setAxisMaxMinor(i, minTicks);
 			}
-
-		if (scales[8*axis+7] == "1")
-			{
-			QwtLinearScaleEngine *sc_engine = (QwtLinearScaleEngine *)d_plot->axisScaleEngine(i);
-			sc_engine->setAttribute(QwtScaleEngine::Inverted);
-			d_plot->setAxisScaleEngine (i, sc_engine);
-			}
-		}
+		}*/
 
 	/*if (scaleType == 1)
 		{
@@ -6923,10 +6935,14 @@ axisType = g->axisType;
 setAxisLabelRotation(QwtPlot::xBottom, g->labelsRotation(QwtPlot::xBottom));
 setAxisLabelRotation(QwtPlot::xTop, g->labelsRotation(QwtPlot::xTop));
 
-tickLabelsOn = g->tickLabelsOn;
-for (i=0; i<4; i++)
+for (i=0; i<QwtPlot::axisCnt; i++)
 	{
-	if (tickLabelsOn[i] == "1")
+	QwtScaleWidget *sc = g->plotWidget()->axisWidget(i);
+	if (!sc)
+		continue;
+
+	QwtScaleDraw *sd = g->plotWidget()->axisScaleDraw (i);
+	if (sd->hasComponent(QwtAbstractScaleDraw::Labels))
 		{
 		if (axisType[i] == Graph::Numeric)
 			setLabelsNumericFormat(i, g->labelsNumericFormat());
@@ -6939,7 +6955,10 @@ for (i=0; i<4; i++)
 			}
 		}
 	else
-		d_plot->setAxisScaleDraw (i, new QwtNoLabelsScaleDraw(axesLineWidth));
+		{
+		sd = d_plot->axisScaleDraw (i);
+		sd->enableComponent (QwtAbstractScaleDraw::Labels, false);
+		}
 	}
 setScales(g->scales);
 

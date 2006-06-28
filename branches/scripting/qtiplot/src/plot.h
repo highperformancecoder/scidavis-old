@@ -38,9 +38,8 @@ public:
 	QValueList <int> getMinorTicksType(){return minorTicksType;};
 	void setMinorTicksType(int axis, int type){minorTicksType[axis]=type;}
 
-	int minorTickLength(){return minTickLength;};
-	int majorTickLength(){return majTickLength;};
-	void setTickLength (int minLength, int majLength);
+	int minorTickLength() const;
+	int majorTickLength() const;
 
 	void setTicksLineWidth(int width);
 	void printFrame(QPainter *painter, const QRect &rect) const;
@@ -58,10 +57,10 @@ public:
 protected:
 	/*
 	void printCanvas(QPainter *painter, const QRect &canvasRect,
-   			 const QwtArray<QwtScaleMap> &map, const QwtPlotPrintFilter &pfilter) const;
+   			 const QwtArray<QwtScaleMap> &map, const QwtPlotPrintFilter &pfilter) const;*/
 
 	virtual void drawItems (QPainter *painter, const QRect &rect,
-			const QwtArray< QwtScaleMap > &map, const QwtPlotPrintFilter &pfilter) const;*/
+			const QwtArray< QwtScaleMap > &map, const QwtPlotPrintFilter &pfilter) const;
 
 	void drawInwardTicks(QPainter *painter, const QRect &rect, 
 							const QwtScaleMap&map, int axis) const;
@@ -83,7 +82,7 @@ protected:
 	QMap<int, QwtPlotCurve*> d_curves;
 	QMap<int, QwtPlotMarker*> d_markers;
 
-	int minTickLength, majTickLength, d_lineWidth;
+	int d_lineWidth;
 	QValueList <int> minorTicksType;
 	QValueList <int> majorTicksType;
 	bool movedGraph, ShiftButton, graphToResize;

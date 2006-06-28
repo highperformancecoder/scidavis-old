@@ -12,14 +12,11 @@ ImageMarker::ImageMarker(const QPixmap& p, QwtPlot *plot):
 pic=p;
 }
 
-void ImageMarker::draw(QPainter *p, int, int, const QRect& rect)
+void ImageMarker::draw (QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r) const
 {
 	if (p->device()->isExtDev())
 		{
-		QwtPlot *plot = this->plot();				
-		const QwtScaleMap xMap = plot->canvasMap(QwtPlot::xBottom);
-		const QwtScaleMap yMap = plot->canvasMap(QwtPlot::yLeft);
-	
+		QwtPlot *plot = this->plot();					
 		double r0_x=xMap.invTransform(origin.x());
 		double r0_y=yMap.invTransform(origin.y());	
 		double r1_x=xMap.invTransform(origin.x()+picSize.width());
@@ -39,7 +36,7 @@ void ImageMarker::draw(QPainter *p, int, int, const QRect& rect)
 		{
 		QRect ir=QRect(origin,picSize);
 		int clw = plot()->canvas()->lineWidth();
-		ir.moveBy(rect.x() - clw, rect.y() - clw);
+		ir.moveBy(r.x() - clw, r.y() - clw);
 		p->drawPixmap(ir,pic);
 		}
 }

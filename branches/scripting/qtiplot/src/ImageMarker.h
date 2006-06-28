@@ -9,7 +9,7 @@ class ImageMarker: public QwtPlotMarker
 {
 public:
 	ImageMarker(const QPixmap& p, QwtPlot *plot);
-    virtual void draw(QPainter *p, int x, int y, const QRect &);
+    virtual void draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r) const;
 	
 	QRect rect(){return QRect(origin,picSize);};
 

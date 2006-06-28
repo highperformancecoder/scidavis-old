@@ -52,9 +52,9 @@ public:
 		}
 	else
 		return QwtScaleDraw::label(value);
-	};
+	};*/
 
-	virtual void draw(QPainter *p) const
+	virtual void draw(QPainter *p, const QColorGroup &colorGroup) const
 	{
 	p->save();
 		
@@ -62,12 +62,12 @@ public:
 	pen.setWidth(d_lineWidth);
 	p->setPen(pen);
 		
-	QwtScaleDraw::draw(p);	
+	QwtScaleDraw::draw(p, colorGroup);	
 		
 	p->restore();
 	};
 	
-	void drawTick(QPainter *p, double val, int len) const
+	/*void drawTick(QPainter *p, double val, int len) const
 	{
 	bool print = p->device()->isExtDev();
 		
@@ -216,18 +216,6 @@ public:
 private:
 	uint d_lineWidth;
 	QString formula_string;
-};
-
-class QwtNoLabelsScaleDraw: public ScaleDraw
-{
-public:
-	QwtNoLabelsScaleDraw(int linewidth){setLineWidth(linewidth);};
-	~QwtNoLabelsScaleDraw(){};
-
-	/*virtual QString label(double) const
-	{
-	return QString::null;
-	};*/
 };
 
 class QwtTextScaleDraw: public ScaleDraw

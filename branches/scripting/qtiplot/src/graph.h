@@ -686,7 +686,6 @@ private:
 	QMemArray<long> c_keys; // arrows on plot keys
 	QMemArray<long> lines; // arrows on plot keys
 	QMemArray<long> images; // images on plot keys
-	QStringList tickLabelsOn;// tells wich axes have tick labels enabled
 	QPen mrkLinePen;
 	QFont auxMrkFont, defaultMarkerFont;
 	QColor auxMrkColor, auxMrkBkgColor;
