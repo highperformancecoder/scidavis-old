@@ -4,7 +4,7 @@
 #include <qpainter.h>
 
 QwtErrorPlotCurve::QwtErrorPlotCurve(int orientation, QwtPlot *parent, const char *name):
-    QwtPlotCurve(parent,name)
+    QwtPlotCurve(name)
 {
 pen=QPen(Qt::black,2,Qt::SolidLine);
 cap=10;
@@ -16,7 +16,7 @@ through=FALSE;
 }
 
 QwtErrorPlotCurve::QwtErrorPlotCurve(QwtPlot *parent, const char *name):
-    QwtPlotCurve(parent,name)
+    QwtPlotCurve(name)
 {
 pen=QPen(Qt::black,2,Qt::SolidLine);
 cap=10;
@@ -42,7 +42,7 @@ setTitle(e->title());
 }
 
 void QwtErrorPlotCurve::draw(QPainter *painter,
-    const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
 {
     if ( !painter || dataSize() <= 0 )
         return;
@@ -60,7 +60,7 @@ void QwtErrorPlotCurve::draw(QPainter *painter,
 }
 
 void QwtErrorPlotCurve::drawErrorBars(QPainter *painter,
-    const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
 {   
 int sh=size.height();
 int sw=size.width();
@@ -215,7 +215,7 @@ pen.setColor(c);
 
 QwtDoubleRect QwtErrorPlotCurve::boundingRect() const
 {
-QwtDoubleRect rect = QwtCurve::boundingRect();
+QwtDoubleRect rect = QwtPlotCurve::boundingRect();
 
 int size = dataSize();
 
@@ -251,10 +251,10 @@ else
 QwtDoubleRect minrect = erMin->boundingRect();
 QwtDoubleRect maxrect = erMax->boundingRect();
 	
-rect.setY1(QMIN(minrect.y1(), maxrect.y1()));
-rect.setY2(QMAX(minrect.y2(), maxrect.y2()));
-rect.setX1(QMIN(minrect.x1(), maxrect.x1()));
-rect.setX2(QMAX(minrect.x2(), maxrect.x2()));
+rect.setTop(QMIN(minrect.top(), maxrect.top()));
+rect.setBottom(QMAX(minrect.bottom(), maxrect.bottom()));
+rect.setLeft(QMIN(minrect.left(), maxrect.left()));
+rect.setRight(QMAX(minrect.right(), maxrect.right()));
 
 delete erMin;
 delete erMax;

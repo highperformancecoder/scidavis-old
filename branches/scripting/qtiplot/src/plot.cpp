@@ -5,13 +5,18 @@
 #include <qwt_painter.h>
 #include <qwt_plot_canvas.h>
 #include <qwt_plot_layout.h>
-#include <qwt_scale.h>
+#include <qwt_scale_widget.h>
+#include <qwt_scale_map.h>
 
 #include <qapplication.h>
+#include <qpixmap.h>
 
 Plot::Plot(QWidget *parent, const char *name)
-		: QwtPlot(parent,name)
+		: QwtPlot(parent)
 {
+marker_key = 0;
+curve_key = 0;
+
 movedGraph=FALSE;
 graphToResize=FALSE;
 ShiftButton=FALSE;
@@ -21,9 +26,16 @@ minTickLength = 5;
 majTickLength = 9;	
 
 setGeometry(QRect(0,0,500,400));
-setAutoLegend(FALSE); // We don't want a Qwt legend
 setAxisTitle(0, tr("Y Axis Title"));
 setAxisTitle(2, tr("X Axis Title"));	
+
+// grid 
+d_grid = new QwtPlotGrid;
+d_grid->enableX(false);
+d_grid->enableY(false);
+d_grid->setMajPen(QPen(Qt::blue, 0, Qt::SolidLine));
+d_grid->setMinPen(QPen(Qt::gray, 0 , Qt::DotLine));
+d_grid->attach(this);
 
 //custom scale
 for (int i= 0; i<QwtPlot::axisCnt; i++)
@@ -31,12 +43,12 @@ for (int i= 0; i<QwtPlot::axisCnt; i++)
 	majorTicksType<<Out;
 	minorTicksType<<Out;
 
-	QwtScale *scale = (QwtScale *) axis(i);
+	QwtScaleWidget *scale = (QwtScaleWidget *) axisWidget(i);
 	if (scale)
-		scale->setBaselineDist(0);
+		scale->setMargin(0);
 	
-	ScaleDraw *sd= new ScaleDraw(1);
-	setAxisScaleDraw (i, sd);
+	//ScaleDraw *sd= new ScaleDraw(1);
+	//setAxisScaleDraw (i, sd);
 	}
 	
 QwtPlotLayout *pLayout=plotLayout();
@@ -79,8 +91,8 @@ QwtPainter::drawRect(painter, rect.x(), rect.y(), rect.width(), rect.height());
 painter->restore();
 }
 
-void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
-    const QwtArray<QwtDiMap> &map, const QwtPlotPrintFilter &pfilter) const
+/*void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
+    const QwtArray<QwtScaleMap> &map, const QwtPlotPrintFilter &pfilter) const
 {
 	const QwtPlotCanvas* plotCanvas=canvas();	
 	QRect rect=canvasRect;
@@ -105,13 +117,13 @@ void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
 	rect = QRect(canvasRect.x()+1, canvasRect.y()+1, canvasRect.width(), canvasRect.height()-1);
 	QwtPainter::setClipRect(painter, rect);
 
-    drawCanvasItems(painter, canvasRect, map, pfilter);
-}
+    drawItems(painter, canvasRect, map, pfilter);
+}*/
 
-void Plot::drawCanvasItems (QPainter *painter, const QRect &rect, 
-							const QwtArray< QwtDiMap > &map, const QwtPlotPrintFilter &pfilter) const
+/*void Plot::drawItems (QPainter *painter, const QRect &rect, 
+							const QwtArray< QwtScaleMap > &map, const QwtPlotPrintFilter &pfilter) const
 {
-QwtPlot::drawCanvasItems(painter, rect, map, pfilter);
+QwtPlot::drawItems(painter, rect, map, pfilter);
 	
 for (int i=0; i<QwtPlot::axisCnt; i++)
  	{
@@ -126,12 +138,12 @@ for (int i=0; i<QwtPlot::axisCnt; i++)
 			drawInwardMinorTicks(painter, rect, map[i], i);
 		}
  	}
-}
+}*/
 
 void Plot::drawInwardTicks(QPainter *painter, const QRect &rect, 
-							const QwtDiMap &map, int axis) const
+							const QwtScaleMap &map, int axis) const
 {
-	QwtScale *scale=(QwtScale *) QwtPlot::axis (axis);
+	QwtScaleWidget *scale = (QwtScaleWidget *)axisWidget(axis);
 	if (!scale)
 		return;
 	
@@ -146,8 +158,8 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
     painter->save();	
     painter->setPen(QPen(color,d_lineWidth,QPainter::SolidLine));
 		
-	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScale(axis);
-	int minTicks=scDiv->minCnt();
+	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScaleDiv(axis);
+	/*int minTicks=scDiv->minCnt();
 	int majTicks= scDiv->majCnt();
 
 int j, x, y, low,high;
@@ -226,21 +238,21 @@ switch (axis)
             	QwtPainter::drawLine(painter, x, y, x, y + majTickLength);
         	}
 	break;
-	}
+	}*/
 painter->restore();
 }
 
 void Plot::drawInwardMajorTicks(QPainter *painter, const QRect &rect, 
-							const QwtDiMap &map, int axis) const
+							const QwtScaleMap &map, int axis) const
 {
-	QwtScale *scale=(QwtScale *) QwtPlot::axis (axis);
+	QwtScaleWidget *scale=(QwtScaleWidget *)axisWidget (axis);
 	if (!scale)
 		return;
 	
-	int x1=rect.left();
-	int x2=rect.right();	
-	int y1=rect.top();
-	int y2=rect.bottom();
+	const int x1=rect.left();
+	const int x2=rect.right();	
+	const int y1=rect.top();
+	const int y2=rect.bottom();
 	
 	QPalette pal=scale->palette();
 	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
@@ -248,57 +260,59 @@ void Plot::drawInwardMajorTicks(QPainter *painter, const QRect &rect,
     painter->save();	
     painter->setPen(QPen(color, d_lineWidth, QPainter::SolidLine));
 		
-	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScale(axis);
-	int majTicks = scDiv->majCnt();
+	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScaleDiv(axis);
+	/*int majTicks = scDiv->majCnt();
 
-int i, x, y;
 switch (axis)
 	{
 	case QwtPlot::yLeft:
-	x=x1;
-    for (i = 0; i < majTicks; i++)
-        {
-        y = map.transform(scDiv->majMark(i));
-        QwtPainter::drawLine(painter, x, y, x+majTickLength, y);
-        }		
+		{
+		for (uint i = 0; i < majTicks; i++)
+			{
+			const int y = map.transform(scDiv->majMark(i));
+			if ((y >= y1) && (y <= y2))
+			QwtPainter::drawLine(painter, x1, y, x1+majTickLength, y);
+			}
+		}
 	break;
 		
 	case QwtPlot::yRight:
 		{
-		x=x2;
-     	for (i = 0; i < majTicks; i++)
+     	for (uint i = 0; i < majTicks; i++)
        	 	{
-            y = map.transform(scDiv->majMark(i));
-            QwtPainter::drawLine(painter, x, y, x-majTickLength, y);
+            const int y = map.transform(scDiv->majMark(i));
+            QwtPainter::drawLine(painter, x2, y, x2-majTickLength, y);
         	}
 		}
 	  break;
 		
 	case QwtPlot::xBottom:
-		y=y2;
-     	for (i = 0; i < majTicks; i++)
+		{
+     	for (uint i = 0; i < majTicks; i++)
         	{
-            x = map.transform(scDiv->majMark(i));
-            QwtPainter::drawLine(painter, x, y, x, y-majTickLength);
+            const int x = map.transform(scDiv->majMark(i));
+            QwtPainter::drawLine(painter, x, y2, x, y2-majTickLength);
        		}	
+		}
 		break;
 	
 	case QwtPlot::xTop:
-		y=y1;
-    	for (i = 0; i < majTicks; i++)
+		{
+    	for (uint i = 0; i < majTicks; i++)
        		{
-            x = map.transform(scDiv->majMark(i));
-            QwtPainter::drawLine(painter, x, y, x, y + majTickLength);
-       	    }		
+            const int x = map.transform(scDiv->majMark(i));
+            QwtPainter::drawLine(painter, x, y1, x, y1 + majTickLength);
+       	    }
+		}
 	break;
 	}
-painter->restore();
+painter->restore();*/
 }
 
 void Plot::drawInwardMinorTicks(QPainter *painter, const QRect &rect, 
-							const QwtDiMap &map, int axis) const
+							const QwtScaleMap &map, int axis) const
 {
-	QwtScale *scale=(QwtScale *) QwtPlot::axis (axis);
+	QwtScaleWidget *scale=(QwtScaleWidget *)axisWidget (axis);
 	if (!scale)
 		return;
 	
@@ -313,8 +327,8 @@ void Plot::drawInwardMinorTicks(QPainter *painter, const QRect &rect,
     painter->save();	
     painter->setPen(QPen(color, d_lineWidth, QPainter::SolidLine));
 		
-	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScale(axis);
-	int minTicks=scDiv->minCnt();
+	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScaleDiv(axis);
+	/*int minTicks=scDiv->minCnt();
 
 int j, x, y, low,high;
 switch (axis)
@@ -368,7 +382,7 @@ switch (axis)
             	QwtPainter::drawLine(painter, x, y, x, y + minTickLength);
        	    }		
 	break;
-	}
+	}*/
 painter->restore();
 }
 
@@ -443,25 +457,31 @@ void Plot::drawPixmap(QPainter *painter, const QRect &rect)
 
     for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
 		{
-		const QwtScale *scale = this->axis(axis);
+		const QwtScaleWidget *scale = this->axisWidget(axis);
         if (scale)
 			{
-            int baseDist = scale->baseLineDist();
+            int baseDist = scale->margin();
             int startDist, endDist;
 			if (axis == QwtPlot::xTop || axis == QwtPlot::yRight)
 				{//synchronize secondary scales 
-				scale = this->axis(axis-1);
+				scale = this->axisWidget(axis-1);
 				if (scale)
-					scale->minBorderDist(startDist, endDist);
+					{
+					startDist = scale->startBorderDist();
+					endDist = scale->endBorderDist();
+					}
 				}
 			else
-				scale->minBorderDist(startDist, endDist);
+				{
+				startDist = scale->startBorderDist();
+				endDist = scale->endBorderDist();
+				}
             printScale(painter, axis, startDist, endDist, baseDist, layout->scaleRect(axis));
 			}
 		}
 
 	const QwtPlotCanvas *canvas = this->canvas();
-	const QPixmap *canvasPix = canvas->cache();
+	const QPixmap *canvasPix = canvas->paintCache();
 	if (canvasPix)
 		{
 		QRect cr = layout->canvasRect();
@@ -492,7 +512,7 @@ void Plot::drawPixmap(QPainter *painter, const QRect &rect)
     painter->restore();
 }
 
-void Plot::print(QPainter *painter, const QRect &plotRect,
+/*void Plot::print(QPainter *painter, const QRect &plotRect,
         const QwtPlotPrintFilter &pfilter) const
 {
     int axis;
@@ -534,7 +554,7 @@ void Plot::print(QPainter *painter, const QRect &plotRect,
 
         for (axis = 0; axis < QwtPlot::axisCnt; axis++ )
         {
-			QwtScale *scale = (QwtScale *)this->axis(axis);
+			QwtScaleWidget *scale = (QwtScaleWidget *)this->axisWidget(axis);
             if ( scale )
             {
                 baseLineDists[axis] = scale->baseLineDist();
@@ -563,7 +583,7 @@ void Plot::print(QPainter *painter, const QRect &plotRect,
 
     for ( axis = 0; axis < QwtPlot::axisCnt; axis++ )
     {
-		QwtScale *scale = (QwtScale *)this->axis(axis);
+		QwtScaleWidget *scale = (QwtScaleWidget *)this->axisWidget(axis);
         if (scale)
         {
             int baseDist = scale->baseLineDist();
@@ -571,7 +591,7 @@ void Plot::print(QPainter *painter, const QRect &plotRect,
             int startDist, endDist;
 			if ( axis == xTop || axis == yRight)
 				{//TO DO: try to synchronize scales, it doesn't work for the moment
-				QwtScale *op_scale = (QwtScale *)this->axis(axis-1);
+				QwtScaleWidget *op_scale = (QwtScaleWidget *)this->axisWidget(axis-1);
 				if (op_scale)
 					{
 					op_scale->minBorderDist(startDist, endDist);
@@ -589,17 +609,17 @@ void Plot::print(QPainter *painter, const QRect &plotRect,
 
     const QRect canvasRect = metricsMap.layoutToDevice(layout->canvasRect());
 
-    QwtArray<QwtDiMap> map(axisCnt);
+    QwtArray<QwtScaleMap> map(axisCnt);
     for (axis = 0; axis < axisCnt; axis++)
     {
-        const QwtScaleDiv *scaleDiv = this->axisScale(axis);
+        const QwtScaleDiv *scaleDiv = this->axisScaleDiv(axis);
         map[axis].setDblRange(scaleDiv->lBound(),
             scaleDiv->hBound(), scaleDiv->logScale());
 
         double from, to;
         if ( axisEnabled(axis) )
         {
-			QwtScale *scale = (QwtScale *)this->axis(axis);
+			QwtScaleWidget *scale = (QwtScaleWidget *)this->axisWidget(axis);
             const int sDist = scale->startBorderDist();
             const int eDist = scale->endBorderDist();
             const QRect &scaleRect = layout->scaleRect(axis);
@@ -651,7 +671,7 @@ void Plot::print(QPainter *painter, const QRect &plotRect,
 
         for (axis = 0; axis < QwtPlot::axisCnt; axis++ )
         {
-			QwtScale *scale = (QwtScale *)this->axis(axis);
+			QwtScaleWidget *scale = (QwtScaleWidget *)this->axisWidget(axis);
             if ( scale )
                 scale->setBaselineDist(baseLineDists[axis]);
         }
@@ -660,4 +680,66 @@ void Plot::print(QPainter *painter, const QRect &plotRect,
     pfilter.reset((QwtPlot *)this);
 
     painter->restore();
+}
+*/
+
+int Plot::closestCurve(int xpos, int ypos, int &dist, int &point)
+{
+QwtScaleMap map[QwtPlot::axisCnt];
+for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
+	map[axis] = canvasMap(axis);
+
+double dmin = 1.0e10;
+int key = -1;
+for (QMapIterator<int, QwtPlotCurve *> it = d_curves.begin(); it != d_curves.end(); ++it ) 
+	{
+	QwtPlotCurve *c = it.data();
+	for (int i=0; i<c->dataSize(); i++)
+		{
+		double cx = map[c->xAxis()].xTransform(c->x(i)) - double(xpos);
+		double cy = map[c->yAxis()].xTransform(c->y(i)) - double(ypos);
+
+		double f = qwtSqr(cx) + qwtSqr(cy);
+
+		if (f < dmin)
+			{
+			dmin = f;
+			key = it.key();
+			point = i;
+			}
+		 }
+	}
+
+dist = int(sqrt(dmin));
+return key;
+}
+
+void Plot::removeMarker(int index)
+{
+QwtPlotMarker *m = d_markers[index];
+m->detach();
+d_markers.remove (index);
+}
+
+int Plot::insertMarker(QwtPlotMarker *m)
+{
+marker_key++;
+d_markers.insert (marker_key, m, false );
+m->attach(this);
+return marker_key;
+}
+
+int Plot::insertCurve(QwtPlotCurve *c)
+{
+curve_key++;
+d_curves.insert (curve_key, c, false);
+c->attach(this);
+return curve_key;
+}
+
+void Plot::removeCurve(int index)
+{
+QwtPlotCurve *c = d_curves[index];
+c->detach();
+d_curves.remove (index);
 }

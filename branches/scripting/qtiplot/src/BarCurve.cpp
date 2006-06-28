@@ -2,7 +2,7 @@
 #include <qpainter.h>
 
 QwtBarCurve::QwtBarCurve(QwtPlot *parent, const char *name):
-    QwtPlotCurve(parent,name)
+    QwtPlotCurve(name)
 {
 bar_offset=0;
 bar_gap=0;
@@ -13,7 +13,7 @@ setBrush(QBrush(Qt::red));
 }
 
 QwtBarCurve::QwtBarCurve(BarStyle style, QwtPlot *parent, const char *name):
-    QwtPlotCurve(parent,name)
+    QwtPlotCurve(name)
 {
 bar_offset=0;
 bar_gap=0;
@@ -33,7 +33,7 @@ setTitle(b->title());
 }
 
 void QwtBarCurve::draw(QPainter *painter,
-    const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
 {
    if ( !painter || dataSize() <= 0 )
         return;
@@ -106,20 +106,20 @@ void QwtBarCurve::draw(QPainter *painter,
 
 QwtDoubleRect QwtBarCurve::boundingRect() const
 {
-QwtDoubleRect rect = QwtCurve::boundingRect();
+QwtDoubleRect rect = QwtPlotCurve::boundingRect();
 double n= (double)dataSize();
 
 if (bar_style == Vertical)
 	{	
-	double dx=(rect.x2()-rect.x1())/n;
-	rect.setX1(rect.x1()-dx);
-	rect.setX2(rect.x2()+dx);
+	double dx=(rect.right()-rect.left())/n;
+	rect.setLeft(rect.left()-dx);
+	rect.setRight(rect.right()+dx);
 	}
 else
 	{	
-	double dy=(rect.y2()-rect.y1())/n;
-	rect.setY1(rect.y1()-dy);
-	rect.setY2(rect.y2()+dy);
+	double dy=(rect.bottom()-rect.top())/n;
+	rect.setTop(rect.top()-dy);
+	rect.setBottom(rect.bottom()+dy);
 	}
 	
 return rect;

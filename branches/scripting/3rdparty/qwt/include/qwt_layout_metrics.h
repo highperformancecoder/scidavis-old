@@ -11,15 +11,19 @@
 #define QWT_LAYOUT_METRICS_H
 
 #include <qsize.h>
+#include <qrect.h>
+#include "qwt_polygon.h"
 #include "qwt_global.h"
 
 class QPainter;
-class QRect;
-class QPoint;
-class QPointArray;
 class QString;
-class QSimpleRichText;
-class QPaintDeviceMetrics;
+class QFontMetrics;
+#if QT_VERSION < 0x040000
+class QWMatrix;
+#else
+class QMatrix;
+#endif
+class QPaintDevice;
 
 class QWT_EXPORT QwtMetricsMap
 {
@@ -28,8 +32,8 @@ public:
 
     bool isIdentity() const;
 
-    void setMetrics(const QPaintDeviceMetrics &layoutMetrics,
-        const QPaintDeviceMetrics &deviceMetrics);
+    void setMetrics(const QPaintDevice *layoutMetrics,
+        const QPaintDevice *deviceMetrics);
 
     int layoutToDeviceX(int x) const;
     int deviceToLayoutX(int x) const;
@@ -44,22 +48,31 @@ public:
     QPoint layoutToDevice(const QPoint &, const QPainter * = NULL) const;
     QPoint deviceToLayout(const QPoint &, const QPainter * = NULL) const;
     QPoint screenToLayout(const QPoint &) const;
+    QPoint layoutToScreen(const QPoint &point) const;
+
 
     QSize layoutToDevice(const QSize &) const;
     QSize deviceToLayout(const QSize &) const;
     QSize screenToLayout(const QSize &) const;
+    QSize layoutToScreen(const QSize &) const;
 
     QRect layoutToDevice(const QRect &, const QPainter * = NULL) const;
     QRect deviceToLayout(const QRect &, const QPainter * = NULL) const;
     QRect screenToLayout(const QRect &) const;
+    QRect layoutToScreen(const QRect &) const;
 
-    QPointArray layoutToDevice(const QPointArray &, 
+    QwtPolygon layoutToDevice(const QwtPolygon &, 
         const QPainter * = NULL) const;
-    QPointArray deviceToLayout(const QPointArray &, 
+    QwtPolygon deviceToLayout(const QwtPolygon &, 
         const QPainter * = NULL) const;
 
+#if QT_VERSION < 0x040000
+    static QwtPolygon translate(const QWMatrix &, const QwtPolygon &);
     static QRect translate(const QWMatrix &, const QRect &);
-    static QPointArray translate(const QWMatrix &, const QPointArray &);
+#else
+    static QwtPolygon translate(const QMatrix &, const QwtPolygon &);
+    static QRect translate(const QMatrix &, const QRect &);
+#endif
 
 private:
     double d_screenToLayoutX;
@@ -67,33 +80,6 @@ private:
 
     double d_deviceToLayoutX;
     double d_deviceToLayoutY;
-};
-
-
-class QWT_EXPORT QwtLayoutMetrics
-{
-public:
-    QwtLayoutMetrics();
-    QwtLayoutMetrics(const QwtMetricsMap &);
-
-    void setMap(const QwtMetricsMap &);
-
-    QRect boundingRect(const QString &, int flags, QPainter *) const;
-    QRect boundingRect(const QString &, int flags, const QFontMetrics &) const;
-
-    int heightForWidth(const QString &,
-        int width, int flags, const QFontMetrics &) const;
-    int heightForWidth(const QString &,
-        int width, int flags, QPainter *) const;
-
-#ifndef QT_NO_RICHTEXT
-    QRect boundingRect(const QSimpleRichText &, 
-        int flags, QPainter * = NULL) const;
-    int heightForWidth(QSimpleRichText &, int width) const;
-#endif
-
-private:
-    QwtMetricsMap d_map;
 };
 
 inline bool QwtMetricsMap::isIdentity() const
@@ -157,6 +143,12 @@ inline QSize QwtMetricsMap::screenToLayout(const QSize &size) const
 {
     return QSize(screenToLayoutX(size.width()), 
         screenToLayoutY(size.height()));
+}
+
+inline QSize QwtMetricsMap::layoutToScreen(const QSize &size) const
+{
+    return QSize(layoutToScreenX(size.width()), 
+        layoutToScreenY(size.height()));
 }
 
 #endif

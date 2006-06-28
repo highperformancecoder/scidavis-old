@@ -3,8 +3,7 @@
 
 #include <qpaintdevicemetrics.h>
 #include <qpixmap.h>
-#include <qwt_plot_classes.h>
-#include <qwt_marker.h>
+#include <qwt_plot_marker.h>
 	
 class ImageMarker: public QwtPlotMarker
 {

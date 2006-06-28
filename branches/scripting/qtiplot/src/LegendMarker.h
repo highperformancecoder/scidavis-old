@@ -5,8 +5,7 @@
 #include <qpen.h>
 
 #include <qwt_plot.h>
-#include <qwt_plot_classes.h>
-#include <qwt_marker.h>
+#include <qwt_plot_marker.h>
 #include <qwt_array.h>
 #include <qwt_text.h>
 
@@ -22,7 +21,7 @@ public:
 
 	enum FrameStyle{None = 0, Line = 1, Shadow=2};
 	
-    virtual void draw(QPainter *p, int x, int y, const QRect &);
+    virtual void draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r);
 
 	QString getText();
 	void setText(const QString& s);

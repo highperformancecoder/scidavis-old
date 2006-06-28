@@ -6,7 +6,7 @@
 #include <qpaintdevicemetrics.h>
 
 QwtPieCurve::QwtPieCurve(QwtPlot *parent, const char *name):
-    QwtPlotCurve(parent,name)
+    QwtPlotCurve(name)
 {
 pieRay=100;
 firstColor=0;
@@ -15,7 +15,7 @@ setBrush(QBrush(Qt::black,Qt::SolidPattern));
 }
 
 void QwtPieCurve::draw(QPainter *painter,
-    const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
 {
     if ( !painter || dataSize() <= 0 )
         return;
@@ -28,10 +28,10 @@ void QwtPieCurve::draw(QPainter *painter,
 }
 
 void QwtPieCurve::drawPie(QPainter *painter,
-    const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
 {   	
 	int i, d = pieRay*2;
-	QwtPlot *plot = (QwtPlot *)parentPlot();
+	QwtPlot *plot = (QwtPlot *)this->plot();
 	QRect rect = plot->rect();
 	int x_center = rect.x() + rect.width()/2;
 	int y_center = rect.y() + rect.height()/2;

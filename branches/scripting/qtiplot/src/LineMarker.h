@@ -1,21 +1,20 @@
 #ifndef LINEMARKER_H
 #define LINEMARKER_H
 
-#include <qwt_plot_classes.h>
-#include <qwt_marker.h>
+#include <qwt_plot_marker.h>
 	
 class LineMarker: public QwtPlotMarker
 {
 public:
     LineMarker(QwtPlot *);
-    virtual void draw(QPainter *p, int x, int y, const QRect &);
+    virtual void draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r) const;
 
 	void setStartPoint(const QPoint& p);
 	void setEndPoint(const QPoint& p);
 	QPoint startPoint();
 	QPoint endPoint();
 	double dist(int x, int y);
-	double teta();
+	double teta() const;
 	double length();
 
 	void setColor(const QColor& c);
@@ -41,7 +40,7 @@ public:
 	bool filledArrowHead(){return filledArrow;};
 	void fillArrowHead(bool fill);
 	
-	static QwtDiMap mapCanvasToDevice(QPainter *p, QwtPlot *plot, int axis) ;
+	static QwtScaleMap mapCanvasToDevice(QPainter *p, QwtPlot *plot, int axis) ;
 		
 private:
 	QPoint start,end;

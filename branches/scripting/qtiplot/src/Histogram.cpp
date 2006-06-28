@@ -16,7 +16,7 @@ d_end = h->d_end;
 }
 
 void QwtHistogram::draw(QPainter *painter,
-    const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
 {
 if ( !painter || dataSize() <= 0 )
 	return;
@@ -49,11 +49,11 @@ if ( verifyRange(from, to) > 0 )
 
 QwtDoubleRect QwtHistogram::boundingRect() const
 {
-QwtDoubleRect rect = QwtCurve::boundingRect();
-rect.setX1(rect.x1()-x(1));
-rect.setX2(rect.x2()+x(dataSize()-1));
-rect.setY1(0);
-rect.setY2(1.2*rect.y2());
+QwtDoubleRect rect = QwtPlotCurve::boundingRect();
+rect.setLeft(rect.left()-x(1));
+rect.setRight(rect.right()+x(dataSize()-1));
+rect.setTop(0);
+rect.setBottom(1.2*rect.bottom());
 return rect;
 }
 

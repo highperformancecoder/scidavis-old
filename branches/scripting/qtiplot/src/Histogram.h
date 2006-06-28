@@ -7,8 +7,8 @@ public:
 
 	void copy(const QwtHistogram *h);
 
-	virtual void draw(QPainter *painter,const QwtDiMap &xMap, 
-		const QwtDiMap &yMap, int from, int to);
+	virtual void draw(QPainter *painter,const QwtScaleMap &xMap, 
+		const QwtScaleMap &yMap, int from, int to);
 
 	QwtDoubleRect boundingRect() const;
 

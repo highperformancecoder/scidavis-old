@@ -73,7 +73,7 @@ if(it<2 || (it==2 && Y[0] == Y[1]))
 		Y[i] = 0;
 		X[i] = 0;
 		}
-	d_plot->setCurveData(curveID, X, Y, 2);
+	cv->setData(X, Y, 2);
 	d_plot->replot(); 
 	updateScale();
 	return;
@@ -133,7 +133,7 @@ for (i = 0;i<n;i++ )
 	gsl_histogram_get_range (h, i, &lower, &upper);
 	X[i] = lower;
 	}
-d_plot->setCurveData(curveID, X, Y, n);
+cv->setData(X, Y, n);
 gsl_histogram_free (h);
 d_plot->replot(); 
 updateScale();
@@ -177,7 +177,7 @@ if(it<2 || (it==2 && Y[0] == Y[1]))
 		X[i] = 0;
 		}
 
-	d_plot->setCurveData(curveID, X, Y, 2);
+	cv->setData(X, Y, 2);
 	d_plot->replot(); 
 	updateScale();
 	return;
@@ -240,7 +240,8 @@ for (i = 0;i<n;i++ )
 	gsl_histogram_get_range (h, i, &lower, &upper);
 	X[i] = lower;
 	}
-d_plot->setCurveData(curveID, X, Y, n);
+
+cv->setData(X, Y, n);
 gsl_histogram_free (h);
 d_plot->replot(); 
 updateScale();
@@ -363,6 +364,10 @@ return info;
 
 void Graph::initHistogram(long curveID, const QMemArray<double>& Y, int it)
 {
+QwtHistogram *hc = (QwtHistogram *)d_plot->curve(curveID);
+if (!hc)
+	return;
+
 int i;
 if(it<2 || (it==2 && Y[0] == Y[1]))
 	{//non valid histogram data
@@ -372,15 +377,11 @@ if(it<2 || (it==2 && Y[0] == Y[1]))
 		y[i] = 0;
 		x[i] = 0;
 		}
-	d_plot->setCurveData(curveID, x, y, 2);
+	hc->setData(x, y, 2);
 	d_plot->replot(); 
 	updateScale();
 	return;
 	}
-
-QwtHistogram *hc = (QwtHistogram *)d_plot->curve(curveID);
-if (!hc)
-	return;
 
 int n=10;//default value
 QMemArray<double> x(n),y(n); //store ranges (x) and bins (y)
@@ -414,7 +415,7 @@ for (i = 0;i<n;i++ )
 	}
 
 hc->setBinning(true, (double)from, (double)to, (double)(to-from)/(double)n);
-d_plot->setCurveData(curveID, x, y, n);
+hc->setData(x, y, n);
 gsl_histogram_free (h);
 }
 
@@ -578,17 +579,17 @@ switch(spline)
 		case 0:
 			method=gsl_interp_linear;
 			label="LinearInt";
-			wlabel = "Linear interpolation of "+curve->title();
+			wlabel = tr("Linear interpolation of ")+curve->title().text();
 		break;
 		case 1:
 			method=gsl_interp_cspline;
 			label="CubicInt";
-			wlabel = "Cubic interpolation of "+curve->title();
+			wlabel = tr("Cubic interpolation of ")+curve->title().text();
 		break;
 		case 2:
 			method=gsl_interp_akima;
 			label="AkimaInt";
-			wlabel = "Akima interpolation of "+curve->title();
+			wlabel = tr("Akima interpolation of ")+curve->title().text();
 		break;
 		}
 		
@@ -645,7 +646,7 @@ for (i = 1; i < n-1; i++)
 	text+="\n";
 	}
 	
-emit createHiddenTable(c->title()+"\t"+ tr("Derivative of")+" "+c->title(),n-2,2,text);
+emit createHiddenTable(c->title().text()+"\t"+ tr("Derivative of")+" "+c->title().text(),n-2,2,text);
 free_vector(x,0,n-1);free_vector(y,0,n-1);free_vector(result,0,n-2);
 return true;
 }
@@ -844,7 +845,7 @@ if(order==1) pref="st";
 if(order==2) pref="nd";
 if(order==3) pref="rd";
 if(order>3) pref="th";
-QString info=date+"\t"+this->caption()+"\nNumerical integration of: "+c->title()+" with a "+QString::number(order)+pref+" order method \n";
+QString info=date+"\t"+this->caption()+"\nNumerical integration of: "+c->title().text()+" with a "+QString::number(order)+pref+" order method \n";
 if(success)
 info+="Number of iterations: "+QString::number(j)+"\n"; 
 if(!success)
@@ -900,7 +901,7 @@ for (i=0;i<n;i++)
 QDateTime dt = QDateTime::currentDateTime ();
 QString date=dt.toString(Qt::LocalDate);
 QString info=date+"\t"+this->caption()+" LinearFit"+ QString::number(fitID)+ ":\n";
-info+="Linear regression of " + c->title() + ": y=Ax+B\n";
+info+="Linear regression of " + c->title().text() + ": y=Ax+B\n";
 info+="From x="+QString::number(x[0]) +" to x="+QString::number(x[n-1])+"\n";
 info+="A = "+QString::number(c1)+" +/- " + QString::number(sqrt(cov11))+"\n";
 info+="B = "+QString::number(c0)+" +/- " + QString::number(sqrt(cov00));
@@ -909,7 +910,7 @@ info+="sumsq = "+QString::number(sumsq);
 info+="\nRsquare = "+QString::number(Rsquare);
 info+="\n-------------------------------------------------------------\n";
 
-addResultCurve(n, x, y, 1, "LinearFit"+QString::number(++fitID), tr("Linear regression of ")+c->title());
+addResultCurve(n, x, y, 1, "LinearFit"+QString::number(++fitID), tr("Linear regression of ")+c->title().text());
 return info;
 }
 
@@ -925,7 +926,7 @@ double *x=vector(0,n-1);
 double *y=vector(0,n-1);
 if (!x || !y)
 	{
-	QMessageBox::warning(0,"QtiPlot", tr("Could not allocate memory, operation aborted!"));
+	QMessageBox::warning(0, tr("QtiPlot"), tr("Could not allocate memory, operation aborted!"));
 	return;
 	}
 
@@ -1036,9 +1037,11 @@ delete[] w;
 
 QString tableName = "Fit"+QString::number(++fitID);
 QString label=tableName+"_2";
-long curveID = d_plot->insertCurve(label);
-d_plot->setCurvePen(curveID, QPen(Qt::red,2)); 
-d_plot->setCurveData(curveID, x, y, n1);	
+
+QwtPlotCurve *cv = new QwtPlotCurve(label);
+long curveID = d_plot->insertCurve(cv);
+cv->setPen(QPen(Qt::red,2)); 
+cv->setData(x, y, n1);	
 	
 c_type.resize(++n_curves);
 c_type[n_curves-1]=Line;
@@ -1056,9 +1059,10 @@ for (i=0; i<n_peaks; i++)
 		y[j] = gsl_matrix_get (m, j, i);
 
 	label=tableName+"_peak"+QString::number(i+1);
-	curveID = d_plot->insertCurve(label);
-	d_plot->setCurvePen(curveID, QPen(Qt::green,1)); 
-	d_plot->setCurveData(curveID, x, y, n1);	
+	cv = new QwtPlotCurve(label);
+	curveID = d_plot->insertCurve(cv);
+	cv->setPen(QPen(Qt::green,1)); 
+	cv->setData(x, y, n1);	
 
 	c_type.resize(++n_curves);
 	c_type[n_curves-1]=Line;
@@ -1269,7 +1273,7 @@ for (i=0;i<(int)p;i++)
 	par[i]=gsl_vector_get(s->x,i); 
 par[1]=1.0/par[1];
 result = outputFitString(n, tolerance, X0, XN, iterations, J, status, par, s, params,
-					   curve->title(),  "y=Aexp(-x/t)+y0", "Exponential decay");
+					   curve->title().text(),  "y=Aexp(-x/t)+y0", "Exponential decay");
 par[1]=1.0/par[1];
 }
 else
@@ -1288,7 +1292,7 @@ for (i=0;i<(int)p;i++)
 	par[i]=gsl_vector_get(s->x,i);
 par[1]=1.0/par[1];
 result=outputFitString(n, tolerance, X0, XN, iterations, solver, status, par, s, params,
-					   curve->title(), "y=Aexp(-x/t)+y0", "Exponential decay");
+					   curve->title().text(), "y=Aexp(-x/t)+y0", "Exponential decay");
 par[1]=1.0/par[1];
 }
     
@@ -1299,7 +1303,7 @@ for (i=0;i<n1;i++)
 	X[i]=X0+i*step;
 	Y[i]=par[0]*exp(-par[1]*X[i])+par[2];
 	}
-addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("Exponential decay fit of ")+curve->title());
+addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("Exponential decay fit of ")+curve->title().text());
 
 return result;
 }
@@ -1369,7 +1373,7 @@ par[1]=1.0/par[1];
 par[3]=1.0/par[3];
 
 result = outputFitString(n, tolerance, X0, XN, iterations, J, status, par, s, params,
-					   curve->title(),  "y=A1*exp(-x/t1)+A2*exp(-x/t2)+y0", "Exponential decay");
+					   curve->title().text(),  "y=A1*exp(-x/t1)+A2*exp(-x/t2)+y0", "Exponential decay");
 par[1]=1.0/par[1];
 par[3]=1.0/par[3];
 
@@ -1393,7 +1397,7 @@ par[1]=1.0/par[1];
 par[3]=1.0/par[3];
 
 result = outputFitString(n, tolerance, X0, XN, iterations, solver, status, par, s, params,
-				   curve->title(), "y=A1*exp(-x/t1)+A2*exp(-x/t2)+y0", "Exponential decay");
+				   curve->title().text(), "y=A1*exp(-x/t1)+A2*exp(-x/t2)+y0", "Exponential decay");
 par[1]=1.0/par[1];
 par[3]=1.0/par[3];
 
@@ -1408,7 +1412,7 @@ for (i=0; i<n1; i++)
 	Y[i]=par[0]*exp(-par[1]*X[i])+par[2]*exp(-par[3]*X[i])+par[4];
 	}
 
-addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("ExpDecay2 fit of ")+curve->title());
+addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("ExpDecay2 fit of ")+curve->title().text());
 
 return result;
 }
@@ -1483,7 +1487,7 @@ par[3]=1.0/par[3];
 par[5]=1.0/par[5];
 
 result = outputFitString(n, tolerance, X0, XN, iterations, J, status, par, s, params,
-					   curve->title(),  "y=A1*exp(-x/t1)+A2*exp(-x/t2)+A3*exp(-x/t3)+y0",
+					   curve->title().text(),  "y=A1*exp(-x/t1)+A2*exp(-x/t2)+A3*exp(-x/t3)+y0",
 					   "Exponential decay");
 par[1]=1.0/par[1];
 par[3]=1.0/par[3];
@@ -1510,7 +1514,7 @@ par[3]=1.0/par[3];
 par[5]=1.0/par[5];
 
 result = outputFitString(n, tolerance, X0, XN, iterations, solver, status, par, s, params,
-					   curve->title(), "y=A1*exp(-x/t1)+A2*exp(-x/t2)+A3*exp(-x/t3)+y0",
+					   curve->title().text(), "y=A1*exp(-x/t1)+A2*exp(-x/t2)+A3*exp(-x/t3)+y0",
 					   "Exponential decay");	
 par[1]=1.0/par[1];
 par[3]=1.0/par[3];
@@ -1524,7 +1528,7 @@ for (i=0;i<n1;i++)
 	X[i]=X0+i*step;
 	Y[i]=par[0]*exp(-X[i]*par[1])+par[2]*exp(-X[i]*par[3])+par[4]*exp(-X[i]*par[5])+par[6];
 	}
-addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("ExpDecay3 fit of ")+ curve->title());
+addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("ExpDecay3 fit of ")+ curve->title().text());
 return result;
 }
 
@@ -1591,7 +1595,7 @@ for (i=0;i<(int)p;i++)
 	par[i]=gsl_vector_get(s->x,i); 
 par[1]=-1.0/par[1];
 result = outputFitString(n, tolerance, X0, XN, iterations, J, status, par, s, params,
-					   curve->title(),  "y=Aexp(-x/t)+y0", "Exponential decay");
+					   curve->title().text(),  "y=Aexp(-x/t)+y0", "Exponential decay");
 par[1]=-1.0/par[1];
 
 }
@@ -1614,7 +1618,7 @@ for (i=0;i<(int)p;i++)
 
 par[1]=-1.0/par[1];
 result = outputFitString(n, tolerance, X0, XN, iterations, solver, status, par, s, params,
-					   curve->title(), "y=Aexp(x/t)+y0", "Exponential growth");
+					   curve->title().text(), "y=Aexp(x/t)+y0", "Exponential growth");
 par[1]=-1.0/par[1];
 }
 free_vector(X,0,n-1); free_vector(Y,0,n-1);	
@@ -1624,7 +1628,7 @@ for (i=0;i<n1;i++)
 	X[i]=X0+i*step;
 	Y[i]=par[0]*exp(-par[1]*X[i])+par[2];
 	}
-addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("Exponential growth fit of ")+ curve->title());
+addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("Exponential growth fit of ")+ curve->title().text());
 
 return result;
 }
@@ -1705,7 +1709,7 @@ for (i=0;i<(int)p;i++)
 	par[i]=gsl_vector_get(s->x,i); 
 
 result = outputFitString(n, tolerance, X0, XN, iterations, J, status, par, s, params,
-					   curve->title(), "y=y0+A*exp[-(x-xc)^2/(2*w^2)]", "Gauss");
+					   curve->title().text(), "y=y0+A*exp[-(x-xc)^2/(2*w^2)]", "Gauss");
 }
 else
 {
@@ -1723,7 +1727,7 @@ for (i=0;i<(int)p;i++)
 	par[i]=gsl_vector_get(s->x,i); 
 
 result = outputFitString(n, tolerance, X0, XN, iterations, solver, status, par, s, params,
-					   curve->title(), "y=y0+A*exp[-(x-xc)^2/(2*w^2)]", "Gauss");
+					   curve->title().text(), "y=y0+A*exp[-(x-xc)^2/(2*w^2)]", "Gauss");
 
 }
 
@@ -1739,7 +1743,7 @@ for (i=0;i<n1;i++)
 	double diff=X[i]-par[2];
 	Y[i]=par[1]*exp(-0.5*diff*diff/w2)+par[0];
 	}
-addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("Gauss fit of ")+ curve->title());
+addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("Gauss fit of ")+ curve->title().text());
 
 return result;
 }
@@ -1821,7 +1825,7 @@ par[1]= M_PI_2*par[1];
 
 
 result = outputFitString(n, tolerance, X0, XN, iterations, J, status, par, s, params,
-					   curve->title(),  "y=y0+2A/pi*w/[4*(x-xc)^2+w^2)]", "Lorentz");
+					   curve->title().text(),  "y=y0+2A/pi*w/[4*(x-xc)^2+w^2)]", "Lorentz");
 par[1]=par[1]/M_PI_2;
 }
 else
@@ -1841,7 +1845,7 @@ for (i=0;i<(int)p;i++)
 par[1]= M_PI_2*par[1];
 
 result = outputFitString(n, tolerance, X0, XN, iterations, solver, status, par, s, params,
-					   curve->title(), "y=y0+2A/pi*w/[4*(x-xc)^2+w^2)]", "Lorentz");
+					   curve->title().text(), "y=y0+2A/pi*w/[4*(x-xc)^2+w^2)]", "Lorentz");
 par[1]=par[1]/M_PI_2;
 
 }
@@ -1859,7 +1863,7 @@ for (i=0;i<n1;i++)
 	double diff=X[i]-par[2];
 	Y[i]=aw/(4*diff*diff+w2)+par[0];
 	}
-addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("Lorentz fit of ")+curve->title());
+addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("Lorentz fit of ")+curve->title().text());
 
 return result;
 }
@@ -2036,7 +2040,7 @@ double step=double (xn-x0) / double (points-1);
 QString table_name = "Fit"+ QString::number(fitID);	
 QDateTime dt = QDateTime::currentDateTime();
 QString info=dt.toString(Qt::LocalDate)+"\t"+this->caption()+" "+table_name+ ":\n";
-QString label = tr("Order")+" "+QString::number(order)+" "+tr("Polynomial fit of ")+curve->title();
+QString label = tr("Order")+" "+QString::number(order)+" "+tr("Polynomial fit of ")+curve->title().text();
 info+=label+t;
 info+="\nFrom x="+QString::number(x0) +" to x="+QString::number(xn)+"\n";
 QString infoA;
@@ -2658,8 +2662,9 @@ void Graph::addResultCurve(int n, double *x, double *y, int colorIndex,
 						const QString& tableName, const QString& legend)
 {
 QString label=tableName+"_2";
-long curveID = d_plot->insertCurve(label);
-d_plot->setCurvePen(curveID, QPen(color(colorIndex),1)); 
+QwtPlotCurve *c = new QwtPlotCurve(label);
+long curveID = d_plot->insertCurve(c);
+c->setPen(QPen(color(colorIndex),1)); 
 	
 c_type.resize(++n_curves);
 c_type[n_curves-1]=Line;
@@ -2671,7 +2676,7 @@ addLegendItem(label);
 label=tableName+"_1(X),"+label+"(Y)";
 associations<<label;
 
-d_plot->setCurveData(curveID, x, y, n);	
+c->setData(x, y, n);	
 QString text="1\t2\n";
 
 for (int i=0; i<n; i++)
@@ -2744,7 +2749,7 @@ free_vector(c,1,np);
 free_intvector(index,1,np);
 		
 addResultCurve(n, x, s, colIndex, "Smoothed"+QString::number(++fitID), 
-			           tr("Savitzky-Golay smoothing of ")+curve->title());
+			           tr("Savitzky-Golay smoothing of ")+curve->title().text());
 
 QApplication::restoreOverrideCursor();
 }
@@ -2786,7 +2791,7 @@ gsl_fft_halfcomplex_wavetable_free (hc);
 gsl_fft_real_workspace_free (work);
 	
 addResultCurve(n, x, y, colIndex, "Smoothed"+QString::number(++fitID), 
-			   QString::number(points) + " points FFT Smoothing of "+curve->title());
+			   QString::number(points) + " points FFT Smoothing of "+curve->title().text());
 QApplication::restoreOverrideCursor();
 }
 
@@ -2841,7 +2846,7 @@ for (i=n-p2; i<n-1; i++)
 s[n-1]=y[n-1];
 free_vector(y,0,n-1);	
 addResultCurve(n, x, s, colIndex, "Smoothed"+QString::number(++fitID), 
-			   QString::number(points)+" Points Average Smoothing of "+curve->title());
+			   QString::number(points)+" Points Average Smoothing of "+curve->title().text());
 QApplication::restoreOverrideCursor();
 }
 
@@ -2921,7 +2926,7 @@ gsl_fft_halfcomplex_inverse (y, 1, n, hc, work);
 gsl_fft_halfcomplex_wavetable_free (hc);
 gsl_fft_real_workspace_free (work);
 	
-addResultCurve(n, x, y, colIndex, "FilteredFFT"+QString::number(++fitID), label+curve->title());
+addResultCurve(n, x, y, colIndex, "FilteredFFT"+QString::number(++fitID), label+curve->title().text());
 QApplication::restoreOverrideCursor();
 }
 
@@ -3026,7 +3031,7 @@ for (i=0;i<(int)p;i++)
 	par[i]=gsl_vector_get(s->x,i); 
 
 result = outputFitString(n, tolerance, X0, XN, iterations, J, status, par, s, params,
-					   curve->title(), "y=(A1-A2)/(1+exp((x-x0)/dx))+A2", tr("Boltzmann (Sigmoidal)"));
+					   curve->title().text(), "y=(A1-A2)/(1+exp((x-x0)/dx))+A2", tr("Boltzmann (Sigmoidal)"));
 }
 else
 {
@@ -3044,7 +3049,7 @@ for (i=0;i<(int)p;i++)
 	par[i]=gsl_vector_get(s->x,i); 
 
 result = outputFitString(n, tolerance, X0, XN, iterations, solver, status, par, s, params,
-					   curve->title(), "y=(A1-A2)/(1+exp((x-x0)/dx))+A2", tr("Boltzmann (Sigmoidal)"));
+					   curve->title().text(), "y=(A1-A2)/(1+exp((x-x0)/dx))+A2", tr("Boltzmann (Sigmoidal)"));
 }
 
 int n1 = (n<100)?100:n;
@@ -3057,6 +3062,6 @@ for (i=0;i<n1;i++)
 	X[i]=X0+i*step;
 	Y[i]=(par[0]-par[1])/(1+exp((X[i]-par[2])/par[3]))+par[1];
 	}
-addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("Boltzmann (Sigmoidal) fit of ")+ curve->title());
+addResultCurve(n1, X, Y, colorIndex, "Fit"+QString::number(fitID), tr("Boltzmann (Sigmoidal) fit of ")+ curve->title().text());
 return result;
 }

@@ -37,7 +37,7 @@
 #include <qwidgetlist.h>
 
 #include <qwt_plot.h>
-#include <qwt_scale.h>
+#include <qwt_scale_widget.h>
 
 /* XPM */
 static char * vert_scl_xpm[] = {
@@ -2710,7 +2710,7 @@ void axesDialog::setCurrentScale(int axisPos)
 int axis = -1;
 if (generalDialog->currentPage()==(QWidget*)scalesPage)
 	{
-	if (axisPos == QwtScale::Left || axisPos == QwtScale::Right)
+	if (axisPos == QwtScaleDraw::LeftScale || axisPos == QwtScaleDraw::RightScale)
 		axis = 1;
 	else
 		axis = 0;
@@ -2720,19 +2720,19 @@ else if (generalDialog->currentPage()==(QWidget*)axesPage)
 	{
 	switch (axisPos)
 		{
-		case QwtScale::Left:
+		case QwtScaleDraw::LeftScale:
 			axis = 1;
 		break;
 
-		case QwtScale::Bottom:
+		case QwtScaleDraw::BottomScale:
 			axis = 0;
 		break;
 
-		case QwtScale::Right:
+		case QwtScaleDraw::RightScale:
 			axis = 3;
 		break;
 
-		case QwtScale::Top:
+		case QwtScaleDraw::TopScale:
 			axis = 2;
 		break;
 		}

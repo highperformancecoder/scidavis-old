@@ -4,7 +4,7 @@
 #include <qpaintdevicemetrics.h>
 
 #include <qwt_plot.h>
-#include <qwt_scale.h>
+#include <qwt_scale_widget.h>
 #include <qwt_painter.h>
 #include <qwt_plot_canvas.h>
 #include <qwt_plot_layout.h>
@@ -19,7 +19,7 @@
 #endif
 
 LineMarker::LineMarker(QwtPlot *plot):
-    QwtPlotMarker(plot)
+    QwtPlotMarker()
 {
 endArrow=true;
 filledArrow=true;
@@ -27,21 +27,18 @@ d_headAngle=45;
 d_headLength=4;
 }
 
-void LineMarker::draw(QPainter *p, int, int, const QRect &rect)
+void LineMarker::draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r) const
 {	
 	int x0,y0,x1,y1;
 	if ( p->device()->isExtDev() )
 		{	
-		QwtPlot *plot = (QwtPlot *)parentPlot();
-		const QwtDiMap xMap = plot->canvasMap(QwtPlot::xBottom);
-		const QwtDiMap yMap = plot->canvasMap(QwtPlot::yLeft);
-	
+		QwtPlot *plot = this->plot();	
 		double r0_x=xMap.invTransform(start.x());
 		double r0_y=yMap.invTransform(start.y());	
 		double r1_x=xMap.invTransform(end.x());
 		double r1_y=yMap.invTransform(end.y());
 			
-		QwtDiMap map=mapCanvasToDevice(p, plot, QwtPlot::xBottom);
+		QwtScaleMap map=mapCanvasToDevice(p, plot, QwtPlot::xBottom);
 		x0=map.transform(r0_x);
 		x1=map.transform(r1_x);
 	
@@ -51,11 +48,11 @@ void LineMarker::draw(QPainter *p, int, int, const QRect &rect)
 		}		
 	else	
 		{
-		int clw = parentPlot()->canvas()->lineWidth();
-		x0=start.x() + rect.x() - clw;
-		y0=start.y() + rect.y() - clw;
-		x1=end.x() + rect.x() - clw;
-		y1=end.y() + rect.y() - clw;
+		const int clw = 0;//this->plot()->canvas()->lineWidth();
+		x0=start.x() + r.x() - clw;
+		y0=start.y() + r.y() - clw;
+		x1=end.x() + r.x() - clw;
+		y1=end.y() + r.y() - clw;
 		}
 	
 	p->save();
@@ -68,7 +65,7 @@ void LineMarker::draw(QPainter *p, int, int, const QRect &rect)
 		{
 		p->save();
 		p->translate(x1,y1);
-		double t=teta();
+		const double t = teta();
 		p->rotate(-t);
 
 		const QPointArray endArray(3);	
@@ -90,7 +87,7 @@ void LineMarker::draw(QPainter *p, int, int, const QRect &rect)
 		{
 		p->save();
 		p->translate(x0,y0);
-		double t=teta();
+		const double t = teta();
 		p->rotate(-t);
 
 		const QPointArray startArray(3);	
@@ -108,7 +105,7 @@ void LineMarker::draw(QPainter *p, int, int, const QRect &rect)
 		}
 }
 
-double LineMarker::teta()
+double LineMarker::teta() const
 {	
 int x0,y0,x1,y1;
 x0=start.x();
@@ -273,7 +270,7 @@ if (filledArrow == fill)
 filledArrow=fill;
 }
 
-QwtDiMap LineMarker::mapCanvasToDevice(QPainter *p, QwtPlot *plot, int axis) 
+QwtScaleMap LineMarker::mapCanvasToDevice(QPainter *p, QwtPlot *plot, int axis) 
 {
 QwtPlotLayout *pl=plot->plotLayout ();
 	
@@ -281,10 +278,10 @@ QPaintDeviceMetrics pdmFrom(plot);
 QPaintDeviceMetrics pdmTo(p->device());	
 	
 QwtMetricsMap metricsMap;
-metricsMap.setMetrics(pdmFrom, pdmTo);
+//metricsMap.setMetrics(pdmFrom, pdmTo);
 
-QwtDiMap map;
-double from=0.0, to=0.0;		
+QwtScaleMap map;
+/*double from=0.0, to=0.0;		
 if (plot->axisEnabled(axis))
 	{
 	const QwtScaleDiv *scaleDiv =plot->axisScale(axis);
@@ -312,7 +309,7 @@ else
     const QRect &canvasRect = pl->canvasRect();
     if ( axis ==QwtPlot::yLeft)
          {
-		 QwtDiMap yMap = plot->canvasMap(QwtPlot::yLeft);
+		 QwtScaleMap yMap = plot->canvasMap(QwtPlot::yLeft);
 		 map.setDblRange(yMap.d1(),yMap.d2(),yMap.logarithmic());
 			 
          from = metricsMap.layoutToDeviceY(canvasRect.bottom() - margin);
@@ -320,13 +317,13 @@ else
          }
     else
         {
-		QwtDiMap xMap = plot->canvasMap(QwtPlot::xBottom);
+		QwtScaleMap xMap = plot->canvasMap(QwtPlot::xBottom);
 		map.setDblRange(xMap.d1(),xMap.d2(),xMap.logarithmic());
 			
         from = metricsMap.layoutToDeviceX(canvasRect.left() + margin);
         to = metricsMap.layoutToDeviceX(canvasRect.right() - margin);
         }
 	}      	
-map.setIntRange(qwtInt(from), qwtInt(to));	
+map.setIntRange(qwtInt(from), qwtInt(to));	*/
 return map;	
 }

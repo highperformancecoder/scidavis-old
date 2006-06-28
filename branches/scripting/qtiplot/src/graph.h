@@ -4,15 +4,22 @@
 #include <qprinter.h>
 #include <qpainter.h>
 #include <qpointarray.h>
-#include <qwt_plot.h>
+
 #include <gsl/gsl_multifit_nlin.h>
 #include <gsl/gsl_multimin.h>
+
+#include <qwt_plot.h>
+#include <qwt_plot_marker.h>
+#include <qwt_plot_curve.h>
 
 #include "plotDialog.h"
 #include "worksheet.h"
 #include "axesDialog.h"
 
+class QwtPlotCurve;
 class QwtPlotZoomer;
+class QwtScaleMap;
+
 class QwtPieCurve;	
 class Table;
 class LegendMarker;
@@ -97,6 +104,7 @@ public slots:
 	
 	 void print();
 	 void copyImage();
+	 void exportToSVG(const QString& fname);
 	 void exportToEPS(const QString& fname);
 	 void exportToEPS(const QString& fname, int res, QPrinter::Orientation o, 
 					 QPrinter::PageSize size, QPrinter::ColorMode col);
@@ -216,7 +224,7 @@ public slots:
 	 QRect copiedMarkerRect(){return QRect(auxMrkStart, auxMrkEnd);};
 	 
 	 //legendMarker
-	 QwtArray<long> textMarkerKeys();
+	 QValueList<int> textMarkerKeys();
 	 LegendMarker* textMarker(long id);
 
 	 void addTimeStamp(const QFont& fnt, int frameStyle);
@@ -669,10 +677,10 @@ private:
 	QStringList axesFormatInfo;//stores columns used for axes with text labels or  time/date format info
 	QValueList <int> axisType;
 	QValueList <int> lblFormat; //stores label format used for the axes
-	QwtDiMap xCanvasMap, yCanvasMap;
+	QwtScaleMap xCanvasMap, yCanvasMap;
 	gridOptions grid;
 	MarkerType selectedMarkerType;
-	QwtMarker::LineStyle mrklStyle;
+	QwtPlotMarker::LineStyle mrklStyle;
 	QStringList scales,associations;
 	QMemArray<int> c_type; //curve types
 	QMemArray<long> c_keys; // arrows on plot keys
@@ -713,8 +721,8 @@ class PrintFilter: public QwtPlotPrintFilter
 public:
     PrintFilter(QwtPlot *insertCurve) 
 	{
-	gridMajorColor=insertCurve->gridMajPen().color();
-	gridMinorColor=insertCurve->gridMinPen().color();		
+	//gridMajorColor=insertCurve->gridMajPen().color();
+	//gridMinorColor=insertCurve->gridMinPen().color();		
 	};
 
 	virtual QColor color(const QColor &c, Item item, int) const

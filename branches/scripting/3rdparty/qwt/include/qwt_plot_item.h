@@ -7,12 +7,21 @@
  * modify it under the terms of the Qwt License, Version 1.0
  *****************************************************************************/
 
-#ifndef QWT_PLOT_ITEM
-#define QWT_PLOT_ITEM
+#ifndef QWT_PLOT_ITEM_H
+#define QWT_PLOT_ITEM_H
 
 #include "qwt_global.h"
+#include "qwt_text.h"
+#include "qwt_double_rect.h"
 
+class QString;
+class QRect;
+class QPainter;
+class QWidget;
 class QwtPlot;
+class QwtLegend;
+class QwtScaleMap;
+class QwtScaleDiv;
 
 /*!
   \brief Base class for items on the plot canvas
@@ -21,37 +30,63 @@ class QwtPlot;
 class QWT_EXPORT QwtPlotItem
 {
 public:
-    QwtPlotItem(QwtPlot *parent, bool nbl = TRUE);
+    enum RttiValues
+    { 
+        Rtti_PlotItem = 0,
+
+        Rtti_PlotGrid,
+        Rtti_PlotMarker,
+        Rtti_PlotCurve,
+        Rtti_PlotHistogram,
+        Rtti_PlotSpectrogram,
+        Rtti_PlotSVG,
+
+        Rtti_PlotUserItem = 1000
+    };
+
+    enum ItemAttribute
+    {
+        Legend = 1,
+        AutoScale = 2
+    };
+
+#if QT_VERSION >= 0x040000
+    enum RenderHint
+    {
+        RenderAntialiased = 1
+    };
+#endif
+
+    explicit QwtPlotItem(const QwtText &title = QwtText());
     virtual ~QwtPlotItem();
 
-    void reparent(QwtPlot *plot);
+    void attach(QwtPlot *plot);
+    void detach() { attach(NULL); }
 
-    //! Return parent plot
-    QwtPlot *parentPlot() { return d_parent; }
-
-    //! Return parent plot
-    const QwtPlot *parentPlot() const { return d_parent; }
+    QwtPlot *plot() const;
     
-    virtual void setEnabled(bool);
-    bool enabled() const;
+    void setTitle(const QString &title);
+    void setTitle(const QwtText &title);
+    const QwtText &title() const;
 
-    virtual void itemChanged();
+    virtual int rtti() const;
 
-private:
-    bool d_enabled;
-    QwtPlot *d_parent;
-};
-            
+    void setItemAttribute(ItemAttribute, bool on = true);
+    bool testItemAttribute(ItemAttribute) const;
 
-/*!
-  \brief Base class for items on the plot canvas,
-  that are attached to x and y axes.
-*/
-class QWT_EXPORT QwtPlotMappedItem : public QwtPlotItem 
-{
-public:
-    QwtPlotMappedItem(QwtPlot *parent, bool nbl = TRUE);
-    
+#if QT_VERSION >= 0x040000
+    void setRenderHint(RenderHint, bool on = true);
+    bool testRenderHint(RenderHint) const;
+#endif
+
+    double z() const; 
+    void setZ(double z);
+
+    void show();
+    void hide();
+    virtual void setVisible(bool);
+    bool isVisible () const;
+
     void setAxis(int xAxis, int yAxis);
 
     void setXAxis(int axis);
@@ -60,9 +95,35 @@ public:
     void setYAxis(int axis);
     int yAxis() const;
 
-private:
-    int d_xAxis;
-    int d_yAxis;
-};
+    virtual void itemChanged();
 
+    virtual void draw(QPainter *p, 
+        const QwtScaleMap &xMap, const QwtScaleMap &yMap,
+        const QRect &rect) const = 0;
+
+    virtual QwtDoubleRect boundingRect() const;
+
+    virtual void updateLegend(QwtLegend *) const;
+    virtual void updateScaleDiv(const QwtScaleDiv&,
+        const QwtScaleDiv&);
+
+    virtual QWidget *legendItem() const;
+
+    QwtDoubleRect scaleRect(const QwtScaleMap &, const QwtScaleMap &) const;
+    QRect paintRect(const QwtScaleMap &, const QwtScaleMap &) const;
+    
+    QRect transform(const QwtScaleMap &, const QwtScaleMap &, 
+        const QwtDoubleRect&) const; 
+    QwtDoubleRect invTransform(const QwtScaleMap &, const QwtScaleMap &,
+        const QRect&) const; 
+
+private:
+    // Disabled copy constructor and operator=
+    QwtPlotItem( const QwtPlotItem & );
+    QwtPlotItem &operator=( const QwtPlotItem & );
+
+    class PrivateData;
+    PrivateData *d_data;
+};
+            
 #endif

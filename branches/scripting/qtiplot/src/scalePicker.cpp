@@ -1,7 +1,8 @@
 #include "scalePicker.h"
 #include <qpainter.h>
 #include <qwt_plot.h>
-#include <qwt_scale.h>
+#include <qwt_scale_widget.h>
+#include <qwt_text_label.h>
 
 #include <qmessagebox.h>
 #include <qapplication.h>
@@ -13,7 +14,7 @@ ScalePicker::ScalePicker(QwtPlot *plot):
 	
     for ( uint i = 0; i < QwtPlot::axisCnt; i++ )
 		{
-        QwtScale *scale = (QwtScale *)plot->axis(i);
+        QwtScaleWidget *scale = (QwtScaleWidget *)plot->axisWidget(i);
         if ( scale )
             scale->installEventFilter(this);
 		}
@@ -21,13 +22,13 @@ ScalePicker::ScalePicker(QwtPlot *plot):
 
 bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 {  
-	if ( object->inherits("QwtScale") && e->type() == QEvent::MouseButtonDblClick)
+	if ( object->inherits("QwtScaleWidget") && e->type() == QEvent::MouseButtonDblClick)
     	{
-		mouseDblClicked((const QwtScale *)object, ((QMouseEvent *)e)->pos());
+		mouseDblClicked((const QwtScaleWidget *)object, ((QMouseEvent *)e)->pos());
         return TRUE;
     	}
 
-	if ( object->inherits("QwtScale") && e->type() == QEvent::MouseButtonPress)
+	if ( object->inherits("QwtScaleWidget") && e->type() == QEvent::MouseButtonPress)
     	{
 		const QMouseEvent *me = (const QMouseEvent *)e;	
 		if (me->button()==QEvent::LeftButton)
@@ -38,7 +39,7 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 
 			if (plot()->margin() < 2 && plot()->lineWidth() < 2)
 				{
-				QRect r = ((const QwtScale *)object)->rect();
+				QRect r = ((const QwtScaleWidget *)object)->rect();
 				r.addCoords(2, 2, -2, -2);
 				if (!r.contains(me->pos()))
 					emit highlightGraph();
@@ -47,12 +48,12 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 			}
 		else if (me->button() == QEvent::RightButton)
 			{
-			mouseRightClicked((const QwtScale *)object, me->pos());
+			mouseRightClicked((const QwtScaleWidget *)object, me->pos());
 			return TRUE;
 			}
     	}
 	
-	if ( object->inherits("QwtScale") && e->type() == QEvent::MouseMove)
+	if ( object->inherits("QwtScaleWidget") && e->type() == QEvent::MouseMove)
     	{	
 		const QMouseEvent *me = (const QMouseEvent *)e;			
 
@@ -65,7 +66,7 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
         return TRUE;
    	 }
 	
-	if ( object->inherits("QwtScale") && e->type() == QEvent::MouseButtonRelease)
+	if ( object->inherits("QwtScaleWidget") && e->type() == QEvent::MouseButtonRelease)
     	{
 		if (movedGraph)
 			{
@@ -79,7 +80,7 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 return QObject::eventFilter(object, e);
 }
 
-void ScalePicker::mouseDblClicked(const QwtScale *scale, const QPoint &pos) 
+void ScalePicker::mouseDblClicked(const QwtScaleWidget *scale, const QPoint &pos) 
 {
 QRect rect = scaleRect(scale);
 
@@ -88,28 +89,28 @@ rect.setRect(rect.x() - margin, rect.y() - margin, rect.width() + 2 * margin, re
 
 if ( rect.contains(pos) ) 
 	{
-	emit axisDblClicked(scale->position());
+	emit axisDblClicked(scale->alignment());
 	}
 else
 	{// Click on the title
-    switch(scale->position())   
+    switch(scale->alignment())   
         {
-        case QwtScale::Left:
+        case QwtScaleDraw::LeftScale:
             {
 			emit yAxisTitleDblClicked();
             break;
             }
-        case QwtScale::Right:
+        case QwtScaleDraw::RightScale:
             {
 			emit rightAxisTitleDblClicked();
             break;
             }
-        case QwtScale::Bottom:
+        case QwtScaleDraw::BottomScale:
             {
 			emit xAxisTitleDblClicked();
             break;
             }
-        case QwtScale::Top:
+        case QwtScaleDraw::TopScale:
             {
 			emit topAxisTitleDblClicked();
             break;
@@ -118,7 +119,7 @@ else
 	}
 }
 
-void ScalePicker::mouseRightClicked(const QwtScale *scale, const QPoint &pos) 
+void ScalePicker::mouseRightClicked(const QwtScaleWidget *scale, const QPoint &pos) 
 {
 QRect rect = scaleRect(scale);
 
@@ -127,28 +128,28 @@ rect.setRect(rect.x() - margin, rect.y() - margin, rect.width() + 2 * margin, re
 
 if (rect.contains(pos)) 
 	{
-	if (scale->position() == QwtScale::Left || scale->position() == QwtScale::Right)
-			emit axisRightClicked(scale->position());
-	else if (scale->position() == QwtScale::Top)
-		emit axisRightClicked(QwtScale::Bottom);
-	else if (scale->position() == QwtScale::Bottom)
-		emit axisRightClicked(QwtScale::Top);
+	if (scale->alignment() == QwtScaleDraw::LeftScale || scale->alignment() == QwtScaleDraw::RightScale)
+		emit axisRightClicked(scale->alignment());
+	else if (scale->alignment() == QwtScaleDraw::TopScale)
+		emit axisRightClicked(QwtScaleDraw::BottomScale);
+	else if (scale->alignment() == QwtScaleDraw::BottomScale)
+		emit axisRightClicked(QwtScaleDraw::TopScale);
 	}
 else
 	{
-	if (scale->position() == QwtScale::Left || scale->position() == QwtScale::Right)
-		emit axisTitleRightClicked(scale->position());
-	else if (scale->position() == QwtScale::Top)
-		emit axisTitleRightClicked(QwtScale::Bottom);
-	else if (scale->position() == QwtScale::Bottom)
-		emit axisTitleRightClicked(QwtScale::Top);
+	if (scale->alignment() == QwtScaleDraw::LeftScale || scale->alignment() == QwtScaleDraw::RightScale)
+		emit axisTitleRightClicked(scale->alignment());
+	else if (scale->alignment() == QwtScaleDraw::TopScale)
+		emit axisTitleRightClicked(QwtScaleDraw::BottomScale);
+	else if (scale->alignment() == QwtScaleDraw::BottomScale)
+		emit axisTitleRightClicked(QwtScaleDraw::TopScale);
 	}
 }
 
 // The rect of a scale without the title
-QRect ScalePicker::scaleRect(const QwtScale *scale) const
+QRect ScalePicker::scaleRect(const QwtScaleWidget *scale) const
 {
-    const int bld = scale->baseLineDist();
+    const int bld = scale->margin();
     const int mjt = scale->scaleDraw()->majTickLength();
     const int sbd = scale->startBorderDist();
     const int ebd = scale->endBorderDist();
@@ -156,9 +157,9 @@ QRect ScalePicker::scaleRect(const QwtScale *scale) const
 	int mlw, mlh;
 
     QRect rect;
-    switch(scale->position())   
+    switch(scale->alignment())   
     {
-        case QwtScale::Left:
+        case QwtScaleDraw::LeftScale:
         {
 			mlw=maxLabelWidth(scale);
 			
@@ -167,21 +168,21 @@ QRect ScalePicker::scaleRect(const QwtScale *scale) const
 			
             break;
         }
-        case QwtScale::Right:
+        case QwtScaleDraw::RightScale:
         {
 			mlw=maxLabelWidth(scale);
 			rect.setRect(bld, sbd,
                  mjt+mlw, scale->height() - sbd - ebd);
             break;
         }
-        case QwtScale::Bottom:
+        case QwtScaleDraw::BottomScale:
         {
 			mlh=maxLabelHeight(scale);
 			rect.setRect(sbd, bld, 
                 scale->width() - sbd - ebd, mjt+mlh);
 	        break;
         }
-        case QwtScale::Top:
+        case QwtScaleDraw::TopScale:
         {
 			mlh=maxLabelHeight(scale);
 			rect.setRect(sbd, scale->height() - bld - mjt-mlh, 
@@ -192,7 +193,7 @@ QRect ScalePicker::scaleRect(const QwtScale *scale) const
     return rect;
 }
 
-int ScalePicker::maxLabelWidth(const QwtScale *scale) const
+int ScalePicker::maxLabelWidth(const QwtScaleWidget *scale) const
 {
 	QFontMetrics fm(scale->font());
 	const QwtScaleDraw * scaleDraw=scale->scaleDraw ();
@@ -200,7 +201,7 @@ int ScalePicker::maxLabelWidth(const QwtScale *scale) const
 	const double step_eps = 1.0e-6;
     int maxWidth = 0;
 
-    for (uint i = 0; i < scaleDiv.majCnt(); i++)
+    /*for (uint i = 0; i < scaleDiv.majCnt(); i++)
     {
         double val = scaleDiv.majMark(i);
 
@@ -214,12 +215,12 @@ int ScalePicker::maxLabelWidth(const QwtScale *scale) const
         const int w = fm.boundingRect(scaleDraw->label(val)).width();
         if ( w > maxWidth )
             maxWidth = w;
-    }
+    }*/
 
     return maxWidth;
 }
 
-int ScalePicker::maxLabelHeight(const QwtScale *scale) const
+int ScalePicker::maxLabelHeight(const QwtScaleWidget *scale) const
 {
 	QFontMetrics fm(scale->font());
 	const QwtScaleDraw * scaleDraw=scale->scaleDraw ();
@@ -227,14 +228,14 @@ int ScalePicker::maxLabelHeight(const QwtScale *scale) const
    
 	int maxHeight = 0;
 
-    for (uint i = 0; i < scaleDiv.majCnt(); i++)
+    /*for (uint i = 0; i < scaleDiv.majCnt(); i++)
     {
         double val = scaleDiv.majMark(i);
 
         const int w = fm.boundingRect(scaleDraw->label(val)).height();
         if ( w > maxHeight )
             maxHeight = w;
-    }
+    }*/
 	
     return maxHeight;
 }
@@ -243,7 +244,7 @@ void ScalePicker::refresh()
 {	
     for ( uint i = 0; i < QwtPlot::axisCnt; i++ )
     {
-        QwtScale *scale = (QwtScale *)plot()->axis(i);
+        QwtScaleWidget *scale = (QwtScaleWidget *)plot()->axisWidget(i);
         if ( scale )
             scale->installEventFilter(this);
     }
@@ -254,7 +255,7 @@ TitlePicker::TitlePicker(QwtPlot *plot):
 {
 movedGraph=FALSE;
 
-title = (QLabel *)plot->titleLabel();
+title = (QwtTextLabel *)plot->titleLabel();
 title->setFocusPolicy(QWidget::StrongFocus);
 if (title)
 	title->installEventFilter(this);
@@ -265,13 +266,13 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
 	if (object != (QObject *)title)
 		return FALSE;
 	
-    if ( object->inherits("QLabel") && e->type() == QEvent::MouseButtonDblClick)
+    if ( object->inherits("QwtTextLabel") && e->type() == QEvent::MouseButtonDblClick)
 		{
 		emit doubleClicked();
         return TRUE;
 		}
 
-	if ( object->inherits("QLabel") &&  e->type() == QEvent::MouseButtonPress )
+	if ( object->inherits("QwtTextLabel") &&  e->type() == QEvent::MouseButtonPress )
 		{
 		const QMouseEvent *me = (const QMouseEvent *)e;	
 		presspos = me->pos();
@@ -292,7 +293,7 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
 		return TRUE;
 		}
 
-	if ( object->inherits("QLabel") &&  e->type() == QEvent::MouseMove)
+	if ( object->inherits("QwtTextLabel") &&  e->type() == QEvent::MouseMove)
 		{	
 		const QMouseEvent *me = (const QMouseEvent *)e;		
 		if ((presspos - me->pos()).manhattanLength() > QApplication::startDragDistance())
@@ -303,7 +304,7 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
         return TRUE;
 		}
 	
-	if ( object->inherits("QLabel") && e->type() == QEvent::MouseButtonRelease)
+	if ( object->inherits("QwtTextLabel") && e->type() == QEvent::MouseButtonRelease)
 		{
 		const QMouseEvent *me = (const QMouseEvent *)e;
 		if (me->button()== QEvent::LeftButton)
@@ -318,7 +319,7 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
 			}
 		}
 
-	if ( object->inherits("QLabel") && 
+	if ( object->inherits("QwtTextLabel") && 
         e->type() == QEvent::KeyPress)
 		{
 		switch (((const QKeyEvent *)e)->key()) 

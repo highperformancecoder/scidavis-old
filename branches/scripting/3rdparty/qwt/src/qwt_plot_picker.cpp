@@ -11,8 +11,9 @@
 
 #include "qwt_plot.h"
 #include "qwt_double_rect.h"
+#include "qwt_scale_div.h"
 #include "qwt_painter.h"
-#include "qwt_array.h"
+#include "qwt_scale_map.h"
 #include "qwt_plot_picker.h"
 
 /*!
@@ -24,19 +25,12 @@
   enabled, it is set to QwtPlot::yLeft.
 
   \param canvas Plot canvas to observe, also the parent object
-  \param name Object name
-
-  \warning Calling QwtPlot::setAxisScale() while QwtPlot::autoReplot() is FALSE
-           leaves the axis in an 'intermediate' state.
-           In this case, to prevent buggy behaviour, you must call
-           QwtPlot::replot() before calling QwtPlotPicker().
-           This quirk will be removed in a future release.
 
   \sa QwtPlot::autoReplot(), QwtPlot::replot(), QwtPlotPicker::scaleRect()
 */
   
-QwtPlotPicker::QwtPlotPicker(QwtPlotCanvas *canvas, const char *name):
-    QwtPicker(canvas, name),
+QwtPlotPicker::QwtPlotPicker(QwtPlotCanvas *canvas):
+    QwtPicker(canvas),
     d_xAxis(-1),
     d_yAxis(-1)
 {
@@ -70,19 +64,11 @@ QwtPlotPicker::QwtPlotPicker(QwtPlotCanvas *canvas, const char *name):
   \param xAxis Set the x axis of the picker
   \param yAxis Set the y axis of the picker
   \param canvas Plot canvas to observe, also the parent object
-  \param name Object name
-
-  \warning Calling QwtPlot::setAxisScale() while QwtPlot::autoReplot() is FALSE
-           leaves the axis in an 'intermediate' state.
-           In this case, to prevent buggy behaviour, you must call
-           QwtPlot::replot() before calling QwtPlotPicker().
-           This quirk will be removed in a future release.
 
   \sa QwtPlot::autoReplot(), QwtPlot::replot(), QwtPlotPicker::scaleRect()
 */
-QwtPlotPicker::QwtPlotPicker(int xAxis, int yAxis, 
-        QwtPlotCanvas *canvas, const char *name):
-    QwtPicker(canvas, name),
+QwtPlotPicker::QwtPlotPicker(int xAxis, int yAxis, QwtPlotCanvas *canvas):
+    QwtPicker(canvas),
     d_xAxis(xAxis),
     d_yAxis(yAxis)
 {
@@ -96,25 +82,18 @@ QwtPlotPicker::QwtPlotPicker(int xAxis, int yAxis,
   \param selectionFlags Or´d value of SelectionType, RectSelectionType and
                         SelectionMode
   \param rubberBand Rubberband style
-  \param cursorLabelMode Cursor label mode
+  \param trackerMode Tracker mode
   \param canvas Plot canvas to observe, also the parent object
-  \param name Object name
 
   \sa QwtPicker, QwtPicker::setSelectionFlags(), QwtPicker::setRubberBand(),
-      QwtPicker::setCursorLabelMode
-
-  \warning Calling QwtPlot::setAxisScale() while QwtPlot::autoReplot() is FALSE
-           leaves the axis in an 'intermediate' state.
-           In this case, to prevent buggy behaviour, you must call
-           QwtPlot::replot() before calling QwtPlotPicker().
-           This quirk will be removed in a future release.
+      QwtPicker::setTrackerMode
 
   \sa QwtPlot::autoReplot(), QwtPlot::replot(), QwtPlotPicker::scaleRect()
 */
 QwtPlotPicker::QwtPlotPicker(int xAxis, int yAxis, int selectionFlags,
-        RubberBand rubberBand, DisplayMode cursorLabelMode,
-        QwtPlotCanvas *canvas, const char *name):
-    QwtPicker(selectionFlags, rubberBand, cursorLabelMode, canvas, name),
+        RubberBand rubberBand, DisplayMode trackerMode,
+        QwtPlotCanvas *canvas):
+    QwtPicker(selectionFlags, rubberBand, trackerMode, canvas),
     d_xAxis(xAxis),
     d_yAxis(yAxis)
 {
@@ -159,26 +138,17 @@ const QwtPlot *QwtPlotPicker::plot() const
 /*!
   Return normalized bounding rect of the axes
 
-  \warning Calling QwtPlot::setAxisScale() while QwtPlot::autoReplot() is FALSE
-           leaves the axis in an 'intermediate' state.
-           In this case, to prevent buggy behaviour, you must call
-           QwtPlot::replot() before calling QwtPlotPicker::scaleRect().
-           This quirk will be removed in a future release.
-
   \sa QwtPlot::autoReplot(), QwtPlot::replot().
 */
 QwtDoubleRect QwtPlotPicker::scaleRect() const
 {
-    const QwtPlot *plt = plot();
+    const QwtScaleDiv *xs = plot()->axisScaleDiv(xAxis());
+    const QwtScaleDiv *ys = plot()->axisScaleDiv(yAxis());
 
-    const QwtDoubleRect rect(
-        plt->axisScale(xAxis())->lBound(),
-        plt->axisScale(xAxis())->hBound(),
-        plt->axisScale(yAxis())->lBound(),
-        plt->axisScale(yAxis())->hBound()
-    );
+    const QwtDoubleRect rect( xs->lBound(), ys->lBound(), 
+        xs->range(), ys->range() );
 
-    return rect.normalize();
+    return rect.normalized();
 }
 
 /*!
@@ -218,9 +188,9 @@ int QwtPlotPicker::yAxis() const
   \param pos Position in pixel coordinates
   \return Position string
 */
-QString QwtPlotPicker::cursorLabel(const QPoint &pos) const
+QwtText QwtPlotPicker::trackerText(const QPoint &pos) const
 {
-    return cursorLabel(invTransform(pos));
+    return trackerText(invTransform(pos));
 }
 
 /*!
@@ -235,7 +205,7 @@ QString QwtPlotPicker::cursorLabel(const QPoint &pos) const
   \param pos Position
   \return Position string
 */
-QString QwtPlotPicker::cursorLabel(const QwtDoublePoint &pos) const
+QwtText QwtPlotPicker::trackerText(const QwtDoublePoint &pos) const
 {
     switch(rubberBand())
     {
@@ -246,11 +216,11 @@ QString QwtPlotPicker::cursorLabel(const QwtDoublePoint &pos) const
         default:
             return QString().sprintf("%.4f, %.4f", pos.x(), pos.y());
     }
-    return QString::null; // make some dumb compilers happy
+    return QwtText(); // make some dumb compilers happy
 }
 
 /*! 
-  Append a point to the selection and update rubberband and cursor label.
+  Append a point to the selection and update rubberband and tracker.
     
   \param pos Additional point
   \sa isActive, begin(), end(), move(), appended()
@@ -282,24 +252,24 @@ void QwtPlotPicker::move(const QPoint &pos)
 /*!
   Close a selection setting the state to inactive.
 
-  \param ok If TRUE, complete the selection and emit selected signals
+  \param ok If true, complete the selection and emit selected signals
             otherwise discard the selection.
-  \return TRUE if the selection is accepted, FALSE otherwise
+  \return true if the selection is accepted, false otherwise
 */
 
 bool QwtPlotPicker::end(bool ok)
 {
     ok = QwtPicker::end(ok);
     if ( !ok )
-        return FALSE;
+        return false;
 
     QwtPlot *plot = QwtPlotPicker::plot();
     if ( !plot )
-        return FALSE;
+        return false;
 
-    const QPointArray &pa = selection();
+    const QwtPolygon &pa = selection();
     if ( pa.count() == 0 )
-        return FALSE;
+        return false;
 
     if ( selectionFlags() & PointSelection )
     {
@@ -318,15 +288,15 @@ bool QwtPlotPicker::end(bool ok)
         }
         else if ( selectionFlags() & CenterToRadius )
         {
-            const int radius = QMAX(QABS(p2.x() - p1.x()),
-                QABS(p2.y() - p1.y()));
+            const int radius = qwtMax(qwtAbs(p2.x() - p1.x()),
+                qwtAbs(p2.y() - p1.y()));
             p2.setX(p1.x() + radius);
             p2.setY(p1.y() + radius);
             p1.setX(p1.x() - radius);
             p1.setY(p1.y() - radius);
         }
 
-        emit selected(invTransform(QRect(p1, p2)).normalize());
+        emit selected(invTransform(QRect(p1, p2)).normalized());
     }
     else 
     {
@@ -337,7 +307,7 @@ bool QwtPlotPicker::end(bool ok)
         emit selected(dpa);
     }
 
-    return TRUE;
+    return true;
 }
 
 /*!
@@ -348,15 +318,16 @@ bool QwtPlotPicker::end(bool ok)
 */
 QwtDoubleRect QwtPlotPicker::invTransform(const QRect &rect) const
 {
-    QwtDiMap xMap = plot()->canvasMap(d_xAxis);
-    QwtDiMap yMap = plot()->canvasMap(d_yAxis);
+    QwtScaleMap xMap = plot()->canvasMap(d_xAxis);
+    QwtScaleMap yMap = plot()->canvasMap(d_yAxis);
 
-    return QwtDoubleRect(
-        xMap.invTransform(rect.left()),
-        xMap.invTransform(rect.right()),
-        yMap.invTransform(rect.top()),
-        yMap.invTransform(rect.bottom())
-    );
+    const double left = xMap.invTransform(rect.left());
+    const double right = xMap.invTransform(rect.right());
+    const double top = yMap.invTransform(rect.top());
+    const double bottom = yMap.invTransform(rect.bottom());
+
+    return QwtDoubleRect(left, top,
+        right - left, bottom - top);
 }
 
 /*!
@@ -366,15 +337,15 @@ QwtDoubleRect QwtPlotPicker::invTransform(const QRect &rect) const
 */
 QRect QwtPlotPicker::transform(const QwtDoubleRect &rect) const
 {
-    QwtDiMap xMap = plot()->canvasMap(d_xAxis);
-    QwtDiMap yMap = plot()->canvasMap(d_yAxis);
+    QwtScaleMap xMap = plot()->canvasMap(d_xAxis);
+    QwtScaleMap yMap = plot()->canvasMap(d_yAxis);
 
-    const int x1 = xMap.transform(rect.x1());
-    const int x2 = xMap.transform(rect.x2());
-    const int y1 = yMap.transform(rect.y1());
-    const int y2 = yMap.transform(rect.y2());
+    const int left = xMap.transform(rect.left());
+    const int right = xMap.transform(rect.right());
+    const int top = yMap.transform(rect.top());
+    const int bottom = yMap.transform(rect.bottom());
 
-    return QRect(x1, y1, x2 - x1, y2 - y1);
+    return QRect(left, top, right - left, bottom - top);
 }
 
 /*!
@@ -384,8 +355,8 @@ QRect QwtPlotPicker::transform(const QwtDoubleRect &rect) const
 */
 QwtDoublePoint QwtPlotPicker::invTransform(const QPoint &pos) const
 {
-    QwtDiMap xMap = plot()->canvasMap(d_xAxis);
-    QwtDiMap yMap = plot()->canvasMap(d_yAxis);
+    QwtScaleMap xMap = plot()->canvasMap(d_xAxis);
+    QwtScaleMap yMap = plot()->canvasMap(d_yAxis);
 
     return QwtDoublePoint(
         xMap.invTransform(pos.x()),
@@ -400,17 +371,11 @@ QwtDoublePoint QwtPlotPicker::invTransform(const QPoint &pos) const
 */
 QPoint QwtPlotPicker::transform(const QwtDoublePoint &pos) const
 {
-    QwtDiMap xMap = plot()->canvasMap(d_xAxis);
-    QwtDiMap yMap = plot()->canvasMap(d_yAxis);
+    QwtScaleMap xMap = plot()->canvasMap(d_xAxis);
+    QwtScaleMap yMap = plot()->canvasMap(d_yAxis);
 
     return QPoint(
         xMap.transform(pos.x()),
         yMap.transform(pos.y())
     );
 }
-
-// Local Variables:
-// mode: C++
-// c-file-style: "stroustrup"
-// indent-tabs-mode: nil
-// End:

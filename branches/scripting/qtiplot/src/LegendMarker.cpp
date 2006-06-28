@@ -3,34 +3,39 @@
 #include "graph.h"
 #include "pie.h"
 #include "VectorCurve.h"
+#include "plot.h"
 
 #include <qpainter.h>
 #include <qpaintdevicemetrics.h>
 
 #include <qwt_plot.h>
-#include <qwt_scale.h>
+#include <qwt_scale_widget.h>
 #include <qwt_painter.h>
 #include <qwt_plot_layout.h>
 #include <qwt_plot_canvas.h>
 #include <qwt_layout_metrics.h>
 
 LegendMarker::LegendMarker(QwtPlot *plot):
-    QwtPlotMarker(plot)
+    QwtPlotMarker()
 {
-d_text= QwtText::makeText(QString::null,Qt::RichText,Qt::AlignTop|Qt::AlignLeft, 
-		QFont("Arial",12, QFont::Normal, FALSE),Qt::black,QPen(Qt::NoPen),QBrush(Qt::NoBrush));
+d_text = new QwtText(QString::null, QwtText::RichText);
+d_text->setFont(QFont("Arial",12, QFont::Normal, FALSE));
+d_text->setFlags(Qt::AlignTop|Qt::AlignLeft);
+d_text->setBackgroundBrush(QBrush(Qt::NoBrush));
+d_text->setColor(Qt::black);
+d_text->setBackgroundPen (QPen(Qt::NoPen));
 	
 bkgType=0;
 angle=0;
 bkgColor = plot->paletteBackgroundColor();
 }
 
-void LegendMarker::draw(QPainter *p, int, int, const QRect &rect)
+void LegendMarker::draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r)
 { 
 symbolLineLength=symbolsMaxLineLength();
 	
-int clw = parentPlot()->canvas()->lineWidth();
-QRect rs=scaledLegendRect(p, QPoint(rect.x() - clw, rect.y() - clw), lRect);
+int clw = plot()->canvas()->lineWidth();
+QRect rs=scaledLegendRect(p, QPoint(r.x() - clw, r.y() - clw), lRect);
 
 lRect.setWidth(rs.width());
 lRect.setHeight(rs.height());
@@ -120,7 +125,7 @@ void LegendMarker::drawFrame(QPainter *p, int type, const QRect& rect)
 {
 p->save();
 p->setPen(QPen(Qt::black,1,Qt::SolidLine));
-if (type == None && bkgColor != parentPlot()->paletteBackgroundColor())
+if (type == None && bkgColor != plot()->paletteBackgroundColor())
 	p->fillRect (rect,QBrush(bkgColor));
 if (type == Line)
 	{
@@ -140,7 +145,7 @@ p->restore();
 
 void LegendMarker::drawVector(QPainter *p, int x, int y, int l, int curveIndex)
 {
-Graph *g = parentGraph(parentPlot());
+Graph *g = parentGraph(plot());
 if (!g)
 	return;
 
@@ -174,7 +179,7 @@ p->restore();
 
 void LegendMarker::drawSymbols(QPainter *p, const QRect& rect, QwtArray<long> height)
 { 	
-QwtPlot *plot = (QwtPlot *)parentPlot();
+Plot *plot = (Plot *)this->plot();
 Graph *g=parentGraph(plot);
 	
 int w=rect.x()+10;
@@ -260,7 +265,7 @@ int w=rect.x()+10;
 int textL=w,textH=0;
 QString text=d_text->text();
 QStringList titles=QStringList::split ("\n",text,FALSE);
-QwtText *text_copy= d_text->clone();
+QwtText *text_copy = new QwtText(*d_text);
 		
 for (int i=0;i<(int)titles.count();i++)
 	{
@@ -281,10 +286,10 @@ for (int i=0;i<(int)titles.count();i++)
 		}
 		
 	text_copy->setText(str);
-	QRect tr=text_copy->boundingRect(p);
+	/*QRect tr=text_copy->boundingRect(p);
 	textH=tr.height();	
 	tr.moveTopLeft(QPoint(textL,height[i]-textH/2));
-	text_copy->draw(p,tr);
+	text_copy->draw(p,tr);*/
 	}		
 
 delete text_copy;
@@ -301,20 +306,20 @@ copy.moveBy(canvas_origin.x(), canvas_origin.y());
 
 if (p->device()->isExtDev())
 	{	
-	QwtPlot *plot = (QwtPlot *)parentPlot();		
-	QwtDiMap xMap = plot->canvasMap(QwtPlot::xBottom);
-	QwtDiMap yMap = plot->canvasMap(QwtPlot::yLeft);		
+	QwtPlot *plot = this->plot();		
+	QwtScaleMap xMap = plot->canvasMap(QwtPlot::xBottom);
+	QwtScaleMap yMap = plot->canvasMap(QwtPlot::yLeft);		
 		
 	double dx=xMap.invTransform(lRect.topLeft().x());
 	double dy=yMap.invTransform(lRect.topLeft().y());			
 	
-	QwtDiMap map=LineMarker::mapCanvasToDevice(p, plot, QwtPlot::xBottom);		
+	QwtScaleMap map=LineMarker::mapCanvasToDevice(p, plot, QwtPlot::xBottom);		
 	copy.setX(map.transform(dx));
 	map=LineMarker::mapCanvasToDevice(p, plot, QwtPlot::yLeft);	
 	copy.setY(map.transform(dy));
 	}
 
-QwtText *text_copy= d_text->clone();
+QwtText *text_copy= new QwtText(*d_text);
 QString text=d_text->text();
 QStringList titles=QStringList::split ("\n",text,FALSE);
 int n=(int)titles.count();
@@ -339,7 +344,7 @@ for (int i=0;i<n;i++)
 		}
 		
 	 text_copy->setText(str);
-	 QRect tr=text_copy->boundingRect(p);
+	 /*QRect tr=text_copy->boundingRect(p);
 	 textL+=tr.width();
 	 if (textL>maxL) maxL=textL;
 
@@ -347,7 +352,7 @@ for (int i=0;i<n;i++)
 	 rectH+=textH;
 	 
 	 heights[i]=h+textH/2;
-	 h+=textH;
+	 h+=textH;*/
 	 }	
 	
 rectH+=margin;
@@ -362,8 +367,8 @@ return copy;
 
 int LegendMarker::symbolsMaxLineLength()
 {
-QwtPlot *plot = (QwtPlot *)parentPlot();		
-QwtArray<long>  cvs=plot->curveKeys();
+Plot *plot = (Plot *)this->plot();		
+QValueList<int> cvs = plot->curveKeys();
 	
 int maxL=0;
 QString text=d_text->text();	

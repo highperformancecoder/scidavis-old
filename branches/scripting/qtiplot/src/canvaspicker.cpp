@@ -10,6 +10,7 @@
 #include <qapplication.h> 
 #include <qmessagebox.h> 
 
+#include <qwt_text_label.h>
 #include <qwt_plot_canvas.h>
 
 CanvasPicker::CanvasPicker(Graph *plot):
@@ -30,7 +31,7 @@ CanvasPicker::CanvasPicker(Graph *plot):
 bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 {
     QMemArray<long> images=plot()->imageMarkerKeys();	
-	QMemArray<long> texts=plot()->textMarkerKeys();
+	QValueList<int> texts=plot()->textMarkerKeys();
 	QMemArray<long> lines=plot()->lineMarkerKeys();	
 	
 	if (object != (QObject *)plot()->plotWidget()->canvas())
@@ -196,8 +197,8 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 				else
 					{
 					const QMouseEvent *me = (const QMouseEvent *)e;	
-					int dist;
-					long curveKey = plotWidget->closestCurve(me->pos().x(), me->pos().y(), dist);
+					int dist, point;
+					long curveKey = plotWidget->closestCurve(me->pos().x(), me->pos().y(), dist, point);
 					if (dist < 10)
 						emit showPlotDialog(curveKey);
 					else if (plot()->curves() > 0)
@@ -490,7 +491,7 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 void CanvasPicker::releaseMarker()
 {
 QMemArray<long> images=plot()->imageMarkerKeys();	
-QMemArray<long> texts=plot()->textMarkerKeys();
+QValueList<int> texts=plot()->textMarkerKeys();
 QMemArray<long> lines=plot()->lineMarkerKeys();
 
 bool line = false, image = false;
@@ -538,7 +539,7 @@ void CanvasPicker::moveMarker(QPoint& point)
 QApplication::setOverrideCursor(QCursor(Qt::PointingHandCursor), true);
 
 QMemArray<long> images=plot()->imageMarkerKeys();	
-QMemArray<long> texts=plot()->textMarkerKeys();
+QValueList<int> texts=plot()->textMarkerKeys();
 QMemArray<long> lines=plot()->lineMarkerKeys();
 			
 QPainter painter(plotWidget->canvas());
@@ -572,7 +573,8 @@ if (lines.contains(selectedMarker))
 	mrk->setEndPoint(QPoint(x,y));
 	endLinePoint=QPoint(x,y);
 
-	mrk->draw(&painter,0,0,QRect(0,0,0,0));
+	mrk->draw(&painter, plotWidget->canvasMap(QwtPlot::xBottom), 
+				plotWidget->canvasMap(QwtPlot::yLeft), QRect(0,0,0,0));
 	}
 else if (images.contains(selectedMarker))
 	{
@@ -658,7 +660,9 @@ else
 QPainter painter(plot()->plotWidget()->canvas());
 painter.save();
 painter.setRasterOp(Qt::NotXorROP);
-mrk.draw(&painter,0,0,QRect(0,0,0,0));	
+mrk.draw(&painter, plotWidget->canvasMap(QwtPlot::xBottom), 
+		 plotWidget->canvasMap(QwtPlot::yLeft), QRect(0, 0, 0, 0));	
+
 painter.restore();	
 }
 
@@ -666,7 +670,7 @@ painter.restore();
 bool CanvasPicker::selectMarker(const QPoint& point)
 {
 QMemArray<long> images=plot()->imageMarkerKeys();	
-QMemArray<long> texts=plot()->textMarkerKeys();
+QValueList<int> texts=plot()->textMarkerKeys();
 QMemArray<long> lines=plot()->lineMarkerKeys();
 int n=texts.size();	
 int m=lines.size();			

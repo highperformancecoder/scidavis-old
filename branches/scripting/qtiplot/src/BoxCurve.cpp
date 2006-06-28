@@ -4,7 +4,7 @@
 #include <gsl/gsl_statistics.h>
 
 BoxCurve::BoxCurve(QwtPlot *parent, const char *name):
-    QwtPlotCurve(parent,name)
+    QwtPlotCurve(name)
 {
 mean_style = QwtSymbol::Rect;
 max_style = QwtSymbol::XCross;
@@ -39,7 +39,7 @@ b_width = b->b_width;
 }
 
 void BoxCurve::draw(QPainter *painter,
-    const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
 {
    if ( !painter || dataSize() <= 0 )
         return;
@@ -65,7 +65,7 @@ void BoxCurve::draw(QPainter *painter,
 		}
 }
 
-void BoxCurve::drawBox(QPainter *painter, const QwtDiMap &xMap, const QwtDiMap &yMap, double *dat, int size)
+void BoxCurve::drawBox(QPainter *painter, const QwtScaleMap &xMap, const QwtScaleMap &yMap, double *dat, int size)
 {
 const int px = xMap.transform(x(0));
 const int px_min = xMap.transform(x(0) - 0.5);
@@ -199,7 +199,7 @@ else
 	painter->drawLine(px - hbw, median, px + hbw, median);
 }
 
-void BoxCurve::drawSymbols(QPainter *painter, const QwtDiMap &xMap, const QwtDiMap &yMap, double *dat, int size)
+void BoxCurve::drawSymbols(QPainter *painter, const QwtScaleMap &xMap, const QwtScaleMap &yMap, double *dat, int size)
 {
 const int px = xMap.transform(x(0));
 
@@ -288,13 +288,13 @@ else
 
 QwtDoubleRect BoxCurve::boundingRect() const
 {
-QwtDoubleRect rect = QwtCurve::boundingRect();
+QwtDoubleRect rect = QwtPlotCurve::boundingRect();
 	
-double dy=0.2*(rect.y2()-rect.y1());
-rect.setY1(rect.y1()-dy);
-rect.setY2(rect.y2()+dy);
+double dy=0.2*(rect.bottom()-rect.top());
+rect.setTop(rect.top()-dy);
+rect.setBottom(rect.bottom()+dy);
 
-rect.setX1(rect.x1()-0.5);
-rect.setX2(rect.x2()+0.5);
+rect.setLeft(rect.left()-0.5);
+rect.setRight(rect.right()+0.5);
 return rect;
 }

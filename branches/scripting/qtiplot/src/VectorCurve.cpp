@@ -1,13 +1,13 @@
 #include "VectorCurve.h"
 
 #include <qwt_plot.h>
-#include <qwt_curve.h>
+#include <qwt_plot_curve.h>
 #include <qwt_painter.h>
 #include <qwt_double_rect.h>
 #include <qpainter.h>
 
 VectorCurve::VectorCurve(VectorStyle style, QwtPlot *parent, const char *name):
-    QwtPlotCurve(parent,name)
+    QwtPlotCurve(name)
 {
 d_style = style;
 pen=QPen(Qt::black, 1, Qt::SolidLine);
@@ -31,7 +31,7 @@ setTitle(vc->title());
 }
 
 void VectorCurve::draw(QPainter *painter,
-    const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
 {
     if ( !painter || dataSize() <= 0 )
         return;
@@ -51,7 +51,7 @@ void VectorCurve::draw(QPainter *painter,
 }
 
 void VectorCurve::drawVector(QPainter *painter,
-    const QwtDiMap &xMap, const QwtDiMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
 { 
 if (d_style == XYAM)
 {
@@ -195,15 +195,15 @@ if (filledArrow != fill)
 
 QwtDoubleRect VectorCurve::boundingRect() const
 {
-QwtDoubleRect rect = QwtCurve::boundingRect();
+QwtDoubleRect rect = QwtPlotCurve::boundingRect();
 QwtDoubleRect vrect = vectorEnd->boundingRect();
 	
 if (d_style == XYXY)
 	{
-	rect.setY1(QMIN(rect.y1(), vrect.y1()));
-	rect.setY2(QMAX(rect.y2(), vrect.y2()));
-	rect.setX1(QMIN(rect.x1(), vrect.x1()));
-	rect.setX2(QMAX(rect.x2(), vrect.x2()));
+	rect.setTop(QMIN(rect.top(), vrect.top()));
+	rect.setBottom(QMAX(rect.bottom(), vrect.bottom()));
+	rect.setLeft(QMIN(rect.left(), vrect.left()));
+	rect.setRight(QMAX(rect.right(), vrect.right()));
 	}
 else
 	{
@@ -212,27 +212,27 @@ else
 	switch(d_position)
 		{
 		case Tail:
-			rect.setY1(QMIN(rect.y1(), rect.y1()+mag*sin(angle)));
-			rect.setY2(QMAX(rect.y2(), rect.y2()+mag*sin(angle)));
-			rect.setX1(QMIN(rect.x1(), rect.x1()+mag*cos(angle)));
-			rect.setX2(QMAX(rect.x2(), rect.x2()+mag*cos(angle)));
+			rect.setTop(QMIN(rect.top(), rect.top()+mag*sin(angle)));
+			rect.setBottom(QMAX(rect.bottom(), rect.bottom()+mag*sin(angle)));
+			rect.setLeft(QMIN(rect.left(), rect.left()+mag*cos(angle)));
+			rect.setRight(QMAX(rect.right(), rect.right()+mag*cos(angle)));
 		break;
 
 		case Middle:
 			{
 			mag *= 0.5;
-			rect.setY1(QMIN(rect.y1(), rect.y1() - fabs(mag*sin(angle))));
-			rect.setY2(QMAX(rect.y2(), rect.y2() + fabs(mag*sin(angle))));
-			rect.setX1(QMIN(rect.x1(), rect.x1() - fabs(mag*cos(angle))));
-			rect.setX2(QMAX(rect.x2(), rect.x2() + fabs(mag*cos(angle))));
+			rect.setTop(QMIN(rect.top(), rect.top() - fabs(mag*sin(angle))));
+			rect.setBottom(QMAX(rect.bottom(), rect.bottom() + fabs(mag*sin(angle))));
+			rect.setLeft(QMIN(rect.left(), rect.left() - fabs(mag*cos(angle))));
+			rect.setRight(QMAX(rect.right(), rect.right() + fabs(mag*cos(angle))));
 			}
 		break;
 
 		case Head:
-			rect.setY1(QMIN(rect.y1(), rect.y1() - mag*sin(angle)));
-			rect.setY2(QMAX(rect.y2(), rect.y2() - mag*sin(angle)));
-			rect.setX1(QMIN(rect.x1(), rect.x1() - mag*cos(angle)));
-			rect.setX2(QMAX(rect.x2(), rect.x2() - mag*cos(angle)));
+			rect.setTop(QMIN(rect.top(), rect.top() - mag*sin(angle)));
+			rect.setBottom(QMAX(rect.bottom(), rect.bottom() - mag*sin(angle)));
+			rect.setLeft(QMIN(rect.left(), rect.left() - mag*cos(angle)));
+			rect.setRight(QMAX(rect.right(), rect.right() - mag*cos(angle)));
 		break;
 		}		
 	}

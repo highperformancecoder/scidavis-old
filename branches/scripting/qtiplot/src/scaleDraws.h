@@ -8,7 +8,7 @@
 #include <qdatetime.h>
 
 #include <qwt_painter.h>
-#include <qwt_scldraw.h>
+#include <qwt_scale_draw.h>
 
 class ScaleDraw: public QwtScaleDraw
 {
@@ -28,7 +28,7 @@ public:
 	QString formulaString() {return formula_string;};
 	void setFormulaString(const QString& formula) {formula_string = formula;};
 
-	virtual QString label(double value) const
+	/*virtual QString label(double value) const
 	{
 	if (!formula_string.isEmpty())
 		{
@@ -203,7 +203,7 @@ public:
 		}
 	else
 		QwtScaleDraw::drawBackbone(p);
-	};
+	};*/
 
 	uint lineWidth(){return d_lineWidth;};
 		
@@ -224,10 +224,10 @@ public:
 	QwtNoLabelsScaleDraw(int linewidth){setLineWidth(linewidth);};
 	~QwtNoLabelsScaleDraw(){};
 
-	virtual QString label(double) const
+	/*virtual QString label(double) const
 	{
 	return QString::null;
-	};
+	};*/
 };
 
 class QwtTextScaleDraw: public ScaleDraw
@@ -241,14 +241,14 @@ public:
 		
 	~QwtTextScaleDraw(){};
 		
-	virtual QString label(double value) const
+	/*virtual QString label(double value) const
 		{
 		int index=qRound(value);
 		if (floor(value) == value && index > 0 && index <= (int)labels.count())
 			return labels[index - 1];
 		else
 			return "";
-		};
+		};*/
 
 	QStringList labelsList(){return labels;};
 
@@ -275,11 +275,11 @@ public:
 	
 	QString timeFormat() {return t_format;};
 		
-	virtual QString label(double value) const
+	/*virtual QString label(double value) const
 	{
 		QTime t = t_origin.addMSecs ( (int)value );		
 		return t.toString ( t_format );
-	};
+	};*/
 	
 private:
 	QTime t_origin;
@@ -305,11 +305,11 @@ public:
 	
 	QString format() {return t_format;};
 		
-	virtual QString label(double value) const
+	/*virtual QString label(double value) const
 	{
 		QDate t = t_origin.addDays ( (int)value );
 		return t.toString ( t_format );
-	};
+	};*/
 	
 private:
 	QDate t_origin;
@@ -322,7 +322,7 @@ public:
 	QwtSupersciptsScaleDraw(const QFont& fnt, const QColor& col){d_font = fnt; d_color = col;};
 	~QwtSupersciptsScaleDraw(){};
 
-	virtual QString label(double value) const
+	/*virtual QString label(double value) const
 	{
 	char f;
 	int prec, fieldwidth;
@@ -434,10 +434,10 @@ QRect labelBoundingRect(const QFontMetrics &fm, double val) const
 	
 	delete ltxt;
     return br;
-	};
+	};*/
 	
 //! Return the world matrix for painting the label 
- QWMatrix labelWorldMatrix(const QFontMetrics &,
+/* QWMatrix labelWorldMatrix(const QFontMetrics &,
     const QPoint &pos, int alignment, 
 #ifdef QT_NO_TRANSFORMATIONS
     double,
@@ -476,7 +476,7 @@ QRect labelBoundingRect(const QFontMetrics &fm, double val) const
 
 	delete ltxt;
     return m;
- };
+ };*/
 	
  void setFont(const QFont& fnt){d_font = fnt;};
 

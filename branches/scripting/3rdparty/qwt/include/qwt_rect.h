@@ -12,9 +12,7 @@
 
 #include <qrect.h>
 #include "qwt_global.h"
-
-class QPoint;
-class QPointArray;
+#include "qwt_polygon.h"
 
 /*!
   \brief Some extensions for QRect
@@ -26,18 +24,12 @@ public:
     QwtRect();
     QwtRect(const QRect &r);
 
-    QRect cutTop(int h , int distTop = 0, int distBottom = 0);
-    QRect cutBottom(int h, int distTop = 0, int distBottom = 0);
-    QRect cutLeft(int w, int distLeft = 0, int distRight = 0);
-    QRect cutRight(int w, int distLeft = 0, int distRight = 0);
-    const QwtRect &cutMargin(int mLeft, int mRight, int Top, int mBottom);
-
-    QPointArray clip(const QPointArray &) const;
+    QwtPolygon clip(const QwtPolygon &) const;
 
 private:
     enum Edge { Left, Top, Right, Bottom, NEdges };
 
-    void clipEdge(Edge, const QPointArray &, QPointArray &) const;
+    void clipEdge(Edge, const QwtPolygon &, QwtPolygon &) const;
     bool insideEdge(const QPoint &, Edge edge) const;
     QPoint intersectEdge(const QPoint &p1, 
         const QPoint &p2, Edge edge) const;

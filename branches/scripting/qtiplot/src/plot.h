@@ -2,8 +2,12 @@
 #define PLOT_H
 
 #include <qobject.h>
+#include <qmap.h>
 
 #include <qwt_plot.h>
+#include <qwt_plot_curve.h>
+#include <qwt_plot_grid.h>
+#include <qwt_plot_marker.h>
 
 class Plot: public QwtPlot
 {	
@@ -14,6 +18,20 @@ public:
 	
 	enum TicksType{None = 0, Out = 1, Both = 2, In = 3};
 	
+	QwtPlotGrid *grid(){return d_grid;};
+	QValueList<int> curveKeys(){return d_curves.keys();};
+
+	int insertCurve(QwtPlotCurve *c);
+	void removeCurve(int index);
+
+	int closestCurve(int xpos, int ypos, int &dist, int &point);
+	QwtPlotCurve* curve(int index){return d_curves[index];};
+
+	QwtPlotMarker* marker(int index){return d_markers[index];};
+	QValueList<int> markerKeys(){return d_markers.keys();};
+	int insertMarker(QwtPlotMarker *m);
+	void removeMarker(int index);
+
 	QValueList <int> getMajorTicksType(){return majorTicksType;};
 	void setMajorTicksType(int axis, int type){majorTicksType[axis]=type;}
 
@@ -34,24 +52,25 @@ public:
 	void mouseMoveEvent ( QMouseEvent * e );
 
 	void drawPixmap(QPainter *painter, const QRect &rect);
-	virtual void print(QPainter *, const QRect &rect,
-        const QwtPlotPrintFilter & = QwtPlotPrintFilter()) const;
+	/*virtual void print(QPainter *, const QRect &rect,
+        const QwtPlotPrintFilter & = QwtPlotPrintFilter()) const;*/
 	
 protected:
+	/*
 	void printCanvas(QPainter *painter, const QRect &canvasRect,
-   			 const QwtArray<QwtDiMap> &map, const QwtPlotPrintFilter &pfilter) const;
+   			 const QwtArray<QwtScaleMap> &map, const QwtPlotPrintFilter &pfilter) const;
 
-	virtual void drawCanvasItems (QPainter *painter, const QRect &rect,
-			const QwtArray< QwtDiMap > &map, const QwtPlotPrintFilter &pfilter) const;
+	virtual void drawItems (QPainter *painter, const QRect &rect,
+			const QwtArray< QwtScaleMap > &map, const QwtPlotPrintFilter &pfilter) const;*/
 
 	void drawInwardTicks(QPainter *painter, const QRect &rect, 
-							const QwtDiMap&map, int axis) const;
+							const QwtScaleMap&map, int axis) const;
 
 	void drawInwardMinorTicks(QPainter *painter, const QRect &rect, 
-							const QwtDiMap &map, int axis) const;
+							const QwtScaleMap &map, int axis) const;
 
 	void drawInwardMajorTicks(QPainter *painter, const QRect &rect, 
-							const QwtDiMap &map, int axis) const;
+							const QwtScaleMap &map, int axis) const;
 signals:
 	void selectPlot();
 	void moveGraph(const QPoint&);
@@ -60,11 +79,17 @@ signals:
 	void resizedGraph();
 
 protected:
+	QwtPlotGrid *d_grid;
+	QMap<int, QwtPlotCurve*> d_curves;
+	QMap<int, QwtPlotMarker*> d_markers;
+
 	int minTickLength, majTickLength, d_lineWidth;
 	QValueList <int> minorTicksType;
 	QValueList <int> majorTicksType;
 	bool movedGraph, ShiftButton, graphToResize;
 	QPoint presspos;
+	int marker_key;
+	int curve_key;
 };
 
 #endif

@@ -60,7 +60,8 @@
 #include <qwt_plot.h>
 #include <qwt_plot_canvas.h>
 #include <qwt_plot_layout.h>
-#include <qwt_scale.h>
+#include <qwt_scale_widget.h>
+#include <qwt_text_label.h>
 
 #include "multilayer.h"
 #include "graph.h"
@@ -375,14 +376,14 @@ for (int i=0;i<(int)graphsList->count();i++)
 		if (!tRect.isNull())
 			height+=tRect.height() + plotLayout->spacing();
 
-		QwtScale *scale=(QwtScale *) plot->axis (QwtPlot::xTop);
+		QwtScaleWidget *scale=(QwtScaleWidget *) plot->axisWidget (QwtPlot::xTop);
 		if (scale)
 			{
 			QRect sRect=plotLayout->scaleRect (QwtPlot::xTop);
 			height+= sRect.height();
 			}
 		
-		scale=(QwtScale *) plot->axis (QwtPlot::xBottom);			
+		scale=(QwtScaleWidget *) plot->axisWidget (QwtPlot::xBottom);			
 		if (scale)
 			{
 			QRect sRect=plotLayout->scaleRect (QwtPlot::xBottom);
@@ -392,14 +393,14 @@ for (int i=0;i<(int)graphsList->count();i++)
 		height += int(h_ratio*ch);
 
 		int width = 0;
-		scale=(QwtScale *) plot->axis (QwtPlot::yLeft);			
+		scale=(QwtScaleWidget *) plot->axisWidget (QwtPlot::yLeft);			
 		if (scale)
 			{
 			QRect sRect=plotLayout->scaleRect (QwtPlot::yLeft);
 			width+= sRect.width();
 			}	
 			
-		scale=(QwtScale *) plot->axis (QwtPlot::yRight);			
+		scale=(QwtScaleWidget *) plot->axisWidget (QwtPlot::yRight);			
 		if (scale)
 			{
 			QRect sRect=plotLayout->scaleRect (QwtPlot::yRight);
@@ -614,7 +615,7 @@ for (i=0; i<graphs; i++)
 	double cw = (double) cRect.width();
 	
 	QRect tRect=plotLayout->titleRect ();
-	QwtScale *scale=(QwtScale *) plot->axis (QwtPlot::xTop);
+	QwtScaleWidget *scale=(QwtScaleWidget *) plot->axisWidget (QwtPlot::xTop);
 
 	int topHeight = 0;
     if (!tRect.isNull())
@@ -626,21 +627,21 @@ for (i=0; i<graphs; i++)
 		}
 	gsl_vector_set (xTopR, i, double(topHeight)/ch);
 		
-	scale=(QwtScale *) plot->axis (QwtPlot::xBottom);			
+	scale=(QwtScaleWidget *) plot->axisWidget (QwtPlot::xBottom);			
 	if (scale)
 		{
 		QRect sRect=plotLayout->scaleRect (QwtPlot::xBottom);
 		gsl_vector_set (xBottomR, i, double(sRect.height())/ch);
 		}	
 			
-	scale=(QwtScale *) plot->axis (QwtPlot::yLeft);			
+	scale=(QwtScaleWidget *) plot->axisWidget (QwtPlot::yLeft);			
 	if (scale)
 		{
 		QRect sRect=plotLayout->scaleRect (QwtPlot::yLeft);
 		gsl_vector_set (yLeftR, i, double(sRect.width())/cw);
 		}	
 			
-	scale=(QwtScale *) plot->axis (QwtPlot::yRight);			
+	scale=(QwtScaleWidget *) plot->axisWidget (QwtPlot::yRight);			
 	if (scale)
 		{
 		QRect sRect=plotLayout->scaleRect (QwtPlot::yRight);
@@ -1093,14 +1094,14 @@ for (int i=0;i<(int)graphsList->count();i++)
 		Graph *gr=(Graph *)graphsList->at(i);
 		QwtPlot *plot=gr->plotWidget();
 			
-		plot->setTitleFont(titleFnt);
+		plot->title().setFont(titleFnt);
 		for (int j= 0;j<QwtPlot::axisCnt;j++)
 			{
 			plot->setAxisFont (j,numbersFnt);
-			plot->setAxisTitleFont (j,scaleFnt);
+			plot->axisTitle(j).setFont(scaleFnt);
 			}
 			
-		QwtArray<long> keys=gr->textMarkerKeys();
+		QValueList<int> keys=gr->textMarkerKeys();
 		for (int k=0;k<(int)keys.size();k++)
 			{
 			LegendMarker* mrk=(LegendMarker*)gr->textMarker(keys[k]);
@@ -1127,7 +1128,7 @@ plotLayout->activate(plot, rect, 0);
 QPixmap pix = QPixmap::grabWidget (canvas, x, y, g->width(), g->height());
 plot->setPaletteBackgroundPixmap(pix);
 	
-QLabel *title=plot->titleLabel ();
+QwtTextLabel *title=plot->titleLabel ();
 QRect tRect=plotLayout->titleRect ();
 if (!tRect.isNull())
 	{
@@ -1137,7 +1138,7 @@ if (!tRect.isNull())
 
 for (int i=0;i<QwtPlot::axisCnt;i++)
 	{
-	QwtScale *scale=(QwtScale *) plot->axis (i);
+	QwtScaleWidget *scale=(QwtScaleWidget *) plot->axisWidget (i);
 	if (scale)
 		{
 		QRect sRect=plotLayout->scaleRect (i);

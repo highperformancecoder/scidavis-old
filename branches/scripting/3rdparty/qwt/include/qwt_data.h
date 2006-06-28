@@ -15,13 +15,23 @@
 #include "qwt_global.h"
 #include "qwt_array.h"
 #include "qwt_double_rect.h"
+#if QT_VERSION >= 0x040000
+#include <QPolygonF>
+#endif
+
+// MOC_SKIP_BEGIN
 
 #if defined(QWT_TEMPLATEDLL)
-// MOC_SKIP_BEGIN
-template class QWT_EXPORT QwtArray<QwtDoublePoint>;
+
 template class QWT_EXPORT QwtArray<double>;
-// MOC_SKIP_END
+
+#if QT_VERSION < 0x040000
+template class QWT_EXPORT QwtArray<QwtDoublePoint>;
 #endif
+
+#endif
+
+// MOC_SKIP_END
 
 /*!
   \brief QwtData defines an interface to any type of data.
@@ -73,6 +83,7 @@ protected:
     QwtData &operator=(const QwtData &);
 };
 
+
 /*!
   \brief Data class containing a single QwtArray<QwtDoublePoint> object. 
  */
@@ -84,7 +95,12 @@ public:
       
       \sa QwtCurve::setData and QwtPlot::setCurveData.
      */
+#if QT_VERSION < 0x040000
     QwtDoublePointData(const QwtArray<QwtDoublePoint> &);
+#else
+    QwtDoublePointData(const QPolygonF &);
+#endif
+
     QwtDoublePointData &operator=(const QwtDoublePointData &);
     virtual QwtData *copy() const;
 
@@ -92,8 +108,18 @@ public:
     virtual double x(size_t i) const;
     virtual double y(size_t i) const;
 
+#if QT_VERSION < 0x040000
+    const QwtArray<QwtDoublePoint> &data() const;
+#else
+    const QPolygonF &data() const;
+#endif
+
 private:
+#if QT_VERSION < 0x040000
     QwtArray<QwtDoublePoint> d_data;
+#else
+    QPolygonF d_data;
+#endif
 };
 
 /*!
@@ -111,6 +137,9 @@ public:
     virtual size_t size() const;
     virtual double x(size_t i) const;
     virtual double y(size_t i) const;
+
+    const QwtArray<double> &xData() const;
+    const QwtArray<double> &yData() const;
 
     virtual QwtDoubleRect boundingRect() const;
 
@@ -141,6 +170,9 @@ public:
     virtual double x(size_t i) const;
     virtual double y(size_t i) const;
 
+    const double *xData() const;
+    const double *yData() const;
+
     virtual QwtDoubleRect boundingRect() const;
 
 private:
@@ -150,10 +182,3 @@ private:
 };
 
 #endif // !QWT_DATA
-
-// Local Variables:
-// mode: C++
-// c-file-style: "stroustrup"
-// indent-tabs-mode: nil
-// End:
-

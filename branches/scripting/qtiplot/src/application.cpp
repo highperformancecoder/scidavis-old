@@ -86,6 +86,7 @@
 #include <qsplitter.h>
 #include <qobjectlist.h>
 #include <qeventloop.h>
+#include <qsimplerichtext.h>
 
 #include <zlib.h>
 
@@ -4409,6 +4410,9 @@ if(plotWindows.contains(w->name()))
    			 return;
 			}
 			
+		//if (selectedFilter.contains(".svg"))
+			//plot->exportToSVG(fname);
+
 		if (selectedFilter.contains(".eps"))
 			{
 			if (ied->showExportOptions())
@@ -4514,7 +4518,12 @@ if ( ied->exec() == QDialog::Accepted )
 			if (plot->hasOverlapingLayers())
 				plot->updateTransparency();
 			return;
-			}			
+			}
+		else if (selectedFilter.contains(".svg"))
+			{
+			g->exportToSVG(fname);
+			return;
+			}
 		/*else if (selectedFilter.contains(".wmf"))
 			{
 			g->exportToWmf(fname);
@@ -9755,15 +9764,13 @@ for (int j=0;j<(int)list.count()-1;j++)
 	else if (s.contains ("EnabledTickLabels"))
 			{
 			fList=QStringList::split ("\t",s,TRUE);
-			for (i=0;i<(int)fList.count();i++)
-				fList[i]=fList[i+1];
+			fList.pop_front();
 			ag->setEnabledTickLabels(fList);
 			}
 	else if (s.contains ("AxesColors"))
 			{
 			fList=QStringList::split ("\t",s,TRUE);
-			for (i=0;i<(int)fList.count();i++)
-				fList[i]=fList[i+1];
+			fList.pop_front();
 			ag->setAxesColors(fList);
 			}
 	else if (s.left(5)=="grid\t")
@@ -9975,8 +9982,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 				}
 			else
 				{
-				for (i=0; i<(int)scale.count(); i++)
-					scale[i]=scale[i+1];				
+				scale.pop_front();				
 				ag->setScales(scale);
 				}
 			}
@@ -10062,7 +10068,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 						fList[2*i + 1] = "0";
 					}					
 				}
-			fList.remove(fList.first());
+			fList.pop_front();
 			ag->setLabelsNumericFormat(fList);
 			}
 		else if (s.contains ("LabelsRotation"))
@@ -10209,7 +10215,7 @@ fList=QStringList::split ("\t",lst[6],FALSE );
 plot->setColors(fList);
 
 fList=QStringList::split ("\t",lst[7],FALSE );
-fList.remove(fList.first());
+fList.pop_front();
 plot->setAxesLabels(fList);
 
 fList=QStringList::split ("\t",lst[8],FALSE );
@@ -10342,7 +10348,7 @@ else if(g->curves() == 1)
 	{
 	const QwtPlotCurve *c = g->curve(0);
 	if (c)
-		analyzeCurve(whichFit,c->title());
+		analyzeCurve(whichFit,c->title().text());
 	}
 else
 	showAnalysisDialog(whichFit);
@@ -13316,8 +13322,7 @@ void HelpBrowser::print()
 	int dpiy = metrics.logicalDpiY();
 	int margin = (int) ( (2/2.54)*dpiy ); // 2 cm margins
 	QRect body( margin, margin, metrics.width() - 2*margin, metrics.height() - 2*margin );
-	QSimpleRichText richText(text(), QFont(), context(), styleSheet(),
-							mimeSourceFactory(), body.height() );
+	QSimpleRichText richText(text(), QFont(), context(), styleSheet(), mimeSourceFactory(), body.height());
 	richText.setWidth( &p, body.width() );
 	QRect view( body );
 	int page = 1;

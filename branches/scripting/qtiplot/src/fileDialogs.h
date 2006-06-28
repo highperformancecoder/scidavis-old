@@ -53,6 +53,7 @@ public:
 		QStringList list=QImage::outputFormatList ();
 		list<<"EPS";
 		//list<<"WMF";
+		list<<"SVG";
 		list.sort();
 		
 		QString filter, selectedFilter,aux;			
