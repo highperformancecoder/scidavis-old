@@ -28,7 +28,7 @@ public:
 	QString formulaString() {return formula_string;};
 	void setFormulaString(const QString& formula) {formula_string = formula;};
 
-	/*virtual QString label(double value) const
+	virtual QwtText label(double value) const
 	{
 	if (!formula_string.isEmpty())
 		{
@@ -46,13 +46,13 @@ public:
 			}
 		catch(mu::ParserError &)
 			{
-			return QString::null;
+			return QwtText();
 			}
 		return QwtScaleDraw::label(lbl);
 		}
 	else
 		return QwtScaleDraw::label(value);
-	};*/
+	};
 
 	virtual void draw(QPainter *p, const QColorGroup &colorGroup) const
 	{
@@ -229,14 +229,14 @@ public:
 		
 	~QwtTextScaleDraw(){};
 		
-	/*virtual QString label(double value) const
+	virtual QwtText label(double value) const
 		{
 		int index=qRound(value);
 		if (floor(value) == value && index > 0 && index <= (int)labels.count())
-			return labels[index - 1];
+			return QwtText(labels[index - 1]);
 		else
-			return "";
-		};*/
+			return QwtText();
+		};
 
 	QStringList labelsList(){return labels;};
 
@@ -263,11 +263,11 @@ public:
 	
 	QString timeFormat() {return t_format;};
 		
-	/*virtual QString label(double value) const
+	virtual QwtText label(double value) const
 	{
 		QTime t = t_origin.addMSecs ( (int)value );		
-		return t.toString ( t_format );
-	};*/
+		return QwtText(t.toString ( t_format ));
+	};
 	
 private:
 	QTime t_origin;
@@ -293,11 +293,11 @@ public:
 	
 	QString format() {return t_format;};
 		
-	/*virtual QString label(double value) const
+	virtual QwtText label(double value) const
 	{
 		QDate t = t_origin.addDays ( (int)value );
-		return t.toString ( t_format );
-	};*/
+		return QwtText(t.toString ( t_format ));
+	};
 	
 private:
 	QDate t_origin;
@@ -307,19 +307,20 @@ private:
 class QwtSupersciptsScaleDraw: public ScaleDraw
 {
 public:
-	QwtSupersciptsScaleDraw(const QFont& fnt, const QColor& col){d_font = fnt; d_color = col;};
+	QwtSupersciptsScaleDraw(){};
 	~QwtSupersciptsScaleDraw(){};
 
-	/*virtual QString label(double value) const
+	virtual QwtText label(double value) const
 	{
-	char f;
+	/*	char f;
 	int prec, fieldwidth;
-	labelFormat(f, prec, fieldwidth);
+	labelFormat(f, prec, fieldwidth);*/
 	
-	double lval = ScaleDraw::label(value).toDouble();
-	QString txt;
-	txt.setNum (lval, 'e', prec);
+	//double lval = ScaleDraw::label(value).toDouble();
+	//txt.setNum (lval, 'e', prec);
 
+	QString txt;
+	txt.setNum (value, 'e', 6);
 	QStringList list = QStringList::split ( "e", txt, FALSE );
 	if (list[0].toDouble() == 0.0)
 		return "0";
@@ -340,137 +341,10 @@ public:
 		s.prepend(sign);
 	
 	if (list[0] == "1")
-		return "10<sup>" + s + "</sup>";
+		return QwtText("10<sup>" + s + "</sup>");
 	else
-		return list[0] + "x10<sup>" + s + "</sup>";
+		return QwtText(list[0] + "x10<sup>" + s + "</sup>");
 	};
-	
-//! Draws the number label for a major scale tick
-void drawLabel(QPainter *p, double val) const
-{
-    QPoint pos;
-    int alignment;
-    double rotation;
-    labelPlacement(QFontMetrics(d_font), val, pos, alignment, rotation);
-
-	if ( alignment )
-    {
-    const QString txt = label(val);
-    if ( !txt.isEmpty() )
-        {
-            QWMatrix m = labelWorldMatrix(d_font, pos, alignment, rotation, txt);
-			
-            p->save();
-#ifndef QT_NO_TRANSFORMATIONS
-            p->setWorldMatrix(m, TRUE);
-#else
-            p->translate(m.dx(), m.dy());
-#endif
-           
-			QwtText *ltxt = labelText(val);
-			QRect br = ltxt->boundingRect();
-			QRect rect = QRect (0, 0, br.width(), br.height());
-			
-			ltxt->draw (p, rect);
-			delete ltxt;
-			
-			p->restore();
-        }
-	}
-};
-
-QwtText *labelText(double value) const
-	{
-	const QString lbl = label(value);
-	return QwtText::makeText(lbl, labelAlignment(), d_font, d_color);
-	};
-	
-QRect labelBoundingRect(const QFontMetrics &fm, double val) const
-	{
-	char f;
-	int prec, fieldwidth;
-	labelFormat(f, prec, fieldwidth);
-		
-    QString zeroString;
-    if ( fieldwidth > 0 )
-        zeroString.fill('0', fieldwidth);
-
-    const QString lbl = label(val);
-
-    const QString &txt = fm.width(zeroString) > fm.width(lbl) 
-        ? zeroString : lbl;
-    if ( txt.isEmpty() )
-        return QRect(0, 0, 0, 0);
-
-	QwtText *ltxt = labelText(val);
-	
-    QRect br;
-    QPoint pos;
-    int alignment;
-    double rotation;
-
-    labelPlacement(fm, val, pos, alignment, rotation);
-    if ( alignment )
-		{
-       const int w = ltxt->boundingRect().width();
-       const int h = ltxt->boundingRect().height();
-				
-        QWMatrix m = labelWorldMatrix(fm, pos, alignment, rotation, lbl);
-        br = QwtMetricsMap::translate(m, QRect(0, 0, w, h));
-        br.moveBy(-pos.x(), -pos.y());
-		}
-	
-	delete ltxt;
-    return br;
-	};*/
-	
-//! Return the world matrix for painting the label 
-/* QWMatrix labelWorldMatrix(const QFontMetrics &,
-    const QPoint &pos, int alignment, 
-#ifdef QT_NO_TRANSFORMATIONS
-    double,
-#else
-    double rotation, 
-#endif
-    const QString &txt) const
-	{
-    QwtText *ltxt = QwtText::makeText(txt, alignment, d_font, d_color);
-    QRect br = ltxt->boundingRect();
-			
-	const int w = br.width();
-    const int h = br.height();
-    	
-    int x, y;
-    if ( alignment & Qt::AlignLeft )
-        x = -w;
-    else if ( alignment & Qt::AlignRight )
-        x = 0 - w % 2;
-    else // Qt::AlignHCenter
-        x = -(w / 2);
-	
-	if ( alignment & Qt::AlignTop )
-        y =  - h ;
-    else if ( alignment & Qt::AlignBottom )
-        y = 0;
-    else // Qt::AlignVCenter
-        y = - (h/2);
-	
-    QWMatrix m;
-    m.translate(pos.x(), pos.y());
-#ifndef QT_NO_TRANSFORMATIONS
-    m.rotate(rotation);
-#endif
-    m.translate(x, y);
-
-	delete ltxt;
-    return m;
- };*/
-	
- void setFont(const QFont& fnt){d_font = fnt;};
-
-private:
-	QFont d_font;
-	QColor d_color;
 };
 
 #endif

@@ -424,13 +424,20 @@ public slots:
 	 bool translationInProgress(){return translateOn;};
 	 void startCurveTranslation();
 
-	// data range selectors
+	//! Returns TRUE if the data range selectors are enables, FALSE otherwise.
    	 bool selectorsEnabled(){return rangeSelectorsEnabled;};
+
+	 //! Enables the data range selectors depending on the value of ON (ON = false will call disableRangeSelectors()).
 	 bool enableRangeSelectors(bool on);
+
+	//! Disables the data range selectors tool.
 	 void disableRangeSelectors();
+
 	 void moveRangeSelector(bool up);
 	 void moveRangeSelector();
 	 void shiftRangeSelector(bool shift);
+
+	 //! Select the next/previous curve 
 	 void shiftCurveSelector(bool up);
 	 int selectedPoints(long curveKey);
 

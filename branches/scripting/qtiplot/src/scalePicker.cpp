@@ -88,9 +88,7 @@ int margin = 2; // pixels tolerance
 rect.setRect(rect.x() - margin, rect.y() - margin, rect.width() + 2 * margin, rect.height() +  2 * margin);
 
 if ( rect.contains(pos) ) 
-	{
 	emit axisDblClicked(scale->alignment());
-	}
 else
 	{// Click on the title
     switch(scale->alignment())   
@@ -127,23 +125,9 @@ int margin = 2; // pixels tolerance
 rect.setRect(rect.x() - margin, rect.y() - margin, rect.width() + 2 * margin, rect.height() +  2 * margin);
 
 if (rect.contains(pos)) 
-	{
-	if (scale->alignment() == QwtScaleDraw::LeftScale || scale->alignment() == QwtScaleDraw::RightScale)
-		emit axisRightClicked(scale->alignment());
-	else if (scale->alignment() == QwtScaleDraw::TopScale)
-		emit axisRightClicked(QwtScaleDraw::BottomScale);
-	else if (scale->alignment() == QwtScaleDraw::BottomScale)
-		emit axisRightClicked(QwtScaleDraw::TopScale);
-	}
+	emit axisRightClicked(scale->alignment());
 else
-	{
-	if (scale->alignment() == QwtScaleDraw::LeftScale || scale->alignment() == QwtScaleDraw::RightScale)
-		emit axisTitleRightClicked(scale->alignment());
-	else if (scale->alignment() == QwtScaleDraw::TopScale)
-		emit axisTitleRightClicked(QwtScaleDraw::BottomScale);
-	else if (scale->alignment() == QwtScaleDraw::BottomScale)
-		emit axisTitleRightClicked(QwtScaleDraw::TopScale);
-	}
+	emit axisTitleRightClicked(scale->alignment());
 }
 
 // The rect of a scale without the title
@@ -195,49 +179,14 @@ QRect ScalePicker::scaleRect(const QwtScaleWidget *scale) const
 
 int ScalePicker::maxLabelWidth(const QwtScaleWidget *scale) const
 {
-	QFontMetrics fm(scale->font());
-	const QwtScaleDraw * scaleDraw=scale->scaleDraw ();
-	const QwtScaleDiv 	scaleDiv=scaleDraw->scaleDiv();
-	const double step_eps = 1.0e-6;
-    int maxWidth = 0;
-
-    /*for (uint i = 0; i < scaleDiv.majCnt(); i++)
-    {
-        double val = scaleDiv.majMark(i);
-
-        // correct rounding errors if val = 0
-        if ((!scaleDiv.logScale()) 
-            && (qwtAbs(val) < step_eps * qwtAbs(scaleDiv.majStep())))
-        {
-            val = 0.0;
-        }
-
-        const int w = fm.boundingRect(scaleDraw->label(val)).width();
-        if ( w > maxWidth )
-            maxWidth = w;
-    }*/
-
-    return maxWidth;
+const QwtScaleDraw *sd=scale->scaleDraw ();
+return sd->maxLabelWidth (scale->font());
 }
 
 int ScalePicker::maxLabelHeight(const QwtScaleWidget *scale) const
 {
-	QFontMetrics fm(scale->font());
-	const QwtScaleDraw * scaleDraw=scale->scaleDraw ();
-	const QwtScaleDiv 	scaleDiv=scaleDraw->scaleDiv();
-   
-	int maxHeight = 0;
-
-    /*for (uint i = 0; i < scaleDiv.majCnt(); i++)
-    {
-        double val = scaleDiv.majMark(i);
-
-        const int w = fm.boundingRect(scaleDraw->label(val)).height();
-        if ( w > maxHeight )
-            maxHeight = w;
-    }*/
-	
-    return maxHeight;
+const QwtScaleDraw *sd=scale->scaleDraw ();
+return sd->maxLabelHeight (scale->font());
 }
 
 void ScalePicker::refresh()

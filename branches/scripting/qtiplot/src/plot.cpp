@@ -772,7 +772,10 @@ double dmin = 1.0e10;
 int key = -1;
 for (QMapIterator<int, QwtPlotCurve *> it = d_curves.begin(); it != d_curves.end(); ++it ) 
 	{
-	QwtPlotCurve *c = it.data();
+	QwtPlotCurve *c = (QwtPlotCurve *)it.data();
+	if (!c)
+		continue;
+
 	for (int i=0; i<c->dataSize(); i++)
 		{
 		double cx = map[c->xAxis()].xTransform(c->x(i)) - double(xpos);

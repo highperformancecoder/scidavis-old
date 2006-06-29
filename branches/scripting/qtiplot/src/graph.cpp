@@ -467,17 +467,13 @@ for (int i = 0;i<QwtPlot::axisCnt;i++)
 	d_plot->setAxisFont (i,numbersFnt);
 	QwtText t = d_plot->axisTitle (i);
 	t.setFont (scaleTitleFnt);
+	d_plot->setAxisTitle(i, t);
 	}
 }
 
 void Graph::setAxisFont(int axis,const QFont &fnt)
 {
-d_plot->setAxisFont (axis,fnt);
-if (lblFormat[axis] == Superscripts)
-	{	
-	QwtSupersciptsScaleDraw *sd= (QwtSupersciptsScaleDraw *)d_plot->axisScaleDraw(axis);
-	sd->setFont(fnt);
-	}
+d_plot->setAxisFont (axis, fnt);
 d_plot->replot();
 emit modifiedGraph();
 }
@@ -602,27 +598,18 @@ axesFormulas[axis] = formula;
 
 ScaleDraw *sd_old= (ScaleDraw *)d_plot->axisScaleDraw (axis);
 const QwtScaleDiv div=sd_old->scaleDiv ();
-			
+	
 if (format == Superscripts)
 	{
-	QwtScaleWidget *scale = (QwtScaleWidget *)d_plot->axisWidget(axis);
-	QColor color = QColor();
-	if (scale)	
-		{
-		QPalette pal=scale->palette();
-		color =pal.color(QPalette::Active, QColorGroup::Foreground);
-		}
-				
-	QwtSupersciptsScaleDraw* sd= new QwtSupersciptsScaleDraw(axisFont(axis), color);
-
+	QwtSupersciptsScaleDraw *sd = new QwtSupersciptsScaleDraw();
 	sd->setLineWidth(axesLineWidth);
-	/*d_plot->setAxisLabelFormat (axis, 'e', prec, 0);
-	sd->setScale(div);*/
+	//d_plot->setAxisLabelFormat (axis, 'e', 6, 0);
+	//sd->setScaleDiv(div);
 	sd->setFormulaString(formula.ascii());
-	d_plot->setAxisScaleDraw (axis,sd);	
+	d_plot->setAxisScaleDraw (axis, sd);	
 	}
 else
-	{				
+	{			
 	ScaleDraw *sd= new ScaleDraw(axesLineWidth);
 
 	/*if (format == Automatic)
@@ -630,11 +617,11 @@ else
 	else if (format == Scientific )
 		d_plot->setAxisLabelFormat (axis, 'e', prec, 0);
 	else if (format == Decimal)
-		d_plot->setAxisLabelFormat (axis, 'f', prec, 0);
+		d_plot->setAxisLabelFormat (axis, 'f', prec, 0);*/
 
-	sd->setScale(div);*/
+	//sd->setScaleDiv(div);
 	sd->setFormulaString(formula.ascii());
-	d_plot->setAxisScaleDraw (axis,sd);	
+	d_plot->setAxisScaleDraw (axis, sd);	
 	}
 }
 
@@ -900,7 +887,7 @@ int oldBaseline = 0;
 if (scale)
 	oldBaseline = scale->margin();
 
-if (d_plot->axisEnabled (axis) == axisOn &&
+/*if (d_plot->axisEnabled (axis) == axisOn &&
 	majTicksTypeList[axis] == majTicksType &&
 	minTicksTypeList[axis] == minTicksType &&
 	axesColors()[axis] == c.name() &&
@@ -910,7 +897,7 @@ if (d_plot->axisEnabled (axis) == axisOn &&
 	axesFormatInfo[axis] == formatInfo &&
 	axesFormulas[axis] == formula &&
 	oldBaseline == baselineDist)
- return;
+ return;*/
 
 d_plot->enableAxis (axis, axisOn);
 scale = (QwtScaleWidget *)d_plot->axisWidget(axis);	
@@ -926,6 +913,14 @@ if (scale)
 		}		
  	}
 	
+d_plot->setMajorTicksType(axis, majTicksType);	
+d_plot->setMinorTicksType(axis, minTicksType);
+setAxisTicksLength(axis, majTicksType, minTicksType, 
+				   d_plot->minorTickLength(), d_plot->majorTickLength());
+
+if (axisOn && (axis == QwtPlot::xTop || axis == QwtPlot::yRight))
+	updateSecondaryAxis(axis);//synchronize scale divisions
+
 ScaleDraw *sclDraw= (ScaleDraw *)d_plot->axisScaleDraw (axis);	
 sclDraw->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 
@@ -944,14 +939,6 @@ else
 	else	
 		setLabelsTextFormat(axis, type, formatInfo, table);
 	}
-
-d_plot->setMajorTicksType(axis, majTicksType);	
-d_plot->setMinorTicksType(axis, minTicksType);
-setAxisTicksLength(axis, majTicksType, minTicksType, 
-				   d_plot->minorTickLength(), d_plot->majorTickLength());
-
-if (axisOn && (axis == QwtPlot::xTop || axis == QwtPlot::yRight))
-	updateSecondaryAxis(axis);//synchronize scale divisions
 
 scalePicker->refresh();		
 d_plot->replot();	
@@ -1165,9 +1152,9 @@ emit modifiedGraph();
 
 void Graph::setAxisTitleFont(int axis,const QFont &fnt)
 {
-QwtText txt = d_plot->axisTitle (axis);
-txt.setFont (fnt);
-
+QwtText t = d_plot->axisTitle (axis);
+t.setFont (fnt);
+d_plot->setAxisTitle(axis, t);
 d_plot->replot();
 emit modifiedGraph(); 
 }
@@ -1758,12 +1745,12 @@ if ( !curve || curve->dataSize()<=0)
 	QString info;		
 	if ( selectedCursor == startID )
 		{
-		info="L <=> ";
+		info = tr("Left") + " <=> ";
 		selectedPoint=startPoint;
 		}
 	else if ( selectedCursor == endID )
 		{
-		info="R <=> ";
+		info = tr("Right") + " <=> ";
 		selectedPoint=endPoint;
 		}
 		
@@ -1813,7 +1800,7 @@ if (shift)
 		m->setLinePen(QPen(red,1,Qt::DashLine));
 			
 		selectedPoint = endPoint;			
-		info="R <=> ";
+		info = tr("Right") + " <=> ";
 		}
 	else if ( selectedCursor == endID )
 		{
@@ -1829,7 +1816,7 @@ if (shift)
 		m->setLinePen(QPen(red,1,Qt::DashLine));
 			
     	selectedPoint = startPoint;			
-		info="L <=> ";
+		info = tr("Left") + " <=> ";
 		}
 	d_plot->replot();
 		
@@ -1882,12 +1869,12 @@ d_plot->replot();
 if ( selectedCursor == startID )
 	{
     startPoint = selectedPoint;
-	info="L <=> ";
+	info = tr("Left") + " <=> ";
 	}
 else if ( selectedCursor == endID )
 	{
     endPoint = selectedPoint;
-	info="R <=> ";
+	info = tr("Right") + " <=> ";
 	}
 
 info+=curve->title().text();
@@ -1941,12 +1928,12 @@ d_plot->replot();
 if ( selectedCursor == startID )
 	{
     startPoint = selectedPoint;
-	info="L <=> ";
+	info = tr("Left") + " <=> ";
 	}
 else if ( selectedCursor == endID )
 	{
     endPoint = selectedPoint;
-	info="R <=> ";
+	info = tr("Right") + " <=> ";
 	}
 
 info+=curve->title().text(); 
@@ -2017,20 +2004,22 @@ if (on)
 		d+=QMAX(sz.width(),sz.height());
 		}
 		
-	/*startID=d_plot->insertLineMarker (QString::null,QwtPlot::xBottom);
-	d_plot->setMarkerSymbol(startID,QwtSymbol(QwtSymbol::Cross,
-					QBrush(Qt::NoBrush), QPen(red,2), QSize(d,d)));
-	d_plot->setMarkerLineStyle(startID, QwtPlotMarker::VLine);
-	d_plot->setMarkerLinePen(startID, QPen(red,1,Qt::DashLine));
-	d_plot->setMarkerPos (startID,curve->x(0),curve->y(0));
+	QwtPlotMarker *m = new QwtPlotMarker();
+	m->setSymbol(QwtSymbol(QwtSymbol::Cross, QBrush(Qt::NoBrush), QPen(red,2), QSize(d,d)));
+	m->setLineStyle(QwtPlotMarker::VLine);
+	m->setLinePen(QPen(red,1,Qt::DashLine));
+	m->setValue (curve->x(0),curve->y(0));
+	startID=d_plot->insertMarker(m);
+
 	selectedCursor=startID;
 		
-	endID=d_plot->insertLineMarker (QString::null,QwtPlot::xBottom);
-	d_plot->setMarkerLineStyle(endID, QwtPlotMarker::VLine);
-	d_plot->setMarkerLinePen(endID, QPen(black,1,Qt::DashLine));
-	d_plot->setMarkerSymbol(endID,QwtSymbol(QwtSymbol::Cross,
-					QBrush(Qt::NoBrush), QPen(black,2), QSize(d,d)));	
-	d_plot->setMarkerPos (endID,curve->x(endPoint),curve->y(endPoint));*/
+	m = new QwtPlotMarker();
+	m->setLineStyle(QwtPlotMarker::VLine);
+	m->setLinePen(QPen(black,1,Qt::DashLine));
+	m->setSymbol(QwtSymbol(QwtSymbol::Cross, QBrush(Qt::NoBrush), QPen(black,2), QSize(d,d)));	
+	m->setValue(curve->x(endPoint),curve->y(endPoint));
+	endID=d_plot->insertMarker(m);
+
 	d_plot->replot();
 		
 	QPainter painter(d_plot->canvas());
@@ -3216,41 +3205,39 @@ void Graph::shiftPointCursor(bool up)
 
 void Graph::shiftCurveCursor(bool up)
 {// Select the next/previous curve 
-    const QValueList<int> keys = d_plot->curveKeys();
-
-    int index = 0;
+	int index = 0;
     if ( selectedCurve >= 0 )
     {
-        for ( uint i = 0; i < keys.count() - 1; i++ )
+        for ( uint i = 0; i < c_keys.count() - 1; i++ )
         {
-            if ( selectedCurve == keys[(int)i] )
+            if ( selectedCurve == c_keys[(int)i] )
             {
                 index = i + (up ? 1 : -1);
                 break;
             }
         }
     }
-    index = (keys.count() + index) % keys.count();
+    index = (c_keys.count() + index) % c_keys.count();
 
-    if ( selectedCurve != keys[index] )
+    if ( selectedCurve != c_keys[index] )
 		{
         showCursor(FALSE);
-        selectedCurve = keys[index];
+        selectedCurve = c_keys[index];
         showCursor(TRUE);
 		}
 
-	const QwtPlotCurve *curve = d_plot->curve(selectedCurve);
-    if ( !curve )
+	const QwtPlotCurve *c = d_plot->curve(selectedCurve);
+    if ( !c )
         return;
 
 	QString info;
-	info=curve->title().text();
+	info=c->title().text();
 	info+="[";
 	info+=QString::number(selectedPoint+1);
 	info+="]: x=";
-	info+=QString::number(curve->x(selectedPoint), 'G', 15);
+	info+=QString::number(c->x(selectedPoint), 'G', 15);
 	info+="; y=";
-	info+=QString::number(curve->y(selectedPoint), 'G', 15);
+	info+=QString::number(c->y(selectedPoint), 'G', 15);
 	emit cursorInfo(info);
 }
 
@@ -3833,7 +3820,7 @@ for (i=0;i<d_plot->axisCnt;i++)
 
 for (i=0;i<d_plot->axisCnt;i++)
 	{
-	f=d_plot->axisTitle(i).font();
+	f=d_plot->axisFont(i);
 	list[0]="AxisFont"+QString::number(i);
 	list[1]=f.family();
 	list[2]=QString::number(f.pointSize());
@@ -6398,11 +6385,7 @@ for (i = 0; i<QwtPlot::axisCnt; i++)
 	font = axisFont(i);
 	font.setPointSizeFloat(factor*font.pointSizeFloat());
 	d_plot->setAxisFont (i, font);
-	if (lblFormat[i] == Superscripts)
-		{	
-		QwtSupersciptsScaleDraw *sd= (QwtSupersciptsScaleDraw *)d_plot->axisScaleDraw (i);
-		sd->setFont(font);
-		}
+
 	font = axisTitleFont(i);
 	font.setPointSizeFloat(factor*font.pointSizeFloat());
 	d_plot->axisTitle(i).setFont (font);
@@ -6741,7 +6724,7 @@ menu.insertSeparator();
 menu.insertItem(tr("&Hide axis"), this, SLOT(hideSelectedAxis()));
 
 int gridsID = menu.insertItem(tr("&Show grids"), this, SLOT(showGrids()));
-if (selectedAxis == QwtScaleDraw::LeftScale || selectedAxis == QwtScaleDraw::RightScale)
+if (axis == QwtScaleDraw::LeftScale || axis == QwtScaleDraw::RightScale)
 	{
 	if (grid.majorOnY) 
 		menu. setItemChecked(gridsID, true);
@@ -6760,27 +6743,23 @@ menu.exec(QCursor::pos());
 
 void Graph::showAxisDialog()
 {
-if (selectedAxis == QwtScaleDraw::BottomScale)
-	 selectedAxis = QwtScaleDraw::TopScale;
-else if (selectedAxis == QwtScaleDraw::TopScale)
-	 selectedAxis = QwtScaleDraw::BottomScale;
-
 emit showAxisDialog(selectedAxis);
 }
 
 void Graph::showScaleDialog()
 {
-if (selectedAxis == QwtScaleDraw::BottomScale)
-	 selectedAxis = QwtScaleDraw::TopScale;
-else if (selectedAxis == QwtScaleDraw::TopScale)
-	 selectedAxis = QwtScaleDraw::BottomScale;
-
 emit axisDblClicked(selectedAxis);
 }
 
 void Graph::hideSelectedAxis()
 {
-d_plot->enableAxis(selectedAxis, false);
+int axis = -1;
+if (selectedAxis == QwtScaleDraw::LeftScale || selectedAxis == QwtScaleDraw::RightScale)
+	axis = selectedAxis - 2;
+else
+	axis = selectedAxis + 2;
+
+d_plot->enableAxis(axis, false);
 scalePicker->refresh();
 emit modifiedGraph();
 }

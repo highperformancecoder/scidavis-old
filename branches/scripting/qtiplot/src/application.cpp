@@ -3650,7 +3650,7 @@ progress.setLabelText(title);
 progress.setTotalSteps(widgets);
 progress.setActiveWindow();
 //progress.setMinimumDuration(10000);
-//progress.move(0,0);
+progress.move(0,0);
 
 Folder *cf = app->projectFolder();
 app->folders->blockSignals (true);
