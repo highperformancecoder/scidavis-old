@@ -13,16 +13,11 @@
 class ScaleDraw: public QwtScaleDraw
 {
 public:		
-	ScaleDraw(int width)
+	ScaleDraw(const QString& s = QString::null)
 	{
-	d_lineWidth = width;
-	formula_string = QString::null;
+	formula_string = s;
 	};
-	ScaleDraw()
-	{
-	d_lineWidth = 1;
-	formula_string = QString::null;
-	};
+
 	virtual ~ScaleDraw(){};
 		
 	QString formulaString() {return formula_string;};
@@ -52,19 +47,6 @@ public:
 		}
 	else
 		return QwtScaleDraw::label(value);
-	};
-
-	virtual void draw(QPainter *p, const QColorGroup &colorGroup) const
-	{
-	p->save();
-		
-	QPen pen = p->pen();
-	pen.setWidth(d_lineWidth);
-	p->setPen(pen);
-		
-	QwtScaleDraw::draw(p, colorGroup);	
-		
-	p->restore();
 	};
 	
 	/*void drawTick(QPainter *p, double val, int len) const
@@ -151,9 +133,9 @@ public:
             	break;
     		}
 		}
-	};
+	};*/
 	
-	void drawBackbone(QPainter *p) const
+	/*void drawBackbone(QPainter *p) const
 	{   
 	const int pw = p->pen().width();
 	const int pw2 = p->pen().width() % 2;
@@ -204,27 +186,17 @@ public:
 	else
 		QwtScaleDraw::drawBackbone(p);
 	};*/
-
-	uint lineWidth(){return d_lineWidth;};
-		
-	void setLineWidth(uint width)
-	{
-	if (d_lineWidth != width)
-		d_lineWidth = width;
-	};
 	
 private:
-	uint d_lineWidth;
 	QString formula_string;
 };
 
 class QwtTextScaleDraw: public ScaleDraw
 {
 public:
-	QwtTextScaleDraw(const QStringList& list, int linewidth)
+	QwtTextScaleDraw(const QStringList& list)
 		{
 		labels = list; 
-		setLineWidth(linewidth);			
 		};
 		
 	~QwtTextScaleDraw(){};
@@ -247,11 +219,10 @@ private:
 class TimeScaleDraw: public ScaleDraw
 {
 public:
-	TimeScaleDraw(const QTime& t, const QString& format, int linewidth)
+	TimeScaleDraw(const QTime& t, const QString& format)
 		{
 		t_origin = t; 
 		t_format = format;
-		setLineWidth(linewidth);
 		};
 		
 	~TimeScaleDraw(){};
@@ -277,11 +248,10 @@ private:
 class DateScaleDraw: public ScaleDraw
 {
 public:
-	DateScaleDraw(const QDate& t, const QString& format, int linewidth)
+	DateScaleDraw(const QDate& t, const QString& format)
 		{
 		t_origin = t; 
 		t_format = format;
-		setLineWidth(linewidth);			
 		};
 		
 	~DateScaleDraw(){};
@@ -316,11 +286,12 @@ public:
 	int prec, fieldwidth;
 	labelFormat(f, prec, fieldwidth);*/
 	
-	//double lval = ScaleDraw::label(value).toDouble();
+	double lval = ScaleDraw::label(value).text().toDouble();
 	//txt.setNum (lval, 'e', prec);
 
 	QString txt;
-	txt.setNum (value, 'e', 6);
+	txt.setNum (lval, 'e', 6);
+
 	QStringList list = QStringList::split ( "e", txt, FALSE );
 	if (list[0].toDouble() == 0.0)
 		return "0";

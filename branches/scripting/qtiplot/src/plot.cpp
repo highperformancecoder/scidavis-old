@@ -17,11 +17,12 @@ Plot::Plot(QWidget *parent, const char *name)
 marker_key = 0;
 curve_key = 0;
 
+minTickLength = 5;
+majTickLength = 9;
+
 movedGraph=FALSE;
 graphToResize=FALSE;
 ShiftButton=FALSE;
-
-d_lineWidth = 1;		
 
 setGeometry(QRect(0,0,500,400));
 setAxisTitle(0, tr("Y Axis Title"));
@@ -43,10 +44,14 @@ for (int i= 0; i<QwtPlot::axisCnt; i++)
 
 	QwtScaleWidget *scale = (QwtScaleWidget *) axisWidget(i);
 	if (scale)
+		{
 		scale->setMargin(0);
-	
-	ScaleDraw *sd= new ScaleDraw(1);
-	setAxisScaleDraw (i, sd);
+
+		QwtScaleDraw *sd = axisScaleDraw(i); 
+		sd->setTickLength  	(QwtScaleDiv::MinorTick, minTickLength); 
+		sd->setTickLength  	(QwtScaleDiv::MediumTick, minTickLength);
+		sd->setTickLength  	(QwtScaleDiv::MajorTick, majTickLength);
+		}
 	}
 	
 QwtPlotLayout *pLayout=plotLayout();
@@ -155,11 +160,8 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
 		
     painter->save();	
-    painter->setPen(QPen(color,d_lineWidth,QPainter::SolidLine));
+    painter->setPen(QPen(color, axesLinewidth(), QPainter::SolidLine));
 		
-	const int minTickLength = minorTickLength();
-	const int majTickLength = majorTickLength();
-
 	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScaleDiv(axis);
 	const QwtValueList minTickList = scDiv->ticks(QwtScaleDiv::MinorTick);
 	int minTicks = (int)minTickList.count();
@@ -169,7 +171,7 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 
 	const QwtValueList majTickList = scDiv->ticks(QwtScaleDiv::MajorTick);
 	int majTicks = (int)majTickList.count();
-
+	
 int j, x, y, low,high;
 switch (axis)
 	{
@@ -290,13 +292,12 @@ void Plot::drawInwardMajorTicks(QPainter *painter, const QRect &rect,
 	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
 		
     painter->save();	
-    painter->setPen(QPen(color, d_lineWidth, QPainter::SolidLine));
+    painter->setPen(QPen(color, axesLinewidth(), QPainter::SolidLine));
 		
 	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScaleDiv(axis);
 	
 	const QwtValueList majTickList = scDiv->ticks(QwtScaleDiv::MajorTick);
-	const int majTicks = (int)majTickList.count();
-	const int majTickLength = majorTickLength();
+	int majTicks = (int)majTickList.count();
 
 switch (axis)
 	{
@@ -360,11 +361,8 @@ void Plot::drawInwardMinorTicks(QPainter *painter, const QRect &rect,
 	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
 		
     painter->save();	
-    painter->setPen(QPen(color, d_lineWidth, QPainter::SolidLine));
+    painter->setPen(QPen(color, axesLinewidth(), QPainter::SolidLine));
 		
-	const int minTickLength = minorTickLength();
-	const int majTickLength = majorTickLength();
-
 	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScaleDiv(axis);
 	const QwtValueList tickList = scDiv->ticks(QwtScaleDiv::MinorTick);
 	int minTicks = (int)tickList.count();
@@ -447,40 +445,48 @@ switch (axis)
 painter->restore();
 }
 
-void Plot::setTicksLineWidth(int width)
+void Plot::setAxesLinewidth(int width)
 {
-if (d_lineWidth == width)
-	return;
+for (int i=0; i<QwtPlot::axisCnt; i++)
+	{
+	QwtScaleWidget *scale=(QwtScaleWidget*) this->axisWidget(i);
+	if (scale)
+		{
+		scale->setPenWidth(width);
+		scale->repaint();
+		}
+	}
+}
 
-d_lineWidth = width;
+int Plot::axesLinewidth() const
+{
+for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
+	{
+	const QwtScaleWidget *scale = this->axisWidget(axis);
+    if (scale)
+		return scale->penWidth();
+	}
+return 0;
 }
 
 int Plot::minorTickLength() const
 {
-for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
-	{
-	const QwtScaleWidget *scale = this->axisWidget(axis);
-    if (scale)
-		{
-		const QwtScaleDraw *sd = scale->scaleDraw ();
-		return sd->tickLength (QwtScaleDiv::MinorTick);
-		}
-	}
-return 0;
+return minTickLength;
 }
 
 int Plot::majorTickLength() const
 {
-for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
-	{
-	const QwtScaleWidget *scale = this->axisWidget(axis);
-    if (scale)
-		{
-		const QwtScaleDraw *sd = scale->scaleDraw ();
-		return sd->tickLength (QwtScaleDiv::MajorTick);
-		}
-	}
-return 0;
+return majTickLength;
+}
+
+void Plot::setTickLength (int minLength, int majLength)
+{
+if (majTickLength == majLength &&
+	minTickLength == minLength)
+	return;
+
+majTickLength = majLength;
+minTickLength = minLength;
 }
 
 void Plot::mousePressEvent ( QMouseEvent * e )

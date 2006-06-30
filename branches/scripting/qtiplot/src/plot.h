@@ -40,8 +40,11 @@ public:
 
 	int minorTickLength() const;
 	int majorTickLength() const;
+	void setTickLength (int minLength, int majLength);
 
-	void setTicksLineWidth(int width);
+	int axesLinewidth() const;
+	void setAxesLinewidth(int width);
+
 	void printFrame(QPainter *painter, const QRect &rect) const;
 
 	QColor frameColor();
@@ -82,9 +85,10 @@ protected:
 	QMap<int, QwtPlotCurve*> d_curves;
 	QMap<int, QwtPlotMarker*> d_markers;
 
-	int d_lineWidth;
 	QValueList <int> minorTicksType;
 	QValueList <int> majorTicksType;
+
+	int minTickLength, majTickLength;
 	bool movedGraph, ShiftButton, graphToResize;
 	QPoint presspos;
 	int marker_key;

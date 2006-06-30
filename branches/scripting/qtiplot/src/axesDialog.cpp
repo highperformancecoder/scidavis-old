@@ -2449,7 +2449,7 @@ boxMargin->setValue (p->margin());
 boxBorderWidth->setValue(p->lineWidth());
 boxBorderColor->setColor(p->frameColor());
 boxBackgroundColor->setColor(p->paletteBackgroundColor());
-boxAxesLinewidth->setValue(d_graph->axesLinewidth());
+boxAxesLinewidth->setValue(d_graph->plotWidget()->axesLinewidth());
 
 boxFramed->setChecked(d_graph->framed());
 boxFrameColor->setColor(d_graph->canvasFrameColor());
@@ -2457,8 +2457,8 @@ boxFrameWidth->setValue(d_graph->canvasFrameWidth());
 
 boxBackbones->setChecked (d_graph->axesBackbones());
 
-boxMinorTicksLength->setValue(d_graph->minorTickLength());
-boxMajorTicksLength->setValue(d_graph->majorTickLength());
+boxMinorTicksLength->setValue(p->minorTickLength());
+boxMajorTicksLength->setValue(p->majorTickLength());
 }
 
 int axesDialog::mapToQwtAxisId()

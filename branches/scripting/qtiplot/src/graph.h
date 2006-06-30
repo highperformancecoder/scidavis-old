@@ -328,7 +328,6 @@ public slots:
 	QStringList enabledTickLabels();
 	void setEnabledTickLabels(const QStringList& list);
 	
-	int axesLinewidth();
 	void setAxesLinewidth(int width);
 	void loadAxesLinewidth(int width);//used when opening a project file
 
@@ -704,7 +703,7 @@ private:
 	int selectedCol,xCol,widthLine,fitID,linesOnPlot, defaultMarkerFrame;
 	int auxMrkAngle,auxMrkBkg,auxMrkWidth, averagePixels;
 	int auxArrowHeadLength, auxArrowHeadAngle;
-	int axesLineWidth, translationDirection;
+	int translationDirection;
 	long selectedMarker,legendMarkerID, startID, endID, functions;
 	long mrkX,mrkY;//x=0 et y=0 line markers keys
 	bool startArrowOn, endArrowOn, drawTextOn, drawLineOn, drawArrowOn;
