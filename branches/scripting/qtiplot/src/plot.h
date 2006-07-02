@@ -45,6 +45,9 @@ public:
 	int axesLinewidth() const;
 	void setAxesLinewidth(int width);
 
+	void setAxisLabelFormat(int axis, char f, int prec);
+    void axisLabelFormat(int axis, char &f, int &prec) const;
+
 	void printFrame(QPainter *painter, const QRect &rect) const;
 
 	QColor frameColor();

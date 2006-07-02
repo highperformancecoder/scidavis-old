@@ -708,7 +708,7 @@ private:
 	long mrkX,mrkY;//x=0 et y=0 line markers keys
 	bool startArrowOn, endArrowOn, drawTextOn, drawLineOn, drawArrowOn;
 	
-	//the following bools tell iwhich data tool is activated by the user
+	//the following bool values tell which data tool is activated by the user
 	bool removePointsEnabled,movePointsEnabled, translateOn;
 	bool pickerEnabled, cursorEnabled, rangeSelectorsEnabled;	
 	bool piePlot;//tells if the plot is a pie plot

@@ -3,7 +3,6 @@
 
 #include "parser.h"
 
-#include <qmessagebox.h>
 #include <qpainter.h>
 #include <qdatetime.h>
 
@@ -13,17 +12,18 @@
 class ScaleDraw: public QwtScaleDraw
 {
 public:		
-	ScaleDraw(const QString& s = QString::null)
-	{
-	formula_string = s;
-	};
+	ScaleDraw(const QString& s = QString::null):
+	d_fmt('g'),
+    d_prec(4),
+	formula_string (s)
+	{};
 
 	virtual ~ScaleDraw(){};
 		
 	QString formulaString() {return formula_string;};
 	void setFormulaString(const QString& formula) {formula_string = formula;};
 
-	virtual QwtText label(double value) const
+	double transformValue(double value) const
 	{
 	if (!formula_string.isEmpty())
 		{
@@ -41,13 +41,71 @@ public:
 			}
 		catch(mu::ParserError &)
 			{
-			return QwtText();
+			return 0;
 			}
-		return QwtScaleDraw::label(lbl);
+
+		return lbl;
 		}
 	else
-		return QwtScaleDraw::label(value);
+		return value;
 	};
+
+	virtual QwtText label(double value) const
+	{
+	return QwtText(QString::number(transformValue(value), d_fmt, d_prec));
+	};
+
+/*!
+  \brief Set the number format for the major scale labels
+
+  Format character and precision have the same meaning as for
+  sprintf().
+  \param f format character 'e', 'f', 'g' 
+  \param prec
+    - for 'e', 'f': the number of digits after the radix character (point)
+    - for 'g': the maximum number of significant digits
+
+  \sa labelFormat()
+*/
+void setLabelFormat(char f, int prec)
+{
+d_fmt = f;
+d_prec = prec;
+}
+
+/*!
+  \brief Set the number precision for the major scale labels
+
+  Precision has the same meaning as for
+  sprintf().
+  \param prec
+    - for 'e', 'f': the number of digits after the radix character (point)
+    - for 'g': the maximum number of significant digits
+
+  \sa labelFormat()
+*/
+void setLabelPrecision(int prec)
+{
+d_prec = prec;
+}
+
+/*!
+  \brief Return the number format for the major scale labels
+
+  Format character and precision have the same meaning as for
+  sprintf().
+  \param f format character 'e', 'f' or 'g' 
+  \param prec
+    - for 'e', 'f': the number of digits after the radix character (point)
+    - for 'g': the maximum number of significant digits
+
+  \sa setLabelFormat()
+*/
+void labelFormat(char &f, int &prec) const
+{
+    f = d_fmt;
+    prec = d_prec;
+}
 	
 	/*void drawTick(QPainter *p, double val, int len) const
 	{
@@ -189,6 +247,9 @@ public:
 	
 private:
 	QString formula_string;
+
+	char d_fmt;
+    int d_prec;
 };
 
 class QwtTextScaleDraw: public ScaleDraw
@@ -277,20 +338,23 @@ private:
 class QwtSupersciptsScaleDraw: public ScaleDraw
 {
 public:
-	QwtSupersciptsScaleDraw(){};
+	QwtSupersciptsScaleDraw(const QString& s = QString::null)
+	{
+	setFormulaString(s);
+	};
+
 	~QwtSupersciptsScaleDraw(){};
 
 	virtual QwtText label(double value) const
 	{
-	/*	char f;
-	int prec, fieldwidth;
-	labelFormat(f, prec, fieldwidth);*/
+	char f;
+	int prec;
+	labelFormat(f, prec);
 	
-	double lval = ScaleDraw::label(value).text().toDouble();
-	//txt.setNum (lval, 'e', prec);
-
+	double val = transformValue(value);
+	
 	QString txt;
-	txt.setNum (lval, 'e', 6);
+	txt.setNum (val, 'e', prec);
 
 	QStringList list = QStringList::split ( "e", txt, FALSE );
 	if (list[0].toDouble() == 0.0)

@@ -47,10 +47,13 @@ for (int i= 0; i<QwtPlot::axisCnt; i++)
 		{
 		scale->setMargin(0);
 
-		QwtScaleDraw *sd = axisScaleDraw(i); 
+		ScaleDraw *sd = new ScaleDraw();
+		 
 		sd->setTickLength  	(QwtScaleDiv::MinorTick, minTickLength); 
 		sd->setTickLength  	(QwtScaleDiv::MediumTick, minTickLength);
 		sd->setTickLength  	(QwtScaleDiv::MajorTick, majTickLength);
+
+		setAxisScaleDraw (i, sd);
 		}
 	}
 	
@@ -830,4 +833,40 @@ void Plot::removeCurve(int index)
 QwtPlotCurve *c = d_curves[index];
 c->detach();
 d_curves.remove (index);
+}
+
+/*!
+  \return the number format for the major scale labels of a specified axis
+  \param axis axis index
+  \retval f format character
+  \retval prec precision
+*/
+void Plot::axisLabelFormat(int axis, char &f, int &prec) const
+{
+if (axisValid(axis))
+	{
+	ScaleDraw *sd = (ScaleDraw *)axisScaleDraw (axis);
+    sd->labelFormat(f, prec);
+	}
+else
+    {
+    //for a bad call we return the default values
+    f = 'g'; 
+    prec = 4;
+    }
+}
+
+/*!
+  Change the number format for the major scale of a selected axis
+  \param axis axis index
+  \param f format
+  \param prec precision
+*/
+void Plot::setAxisLabelFormat(int axis, char f, int prec)
+{
+    if (axisValid(axis))
+		{
+		ScaleDraw *sd = (ScaleDraw *)axisScaleDraw (axis);
+        sd->setLabelFormat(f, prec);
+		}
 }

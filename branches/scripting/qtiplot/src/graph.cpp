@@ -426,29 +426,30 @@ void Graph::movedPicker(const QPoint &pos, bool mark)
 	if (mark)
 		{
 		QwtPlotMarker mrk;
-		mrk.setSymbol(QwtSymbol(QwtSymbol::Cross,
-					QBrush(Qt::NoBrush), QPen(red,1), QSize(15,15)));
+		mrk.setSymbol(QwtSymbol(QwtSymbol::Cross,QBrush(Qt::NoBrush),QPen(red,1),QSize(15,15)));
 
 		QPainter painter(d_plot->canvas());
 		painter.setClipping(TRUE);
-		painter.setClipRect(d_plot->canvas()->contentsRect());
+		QRect cr = d_plot->canvas()->contentsRect();
+		painter.setClipRect(cr);
 		painter.setRasterOp(Qt::NotXorROP);
 
-		/*if (translateOn)
+		if (translateOn)
 			{
 			const QwtPlotCurve *c = d_plot->curve(selectedCurve);
 			if (!c)
 				return;
 				
 			if (translationDirection)
-				mrk.draw(&painter,
-				d_plot->transform(QwtPlot::xBottom,c->x(selectedPoint)), pos.y(),QRect());
+				mrk.setValue(c->x(selectedPoint), d_plot->invTransform(QwtPlot::yLeft, pos.y()));
 			else
-				mrk.draw(&painter,pos.x(), 
-				d_plot->transform(QwtPlot::yLeft,c->y(selectedPoint)),QRect());
+				mrk.setValue(d_plot->invTransform(QwtPlot::xBottom,pos.x()), c->y(selectedPoint));
 			}
 		else
-			mrk.draw(&painter, pos.x(), pos.y(),QRect());*/
+			mrk.setValue(d_plot->invTransform(QwtPlot::xBottom, pos.x()), 
+						 d_plot->invTransform(QwtPlot::yLeft, pos.y()));
+			
+		mrk.draw(&painter, d_plot->canvasMap(QwtPlot::xBottom), d_plot->canvasMap(QwtPlot::yLeft), cr);
 		}
 }
 
@@ -569,13 +570,13 @@ QStringList format;
 for (int i= 0; i<8; i++)
 	format<<"0";
 
-int prec, fieldwidth;
+int prec;
 char f;
 for (int j= 0; j<4; j++)
 	{
 	if (d_plot->axisEnabled (j))
 		{
-		//d_plot->axisLabelFormat (j, f, prec, fieldwidth);		
+		d_plot->axisLabelFormat (j, f, prec);		
 		
 		format[2*j]=QString::number(lblFormat[j]);
 		format[2*j+1]=QString::number(prec);
@@ -600,24 +601,23 @@ const QwtScaleDiv div=sd_old->scaleDiv ();
 	
 if (format == Superscripts)
 	{
-	QwtSupersciptsScaleDraw *sd = new QwtSupersciptsScaleDraw();
-	sd->setFormulaString(formula.ascii());
-	//d_plot->setAxisLabelFormat (axis, 'e', 6, 0);
+	QwtSupersciptsScaleDraw *sd = new QwtSupersciptsScaleDraw(formula.ascii());
+	sd->setLabelPrecision(prec);
 	sd->setScaleDiv(div);
 	d_plot->setAxisScaleDraw (axis, sd);	
 	}
 else
 	{			
 	ScaleDraw *sd= new ScaleDraw(formula.ascii());
-
-	/*if (format == Automatic)
-		d_plot->setAxisLabelFormat (axis, 'g', prec, 0);
-	else if (format == Scientific )
-		d_plot->setAxisLabelFormat (axis, 'e', prec, 0);
-	else if (format == Decimal)
-		d_plot->setAxisLabelFormat (axis, 'f', prec, 0);*/
-
 	sd->setScaleDiv(div);
+
+	if (format == Automatic)
+		sd->setLabelFormat ('g', prec);
+	else if (format == Scientific )
+		sd->setLabelFormat ('e', prec);
+	else if (format == Decimal)
+		sd->setLabelFormat ('f', prec);
+
 	d_plot->setAxisScaleDraw (axis, sd);	
 	}
 }
@@ -867,8 +867,8 @@ QValueList<int> majTicksTypeList = d_plot->getMajorTicksType();
 QValueList<int> minTicksTypeList = d_plot->getMinorTicksType();
 	
 char f;
-int pr,fw;
-//d_plot->axisLabelFormat (axis, f, pr, fw);
+int pr;
+d_plot->axisLabelFormat (axis, f, pr);
 
 QwtScaleWidget *scale = (QwtScaleWidget *)d_plot->axisWidget(axis);
 int oldBaseline = 0;
@@ -902,7 +902,6 @@ if (scale)
  	}
 
 ScaleDraw *sclDraw= (ScaleDraw *)d_plot->axisScaleDraw (axis);	
-
 if (!labelsOn)
 	sclDraw->enableComponent (QwtAbstractScaleDraw::Labels, false);
 else
@@ -919,7 +918,7 @@ else
 	setAxisLabelRotation(axis, rotation);
 	}
 
-sclDraw= (ScaleDraw *)d_plot->axisScaleDraw (axis);	
+sclDraw = (ScaleDraw *)d_plot->axisScaleDraw (axis);	
 sclDraw->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 
 d_plot->setMajorTicksType(axis, majTicksType);	
@@ -965,20 +964,25 @@ else if (type == ColHeader)
 			list<<table->colLabel(i);
 		}
 	}
-/*else if (type == Day)
+else if (type == Day)
 	{
 	const QwtScaleDiv *sd = d_plot->axisScaleDiv (axis);
-	int maj = sd->majCnt();
-	int min = sd->minCnt();
+
+	const QwtValueList minTickList = sd->ticks(QwtScaleDiv::MinorTick);
+	int min = (int)minTickList.count();
+
+	const QwtValueList majTickList = sd->ticks(QwtScaleDiv::MajorTick);
+	int maj = (int)majTickList.count();
+
 	int k=0;
 	QString day;
 	for (int i=0; i<maj; i++)
 		{
 		while(k < min)
 			{
-			if (sd->minMark(k) < sd->majMark(i))
+			if (minTickList[k] < majTickList[k])
 				{
-				day = QDate::shortDayName (int(sd->minMark(k))%8);
+				day = QDate::shortDayName (int(minTickList[k])%8);
 				if (list.isEmpty () || list.last() != day)
 					list<<day;
 				k++;
@@ -987,20 +991,20 @@ else if (type == ColHeader)
 				break;
 			}
 		
-		day = QDate::shortDayName (int(sd->majMark (i))%8);
+		day = QDate::shortDayName (int(majTickList[k])%8);
 		if (list.isEmpty () || list.last() != day)
 			list<<day;
 		}
 
 	while(k < min)
 		{
-		day = QDate::shortDayName (int(sd->minMark(k))%8);
+		day = QDate::shortDayName (int(minTickList[k])%8);
 		if (list.last() != day)
 			list<<day;
 		k++;
 		}
 	}
-else if (type == Month)
+/*else if (type == Month)
 	{
 	const QwtScaleDiv *sd = d_plot->axisScaleDiv (axis);
 	int maj = sd->majCnt();
@@ -5707,13 +5711,13 @@ void Graph::zoom(bool on)
 {
 d_zoomer->setEnabled(on);
 
-int prec, fw;
+int prec;
 char f;
 for (int j= 0; j<QwtPlot::axisCnt; j++)
 	{
-	/*	d_plot->axisLabelFormat(j,f,prec,fw);
+	d_plot->axisLabelFormat(j,f,prec);
 	if (prec<4)
-		d_plot->setAxisLabelFormat (j,f,4,fw);*/			
+		d_plot->setAxisLabelFormat (j,f,4);			
 	}
 
 QCursor cursor=QCursor (QPixmap(lens_xpm),-1,-1);
