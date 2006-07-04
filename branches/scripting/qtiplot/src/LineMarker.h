@@ -14,7 +14,7 @@ public:
 	QPoint startPoint();
 	QPoint endPoint();
 	double dist(int x, int y);
-	double teta() const;
+	double teta(int xs, int ys, int xe, int ye) const;
 	double length();
 
 	void setColor(const QColor& c);
@@ -40,12 +40,14 @@ public:
 	bool filledArrowHead(){return filledArrow;};
 	void fillArrowHead(bool fill);
 	
-	static QwtScaleMap mapCanvasToDevice(QPainter *p, QwtPlot *plot, int axis) ;
-		
+	void updateBoundingRect();
+	
 private:
-	QPoint start,end;
+	QPoint d_start, d_end; 
 	QPen pen;
 	bool startArrow,endArrow, filledArrow;
 	int d_headAngle, d_headLength;
+	QwtDoubleRect d_rect;
+	QwtPlot *d_plot;
 };
 #endif

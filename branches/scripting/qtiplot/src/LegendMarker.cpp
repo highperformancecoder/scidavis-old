@@ -1,5 +1,4 @@
 #include "LegendMarker.h"
-#include "LineMarker.h"
 #include "graph.h"
 #include "pie.h"
 #include "VectorCurve.h"
@@ -298,10 +297,10 @@ delete text_copy;
 QRect LegendMarker::scaledLegendRect(QPainter *p, const QPoint& canvas_origin, const QRect& rect)
 { 
 int textH=0,maxL=0,rectH=0,rectL=0;
-int textL,margin=10;	
+int textL, margin=10;	
 int hspace=30;//determines distance between symbols and legend text
 
-QRect copy= rect;	
+QRect copy = rect;	
 copy.moveBy(canvas_origin.x(), canvas_origin.y());
 
 if (p->device()->isExtDev())
@@ -313,10 +312,10 @@ if (p->device()->isExtDev())
 	double dx=xMap.invTransform(lRect.topLeft().x());
 	double dy=yMap.invTransform(lRect.topLeft().y());			
 	
-	QwtScaleMap map=LineMarker::mapCanvasToDevice(p, plot, QwtPlot::xBottom);		
+	/*QwtScaleMap map=LineMarker::mapCanvasToDevice(p, plot, QwtPlot::xBottom);		
 	copy.setX(map.transform(dx));
 	map=LineMarker::mapCanvasToDevice(p, plot, QwtPlot::yLeft);	
-	copy.setY(map.transform(dy));
+	copy.setY(map.transform(dy));*/
 	}
 
 QwtText *text_copy= new QwtText(*d_text);
@@ -344,15 +343,15 @@ for (int i=0;i<n;i++)
 		}
 		
 	 text_copy->setText(str);
-	 /*QRect tr=text_copy->boundingRect(p);
-	 textL+=tr.width();
+	 QSize size = text_copy->textSize();
+	 textL+=size.width();
 	 if (textL>maxL) maxL=textL;
 
-	 textH=tr.height();
+	 textH = size.height();
 	 rectH+=textH;
 	 
-	 heights[i]=h+textH/2;
-	 h+=textH;*/
+	 heights[i]= h+textH/2;
+	 h+=textH;
 	 }	
 	
 rectH+=margin;

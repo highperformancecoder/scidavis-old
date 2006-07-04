@@ -26,6 +26,9 @@ public:
 
 	int closestCurve(int xpos, int ypos, int &dist, int &point);
 	QwtPlotCurve* curve(int index){return d_curves[index];};
+	QMap<int, QwtPlotCurve*> curves(){return d_curves;};
+
+	QwtDoubleRect boundingRect();
 
 	QwtPlotMarker* marker(int index){return d_markers[index];};
 	QValueList<int> markerKeys(){return d_markers.keys();};

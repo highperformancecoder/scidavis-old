@@ -412,7 +412,7 @@ for (int i=0;i<(int)graphsList->count();i++)
 		gr->setGeometry(QRect(gx,gy, width, height));
 		gr->plotWidget()->resize(QSize(width, height));
 
-		gr->resizeMarkers(w_ratio, h_ratio);
+		//gr->resizeMarkers(w_ratio, h_ratio);
 		}
 	}
 

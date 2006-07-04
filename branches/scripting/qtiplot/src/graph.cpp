@@ -337,7 +337,7 @@ void Graph::highlightImageMarker(long markerID)
 {
 ImageMarker* mrkI = (ImageMarker*)d_plot->marker(markerID);
 if (!mrkI)
-		return;	
+	return;	
 
 selectedMarker=markerID;					
 QwtPlotCanvas *canvas=d_plot->canvas ();
@@ -968,7 +968,15 @@ else if (type == Day)
 	{
 	const QwtScaleDiv *sd = d_plot->axisScaleDiv (axis);
 
-	const QwtValueList minTickList = sd->ticks(QwtScaleDiv::MinorTick);
+	const QwtValueList majTickList = sd->ticks(QwtScaleDiv::MajorTick);
+	for (int i=0; i<(int)majTickList.count(); i++)
+		{	
+		QString day = QDate::shortDayName (int(majTickList[i])%7);
+		list<<day;
+		}
+	}
+
+	/*const QwtValueList minTickList = sd->ticks(QwtScaleDiv::MinorTick);
 	int min = (int)minTickList.count();
 
 	const QwtValueList majTickList = sd->ticks(QwtScaleDiv::MajorTick);
@@ -1003,7 +1011,8 @@ else if (type == Day)
 			list<<day;
 		k++;
 		}
-	}
+	}*/
+
 /*else if (type == Month)
 	{
 	const QwtScaleDiv *sd = d_plot->axisScaleDiv (axis);
@@ -1271,88 +1280,6 @@ QwtText t = d_plot->title();
 return t.flags();
 }
 
-void Graph::setAutoScale()
-{
-int maxNumSteps;
-int scaleType=scales[6].toInt();
-
-int a;
-for (a = QwtPlot::xBottom;	a<= QwtPlot::xTop; a++)
-	{
-	/*if (scaleType == 1)
-		{
-		if (inverted)
-			d_plot->setAxisOptions(a, QwtAutoScale::Logarithmic | QwtAutoScale::Inverted);
-		else
-			d_plot->setAxisOptions(a, QwtAutoScale::Logarithmic);
-		}
-	else if (scaleType == 0)
-		{
-		if (inverted)
-			d_plot->setAxisOptions(a, QwtAutoScale::None | QwtAutoScale::Inverted);
-		else
-			d_plot->setAxisOptions(a, QwtAutoScale::None);
-		}*/
-
-	QwtScaleEngine *sc_engine = 0;
-	if (scaleType == 1)
-		sc_engine = new QwtLog10ScaleEngine();
-	else
-		sc_engine = new QwtLinearScaleEngine();
-
-	double start, end, step;
-	sc_engine->autoScale(maxNumSteps, start, end, step);
-
-	QwtScaleDiv div = sc_engine->divideScale (start, end, maxNumSteps, maxNumSteps);
-	if (scales[7] == "1")
-		div.invert();
-
-	d_plot->setAxisScaleDiv (a, div);
-	}
-
-scaleType=scales[14].toInt();	
-
-for (a = QwtPlot::yLeft; a<= QwtPlot::yRight; a++)
-	{
-	/*if (scaleType == 1)
-		{
-		if (inverted)
-			d_plot->setAxisOptions(a, QwtAutoScale::Logarithmic | QwtAutoScale::Inverted);
-		else
-			d_plot->setAxisOptions(a, QwtAutoScale::Logarithmic);
-		}
-	else if (scaleType == 0)
-		{
-		if (inverted)
-			d_plot->setAxisOptions(a, QwtAutoScale::None | QwtAutoScale::Inverted);
-		else
-			d_plot->setAxisOptions(a, QwtAutoScale::None);
-		}*/
-
-	QwtScaleEngine *sc_engine = 0;
-	if (scaleType == 1)
-		sc_engine = new QwtLog10ScaleEngine();
-	else
-		sc_engine = new QwtLinearScaleEngine();
-
-	double start, end, step;
-	sc_engine->autoScale(maxNumSteps, start, end, step);
-
-	QwtScaleDiv div = sc_engine->divideScale (start, end, maxNumSteps, maxNumSteps);
-	if (scales[15] == "1")
-		div.invert();
-
-	d_plot->setAxisScaleDiv (a, div);
-	}
-
-//d_plot->setAxisAutoScale(QwtPlot::xBottom);
-//d_plot->setAxisAutoScale(QwtPlot::yLeft);
-d_plot->replot();
-d_zoomer->setZoomBase();
-updateScale();
-emit modifiedGraph();
-}
-
 void Graph::setYAxisTitle(const QString& text)
 {
 d_plot->setAxisTitle(0,text);
@@ -1606,14 +1533,45 @@ return scales;
 void Graph::updateSecondaryAxis(int axis)
 {
 int a = QwtPlot::xBottom;
-if (axis == QwtPlot::yRight) 
+int scaleType = scales[6].toInt();
+if (axis == QwtPlot::yRight)
+	{ 
 	a = QwtPlot::yLeft;
-
-if (d_plot->axisEnabled(a))
-	{
-	const QwtScaleDiv *div = d_plot->axisScaleDiv(a);
-	d_plot->setAxisScaleDiv(axis, *div);
+	scaleType = scales[14].toInt();
 	}
+
+if (!d_plot->axisEnabled(a))
+	return;
+
+QwtScaleEngine *se = d_plot->axisScaleEngine(a);
+const QwtScaleDiv *sd = d_plot->axisScaleDiv(a);
+
+QwtScaleEngine *sc_engine = 0;
+if (scaleType == 1)
+	sc_engine = new QwtLog10ScaleEngine();
+else
+	sc_engine = new QwtLinearScaleEngine();
+
+if (se->testAttribute(QwtScaleEngine::Inverted))
+	sc_engine->setAttribute(QwtScaleEngine::Inverted);
+
+d_plot->setAxisScaleEngine (axis, sc_engine);
+d_plot->setAxisScaleDiv (axis, *sd);
+}
+
+void Graph::setAutoScale()
+{
+d_plot->setAxisAutoScale (QwtPlot::xBottom);
+d_plot->setAxisAutoScale (QwtPlot::yLeft);
+
+d_plot->replot();
+d_zoomer->setZoomBase();
+updateScale();
+
+updateSecondaryAxis(QwtPlot::xTop);
+updateSecondaryAxis(QwtPlot::yRight);
+
+emit modifiedGraph();
 }
 
 void Graph::setAxisScale(int axis, const QStringList& s)
@@ -1647,11 +1605,15 @@ for (int i = a; i <= a+1; i++)
 		div = sc_engine->divideScale (start, end, majTicks, minTicks);
 
 	if (scales[8*axis+7] == "1")
+		{
+		sc_engine->setAttribute(QwtScaleEngine::Inverted);
 		div.invert();
+		}
 
 	d_plot->setAxisScaleEngine (i, sc_engine);
 	d_plot->setAxisScaleDiv (i, div);
 	}
+d_zoomer->setZoomBase();
 }
 
 void Graph::setScaleDiv(int axis,const QStringList& s)
@@ -2715,7 +2677,8 @@ else if (selectedMarkerType==Image)
 	else
 		photo.load(fn,type.upper(),QPixmap::Auto);	
 
-	ImageMarker* mrk= new ImageMarker(photo, d_plot);
+	ImageMarker* mrk= new ImageMarker(photo);
+	long mrkID=d_plot->insertMarker(mrk);
 	mrk->setFileName(fn);
 
 	QPoint o=d_plot->canvas()->mapFromGlobal(QCursor::pos());
@@ -2724,7 +2687,6 @@ else if (selectedMarkerType==Image)
 
 	mrk->setOrigin(o);
 	mrk->setSize(rect.size());
-	long mrkID=d_plot->insertMarker(mrk);
 	d_plot->replot();
 	
 	int imagesOnPlot=images.size();
@@ -5449,7 +5411,7 @@ const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(QwtPlot::xBottom);
 QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
 scales[0]=QString::number(scDiv->lBound());
 scales[1]=QString::number(scDiv->hBound());
-scales[2]=QString::number(lst[1]-lst[0]);
+scales[2]=QString::number(fabs(lst[1]-lst[0]));
 
 int majTicks = lst.count();
 scales[3]=QString::number(majTicks);
@@ -5462,27 +5424,23 @@ scDiv=d_plot->axisScaleDiv(QwtPlot::yLeft);
 lst = scDiv->ticks (QwtScaleDiv::MajorTick);
 scales[8]=QString::number(scDiv->lBound());
 scales[9]=QString::number(scDiv->hBound());
-scales[10]=QString::number(lst[1]-lst[0]);
+scales[10]=QString::number(fabs(lst[1]-lst[0]));
 
 majTicks = lst.count();
 scales[11]=QString::number(majTicks);
 lst = scDiv->ticks (QwtScaleDiv::MinorTick);
 minTicks = lst.count();
 lst = scDiv->ticks (QwtScaleDiv::MediumTick);
-scales[12]=QString::number((minTicks + lst.count())/(majTicks-1));
-	
-//updating scale maps
-xCanvasMap = d_plot->canvasMap (QwtPlot::xBottom);
-yCanvasMap = d_plot->canvasMap (QwtPlot::yLeft);	
+scales[12]=QString::number((minTicks + lst.count())/(majTicks-1));	
 }
 
 void Graph::updateScale()
 {
 const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(QwtPlot::xBottom);
 QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
-scales[0]=QString::number(scDiv->lBound());
-scales[1]=QString::number(scDiv->hBound());
-double step = lst[1]-lst[0];
+scales[0]=QString::number(QMIN(scDiv->lBound(), scDiv->hBound()));
+scales[1]=QString::number(QMAX(scDiv->lBound(), scDiv->hBound()));
+double step = fabs(lst[1]-lst[0]);
 scales[2]=QString::number(step);
 int majTicks = lst.count();
 scales[3]=QString::number(majTicks);
@@ -5496,9 +5454,9 @@ if (!autoscale)
 
 scDiv=d_plot->axisScaleDiv(QwtPlot::yLeft);
 lst = scDiv->ticks (QwtScaleDiv::MajorTick);
-scales[8]=QString::number(scDiv->lBound());
-scales[9]=QString::number(scDiv->hBound());
-step = lst[1]-lst[0];
+scales[8]=QString::number(QMIN(scDiv->lBound(), scDiv->hBound()));
+scales[9]=QString::number(QMAX(scDiv->lBound(), scDiv->hBound()));
+step = fabs(lst[1]-lst[0]);
 scales[10]=QString::number(step);
 
 majTicks = lst.count();
@@ -5510,12 +5468,10 @@ scales[12]=QString::number((minTicks + lst.count())/(majTicks-1));
 	
 if (!autoscale)
 	d_plot->setAxisScale (QwtPlot::yLeft, scDiv->lBound(), scDiv->hBound(), step);
-
-//updating scale maps
-xCanvasMap=d_plot->canvasMap (QwtPlot::xBottom);
-yCanvasMap=d_plot->canvasMap (QwtPlot::yLeft);
 	
-resizeMarkers (1, 1);
+updateMarkersBoundingRect();
+
+d_plot->replot();//TO DO: avoid 2nd replot!
 }
 
 void Graph::setBarsGap(int curve, int gapPercent, int offset)
@@ -5684,25 +5640,43 @@ void Graph::zoomed (const QwtDoubleRect &rect)
 {
 d_zoomer->setZoomBase (rect);
 	
+int prec;
+char f;
+d_plot->axisLabelFormat(QwtPlot::xBottom, f, prec);
+
 const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(QwtPlot::xBottom);
-/*double step=scDiv->majStep();
-scales[0]=QString::number(scDiv->lBound(),'e',3);
-scales[1]=QString::number(scDiv->hBound(),'e',3);
+
+QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
+scales[0]=QString::number(QMIN(scDiv->lBound(), scDiv->hBound()), f, prec);
+scales[1]=QString::number(QMAX(scDiv->lBound(), scDiv->hBound()), f, prec);
+double step = fabs(lst[1]-lst[0]);
 scales[2]=QString::number(step);
-scales[3]=QString::number(d_plot->axisMaxMajor(2));
-scales[4]=QString::number(d_plot->axisMaxMinor(2));
+int majTicks = lst.count();
+scales[3]=QString::number(majTicks);
+lst = scDiv->ticks (QwtScaleDiv::MinorTick);
+int minTicks = lst.count();
+lst = scDiv->ticks (QwtScaleDiv::MediumTick);
+scales[4]=QString::number((minTicks + lst.count())/(majTicks-1));
 
 d_plot->setAxisScale (QwtPlot::xTop, scDiv->lBound(), scDiv->hBound(), step);
 
-scDiv=d_plot->axisScale(QwtPlot::yLeft);
-step=scDiv->majStep();
-scales[8]=QString::number(scDiv->lBound(),'e',3);
-scales[9]=QString::number(scDiv->hBound(),'e',3);
-scales[10]=QString::number(step);
-scales[11]=QString::number(d_plot->axisMaxMajor(0));
-scales[12]=QString::number(d_plot->axisMaxMinor(0));
+scDiv=d_plot->axisScaleDiv(QwtPlot::yLeft);
+d_plot->axisLabelFormat(QwtPlot::yLeft, f, prec);
 
-d_plot->setAxisScale (QwtPlot::yRight, scDiv->lBound(), scDiv->hBound(), step);*/
+lst = scDiv->ticks (QwtScaleDiv::MajorTick);
+scales[8]=QString::number(QMIN(scDiv->lBound(), scDiv->hBound()), f, prec);
+scales[9]=QString::number(QMAX(scDiv->lBound(), scDiv->hBound()), f, prec);
+ 
+step = fabs(lst[1]-lst[0]);
+scales[10]=QString::number(step);
+majTicks = lst.count();
+scales[11]=QString::number(majTicks);
+lst = scDiv->ticks (QwtScaleDiv::MinorTick);
+minTicks = lst.count();
+lst = scDiv->ticks (QwtScaleDiv::MediumTick);
+scales[12]=QString::number((minTicks + lst.count())/(majTicks-1));
+
+d_plot->setAxisScale (QwtPlot::yRight, scDiv->lBound(), scDiv->hBound(), step);
 d_plot->replot();	
 emit modifiedGraph();
 }
@@ -5710,15 +5684,6 @@ emit modifiedGraph();
 void Graph::zoom(bool on)
 {
 d_zoomer->setEnabled(on);
-
-int prec;
-char f;
-for (int j= 0; j<QwtPlot::axisCnt; j++)
-	{
-	d_plot->axisLabelFormat(j,f,prec);
-	if (prec<4)
-		d_plot->setAxisLabelFormat (j,f,4);			
-	}
 
 QCursor cursor=QCursor (QPixmap(lens_xpm),-1,-1);
 if (on)
@@ -5740,12 +5705,13 @@ drawTextOn=on;
 
 void Graph::insertImageMarker(ImageMarker* mrk)
 {
-QPixmap photo=mrk->image();
-ImageMarker* mrk2= new ImageMarker(photo,d_plot);
+QPixmap photo = mrk->image();
+ImageMarker* mrk2= new ImageMarker(photo);
+long mrk2ID=d_plot->insertMarker(mrk2);
 mrk2->setFileName(mrk->getFileName());
 mrk2->setOrigin(mrk->getOrigin());	
 mrk2->setSize(mrk->size());	
-long mrk2ID=d_plot->insertMarker(mrk2);
+
 int imagesOnPlot=images.size();
 images.resize(++imagesOnPlot);
 images[imagesOnPlot-1]=mrk2ID;
@@ -5753,7 +5719,8 @@ images[imagesOnPlot-1]=mrk2ID;
 
 void Graph::insertImageMarker(const QPixmap& photo, const QString& fileName)
 {
-ImageMarker* mrk= new ImageMarker(photo, d_plot);
+ImageMarker* mrk= new ImageMarker(photo);
+long mrkID=d_plot->insertMarker(mrk);
 mrk->setFileName(fileName);
 mrk->setOrigin(QPoint(0,0));
 	
@@ -5766,7 +5733,7 @@ if (picSize.height()>h)
 	picSize.setHeight(h);
 
 mrk->setSize(picSize);
-long mrkID=d_plot->insertMarker(mrk);
+
 d_plot->replot();
 	
 int imagesOnPlot=images.size();
@@ -5800,11 +5767,12 @@ else
 		QString type=baseName.right(baseName.length()-pos-1);
 		photo.load(fn,type.upper(),QPixmap::Auto);
 		}			
-	ImageMarker* mrk= new ImageMarker(photo,d_plot);
+	ImageMarker* mrk = new ImageMarker(photo);
+	long mrkID=d_plot->insertMarker(mrk);
 	mrk->setFileName(fn);
 	mrk->setOrigin(QPoint(options[2].toInt(),options[3].toInt()));
 	mrk->setSize(QSize(options[4].toInt(),options[5].toInt()));
-	long mrkID=d_plot->insertMarker(mrk);
+	
 	int imagesOnPlot=images.size();
 	images.resize(++imagesOnPlot);
 	images[imagesOnPlot-1]=mrkID;
@@ -6253,67 +6221,28 @@ QPixmap pic=mrk->image();
 emit createIntensityTable(pic);
 }
 
-void Graph::resizeMarkers (double w_ratio, double h_ratio)
+void Graph::updateMarkersBoundingRect()
 {
-if (ignoreResize || (w_ratio == 1 && h_ratio == 1))
-	return;
-
 QValueList<int> texts=textMarkerKeys();
-
-QwtScaleMap xmap=d_plot->canvasMap (QwtPlot::xBottom);
-QwtScaleMap ymap=d_plot->canvasMap (QwtPlot::yLeft);
 
 int i=0;
 for (i=0;i<(int)lines.size();i++)
 	{			
 	LineMarker* mrkL=(LineMarker*)d_plot->marker(lines[i]);
-	QPoint start=mrkL->startPoint();
-	QPoint end=mrkL->endPoint();
-		
-	double r0_x=xCanvasMap.invTransform(start.x());
-	double r0_y=yCanvasMap.invTransform(start.y());	
-	double r1_x=xCanvasMap.invTransform(end.x());
-	double r1_y=yCanvasMap.invTransform(end.y());
-			
-	int x0=xmap.transform(r0_x);
-	int x1=xmap.transform(r1_x);	
-	int y0=ymap.transform(r0_y);
-	int y1=ymap.transform(r1_y);
-
-	mrkL->setStartPoint(QPoint(x0,y0));
-	mrkL->setEndPoint(QPoint(x1,y1));
+	mrkL->updateBoundingRect();
 	}
 	
 for (i=0;i<(int)texts.size();i++)
 	{
-	LegendMarker* mrkT = (LegendMarker*) d_plot->marker(texts[i]);
-	QPoint o=mrkT->rect().topLeft();
-	double d_ox=xCanvasMap.invTransform(o.x());
-	double d_oy=yCanvasMap.invTransform(o.y());
-	
-	int ox=xmap.transform(d_ox);	
-	int oy=ymap.transform(d_oy);
-	mrkT->setOrigin(QPoint(ox,oy));	
+	/*LegendMarker* mrkT = (LegendMarker*) d_plot->marker(texts[i]);
+	mrkT->setOrigin(QPoint(ox,oy));	*/
 	}
 	
 for (i=0;i<(int)images.size();i++)
 	{
 	ImageMarker* mrk = (ImageMarker*) d_plot->marker(images[i]);
-	QPoint o=mrk->getOrigin();
-	double d_ix=xCanvasMap.invTransform(o.x());
-	double d_iy=yCanvasMap.invTransform(o.y());
-	int ix=xmap.transform(d_ix);	
-	int iy=ymap.transform(d_iy);	
-	mrk->setOrigin(QPoint(ix,iy));
-
-	QSize size = mrk->size();
-	mrk->setSize(QSize(int(size.width()*w_ratio), int(size.height()*h_ratio)));
+	mrk->updateOrigin();
 	}
-
-xCanvasMap=xmap;
-yCanvasMap=ymap;
-
-d_plot->replot();
 }
 
 void Graph::resizeEvent ( QResizeEvent *e )

@@ -18,7 +18,6 @@
 
 class QwtPlotCurve;
 class QwtPlotZoomer;
-class QwtScaleMap;
 
 class QwtPieCurve;	
 class Table;
@@ -268,7 +267,9 @@ public slots:
 	 bool imageMarkerSelected();
 	 void updateImageMarker(int x, int y, int width, int height);
 	 
-	 void resizeMarkers (double w_ratio, double h_ratio);
+	 //! Keep the markers on screen each time the scales are modified by adding/removing curves
+	 void updateMarkersBoundingRect();
+
 	 long selectedMarkerKey();
 	 void setSelectedMarker(long mrk);
 	  QwtPlotMarker* selectedMarkerPtr();
@@ -683,7 +684,6 @@ private:
 	QStringList axesFormatInfo;//stores columns used for axes with text labels or  time/date format info
 	QValueList <int> axisType;
 	QValueList <int> lblFormat; //stores label format used for the axes
-	QwtScaleMap xCanvasMap, yCanvasMap;
 	gridOptions grid;
 	MarkerType selectedMarkerType;
 	QwtPlotMarker::LineStyle mrklStyle;

@@ -11,6 +11,8 @@
 #include <qapplication.h>
 #include <qpixmap.h>
 
+#include "graph.h"
+
 Plot::Plot(QWidget *parent, const char *name)
 		: QwtPlot(parent)
 {
@@ -508,11 +510,14 @@ if(ShiftButton)
 	graphToResize=TRUE;
 	emit resizeGraph(e->pos());	
 	}				
-else if ((presspos - e->pos()).manhattanLength() > QApplication::startDragDistance())
+/*else if ((presspos - e->pos()).manhattanLength() > QApplication::startDragDistance())
 	{
-	movedGraph=TRUE;
-	emit moveGraph(e->pos());
-	}
+	if (!((Graph *)parent())->zoomOn())
+		{
+		movedGraph=TRUE;
+		emit moveGraph(e->pos());
+		}
+	}*/
 }
 
 void Plot::mouseReleaseEvent ( QMouseEvent *)
@@ -816,7 +821,7 @@ int Plot::insertMarker(QwtPlotMarker *m)
 {
 marker_key++;
 d_markers.insert (marker_key, m, false );
-m->attach(this);
+m->attach(((QwtPlot *)this));
 return marker_key;
 }
 
@@ -869,4 +874,36 @@ void Plot::setAxisLabelFormat(int axis, char f, int prec)
 		ScaleDraw *sd = (ScaleDraw *)axisScaleDraw (axis);
         sd->setLabelFormat(f, prec);
 		}
+}
+
+QwtDoubleRect Plot::boundingRect ()
+{
+QMapIterator<int, QwtPlotCurve *> it = d_curves.begin();
+QwtPlotCurve *c = (QwtPlotCurve *)it.data();
+
+double minX = c->minXValue();
+double minY = c->minYValue();
+double maxX = c->maxXValue();
+double maxY = c->maxYValue();
+
+it++;
+
+for (it; it != d_curves.end(); ++it) 
+	{
+	QwtPlotCurve *c = (QwtPlotCurve *)it.data();
+	if (!c)
+		continue;
+
+	minX = (c->minXValue() < minX) ? c->minXValue() : minX;
+	maxX = (c->maxXValue() > maxX) ? c->maxXValue() : maxX;
+	minY = (c->minYValue() < minY) ? c->minYValue() : minY;
+	maxY = (c->maxYValue() > maxY) ? c->maxYValue() : maxY;
+	}
+
+QwtDoubleRect r;
+r.setLeft(minX);
+r.setRight(maxX);
+r.setTop(minY);
+r.setBottom(maxY);
+return r;
 }

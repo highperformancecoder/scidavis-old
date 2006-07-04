@@ -248,7 +248,7 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 			plot()->movedPicker(pos, false);		
 		else if (selectedMarker>=0)
 			moveMarker(pos);
-		else if (!plot()->zoomOn() )
+		else if (!plot()->zoomOn())
 			{
 			plotWidget->canvas()->setCursor(Qt::PointingHandCursor);
 			movedGraph=TRUE;
@@ -669,6 +669,9 @@ painter.restore();
 // Selects and highlights the marker 
 bool CanvasPicker::selectMarker(const QPoint& point)
 {
+if (plot()->zoomOn())
+	return false;
+
 QMemArray<long> images=plot()->imageMarkerKeys();	
 QValueList<int> texts=plot()->textMarkerKeys();
 QMemArray<long> lines=plot()->lineMarkerKeys();
