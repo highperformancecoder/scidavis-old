@@ -7,13 +7,13 @@ public:
 	QwtPieCurve(QwtPlot *parent, const char *name=0);
 
 	virtual void draw(QPainter *painter,const QwtScaleMap &xMap, 
-		const QwtScaleMap &yMap, int from, int to);
+		const QwtScaleMap &yMap, int from, int to) const;
 
 	virtual void drawPie(QPainter *painter, const QwtScaleMap &xMap, 
-		const QwtScaleMap &yMap, int from, int to);
+		const QwtScaleMap &yMap, int from, int to) const;
 
 public slots:
-	QColor color(int i);
+	QColor color(int i) const;
 
 	int ray(){return pieRay;};
 	void setRay(int size){pieRay=size;};

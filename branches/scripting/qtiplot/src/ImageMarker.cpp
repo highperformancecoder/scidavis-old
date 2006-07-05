@@ -70,6 +70,11 @@ QRect ImageMarker::rect()
 return QRect(getOrigin(), size());
 }
 
+QwtDoubleRect ImageMarker::boundingRect() const
+{
+return d_rect;
+}
+
 void ImageMarker::updateOrigin()
 {
 const QwtScaleMap &xMap = plot()->canvasMap(xAxis());

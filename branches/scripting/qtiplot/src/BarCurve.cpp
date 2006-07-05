@@ -33,7 +33,7 @@ setTitle(b->title());
 }
 
 void QwtBarCurve::draw(QPainter *painter,
-    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
 {
    if ( !painter || dataSize() <= 0 )
         return;

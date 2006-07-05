@@ -39,7 +39,7 @@ b_width = b->b_width;
 }
 
 void BoxCurve::draw(QPainter *painter,
-    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
 {
    if ( !painter || dataSize() <= 0 )
         return;
@@ -65,7 +65,8 @@ void BoxCurve::draw(QPainter *painter,
 		}
 }
 
-void BoxCurve::drawBox(QPainter *painter, const QwtScaleMap &xMap, const QwtScaleMap &yMap, double *dat, int size)
+void BoxCurve::drawBox(QPainter *painter, const QwtScaleMap &xMap, 
+					   const QwtScaleMap &yMap, double *dat, int size) const
 {
 const int px = xMap.transform(x(0));
 const int px_min = xMap.transform(x(0) - 0.5);
@@ -199,7 +200,8 @@ else
 	painter->drawLine(px - hbw, median, px + hbw, median);
 }
 
-void BoxCurve::drawSymbols(QPainter *painter, const QwtScaleMap &xMap, const QwtScaleMap &yMap, double *dat, int size)
+void BoxCurve::drawSymbols(QPainter *painter, const QwtScaleMap &xMap, 
+						   const QwtScaleMap &yMap, double *dat, int size) const
 {
 const int px = xMap.transform(x(0));
 

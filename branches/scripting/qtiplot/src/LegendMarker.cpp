@@ -1,11 +1,10 @@
 #include "LegendMarker.h"
-#include "graph.h"
 #include "pie.h"
 #include "VectorCurve.h"
-#include "plot.h"
 
 #include <qpainter.h>
 #include <qpaintdevicemetrics.h>
+#include <qmessagebox.h>
 
 #include <qwt_plot.h>
 #include <qwt_scale_widget.h>
@@ -15,7 +14,10 @@
 #include <qwt_layout_metrics.h>
 
 LegendMarker::LegendMarker(QwtPlot *plot):
-    QwtPlotMarker()
+    d_plot((Plot *)plot),
+	d_frame (0),
+	angle(0),
+	bkgColor(plot->paletteBackgroundColor())
 {
 d_text = new QwtText(QString::null, QwtText::RichText);
 d_text->setFont(QFont("Arial",12, QFont::Normal, FALSE));
@@ -24,24 +26,26 @@ d_text->setBackgroundBrush(QBrush(Qt::NoBrush));
 d_text->setColor(Qt::black);
 d_text->setBackgroundPen (QPen(Qt::NoPen));
 	
-bkgType=0;
-angle=0;
-bkgColor = plot->paletteBackgroundColor();
+hspace = 30;
+left_margin = 10;
+top_margin = 5;
 }
 
-void LegendMarker::draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r)
+void LegendMarker::draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r) const
 { 
-symbolLineLength=symbolsMaxLineLength();
-	
-int clw = plot()->canvas()->lineWidth();
-QRect rs=scaledLegendRect(p, QPoint(r.x() - clw, r.y() - clw), lRect);
+const int x = xMap.transform(xValue());
+const int y = yMap.transform(yValue());
 
-lRect.setWidth(rs.width());
-lRect.setHeight(rs.height());
+const int symbolLineLength = symbolsMaxLineLength();
 
-drawFrame(p,bkgType,rs);	
-drawSymbols(p,rs,heights);
-drawLegends(p,rs,heights);
+int width, height;
+QwtArray<long> heights = itemsHeight(y, symbolLineLength, width, height);
+
+QRect rs = QRect(QPoint(x, y), QSize(width, height));
+
+drawFrame(p, d_frame, rs);	
+drawSymbols(p, rs, heights, symbolLineLength);
+drawLegends(p, rs, heights, symbolLineLength);
 }
 
 QString LegendMarker::getText()
@@ -56,14 +60,15 @@ d_text->setText(s);
 
 int LegendMarker::getBkgType()
 {
-return bkgType; 
+return d_frame; 
 }
 
 void LegendMarker::setBackground(int bkg)
 {
-if (bkgType == bkg)
+if (d_frame == bkg)
 	return;
-bkgType=bkg;
+
+d_frame = bkg;
 }
 
 void LegendMarker::setBackgroundColor(const QColor& c)
@@ -76,7 +81,16 @@ bkgColor = c;
 
 QRect LegendMarker::rect()
 {
-return lRect;
+const QwtScaleMap &xMap = d_plot->canvasMap(xAxis());
+const QwtScaleMap &yMap = d_plot->canvasMap(yAxis());
+
+const int x = xMap.transform(xValue());
+const int y = yMap.transform(yValue());
+
+int width, height;
+itemsHeight(y, symbolsMaxLineLength(), width, height);
+
+return QRect(QPoint(x, y), QSize(width, height));
 }
 
 QColor LegendMarker::getTextColor()
@@ -94,7 +108,22 @@ d_text->setColor(c);
 
 void LegendMarker::setOrigin( const QPoint & p )
 {
-lRect.setTopLeft (p);
+d_pos = p;
+
+const QwtScaleMap &xMap = d_plot->canvasMap(xAxis());
+const QwtScaleMap &yMap = d_plot->canvasMap(yAxis());
+
+setXValue (xMap.invTransform(p.x()));
+setYValue (yMap.invTransform(p.y()));
+}
+
+void LegendMarker::updateOrigin()
+{
+const QwtScaleMap &xMap = d_plot->canvasMap(xAxis());
+const QwtScaleMap &yMap = d_plot->canvasMap(yAxis());
+
+setXValue (xMap.invTransform(d_pos.x()));
+setYValue (yMap.invTransform(d_pos.y()));
 }
 
 QFont LegendMarker::getFont()
@@ -110,41 +139,31 @@ if ( font == d_text->font() )
 d_text->setFont(font);	 
 }
 
-int LegendMarker::getAngle()
-{
-return angle; 
-}
-
-void LegendMarker::setAngle(int ang)
-{
-angle=ang;
-}
-
-void LegendMarker::drawFrame(QPainter *p, int type, const QRect& rect)
+void LegendMarker::drawFrame(QPainter *p, int type, const QRect& rect) const
 {
 p->save();
 p->setPen(QPen(Qt::black,1,Qt::SolidLine));
-if (type == None && bkgColor != plot()->paletteBackgroundColor())
+if (type == None && bkgColor != d_plot->paletteBackgroundColor())
 	p->fillRect (rect,QBrush(bkgColor));
 if (type == Line)
 	{
-	p->fillRect (rect,QBrush(bkgColor));
+	//p->setBrush(QBrush(Qt::black));
 	p->drawRect(rect);
 	}
-else if (type== Shadow)
+else if (type == Shadow)
 	{
 	QRect shadow=QRect(rect.x()+5,rect.y()+5,rect.width(),rect.height());
-	p->fillRect (shadow,QBrush(QColor(Qt::black)));
+	p->setBrush(QBrush(Qt::black));
 	p->drawRect(shadow);
-	p->fillRect (rect, QBrush(bkgColor));
+	p->setBrush(QBrush(bkgColor));
 	p->drawRect(rect);
 	}
 p->restore();
 }
 
-void LegendMarker::drawVector(QPainter *p, int x, int y, int l, int curveIndex)
+void LegendMarker::drawVector(QPainter *p, int x, int y, int l, int curveIndex) const
 {
-Graph *g = parentGraph(plot());
+Graph *g = (Graph *)d_plot->parent();
 if (!g)
 	return;
 
@@ -176,13 +195,13 @@ QwtPainter::drawPolygon(p,endArray);
 p->restore();
 }
 
-void LegendMarker::drawSymbols(QPainter *p, const QRect& rect, QwtArray<long> height)
+void LegendMarker::drawSymbols(QPainter *p, const QRect& rect, 
+							   QwtArray<long> height, int symbolLineLength) const
 { 	
-Plot *plot = (Plot *)this->plot();
-Graph *g=parentGraph(plot);
+Graph *g = (Graph *) d_plot->parent();
 	
-int w=rect.x()+10;
-int l=symbolLineLength+20;
+int w = rect.x() + 10;
+int l = symbolLineLength + 20;
 	
 QString text=d_text->text();	
 QStringList titles=QStringList::split ("\n",text,FALSE);
@@ -216,7 +235,7 @@ for (int i=0;i<(int)titles.count();i++)
 						if (br.style() != Qt::NoBrush || g->curveType(cv) == Graph::Box)
 							{
 							QRect lr=QRect(w,height[i]-4,l,10);						
-							p->fillRect(lr,br);
+							p->setBrush(br);
 							p->drawRect (lr);
 							}			
 						else 			
@@ -236,10 +255,10 @@ for (int i=0;i<(int)titles.count();i++)
 		
 		int id=aux.toInt();
 		
-		Graph* g=(Graph*)plot->parent();
+		Graph* g=(Graph*)d_plot->parent();
 		if (g->isPiePlot())
 			{			
-			QwtPieCurve *curve = (QwtPieCurve *)plot->curve(1);
+			QwtPieCurve *curve = (QwtPieCurve *)d_plot->curve(1);
 			if (curve)
 				{
 				const QBrush br=QBrush(curve->color(id-1), curve->pattern());
@@ -248,8 +267,8 @@ for (int i=0;i<(int)titles.count();i++)
 				p->save();						
 				p->setPen (QPen(pen.color(),1,Qt::SolidLine));					
 				QRect lr=QRect(w,height[i]-4,l,10);						
-				p->fillRect(lr,br);
-				p->drawRect (lr);
+				p->setBrush(br);
+				p->drawRect(lr);
 				p->restore();
 				}
 			}
@@ -257,117 +276,83 @@ for (int i=0;i<(int)titles.count();i++)
  	}	 
 }
 
-void LegendMarker::drawLegends(QPainter *p, const QRect& rect, QwtArray<long> height)
+void LegendMarker::drawLegends(QPainter *p, const QRect& rect, 
+							   QwtArray<long> height, int symbolLineLength) const
 { 	
-int hspace=30;//determines distance between symbols and legend text
-int w=rect.x()+10;
-int textL=w,textH=0;
+int w = rect.x() + left_margin;
+
 QString text=d_text->text();
 QStringList titles=QStringList::split ("\n",text,FALSE);
-QwtText *text_copy = new QwtText(*d_text);
 		
 for (int i=0;i<(int)titles.count();i++)
 	{
 	QString str=titles[i];
-	textL=w;
-	if (str.contains("\\c{",TRUE)>0)
+	int x = w;
+	if (str.contains("\\c{",TRUE)>0 || str.contains("\\p{",TRUE)>0)
 		{
-		textL+=symbolLineLength+hspace;
+		x += symbolLineLength + hspace;
 		int pos=str.find("}",0);
 		str=str.right(str.length()-pos-1);
 		}
 		
-	if (str.contains("\\p{",TRUE)>0)
-		{
-		textL+=symbolLineLength+hspace;
-		int pos=str.find("}",0);
-		str=str.right(str.length()-pos-1);
-		}
-		
-	text_copy->setText(str);
-	/*QRect tr=text_copy->boundingRect(p);
-	textH=tr.height();	
-	tr.moveTopLeft(QPoint(textL,height[i]-textH/2));
-	text_copy->draw(p,tr);*/
-	}		
+	QwtText aux(str);
+	aux.setFont(d_text->font());
+	aux.setColor(d_text->color());
 
-delete text_copy;
+	QSize size = aux.textSize();
+
+	QRect tr = QRect(QPoint(x, height[i] - size.height()/2), size);
+	aux.draw(p, tr);
+	}	
 }
 
-QRect LegendMarker::scaledLegendRect(QPainter *p, const QPoint& canvas_origin, const QRect& rect)
+QwtArray<long> LegendMarker::itemsHeight(int y, int symbolLineLength, int &width, int &height) const
 { 
-int textH=0,maxL=0,rectH=0,rectL=0;
-int textL, margin=10;	
-int hspace=30;//determines distance between symbols and legend text
+int maxL=0;
 
-QRect copy = rect;	
-copy.moveBy(canvas_origin.x(), canvas_origin.y());
+width = 0;
+height = 0;
 
-if (p->device()->isExtDev())
-	{	
-	QwtPlot *plot = this->plot();		
-	QwtScaleMap xMap = plot->canvasMap(QwtPlot::xBottom);
-	QwtScaleMap yMap = plot->canvasMap(QwtPlot::yLeft);		
-		
-	double dx=xMap.invTransform(lRect.topLeft().x());
-	double dy=yMap.invTransform(lRect.topLeft().y());			
-	
-	/*QwtScaleMap map=LineMarker::mapCanvasToDevice(p, plot, QwtPlot::xBottom);		
-	copy.setX(map.transform(dx));
-	map=LineMarker::mapCanvasToDevice(p, plot, QwtPlot::yLeft);	
-	copy.setY(map.transform(dy));*/
-	}
-
-QwtText *text_copy= new QwtText(*d_text);
 QString text=d_text->text();
 QStringList titles=QStringList::split ("\n",text,FALSE);
 int n=(int)titles.count();
-heights.resize(n);
-int h=copy.y()+5;	
-for (int i=0;i<n;i++)
+QwtArray<long> heights(n);
+
+int h = top_margin;
+
+for (int i=0; i<n; i++)
 	 {
 	 QString str=titles[i];		 
-	 textL=0;	 
-	 if (str.contains("\\c{",TRUE)>0)
+	 int textL=0;	 
+	 if (str.contains("\\c{",TRUE)>0 || str.contains("\\p{",TRUE)>0)
 	 	{
-		textL=symbolLineLength+hspace; 
+		textL = symbolLineLength + hspace; 
 		int pos=str.find("}",0);
-		str=str.right(str.length()-pos-1);
-		}
+		str = str.right(str.length()-pos-1);
+		}	
 		
-	if (str.contains("\\p{",TRUE)>0)
-	 	{
-		textL=symbolLineLength+hspace; 
-		int pos=str.find("}",0);
-		str=str.right(str.length()-pos-1);
-		}
-		
-	 text_copy->setText(str);
-	 QSize size = text_copy->textSize();
-	 textL+=size.width();
-	 if (textL>maxL) maxL=textL;
+	 QwtText aux(str);
+	 QSize size = aux.textSize(d_text->font());
+	 textL += size.width();
+	 if (textL>maxL) 
+		 maxL = textL;
 
-	 textH = size.height();
-	 rectH+=textH;
+	 int textH = size.height();
+	 height += textH;
 	 
-	 heights[i]= h+textH/2;
-	 h+=textH;
+	 heights[i] = y + h + textH/2;
+	 h += textH;
 	 }	
 	
-rectH+=margin;
-rectL=margin+maxL+5;
+height += 2*top_margin;
+width = 2*left_margin + maxL;
 	
-delete text_copy;
-
-copy.setWidth(rectL);
-copy.setHeight(rectH);
-return copy;
+return heights;
 }
 
-int LegendMarker::symbolsMaxLineLength()
+int LegendMarker::symbolsMaxLineLength() const
 {
-Plot *plot = (Plot *)this->plot();		
-QValueList<int> cvs = plot->curveKeys();
+QValueList<int> cvs = d_plot->curveKeys();
 	
 int maxL=0;
 QString text=d_text->text();	
@@ -379,7 +364,7 @@ for (int i=0;i<(int)titles.count();i++)
 		int pos=titles[i].find("{",0);
         int pos2=titles[i].find("}",pos);
 		QString aux=titles[i].mid(pos+1,pos2-pos-1);
-		const QwtPlotCurve *c = plot->curve(cvs[aux.toInt()-1]);
+		const QwtPlotCurve *c = d_plot->curve(cvs[aux.toInt()-1]);
 		int l=c->symbol().size().width();
 		if (l>maxL && c->symbol().style() != QwtSymbol::None) 
 			maxL=l;		
@@ -389,11 +374,6 @@ for (int i=0;i<(int)titles.count();i++)
 		maxL=10;
 	}
 return maxL;
-}
-
-Graph * LegendMarker::parentGraph(QwtPlot *plot) 
-{ 
-return (Graph *) plot->parent();
 }
 
 LegendMarker::~LegendMarker()

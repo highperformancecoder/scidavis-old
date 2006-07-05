@@ -27,6 +27,8 @@ public:
 //! Keep the markers on screen each time the scales are modified by adding/removing curves
 	void updateOrigin();
 
+	QwtDoubleRect boundingRect() const;
+
 private:
 	QPoint origin;
 	QPixmap pic;

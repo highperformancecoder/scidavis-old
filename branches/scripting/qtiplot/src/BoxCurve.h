@@ -15,10 +15,12 @@ public:
 	void copy(const BoxCurve *b);
 
 	virtual void draw(QPainter *painter,const QwtScaleMap &xMap, 
-		const QwtScaleMap &yMap, int from, int to);
+		const QwtScaleMap &yMap, int from, int to) const;
 
-	void drawBox(QPainter *painter, const QwtScaleMap &xMap, const QwtScaleMap &yMap, double *dat, int size);
-	void drawSymbols(QPainter *painter, const QwtScaleMap &xMap, const QwtScaleMap &yMap, double *dat, int size);
+	void drawBox(QPainter *painter, const QwtScaleMap &xMap, 
+				const QwtScaleMap &yMap, double *dat, int size) const;
+	void drawSymbols(QPainter *painter, const QwtScaleMap &xMap, 
+				const QwtScaleMap &yMap, double *dat, int size) const;
 
 	virtual QwtDoubleRect boundingRect() const;
 

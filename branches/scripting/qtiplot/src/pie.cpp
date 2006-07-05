@@ -15,7 +15,7 @@ setBrush(QBrush(Qt::black,Qt::SolidPattern));
 }
 
 void QwtPieCurve::draw(QPainter *painter,
-    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
 {
     if ( !painter || dataSize() <= 0 )
         return;
@@ -28,7 +28,7 @@ void QwtPieCurve::draw(QPainter *painter,
 }
 
 void QwtPieCurve::drawPie(QPainter *painter,
-    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
 {   	
 	int i, d = pieRay*2;
 	QwtPlot *plot = (QwtPlot *)this->plot();
@@ -78,7 +78,7 @@ void QwtPieCurve::drawPie(QPainter *painter,
 	painter->restore();
 }
 
-QColor QwtPieCurve::color(int i)
+QColor QwtPieCurve::color(int i) const
 {
 int index=(firstColor+i)%16;
 return ColorBox::color(index);

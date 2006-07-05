@@ -31,7 +31,7 @@ setTitle(vc->title());
 }
 
 void VectorCurve::draw(QPainter *painter,
-    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
 {
     if ( !painter || dataSize() <= 0 )
         return;
@@ -51,7 +51,7 @@ void VectorCurve::draw(QPainter *painter,
 }
 
 void VectorCurve::drawVector(QPainter *painter,
-    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
 { 
 if (d_style == XYAM)
 {
@@ -108,7 +108,7 @@ else
 	}
 }
 
-void VectorCurve::drawArrowHead(QPainter *p, int xs, int ys, int xe, int ye)
+void VectorCurve::drawArrowHead(QPainter *p, int xs, int ys, int xe, int ye) const
 {
 p->save();
 p->translate(xe, ye);
@@ -130,7 +130,7 @@ QwtPainter::drawPolygon(p,endArray);
 p->restore();
 }
 
-double VectorCurve::teta(int x0, int y0, int x1, int y1)
+double VectorCurve::teta(int x0, int y0, int x1, int y1) const
 {		
 double t,pi=4*atan(-1.0);
 if (x1==x0)

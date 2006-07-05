@@ -6234,8 +6234,8 @@ for (i=0;i<(int)lines.size();i++)
 	
 for (i=0;i<(int)texts.size();i++)
 	{
-	/*LegendMarker* mrkT = (LegendMarker*) d_plot->marker(texts[i]);
-	mrkT->setOrigin(QPoint(ox,oy));	*/
+	LegendMarker* mrkT = (LegendMarker*) d_plot->marker(texts[i]);
+	mrkT->updateOrigin();	
 	}
 	
 for (i=0;i<(int)images.size();i++)
