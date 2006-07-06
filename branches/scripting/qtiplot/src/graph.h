@@ -358,6 +358,8 @@ public slots:
 	void setLabelsNumericFormat(int axis, const QStringList& l);	
 	void setLabelsNumericFormat(int axis, int format, int prec, const QString& formula);
 	void setLabelsDateTimeFormat(int axis, int type, const QString& formatInfo);
+	void setLabelsDayFormat(int axis, int format);
+	void setLabelsMonthFormat(int axis, int format);
 	
 	QStringList axesLabelsFormatInfo(){return axesFormatInfo;};
 	void setLabelsTextFormat(int axis, int type, const QString& labelsColName, Table *table);

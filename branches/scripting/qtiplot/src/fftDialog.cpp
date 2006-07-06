@@ -22,15 +22,13 @@
 FFTDialog::FFTDialog(int type, QWidget* parent, const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
-    if ( !name )
-		setName( "FFTDialog" );
 	setCaption(tr("QtiPlot - FFT Options"));
 	
 	d_table = 0;
 	graph = 0;
 	d_type = type;
 
-	QVBox *box = new QVBox (this, "vbox");
+	QVBox *box = new QVBox (this);
 	box->setSpacing(5);
 	box->setMargin(5);
 

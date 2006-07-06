@@ -150,12 +150,12 @@ translateOn = false;
 for (int i=0; i<QwtPlot::axisCnt; i++)
 	{
 	axisType << Numeric;
-	axesFormatInfo<<QString::null;
-	lblFormat<<Automatic;
-	axesFormulas<<QString::null;
+	axesFormatInfo << QString::null;
+	lblFormat << Automatic;
+	axesFormulas << QString::null;
 	}
 
-d_plot = new Plot(this,"QwtPlot");		
+d_plot = new Plot(this);		
 cp = new CanvasPicker(this);
 		
 LegendMarker *mrk = new LegendMarker(d_plot);
@@ -597,7 +597,7 @@ axisType[axis] = Numeric;
 axesFormulas[axis] = formula;
 
 ScaleDraw *sd_old= (ScaleDraw *)d_plot->axisScaleDraw (axis);
-const QwtScaleDiv div=sd_old->scaleDiv ();
+const QwtScaleDiv div = sd_old->scaleDiv ();
 	
 if (format == Superscripts)
 	{
@@ -651,8 +651,9 @@ for (int i=0; i<4; i++)
 	{
 	int type = axisType[i];
 	s+=QString::number(type);
-	if (type == Time || type == Date || type == Txt || type == ColHeader)
-		s+=";"+ axesFormatInfo[i];
+	if (type == Time || type == Date || type == Txt ||
+		type == ColHeader || type == Day || type == Month)
+		s += ";" + axesFormatInfo[i];
 	s+="\t";
 	};
 
@@ -892,13 +893,13 @@ scale = (QwtScaleWidget *)d_plot->axisWidget(axis);
 if (scale)
 	{
 	scale->setMargin(baselineDist);	
-		
 	QPalette pal = scale->palette();
 	if (pal.color(QPalette::Active, QColorGroup::Foreground) != c)
 		{
 		pal.setColor(QColorGroup::Foreground,c);
+		pal.setColor(QColorGroup::Text,c);
 		scale->setPalette(pal);
-		}		
+		}
  	}
 
 ScaleDraw *sclDraw= (ScaleDraw *)d_plot->axisScaleDraw (axis);	
@@ -910,6 +911,10 @@ else
 
 	if (type == Numeric)
 		setLabelsNumericFormat(axis, format, prec, formula);
+	else if (type == Day)
+		setLabelsDayFormat (axis, format);
+	else if (type == Month)
+		setLabelsMonthFormat (axis, format);
 	else if (type == Time || type == Date)
 		setLabelsDateTimeFormat (axis, type, formatInfo);
 	else	
@@ -932,6 +937,32 @@ if (axisOn && (axis == QwtPlot::xTop || axis == QwtPlot::yRight))
 scalePicker->refresh();		
 d_plot->replot();	
 emit modifiedGraph();
+}
+
+void Graph::setLabelsDayFormat(int axis, int format)
+{
+axisType[axis] = Day;
+axesFormatInfo[axis] = QString::number(format);
+
+ScaleDraw *sd_old= (ScaleDraw *)d_plot->axisScaleDraw (axis);
+const QwtScaleDiv div = sd_old->scaleDiv ();
+	
+WeekDayScaleDraw *sd = new WeekDayScaleDraw((WeekDayScaleDraw::NameFormat)format);
+sd->setScaleDiv(div);
+d_plot->setAxisScaleDraw (axis, sd);
+}
+
+void Graph::setLabelsMonthFormat(int axis, int format)
+{
+axisType[axis] = Month;
+axesFormatInfo[axis] = QString::number(format);
+
+ScaleDraw *sd_old= (ScaleDraw *)d_plot->axisScaleDraw (axis);
+const QwtScaleDiv div = sd_old->scaleDiv ();
+	
+MonthScaleDraw *sd = new MonthScaleDraw((MonthScaleDraw::NameFormat)format);
+sd->setScaleDiv(div);
+d_plot->setAxisScaleDraw (axis, sd);
 }
 
 void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName, Table *table)
@@ -964,91 +995,6 @@ else if (type == ColHeader)
 			list<<table->colLabel(i);
 		}
 	}
-else if (type == Day)
-	{
-	const QwtScaleDiv *sd = d_plot->axisScaleDiv (axis);
-
-	const QwtValueList majTickList = sd->ticks(QwtScaleDiv::MajorTick);
-	for (int i=0; i<(int)majTickList.count(); i++)
-		{	
-		QString day = QDate::shortDayName (int(majTickList[i])%7);
-		list<<day;
-		}
-	}
-
-	/*const QwtValueList minTickList = sd->ticks(QwtScaleDiv::MinorTick);
-	int min = (int)minTickList.count();
-
-	const QwtValueList majTickList = sd->ticks(QwtScaleDiv::MajorTick);
-	int maj = (int)majTickList.count();
-
-	int k=0;
-	QString day;
-	for (int i=0; i<maj; i++)
-		{
-		while(k < min)
-			{
-			if (minTickList[k] < majTickList[k])
-				{
-				day = QDate::shortDayName (int(minTickList[k])%8);
-				if (list.isEmpty () || list.last() != day)
-					list<<day;
-				k++;
-				}
-			else
-				break;
-			}
-		
-		day = QDate::shortDayName (int(majTickList[k])%8);
-		if (list.isEmpty () || list.last() != day)
-			list<<day;
-		}
-
-	while(k < min)
-		{
-		day = QDate::shortDayName (int(minTickList[k])%8);
-		if (list.last() != day)
-			list<<day;
-		k++;
-		}
-	}*/
-
-/*else if (type == Month)
-	{
-	const QwtScaleDiv *sd = d_plot->axisScaleDiv (axis);
-	int maj = sd->majCnt();
-	int min = sd->minCnt();
-	int k=0;
-	QString day;
-	for (int i=0; i<maj; i++)
-		{
-		while(k < min)
-			{
-			if (sd->minMark(k) < sd->majMark(i))
-				{
-				day = QDate::shortMonthName (int(sd->minMark(k))%13);
-				if (list.isEmpty () || list.last() != day)
-					list<<day;
-				k++;
-				}
-			else
-				break;
-			}
-		
-		day = QDate::shortMonthName (int(sd->majMark (i))%13);
-		if (list.isEmpty () || list.last() != day)
-			list<<day;
-		}
-
-	while(k < min)
-		{
-		day = QDate::shortMonthName (int(sd->minMark(k))%13);
-		if (list.last() != day)
-			list<<day;
-		k++;
-		}
-	}*/
-	
 d_plot->setAxisScaleDraw (axis, new QwtTextScaleDraw(list));
 axisType[axis] = type;
 }
@@ -6333,28 +6279,16 @@ d_plot->setLineWidth(width);
 void Graph::setBackgroundColor(const QColor& color)
 {
 QValueList<int> texts=textMarkerKeys();
-int i;	
-for (i=0; i<(int)texts.size(); i++)
+for (int i=0; i<(int)texts.size(); i++)
 	{
 	LegendMarker* mrk = (LegendMarker*) d_plot->marker(texts[i]);
 	if (d_plot->paletteBackgroundColor() == mrk->backgroundColor())
 		mrk->setBackgroundColor(color);	
 	}
 
-d_plot->setPaletteBackgroundColor(color);
-
-QwtTextLabel *title=d_plot->titleLabel();
-title->setPaletteBackgroundColor(color);
-
-for (i=0;i<QwtPlot::axisCnt;i++)
-	{
-	QwtScaleWidget *scale=(QwtScaleWidget *) d_plot->axisWidget(i);
-	if (scale)
-		scale->setPaletteBackgroundColor(color);
-	}
-		
-QwtPlotCanvas *plotCanvas = d_plot->canvas();
-plotCanvas->setPaletteBackgroundColor(color);
+QPalette pal = d_plot->palette();
+pal.setColor(QColorGroup::Background, color);
+d_plot->setPalette(pal);
 
 d_plot->replot();
 emit modifiedGraph();
@@ -6818,6 +6752,10 @@ for (i=0; i<QwtPlot::axisCnt; i++)
 		{
 		if (axisType[i] == Graph::Numeric)
 			setLabelsNumericFormat(i, g->labelsNumericFormat());
+		else if (axisType[i] == Graph::Day)
+			setLabelsDayFormat(i, axesFormatInfo[i].toInt());
+		else if (axisType[i] == Graph::Month)
+			setLabelsMonthFormat(i, axesFormatInfo[i].toInt());
 		else if (axisType[i] == Graph::Time || axisType[i] == Graph::Date)
 			setLabelsDateTimeFormat(i, axisType[i], axesFormatInfo[i]);
 		else

@@ -35,6 +35,7 @@
 #include <qregexp.h> 
 #include <qvbox.h>
 #include <qwidgetlist.h>
+#include <qdatetime.h>
 
 #include <qwt_plot.h>
 #include <qwt_scale_widget.h>
@@ -1354,12 +1355,12 @@ connect(boxMinorTicksType,SIGNAL(activated(int)), this, SLOT(updateMinTicksType(
 
 connect(boxShowAxis,SIGNAL(clicked()), this, SLOT(showAxis()));
 connect(boxFormat, SIGNAL(activated(int) ), this, SLOT(setLabelsNumericFormat(int) ) );
-connect(axesTitlesList,SIGNAL(highlighted(int) ), this, SLOT(updateLabelsFormat(int) ) );
+connect(axesTitlesList,SIGNAL(activated(int)), this, SLOT(updateLabelsFormat(int) ) );
 
 connect(btnAxesFont, SIGNAL(clicked()), this, SLOT(customAxisFont()));	
 connect(boxBaseline, SIGNAL(valueChanged(int)), this, SLOT(changeBaselineDist(int)));
-connect(boxAxisType,SIGNAL(activated(int) ), this, SLOT(showAxisFormatOptions(int)));
-connect(boxPrecision,SIGNAL(valueChanged(int) ), this, SLOT(setLabelsNumericFormat(int)));
+connect(boxAxisType, SIGNAL(activated(int)), this, SLOT(showAxisFormatOptions(int)));
+connect(boxPrecision, SIGNAL(valueChanged(int)), this, SLOT(setLabelsNumericFormat(int)));
 
 connect( buttonExp, SIGNAL( clicked() ), this, SLOT(addExp() ) );
 connect( buttonIndice, SIGNAL( clicked() ), this, SLOT(addIndex() ) );
@@ -1731,6 +1732,7 @@ boxShowFormula->hide();
 boxFormula->hide();
 boxTableName->hide();
 labelTable->hide();
+
 switch (format)
 	{
 	case 0:
@@ -1756,38 +1758,56 @@ switch (format)
 	break;
 
 	case 2:
+		{
+		int day = (QDate::currentDate()).dayOfWeek();
+		label2->show();
+		boxFormat->show();
+		boxFormat->insertItem(QDate::shortDayName(day));
+		boxFormat->insertItem(QDate::longDayName(day));
+		boxFormat->insertItem((QDate::shortDayName(day)).left(1));
+		boxFormat->setCurrentItem (formatInfo[axis].toInt());
+		}
 	break;
 
 	case 3:
+		{
+		int month = (QDate::currentDate()).month();
+		label2->show();
+		boxFormat->show();
+		boxFormat->insertItem(QDate::shortMonthName(month));
+		boxFormat->insertItem(QDate::longMonthName(month));
+		boxFormat->insertItem((QDate::shortMonthName(month)).left(1));
+		boxFormat->setCurrentItem (formatInfo[axis].toInt());
+		}
 	break;
 	
 	case 4:
-			{
-			label2->show();
-			boxFormat->show();
-			boxFormat->setEditable(true);
+		{
+		label2->show();
+		boxFormat->show();
+		boxFormat->setEditable(true);
 	
-			QStringList lst = QStringList::split(";", formatInfo[axis], false);
-			if (!lst[1].isEmpty())
-				{
-				boxFormat->insertItem(lst[1]);
-				boxFormat->setCurrentText(lst[1]);
-				}
-
-			boxFormat->insertItem("h");
-			boxFormat->insertItem("h ap");
-			boxFormat->insertItem("h AP");
-			boxFormat->insertItem("h:mm");
-			boxFormat->insertItem("h:mm ap");
-			boxFormat->insertItem("hh:mm");
-			boxFormat->insertItem("h:mm:ss");
-			boxFormat->insertItem("h:mm:ss.zzz");
-			boxFormat->insertItem("mm:ss");
-			boxFormat->insertItem("mm:ss.zzz");
-			boxFormat->insertItem("hmm");
-			boxFormat->insertItem("hmmss");
-			boxFormat->insertItem("hhmmss");		
+		QStringList lst = QStringList::split(";", formatInfo[axis], false);
+		if (!lst[1].isEmpty())
+			{
+			boxFormat->insertItem(lst[1]);
+			boxFormat->setCurrentText(lst[1]);
 			}
+
+		boxFormat->insertItem("h");
+		boxFormat->insertItem("h ap");
+		boxFormat->insertItem("h AP");
+		boxFormat->insertItem("h:mm");
+		boxFormat->insertItem("h:mm ap");
+		boxFormat->insertItem("hh:mm");
+		boxFormat->insertItem("h:mm:ss");
+		boxFormat->insertItem("h:mm:ss.zzz");
+		boxFormat->insertItem("mm:ss");
+		boxFormat->insertItem("mm:ss.zzz");
+		boxFormat->insertItem("hmm");
+		boxFormat->insertItem("hmmss");
+		boxFormat->insertItem("hhmmss");		
+		}
 	break;
 
 	case 5:
@@ -2386,6 +2406,8 @@ else if (generalDialog->currentPage()==(QWidget*)axesPage)
 		lst[1] = boxFormat->currentText();
 		formatInfo[axis]  = lst.join(";");
 		}
+	else if (format == Graph::Day || format == Graph::Month)
+		formatInfo[axis] = QString::number(boxFormat->currentItem());
 	else if (format == Graph::ColHeader)
 		formatInfo[axis] = boxTableName->currentText();
 	else
@@ -2585,7 +2607,7 @@ emit showAxis(axis, boxAxisType->currentItem(), formatInfo[axis], boxShowAxis->i
 
 void axesDialog::setAxisType(int)
 {
-int a=mapToQwtAxisId();
+int a = mapToQwtAxisId();
 int style = axesType[a];
 
 boxAxisType->setCurrentItem(style);
@@ -2688,7 +2710,9 @@ if ( tickLabelsOn[axis] == QString::number(on))
 tickLabelsOn[axis]=QString::number(on);
 
 int type = boxAxisType->currentItem();
-if (type > 3)
+if (type == Graph::Day || type == Graph::Month)
+	formatInfo[axis] = QString::number(boxFormat->currentItem());
+else if (type == Graph::Time || type == Graph::Date)
 	{
 	QStringList lst = QStringList::split(";", formatInfo[axis], false);			
 	lst[1] = boxFormat->currentText();
@@ -2768,15 +2792,15 @@ labelsNumericFormat=list;
 
 void axesDialog::setLabelsNumericFormat(int)
 {
-int axis=mapToQwtAxisId();
+int axis = mapToQwtAxisId();
 int type = boxAxisType->currentItem();
-int prec=boxPrecision->value();
-int format=boxFormat->currentItem();
+int prec = boxPrecision->value();
+int format = boxFormat->currentItem();
 
 if (type == Graph::Numeric)
 	{	
-	if ( labelsNumericFormat[2*axis] ==QString::number(format)
-		&& labelsNumericFormat[2*axis+1] ==QString::number(prec))
+	if ( labelsNumericFormat[2*axis] == QString::number(format)
+		&& labelsNumericFormat[2*axis+1] == QString::number(prec))
 		return;
 
 	if (format == 0)
@@ -2787,7 +2811,9 @@ if (type == Graph::Numeric)
 	labelsNumericFormat[2*axis] = QString::number(format);
 	labelsNumericFormat[2*axis+1] = QString::number(prec);
 	}
-else if (type >= Graph::Time)
+else if (type == Graph::Day || type == Graph::Month)
+	formatInfo[axis] = QString::number(format);
+else if (type == Graph::Time || type == Graph::Date)
 	{
 	QStringList lst = QStringList::split(";", formatInfo[axis], false);			
 	lst[1] = boxFormat->currentText();
@@ -2800,8 +2826,10 @@ QString formula =  boxFormula->text();
 if (!boxShowFormula->isChecked())
 	formula = QString::null;
 emit showAxis(axis, type, formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), 
-			  boxMinorTicksType->currentItem(), boxShowLabels->isChecked(),QColor(axesColors[axis]), format, 
-			  prec, boxAngle->value(), boxBaseline->value(), formula);		
+			  boxMinorTicksType->currentItem(), boxShowLabels->isChecked(),QColor(axesColors[axis]),
+			  format, prec, boxAngle->value(), boxBaseline->value(), formula);		
+
+axesType[axis] = type;
 }
 
 void axesDialog::showAxisFormula(int axis)

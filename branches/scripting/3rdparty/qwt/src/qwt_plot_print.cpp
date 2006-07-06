@@ -412,6 +412,10 @@ void QwtPlot::printScale(QPainter *painter,
     painter->save();
     painter->setFont(scaleWidget->font());
 
+    QPen pen = painter->pen();
+    pen.setWidth(scaleWidget->penWidth());
+    painter->setPen(pen);
+
     QwtScaleDraw *sd = (QwtScaleDraw *)scaleWidget->scaleDraw();
     const QPoint sdPos = sd->pos();
     const int sdLength = sd->length();

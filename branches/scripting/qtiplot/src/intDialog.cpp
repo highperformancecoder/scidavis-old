@@ -22,7 +22,7 @@ intDialog::intDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
 	setName( "polynomFitDialog" );
 	setCaption(tr("QtiPlot - Integration Options"));
     setSizeGripEnabled( true );
-	setFixedHeight(sizeHint().height());
+	setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
 
 	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),this,"GroupBox1" );
 

@@ -99,7 +99,7 @@ QwtPainter::drawRect(painter, rect.x(), rect.y(), rect.width(), rect.height());
 painter->restore();
 }
 
-/*void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
+void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
     const QwtArray<QwtScaleMap> &map, const QwtPlotPrintFilter &pfilter) const
 {
 	const QwtPlotCanvas* plotCanvas=canvas();	
@@ -126,7 +126,7 @@ painter->restore();
 	QwtPainter::setClipRect(painter, rect);
 
     drawItems(painter, canvasRect, map, pfilter);
-}*/
+}
 
 void Plot::drawItems (QPainter *painter, const QRect &rect, 
 							const QwtArray< QwtScaleMap > &map, const QwtPlotPrintFilter &pfilter) const

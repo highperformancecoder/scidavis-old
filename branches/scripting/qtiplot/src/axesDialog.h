@@ -192,7 +192,8 @@ signals:
 				  const QColor&, int, int, int, int, const QString&);	
 
 protected:
-	QStringList titles,scales,axesColors, tickLabelsOn, formatInfo, labelsNumericFormat, tablesList;
+	QStringList titles,scales,axesColors, tickLabelsOn, formatInfo;
+	QStringList	labelsNumericFormat, tablesList;
 	QValueList<int> majTicks, minTicks, axesType, axesBaseline;
 	QFont xBottomFont, yLeftFont, xTopFont, yRightFont;
 	gridOptions grid;

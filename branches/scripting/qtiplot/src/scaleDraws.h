@@ -5,6 +5,7 @@
 
 #include <qpainter.h>
 #include <qdatetime.h>
+#include <qmessagebox.h>
 
 #include <qwt_painter.h>
 #include <qwt_scale_draw.h>
@@ -111,32 +112,34 @@ void labelFormat(char &f, int &prec) const
 	{
 	bool print = p->device()->isExtDev();
 		
-	if (options() && !print)
+	bool hasBackbone = hasComponent(QwtAbstractScaleDraw::Backbone);
+	if ( hasBackbone && !print)
 		QwtScaleDraw::drawTick(p, val, len);
-	else if (!options())
-		{//axes without backbone
+	else if (!hasBackbone)
+		{
     	if ( len <= 0 )
        		return;
 
-    	const int tval = transform(val);
+		const QwtScaleMap map = this->map();
+    	const int tval = map.transform(val);
 		const int xorg = x();
 		const int yorg = y();	
 	
     	switch(orientation())
     		{
-        	case Left:
+        	case LeftScale:
 				QwtPainter::drawLine(p, xorg + 1, tval, xorg - len, tval);
             break;
 
-        	case Right:
+        	case RightScale:
 				QwtPainter::drawLine(p, xorg, tval, xorg + len, tval);
             break;
 
-        	case Bottom: 
+        	case BottomScale: 
                  QwtPainter::drawLine(p, tval, yorg, tval, yorg + len);
             break;
 
-        	case Top:
+        	case TopScale:
 				QwtPainter::drawLine(p, tval, yorg + 1, tval, yorg - len);
             break;
 
@@ -149,24 +152,25 @@ void labelFormat(char &f, int &prec) const
     	if ( len <= 0 )
        		return;
 
-    	const int tval = transform(val);
+    	const QwtScaleMap map = this->map();
+    	const int tval = map.transform(val);
 		const int xorg = x();
 		const int yorg = y();	
 	
     	switch(orientation())
     		{
-        	case Left:
+        	case LeftScale:
 				{
-				if (!options())
+				if (!hasBackbone)
 					QwtPainter::drawLine(p, xorg + 1, tval, xorg - len, tval);
 				else
 					QwtPainter::drawLine(p, xorg, tval, xorg - len, tval);
            	    break;
 				}
 
-        	case Right:
+        	case RightScale:
 				{
-				if (!options())
+				if (!hasBackbone)
             		QwtPainter::drawLine(p, xorg, tval, xorg + len, tval);
 				else
 					{
@@ -176,14 +180,14 @@ void labelFormat(char &f, int &prec) const
             	break;
 				}
 
-        	case Bottom: 
+        	case BottomScale: 
 				{
 				const int bw = p->pen().width() / 2;
 					QwtPainter::drawLine(p, tval, yorg + bw, tval, yorg + len);
             	break;
 				}
 
-        	case Top:
+        	case TopScale:
 				QwtPainter::drawLine(p, tval, yorg, tval, yorg - len);
             break;
 
@@ -191,9 +195,9 @@ void labelFormat(char &f, int &prec) const
             	break;
     		}
 		}
-	};*/
+	};
 	
-	/*void drawBackbone(QPainter *p) const
+	void drawBackbone(QPainter *p) const
 	{   
 	const int pw = p->pen().width();
 	const int pw2 = p->pen().width() % 2;
@@ -206,14 +210,14 @@ void labelFormat(char &f, int &prec) const
 			
     	switch(orientation())
     		{
-        	case Left:
+        	case LeftScale:
 				{
 				const int bw2 = (pw - 1) / 2;
             	QwtPainter::drawLine(p, xorg - bw2, yorg, xorg - bw2, yorg + l - 1);
             	break;
 				}
 			
-        	case Right:
+        	case RightScale:
 				{
 				int bw2 = pw / 2;
 				if (p->device()->isExtDev() && pw == 1)
@@ -223,22 +227,19 @@ void labelFormat(char &f, int &prec) const
             	break;
 				}
 			
-        	case Top:
+        	case TopScale:
 				{
 				const int bw2 = (pw - 1) / 2;
             	QwtPainter::drawLine(p, xorg, yorg - bw2, xorg + l - 1, yorg - bw2);
             	break;
 				}
 			
-        	case Bottom:
+        	case BottomScale:
 				{
 				const int bw2 = pw / 2;
             	QwtPainter::drawLine(p, xorg, yorg + bw2, xorg + l - 1, yorg + bw2);
             	break;
 				}
-			
-       	 	case Round:
-           	 break;
     		}
 		}
 	else
@@ -333,6 +334,96 @@ public:
 private:
 	QDate t_origin;
 	QString t_format;
+};
+
+class WeekDayScaleDraw: public ScaleDraw
+{
+public:
+	enum NameFormat{ShortName, LongName, Initial};
+
+	WeekDayScaleDraw(NameFormat format = ShortName):
+		d_format(format)
+		{};
+		
+	~WeekDayScaleDraw(){};
+		
+	NameFormat format() {return d_format;};
+		
+	virtual QwtText label(double value) const
+	{
+		int val = int(transformValue(value))%7;
+
+		if (val < 0)
+			val = 7 - abs(val);
+		else if (val == 0)
+			val = 7;
+
+		QString day;
+		switch(d_format)
+			{
+			case  ShortName:
+				day = QDate::shortDayName (val);
+			break;
+
+			case  LongName:
+				day = QDate::longDayName (val);
+			break;
+
+			case  Initial:
+				day = (QDate::shortDayName (val)).left(1);
+			break;
+			}
+
+		return QwtText(day);
+	};
+	
+private:
+	NameFormat d_format;
+};
+
+class MonthScaleDraw: public ScaleDraw
+{
+public:
+	enum NameFormat{ShortName, LongName, Initial};
+
+	MonthScaleDraw(NameFormat format = ShortName):
+		d_format(format)
+		{};
+		
+	~MonthScaleDraw(){};
+		
+	NameFormat format() {return d_format;};
+		
+	virtual QwtText label(double value) const
+	{
+		int val = int(transformValue(value))%12;
+
+		if (val < 0)
+			val = 12 - abs(val);
+		else if (val == 0)
+			val = 12;
+
+		QString day;
+		switch(d_format)
+			{
+			case  ShortName:
+				day = QDate::shortMonthName (val);
+			break;
+
+			case  LongName:
+				day = QDate::longMonthName (val);
+			break;
+
+			case  Initial:
+				day = (QDate::shortMonthName (val)).left(1);
+			break;
+			}
+
+		return QwtText(day);
+	};
+	
+private:
+	NameFormat d_format;
 };
 
 class QwtSupersciptsScaleDraw: public ScaleDraw

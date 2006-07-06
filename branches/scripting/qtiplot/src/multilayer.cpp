@@ -367,10 +367,10 @@ for (int i=0;i<(int)graphsList->count();i++)
 		
 		gr->setGeometry(QRect(gx,gy,gw,gh));
 		gr->plotWidget()->resize(QSize(gw, gh));
-		
-		plotLayout=plot->plotLayout();
-	
+
 		//we try to maintain the aspect ratio of the plot canvas
+		/*plotLayout=plot->plotLayout();
+	
 		int height = 0;
 		QRect tRect=plotLayout->titleRect ();
 		if (!tRect.isNull())
@@ -410,7 +410,7 @@ for (int i=0;i<(int)graphsList->count();i++)
 		width += int(w_ratio*cw);
 
 		gr->setGeometry(QRect(gx,gy, width, height));
-		gr->plotWidget()->resize(QSize(width, height));
+		gr->plotWidget()->resize(QSize(width, height));*/
 		}
 	}
 

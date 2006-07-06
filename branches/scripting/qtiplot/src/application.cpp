@@ -2263,6 +2263,7 @@ if (g)
 	g->showNormal();
 	activeGraph = g->addLayer();
 	customGraph(activeGraph);
+	activeGraph->removeLegend();
 	activeGraph->replot();
 	}
 }
@@ -10132,6 +10133,10 @@ for (int j=0;j<(int)list.count()-1;j++)
 				int format = lst[0].toInt();
 				if (format == Graph::Numeric)
 					ag->setLabelsNumericFormat(i, ag->labelsNumericFormat());
+				else if (format == Graph::Day)
+					ag->setLabelsDayFormat(i, lst[1].toInt());
+				else if (format == Graph::Month)
+					ag->setLabelsMonthFormat(i, lst[1].toInt());
 				else if (format == Graph::Time || format == Graph::Date)
 					ag->setLabelsDateTimeFormat(i, format, lst[1]+";"+lst[2]);
 				else
