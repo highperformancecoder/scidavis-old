@@ -3447,6 +3447,42 @@ Wollen Sie fortfahren?</translation>
         <source>Quantity</source>
         <translation>Anzahl</translation>
     </message>
+    <message>
+        <source>Left</source>
+        <translation>Links</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation>Rechts</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Remove point error</source>
+        <translation>QtiPlot - Fehler beim Punkte entfernen</translation>
+    </message>
+    <message>
+        <source>This function is not available for function curves!</source>
+        <translation>Diese Funktion steht für Funktionskurven nicht zur Verfügung!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Move point error</source>
+        <translation>QtiPlot - Fehler beim Punkte verschieben</translation>
+    </message>
+    <message>
+        <source>Linear interpolation of </source>
+        <translation>Lineare Interpolation von </translation>
+    </message>
+    <message>
+        <source>Cubic interpolation of </source>
+        <translation>Kubische Interpolation von </translation>
+    </message>
+    <message>
+        <source>Akima interpolation of </source>
+        <translation>Akima Interpolation von </translation>
+    </message>
+    <message>
+        <source>QtiPlot</source>
+        <translation>QtiPlot</translation>
+    </message>
 </context>
 <context>
     <name>Graph3D</name>
@@ -4408,7 +4444,7 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     </message>
     <message>
         <source>Ticks</source>
-        <translation>Achsenmarkierungen</translation>
+        <translation type="obsolete">Achsenmarkierungen</translation>
     </message>
     <message>
         <source>In</source>
@@ -4420,7 +4456,7 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation>Beides</translation>
+        <translation type="obsolete">Beides</translation>
     </message>
     <message>
         <source>None</source>
@@ -4578,6 +4614,14 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
         <source>millisec.</source>
         <translation>Millisek.</translation>
     </message>
+    <message>
+        <source>In &amp; Out</source>
+        <translation>Innen &amp; Aussen</translation>
+    </message>
+    <message>
+        <source>Canvas Color</source>
+        <translation>Untergrundfarbe</translation>
+    </message>
 </context>
 <context>
     <name>configDialog</name>
@@ -4671,11 +4715,11 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation>Beides</translation>
+        <translation type="obsolete">Beides</translation>
     </message>
     <message>
         <source>Major ticks length</source>
-        <translation>Achsen-Hauptmarkenlänge</translation>
+        <translation type="obsolete">Achsen-Hauptmarkenlänge</translation>
     </message>
     <message>
         <source>Axes linewidth</source>
@@ -4683,7 +4727,7 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     </message>
     <message>
         <source>Minor ticks length</source>
-        <translation>Achsen-Nebenmarkenlänge</translation>
+        <translation type="obsolete">Achsen-Nebenmarkenlänge</translation>
     </message>
     <message>
         <source>&amp;Show Legend</source>
@@ -4935,7 +4979,7 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     </message>
     <message>
         <source>Axes &amp;backbones</source>
-        <translation>Achsen-&amp;Basislinie</translation>
+        <translation type="obsolete">Achsen-&amp;Basislinie</translation>
     </message>
     <message>
         <source>Canvas Fra&amp;me</source>
@@ -4951,11 +4995,11 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     </message>
     <message>
         <source>Scale &amp;Fonts</source>
-        <translation>Schri&amp;ftarten skalieren</translation>
+        <translation type="obsolete">Schri&amp;ftarten skalieren</translation>
     </message>
     <message>
         <source>Auto&amp;scaling</source>
-        <translation>Auto&amp;skalierung</translation>
+        <translation type="obsolete">Auto&amp;skalierung</translation>
     </message>
     <message>
         <source>Folders</source>
@@ -5000,6 +5044,34 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     <message>
         <source>Check for new versions at startup</source>
         <translation>Beim Starten die Verfügbarkeit einer neuen Version prüfen</translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation>Länge</translation>
+    </message>
+    <message>
+        <source>Major Ticks</source>
+        <translation>Achsenhauptmarken</translation>
+    </message>
+    <message>
+        <source>Minor Ticks</source>
+        <translation>Achsennebenmarken</translation>
+    </message>
+    <message>
+        <source>In &amp; Out</source>
+        <translation>Innen &amp; Aussen</translation>
+    </message>
+    <message>
+        <source>Draw axes &amp;backbone</source>
+        <translation>Achsen&amp;basislinien zeichnen</translation>
+    </message>
+    <message>
+        <source>Scale &amp;fonts on resize</source>
+        <translation>Schri&amp;ften bei Größenänderungen mitskalieren</translation>
+    </message>
+    <message>
+        <source>Auto&amp;scale axes</source>
+        <translation>Achsen automatisch &amp;skalieren</translation>
     </message>
 </context>
 <context>
@@ -7014,7 +7086,19 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     </message>
     <message>
         <source> pixels</source>
-        <translation> Pixel</translation>
+        <translation type="obsolete"> Pixel</translation>
+    </message>
+    <message>
+        <source>Unit</source>
+        <translation>Einheit</translation>
+    </message>
+    <message>
+        <source>Pixels</source>
+        <translation>Pixel</translation>
+    </message>
+    <message>
+        <source>Scale Coordinates</source>
+        <translation>Skalenkoordinaten</translation>
     </message>
 </context>
 <context>
