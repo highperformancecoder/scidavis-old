@@ -1,0 +1,10 @@
+all : opj2dat liborigin.dll
+
+liborigin.dll : OPJFile.cc OPJFile.h
+	g++ -s -shared OPJFile.cc -o liborigin.dll -lws2_32 -Wl,--out-implib,liborigin.a
+
+opj2dat: opj2dat.cc OPJFile.cc
+	g++ -o opj2dat opj2dat.cc OPJFile.cc -lws2_32
+
+clean :
+	rm -f *~ *.o
