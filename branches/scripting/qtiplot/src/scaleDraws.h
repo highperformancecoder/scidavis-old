@@ -449,7 +449,7 @@ public:
 
 	QStringList list = QStringList::split ( "e", txt, FALSE );
 	if (list[0].toDouble() == 0.0)
-		return "0";
+		return QString("0");
 	
 	QString s= list[1];
 	int l = s.length();

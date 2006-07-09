@@ -10421,7 +10421,8 @@ plot->askOnCloseEvent(confirmClosePlot3D);
 
 void ApplicationWindow::connectMultilayerPlot(MultiLayer *g)
 {
-connect (g,SIGNAL(changeActiveLayer(Graph *)),this,SLOT(changeActiveGraph(Graph *)));
+// FIXME: the signal changeActiveLayer does not exist
+//connect (g,SIGNAL(changeActiveLayer(Graph *)),this,SLOT(changeActiveGraph(Graph *)));
 
 connect (g,SIGNAL(showTextDialog()),this,SLOT(showTextDialog()));
 connect (g,SIGNAL(showPlotDialog(long)),this,SLOT(showPlotDialog(long)));
