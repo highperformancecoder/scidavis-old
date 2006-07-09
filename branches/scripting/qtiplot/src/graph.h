@@ -176,7 +176,7 @@ public slots:
 	 QString saveAxesColors();
 	 QString saveEnabledAxes();
 	 QString saveErrorBars();
-	 QString saveCanvasFrame();
+	 QString saveCanvas();
 	 QString saveTitle();
 	 QString saveAxesTitleAlignement();
 	 QString saveEnabledTickLabels();
@@ -229,7 +229,7 @@ public slots:
 	 void addTimeStamp(const QFont& fnt, int frameStyle);
 	 
 	  // legend  
-	 LegendMarker* legend();
+	 void customLegend(int frame, const QFont& font);
 	 void removeLegend();
 	 void removeLegendItem(int index);
 	 void addLegendItem(const QString& colName);
@@ -247,16 +247,12 @@ public slots:
 	 LineMarker* lineMarker(long id);
 	 void insertLineMarker(LineMarker* mrk);
 	 void insertLineMarker(QStringList list);
-	 void updateLineMarker(const QColor& c,int w,Qt::PenStyle style,bool endArrow, bool startArrow);
 	 QwtArray<long> lineMarkerKeys();
 
 	 //!Draws a line/arrow depending on the value of "arrow"
 	 void drawLine(bool on, bool arrow = FALSE);
 	 bool drawArrow(){return drawArrowOn;};
 	 bool drawLineActive(){return drawLineOn;};
-
-	 void setArrowHeadGeometry(int length, int angle, bool filled);
-	 void updateLineMarkerGeometry(const QPoint& sp,const QPoint& ep);
 
 	 //image markers
 	 ImageMarker* imageMarker(long id);
@@ -386,9 +382,7 @@ public slots:
 	 void removeTitle();
 	 bool titleSelected();
 
-	 void deselectTitle();
 	 void selectTitle();
-	 void setTitleSelected(bool on);
 	 int titleAlignment();
 	 void setTitleAlignment(int align);
 	 void initTitle( bool on);
@@ -448,6 +442,7 @@ public slots:
 	 void drawBorder (int width, const QColor& color);
 	 void setBorder (int width, const QColor& color);
 	 void setBackgroundColor(const QColor& color);
+	 void setCanvasBackground(const QColor& color);
 
 	 //functions in analysis.cpp file
 	 void smoothSavGol(long curveKey, int order, int nl, int nr, int colIndex);
@@ -715,42 +710,11 @@ private:
 	bool pickerEnabled, cursorEnabled, rangeSelectorsEnabled;	
 	bool piePlot;//tells if the plot is a pie plot
 	bool lineProfileOn; // tells if pixel line profile is asked
-	bool isTitleSelected, auxFilledArrowHead, ignoreResize;
+	bool auxFilledArrowHead, ignoreResize;
 	bool drawAxesBackbone, autoscale;
 
 	QStringList fit_results;
 	double *peaks_array;
 	int n_peaks, selected_peaks, fit_type;
 };
-
-class PrintFilter: public QwtPlotPrintFilter
-{
-public:
-    PrintFilter(QwtPlot *insertCurve) 
-	{
-	//gridMajorColor=insertCurve->gridMajPen().color();
-	//gridMinorColor=insertCurve->gridMinPen().color();		
-	};
-
-	virtual QColor color(const QColor &c, Item item, int) const
-    {
-        if ( !(options() & PrintCanvasBackground))
-        {
-            switch(item)
-            {
-            case MajorGrid:
-                return gridMajorColor;
-            case MinorGrid:
-                return gridMinorColor;
-            default:	
-                ;
-            }
-        }
-        return c;
-    }
-
-private:
-	QColor gridMajorColor,gridMinorColor;
-};
-
 #endif // GRAPH_H

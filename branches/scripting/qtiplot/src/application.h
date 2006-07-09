@@ -487,6 +487,7 @@ public slots:
 	void showColMenu(int c);
 	void showColumnValuesDialog();	
 	void showGraphContextMenu();
+	void showTableContextMenu(bool selection);
 	void showWindowContextMenu();
 	void showWindowPopupMenu(QListViewItem *it, const QPoint &p, int);
 

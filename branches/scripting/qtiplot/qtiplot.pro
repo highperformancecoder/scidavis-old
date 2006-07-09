@@ -194,7 +194,8 @@ SOURCES  = src/application.cpp \
 	 src/folder.cpp\
 	 src/findDialog.cpp\
 	 src/scriptedit.cpp\
-	 src/muParserScripting.cpp
+	 src/muParserScripting.cpp\
+	 src/fileDialogs.cpp
 
 #parser (muParser_v1.26)
 HEADERS+=../3rdparty/muParser/muParser.h \

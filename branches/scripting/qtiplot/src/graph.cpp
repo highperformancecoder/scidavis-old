@@ -139,7 +139,6 @@ removePointsEnabled=FALSE;
 pickerEnabled=FALSE;
 rangeSelectorsEnabled=FALSE;
 piePlot=FALSE;
-isTitleSelected=FALSE;
 functions=0;
 ignoreResize= false;
 drawAxesBackbone = true;
@@ -157,10 +156,6 @@ for (int i=0; i<QwtPlot::axisCnt; i++)
 
 d_plot = new Plot(this);		
 cp = new CanvasPicker(this);
-		
-LegendMarker *mrk = new LegendMarker(d_plot);
-mrk->setOrigin(QPoint(10, 10));
-legendMarkerID = d_plot->insertMarker(mrk);
 		
 titlePicker = new TitlePicker(d_plot);
 scalePicker = new ScalePicker(d_plot);
@@ -190,6 +185,10 @@ grid.yZeroOn=0;
 setGridOptions(grid);
 
 initScales();
+
+LegendMarker *mrk = new LegendMarker(d_plot);
+mrk->setOrigin(QPoint(10, 20));
+legendMarkerID = d_plot->insertMarker(mrk);
 
 connect (d_plot,SIGNAL(selectPlot()),this,SLOT(activateGraph()));
 connect (d_plot,SIGNAL(selectPlot()),this,SLOT(highlightGraph()));
@@ -223,7 +222,6 @@ connect (titlePicker,SIGNAL(releasedGraph()),this,SLOT(releaseGraph()));
 connect (scalePicker,SIGNAL(highlightGraph()),this,SLOT(highlightGraph()));
 connect (scalePicker,SIGNAL(clicked()),this,SLOT(activateGraph()));
 connect (scalePicker,SIGNAL(clicked()),this,SLOT(deselectMarker()));
-connect (scalePicker,SIGNAL(clicked()),this,SLOT(deselectTitle()));
 connect (scalePicker,SIGNAL(axisDblClicked(int)),this,SIGNAL(axisDblClicked(int)));
 connect (scalePicker,SIGNAL(axisTitleRightClicked(int)),this,SLOT(showAxisTitleMenu(int)));
 connect (scalePicker,SIGNAL(axisRightClicked(int)),this,SLOT(showAxisContextMenu(int)));
@@ -235,6 +233,22 @@ connect (scalePicker,SIGNAL(moveGraph(const QPoint&)),this,SLOT(moveGraph(const 
 connect (scalePicker,SIGNAL(releasedGraph()),this, SLOT(releaseGraph()));
 
 connect (d_zoomer,SIGNAL(zoomed (const QwtDoubleRect &)),this,SLOT(zoomed (const QwtDoubleRect &)));
+}
+
+void Graph::customLegend(int frame, const QFont& font)
+{
+LegendMarker *mrk = (LegendMarker*) d_plot->marker(legendMarkerID);
+if (!mrk)
+	return;
+
+mrk->setBackground(frame);
+mrk->setFont(font);
+
+if (!n_curves)
+	{
+	mrk->setValue(50, 990);
+	mrk->updateOrigin();
+	}
 }
 
 void Graph::emitModified()
@@ -266,12 +280,6 @@ void Graph::deselectMarker()
 {
 selectedMarker = -1;
 d_plot->replot();
-}
-
-void Graph::deselectTitle()
-{
-isTitleSelected=FALSE;
-d_plot->titleLabel()->repaint();
 }
 
 long Graph::selectedMarkerKey()
@@ -353,9 +361,6 @@ QValueList<int> mrkKeys=d_plot->markerKeys();
 int n=mrkKeys.size();
 if (n==0)
 	return;
-
-if (isTitleSelected)
-	deselectTitle();
 
 int min_key=mrkKeys[0], max_key=mrkKeys[0];
 for (int i = 0; i<n; i++ )
@@ -2071,7 +2076,7 @@ printer.setFullPage(TRUE);
 printer.setOutputToFile(TRUE);
 printer.setOutputFileName(fname);
 	
-PrintFilter  filter(d_plot); 
+QwtPlotPrintFilter  filter; 
 filter.setOptions(QwtPlotPrintFilter::PrintAll |QwtPlotPrintFilter::PrintTitle |
 				  QwtPlotPrintFilter::PrintCanvasBackground);
 	
@@ -2123,7 +2128,7 @@ printer.setFullPage(TRUE);
 printer.setOutputToFile(TRUE);
 printer.setOutputFileName(fname);
 	
-PrintFilter  filter(d_plot); 
+QwtPlotPrintFilter  filter; 
 filter.setOptions(QwtPlotPrintFilter::PrintAll |QwtPlotPrintFilter::PrintTitle |
 				  QwtPlotPrintFilter::PrintCanvasBackground);
 	
@@ -2231,9 +2236,13 @@ if (printer.setup())
 
 	d_plot->printFrame(&paint, body);
 
-	PrintFilter filter(d_plot); 	
+	/*PrintFilter filter(d_plot); 	
     filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle |
-				  QwtPlotPrintFilter::PrintCanvasBackground);
+				  QwtPlotPrintFilter::PrintCanvasBackground);*/
+
+	QwtPlotPrintFilter filter;
+	filter.setOptions(QwtPlotPrintFilter::PrintAll |
+					  QwtPlotPrintFilter::PrintCanvasBackground);
 	d_plot->print(&paint, rect, filter);
 	}
 }
@@ -2256,12 +2265,7 @@ painter.end();*/
 
 void Graph::exportToSVG(const QString& fname) 
 {
-PrintFilter filter(d_plot); 	
-filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle |
-				  QwtPlotPrintFilter::PrintCanvasBackground);
-
 QPicture picture;
-
 QPainter p(&picture);
 d_plot->print(&p, d_plot->rect());
 p.end();
@@ -2696,29 +2700,19 @@ auxFilledArrowHead=filledHead;
 
 bool Graph::titleSelected()
 {
-return isTitleSelected;
-}
-
-void Graph::setTitleSelected(bool on)
-{
-isTitleSelected=on;
+return d_plot->titleLabel()->hasFocus(); 
 }
 
 void Graph::selectTitle()
 {
-if (!isTitleSelected)
+if (!d_plot->hasFocus())
+	{
 	emit selectedGraph(this);
+	QwtTextLabel *title = d_plot->titleLabel();
+	title->setFocus();
+	}
 
-d_plot->replot();
-isTitleSelected=TRUE;
 selectedMarker = -1;
-
-QwtTextLabel *title=d_plot->titleLabel();
-QPainter paint (title);
-paint.setPen(QPen(Qt::black,1,Qt::DotLine));
-paint.setRasterOp(Qt::NotROP);	
-paint.drawRect (title->rect());
-paint.end();
 }
 
 void Graph::setTitle(const QString& t)
@@ -2736,7 +2730,7 @@ emit modifiedGraph();
 
 void Graph::removeTitle()
 {
-if (isTitleSelected)
+if (d_plot->titleLabel()->hasFocus())
 	{
 	QwtPlotLayout *plotLayout=d_plot->plotLayout();
 	QRect tRect=plotLayout->titleRect ();
@@ -2778,57 +2772,6 @@ void Graph::updateImageMarker(int x, int y, int width, int height)
 ImageMarker* mrk=(ImageMarker*) d_plot->marker(selectedMarker);
 mrk->setOrigin(QPoint(x,y));
 mrk->setSize(QSize(width,height));
-d_plot->replot();
-emit modifiedGraph();
-}
-
-void Graph::updateLineMarker(const QColor& c,int w,Qt::PenStyle style,bool endArrow, bool startArrow)
-{
-LineMarker* mrkL=(LineMarker*) d_plot->marker(selectedMarker);
-mrkL->setColor(c);
-mrkL->setWidth(w);
-mrkL->setStyle(style);
-mrkL->setEndArrow(endArrow);
-mrkL->setStartArrow(startArrow);
-
-d_plot->replot();
-emit modifiedGraph();
-}
-
-void Graph::setArrowHeadGeometry(int length, int angle, bool filled)
-{
-LineMarker* mrkL=(LineMarker*) d_plot->marker(selectedMarker);
-if (!mrkL)
-	return;
-
-if (mrkL->headLength() != length)
-	mrkL->setHeadLength( length );
-
-if (mrkL->headAngle() != angle)
-	mrkL->setHeadAngle( angle );
-
-if (mrkL->filledArrowHead() != filled)
-	mrkL->fillArrowHead( filled );
-
-d_plot->replot();
-emit modifiedGraph();
-}
-
-void Graph::updateLineMarkerGeometry(const QPoint& sp,const QPoint& ep)
-{
-LineMarker* mrkL=(LineMarker*) d_plot->marker(selectedMarker);
-if (!mrkL)
-	return;
-
-QPoint startPoint=mrkL->startPoint();
-QPoint endPoint=mrkL->endPoint();
-
-if (startPoint != sp)
-	mrkL->setStartPoint(sp);
-
-if (endPoint != ep)
-	mrkL->setEndPoint(ep);
-
 d_plot->replot();
 emit modifiedGraph();
 }
@@ -3637,17 +3580,19 @@ void Graph::loadAxesLinewidth(int width)
 d_plot->setAxesLinewidth(width);
 }
 
-QString Graph::saveCanvasFrame()
+QString Graph::saveCanvas()
 {
-QString s="CanvasFrame\t";
+QString s="";
 QwtPlotCanvas* canvas=(QwtPlotCanvas*) d_plot->canvas();
 int w=canvas->lineWidth();
 if (w>0)
 	{
-	s+=QString::number(w)+"\t";
-	s+=canvasFrameColor().name()+"\n";
+	s += "CanvasFrame\t" + QString::number(w)+"\t";
+	s += canvasFrameColor().name()+"\n";
 	}
-else s="";
+
+QPalette pal = canvas->palette();
+s += "CanvasBackground\t" + pal.color(QPalette::Normal, QColorGroup::Background).name()+"\n"; 
 return s;
 }
 
@@ -4088,17 +4033,6 @@ bool on=FALSE;
 if (legendMarkerID>=0)	
 	on=TRUE;
 return on;
-}
-
-LegendMarker* Graph::legend()
-{
-if (legendMarkerID>=0)
-	{
-	LegendMarker* mrk=(LegendMarker*) d_plot->marker(legendMarkerID);
-	return mrk;	
-	}
-else 
-	return 0;
 }
 
 void Graph::newLegend(const QFont& fnt, int frameStyle)
@@ -6100,7 +6034,7 @@ s+="TicksLength\t"+QString::number(minorTickLength())+"\t"+
 s+=saveEnabledTickLabels();
 s+=saveAxesColors();
 s+=saveAxesBaseline();
-s+=saveCanvasFrame();
+s+=saveCanvas();
 s+=saveLabelsRotation();
 s+=saveCurves();			
 s+=saveErrorBars();
@@ -6144,7 +6078,7 @@ s+="TicksLength\t"+QString::number(minorTickLength())+"\t"+
 s+=saveEnabledTickLabels();
 s+=saveAxesColors();
 s+=saveAxesBaseline();
-s+=saveCanvasFrame();
+s+=saveCanvas();
 s+=saveLabelsRotation();
 s+=saveScale();
 s+=saveAxesFormulas();
@@ -6278,19 +6212,31 @@ d_plot->setLineWidth(width);
 
 void Graph::setBackgroundColor(const QColor& color)
 {
+d_plot->setPaletteBackgroundColor(color);
+
+QwtTextLabel *title=d_plot->titleLabel ();
+title->setPaletteBackgroundColor(color);
+
+for (int i=0;i<QwtPlot::axisCnt;i++)
+	{
+	QwtScaleWidget *scale=(QwtScaleWidget *) d_plot->axisWidget(i);
+	if (scale)
+		scale->setPaletteBackgroundColor(color);
+	}
+	
+emit modifiedGraph();
+}
+
+void Graph::setCanvasBackground(const QColor& color)
+{
 QValueList<int> texts=textMarkerKeys();
 for (int i=0; i<(int)texts.size(); i++)
 	{
 	LegendMarker* mrk = (LegendMarker*) d_plot->marker(texts[i]);
-	if (d_plot->paletteBackgroundColor() == mrk->backgroundColor())
+	if (d_plot->canvasBackground() == mrk->backgroundColor())
 		mrk->setBackgroundColor(color);	
 	}
-
-QPalette pal = d_plot->palette();
-pal.setColor(QColorGroup::Background, color);
-d_plot->setPalette(pal);
-
-d_plot->replot();
+d_plot->setCanvasBackground(color);
 emit modifiedGraph();
 }
 
@@ -6620,13 +6566,13 @@ Plot *plot = g->plotWidget();
 d_plot->setMargin(plot->margin());
 setBackgroundColor(plot->paletteBackgroundColor());
 setBorder(plot->lineWidth(), plot->frameColor());
+setCanvasBackground(plot->canvasBackground());
 
 enableAxes(g->enabledAxes());
 setAxesColors(g->axesColors());
 setMajorTicksType(g->plotWidget()->getMajorTicksType());
 setMinorTicksType(g->plotWidget()->getMinorTicksType());
 setAxesBaseline(g->axesBaseline());
-drawAxesBackbones(g->drawAxesBackbone);
 		
 setGridOptions(g->grid);
 setTitle(g->title());
@@ -6771,6 +6717,8 @@ for (i=0; i<QwtPlot::axisCnt; i++)
 		}
 	}
 setScales(g->scales);
+
+drawAxesBackbones(g->drawAxesBackbone);
 
 QwtArray<long> imag = g->imageMarkerKeys();
 for (i=0;i<(int)imag.size();i++)

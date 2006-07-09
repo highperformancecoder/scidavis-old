@@ -111,6 +111,7 @@ public slots:
 	QPixmap canvasPixmap();
 
 	void exportImage(const QString& fileName,const QString& fileType, int quality, bool transparent);
+	void exportToSVG(const QString& fname);
 	void exportToEPS(const QString& fname);
 	void exportToEPS(const QString& fname, int res, QPrinter::Orientation o, 
 					QPrinter::PageSize pageSize, QPrinter::ColorMode col);

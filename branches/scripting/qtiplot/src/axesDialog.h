@@ -74,6 +74,7 @@ public:
     QComboBox* boxTypeMajor;
     ColorBox* boxColorMinor;
     ColorBox* boxColorMajor;
+	ColorButton *boxCanvasColor;
     QSpinBox* boxWidthMajor;
     QComboBox* boxTypeMinor;
     QSpinBox* boxWidthMinor;
@@ -167,6 +168,7 @@ public slots:
 	void changeAxesLinewidth (int);
 	void drawAxesBackbones (bool);
 	void pickBackgroundColor();
+	void pickCanvasColor();
 	void showGeneralPage();
 	void showAxesPage();
 	void showGridPage();

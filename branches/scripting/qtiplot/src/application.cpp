@@ -2263,7 +2263,6 @@ if (g)
 	g->showNormal();
 	activeGraph = g->addLayer();
 	customGraph(activeGraph);
-	activeGraph->removeLegend();
 	activeGraph->replot();
 	}
 }
@@ -2506,13 +2505,9 @@ if (!g->isPiePlot())
 	g->drawAxesBackbones(drawBackbones);
 	}
 
-LegendMarker* legend = g->legend();
-if (legend)
-	{
-	legend->setBackground(legendFrameStyle);
-	legend->setFont(plotLegendFont);
-	}
 g->initFonts(plotAxesFont, plotNumbersFont, plotLegendFont);
+g->customLegend(legendFrameStyle, plotLegendFont);
+
 g->setTextMarkerDefaultFrame(legendFrameStyle);
 g->initTitleFont(plotTitleFont);
 g->initTitle(titleOn);
@@ -4411,10 +4406,12 @@ if(plotWindows.contains(w->name()))
    			 return;
 			}
 			
-		//if (selectedFilter.contains(".svg"))
-			//plot->exportToSVG(fname);
-
-		if (selectedFilter.contains(".eps"))
+		if (selectedFilter.contains(".svg"))
+			{
+			plot->exportToSVG(fname);
+			return;
+			}
+		else if (selectedFilter.contains(".eps"))
 			{
 			if (ied->showExportOptions())
 				{
@@ -5067,7 +5064,6 @@ if (g)
 	td->setAlignment(g->titleAlignment());
 	td->showNormal();
 	td->setActiveWindow();
-	g->setTitleSelected(FALSE);
 	}
 }
 else if (plot3DWindows.contains(caption)>0)
@@ -7031,26 +7027,7 @@ if (g)
 	if (!lm)
 		return;
 
-	lineDialog *ld=new lineDialog(0,"lineDialog",TRUE,WStyle_Tool|WDestructiveClose);
-	connect (ld,SIGNAL(values(const QColor&,int,Qt::PenStyle,bool,bool)),
-		 g,SLOT(updateLineMarker(const QColor&,int,Qt::PenStyle,bool, bool)));
-
-	connect (ld,SIGNAL(setLineGeometry(const QPoint&,const QPoint&)),
-		 g,SLOT(updateLineMarkerGeometry(const QPoint&,const QPoint&)));
-
-	connect (ld,SIGNAL(setHeadGeometry(int, int, bool)),
-		 g,SLOT(setArrowHeadGeometry(int, int, bool)));
-
-	ld->setIcon(QPixmap(logo_xpm));
-	ld->setStartPoint(lm->startPoint());
-	ld->setEndPoint(lm->endPoint());
-	ld->setColor(lm->color());
-	ld->setWidth(lm->width());
-	ld->setStyle(lm->style());
-	ld->setEndArrow(lm->getEndArrow());
-	ld->setStartArrow(lm->getStartArrow());
-	ld->initHeadGeometry(lm->headLength(), lm->headAngle(), lm->filledArrowHead());
-	ld->enableHeadTab();
+	lineDialog *ld = new lineDialog(lm, this, "lineDialog", TRUE, WStyle_Tool|WDestructiveClose);
 	ld->showNormal();
 	ld->setFocus();
 	}
@@ -8407,7 +8384,7 @@ if (!w)
 
 QPopupMenu cm(this);
 QPopupMenu plot3D(this);
-if (plotWindows.contains(w->name()))
+if (w->isA("MultiLayer"))
 	{
 	MultiLayer *g=(MultiLayer*)w;
 	if (copiedLayer)
@@ -8435,52 +8412,7 @@ if (plotWindows.contains(w->name()))
 	cm.insertSeparator();
 	actionCloseWindow->addTo(&cm);
 	}
-else if (tableWindows.contains(w->name()))
-	{
-	Table *t=(Table *)w;
-	if (t->singleRowSelected())
-		{
-		cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), w, SLOT(cutSelection()));
-		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), w, SLOT(copySelection()));
-		cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), w, SLOT(pasteSelection()));
-		cm.insertSeparator();
-		cm.insertItem(tr("&Insert Row"), w, SLOT(insertRow()));
-		cm.insertItem(QPixmap(close_xpm), tr("&Delete Row"), w, SLOT(deleteSelectedRows()));
-		cm.insertItem(QPixmap(erase_xpm),tr("Clea&r Row"), w, SLOT(clearSelection()));
-		cm.insertSeparator();
-		actionShowRowStatistics->addTo(&cm);
-		}
-	else if (t->multipleRowsSelected())
-		{
-		cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), w, SLOT(cutSelection()));
-		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), w, SLOT(copySelection()));
-		cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), w, SLOT(pasteSelection()));
-		cm.insertSeparator();
-		cm.insertItem(QPixmap(close_xpm), tr("&Delete Rows"), w, SLOT(deleteSelectedRows()));
-		cm.insertItem(QPixmap(erase_xpm),tr("Clea&r Rows"), w, SLOT(clearSelection()));
-		cm.insertSeparator();
-		actionShowRowStatistics->addTo(&cm);
-		}
-	else if (!t->singleCellSelected())
-		{
-		cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), w, SLOT(cutSelection()));
-		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), w, SLOT(copySelection()));
-		cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), w, SLOT(pasteSelection()));
-		cm.insertSeparator();
-		cm.insertItem(QPixmap(erase_xpm),tr("Clea&r"), w, SLOT(clearSelection()));
-		}
-	else
-		{
-		actionRename->addTo(&cm);
-		actionCopyWindow->addTo(&cm);
-		cm.insertSeparator();
-		actionShowExportASCIIDialog->addTo(&cm);
-		actionPrint->addTo(&cm);
-		cm.insertSeparator();
-		actionCloseWindow->addTo(&cm);
-		}
-	}
-else if (plot3DWindows.contains(w->name()))
+else if (w->isA("Graph3D"))
 	{
 	Graph3D *g=(Graph3D*)w;
 	if (!g->hasData())
@@ -8511,7 +8443,7 @@ else if (plot3DWindows.contains(w->name()))
 	cm.insertSeparator();
 	actionCloseWindow->addTo(&cm);
 	}
-else if (matrixWindows.contains(w->name()))
+else if (w->isA("Matrix"))
 	{
 	Matrix *t=(Matrix *)w;
 	cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), t, SLOT(cutSelection()));
@@ -8529,6 +8461,65 @@ else if (matrixWindows.contains(w->name()))
 		cm.insertItem(QPixmap(close_xpm), tr("&Delete Columns"), t, SLOT(deleteSelectedColumns()));
 		}
 	cm.insertItem(QPixmap(erase_xpm),tr("Clea&r"), t, SLOT(clearSelection()));
+	}
+cm.exec(QCursor::pos());
+}
+
+void ApplicationWindow::showTableContextMenu(bool selection)
+{
+Table *t = (Table*)ws->activeWindow();
+if (!t)
+	return;
+
+QPopupMenu cm(this);
+if (selection)
+	{
+	if (t->singleRowSelected())
+		{
+		cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), t, SLOT(cutSelection()));
+		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
+		cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), t, SLOT(pasteSelection()));
+		cm.insertSeparator();
+		cm.insertItem(tr("&Insert Row"), t, SLOT(insertRow()));
+		cm.insertItem(QPixmap(close_xpm), tr("&Delete Row"), t, SLOT(deleteSelectedRows()));
+		cm.insertItem(QPixmap(erase_xpm),tr("Clea&r Row"), t, SLOT(clearSelection()));
+		cm.insertSeparator();
+		actionShowRowStatistics->addTo(&cm);
+		}
+	else if (t->multipleRowsSelected())
+		{
+		cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), t, SLOT(cutSelection()));
+		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
+		cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), t, SLOT(pasteSelection()));
+		cm.insertSeparator();
+		cm.insertItem(QPixmap(close_xpm), tr("&Delete Rows"), t, SLOT(deleteSelectedRows()));
+		cm.insertItem(QPixmap(erase_xpm),tr("Clea&r Rows"), t, SLOT(clearSelection()));
+		cm.insertSeparator();
+		actionShowRowStatistics->addTo(&cm);
+		}
+	else if ((int)t->selectedColumns().count() > 0) 
+		{
+ 		showColMenu(t->firstSelectedColumn());
+ 		return;
+		}
+	else
+		{
+		cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), t, SLOT(cutSelection()));
+		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
+		cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), t, SLOT(pasteSelection()));
+		cm.insertSeparator();
+		cm.insertItem(QPixmap(erase_xpm),tr("Clea&r"), t, SLOT(clearSelection()));
+		}	
+	}
+else
+	{
+	actionRename->addTo(&cm);
+	actionCopyWindow->addTo(&cm);
+	cm.insertSeparator();
+	actionShowExportASCIIDialog->addTo(&cm);
+	actionPrint->addTo(&cm);
+	cm.insertSeparator();
+	actionCloseWindow->addTo(&cm);
 	}
 cm.exec(QCursor::pos());
 }
@@ -9703,15 +9694,12 @@ for (int j=0;j<(int)list.count()-1;j++)
 	if (s.contains ("ggeometry"))
 			{
 			fList=QStringList::split ("\t",s,TRUE);
-			int x=fList[1].toInt();
-			int y=fList[2].toInt();
-			int width=fList[3].toInt();
-			int height=fList[4].toInt();
-			ag=(Graph*)plot->addLayer(x,y,width,height);
+			ag=(Graph*)plot->addLayer(fList[1].toInt(), fList[2].toInt(), 
+									  fList[3].toInt(), fList[4].toInt());
 			ag->setIgnoreResizeEvents(true);
 			ag->enableAutoscaling(autoscale2DPlots);
 			}
-	else if (s.contains ("Background"))
+	else if (s.left(10) == "Background")
 			{
 			fList=QStringList::split ("\t",s,TRUE);
 			if (QColor(fList[1]) != QColor(255, 255, 255))
@@ -10092,6 +10080,11 @@ for (int j=0;j<(int)list.count()-1;j++)
 			{
 			QStringList list=QStringList::split ("\t",s,TRUE);
 			ag->drawCanvasFrame(list);
+			}
+		else if (s.contains ("CanvasBackground"))
+			{
+			QStringList list=QStringList::split ("\t",s,TRUE);
+			ag->setCanvasBackground(QColor(list[1]));
 			}
 		else if (s.contains ("Legend"))
 			{
@@ -10489,8 +10482,7 @@ connect (w,SIGNAL(plotCol(Table*,const QStringList&, int)),this, SLOT(multilayer
 connect (w,SIGNAL(modifiedWindow(QWidget*)),this,SLOT(modifiedProject(QWidget*)));
 connect (w,SIGNAL(optionsDialog()),this,SLOT(showColumnOptionsDialog()));
 connect (w,SIGNAL(colValuesDialog()),this,SLOT(showColumnValuesDialog()));
-connect (w,SIGNAL(colMenu(int)),this,SLOT(showColMenu(int)));
-connect (w,SIGNAL(showContextMenu()),this,SLOT(showWindowContextMenu()));
+connect (w,SIGNAL(showContextMenu(bool)),this,SLOT(showTableContextMenu(bool)));
 connect (w,SIGNAL(changedColHeader(const QString&,const QString&)),this,SLOT(updateColNames(const QString&,const QString&)));
 connect (w,SIGNAL(createTable(const QString&,int,int,const QString&)),this,SLOT(newTable(const QString&,int,int,const QString&)));
 

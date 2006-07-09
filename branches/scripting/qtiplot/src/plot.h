@@ -60,12 +60,12 @@ public:
 	void mouseMoveEvent ( QMouseEvent * e );
 
 	void drawPixmap(QPainter *painter, const QRect &rect);
-	/*virtual void print(QPainter *, const QRect &rect,
-        const QwtPlotPrintFilter & = QwtPlotPrintFilter()) const;*/
+	virtual void print(QPainter *, const QRect &rect,
+        const QwtPlotPrintFilter & = QwtPlotPrintFilter()) const;
 	
 protected:
-	void printCanvas(QPainter *painter, const QRect &canvasRect,
-   			 const QwtArray<QwtScaleMap> &map, const QwtPlotPrintFilter &pfilter) const;
+	/*void printCanvas(QPainter *painter, const QRect &canvasRect,
+   			 const QwtArray<QwtScaleMap> &map, const QwtPlotPrintFilter &pfilter) const;*/
 
 	virtual void drawItems (QPainter *painter, const QRect &rect,
 			const QwtArray< QwtScaleMap > &map, const QwtPlotPrintFilter &pfilter) const;

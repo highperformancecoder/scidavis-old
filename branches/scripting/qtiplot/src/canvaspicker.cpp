@@ -109,9 +109,6 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 			xMouse=me->pos().x();
 			yMouse=me->pos().y();
 			
-			if (plot()->titleSelected())
-				plot()->deselectTitle();	
-
 			bool drawText=plot()->drawTextActive();
 			bool select=false;
 			//first perform all other operations than marker selection

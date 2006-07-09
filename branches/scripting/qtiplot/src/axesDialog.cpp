@@ -1387,14 +1387,17 @@ boxFrameWidth->setMinValue(1);
 
 QButtonGroup *GroupBox55 = new QButtonGroup(2,QGroupBox::Horizontal,tr("Background"), vbox, "GroupBox5" );
 	
-new QLabel(tr( "Color" ),GroupBox55, "TextLabel1_53",0 );
+new QLabel(tr( "Color" ),GroupBox55);
 boxBackgroundColor= new ColorButton(GroupBox55);
 	
-new QLabel(tr( "Border Width" ),GroupBox55, "TextLabel1_54",0 );
+new QLabel(tr( "Border Width" ),GroupBox55);
 boxBorderWidth= new QSpinBox(GroupBox55);
 
-new QLabel(tr("Border Color" ),GroupBox55, "TextLabel1_53",0 );
+new QLabel(tr("Border Color" ),GroupBox55);
 boxBorderColor= new ColorButton(GroupBox55);
+
+new QLabel(tr("Canvas Color" ),GroupBox55);
+boxCanvasColor= new ColorButton(GroupBox55);
 
 QVBox *vbox2 = new QVBox(frame, "vbox2");
 vbox2->setSpacing(5);
@@ -1431,6 +1434,7 @@ generalDialog->insertTab(frame, tr( "General" ) );
 connect(boxMargin, SIGNAL(valueChanged (int)), this, SLOT(changeMargin(int)));
 connect(boxBorderColor, SIGNAL(clicked()), this, SLOT(pickBorderColor()));
 connect(boxBackgroundColor, SIGNAL(clicked()), this, SLOT(pickBackgroundColor()));
+connect(boxCanvasColor, SIGNAL(clicked()), this, SLOT(pickCanvasColor()));
 connect(boxBorderWidth,SIGNAL(valueChanged (int)), this, SLOT(updateBorder(int)));
 connect(boxFrameColor, SIGNAL(clicked()), this, SLOT(pickCanvasFrameColor()));
 connect(boxFramed,SIGNAL(toggled(bool)), this, SLOT(drawFrame(bool)));
@@ -1630,6 +1634,41 @@ else
 	}
 }
 
+void axesDialog::pickCanvasColor()
+{
+QColor c = QColorDialog::getColor(boxCanvasColor->color(), this);
+if ( !c.isValid() || c == boxCanvasColor->color() )
+	return;
+
+boxCanvasColor->setColor ( c ) ;
+
+if (boxAll->isChecked())
+	{
+	QWidgetList* allPlots = mPlot->graphPtrs();
+	for (int i=0; i<(int)allPlots->count();i++)
+		{
+		Graph* g=(Graph*)allPlots->at(i);
+		if (g)
+			{
+			g->setCanvasBackground(c);
+			g->replot();
+			}
+		}
+	}
+else
+	{
+	Graph* g = (Graph*)mPlot->activeGraph();
+	if (g)
+		{
+		g->setCanvasBackground(c);
+		g->replot();
+		}
+	}
+
+if (c == QColor(white) && mPlot->hasOverlapingLayers())
+	mPlot->updateTransparency();
+}
+
 void axesDialog::pickBackgroundColor()
 {
 QColor c = QColorDialog::getColor(boxBackgroundColor->color(), this);
@@ -1645,18 +1684,22 @@ if (boxAll->isChecked())
 		{
 		Graph* g=(Graph*)allPlots->at(i);
 		if (g)
+			{
 			g->setBackgroundColor(c);
+			g->replot();
+			}
 		}
 	}
 else
 	{
 	Graph* g = (Graph*)mPlot->activeGraph();
 	if (g)
+		{
 		g->setBackgroundColor(c);
+		g->replot();
+		}
 	}
-
-if (c == QColor(white) && mPlot->hasOverlapingLayers())
-	mPlot->updateTransparency();
+mPlot->updateTransparency();
 }
 
 void axesDialog::pickBorderColor()
@@ -2452,10 +2495,10 @@ else if (generalDialog->currentPage()==(QWidget*)frame)
 			g->drawAxesBackbones(boxBackbones->isChecked());
 			g->changeMargin(boxMargin->value());
 			g->setBackgroundColor(c);
+			g->setCanvasBackground(boxCanvasColor->color());
 			}
 		}
-	if (c == QColor(white) && mPlot->hasOverlapingLayers())
-		mPlot->updateTransparency();
+	mPlot->updateTransparency();
 	}
 
 return TRUE;
@@ -2471,6 +2514,7 @@ boxMargin->setValue (p->margin());
 boxBorderWidth->setValue(p->lineWidth());
 boxBorderColor->setColor(p->frameColor());
 boxBackgroundColor->setColor(p->paletteBackgroundColor());
+boxCanvasColor->setColor(d_graph->plotWidget()->canvasBackground());
 boxAxesLinewidth->setValue(d_graph->plotWidget()->axesLinewidth());
 
 boxFramed->setChecked(d_graph->framed());

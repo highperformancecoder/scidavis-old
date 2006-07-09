@@ -17,6 +17,12 @@ public:
 	double teta(int xs, int ys, int xe, int ye) const;
 	double length();
 
+	QwtDoublePoint coordStartPoint();
+	void setCoordStartPoint(const QwtDoublePoint& p);
+
+	QwtDoublePoint coordEndPoint();
+	void setCoordEndPoint(const QwtDoublePoint& p);
+
 	void setColor(const QColor& c);
 	QColor color();
 

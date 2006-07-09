@@ -490,12 +490,12 @@ void configDialog::languageChange()
 	lblMargin->setText(tr("Margin" )); 
 	lblLegend->setText(tr("Legend frame" )); 
 	labelFrameWidth->setText(tr("Frame width" )); 
-	boxBackbones->setText(tr("Axes &backbones"));
+	boxBackbones->setText(tr("Draw axes &backbone"));
 	boxFrame->setText(tr("Canvas Fra&me"));
 	boxAllAxes->setText(tr("Sho&w all axes"));
 	boxTitle->setText(tr("Show &Title"));
-	boxScaleFonts->setText(tr("Scale &Fonts"));
-	boxAutoscaling->setText(tr("Auto&scaling"));
+	boxScaleFonts->setText(tr("Scale &fonts on resize"));
+	boxAutoscaling->setText(tr("Auto&scale axes"));
 	boxLegend->clear();
 	boxLegend->insertItem( tr( "None" ) );
 	boxLegend->insertItem( tr( "Rectangle" ) );

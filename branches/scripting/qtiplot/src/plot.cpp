@@ -99,7 +99,7 @@ QwtPainter::drawRect(painter, rect.x(), rect.y(), rect.width(), rect.height());
 painter->restore();
 }
 
-void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
+/*void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
     const QwtArray<QwtScaleMap> &map, const QwtPlotPrintFilter &pfilter) const
 {
 	const QwtPlotCanvas* plotCanvas=canvas();	
@@ -126,7 +126,7 @@ void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
 	QwtPainter::setClipRect(painter, rect);
 
     drawItems(painter, canvasRect, map, pfilter);
-}
+}*/
 
 void Plot::drawItems (QPainter *painter, const QRect &rect, 
 							const QwtArray< QwtScaleMap > &map, const QwtPlotPrintFilter &pfilter) const
@@ -605,10 +605,10 @@ void Plot::drawPixmap(QPainter *painter, const QRect &rect)
     painter->restore();
 }
 
-/*void Plot::print(QPainter *painter, const QRect &plotRect,
+void Plot::print(QPainter *painter, const QRect &plotRect,
         const QwtPlotPrintFilter &pfilter) const
 {
-    int axis;
+ /*   int axis;
 
     if ( painter == 0 || !painter->isActive() ||
             !plotRect.isValid() || size().isNull() )
@@ -772,9 +772,10 @@ void Plot::drawPixmap(QPainter *painter, const QRect &rect)
 
     pfilter.reset((QwtPlot *)this);
 
-    painter->restore();
+    painter->restore();*/
+
+QwtPlot::print(painter, plotRect, pfilter);
 }
-*/
 
 int Plot::closestCurve(int xpos, int ypos, int &dist, int &point)
 {
@@ -907,3 +908,9 @@ r.setTop(minY);
 r.setBottom(maxY);
 return r;
 }
+
+/*const QColor& Plot::canvasBackground() const
+{
+return canvas()->paletteBackgroundColor();
+}*/
+

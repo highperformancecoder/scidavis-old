@@ -22,19 +22,40 @@ ScalePicker::ScalePicker(QwtPlot *plot):
 
 bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 {  
-	if ( object->inherits("QwtScaleWidget") && e->type() == QEvent::MouseButtonDblClick)
+
+	if (!object->inherits("QwtScaleWidget"))
+		return QObject::eventFilter(object, e);
+
+	/*if ( e->type() == QEvent::Paint )
+    	{
+		const QwtScaleWidget *scale = (const QwtScaleWidget *)object;
+		if ( scale->hasFocus() )
+		 {
+		 const int margin = 2;
+
+         QRect focusRect = contentsRect();
+         focusRect.setRect(focusRect.x() + margin, focusRect.y() + margin,
+            focusRect.width() - 2 * margin - 2, 
+             focusRect.height() - 2 * margin - 2);
+
+        QwtPainter::drawFocusRect(painter, this, focusRect);
+	    }
+        return TRUE;
+    	}*/
+
+	if ( e->type() == QEvent::MouseButtonDblClick )
     	{
 		mouseDblClicked((const QwtScaleWidget *)object, ((QMouseEvent *)e)->pos());
         return TRUE;
     	}
 
-	if ( object->inherits("QwtScaleWidget") && e->type() == QEvent::MouseButtonPress)
+	if ( e->type() == QEvent::MouseButtonPress)
     	{
 		const QMouseEvent *me = (const QMouseEvent *)e;	
 		if (me->button()==QEvent::LeftButton)
 			{
 			presspos = me->pos();
-				
+			((QwtScaleWidget *)object)->setFocus();
 			emit clicked();	
 
 			if (plot()->margin() < 2 && plot()->lineWidth() < 2)
@@ -53,7 +74,7 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 			}
     	}
 	
-	if ( object->inherits("QwtScaleWidget") && e->type() == QEvent::MouseMove)
+	if ( e->type() == QEvent::MouseMove)
     	{	
 		const QMouseEvent *me = (const QMouseEvent *)e;			
 
@@ -66,7 +87,7 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
         return TRUE;
    	 }
 	
-	if ( object->inherits("QwtScaleWidget") && e->type() == QEvent::MouseButtonRelease)
+	if ( e->type() == QEvent::MouseButtonRelease)
     	{
 		if (movedGraph)
 			{

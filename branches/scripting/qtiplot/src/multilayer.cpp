@@ -252,12 +252,10 @@ Graph* MultiLayer::addLayer(int x, int y, int width, int height)
 addLayerButton();
 	
 Graph* g = new Graph(canvas,0,WDestructiveClose);
-g->removeLegend();
-
 QSize size=QSize(width,height);
 g->plotWidget()->resize(size);
 g->setGeometry(x,y,width,height);
-
+g->removeLegend();
 graphsList->append(g);
 
 active_graph=g;
@@ -270,8 +268,6 @@ Graph* MultiLayer::addLayerToOrigin()
 addLayerButton();
 	
 Graph* g = new Graph(canvas,0,0);
-g->removeLegend();
-
 int w = canvas->width();
 int h = canvas->height();
 g->setGeometry(QRect(0, 0, w, h));
@@ -969,7 +965,7 @@ for (int i=0;i<(int)graphsList->count();i++)
 	Graph *gr=(Graph *)graphsList->at(i);
 	Plot *myPlot= (Plot *)gr->plotWidget();
 			
-	PrintFilter  filter(myPlot); 
+	QwtPlotPrintFilter  filter; 
 	filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle 
 					  | QwtPlotPrintFilter::PrintCanvasBackground);
 
@@ -1001,6 +997,33 @@ for (int i=0;i<(int)graphsList->count();i++)
 
 if (hasOverlapingLayers())		
 	updateTransparency();
+}
+
+void MultiLayer::exportToSVG(const QString& fname)
+{	
+QPicture picture;
+QPainter p(&picture);
+for (int i=0;i<(int)graphsList->count();i++)
+	{
+	Graph *gr=(Graph *)graphsList->at(i);
+	Plot *myPlot= (Plot *)gr->plotWidget();
+
+	QPoint pos=gr->pos();
+	
+	int width=int(myPlot->frameGeometry().width());
+	int height=int(myPlot->frameGeometry().height());
+
+	QRect rect = QRect(pos,QSize(width,height));
+
+	myPlot->print(&p, rect);
+
+	int lw = myPlot->lineWidth();
+	if ( lw > 0)
+		myPlot->printFrame(&p, rect);
+	}
+
+p.end();
+picture.save(fname, "svg");
 }
 
 void MultiLayer::copyAllLayers()
@@ -1053,7 +1076,7 @@ for (int i=0; i<(int)graphsList->count(); i++)
 	Graph *gr=(Graph *)graphsList->at(i);
 	Plot *myPlot= gr->plotWidget();
 			
-	PrintFilter  filter(myPlot); 
+	QwtPlotPrintFilter  filter; 
     filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle |
 				      QwtPlotPrintFilter::PrintCanvasBackground);
 
@@ -1161,27 +1184,11 @@ if (overlapsLayers(g))
 
 void MultiLayer::updateTransparency()
 {
-int i;
-int graphs=(int)graphsList->count();
-bool allColored = true;
-for (i=0;i<graphs;i++)
-	{
-	Graph *gr=(Graph *)graphsList->at(i);
-	QColor c = gr->plotWidget()->paletteBackgroundColor();
-	if (c == QColor(white))
-		{
-		allColored = false;
-		break;
-		}
-	}
-if (allColored)
-	return;
-
 QApplication::setOverrideCursor(waitCursor);
 
 showLayers(false);
 
-for (i=0; i<graphs; i++)
+for (int i=0; i<(int)graphsList->count(); i++)
 	{	
 	Graph *gr=(Graph *)graphsList->at(i);
 	if (gr->plotWidget()->paletteBackgroundColor() == QColor(white))

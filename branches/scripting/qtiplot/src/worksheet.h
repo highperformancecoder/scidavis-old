@@ -161,7 +161,6 @@ public slots:
 	void pasteSelection();
 	void selectAllTable();
 	void deselect();
-	bool singleCellSelected();
 	bool singleRowSelected();
 	bool multipleRowsSelected();
 
@@ -274,8 +273,7 @@ signals:
 	void optionsDialog();
 	void colValuesDialog();
 	void resizedTable(QWidget*);
-	void colMenu(int);
-	void showContextMenu();
+	void showContextMenu(bool selection);
 	void createTable(const QString&,int,int,const QString&);
 	
 private:

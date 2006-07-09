@@ -916,20 +916,6 @@ copySelection();
 clearSelection();
 }
 
-bool Table::singleCellSelected()
-{
-bool single=TRUE;
-QTableSelection sel=worksheet->selection(worksheet->currentSelection());
-int top=sel.topRow();
-int bottom=sel.bottomRow();
-int left=sel.leftCol();
-int right=sel.rightCol();
-	
-if (top != bottom || left != right)
-	single=FALSE;
-return single;
-}
-
 bool Table::multipleRowsSelected()
 {
 bool selected = true;
@@ -2767,7 +2753,14 @@ return true;
 
 void Table::contextMenuEvent(QContextMenuEvent *e)
 {
-emit showContextMenu();
+int w = 0;
+for (int i = 0; i < worksheet->numCols(); i++)
+	w += worksheet->columnWidth (i);
+
+if (e->pos().x() > w)
+	emit showContextMenu(false);
+else
+	emit showContextMenu(true);
 e->accept();
 }
 
@@ -2796,7 +2789,7 @@ QHeader *header = worksheet->horizontalHeader();
 if (object != (QObject *)header)
 	return FALSE;
 
-int offset =header->offset();
+int offset = header->offset();
 switch(e->type())
     {
         case QEvent::MouseButtonDblClick:
@@ -2809,15 +2802,7 @@ switch(e->type())
 
 		case QEvent::MouseButtonPress:
 			{
-			const QMouseEvent *me = (const QMouseEvent *)e;
-			if (me->button() == QMouseEvent::RightButton)	
-				{
-				const QMouseEvent *me = (const QMouseEvent *)e;
-				selectedCol=header->sectionAt (me->pos().x() + offset);
-				emit colMenu(selectedCol);
-				worksheet->setCurrentCell (0, selectedCol);
-				}
-			
+			const QMouseEvent *me = (const QMouseEvent *)e;	
 			if (me->button() == QMouseEvent::LeftButton)	
 				{
 				LeftButton=TRUE;
@@ -2832,7 +2817,7 @@ switch(e->type())
 						worksheet->removeSelection(sel);						
 					}
 				else
-					worksheet->clearSelection (TRUE);
+					worksheet->clearSelection();
 				
 				selectedCol=header->sectionAt (me->pos().x()+offset);
 				lastSelectedCol=selectedCol;

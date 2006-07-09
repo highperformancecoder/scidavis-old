@@ -257,12 +257,50 @@ const QwtScaleMap &yMap = d_plot->canvasMap(yAxis());
 return QPoint(xMap.transform(d_rect.left()), yMap.transform(d_rect.top()));
 }
 
+QwtDoublePoint LineMarker::coordStartPoint()
+{
+return QwtDoublePoint(d_rect.left(), d_rect.top());
+}
+
+void LineMarker::setCoordStartPoint(const QwtDoublePoint& p)
+{
+if (QwtDoublePoint(d_rect.left(), d_rect.top()) == p)
+	return;
+
+d_rect.setLeft(p.x());
+d_rect.setTop(p.y());
+
+const QwtScaleMap &xMap = d_plot->canvasMap(xAxis());
+const QwtScaleMap &yMap = d_plot->canvasMap(yAxis());
+
+d_start = QPoint(xMap.transform(p.x()), yMap.transform(p.y()));
+}
+
 QPoint LineMarker::endPoint()
 {
 const QwtScaleMap &xMap = d_plot->canvasMap(xAxis());
 const QwtScaleMap &yMap = d_plot->canvasMap(yAxis());
 
 return QPoint(xMap.transform(d_rect.right()), yMap.transform(d_rect.bottom()));
+}
+
+void LineMarker::setCoordEndPoint(const QwtDoublePoint& p)
+{
+if (QwtDoublePoint(d_rect.right(), d_rect.bottom()) == p)
+	return;
+
+d_rect.setRight(p.x());
+d_rect.setBottom(p.y());
+
+const QwtScaleMap &xMap = d_plot->canvasMap(xAxis());
+const QwtScaleMap &yMap = d_plot->canvasMap(yAxis());
+
+d_end = QPoint(xMap.transform(p.x()), yMap.transform(p.y()));
+}
+
+QwtDoublePoint LineMarker::coordEndPoint()
+{
+return QwtDoublePoint(d_rect.right(), d_rect.bottom());
 }
 
 void LineMarker::updateBoundingRect()
