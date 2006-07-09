@@ -2595,6 +2595,11 @@ if ( f.open(IO_ReadOnly) )
   			else if (stripSpaces)
   				s = s.stripWhiteSpace();
 			line = QStringList::split(sep, s, true);
+			int lc = (int)line.count();
+			if (lc > cols) {
+				addColumns(lc - cols);
+				cols = lc;
+			}
 			for (int j=0; j<cols; j++)
 				worksheet->setText(start + k, j, line[j]);
 			}
@@ -2611,6 +2616,11 @@ if ( f.open(IO_ReadOnly) )
   		else if (stripSpaces)
   			s = s.stripWhiteSpace();
 		line = QStringList::split(sep, s, true);
+		int lc = (int)line.count();
+		if (lc > cols) {
+			addColumns(lc - cols);
+			cols = lc;
+		}
 		for (int j=0; j<cols; j++)
 			worksheet->setText(i, j, line[j]);
 		}
