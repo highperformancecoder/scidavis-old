@@ -1183,7 +1183,7 @@ for (i=0;i<4;i++)
 return colors;
 }
 
-QFont Graph::titleFont()
+/*QFont Graph::titleFont()
 {
 return d_plot->title().font();
 }
@@ -1191,7 +1191,7 @@ return d_plot->title().font();
 QColor Graph::titleColor()
 {
 return d_plot->title().color();
-}
+}*/
 
 void Graph::setTitleColor(const QColor & c)
 {
@@ -1218,17 +1218,6 @@ t.setFont(fnt);
 d_plot->setTitle (t);
 d_plot->replot();
 emit modifiedGraph(); 
-}
-
-QString Graph::title()
-{
-return d_plot->title().text();
-}
-
-int Graph::titleAlignment()
-{
-QwtText t = d_plot->title();
-return t.flags();
 }
 
 void Graph::setYAxisTitle(const QString& text)
@@ -2717,45 +2706,34 @@ selectedMarker = -1;
 
 void Graph::setTitle(const QString& t)
 {
-QRect rect=d_plot->rect();
-QString oldTitle=d_plot->title().text();
-d_plot->setTitle (t);	
-if (oldTitle.isEmpty())
-	{
-	d_plot->resize(rect.width(),rect.height()+1);
-	d_plot->resize(rect.width(),rect.height()-1);
-	}
+QwtText title = d_plot->title();
+title.setText(t);
+d_plot->setTitle (title);	
+d_plot->updateLayout();
 emit modifiedGraph(); 
 }
 
 void Graph::removeTitle()
 {
 if (d_plot->titleLabel()->hasFocus())
-	{
-	QwtPlotLayout *plotLayout=d_plot->plotLayout();
-	QRect tRect=plotLayout->titleRect ();
-	int height=d_plot->height();
-	int width=d_plot->width();	
-	d_plot->setTitle("");
-		
-	int h=height-tRect.height();
-	d_plot->resize(width,h);
-	resize(width,h);
-		
+	{	
+	QwtText title = d_plot->title();
+	title.setText("");
+	d_plot->setTitle (title);	
+
 	emit modifiedGraph(); 
 	}
 }
 
-void Graph::initTitle( bool on)
+void Graph::initTitle(bool on, const QFont& fnt)
 {
 if (on)
-	d_plot->setTitle("Title");
-}
-
-void Graph::initTitleFont( const QFont& fnt)
-{
-QwtText t = d_plot->title();
-t.setFont(fnt);
+	{
+	QwtText t = d_plot->title();
+	t.setFont(fnt);
+	t.setText(tr("Title"));
+	d_plot->setTitle (t);
+	}
 }
 
 void Graph::removeLegend()
@@ -3775,9 +3753,9 @@ return s+"\n";
 QString Graph::saveTitle()
 {
 QString s="PlotTitle\t";
-s+=title().replace("\n", "<br>")+"\t";
-s+=d_plot->title().color().name()+"\t";
-s+=QString::number(d_plot->title().flags())+"\n";
+s += d_plot->title().text().replace("\n", "<br>")+"\t";
+s += d_plot->title().color().name()+"\t";
+s += QString::number(d_plot->title().flags())+"\n";
 return s;
 }
 
@@ -6575,10 +6553,9 @@ setMinorTicksType(g->plotWidget()->getMinorTicksType());
 setAxesBaseline(g->axesBaseline());
 		
 setGridOptions(g->grid);
-setTitle(g->title());
-setTitleFont(g->titleFont());
-setTitleColor(g->titleColor());
-setTitleAlignment(g->titleAlignment());
+
+d_plot->setTitle (g->plotWidget()->title());
+
 drawCanvasFrame(g->framed(),g->canvasFrameWidth(), g->canvasFrameColor());
 
 QStringList lst = g->scalesTitles();

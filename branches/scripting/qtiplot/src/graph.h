@@ -372,21 +372,17 @@ public slots:
 	 int canvasFrameWidth();
 	 bool framed();
 
-	  // insertCurve title 
-	 QString title();
+	 // plot title
 	 void setTitle(const QString& t);
 	 void setTitleFont(const QFont &fnt);
-	 QFont titleFont();
-	 QColor titleColor();
 	 void setTitleColor(const QColor &c);
-	 void removeTitle();
-	 bool titleSelected();
-
-	 void selectTitle();
-	 int titleAlignment();
 	 void setTitleAlignment(int align);
-	 void initTitle( bool on);
-	 void initTitleFont( const QFont& fnt);
+
+	 bool titleSelected();
+	 void selectTitle();
+
+	 void removeTitle();
+	 void initTitle( bool on, const QFont& fnt);
 	
 	 // tools for modifing insertCurve data 
 	 bool selectPoint(const QPoint &pos);

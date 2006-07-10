@@ -380,10 +380,10 @@ else
 void TextDialog::customFont()
 {
 bool okF;
-QFont fnt = QFontDialog::getFont( &okF,f,this);
-if (okF)
+QFont fnt = QFontDialog::getFont( &okF, f, this);
+if (okF && fnt != f)
 	{
-	f=fnt;
+	f = fnt;
 	
 	fnt.setPointSize(12);
 	LineEdit->setFont(fnt);
@@ -432,7 +432,7 @@ backgroundBtn->setColor ( c ) ;
 
 void TextDialog::setFont(const QFont& fnt)
 {
-f=fnt; 
+f = fnt; 
 
 QFont auxf = f;
 auxf.setPointSize(12);

@@ -1,11 +1,10 @@
 #include "scalePicker.h"
-#include <qpainter.h>
+
+#include <qapplication.h>
+
 #include <qwt_plot.h>
 #include <qwt_scale_widget.h>
 #include <qwt_text_label.h>
-
-#include <qmessagebox.h>
-#include <qapplication.h>
 
 ScalePicker::ScalePicker(QwtPlot *plot):
     QObject(plot)
@@ -22,26 +21,8 @@ ScalePicker::ScalePicker(QwtPlot *plot):
 
 bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 {  
-
 	if (!object->inherits("QwtScaleWidget"))
 		return QObject::eventFilter(object, e);
-
-	/*if ( e->type() == QEvent::Paint )
-    	{
-		const QwtScaleWidget *scale = (const QwtScaleWidget *)object;
-		if ( scale->hasFocus() )
-		 {
-		 const int margin = 2;
-
-         QRect focusRect = contentsRect();
-         focusRect.setRect(focusRect.x() + margin, focusRect.y() + margin,
-            focusRect.width() - 2 * margin - 2, 
-             focusRect.height() - 2 * margin - 2);
-
-        QwtPainter::drawFocusRect(painter, this, focusRect);
-	    }
-        return TRUE;
-    	}*/
 
 	if ( e->type() == QEvent::MouseButtonDblClick )
     	{
@@ -105,7 +86,7 @@ void ScalePicker::mouseDblClicked(const QwtScaleWidget *scale, const QPoint &pos
 {
 QRect rect = scaleRect(scale);
 
-int margin = 2; // pixels tolerance
+int margin = 1; // pixels tolerance
 rect.setRect(rect.x() - margin, rect.y() - margin, rect.width() + 2 * margin, rect.height() +  2 * margin);
 
 if ( rect.contains(pos) ) 

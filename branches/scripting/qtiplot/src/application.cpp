@@ -2509,8 +2509,7 @@ g->initFonts(plotAxesFont, plotNumbersFont, plotLegendFont);
 g->customLegend(legendFrameStyle, plotLegendFont);
 
 g->setTextMarkerDefaultFrame(legendFrameStyle);
-g->initTitleFont(plotTitleFont);
-g->initTitle(titleOn);
+g->initTitle(titleOn, plotTitleFont);
 g->drawCanvasFrame(canvasFrameOn, canvasFrameWidth);
 g->plotWidget()->setMargin(defaultPlotMargin);
 g->enableAutoscaling(autoscale2DPlots);
@@ -5058,10 +5057,11 @@ if (g)
 	connect (td,SIGNAL(changeColor(const QColor &)),g,SLOT(setTitleColor(const QColor &)));
 	connect (td,SIGNAL(changeAlignment(int)),g,SLOT(setTitleAlignment(int)));
 
-	td->setText(g->title());
-	td->setFont(g->titleFont());
-	td->setTextColor(g->titleColor());
-	td->setAlignment(g->titleAlignment());
+	QwtText t = g->plotWidget()->title();
+	td->setText(t.text());
+	td->setFont(t.font());
+	td->setTextColor(t.color());
+	td->setAlignment(t.flags());
 	td->showNormal();
 	td->setActiveWindow();
 	}
