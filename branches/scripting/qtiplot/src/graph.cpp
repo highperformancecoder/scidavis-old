@@ -77,7 +77,7 @@ static const char *unzoom_xpm[]={
 #include "BoxCurve.h"
 #include "Histogram.h"
 #include "VectorCurve.h"
-#include "scaleDraws.h"
+#include "scales.h"
 #include "plot.h"
 #include "parser.h"
 #include "fileDialogs.h"
@@ -940,7 +940,7 @@ if (axisOn && (axis == QwtPlot::xTop || axis == QwtPlot::yRight))
 	updateSecondaryAxis(axis);//synchronize scale divisions
 
 scalePicker->refresh();		
-d_plot->replot();	
+d_plot->replot();
 emit modifiedGraph();
 }
 

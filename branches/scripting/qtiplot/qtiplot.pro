@@ -91,7 +91,7 @@ HEADERS  = src/application.h \
 	 src/BoxCurve.h \
 	 src/Histogram.h \
 	 src/VectorCurve.h \
-     src/scaleDraws.h \
+     src/scales.h \
 	 src/imageExportDialog.h \
 	 src/matrix.h \
 	 src/matrixDialog.h \
@@ -195,7 +195,8 @@ SOURCES  = src/application.cpp \
 	 src/findDialog.cpp\
 	 src/scriptedit.cpp\
 	 src/muParserScripting.cpp\
-	 src/fileDialogs.cpp
+	 src/fileDialogs.cpp\
+     src/scales.cpp
 
 #parser (muParser_v1.26)
 HEADERS+=../3rdparty/muParser/muParser.h \

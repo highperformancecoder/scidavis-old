@@ -64,6 +64,9 @@ public:
         const QwtPlotPrintFilter & = QwtPlotPrintFilter()) const;
 	
 protected:
+	void Plot::printScale(QPainter *painter, int axisId, int startDist, int endDist, 
+						  int baseDist, const QRect &rect) const;
+
 	/*void printCanvas(QPainter *painter, const QRect &canvasRect,
    			 const QwtArray<QwtScaleMap> &map, const QwtPlotPrintFilter &pfilter) const;*/
 
