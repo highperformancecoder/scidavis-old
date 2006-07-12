@@ -3561,16 +3561,13 @@ d_plot->setAxesLinewidth(width);
 QString Graph::saveCanvas()
 {
 QString s="";
-QwtPlotCanvas* canvas=(QwtPlotCanvas*) d_plot->canvas();
-int w=canvas->lineWidth();
+int w = d_plot->canvas()->lineWidth();
 if (w>0)
 	{
 	s += "CanvasFrame\t" + QString::number(w)+"\t";
 	s += canvasFrameColor().name()+"\n";
 	}
-
-QPalette pal = canvas->palette();
-s += "CanvasBackground\t" + pal.color(QPalette::Normal, QColorGroup::Background).name()+"\n"; 
+s += "CanvasBackground\t" + d_plot->canvasBackground().name()+"\n"; 
 return s;
 }
 
