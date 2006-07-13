@@ -107,7 +107,6 @@ public slots:
 	 void exportToEPS(const QString& fname);
 	 void exportToEPS(const QString& fname, int res, QPrinter::Orientation o, 
 					 QPrinter::PageSize size, QPrinter::ColorMode col);
-	 static void addBoundingBox(const QString& fname, const QRect& rect);
 
 	 void exportToWmf(const QString& fname);
 	 

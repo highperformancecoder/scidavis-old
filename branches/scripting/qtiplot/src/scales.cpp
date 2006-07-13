@@ -7,6 +7,7 @@
 
 #include <qwt_painter.h>
 #include <qwt_text.h>		
+#include <qwt_scale_map.h>
 
 ScaleDraw::ScaleDraw(const QString& s):
 	d_fmt('g'),
@@ -93,67 +94,56 @@ void ScaleDraw::labelFormat(char &f, int &prec) const
     prec = d_prec;
 }
 	
-/*void drawTick(QPainter *p, double val, int len) const
-	{
-	bool print = p->device()->isExtDev();
-		
-	bool hasBackbone = hasComponent(QwtAbstractScaleDraw::Backbone);
-	if ( hasBackbone && !print)
-		QwtScaleDraw::drawTick(p, val, len);
-	else if (!hasBackbone)
-		{
-    	if ( len <= 0 )
-       		return;
-
-		const QwtScaleMap map = this->map();
-    	const int tval = map.transform(val);
-		const int xorg = x();
-		const int yorg = y();	
+void ScaleDraw::drawTick(QPainter *p, double value, int len) const
+{
+bool print = p->device()->isExtDev();
+bool hasBackbone = hasComponent(QwtAbstractScaleDraw::Backbone);
 	
-    	switch(orientation())
+if ( hasBackbone && !print )
+	QwtScaleDraw::drawTick(p, value, len);
+else 
+	{
+    if ( len <= 0 )
+       	return;
+
+	const int tval = map().transform(value);
+	const int xorg = pos().x();
+	const int yorg = pos().y();	
+	
+	if (!hasBackbone)
+		{
+		switch(alignment())
     		{
-        	case LeftScale:
-				QwtPainter::drawLine(p, xorg + 1, tval, xorg - len, tval);
+			case LeftScale:
+			QwtPainter::drawLine(p, xorg + 1, tval, xorg - len, tval);
             break;
+			case RightScale:
+			QwtPainter::drawLine(p, xorg, tval, xorg + len, tval);
+			break;
+			case BottomScale: 
+             QwtPainter::drawLine(p, tval, yorg, tval, yorg + len);
+			break;
+			case TopScale:
+			QwtPainter::drawLine(p, tval, yorg + 1, tval, yorg - len);
+			break;
 
-        	case RightScale:
-				QwtPainter::drawLine(p, xorg, tval, xorg + len, tval);
-            break;
-
-        	case BottomScale: 
-                 QwtPainter::drawLine(p, tval, yorg, tval, yorg + len);
-            break;
-
-        	case TopScale:
-				QwtPainter::drawLine(p, tval, yorg + 1, tval, yorg - len);
-            break;
-
-        	default:
-            	break;
+			default:
+				break;
     		}
 		}
 	else if (print)
 		{
-    	if ( len <= 0 )
-       		return;
-
-    	const QwtScaleMap map = this->map();
-    	const int tval = map.transform(val);
-		const int xorg = x();
-		const int yorg = y();	
-	
-    	switch(orientation())
+		switch(alignment())
     		{
-        	case LeftScale:
+			case LeftScale:
 				{
 				if (!hasBackbone)
 					QwtPainter::drawLine(p, xorg + 1, tval, xorg - len, tval);
 				else
 					QwtPainter::drawLine(p, xorg, tval, xorg - len, tval);
-           	    break;
+           		break;
 				}
-
-        	case RightScale:
+			case RightScale:
 				{
 				if (!hasBackbone)
             		QwtPainter::drawLine(p, xorg, tval, xorg + len, tval);
@@ -162,25 +152,24 @@ void ScaleDraw::labelFormat(char &f, int &prec) const
 					const int bw = QMAX (p->pen().width() / 2, 1);
 					QwtPainter::drawLine(p, xorg + bw, tval, xorg + len, tval);
 					}
-            	break;
+				break;
 				}
-
-        	case BottomScale: 
+			case BottomScale: 
 				{
 				const int bw = p->pen().width() / 2;
 					QwtPainter::drawLine(p, tval, yorg + bw, tval, yorg + len);
-            	break;
+				break;
 				}
-
-        	case TopScale:
+			case TopScale:
 				QwtPainter::drawLine(p, tval, yorg, tval, yorg - len);
-            break;
+			break;
 
-        	default:
-            	break;
+			default:
+				break;
     		}
 		}
-	};*/
+	}
+}
 	
 void ScaleDraw::drawBackbone(QPainter *p) const
 {   
@@ -209,6 +198,11 @@ switch(alignment())
 	}
 }
 
+/*****************************************************************************
+ *
+ * Class QwtTextScaleDraw
+ *
+ *****************************************************************************/
 
 QwtTextScaleDraw::QwtTextScaleDraw(const QStringList& list):
 					  labels(list)
@@ -222,6 +216,12 @@ if (floor(value) == value && index > 0 && index <= (int)labels.count())
 else
 	return QwtText();
 }
+
+/*****************************************************************************
+ *
+ * Class TimeScaleDraw
+ *
+ *****************************************************************************/
 
 TimeScaleDraw::TimeScaleDraw(const QTime& t, const QString& format):
 		t_origin (t), 
@@ -240,6 +240,12 @@ QTime t = t_origin.addMSecs ( (int)value );
 return QwtText(t.toString ( t_format ));
 }
 
+/*****************************************************************************
+ *
+ * Class DateScaleDraw
+ *
+ *****************************************************************************/
+
 DateScaleDraw::DateScaleDraw(const QDate& t, const QString& format):
 			  t_origin (t), 
 			  t_format (format)
@@ -256,6 +262,11 @@ QDate t = t_origin.addDays ( (int)value );
 return QwtText(t.toString ( t_format ));
 }
 
+/*****************************************************************************
+ *
+ * Class WeekDayScaleDraw
+ *
+ *****************************************************************************/
 
 WeekDayScaleDraw:: WeekDayScaleDraw(NameFormat format):
 				d_format(format)
@@ -288,6 +299,12 @@ switch(d_format)
 return QwtText(day);
 }
 
+/*****************************************************************************
+ *
+ * Class MonthScaleDraw
+ *
+ *****************************************************************************/
+
 MonthScaleDraw::MonthScaleDraw(NameFormat format):
 		d_format(format)
 {};
@@ -318,6 +335,12 @@ switch(d_format)
 	}
 return QwtText(day);
 }
+
+/*****************************************************************************
+ *
+ * Class QwtSupersciptsScaleDraw
+ *
+ *****************************************************************************/
 
 QwtSupersciptsScaleDraw::QwtSupersciptsScaleDraw(const QString& s)
 {
@@ -359,5 +382,7 @@ if (list[0] == "1")
 else
 	return QwtText(list[0] + "x10<sup>" + s + "</sup>");
 }
+
+
 
 

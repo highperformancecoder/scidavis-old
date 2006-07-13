@@ -967,7 +967,7 @@ for (int i=0;i<(int)graphsList->count();i++)
 			
 	QwtPlotPrintFilter  filter; 
 	filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle 
-					  | QwtPlotPrintFilter::PrintCanvasBackground);
+					  |~QwtPlotPrintFilter::PrintCanvasBackground);
 
 	QPoint pos=gr->pos();
 	pos=QPoint(int(margin + pos.x()*scaleFactorX),int(margin + pos.y()*scaleFactorY));
@@ -975,24 +975,7 @@ for (int i=0;i<(int)graphsList->count();i++)
 	int width=int(myPlot->frameGeometry().width()*scaleFactorX);
 	int height=int(myPlot->frameGeometry().height()*scaleFactorY);
 
-	QRect rect = QRect(pos,QSize(width,height));
-
-	if (myPlot->paletteBackgroundColor() != QColor(white))
-		paint.fillRect(rect, myPlot->paletteBackgroundColor());
-
-	int lw = myPlot->lineWidth();
-	if ( lw > 0)
-		{			
-		myPlot->printFrame(&paint, rect);
-				
-		rect.moveBy ( lw, lw);
-		rect.setWidth(rect.width() - 2*lw);
-		rect.setHeight(rect.height() - 2*lw);
-		}
-	
-	//paint.translate(canvas->width(), 0);
-	//paint.rotate(90);
-	myPlot->print(&paint, rect, filter);
+	myPlot->print(&paint, QRect(pos,QSize(width,height)), filter);
 	}
 
 if (hasOverlapingLayers())		
@@ -1013,13 +996,7 @@ for (int i=0;i<(int)graphsList->count();i++)
 	int width=int(myPlot->frameGeometry().width());
 	int height=int(myPlot->frameGeometry().height());
 
-	QRect rect = QRect(pos,QSize(width,height));
-
-	myPlot->print(&p, rect);
-
-	int lw = myPlot->lineWidth();
-	if ( lw > 0)
-		myPlot->printFrame(&p, rect);
+	myPlot->print(&p, QRect(pos,QSize(width,height)));
 	}
 
 p.end();
@@ -1078,29 +1055,15 @@ for (int i=0; i<(int)graphsList->count(); i++)
 			
 	QwtPlotPrintFilter  filter; 
     filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle |
-				      QwtPlotPrintFilter::PrintCanvasBackground);
+				      ~ QwtPlotPrintFilter::PrintCanvasBackground);
 
 	QPoint pos=gr->pos();
 	pos=QPoint(margin + int(pos.x()*scaleFactorX), margin + int(pos.y()*scaleFactorY));
 			
 	int width=int(myPlot->frameGeometry().width()*scaleFactorX);
 	int height=int(myPlot->frameGeometry().height()*scaleFactorY);
-
-	QRect rect = QRect(pos,QSize(width,height));
-	if (myPlot->paletteBackgroundColor() != QColor(white))
-		painter->fillRect(rect, myPlot->paletteBackgroundColor());
-
-    int lw = myPlot->lineWidth();
-	if ( lw > 0)
-		{			
-		myPlot->printFrame(painter, rect);
-				
-		rect.moveBy (lw, lw);
-		rect.setWidth(rect.width() - 2*lw);
-		rect.setHeight(rect.height() - 2*lw);
-		}
 	
-	myPlot->print(painter, rect, filter);
+	myPlot->print(painter, QRect(pos,QSize(width,height)), filter);
 	}
 
 if (hasOverlapingLayers())

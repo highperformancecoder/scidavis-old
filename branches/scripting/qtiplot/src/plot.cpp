@@ -28,8 +28,8 @@ graphToResize=FALSE;
 ShiftButton=FALSE;
 
 setGeometry(QRect(0,0,500,400));
-setAxisTitle(0, tr("Y Axis Title"));
-setAxisTitle(2, tr("X Axis Title"));	
+setAxisTitle(QwtPlot::yLeft, tr("Y Axis Title"));
+setAxisTitle(QwtPlot::xBottom, tr("X Axis Title"));	
 
 // grid 
 d_grid = new QwtPlotGrid;
@@ -50,8 +50,12 @@ for (int i= 0; i<QwtPlot::axisCnt; i++)
 		{
 		scale->setMargin(0);
 
+		//the axis title color must be initialized
+		QwtText title = scale->title();
+		title.setColor(Qt::black);
+		scale->setTitle(title);
+
 		ScaleDraw *sd = new ScaleDraw();
-		 
 		sd->setTickLength  	(QwtScaleDiv::MinorTick, minTickLength); 
 		sd->setTickLength  	(QwtScaleDiv::MediumTick, minTickLength);
 		sd->setTickLength  	(QwtScaleDiv::MajorTick, majTickLength);
@@ -86,15 +90,17 @@ return palette().color(QPalette::Active, QColorGroup::Foreground);
 
 void Plot::printFrame(QPainter *painter, const QRect &rect) const
 {
-int lw = lineWidth();
-if (!lw)
-	return;
-
-QPalette pal = palette();
-QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
-		
 painter->save();
-painter->setPen (QPen(color, lw, Qt::SolidLine));
+
+int lw = lineWidth();
+if (lw)
+	{
+	QColor color = palette().color(QPalette::Active, QColorGroup::Foreground);
+	painter->setPen (QPen(color, lw, Qt::SolidLine));
+	}
+else
+	painter->setPen(QPen(Qt::NoPen));
+
 painter->setBrush(paletteBackgroundColor());
 							
 QwtPainter::drawRect(painter, rect.x(), rect.y(), rect.width(), rect.height());
@@ -633,9 +639,7 @@ for (QMapIterator<int, QwtPlotCurve *> it = d_curves.begin(); it != d_curves.end
 		{
 		double cx = map[c->xAxis()].xTransform(c->x(i)) - double(xpos);
 		double cy = map[c->yAxis()].xTransform(c->y(i)) - double(ypos);
-
 		double f = qwtSqr(cx) + qwtSqr(cy);
-
 		if (f < dmin)
 			{
 			dmin = f;
@@ -644,7 +648,6 @@ for (QMapIterator<int, QwtPlotCurve *> it = d_curves.begin(); it != d_curves.end
 			}
 		 }
 	}
-
 dist = int(sqrt(dmin));
 return key;
 }

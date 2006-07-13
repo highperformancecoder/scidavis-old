@@ -28,7 +28,7 @@ public:
 
 	void labelFormat(char &f, int &prec) const;
 
-	//virtual void drawTick(QPainter *p, double val, int len) const;
+	virtual void drawTick(QPainter *p, double value, int len) const;
 	virtual void drawBackbone(QPainter *p) const;
 	
 private:

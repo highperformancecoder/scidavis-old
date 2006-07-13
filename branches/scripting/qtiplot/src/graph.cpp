@@ -2067,7 +2067,7 @@ printer.setOutputFileName(fname);
 	
 QwtPlotPrintFilter  filter; 
 filter.setOptions(QwtPlotPrintFilter::PrintAll |QwtPlotPrintFilter::PrintTitle |
-				  QwtPlotPrintFilter::PrintCanvasBackground);
+				  ~QwtPlotPrintFilter::PrintCanvasBackground);
 	
 // export should preserve plot aspect ratio, if possible
 double aspect = double(d_plot->frameGeometry().width())/double(d_plot->frameGeometry().height());	
@@ -2087,21 +2087,7 @@ if (width > mpr.width())
 	rect.setLeft(margin);
 	rect.setWidth(mpr.width() - 2*margin);
 	}
-QRect body = QRect(rect);	
-QPainter paint(&printer);
-			
-int lw = d_plot->lineWidth();
-if (lw > 0)
-	{
-	body.moveBy (-lw, -lw);
-	body.setWidth(body.width() + 2*lw);
-	body.setHeight(body.height() + 2*lw);
-	}	
-	
-if (d_plot->paletteBackgroundColor() != QColor(255, 255, 255))
-	paint.fillRect(body, d_plot->paletteBackgroundColor());
-
-d_plot->printFrame(&paint, body);
+QPainter paint(&printer);	
 d_plot->print(&paint, rect, filter);
 }
 
@@ -2119,7 +2105,7 @@ printer.setOutputFileName(fname);
 	
 QwtPlotPrintFilter  filter; 
 filter.setOptions(QwtPlotPrintFilter::PrintAll |QwtPlotPrintFilter::PrintTitle |
-				  QwtPlotPrintFilter::PrintCanvasBackground);
+				  ~QwtPlotPrintFilter::PrintCanvasBackground);
 	
 // export should preserve plot aspect ratio, if possible
 double aspect = double(d_plot->frameGeometry().width())/double(d_plot->frameGeometry().height());
@@ -2135,49 +2121,9 @@ if (width > mpr.width())
 	rect.setLeft(margin);
 	rect.setWidth(mpr.width() - 2*margin);
 	}
-QRect body = QRect(rect);	
+
 QPainter paint(&printer);
-			
-int lw = d_plot->lineWidth();
-if (lw > 0)
-	{
-	body.moveBy (-lw, -lw);
-	body.setWidth(body.width() + 2*lw);
-	body.setHeight(body.height() + 2*lw);
-	}	
-	
-if (d_plot->paletteBackgroundColor() != QColor(255, 255, 255))
-	paint.fillRect(body, d_plot->paletteBackgroundColor());
-
-d_plot->printFrame(&paint, body);
 d_plot->print(&paint, rect, filter);
-}
-
-void Graph::addBoundingBox(const QString& fname, const QRect& rect)
-{
-//adding a bounding box info to EPS files
-QFile f(fname);
-QString szBoxInfo;
-szBoxInfo.sprintf("%%%%BoundingBox: %d %d %d %d\n", 
-					rect.x(), rect.y(), rect.width(), rect.height());
-	
-f.open(IO_ReadOnly);
-
-QTextStream in( &f );
-in.setEncoding( QTextStream::Latin1 );
- 
-QString s=in.readLine()+"\n";
-s+=szBoxInfo;
-
-in.readLine();
-while (! in.atEnd() ) {s+=in.readLine()+"\n";}
-
-f.close();
-f.open(IO_WriteOnly);	 
-QTextStream out( &f);
-out.setEncoding( QTextStream::Latin1 );
-out<<s;
-f.close();
 }
 
 void Graph::print()
@@ -2209,29 +2155,9 @@ if (printer.setup())
 		rect.setLeft(margin);
 		rect.setWidth(mpr.width() - 2*margin);
 		}
-	QRect body = QRect(rect);	
 	QPainter paint(&printer);
-
-	int lw = d_plot->lineWidth();
-	if ( lw > 0)
-		{
-		body.moveBy ( -lw, -lw);
-		body.setWidth(body.width() + 2*lw);
-		body.setHeight(body.height() + 2*lw);
-		}	
-	
-	if (d_plot->paletteBackgroundColor() != QColor(255, 255, 255))
-		paint.fillRect(body, d_plot->paletteBackgroundColor());
-
-	d_plot->printFrame(&paint, body);
-
-	/*PrintFilter filter(d_plot); 	
-    filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle |
-				  QwtPlotPrintFilter::PrintCanvasBackground);*/
-
 	QwtPlotPrintFilter filter;
-	filter.setOptions(QwtPlotPrintFilter::PrintAll |
-					  QwtPlotPrintFilter::PrintCanvasBackground);
+	filter.setOptions(QwtPlotPrintFilter::PrintAll | ~QwtPlotPrintFilter::PrintCanvasBackground);
 	d_plot->print(&paint, rect, filter);
 	}
 }
