@@ -39,7 +39,6 @@ public:
 
 	enum AxisType{Numeric = 0, Txt = 1, Day = 2, Month = 3, Time = 4, Date = 5, ColHeader = 6};
 	enum MarkerType{None=-1, Text = 0, Arrow=1, Image=2};
-	enum LabelFormat{Automatic, Decimal, Scientific, Superscripts};
 	enum CurveType{Line, Scatter, LineSymbols, VerticalBars , Area, Pie, VerticalDropLines, 
 				  Spline, Steps, Histogram, HorizontalBars, VectXYXY, ErrorBars, Box, VectXYAM};
 
@@ -348,7 +347,6 @@ public slots:
 	void setTicksLength(int minLength, int majLength);
 	void changeTicksLength(int minLength, int majLength);
 
-	QStringList labelsNumericFormat();
 	void setLabelsNumericFormat(const QStringList& l);
 	void setLabelsNumericFormat(int axis, const QStringList& l);	
 	void setLabelsNumericFormat(int axis, int format, int prec, const QString& formula);
@@ -675,7 +673,6 @@ private:
 	QStringList axesFormulas;
 	QStringList axesFormatInfo;//stores columns used for axes with text labels or  time/date format info
 	QValueList <int> axisType;
-	QValueList <int> lblFormat; //stores label format used for the axes
 	gridOptions grid;
 	MarkerType selectedMarkerType;
 	QwtPlotMarker::LineStyle mrklStyle;

@@ -49,6 +49,7 @@
 #include "findDialog.h"
 #include "Scripting.h"
 #include "muParserScripting.h"
+#include "scales.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -2232,7 +2233,7 @@ void ApplicationWindow::polishGraph(Graph *g, int style)
 if (style == Graph::VerticalBars || style == Graph::HorizontalBars ||style == Graph::Histogram)
 	{
 	QValueList<int> ticksList;
-	int majTicksStyle = Plot::Out;
+	int majTicksStyle = ScaleDraw::Out;
 	ticksList<<majTicksStyle<<majTicksStyle<<majTicksStyle<<majTicksStyle;
 	g->setMajorTicksType(ticksList);
 	g->setMinorTicksType(ticksList);
@@ -4116,8 +4117,8 @@ defaultCurveStyle = settings.readNumEntry ("/defaultCurveStyle", Graph::LineSymb
 defaultCurveLineWidth = settings.readNumEntry("/defaultCurveLineWidth", 1, 0);
 defaultSymbolSize = settings.readNumEntry("/defaultSymbolSize", 7, 0);
 
-majTicksStyle=settings.readNumEntry ("/majTicksStyle", Plot::Out, 0);
-minTicksStyle=settings.readNumEntry ("/minTicksStyle", Plot::Out, 0);
+majTicksStyle=settings.readNumEntry ("/majTicksStyle", ScaleDraw::Out, 0);
+minTicksStyle=settings.readNumEntry ("/minTicksStyle", ScaleDraw::Out, 0);
 minTicksLength=settings.readNumEntry ("/minTicksLength", 5, 0);
 majTicksLength=settings.readNumEntry ("/majTicksLength", 9, 0);
 
@@ -5752,14 +5753,13 @@ if (!g->isPiePlot())
 	{
 	activeGraph = g;
 		
-	axesDialog* ad= new axesDialog(this,"ad",TRUE,WStyle_Tool|WDestructiveClose);
+	axesDialog* ad= new axesDialog(this, 0,TRUE,WStyle_Tool|WDestructiveClose);
 	connect (ad,SIGNAL(updateAxisTitle(int,const QString&)),g,SLOT(setAxisTitle(int,const QString&)));
 	connect (ad,SIGNAL(changeAxisFont(int, const QFont &)),g,SLOT(setAxisFont(int,const QFont &)));
 	connect (ad,SIGNAL(showAxis(int, int, const QString&, bool,int, int, bool,const QColor&, int, int, int, int, const QString&)),
 			this, SLOT(showAxis(int,int, const QString&, bool, int, int, bool,const QColor&, int, int, int, int, const QString&)));
 
 	ad->setMultiLayerPlot(plot);
-	ad->setLabelsNumericFormat(g->labelsNumericFormat());
 	ad->insertColList(columnsList(Table::All));
 	ad->insertTablesList(tableWindows);
 	ad->setAxesLabelsFormatInfo(g->axesLabelsFormatInfo());
@@ -10124,9 +10124,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 				{
 				QStringList lst = QStringList::split(";", fList[i+1], false);
 				int format = lst[0].toInt();
-				if (format == Graph::Numeric)
-					ag->setLabelsNumericFormat(i, ag->labelsNumericFormat());
-				else if (format == Graph::Day)
+				if (format == Graph::Day)
 					ag->setLabelsDayFormat(i, lst[1].toInt());
 				else if (format == Graph::Month)
 					ag->setLabelsMonthFormat(i, lst[1].toInt());

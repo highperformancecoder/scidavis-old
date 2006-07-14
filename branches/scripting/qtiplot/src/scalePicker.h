@@ -12,8 +12,6 @@ public:
     ScalePicker(QwtPlot *plot);
     virtual bool eventFilter(QObject *, QEvent *);
 	QRect scaleRect(const QwtScaleWidget *) const;
-	int maxLabelWidth(const QwtScaleWidget *scale) const;
-	int maxLabelHeight(const QwtScaleWidget *scale) const;
 
 	void mouseDblClicked(const QwtScaleWidget *, const QPoint &);
 	void mouseClicked(const QwtScaleWidget *scale, const QPoint &pos) ;

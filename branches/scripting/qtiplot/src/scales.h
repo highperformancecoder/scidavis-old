@@ -8,7 +8,9 @@
 
 class ScaleDraw: public QwtScaleDraw
 {
-public:		
+public:	
+	enum TicksStyle{None = 0, Out = 1, Both = 2, In = 3};
+
 	ScaleDraw(const QString& s = QString::null);
 	virtual ~ScaleDraw(){};
 		
@@ -23,10 +25,16 @@ public:
 	};
 
 
-	void setLabelFormat(char f, int prec);
-	void setLabelPrecision(int prec);
-
 	void labelFormat(char &f, int &prec) const;
+	void setLabelFormat(char f, int prec);
+
+	int labelNumericPrecision(){return d_prec;};
+
+	int majorTicksStyle(){return d_majTicks;};
+	void setMajorTicksStyle(TicksStyle type){d_majTicks = type;};
+
+	int minorTicksStyle(){return d_minTicks;};
+	void setMinorTicksStyle(TicksStyle type){d_minTicks = type;};
 
 	virtual void drawTick(QPainter *p, double value, int len) const;
 	virtual void drawBackbone(QPainter *p) const;
@@ -35,6 +43,7 @@ private:
 	QString formula_string;
 	char d_fmt;
     int d_prec;
+	int d_minTicks, d_majTicks;
 };
 
 class QwtTextScaleDraw: public ScaleDraw

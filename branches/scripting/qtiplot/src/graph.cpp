@@ -150,7 +150,6 @@ for (int i=0; i<QwtPlot::axisCnt; i++)
 	{
 	axisType << Numeric;
 	axesFormatInfo << QString::null;
-	lblFormat << Automatic;
 	axesFormulas << QString::null;
 	}
 
@@ -274,6 +273,7 @@ emit releaseGraph(this);
 void Graph::activateGraph()
 {
 emit selectedGraph(this);
+setFocus();
 }
 
 void Graph::deselectMarker()
@@ -569,45 +569,18 @@ QValueList<int> Graph::axesType()
 return axisType;
 }
 
-QStringList Graph::labelsNumericFormat()
-{
-QStringList format;
-for (int i= 0; i<8; i++)
-	format<<"0";
-
-int prec;
-char f;
-for (int j= 0; j<4; j++)
-	{
-	if (d_plot->axisEnabled (j))
-		{
-		d_plot->axisLabelFormat (j, f, prec);		
-		
-		format[2*j]=QString::number(lblFormat[j]);
-		format[2*j+1]=QString::number(prec);
-		}
-	else
-		{
-		format[2*j]="0";
-		format[2*j+1]="4";
-		}
-	}
-return format;
-}
-
 void Graph::setLabelsNumericFormat(int axis, int format, int prec, const QString& formula)
 {	
-lblFormat[axis] = format;
 axisType[axis] = Numeric;
 axesFormulas[axis] = formula;
 
 ScaleDraw *sd_old= (ScaleDraw *)d_plot->axisScaleDraw (axis);
 const QwtScaleDiv div = sd_old->scaleDiv ();
 	
-if (format == Superscripts)
+if (format == Plot::Superscripts)
 	{
 	QwtSupersciptsScaleDraw *sd = new QwtSupersciptsScaleDraw(formula.ascii());
-	sd->setLabelPrecision(prec);
+	sd->setLabelFormat('s', prec);
 	sd->setScaleDiv(div);
 	d_plot->setAxisScaleDraw (axis, sd);	
 	}
@@ -616,11 +589,11 @@ else
 	ScaleDraw *sd= new ScaleDraw(formula.ascii());
 	sd->setScaleDiv(div);
 
-	if (format == Automatic)
+	if (format == Plot::Automatic)
 		sd->setLabelFormat ('g', prec);
-	else if (format == Scientific )
+	else if (format == Plot::Scientific )
 		sd->setLabelFormat ('e', prec);
-	else if (format == Decimal)
+	else if (format == Plot::Decimal)
 		sd->setLabelFormat ('f', prec);
 
 	d_plot->setAxisScaleDraw (axis, sd);	
@@ -707,8 +680,11 @@ return s+"\n";
 QString Graph::saveLabelsFormat()
 {
 QString s="LabelsFormat\t";
-QStringList format=labelsNumericFormat();
-s+=format.join("\t");
+for (int axis=0; axis<QwtPlot::axisCnt; axis++)
+	{
+	s += QString::number(d_plot->axisLabelFormat(axis))+"\t";
+	s += QString::number(d_plot->axisLabelPrecision(axis))+"\t";
+	}
 return s+"\n";
 }
 
@@ -755,7 +731,7 @@ if (d_plot->getMajorTicksType() == lst)
 for (int i=0;i<(int)lst.count();i++)
 	{
 	ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (i);
-	if (lst[i]==Plot::None || lst[i]==Plot::In)
+	if (lst[i]==ScaleDraw::None || lst[i]==ScaleDraw::In)
 		sd->enableComponent (QwtAbstractScaleDraw::Ticks, false);
 	else
 		{
@@ -810,26 +786,14 @@ if (!scale)
 d_plot->setTickLength(minLength, majLength);	
 
 ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (axis);
-if (majTicksType == Plot::None && minTicksType == Plot::None)
-	{
-	minLength = 0;
-	majLength = 0;
+if (majTicksType == ScaleDraw::None && minTicksType == ScaleDraw::None)
 	sd->enableComponent (QwtAbstractScaleDraw::Ticks, false);
-	}
 else
-	{
 	sd->enableComponent (QwtAbstractScaleDraw::Ticks);
 
-	if (minTicksType == Plot::None || minTicksType == Plot::In)
-		minLength = 0;
-	
-	if (majTicksType == Plot::None || majTicksType == Plot::In)
-		majLength = 0;
-
-	sd->setTickLength  	(QwtScaleDiv::MinorTick, minLength); 
-	sd->setTickLength  	(QwtScaleDiv::MediumTick, minLength);
-	sd->setTickLength  	(QwtScaleDiv::MajorTick, majLength);
-	}
+sd->setTickLength (QwtScaleDiv::MinorTick, minLength); 
+sd->setTickLength (QwtScaleDiv::MediumTick, minLength);
+sd->setTickLength (QwtScaleDiv::MajorTick, majLength);
 }
 
 void Graph::setTicksLength(int minLength, int majLength)
@@ -869,42 +833,35 @@ void Graph::showAxis(int axis, int type, const QString& formatInfo, Table *table
 					 const QColor& c,  int format, int prec, int rotation, int baselineDist,
 					 const QString& formula)
 {
+d_plot->enableAxis (axis, axisOn);
+if (!axisOn)
+	return;
+
 QValueList<int> majTicksTypeList = d_plot->getMajorTicksType();
 QValueList<int> minTicksTypeList = d_plot->getMinorTicksType();
 	
-char f;
-int pr;
-d_plot->axisLabelFormat (axis, f, pr);
-
 QwtScaleWidget *scale = (QwtScaleWidget *)d_plot->axisWidget(axis);
-int oldBaseline = 0;
-if (scale)
-	oldBaseline = scale->margin();
 
 if (d_plot->axisEnabled (axis) == axisOn &&
 	majTicksTypeList[axis] == majTicksType &&
 	minTicksTypeList[axis] == minTicksType &&
 	axesColors()[axis] == c.name() &&
-	prec == pr && format == lblFormat[axis] &&
+	prec == d_plot->axisLabelPrecision (axis) && 
+	format == d_plot->axisLabelFormat (axis) &&
 	labelsRotation(axis) == rotation &&
 	axisType[axis] == type &&
 	axesFormatInfo[axis] == formatInfo &&
 	axesFormulas[axis] == formula &&
-	oldBaseline == baselineDist)
+	scale->margin() == baselineDist)
  return;
 
-d_plot->enableAxis (axis, axisOn);
-scale = (QwtScaleWidget *)d_plot->axisWidget(axis);	
-if (scale)
+scale->setMargin(baselineDist);	
+QPalette pal = scale->palette();
+if (pal.color(QPalette::Active, QColorGroup::Foreground) != c)
 	{
-	scale->setMargin(baselineDist);	
-	QPalette pal = scale->palette();
-	if (pal.color(QPalette::Active, QColorGroup::Foreground) != c)
-		{
-		pal.setColor(QColorGroup::Foreground,c);
-		pal.setColor(QColorGroup::Text,c);
-		scale->setPalette(pal);
-		}
+	pal.setColor(QColorGroup::Foreground,c);
+	pal.setColor(QColorGroup::Text,c);
+	scale->setPalette(pal);
  	}
 
 ScaleDraw *sclDraw= (ScaleDraw *)d_plot->axisScaleDraw (axis);	
@@ -912,8 +869,6 @@ if (!labelsOn)
 	sclDraw->enableComponent (QwtAbstractScaleDraw::Labels, false);
 else
 	{
-	sclDraw->enableComponent (QwtAbstractScaleDraw::Labels);
-
 	if (type == Numeric)
 		setLabelsNumericFormat(axis, format, prec, formula);
 	else if (type == Day)
@@ -939,8 +894,10 @@ setAxisTicksLength(axis, majTicksType, minTicksType,
 if (axisOn && (axis == QwtPlot::xTop || axis == QwtPlot::yRight))
 	updateSecondaryAxis(axis);//synchronize scale divisions
 
-scalePicker->refresh();		
-d_plot->replot();
+scalePicker->refresh();
+d_plot->updateLayout();	
+scale->repaint();
+d_plot->replot();	
 emit modifiedGraph();
 }
 
@@ -1497,6 +1454,13 @@ if (se->testAttribute(QwtScaleEngine::Inverted))
 
 d_plot->setAxisScaleEngine (axis, sc_engine);
 d_plot->setAxisScaleDiv (axis, *sd);
+
+QwtScaleWidget *scale = d_plot->axisWidget(a);
+int start = scale->startBorderDist();
+int end = scale->endBorderDist();
+
+scale = d_plot->axisWidget(axis);
+scale->setMinBorderDist (start, end);
 }
 
 void Graph::setAutoScale()
@@ -1554,6 +1518,9 @@ for (int i = a; i <= a+1; i++)
 	d_plot->setAxisScaleDiv (i, div);
 	}
 d_zoomer->setZoomBase();
+
+//keep markers on canvas area
+updateMarkersBoundingRect();
 }
 
 void Graph::setScaleDiv(int axis,const QStringList& s)
@@ -6477,7 +6444,7 @@ setAxesBaseline(g->axesBaseline());
 		
 setGridOptions(g->grid);
 
-d_plot->setTitle (g->plotWidget()->title());
+d_plot->setTitle (plot->title());
 
 drawCanvasFrame(g->framed(),g->canvasFrameWidth(), g->canvasFrameColor());
 
@@ -6504,7 +6471,7 @@ setRightAxisTitleColor(g->axisTitleColor(1));
 setRightAxisTitleFont(g->axisTitleFont(1));
 setRightAxisTitleAlignment(g->axisTitleAlignment(1));
 
-setAxesLinewidth(g->plotWidget()->axesLinewidth());
+setAxesLinewidth(plot->axesLinewidth());
 setTicksLength(g->minorTickLength(), g->majorTickLength());
 removeLegend();
 		
@@ -6589,15 +6556,15 @@ setAxisLabelRotation(QwtPlot::xTop, g->labelsRotation(QwtPlot::xTop));
 
 for (i=0; i<QwtPlot::axisCnt; i++)
 	{
-	QwtScaleWidget *sc = g->plotWidget()->axisWidget(i);
+	QwtScaleWidget *sc = plot->axisWidget(i);
 	if (!sc)
 		continue;
 
-	QwtScaleDraw *sd = g->plotWidget()->axisScaleDraw (i);
+	QwtScaleDraw *sd = plot->axisScaleDraw (i);
 	if (sd->hasComponent(QwtAbstractScaleDraw::Labels))
 		{
 		if (axisType[i] == Graph::Numeric)
-			setLabelsNumericFormat(i, g->labelsNumericFormat());
+			setLabelsNumericFormat(i, plot->axisLabelFormat(i), plot->axisLabelPrecision(i), axesFormulas[i]);
 		else if (axisType[i] == Graph::Day)
 			setLabelsDayFormat(i, axesFormatInfo[i].toInt());
 		else if (axisType[i] == Graph::Month)

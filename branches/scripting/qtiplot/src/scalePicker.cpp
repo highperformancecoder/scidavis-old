@@ -140,55 +140,39 @@ QRect ScalePicker::scaleRect(const QwtScaleWidget *scale) const
     const int sbd = scale->startBorderDist();
     const int ebd = scale->endBorderDist();
 	
-	int mlw, mlh;
+	const QwtScaleDraw *sd = scale->scaleDraw ();
+	const int mlw = sd->maxLabelWidth (scale->font());
+	const int mlh = sd->maxLabelHeight (scale->font());
 
     QRect rect;
     switch(scale->alignment())   
     {
         case QwtScaleDraw::LeftScale:
-        {
-			mlw=maxLabelWidth(scale);
-			
-			rect.setRect(scale->width() - bld - mjt-mlw, sbd,
-                mjt+mlw, scale->height() - sbd - ebd);
-			
+        {			
+			rect.setRect(scale->width() - bld - mjt - mlw, sbd - mlh,
+                mjt + mlw, scale->height() - sbd - ebd + mlw);	
             break;
         }
         case QwtScaleDraw::RightScale:
         {
-			mlw=maxLabelWidth(scale);
-			rect.setRect(bld, sbd,
-                 mjt+mlw, scale->height() - sbd - ebd);
+			rect.setRect(bld, sbd - mlh,
+                 mjt + mlw, scale->height() - sbd - ebd + mlw);
             break;
         }
         case QwtScaleDraw::BottomScale:
         {
-			mlh=maxLabelHeight(scale);
 			rect.setRect(sbd, bld, 
-                scale->width() - sbd - ebd, mjt+mlh);
+                scale->width() - sbd - ebd + mlw, mjt + mlh);
 	        break;
         }
         case QwtScaleDraw::TopScale:
         {
-			mlh=maxLabelHeight(scale);
-			rect.setRect(sbd, scale->height() - bld - mjt-mlh, 
-                scale->width() - sbd - ebd, mjt+mlh);
+			rect.setRect(sbd, scale->height() - bld - mjt - mlh, 
+                scale->width() - sbd - ebd + mlw, mjt + mlh);
             break;
         }
     }
     return rect;
-}
-
-int ScalePicker::maxLabelWidth(const QwtScaleWidget *scale) const
-{
-const QwtScaleDraw *sd=scale->scaleDraw ();
-return sd->maxLabelWidth (scale->font());
-}
-
-int ScalePicker::maxLabelHeight(const QwtScaleWidget *scale) const
-{
-const QwtScaleDraw *sd=scale->scaleDraw ();
-return sd->maxLabelHeight (scale->font());
 }
 
 void ScalePicker::refresh()

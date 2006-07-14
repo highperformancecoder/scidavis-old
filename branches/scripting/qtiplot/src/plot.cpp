@@ -32,7 +32,7 @@ setAxisTitle(QwtPlot::yLeft, tr("Y Axis Title"));
 setAxisTitle(QwtPlot::xBottom, tr("X Axis Title"));	
 
 // grid 
-d_grid = new QwtPlotGrid;
+d_grid = new Grid;
 d_grid->enableX(false);
 d_grid->enableY(false);
 d_grid->setMajPen(QPen(Qt::blue, 0, Qt::SolidLine));
@@ -42,9 +42,6 @@ d_grid->attach(this);
 //custom scale
 for (int i= 0; i<QwtPlot::axisCnt; i++)
 	{
-	majorTicksType<<Out;
-	minorTicksType<<Out;
-
 	QwtScaleWidget *scale = (QwtScaleWidget *) axisWidget(i);
 	if (scale)
 		{
@@ -123,7 +120,7 @@ void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
 		painter->setPen (QPen(color,w,Qt::SolidLine));
 		painter->setBrush(canvasBackground());
 				
-		if (w == 1 && majorTicksType[QwtPlot::xBottom] == Plot::Out)
+		//if (w == 1 && majorTicksType[QwtPlot::xBottom] == Plot::Out)
 			rect.setHeight(canvasRect.height() + 1);	
 						
 		QwtPainter::drawRect(painter, rect.x(), rect.y(), rect.width(), rect.height());
@@ -144,33 +141,30 @@ QwtPlot::drawItems(painter, rect, map, pfilter);
 	
 for (int i=0; i<QwtPlot::axisCnt; i++)
  	{
-	if ((majorTicksType[i] == In || majorTicksType[i] == Both) &&
-		(minorTicksType[i] == In || minorTicksType[i] == Both))	
-		drawInwardTicks(painter, rect, map[i], i);
-	else 
-		{
-		if (majorTicksType[i] == In || majorTicksType[i] == Both)	
-			drawInwardMajorTicks(painter, rect, map[i], i);
+	if (!axisEnabled(i))
+		continue;
 
-		if (minorTicksType[i] == In || minorTicksType[i] == Both)	
-			drawInwardMinorTicks(painter, rect, map[i], i);
-		}
+	ScaleDraw *sd = (ScaleDraw *) axisScaleDraw (i);
+	int majorTicksType = sd->majorTicksStyle();
+	int minorTicksType = sd->minorTicksStyle();
+
+	bool min = (minorTicksType == ScaleDraw::In || minorTicksType == ScaleDraw::Both);
+	bool maj = (majorTicksType == ScaleDraw::In || majorTicksType == ScaleDraw::Both);
+
+	if (min || maj)
+		drawInwardTicks(painter, rect, map[i], i, min, maj);
  	}
 }
 
 void Plot::drawInwardTicks(QPainter *painter, const QRect &rect, 
-							const QwtScaleMap &map, int axis) const
-{
-	QwtScaleWidget *scale = (QwtScaleWidget *)axisWidget(axis);
-	if (!scale)
-		return;
-	
+							const QwtScaleMap &map, int axis, bool min, bool maj) const
+{	
 	int x1=rect.left();
 	int x2=rect.right();
 	int y1=rect.top();
 	int y2=rect.bottom();
 	
-	QPalette pal=scale->palette();
+	QPalette pal=axisWidget(axis)->palette();
 	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
 		
     painter->save();	
@@ -193,6 +187,8 @@ switch (axis)
 	x=x1;
 	low=y1+majTickLength;
 	high=y2-majTickLength;
+	if (min)
+	{
     for (j = 0; j < minTicks; j++)
         {
             y = map.transform(minTickList[j]);
@@ -205,12 +201,17 @@ switch (axis)
 			if (y>low && y< high)
             	QwtPainter::drawLine(painter, x, y, x+minTickLength, y);
         }
-	 for (j = 0; j < majTicks; j++)
+	}
+
+	if (maj)
+	{
+	for (j = 0; j < majTicks; j++)
         {
             y = map.transform(majTickList[j]);
 			if (y>low && y< high)
             	QwtPainter::drawLine(painter, x, y, x+majTickLength, y);
         }
+	}
 	break;
 		
 	case QwtPlot::yRight:
@@ -218,6 +219,8 @@ switch (axis)
 		x=x2;
 		low=y1+majTickLength;
 		high=y2-majTickLength;
+		if (min)
+		{
      	for (j = 0; j < minTicks; j++)
        	 	{
             y = map.transform(minTickList[j]);
@@ -230,6 +233,10 @@ switch (axis)
 			if (y>low && y< high)
             	QwtPainter::drawLine(painter, x+1, y, x-minTickLength, y);
         	}
+		}
+
+		if (maj)
+		{
 		 for (j = 0; j <majTicks; j++)
         	{
             y = map.transform(majTickList[j]);
@@ -237,12 +244,15 @@ switch (axis)
             	QwtPainter::drawLine(painter, x+1, y, x-majTickLength, y);
         	}
 		}
+		}
 	  break;
 		
 	case QwtPlot::xBottom:
 		y=y2;
 		low=x1+majTickLength;
 		high=x2-majTickLength;
+		if (min)
+		{
      	for (j = 0; j < minTicks; j++)
         	{
             x = map.transform(minTickList[j]);
@@ -255,18 +265,26 @@ switch (axis)
 			if (x>low && x<high)
             	QwtPainter::drawLine(painter, x, y+1, x, y-minTickLength);
        		 }
+		}
+
+		if (maj)
+		{
 	 	for (j = 0; j < majTicks; j++)
         	{
             x = map.transform(majTickList[j]);
 			if (x>low && x<high)
             	QwtPainter::drawLine(painter, x, y+1, x, y-majTickLength);
         	}
+		}
 		break;
 	
 	case QwtPlot::xTop:
 		y=y1;
 		low=x1+majTickLength;
 		high=x2-majTickLength;
+
+		if (min)
+		{
     	for (j = 0; j < minTicks; j++)
        		{
              x = map.transform(minTickList[j]);
@@ -279,181 +297,17 @@ switch (axis)
 			if (x>low && x<high)
             	QwtPainter::drawLine(painter, x, y, x, y + minTickLength);
        	    }
+		}
+
+		if (maj)
+		{
 	 	for (j = 0; j <majTicks; j++)
         	{
             x = map.transform(majTickList[j]);
 			if (x>low && x<high)
             	QwtPainter::drawLine(painter, x, y, x, y + majTickLength);
         	}
-	break;
-	}
-painter->restore();
-}
-
-void Plot::drawInwardMajorTicks(QPainter *painter, const QRect &rect, 
-							const QwtScaleMap &map, int axis) const
-{
-	QwtScaleWidget *scale=(QwtScaleWidget *)axisWidget (axis);
-	if (!scale)
-		return;
-	
-	const int x1=rect.left();
-	const int x2=rect.right();	
-	const int y1=rect.top();
-	const int y2=rect.bottom();
-	
-	QPalette pal=scale->palette();
-	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
-		
-    painter->save();	
-    painter->setPen(QPen(color, axesLinewidth(), QPainter::SolidLine));
-		
-	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScaleDiv(axis);
-	
-	const QwtValueList majTickList = scDiv->ticks(QwtScaleDiv::MajorTick);
-	int majTicks = (int)majTickList.count();
-
-switch (axis)
-	{
-	case QwtPlot::yLeft:
-		{
-		for (uint i = 0; i < majTicks; i++)
-			{
-			const int y = map.transform(majTickList[i]);
-			if ((y >= y1) && (y <= y2))
-			QwtPainter::drawLine(painter, x1, y, x1+majTickLength, y);
-			}
 		}
-	break;
-		
-	case QwtPlot::yRight:
-		{
-     	for (uint i = 0; i < majTicks; i++)
-       	 	{
-            const int y = map.transform(majTickList[i]);
-            QwtPainter::drawLine(painter, x2, y, x2-majTickLength, y);
-        	}
-		}
-	  break;
-		
-	case QwtPlot::xBottom:
-		{
-     	for (uint i = 0; i < majTicks; i++)
-        	{
-            const int x = map.transform(majTickList[i]);
-            QwtPainter::drawLine(painter, x, y2, x, y2-majTickLength);
-       		}	
-		}
-		break;
-	
-	case QwtPlot::xTop:
-		{
-    	for (uint i = 0; i < majTicks; i++)
-       		{
-            const int x = map.transform(majTickList[i]);
-            QwtPainter::drawLine(painter, x, y1, x, y1 + majTickLength);
-       	    }
-		}
-	break;
-	}
-painter->restore();
-}
-
-void Plot::drawInwardMinorTicks(QPainter *painter, const QRect &rect, 
-							const QwtScaleMap &map, int axis) const
-{
-	QwtScaleWidget *scale=(QwtScaleWidget *)axisWidget (axis);
-	if (!scale)
-		return;
-	
-	int x1=rect.left();
-	int x2=rect.right();	
-	int y1=rect.top();
-	int y2=rect.bottom();
-	
-	QPalette pal=scale->palette();
-	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
-		
-    painter->save();	
-    painter->setPen(QPen(color, axesLinewidth(), QPainter::SolidLine));
-		
-	QwtScaleDiv *scDiv=(QwtScaleDiv *)axisScaleDiv(axis);
-	const QwtValueList tickList = scDiv->ticks(QwtScaleDiv::MinorTick);
-	int minTicks = (int)tickList.count();
-
-	const QwtValueList medTickList = scDiv->ticks(QwtScaleDiv::MediumTick);
-	int medTicks = (int)medTickList.count();
-
-int j, x, y, low,high;
-switch (axis)
-	{
-	case QwtPlot::yLeft:
-	x=x1;
-	low=y1+majTickLength;
-	high=y2-majTickLength;
-    for (j = 0; j < minTicks; j++)
-        {
-            y = map.transform(tickList[j]);
-			if (y>low && y< high)
-            	QwtPainter::drawLine(painter, x, y, x+minTickLength, y);
-        }		
-	break;
-		
-	case QwtPlot::yRight:
-		{
-		x=x2;
-		low=y1+majTickLength;
-		high=y2-majTickLength;
-     	for (j = 0; j < minTicks; j++)
-       	 	{
-            y = map.transform(tickList[j]);
-			if (y>low && y< high)
-            	QwtPainter::drawLine(painter, x+1, y, x-minTickLength, y);
-        	}
-
-		for (j = 0; j < medTicks; j++)
-       	 	{
-            y = map.transform(medTickList[j]);
-			if (y>low && y< high)
-            	QwtPainter::drawLine(painter, x+1, y, x-minTickLength, y);
-        	}
-		}
-	  break;
-		
-	case QwtPlot::xBottom:
-		y=y2;
-		low=x1+majTickLength;
-		high=x2-majTickLength;
-     	for (j = 0; j < minTicks; j++)
-        	{
-            x = map.transform(tickList[j]);
-			if (x>low && x<high)
-            	QwtPainter::drawLine(painter, x, y+1, x, y-minTickLength);
-       		}
-		for (j = 0; j < medTicks; j++)
-        	{
-            x = map.transform(medTickList[j]);
-			if (x>low && x<high)
-            	QwtPainter::drawLine(painter, x, y+1, x, y-minTickLength);
-       		}
-		break;
-	
-	case QwtPlot::xTop:
-		y=y1;
-		low=x1+majTickLength;
-		high=x2-majTickLength;
-    	for (j = 0; j < minTicks; j++)
-       		{
-             x = map.transform(tickList[j]);
-			if (x>low && x<high)
-            	QwtPainter::drawLine(painter, x, y, x, y + minTickLength);
-       	    }
-		for (j = 0; j < medTicks; j++)
-       		{
-             x = map.transform(medTickList[j]);
-			if (x>low && x<high)
-            	QwtPainter::drawLine(painter, x, y, x, y + minTickLength);
-       	    }
 	break;
 	}
 painter->restore();
@@ -682,6 +536,87 @@ c->detach();
 d_curves.remove (index);
 }
 
+QValueList <int> Plot::getMajorTicksType()
+{
+QValueList <int> majorTicksType;
+for (int axis=0; axis<QwtPlot::axisCnt; axis++)
+	{
+	if (axisEnabled(axis))
+		{
+		ScaleDraw *sd = (ScaleDraw *) axisScaleDraw (axis);
+		majorTicksType << sd->majorTicksStyle();
+		}
+	else
+		majorTicksType << ScaleDraw::Out;
+	}
+return majorTicksType;
+}
+
+void Plot::setMajorTicksType(int axis, int type)
+{
+ScaleDraw *sd = (ScaleDraw *)axisScaleDraw (axis);
+if (sd)
+	sd->setMajorTicksStyle ((ScaleDraw::TicksStyle)type);
+}
+
+QValueList <int> Plot::getMinorTicksType()
+{
+QValueList <int> minorTicksType;
+for (int axis=0; axis<QwtPlot::axisCnt; axis++)
+	{
+	if (axisEnabled(axis))
+		{
+		ScaleDraw *sd = (ScaleDraw *) axisScaleDraw (axis);
+		minorTicksType << sd->minorTicksStyle();
+		}
+	else
+		minorTicksType << ScaleDraw::Out;
+	}
+return minorTicksType;
+}
+
+void Plot::setMinorTicksType(int axis, int type)
+{
+ScaleDraw *sd = (ScaleDraw *)axisScaleDraw (axis);
+if (sd)
+	sd->setMinorTicksStyle((ScaleDraw::TicksStyle)type);
+}
+
+int Plot::axisLabelFormat(int axis)
+{
+if (axisValid(axis))
+	{
+	int prec;
+	char format;
+
+	ScaleDraw *sd = (ScaleDraw *)axisScaleDraw (axis);
+    sd->labelFormat(format, prec);
+
+	if (format == 'g')
+		return Automatic;
+	else if (format == 'e')
+		return Scientific;
+	else if (format == 'f')
+		return Decimal;
+	else
+		return Superscripts;
+	}
+
+return 0; 
+}
+
+int Plot::axisLabelPrecision(int axis)
+{
+if (axisValid(axis))
+	{
+	ScaleDraw *sd = (ScaleDraw *)axisScaleDraw (axis);
+    return sd->labelNumericPrecision();
+	}
+
+//for a bad call we return the default values
+return 4;
+}
+
 /*!
   \return the number format for the major scale labels of a specified axis
   \param axis axis index
@@ -866,5 +801,80 @@ void Plot::printScale(QPainter *painter, int axisId, int startDist, int endDist,
     painter->restore();
 }
 
+/*!
+  \brief Draw the grid
+  
+  The grid is drawn into the bounding rectangle such that 
+  gridlines begin and end at the rectangle's borders. The X and Y
+  maps are used to map the scale divisions into the drawing region
+  screen.
+  \param painter  Painter
+  \param mx X axis map
+  \param my Y axis 
+  \param r Contents rect of the plot canvas
+*/
+void Grid::draw(QPainter *painter, 
+    const QwtScaleMap &mx, const QwtScaleMap &my,
+    const QRect &r) const
+{
+    //  draw minor gridlines
+    painter->setPen(minPen ());
+    
+    if (xEnabled() && xMinEnabled())
+    {
+        drawLines(painter, r, Qt::Vertical, mx, 
+				xScaleDiv().ticks(QwtScaleDiv::MinorTick));
+        drawLines(painter, r, Qt::Vertical, mx, 
+				xScaleDiv().ticks(QwtScaleDiv::MediumTick));
+    }
 
+    if (yEnabled() && yMinEnabled())
+    {
+        drawLines(painter, r, Qt::Horizontal, my, 
+				yScaleDiv().ticks(QwtScaleDiv::MinorTick));
+        drawLines(painter, r, Qt::Horizontal, my, 
+				yScaleDiv().ticks(QwtScaleDiv::MediumTick));
+    }
 
+    //  draw major gridlines
+    painter->setPen(majPen());
+    
+    if (xEnabled())
+    {
+        drawLines(painter, r, Qt::Vertical, mx, 
+			xScaleDiv().ticks (QwtScaleDiv::MajorTick));
+    }
+
+    if (yEnabled())
+    {
+        drawLines(painter, r, Qt::Horizontal, my, 
+			yScaleDiv().ticks (QwtScaleDiv::MajorTick));
+    }
+}
+
+void Grid::drawLines(QPainter *painter, const QRect &rect,
+    Qt::Orientation orientation, const QwtScaleMap &map, 
+    const QwtValueList &values) const
+{
+    const int x1 = rect.left();
+    const int x2 = rect.right() + 1;
+    const int y1 = rect.top();
+    const int y2 = rect.bottom() + 1;
+
+	const int margin = 20;
+
+    for (uint i = 0; i < (uint)values.count(); i++)
+    {
+        const int value = map.transform(values[i]);
+        if ( orientation == Qt::Horizontal )
+        {
+            if ((value >= y1 + margin) && (value <= y2 - margin))
+                QwtPainter::drawLine(painter, x1, value, x2, value);
+        }
+        else
+        {
+            if ((value >= x1 + margin) && (value <= x2 - margin))
+                QwtPainter::drawLine(painter, value, y1, value, y2);
+        }
+    }
+}

@@ -12,7 +12,9 @@
 ScaleDraw::ScaleDraw(const QString& s):
 	d_fmt('g'),
     d_prec(4),
-	formula_string (s)
+	formula_string (s),
+	d_majTicks(Out),
+	d_minTicks(Out)
 	{};
 
 double ScaleDraw::transformValue(double value) const
@@ -61,22 +63,6 @@ d_prec = prec;
 }
 
 /*!
-  \brief Set the number precision for the major scale labels
-
-  Precision has the same meaning as for
-  sprintf().
-  \param prec
-    - for 'e', 'f': the number of digits after the radix character (point)
-    - for 'g': the maximum number of significant digits
-
-  \sa labelFormat()
-*/
-void ScaleDraw::setLabelPrecision(int prec)
-{
-d_prec = prec;
-}
-
-/*!
   \brief Return the number format for the major scale labels
 
   Format character and precision have the same meaning as for
@@ -96,6 +82,19 @@ void ScaleDraw::labelFormat(char &f, int &prec) const
 	
 void ScaleDraw::drawTick(QPainter *p, double value, int len) const
 {
+QwtScaleDiv scDiv = scaleDiv();
+QwtValueList majTicks = scDiv.ticks(QwtScaleDiv::MajorTick);
+if (majTicks.contains(value) && (d_majTicks == In || d_majTicks == None))
+	return;
+
+QwtValueList medTicks = scDiv.ticks(QwtScaleDiv::MediumTick);
+if (medTicks.contains(value) && (d_minTicks == In || d_minTicks == None))
+	return;
+
+QwtValueList minTicks = scDiv.ticks(QwtScaleDiv::MinorTick);
+if (minTicks.contains(value) && (d_minTicks == In || d_minTicks == None))
+	return;
+
 bool print = p->device()->isExtDev();
 bool hasBackbone = hasComponent(QwtAbstractScaleDraw::Backbone);
 	

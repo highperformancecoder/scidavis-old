@@ -1350,12 +1350,12 @@ connect(boxShowLabels,SIGNAL(clicked()), this, SLOT(updateTickLabelsList()));
 connect(boxAxisColor, SIGNAL(clicked()), this, SLOT(pickAxisColor()));
 connect(boxShowFormula, SIGNAL(clicked()), this, SLOT(showFormulaBox()));
 
-connect(boxMajorTicksType,SIGNAL(activated(int)), this, SLOT(updateMajTicksType(int)));
-connect(boxMinorTicksType,SIGNAL(activated(int)), this, SLOT(updateMinTicksType(int)));
+connect(boxMajorTicksType, SIGNAL(activated(int)), this, SLOT(updateMajTicksType(int)));
+connect(boxMinorTicksType, SIGNAL(activated(int)), this, SLOT(updateMinTicksType(int)));
 
 connect(boxShowAxis,SIGNAL(clicked()), this, SLOT(showAxis()));
-connect(boxFormat, SIGNAL(activated(int) ), this, SLOT(setLabelsNumericFormat(int) ) );
-connect(axesTitlesList,SIGNAL(activated(int)), this, SLOT(updateLabelsFormat(int) ) );
+connect(boxFormat, SIGNAL(activated(int) ), this, SLOT(setLabelsNumericFormat(int)));
+connect(axesTitlesList, SIGNAL(highlighted(int)), this, SLOT(updateLabelsFormat(int)));
 
 connect(btnAxesFont, SIGNAL(clicked()), this, SLOT(customAxisFont()));	
 connect(boxBaseline, SIGNAL(valueChanged(int)), this, SLOT(changeBaselineDist(int)));
@@ -1367,8 +1367,8 @@ connect( buttonIndice, SIGNAL( clicked() ), this, SLOT(addIndex() ) );
 connect( buttonU, SIGNAL( clicked() ), this, SLOT(addUnderline() ) );
 connect( buttonI, SIGNAL( clicked() ), this, SLOT(addItalic() ) );
 connect( buttonB, SIGNAL( clicked() ), this, SLOT(addBold() ) );
-connect(buttonMinGreek, SIGNAL(clicked()), this, SLOT(showMinGreek()));
-connect(buttonMajGreek, SIGNAL(clicked()), this, SLOT(showMajGreek()));
+connect( buttonMinGreek, SIGNAL(clicked()), this, SLOT(showMinGreek()));
+connect( buttonMajGreek, SIGNAL(clicked()), this, SLOT(showMajGreek()));
 }
 
 void axesDialog::initFramePage()
@@ -1437,11 +1437,10 @@ connect(boxBackgroundColor, SIGNAL(clicked()), this, SLOT(pickBackgroundColor())
 connect(boxCanvasColor, SIGNAL(clicked()), this, SLOT(pickCanvasColor()));
 connect(boxBorderWidth,SIGNAL(valueChanged (int)), this, SLOT(updateBorder(int)));
 connect(boxFrameColor, SIGNAL(clicked()), this, SLOT(pickCanvasFrameColor()));
+connect(boxBackbones,SIGNAL(toggled(bool)), this, SLOT(drawAxesBackbones(bool)));
 connect(boxFramed,SIGNAL(toggled(bool)), this, SLOT(drawFrame(bool)));
-connect(boxFramed,SIGNAL(toggled(bool)), this, SLOT(updateBackbones(bool)));
 connect(boxFrameWidth,SIGNAL(valueChanged (int)),this, SLOT(updateFrame(int)));
 connect(boxAxesLinewidth,SIGNAL(valueChanged (int)), this, SLOT(changeAxesLinewidth(int)));
-connect(boxBackbones,SIGNAL(toggled(bool)), this, SLOT(drawAxesBackbones(bool)));
 connect(boxMajorTicksLength,SIGNAL(valueChanged (int)),this, SLOT(changeMajorTicksLength(int)));
 connect(boxMinorTicksLength,SIGNAL(valueChanged (int)),this, SLOT(changeMinorTicksLength(int)));
 }
@@ -1754,11 +1753,6 @@ else
 	}
 }
 
-void axesDialog::updateBackbones (bool on)
-{
-boxBackbones->setChecked(!on);
-}
-
 void axesDialog::showAxisFormatOptions(int format)
 {
 int axis=mapToQwtAxisId();
@@ -1785,8 +1779,7 @@ switch (format)
 		boxFormat->insertItem(tr( "Decimal: 100.0" ) );
 		boxFormat->insertItem(tr( "Scientific: 1e2" ) );
 		boxFormat->insertItem(tr( "Scientific: 10^2" ) );
-	
-		boxFormat->setCurrentItem (labelsNumericFormat[2*axis].toInt());
+		boxFormat->setCurrentItem (d_graph->plotWidget()->axisLabelFormat(axis));
 	
 		label3->show();
 		boxPrecision->show();
@@ -2829,11 +2822,6 @@ if (generalDialog->currentPage()==gridPage)
 	}	
 }
 
-void axesDialog::setLabelsNumericFormat(const QStringList& list)
-{
-labelsNumericFormat=list;
-}
-
 void axesDialog::setLabelsNumericFormat(int)
 {
 int axis = mapToQwtAxisId();
@@ -2841,19 +2829,18 @@ int type = boxAxisType->currentItem();
 int prec = boxPrecision->value();
 int format = boxFormat->currentItem();
 
+Plot *plot = d_graph->plotWidget();
+
 if (type == Graph::Numeric)
 	{	
-	if ( labelsNumericFormat[2*axis] == QString::number(format)
-		&& labelsNumericFormat[2*axis+1] == QString::number(prec))
+	if (plot->axisLabelFormat(axis) == format && 
+		plot->axisLabelPrecision(axis) == prec)
 		return;
 
 	if (format == 0)
 		boxPrecision->setEnabled(FALSE);
 	else
 		boxPrecision->setEnabled(TRUE);
-
-	labelsNumericFormat[2*axis] = QString::number(format);
-	labelsNumericFormat[2*axis+1] = QString::number(prec);
 	}
 else if (type == Graph::Day || type == Graph::Month)
 	formatInfo[axis] = QString::number(format);
@@ -2869,6 +2856,7 @@ else
 QString formula =  boxFormula->text();
 if (!boxShowFormula->isChecked())
 	formula = QString::null;
+
 emit showAxis(axis, type, formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), 
 			  boxMinorTicksType->currentItem(), boxShowLabels->isChecked(),QColor(axesColors[axis]),
 			  format, prec, boxAngle->value(), boxBaseline->value(), formula);		
@@ -2896,15 +2884,13 @@ else
 
 void axesDialog::updateLabelsFormat(int)
 {
-int a=mapToQwtAxisId();
-int format=labelsNumericFormat[2*a].toInt();
-if (format != Graph::Numeric)
+if (boxAxisType->currentItem() != Graph::Numeric)
 	return;
 
+int a = mapToQwtAxisId();
+int format = d_graph->plotWidget()->axisLabelFormat(a);
 boxFormat->setCurrentItem(format);
-
-int prec=labelsNumericFormat[2*a+1].toInt();
-boxPrecision->setValue(prec);
+boxPrecision->setValue(d_graph->plotWidget()->axisLabelPrecision(a));
 	
 if (format == 0)
 	boxPrecision->setEnabled(FALSE);
