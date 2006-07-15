@@ -64,19 +64,17 @@ for (int i= 0; i<QwtPlot::axisCnt; i++)
 QwtPlotLayout *pLayout=plotLayout();
 pLayout->setCanvasMargin(0);
 
-QwtPlotCanvas* plCanvas=canvas();
+QwtPlotCanvas* plCanvas = canvas();
 plCanvas->setFocusPolicy(QWidget::StrongFocus);
 plCanvas->setFocusIndicator(QwtPlotCanvas::ItemFocusIndicator);
 plCanvas->setFocus();
-plCanvas->setFrameShadow( QwtPlot::Plain);
+plCanvas->setFrameShadow(QwtPlot::Plain);
 plCanvas->setCursor(Qt::arrowCursor);
 plCanvas->setLineWidth(0);
 
 setFocusPolicy(QWidget::StrongFocus);
 setFocusProxy(plCanvas);
-
 setFrameShape (QFrame::Box);
-setFrameShadow(QFrame::Plain);
 setLineWidth(0);
 }
 

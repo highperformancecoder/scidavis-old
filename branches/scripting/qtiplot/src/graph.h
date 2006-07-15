@@ -205,18 +205,30 @@ public slots:
 	 void highlightTextMarker(long markerID);
 	 void highlightImageMarker(long markerID);
 	 void moveMarkerBy(int dx, int dy);
-	 QFont defaultTextMarkerFont(){return defaultMarkerFont;};
 
+	 QFont defaultTextMarkerFont(){return defaultMarkerFont;};
+	 QColor textMarkerDefaultColor(){return defaultTextMarkerColor;};
+	 QColor textMarkerDefaultBackground(){return defaultTextMarkerBackground;};
 	 int textMarkerDefaultFrame(){return defaultMarkerFrame;};
-	 void setTextMarkerDefaultFrame(int f){defaultMarkerFrame = f;};
+	 void setTextMarkerDefaults(int f, const QFont &font, const QColor& textCol, const QColor& backgroundCol);
 	 
+	 Qt::PenStyle arrowLineDefaultStyle(){return defaultArrowLineStyle;};
+	 bool arrowHeadDefaultFill(){return defaultArrowHeadFill;};
+	 int arrowDefaultWidth(){return defaultArrowLineWidth;};
+	 int arrowHeadDefaultLength(){return defaultArrowHeadLength;};
+	 int arrowHeadDefaultAngle(){return defaultArrowHeadAngle;};
+	 QColor arrowDefaultColor(){return defaultArrowColor;};
+
+	 void setArrowDefaults(int lineWidth,  const QColor& c, Qt::PenStyle style,
+						   int headLength, int headAngle, bool fillHead);
+
 	 MarkerType copiedMarkerType(){return selectedMarkerType;};
 	 void setCopiedMarkerType(Graph::MarkerType type){selectedMarkerType=type;};
 	 void setCopiedMarkerEnds(const QPoint& start, const QPoint& end);
  	 void setCopiedTextOptions(int bkg, const QString& text, const QFont& font, 
 								const QColor& color, const QColor& bkgColor);
 	 void setCopiedArrowOptions(int width, Qt::PenStyle style, const QColor& color,
-													bool start, bool end, int headLength, int headAngle, bool filledHead);	
+								bool start, bool end, int headLength, int headAngle, bool filledHead);	
 	 void setCopiedImageName(const QString& fn){auxMrkFileName=fn;};	
 	 QRect copiedMarkerRect(){return QRect(auxMrkStart, auxMrkEnd);};
 	 
@@ -224,16 +236,16 @@ public slots:
 	 QValueList<int> textMarkerKeys();
 	 LegendMarker* textMarker(long id);
 
-	 void addTimeStamp(const QFont& fnt, int frameStyle);
+	 void addTimeStamp();
 	 
 	  // legend  
-	 void customLegend(int frame, const QFont& font);
+	 void customLegend();
 	 void removeLegend();
 	 void removeLegendItem(int index);
 	 void addLegendItem(const QString& colName);
 	 void insertLegend(const QStringList& lst);
 	 void insertLegend_obsolete(const QStringList& lst);
-	 void newLegend(const QFont& fnt, int frameStyle);
+	 void newLegend();
 	 QSize newLegend(const QString& text);
 	 bool legendOn();
 	 
@@ -291,7 +303,7 @@ public slots:
 
 	 void setAxisFont(int axis,const QFont &fnt);
 	 QFont axisFont(int axis);
-	 void initFonts(const QFont &scaleTitleFnt,const QFont &numbersFnt,const QFont &textMarkerFnt);
+	 void initFonts(const QFont &scaleTitleFnt,const QFont &numbersFnt);
 	
 	 QColor axisTitleColor(int axis);
 	 void setXAxisTitleColor(const QColor& c);
@@ -597,6 +609,7 @@ public slots:
 	void setAutoscaleFonts(bool yes){autoScaleFonts = yes;};
 
 	static int obsoleteSymbolStyle(int type);
+	static QString penStyleName(Qt::PenStyle style);
 	static Qt::PenStyle getPenStyle(const QString& s);
 	static Qt::PenStyle getPenStyle(int style);
 	static Qt::BrushStyle getBrushStyle(int style);
@@ -690,6 +703,7 @@ private:
 
 	int n_curves, selectedCurve, selectedPoint,startPoint,endPoint, selectedCursor, pieRay;
 	int selectedCol,xCol,widthLine,fitID,linesOnPlot, defaultMarkerFrame;
+	QColor defaultTextMarkerColor, defaultTextMarkerBackground;
 	int auxMrkAngle,auxMrkBkg,auxMrkWidth, averagePixels;
 	int auxArrowHeadLength, auxArrowHeadAngle;
 	int translationDirection;
@@ -708,5 +722,10 @@ private:
 	QStringList fit_results;
 	double *peaks_array;
 	int n_peaks, selected_peaks, fit_type;
+
+	QColor defaultArrowColor;
+	int defaultArrowLineWidth, defaultArrowHeadLength, defaultArrowHeadAngle;
+	bool defaultArrowHeadFill;
+	Qt::PenStyle defaultArrowLineStyle;
 };
 #endif // GRAPH_H

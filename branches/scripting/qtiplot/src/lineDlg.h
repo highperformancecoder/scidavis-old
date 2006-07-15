@@ -33,8 +33,9 @@ public:
     QComboBox* widthBox;
 	QComboBox* unitBox;
     QPushButton* btnOk;
-    QPushButton* btnCancel;
     QPushButton* btnApply;
+	QPushButton* buttonDefault;
+
     QCheckBox* endBox;
     QCheckBox* startBox,  *filledBox;
 	QTabWidget* tw;
@@ -43,6 +44,8 @@ public:
 	QSpinBox *boxHeadAngle, *boxHeadLength;
 
 public slots:
+	void enableButtonDefault(QWidget *w);
+	void setDefaultValues();
 	void displayCoordinates(int unit);
 	void setLineStyle(Qt::PenStyle style);
 	void pickColor();

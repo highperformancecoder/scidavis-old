@@ -147,7 +147,10 @@ if (type == None && bkgColor != d_plot->paletteBackgroundColor())
 	p->fillRect (rect,QBrush(bkgColor));
 
 if (type == Line)
+	{
+	p->setBrush(QBrush(bkgColor));
 	p->drawRect(rect);
+	}
 else if (type == Shadow)
 	{
 	QRect shadow=QRect(rect.x()+5,rect.y()+5,rect.width(),rect.height());

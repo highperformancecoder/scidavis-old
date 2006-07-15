@@ -62,7 +62,7 @@ public slots:
     void removeLayer();
 	void confirmRemoveLayer();
 
-	void addTextLayer();
+	void addTextLayer(int f, const QFont& font, const QColor& textCol, const QColor& backgroundCol);
 	void addTextLayer(const QPoint& pos);
 
 	Graph* activeGraph(){return active_graph;};
@@ -184,6 +184,12 @@ private:
 	int l_canvas_width, l_canvas_height, hor_align, vert_align;
 	int xMouse, yMouse, xActiveGraph, yActiveGraph;//used for moving layers
 	bool movedGraph, addTextOn, highlightedLayer, ignore_resize;
+
+	//! Used when adding text markers on new layers
+	int defaultTextMarkerFrame;
+	QFont defaultTextMarkerFont;
+	QColor defaultTextMarkerColor, defaultTextMarkerBackground;
+
 };
 
 	

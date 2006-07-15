@@ -2,6 +2,7 @@
 #include "colorButton.h"
 #include "txt_icons.h"
 #include "symbolDialog.h"
+#include "application.h"
 
 #include <qcombobox.h>
 #include <qlabel.h>
@@ -47,18 +48,18 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
     setSizeGripEnabled( true );
 	
 	text_type = type;
-	GroupBox1 = new QButtonGroup(3,QGroupBox::Horizontal, QString::null,this, "GroupBox1" );
+	GroupBox1 = new QButtonGroup(3,QGroupBox::Horizontal, QString::null, this);
 
-	new QLabel(tr( "Color" ), GroupBox1, "TextLabel2",0 );
+	new QLabel(tr( "Color" ), GroupBox1);
 	
     colorBox = new ColorButton(GroupBox1);
 
-	buttonOk = new QPushButton( GroupBox1, "buttonOk" );
+	buttonOk = new QPushButton( GroupBox1);
     buttonOk->setText( tr( "&OK" ) );
     buttonOk->setAutoDefault( TRUE );
     buttonOk->setDefault( TRUE );
 
-	new QLabel(tr( "Font" ),GroupBox1, "TextLabel1_21",0);
+	new QLabel(tr( "Font" ),GroupBox1);
 	buttonFont = new QPushButton( GroupBox1, "buttonFont" );
     buttonFont->setText( tr( "&Font" ) );
     buttonFont->setAutoDefault( TRUE );
@@ -89,12 +90,16 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
     buttonCancel->setText( tr( "&Cancel" ) );
     buttonCancel->setAutoDefault( TRUE );	
 
-	if (!text_type)
+	if (text_type == TextMarker)
 		{
 		new QLabel(tr("Background"), GroupBox1, "TextLabel2",0 );
 		backgroundBtn = new ColorButton(GroupBox1);
 
 		connect(backgroundBtn, SIGNAL(clicked()), this, SLOT(pickBackgroundColor()));
+
+		buttonDefault = new QPushButton( GroupBox1);
+		buttonDefault->setText( tr( "Set &Default" ) );
+		connect(buttonDefault, SIGNAL(clicked()), this, SLOT(setDefaultValues()));
 		}
 
 	QLabel* rotate=new QLabel(tr( "Rotate (deg.)" ),GroupBox1, "TextLabel1_2",0);
@@ -115,7 +120,7 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
 	
 	GroupBox2= new QButtonGroup(8, QGroupBox::Horizontal, QString::null,this, "GroupBox2" );
 
-	if (!text_type)
+	if (text_type == TextMarker)
 		{
 		buttonCurve = new QPushButton( GroupBox2, "buttonCurve" ); 
 		buttonCurve->setPixmap (QPixmap(lineSymbol_xpm));
@@ -317,11 +322,6 @@ else
 	}
 }
 
-int TextDialog::backgroundType()
-{
-return backgroundBox->currentItem();
-}
-
 void TextDialog::apply()
 {
 if (text_type)
@@ -331,7 +331,18 @@ if (text_type)
 	emit changeColor(colorBox->color());
 	}
 else
-	emit values(LineEdit->text(),0,backgroundType(),f, colorBox->color(), backgroundBtn->color());
+	emit values(LineEdit->text(),0, backgroundBox->currentItem(), 
+				f, colorBox->color(), backgroundBtn->color());
+}
+
+void TextDialog::setDefaultValues()
+{
+ApplicationWindow *app = (ApplicationWindow *)this->parent();
+if (!app)
+	return;
+
+app->setLegendDefaultSettings(backgroundBox->currentItem(), f, 
+							  colorBox->color(), backgroundBtn->color());
 }
 
 void TextDialog::accept()

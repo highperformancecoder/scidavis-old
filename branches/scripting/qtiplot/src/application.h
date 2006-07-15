@@ -231,6 +231,10 @@ public slots:
 	
 	void customGraph(Graph* g);
 	void setGraphDefaultSettings(bool autoscale,bool scaleFonts,bool resizeLayers);
+	void setLegendDefaultSettings(int frame, const QFont& font, 
+							 const QColor& textCol, const QColor& backgroundCol);
+	void setArrowDefaultSettings(int lineWidth,  const QColor& c, Qt::PenStyle style,
+								int headLength, int headAngle, bool fillHead);
 
 	void plot3DWireframe();
 	void plot3DHiddenLine();
@@ -720,6 +724,10 @@ public:
 	bool confirmCloseFolder, confirmCloseNotes;
 	bool canvasFrameOn, titleOn, autoSave, drawBackbones, allAxesOn, autoscale2DPlots;
 	int majTicksStyle, minTicksStyle, legendFrameStyle, autoSaveTime, axesLineWidth, canvasFrameWidth;
+	QColor legendBackground, legendColor, defaultArrowColor;
+	int defaultArrowLineWidth, defaultArrowHeadLength, defaultArrowHeadAngle;
+	bool defaultArrowHeadFill;
+	Qt::PenStyle defaultArrowLineStyle;
 	int majTicksLength, minTicksLength, defaultPlotMargin;
 	int defaultCurveStyle, defaultCurveLineWidth, defaultSymbolSize;
 	QFont appFont, plot3DTitleFont, plot3DNumbersFont, plot3DAxesFont;

@@ -194,9 +194,6 @@ ApplicationWindow *app = (ApplicationWindow *)parentWidget();
 	boxLinewidth= new QSpinBox(0, 100, 1,GroupBoxOptions);
 	boxLinewidth->setValue(app->axesLineWidth);
 
-	lblLegend = new QLabel(GroupBoxOptions); 
-	boxLegend = new QComboBox(GroupBoxOptions);
-
 	lblMargin = new QLabel(GroupBoxOptions); 
 	boxMargin= new QSpinBox(0, 1000, 5, GroupBoxOptions);	
 	boxMargin->setValue(app->defaultPlotMargin);
@@ -488,7 +485,6 @@ void configDialog::languageChange()
 	lblMinTicks->setText(tr("Minor Ticks" ));
 
 	lblMargin->setText(tr("Margin" )); 
-	lblLegend->setText(tr("Legend frame" )); 
 	labelFrameWidth->setText(tr("Frame width" )); 
 	boxBackbones->setText(tr("Draw axes &backbone"));
 	boxFrame->setText(tr("Canvas Fra&me"));
@@ -496,13 +492,6 @@ void configDialog::languageChange()
 	boxTitle->setText(tr("Show &Title"));
 	boxScaleFonts->setText(tr("Scale &fonts on resize"));
 	boxAutoscaling->setText(tr("Auto&scale axes"));
-	boxLegend->clear();
-	boxLegend->insertItem( tr( "None" ) );
-	boxLegend->insertItem( tr( "Rectangle" ) );
-    boxLegend->insertItem( tr( "Shadow" ) );
-    boxLegend->insertItem( tr( "White out" ) );
-    boxLegend->insertItem( tr( "Black out" ) );
-	boxLegend->setCurrentItem(app->legendFrameStyle);
 
 	boxMajTicks->clear();
 	boxMajTicks->insertItem(tr("None"));
@@ -665,7 +654,6 @@ else if (generalDialog->visibleWidget() == plotsTabWidget)
 	{
 	if (plotsTabWidget->currentPage() == plots)
 		{		
-		app->legendFrameStyle=boxLegend->currentItem();
 		app->titleOn=boxTitle->isChecked();
 		app->allAxesOn = boxAllAxes->isChecked();
 		app->canvasFrameOn=boxFrame->isChecked();

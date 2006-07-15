@@ -259,24 +259,28 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 		{
 			const QMouseEvent *me = (const QMouseEvent *)e;
 			
-			if (moved && !plot()->drawLineActive() && !plot()->lineProfile())
+			Graph *g = plot();
+			if (moved && !g->drawLineActive() && !g->lineProfile())
 				releaseMarker();
 			else if (resizeLineFromStart || resizeLineFromEnd)
 				resizeLineMarker(me->pos());
-			else if (plot()->drawLineActive())
+			else if (g->drawLineActive())
 				{ 	
 				LineMarker* mrk = new LineMarker(plotWidget);	
 				mrk->setStartPoint(startLinePoint);
 				mrk->setEndPoint(QPoint(me->x(), me->y()));
 
-				mrk->setColor(Qt::black);
-				mrk->setWidth(1);
-				Qt::PenStyle style=Qt::SolidLine;
-				mrk->setStyle(style);
-				mrk->setEndArrow(plot()->drawArrow());
+				mrk->setColor(g->arrowDefaultColor());
+				mrk->setWidth(g->arrowDefaultWidth());
+				mrk->setStyle(g->arrowLineDefaultStyle());
+				mrk->setHeadLength(g->arrowHeadDefaultLength());
+				mrk->setHeadAngle(g->arrowHeadDefaultAngle());
+				mrk->fillArrowHead(g->arrowHeadDefaultFill());
+
+				mrk->setEndArrow(g->drawArrow());
 				mrk->setStartArrow(FALSE);
-				plot()->insertLineMarker(mrk);
-				plot()->drawLine(false);
+				g->insertLineMarker(mrk);
+				g->drawLine(false);
 				plotWidget->replot();
 				}
 			else if (plot()->lineProfile())
@@ -604,6 +608,8 @@ LegendMarker mrkT(plotWidget);
 mrkT.setOrigin(point);
 mrkT.setBackground(plot()->textMarkerDefaultFrame());
 mrkT.setFont(plot()->defaultTextMarkerFont());
+mrkT.setTextColor(plot()->textMarkerDefaultColor());
+mrkT.setBackgroundColor(plot()->textMarkerDefaultBackground());
 mrkT.setText(tr("enter your text here"));
 plot()->insertTextMarker(&mrkT);		
 plot()->drawText(FALSE);
@@ -637,6 +643,7 @@ QApplication::restoreOverrideCursor();
 
 void CanvasPicker::drawLineMarker(const QPoint& point, bool endArrow)
 {
+Graph *g = plot();
 plotWidget->replot();
 LineMarker mrk(plotWidget);
 
@@ -650,7 +657,7 @@ mrk.setEndArrow(endArrow);
 mrk.setStartArrow(FALSE);
 
 if (plot()->drawLineActive())
-	mrk.setColor(Qt::black);
+mrk.setColor(Qt::black);
 else
 	mrk.setColor(Qt::red);
 

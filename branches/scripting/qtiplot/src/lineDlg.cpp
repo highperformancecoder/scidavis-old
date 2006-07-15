@@ -3,6 +3,7 @@
 #include "LineMarker.h"
 #include "graph.h"
 #include "plot.h"
+#include "application.h"
 
 #include <qwt_plot.h>
 
@@ -89,17 +90,17 @@ lineDialog::lineDialog(LineMarker *line, QWidget* parent,  const char* name, boo
 
 	initGeometryTab();
 
-	GroupBox2 = new QButtonGroup(3,QGroupBox::Horizontal, QString::null,this,"GroupBox2" );
+	GroupBox2 = new QButtonGroup(4,QGroupBox::Horizontal, QString::null,this,"GroupBox2" );
 	GroupBox2->setLineWidth (0);
 	
-    btnOk = new QPushButton(GroupBox2, "btnOk" );
-    btnOk->setText( tr( "&Ok" ) );
+	buttonDefault = new QPushButton( GroupBox2);
+	buttonDefault->setText( tr( "Set &Default" ) );
 	
 	btnApply = new QPushButton(GroupBox2, "btnApply" );
     btnApply->setText( tr( "&Apply" ) );
 
-    btnCancel = new QPushButton(GroupBox2, "btnCancel" );
-    btnCancel->setText( tr( "&Cancel" ) );
+	btnOk = new QPushButton(GroupBox2, "btnOk" );
+    btnOk->setText( tr( "&Ok" ) );
 	
 	QVBoxLayout* hlayout = new QVBoxLayout(this,5,5, "hlayout");
     hlayout->addWidget(tw);
@@ -110,7 +111,8 @@ lineDialog::lineDialog(LineMarker *line, QWidget* parent,  const char* name, boo
 	connect( colorBox, SIGNAL( clicked() ), this, SLOT(pickColor() ) );
 	connect( btnOk, SIGNAL( clicked() ), this, SLOT(accept() ) );
 	connect( btnApply, SIGNAL( clicked() ), this, SLOT(apply() ) );
-    connect( btnCancel, SIGNAL( clicked() ), this, SLOT(close() ) );
+	connect( tw, SIGNAL(currentChanged (QWidget *)), this, SLOT(enableButtonDefault(QWidget *)));
+	connect( buttonDefault, SIGNAL(clicked()), this, SLOT(setDefaultValues()));
 }
 
 void lineDialog::initGeometryTab()
@@ -207,26 +209,7 @@ void lineDialog::apply()
 {
 if (tw->currentPage()==(QWidget *)options)
 	{
-	Qt::PenStyle style;
-	switch (styleBox->currentItem())
-		{
-		case 0:
-			style=Qt::SolidLine;
-		break;
-		case 1:
-			style=Qt::DashLine;
-		break;
-		case 2:
-			style=Qt::DotLine;
-		break;
-		case 3:
-			style=Qt::DashDotLine;
-		break;
-		case 4:
-			style=Qt::DashDotDotLine;
-		break;
-		}
-	lm->setStyle(style);
+	lm->setStyle(Graph::getPenStyle(styleBox->currentItem()));
 	lm->setColor(colorBox->color());
 	lm->setWidth(widthBox->currentText().toInt());
 	lm->setEndArrow(endBox->isChecked());
@@ -291,6 +274,25 @@ if ( !c.isValid() || c == colorBox->color() )
 colorBox->setColor ( c ) ;
 }
 	
+void lineDialog::setDefaultValues()
+{
+ApplicationWindow *app = (ApplicationWindow *)this->parent();
+if (!app)
+	return;
+
+app->setArrowDefaultSettings(widthBox->currentText().toInt(), colorBox->color(), 
+							Graph::getPenStyle(styleBox->currentItem()),
+							boxHeadLength->value(), boxHeadAngle->value(), filledBox->isChecked());
+}
+
+void lineDialog::enableButtonDefault(QWidget *w)
+{
+if (w == geometry)
+	buttonDefault->setEnabled(false);
+else
+	buttonDefault->setEnabled(true);
+}
+
 lineDialog::~lineDialog()
 {
 }

@@ -1232,8 +1232,14 @@ connect (g,SIGNAL(createHistogramTable(const QString&,int,int,const QString&)),
 connect (g,SIGNAL(highlightGraph(Graph*)),this,SLOT(highlightLayer(Graph*)));
 }
 
-void MultiLayer::addTextLayer()
+void MultiLayer::addTextLayer(int f, const QFont& font, 
+						const QColor& textCol, const QColor& backgroundCol)
 {
+defaultTextMarkerFont = font;
+defaultTextMarkerFrame = f; 
+defaultTextMarkerColor = textCol;
+defaultTextMarkerBackground = backgroundCol;
+
 addTextOn=TRUE;
 QApplication::setOverrideCursor(IbeamCursor);
 canvas->grabMouse();
@@ -1245,15 +1251,15 @@ Graph* g=addLayer();
 g->setTitle("");
 QMemArray<bool> axesOn(4);
 for (int j=0;j<4;j++)
-		axesOn[j]=FALSE;
+	axesOn[j]=FALSE;
 g->enableAxes(axesOn);
-g->plotWidget()->setLineWidth(1);
 g->setIgnoreResizeEvents(true);
+g->setTextMarkerDefaults(defaultTextMarkerFrame, defaultTextMarkerFont, 
+						 defaultTextMarkerColor, defaultTextMarkerBackground);
 QSize size=g->newLegend(tr("enter your text here"));
 setGraphGeometry(pos.x(), pos.y(), size.width()+10, size.height()+10);
 g->setIgnoreResizeEvents(false);
 g->show();
-connectLayer(g);
 QApplication::restoreOverrideCursor();
 canvas->releaseMouse();
 addTextOn=FALSE;

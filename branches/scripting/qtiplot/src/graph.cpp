@@ -234,14 +234,17 @@ connect (scalePicker,SIGNAL(releasedGraph()),this, SLOT(releaseGraph()));
 connect (d_zoomer,SIGNAL(zoomed (const QwtDoubleRect &)),this,SLOT(zoomed (const QwtDoubleRect &)));
 }
 
-void Graph::customLegend(int frame, const QFont& font)
+void Graph::customLegend()
 {
 LegendMarker *mrk = (LegendMarker*) d_plot->marker(legendMarkerID);
 if (!mrk)
 	return;
 
-mrk->setBackground(frame);
-mrk->setFont(font);
+mrk->setBackground(defaultMarkerFrame);
+mrk->setFont(defaultMarkerFont);
+mrk->setTextColor(defaultTextMarkerColor);
+mrk->setBackgroundColor(defaultTextMarkerBackground);
+
 
 if (!n_curves)
 	{
@@ -463,10 +466,8 @@ bool Graph::pickerActivated()
 return pickerEnabled;
 }
 
-void Graph::initFonts(const QFont &scaleTitleFnt, const QFont &numbersFnt, 
-					  const QFont &textMarkerFnt)
+void Graph::initFonts(const QFont &scaleTitleFnt, const QFont &numbersFnt)
 {
-defaultMarkerFont = textMarkerFnt;
 for (int i = 0;i<QwtPlot::axisCnt;i++)
 	{
 	d_plot->setAxisFont (i,numbersFnt);
@@ -1293,46 +1294,8 @@ grid=options;
 QColor minColor = color(grid.minorCol);
 QColor majColor = color(grid.majorCol);
 
-Qt::PenStyle majStyle;
-Qt::PenStyle minStyle;
-
-switch (grid.majorStyle)
-	{
-	case 0:
-		majStyle=Qt::SolidLine;
-	break;
-	case 1:
-		majStyle=Qt::DashLine;
-	break;
-	case 2:
-		majStyle=Qt::DotLine;
-	break;
-	case 3:
-		majStyle=Qt::DashDotLine;
-	break;
-	case 4:
-		majStyle=Qt::DashDotDotLine;
-	break;
-	}
-
-switch (grid.minorStyle)
-	{
-	case 0:
-		minStyle=Qt::SolidLine;
-	break;
-	case 1:
-		minStyle=Qt::DashLine;
-	break;
-	case 2:
-		minStyle=Qt::DotLine;
-	break;
-	case 3:
-		minStyle=Qt::DashDotLine;
-	break;
-	case 4:
-		minStyle=Qt::DashDotDotLine;
-	break;
-	}
+Qt::PenStyle majStyle = getPenStyle(grid.majorStyle);
+Qt::PenStyle minStyle = getPenStyle(grid.minorStyle);
 
 QPen majPen=QPen (majColor,grid.majorWidth,majStyle);
 d_plot->grid()->setMajPen (majPen);
@@ -3707,18 +3670,7 @@ QPen pen=pieCurve->pen();
 	
 s+=QString::number(pen.width())+"\t";
 s+=pen.color().name()+"\t";
-	
-Qt::PenStyle style=pen.style();
-if (style==Qt::SolidLine)
-	s+="SolidLine\t";
-else if (style==Qt::DashLine)
-	s+="DashLine\t";
-else if (style==Qt::DotLine)
-	s+="DotLine\t";	
-else if (style==Qt::DashDotLine)
-	s+="DashDotLine\t";		
-else if (style==Qt::DashDotDotLine)
-	s+="DashDotDotLine\t";
+s+=penStyleName(pen.style()) + "\t";
 
 Qt::BrushStyle pattern=pieCurve->pattern();
 int index;
@@ -3903,7 +3855,7 @@ if (legendMarkerID>=0)
 return on;
 }
 
-void Graph::newLegend(const QFont& fnt, int frameStyle)
+void Graph::newLegend()
 {
 LegendMarker* mrk = new LegendMarker(d_plot);
 mrk->setOrigin(QPoint(10, 10));
@@ -3912,15 +3864,18 @@ if (piePlot)
 else
 	mrk->setText(legendText());
 
-mrk->setFont(fnt);
-mrk->setBackground(frameStyle);
+mrk->setBackground(defaultMarkerFrame);
+mrk->setFont(defaultMarkerFont);
+mrk->setTextColor(defaultTextMarkerColor);
+mrk->setBackgroundColor(defaultTextMarkerBackground);
+
 legendMarkerID=d_plot->insertMarker(mrk);
 
 emit modifiedGraph();
 d_plot->replot();	
 }
 
-void Graph::addTimeStamp(const QFont& fnt, int frameStyle)
+void Graph::addTimeStamp()
 {
 LegendMarker* mrk= new LegendMarker(d_plot);
 mrk->setOrigin(QPoint(d_plot->canvas()->width()/2, 10));
@@ -3928,8 +3883,11 @@ mrk->setOrigin(QPoint(d_plot->canvas()->width()/2, 10));
 QDateTime dt = QDateTime::currentDateTime ();
 mrk->setText(dt.toString(Qt::LocalDate));
 
-mrk->setFont(fnt);
-mrk->setBackground(frameStyle);
+mrk->setBackground(defaultMarkerFrame);
+mrk->setFont(defaultMarkerFont);
+mrk->setTextColor(defaultTextMarkerColor);
+mrk->setBackgroundColor(defaultTextMarkerBackground);
+
 legendMarkerID=d_plot->insertMarker(mrk);
 
 emit modifiedGraph();
@@ -3941,7 +3899,13 @@ QSize Graph::newLegend(const QString& text)
 LegendMarker* mrk= new LegendMarker(d_plot);
 mrk->setOrigin(QPoint(5,5));
 mrk->setText(text);
-mrk->setBackground(LegendMarker::None);
+//mrk->setBackground(LegendMarker::None);
+
+mrk->setBackground(defaultMarkerFrame);
+mrk->setFont(defaultMarkerFont);
+mrk->setTextColor(defaultTextMarkerColor);
+mrk->setBackgroundColor(defaultTextMarkerBackground);
+
 selectedMarker=d_plot->insertMarker(mrk);
 d_plot->replot();
 QRect rect=mrk->rect();
@@ -4160,19 +4124,7 @@ for (i=0;i<l;i++)
 	s+=QString::number(aux.y())+"\t";	
 	s+=QString::number(mrkL->width())+"\t";
 	s+=mrkL->color().name()+"\t";
-
-	Qt::PenStyle style=mrkL->style();
-	if (style==Qt::SolidLine)
-		s+="SolidLine\t";
-	else if (style==Qt::DashLine)
-		s+="DashLine\t";
-	else if (style==Qt::DotLine)
-		s+="DotLine\t";	
-	else if (style==Qt::DashDotLine)
-		s+="DashDotLine\t";		
-	else if (style==Qt::DashDotDotLine)
-		s+="DashDotDotLine\t";
-
+	s+=penStyleName(mrkL->style())+"\t";
 	s+=QString::number(mrkL->getEndArrow())+"\t";
 	s+=QString::number(mrkL->getStartArrow())+"\t";
 	s+=QString::number(mrkL->headLength())+"\t";
@@ -6159,6 +6111,22 @@ switch (style)
 return brushStyle;
 }
 
+QString Graph::penStyleName(Qt::PenStyle style)
+{
+if (style==Qt::SolidLine)
+	return "SolidLine";
+else if (style==Qt::DashLine)
+	return "DashLine";
+else if (style==Qt::DotLine)
+	return "DotLine";	
+else if (style==Qt::DashDotLine)
+	return "DashDotLine";		
+else if (style==Qt::DashDotDotLine)
+	return "DashDotDotLine";
+else
+	return "SolidLine";
+}
+
 Qt::PenStyle Graph::getPenStyle(int style)
 {
 Qt::PenStyle linePen;
@@ -6852,6 +6820,26 @@ else if (drawLineActive())
 	drawLine(false);
 	return;
 	}
+}
+
+void Graph::setTextMarkerDefaults(int f, const QFont& font, 
+						const QColor& textCol, const QColor& backgroundCol)
+{
+defaultMarkerFont = font;
+defaultMarkerFrame = f; 
+defaultTextMarkerColor = textCol;
+defaultTextMarkerBackground = backgroundCol;
+}
+
+void Graph::setArrowDefaults(int lineWidth,  const QColor& c, Qt::PenStyle style,
+									int headLength, int headAngle, bool fillHead)
+{
+defaultArrowLineWidth = lineWidth; 
+defaultArrowColor = c;
+defaultArrowLineStyle = style;
+defaultArrowHeadLength = headLength;
+defaultArrowHeadAngle = headAngle;
+defaultArrowHeadFill = fillHead;
 }
 
 Graph::~Graph()

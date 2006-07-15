@@ -51,7 +51,7 @@ public:
 	QCheckBox *boxTitle, *boxFrame, *boxPlots3D, *boxPlots2D, *boxTables, *boxNotes, *boxFolders;
 	QCheckBox *boxSave, *boxBackbones, *boxAllAxes, *boxShowLegend, *boxSmoothMesh;
 	QCheckBox *boxAutoscaling, *boxShowProjection, *boxMatrixes, *boxScaleFonts, *boxResize;
-	QComboBox *boxLegend, *boxMajTicks, *boxStyle, *boxCurveStyle, *boxSeparator, *boxLanguage, *boxMinTicks;
+	QComboBox *boxMajTicks, *boxStyle, *boxCurveStyle, *boxSeparator, *boxLanguage, *boxMinTicks;
 	QSpinBox *boxMinutes, *boxLinewidth, *boxFrameWidth, *boxResolution, *boxMargin;
 	QSpinBox *boxCurveLineWidth, *boxSymbolSize, *boxMajTicksLength, *boxMinTicksLength;
 	ColorButton *btnWorkspace, *btnPanels, *btnPanelsText;
@@ -63,7 +63,7 @@ public:
 	QLabel *lblSeparator, *lblTableBackground, *lblTextColor, *lblHeaderColor;
 	QLabel *lblSymbSize, *lblLineWidth, *lblCurveStyle, *lblResolution;
 	QGroupBox *GroupBox3DFonts, *GroupBox3DCol;
-	QLabel *lblLegend, *lblMargin, *lblTicks, *lblMajTicks, *lblLinewidth, *lblMinTicks;
+	QLabel *lblMargin, *lblTicks, *lblMajTicks, *lblLinewidth, *lblMinTicks;
 
 public slots:
     virtual void languageChange();

@@ -324,6 +324,10 @@ plotTitleFont=QFont(family, pointSize + 2, QFont::Bold,FALSE);
 plot3DAxesFont=QFont(family, pointSize, QFont::Bold, FALSE );
 plot3DNumbersFont=QFont(family, pointSize);
 plot3DTitleFont=QFont(family, pointSize + 2, QFont::Bold,FALSE);
+
+legendColor = QColor(Qt::black);
+legendBackground = QColor(Qt::white);
+defaultArrowColor = QColor(Qt::black);
 }
 
 void ApplicationWindow::applyUserSettings()
@@ -2506,10 +2510,13 @@ if (!g->isPiePlot())
 	g->drawAxesBackbones(drawBackbones);
 	}
 
-g->initFonts(plotAxesFont, plotNumbersFont, plotLegendFont);
-g->customLegend(legendFrameStyle, plotLegendFont);
+g->initFonts(plotAxesFont, plotNumbersFont);
+g->setTextMarkerDefaults(legendFrameStyle, plotLegendFont, legendColor, legendBackground);
+g->customLegend();
 
-g->setTextMarkerDefaultFrame(legendFrameStyle);
+g->setArrowDefaults(defaultArrowLineWidth, defaultArrowColor, defaultArrowLineStyle,
+					defaultArrowHeadLength, defaultArrowHeadAngle, defaultArrowHeadFill);
+
 g->initTitle(titleOn, plotTitleFont);
 g->drawCanvasFrame(canvasFrameOn, canvasFrameWidth);
 g->plotWidget()->setMargin(defaultPlotMargin);
@@ -3328,6 +3335,68 @@ for (int i=0; i<(int)windows.count(); i++)
 	}
 }
 
+void ApplicationWindow::setLegendDefaultSettings(int frame, const QFont& font, 
+												 const QColor& textCol, const QColor& backgroundCol)
+{
+if (legendFrameStyle == frame && 
+	legendColor == textCol &&
+	legendBackground == backgroundCol &&
+	plotLegendFont == font)
+	return;
+
+legendFrameStyle = frame;
+legendColor = textCol;
+legendBackground = backgroundCol;
+plotLegendFont = font;
+
+QWidgetList *windows = windowsList();
+for (QWidget *w = windows->first(); w; w = windows->next())
+	{
+	if (w->isA("MultiLayer"))
+		{
+		QWidgetList *graphsList = ((MultiLayer*)w)->graphPtrs();
+		for (Graph* g = (Graph*)graphsList->first(); g; g = (Graph*)graphsList->next())
+			g->setTextMarkerDefaults(frame, font, textCol, backgroundCol);
+		}
+	}
+delete windows;
+saveSettings();
+}
+
+void ApplicationWindow::setArrowDefaultSettings(int lineWidth,  const QColor& c, Qt::PenStyle style,
+												int headLength, int headAngle, bool fillHead)
+{
+if (defaultArrowLineWidth == lineWidth && 
+	defaultArrowColor == c &&
+	defaultArrowLineStyle == style &&
+	defaultArrowHeadLength == headLength &&
+	defaultArrowHeadAngle == headAngle &&
+	defaultArrowHeadFill == fillHead)
+	return;
+
+defaultArrowLineWidth = lineWidth; 
+defaultArrowColor = c;
+defaultArrowLineStyle = style;
+defaultArrowHeadLength = headLength;
+defaultArrowHeadAngle = headAngle;
+defaultArrowHeadFill = fillHead;
+
+QWidgetList *windows = windowsList();
+for (QWidget *w = windows->first(); w; w = windows->next())
+	{
+	if (w->isA("MultiLayer"))
+		{
+		QWidgetList *graphsList = ((MultiLayer*)w)->graphPtrs();
+		for (Graph* g = (Graph*)graphsList->first(); g; g = (Graph*)graphsList->next())
+			g->setArrowDefaults(defaultArrowLineWidth, defaultArrowColor, 
+							defaultArrowLineStyle, defaultArrowHeadLength,
+							defaultArrowHeadAngle, defaultArrowHeadFill);
+		}
+	}
+delete windows;
+saveSettings();
+}
+
 ApplicationWindow * ApplicationWindow::plotFile(const QString& fn)
 {	
 QApplication::setOverrideCursor(waitCursor);
@@ -4123,6 +4192,16 @@ minTicksLength=settings.readNumEntry ("/minTicksLength", 5, 0);
 majTicksLength=settings.readNumEntry ("/majTicksLength", 9, 0);
 
 legendFrameStyle=settings.readNumEntry ("/legendFrameStyle", LegendMarker::Line, 0);
+legendColor = QColor(settings.readEntry("/legendColor"));
+legendBackground = QColor(settings.readEntry("/legendBackground"));
+
+defaultArrowLineWidth = settings.readNumEntry("/defaultArrowLineWidth", 1);
+defaultArrowColor = QColor(settings.readEntry("/defaultArrowColor"));
+defaultArrowHeadLength = settings.readNumEntry("/defaultArrowHeadLength", 4);
+defaultArrowHeadAngle = settings.readNumEntry("/defaultArrowHeadAngle", 45);
+defaultArrowHeadFill = settings.readBoolEntry("/defaultArrowHeadFill", true);
+defaultArrowLineStyle = Graph::getPenStyle(settings.readEntry("/defaultArrowLineStyle", "SolidLine"));
+
 QStringList graphFonts=settings.readListEntry("/graphFonts");
 confirmCloseFolder=settings.readBoolEntry ("/confirmCloseFolder", true, 0);
 confirmCloseTable=settings.readBoolEntry ("/confirmCloseTable", true, 0);
@@ -4325,6 +4404,16 @@ settings.writeEntry("/minTicksLength", minTicksLength);
 settings.writeEntry("/majTicksLength", majTicksLength);
 
 settings.writeEntry("/legendFrameStyle", legendFrameStyle);
+settings.writeEntry("/legendColor", legendColor.name());
+settings.writeEntry("/legendBackground", legendBackground.name());
+
+//line/arrow default settings 
+settings.writeEntry("/defaultArrowLineWidth", defaultArrowLineWidth);
+settings.writeEntry("/defaultArrowColor", defaultArrowColor.name());
+settings.writeEntry("/defaultArrowHeadLength", defaultArrowHeadLength);
+settings.writeEntry("/defaultArrowHeadAngle", defaultArrowHeadAngle);
+settings.writeEntry("/defaultArrowHeadFill", defaultArrowHeadFill);
+settings.writeEntry("/defaultArrowLineStyle", Graph::penStyleName(defaultArrowLineStyle));
 settings.writeEntry("/graphFonts", graphFonts);
 settings.writeEntry("/confirmCloseFolder", confirmCloseFolder);
 settings.writeEntry("/confirmCloseTable", confirmCloseTable);
@@ -6743,7 +6832,7 @@ if (plot->isEmpty())
 	
 Graph* g = (Graph*)plot->activeGraph();
 if ( g )
-	g->newLegend(plotLegendFont, legendFrameStyle);
+	g->newLegend();
 }
 
 void ApplicationWindow::addTimeStamp()
@@ -6762,7 +6851,7 @@ if (plot->isEmpty())
 	
 Graph* g = (Graph*)plot->activeGraph();
 if ( g )
-	g->addTimeStamp(plotLegendFont, legendFrameStyle);
+	g->addTimeStamp();
 }
 
 void ApplicationWindow::disableAddText()
@@ -6787,7 +6876,7 @@ switch(QMessageBox::information(this,
             0, 2 ) )
 	{
 	case 0:
-		plot->addTextLayer();
+		plot->addTextLayer(legendFrameStyle, plotLegendFont, legendColor, legendBackground);
 	break;
 
 	case 1:
@@ -7010,7 +7099,7 @@ if ( g )
 	td->setBackgroundType(m->getBkgType());
 	td->setAngle(m->getAngle());
 	td->showNormal();
-	td->setFocus();
+	td->setActiveWindow();
 	}
 }
 
@@ -8723,7 +8812,6 @@ MultiLayer* plot = multilayerPlot(label);
 Graph* g=plot->addLayer();
 customGraph(g);
 g->addFunctionCurve(type,formulas,vars,ranges,points);
-g->newLegend(plotLegendFont, legendFrameStyle);
 
 plot->showNormal();
 setListViewSize(plot->name(), plot->sizeToString());
@@ -10152,6 +10240,9 @@ for (int j=0;j<(int)list.count()-1;j++)
 ag->replot();
 ag->setIgnoreResizeEvents(!autoResizeLayers);
 ag->setAutoscaleFonts(autoScaleFonts);
+ag->setTextMarkerDefaults(legendFrameStyle, plotLegendFont, legendColor, legendBackground);
+ag->setArrowDefaults(defaultArrowLineWidth, defaultArrowColor, defaultArrowLineStyle,
+					 defaultArrowHeadLength, defaultArrowHeadAngle, defaultArrowHeadFill);
 plot->connectLayer(ag);
 }
 

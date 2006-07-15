@@ -38,6 +38,7 @@ public:
     QPushButton* buttonI;
     QPushButton* buttonU;
 	QPushButton* buttonCurve;
+	QPushButton* buttonDefault;
     QMultiLineEdit* LineEdit;
 	QButtonGroup *GroupBox1, *GroupBox2;
 	QPushButton* buttonMinGreek, *buttonMajGreek;
@@ -60,7 +61,6 @@ public slots:
 	void pickBackgroundColor();
 	void setBackgroundColor(QColor c);
 
-	int backgroundType();
 	void setBackgroundType(int bkg);
 
 	void setAngle(int angle);
@@ -77,6 +77,8 @@ public slots:
 	void showMinGreek();
 	void showMajGreek();
 	void addSymbol(const QString& letter);
+
+	void setDefaultValues();
 
 signals:
 	void values(const QString& text, int, int, const QFont&, const QColor&, const QColor&);
