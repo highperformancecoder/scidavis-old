@@ -7,7 +7,7 @@
 
 ImageMarker::ImageMarker(const QPixmap& p):
     pic(p),
-	origin(QPoint(0,0)),
+	d_pos(QPoint(0,0)),
 	picSize(p.size())
 {
 }
@@ -47,9 +47,22 @@ d_rect.setRight(xMap.invTransform(x + size.width()));
 d_rect.setBottom(yMap.invTransform(y + size.height()));
 }
 
+void ImageMarker::setBoundingRect(const QwtDoubleRect& rect)
+{
+if (d_rect == rect)
+	return;
+
+d_rect = rect;
+
+const QwtScaleMap &xMap = plot()->canvasMap(xAxis());
+const QwtScaleMap &yMap = plot()->canvasMap(yAxis());
+
+d_pos = QPoint(xMap.transform(rect.left()), yMap.transform(rect.top()));
+}
+
 void ImageMarker::setOrigin(const QPoint& p)
 {
-origin = p;
+d_pos = p;
 
 const QwtScaleMap &xMap = plot()->canvasMap(xAxis());
 const QwtScaleMap &yMap = plot()->canvasMap(yAxis());
@@ -80,8 +93,8 @@ void ImageMarker::updateOrigin()
 const QwtScaleMap &xMap = plot()->canvasMap(xAxis());
 const QwtScaleMap &yMap = plot()->canvasMap(yAxis());
 
-d_rect.moveTo(xMap.invTransform(origin.x()), yMap.invTransform(origin.y()));
+d_rect.moveTo(xMap.invTransform(d_pos.x()), yMap.invTransform(d_pos.y()));
 
-d_rect.setRight(xMap.invTransform(origin.x() + picSize.width()));
-d_rect.setBottom(yMap.invTransform(origin.y() + picSize.height()));
+d_rect.setRight(xMap.invTransform(d_pos.x() + picSize.width()));
+d_rect.setBottom(yMap.invTransform(d_pos.y() + picSize.height()));
 }

@@ -42,7 +42,7 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 			if (plot()->margin() < 2 && plot()->lineWidth() < 2)
 				{
 				QRect r = ((const QwtScaleWidget *)object)->rect();
-				r.addCoords(2, 2, -2, -2);
+				//r.addCoords(2, 2, -2, -2);
 				if (!r.contains(me->pos()))
 					emit highlightGraph();
 				}
@@ -121,12 +121,7 @@ else
 
 void ScalePicker::mouseRightClicked(const QwtScaleWidget *scale, const QPoint &pos) 
 {
-QRect rect = scaleRect(scale);
-
-int margin = 2; // pixels tolerance
-rect.setRect(rect.x() - margin, rect.y() - margin, rect.width() + 2 * margin, rect.height() +  2 * margin);
-
-if (rect.contains(pos)) 
+if (scaleRect(scale).contains(pos)) 
 	emit axisRightClicked(scale->alignment());
 else
 	emit axisTitleRightClicked(scale->alignment());
@@ -135,44 +130,32 @@ else
 // The rect of a scale without the title
 QRect ScalePicker::scaleRect(const QwtScaleWidget *scale) const
 {
-    const int bld = scale->margin();
-    const int mjt = scale->scaleDraw()->majTickLength();
-    const int sbd = scale->startBorderDist();
-    const int ebd = scale->endBorderDist();
-	
-	const QwtScaleDraw *sd = scale->scaleDraw ();
-	const int mlw = sd->maxLabelWidth (scale->font());
-	const int mlh = sd->maxLabelHeight (scale->font());
-
-    QRect rect;
-    switch(scale->alignment())   
+QRect rect = scale->rect();
+int dh = scale->title().textSize().height();
+switch(scale->alignment())   
     {
-        case QwtScaleDraw::LeftScale:
+    case QwtScaleDraw::LeftScale:
         {			
-			rect.setRect(scale->width() - bld - mjt - mlw, sbd - mlh,
-                mjt + mlw, scale->height() - sbd - ebd + mlw);	
-            break;
+		rect.setLeft(rect.left() + dh);	
+        break;
         }
-        case QwtScaleDraw::RightScale:
+    case QwtScaleDraw::RightScale:
         {
-			rect.setRect(bld, sbd - mlh,
-                 mjt + mlw, scale->height() - sbd - ebd + mlw);
-            break;
+		rect.setRight(rect.right() - dh);
+        break;
         }
-        case QwtScaleDraw::BottomScale:
+    case QwtScaleDraw::BottomScale:
         {
-			rect.setRect(sbd, bld, 
-                scale->width() - sbd - ebd + mlw, mjt + mlh);
-	        break;
+		rect.setBottom(rect.bottom() - dh);
+	    break;
         }
-        case QwtScaleDraw::TopScale:
+    case QwtScaleDraw::TopScale:
         {
-			rect.setRect(sbd, scale->height() - bld - mjt - mlh, 
-                scale->width() - sbd - ebd + mlw, mjt + mlh);
-            break;
+		rect.setTop(rect.top() + dh);
+        break;
         }
     }
-    return rect;
+return rect;
 }
 
 void ScalePicker::refresh()

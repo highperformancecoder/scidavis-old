@@ -126,6 +126,20 @@ setXValue (xMap.invTransform(d_pos.x()));
 setYValue (yMap.invTransform(d_pos.y()));
 }
 
+void LegendMarker::setOriginCoord(double x, double y)
+{
+if (xValue() == x && yValue() == y)
+	return;
+
+setXValue(x);
+setYValue(y);
+
+const QwtScaleMap &xMap = d_plot->canvasMap(xAxis());
+const QwtScaleMap &yMap = d_plot->canvasMap(yAxis());
+
+d_pos = QPoint(xMap.transform(x), yMap.transform(y));
+}
+
 QFont LegendMarker::getFont()
 {
 return d_text->font();
@@ -214,37 +228,37 @@ for (int i=0;i<(int)titles.count();i++)
 		int pos=titles[i].find("{",0);
         int pos2=titles[i].find("}",pos);
 		QString aux=titles[i].mid(pos+1,pos2-pos-1);
-		int cv=aux.toInt() - 1;		
-		if (cv >= 0)
+		int cv = aux.toInt() - 1;	
+		if (cv < 0)
+			continue;
+
+		if (g->curveType(cv) == Graph :: VectXYXY || g->curveType(cv) == Graph :: VectXYAM)
+			drawVector(p, w, height[i], l, cv);
+		else
 			{
-			if (g->curveType(cv) == Graph :: VectXYXY || g->curveType(cv) == Graph :: VectXYAM)
-				drawVector(p, w, height[i], l, cv);
-			else
+			const QwtPlotCurve *curve = g->curve(cv);
+			if (curve)
 				{
-				const QwtPlotCurve *curve = g->curve(cv);
-				if (curve)
-					{
-					const QwtSymbol symb=curve->symbol(); 
-					const QBrush br=curve->brush();
-					QPen pen=curve->pen();
+				const QwtSymbol symb=curve->symbol(); 
+				const QBrush br=curve->brush();
+				QPen pen=curve->pen();
 										
-					p->save();
+				p->save();
 	
-					if (curve->style()!=0)
-						{	
-						p->setPen (pen);					
-						if (br.style() != Qt::NoBrush || g->curveType(cv) == Graph::Box)
-							{
-							QRect lr=QRect(w,height[i]-4,l,10);						
-							p->setBrush(br);
-							p->drawRect (lr);
-							}			
-						else 			
-							p->drawLine (w,height[i],w+l,height[i]);						
-						}
-					symb.draw(p,w+l/2,height[i]);
-					p->restore();
+				if (curve->style()!=0)
+					{	
+					p->setPen (pen);					
+					if (br.style() != Qt::NoBrush || g->curveType(cv) == Graph::Box)
+						{
+						QRect lr=QRect(w,height[i]-4,l,10);						
+						p->setBrush(br);
+						p->drawRect (lr);
+						}			
+					else 			
+						p->drawLine (w,height[i],w+l,height[i]);						
 					}
+				symb.draw(p,w+l/2,height[i]);
+				p->restore();
 				}
 			}
 	 	}	
@@ -365,10 +379,17 @@ for (int i=0;i<(int)titles.count();i++)
 		int pos=titles[i].find("{",0);
         int pos2=titles[i].find("}",pos);
 		QString aux=titles[i].mid(pos+1,pos2-pos-1);
-		const QwtPlotCurve *c = d_plot->curve(cvs[aux.toInt()-1]);
-		int l=c->symbol().size().width();
-		if (l>maxL && c->symbol().style() != QwtSymbol::None) 
-			maxL=l;		
+		int cv = aux.toInt()-1;
+		if (cv < 0)
+			continue;
+
+		const QwtPlotCurve *c = d_plot->curve(cvs[cv]);
+		if (c)
+			{
+			int l=c->symbol().size().width();
+			if (l>maxL && c->symbol().style() != QwtSymbol::None) 
+				maxL=l;
+			}
 		}
 		
 	if (titles[i].contains("\\p{"))

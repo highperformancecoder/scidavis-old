@@ -167,7 +167,6 @@ public slots:
 	 QString saveScale();
 	 QString saveScaleTitles();
 	 QString saveFonts();
-	 QString saveLegend();
 	 QString saveMarkers();
 	 QString saveCurveLayout(int index);
 	 QString saveAxesTitleColors();
@@ -191,8 +190,9 @@ public slots:
 	 bool drawTextActive(){return drawTextOn;};
 	 
 	 void insertTextMarker(LegendMarker* mrk);
-	 long insertTextMarker(const QStringList& list);
-	 long insertTextMarker_obsolete(const QStringList& list);
+
+	 //! Used when opening a project file
+	 long insertTextMarker(const QStringList& list, int fileVersion);
 	 void updateTextMarker(const QString& text,int angle, int bkg,const QFont& fnt,
 						   const QColor& textColor, const QColor& backgroundColor);
 	
@@ -243,8 +243,7 @@ public slots:
 	 void removeLegend();
 	 void removeLegendItem(int index);
 	 void addLegendItem(const QString& colName);
-	 void insertLegend(const QStringList& lst);
-	 void insertLegend_obsolete(const QStringList& lst);
+	 void insertLegend(const QStringList& lst, int fileVersion);
 	 void newLegend();
 	 QSize newLegend(const QString& text);
 	 bool legendOn();
@@ -256,7 +255,9 @@ public slots:
 	 // line markers 
 	 LineMarker* lineMarker(long id);
 	 void insertLineMarker(LineMarker* mrk);
-	 void insertLineMarker(QStringList list);
+
+	 //! Used when opening a project file
+	 void insertLineMarker(QStringList list, int fileVersion);
 	 QwtArray<long> lineMarkerKeys();
 
 	 //!Draws a line/arrow depending on the value of "arrow"
@@ -269,7 +270,7 @@ public slots:
 	 QwtArray<long> imageMarkerKeys();
 	 void insertImageMarker(ImageMarker* mrk);
 	 void insertImageMarker(const QPixmap& photo, const QString& fileName);
-	 void insertImageMarker(const QStringList& options);
+	 void insertImageMarker(const QStringList& lst, int fileVersion);
 	 bool imageMarkerSelected();
 	 void updateImageMarker(int x, int y, int width, int height);
 	 

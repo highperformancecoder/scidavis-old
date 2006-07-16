@@ -11,6 +11,8 @@ class ScalePicker: public QObject
 public:
     ScalePicker(QwtPlot *plot);
     virtual bool eventFilter(QObject *, QEvent *);
+
+	//! The rect of a scale without the title
 	QRect scaleRect(const QwtScaleWidget *) const;
 
 	void mouseDblClicked(const QwtScaleWidget *, const QPoint &);
@@ -19,7 +21,7 @@ public:
 
 	void refresh();
 	
-	QwtPlot *plot() { return (QwtPlot *)parent(); }
+	QwtPlot *plot() {return (QwtPlot *)parent();};
 
 signals:
 	void clicked();
@@ -57,7 +59,7 @@ signals:
 	void removeTitle();
 	void showTitleMenu();
 
-	//moving and highlighting the plot parent
+	// moving and highlighting the plot parent
 	void moveGraph(const QPoint&);
 	void releasedGraph();
 	void highlightGraph();

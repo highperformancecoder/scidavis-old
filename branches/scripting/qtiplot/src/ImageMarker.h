@@ -24,13 +24,14 @@ public:
 	void setOrigin(const QPoint& p);
 	QPoint getOrigin();
 
-//! Keep the markers on screen each time the scales are modified by adding/removing curves
+	//! Keep the markers on screen each time the scales are modified by adding/removing curves
 	void updateOrigin();
 
 	QwtDoubleRect boundingRect() const;
+	void setBoundingRect(const QwtDoubleRect& rect);
 
 private:
-	QPoint origin;
+	QPoint d_pos;
 	QPixmap pic;
 	QSize picSize;
 	QString fileName;

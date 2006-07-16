@@ -10177,28 +10177,22 @@ for (int j=0;j<(int)list.count()-1;j++)
 		else if (s.contains ("Legend"))
 			{
 			fList=QStringList::split ("\t",s,TRUE);
-			if (fileVersion < 71)
-				ag->insertLegend_obsolete(fList);
-			else
-				ag->insertLegend(fList);
+			ag->insertLegend(fList, fileVersion);
 			}
 		else if (s.contains ("textMarker"))
 			{
 			fList=QStringList::split ("\t",s,TRUE);
-			if (fileVersion < 71)
-				ag->insertTextMarker_obsolete(fList);
-			else
-				ag->insertTextMarker(fList);
+			ag->insertTextMarker(fList, fileVersion);
 			}
 		else if (s.contains ("lineMarker"))
 			{
 			fList=QStringList::split ("\t",s,TRUE);
-			ag->insertLineMarker(fList);
+			ag->insertLineMarker(fList, fileVersion);
 			}
 		else if (s.contains ("ImageMarker"))
 			{
 			fList=QStringList::split ("\t",s,TRUE);
-			ag->insertImageMarker(fList);
+			ag->insertImageMarker(fList, fileVersion);
 			}
 		else if (s.contains ("FitID"))
 			{
