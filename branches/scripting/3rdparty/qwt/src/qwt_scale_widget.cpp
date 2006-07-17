@@ -654,6 +654,11 @@ void QwtScaleWidget::drawTitle(QPainter *painter,
 
     painter->save();
     painter->setFont(font());
+#if QT_VERSION < 0x040000
+    painter->setPen(colorGroup().color(QColorGroup::Text));
+#else
+    painter->setPen(palette().color(QPalette::Text));
+#endif
 
     painter->translate(r.x(), r.y());
     if (angle != 0.0)
@@ -662,8 +667,6 @@ void QwtScaleWidget::drawTitle(QPainter *painter,
 
     QwtText title = d_data->title;
     title.setFlags(flags);
-
-	painter->setPen(title.color());
     title.draw(painter, QRect(0, 0, r.width(), r.height()));
 
     painter->restore();

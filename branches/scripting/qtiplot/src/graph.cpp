@@ -2563,7 +2563,6 @@ selectedMarker = -1;
 void Graph::setTitle(const QString& t)
 {
 d_plot->setTitle (t);	
-d_plot->updateLayout();
 emit modifiedGraph(); 
 }
 
@@ -2571,7 +2570,7 @@ void Graph::removeTitle()
 {
 if (d_plot->titleLabel()->hasFocus())
 	{
-	/*QRect rect = d_plot->contentsRect();
+	QRect rect = d_plot->contentsRect();
 	
 	QwtPlotLayout *layout = (QwtPlotLayout *)d_plot->plotLayout();
 	int y = 0;
@@ -2580,12 +2579,11 @@ if (d_plot->titleLabel()->hasFocus())
 	else
 		y = layout->canvasRect().y();
 
-	rect.setY(y);*/
+	rect.setY(y);
 
 	d_plot->setTitle(QString::null);
-	d_plot->updateLayout();
-
-	//setGeometry(rect);
+	d_plot->resize(rect.size());
+	setGeometry(rect);
 
 	emit modifiedGraph(); 
 	}
