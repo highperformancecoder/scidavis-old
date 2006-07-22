@@ -119,6 +119,9 @@ setYValue (yMap.invTransform(p.y()));
 
 void LegendMarker::updateOrigin()
 {
+if (!d_plot)
+	return;
+
 const QwtScaleMap &xMap = d_plot->canvasMap(xAxis());
 const QwtScaleMap &yMap = d_plot->canvasMap(yAxis());
 

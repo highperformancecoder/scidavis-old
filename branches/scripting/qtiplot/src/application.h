@@ -120,7 +120,6 @@ public slots:
 	void setAppColors(const QColor& wc,const QColor& pc,const QColor& tpc);
 
 	//multilayer plots
-	MultiLayer* plot(const QString& name);
 	MultiLayer* copyGraph();
 	MultiLayer* multilayerPlot(int c, int r, int style);
 	MultiLayer* multilayerPlot(Table* w,const QStringList& colList, int style);
@@ -161,7 +160,6 @@ public slots:
 	Graph3D* newPlot3D(const QString& caption,const QString& formula, 
 					   double xl, double xr,double yl, double yr, double zl, double zr);
 	Graph3D* copySurfacePlot();
-	Graph3D* surfacePlot(const QString& name);
 	void connectSurfacePlot(Graph3D *plot);
 	void newSurfacePlot();
 	void editSurfacePlot();
@@ -600,6 +598,14 @@ public slots:
 	void switchToLanguage(const QString& locale);
 
 	bool alreadyUsedName(const QString& label);
+	bool projectHas2DPlots();
+	bool projectHas3DPlots();
+
+	//! Returns a pointer to the window named "name"
+	QWidget* window(const QString& name);
+
+	//! Returns a list with the names of all the matrices in the project
+	QStringList matrixNames();
 
 	Note* newNote(const QString& caption = QString::null);
 	Note* openNote(ApplicationWindow* app, const QStringList &flist);
@@ -739,7 +745,7 @@ public:
 	int exportID, printAllID;
 	int notes, graphs,tables, matrixes, fitNumber, ignoredLines, savingTimerId;
 	bool renameColumns, copiedLayer, strip_spaces, simplify_spaces;
-	QStringList plotWindows,tableWindows, recentProjects, plot3DWindows, matrixWindows, noteWindows;
+	QStringList recentProjects, tableWindows;
 	bool saved, showPlot3DProjection, showPlot3DLegend;
 	int plot3DResolution;
 	QStringList plot3DColors, locales;
@@ -789,7 +795,7 @@ public:
     QAction *actionDifferentiate, *actionFitLinear, *actionShowFitPolynomDialog;
     QAction *actionShowExpDecayDialog, *actionShowTwoExpDecayDialog, *actionShowExpDecay3Dialog;
     QAction *actionFitExpGrowth, *actionFitSigmoidal, *actionFitGauss, *actionFitLorentz, *actionShowFitDialog;
-    QAction *actionShowLayoutDialog, *actionShowAxisDialog, *actionShowTitleDialog;
+    QAction *actionShowCurveFormatDialog, *actionShowAxisDialog, *actionShowTitleDialog;
     QAction *actionShowColumnOptionsDialog, *actionShowColumnValuesDialog, *actionShowColsDialog, *actionShowRowsDialog;
     QAction *actionAbout, *actionShowHelp, *actionChooseHelpFolder;
     QAction *actionRename, *actionCloseWindow, *actionConvertTable;

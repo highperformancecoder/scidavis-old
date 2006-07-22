@@ -2393,7 +2393,9 @@ if (generalDialog->currentPage()==(QWidget*)scalesPage)
 			
 	if (!error)
 		{
-		d_graph->setScaleDiv(axis, scaleLimits(axis, start, end, stp, boxMajorValue->text(), boxMinorValue->text()));
+		d_graph->setAxisScale(axis, scaleLimits(axis, start, end, stp, 
+							boxMajorValue->text(), boxMinorValue->text()));
+		d_graph->emitModified();
 		d_graph->replot();
 		}
 	}

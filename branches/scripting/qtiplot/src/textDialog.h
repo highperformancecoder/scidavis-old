@@ -9,7 +9,7 @@ class QHBoxLayout;
 class QGridLayout; 
 class QComboBox;
 class QLabel;
-class QMultiLineEdit;
+class QTextEdit;
 class QPushButton;
 class QButtonGroup;
 class ColorButton;
@@ -39,7 +39,7 @@ public:
     QPushButton* buttonU;
 	QPushButton* buttonCurve;
 	QPushButton* buttonDefault;
-    QMultiLineEdit* LineEdit;
+    QTextEdit* textEditBox;
 	QButtonGroup *GroupBox1, *GroupBox2;
 	QPushButton* buttonMinGreek, *buttonMajGreek;
 	QComboBox* alignementBox;

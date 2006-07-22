@@ -137,7 +137,6 @@ public slots:
 
 	 // plot scales
 	 void setAxisScale(int axis,const QStringList& s);
-	 void setScaleDiv(int axis,const QStringList& s);
 	 QStringList plotLimits();
 	 void setScales(const QStringList& s);
 
@@ -270,6 +269,7 @@ public slots:
 	 QwtArray<long> imageMarkerKeys();
 	 void insertImageMarker(ImageMarker* mrk);
 	 void insertImageMarker(const QPixmap& photo, const QString& fileName);
+
 	 void insertImageMarker(const QStringList& lst, int fileVersion);
 	 bool imageMarkerSelected();
 	 void updateImageMarker(int x, int y, int width, int height);

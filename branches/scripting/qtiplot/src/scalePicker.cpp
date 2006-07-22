@@ -131,6 +131,9 @@ else
 QRect ScalePicker::scaleRect(const QwtScaleWidget *scale) const
 {
 QRect rect = scale->rect();
+if (scale->title().text().isEmpty())
+	return rect;
+
 int dh = scale->title().textSize().height();
 switch(scale->alignment())   
     {

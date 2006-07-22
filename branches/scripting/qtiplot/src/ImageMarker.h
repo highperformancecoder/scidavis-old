@@ -16,10 +16,10 @@ public:
 	QSize size();
 	void setSize(const QSize& size);
 	
-	void setFileName(const QString& fn){fileName=fn;};
-	QString getFileName(){return fileName;};
+	void setFileName(const QString& fn){d_fileName = fn;};
+	QString getFileName(){return d_fileName;};
 	
-	QPixmap image(){return pic;};
+	QPixmap image(){return d_pic;};
 
 	void setOrigin(const QPoint& p);
 	QPoint getOrigin();
@@ -32,9 +32,9 @@ public:
 
 private:
 	QPoint d_pos;
-	QPixmap pic;
-	QSize picSize;
-	QString fileName;
+	QPixmap d_pic;
+	QSize d_picSize;
+	QString d_fileName;
 	QwtDoubleRect d_rect;
 };
 

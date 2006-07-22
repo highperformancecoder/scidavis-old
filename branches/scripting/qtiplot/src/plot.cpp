@@ -858,8 +858,7 @@ void Grid::drawLines(QPainter *painter, const QRect &rect,
     const int x2 = rect.right() + 1;
     const int y1 = rect.top();
     const int y2 = rect.bottom() + 1;
-
-	const int margin = 20;
+	const int margin = 10;
 
     for (uint i = 0; i < (uint)values.count(); i++)
     {

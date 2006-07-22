@@ -6,9 +6,9 @@
 #include <qwt_plot_canvas.h>
 
 ImageMarker::ImageMarker(const QPixmap& p):
-    pic(p),
+    d_pic(p),
 	d_pos(QPoint(0,0)),
-	picSize(p.size())
+	d_picSize(p.size())
 {
 }
 
@@ -19,7 +19,7 @@ const int y0 = yMap.transform(d_rect.top());
 const int x1 = xMap.transform(d_rect.right());
 const int y1 = yMap.transform(d_rect.bottom());
 
-p->drawPixmap(QRect(QPoint(x0, y0), QPoint(x1, y1)), pic);
+p->drawPixmap(QRect(QPoint(x0, y0), QPoint(x1, y1)), d_pic);
 }
 
 QSize ImageMarker::size()
@@ -35,7 +35,7 @@ return QRect(topLeft, bottomRight).size();
 
 void ImageMarker::setSize(const QSize& size)
 {
-picSize = size;
+d_picSize = size;
 
 const QwtScaleMap &xMap = plot()->canvasMap(xAxis());
 const QwtScaleMap &yMap = plot()->canvasMap(yAxis());
@@ -95,6 +95,6 @@ const QwtScaleMap &yMap = plot()->canvasMap(yAxis());
 
 d_rect.moveTo(xMap.invTransform(d_pos.x()), yMap.invTransform(d_pos.y()));
 
-d_rect.setRight(xMap.invTransform(d_pos.x() + picSize.width()));
-d_rect.setBottom(yMap.invTransform(d_pos.y() + picSize.height()));
+d_rect.setRight(xMap.invTransform(d_pos.x() + d_picSize.width()));
+d_rect.setBottom(yMap.invTransform(d_pos.y() + d_picSize.height()));
 }

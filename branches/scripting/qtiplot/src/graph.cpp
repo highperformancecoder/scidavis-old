@@ -748,7 +748,7 @@ for (int i=0;i<(int)lst.count();i++)
 
 void Graph::setMajorTicksType(const QStringList& lst)
 {
-for (int i=0;i<(int)lst.count();i++)
+for (int i=0; i<(int)lst.count(); i++)
 	d_plot->setMajorTicksType(i, lst[i].toInt());
 }
 
@@ -842,6 +842,7 @@ QValueList<int> majTicksTypeList = d_plot->getMajorTicksType();
 QValueList<int> minTicksTypeList = d_plot->getMinorTicksType();
 	
 QwtScaleWidget *scale = (QwtScaleWidget *)d_plot->axisWidget(axis);
+ScaleDraw *sclDraw = (ScaleDraw *)d_plot->axisScaleDraw (axis);	
 
 if (d_plot->axisEnabled (axis) == axisOn &&
 	majTicksTypeList[axis] == majTicksType &&
@@ -853,7 +854,8 @@ if (d_plot->axisEnabled (axis) == axisOn &&
 	axisType[axis] == type &&
 	axesFormatInfo[axis] == formatInfo &&
 	axesFormulas[axis] == formula &&
-	scale->margin() == baselineDist)
+	scale->margin() == baselineDist &&
+	sclDraw->hasComponent (QwtAbstractScaleDraw::Labels) == labelsOn)
  return;
 
 scale->setMargin(baselineDist);	
@@ -865,7 +867,6 @@ if (pal.color(QPalette::Active, QColorGroup::Foreground) != c)
 	scale->setPalette(pal);
  	}
 
-ScaleDraw *sclDraw= (ScaleDraw *)d_plot->axisScaleDraw (axis);	
 if (!labelsOn)
 	sclDraw->enableComponent (QwtAbstractScaleDraw::Labels, false);
 else
@@ -1422,6 +1423,9 @@ QwtScaleWidget *scale = d_plot->axisWidget(a);
 int start = scale->startBorderDist();
 int end = scale->endBorderDist();
 
+//int start, end;
+//scale->getBorderDistHint(start, end);
+
 scale = d_plot->axisWidget(axis);
 scale->setMinBorderDist (start, end);
 }
@@ -1453,7 +1457,7 @@ int minTicks=scales[8*axis+4].toInt()+1;
 int stepOn=scales[8*axis+5].toInt();
 int scaleType=scales[8*axis+6].toInt();
 
-int a=QwtPlot::xBottom;
+int a = QwtPlot::xBottom;
 if (axis) 
 	a=QwtPlot::yLeft;
 
@@ -1486,15 +1490,9 @@ d_zoomer->setZoomBase();
 updateMarkersBoundingRect();
 }
 
-void Graph::setScaleDiv(int axis,const QStringList& s)
-{
-setAxisScale(axis, s);
-emit modifiedGraph();
-}
-
 void Graph::setScales(const QStringList& s)
 {
-for (int axis=0;axis<2;axis++)
+for (int axis=0; axis<2; axis++)
 	setAxisScale(axis, s);
 }
 
@@ -5141,6 +5139,9 @@ if (!autoscale)
 	
 updateMarkersBoundingRect();
 
+updateSecondaryAxis(QwtPlot::xTop);
+updateSecondaryAxis(QwtPlot::yRight);
+
 d_plot->replot();//TO DO: avoid 2nd replot!
 }
 
@@ -5391,11 +5392,16 @@ void Graph::insertImageMarker(const QPixmap& photo, const QString& fileName)
 {
 ImageMarker* mrk= new ImageMarker(photo);
 long mrkID=d_plot->insertMarker(mrk);
+
+int imagesOnPlot=images.size();
+images.resize(++imagesOnPlot);
+images[imagesOnPlot-1]=mrkID;
+
 mrk->setFileName(fileName);
 mrk->setOrigin(QPoint(0,0));
 	
 QSize picSize=photo.size();
-int w=d_plot->canvas()->width();
+int w = d_plot->canvas()->width();
 if (picSize.width()>w)
 	picSize.setWidth(w);
 int h=d_plot->canvas()->height();
@@ -5403,13 +5409,8 @@ if (picSize.height()>h)
 	picSize.setHeight(h);
 
 mrk->setSize(picSize);
-
 d_plot->replot();
 	
-int imagesOnPlot=images.size();
-imagesOnPlot++;
-images.resize(imagesOnPlot);
-images[imagesOnPlot-1]=mrkID;
 emit modifiedGraph();
 }
 
@@ -5826,7 +5827,6 @@ s+="AxesTitles\t"+saveScaleTitles();
 s+=saveAxesTitleColors();
 s+=saveAxesTitleAlignement();
 s+=saveFonts();
-s+=saveTicksType();
 s+="TicksLength\t"+QString::number(minorTickLength())+"\t"+
 	QString::number(majorTickLength())+"\n";
 s+=saveEnabledTickLabels();
@@ -5840,6 +5840,7 @@ s+=saveScale();
 s+=saveAxesFormulas();
 s+=saveLabelsFormat();
 s+=saveAxesLabelsType();
+s+=saveTicksType();
 s+="DrawAxesBackbone\t"+QString::number(drawAxesBackbone)+"\n";
 s+="AxesLineWidth\t"+QString::number(d_plot->axesLinewidth())+"\n";
 s+=saveMarkers();
@@ -5866,7 +5867,6 @@ s+="AxesTitles\t"+saveScaleTitles();
 s+=saveAxesTitleColors();
 s+=saveAxesTitleAlignement();
 s+=saveFonts();
-s+=saveTicksType();
 s+="TicksLength\t"+QString::number(minorTickLength())+"\t"+
 	QString::number(majorTickLength())+"\n";
 s+=saveEnabledTickLabels();
@@ -5878,6 +5878,7 @@ s+=saveScale();
 s+=saveAxesFormulas();
 s+=saveLabelsFormat();
 s+=saveAxesLabelsType();
+s+=saveTicksType();
 s+="DrawAxesBackbone\t"+QString::number(drawAxesBackbone)+"\n";
 s+="AxesLineWidth\t"+QString::number(d_plot->axesLinewidth())+"\n";
 s+=saveMarkers();
@@ -6380,8 +6381,6 @@ setCanvasBackground(plot->canvasBackground());
 
 enableAxes(g->enabledAxes());
 setAxesColors(g->axesColors());
-setMajorTicksType(g->plotWidget()->getMajorTicksType());
-setMinorTicksType(g->plotWidget()->getMinorTicksType());
 setAxesBaseline(g->axesBaseline());
 		
 setGridOptions(g->grid);
@@ -6528,6 +6527,8 @@ for (i=0; i<QwtPlot::axisCnt; i++)
 setScales(g->scales);
 
 drawAxesBackbones(g->drawAxesBackbone);
+setMajorTicksType(g->plotWidget()->getMajorTicksType());
+setMinorTicksType(g->plotWidget()->getMinorTicksType());
 
 QwtArray<long> imag = g->imageMarkerKeys();
 for (i=0;i<(int)imag.size();i++)

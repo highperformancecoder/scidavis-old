@@ -6,7 +6,7 @@
 
 #include <qcombobox.h>
 #include <qlabel.h>
-#include <qmultilineedit.h>
+#include <qtextedit.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qvariant.h>
@@ -159,15 +159,15 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
 	buttonU->setFont(font);
 	buttonU->setMaximumWidth(40);
 
-    LineEdit = new QMultiLineEdit( this, "LineEdit" );
+    textEditBox = new QTextEdit( this);
 
 	setFocusPolicy(QWidget::StrongFocus);
-	setFocusProxy(LineEdit);
+	setFocusProxy(textEditBox);
 	
 	QVBoxLayout* vlayout = new QVBoxLayout(this,5,5, "vlayout");
     vlayout->addWidget(GroupBox1);
 	vlayout->addWidget(GroupBox2);
-	vlayout->addWidget(LineEdit);
+	vlayout->addWidget(textEditBox);
 
     // signals and slots connections
 	connect( colorBox, SIGNAL( clicked() ), this, SLOT( pickTextColor() ) );
@@ -212,33 +212,33 @@ greekLetters->setActiveWindow();
 
 void TextDialog::addSymbol(const QString& letter)
 {
-LineEdit->insert(letter);
+textEditBox->insert(letter);
 }
 
 void TextDialog::addCurve()
 {
-int line=0, col=0;
-LineEdit->getCursorPosition (&line,&col);
-LineEdit->insert("\\c{}");
-LineEdit->setCursorPosition (line,col+3,FALSE);
+int para=0, index=0;
+textEditBox->getCursorPosition (&para,&index);
+textEditBox->insert("\\c{}");
+textEditBox->setCursorPosition (para, index+3);
 }
 
 void TextDialog::addUnderline()
 {
 int line=0, col=0;
-if (LineEdit->hasMarkedText())
+if (textEditBox->hasSelectedText())
 	{	
-	QString markedText=LineEdit->markedText ();
-	LineEdit->insert("<u>"+markedText);
-	LineEdit->getCursorPosition (&line,&col);
-	LineEdit->insertAt ("</u>",line,col,FALSE);
-	LineEdit->setCursorPosition (line,col,FALSE);
+	QString selectedText = textEditBox->selectedText ();
+	textEditBox->insert("<u>"+selectedText);
+	textEditBox->getCursorPosition (&line,&col);
+	textEditBox->insertAt ("</u>",line,col);
+	textEditBox->setCursorPosition (line,col);
 	}
 else
 	{	
-	LineEdit->getCursorPosition (&line,&col);
-	LineEdit->insert("<u></u>");
-	LineEdit->setCursorPosition (line,col+3,FALSE);
+	textEditBox->getCursorPosition (&line,&col);
+	textEditBox->insert("<u></u>");
+	textEditBox->setCursorPosition (line,col+3);
 	}
 }
 
@@ -246,19 +246,19 @@ void TextDialog::addItalic()
 {
 int line=0, col=0;
 
-if (LineEdit->hasMarkedText())
+if (textEditBox->hasSelectedText())
 	{	
-	QString markedText=LineEdit->markedText ();
-	LineEdit->insert("<i>"+markedText);
-	LineEdit->getCursorPosition (&line,&col);
-	LineEdit->insertAt ("</i>",line,col,FALSE);
-	LineEdit->setCursorPosition (line,col,FALSE);
+	QString selectedText=textEditBox->selectedText ();
+	textEditBox->insert("<i>"+selectedText);
+	textEditBox->getCursorPosition (&line,&col);
+	textEditBox->insertAt ("</i>",line,col);
+	textEditBox->setCursorPosition (line,col);
 	}
 else
 	{	
-	LineEdit->getCursorPosition (&line,&col);
-	LineEdit->insert("<i></i>");
-	LineEdit->setCursorPosition (line,col+3,FALSE);
+	textEditBox->getCursorPosition (&line,&col);
+	textEditBox->insert("<i></i>");
+	textEditBox->setCursorPosition (line,col+3);
 	}
 }
 
@@ -266,59 +266,59 @@ void TextDialog::addBold()
 {
 int line=0, col=0;
 	
-if (LineEdit->hasMarkedText())
+if (textEditBox->hasSelectedText())
 	{	
-	QString markedText=LineEdit->markedText ();
-	LineEdit->insert("<b>"+markedText);
-	LineEdit->getCursorPosition (&line,&col);
-	LineEdit->insertAt ("</b>",line,col,FALSE);
-	LineEdit->setCursorPosition (line,col,FALSE);
+	QString selectedText=textEditBox->selectedText ();
+	textEditBox->insert("<b>"+selectedText);
+	textEditBox->getCursorPosition (&line,&col);
+	textEditBox->insertAt ("</b>",line,col);
+	textEditBox->setCursorPosition (line,col);
 	}
 else
 	{	
-	LineEdit->getCursorPosition (&line,&col);
-	LineEdit->insert("<b></b>");
-	LineEdit->setCursorPosition (line,col+3,FALSE);
+	textEditBox->getCursorPosition (&line,&col);
+	textEditBox->insert("<b></b>");
+	textEditBox->setCursorPosition (line,col+3);
 	}
 }
 
 void TextDialog::addIndex()
 {
 int line=0, col=0;
-LineEdit->getCursorPosition (&line,&col);
+textEditBox->getCursorPosition (&line,&col);
 	
-if (LineEdit->hasMarkedText())
+if (textEditBox->hasSelectedText())
 	{	
-	QString markedText=LineEdit->markedText ();
-	LineEdit->insert("<sub>"+markedText);
-	LineEdit->getCursorPosition (&line,&col);
-	LineEdit->insertAt ("</sub>",line,col,FALSE);
-	LineEdit->setCursorPosition (line,col,FALSE);
+	QString selectedText=textEditBox->selectedText ();
+	textEditBox->insert("<sub>"+selectedText);
+	textEditBox->getCursorPosition (&line,&col);
+	textEditBox->insertAt ("</sub>",line,col);
+	textEditBox->setCursorPosition (line,col);
 	}
 else
 	{	
-	LineEdit->insert("<sub></sub>");
-	LineEdit->setCursorPosition (line,col+5,FALSE);
+	textEditBox->insert("<sub></sub>");
+	textEditBox->setCursorPosition (line,col+5);
 	}
 }
 
 void TextDialog::addExp()
 {
 int line, col;
-LineEdit->getCursorPosition (&line,&col);
+textEditBox->getCursorPosition (&line,&col);
 
-if (LineEdit->hasMarkedText())
+if (textEditBox->hasSelectedText())
 	{	
-	QString markedText=LineEdit->markedText ();
-	LineEdit->insert("<sup>"+markedText);
-	LineEdit->getCursorPosition (&line,&col);
-	LineEdit->insertAt ("</sup>",line,col,FALSE);
-	LineEdit->setCursorPosition (line,col,FALSE);
+	QString selectedText=textEditBox->selectedText ();
+	textEditBox->insert("<sup>"+selectedText);
+	textEditBox->getCursorPosition (&line,&col);
+	textEditBox->insertAt ("</sup>",line,col);
+	textEditBox->setCursorPosition (line,col);
 	}
 else
 	{	
-	LineEdit->insert("<sup></sup>");
-	LineEdit->setCursorPosition (line,col+5,FALSE);
+	textEditBox->insert("<sup></sup>");
+	textEditBox->setCursorPosition (line,col+5);
 	}
 }
 
@@ -327,11 +327,11 @@ void TextDialog::apply()
 if (text_type)
 	{
 	emit changeAlignment(alignment());
-	emit changeText(LineEdit->text());
+	emit changeText(textEditBox->text());
 	emit changeColor(colorBox->color());
 	}
 else
-	emit values(LineEdit->text(),0, backgroundBox->currentItem(), 
+	emit values(textEditBox->text(),0, backgroundBox->currentItem(), 
 				f, colorBox->color(), backgroundBtn->color());
 }
 
@@ -397,7 +397,7 @@ if (okF && fnt != f)
 	f = fnt;
 	
 	fnt.setPointSize(12);
-	LineEdit->setFont(fnt);
+	textEditBox->setFont(fnt);
 
 	emit changeFont (f);
 	}
@@ -410,7 +410,8 @@ rotateBox->setEditText(QString::number(angle));
 
 void TextDialog::setText(const QString & t)
 {
-LineEdit->insertAt (t, 0, 0, TRUE );
+textEditBox->setText (t);
+textEditBox->selectAll();
 }
 
 void TextDialog::setTextColor(QColor c)
@@ -447,7 +448,7 @@ f = fnt;
 
 QFont auxf = f;
 auxf.setPointSize(12);
-LineEdit->setFont(auxf);
+textEditBox->setFont(auxf);
 }
 
 TextDialog::~TextDialog()
