@@ -574,7 +574,7 @@ public slots:
 	 void activateGraph();
 	 void moveGraph(const QPoint& pos);
 	 void releaseGraph();
-	 void highlightGraph(){emit highlightGraph(this);};
+	 void drawFocusRect();
 
 	//vector curves
 	void plotVectorCurve(Table* w, const QStringList& colList, int style);

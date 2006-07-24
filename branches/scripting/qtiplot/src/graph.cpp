@@ -189,14 +189,14 @@ LegendMarker *mrk = new LegendMarker(d_plot);
 mrk->setOrigin(QPoint(10, 20));
 legendMarkerID = d_plot->insertMarker(mrk);
 
-connect (d_plot,SIGNAL(selectPlot()),this,SLOT(activateGraph()));
-connect (d_plot,SIGNAL(selectPlot()),this,SLOT(highlightGraph()));
+connect (d_plot,SIGNAL(selectPlot()), this, SLOT(activateGraph()));
+connect (d_plot,SIGNAL(selectPlot()), this, SLOT(drawFocusRect()));
 connect (d_plot,SIGNAL(moveGraph(const QPoint&)),this,SLOT(moveGraph(const QPoint&)));
 connect (d_plot,SIGNAL(releasedGraph()),this,SLOT(releaseGraph()));
 
 connect (cp,SIGNAL(moveGraph(const QPoint&)),this,SLOT(moveGraph(const QPoint&)));
 connect (cp,SIGNAL(releasedGraph()),this,SLOT(releaseGraph()));
-connect (cp,SIGNAL(highlightGraph()),this,SLOT(highlightGraph()));
+connect (cp,SIGNAL(highlightGraph()),this, SLOT(drawFocusRect()));
 connect (cp,SIGNAL(selectPlot()),this,SLOT(activateGraph()));
 connect (cp,SIGNAL(drawTextOff()),this,SIGNAL(drawTextOff()));
 connect (cp,SIGNAL(viewImageDialog()),this,SIGNAL(viewImageDialog()));
@@ -210,7 +210,7 @@ connect (cp,SIGNAL(modified()), this, SIGNAL(modifiedGraph()));
 connect (cp,SIGNAL(calculateProfile(const QPoint&, const QPoint&)),
 		 this,SLOT(calculateLineProfile(const QPoint&, const QPoint&)));
 
-connect (titlePicker,SIGNAL(highlightGraph()),this,SLOT(highlightGraph()));
+connect (titlePicker,SIGNAL(highlightGraph()), this, SLOT(drawFocusRect()));
 connect (titlePicker,SIGNAL(showTitleMenu()),this,SLOT(showTitleContextMenu()));
 connect (titlePicker,SIGNAL(doubleClicked()),this,SIGNAL(viewTitleDialog()));
 connect (titlePicker,SIGNAL(removeTitle()),this,SLOT(removeTitle()));
@@ -218,7 +218,7 @@ connect (titlePicker,SIGNAL(clicked()), this,SLOT(selectTitle()));
 connect (titlePicker,SIGNAL(moveGraph(const QPoint&)),this,SLOT(moveGraph(const QPoint&)));
 connect (titlePicker,SIGNAL(releasedGraph()),this,SLOT(releaseGraph()));
 
-connect (scalePicker,SIGNAL(highlightGraph()),this,SLOT(highlightGraph()));
+connect (scalePicker,SIGNAL(highlightGraph()),this, SLOT(drawFocusRect()));
 connect (scalePicker,SIGNAL(clicked()),this,SLOT(activateGraph()));
 connect (scalePicker,SIGNAL(clicked()),this,SLOT(deselectMarker()));
 connect (scalePicker,SIGNAL(axisDblClicked(int)),this,SIGNAL(axisDblClicked(int)));
@@ -232,6 +232,14 @@ connect (scalePicker,SIGNAL(moveGraph(const QPoint&)),this,SLOT(moveGraph(const 
 connect (scalePicker,SIGNAL(releasedGraph()),this, SLOT(releaseGraph()));
 
 connect (d_zoomer,SIGNAL(zoomed (const QwtDoubleRect &)),this,SLOT(zoomed (const QwtDoubleRect &)));
+}
+
+void Graph::drawFocusRect()
+{
+if (translateOn || pickerEnabled)
+	return;
+
+emit highlightGraph(this);
 }
 
 void Graph::customLegend()
@@ -1859,7 +1867,7 @@ d_plot->canvas()->setCursor(Qt::arrowCursor);
 
 void Graph::showPlotPicker(bool on)
 {
-pickerEnabled=on;
+pickerEnabled = on;
 QCursor cursor=QCursor (QPixmap(cursor_xpm),-1,-1);
 if (on)
 	d_plot->canvas()->setCursor(cursor);

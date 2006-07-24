@@ -104,7 +104,7 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 					emit highlightGraph();
 				}
 							
-			emit selectPlot();			
+			emit selectPlot();	
 
 			xMouse=me->pos().x();
 			yMouse=me->pos().y();
@@ -168,7 +168,7 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 					plot()->startCurveTranslation();
 				else
 					plot()->translateCurveTo(me->pos());
-				return false;
+				return true;
 				}
 
 			if (plot()->selectPeaksOn() && pointSelected && pickerActivated)

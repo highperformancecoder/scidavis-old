@@ -8442,7 +8442,12 @@ if (!t)
 QPopupMenu cm(this);
 if (selection)
 	{
-	if (t->singleRowSelected())
+	if ((int)t->selectedColumns().count() > 0) 
+		{
+ 		showColMenu(t->firstSelectedColumn());
+ 		return;
+		}
+	else if (t->singleRowSelected())
 		{
 		cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), t, SLOT(cutSelection()));
 		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
@@ -8464,11 +8469,6 @@ if (selection)
 		cm.insertItem(QPixmap(erase_xpm),tr("Clea&r Rows"), t, SLOT(clearSelection()));
 		cm.insertSeparator();
 		actionShowRowStatistics->addTo(&cm);
-		}
-	else if ((int)t->selectedColumns().count() > 0) 
-		{
- 		showColMenu(t->firstSelectedColumn());
- 		return;
 		}
 	else
 		{

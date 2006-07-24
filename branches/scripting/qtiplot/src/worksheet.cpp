@@ -79,8 +79,9 @@ for (int i=0; i<cols; i++)
 	}
 
 QHeader* head=(QHeader*)worksheet->horizontalHeader();
+head->setMouseTracking(true);
+head->setResizeEnabled(true);
 head->installEventFilter(this);
-head->setMouseTracking(TRUE);
 
 col_plot_type[0] = X;
 setHeaderColType();
@@ -2793,80 +2794,71 @@ else
 	}
 }
 
+void Table::mouseMoveEvent ( QMouseEvent * e )
+{
+QHeader *header = worksheet->horizontalHeader();
+int offset = header->offset();
+selectedCol = header->sectionAt (e->pos().x() + offset);
+
+if(selectedCol != lastSelectedCol)
+	{//This means that we are in the next column
+	if(worksheet->isColumnSelected(selectedCol,TRUE))
+		{//Since this column is selected, deselect it
+		worksheet->removeSelection(QTableSelection (0,lastSelectedCol,
+				worksheet->numRows()-1,lastSelectedCol));
+		}
+	else
+		worksheet->selectColumn (selectedCol);
+	}
+lastSelectedCol=selectedCol;
+worksheet->setCurrentCell (0, selectedCol);
+}
+
+void Table::mousePressEvent ( QMouseEvent * e )
+{
+if (e->button() == QMouseEvent::LeftButton)	
+	{				
+	if (e->state ()==Qt::ControlButton)
+		{
+		int current=worksheet->currentSelection();
+		QTableSelection sel=worksheet->selection(current);
+		if (sel.topRow() != 0 || sel.bottomRow() != (worksheet->numRows() - 1))
+			//select only full columns
+			worksheet->removeSelection(sel);						
+		}
+	else
+		worksheet->clearSelection();
+		
+	QHeader *header = worksheet->horizontalHeader();
+	int offset = header->offset();
+
+	selectedCol=header->sectionAt (e->pos().x()+offset);
+	lastSelectedCol=selectedCol;
+	worksheet->selectColumn (selectedCol);
+	worksheet->setCurrentCell (0, selectedCol);
+	}			
+}
+
 bool Table::eventFilter(QObject *object, QEvent *e)
 {
 QHeader *header = worksheet->horizontalHeader();
 if (object != (QObject *)header)
 	return FALSE;
 
-int offset = header->offset();
-switch(e->type())
+if (e->type() == QEvent::MouseButtonDblClick)
     {
-        case QEvent::MouseButtonDblClick:
-			{
-            const QMouseEvent *me = (const QMouseEvent *)e;
-			selectedCol = header->sectionAt (me->pos().x()+offset);
-			emit optionsDialog();			
-			return TRUE; 
-			}
+    const QMouseEvent *me = (const QMouseEvent *)e;
+	selectedCol = header->sectionAt (me->pos().x() + header->offset());
 
-		case QEvent::MouseButtonPress:
-			{
-			const QMouseEvent *me = (const QMouseEvent *)e;	
-			if (me->button() == QMouseEvent::LeftButton)	
-				{
-				LeftButton=TRUE;
-				const QMouseEvent *me = (const QMouseEvent *)e;
-				
-				if (((const QMouseEvent *)e)->state ()==Qt::ControlButton)
-					{
-					int current=worksheet->currentSelection();
-					QTableSelection sel=worksheet->selection(current);
-					if (sel.topRow() != 0 || sel.bottomRow() != (worksheet->numRows() - 1))
-						//select only full columns
-						worksheet->removeSelection(sel);						
-					}
-				else
-					worksheet->clearSelection();
-				
-				selectedCol=header->sectionAt (me->pos().x()+offset);
-				lastSelectedCol=selectedCol;
-				worksheet->selectColumn (selectedCol);
-				worksheet->setCurrentCell (0, selectedCol);
-				}		
-			return TRUE; 
-			}
-		
-		case QEvent::MouseMove:
-			{
-			if(LeftButton)
-				{
-				const QMouseEvent *me = (const QMouseEvent *)e;
-				selectedCol=header->sectionAt (me->pos().x() + offset);
+	QRect rect = header->sectionRect (selectedCol);
+	rect.setLeft(rect.right() - 2);
+	rect.setWidth(4);
 
-				if(selectedCol != lastSelectedCol)
-					{// This means that we are in the next column
-					if(worksheet->isColumnSelected(selectedCol,TRUE))
-						{//Since this column is selected, deselect it
-						worksheet->removeSelection(QTableSelection (0,lastSelectedCol,worksheet->numRows()-1,lastSelectedCol));
-						}
-					else
-						worksheet->selectColumn (selectedCol);
-					}
-				lastSelectedCol=selectedCol;
-				worksheet->setCurrentCell (0, selectedCol);
-				}
-			return TRUE;
-			}
-			
-		case QEvent::MouseButtonRelease:
-			{
-			LeftButton=FALSE;
-			return TRUE;
-			}
-			
-		default:
-				;
+	if (rect.contains (me->pos()))
+		worksheet->adjustColumn(selectedCol);
+	else
+		emit optionsDialog();
+	return true;
     }
 return QObject::eventFilter(object, e);
 }
