@@ -432,10 +432,15 @@ void ApplicationWindow::initToolBars()
 	btnPointer->setOn(TRUE);
 	btnPointer->addTo(plotTools);
 
-	btnZoom = new QAction(tr("&Zoom"), tr("ALT+Z"), dataTools, "btnZoom" );
-    btnZoom->setToggleAction( TRUE );
-    btnZoom->setIconSet(QPixmap(zoom_xpm) );
-	btnZoom->addTo(plotTools);
+	btnZoomIn = new QAction(tr("&Zoom"), tr("ALT+Z"), dataTools, "btnZoomIn" );
+    btnZoomIn->setToggleAction( TRUE );
+    btnZoomIn->setIconSet(QPixmap(zoom_xpm) );
+	btnZoomIn->addTo(plotTools);
+
+	btnZoomOut = new QAction(tr("Zoom &Out"), tr("Ctrl+-"), dataTools);
+    btnZoomOut->setToggleAction( TRUE );
+    btnZoomOut->setIconSet(QPixmap(zoomOut_xpm));
+	btnZoomOut->addTo(plotTools);
 
     btnCursor = new QAction(tr("&Data reader"), tr("CTRL+D"), dataTools, "btnCursor" );
     btnCursor->setToggleAction( TRUE );
@@ -856,7 +861,8 @@ void ApplicationWindow::initPlotDataMenu()
 	plotDataMenu->setCheckable(TRUE);
 
 	btnPointer->addTo(plotDataMenu);
-	btnZoom->addTo(plotDataMenu);
+	btnZoomIn->addTo(plotDataMenu);
+	btnZoomOut->addTo(plotDataMenu);
 	actionUnzoom->addTo(plotDataMenu);
 	plotDataMenu->insertSeparator();
 
@@ -6031,7 +6037,7 @@ if (w->isA("MultiLayer"))
 	}
 }
 
-void ApplicationWindow::zoom()
+void ApplicationWindow::zoomIn()
 {
 if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
 	return;
@@ -6048,7 +6054,7 @@ if (plot->isEmpty())
 
 if ((Graph*)plot->activeGraph()->isPiePlot())
 	{
-	if (btnZoom->isOn())
+	if (btnZoomIn->isOn())
 			QMessageBox::warning(this,tr("QtiPlot - Warning"),
 				tr("This functionality is not available for pie plots!"));
 	btnPointer->setOn(true);
@@ -6063,7 +6069,38 @@ for (Graph* g = (Graph*)graphsList->first(); g; g = (Graph*)graphsList->next())
 	}
 }
 
-void ApplicationWindow::unzoom()
+void ApplicationWindow::zoomOut()
+{
+if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
+	return;
+
+MultiLayer* plot = (MultiLayer*)ws->activeWindow();	
+if (plot->isEmpty())
+	{
+	QMessageBox::warning(this,tr("QtiPlot - Warning"),
+				tr("<h4>There are no plot layers available in this window.</h4>"
+					  "<p><h4>Please add a layer and try again!</h4>"));
+	return;
+	}
+
+if ((Graph*)plot->activeGraph()->isPiePlot())
+	{
+	if (btnZoomIn->isOn())
+			QMessageBox::warning(this,tr("QtiPlot - Warning"),
+				tr("This functionality is not available for pie plots!"));
+	return;
+	}
+
+QWidgetList *graphsList=plot->graphPtrs();
+for (Graph* g = (Graph*)graphsList->first(); g; g = (Graph*)graphsList->next())
+	{
+	if (!g->isPiePlot())
+		g->zoomOut();
+	}
+btnPointer->setOn(true);
+}
+
+void ApplicationWindow::setAutoScale()
 {
 if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
 	return;
@@ -10275,8 +10312,10 @@ else if (action == btnMovePoints)
 	movePoints();
 else if (action == btnRemovePoints)
 	removePoints();
-else if (action == btnZoom)
-	zoom();
+else if (action == btnZoomIn)
+	zoomIn();
+else if (action == btnZoomOut)
+	zoomOut();
 else if (action == btnArrow)
 	drawArrow();
 else if (action == btnLine)
@@ -10553,7 +10592,7 @@ void ApplicationWindow::createActions()
   connect(actionAddFunctionCurve, SIGNAL(activated()), this, SLOT(addFunctionCurve()));
 
   actionUnzoom = new QAction(QPixmap(unzoom_xpm), tr("&Rescale to show all"), tr("Ctrl+Shift+R"), this);
-  connect(actionUnzoom, SIGNAL(activated()), this, SLOT(unzoom()));
+  connect(actionUnzoom, SIGNAL(activated()), this, SLOT(setAutoScale()));
 
   actionNewLegend = new QAction(QPixmap(legend_xpm), tr("New &Legend"), tr("Ctrl+L"), this);
   connect(actionNewLegend, SIGNAL(activated()), this, SLOT(newLegend()));
@@ -11231,9 +11270,13 @@ void ApplicationWindow::translateActionsStrings()
   	btnPointer->setMenuText(tr("Disable &tools"));
 	btnPointer->setToolTip( tr( "Pointer" ) );
 
-	btnZoom->setMenuText(tr("&Zoom"));
-	btnZoom->setAccel(tr("ALT+Z"));
-	btnZoom->setToolTip(tr("Zoom"));
+	btnZoomIn->setMenuText(tr("&Zoom"));
+	btnZoomIn->setAccel(tr("ALT+Z"));
+	btnZoomIn->setToolTip(tr("Zoom"));
+
+	btnZoomOut->setMenuText(tr("&Zoom Out"));
+	btnZoomOut->setAccel(tr("Ctrl+-"));
+	btnZoomOut->setToolTip(tr("Zoom Out"));
 
     btnCursor->setMenuText(tr("&Data reader"));
 	btnCursor->setAccel(tr("CTRL+D"));

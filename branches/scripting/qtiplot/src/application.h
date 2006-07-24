@@ -71,7 +71,7 @@ public:
 
 	QActionGroup* dataTools;
 	QAction *btnCursor, *btnSelect, *btnPicker, *btnRemovePoints, *btnMovePoints;
-	QAction  *btnZoom, *btnPointer, *btnLine, *btnArrow;
+	QAction  *btnZoomIn, *btnZoomOut, *btnPointer, *btnLine, *btnArrow;
 	
 	QActionGroup* coord;
 	QAction* Box;
@@ -420,8 +420,9 @@ public slots:
 	void addText();
 	void disableAddText();
 	void addImage();
-	void zoom();
-	void unzoom();
+	void zoomIn();
+	void zoomOut();
+	void setAutoScale();
 	void showRangeSelectors();	
 	void showCursor();
 	void showScreenReader();

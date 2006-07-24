@@ -151,6 +151,7 @@ public slots:
 	// zoom
 	 void zoomed (const QwtDoubleRect &rect);
 	 void zoom(bool on);
+	 void zoomOut();
 	 bool zoomOn();
 	 
 	 void movedPicker(const QPoint &pos, bool mark);

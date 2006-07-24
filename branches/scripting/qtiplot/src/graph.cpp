@@ -5316,9 +5316,7 @@ return d_zoomer->isEnabled();
 }
 
 void Graph::zoomed (const QwtDoubleRect &rect)
-{
-d_zoomer->setZoomBase (rect);
-	
+{	
 int prec;
 char f;
 d_plot->axisLabelFormat(QwtPlot::xBottom, f, prec);
@@ -5369,6 +5367,11 @@ if (on)
 	d_plot->canvas()->setCursor(cursor);
 else 
 	d_plot->canvas()->setCursor(Qt::arrowCursor);
+}
+
+void Graph::zoomOut()
+{
+d_zoomer->zoom(-1);
 }
 
 void Graph::drawText(bool on)
