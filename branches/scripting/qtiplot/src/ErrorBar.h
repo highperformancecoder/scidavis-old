@@ -17,10 +17,10 @@ public:
 	QwtDoubleRect boundingRect() const;
 
 	virtual void draw(QPainter *painter,const QwtScaleMap &xMap, 
-		const QwtScaleMap &yMap, int from, int to);
+		const QwtScaleMap &yMap, int from, int to) const;
 
 	virtual void drawErrorBars(QPainter *painter, const QwtScaleMap &xMap, 
-		const QwtScaleMap &yMap, int from, int to);
+		const QwtScaleMap &yMap, int from, int to) const;
 
 	QwtArray<double> errors();
 	void setErrors(const QwtArray<double>&data);
@@ -50,12 +50,19 @@ public:
 	bool minusSide();
 	void drawMinusSide(bool yes);
 
+	double xDataOffset() const;
+	void setXDataOffset(double offset){d_xOffset = offset;};
+
+	double yDataOffset() const;
+	void setYDataOffset(double offset){d_yOffset = offset;};
+
 private:
     QwtArray<double> err;
 	QPen pen;
 	QSize size;
 	int type, cap;
 	bool plus, minus, through;
+	double d_xOffset, d_yOffset;
 };
 
 #endif

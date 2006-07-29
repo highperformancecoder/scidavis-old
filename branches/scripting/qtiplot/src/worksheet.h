@@ -15,7 +15,7 @@ class Table: public myWidget
     Q_OBJECT
 
 public:
-	enum PlotDesignation{All = -1, None = 0, X = 1, Y = 2, Z = 3};
+	enum PlotDesignation{All = -1, None = 0, X = 1, Y = 2, Z = 3, xErr = 4, yErr = 5};
 	enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5};
 
    	Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
@@ -102,7 +102,7 @@ public slots:
 	void clearCol();
 	void insertCol();
 	void insertCols(int start, int count);
-	void addCol();
+	void addCol(PlotDesignation pd = Y);
 	void addColumns(int c);
 	
 	//sorting
@@ -130,11 +130,7 @@ public slots:
 	bool noXColumn();
 	bool noYColumn();
 	int colX(int col);
-	void setXCol();	
 	int colY(int col);
-	void setYCol();
-	void setZCol();
-	void disregardCol();
 
 	int atRow(int col, double value);
 	void showColStatistics();

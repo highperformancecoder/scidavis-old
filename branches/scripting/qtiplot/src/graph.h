@@ -80,7 +80,6 @@ public slots:
 	void updateBoxData(Table* w, const QString& yColName, int curve);
 	 
 	 int curves(){return n_curves;};
-	 int curveDataSize(int curve);
 	 bool validCurvesDataSize();
 	 double selectedXStartValue();
 	 double selectedXEndValue();
@@ -120,7 +119,7 @@ public slots:
 	 void addErrorBars(Table *w, const QString& xColName, const QString& yColName, 
 					   Table *errTable, const QString& errColName,
 					   int type, int width, int cap, const QColor& color,
-					   bool through, bool minus,bool plus);
+					   bool through, bool minus,bool plus, double xOffset = 0, double yOffset = 0);
 	
 	 void addErrorBars(Table *w, const QString& yColName, 
 						 Table *errTable, const QString& errColName,
@@ -130,6 +129,9 @@ public slots:
 	 void updateErrorBarsData(Table* w, int curve);
 	 void updateErrorBars(int curve,bool xErr,int width,int cap,
 		          const QColor& c,bool plus,bool minus,bool through);
+
+	 //! Called when a bar curve associated to an error bars curve curve is deleted
+	 void resetErrorBarsOffset(int index);
 				  
 	 // event handlers 
 	 void contextMenuEvent(QContextMenuEvent *);
@@ -189,7 +191,7 @@ public slots:
 	 void drawText(bool on);
 	 bool drawTextActive(){return drawTextOn;};
 	 
-	 void insertTextMarker(LegendMarker* mrk);
+	 long insertTextMarker(LegendMarker* mrk);
 
 	 //! Used when opening a project file
 	 long insertTextMarker(const QStringList& list, int fileVersion);
@@ -564,12 +566,10 @@ public slots:
 	 void showIntensityTable();
 	 
 	 //user defined functions
-	 void modifyFunctionCurve(int curve, QString& type,QStringList &formulas,QStringList &vars,QValueList<double> &ranges,QValueList<int> &points);
-	 void addFunctionCurve(QString& type,QStringList &formulas,QStringList &vars,QValueList<double> &ranges,QValueList<int> &points);	 
+	 void modifyFunctionCurve(int curve, int type, const QStringList &formulas, const QString &var,QValueList<double> &ranges, int points);
+	 void addFunctionCurve(int type, const QStringList &formulas, const QString& var,QValueList<double> &ranges, int points);	 
 	 //when reading from file
 	 void insertFunctionCurve(const QString& formula, double from, double to, int points);
-	 //for versions <0.4.3
-	 void insertOldFunctionCurve(const QString& formula, double from, double step, int points);
 
 	 void createWorksheet(const QString& name);
 	 void activateGraph();
@@ -709,7 +709,7 @@ private:
 	int auxMrkAngle,auxMrkBkg,auxMrkWidth, averagePixels;
 	int auxArrowHeadLength, auxArrowHeadAngle;
 	int translationDirection;
-	long selectedMarker,legendMarkerID, startID, endID, functions;
+	long selectedMarker,legendMarkerID, startID, endID;
 	long mrkX,mrkY;//x=0 et y=0 line markers keys
 	bool startArrowOn, endArrowOn, drawTextOn, drawLineOn, drawArrowOn;
 	

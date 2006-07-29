@@ -289,7 +289,7 @@ init();
 
 void ColorButton::init()
 {
-int btn_size = 32;
+btn_size = 32;
 selectButton = new QPushButton(QPixmap(palette_xpm), QString::null, this, 0);
 selectButton->setMaximumWidth(btn_size);
 selectButton->setMaximumHeight(btn_size);
@@ -320,4 +320,9 @@ display->setPaletteBackgroundColor ( c ) ;
 QColor ColorButton::color() const
 {
 return display->paletteBackgroundColor();
+}
+
+QSize ColorButton::sizeHint () const
+{
+return QSize(3*btn_size, btn_size);
 }

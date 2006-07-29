@@ -1,6 +1,7 @@
 #include "functionDialog.h"
 #include "parser.h"
 #include "application.h"
+#include "FunctionCurve.h"
 
 #include <qvariant.h>
 #include <qpushbutton.h>
@@ -28,68 +29,50 @@ fDialog::fDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
 	graph = 0;
 }
 
-void fDialog::setCurveToModify(const QString& s, int curve)
+void fDialog::setCurveToModify(Graph *g, int curve)
 {
+if (!g)
+	return;
+
+graph = g;
+
+FunctionCurve *c = (FunctionCurve *)graph->curve(curve);
+if (!c)
+	return;
+
 curveID = curve;
 
-int equations = s.contains("=");
-if (equations == 1)
+QStringList formulas = c->formulas();
+if (c->functionType() == FunctionCurve::Normal)
 	{
-	uint pos = s.find("=", 0);
-	QString eq = s;
-	eq.remove(0, pos+1);
-
-	QStringList lst = QStringList::split(",", eq, false);
-	boxFunction->setCurrentText(lst[0]);
-	boxFrom->setText(lst[2]);
-	boxTo->setText(lst[3]);
-	boxPoints->setValue(graph->curveDataSize(curve));
+	boxFunction->setCurrentText(formulas[0]);
+	boxFrom->setText(QString::number(c->startRange(), 'g', 15));
+	boxTo->setText(QString::number(c->endRange(), 'g', 15));
+	boxPoints->setValue(c->dataSize());
 	}
-else if (equations == 2 && s.contains("Theta"))
+else if (c->functionType() == FunctionCurve::Polar)
 	{
 	optionStack->raiseWidget(2);
 	boxType->setCurrentItem(2);
 
-	uint pos = s.find(",", 0);
-	QString eq1 = s.left(pos);
-	uint pos2 = eq1.find("=", 0);
-	eq1.remove(0, pos2+1);
-	boxPolarRadius->setCurrentText(eq1);
-
-	QString eq2 = s;
-	eq2.remove(0, pos+1);
-	pos2 = eq2.find("=", 0);
-	eq2.remove(0, pos2+1);
-
-	QStringList lst = QStringList::split(",", eq2, false);
-	boxPolarTheta->setCurrentText(lst[0]);
-	boxPolarParameter->setText(lst[1]);
-	boxPolarFrom->setText(lst[2]);
-	boxPolarTo->setText(lst[3]);
-	boxPolarPoints->setValue(graph->curveDataSize(curve));
+	boxPolarRadius->setCurrentText(formulas[0]);
+	boxPolarTheta->setCurrentText(formulas[1]);
+	boxPolarParameter->setText(c->variable());
+	boxPolarFrom->setText(QString::number(c->startRange(), 'g', 15));
+	boxPolarTo->setText(QString::number(c->endRange(), 'g', 15));
+	boxPolarPoints->setValue(c->dataSize());
 	}
-else if (equations == 2 && !s.contains("Theta"))
+else if (c->functionType() == FunctionCurve::Parametric)
 	{
 	boxType->setCurrentItem(1);
 	optionStack->raiseWidget(1);
 
-	uint pos = s.find(",", 0);
-	QString eq1 = s.left(pos);
-	uint pos2 = eq1.find("=", 0);
-	eq1.remove(0, pos2+1);
-	boxXFunction->setCurrentText(eq1);
-
-	QString eq2 = s;
-	eq2.remove(0, pos+1);
-	pos2 = eq2.find("=", 0);
-	eq2.remove(0, pos2+1);
-
-	QStringList lst = QStringList::split(",", eq2, false);
-	boxYFunction->setCurrentText(lst[0]);
-	boxParameter->setText(lst[1]);
-	boxParFrom->setText(lst[2]);
-	boxParTo->setText(lst[3]);
-	boxParPoints->setValue(graph->curveDataSize(curve));
+	boxXFunction->setCurrentText(formulas[0]);
+	boxYFunction->setCurrentText(formulas[1]);
+	boxParameter->setText(c->variable());
+	boxParFrom->setText(QString::number(c->startRange(), 'g', 15));
+	boxParTo->setText(QString::number(c->endRange(), 'g', 15));
+	boxParPoints->setValue(c->dataSize());
 	}
 }
 
@@ -180,26 +163,22 @@ if (start>=end)
 		}	
 
 	// Collecting all the information
-	QString type=QString("Function");
+	int type = boxType->currentItem();
 	QStringList formulas;
-	QStringList variables;	
 	QValueList<double> ranges;
-	QValueList<int> varpoints;
 	formulas+=formula;
-	variables+="x";
 	ranges+=start;
 	ranges+=end;
-	varpoints[0]=boxPoints->value();
 	if (!error)
 		{
 		if (!graph)
-			emit newFunctionPlot(type,formulas,variables,ranges,varpoints);
+			emit newFunctionPlot(type, formulas, "x", ranges, boxPoints->value());
 		else
 			{
 			if (curveID >= 0)
-				graph->modifyFunctionCurve(curveID, type,formulas,variables,ranges,varpoints);
+				graph->modifyFunctionCurve(curveID, type, formulas, "x", ranges, boxPoints->value());
 			else
-				graph->addFunctionCurve(type,formulas,variables,ranges,varpoints);
+				graph->addFunctionCurve(type,formulas, "x", ranges, boxPoints->value());
 
 			ApplicationWindow *app = (ApplicationWindow *)this->parent();
 			app->updateFunctionLists(type,formulas);
@@ -289,27 +268,23 @@ if (start>=end)
 		error=TRUE;	
 		}
 	// Collecting all the information
-	QString type=QString("Parametric plot");
+	int type = boxType->currentItem();
 	QStringList formulas;
-	QStringList variables;	
 	QValueList<double> ranges;
-	QValueList<int> varpoints;
 	formulas+=xformula;
 	formulas+=yformula;
-	variables+=boxParameter->text();
 	ranges+=start;
 	ranges+=end;
-	varpoints[0]=boxParPoints->value();
 	if (!error)
 		{
 		if (!graph)
-			emit newFunctionPlot(type,formulas,variables,ranges,varpoints);
+			emit newFunctionPlot(type, formulas, boxParameter->text(),ranges, boxParPoints->value());
 		else
 			{
 			if (curveID >= 0)
-				graph->modifyFunctionCurve(curveID, type,formulas,variables,ranges,varpoints);
+				graph->modifyFunctionCurve(curveID, type, formulas, boxParameter->text(),ranges, boxParPoints->value());
 			else
-				graph->addFunctionCurve(type,formulas,variables,ranges,varpoints);
+				graph->addFunctionCurve(type,formulas, boxParameter->text(),ranges, boxParPoints->value());
 
 			ApplicationWindow *app = (ApplicationWindow *)this->parent();
 			app->updateFunctionLists(type,formulas);
@@ -399,30 +374,26 @@ if (start>=end)
 		error=TRUE;	
 		}
 	// Collecting all the information
-	QString type=QString("Polar plot");
+	int type = boxType->currentItem();
 	QStringList formulas;
-	QStringList variables;	
 	QValueList<double> ranges;
-	QValueList<int> varpoints;
 	formulas+=rformula;
 	formulas+=tformula;
-	variables+=boxPolarParameter->text();
 	ranges+=start;
 	ranges+=end;
-	varpoints[0]=boxPolarPoints->value();
 	if (!error)
 		{
+		ApplicationWindow *app = (ApplicationWindow *)this->parent();
+		app->updateFunctionLists(type,formulas);
+
 		if (!graph)
-			emit newFunctionPlot(type,formulas,variables,ranges,varpoints);
+			emit newFunctionPlot(type, formulas, boxParameter->text(),ranges, boxPolarPoints->value());
 		else
 			{
 			if (curveID >= 0)
-				graph->modifyFunctionCurve(curveID, type,formulas,variables,ranges,varpoints);
+				graph->modifyFunctionCurve(curveID, type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
 			else
-				graph->addFunctionCurve(type,formulas,variables,ranges,varpoints);
-
-			ApplicationWindow *app = (ApplicationWindow *)this->parent();
-			app->updateFunctionLists(type,formulas);
+				graph->addFunctionCurve(type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
 			}
 		close();
 		}

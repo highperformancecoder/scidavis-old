@@ -262,46 +262,6 @@ for(i=col+1; i<(int)worksheet->numCols(); i++)
 return yCol;
 }
 
-void Table::setXCol()
-{
-if (col_plot_type[selectedCol] == X)
-	return;
-	
-col_plot_type[selectedCol] = X;
-setHeaderColType();
-emit modifiedWindow(this);
-}
-
-void Table::disregardCol()
-{
-if (col_plot_type[selectedCol] == None)
-	return;
-
-col_plot_type[selectedCol] = None;
-setHeaderColType();
-emit modifiedWindow(this);
-}
-
-void Table::setYCol()
-{
-if (col_plot_type[selectedCol] == Y)
-	return;
-
-col_plot_type[selectedCol] = Y;
-setHeaderColType();
-emit modifiedWindow(this);
-}
-
-void Table::setZCol()
-{
-if (col_plot_type[selectedCol] == Z)
-	return;
-
-col_plot_type[selectedCol] = Z;
-setHeaderColType();
-emit modifiedWindow(this);
-}
-
 void Table::setPlotDesignation(PlotDesignation pd)
 {
 QStringList list=selectedColumns();
@@ -530,6 +490,10 @@ for (int j=0; j<worksheet->numCols(); j++)
 		s+= colLabel(j) + "[Y]\t";
 	else if (col_plot_type[j] == Z)
 		s+= colLabel(j) + "[Z]\t";
+	else if (col_plot_type[j] == xErr)
+		s+= colLabel(j) + "[xEr]\t";
+	else if (col_plot_type[j] == yErr)
+		s+= colLabel(j) + "[yEr]\t";
 	else
 		s+= colLabel(j) + "\t";
 	}
@@ -803,27 +767,20 @@ if (worksheet->isRowSelected (cr, true))
 	}
 }
 
-void Table::addCol()
+void Table::addCol(PlotDesignation pd)
 {
 worksheet->clearSelection();
-int index,max=0, cols=worksheet->numCols(), xcols = 0;
+int index, max=0, cols=worksheet->numCols();
 for (int i=0; i<cols; i++)
 	{
 	if (!col_label[i].contains(QRegExp ("\\D")))
 		{
-		index=col_label[i].toInt();
-		if (index>max) 
-			max=index;
+		index = col_label[i].toInt();
+		if (index > max) 
+			max = index;
 		}
-	if (col_plot_type[i] == X)
-		xcols++;
 	}
 worksheet->insertColumns(cols,1);
-if (xcols>1)
-	worksheet->horizontalHeader()->setLabel (cols,QString::number(max+1)+"[Y"+QString::number(xcols)+"]",-1);
-else
-	worksheet->horizontalHeader()->setLabel (cols,QString::number(max+1)+"[Y]",-1);
-
 worksheet->ensureCellVisible ( 0, cols );
 	
 comments << QString::null;
@@ -831,8 +788,9 @@ commandes<<"";
 colTypes<<Numeric;
 col_format<<"0/6";
 col_label<< QString::number(max+1);
-col_plot_type << Y;
+col_plot_type << pd;
 
+setHeaderColType();
 emit modifiedWindow(this);
 }
 
@@ -1968,6 +1926,16 @@ for (int i=0;i<(int)worksheet->numCols();i++)
 		col_label[i]=s.remove("[Z]");
 		col_plot_type[i] = Z;
 		}
+	else if (s.contains("[xEr]"))
+		{
+		col_label[i]=s.remove("[xEr]");
+		col_plot_type[i] = xErr;
+		}
+	else if (s.contains("[yEr]"))
+		{
+		col_label[i]=s.remove("[yEr]");
+		col_plot_type[i] = yErr;
+		}
 	else
 		{
 		col_label[i]=s;
@@ -2011,6 +1979,10 @@ if (xcols>1)
 			head->setLabel(i, col_label[i]+"[Y"+ QString::number(xcols) +"]", -1);
 		else if (col_plot_type[i] == Z)
 			head->setLabel(i, col_label[i]+"[Z"+ QString::number(xcols) +"]", -1);
+		else if (col_plot_type[i] == xErr)
+			head->setLabel(i, col_label[i]+"[xEr]", -1);
+		else if (col_plot_type[i] == yErr)
+			head->setLabel(i, col_label[i]+"[yEr]", -1);
 		else
 			head->setLabel(i, col_label[i], -1);
 		}
@@ -2025,6 +1997,10 @@ else
 			head->setLabel(i, col_label[i]+"[Y]", -1);
 		else if (col_plot_type[i] == Z)
 			head->setLabel(i, col_label[i]+"[Z]", -1);
+		else if (col_plot_type[i] == xErr)
+			head->setLabel(i, col_label[i]+"[xEr]", -1);
+		else if (col_plot_type[i] == yErr)
+			head->setLabel(i, col_label[i]+"[yEr]", -1);
 		else
 			head->setLabel(i, col_label[i], -1);
 		}
@@ -3113,6 +3089,8 @@ if (!col_label.isEmpty() && col_label != list)
 	list.gres("[X]","");
 	list.gres("[Y]","");
 	list.gres("[Z]","");
+	list.gres("[xEr]","");
+	list.gres("[yEr]","");
 
 	for (j=0;j<c;j++)
 		{

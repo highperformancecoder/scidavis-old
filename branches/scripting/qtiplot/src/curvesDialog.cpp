@@ -419,7 +419,7 @@ close();
 
 void curvesDialog::showFunctionDialog() 
 {
-emit showFunctionDialog(contents->currentText(), contents->currentItem());
+emit showFunctionDialog(g, contents->currentItem());
 close();
 }
 

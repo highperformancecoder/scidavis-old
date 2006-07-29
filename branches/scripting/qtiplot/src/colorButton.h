@@ -14,6 +14,7 @@ public:
   ColorButton(QWidget *parent);
   void setColor(const QColor& c);
   QColor color() const;
+  QSize sizeHint () const;
 
   QPushButton *selectButton;
   QFrame *display;
@@ -23,6 +24,9 @@ signals:
 
 protected:
   void init();
+
+private:
+	int btn_size;
 };
 
 #endif

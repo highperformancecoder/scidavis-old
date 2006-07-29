@@ -432,7 +432,7 @@ void ApplicationWindow::initToolBars()
 	btnPointer->setOn(TRUE);
 	btnPointer->addTo(plotTools);
 
-	btnZoomIn = new QAction(tr("&Zoom"), tr("ALT+Z"), dataTools, "btnZoomIn" );
+	btnZoomIn = new QAction(tr("&Zoom In"), tr("Ctrl++"), dataTools);
     btnZoomIn->setToggleAction( TRUE );
     btnZoomIn->setIconSet(QPixmap(zoom_xpm) );
 	btnZoomIn->addTo(plotTools);
@@ -831,6 +831,11 @@ setAsMenu->setFont(appFont);
 actionSetXCol->addTo(setAsMenu);
 actionSetYCol->addTo(setAsMenu);
 actionSetZCol->addTo(setAsMenu);
+setAsMenu->insertSeparator();
+actionSetYErrCol->addTo(setAsMenu);
+actionSetXErrCol->addTo(setAsMenu);
+setAsMenu->insertSeparator();
+
 actionDisregardCol->addTo(setAsMenu);
 setAsMenuID = tableMenu->insertItem(tr("Set columns &as"), setAsMenu);
 
@@ -2942,8 +2947,7 @@ if ( g )
 	}
 }
 
-void ApplicationWindow::defineErrorBars(const QString& name, int type,
-										const QString& percent, int direction)
+void ApplicationWindow::defineErrorBars(const QString& name, int type, const QString& percent, int direction)
 {
 	Table *w=table(name);
 	if (!w)
@@ -2957,7 +2961,11 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type,
 	if (xColName.isEmpty())
 		return;
 
-	w->addCol();
+	if (direction == QwtErrorPlotCurve::Horizontal)
+		w->addCol(Table::xErr);
+	else
+		w->addCol(Table::yErr);
+
 	int r=w->tableRows();
 	int c=w->tableCols()-1;
 	int ycol=w->colIndex(name);
@@ -2998,8 +3006,7 @@ activeGraph->addErrorBars(w, xColName, name, w, errColName,
 						   direction, 2, 5, QColor(black), false, true, true);
 }
 
-void ApplicationWindow::defineErrorBars(const QString& curveName, 
-										const QString& errColumnName, int direction)
+void ApplicationWindow::defineErrorBars(const QString& curveName, const QString& errColumnName, int direction)
 {
 Table *w=table(curveName);
 if (!w) 
@@ -3569,12 +3576,12 @@ if (fileType != "QtiPlot")
 	      return open(fname+"~");
 	  } 
 	  else
-	    QMessageBox::critical(this,tr("QtiPlot - File opening error"),  tr("The file: <b> %1 </b> was not created using QtiPlot!").arg(fn));
+	    QMessageBox::critical(this, tr("QtiPlot - File opening error"),  tr("The file: <b> %1 </b> was not created using QtiPlot!").arg(fn));
  	return 0;
 	}
 
 QStringList vl = QStringList::split (".", version, false);
-fileVersion =100*(vl[0]).toInt()+10*(vl[1]).toInt()+(vl[2]).toInt();
+fileVersion = 100*(vl[0]).toInt()+10*(vl[1]).toInt()+(vl[2]).toInt();
 
 ApplicationWindow* app = openProject(fname);
 
@@ -3659,7 +3666,7 @@ progress.setLabelText(title);
 progress.setTotalSteps(widgets);
 progress.setActiveWindow();
 //progress.setMinimumDuration(10000);
-progress.move(0,0);
+//progress.move(0,0);
 
 Folder *cf = app->projectFolder();
 app->folders->blockSignals (true);
@@ -3889,6 +3896,9 @@ app->updateRecentProjectsList();
 if (app->aw)
 	{
 	app->aw->setFocus();
+	if (app->aw->status() == myWidget::Maximized)
+		app->aw->showMaximized();
+
 	app->customMenu(app->aw);
 	app->customToolBars(app->aw);
 	}
@@ -4717,7 +4727,12 @@ QString s = "geometry\t";
 if (((myWidget *)w)->status() == myWidget::Minimized)
 	s+="minimized\n";
 else if (((myWidget *)w)->status() == myWidget::Maximized)
-	s+="maximized\n";
+	{
+	if (w == ws->activeWindow())
+		s+="maximized\tactive\n";
+	else
+		s+="maximized\n";
+	}
 else
 	{
 	if (!w->parent())
@@ -5012,10 +5027,11 @@ if (g->isPiePlot())
 	}
 else
 	{
+	activeGraph = g;
+
 	curvesDialog* crvDialog=new curvesDialog(this,"curves",TRUE,WStyle_StaysOnTop|WStyle_Tool|WDestructiveClose);
 	connect (crvDialog,SIGNAL(showPlotAssociations(int)), this, SLOT(showPlotAssociations(int)));
-	connect (crvDialog,SIGNAL(showFunctionDialog(const QString&, int)), 
-				  this, SLOT(showFunctionDialog(const QString&, int)));
+	connect (crvDialog,SIGNAL(showFunctionDialog(Graph *, int)), this, SLOT(showFunctionDialog(Graph *, int)));
 
 	crvDialog->insertCurvesToDialog(columnsList(Table::Y));
 	crvDialog->setCurveDefaultSettings(defaultCurveStyle, defaultCurveLineWidth, defaultSymbolSize);
@@ -5023,8 +5039,6 @@ else
 	crvDialog->initTablesList(tableList());
 	crvDialog->showNormal();
 	crvDialog->setActiveWindow();
-
-	activeGraph = g;
 	}
 }
 
@@ -5485,17 +5499,25 @@ Table* w = (Table*)ws->activeWindow();
 		Legend.insertItem(QPixmap(paste_xpm),tr("Past&e"), w, SLOT(pasteSelection()));
 		Legend.insertSeparator();
 
-		int xColID=colType.insertItem("X", w, SLOT(setXCol()));
-		int yColID=colType.insertItem("Y", w, SLOT(setYCol()));
-		int zColID=colType.insertItem("Z", w, SLOT(setZCol()));
-		int noneID=colType.insertItem(tr("None"), w, SLOT(disregardCol()));
+		int xColID = colType.insertItem(tr("X"), this, SLOT(setXCol()));
+		int yColID = colType.insertItem(tr("Y"), this, SLOT(setYCol()));
+		int zColID = colType.insertItem(tr("Z"), this, SLOT(setZCol()));
+		colType.insertSeparator();
+		int xErrColID = colType.insertItem(tr("X Error"), this, SLOT(setXErrCol()));
+		int yErrColID = colType.insertItem(QPixmap(errors_xpm), tr("Y Error"), this, SLOT(setYErrCol()));
+		colType.insertSeparator();
+		int noneID = colType.insertItem(tr("None"), this, SLOT(disregardCol()));
 		
 		if (w->colPlotDesignation(c) == Table::X)
-			colType.setItemChecked (xColID,true);
+			colType.setItemChecked (xColID, true);
 		else if (w->colPlotDesignation(c) == Table::Y)
-			colType.setItemChecked (yColID,true);
+			colType.setItemChecked (yColID, true);
 		else if (w->colPlotDesignation(c) == Table::Z)
-			colType.setItemChecked (zColID,true);
+			colType.setItemChecked (zColID, true);
+		else if (w->colPlotDesignation(c) == Table::xErr)
+			colType.setItemChecked (xErrColID, true);
+		else if (w->colPlotDesignation(c) == Table::yErr)
+			colType.setItemChecked (yErrColID, true);
 		else
 			colType.setItemChecked (noneID,true);
 
@@ -5578,6 +5600,10 @@ Table* w = (Table*)ws->activeWindow();
 		actionSetXCol->addTo(&colType);
 		actionSetYCol->addTo(&colType);
 		actionSetZCol->addTo(&colType);
+		colType.insertSeparator();
+		actionSetXErrCol->addTo(&colType);
+		actionSetYErrCol->addTo(&colType);
+		colType.insertSeparator();
 		actionDisregardCol->addTo(&colType);
 		Legend.insertItem(tr("Set as"),&colType);
 		Legend.insertSeparator();
@@ -6075,28 +6101,10 @@ if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
 	return;
 
 MultiLayer* plot = (MultiLayer*)ws->activeWindow();	
-if (plot->isEmpty())
-	{
-	QMessageBox::warning(this,tr("QtiPlot - Warning"),
-				tr("<h4>There are no plot layers available in this window.</h4>"
-					  "<p><h4>Please add a layer and try again!</h4>"));
+if (plot->isEmpty() || (Graph*)plot->activeGraph()->isPiePlot())
 	return;
-	}
 
-if ((Graph*)plot->activeGraph()->isPiePlot())
-	{
-	if (btnZoomIn->isOn())
-			QMessageBox::warning(this,tr("QtiPlot - Warning"),
-				tr("This functionality is not available for pie plots!"));
-	return;
-	}
-
-QWidgetList *graphsList=plot->graphPtrs();
-for (Graph* g = (Graph*)graphsList->first(); g; g = (Graph*)graphsList->next())
-	{
-	if (!g->isPiePlot())
-		g->zoomOut();
-	}
+((Graph*)plot->activeGraph())->zoomOut();
 btnPointer->setOn(true);
 }
 
@@ -6307,7 +6315,7 @@ if (!g || !g->validCurvesDataSize())
 	return;
 
 activeGraph = g;
-aw = ws->activeWindow();
+aw = (myWidget *)ws->activeWindow();
 
 expDecayDialog *edd = new expDecayDialog(type, this,"polyDialog", false, WStyle_Tool|WDestructiveClose);
 connect ((myWidget*)ws->activeWindow(), SIGNAL(closedWindow(myWidget*)), edd, SLOT(close()));
@@ -6350,7 +6358,7 @@ if (!g || !g->validCurvesDataSize())
 	return;
 
 activeGraph=g;
-aw = ws->activeWindow();
+aw = (myWidget *)ws->activeWindow();
 
 fitDialog *fd=new fitDialog(this,"fitDialog", false, WDestructiveClose);
 connect (fd, SIGNAL(clearFunctionsList()), this, SLOT(clearFitFunctionsList()));
@@ -6564,7 +6572,7 @@ if (!g || !g->validCurvesDataSize())
 	return;
 
 activeGraph=g;
-aw = ws->activeWindow();
+aw = (myWidget *)ws->activeWindow();
 
 polynomFitDialog *pfd=new polynomFitDialog(this,"polyDialog",false,WStyle_Tool|WDestructiveClose);	
 connect ((myWidget*)ws->activeWindow(), SIGNAL(closedWindow(myWidget*)), pfd, SLOT(close()));
@@ -8619,15 +8627,14 @@ else
 					  "<p><h4>Please create a table and try again!</h4>"));
 }
 
-void ApplicationWindow::showFunctionDialog(const QString& function, int curve)
+void ApplicationWindow::showFunctionDialog(Graph *g, int curve)
 {	
-if ( !activeGraph )
+if ( !g )
 	return;
 
 fDialog* fd= functionDialog();
 fd->setCaption(tr("QtiPlot - Edit function"));
-fd->setGraph(activeGraph);
-fd->setCurveToModify(function, curve);
+fd->setCurveToModify(g, curve);
 }
 
 fDialog* ApplicationWindow::functionDialog()
@@ -8650,7 +8657,7 @@ void ApplicationWindow::addFunctionCurve()
 {
 QWidget* w = ws->activeWindow();
 if (!w || !w->isA("MultiLayer"))
-		return;
+	return;
 
 if (((MultiLayer*)w)->isEmpty())
 	{
@@ -8670,10 +8677,10 @@ if ( g )
 	}
 }
 
-void ApplicationWindow::updateFunctionLists(QString& type,QStringList &formulas)
+void ApplicationWindow::updateFunctionLists(int type, QStringList &formulas)
 {
 int maxListSize = 10;
-if (type == "Polar plot")
+if (type == 2)
 	{
 	rFunctions.remove(formulas[0]);
 	rFunctions.push_front(formulas[0]);
@@ -8686,7 +8693,7 @@ if (type == "Polar plot")
 	while ((int)tetaFunctions.size() > maxListSize)
 		tetaFunctions.pop_back();
 	}
-else if  (type == "Parametric plot")
+else if (type == 1)
 	{
 	xFunctions.remove(formulas[0]);
 	xFunctions.push_front(formulas[0]);
@@ -8699,7 +8706,7 @@ else if  (type == "Parametric plot")
 	while ((int)yFunctions.size() > maxListSize)
 		yFunctions.pop_back();
 	}
-else if (type == "Function")
+else 
 	{
 	functions.remove(formulas[0]);
 	functions.push_front(formulas[0]);
@@ -8713,12 +8720,12 @@ void ApplicationWindow::newFunctionPlot()
 {
 fDialog* fd = functionDialog();
 if (fd)
-	connect (fd,SIGNAL(newFunctionPlot(QString&,QStringList &,QStringList &,QValueList<double> &,QValueList<int> &)),
-		this,SLOT(newFunctionPlot(QString&,QStringList &,QStringList &,QValueList<double> &,QValueList<int> &)));
+	connect (fd,SIGNAL(newFunctionPlot(int, QStringList &, const QString&, QValueList<double> &, int )),
+		this,SLOT(newFunctionPlot(int, QStringList &, const QString&, QValueList<double> &, int)));
 
 }
 
-void ApplicationWindow::newFunctionPlot(QString& type,QStringList &formulas,QStringList &vars,QValueList<double> &ranges,QValueList<int> &points)
+void ApplicationWindow::newFunctionPlot(int type,QStringList &formulas, const QString& var, QValueList<double> &ranges, int points)
 {
 QString label="graph"+QString::number(++graphs);
 while(alreadyUsedName(label)){
@@ -8727,7 +8734,7 @@ while(alreadyUsedName(label)){
 MultiLayer* plot = multilayerPlot(label);
 Graph* g=plot->addLayer();
 customGraph(g);
-g->addFunctionCurve(type,formulas,vars,ranges,points);
+g->addFunctionCurve(type,formulas, var,ranges,points);
 
 plot->showNormal();
 setListViewSize(plot->name(), plot->sizeToString());
@@ -9419,11 +9426,13 @@ else
 	w->parentWidget()->setGeometry(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
 	((myWidget *)w)->setStatus(myWidget::Normal);
 
-	if (lst[5] == "active")
-		app->aw=(QWidget*)w;
-	else if (lst[5] == "hidden")
+	if (lst[5] == "hidden")
 		hideWindow((myWidget* )w);
 	}
+
+if (s.contains ("active"))
+	app->aw=(myWidget*)w;
+
 w->blockSignals (false);
 }
 
@@ -9794,8 +9803,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 						ag->updateHistogram(w,curve[2],curveID,curve[17].toInt(),curve[18].toDouble(),curve[19].toDouble(),curve[20].toDouble());
 					}
 
-				if(plotType == Graph::VerticalBars || 
-				   plotType == Graph::HorizontalBars || 
+				if(plotType == Graph::VerticalBars || plotType == Graph::HorizontalBars || 
 				   plotType == Graph::Histogram)
 					{
 					if (fileVersion <= 76)
@@ -9835,16 +9843,18 @@ for (int j=0;j<(int)list.count()-1;j++)
 		else if (s.contains ("ErrorBars"))
 			{
 			curve=QStringList::split ("\t",s,FALSE);
-			bool plus=TRUE,minus=TRUE,through=TRUE;
-			if (!curve[8].toInt()) through=FALSE;
-			if (!curve[9].toInt()) plus=FALSE;
-			if (!curve[10].toInt()) minus=FALSE;
 			w=app->table(curve[3]);
 			Table *errTable=app->table(curve[4]);
 			if (w && errTable)
-				ag->addErrorBars(w,curve[2],curve[3],errTable, curve[4],
-							 curve[1].toInt(),curve[5].toInt(),curve[6].toInt(),
-							 QColor(curve[7]),through,minus,plus);
+				{
+				double xOffset = 0, yOffset = 0;
+				if (fileVersion > 85){
+					xOffset = curve[11].toDouble(); yOffset = curve[12].toDouble();}
+
+				ag->addErrorBars(w,curve[2],curve[3],errTable, curve[4], curve[1].toInt(),
+							curve[5].toInt(),curve[6].toInt(), QColor(curve[7]), 
+							curve[8].toInt(), curve[10].toInt(), curve[9].toInt(), xOffset, yOffset);
+				}
 			}
 		else if (s.left(6)=="scale\t")
 			{
@@ -10257,7 +10267,7 @@ if (!g || !g->validCurvesDataSize())
 	return;
 
 activeGraph=g;
-aw = ws->activeWindow();
+aw = (myWidget *)ws->activeWindow();
 		
 if (g->selectorsEnabled()) // a curve is selected
 	analyzeCurve(whichFit, g->selectedCurveTitle());
@@ -10909,14 +10919,20 @@ void ApplicationWindow::createActions()
   actionSetRandomValues = new QAction(QPixmap(randomNumbers_xpm),tr("&Random values"), QString::null, this);
   connect(actionSetRandomValues, SIGNAL(activated()), this, SLOT(setRandomValues()));
 
-  actionSetXCol = new QAction("&X", QString::null, this);
+  actionSetXCol = new QAction(tr("&X"), QString::null, this);
   connect(actionSetXCol, SIGNAL(activated()), this, SLOT(setXCol()));
 
-  actionSetYCol = new QAction("&Y", QString::null, this);
+  actionSetYCol = new QAction(tr("&Y"), QString::null, this);
   connect(actionSetYCol, SIGNAL(activated()), this, SLOT(setYCol()));
 
-  actionSetZCol = new QAction("&Z", QString::null, this);
+  actionSetZCol = new QAction(tr("&Z"), QString::null, this);
   connect(actionSetZCol, SIGNAL(activated()), this, SLOT(setZCol()));
+
+  actionSetXErrCol = new QAction(tr("X E&rror"), QString::null, this);
+  connect(actionSetXErrCol, SIGNAL(activated()), this, SLOT(setXErrCol()));
+
+  actionSetYErrCol = new QAction(QPixmap(errors_xpm), tr("Y &Error"), QString::null, this);
+  connect(actionSetYErrCol, SIGNAL(activated()), this, SLOT(setYErrCol()));
 
   actionDisregardCol = new QAction(tr("&None"), QString::null, this);
   connect(actionDisregardCol, SIGNAL(activated()), this, SLOT(disregardCol()));
@@ -11250,9 +11266,11 @@ void ApplicationWindow::translateActionsStrings()
   actionTranslateVert->setMenuText(tr("&Vertical"));
   actionSetAscValues->setMenuText(tr("Ro&w Numbers"));
   actionSetRandomValues->setMenuText(tr("&Random values"));
-  actionSetXCol->setMenuText("&X");
-  actionSetYCol->setMenuText("&Y");
-  actionSetZCol->setMenuText("&Z");
+  actionSetXCol->setMenuText(tr("&X"));
+  actionSetYCol->setMenuText(tr("&Y"));
+  actionSetZCol->setMenuText(tr("&Z"));
+  actionSetXErrCol->setMenuText(tr("X E&rror"));
+  actionSetYErrCol->setMenuText(tr("Y &Error"));
   actionDisregardCol->setMenuText(tr("&None"));
 
   actionBoxPlot->setMenuText(tr("&Box Plot"));
@@ -11270,11 +11288,11 @@ void ApplicationWindow::translateActionsStrings()
   	btnPointer->setMenuText(tr("Disable &tools"));
 	btnPointer->setToolTip( tr( "Pointer" ) );
 
-	btnZoomIn->setMenuText(tr("&Zoom"));
-	btnZoomIn->setAccel(tr("ALT+Z"));
-	btnZoomIn->setToolTip(tr("Zoom"));
+	btnZoomIn->setMenuText(tr("&Zoom In"));
+	btnZoomIn->setAccel(tr("Ctrl++"));
+	btnZoomIn->setToolTip(tr("Zoom In"));
 
-	btnZoomOut->setMenuText(tr("&Zoom Out"));
+	btnZoomOut->setMenuText(tr("Zoom &Out"));
 	btnZoomOut->setAccel(tr("Ctrl+-"));
 	btnZoomOut->setToolTip(tr("Zoom Out"));
 
@@ -11581,6 +11599,22 @@ if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 ((Table *)ws->activeWindow())->setRandomValues();
+}
+
+void ApplicationWindow::setXErrCol()
+{
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
+	return;
+
+((Table *)ws->activeWindow())->setPlotDesignation(Table::xErr);
+}
+
+void ApplicationWindow::setYErrCol()
+{
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
+	return;
+
+((Table *)ws->activeWindow())->setPlotDesignation(Table::yErr);
 }
 
 void ApplicationWindow::setXCol()

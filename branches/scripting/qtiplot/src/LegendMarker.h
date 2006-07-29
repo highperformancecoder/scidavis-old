@@ -15,7 +15,7 @@
 class LegendMarker: public QwtPlotMarker
 {
 public:
-    LegendMarker(QwtPlot *);
+    LegendMarker(Plot *);
 	~LegendMarker();
 
 	enum FrameStyle{None = 0, Line = 1, Shadow=2};

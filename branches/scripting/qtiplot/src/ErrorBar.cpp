@@ -13,6 +13,8 @@ size=QSize(1,1);
 plus=TRUE;
 minus=TRUE;
 through=FALSE;
+d_xOffset = 0;
+d_yOffset = 0;
 }
 
 QwtErrorPlotCurve::QwtErrorPlotCurve(QwtPlot *parent, const char *name):
@@ -25,6 +27,8 @@ size=QSize(1,1);
 plus=TRUE;
 minus=TRUE;
 through=FALSE;
+d_xOffset = 0;
+d_yOffset = 0;
 }
 
 void QwtErrorPlotCurve::copy(const QwtErrorPlotCurve *e)
@@ -37,12 +41,15 @@ minus = e->minus;
 through = e->through;
 pen = e->pen;
 err = e->err.copy();
+
+d_xOffset = e->xDataOffset();
+d_yOffset = e->yDataOffset();
 	
 setTitle(e->title());
 }
 
 void QwtErrorPlotCurve::draw(QPainter *painter,
-    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
 {
     if ( !painter || dataSize() <= 0 )
         return;
@@ -60,15 +67,15 @@ void QwtErrorPlotCurve::draw(QPainter *painter,
 }
 
 void QwtErrorPlotCurve::drawErrorBars(QPainter *painter,
-    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to)
+    const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
 {   
 int sh=size.height();
 int sw=size.width();
 
  for (int i = from; i <= to; i++)
 	{
-	const int xi = xMap.transform(x(i));
-	const int yi = yMap.transform(y(i));
+	const int xi = xMap.transform(x(i) + d_xOffset);
+	const int yi = yMap.transform(y(i) + d_yOffset);
 	
 	if (type == Vertical)
 			{
@@ -260,4 +267,15 @@ delete erMin;
 delete erMax;
 
 return rect;
+}
+
+double QwtErrorPlotCurve::xDataOffset() const
+{
+return d_xOffset;
+}
+
+
+double QwtErrorPlotCurve::yDataOffset() const
+{
+return d_yOffset;
 }

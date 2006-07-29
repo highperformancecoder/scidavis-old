@@ -20,7 +20,7 @@ public slots:
 	void acceptFunction();
 	void acceptParametric();
 	void acceptPolar();
-	void setCurveToModify(const QString& s, int curve);
+	void setCurveToModify(Graph *g, int curve);
 	void insertFunctionsList(const QStringList& list);
 	void insertParamFunctionsList(const QStringList& xList, const QStringList& yList);
 	void insertPolarFunctionsList(const QStringList& rList, const QStringList& tetaList);
@@ -28,7 +28,7 @@ public slots:
 	void setGraph(Graph *g){graph = g;};
 
 signals:
-	void newFunctionPlot(QString& ,QStringList &,QStringList &,QValueList<double> &,QValueList<int> &);
+	void newFunctionPlot(int, QStringList &, const QString &, QValueList<double> &, int);
 	void clearFunctionsList();
 	void clearParamFunctionsList();
 	void clearPolarFunctionsList();

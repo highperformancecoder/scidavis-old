@@ -13,8 +13,8 @@
 #include <qwt_plot_canvas.h>
 #include <qwt_layout_metrics.h>
 
-LegendMarker::LegendMarker(QwtPlot *plot):
-    d_plot((Plot *)plot),
+LegendMarker::LegendMarker(Plot *plot):
+    d_plot(plot),
 	d_frame (0),
 	angle(0),
 	bkgColor(plot->paletteBackgroundColor())

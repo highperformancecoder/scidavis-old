@@ -133,7 +133,7 @@ if (!app)
 
 QString text = item->text();
 if (text.contains("="))
-	app->showFunctionDialog(text, listBox->index(item));
+	app->showFunctionDialog(graph, listBox->index(item));
 else
 	app->showPlotAssociations(listBox->index(item));
 close();
@@ -667,10 +667,9 @@ contextMenu.exec(point);
 
 void plotDialog::editFunctionCurve()
 {
-int curve = listBox->currentItem();
 ApplicationWindow *app = (ApplicationWindow *)this->parent();
 if (app)
-	app->showFunctionDialog(listBox->text(curve), curve);
+	app->showFunctionDialog(graph, listBox->currentItem());
 }
 
 void plotDialog::removeSelectedCurve()

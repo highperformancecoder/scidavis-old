@@ -120,7 +120,8 @@ HEADERS  = src/application.h \
 	 src/findDialog.h\
 	 src/Scripting.h\
 	 src/scriptedit.h\
-	 src/muParserScripting.h
+	 src/muParserScripting.h\
+	 src/FunctionCurve.h
      
 SOURCES  = src/application.cpp \
      src/graph.cpp \
@@ -196,7 +197,8 @@ SOURCES  = src/application.cpp \
 	 src/scriptedit.cpp\
 	 src/muParserScripting.cpp\
 	 src/fileDialogs.cpp\
-     src/scales.cpp
+     src/scales.cpp\
+	 src/FunctionCurve.cpp
 
 #parser (muParser_v1.26)
 HEADERS+=../3rdparty/muParser/muParser.h \

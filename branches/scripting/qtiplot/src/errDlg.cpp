@@ -94,7 +94,10 @@ srcTables = tables;
 tableNamesBox->clear();
 for (QWidget *i=srcTables->first(); i; i=srcTables->next())
 	tableNamesBox->insertItem(i->name());
-tableNamesBox->setCurrentText(QStringList::split("_",nameLabel->currentText())[0]);
+
+if (!nameLabel->currentText().contains("="))
+	tableNamesBox->setCurrentText(QStringList::split("_",nameLabel->currentText())[0]);
+
 selectSrcTable(tableNamesBox->currentItem());
 }
 

@@ -78,6 +78,8 @@ tableDialog::tableDialog( QWidget* parent, const char* name, bool modal, WFlags 
 	columnsBox->insertItem(tr("X (abscissae)"));
 	columnsBox->insertItem(tr("Y (ordinates)"));
 	columnsBox->insertItem(tr("Z (height)"));
+	columnsBox->insertItem(tr("X Error"));
+	columnsBox->insertItem(tr("Y Error"));
 
 	displayBox = new QComboBox(vbox2, "displayBox" );
 	displayBox->insertItem(tr("Numeric"));
@@ -277,19 +279,27 @@ void tableDialog::setPlotDesignation(int i)
 switch(i)
 	{
 	case 0:
-		w->disregardCol();
+		w->setPlotDesignation(Table::None);
 	break;
 
 	case 1:
-		w->setXCol();
+		w->setPlotDesignation(Table::X);
 	break;
 
 	case 2:
-		w->setYCol();
+		w->setPlotDesignation(Table::Y);
 	break;
 
 	case 3:
-		w->setZCol();
+		w->setPlotDesignation(Table::Z);
+	break;
+
+	case 4:
+		w->setPlotDesignation(Table::xErr);
+	break;
+
+	case 5:
+		w->setPlotDesignation(Table::yErr);
 	break;
 	}
 }

@@ -179,10 +179,10 @@ public slots:
 
 	//user-defined functions
 	void newFunctionPlot();
-	void newFunctionPlot(QString& type,QStringList &formulas,QStringList &vars,QValueList<double> &ranges,QValueList<int> &points);
+	void newFunctionPlot(int type,QStringList &formulas, const QString& var,QValueList<double> &ranges, int points);
 
 	fDialog* functionDialog();
-	void showFunctionDialog(const QString& function, int curve);
+	void showFunctionDialog(Graph *g, int curve);
 	void addFunctionCurve();
 	void clearFunctionsList();
 	void clearFitFunctionsList();
@@ -191,7 +191,7 @@ public slots:
 	void clearLogInfo();
 	void clearParamFunctionsList();
 	void clearPolarFunctionsList();
-	void updateFunctionLists(QString& type,QStringList &formulas);
+	void updateFunctionLists(int type, QStringList &formulas);
 	void updateSurfaceFuncList(const QString& s);
 
 	Matrix* cloneMatrix();
@@ -541,6 +541,8 @@ public slots:
 	void setXCol();
 	void setYCol();
 	void setZCol();
+	void setXErrCol();
+	void setYErrCol();
 	void disregardCol();
 
 	void updateConfirmOptions(bool askTables, bool askMatrixes, bool askPlots2D, bool askPlots3D, bool askNotes);
@@ -758,7 +760,7 @@ public:
 	//!List of tables and matrixes renamed in order to avoid conflicts when appending a project to a folder
 	QStringList renamedTables;
 	//!active window
-	QWidget *aw; 
+	myWidget *aw; 
 	Graph::MarkerType copiedMarkerType;
 	
 //variables used when user copy/paste markers
@@ -815,7 +817,7 @@ public:
 	QAction *actionSortTable, *actionSortSelection, *actionNormalizeSelection;
 	QAction *actionNormalizeTable, *actionConvolute, *actionDeconvolute, *actionCorrelate;
 	QAction *actionTranslateHor, *actionTranslateVert, *actionSetAscValues, *actionSetRandomValues;
-	QAction *actionSetXCol, *actionSetYCol, *actionSetZCol, *actionDisregardCol;
+	QAction *actionSetXCol, *actionSetYCol, *actionSetZCol, *actionDisregardCol, *actionSetXErrCol, *actionSetYErrCol;
 	QAction *actionBoxPlot, *actionMultiPeakGauss, *actionMultiPeakLorentz, *actionCheckUpdates;
 	QAction *actionDonate, *actionHomePage, *actionDownloadManual, *actionTechnicalSupport, *actionTranslations;
 	QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;

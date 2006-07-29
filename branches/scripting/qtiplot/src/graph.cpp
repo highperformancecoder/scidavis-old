@@ -84,6 +84,7 @@ static const char *unzoom_xpm[]={
 #include "colorBox.h"
 #include "patternBox.h"
 #include "symbolBox.h"
+#include "FunctionCurve.h"
 
 #include <qapplication.h>
 #include <qbitmap.h>
@@ -139,7 +140,6 @@ removePointsEnabled=FALSE;
 pickerEnabled=FALSE;
 rangeSelectorsEnabled=FALSE;
 piePlot=FALSE;
-functions=0;
 ignoreResize= false;
 drawAxesBackbone = true;
 autoscale = true;
@@ -3534,7 +3534,9 @@ for (int i=0; i<n_curves; i++)
 		s+=er->color().name()+"\t";
 		s+=QString::number(er->throughSymbol())+"\t";
 		s+=QString::number(er->plusSide())+"\t";
-		s+=QString::number(er->minusSide())+"\n";
+		s+=QString::number(er->minusSide())+"\t";
+		s+=QString::number(er->xDataOffset())+"\t";
+		s+=QString::number(er->yDataOffset())+"\n";
 		all+=s;
 		}				
 	}
@@ -3822,7 +3824,10 @@ else
 			QString name = c->title().text();				
 			if (!name.contains("_") && name.contains("="))
 				{
-				s+="FunctionCurve\t"+name+"\t";
+				s+="FunctionCurve\t"+name;
+				s+=","+((FunctionCurve *)c)->variable()+",";
+				s+=QString::number(((FunctionCurve *)c)->startRange(),'g',15)+",";
+				s+=QString::number(((FunctionCurve *)c)->endRange(),'g',15)+"\t";
 				s+=QString::number(c->dataSize())+"\t";
 				s+=QString::number(c->minXValue())+"\t";
 				s+=QString::number(c->x(1)-c->x(0))+"\t";					
@@ -3933,7 +3938,7 @@ legendMarkerID = insertTextMarker(lst, fileVersion);
 long Graph::insertTextMarker(const QStringList& list, int fileVersion)
 {
 QStringList fList=list;
-LegendMarker* mrk= new LegendMarker(d_plot);
+LegendMarker* mrk = new LegendMarker(d_plot);
 long key = d_plot->insertMarker(mrk);
 
 if (fileVersion < 86)
@@ -4061,17 +4066,19 @@ QValueList<int> txtMrkKeys=textMarkerKeys();
 return (LegendMarker*)d_plot->marker(id);	
 }
 
-void Graph::insertTextMarker(LegendMarker* mrk)
+long Graph::insertTextMarker(LegendMarker* mrk)
 {
-LegendMarker* aux= new LegendMarker(d_plot);
+LegendMarker* aux = new LegendMarker(d_plot);
+selectedMarker = d_plot->insertMarker(aux);
+
 aux->setTextColor(mrk->getTextColor());
 aux->setBackgroundColor(mrk->backgroundColor());
 aux->setOrigin(mrk->rect().topLeft ());
 aux->setFont(mrk->getFont());
 aux->setBackground(mrk->getBkgType());
 aux->setAngle(mrk->getAngle());
-aux->setText(mrk->getText());	
-selectedMarker=d_plot->insertMarker(aux);
+aux->setText(mrk->getText());
+return selectedMarker;
 }
 
 QValueList<int> Graph::textMarkerKeys()
@@ -4188,12 +4195,6 @@ return c_keys.find (key, 0 );
 long Graph::curveKey(int curve)
 {	
 return c_keys[curve];
-}
-
-int Graph::curveDataSize(int curve)
-{
-QwtPlotCurve *c = this->curve(curve);
-return c->dataSize();
 }
 
 QwtPlotCurve *Graph::curve(int index)
@@ -4389,7 +4390,7 @@ for (int i = 0; i<n_curves; i++ )
 void Graph::addErrorBars(Table *w, const QString& xColName, const QString& yColName, 
 						 Table *errTable, const QString& errColName,
 						 int type, int width, int cap, const QColor& color,
-						 bool through, bool minus,bool plus)
+						 bool through, bool minus,bool plus, double xOffset, double yOffset)
 {
 int xcol=w->colIndex(xColName);
 int ycol=w->colIndex(yColName);
@@ -4455,6 +4456,8 @@ er->setWidth(width);
 er->drawPlusSide(plus);
 er->drawMinusSide(minus);
 er->drawThroughSymbol(through);
+er->setXDataOffset(xOffset);
+er->setYDataOffset(yOffset);
 
 long errorsID=d_plot->insertCurve(er);
 er->setTitle(errColName);	
@@ -5161,6 +5164,22 @@ if (!bars || (bars->gap() == gapPercent && bars->offset() == offset))
 
 bars->setGap(gapPercent);
 bars->setOffset(offset);
+
+QString yColName = bars->title().text();
+for (int i=0; i<n_curves; i++)
+	{
+	if (associations[i].contains(yColName) && i != curve && c_type[i] == ErrorBars)
+		{
+		QwtErrorPlotCurve *er=(QwtErrorPlotCurve *)this->curve(i);
+		if (!er)
+			continue;
+
+		if (bars->orientation() == QwtBarCurve::Vertical)
+			er->setXDataOffset(bars->dataOffset());	
+		else
+			er->setYDataOffset(bars->dataOffset());	
+		}
+	}
 }
 
 void Graph::removePie()
@@ -5193,11 +5212,14 @@ removeCurve(index);
 }
 
 void Graph::removeCurve(int index)
-{		
+{
+resetErrorBarsOffset(index);
+
 QStringList::Iterator it=associations.at(index);
 associations.remove(it);
 
 removeLegendItem(index);
+
 d_plot->removeCurve(c_keys[index]);
 
 if (piePlot)
@@ -5235,6 +5257,33 @@ else
 	}
 updatePlot();
 emit modifiedGraph();	
+}
+
+void Graph::resetErrorBarsOffset(int index)
+{
+int curveType = c_type[index];
+if (curveType != VerticalBars && curveType != Histogram && curveType != HorizontalBars)
+	return;
+
+QwtBarCurve *bars=(QwtBarCurve *)this->curve(index);
+if (!bars || !bars->offset())
+	return;
+
+QString yColName = bars->title().text();
+for (int i=0; i<n_curves; i++)
+	{
+	if (associations[i].contains(yColName) && i != index && c_type[i] == ErrorBars)
+		{
+		QwtErrorPlotCurve *er=(QwtErrorPlotCurve *)this->curve(i);
+		if (!er)
+			continue;
+
+		if (bars->orientation() == QwtBarCurve::Vertical)
+			er->setXDataOffset(0);	
+		else
+			er->setYDataOffset(0);	
+		}
+	}
 }
 
 void Graph::removeLegendItem(int index)
@@ -5482,79 +5531,44 @@ void Graph::setFitID(int id)
 	fitID=id;
 }
 
-void Graph::insertOldFunctionCurve(const QString& formula, double from, double step, int points)
+void Graph::modifyFunctionCurve(int curve, int type, const QStringList &formulas,
+								const QString& var,QValueList<double> &ranges, int points)
 {
-functions++;
-associations << formula;
-	
-int i;
-int pos=formula.find("=",0);
-QString function=formula;
-function=function.mid(pos+1,function.length()-pos-1);
-	
-myParser parser;
-double x;
-parser.DefineVar("x", &x);		
-parser.SetExpr(function.ascii());
-
-QMemArray<double> X(points),Y(points);
-X[0]=from;x=from;Y[0]=parser.Eval();
-for (i = 1;i<points;i++ )
-	{
-	x+=step;
-	X[i]=x;
-	Y[i]=parser.Eval();
-	}
-	
-QwtPlotCurve *c = new QwtPlotCurve(formula);
-int curveID = d_plot->insertCurve(c);
-c->setPen(QPen(black,widthLine)); 
-c->setData(X, Y, points);
-	
-c_type.resize(++n_curves);
-c_type[n_curves-1]=Line;
-
-updatePlot();
-scales[5]="1";
-scales[6]="0";
-scales[12]="1";
-scales[13]="0";
-}
-
-void Graph::modifyFunctionCurve(int curve, QString& type,QStringList &formulas,QStringList &vars,QValueList<double> &ranges,QValueList<int> &points)
-{
-int i,ndata;
-bool error=FALSE;
-QMemArray<double> X(1),Y(1);
-QString label,swap;
-double step;
-
-QwtPlotCurve *c=this->curve(curve);
+FunctionCurve *c = (FunctionCurve *)this->curve(curve);
 if (!c)
 	return;
 
-QString oldLabel = associations[curve];
-if (type=="Function")
-{
-	label="f"+QString::number(functions)+"(x)="+formulas[0]+",x,"+QString::number(ranges[0],'e',6)+","+QString::number(ranges[1],'e',6);
-	if (label == oldLabel && c->dataSize() == points[0])
-		return;
+if (c->functionType() == type &&
+	c->variable() == var &&
+	c->formulas() == formulas &&
+	c->startRange() == ranges[0] &&
+	c->endRange() == ranges[1] &&
+	c->dataSize() == points)
+	return;
 
-	ndata=points[0];
-	X.resize(points[0]);
-	Y.resize(points[0]);
-	step=(ranges[1]-ranges[0])/(double) (points[0]-1);
+bool error=FALSE;
+QMemArray<double> X(points),Y(points);
+double step=(ranges[1]-ranges[0])/(double) (points-1);
+
+int functions = 0;
+for (int i=0; i<n_curves; i++)
+	{//count the number of function curves
+	if (!(associations[i]).contains("_") && (associations[i]).contains("="))
+		functions++;
+	}
+
+QString label, oldLabel = c->title().text();
+if (type == FunctionCurve::Normal)
+	{
 	myParser parser;
 	double x;
-	bool error=FALSE;
-
 	try
     	{	
-		parser.DefineVar(vars[0].ascii(), &x);	
+		parser.DefineVar(var.ascii(), &x);	
 		parser.SetExpr(formulas[0].ascii());
 			
 		X[0]=ranges[0];x=ranges[0];Y[0]=parser.Eval();
-		for (i = 1;i<ndata;i++ )
+		for (int i = 1; i<points; i++ )
 			{
 			x+=step;
 			X[i]=x;
@@ -5563,47 +5577,35 @@ if (type=="Function")
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0,"QtiPlot - Input function error", e.GetMsg());
+		QMessageBox::critical(this, tr("QtiPlot - Input function error"), e.GetMsg());
 		error=TRUE;	
     	}
-}	
-
-if (error)
-	return;
-	
-if (type=="Parametric plot" || type=="Polar plot")
+	label="f"+QString::number(functions)+"(x)="+formulas[0];
+	}	
+else if (type == FunctionCurve::Parametric || type == FunctionCurve::Polar)
 	{
-	if (type=="Parametric plot")
+	QStringList aux = formulas;
+	if (type == FunctionCurve::Parametric)
+		label="X"+QString::number(functions)+"("+var+")="+aux[0]+",Y"+QString::number(functions)+"("+var+")="+aux[1];
+	else if (type == FunctionCurve::Polar)
 		{
-		label="X"+QString::number(functions)+"("+vars[0]+")="+formulas[0]+",Y"+QString::number(functions)+"("+vars[0]+")="+formulas[1]+","+vars[0]+","+QString::number(ranges[0],'e',6)+","+QString::number(ranges[1],'e',6);
-		}
-	if (type=="Polar plot")
-		{
-		label="R"+QString::number(functions)+"("+vars[0]+")="+formulas[0]+",Theta"+QString::number(functions)+"("+vars[0]+")="+formulas[1]+","+vars[0]+","+QString::number(ranges[0],'e',6)+","+QString::number(ranges[1],'e',6);
-		swap=formulas[0];
-		formulas[0]="("+swap+")*cos("+formulas[1]+")";
-		formulas[1]="("+swap+")*sin("+formulas[1]+")";
+		label="R"+QString::number(functions)+"("+var+")="+aux[0]+",Theta"+QString::number(functions)+"("+var+")="+aux[1];
+		QString swap=aux[0];
+		aux[0]="("+swap+")*cos("+aux[1]+")";
+		aux[1]="("+swap+")*sin("+aux[1]+")";
 		}
 
-	if (label == oldLabel && c->dataSize() == points[0])
-		return;
-
-	X.resize(points[0]);
-	Y.resize(points[0]);
-	step=(ranges[1]-ranges[0])/(double) (points[0]-1);	
 	myParser xparser;
 	myParser yparser;
 	double par;
-	ndata=points[0];
-
 	try
 	    {
-		xparser.DefineVar(vars[0].ascii(), &par);	
-		yparser.DefineVar(vars[0].ascii(), &par);	
-		xparser.SetExpr(formulas[0].ascii());
-		yparser.SetExpr(formulas[1].ascii());
+		xparser.DefineVar(var.ascii(), &par);	
+		yparser.DefineVar(var.ascii(), &par);	
+		xparser.SetExpr(aux[0].ascii());
+		yparser.SetExpr(aux[1].ascii());
 		par=ranges[0];
-		for (i = 0;i<points[0];i++ )
+		for (int i = 0; i<points; i++ )
 			{
 			X[i]=xparser.Eval();
 			Y[i]=yparser.Eval();
@@ -5612,7 +5614,7 @@ if (type=="Parametric plot" || type=="Polar plot")
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0,"QtiPlot - Input function error",e.GetMsg());
+		QMessageBox::critical(0, tr("QtiPlot - Input function error"),e.GetMsg());
 		error=TRUE;	
     	}
 	}		
@@ -5621,17 +5623,19 @@ if (error)
 	return;
 
 associations[curve] = label;
-c->setData(X, Y, ndata);
+c->setData(X, Y, points);
 c->setTitle(label);	
+c->setFunctionType((FunctionCurve::FunctionType)type);
+c->setRange(ranges[0], ranges[1]);
+c->setFormulas(formulas);
+c->setVariable(var);
 
-//update the legend marker	
-if (legendMarkerID>=0)
-	{
+if (legendMarkerID >= 0)
+	{//update the legend marker	
 	LegendMarker* mrk=(LegendMarker*) d_plot->marker(legendMarkerID);
 	if (mrk)
 		{
-		QString text=mrk->getText();
-		text.replace(oldLabel, label);
+		QString text = (mrk->getText()).replace(oldLabel, label);
 		mrk->setText(text);
 		}
 	}
@@ -5641,31 +5645,32 @@ emit modifiedGraph();
 emit modifiedFunction();
 }
 
-void Graph::addFunctionCurve(QString& type,QStringList &formulas,QStringList &vars,QValueList<double> &ranges,QValueList<int> &points)
+void Graph::addFunctionCurve(int type, const QStringList &formulas, const QString &var,
+							 QValueList<double> &ranges, int points)
 {
-int i,ndata;
 bool error=FALSE;
-QMemArray<double> X(1),Y(1);
-QString label,swap;
-double step;
+QMemArray<double> X(points), Y(points);
+QString label;
+double step=(ranges[1]-ranges[0])/(double) (points-1);
 
-if (type=="Function")
-{
-	ndata=points[0];
-	X.resize(points[0]);
-	Y.resize(points[0]);
-	step=(ranges[1]-ranges[0])/(double) (points[0]-1);
+int functions = 1;
+for (int i=0; i<n_curves; i++)
+	{//count the number of function curves
+	if (!(associations[i]).contains("_") && (associations[i]).contains("="))
+		functions++;
+	}
+
+if (type == FunctionCurve::Normal)
+	{
 	myParser parser;
 	double x;
-	bool error=FALSE;
-
 	try
     	{	
-		parser.DefineVar(vars[0].ascii(), &x);	
+		parser.DefineVar(var.ascii(), &x);	
 		parser.SetExpr(formulas[0].ascii());
 			
 		X[0]=ranges[0];x=ranges[0];Y[0]=parser.Eval();
-		for (i = 1;i<ndata;i++ )
+		for (int i = 1; i<points; i++ )
 			{
 			x+=step;
 			X[i]=x;
@@ -5674,41 +5679,34 @@ if (type=="Function")
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0,"QtiPlot - Input function error", e.GetMsg());
+		QMessageBox::critical(this, tr("QtiPlot - Input function error"), e.GetMsg());
 		error=TRUE;	
     	}
-	label="f"+QString::number(functions)+"(x)="+formulas[0]+",x,"+QString::number(ranges[0],'e',6)+","+QString::number(ranges[1],'e',6);
-}	
-
-if (error)
-	return;
-	
-if (type=="Parametric plot" || type=="Polar plot")
+	label="f"+QString::number(functions)+"(x)="+formulas[0];
+	}	
+else if (type == FunctionCurve::Parametric || type == FunctionCurve::Polar)
 	{
-	X.resize(points[0]);
-	Y.resize(points[0]);
-	step=(ranges[1]-ranges[0])/(double) (points[0]-1);	
+	QStringList aux = formulas;
 	myParser xparser;
 	myParser yparser;
 	double par;
-	ndata=points[0];
-	if (type=="Parametric plot")
-		label="X"+QString::number(functions)+"("+vars[0]+")="+formulas[0]+",Y"+QString::number(functions)+"("+vars[0]+")="+formulas[1]+","+vars[0]+","+QString::number(ranges[0],'e',6)+","+QString::number(ranges[1],'e',6);
-	if (type=="Polar plot")
+	if (type == FunctionCurve::Parametric)
+		label="X"+QString::number(functions)+"("+var+")="+aux[0]+",Y"+QString::number(functions)+"("+var+")="+aux[1];
+	else if (type == FunctionCurve::Polar)
 		{
-		label="R"+QString::number(functions)+"("+vars[0]+")="+formulas[0]+",Theta"+QString::number(functions)+"("+vars[0]+")="+formulas[1]+","+vars[0]+","+QString::number(ranges[0],'e',6)+","+QString::number(ranges[1],'e',6);
-		swap=formulas[0];
-		formulas[0]="("+swap+")*cos("+formulas[1]+")";
-		formulas[1]="("+swap+")*sin("+formulas[1]+")";
+		label="R"+QString::number(functions)+"("+var+")="+aux[0]+",Theta"+QString::number(functions)+"("+var+")="+aux[1];
+		QString swap=aux[0];
+		aux[0]="("+swap+")*cos("+aux[1]+")";
+		aux[1]="("+swap+")*sin("+aux[1]+")";
 		}
 	try
 	    {
-		xparser.DefineVar(vars[0].ascii(), &par);	
-		yparser.DefineVar(vars[0].ascii(), &par);	
-		xparser.SetExpr(formulas[0].ascii());
-		yparser.SetExpr(formulas[1].ascii());
+		xparser.DefineVar(var.ascii(), &par);	
+		yparser.DefineVar(var.ascii(), &par);	
+		xparser.SetExpr(aux[0].ascii());
+		yparser.SetExpr(aux[1].ascii());
 		par=ranges[0];
-		for (i = 0;i<points[0];i++ )
+		for (int i = 0; i<points; i++ )
 			{
 			X[i]=xparser.Eval();
 			Y[i]=yparser.Eval();
@@ -5717,7 +5715,7 @@ if (type=="Parametric plot" || type=="Polar plot")
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(0,"QtiPlot - Input function error",e.GetMsg());
+		QMessageBox::critical(this, tr("QtiPlot - Input function error"), e.GetMsg());
 		error=TRUE;	
     	}
 	}		
@@ -5725,12 +5723,14 @@ if (type=="Parametric plot" || type=="Polar plot")
 if (error)
 	return;
 
-functions++;
 associations << label;
 	
-QwtPlotCurve *c = new QwtPlotCurve(label);
-c->setPen(QPen(black,widthLine)); 
-c->setData(X, Y, ndata);
+FunctionCurve *c = new FunctionCurve((const FunctionCurve::FunctionType)type, label);
+c->setPen(QPen(black, widthLine)); 
+c->setData(X, Y, points);
+c->setRange(ranges[0], ranges[1]);
+c->setFormulas(formulas);
+c->setVariable(var);
 
 int curveID = d_plot->insertCurve(c);
 	
@@ -5747,49 +5747,39 @@ emit modifiedGraph();
 
 void Graph::insertFunctionCurve(const QString& formula, double from, double step, int points)
 {
-QStringList curve;
-QString type;
+int type;
 QStringList formulas;
-QStringList variables;	
+QString var;	
 QValueList<double> ranges;
-QValueList<int> varpoints;
 
-if (!formula.contains(","))	//version < 0.4.3
-	insertOldFunctionCurve(formula,from, step, points);
-else
-	{//version >= 0.4.3
-	curve=QStringList::split (",",formula,TRUE);
-	if (curve[0][0]=='f')
-		{
-		type="Function";
-		formulas+=curve[0].section('=',1,1);
-		variables+=curve[1];
-		ranges+=curve[2].toDouble();
-		ranges+=curve[3].toDouble();
-		varpoints[0]=points;
-		}
-	else if (curve[0][0]=='X')
-		{
-		type="Parametric plot";
-		formulas+=curve[0].section('=',1,1);
-		formulas+=curve[1].section('=',1,1);	
-		variables+=curve[2];
-		ranges+=curve[3].toDouble();
-		ranges+=curve[4].toDouble();
-		varpoints[0]=points;
-		}
-	else if (curve[0][0]=='R')
-		{
-		type="Polar plot";
-		formulas+=curve[0].section('=',1,1);
-		formulas+=curve[1].section('=',1,1);	
-		variables+=curve[2];
-		ranges+=curve[3].toDouble();
-		ranges+=curve[4].toDouble();
-		varpoints[0]=points;
-		}
-	addFunctionCurve(type,formulas,variables,ranges,varpoints);	 
+QStringList curve=QStringList::split (",",formula,TRUE);
+if (curve[0][0]=='f')
+	{
+	type = FunctionCurve::Normal;
+	formulas+=curve[0].section('=',1,1);
+	var = curve[1];
+	ranges+=curve[2].toDouble();
+	ranges+=curve[3].toDouble();
 	}
+else if (curve[0][0]=='X')
+	{
+	type = FunctionCurve::Parametric;
+	formulas+=curve[0].section('=',1,1);
+	formulas+=curve[1].section('=',1,1);	
+	var = curve[2];
+	ranges+=curve[3].toDouble();
+	ranges+=curve[4].toDouble();
+	}
+else if (curve[0][0]=='R')
+	{
+	type = FunctionCurve::Polar;
+	formulas+=curve[0].section('=',1,1);
+	formulas+=curve[1].section('=',1,1);	
+	var = curve[2];
+	ranges+=curve[3].toDouble();
+	ranges+=curve[4].toDouble();
+	}
+addFunctionCurve(type, formulas, var, ranges, points);	 
 }
 
 void Graph::createWorksheet(const QString& name)
@@ -5915,19 +5905,22 @@ int i=0;
 for (i=0;i<(int)lines.size();i++)
 	{			
 	LineMarker* mrkL=(LineMarker*)d_plot->marker(lines[i]);
-	mrkL->updateBoundingRect();
+	if (mrkL)
+		mrkL->updateBoundingRect();
 	}
 	
 for (i=0;i<(int)texts.size();i++)
 	{
 	LegendMarker* mrkT = (LegendMarker*) d_plot->marker(texts[i]);
-	mrkT->updateOrigin();	
+	if (mrkT)
+		mrkT->updateOrigin();	
 	}
 	
 for (i=0;i<(int)images.size();i++)
 	{
 	ImageMarker* mrk = (ImageMarker*) d_plot->marker(images[i]);
-	mrk->updateOrigin();
+	if (mrk)
+		mrk->updateOrigin();
 	}
 }
 
@@ -6432,7 +6425,7 @@ if (g->isPiePlot())
 	plotPie((QwtPieCurve*)g->curve(0));
 else
 	{
-	for (i=0;i<g->curves();i++)
+	for (i=0; i<g->curves(); i++)
 		{
 		QwtPlotCurve *cv = (QwtPlotCurve *)g->curve(i);
 		int n = cv->dataSize();
@@ -6446,7 +6439,14 @@ else
 			}
 
 		QwtPlotCurve *c = 0;
-		if (style == VerticalBars || style == HorizontalBars)
+		QString name = cv->title().text();	
+		
+		if (!name.contains("_") && name.contains("="))
+			{//function curve
+			c = new FunctionCurve(name);
+			((FunctionCurve*)c)->copy((FunctionCurve*)cv);
+			}
+		else if (style == VerticalBars || style == HorizontalBars)
 			{
 			c = new QwtBarCurve(((QwtBarCurve*)cv)->orientation(), d_plot,0);
 			((QwtBarCurve*)c)->copy((const QwtBarCurve*)cv);
@@ -6553,10 +6553,14 @@ QValueList<int> txtMrkKeys=g->textMarkerKeys();
 for (i=0;i<(int)txtMrkKeys.size();i++)
 	{
 	LegendMarker* mrk=(LegendMarker*)g->textMarker(txtMrkKeys[i]);
-	if (mrk)
+	if (!mrk)
+		continue;
+
+	if (txtMrkKeys[i] == g->legendMarkerID)
+		legendMarkerID = insertTextMarker(mrk);
+	else
 		insertTextMarker(mrk);
 	}
-legendMarkerID = g->legendMarkerID;
 
 QwtArray<long> l = g->lineMarkerKeys();
 for (i=0;i<(int)l.size();i++)

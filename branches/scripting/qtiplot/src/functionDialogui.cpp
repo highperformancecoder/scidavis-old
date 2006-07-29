@@ -96,7 +96,7 @@ functionDialogui::functionDialogui( QWidget* parent, const char* name, bool moda
 
     polarPage = new QWidget( optionStack, "polarPage" );
 
-	GroupBox3 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""), polarPage,"GroupBox3" );
+	GroupBox3 = new QButtonGroup( 2,QGroupBox::Horizontal, QString::null, polarPage,"GroupBox3" );
 	GroupBox3->setLineWidth(0);
 	GroupBox3->setFlat(TRUE);
 	

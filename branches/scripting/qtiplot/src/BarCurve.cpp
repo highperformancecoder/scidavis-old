@@ -140,3 +140,39 @@ if (bar_offset == offset)
 
 bar_offset = offset;
 }
+
+double QwtBarCurve::dataOffset()   
+{
+if (bar_style == Vertical)
+	{
+	const QwtScaleMap &xMap = plot()->canvasMap(xAxis());
+
+	int dx = abs(xMap.transform(x(1))-xMap.transform(x(0)));
+	for (int i = 2; i<dataSize(); i++)
+		{
+		int min = abs(xMap.transform(x(i+1))-xMap.transform(x(i)));
+		if (min <= dx)
+			dx=min;
+		}
+	int bar_width=int(dx*(1-bar_gap*0.01));
+	int x1 = xMap.transform(minXValue()) + int(bar_offset*0.01*bar_width);	
+	return xMap.invTransform(x1) - minXValue();
+	}
+else
+	{
+	const QwtScaleMap &yMap = plot()->canvasMap(yAxis());
+
+	int dy = abs(yMap.transform(y(1))-yMap.transform(y(0)));
+	for (int i=2; i<dataSize(); i++)
+		{
+		int min = abs(yMap.transform(y(i+1))-yMap.transform(y(i)));
+		if (min <= dy)
+			dy=min;
+		}
+
+	int bar_width = int(dy*(1-bar_gap*0.01));
+	int y1 = yMap.transform(minYValue()) + int(bar_offset*0.01*bar_width);	
+	return yMap.invTransform(y1) - minYValue();
+	}
+return 0;
+}
