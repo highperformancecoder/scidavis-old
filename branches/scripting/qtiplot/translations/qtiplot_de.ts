@@ -440,7 +440,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
     </message>
     <message>
         <source>Zoom</source>
-        <translation>Zoom</translation>
+        <translation type="obsolete">Zoom</translation>
     </message>
     <message>
         <source>Show data display</source>
@@ -604,7 +604,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
     </message>
     <message>
         <source>Matrix</source>
-        <translation type="obsolete">Matrize</translation>
+        <translation>Matrix</translation>
     </message>
     <message>
         <source>Normal</source>
@@ -1669,11 +1669,11 @@ Operation aborted!</source>
     </message>
     <message>
         <source>&amp;Zoom</source>
-        <translation>&amp;Zoom</translation>
+        <translation type="obsolete">&amp;Zoom</translation>
     </message>
     <message>
         <source>ALT+Z</source>
-        <translation>ALT+Z</translation>
+        <translation type="obsolete">ALT+Z</translation>
     </message>
     <message>
         <source>&amp;Data reader</source>
@@ -2886,6 +2886,98 @@ Wollen Sie fortfahren?</translation>
         <source>Click on data point to display information!</source>
         <translation>Klicken Sie auf einen Datenpunkt, um Informationen anzuzeigen!</translation>
     </message>
+    <message>
+        <source>&amp;Zoom In</source>
+        <translation>Rein&amp;zoomen</translation>
+    </message>
+    <message>
+        <source>Ctrl++</source>
+        <translation>Strg++</translation>
+    </message>
+    <message>
+        <source>Zoom &amp;Out</source>
+        <translation>Herausz&amp;oomen</translation>
+    </message>
+    <message>
+        <source>Ctrl+-</source>
+        <translation>Strg+-</translation>
+    </message>
+    <message>
+        <source>Note</source>
+        <translation>Notiz</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Row selection error</source>
+        <translation>QtiPlot - Fehler beim Auswählen einer Zeile</translation>
+    </message>
+    <message>
+        <source>Please select a row first!</source>
+        <translation>Bitte zuerst eine Zeile auswählen!</translation>
+    </message>
+    <message>
+        <source>X</source>
+        <translation>X</translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation>Y</translation>
+    </message>
+    <message>
+        <source>Z</source>
+        <translation>Z</translation>
+    </message>
+    <message>
+        <source>X Error</source>
+        <translation>X-Fehler</translation>
+    </message>
+    <message>
+        <source>Y Error</source>
+        <translation>Y-Fehler</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Set number of pixels to average</source>
+        <translation type="obsolete">QtiPlot - Anzahl der zu mittelnden Pixel setzen</translation>
+    </message>
+    <message>
+        <source>Number of average pixels</source>
+        <translation type="obsolete">Anzahl der zu mittelnden Pixel</translation>
+    </message>
+    <message>
+        <source>&amp;X</source>
+        <translation>&amp;X</translation>
+    </message>
+    <message>
+        <source>&amp;Y</source>
+        <translation>&amp;Y</translation>
+    </message>
+    <message>
+        <source>&amp;Z</source>
+        <translation>&amp;Z</translation>
+    </message>
+    <message>
+        <source>X E&amp;rror</source>
+        <translation>X-&amp;Fehler</translation>
+    </message>
+    <message>
+        <source>Y &amp;Error</source>
+        <translation>Y-F&amp;ehler</translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation>Reinzoomen</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation>Herauszoomen</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Set the number of pixels to average</source>
+        <translation>QtiPlot - Anzahl der zu mittelnden Pixel festlegen</translation>
+    </message>
+    <message>
+        <source>Number of averaged pixels</source>
+        <translation>Anzahl der zu mittelnden Pixel</translation>
+    </message>
 </context>
 <context>
     <name>CanvasPicker</name>
@@ -3482,6 +3574,18 @@ Wollen Sie fortfahren?</translation>
     <message>
         <source>QtiPlot</source>
         <translation>QtiPlot</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation>Titel</translation>
+    </message>
+    <message>
+        <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
+        <translation>Die Bilddatei: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; existiert nicht mehr!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input function error</source>
+        <translation>QtiPlot - Fehler bei der Funktionseingabe</translation>
     </message>
 </context>
 <context>
@@ -4086,6 +4190,110 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
+    <message>
+        <source>The text in the clipboard is larger than your current selection!<byte value="x9"/>        
+Do you want to insert cells?</source>
+        <translation type="obsolete">Der Text in der Zwischenablage ist größer als die aktuelle Auswahl!<byte value="x9"/>        
+Wollen Sie trotzdem die Zellen einfügen?</translation>
+    </message>
+    <message>
+        <source>Please select two columns for this operation!</source>
+        <translation type="obsolete">Bitte zwei Spalten für diese Operation auswählen!</translation>
+    </message>
+    <message>
+        <source>Could not allocate memory, operation aborted!</source>
+        <translation type="obsolete">Konnte nicht genug Speicher reservieren, Operation abgebrochen!</translation>
+    </message>
+    <message>
+        <source>Error in GSL forward FFT operation!</source>
+        <translation type="obsolete">Fehler in GSL vorwärts FFT Operation!</translation>
+    </message>
+    <message>
+        <source>Please select a Y column to plot!</source>
+        <translation type="obsolete">Bitte eine Y-Spalte zum Plotten auswählen!</translation>
+    </message>
+    <message>
+        <source>Please set a default X column for this table, first!</source>
+        <translation type="obsolete">Bitte zuerst eine Spalte als Standard X-Spalte der Tabelle auswählen!</translation>
+    </message>
+    <message>
+        <source>Please select a column to plot!</source>
+        <translation type="obsolete">Bitte eine Spalte zum Plotten auswählen!</translation>
+    </message>
+    <message>
+        <source>Please select four columns for this operation!</source>
+        <translation type="obsolete">Bitte vier Spalten für diese Operation auswählen!</translation>
+    </message>
+    <message>
+        <source>You need at least two columns for this operation!</source>
+        <translation type="obsolete">Es werden mindestens zwei Spalten für diese Operation benötigt!</translation>
+    </message>
+    <message>
+        <source>Please select a Z column for this operation!</source>
+        <translation type="obsolete">Bitte eine Z-Spalte für diese Operation wählen!</translation>
+    </message>
+    <message>
+        <source>You need to define a X column first!</source>
+        <translation type="obsolete">Sie müssen zuerst eine X-Spalte definieren!</translation>
+    </message>
+    <message>
+        <source>You need to define a Y column first!</source>
+        <translation type="obsolete">Sie müssen zuerst eine Y-Spalte definieren!</translation>
+    </message>
+    <message>
+        <source>Qtiplot - Reading file...</source>
+        <translation type="obsolete">QtiPlot - Datei lesen...</translation>
+    </message>
+    <message>
+        <source>Rows will be deleted from the table!</source>
+        <translation type="obsolete">Es werden Zeilen aus der Tabelle gelöscht!</translation>
+    </message>
+    <message>
+        <source>Do you really want to continue?</source>
+        <translation type="obsolete">Wollen Sie wirklich fortfahren?</translation>
+    </message>
+    <message>
+        <source>Columns will be deleted from the table!</source>
+        <translation type="obsolete">Es werden Spalten aus der Tabelle gelöscht!</translation>
+    </message>
+    <message>
+        <source>Please select two columns for this operation:
+ the first represents the signal and the second the response function!</source>
+        <translation type="obsolete">Bitte wählen Sie zwei Spalten für diese Operation aus:
+Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</translation>
+    </message>
+    <message>
+        <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
+        <translation type="obsolete">Der Antwortdatensatz &apos;%1&apos; muss weniger als halb so groß wie der Signaldatensatz &apos;%2&apos; sein!</translation>
+    </message>
+    <message>
+        <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
+        <translation type="obsolete">Der Antwortdatensatz &apos;%1&apos; muss eine ungerade Anzahl von Punkten enthalten!</translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation type="obsolete">Frequenz</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="obsolete">Zeit</translation>
+    </message>
+    <message>
+        <source>Real</source>
+        <translation type="obsolete">Realteil</translation>
+    </message>
+    <message>
+        <source>Imaginary</source>
+        <translation type="obsolete">Imaginärteil</translation>
+    </message>
+    <message>
+        <source>Amplitude</source>
+        <translation type="obsolete">Amplitude</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="obsolete">Winkel</translation>
+    </message>
 </context>
 <context>
     <name>TextDialog</name>
@@ -4201,12 +4409,16 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
         <source>U</source>
         <translation>U</translation>
     </message>
+    <message>
+        <source>Set &amp;Default</source>
+        <translation>Stan&amp;dardwert setzen</translation>
+    </message>
 </context>
 <context>
     <name>analysisDialog</name>
     <message>
         <source>QtiPlot - Analysis Option</source>
-        <translation>QtiPlot - Analyseoptionen</translation>
+        <translation type="obsolete">QtiPlot - Analyseoptionen</translation>
     </message>
     <message>
         <source></source>
@@ -4219,6 +4431,10 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Analysis Options</source>
+        <translation>QtiPlot - Analyseoptionen</translation>
     </message>
 </context>
 <context>
@@ -4679,7 +4895,7 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     </message>
     <message>
         <source>Legend frame</source>
-        <translation>Legendenrahmen</translation>
+        <translation type="obsolete">Legendenrahmen</translation>
     </message>
     <message>
         <source>None</source>
@@ -4687,19 +4903,19 @@ Wollen Sie trotzdem die Zellen einfügen?</translation>
     </message>
     <message>
         <source>Rectangle</source>
-        <translation>Rechteck</translation>
+        <translation type="obsolete">Rechteck</translation>
     </message>
     <message>
         <source>Shadow</source>
-        <translation>Schatten</translation>
+        <translation type="obsolete">Schatten</translation>
     </message>
     <message>
         <source>White out</source>
-        <translation>weiß ausfüllen</translation>
+        <translation type="obsolete">weiß ausfüllen</translation>
     </message>
     <message>
         <source>Black out</source>
-        <translation>schwärzen</translation>
+        <translation type="obsolete">schwärzen</translation>
     </message>
     <message>
         <source>Ticks</source>
@@ -7078,7 +7294,7 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <translation type="obsolete">&amp;Abbrechen</translation>
     </message>
     <message>
         <source>Co&amp;lor</source>
@@ -7099,6 +7315,10 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <source>Scale Coordinates</source>
         <translation>Skalenkoordinaten</translation>
+    </message>
+    <message>
+        <source>Set &amp;Default</source>
+        <translation>Stan&amp;dardwert setzen</translation>
     </message>
 </context>
 <context>
@@ -8874,6 +9094,14 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <source>The column names must only contain letters and digits!</source>
         <translation>Die Spaltennamen dürfen nur Buchstaben und Ziffern enthalten!</translation>
+    </message>
+    <message>
+        <source>X Error</source>
+        <translation>X-Fehler</translation>
+    </message>
+    <message>
+        <source>Y Error</source>
+        <translation>Y-Fehler</translation>
     </message>
 </context>
 <context>

@@ -9317,7 +9317,7 @@ if (g)
 	{
 	 bool ok;
     int res = QInputDialog::getInteger(
-            tr("QtiPlot - Set number of pixels to average"), tr("Number of average pixels"),1, 1, 2000, 2,
+            tr("QtiPlot - Set the number of pixels to average"), tr("Number of averaged pixels"),1, 1, 2000, 2,
             &ok, this );
     if ( ok )
 		{

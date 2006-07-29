@@ -15,7 +15,7 @@ analysisDialog::analysisDialog( QWidget* parent, const QString& text, const char
 {
     if ( !name )
 		setName( "analysisDialog" );
-	setCaption(tr("QtiPlot - Analysis Option"));
+	setCaption(tr("QtiPlot - Analysis Options"));
 	
 	operation = QString::null;
 
