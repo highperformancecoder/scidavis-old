@@ -643,7 +643,6 @@ QApplication::restoreOverrideCursor();
 
 void CanvasPicker::drawLineMarker(const QPoint& point, bool endArrow)
 {
-Graph *g = plot();
 plotWidget->replot();
 LineMarker mrk(plotWidget);
 

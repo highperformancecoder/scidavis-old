@@ -733,7 +733,7 @@ public:
 	bool confirmCloseFolder, confirmCloseNotes;
 	bool canvasFrameOn, titleOn, autoSave, drawBackbones, allAxesOn, autoscale2DPlots;
 	int majTicksStyle, minTicksStyle, legendFrameStyle, autoSaveTime, axesLineWidth, canvasFrameWidth;
-	QColor legendBackground, legendColor, defaultArrowColor;
+	QColor legendBackground, legendTextColor, defaultArrowColor;
 	int defaultArrowLineWidth, defaultArrowHeadLength, defaultArrowHeadAngle;
 	bool defaultArrowHeadFill;
 	Qt::PenStyle defaultArrowLineStyle;

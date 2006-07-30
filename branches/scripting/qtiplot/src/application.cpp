@@ -324,10 +324,6 @@ plotTitleFont=QFont(family, pointSize + 2, QFont::Bold,FALSE);
 plot3DAxesFont=QFont(family, pointSize, QFont::Bold, FALSE );
 plot3DNumbersFont=QFont(family, pointSize);
 plot3DTitleFont=QFont(family, pointSize + 2, QFont::Bold,FALSE);
-
-legendColor = QColor(Qt::black);
-legendBackground = QColor(Qt::white);
-defaultArrowColor = QColor(Qt::black);
 }
 
 void ApplicationWindow::applyUserSettings()
@@ -2494,7 +2490,7 @@ if (!g->isPiePlot())
 	}
 
 g->initFonts(plotAxesFont, plotNumbersFont);
-g->setTextMarkerDefaults(legendFrameStyle, plotLegendFont, legendColor, legendBackground);
+g->setTextMarkerDefaults(legendFrameStyle, plotLegendFont, legendTextColor, legendBackground);
 g->customLegend();
 
 g->setArrowDefaults(defaultArrowLineWidth, defaultArrowColor, defaultArrowLineStyle,
@@ -3289,13 +3285,13 @@ void ApplicationWindow::setLegendDefaultSettings(int frame, const QFont& font,
 												 const QColor& textCol, const QColor& backgroundCol)
 {
 if (legendFrameStyle == frame && 
-	legendColor == textCol &&
+	legendTextColor == textCol &&
 	legendBackground == backgroundCol &&
 	plotLegendFont == font)
 	return;
 
 legendFrameStyle = frame;
-legendColor = textCol;
+legendTextColor = textCol;
 legendBackground = backgroundCol;
 plotLegendFont = font;
 
@@ -4096,7 +4092,7 @@ helpFilePath="/usr/share/doc/qtiplot/index.html";
 #endif
 
 settings.beginGroup("/QtiPlot");
-autoSearchUpdates = settings.readBoolEntry("/autoSearchUpdates", true, 0);
+autoSearchUpdates = settings.readBoolEntry("/autoSearchUpdates", false, 0);
 askForSupport = settings.readBoolEntry ("/askForSupport", true, 0);
 appLanguage = settings.readEntry("/appLanguage", "en");
 workingDir=settings.readEntry("/workingDir", qApp->applicationDirPath());
@@ -4141,11 +4137,11 @@ minTicksLength=settings.readNumEntry ("/minTicksLength", 5, 0);
 majTicksLength=settings.readNumEntry ("/majTicksLength", 9, 0);
 
 legendFrameStyle=settings.readNumEntry ("/legendFrameStyle", LegendMarker::Line, 0);
-legendColor = QColor(settings.readEntry("/legendColor"));
-legendBackground = QColor(settings.readEntry("/legendBackground"));
+legendTextColor = QColor(settings.readEntry("/legendTextColor", "#000000"));//default color Qt::black
+legendBackground = QColor(settings.readEntry("/legendBackground", "#ffffff"));//default color Qt::white
 
 defaultArrowLineWidth = settings.readNumEntry("/defaultArrowLineWidth", 1);
-defaultArrowColor = QColor(settings.readEntry("/defaultArrowColor"));
+defaultArrowColor = QColor(settings.readEntry("/defaultArrowColor", "#000000"));//default color Qt::black
 defaultArrowHeadLength = settings.readNumEntry("/defaultArrowHeadLength", 4);
 defaultArrowHeadAngle = settings.readNumEntry("/defaultArrowHeadAngle", 45);
 defaultArrowHeadFill = settings.readBoolEntry("/defaultArrowHeadFill", true);
@@ -4353,7 +4349,7 @@ settings.writeEntry("/minTicksLength", minTicksLength);
 settings.writeEntry("/majTicksLength", majTicksLength);
 
 settings.writeEntry("/legendFrameStyle", legendFrameStyle);
-settings.writeEntry("/legendColor", legendColor.name());
+settings.writeEntry("/legendTextColor", legendTextColor.name());
 settings.writeEntry("/legendBackground", legendBackground.name());
 
 //line/arrow default settings 
@@ -6824,7 +6820,7 @@ switch(QMessageBox::information(this,
             0, 2 ) )
 	{
 	case 0:
-		plot->addTextLayer(legendFrameStyle, plotLegendFont, legendColor, legendBackground);
+		plot->addTextLayer(legendFrameStyle, plotLegendFont, legendTextColor, legendBackground);
 	break;
 
 	case 1:
@@ -7796,7 +7792,7 @@ QString version = "QtiPlot " + QString::number(majVersion) + "." +
 QMessageBox::about(this,tr("About QtiPlot"),
 			 tr("<h2>"+ version + "</h2>"
 			 "<p><h3>Copyright(C): Ion Vasilief</h3>"
-			 "<p><h3>Released: 23/05/2006</h3>"));
+			 "<p><h3>Released: 30/07/2006</h3>"));
 }
 
 void ApplicationWindow::windowsMenuAboutToShow()
@@ -10081,7 +10077,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 ag->replot();
 ag->setIgnoreResizeEvents(!autoResizeLayers);
 ag->setAutoscaleFonts(autoScaleFonts);
-ag->setTextMarkerDefaults(legendFrameStyle, plotLegendFont, legendColor, legendBackground);
+ag->setTextMarkerDefaults(legendFrameStyle, plotLegendFont, legendTextColor, legendBackground);
 ag->setArrowDefaults(defaultArrowLineWidth, defaultArrowColor, defaultArrowLineStyle,
 					 defaultArrowHeadLength, defaultArrowHeadAngle, defaultArrowHeadFill);
 plot->connectLayer(ag);

@@ -8,7 +8,6 @@ ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
 {	
 OPJFile opj((char *)filename.latin1());
 parse_error = opj.Parse();
-
 importTables(opj);
 }
 

@@ -3,10 +3,17 @@ liborigin and opj2dat
 
 Author : Stefan Gerlach
 
+Thanks to :
+Ion Vasilief	for Windows patches and testing
+
 compiling :
 	$ make -f Makefile.LINUX
 	or for Darwin :
 	$ make -f Makefile.DARWIN
+	or for Windows :
+	$ make -f Makefile.WINDOWS
+	or with Solaris Compiler :
+	$ make -f Makefile.Solaris
 Usage :
 	$ ./opj2dat <project.opj>
 
@@ -17,13 +24,17 @@ FEATURES :
 
 ---------------------------------------------------------------------------
 TODO :
-	* read spreadsheet infos (LAYER section) with better method
-		-> check out examples
+	V CRASH on 4.1 projects companatomy(_new)
 	V crash on backup.opj
 		-> cname==0 but no matrix !
+	* read spreadsheet infos (LAYER section) with better method
+		-> check out examples
 	* support MATRIX tables
+		* check older project versions (6.0,5.0,etc.)
+			-> size always 0
 		* get column/row numbers -> resize matrix
 			* check ws+matrix.opj
+			5x2 & 2x5	: 0x215 / 0x23D
 		* check all matrix examples (also mixed)
 	* fix reading of mixed columns in file
 		-> SiGe example

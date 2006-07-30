@@ -1,4 +1,4 @@
-// OPJFile.cc
+// OPJFile.cpp
 
 #include <stdio.h>
 #include <stdlib.h>
