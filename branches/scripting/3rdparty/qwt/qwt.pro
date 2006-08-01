@@ -16,6 +16,8 @@
 # relevant files and others. If you are 
 # interested in QwtPlot only, you can remove
 # the lists at the end of this file.
+QMAKE_PROJECT_DEPTH = 0
+linux-g++-64: libsuff=64
 
 TARGET            = qwt
 TEMPLATE          = lib
@@ -39,7 +41,7 @@ unix:CONFIG           += staticlib
 
 MOC_DIR           = src/moc
 OBJECTS_DIR       = src/obj
-DESTDIR           = lib
+DESTDIR           = lib$${libsuff}
 INCLUDEPATH      += include
 DEPENDPATH       += include src
 

@@ -1,3 +1,6 @@
+QMAKE_PROJECT_DEPTH = 0
+linux-g++-64: libsuff=64
+
 TARGET  = qtiplot
 TEMPLATE     = app
 CONFIG      += qt warn_on release exceptions opengl
@@ -17,8 +20,8 @@ INCLUDEPATH		  += ../3rdparty/liborigin
 ##################### Linux (Mac OS X) settings ##################### 
 
 unix:INCLUDEPATH  += -I /usr/include/qwtplot3d
-unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
-unix:LIBS         += -L /usr/lib -lgsl -lgslcblas -lqwtplot3d -lz -lorigin
+unix:LIBS         += ../3rdparty/qwt/lib$${libsuff}/libqwt.a
+unix:LIBS         += -L /usr/lib$${libsuff} -lgsl -lgslcblas -lqwtplot3d -lz -lorigin
 
 unix:target.path=/usr/bin
 unix:INSTALLS += target
