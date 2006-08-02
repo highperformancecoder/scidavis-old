@@ -259,11 +259,13 @@ public slots:
 
 	//!Slot: notifies the main application that the table has been modified. Triggers the update of 2D plots.
 	void notifyChanges();
+
+	//!Slot: notifies the main application that the width of a table column has been modified by the user
+	void colWidthModified(int, int, int);
 				
 signals:
 	void plot3DRibbon(Table *,const QString&);
 	void plotXYZ(Table *,const QString&, int);
-
 	void plotCol(Table *,const QStringList&, int);
 	void changedColHeader(const QString&, const QString&);
 	void removedCol(const QString&);

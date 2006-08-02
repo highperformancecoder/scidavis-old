@@ -580,10 +580,9 @@ public slots:
 	void updateRecentProjectsList();
 	
 	//!  connected to the done(bool) signal of the http object
-	void getVersionDone(bool error);
-
+	void receivedVersionFile(bool error);
 	//!  called when the user presses the actionCheckUpdates
-	void getVersionFile();
+	void searchForUpdates();
 
 	void showDonationDialog();
 	void showSupportPage();
@@ -775,6 +774,9 @@ public:
 	int arrowHeadLength, arrowHeadAngle, specialPlotMenuID, statMenuID, panelMenuID, plot3dID;
 	int plotMenuID, importMenuID, newMenuID, recentMenuID, setAsMenuID, fillMenuID, normMenuID;
 	int translateMenuID, smoothMenuID, filterMenuID, fitExpMenuID, multiPeakMenuID; 
+
+	//! Equals true if an automatical search for updates was performed on start-up otherwise is set to false;
+	bool autoSearchUpdatesRequest;
 
     QAction *actionNewProject, *actionNewNote, *actionNewTable, *actionNewFunctionPlot, *actionNewSurfacePlot, *actionNewMatrix, *actionNewGraph;
     QAction *actionOpen, *actionLoadImage, *actionSaveProject, *actionSaveProjectAs, *actionImportImage;

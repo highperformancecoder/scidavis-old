@@ -1477,12 +1477,10 @@ for (int i = a; i <= a+1; i++)
 	else
 		sc_engine = new QwtLinearScaleEngine();
 
-	QwtScaleDiv div;
-	if (stepOn)	
-		div = sc_engine->divideScale (start, end, majTicks, minTicks, step);
-	else
-		div = sc_engine->divideScale (start, end, majTicks, minTicks);
+	if (!stepOn)	
+		step = 0;
 
+	QwtScaleDiv	div = sc_engine->divideScale (start, end, majTicks, minTicks, step);
 	if (scales[8*axis+7] == "1")
 		{
 		sc_engine->setAttribute(QwtScaleEngine::Inverted);
@@ -1942,13 +1940,7 @@ QwtPlotPrintFilter  filter;
 filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle |
                   QwtPlotPrintFilter::PrintCanvasBackground);
 
-if (d_plot->paletteBackgroundColor() != QColor(255, 255, 255))
-	paint.fillRect(rect, d_plot->paletteBackgroundColor());
-
-d_plot->drawPixmap(&paint, rect);
-d_plot->printFrame(&paint, QRect(lw/2,lw/2, 
-				   d_plot->width()-lw, d_plot->height()-lw));//draw plot frame
-
+d_plot->print(&paint, rect, filter);
 paint.end();
 
 //the initial layout is invalidated during the print operation and must be recalculated	

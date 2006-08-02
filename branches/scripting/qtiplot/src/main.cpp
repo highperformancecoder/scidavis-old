@@ -53,7 +53,10 @@ int main( int argc, char ** argv )
 		mw->actionSaveProject->setEnabled(false);
 		mw->showDonationDialog();
 		if (mw->autoSearchUpdates)
-			mw->getVersionFile();
+			{
+			mw->autoSearchUpdatesRequest = true;
+			mw->searchForUpdates();
+			}
 		}
 
     a.connect( &a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()) );

@@ -82,6 +82,7 @@ QHeader* head=(QHeader*)worksheet->horizontalHeader();
 head->setMouseTracking(true);
 head->setResizeEnabled(true);
 head->installEventFilter(this);
+connect(head, SIGNAL(sizeChange(int, int, int)), this, SLOT(colWidthModified(int, int, int)));
 
 col_plot_type[0] = X;
 setHeaderColType();
@@ -104,6 +105,12 @@ accel->connectItem( accel->insertItem( CTRL+Key_Return ), this, SLOT(calculate()
 connect(worksheet, SIGNAL(valueChanged(int,int)),this, SLOT(cellEdited(int,int)));
 specifications = saveToString("geometry\n");
 }
+
+void Table::colWidthModified(int, int, int)
+{
+emit modifiedWindow(this);
+}
+
 
 void Table::setBackgroundColor(const QColor& col)
 {
@@ -2831,7 +2838,10 @@ if (e->type() == QEvent::MouseButtonDblClick)
 	rect.setWidth(4);
 
 	if (rect.contains (me->pos()))
+		{
 		worksheet->adjustColumn(selectedCol);
+		emit modifiedWindow(this);
+		}
 	else
 		emit optionsDialog();
 	return true;

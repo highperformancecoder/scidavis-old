@@ -123,7 +123,10 @@ else
              QwtPainter::drawLine(p, tval, yorg, tval, yorg + len);
 			break;
 			case TopScale:
-			QwtPainter::drawLine(p, tval, yorg + 1, tval, yorg - len);
+				if (p->pen().width() > 1)
+					QwtPainter::drawLine(p, tval, yorg + 1, tval, yorg - len);
+				else
+					QwtPainter::drawLine(p, tval, yorg, tval, yorg - len);
 			break;
 
 			default:

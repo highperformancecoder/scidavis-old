@@ -64,7 +64,6 @@ public:
 	void mouseReleaseEvent ( QMouseEvent * e );
 	void mouseMoveEvent ( QMouseEvent * e );
 
-	void drawPixmap(QPainter *painter, const QRect &rect);
 	virtual void print(QPainter *, const QRect &rect,
         const QwtPlotPrintFilter & = QwtPlotPrintFilter()) const;
 	

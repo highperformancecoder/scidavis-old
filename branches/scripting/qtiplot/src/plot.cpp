@@ -96,7 +96,8 @@ if (lw)
 else
 	painter->setPen(QPen(Qt::NoPen));
 
-painter->setBrush(paletteBackgroundColor());
+if (paletteBackgroundColor() != Qt::white)
+	painter->setBrush(paletteBackgroundColor());
 							
 QwtPainter::drawRect(painter, rect.x(), rect.y(), rect.width(), rect.height());
 painter->restore();
@@ -116,7 +117,9 @@ void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
 		
 		painter->save();
 		painter->setPen (QPen(color,w,Qt::SolidLine));
-		painter->setBrush(canvasBackground());
+
+		if (canvasBackground() != Qt::white)
+			painter->setBrush(canvasBackground());
 				
 		//if (w == 1 && majorTicksType[QwtPlot::xBottom] == Plot::Out)
 			rect.setHeight(canvasRect.height() + 1);	
@@ -395,75 +398,6 @@ if (graphToResize)
 	graphToResize=FALSE;
 	ShiftButton=FALSE;
 	}
-}
-
-void Plot::drawPixmap(QPainter *painter, const QRect &rect)
-{
-    if ( painter == 0 || !painter->isActive() || size().isNull() )
-       return;
-
-    painter->save();
-
-	QwtPlotLayout *layout = plotLayout();
-    layout->activate(this, rect, 0);
-   
-	printTitle(painter, layout->titleRect());
-
-    for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
-		{
-		const QwtScaleWidget *scale = this->axisWidget(axis);
-        if (scale)
-			{
-            int baseDist = scale->margin();
-            int startDist, endDist;
-			if (axis == QwtPlot::xTop || axis == QwtPlot::yRight)
-				{//synchronize secondary scales 
-				scale = this->axisWidget(axis-1);
-				if (scale)
-					{
-					startDist = scale->startBorderDist();
-					endDist = scale->endBorderDist();
-					}
-				}
-			else
-				{
-				startDist = scale->startBorderDist();
-				endDist = scale->endBorderDist();
-				}
-            printScale(painter, axis, startDist, endDist, baseDist, layout->scaleRect(axis));
-			}
-		}
-
-	const QwtPlotCanvas *canvas = this->canvas();
-	const QPixmap *canvasPix = canvas->paintCache();
-	if (canvasPix)
-		{
-		QRect cr = layout->canvasRect();
-		const int clw = canvas->lineWidth();
-		if (clw > 0)
-    		{
-			QPalette pal = canvas->palette();
-			QColor color = pal.color(QPalette::Active, QColorGroup::Foreground);
-			painter->setPen (QPen(color, clw, Qt::SolidLine));
-
-			cr.moveBy(clw/2, clw/2);
-			cr.setWidth(cr.width() - clw);
-			cr.setHeight(cr.height() - clw);
-
-			painter->drawRect(cr);//draw canvas frame
-
-			cr = layout->canvasRect();
-			cr.moveBy(clw, clw);
-			cr.setWidth(cr.width() - clw);
-			cr.setHeight(cr.height() - clw);
-			}
-
-		QPixmap pix = QPixmap (cr.width(), cr.height(), -1);
-		copyBlt (&pix, 0, 0, canvasPix, 0, 0, -1, -1);
-		painter->drawPixmap (cr, pix);
-		}
-
-    painter->restore();
 }
 
 void Plot::print(QPainter *painter, const QRect &plotRect,

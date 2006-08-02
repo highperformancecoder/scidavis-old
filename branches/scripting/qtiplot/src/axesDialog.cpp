@@ -2342,7 +2342,6 @@ if (generalDialog->currentPage()==(QWidget*)scalesPage)
     QString to=boxEnd->text().lower();
 	QString step=boxStep->text().lower();			
 	double start, end, stp;
-    bool error=FALSE;	
 	try
 		{
 		myParser parser;
@@ -2353,7 +2352,6 @@ if (generalDialog->currentPage()==(QWidget*)scalesPage)
 		{
 		QMessageBox::critical(0, tr("QtiPlot - Start limit error"),e.GetMsg());
 		boxStart->setFocus();
-		error=TRUE;
 		return FALSE;
 		}			
 	try
@@ -2366,7 +2364,6 @@ if (generalDialog->currentPage()==(QWidget*)scalesPage)
 		{
 		QMessageBox::critical(0, tr("QtiPlot - End limit error"),e.GetMsg());
 		boxEnd->setFocus();
-		error=TRUE;
 		return FALSE;
 		}	
 	try
@@ -2379,7 +2376,6 @@ if (generalDialog->currentPage()==(QWidget*)scalesPage)
 		{
 		QMessageBox::critical(0, tr("QtiPlot - Step input error"),e.GetMsg());
 		boxStep->setFocus();
-		error=TRUE;
 		return FALSE;
 		}
 		
@@ -2391,13 +2387,10 @@ if (generalDialog->currentPage()==(QWidget*)scalesPage)
 		return FALSE;	
 		}
 			
-	if (!error)
-		{
-		d_graph->setAxisScale(axis, scaleLimits(axis, start, end, stp, 
-							boxMajorValue->text(), boxMinorValue->text()));
-		d_graph->emitModified();
-		d_graph->replot();
-		}
+	d_graph->setAxisScale(axis, scaleLimits(axis, start, end, stp, 
+						boxMajorValue->text(), boxMinorValue->text()));
+	d_graph->emitModified();
+	d_graph->replot();
 	}
 else if (generalDialog->currentPage()==gridPage)
 	{

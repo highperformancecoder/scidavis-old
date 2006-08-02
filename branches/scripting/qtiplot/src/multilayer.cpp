@@ -879,13 +879,7 @@ for (int i=0;i<(int)graphsList->count();i++)
 		int lw = myPlot->lineWidth();
 		QRect rect = QRect(gr->x() + lw, gr->y() + lw, myPlot->width() - 2*lw, 
 						  myPlot->height() - 2*lw);
-
-		if (myPlot->paletteBackgroundColor() != QColor(white))
-			paint.fillRect(rect, myPlot->paletteBackgroundColor());
-
-		myPlot->drawPixmap(&paint, rect);
-		myPlot->printFrame(&paint, QRect(gr->x()+lw/2,gr->y()+lw/2, myPlot->width()-lw, 
-						  myPlot->height()-lw));//draw plot frame
+		myPlot->print(&paint, rect, filter);
 		}		
 paint.end();
 return pic;
