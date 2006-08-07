@@ -217,9 +217,11 @@ void QwtSymbol::draw(QPainter *painter, const QRect& r) const
         }
         case QwtSymbol::Star1:
         {
+            const double sqrt1_2 = 0.70710678118654752440; /* 1/sqrt(2) */
+
             const int w2 = r.width() / 2;
             const int h2 = r.height() / 2;
-            const int d1  = (int)( (double)w2 * (1.0 - M_SQRT1_2) );
+            const int d1  = (int)( (double)w2 * (1.0 - sqrt1_2) );
 
             QwtPainter::drawLine(painter, r.left() + d1, r.top() + d1,
                     r.right() - d1, r.bottom() - d1);
@@ -234,8 +236,7 @@ void QwtSymbol::draw(QPainter *painter, const QRect& r) const
         case QwtSymbol::Star2:
         {
             const int w = r.width();
-            const int side = (int)(((double)r.width() * (1.0 - 0.866025)) /
-                2.0);  // 0.866025 = cos(30°)
+            const int side = (int)(((double)r.width() * (1.0 - 0.866025)) / 2.0);  // 0.866025 = cos(30°)
             const int h4 = r.height() / 4;
             const int h2 = r.height() / 2;
             const int h34 = (r.height() * 3) / 4;
