@@ -40,8 +40,11 @@ win32:INCLUDEPATH += ../3rdparty/zlib123/include
 
 win32:LIBS        += ../3rdparty/qwtplot3d/lib/qwtplot3d.lib
 win32:LIBS        += ../3rdparty/qwt/lib/qwt500.lib  
-win32:LIBS        += C:/GSL/lib/libgsl.lib
-win32:LIBS        += C:/GSL/lib/libgslcblas.lib
+//win32:LIBS        += C:/GSL/lib/libgsl.lib
+//win32:LIBS        += C:/GSL/lib/libgslcblas.lib
+
+win32:LIBS        += C:/WinGsl/Lib/WinGsl.lib
+
 win32:LIBS		  += ../3rdparty/zlib123/lib/zdll.lib
 win32:LIBS		  += ../3rdparty/liborigin/liborigin.lib
  
@@ -124,7 +127,8 @@ HEADERS  = src/application.h \
 	 src/Scripting.h\
 	 src/scriptedit.h\
 	 src/muParserScripting.h\
-	 src/FunctionCurve.h
+	 src/FunctionCurve.h\
+	 src/Fitter.h
      
 SOURCES  = src/application.cpp \
      src/graph.cpp \
@@ -201,7 +205,8 @@ SOURCES  = src/application.cpp \
 	 src/muParserScripting.cpp\
 	 src/fileDialogs.cpp\
      src/scales.cpp\
-	 src/FunctionCurve.cpp
+	 src/FunctionCurve.cpp\
+	 src/Fitter.cpp
 
 #parser (muParser_v1.26)
 HEADERS+=../3rdparty/muParser/muParser.h \

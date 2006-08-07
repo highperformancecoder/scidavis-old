@@ -2,6 +2,7 @@
 #include "graph.h"
 #include "colorBox.h"
 #include "application.h"
+#include "Fitter.h"
 
 #include <qvariant.h>
 #include <qpushbutton.h>
@@ -20,10 +21,7 @@ expDecayDialog::expDecayDialog(int type, QWidget* parent, const char* name, bool
 	
 	slopes = type;
 	
-	setCaption(tr("QtiPlot - Verify initial guesses"));
-    setMinimumSize( QSize( 310, 140 ) );
-	setMaximumSize( QSize( 310, 140 ) );
-	
+	setCaption(tr("QtiPlot - Verify initial guesses"));	
 	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),this,"GroupBox1" );
 
 	new QLabel( tr("Exponential Fit of"), GroupBox1, "TextLabel1",0 );
@@ -108,7 +106,7 @@ expDecayDialog::~expDecayDialog()
 void expDecayDialog::languageChange()
 {
 	buttonFit->setText( tr( "&Fit" ) );
-	buttonCancel->setText( tr( "&Cancel" ) );
+	buttonCancel->setText( tr( "&Close" ) );
 }
 
 void expDecayDialog::setGraph(Graph *g)
@@ -137,6 +135,8 @@ if (curvesList.contains(curve) <= 0)
 
 ApplicationWindow *app = (ApplicationWindow *)this->parent();
 graph->setFitID(++app->fitNumber);
+
+Fitter *fitter;
 QString result;
 if (slopes == 3)
 	result = graph->fitExpDecay3(boxName->currentText(),boxFirst->text().toDouble(),
@@ -146,14 +146,14 @@ else if (slopes == 2)
 	result = graph->fitExpDecay2(boxName->currentText(),boxFirst->text().toDouble(),
 				boxSecond->text().toDouble(), boxStart->text().toDouble(),
 				boxYOffset->text().toDouble(), boxColor->currentItem());
-else if (slopes == 1)
-	result = graph->fitExpDecay(boxName->currentText(),boxFirst->text().toDouble(),
-				 boxStart->text().toDouble(), boxYOffset->text().toDouble(), boxColor->currentItem());
-else if (slopes == -1)
-	result = graph->fitExpGrowth(boxName->currentText(),boxFirst->text().toDouble(),
-				 boxStart->text().toDouble(), boxYOffset->text().toDouble(), boxColor->currentItem());
+else if (slopes == 1 || slopes == -1)
+	{
+	double x_init[3] = {boxStart->text().toDouble(), slopes/boxFirst->text().toDouble(), boxYOffset->text().toDouble()};
+	fitter = new ExponentialFitter(slopes == -1, app, graph);
+	fitter->setInitialGuesses(x_init);
+	}
 
-app->updateLog(result);
+fitter->setDataFromCurve(boxName->currentText());
+fitter->fit();
+delete fitter;
 }
-
-

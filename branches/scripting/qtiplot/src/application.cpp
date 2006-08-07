@@ -4248,6 +4248,12 @@ QTextIStream in2(&str);
 in2 >> *explorerSplitter;
 
 settings.endGroup();
+
+settings.beginGroup("/Fitting");
+fit_output_precision = settings.readNumEntry("/fit_output_precision", 15);
+pasteFitResultsToPlot = settings.readBoolEntry("/pasteFitResultsToPlot", false);
+writeFitResultsToLog = settings.readBoolEntry("/writeFitResultsToLog", true);
+settings.endGroup();
 }
 
 void ApplicationWindow::saveSettings()
@@ -4392,6 +4398,12 @@ QTextOStream out2(&str);
 out2 << *explorerSplitter;
 settings.writeEntry("/ExplorerSplitter", str);
 
+settings.endGroup();
+
+settings.beginGroup("/Fitting");
+settings.writeEntry("/fit_output_precision", fit_output_precision);
+settings.writeEntry("/pasteFitResultsToPlot", pasteFitResultsToPlot);
+settings.writeEntry("/writeFitResultsToLog", writeFitResultsToLog);
 settings.endGroup();
 }
 
@@ -6367,6 +6379,7 @@ connect (plot, SIGNAL(closedWindow(myWidget*)), fd, SLOT(close()));
 	
 fd->insertFunctionsList(fitFunctions);
 fd->setGraph(g);
+fd->setSrcTables(tableList());
 fd->showNormal();
 fd->setActiveWindow();
 }
@@ -7795,7 +7808,7 @@ QString version = "QtiPlot " + QString::number(majVersion) + "." +
 QMessageBox::about(this,tr("About QtiPlot"),
 			 tr("<h2>"+ version + "</h2>"
 			 "<p><h3>Copyright(C): Ion Vasilief</h3>"
-			 "<p><h3>Released: 30/07/2006</h3>"));
+			 "<p><h3>Released: 02/08/2006</h3>"));
 }
 
 void ApplicationWindow::windowsMenuAboutToShow()

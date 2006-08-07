@@ -842,10 +842,12 @@ void QwtScaleWidget::setScaleDiv(
     const QwtScaleTransformation& transformation,
     const QwtScaleDiv &scaleDiv)
 {
-    if (d_data->scaleDraw->scaleDiv() != scaleDiv)
+    QwtScaleDraw *sd = d_data->scaleDraw;
+    if (sd->scaleDiv() != scaleDiv ||
+        sd->map().transformation().xForm != transformation.xForm )
     {
-        d_data->scaleDraw->setTransformation(transformation);
-        d_data->scaleDraw->setScaleDiv(scaleDiv);
+        sd->setTransformation(transformation);
+        sd->setScaleDiv(scaleDiv);
         layoutScale();
 
         emit scaleDivChanged();

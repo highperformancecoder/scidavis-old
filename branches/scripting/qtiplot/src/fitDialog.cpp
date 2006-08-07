@@ -3,6 +3,7 @@
 #include "graph.h"
 #include "application.h"
 #include "colorBox.h"
+#include "Fitter.h"
 
 #include <qvariant.h>
 #include <qpushbutton.h>
@@ -27,7 +28,9 @@
 #include <qfiledialog.h>
 #include <qtable.h>
 #include <qheader.h>
-
+#include <qwidgetlist.h>
+#include <qradiobutton.h>
+#include <qlineedit.h>
 #include <stdio.h> 
 
 fitDialog::fitDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
@@ -38,10 +41,13 @@ if ( !name )
 setCaption(tr("QtiPlot - Non-linear curve fit"));
 setSizeGripEnabled( true );
 	
+fitter = 0;
+
 tw = new QWidgetStack( this, "tw" );
 tw->setSizePolicy(QSizePolicy (QSizePolicy::Preferred, QSizePolicy::Preferred, 2, 0, FALSE ));
 initEditPage();
 initFitPage();
+initAdvancedPage();
 
 tw->addWidget(editPage, 0);
 tw->addWidget(fitPage, 1);
@@ -72,7 +78,7 @@ lblFunction = new QLabel(GroupBox1, "boxOrder" );
 new QLabel(QString::null, GroupBox1, "TextLabel2",0 );
 boxFunction = new QTextEdit(GroupBox1, "boxOrder" );
 boxFunction->setReadOnly(true);
-boxFunction->setMaximumHeight(60);
+boxFunction->setMaximumHeight(50);
 
 new QLabel( tr("Initial guesses"), GroupBox1, "TextLabel23",0 );
 boxParams = new QTable(GroupBox1, "boxParams");
@@ -92,6 +98,21 @@ boxSolver->insertItem(tr("Nelder-Mead Simplex"));
 new QLabel( tr("Color"), GroupBox1, "boxColorLabel",0 );
 boxColor = new ColorBox( FALSE, GroupBox1);
 boxColor->setColor(QColor(red));
+
+QHBox *weightBox = new QHBox(fitPage);
+weightBox->setSpacing(5);
+
+new QLabel( tr("Weighting Method"), weightBox);
+boxWeighting = new QComboBox(weightBox);
+boxWeighting->insertItem(tr("No weighting"));
+boxWeighting->insertItem(tr("Instrumental"));
+boxWeighting->insertItem(tr("Statistical"));
+boxWeighting->insertItem(tr("Arbitrary Dataset"));
+
+tableNamesBox = new QComboBox(weightBox);
+tableNamesBox->setEnabled(false);
+colNamesBox = new QComboBox(weightBox);
+colNamesBox->setEnabled(false);
 	
 QHBox *hbox=new QHBox(fitPage,"hbox");
 hbox->setSpacing(5);
@@ -114,7 +135,7 @@ new QLabel( tr("Tolerance"), GroupBox3, "TextLabel41",0 );
 boxTolerance = new QLineEdit(GroupBox3, "boxTolerance" );
 boxTolerance->setText("1e-4");
 
-QButtonGroup *GroupBox2 = new QButtonGroup(4,QGroupBox::Horizontal,tr(""),fitPage,"GroupBox2" );
+QButtonGroup *GroupBox2 = new QButtonGroup(5,QGroupBox::Horizontal,tr(""),fitPage,"GroupBox2" );
 GroupBox2->setFlat (TRUE);
 GroupBox2->setLineWidth (0);
 
@@ -130,11 +151,15 @@ buttonOk->setAutoDefault( TRUE );
 buttonOk->setDefault( TRUE );
   
 buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
-buttonCancel->setText( tr( "&Cancel" ) );
+buttonCancel->setText( tr( "&Close" ) );
+
+buttonAdvanced = new QPushButton(GroupBox2, "buttonCancel" );
+buttonAdvanced->setText( tr( "Custom &Output >>" ) );
 
 QVBoxLayout* hlayout = new QVBoxLayout(fitPage, 5, 5, "hlayout");
 hlayout->addWidget(GroupBox1);
 hlayout->addWidget(hbox);
+hlayout->addWidget(weightBox);
 hlayout->addWidget(GroupBox2);
 
 // signals and slots connections
@@ -143,7 +168,9 @@ connect( buttonOk, SIGNAL( clicked() ), this, SLOT(accept()));
 connect( buttonCancel, SIGNAL( clicked() ), this, SLOT(close()));
 connect( buttonEdit, SIGNAL( clicked() ), this, SLOT(showEditPage()));
 connect( btnDeleteTables, SIGNAL( clicked() ), (ApplicationWindow *)this->parent(), SLOT(deleteFitTables()));
-	
+connect( boxWeighting, SIGNAL( activated(int) ), this, SLOT( enableWeightingParameters(int) ) );
+connect( buttonAdvanced, SIGNAL(clicked()), this, SLOT(showAdvancedPage() ) );
+
 setFocusProxy(boxFunction);
 }
 
@@ -240,6 +267,143 @@ connect( btnAddTxt, SIGNAL(clicked()), this, SLOT(addFunction() ) );
 connect( btnContinue, SIGNAL(clicked()), this, SLOT(showFitPage() ) );
 connect( btnAddFunc, SIGNAL(clicked()), this, SLOT(saveUserFunction()));
 connect( btnDelFunc, SIGNAL(clicked()), this, SLOT(removeUserFunction()));
+}
+
+void fitDialog::initAdvancedPage()
+{
+ApplicationWindow *app = (ApplicationWindow *)this->parent();
+advancedPage = new QWidget( tw);
+
+QButtonGroup *GroupBox1 = new QButtonGroup(2,QGroupBox::Horizontal,tr("Generated Fit Curve"), advancedPage );
+
+generatePointsBtn = new QRadioButton (GroupBox1);
+generatePointsBtn ->setText(tr("Uniform X"));
+generatePointsBtn->setChecked(true);
+
+QHBox *hb=new QHBox(GroupBox1);
+hb->setSpacing(5);
+
+lblPoints = new QLabel( tr("Points"), hb);
+generatePointsBox = new QSpinBox (0, 1000000, 10, hb);
+generatePointsBox->setValue(100);
+
+samePointsBtn = new QRadioButton(GroupBox1);
+samePointsBtn->setText( tr( "Same X as Fitting Data" ) );
+
+QButtonGroup *GroupBox2 = new QButtonGroup(3,QGroupBox::Horizontal, tr("Parameters Output"), advancedPage );
+
+btnParamTable = new QPushButton(GroupBox2);
+btnParamTable->setText( tr( "Parameters Table" ) );
+
+new QLabel( tr("Name: "), GroupBox2);
+
+paramTableName = new QLineEdit(GroupBox2);
+paramTableName->setText( tr( "Parameters" ) );
+
+btnCovMatrix = new QPushButton(GroupBox2);
+btnCovMatrix->setText( tr( "Covariance Matrix" ) );
+
+new QLabel( tr("Name: "), GroupBox2);
+
+covMatrixName = new QLineEdit(GroupBox2);
+covMatrixName->setText( tr( "CovMatrix" ) );
+
+new QLabel( tr("Significant Digits"), GroupBox2);
+boxPrecision = new QSpinBox (0, 15, 1, GroupBox2);
+boxPrecision->setValue (app->fit_output_precision);
+
+logBox = new QCheckBox (tr("Write Parameters to Result Log"), advancedPage);
+logBox->setChecked(app->writeFitResultsToLog);
+
+plotLabelBox = new QCheckBox (tr("Paste Parameters to Plot"), advancedPage);
+plotLabelBox->setChecked(app->pasteFitResultsToPlot);
+
+QHBox *hbox1=new QHBox(advancedPage);
+hbox1->setSpacing(5);
+hbox1->setMaximumWidth(200);
+
+btnBack = new QPushButton(hbox1);
+btnBack->setText( tr( "<< &Fit" ) );
+btnBack->setMaximumWidth(100);
+connect( btnBack, SIGNAL(clicked()), this, SLOT(showFitPage()));
+
+btnApply = new QPushButton(hbox1);
+btnApply->setText( tr( "&Apply" ) );
+btnApply->setMaximumWidth(100);
+connect( btnApply, SIGNAL(clicked()), this, SLOT(applyChanges()));
+
+QVBoxLayout* hlayout = new QVBoxLayout(advancedPage, 5, 5);
+hlayout->addWidget(GroupBox1);
+hlayout->addWidget(GroupBox2);
+hlayout->addWidget(logBox);
+hlayout->addWidget(plotLabelBox);
+hlayout->addWidget(hbox1);
+
+connect(btnParamTable, SIGNAL(clicked()), this, SLOT(showParametersTable()));
+connect(btnCovMatrix, SIGNAL(clicked()), this, SLOT(showCovarianceMatrix()));
+
+connect(samePointsBtn, SIGNAL(toggled(bool)), this, SLOT(showPointsBox(bool)));
+connect(generatePointsBtn, SIGNAL(toggled(bool)), this, SLOT(showPointsBox(bool)));
+}
+
+void fitDialog::applyChanges()
+{
+ApplicationWindow *app = (ApplicationWindow *)this->parent();
+app->fit_output_precision = boxPrecision->value();
+app->pasteFitResultsToPlot = plotLabelBox->isChecked();
+app->writeFitResultsToLog = logBox->isChecked();
+app->saveSettings();
+}
+
+void fitDialog::showParametersTable()
+{
+if (paramTableName->text().isEmpty())
+	{
+	QMessageBox::critical(this, tr("Error"), 
+	tr("Please enter a valid name for the parameters table."));
+	return;
+	}
+
+if (!fitter)
+	{
+	QMessageBox::critical(this, tr("Error"), 
+	tr("The fitter has not been initialized. Please perform a fit first and try again."));
+	return;
+	}
+
+fitter->showParametersTable(paramTableName->text());
+}
+
+void fitDialog::showCovarianceMatrix()
+{
+if (covMatrixName->text().isEmpty())
+	{
+	QMessageBox::critical(this, tr("Error"), 
+	tr("Please enter a valid name for the covariance matrix."));
+	return;
+	}
+
+if (!fitter)
+	{
+	QMessageBox::critical(this, tr("Error"), 
+	tr("The fitter has not been initialized. Please perform a fit first and try again."));
+	return;
+	}
+fitter->showCovarianceMatrix(covMatrixName->text());
+}
+
+void fitDialog::showPointsBox(bool)
+{
+if (generatePointsBtn->isChecked())
+	{
+	lblPoints->show();
+	generatePointsBox->show();
+	}
+else
+	{
+	lblPoints->hide();
+	generatePointsBox->hide();
+	}
 }
 
 void fitDialog::setGraph(Graph *g)
@@ -417,6 +581,11 @@ tw->raiseWidget(fitPage);
 void fitDialog::showEditPage()
 {
 tw->raiseWidget(editPage);
+}
+
+void fitDialog::showAdvancedPage()
+{
+tw->raiseWidget(advancedPage);
 }
 
 void fitDialog::setFunction(bool ok)
@@ -718,7 +887,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Start limit error"),e.GetMsg());
+	QMessageBox::critical(this, tr("QtiPlot - Start limit error"),e.GetMsg());
 	boxFrom->setFocus();
 	return;
 	}	
@@ -731,7 +900,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - End limit error"),e.GetMsg());
+	QMessageBox::critical(this, tr("QtiPlot - End limit error"),e.GetMsg());
 	boxTo->setFocus();
 	return;
 	}	
@@ -854,6 +1023,13 @@ if (!error)
 	{
 	ApplicationWindow *app = (ApplicationWindow *)this->parent();
 	graph->setFitID(++app->fitNumber);
+
+	if (fitter)
+		{
+		delete fitter;
+		fitter  = 0;
+		}
+
 	QString result;
 	if (boxUseBuiltIn->isChecked() && categoryBox->currentItem() == 1)
 		result = fitBuiltInFunction(curve,funcBox->currentText(),initialValues, start,end,
@@ -868,7 +1044,19 @@ if (!error)
 		result = graph->fitNonlinearCurve(curve, lblFunction->text()+"="+formula, parameters, initialValues,
 				start, end, boxPoints->value(), boxSolver->currentItem(), eps, boxColor->currentItem());
 
-	QStringList res = graph->fitResults();
+	fitter->setTolerance (eps);
+	fitter->setDataFromCurve(curve, start, end);
+	fitter->setSolver((Fitter::Solver)boxSolver->currentItem());
+	fitter->setFitCurveColor(boxColor->currentItem());
+	fitter->setFitCurveParameters(generatePointsBtn->isChecked(), generatePointsBox->value());
+	fitter->setMaximumIterations(boxPoints->value());
+	if (!fitter->setWeightingData ((Fitter::WeightingMethod)boxWeighting->currentItem(), 
+		tableNamesBox->currentText()+"_"+colNamesBox->currentText()))
+		return;
+
+	fitter->fit();
+
+	QStringList res = fitter->fitResultsList();
 	if (boxParams->numCols() == 3)
 		{
 		int j = 0;
@@ -890,73 +1078,70 @@ if (!error)
 }
 
 QString fitDialog::fitBuiltInFunction(const QString& curve, const QString& function, 
-								   const QStringList& initialValues, double from,
-								   double to, int iterations, int solver,
-								   double tolerance, int colorIndex)
+								   const QStringList& initVal, double from, double to, 
+								   int iterations, int solver, double tolerance, int colorIndex)
 {
+ApplicationWindow *app = (ApplicationWindow *)this->parent();
+
 QString result; 
 if (function == "ExpDecay1")
 	{
-	double amplitude = initialValues[0].toDouble();
-	double damping = initialValues[1].toDouble();
-	double yOffset = initialValues[2].toDouble();
-	result = graph->fitExpDecay(curve, damping, amplitude, yOffset, 
-							 from, to, iterations, solver, tolerance, colorIndex);
+	double x_init[3] = {initVal[0].toDouble(), initVal[1].toDouble(), initVal[2].toDouble()};
+	fitter = new ExponentialFitter(false, app, graph);
+	fitter->setInitialGuesses(x_init);
+	}
+else if (function == "ExpGrowth")
+	{
+	double x_init[3] = {initVal[0].toDouble(), -initVal[1].toDouble(), initVal[2].toDouble()};
+	fitter = new ExponentialFitter(true, app, graph);
+	fitter->setInitialGuesses(x_init);
 	}
 else if (function == "ExpDecay2")
 	{
-	double amp1 = initialValues[0].toDouble();
-	double t1 = initialValues[1].toDouble();
-	double amp2 = initialValues[2].toDouble();
-	double t2 = initialValues[3].toDouble();
-	double yOffset = initialValues[4].toDouble();
+	double amp1 = initVal[0].toDouble();
+	double t1 = initVal[1].toDouble();
+	double amp2 = initVal[2].toDouble();
+	double t2 = initVal[3].toDouble();
+	double yOffset = initVal[4].toDouble();
 	result = graph->fitExpDecay2(curve, amp1, t1, amp2, t2, yOffset, 
 							 from, to, iterations, solver, tolerance, colorIndex);
 	}
 else if (function == "ExpDecay3")
 	{
-	double amp1 = initialValues[0].toDouble();
-	double t1 = initialValues[1].toDouble();
-	double amp2 = initialValues[2].toDouble();
-	double t2 = initialValues[3].toDouble();
-	double amp3 = initialValues[4].toDouble();
-	double t3 = initialValues[5].toDouble();
-	double yOffset = initialValues[6].toDouble();
+	double amp1 = initVal[0].toDouble();
+	double t1 = initVal[1].toDouble();
+	double amp2 = initVal[2].toDouble();
+	double t2 = initVal[3].toDouble();
+	double amp3 = initVal[4].toDouble();
+	double t3 = initVal[5].toDouble();
+	double yOffset = initVal[6].toDouble();
 	result = graph->fitExpDecay3(curve, amp1, t1, amp2, t2, amp3, t3, yOffset, 
-							 from, to, iterations, solver, tolerance, colorIndex);
-	}
-else if (function == "ExpGrowth")
-	{
-	double amplitude = initialValues[0].toDouble();
-	double damping = initialValues[1].toDouble();
-	double yOffset = initialValues[2].toDouble();
-	result = graph->fitExpGrowth(curve, damping, amplitude, yOffset, 
 							 from, to, iterations, solver, tolerance, colorIndex);
 	}
 else if (function == "Boltzmann")
 	{
-	double A1 = initialValues[0].toDouble();
-	double A2 = initialValues[1].toDouble();
-	double x0 = initialValues[2].toDouble();
-	double dx = initialValues[3].toDouble();
+	double A1 = initVal[0].toDouble();
+	double A2 = initVal[1].toDouble();
+	double x0 = initVal[2].toDouble();
+	double dx = initVal[3].toDouble();
 	result = graph->fitBoltzmann(curve, A1, A2, x0, dx, 
 							 from, to, iterations, solver, tolerance, colorIndex);
 	}
 else if (function == "Gauss")
 	{
-	double offset = initialValues[0].toDouble();
-	double amplitude = initialValues[1].toDouble();
-	double center = initialValues[2].toDouble();
-	double width = initialValues[3].toDouble();
+	double offset = initVal[0].toDouble();
+	double amplitude = initVal[1].toDouble();
+	double center = initVal[2].toDouble();
+	double width = initVal[3].toDouble();
 	result = graph->fitGauss(curve, amplitude, center, width, offset, 
 							 from, to, iterations, solver, tolerance, colorIndex);
 	}
 else if (function == "Lorentz")
 	{
-	double offset = initialValues[0].toDouble();
-	double amplitude = initialValues[1].toDouble();
-	double center = initialValues[2].toDouble();
-	double width = initialValues[3].toDouble();
+	double offset = initVal[0].toDouble();
+	double amplitude = initVal[1].toDouble();
+	double center = initVal[2].toDouble();
+	double width = initVal[3].toDouble();
 	result = graph->fitLorentz(curve, amplitude, center, width, offset, 
 							 from, to, iterations, solver, tolerance, colorIndex);
 	}
@@ -1011,6 +1196,47 @@ double start = graph->selectedXStartValue();
 double end = graph->selectedXEndValue();
 boxFrom->setText(QString::number(QMIN(start, end), 'g', 15));
 boxTo->setText(QString::number(QMAX(start, end), 'g', 15));
+}
+
+void fitDialog::setSrcTables(QWidgetList* tables)
+{
+srcTables = tables;
+tableNamesBox->clear();
+for (QWidget *i=srcTables->first(); i; i=srcTables->next())
+	tableNamesBox->insertItem(i->name());
+
+if (!boxCurve->currentText().contains("="))
+	tableNamesBox->setCurrentText(QStringList::split("_",boxCurve->currentText())[0]);
+
+selectSrcTable(tableNamesBox->currentItem());
+}
+
+void fitDialog::selectSrcTable(int tabnr)
+{
+colNamesBox->clear();
+colNamesBox->insertStringList(((Table*)srcTables->at(tabnr))->colNames());
+}
+
+void fitDialog::enableWeightingParameters(int index)
+{
+if (index == Fitter::ArbDataset)
+	{
+	tableNamesBox->setEnabled(true);
+	colNamesBox->setEnabled(true);
+	}
+else
+	{
+	tableNamesBox->setEnabled(false);
+	colNamesBox->setEnabled(false);
+	}
+}
+
+void fitDialog::closeEvent (QCloseEvent * e )
+{
+if(fitter && plotLabelBox->isChecked())
+	graph->newLegend(fitter->legendFitInfo());
+
+e->accept();
 }
 
 fitDialog::~fitDialog()

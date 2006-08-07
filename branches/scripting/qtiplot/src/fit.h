@@ -7,6 +7,7 @@ struct fitData {
   size_t n;
   double * X;
   double * Y;
+  double * sigma;//weighting data
 };
 
 struct fitParserData{

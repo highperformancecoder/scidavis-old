@@ -99,9 +99,6 @@ void QwtPlotPanner::moveCanvas(int dx, int dy)
     if ( plot == NULL )
         return;
     
-    const bool doReplot = plot->autoReplot();
-    plot->setAutoReplot(false);
-
     for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
     {
         if ( !d_data->isAxisEnabled[axis] )
@@ -127,9 +124,6 @@ void QwtPlotPanner::moveCanvas(int dx, int dy)
         plot->setAxisScale(axis, d1, d2);
     }
 
-    plot->setAutoReplot(doReplot);
-
-    if ( doReplot )
-        plot->replot();
+    plot->replot();
 }
 
