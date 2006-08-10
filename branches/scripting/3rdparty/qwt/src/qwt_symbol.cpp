@@ -7,7 +7,6 @@
  * modify it under the terms of the Qwt License, Version 1.0
  *****************************************************************************/
 
-#include <math.h>
 #include <qpainter.h>
 #include <qapplication.h>
 #include "qwt_painter.h"

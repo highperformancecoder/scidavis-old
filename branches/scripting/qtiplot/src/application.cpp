@@ -50,6 +50,7 @@
 #include "Scripting.h"
 #include "muParserScripting.h"
 #include "scales.h"
+#include "Fitter.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -5099,7 +5100,7 @@ if (g)
 	td->setText(t.text());
 	td->setFont(t.font());
 	td->setTextColor(t.color());
-	td->setAlignment(t.flags());
+	td->setAlignment(t.renderFlags());
 	td->showNormal();
 	td->setActiveWindow();
 	}
@@ -10242,11 +10243,29 @@ QString result="";
 if (whichFit=="fitLinear")
 	result=activeGraph->fitLinear(curveTitle);
 else if(whichFit=="fitSigmoidal")
-	result=activeGraph->fitBoltzmann(curveTitle);
+	{
+	SigmoidalFitter *fitter = new SigmoidalFitter (this, activeGraph);
+	fitter->setDataFromCurve(curveTitle);
+	fitter->guessInitialValues();
+	fitter->fit();
+	delete fitter;
+	}
 else if(whichFit=="fitGauss")
-	result=activeGraph->fitGauss(curveTitle);
+	{
+	GaussFitter *fitter = new GaussFitter(this, activeGraph);
+	fitter->setDataFromCurve(curveTitle);
+	fitter->guessInitialValues();
+	fitter->fit();
+	delete fitter;
+	}
 else if(whichFit=="fitLorentz")
-	result=activeGraph->fitLorentz(curveTitle);
+	{
+	LorentzFitter *fitter = new LorentzFitter(this, activeGraph);
+	fitter->setDataFromCurve(curveTitle);
+	fitter->guessInitialValues();
+	fitter->fit();
+	delete fitter;
+	}
 else if(whichFit=="differentiate" && activeGraph->diffCurve(curveTitle))
 	{
 	Table* w = table(tableWindows.last());
@@ -10589,7 +10608,7 @@ void ApplicationWindow::createActions()
   actionShowImportDialog = new QAction(tr("Set import &options"), QString::null, this);
   connect(actionShowImportDialog, SIGNAL(activated()), this, SLOT(showImportDialog()));
 
-  actionCloseAllWindows = new QAction(QPixmap(quit_xpm), tr("&Quit"), tr("Ctrl+Q"), this);
+  actionCloseAllWindows = new QAction(QPixmap(quit_xpm), tr("&Quit"), tr("Alt+F4"), this);
   connect(actionCloseAllWindows, SIGNAL(activated()), qApp, SLOT(closeAllWindows()));
 
   actionClearLogInfo = new QAction(tr("Clear &log information"), QString::null, this);
@@ -10778,7 +10797,7 @@ void ApplicationWindow::createActions()
   actionShowTitleDialog = new QAction(tr("&Title ..."), QString::null, this);
   connect(actionShowTitleDialog, SIGNAL(activated()), this, SLOT(showTitleDialog()));
 
-  actionShowColumnOptionsDialog = new QAction(tr("Column &Options ..."), QString::null, this);
+  actionShowColumnOptionsDialog = new QAction(tr("Column &Options ..."), tr("Ctrl+Alt+O"), this);
   connect(actionShowColumnOptionsDialog, SIGNAL(activated()), this, SLOT(showColumnOptionsDialog()));
 
   actionShowColumnValuesDialog = new QAction(tr("Set Column &Values ..."), QString::null, this);
@@ -11095,7 +11114,7 @@ void ApplicationWindow::translateActionsStrings()
   actionShowImportDialog->setMenuText(tr("Set import &options"));
 
   actionCloseAllWindows->setMenuText(tr("&Quit")); 
-  actionCloseAllWindows->setAccel(tr("Ctrl+Q"));
+  actionCloseAllWindows->setAccel(tr("Alt+F4"));
 
   actionClearLogInfo->setMenuText(tr("Clear &log information"));
   actionDeleteFitTables->setMenuText(tr("Delete &fit tables"));
@@ -11217,7 +11236,11 @@ void ApplicationWindow::translateActionsStrings()
   actionShowGridDialog->setMenuText(tr("&Grid ..."));
   actionShowTitleDialog->setMenuText(tr("&Title ..."));
   actionShowColumnOptionsDialog->setMenuText(tr("Column &Options ..."));
+  actionShowColumnValuesDialog->setAccel(tr("Ctrl+Alt+O"));
+
   actionShowColumnValuesDialog->setMenuText(tr("Set Column &Values ..."));
+  actionShowColumnValuesDialog->setAccel(tr("Ctrl+Q"));
+
   actionShowColsDialog->setMenuText(tr("&Columns..."));
   actionShowRowsDialog->setMenuText(tr("&Rows..."));
 
@@ -11671,48 +11694,15 @@ if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::fitMultiPeakGauss()
 {
-QWidget *w=ws->activeWindow();
-if (!w || !w->isA("MultiLayer"))
-	return;
-
-MultiLayer *plot = (MultiLayer*)w;
-if (plot->isEmpty())
-	{
-	QMessageBox::warning(this,tr("QtiPlot - Warning"),
-				tr("<h4>There are no plot layers available in this window.</h4>"
-					  "<p><h4>Please add a layer and try again!</h4>"));
-	btnPointer->setOn(true);
-	return;
-	}
-	
-Graph* g = (Graph*)plot->activeGraph();
-if (!g || !g->validCurvesDataSize())
-	return;
-
-if (g->isPiePlot())
-	{
-	QMessageBox::warning(this,tr("QtiPlot - Warning"),
-				tr("This functionality is not available for pie plots!"));
-	return;
-	}
-else
-	{	
-	activeGraph=g;
-	bool ok;
-	int peaks = QInputDialog::getInteger(
-            tr("QtiPlot - Enter the number of peaks"), tr("Peaks"), 2, 0, 1000000, 1,
-            &ok, this );
-	if (ok && peaks) 
-		{
-		g->multiPeakFit(0, peaks);
-		info->setText(tr("Move cursor and click to select a point and double-click/press 'Enter' to set the position of a peak!"));
-		displayBar->show();
-		connect (g,SIGNAL(showFitResults(const QString&)), this, SLOT(showResults(const QString&)));
-		}
-	}
+fitMultiPeak((int)MultiPeakFitter::Gauss);
 }
 
 void ApplicationWindow::fitMultiPeakLorentz()
+{
+fitMultiPeak((int)MultiPeakFitter::Lorentz);
+}
+
+void ApplicationWindow::fitMultiPeak(int profile)
 {
 QWidget *w=ws->activeWindow();
 if (!w || !w->isA("MultiLayer"))
@@ -11743,10 +11733,10 @@ else
 	activeGraph=g;
 	bool ok;
 	int peaks = QInputDialog::getInteger(tr("QtiPlot - Enter the number of peaks"), 
-				tr("Peaks"), 2, 0, 1000000, 1, &ok, this);
+				tr("Peaks"), 2, 2, 1000000, 1, &ok, this);
 	if (ok && peaks) 
 		{
-		g->multiPeakFit(1, peaks);
+		g->multiPeakFit(this, (int)profile, peaks);
 		info->setText(tr("Move cursor and click to select a point and double-click/press 'Enter' to set the position of a peak!"));
 		displayBar->show();
 		connect (g,SIGNAL(showFitResults(const QString&)), this, SLOT(showResults(const QString&)));

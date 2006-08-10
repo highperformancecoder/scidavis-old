@@ -151,7 +151,7 @@ QwtPlotSpectrogram::~QwtPlotSpectrogram()
 //! \return QwtPlotItem::Rtti_PlotSpectrogram
 int QwtPlotSpectrogram::rtti() const
 {
-    return Rtti_PlotSpectrogram;
+    return QwtPlotItem::Rtti_PlotSpectrogram;
 }
 
 /*!
@@ -222,7 +222,7 @@ const QwtColorMap &QwtPlotSpectrogram::colorMap() const
 
    If the spectrogram has a valid default contour pen 
    a contour line is painted using the default contour pen.
-   Otherwise (pen.style() == QPen::NoPen) the pen is calculated
+   Otherwise (pen.style() == Qt::NoPen) the pen is calculated
    for each contour level using contourPen().
 
    \sa defaultContourPen, contourPen
@@ -252,7 +252,7 @@ QPen QwtPlotSpectrogram::defaultContourPen() const
    
    \param level Contour level
    \return Pen for the contour line
-   \note contourPen is only used if defaultContourPen().style() == QPen::NoPen
+   \note contourPen is only used if defaultContourPen().style() == Qt::NoPen
 
    \sa setDefaultContourPen, setColorMap, setContourLevels
 */
@@ -576,10 +576,10 @@ void QwtPlotSpectrogram::drawContourLines(QPainter *painter,
         const double level = d_data->contourLevels[l];
 
         QPen pen = defaultContourPen();
-        if ( pen.style() == QPen::NoPen )
+        if ( pen.style() == Qt::NoPen )
             pen = contourPen(level);
 
-        if ( pen.style() == QPen::NoPen )
+        if ( pen.style() == Qt::NoPen )
             continue;
 
         painter->setPen(pen);

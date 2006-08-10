@@ -85,6 +85,7 @@ static const char *unzoom_xpm[]={
 #include "patternBox.h"
 #include "symbolBox.h"
 #include "FunctionCurve.h"
+#include "Fitter.h"
 
 #include <qapplication.h>
 #include <qbitmap.h>
@@ -1171,7 +1172,7 @@ emit modifiedGraph();
 void Graph::setTitleAlignment(int align)
 {
 QwtText t = d_plot->title();
-t.setFlags(align);
+t.setRenderFlags(align);
 d_plot->setTitle (t);
 d_plot->replot();
 emit modifiedGraph(); 
@@ -1216,7 +1217,7 @@ emit modifiedGraph();
 
 int Graph::axisTitleAlignment (int axis)
 {
-return d_plot->axisTitle(axis).flags();
+return d_plot->axisTitle(axis).renderFlags();
 }
 
 void Graph::setAxesTitlesAlignment(const QStringList& align) 
@@ -1224,7 +1225,7 @@ void Graph::setAxesTitlesAlignment(const QStringList& align)
 for (int i=0;i<4;i++)	
 	{
 	QwtText t = d_plot->axisTitle(i);
-	t.setFlags(align[i+1].toInt());
+	t.setRenderFlags(align[i+1].toInt());
 	d_plot->setAxisTitle (i, t);
 	}
 }
@@ -1232,7 +1233,7 @@ for (int i=0;i<4;i++)
 void Graph::setXAxisTitleAlignment(int align) 
 {
 QwtText t = d_plot->axisTitle(QwtPlot::xBottom);
-t.setFlags(align);
+t.setRenderFlags(align);
 d_plot->setAxisTitle (QwtPlot::xBottom, t);
 
 d_plot->replot(); 
@@ -1242,7 +1243,7 @@ emit modifiedGraph();
 void Graph::setYAxisTitleAlignment(int align) 
 {
 QwtText t = d_plot->axisTitle(QwtPlot::yLeft);
-t.setFlags(align);
+t.setRenderFlags(align);
 d_plot->setAxisTitle (QwtPlot::yLeft, t);
 
 d_plot->replot(); 
@@ -1252,7 +1253,7 @@ emit modifiedGraph();
 void Graph::setTopAxisTitleAlignment(int align) 
 {
 QwtText t = d_plot->axisTitle(QwtPlot::xTop);
-t.setFlags(align);
+t.setRenderFlags(align);
 d_plot->setAxisTitle (QwtPlot::xTop, t);
 d_plot->replot(); 
 emit modifiedGraph();	
@@ -1261,7 +1262,7 @@ emit modifiedGraph();
 void Graph::setRightAxisTitleAlignment(int align) 
 {
 QwtText t = d_plot->axisTitle(QwtPlot::yRight);
-t.setFlags(align);
+t.setRenderFlags(align);
 d_plot->setAxisTitle (QwtPlot::yRight, t);
 
 d_plot->replot(); 
@@ -1985,7 +1986,6 @@ pic.save(fileName, fileType, quality);
 void Graph::exportToEPS(const QString& fname)
 {	
 QPrinter printer;
-printer.setResolution(84);
 printer.setPageSize (QPrinter::A4);
 printer.setColorMode (QPrinter::Color);
 printer.setFullPage(TRUE);
@@ -2022,7 +2022,6 @@ void Graph::exportToEPS(const QString& fname, int res, QPrinter::Orientation o,
 						QPrinter::PageSize size, QPrinter::ColorMode col)
 {	
 QPrinter printer;
-printer.setResolution(res);
 printer.setPageSize (size);
 printer.setColorMode (col);
 printer.setOrientation(o);
@@ -2056,7 +2055,6 @@ d_plot->print(&paint, rect, filter);
 void Graph::print()
 {
 QPrinter printer;
-printer.setResolution(84); //empirical value, it works...
 printer.setColorMode (QPrinter::Color);
 printer.setFullPage(TRUE);
 
@@ -2107,6 +2105,9 @@ painter.end();*/
 
 void Graph::exportToSVG(const QString& fname) 
 {
+// enable workaround for Qt3 misalignments
+QwtPainter::setSVGMode(true); 
+
 QPicture picture;
 QPainter p(&picture);
 d_plot->print(&p, d_plot->rect());
@@ -2145,19 +2146,19 @@ bool Graph::removePointActivated()
 return removePointsEnabled;
 }
 
-void Graph::multiPeakFit(int fitType, int peaks)
+void Graph::multiPeakFit(ApplicationWindow *app, int profile, int peaks)
 {
 showPlotPicker(true);
-n_peaks = peaks;
+
 selected_peaks = 0;
-peaks_array = new double[2*peaks];
-fit_type = fitType;
+fitter = new MultiPeakFitter (app, this, (MultiPeakFitter::PeakProfile)profile, peaks);
+
 d_plot->canvas()->grabMouse();
 }
 
 bool Graph::selectPeaksOn()
 {
-if (n_peaks && selected_peaks<n_peaks)
+if (fitter)
 	return true;
 else
 	return false;
@@ -2216,28 +2217,35 @@ const QwtPlotCurve *c = d_plot->curve(selectedCurve);
 if (!c)
 	return;
 
-peaks_array[2*selected_peaks]=c->y(selectedPoint);
-peaks_array[2*selected_peaks+1]=c->x(selectedPoint);
+fitter->initializeParameter(3*selected_peaks, c->y(selectedPoint));
+fitter->initializeParameter(3*selected_peaks+1, c->x(selectedPoint));
 
-QwtPlotMarker *mrk = new QwtPlotMarker();
-mrk->setLineStyle(QwtPlotMarker::VLine);
-mrk->setLinePen(QPen(green, 2, Qt::DashLine));
-mrk->setXValue(c->x(selectedPoint));
-mrk->attach(d_plot);
+QwtPlotMarker *m = new QwtPlotMarker();
+m->setLineStyle(QwtPlotMarker::VLine);
+m->setLinePen(QPen(green, 2, Qt::DashLine));
+m->setXValue(c->x(selectedPoint));
+d_plot->insertMarker(m);
 d_plot->replot();
+
 selected_peaks++;
-if (selected_peaks == n_peaks)
+int peaks = fitter->peaks();
+if (selected_peaks == peaks)
 	{
 	showPlotPicker(false);
 	QApplication::setOverrideCursor(waitCursor);
-	fitMultiPeak(fit_type, c->title().text());
+
+	fitter->setDataFromCurve(c->title().text());
+	fitter->fit();
+	delete fitter;
+	fitter = 0;
+
 	QApplication::restoreOverrideCursor();
 	//remove peak line markers
 	QValueList<int>mrks = d_plot->markerKeys();
 	int n=(int)mrks.count();
-	for (int i=0; i<n_peaks; i++)
+	for (int i=0; i<peaks; i++)
 		d_plot->removeMarker(mrks[n-i-1]);
-	n_peaks = 0;
+
 	d_plot->canvas()->releaseMouse();
 	return;
 	}
@@ -3614,7 +3622,7 @@ QString Graph::saveTitle()
 QString s="PlotTitle\t";
 s += d_plot->title().text().replace("\n", "<br>")+"\t";
 s += d_plot->title().color().name()+"\t";
-s += QString::number(d_plot->title().flags())+"\n";
+s += QString::number(d_plot->title().renderFlags())+"\n";
 return s;
 }
 
@@ -3659,7 +3667,7 @@ for (i=0;i<4;i++)
 	{
 
 	if (d_plot->axisEnabled(i))
-		axes[i]=QString::number(d_plot->axisTitle(i).flags());
+		axes[i]=QString::number(d_plot->axisTitle(i).renderFlags());
 	}
 	
 s+=axes.join("\t")+"\n";
@@ -4069,8 +4077,9 @@ QValueList<int> txtMrkKeys;
 for (int i=0;i<(int)mrkKeys.size();i++)
 	{
 	if (mrkKeys[i]!=mrkX && mrkKeys[i]!=mrkY &&
-		mrkKeys[i]!=startID && mrkKeys[i]!=endID && lines.contains(mrkKeys[i])<=0
-		&& images.contains(mrkKeys[i])<=0)
+		mrkKeys[i]!=startID && mrkKeys[i]!=endID && 
+		lines.contains(mrkKeys[i])<=0 &&
+		images.contains(mrkKeys[i])<=0)
 		{
 		txtMrkKeys.append(mrkKeys[i]);
 		}

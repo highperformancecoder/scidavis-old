@@ -36,6 +36,12 @@ protected:
     virtual void paintEvent(QPaintEvent *);
 
 signals:
+    /*!
+      Signal emitted, when the widget has been panned
+
+      \param dx Offset in horizontal direction
+      \param dx Offset in vertical direction
+    */
     void panned(int dx, int dy);
 
 private:

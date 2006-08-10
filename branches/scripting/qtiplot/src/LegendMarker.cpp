@@ -21,7 +21,7 @@ LegendMarker::LegendMarker(Plot *plot):
 {
 d_text = new QwtText(QString::null, QwtText::RichText);
 d_text->setFont(QFont("Arial",12, QFont::Normal, FALSE));
-d_text->setFlags(Qt::AlignTop|Qt::AlignLeft);
+d_text->setRenderFlags(Qt::AlignTop|Qt::AlignLeft);
 d_text->setBackgroundBrush(QBrush(Qt::NoBrush));
 d_text->setColor(Qt::black);
 d_text->setBackgroundPen (QPen(Qt::NoPen));

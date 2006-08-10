@@ -28,6 +28,8 @@ class TitlePicker;
 class ScalePicker;
 class CanvasPicker;
 class Plot;
+class MultiPeakFitter;
+class ApplicationWindow;
 
 class Graph: public QWidget
 {
@@ -469,73 +471,11 @@ public slots:
 								int params, int &start, int &end);
 
 	 QString fitLinear(const QString& curveTitle);
-	 
-	 QString fitExpDecay2(const QString& name, double firstTime, double secondTime,
-						 double from, double yOffset, int colorIndex);
-	 QString fitExpDecay2(const QString& name, double amp1, double t1, double amp2, double t2, double yOffset,
-						  double from, double to, int iterations, int solver, double tolerance, int colorIndex);
-	 QString fitExpDecay2(QwtPlotCurve *curve, double amp1, double t1, double amp2, double t2, double yOffset,
-						   int start, int end, int iterations, int solver, double tolerance, int colorIndex);
-
-	 QString fitExpDecay3(const QString& name, double firstTime, double secondTime,
-						double thirdTime, double from, double yOffset, int colorIndex);
-	 QString fitExpDecay3(const QString& name, double amp1, double t1, double amp2, double t2, 
-						  double amp3, double t3, double yOffset, double from, double to, 
-						  int iterations, int solver, double tolerance, int colorIndex);
-	 QString fitExpDecay3(QwtPlotCurve *curve, double amp1, double t1, double amp2, double t2, 
-						  double amp3, double t3, double yOffset, int start, int end, 
-						  int iterations, int solver, double tolerance, int colorIndex);
-
-	 QString fitBoltzmann(const QString& curveTitle);
-	 QString fitBoltzmann(const QString& name, double A1, double A2, double x0, double dx,
-						  double from, double to, int iterations, int solver, double tolerance, int colorIndex);
-	 QString fitBoltzmann(QwtPlotCurve *curve, double A1, double A2, double x0, double dx,
-						  int start, int end, int iterations, int solver, double tolerance, int colorIndex);
-
-	 QString fitGauss(const QString& curveTitle);
-	 QString fitGauss(const QString& name, double amplitude, double center, double width, double offset,
-						   double from, double to, int iterations, int solver, double tolerance, int colorIndex);
-	 QString fitGauss(QwtPlotCurve *curve, double amplitude, double center, double width, double offset,
-						   int start, int end, int iterations, int solver, double tolerance, int colorIndex);
-
-	 QString fitLorentz(const QString& curveTitle);
-	 QString fitLorentz(const QString& name, double amplitude, double center, double width, double offset,
-						   double from, double to, int iterations, int solver, double tolerance, int colorIndex);
-	 QString fitLorentz(QwtPlotCurve *curve, double amplitude, double center, double width, double offset,
-						   int start, int end, int iterations, int solver, double tolerance, int colorIndex);
-
 	 QString fitPolynomial(const QString&,int order, int points,
 				double start, double end, bool showFormula, int colorIndex);
 	 void setFitID(int id);
 
-	 QString fitNonlinearCurve(const QString& curve,const QString& formula,
-							const QStringList& params,const QStringList& paramsInit,
-							double from,double to,int points, int solver, double tolerance, int colorIndex);
-	
-	QString fitPluginFunction(const QString& curve,const QString& pluginName,
-							  const QStringList& paramsInit, double from,
-							  double to,int points, int solver, double tolerance, int colorIndex);
-
-	static gsl_multifit_fdfsolver* fitGSL(gsl_multifit_function_fdf f, int p, int n, 
-										  double *x_init, int solver, double tolerance,
-										  int &iterations, int &status);
-
-	static gsl_multimin_fminimizer* fitSimplex(gsl_multimin_function f, double *x_init,
-										  double tolerance,int &iterations, int &status);
-
-
 	void addResultCurve(int n, double *x, double *y, int colorIndex,const QString& tableName, const QString& legend);
-	
-	QString outputFitString(int n, double tolerance, double from, double to, int iter,
-							int solver, int status, double *params, gsl_multifit_fdfsolver *s, 
-							const QStringList& parNames,const QString& curve,
-							const QString& f, const QString& fitType);
-
-   	QString outputFitString(int n, double tolerance, double from, double to, int iter,
-							gsl_matrix *J, int status, double *params, gsl_multimin_fminimizer *s, 
-							const QStringList& parNames,const QString& curve,
-							const QString& f, const QString& fitType);
-
 
 	//histograms
 	void initHistogram(long curveID, const QMemArray<double>& Y, int it);
@@ -620,9 +560,8 @@ public slots:
 	void showScaleDialog();
 
 	QStringList fitResults(){return fit_results;};
-	void multiPeakFit(int fitType, int peaks);
+	void multiPeakFit(ApplicationWindow *app, int profile, int peaks);
 	void selectPeak(const QPoint &pos);
-	void fitMultiPeak(int fitType, const QString& curveTitle);
 	bool selectPeaksOn();
 
 signals:
@@ -709,8 +648,8 @@ private:
 	bool drawAxesBackbone, autoscale;
 
 	QStringList fit_results;
-	double *peaks_array;
-	int n_peaks, selected_peaks, fit_type;
+	int selected_peaks;
+	MultiPeakFitter *fitter;
 
 	QColor defaultArrowColor;
 	int defaultArrowLineWidth, defaultArrowHeadLength, defaultArrowHeadAngle;

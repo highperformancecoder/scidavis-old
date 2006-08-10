@@ -438,6 +438,7 @@ public slots:
 	void fitSigmoidal();
 	void fitGauss();
 	void fitLorentz();
+	void fitMultiPeak(int profile);
 	void fitMultiPeakGauss();
 	void fitMultiPeakLorentz();
 				 

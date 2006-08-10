@@ -137,15 +137,20 @@ ApplicationWindow *app = (ApplicationWindow *)this->parent();
 graph->setFitID(++app->fitNumber);
 
 Fitter *fitter;
-QString result;
 if (slopes == 3)
-	result = graph->fitExpDecay3(boxName->currentText(),boxFirst->text().toDouble(),
-				boxSecond->text().toDouble(), boxThird->text().toDouble(),
-				boxStart->text().toDouble(),boxYOffset->text().toDouble(), boxColor->currentItem());
+	{		
+	double x_init[7] = {1.0, boxFirst->text().toDouble(), 1.0, boxSecond->text().toDouble(), 
+						1.0, boxThird->text().toDouble(), boxYOffset->text().toDouble()};
+	fitter = new ThreeExpFitter(app, graph);
+	fitter->setInitialGuesses(x_init);
+	}
 else if (slopes == 2)
-	result = graph->fitExpDecay2(boxName->currentText(),boxFirst->text().toDouble(),
-				boxSecond->text().toDouble(), boxStart->text().toDouble(),
-				boxYOffset->text().toDouble(), boxColor->currentItem());
+	{
+	double x_init[5] = {1.0, boxFirst->text().toDouble(), 1.0, boxSecond->text().toDouble(), 
+						boxYOffset->text().toDouble()};
+	fitter = new TwoExpFitter(app, graph);
+	fitter->setInitialGuesses(x_init);
+	}
 else if (slopes == 1 || slopes == -1)
 	{
 	double x_init[3] = {boxStart->text().toDouble(), slopes/boxFirst->text().toDouble(), boxYOffset->text().toDouble()};
@@ -153,7 +158,7 @@ else if (slopes == 1 || slopes == -1)
 	fitter->setInitialGuesses(x_init);
 	}
 
-fitter->setDataFromCurve(boxName->currentText());
+fitter->setDataFromCurve(boxName->currentText(), boxStart->text().toDouble(), boxStart->text().toDouble() - 1);
 fitter->fit();
 delete fitter;
 }

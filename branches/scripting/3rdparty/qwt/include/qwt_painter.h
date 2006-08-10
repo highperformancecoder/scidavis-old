@@ -121,8 +121,8 @@ public:
         const QwtScaleMap &, Qt::Orientation, const QRect &);
 
 #if QT_VERSION < 0x040000
-	static void setSVGMode(bool on);
-	static bool isSVGMode();
+    static void setSVGMode(bool on);
+    static bool isSVGMode();
 #endif
 
 private:

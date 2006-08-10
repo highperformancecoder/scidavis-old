@@ -19,7 +19,7 @@
 class QwtColorMap;
 
 /*!
-  \brief A class, which displays a spectrogram
+  \brief A plot item, which displays a spectrogram
 
   A spectrogram displays threedimenional data, where the 3rd dimension
   ( the intensity ) is displayed using colors. The colors are calculated
@@ -70,7 +70,7 @@ public:
     void setDefaultContourPen(const QPen &);
     QPen defaultContourPen() const;
 
-	virtual QPen contourPen(double level) const;
+    virtual QPen contourPen(double level) const;
 
     void setConrecAttribute(QwtRasterData::ConrecAttribute, bool on);
     bool testConrecAttribute(QwtRasterData::ConrecAttribute) const;

@@ -3,27 +3,14 @@
 
 #include <gsl/gsl_vector.h>
 
-struct fitData {
+struct fitData{
   size_t n;
+  size_t p;
   double * X;
   double * Y;
   double * sigma;//weighting data
-};
-
-struct fitParserData{
-  size_t n;
-  size_t p;
-  double * X;
-  double * Y;
   const char *function;
   const char *names;
-};
-
-struct fitMultiPeakData{
-  size_t n;
-  size_t p;
-  double * X;
-  double * Y;
 };
 
 int expd3_fdf (const gsl_vector * x, void *params, gsl_vector * f, gsl_matrix * J);

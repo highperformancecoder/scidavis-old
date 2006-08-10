@@ -99,9 +99,7 @@ new QLabel( tr("Color"), GroupBox1, "boxColorLabel",0 );
 boxColor = new ColorBox( FALSE, GroupBox1);
 boxColor->setColor(QColor(red));
 
-QHBox *weightBox = new QHBox(fitPage);
-weightBox->setSpacing(5);
-
+QButtonGroup* weightBox = new QButtonGroup(4, QGroupBox::Horizontal,tr( "" ), fitPage);
 new QLabel( tr("Weighting Method"), weightBox);
 boxWeighting = new QComboBox(weightBox);
 boxWeighting->insertItem(tr("No weighting"));
@@ -311,12 +309,15 @@ covMatrixName->setText( tr( "CovMatrix" ) );
 new QLabel( tr("Significant Digits"), GroupBox2);
 boxPrecision = new QSpinBox (0, 15, 1, GroupBox2);
 boxPrecision->setValue (app->fit_output_precision);
+connect( boxPrecision, SIGNAL(valueChanged (int)), this, SLOT(enableApplyChanges(int)));
 
 logBox = new QCheckBox (tr("Write Parameters to Result Log"), advancedPage);
 logBox->setChecked(app->writeFitResultsToLog);
+connect( logBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
 
 plotLabelBox = new QCheckBox (tr("Paste Parameters to Plot"), advancedPage);
 plotLabelBox->setChecked(app->pasteFitResultsToPlot);
+connect( plotLabelBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
 
 QHBox *hbox1=new QHBox(advancedPage);
 hbox1->setSpacing(5);
@@ -326,10 +327,12 @@ btnBack = new QPushButton(hbox1);
 btnBack->setText( tr( "<< &Fit" ) );
 btnBack->setMaximumWidth(100);
 connect( btnBack, SIGNAL(clicked()), this, SLOT(showFitPage()));
+connect( btnBack, SIGNAL(clicked()), this, SLOT(applyChanges()));
 
 btnApply = new QPushButton(hbox1);
 btnApply->setText( tr( "&Apply" ) );
 btnApply->setMaximumWidth(100);
+btnApply->setEnabled(false);
 connect( btnApply, SIGNAL(clicked()), this, SLOT(applyChanges()));
 
 QVBoxLayout* hlayout = new QVBoxLayout(advancedPage, 5, 5);
@@ -353,6 +356,7 @@ app->fit_output_precision = boxPrecision->value();
 app->pasteFitResultsToPlot = plotLabelBox->isChecked();
 app->writeFitResultsToLog = logBox->isChecked();
 app->saveSettings();
+btnApply->setEnabled(false);
 }
 
 void fitDialog::showParametersTable()
@@ -761,7 +765,6 @@ QStringList lst = dir.entryList(QDir::Files|QDir::NoSymLinks);
 for (int i=0; i<(int)lst.count(); i++)
 	{
 	QLibrary lib(path + lst[i]);
-	lib.setAutoUnload(true);
 
 	fitFunc name = (fitFunc) lib.resolve( "name" );
 	fitFunc function = (fitFunc) lib.resolve("function");
@@ -1024,26 +1027,27 @@ if (!error)
 	ApplicationWindow *app = (ApplicationWindow *)this->parent();
 	graph->setFitID(++app->fitNumber);
 
-	if (fitter)
-		{
+	if (fitter){
 		delete fitter;
-		fitter  = 0;
-		}
+		fitter  = 0;}
 
-	QString result;
 	if (boxUseBuiltIn->isChecked() && categoryBox->currentItem() == 1)
-		result = fitBuiltInFunction(curve,funcBox->currentText(),initialValues, start,end,
-			    	boxPoints->value(),boxSolver->currentItem(),eps, boxColor->currentItem());
+		fitBuiltInFunction(funcBox->currentText(),initialValues);
 	else if (boxUseBuiltIn->isChecked() && categoryBox->currentItem() == 3)
 		{
-		result = graph->fitPluginFunction(curve, pluginFilesList[funcBox->currentItem()],
-									 initialValues, start, end, boxPoints->value(),
-									 boxSolver->currentItem(), eps, boxColor->currentItem());
+		fitter = new PluginFitter(app, graph);
+		if (!((PluginFitter*)fitter)->load(pluginFilesList[funcBox->currentItem()])){
+			fitter  = 0;
+			return;}
+		((PluginFitter *)fitter)->setInitialGuesses(initialValues);
 		}
 	else
-		result = graph->fitNonlinearCurve(curve, lblFunction->text()+"="+formula, parameters, initialValues,
-				start, end, boxPoints->value(), boxSolver->currentItem(), eps, boxColor->currentItem());
-
+		{
+		fitter = new NonLinearFitter(app, graph);
+		fitter->setParametersList(parameters);
+		((NonLinearFitter *)fitter)->setInitialGuesses(initialValues);
+		fitter->setFormula(formula);
+		}
 	fitter->setTolerance (eps);
 	fitter->setDataFromCurve(curve, start, end);
 	fitter->setSolver((Fitter::Solver)boxSolver->currentItem());
@@ -1051,8 +1055,10 @@ if (!error)
 	fitter->setFitCurveParameters(generatePointsBtn->isChecked(), generatePointsBox->value());
 	fitter->setMaximumIterations(boxPoints->value());
 	if (!fitter->setWeightingData ((Fitter::WeightingMethod)boxWeighting->currentItem(), 
-		tableNamesBox->currentText()+"_"+colNamesBox->currentText()))
-		return;
+		tableNamesBox->currentText()+"_"+colNamesBox->currentText())){
+		delete fitter;
+		fitter  = 0;
+		return;}
 
 	fitter->fit();
 
@@ -1072,27 +1078,21 @@ if (!error)
 		for (i=0;i<rows;i++)
 			boxParams->setText(i, 1, res[i]);
 		}
-
-	app->updateLog(result);
 	}
 }
 
-QString fitDialog::fitBuiltInFunction(const QString& curve, const QString& function, 
-								   const QStringList& initVal, double from, double to, 
-								   int iterations, int solver, double tolerance, int colorIndex)
+void fitDialog::fitBuiltInFunction(const QString& function, const QStringList& initVal)
 {
 ApplicationWindow *app = (ApplicationWindow *)this->parent();
-
-QString result; 
 if (function == "ExpDecay1")
 	{
-	double x_init[3] = {initVal[0].toDouble(), initVal[1].toDouble(), initVal[2].toDouble()};
+	double x_init[3] = {initVal[0].toDouble(), 1/initVal[1].toDouble(), initVal[2].toDouble()};
 	fitter = new ExponentialFitter(false, app, graph);
 	fitter->setInitialGuesses(x_init);
 	}
 else if (function == "ExpGrowth")
 	{
-	double x_init[3] = {initVal[0].toDouble(), -initVal[1].toDouble(), initVal[2].toDouble()};
+	double x_init[3] = {initVal[0].toDouble(), -1/initVal[1].toDouble(), initVal[2].toDouble()};
 	fitter = new ExponentialFitter(true, app, graph);
 	fitter->setInitialGuesses(x_init);
 	}
@@ -1103,8 +1103,9 @@ else if (function == "ExpDecay2")
 	double amp2 = initVal[2].toDouble();
 	double t2 = initVal[3].toDouble();
 	double yOffset = initVal[4].toDouble();
-	result = graph->fitExpDecay2(curve, amp1, t1, amp2, t2, yOffset, 
-							 from, to, iterations, solver, tolerance, colorIndex);
+	double x_init[5] = {amp1, 1/t1, amp2, 1/t2, yOffset};
+	fitter = new TwoExpFitter(app, graph);
+	fitter->setInitialGuesses(x_init);
 	}
 else if (function == "ExpDecay3")
 	{
@@ -1115,8 +1116,9 @@ else if (function == "ExpDecay3")
 	double amp3 = initVal[4].toDouble();
 	double t3 = initVal[5].toDouble();
 	double yOffset = initVal[6].toDouble();
-	result = graph->fitExpDecay3(curve, amp1, t1, amp2, t2, amp3, t3, yOffset, 
-							 from, to, iterations, solver, tolerance, colorIndex);
+	double x_init[7] = {amp1, 1.0/t1, amp2, 1.0/t2, amp3, 1.0/t3, yOffset};
+	fitter = new ThreeExpFitter(app, graph);
+	fitter->setInitialGuesses(x_init);
 	}
 else if (function == "Boltzmann")
 	{
@@ -1124,8 +1126,10 @@ else if (function == "Boltzmann")
 	double A2 = initVal[1].toDouble();
 	double x0 = initVal[2].toDouble();
 	double dx = initVal[3].toDouble();
-	result = graph->fitBoltzmann(curve, A1, A2, x0, dx, 
-							 from, to, iterations, solver, tolerance, colorIndex);
+	double x_init[4] = {A1, A2, x0, dx};
+		
+	fitter = new SigmoidalFitter(app, graph);
+	fitter->setInitialGuesses(x_init);
 	}
 else if (function == "Gauss")
 	{
@@ -1133,8 +1137,10 @@ else if (function == "Gauss")
 	double amplitude = initVal[1].toDouble();
 	double center = initVal[2].toDouble();
 	double width = initVal[3].toDouble();
-	result = graph->fitGauss(curve, amplitude, center, width, offset, 
-							 from, to, iterations, solver, tolerance, colorIndex);
+	double x_init[4] = {offset, amplitude, center, width};
+
+	fitter = new GaussFitter(app, graph);
+	fitter->setInitialGuesses(x_init);
 	}
 else if (function == "Lorentz")
 	{
@@ -1142,10 +1148,11 @@ else if (function == "Lorentz")
 	double amplitude = initVal[1].toDouble();
 	double center = initVal[2].toDouble();
 	double width = initVal[3].toDouble();
-	result = graph->fitLorentz(curve, amplitude, center, width, offset, 
-							 from, to, iterations, solver, tolerance, colorIndex);
+	double x_init[4] = {offset, amplitude, center, width};
+
+	fitter = new LorentzFitter(app, graph);
+	fitter->setInitialGuesses(x_init);
 	}
-return result;
 }
 
 bool fitDialog::containsUserFunctionName(const QString& s)
@@ -1237,6 +1244,11 @@ if(fitter && plotLabelBox->isChecked())
 	graph->newLegend(fitter->legendFitInfo());
 
 e->accept();
+}
+
+void fitDialog::enableApplyChanges(int)
+{
+btnApply->setEnabled(true);
 }
 
 fitDialog::~fitDialog()

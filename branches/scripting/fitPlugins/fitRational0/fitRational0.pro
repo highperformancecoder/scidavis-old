@@ -12,8 +12,8 @@ CONFIG           += dll
 DESTDIR           = ../
 unix:LIBS += -L /usr/lib$${libsuff} -lgsl
  
-win32:INCLUDEPATH += C:/Qt/WinGsl
-win32:LIBS     += C:/Qt/WinGsl/Lib/WinGsl.lib 
+win32:INCLUDEPATH += C:/WinGsl
+win32:LIBS     += C:/WinGsl/Lib/WinGsl.lib 
 win32:DEFINES  += GSL_DLL 
 
 #target.path=/usr/lib$${libsuff}

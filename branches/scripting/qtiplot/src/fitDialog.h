@@ -91,8 +91,7 @@ public slots:
 	void choosePluginsFolder();
 	bool validInitialValues();
 	void changeDataRange();
-	QString fitBuiltInFunction(const QString&,const QString&, const QStringList&, 
-							double, double, int, int, double, int);
+	void fitBuiltInFunction(const QString& function, const QStringList& initVal);
 
 	void setSrcTables(QWidgetList* tables);
 	void selectSrcTable(int tabnr);
@@ -103,6 +102,7 @@ public slots:
 
 	//! Applies the user changes to the numerical format of the output results
 	void applyChanges();
+	void enableApplyChanges(int);
 
 signals:
 	void clearFunctionsList();
