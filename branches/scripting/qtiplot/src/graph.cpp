@@ -123,6 +123,7 @@ Graph::Graph(QWidget* parent, const char* name, WFlags f)
 if ( !name )
 	setName( "graph" );
 	
+fitter = 0;
 n_curves=0;
 linesOnPlot=0;
 widthLine=1;mrkX=-1;mrkY=-1;fitID=0;
@@ -2146,24 +2147,6 @@ bool Graph::removePointActivated()
 return removePointsEnabled;
 }
 
-void Graph::multiPeakFit(ApplicationWindow *app, int profile, int peaks)
-{
-showPlotPicker(true);
-
-selected_peaks = 0;
-fitter = new MultiPeakFitter (app, this, (MultiPeakFitter::PeakProfile)profile, peaks);
-
-d_plot->canvas()->grabMouse();
-}
-
-bool Graph::selectPeaksOn()
-{
-if (fitter)
-	return true;
-else
-	return false;
-}
-
 void Graph::translateCurve(int direction)
 {
 translateOn=true;
@@ -2211,6 +2194,22 @@ else
 	return QString::null;
 }
 
+void Graph::multiPeakFit(ApplicationWindow *app, int profile, int peaks)
+{
+showPlotPicker(true);
+selected_peaks = 0;
+fitter = new MultiPeakFitter (app, this, (MultiPeakFitter::PeakProfile)profile, peaks);
+d_plot->canvas()->grabMouse();
+}
+
+bool Graph::selectPeaksOn()
+{
+if (fitter)
+	return true;
+else
+	return false;
+}
+
 void Graph::selectPeak(const QPoint &)
 {
 const QwtPlotCurve *c = d_plot->curve(selectedCurve);
@@ -2232,21 +2231,23 @@ int peaks = fitter->peaks();
 if (selected_peaks == peaks)
 	{
 	showPlotPicker(false);
-	QApplication::setOverrideCursor(waitCursor);
+	d_plot->canvas()->releaseMouse();
 
-	fitter->setDataFromCurve(c->title().text());
-	fitter->fit();
-	delete fitter;
-	fitter = 0;
-
-	QApplication::restoreOverrideCursor();
+	if (fitter->setDataFromCurve(c->title().text()))
+		{
+		QApplication::setOverrideCursor(waitCursor);
+		fitter->fit();
+		delete fitter;
+		QApplication::restoreOverrideCursor();
+		}
+	
 	//remove peak line markers
 	QValueList<int>mrks = d_plot->markerKeys();
 	int n=(int)mrks.count();
 	for (int i=0; i<peaks; i++)
 		d_plot->removeMarker(mrks[n-i-1]);
 
-	d_plot->canvas()->releaseMouse();
+	d_plot->replot();
 	return;
 	}
 emit cursorInfo(tr("Peak %1 selected! Click to select a point and double-click/press 'Enter' to set the position of the next peak!").arg(QString::number(selected_peaks)));
@@ -4714,6 +4715,20 @@ else
 	}
 updatePlot();
 return true;
+}
+
+void Graph::insertCurve(QwtPlotCurve *c, const QString& plotAssociation)
+{
+int curveID = d_plot->insertCurve(c);
+
+c_type.resize(++n_curves);
+c_type[n_curves-1]=Line;
+
+c_keys.resize(n_curves);
+c_keys[n_curves-1] = curveID;
+
+addLegendItem(c->title().text());	
+associations << plotAssociation;
 }
 
 bool Graph::insertCurve(Table* w, const QString& name, int style)

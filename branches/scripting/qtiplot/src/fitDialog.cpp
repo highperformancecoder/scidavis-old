@@ -1025,7 +1025,6 @@ catch(mu::ParserError &e)
 if (!error)
 	{
 	ApplicationWindow *app = (ApplicationWindow *)this->parent();
-	graph->setFitID(++app->fitNumber);
 
 	if (fitter){
 		delete fitter;
@@ -1049,19 +1048,21 @@ if (!error)
 		fitter->setFormula(formula);
 		}
 	fitter->setTolerance (eps);
-	fitter->setDataFromCurve(curve, start, end);
 	fitter->setSolver((Fitter::Solver)boxSolver->currentItem());
 	fitter->setFitCurveColor(boxColor->currentItem());
 	fitter->setFitCurveParameters(generatePointsBtn->isChecked(), generatePointsBox->value());
 	fitter->setMaximumIterations(boxPoints->value());
-	if (!fitter->setWeightingData ((Fitter::WeightingMethod)boxWeighting->currentItem(), 
-		tableNamesBox->currentText()+"_"+colNamesBox->currentText())){
+
+	if (!fitter->setDataFromCurve(curve, start, end) ||
+		!fitter->setWeightingData ((Fitter::WeightingMethod)boxWeighting->currentItem(), 
+		tableNamesBox->currentText()+"_"+colNamesBox->currentText()))
+		{
 		delete fitter;
 		fitter  = 0;
-		return;}
+		return;
+		}
 
 	fitter->fit();
-
 	QStringList res = fitter->fitResultsList();
 	if (boxParams->numCols() == 3)
 		{

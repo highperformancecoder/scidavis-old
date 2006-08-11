@@ -23,20 +23,24 @@ public:
 	enum Solver{ScaledLevenbergMarquardt, UnscaledLevenbergMarquardt, NelderMeadSimplex};
 	enum WeightingMethod{NoWeighting, Instrumental, Statistical, ArbDataset};
 
-    Fitter( ApplicationWindow *parent, Graph *g = 0);
+    Fitter(ApplicationWindow *parent, Graph *g = 0, const char * name = 0);
     ~Fitter();
 
 	//! Customs and stores the fit results according to the derived class specifications. Used by exponential fits.
 	virtual void storeCustomFitResults(double *par);
 
 	virtual void fit();
-	void fitSimplex(gsl_multimin_function f, int &iterations, int &status);
-	void fitGSL(gsl_multifit_function_fdf f, int &iterations, int &status);
+
+	//! Pointer to the GSL multifit minimizer (for simplex algorithm)
+	gsl_multimin_fminimizer * fitSimplex(gsl_multimin_function f, int &iterations, int &status);
+
+	//! Pointer to the GSL multifit solver
+	gsl_multifit_fdfsolver * fitGSL(gsl_multifit_function_fdf f, int &iterations, int &status);
 
 	bool setWeightingData(WeightingMethod w, const QString& colName = QString::null);
 
-	void setDataFromCurve(const QString& curveTitle);
-	void setDataFromCurve(const QString& curveTitle, double from, double to);
+	bool setDataFromCurve(const QString& curveTitle);
+	bool setDataFromCurve(const QString& curveTitle, double from, double to);
 	void setDataFromCurve(QwtPlotCurve *curve, int start, int end);
 
 	void setGraph(Graph *g){d_graph = g;};
@@ -45,19 +49,20 @@ public:
 	virtual void setParametersList(const QStringList& lst){};
 
 	void initializeParameter(int parIndex, double val){gsl_vector_set(d_param_init, parIndex, val);};
+	virtual void guessInitialValues(){};
 	void setInitialGuesses(double *x_init);
 	void setSolver(Solver s){d_solver = s;};
 
 	void setTolerance(double eps){d_tolerance = eps;};
 	void setFitCurveColor(int colorId){d_curveColorIndex = colorId;};
 
-	virtual void generateFitCurve(double *par, double *X, double *Y){};
+	virtual void generateFitCurve(double *par, int fitId){};
 	void setFitCurveParameters(bool generate, int points = 0);
 
 	void setMaximumIterations(int iter){d_max_iterations = iter;};
 
 	//! Output string added to the result log
-	QString logFitInfo(double *par, int iterations, int status);
+	virtual QString logFitInfo(double *par, int iterations, int status, int prec, int fitId);
 
 	//! Output string added to the plot as a new legend
 	QString legendFitInfo();
@@ -77,12 +82,6 @@ protected:
 	fit_function_fdf d_fdf;
 	fit_function_simplex d_fsimplex;
 
-	//! Pointer to the GSL multifit solver
-	gsl_multifit_fdfsolver *s;
-
-	//! Pointer to the GSL multifit minimizer (for simplex algorithm)
-	gsl_multimin_fminimizer *s_min;
-
 	//! Size of the data arrays
 	int d_n;
 
@@ -91,6 +90,9 @@ protected:
 
 	//! Initial guesses for the fit parameters 
 	gsl_vector *d_param_init;
+
+	//! Tells weather the fitter has allocated memory for the fitting data sets. Used by the destructor.
+	bool has_allocated_data;
 
 	//! x data set to be fitted
 	double *d_x;
@@ -142,6 +144,9 @@ protected:
 
 	//! Stores the result parameters
 	double *d_results;
+
+	//! Stores the error chi square parameter
+	double chi_2;
 };
 
 class ExponentialFitter : public Fitter
@@ -152,7 +157,7 @@ public:
 	ExponentialFitter( bool expGrowth, ApplicationWindow *parent, Graph *g);
 
 	void storeCustomFitResults(double *par);
-	void generateFitCurve(double *par, double *X, double *Y);
+	void generateFitCurve(double *par, int fitId);
 
 private:
 	bool is_exp_growth;
@@ -166,7 +171,7 @@ public:
 	TwoExpFitter(ApplicationWindow *parent, Graph *g);
 
 	void storeCustomFitResults(double *par);
-	void generateFitCurve(double *par, double *X, double *Y);
+	void generateFitCurve(double *par, int fitId);
 };
 
 class ThreeExpFitter : public Fitter
@@ -177,7 +182,7 @@ public:
 	ThreeExpFitter(ApplicationWindow *parent, Graph *g);
 
 	void storeCustomFitResults(double *par);
-	void generateFitCurve(double *par, double *X, double *Y);
+	void generateFitCurve(double *par, int fitId);
 };
 
 class SigmoidalFitter : public Fitter
@@ -185,7 +190,7 @@ class SigmoidalFitter : public Fitter
 public:
 	SigmoidalFitter(ApplicationWindow *parent, Graph *g);
 
-	void generateFitCurve(double *par, double *X, double *Y);
+	void generateFitCurve(double *par, int fitId);
 	void guessInitialValues();
 };
 
@@ -194,7 +199,7 @@ class GaussFitter : public Fitter
 public:
 	GaussFitter(ApplicationWindow *parent, Graph *g);
 
-	void generateFitCurve(double *par, double *X, double *Y);
+	void generateFitCurve(double *par, int fitId);
 	void guessInitialValues();
 };
 
@@ -203,7 +208,7 @@ class LorentzFitter : public Fitter
 public:
 	LorentzFitter(ApplicationWindow *parent, Graph *g);
 
-	void generateFitCurve(double *par, double *X, double *Y);
+	void generateFitCurve(double *par, int fitId);
 	void guessInitialValues();
 };
 
@@ -213,7 +218,7 @@ public:
 	NonLinearFitter(ApplicationWindow *parent, Graph *g);
 
 	void setParametersList(const QStringList& lst);
-	void generateFitCurve(double *par, double *X, double *Y);
+	void generateFitCurve(double *par, int fitId);
 	void setInitialGuesses(const QStringList& lst);
 };
 
@@ -225,7 +230,7 @@ public:
 	PluginFitter(ApplicationWindow *parent, Graph *g);
 
 	bool load(const QString& pluginName);
-	void generateFitCurve(double *par, double *X, double *Y);
+	void generateFitCurve(double *par, int fitId);
 	void setInitialGuesses(const QStringList& lst);
 
 private:
@@ -240,8 +245,9 @@ public:
 
 	MultiPeakFitter(ApplicationWindow *parent, Graph *g = 0, PeakProfile profile = Gauss, int peaks = 0);
 
-	void generateFitCurve(double *par, double *X, double *Y);
-	void guessInitialValues();
+	QString logFitInfo(double *par, int iterations, int status, int prec, int fitId);
+	void generateFitCurve(double *par, int fitId);
+	void storeCustomFitResults(double *par);
 
 	int peaks(){return d_peaks;};
 

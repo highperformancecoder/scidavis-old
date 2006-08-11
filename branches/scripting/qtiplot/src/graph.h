@@ -73,6 +73,7 @@ public slots:
 	bool insertCurve(Table* w, const QString& name, int style);
 	bool insertCurve(Table* w, int xcol, const QString& name, int style);
 	bool insertCurve(Table* w, const QString& xColName, const QString& yColName, int style);
+	void insertCurve(QwtPlotCurve *c, const QString& plotAssociation);
 
 	void removeCurve(int index);
 	void removeCurve(const QString& s);
@@ -559,7 +560,7 @@ public slots:
 	void showAxisDialog();
 	void showScaleDialog();
 
-	QStringList fitResults(){return fit_results;};
+	//! Initialize a multi peak fitting operations and creates a new MultiPeakFitter object
 	void multiPeakFit(ApplicationWindow *app, int profile, int peaks);
 	void selectPeak(const QPoint &pos);
 	bool selectPeaksOn();
@@ -647,7 +648,6 @@ private:
 	bool auxFilledArrowHead, ignoreResize;
 	bool drawAxesBackbone, autoscale;
 
-	QStringList fit_results;
 	int selected_peaks;
 	MultiPeakFitter *fitter;
 

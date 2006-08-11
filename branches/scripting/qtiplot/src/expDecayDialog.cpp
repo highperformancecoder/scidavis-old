@@ -134,8 +134,6 @@ if (curvesList.contains(curve) <= 0)
 	}
 
 ApplicationWindow *app = (ApplicationWindow *)this->parent();
-graph->setFitID(++app->fitNumber);
-
 Fitter *fitter;
 if (slopes == 3)
 	{		
@@ -158,7 +156,10 @@ else if (slopes == 1 || slopes == -1)
 	fitter->setInitialGuesses(x_init);
 	}
 
-fitter->setDataFromCurve(boxName->currentText(), boxStart->text().toDouble(), boxStart->text().toDouble() - 1);
-fitter->fit();
-delete fitter;
+if (fitter->setDataFromCurve(boxName->currentText(), 
+	boxStart->text().toDouble(), boxStart->text().toDouble() - 1))
+	{
+	fitter->fit();
+	delete fitter;
+	}
 }
