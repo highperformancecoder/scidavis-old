@@ -159,6 +159,7 @@ else if (slopes == 1 || slopes == -1)
 if (fitter->setDataFromCurve(boxName->currentText(), 
 	boxStart->text().toDouble(), boxStart->text().toDouble() - 1))
 	{
+	fitter->setFitCurveColor(boxColor->currentItem());
 	fitter->fit();
 	delete fitter;
 	}

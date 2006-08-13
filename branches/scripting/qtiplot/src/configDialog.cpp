@@ -2,6 +2,7 @@
 
 #include <qvariant.h>
 #include <qpushbutton.h>
+#include <qradiobutton.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qbuttongroup.h>
@@ -72,11 +73,13 @@ configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlag
 	initTablesPage();
 	initPlotsPage();
 	initPlots3DPage();
+	initFittingPage();
 	
 	generalDialog->addWidget(appTabWidget, 0);
 	generalDialog->addWidget(tables, 1);
 	generalDialog->addWidget(plotsTabWidget, 2);
 	generalDialog->addWidget(plots3D, 3);
+	generalDialog->addWidget(fitPage, 4);
 
 	GroupBox2 = new QButtonGroup( 3,QGroupBox::Horizontal, QString::null,this);
 	GroupBox2->setFlat(TRUE);
@@ -431,6 +434,58 @@ QButtonGroup *GroupBoxApp = new QButtonGroup( 2,QGroupBox::Horizontal, QString::
 	connect( btnPanelsText, SIGNAL( clicked() ), this, SLOT( pickPanelsTextColor() ) );
 }
 
+void configDialog::initFittingPage()
+{
+ApplicationWindow *app = (ApplicationWindow *)this->parent();
+
+fitPage = new QWidget(generalDialog );
+
+GroupBoxFittingCurve = new QButtonGroup(2,QGroupBox::Horizontal, tr("Generated Fit Curve"), fitPage );
+
+generatePointsBtn = new QRadioButton (GroupBoxFittingCurve);
+generatePointsBtn ->setText(tr("Uniform X"));
+generatePointsBtn->setChecked(app->generateUniformFitPoints);
+
+QHBox *hb=new QHBox(GroupBoxFittingCurve);
+hb->setSpacing(5);
+
+lblPoints = new QLabel( tr("Points"), hb);
+generatePointsBox = new QSpinBox (0, 1000000, 10, hb);
+generatePointsBox->setValue(app->fitPoints);
+
+samePointsBtn = new QRadioButton(GroupBoxFittingCurve);
+samePointsBtn->setText( tr( "Same X as Fitting Data" ) );
+samePointsBtn->setChecked(!app->generateUniformFitPoints);
+
+GroupBoxFitParameters = new QButtonGroup(2,QGroupBox::Horizontal, tr("Parameters Output"), fitPage );
+
+lblPrecision = new QLabel( tr("Significant Digits"), GroupBoxFitParameters);
+boxPrecision = new QSpinBox (0, 15, 1, GroupBoxFitParameters);
+boxPrecision->setValue (app->fit_output_precision);
+connect( boxPrecision, SIGNAL(valueChanged (int)), this, SLOT(enableApplyChanges(int)));
+
+logBox = new QCheckBox (tr("Write Parameters to Result Log"), GroupBoxFitParameters);
+logBox->setChecked(app->writeFitResultsToLog);
+connect( logBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
+
+new QLabel(QString::null, GroupBoxFitParameters);
+
+plotLabelBox = new QCheckBox (tr("Paste Parameters to Plot"), GroupBoxFitParameters);
+plotLabelBox->setChecked(app->pasteFitResultsToPlot);
+connect( plotLabelBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
+
+new QLabel(QString::null, GroupBoxFitParameters);
+
+QVBoxLayout* hlayout = new QVBoxLayout(fitPage, 5, 5);
+hlayout->addWidget(GroupBoxFittingCurve);
+hlayout->addWidget(GroupBoxFitParameters);
+
+connect(samePointsBtn, SIGNAL(toggled(bool)), this, SLOT(showPointsBox(bool)));
+connect(generatePointsBtn, SIGNAL(toggled(bool)), this, SLOT(showPointsBox(bool)));
+
+appTabWidget->insertTab(fitPage, tr("Fitting"));
+}
+
 void configDialog::initCurvesPage()
 {
 ApplicationWindow *app = (ApplicationWindow *)parentWidget();
@@ -469,6 +524,7 @@ void configDialog::languageChange()
     itemsList->insertItem( QPixmap(configTable_xpm), tr( "Tables" ) );
     itemsList->insertItem( QPixmap(config_curves_xpm), tr( "2D Plots" ) );
 	itemsList->insertItem( QPixmap(logo_xpm), tr( "3D Plots" ) );
+	itemsList->insertItem( QPixmap(fit_xpm), tr( "Fitting" ) );
 	itemsList->setSelected(0, true);
 	
 	//plots 2D page
@@ -617,6 +673,17 @@ void configDialog::languageChange()
 	btnTitleFnt->setText( tr( "&Title" ) );
 	btnLabelsFnt->setText( tr( "&Axes Labels" ) );
 	btnNumFnt->setText( tr( "&Numbers" ) );
+
+	//Fitting page
+	GroupBoxFittingCurve->setTitle(tr("Generated Fit Curve"));
+	generatePointsBtn ->setText(tr("Uniform X"));
+	lblPoints->setText( tr("Points"));
+	samePointsBtn->setText( tr( "Same X as Fitting Data" ) );
+
+	GroupBoxFitParameters->setTitle(tr("Parameters Output"));
+	lblPrecision->setText(tr("Significant Digits"));
+	logBox->setText(tr("Write Parameters to Result Log"));
+	plotLabelBox->setText(tr("Paste Parameters to Plot"));
 }
 
 void configDialog::accept()
@@ -720,6 +787,14 @@ else if (generalDialog->visibleWidget()==(QWidget*)plots3D)
 		app->smooth3DMesh = boxSmoothMesh->isChecked();
 		app->setPlot3DOptions();
 		}
+	}
+else if (generalDialog->visibleWidget()==(QWidget*)fitPage)
+	{
+	app->fit_output_precision = boxPrecision->value();
+	app->pasteFitResultsToPlot = plotLabelBox->isChecked();
+	app->writeFitResultsToLog = logBox->isChecked();
+	app->fitPoints = generatePointsBox->value();
+	app->generateUniformFitPoints = generatePointsBtn->isChecked();
 	}
 app->saveSettings();
 }
@@ -1054,3 +1129,19 @@ for (int i=0; i < (int)locales.size(); i++)
 boxLanguage->insertStringList(languages);
 boxLanguage->setCurrentItem(lang);
 }
+
+void configDialog::showPointsBox(bool)
+{
+if (generatePointsBtn->isChecked())
+	{
+	lblPoints->show();
+	generatePointsBox->show();
+	}
+else
+	{
+	lblPoints->hide();
+	generatePointsBox->hide();
+	}
+}
+
+

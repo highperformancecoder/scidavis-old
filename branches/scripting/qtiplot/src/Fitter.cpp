@@ -6,6 +6,10 @@
 #include "parser.h"
 
 #include <gsl/gsl_blas.h>
+#include <gsl/gsl_multifit_nlin.h>
+#include <gsl/gsl_multifit.h>
+#include <gsl/gsl_fit.h>
+#include <gsl/gsl_statistics.h>
 
 #include <qapplication.h>
 #include <qlibrary.h>
@@ -27,6 +31,7 @@ d_fit_type = QString::null;
 d_weihting = NoWeighting;
 weighting_dataset = QString::null;
 has_allocated_data = false;
+is_non_linear = true;
 }
 
 gsl_multifit_fdfsolver * Fitter::fitGSL(gsl_multifit_function_fdf f, int &iterations, int &status)
@@ -160,7 +165,7 @@ QDateTime dt = QDateTime::currentDateTime ();
 QString info = dt.toString(Qt::LocalDate)+"\t " + tr("Fit") + QString::number(fitId)+ ":\n";
 info += d_fit_type +" " + tr("fit of dataset") + ": " + d_curve->title().text();
 if (!d_formula.isEmpty())
-	info +=", " + tr("using function") + " " + d_formula + "\n";
+	info +=", " + tr("using function") + ": " + d_formula + "\n";
 else
 	info +="\n";
 
@@ -182,32 +187,40 @@ switch(d_weihting)
 	}
 info +="\n";
 
-if (d_solver == NelderMeadSimplex)
-	info+=tr("Nelder-Mead Simplex");
-else if (d_solver == UnscaledLevenbergMarquardt)
-	info+=tr("Unscaled Levenberg-Marquardt");
-else
-	info+=tr("Scaled Levenberg-Marquardt");
+if (is_non_linear)
+	{
+	if (d_solver == NelderMeadSimplex)
+		info+=tr("Nelder-Mead Simplex");
+	else if (d_solver == UnscaledLevenbergMarquardt)
+		info+=tr("Unscaled Levenberg-Marquardt");
+	else
+		info+=tr("Scaled Levenberg-Marquardt");
 
-info+=tr(" algorithm with tolerance = ")+QString::number(d_tolerance)+"\n";
-info+=tr("From x=")+QString::number(d_x[0]) +tr(" to x=")+QString::number(d_x[d_n-1])+"\n";
+	info+=tr(" algorithm with tolerance = ")+QString::number(d_tolerance)+"\n";
+	}
+
+info+=tr("From x")+" = "+QString::number(d_x[0])+" "+tr("to x")+" = "+QString::number(d_x[d_n-1])+"\n";
 
 for (int i=0; i<d_p; i++)
 	{
 	info += d_param_names[i] + " = " + QString::number(par[i], 'g', prec) + " +/- ";
 	info += QString::number(sqrt(gsl_matrix_get(covar,i,i)), 'g', prec) + "\n";
 	}
-info+="-----------------------------------\n";
+info += "--------------------------------------------------------------------------------------\n";
 
 QString info2;
 info2.sprintf("Chi^2/doF = %g\n",  chi_2/(d_n - d_p));
 info+=info2;
-
-info +="-----------------------------------\n";
-info += tr("Iterations")+ " = " + QString::number(iterations) + "\n";
-info += tr("Status") + " = " + gsl_strerror (status) + "\n";
-info +="---------------------------------------------------------------------------------------\n";
-
+double sst = (d_n-1)*gsl_stats_variance(d_y, 1, d_n);
+info2.sprintf(tr("R-Square") + " = %g\n",  1 - chi_2/sst);
+info+=info2;
+info += "---------------------------------------------------------------------------------------\n";
+if (is_non_linear)
+	{
+	info += tr("Iterations")+ " = " + QString::number(iterations) + "\n";
+	info += tr("Status") + " = " + gsl_strerror (status) + "\n";
+	info +="---------------------------------------------------------------------------------------\n";
+	}
 return info;
 }
 
@@ -217,11 +230,13 @@ ApplicationWindow *app = (ApplicationWindow *)parent();
 int prec = app->fit_output_precision;
 
 QString info = tr("Dataset") + ": " + d_curve->title().text() + "\n";
-
 info += tr("Function") + ": " + d_formula + "\n<br>";
 
 QString info2;
 info2.sprintf("Chi^2/doF = %g\n",  chi_2/(d_n - d_p));
+info+=info2;
+double sst = (d_n-1)*gsl_stats_variance(d_y, 1, d_n);
+info2.sprintf(" R^2 = %g\n",  1 - chi_2/sst);
 info += info2 + "<br>";
 for (int i=0; i<d_p; i++)
 	{
@@ -306,7 +321,7 @@ void Fitter::showParametersTable(const QString& tableName)
 ApplicationWindow *app = (ApplicationWindow *)parent();
 int prec = app->fit_output_precision;
 
-Table *t= app->newTable(tableName, d_p, 3);
+Table *t = app->newTable(tableName, d_p, 3);
 t->setHeader(QStringList() << tr("Parameter") << tr("Value") << tr ("Error"));
 for (int i=0; i<d_p; i++)
 	{
@@ -428,8 +443,11 @@ if (has_allocated_data)
 	delete[] d_y;
 	delete[] d_w;
 	}
+
+if (is_non_linear)
+	gsl_vector_free(d_param_init);
+
 delete[] d_results;
-gsl_vector_free(d_param_init);
 gsl_matrix_free (covar);
 }
 
@@ -1193,5 +1211,215 @@ for (int j=0; j<d_peaks; j++)
 	}
 info += "---------------------------------------------------------------------------------------\n";
 return info;
+}
+
+/*****************************************************************************
+ *
+ * Class PolynomialFitter
+ *
+ *****************************************************************************/
+
+PolynomialFitter::PolynomialFitter(ApplicationWindow *parent, Graph *g, int order, bool legend)
+: Fitter(parent, g), d_order(order), show_legend(legend)
+{
+is_non_linear = false;
+d_fit_type = tr("Polynomial");
+d_p = order + 1;
+
+covar = gsl_matrix_alloc (d_p, d_p);
+d_results = new double[d_p];
+
+d_formula = "y = ";	
+for (int i = 0; i < d_p; i++)
+	{
+	QString par = "a" + QString::number(i);
+	d_param_names << par;
+	d_formula += par;
+	if (i>0)
+		d_formula +="*X";
+	if (i>1)
+		d_formula += "^"+QString::number(i);
+
+	if (i != d_p-1)
+		d_formula += " + ";
+	}
+}
+
+void PolynomialFitter::generateFitCurve(double *par, int fitId)
+{
+double *X = new double[d_result_points]; 
+double *Y = new double[d_result_points]; 
+
+if (gen_x_data)
+	{
+	double X0 = d_x[0];
+	double XN = d_x[d_n-1];
+	double step = (XN-X0)/(d_result_points-1);
+	for (int i=0; i<d_result_points; i++)
+		{
+		X[i] = X0+i*step;
+		double 	yi = 0.0;
+		for (int j=0; j<d_p;j++)
+			yi += par[j]*pow(X[i],j);
+
+		Y[i] = yi;
+		}
+	}
+else
+	{
+	for (int i=0; i<d_n; i++)
+		{
+		X[i] = d_x[i];		
+		double 	yi = 0.0;
+		for (int j=0; j<d_p;j++)
+			yi += par[j]*pow(X[i],j);
+
+		Y[i] = yi;
+		}
+	}
+d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, "Fit" + QString::number(fitId), 
+						d_fit_type + tr(" fit of ") +  d_curve->title().text());
+}
+
+void PolynomialFitter::fit()
+{
+gsl_matrix *X = gsl_matrix_alloc (d_n, d_p);
+gsl_vector *c = gsl_vector_alloc (d_p);
+
+int i;
+for (i = 0; i <d_n; i++)
+    {		
+	for (int j= 0; j < d_p; j++)
+     	gsl_matrix_set (X, i, j, pow(d_x[i],j));
+    }
+
+gsl_vector_view y = gsl_vector_view_array (d_y, d_n);	
+gsl_vector_view w = gsl_vector_view_array (d_w, d_n);	
+gsl_multifit_linear_workspace * work = gsl_multifit_linear_alloc (d_n, d_p);
+
+if (d_weihting == NoWeighting)
+	gsl_multifit_linear (X, &y.vector, c, covar, &chi_2, work);
+else
+	gsl_multifit_wlinear (X, &w.vector, &y.vector, c, covar, &chi_2, work);
+
+for (i = 0; i < d_p; i++)
+	d_results[i] = gsl_vector_get(c, i);
+
+gsl_multifit_linear_free (work);
+gsl_matrix_free (X);
+gsl_vector_free (c);
+
+ApplicationWindow *app = (ApplicationWindow *)parent();
+if (app->writeFitResultsToLog)
+	app->updateLog(logFitInfo(d_results, 0, 0, app->fit_output_precision, ++app->fitNumber));
+
+if (show_legend)
+	showLegend(app->fit_output_precision);
+
+generateFitCurve(d_results, app->fitNumber);
+}
+
+void PolynomialFitter::showLegend(int prec)
+{		
+QString legend = "Y=" + QString::number(d_results[0], 'g', prec);		
+for (int j = 1; j < d_p; j++)
+	{
+	double cj = d_results[j];
+	if (cj>0 && !legend.isEmpty())
+		legend += "+";
+
+	QString s;
+	s.sprintf("%.5f",cj);	
+	if (s != "1.00000")
+		legend += QString::number(cj, 'g', prec);
+			
+	legend += "X";
+	if (j>1)
+		legend += "<sup>" + QString::number(j) + "</sup>";
+	}
+
+LegendMarker* mrk = d_graph->newLegend(legend);
+if (d_graph->hasLegend())
+	{
+	LegendMarker* legend = d_graph->legend();
+	QPoint p = legend->rect().bottomLeft();
+	mrk->setOrigin(QPoint(p.x(), p.y()+20));
+	}
+}
+
+/*****************************************************************************
+ *
+ * Class LinearFitter
+ *
+ *****************************************************************************/
+
+LinearFitter::LinearFitter(ApplicationWindow *parent, Graph *g)
+: Fitter(parent, g)
+{
+d_p = 2;
+covar = gsl_matrix_alloc (d_p, d_p);
+d_results = new double[d_p];
+
+is_non_linear = false;
+d_formula = "y = A*x + B";
+d_param_names << "B" << "A";
+d_fit_type = tr("Linear Regression");
+}
+
+void LinearFitter::fit()
+{
+gsl_vector *c = gsl_vector_alloc (d_p);
+
+double c0, c1, cov00, cov01, cov11;	
+if (d_weihting == NoWeighting)
+	gsl_fit_linear(d_x, 1, d_y, 1, d_n, &c0, &c1, &cov00, &cov01, &cov11, &chi_2);
+else
+	gsl_fit_wlinear(d_x, 1, d_w, 1, d_y, 1, d_n, &c0, &c1, &cov00, &cov01, &cov11, &chi_2);
+
+double sst = (d_n-1)*gsl_stats_variance(d_y, 1, d_n);
+double Rsquare = 1 - chi_2/sst;
+
+d_results[0] = c0;
+d_results[1] = c1;
+gsl_vector_free (c);
+
+gsl_matrix_set(covar, 0, 0, cov00);
+gsl_matrix_set(covar, 0, 1, cov01);
+gsl_matrix_set(covar, 1, 1, cov11);
+gsl_matrix_set(covar, 1, 0, cov01);
+
+ApplicationWindow *app = (ApplicationWindow *)parent();
+if (app->writeFitResultsToLog)
+	app->updateLog(logFitInfo(d_results, 0, 0, app->fit_output_precision, ++app->fitNumber));
+
+generateFitCurve(d_results, app->fitNumber);
+}
+
+void LinearFitter::generateFitCurve(double *par, int fitId)
+{
+double *X = new double[d_result_points]; 
+double *Y = new double[d_result_points]; 
+
+if (gen_x_data)
+	{
+	double X0 = d_x[0];
+	double XN = d_x[d_n-1];
+	double step = (XN-X0)/(d_result_points-1);
+	for (int i=0; i<d_result_points; i++)
+		{
+		X[i] = X0+i*step;
+		Y[i] = par[0]+par[1]*X[i];
+		}
+	}
+else
+	{
+	for (int i=0; i<d_n; i++)
+		{
+		X[i] = d_x[i];		
+		Y[i] = par[0]+par[1]*X[i];
+		}
+	}
+d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, "LinearFit" + QString::number(fitId), 
+						d_fit_type + tr(" of ") +  d_curve->title().text());
 }
 

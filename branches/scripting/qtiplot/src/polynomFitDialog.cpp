@@ -2,6 +2,7 @@
 #include "graph.h"
 #include "colorBox.h"
 #include "application.h"
+#include "Fitter.h"
 
 #include <qvariant.h>
 #include <qpushbutton.h>
@@ -113,15 +114,14 @@ if (!c || c->dataSize()<2)
 else
 	{
 	ApplicationWindow *app = (ApplicationWindow *)this->parent();
-	app->fitNumber++;
-	graph->setFitID(app->fitNumber);
-
-	QString result = graph->fitPolynomial(boxName->currentText(),boxOrder->value(),
-			boxPoints->value(), boxStart->text().toDouble(),
-			boxEnd->text().toDouble(), boxShowFormula->isChecked(), 
-			boxColor->currentItem());
-
-	app->updateLog(result);
+	PolynomialFitter *fitter = new PolynomialFitter(app, graph, boxOrder->value(), boxShowFormula->isChecked());
+	if (fitter->setDataFromCurve(boxName->currentText(), 
+		boxStart->text().toDouble(), boxEnd->text().toDouble()))
+		{
+		fitter->setFitCurveColor(boxColor->currentItem());
+		fitter->fit();
+		delete fitter;
+		}
 	}
 }
 

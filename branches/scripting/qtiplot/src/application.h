@@ -720,6 +720,10 @@ signals:
 	void modified();
 	
 public:
+	bool generateUniformFitPoints;
+
+	//! Number of points in a generated fit curve
+	int fitPoints;
 	bool pasteFitResultsToPlot;
 
 	//! Write fit output information to Result Log

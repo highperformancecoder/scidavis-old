@@ -47,12 +47,12 @@ public:
 	QLineEdit* boxFrom;
 	QLineEdit* boxTo;
 	QLineEdit* boxTolerance;
-	QSpinBox *boxPoints, *generatePointsBox, *boxPrecision;
+	QSpinBox *boxPoints, *generatePointsBox, *boxPrecision, *polynomOrderBox;
 	QWidget *fitPage, *editPage, *advancedPage;
 	QTextEdit *editBox, *explainBox, *boxFunction;
 	QListBox *categoryBox, *funcBox;
 	QLineEdit *boxName, *boxParam;
-	QLabel *lblFunction, *lblPoints;
+	QLabel *lblFunction, *lblPoints, *polynomOrderLabel;
 	QPushButton *btnAddFunc, *btnDelFunc, *btnContinue, *btnApply;
 	QPushButton *buttonEdit, *btnAddTxt, *btnAddName, *btnDeleteTables;
 	ColorBox* boxColor;

@@ -1498,11 +1498,14 @@ for (QWidget *w = windows->first(); w; w = windows->next())
 			g->setPlotAssociations(onPlot);
 
 			//update legend
-			QString legend=g->getLegendText();
-			onPlot=QStringList::split ("\n",legend,FALSE );
-			onPlot.gres (oldName,newName,TRUE);
-			legend=onPlot.join("\n");
-			g->setLegendText(legend);
+			LegendMarker *legendMrk = g->legend();
+			if (legendMrk)
+				{
+				onPlot = QStringList::split ("\n", legendMrk->getText(), FALSE );
+				onPlot.gres (oldName,newName,TRUE);
+				legendMrk->setText(onPlot.join("\n"));
+				g->replot();
+				}
 			}
 		}
 	else if (w->isA("Graph3D"))
@@ -1557,11 +1560,14 @@ for (QWidget *w = windows->first(); w; w = windows->next())
 			g->setPlotAssociations(onPlot);
 
 			//update legend
-			QString legend=g->getLegendText();
-			onPlot=QStringList::split ("\n",legend,FALSE );
-			onPlot.gres (oldName,newName,TRUE);
-			legend=onPlot.join("\n");
-			g->setLegendText(legend);
+			LegendMarker *legendMrk = g->legend();
+			if (legendMrk)
+				{
+				onPlot = QStringList::split ("\n", legendMrk->getText(), FALSE );
+				onPlot.gres (oldName,newName,TRUE);
+				legendMrk->setText(onPlot.join("\n"));
+				g->replot();
+				}
 			}
 		}
 	else if (w->isA("Graph3D"))
@@ -4264,6 +4270,8 @@ settings.beginGroup("/Fitting");
 fit_output_precision = settings.readNumEntry("/fit_output_precision", 15);
 pasteFitResultsToPlot = settings.readBoolEntry("/pasteFitResultsToPlot", false);
 writeFitResultsToLog = settings.readBoolEntry("/writeFitResultsToLog", true);
+generateUniformFitPoints = settings.readBoolEntry("/generateUniformFitPoints", true);
+fitPoints = settings.readNumEntry("/fitPoints", 100);
 settings.endGroup();
 }
 
@@ -4415,6 +4423,8 @@ settings.beginGroup("/Fitting");
 settings.writeEntry("/fit_output_precision", fit_output_precision);
 settings.writeEntry("/pasteFitResultsToPlot", pasteFitResultsToPlot);
 settings.writeEntry("/writeFitResultsToLog", writeFitResultsToLog);
+settings.writeEntry("/generateUniformFitPoints", generateUniformFitPoints);
+settings.writeEntry("/fitPoints", fitPoints);
 settings.endGroup();
 }
 
@@ -10249,13 +10259,12 @@ connect (ad,SIGNAL(analyse(const QString&, const QString&)),this,SLOT(analyzeCur
 
 void ApplicationWindow::analyzeCurve(const QString& whichFit, const QString& curveTitle)
 {
-QString result="";
-if (whichFit=="fitLinear")
-	result=activeGraph->fitLinear(curveTitle);
-else if(whichFit=="fitSigmoidal" || whichFit=="fitGauss" || whichFit=="fitLorentz")
+if(whichFit=="fitLinear" || whichFit=="fitSigmoidal" || whichFit=="fitGauss" || whichFit=="fitLorentz")
 	{
 	Fitter *fitter = 0;
-	if (whichFit=="fitSigmoidal")
+	if (whichFit=="fitLinear")
+		fitter = new LinearFitter (this, activeGraph);
+	else if (whichFit=="fitSigmoidal")
 		fitter = new SigmoidalFitter (this, activeGraph);
 	else if(whichFit=="fitGauss")
 		fitter = new GaussFitter(this, activeGraph);
@@ -10264,7 +10273,9 @@ else if(whichFit=="fitSigmoidal" || whichFit=="fitGauss" || whichFit=="fitLorent
 
 	if (fitter->setDataFromCurve(curveTitle))
 		{
-		fitter->guessInitialValues();
+		if (whichFit != "fitLinear")
+			fitter->guessInitialValues();
+
 		fitter->fit();
 		delete fitter;
 		}
@@ -10276,17 +10287,6 @@ else if(whichFit=="differentiate" && activeGraph->diffCurve(curveTitle))
 	list<<QString(w->name())+"_derivative";
 	MultiLayer* d=multilayerPlot(w,list,0);
 	d->setFocus();
-	}
-if (whichFit != "differentiate" && !result.isEmpty())
-	{
-	logInfo+=result;
-	showResults(true);
-	activeGraph->setFocus();
-	emit modified();
-	if (!aw)
-		return;
-	aw->setActiveWindow();
-	((MultiLayer*)aw)->updateTransparency();
 	}
 }
 
