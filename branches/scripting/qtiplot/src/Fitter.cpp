@@ -19,6 +19,8 @@ Fitter::Fitter( ApplicationWindow *parent, Graph *g, const char * name)
 : QObject( parent, name),
   d_graph(g)
 {
+d_p = 0;
+d_n = 0;
 d_curveColorIndex = 1;
 d_solver = ScaledLevenbergMarquardt;
 d_tolerance = 1e-4;
@@ -30,7 +32,6 @@ d_formula = QString::null;
 d_fit_type = QString::null;
 d_weihting = NoWeighting;
 weighting_dataset = QString::null;
-has_allocated_data = false;
 is_non_linear = true;
 }
 
@@ -98,7 +99,13 @@ return s_min;
 
 void Fitter::setDataFromCurve(QwtPlotCurve *curve, int start, int end)
 { 
-has_allocated_data = true;
+if (d_n > 0)
+	{//delete previousely allocated memory
+	delete[] d_x;
+	delete[] d_y;
+	delete[] d_w;
+	}
+
 d_curve = curve;
 d_n = end - start + 1;
 
@@ -155,8 +162,10 @@ void Fitter::setFitCurveParameters(bool generate, int points)
 gen_x_data = generate;
 if (gen_x_data)
 	d_result_points = points;
-else
+else if (d_n > 0)
 	d_result_points = d_n;
+else
+	d_result_points = 100;
 }
 
 QString Fitter::logFitInfo(double *par, int iterations, int status, int prec, int fitId)
@@ -437,8 +446,8 @@ generateFitCurve(par, app->fitNumber);
 
 Fitter::~Fitter()
 {
-if (has_allocated_data)
-	{
+if (d_n > 0)
+	{//delete the memory allocated for the fitting data
 	delete[] d_x;
 	delete[] d_y;
 	delete[] d_w;
@@ -503,8 +512,7 @@ double *Y = new double[d_result_points];
 if (gen_x_data)
 	{
 	double X0 = d_x[0];
-	double XN = d_x[d_n-1];
-	double step = (XN-X0)/(d_result_points-1);
+	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
 	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = X0+i*step;
@@ -513,7 +521,7 @@ if (gen_x_data)
 	}
 else
 	{
-	for (int i=0; i<d_n; i++)
+	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = d_x[i];
 		Y[i] = par[0]*exp(-par[1]*X[i])+par[2];
@@ -564,8 +572,7 @@ double *Y = new double[d_result_points];
 if (gen_x_data)
 	{
 	double X0 = d_x[0];
-	double XN = d_x[d_n-1];
-	double step = (XN-X0)/(d_result_points-1);
+	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
 	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = X0+i*step;
@@ -574,7 +581,7 @@ if (gen_x_data)
 	}
 else
 	{
-	for (int i=0; i<d_n; i++)
+	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = d_x[i];
 		Y[i] = par[0]*exp(-par[1]*X[i])+par[2]*exp(-par[3]*X[i])+par[4];
@@ -626,8 +633,7 @@ double *Y = new double[d_result_points];
 if (gen_x_data)
 	{
 	double X0 = d_x[0];
-	double XN = d_x[d_n-1];
-	double step = (XN-X0)/(d_result_points-1);
+	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
 	for (int i=0; i<d_result_points; i++)
 		{
 		X[i]=X0+i*step;
@@ -636,7 +642,7 @@ if (gen_x_data)
 	}
 else
 	{
-	for (int i=0; i<d_n; i++)
+	for (int i=0; i<d_result_points; i++)
 		{
 		X[i]=d_x[i];
 		Y[i]=par[0]*exp(-X[i]*par[1])+par[2]*exp(-X[i]*par[3])+par[4]*exp(-X[i]*par[5])+par[6];
@@ -679,8 +685,7 @@ double *Y = new double[d_result_points];
 if (gen_x_data)
 	{
 	double X0 = d_x[0];
-	double XN = d_x[d_n-1];
-	double step = (XN-X0)/(d_result_points-1);
+	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
 	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = X0+i*step;
@@ -689,7 +694,7 @@ if (gen_x_data)
 	}
 else
 	{
-	for (int i=0; i<d_n; i++)
+	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = d_x[i];
 		Y[i] = (par[0]-par[1])/(1+exp((X[i]-par[2])/par[3]))+par[1];
@@ -746,8 +751,7 @@ double w2 = par[3]*par[3];
 if (gen_x_data)
 	{
 	double X0 = d_x[0];
-	double XN = d_x[d_n-1];
-	double step = (XN-X0)/(d_result_points-1);
+	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
 	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = X0+i*step;
@@ -757,7 +761,7 @@ if (gen_x_data)
 	}
 else
 	{
-	for (int i=0; i<d_n; i++)
+	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = d_x[i];		
 		double diff = X[i]-par[2];
@@ -817,8 +821,7 @@ double w2 = par[3]*par[3];
 if (gen_x_data)
 	{
 	double X0 = d_x[0];
-	double XN = d_x[d_n-1];
-	double step = (XN-X0)/(d_result_points-1);
+	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
 	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = X0+i*step;
@@ -828,7 +831,7 @@ if (gen_x_data)
 	}
 else
 	{
-	for (int i=0; i<d_n; i++)
+	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = d_x[i];		
 		double diff = X[i]-par[2];
@@ -879,12 +882,6 @@ covar = gsl_matrix_alloc (d_p, d_p);
 d_results = new double[d_p];
 }
 
-void NonLinearFitter::setInitialGuesses(const QStringList& lst)
-{
-for (int i = 0; i < d_p; i++)
-	gsl_vector_set(d_param_init, i, lst[i].toDouble());
-}
-
 void NonLinearFitter::generateFitCurve(double *par, int fitId)
 {
 double *X = new double[d_result_points]; 
@@ -901,8 +898,7 @@ parser.SetExpr(d_formula.ascii());
 if (gen_x_data)
 	{
 	double X0 = d_x[0];
-	double XN = d_x[d_n-1];
-	double step = (XN-X0)/(d_result_points-1);
+	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
 	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = X0+i*step;
@@ -912,7 +908,7 @@ if (gen_x_data)
 	}
 else
 	{
-	for (int i=0; i<d_n; i++)
+	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = d_x[i];		
 		xvar = X[i];
@@ -1013,12 +1009,6 @@ else
 return true;
 }
 
-void PluginFitter::setInitialGuesses(const QStringList& lst)
-{
-for (int i = 0; i < d_p; i++)
-	gsl_vector_set(d_param_init, i, lst[i].toDouble());
-}
-
 void PluginFitter::generateFitCurve(double *par, int fitId)
 {
 double *X = new double[d_result_points]; 
@@ -1027,8 +1017,7 @@ double *Y = new double[d_result_points];
 if (gen_x_data)
 	{
 	double X0 = d_x[0];
-	double XN = d_x[d_n-1];
-	double step = (XN-X0)/(d_result_points-1);
+	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
 	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = X0+i*step;
@@ -1037,7 +1026,7 @@ if (gen_x_data)
 	}
 else
 	{
-	for (int i=0; i<d_n; i++)
+	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = d_x[i];		
 		Y[i]= f_eval(X[i], par);
@@ -1229,20 +1218,33 @@ d_p = order + 1;
 covar = gsl_matrix_alloc (d_p, d_p);
 d_results = new double[d_p];
 
-d_formula = "y = ";	
-for (int i = 0; i < d_p; i++)
+d_formula = "y = " + generateFormula(order);	
+d_param_names = generateParameterList(order);
+}
+
+QString PolynomialFitter::generateFormula(int order)
+{
+QString formula;
+for (int i = 0; i < order+1; i++)
 	{
 	QString par = "a" + QString::number(i);
-	d_param_names << par;
-	d_formula += par;
+	formula += par;
 	if (i>0)
-		d_formula +="*X";
+		formula +="*x";
 	if (i>1)
-		d_formula += "^"+QString::number(i);
-
-	if (i != d_p-1)
-		d_formula += " + ";
+		formula += "^"+QString::number(i);
+	if (i != order)
+		formula += " + ";
 	}
+return formula;
+}
+
+QStringList PolynomialFitter::generateParameterList(int order)
+{
+QStringList lst;
+for (int i = 0; i < order+1; i++)
+	lst << "a" + QString::number(i);
+return lst;
 }
 
 void PolynomialFitter::generateFitCurve(double *par, int fitId)
@@ -1253,8 +1255,7 @@ double *Y = new double[d_result_points];
 if (gen_x_data)
 	{
 	double X0 = d_x[0];
-	double XN = d_x[d_n-1];
-	double step = (XN-X0)/(d_result_points-1);
+	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
 	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = X0+i*step;
@@ -1267,7 +1268,7 @@ if (gen_x_data)
 	}
 else
 	{
-	for (int i=0; i<d_n; i++)
+	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = d_x[i];		
 		double 	yi = 0.0;
@@ -1403,8 +1404,7 @@ double *Y = new double[d_result_points];
 if (gen_x_data)
 	{
 	double X0 = d_x[0];
-	double XN = d_x[d_n-1];
-	double step = (XN-X0)/(d_result_points-1);
+	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
 	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = X0+i*step;
@@ -1413,7 +1413,7 @@ if (gen_x_data)
 	}
 else
 	{
-	for (int i=0; i<d_n; i++)
+	for (int i=0; i<d_result_points; i++)
 		{
 		X[i] = d_x[i];		
 		Y[i] = par[0]+par[1]*X[i];

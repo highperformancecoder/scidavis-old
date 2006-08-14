@@ -452,6 +452,7 @@ hb->setSpacing(5);
 lblPoints = new QLabel( tr("Points"), hb);
 generatePointsBox = new QSpinBox (0, 1000000, 10, hb);
 generatePointsBox->setValue(app->fitPoints);
+showPointsBox(!app->generateUniformFitPoints);
 
 samePointsBtn = new QRadioButton(GroupBoxFittingCurve);
 samePointsBtn->setText( tr( "Same X as Fitting Data" ) );
@@ -462,17 +463,14 @@ GroupBoxFitParameters = new QButtonGroup(2,QGroupBox::Horizontal, tr("Parameters
 lblPrecision = new QLabel( tr("Significant Digits"), GroupBoxFitParameters);
 boxPrecision = new QSpinBox (0, 15, 1, GroupBoxFitParameters);
 boxPrecision->setValue (app->fit_output_precision);
-connect( boxPrecision, SIGNAL(valueChanged (int)), this, SLOT(enableApplyChanges(int)));
 
 logBox = new QCheckBox (tr("Write Parameters to Result Log"), GroupBoxFitParameters);
 logBox->setChecked(app->writeFitResultsToLog);
-connect( logBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
 
 new QLabel(QString::null, GroupBoxFitParameters);
 
 plotLabelBox = new QCheckBox (tr("Paste Parameters to Plot"), GroupBoxFitParameters);
 plotLabelBox->setChecked(app->pasteFitResultsToPlot);
-connect( plotLabelBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
 
 new QLabel(QString::null, GroupBoxFitParameters);
 

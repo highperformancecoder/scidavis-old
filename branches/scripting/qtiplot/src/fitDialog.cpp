@@ -207,10 +207,12 @@ boxUseBuiltIn = new QCheckBox(hbox3,"boxUseBuiltIn");
 boxUseBuiltIn->setText(tr("Fit with &built-in function"));
 boxUseBuiltIn->hide();
 
-/*polynomOrderLabel = new QLabel( tr("Polynomial Order"), hbox3);
+polynomOrderLabel = new QLabel( tr("Polynomial Order"), hbox3);
 polynomOrderLabel->hide();
 polynomOrderBox = new QSpinBox(1, 100, 1, hbox3);
-polynomOrderBox->hide();*/
+polynomOrderBox->setValue(2);
+polynomOrderBox->hide();
+connect(polynomOrderBox, SIGNAL(valueChanged(int)), this, SLOT(showExpression(int)));
 
 buttonPlugins = new QPushButton(hbox3, "buttonPlugins" );
 buttonPlugins->setText( tr( "&Choose plugins folder..." ) );
@@ -291,6 +293,7 @@ lblPoints = new QLabel( tr("Points"), hb);
 generatePointsBox = new QSpinBox (0, 1000000, 10, hb);
 generatePointsBox->setValue(app->fitPoints);
 connect( generatePointsBox, SIGNAL(valueChanged (int)), this, SLOT(enableApplyChanges(int)));
+showPointsBox(!app->generateUniformFitPoints);
 
 samePointsBtn = new QRadioButton(GroupBox1);
 samePointsBtn->setText( tr( "Same X as Fitting Data" ) );
@@ -601,7 +604,12 @@ void fitDialog::showFitPage()
 {
 QString par = boxParam->text().simplifyWhiteSpace();
 QStringList paramList = QStringList::split(QRegExp("[,;]+[\\s]*"), par, false);
-boxParams->setNumRows((int)paramList.count());
+int parameters = (int)paramList.count();
+boxParams->setNumRows(parameters);
+if (parameters > 7)
+	parameters = 7;
+boxParams->setMinimumHeight(4+(parameters+1)*boxParams->horizontalHeader()->height());
+
 if (!boxUseBuiltIn->isChecked() || 
 	(boxUseBuiltIn->isChecked()&& categoryBox->currentItem()!=3 && categoryBox->currentItem()!=1))
 	{
@@ -683,6 +691,10 @@ if (ok)
 			case 6:
 				boxParam->setText("y0, a, xc, w");
 			break;
+			case 7:
+				QStringList lst = PolynomialFitter::generateParameterList(polynomOrderBox->value());
+				boxParam->setText(lst.join(", "));
+			break;
 			}
 		}
 	else if (categoryBox->currentItem() == 3 && (int)pluginParameters.size() > 0 )
@@ -731,8 +743,8 @@ boxUseBuiltIn->hide();
 buttonPlugins->hide();
 btnDelFunc->setEnabled(false);
 funcBox->clear();
-//polynomOrderLabel->hide();
-//polynomOrderBox->hide();
+polynomOrderLabel->hide();
+polynomOrderBox->hide();
 
 switch (category)
 	{
@@ -839,7 +851,7 @@ funcBox->insertStringList (userFunctionNames, 1);
 void fitDialog::setBuiltInFunctionNames()
 {
 builtInFunctionNames << "Boltzmann" << "ExpGrowth" << "ExpDecay1" << "ExpDecay2" << "ExpDecay3" 
-<< "Gauss" << "Lorentz";// << "Polynomial";
+<< "Gauss" << "Lorentz" << "Polynomial";
 }
 
 void fitDialog::setBuiltInFunctions()
@@ -866,17 +878,18 @@ if (categoryBox->currentItem() == 2)
 	}
 else if (categoryBox->currentItem() == 1)
 	{
-	explainBox->setText(builtInFunctions[function]);
-	/*if (funcBox->currentText() == tr("Polynomial"))
+	if (funcBox->currentText() == tr("Polynomial"))
 		{
 		polynomOrderLabel->show();
 		polynomOrderBox->show();
+		explainBox->setText(PolynomialFitter::generateFormula(polynomOrderBox->value()));
 		}
 	else
 		{
 		polynomOrderLabel->hide();
 		polynomOrderBox->hide();
-		}*/
+		explainBox->setText(builtInFunctions[function]);
+		}
 	setFunction(boxUseBuiltIn->isChecked());
 	}
 else if (categoryBox->currentItem() == 0)
@@ -1011,9 +1024,11 @@ if (boxParams->numCols() == 3)
 else 
 	n=rows;
 	
-QStringList parameters, initialValues;
+QStringList parameters;
 myParser parser;
 bool error=FALSE;
+	
+double *paramsInit = new double[n];
 QString formula = boxFunction->text();
 try
 	{
@@ -1037,19 +1052,17 @@ try
 			formula.replace(builtInFunctionNames[i], "(" + builtInFunctions[i] + ")");
 		}	
 
-	double *paramsInit = new double[n];
 	if (boxParams->numCols() == 3)
 		{
+		int j = 0;
 		for (i=0;i<rows;i++)
 			{
 			QCheckTableItem *it = (QCheckTableItem *)boxParams->item (i, 2);
-			int j = 0;
 			if (!it->isChecked())
 				{
-				paramsInit[j]=boxParams->text(i,1).toDouble();
+				paramsInit[j] = boxParams->text(i,1).toDouble();					
 				parser.DefineVar(boxParams->text(i,0).ascii(), &paramsInit[j]);
 				parameters<<boxParams->text(i,0);
-				initialValues<<boxParams->text(i,1);
 				j++;
 				}
 			else
@@ -1060,10 +1073,9 @@ try
 		{
 		for (i=0;i<n;i++)
 			{
-			paramsInit[i]=boxParams->text(i,1).toDouble();
+			paramsInit[i] = boxParams->text(i,1).toDouble();
 			parser.DefineVar(boxParams->text(i,0).ascii(), &paramsInit[i]);
 			parameters<<boxParams->text(i,0);
-			initialValues<<boxParams->text(i,1);
 			}
 		}
 
@@ -1071,7 +1083,6 @@ try
 	double x=start;
 	parser.DefineVar("x", &x);	
 	parser.Eval();
-	delete[] paramsInit;
 	}
 catch(mu::ParserError &e)
 	{
@@ -1092,27 +1103,23 @@ if (!error)
 		fitter  = 0;}
 
 	if (boxUseBuiltIn->isChecked() && categoryBox->currentItem() == 1)
-		fitBuiltInFunction(funcBox->currentText(),initialValues);
+		fitBuiltInFunction(funcBox->currentText(), paramsInit);
 	else if (boxUseBuiltIn->isChecked() && categoryBox->currentItem() == 3)
 		{
 		fitter = new PluginFitter(app, graph);
 		if (!((PluginFitter*)fitter)->load(pluginFilesList[funcBox->currentItem()])){
 			fitter  = 0;
 			return;}
-		((PluginFitter *)fitter)->setInitialGuesses(initialValues);
+		fitter->setInitialGuesses(paramsInit);
 		}
 	else
 		{
 		fitter = new NonLinearFitter(app, graph);
 		fitter->setParametersList(parameters);
-		((NonLinearFitter *)fitter)->setInitialGuesses(initialValues);
+		fitter->setInitialGuesses(paramsInit);
 		fitter->setFormula(formula);
 		}
-	fitter->setTolerance (eps);
-	fitter->setSolver((Fitter::Solver)boxSolver->currentItem());
-	fitter->setFitCurveColor(boxColor->currentItem());
-	fitter->setFitCurveParameters(generatePointsBtn->isChecked(), generatePointsBox->value());
-	fitter->setMaximumIterations(boxPoints->value());
+	delete[] paramsInit;
 
 	if (!fitter->setDataFromCurve(curve, start, end) ||
 		!fitter->setWeightingData ((Fitter::WeightingMethod)boxWeighting->currentItem(), 
@@ -1122,6 +1129,12 @@ if (!error)
 		fitter  = 0;
 		return;
 		}
+
+	fitter->setTolerance (eps);
+	fitter->setSolver((Fitter::Solver)boxSolver->currentItem());
+	fitter->setFitCurveColor(boxColor->currentItem());
+	fitter->setFitCurveParameters(generatePointsBtn->isChecked(), generatePointsBox->value());
+	fitter->setMaximumIterations(boxPoints->value());
 
 	fitter->fit();
 	QStringList res = fitter->fitResultsList();
@@ -1143,51 +1156,51 @@ if (!error)
 	}
 }
 
-void fitDialog::fitBuiltInFunction(const QString& function, const QStringList& initVal)
+void fitDialog::fitBuiltInFunction(const QString& function, double* initVal)
 {
 ApplicationWindow *app = (ApplicationWindow *)this->parent();
 if (function == "ExpDecay1")
 	{
-	double x_init[3] = {initVal[0].toDouble(), 1/initVal[1].toDouble(), initVal[2].toDouble()};
+	double x_init[3] = {initVal[0], 1/initVal[1], initVal[2]};
 	fitter = new ExponentialFitter(false, app, graph);
 	fitter->setInitialGuesses(x_init);
 	}
 else if (function == "ExpGrowth")
 	{
-	double x_init[3] = {initVal[0].toDouble(), -1/initVal[1].toDouble(), initVal[2].toDouble()};
+	double x_init[3] = {initVal[0], -1/initVal[1], initVal[2]};
 	fitter = new ExponentialFitter(true, app, graph);
 	fitter->setInitialGuesses(x_init);
 	}
 else if (function == "ExpDecay2")
 	{
-	double amp1 = initVal[0].toDouble();
-	double t1 = initVal[1].toDouble();
-	double amp2 = initVal[2].toDouble();
-	double t2 = initVal[3].toDouble();
-	double yOffset = initVal[4].toDouble();
+	double amp1 = initVal[0];
+	double t1 = initVal[1];
+	double amp2 = initVal[2];
+	double t2 = initVal[3];
+	double yOffset = initVal[4];
 	double x_init[5] = {amp1, 1/t1, amp2, 1/t2, yOffset};
 	fitter = new TwoExpFitter(app, graph);
 	fitter->setInitialGuesses(x_init);
 	}
 else if (function == "ExpDecay3")
 	{
-	double amp1 = initVal[0].toDouble();
-	double t1 = initVal[1].toDouble();
-	double amp2 = initVal[2].toDouble();
-	double t2 = initVal[3].toDouble();
-	double amp3 = initVal[4].toDouble();
-	double t3 = initVal[5].toDouble();
-	double yOffset = initVal[6].toDouble();
+	double amp1 = initVal[0];
+	double t1 = initVal[1];
+	double amp2 = initVal[2];
+	double t2 = initVal[3];
+	double amp3 = initVal[4];
+	double t3 = initVal[5];
+	double yOffset = initVal[6];
 	double x_init[7] = {amp1, 1.0/t1, amp2, 1.0/t2, amp3, 1.0/t3, yOffset};
 	fitter = new ThreeExpFitter(app, graph);
 	fitter->setInitialGuesses(x_init);
 	}
 else if (function == "Boltzmann")
 	{
-	double A1 = initVal[0].toDouble();
-	double A2 = initVal[1].toDouble();
-	double x0 = initVal[2].toDouble();
-	double dx = initVal[3].toDouble();
+	double A1 = initVal[0];
+	double A2 = initVal[1];
+	double x0 = initVal[2];
+	double dx = initVal[3];
 	double x_init[4] = {A1, A2, x0, dx};
 		
 	fitter = new SigmoidalFitter(app, graph);
@@ -1195,10 +1208,10 @@ else if (function == "Boltzmann")
 	}
 else if (function == "Gauss")
 	{
-	double offset = initVal[0].toDouble();
-	double amplitude = initVal[1].toDouble();
-	double center = initVal[2].toDouble();
-	double width = initVal[3].toDouble();
+	double offset = initVal[0];
+	double amplitude = initVal[1];
+	double center = initVal[2];
+	double width = initVal[3];
 	double x_init[4] = {offset, amplitude, center, width};
 
 	fitter = new GaussFitter(app, graph);
@@ -1206,19 +1219,17 @@ else if (function == "Gauss")
 	}
 else if (function == "Lorentz")
 	{
-	double offset = initVal[0].toDouble();
-	double amplitude = initVal[1].toDouble();
-	double center = initVal[2].toDouble();
-	double width = initVal[3].toDouble();
+	double offset = initVal[0];
+	double amplitude = initVal[1];
+	double center = initVal[2];
+	double width = initVal[3];
 	double x_init[4] = {offset, amplitude, center, width};
 
 	fitter = new LorentzFitter(app, graph);
 	fitter->setInitialGuesses(x_init);
 	}
-/*else if (function == tr("Polynomial"))
-	{
-	fitter = new PolynomialFitter(app, graph);
-	}*/
+else if (function == tr("Polynomial"))
+	fitter = new PolynomialFitter(app, graph, polynomOrderBox->value());
 }
 
 bool fitDialog::containsUserFunctionName(const QString& s)

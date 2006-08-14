@@ -91,9 +91,6 @@ protected:
 	//! Initial guesses for the fit parameters 
 	gsl_vector *d_param_init;
 
-	//! Tells weather the fitter has allocated memory for the fitting data sets. Used by the destructor.
-	bool has_allocated_data;
-
 	//! Tells weather the fitter uses non-linear/simplex fitting 
 	// with an initial parameters set, that must be freed in the destructor.
 	bool is_non_linear;
@@ -223,7 +220,6 @@ public:
 
 	void setParametersList(const QStringList& lst);
 	void generateFitCurve(double *par, int fitId);
-	void setInitialGuesses(const QStringList& lst);
 };
 
 class PluginFitter : public Fitter
@@ -235,7 +231,6 @@ public:
 
 	bool load(const QString& pluginName);
 	void generateFitCurve(double *par, int fitId);
-	void setInitialGuesses(const QStringList& lst);
 
 private:
 	fitFunctionEval f_eval;
@@ -268,6 +263,9 @@ public:
 	void showLegend(int prec);
 	void generateFitCurve(double *par, int fitId);
 	void fit();
+
+	static QString generateFormula(int order);
+	static QStringList generateParameterList(int order);
 
 private:
 	int d_order;
