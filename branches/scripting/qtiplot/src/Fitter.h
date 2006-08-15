@@ -201,6 +201,8 @@ private:
 
 class SigmoidalFitter : public Fitter
 {
+    Q_OBJECT
+
 public:
 	SigmoidalFitter(ApplicationWindow *parent, Graph *g);
 	void guessInitialValues();
@@ -211,6 +213,8 @@ private:
 
 class GaussFitter : public Fitter
 {
+    Q_OBJECT
+
 public:
 	GaussFitter(ApplicationWindow *parent, Graph *g);
 	void guessInitialValues();
@@ -221,6 +225,8 @@ private:
 
 class LorentzFitter : public Fitter
 {
+    Q_OBJECT
+
 public:
 	LorentzFitter(ApplicationWindow *parent, Graph *g);
 	void guessInitialValues();
@@ -232,6 +238,8 @@ private:
 
 class NonLinearFitter : public Fitter
 {
+    Q_OBJECT
+
 public:
 	NonLinearFitter(ApplicationWindow *parent, Graph *g, const QString& formula = QString::null);
 	void setParametersList(const QStringList& lst);
@@ -243,6 +251,8 @@ private:
 
 class PluginFitter : public Fitter
 {
+    Q_OBJECT
+
 public:
 	typedef double (*fitFunctionEval)(double, double *);
 	PluginFitter(ApplicationWindow *parent, Graph *g);
@@ -255,6 +265,8 @@ private:
 
 class MultiPeakFitter : public Fitter
 {
+    Q_OBJECT
+
 public:
 		
 	enum PeakProfile{Gauss, Lorentz};
@@ -275,6 +287,8 @@ private:
 
 class PolynomialFitter : public Fitter
 {
+    Q_OBJECT
+
 public:
 	PolynomialFitter(ApplicationWindow *parent, Graph *g, int order = 2, bool legend = false);
 
@@ -293,6 +307,8 @@ private:
 
 class LinearFitter : public Fitter
 {
+    Q_OBJECT
+
 public:
 	LinearFitter(ApplicationWindow *parent, Graph *g);
 	void fit();
