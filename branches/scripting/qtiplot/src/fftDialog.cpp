@@ -130,9 +130,9 @@ if (graph)
 	graph->fft(key, forwardBtn->isChecked(), sampling, 
 		   boxNormalize->isChecked(), boxOrder->isChecked());
 
-	int fitID = app->fitNumber;
+	/*int fitID = app->fitNumber;
 	graph->setFitID(++fitID);
-	app->fitNumber = fitID;
+	app->fitNumber = fitID;*/
 	}
 else
 	{

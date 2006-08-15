@@ -50,6 +50,9 @@ public:
 	ScalePicker *scalePicker;
 	CanvasPicker* cp;
 	 
+	//! Returns the name of the parent multilayer plot
+	QString parentPlotName();
+
 public slots:
 	Plot* plotWidget(){return d_plot;};
 	void copy(Graph* g);

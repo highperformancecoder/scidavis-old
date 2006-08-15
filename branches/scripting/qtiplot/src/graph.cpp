@@ -2216,8 +2216,8 @@ const QwtPlotCurve *c = d_plot->curve(selectedCurve);
 if (!c)
 	return;
 
-fitter->initializeParameter(3*selected_peaks, c->y(selectedPoint));
-fitter->initializeParameter(3*selected_peaks+1, c->x(selectedPoint));
+fitter->setInitialGuess(3*selected_peaks, c->y(selectedPoint));
+fitter->setInitialGuess(3*selected_peaks+1, c->x(selectedPoint));
 
 QwtPlotMarker *m = new QwtPlotMarker();
 m->setLineStyle(QwtPlotMarker::VLine);
@@ -3900,8 +3900,6 @@ mrk->setBackground(defaultMarkerFrame);
 mrk->setFont(defaultMarkerFont);
 mrk->setTextColor(defaultTextMarkerColor);
 mrk->setBackgroundColor(defaultTextMarkerBackground);
-
-d_plot->replot();
 return mrk;
 }
 
@@ -6820,6 +6818,12 @@ defaultArrowLineStyle = style;
 defaultArrowHeadLength = headLength;
 defaultArrowHeadAngle = headAngle;
 defaultArrowHeadFill = fillHead;
+}
+
+QString Graph::parentPlotName()
+{
+QWidget *w = (QWidget *)parent()->parent();
+return QString(w->name());
 }
 
 Graph::~Graph()

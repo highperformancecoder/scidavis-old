@@ -21,7 +21,7 @@ class QwtPanner::PrivateData
 public:
     PrivateData():
         isEnabled(false),
-        button(Qt::MidButton),
+        button(Qt::LeftButton),
         buttonState(Qt::NoButton)
     {
     }

@@ -42,7 +42,7 @@ public:
 	QPushButton* buttonPlugins;
 	QPushButton* btnBack;
 	QComboBox* boxCurve;
-	QComboBox* boxSolver;
+	QComboBox* boxAlgorithm;
 	QTable* boxParams;
 	QLineEdit* boxFrom;
 	QLineEdit* boxTo;

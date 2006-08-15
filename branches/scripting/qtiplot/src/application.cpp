@@ -296,7 +296,7 @@ void ApplicationWindow::initGlobalConstants()
 #endif
 
 majVersion = 0; minVersion = 8; patchVersion = 6;
-graphs=0; tables=0; matrixes = 0; notes = 0; fitNumber=0;
+graphs=0; tables=0; matrixes = 0; notes = 0;
 projectname="untitled";
 ignoredLines=0;
 lastModified=0;
@@ -9577,13 +9577,6 @@ if (caption.contains ("table"))
 	if (tb > app->tables && ok) 
 		app->tables = tb;	
 	}
-else if (caption.contains ("Fit"))
-	{
-	bool ok;
-	int tb=caption.remove("Fit").toInt(&ok);
-	if (tb > app->fitNumber && ok) 
-		app->fitNumber = tb;
-	}
 
 for (line++; line!=flist.end(); line++)
 {
@@ -11512,7 +11505,7 @@ QWidgetList *windows = windowsList();
 for (QWidget *w = windows->first(); w; w = windows->next())
 	{
 	QString caption = w->name();
-	if (w->isA("Table") && (caption.startsWith("Fit") || caption.startsWith("LinearFit")))
+	if (w->isA("Table") && (caption.startsWith(tr("Fit")) || caption.startsWith(tr("LinearFit"))))
 		{
 		((Table*)w)->askOnCloseEvent(false);
 		((Table*)w)->close();
@@ -13288,6 +13281,28 @@ if (versionFile.open(IO_ReadOnly))
 		}
 	autoSearchUpdatesRequest = false;
 	}
+}
+
+QString ApplicationWindow::generateUnusedName(const QString& name, bool increment)
+{
+int index = 0;
+QWidgetList *windows = windowsList();
+for (int i = 0; i < int(windows->count());i++ )
+	{
+	if (QString(windows->at(i)->name()).startsWith(name))
+		index++;
+	}
+delete windows;
+
+QString newName = name;
+if (increment)//force return of a different name
+	newName += QString::number(++index);
+else
+	{
+	if (index>0)
+		newName += QString::number(index);
+	}
+return newName;
 }
 
 ApplicationWindow::~ApplicationWindow()
