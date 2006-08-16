@@ -114,7 +114,7 @@ if (!c || c->dataSize()<2)
 else
 	{
 	ApplicationWindow *app = (ApplicationWindow *)this->parent();
-	PolynomialFitter *fitter = new PolynomialFitter(app, graph, boxOrder->value(), boxShowFormula->isChecked());
+	PolynomialFit *fitter = new PolynomialFit(app, graph, boxOrder->value(), boxShowFormula->isChecked());
 	if (fitter->setDataFromCurve(boxName->currentText(), 
 		boxStart->text().toDouble(), boxEnd->text().toDouble()))
 		{

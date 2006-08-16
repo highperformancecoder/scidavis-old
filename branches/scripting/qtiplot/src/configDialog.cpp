@@ -26,6 +26,7 @@
 #include "application.h"
 #include "graph.h"
 #include "colorButton.h"
+#include "colorBox.h"
 #include "pixmaps.h"
 
 configDialog::configDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
@@ -458,6 +459,14 @@ samePointsBtn = new QRadioButton(GroupBoxFittingCurve);
 samePointsBtn->setText( tr( "Same X as Fitting Data" ) );
 samePointsBtn->setChecked(!app->generateUniformFitPoints);
 
+GroupBoxMultiPeak = new QButtonGroup(2,QGroupBox::Horizontal, tr("Display Peak Curves for Multi-peak Fits"), fitPage );
+GroupBoxMultiPeak->setCheckable(true);
+GroupBoxMultiPeak->setChecked(app->generatePeakCurves);
+
+lblPeaksColor = new QLabel( tr("Peaks Color"), GroupBoxMultiPeak);
+boxPeaksColor = new ColorBox (GroupBoxMultiPeak);
+boxPeaksColor->setCurrentItem(app->peakCurvesColor);
+
 GroupBoxFitParameters = new QButtonGroup(2,QGroupBox::Horizontal, tr("Parameters Output"), fitPage );
 
 lblPrecision = new QLabel( tr("Significant Digits"), GroupBoxFitParameters);
@@ -476,6 +485,7 @@ new QLabel(QString::null, GroupBoxFitParameters);
 
 QVBoxLayout* hlayout = new QVBoxLayout(fitPage, 5, 5);
 hlayout->addWidget(GroupBoxFittingCurve);
+hlayout->addWidget(GroupBoxMultiPeak);
 hlayout->addWidget(GroupBoxFitParameters);
 
 connect(samePointsBtn, SIGNAL(toggled(bool)), this, SLOT(showPointsBox(bool)));
@@ -793,6 +803,8 @@ else if (generalDialog->visibleWidget()==(QWidget*)fitPage)
 	app->writeFitResultsToLog = logBox->isChecked();
 	app->fitPoints = generatePointsBox->value();
 	app->generateUniformFitPoints = generatePointsBtn->isChecked();
+	app->generatePeakCurves = GroupBoxMultiPeak->isChecked();
+	app->peakCurvesColor = boxPeaksColor->currentItem();
 	}
 app->saveSettings();
 }

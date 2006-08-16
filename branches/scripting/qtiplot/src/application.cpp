@@ -4272,6 +4272,8 @@ pasteFitResultsToPlot = settings.readBoolEntry("/pasteFitResultsToPlot", false);
 writeFitResultsToLog = settings.readBoolEntry("/writeFitResultsToLog", true);
 generateUniformFitPoints = settings.readBoolEntry("/generateUniformFitPoints", true);
 fitPoints = settings.readNumEntry("/fitPoints", 100);
+generatePeakCurves = settings.readBoolEntry("/generatePeakCurves", true);
+peakCurvesColor = settings.readNumEntry("/peakCurvesColor", 2);//green color
 settings.endGroup();
 }
 
@@ -4425,6 +4427,8 @@ settings.writeEntry("/pasteFitResultsToPlot", pasteFitResultsToPlot);
 settings.writeEntry("/writeFitResultsToLog", writeFitResultsToLog);
 settings.writeEntry("/generateUniformFitPoints", generateUniformFitPoints);
 settings.writeEntry("/fitPoints", fitPoints);
+settings.writeEntry("/generatePeakCurves", generatePeakCurves);
+settings.writeEntry("/peakCurvesColor", peakCurvesColor);
 settings.endGroup();
 }
 
@@ -10254,15 +10258,15 @@ void ApplicationWindow::analyzeCurve(const QString& whichFit, const QString& cur
 {
 if(whichFit=="fitLinear" || whichFit=="fitSigmoidal" || whichFit=="fitGauss" || whichFit=="fitLorentz")
 	{
-	Fitter *fitter = 0;
+	Fit *fitter = 0;
 	if (whichFit=="fitLinear")
-		fitter = new LinearFitter (this, activeGraph);
+		fitter = new LinearFit (this, activeGraph);
 	else if (whichFit=="fitSigmoidal")
-		fitter = new SigmoidalFitter (this, activeGraph);
+		fitter = new SigmoidalFit (this, activeGraph);
 	else if(whichFit=="fitGauss")
-		fitter = new GaussFitter(this, activeGraph);
+		fitter = new MultiPeakFit(this, activeGraph, MultiPeakFit::Gauss);
 	else if(whichFit=="fitLorentz")
-		fitter = new LorentzFitter(this, activeGraph);
+		fitter = new LorentzFit(this, activeGraph);
 
 	if (fitter->setDataFromCurve(curveTitle))
 		{
@@ -11689,12 +11693,12 @@ if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::fitMultiPeakGauss()
 {
-fitMultiPeak((int)MultiPeakFitter::Gauss);
+fitMultiPeak((int)MultiPeakFit::Gauss);
 }
 
 void ApplicationWindow::fitMultiPeakLorentz()
 {
-fitMultiPeak((int)MultiPeakFitter::Lorentz);
+fitMultiPeak((int)MultiPeakFit::Lorentz);
 }
 
 void ApplicationWindow::fitMultiPeak(int profile)

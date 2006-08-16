@@ -28,7 +28,7 @@ class TitlePicker;
 class ScalePicker;
 class CanvasPicker;
 class Plot;
-class MultiPeakFitter;
+class MultiPeakFit;
 class ApplicationWindow;
 
 class Graph: public QWidget
@@ -560,7 +560,7 @@ public slots:
 	void showAxisDialog();
 	void showScaleDialog();
 
-	//! Initialize a multi peak fitting operations and creates a new MultiPeakFitter object
+	//! Initialize a multi peak fitting operations and creates a new MultiPeakFit object
 	void multiPeakFit(ApplicationWindow *app, int profile, int peaks);
 	void selectPeak(const QPoint &pos);
 	bool selectPeaksOn();
@@ -649,7 +649,7 @@ private:
 	bool drawAxesBackbone, autoscale;
 
 	int selected_peaks;
-	MultiPeakFitter *fitter;
+	MultiPeakFit *fitter;
 
 	QColor defaultArrowColor;
 	int defaultArrowLineWidth, defaultArrowHeadLength, defaultArrowHeadAngle;

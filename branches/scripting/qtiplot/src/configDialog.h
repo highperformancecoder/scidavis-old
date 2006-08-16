@@ -18,8 +18,10 @@ class QListBox;
 class QLabel;
 class QGroupBox;
 class QTabWidget;
-class ColorButton;
 class QRadioButton;
+
+class ColorButton;
+class ColorBox;
 
 class configDialog : public QDialog
 {
@@ -67,8 +69,10 @@ public:
 	QLabel *lblSymbSize, *lblLineWidth, *lblCurveStyle, *lblResolution, *lblPrecision;
 	QGroupBox *GroupBox3DFonts, *GroupBox3DCol;
 	QGroupBox *GroupBoxFittingCurve, *GroupBoxFitParameters;
-	QLabel *lblMargin, *lblTicks, *lblMajTicks, *lblLinewidth, *lblMinTicks, *lblPoints;
+	QLabel *lblMargin, *lblTicks, *lblMajTicks, *lblLinewidth, *lblMinTicks, *lblPoints, *lblPeaksColor;
 	QRadioButton *samePointsBtn, *generatePointsBtn;
+    QButtonGroup *GroupBoxMultiPeak;
+	ColorBox *boxPeaksColor;
 
 public slots:
     virtual void languageChange();

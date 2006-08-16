@@ -470,9 +470,10 @@ int gauss_multi_peak_f (const gsl_vector * x, void *params, gsl_vector * f)
   size_t i,j;
   for (i = 0; i < peaks; i++)
 	{
-	a[i] = gsl_vector_get(x, 3*i);
 	xc[i] = gsl_vector_get(x, 3*i+1);
-	w2[i] = gsl_vector_get(x, 3*i+2)*gsl_vector_get (x, 3*i+2);
+	double wi = gsl_vector_get(x, 3*i+2);
+	a[i] = sqrt(M_2_PI)*gsl_vector_get(x, 3*i)/wi;
+	w2[i] = wi*wi;
 	}
   for (i = 0; i < n; i++)
     {
@@ -480,7 +481,7 @@ int gauss_multi_peak_f (const gsl_vector * x, void *params, gsl_vector * f)
 	for (j = 0; j < peaks; j++)
 		{
 		double diff=X[i]-xc[j];
-		res+= a[j]*exp(-0.5*diff*diff/w2[j]);
+		res+= a[j]*exp(-2*diff*diff/w2[j]);
 		}
 	gsl_vector_set(f, i, (res + offset - Y[i])/sigma[i]);
     }
@@ -508,9 +509,10 @@ double gauss_multi_peak_d (const gsl_vector * x, void *params)
   double val=0;
   for (i = 0; i < peaks; i++)
 	{
-	a[i] = gsl_vector_get(x, 3*i);
 	xc[i] = gsl_vector_get(x, 3*i+1);
-	w2[i] = gsl_vector_get(x, 3*i+2)*gsl_vector_get (x, 3*i+2);
+	double wi = gsl_vector_get(x, 3*i+2);
+	a[i] = sqrt(M_2_PI)*gsl_vector_get(x, 3*i)/wi;
+	w2[i] = wi*wi;
 	}
 	double t;
   for (i = 0; i < n; i++)
@@ -519,7 +521,7 @@ double gauss_multi_peak_d (const gsl_vector * x, void *params)
 	for (j = 0; j < peaks; j++)
 		{
 		double diff=X[i]-xc[j];
-		res+= a[j]*exp(-0.5*diff*diff/w2[j]);
+		res+= a[j]*exp(-2*diff*diff/w2[j]);
 		}
 		t = (res+offset-Y[i])/sigma[i];
 		val += t*t;
@@ -556,13 +558,13 @@ int gauss_multi_peak_df (const gsl_vector * x, void *params, gsl_matrix * J)
 		{
 	    double diff = X[i]-xc[j];
 		double w2 = w[j]*w[j];
-        double e = exp(-0.5*diff*diff/w2)/s;
+        double e = sqrt(M_2_PI)/s*exp(-2*diff*diff/w2);
 	 
-		gsl_matrix_set (J, i, 3*j, e);
-		gsl_matrix_set (J, i, 3*j+1, diff*a[j]*e/w2);
-		gsl_matrix_set (J, i, 3*j+2, diff*diff*a[j]*e/(w2*w[j]));
+		gsl_matrix_set (J, i, 3*j, e/w[j]);
+		gsl_matrix_set (J, i, 3*j+1, 4*diff*a[j]*e/(w2*w[j]));
+		gsl_matrix_set (J, i, 3*j+2, a[j]/w2*e*(4*diff*diff/w2 - 1));
 		}
-	gsl_matrix_set (J, i, p-1, 1.0);
+	gsl_matrix_set (J, i, p-1, 1.0/s);
     }
   free_vector(a, 0, peaks-1);
   free_vector(xc, 0, peaks-1);
@@ -686,7 +688,7 @@ int lorentz_multi_peak_df (const gsl_vector * x, void *params, gsl_matrix * J)
 		gsl_matrix_set (J, i, 3*j+1, 8*diff*a[j]*w[j]*num*sqrt(num)/s);
 		gsl_matrix_set (J, i, 3*j+2, den*a[j]*num*num/s);
 		}
-	gsl_matrix_set (J, i, p-1, 1.0);
+	gsl_matrix_set (J, i, p-1, 1.0/s);
     }
   free_vector(a, 0, peaks-1);
   free_vector(xc, 0, peaks-1);

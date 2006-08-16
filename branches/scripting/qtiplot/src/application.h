@@ -728,6 +728,8 @@ signals:
 	
 public:
 	bool generateUniformFitPoints;
+	bool generatePeakCurves;
+	int peakCurvesColor;
 
 	//! Number of points in a generated fit curve
 	int fitPoints;
