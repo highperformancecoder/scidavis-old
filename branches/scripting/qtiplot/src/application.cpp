@@ -48,9 +48,9 @@
 #include "folder.h"
 #include "findDialog.h"
 #include "Scripting.h"
-#include "muParserScripting.h"
 #include "scales.h"
 #include "Fitter.h"
+#include "ScriptingLangDialog.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -101,13 +101,13 @@ void file_uncompress(char  *file);
 }
 
 ApplicationWindow::ApplicationWindow()
-    : QMainWindow( 0, "main window", WDestructiveClose )
+    : QMainWindow( 0, "main window", WDestructiveClose ), scripted(ScriptingLangManager::newEnv(this))
 {
 init();
 }
 
 ApplicationWindow::ApplicationWindow(const QStringList& l)
-    : QMainWindow( 0, "main window", WDestructiveClose )
+    : QMainWindow( 0, "main window", WDestructiveClose ), scripted(ScriptingLangManager::newEnv(this))
 {
 int args = (int)l.size();
 if (args > 2)
@@ -154,8 +154,6 @@ initGlobalConstants();
 QPixmapCache::setCacheLimit(20*QPixmapCache::cacheLimit ());
 
 tablesDepend = new QPopupMenu(this, 0);
-// TODO: select scripting language based on user choice / project file
-scriptEnv = new muParserScripting(this);
 
 createActions();
 initToolBars();
@@ -795,6 +793,11 @@ void ApplicationWindow::initMainMenu()
 	format = new QPopupMenu(this);
 	format->setFont(appFont);
 
+	scriptingMenu = new QPopupMenu(this);
+	scriptingMenu->setFont(appFont);
+	actionScriptingLang->addTo(scriptingMenu);
+	actionRestartScripting->addTo(scriptingMenu);
+
 	windowsMenu = new QPopupMenu( this );
 	windowsMenu->setFont(appFont);
     windowsMenu->setCheckable( TRUE );
@@ -1051,6 +1054,7 @@ menuBar()->insertItem(tr("&Windows"), windowsMenu );
 else 
 	disableActions();
 
+menuBar()->insertItem(tr("S&cripting"), scriptingMenu);
 menuBar()->insertItem(tr("&Help"), help );
 }
 
@@ -2919,6 +2923,38 @@ delete lst;
 return  0;
 }
 
+MultiLayer* ApplicationWindow::plot(const QString& name)
+{
+QWidget *w;
+QWidgetList *lst = windowsList();
+for (w = lst->first(); w; w = lst->next() )
+	{
+	if (w->isA("MultiLayer") && w->name() == name)
+		{
+		delete lst;
+		return (MultiLayer*)w;
+		}
+	}
+delete lst;
+return  0;
+}
+
+Note* ApplicationWindow::note(const QString& name)
+{
+QWidget *w;
+QWidgetList *lst = windowsList();
+for (w = lst->first(); w; w = lst->next() )
+	{
+	if (w->isA("Note") && w->name() == name)
+		{
+		delete lst;
+		return (Note*)w;
+		}
+	}
+delete lst;
+return  0;
+}
+
 void ApplicationWindow::windowActivated(QWidget *w)
 {
 customToolBars(w);
@@ -3181,6 +3217,7 @@ void ApplicationWindow::updateAppFonts()
 {
 qApp->setFont (appFont);
 this->setFont(appFont);
+scriptingMenu->setFont(appFont);
 windowsMenu->setFont(appFont);
 view->setFont(appFont);
 graph->setFont(appFont);
@@ -3670,6 +3707,26 @@ if (fileVersion < 73)
 
 QString s = t.readLine();
 QStringList list=QStringList::split("\t",s,FALSE);
+if (list[0] == "<scripting-lang>")
+{
+  ScriptingEnv *newEnv = ScriptingLangManager::newEnv(list[1], app);
+  if (newEnv && newEnv->isInitialized())
+  {
+    ScriptingChangeEvent *sce = new ScriptingChangeEvent(newEnv);
+    QApplication::sendEvent(app, sce);
+    delete sce;
+  } else {
+    if (newEnv) delete newEnv;
+    QMessageBox::warning(app, tr("QtiPlot - File opening error"),
+	tr("The file \"%1\" was created using \"%2\" as scripting language.\n\n"\
+	  "Initializing support for this language FAILED; I'm using \"%3\" instead.\n"\
+	  "Various parts of this file may not be displayed as expected.")\
+	.arg(fn).arg(list[1]).arg(scriptEnv->name()));
+  }
+
+  s = t.readLine();
+  list=QStringList::split("\t",s,FALSE);
+}
 int aux=0,widgets=list[1].toInt();
 
 QString titleBase = tr("Window") + ": ";
@@ -3955,6 +4012,32 @@ void ApplicationWindow::scriptError(const QString &message, const QString &scrip
   QMessageBox::critical(this, "QtiPlot - Script Error", errmsg);
 }
 
+void ApplicationWindow::showScriptingLangDialog()
+{
+ScriptingLangDialog* d = new ScriptingLangDialog(scriptEnv,this,"scriptingLangDialog",TRUE,WStyle_Tool|WDestructiveClose);
+d->showNormal();
+d->setActiveWindow();
+}
+
+void ApplicationWindow::restartScriptingEnv()
+{
+  ScriptingEnv *newEnv = ScriptingLangManager::newEnv(scriptEnv->name(), this);
+  if (!newEnv || !newEnv->isInitialized())
+  {
+    if (newEnv) delete newEnv;
+    QMessageBox::critical(this, tr("QtiPlot - Scripting Error"), tr("Scripting language \"%1\" failed to initialize.").arg(scriptEnv->name()));
+    return;
+  }
+  ScriptingChangeEvent *sce = new ScriptingChangeEvent(newEnv);
+  QApplication::sendEvent(this, sce);
+  QObjectList *receivers = queryList();
+  for (QObjectListIt i(*receivers); !i.atLast(); ++i)
+    QApplication::sendEvent(i, sce);
+  delete receivers;
+  delete sce;
+  executeNotes();
+}
+
 void ApplicationWindow::openTemplate()
 {
 QString filter = "QtiPlot 2D Plot Template (*.qpt);;";
@@ -3973,7 +4056,7 @@ if (!fn.isEmpty())
 		{
 		if (!fi.exists())
 			{
-			QMessageBox::critical(this, tr("QtiPlot - File openning error"),
+			QMessageBox::critical(this, tr("QtiPlot - File opening error"),
 				tr("The file: <b>%1</b> doesn't exist!").arg(fn));
 			return;
 			}
@@ -8051,6 +8134,12 @@ else
 	}
 }
 
+void ApplicationWindow::customEvent(QCustomEvent *e)
+{
+  if (e->type() == SCRIPTING_CHANGE_EVENT)
+    scriptingChangeEvent((ScriptingChangeEvent*)e);
+}
+
 void ApplicationWindow::deleteSelectedItems()
 {
 if (folders->hasFocus() && folders->currentItem() != folders->firstChild())
@@ -10993,6 +11082,12 @@ void ApplicationWindow::createActions()
 
   actionTechnicalSupport = new QAction(tr("Technical &support"), QString::null, this);
   connect(actionTechnicalSupport, SIGNAL(activated()), this, SLOT(showSupportPage()));
+
+  actionScriptingLang = new QAction(tr("Scripting &language"), QString::null, this);
+  connect(actionScriptingLang, SIGNAL(activated()), this, SLOT(showScriptingLangDialog()));
+
+  actionRestartScripting = new QAction(tr("&Restart scripting"), QString::null, this);
+  connect(actionRestartScripting, SIGNAL(activated()), this, SLOT(restartScriptingEnv()));
 }
 
 void ApplicationWindow::translateActionsStrings()
@@ -11318,6 +11413,8 @@ void ApplicationWindow::translateActionsStrings()
   actionTranslations->setMenuText(tr("&Translations"));
   actionDonate->setMenuText(tr("Make a &donation"));
   actionTechnicalSupport->setMenuText(tr("Technical &support"));
+  actionScriptingLang->setMenuText(tr("Scripting &language"));
+  actionRestartScripting->setMenuText(tr("&Restart scripting"));
 
   	btnPointer->setMenuText(tr("Disable &tools"));
 	btnPointer->setToolTip( tr( "Pointer" ) );
@@ -12342,6 +12439,7 @@ while (item && item->depth() > initial_depth)
 	}
 text += "<log>\n"+logInfo+"</log>";
 text.prepend("<windows>\t"+QString::number(windows)+"\n");
+text.prepend("<scripting-lang>\t"+QString(scriptEnv->name())+"\n");
 text.prepend("QtiPlot " + QString::number(majVersion)+"."+ QString::number(minVersion)+"."+
 			QString::number(patchVersion)+" project file\n");
 

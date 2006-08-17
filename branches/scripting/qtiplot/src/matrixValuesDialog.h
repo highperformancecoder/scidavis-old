@@ -1,6 +1,8 @@
 #ifndef MVALUESDIALOG_H
 #define MVALUESDIALOG_H
 
+#include "Scripting.h"
+
 #include <qvariant.h>
 #include <qdialog.h>
 
@@ -10,9 +12,8 @@ class ScriptEdit;
 class QSpinBox;
 class QPushButton;
 class Matrix;
-class ScriptingEnv;
 	
-class matrixValuesDialog : public QDialog
+class matrixValuesDialog : public QDialog, public scripted
 { 
     Q_OBJECT
 
@@ -21,6 +22,8 @@ public:
     ~matrixValuesDialog();
 	
 	QSize sizeHint() const ;
+
+	void customEvent( QCustomEvent* e);
 
     QComboBox* functions;
     QPushButton* PushButton3; 
@@ -42,7 +45,6 @@ public slots:
 
 private:
 	Matrix *matrix;
-	ScriptingEnv *scriptEnv;
 };
 
 #endif //

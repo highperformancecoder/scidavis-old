@@ -1,6 +1,5 @@
 #include "worksheet.h"
 #include "sortDialog.h"
-#include "Scripting.h"
 #include "nrutil.h"
 
 #include <qpopupmenu.h>
@@ -32,13 +31,13 @@
 Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 			 bool stripSpaces, bool simplifySpaces, const QString& label, 
 			 QWidget* parent, const char* name, WFlags f)
-        : myWidget(label, parent,name,f), scriptEnv(env)
+        : myWidget(label, parent,name,f), scripted(env)
 {
 importASCII(fname, sep, ignoredLines, renameCols, stripSpaces, simplifySpaces, true);
 }
 
 Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, WFlags f)
-        : myWidget(label,parent,name,f), scriptEnv(env)
+        : myWidget(label,parent,name,f), scripted(env)
 {
 init(r,c);	
 }
@@ -2847,6 +2846,12 @@ if (e->type() == QEvent::MouseButtonDblClick)
 	return true;
     }
 return QObject::eventFilter(object, e);
+}
+
+void Table::customEvent(QCustomEvent *e)
+{
+  if (e->type() == SCRIPTING_CHANGE_EVENT)
+    scriptingChangeEvent((ScriptingChangeEvent*)e);
 }
 
 void Table::showColStatistics()

@@ -16,9 +16,8 @@
 #include <qbuttongroup.h>
 
 matrixValuesDialog::matrixValuesDialog( ScriptingEnv *env, QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl )
+    : QDialog( parent, name, modal, fl ), scripted(env)
 {
-  scriptEnv = env;
     if ( !name )
 		setName( "matrixValuesDialog" );
 
@@ -117,6 +116,12 @@ connect(functions, SIGNAL(activated(int)),this, SLOT(insertExplain(int)));
 QSize matrixValuesDialog::sizeHint() const 
 {
 return QSize( 400, 190 );
+}
+
+void matrixValuesDialog::customEvent(QCustomEvent *e)
+{
+  if (e->type() == SCRIPTING_CHANGE_EVENT)
+    scriptingChangeEvent((ScriptingChangeEvent*)e);
 }
 
 void matrixValuesDialog::accept()

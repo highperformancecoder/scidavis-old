@@ -7,13 +7,15 @@
 class QAction;
 class QPopupMenu;
 
-class ScriptEdit: public QTextEdit
+class ScriptEdit: public QTextEdit, public scripted
 {
   Q_OBJECT
     
   public:
     ScriptEdit(ScriptingEnv *env, QWidget *parent=0, const char *name=0);
     ~ScriptEdit();
+    
+    void customEvent(QCustomEvent*);
     
   public slots:
     void execute();
@@ -28,7 +30,6 @@ class ScriptEdit: public QTextEdit
     QPopupMenu *createPopupMenu (const QPoint & pos);
     
   private:
-    ScriptingEnv *scriptEnv;
     Script *myScript;
     QAction *actionExecute, *actionExecuteAll, *actionEval, *actionPrint;
     QPopupMenu *functionsMenu;

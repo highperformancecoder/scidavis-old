@@ -1,5 +1,4 @@
 #include "note.h"
-#include "Scripting.h"
 #include "scriptedit.h"
 
 #include <qdatetime.h>

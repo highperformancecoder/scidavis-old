@@ -9,9 +9,9 @@
 #include <qsimplerichtext.h>
 
 ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
-  : QTextEdit(parent, name), scriptEnv(env)
+  : QTextEdit(parent, name), scripted(env)
 {
-  myScript = env->newScript("", this, name);
+  myScript = scriptEnv->newScript("", this, name);
   connect(myScript, SIGNAL(error(const QString&,const QString&,int)), this, SLOT(insertErrorMsg(const QString&)));
   
   setWordWrap(QTextEdit::NoWrap);
@@ -29,6 +29,17 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
 
   functionsMenu = new QPopupMenu(this, "functionsMenu");
   Q_CHECK_PTR(functionsMenu);
+}
+
+void ScriptEdit::customEvent(QCustomEvent *e)
+{
+  if (e->type() == SCRIPTING_CHANGE_EVENT)
+  {
+    scriptingChangeEvent((ScriptingChangeEvent*)e);
+    delete myScript;
+    myScript = scriptEnv->newScript("", this, name());
+    connect(myScript, SIGNAL(error(const QString&,const QString&,int)), this, SLOT(insertErrorMsg(const QString&)));
+  }
 }
 
 QPopupMenu *ScriptEdit::createPopupMenu (const QPoint & pos)

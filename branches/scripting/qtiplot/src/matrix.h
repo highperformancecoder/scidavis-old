@@ -3,17 +3,16 @@
 
 #include <qtable.h>
 #include "widget.h"
+#include "Scripting.h"
 
-class ScriptingEnv;
-
-class Matrix: public myWidget
+class Matrix: public myWidget, public scripted
 {
     Q_OBJECT
 
 public:
 
 	Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, WFlags f=0);
-	~Matrix(){};
+	~Matrix(){}
 	
 	int numRows();
 	int numCols();
@@ -25,6 +24,7 @@ public:
 	//event handlers
 	bool eventFilter(QObject *object, QEvent *e);
 	void contextMenuEvent(QContextMenuEvent *e);
+	void customEvent( QCustomEvent* e);
 
 public slots:
 
@@ -98,7 +98,6 @@ private:
 	//!Stores the matrix data only before the user opens the matrix dialog in order to avoid data loses during number format changes.
 	double **dMatrix;
 	double x_start, x_end, y_start, y_end;
-	ScriptingEnv *scriptEnv;
 };
    
 #endif

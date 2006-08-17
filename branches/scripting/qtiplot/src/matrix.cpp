@@ -1,5 +1,4 @@
 #include "matrix.h"
-#include "Scripting.h"
 #include "nrutil.h"
 
 #include <qdatetime.h>
@@ -23,7 +22,7 @@
 #include <gsl/gsl_math.h>
 
 Matrix::Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, WFlags f)
-				: myWidget(label, parent, name, f), scriptEnv(env)
+				: myWidget(label, parent, name, f), scripted(env)
 {
 init(r, c);	
 }
@@ -827,6 +826,12 @@ void Matrix::contextMenuEvent(QContextMenuEvent *e)
 {
 emit showContextMenu();
 e->accept();
+}
+
+void Matrix::customEvent(QCustomEvent *e)
+{
+  if (e->type() == SCRIPTING_CHANGE_EVENT)
+    scriptingChangeEvent((ScriptingChangeEvent*)e);
 }
 
 bool Matrix::eventFilter(QObject *object, QEvent *e)

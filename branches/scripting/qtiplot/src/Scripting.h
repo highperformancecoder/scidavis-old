@@ -4,10 +4,55 @@
 #include <qvariant.h>
 #include <qstring.h>
 #include <qvaluelist.h>
+#include <qstringlist.h>
 #include <qobject.h>
+#include <qevent.h>
 
+#include "customEvents.h"
 class ApplicationWindow;
-class ScriptingEnv;
+class Script; // forward declaration; class follows
+
+class ScriptingEnv : public QObject
+{
+  // roughly equivalent to QSInterpreter
+  Q_OBJECT
+
+  public:
+    ScriptingEnv(ApplicationWindow *parent, const char *langName);
+
+    // Python initialization may fail; or there could be other errors setting up the environment
+    bool isInitialized() const { return initialized; }
+    virtual bool isRunning() const { return false; }
+    
+    virtual Script *newScript(const QString&, QObject*, const QString&) { return 0; }
+      
+    // global variables
+    virtual bool setQObject(QObject*, const char*) { return false; } // name should default to val->name()
+    virtual bool setInt(int, const char*) { return false; }
+    virtual bool setDouble(double, const char*) { return false; }
+
+    virtual QString stackTraceString() { return QString::null; }
+
+    virtual const QStringList mathFunctions() const { return QStringList(); }
+    virtual const QString mathFunctionDoc(const QString&) const { return QString::null; }
+//    virtual QSyntaxHighlighter syntaxHighlighter(QTextEdit *textEdit) const;
+
+  public slots:
+    virtual void clear() {}
+    virtual void stopExecution() {}
+    void incref();
+    void decref();
+
+  signals:
+    void error(const QString & message, const QString & scriptName, int lineNumber);
+    
+  protected:
+    bool initialized;
+    ApplicationWindow *Parent;
+
+  private:
+    int refcount;
+};
 
 class Script : public QObject
 {
@@ -18,7 +63,8 @@ class Script : public QObject
   public:
     Script(ScriptingEnv *env, const QString &code, QObject *context=0, const QString &name="<input>")
       : Env(env), Code(code), Name(name), compiled(notCompiled)
-      { Context = context; EmitErrors=true; }
+      { Env->incref(); Context = context; EmitErrors=true; }
+    ~Script() { Env->decref(); }
 
     const QString code() const { return Code; }
     const QObject* context() const { return Context; }
@@ -55,40 +101,41 @@ class Script : public QObject
       { if(EmitErrors) emit error(message, Name, lineNumber); }
 };
 
-class ScriptingEnv : public QObject
+class ScriptingLangManager
 {
-  // roughly equivalent to QSInterpreter
-  Q_OBJECT
-
   public:
-    ScriptingEnv(ApplicationWindow *parent) : Parent(parent) { initialized=false; }
-    // Python initialization may fail; or there could be other errors setting up the environment
-    bool isInitialized() const { return initialized; }
-    virtual bool isRunning() const { return false; }
-    
-    virtual Script *newScript(const QString&, QObject*, const QString&) { return 0; }
-      
-    // global variables
-    virtual bool setQObject(QObject*, const char*) { return false; } // name should default to val->name()
-    virtual bool setInt(int, const char*) { return false; }
-    virtual bool setDouble(double, const char*) { return false; }
+    static ScriptingEnv *newEnv(ApplicationWindow *parent);
+    static ScriptingEnv *newEnv(const char *name, ApplicationWindow *parent);
+    static QStringList languages();
 
-    virtual QString stackTraceString() { return QString::null; }
+  private:
+    typedef ScriptingEnv*(*ScriptingEnvConstructor)(ApplicationWindow*);
+    typedef struct {
+      const char *name;
+      ScriptingEnvConstructor constructor;
+    } ScriptingLang;
+//! global registry of available languages
+    static ScriptingLang langs[];
+};
 
-    virtual const QStringList mathFunctions() const { return QStringList(); }
-    virtual const QString mathFunctionDoc(const QString&) const { return QString::null; }
-//    virtual QSyntaxHighlighter syntaxHighlighter(QTextEdit *textEdit) const;
+class ScriptingChangeEvent : public QCustomEvent
+{
+  public:
+    ScriptingChangeEvent(ScriptingEnv *e) : QCustomEvent(SCRIPTING_CHANGE_EVENT), env(e) {}
+    ScriptingEnv *scriptingEnv() const { return env; }
+  private:
+    ScriptingEnv *env;
+};
 
-  public slots:
-    virtual void clear() {}
-    virtual void stopExecution() {}
+class scripted
+{
+  public:
+    scripted(ScriptingEnv* env);
+    ~scripted();
+    void scriptingChangeEvent(ScriptingChangeEvent*);
 
-  signals:
-    void error(const QString & message, const QString & scriptName, int lineNumber);
-    
   protected:
-    bool initialized;
-    ApplicationWindow *Parent;
+    ScriptingEnv *scriptEnv;
 };
 
 #endif

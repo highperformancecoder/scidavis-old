@@ -40,7 +40,9 @@ class muParserScripting: public ScriptingEnv
   Q_OBJECT
 
   public:
-    muParserScripting(ApplicationWindow *parent) : ScriptingEnv(parent) { initialized=true; }
+    static const char *langName;
+    muParserScripting(ApplicationWindow *parent) : ScriptingEnv(parent, langName) { initialized=true; }
+    static ScriptingEnv *constructor(ApplicationWindow *parent) { return new muParserScripting(parent); }
 
     bool isRunning() const { return true; }
     Script *newScript(const QString &code, QObject *context, const QString &name="<input>")

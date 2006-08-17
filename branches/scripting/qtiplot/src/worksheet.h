@@ -7,10 +7,9 @@
 
 #include "graph.h"
 #include "widget.h"
+#include "Scripting.h"
 
-class ScriptingEnv;
-
-class Table: public myWidget
+class Table: public myWidget, public scripted
 {
     Q_OBJECT
 
@@ -95,6 +94,7 @@ public slots:
 	void contextMenuEvent(QContextMenuEvent *e);
 	void mouseMoveEvent( QMouseEvent * e);
 	void mousePressEvent( QMouseEvent * e);
+	void customEvent( QCustomEvent* e);
 	
 	// column operations 
 	void removeCol();
@@ -285,7 +285,6 @@ private:
 	QStringList savedCells;
 	int savedCol;
 	bool LeftButton;
-	ScriptingEnv *scriptEnv;
 };
 
 #endif

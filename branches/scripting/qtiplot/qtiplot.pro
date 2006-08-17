@@ -1,21 +1,27 @@
 QMAKE_PROJECT_DEPTH = 0
 linux-g++-64: libsuff=64
 
-TARGET  = qtiplot
-TEMPLATE     = app
-CONFIG      += qt warn_on release exceptions opengl
-MOC_DIR      = ../tmp/qtiplot
-OBJECTS_DIR  = ../tmp/qtiplot
-DESTDIR           = ./
-DEFINES += QT_PLUGIN
-#DEFINES += SCRIPTING_CONSOLE
+TARGET		= qtiplot
+TEMPLATE	= app
+CONFIG		+= qt warn_on exceptions opengl
+CONFIG		+= release
+#CONFIG		+= debug
+MOC_DIR		= ../tmp/qtiplot
+OBJECTS_DIR	= ../tmp/qtiplot
+DESTDIR		= ./
+DEFINES		+= QT_PLUGIN
+#DEFINES		+= SCRIPTING_CONSOLE
+
+SCRIPTING_LANGS = muParser
+# Python support is unstable; use at your own risk
+#unix:SCRIPTING_LANGS += Python
 
 TRANSLATIONS = translations/qtiplot_de.ts \
 			   translations/qtiplot_es.ts \
 			   translations/qtiplot_fr.ts 
 
-INCLUDEPATH       += ../3rdparty/qwt/include
-INCLUDEPATH		  += ../3rdparty/liborigin
+INCLUDEPATH	+= ../3rdparty/qwt/include
+INCLUDEPATH	+= ../3rdparty/liborigin
 
 ##################### Linux (Mac OS X) settings ##################### 
 
@@ -52,7 +58,7 @@ win32:RC_FILE     = src/iPlot.rc
 
 ###################### Project files #############################
  
-HEADERS  = src/application.h \
+HEADERS  += src/application.h \
      src/graph.h \
      src/graph3D.h \
      src/worksheet.h \
@@ -126,11 +132,12 @@ HEADERS  = src/application.h \
 	 src/findDialog.h\
 	 src/Scripting.h\
 	 src/scriptedit.h\
-	 src/muParserScripting.h\
 	 src/FunctionCurve.h\
-	 src/Fitter.h
+	 src/Fitter.h\
+	 src/customEvents.h\
+	 src/ScriptingLangDialog.h
      
-SOURCES  = src/application.cpp \
+SOURCES  += src/application.cpp \
      src/graph.cpp \
      src/analysis.cpp \
      src/graph3D.cpp \
@@ -202,31 +209,72 @@ SOURCES  = src/application.cpp \
 	 src/folder.cpp\
 	 src/findDialog.cpp\
 	 src/scriptedit.cpp\
-	 src/muParserScripting.cpp\
 	 src/fileDialogs.cpp\
      src/scales.cpp\
 	 src/FunctionCurve.cpp\
-	 src/Fitter.cpp
-
-#parser (muParser_v1.26)
-HEADERS+=../3rdparty/muParser/muParser.h \
-         ../3rdparty/muParser/muParserBase.h \ 
-	     ../3rdparty/muParser/muParserInt.h \
-	     ../3rdparty/muParser/muParserError.h \ 
-         ../3rdparty/muParser/muParserStack.h \ 
-         ../3rdparty/muParser/muParserToken.h \
-		 ../3rdparty/muParser/muParserBytecode.h \
-		 ../3rdparty/muParser/muParserCallback.h \
-		 ../3rdparty/muParser/muParserTokenReader.h \ 
-		 ../3rdparty/muParser/muParserFixes.h \
-		 ../3rdparty/muParser/muParserDef.h  	   
-SOURCES+=../3rdparty/muParser/muParser.cpp \
-         ../3rdparty/muParser/muParserBase.cpp \ 
-         ../3rdparty/muParser/muParserInt.cpp \
-		 ../3rdparty/muParser/muParserBytecode.cpp \
-		 ../3rdparty/muParser/muParserCallback.cpp \
-		 ../3rdparty/muParser/muParserTokenReader.cpp \
-		 ../3rdparty/muParser/muParserError.cpp
+	 src/Fitter.cpp\
+	 src/Scripting.cpp\
+	 src/ScriptingLangDialog.cpp
 
 #Compression (zlib123)
 SOURCES+=../3rdparty/zlib123/minigzip.c
+
+##################### Scripting Languages #####################
+
+# muParser v1.26
+contains(SCRIPTING_LANGS, muParser) {
+  DEFINES +=	SCRIPTING_MUPARSER
+  HEADERS +=	src/muParserScripting.h \
+		../3rdparty/muParser/muParser.h \
+		../3rdparty/muParser/muParserBase.h \
+		../3rdparty/muParser/muParserInt.h \
+		../3rdparty/muParser/muParserError.h \
+		../3rdparty/muParser/muParserStack.h \
+		../3rdparty/muParser/muParserToken.h \
+		../3rdparty/muParser/muParserBytecode.h \
+		../3rdparty/muParser/muParserCallback.h \
+		../3rdparty/muParser/muParserTokenReader.h \ 
+		../3rdparty/muParser/muParserFixes.h \
+		../3rdparty/muParser/muParserDef.h  	   
+  SOURCES +=	src/muParserScripting.cpp \
+		../3rdparty/muParser/muParser.cpp \
+		../3rdparty/muParser/muParserBase.cpp \
+		../3rdparty/muParser/muParserInt.cpp \
+		../3rdparty/muParser/muParserBytecode.cpp \
+		../3rdparty/muParser/muParserCallback.cpp \
+		../3rdparty/muParser/muParserTokenReader.cpp \
+		../3rdparty/muParser/muParserError.cpp
+}
+
+contains(SCRIPTING_LANGS, Python) {
+  DEFINES +=	SCRIPTING_PYTHON
+  HEADERS +=	src/PythonScripting.h
+  SOURCES +=	src/PythonScripting.cpp
+  unix:INCLUDEPATH += /usr/include/python2.4
+  LIBS +=	$$system(python-config)
+  
+  # TODO: is there a way to do this in the Makefile?
+  unix:system(mkdir -p $${MOC_DIR})
+  unix:system(sip -I /usr/share/sip -t Qt_3_3_0 -t WS_X11 -c $${MOC_DIR} src/qti.sip)
+
+  HEADERS +=\
+	 ../tmp/qtiplot/sipqtiApplicationWindow.h\
+	 ../tmp/qtiplot/sipqtiGraph.h\
+	 ../tmp/qtiplot/sipqtiLineMarker.h\
+	 ../tmp/qtiplot/sipqtiMultiLayer.h\
+	 ../tmp/qtiplot/sipqtiTable.h\
+	 ../tmp/qtiplot/sipqtimyWidget.h\
+	 ../tmp/qtiplot/sipqtiScriptEdit.h\
+	 ../tmp/qtiplot/sipqtiNote.h
+  SOURCES +=\
+	 ../tmp/qtiplot/sipqticmodule.cpp\
+	 ../tmp/qtiplot/sipqtiApplicationWindow.cpp\
+	 ../tmp/qtiplot/sipqtiGraph.cpp\
+	 ../tmp/qtiplot/sipqtiLineMarker.cpp\
+	 ../tmp/qtiplot/sipqtiMultiLayer.cpp\
+	 ../tmp/qtiplot/sipqtiTable.cpp\
+	 ../tmp/qtiplot/sipqtimyWidget.cpp\
+	 ../tmp/qtiplot/sipqtiScriptEdit.cpp\
+	 ../tmp/qtiplot/sipqtiNote.cpp
+}
+

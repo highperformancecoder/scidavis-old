@@ -1,6 +1,8 @@
 #ifndef VALUESDIALOG_H
 #define VALUESDIALOG_H
 
+#include "Scripting.h"
+
 #include <qvariant.h>
 #include <qdialog.h>
 class QVBoxLayout; 
@@ -15,7 +17,7 @@ class Table;
 class ScriptingEnv;
 class ScriptEdit;
 	
-class setColValuesDialog : public QDialog
+class setColValuesDialog : public QDialog, public scripted
 { 
     Q_OBJECT
 
@@ -24,6 +26,7 @@ public:
     ~setColValuesDialog();
 	
 	QSize sizeHint() const ;
+	void customEvent( QCustomEvent* e);
 
     QComboBox* functions;
     QComboBox* boxColumn;
@@ -52,7 +55,6 @@ public slots:
 
 private:
 	Table* table;
-	ScriptingEnv *scriptEnv;
 };
 
 #endif //

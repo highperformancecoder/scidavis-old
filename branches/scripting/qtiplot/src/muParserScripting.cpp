@@ -8,6 +8,8 @@
 
 using namespace mu;
 
+const char* muParserScripting::langName = "muParser";
+
 const muParserScripting::mathFunction muParserScripting::math_functions[] = {
   { "abs", 1, NULL,NULL,NULL, "abs(x):\n Absolute value of x." },
   { "acos", 1, NULL,NULL,NULL, "acos(x):\n Inverse cos function." },

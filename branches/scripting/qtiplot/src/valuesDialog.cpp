@@ -19,9 +19,8 @@
 #include <qbuttongroup.h>
 
 setColValuesDialog::setColValuesDialog( ScriptingEnv *env, QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl )
+    : QDialog( parent, name, modal, fl ), scripted(env)
 {
-  scriptEnv = env;
     if ( !name )
 	setName( "setColValuesDialog" );
     setCaption( tr( "QtiPlot - Set column values" ) );
@@ -99,7 +98,7 @@ setColValuesDialog::setColValuesDialog( ScriptingEnv *env, QWidget* parent,  con
 	QHBox *hbox3=new QHBox (this, "hbox3"); 
 	hbox3->setSpacing (5);
 	
-	commandes = new ScriptEdit( env, hbox3, "commandes" );
+	commandes = new ScriptEdit( scriptEnv, hbox3, "commandes" );
     commandes->setGeometry( QRect(10, 100, 260, 70) );
 	commandes->setFocus();
 	
@@ -168,6 +167,12 @@ commandes->moveCursor ( QTextEdit::MoveEnd, true );
 QSize setColValuesDialog::sizeHint() const 
 {
 return QSize( 400, 190 );
+}
+
+void setColValuesDialog::customEvent(QCustomEvent *e)
+{
+  if (e->type() == SCRIPTING_CHANGE_EVENT)
+    scriptingChangeEvent((ScriptingChangeEvent*)e);
 }
 
 void setColValuesDialog::accept()

@@ -9,6 +9,7 @@
 
 #include "graph3D.h"
 #include "plot3DDialog.h"
+#include "Scripting.h"
 
 class QAction;
 class QActionGroup;
@@ -40,7 +41,7 @@ class FolderListView;
 class ScriptingEnv;
 
 //! QtiPlot's main window
-class ApplicationWindow: public QMainWindow
+class ApplicationWindow: public QMainWindow, public scripted
 {
     Q_OBJECT
 public:
@@ -63,6 +64,7 @@ public:
 	QPopupMenu *help,*type,*import,*plot2D,*plot3D, *specialPlot, *panels,*stat,*decay, *filter;
 	QPopupMenu *matrixMenu, *plot3DMenu, *plotDataMenu, *tableMenu, *tablesDepend; 
 	QPopupMenu *smooth, *normMenu, *translateMenu, *fillMenu, *setAsMenu, *multiPeakMenu;
+	QPopupMenu *scriptingMenu;
 	FolderListView *lv, *folders;
 	QToolButton *btnResults;
 	QWidgetList *hiddenWindows, *outWindows;
@@ -135,6 +137,7 @@ public slots:
 	//!used by the plot wizard
 	MultiLayer* multilayerPlot(const QStringList& colList); 
 	void connectMultilayerPlot(MultiLayer *g);
+	MultiLayer *plot(const QString& name);
 	void addLayer();
 	void deleteLayer();
 	void initMultilayerPlot(MultiLayer* g, const QString& name);
@@ -467,6 +470,7 @@ public slots:
 	void timerEvent ( QTimerEvent *e);
 	void dragEnterEvent( QDragEnterEvent* e );
 	void dropEvent( QDropEvent* e );
+	void customEvent( QCustomEvent* e);
 
 	//dialogs
 	void showFindDialogue();	
@@ -621,6 +625,7 @@ public slots:
 	Note* newNote(const QString& caption = QString::null);
 	Note* openNote(ApplicationWindow* app, const QStringList &flist);
 	void initNote(Note* m, const QString& caption);
+	Note* note(const QString& name);
 	
 	//! Adds a new folder to the project
 	void addFolder();
@@ -718,10 +723,14 @@ public slots:
 	void moveFolder(FolderListItem *src, FolderListItem *dest);
 
 	// scripting
-	//!  notify the user that an error occured in the scripting system
+	//! notify the user that an error occured in the scripting system
 	void scriptError(const QString &message, const QString &scriptName, int lineNumber);
-	//!  execute all notes marked auto-exec
+	//! execute all notes marked auto-exec
 	void executeNotes();
+	//! show scripting language selection dialog
+	void showScriptingLangDialog();
+	//! create a new environment for the current scripting language
+	void restartScriptingEnv();
 
 signals:
 	void modified();
@@ -846,12 +855,11 @@ public:
 	QAction *actionBoxPlot, *actionMultiPeakGauss, *actionMultiPeakLorentz, *actionCheckUpdates;
 	QAction *actionDonate, *actionHomePage, *actionDownloadManual, *actionTechnicalSupport, *actionTranslations;
 	QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;
+	QAction *actionScriptingLang, *actionRestartScripting;
 
 private:
 	//!Stores the pointers to the dragged items from the FolderListViews objects
 	QPtrList<QListViewItem> draggedItems;
-	//!Scripting environment currently in use
-	ScriptingEnv *scriptEnv;
 	//! Used when checking for new versions
 	QHttp http;
 	//! Used when checking for new versions
