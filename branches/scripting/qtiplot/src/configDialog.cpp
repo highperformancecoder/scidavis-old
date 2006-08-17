@@ -619,7 +619,7 @@ void configDialog::languageChange()
 	boxSeparator->insertItem("," + tr("SPACE"));
     boxSeparator->insertItem(";");
     boxSeparator->insertItem(",");
-	setColumnSeparator(app->separator);
+	setColumnSeparator(app->columnSeparator);
 
 	lblTableBackground->setText(tr( "Background" )); 
 	lblTextColor->setText(tr( "Text" )); 
@@ -721,7 +721,7 @@ if (generalDialog->visibleWidget()==(QWidget*)tables)
 		return;
 		}
 
-	app->separator = sep;
+	app->columnSeparator = sep;
 	app->customizeTables(buttonBackground->color(), buttonText->color(), 
 						 buttonHeader->color(), textFont, headerFont);
 	}

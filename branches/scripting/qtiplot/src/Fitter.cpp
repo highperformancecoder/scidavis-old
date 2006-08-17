@@ -208,7 +208,7 @@ if (is_non_linear)
 	info+=tr(" algorithm with tolerance = ")+QString::number(d_tolerance)+"\n";
 	}
 
-info+=tr("From x")+" = "+QString::number(d_x[0])+" "+tr("to x")+" = "+QString::number(d_x[d_n-1])+"\n";
+info+=tr("From x")+" = "+QString::number(d_x[0], 'g', 15)+" "+tr("to x")+" = "+QString::number(d_x[d_n-1], 'g', 15)+"\n";
 
 for (int i=0; i<d_p; i++)
 	{
@@ -1158,14 +1158,14 @@ gsl_vector_view y = gsl_vector_view_array (d_y, d_n);
 double min_out, max_out;
 gsl_vector_minmax (&y.vector, &min_out, &max_out);
 
-gsl_vector_set(d_param_init, 0, min_out);
 if (d_profile == Gauss)
-	gsl_vector_set(d_param_init, 1, sqrt(M_2_PI)*(max_out - min_out));
+	gsl_vector_set(d_param_init, 0, sqrt(M_2_PI)*(max_out - min_out));
 else if (d_profile == Lorentz)
-	gsl_vector_set(d_param_init, 1, 1.0);
+	gsl_vector_set(d_param_init, 0, 1.0);
 
-gsl_vector_set(d_param_init, 2, gsl_vector_get(&x.vector, gsl_vector_max_index (&y.vector)));
-gsl_vector_set(d_param_init, 3, 1.0);
+gsl_vector_set(d_param_init, 1, gsl_vector_get(&x.vector, gsl_vector_max_index (&y.vector)));
+gsl_vector_set(d_param_init, 2, 1.0);
+gsl_vector_set(d_param_init, 3, min_out);
 }
 
 void MultiPeakFit::storeCustomFitResults(double *par)

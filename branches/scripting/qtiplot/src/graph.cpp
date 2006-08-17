@@ -801,6 +801,11 @@ if (majTicksType == ScaleDraw::None && minTicksType == ScaleDraw::None)
 else
 	sd->enableComponent (QwtAbstractScaleDraw::Ticks);
 
+if (majTicksType == ScaleDraw::None || majTicksType == ScaleDraw::In)
+	majLength = 0;
+if (minTicksType == ScaleDraw::None || minTicksType == ScaleDraw::In)
+	minLength = 0;
+
 sd->setTickLength (QwtScaleDiv::MinorTick, minLength); 
 sd->setTickLength (QwtScaleDiv::MediumTick, minLength);
 sd->setTickLength (QwtScaleDiv::MajorTick, majLength);
@@ -907,7 +912,6 @@ if (axisOn && (axis == QwtPlot::xTop || axis == QwtPlot::yRight))
 
 scalePicker->refresh();
 d_plot->updateLayout();	
-scale->repaint();
 d_plot->replot();	
 emit modifiedGraph();
 }
@@ -1535,12 +1539,11 @@ if ( selectedCurve >= 0 )
 	
 index = (keys.count() + index) % keys.count();
 if ( selectedCurve != keys[index] )
-        selectedCurve = keys[index];
+	selectedCurve = keys[index];
 
 QwtPlotCurve *curve = d_plot->curve(selectedCurve);
 if ( !curve || curve->dataSize()<=0)
-        return;
-
+	return;
 
 	startPoint=0;
 	endPoint=curve->dataSize()-1;
@@ -1882,8 +1885,8 @@ emit cursorInfo(tr("Curve selected! Move cursor and click to choose a point and 
 
 void Graph::insertPlottedList(const QStringList& names)
 {
-QValueList<int> keys= d_plot->curveKeys();
-for (int i=0; i<n_curves; i++)
+QValueList<int> keys = d_plot->curveKeys();
+for (int i=0; i<(int)keys.count(); i++)
 	{
 	QwtPlotCurve *c = d_plot->curve(keys[i]);
 	if (c)
@@ -1894,14 +1897,13 @@ for (int i=0; i<n_curves; i++)
 QStringList Graph::curvesList()
 {	
 QStringList cList;
-QValueList<int> keys= d_plot->curveKeys();
-for (int i=0; i<n_curves; i++)
+QValueList<int> keys = d_plot->curveKeys();
+for (int i=0; i<(int)keys.count(); i++)
 	{
 	QwtPlotCurve *c = d_plot->curve(keys[i]);
 	if (c)
-		cList<<c->title().text();
-	}
-	
+		cList << c->title().text();
+	}	
 return cList;
 }
 
@@ -5211,24 +5213,16 @@ associations.remove(it);
 removeLegendItem(index);
 
 d_plot->removeCurve(c_keys[index]);
+n_curves--;
 
 if (piePlot)
 	{
 	piePlot=FALSE;	
-	c_keys.resize(--n_curves);
+	c_keys.resize(n_curves);
 	}
 else
-	{			
-	for (int i=index; i<n_curves; i++)
-		{
-		c_type[i]=c_type[i+1];
-		c_keys[i] = c_keys[i+1];
-		}
-		
-	c_type.resize(--n_curves);
-	c_keys.resize(n_curves);
-				
-	if (rangeSelectorsEnabled)
+	{
+	if (rangeSelectorsEnabled && c_keys[index] == selectedCurve)
 		{
 		if (n_curves>0)
 			shiftCurveSelector(TRUE);
@@ -5244,6 +5238,15 @@ else
 			selectedCursor=-1;	
 			}			
 		}
+
+	for (int i=index; i<n_curves; i++)
+		{
+		c_type[i] = c_type[i+1];
+		c_keys[i] = c_keys[i+1];
+		}
+		
+	c_type.resize(n_curves);
+	c_keys.resize(n_curves);
 	}
 updatePlot();
 emit modifiedGraph();	
@@ -5800,8 +5803,7 @@ return lineProfileOn;
 
 QString Graph::saveToString()
 {
-QString s="<graph>\n";
-			
+QString s="<graph>\n";			
 s+="ggeometry\t";
 QPoint p=this->pos();
 s+=QString::number(p.x())+"\t";
@@ -5818,8 +5820,6 @@ s+="AxesTitles\t"+saveScaleTitles();
 s+=saveAxesTitleColors();
 s+=saveAxesTitleAlignement();
 s+=saveFonts();
-s+="TicksLength\t"+QString::number(minorTickLength())+"\t"+
-	QString::number(majorTickLength())+"\n";
 s+=saveEnabledTickLabels();
 s+=saveAxesColors();
 s+=saveAxesBaseline();
@@ -5832,6 +5832,7 @@ s+=saveAxesFormulas();
 s+=saveLabelsFormat();
 s+=saveAxesLabelsType();
 s+=saveTicksType();
+s+="TicksLength\t"+QString::number(minorTickLength())+"\t"+QString::number(majorTickLength())+"\n";
 s+="DrawAxesBackbone\t"+QString::number(drawAxesBackbone)+"\n";
 s+="AxesLineWidth\t"+QString::number(d_plot->axesLinewidth())+"\n";
 s+=saveMarkers();
@@ -5858,8 +5859,6 @@ s+="AxesTitles\t"+saveScaleTitles();
 s+=saveAxesTitleColors();
 s+=saveAxesTitleAlignement();
 s+=saveFonts();
-s+="TicksLength\t"+QString::number(minorTickLength())+"\t"+
-	QString::number(majorTickLength())+"\n";
 s+=saveEnabledTickLabels();
 s+=saveAxesColors();
 s+=saveAxesBaseline();
@@ -5870,6 +5869,7 @@ s+=saveAxesFormulas();
 s+=saveLabelsFormat();
 s+=saveAxesLabelsType();
 s+=saveTicksType();
+s+="TicksLength\t"+QString::number(minorTickLength())+"\t"+QString::number(majorTickLength())+"\n";
 s+="DrawAxesBackbone\t"+QString::number(drawAxesBackbone)+"\n";
 s+="AxesLineWidth\t"+QString::number(d_plot->axesLinewidth())+"\n";
 s+=saveMarkers();
@@ -6407,7 +6407,6 @@ setRightAxisTitleFont(g->axisTitleFont(1));
 setRightAxisTitleAlignment(g->axisTitleAlignment(1));
 
 setAxesLinewidth(plot->axesLinewidth());
-setTicksLength(g->minorTickLength(), g->majorTickLength());
 removeLegend();
 		
 associations = g->associations;
@@ -6530,6 +6529,7 @@ setScales(g->scales);
 drawAxesBackbones(g->drawAxesBackbone);
 setMajorTicksType(g->plotWidget()->getMajorTicksType());
 setMinorTicksType(g->plotWidget()->getMinorTicksType());
+setTicksLength(g->minorTickLength(), g->majorTickLength());
 
 QwtArray<long> imag = g->imageMarkerKeys();
 for (i=0;i<(int)imag.size();i++)

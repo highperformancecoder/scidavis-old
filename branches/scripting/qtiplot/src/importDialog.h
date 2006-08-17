@@ -29,11 +29,15 @@ public:
 	QLabel *ignoreLabel,*sepText;
 
 public slots:
+	void enableApplyButton(int);
+	void disableApplyButton();
+
     virtual void languageChange();
 	void setSeparator(const QString& sep);
 	void setWhiteSpaceOptions(bool strip, bool simplify);
 	void setLines(int lines);
 	void renameCols(bool rename);
+	void quit();
 	void accept();
 	void help();
 

@@ -460,7 +460,7 @@ if (n==0)
 void curvesDialog::setGraph(Graph *graph)
 {
 g = graph;
-contents->insertStringList(g->curvesList(), -1);
+contents->insertStringList(g->curvesList());
 enableRemoveBtn();
 }
 

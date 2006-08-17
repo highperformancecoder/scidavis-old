@@ -296,7 +296,6 @@ void ApplicationWindow::initGlobalConstants()
 majVersion = 0; minVersion = 8; patchVersion = 6;
 graphs=0; tables=0; matrixes = 0; notes = 0;
 projectname="untitled";
-ignoredLines=0;
 lastModified=0;
 activeGraph=0;
 lastCopiedLayer=0;
@@ -305,9 +304,6 @@ copiedMarkerType=Graph::None;
 aw=0;
 logInfo=QString::null;
 savingTimerId=0;
-renameColumns = true;
-strip_spaces = false;
-simplify_spaces = false;
 
 autoSearchUpdatesRequest = false;
 
@@ -3167,7 +3163,7 @@ QApplication::restoreOverrideCursor();
 void ApplicationWindow::showPreferencesDialog()
 {
 configDialog* cd= new configDialog(this,"configDialog",TRUE,WStyle_Tool|WDestructiveClose);
-cd->setColumnSeparator(separator);
+cd->setColumnSeparator(columnSeparator);
 cd->showNormal();
 cd->setActiveWindow();
 }
@@ -3407,7 +3403,7 @@ ApplicationWindow *app= new ApplicationWindow();
 app->applyUserSettings();
 app->showMaximized();
 
-Table* t = app->newTable(fn, app->separator, 0, true, app->strip_spaces, app->simplify_spaces);
+Table* t = app->newTable(fn, app->columnSeparator, 0, true, app->strip_spaces, app->simplify_spaces);
 t->setCaptionPolicy(myWidget::Both);	
 app->multilayerPlot(t, t->YColumns(),Graph::LineSymbols);
 QApplication::restoreOverrideCursor();
@@ -3420,18 +3416,19 @@ importDialog* id= new importDialog(this,"importDialog",false, WStyle_ContextHelp
 connect (id, SIGNAL(options(const QString&, int, bool, bool, bool)),
 			this, SLOT(setImportOptions(const QString&, int, bool, bool, bool)));
 	
-id->setSeparator(separator);
+id->setSeparator(columnSeparator);
 id->setLines(ignoredLines);
 id->renameCols(renameColumns);
 id->setWhiteSpaceOptions(strip_spaces, simplify_spaces);
 id->showNormal();
+id->disableApplyButton();
 id->setActiveWindow();
 }
 
 void ApplicationWindow::setImportOptions(const QString& sep, int lines, bool rename,
 										 bool strip, bool simplify)
 {
-separator = sep;
+columnSeparator = sep;
 ignoredLines = lines;
 renameColumns = rename;
 strip_spaces = strip;
@@ -3449,12 +3446,12 @@ if (!fn.isEmpty())
 	Table* t = (Table*)ws->activeWindow();
 	if ( t && t->isA("Table"))
 		{
-		t->importASCII(fn, separator, ignoredLines, renameColumns, 
+		t->importASCII(fn, columnSeparator, ignoredLines, renameColumns, 
 					  strip_spaces, simplify_spaces, false);
 		t->setWindowLabel(fn);
 		}
 	else
-		t = newTable(fn, separator, ignoredLines, renameColumns, 
+		t = newTable(fn, columnSeparator, ignoredLines, renameColumns, 
 					 strip_spaces, simplify_spaces);
 
 	t->setCaptionPolicy(myWidget::Both);
@@ -3498,7 +3495,7 @@ if (!files)
 if (!importFileAs)
 	{
 	QString fn  = fileNames[0];
-	Table *firstTable=newTable(fn, separator, ignoredLines, renameColumns, 
+	Table *firstTable=newTable(fn, columnSeparator, ignoredLines, renameColumns, 
 							   strip_spaces, simplify_spaces);
 	if (!firstTable)
 		return;
@@ -3513,7 +3510,7 @@ if (!importFileAs)
 	for (int i=1;i<files;i++)
 		{
 		fn  = fileNames[i];
-		Table *w = newTable(fn, separator, ignoredLines, renameColumns, 
+		Table *w = newTable(fn, columnSeparator, ignoredLines, renameColumns, 
 							strip_spaces, simplify_spaces);
 		if (w)
 			{
@@ -3532,7 +3529,7 @@ else
 		Table* t = (Table*)ws->activeWindow();
 
 		for (int i=0; i<files; i++)
-			t->importMultipleASCIIFiles(fileNames[i], separator, ignoredLines, renameColumns, 
+			t->importMultipleASCIIFiles(fileNames[i], columnSeparator, ignoredLines, renameColumns, 
 										strip_spaces, simplify_spaces, importFileAs);
 		t->setWindowLabel(fileNames.join("; "));
 		t->setCaptionPolicy(myWidget::Name);
@@ -4213,7 +4210,6 @@ yFunctions=settings.readListEntry("/yFunctions");
 rFunctions=settings.readListEntry("/rFunctions");
 tetaFunctions=settings.readListEntry("/tetaFunctions");
 
-separator=settings.readEntry("/defaultColumnSeparator", "\t");
 QStringList tableColors=settings.readListEntry("/tableColors");
 QStringList tableFonts=settings.readListEntry("/tableFonts");
 
@@ -4358,6 +4354,14 @@ fitPoints = settings.readNumEntry("/fitPoints", 100);
 generatePeakCurves = settings.readBoolEntry("/generatePeakCurves", true);
 peakCurvesColor = settings.readNumEntry("/peakCurvesColor", 2);//green color
 settings.endGroup();
+
+settings.beginGroup("/ImportASCII");
+columnSeparator = settings.readEntry("/defaultColumnSeparator", "\t");
+ignoredLines = settings.readNumEntry("/ignoredLines", 0);
+renameColumns = settings.readBoolEntry("/renameColumns", true);
+strip_spaces = settings.readBoolEntry("/stripSpaces", false);
+simplify_spaces = settings.readBoolEntry("/simplifySpaces", false);
+settings.endGroup();
 }
 
 void ApplicationWindow::saveSettings()
@@ -4437,7 +4441,7 @@ settings.writeEntry("/xFunctions", xFunctions);
 settings.writeEntry("/yFunctions", yFunctions);
 settings.writeEntry("/rFunctions", rFunctions);
 settings.writeEntry("/tetaFunctions", tetaFunctions);
-settings.writeEntry("/defaultColumnSeparator", separator);
+
 settings.writeEntry("/tableColors", tableColors);
 settings.writeEntry("/tableFonts", tableFonts);
 settings.writeEntry("/titleOn", titleOn);
@@ -4512,6 +4516,14 @@ settings.writeEntry("/generateUniformFitPoints", generateUniformFitPoints);
 settings.writeEntry("/fitPoints", fitPoints);
 settings.writeEntry("/generatePeakCurves", generatePeakCurves);
 settings.writeEntry("/peakCurvesColor", peakCurvesColor);
+settings.endGroup();
+
+settings.beginGroup("/ImportASCII");
+settings.writeEntry("/defaultColumnSeparator", columnSeparator);
+settings.writeEntry("/ignoredLines", ignoredLines);
+settings.writeEntry("/renameColumns", renameColumns);
+settings.writeEntry("/stripSpaces", strip_spaces);
+settings.writeEntry("/simplifySpaces", simplify_spaces);
 settings.endGroup();
 }
 
@@ -5332,7 +5344,7 @@ if ( ws->activeWindow() && ws->activeWindow()->isA("Table"))
 
 	ed->setTableNames(tableWindows);
 	ed->setActiveTableName(ws->activeWindow()->name());
-	ed->setColumnSeparator(separator);
+	ed->setColumnSeparator(columnSeparator);
 	ed->showNormal();
 	ed->setActiveWindow();
 	}
@@ -10348,13 +10360,13 @@ void ApplicationWindow::analyzeCurve(const QString& whichFit, const QString& cur
 if(whichFit=="fitLinear" || whichFit=="fitSigmoidal" || whichFit=="fitGauss" || whichFit=="fitLorentz")
 	{
 	Fit *fitter = 0;
-	if (whichFit=="fitLinear")
+	if (whichFit == "fitLinear")
 		fitter = new LinearFit (this, activeGraph);
-	else if (whichFit=="fitSigmoidal")
+	else if (whichFit == "fitSigmoidal")
 		fitter = new SigmoidalFit (this, activeGraph);
-	else if(whichFit=="fitGauss")
+	else if(whichFit == "fitGauss")
 		fitter = new MultiPeakFit(this, activeGraph, MultiPeakFit::Gauss);
-	else if(whichFit=="fitLorentz")
+	else if(whichFit == "fitLorentz")
 		fitter = new LorentzFit(this, activeGraph);
 
 	if (fitter->setDataFromCurve(curveTitle))
@@ -10366,7 +10378,7 @@ if(whichFit=="fitLinear" || whichFit=="fitSigmoidal" || whichFit=="fitGauss" || 
 		delete fitter;
 		}
 	}
-else if(whichFit=="differentiate" && activeGraph->diffCurve(curveTitle))
+else if(whichFit == "differentiate" && activeGraph->diffCurve(curveTitle))
 	{
 	Table* w = table(tableWindows.last());
 	QStringList list;

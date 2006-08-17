@@ -721,9 +721,8 @@ int user_f(const gsl_vector * x, void *params, gsl_vector * f)
 	{
 	double *parameters = new double[p];
 	double xvar;
-	int i;
 	parser.DefineVar("x", &xvar);
-	for (i=0;i<(int)p;i++)
+	for (int i=0; i<(int)p; i++)
 		{
 		parameters[i]=gsl_vector_get(x,i);
 		parser.DefineVar(parNames[i].ascii(), &parameters[i]);
@@ -732,7 +731,7 @@ int user_f(const gsl_vector * x, void *params, gsl_vector * f)
 	for (int j = 0; j < (int)n; j++)
 		{
 		xvar=X[j];
-		gsl_vector_set (f, j, (parser.Eval() - Y[j])/sigma[i]);
+		gsl_vector_set (f, j, (parser.Eval() - Y[j])/sigma[j]);
 		}
 	delete[] parameters;
 	}
@@ -760,10 +759,9 @@ double user_d(const gsl_vector * x, void *params)
   try
 	{
 	double *parameters = new double[p];
-	double xvar,t;
-	int i;
+	double xvar;
 	parser.DefineVar("x", &xvar);
-	for (i=0;i<(int)p;i++)
+	for (int i=0; i<(int)p; i++)
 		{
 		parameters[i]=gsl_vector_get(x,i);
 		parser.DefineVar(parNames[i].ascii(), &parameters[i]);
@@ -772,7 +770,7 @@ double user_d(const gsl_vector * x, void *params)
 	for (int j = 0; j < (int)n; j++)
 		{
 		xvar=X[j];
-		t=(parser.Eval() - Y[j])/sigma[i];
+		double t=(parser.Eval() - Y[j])/sigma[j];
 		val+=t*t;
 		}
 	delete[] parameters;
@@ -800,8 +798,7 @@ int user_df(const gsl_vector *x, void *params, gsl_matrix *J)
 	myParser parser;
 	double xvar; 
 	parser.DefineVar("x", &xvar);
-
-	for (int k=0;k<(int)p;k++)
+	for (int k=0; k<(int)p; k++)
 		{
 		param[k]=gsl_vector_get(x,k);
 		parser.DefineVar(parNames[k].ascii(), &param[k]);
@@ -812,7 +809,7 @@ int user_df(const gsl_vector *x, void *params, gsl_matrix *J)
 	for (int i = 0; i<(int)n; i++)
 		{
 		xvar = X[i];	 
-		for (int j=0;j<(int)p;j++)
+		for (int j=0; j<(int)p; j++)
 			gsl_matrix_set (J, i, j, 1/sigma[i]*parser.Diff(&param[j], param[j]));
 		}
 	delete[] param;
