@@ -721,8 +721,9 @@ int user_f(const gsl_vector * x, void *params, gsl_vector * f)
 	{
 	double *parameters = new double[p];
 	double xvar;
+	int i;
 	parser.DefineVar("x", &xvar);
-	for (int i=0;i<(int)p;i++)
+	for (i=0;i<(int)p;i++)
 		{
 		parameters[i]=gsl_vector_get(x,i);
 		parser.DefineVar(parNames[i].ascii(), &parameters[i]);
@@ -760,8 +761,9 @@ double user_d(const gsl_vector * x, void *params)
 	{
 	double *parameters = new double[p];
 	double xvar,t;
+	int i;
 	parser.DefineVar("x", &xvar);
-	for (int i=0;i<(int)p;i++)
+	for (i=0;i<(int)p;i++)
 		{
 		parameters[i]=gsl_vector_get(x,i);
 		parser.DefineVar(parNames[i].ascii(), &parameters[i]);
