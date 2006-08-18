@@ -9,13 +9,13 @@ class ScriptEdit: QTextEdit
 #include "src/scriptedit.h"
 %End
 public slots:
-    void execute();
-    void executeAll();
-    void evaluate();
-    void print();
-    void insertFunction(const QString &);
+  void execute();
+  void executeAll();
+  void evaluate();
+  void print();
+  void insertFunction(const QString &);
 private:
-    ScriptEdit(ScriptEdit&);
+  ScriptEdit(ScriptEdit&);
 };
 
 class myWidget: QWidget
@@ -94,6 +94,7 @@ public:
 %MethodCode
     sipCpp->setColName(sipqti_colArg(sipCpp, a0), *a1);
 %End
+  void notifyChanges();
   
 private:
   Table(const Table&);
@@ -114,12 +115,12 @@ private:
   LineMarker(const LineMarker&);
 };
 
-class Graph: QWidget
+class Graph : QWidget /PyName=Layer/
 {
 %TypeHeaderCode
 #include "src/graph.h"
 %End
-  public:
+public:
   bool isPiePlot();
   const char* pieLegendText() /PyName=pieLegend/;
 
@@ -136,20 +137,20 @@ class Graph: QWidget
 
   void insertLineMarker(LineMarker*);
   LineMarker* lineMarker(long);
-  private:
+private:
   Graph(const Graph&);
 };
 
-class MultiLayer: myWidget
+class MultiLayer : myWidget /PyName=Graph/
 {
 %TypeHeaderCode
 #include "src/multilayer.h"
 %End
-  public:
+public:
   Graph *activeGraph() /PyName=activeLayer/;
   void setActiveGraph(Graph*) /PyName=setActiveLayer/;
   // TODO: implement Graph* layer(int num);;
-  private:
+private:
   MultiLayer(const MultiLayer&);
 };
 
@@ -158,10 +159,10 @@ class Note: myWidget
 %TypeHeaderCode
 #include "src/note.h"
 %End
-  public:
+public:
   void execute() const;
   bool autoexec() const;
-  private:
+private:
   Note(const Note&);
 };
 
@@ -170,14 +171,168 @@ class ApplicationWindow: QMainWindow
 %TypeHeaderCode
 #include "src/application.h"
 %End
-  public:
+public:
   Table *table(const QString&);
   Table *newTable(const QString&, int, int);
-  MultiLayer *plot(const QString&);
+  MultiLayer *plot(const QString&) /PyName=graph/;
   Note *note(const QString&);
   QTextEdit *results;
   QTextEdit *console;
-  private:
+private:
   ApplicationWindow(const ApplicationWindow&);
+};
+
+class Fit : QObject
+{
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
+public:
+  enum Algorithm{ScaledLevenbergMarquardt, UnscaledLevenbergMarquardt, NelderMeadSimplex};
+  enum WeightingMethod{NoWeighting, Instrumental, Statistical, ArbDataset};
+
+  Fit(ApplicationWindow* /TransferThis/, Graph*, const char*);
+  ~Fit();
+
+  virtual void fit();
+
+  bool setWeightingData(WeightingMethod, const QString&);
+
+  bool setDataFromCurve(const QString&);
+  bool setDataFromCurve(const QString&, double, double);
+//  void setDataFromCurve(QwtPlotCurve*, int, int);
+
+  void setGraph(Graph*);
+
+  QString formula();
+  virtual void setParametersList(const QStringList&);
+
+  void setInitialGuess(int, double);
+  void setInitialGuesses(double *);
+
+  virtual void guessInitialValues();
+
+  void setAlgorithm(Algorithm);
+
+  void setTolerance(double);
+  void setFitCurveColor(int);
+
+  virtual void generateFitCurve(double *);
+  void setFitCurveParameters(bool, int);
+
+  void setMaximumIterations(int);
+
+  //! Added a new legend to the plot. Calls virtual legendFitInfo()
+  void showLegend();
+
+  //! Output string added to the plot as a new legend
+  virtual QString legendFitInfo(int);
+
+  //! Returns a vector with the fit results
+  SIP_PYTUPLE fitResults();
+%MethodCode
+double *results = sipCpp->fitResults();
+int size=sipCpp->numParameters();
+sipRes = PyTuple_New(size);
+if(sipRes)
+{
+  for(int i=0; i<size; i++)
+    PyTuple_SET_ITEM(sipRes, i, PyFloat_FromDouble(results[i]));
+}
+%End
+
+  //! Returns the sum of squares of the residuals from the best-fit line
+  double chiSquare();
+
+  Table* parametersTable(const QString&);
+//  Matrix* covarianceMatrix(const QString&);
+};
+
+class ExponentialFit : Fit
+{
+public:
+  ExponentialFit(ApplicationWindow *, Graph *,  bool);
+};
+
+class TwoExpFit : Fit
+{
+public:
+  TwoExpFit(ApplicationWindow *, Graph *);
+};
+
+class ThreeExpFit : Fit
+{
+public:
+  ThreeExpFit(ApplicationWindow *, Graph *);
+};
+
+class SigmoidalFit : Fit
+{
+public:
+  SigmoidalFit(ApplicationWindow *, Graph *);
+  void guessInitialValues();
+};
+
+class GaussAmpFit : Fit
+{
+public:
+  GaussAmpFit(ApplicationWindow *, Graph *);
+};
+
+class LorentzFit : Fit
+{
+public:
+  LorentzFit(ApplicationWindow *, Graph *);
+  void guessInitialValues();
+};
+
+class NonLinearFit : Fit
+{
+public:
+  NonLinearFit(ApplicationWindow *, Graph *, const QString&);
+  void setParametersList(const QStringList&);
+  void setFormula(const QString&);
+};
+
+class PluginFit : Fit
+{
+public:
+  PluginFit(ApplicationWindow *, Graph *);
+  bool load(const QString&);
+};
+
+class MultiPeakFit : Fit
+{
+public:
+  enum PeakProfile{Gauss, Lorentz};
+  MultiPeakFit(ApplicationWindow *, Graph *, PeakProfile, int);
+
+  int peaks();
+
+  void enablePeakCurves(bool);
+  void setPeakCurvesColor(int);
+
+  static QString generateFormula(int, PeakProfile);
+  static QStringList generateParameterList(int);
+};
+
+class PolynomialFit : Fit
+{
+public:
+  PolynomialFit(ApplicationWindow *, Graph *, int, bool);
+
+  virtual QString legendFitInfo(int);
+  void fit();
+
+  static QString generateFormula(int);
+  static QStringList generateParameterList(int);
+};
+
+class LinearFit : Fit
+{
+public:
+  LinearFit(ApplicationWindow *, Graph *);
+  void fit();
+  void generateFitCurve(double *);
 };
 

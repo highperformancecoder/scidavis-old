@@ -104,8 +104,6 @@ QString PythonScripting::errorMsg()
   msg.append(toString(exception,true)).remove("exceptions.").append(": ");
   msg.append(toString(value,true));
   msg.append("\n");
-  Py_DECREF(exception);
-  Py_DECREF(value);
 
   if (traceback) {
     excit = (PyTracebackObject*)traceback;
@@ -199,7 +197,7 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
     PyObject *qtiDict = PyModule_GetDict(qtimod);
     setQObject(Parent, "app", qtiDict);
     Py_DECREF(qtimod);
-    if (!exec("table=qti.app.table\nplot=qti.app.plot\nnote=qti.app.note",globals))
+    if (!exec("table=qti.app.table\ngraph=qti.app.graph\nnote=qti.app.note",globals))
       PyErr_Print();
   } else
     PyErr_Print();
@@ -318,7 +316,7 @@ PythonScript::~PythonScript()
   Py_XDECREF(PyCode);
 }
 
-bool PythonScript::compile()
+bool PythonScript::compile(bool asFunction)
 {
   PyObject *ret = PyRun_String("def col(c,*arg):\n\tif len(arg)>0: return tt.cell(c,arg[0])\n\telse: return tt.cell(c,i)\n",Py_file_input,localDict,localDict);
   if (ret)
@@ -326,13 +324,13 @@ bool PythonScript::compile()
   else
     PyErr_Print();
   bool success=false;
-  PyObject *tmp;
   Py_XDECREF(PyCode);
   PyCode = Py_CompileString(Code.ascii(),Name,Py_eval_input);
   if (PyCode) { // code is a single expression
     success = true;
-  } else { // code contains statements
-    PyErr_Clear();
+  } else if (asFunction) { // code contains statements
+    emit_error(env()->errorMsg(), 0);
+    //PyErr_Clear();
     PyObject *key, *value;
     int i=0;
     QString signature = "";
@@ -342,17 +340,21 @@ bool PythonScript::compile()
     QString fdef = "def __doit__("+signature+"):\n";
     fdef.append(Code);
     fdef.replace('\n',"\n\t");
-    tmp = PyDict_New();
     PyCode = Py_CompileString(fdef,Name,Py_file_input);
     if (PyCode)
     {
+      PyObject *tmp = PyDict_New();
       Py_XDECREF(PyEval_EvalCode((PyCodeObject*)PyCode, env()->globalDict(), tmp));
       Py_DECREF(PyCode);
       PyCode = PyDict_GetItemString(tmp,"__doit__");
       Py_XINCREF(PyCode);
+      Py_DECREF(tmp);
     }
     success = PyCode != NULL;
-    Py_DECREF(tmp);
+  } else {
+    PyErr_Clear();
+    PyCode = Py_CompileString(Code.ascii(),Name,Py_file_input);
+    success = PyCode != NULL;
   }
   if (!success)
   {
@@ -365,15 +367,17 @@ bool PythonScript::compile()
 
 QVariant PythonScript::eval()
 {
-  if (compiled != Script::isCompiled && !compile())
+  if (!isFunction) compiled = notCompiled;
+  if (compiled != isCompiled && !compile(true))
     return QVariant();
   PyObject *pyret;
-  PyObject *empty_tuple = PyTuple_New(0);
   if (PyCallable_Check(PyCode))
+  {
+    PyObject *empty_tuple = PyTuple_New(0);
     pyret = PyObject_Call(PyCode, empty_tuple, localDict);
-  else
+    Py_DECREF(empty_tuple);
+  } else
     pyret = PyEval_EvalCode((PyCodeObject*)PyCode, env()->globalDict(), localDict);
-  Py_DECREF(empty_tuple);
   if (!pyret)
   {
     emit_error(env()->errorMsg(), 0);
@@ -439,15 +443,17 @@ QVariant PythonScript::eval()
 
 bool PythonScript::exec()
 {
-  if (compiled != Script::isCompiled && !compile())
+  if (isFunction) compiled = notCompiled;
+  if (compiled != Script::isCompiled && !compile(false))
     return false;
   PyObject *pyret;
-  PyObject *empty_tuple = PyTuple_New(0);
   if (PyCallable_Check(PyCode))
+  {
+    PyObject *empty_tuple = PyTuple_New(0);
     pyret = PyObject_Call(PyCode,empty_tuple,localDict);
-  else
+    Py_DECREF(empty_tuple);
+  } else
     pyret = PyEval_EvalCode((PyCodeObject*)PyCode, env()->globalDict(), localDict);
-  Py_DECREF(empty_tuple);
   if (pyret) {
     Py_DECREF(pyret);
     return true;

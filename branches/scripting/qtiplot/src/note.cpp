@@ -68,8 +68,3 @@ void Note::setAutoexec(bool exec)
     te->unsetPalette();
 }
 
-void Note::execute()
-{
-  te->executeAll();
-}
-

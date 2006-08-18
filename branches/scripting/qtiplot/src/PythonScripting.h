@@ -18,7 +18,7 @@ class PythonScript : public Script
     ~PythonScript();
 	
   public slots:
-    bool compile();
+    bool compile(bool asFunction=true);
     QVariant eval();
     bool exec();
     bool setQObject(QObject *val, const char *name);
@@ -29,6 +29,7 @@ class PythonScript : public Script
     PythonScripting *env() { return (PythonScripting*)Env; }
 
     PyObject *PyCode, *localDict;
+    bool isFunction;
 };
 
 class PythonScripting: public ScriptingEnv

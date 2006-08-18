@@ -265,7 +265,19 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiTable.h\
 	 ../tmp/qtiplot/sipqtimyWidget.h\
 	 ../tmp/qtiplot/sipqtiScriptEdit.h\
-	 ../tmp/qtiplot/sipqtiNote.h
+	 ../tmp/qtiplot/sipqtiNote.h\
+	 ../tmp/qtiplot/sipqtiFit.h\
+	 ../tmp/qtiplot/sipqtiExponentialFit.h\
+	 ../tmp/qtiplot/sipqtiTwoExpFit.h\
+	 ../tmp/qtiplot/sipqtiThreeExpFit.h\
+	 ../tmp/qtiplot/sipqtiSigmoidalFit.h\
+	 ../tmp/qtiplot/sipqtiGaussAmpFit.h\
+	 ../tmp/qtiplot/sipqtiLorentzFit.h\
+	 ../tmp/qtiplot/sipqtiNonLinearFit.h\
+	 ../tmp/qtiplot/sipqtiPluginFit.h\
+	 ../tmp/qtiplot/sipqtiMultiPeakFit.h\
+	 ../tmp/qtiplot/sipqtiPolynomialFit.h\
+	 ../tmp/qtiplot/sipqtiLinearFit.h
   SOURCES +=\
 	 ../tmp/qtiplot/sipqticmodule.cpp\
 	 ../tmp/qtiplot/sipqtiApplicationWindow.cpp\
@@ -275,6 +287,18 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiTable.cpp\
 	 ../tmp/qtiplot/sipqtimyWidget.cpp\
 	 ../tmp/qtiplot/sipqtiScriptEdit.cpp\
-	 ../tmp/qtiplot/sipqtiNote.cpp
+	 ../tmp/qtiplot/sipqtiNote.cpp\
+	 ../tmp/qtiplot/sipqtiFit.cpp\
+	 ../tmp/qtiplot/sipqtiExponentialFit.cpp\
+	 ../tmp/qtiplot/sipqtiTwoExpFit.cpp\
+	 ../tmp/qtiplot/sipqtiThreeExpFit.cpp\
+	 ../tmp/qtiplot/sipqtiSigmoidalFit.cpp\
+	 ../tmp/qtiplot/sipqtiGaussAmpFit.cpp\
+	 ../tmp/qtiplot/sipqtiLorentzFit.cpp\
+	 ../tmp/qtiplot/sipqtiNonLinearFit.cpp\
+	 ../tmp/qtiplot/sipqtiPluginFit.cpp\
+	 ../tmp/qtiplot/sipqtiMultiPeakFit.cpp\
+	 ../tmp/qtiplot/sipqtiPolynomialFit.cpp\
+	 ../tmp/qtiplot/sipqtiLinearFit.cpp
 }
 

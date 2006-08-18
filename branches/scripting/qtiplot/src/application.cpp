@@ -791,8 +791,6 @@ void ApplicationWindow::initMainMenu()
 
 	scriptingMenu = new QPopupMenu(this);
 	scriptingMenu->setFont(appFont);
-	actionScriptingLang->addTo(scriptingMenu);
-	actionRestartScripting->addTo(scriptingMenu);
 
 	windowsMenu = new QPopupMenu( this );
 	windowsMenu->setFont(appFont);
@@ -969,6 +967,10 @@ menuBar()->clear();
 menuBar()->insertItem(tr("&File"), file);
 menuBar()->insertItem(tr("&Edit"), edit);
 menuBar()->insertItem(tr("&View"), view);
+menuBar()->insertItem(tr("S&cripting"), scriptingMenu);
+scriptingMenu->clear();
+actionScriptingLang->addTo(scriptingMenu);
+actionRestartScripting->addTo(scriptingMenu);
 
 if(w)
 {
@@ -1041,7 +1043,20 @@ else if (w->isA("Matrix"))
 	menuBar()->insertItem(tr("&Matrix"), matrixMenu);
 	}
 else if (w->isA("Note"))
+	{
 	actionSaveTemplate->setEnabled(false);
+	scriptingMenu->insertSeparator();
+	actionNoteExecute->addTo(scriptingMenu);
+	actionNoteExecuteAll->addTo(scriptingMenu);
+	actionNoteEvaluate->addTo(scriptingMenu);
+
+	actionNoteExecute->disconnect(SIGNAL(activated()));
+	actionNoteExecuteAll->disconnect(SIGNAL(activated()));
+	actionNoteEvaluate->disconnect(SIGNAL(activated()));
+	connect(actionNoteExecute, SIGNAL(activated()), w, SLOT(execute()));
+	connect(actionNoteExecuteAll, SIGNAL(activated()), w, SLOT(executeAll()));
+	connect(actionNoteEvaluate, SIGNAL(activated()), w, SLOT(evaluate()));
+	}
 else
 	disableActions();
 
@@ -1050,7 +1065,6 @@ menuBar()->insertItem(tr("&Windows"), windowsMenu );
 else 
 	disableActions();
 
-menuBar()->insertItem(tr("S&cripting"), scriptingMenu);
 menuBar()->insertItem(tr("&Help"), help );
 }
 
@@ -3995,7 +4009,7 @@ void ApplicationWindow::executeNotes()
 QPtrList<myWidget> lst = projectFolder()->windowsList();
 for (myWidget *i=lst.first(); i; i=lst.next())
   if (i->isA("Note") && ((Note*)i)->autoexec())
-    ((Note*)i)->execute();
+    ((Note*)i)->executeAll();
 }
 
 void ApplicationWindow::scriptError(const QString &message, const QString &scriptName, int lineNumber)
@@ -11100,6 +11114,12 @@ void ApplicationWindow::createActions()
 
   actionRestartScripting = new QAction(tr("&Restart scripting"), QString::null, this);
   connect(actionRestartScripting, SIGNAL(activated()), this, SLOT(restartScriptingEnv()));
+
+  actionNoteExecute = new QAction(tr("E&xecute"), QString::null, this);
+
+  actionNoteExecuteAll = new QAction(tr("Execute &All"), QString::null, this);
+
+  actionNoteEvaluate = new QAction(tr("&Evaluate Expression"), QString::null, this);
 }
 
 void ApplicationWindow::translateActionsStrings()
@@ -11427,6 +11447,9 @@ void ApplicationWindow::translateActionsStrings()
   actionTechnicalSupport->setMenuText(tr("Technical &support"));
   actionScriptingLang->setMenuText(tr("Scripting &language"));
   actionRestartScripting->setMenuText(tr("&Restart scripting"));
+  actionNoteExecute->setMenuText(tr("E&xecute"));
+  actionNoteExecuteAll->setMenuText(tr("Execute &All"));
+  actionNoteEvaluate->setMenuText(tr("&Evaluate Expression"));
 
   	btnPointer->setMenuText(tr("Disable &tools"));
 	btnPointer->setToolTip( tr( "Pointer" ) );

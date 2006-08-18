@@ -40,6 +40,7 @@ public:
 
 	QString formula(){return d_formula;};
 	virtual void setParametersList(const QStringList& lst){};
+	int numParameters() { return d_p; }
 
 	void setInitialGuess(int parIndex, double val){gsl_vector_set(d_param_init, parIndex, val);};
 	void setInitialGuesses(double *x_init);

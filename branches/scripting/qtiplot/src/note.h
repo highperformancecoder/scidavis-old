@@ -24,13 +24,17 @@ public slots:
 	void restore(const QStringList&);
 
 	QTextEdit* textWidget(){return (QTextEdit*)te;};
-	QString text(){return te->text();};
-	void setText(const QString &s){te->setText(s);};
 	bool autoexec() const { return autoExec; }
 	void setAutoexec(bool);
-	void execute();
 	void modifiedNote();
+
+	// ScriptEdit methods
+	QString text() { return te->text(); };
+	void setText(const QString &s){te->setText(s);};
 	void print() { te->print(); }
+	void execute() { te->execute(); }
+	void executeAll() { te->executeAll(); }
+	void evaluate() { te->evaluate(); }
 
 private:
 	ScriptEdit *te;

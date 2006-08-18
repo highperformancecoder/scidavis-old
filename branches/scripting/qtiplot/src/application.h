@@ -856,6 +856,7 @@ public:
 	QAction *actionDonate, *actionHomePage, *actionDownloadManual, *actionTechnicalSupport, *actionTranslations;
 	QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;
 	QAction *actionScriptingLang, *actionRestartScripting;
+	QAction *actionNoteExecute, *actionNoteExecuteAll, *actionNoteEvaluate;
 
 private:
 	//!Stores the pointers to the dragged items from the FolderListViews objects
