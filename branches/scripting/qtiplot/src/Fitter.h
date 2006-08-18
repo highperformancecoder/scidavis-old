@@ -223,19 +223,6 @@ private:
 	void generateFitCurve(double *par);
 };
 
-class LorentzFit : public Fit
-{
-    Q_OBJECT
-
-public:
-	LorentzFit(ApplicationWindow *parent, Graph *g);
-	void guessInitialValues();
-
-private:
-	void storeCustomFitResults(double *par);
-	void generateFitCurve(double *par);
-};
-
 class NonLinearFit : public Fit
 {
     Q_OBJECT
@@ -294,7 +281,25 @@ private:
 
 	//! Color index for the peak curves
 	int d_peaks_color;
+
+	//! The peak profile
 	PeakProfile d_profile;
+};
+
+class LorentzFit : public MultiPeakFit
+{
+    Q_OBJECT
+
+public:
+	LorentzFit(ApplicationWindow *parent, Graph *g);
+};
+
+class GaussFit : public MultiPeakFit
+{
+    Q_OBJECT
+
+public:
+	GaussFit(ApplicationWindow *parent, Graph *g);
 };
 
 class PolynomialFit : public Fit

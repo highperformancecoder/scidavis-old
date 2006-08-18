@@ -10379,7 +10379,7 @@ if(whichFit=="fitLinear" || whichFit=="fitSigmoidal" || whichFit=="fitGauss" || 
 	else if (whichFit == "fitSigmoidal")
 		fitter = new SigmoidalFit (this, activeGraph);
 	else if(whichFit == "fitGauss")
-		fitter = new MultiPeakFit(this, activeGraph, MultiPeakFit::Gauss);
+		fitter = new GaussFit(this, activeGraph);
 	else if(whichFit == "fitLorentz")
 		fitter = new LorentzFit(this, activeGraph);
 

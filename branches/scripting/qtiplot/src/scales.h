@@ -24,7 +24,6 @@ public:
 	return QwtText(QString::number(transformValue(value), d_fmt, d_prec));
 	};
 
-
 	void labelFormat(char &f, int &prec) const;
 	void setLabelFormat(char f, int prec);
 
@@ -36,6 +35,9 @@ public:
 	int minorTicksStyle(){return d_minTicks;};
 	void setMinorTicksStyle(TicksStyle type){d_minTicks = type;};
 	
+protected:
+	virtual void drawTick(QPainter *p, double value, int len) const;
+
 private:
 	QString formula_string;
 	char d_fmt;

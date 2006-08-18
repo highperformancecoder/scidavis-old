@@ -740,7 +740,7 @@ if (d_plot->getMajorTicksType() == lst)
 
 for (int i=0;i<(int)lst.count();i++)
 	{
-	ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (i);
+	ScaleDraw *sd = (ScaleDraw *)d_plot->axisScaleDraw (i);
 	if (lst[i]==ScaleDraw::None || lst[i]==ScaleDraw::In)
 		sd->enableComponent (QwtAbstractScaleDraw::Ticks, false);
 	else
@@ -750,8 +750,7 @@ for (int i=0;i<(int)lst.count();i++)
 		sd->setTickLength  	(QwtScaleDiv::MediumTick, d_plot->minorTickLength());
 		sd->setTickLength  	(QwtScaleDiv::MajorTick, d_plot->majorTickLength());
 		}
-	
-	d_plot->setMajorTicksType(i,lst[i]);
+	sd->setMajorTicksStyle((ScaleDraw::TicksStyle)lst[i]);
 	}
 }
 
@@ -796,15 +795,13 @@ if (!scale)
 d_plot->setTickLength(minLength, majLength);	
 
 ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (axis);
+sd->setMajorTicksStyle((ScaleDraw::TicksStyle)majTicksType);	
+sd->setMinorTicksStyle((ScaleDraw::TicksStyle)minTicksType);
+
 if (majTicksType == ScaleDraw::None && minTicksType == ScaleDraw::None)
 	sd->enableComponent (QwtAbstractScaleDraw::Ticks, false);
 else
 	sd->enableComponent (QwtAbstractScaleDraw::Ticks);
-
-if (majTicksType == ScaleDraw::None || majTicksType == ScaleDraw::In)
-	majLength = 0;
-if (minTicksType == ScaleDraw::None || minTicksType == ScaleDraw::In)
-	minLength = 0;
 
 sd->setTickLength (QwtScaleDiv::MinorTick, minLength); 
 sd->setTickLength (QwtScaleDiv::MediumTick, minLength);
@@ -902,8 +899,6 @@ else
 sclDraw = (ScaleDraw *)d_plot->axisScaleDraw (axis);	
 sclDraw->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 
-d_plot->setMajorTicksType(axis, majTicksType);	
-d_plot->setMinorTicksType(axis, minTicksType);
 setAxisTicksLength(axis, majTicksType, minTicksType, 
 				   d_plot->minorTickLength(), d_plot->majorTickLength());
 
@@ -912,6 +907,7 @@ if (axisOn && (axis == QwtPlot::xTop || axis == QwtPlot::yRight))
 
 scalePicker->refresh();
 d_plot->updateLayout();	
+scale->repaint();
 d_plot->replot();	
 emit modifiedGraph();
 }
@@ -1435,10 +1431,6 @@ d_plot->setAxisScaleDiv (axis, *sd);
 QwtScaleWidget *scale = d_plot->axisWidget(a);
 int start = scale->startBorderDist();
 int end = scale->endBorderDist();
-
-//int start, end;
-//scale->getBorderDistHint(start, end);
-
 scale = d_plot->axisWidget(axis);
 scale->setMinBorderDist (start, end);
 }

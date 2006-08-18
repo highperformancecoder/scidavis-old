@@ -136,7 +136,7 @@ void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
 }
 
 void Plot::drawItems (QPainter *painter, const QRect &rect, 
-							const QwtArray< QwtScaleMap > &map, const QwtPlotPrintFilter &pfilter) const
+					const QwtArray< QwtScaleMap > &map, const QwtPlotPrintFilter &pfilter) const
 {
 QwtPlot::drawItems(painter, rect, map, pfilter);
 	
