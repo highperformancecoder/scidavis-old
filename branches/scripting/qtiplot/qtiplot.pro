@@ -251,7 +251,7 @@ contains(SCRIPTING_LANGS, Python) {
   HEADERS +=	src/PythonScripting.h
   SOURCES +=	src/PythonScripting.cpp
   unix:INCLUDEPATH += /usr/include/python2.4
-  LIBS +=	$$system(python-config)
+  LIBS +=	-lpython2.4 -lm
   
   # TODO: is there a way to do this in the Makefile?
   unix:system(mkdir -p $${MOC_DIR})

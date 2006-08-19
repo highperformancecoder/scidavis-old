@@ -191,7 +191,7 @@ public:
   enum Algorithm{ScaledLevenbergMarquardt, UnscaledLevenbergMarquardt, NelderMeadSimplex};
   enum WeightingMethod{NoWeighting, Instrumental, Statistical, ArbDataset};
 
-  Fit(ApplicationWindow* /TransferThis/, Graph*, const char*);
+  Fit(ApplicationWindow* /TransferThis/, Graph* /Transfer/, const char*);
   ~Fit();
 
   virtual void fit();
@@ -270,7 +270,6 @@ class SigmoidalFit : Fit
 {
 public:
   SigmoidalFit(ApplicationWindow *, Graph *);
-  void guessInitialValues();
 };
 
 class GaussAmpFit : Fit
@@ -283,7 +282,6 @@ class LorentzFit : Fit
 {
 public:
   LorentzFit(ApplicationWindow *, Graph *);
-  void guessInitialValues();
 };
 
 class NonLinearFit : Fit
