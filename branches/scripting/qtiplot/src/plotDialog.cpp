@@ -739,7 +739,6 @@ if (plot_type < 0)
 	lastSelectedCurve = -1;
 	return;
 	}
-
 else if (graph->curveType(lastSelectedCurve) == plot_type)
 	{
 	setActiveCurve(curveIndex);
@@ -747,18 +746,6 @@ else if (graph->curveType(lastSelectedCurve) == plot_type)
 	}
 
 clearTabWidget();
-
-QString text=listBox->currentText();
-if (text.contains("="))
-	{
-	btnAssociations->hide();
-	btnEditFunction->show();
-	}
-else
-	{
-	btnAssociations->show();
-	btnEditFunction->hide();
-	}
 
 insertTabs(plot_type);
 setActiveCurve(curveIndex);
@@ -845,19 +832,11 @@ if (acceptParams())
 
 void plotDialog::showWorksheet()
 {
-int index=listBox->currentItem();
-QString text=listBox->text(index);
-if (text.contains("="))
-	graph->createWorksheet(text);
-else
-	{
-	ApplicationWindow *app = (ApplicationWindow *)this->parent();
-	if (!app)
-		return;
+ApplicationWindow *app = (ApplicationWindow *)this->parent();
+if (!app)
+	return;
 
-	QStringList t=QStringList::split(": ", text, false);
-	app->showTable(t[0]+"_");
-	}
+app->showCurveWorksheet(graph->curveKey(listBox->currentItem()));
 close();
 }
 
@@ -921,6 +900,17 @@ if (size>0)
 	QwtPlotCurve *c = (QwtPlotCurve*)graph->curve(index);
 	if (!c)
 		return;
+
+	if (listBox->currentText().contains("="))
+		{
+		btnAssociations->hide();
+		btnEditFunction->show();
+		}
+	else
+		{
+		btnAssociations->show();
+		btnEditFunction->hide();
+		}
 
 	int curveType = graph->curveType(index);
 

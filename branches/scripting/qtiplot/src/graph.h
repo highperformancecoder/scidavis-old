@@ -41,7 +41,7 @@ public:
 
 	enum AxisType{Numeric = 0, Txt = 1, Day = 2, Month = 3, Time = 4, Date = 5, ColHeader = 6};
 	enum MarkerType{None=-1, Text = 0, Arrow=1, Image=2};
-	enum CurveType{Line, Scatter, LineSymbols, VerticalBars , Area, Pie, VerticalDropLines, 
+	enum CurveType{Line, Scatter, LineSymbols, VerticalBars, Area, Pie, VerticalDropLines, 
 				  Spline, Steps, Histogram, HorizontalBars, VectXYXY, ErrorBars, Box, VectXYAM};
 
 	Plot *d_plot;
@@ -574,7 +574,7 @@ signals:
 	void drawTextOff();
 	void drawLineEnded(bool);
 	void cursorInfo(const QString&);
-	void showPlotDialog(long);
+	void showPlotDialog(int);
 	void showPieDialog();
 	void createTable(const QString&,int,int,const QString&);
 	void createHiddenTable(const QString&,int,int,const QString&);
@@ -594,6 +594,7 @@ signals:
 	void modifiedPlotAssociation();
 
 	void showContextMenu();
+	void showCurveContextMenu(int);
 	void showMarkerPopupMenu();
 	
 	void showAxisDialog(int);

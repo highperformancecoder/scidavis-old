@@ -157,6 +157,9 @@ else
 	buttonNext->setEnabled(true);
 
 table->setSelectedCol(sc);
+table->table()->clearSelection();
+table->table()->selectColumn(sc);
+
 colNameLabel->setText("col(\""+table->colLabel(sc)+"\")= ");
 
 QStringList com = table->getCommandes();

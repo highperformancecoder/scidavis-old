@@ -192,6 +192,7 @@ public slots:
 	void newFunctionPlot(int type,QStringList &formulas, const QString& var,QValueList<double> &ranges, int points);
 
 	fDialog* functionDialog();
+	void showFunctionDialog(int curveKey);
 	void showFunctionDialog(Graph *g, int curve);
 	void addFunctionCurve();
 	void clearFunctionsList();
@@ -475,7 +476,7 @@ public slots:
 	//dialogs
 	void showFindDialogue();	
 	void showPlotDialog();
-	void showPlotDialog(long curveKey);
+	void showPlotDialog(int curveKey);
 	QDialog* showScaleDialog();
 	QDialog* showPieDialog();
 	QDialog* showPlot3dDialog();
@@ -505,6 +506,8 @@ public slots:
 	void showGraphContextMenu();
 	void showTableContextMenu(bool selection);
 	void showWindowContextMenu();
+	void showCurveContextMenu(int curveKey);
+	void showCurveWorksheet(int curveKey);
 	void showWindowPopupMenu(QListViewItem *it, const QPoint &p, int);
 
 	//! Connected to the context menu signal from lv; it's called when there are several items selected in the list

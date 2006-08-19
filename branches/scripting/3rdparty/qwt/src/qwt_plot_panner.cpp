@@ -26,6 +26,15 @@ public:
     bool isAxisEnabled[QwtPlot::axisCnt];
 };
 
+/*!
+  \brief Create a plot panner
+
+  The panner is enabled for all axes
+
+  \param canvas Plot canvas to pan, also the parent object
+
+  \sa setAxisEnabled
+*/
 QwtPlotPanner::QwtPlotPanner(QwtPlotCanvas *canvas):
     QwtPanner(canvas)
 {
@@ -35,17 +44,37 @@ QwtPlotPanner::QwtPlotPanner(QwtPlotCanvas *canvas):
         SLOT(moveCanvas(int, int)));
 }
 
+//! Destructor
 QwtPlotPanner::~QwtPlotPanner()
 {
     delete d_data;
 }
 
+/*!
+   \brief En/Disable an axis
+
+   Axes that are enabled will be synchronized to the
+   result of panning. All other axes will remain unchanged.
+
+   \param axis Axis, see QwtPlot::Axis
+   \param on On/Off
+
+   \sa isAxisEnabled, moveCanvas
+*/
 void QwtPlotPanner::setAxisEnabled(int axis, bool on)
 {
     if ( axis >= 0 && axis <= QwtPlot::axisCnt )
         d_data->isAxisEnabled[axis] = on;
 }
 
+/*!
+   Test if an axis is enabled
+
+   \param axis Axis, see QwtPlot::Axis
+   \return True, if the axis is enabled
+   
+   \sa setAxisEnabled, moveCanvas
+*/
 bool QwtPlotPanner::isAxisEnabled(int axis) const
 {
     if ( axis >= 0 && axis <= QwtPlot::axisCnt )
@@ -90,6 +119,14 @@ const QwtPlot *QwtPlotPanner::plot() const
     return ((QwtPlotPanner *)this)->plot();
 }
 
+/*!
+   Adjust the enabled axes according to dx/dy
+
+   \param dx Pixel offset in x direction
+   \param dy Pixel offset in y direction
+
+   \sa QwtPanner::panned
+*/
 void QwtPlotPanner::moveCanvas(int dx, int dy)
 {
     if ( dx == 0 && dy == 0 )
@@ -130,4 +167,3 @@ void QwtPlotPanner::moveCanvas(int dx, int dy)
     plot->setAutoReplot(doAutoReplot);
     plot->replot();
 }
-

@@ -204,7 +204,7 @@ connect (cp,SIGNAL(drawTextOff()),this,SIGNAL(drawTextOff()));
 connect (cp,SIGNAL(viewImageDialog()),this,SIGNAL(viewImageDialog()));
 connect (cp,SIGNAL(viewTextDialog()),this,SIGNAL(viewTextDialog()));
 connect (cp,SIGNAL(viewLineDialog()),this,SIGNAL(viewLineDialog()));
-connect (cp,SIGNAL(showPlotDialog(long)),this,SIGNAL(showPlotDialog(long)));
+connect (cp,SIGNAL(showPlotDialog(int)),this,SIGNAL(showPlotDialog(int)));
 connect (cp,SIGNAL(showPieDialog()),this,SIGNAL(showPieDialog()));
 connect (cp,SIGNAL(showMarkerPopupMenu()),this,SIGNAL(showMarkerPopupMenu()));
 connect (cp,SIGNAL(modified()), this, SLOT(modified()));
@@ -5333,7 +5333,16 @@ void Graph::contextMenuEvent(QContextMenuEvent *e)
 if (selectedMarker>=0)
 	return;
 
-emit showContextMenu();
+QPoint pos = d_plot->canvas()->mapFrom(d_plot, e->pos());
+int dist, point;
+const long curve = d_plot->closestCurve(pos.x(), pos.y(), dist, point);
+const QwtPlotCurve *c = d_plot->curve(curve);
+
+if (c && dist < 10)//10 pixels tolerance
+	emit showCurveContextMenu(curve);
+else
+	emit showContextMenu();
+
 e->accept();
 }
 

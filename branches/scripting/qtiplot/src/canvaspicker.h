@@ -47,7 +47,7 @@ private:
 	
 signals:
 	void showPieDialog();
-	void showPlotDialog(long);
+	void showPlotDialog(int);
 	void viewTextDialog();
 	void viewLineDialog();
 	void viewImageDialog();
