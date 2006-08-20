@@ -1,6 +1,7 @@
 #include "curvesDialog.h"
 #include "graph.h"
 #include "worksheet.h"
+#include "FunctionCurve.h"
 
 #include <qlabel.h>
 #include <qlistbox.h>
@@ -395,8 +396,11 @@ accel->connectItem( accel->insertItem( Key_Delete ), this, SLOT(removeCurve()) )
 
 void curvesDialog::showCurveBtn(int) 
 {
-QString txt= contents->currentText();
-if (txt.contains("="))
+QwtPlotCurve *c = g->curve(contents->currentItem());
+if (!c)
+	return;
+
+if (c->rtti() == FunctionCurve::RTTI)
 	{
 	btnAssociations->setEnabled(false);
 	btnEditFunction->setEnabled(true);

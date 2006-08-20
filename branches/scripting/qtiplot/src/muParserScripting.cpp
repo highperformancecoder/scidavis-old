@@ -70,15 +70,23 @@ muParserScript::muParserScript(ScriptingEnv *env, const QString &code, QObject *
   parser.DefineConst("e", M_E);
   parser.DefineConst("E", M_E);
 
+  rparser.DefineConst("pi", M_PI);
+  rparser.DefineConst("Pi", M_PI);
+  rparser.DefineConst("PI", M_PI);
+  rparser.DefineConst("e", M_E);
+  rparser.DefineConst("E", M_E);
+  
   for (const muParserScripting::mathFunction *i=muParserScripting::math_functions; i->name; i++)
-    if (i->numargs == 1 && i->fun1 != NULL)
+    if (i->numargs == 1 && i->fun1 != NULL) {
       parser.DefineFun(i->name, i->fun1);
-    else if (i->numargs == 2 && i->fun2 != NULL)
+      rparser.DefineFun(i->name, i->fun1);
+    } else if (i->numargs == 2 && i->fun2 != NULL) {
       parser.DefineFun(i->name, i->fun2);
-    else if (i->numargs == 3 && i->fun3 != NULL)
+      rparser.DefineFun(i->name, i->fun2);
+    } else if (i->numargs == 3 && i->fun3 != NULL) {
       parser.DefineFun(i->name, i->fun3);
-
-  rparser = parser;
+      rparser.DefineFun(i->name, i->fun3);
+    }
 }
 
 bool muParserScript::setDouble(double val, const char *name)

@@ -11,6 +11,7 @@
 #include "VectorCurve.h"
 #include "ErrorBar.h"
 #include "BoxCurve.h"
+#include "FunctionCurve.h"
 
 #include <qaccel.h>
 #include <qcheckbox.h>
@@ -657,7 +658,11 @@ QPopupMenu contextMenu(this);
 if (listBox->count() > 1)
 	contextMenu.insertItem(tr("&Delete"), this, SLOT(removeSelectedCurve()));
 
-if (it->text().contains("="))
+QwtPlotCurve *c = graph->curve(lastSelectedCurve);
+if (!c)
+	return;
+
+if (c->rtti() == FunctionCurve::RTTI)
 	contextMenu.insertItem(tr("&Edit..."), this, SLOT(editFunctionCurve()));
 else
 	contextMenu.insertItem(tr("&Plot Associations..."), this, SLOT(showPlotAssociations()));
@@ -901,7 +906,7 @@ if (size>0)
 	if (!c)
 		return;
 
-	if (listBox->currentText().contains("="))
+	if (c->rtti() == FunctionCurve::RTTI)
 		{
 		btnAssociations->hide();
 		btnEditFunction->show();

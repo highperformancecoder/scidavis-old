@@ -19,10 +19,7 @@ functionDialogui::functionDialogui( QWidget* parent, const char* name, bool moda
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
-	setName( "functionDialogui" );
-	 setMinimumSize( QSize( 610, 440 ) );
-	setMaximumSize( QSize( 610, 440 ) );
-    setMouseTracking( TRUE );
+		setName( "functionDialogui" );
 
 	QHBox *hbox1=new QHBox(this, "hbox1");
 	hbox1->setSpacing(5);

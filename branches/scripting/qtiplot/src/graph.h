@@ -474,7 +474,11 @@ public slots:
 	 QwtPlotCurve* getValidCurve(const QString& name, int params, int &points, int &start, int &end);
 	 QwtPlotCurve* getFitLimits(const QString& name, double from, double to,
 								int params, int &start, int &end);
-	 void setFitID(int id);
+
+	//! Set the number of fit curves
+	void setFitID(int id){fitID=id;};
+	//! Get the number of existing fit curves
+	int fitCurves(){return fitID;};
 
 	void addResultCurve(int n, double *x, double *y, int colorIndex,const QString& tableName, const QString& legend);
 
@@ -495,9 +499,10 @@ public slots:
 	 
 	 //user defined functions
 	 void modifyFunctionCurve(int curve, int type, const QStringList &formulas, const QString &var,QValueList<double> &ranges, int points);
-	 void addFunctionCurve(int type, const QStringList &formulas, const QString& var,QValueList<double> &ranges, int points);	 
+	 void addFunctionCurve(int type, const QStringList &formulas, const QString& var,
+		 QValueList<double> &ranges, int points, const QString& title = QString::null);	 
 	 //when reading from file
-	 void insertFunctionCurve(const QString& formula, double from, double to, int points);
+	 void insertFunctionCurve(const QString& formula, double from, double to, int points, int fileVersion);
 
 	 void createWorksheet(const QString& name);
 	 void activateGraph();
@@ -630,6 +635,9 @@ private:
 	QPoint auxMrkStart,auxMrkEnd;
 	Qt::PenStyle auxMrkStyle;
 	QString auxMrkFileName, auxMrkText;
+
+	//! The number of FunctionCurves inserted in the plot
+	int d_functions;
 
 	int n_curves, selectedCurve, selectedPoint,startPoint,endPoint, selectedCursor, pieRay;
 	int selectedCol,xCol,widthLine,fitID,linesOnPlot, defaultMarkerFrame;

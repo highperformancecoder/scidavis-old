@@ -1138,7 +1138,7 @@ if (!error)
 		}
 
 	fitter->fit();
-	double *res = fitter->fitResults();
+	double *res = fitter->results();
 	if (boxParams->numCols() == 3)
 		{
 		int j = 0;

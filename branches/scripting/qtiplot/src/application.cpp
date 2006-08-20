@@ -50,6 +50,7 @@
 #include "Scripting.h"
 #include "scales.h"
 #include "Fitter.h"
+#include "FunctionCurve.h"
 #include "ScriptingLangDialog.h"
 
 #include <stdio.h>
@@ -293,7 +294,7 @@ void ApplicationWindow::initGlobalConstants()
 	 appStyle = "Windows";
 #endif
 
-majVersion = 0; minVersion = 8; patchVersion = 6;
+majVersion = 0; minVersion = 8; patchVersion = 7;
 graphs=0; tables=0; matrixes = 0; notes = 0;
 projectname="untitled";
 lastModified=0;
@@ -6219,20 +6220,30 @@ if (!c)
 	return;
 
 QPopupMenu curveMenu(this);
+int id = curveMenu.insertItem(c->title().text(), this, SLOT(showPlotDialog(int)));
+curveMenu.setItemParameter(id, curveKey);
+curveMenu.insertSeparator();
 
-if (c->title().text().contains("="))
+if (c->rtti() == FunctionCurve::RTTI)
 	{
 	int id = curveMenu.insertItem(tr("&Edit Function..."), this, SLOT(showFunctionDialog(int)));
 	curveMenu.setItemParameter(id, curveKey);
-	curveMenu.insertSeparator();
 	}
 
-int id = curveMenu.insertItem(tr("&Worksheet"), this, SLOT(showCurveWorksheet(int)));
+id = curveMenu.insertItem(tr("&Worksheet"), this, SLOT(showCurveWorksheet(int)));
 curveMenu.setItemParameter(id, curveKey);
 id = curveMenu.insertItem(tr("&Plot details..."), this, SLOT(showPlotDialog(int)));
 curveMenu.setItemParameter(id, curveKey);
+curveMenu.insertSeparator();
+id = curveMenu.insertItem(QPixmap(close_xpm), tr("&Delete"), this, SLOT(removeCurve(int)));
+curveMenu.setItemParameter(id, curveKey);
 
 curveMenu.exec(QCursor::pos());
+}
+
+void ApplicationWindow::removeCurve(int curveKey)
+{
+activeGraph->removeCurve(activeGraph->curveIndex(curveKey));
 }
 
 void ApplicationWindow::showCurveWorksheet(int curveKey)
@@ -6242,7 +6253,7 @@ if (!c)
 	return;
 
 QString curveTitle = c->title().text();
-if (curveTitle.contains("="))
+if (c->rtti() == FunctionCurve::RTTI)
 	activeGraph->createWorksheet(curveTitle);
 else
 	showTable(curveTitle);
@@ -10032,7 +10043,8 @@ for (int j=0;j<(int)list.count()-1;j++)
 			else
 				cl.penWidth = curve[17].toInt();
 
-			ag->insertFunctionCurve(curve[1], curve[3].toDouble(),curve[4].toDouble(),curve[2].toInt());
+			ag->insertFunctionCurve(curve[1], curve[3].toDouble(),
+				curve[4].toDouble(),curve[2].toInt(), fileVersion);
 			ag->setCurveType(curveID, curve[5].toInt());
 			ag->updateCurveLayout(curveID, &cl);
 			curveID++;
@@ -10439,7 +10451,8 @@ if(whichFit=="fitLinear" || whichFit=="fitSigmoidal" || whichFit=="fitGauss" || 
 		{
 		if (whichFit != "fitLinear")
 			fitter->guessInitialValues();
-
+		
+		fitter->setFitCurveParameters(generateUniformFitPoints, fitPoints);
 		fitter->fit();
 		delete fitter;
 		}
