@@ -250,42 +250,63 @@ if(sipRes)
 
 class ExponentialFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   ExponentialFit(ApplicationWindow *, Graph *,  bool);
 };
 
 class TwoExpFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   TwoExpFit(ApplicationWindow *, Graph *);
 };
 
 class ThreeExpFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   ThreeExpFit(ApplicationWindow *, Graph *);
 };
 
 class SigmoidalFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   SigmoidalFit(ApplicationWindow *, Graph *);
 };
 
 class GaussAmpFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   GaussAmpFit(ApplicationWindow *, Graph *);
 };
 
 class LorentzFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   LorentzFit(ApplicationWindow *, Graph *);
 };
 
 class NonLinearFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   NonLinearFit(ApplicationWindow *, Graph *, const QString&);
   void setParametersList(const QStringList&);
@@ -294,6 +315,9 @@ public:
 
 class PluginFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   PluginFit(ApplicationWindow *, Graph *);
   bool load(const QString&);
@@ -301,6 +325,9 @@ public:
 
 class MultiPeakFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   enum PeakProfile{Gauss, Lorentz};
   MultiPeakFit(ApplicationWindow *, Graph *, PeakProfile, int);
@@ -316,6 +343,9 @@ public:
 
 class PolynomialFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   PolynomialFit(ApplicationWindow *, Graph *, int, bool);
 
@@ -328,6 +358,9 @@ public:
 
 class LinearFit : Fit
 {
+%TypeHeaderCode
+#include "src/Fitter.h"
+%End
 public:
   LinearFit(ApplicationWindow *, Graph *);
   void fit();
