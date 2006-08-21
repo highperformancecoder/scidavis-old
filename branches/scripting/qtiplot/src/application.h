@@ -195,7 +195,6 @@ public slots:
 	void showFunctionDialog(int curveKey);
 	void showFunctionDialog(Graph *g, int curve);
 	void addFunctionCurve();
-	void clearFunctionsList();
 	void clearFitFunctionsList();
 	void saveFitFunctionsList(const QStringList& l);
 	void clearSurfaceFunctionsList();
@@ -789,7 +788,6 @@ public:
 	bool saved, showPlot3DProjection, showPlot3DLegend;
 	int plot3DResolution;
 	QStringList plot3DColors, locales;
-	QStringList functions; //user-defined functions;
 	QStringList xFunctions, yFunctions, rFunctions,tetaFunctions; // user functions for parametric and polar plots
 	QStringList fitFunctions; //user-defined fit functions;
 	QStringList surfaceFunc; //user-defined surface functions;

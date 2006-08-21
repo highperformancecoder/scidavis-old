@@ -12,6 +12,7 @@ class QComboBox;
 class QPushButton;
 class QButtonGroup;
 class QSpinBox;
+class QTextEdit;
 
 class functionDialogui : public QDialog
 {
@@ -19,7 +20,6 @@ class functionDialogui : public QDialog
 
 public:
     functionDialogui( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
-    ~functionDialogui();
 
     QLabel* textFunction_2;
     QWidgetStack* optionStack;
@@ -30,7 +30,7 @@ public:
     QLabel* textTo;
     QLabel* textPoints;
     QLineEdit* boxTo;
-    QComboBox* boxFunction;
+    QTextEdit* boxFunction;
     QPushButton* buttonClear;
     QWidget* parametricPage;
     QLabel* textParameter;
@@ -60,11 +60,11 @@ public:
     QButtonGroup  *GroupBox1, *GroupBox2, *GroupBox3, *GroupBox4;
     QPushButton* buttonCancel;
     QPushButton* buttonOk;
-	QSpinBox    *boxPoints, *boxParPoints, *boxPolarPoints;
+	QSpinBox *boxPoints, *boxParPoints, *boxPolarPoints;
 
 protected slots:
-    virtual void languageChange();
-
+    void languageChange();
+	void raiseWidget(int index);
 };
 
 #endif // FUNCTIONDIALOGUI_H

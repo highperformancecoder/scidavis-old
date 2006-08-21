@@ -45,7 +45,6 @@ init(r,c);
 void Table::init(int rows, int cols)
 {
 selectedCol=0;
-LeftButton=FALSE;
 savedCol=-1;
 	
 QDateTime dt = QDateTime::currentDateTime ();
@@ -2776,56 +2775,25 @@ else
 	}
 }
 
-void Table::mouseMoveEvent ( QMouseEvent * e )
-{
-QHeader *header = worksheet->horizontalHeader();
-int offset = header->offset();
-selectedCol = header->sectionAt (e->pos().x() + offset);
-
-if(selectedCol != lastSelectedCol)
-	{//This means that we are in the next column
-	if(worksheet->isColumnSelected(selectedCol,TRUE))
-		{//Since this column is selected, deselect it
-		worksheet->removeSelection(QTableSelection (0,lastSelectedCol,
-				worksheet->numRows()-1,lastSelectedCol));
-		}
-	else
-		worksheet->selectColumn (selectedCol);
-	}
-lastSelectedCol=selectedCol;
-worksheet->setCurrentCell (0, selectedCol);
-}
-
-void Table::mousePressEvent ( QMouseEvent * e )
-{
-if (e->button() == QMouseEvent::LeftButton)	
-	{				
-	if (e->state ()==Qt::ControlButton)
-		{
-		int current=worksheet->currentSelection();
-		QTableSelection sel=worksheet->selection(current);
-		if (sel.topRow() != 0 || sel.bottomRow() != (worksheet->numRows() - 1))
-			//select only full columns
-			worksheet->removeSelection(sel);						
-		}
-	else
-		worksheet->clearSelection();
-		
-	QHeader *header = worksheet->horizontalHeader();
-	int offset = header->offset();
-
-	selectedCol=header->sectionAt (e->pos().x()+offset);
-	lastSelectedCol=selectedCol;
-	worksheet->selectColumn (selectedCol);
-	worksheet->setCurrentCell (0, selectedCol);
-	}			
-}
-
 bool Table::eventFilter(QObject *object, QEvent *e)
 {
 QHeader *header = worksheet->horizontalHeader();
 if (object != (QObject *)header)
 	return FALSE;
+
+if (e->type() == QEvent::MouseButtonPress )
+	{
+	const QMouseEvent *me = (const QMouseEvent *)e;
+	if (me->button() == QMouseEvent::LeftButton && me->state() == Qt::ControlButton)
+		{		
+		int offset = header->offset();
+		selectedCol = header->sectionAt (me->pos().x()+offset);	
+		worksheet->selectColumn (selectedCol);
+		worksheet->setCurrentCell (0, selectedCol);
+		return true;
+		}
+	return QObject::eventFilter(object, e);
+	}
 
 if (e->type() == QEvent::MouseButtonDblClick)
     {
@@ -2845,6 +2813,7 @@ if (e->type() == QEvent::MouseButtonDblClick)
 		emit optionsDialog();
 	return true;
     }
+
 return QObject::eventFilter(object, e);
 }
 

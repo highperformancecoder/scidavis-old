@@ -2196,6 +2196,7 @@ selected_peaks = 0;
 fitter = new MultiPeakFit (app, this, (MultiPeakFit::PeakProfile)profile, peaks);
 fitter->enablePeakCurves(app->generatePeakCurves);
 fitter->setPeakCurvesColor(app->peakCurvesColor);
+fitter->setFitCurveParameters(app->generateUniformFitPoints, app->fitPoints);
 d_plot->canvas()->grabMouse();
 }
 
@@ -5330,7 +5331,7 @@ int dist, point;
 const long curve = d_plot->closestCurve(pos.x(), pos.y(), dist, point);
 const QwtPlotCurve *c = d_plot->curve(curve);
 
-if (c && dist < 10)//10 pixels tolerance
+if (c && dist < 5)//5 pixels tolerance
 	emit showCurveContextMenu(curve);
 else
 	emit showContextMenu();
@@ -5745,9 +5746,6 @@ else
 	{
 	type = curve[0].toInt();
 	name = curve[1];
-	if (name.contains(tr("Fit")))
-		fitID++;
-
 	if (type == FunctionCurve::Normal)
 		{
 		formulas << curve[2];

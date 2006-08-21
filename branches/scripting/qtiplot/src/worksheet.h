@@ -92,8 +92,6 @@ public slots:
 	// event handlers 
 	bool eventFilter(QObject *object, QEvent *e);
 	void contextMenuEvent(QContextMenuEvent *e);
-	void mouseMoveEvent( QMouseEvent * e);
-	void mousePressEvent( QMouseEvent * e);
 	void customEvent( QCustomEvent* e);
 	
 	// column operations 
@@ -281,10 +279,9 @@ private:
 	QString specifications, newSpecifications;
 	QStringList commandes, col_format, comments, col_label;
 	QValueList<int> colTypes, col_plot_type;
-	int selectedCol, lastSelectedCol;
+	int selectedCol;
 	QStringList savedCells;
 	int savedCol;
-	bool LeftButton;
 };
 
 #endif

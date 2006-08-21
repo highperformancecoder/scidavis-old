@@ -444,7 +444,7 @@ fitPage = new QWidget(generalDialog );
 GroupBoxFittingCurve = new QButtonGroup(2,QGroupBox::Horizontal, tr("Generated Fit Curve"), fitPage );
 
 generatePointsBtn = new QRadioButton (GroupBoxFittingCurve);
-generatePointsBtn ->setText(tr("Uniform X"));
+generatePointsBtn ->setText(tr("Uniform X Function"));
 generatePointsBtn->setChecked(app->generateUniformFitPoints);
 
 QHBox *hb=new QHBox(GroupBoxFittingCurve);
@@ -684,7 +684,7 @@ void configDialog::languageChange()
 
 	//Fitting page
 	GroupBoxFittingCurve->setTitle(tr("Generated Fit Curve"));
-	generatePointsBtn ->setText(tr("Uniform X"));
+	generatePointsBtn ->setText(tr("Uniform X Function"));
 	lblPoints->setText( tr("Points"));
 	samePointsBtn->setText( tr( "Same X as Fitting Data" ) );
 

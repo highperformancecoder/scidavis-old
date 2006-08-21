@@ -83,10 +83,13 @@ private:
 
 protected:
 	//! Addes the result curve as a FunctionCurve to the plot, if gen_x_data = true
-	void insertFitFunctionCurve(const QString& name, double *x, double *y, int prec);
+	void insertFitFunctionCurve(const QString& name, double *x, double *y, int prec, int penWidth = 1);
 
 	//! Addes the result curve to the plot
-	virtual void generateFitCurve(double *par){};
+	virtual void generateFitCurve(double *par);
+
+	//! Calculates the data for the output fit curve and store itin the X an Y vectors
+	virtual void calculateFitCurveData(double *par, double *X, double *Y){};
 
 	//! Output string added to the result log
 	virtual QString logFitInfo(double *par, int iterations, int status, int prec, const QString& plotName);
@@ -126,6 +129,9 @@ protected:
 
 	//! Names of the fit parameters
 	QStringList d_param_names;
+
+	//! Stores a list of short explanations for the significance of the fit parameters
+	QStringList d_param_explain;
 
 	//! Tells weather the result curve has the same x values as the fit data or not
 	bool gen_x_data;
@@ -176,7 +182,7 @@ public:
 
 private:
 	void storeCustomFitResults(double *par);
-	void generateFitCurve(double *par);
+	void calculateFitCurveData(double *par, double *X, double *Y);
 
 	bool is_exp_growth;
 };
@@ -190,7 +196,7 @@ public:
 
 private:
 	void storeCustomFitResults(double *par);
-	void generateFitCurve(double *par);
+	void calculateFitCurveData(double *par, double *X, double *Y);
 };
 
 class ThreeExpFit : public Fit
@@ -202,7 +208,7 @@ public:
 
 private:
 	void storeCustomFitResults(double *par);
-	void generateFitCurve(double *par);
+	void calculateFitCurveData(double *par, double *X, double *Y);
 };
 
 class SigmoidalFit : public Fit
@@ -214,7 +220,7 @@ public:
 	void guessInitialValues();
 
 private:
-	void generateFitCurve(double *par);
+	void calculateFitCurveData(double *par, double *X, double *Y);
 };
 
 class GaussAmpFit : public Fit
@@ -225,7 +231,7 @@ public:
 	GaussAmpFit(ApplicationWindow *parent, Graph *g);
 
 private:
-	void generateFitCurve(double *par);
+	void calculateFitCurveData(double *par, double *X, double *Y);
 };
 
 class NonLinearFit : public Fit
@@ -238,7 +244,7 @@ public:
 	void setFormula(const QString& s){if (d_formula != s) d_formula = s;};
 
 private:
-	void generateFitCurve(double *par);
+	void calculateFitCurveData(double *par, double *X, double *Y);
 };
 
 class PluginFit : public Fit
@@ -251,7 +257,7 @@ public:
 	bool load(const QString& pluginName);
 
 private:
-	void generateFitCurve(double *par);
+	void calculateFitCurveData(double *par, double *X, double *Y);
 	fitFunctionEval f_eval;
 };
 
@@ -259,8 +265,7 @@ class MultiPeakFit : public Fit
 {
     Q_OBJECT
 
-public:
-		
+public:		
 	enum PeakProfile{Gauss, Lorentz};
 	MultiPeakFit(ApplicationWindow *parent, Graph *g = 0, PeakProfile profile = Gauss, int peaks = 1);
 
@@ -275,7 +280,12 @@ public:
 private:
 	QString logFitInfo(double *par, int iterations, int status, int prec, const QString& plotName);
 	void generateFitCurve(double *par);
+	static QString peakFormula(int peakIndex, PeakProfile profile);
+	//! Inserts a peak function curve into the plot 
+	void insertPeakFunctionCurve(double *x, double *y, int prec, int peak);
 	void storeCustomFitResults(double *par);
+
+	//! Used by the GaussFit and LorentzFit derived classes to calculate initial values for the parameters 
 	void guessInitialValues();
 
 	//! Number of peaks
@@ -321,7 +331,7 @@ public:
 	static QStringList generateParameterList(int order);
 
 private:
-	void generateFitCurve(double *par);
+	void calculateFitCurveData(double *par, double *X, double *Y);
 
 	int d_order;
 	bool show_legend;
@@ -334,6 +344,8 @@ class LinearFit : public Fit
 public:
 	LinearFit(ApplicationWindow *parent, Graph *g);
 	void fit();
-	void generateFitCurve(double *par);
+
+private:
+	void calculateFitCurveData(double *par, double *X, double *Y);
 };
 #endif

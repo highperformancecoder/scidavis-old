@@ -45,7 +45,7 @@ curveID = curve;
 QStringList formulas = c->formulas();
 if (c->functionType() == FunctionCurve::Normal)
 	{
-	boxFunction->setCurrentText(formulas[0]);
+	boxFunction->setText(formulas[0]);
 	boxFrom->setText(QString::number(c->startRange(), 'g', 15));
 	boxTo->setText(QString::number(c->endRange(), 'g', 15));
 	boxPoints->setValue(c->dataSize());
@@ -83,7 +83,6 @@ switch (type)
 	{
 	case 0:
 		boxFunction->clear();
-		emit clearFunctionsList();
 	break;
 	
 	case 1:
@@ -141,7 +140,7 @@ if (start>=end)
 	}
 
 	double x;
-	QString formula=boxFunction->currentText();
+	QString formula=boxFunction->text().remove("\n");
 	bool error=FALSE;
 
 	try
@@ -183,7 +182,6 @@ if (start>=end)
 			ApplicationWindow *app = (ApplicationWindow *)this->parent();
 			app->updateFunctionLists(type,formulas);
 			}
-		close();
 		}		
 
 }
@@ -289,7 +287,6 @@ if (start>=end)
 			ApplicationWindow *app = (ApplicationWindow *)this->parent();
 			app->updateFunctionLists(type,formulas);
 			}
-		close();
 		}
 }
 
@@ -395,7 +392,6 @@ if (start>=end)
 			else
 				graph->addFunctionCurve(type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
 			}
-		close();
 		}
 }
 
@@ -416,11 +412,6 @@ switch (type)
 		acceptPolar();
 	break;
 	}
-}
-
-void fDialog::insertFunctionsList(const QStringList& list)
-{
-boxFunction->insertStringList (list, 1);
 }
 
 void fDialog::insertParamFunctionsList(const QStringList& xList, const QStringList& yList)

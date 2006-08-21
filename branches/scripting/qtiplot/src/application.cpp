@@ -4217,7 +4217,6 @@ show_windows_policy = (ShowWindowsPolicy)settings.readNumEntry("/ShowWindowsPoli
 recentProjects=settings.readListEntry("/recentProjects");
 updateRecentProjectsList();
 
-functions=settings.readListEntry("/functions");
 fitFunctions=settings.readListEntry("/fitFunctions");
 surfaceFunc=settings.readListEntry("/surfaceFunctions");
 xFunctions=settings.readListEntry("/xFunctions");
@@ -4449,7 +4448,6 @@ settings.writeEntry("/workingDir", workingDir);
 settings.writeEntry("/helpFilePath", helpFilePath);
 settings.writeEntry("/ShowWindowsPolicy", show_windows_policy);
 settings.writeEntry("/recentProjects", recentProjects);
-settings.writeEntry("/functions", functions);
 settings.writeEntry("/fitFunctions", fitFunctions);
 settings.writeEntry("/surfaceFunctions", surfaceFunc);
 settings.writeEntry("/xFunctions", xFunctions);
@@ -8855,11 +8853,9 @@ fd->setCurveToModify(g, curve);
 fDialog* ApplicationWindow::functionDialog()
 {
 fDialog* fd= new fDialog(this,"fDialog",TRUE,WStyle_Tool|WDestructiveClose);
-connect (fd,SIGNAL(clearFunctionsList()),this,SLOT(clearFunctionsList()));
 connect (fd,SIGNAL(clearParamFunctionsList()),this,SLOT(clearParamFunctionsList()));
 connect (fd,SIGNAL(clearPolarFunctionsList()),this,SLOT(clearPolarFunctionsList()));
 
-fd->insertFunctionsList(functions);
 fd->insertParamFunctionsList(xFunctions, yFunctions);
 fd->insertPolarFunctionsList(rFunctions, tetaFunctions);
 fd->show();
@@ -8921,14 +8917,6 @@ else if (type == 1)
 	while ((int)yFunctions.size() > maxListSize)
 		yFunctions.pop_back();
 	}
-else 
-	{
-	functions.remove(formulas[0]);
-	functions.push_front(formulas[0]);
-
-	while ((int)functions.size() > maxListSize)
-		functions.pop_back();
-	}
 }
 
 void ApplicationWindow::newFunctionPlot()
@@ -8977,11 +8965,6 @@ void ApplicationWindow::clearPolarFunctionsList()
 {
 rFunctions.clear();
 tetaFunctions.clear();
-}
-
-void ApplicationWindow::clearFunctionsList()
-{
-functions.clear();
 }
 
 void ApplicationWindow::clearFitFunctionsList()
