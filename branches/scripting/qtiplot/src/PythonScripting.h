@@ -54,7 +54,7 @@ class PythonScripting: public ScriptingEnv
       return new PythonScript(this, code, context, name);
     }
 
-    bool setQObject(const QObject*, const char*, PyObject *dict=NULL);
+    bool setQObject(QObject*, const char*, PyObject *dict=NULL);
     bool setInt(int, const char*, PyObject *dict=NULL);
     bool setDouble(double, const char*, PyObject *dict=NULL);
     

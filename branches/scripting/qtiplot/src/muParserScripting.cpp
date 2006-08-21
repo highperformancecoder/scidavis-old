@@ -236,7 +236,7 @@ int muParserScript::setDynamicVars()
       if (i.data() == "i" && variables["i"])
 	row = (int) *(variables["i"]) - 1;
       else {
-	rparser.SetExpr(i.data());
+	rparser.SetExpr(i.data().ascii());
 	row = qRound(rparser.Eval()) - 1;
       }
       col=j.data().toInt();
@@ -259,13 +259,13 @@ int muParserScript::setDynamicVars()
       if (i.data() == "i" && variables["i"])
 	row = (int) *(variables["i"]) - 1;
       else {
-	rparser.SetExpr(i.data());
+	rparser.SetExpr(i.data().ascii());
 	row = qRound(rparser.Eval()) - 1;
       }
       if (j.data() == "j" && variables["j"])
 	col = (int) *(variables["j"]) - 1;
       else {
-	rparser.SetExpr(j.data());
+	rparser.SetExpr(j.data().ascii());
 	col = qRound(rparser.Eval()) - 1;
       }
       if (row < 0 || row >= matrix->numRows() || col < 0 || col >= matrix->numCols())
@@ -282,7 +282,7 @@ int muParserScript::setDynamicVars()
   }
   for (strDict::iterator i=userVariables.begin(); i!=userVariables.end(); i++)
   {
-    rparser.SetExpr(i.data());
+    rparser.SetExpr(i.data().ascii());
     if (!setDouble(rparser.Eval(), i.key().ascii()))
       return 0;
   }

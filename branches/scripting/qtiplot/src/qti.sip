@@ -59,7 +59,7 @@ class Table: myWidget
     return col;
   }
 %End
-  
+
 public:
   int tableRows() /PyName=rows/;
   int tableCols() /PyName=cols/;
@@ -171,6 +171,20 @@ class ApplicationWindow: QMainWindow
 %TypeHeaderCode
 #include "src/application.h"
 %End
+%ConvertToSubClassCode
+// we have to do this to override casting in qt/qobject.sip (PyQt 3.16)
+sipClass=NULL;
+QString cN = sipCpp->className();
+sipTypeDef *t;
+#if SIP_VERSION >= 0x040400
+  for (int i=0; i<sipModuleAPI_qti.em_nrtypes; i++)
+#else
+  for (int i=0; sipModuleAPI_qti.em_types[i] != 0; i++)
+#endif
+  if (((t=sipModuleAPI_qti.em_types[i]->type)->td_cname && cN == t->td_cname) ||
+      (!t->td_cname && cN == t->td_name+4))
+    sipClass = sipModuleAPI_qti.em_types[i];
+%End
 public:
   Table *table(const QString&);
   Table *newTable(const QString&, int, int);
@@ -217,7 +231,6 @@ public:
   void setTolerance(double);
   void setFitCurveColor(int);
 
-  virtual void generateFitCurve(double *);
   void setFitCurveParameters(bool, int);
 
   void setMaximumIterations(int);
@@ -229,9 +242,9 @@ public:
   virtual QString legendFitInfo(int);
 
   //! Returns a vector with the fit results
-  SIP_PYTUPLE fitResults();
+  SIP_PYTUPLE results();
 %MethodCode
-double *results = sipCpp->fitResults();
+double *results = sipCpp->results();
 int size=sipCpp->numParameters();
 sipRes = PyTuple_New(size);
 if(sipRes)

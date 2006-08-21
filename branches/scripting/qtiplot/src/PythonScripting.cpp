@@ -223,32 +223,53 @@ bool PythonScripting::isRunning() const
   return Py_IsInitialized();
 }
 
-bool PythonScripting::setQObject(const QObject *val, const char *name, PyObject *dict)
+bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
 {
   if(!val) return false;
   PyObject *pyobj=NULL;
-  sipWrapperType **typesTable = sipModuleAPI_qti.em_types;
-  QString cN = val->className();
-  cN.prepend("qti.");
-  while (*typesTable != 0)
-    if(!strcmp((**typesTable++).type->td_name,cN.ascii()))
+  sipTypeDef *t;
+#if SIP_VERSION >= 0x040301 && SIP_VERSION <= 0x040403
+#error "SIP versions between 4.3.1 and 4.4.3 are currently not supported. Please install another version of SIP and try again."
+#endif
+#if SIP_VERSION >= 0x040400
+  for (int i=0; i<sipModuleAPI_qti.em_nrtypes; i++)
+#else
+  for (int i=0; sipModuleAPI_qti.em_types[i] != 0; i++)
+#endif
+  // Note that the SIP API is a bit confusing here.
+  // sipTypeDef.td_cname holds the C++ class name, but is NULL if that's the same as the Python class name.
+  // sipTypeDef.td_name OTOH always holds the Python class name, but prepended by the module name ("qti.")
+    if (((t=sipModuleAPI_qti.em_types[i]->type)->td_cname && !strcmp(val->className(),t->td_cname)) ||
+	  (!t->td_cname && !strcmp(val->className(),t->td_name+4)))
     {
-      pyobj=sipBuildResult(NULL,"M",val,*--typesTable);
+#if SIP_VERSION >= 0x040400
+      pyobj=sipConvertFromInstance(val,sipModuleAPI_qti.em_types[i],NULL);
+#else
+      pyobj=sipBuildResult(NULL, "M", val, sipModuleAPI_qti.em_types[i]);
+#endif
+      if (!pyobj) return false;
       break;
     }
   if (!pyobj) {
-    cN = val->className();
-    cN.prepend("qt.");
-    typesTable = sipModuleAPI_qti_qt->em_types;
-    while (*typesTable != 0)
-      if(!strcmp((**typesTable++).type->td_name,cN.ascii()))
+#if SIP_VERSION >= 0x040400
+    for (int i=0; i<sipModuleAPI_qti_qt->em_nrtypes; i++)
+#else
+    for (int i=0; sipModuleAPI_qti_qt->em_types[i] != 0; i++)
+#endif
+    if (((t=sipModuleAPI_qti_qt->em_types[i]->type)->td_cname && !strcmp(val->className(),t->td_cname)) ||
+	  (!t->td_cname && !strcmp(val->className(),t->td_name+3)))
       {
-	pyobj=sipBuildResult(NULL,"M",val,*--typesTable);
+#if SIP_VERSION >= 0x040400
+	pyobj=sipConvertFromInstance(val,sipModuleAPI_qti_qt->em_types[i],NULL);
+#else
+	pyobj=sipBuildResult(NULL, "M", val, sipModuleAPI_qti_qt->em_types[i]);
+#endif
+	if (!pyobj) return false;
 	break;
       }
   } 
   if (!pyobj) return false;
- 
+
   if (dict)
     PyDict_SetItemString(dict,name,pyobj);
   else
