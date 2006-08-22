@@ -45,6 +45,7 @@ fitter = 0;
 
 tw = new QWidgetStack( this, "tw" );
 tw->setSizePolicy(QSizePolicy (QSizePolicy::Preferred, QSizePolicy::Preferred, 2, 0, FALSE ));
+
 initEditPage();
 initFitPage();
 initAdvancedPage();
@@ -148,11 +149,12 @@ buttonOk->setText( tr( "&Fit" ) );
 buttonOk->setAutoDefault( TRUE );
 buttonOk->setDefault( TRUE );
   
-buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
-buttonCancel->setText( tr( "&Close" ) );
+buttonCancel1 = new QPushButton(GroupBox2, "buttonCancel1" );
+buttonCancel1->setText( tr( "&Close" ) );
 
-buttonAdvanced = new QPushButton(GroupBox2, "buttonCancel" );
+buttonAdvanced = new QPushButton(GroupBox2, "buttonAdvanced" );
 buttonAdvanced->setText( tr( "Custom &Output >>" ) );
+
 
 QVBoxLayout* hlayout = new QVBoxLayout(fitPage, 5, 5, "hlayout");
 hlayout->addWidget(GroupBox1);
@@ -163,7 +165,7 @@ hlayout->addWidget(GroupBox2);
 // signals and slots connections
 connect( boxCurve, SIGNAL( activated(int) ), this, SLOT( activateCurve(int) ) );
 connect( buttonOk, SIGNAL( clicked() ), this, SLOT(accept()));
-connect( buttonCancel, SIGNAL( clicked() ), this, SLOT(close()));
+connect( buttonCancel1, SIGNAL(clicked()), this, SLOT(close()) );
 connect( buttonEdit, SIGNAL( clicked() ), this, SLOT(showEditPage()));
 connect( btnDeleteFitCurves, SIGNAL( clicked() ), this, SLOT(deleteFitCurves()));
 connect( boxWeighting, SIGNAL( activated(int) ), this, SLOT( enableWeightingParameters(int) ) );
@@ -247,7 +249,7 @@ vbox4->setSpacing(5);
 btnAddTxt = new QPushButton(vbox4, "btnAddTxt" );
 btnAddTxt->setText( tr( "Add &expression" ) );
 
-btnAddName = new QPushButton(vbox4, "btnClose" );
+btnAddName = new QPushButton(vbox4, "btnAddName" );
 btnAddName->setText( tr( "Add &name" ) );
 
 buttonClear = new QPushButton(vbox4, "buttonClear" );
@@ -255,7 +257,11 @@ buttonClear->setText( tr( "Clear user &list" ) );
 
 btnContinue = new QPushButton(vbox4, "btnContinue" );
 btnContinue->setText( tr( "&Fit >>" ) );
+
+buttonCancel2 = new QPushButton(vbox4, "buttonCancel2" );
+buttonCancel2->setText( tr( "&Close" ) );
 	
+
 QVBoxLayout* hlayout = new QVBoxLayout(editPage, 5, 5, "hlayout");
 hlayout->addWidget(hbox1);
 hlayout->addWidget(hbox3);
@@ -272,6 +278,7 @@ connect( btnAddTxt, SIGNAL(clicked()), this, SLOT(addFunction() ) );
 connect( btnContinue, SIGNAL(clicked()), this, SLOT(showFitPage() ) );
 connect( btnAddFunc, SIGNAL(clicked()), this, SLOT(saveUserFunction()));
 connect( btnDelFunc, SIGNAL(clicked()), this, SLOT(removeUserFunction()));
+connect( buttonCancel2, SIGNAL(clicked()), this, SLOT(close()) );
 }
 
 void fitDialog::initAdvancedPage()
@@ -335,7 +342,6 @@ connect( plotLabelBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges
 
 QHBox *hbox1=new QHBox(advancedPage);
 hbox1->setSpacing(5);
-hbox1->setMaximumWidth(200);
 
 btnBack = new QPushButton(hbox1);
 btnBack->setText( tr( "<< &Fit" ) );
@@ -349,6 +355,12 @@ btnApply->setMaximumWidth(100);
 btnApply->setEnabled(false);
 connect( btnApply, SIGNAL(clicked()), this, SLOT(applyChanges()));
 
+buttonCancel3 = new QPushButton(hbox1, "buttonCancel3" );
+buttonCancel3->setText( tr( "&Close" ) );
+
+QWidget * spacer = new QWidget(hbox1);
+hbox1->setStretchFactor(spacer, 1);
+
 QVBoxLayout* hlayout = new QVBoxLayout(advancedPage, 5, 5);
 hlayout->addWidget(GroupBox1);
 hlayout->addWidget(GroupBox2);
@@ -361,6 +373,7 @@ connect(btnCovMatrix, SIGNAL(clicked()), this, SLOT(showCovarianceMatrix()));
 
 connect(samePointsBtn, SIGNAL(toggled(bool)), this, SLOT(showPointsBox(bool)));
 connect(generatePointsBtn, SIGNAL(toggled(bool)), this, SLOT(showPointsBox(bool)));
+connect( buttonCancel3, SIGNAL(clicked()), this, SLOT(close()) );
 }
 
 void fitDialog::applyChanges()
