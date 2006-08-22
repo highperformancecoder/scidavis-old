@@ -41,7 +41,7 @@ public:
 	void setRange(double from, double to);
 
 	QString formula(){return d_formula;};
-	virtual void setParametersList(const QStringList& lst){};
+	virtual void setParametersList(const QStringList& ){};
 	int numParameters() { return d_p; }
 
 	void setInitialGuess(int parIndex, double val){gsl_vector_set(d_param_init, parIndex, val);};
@@ -91,7 +91,7 @@ protected:
 	virtual void generateFitCurve(double *par);
 
 	//! Calculates the data for the output fit curve and store itin the X an Y vectors
-	virtual void calculateFitCurveData(double *par, double *X, double *Y){};
+	virtual void calculateFitCurveData(double *, double *, double *){};
 
 	//! Output string added to the result log
 	virtual QString logFitInfo(double *par, int iterations, int status, int prec, const QString& plotName);

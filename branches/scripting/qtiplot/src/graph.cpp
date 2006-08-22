@@ -5705,7 +5705,7 @@ updatePlot();
 emit modifiedGraph();
 }
 
-void Graph::insertFunctionCurve(const QString& formula, double from, double step, int points, int fileVersion)
+void Graph::insertFunctionCurve(const QString& formula, int points, int fileVersion)
 {
 int type;
 QStringList formulas;

@@ -10022,8 +10022,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 			else
 				cl.penWidth = curve[17].toInt();
 
-			ag->insertFunctionCurve(curve[1], curve[3].toDouble(),
-				curve[4].toDouble(),curve[2].toInt(), fileVersion);
+			ag->insertFunctionCurve(curve[1], curve[2].toInt(), fileVersion);
 			ag->setCurveType(curveID, curve[5].toInt());
 			ag->updateCurveLayout(curveID, &cl);
 			curveID++;
@@ -11160,11 +11159,11 @@ void ApplicationWindow::createActions()
   actionRestartScripting = new QAction(tr("&Restart scripting"), QString::null, this);
   connect(actionRestartScripting, SIGNAL(activated()), this, SLOT(restartScriptingEnv()));
 
-  actionNoteExecute = new QAction(tr("E&xecute"), QString::null, this);
+  actionNoteExecute = new QAction(tr("E&xecute"), tr("Ctrl+J"), this);
 
-  actionNoteExecuteAll = new QAction(tr("Execute &All"), QString::null, this);
+  actionNoteExecuteAll = new QAction(tr("Execute &All"), tr("Ctrl+Shift+J"), this);
 
-  actionNoteEvaluate = new QAction(tr("&Evaluate Expression"), QString::null, this);
+  actionNoteEvaluate = new QAction(tr("&Evaluate Expression"), tr("Ctrl+Return"), this);
 }
 
 void ApplicationWindow::translateActionsStrings()
@@ -11492,9 +11491,15 @@ void ApplicationWindow::translateActionsStrings()
   actionTechnicalSupport->setMenuText(tr("Technical &support"));
   actionScriptingLang->setMenuText(tr("Scripting &language"));
   actionRestartScripting->setMenuText(tr("&Restart scripting"));
+
   actionNoteExecute->setMenuText(tr("E&xecute"));
+  actionNoteExecute->setAccel(tr("Ctrl+J"));
+
   actionNoteExecuteAll->setMenuText(tr("Execute &All"));
+  actionNoteExecuteAll->setAccel(tr("Ctrl+Shift+J"));
+
   actionNoteEvaluate->setMenuText(tr("&Evaluate Expression"));
+  actionNoteEvaluate->setAccel(tr("Ctrl+Return"));
 
   	btnPointer->setMenuText(tr("Disable &tools"));
 	btnPointer->setToolTip( tr( "Pointer" ) );
@@ -11686,7 +11691,7 @@ QWidgetList *windows = windowsList();
 for (QWidget *w = windows->first(); w; w = windows->next())
 	{
 	QString caption = w->name();
-	if (w->isA("Table") && (caption.startsWith(tr("Fit")) || caption.startsWith(tr("LinearFit"))))
+	if (w->isA("Table") && caption.contains(tr("Fit")))
 		{
 		((Table*)w)->askOnCloseEvent(false);
 		((Table*)w)->close();
@@ -12695,7 +12700,7 @@ else
 	}
 }
 
-void ApplicationWindow::renameFolder(QListViewItem *it, int col, const QString &text)
+void ApplicationWindow::renameFolder(QListViewItem *it, int, const QString &text)
 {
 if (!it)
 	return;
