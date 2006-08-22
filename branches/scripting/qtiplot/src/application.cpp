@@ -6789,12 +6789,6 @@ if ( !result.isEmpty() )
 	logInfo+=result;
 	showResults(true);
 	emit modified();
-
-	if (! aw)
-		return;
-
-	((MultiLayer*)aw)->updateTransparency();
-	aw->setFocus();
 	}
 }
 
@@ -8211,8 +8205,10 @@ else
 
 void ApplicationWindow::customEvent(QCustomEvent *e)
 {
-  if (e->type() == SCRIPTING_CHANGE_EVENT)
+  if (e->type() == SCRIPTING_CHANGE_EVENT) {
     scriptingChangeEvent((ScriptingChangeEvent*)e);
+    connect(scriptEnv,SIGNAL(error(const QString&,const QString&,int)),this,SLOT(scriptError(const QString&,const QString&,int)));
+  }
 }
 
 void ApplicationWindow::deleteSelectedItems()

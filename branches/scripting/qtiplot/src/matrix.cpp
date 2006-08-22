@@ -124,7 +124,9 @@ connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIG
 script->setInt(row+1, "row");
 script->setInt(col+1, "col");
 QVariant ret = script->eval();
-if(ret.type()==QVariant::Double || ret.type()==QVariant::Int)
+if(ret.type()==QVariant::Int || ret.type()==QVariant::UInt || ret.type()==QVariant::LongLong || ret.type()==QVariant::ULongLong)
+	table->setText(row, col, ret.toString());
+else if(ret.canCast(QVariant::Double))
 	table->setText(row, col, QString::number(ret.toDouble(), txt_format, num_precision));
 else
 	table->setText(row, col, "");

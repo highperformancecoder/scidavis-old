@@ -18,12 +18,13 @@ class PythonScript : public Script
     ~PythonScript();
 	
   public slots:
-    bool compile(bool asFunction=true);
+    bool compile(bool for_eval=true);
     QVariant eval();
     bool exec();
     bool setQObject(QObject *val, const char *name);
     bool setInt(int val, const char* name);
     bool setDouble(double val, const char* name);
+    void setContext(QObject *context);
 
   private:
     PythonScripting *env() { return (PythonScripting*)Env; }
@@ -54,7 +55,8 @@ class PythonScripting: public ScriptingEnv
       return new PythonScript(this, code, context, name);
     }
 
-    bool setQObject(QObject*, const char*, PyObject *dict=NULL);
+    bool setQObject(QObject*, const char*, PyObject *dict);
+    bool setQObject(QObject *val, const char *name) { return setQObject(val,name,NULL); }
     bool setInt(int, const char*, PyObject *dict=NULL);
     bool setDouble(double, const char*, PyObject *dict=NULL);
     

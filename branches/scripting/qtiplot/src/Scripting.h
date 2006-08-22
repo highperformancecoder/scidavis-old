@@ -77,12 +77,12 @@ class Script : public QObject
     void setEmitErrors(bool yes) { EmitErrors = yes; }
 
   public slots:
-    virtual bool compile() { return false; }
-    virtual QVariant eval() { return QVariant(); }
-    virtual bool exec() { return false; }
+    virtual bool compile(bool for_eval=true) { emit_error("Script::compile called!",0); return false; }
+    virtual QVariant eval() { emit_error("Script::eval called!",0); return QVariant(); }
+    virtual bool exec() { emit_error("Script::exec called!",0); return false; }
 
     // local variables
-    virtual bool setQObject(const QObject*, const char*) { return false; } // name should default to val->name()
+    virtual bool setQObject(const QObject*, const char*) { return false; }
     virtual bool setInt(int, const char*) { return false; }
     virtual bool setDouble(double, const char*) { return false; }
 

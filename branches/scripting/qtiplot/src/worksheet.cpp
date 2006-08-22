@@ -400,7 +400,7 @@ bool Table::calculate(int col, int startRow, int endRow)
   {
     colscript->setInt(i+1,"i");
     ret = colscript->eval();
-    if(ret.type()==QVariant::Double || ret.type()==QVariant::Int) {
+    if(ret.type()==QVariant::Double) {
       int prec;
       char f;
       columnNumericFormat(col, f, prec);

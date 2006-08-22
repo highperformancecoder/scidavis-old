@@ -1124,7 +1124,8 @@ if (!error)
 		}
 	else
 		{
-		fitter = new NonLinearFit(app, graph, formula);
+		fitter = new NonLinearFit(app, graph);
+		((NonLinearFit*)fitter)->setFormula(formula);
 		fitter->setParametersList(parameters);
 		fitter->setInitialGuesses(paramsInit);
 		}

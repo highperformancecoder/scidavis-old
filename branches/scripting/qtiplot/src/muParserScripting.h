@@ -19,7 +19,7 @@ class muParserScript: public Script
     muParserScript(ScriptingEnv *env, const QString &code, QObject *context=0, const QString &name="<input>");
 	
   public slots:
-    bool compile();
+    bool compile(bool asFunction=true);
     QVariant eval();
     bool exec();
     bool setQObject(QObject *val, const char *name);

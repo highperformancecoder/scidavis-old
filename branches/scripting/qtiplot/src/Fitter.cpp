@@ -939,11 +939,30 @@ delete[] par;
  *
  *****************************************************************************/
 
-NonLinearFit::NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& formula)
+NonLinearFit::NonLinearFit(ApplicationWindow *parent, Graph *g)
 : Fit(parent, g)
 {
+init();
+}
+
+NonLinearFit::NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle)
+: Fit(parent, g)
+{
+init();
+setDataFromCurve(curveTitle);
+}
+
+NonLinearFit::NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, int start, int end)
+: Fit(parent, g)
+{
+init();
+setDataFromCurve(curveTitle, start, end);
+}
+
+void NonLinearFit::init()
+{
 setName(tr("NonLinear"));
-d_formula = formula;
+d_formula = QString::null;
 d_f = user_f;
 d_df = user_df;
 d_fdf = user_fdf;
@@ -1009,6 +1028,25 @@ delete[] par;
 
 PluginFit::PluginFit(ApplicationWindow *parent, Graph *g)
 : Fit(parent, g)
+{
+  init();
+}
+
+PluginFit::PluginFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle)
+: Fit(parent, g)
+{
+  init();
+  setDataFromCurve(curveTitle);
+}
+
+PluginFit::PluginFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, int start, int end)
+: Fit(parent, g)
+{
+  init();
+  setDataFromCurve(curveTitle, start, end);
+}
+
+void PluginFit::init()
 {
 d_fit_type = tr("Plugin");
 }
@@ -1513,16 +1551,35 @@ d_param_explain << tr("(area)") << tr("(center)") << tr("(width)") << tr("(offse
 PolynomialFit::PolynomialFit(ApplicationWindow *parent, Graph *g, int order, bool legend)
 : Fit(parent, g), d_order(order), show_legend(legend)
 {
+  init();
+}
+
+PolynomialFit::PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, int order, bool legend)
+: Fit(parent, g), d_order(order), show_legend(legend)
+{
+  init();
+  setDataFromCurve(curveTitle);
+}
+
+PolynomialFit::PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, int start, int end, int order, bool legend)
+: Fit(parent, g), d_order(order), show_legend(legend)
+{
+  init();
+  setDataFromCurve(curveTitle, start, end);
+}
+
+void PolynomialFit::init()
+{
 setName(tr("Poly"));
 is_non_linear = false;
 d_fit_type = tr("Polynomial");
-d_p = order + 1;
+d_p = d_order + 1;
 
 covar = gsl_matrix_alloc (d_p, d_p);
 d_results = new double[d_p];
 
-d_formula = generateFormula(order);	
-d_param_names = generateParameterList(order);
+d_formula = generateFormula(d_order);
+d_param_names = generateParameterList(d_order);
 }
 
 QString PolynomialFit::generateFormula(int order)

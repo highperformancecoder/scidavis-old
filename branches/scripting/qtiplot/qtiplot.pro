@@ -275,7 +275,9 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiPluginFit.h\
 	 ../tmp/qtiplot/sipqtiMultiPeakFit.h\
 	 ../tmp/qtiplot/sipqtiPolynomialFit.h\
-	 ../tmp/qtiplot/sipqtiLinearFit.h
+	 ../tmp/qtiplot/sipqtiLinearFit.h\
+	 ../tmp/qtiplot/sipqtiMatrix.h\
+	 ../tmp/qtiplot/sipqtiGaussFit.h
   SOURCES +=\
 	 ../tmp/qtiplot/sipqticmodule.cpp\
 	 ../tmp/qtiplot/sipqtiApplicationWindow.cpp\
@@ -297,6 +299,8 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiPluginFit.cpp\
 	 ../tmp/qtiplot/sipqtiMultiPeakFit.cpp\
 	 ../tmp/qtiplot/sipqtiPolynomialFit.cpp\
-	 ../tmp/qtiplot/sipqtiLinearFit.cpp
+	 ../tmp/qtiplot/sipqtiLinearFit.cpp\
+	 ../tmp/qtiplot/sipqtiMatrix.cpp\
+	 ../tmp/qtiplot/sipqtiGaussFit.cpp
 }
 

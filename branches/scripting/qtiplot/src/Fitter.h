@@ -257,12 +257,15 @@ class NonLinearFit : public Fit
     Q_OBJECT
 
 public:
-	NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& formula = QString::null);
+	NonLinearFit(ApplicationWindow *parent, Graph *g);
+	NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+	NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, int start, int end);
 	void setParametersList(const QStringList& lst);
 	void setFormula(const QString& s){if (d_formula != s) d_formula = s;};
 
 private:
 	void calculateFitCurveData(double *par, double *X, double *Y);
+	void init();
 };
 
 class PluginFit : public Fit
@@ -270,11 +273,14 @@ class PluginFit : public Fit
     Q_OBJECT
 
 public:
-	typedef double (*fitFunctionEval)(double, double *);
 	PluginFit(ApplicationWindow *parent, Graph *g);
+	PluginFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+	PluginFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, int start, int end);
 	bool load(const QString& pluginName);
 
 private:
+	void init();
+	typedef double (*fitFunctionEval)(double, double *);
 	void calculateFitCurveData(double *par, double *X, double *Y);
 	fitFunctionEval f_eval;
 };
@@ -351,6 +357,8 @@ class PolynomialFit : public Fit
 
 public:
 	PolynomialFit(ApplicationWindow *parent, Graph *g, int order = 2, bool legend = false);
+	PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, int order = 2, bool legend = false);
+	PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, int start, int end, int order = 2, bool legend = false);
 
 	virtual QString legendFitInfo(int prec);
 	void fit();
@@ -359,6 +367,7 @@ public:
 	static QStringList generateParameterList(int order);
 
 private:
+	void init();
 	void calculateFitCurveData(double *par, double *X, double *Y);
 
 	int d_order;

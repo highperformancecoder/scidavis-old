@@ -197,7 +197,7 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
     PyObject *qtiDict = PyModule_GetDict(qtimod);
     setQObject(Parent, "app", qtiDict);
     Py_DECREF(qtimod);
-    if (!exec("table=qti.app.table\ngraph=qti.app.graph\nnote=qti.app.note",globals))
+    if (!exec("table=qti.app.table\nmatrix=qti.app.matrix\ngraph=qti.app.graph\nnote=qti.app.note",globals))
       PyErr_Print();
   } else
     PyErr_Print();
@@ -327,8 +327,9 @@ const QString PythonScripting::mathFunctionDoc(const QString &name) const
 PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *context, const QString &name)
   : Script(env, code, context, name)
 {
-  localDict = PyDict_New();
   PyCode = NULL;
+  localDict = PyDict_New();
+  setQObject(Context, "self");
 }
 
 PythonScript::~PythonScript()
@@ -337,9 +338,15 @@ PythonScript::~PythonScript()
   Py_XDECREF(PyCode);
 }
 
-bool PythonScript::compile(bool asFunction)
+void PythonScript::setContext(QObject *context)
 {
-  PyObject *ret = PyRun_String("def col(c,*arg):\n\tif len(arg)>0: return tt.cell(c,arg[0])\n\telse: return tt.cell(c,i)\n",Py_file_input,localDict,localDict);
+  Script::setContext(context);
+  setQObject(Context, "self");
+}
+
+bool PythonScript::compile(bool for_eval)
+{
+  PyObject *ret = PyRun_String("def col(c,*arg):\n\tif len(arg)>0: return self.cell(c,arg[0])\n\telse: return self.cell(c,i)\n",Py_file_input,localDict,localDict);
   if (ret)
     Py_DECREF(ret);
   else
@@ -349,9 +356,8 @@ bool PythonScript::compile(bool asFunction)
   PyCode = Py_CompileString(Code.ascii(),Name,Py_eval_input);
   if (PyCode) { // code is a single expression
     success = true;
-  } else if (asFunction) { // code contains statements
-    emit_error(env()->errorMsg(), 0);
-    //PyErr_Clear();
+  } else if (for_eval) { // code contains statements
+    PyErr_Clear();
     PyObject *key, *value;
     int i=0;
     QString signature = "";
@@ -404,62 +410,49 @@ QVariant PythonScript::eval()
     emit_error(env()->errorMsg(), 0);
     return QVariant();
   }
+
+  QVariant qret = QVariant();
+  /* None */
   if (pyret == Py_None)
+    qret = QVariant("");
+  /* numeric types */
+  else if (PyFloat_Check(pyret))
+    qret = QVariant(PyFloat_AS_DOUBLE(pyret));
+  else if (PyInt_Check(pyret))
+    qret = QVariant((Q_LLONG)PyInt_AS_LONG(pyret));
+  else if (PyLong_Check(pyret))
+    qret = QVariant((Q_LLONG)PyLong_AsLongLong(pyret));
+  else if (PyNumber_Check(pyret))
   {
-    Py_DECREF(pyret);
-    return QVariant("");
-  }
-  QVariant qret;
-  if (PyNumber_Check(pyret))
-  {
-    PyObject *number = PyNumber_Int(pyret);
-    if (number)
-    {
-      qret = QVariant((Q_LLONG)PyInt_AS_LONG(number));
-      Py_DECREF(number);
-      Py_DECREF(pyret);
-      return qret;
-    }
-    number = PyNumber_Float(pyret);
+    PyObject *number = PyNumber_Float(pyret);
     if (number)
     {
       qret = QVariant(PyFloat_AS_DOUBLE(number));
       Py_DECREF(number);
-      Py_DECREF(pyret);
-      return qret;
     }
-  }
-  if (PyBool_Check(pyret))
-    if (pyret == Py_True)
-    {
-      Py_DECREF(pyret);
-      return QVariant(true, 0);
-    } else {
-      Py_DECREF(pyret);
-      return QVariant(false, 0);
-    }
+  /* bool */
+  } else if (PyBool_Check(pyret))
+    qret = QVariant(pyret==Py_True, 0);
   // could handle advanced types (such as PyList->QValueList) here if needed
-  PyObject *pystring = PyObject_Unicode(pyret);
+  /* fallback: try to convert to unicode string */
+  else {
+    PyObject *pystring = PyObject_Unicode(pyret);
+    if (pystring) {
+      PyObject *asUTF8 = PyUnicode_EncodeUTF8(PyUnicode_AS_UNICODE(pystring), PyUnicode_GET_DATA_SIZE(pystring), 0);
+      Py_DECREF(pystring);
+      if (asUTF8) {
+	qret = QVariant(QString::fromUtf8(PyString_AS_STRING(asUTF8)));
+	Py_DECREF(asUTF8);
+      }
+    }
+  }
+
   Py_DECREF(pyret);
-  if (!pystring)
-  {
+  if (PyErr_Occurred()) {
     emit_error(env()->errorMsg(), 0);
     return QVariant();
-  }
-  PyObject *asUCS2 = PyUnicode_Encode(PyUnicode_AS_UNICODE(pystring), PyUnicode_GET_DATA_SIZE(pystring), "UCS-2", 0);
-//  PyObject *asUTF8 = PyUnicode_EncodeUTF8(PyUnicode_AS_UNICODE(pystring), PyUnicode_GET_DATA_SIZE(pystring), 0);
-  if (!asUCS2)
-  {
-    emit_error(env()->errorMsg(), 0);
-    Py_DECREF(pystring);
-    return QVariant();
-  }
-//  qret = QVariant(QString::fromUtf8(PyString_AS_STRING(asUTF8)));
-//  Qt4: fromUcs2 -> fromRawData
-  qret = QVariant(QString::fromUcs2((unsigned short*)PyString_AS_STRING(asUCS2)));
-  Py_DECREF(pystring);
-  Py_DECREF(asUCS2);
-  return qret;
+  } else
+    return qret;
 }
 
 bool PythonScript::exec()
@@ -471,6 +464,10 @@ bool PythonScript::exec()
   if (PyCallable_Check(PyCode))
   {
     PyObject *empty_tuple = PyTuple_New(0);
+    if (!empty_tuple) {
+      emit_error(env()->errorMsg(), 0);
+      return false;
+    }
     pyret = PyObject_Call(PyCode,empty_tuple,localDict);
     Py_DECREF(empty_tuple);
   } else

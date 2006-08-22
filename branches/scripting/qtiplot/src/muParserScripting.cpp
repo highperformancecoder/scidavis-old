@@ -127,7 +127,7 @@ bool muParserScript::setQObject(QObject*, const char*)
   return false;
 }
 
-bool muParserScript::compile()
+bool muParserScript::compile(bool for_eval)
 {
   QString aux(Code);
   int i;
