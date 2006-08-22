@@ -74,7 +74,6 @@ HEADERS  += src/application.h \
      src/polynomFitDialog.h \
      src/expDecayDialog.h \
      src/functionDialog.h \
-     src/functionDialogui.h \
      src/fitDialog.h \
      src/surfaceDialog.h \
      src/tableDialog.h \
@@ -158,7 +157,6 @@ SOURCES  += src/application.cpp \
      src/canvaspicker.cpp \
      src/expDecayDialog.cpp \
      src/functionDialog.cpp \
-     src/functionDialogui.cpp \
      src/fitDialog.cpp \
      src/surfaceDialog.cpp \
      src/lineDlg.cpp \

@@ -13,13 +13,135 @@
 #include <qcombobox.h>
 #include <qspinbox.h>
 #include <qwidgetstack.h>
+#include <qhbox.h>
 
-fDialog::fDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
-    : functionDialogui( parent, name, modal, fl )
+FunctionDialog::FunctionDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
+    : QDialog( parent, name, modal, fl )
 {
-    if ( !name )
-	setName( "fDialog" );
+	if ( !name )
+		setName( "FunctionDialog" );
 
+	QHBox *hbox1=new QHBox(this, "hbox1");
+	hbox1->setSpacing(5);
+
+	textFunction_2 = new QLabel( hbox1, "textFunction_2" );
+	boxType = new QComboBox( FALSE, hbox1, "boxType" );
+
+	optionStack = new QWidgetStack( this, "optionStack" );
+	optionStack->setFrameShape( QWidgetStack::GroupBoxPanel );
+	optionStack->setFrameShadow( QWidgetStack::Plain );
+
+	functionPage = new QWidget( optionStack, "functionPage" );
+
+	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal, QString::null,functionPage,"GroupBox1" );
+	GroupBox1->setLineWidth(0);
+	GroupBox1->setFlat(TRUE);
+
+	textFunction = new QLabel( GroupBox1);
+	boxFunction = new QTextEdit(GroupBox1);
+	boxFunction->setMinimumHeight(50);
+	boxFunction->setMinimumWidth(350);
+
+	textFrom = new QLabel( GroupBox1);
+	boxFrom = new QLineEdit( GroupBox1 );
+	boxFrom->setText("0");
+
+	textTo = new QLabel( GroupBox1);
+	boxTo = new QLineEdit( GroupBox1);
+	boxTo->setText("1");
+
+	textPoints = new QLabel( GroupBox1, "textPoints" );
+	boxPoints = new QSpinBox(2,1000000,100, GroupBox1, "boxPoints" );
+	boxPoints->setValue(100);
+
+	QHBoxLayout* hlayout = new QHBoxLayout(functionPage,5,5, "hlayout");
+	hlayout->addWidget(GroupBox1);
+
+	optionStack->addWidget( functionPage, 0 );
+
+	parametricPage = new QWidget( optionStack, "parametricPage" );
+
+	GroupBox2 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""), parametricPage,"GroupBox2" );
+	GroupBox2->setLineWidth(0);
+	GroupBox2->setFlat(TRUE);
+
+	textParameter = new QLabel( GroupBox2, "textParameter" );
+	boxParameter = new QLineEdit( GroupBox2, "boxParameter" );
+	boxParameter->setText("m");
+
+	textParameterFrom = new QLabel( GroupBox2, "textParameterFrom" );
+	boxParFrom = new QLineEdit( GroupBox2, "boxParFrom" );
+	boxParFrom->setText("0");
+
+	textParameterTo = new QLabel( GroupBox2, "textParameterTo" );
+	boxParTo = new QLineEdit( GroupBox2, "boxParTo" );
+	boxParTo->setText("1");
+
+	textXPar = new QLabel( GroupBox2, "textXPar" );
+	boxXFunction = new QComboBox(TRUE, GroupBox2, "boxXFunction" );
+
+	textYPar = new QLabel( GroupBox2, "textYPar" );
+	boxYFunction = new QComboBox(TRUE, GroupBox2, "boxYFunction" );
+
+	textParPoints = new QLabel( GroupBox2, "textParPoints" );
+	boxParPoints = new QSpinBox(2,1000000,100, GroupBox2, "boxParPoints" );
+	boxParPoints->setValue(100);
+
+	QHBoxLayout* hlayout2 = new QHBoxLayout(parametricPage, 5, 5, "hlayout");
+	hlayout2->addWidget(GroupBox2);
+
+	optionStack->addWidget( parametricPage, 1 );
+
+	polarPage = new QWidget( optionStack, "polarPage" );
+
+	GroupBox3 = new QButtonGroup( 2,QGroupBox::Horizontal, QString::null, polarPage,"GroupBox3" );
+	GroupBox3->setLineWidth(0);
+	GroupBox3->setFlat(TRUE);
+
+	textPolarParameter = new QLabel( GroupBox3, "textPolarParameter" );
+	boxPolarParameter = new QLineEdit( GroupBox3, "boxPolarParameter" );
+	boxPolarParameter->setText ("t");
+
+	textPolarFrom = new QLabel( GroupBox3, "textPolarFrom" );
+	boxPolarFrom = new QLineEdit( GroupBox3, "boxPolarFrom" );
+	boxPolarFrom->setText("0");
+
+	textPolarTo = new QLabel( GroupBox3, "textPolarTo" );
+	boxPolarTo = new QLineEdit( GroupBox3, "boxPolarTo" );
+	boxPolarTo->setText("pi");
+
+	textPolarRadius = new QLabel( GroupBox3, "textPolarRadius" );
+	boxPolarRadius = new QComboBox(TRUE, GroupBox3, "boxPolarRadius" );
+
+	textPolarTheta = new QLabel( GroupBox3, "textPolarTheta" );
+	boxPolarTheta = new QComboBox(TRUE, GroupBox3, "boxPolarTheta" );
+
+	textPolarPoints = new QLabel( GroupBox3, "textPolarPoints" );
+	boxPolarPoints = new QSpinBox(2,1000000,100,GroupBox3, "boxPolarPoints" );
+	boxPolarPoints->setValue(100);
+
+	QHBoxLayout* hlayout3 = new QHBoxLayout(polarPage, 5, 5, "hlayout");
+	hlayout3->addWidget(GroupBox3);
+
+	optionStack->addWidget( polarPage, 2 );
+
+	GroupBox4 = new QButtonGroup( 3, QGroupBox::Horizontal,tr(""), this, "buttonGroup3" );
+	GroupBox4->setLineWidth(0);
+	GroupBox4->setFlat(TRUE);
+
+	buttonClear = new QPushButton( GroupBox4, "buttonClear" );
+	buttonOk = new QPushButton( GroupBox4, "buttonOk" );
+	buttonOk->setDefault(TRUE);
+
+	buttonCancel = new QPushButton( GroupBox4, "buttonCancel" );
+
+	QVBoxLayout* hlayout1 = new QVBoxLayout(this, 5, 5, "hlayout1");
+	hlayout1->addWidget(hbox1);
+	hlayout1->addWidget(optionStack);
+	hlayout1->addWidget(GroupBox4);
+
+	languageChange();
+	connect( boxType, SIGNAL( activated(int) ), this, SLOT( raiseWidget(int) ) );
 	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
 	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 	connect( buttonClear, SIGNAL( clicked() ), this, SLOT(clearList() ) );
@@ -29,114 +151,152 @@ fDialog::fDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
 	graph = 0;
 }
 
-void fDialog::setCurveToModify(Graph *g, int curve)
+void FunctionDialog::raiseWidget(int index)
 {
-if (!g)
-	return;
+	if (index)
+		buttonClear->setText( tr( "Clear list" ) );
+	else
+		buttonClear->setText( tr( "Clear Function" ) );
 
-graph = g;
+	optionStack->raiseWidget(index);
+}
 
-FunctionCurve *c = (FunctionCurve *)graph->curve(curve);
-if (!c)
-	return;
+void FunctionDialog::languageChange()
+{
+	setCaption( tr( "QtiPlot - Add function curve" ) );
+	textFunction_2->setText( tr( "Curve type " ) );
+	textFunction->setText( tr( "f(x)= " ) );
+	textFrom->setText( tr( "From x= " ) );
+	textTo->setText( tr( "To x= " ) );
+	textPoints->setText( tr( "Points" ) );
+	buttonClear->setText( tr( "Clear Function" ) );
+	textParameter->setText( tr( "Parameter" ) );
+	textParPoints->setText( tr( "Points" ) );
+	textParameterTo->setText( tr( "To" ) );
+	textYPar->setText( tr( "y = " ) );
+	textXPar->setText( tr( "x = " ) );
+	textParameterFrom->setText( tr( "From" ) );
+	textPolarPoints->setText( tr( "Points" ) );
+	textPolarParameter->setText( tr( "Parameter" ) );
+	textPolarFrom->setText( tr( "From" ) );
+	textPolarTo->setText( tr( "To" ) );
+	textPolarRadius->setText( tr( "R =" ) );
+	textPolarTheta->setText( tr( "Theta =" ) );
+	boxType->insertItem( tr( "Function" ) );
+	boxType->insertItem( tr( "Parametric plot" ) );
+	boxType->insertItem( tr( "Polar plot" ) );
+	buttonCancel->setText( tr( "Close" ) );
+	buttonOk->setText( tr( "Apply" ) );
+}
 
-curveID = curve;
+void FunctionDialog::setCurveToModify(Graph *g, int curve)
+{
+	if (!g)
+		return;
 
-QStringList formulas = c->formulas();
-if (c->functionType() == FunctionCurve::Normal)
+	graph = g;
+
+	FunctionCurve *c = (FunctionCurve *)graph->curve(curve);
+	if (!c)
+		return;
+
+	curveID = curve;
+
+	QStringList formulas = c->formulas();
+	if (c->functionType() == FunctionCurve::Normal)
 	{
-	boxFunction->setText(formulas[0]);
-	boxFrom->setText(QString::number(c->startRange(), 'g', 15));
-	boxTo->setText(QString::number(c->endRange(), 'g', 15));
-	boxPoints->setValue(c->dataSize());
+		boxFunction->setText(formulas[0]);
+		boxFrom->setText(QString::number(c->startRange(), 'g', 15));
+		boxTo->setText(QString::number(c->endRange(), 'g', 15));
+		boxPoints->setValue(c->dataSize());
 	}
-else if (c->functionType() == FunctionCurve::Polar)
+	else if (c->functionType() == FunctionCurve::Polar)
 	{
-	optionStack->raiseWidget(2);
-	boxType->setCurrentItem(2);
+		optionStack->raiseWidget(2);
+		boxType->setCurrentItem(2);
 
-	boxPolarRadius->setCurrentText(formulas[0]);
-	boxPolarTheta->setCurrentText(formulas[1]);
-	boxPolarParameter->setText(c->variable());
-	boxPolarFrom->setText(QString::number(c->startRange(), 'g', 15));
-	boxPolarTo->setText(QString::number(c->endRange(), 'g', 15));
-	boxPolarPoints->setValue(c->dataSize());
+		boxPolarRadius->setCurrentText(formulas[0]);
+		boxPolarTheta->setCurrentText(formulas[1]);
+		boxPolarParameter->setText(c->variable());
+		boxPolarFrom->setText(QString::number(c->startRange(), 'g', 15));
+		boxPolarTo->setText(QString::number(c->endRange(), 'g', 15));
+		boxPolarPoints->setValue(c->dataSize());
 	}
-else if (c->functionType() == FunctionCurve::Parametric)
+	else if (c->functionType() == FunctionCurve::Parametric)
 	{
-	boxType->setCurrentItem(1);
-	optionStack->raiseWidget(1);
+		boxType->setCurrentItem(1);
+		optionStack->raiseWidget(1);
 
-	boxXFunction->setCurrentText(formulas[0]);
-	boxYFunction->setCurrentText(formulas[1]);
-	boxParameter->setText(c->variable());
-	boxParFrom->setText(QString::number(c->startRange(), 'g', 15));
-	boxParTo->setText(QString::number(c->endRange(), 'g', 15));
-	boxParPoints->setValue(c->dataSize());
+		boxXFunction->setCurrentText(formulas[0]);
+		boxYFunction->setCurrentText(formulas[1]);
+		boxParameter->setText(c->variable());
+		boxParFrom->setText(QString::number(c->startRange(), 'g', 15));
+		boxParTo->setText(QString::number(c->endRange(), 'g', 15));
+		boxParPoints->setValue(c->dataSize());
 	}
 }
 
-void fDialog::clearList()
+void FunctionDialog::clearList()
 {
-int type=boxType->currentItem();
-switch (type)
+	int type=boxType->currentItem();
+	switch (type)
 	{
-	case 0:
-		boxFunction->clear();
-	break;
-	
-	case 1:
-		boxXFunction->clear();
-		boxYFunction->clear();
-		emit clearParamFunctionsList();
-	break;
-	
-	case 2:
-		boxPolarTheta->clear();
-		boxPolarRadius->clear();
-		emit clearPolarFunctionsList();
-	break;
+		case 0:
+			boxFunction->clear();
+			break;
+
+		case 1:
+			boxXFunction->clear();
+			boxYFunction->clear();
+			emit clearParamFunctionsList();
+			break;
+
+		case 2:
+			boxPolarTheta->clear();
+			boxPolarRadius->clear();
+			emit clearPolarFunctionsList();
+			break;
 	}
 }
 
-void fDialog::acceptFunction()
+void FunctionDialog::acceptFunction()
 {
-QString from=boxFrom->text().lower();
-QString to=boxTo->text().lower();
-QString points=boxPoints->text().lower();
+	QString from=boxFrom->text().lower();
+	QString to=boxTo->text().lower();
+	QString points=boxPoints->text().lower();
 
-double start, end;
-try
+	double start, end;
+	try
 	{
-	myParser parser;
-	parser.SetExpr(from.ascii());
-	start=parser.Eval();
+		myParser parser;
+		parser.SetExpr(from.ascii());
+		start=parser.Eval();
 	}
-catch(mu::ParserError &e)
+	catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Start limit error"), e.GetMsg());
-	boxFrom->setFocus();
-	return;
+		QMessageBox::critical(0, tr("QtiPlot - Start limit error"), e.GetMsg());
+		boxFrom->setFocus();
+		return;
 	}	
-try
+	try
 	{
-	myParser parser;
-	parser.SetExpr(to.ascii());
-	end=parser.Eval();
+		myParser parser;
+		parser.SetExpr(to.ascii());
+		end=parser.Eval();
 	}
-catch(mu::ParserError &e)
+	catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - End limit error"), e.GetMsg());
-	boxTo->setFocus();
-	return;
+		QMessageBox::critical(0, tr("QtiPlot - End limit error"), e.GetMsg());
+		boxTo->setFocus();
+		return;
 	}
 
-if (start>=end)
+	if (start>=end)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Input error"),
+		QMessageBox::critical(0, tr("QtiPlot - Input error"),
 				tr("Please enter x limits that satisfy: from < end!"));
-	boxTo->setFocus();
-	return;
+		boxTo->setFocus();
+		return;
 	}
 
 	double x;
@@ -144,22 +304,22 @@ if (start>=end)
 	bool error=FALSE;
 
 	try
-		{
+	{
 		myParser parser;	
 		parser.DefineVar("x", &x);	
 		parser.SetExpr(formula.ascii());
-		
+
 		x=start;
 		parser.Eval();
 		x=end;
 		parser.Eval();
-		}
+	}
 	catch(mu::ParserError &e)
-		{
+	{
 		QMessageBox::critical(0, tr("QtiPlot - Input function error"), e.GetMsg());
 		boxFunction->setFocus();
 		error=TRUE;	
-		}	
+	}	
 
 	// Collecting all the information
 	int type = boxType->currentItem();
@@ -169,11 +329,11 @@ if (start>=end)
 	ranges+=start;
 	ranges+=end;
 	if (!error)
-		{
+	{
 		if (!graph)
 			emit newFunctionPlot(type, formulas, "x", ranges, boxPoints->value());
 		else
-			{
+		{
 			if (curveID >= 0)
 				graph->modifyFunctionCurve(curveID, type, formulas, "x", ranges, boxPoints->value());
 			else
@@ -181,49 +341,49 @@ if (start>=end)
 
 			ApplicationWindow *app = (ApplicationWindow *)this->parent();
 			app->updateFunctionLists(type,formulas);
-			}
-		}		
+		}
+	}		
 
 }
-void fDialog::acceptParametric()
+void FunctionDialog::acceptParametric()
 {
-QString from=boxParFrom->text().lower();
-QString to=boxParTo->text().lower();
-QString points=boxParPoints->text().lower();
+	QString from=boxParFrom->text().lower();
+	QString to=boxParTo->text().lower();
+	QString points=boxParPoints->text().lower();
 
-double start, end;
-try
+	double start, end;
+	try
 	{
-	myParser parser;
-	parser.SetExpr(from.ascii());
-	start=parser.Eval();
+		myParser parser;
+		parser.SetExpr(from.ascii());
+		start=parser.Eval();
 	}
-catch(mu::ParserError &e)
+	catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Start limit error"), e.GetMsg());
-	boxParFrom->setFocus();
-	return;
+		QMessageBox::critical(0, tr("QtiPlot - Start limit error"), e.GetMsg());
+		boxParFrom->setFocus();
+		return;
 	}	
 
-try
+	try
 	{
-	myParser parser;
-	parser.SetExpr(to.ascii());
-	end=parser.Eval();
+		myParser parser;
+		parser.SetExpr(to.ascii());
+		end=parser.Eval();
 	}
-catch(mu::ParserError &e)
+	catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - End limit error"), e.GetMsg());
-	boxParTo->setFocus();
-	return;
+		QMessageBox::critical(0, tr("QtiPlot - End limit error"), e.GetMsg());
+		boxParTo->setFocus();
+		return;
 	}	
 
-if (start>=end)
+	if (start>=end)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Input error"),
+		QMessageBox::critical(0, tr("QtiPlot - Input error"),
 				tr("Please enter parameter limits that satisfy: from < end!"));
-	boxParTo->setFocus();
-	return;
+		boxParTo->setFocus();
+		return;
 	}
 
 	double parameter;
@@ -232,39 +392,39 @@ if (start>=end)
 	bool error=FALSE;
 
 	try
-		{
+	{
 		myParser parser;				
 		parser.DefineVar((boxParameter->text()).ascii(), &parameter);	
 		parser.SetExpr(xformula.ascii());
-		
+
 		parameter=start;
 		parser.Eval();
 		parameter=end;
 		parser.Eval();
-		}
+	}
 	catch(mu::ParserError &e)
-		{
+	{
 		QMessageBox::critical(0, tr("QtiPlot - Input function error"), e.GetMsg());
 		boxXFunction->setFocus();
 		error=TRUE;	
-		}	
+	}	
 	try
-		{
+	{
 		myParser parser;				
 		parser.DefineVar((boxParameter->text()).ascii(), &parameter);	
 		parser.SetExpr(yformula.ascii());
-		
+
 		parameter=start;
 		parser.Eval();
 		parameter=end;
 		parser.Eval();
-		}
+	}
 	catch(mu::ParserError &e)
-		{
+	{
 		QMessageBox::critical(0, tr("QtiPlot - Input function error"), e.GetMsg());
 		boxYFunction->setFocus();
 		error=TRUE;	
-		}
+	}
 	// Collecting all the information
 	int type = boxType->currentItem();
 	QStringList formulas;
@@ -274,11 +434,11 @@ if (start>=end)
 	ranges+=start;
 	ranges+=end;
 	if (!error)
-		{
+	{
 		if (!graph)
 			emit newFunctionPlot(type, formulas, boxParameter->text(),ranges, boxParPoints->value());
 		else
-			{
+		{
 			if (curveID >= 0)
 				graph->modifyFunctionCurve(curveID, type, formulas, boxParameter->text(),ranges, boxParPoints->value());
 			else
@@ -286,49 +446,49 @@ if (start>=end)
 
 			ApplicationWindow *app = (ApplicationWindow *)this->parent();
 			app->updateFunctionLists(type,formulas);
-			}
 		}
+	}
 }
 
-void fDialog::acceptPolar()
+void FunctionDialog::acceptPolar()
 {
-QString from=boxPolarFrom->text().lower();
-QString to=boxPolarTo->text().lower();
-QString points=boxPolarPoints->text().lower();
+	QString from=boxPolarFrom->text().lower();
+	QString to=boxPolarTo->text().lower();
+	QString points=boxPolarPoints->text().lower();
 
-double start, end;
-try
+	double start, end;
+	try
 	{
-	myParser parser;
-	parser.SetExpr(from.ascii());
-	start=parser.Eval();
+		myParser parser;
+		parser.SetExpr(from.ascii());
+		start=parser.Eval();
 	}
-catch(mu::ParserError &e)
+	catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Start limit error"), e.GetMsg());
-	boxPolarFrom->setFocus();
-	return;
-	}
-
-try
-	{
-	myParser parser;	
-	parser.SetExpr(to.ascii());
-	end=parser.Eval();
-	}
-catch(mu::ParserError &e)
-	{
-	QMessageBox::critical(0, tr("QtiPlot - End limit error"), e.GetMsg());
-	boxPolarTo->setFocus();
-	return;
+		QMessageBox::critical(0, tr("QtiPlot - Start limit error"), e.GetMsg());
+		boxPolarFrom->setFocus();
+		return;
 	}
 
-if (start>=end)
+	try
 	{
-	QMessageBox::critical(0, tr("QtiPlot - Input error"),
+		myParser parser;	
+		parser.SetExpr(to.ascii());
+		end=parser.Eval();
+	}
+	catch(mu::ParserError &e)
+	{
+		QMessageBox::critical(0, tr("QtiPlot - End limit error"), e.GetMsg());
+		boxPolarTo->setFocus();
+		return;
+	}
+
+	if (start>=end)
+	{
+		QMessageBox::critical(0, tr("QtiPlot - Input error"),
 				tr("Please enter parameter limits that satisfy: from < end!"));
-	boxPolarTo->setFocus();
-	return;
+		boxPolarTo->setFocus();
+		return;
 	}
 
 	double parameter;
@@ -337,39 +497,39 @@ if (start>=end)
 	bool error=FALSE;
 
 	try
-		{
+	{
 		myParser parser;				
 		parser.DefineVar((boxPolarParameter->text()).ascii(), &parameter);	
 		parser.SetExpr(rformula.ascii());
-		
+
 		parameter=start;
 		parser.Eval();
 		parameter=end;
 		parser.Eval();
-		}
+	}
 	catch(mu::ParserError &e)
-		{
+	{
 		QMessageBox::critical(0, tr("QtiPlot - Input function error"), e.GetMsg());
 		boxPolarRadius->setFocus();
 		error=TRUE;	
-		}	
+	}	
 	try
-		{
+	{
 		myParser parser;				
 		parser.DefineVar((boxPolarParameter->text()).ascii(), &parameter);	
 		parser.SetExpr(tformula.ascii());
-		
+
 		parameter=start;
 		parser.Eval();
 		parameter=end;
 		parser.Eval();
-		}
+	}
 	catch(mu::ParserError &e)
-		{
+	{
 		QMessageBox::critical(0, tr("QtiPlot - Input function error"), e.GetMsg());
 		boxPolarTheta->setFocus();
 		error=TRUE;	
-		}
+	}
 	// Collecting all the information
 	int type = boxType->currentItem();
 	QStringList formulas;
@@ -379,53 +539,53 @@ if (start>=end)
 	ranges+=start;
 	ranges+=end;
 	if (!error)
-		{
+	{
 		ApplicationWindow *app = (ApplicationWindow *)this->parent();
 		app->updateFunctionLists(type,formulas);
 
 		if (!graph)
 			emit newFunctionPlot(type, formulas, boxParameter->text(),ranges, boxPolarPoints->value());
 		else
-			{
+		{
 			if (curveID >= 0)
 				graph->modifyFunctionCurve(curveID, type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
 			else
 				graph->addFunctionCurve(type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
-			}
 		}
-}
-
-void fDialog::accept()
-{
-int type=boxType->currentItem();
-switch (type)
-	{
-	case 0:
-		acceptFunction();
-	break;
-	
-	case 1:
-		acceptParametric();
-	break;
-	
-	case 2:
-		acceptPolar();
-	break;
 	}
 }
 
-void fDialog::insertParamFunctionsList(const QStringList& xList, const QStringList& yList)
+void FunctionDialog::accept()
 {
-boxXFunction->insertStringList (xList, 1);
-boxYFunction->insertStringList (yList, 1);
+	int type=boxType->currentItem();
+	switch (type)
+	{
+		case 0:
+			acceptFunction();
+			break;
+
+		case 1:
+			acceptParametric();
+			break;
+
+		case 2:
+			acceptPolar();
+			break;
+	}
 }
 
-void fDialog::insertPolarFunctionsList(const QStringList& rList, const QStringList& tetaList)
+void FunctionDialog::insertParamFunctionsList(const QStringList& xList, const QStringList& yList)
 {
-boxPolarRadius->insertStringList (rList, 1);
-boxPolarTheta->insertStringList (tetaList, 1);	
+	boxXFunction->insertStringList (xList, 1);
+	boxYFunction->insertStringList (yList, 1);
 }
 
-fDialog::~fDialog()
+void FunctionDialog::insertPolarFunctionsList(const QStringList& rList, const QStringList& tetaList)
+{
+	boxPolarRadius->insertStringList (rList, 1);
+	boxPolarTheta->insertStringList (tetaList, 1);	
+}
+
+FunctionDialog::~FunctionDialog()
 {
 }

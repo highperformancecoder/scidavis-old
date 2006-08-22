@@ -34,7 +34,7 @@ class ScalePicker;
 class Graph3D;
 class Note;
 class MultiLayer;
-class fDialog;
+class FunctionDialog;
 class Folder;
 class FolderListItem;
 class FolderListView;
@@ -191,7 +191,7 @@ public slots:
 	void newFunctionPlot();
 	void newFunctionPlot(int type,QStringList &formulas, const QString& var,QValueList<double> &ranges, int points);
 
-	fDialog* functionDialog();
+	FunctionDialog* functionDialog();
 	void showFunctionDialog(int curveKey);
 	void showFunctionDialog(Graph *g, int curve);
 	void addFunctionCurve();

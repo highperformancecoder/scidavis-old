@@ -1762,7 +1762,7 @@ if ( ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 	{
 	Graph3D* g = (Graph3D*)ws->activeWindow();
 
-	sDialog* sd= new sDialog(this,"fDialog",TRUE,WStyle_Tool|WDestructiveClose);
+	sDialog* sd= new sDialog(this,"sDialog",TRUE,WStyle_Tool|WDestructiveClose);
 	connect (sd,SIGNAL(options(const QString&,double,double,double,double,double,double)),
 		g,SLOT(insertFunction(const QString&,double,double,double,double,double,double)));
 	connect (sd,SIGNAL(clearFunctionsList()),this,SLOT(clearSurfaceFunctionsList()));
@@ -1781,7 +1781,7 @@ if ( ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 
 void ApplicationWindow::newSurfacePlot()
 {
-sDialog* sd= new sDialog(this,"fDialog",TRUE,WStyle_Tool|WDestructiveClose);
+sDialog* sd= new sDialog(this,"sDialog",TRUE,WStyle_Tool|WDestructiveClose);
 connect (sd,SIGNAL(options(const QString&,double,double,double,double,double,double)),
 		this,SLOT(newPlot3D(const QString&,double,double,double,double,double,double)));
 connect (sd,SIGNAL(clearFunctionsList()),this,SLOT(clearSurfaceFunctionsList()));
@@ -8845,14 +8845,14 @@ void ApplicationWindow::showFunctionDialog(Graph *g, int curve)
 if ( !g )
 	return;
 
-fDialog* fd = functionDialog();
+FunctionDialog* fd = functionDialog();
 fd->setCaption(tr("QtiPlot - Edit function"));
 fd->setCurveToModify(g, curve);
 }
 
-fDialog* ApplicationWindow::functionDialog()
+FunctionDialog* ApplicationWindow::functionDialog()
 {
-fDialog* fd= new fDialog(this,"fDialog",TRUE,WStyle_Tool|WDestructiveClose);
+FunctionDialog* fd= new FunctionDialog(this,"FunctionDialog",TRUE,WStyle_Tool|WDestructiveClose);
 connect (fd,SIGNAL(clearParamFunctionsList()),this,SLOT(clearParamFunctionsList()));
 connect (fd,SIGNAL(clearPolarFunctionsList()),this,SLOT(clearPolarFunctionsList()));
 
@@ -8882,7 +8882,7 @@ Graph* g = ((MultiLayer*)w)->activeGraph();
 if ( g )
 	{
 	activeGraph=g;
-	fDialog* fd = functionDialog();
+	FunctionDialog* fd = functionDialog();
 	if (fd)
 		fd->setGraph(g);
 	}
@@ -8921,7 +8921,7 @@ else if (type == 1)
 
 void ApplicationWindow::newFunctionPlot()
 {
-fDialog* fd = functionDialog();
+FunctionDialog* fd = functionDialog();
 if (fd)
 	connect (fd,SIGNAL(newFunctionPlot(int, QStringList &, const QString&, QValueList<double> &, int )),
 		this,SLOT(newFunctionPlot(int, QStringList &, const QString&, QValueList<double> &, int)));
