@@ -263,7 +263,26 @@ public:
   int numParameters();
 
   void setInitialGuess(int, double);
-  void setInitialGuesses(double *);
+  void setInitialGuesses(...);
+%MethodCode
+int n = PyTuple_GET_SIZE(a0);
+double *values = new double[n];
+for (int i=0; i<n; i++) {
+  PyObject *item = PyTuple_GET_ITEM(a0, i);
+  if (PyNumber_Check(item)) {
+    item=PyNumber_Float(item);
+    if (!item) {
+      sipIsErr=1;
+      break;
+    }
+    values[i] = PyFloat_AS_DOUBLE(item);
+    Py_DECREF(item);
+  } else
+    values[i] = 0;
+}
+sipCpp->setInitialGuesses(values);
+delete values;
+%End
 
   virtual void guessInitialValues();
 
@@ -289,7 +308,21 @@ if(sipRes)
 {
   for(int i=0; i<size; i++)
     PyTuple_SET_ITEM(sipRes, i, PyFloat_FromDouble(results[i]));
-}
+} else
+  sipIsErr = 1;
+%End
+
+  SIP_PYTUPLE errors();
+%MethodCode
+double *errors = sipCpp->errors();
+int size=sipCpp->numParameters();
+sipRes = PyTuple_New(size);
+if(sipRes)
+{
+  for(int i=0; i<size; i++)
+    PyTuple_SET_ITEM(sipRes, i, PyFloat_FromDouble(errors[i]));
+} else
+  sipIsErr = 1;
 %End
 
   //! Returns the sum of squares of the residuals from the best-fit line
@@ -307,6 +340,14 @@ class ExponentialFit : Fit
 public:
   ExponentialFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, bool=false);
   ExponentialFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int, bool=false);
+  ExponentialFit(Graph *, const QString&, bool=false);
+%MethodCode
+  sipCpp = new sipExponentialFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2);
+%End
+  ExponentialFit(Graph *, const QString&, int, int, bool=false);
+%MethodCode
+  sipCpp = new sipExponentialFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3, a4);
+%End
 };
 
 class TwoExpFit : Fit
@@ -317,6 +358,14 @@ class TwoExpFit : Fit
 public:
   TwoExpFit(ApplicationWindow * /TransferThis/, Graph *, const QString&);
   TwoExpFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
+  TwoExpFit(Graph *, const QString&);
+%MethodCode
+  sipCpp = new sipTwoExpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+%End
+  TwoExpFit(Graph *, const QString&, int, int);
+%MethodCode
+  sipCpp = new sipTwoExpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+%End
 };
 
 class ThreeExpFit : Fit
@@ -327,6 +376,14 @@ class ThreeExpFit : Fit
 public:
   ThreeExpFit(ApplicationWindow * /TransferThis/, Graph *, const QString&);
   ThreeExpFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
+  ThreeExpFit(Graph *, const QString&);
+%MethodCode
+  sipCpp = new sipThreeExpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+%End
+  ThreeExpFit(Graph *, const QString&, int, int);
+%MethodCode
+  sipCpp = new sipThreeExpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+%End
 };
 
 class SigmoidalFit : Fit
@@ -337,6 +394,14 @@ class SigmoidalFit : Fit
 public:
   SigmoidalFit(ApplicationWindow * /TransferThis/, Graph *, const QString&);
   SigmoidalFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
+  SigmoidalFit(Graph *, const QString&);
+%MethodCode
+  sipCpp = new sipSigmoidalFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+%End
+  SigmoidalFit(Graph *, const QString&, int, int);
+%MethodCode
+  sipCpp = new sipSigmoidalFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+%End
 };
 
 class GaussAmpFit : Fit
@@ -347,6 +412,14 @@ class GaussAmpFit : Fit
 public:
   GaussAmpFit(ApplicationWindow * /TransferThis/, Graph *, const QString&);
   GaussAmpFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
+  GaussAmpFit(Graph *, const QString&);
+%MethodCode
+  sipCpp = new sipGaussAmpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+%End
+  GaussAmpFit(Graph *, const QString&, int, int);
+%MethodCode
+  sipCpp = new sipGaussAmpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+%End
 };
 
 class NonLinearFit : Fit
@@ -357,6 +430,14 @@ class NonLinearFit : Fit
 public:
   NonLinearFit(ApplicationWindow * /TransferThis/, Graph *, const QString&);
   NonLinearFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
+  NonLinearFit(Graph *, const QString&);
+%MethodCode
+  sipCpp = new sipNonLinearFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+%End
+  NonLinearFit(Graph *, const QString&, int, int);
+%MethodCode
+  sipCpp = new sipNonLinearFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+%End
   void setParametersList(const QStringList&);
   // TODO: make it accept Python callables
   void setFormula(const QString&);
@@ -370,6 +451,14 @@ class PluginFit : Fit
 public:
   PluginFit(ApplicationWindow * /TransferThis/, Graph *, const QString&);
   PluginFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
+  PluginFit(Graph *, const QString&);
+%MethodCode
+  sipCpp = new sipPluginFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+%End
+  PluginFit(Graph *, const QString&, int, int);
+%MethodCode
+  sipCpp = new sipPluginFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+%End
   bool load(const QString&);
 };
 
@@ -399,6 +488,14 @@ class LorentzFit : MultiPeakFit
 public:
   LorentzFit(ApplicationWindow * /TransferThis/, Graph *, const QString&);
   LorentzFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
+  LorentzFit(Graph *, const QString&);
+%MethodCode
+  sipCpp = new sipLorentzFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+%End
+  LorentzFit(Graph *, const QString&, int, int);
+%MethodCode
+  sipCpp = new sipLorentzFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+%End
 };
 
 class GaussFit : MultiPeakFit
@@ -409,6 +506,14 @@ class GaussFit : MultiPeakFit
 public:
   GaussFit(ApplicationWindow * /TransferThis/, Graph *, const QString&);
   GaussFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
+  GaussFit(Graph *, const QString&);
+%MethodCode
+  sipCpp = new sipGaussFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+%End
+  GaussFit(Graph *, const QString&, int, int);
+%MethodCode
+  sipCpp = new sipGaussFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+%End
 };
 
 class PolynomialFit : Fit
@@ -419,6 +524,14 @@ class PolynomialFit : Fit
 public:
   PolynomialFit(ApplicationWindow * /TransferThis/, Graph *, QString&, int=2, bool=false);
   PolynomialFit(ApplicationWindow * /TransferThis/, Graph *, QString&, int, int, int=2, bool=false);
+  PolynomialFit(Graph *, QString&, int=2, bool=false);
+%MethodCode
+  sipCpp = new sipPolynomialFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+%End
+  PolynomialFit(Graph *, QString&, int, int, int=2, bool=false);
+%MethodCode
+  sipCpp = new sipPolynomialFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3, a4, a5);
+%End
 
   virtual QString legendFitInfo(int);
   void fit();
@@ -435,6 +548,25 @@ class LinearFit : Fit
 public:
   LinearFit(ApplicationWindow * /TransferThis/, Graph *, const QString&);
   LinearFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
+  LinearFit(Graph *, const QString&);
+%MethodCode
+  sipCpp = new sipLinearFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+%End
+  LinearFit(Graph *, const QString&, int, int);
+%MethodCode
+  sipCpp = new sipLinearFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+%End
   void fit();
+};
+
+class PythonScript
+{
+%TypeHeaderCode
+#include "src/PythonScripting.h"
+%End
+public:
+  void write(const QString&);
+private:
+  PythonScript(const PythonScript&);
 };
 

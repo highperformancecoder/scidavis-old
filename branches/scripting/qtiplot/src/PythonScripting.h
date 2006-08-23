@@ -16,6 +16,8 @@ class PythonScript : public Script
   public:
     PythonScript(PythonScripting *env, const QString &code, QObject *context=0, const QString &name="<input>");
     ~PythonScript();
+
+    void write(const QString &text) { emit print(text.stripWhiteSpace()); }
 	
   public slots:
     bool compile(bool for_eval=true);
@@ -28,8 +30,10 @@ class PythonScript : public Script
 
   private:
     PythonScripting *env() { return (PythonScripting*)Env; }
+    void beginStdoutRedirect();
+    void endStdoutRedirect();
 
-    PyObject *PyCode, *localDict;
+    PyObject *PyCode, *localDict, *stdoutSave, *stderrSave;
     bool isFunction;
 };
 
@@ -64,10 +68,12 @@ class PythonScripting: public ScriptingEnv
     const QString mathFunctionDoc (const QString &name) const;
 
     PyObject *globalDict() { return globals; }
+    PyObject *sysDict() { return sys; }
 
   private:
     PyObject *globals;		// PyDict of global environment
     PyObject *math;		// PyDict of math module
+    PyObject *sys;		// PyDict of sys module
 };
 
 #endif

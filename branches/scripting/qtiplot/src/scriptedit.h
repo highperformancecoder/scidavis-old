@@ -25,6 +25,7 @@ class ScriptEdit: public QTextEdit, public scripted
     void insertFunction(const QString &);
     void insertFunction(int);
     void setContext(QObject *context) { myScript->setContext(context); }
+    void scriptPrint(const QString&);
 
   protected:
     QPopupMenu *createPopupMenu (const QPoint & pos);

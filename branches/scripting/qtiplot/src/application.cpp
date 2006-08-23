@@ -4024,6 +4024,15 @@ void ApplicationWindow::scriptError(const QString &message, const QString &scrip
   QMessageBox::critical(this, "QtiPlot - Script Error", errmsg);
 }
 
+void ApplicationWindow::scriptPrint(const QString &text)
+{
+#ifdef SCRIPTING_CONSOLE
+  console->append(text);
+#else
+  printf(text.ascii());
+#endif
+}
+
 void ApplicationWindow::showScriptingLangDialog()
 {
 ScriptingLangDialog* d = new ScriptingLangDialog(scriptEnv,this,"scriptingLangDialog",TRUE,WStyle_Tool|WDestructiveClose);

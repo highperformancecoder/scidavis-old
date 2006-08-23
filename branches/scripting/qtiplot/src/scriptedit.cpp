@@ -13,6 +13,7 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
 {
   myScript = scriptEnv->newScript("", this, name);
   connect(myScript, SIGNAL(error(const QString&,const QString&,int)), this, SLOT(insertErrorMsg(const QString&)));
+  connect(myScript, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
   
   setWordWrap(QTextEdit::NoWrap);
   setTextFormat(PlainText);
@@ -84,6 +85,12 @@ void ScriptEdit::insertErrorMsg(const QString &message)
   err.prepend("\n").replace("\n","\n#> ");
   removeSelection();
   insert(err,(uint)QTextEdit::CheckNewLines);
+}
+
+void ScriptEdit::scriptPrint(const QString &text)
+{
+  insert("\n",(uint)QTextEdit::CheckNewLines);
+  insert(text,(uint)QTextEdit::CheckNewLines);
 }
 
 void ScriptEdit::insertFunction(const QString &fname)

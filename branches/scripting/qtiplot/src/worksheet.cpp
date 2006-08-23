@@ -382,6 +382,7 @@ bool Table::calculate(int col, int startRow, int endRow)
 
   Script *colscript = scriptEnv->newScript(commandes[col], this,  QString("<%1>").arg(colName(col)));
   connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
+  connect(colscript, SIGNAL(print(const QString&)), parent()->parent()->parent(), SLOT(scriptPrint(const QString&)));
   
   if (!colscript->compile())
   {

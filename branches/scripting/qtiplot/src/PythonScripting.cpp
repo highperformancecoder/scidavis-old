@@ -7,8 +7,8 @@
 #include <eval.h>
 #include <frameobject.h>
 #include <traceback.h>
-// for Python < 2.4, uncomment the following
-/*
+
+#if PY_VERSION_HEX < 0x020400A1
 typedef struct _traceback {
         PyObject_HEAD
         struct _traceback *tb_next;
@@ -16,7 +16,7 @@ typedef struct _traceback {
         int tb_lasti;
         int tb_lineno;
 } PyTracebackObject;
- */
+#endif
 
 #include "PythonScripting.h"
 #include "sipAPIqti.h"
@@ -135,7 +135,7 @@ bool PythonScripting::importModule(char *name)
 PythonScripting::PythonScripting(ApplicationWindow *parent)
 : ScriptingEnv(parent, langName)
 {
-  PyObject *mainmod=NULL, *mathmod=NULL, *qtimod=NULL;
+  PyObject *mainmod=NULL, *mathmod=NULL, *qtimod=NULL, *sysmod=NULL;
   if (Py_IsInitialized())
   {
     PyEval_AcquireLock();
@@ -201,13 +201,15 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
       PyErr_Print();
   } else
     PyErr_Print();
-
-#ifdef SCRIPTING_CONSOLE
-  const char *console="class ConsoleWriter:\n\tdef write(self, stuff):\n\t\tqti.app.console.append(stuff.strip())\n\nsys.stdout=ConsoleWriter()\nsys.stderr=ConsoleWriter()\n";
-  if (qtimod && !exec(console))
+  sipExportSymbol("qti.app",Parent);
+  sysmod = PyImport_ImportModule("sys");
+  if (sysmod)
+  {
+    sys = PyModule_GetDict(sysmod);
+    Py_INCREF(sys);
+  } else
     PyErr_Print();
-#endif
-
+  
   PyEval_ReleaseLock();
   initialized=true;
 }
@@ -398,6 +400,7 @@ QVariant PythonScript::eval()
   if (compiled != isCompiled && !compile(true))
     return QVariant();
   PyObject *pyret;
+  beginStdoutRedirect();
   if (PyCallable_Check(PyCode))
   {
     PyObject *empty_tuple = PyTuple_New(0);
@@ -405,6 +408,7 @@ QVariant PythonScript::eval()
     Py_DECREF(empty_tuple);
   } else
     pyret = PyEval_EvalCode((PyCodeObject*)PyCode, env()->globalDict(), localDict);
+  endStdoutRedirect();
   if (!pyret)
   {
     emit_error(env()->errorMsg(), 0);
@@ -461,6 +465,7 @@ bool PythonScript::exec()
   if (compiled != Script::isCompiled && !compile(false))
     return false;
   PyObject *pyret;
+  beginStdoutRedirect();
   if (PyCallable_Check(PyCode))
   {
     PyObject *empty_tuple = PyTuple_New(0);
@@ -472,12 +477,29 @@ bool PythonScript::exec()
     Py_DECREF(empty_tuple);
   } else
     pyret = PyEval_EvalCode((PyCodeObject*)PyCode, env()->globalDict(), localDict);
+  endStdoutRedirect();
   if (pyret) {
     Py_DECREF(pyret);
     return true;
   }
   emit_error(env()->errorMsg(), 0);
   return false;
+}
+
+void PythonScript::beginStdoutRedirect()
+{
+  stdoutSave = PyDict_GetItemString(env()->sysDict(), "stdout");
+  Py_XINCREF(stdoutSave);
+  stderrSave = PyDict_GetItemString(env()->sysDict(), "stderr");
+  Py_XINCREF(stderrSave);
+  env()->setQObject(this, "stdout", env()->sysDict());
+  env()->setQObject(this, "stderr", env()->sysDict());
+}
+
+void PythonScript::endStdoutRedirect()
+{
+  PyDict_SetItemString(env()->sysDict(), "stdout", stdoutSave);
+  PyDict_SetItemString(env()->sysDict(), "stderr", stderrSave);
 }
 
 bool PythonScript::setQObject(QObject *val, const char *name)

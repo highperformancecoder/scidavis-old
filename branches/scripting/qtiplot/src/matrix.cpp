@@ -515,6 +515,7 @@ bool Matrix::calculate(int startRow, int endRow, int startCol, int endCol)
 
   Script *script = scriptEnv->newScript(formula_str, this, QString("<%1>").arg(name()));
   connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int))); 
+  connect(script, SIGNAL(print(const QString&)), parent()->parent()->parent(), SLOT(scriptPrint(const QString&)));
   if (!script->compile())
   {
     QApplication::restoreOverrideCursor();

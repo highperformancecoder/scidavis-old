@@ -736,6 +736,8 @@ public slots:
 	void showScriptingLangDialog();
 	//! create a new environment for the current scripting language
 	void restartScriptingEnv();
+	//! print to scripting console (if available) or to stdout
+	void scriptPrint(const QString &text);
 
 signals:
 	void modified();
