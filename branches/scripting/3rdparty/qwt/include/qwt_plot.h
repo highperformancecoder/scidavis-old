@@ -46,8 +46,8 @@ class QwtPlotPrintFilter;
   way to use QwtPlot. By default, only the left and bottom axes are
   visible and their scales are computed automatically.
   \verbatim
-#include "../include/qwt_plot.h>
-#include "../include/qwt_plot_curve.h>
+#include <qwt_plot.h>
+#include <qwt_plot_curve.h>
 
 QwtPlot *myPlot;
 double x[100], y1[100], y2[100];        // x and y values

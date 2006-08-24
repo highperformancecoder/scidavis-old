@@ -2265,10 +2265,7 @@ initMultilayerPlot(g, label.replace(QRegExp("_"),"-"));
 return g;
 }
 
-/*
-*creates a new empty multilayer plot
-*/
-void ApplicationWindow::newGraph()
+MultiLayer* ApplicationWindow::newGraph()
 {
 MultiLayer* g = multilayerPlot(tr("graph1"));
 if (g)
@@ -2278,6 +2275,7 @@ if (g)
 	customGraph(activeGraph);
 	activeGraph->replot();
 	}
+return g;
 }
 
 MultiLayer* ApplicationWindow::multilayerPlot(Table* w, const QStringList& colList, int style)
@@ -2580,11 +2578,10 @@ if (w->name() != caption)//the table was renamed
 	{
 	renamedTables << caption << w->name();
 
-	QApplication::restoreOverrideCursor();
-	QMessageBox:: warning(this, "QtiPlot - Renamed Window", 
+	QMessageBox:: warning(this, tr("QtiPlot - Renamed Window"),
 	tr("The table '%1' already exists. It has been renamed '%2'.").arg(caption).arg(w->name()));
-	QApplication::setOverrideCursor(waitCursor);
 	}
+w->showNormal();
 return w;
 }
 
@@ -2743,11 +2740,10 @@ if (w->name() != caption)//the matrix was renamed
 	{
 	renamedTables << caption << w->name();
 
-	QApplication::restoreOverrideCursor();
-	QMessageBox:: warning(this, "QtiPlot - Renamed Window", 
+	QMessageBox:: warning(this, tr("QtiPlot - Renamed Window"), 
 	tr("The matrix '%1' already exists. It has been renamed '%2'.").arg(caption).arg(w->name()));
-	QApplication::setOverrideCursor(waitCursor);
 	}
+w->showNormal();	
 return w;
 }
 
@@ -9625,7 +9621,6 @@ else if (s.contains ("maximized"))
 else
 	{
 	QStringList lst=QStringList::split ("\t",s,TRUE);
-	w->showNormal();
 	w->parentWidget()->setGeometry(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
 	((myWidget *)w)->setStatus(myWidget::Normal);
 

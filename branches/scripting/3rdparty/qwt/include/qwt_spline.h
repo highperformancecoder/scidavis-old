@@ -11,6 +11,7 @@
 #define QWT_SPLINE_H
 
 #include "qwt_global.h"
+#include "qwt_array.h"
 
 /*!
   \brief A class for spline interpolation
@@ -20,42 +21,45 @@
   
   \par Usage:
   <ol>
-  <li>First call QwtSpline::recalc() to determine the spline coefficients 
+  <li>First call QwtSpline::buildSpline() to determine the spline coefficients 
       for a tabulated function y(x).
   <li>After the coefficients have been set up, the interpolated
       function value for an argument x can be determined by calling 
       QwtSpline::value().
   </ol>
-  In order to save storage space, QwtSpline can be advised
-  not to buffer the contents of x and y.
-  This means that the arrays have to remain valid and unchanged
-  for the interpolation to work properly. This can be achieved
-  by calling QwtSpline::copyValues().
 
   \par Example:
   \code
-#include<qwt_spline.h>
-#include<iostream.h>
+#include <qwt_spline.h>
+#include <qwt_array.h>
+#include <iostream.h>
+
+const int numPoints = 30;
+QwtArray x(numPoints); 
+QwtArray y(numPoints); 
+
+for(int i = 0; i < numPoints; i++)  // fill up x[] and y[]
+   std::cin >> x[i] >> y[i];
 
 QwtSpline s;
-double x[30], y[30], xInter[300], yInter[300];
-int i;
-
-for(i=0;i<30;i++)               // fill up x[] and y[]
-cin >> x[i] >> y[i];
-
-if (s.recalc(x,y,30,0) == 0)    // build natural spline
+if ( s.buildSpline(x, y, numPoints, false) )    // build natural spline
 {
-   for(i=0;i<300;i++)          // interpolate
-   {
-     xInter[i] = x[0] + double(i) * (x[29] - x[0]) / 299.0;
-     yInter[i] = s.value( xInter[i] );
-   }
+    const int numValues = 300;
 
-   do_something(xInter, yInter, 300);
+    QwtArray xInter(numValues); 
+    QwtArray yInter(numValues);
+
+    const double delta = (x[numPoints - 1] - x[0]) / (numValues - 1);
+    for(i = 0; i < numValues; i++)  / interpolate
+    {
+        xInter[i] = x[0] + i * delta;
+        yInter[i] = s.value( xInter[i] );
+    }
+
+    do_something(xInter, yInter);
 }
 else
-  cerr << "Uhhh...\n";
+    std::cerr << "Uhhh...\n";
   \endcode
 */
 
@@ -66,12 +70,13 @@ public:
     ~QwtSpline();
 
     double value(double x) const;
-    bool recalc(double *x, double *y, int n, bool periodic = false);
-    void copyValues(bool tf = true);
+    bool buildSpline(
+        const QwtArray<double> &x, const QwtArray<double> &y, 
+        int n, bool periodic = false);
 
 private:
-    bool buildPerSpline();
-    bool buildNatSpline();
+    bool buildPeriodicSpline();
+    bool buildNaturalSpline();
     int lookup(double x) const;
     void cleanup();
 

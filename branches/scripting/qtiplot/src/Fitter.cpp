@@ -384,6 +384,7 @@ t->setHeaderColType();
 for (int j=0; j<3; j++)
 	t->table()->adjustColumn(j);
 
+t->showNormal();	
 return t;
 }
 
@@ -398,6 +399,7 @@ for (int i = 0; i < d_p; i++)
 	for (int j = 0; j < d_p; j++)
 		m->setText(i, j, QString::number(gsl_matrix_get(covar, i, j), 'g', prec));
 	}
+m->showNormal();
 return m;
 }
 
@@ -425,10 +427,22 @@ if (!d_graph)
 if (!d_n)
 	{
 	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"),
-		tr("No data assigned to the fitter. Operation aborted!"));
+		tr("You didn't specify a data set for this fit operation. Operation aborted!"));
 	return;
 	}
-
+if (!d_p)
+	{
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"),
+		tr("There are no parameters specified for this fit operation. Operation aborted!"));
+	return;
+	}
+if (d_formula.isEmpty())
+	{
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"),
+		tr("You must specify a valid fit function first. Operation aborted!"));
+	return;
+	}
+	
 QApplication::setOverrideCursor(waitCursor);
 
 const char *function = d_formula.ascii();
@@ -596,6 +610,8 @@ d_fdf = exp_fdf;
 d_fsimplex = exp_d;
 d_p = 3;
 d_param_init = gsl_vector_alloc(d_p);
+gsl_vector_set_all (d_param_init, 1.0);
+	
 covar = gsl_matrix_alloc (d_p, d_p);
 d_results = new double[d_p];
 d_param_names << "A" << "t" << "y0";
@@ -683,6 +699,7 @@ d_fdf = expd2_fdf;
 d_fsimplex = expd2_d;
 d_p = 5;
 d_param_init = gsl_vector_alloc(d_p);
+gsl_vector_set_all (d_param_init, 1.0);
 covar = gsl_matrix_alloc (d_p, d_p);
 d_results = new double[d_p];
 d_param_names << "A1" << "t1" << "A2" << "t2" << "y0";
@@ -757,6 +774,7 @@ d_fdf = expd3_fdf;
 d_fsimplex = expd3_d;
 d_p = 7;
 d_param_init = gsl_vector_alloc(d_p);
+gsl_vector_set_all (d_param_init, 1.0);
 covar = gsl_matrix_alloc (d_p, d_p);
 d_results = new double[d_p];
 d_param_names << "A1" << "t1" << "A2" << "t2" << "A3" << "t3" << "y0";
@@ -832,6 +850,7 @@ d_fdf = boltzmann_fdf;
 d_fsimplex = boltzmann_d;
 d_p = 4;
 d_param_init = gsl_vector_alloc(d_p);
+gsl_vector_set_all (d_param_init, 1.0);
 covar = gsl_matrix_alloc (d_p, d_p);
 d_results = new double[d_p];
 d_param_explain << tr("(init value)") << tr("(final value)") << tr("(center)") << tr("(time constant)");
@@ -912,6 +931,7 @@ d_fdf = gauss_fdf;
 d_fsimplex = gauss_d;
 d_p = 4;
 d_param_init = gsl_vector_alloc(d_p);
+gsl_vector_set_all (d_param_init, 1.0);
 covar = gsl_matrix_alloc (d_p, d_p);
 d_results = new double[d_p];
 d_param_explain << tr("(offset)") << tr("(height)") << tr("(center)") << tr("(width)");
@@ -983,8 +1003,51 @@ d_fsimplex = user_d;
 d_fit_type = tr("Non-linear");
 }
 
+void NonLinearFit::setFormula(const QString& s)
+{
+if (s.isEmpty()) 
+	{
+	QMessageBox::critical((ApplicationWindow *)parent(),  tr("QtiPlot - Input function error"), 
+		tr("Please enter a valid non-empty expression! Operation aborted!"));
+	return;
+	}
+
+if (d_formula == s) 
+	return;
+
+try
+	{
+	double *param = new double[d_p];
+	myParser parser;
+	double xvar; 
+	parser.DefineVar("x", &xvar);
+	for (int k=0; k<(int)d_p; k++)
+		{
+		param[k]=gsl_vector_get(d_param_init, k);
+		parser.DefineVar(d_param_names[k].ascii(), &param[k]);
+		}
+	parser.SetExpr(s.ascii());
+	parser.Eval() ;
+	delete[] param;
+	}
+catch(mu::ParserError &e)
+	{
+	QMessageBox::critical((ApplicationWindow *)parent(),  tr("QtiPlot - Input function error"), e.GetMsg());
+	return;
+	}
+	
+d_formula = s;
+}
+
 void NonLinearFit::setParametersList(const QStringList& lst)
 {
+if ((int)lst.count() < 2)
+	{
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"),
+		tr("You must provide a list containing at least 2 parameters for this type of fit. Operation aborted!"));
+	return;
+	}
+
 d_param_names = lst;
 
 if (d_p > 0)
@@ -996,6 +1059,8 @@ if (d_p > 0)
 
 d_p = (int)lst.count();
 d_param_init = gsl_vector_alloc(d_p);
+gsl_vector_set_all (d_param_init, 1.0);
+	
 covar = gsl_matrix_alloc (d_p, d_p);
 d_results = new double[d_p];
 }
@@ -1758,9 +1823,6 @@ if (d_weihting == NoWeighting)
 else
 	gsl_fit_wlinear(d_x, 1, d_w, 1, d_y, 1, d_n, &c0, &c1, &cov00, &cov01, &cov11, &chi_2);
 
-double sst = (d_n-1)*gsl_stats_variance(d_y, 1, d_n);
-double Rsquare = 1 - chi_2/sst;
-
 d_results[0] = c0;
 d_results[1] = c1;
 gsl_vector_free (c);
@@ -1798,4 +1860,3 @@ else
 		}
 	}
 }
-

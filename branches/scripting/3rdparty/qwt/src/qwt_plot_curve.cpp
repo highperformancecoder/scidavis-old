@@ -922,8 +922,8 @@ void QwtPlotCurve::drawSpline(QPainter *painter,
     int i;
 
     const int size = dataSize();
-    double *txval = new double[size];
-    double *tyval = new double[size];
+    QwtArray<double> txval(size);
+    QwtArray<double> tyval(size);
 
     //
     // Transform x and y values to window coordinates
@@ -939,11 +939,11 @@ void QwtPlotCurve::drawSpline(QPainter *painter,
     int stype;
     if (! (d_data->attributes & (Yfx|Xfy|Parametric)))
     {
-        if (qwtChkMono(txval, size))
+        if (qwtChkMono(txval.data(), size))
         {
             stype = Yfx;
         }
-        else if(qwtChkMono(tyval, size))
+        else if(qwtChkMono(tyval.data(), size))
         {
             stype = Xfy;
         }
@@ -971,7 +971,7 @@ void QwtPlotCurve::drawSpline(QPainter *painter,
         //
         // setup parameter vector
         //
-        double *param = new double[size];
+        QwtArray<double> param(size);
         param[0] = 0.0;
         for (i=1; i<size; i++)
         {
@@ -983,9 +983,9 @@ void QwtPlotCurve::drawSpline(QPainter *painter,
         //
         // setup splines
         QwtSpline spx, spy;
-        ok = spx.recalc(param, txval, size, stype & Periodic);
+        ok = spx.buildSpline(param, txval, size, stype & Periodic);
         if (ok)
-            ok = spy.recalc(param, tyval, size, stype & Periodic);
+            ok = spy.buildSpline(param, tyval, size, stype & Periodic);
 
         if ( ok )
         {
@@ -999,23 +999,22 @@ void QwtPlotCurve::drawSpline(QPainter *painter,
                     qRound(spy.value(dtmp)) );
             }
         }
-        delete[] param;
     }
     else if (stype & Xfy)
     {
         if (tyval[size-1] < tyval[0])
         {
-            qwtTwistArray(txval, size);
-            qwtTwistArray(tyval, size);
+            qwtTwistArray(txval.data(), size);
+            qwtTwistArray(tyval.data(), size);
         }
 
         // 1. Calculate spline coefficients
         QwtSpline spx;
-        ok = spx.recalc(tyval, txval, size, stype & Periodic);
+        ok = spx.buildSpline(tyval, txval, size, stype & Periodic);
         if ( ok )
         {
-            const double ymin = qwtGetMin(tyval, size);
-            const double ymax = qwtGetMax(tyval, size);
+            const double ymin = qwtGetMin(tyval.data(), size);
+            const double ymax = qwtGetMax(tyval.data(), size);
             const double delta = (ymax - ymin) / double(d_data->splineSize - 1);
 
             for (i = 0; i < d_data->splineSize; i++)
@@ -1030,17 +1029,17 @@ void QwtPlotCurve::drawSpline(QPainter *painter,
     {
         if (txval[size-1] < txval[0])
         {
-            qwtTwistArray(tyval, size);
-            qwtTwistArray(txval, size);
+            qwtTwistArray(tyval.data(), size);
+            qwtTwistArray(txval.data(), size);
         }
 
         // 1. Calculate spline coefficients
         QwtSpline spy;
-        ok = spy.recalc(txval, tyval, size, stype & Periodic);
+        ok = spy.buildSpline(txval, tyval, size, stype & Periodic);
         if ( ok )
         {
-            const double xmin = qwtGetMin(txval, size);
-            const double xmax = qwtGetMax(txval, size);
+            const double xmin = qwtGetMin(txval.data(), size);
+            const double xmax = qwtGetMax(txval.data(), size);
             const double delta = (xmax - xmin) / double(d_data->splineSize - 1);
 
             for (i = 0; i < d_data->splineSize; i++)
@@ -1051,9 +1050,6 @@ void QwtPlotCurve::drawSpline(QPainter *painter,
             }
         }
     }
-
-    delete[] txval;
-    delete[] tyval;
 
     if ( ok )
     {

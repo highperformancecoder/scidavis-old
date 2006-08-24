@@ -109,7 +109,6 @@ void Table::colWidthModified(int, int, int)
 emit modifiedWindow(this);
 }
 
-
 void Table::setBackgroundColor(const QColor& col)
 {
 worksheet->setPaletteBackgroundColor ( col );
@@ -1204,8 +1203,7 @@ while (N < rows)
 double *tmpdata = new double[N];
 double *tmpdata2 = new double[N];
 if(tmpdata && tmpdata2) 
-	{
-	// zero-pad the two arrays...
+	{// zero-pad the two arrays...
 	memset( tmpdata, 0, N * sizeof( double ) );
 	memset( tmpdata2, 0, N * sizeof( double ) );
 	for(i=0;i<rows;i++) 

@@ -14,28 +14,20 @@ class QwtSpline::PrivateData
 {
 public:
     PrivateData():
-        size(0),
-        buffered(false)
+        size(0)
     {
-        a = b = c = NULL;
-        xbuffer = ybuffer = x = y = NULL;
     }
 
     // coefficient vectors
-    double *a;
-    double *b;
-    double *c;
-    double *d;
+    QwtArray<double> a;
+    QwtArray<double> b;
+    QwtArray<double> c;
+    QwtArray<double> d;
 
     // values
-    double *x;
-    double *y;
-    double *xbuffer;
-    double *ybuffer;
+    QwtArray<double> x;
+    QwtArray<double> y;
     int size;
-
-    //flags
-    bool buffered;
 };
 
 //! CTOR
@@ -47,37 +39,7 @@ QwtSpline::QwtSpline()
 //! DTOR
 QwtSpline::~QwtSpline()
 {
-    cleanup();
     delete d_data;
-}
-
-
-/*!
-  \brief Advise recalc() to buffer the tabulated function or switch off
-         internal buffering
-
-  By default, QwtSpline maintains an internal copy of the
-  tabulated function given as *x and *y arguments
-  of QwtSpline::recalc(). 
-
-  If QwtSpline::copyValues() is called with zero argument,
-  subsequent calls to QwtSpline::recalc() will not buffer these values
-  anymore and just store the pointers instead. The QwtSpline::value()
-  function will then silently assume that these pointers remained valid
-  and that the contents of the arrays have not been changed since
-  the last QwtSpline::recalc().
-
-  If called with no or nonzero argument,
-  any following QwtSpline::recalc() calls will use the internal buffer. 
-
-  \param tf if nonzero, the function table will be buffered
-  \warning copyValues() resets all the contents of QwtSpline.
-           A subsequent recalc() will be necessary.
-*/
-void QwtSpline::copyValues(bool tf)
-{
-    cleanup();
-    d_data->buffered = tf;
 }
 
 /*!
@@ -86,7 +48,7 @@ void QwtSpline::copyValues(bool tf)
 */
 double QwtSpline::value(double x) const
 {
-    if (!d_data->a)
+    if (d_data->a.size() == 0)
         return 0.0;
 
     const int i = lookup(x);
@@ -99,7 +61,7 @@ double QwtSpline::value(double x) const
 //! Determine the function table index corresponding to a value x
 int QwtSpline::lookup(double x) const
 {
-    int i1, i2, i3;
+    int i1;
     
     if (x <= d_data->x[0])
        i1 = 0;
@@ -108,8 +70,8 @@ int QwtSpline::lookup(double x) const
     else
     {
         i1 = 0;
-        i2 = d_data->size -2;
-        i3 = 0;
+        int i2 = d_data->size -2;
+        int i3 = 0;
 
         while ( i2 - i1 > 1 )
         {
@@ -127,61 +89,50 @@ int QwtSpline::lookup(double x) const
 
 
 /*!
-  \brief re-calculate the spline coefficients
+  \brief Calculate the spline coefficients
 
   Depending on the value of \a periodic, this function
   will determine the coefficients for a natural or a periodic
-  spline and store them internally. By default, it also buffers the
-  values of x and y, which are needed for the
-  interpolation (See QwtSpline::value()). In order to save memory,
-  this last behaviour may be changed with the QwtSpline::copyValues() function.
+  spline and store them internally. 
   
   \param x
   \param y points
-  \param n number of points
+  \param size number of points
   \param periodic if true, calculate periodic spline
   \return true if successful
   \warning The sequence of x (but not y) values has to be strictly monotone
            increasing, which means <code>x[0] < x[1] < .... < x[n-1]</code>.
        If this is not the case, the function will return false
 */
-bool QwtSpline::recalc(double *x, double *y, int n, bool periodic)
+bool QwtSpline::buildSpline(
+    const QwtArray<double> &x, const QwtArray<double> &y, 
+    int size, bool periodic)
 {
-    cleanup();
-
-    if (n <= 2)
+    if (size <= 2) {
+        cleanup();
         return false;
-
-    d_data->size = n;
-
-    if (d_data->buffered)
-    {
-        d_data->xbuffer = new double[n];
-        d_data->ybuffer = new double[n];
-
-        for (int i = 0; i < n; i++)
-        {
-            d_data->xbuffer[i] = x[i];
-            d_data->ybuffer[i] = y[i];
-        }
-        d_data->x = d_data->xbuffer;
-        d_data->y = d_data->ybuffer;
     }
-    else
-    {
-        d_data->x = x;
-        d_data->y = y;
-    }
+
+    d_data->size = size;
+
+#if QT_VERSION < 0x040000
+    // With Qt3 this is a deep copy.
+    d_data->x = x.copy();
+    d_data->y = y.copy();
+#else
+    d_data->x = x;
+    d_data->y = y;
+#endif
     
-    d_data->a = new double[n-1];
-    d_data->b = new double[n-1];
-    d_data->c = new double[n-1];
+    d_data->a.resize(size-1);
+    d_data->b.resize(size-1);
+    d_data->c.resize(size-1);
 
     bool ok;
     if(periodic)
-       ok =  buildPerSpline();
+       ok =  buildPeriodicSpline();
     else
-       ok =  buildNatSpline();
+       ok =  buildNaturalSpline();
 
     if (!ok) 
         cleanup();
@@ -193,36 +144,38 @@ bool QwtSpline::recalc(double *x, double *y, int n, bool periodic)
   \brief Determines the coefficients for a natural spline
   \return true if successful
 */
-bool QwtSpline::buildNatSpline()
+bool QwtSpline::buildNaturalSpline()
 {
     int i;
     
-    double *d = new double[d_data->size-1];
-    double *h = new double[d_data->size-1];
-    double *s = new double[d_data->size];
+    QwtArray<double> d(d_data->size-1);
+    QwtArray<double> h(d_data->size-1);
+    QwtArray<double> s(d_data->size);
+
+    const double *x = d_data->x.data();
+    const double *y = d_data->y.data();
+    double *a = d_data->a.data();
+    double *b = d_data->b.data();
+    double *c = d_data->c.data();
+    const int &size = d_data->size;
 
     //
     //  set up tridiagonal equation system; use coefficient
     //  vectors as temporary buffers
-    for (i = 0; i < d_data->size - 1; i++) 
+    for (i = 0; i < size - 1; i++) 
     {
-        h[i] = d_data->x[i+1] - d_data->x[i];
+        h[i] = x[i+1] - x[i];
         if (h[i] <= 0)
-        {
-            delete[] h;
-            delete[] s;
-            delete[] d;
             return false;
-        }
     }
     
-    double dy1 = (d_data->y[1] - d_data->y[0]) / h[0];
-    for (i = 1; i < d_data->size - 1; i++)
+    double dy1 = (y[1] - y[0]) / h[0];
+    for (i = 1; i < size - 1; i++)
     {
-        d_data->b[i] = d_data->c[i] = h[i];
-        d_data->a[i] = 2.0 * (h[i-1] + h[i]);
+        b[i] = c[i] = h[i];
+        a[i] = 2.0 * (h[i-1] + h[i]);
 
-        const double dy2 = (d_data->y[i+1] - d_data->y[i]) / h[i];
+        const double dy2 = (y[i+1] - y[i]) / h[i];
         d[i] = 6.0 * ( dy1 - dy2);
         dy1 = dy2;
     }
@@ -232,37 +185,33 @@ bool QwtSpline::buildNatSpline()
     //
     
     // L-U Factorization
-    for(i = 1; i < d_data->size - 2;i++)
+    for(i = 1; i < size - 2;i++)
     {
-        d_data->c[i] /= d_data->a[i];
-        d_data->a[i+1] -= d_data->b[i] * d_data->c[i]; 
+        c[i] /= a[i];
+        a[i+1] -= b[i] * c[i]; 
     }
 
     // forward elimination
     s[1] = d[1];
-    for(i=2;i<d_data->size - 1;i++)
-       s[i] = d[i] - d_data->c[i-1] * s[i-1];
+    for ( i = 2; i < size - 1; i++)
+       s[i] = d[i] - c[i-1] * s[i-1];
     
     // backward elimination
-    s[d_data->size - 2] = - s[d_data->size - 2] / d_data->a[d_data->size - 2];
-    for (i= d_data->size -3; i > 0; i--)
-       s[i] = - (s[i] + d_data->b[i] * s[i+1]) / d_data->a[i];
+    s[size - 2] = - s[size - 2] / a[size - 2];
+    for (i= size -3; i > 0; i--)
+       s[i] = - (s[i] + b[i] * s[i+1]) / a[i];
 
     //
     // Finally, determine the spline coefficients
     //
-    s[d_data->size - 1] = s[0] = 0.0;
-    for (i = 0; i < d_data->size - 1; i++)
+    s[size - 1] = s[0] = 0.0;
+    for (i = 0; i < size - 1; i++)
     {
-        d_data->a[i] = ( s[i+1] - s[i] ) / ( 6.0 * h[i]);
-        d_data->b[i] = 0.5 * s[i];
-        d_data->c[i] = ( d_data->y[i+1] - d_data->y[i] ) 
+        a[i] = ( s[i+1] - s[i] ) / ( 6.0 * h[i]);
+        b[i] = 0.5 * s[i];
+        c[i] = ( y[i+1] - y[i] ) 
             / h[i] - (s[i+1] + 2.0 * s[i] ) * h[i] / 6.0; 
     }
-
-    delete[] d;
-    delete[] s;
-    delete[] h;
 
     return true;
 }
@@ -271,38 +220,40 @@ bool QwtSpline::buildNatSpline()
   \brief Determines the coefficients for a periodic spline
   \return true if successful
 */
-bool QwtSpline::buildPerSpline()
+bool QwtSpline::buildPeriodicSpline()
 {
     int i;
     
-    double *d = new double[d_data->size-1];
-    double *h = new double[d_data->size-1];
-    double *s = new double[d_data->size];
+    QwtArray<double> d(d_data->size-1);
+    QwtArray<double> h(d_data->size-1);
+    QwtArray<double> s(d_data->size);
     
+    const double *x = d_data->x.data();
+    const double *y = d_data->y.data();
+    double *a = d_data->a.data();
+    double *b = d_data->b.data();
+    double *c = d_data->c.data();
+    const int &size = d_data->size;
+
     //
     //  setup equation system; use coefficient
     //  vectors as temporary buffers
     //
-    for (i=0; i<d_data->size - 1; i++)
+    for (i = 0; i < size - 1; i++)
     {
-        h[i] = d_data->x[i+1] - d_data->x[i];
+        h[i] = x[i+1] - x[i];
         if (h[i] <= 0.0)
-        {
-            delete[] h;
-            delete[] s;
-            delete[] d;
             return false;
-        }
     }
     
-    const int imax = d_data->size - 2;
+    const int imax = size - 2;
     double htmp = h[imax];
-    double dy1 = (d_data->y[0] - d_data->y[imax]) / htmp;
-    for (i=0; i <= imax; i++)
+    double dy1 = (y[0] - y[imax]) / htmp;
+    for (i = 0; i <= imax; i++)
     {
-        d_data->b[i] = d_data->c[i] = h[i];
-        d_data->a[i] = 2.0 * (htmp + h[i]);
-        const double dy2 = (d_data->y[i+1] - d_data->y[i]) / h[i];
+        b[i] = c[i] = h[i];
+        a[i] = 2.0 * (htmp + h[i]);
+        const double dy2 = (y[i+1] - y[i]) / h[i];
         d[i] = 6.0 * ( dy1 - dy2);
         dy1 = dy2;
         htmp = h[i];
@@ -313,54 +264,50 @@ bool QwtSpline::buildPerSpline()
     //
     
     // L-U Factorization
-    d_data->a[0] = sqrt(d_data->a[0]);
-    d_data->c[0] = h[imax] / d_data->a[0];
+    a[0] = sqrt(a[0]);
+    c[0] = h[imax] / a[0];
     double sum = 0;
 
-    for(i=0;i<imax-1;i++)
+    for( i = 0; i < imax - 1; i++)
     {
-        d_data->b[i] /= d_data->a[i];
+        b[i] /= a[i];
         if (i > 0)
-           d_data->c[i] = - d_data->c[i-1] * d_data->b[i-1] / d_data->a[i];
-        d_data->a[i+1] = sqrt( d_data->a[i+1] - qwtSqr(d_data->b[i]));
-        sum += qwtSqr(d_data->c[i]);
+           c[i] = - c[i-1] * b[i-1] / a[i];
+        a[i+1] = sqrt( a[i+1] - qwtSqr(b[i]));
+        sum += qwtSqr(c[i]);
     }
-    d_data->b[imax-1] = (d_data->b[imax-1] - d_data->c[imax-2] * d_data->b[imax-2]) / d_data->a[imax-1];
-    d_data->a[imax] = sqrt(d_data->a[imax] - qwtSqr(d_data->b[imax-1]) - sum);
+    b[imax-1] = (b[imax-1] - c[imax-2] * b[imax-2]) / a[imax-1];
+    a[imax] = sqrt(a[imax] - qwtSqr(b[imax-1]) - sum);
     
 
     // forward elimination
-    s[0] = d[0] / d_data->a[0];
+    s[0] = d[0] / a[0];
     sum = 0;
     for(i=1;i<imax;i++)
     {
-        s[i] = (d[i] - d_data->b[i-1] * s[i-1]) / d_data->a[i];
-        sum += d_data->c[i-1] * s[i-1];
+        s[i] = (d[i] - b[i-1] * s[i-1]) / a[i];
+        sum += c[i-1] * s[i-1];
     }
-    s[imax] = (d[imax] - d_data->b[imax-1]*s[imax-1] - sum) / d_data->a[imax];
+    s[imax] = (d[imax] - b[imax-1] * s[imax-1] - sum) / a[imax];
     
     
     // backward elimination
-    s[imax] = - s[imax] / d_data->a[imax];
-    s[imax-1] = -(s[imax-1] + d_data->b[imax-1] * s[imax]) / d_data->a[imax-1];
+    s[imax] = - s[imax] / a[imax];
+    s[imax-1] = -(s[imax-1] + b[imax-1] * s[imax]) / a[imax-1];
     for (i= imax - 2; i >= 0; i--)
-       s[i] = - (s[i] + d_data->b[i] * s[i+1] + d_data->c[i] * s[imax]) / d_data->a[i];
+       s[i] = - (s[i] + b[i] * s[i+1] + c[i] * s[imax]) / a[i];
 
     //
     // Finally, determine the spline coefficients
     //
-    s[d_data->size-1] = s[0];
-    for (i=0;i<d_data->size-1;i++)
+    s[size-1] = s[0];
+    for ( i=0; i < size-1; i++)
     {
-        d_data->a[i] = ( s[i+1] - s[i] ) / ( 6.0 * h[i]);
-        d_data->b[i] = 0.5 * s[i];
-        d_data->c[i] = ( d_data->y[i+1] - d_data->y[i] ) 
+        a[i] = ( s[i+1] - s[i] ) / ( 6.0 * h[i]);
+        b[i] = 0.5 * s[i];
+        c[i] = ( y[i+1] - y[i] ) 
             / h[i] - (s[i+1] + 2.0 * s[i] ) * h[i] / 6.0; 
     }
-
-    delete[] d;
-    delete[] s;
-    delete[] h;
 
     return true;
 }
@@ -369,13 +316,10 @@ bool QwtSpline::buildPerSpline()
 //! Free allocated memory and set size to 0
 void QwtSpline::cleanup()
 {
-    delete[] d_data->a;
-    delete[] d_data->b;
-    delete[] d_data->c;
-    delete[] d_data->xbuffer;
-    delete[] d_data->ybuffer;
-
-    d_data->a = d_data->b = d_data->c = NULL;
-    d_data->xbuffer = d_data->ybuffer = d_data->x = d_data->y = NULL;
     d_data->size = 0;
+    d_data->a.resize(0);
+    d_data->b.resize(0);
+    d_data->c.resize(0);
+    d_data->x.resize(0);
+    d_data->y.resize(0);
 }
