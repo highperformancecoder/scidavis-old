@@ -113,7 +113,7 @@ public slots:
 	void sortColumnsDialog();
 	
 	//normalization
-	void normalizeCol();
+	void normalizeCol(int col=-1);
 	void normalizeSelection();
 	void normalizeTable();
 

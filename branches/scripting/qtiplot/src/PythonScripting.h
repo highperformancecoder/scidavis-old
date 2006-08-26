@@ -17,7 +17,7 @@ class PythonScript : public Script
     PythonScript(PythonScripting *env, const QString &code, QObject *context=0, const QString &name="<input>");
     ~PythonScript();
 
-    void write(const QString &text) { emit print(text.stripWhiteSpace()); }
+    void write(const QString &text) { emit print(text); }
 	
   public slots:
     bool compile(bool for_eval=true);
@@ -51,7 +51,6 @@ class PythonScripting: public ScriptingEnv
     PyObject* eval(const QString &code, PyObject *argDict=NULL, const char *name="<qtiplot>");
     bool exec(const QString &code, PyObject *argDict=NULL, const char *name="<qtiplot>");
     QString errorMsg();
-    bool importModule(char *name);
 
     bool isRunning() const;
     Script *newScript(const QString &code, QObject *context, const QString &name="<input>")
@@ -71,8 +70,10 @@ class PythonScripting: public ScriptingEnv
     PyObject *sysDict() { return sys; }
 
   private:
+    bool loadInitFile(const QString &path);
+
     PyObject *globals;		// PyDict of global environment
-    PyObject *math;		// PyDict of math module
+    PyObject *math;		// PyDict of math functions
     PyObject *sys;		// PyDict of sys module
 };
 

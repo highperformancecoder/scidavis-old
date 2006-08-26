@@ -94,6 +94,7 @@ else
 setGeometry(50,50,w + 45, h);
 
 worksheet->verticalHeader()->setResizeEnabled(false);
+worksheet->verticalHeader()->installEventFilter(this);
 
 QAccel *accel = new QAccel(this);
 accel->connectItem( accel->insertItem( Key_Tab ), this, SLOT(moveCurrentCell()));
@@ -1304,15 +1305,16 @@ for (int i=0; i<worksheet->numCols(); i++)
 emit modifiedWindow(this);	
 }
 
-void Table::normalizeCol()
+void Table::normalizeCol(int col)
 {
-double max=worksheet->text(0,selectedCol).toDouble();
+if (col<0) col = selectedCol;
+double max=worksheet->text(0,col).toDouble();
 double aux=0.0;
 int i;
 int rows=worksheet->numRows();
 for (i=0; i<rows; i++)
 	{
-	QString text=this->text(i,selectedCol);
+	QString text=this->text(i,col);
 	aux=text.toDouble();
 	if (!text.isEmpty() && fabs(aux)>fabs(max)) 
 		max=aux;
@@ -1323,13 +1325,13 @@ if (max == 1.0)
 	
 for (i=0;i<rows;i++)
 	{
-	QString text=this->text(i,selectedCol);
+	QString text=this->text(i,col);
 	aux=text.toDouble();
 	if ( !text.isEmpty() )
-		worksheet->setText(i,selectedCol,QString::number(aux/max));
+		worksheet->setText(i,col,QString::number(aux/max));
 	}
 
-QString name=colName(selectedCol);
+QString name=colName(col);
 emit modifiedData(this, name);
 }
 
@@ -2776,30 +2778,46 @@ else
 
 bool Table::eventFilter(QObject *object, QEvent *e)
 {
-QHeader *header = worksheet->horizontalHeader();
-if (object != (QObject *)header)
-	return FALSE;
+QHeader *hheader = worksheet->horizontalHeader();
+QHeader *vheader = worksheet->verticalHeader();
 
-if (e->type() == QEvent::MouseButtonPress )
+if (e->type() == QEvent::MouseButtonPress && object == (QObject*)hheader)
 	{
 	const QMouseEvent *me = (const QMouseEvent *)e;
+	int offset = hheader->offset();
 	if (me->button() == QMouseEvent::LeftButton && me->state() == Qt::ControlButton)
 		{		
-		int offset = header->offset();
-		selectedCol = header->sectionAt (me->pos().x()+offset);	
+		selectedCol = hheader->sectionAt (me->pos().x()+offset);	
 		worksheet->selectColumn (selectedCol);
 		worksheet->setCurrentCell (0, selectedCol);
 		return true;
 		}
-	return QObject::eventFilter(object, e);
+	if (me->button() == QMouseEvent::RightButton)
+		{
+		selectedCol = hheader->sectionAt (me->pos().x()+offset);	
+		worksheet->clearSelection();
+		worksheet->selectColumn (selectedCol);
+		worksheet->setCurrentCell (0, selectedCol);
+		}
 	}
-
-if (e->type() == QEvent::MouseButtonDblClick)
+else if (e->type() == QEvent::MouseButtonPress && object == (QObject*)vheader)
+	{
+	const QMouseEvent *me = (const QMouseEvent *)e;
+	int offset = vheader->offset();
+	if (me->button() == QMouseEvent::RightButton)
+		{
+		worksheet->clearSelection();
+		int row = vheader->sectionAt(me->pos().y()+offset);
+		worksheet->selectRow (row);
+		worksheet->setCurrentCell (row,0);
+		}
+	}
+else if (e->type() == QEvent::MouseButtonDblClick && object == hheader)
     {
     const QMouseEvent *me = (const QMouseEvent *)e;
-	selectedCol = header->sectionAt (me->pos().x() + header->offset());
+	selectedCol = hheader->sectionAt (me->pos().x() + hheader->offset());
 
-	QRect rect = header->sectionRect (selectedCol);
+	QRect rect = hheader->sectionRect (selectedCol);
 	rect.setLeft(rect.right() - 2);
 	rect.setWidth(4);
 
@@ -2812,6 +2830,12 @@ if (e->type() == QEvent::MouseButtonDblClick)
 		emit optionsDialog();
 	return true;
     }
+else if (e->type()==QEvent::ContextMenu && object == titleBar)
+	{
+	emit showContextMenu(false);
+	((QContextMenuEvent*)e)->accept();
+	return true;
+	}
 
 return QObject::eventFilter(object, e);
 }

@@ -34,6 +34,7 @@ class ScriptEdit: public QTextEdit, public scripted
     Script *myScript;
     QAction *actionExecute, *actionExecuteAll, *actionEval, *actionPrint;
     QPopupMenu *functionsMenu;
+    bool firstOutput;
 
   private slots:
     void insertErrorMsg(const QString &message);

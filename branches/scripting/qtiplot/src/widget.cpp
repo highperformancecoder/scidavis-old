@@ -8,6 +8,7 @@ w_label = label;
 caption_policy = Both;
 askOnClose = true;
 w_status = Normal;
+titleBar = NULL;
 }
 
 void myWidget::setCaptionPolicy(CaptionPolicy policy)
@@ -128,6 +129,10 @@ QString myWidget::sizeToString()
 return QString::number(8*sizeof(this)/1024.0, 'f', 1) + " " + tr("kB");
 }
 
-
-
+void myWidget::reparent(QWidget * parent, WFlags f, const QPoint & p, bool showIt)
+{
+titleBar = (QWidget*) parent->child("qt_ws_titlebar","QWidget",false);
+if(titleBar) titleBar->installEventFilter(this);
+QWidget::reparent(parent, f, p, showIt);
+}
 

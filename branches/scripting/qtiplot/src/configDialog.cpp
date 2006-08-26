@@ -375,7 +375,14 @@ QButtonGroup *GroupBoxApp = new QButtonGroup( 2,QGroupBox::Horizontal, QString::
 
 	boxSearchUpdates = new QCheckBox(GroupBoxApp);
 	boxSearchUpdates->setChecked(app->autoSearchUpdates);
+	new QWidget(GroupBoxApp);
 
+	lblScriptingLanguage = new QLabel(GroupBoxApp); 
+	boxScriptingLanguage = new QComboBox(GroupBoxApp);
+	QStringList llist = ScriptingLangManager::languages();
+	boxScriptingLanguage->insertStringList(llist);
+	boxScriptingLanguage->setCurrentItem(llist.findIndex(app->defaultScriptingLang));
+	
 	QVBoxLayout* hlayout4 = new QVBoxLayout(application, 5, 5, "hlayout4");
     hlayout4->addWidget(GroupBoxApp);
 
@@ -606,6 +613,7 @@ void configDialog::languageChange()
 	boxSave->setText(tr("Save every"));
 	boxSearchUpdates->setText(tr("Check for new versions at startup"));
 	boxMinutes->setSuffix(tr(" minutes"));
+	lblScriptingLanguage->setText(tr("Default scripting language"));
 
 	//tables page
 	GroupBoxTableCol->setTitle(tr("Colors"));
@@ -769,6 +777,7 @@ else if (generalDialog->visibleWidget()==(QWidget*)appTabWidget)
 		app->changeAppStyle(boxStyle->currentText());
 		app->autoSearchUpdates = boxSearchUpdates->isChecked();
 		app->setSaveSettings(boxSave->isChecked(), boxMinutes->value());
+		app->defaultScriptingLang = boxScriptingLanguage->currentText();
 		}
 	else if (appTabWidget->currentPage() == confirm)
 		{

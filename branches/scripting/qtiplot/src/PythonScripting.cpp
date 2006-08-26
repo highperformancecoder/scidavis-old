@@ -26,6 +26,7 @@ extern "C" void initqti();
 #include <qobject.h>
 #include <qstringlist.h>
 #include <qvariant.h>
+#include <qdir.h>
 
 const char* PythonScripting::langName = "Python";
 
@@ -123,19 +124,12 @@ QString PythonScripting::errorMsg()
   return msg;
 }
 
-bool PythonScripting::importModule(char *name)
-{
-  PyObject *mod = PyImport_ImportModule(name);
-  if (!mod) return false;
-  PyDict_SetItemString(globals, name, mod);
-  Py_DECREF(mod);
-  return true;
-}
-
 PythonScripting::PythonScripting(ApplicationWindow *parent)
 : ScriptingEnv(parent, langName)
 {
-  PyObject *mainmod=NULL, *mathmod=NULL, *qtimod=NULL, *sysmod=NULL;
+  PyObject *mainmod=NULL, *qtimod=NULL, *sysmod=NULL;
+  math = NULL;
+  sys = NULL;
   if (Py_IsInitialized())
   {
     PyEval_AcquireLock();
@@ -172,36 +166,23 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
     return;
   }
   Py_INCREF(globals);
-  
-  if (!importModule("sys")) PyErr_Print();
-  if (!importModule("qt")) PyErr_Print();
-  if (!importModule("qti")) PyErr_Print();
-
-  mathmod = PyImport_ImportModule("math");
-  if (mathmod && (math = PyModule_GetDict(mathmod)))
-  {
-    Py_INCREF(math);
-    Py_DECREF(mathmod);
-    PyObject *key, *value;
-    int i=0;
-    while(PyDict_Next(math, &i, &key, &value))
-      PyDict_SetItem(globals, key, value);
-  } else {
-    math = NULL;
+ 
+  math = PyDict_New();
+  if (!math)
     PyErr_Print();
-  }
-
+  
   qtimod = PyImport_ImportModule("qti");
   if (qtimod)
   {
+    PyDict_SetItemString(globals, "qti", qtimod);
     PyObject *qtiDict = PyModule_GetDict(qtimod);
     setQObject(Parent, "app", qtiDict);
+    sipExportSymbol("qti.app",Parent);
+    PyDict_SetItemString(qtiDict, "mathFunctions", math);
     Py_DECREF(qtimod);
-    if (!exec("table=qti.app.table\nmatrix=qti.app.matrix\ngraph=qti.app.graph\nnote=qti.app.note",globals))
-      PyErr_Print();
   } else
     PyErr_Print();
-  sipExportSymbol("qti.app",Parent);
+
   sysmod = PyImport_ImportModule("sys");
   if (sysmod)
   {
@@ -211,6 +192,16 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
     PyErr_Print();
   
   PyEval_ReleaseLock();
+
+#ifdef Q_WS_WIN
+  loadInitFile(QDir::homeDirPath()+"qtiplotrc") ||
+    loadInitFile(qApp->applicationDirPath()+"qtiplotrc") ||
+#else
+  loadInitFile(QDir::homeDirPath()+".qtiplotrc") ||
+    loadInitFile(QDir::rootDirPath()+"etc/qtiplotrc") ||
+#endif
+  loadInitFile("qtiplotrc");
+  
   initialized=true;
 }
 
@@ -218,6 +209,35 @@ PythonScripting::~PythonScripting()
 {
   Py_XDECREF(globals);
   Py_XDECREF(math);
+  Py_XDECREF(sys);
+}
+
+bool PythonScripting::loadInitFile(const QString &path)
+{
+  QFileInfo pyFile(path+".py"), pycFile(path+".pyc");
+  if (pycFile.isReadable() && (pycFile.lastModified() >= pyFile.lastModified()))
+    return PyRun_SimpleFileEx(fopen(pycFile.filePath(), "r"), pycFile.fileName(), true) == 0;
+  else if (pyFile.isReadable()) {
+    // try to compile pyFile to pycFile
+    PyObject *compileModule = PyImport_ImportModule("py_compile");
+    if (compileModule) {
+      PyObject *compile = PyDict_GetItemString(PyModule_GetDict(compileModule),"compile");
+      if (compile) {
+	Py_XDECREF(PyObject_CallFunctionObjArgs(compile, PyString_FromString(pyFile.filePath()), PyString_FromString(pycFile.filePath()),NULL));
+      } else
+	PyErr_Print();
+      Py_DECREF(compileModule);
+    } else
+      PyErr_Print();
+    if (pycFile.isReadable() && (pycFile.lastModified() >= pyFile.lastModified())) {
+      // run the newly compiled pycFile
+      return PyRun_SimpleFileEx(fopen(pycFile.filePath(), "r"), pycFile.fileName(), true) == 0;
+    } else {
+      // fallback: just run pyFile
+      return PyRun_SimpleFileEx(fopen(pyFile.filePath(), "r"), pyFile.fileName(), true) == 0;
+    }
+  }
+  return false;
 }
 
 bool PythonScripting::isRunning() const
@@ -310,16 +330,16 @@ const QStringList PythonScripting::mathFunctions() const
   PyObject *key, *value;
   int i=0;
   while(PyDict_Next(math, &i, &key, &value))
-  {
     if (PyCallable_Check(value))
       flist << PyString_AsString(key);
-  }
+  flist.sort();
   return flist;
 }
 
 const QString PythonScripting::mathFunctionDoc(const QString &name) const
 {
   PyObject *mathf = PyDict_GetItemString(math,name); // borrowed
+  if (!mathf) return "";
   PyObject *pydocstr = PyObject_GetAttrString(mathf, "__doc__"); // new
   QString qdocstr = PyString_AsString(pydocstr);
   Py_XDECREF(pydocstr);

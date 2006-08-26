@@ -40,6 +40,7 @@ void ScriptEdit::customEvent(QCustomEvent *e)
     delete myScript;
     myScript = scriptEnv->newScript("", this, name());
     connect(myScript, SIGNAL(error(const QString&,const QString&,int)), this, SLOT(insertErrorMsg(const QString&)));
+    connect(myScript, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
   }
 }
 
@@ -89,7 +90,9 @@ void ScriptEdit::insertErrorMsg(const QString &message)
 
 void ScriptEdit::scriptPrint(const QString &text)
 {
-  insert("\n",(uint)QTextEdit::CheckNewLines);
+  removeSelection();
+  if(firstOutput) insert("\n",(uint)QTextEdit::CheckNewLines);
+  firstOutput = false;
   insert(text,(uint)QTextEdit::CheckNewLines);
 }
 
@@ -124,7 +127,9 @@ void ScriptEdit::execute()
   fname = fname.arg(paraFrom+1);
   myScript->setName(fname);
   myScript->setCode(selectedText());
+  firstOutput=true;
   myScript->exec();
+  firstOutput=false;
 }
 
 void ScriptEdit::executeAll()
@@ -133,7 +138,9 @@ void ScriptEdit::executeAll()
   fname = fname.arg(name());
   myScript->setName(fname);
   myScript->setCode(text());
+  firstOutput=true;
   myScript->exec();
+  firstOutput=false;
 }
 
 void ScriptEdit::evaluate()
@@ -150,6 +157,7 @@ void ScriptEdit::evaluate()
   fname = fname.arg(paraFrom+1);
   myScript->setName(fname);
   myScript->setCode(selectedText());
+  firstOutput=true;
   myScript->setEmitErrors(false);
   QVariant res = myScript->eval();
   myScript->setEmitErrors(true);
@@ -165,6 +173,7 @@ void ScriptEdit::evaluate()
       removeSelection();
     }
   }
+  firstOutput=false;
 }
 
 ScriptEdit::~ScriptEdit()

@@ -60,6 +60,8 @@ public:
 	//! Initializes the pointer to the parent folder of the window
 	void setFolder(Folder* f){parentFolder = f;};
 
+	void reparent(QWidget * parent, WFlags f, const QPoint & p, bool showIt = false);
+
 signals:  
 	void closedWindow(myWidget *);
 	void hiddenWindow(myWidget *);
@@ -67,6 +69,9 @@ signals:
 	void resizedWindow(QWidget *);
 	void statusChanged(myWidget *);
 
+protected:
+	QWidget *titleBar;
+	
 private:
 	//!Pointer to the parent folder of the window
 	Folder *parentFolder;

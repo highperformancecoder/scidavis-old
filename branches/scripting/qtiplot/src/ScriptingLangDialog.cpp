@@ -44,20 +44,9 @@ void ScriptingLangDialog::updateLangList()
 void ScriptingLangDialog::accept()
 {
   ApplicationWindow *app = (ApplicationWindow*) parent();
-  if (langList->currentText() == scriptEnv->name())
+  if (app->setScriptingLang(langList->currentText()))
     close();
-  ScriptingEnv *newEnv = ScriptingLangManager::newEnv(langList->currentText(), app);
-  if (!newEnv || !newEnv->isInitialized())
-  {
+  else
     QMessageBox::critical(this, tr("QtiPlot - Scripting Error"), tr("Scripting language \"%1\" failed to initialize.").arg(langList->currentText()));
-    return;
-  }
-
-  QApplication::postEvent(app, new ScriptingChangeEvent(newEnv));
-  QObjectList *receivers = app->queryList();
-  for (QObjectListIt i(*receivers); !i.atLast(); ++i)
-    QApplication::postEvent(i, new ScriptingChangeEvent(newEnv));
-  delete receivers;
-  close();
 }
 

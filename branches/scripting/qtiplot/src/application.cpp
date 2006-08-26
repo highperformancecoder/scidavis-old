@@ -347,6 +347,8 @@ cg.setColor(QColorGroup::Text, QColor(green) );
 cg.setColor(QColorGroup::HighlightedText, QColor(darkGreen) );
 cg.setColor(QColorGroup::Background, QColor(black) );
 info->setPalette(QPalette(cg, cg, cg));
+
+setScriptingLang(defaultScriptingLang);
 }
 
 void ApplicationWindow::initToolBars()
@@ -4023,10 +4025,30 @@ void ApplicationWindow::scriptError(const QString &message, const QString &scrip
 void ApplicationWindow::scriptPrint(const QString &text)
 {
 #ifdef SCRIPTING_CONSOLE
-  console->append(text);
+  if(!text.stripWhiteSpace().isEmpty()) console->append(text);
 #else
   printf(text.ascii());
 #endif
+}
+
+bool ApplicationWindow::setScriptingLang(const QString &lang)
+{
+  if (lang == scriptEnv->name()) return true;
+  if (lang.isEmpty()) return false;
+
+  ScriptingEnv *newEnv = ScriptingLangManager::newEnv(lang, this);
+  if (newEnv && newEnv->isInitialized())
+  {
+    ScriptingChangeEvent *sce = new ScriptingChangeEvent(newEnv);
+    QApplication::sendEvent(this, sce);
+    delete sce;
+    QObjectList *receivers = queryList();
+    for (QObjectListIt i(*receivers); !i.atLast(); ++i)
+      QApplication::postEvent(i, new ScriptingChangeEvent(newEnv));
+    delete receivers;
+    return true;
+  }
+  return false;
 }
 
 void ApplicationWindow::showScriptingLangDialog()
@@ -4362,6 +4384,8 @@ str = settings.readEntry("/ExplorerSplitter");
 QTextIStream in2(&str);
 in2 >> *explorerSplitter;
 
+defaultScriptingLang = settings.readEntry("/DefaultScriptingLang");
+
 settings.endGroup();
 
 settings.beginGroup("/Fitting");
@@ -4523,6 +4547,8 @@ settings.writeEntry("/DockWindows", str);
 QTextOStream out2(&str);
 out2 << *explorerSplitter;
 settings.writeEntry("/ExplorerSplitter", str);
+
+settings.writeEntry("/DefaultScriptingLang", defaultScriptingLang);
 
 settings.endGroup();
 
@@ -8733,6 +8759,10 @@ if (selection)
 	}
 else
 	{
+	actionActivateWindow->addTo(&cm);
+	actionMinimizeWindow->addTo(&cm);
+	actionMaximizeWindow->addTo(&cm);
+	cm.insertSeparator();
 	actionRename->addTo(&cm);
 	actionCopyWindow->addTo(&cm);
 	cm.insertSeparator();

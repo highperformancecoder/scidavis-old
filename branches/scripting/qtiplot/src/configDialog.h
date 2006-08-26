@@ -73,6 +73,8 @@ public:
 	QRadioButton *samePointsBtn, *generatePointsBtn;
     QButtonGroup *GroupBoxMultiPeak;
 	ColorBox *boxPeaksColor;
+	QLabel *lblScriptingLanguage;
+	QComboBox *boxScriptingLanguage;
 
 public slots:
     virtual void languageChange();

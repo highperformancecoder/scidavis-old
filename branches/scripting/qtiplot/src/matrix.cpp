@@ -69,6 +69,7 @@ hHeader->setMouseTracking(TRUE);
 
 QHeader* vHeader=(QHeader*)table->verticalHeader();
 vHeader->setResizeEnabled (false);
+vHeader->installEventFilter(this);
 
 int w, h;
 if (cols>3)
@@ -839,17 +840,15 @@ void Matrix::customEvent(QCustomEvent *e)
 
 bool Matrix::eventFilter(QObject *object, QEvent *e)
 {
-QHeader *header = table->horizontalHeader();
-if ( object != (QObject *)header)
-	return FALSE;
+QHeader *hheader = table->horizontalHeader();
+QHeader *vheader = table->verticalHeader();
 
-int offset = header->offset();
-switch(e->type())
+if (object == (QObject*)hheader) switch(e->type())
     {
         case QEvent::MouseButtonDblClick:
 			{
-            const QMouseEvent *me = (const QMouseEvent *)e;
-			selectedCol = header->sectionAt (me->pos().x()+offset);
+			const QMouseEvent *me = (const QMouseEvent *)e;
+			selectedCol = hheader->sectionAt (me->pos().x()+hheader->offset());
 			return TRUE; 
 			}
 
@@ -858,17 +857,17 @@ switch(e->type())
 			const QMouseEvent *me = (const QMouseEvent *)e;
 			if (me->button() == QMouseEvent::RightButton)	
 				{
-				const QMouseEvent *me = (const QMouseEvent *)e;
-				selectedCol=header->sectionAt (me->pos().x() + offset);
+				selectedCol=hheader->sectionAt (me->pos().x() + hheader->offset());
+				table->clearSelection();
+				table->selectColumn(selectedCol);
 				table->setCurrentCell (0, selectedCol);
 				}
 			
 			if (me->button() == QMouseEvent::LeftButton)	
 				{
 				LeftButton=TRUE;
-				const QMouseEvent *me = (const QMouseEvent *)e;
 				
-				if (((const QMouseEvent *)e)->state ()==Qt::ControlButton)
+				if (me->state ()==Qt::ControlButton)
 					{
 					int current=table->currentSelection();
 					QTableSelection sel=table->selection(current);
@@ -879,7 +878,7 @@ switch(e->type())
 				else
 					table->clearSelection (TRUE);
 				
-				selectedCol=header->sectionAt (me->pos().x()+offset);
+				selectedCol=hheader->sectionAt (me->pos().x()+hheader->offset());
 				lastSelectedCol=selectedCol;
 				table->selectColumn (selectedCol);
 				table->setCurrentCell (0, selectedCol);
@@ -892,7 +891,7 @@ switch(e->type())
 			if(LeftButton)
 				{
 				const QMouseEvent *me = (const QMouseEvent *)e;
-				selectedCol=header->sectionAt (me->pos().x() + offset);
+				selectedCol=hheader->sectionAt (me->pos().x() + hheader->offset());
 
 				if(selectedCol != lastSelectedCol)
 					{// This means that we are in the next column
@@ -918,6 +917,19 @@ switch(e->type())
 			default:
 				;
     }
+else if (e->type() == QEvent::MouseButtonPress && object == (QObject*)vheader)
+	{
+	const QMouseEvent *me = (const QMouseEvent *)e;
+	int offset = vheader->offset();
+	if (me->button() == QMouseEvent::RightButton)
+		{
+		table->clearSelection();
+		int row = vheader->sectionAt(me->pos().y()+offset);
+		table->selectRow (row);
+		table->setCurrentCell (row,0);
+		}
+	}
+
 return QObject::eventFilter(object, e);
 }
 

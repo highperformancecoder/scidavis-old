@@ -101,6 +101,13 @@ public:
     sipCpp->setColName(sipqti_colArg(sipCpp, a0), *a1);
 %End
   void notifyChanges();
+
+  void importASCII(const QString&, const QString&="\t", int=0, bool=false, bool=true, bool=false, bool=false);
+  void normalizeCol(SIP_PYOBJECT) /PyName=normalize/;
+%MethodCode
+  sipCpp->normalizeCol(sipqti_colArg(sipCpp, a0));
+%End
+  void normalizeTable() /PyName=normalize/;
   
 private:
   Table(const Table&);
@@ -155,6 +162,7 @@ class Graph : QWidget /PyName=Layer/
 {
 %TypeHeaderCode
 #include "src/graph.h"
+#include "src/LegendMarker.h"
 %End
 public:
   bool isPiePlot();
@@ -176,6 +184,19 @@ public:
 
   void insertLineMarker(LineMarker*);
   LineMarker* lineMarker(long);
+
+  void setTitle(const QString& t);
+  void setLegend(const QString&) /NoDerived/;
+%MethodCode
+  sipCpp->legend()->setText(*a0);
+%End
+  void setXAxisTitle(const QString& text) /PyName=setXTitle/;
+  void setYAxisTitle(const QString& text) /PyName=setYTitle/;
+
+  void print();
+  void exportToSVG(const QString& fname);
+  void exportToEPS(const QString& fname);
+  void exportToWmf(const QString& fname);
 private:
   Graph(const Graph&);
 };
@@ -190,6 +211,9 @@ public:
   void setActiveGraph(Graph*) /PyName=setActiveLayer/;
   // TODO: implement Graph* layer(int num);;
   void updateTransparency();
+  void exportToSVG(const QString& fname);
+  void exportToEPS(const QString& fname);
+  void print();
 private:
   MultiLayer(const MultiLayer&);
 };
@@ -227,10 +251,38 @@ sipTypeDef *t;
 %End
 public:
   Table *table(const QString&);
+  Table* newTable();
   Table *newTable(const QString&, int, int);
   Matrix* matrix(const QString&);
+  Matrix* newMatrix();
+  Matrix* newMatrix(const QString&, int, int);
   MultiLayer *plot(const QString&) /PyName=graph/;
+  MultiLayer* newGraph();
   Note *note(const QString&);
+  Note* newNote(const QString& = QString::null);
+
+  MultiLayer *multilayerPlot(Table*, SIP_PYTUPLE, int=1) /PyName=plot/;
+%MethodCode
+  QStringList l;
+  int n = PyTuple_Size(a1);
+  for (int i=0; i<n; i++) {
+    PyObject *str = PyObject_Str(PyTuple_GET_ITEM(a1,i));
+    if (str)
+      l << PyString_AsString(str);
+    else {
+      sipIsErr = 1;
+      break;
+    }
+  }
+  sipRes = sipCpp->multilayerPlot(a0, l, a2);
+%End
+  MultiLayer *multiLayerPlot(Table*, const char*, int=1) /PyName=plot/;
+%MethodCode
+  QStringList l;
+  l << a1;
+  sipRes = sipCpp->multilayerPlot(a0, l, a2);
+%End
+  
   QTextEdit *results;
   QTextEdit *console;
 private:

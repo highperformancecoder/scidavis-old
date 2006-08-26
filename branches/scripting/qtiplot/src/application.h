@@ -740,6 +740,8 @@ public slots:
 	void restartScriptingEnv();
 	//! print to scripting console (if available) or to stdout
 	void scriptPrint(const QString &text);
+	//! switches to the given scripting language (if different from the current)
+	bool setScriptingLang(const QString &lang);
 
 signals:
 	void modified();
@@ -817,6 +819,9 @@ public:
 
 	//! Equals true if an automatical search for updates was performed on start-up otherwise is set to false;
 	bool autoSearchUpdatesRequest;
+
+	//! The scripting language to use for new projects.
+	QString defaultScriptingLang;
 
     QAction *actionNewProject, *actionNewNote, *actionNewTable, *actionNewFunctionPlot, *actionNewSurfacePlot, *actionNewMatrix, *actionNewGraph;
     QAction *actionOpen, *actionLoadImage, *actionSaveProject, *actionSaveProjectAs, *actionImportImage;
