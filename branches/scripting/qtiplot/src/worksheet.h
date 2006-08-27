@@ -157,8 +157,7 @@ public slots:
 	void pasteSelection();
 	void selectAllTable();
 	void deselect();
-	bool singleRowSelected();
-	bool multipleRowsSelected();
+	void clear();
 
 	void init(int rows, int cols);
 	QStringList selectedColumns();

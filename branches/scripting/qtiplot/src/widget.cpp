@@ -136,3 +136,13 @@ if(titleBar) titleBar->installEventFilter(this);
 QWidget::reparent(parent, f, p, showIt);
 }
 
+bool myWidget::eventFilter(QObject *object, QEvent *e)
+{
+if (e->type()==QEvent::ContextMenu && object == titleBar)
+	{
+	emit showTitleBarMenu();
+	((QContextMenuEvent*)e)->accept();
+	return true;
+	}
+return QObject::eventFilter(object, e);
+}

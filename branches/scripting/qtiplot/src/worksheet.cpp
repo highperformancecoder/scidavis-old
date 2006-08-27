@@ -864,7 +864,7 @@ else
 
 void Table::deleteSelectedRows()
 {
-QTableSelection sel=worksheet->selection(worksheet->currentSelection());
+QTableSelection sel=worksheet->selection(0);
 int top=sel.topRow();
 int bottom=sel.bottomRow();
 int numberOfRows=bottom-top+1;
@@ -879,34 +879,6 @@ void Table::cutSelection()
 {
 copySelection();
 clearSelection();
-}
-
-bool Table::multipleRowsSelected()
-{
-bool selected = true;
-QTableSelection sel=worksheet->selection(worksheet->currentSelection());
-int top=sel.topRow();
-int bottom=sel.bottomRow();
-	
-if (top == bottom)
-	return FALSE;
-
-for (int i=top; i<=bottom; i++)
-	{
-	if (!worksheet->isRowSelected (i, true))
-		return FALSE;
-	}
-return selected;
-}
-
-bool Table::singleRowSelected()
-{
-QTableSelection sel=worksheet->selection(worksheet->currentSelection());
-int top=sel.topRow();	
-if (top == sel.bottomRow() && worksheet->isRowSelected (top, true))
-	return true;
-
-return false;
 }
 
 void Table::selectAllTable()
@@ -936,7 +908,7 @@ for (i=0;i<n;i++)
 }
 else
 {
-QTableSelection sel=worksheet->selection(worksheet->currentSelection());
+QTableSelection sel=worksheet->selection(0);
 int top=sel.topRow();
 int bottom=sel.bottomRow();
 int left=sel.leftCol();
@@ -1000,22 +972,13 @@ if (c>0)
 	}
 else
 	{
-	int selnum = worksheet->currentSelection();
-	if (selnum==-1)
-		text=worksheet->text(worksheet->currentRow(),worksheet->currentColumn());
-	else
+	QTableSelection sel=worksheet->selection(0);
+	int right=sel.rightCol();
+	for (i=sel.topRow(); i<=sel.bottomRow(); i++)
 		{
-		QTableSelection sel=worksheet->selection(selnum);
-		int top=sel.topRow();
-		int bottom=sel.bottomRow();
-		int left=sel.leftCol();
-		int right=sel.rightCol();
-		for (i=top; i<=bottom; i++)
-			{
-			for (j=left; j<right; j++)
-				text+=worksheet->text(i,j)+"\t";
-			text+=worksheet->text(i,right)+"\n";
-			}
+		for (j=sel.leftCol(); j<right; j++)
+			text+=worksheet->text(i,j)+"\t";
+		text+=worksheet->text(i,right)+"\n";
 		}
 	}		
 	
@@ -1045,7 +1008,7 @@ while(!ts.atEnd())
 ts.reset();
 	
 int i, j, top, bottom, right, left, firstCol=firstSelectedColumn();
-QTableSelection sel=worksheet->selection(worksheet->currentSelection());
+QTableSelection sel=worksheet->selection(0);
 if (!sel.isEmpty())
 	{// not columns but only cells are selected
 	top=sel.topRow();
@@ -2746,11 +2709,8 @@ return true;
 
 void Table::contextMenuEvent(QContextMenuEvent *e)
 {
-int w = 0;
-for (int i = 0; i < worksheet->numCols(); i++)
-	w += worksheet->columnWidth (i);
-
-if (e->pos().x() > w)
+QRect r = worksheet->horizontalHeader()->sectionRect(worksheet->numCols()-1);
+if (e->pos().x() > r.right() + worksheet->verticalHeader()->width())
 	emit showContextMenu(false);
 else
 	emit showContextMenu(true);
@@ -2792,8 +2752,7 @@ if (e->type() == QEvent::MouseButtonPress && object == (QObject*)hheader)
 		worksheet->setCurrentCell (0, selectedCol);
 		return true;
 		}
-	QTableSelection sel = worksheet->selection(0);
-	if (me->button() == QMouseEvent::RightButton && sel.numRows() <= 1 && sel.numCols() <= 1)
+	if (me->button() == QMouseEvent::RightButton && selectedColsNumber() <= 1)
 		{
 		selectedCol = hheader->sectionAt (me->pos().x()+offset);	
 		worksheet->clearSelection();
@@ -2805,8 +2764,7 @@ else if (e->type() == QEvent::MouseButtonPress && object == (QObject*)vheader)
 	{
 	const QMouseEvent *me = (const QMouseEvent *)e;
 	int offset = vheader->offset();
-	QTableSelection sel = worksheet->selection(0);
-	if (me->button() == QMouseEvent::RightButton && sel.numRows() <= 1 && sel.numCols() <= 1)
+	if (me->button() == QMouseEvent::RightButton && selectedRows() <= 1)
 		{
 		worksheet->clearSelection();
 		int row = vheader->sectionAt(me->pos().y()+offset);
@@ -2834,11 +2792,10 @@ else if (e->type() == QEvent::MouseButtonDblClick && object == hheader)
     }
 else if (e->type()==QEvent::ContextMenu && object == titleBar)
 	{
-	emit showContextMenu(false);
+	emit showTitleBarMenu();
 	((QContextMenuEvent*)e)->accept();
 	return true;
 	}
-
 return QObject::eventFilter(object, e);
 }
 
@@ -3615,6 +3572,19 @@ void Table::notifyChanges()
 {
 for (int i=0; i<worksheet->numCols(); i++)
 	emit modifiedData(this, colName(i));
+
+emit modifiedWindow(this);
+}
+
+void Table::clear()
+{
+for (int i=0; i<worksheet->numCols(); i++)
+	{
+	for (int j=0; j<worksheet->numRows(); j++)
+		worksheet->setText(j, i, QString::null);
+
+	emit modifiedData(this, colName(i));
+	}
 
 emit modifiedWindow(this);
 }

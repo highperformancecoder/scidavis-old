@@ -424,6 +424,8 @@ public slots:
 	void correlate();
 	void convolute();
 	void deconvolute();
+	void clearTable();
+	void goToRow();
 
 	// plot tools 
 	void newLegend();
@@ -507,6 +509,7 @@ public slots:
 	void showGraphContextMenu();
 	void showTableContextMenu(bool selection);
 	void showWindowContextMenu();
+	void showWindowTitleBarMenu();
 	void showCurveContextMenu(int curveKey);
 	void showCurveWorksheet(int curveKey);
 	void showWindowPopupMenu(QListViewItem *it, const QPoint &p, int);
@@ -868,7 +871,7 @@ public:
 	QAction *actionBoxPlot, *actionMultiPeakGauss, *actionMultiPeakLorentz, *actionCheckUpdates;
 	QAction *actionDonate, *actionHomePage, *actionDownloadManual, *actionTechnicalSupport, *actionTranslations;
 	QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;
-	QAction *actionScriptingLang, *actionRestartScripting;
+	QAction *actionScriptingLang, *actionRestartScripting, *actionClearTable, *actionGoToRow;
 	QAction *actionNoteExecute, *actionNoteExecuteAll, *actionNoteEvaluate;
 
 private:
@@ -892,6 +895,7 @@ public:
 
 public slots:
 	void print();
+	void open();
 };
 
 #endif

@@ -2148,21 +2148,17 @@ IO::save(sp, fname, format);
 
 bool Graph3D::eventFilter(QObject *object, QEvent *e)
 {
-if ( object != (QObject *)this->sp)
-return FALSE;
-
-    switch(e->type())
+if (e->type() == QEvent::MouseButtonDblClick && object == (QObject *)this->sp)
     {
-        case QEvent::MouseButtonDblClick:
-			{
-			emit showOptionsDialog();			
-			return TRUE; 
-			}
-			
-			default:
-				;
-		break;
-    }
+	emit showOptionsDialog();			
+	return TRUE; 
+	}
+else if (e->type()==QEvent::ContextMenu && object == titleBar)
+	{
+	emit showTitleBarMenu();
+	((QContextMenuEvent*)e)->accept();
+	return true;
+	}
 return QObject::eventFilter(object, e);
 }
 

@@ -1265,29 +1265,24 @@ emit modifiedPlot();
 
 bool MultiLayer::eventFilter(QObject *object, QEvent *e)
 {
-if ( object != (QObject *)canvas)
-	return FALSE;
-
-switch(e->type())
+if(e->type() == QEvent::MouseButtonPress && object == (QObject *)canvas)
     { 
-	case QEvent::MouseButtonPress:
-		{
-		const QMouseEvent *me = (const QMouseEvent *)e;
-			
-		if (me->button()==QMouseEvent::LeftButton && addTextOn)	
-			addTextLayer(me->pos());
+	const QMouseEvent *me = (const QMouseEvent *)e;
+	if (me->button()==QMouseEvent::LeftButton && addTextOn)	
+		addTextLayer(me->pos());
 	
-		return false; 
-		}
-
-	case QEvent::Resize:
-		{
-		resizeLayers((const QResizeEvent *)e);
-		}
-
-	default:
-		;
+	return false; 
+	}
+else if(e->type() == QEvent::Resize && object == (QObject *)canvas)
+	{
+	resizeLayers((const QResizeEvent *)e);
     }
+else if (e->type()==QEvent::ContextMenu && object == titleBar)
+	{
+	emit showTitleBarMenu();
+	((QContextMenuEvent*)e)->accept();
+	return true;
+	}
 return QObject::eventFilter(object, e);
 }
 

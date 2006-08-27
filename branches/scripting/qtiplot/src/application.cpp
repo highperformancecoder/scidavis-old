@@ -721,6 +721,8 @@ void ApplicationWindow::initMainMenu()
 	actionMatrixDeterminant->addTo(matrixMenu);
 
 	matrixMenu->insertSeparator();
+	actionGoToRow->addTo(matrixMenu);
+	matrixMenu->insertSeparator();
 	actionConvertMatrix->addTo(matrixMenu);
 
 	initPlotMenu();
@@ -850,11 +852,13 @@ actionSetAscValues->addTo(fillMenu);
 actionSetRandomValues->addTo(fillMenu);
 fillMenuID = tableMenu->insertItem(tr("&Fill columns with"),fillMenu);
 
+actionClearTable->addTo(tableMenu);
 tableMenu->insertSeparator();
 actionAddColToTable->addTo(tableMenu);
 actionShowColsDialog->addTo(tableMenu);
+tableMenu->insertSeparator();
 actionShowRowsDialog->addTo(tableMenu);
-
+actionGoToRow->addTo(tableMenu);
 tableMenu->insertSeparator();
 actionConvertTable->addTo(tableMenu);
 }
@@ -2715,7 +2719,8 @@ connect(m->textWidget(), SIGNAL(redoAvailable(bool)), actionRedo, SLOT(setEnable
 connect(m, SIGNAL(modifiedWindow(QWidget*)), this, SLOT(modifiedProject(QWidget*)));
 connect(m, SIGNAL(closedWindow(myWidget*)), this, SLOT(closeWindow(myWidget*)));
 connect(m, SIGNAL(hiddenWindow(myWidget*)), this, SLOT(hideWindow(myWidget*)));
-connect(m,SIGNAL(statusChanged(myWidget*)),this, SLOT(updateWindowStatus(myWidget*)));
+connect(m, SIGNAL(statusChanged(myWidget*)), this, SLOT(updateWindowStatus(myWidget*)));
+connect(m, SIGNAL(showTitleBarMenu()), this, SLOT(showWindowTitleBarMenu()));
 		
 emit modified();
 }
@@ -2835,6 +2840,7 @@ addListViewItem(m);
 current_folder->addWindow(m);
 m->setFolder(current_folder);
 
+connect(m,SIGNAL(showTitleBarMenu()),this,SLOT(showWindowTitleBarMenu()));
 connect(m, SIGNAL(modifiedWindow(QWidget*)), this, SLOT(modifiedProject()));
 connect(m, SIGNAL(modifiedWindow(QWidget*)), this, SLOT(update3DMatrixPlots(QWidget *)));
 connect(m, SIGNAL(closedWindow(myWidget*)), this, SLOT(closeWindow(myWidget*)));
@@ -8713,6 +8719,34 @@ else if (w->isA("Matrix"))
 cm.exec(QCursor::pos());
 }
 
+void ApplicationWindow::showWindowTitleBarMenu()
+{
+if (!ws->activeWindow())
+	return;
+
+QPopupMenu cm(this);
+
+if (ws->activeWindow()->isA("Table"))
+	{
+	actionShowExportASCIIDialog->addTo(&cm);
+	cm.insertSeparator();
+	}
+
+actionPrint->addTo(&cm);
+if (!ws->activeWindow()->isA("Note"))
+	actionSaveTemplate->addTo(&cm);
+cm.insertSeparator();
+actionMinimizeWindow->addTo(&cm);
+actionMaximizeWindow->addTo(&cm);
+cm.insertSeparator();
+actionRename->addTo(&cm);
+actionCopyWindow->addTo(&cm);
+cm.insertSeparator();
+actionHideWindow->addTo(&cm);
+actionCloseWindow->addTo(&cm);
+cm.exec(QCursor::pos());
+}
+
 void ApplicationWindow::showTableContextMenu(bool selection)
 {
 Table *t = (Table*)ws->activeWindow();
@@ -8727,7 +8761,7 @@ if (selection)
  		showColMenu(t->firstSelectedColumn());
  		return;
 		}
-	else if (t->singleRowSelected())
+	else if (t->selectedRows() == 1)
 		{
 		cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), t, SLOT(cutSelection()));
 		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
@@ -8739,7 +8773,7 @@ if (selection)
 		cm.insertSeparator();
 		actionShowRowStatistics->addTo(&cm);
 		}
-	else if (t->multipleRowsSelected())
+	else if (t->selectedRows() > 1)
 		{
 		cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), t, SLOT(cutSelection()));
 		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
@@ -8761,27 +8795,20 @@ if (selection)
 	}
 else
 	{
-	actionActivateWindow->addTo(&cm);
-	actionMinimizeWindow->addTo(&cm);
-	actionMaximizeWindow->addTo(&cm);
-	cm.insertSeparator();
-	actionRename->addTo(&cm);
-	actionCopyWindow->addTo(&cm);
-	cm.insertSeparator();
 	actionShowExportASCIIDialog->addTo(&cm);
-	actionPrint->addTo(&cm);
 	cm.insertSeparator();
-	actionCloseWindow->addTo(&cm);
+	actionAddColToTable->addTo(&cm);
+	actionClearTable->addTo(&cm);
+	cm.insertSeparator();
+	actionGoToRow->addTo(&cm);
 	}
 cm.exec(QCursor::pos());
 }
 
 void ApplicationWindow::chooseHelpFolder()
 {
-QString dir = QFileDialog::getExistingDirectory(
-                    qApp->applicationDirPath(), this,
-                    "get help directory",
-                    "Choose the location of the QtiPlot help folder!",
+	QString dir = QFileDialog::getExistingDirectory(qApp->applicationDirPath(), this, QString::null,
+                    tr("Choose the location of the QtiPlot help folder!"),
                     true, true );
 
 if (!dir.isEmpty())
@@ -8804,15 +8831,19 @@ void ApplicationWindow::showHelp()
 
 	helpWindow->setFocus();
 	helpWindow->setCentralWidget(browser);
+	helpWindow->setCaption(tr("QtiPlot - Help Browser"));
+	helpWindow->resize(QSize(800, 600));
 
 	QToolBar* toolbar = new QToolBar( helpWindow );
     helpWindow->addToolBar( toolbar, "Toolbar");
-    QToolButton* button = new QToolButton(QPixmap(fileprint_xpm), tr("Print"), "", browser, SLOT(print()), toolbar );
-
-	button = new QToolButton(QPixmap(back_xpm), tr("Backward"), "", browser, SLOT(backward()), toolbar );
+	QToolButton* button = new QToolButton(QPixmap(folder_open_xpm), tr("Open File"), "", browser, SLOT(open()), toolbar);
+	button->setAccel(tr("Ctrl+O"));
+	button = new QToolButton(QPixmap(fileprint_xpm), tr("Print"), "", browser, SLOT(print()), toolbar );
+	button->setAccel(tr("Ctrl+P"));
+	button = new QToolButton(QPixmap(prev_xpm), tr("Backward"), "", browser, SLOT(backward()), toolbar );
     connect( browser, SIGNAL( backwardAvailable(bool) ), button, SLOT( setEnabled(bool) ) );
     button->setEnabled( FALSE );
-	button = new QToolButton(QPixmap(forward_xpm), tr("Forward"), "", browser, SLOT(forward()), toolbar );
+	button = new QToolButton(QPixmap(next_xpm), tr("Forward"), "", browser, SLOT(forward()), toolbar );
     connect( browser, SIGNAL( forwardAvailable(bool) ), button, SLOT( setEnabled(bool) ) );
     button->setEnabled( FALSE );
     button = new QToolButton(QPixmap(home_xpm), tr("Home"), "", browser, SLOT(home()), toolbar );
@@ -8828,21 +8859,16 @@ void ApplicationWindow::showHelp()
 			   tr("Please indicate the location of the help file!<br><br>"
 			   "<p>The manual can be downloaded from the following internet address:</p>"
 			   "<p><font color=blue>'http://soft.proindependent.com/manuals.html'</font></p>"));
-		QString fn = QFileDialog::getOpenFileName(QDir::currentDirPath(),QString::null, this );
+		QString fn = QFileDialog::getOpenFileName(QDir::currentDirPath(), "*.html", this );
 		if (!fn.isEmpty())
 			{
 			QFileInfo fi(fn);
 			helpFilePath=fi.absFilePath();
-			}
-		else
-			{
-			delete helpWindow;
-			exit (0);
+			saveSettings();
 			}
 		}		
 	browser->setSource (helpFilePath);
-	helpWindow->setCaption(tr("QtiPlot - Help Browser"));
-	helpWindow->showMaximized();
+	helpWindow->show();
 }
 
 void ApplicationWindow::showPlotWizard()
@@ -10558,6 +10584,7 @@ else if (action == btnLine)
 
 void ApplicationWindow::connectSurfacePlot(Graph3D *plot)
 {
+connect (plot,SIGNAL(showTitleBarMenu()),this,SLOT(showWindowTitleBarMenu()));
 connect (plot,SIGNAL(showContextMenu()),this,SLOT(showWindowContextMenu()));
 connect (plot,SIGNAL(showOptionsDialog()),this,SLOT(showPlot3dDialog()));
 connect (plot,SIGNAL(closedWindow(myWidget*)), this, SLOT(closeWindow(myWidget*)));
@@ -10573,7 +10600,7 @@ void ApplicationWindow::connectMultilayerPlot(MultiLayer *g)
 {
 // FIXME: the signal changeActiveLayer does not exist
 //connect (g,SIGNAL(changeActiveLayer(Graph *)),this,SLOT(changeActiveGraph(Graph *)));
-
+connect (g,SIGNAL(showTitleBarMenu()),this,SLOT(showWindowTitleBarMenu()));
 connect (g,SIGNAL(showTextDialog()),this,SLOT(showTextDialog()));
 connect (g,SIGNAL(showPlotDialog(int)),this,SLOT(showPlotDialog(int)));
 connect (g,SIGNAL(showScaleDialog(int)), this, SLOT(showScalePageFromAxisDialog(int)));
@@ -10624,6 +10651,7 @@ g->askOnCloseEvent(confirmClosePlot2D);
 
 void ApplicationWindow::connectTable(Table* w)
 {
+connect (w,SIGNAL(showTitleBarMenu()),this,SLOT(showWindowTitleBarMenu()));
 connect (w,SIGNAL(statusChanged(myWidget*)),this, SLOT(updateWindowStatus(myWidget*)));
 connect (w,SIGNAL(hiddenWindow(myWidget*)),this, SLOT(hideWindow(myWidget*)));
 connect (w,SIGNAL(closedWindow(myWidget*)), this, SLOT(closeWindow(myWidget*)));
@@ -11020,6 +11048,12 @@ void ApplicationWindow::createActions()
 
   actionAddColToTable = new QAction(QPixmap(addCol_xpm), tr("Add column"), QString::null, this);
   connect(actionAddColToTable, SIGNAL(activated()), this, SLOT(addColToTable()));
+
+  actionGoToRow = new QAction(tr("&Go to Row..."), tr("Ctrl+Alt+G"), this);
+  connect(actionGoToRow, SIGNAL(activated()), this, SLOT(goToRow()));
+
+  actionClearTable = new QAction(QPixmap(erase_xpm), tr("Clear"), QString::null, this);
+  connect(actionClearTable, SIGNAL(activated()), this, SLOT(clearTable()));
 
   actionDeleteLayer = new QAction(QPixmap(erase_xpm), tr("&Remove Layer"), tr("Alt+R"), this);
   connect(actionDeleteLayer, SIGNAL(activated()), this, SLOT(deleteLayer()));
@@ -11465,6 +11499,9 @@ void ApplicationWindow::translateActionsStrings()
   actionCloseWindow->setAccel(tr("Ctrl+W"));
 
   actionAddColToTable->setMenuText(tr("Add column"));
+  actionClearTable->setMenuText(tr("Clear"));
+  actionGoToRow->setMenuText(tr("&Go to Row..."));
+  actionGoToRow->setAccel(tr("Ctrl+Alt+G"));
 
   actionDeleteLayer->setMenuText(tr("&Remove Layer"));
   actionDeleteLayer->setAccel(tr("Alt+R"));
@@ -13532,6 +13569,40 @@ else
 return newName;
 }
 
+void ApplicationWindow::clearTable()
+{
+Table *t = (Table*)ws->activeWindow();
+if (!t || !t->isA("Table"))
+	return;
+
+if (QMessageBox::question(this, tr("QtiPlot - Warning"),
+    tr("This will clear the contents of all the data associated with the table. Are you sure?"),
+    tr("&Yes"), tr("&No"), QString::null, 0, 1 ) )
+    return;
+else
+	t->clear();
+}
+
+void ApplicationWindow::goToRow()
+{
+if (!ws->activeWindow())
+	return;
+
+if (ws->activeWindow()->isA("Table") || ws->activeWindow()->isA("Matrix"))
+	{
+	bool ok;
+	int row = QInputDialog::getInteger(tr("QtiPlot - Enter row number"), tr("Row"), 
+		   1, 0, 1000000, 1, &ok, this );
+	if ( !ok ) 
+		return;
+
+	if (ws->activeWindow()->isA("Table"))
+		((Table*)ws->activeWindow())->table()->ensureCellVisible(row - 1, 0);
+	else if (ws->activeWindow()->isA("Matrix"))
+		((Matrix*)ws->activeWindow())->table()->ensureCellVisible(row - 1, 0);
+	}
+}
+
 ApplicationWindow::~ApplicationWindow()
 {
 if (lastCopiedLayer)
@@ -13551,7 +13622,16 @@ QApplication::clipboard()->clear(QClipboard::Clipboard);
 
 HelpBrowser::HelpBrowser(QWidget * parent, const char * name)
 		:QTextBrowser (parent, name)
-{}
+{
+setPaletteBackgroundColor(QColor(Qt::lightGray));
+}
+
+void HelpBrowser::open()
+{
+QString fn = QFileDialog::getOpenFileName(QDir::currentDirPath(), "*.html", this);
+if (!fn.isEmpty() && QFile(fn).exists())
+	setSource(fn);
+}
 
 void HelpBrowser::print()
 {

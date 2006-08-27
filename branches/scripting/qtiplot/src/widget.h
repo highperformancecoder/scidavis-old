@@ -49,6 +49,7 @@ public:
 	void closeEvent( QCloseEvent *);
 	void askOnCloseEvent(bool ask){askOnClose = ask;};
 	bool event( QEvent *e );
+	bool eventFilter(QObject *object, QEvent *e);
 
 	void showMaximized();
 	//! Tells if a resize event was requested by the user or generated programatically
@@ -68,6 +69,7 @@ signals:
 	void modifiedWindow(QWidget *);
 	void resizedWindow(QWidget *);
 	void statusChanged(myWidget *);
+	void showTitleBarMenu();
 
 protected:
 	QWidget *titleBar;
