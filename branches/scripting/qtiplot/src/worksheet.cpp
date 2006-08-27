@@ -2792,7 +2792,8 @@ if (e->type() == QEvent::MouseButtonPress && object == (QObject*)hheader)
 		worksheet->setCurrentCell (0, selectedCol);
 		return true;
 		}
-	if (me->button() == QMouseEvent::RightButton)
+	QTableSelection sel = worksheet->selection(0);
+	if (me->button() == QMouseEvent::RightButton && sel.numRows() <= 1 && sel.numCols() <= 1)
 		{
 		selectedCol = hheader->sectionAt (me->pos().x()+offset);	
 		worksheet->clearSelection();
@@ -2804,7 +2805,8 @@ else if (e->type() == QEvent::MouseButtonPress && object == (QObject*)vheader)
 	{
 	const QMouseEvent *me = (const QMouseEvent *)e;
 	int offset = vheader->offset();
-	if (me->button() == QMouseEvent::RightButton)
+	QTableSelection sel = worksheet->selection(0);
+	if (me->button() == QMouseEvent::RightButton && sel.numRows() <= 1 && sel.numCols() <= 1)
 		{
 		worksheet->clearSelection();
 		int row = vheader->sectionAt(me->pos().y()+offset);

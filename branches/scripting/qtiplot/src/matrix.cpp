@@ -540,7 +540,9 @@ bool Matrix::calculate(int startRow, int endRow, int startCol, int endCol)
       script->setInt(col+1, "j");
       script->setInt(col+1, "col");
       ret = script->eval();
-      if (ret.type()==QVariant::Double || ret.type()==QVariant::Int)
+      if (ret.type()==QVariant::Int || ret.type()==QVariant::UInt || ret.type()==QVariant::LongLong || ret.type()==QVariant::ULongLong)
+	table->setText(row, col, ret.toString());
+      else if(ret.canCast(QVariant::Double))
 	table->setText(row,col,QString::number(ret.toDouble(),txt_format, num_precision));
       else {
 	table->setText(row,col,"");
@@ -855,7 +857,8 @@ if (object == (QObject*)hheader) switch(e->type())
 		case QEvent::MouseButtonPress:
 			{
 			const QMouseEvent *me = (const QMouseEvent *)e;
-			if (me->button() == QMouseEvent::RightButton)	
+			QTableSelection sel = table->selection(0);
+			if (me->button() == QMouseEvent::RightButton && sel.numRows() <= 1 && sel.numCols() <= 1)
 				{
 				selectedCol=hheader->sectionAt (me->pos().x() + hheader->offset());
 				table->clearSelection();
@@ -921,7 +924,8 @@ else if (e->type() == QEvent::MouseButtonPress && object == (QObject*)vheader)
 	{
 	const QMouseEvent *me = (const QMouseEvent *)e;
 	int offset = vheader->offset();
-	if (me->button() == QMouseEvent::RightButton)
+	QTableSelection sel = table->selection(0);
+	if (me->button() == QMouseEvent::RightButton && sel.numRows() <= 1 && sel.numCols() <= 1)
 		{
 		table->clearSelection();
 		int row = vheader->sectionAt(me->pos().y()+offset);

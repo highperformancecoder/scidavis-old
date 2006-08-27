@@ -972,7 +972,9 @@ menuBar()->insertItem(tr("&Edit"), edit);
 menuBar()->insertItem(tr("&View"), view);
 menuBar()->insertItem(tr("S&cripting"), scriptingMenu);
 scriptingMenu->clear();
+#ifdef SCRIPTING_DIALOG
 actionScriptingLang->addTo(scriptingMenu);
+#endif
 actionRestartScripting->addTo(scriptingMenu);
 
 if(w)
@@ -11187,8 +11189,10 @@ void ApplicationWindow::createActions()
   actionTechnicalSupport = new QAction(tr("Technical &support"), QString::null, this);
   connect(actionTechnicalSupport, SIGNAL(activated()), this, SLOT(showSupportPage()));
 
+#ifdef SCRIPTING_DIALOG
   actionScriptingLang = new QAction(tr("Scripting &language"), QString::null, this);
   connect(actionScriptingLang, SIGNAL(activated()), this, SLOT(showScriptingLangDialog()));
+#endif
 
   actionRestartScripting = new QAction(tr("&Restart scripting"), QString::null, this);
   connect(actionRestartScripting, SIGNAL(activated()), this, SLOT(restartScriptingEnv()));
@@ -11523,7 +11527,9 @@ void ApplicationWindow::translateActionsStrings()
   actionTranslations->setMenuText(tr("&Translations"));
   actionDonate->setMenuText(tr("Make a &donation"));
   actionTechnicalSupport->setMenuText(tr("Technical &support"));
+#ifdef SCRIPTING_DIALOG
   actionScriptingLang->setMenuText(tr("Scripting &language"));
+#endif
   actionRestartScripting->setMenuText(tr("&Restart scripting"));
 
   actionNoteExecute->setMenuText(tr("E&xecute"));

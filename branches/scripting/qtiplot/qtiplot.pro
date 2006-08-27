@@ -11,6 +11,7 @@ OBJECTS_DIR	= ../tmp/qtiplot
 DESTDIR		= ./
 DEFINES		+= QT_PLUGIN
 #DEFINES		+= SCRIPTING_CONSOLE
+#DEFINES		+= SCRIPTING_DIALOG
 
 SCRIPTING_LANGS = muParser
 # Python support is unstable; use at your own risk
