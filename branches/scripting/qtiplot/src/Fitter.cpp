@@ -107,7 +107,7 @@ void Fit::setInterval(double from, double to)
 { 
 if (!d_curve)
 	{
-	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"), 
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"), 
 						tr("No curve assigned to the fitter! Please assign a curve first!"));
 	return;
 	}
@@ -123,6 +123,7 @@ if (d_n > 0)
 	delete[] d_w;
 	}
 
+d_init_err = false;
 d_curve = curve;
 d_n = end - start + 1;
 
@@ -144,8 +145,9 @@ bool Fit::setDataFromCurve(const QString& curveTitle, Graph *g)
 { 
 if (curveTitle.isEmpty())
 	{
-	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"), 
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"), 
 						tr("Please enter a valid curve name!"));
+	d_init_err = true;
 	return false;
 	}
 
@@ -153,12 +155,18 @@ if (g)
 	d_graph = g;
 
 if (!d_graph)
+	{
+	d_init_err = true;
 	return false;
+	}
 
 int n, start, end;
 QwtPlotCurve *c = d_graph->getValidCurve(curveTitle, d_p, n, start, end);
 if (!c)
+	{
+	d_init_err = true;
 	return false;
+	}
 
 setDataFromCurve(c, start, end);
 return true;
@@ -168,8 +176,9 @@ bool Fit::setDataFromCurve(const QString& curveTitle, double from, double to, Gr
 {  
 if (curveTitle.isEmpty())
 	{
-	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"), 
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"), 
 						tr("Please enter a valid curve name!"));
+	d_init_err = true;
 	return false;
 	}
 
@@ -177,12 +186,18 @@ if (g)
 	d_graph = g;
 
 if (!d_graph)
+	{
+	d_init_err = true;
 	return false;
+	}
 
 int start, end;
 QwtPlotCurve *c = d_graph->getFitLimits(curveTitle, from, to, d_p, start, end);
 if (!c)
+	{
+	d_init_err = true;
 	return false;
+	}
 
 setDataFromCurve(c, start, end);
 return true;
@@ -430,19 +445,19 @@ if (!d_graph || d_init_err)
 
 if (!d_n)
 	{
-	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"),
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"),
 		tr("You didn't specify a data set for this fit operation. Operation aborted!"));
 	return;
 	}
 if (!d_p)
 	{
-	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"),
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"),
 		tr("There are no parameters specified for this fit operation. Operation aborted!"));
 	return;
 	}
 if (d_formula.isEmpty())
 	{
-	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"),
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"),
 		tr("You must specify a valid fit function first. Operation aborted!"));
 	return;
 	}
@@ -1021,7 +1036,7 @@ if (s.isEmpty())
 
 if (d_p < 2)
 	{
-	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"),
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"),
 		tr("There are no parameters specified for this fit operation. Please define a list of parameters first!"));
 	d_init_err = true;
 	return;
@@ -1057,10 +1072,10 @@ d_formula = s;
 }
 
 void NonLinearFit::setParametersList(const QStringList& lst)
-{
+{	
 if ((int)lst.count() < 2)
 	{
-	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"),
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"),
 		tr("You must provide a list containing at least 2 parameters for this type of fit. Operation aborted!"));
 	d_init_err = true;
 	return;
@@ -1425,7 +1440,7 @@ if (!gen_x_data)
 gsl_matrix * m = gsl_matrix_alloc (d_result_points, d_peaks);
 if (!m)
 	{
-	QMessageBox::warning(app, tr("QtiPlot - Error"), tr("Could not allocate enough memory for the fit curves!"));
+	QMessageBox::warning(app, tr("QtiPlot - Fit Error"), tr("Could not allocate enough memory for the fit curves!"));
 	return;
 	}
 		

@@ -186,6 +186,7 @@ public:
   LineMarker* lineMarker(long);
 
   void setTitle(const QString& t);
+  void newLegend();
   void setLegend(const QString&) /NoDerived/;
 %MethodCode
   sipCpp->legend()->setText(*a0);
@@ -194,6 +195,9 @@ public:
   void setYAxisTitle(const QString& text) /PyName=setYTitle/;
 
   void print();
+  void exportImage(const QString& fileName, const QString& fileType = "PNG", 
+  			int quality = 100, bool transparent = false);
+							
   void exportToSVG(const QString& fname);
   void exportToEPS(const QString& fname);
   void exportToWmf(const QString& fname);
@@ -650,4 +654,3 @@ public:
 private:
   PythonScript(const PythonScript&);
 };
-

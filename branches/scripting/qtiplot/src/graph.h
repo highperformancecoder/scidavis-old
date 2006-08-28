@@ -122,7 +122,7 @@ public slots:
 	 void updatePlot();
 
 	 QPixmap graphPixmap();
-	 void exportImage(const QString& fileName,const QString& fileType, int quality, bool transparent);
+	 void exportImage(const QString& fileName, const QString& fileType, int quality = 100, bool transparent = false);
 
 	 // error bars
 	 void addErrorBars(Table *w, const QString& xColName, const QString& yColName, 
