@@ -1,0 +1,338 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Fitting to specific curves</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="The QtiPlot Handbook"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Analysis of data and curves"
+HREF="c3660.html"><LINK
+REL="PREVIOUS"
+TITLE="Non Linear Curve Fit"
+HREF="x3734.html"><LINK
+REL="NEXT"
+TITLE="Multi-Peaks fitting"
+HREF="x3813.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="qtiplot.css"></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> Handbook</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x3734.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 6. Analysis of data and curves</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x3813.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="sec-ajustements-specifiques"
+>Fitting to specific curves</A
+></H1
+><P
+><SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> include quick access to the most usefull functions for fitting.</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-fit-linear"
+>Fitting to a line</A
+></H2
+><P
+>This command is used to fit a curve which has a linear shape.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-fit-linear"
+></A
+><P
+><B
+>Figure 6-4. The results of a <B
+CLASS="command"
+>Fit Bolzmann (sigmoidal)</B
+>.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/fit-linear.png"></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-fit-bolzmann"
+>Fitting to a Bolzmann function</A
+></H2
+><P
+>This command is used to fit a curve which has a sigmoidal shape. The function used is:</P
+><DIV
+CLASS="equation"
+><A
+NAME="AEN3764"
+></A
+><P
+><B
+>Equation 6-3. Bolzmann equation</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="equations/equation_bolzmann.png"></P
+></DIV
+></DIV
+><P
+>in which A<SUB
+>2</SUB
+> is the high Y limit, A<SUB
+>1</SUB
+> is the low Y limit, x<SUB
+>0</SUB
+> is the inflexion point and dx is the width.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-fit-bolzman"
+></A
+><P
+><B
+>Figure 6-5. The results of a <B
+CLASS="command"
+>Fit Bolzmann (sigmoidal)</B
+>.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/fit-bolzmann.png"></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-fit-gaussian"
+>Fitting to a Gauss function</A
+></H2
+><P
+>This command is used to fit a curve which has a bell shape. The function used is:</P
+><DIV
+CLASS="equation"
+><A
+NAME="AEN3782"
+></A
+><P
+><B
+>Equation 6-4. Gauss equation</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="equations/equation_gauss.gif"></P
+></DIV
+></DIV
+><P
+>in which A is the height, w is the width, x<SUB
+>c</SUB
+> is the center and y<SUB
+>0</SUB
+> is the Y-values offset.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-fit-gauss"
+></A
+><P
+><B
+>Figure 6-6. The results of a <B
+CLASS="command"
+>Fit Gaussian</B
+>.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/fit-gauss.png"></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-fit-lorentzian"
+>Fitting to a Lorentz function</A
+></H2
+><P
+>This command is used to fit a curve which has a bell shape. The function used is:</P
+><DIV
+CLASS="equation"
+><A
+NAME="AEN3799"
+></A
+><P
+><B
+>Equation 6-5. Lorentz equation</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="equations/equation_lorentz.gif"></P
+></DIV
+></DIV
+><P
+>in which A is the area, w is the width, x<SUB
+>c</SUB
+> is the center and y<SUB
+>0</SUB
+> is the Y-values offset.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-fit-lorentz"
+></A
+><P
+><B
+>Figure 6-7. The results of a <B
+CLASS="command"
+>Fit Lorentzian</B
+>.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/fit-lorentz.png"></P
+></DIV
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x3734.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x3813.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Non Linear Curve Fit</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c3660.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Multi-Peaks fitting</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

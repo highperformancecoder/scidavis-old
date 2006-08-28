@@ -1,0 +1,231 @@
+<!--
+
+		SMALL TUTORIAL ON THE ANALYSIS POSSIBILITIES
+		============================================
+
+		JANUARY 2006: BASED ON VERSION 0.7.7
+
+-->
+
+<chapter id="analysis">
+  <title>Analysis of data and curves</title>
+
+<sect1 id="sec-fft">
+<title>Fast Fourier Transform</title>
+
+<para>This function can be accessed by the command <link linkend="fft-cmd">&fft-cmd;</link>. It can be found in the <link linkend="sec-analysis-menu">Analysis Menu</link> when a table or a plot is selected. The Fourier transform decomposes a signal in its elementary components by assuming that the signal x(t) can be describe as a sum:</para>
+
+<equation> 
+  <title>Fourier equation</title>
+  <mediaobject>
+    <imageobject>
+      <imagedata format="GIF" fileref="equations/equation_fourier.gif"/>
+    </imageobject>
+  </mediaobject>
+</equation>
+
+<para>in which <inlinemediaobject><imageobject><imagedata format="GIF" fileref="equations/equation_omega-n.gif"/></imageobject></inlinemediaobject> are the frequencies, a<subscript>n</subscript> are the amplitudes of each frequency and <inlinemediaobject><imageobject><imagedata format="GIF" fileref="equations/equation_psi-n.gif"/></imageobject></inlinemediaobject> are the phase corresponding frequency. &appname; will compute these parameters and build a new plot of the amplitude as a function of the frequency.</para>
+
+<figure id="fig-exemple-fft">
+  <title>An example of a inverse FFT.</title>
+  <informalexample>
+    <para>FFT performed on a curve to extract the characteristic frequencies. The signal is on the bottom plot, while the amplitude-frequency plot is on the top layer. In this example, the amplitude curve has been normalized, and the frequencies have been shifted to obtain a centered x-scale.</para>
+  </informalexample>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/exemple-fft.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
+<para>Some parameters of the FFT can be modified in the <link linkend="fft-dialog">FFT dialog</link>.</para>
+
+</sect1>
+
+<sect1 id="sec-correlate">
+<title>Correlation</title>
+
+<para>This function can be accessed by the command <link linkend="correlate-cmd">&correlate-cmd;</link>. It can be found in the <link linkend="sec-analysis-menu">Analysis Menu</link> when a table is selected. The correlation function, also known as the covariance function is used to test the similarity of two signals <emphasis>x(t)</emphasis> and <emphasis>y(t)</emphasis>. It is computed by:</para>
+
+<equation> 
+  <title>Covariance function of two signals <emphasis>x(t)</emphasis> and <emphasis>y(t)</emphasis></title>
+  <mediaobject>
+    <imageobject>
+      <imagedata format="GIF" fileref="equations/equation_covariance.gif"/>
+    </imageobject>
+  </mediaobject>
+</equation>
+
+<para>in which <inlineequation><alt>x_m</alt><graphic fileref="equations/equation_x-m.gif"/></inlineequation> and <inlineequation><alt>y_m</alt><graphic fileref="equations/equation_y-m.gif"/></inlineequation> are the mean values of the signals <emphasis>x(t)</emphasis> and <emphasis>y(t)</emphasis> respectively.</para>
+<para>If the number of points is <emphasis>N</emphasis>, the function will be computed between <emphasis>-N/2</emphasis> and <emphasis>N/2</emphasis>. The abscissae are therefore point numbers and not<emphasis>t</emphasis> values.</para>
+
+<figure id="fig-exemple-correlation">
+  <title>An example of a correlation between two sinus functions.</title>
+  <informalexample>
+    <para>The first plot shows the two signals, the second one is the correlation function between the two signal which shows that there are correlations, and the third one is the Fourier transform which is done to extract the caracteristic frequencies of the correlation function.</para>
+  </informalexample>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/exemple-correlation.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
+<para>The correlation of a signal with itself can also be used in spectral analysis (it is then called autocorrelation or autocovariance function).</para>
+
+</sect1>
+
+<sect1 id="sec-convolute">
+<title>Convolution</title>
+<para>.</para>
+
+</sect1>
+
+<sect1 id="sec-deconvolute">
+<title>Deconvolution</title>
+<para>.</para>
+
+</sect1>
+
+<sect1 id="sec-non-linear-curve-fit">
+<title>Non Linear Curve Fit</title>
+
+<para>This function can be accessed by the command <link linkend="non-linear-curve-fit-cmd">&non-linear-curve-fit-cmd;</link>. It can be found in the <link linkend="sec-analysis-menu">Analysis Menu</link> when a table is selected.</para>
+
+  <figure id="fig-non-linear-curve-fit-3">
+    <title>The results of the &non-linear-curve-fit-cmd;.</title>
+    <informalexample>
+      <para>The results are shown in the log window, the curve is plotted in the active window, and a table is created to store the fit.</para>
+    </informalexample>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG"  fileref="pics/fit-dialog3.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+</sect1>
+
+<sect1 id="sec-ajustements-specifiques">
+<title>Fitting to specific curves</title>
+
+<para>&appname; include quick access to the most usefull functions for fitting.</para>
+
+<sect2 id="sec-fit-linear">
+<title>Fitting to a line</title>
+
+<para>This command is used to fit a curve which has a linear shape.</para>
+
+  <figure id="fig-fit-linear">
+    <title>The results of a &fit-bolzmann-cmd;.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/fit-linear.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+</sect2>
+
+<sect2 id="sec-fit-bolzmann">
+<title>Fitting to a Bolzmann function</title>
+
+<para>This command is used to fit a curve which has a sigmoidal shape. The function used is:</para>
+
+<equation> 
+  <title>Bolzmann equation</title>
+  <mediaobject>
+    <imageobject>
+      <imagedata  format="PNG" fileref="equations/equation_bolzmann.png"/>
+    </imageobject>
+  </mediaobject>
+</equation>
+
+<para>in which A<subscript>2</subscript> is the high Y limit, A<subscript>1</subscript> is the low Y limit, x<subscript>0</subscript> is the inflexion point and dx is the width.</para>
+
+  <figure id="fig-fit-bolzman">
+    <title>The results of a &fit-bolzmann-cmd;.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/fit-bolzmann.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+</sect2>
+
+<sect2 id="sec-fit-gaussian">
+<title>Fitting to a Gauss function</title>
+
+<para>This command is used to fit a curve which has a bell shape. The function used is:</para>
+
+<equation> 
+  <title>Gauss equation</title>
+  <mediaobject>
+    <imageobject>
+      <imagedata  format="GIF" fileref="equations/equation_gauss.gif"/>
+    </imageobject>
+  </mediaobject>
+</equation>
+
+<para>in which A is the height, w is the width, x<subscript>c</subscript> is the center and y<subscript>0</subscript> is the Y-values offset.</para>
+
+  <figure id="fig-fit-gauss">
+    <title>The results of a &fit-gaussian-cmd;.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/fit-gauss.png"/>
+      </imageobject>
+   </mediaobject>
+  </figure>
+
+</sect2>
+
+<sect2 id="sec-fit-lorentzian">
+<title>Fitting to a Lorentz function</title>
+
+<para>This command is used to fit a curve which has a bell shape. The function used is:</para>
+
+<equation> 
+  <title>Lorentz equation</title>
+  <mediaobject>
+    <imageobject>
+      <imagedata  format="GIF" fileref="equations/equation_lorentz.gif"/>
+    </imageobject>
+  </mediaobject>
+</equation>
+
+<para>in which A is the area, w is the width, x<subscript>c</subscript> is the center and y<subscript>0</subscript> is the Y-values offset.</para>
+
+  <figure id="fig-fit-lorentz">
+    <title>The results of a &fit-lorentzian-cmd;.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/fit-lorentz.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="sec-fit-multipeak">
+<title>Multi-Peaks fitting</title>
+
+<para>This kind of fitting allows to fit you data points to a sum of N gaussian or lorentzian functions.</para>
+<para>The first step is to specify the numbers of peaks.</para>
+  <figure id="fig-fit-multipeak">
+    <title>The results of a &fit-multipeak-gaussian-cmd;.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/fit-multipeak-2.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+
+</sect1>
+
+
+</chapter>

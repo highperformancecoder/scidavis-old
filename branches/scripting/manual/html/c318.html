@@ -1,0 +1,598 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Drawing plots with QtiPlot</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="The QtiPlot Handbook"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="General Concepts and Terms"
+HREF="x94.html"><LINK
+REL="NEXT"
+TITLE="3D plots"
+HREF="x469.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="qtiplot.css"></HEAD
+><BODY
+CLASS="chapter"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> Handbook</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x94.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x469.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="drawing-plots"
+></A
+>Chapter 2. Drawing plots with <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+></H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+><A
+HREF="c318.html#sec-2d-plots"
+>2D plots</A
+></DT
+><DT
+><A
+HREF="x469.html"
+>3D plots</A
+></DT
+><DT
+><A
+HREF="x555.html"
+>Multilayer Plots</A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="sec-2d-plots"
+>2D plots</A
+></H1
+><P
+>A 2D plot is based on curves which are defined by Y values as functions of X values. There are two ways to obtain a 2D plot depending on the way the (X,Y) values are defined:</P
+><P
+></P
+><UL
+><LI
+><P
+>You can have your (X,Y) values in a <A
+HREF="x94.html#sec-intro-table"
+>table</A
+>. You need to select at least one column as X values and one column as Y values. This is specified with the <A
+HREF="x1634.html#column-options-cmd"
+><B
+CLASS="command"
+>Column Options...</B
+> command</A
+>. Then you can select the columns and use one command of the <A
+HREF="x1029.html"
+>Plot menu</A
+> to plot the data.</P
+></LI
+><LI
+><P
+>If you want to plot a function, you don't need a table. You can use directly the <A
+HREF="c626.html#new-function-plot-cmd"
+><B
+CLASS="command"
+>New Function Plot</B
+> command</A
+>. This will open the corresponding <A
+HREF="x2983.html"
+>dialog box</A
+> and you will be able to define the mathematical expression of your function.</P
+></LI
+><LI
+><P
+>The combined way is to define a <A
+HREF="x94.html#sec-intro-table"
+>table</A
+>, and then to fill in the table with the results of functions. This can be done with the <A
+HREF="x1634.html#set-column-values-cmd"
+><B
+CLASS="command"
+>Set Column Values...</B
+> command</A
+>. Then you can select the columns and use one command of the <A
+HREF="x1029.html"
+>Plot menu</A
+> to plot the data.</P
+></LI
+></UL
+><P
+><SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> will create a new plot window, and the plot will be inserted in a new layer</P
+><P
+>Once the plot is created, you can customize all the graphic items of the plot with the commands of the <A
+HREF="x1742.html"
+>Format Menu</A
+>. You can add new items (text labels, lines or arrows, new legend, images) on the plot with the commands of the <A
+HREF="x947.html"
+>Graph Menu</A
+>.</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-2d-plot-from-data"
+>2D plot from data.</A
+></H2
+><P
+>The data must be stored in a <A
+HREF="x94.html#sec-intro-table"
+>table</A
+>. There are several possibilities to insert your (X,Y) values in the table: you can write them directly from the keyboard, or read them from a file. Here we will use the first solution, refer to the <A
+HREF="c626.html#import-ascii-cmd"
+><B
+CLASS="command"
+>Import ASCII</B
+> command</A
+> to use the second one.</P
+><P
+>The first step is to create an empty project with the <A
+HREF="c626.html#new-project-cmd"
+><B
+CLASS="command"
+>New Project</B
+> command</A
+> from the <A
+HREF="c626.html#sec-file-menu"
+>File menu</A
+>, you can also use the key <SPAN
+CLASS="keycode"
+>Ctrl-N</SPAN
+> or the <SPAN
+CLASS="inlinemediaobject"
+><IMG
+SRC="icons/new.png"></SPAN
+> icon from the <A
+HREF="x2114.html"
+>File toolbar</A
+>. Then create a new table with the <A
+HREF="c626.html#new-table-cmd"
+><B
+CLASS="command"
+>New Table</B
+> command</A
+> from the <A
+HREF="c626.html#sec-file-menu"
+>File menu</A
+> or with the <SPAN
+CLASS="keycode"
+>Ctrl-T</SPAN
+> or with the <SPAN
+CLASS="inlinemediaobject"
+><IMG
+SRC="icons/table.png"></SPAN
+> icon from the <A
+HREF="x2114.html"
+>File toolbar</A
+>.</P
+><P
+>At its creation, the table has two column (one for X and one for Y) and 32 rows. You can add rows and columns by selecting a row or a column and using the right button of the mouse, you can also modify the number of rows and columns with the <A
+HREF="x1029.html#rows-cmd"
+><B
+CLASS="command"
+>Rows</B
+> command</A
+> and <A
+HREF="x1029.html#columns-cmd"
+><B
+CLASS="command"
+>Columns</B
+> command</A
+> from the <A
+HREF="x1634.html"
+>Table menu</A
+>. You enter your values, and obtain this table:</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-simple-2dplot-1"
+></A
+><P
+><B
+>Figure 2-1. A simple 2D plot: the table.</B
+></P
+><DIV
+CLASS="informalexample"
+><P
+></P
+><A
+NAME="AEN378"
+></A
+><P
+>the unused rows have been removed.</P
+><P
+></P
+></DIV
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="tutorial/simple-2dplot-1.png"></P
+></DIV
+></DIV
+><P
+>The you have to select the two columns, and build you plot (here a simple 2D scatter) with the <A
+HREF="x1029.html#scatter-cmd"
+><B
+CLASS="command"
+>Scatter</B
+> command</A
+> from the context menu, or by clicking on the corresponding icon <SPAN
+CLASS="inlinemediaobject"
+><IMG
+SRC="icons/pPlot.png"></SPAN
+> icon from the <A
+HREF="x2318.html"
+>Plot toolbar</A
+> or with the <A
+HREF="x1029.html#scatter-cmd"
+><B
+CLASS="command"
+>Scatter</B
+> command</A
+> from the <A
+HREF="x1029.html"
+>Plot menu</A
+>. A plot is created which use the default options for all elements. You can customize these default options with the <A
+HREF="x3391.html"
+>preferences dialog</A
+>. With default options, you obtain the following plot:</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-simple-2dplot-2"
+></A
+><P
+><B
+>Figure 2-2. A simple 2D plot: the default plot.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="tutorial/simple-2dplot-2.png"></P
+></DIV
+></DIV
+><P
+>You can then customize your plot. By double clicking on the points, you open the <A
+HREF="x3138.html"
+>Custom curves dialog</A
+> which is used to modify the symbols. Then a double-click on the axes open the <A
+HREF="x3333.html"
+>general plot options dialog</A
+>, and you can change the scales, the fonts for the axes labels, etc. You can also add grid lines on X or Y axes, etc. Finally, a double click on each text item (X title, Y title, plot title) allows to change the text and the presentation of these elements. The final plot is:</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-simple-2dplot-3"
+></A
+><P
+><B
+>Figure 2-3. A simple 2D plot: the plot finished.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="tutorial/simple-2dplot-3.png"></P
+></DIV
+></DIV
+><P
+>Finally, you have to save your project in a '.qti' file with the <A
+HREF="c626.html#save-project-cmd"
+><B
+CLASS="command"
+>Save Project</B
+> command</A
+> from the <A
+HREF="c626.html#sec-file-menu"
+>File menu</A
+> or with the <SPAN
+CLASS="keycode"
+>Ctrl-S</SPAN
+> or with the <SPAN
+CLASS="inlinemediaobject"
+><IMG
+SRC="icons/filesave.png"></SPAN
+> icon from the <A
+HREF="x2114.html"
+>File toolbar</A
+>. Depending on your application, you can export your plot to a standard image file with the command  <A
+HREF="c626.html#export-graph-current-cmd"
+><B
+CLASS="command"
+>Export Graph -&#62; Current</B
+> command</A
+> from the <A
+HREF="c626.html#sec-file-menu"
+>File menu</A
+> (or with the <SPAN
+CLASS="keycode"
+>Ctrl-G</SPAN
+> keycode).
+</P
+><P
+>There are several types of plot which can be built from a table. They are presented in the <A
+HREF="x1029.html"
+>Plot menu</A
+></P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-2d-plot-from-function"
+>2D plot from function.</A
+></H2
+><P
+>There are two ways to obtain such a plot: you can plot directly a function or fill a table with the values calculated from this function before doing a plot in the classical way.</P
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="AEN425"
+>Direct plot of a function.</A
+></H3
+><P
+>If you just want to plot a function, you can use the command <A
+HREF="c626.html#new-function-plot-cmd"
+><B
+CLASS="command"
+>New Function Plot</B
+> command</A
+> from the <A
+HREF="c626.html#sec-file-menu"
+>File menu</A
+> or with the <SPAN
+CLASS="keycode"
+>Ctrl-F</SPAN
+> or with the <SPAN
+CLASS="inlinemediaobject"
+><IMG
+SRC="icons/newF.png"></SPAN
+> icon from the <A
+HREF="x2114.html"
+>File toolbar</A
+>.</P
+><P
+>This command will open the <A
+HREF="x2983.html"
+>Add Function Curve dialog</A
+>. You can then enter the expression of your mathematical function, the X range used for the plot, and the number of points used in this X range. Beside classical Y=f(X) functions, parametric and polar functions can be defined.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-direct-function-plot"
+></A
+><P
+><B
+>Figure 2-4. Direct plot of a function.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/direct-function-plot.png"></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="AEN443"
+>Filling of a table with the values of a function.</A
+></H3
+><P
+>If you just want to work not only with the plot but also with the data, you can create a new table as explained in the <A
+HREF="c318.html#sec-2d-plot-from-data"
+>previous section</A
+>. Then you can fill this table with the values of a function with the <A
+HREF="x1634.html#set-column-values-cmd"
+><B
+CLASS="command"
+>Set Column Values...</B
+> command</A
+>.</P
+><P
+>To obtain the same plot as in the previous example, you need to create a new table (key <SPAN
+CLASS="keycode"
+>Ctrl-T</SPAN
+>), then select the first column and use the command <A
+HREF="x1634.html#set-column-values-cmd"
+><B
+CLASS="command"
+>Set Column Values...</B
+> command</A
+> from the context menu, or from the <A
+HREF="x1634.html"
+>Table menu</A
+>. The row number symbol is <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>i</I
+></SPAN
+>, so you can enter the function expression <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>i/10</I
+></SPAN
+> and use 300 rows.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-table-function-plot-1"
+></A
+><P
+><B
+>Figure 2-5. Function plot: filling of the X column.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="tutorial/table-function-plot1.png"></P
+></DIV
+></DIV
+><P
+>The second step is to select the second column and use the same command. The expression is a function of the X values, that is the first column named <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>col(1)</I
+></SPAN
+>.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-table-function-plot-2"
+></A
+><P
+><B
+>Figure 2-6. Function plot: filling of the Y column.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="tutorial/table-function-plot2.png"></P
+></DIV
+></DIV
+><P
+>Once the table is ready, you just have to build the plot as explained in the previous section.</P
+></DIV
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x94.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x469.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>General Concepts and Terms</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>3D plots</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

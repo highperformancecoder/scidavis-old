@@ -1,0 +1,397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>3D plots</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="The QtiPlot Handbook"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Drawing plots with QtiPlot"
+HREF="c318.html"><LINK
+REL="PREVIOUS"
+TITLE="Drawing plots with QtiPlot"
+HREF="c318.html"><LINK
+REL="NEXT"
+TITLE="Multilayer Plots"
+HREF="x555.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="qtiplot.css"></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> Handbook</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c318.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Drawing plots with <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x555.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="sec-3d-plots"
+>3D plots</A
+></H1
+><P
+>3D plot are defined by datas defined as Z=f(X,Y). As for 2D plots, there are two ways to obtain a 3D plot depending on the way the (X,Y,Z) values are defined:</P
+><P
+></P
+><UL
+><LI
+><P
+>You can have your Z values in a <A
+HREF="x94.html#sec-intro-matrix"
+>matrix</A
+>. <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> will consider that all the data presents in the matrix are Z values, and the X and Y values can be defined as a function of the columns and rows numbers.</P
+><P
+>The data in the matrix can be entered in several ways:</P
+><P
+></P
+><UL
+><LI
+><P
+>one by one from the keyboard,</P
+></LI
+><LI
+><P
+>by reading an ascii file in a table and converting the table into a matrix,</P
+></LI
+><LI
+><P
+>by setting the values with a function.</P
+></LI
+></UL
+></LI
+><LI
+><P
+>If you want to plot a function, you don't need a matrix. You can use directly the <A
+HREF="c626.html#new-surface-3d-plot-cmd"
+><B
+CLASS="command"
+>New Surface 3D Plot</B
+> command</A
+>. This will open the corresponding <A
+HREF="x3234.html"
+>dialog box</A
+> and you will be able to define the mathematical expression of your function.</P
+></LI
+></UL
+><DIV
+CLASS="figure"
+><A
+NAME="fig-exemple-3dplot"
+></A
+><P
+><B
+>Figure 2-7. Example of a 3D Plots.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/exemple-plot3d.png"></P
+></DIV
+></DIV
+><P
+>&#13;The 3D plots use OpenGL so you can easily rotate, scale and shift them with the mouse. Via the 3D plot settings dialog or via the Surface 3D Toolbar you can changed all the predefined settings of a three dimensional plot: grids, scales, axes, title, legend, colors for the different elements.
+</P
+><P
+>There are several types of plot which can be built from a matrix. They are presented in the <A
+HREF="x1273.html"
+>Plot3d menu</A
+></P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-3d-plot-function"
+>Direct 3D plot from a function</A
+></H2
+><P
+>This is the simplest way to obtain a 3d plot. it is done with the <B
+CLASS="command"
+>New Surface 3D Plot</B
+> from the <A
+HREF="c626.html#sec-file-menu"
+>File menu</A
+> or directly with the <SPAN
+CLASS="keycode"
+>Ctrl-Alt-Z</SPAN
+>. This will open the folowing <A
+HREF="x3234.html"
+>dialog box</A
+>:</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-define-surface-plot"
+></A
+><P
+><B
+>Figure 2-8. Definition of a new surface 3D plot</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/define-surface-plot.png"></P
+></DIV
+></DIV
+><P
+>You can enter the function z=f(x,y) and the ranges for X,Y and Z. Then <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> will create a default 3d plot:</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-default-surface-plot"
+></A
+><P
+><B
+>Figure 2-9. The 3D surface plot created by default</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/3D-function-plot-default.png"></P
+></DIV
+></DIV
+><P
+>You can then customize this plot to improve by opening the <A
+HREF="x3543.html"
+>Surface plot options dialog</A
+>. You can modify the axis ranges and parameters, add a title, change the colors of the different items, and modify the aspect ratio of the plot. In addition, you can use the different commands of the <A
+HREF="x2715.html"
+>3d plot toolbar</A
+> to add grids on the walls or to modify the style of the plot. After some modifications, you can obtain the following plot:</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-modified-surface-plot"
+></A
+><P
+><B
+>Figure 2-10. The 3D surface plot after customizations</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/3D-function-plot-modified.png"></P
+></DIV
+></DIV
+><P
+>If you want to modify the function itself, you can use the <B
+CLASS="command"
+>surface...</B
+> command which can be activated from the context menu with a right click on the 3D plot. This will re-open the <A
+HREF="x3234.html"
+>define surface function dialog box</A
+>.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-3d-plot-matrix"
+>3D plot from a matrix</A
+></H2
+><P
+>The second way to obtain a 3D plot is to use a <A
+HREF="x94.html#sec-intro-matrix"
+>matrix</A
+>. Therefore, the first step is to fill the matrix.This can be done with by defining a function.</P
+><P
+>The <A
+HREF="c626.html#new-matrix-cmd"
+><B
+CLASS="command"
+>New Matrix</B
+> command</A
+> create a default empty matrix with 32x32 cells. Then use the <A
+HREF="x1700.html#set-dimensions-cmd"
+><B
+CLASS="command"
+>Set Dimensions...</B
+> command</A
+> to modify the number of rows and columns of the matrix. This <A
+HREF="x3474.html"
+>dialog box</A
+> is also used to define the X and Y ranges. </P
+><DIV
+CLASS="informalfigure"
+><P
+></P
+><A
+NAME="AEN538"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/matrix-set-dimensions.png"></P
+></DIV
+><P
+></P
+></DIV
+><P
+>Then use the <A
+HREF="x1700.html#set-values-cmd"
+><B
+CLASS="command"
+>Set Values...</B
+> command</A
+> to fill the cells with numbers. The ranges of X and Y defined in the previous step are not known by this dialog box, then the function is defined with the row and column numbers (i and j) as entry parameters (see the section <A
+HREF="x3525.html"
+>set-values</A
+> for details).</P
+><P
+>The other way to obtain a matrix is to import an ASCII file into a table with the <A
+HREF="c626.html#import-ascii-1-cmd"
+><B
+CLASS="command"
+>Import ASCII -&#62; Single File...</B
+> command</A
+> from the <A
+HREF="c626.html#sec-file-menu"
+>File menu</A
+>. The table can then be transformed in a matrix with the command <A
+HREF="x1634.html#convert-to-matrix-cmd"
+><B
+CLASS="command"
+>Convert to Matrix</B
+> command</A
+> from the <A
+HREF="x1634.html"
+>Table menu</A
+>.</P
+><P
+>You can then use this matrix to build a 3D plot with one of the command of the <A
+HREF="x1029.html"
+>Plot menu</A
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c318.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x555.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Drawing plots with <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c318.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Multilayer Plots</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

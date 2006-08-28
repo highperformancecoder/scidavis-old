@@ -1,0 +1,756 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>General Concepts and Terms</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="The QtiPlot Handbook"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Introduction"
+HREF="c39.html"><LINK
+REL="PREVIOUS"
+TITLE="Command Line Options"
+HREF="x67.html"><LINK
+REL="NEXT"
+TITLE="Drawing plots with QtiPlot"
+HREF="c318.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="qtiplot.css"></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> Handbook</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x67.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 1. Introduction</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c318.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="general-concepts"
+>General Concepts and Terms</A
+></H1
+><P
+>Several plots and all the data related to these plots can be save in a <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>project</I
+></SPAN
+> file, the project is therefore the main container of <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+>. The following screenshot give an example of a typical session.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-qtiplot-session"
+></A
+><P
+><B
+>Figure 1-1. A typical <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> session</B
+></P
+><DIV
+CLASS="informalexample"
+><P
+></P
+><A
+NAME="AEN102"
+></A
+><P
+>This example shows the <A
+HREF="x94.html#sec-intro-log-window"
+>log panel</A
+> at the top of the workspace, the <A
+HREF="x94.html#sec-intro-project-explorer"
+>project explorer</A
+> at the bottom, a <A
+HREF="x94.html#sec-intro-table"
+>table</A
+> and a <A
+HREF="x94.html#sec-intro-plot-window"
+>plot window</A
+> are shown while other are docked or hidden.</P
+><P
+></P
+></DIV
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/qtiplot-session.png"></P
+></DIV
+></DIV
+><P
+>There are numerous commands available in <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> depending on the element which is selected. Therefore, the main menu bar changes when you select a particular element of the project. Moreover, you can access to the set of commands relevant of an element by activating the context menu with the right button of the mouse.</P
+><P
+>In a project, the containers which can be used are:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+HREF="x94.html#sec-intro-table"
+>A Table</A
+></DT
+><DD
+><P
+>A table is a spreadsheet which can be used to store the datas you are entering. It can also be used to do some calculations and statistical analysis of datas. In each table, columns can be labelled as X-values or Y-values for 2D-plotting, or Z-values if you plan to build a 3D-plot.</P
+><P
+>A table can be created by the <A
+HREF="c626.html#new-table-cmd"
+><B
+CLASS="command"
+>New Table</B
+> command</A
+>. Then there are several ways to fill the table with your data. If you want to read a table from an ASCII file, you can import the data of the file to a table with the <A
+HREF="c626.html#import-ascii-1-cmd"
+><B
+CLASS="command"
+>Import ASCII -&#62; Single File...</B
+> command</A
+>. You can also enter each value from the keyboard. The last way to enter your data is to fill the table with the results of a mathematical function (<A
+HREF="x1634.html#set-column-values-cmd"
+><B
+CLASS="command"
+>Set Column Values...</B
+> command</A
+> from the <A
+HREF="x1634.html"
+>Table menu</A
+>)</P
+></DD
+><DT
+><A
+HREF="x94.html#sec-intro-matrix"
+>A Matrix</A
+></DT
+><DD
+><P
+>A matrix is a special table which is used to store the data point for surface 3D plot. It contains Z-values and doesn't include any column or row which could be designed as X-values or Y-values. Nevertheless, you can specify the X-values and the Y-values with the <A
+HREF="x1700.html#set-dimensions-cmd"
+><B
+CLASS="command"
+>Set Dimensions...</B
+> command</A
+> command from the <A
+HREF="x1700.html"
+>Matrix menu</A
+>.</P
+><P
+>A matrix can be created by the <A
+HREF="c626.html#new-matrix-cmd"
+><B
+CLASS="command"
+>New Matrix</B
+> command</A
+>. If you want to read a matrix from an ASCII file, you can import the data of the file to a table with the <A
+HREF="c626.html#import-ascii-1-cmd"
+><B
+CLASS="command"
+>Import ASCII -&#62; Single File...</B
+> command</A
+> and then convert this table to a matrix with the <A
+HREF="x1634.html#convert-to-matrix-cmd"
+><B
+CLASS="command"
+>Convert to Matrix</B
+> command</A
+>. In the same way as for tables, you can also fill matrix with the results of a function z=(i,j) in which i and j are row and column numbers (<A
+HREF="x1700.html#set-values-cmd"
+><B
+CLASS="command"
+>Set Values...</B
+> command</A
+> from the <A
+HREF="x1700.html"
+>Matrix menu</A
+>)</P
+></DD
+><DT
+><A
+HREF="x94.html#sec-intro-plot-window"
+>A plot window</A
+></DT
+><DD
+><P
+>A window can contain one or several plots. Each of these plots is contained in a different <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>layer</I
+></SPAN
+>, these layers can be arranged in many ways to build matrix of plots.</P
+><P
+>A new layer can be added to an existing window with the <A
+HREF="x947.html#add-layer-cmd"
+><B
+CLASS="command"
+>Add Layer</B
+> command</A
+> from the <A
+HREF="x947.html"
+>Graph menu</A
+>. you can also remove an existing layer with the <A
+HREF="x947.html#remove-layer-cmd"
+><B
+CLASS="command"
+>Remove Layer</B
+> command</A
+>, but if you remove a layer, the plot will be deleted. You can also copy a layer from one plot window to another. you can also copy an existing plot window into another, the window will be added as a new layer (see the section on <A
+HREF="x555.html"
+>Multilayer Plots</A
+> for more details).</P
+><P
+>Plots can be created in several ways. You can select data in tables or matrix and build a plot, or create new plots from functions of one or two variables (see sections <A
+HREF="c318.html#sec-2d-plots"
+>2D plots</A
+> and <A
+HREF="x469.html"
+>3D plots</A
+>).</P
+></DD
+><DT
+><A
+HREF="x94.html#sec-intro-log-window"
+>The Log Window</A
+></DT
+><DD
+><P
+>This window is used to store the results of all the calculations which have been done. If this window is not visible, you can find it with the <A
+HREF="x94.html#sec-intro-project-explorer"
+>Project Explorer</A
+> or with the <A
+HREF="x918.html#results-log-cmd"
+><B
+CLASS="command"
+>Results log</B
+> command</A
+>.</P
+><P
+>When you load a previously saved project, all the analysis are done again so that the results-log panel is re-filled with the results of the calculations.</P
+></DD
+><DT
+><A
+HREF="x94.html#sec-intro-project-explorer"
+>The Project Explorer</A
+></DT
+><DD
+><P
+>This window is used to list all the windows contained in a projet. The <A
+HREF="x3383.html"
+>Project Explorer</A
+> gives a quick access to all elements of a project, hidden or visibles. It can be used to do some operations on the windows related to these items such as hidding a window, renaming windows, etc.</P
+><P
+>Since the version 0.8.5, a project file can include several independant projects. In this case, the containers or each project are stored in different folders.</P
+></DD
+><DT
+><A
+HREF="x94.html#sec-intro-note"
+>A note</A
+></DT
+><DD
+><P
+>This window is just a text container which allows to insert comments and notes in a project.</P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-intro-table"
+>Tables</A
+></H2
+><P
+>&#13;The table is the main part of QtiPlot when working with data. For controlling and converting data the spreadsheet contains a highly customizable table: all colors and font preferences can be set using the <A
+HREF="x918.html#preferences-cmd"
+><B
+CLASS="command"
+>Preferences...</B
+> command</A
+> of the <A
+HREF="x918.html"
+>View menu</A
+>. You can resize a table in terms of rows and columns using the <A
+HREF="x1634.html"
+>Table menu</A
+> with <A
+HREF="x1029.html#rows-cmd"
+><B
+CLASS="command"
+>Rows</B
+> command</A
+> or <A
+HREF="x1029.html#columns-cmd"
+><B
+CLASS="command"
+>Columns</B
+> command</A
+>. 
+</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-the-table"
+></A
+><P
+><B
+>Figure 1-2. The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> table</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/table.png"></P
+></DIV
+></DIV
+><P
+> Every column of the table has a label and can be assigned a format: numeric, text, date or time. In a spreadsheet, columns can be X, Y or Z columns. The X column are abscissae columns used when creating a 2D plot from data. These default flags can be changed using the <A
+HREF="x3120.html"
+>Column options dialog</A
+>. To reach this dialog you simply have to double-click on the column label or to use the  <A
+HREF="x1634.html#column-options-cmd"
+><B
+CLASS="command"
+>Column Options...</B
+> command</A
+> of the <A
+HREF="x1634.html"
+>Table menu</A
+>.</P
+><P
+> You can select all the columns of the spreadsheet (<SPAN
+CLASS="keycode"
+>Ctrl+A</SPAN
+>) or only some of them by clicking on the column label while keeping the <SPAN
+CLASS="keycode"
+>Ctrl</SPAN
+> key pressed, or by moving the mouse over the column label. This also allows you to deselect columns.</P
+><P
+> On the selected columns you can perform various operations: fill with data, normalize, sort, view statistics and finally make plots out of your data. All these functions can be reached by right clicking on the column label or by using the <A
+HREF="x1634.html"
+>Table menu</A
+>.</P
+><P
+> Any other spreadsheet function: rename, duplicate, export, print, close can be reached via the context menu (right click anywhere in the table outside the column labels area). </P
+><P
+> You can cut, copy and paste data between spreadsheets or between a spreadsheet and another application (Excel, Gnumeric, etc...).</P
+><P
+> You can import single or multiple ASCII files using the <A
+HREF="c626.html#import-ascii-cmd"
+><B
+CLASS="command"
+>Import ASCII</B
+> command</A
+> from the <A
+HREF="c626.html#sec-file-menu"
+>File menu</A
+>. The file import options can be changed via the <A
+HREF="c626.html#set-import-options-cmd"
+><B
+CLASS="command"
+>Set Import Options...</B
+> command</A
+>. Of course you can export the data off the spreadsheet to a text file using the <A
+HREF="c626.html#export-ascii-cmd"
+><B
+CLASS="command"
+>Export ASCII</B
+> command</A
+>.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-intro-matrix"
+>Matrix</A
+></H2
+><P
+>The matrix is a special table which is used for data which depends on two variables. This special table is used to store data for 3D-plots. The difference between a table and a matrix is that there is no special column nor special row for X or Y labels or values. Nevertheless, you can specify an X-scale and an Y-scale with the <A
+HREF="x1700.html#set-dimensions-cmd"
+><B
+CLASS="command"
+>Set Dimensions...</B
+> command</A
+>.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-matrix"
+></A
+><P
+><B
+>Figure 1-3. The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> matrix</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/matrix.png"></P
+></DIV
+></DIV
+><P
+>The values which are stored in a matrix can be obtained from a function of the form z=(i,j) with the <A
+HREF="x1700.html#set-values-cmd"
+><B
+CLASS="command"
+>Set Values...</B
+> command</A
+>, i and j beeing the column and row numbers. They can also be read from a file with the <A
+HREF="c626.html#import-ascii-cmd"
+><B
+CLASS="command"
+>Import ASCII</B
+> command</A
+> which allows to read a file in a table, then the table can be converted to a matrix with the <A
+HREF="x1634.html#convert-to-matrix-cmd"
+><B
+CLASS="command"
+>Convert to Matrix</B
+> command</A
+> of the <A
+HREF="x1700.html"
+>Matrix menu</A
+>.</P
+><P
+>The operations which can be done on a matrix are limited changes in number presentation and matrix size. The data of a matrix can be used to build a 3D plot with the commands presents in the <A
+HREF="x1273.html"
+>Plot3d menu</A
+> and in <A
+HREF="x2715.html"
+>3d plot toolbar</A
+>.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-intro-plot-window"
+>Plot Window</A
+></H2
+><P
+>The plot window is the one in which the graphic is plotted. It contains at least one layer, which is the main container of the plot window. Each new plot can be inserted in a new layer of this plot window, it has its own geometry and graphic properties (background color, frame, etc). </P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-plot-window"
+></A
+><P
+><B
+>Figure 1-4. An example of <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> 2D plot window</B
+></P
+><DIV
+CLASS="informalexample"
+><P
+></P
+><A
+NAME="AEN259"
+></A
+><P
+>This example shows a plot with two layers which have different geometries.</P
+><P
+></P
+></DIV
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/plot-window.png"></P
+></DIV
+></DIV
+><P
+>Each layer can be activated by clicking on the corresponding gray button  <SPAN
+CLASS="inlinemediaobject"
+><IMG
+SRC="pics/layer-button.png"></SPAN
+> in the top-left corner of the window.</P
+><P
+>The elements which can be accessed by a double click in a layer are:</P
+><P
+></P
+><UL
+><LI
+><P
+>the plot itself: this will open the <A
+HREF="x3138.html"
+>Custom Curve Dialog</A
+>. You can then add new curves to the plot, or change the way the curves are plotted.</P
+></LI
+><LI
+><P
+>The axes or the axes labels: this will open the <A
+HREF="x3333.html"
+>General Plot Options Dialog</A
+>. It is used to customize the axes, the numbers and labels of the axes, and the grid.</P
+></LI
+><LI
+><P
+>Any other text item, including the legend of the plot: this will open the <A
+HREF="x3601.html"
+>Text Options Dialog</A
+> which allows to customize the font of the label and the frame in which it is drawn.</P
+></LI
+></UL
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-intro-log-window"
+>Log Window</A
+></H2
+><P
+>This window keep a history of all analysis which have been done in the project. This panel contains the results of all the correlations, fittings, etc.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-log-window"
+></A
+><P
+><B
+>Figure 1-5. The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> Log window</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/log-window.png"></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-intro-project-explorer"
+>The Project Explorer</A
+></H2
+><P
+>The project explorer can be opened/closed using the <A
+HREF="x918.html#project-explorer-cmd"
+><B
+CLASS="command"
+>Project Explorer</B
+> command</A
+> from the <A
+HREF="x918.html"
+>View menu</A
+> or by clicking on the <SPAN
+CLASS="inlinemediaobject"
+><IMG
+SRC="icons/folder.png"></SPAN
+> in the <A
+HREF="x2114.html"
+>file toolbar</A
+>.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-project-explorer"
+></A
+><P
+><B
+>Figure 1-6. The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> Project Explorer</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/explorer.png"></P
+></DIV
+></DIV
+><P
+>It gives an overview of the structure of a project and allows the user to perform various operations on the windows (tables and plots) in the workspace: hiding, minimazing, closing, renaming, printing, etc... These functions can be reached via the context menu, by right-clicking on an item in the explorer.</P
+><P
+>By double-clicking on an item, the corresponding window is shown maximized in the workspace, even if it was hidden before.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="sec-intro-note"
+>Note window</A
+></H2
+><P
+>This simple window allows to insert text (comments, notes, etc) in a project.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-note-window"
+></A
+><P
+><B
+>Figure 1-7. The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> Note Window</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/new-note1.png"></P
+></DIV
+></DIV
+><P
+>The only parameter which can be changed in a note window is the text input method. <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>Simple Composing Input Method</I
+></SPAN
+> is the standard method to enter text in QT applications. <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>Xim</I
+></SPAN
+> is the X input method, it is the legacy system of the X window environment to support localized text input. The default choice is the second one, it allows to enter special characters and accents from your localised environment.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x67.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c318.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Command Line Options</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c39.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Drawing plots with <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

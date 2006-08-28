@@ -1,0 +1,355 @@
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be
+included below the credits with a reference to the appropriate license
+file included in the KDE distribution. -->
+
+<title>Credits and License</title>
+
+<para>&appname;</para>
+
+<para>Program copyright 2001-2005 &ion; <email>&email-ion;</email></para>
+
+<para>Documentation copyright:</para>
+<para>2001-2005 &ion; &email-ion;</para>
+<para>2006 &roger; &email-roger;</para>
+
+
+</chapter>
+
+<appendix id="mathematical-expressions">
+<title>Mathematical Expressions.</title>
+
+<sect1 id="sec-operators">
+<title>Mathematical and Logical Operators</title>
+
+<para>.</para>
+</sect1>
+
+<sect1 id="sec-intrinsic-functions">
+<title>Intrinsic Mathematical Functions.</title>
+
+<table tocentry="1" pgwide="1" width="5in" frame="box">
+<title>Intrinsic Mathematical Functions.</title>
+<tgroup cols="2">
+  <colspec colname="name" colwidth="1*" align="left"/>
+  <colspec colname="description" colwidth="5*" align="justify"/>
+  <thead>
+    <row>
+      <entry>Name</entry>
+      <entry>Description</entry>
+    </row>
+  </thead>
+ <tbody>
+  <row>
+   <entry>abs(x)</entry>
+   <entry>absolute value of x</entry>
+  </row>
+  <row>
+   <entry>acos(x)</entry>
+   <entry>inverse cosinus</entry>
+  </row>
+  <row>
+   <entry>acosh(x)</entry>
+   <entry>inverse hyperbolic cosinus</entry>
+  </row>
+  <row>
+   <entry>asin(x)</entry>
+   <entry>inverse sinus</entry>
+  </row>
+  <row>
+   <entry>asinh(x)</entry>
+   <entry>inverse hyperbolic sinus</entry>
+  </row>
+  <row>
+   <entry>atan(x)</entry>
+   <entry>inverse tangent</entry>
+  </row>
+  <row>
+   <entry>atanh(x)</entry>
+   <entry>inverse hyperbolic tangent</entry>
+  </row>
+</tbody>
+</tgroup>
+</table>
+<table tocentry="1" pgwide="1" width="5in" frame="border">
+<title>Intrinsic Mathematical Functions.</title>
+<tgroup cols="2">
+  <colspec colname="name" colwidth="1*" align="left"/>
+  <colspec colname="description" colwidth="5*" align="justify"/>
+  <thead>
+    <row>
+      <entry>Name</entry>
+      <entry>Description</entry>
+    </row>
+  </thead>
+ <tbody>
+  <row>
+   <entry>avg(x1,x2,x3,...)</entry>
+   <entry>average value, this command accept a list of arguments separated by commas</entry>
+  </row>
+  <row>
+   <entry>bessel_j0(x)</entry>
+   <entry>Regular cylindrical Bessel function of zeroth order, J<subscript>0</subscript>(x).</entry>
+  </row>
+  <row>
+   <entry>bessel_j1(x)</entry>
+   <entry>Regular cylindrical Bessel function of first order, J<subscript>1</subscript>(x).</entry>
+  </row>
+  <row>
+   <entry>bessel_jn(x,n)</entry>
+   <entry>Regular cylindrical Bessel function of n<superscript>th</superscript> order, J<subscript>n</subscript>(x).</entry>
+  </row>
+  <row>
+   <entry>bessel_y0(x)</entry>
+   <entry>Irregular cylindrical Bessel function of zeroth order, Y<subscript>0</subscript>(x) for x>0.</entry>
+  </row>
+  <row>
+   <entry>bessel_y1(x)</entry>
+   <entry>Irregular cylindrical Bessel function of first order, Y<subscript>1</subscript>(x) for x>0.</entry>
+  </row>
+  <row>
+   <entry>bessel_yn(x,n)</entry>
+   <entry>Irregular cylindrical Bessel function of n<superscript>th</superscript> order, Y<subscript>n</subscript>(x) for x>0.</entry>
+  </row>
+  <row>
+   <entry>beta (a,b)</entry>
+   <entry>Computes the Beta Function, B(a,b) = Gamma(a)*Gamma(b)/Gamma(a+b) for a > 0 and b > 0.</entry>
+  </row>
+  <row>
+   <entry>cos(x)</entry>
+   <entry>cosinus of x</entry>
+  </row>
+  <row>
+   <entry>cosh(x)</entry>
+   <entry>hyperbolic cosinus of x</entry>
+  </row>
+  <row>
+   <entry>erf(x)</entry>
+   <entry>error function of x</entry>
+  </row>
+  <row>
+   <entry>erfc(x)</entry>
+   <entry>Complementary error function erfc(x) = 1 - erf(x).</entry>
+  </row>
+  <row>
+   <entry>erfz(x)</entry>
+   <entry>The Gaussian probability density function Z(x).</entry>
+  </row>
+  <row>
+   <entry>erfq(x)</entry>
+   <entry>The upper tail of the Gaussian probability function Q(x).</entry>
+  </row>
+  <row>
+   <entry>exp(x)</entry>
+   <entry>Exponential function: e raised to the power of x.</entry>
+  </row>
+  <row>
+   <entry>gamma(x)</entry>
+   <entry>Computes the Gamma function, subject to x not being a negative integer</entry>
+  </row>
+  <row>
+   <entry>gammaln(x)</entry>
+   <entry>Computes the logarithm of the Gamma function, subject to x not a being negative integer. For x&lt;0, log(|Gamma(x)|) is returned.</entry>
+  </row>
+  <row>
+   <entry>hazard(x)</entry>
+   <entry>Computes the hazard function for the normal distribution h(x) = erfz(x)/erfq(x).</entry>
+  </row>
+  <row>
+   <entry>if(e1,e2,e3)</entry>
+   <entry>if e1 is true, e2 is executed else e3 is executed.</entry>
+  </row>
+  <row>
+   <entry>ln(x)</entry>
+   <entry>natural logarythm of x</entry>
+  </row>
+  <row>
+   <entry>log(x)</entry>
+   <entry>decimal logarythm of x</entry>
+  </row>
+  <row>
+   <entry>log2(x)</entry>
+   <entry>base 2 logarythm of x</entry>
+  </row>
+  <row>
+   <entry>min(x1,x2,x3,...)</entry>
+   <entry>Minimum of the list of arguments</entry>
+  </row>
+  <row>
+   <entry>max(x1,x2,x3,...)</entry>
+   <entry>Maximum of the list of arguments</entry>
+  </row>
+  <row>
+   <entry>rint(x)</entry>
+   <entry>Round to nearest integer.</entry>
+  </row>
+  <row>
+   <entry>sign(x)</entry>
+   <entry>Sign function: -1 if x&lt;0; 1 if x>0.</entry>
+  </row>
+  <row>
+   <entry>sin(x)</entry>
+   <entry>sinus of x</entry>
+  </row>
+  <row>
+   <entry>sinh(x)</entry>
+   <entry>hyperblic sinus of x</entry>
+  </row>
+  <row>
+   <entry>sqrt(x)</entry>
+   <entry>square root of x</entry>
+  </row>
+  <row>
+   <entry>tan(x)</entry>
+   <entry>tangent of x</entry>
+  </row>
+  <row>
+   <entry>tanh(x)</entry>
+   <entry>hyperbolic tangent of x</entry>
+  </row>
+</tbody>
+</tgroup>
+</table>
+</sect1>
+
+</appendix>
+
+<appendix id="installation">
+<title>Installation</title>
+
+<sect1 id="getting-qtiplot">
+<title>How to obtain &appname;</title>
+
+<para>
+The &appname; home page can be found at <ulink url="&homepage;">&homepage;</ulink>.
+Updates and news can be found there.
+</para>
+
+<para>
+&appname; is distributed as a package with sources which have to be compiled. compiled packages for most Linux distributions and for Windows can also be obtained. If you want to build QtiPlot from sources, don't forget first to download and install the <ulink url="http://www.trolltech.com/products/qt/index.html">Qt</ulink> and <ulink url="http://sources.redhat.com/gsl/">GSL</ulink> libraries. 
+
+</para>
+
+</sect1>
+
+<sect1 id="requirements">
+<title>Requirements</title>
+
+<para>In order to successfully use &appname;, you need the following libraries:</para>
+
+<variablelist>
+<varlistentry>
+  <term>Qwt</term>
+  <listitem>
+    <para>You must use the modified version of Qwt 4.2.0 which comes with the QtiPlot archive ("3rdparty" folder).</para>
+  </listitem>
+</varlistentry>
+<varlistentry>
+  <term>muParser</term>
+  <listitem>
+    <para>The last version of the <ulink url="http://muparser.sourceforge.net/">muParser (1.24)</ulink> library is included in &appname; ("3rdparty/muParser" folder) and <ulink url="http://sourceforge.net/projects/liborigin/">liborigin</ulink> libraries, so you don't need to download and install them.</para>
+    <para> the <ulink url="http://qwtplot3d.sourceforge.net/">QwtPlot3D</ulink> library is also required, and it not included in the source package. Therefore, you need to download it and install it before any installation of &appname;</para>
+  </listitem>
+</varlistentry>
+<varlistentry>
+  <term>qmake</term>
+  <listitem>
+    <para>In order to build QtiPlot you also need <emphasis>qmake</emphasis>, that is official part of Qt 3.x.</para>
+  </listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="installation-from-binary">
+<title>Installation from binary packages</title>
+
+<para>&appname; distributes a binary <ulink url="http://www.debian.org/">Debian</ulink> package and a <ulink url="http://www.rpm.org/">RPM</ulink> package for RedHat, Mandrake and SuSE distributions. The RPM package was created on an <ulink url="http://www.ubuntulinux.org/">Ubuntu</ulink> distribution.</para>
+
+<para>To install on Linux Debian: download the package file <ulink  url="&kappdownload;">qtiplot_&kappversion;_i386.deb</ulink>,
+then login as "root" and type:</para>
+<screen>
+dpkg -i qtiplot_0.x.x_i386.deb
+</screen>
+
+<para>To install the RPM package: download the file <ulink url="&kappdownload;">qtiplot-&kappversion;-1.i386.rpm</ulink>,
+then login as "root" and type:</para>
+<screen>
+rpm -i qtiplot-0.x.x-1.i386.rpm
+</screen>
+
+</sect1>
+
+<sect1 id="compilation">
+<title>Compilation and Installation from sources</title>
+
+<sect2 id="compilation-linux">
+<title>Linux</title>
+
+<para>Download the <ulink url="&kappdownload;">qtiplot archive</ulink> (.tar.bz2 or .zip file) and decompress it. Then open a  terminal (console) window and go to the main folder of the decompressed archive (which should be named &kappdirectory;-&version;). You must be sure that &appname; is able to find the <ulink url="http://qwtplot3d.sourceforge.net/">QwtPlot3D</ulink> library. You have to go to the &kappdirectory; directory and open the file &kappdirectory;.pro. The folowing line add a new path to the library files  which should be available for the compiling:</para>
+<screen>
+unix:INCLUDEPATH  += -I /usr/lib/qt3/include/qwtplot3d
+</screen>
+<para>it should point to the correct directory. Once this is done, go back to the main directory &kappdirectory;-&version; and type:</para>
+<screen>
+qmake qtiplot.pro
+make
+strip qtiplot
+</screen>
+
+<para>to install &appname;, you must login as root and type:</para>
+<screen>
+make install
+</screen>
+<para>You can then logout from root and launch the application:</para>
+<screen>
+qtiplot
+</screen>
+
+</sect2>
+<sect2 id="compilation-windows">
+<title>Windows</title>
+
+<para>QtiPlot distributes a binary Windows package. You can download the <ulink url="&kappdownload;">qtiplot-&kappversion;.exe</ulink> file. To install, open a Windows Explorer, double click on 'qtiplot-&kappversion;.exe' icon and follow the installation instructions.</para>
+
+<para>If you want to compile the application from sources you need to purchase the <ulink url="http://www.informit.com/title/0131240722" >Qt3 official book</ulink>, that comes with a CD containing a non commercial version of Qt 3.2.1. Then, to install:</para>
+
+<orderedlist>
+  <listitem>
+    <para>Download the <ulink url="&kappdownload;">qtiplot</ulink> archive and unzip it.</para>
+  </listitem>
+  <listitem>
+    <para>Modify the 'qtiplot.pro' file in order to set the INCLUDEPATH variable to the 'include' directory of your local build of the <ulink url="http://www6.in.tum.de/~kiss/WinGsl.htm">WinGSL</ulink> folder.</para>
+  </listitem>
+  <listitem>
+    <para>Modify the 'qtiplot.pro' file in order to set the LIBS variable, in the win32 section,  to the actual directories of your local build of the <ulink url="http://www6.in.tum.de/~kiss/WinGsl.htm">WinGSL</ulink> library.</para>
+  </listitem>
+  <listitem>
+    <para>Open a MS-DOS command terminal, go to the 'qtiplot' folder and type:</para>
+    <orderedlist>
+      <listitem>
+        <para>For MSVC users with <emphasis>nmake</emphasis>:</para>
+        <screen>
+          qmake qtiplot.pro
+          nmake
+        </screen>
+      </listitem>
+      <listitem>
+        <para>For Visual Studio users, <emphasis>qmake</emphasis> can also generate '.dsp' files. All you need to do is type:</para>
+        <screen>
+          qmake -tp vc qtiplot.pro
+        </screen>
+        <para>then open the 'qtiplot.dsp' file, go to the 'Build' menu and chose 'Set active configuration...'. Choose the "qtiplot-Win32 Release' project configuration and press OK. Press the 'F7' key to build the application.</para>
+      </listitem>
+    </orderedlist>
+  </listitem>
+</orderedlist>
+
+</sect2>
+
+</sect1>
+
+</appendix>

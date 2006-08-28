@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>The Dialogs</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="The QtiPlot Handbook"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="The Plot 3D Toolbar."
+HREF="x2715.html"><LINK
+REL="NEXT"
+TITLE="Add Function"
+HREF="x2983.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="qtiplot.css"></HEAD
+><BODY
+CLASS="chapter"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> Handbook</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x2715.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x2983.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="Dialogs"
+></A
+>Chapter 5. The Dialogs</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+><A
+HREF="c2948.html#add-error-bars-dialog"
+>Add Error bars</A
+></DT
+><DT
+><A
+HREF="x2983.html"
+>Add Function</A
+></DT
+><DT
+><A
+HREF="x3017.html"
+>Add Layer</A
+></DT
+><DT
+><A
+HREF="x3020.html"
+>Add/Remove curves.</A
+></DT
+><DT
+><A
+HREF="x3041.html"
+>Add Text</A
+></DT
+><DT
+><A
+HREF="x3050.html"
+>Arrange Layers</A
+></DT
+><DT
+><A
+HREF="x3088.html"
+>Add Arrow</A
+></DT
+><DT
+><A
+HREF="x3120.html"
+>Column Options</A
+></DT
+><DT
+><A
+HREF="x3138.html"
+>Custom Curves</A
+></DT
+><DT
+><A
+HREF="x3234.html"
+>Define surface plot</A
+></DT
+><DT
+><A
+HREF="x3245.html"
+>Export ASCII</A
+></DT
+><DT
+><A
+HREF="x3262.html"
+>Fast Fourier Transform</A
+></DT
+><DT
+><A
+HREF="x3288.html"
+>Integrate dialog</A
+></DT
+><DT
+><A
+HREF="x3299.html"
+>Non linear curve fit</A
+></DT
+><DT
+><A
+HREF="x3333.html"
+>General Plot Options</A
+></DT
+><DT
+><A
+HREF="x3368.html"
+>Plot Wizard</A
+></DT
+><DT
+><A
+HREF="x3383.html"
+>Project Explorer</A
+></DT
+><DT
+><A
+HREF="x3391.html"
+>Preferences Dialog</A
+></DT
+><DT
+><A
+HREF="x3444.html"
+>Printer-setup</A
+></DT
+><DT
+><A
+HREF="x3456.html"
+>Set Column Values</A
+></DT
+><DT
+><A
+HREF="x3474.html"
+><B
+CLASS="command"
+>Set Dimensions...</B
+></A
+></DT
+><DT
+><A
+HREF="x3488.html"
+>Set options for Importation of ASCII files.</A
+></DT
+><DT
+><A
+HREF="x3514.html"
+><B
+CLASS="command"
+>Set Properties...</B
+></A
+></DT
+><DT
+><A
+HREF="x3525.html"
+><B
+CLASS="command"
+>Set Values...</B
+></A
+></DT
+><DT
+><A
+HREF="x3543.html"
+>Surface plot options</A
+></DT
+><DT
+><A
+HREF="x3601.html"
+>Text options</A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="add-error-bars-dialog"
+>Add Error bars</A
+></H1
+><P
+>This dialog is activated by selecting the <A
+HREF="x947.html#add-error-bars-cmd"
+><B
+CLASS="command"
+>Add Error Bars...</B
+> command</A
+> from the <A
+HREF="x947.html"
+>Graph menu</A
+>.</P
+><P
+>This command is used to plot X and/or Y error bars around the data points.</P
+><P
+>It must be taken care that the "add" button add the errors bars, and so do the "OK" button. Then, you should close the dialog with cancel if you have clicked on the "add" button.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-add-error-bars-1"
+></A
+><P
+><B
+>Figure 5-1. The <B
+CLASS="command"
+>Add Error Bars...</B
+> dialog.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/add-error-bars-1.png"></P
+></DIV
+></DIV
+><P
+>There are three ways to specify the size of the bar:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>A column of the table</DT
+><DD
+><P
+>In this case, the values of the selected column are used to compute the error bars. if V is the value of the data point, and E the value of the errorbar column, the size of the bars will be V-E to V+E.</P
+></DD
+><DT
+>A percentage of the values</DT
+><DD
+><P
+>if E is the percentage selected, the size of the bars will be V(1-E/100) to V(1+E/100). It must be noticed that, in addition to the errorbars on the plot, this command will create a new column in the active table with can be used in the way as with the previous option. This column can be modified like any other one.</P
+></DD
+><DT
+>The standard deviation of the values</DT
+><DD
+><P
+>the standard deviation of the values. This has a meaning only of the data are centered around an average value. Like with the previous option, a new column will be created in the active table.</P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="figure"
+><A
+NAME="fig-add-error-bars-2"
+></A
+><P
+><B
+>Figure 5-2. A plot with X and Y Error Bars.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/add-error-bars-2.png"></P
+></DIV
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x2715.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x2983.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The Plot 3D Toolbar.</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Add Function</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

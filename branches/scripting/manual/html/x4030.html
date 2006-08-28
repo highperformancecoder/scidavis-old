@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Compilation and Installation from sources</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="The QtiPlot Handbook"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Installation"
+HREF="a3981.html"><LINK
+REL="PREVIOUS"
+TITLE="Installation from binary packages"
+HREF="x4017.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="qtiplot.css"></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> Handbook</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x4017.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Appendix B. Installation</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+>&nbsp;</TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="compilation"
+>Compilation and Installation from sources</A
+></H1
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="compilation-linux"
+>Linux</A
+></H2
+><P
+>Download the <A
+HREF="http://soft.proindependent.com/download.html"
+TARGET="_top"
+>qtiplot archive</A
+> (.tar.bz2 or .zip file) and decompress it. Then open a  terminal (console) window and go to the main folder of the decompressed archive (which should be named qtiplot-0-8-5). You must be sure that <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> is able to find the <A
+HREF="http://qwtplot3d.sourceforge.net/"
+TARGET="_top"
+>QwtPlot3D</A
+> library. You have to go to the qtiplot directory and open the file qtiplot.pro. The folowing line add a new path to the library files  which should be available for the compiling:</P
+><PRE
+CLASS="screen"
+>&#13;unix:INCLUDEPATH  += -I /usr/lib/qt3/include/qwtplot3d
+</PRE
+><P
+>it should point to the correct directory. Once this is done, go back to the main directory qtiplot-0-8-5 and type:</P
+><PRE
+CLASS="screen"
+>&#13;qmake qtiplot.pro
+make
+strip qtiplot
+</PRE
+><P
+>to install <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+>, you must login as root and type:</P
+><PRE
+CLASS="screen"
+>&#13;make install
+</PRE
+><P
+>You can then logout from root and launch the application:</P
+><PRE
+CLASS="screen"
+>&#13;qtiplot
+</PRE
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="compilation-windows"
+>Windows</A
+></H2
+><P
+>QtiPlot distributes a binary Windows package. You can download the <A
+HREF="http://soft.proindependent.com/download.html"
+TARGET="_top"
+>qtiplot-0.8.5.exe</A
+> file. To install, open a Windows Explorer, double click on 'qtiplot-0.8.5.exe' icon and follow the installation instructions.</P
+><P
+>If you want to compile the application from sources you need to purchase the <A
+HREF="http://www.informit.com/title/0131240722"
+TARGET="_top"
+>Qt3 official book</A
+>, that comes with a CD containing a non commercial version of Qt 3.2.1. Then, to install:</P
+><P
+></P
+><OL
+TYPE="1"
+><LI
+><P
+>Download the <A
+HREF="http://soft.proindependent.com/download.html"
+TARGET="_top"
+>qtiplot</A
+> archive and unzip it.</P
+></LI
+><LI
+><P
+>Modify the 'qtiplot.pro' file in order to set the INCLUDEPATH variable to the 'include' directory of your local build of the <A
+HREF="http://www6.in.tum.de/~kiss/WinGsl.htm"
+TARGET="_top"
+>WinGSL</A
+> folder.</P
+></LI
+><LI
+><P
+>Modify the 'qtiplot.pro' file in order to set the LIBS variable, in the win32 section,  to the actual directories of your local build of the <A
+HREF="http://www6.in.tum.de/~kiss/WinGsl.htm"
+TARGET="_top"
+>WinGSL</A
+> library.</P
+></LI
+><LI
+><P
+>Open a MS-DOS command terminal, go to the 'qtiplot' folder and type:</P
+><P
+></P
+><OL
+TYPE="a"
+><LI
+><P
+>For MSVC users with <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>nmake</I
+></SPAN
+>:</P
+><PRE
+CLASS="screen"
+>&#13;          qmake qtiplot.pro
+          nmake
+        </PRE
+></LI
+><LI
+><P
+>For Visual Studio users, <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>qmake</I
+></SPAN
+> can also generate '.dsp' files. All you need to do is type:</P
+><PRE
+CLASS="screen"
+>&#13;          qmake -tp vc qtiplot.pro
+        </PRE
+><P
+>then open the 'qtiplot.dsp' file, go to the 'Build' menu and chose 'Set active configuration...'. Choose the "qtiplot-Win32 Release' project configuration and press OK. Press the 'F7' key to build the application.</P
+></LI
+></OL
+></LI
+></OL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x4017.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Installation from binary packages</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="a3981.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>&nbsp;</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

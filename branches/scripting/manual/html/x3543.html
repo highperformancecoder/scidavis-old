@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Surface plot options</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="The QtiPlot Handbook"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="The Dialogs"
+HREF="c2948.html"><LINK
+REL="PREVIOUS"
+TITLE="Set Values..."
+HREF="x3525.html"><LINK
+REL="NEXT"
+TITLE="Text options"
+HREF="x3601.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="qtiplot.css"></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+> Handbook</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x3525.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 5. The Dialogs</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x3601.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="surface-plot-options-dialog"
+>Surface plot options</A
+></H1
+><P
+>This dialog box is used to customize a 3D function plot which has been created by the <B
+CLASS="command"
+>New Surface 3D Plot</B
+> from the <A
+HREF="c626.html#sec-file-menu"
+>File menu</A
+>. It is activated by a double click on the 3D plot.</P
+><P
+>The first tab is used to modify the X, Y and Z ranges. It allows also to specify the number of labels on the axis and the number of secondary ticks.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-surface-plot-options-1"
+></A
+><P
+><B
+>Figure 5-55. The surface plot options dialog box with tab 1: scales definitions.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/surface-plot-options-dialog1.png"></P
+></DIV
+></DIV
+><P
+>The second tab define the main parameters of the three axis: the axis label and its font, and the length of the ticks. This length is defined in the same units as the range of the axis. If something is changed in the scales of the graph, the length of the ticks is re-calculated by <SPAN
+CLASS="application"
+>QtiPlot</SPAN
+>. The font button allows to modify only the font used for the label, if you want to customize the font of the numbers used for the axis, you must used the fifth tab.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-surface-plot-options-2"
+></A
+><P
+><B
+>Figure 5-56. The surface plot options dialog box with tab 2: axis parameters.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/surface-plot-options-dialog2.png"></P
+></DIV
+></DIV
+><P
+>The third tab is used to define or modify the title of the plot. You can add subscripts, bold characters, etc in your title, see the <A
+HREF="x3601.html"
+>text options dialog</A
+> for more details.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-surface-plot-options-3"
+></A
+><P
+><B
+>Figure 5-57. The surface plot options dialog box with tab 3: plot title.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/surface-plot-options-dialog3.png"></P
+></DIV
+></DIV
+><P
+>The fourth tab allows to modify the colors used in the different elements of the plot.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-surface-plot-options-4"
+></A
+><P
+><B
+>Figure 5-58. The surface plot options dialog box with tab 4: colors.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/surface-plot-options-dialog4.png"></P
+></DIV
+></DIV
+><P
+>The first set of two colors (data min and data max) define the color scheme which is used to show the Z-values. They are the colors used for the minimum value of Z (Z<SUB
+>min</SUB
+>) and the maximum value of Z (Z<SUB
+>max</SUB
+>). We can define the colors by their Red,Green and Blue parameters: [R,G,B]. Then, a value Z will be represented by a color defined by linear interpolation:</P
+><DIV
+CLASS="equation"
+><P
+></P
+><A
+NAME="AEN3577"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="equations/equation_couleur.gif"></P
+></DIV
+><P
+></P
+></DIV
+><P
+>The default colors for Z<SUB
+>min</SUB
+> and Z<SUB
+>max</SUB
+> are respectively blue ( [R,G,B] = [0,0,255] ) and red ( [R,G,B] = [255,0,0] ). This lead to the following color scheme:</P
+><DIV
+CLASS="informalfigure"
+><P
+></P
+><A
+NAME="fig-default-color-scheme"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/default-color-scheme.png"></P
+></DIV
+><P
+></P
+></DIV
+><P
+>Another classical color scheme can be built with Z<SUB
+>min</SUB
+> = [160,32,32] and Z<SUB
+>max</SUB
+> = [255,255,0] (yellow). It lead to:</P
+><DIV
+CLASS="informalfigure"
+><P
+></P
+><A
+NAME="fig-color-scheme-1"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/color-scheme-1.png"></P
+></DIV
+><P
+></P
+></DIV
+><P
+>The last tab is used to define some global parameters and the aspect ratio of the plot.</P
+><DIV
+CLASS="figure"
+><A
+NAME="fig-surface-plot-options-5"
+></A
+><P
+><B
+>Figure 5-59. The surface plot options dialog box with tab 5: aspect ratio.</B
+></P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="pics/surface-plot-options-dialog5.png"></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x3525.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x3601.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><B
+CLASS="command"
+>Set Values...</B
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c2948.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Text options</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
