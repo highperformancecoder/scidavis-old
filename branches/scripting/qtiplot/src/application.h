@@ -506,6 +506,8 @@ public slots:
 	void showColsDialog();
 	void showColMenu(int c);
 	void showColumnValuesDialog();	
+	//! recalculate selected cells of current table
+	void recalculateTable();
 	void showGraphContextMenu();
 	void showTableContextMenu(bool selection);
 	void showWindowContextMenu();
@@ -850,6 +852,7 @@ public:
     QAction *actionFitExpGrowth, *actionFitSigmoidal, *actionFitGauss, *actionFitLorentz, *actionShowFitDialog;
     QAction *actionShowCurveFormatDialog, *actionShowAxisDialog, *actionShowTitleDialog;
     QAction *actionShowColumnOptionsDialog, *actionShowColumnValuesDialog, *actionShowColsDialog, *actionShowRowsDialog;
+    QAction *actionTableRecalculate;
     QAction *actionAbout, *actionShowHelp, *actionChooseHelpFolder;
     QAction *actionRename, *actionCloseWindow, *actionConvertTable;
     QAction *actionAddColToTable, *actionDeleteLayer, *actionInterpolate;

@@ -99,7 +99,6 @@ worksheet->verticalHeader()->installEventFilter(this);
 QAccel *accel = new QAccel(this);
 accel->connectItem( accel->insertItem( Key_Tab ), this, SLOT(moveCurrentCell()));
 accel->connectItem( accel->insertItem( CTRL+Key_A ), this, SLOT(selectAllTable()) );
-accel->connectItem( accel->insertItem( CTRL+Key_Return ), this, SLOT(calculate()));
 
 connect(worksheet, SIGNAL(valueChanged(int,int)),this, SLOT(cellEdited(int,int)));
 specifications = saveToString("geometry\n");

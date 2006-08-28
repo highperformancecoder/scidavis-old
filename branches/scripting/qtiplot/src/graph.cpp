@@ -4708,7 +4708,7 @@ bool Graph::insertCurve(Table* w, const QString& name, int style)
 int ycol = w->colIndex(name);
 int xcol = w->colX(ycol);
 
-bool succes = insertCurve(w, w->colName(xcol), name, style);
+bool succes = insertCurve(w, w->colName(xcol), w->colName(ycol), style);
 if (succes)
 	emit modifiedGraph();
 return succes;
@@ -4716,7 +4716,7 @@ return succes;
 
 bool Graph::insertCurve(Table* w, int xcol, const QString& name, int style)
 {//provided for convenience
-return insertCurve(w, w->colName(xcol), name, style);
+return insertCurve(w, w->colName(xcol), w->colName(w->colIndex(name)), style);
 }
 
 bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColName, int style)
@@ -4808,7 +4808,7 @@ for (i = 0; i<r; i++ )
 if (!it)
 	return false;
 
-associations << xColName+"(X),"+yColName+"(Y)";
+associations << w->colName(xcol)+"(X),"+w->colName(ycol)+"(Y)";
 
 c_type.resize(++n_curves);
 c_type[n_curves-1] = style;
@@ -4820,25 +4820,25 @@ if (style == VerticalBars)
 	c = new QwtBarCurve(QwtBarCurve::Vertical, d_plot,0);
 	curveID = d_plot->insertCurve(c);
 	c->setStyle(QwtPlotCurve::UserCurve);
-	c->setTitle(yColName);
+	c->setTitle(w->colName(ycol));
 	}
 else if (style == HorizontalBars)
 	{
 	c = new QwtBarCurve(QwtBarCurve::Horizontal, d_plot,0);
 	curveID = d_plot->insertCurve(c);
 	c->setStyle(QwtPlotCurve::UserCurve);
-	c->setTitle(yColName);
+	c->setTitle(w->colName(ycol));
 	}
 else if (style == Histogram)
 	{
 	c = new QwtHistogram(d_plot,0);
 	curveID = d_plot->insertCurve(c);
 	c->setStyle(QwtPlotCurve::UserCurve);
-	c->setTitle(yColName);
+	c->setTitle(w->colName(ycol));
 	}
 else
 	{
-	c = new QwtPlotCurve(yColName);
+	c = new QwtPlotCurve(w->colName(ycol));
 	curveID = d_plot->insertCurve(c);
 	}
 
@@ -4858,15 +4858,15 @@ if (xColType == Table::Text )
 	{
 	if (style == HorizontalBars)
 		{
-		axesFormatInfo[QwtPlot::yLeft] = xColName;
-		axesFormatInfo[QwtPlot::yRight] = xColName;
+		axesFormatInfo[QwtPlot::yLeft] = w->colName(xcol);
+		axesFormatInfo[QwtPlot::yRight] = w->colName(xcol);
 		axisType[QwtPlot::yLeft] = Txt;
 		d_plot->setAxisScaleDraw (QwtPlot::yLeft, new QwtTextScaleDraw(xLabels));
 		}
 	else
 		{
-		axesFormatInfo[QwtPlot::xBottom] = xColName;
-		axesFormatInfo[QwtPlot::xTop] = xColName;
+		axesFormatInfo[QwtPlot::xBottom] = w->colName(xcol);
+		axesFormatInfo[QwtPlot::xTop] = w->colName(xcol);
 		axisType[QwtPlot::xBottom] = Txt;
 		d_plot->setAxisScaleDraw (QwtPlot::xBottom, new QwtTextScaleDraw(xLabels));
 		}
@@ -4890,13 +4890,13 @@ else if (xColType == Table::Date )
 	
 if (yColType == Table::Text)
 	{
-	axesFormatInfo[QwtPlot::yLeft] = yColName;
-	axesFormatInfo[QwtPlot::yRight] = yColName;
+	axesFormatInfo[QwtPlot::yLeft] = w->colName(ycol);
+	axesFormatInfo[QwtPlot::yRight] = w->colName(ycol);
 	axisType[QwtPlot::yLeft] = Txt;
 	d_plot->setAxisScaleDraw (QwtPlot::yLeft, new QwtTextScaleDraw(yLabels));
 	}
 
-addLegendItem(yColName);
+addLegendItem(w->colName(ycol));
 updatePlot();
 return true;
 }

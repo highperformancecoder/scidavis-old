@@ -123,21 +123,21 @@ public:
   int numCols();
   SIP_PYOBJECT text(int, int);
 %MethodCode
-    sipRes = PyString_FromString(sipCpp->text(a1-1, a0-1));
+    sipRes = PyString_FromString(sipCpp->text(a0-1, a1-1));
 %End
   double cell(int, int);
 %MethodCode
-    sipRes = sipCpp->text(a1-1, a0-1).toDouble();
+    sipRes = sipCpp->text(a0-1, a1-1).toDouble();
 %End
   void setText(int, int, const char*);
 %MethodCode
-    sipCpp->setText(a1-1, a0-1, a2);
+    sipCpp->setText(a0-1, a1-1, a2);
 %End
   void setCell(int, int, double);
 %MethodCode
   int prec = sipCpp->precision();
   char f = sipCpp->textFormat();
-  sipCpp->setText(a1-1,a0-1,QString::number(a2, f, prec));
+  sipCpp->setText(a0-1,a1-1,QString::number(a2, f, prec));
 %End
 private:
   Matrix(const Matrix&);
@@ -209,7 +209,9 @@ class MultiLayer : myWidget /PyName=Graph/
 public:
   Graph *activeGraph() /PyName=activeLayer/;
   void setActiveGraph(Graph*) /PyName=setActiveLayer/;
-  // TODO: implement Graph* layer(int num);;
+  int graphsNumber() /PyName=numLayers/;
+  Graph* layer(int num);
+  Graph* addLayer();
   void updateTransparency();
   void exportToSVG(const QString& fname);
   void exportToEPS(const QString& fname);
@@ -284,7 +286,7 @@ public:
 %End
   
   QTextEdit *results;
-  QTextEdit *console;
+//  QTextEdit *console;
 private:
   ApplicationWindow(const ApplicationWindow&);
 };
@@ -353,7 +355,7 @@ delete values;
 
   void showLegend();
 
-  virtual QString legendFitInfo(int);
+  virtual QString legendFitInfo();
 
   SIP_PYTUPLE results();
 %MethodCode
@@ -388,6 +390,29 @@ if(sipRes)
   Matrix* covarianceMatrix(const QString&);
 };
 
+%ModuleCode
+ApplicationWindow *sipqti_app()
+{
+  int iserr = 0;
+  PyObject *me = PyImport_ImportModule("qti");
+  PyObject *mydict = PyModule_GetDict(me);
+  PyObject *pyapp = PyDict_GetItemString(mydict,"app");
+  Py_DECREF(me);
+  if (sipCanConvertToInstance(pyapp, sipClass_ApplicationWindow, SIP_NOT_NONE))
+    return (ApplicationWindow*) sipConvertToInstance(pyapp, sipClass_ApplicationWindow, NULL, SIP_NOT_NONE, NULL, &iserr);
+  else
+    return NULL;
+}
+%End
+%ModuleHeaderCode
+class ApplicationWindow;
+ApplicationWindow *sipqti_app();
+#define SIPQTI_APP(sipcppexpr)\
+ApplicationWindow *app = sipqti_app();\
+if (app) sipCpp = sipcppexpr;\
+else { sipCpp = NULL; }
+%End
+
 class ExponentialFit : Fit
 {
 %TypeHeaderCode
@@ -398,11 +423,11 @@ public:
   ExponentialFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int, bool=false);
   ExponentialFit(Graph *, const QString&, bool=false);
 %MethodCode
-  sipCpp = new sipExponentialFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2);
+  SIPQTI_APP(new sipExponentialFit(app, a0, *a1, a2))
 %End
   ExponentialFit(Graph *, const QString&, int, int, bool=false);
 %MethodCode
-  sipCpp = new sipExponentialFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3, a4);
+  SIPQTI_APP(new sipExponentialFit(app, a0, *a1, a2, a3, a4))
 %End
 };
 
@@ -416,11 +441,11 @@ public:
   TwoExpFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
   TwoExpFit(Graph *, const QString&);
 %MethodCode
-  sipCpp = new sipTwoExpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+  SIPQTI_APP(new sipTwoExpFit(app, a0, *a1))
 %End
   TwoExpFit(Graph *, const QString&, int, int);
 %MethodCode
-  sipCpp = new sipTwoExpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+  SIPQTI_APP(new sipTwoExpFit(app, a0, *a1, a2, a3))
 %End
 };
 
@@ -434,11 +459,11 @@ public:
   ThreeExpFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
   ThreeExpFit(Graph *, const QString&);
 %MethodCode
-  sipCpp = new sipThreeExpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+  SIPQTI_APP(new sipThreeExpFit(app, a0, *a1))
 %End
   ThreeExpFit(Graph *, const QString&, int, int);
 %MethodCode
-  sipCpp = new sipThreeExpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+  SIPQTI_APP(new sipThreeExpFit(app, a0, *a1, a2, a3))
 %End
 };
 
@@ -452,11 +477,11 @@ public:
   SigmoidalFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
   SigmoidalFit(Graph *, const QString&);
 %MethodCode
-  sipCpp = new sipSigmoidalFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+  SIPQTI_APP(new sipSigmoidalFit(app, a0, *a1))
 %End
   SigmoidalFit(Graph *, const QString&, int, int);
 %MethodCode
-  sipCpp = new sipSigmoidalFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+  SIPQTI_APP(new sipSigmoidalFit(app, a0, *a1, a2, a3))
 %End
 };
 
@@ -470,11 +495,11 @@ public:
   GaussAmpFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
   GaussAmpFit(Graph *, const QString&);
 %MethodCode
-  sipCpp = new sipGaussAmpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+  SIPQTI_APP(new sipGaussAmpFit(app, a0, *a1))
 %End
   GaussAmpFit(Graph *, const QString&, int, int);
 %MethodCode
-  sipCpp = new sipGaussAmpFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+  SIPQTI_APP(new sipGaussAmpFit(app, a0, *a1, a2, a3))
 %End
 };
 
@@ -488,11 +513,11 @@ public:
   NonLinearFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
   NonLinearFit(Graph *, const QString&);
 %MethodCode
-  sipCpp = new sipNonLinearFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+  SIPQTI_APP(new sipNonLinearFit(app, a0, *a1))
 %End
   NonLinearFit(Graph *, const QString&, int, int);
 %MethodCode
-  sipCpp = new sipNonLinearFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+  SIPQTI_APP(new sipNonLinearFit(app, a0, *a1, a2, a3))
 %End
   void setParametersList(const QStringList&);
   // TODO: make it accept Python callables
@@ -509,11 +534,11 @@ public:
   PluginFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
   PluginFit(Graph *, const QString&);
 %MethodCode
-  sipCpp = new sipPluginFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+  SIPQTI_APP(new sipPluginFit(app, a0, *a1))
 %End
   PluginFit(Graph *, const QString&, int, int);
 %MethodCode
-  sipCpp = new sipPluginFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+  SIPQTI_APP(new sipPluginFit(app, a0, *a1, a2, a3))
 %End
   bool load(const QString&);
 };
@@ -546,11 +571,11 @@ public:
   LorentzFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
   LorentzFit(Graph *, const QString&);
 %MethodCode
-  sipCpp = new sipLorentzFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+  SIPQTI_APP(new sipLorentzFit(app, a0, *a1))
 %End
   LorentzFit(Graph *, const QString&, int, int);
 %MethodCode
-  sipCpp = new sipLorentzFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+  SIPQTI_APP(new sipLorentzFit(app, a0, *a1, a2, a3))
 %End
 };
 
@@ -564,11 +589,11 @@ public:
   GaussFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
   GaussFit(Graph *, const QString&);
 %MethodCode
-  sipCpp = new sipGaussFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+  SIPQTI_APP(new sipGaussFit(app, a0, *a1))
 %End
   GaussFit(Graph *, const QString&, int, int);
 %MethodCode
-  sipCpp = new sipGaussFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+  SIPQTI_APP(new sipGaussFit(app, a0, *a1, a2, a3))
 %End
 };
 
@@ -582,14 +607,14 @@ public:
   PolynomialFit(ApplicationWindow * /TransferThis/, Graph *, QString&, int, int, int=2, bool=false);
   PolynomialFit(Graph *, QString&, int=2, bool=false);
 %MethodCode
-  sipCpp = new sipPolynomialFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+  SIPQTI_APP(new sipPolynomialFit(app, a0, *a1, a2, a3))
 %End
   PolynomialFit(Graph *, QString&, int, int, int=2, bool=false);
 %MethodCode
-  sipCpp = new sipPolynomialFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3, a4, a5);
+  SIPQTI_APP(new sipPolynomialFit(app, a0, *a1, a2, a3, a4, a5))
 %End
 
-  virtual QString legendFitInfo(int);
+  virtual QString legendFitInfo();
   void fit();
 
   static QString generateFormula(int);
@@ -606,11 +631,11 @@ public:
   LinearFit(ApplicationWindow * /TransferThis/, Graph *, const QString&, int, int);
   LinearFit(Graph *, const QString&);
 %MethodCode
-  sipCpp = new sipLinearFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1);
+  SIPQTI_APP(new sipLinearFit(app, a0, *a1))
 %End
   LinearFit(Graph *, const QString&, int, int);
 %MethodCode
-  sipCpp = new sipLinearFit((ApplicationWindow*) sipImportSymbol("qti.app"), a0, *a1, a2, a3);
+  SIPQTI_APP(new sipLinearFit(app, a0, *a1, a2, a3))
 %End
   void fit();
 };

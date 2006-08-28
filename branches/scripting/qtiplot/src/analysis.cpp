@@ -1,6 +1,6 @@
 #include "graph.h"
 #include "plot.h"
-#include "ColorBox.h"
+#include "colorBox.h"
 #include "ImageMarker.h"
 #include "Histogram.h"
 #include "nrutil.h"

@@ -119,11 +119,13 @@ else
 
 void Matrix::cellEdited(int row,int col)
 {
-Script *script = scriptEnv->newScript(d_table->text(row,col),this,QString("<%1:%2:%3>").arg(name()).arg(row).arg(col));
+Script *script = scriptEnv->newScript(d_table->text(row,col),this,QString("<%1_%2_%3>").arg(name()).arg(row).arg(col));
 connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
 
 script->setInt(row+1, "row");
+script->setInt(row+1, "i");
 script->setInt(col+1, "col");
+script->setInt(col+1, "j");
 QVariant ret = script->eval();
 if(ret.type()==QVariant::Int || ret.type()==QVariant::UInt || ret.type()==QVariant::LongLong || ret.type()==QVariant::ULongLong)
 	d_table->setText(row, col, ret.toString());
@@ -857,10 +859,10 @@ if (object == (QObject*)hheader) switch(e->type())
 		case QEvent::MouseButtonPress:
 			{
 			const QMouseEvent *me = (const QMouseEvent *)e;
-			QTableSelection sel = d_table->selection(0);
-			if (me->button() == QMouseEvent::RightButton && sel.numRows() <= 1 && sel.numCols() <= 1)
+			int col = hheader->sectionAt (me->pos().x() + hheader->offset());
+			if (me->button() == QMouseEvent::RightButton && !d_table->isColumnSelected(col,true))
 				{
-				selectedCol=hheader->sectionAt (me->pos().x() + hheader->offset());
+				selectedCol=col;
 				d_table->clearSelection();
 				d_table->selectColumn(selectedCol);
 				d_table->setCurrentCell (0, selectedCol);
@@ -924,11 +926,10 @@ else if (e->type() == QEvent::MouseButtonPress && object == (QObject*)vheader)
 	{
 	const QMouseEvent *me = (const QMouseEvent *)e;
 	int offset = vheader->offset();
-	QTableSelection sel = d_table->selection(0);
-	if (me->button() == QMouseEvent::RightButton && sel.numRows() <= 1 && sel.numCols() <= 1)
+	int row = vheader->sectionAt(me->pos().y()+offset);
+	if (me->button() == QMouseEvent::RightButton && !d_table->isRowSelected(row,true))
 		{
 		d_table->clearSelection();
-		int row = vheader->sectionAt(me->pos().y()+offset);
 		d_table->selectRow (row);
 		d_table->setCurrentCell (row,0);
 		}

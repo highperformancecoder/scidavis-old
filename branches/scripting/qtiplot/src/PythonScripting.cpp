@@ -177,7 +177,6 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
     PyDict_SetItemString(globals, "qti", qtimod);
     PyObject *qtiDict = PyModule_GetDict(qtimod);
     setQObject(Parent, "app", qtiDict);
-    sipExportSymbol("qti.app",Parent);
     PyDict_SetItemString(qtiDict, "mathFunctions", math);
     Py_DECREF(qtimod);
   } else
@@ -368,11 +367,21 @@ void PythonScript::setContext(QObject *context)
 
 bool PythonScript::compile(bool for_eval)
 {
-  PyObject *ret = PyRun_String("def col(c,*arg):\n\tif len(arg)>0: return self.cell(c,arg[0])\n\telse: return self.cell(c,i)\n",Py_file_input,localDict,localDict);
-  if (ret)
-    Py_DECREF(ret);
-  else
-    PyErr_Print();
+  if(Context->isA("Table")) {
+    PyDict_SetItemString(localDict,"__builtins__",PyDict_GetItemString(env()->globalDict(),"__builtins__"));
+    PyObject *ret = PyRun_String("def col(c,*arg):\n\ttry: return self.cell(c,arg[0])\n\texcept(IndexError): return self.cell(c,i)\n",Py_file_input,localDict,localDict);
+    if (ret)
+      Py_DECREF(ret);
+    else
+      PyErr_Print();
+  } else if(Context->isA("Matrix")) {
+    PyDict_SetItemString(localDict,"__builtins__",PyDict_GetItemString(env()->globalDict(),"__builtins__"));
+    PyObject *ret = PyRun_String("def cell(*arg):\n\ttry: return self.cell(arg[0],arg[1])\n\texcept(IndexError): return self.cell(i,j)\n",Py_file_input,localDict,localDict);
+    if (ret)
+      Py_DECREF(ret);
+    else
+      PyErr_Print();
+  }
   bool success=false;
   Py_XDECREF(PyCode);
   PyCode = Py_CompileString(Code.ascii(),Name,Py_eval_input);

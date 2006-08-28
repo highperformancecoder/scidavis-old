@@ -845,6 +845,7 @@ actionShowColumnOptionsDialog->addTo(tableMenu);
 tableMenu->insertSeparator();
 
 actionShowColumnValuesDialog->addTo(tableMenu);
+actionTableRecalculate->addTo(tableMenu);
 
 fillMenu = new QPopupMenu(this);
 fillMenu->setFont(appFont);
@@ -981,6 +982,10 @@ actionScriptingLang->addTo(scriptingMenu);
 #endif
 actionRestartScripting->addTo(scriptingMenu);
 
+// these use the same keyboard shortcut (Ctrl+Return) and should not be enabled at the same time
+actionNoteEvaluate->setEnabled(false);
+actionTableRecalculate->setEnabled(false);
+
 if(w)
 {
 actionPrintAllPlots->setEnabled(projectHas2DPlots());
@@ -1043,6 +1048,7 @@ else if (w->isA("Table"))
 	menuBar()->insertItem(tr("&Table"), tableMenu);
 
 	actionShowExportASCIIDialog->setEnabled(TRUE);
+	actionTableRecalculate->setEnabled(true);
 	file->setItemEnabled (exportID,FALSE);
 	file->setItemEnabled (closeID,TRUE);
 	}
@@ -1054,6 +1060,7 @@ else if (w->isA("Matrix"))
 else if (w->isA("Note"))
 	{
 	actionSaveTemplate->setEnabled(false);
+	actionNoteEvaluate->setEnabled(true);
 	scriptingMenu->insertSeparator();
 	actionNoteExecute->addTo(scriptingMenu);
 	actionNoteExecuteAll->addTo(scriptingMenu);
@@ -5535,6 +5542,13 @@ if ( w && w->isA("Table"))
 	}
 }
 
+void ApplicationWindow::recalculateTable()
+{
+Table* w = (Table*)ws->activeWindow();
+if ( w && w->isA("Table"))
+  w->calculate();
+}
+
 void ApplicationWindow::sortActiveTable()
 {
 if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
@@ -5707,8 +5721,8 @@ Table* w = (Table*)ws->activeWindow();
 		Legend.insertItem(tr("Set as"),&colType);
 		Legend.insertSeparator();
 
-		Legend.insertItem(tr("Recalculate"), w, SLOT(calculate()));
-		Legend.insertItem(tr("Set column &values..."),w,SIGNAL(colValuesDialog()));
+		actionShowColumnValuesDialog->addTo(&Legend);
+		actionTableRecalculate->addTo(&Legend);
 		actionSetAscValues->addTo(&fill);
 		actionSetRandomValues->addTo(&fill);
 		Legend.insertItem(tr("&Fill column with"),&fill);
@@ -8551,6 +8565,7 @@ if (w->isA("MultiLayer"))
 	else
 		{
 		actionShowCurvesDialog->addTo(&cm);
+		actionAddFunctionCurve->addTo(&cm);
 		
 		actionTranslateVert->addTo(&translate);
 		actionTranslateHor->addTo(&translate);
@@ -8767,6 +8782,7 @@ if (selection)
 		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
 		cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), t, SLOT(pasteSelection()));
 		cm.insertSeparator();
+		actionTableRecalculate->addTo(&cm);
 		cm.insertItem(tr("&Insert Row"), t, SLOT(insertRow()));
 		cm.insertItem(QPixmap(close_xpm), tr("&Delete Row"), t, SLOT(deleteSelectedRows()));
 		cm.insertItem(QPixmap(erase_xpm),tr("Clea&r Row"), t, SLOT(clearSelection()));
@@ -8779,6 +8795,7 @@ if (selection)
 		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
 		cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), t, SLOT(pasteSelection()));
 		cm.insertSeparator();
+		actionTableRecalculate->addTo(&cm);
 		cm.insertItem(QPixmap(close_xpm), tr("&Delete Rows"), t, SLOT(deleteSelectedRows()));
 		cm.insertItem(QPixmap(erase_xpm),tr("Clea&r Rows"), t, SLOT(clearSelection()));
 		cm.insertSeparator();
@@ -8790,6 +8807,7 @@ if (selection)
 		cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
 		cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), t, SLOT(pasteSelection()));
 		cm.insertSeparator();
+		actionTableRecalculate->addTo(&cm);
 		cm.insertItem(QPixmap(erase_xpm),tr("Clea&r"), t, SLOT(clearSelection()));
 		}	
 	}
@@ -11025,6 +11043,9 @@ void ApplicationWindow::createActions()
   actionShowColumnValuesDialog = new QAction(tr("Set Column &Values ..."), QString::null, this);
   connect(actionShowColumnValuesDialog, SIGNAL(activated()), this, SLOT(showColumnValuesDialog()));
 
+  actionTableRecalculate = new QAction(tr("Recalculate"), tr("Ctrl+Return"), this);
+  connect(actionTableRecalculate, SIGNAL(activated()), this, SLOT(recalculateTable()));
+
   actionShowColsDialog = new QAction(tr("&Columns..."), QString::null, this);
   connect(actionShowColsDialog, SIGNAL(activated()), this, SLOT(showColsDialog()));
 
@@ -11478,10 +11499,11 @@ void ApplicationWindow::translateActionsStrings()
   actionShowGridDialog->setMenuText(tr("&Grid ..."));
   actionShowTitleDialog->setMenuText(tr("&Title ..."));
   actionShowColumnOptionsDialog->setMenuText(tr("Column &Options ..."));
-  actionShowColumnValuesDialog->setAccel(tr("Ctrl+Alt+O"));
-
+  actionShowColumnOptionsDialog->setAccel(tr("Ctrl+Alt+O"));
+  
   actionShowColumnValuesDialog->setMenuText(tr("Set Column &Values ..."));
   actionShowColumnValuesDialog->setAccel(tr("Ctrl+Q"));
+  actionTableRecalculate->setMenuText(tr("Recalculate"));
 
   actionShowColsDialog->setMenuText(tr("&Columns..."));
   actionShowRowsDialog->setMenuText(tr("&Rows..."));

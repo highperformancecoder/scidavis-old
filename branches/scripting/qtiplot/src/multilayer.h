@@ -30,6 +30,7 @@ class MultiLayer: public myWidget
 public:
     MultiLayer (const QString& label, QWidget* parent=0, const char* name=0, WFlags f=0);
 	QWidgetList* graphPtrs(){return graphsList;};
+	Graph *layer(int num);
 	LayerButton* addLayerButton();	
 
 	enum HorAlignement{HCenter, Left, Right};

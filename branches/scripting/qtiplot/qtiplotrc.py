@@ -50,11 +50,47 @@ try:
     "fresnel", "fresnel_zeros", "fresnelc_zeros", "fresnels_zeros", "modfresnelp", "modfresnelm",
     # Legendre Functions
     "lpn", "lqn", "lpmn", "lqmn", "lpmv", "sph_harm",
+    # Orthogonal polynomials
+    "legendre", "sh_legendre",
+    "chebyt", "chebyu", "chebyc", "chebys", "sh_chebyt", "sh_chebyu",
+    "jacobi", "sh_jacobi",
+    "laguerre", "genlaguerre",
+    "hermite", "hermitenorm",
+    "gegenbauer",
+    # HyperGeometric Functions
+    "hyp2f1",
+    "hyp1f1", "hyperu", "hyp0f1",
+    "hyp2f0", "hyp1f2", "hyp3f0",
+    # Parabolic Cylinder Functions
+    "pbdv", "pbvv", "pbwa", "pbdv_seq", "pbvv_seq", "pbdn_seq",
+    # mathieu and Related Functions (and derivatives)
+    "mathieu_a", "mathieu_b", "mathieu_even_coeff", "mathieu_odd_coeff",
+    "mathieu_cem", "mathieu_sem", "mathieu_modcem1", "mathieu_modcem2", "mathieu_modsem1", "mathieu_modsem2",
+    # Spheroidal Wave Functions
+    "pro_ang1", "pro_rad1", "pro_rad2",
+    "obl_ang1", "obl_rad1", "obl_rad2",
+    "pro_cv", "obl_cv", "pro_cv_seq", "obl_vc_seq",
+    "pro_ang1_cv", "pro_rad1_cv", "pro_rad2_cv",
+    "obl_ang1_cv", "obl_rad1_cv", "obl_rad2_cv",
+    # Kelvin Functions
+    "kelvin", "kelvin_zeros",
+    "ber", "bei", "berp", "beip", "ker", "kei", "kerp", "keip",
+    "ber_zeros", "bei_zeros", "berp_zeros", "beip_zeros", "ker_zeros", "kei_zeros", "kerp_zeros", "keip_zeros",
+    # Other Special Functions
+    "expn", "exp1", "expi",
+    "wofz", "dawson",
+    "shichi", "sici", "spence",
+    "zeta", "zetac",
+    # Convenience Functions
+#    "cbrt", "exp10", "exp2",
+#    "radian", "cosdg", "sindg", "tandg", "cotdg",
+#    "log1p", "expm1", "cosm1",
+    "round",
   ]
   for name in special_functions:
     try:
       f = getattr(special, name)
-      setattr(__main__,name,f)
+      setattr(__main__, name, f)
       # make functions available in QtiPlot's math function list
       if callable(f):
         qti.mathFunctions[name] = f
