@@ -308,7 +308,7 @@ public:
   bool setDataFromCurve(const QString&, Graph*=0);
   bool setDataFromCurve(const QString&, double, double, Graph*=0);
 
-  void setRange(double from, double to);
+  void setInterval(double from, double to);
 
   QString formula();
   virtual void setParametersList(const QStringList&);
@@ -341,7 +341,11 @@ delete values;
   void setAlgorithm(Algorithm);
 
   void setTolerance(double);
-  void setFitCurveColor(int);
+
+  void setColor(int);
+  void setColor(const QColor&);
+
+  void setOutputPrecision(int);
 
   void setFitCurveParameters(bool, int=0);
 

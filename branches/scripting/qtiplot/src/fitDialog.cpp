@@ -1132,7 +1132,7 @@ if (!error)
 
 	fitter->setTolerance (eps);
 	fitter->setAlgorithm((Fit::Algorithm)boxAlgorithm->currentItem());
-	fitter->setFitCurveColor(boxColor->currentItem());
+	fitter->setColor(boxColor->currentItem());
 	fitter->setFitCurveParameters(generatePointsBtn->isChecked(), generatePointsBox->value());
 	fitter->setMaximumIterations(boxPoints->value());
 	if (fitter->name() == tr("MultiPeak") && ((MultiPeakFit *)fitter)->peaks() > 1)

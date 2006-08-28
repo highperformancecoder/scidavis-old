@@ -78,7 +78,10 @@ public slots:
 	bool insertCurve(Table* w, const QString& xColName, const QString& yColName, int style);
 	void insertCurve(QwtPlotCurve *c, const QString& plotAssociation);
 
+	//! Removes a curve defined by its index.
 	void removeCurve(int index);
+
+	//! Removes a curve defined by the title/plot association string s.
 	void removeCurve(const QString& s);
 	
 	void updateData(Table* w, int curve);
@@ -546,7 +549,6 @@ public slots:
 	static Qt::PenStyle getPenStyle(const QString& s);
 	static Qt::PenStyle getPenStyle(int style);
 	static Qt::BrushStyle getBrushStyle(int style);
-	static QColor color(int item);
 	static void showPlotErrorMessage(QWidget *parent, const QStringList& emptyColumns);
 
 	void showTitleContextMenu();

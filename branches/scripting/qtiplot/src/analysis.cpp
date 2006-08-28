@@ -1,5 +1,6 @@
 #include "graph.h"
 #include "plot.h"
+#include "ColorBox.h"
 #include "ImageMarker.h"
 #include "Histogram.h"
 #include "nrutil.h"
@@ -1089,7 +1090,7 @@ void Graph::addResultCurve(int n, double *x, double *y, int colorIndex,
 QString label=tableName+"_2";
 QwtPlotCurve *c = new QwtPlotCurve(label);
 long curveID = d_plot->insertCurve(c);
-c->setPen(QPen(color(colorIndex),1)); 
+c->setPen(QPen(ColorBox::color(colorIndex),1)); 
 	
 c_type.resize(++n_curves);
 c_type[n_curves-1]=Line;
