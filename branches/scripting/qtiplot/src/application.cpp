@@ -3995,7 +3995,10 @@ if (app->aw)
 	{
 	app->aw->setFocus();
 	if (app->aw->status() == myWidget::Maximized)
+		{
+		app->aw->hide();
 		app->aw->showMaximized();
+		}
 
 	app->customMenu(app->aw);
 	app->customToolBars(app->aw);
