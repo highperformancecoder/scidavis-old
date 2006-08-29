@@ -10513,7 +10513,7 @@ if(whichFit=="fitLinear" || whichFit=="fitSigmoidal" || whichFit=="fitGauss" || 
 		if (whichFit != "fitLinear")
 			fitter->guessInitialValues();
 		
-		fitter->setFitCurveParameters(generateUniformFitPoints, fitPoints);
+		fitter->generateFunction(generateUniformFitPoints, fitPoints);
 		fitter->fit();
 		delete fitter;
 		}

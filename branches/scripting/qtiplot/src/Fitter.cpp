@@ -26,7 +26,7 @@ d_n = 0;
 d_curveColorIndex = 1;
 d_solver = ScaledLevenbergMarquardt;
 d_tolerance = 1e-4;
-gen_x_data = true;
+d_gen_function = true;
 d_result_points = 100;
 d_max_iterations = 1000;
 d_curve = 0;
@@ -214,10 +214,10 @@ void Fit::setColor(const QColor& c)
 d_curveColorIndex = ColorBox::colorIndex(c);	
 }
 
-void Fit::setFitCurveParameters(bool generate, int points)
+void Fit::generateFunction(bool yes, int points)
 {
-gen_x_data = generate;
-if (gen_x_data)
+d_gen_function = yes;
+if (d_gen_function)
 	d_result_points = points;
 }
 
@@ -523,7 +523,7 @@ QApplication::restoreOverrideCursor();
 
 void Fit::generateFitCurve(double *par)
 {
-if (!gen_x_data)
+if (!d_gen_function)
 	d_result_points = d_n;
 
 double *X = new double[d_result_points]; 
@@ -532,7 +532,7 @@ double *Y = new double[d_result_points];
 calculateFitCurveData(par, X, Y);
 
 ApplicationWindow *app = (ApplicationWindow *)parent();
-if (gen_x_data)
+if (d_gen_function)
 	{
 	insertFitFunctionCurve(QString(name()) + tr("Fit"), X, Y);
 	d_graph->replot();
@@ -664,7 +664,7 @@ else
 
 void ExponentialFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-if (gen_x_data)
+if (d_gen_function)
 	{
 	double X0 = d_x[0];
 	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
@@ -739,7 +739,7 @@ d_results[3]=1.0/d_results[3];
 
 void TwoExpFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-if (gen_x_data)
+if (d_gen_function)
 	{
 	double X0 = d_x[0];
 	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
@@ -815,7 +815,7 @@ d_results[5]=1.0/d_results[5];
 
 void ThreeExpFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-if (gen_x_data)
+if (d_gen_function)
 	{
 	double X0 = d_x[0];
 	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
@@ -882,7 +882,7 @@ d_formula = "(A1-A2)/(1+exp((x-x0)/dx))+A2";
 
 void SigmoidalFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-if (gen_x_data)
+if (d_gen_function)
 	{
 	double X0 = d_x[0];
 	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
@@ -964,7 +964,7 @@ d_formula = "y0 + A*exp(-(x-xc)^2/(2*w^2))";
 void GaussAmpFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
 double w2 = par[3]*par[3];
-if (gen_x_data)
+if (d_gen_function)
 	{
 	double X0 = d_x[0];
 	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
@@ -1109,7 +1109,7 @@ double xvar;
 parser.DefineVar("x", &xvar);
 parser.SetExpr(d_formula.ascii());
 
-if (gen_x_data)
+if (d_gen_function)
 	{
 	double X0 = d_x[0];
 	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
@@ -1239,7 +1239,7 @@ return true;
 
 void PluginFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-if (gen_x_data)
+if (d_gen_function)
 	{
 	double X0 = d_x[0];
 	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
@@ -1434,7 +1434,7 @@ d_graph->insertCurve(c, title);
 void MultiPeakFit::generateFitCurve(double *par)
 {
 ApplicationWindow *app = (ApplicationWindow *)parent();
-if (!gen_x_data)
+if (!d_gen_function)
 	d_result_points = d_n;
 
 gsl_matrix * m = gsl_matrix_alloc (d_result_points, d_peaks);
@@ -1451,7 +1451,7 @@ int peaks_aux = d_peaks;
 if (d_peaks == 1)
 	peaks_aux--;
 
-if (gen_x_data)
+if (d_gen_function)
 	{
 	double step = (d_x[d_n-1] - d_x[0])/(d_result_points-1);	
 	for (i = 0; i<d_result_points; i++)
@@ -1721,7 +1721,7 @@ return lst;
 
 void PolynomialFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-if (gen_x_data)
+if (d_gen_function)
 	{
 	double X0 = d_x[0];
 	double step = (d_x[d_n-1]-X0)/(d_result_points-1);
@@ -1875,7 +1875,7 @@ generateFitCurve(d_results);
 
 void LinearFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-if (gen_x_data)
+if (d_gen_function)
 	{
 	double X0 = d_x[0];
 	double step = (d_x[d_n-1]-X0)/(d_result_points-1);

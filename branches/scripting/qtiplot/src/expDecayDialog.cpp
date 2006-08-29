@@ -160,7 +160,7 @@ if (fitter->setDataFromCurve(boxName->currentText(),
 	boxStart->text().toDouble(), boxStart->text().toDouble() - 1))
 	{
 	fitter->setColor(boxColor->currentItem());
-	fitter->setFitCurveParameters(app->generateUniformFitPoints, app->fitPoints);
+	fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);
 	fitter->fit();
 	delete fitter;
 	}

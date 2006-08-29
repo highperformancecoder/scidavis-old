@@ -155,6 +155,8 @@ public slots:
 	 curveLayout initCurveLayout(int i, int curves, int style);
 	 static curveLayout initCurveLayout();
 	 void updateCurveLayout(int index,const curveLayout *cL);
+	 //! Tries to guess not already used curve color and symbol style
+	 void guessUniqueCurveLayout(int& colorIndex, int& symbolIndex);
 
 	 gridOptions getGridOptions();
 	 void setGridOptions(const gridOptions& options);

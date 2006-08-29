@@ -353,7 +353,7 @@ delete values;
 
   void setOutputPrecision(int);
 
-  void setFitCurveParameters(bool, int=0);
+  void generateFunction(bool, int=100);
 
   void setMaximumIterations(int);
 

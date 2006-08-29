@@ -2196,7 +2196,7 @@ selected_peaks = 0;
 fitter = new MultiPeakFit (app, this, (MultiPeakFit::PeakProfile)profile, peaks);
 fitter->enablePeakCurves(app->generatePeakCurves);
 fitter->setPeakCurvesColor(app->peakCurvesColor);
-fitter->setFitCurveParameters(app->generateUniformFitPoints, app->fitPoints);
+fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);
 d_plot->canvas()->grabMouse();
 }
 
@@ -6824,6 +6824,34 @@ QString Graph::parentPlotName()
 {
 QWidget *w = (QWidget *)parent()->parent();
 return QString(w->name());
+}
+
+void Graph::guessUniqueCurveLayout(int& colorIndex, int& symbolIndex)
+{
+colorIndex = 0; 
+symbolIndex = 0;
+for (int i=0; i<n_curves; i++)
+	{
+	const QwtPlotCurve *c = curve(i);
+	if (c)
+		{
+		int index = ColorBox::colorIndex(c->pen().color());
+		if (index > colorIndex)
+			colorIndex = index;
+		QwtSymbol symb = c->symbol();
+		index = SymbolBox::symbolIndex(symb.style());
+		if (index > symbolIndex)
+			symbolIndex = index;
+		}
+	}
+if (n_curves > 1)
+	colorIndex = (++colorIndex)%16;
+if (colorIndex == 13) //avoid white invisible curves
+	colorIndex = 0;
+
+symbolIndex = (++symbolIndex)%15;
+if (!symbolIndex)
+	symbolIndex = 1;
 }
 
 Graph::~Graph()
