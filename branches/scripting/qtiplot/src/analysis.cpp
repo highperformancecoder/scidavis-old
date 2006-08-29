@@ -1112,8 +1112,8 @@ for (int i=0; i<n; i++)
 	text+=QString::number(y[i], 'g', 15);
 	text+="\n";
 	}
-delete[] x;
-delete[] y;
+free_vector(x, 0, n-1);
+free_vector(y, 0, n-1);
 
 emit createHiddenTable(tableName+"\t"+legend, n, 2, text);
 updatePlot();

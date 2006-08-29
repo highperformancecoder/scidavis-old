@@ -84,15 +84,23 @@ void ScriptEdit::insertErrorMsg(const QString &message)
 {
   QString err = message;
   err.prepend("\n").replace("\n","\n#> ");
+  int paraFrom, indexFrom, paraTo, indexTo;
+  getSelection(&paraFrom, &indexFrom, &paraTo, &indexTo);
   removeSelection();
+  setCursorPosition(paraTo, indexTo);
   insert(err,(uint)QTextEdit::CheckNewLines);
 }
 
 void ScriptEdit::scriptPrint(const QString &text)
 {
-  removeSelection();
-  if(firstOutput) insert("\n",(uint)QTextEdit::CheckNewLines);
-  firstOutput = false;
+  if(firstOutput) {
+    int paraFrom, indexFrom, paraTo, indexTo;
+    getSelection(&paraFrom, &indexFrom, &paraTo, &indexTo);
+    removeSelection();
+    setCursorPosition(paraTo, indexTo);
+    insert("\n",(uint)QTextEdit::CheckNewLines);
+    firstOutput = false;
+  }
   insert(text,(uint)QTextEdit::CheckNewLines);
 }
 

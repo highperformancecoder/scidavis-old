@@ -102,6 +102,9 @@ except(ImportError):
 global qt
 import qt
 
+# import QtiPlot's classes to the global namespace (particularly useful for fits)
+from qti import *
+
 # import selected methods of ApplicationWindow into the global namespace
 appImports = (
     "table", "newTable",
