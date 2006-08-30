@@ -175,6 +175,7 @@ public:
   bool insertCurve(Table*, const QString&, const QString&, int);
   void removeCurve(int);
   void removeCurve(const QString&);
+  void deleteFitCurves();
   int curves();
 
   void addErrorBars(Table *, const QString&, 

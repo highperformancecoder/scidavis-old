@@ -775,6 +775,9 @@ public:
 	int majVersion, minVersion, patchVersion;
 	QColor workspaceColor, panelsColor, panelsTextColor;
 	QString appStyle, workingDir;
+
+	//! Path to the folder where the last template file was opened/saved 
+	QString templatesDir;
 	bool smooth3DMesh, autoScaleFonts, autoResizeLayers, askForSupport, autoSearchUpdates;
 	bool confirmCloseTable, confirmCloseMatrix, confirmClosePlot2D, confirmClosePlot3D;
 	bool confirmCloseFolder, confirmCloseNotes;

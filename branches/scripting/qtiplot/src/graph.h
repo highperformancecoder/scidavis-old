@@ -117,7 +117,6 @@ public slots:
 
 	 void exportToWmf(const QString& fname);
 	 
-	 void clearPlot();
 	 void replot();
 	 void updatePlot();
 
@@ -245,7 +244,7 @@ public slots:
 	 QRect copiedMarkerRect(){return QRect(auxMrkStart, auxMrkEnd);};
 	 
 	 //legendMarker
-	 QValueList<int> textMarkerKeys();
+	 QwtArray<long> textMarkerKeys(){return d_texts;};
 	 LegendMarker* textMarker(long id);
 
 	 void addTimeStamp();
@@ -271,7 +270,7 @@ public slots:
 
 	 //! Used when opening a project file
 	 void insertLineMarker(QStringList list, int fileVersion);
-	 QwtArray<long> lineMarkerKeys();
+	 QwtArray<long> lineMarkerKeys(){return d_lines;};
 
 	 //!Draws a line/arrow depending on the value of "arrow"
 	 void drawLine(bool on, bool arrow = FALSE);
@@ -280,7 +279,7 @@ public slots:
 
 	 //image markers
 	 ImageMarker* imageMarker(long id);
-	 QwtArray<long> imageMarkerKeys();
+	 QwtArray<long> imageMarkerKeys(){return d_images;};
 	 void insertImageMarker(ImageMarker* mrk);
 	 void insertImageMarker(const QPixmap& photo, const QString& fileName);
 
@@ -476,6 +475,7 @@ public slots:
 	 void filterFFT(long curveKey, int filter_type, double lf, double hf, 
 					bool DCOffset, int colIndex);
 	
+	 void deleteFitCurves();
 	 QwtPlotCurve* getValidCurve(const QString& name, int params, int &points, int &start, int &end);
 	 QwtPlotCurve* getFitLimits(const QString& name, double from, double to,
 								int params, int &start, int &end);
@@ -627,14 +627,22 @@ private:
 	MarkerType selectedMarkerType;
 	QwtPlotMarker::LineStyle mrklStyle;
 	QStringList scales,associations;
-	QMemArray<int> c_type; //curve types
-	QMemArray<long> c_keys; // arrows on plot keys
-	QMemArray<long> lines; // arrows on plot keys
-	QMemArray<long> images; // images on plot keys
+
+	//! Curve types
+	QMemArray<int> c_type;
+	//! Arrows on plot keys
+	QMemArray<long> c_keys;
+	//! Arrows/lines on plot keys
+	QMemArray<long> d_lines; 
+	//! Images on plot keys
+	QMemArray<long> d_images; 
+	//! Stores the identifiers (keys) of the text objects on the plot
+	QMemArray<long> d_texts;
+
 	QPen mrkLinePen;
 	QFont auxMrkFont, defaultMarkerFont;
 	QColor auxMrkColor, auxMrkBkgColor;
-	QPoint auxMrkStart,auxMrkEnd;
+	QPoint auxMrkStart, auxMrkEnd;
 	Qt::PenStyle auxMrkStyle;
 	QString auxMrkFileName, auxMrkText;
 

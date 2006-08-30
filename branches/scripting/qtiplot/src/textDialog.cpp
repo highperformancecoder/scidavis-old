@@ -62,11 +62,9 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
 	new QLabel(tr( "Font" ),GroupBox1);
 	buttonFont = new QPushButton( GroupBox1, "buttonFont" );
     buttonFont->setText( tr( "&Font" ) );
-    buttonFont->setAutoDefault( TRUE );
 
 	buttonApply = new QPushButton( GroupBox1, "buttonApply" );
     buttonApply->setText( tr( "&Apply" ) );
-    buttonApply->setAutoDefault( TRUE );
     buttonApply->setDefault( TRUE );
 	
 	if (text_type)
@@ -88,7 +86,6 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
 
 	buttonCancel = new QPushButton( GroupBox1, "buttonCancel" );
     buttonCancel->setText( tr( "&Cancel" ) );
-    buttonCancel->setAutoDefault( TRUE );	
 
 	if (text_type == TextMarker)
 		{
@@ -160,6 +157,7 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
 	buttonU->setMaximumWidth(40);
 
     textEditBox = new QTextEdit( this);
+	textEditBox->setTextFormat(QTextEdit::PlainText);
 
 	setFocusPolicy(QWidget::StrongFocus);
 	setFocusProxy(textEditBox);
@@ -180,8 +178,8 @@ TextDialog::TextDialog(TextType type, QWidget* parent,  const char* name, bool m
 	connect( buttonU, SIGNAL( clicked() ), this, SLOT(addUnderline() ) );
 	connect( buttonI, SIGNAL( clicked() ), this, SLOT(addItalic() ) );
 	connect( buttonB, SIGNAL( clicked() ), this, SLOT(addBold() ) );
-	connect(buttonMinGreek, SIGNAL(clicked()), this, SLOT(showMinGreek()));
-	connect(buttonMajGreek, SIGNAL(clicked()), this, SLOT(showMajGreek()));
+	connect( buttonMinGreek, SIGNAL(clicked()), this, SLOT(showMinGreek()));
+	connect( buttonMajGreek, SIGNAL(clicked()), this, SLOT(showMajGreek()));
 }
 
 void TextDialog::showMinGreek()

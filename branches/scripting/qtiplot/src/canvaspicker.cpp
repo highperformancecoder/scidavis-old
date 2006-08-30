@@ -31,7 +31,7 @@ CanvasPicker::CanvasPicker(Graph *plot):
 bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 {
     QMemArray<long> images=plot()->imageMarkerKeys();	
-	QValueList<int> texts=plot()->textMarkerKeys();
+	QMemArray<long> texts=plot()->textMarkerKeys();
 	QMemArray<long> lines=plot()->lineMarkerKeys();	
 	
 	if (object != (QObject *)plot()->plotWidget()->canvas())
@@ -492,7 +492,7 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 void CanvasPicker::releaseMarker()
 {
 QMemArray<long> images=plot()->imageMarkerKeys();	
-QValueList<int> texts=plot()->textMarkerKeys();
+QMemArray<long> texts=plot()->textMarkerKeys();
 QMemArray<long> lines=plot()->lineMarkerKeys();
 
 bool line = false, image = false;
@@ -540,7 +540,7 @@ void CanvasPicker::moveMarker(QPoint& point)
 QApplication::setOverrideCursor(QCursor(Qt::PointingHandCursor), true);
 
 QMemArray<long> images=plot()->imageMarkerKeys();	
-QValueList<int> texts=plot()->textMarkerKeys();
+QMemArray<long> texts=plot()->textMarkerKeys();
 QMemArray<long> lines=plot()->lineMarkerKeys();
 			
 QPainter painter(plotWidget->canvas());
@@ -676,17 +676,14 @@ if (plot()->zoomOn())
 	return false;
 
 QMemArray<long> images=plot()->imageMarkerKeys();	
-QValueList<int> texts=plot()->textMarkerKeys();
+QMemArray<long> texts=plot()->textMarkerKeys();
 QMemArray<long> lines=plot()->lineMarkerKeys();
-int n=texts.size();	
-int m=lines.size();			
-int p=images.size();
 
 plot()->copyCanvas(true);
 plotWidget->replot();
 
 int i;
-for (i=0;i<m;i++)
+for (i=0; i<(int)lines.size(); i++)
 	{//line marker selected(first)?	
 	LineMarker* mrkL=(LineMarker*) plotWidget->marker(lines[i]);
 	if (mrkL)
@@ -716,13 +713,12 @@ for (i=0;i<m;i++)
 				startLinePoint = mrkL->startPoint();
 				return TRUE;
 				}
-
 			return TRUE;
 			}
 		}
 	}
 
-for (i=0;i<n;i++)
+for (i=0; i<(int)texts.size(); i++)
 	{//text marker selected(second)?	
 	LegendMarker* mrk=(LegendMarker*)plotWidget->marker(texts[i]);
 	QRect mRect=mrk->rect();		
@@ -735,7 +731,7 @@ for (i=0;i<n;i++)
 		}
 	}
 
-for (i=0;i<p;i++)
+for (i=0; i<(int)images.size(); i++)
 	{//image marker selected(last)?	
 	ImageMarker* mrkI=(ImageMarker*)plotWidget->marker(images[i]);
 	if (mrkI->rect().contains(point))

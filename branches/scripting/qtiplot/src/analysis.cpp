@@ -520,8 +520,8 @@ void Graph::interpolate(QwtPlotCurve *curve, int spline, int start, int end,
 						int points, int colorIndex)
 {
 size_t i, n = end - start + 1;
-double *x=vector(0, n-1);
-double *y=vector(0, n-1);
+double *x = new double[n];
+double *y = new double[n];
 for (i = 0; i < n; i++)
     {// This is the data to be analysed 
 	x[i]=curve->x(i+start);
@@ -577,11 +577,11 @@ gsl_spline_init (interp, x, y, n);
 
 double origin = x[0];
 double step=(x[n-1]-x[0])/(double)(points-1);
-free_vector(x,0,n-1);	
-free_vector(y,0,n-1);
+delete[] x;
+delete[] y;
 
-x=vector(0, points-1);
-y=vector(0, points-1);
+x = new double[points];
+y = new double[points];
 for (int j=0; j<points; j++)
 	{
 	x[j]=origin + j*step;
@@ -601,9 +601,9 @@ QwtPlotCurve *c= getValidCurve(curveTitle, 4, n, start, end);
 if (!c)
 	return false;
 	
-double *x=vector(0,n-1);
-double *y=vector(0,n-1);
-double *result=vector(0,n-2);
+double *x = new double[n];
+double *y = new double[n];
+double *result = new double[n-1];
 
 int i,aux = 0;
 for (i = start; i <= end; i++)
@@ -611,8 +611,7 @@ for (i = start; i <= end; i++)
 	x[aux]=c->x(i);
 	y[aux]=c->y(i);
 	aux++;
-  	}
-	
+  	}	
 for (i = 1; i < n-1; i++)
 	 result[i]=0.5*((y[i+1]-y[i])/(x[i+1]-x[i]) + (y[i]-y[i-1])/(x[i]-x[i-1]));
 	
@@ -626,7 +625,9 @@ for (i = 1; i < n-1; i++)
 	}
 	
 emit createHiddenTable(c->title().text()+"\t"+ tr("Derivative of")+" "+c->title().text(),n-2,2,text);
-free_vector(x,0,n-1);free_vector(y,0,n-1);free_vector(result,0,n-2);
+delete[] x;
+delete[] y;
+delete[] result;
 return true;
 }
 
@@ -952,8 +953,8 @@ if (!mrk)
 	QMessageBox::warning(0,tr("QtiPlot - Pixel selection warning"),  
 						"Please select the start line point inside the image rectangle!");
 	linesOnPlot--;
-	d_plot->removeMarker(lines[linesOnPlot]);
-	lines.resize(linesOnPlot);
+	d_plot->removeMarker(d_lines[linesOnPlot]);
+	d_lines.resize(linesOnPlot);
 	return;
 	}
 
@@ -963,8 +964,8 @@ if (!rect.contains(start) || !rect.contains(end))
 	QMessageBox::warning(0,tr("QtiPlot - Pixel selection warning"),  
 						"Please select the end line point inside the image rectangle!");
 	linesOnPlot--;
-	d_plot->removeMarker(lines[linesOnPlot]);
-	lines.resize(linesOnPlot);		
+	d_plot->removeMarker(d_lines[linesOnPlot]);
+	d_lines.resize(linesOnPlot);		
 	return;		
 	}
 	
@@ -1112,9 +1113,9 @@ for (int i=0; i<n; i++)
 	text+=QString::number(y[i], 'g', 15);
 	text+="\n";
 	}
-free_vector(x, 0, n-1);
-free_vector(y, 0, n-1);
-
+delete[] x;
+delete[] y;
+	
 emit createHiddenTable(tableName+"\t"+legend, n, 2, text);
 updatePlot();
 }
@@ -1128,9 +1129,9 @@ if (!curve)
 QApplication::setOverrideCursor(waitCursor);
 
 int i,n=curve->dataSize();
-double *x = vector(0,n-1);
-double *y = vector(0,n-1);
-double *s = vector(0,n-1);
+double *x = new double[n];
+double *y = new double[n];
+double *s = new double[n];
 int np = nl+nr+1;
 double *c = vector(1, np);
 
@@ -1170,8 +1171,9 @@ for (i=0; i<n; i++)
 		}
 	}
 
-free_vector(y,0,n-1);
+delete[] y;
 free_vector(c,1,np);
+
 free_intvector(index,1,np);
 		
 addResultCurve(n, x, s, colIndex, "Smoothed"+QString::number(++fitID), 
@@ -1188,9 +1190,9 @@ if (!curve)
 
 QApplication::setOverrideCursor(waitCursor);
 
-int i, n=curve->dataSize();
-double *x = vector(0,n-1);
-double *y = vector(0,n-1);
+int i, n = curve->dataSize();
+double *x = new double[n];
+double *y = new double[n];
 for (i = 0; i<n; i++)
     {// The data to be filtered 
 	x[i]=curve->x(i);
@@ -1230,9 +1232,9 @@ if (!curve)
 QApplication::setOverrideCursor(waitCursor);
 
 int i,j, n=curve->dataSize();
-double *x = vector(0,n-1);
-double *y = vector(0,n-1);
-double *s = vector(0,n-1);
+double *x = new double[n];
+double *y = new double[n];
+double *s = new double[n];
 
 for (i = 0; i < n; i++)
     {// The data to be smoothed 
@@ -1270,7 +1272,7 @@ for (i=n-p2; i<n-1; i++)
 	s[i]=aux/(double)(2*(n-i-1)+1);
 	}
 s[n-1]=y[n-1];
-free_vector(y,0,n-1);	
+delete[] y;	
 addResultCurve(n, x, s, colIndex, "Smoothed"+QString::number(++fitID), 
 			   QString::number(points)+" Points Average Smoothing of "+curve->title().text());
 QApplication::restoreOverrideCursor();
@@ -1284,9 +1286,9 @@ if (!curve)
 
 QApplication::setOverrideCursor(waitCursor);
 
-int i, n=curve->dataSize();
-double *x = vector(0,n-1);
-double *y = vector(0,n-1);
+int i, n = curve->dataSize();
+double *x = new double[n];
+double *y = new double[n];
 
 for (i = 0; i<n; i++)
     {// The data to be filtered 
@@ -1382,5 +1384,3 @@ else
 	}
 return true;
 }
-
-

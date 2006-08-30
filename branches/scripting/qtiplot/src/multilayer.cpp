@@ -1083,7 +1083,7 @@ for (int i=0;i<(int)graphsList->count();i++)
 			plot->axisTitle(j).setFont(scaleFnt);
 			}
 			
-		QValueList<int> keys=gr->textMarkerKeys();
+		QMemArray<long> keys=gr->textMarkerKeys();
 		for (int k=0;k<(int)keys.size();k++)
 			{
 			LegendMarker* mrk=(LegendMarker*)gr->textMarker(keys[k]);

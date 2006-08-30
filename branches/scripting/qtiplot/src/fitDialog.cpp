@@ -1300,12 +1300,13 @@ btnApply->setEnabled(true);
 
 void fitDialog::deleteFitCurves()
 {
-QStringList lst = graph->curvesList();
+/*QStringList lst = graph->curvesList();
 for (int i = 0; i<(int)lst.count(); i++)
 	{
 	if (lst[i].contains(tr("Fit")))
 		graph->removeCurve(lst[i]);
-	}
+	}*/
+graph->deleteFitCurves();
 }
 
 fitDialog::~fitDialog()
