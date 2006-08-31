@@ -4097,7 +4097,7 @@ void ApplicationWindow::restartScriptingEnv()
 
 void ApplicationWindow::openTemplate()
 {
-QString filter = "QtiPlot 2D Plot Template (*.qpt);;";
+QString filter = "QtiPlot 2D Graph Template (*.qpt);;";
 filter += "QtiPlot 3D Surface Template (*.qst);;";
 filter += "QtiPlot Table Template (*.qtt);;";
 filter += "QtiPlot Matrix Template (*.qmt);;";
@@ -4913,7 +4913,7 @@ if (plot->isEmpty())
 	QApplication::restoreOverrideCursor();
 	QMessageBox::warning(this,tr("QtiPlot - Warning"),
 				tr("There are no plot layers available in window <b>"+
-				QString(plot->name()) + "</b>.<br>Plot window not exported!"));
+				QString(plot->name()) + "</b>.<br>Graph window not exported!"));
 	return;
 	}
 
@@ -5072,7 +5072,7 @@ QString filter;
 if (w->isA("Matrix"))
 	filter = tr("QtiPlot Matrix Template")+" (*.qmt)";
 else if (w->isA("MultiLayer"))
-	filter = tr("QtiPlot 2D Plot Template")+" (*.qpt)";
+	filter = tr("QtiPlot 2D Graph Template")+" (*.qpt)";
 else if (w->isA("Table"))
 	filter = tr("QtiPlot Table Template")+" (*.qtt)";
 else if (w->isA("Graph3D"))
@@ -8421,7 +8421,7 @@ if (w)
 			for (int i=0;i<int(graphs.count());i++)
 				plots.insertItem(graphs[i], window(graphs[i]), SLOT(showMaximized()));
 
-			cm.insertItem(tr("D&epending Plots"),&plots);
+			cm.insertItem(tr("D&epending Graphs"),&plots);
 			}
 		}
 	else if (w->isA("Matrix"))
@@ -8433,7 +8433,7 @@ if (w)
 			for (int i=0;i<int(graphs.count());i++)
 				plots.insertItem(graphs[i], window(graphs[i]), SLOT(showMaximized()));
 
-			cm.insertItem(tr("D&epending 3D Plots"),&plots);
+			cm.insertItem(tr("D&epending 3D Graphs"),&plots);
 			}
 		}
 	else if (w->isA("MultiLayer"))
@@ -8724,7 +8724,7 @@ else if (w->isA("Graph3D"))
 	Graph3D *g=(Graph3D*)w;
 	if (!g->hasData())
 		{
-		cm.insertItem(tr("&Plot 3D"), &plot3D);
+		cm.insertItem(tr("&Graph 3D"), &plot3D);
 		actionAdd3DData->addTo(&plot3D);
 		plot3D.insertItem(tr("&Matrix..."), this, SLOT(add3DMatrixPlot()));
 		actionEditSurfacePlot->addTo(&plot3D);
@@ -13288,12 +13288,12 @@ else if (w->isA("Note"))
 else if (w->isA("MultiLayer"))
 	{
 	it->setPixmap(0, QPixmap(graph_xpm));
-	it->setText(1, tr("Plot"));
+	it->setText(1, tr("Graph"));
 	}
 else if (w->isA("Graph3D"))
 	{
 	it->setPixmap(0, QPixmap(trajectory_xpm));
-	it->setText(1, tr("Plot 3D"));
+	it->setText(1, tr("Graph 3D"));
 	}
 
 it->setText(0, w->name());
@@ -13340,12 +13340,12 @@ else if (w->isA("Note"))
 else if (w->isA("MultiLayer"))
 	{
 	mbox->setIconPixmap(QPixmap(graph_xpm));
-	s +=  tr("Type") + ": " + tr("Plot") + "\n\n";
+	s +=  tr("Type") + ": " + tr("Graph") + "\n\n";
 	}
 else if (w->isA("Graph3D"))
 	{
 	mbox->setIconPixmap(QPixmap(trajectory_xpm));
-	s +=  tr("Type") + ": " + tr("Plot 3D") + "\n\n";
+	s +=  tr("Type") + ": " + tr("Graph 3D") + "\n\n";
 	}
 s += tr("Path") + ": " + current_folder->path() + "\n\n";
 s += tr("Size") + ": " + w->sizeToString() + "\n\n";

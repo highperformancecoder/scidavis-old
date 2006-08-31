@@ -7,6 +7,8 @@
 #include <qpainter.h>
 #include <qpaintdevicemetrics.h>
 #include <qsimplerichtext.h>
+#include <qmessagebox.h>
+#include <qfiledialog.h>
 
 ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
   : QTextEdit(parent, name), scripted(env)
@@ -26,6 +28,10 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
   connect(actionEval, SIGNAL(activated()), this, SLOT(evaluate()));
   actionPrint = new QAction(NULL, "&Print", 0, this, "print");
   connect(actionPrint, SIGNAL(activated()), this, SLOT(print()));
+  actionImport = new QAction(NULL, "&Import", 0, this, "import");
+  connect(actionImport, SIGNAL(activated()), this, SLOT(importASCII()));
+  actionExport = new QAction(NULL, "Exp&ort", 0, this, "export");
+  connect(actionExport, SIGNAL(activated()), this, SLOT(exportASCII()));
   //TODO: CTRL+Key_I -> inspect (currently "Open image file". other shortcut?)
 
   functionsMenu = new QPopupMenu(this, "functionsMenu");
@@ -50,6 +56,8 @@ QPopupMenu *ScriptEdit::createPopupMenu (const QPoint & pos)
   Q_CHECK_PTR(menu);
 
   actionPrint->addTo(menu);
+  actionImport->addTo(menu);
+  actionExport->addTo(menu);
   menu->insertSeparator();
 
   actionExecute->addTo(menu);
@@ -146,6 +154,7 @@ void ScriptEdit::executeAll()
   fname = fname.arg(name());
   myScript->setName(fname);
   myScript->setCode(text());
+  moveCursor(QTextEdit::MoveEnd,false);
   firstOutput=true;
   myScript->exec();
   firstOutput=false;
@@ -221,5 +230,44 @@ if (printer.setup())
 		} 
 	while (TRUE);
 	}
+}
+
+void ScriptEdit::importASCII(const QString &filename)
+{
+  QString f;
+  if (filename.isEmpty())
+    f = QFileDialog::getOpenFileName(QString::null, "Text (*.txt *.TXT);; Python Source (*.py)", this, 0, tr("QtiPlot - Import Text into Note"));
+  else
+    f = filename;
+  if (f.isEmpty()) return;
+  QFile file(f);
+  if (!file.open(IO_ReadOnly))
+  {
+    QMessageBox::critical(this, tr("QtiPlot - Error Opening File"), tr("Could not open file \"%1\" for reading.").arg(f));
+    return;
+  }
+  QTextStream s(&file);
+  while (!s.atEnd())
+    insert(s.readLine()+"\n");
+  file.close();
+}
+
+void ScriptEdit::exportASCII(const QString &filename)
+{
+  QString f;
+  if (filename.isEmpty())
+    f = QFileDialog::getSaveFileName(QString::null, "Text (*.txt *.TXT);; Python Source (*.py)", this, 0, tr("QtiPlot - Export Note to Text File"));
+  else
+    f = filename;
+  if (f.isEmpty()) return;
+  QFile file(f);
+  if (!file.open(IO_WriteOnly))
+  {
+    QMessageBox::critical(this, tr("QtiPlot - Error Opening File"), tr("Could not open file \"%1\" for writing.").arg(f));
+    return;
+  }
+  QTextStream s(&file);
+  s << text();
+  file.close();
 }
 

@@ -468,7 +468,7 @@ QVariant PythonScript::eval()
     qret = QVariant(pyret==Py_True, 0);
   // could handle advanced types (such as PyList->QValueList) here if needed
   /* fallback: try to convert to unicode string */
-  else {
+  if(!qret.isValid()) {
     PyObject *pystring = PyObject_Unicode(pyret);
     if (pystring) {
       PyObject *asUTF8 = PyUnicode_EncodeUTF8(PyUnicode_AS_UNICODE(pystring), PyUnicode_GET_DATA_SIZE(pystring), 0);
