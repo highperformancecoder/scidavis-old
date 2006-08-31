@@ -30,8 +30,6 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
   connect(actionPrint, SIGNAL(activated()), this, SLOT(print()));
   actionImport = new QAction(NULL, "&Import", 0, this, "import");
   connect(actionImport, SIGNAL(activated()), this, SLOT(importASCII()));
-  actionExport = new QAction(NULL, "Exp&ort", 0, this, "export");
-  connect(actionExport, SIGNAL(activated()), this, SLOT(exportASCII()));
   //TODO: CTRL+Key_I -> inspect (currently "Open image file". other shortcut?)
 
   functionsMenu = new QPopupMenu(this, "functionsMenu");
@@ -57,7 +55,6 @@ QPopupMenu *ScriptEdit::createPopupMenu (const QPoint & pos)
 
   actionPrint->addTo(menu);
   actionImport->addTo(menu);
-  actionExport->addTo(menu);
   menu->insertSeparator();
 
   actionExecute->addTo(menu);
@@ -249,25 +246,6 @@ void ScriptEdit::importASCII(const QString &filename)
   QTextStream s(&file);
   while (!s.atEnd())
     insert(s.readLine()+"\n");
-  file.close();
-}
-
-void ScriptEdit::exportASCII(const QString &filename)
-{
-  QString f;
-  if (filename.isEmpty())
-    f = QFileDialog::getSaveFileName(QString::null, "Text (*.txt *.TXT);; Python Source (*.py)", this, 0, tr("QtiPlot - Export Note to Text File"));
-  else
-    f = filename;
-  if (f.isEmpty()) return;
-  QFile file(f);
-  if (!file.open(IO_WriteOnly))
-  {
-    QMessageBox::critical(this, tr("QtiPlot - Error Opening File"), tr("Could not open file \"%1\" for writing.").arg(f));
-    return;
-  }
-  QTextStream s(&file);
-  s << text();
   file.close();
 }
 

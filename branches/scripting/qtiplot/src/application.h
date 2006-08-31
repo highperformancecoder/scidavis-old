@@ -638,6 +638,7 @@ public slots:
 	Note* openNote(ApplicationWindow* app, const QStringList &flist);
 	void initNote(Note* m, const QString& caption);
 	Note* note(const QString& name);
+	void saveNoteAs();
 	
 	//! Adds a new folder to the project
 	void addFolder();
@@ -878,7 +879,7 @@ public:
 	QAction *actionDonate, *actionHomePage, *actionDownloadManual, *actionTechnicalSupport, *actionTranslations;
 	QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;
 	QAction *actionScriptingLang, *actionRestartScripting, *actionClearTable, *actionGoToRow;
-	QAction *actionNoteExecute, *actionNoteExecuteAll, *actionNoteEvaluate;
+	QAction *actionNoteExecute, *actionNoteExecuteAll, *actionNoteEvaluate, *actionSaveNote;
 
 private:
 	//!Stores the pointers to the dragged items from the FolderListViews objects

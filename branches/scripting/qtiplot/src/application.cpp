@@ -5062,6 +5062,58 @@ if ( !fn.isEmpty() )
     }
 }
 
+void ApplicationWindow::saveNoteAs()
+{
+Note* w = (Note*)ws->activeWindow();
+if (!w)
+	return;
+
+QString filter = " *.txt;;";
+if (QString(scriptEnv->name()) == "Python")
+	filter += tr("Python Source")+" (*.py);;";
+filter += tr("All Files")+" (*)";
+
+QString selectedFilter;
+QString fn = QFileDialog::getSaveFileName(workingDir + "/" + w->name(), filter, this, 0,
+			tr("Save Notes As..."), &selectedFilter, false);
+if ( !fn.isEmpty() )
+	{
+	QFileInfo fi(fn);
+	templatesDir = fi.dirPath(true);
+	QString baseName = fi.fileName();	
+	if (!baseName.contains("."))
+		{
+		if (selectedFilter.contains(".txt"))
+			fn.append(".txt");
+		else if (selectedFilter.contains(".py"))
+			fn.append(".py");
+		}
+
+	if ( QFile::exists(fn) &&
+        QMessageBox::question(this, tr("QtiPlot -- Overwrite File? "),
+            tr("A file called: <p><b>%1</b><p>already exists.\n"
+                "Do you want to overwrite it?")
+                .arg(fn), tr("&Yes"), tr("&No"),QString::null, 0, 1 ) )
+        return ;
+	else
+		{
+		QFile f(fn);
+		if ( !f.open( IO_WriteOnly ) )
+			{
+			QMessageBox::critical(0, tr("QtiPlot - File Save Error"),
+			tr("Could not write to file: <br><h4> %1 </h4><p>Please verify that you have the right to write to this location!").arg(fn));
+			return;
+			}
+		QApplication::setOverrideCursor(waitCursor);
+		QTextStream t( &f );
+		t.setEncoding(QTextStream::UnicodeUTF8);
+		t << w->text();
+		f.close();
+		QApplication::restoreOverrideCursor();
+		}
+    }
+}
+
 void ApplicationWindow::saveAsTemplate()
 {
 myWidget* w = (myWidget*)ws->activeWindow();
@@ -5079,7 +5131,7 @@ else if (w->isA("Graph3D"))
 	filter = tr("QtiPlot 3D Surface Template")+" (*.qst)";
 
 QString selectedFilter;
-QString fn = QFileDialog::getSaveFileName(templatesDir, filter, this, "template",
+QString fn = QFileDialog::getSaveFileName(templatesDir  + "/" + w->name(), filter, this, 0,
 			tr("Save Window As Template"), &selectedFilter, false);
 if ( !fn.isEmpty() )
 	{
@@ -8785,12 +8837,12 @@ if (ws->activeWindow()->isA("Table"))
 	cm.insertSeparator();
 	}
 
-actionPrint->addTo(&cm);
-if (!ws->activeWindow()->isA("Note"))
+if (ws->activeWindow()->isA("Note"))
+	actionSaveNote->addTo(&cm);
+else
 	actionSaveTemplate->addTo(&cm);
-cm.insertSeparator();
-actionMinimizeWindow->addTo(&cm);
-actionMaximizeWindow->addTo(&cm);
+
+actionPrint->addTo(&cm);
 cm.insertSeparator();
 actionRename->addTo(&cm);
 actionCopyWindow->addTo(&cm);
@@ -10817,6 +10869,9 @@ void ApplicationWindow::createActions()
 
   actionSaveTemplate = new QAction(QPixmap(save_template_xpm), tr("Save as &Template..."), QString::null, this);
   connect(actionSaveTemplate, SIGNAL(activated()), this, SLOT(saveAsTemplate()));
+
+  actionSaveNote = new QAction(tr("Save Notes As..."), QString::null, this);
+  connect(actionSaveNote, SIGNAL(activated()), this, SLOT(saveNoteAs()));
 
   actionLoad = new QAction(QPixmap(import_xpm), tr("&Single file..."), QString::null, this);
   connect(actionLoad, SIGNAL(activated()), this, SLOT(loadASCII()));
