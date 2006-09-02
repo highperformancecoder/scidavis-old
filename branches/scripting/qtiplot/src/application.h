@@ -795,13 +795,10 @@ public:
 	QColor tableBkgdColor, tableTextColor, tableHeaderColor;
 	QString projectname, columnSeparator, helpFilePath, appLanguage;
 	QString configFilePath, logInfo, fitPluginsPath;
-	int logID,asciiID,closeID;
-	int exportID, printAllID;
-	int notes, graphs,tables, matrixes, ignoredLines, savingTimerId;
+	int logID,asciiID,closeID, exportID, printAllID, ignoredLines, savingTimerId, plot3DResolution;
 	bool renameColumns, copiedLayer, strip_spaces, simplify_spaces;
 	QStringList recentProjects, tableWindows;
 	bool saved, showPlot3DProjection, showPlot3DLegend;
-	int plot3DResolution;
 	QStringList plot3DColors, locales;
 	QStringList xFunctions, yFunctions, rFunctions,tetaFunctions; // user functions for parametric and polar plots
 	QStringList fitFunctions; //user-defined fit functions;

@@ -41,7 +41,7 @@ void QwtBarCurve::draw(QPainter *painter,
     if (to < 0)
         to = dataSize() - 1;
 
-    if ( verifyRange(from, to) > 0 )
+    //if ( verifyRange(dataSize(), from, to) > 0 )
 		{
         painter->save();
         painter->setPen(QwtPlotCurve::pen());

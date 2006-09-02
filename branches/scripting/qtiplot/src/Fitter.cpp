@@ -39,6 +39,7 @@ d_results = 0;
 d_errors = 0;
 d_prec = parent->fit_output_precision;
 d_init_err = false;
+chi_2 = -1;
 }
 
 gsl_multifit_fdfsolver * Fit::fitGSL(gsl_multifit_function_fdf f, int &iterations, int &status)
@@ -284,6 +285,12 @@ if (is_non_linear)
 	info +="---------------------------------------------------------------------------------------\n";
 	}
 return info;
+}
+
+double Fit::rSquare()
+{
+double sst = (d_n-1)*gsl_stats_variance(d_y, 1, d_n);
+return 1 - chi_2/sst;
 }
 
 void Fit::showLegend()

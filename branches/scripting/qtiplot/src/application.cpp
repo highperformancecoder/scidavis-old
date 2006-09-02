@@ -295,7 +295,6 @@ void ApplicationWindow::initGlobalConstants()
 #endif
 
 majVersion = 0; minVersion = 8; patchVersion = 7;
-graphs=0; tables=0; matrixes = 0; notes = 0;
 projectname="untitled";
 lastModified=0;
 activeGraph=0;
@@ -1730,7 +1729,7 @@ QStringList matrices = matrixNames();
 if ((int)matrices.count() <= 0)
 	{
 	QMessageBox::warning(this,tr("QtiPlot - Warning"),
-				tr("<h4>There are no matrixes available in this project.</h4>"
+				tr("<h4>There are no matrices available in this project.</h4>"
 					  "<p><h4>Please create a matrix and try again!</h4>"));
 	return;
 	}
@@ -1809,10 +1808,7 @@ sd->setActiveWindow();
 Graph3D* ApplicationWindow::newPlot3D(const QString& formula, double xl, double xr,
 									  double yl, double yr, double zl, double zr)
 {
-QString label="graph"+QString::number(++graphs);
-while(alreadyUsedName(label)){
-	label="graph"+QString::number(++graphs);}
-
+QString label = generateUnusedName(tr("Graph"));
 Graph3D *plot=new Graph3D("",ws,0,WDestructiveClose);
 plot->addFunction(formula, xl, xr, yl, yr, zl, zr);
 plot->resize(500,400);
@@ -1843,12 +1839,9 @@ Graph3D *plot=new Graph3D("",ws,0,WDestructiveClose);
 plot->addFunction(formula, xl, xr, yl, yr, zl, zr);
 plot->update();
 	
-QString label=caption;
-while(alreadyUsedName(label))
-	{
-	graphs++;
-	label="graph"+QString::number(graphs);
-	}
+QString label = caption;
+while(alreadyUsedName(label)){
+	label = generateUnusedName(tr("Graph"));}
 
 plot->setCaption(label);
 plot->setName(label);
@@ -1860,14 +1853,7 @@ Graph3D* ApplicationWindow::dataPlot3D(Table* table, const QString& colName)
 {
 QApplication::setOverrideCursor(waitCursor);
 
-graphs++;
-QString label="graph"+QString::number(graphs);
-while(alreadyUsedName(label))
-	{
-	graphs++;
-	label="graph"+QString::number(graphs);
-	}
-
+QString label = generateUnusedName(tr("Graph"));
 Graph3D *plot=new Graph3D("", ws, 0, WDestructiveClose);
 plot->addData(table, colName);
 plot->resize(500,400);
@@ -1905,11 +1891,8 @@ plot->addData(w, xCol, yCol, xl, xr, yl, yr, zl, zr);
 plot->update();
 
 QString label=caption;
-while(alreadyUsedName(label))
-	{
-	graphs++;
-	label="graph"+QString::number(graphs);
-	}
+while(alreadyUsedName(label)){
+	label = generateUnusedName(tr("Graph"));}
 
 plot->setCaption(label);
 plot->setName(label);
@@ -1939,11 +1922,7 @@ Graph3D* ApplicationWindow::dataPlot3D(const QString& formula)
 	int posY=formula.find("(",posX);
 	QString yColName=caption+formula.mid(posX+2,posY-posX-2);
 
-	QString label="graph"+QString::number(++graphs);
-	while(alreadyUsedName(label))
-		{
-		label="graph"+QString::number(++graphs);
-		}
+QString label = generateUnusedName(tr("Graph"));
 
 Graph3D *plot=new Graph3D("", ws, 0, WDestructiveClose);
 plot->addData(w, xColName, yColName);
@@ -1963,14 +1942,8 @@ return plot;
 Graph3D* ApplicationWindow::dataPlotXYZ(Table* table, const QString& zColName, int type)
 {
 QApplication::setOverrideCursor(waitCursor);
-graphs++;
-QString label="graph"+QString::number(graphs);
-while(alreadyUsedName(label))
-	{
-	graphs++;
-	label="graph"+QString::number(graphs);
-	}
 
+QString label = generateUnusedName(tr("Graph"));
 int zCol=table->colIndex(zColName);
 int yCol=table->colY(zCol);
 int xCol=table->colX(zCol);
@@ -2021,11 +1994,8 @@ plot->addData(w, xCol, yCol, zCol, xl, xr, yl, yr, zl, zr);
 plot->update();
 
 QString label=caption;
-while(alreadyUsedName(label))
-	{
-	graphs++;
-	label="graph"+QString::number(graphs);
-	}
+while(alreadyUsedName(label)){
+	label = generateUnusedName(tr("Graph"));}
 
 plot->setCaption(label);
 plot->setName(label);
@@ -2066,11 +2036,7 @@ Graph3D *plot=new Graph3D("", ws,0,WDestructiveClose);
 plot->addData(w, xCol, yCol, zCol, 1);
 plot->resize(500,400);
 
-QString label="graph"+QString::number(++graphs);
-while(alreadyUsedName(label))
-	{
-	label="graph"+QString::number(++graphs);
-	}
+QString label = generateUnusedName(tr("Graph"));
 plot->setCaption(label);
 plot->setName(label);
 customPlot3D(plot);
@@ -2232,7 +2198,7 @@ else
 		}
 	}
 
-MultiLayer *plot = multilayerPlot("graph" + QString::number(++graphs));
+MultiLayer *plot = multilayerPlot(generateUnusedName(tr("Graph")));
 plot->setWindowLabel(fn);
 plot->setCaptionPolicy(myWidget::Both);
 setListViewLabel(plot->name(), fn);
@@ -2282,7 +2248,7 @@ return g;
 
 MultiLayer* ApplicationWindow::newGraph()
 {
-MultiLayer* g = multilayerPlot(tr("graph1"));
+MultiLayer* g = multilayerPlot(generateUnusedName(tr("Graph")));
 if (g)
 	{
 	g->showNormal();
@@ -2308,7 +2274,7 @@ activeGraph->insertCurvesList(w, colList, style, defaultCurveLineWidth, defaultS
 
 customGraph(activeGraph);
 polishGraph(activeGraph, style);
-initMultilayerPlot(g, "graph"+QString::number(++graphs));
+initMultilayerPlot(g, generateUnusedName(tr("Graph")));
 
 //the following function must be called last in order to avoid resizing problems
 activeGraph->setIgnoreResizeEvents(!autoResizeLayers);
@@ -2340,7 +2306,7 @@ if (r<0)
 
 MultiLayer* g = new MultiLayer("", ws,0,WDestructiveClose);
 g->askOnCloseEvent(confirmClosePlot2D);
-initMultilayerPlot(g, "graph"+QString::number(++graphs));
+initMultilayerPlot(g, generateUnusedName(tr("Graph")));
 int layers=c*r;
 if (curves<layers)
 	{
@@ -2441,7 +2407,7 @@ for (int i=0;i<(int)colList.count();i++)
 		}
 	}
 ag->updatePlot();
-initMultilayerPlot(g, "graph"+QString::number(++graphs));
+initMultilayerPlot(g, generateUnusedName(tr("Graph")));
 ag->setIgnoreResizeEvents(!autoResizeLayers);
 emit modified();
 QApplication::restoreOverrideCursor();
@@ -2453,10 +2419,8 @@ void ApplicationWindow::initMultilayerPlot(MultiLayer* g, const QString& name)
 connectMultilayerPlot(g);
 	
 QString label = name;
-while(alreadyUsedName(label))
-	{
-	label="graph"+QString::number(++graphs);
-	}
+while(alreadyUsedName(label)){
+	label = generateUnusedName(tr("Graph"));}
 
 g->setCaption(label);
 g->setName(label);
@@ -2565,7 +2529,7 @@ Table* w = new Table(scriptEnv, fname, sep, lines, renameCols, stripSpaces,
 					 simplifySpaces, fname, ws, 0, WDestructiveClose);
 if (w)
 	{	
-	initTable(w, "table"+QString::number(++tables));
+	initTable(w, generateUnusedName(tr("Table")));
 	w->show();
 	}
 return w;
@@ -2577,7 +2541,7 @@ return w;
 Table* ApplicationWindow::newTable()
 {
 Table* w = new Table(scriptEnv, 30, 2, "", ws, 0, WDestructiveClose);
-initTable(w, "table"+QString::number(++tables));
+initTable(w, generateUnusedName(tr("Table")));
 w->showNormal();	
 return w;
 }
@@ -2672,7 +2636,7 @@ QString name=caption;
 name=name.replace ("_","-");
 
 while(alreadyUsedName(name)){
-	name="table"+QString::number(++tables);}
+	name = generateUnusedName(tr("Table"));}
 
 tableWindows<<name;
 w->setCaption(name);
@@ -2699,7 +2663,7 @@ Note* ApplicationWindow::newNote(const QString& caption)
 {
 Note* m = new Note(scriptEnv, "", ws, 0, WDestructiveClose);
 if (caption.isEmpty())
-	initNote(m, tr("Note") + QString::number(++notes));
+	initNote(m, generateUnusedName(tr("Notes")));
 else
 	initNote(m, caption);
 m->showNormal();	
@@ -2710,7 +2674,7 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 {
 QString name=caption;
 while(name.isEmpty() || alreadyUsedName(name))
-	name = "Note"+QString::number(++notes);
+	name = generateUnusedName(tr("Notes"));
 
 m->setCaption(name);
 m->setName(name);
@@ -2738,8 +2702,7 @@ emit modified();
 Matrix* ApplicationWindow::newMatrix()
 {
 Matrix* m = new Matrix(scriptEnv, 32, 32, "", ws, 0, WDestructiveClose);
-matrixes++;
-QString caption="Matrix" + QString::number(matrixes);
+QString caption = generateUnusedName(tr("Matrix"));
 initMatrix(m, caption);
 m->showNormal();	
 return m;
@@ -2818,9 +2781,7 @@ for (int i = 0; i<rows; i++)
 		w->setText(i, j, m->text(i,j));
 	}
 
-tables++;
-QString caption="table"+QString::number(tables);
-initTable(w, caption);
+initTable(w, generateUnusedName(tr("Table")));
 
 w->setWindowLabel(m->windowLabel());
 w->setCaptionPolicy(m->captionPolicy());
@@ -2835,8 +2796,7 @@ return w;
 void ApplicationWindow::initMatrix(Matrix* m, const QString& caption)
 {
 QString name=caption;
-while(alreadyUsedName(name)){
-	name = "Matrix"+QString::number(++matrixes);}
+while(alreadyUsedName(name)){name = generateUnusedName(tr("Matrix"));}
 	
 m->setCaption(name);
 m->setName(name);
@@ -2876,8 +2836,7 @@ for (int i = 0; i<rows; i++)
 		w->setText(i, j, m->text(i,j));
 	}
 
-matrixes++;
-QString caption="Matrix"+QString::number(matrixes);
+QString caption = generateUnusedName(tr("Matrix"));
 initMatrix(w, caption);
 
 w->setWindowLabel(m->windowLabel());
@@ -3903,15 +3862,6 @@ while ( !t.eof() && !progress.wasCanceled())
 			app->setListViewLabel(plot->name(),lst[1]);
 			plot->setCaptionPolicy((myWidget::CaptionPolicy)lst[2].toInt());
 			}
-
-		if (caption.contains ("graph",TRUE))
-			{
-			bool ok;
-			int gr=caption.remove("graph").toInt(&ok);
-			if (gr > app->graphs && ok) 
-				app->graphs = gr;
-			}
-
 		if (fileVersion > 83)
 			{
 			QStringList lst=QStringList::split ("\t", t.readLine(), false);
@@ -4156,7 +4106,7 @@ if (!fn.isEmpty())
 				
 			if (templateType == "<multiLayer>")
 				{
-				w = multilayerPlot(tr("graph1"));
+				w = multilayerPlot(generateUnusedName(tr("Graph")));
 				if (w)
 					{
 					((MultiLayer*)w)->setCols(cols);
@@ -4822,8 +4772,8 @@ if ( ied->exec() == QDialog::Accepted )
 
 void ApplicationWindow::exportAllGraphs()
 {
-QString dir = QFileDialog::getExistingDirectory(workingDir, this, "get existing directory", 
-					"Choose a directory to export the graphs to", true, true);
+QString dir = QFileDialog::getExistingDirectory(workingDir, this, tr("Get existing directory"), 
+					tr("Choose a directory to export the graphs to"), true, true);
 if (!dir.isEmpty())
 	{
 	imageExportDialog* ed= new imageExportDialog(true, this,"exportDialog",TRUE,WStyle_Tool|WDestructiveClose);
@@ -6267,17 +6217,6 @@ if (g)
 	connect (pd,SIGNAL(updatePie(const QPen&, const Qt::BrushStyle &,int,int)),g,SLOT(updatePie(const QPen&, const Qt::BrushStyle &,int,int)));
 	connect (pd,SIGNAL(worksheet(const QString&)),this,SLOT(showTable(const QString&)));
 
-	QString curve=(g->curvesList())[0];
-	pd->insertCurveName(curve);
-	QPen piePen=g->pieCurvePen();
-
-	pd->setBorderWidth(piePen.width());
-	pd->setBorderColor(piePen.color());
-	pd->setBorderStyle(piePen.style());
-	pd->setFirstColor(g->pieFirstColor());
-	pd->setPattern(g->pieBrushStyle());
-	pd->setPieSize(g->pieSize());
-
 	pd->setMultiLayerPlot((MultiLayer*)ws->activeWindow());
 	pd->showNormal();
 	pd->setActiveWindow();
@@ -7599,12 +7538,7 @@ Table* ApplicationWindow::copyTable()
 Table *w = 0, *m = (Table*)ws->activeWindow();
 if (m)
 	{
-	QString caption="table"+QString::number(++tables);
-	while (alreadyUsedName(caption))
-		{
-		tables++;
-		caption="table"+QString::number(tables);
-		}
+	QString caption = generateUnusedName(tr("Table"));
 	w=newTable(caption, m->tableRows(), m->tableCols());
 	w->copy(m);
 
@@ -7623,10 +7557,7 @@ Matrix* ApplicationWindow::cloneMatrix()
 Matrix *w = 0, *m = (Matrix*)ws->activeWindow();
 if (m)
 	{
-	QString caption="Matrix"+QString::number(++matrixes);
-	while(alreadyUsedName(caption))
-		caption = "Matrix"+QString::number(++matrixes);
-
+	QString caption = generateUnusedName(tr("Matrix"));
 	int c=m->numCols();
 	int r=m->numRows();
 	w = newMatrix(caption,r,c);
@@ -7659,10 +7590,7 @@ if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 		return 0;
 		}
 
-	QString caption="graph"+QString::number(++graphs);
-	while(alreadyUsedName(caption))
-		caption="graph"+QString::number(++graphs);
-
+	QString caption = generateUnusedName(tr("Graph"));
 	Graph3D *g2=0;
 	QString s = g->formula();
 	if (g->userFunction())
@@ -7746,9 +7674,7 @@ MultiLayer* plot2=0;
 if (ws->activeWindow() &&  ws->activeWindow()->isA("MultiLayer"))
 	{
 	MultiLayer* plot = (MultiLayer*)ws->activeWindow();
-	QString caption="graph"+QString::number(++graphs);
-	while(alreadyUsedName(caption))
-		caption="graph"+QString::number(++graphs);
+	QString caption = generateUnusedName(tr("Graph"));
 
 	plot2=multilayerPlot(caption);
 	plot2->showNormal();
@@ -9097,10 +9023,7 @@ if (fd)
 
 void ApplicationWindow::newFunctionPlot(int type,QStringList &formulas, const QString& var, QValueList<double> &ranges, int points)
 {
-QString label="graph"+QString::number(++graphs);
-while(alreadyUsedName(label)){
-	label="graph"+QString::number(++graphs);}
-
+QString label = generateUnusedName(tr("Graph"));
 MultiLayer* plot = multilayerPlot(label);
 Graph* g=plot->addLayer();
 customGraph(g);
@@ -9807,13 +9730,6 @@ QString caption=lst[0];
 Note* w = app->newNote(caption);
 app->setListViewDate(caption, lst[1]);
 w->setBirthDate(lst[1]);
-if (caption.contains ("Note"))
-	{
-	bool ok;
-	int tb=caption.remove("Note").toInt(&ok);
-	if (tb > app->notes && ok) 
-		app->notes = tb;
-	}
 restoreWindowGeometry(app, (QWidget *)w, flist[1]);
 
 lst=QStringList::split ("\t", flist[2], true);
@@ -9835,14 +9751,6 @@ int cols = list[2].toInt();
 Matrix* w = app->newMatrix(caption, rows, cols);
 app->setListViewDate(caption,list[3]);
 w->setBirthDate(list[3]);
-
-if (caption.contains ("Matrix"))
-	{
-	bool ok;
-	int tb=caption.remove("Matrix").toInt(&ok);
-	if (tb > app->matrixes && ok) 
-		app->matrixes = tb;
-	}
 
 for (line++; line!=flist.end(); line++)
 {
@@ -9900,14 +9808,6 @@ int cols = list[2].toInt();
 Table* w = app->newTable(caption, rows,cols);
 app->setListViewDate(caption,list[3]);
 w->setBirthDate(list[3]);
-
-if (caption.contains ("table"))
-	{
-	bool ok;
-	int tb = caption.remove("table").toInt(&ok);
-	if (tb > app->tables && ok) 
-		app->tables = tb;	
-	}
 
 for (line++; line!=flist.end(); line++)
 {
@@ -10474,15 +10374,6 @@ if (!plot)
 
 app->setListViewDate(caption,date);
 plot->setBirthDate(date);
-//app->setListViewSize(caption, plot->sizeToString());
-
-if (caption.contains ("graph",TRUE))
-	{
-	bool ok;
-	int gr=caption.remove("graph").toInt(&ok);
-	if (gr > app->graphs && ok) 
-		app->graphs = gr;
-	}
 
 plot->setIgnoreFonts(true);
 restoreWindowGeometry(app, (QWidget *)plot, lst[1]);
@@ -11839,9 +11730,7 @@ if (!ws->activeWindow()|| !ws->activeWindow()->isA("Matrix"))
 	return;
 
 QApplication::setOverrideCursor(waitCursor);
-QString label="graph"+QString::number(++graphs);
-while (alreadyUsedName(label)){
-	label="graph"+QString::number(++graphs);}
+QString label = generateUnusedName(tr("Graph"));
 
 Graph3D *plot=new Graph3D("", ws, 0, WDestructiveClose);
 plot->addMatrixData((Matrix*)ws->activeWindow());
@@ -12560,15 +12449,6 @@ while ( !t.eof())
 			setListViewLabel(plot->name(),lst[1]);
 			plot->setCaptionPolicy((myWidget::CaptionPolicy)lst[2].toInt());
 			}
-
-		if (caption.contains ("graph",TRUE))
-			{
-			bool ok;
-			int gr=caption.remove("graph").toInt(&ok);
-			if (gr > graphs && ok) 
-				graphs = gr;
-			}
-
 		if (fileVersion > 83)
 			{
 			QStringList lst=QStringList::split ("\t", t.readLine(), false);
@@ -13666,8 +13546,11 @@ QString ApplicationWindow::generateUnusedName(const QString& name, bool incremen
 {
 int index = 0;
 QWidgetList *windows = windowsList();
-for (int i = 0; i < int(windows->count());i++ )
+QStringList lst;
+
+for (int i = 0; i < int(windows->count()); i++)
 	{
+	lst << windows->at(i)->name();
 	if (QString(windows->at(i)->name()).startsWith(name))
 		index++;
 	}
@@ -13681,6 +13564,9 @@ else
 	if (index>0)
 		newName += QString::number(index);
 	}
+
+while(lst.contains(newName)){
+	newName = name + QString::number(++index);}
 return newName;
 }
 

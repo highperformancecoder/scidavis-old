@@ -82,6 +82,12 @@ public:
 	//! Returns the sum of squares of the residuals from the best-fit line
 	double chiSquare() {return chi_2;};
 
+	//! Returns R^2
+	double rSquare();
+
+	//! Returns the size of the fitted data set
+	int dataSize(){return d_n;};
+
 	//! Sets the precision used for the output
 	void setOutputPrecision(int digits){d_prec = digits;};
 

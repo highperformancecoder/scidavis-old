@@ -6,6 +6,7 @@
 #include "graph.h"
 #include "multilayer.h"
 #include "plot.h"
+#include "pie.h"
 
 #include <qcheckbox.h>
 #include <qlabel.h>
@@ -29,10 +30,8 @@ pieDialog::pieDialog( QWidget* parent,  const char* name, bool modal, WFlags fl 
 {
     if ( !name )
 		setName( "pieDialog" );
-	setFixedWidth(521);
-	setFixedHeight(260);
     setCaption( tr( "QtiPlot - Pie Options" ) );
-    setSizeGripEnabled( FALSE );
+    setSizeGripEnabled( true );
 
     generalDialog = new QTabWidget( this, "generalDialog" );
 	
@@ -125,6 +124,9 @@ boxBorderWidth= new QSpinBox(GroupBox1);
 new QLabel(tr("Border Color" ),GroupBox1, "TextLabel1_53",0 );
 boxBorderColor= new ColorButton(GroupBox1);
 
+new QLabel(tr("Canvas Color" ),GroupBox1);
+boxCanvasColor = new ColorButton(GroupBox1);
+
 QButtonGroup *GroupBox2 = new QButtonGroup(2,QGroupBox::Horizontal,tr("Options"), frame, "GroupBox2" );
 new QLabel(tr( "Margin" ),GroupBox2, "TextLabel1_541",0 );
 boxMargin= new QSpinBox(0, 1000, 5, GroupBox2);
@@ -140,18 +142,68 @@ connect(boxMargin, SIGNAL(valueChanged (int)), this, SLOT(changeMargin(int)));
 connect(boxBorderColor, SIGNAL(clicked()), this, SLOT(pickBorderColor()));
 connect(boxBackgroundColor, SIGNAL(clicked()), this, SLOT(pickBackgroundColor()));
 connect(boxBorderWidth,SIGNAL(valueChanged (int)), this, SLOT(updateBorder(int)));
+connect(boxCanvasColor, SIGNAL(clicked()), this, SLOT(pickCanvasColor()));
 }
 
 void pieDialog::setMultiLayerPlot(MultiLayer *m)
 {
 mPlot = m;
 Graph* g = (Graph*)mPlot->activeGraph();
-Plot *p = g->plotWidget();
+QwtPieCurve *pie = (QwtPieCurve *)g->curve(0);
+if (!pie)
+	return;
 	
+Plot *p = g->plotWidget();
 boxMargin->setValue (p->margin());
 boxBorderWidth->setValue(p->lineWidth());
 boxBorderColor->setColor(p->frameColor());
 boxBackgroundColor->setColor(p->paletteBackgroundColor());
+boxCanvasColor->setColor(p->canvasBackground());
+
+curvesList->insertItem(pie->title().text());
+curvesList->setCurrentItem (0);
+
+boxRay->setValue(pie->ray());
+boxPattern->setPattern(pie->pattern());
+boxLineWidth->setValue(pie->pen().width());
+boxLineColor->setColor(pie->pen().color());
+setBorderStyle(pie->pen().style());
+boxFirstColor->setCurrentItem(pie->first());	
+}
+
+void pieDialog::pickCanvasColor()
+{
+QColor c = QColorDialog::getColor(boxCanvasColor->color(), this);
+if ( !c.isValid() || c == boxCanvasColor->color() )
+	return;
+
+boxCanvasColor->setColor ( c ) ;
+
+if (boxAll->isChecked())
+	{
+	QWidgetList* allPlots = mPlot->graphPtrs();
+	for (int i=0; i<(int)allPlots->count();i++)
+		{
+		Graph* g=(Graph*)allPlots->at(i);
+		if (g)
+			{
+			g->setCanvasBackground(c);
+			g->replot();
+			}
+		}
+	}
+else
+	{
+	Graph* g = (Graph*)mPlot->activeGraph();
+	if (g)
+		{
+		g->setCanvasBackground(c);
+		g->replot();
+		}
+	}
+
+if (c == QColor(white) && mPlot->hasOverlapingLayers())
+	mPlot->updateTransparency();
 }
 
 void pieDialog::pickBackgroundColor()
@@ -274,11 +326,6 @@ emit toggleCurve();
 curvesList->removeItem (0);
 }
 
-void pieDialog::setPieSize(int size)
-{
-boxRay->setValue(size);
-}
-
 void pieDialog::setFramed(bool ok)
 {
 boxFramed->setChecked(ok);
@@ -300,13 +347,6 @@ boxFrameWidth->setValue(w);
 void pieDialog::setFrameColor(const QColor& c)
 {
   boxFrameColor->setColor(c);
-}
-
-void pieDialog::insertCurveName(const QString& name)
-{
-curvesList->clear();
-curvesList->insertItem(name,-1);
-curvesList->setCurrentItem (0);
 }
 
 void pieDialog::accept()
@@ -338,26 +378,12 @@ if (generalDialog->currentPage()==(QWidget*)frame)
 			g->drawBorder(boxBorderWidth->value(), boxBorderColor->color());
 			g->changeMargin(boxMargin->value());
 			g->setBackgroundColor(c);
+			g->setCanvasBackground(c);
 			}
 		}
 	if (c == QColor(white) && mPlot->hasOverlapingLayers())
 		mPlot->updateTransparency();
 	}
-}
-
-void pieDialog::setBorderWidth(int width)
-{
-boxLineWidth->setValue(width);
-}
-
-void pieDialog::setFirstColor(int c)
-{
-boxFirstColor->setCurrentItem(c);	
-}
-
-void pieDialog::setBorderColor(const QColor& c)
-{
-  boxLineColor->setColor(c);
 }
 
 Qt::PenStyle pieDialog::style()
@@ -397,12 +423,6 @@ if(style == Qt::DashDotLine)
 if(style == Qt::DashDotDotLine)
 	boxLineStyle->setCurrentItem(4);
 }
-
-void pieDialog::setPattern(const Qt::BrushStyle& style)
-{
-  boxPattern->setPattern(style);
-}
-
 
 Qt::BrushStyle pieDialog::pattern()
 {

@@ -4420,47 +4420,6 @@ associations << errLabel;
 updatePlot();
 }
 
-int Graph::pieSize()
-{
-return pieRay;
-}
-
-Qt::BrushStyle Graph::pieBrushStyle()
-{
-Qt::BrushStyle style=Qt::SolidPattern;
-if (piePlot)
-	{
-	QwtPieCurve *pieCurve = (QwtPieCurve *)curve(0);
-	if (pieCurve->pattern() != style)
-		style=pieCurve->pattern();
-	}	
-return 	style;
-}
-
-int Graph::pieFirstColor()
-{
-int first=0;
-if (piePlot)
-	{
-	QwtPieCurve *pieCurve = (QwtPieCurve *)curve(0);
-	if (pieCurve->first() != first)
-		first=pieCurve->first();
-	}	
-return 	first;
-}
-
-QPen Graph::pieCurvePen()
-{
-QPen pen=QPen(QColor(black),1,Qt::SolidLine);
-if (piePlot)
-	{
-	QwtPieCurve *pieCurve = (QwtPieCurve *)curve(0);
-	if (pieCurve->pen() != pen)
-		pen=pieCurve->pen();
-	}	
-return 	pen;
-}
-
 void Graph::updatePie(const QPen& pen, const Qt::BrushStyle &brushStyle, int size, int firstColor)
 {
 if (curves()>0)
@@ -4509,7 +4468,6 @@ piePlot=TRUE;
 
 associations<<curve->title().text();
 }
-
 
 void Graph::plotPie(Table* w, const QString& name,const QPen& pen, int brush, int size, int firstColor)
 {
@@ -4570,12 +4528,11 @@ associations<<name;
 
 QwtPlotLayout *pLayout=d_plot->plotLayout();
 pLayout->activate(d_plot, d_plot->rect(), 0);
-const QRect rect=pLayout->canvasRect();
+const QRect rect = pLayout->canvasRect();
 
-QwtPieCurve *pieCurve = new QwtPieCurve(d_plot,0);
+QwtPieCurve *pieCurve = new QwtPieCurve(d_plot, name);
 pieCurve->setData(Y, Y, it);
 long curveID = d_plot->insertCurve(pieCurve);
-pieCurve->setTitle(name);
 	
 c_keys.resize(++n_curves);
 c_keys[n_curves-1] = curveID;
@@ -4584,8 +4541,8 @@ c_type.resize(n_curves);
 c_type[n_curves-1] = Pie;
 	
 const int ray = 125;
-int xc=int(rect.width()*0.5+10);
-int yc=int(rect.y()+rect.height()*0.5);
+int xc = int(rect.width()/2 + 10);
+int yc = int(rect.y()+rect.height()/2 + pLayout->titleRect().height() + 15);
 	
 double PI=4*atan(1.0);
 double angle = 90;	
@@ -4602,13 +4559,16 @@ for (i = 0;i<it;i++ )
 	aux->setOrigin(QPoint(x,y));
 	aux->setBackground(0);
 	aux->setText(QString::number(Y[i]/sum*100,'g',2)+"%");	
-	d_plot->insertMarker(aux);
+	long key = d_plot->insertMarker(aux);
 		
+	int texts = d_texts.size();
+	d_texts.resize(++texts);
+	d_texts[texts-1] = key;
+
 	angle -= value;
 	}
 
-piePlot=TRUE;
-		
+piePlot=TRUE;		
 if (legendMarkerID>=0)
 	{
 	LegendMarker* mrk=(LegendMarker*) d_plot->marker(legendMarkerID);

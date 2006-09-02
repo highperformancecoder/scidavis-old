@@ -11,7 +11,25 @@
 #define QWT_SPLINE_H
 
 #include "qwt_global.h"
+#include "qwt_double_rect.h"
+
+#if QT_VERSION >= 0x040000
+#include <QPolygonF>
+#else
 #include "qwt_array.h"
+#endif
+
+// MOC_SKIP_BEGIN
+
+#if defined(QWT_TEMPLATEDLL)
+
+#if QT_VERSION < 0x040000
+template class QWT_EXPORT QwtArray<QwtDoublePoint>;
+#endif
+
+#endif
+
+// MOC_SKIP_END
 
 /*!
   \brief A class for spline interpolation
@@ -31,54 +49,71 @@
   \par Example:
   \code
 #include <qwt_spline.h>
-#include <qwt_array.h>
-#include <iostream.h>
 
-const int numPoints = 30;
-QwtArray x(numPoints); 
-QwtArray y(numPoints); 
-
-for(int i = 0; i < numPoints; i++)  // fill up x[] and y[]
-   std::cin >> x[i] >> y[i];
-
-QwtSpline s;
-if ( s.buildSpline(x, y, numPoints, false) )    // build natural spline
+QPolygonF interpolate(const QPolygonF& points, int numValues)
 {
-    const int numValues = 300;
+    QwtSpline spline;
+    if ( !spline.setPoints(points) ) 
+        return points;
 
-    QwtArray xInter(numValues); 
-    QwtArray yInter(numValues);
+    QPolygonF interpolatedPoints(numValues);
 
-    const double delta = (x[numPoints - 1] - x[0]) / (numValues - 1);
-    for(i = 0; i < numValues; i++)  / interpolate
+    const double delta = 
+        (points[numPoints - 1].x() - points[0].x()) / (points.size() - 1);
+    for(i = 0; i < points.size(); i++)  / interpolate
     {
-        xInter[i] = x[0] + i * delta;
-        yInter[i] = s.value( xInter[i] );
+        const double x = points[0].x() + i * delta;
+        interpolatedPoints[i].setX(x);
+        interpolatedPoints[i].setY(spline.value(x));
     }
-
-    do_something(xInter, yInter);
+    return interpolatedPoints;
 }
-else
-    std::cerr << "Uhhh...\n";
   \endcode
 */
 
 class QWT_EXPORT QwtSpline
 {
 public:
+    enum SplineType
+    {
+        Natural,
+        Periodic
+    };
+
     QwtSpline();
+    QwtSpline( const QwtSpline & );
+
     ~QwtSpline();
 
-    double value(double x) const;
-    bool buildSpline(
-        const QwtArray<double> &x, const QwtArray<double> &y, 
-        int n, bool periodic = false);
+    QwtSpline &operator=( const QwtSpline & );
 
-private:
-    bool buildPeriodicSpline();
-    bool buildNaturalSpline();
-    int lookup(double x) const;
-    void cleanup();
+    void setSplineType(SplineType);
+    SplineType splineType() const;
+
+#if QT_VERSION < 0x040000
+    bool setPoints(const QwtArray<QwtDoublePoint>& points);
+    QwtArray<QwtDoublePoint> points() const;
+#else
+    bool setPoints(const QPolygonF& points);
+    QPolygonF points() const;
+#endif
+
+    void reset();
+
+    bool isValid() const;
+    double value(double x) const;
+
+protected:
+
+#if QT_VERSION < 0x040000
+    bool buildNaturalSpline(
+        const QwtArray<QwtDoublePoint> &);
+    bool buildPeriodicSpline(
+        const QwtArray<QwtDoublePoint> &);
+#else
+    bool buildNaturalSpline(const QPolygonF &);
+    bool buildPeriodicSpline(const QPolygonF &);
+#endif
 
     class PrivateData;
     PrivateData *d_data;

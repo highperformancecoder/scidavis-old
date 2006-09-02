@@ -81,7 +81,7 @@ protected:
 /*!
   \brief Data class containing a single QwtArray<QwtDoublePoint> object. 
  */
-class QWT_EXPORT QwtDoublePointData: public QwtData
+class QWT_EXPORT QwtPolygonFData: public QwtData
 {
 public:
     /*!
@@ -90,12 +90,12 @@ public:
       \sa QwtCurve::setData and QwtPlot::setCurveData.
      */
 #if QT_VERSION < 0x040000
-    QwtDoublePointData(const QwtArray<QwtDoublePoint> &);
+    QwtPolygonFData(const QwtArray<QwtDoublePoint> &);
 #else
-    QwtDoublePointData(const QPolygonF &);
+    QwtPolygonFData(const QPolygonF &);
 #endif
 
-    QwtDoublePointData &operator=(const QwtDoublePointData &);
+    QwtPolygonFData &operator=(const QwtPolygonFData &);
     virtual QwtData *copy() const;
 
     virtual size_t size() const;

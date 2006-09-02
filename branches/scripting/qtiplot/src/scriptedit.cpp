@@ -244,6 +244,7 @@ void ScriptEdit::importASCII(const QString &filename)
     return;
   }
   QTextStream s(&file);
+  s.setEncoding(QTextStream::UnicodeUTF8);
   while (!s.atEnd())
     insert(s.readLine()+"\n");
   file.close();
