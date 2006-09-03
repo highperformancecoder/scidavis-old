@@ -8062,7 +8062,7 @@ QString version = "QtiPlot " + QString::number(majVersion) + "." +
 QMessageBox::about(this,tr("About QtiPlot"),
 			 tr("<h2>"+ version + "</h2>"
 			 "<p><h3>Copyright(C): Ion Vasilief</h3>"
-			 "<p><h3>Released: 02/08/2006</h3>"));
+			 "<p><h3>Released: 04/09/2006</h3>"));
 }
 
 void ApplicationWindow::windowsMenuAboutToShow()

@@ -15,7 +15,7 @@ DEFINES		+= QT_PLUGIN
 
 SCRIPTING_LANGS = muParser
 # Python support is unstable; use at your own risk
-#unix:SCRIPTING_LANGS += Python
+unix:SCRIPTING_LANGS += Python
 
 TRANSLATIONS = translations/qtiplot_de.ts \
 			   translations/qtiplot_es.ts \
