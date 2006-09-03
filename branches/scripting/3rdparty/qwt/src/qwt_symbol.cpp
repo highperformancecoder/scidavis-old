@@ -235,7 +235,8 @@ void QwtSymbol::draw(QPainter *painter, const QRect& r) const
         case QwtSymbol::Star2:
         {
             const int w = r.width();
-            const int side = (int)(((double)r.width() * (1.0 - 0.866025)) / 2.0);  // 0.866025 = cos(30°)
+            const int side = (int)(((double)r.width() * (1.0 - 0.866025)) /
+                2.0);  // 0.866025 = cos(30°)
             const int h4 = r.height() / 4;
             const int h2 = r.height() / 2;
             const int h34 = (r.height() * 3) / 4;

@@ -1,5 +1,6 @@
 #include "layerDialog.h"
 #include "multilayer.h"
+#include "application.h"
 
 #include <qvariant.h>
 #include <qpushbutton.h>
@@ -183,7 +184,7 @@ void layerDialog::setMultiLayer(MultiLayer *g)
 {
 multi_layer = g;
 
-layersBox->setValue(g->graphsNumber());
+layersBox->setValue(g->layers());
 boxX->setValue(g->getCols());
 boxY->setValue(g->getRows());
 boxColsGap->setValue(g->colsSpacing());
@@ -202,17 +203,25 @@ void layerDialog::update()
 {
 if (generalDialog->currentPage()==(QWidget *)layout )
 	{
-	int dn = multi_layer->graphsNumber() - layersBox->value();
+	int graphs = layersBox->value();
+	int old_graphs = multi_layer->layers();
+	int dn = multi_layer->layers() - graphs;
 	if (dn > 0 && QMessageBox::question(0, tr("QtiPlot - Delete Layers?"),
 				tr("You are about to delete %1 existing layers.").arg(dn)+"\n"+
                 tr("Are you sure you want to continue this operation?"),
 				tr("&Continue"), tr("&Cancel"), QString::null, 0, 1 )) return; 
 
-	int graphs = layersBox->value();
 	multi_layer->setLayersNumber(graphs);
 
 	if (!graphs)
 		return;
+
+	if (dn < 0)
+		{// Customize new layers with user default settings
+		ApplicationWindow *app = (ApplicationWindow *)this->parent();
+		for (int i = old_graphs+1; i <= graphs; i++)
+			app->customGraph(multi_layer->layer(i));
+		}
 
 	int cols=boxX->value();
 	int rows=boxY->value();

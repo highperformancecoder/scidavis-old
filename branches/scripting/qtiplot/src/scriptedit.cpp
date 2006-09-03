@@ -30,6 +30,8 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
   connect(actionPrint, SIGNAL(activated()), this, SLOT(print()));
   actionImport = new QAction(NULL, "&Import", 0, this, "import");
   connect(actionImport, SIGNAL(activated()), this, SLOT(importASCII()));
+  actionExport = new QAction(NULL, "&Export", 0, this, "export");
+  connect(actionExport, SIGNAL(activated()), this, SLOT(exportASCII()));
   //TODO: CTRL+Key_I -> inspect (currently "Open image file". other shortcut?)
 
   functionsMenu = new QPopupMenu(this, "functionsMenu");
@@ -55,6 +57,7 @@ QPopupMenu *ScriptEdit::createPopupMenu (const QPoint & pos)
 
   actionPrint->addTo(menu);
   actionImport->addTo(menu);
+  actionExport->addTo(menu);
   menu->insertSeparator();
 
   actionExecute->addTo(menu);
@@ -229,24 +232,77 @@ if (printer.setup())
 	}
 }
 
-void ScriptEdit::importASCII(const QString &filename)
+QString ScriptEdit::importASCII(const QString &filename)
 {
+QString filter = tr("Text") +" (*.txt *.TXT);;";
+#ifdef SCRIPTING_PYTHON
+	filter += tr("Python Source")+" (*.py);;";
+#endif
+filter += tr("All Files")+" (*)";
+	
   QString f;
   if (filename.isEmpty())
-    f = QFileDialog::getOpenFileName(QString::null, "Text (*.txt *.TXT);; Python Source (*.py)", this, 0, tr("QtiPlot - Import Text into Note"));
+    f = QFileDialog::getOpenFileName(QString::null,  filter, this, 0, tr("QtiPlot - Import Text From File"));
   else
     f = filename;
-  if (f.isEmpty()) return;
+  if (f.isEmpty()) return QString::null;
   QFile file(f);
   if (!file.open(IO_ReadOnly))
   {
     QMessageBox::critical(this, tr("QtiPlot - Error Opening File"), tr("Could not open file \"%1\" for reading.").arg(f));
-    return;
+    return QString::null;
   }
   QTextStream s(&file);
   s.setEncoding(QTextStream::UnicodeUTF8);
   while (!s.atEnd())
     insert(s.readLine()+"\n");
   file.close();
+  return f;
 }
 
+QString ScriptEdit::exportASCII()
+{
+QString filter = " *.txt;;";
+#ifdef SCRIPTING_PYTHON
+	filter += tr("Python Source")+" (*.py);;";
+#endif
+filter += tr("All Files")+" (*)";
+
+QString selectedFilter;
+QString fn = QFileDialog::getSaveFileName(parent()->name(), filter, this, 0,
+			tr("Save Text to File"), &selectedFilter, false);
+if ( !fn.isEmpty() )
+	{
+	QFileInfo fi(fn);
+	QString baseName = fi.fileName();	
+	if (!baseName.contains("."))
+		{
+		if (selectedFilter.contains(".txt"))
+			fn.append(".txt");
+		else if (selectedFilter.contains(".py"))
+			fn.append(".py");
+		}
+
+	if ( QFile::exists(fn) &&
+        QMessageBox::question(this, tr("QtiPlot -- Overwrite File? "),
+            tr("A file called: <p><b>%1</b><p>already exists.\n"
+                "Do you want to overwrite it?")
+                .arg(fn), tr("&Yes"), tr("&No"),QString::null, 0, 1 ) )
+		return QString::null;
+	else
+		{
+		QFile f(fn);
+		if ( !f.open( IO_WriteOnly ) )
+			{
+			QMessageBox::critical(0, tr("QtiPlot - File Save Error"),
+			tr("Could not write to file: <br><h4> %1 </h4><p>Please verify that you have the right to write to this location!").arg(fn));
+			return QString::null;
+			}
+		QTextStream t( &f );
+		t.setEncoding(QTextStream::UnicodeUTF8);
+		t << text();
+		f.close();
+		}
+    }
+return fn;
+}

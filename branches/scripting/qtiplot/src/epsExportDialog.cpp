@@ -31,7 +31,7 @@ epsExportDialog::epsExportDialog(const QString& fileName, QWidget* parent, const
 		
 	new QLabel( tr( "Resolution" ), GroupBox1, "TextLabel1",0 );
 	boxResolution= new QSpinBox(0, 1000, 1, GroupBox1, "boxQuality" );
-	boxResolution->setValue(84);
+	boxResolution->setValue(QPrinter().resolution());
 	
     boxColor= new QCheckBox(GroupBox1, "boxColor" );
 	boxColor->setText( tr("&Print in color if available") );

@@ -44,15 +44,16 @@ static int lookup(double x, const QPolygonF &values)
 //qLowerBiund/qHigherBound ???
 #endif
     int i1;
-    int aux = values.size() - 2;
+	const int size = (int)values.size();
+    
     if (x <= values[0].x())
        i1 = 0;
-    else if (x >= values[aux].x())
-       i1 = values.size() - 2;
+    else if (x >= values[size - 2].x())
+       i1 = size - 2;
     else
     {
         i1 = 0;
-        int i2 = values.size() - 2;
+        int i2 = size - 2;
         int i3 = 0;
 
         while ( i2 - i1 > 1 )

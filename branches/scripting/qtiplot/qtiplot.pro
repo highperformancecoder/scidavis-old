@@ -135,7 +135,8 @@ HEADERS  += src/application.h \
 	 src/FunctionCurve.h\
 	 src/Fitter.h\
 	 src/customEvents.h\
-	 src/ScriptingLangDialog.h
+	 src/ScriptingLangDialog.h\
+	 src/ScriptWindow.h
      
 SOURCES  += src/application.cpp \
      src/graph.cpp \
@@ -213,7 +214,8 @@ SOURCES  += src/application.cpp \
 	 src/FunctionCurve.cpp\
 	 src/Fitter.cpp\
 	 src/Scripting.cpp\
-	 src/ScriptingLangDialog.cpp
+	 src/ScriptingLangDialog.cpp\
+	 src/ScriptWindow.cpp
 
 #Compression (zlib123)
 SOURCES+=../3rdparty/zlib123/minigzip.c

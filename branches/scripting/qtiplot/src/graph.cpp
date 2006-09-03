@@ -148,7 +148,19 @@ drawAxesBackbone = true;
 autoscale = true;
 autoScaleFonts = true;
 translateOn = false;
-		
+	
+defaultArrowLineWidth = 1; 
+defaultArrowColor = QColor(black);
+defaultArrowLineStyle = QPen::SolidLine;
+defaultArrowHeadLength = 4;
+defaultArrowHeadAngle = 45;
+defaultArrowHeadFill = true;
+	
+defaultMarkerFont = QFont();
+defaultMarkerFrame = 1; 
+defaultTextMarkerColor = QColor(black);
+defaultTextMarkerBackground = QColor(white);
+
 for (int i=0; i<QwtPlot::axisCnt; i++)
 	{
 	axisType << Numeric;
@@ -2016,6 +2028,7 @@ void Graph::exportToEPS(const QString& fname, int res, QPrinter::Orientation o,
 						QPrinter::PageSize size, QPrinter::ColorMode col)
 {	
 QPrinter printer;
+printer.setResolution(res);
 printer.setPageSize (size);
 printer.setColorMode (col);
 printer.setOrientation(o);

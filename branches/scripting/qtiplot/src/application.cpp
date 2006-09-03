@@ -52,6 +52,7 @@
 #include "Fitter.h"
 #include "FunctionCurve.h"
 #include "ScriptingLangDialog.h"
+#include "ScriptWindow.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -244,6 +245,8 @@ setAcceptDrops(true);
 hiddenWindows = new QWidgetList();
 outWindows = new QWidgetList();
 
+scriptWindow = 0; 
+
 readSettings();
 createLanguagesList();
 insertTranslatedStrings();
@@ -388,7 +391,10 @@ void ApplicationWindow::initToolBars()
 
 	actionShowExplorer->addTo(fileTools);
 	actionShowLog->addTo(fileTools);
-
+	#ifdef SCRIPTING_PYTHON
+		actionShowScriptWindow->addTo(fileTools);
+	#endif
+	
 	editTools = new QToolBar( this, "edit operations" );
 	editTools->setCloseMode(QDockWindow::Undocked);
     addToolBar( editTools, tr( "Edit" ));
@@ -543,6 +549,8 @@ lv->setColumnText (3, tr("Size"));
 lv->setColumnText (4, tr("Created"));
 lv->setColumnText (5, tr("Label"));
 
+if (scriptWindow)
+	scriptWindow->setCaption(tr("QtiPlot - Python Script Window"));
 explorerWindow->setCaption(tr("Project Explorer"));
 logWindow->setCaption(tr("Results Log"));
 #ifdef SCRIPTING_CONSOLE
@@ -1808,7 +1816,7 @@ sd->setActiveWindow();
 Graph3D* ApplicationWindow::newPlot3D(const QString& formula, double xl, double xr,
 									  double yl, double yr, double zl, double zr)
 {
-QString label = generateUnusedName(tr("Graph"));
+QString label = generateUniqueName(tr("Graph"));
 Graph3D *plot=new Graph3D("",ws,0,WDestructiveClose);
 plot->addFunction(formula, xl, xr, yl, yr, zl, zr);
 plot->resize(500,400);
@@ -1841,7 +1849,7 @@ plot->update();
 	
 QString label = caption;
 while(alreadyUsedName(label)){
-	label = generateUnusedName(tr("Graph"));}
+	label = generateUniqueName(tr("Graph"));}
 
 plot->setCaption(label);
 plot->setName(label);
@@ -1853,7 +1861,7 @@ Graph3D* ApplicationWindow::dataPlot3D(Table* table, const QString& colName)
 {
 QApplication::setOverrideCursor(waitCursor);
 
-QString label = generateUnusedName(tr("Graph"));
+QString label = generateUniqueName(tr("Graph"));
 Graph3D *plot=new Graph3D("", ws, 0, WDestructiveClose);
 plot->addData(table, colName);
 plot->resize(500,400);
@@ -1892,7 +1900,7 @@ plot->update();
 
 QString label=caption;
 while(alreadyUsedName(label)){
-	label = generateUnusedName(tr("Graph"));}
+	label = generateUniqueName(tr("Graph"));}
 
 plot->setCaption(label);
 plot->setName(label);
@@ -1922,7 +1930,7 @@ Graph3D* ApplicationWindow::dataPlot3D(const QString& formula)
 	int posY=formula.find("(",posX);
 	QString yColName=caption+formula.mid(posX+2,posY-posX-2);
 
-QString label = generateUnusedName(tr("Graph"));
+QString label = generateUniqueName(tr("Graph"));
 
 Graph3D *plot=new Graph3D("", ws, 0, WDestructiveClose);
 plot->addData(w, xColName, yColName);
@@ -1943,7 +1951,7 @@ Graph3D* ApplicationWindow::dataPlotXYZ(Table* table, const QString& zColName, i
 {
 QApplication::setOverrideCursor(waitCursor);
 
-QString label = generateUnusedName(tr("Graph"));
+QString label = generateUniqueName(tr("Graph"));
 int zCol=table->colIndex(zColName);
 int yCol=table->colY(zCol);
 int xCol=table->colX(zCol);
@@ -1995,7 +2003,7 @@ plot->update();
 
 QString label=caption;
 while(alreadyUsedName(label)){
-	label = generateUnusedName(tr("Graph"));}
+	label = generateUniqueName(tr("Graph"));}
 
 plot->setCaption(label);
 plot->setName(label);
@@ -2036,7 +2044,7 @@ Graph3D *plot=new Graph3D("", ws,0,WDestructiveClose);
 plot->addData(w, xCol, yCol, zCol, 1);
 plot->resize(500,400);
 
-QString label = generateUnusedName(tr("Graph"));
+QString label = generateUniqueName(tr("Graph"));
 plot->setCaption(label);
 plot->setName(label);
 customPlot3D(plot);
@@ -2198,7 +2206,7 @@ else
 		}
 	}
 
-MultiLayer *plot = multilayerPlot(generateUnusedName(tr("Graph")));
+MultiLayer *plot = multilayerPlot(generateUniqueName(tr("Graph")));
 plot->setWindowLabel(fn);
 plot->setCaptionPolicy(myWidget::Both);
 setListViewLabel(plot->name(), fn);
@@ -2248,7 +2256,7 @@ return g;
 
 MultiLayer* ApplicationWindow::newGraph()
 {
-MultiLayer* g = multilayerPlot(generateUnusedName(tr("Graph")));
+MultiLayer* g = multilayerPlot(generateUniqueName(tr("Graph")));
 if (g)
 	{
 	g->showNormal();
@@ -2274,7 +2282,7 @@ activeGraph->insertCurvesList(w, colList, style, defaultCurveLineWidth, defaultS
 
 customGraph(activeGraph);
 polishGraph(activeGraph, style);
-initMultilayerPlot(g, generateUnusedName(tr("Graph")));
+initMultilayerPlot(g, generateUniqueName(tr("Graph")));
 
 //the following function must be called last in order to avoid resizing problems
 activeGraph->setIgnoreResizeEvents(!autoResizeLayers);
@@ -2306,7 +2314,7 @@ if (r<0)
 
 MultiLayer* g = new MultiLayer("", ws,0,WDestructiveClose);
 g->askOnCloseEvent(confirmClosePlot2D);
-initMultilayerPlot(g, generateUnusedName(tr("Graph")));
+initMultilayerPlot(g, generateUniqueName(tr("Graph")));
 int layers=c*r;
 if (curves<layers)
 	{
@@ -2343,7 +2351,7 @@ g->setCols(c);
 g->arrangeLayers(false, false);
 
 QWidgetList *lst = g->graphPtrs();
-for (int i=0; i<g->graphsNumber();i++)
+for (int i=0; i<g->layers();i++)
 	{
 	Graph *ag = (Graph *)lst->at(i);
 	ag->setAutoscaleFonts(autoScaleFonts);//restore user defined fonts behaviour
@@ -2407,7 +2415,7 @@ for (int i=0;i<(int)colList.count();i++)
 		}
 	}
 ag->updatePlot();
-initMultilayerPlot(g, generateUnusedName(tr("Graph")));
+initMultilayerPlot(g, generateUniqueName(tr("Graph")));
 ag->setIgnoreResizeEvents(!autoResizeLayers);
 emit modified();
 QApplication::restoreOverrideCursor();
@@ -2420,7 +2428,7 @@ connectMultilayerPlot(g);
 	
 QString label = name;
 while(alreadyUsedName(label)){
-	label = generateUnusedName(tr("Graph"));}
+	label = generateUniqueName(tr("Graph"));}
 
 g->setCaption(label);
 g->setName(label);
@@ -2529,7 +2537,7 @@ Table* w = new Table(scriptEnv, fname, sep, lines, renameCols, stripSpaces,
 					 simplifySpaces, fname, ws, 0, WDestructiveClose);
 if (w)
 	{	
-	initTable(w, generateUnusedName(tr("Table")));
+	initTable(w, generateUniqueName(tr("Table")));
 	w->show();
 	}
 return w;
@@ -2541,7 +2549,7 @@ return w;
 Table* ApplicationWindow::newTable()
 {
 Table* w = new Table(scriptEnv, 30, 2, "", ws, 0, WDestructiveClose);
-initTable(w, generateUnusedName(tr("Table")));
+initTable(w, generateUniqueName(tr("Table")));
 w->showNormal();	
 return w;
 }
@@ -2636,7 +2644,7 @@ QString name=caption;
 name=name.replace ("_","-");
 
 while(alreadyUsedName(name)){
-	name = generateUnusedName(tr("Table"));}
+	name = generateUniqueName(tr("Table"));}
 
 tableWindows<<name;
 w->setCaption(name);
@@ -2663,7 +2671,7 @@ Note* ApplicationWindow::newNote(const QString& caption)
 {
 Note* m = new Note(scriptEnv, "", ws, 0, WDestructiveClose);
 if (caption.isEmpty())
-	initNote(m, generateUnusedName(tr("Notes")));
+	initNote(m, generateUniqueName(tr("Notes")));
 else
 	initNote(m, caption);
 m->showNormal();	
@@ -2674,7 +2682,7 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 {
 QString name=caption;
 while(name.isEmpty() || alreadyUsedName(name))
-	name = generateUnusedName(tr("Notes"));
+	name = generateUniqueName(tr("Notes"));
 
 m->setCaption(name);
 m->setName(name);
@@ -2702,7 +2710,7 @@ emit modified();
 Matrix* ApplicationWindow::newMatrix()
 {
 Matrix* m = new Matrix(scriptEnv, 32, 32, "", ws, 0, WDestructiveClose);
-QString caption = generateUnusedName(tr("Matrix"));
+QString caption = generateUniqueName(tr("Matrix"));
 initMatrix(m, caption);
 m->showNormal();	
 return m;
@@ -2781,7 +2789,7 @@ for (int i = 0; i<rows; i++)
 		w->setText(i, j, m->text(i,j));
 	}
 
-initTable(w, generateUnusedName(tr("Table")));
+initTable(w, generateUniqueName(tr("Table")));
 
 w->setWindowLabel(m->windowLabel());
 w->setCaptionPolicy(m->captionPolicy());
@@ -2796,7 +2804,7 @@ return w;
 void ApplicationWindow::initMatrix(Matrix* m, const QString& caption)
 {
 QString name=caption;
-while(alreadyUsedName(name)){name = generateUnusedName(tr("Matrix"));}
+while(alreadyUsedName(name)){name = generateUniqueName(tr("Matrix"));}
 	
 m->setCaption(name);
 m->setName(name);
@@ -2836,7 +2844,7 @@ for (int i = 0; i<rows; i++)
 		w->setText(i, j, m->text(i,j));
 	}
 
-QString caption = generateUnusedName(tr("Matrix"));
+QString caption = generateUniqueName(tr("Matrix"));
 initMatrix(w, caption);
 
 w->setWindowLabel(m->windowLabel());
@@ -4106,7 +4114,7 @@ if (!fn.isEmpty())
 				
 			if (templateType == "<multiLayer>")
 				{
-				w = multilayerPlot(generateUnusedName(tr("Graph")));
+				w = multilayerPlot(generateUniqueName(tr("Graph")));
 				if (w)
 					{
 					((MultiLayer*)w)->setCols(cols);
@@ -5029,7 +5037,7 @@ QString fn = QFileDialog::getSaveFileName(workingDir + "/" + w->name(), filter, 
 if ( !fn.isEmpty() )
 	{
 	QFileInfo fi(fn);
-	templatesDir = fi.dirPath(true);
+	workingDir = fi.dirPath(true);
 	QString baseName = fi.fileName();	
 	if (!baseName.contains("."))
 		{
@@ -5972,7 +5980,7 @@ if (!plot)
 	return;
 
 QDialog* gd = showScaleDialog();
-if (gd && plot->isA("MultiLayer") && ((MultiLayer*)plot)->graphsNumber())
+if (gd && plot->isA("MultiLayer") && ((MultiLayer*)plot)->layers())
 	{
 	Graph* g = ((MultiLayer*)plot)->activeGraph();
 	if (!g->isPiePlot())
@@ -5991,7 +5999,7 @@ if (!plot)
 	return;
 
 QDialog* gd = showScaleDialog();
-if (gd && plot->isA("MultiLayer") && ((MultiLayer*)plot)->graphsNumber())
+if (gd && plot->isA("MultiLayer") && ((MultiLayer*)plot)->layers())
 	((axesDialog*)gd)->showAxesPage();
 else if (gd && plot->isA("Graph3D"))
 	((plot3DDialog*)gd)->showAxisTab();
@@ -7396,7 +7404,7 @@ else if (m->isA("Matrix"))
 else if (m->isA("MultiLayer"))
 	{
 	MultiLayer* plot = (MultiLayer*)m;
-	if (!plot || plot->graphsNumber() == 0)
+	if (!plot || plot->layers() == 0)
 		return;
 
 	plot->copyAllLayers();
@@ -7423,7 +7431,7 @@ else if (m->isA("Matrix"))
 else if(m->isA("MultiLayer"))
 	{
 	MultiLayer* plot = (MultiLayer*)m;
-	if (!plot || plot->graphsNumber() == 0)
+	if (!plot || plot->layers() == 0)
 		return;
 
 	Graph* g = (Graph*)plot->activeGraph();
@@ -7510,7 +7518,7 @@ void ApplicationWindow::pasteSelection()
 			}
 		else
 			{
-			if (plot->graphsNumber() == 0)
+			if (plot->layers() == 0)
 				return;
 
 			Graph* g = (Graph*)plot->activeGraph();
@@ -7538,7 +7546,7 @@ Table* ApplicationWindow::copyTable()
 Table *w = 0, *m = (Table*)ws->activeWindow();
 if (m)
 	{
-	QString caption = generateUnusedName(tr("Table"));
+	QString caption = generateUniqueName(tr("Table"));
 	w=newTable(caption, m->tableRows(), m->tableCols());
 	w->copy(m);
 
@@ -7557,7 +7565,7 @@ Matrix* ApplicationWindow::cloneMatrix()
 Matrix *w = 0, *m = (Matrix*)ws->activeWindow();
 if (m)
 	{
-	QString caption = generateUnusedName(tr("Matrix"));
+	QString caption = generateUniqueName(tr("Matrix"));
 	int c=m->numCols();
 	int r=m->numRows();
 	w = newMatrix(caption,r,c);
@@ -7590,7 +7598,7 @@ if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 		return 0;
 		}
 
-	QString caption = generateUnusedName(tr("Graph"));
+	QString caption = generateUniqueName(tr("Graph"));
 	Graph3D *g2=0;
 	QString s = g->formula();
 	if (g->userFunction())
@@ -7674,7 +7682,7 @@ MultiLayer* plot2=0;
 if (ws->activeWindow() &&  ws->activeWindow()->isA("MultiLayer"))
 	{
 	MultiLayer* plot = (MultiLayer*)ws->activeWindow();
-	QString caption = generateUnusedName(tr("Graph"));
+	QString caption = generateUniqueName(tr("Graph"));
 
 	plot2=multilayerPlot(caption);
 	plot2->showNormal();
@@ -8076,6 +8084,10 @@ void ApplicationWindow::windowsMenuAboutToShow()
 	actionRename->addTo(windowsMenu);
 	actionCopyWindow->addTo(windowsMenu);
 	windowsMenu->insertSeparator();
+	#ifdef SCRIPTING_PYTHON
+		actionShowScriptWindow->addTo(windowsMenu);
+		windowsMenu->insertSeparator();
+	#endif
 	actionResizeActiveWindow->addTo(windowsMenu);
 	windowsMenu->insertItem(tr("&Hide Window"),
 			   this, SLOT(hideActiveWindow()));
@@ -8680,7 +8692,7 @@ if (w->isA("MultiLayer"))
 	
 	actionAddLayer->addTo(&cm);	
 	cm.insertSeparator();
-	if (g->graphsNumber() != 0)
+	if (g->layers() != 0)
 		{
 		actionDeleteLayer->addTo(&cm);
 		cm.insertSeparator();
@@ -9023,7 +9035,7 @@ if (fd)
 
 void ApplicationWindow::newFunctionPlot(int type,QStringList &formulas, const QString& var, QValueList<double> &ranges, int points)
 {
-QString label = generateUnusedName(tr("Graph"));
+QString label = generateUniqueName(tr("Graph"));
 MultiLayer* plot = multilayerPlot(label);
 Graph* g=plot->addLayer();
 customGraph(g);
@@ -11241,6 +11253,13 @@ void ApplicationWindow::createActions()
   actionNoteExecuteAll = new QAction(tr("Execute &All"), tr("Ctrl+Shift+J"), this);
 
   actionNoteEvaluate = new QAction(tr("&Evaluate Expression"), tr("Ctrl+Return"), this);
+
+#ifdef SCRIPTING_PYTHON
+  actionShowScriptWindow = new QAction(QPixmap(python_xpm), tr("&Python Script Window"), tr("F3"), this);
+  actionShowScriptWindow->setToggleAction( true );
+  actionShowScriptWindow->setOn(false);
+  connect(actionShowScriptWindow, SIGNAL(activated()), this, SLOT(showScriptWindow()));
+#endif
 }
 
 void ApplicationWindow::translateActionsStrings()
@@ -11338,6 +11357,11 @@ void ApplicationWindow::translateActionsStrings()
   actionShowConsole->setToolTip(tr("Show Scripting console"));
 #endif
   
+#ifdef SCRIPTING_PYTHON
+  actionShowScriptWindow->setMenuText(tr("&Python Script Window"));
+  actionShowScriptWindow->setAccel(tr("F3"));
+#endif
+
   actionAddLayer->setMenuText(tr("Add La&yer"));
   actionAddLayer->setAccel(tr("ALT+L"));
 
@@ -11730,7 +11754,7 @@ if (!ws->activeWindow()|| !ws->activeWindow()->isA("Matrix"))
 	return;
 
 QApplication::setOverrideCursor(waitCursor);
-QString label = generateUnusedName(tr("Graph"));
+QString label = generateUniqueName(tr("Graph"));
 
 Graph3D *plot=new Graph3D("", ws, 0, WDestructiveClose);
 plot->addMatrixData((Matrix*)ws->activeWindow());
@@ -13542,7 +13566,7 @@ if (versionFile.open(IO_ReadOnly))
 	}
 }
 
-QString ApplicationWindow::generateUnusedName(const QString& name, bool increment)
+QString ApplicationWindow::generateUniqueName(const QString& name, bool increment)
 {
 int index = 0;
 QWidgetList *windows = windowsList();
@@ -13604,6 +13628,23 @@ if (ws->activeWindow()->isA("Table") || ws->activeWindow()->isA("Matrix"))
 	}
 }
 
+void ApplicationWindow::showScriptWindow()
+{
+if (!scriptWindow)
+	{
+	scriptWindow = new ScriptWindow(scriptEnv);
+	connect(scriptWindow, SIGNAL(setVisible(bool)), actionShowScriptWindow, SLOT(setOn(bool)));
+	}
+
+if (!scriptWindow->isVisible())
+	{
+	scriptWindow->setFocus();
+	scriptWindow->show();
+	}
+else
+	scriptWindow->hide();
+}
+
 ApplicationWindow::~ApplicationWindow()
 {
 if (lastCopiedLayer)
@@ -13611,6 +13652,9 @@ if (lastCopiedLayer)
 
 delete hiddenWindows;
 delete outWindows;
+
+if (scriptWindow)
+	delete scriptWindow;
 
 QApplication::clipboard()->clear(QClipboard::Clipboard);
 }

@@ -106,7 +106,7 @@ public slots:
 	int verticalAlignement(){return vert_align;};
 	void setAlignement (int ha, int va);
 
-	int graphsNumber(){return graphs;};
+	int layers(){return graphs;};
 	
 	// print and export
 	QPixmap canvasPixmap();

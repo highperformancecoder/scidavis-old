@@ -926,14 +926,15 @@ if (hasOverlapingLayers())
 
 void MultiLayer::exportToEPS(const QString& fname)
 {
-exportToEPS(fname, 84, QPrinter::Landscape, QPrinter::A4, QPrinter::Color);
+exportToEPS(fname, 0, QPrinter::Landscape, QPrinter::A4, QPrinter::Color);
 }
 
 void MultiLayer::exportToEPS(const QString& fname, int res, QPrinter::Orientation o, 
 						QPrinter::PageSize pageSize, QPrinter::ColorMode col)
 {	
 QPrinter printer;
-//printer.setResolution(res);
+if (res)
+	printer.setResolution(res);
 printer.setPageSize(pageSize);
 printer.setColorMode(col);
 printer.setOrientation(o);

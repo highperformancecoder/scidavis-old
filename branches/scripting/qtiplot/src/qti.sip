@@ -214,7 +214,7 @@ class MultiLayer : myWidget /PyName=Graph/
 public:
   Graph *activeGraph() /PyName=activeLayer/;
   void setActiveGraph(Graph*) /PyName=setActiveLayer/;
-  int graphsNumber() /PyName=numLayers/;
+  int layers() /PyName=numLayers/;
   Graph* layer(int num);
   Graph* addLayer();
   void updateTransparency();

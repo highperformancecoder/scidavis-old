@@ -22,7 +22,8 @@ class ScriptEdit: public QTextEdit, public scripted
     void executeAll();
     void evaluate();
     void print();
-    void importASCII(const QString &file=QString::null);
+	QString exportASCII();
+    QString importASCII(const QString &file=QString::null);
 
     void insertFunction(const QString &);
     void insertFunction(int);
@@ -34,7 +35,7 @@ class ScriptEdit: public QTextEdit, public scripted
     
   private:
     Script *myScript;
-    QAction *actionExecute, *actionExecuteAll, *actionEval, *actionPrint, *actionImport;
+    QAction *actionExecute, *actionExecuteAll, *actionEval, *actionPrint, *actionImport, *actionExport;
     QPopupMenu *functionsMenu;
     bool firstOutput;
 

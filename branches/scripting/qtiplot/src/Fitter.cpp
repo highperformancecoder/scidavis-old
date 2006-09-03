@@ -549,7 +549,7 @@ if (d_gen_function)
 else
 	{
 	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, 
-	app->generateUnusedName(QString(name())+tr("Fit")), d_fit_type + tr(" of ") + d_curve->title().text());
+	app->generateUniqueName(QString(name())+tr("Fit")), d_fit_type + tr(" of ") + d_curve->title().text());
 	}
 }
 
@@ -1500,7 +1500,7 @@ if (d_gen_function)
 	}
 else
 	{
-	QString tableName = app->generateUnusedName(tr("Fit"));
+	QString tableName = app->generateUniqueName(tr("Fit"));
 	QString label = d_fit_type + " " + tr("fit of") + " " + d_curve->title().text();
 
 	Table *t= app->newHiddenTable(tableName, label, d_result_points, peaks_aux + 2);

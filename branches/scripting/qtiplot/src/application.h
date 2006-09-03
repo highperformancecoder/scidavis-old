@@ -39,6 +39,7 @@ class Folder;
 class FolderListItem;
 class FolderListView;
 class ScriptingEnv;
+class ScriptWindow;
 
 //! QtiPlot's main window
 class ApplicationWindow: public QMainWindow, public scripted
@@ -51,6 +52,7 @@ public:
 
 	enum ShowWindowsPolicy{HideAll, ActiveFolder, SubFolders};
 
+	ScriptWindow *scriptWindow;
 	QTranslator *appTranslator, *qtTranslator;
 	QDockWindow *logWindow, *explorerWindow;
 	QTextEdit *results;
@@ -108,7 +110,7 @@ public:
 	You can force the output to be a name different of /param name, 
 	even if 'name' is not used in the project, by setting /param increment = true (the default)
 	*/
-	QString generateUnusedName(const QString& name, bool increment = true);
+	QString generateUniqueName(const QString& name, bool increment = true);
 	
 public slots:
 	void open();
@@ -522,6 +524,7 @@ public slots:
 	//! Connected to the context menu signal from lv; it's called when there are no items selected in the list
 	void showListViewPopupMenu(const QPoint &p);
 
+	void showScriptWindow();
 	void showMoreWindows();
 	void showImportDialog();
 	void showMarkerPopupMenu();
@@ -877,6 +880,7 @@ public:
 	QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;
 	QAction *actionScriptingLang, *actionRestartScripting, *actionClearTable, *actionGoToRow;
 	QAction *actionNoteExecute, *actionNoteExecuteAll, *actionNoteEvaluate, *actionSaveNote;
+	QAction *actionShowScriptWindow;
 
 private:
 	//!Stores the pointers to the dragged items from the FolderListViews objects
