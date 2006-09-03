@@ -1275,15 +1275,12 @@ delete[] par;
 
 MultiPeakFit::MultiPeakFit(ApplicationWindow *parent, Graph *g, PeakProfile profile, int peaks)
 : Fit(parent, g),
-  d_profile(profile),
-  d_peaks(peaks)
+  d_profile(profile)
 {
 setName(tr("MultiPeak"));
 
 if (profile == Gauss)
 	{
-	d_fit_type = tr("Gauss");
-
 	d_f = gauss_multi_peak_f;
 	d_df = gauss_multi_peak_df;
 	d_fdf = gauss_multi_peak_fdf;
@@ -1291,29 +1288,44 @@ if (profile == Gauss)
 	}
 else
 	{
-	d_fit_type = tr("Lorentz");
-
 	d_f = lorentz_multi_peak_f;
 	d_df = lorentz_multi_peak_df;
 	d_fdf = lorentz_multi_peak_fdf;
 	d_fsimplex = lorentz_multi_peak_d;
 	}
 
+d_param_init = NULL;
+covar = NULL;
+d_results = NULL;
+
+setNumPeaks(peaks);
+
+generate_peak_curves = true;
+d_peaks_color = 2;//green
+}
+
+void MultiPeakFit::setNumPeaks(int n)
+{
+d_peaks = n;
+if (d_profile == Gauss)
+	d_fit_type = tr("Gauss");
+else
+	d_fit_type = tr("Lorentz");
 if (d_peaks > 1)
 	d_fit_type += "(" + QString::number(d_peaks) +") " + tr("multi-peak");
 
 d_p = 3*d_peaks + 1;
+if(d_param_init) gsl_vector_free(d_param_init);
 d_param_init = gsl_vector_alloc(d_p);
 gsl_vector_set_all (d_param_init, 1.0);
 
+if (covar) gsl_matrix_free(covar);
 covar = gsl_matrix_alloc (d_p, d_p);
+if (d_results) delete[] d_results;
 d_results = new double[d_p];
 
 d_param_names = generateParameterList(d_peaks);
 d_formula = generateFormula(d_peaks, d_profile);
-
-generate_peak_curves = true;
-d_peaks_color = 2;//green
 }
 
 QStringList MultiPeakFit::generateParameterList(int peaks)

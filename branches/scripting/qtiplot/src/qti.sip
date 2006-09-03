@@ -18,7 +18,7 @@ private:
   ScriptEdit(ScriptEdit&);
 };
 
-class myWidget: QWidget
+class myWidget: QWidget /PyName=MDIWindow/
 {
 %TypeHeaderCode
 #include "src/widget.h"
@@ -171,12 +171,12 @@ public:
   sipRes = PyString_FromString(sipCpp->pieLegendText());
 %End
 
-  bool insertCurve(Table*, const QString&, int);
-  bool insertCurve(Table*, const QString&, const QString&, int);
+  bool insertCurve(Table*, const QString&, int=1);
+  bool insertCurve(Table*, const QString&, const QString&, int=1);
   void removeCurve(int);
   void removeCurve(const QString&);
   void deleteFitCurves();
-  int curves();
+  int curves() /PyName=numCurves/;
 
   void addErrorBars(Table *, const QString&, 
       Table *, const QString&,
@@ -201,7 +201,7 @@ public:
 							
   void exportToSVG(const QString& fname);
   void exportToEPS(const QString& fname);
-  void exportToWmf(const QString& fname);
+  void exportToWmf(const QString& fname) /PyName=exportToWMF/;
 private:
   Graph(const Graph&);
 };
@@ -257,12 +257,15 @@ sipTypeDef *t;
     sipClass = sipModuleAPI_qti.em_types[i];
 %End
 public:
-  Table *table(const QString&);
+  Table* table(const QString&);
   Table* newTable();
-  Table *newTable(const QString&, int, int);
+  Table* newTable(const QString&, int=2, int=30);
+%MethodCode
+  sipRes = sipCpp->newTable(*a0, a2, a1);
+%End
   Matrix* matrix(const QString&);
   Matrix* newMatrix();
-  Matrix* newMatrix(const QString&, int, int);
+  Matrix* newMatrix(const QString&, int=32, int=32);
   MultiLayer *plot(const QString&) /PyName=graph/;
   MultiLayer* newGraph();
   Note *note(const QString&);
@@ -321,8 +324,8 @@ public:
   virtual void setParametersList(const QStringList&);
   int numParameters();
 
-  void setInitialGuess(int, double);
-  void setInitialGuesses(...);
+  void setInitialGuess(int, double) /PyName=setInitialValue/;
+  void setInitialGuesses(...) /PyName=setInitialValues/;
 %MethodCode
 int n = PyTuple_GET_SIZE(a0);
 double *values = new double[n];
@@ -557,7 +560,8 @@ public:
   enum PeakProfile{Gauss, Lorentz};
   MultiPeakFit(ApplicationWindow * /TransferThis/, Graph *, PeakProfile=Gauss, int=1);
 
-  int peaks();
+  int peaks() /PyName=numPeaks/;
+  void setNumPeaks(int);
 
   void enablePeakCurves(bool);
   void setPeakCurvesColor(int);

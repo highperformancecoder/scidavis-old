@@ -408,7 +408,7 @@ void ApplicationWindow::initToolBars()
 
 	plotTools = new QToolBar( this, "file operations" );
 	plotTools->setCloseMode(QDockWindow::Undocked);
-    addToolBar( plotTools, tr( "Plot" ));
+    addToolBar( plotTools, tr( "Graph" ));
 
 	actionAddLayer->addTo(plotTools);
 	actionShowLayerDialog->addTo(plotTools);

@@ -29,6 +29,7 @@
   <!ENTITY toolbars-chapter SYSTEM "toolbars.docbook">
   <!ENTITY dialogs-chapter SYSTEM "dialogs.docbook">
   <!ENTITY analysis-chapter SYSTEM "analysis.docbook">
+  <!ENTITY scripting-chapter SYSTEM "scripting.docbook">
   <!ENTITY appendix-chapter SYSTEM "appendix.docbook">
   <!ENTITY faqs-chapter SYSTEM "faqs.docbook">
 <!--
@@ -701,6 +702,7 @@
 &toolbars-chapter;
 &dialogs-chapter;
 &analysis-chapter;
+&scripting-chapter;
 &appendix-chapter;
 
 </book>
