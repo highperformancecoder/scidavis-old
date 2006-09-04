@@ -21,7 +21,7 @@ The last version of the <a href="http://muparser.sourceforge.net/">muParser (1.2
 In order to build QtiPlot you also need <span class="keywordflow">qmake</span>, that is official part of Qt 3.x.<br><br>
 
 <center> <font color = darkRed size = +1> <b>Linux and Mac OS X</b> </font><br></center>
-While you can probably install the other dependencies from your distribution's package manager, there are no binaries and little documentation for <b>liborigin</b>.
+While you can probably install the other dependencies from your distribution's package manager, there are no binaries and little documentation available for <b>liborigin</b>.
 So here's how to install it:<br>
 <ol>
   <li>download the archive (liborigin-xxxxxxxx.tar.gz) and decompress it</li>
@@ -32,6 +32,12 @@ So here's how to install it:<br>
   <li>type "cp liborigin.so /usr/local/lib/"</li>
   <li>type "ldconfig"</li>
 </ol>
+
+<p>If you want Python scripting support, you will also need to download and install <a href="http://www.python.org">Python</a> 2.4, <a href="http://www.riverbankcomputing.co.uk/sip">SIP</a> 4.4.5 and <a href="http://www.riverbankcomputing.co.uk/pyqt">PyQt</a> 3.16.
+All three of them are included in many Linux distributions.
+Other versions as those indicated above may or may not work.
+Specifically, there are known issues with a number of SIP versions and a given version of PyQt will only work with a limited range of SIP versions.
+</p>
 
 QtiPlot distributes a binary <a href="http://www.debian.org/">Debian</a> package and a <a href="http://www.rpm.org/">RPM</a> package for RedHat, Mandrake and SuSE distributions.<br>
 The RPM package was created on an <a href="http://www.ubuntulinux.org/">Ubuntu</a> distribution.<br>
