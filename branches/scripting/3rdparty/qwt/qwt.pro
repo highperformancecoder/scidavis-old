@@ -16,8 +16,6 @@
 # relevant files and others. If you are 
 # interested in QwtPlot only, you can remove
 # the lists at the end of this file.
-QMAKE_PROJECT_DEPTH = 0
-linux-g++-64: libsuff=64
 
 TARGET            = qwt
 TEMPLATE          = lib
@@ -33,25 +31,28 @@ CONFIG           += release
 CONFIG           += thread
 
 # Only one of the following flags is allowed !
-win32:CONFIG           += dll 
-unix:CONFIG           += staticlib
+# CONFIG           += dll 
+CONFIG           += staticlib
 
 # DEFINES          += QT_NO_CAST_ASCII
 # DEFINES          += QT_NO_CAST_TO_ASCII
 
 MOC_DIR           = src/moc
 OBJECTS_DIR       = src/obj
-DESTDIR           = lib$${libsuff}
+DESTDIR           = lib
 INCLUDEPATH      += include
 DEPENDPATH       += include src
 
 win32:dll:DEFINES    += QT_DLL QWT_DLL QWT_MAKEDLL
+
+# debug:QMAKE_CXXFLAGS += -O0
 
 HEADERS = \
     include/qwt.h \
     include/qwt_abstract_scale_draw.h \
     include/qwt_array.h \
     include/qwt_color_map.h \
+    include/qwt_curve_fitter.h \
     include/qwt_data.h \
     include/qwt_double_interval.h \
     include/qwt_double_rect.h \
@@ -82,6 +83,7 @@ HEADERS = \
     include/qwt_plot_panner.h \
     include/qwt_plot_picker.h \
     include/qwt_plot_zoomer.h \
+    include/qwt_plot_magnifier.h \
     include/qwt_polygon.h \
     include/qwt_raster_data.h \
     include/qwt_rect.h \
@@ -103,6 +105,7 @@ SOURCES = \
     src/qwt_abstract_scale_draw.cpp \
     src/qwt_data.cpp \
     src/qwt_color_map.cpp \
+    src/qwt_curve_fitter.cpp \
     src/qwt_double_interval.cpp \
     src/qwt_double_rect.cpp \
     src/qwt_dyngrid_layout.cpp \
@@ -134,6 +137,7 @@ SOURCES = \
     src/qwt_plot_rasteritem.cpp \
     src/qwt_plot_picker.cpp \
     src/qwt_plot_zoomer.cpp \
+    src/qwt_plot_magnifier.cpp \
     src/qwt_raster_data.cpp \
     src/qwt_rect.cpp \
     src/qwt_round_scale_draw.cpp \
@@ -154,9 +158,9 @@ SOURCES = \
 # lines
 ##############################################
 
-QT += svg
-HEADERS += include/qwt_plot_svgitem.h
-SOURCES += src/qwt_plot_svgitem.cpp 
+# QT += svg
+# HEADERS += include/qwt_plot_svgitem.h
+# SOURCES += src/qwt_plot_svgitem.cpp 
 
 ##############################################
 # If you are interested in the plot widget
