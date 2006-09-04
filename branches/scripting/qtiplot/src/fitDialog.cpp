@@ -1273,7 +1273,7 @@ colNamesBox->insertStringList(((Table*)srcTables->at(tabnr))->colNames());
 
 void fitDialog::enableWeightingParameters(int index)
 {
-if (index == Fit::ArbDataset)
+if (index == Fit::Dataset)
 	{
 	tableNamesBox->setEnabled(true);
 	colNamesBox->setEnabled(true);

@@ -31,7 +31,14 @@ Updates and news can be found there.
 </para>
 
 <para>
-&appname; is distributed as a package with sources which have to be compiled. compiled packages for most Linux distributions and for Windows can also be obtained. If you want to build QtiPlot from sources, don't forget first to download and install the <ulink url="http://www.trolltech.com/products/qt/index.html">Qt</ulink> and <ulink url="http://sources.redhat.com/gsl/">GSL</ulink> libraries. 
+&appname; is distributed as a package with sources which have to be compiled. 
+Compiled packages for most Linux distributions and for Windows can also be obtained. 
+If you want to build QtiPlot from sources, don't forget first to download and install the 
+<ulink url="http://www.trolltech.com/products/qt/index.html">Qt</ulink>,
+<ulink url="http://qwtplot3d.sourceforge.net/">QwtPlot3D</ulink>,
+<ulink url="http://sourceforge.net/projects/liborigin/">liborigin</ulink>,  
+<ulink url="http://www.zlib.net/">zlib</ulink> and  
+<ulink url="http://sources.redhat.com/gsl/">GSL</ulink> libraries. 
 
 </para>
 
@@ -46,14 +53,14 @@ Updates and news can be found there.
 <varlistentry>
   <term>Qwt</term>
   <listitem>
-    <para>You must use the modified version of Qwt 4.2.0 which comes with the QtiPlot archive ("3rdparty" folder).</para>
+    <para>You must use the CVS version of the Qwt 5 library which comes with the QtiPlot archive ("3rdparty" folder). This should be statically linked to QtiPlot in order to avoid conflicts on your operating system.</para>
   </listitem>
 </varlistentry>
 <varlistentry>
   <term>muParser</term>
   <listitem>
-    <para>The last version of the <ulink url="http://muparser.sourceforge.net/">muParser (1.24)</ulink> library is included in &appname; ("3rdparty/muParser" folder) and <ulink url="http://sourceforge.net/projects/liborigin/">liborigin</ulink> libraries, so you don't need to download and install them.</para>
-    <para> the <ulink url="http://qwtplot3d.sourceforge.net/">QwtPlot3D</ulink> library is also required, and it not included in the source package. Therefore, you need to download it and install it before any installation of &appname;</para>
+    <para>The last version of the <ulink url="http://muparser.sourceforge.net/">muParser (1.26)</ulink>
+	 library is included in &appname; ("3rdparty/muParser" folder), so you don't need to download and install it.</para>
   </listitem>
 </varlistentry>
 <varlistentry>
@@ -89,7 +96,7 @@ rpm -i qtiplot-0.x.x-1.i386.rpm
 <title>Compilation and Installation from sources</title>
 
 <sect2 id="compilation-linux">
-<title>Linux</title>
+<title>Linux and Mac OS X</title>
 
 <para>Download the <ulink url="&kappdownload;">qtiplot archive</ulink> (.tar.bz2 or .zip file) and decompress it. Then open a  terminal (console) window and go to the main folder of the decompressed archive (which should be named &kappdirectory;-&version;). You must be sure that &appname; is able to find the <ulink url="http://qwtplot3d.sourceforge.net/">QwtPlot3D</ulink> library. You have to go to the &kappdirectory; directory and open the file &kappdirectory;.pro. The folowing line add a new path to the library files  which should be available for the compiling:</para>
 <screen>
@@ -110,6 +117,13 @@ make install
 <screen>
 qtiplot
 </screen>
+
+<para>If you want Python scripting support, you will also need to download and install: <ulink url="http://muparser.sourceforge.net/">Python</ulink> 2.4, <ulink url="http://www.riverbankcomputing.co.uk/sip">SIP</ulink> 4.4.5,
+and <ulink url="http://www.riverbankcomputing.co.uk/pyqt">PyQt</ulink> 3.16. All three of them are included in many Linux distributions.
+Other versions as those indicated above may or may not work.
+Specifically, there are known issues with a number of SIP versions and a given version of PyQt will only work with a limited range of SIP
+versions.</para>
+
 
 </sect2>
 <sect2 id="compilation-windows">

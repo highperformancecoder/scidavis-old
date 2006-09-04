@@ -5233,7 +5233,7 @@ for (int i=0;i<(int)windows->count();i++)
 	Table *t = (Table *)windows->at(i);
 	for (int j=0; j < t->tableCols(); j++)
 		{
-		if (t->colPlotDesignation(j) == plotType)
+		if (t->colPlotDesignation(j) == plotType || plotType == Table::All)
 			list << QString(t->name()) + "_" + t->colLabel(j);
 		}
 	}
@@ -8921,13 +8921,13 @@ void ApplicationWindow::showPlotWizard()
 {
 if (tableWindows.count()>0)
 	{
-	plotWizard* pw = new plotWizard(this,"plotWizard",TRUE,WStyle_Tool|WDestructiveClose);
+	plotWizard* pw = new plotWizard(this,"plotWizard", TRUE, WStyle_Tool|WDestructiveClose);
 	connect (pw,SIGNAL(plot(const QStringList&)),this,SLOT(multilayerPlot(const QStringList&)));
 	connect (pw,SIGNAL(plot3D(const QString&)),this,SLOT(dataPlotXYZ(const QString&)));
 	connect (pw,SIGNAL(plot3DRibbon(const QString&)),this,SLOT(dataPlot3D(const QString&)));
 
 	pw->insertTablesList(tableWindows);
-	pw->setColumnsList(columnsList(Table::All));
+	pw->setColumnsList(columnsList());
 	pw->changeColumnsList(tableWindows[0]);
 	pw->show();
 	pw->setActiveWindow();

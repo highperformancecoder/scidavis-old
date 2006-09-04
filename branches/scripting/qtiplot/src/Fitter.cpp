@@ -244,7 +244,7 @@ switch(d_weihting)
 	case Statistical:
 		info += tr("Statistical");
 	break;
-	case ArbDataset:
+	case Dataset:
 		info += tr("Arbitrary Dataset") + ": " + weighting_dataset;
 	break;
 	}
@@ -375,7 +375,7 @@ switch (d_weihting)
 			d_w[i] = sqrt(d_y[i]);
 		}
 	break;
-	case ArbDataset:
+	case Dataset:
 		{//d_w are equal to the values of the arbitrary dataset
 		if (colName.isEmpty())
 			return false;

@@ -3,7 +3,9 @@
   <title>Mathematical Expressions and Scripting</title>
 
   <para>Starting with version 0.8.7, QtiPlot supports different interpreters
-  for evaluating mathematical expressions and for executing scripts.</para>
+  for evaluating mathematical expressions and for executing scripts. On Windows currently only evaluation of mathematical expressions using muParser 
+  is supported. Support for scripts using the Python programming language is only available for Linux and Mac OS X. 
+  When the port of QtiPlot to Qt4 will be ready this feature will also be supported on Windows systems.</para>
 
   <sect1 id="muParser">
     <title>muParser</title>
@@ -1027,7 +1029,7 @@ f.setInitialValue(number, value)
 f.setInitialValues(value1, ...)
 f.guessInitialValues()
 f.setAlgorithm(algo) # algo = Fit.ScaledLevenbergMarquardt, Fit.UnscaledLevenbergMarquardt, Fit.NelderMeadSimplex
-f.setWeightingData(method, colname) # method = Fit.NoWeighting, Fit.Instrumental, Fit.Statistical, Fit.ArbDataset
+f.setWeightingData(method, colname) # method = Fit.NoWeighting, Fit.Instrumental, Fit.Statistical, Fit.Dataset
 f.setTolerance(tolerance)
 f.setOutputPrecision(precision)
 f.setMaximumIterations(number)

@@ -131,8 +131,8 @@ QStringList newList;
 for (int i=0;i<(int)columns.count();i++)
 	{
 	QString s=columns[i];
-	if (s.contains(table))					
-		newList<< s.remove(table+"_",TRUE);
+	if (s.contains(table))	
+		newList << s.remove(table+"_",TRUE);
 	}
 insertColumnsList(newList);
 }
