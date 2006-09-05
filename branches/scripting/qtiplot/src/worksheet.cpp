@@ -712,24 +712,24 @@ return Y;
 }
 
 void Table::insertCols(int start, int count)
-{	
-int i, index, max=0, xcols = 0;
+{
+start--;//insert new columns before the start/selected column
+
+int max=0;
 int cols=worksheet->numCols();
-for (i=0; i<cols; i++)
+for (int i=0; i<cols; i++)
 	{
 	if (col_label[i].contains(QRegExp ("\\D"))==0)
 		{
-		index=col_label[i].toInt();
+		int index=col_label[i].toInt();
 		if (index>max) 
 			max=index;
 		}
-	if (col_plot_type[i] == X)
-		xcols++;
 	}
 max++;
 	
 QStringList::Iterator it=commandes.at(++start);
-commandes.insert(it++, count, "");
+commandes.insert(it++, count, QString::null);
 it=col_format.at(start);
 col_format.insert(it++, count, "0/6");
 it=comments.at(start);
@@ -743,17 +743,10 @@ itt=col_plot_type.at(start);
 col_plot_type.insert(itt++, count, Y);
 	
 worksheet->insertColumns (start, count);
+for (int j=0; j<count; j++)
+	col_label[start+j] = QString::number(max+j);
 
-QHeader *head = worksheet->horizontalHeader();
-for (i=0; i<count; i++)
-	{
-	int col = start+i;
-	col_label[col] = QString::number(max+i);
-	if (xcols>1)
-		head->setLabel(col,col_label[col]+"[Y"+QString::number(xcols)+"]", -1);
-	else
-		head->setLabel(col,col_label[col]+"[Y]",-1);
-	}
+setHeaderColType();
 }
 
 void Table::insertCol()
@@ -1939,38 +1932,48 @@ for (int j=0;j<(int)worksheet->numCols();j++)
 if (xcols>1)
 	{
 	xcols = 0;
-	for (int i=0;i<(int)worksheet->numCols();i++) 
+	for (int i=0; i<(int)worksheet->numCols(); i++) 
 		{
 		if (col_plot_type[i] == X)
-			head->setLabel(i, col_label[i]+"[X" + QString::number(++xcols) +"]", -1);
+			head->setLabel(i, col_label[i]+"[X" + QString::number(++xcols) +"]");
 		else if (col_plot_type[i] == Y)
-			head->setLabel(i, col_label[i]+"[Y"+ QString::number(xcols) +"]", -1);
+			{
+			if (xcols)
+				head->setLabel(i, col_label[i]+"[Y"+ QString::number(xcols) +"]");
+			else
+				head->setLabel(i, col_label[i]+"[Y]");
+			}
 		else if (col_plot_type[i] == Z)
-			head->setLabel(i, col_label[i]+"[Z"+ QString::number(xcols) +"]", -1);
+			{
+			if (xcols)
+				head->setLabel(i, col_label[i]+"[Z"+ QString::number(xcols) +"]");
+			else
+				head->setLabel(i, col_label[i]+"[Z]");
+			}
 		else if (col_plot_type[i] == xErr)
-			head->setLabel(i, col_label[i]+"[xEr]", -1);
+			head->setLabel(i, col_label[i]+"[xEr]");
 		else if (col_plot_type[i] == yErr)
-			head->setLabel(i, col_label[i]+"[yEr]", -1);
+			head->setLabel(i, col_label[i]+"[yEr]");
 		else
-			head->setLabel(i, col_label[i], -1);
+			head->setLabel(i, col_label[i]);
 		}
 	}
 else
 	{
-	for (int i=0;i<(int)worksheet->numCols();i++) 
+	for (int i=0; i<(int)worksheet->numCols(); i++) 
 		{
 		if (col_plot_type[i] == X)
-			head->setLabel(i, col_label[i]+"[X]", -1);
+			head->setLabel(i, col_label[i]+"[X]");
 		else if (col_plot_type[i] == Y)
-			head->setLabel(i, col_label[i]+"[Y]", -1);
+			head->setLabel(i, col_label[i]+"[Y]");
 		else if (col_plot_type[i] == Z)
-			head->setLabel(i, col_label[i]+"[Z]", -1);
+			head->setLabel(i, col_label[i]+"[Z]");
 		else if (col_plot_type[i] == xErr)
-			head->setLabel(i, col_label[i]+"[xEr]", -1);
+			head->setLabel(i, col_label[i]+"[xEr]");
 		else if (col_plot_type[i] == yErr)
-			head->setLabel(i, col_label[i]+"[yEr]", -1);
+			head->setLabel(i, col_label[i]+"[yEr]");
 		else
-			head->setLabel(i, col_label[i], -1);
+			head->setLabel(i, col_label[i]);
 		}
 	}
 }
@@ -2433,11 +2436,10 @@ if ( f.open(IO_ReadOnly) )
 		t.readLine();
 
 	QString s = t.readLine();//read first line after the ignored ones
-	while ( !t.atEnd()) 
+	while (!t.atEnd()) 
 		{
 		t.readLine(); 
 		rows++;
-		qApp->eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
 		}
 
 	if (simplifySpaces)
