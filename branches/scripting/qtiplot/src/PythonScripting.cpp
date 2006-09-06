@@ -196,7 +196,7 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
   loadInitFile(QDir::homeDirPath()+"qtiplotrc") ||
     loadInitFile(qApp->applicationDirPath()+"qtiplotrc") ||
 #else
-  loadInitFile(QDir::homeDirPath()+".qtiplotrc") ||
+  loadInitFile(QDir::homeDirPath()+"/.qtiplotrc") ||
     loadInitFile(QDir::rootDirPath()+"etc/qtiplotrc") ||
 #endif
   loadInitFile("qtiplotrc");
@@ -215,14 +215,18 @@ bool PythonScripting::loadInitFile(const QString &path)
 {
   QFileInfo pyFile(path+".py"), pycFile(path+".pyc");
   if (pycFile.isReadable() && (pycFile.lastModified() >= pyFile.lastModified()))
-    return PyRun_SimpleFileEx(fopen(pycFile.filePath(), "r"), pycFile.fileName(), true) == 0;
+    return PyRun_SimpleFileEx(fopen(pycFile.filePath(), "rb"), pycFile.filePath(), true) == 0;
   else if (pyFile.isReadable()) {
     // try to compile pyFile to pycFile
     PyObject *compileModule = PyImport_ImportModule("py_compile");
     if (compileModule) {
       PyObject *compile = PyDict_GetItemString(PyModule_GetDict(compileModule),"compile");
       if (compile) {
-	Py_XDECREF(PyObject_CallFunctionObjArgs(compile, PyString_FromString(pyFile.filePath()), PyString_FromString(pycFile.filePath()),NULL));
+	PyObject *tmp = PyObject_CallFunctionObjArgs(compile, PyString_FromString(pyFile.filePath()), PyString_FromString(pycFile.filePath()),NULL);
+	if (tmp)
+	  Py_DECREF(tmp);
+	else
+	  PyErr_Print();
       } else
 	PyErr_Print();
       Py_DECREF(compileModule);
@@ -230,10 +234,10 @@ bool PythonScripting::loadInitFile(const QString &path)
       PyErr_Print();
     if (pycFile.isReadable() && (pycFile.lastModified() >= pyFile.lastModified())) {
       // run the newly compiled pycFile
-      return PyRun_SimpleFileEx(fopen(pycFile.filePath(), "r"), pycFile.fileName(), true) == 0;
+      return PyRun_SimpleFileEx(fopen(pycFile.filePath(), "rb"), pycFile.filePath(), true) == 0;
     } else {
       // fallback: just run pyFile
-      return PyRun_SimpleFileEx(fopen(pyFile.filePath(), "r"), pyFile.fileName(), true) == 0;
+      return PyRun_SimpleFileEx(fopen(pyFile.filePath(), "r"), pyFile.filePath(), true) == 0;
     }
   }
   return false;
