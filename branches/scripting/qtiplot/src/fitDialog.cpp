@@ -332,6 +332,10 @@ new QLabel( tr("Name: "), GroupBox2);
 covMatrixName = new QLineEdit(GroupBox2);
 covMatrixName->setText( tr( "CovMatrix" ) );
 
+scaleErrorsBox = new QCheckBox (tr("Scale Errors with sqrt(reduced chi^2)"), advancedPage);
+scaleErrorsBox->setChecked(false);
+connect( scaleErrorsBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
+
 logBox = new QCheckBox (tr("Write Parameters to Result Log"), advancedPage);
 logBox->setChecked(app->writeFitResultsToLog);
 connect( logBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
@@ -364,6 +368,7 @@ hbox1->setStretchFactor(spacer, 1);
 QVBoxLayout* hlayout = new QVBoxLayout(advancedPage, 5, 5);
 hlayout->addWidget(GroupBox1);
 hlayout->addWidget(GroupBox2);
+hlayout->addWidget(scaleErrorsBox);
 hlayout->addWidget(logBox);
 hlayout->addWidget(plotLabelBox);
 hlayout->addWidget(hbox1);
@@ -1135,6 +1140,7 @@ if (!error)
 	fitter->setColor(boxColor->currentItem());
 	fitter->generateFunction(generatePointsBtn->isChecked(), generatePointsBox->value());
 	fitter->setMaximumIterations(boxPoints->value());
+	fitter->scaleErrors(scaleErrorsBox->isChecked());
 	if (fitter->name() == tr("MultiPeak") && ((MultiPeakFit *)fitter)->peaks() > 1)
 		{
 		((MultiPeakFit *)fitter)->enablePeakCurves(app->generatePeakCurves);

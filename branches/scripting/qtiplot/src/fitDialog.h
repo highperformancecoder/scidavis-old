@@ -62,7 +62,7 @@ public:
 	QRadioButton *generatePointsBtn, *samePointsBtn;
 	QPushButton *btnParamTable, *btnCovMatrix;
 	QLineEdit *covMatrixName, *paramTableName;
-	QCheckBox *plotLabelBox, *logBox;
+	QCheckBox *plotLabelBox, *logBox, *scaleErrorsBox;
 	Fit *fitter;
 
 protected:

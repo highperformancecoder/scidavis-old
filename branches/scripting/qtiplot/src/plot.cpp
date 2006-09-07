@@ -53,9 +53,9 @@ for (int i= 0; i<QwtPlot::axisCnt; i++)
 		scale->setTitle(title);
 
 		ScaleDraw *sd = new ScaleDraw();
-		sd->setTickLength  	(QwtScaleDiv::MinorTick, minTickLength); 
-		sd->setTickLength  	(QwtScaleDiv::MediumTick, minTickLength);
-		sd->setTickLength  	(QwtScaleDiv::MajorTick, majTickLength);
+		sd->setTickLength(QwtScaleDiv::MinorTick, minTickLength); 
+		sd->setTickLength(QwtScaleDiv::MediumTick, minTickLength);
+		sd->setTickLength(QwtScaleDiv::MajorTick, majTickLength);
 
 		setAxisScaleDraw (i, sd);
 		}

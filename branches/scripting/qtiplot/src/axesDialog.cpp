@@ -2163,7 +2163,7 @@ btnStep->setChecked(!btnMinor->isChecked ());
 }
 
 QStringList axesDialog::scaleLimits(int axis, double start, double end, double step, 
-																const QString& majors, const QString&minors)
+									const QString& majors, const QString&minors)
 {
 scales[8*axis+0]=QString::number(start);
 scales[8*axis+1]=QString::number(end);

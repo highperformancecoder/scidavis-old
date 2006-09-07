@@ -166,7 +166,7 @@ if (type == None && bkgColor != d_plot->paletteBackgroundColor())
 if (type == Line)
 	{
 	p->setBrush(QBrush(bkgColor));
-	p->drawRect(rect);
+	QwtPainter::drawRect(p, rect);
 	}
 else if (type == Shadow)
 	{
@@ -174,7 +174,7 @@ else if (type == Shadow)
 	p->setBrush(QBrush(Qt::black));
 	p->drawRect(shadow);
 	p->setBrush(QBrush(bkgColor));
-	p->drawRect(rect);
+	QwtPainter::drawRect(p, rect);
 	}
 p->restore();
 }
@@ -255,10 +255,10 @@ for (int i=0;i<(int)titles.count();i++)
 						{
 						QRect lr=QRect(w,height[i]-4,l,10);						
 						p->setBrush(br);
-						p->drawRect (lr);
+						QwtPainter::drawRect(p, lr);
 						}			
 					else 			
-						p->drawLine (w,height[i],w+l,height[i]);						
+						QwtPainter::drawLine(p, w,height[i],w+l,height[i]);						
 					}
 				symb.draw(p,w+l/2,height[i]);
 				p->restore();
@@ -286,7 +286,7 @@ for (int i=0;i<(int)titles.count();i++)
 				p->setPen (QPen(pen.color(),1,Qt::SolidLine));					
 				QRect lr=QRect(w,height[i]-4,l,10);						
 				p->setBrush(br);
-				p->drawRect(lr);
+				QwtPainter::drawRect(p, lr);
 				p->restore();
 				}
 			}

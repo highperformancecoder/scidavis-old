@@ -1033,6 +1033,7 @@ f.setWeightingData(method, colname) # method = Fit.NoWeighting, Fit.Instrumental
 f.setTolerance(tolerance)
 f.setOutputPrecision(precision)
 f.setMaximumIterations(number)
+f.scaleErrors(yes = True)
 	  </programlisting></para>
 
         <para>After you've called fit(), you have a number of possibilities

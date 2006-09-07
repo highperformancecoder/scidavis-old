@@ -365,6 +365,8 @@ delete values;
 
   virtual QString legendFitInfo();
 
+  void scaleErrors(bool yes = true);
+
   SIP_PYTUPLE results();
 %MethodCode
 double *results = sipCpp->results();
