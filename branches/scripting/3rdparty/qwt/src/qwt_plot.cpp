@@ -548,7 +548,7 @@ void QwtPlot::updateTabOrder()
 
 void QwtPlot::drawCanvas(QPainter *painter)
 {
-    QwtArray<QwtScaleMap> maps(axisCnt);
+    QwtScaleMap maps[axisCnt];
     for ( int axisId = 0; axisId < axisCnt; axisId++ )
         maps[axisId] = canvasMap(axisId);
 
@@ -565,7 +565,7 @@ void QwtPlot::drawCanvas(QPainter *painter)
 */
 
 void QwtPlot::drawItems(QPainter *painter, const QRect &rect, 
-        const QwtArray<QwtScaleMap> &map, 
+        const QwtScaleMap map[axisCnt], 
         const QwtPlotPrintFilter &pfilter) const
 {
     painter->save();

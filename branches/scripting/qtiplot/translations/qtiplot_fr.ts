@@ -4,97 +4,97 @@
     <name>@default</name>
     <message>
         <source>QtiPlot</source>
-        <translation>QtiPlot</translation>
+        <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
         <source>QtiPlot - Error</source>
-        <translation>QtiPlot - Erreur</translation>
+        <translation type="obsolete">QtiPlot - Erreur</translation>
     </message>
     <message>
         <source>Please select two columns for this operation!</source>
-        <translation>Sélectionnez 2 colonnes pour cette opération !</translation>
+        <translation type="obsolete">Sélectionnez 2 colonnes pour cette opération !</translation>
     </message>
     <message>
         <source>Could not allocate memory, operation aborted!</source>
-        <translation>Allocation mémoire impossible, Opération annulée !</translation>
+        <translation type="obsolete">Allocation mémoire impossible, Opération annulée !</translation>
     </message>
     <message>
         <source>Error in GSL forward FFT operation!</source>
-        <translation>Erreur de la librarie GSL sur la FFT !</translation>
+        <translation type="obsolete">Erreur de la librarie GSL sur la FFT !</translation>
     </message>
     <message>
         <source>Please select a Y column to plot!</source>
-        <translation>Sélectionnez une colonne Y à tracer !</translation>
+        <translation type="obsolete">Sélectionnez une colonne Y à tracer !</translation>
     </message>
     <message>
         <source>Please set a default X column for this table, first!</source>
-        <translation>Sélectionnez d&apos;abord la colonne X par défaut pour cette table !</translation>
+        <translation type="obsolete">Sélectionnez d&apos;abord la colonne X par défaut pour cette table !</translation>
     </message>
     <message>
         <source>Please select a column to plot!</source>
-        <translation>Sélectionner une colonne à tracer !</translation>
+        <translation type="obsolete">Sélectionner une colonne à tracer !</translation>
     </message>
     <message>
         <source>Please select four columns for this operation!</source>
-        <translation>Sélectionnez quatre colonnes pour cette opération !</translation>
+        <translation type="obsolete">Sélectionnez quatre colonnes pour cette opération !</translation>
     </message>
     <message>
         <source>You need at least two columns for this operation!</source>
-        <translation>Vous avez besoin d&apos;au moins deux colonnes pour cette opération !</translation>
+        <translation type="obsolete">Vous avez besoin d&apos;au moins deux colonnes pour cette opération !</translation>
     </message>
     <message>
         <source>Please select a Z column for this operation!</source>
-        <translation>Sélectionnez une colonne Z pour cette opération !</translation>
+        <translation type="obsolete">Sélectionnez une colonne Z pour cette opération !</translation>
     </message>
     <message>
         <source>You need to define a X column first!</source>
-        <translation>Vous devez d&apos;abord définir une colonne X !</translation>
+        <translation type="obsolete">Vous devez d&apos;abord définir une colonne X !</translation>
     </message>
     <message>
         <source>You need to define a Y column first!</source>
-        <translation>Vous devez d&apos;abord définir une colonne Y !</translation>
+        <translation type="obsolete">Vous devez d&apos;abord définir une colonne Y !</translation>
     </message>
     <message>
         <source>QtiPlot - ASCII Export Error</source>
-        <translation>Qtiplot - Erreur lors de l&apos;exportation ASCII</translation>
+        <translation type="obsolete">Qtiplot - Erreur lors de l&apos;exportation ASCII</translation>
     </message>
     <message>
         <source>Please select two columns for this operation:
  the first represents the signal and the second the response function!</source>
-        <translation>Sélectionnez 2 colonnes pour cette opération :
+        <translation type="obsolete">Sélectionnez 2 colonnes pour cette opération :
 La première représente le signal et la seconde, la réponse de la fonction !</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
-        <translation>Les données de la réponse &apos;%1&apos; doivent être de moitié inférieure à la taille des données du signal &apos;%2&apos; !</translation>
+        <translation type="obsolete">Les données de la réponse &apos;%1&apos; doivent être de moitié inférieure à la taille des données du signal &apos;%2&apos; !</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
-        <translation>Les données de la réponse &apos;%1&apos; doivent contenir un nombre de points impaires !</translation>
+        <translation type="obsolete">Les données de la réponse &apos;%1&apos; doivent contenir un nombre de points impaires !</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation>Fréquence</translation>
+        <translation type="obsolete">Fréquence</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Temps</translation>
+        <translation type="obsolete">Temps</translation>
     </message>
     <message>
         <source>Real</source>
-        <translation>Réel</translation>
+        <translation type="obsolete">Réel</translation>
     </message>
     <message>
         <source>Imaginary</source>
-        <translation>Imaginaire</translation>
+        <translation type="obsolete">Imaginaire</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation>Amplitude</translation>
+        <translation type="obsolete">Amplitude</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Angle</translation>
+        <translation type="obsolete">Angle</translation>
     </message>
     <message>
         <source>QtiPlot - Warning</source>
@@ -102,35 +102,35 @@ La première représente le signal et la seconde, la réponse de la fonction !</
     </message>
     <message>
         <source>QtiPlot - untitled</source>
-        <translation>QtiPlot - Sans nom</translation>
+        <translation type="obsolete">QtiPlot - Sans nom</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
-        <translation>&lt;b&gt; %1 &lt;/b&gt; : Langue inconnue !</translation>
+        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt; : Langue inconnue !</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Unknown command line option or the file doesn&apos;t exist!</source>
-        <translation>&lt;b&gt; %1 &lt;/b&gt; : Commande inconnue ou le fichier n&apos;existe pas !</translation>
+        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt; : Commande inconnue ou le fichier n&apos;existe pas !</translation>
     </message>
     <message>
         <source>QtiPlot project</source>
-        <translation>Projet QtiPlot</translation>
+        <translation type="obsolete">Projet QtiPlot</translation>
     </message>
     <message>
         <source>Compressed QtiPlot project</source>
-        <translation>Projet QtiPlot compressé</translation>
+        <translation type="obsolete">Projet QtiPlot compressé</translation>
     </message>
     <message>
         <source>QtiPlot - Open Project</source>
-        <translation>QtiPlot - Ouvrir un projet</translation>
+        <translation type="obsolete">QtiPlot - Ouvrir un projet</translation>
     </message>
     <message>
         <source>QtiPlot - File openning error</source>
-        <translation>QtiPlot - Erreur lors de l&apos;ouverture du fichier</translation>
+        <translation type="obsolete">QtiPlot - Erreur lors de l&apos;ouverture du fichier</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; doesn&apos;t exist!</source>
-        <translation>Le fichier &lt;b&gt; %1 &lt;/b&gt; n&apos;existe pas !</translation>
+        <translation type="obsolete">Le fichier &lt;b&gt; %1 &lt;/b&gt; n&apos;existe pas !</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a QtiPlot project file!</source>
@@ -138,295 +138,295 @@ La première représente le signal et la seconde, la réponse de la fonction !</
     </message>
     <message>
         <source>QtiPlot - File Backup Error</source>
-        <translation>QtiPlot - Erreur lors de la sauvegarde automatique</translation>
+        <translation type="obsolete">QtiPlot - Erreur lors de la sauvegarde automatique</translation>
     </message>
     <message>
         <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you run the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation>Impossible de faire une sauvegarde de &lt;b&gt;%1&lt;/b&gt; (vers %2).&lt;br&gt;Si vous ignorez ce message, vous prenez le risque de &lt;b&gt;perdre des données&lt;/b&gt;.</translation>
+        <translation type="obsolete">Impossible de faire une sauvegarde de &lt;b&gt;%1&lt;/b&gt; (vers %2).&lt;br&gt;Si vous ignorez ce message, vous prenez le risque de &lt;b&gt;perdre des données&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>QtiPlot - File Save Error</source>
-        <translation>QtiPlot - Erreur lors de la sauvegarde du fichier</translation>
+        <translation type="obsolete">QtiPlot - Erreur lors de la sauvegarde du fichier</translation>
     </message>
     <message>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
-        <translation>Le fichier &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; est ouvert en lecture seule</translation>
+        <translation type="obsolete">Le fichier &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; est ouvert en lecture seule</translation>
     </message>
     <message>
         <source>Save Project As</source>
-        <translation>Enregistrer le projet sous</translation>
+        <translation type="obsolete">Enregistrer le projet sous</translation>
     </message>
     <message>
         <source>QtiPlot -- Overwrite File? </source>
-        <translation>QtiPlot -- Ecraser le fichier ? </translation>
+        <translation type="obsolete">QtiPlot -- Ecraser le fichier ? </translation>
     </message>
     <message>
         <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
 Do you want to overwrite it?</source>
-        <translation>Un fichier nommé &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;existe déjà.
+        <translation type="obsolete">Un fichier nommé &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;existe déjà.
 Voulez-vous l&apos;écraser ?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>Oui</translation>
+        <translation type="obsolete">Oui</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;Non</translation>
+        <translation type="obsolete">&amp;Non</translation>
     </message>
     <message>
         <source>&amp;Find...</source>
-        <translation>Chercher...</translation>
+        <translation type="obsolete">Chercher...</translation>
     </message>
     <message>
         <source>App&amp;end Project...</source>
-        <translation>Ajout&amp;er un projet...</translation>
+        <translation type="obsolete">Ajout&amp;er un projet...</translation>
     </message>
     <message>
         <source>Save &amp;As Project...</source>
-        <translation>S&amp;auvegarder comme projet...</translation>
+        <translation type="obsolete">S&amp;auvegarder comme projet...</translation>
     </message>
     <message>
         <source>Save Project &amp;As...</source>
-        <translation>E&amp;nregistrer le projet sous...</translation>
+        <translation type="obsolete">E&amp;nregistrer le projet sous...</translation>
     </message>
     <message>
         <source>&amp;Show All Windows</source>
-        <translation>Montrer toutes les fenêtres</translation>
+        <translation type="obsolete">Montrer toutes les fenêtres</translation>
     </message>
     <message>
         <source>&amp;Hide All Windows</source>
-        <translation>Cac&amp;her toutes les fenêtres</translation>
+        <translation type="obsolete">Cac&amp;her toutes les fenêtres</translation>
     </message>
     <message>
         <source>&amp;Delete Folder</source>
-        <translation>Supprimer le dossier</translation>
+        <translation type="obsolete">Supprimer le dossier</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation>&amp;Renommer</translation>
+        <translation type="obsolete">&amp;Renommer</translation>
     </message>
     <message>
         <source>New &amp;Window</source>
-        <translation>Fenêtre</translation>
+        <translation type="obsolete">Fenêtre</translation>
     </message>
     <message>
         <source>New F&amp;older</source>
-        <translation>Dossier</translation>
+        <translation type="obsolete">Dossier</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation>&amp;Non</translation>
+        <translation type="obsolete">&amp;Non</translation>
     </message>
     <message>
         <source>&amp;Windows in Active Folder</source>
-        <translation>Dans le dossier actif</translation>
+        <translation type="obsolete">Dans le dossier actif</translation>
     </message>
     <message>
         <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
-        <translation>Dans le dossier actif et les sous-dossiers</translation>
+        <translation type="obsolete">Dans le dossier actif et les sous-dossiers</translation>
     </message>
     <message>
         <source>&amp;View Windows</source>
-        <translation>Afficher les fenêtres</translation>
+        <translation type="obsolete">Afficher les fenêtres</translation>
     </message>
     <message>
         <source>&amp;Properties...</source>
-        <translation>&amp;Propriétés...</translation>
+        <translation type="obsolete">&amp;Propriétés...</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation>Caché</translation>
+        <translation type="obsolete">Caché</translation>
     </message>
     <message>
         <source>Please enter a valid name!</source>
-        <translation>Veuillez donner un nom valide !</translation>
+        <translation type="obsolete">Veuillez donner un nom valide !</translation>
     </message>
     <message>
         <source>Name already exists!</source>
-        <translation>Ce nom existe déjà !</translation>
+        <translation type="obsolete">Ce nom existe déjà !</translation>
     </message>
     <message>
         <source>Please choose another name!</source>
-        <translation>Choisissez un autre nom !</translation>
+        <translation type="obsolete">Choisissez un autre nom !</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation type="obsolete">Type</translation>
     </message>
     <message>
         <source>Project</source>
-        <translation>Projet</translation>
+        <translation type="obsolete">Projet</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation>Chemin</translation>
+        <translation type="obsolete">Chemin</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Taille</translation>
+        <translation type="obsolete">Taille</translation>
     </message>
     <message>
         <source>bytes</source>
-        <translation>octets</translation>
+        <translation type="obsolete">octets</translation>
     </message>
     <message>
         <source>Contents</source>
-        <translation>Contenu</translation>
+        <translation type="obsolete">Contenu</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation>Fenêtres</translation>
+        <translation type="obsolete">Fenêtres</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation>Dossiers</translation>
+        <translation type="obsolete">Dossiers</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation>Créé</translation>
+        <translation type="obsolete">Créé</translation>
     </message>
     <message>
         <source>Modified</source>
-        <translation>Modifié</translation>
+        <translation type="obsolete">Modifié</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation>Propriétés</translation>
+        <translation type="obsolete">Propriétés</translation>
     </message>
     <message>
         <source>Folder</source>
-        <translation>Dossier</translation>
+        <translation type="obsolete">Dossier</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation>Nouveau Dossier</translation>
+        <translation type="obsolete">Nouveau Dossier</translation>
     </message>
     <message>
         <source>QtiPlot - Delete folder?</source>
-        <translation>QtiPlot - Supprimer le dossier ?</translation>
+        <translation type="obsolete">QtiPlot - Supprimer le dossier ?</translation>
     </message>
     <message>
         <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
-        <translation>Supprimer le dossier &apos;%1&apos; et toutes les fenêtres qu&apos;il contient ?</translation>
+        <translation type="obsolete">Supprimer le dossier &apos;%1&apos; et toutes les fenêtres qu&apos;il contient ?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Oui</translation>
+        <translation type="obsolete">Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Non</translation>
+        <translation type="obsolete">Non</translation>
     </message>
     <message>
         <source>Matrix</source>
-        <translation>Matrice</translation>
+        <translation type="obsolete">Matrice</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation>Table</translation>
+        <translation type="obsolete">Table</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation>Commentaires</translation>
+        <translation type="obsolete">Commentaires</translation>
     </message>
     <message>
         <source>Plot</source>
-        <translation>Graphe</translation>
+        <translation type="obsolete">Graphe</translation>
     </message>
     <message>
         <source>Plot 3D</source>
-        <translation>Graphe 3D</translation>
+        <translation type="obsolete">Graphe 3D</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation>Etiquette</translation>
+        <translation type="obsolete">Etiquette</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Etat</translation>
+        <translation type="obsolete">Etat</translation>
     </message>
     <message>
         <source>QtiPlot - No match found</source>
-        <translation>QtiPlot - Pas de correspondance</translation>
+        <translation type="obsolete">QtiPlot - Pas de correspondance</translation>
     </message>
     <message>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
-        <translation>Désolé, &apos;%1&apos; introuvable</translation>
+        <translation type="obsolete">Désolé, &apos;%1&apos; introuvable</translation>
     </message>
     <message>
         <source>Cannot move an object to itself!</source>
-        <translation>Impossible de déplacer un objet vers lui-même !</translation>
+        <translation type="obsolete">Impossible de déplacer un objet vers lui-même !</translation>
     </message>
     <message>
         <source>Cannot move a parent folder into a child folder!</source>
-        <translation>Ne peux pas déplacer un dossier père vers un dossier fils !</translation>
+        <translation type="obsolete">Ne peux pas déplacer un dossier père vers un dossier fils !</translation>
     </message>
     <message>
         <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
-        <translation>Le dossier de destination contient déjà un dossier &apos;%1&apos; !</translation>
+        <translation type="obsolete">Le dossier de destination contient déjà un dossier &apos;%1&apos; !</translation>
     </message>
     <message>
         <source>Rows will be deleted from the table!</source>
-        <translation>Les rangées seront effacées de la table !</translation>
+        <translation type="obsolete">Les rangées seront effacées de la table !</translation>
     </message>
     <message>
         <source>Do you really want to continue?</source>
-        <translation>Voulez-vous vraiment continuer ?</translation>
+        <translation type="obsolete">Voulez-vous vraiment continuer ?</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="obsolete">Annuler</translation>
     </message>
     <message>
         <source>Columns will be deleted from the table!</source>
-        <translation>Les colonnes seront effacées de la table !</translation>
+        <translation type="obsolete">Les colonnes seront effacées de la table !</translation>
     </message>
     <message>
         <source>Origin project</source>
-        <translation>Projet Origin</translation>
+        <translation type="obsolete">Projet Origin</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a QtiPlot or Origin project file!</source>
-        <translation>Le fichier &lt;b&gt;%1&lt;/b&gt; n&apos;est pas un fichier QtiPlot ou un projet Origin !</translation>
+        <translation type="obsolete">Le fichier &lt;b&gt;%1&lt;/b&gt; n&apos;est pas un fichier QtiPlot ou un projet Origin !</translation>
     </message>
     <message>
         <source>Skipped Moving Folder</source>
-        <translation>Dossier inchangé</translation>
+        <translation type="obsolete">Dossier inchangé</translation>
     </message>
     <message>
         <source>QtiPlot - HTTP Get Version File</source>
-        <translation>QtiPlot - Recherche de mise à jour par le WEB</translation>
+        <translation type="obsolete">QtiPlot - Recherche de mise à jour par le WEB</translation>
     </message>
     <message>
         <source>Cannot write file %1
 %2.</source>
-        <translation>Ne peut pas écire le fichier %1
+        <translation type="obsolete">Ne peut pas écire le fichier %1
 %2.</translation>
     </message>
     <message>
         <source>Error while fetching version file with HTTP: %1.</source>
-        <translation>Erreur lors de la recherche de la version du fichier par le WEB : %1.</translation>
+        <translation type="obsolete">Erreur lors de la recherche de la version du fichier par le WEB : %1.</translation>
     </message>
     <message>
         <source>QtiPlot - Updates Available</source>
-        <translation>QtiPlot - Mises à jour disponibles</translation>
+        <translation type="obsolete">QtiPlot - Mises à jour disponibles</translation>
     </message>
     <message>
         <source>There is a newer version of QtiPlot (%1) available for download. Would you like to download it?</source>
-        <translation>Une nouvelle version de QtiPlot (%1) est disponible. Voulez-vous la télécharger ?</translation>
+        <translation type="obsolete">Une nouvelle version de QtiPlot (%1) est disponible. Voulez-vous la télécharger ?</translation>
     </message>
     <message>
         <source>QtiPlot - No Updates Available</source>
-        <translation>QtiPlot - Aucune mise à jour disponible</translation>
+        <translation type="obsolete">QtiPlot - Aucune mise à jour disponible</translation>
     </message>
     <message>
         <source>No updates available. Your current version %1 is the last version available!</source>
-        <translation>Aucune mise à jour disponible. Votre version %1 est la dernière disponible !</translation>
+        <translation type="obsolete">Aucune mise à jour disponible. Votre version %1 est la dernière disponible !</translation>
     </message>
     <message>
         <source>Qtiplot - Reading file...</source>
-        <translation>Qtiplot - Lecture du fichier...</translation>
+        <translation type="obsolete">Qtiplot - Lecture du fichier...</translation>
     </message>
 </context>
 <context>
@@ -565,7 +565,7 @@ Voulez-vous l&apos;écraser ?</translation>
     </message>
     <message>
         <source>&lt;h4&gt;There are no matrixes available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;Il n&apos;y a pas de matrices disponibles dans ce projet.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Veuillez créer une matrice et réessayer !&lt;/h4&gt;</translation>
+        <translation type="obsolete">&lt;h4&gt;Il n&apos;y a pas de matrices disponibles dans ce projet.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Veuillez créer une matrice et réessayer !&lt;/h4&gt;</translation>
     </message>
     <message>
         <source>QtiPlot - Choose matrix to plot</source>
@@ -633,7 +633,7 @@ Voulez-vous l&apos;écraser ?</translation>
     </message>
     <message>
         <source>QtiPlot - File Save Error</source>
-        <translation type="obsolete">QtiPlot - Erreur lors de la sauvegarde du fichier</translation>
+        <translation type="unfinished">QtiPlot - Erreur lors de la sauvegarde du fichier</translation>
     </message>
     <message>
         <source>QtiPlot -- Overwrite File? </source>
@@ -1869,7 +1869,7 @@ Operation aborted!</source>
     </message>
     <message>
         <source>Set column &amp;values...</source>
-        <translation>Fixer les &amp;valeurs de la colonne...</translation>
+        <translation type="obsolete">Fixer les &amp;valeurs de la colonne...</translation>
     </message>
     <message>
         <source>Ro&amp;w Numbers</source>
@@ -1953,7 +1953,7 @@ Operation aborted!</source>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation type="obsolete">&amp;Renommer</translation>
+        <translation type="unfinished">&amp;Renommer</translation>
     </message>
     <message>
         <source>&amp;Properties...</source>
@@ -2009,7 +2009,7 @@ Operation aborted!</source>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="obsolete">Caché</translation>
+        <translation type="unfinished">Caché</translation>
     </message>
     <message>
         <source>Maximized</source>
@@ -2025,11 +2025,11 @@ Operation aborted!</source>
     </message>
     <message>
         <source>D&amp;epending Plots</source>
-        <translation>Graphes dép&amp;endants</translation>
+        <translation type="obsolete">Graphes dép&amp;endants</translation>
     </message>
     <message>
         <source>D&amp;epending 3D Plots</source>
-        <translation>Graphes 3D Dép&amp;endants</translation>
+        <translation type="obsolete">Graphes 3D Dép&amp;endants</translation>
     </message>
     <message>
         <source>D&amp;epends on</source>
@@ -2113,7 +2113,7 @@ Operation aborted!</source>
     </message>
     <message>
         <source>&amp;Plot 3D</source>
-        <translation>Graphes 3D</translation>
+        <translation type="obsolete">Graphes 3D</translation>
     </message>
     <message>
         <source>&amp;Matrix...</source>
@@ -2435,7 +2435,7 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>graph1</source>
-        <translation>graph1</translation>
+        <translation type="obsolete">graph1</translation>
     </message>
     <message>
         <source>table1</source>
@@ -2475,7 +2475,7 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>QtiPlot 2D Plot Template</source>
-        <translation>Modèle de Graphe 2D Qtiplot </translation>
+        <translation type="obsolete">Modèle de Graphe 2D Qtiplot </translation>
     </message>
     <message>
         <source>QtiPlot Table Template</source>
@@ -2747,7 +2747,7 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
-        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt; : Mauvaise option de langue !</translation>
+        <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt; : Mauvaise option de langue !</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a QtiPlot project file!</source>
@@ -2755,95 +2755,95 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>QtiPlot - File Backup Error</source>
-        <translation type="obsolete">QtiPlot - Erreur de sauvegarde automatique</translation>
+        <translation type="unfinished">QtiPlot - Erreur de sauvegarde automatique</translation>
     </message>
     <message>
         <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you run the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation type="obsolete">Impossible de faire une sauvagarde de &lt;b&gt;%1&lt;/b&gt; (vers %2).&lt;br&gt;Si vous ignorez ce message, vous prenez le risque de &lt;b&gt;prendre des données&lt;/b&gt;.</translation>
+        <translation type="unfinished">Impossible de faire une sauvagarde de &lt;b&gt;%1&lt;/b&gt; (vers %2).&lt;br&gt;Si vous ignorez ce message, vous prenez le risque de &lt;b&gt;prendre des données&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
-        <translation type="obsolete">Le fichier &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; est ouvert en lecture seule</translation>
+        <translation type="unfinished">Le fichier &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; est ouvert en lecture seule</translation>
     </message>
     <message>
         <source>&amp;Find...</source>
-        <translation type="obsolete">Chercher...</translation>
+        <translation type="unfinished">Chercher...</translation>
     </message>
     <message>
         <source>App&amp;end Project...</source>
-        <translation type="obsolete">Ajout&amp;er un projet...</translation>
+        <translation type="unfinished">Ajout&amp;er un projet...</translation>
     </message>
     <message>
         <source>Save &amp;As Project...</source>
-        <translation type="obsolete">S&amp;auvegarder comme projet...</translation>
+        <translation type="unfinished">S&amp;auvegarder comme projet...</translation>
     </message>
     <message>
         <source>Save Project &amp;As...</source>
-        <translation type="obsolete">E&amp;nregistrer le projet sous...</translation>
+        <translation type="unfinished">E&amp;nregistrer le projet sous...</translation>
     </message>
     <message>
         <source>&amp;Show All Windows</source>
-        <translation type="obsolete">Montrer toutes les fenêtres</translation>
+        <translation type="unfinished">Montrer toutes les fenêtres</translation>
     </message>
     <message>
         <source>&amp;Hide All Windows</source>
-        <translation type="obsolete">Cac&amp;her toutes les fenêtres</translation>
+        <translation type="unfinished">Cac&amp;her toutes les fenêtres</translation>
     </message>
     <message>
         <source>&amp;Delete Folder</source>
-        <translation type="obsolete">Supprimer le dossier</translation>
+        <translation type="unfinished">Supprimer le dossier</translation>
     </message>
     <message>
         <source>&amp;Windows in Active Folder</source>
-        <translation type="obsolete">Dans le dossier actif</translation>
+        <translation type="unfinished">Dans le dossier actif</translation>
     </message>
     <message>
         <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
-        <translation type="obsolete">Dans le dossier actif et les sous-dossiers</translation>
+        <translation type="unfinished">Dans le dossier actif et les sous-dossiers</translation>
     </message>
     <message>
         <source>&amp;View Windows</source>
-        <translation type="obsolete">Afficher les fenêtres</translation>
+        <translation type="unfinished">Afficher les fenêtres</translation>
     </message>
     <message>
         <source>Project</source>
-        <translation type="obsolete">Projet</translation>
+        <translation type="unfinished">Projet</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="obsolete">Chemin</translation>
+        <translation type="unfinished">Chemin</translation>
     </message>
     <message>
         <source>Contents</source>
-        <translation type="obsolete">Contenu</translation>
+        <translation type="unfinished">Contenu</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="obsolete">Fenêtres</translation>
+        <translation type="unfinished">Fenêtres</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation type="obsolete">Dossiers</translation>
+        <translation type="unfinished">Dossiers</translation>
     </message>
     <message>
         <source>Modified</source>
-        <translation type="obsolete">Modifié</translation>
+        <translation type="unfinished">Modifié</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="obsolete">Propriétés</translation>
+        <translation type="unfinished">Propriétés</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="obsolete">Nouveau Dossier</translation>
+        <translation type="unfinished">Nouveau Dossier</translation>
     </message>
     <message>
         <source>QtiPlot - Delete folder?</source>
-        <translation type="obsolete">QtiPlot - Supprimer le dossier ?</translation>
+        <translation type="unfinished">QtiPlot - Supprimer le dossier ?</translation>
     </message>
     <message>
         <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
-        <translation type="obsolete">Supprimer le dossier &apos;%1&apos; et toutes les fenêtres qu&apos;il contient ?</translation>
+        <translation type="unfinished">Supprimer le dossier &apos;%1&apos; et toutes les fenêtres qu&apos;il contient ?</translation>
     </message>
     <message>
         <source>Note</source>
@@ -2855,27 +2855,27 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="obsolete">Etat</translation>
+        <translation type="unfinished">Etat</translation>
     </message>
     <message>
         <source>QtiPlot - No match found</source>
-        <translation type="obsolete">QtiPlot - Pas de correspondance</translation>
+        <translation type="unfinished">QtiPlot - Pas de correspondance</translation>
     </message>
     <message>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
-        <translation type="obsolete">Désolé, &apos;%1&apos; introuvable</translation>
+        <translation type="unfinished">Désolé, &apos;%1&apos; introuvable</translation>
     </message>
     <message>
         <source>Cannot move an object to itself!</source>
-        <translation type="obsolete">Impossible de déplacer un objet vers lui-même !</translation>
+        <translation type="unfinished">Impossible de déplacer un objet vers lui-même !</translation>
     </message>
     <message>
         <source>Cannot move a parent folder into a child folder!</source>
-        <translation type="obsolete">Ne peux pas déplacer un dossier père vers un dossier fils !</translation>
+        <translation type="unfinished">Ne peux pas déplacer un dossier père vers un dossier fils !</translation>
     </message>
     <message>
         <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
-        <translation type="obsolete">Le dossier de destination contient déjà un dossier nomé &apos;%1&apos;. Le dossier n&apos;as pas été déplacé!</translation>
+        <translation type="unfinished">Le dossier de destination contient déjà un dossier nomé &apos;%1&apos;. Le dossier n&apos;as pas été déplacé!</translation>
     </message>
     <message>
         <source>QtiPlot - Skipped Moving Folder</source>
@@ -2883,7 +2883,7 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>Skipped Moving Folder</source>
-        <translation type="obsolete">Dossier inchangé!</translation>
+        <translation type="unfinished">Dossier inchangé!</translation>
     </message>
     <message>
         <source>Key_Delete</source>
@@ -3065,6 +3065,231 @@ Etes vous sûr de vouloir continuer ?</translation>
         <source>Draw arrow</source>
         <translation>Désiner une flèche</translation>
     </message>
+    <message>
+        <source>Graph</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Python Script Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;cripting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h4&gt;There are no matrices available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Renamed Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The file &quot;%1&quot; was created using &quot;%2&quot; as scripting language.
+
+Initializing support for this language FAILED; I&apos;m using &quot;%3&quot; instead.
+Various parts of this file may not be displayed as expected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Scripting Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scripting language &quot;%1&quot; failed to initialize.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get existing directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a directory to export the graphs to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Python Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Notes As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot 2D Graph Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit Function...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Plot details...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D&amp;epending Graphs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D&amp;epending 3D Graphs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Graph 3D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the location of the QtiPlot help folder!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+F4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Alt+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Return</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Go to Row...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Alt+G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scripting &amp;language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Restart scripting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xecute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+J</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Execute &amp;All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+J</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Evaluate Expression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Python Script Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F3</source>
+        <translation type="unfinished">F3</translation>
+    </message>
+    <message>
+        <source>Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot is open-source software and its development required hundreds of hours of work.&lt;br&gt;&lt;br&gt;<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   If you like it, you&apos;re using it in your work and you would like to see it <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   constantly improved,&lt;br&gt; please support its author by making a donation.&lt;br&gt;&lt;br&gt; <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   Would you like to make a donation for QtiPlot now?&lt;/b&gt;&lt;/font&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please support QtiPlot!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes, I&apos;d love to!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ask me again later!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No, stop bothering me!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Graph 3D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - HTTP Get Version File</source>
+        <translation type="unfinished">QtiPlot - Recherche de mise à jour par le WEB</translation>
+    </message>
+    <message>
+        <source>Cannot write file %1
+%2.</source>
+        <translation type="unfinished">Ne peut pas écire le fichier %1
+%2.</translation>
+    </message>
+    <message>
+        <source>Error while fetching version file with HTTP: %1.</source>
+        <translation type="unfinished">Erreur lors de la recherche de la version du fichier par le WEB : %1.</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Updates Available</source>
+        <translation type="unfinished">QtiPlot - Mises à jour disponibles</translation>
+    </message>
+    <message>
+        <source>There is a newer version of QtiPlot (%1) available for download. Would you like to download it?</source>
+        <translation type="unfinished">Une nouvelle version de QtiPlot (%1) est disponible. Voulez-vous la télécharger ?</translation>
+    </message>
+    <message>
+        <source>QtiPlot - No Updates Available</source>
+        <translation type="unfinished">QtiPlot - Aucune mise à jour disponible</translation>
+    </message>
+    <message>
+        <source>No updates available. Your current version %1 is the last version available!</source>
+        <translation type="unfinished">Aucune mise à jour disponible. Votre version %1 est la dernière disponible !</translation>
+    </message>
+    <message>
+        <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Enter row number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Row</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CanvasPicker</name>
@@ -3138,6 +3363,17 @@ Etes vous sûr de vouloir continuer ?</translation>
     <message>
         <source>dark gray</source>
         <translation>gris foncé</translation>
+    </message>
+</context>
+<context>
+    <name>ExponentialFit</name>
+    <message>
+        <source>Exponential growth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exponential decay</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3220,6 +3456,137 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
 </context>
 <context>
+    <name>Fit</name>
+    <message>
+        <source>QtiPlot - Fit Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No curve assigned to the fitter! Please assign a curve first!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a valid curve name!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plot</source>
+        <translation type="unfinished">Graphe</translation>
+    </message>
+    <message>
+        <source>fit of dataset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>using function</source>
+        <translation type="unfinished">utilisant la fonction</translation>
+    </message>
+    <message>
+        <source>Weighting Method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No weighting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrumental</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>using error bars dataset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Statistical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arbitrary Dataset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nelder-Mead Simplex</source>
+        <translation type="unfinished">Simplex Nelder-Mead</translation>
+    </message>
+    <message>
+        <source>Unscaled Levenberg-Marquardt</source>
+        <translation type="unfinished">Levenberg-Marquardt</translation>
+    </message>
+    <message>
+        <source>Scaled Levenberg-Marquardt</source>
+        <translation type="unfinished">Levenberg-Marquardt Normalisé</translation>
+    </message>
+    <message>
+        <source> algorithm with tolerance = </source>
+        <translation type="unfinished"> algorithme avec une tolérence de </translation>
+    </message>
+    <message>
+        <source>From x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>R^2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Iterations</source>
+        <translation type="unfinished">Nombre d&apos;itérations</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">Etat</translation>
+    </message>
+    <message>
+        <source>Dataset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The curve %1 has no associated Y error bars. You cannot use instrumental weighting method.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameter</source>
+        <translation type="unfinished">Paramètre</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valeur</translation>
+    </message>
+    <message>
+        <source>You didn&apos;t specify a data set for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are no parameters specified for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must specify a valid fit function first. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> of </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Folder</name>
     <message>
         <source>kB</source>
@@ -3228,6 +3595,163 @@ Etes vous sûr de vouloir continuer ?</translation>
     <message>
         <source>bytes</source>
         <translation>octects</translation>
+    </message>
+</context>
+<context>
+    <name>FunctionDialog</name>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear list</source>
+        <translation type="unfinished">Effacer la liste</translation>
+    </message>
+    <message>
+        <source>Clear Function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Add function curve</source>
+        <translation type="unfinished">Qtiplot - Ajouter une courbe de fonction</translation>
+    </message>
+    <message>
+        <source>Curve type </source>
+        <translation type="unfinished">Type de courbe </translation>
+    </message>
+    <message>
+        <source>f(x)= </source>
+        <translation type="unfinished">f(x) = </translation>
+    </message>
+    <message>
+        <source>From x= </source>
+        <translation type="unfinished">De x =  </translation>
+    </message>
+    <message>
+        <source>To x= </source>
+        <translation type="unfinished">à x = </translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameter</source>
+        <translation type="unfinished">Paramètre</translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation type="unfinished">à</translation>
+    </message>
+    <message>
+        <source>y = </source>
+        <translation type="unfinished">y = </translation>
+    </message>
+    <message>
+        <source>x = </source>
+        <translation type="unfinished">x = </translation>
+    </message>
+    <message>
+        <source>From</source>
+        <translation type="unfinished">De</translation>
+    </message>
+    <message>
+        <source>R =</source>
+        <translation type="unfinished">R = </translation>
+    </message>
+    <message>
+        <source>Theta =</source>
+        <translation type="unfinished">Theta = </translation>
+    </message>
+    <message>
+        <source>Function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parametric plot</source>
+        <translation type="unfinished">Courbe paramétrée</translation>
+    </message>
+    <message>
+        <source>Polar plot</source>
+        <translation type="unfinished">Courbe polaire</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Fermer</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Start limit error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - End limit error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter x limits that satisfy: from &lt; end!</source>
+        <translation type="unfinished">Donnez des limites en abscisses dans l&apos;ordre croissant !</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input function error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter parameter limits that satisfy: from &lt; end!</source>
+        <translation type="unfinished">Donnez des valeurs du paramètre dans l&apos;ordre croissant !</translation>
+    </message>
+</context>
+<context>
+    <name>GaussAmpFit</name>
+    <message>
+        <source>(offset)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(height)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(center)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(width)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GaussAmp</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GaussFit</name>
+    <message>
+        <source>Gauss</source>
+        <translation type="unfinished">Gauss</translation>
+    </message>
+    <message>
+        <source>(area)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(center)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(width)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(offset)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3274,7 +3798,7 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>You need at least %1 points to perform the fit! Operation aborted!</source>
-        <translation>Il faut au moins %1 points pour pouvoir faire cet ajustement ! Opération annulée !</translation>
+        <translation type="obsolete">Il faut au moins %1 points pour pouvoir faire cet ajustement ! Opération annulée !</translation>
     </message>
     <message>
         <source>You need at least %1 points to perform this operation! Operation aborted!</source>
@@ -3318,21 +3842,21 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>QtiPlot - File not found</source>
-        <translation>QtiPlot - Fichier non trouvé</translation>
+        <translation type="obsolete">QtiPlot - Fichier non trouvé</translation>
     </message>
     <message>
         <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
-        <translation>Le ficher d&apos;extension : &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt; n&apos;existe pas. Opération annulée !</translation>
+        <translation type="obsolete">Le ficher d&apos;extension : &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt; n&apos;existe pas. Opération annulée !</translation>
     </message>
     <message>
         <source>Error when loading plugin!
 </source>
-        <translation>Erreur lors du chargement de l&apos;extension !
+        <translation type="obsolete">Erreur lors du chargement de l&apos;extension !
 </translation>
     </message>
     <message>
         <source>Error when loading plugin!</source>
-        <translation>Erreur lors du chargement de l&apos;extension !</translation>
+        <translation type="obsolete">Erreur lors du chargement de l&apos;extension !</translation>
     </message>
     <message>
         <source>Frequency</source>
@@ -3428,11 +3952,11 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>Order</source>
-        <translation>Ordre</translation>
+        <translation type="obsolete">Ordre</translation>
     </message>
     <message>
         <source>Polynomial fit of </source>
-        <translation>Ajustement polynomial de </translation>
+        <translation type="obsolete">Ajustement polynomial de </translation>
     </message>
     <message>
         <source>There are no curves available on this plot!</source>
@@ -3472,107 +3996,107 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>y0 (offset)</source>
-        <translation>y0 (décalage)</translation>
+        <translation type="obsolete">y0 (décalage)</translation>
     </message>
     <message>
         <source>Lorentz</source>
-        <translation>Lorentz</translation>
+        <translation type="obsolete">Lorentz</translation>
     </message>
     <message>
         <source>Gauss</source>
-        <translation>Gauss</translation>
+        <translation type="obsolete">Gauss</translation>
     </message>
     <message>
         <source>multi-peak</source>
-        <translation>multi-pic</translation>
+        <translation type="obsolete">multi-pic</translation>
     </message>
     <message>
         <source>fit of</source>
-        <translation>Ajustement de</translation>
+        <translation type="obsolete">Ajustement de</translation>
     </message>
     <message>
         <source>Non-linear fit of </source>
-        <translation>Ajustement non-linéaire de </translation>
+        <translation type="obsolete">Ajustement non-linéaire de </translation>
     </message>
     <message>
         <source>Non-linear</source>
-        <translation>Non-linéaire</translation>
+        <translation type="obsolete">Non-linéaire</translation>
     </message>
     <message>
         <source>Exponential decay fit of </source>
-        <translation>Ajustement décroissance exponentielle de </translation>
+        <translation type="obsolete">Ajustement décroissance exponentielle de </translation>
     </message>
     <message>
         <source>ExpDecay2 fit of </source>
-        <translation>Ajustement décroissance exponentielle 2 de </translation>
+        <translation type="obsolete">Ajustement décroissance exponentielle 2 de </translation>
     </message>
     <message>
         <source>ExpDecay3 fit of </source>
-        <translation>Ajustement décroissance exponentielle 3 de </translation>
+        <translation type="obsolete">Ajustement décroissance exponentielle 3 de </translation>
     </message>
     <message>
         <source>Exponential growth fit of </source>
-        <translation>Ajustement croissance exponentielle de </translation>
+        <translation type="obsolete">Ajustement croissance exponentielle de </translation>
     </message>
     <message>
         <source>Gauss fit of </source>
-        <translation>Ajustement Gaussien de </translation>
+        <translation type="obsolete">Ajustement Gaussien de </translation>
     </message>
     <message>
         <source>Lorentz fit of </source>
-        <translation>Ajustement Lorentzien de </translation>
+        <translation type="obsolete">Ajustement Lorentzien de </translation>
     </message>
     <message>
         <source>using function</source>
-        <translation>utilisant la fonction</translation>
+        <translation type="obsolete">utilisant la fonction</translation>
     </message>
     <message>
         <source>Unscaled Levenberg-Marquardt</source>
-        <translation>Levenberg-Marquardt</translation>
+        <translation type="obsolete">Levenberg-Marquardt</translation>
     </message>
     <message>
         <source>Scaled Levenberg-Marquardt</source>
-        <translation>Levenberg-Marquardt Normalisé</translation>
+        <translation type="obsolete">Levenberg-Marquardt Normalisé</translation>
     </message>
     <message>
         <source> algorithm with tolerance = </source>
-        <translation> algorithme avec une tolérence de </translation>
+        <translation type="obsolete"> algorithme avec une tolérence de </translation>
     </message>
     <message>
         <source>From x=</source>
-        <translation>De x = </translation>
+        <translation type="obsolete">De x = </translation>
     </message>
     <message>
         <source> to x=</source>
-        <translation> à x = </translation>
+        <translation type="obsolete"> à x = </translation>
     </message>
     <message>
         <source>Iterations = </source>
-        <translation>Nombre d&apos;itérations</translation>
+        <translation type="obsolete">Nombre d&apos;itérations</translation>
     </message>
     <message>
         <source>Peak</source>
-        <translation>Pic</translation>
+        <translation type="obsolete">Pic</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Hauteur</translation>
+        <translation type="obsolete">Hauteur</translation>
     </message>
     <message>
         <source>Area</source>
-        <translation> Aire</translation>
+        <translation type="obsolete"> Aire</translation>
     </message>
     <message>
         <source>Center</source>
-        <translation>Centre</translation>
+        <translation type="obsolete">Centre</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Largeur</translation>
+        <translation type="obsolete">Largeur</translation>
     </message>
     <message>
         <source>Nelder-Mead Simplex</source>
-        <translation>Simplex Nelder-Mead</translation>
+        <translation type="obsolete">Simplex Nelder-Mead</translation>
     </message>
     <message>
         <source>Savitzky-Golay smoothing of </source>
@@ -3580,27 +4104,27 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>A1 (init value)</source>
-        <translation>A1 (Valeur initiale)</translation>
+        <translation type="obsolete">A1 (Valeur initiale)</translation>
     </message>
     <message>
         <source>A2 (final value)</source>
-        <translation>A2 (valeur finale)</translation>
+        <translation type="obsolete">A2 (valeur finale)</translation>
     </message>
     <message>
         <source>x0 (center)</source>
-        <translation>x0 (centre)</translation>
+        <translation type="obsolete">x0 (centre)</translation>
     </message>
     <message>
         <source>dx (time constant)</source>
-        <translation>dx (constante de temps)</translation>
+        <translation type="obsolete">dx (constante de temps)</translation>
     </message>
     <message>
         <source>Boltzmann (Sigmoidal)</source>
-        <translation>Boltzmann (Sigmoïdal)</translation>
+        <translation type="obsolete">Boltzmann (Sigmoïdal)</translation>
     </message>
     <message>
         <source>Boltzmann (Sigmoidal) fit of </source>
-        <translation>Ajustement Boltzmann (Sigmoïdal) de </translation>
+        <translation type="obsolete">Ajustement Boltzmann (Sigmoïdal) de </translation>
     </message>
     <message>
         <source>Derivative of</source>
@@ -3668,11 +4192,31 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <source>Linear regression of </source>
-        <translation>Regression linéaire de </translation>
+        <translation type="obsolete">Regression linéaire de </translation>
     </message>
     <message>
         <source>QtiPlot</source>
-        <translation>QtiPlot</translation>
+        <translation type="obsolete">QtiPlot</translation>
+    </message>
+    <message>
+        <source>There is no curve called &apos;%1&apos; on this layer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no curve with index %1 on this layer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valid indexes must have values between 0 and %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The curve %1 doesn&apos;t exist! Operation aborted!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3773,6 +4317,40 @@ Etes vous sûr de vouloir continuer ?</translation>
     </message>
 </context>
 <context>
+    <name>LinearFit</name>
+    <message>
+        <source>Linear Regression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Linear</source>
+        <translation type="unfinished">linéaire</translation>
+    </message>
+</context>
+<context>
+    <name>LorentzFit</name>
+    <message>
+        <source>Lorentz</source>
+        <translation type="unfinished">Lorentz</translation>
+    </message>
+    <message>
+        <source>(area)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(center)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(width)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(offset)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Matrix</name>
     <message>
         <source>QtiPlot - Input error</source>
@@ -3801,7 +4379,7 @@ Etes vous sûr de vouloir continuer ?</translation>
     <message>
         <source>The text in the clipboard is larger than your current selection!<byte value="x9"/>        
 Do you want to insert cells?</source>
-        <translation type="obsolete">Le texte présent dans le presse-papier est plus grand que la sélection !(tab)(sp)(sp)(sp)(sp)(sp)(sp)(sp)(sp)(new line)
+        <translation type="unfinished">Le texte présent dans le presse-papier est plus grand que la sélection !(tab)(sp)(sp)(sp)(sp)(sp)(sp)(sp)(sp)(new line)
 Voulez-vous insérer des cellules?</translation>
     </message>
     <message>
@@ -3869,10 +4447,100 @@ Voulez-vous insérer des cellules?</translation>
     </message>
 </context>
 <context>
+    <name>MultiPeakFit</name>
+    <message>
+        <source>MultiPeak</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gauss</source>
+        <translation type="unfinished">Gauss</translation>
+    </message>
+    <message>
+        <source>Lorentz</source>
+        <translation type="unfinished">Lorentz</translation>
+    </message>
+    <message>
+        <source>multi-peak</source>
+        <translation type="unfinished">multi-pic</translation>
+    </message>
+    <message>
+        <source>Peak</source>
+        <translation type="unfinished">Pic</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Fit Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not allocate enough memory for the fit curves!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fit of</source>
+        <translation type="unfinished">Ajustement de</translation>
+    </message>
+    <message>
+        <source>peak</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Area</source>
+        <translation type="unfinished"> Aire</translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Hauteur</translation>
+    </message>
+</context>
+<context>
     <name>MyDialog</name>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>NonLinearFit</name>
+    <message>
+        <source>NonLinear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Non-linear</source>
+        <translation type="unfinished">Non-linéaire</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input function error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a valid non-empty expression! Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Fit Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are no parameters specified for this fit operation. Please define a list of parameters first!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must provide a list containing at least 2 parameters for this type of fit. Operation aborted!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3946,6 +4614,44 @@ Voulez-vous insérer des cellules?</translation>
     </message>
 </context>
 <context>
+    <name>PluginFit</name>
+    <message>
+        <source>Plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - File not found</source>
+        <translation type="unfinished">QtiPlot - Fichier non trouvé</translation>
+    </message>
+    <message>
+        <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
+        <translation type="unfinished">Le ficher d&apos;extension : &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt; n&apos;existe pas. Opération annulée !</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Plugin Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The plugin does not implement a %1 method necessary for simplex fitting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The plugin does not implement a %1 method necessary for Levenberg-Marquardt fitting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PolynomialFit</name>
+    <message>
+        <source>Poly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Polynomial</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ScriptEdit</name>
     <message>
         <source>Auto&amp;exec</source>
@@ -3954,6 +4660,188 @@ Voulez-vous insérer des cellules?</translation>
     <message>
         <source>&amp;Functions</source>
         <translation>&amp;Fonctions</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Texte</translation>
+    </message>
+    <message>
+        <source>Python Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Import Text From File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error Opening File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open file &quot;%1&quot; for reading.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Text to File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot -- Overwrite File? </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
+Do you want to overwrite it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation type="unfinished">&amp;Non</translation>
+    </message>
+    <message>
+        <source>QtiPlot - File Save Error</source>
+        <translation type="unfinished">QtiPlot - Erreur lors de la sauvegarde du fichier</translation>
+    </message>
+    <message>
+        <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
+        <translation type="unfinished">Impossible d&apos;enregistrer le fichier &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;. Vérifiez que vous avez les droits requis pour écrire à cet emplacement !</translation>
+    </message>
+</context>
+<context>
+    <name>ScriptWindow</name>
+    <message>
+        <source>QtiPlot - Python Script Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Fichier</translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished">&amp;Edition</translation>
+    </message>
+    <message>
+        <source>E&amp;xecute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+N</source>
+        <translation type="unfinished">Ctrl+N</translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished">Ctrl+O</translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished">Ctrl+S</translation>
+    </message>
+    <message>
+        <source>Ctrl+P</source>
+        <translation type="unfinished">Ctrl+P</translation>
+    </message>
+    <message>
+        <source>Ctrl+Z</source>
+        <translation type="unfinished">Ctrl+Z</translation>
+    </message>
+    <message>
+        <source>Ctrl+Y</source>
+        <translation type="unfinished">Ctrl+Y</translation>
+    </message>
+    <message>
+        <source>Ctrl+x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+C</source>
+        <translation type="unfinished">Ctrl+C</translation>
+    </message>
+    <message>
+        <source>Ctrl+V</source>
+        <translation type="unfinished">Ctrl+V</translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTRL+J</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTRL+SHIFT+J</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTRL+Return</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - File Save Error</source>
+        <translation type="unfinished">QtiPlot - Erreur lors de la sauvegarde du fichier</translation>
+    </message>
+    <message>
+        <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
+        <translation type="unfinished">Impossible d&apos;enregistrer le fichier &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;. Vérifiez que vous avez les droits requis pour écrire à cet emplacement !</translation>
+    </message>
+</context>
+<context>
+    <name>ScriptingLangDialog</name>
+    <message>
+        <source>QtiPlot - Select scripting language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Scripting Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scripting language &quot;%1&quot; failed to initialize.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SigmoidalFit</name>
+    <message>
+        <source>(init value)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(final value)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(center)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(time constant)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boltzmann (Sigmoidal)</source>
+        <translation type="unfinished">Boltzmann (Sigmoïdal)</translation>
     </message>
 </context>
 <context>
@@ -4002,6 +4890,26 @@ Voulez-vous insérer des cellules?</translation>
         <source>Diagonal Cross</source>
         <translation>Croix 2</translation>
     </message>
+    <message>
+        <source>Horizontal Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Star 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Star 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hexagon</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Table</name>
@@ -4031,61 +4939,61 @@ Voulez-vous insérer des cellules?</translation>
     </message>
     <message>
         <source>QtiPlot - ASCII Export Error</source>
-        <translation type="obsolete">Qtiplot - Erreur lors de l&apos;exportation en ASCII</translation>
+        <translation type="unfinished">Qtiplot - Erreur lors de l&apos;exportation en ASCII</translation>
     </message>
     <message>
         <source>QtiPlot</source>
-        <translation type="obsolete">Qtiplot</translation>
+        <translation type="unfinished">Qtiplot</translation>
     </message>
     <message>
         <source>Please select two columns for this operation!</source>
-        <translation type="obsolete">Sélectionnez 2 colonnes pour cette opération !</translation>
+        <translation type="unfinished">Sélectionnez 2 colonnes pour cette opération !</translation>
     </message>
     <message>
         <source>Could not allocate memory, operation aborted!</source>
-        <translation type="obsolete">Allocation mémoire impossible, Opération annulée !</translation>
+        <translation type="unfinished">Allocation mémoire impossible, Opération annulée !</translation>
     </message>
     <message>
         <source>Error in GSL forward FFT operation!</source>
-        <translation type="obsolete">Erreur de la librarie GSL sur la FFT !</translation>
+        <translation type="unfinished">Erreur de la librarie GSL sur la FFT !</translation>
     </message>
     <message>
         <source>Please select two columns for this operation:
  the first represents the signal and the second the response function!</source>
-        <translation type="obsolete">Sélectionnez 2 colonnes pour cette opération :
+        <translation type="unfinished">Sélectionnez 2 colonnes pour cette opération :
 La première représente le signal et la seconde la réponse de la fonction !</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
-        <translation type="obsolete">Les données de la réponse &apos;%1&apos; doivent être de moitié inférieure à la taille des données du signal &apos;%2&apos; !</translation>
+        <translation type="unfinished">Les données de la réponse &apos;%1&apos; doivent être de moitié inférieure à la taille des données du signal &apos;%2&apos; !</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
-        <translation type="obsolete">Les données de la réponse &apos;%1&apos; doivent contenir un nombre de points impaires !</translation>
+        <translation type="unfinished">Les données de la réponse &apos;%1&apos; doivent contenir un nombre de points impaires !</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="obsolete">Fréquence</translation>
+        <translation type="unfinished">Fréquence</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="obsolete">Temps</translation>
+        <translation type="unfinished">Temps</translation>
     </message>
     <message>
         <source>Real</source>
-        <translation type="obsolete">Réel</translation>
+        <translation type="unfinished">Réel</translation>
     </message>
     <message>
         <source>Imaginary</source>
-        <translation type="obsolete">Imaginaire</translation>
+        <translation type="unfinished">Imaginaire</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation type="obsolete">Amplitude</translation>
+        <translation type="unfinished">Amplitude</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="obsolete">Angle</translation>
+        <translation type="unfinished">Angle</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -4101,43 +5009,56 @@ La première représente le signal et la seconde la réponse de la fonction !</t
     </message>
     <message>
         <source>Please select a Y column to plot!</source>
-        <translation type="obsolete">Sélectionnez une colonne Y à tracer !</translation>
+        <translation type="unfinished">Sélectionnez une colonne Y à tracer !</translation>
     </message>
     <message>
         <source>Please set a default X column for this table, first!</source>
-        <translation type="obsolete">Sélectionnez d&apos;abord une colonne X par défaut pour cette table !</translation>
+        <translation type="unfinished">Sélectionnez d&apos;abord une colonne X par défaut pour cette table !</translation>
     </message>
     <message>
         <source>Please select four columns for this operation!</source>
-        <translation type="obsolete">Sélectionnez quatre colonnes pour cette opération !</translation>
+        <translation type="unfinished">Sélectionnez quatre colonnes pour cette opération !</translation>
     </message>
     <message>
         <source>You need at least two columns for this operation!</source>
-        <translation type="obsolete">Vous avez besoin d&apos;au moins deux colonnes pour cette opération !</translation>
+        <translation type="unfinished">Vous avez besoin d&apos;au moins deux colonnes pour cette opération !</translation>
     </message>
     <message>
         <source>Please select a Z column for this operation!</source>
-        <translation type="obsolete">Sélectionnez une colonne Z pour cette opération !</translation>
+        <translation type="unfinished">Sélectionnez une colonne Z pour cette opération !</translation>
     </message>
     <message>
         <source>You need to define a X column first!</source>
-        <translation type="obsolete">Vous devez d&apos;abord définir une colonne X !</translation>
+        <translation type="unfinished">Vous devez d&apos;abord définir une colonne X !</translation>
     </message>
     <message>
         <source>You need to define a Y column first!</source>
-        <translation type="obsolete">Vous devez d&apos;abord définir une colonne Y !</translation>
+        <translation type="unfinished">Vous devez d&apos;abord définir une colonne Y !</translation>
     </message>
     <message>
         <source>Rows will be deleted from the table!</source>
-        <translation type="obsolete">Les rangées seront effacées de cette table !</translation>
+        <translation type="unfinished">Les rangées seront effacées de cette table !</translation>
     </message>
     <message>
         <source>Do you really want to continue?</source>
-        <translation type="obsolete">Voulez-vous vraiment continuer ?</translation>
+        <translation type="unfinished">Voulez-vous vraiment continuer ?</translation>
     </message>
     <message>
         <source>Columns will be deleted from the table!</source>
-        <translation type="obsolete">Les colonnes seront effacées de la table !</translation>
+        <translation type="unfinished">Les colonnes seront effacées de la table !</translation>
+    </message>
+    <message>
+        <source>The text in the clipboard is larger than your current selection!<byte value="x9"/>        
+Do you want to insert cells?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select a column to plot!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Qtiplot - Reading file...</source>
+        <translation type="unfinished">Qtiplot - Lecture du fichier...</translation>
     </message>
 </context>
 <context>
@@ -4257,6 +5178,20 @@ La première représente le signal et la seconde la réponse de la fonction !</t
     <message>
         <source>Set &amp;Default</source>
         <translation>&amp;Défault</translation>
+    </message>
+</context>
+<context>
+    <name>ThreeExpFit</name>
+    <message>
+        <source>Exponential decay</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TwoExpFit</name>
+    <message>
+        <source>Exponential decay</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5210,6 +6145,54 @@ La première représente le signal et la seconde la réponse de la fonction !</t
         <source>Check for new versions at startup</source>
         <translation>Vérifier les nouvelles versions au démarrage</translation>
     </message>
+    <message>
+        <source>Generated Fit Curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uniform X Function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Same X as Fitting Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display Peak Curves for Multi-peak Fits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peaks Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Significant Digits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Parameters to Result Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste Parameters to Plot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fitting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default scripting language</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>curvesDialog</name>
@@ -5444,7 +6427,7 @@ La première représente le signal et la seconde la réponse de la fonction !</t
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Annuler</translation>
+        <translation type="obsolete">&amp;Annuler</translation>
     </message>
     <message>
         <source>Exponential Fit of</source>
@@ -5469,6 +6452,10 @@ La première représente le signal et la seconde la réponse de la fonction !</t
     <message>
         <source>Color</source>
         <translation>Couleur</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5570,27 +6557,27 @@ La première représente le signal et la seconde la réponse de la fonction !</t
     <name>fDialog</name>
     <message>
         <source>QtiPlot - Start limit error</source>
-        <translation>QtiPlot - Erreur de la limite de départ</translation>
+        <translation type="obsolete">QtiPlot - Erreur de la limite de départ</translation>
     </message>
     <message>
         <source>QtiPlot - End limit error</source>
-        <translation>QtiPlot - Erreur de la limite d&apos;arrêt</translation>
+        <translation type="obsolete">QtiPlot - Erreur de la limite d&apos;arrêt</translation>
     </message>
     <message>
         <source>QtiPlot - Input error</source>
-        <translation>Qtiplot - Erreur lors de l&apos;entrée</translation>
+        <translation type="obsolete">Qtiplot - Erreur lors de l&apos;entrée</translation>
     </message>
     <message>
         <source>Please enter x limits that satisfy: from &lt; end!</source>
-        <translation>Donnez des limites en abscisses dans l&apos;ordre croissant !</translation>
+        <translation type="obsolete">Donnez des limites en abscisses dans l&apos;ordre croissant !</translation>
     </message>
     <message>
         <source>QtiPlot - Input function error</source>
-        <translation>Qtiplot - Erreur lors de l&apos;entrée de la fonction</translation>
+        <translation type="obsolete">Qtiplot - Erreur lors de l&apos;entrée de la fonction</translation>
     </message>
     <message>
         <source>Please enter parameter limits that satisfy: from &lt; end!</source>
-        <translation>Donnez des valeurs du paramètre dans l&apos;ordre croissant !</translation>
+        <translation type="obsolete">Donnez des valeurs du paramètre dans l&apos;ordre croissant !</translation>
     </message>
 </context>
 <context>
@@ -5763,7 +6750,7 @@ La première représente le signal et la seconde la réponse de la fonction !</t
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Annuler</translation>
+        <translation type="obsolete">&amp;Annuler</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -5975,6 +6962,134 @@ respectez l&apos;ordre des paramètres !</translation>
         <source>Add &amp;expression</source>
         <translation>Ajouter une expression</translation>
     </message>
+    <message>
+        <source>Weighting Method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No weighting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrumental</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Statistical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arbitrary Dataset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom &amp;Output &gt;&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Polynomial Order</source>
+        <translation type="unfinished">Ordre</translation>
+    </message>
+    <message>
+        <source>Generated Fit Curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uniform X Function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Same X as Fitting Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Significant Digits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters Table</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Covariance Matrix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CovMatrix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Parameters to Result Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste Parameters to Plot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;&lt; &amp;Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Apply</source>
+        <translation type="unfinished">&amp;Appliquer</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a valid name for the parameters table.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please perform a fit first and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a valid name for the covariance matrix.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gauss</source>
+        <translation type="unfinished">Gauss</translation>
+    </message>
+    <message>
+        <source>Peaks</source>
+        <translation type="unfinished">Pics</translation>
+    </message>
+    <message>
+        <source>Lorentz</source>
+        <translation type="unfinished">Lorentz</translation>
+    </message>
+    <message>
+        <source>Polynomial</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MultiPeak</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>functionDialogui</name>
@@ -5984,79 +7099,79 @@ respectez l&apos;ordre des paramètres !</translation>
     </message>
     <message>
         <source>QtiPlot - Add function curve</source>
-        <translation>Qtiplot - Ajouter une courbe de fonction</translation>
+        <translation type="obsolete">Qtiplot - Ajouter une courbe de fonction</translation>
     </message>
     <message>
         <source>Curve type </source>
-        <translation>Type de courbe </translation>
+        <translation type="obsolete">Type de courbe </translation>
     </message>
     <message>
         <source>f(x)= </source>
-        <translation>f(x) = </translation>
+        <translation type="obsolete">f(x) = </translation>
     </message>
     <message>
         <source>From x= </source>
-        <translation>De x =  </translation>
+        <translation type="obsolete">De x =  </translation>
     </message>
     <message>
         <source>To x= </source>
-        <translation>à x = </translation>
+        <translation type="obsolete">à x = </translation>
     </message>
     <message>
         <source>Points</source>
-        <translation>Nombre de points</translation>
+        <translation type="obsolete">Nombre de points</translation>
     </message>
     <message>
         <source>Clear list</source>
-        <translation>Effacer la liste</translation>
+        <translation type="obsolete">Effacer la liste</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation>Paramètre</translation>
+        <translation type="obsolete">Paramètre</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>à</translation>
+        <translation type="obsolete">à</translation>
     </message>
     <message>
         <source>y = </source>
-        <translation>y = </translation>
+        <translation type="obsolete">y = </translation>
     </message>
     <message>
         <source>x = </source>
-        <translation>x = </translation>
+        <translation type="obsolete">x = </translation>
     </message>
     <message>
         <source>From</source>
-        <translation>De</translation>
+        <translation type="obsolete">De</translation>
     </message>
     <message>
         <source>R =</source>
-        <translation>R = </translation>
+        <translation type="obsolete">R = </translation>
     </message>
     <message>
         <source>Theta =</source>
-        <translation>Theta = </translation>
+        <translation type="obsolete">Theta = </translation>
     </message>
     <message>
         <source>Function</source>
-        <translation>Fonction y = f(x)</translation>
+        <translation type="obsolete">Fonction y = f(x)</translation>
     </message>
     <message>
         <source>Parametric plot</source>
-        <translation>Courbe paramétrée</translation>
+        <translation type="obsolete">Courbe paramétrée</translation>
     </message>
     <message>
         <source>Polar plot</source>
-        <translation>Courbe polaire</translation>
+        <translation type="obsolete">Courbe polaire</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="obsolete">Annuler</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
 </context>
 <context>
@@ -6657,6 +7772,26 @@ respectez l&apos;ordre des paramètres !</translation>
     <message>
         <source>QtiPlot - Import options error</source>
         <translation>QtiPlot - Erreur d&apos;importation des données</translation>
+    </message>
+    <message>
+        <source>QtiPlot</source>
+        <translation type="unfinished">QtiPlot</translation>
+    </message>
+    <message>
+        <source>Do you want to save the modifications to the ASCII import options before closing?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Oui</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Non</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7547,6 +8682,10 @@ Les limites doivent être dans la gamme de x ; Si vous ne connaissez pas la vale
     <message>
         <source>Pie radius</source>
         <translation>Rayon du graphe à secteurs</translation>
+    </message>
+    <message>
+        <source>Canvas Color</source>
+        <translation type="unfinished">Couleur du cadre</translation>
     </message>
 </context>
 <context>

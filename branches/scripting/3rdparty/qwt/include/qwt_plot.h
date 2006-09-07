@@ -256,7 +256,7 @@ protected:
 
     virtual void drawCanvas(QPainter *);
     virtual void drawItems(QPainter *, const QRect &,
-        const QwtArray<QwtScaleMap> &,
+        const QwtScaleMap maps[axisCnt],
         const QwtPlotPrintFilter &) const;
 
     virtual void updateTabOrder();
@@ -272,7 +272,7 @@ protected:
     virtual void printScale(QPainter *, int axisId, int startDist, int endDist,
         int baseDist, const QRect &) const;
     virtual void printCanvas(QPainter *, const QRect &,
-        const QwtArray<QwtScaleMap> &, const QwtPlotPrintFilter &) const;
+        const QwtScaleMap maps[axisCnt], const QwtPlotPrintFilter &) const;
     virtual void printLegend(QPainter *, const QRect &) const;
 
 private:

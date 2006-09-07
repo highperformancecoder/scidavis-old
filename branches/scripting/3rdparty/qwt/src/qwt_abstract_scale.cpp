@@ -298,3 +298,8 @@ QwtScaleEngine *QwtAbstractScale::scaleEngine()
 void QwtAbstractScale::scaleChange()
 {
 }
+
+const QwtScaleMap &QwtAbstractScale::scaleMap() const
+{
+    return d_data->scaleDraw->scaleMap();
+}

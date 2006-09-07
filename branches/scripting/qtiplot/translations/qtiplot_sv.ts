@@ -319,7 +319,7 @@
     </message>
     <message>
         <source>&lt;h4&gt;There are no matrixes available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;Det finns inga matriser tillgängliga i detta projekt.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Skapa en matris och försök igen!&lt;/h4&gt;</translation>
+        <translation type="obsolete">&lt;h4&gt;Det finns inga matriser tillgängliga i detta projekt.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Skapa en matris och försök igen!&lt;/h4&gt;</translation>
     </message>
     <message>
         <source>Matrix</source>
@@ -343,7 +343,7 @@
     </message>
     <message>
         <source>graph1</source>
-        <translation>diagram1</translation>
+        <translation type="obsolete">diagram1</translation>
     </message>
     <message>
         <source>Please select a Y column to plot!</source>
@@ -561,7 +561,7 @@ Vill du skriva över den?</translation>
     </message>
     <message>
         <source>QtiPlot 2D Plot Template</source>
-        <translation>QtiPlot - 2D-diagramsmall</translation>
+        <translation type="obsolete">QtiPlot - 2D-diagramsmall</translation>
     </message>
     <message>
         <source>QtiPlot Table Template</source>
@@ -757,7 +757,7 @@ Vill du skriva över den?</translation>
     </message>
     <message>
         <source>Set column &amp;values...</source>
-        <translation>Sätt kolumn&amp;värden...</translation>
+        <translation type="obsolete">Sätt kolumn&amp;värden...</translation>
     </message>
     <message>
         <source>&amp;Fill column with</source>
@@ -1015,11 +1015,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>D&amp;epending Plots</source>
-        <translation>B&amp;eroende diagram</translation>
+        <translation type="obsolete">B&amp;eroende diagram</translation>
     </message>
     <message>
         <source>D&amp;epending 3D Plots</source>
-        <translation>B&amp;eroende 3D-diagram</translation>
+        <translation type="obsolete">B&amp;eroende 3D-diagram</translation>
     </message>
     <message>
         <source>D&amp;epends on</source>
@@ -1099,7 +1099,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Plot 3D</source>
-        <translation>&amp;Rita 3D</translation>
+        <translation type="obsolete">&amp;Rita 3D</translation>
     </message>
     <message>
         <source>&amp;Matrix...</source>
@@ -2409,7 +2409,7 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     </message>
     <message>
         <source>Plot 3D</source>
-        <translation>Rita 3D</translation>
+        <translation type="obsolete">Rita 3D</translation>
     </message>
     <message>
         <source>Status</source>
@@ -2472,6 +2472,177 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     <message>
         <source>English</source>
         <translation>Svenska</translation>
+    </message>
+    <message>
+        <source>Graph</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Python Script Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;cripting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h4&gt;There are no matrices available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Renamed Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The file &quot;%1&quot; was created using &quot;%2&quot; as scripting language.
+
+Initializing support for this language FAILED; I&apos;m using &quot;%3&quot; instead.
+Various parts of this file may not be displayed as expected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Scripting Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scripting language &quot;%1&quot; failed to initialize.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get existing directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a directory to export the graphs to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Python Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Notes As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot 2D Graph Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit Function...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Plot details...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D&amp;epending Graphs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D&amp;epending 3D Graphs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Graph 3D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the location of the QtiPlot help folder!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+F4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Alt+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Return</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Go to Row...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Alt+G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scripting &amp;language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Restart scripting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xecute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+J</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Execute &amp;All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+J</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Evaluate Expression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Python Script Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F3</source>
+        <translation type="unfinished">F3</translation>
+    </message>
+    <message>
+        <source>Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Graph 3D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Enter row number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Row</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2546,6 +2717,17 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     <message>
         <source>dark gray</source>
         <translation>mörkgrått</translation>
+    </message>
+</context>
+<context>
+    <name>ExponentialFit</name>
+    <message>
+        <source>Exponential growth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exponential decay</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2628,6 +2810,137 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     </message>
 </context>
 <context>
+    <name>Fit</name>
+    <message>
+        <source>QtiPlot - Fit Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No curve assigned to the fitter! Please assign a curve first!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a valid curve name!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plot</source>
+        <translation type="unfinished">Rita</translation>
+    </message>
+    <message>
+        <source>fit of dataset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>using function</source>
+        <translation type="unfinished">använder funktion</translation>
+    </message>
+    <message>
+        <source>Weighting Method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No weighting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrumental</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>using error bars dataset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Statistical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arbitrary Dataset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nelder-Mead Simplex</source>
+        <translation type="unfinished">Nelder-Mead Simplex</translation>
+    </message>
+    <message>
+        <source>Unscaled Levenberg-Marquardt</source>
+        <translation type="unfinished">Oskalad Levenberg-Marquardt</translation>
+    </message>
+    <message>
+        <source>Scaled Levenberg-Marquardt</source>
+        <translation type="unfinished">Skalad Levenberg-Marquardt</translation>
+    </message>
+    <message>
+        <source> algorithm with tolerance = </source>
+        <translation type="unfinished"> algoritm med tolerans= </translation>
+    </message>
+    <message>
+        <source>From x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>R^2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Iterations</source>
+        <translation type="unfinished">Iterationer</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">Status</translation>
+    </message>
+    <message>
+        <source>Dataset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function</source>
+        <translation type="unfinished">Funktion</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The curve %1 has no associated Y error bars. You cannot use instrumental weighting method.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameter</source>
+        <translation type="unfinished">Parameter</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Värde</translation>
+    </message>
+    <message>
+        <source>You didn&apos;t specify a data set for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are no parameters specified for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must specify a valid fit function first. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> of </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Folder</name>
     <message>
         <source>kB</source>
@@ -2636,6 +2949,163 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     <message>
         <source>bytes</source>
         <translation>byte</translation>
+    </message>
+</context>
+<context>
+    <name>FunctionDialog</name>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear list</source>
+        <translation type="unfinished">Rensa lista</translation>
+    </message>
+    <message>
+        <source>Clear Function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Add function curve</source>
+        <translation type="unfinished">QtiPlot - Lägg till funktionskurva</translation>
+    </message>
+    <message>
+        <source>Curve type </source>
+        <translation type="unfinished">Kurvtyp </translation>
+    </message>
+    <message>
+        <source>f(x)= </source>
+        <translation type="unfinished">f(x)= </translation>
+    </message>
+    <message>
+        <source>From x= </source>
+        <translation type="unfinished">Från x= </translation>
+    </message>
+    <message>
+        <source>To x= </source>
+        <translation type="unfinished">Till x= </translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation type="unfinished">Punkter</translation>
+    </message>
+    <message>
+        <source>Parameter</source>
+        <translation type="unfinished">Parameter</translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation type="unfinished">Till</translation>
+    </message>
+    <message>
+        <source>y = </source>
+        <translation type="unfinished">y= </translation>
+    </message>
+    <message>
+        <source>x = </source>
+        <translation type="unfinished">x= </translation>
+    </message>
+    <message>
+        <source>From</source>
+        <translation type="unfinished">Från</translation>
+    </message>
+    <message>
+        <source>R =</source>
+        <translation type="unfinished">R =</translation>
+    </message>
+    <message>
+        <source>Theta =</source>
+        <translation type="unfinished">Teta =</translation>
+    </message>
+    <message>
+        <source>Function</source>
+        <translation type="unfinished">Funktion</translation>
+    </message>
+    <message>
+        <source>Parametric plot</source>
+        <translation type="unfinished">Parametriskt diagram</translation>
+    </message>
+    <message>
+        <source>Polar plot</source>
+        <translation type="unfinished">Polärt diagram</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Stäng</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Start limit error</source>
+        <translation type="unfinished">QtiPlot - Startgränsfel</translation>
+    </message>
+    <message>
+        <source>QtiPlot - End limit error</source>
+        <translation type="unfinished">QtiPlot - Slutgränsfel</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input error</source>
+        <translation type="unfinished">QtiPlot - Indatafel</translation>
+    </message>
+    <message>
+        <source>Please enter x limits that satisfy: from &lt; end!</source>
+        <translation type="unfinished">Mata in x-gränser som tillfredställer villkoret: från &lt; slut!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input function error</source>
+        <translation type="unfinished">QtiPlot - Fel i indatafuktion</translation>
+    </message>
+    <message>
+        <source>Please enter parameter limits that satisfy: from &lt; end!</source>
+        <translation type="unfinished">Mata in parameter-gränser som tillfredställer villkoret: från &lt; slut!</translation>
+    </message>
+</context>
+<context>
+    <name>GaussAmpFit</name>
+    <message>
+        <source>(offset)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(height)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(center)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(width)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GaussAmp</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GaussFit</name>
+    <message>
+        <source>Gauss</source>
+        <translation type="unfinished">Gauss</translation>
+    </message>
+    <message>
+        <source>(area)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(center)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(width)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(offset)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2846,63 +3316,63 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     </message>
     <message>
         <source>Linear regression of </source>
-        <translation>Linjär regression av </translation>
+        <translation type="obsolete">Linjär regression av </translation>
     </message>
     <message>
         <source>QtiPlot</source>
-        <translation>QtiPlot</translation>
+        <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
         <source>y0 (offset)</source>
-        <translation>y0 (offset)</translation>
+        <translation type="obsolete">y0 (offset)</translation>
     </message>
     <message>
         <source>Lorentz</source>
-        <translation>Lorentz</translation>
+        <translation type="obsolete">Lorentz</translation>
     </message>
     <message>
         <source>Gauss</source>
-        <translation>Gauss</translation>
+        <translation type="obsolete">Gauss</translation>
     </message>
     <message>
         <source>multi-peak</source>
-        <translation>mång-topp</translation>
+        <translation type="obsolete">mång-topp</translation>
     </message>
     <message>
         <source>fit of</source>
-        <translation>anpassning av</translation>
+        <translation type="obsolete">anpassning av</translation>
     </message>
     <message>
         <source>Non-linear fit of </source>
-        <translation>Icke linjär anpassning av</translation>
+        <translation type="obsolete">Icke linjär anpassning av</translation>
     </message>
     <message>
         <source>Non-linear</source>
-        <translation>Icke linjär</translation>
+        <translation type="obsolete">Icke linjär</translation>
     </message>
     <message>
         <source>Exponential decay fit of </source>
-        <translation>Exponentiellt avtagande anpassning av </translation>
+        <translation type="obsolete">Exponentiellt avtagande anpassning av </translation>
     </message>
     <message>
         <source>ExpDecay2 fit of </source>
-        <translation>ExpDEcay2-anpassning av </translation>
+        <translation type="obsolete">ExpDEcay2-anpassning av </translation>
     </message>
     <message>
         <source>ExpDecay3 fit of </source>
-        <translation>ExpDecay3-anpassing av </translation>
+        <translation type="obsolete">ExpDecay3-anpassing av </translation>
     </message>
     <message>
         <source>Exponential growth fit of </source>
-        <translation>Exponentiell öknings-anpassning av </translation>
+        <translation type="obsolete">Exponentiell öknings-anpassning av </translation>
     </message>
     <message>
         <source>Gauss fit of </source>
-        <translation>Gaussisk anpassning av </translation>
+        <translation type="obsolete">Gaussisk anpassning av </translation>
     </message>
     <message>
         <source>Lorentz fit of </source>
-        <translation>Lorentz-anpassning av </translation>
+        <translation type="obsolete">Lorentz-anpassning av </translation>
     </message>
     <message>
         <source>You need at least %1 points to perform this operation! Operation aborted!</source>
@@ -2910,11 +3380,11 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     </message>
     <message>
         <source>Order</source>
-        <translation>Ordning</translation>
+        <translation type="obsolete">Ordning</translation>
     </message>
     <message>
         <source>Polynomial fit of </source>
-        <translation>Polynom-anpassning av </translation>
+        <translation type="obsolete">Polynom-anpassning av </translation>
     </message>
     <message>
         <source>QtiPlot - Pixel selection warning</source>
@@ -2922,77 +3392,77 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     </message>
     <message>
         <source>QtiPlot - File not found</source>
-        <translation>QtiPlot - Fil inte hittad</translation>
+        <translation type="obsolete">QtiPlot - Fil inte hittad</translation>
     </message>
     <message>
         <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
-        <translation>Plugin-fil: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt; ej hittad. Åtgärd avbruten!</translation>
+        <translation type="obsolete">Plugin-fil: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt; ej hittad. Åtgärd avbruten!</translation>
     </message>
     <message>
         <source>Error when loading plugin!
 </source>
-        <translation>Fel vid laddning av plugin!
+        <translation type="obsolete">Fel vid laddning av plugin!
 </translation>
     </message>
     <message>
         <source>You need at least %1 points to perform the fit! Operation aborted!</source>
-        <translation>Du behöver minst %1 punkter för att genomföra anpassningen. Åtgärd avbruten!</translation>
+        <translation type="obsolete">Du behöver minst %1 punkter för att genomföra anpassningen. Åtgärd avbruten!</translation>
     </message>
     <message>
         <source>Error when loading plugin!</source>
-        <translation>Fel vid laddning av plugin!</translation>
+        <translation type="obsolete">Fel vid laddning av plugin!</translation>
     </message>
     <message>
         <source>using function</source>
-        <translation>använder funktion</translation>
+        <translation type="obsolete">använder funktion</translation>
     </message>
     <message>
         <source>Unscaled Levenberg-Marquardt</source>
-        <translation>Oskalad Levenberg-Marquardt</translation>
+        <translation type="obsolete">Oskalad Levenberg-Marquardt</translation>
     </message>
     <message>
         <source>Scaled Levenberg-Marquardt</source>
-        <translation>Skalad Levenberg-Marquardt</translation>
+        <translation type="obsolete">Skalad Levenberg-Marquardt</translation>
     </message>
     <message>
         <source> algorithm with tolerance = </source>
-        <translation> algoritm med tolerans= </translation>
+        <translation type="obsolete"> algoritm med tolerans= </translation>
     </message>
     <message>
         <source>From x=</source>
-        <translation>Från x=</translation>
+        <translation type="obsolete">Från x=</translation>
     </message>
     <message>
         <source> to x=</source>
-        <translation> till x=</translation>
+        <translation type="obsolete"> till x=</translation>
     </message>
     <message>
         <source>Iterations = </source>
-        <translation>Iterationer = </translation>
+        <translation type="obsolete">Iterationer = </translation>
     </message>
     <message>
         <source>Peak</source>
-        <translation>Topp</translation>
+        <translation type="obsolete">Topp</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Höjd</translation>
+        <translation type="obsolete">Höjd</translation>
     </message>
     <message>
         <source>Area</source>
-        <translation>Yta</translation>
+        <translation type="obsolete">Yta</translation>
     </message>
     <message>
         <source>Center</source>
-        <translation>Centrum</translation>
+        <translation type="obsolete">Centrum</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Bredd</translation>
+        <translation type="obsolete">Bredd</translation>
     </message>
     <message>
         <source>Nelder-Mead Simplex</source>
-        <translation>Nelder-Mead Simplex</translation>
+        <translation type="obsolete">Nelder-Mead Simplex</translation>
     </message>
     <message>
         <source>Savitzky-Golay smoothing of </source>
@@ -3028,27 +3498,47 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     </message>
     <message>
         <source>A1 (init value)</source>
-        <translation>A1 (begynnelsevärde)</translation>
+        <translation type="obsolete">A1 (begynnelsevärde)</translation>
     </message>
     <message>
         <source>A2 (final value)</source>
-        <translation>A2 (slutvärde)</translation>
+        <translation type="obsolete">A2 (slutvärde)</translation>
     </message>
     <message>
         <source>x0 (center)</source>
-        <translation>x0 (centrum)</translation>
+        <translation type="obsolete">x0 (centrum)</translation>
     </message>
     <message>
         <source>dx (time constant)</source>
-        <translation>dx (tidskonstant)</translation>
+        <translation type="obsolete">dx (tidskonstant)</translation>
     </message>
     <message>
         <source>Boltzmann (Sigmoidal)</source>
-        <translation>Boltzmann (Sigmodial)</translation>
+        <translation type="obsolete">Boltzmann (Sigmodial)</translation>
     </message>
     <message>
         <source>Boltzmann (Sigmoidal) fit of </source>
-        <translation>Boltzmann (Sigmodial) anpassning av </translation>
+        <translation type="obsolete">Boltzmann (Sigmodial) anpassning av </translation>
+    </message>
+    <message>
+        <source>There is no curve called &apos;%1&apos; on this layer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no curve with index %1 on this layer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valid indexes must have values between 0 and %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The curve %1 doesn&apos;t exist! Operation aborted!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3145,6 +3635,40 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     </message>
 </context>
 <context>
+    <name>LinearFit</name>
+    <message>
+        <source>Linear Regression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Linear</source>
+        <translation type="unfinished">Linjär</translation>
+    </message>
+</context>
+<context>
+    <name>LorentzFit</name>
+    <message>
+        <source>Lorentz</source>
+        <translation type="unfinished">Lorentz</translation>
+    </message>
+    <message>
+        <source>(area)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(center)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(width)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(offset)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Matrix</name>
     <message>
         <source>Yes</source>
@@ -3202,6 +3726,96 @@ Vill du skjuta in celler?</translation>
     <message>
         <source>enter your text here</source>
         <translation>mata in din text här</translation>
+    </message>
+</context>
+<context>
+    <name>MultiPeakFit</name>
+    <message>
+        <source>MultiPeak</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gauss</source>
+        <translation type="unfinished">Gauss</translation>
+    </message>
+    <message>
+        <source>Lorentz</source>
+        <translation type="unfinished">Lorentz</translation>
+    </message>
+    <message>
+        <source>multi-peak</source>
+        <translation type="unfinished">mång-topp</translation>
+    </message>
+    <message>
+        <source>Peak</source>
+        <translation type="unfinished">Topp</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Fit Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not allocate enough memory for the fit curves!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fit of</source>
+        <translation type="unfinished">anpassning av</translation>
+    </message>
+    <message>
+        <source>peak</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Area</source>
+        <translation type="unfinished">Yta</translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation type="unfinished">Centrum</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished">Bredd</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Höjd</translation>
+    </message>
+</context>
+<context>
+    <name>NonLinearFit</name>
+    <message>
+        <source>NonLinear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Non-linear</source>
+        <translation type="unfinished">Icke linjär</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input function error</source>
+        <translation type="unfinished">QtiPlot - Fel i indatafuktion</translation>
+    </message>
+    <message>
+        <source>Please enter a valid non-empty expression! Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Fit Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are no parameters specified for this fit operation. Please define a list of parameters first!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must provide a list containing at least 2 parameters for this type of fit. Operation aborted!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3275,6 +3889,44 @@ Vill du skjuta in celler?</translation>
     </message>
 </context>
 <context>
+    <name>PluginFit</name>
+    <message>
+        <source>Plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - File not found</source>
+        <translation type="unfinished">QtiPlot - Fil inte hittad</translation>
+    </message>
+    <message>
+        <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
+        <translation type="unfinished">Plugin-fil: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt; ej hittad. Åtgärd avbruten!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Plugin Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The plugin does not implement a %1 method necessary for simplex fitting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The plugin does not implement a %1 method necessary for Levenberg-Marquardt fitting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PolynomialFit</name>
+    <message>
+        <source>Poly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Polynomial</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ScriptEdit</name>
     <message>
         <source>Auto&amp;exec</source>
@@ -3283,6 +3935,189 @@ Vill du skjuta in celler?</translation>
     <message>
         <source>&amp;Functions</source>
         <translation>&amp;Funktioner</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Text</translation>
+    </message>
+    <message>
+        <source>Python Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Import Text From File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error Opening File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open file &quot;%1&quot; for reading.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Text to File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot -- Overwrite File? </source>
+        <translation type="unfinished">QtiPlot - Skriva över fil? </translation>
+    </message>
+    <message>
+        <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
+Do you want to overwrite it?</source>
+        <translation type="unfinished">En fil med namn: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;finns redan!
+Vill du skriva över den?</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="unfinished">&amp;Ja</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation type="unfinished">&amp;Nej</translation>
+    </message>
+    <message>
+        <source>QtiPlot - File Save Error</source>
+        <translation type="unfinished">QtiPlot - Filsparningsfel</translation>
+    </message>
+    <message>
+        <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
+        <translation type="unfinished">Kunde inte skriva till filen: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Verifiera att du har rättighet att skriva på denna plats!</translation>
+    </message>
+</context>
+<context>
+    <name>ScriptWindow</name>
+    <message>
+        <source>QtiPlot - Python Script Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Arkiv</translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished">&amp;Redigera</translation>
+    </message>
+    <message>
+        <source>E&amp;xecute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+N</source>
+        <translation type="unfinished">Ctrl+N</translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished">Ctrl+O</translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished">Ctrl+S</translation>
+    </message>
+    <message>
+        <source>Ctrl+P</source>
+        <translation type="unfinished">Ctrl+P</translation>
+    </message>
+    <message>
+        <source>Ctrl+Z</source>
+        <translation type="unfinished">Ctrl+Z</translation>
+    </message>
+    <message>
+        <source>Ctrl+Y</source>
+        <translation type="unfinished">Ctrl+Y</translation>
+    </message>
+    <message>
+        <source>Ctrl+x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+C</source>
+        <translation type="unfinished">Ctrl+C</translation>
+    </message>
+    <message>
+        <source>Ctrl+V</source>
+        <translation type="unfinished">Ctrl+V</translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTRL+J</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTRL+SHIFT+J</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTRL+Return</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - File Save Error</source>
+        <translation type="unfinished">QtiPlot - Filsparningsfel</translation>
+    </message>
+    <message>
+        <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
+        <translation type="unfinished">Kunde inte skriva till filen: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Verifiera att du har rättighet att skriva på denna plats!</translation>
+    </message>
+</context>
+<context>
+    <name>ScriptingLangDialog</name>
+    <message>
+        <source>QtiPlot - Select scripting language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Avbryt</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Scripting Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scripting language &quot;%1&quot; failed to initialize.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SigmoidalFit</name>
+    <message>
+        <source>(init value)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(final value)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(center)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(time constant)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boltzmann (Sigmoidal)</source>
+        <translation type="unfinished">Boltzmann (Sigmodial)</translation>
     </message>
 </context>
 <context>
@@ -3330,6 +4165,26 @@ Vill du skjuta in celler?</translation>
     <message>
         <source>Diagonal Cross</source>
         <translation>Diagonalt kors</translation>
+    </message>
+    <message>
+        <source>Horizontal Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Star 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Star 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hexagon</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3580,6 +4435,20 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
     <message>
         <source>U</source>
         <translation>U</translation>
+    </message>
+</context>
+<context>
+    <name>ThreeExpFit</name>
+    <message>
+        <source>Exponential decay</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TwoExpFit</name>
+    <message>
+        <source>Exponential decay</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4337,6 +5206,54 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
         <source>The separator must not contain the following characters: 0-9eE.+-</source>
         <translation>Åtskillnadsteckent får ej innehålla följande tecken: 0-9eE.+-</translation>
     </message>
+    <message>
+        <source>Generated Fit Curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uniform X Function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation type="unfinished">Punkter</translation>
+    </message>
+    <message>
+        <source>Same X as Fitting Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display Peak Curves for Multi-peak Fits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peaks Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Significant Digits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Parameters to Result Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste Parameters to Plot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fitting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default scripting language</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>curvesDialog</name>
@@ -4567,7 +5484,7 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Avbryt</translation>
+        <translation type="obsolete">&amp;Avbryt</translation>
     </message>
     <message>
         <source>QtiPlot - Warning</source>
@@ -4576,6 +5493,10 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
     <message>
         <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
         <translation>Kurvan &lt;b&gt; %1 &lt;/b&gt; finns inte längre. Åtgärden avbruten!</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Stäng</translation>
     </message>
 </context>
 <context>
@@ -4649,27 +5570,27 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
     <name>fDialog</name>
     <message>
         <source>QtiPlot - Start limit error</source>
-        <translation>QtiPlot - Startgränsfel</translation>
+        <translation type="obsolete">QtiPlot - Startgränsfel</translation>
     </message>
     <message>
         <source>QtiPlot - End limit error</source>
-        <translation>QtiPlot - Slutgränsfel</translation>
+        <translation type="obsolete">QtiPlot - Slutgränsfel</translation>
     </message>
     <message>
         <source>QtiPlot - Input error</source>
-        <translation>QtiPlot - Indatafel</translation>
+        <translation type="obsolete">QtiPlot - Indatafel</translation>
     </message>
     <message>
         <source>Please enter x limits that satisfy: from &lt; end!</source>
-        <translation>Mata in x-gränser som tillfredställer villkoret: från &lt; slut!</translation>
+        <translation type="obsolete">Mata in x-gränser som tillfredställer villkoret: från &lt; slut!</translation>
     </message>
     <message>
         <source>QtiPlot - Input function error</source>
-        <translation>QtiPlot - Fel i indatafuktion</translation>
+        <translation type="obsolete">QtiPlot - Fel i indatafuktion</translation>
     </message>
     <message>
         <source>Please enter parameter limits that satisfy: from &lt; end!</source>
-        <translation>Mata in parameter-gränser som tillfredställer villkoret: från &lt; slut!</translation>
+        <translation type="obsolete">Mata in parameter-gränser som tillfredställer villkoret: från &lt; slut!</translation>
     </message>
 </context>
 <context>
@@ -4874,7 +5795,7 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Avbryt</translation>
+        <translation type="obsolete">&amp;Avbryt</translation>
     </message>
     <message>
         <source>Category</source>
@@ -5028,6 +5949,134 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
         <source>Please enter initial guesses for your parameters!</source>
         <translation>Mata in begynnelsegissningar för dina parametrar!</translation>
     </message>
+    <message>
+        <source>Weighting Method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No weighting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrumental</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Statistical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arbitrary Dataset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Stäng</translation>
+    </message>
+    <message>
+        <source>Custom &amp;Output &gt;&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Polynomial Order</source>
+        <translation type="unfinished">Polynomordning</translation>
+    </message>
+    <message>
+        <source>Generated Fit Curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uniform X Function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation type="unfinished">Punkter</translation>
+    </message>
+    <message>
+        <source>Same X as Fitting Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Significant Digits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters Table</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Covariance Matrix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CovMatrix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Parameters to Result Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste Parameters to Plot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;&lt; &amp;Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Apply</source>
+        <translation type="unfinished">&amp;Tillämpa</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation type="unfinished">QtiPlot - Fel</translation>
+    </message>
+    <message>
+        <source>Please enter a valid name for the parameters table.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please perform a fit first and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a valid name for the covariance matrix.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gauss</source>
+        <translation type="unfinished">Gauss</translation>
+    </message>
+    <message>
+        <source>Peaks</source>
+        <translation type="unfinished">Toppar</translation>
+    </message>
+    <message>
+        <source>Lorentz</source>
+        <translation type="unfinished">Lorentz</translation>
+    </message>
+    <message>
+        <source>Polynomial</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MultiPeak</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>functionDialogui</name>
@@ -5037,79 +6086,79 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
     </message>
     <message>
         <source>QtiPlot - Add function curve</source>
-        <translation>QtiPlot - Lägg till funktionskurva</translation>
+        <translation type="obsolete">QtiPlot - Lägg till funktionskurva</translation>
     </message>
     <message>
         <source>Curve type </source>
-        <translation>Kurvtyp </translation>
+        <translation type="obsolete">Kurvtyp </translation>
     </message>
     <message>
         <source>f(x)= </source>
-        <translation>f(x)= </translation>
+        <translation type="obsolete">f(x)= </translation>
     </message>
     <message>
         <source>From x= </source>
-        <translation>Från x= </translation>
+        <translation type="obsolete">Från x= </translation>
     </message>
     <message>
         <source>To x= </source>
-        <translation>Till x= </translation>
+        <translation type="obsolete">Till x= </translation>
     </message>
     <message>
         <source>Points</source>
-        <translation>Punkter</translation>
+        <translation type="obsolete">Punkter</translation>
     </message>
     <message>
         <source>Clear list</source>
-        <translation>Rensa lista</translation>
+        <translation type="obsolete">Rensa lista</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation>Parameter</translation>
+        <translation type="obsolete">Parameter</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>Till</translation>
+        <translation type="obsolete">Till</translation>
     </message>
     <message>
         <source>y = </source>
-        <translation>y= </translation>
+        <translation type="obsolete">y= </translation>
     </message>
     <message>
         <source>x = </source>
-        <translation>x= </translation>
+        <translation type="obsolete">x= </translation>
     </message>
     <message>
         <source>From</source>
-        <translation>Från</translation>
+        <translation type="obsolete">Från</translation>
     </message>
     <message>
         <source>R =</source>
-        <translation>R =</translation>
+        <translation type="obsolete">R =</translation>
     </message>
     <message>
         <source>Theta =</source>
-        <translation>Teta =</translation>
+        <translation type="obsolete">Teta =</translation>
     </message>
     <message>
         <source>Function</source>
-        <translation>Funktion</translation>
+        <translation type="obsolete">Funktion</translation>
     </message>
     <message>
         <source>Parametric plot</source>
-        <translation>Parametriskt diagram</translation>
+        <translation type="obsolete">Parametriskt diagram</translation>
     </message>
     <message>
         <source>Polar plot</source>
-        <translation>Polärt diagram</translation>
+        <translation type="obsolete">Polärt diagram</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Avbryt</translation>
+        <translation type="obsolete">Avbryt</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
 </context>
 <context>
@@ -5291,6 +6340,26 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
     <message>
         <source>QtiPlot - Import options error</source>
         <translation>QtiPlot - Importalternativfel</translation>
+    </message>
+    <message>
+        <source>QtiPlot</source>
+        <translation type="unfinished">QtiPlot</translation>
+    </message>
+    <message>
+        <source>Do you want to save the modifications to the ASCII import options before closing?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Nej</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Avbryt</translation>
     </message>
 </context>
 <context>
@@ -6087,6 +7156,10 @@ Gränserna måste vara inom definitionsområdet för x; om du inte vet maximum- 
     <message>
         <source>General</source>
         <translation>Allmänt</translation>
+    </message>
+    <message>
+        <source>Canvas Color</source>
+        <translation type="unfinished">Dukfärg</translation>
     </message>
 </context>
 <context>
