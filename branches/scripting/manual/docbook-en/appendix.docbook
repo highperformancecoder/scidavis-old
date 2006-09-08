@@ -122,7 +122,9 @@ qtiplot
 and <ulink url="http://www.riverbankcomputing.co.uk/pyqt">PyQt</ulink> 3.16. All three of them are included in many Linux distributions.
 Other versions as those indicated above may or may not work.
 Specifically, there are known issues with a number of SIP versions and a given version of PyQt will only work with a limited range of SIP
-versions.</para>
+versions. Warning: You might need to edit  the "qtiplot-x.x.x/qtiplot/qtiplot.pro" file in the archive and set the path to the SIP executable to point to the correct location of SIP 4.4.5 on your computer, by changing the following line:
+"unix:system(sip -I /usr/share/sip -t Qt_3_3_0 -t WS_X11 -c $${MOC_DIR} src/qti.sip)"
+</para>
 
 
 </sect2>

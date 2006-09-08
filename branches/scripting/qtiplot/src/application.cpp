@@ -961,7 +961,8 @@ void ApplicationWindow::initTableAnalysisMenu()
 
 	normMenu = new QPopupMenu(this);
 	normMenu->setFont(appFont);
-	normMenu->insertItem(tr("&Columns"), this, SLOT(normalizeSelection()));
+	//normMenu->insertItem(tr("&Columns"), this, SLOT(normalizeSelection()));
+	actionNormalizeSelection->addTo(normMenu);
 	actionNormalizeTable->addTo(normMenu);
 	normMenuID = dataMenu->insertItem(tr("&Normalize"), normMenu);
 
@@ -11359,6 +11360,7 @@ void ApplicationWindow::translateActionsStrings()
   
 #ifdef SCRIPTING_PYTHON
   actionShowScriptWindow->setMenuText(tr("&Python Script Window"));
+  actionShowScriptWindow->setToolTip(tr("&Python Script Window"));
   actionShowScriptWindow->setAccel(tr("F3"));
 #endif
 
@@ -11529,6 +11531,8 @@ void ApplicationWindow::translateActionsStrings()
   actionCloseWindow->setAccel(tr("Ctrl+W"));
 
   actionAddColToTable->setMenuText(tr("Add column"));
+  actionAddColToTable->setToolTip(tr("Add column"));
+
   actionClearTable->setMenuText(tr("Clear"));
   actionGoToRow->setMenuText(tr("&Go to Row..."));
   actionGoToRow->setAccel(tr("Ctrl+Alt+G"));
