@@ -104,39 +104,32 @@ painter->restore();
 }
 
 void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
-    const QwtArray<QwtScaleMap> &map, const QwtPlotPrintFilter &pfilter) const
+    const QwtScaleMap map[axisCnt], const QwtPlotPrintFilter &pfilter) const
 {
 	const QwtPlotCanvas* plotCanvas=canvas();	
-	QRect rect=canvasRect;
-	int w=plotCanvas->lineWidth();
-
-	if (w>0)
+	if (plotCanvas->lineWidth() > 0)
     	{
 		QPalette pal = plotCanvas->palette();
 		QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
 		
 		painter->save();
-		painter->setPen (QPen(color,w,Qt::SolidLine));
+		painter->setPen (QPen(color, plotCanvas->lineWidth(), Qt::SolidLine));
 
 		if (canvasBackground() != Qt::white)
 			painter->setBrush(canvasBackground());
-				
-		//if (w == 1 && majorTicksType[QwtPlot::xBottom] == Plot::Out)
-			rect.setHeight(canvasRect.height() + 1);	
-						
-		QwtPainter::drawRect(painter, rect.x(), rect.y(), rect.width(), rect.height());
+			
+		QwtPainter::drawRect(painter, canvasRect);
 		painter->restore();
    		}
 	
 	painter->setClipping(TRUE);
-	rect = QRect(canvasRect.x()+1, canvasRect.y()+1, canvasRect.width(), canvasRect.height()-1);
-	QwtPainter::setClipRect(painter, rect);
+	QwtPainter::setClipRect(painter, canvasRect);
 
     drawItems(painter, canvasRect, map, pfilter);
 }
 
 void Plot::drawItems (QPainter *painter, const QRect &rect, 
-					const QwtArray< QwtScaleMap > &map, const QwtPlotPrintFilter &pfilter) const
+					const QwtScaleMap map[axisCnt], const QwtPlotPrintFilter &pfilter) const
 {
 QwtPlot::drawItems(painter, rect, map, pfilter);
 	
@@ -180,7 +173,7 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 
 	const QwtValueList majTickList = scDiv->ticks(QwtScaleDiv::MajorTick);
 	int majTicks = (int)majTickList.count();
-	
+
 int j, x, y, low,high;
 switch (axis)
 	{

@@ -808,7 +808,7 @@ if (!scale)
 
 d_plot->setTickLength(minLength, majLength);	
 
-ScaleDraw *sd= (ScaleDraw *)d_plot->axisScaleDraw (axis);
+ScaleDraw *sd = (ScaleDraw *)d_plot->axisScaleDraw (axis);
 sd->setMajorTicksStyle((ScaleDraw::TicksStyle)majTicksType);	
 sd->setMinorTicksStyle((ScaleDraw::TicksStyle)minTicksType);
 
@@ -816,6 +816,11 @@ if (majTicksType == ScaleDraw::None && minTicksType == ScaleDraw::None)
 	sd->enableComponent (QwtAbstractScaleDraw::Ticks, false);
 else
 	sd->enableComponent (QwtAbstractScaleDraw::Ticks);
+
+if (majTicksType == ScaleDraw::None || majTicksType == ScaleDraw::In)
+	majLength = 0;
+if (minTicksType == ScaleDraw::None || minTicksType == ScaleDraw::In)
+	minLength = 0;
 
 sd->setTickLength (QwtScaleDiv::MinorTick, minLength); 
 sd->setTickLength (QwtScaleDiv::MediumTick, minLength);
@@ -911,7 +916,7 @@ else
 	}
 
 sclDraw = (ScaleDraw *)d_plot->axisScaleDraw (axis);	
-sclDraw->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
+sclDraw->enableComponent(QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 
 setAxisTicksLength(axis, majTicksType, minTicksType, 
 				   d_plot->minorTickLength(), d_plot->majorTickLength());
@@ -921,7 +926,7 @@ if (axisOn && (axis == QwtPlot::xTop || axis == QwtPlot::yRight))
 
 scalePicker->refresh();
 d_plot->updateLayout();	
-scale->repaint();
+//scale->repaint();
 d_plot->replot();	
 emit modifiedGraph();
 }
@@ -5018,26 +5023,16 @@ QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
 scales[0]=QString::number(scDiv->lBound());
 scales[1]=QString::number(scDiv->hBound());
 scales[2]=QString::number(fabs(lst[1]-lst[0]));
-
-int majTicks = lst.count();
-scales[3]=QString::number(majTicks);
-lst = scDiv->ticks (QwtScaleDiv::MinorTick);
-int minTicks = lst.count();
-lst = scDiv->ticks (QwtScaleDiv::MediumTick);
-scales[4]=QString::number((minTicks + lst.count())/(majTicks-1));
+scales[3]=QString::number(d_plot->axisMaxMajor(QwtPlot::xBottom));
+scales[4]=QString::number(d_plot->axisMaxMinor(QwtPlot::xBottom));
 	
 scDiv=d_plot->axisScaleDiv(QwtPlot::yLeft);
 lst = scDiv->ticks (QwtScaleDiv::MajorTick);
 scales[8]=QString::number(scDiv->lBound());
 scales[9]=QString::number(scDiv->hBound());
 scales[10]=QString::number(fabs(lst[1]-lst[0]));
-
-majTicks = lst.count();
-scales[11]=QString::number(majTicks);
-lst = scDiv->ticks (QwtScaleDiv::MinorTick);
-minTicks = lst.count();
-lst = scDiv->ticks (QwtScaleDiv::MediumTick);
-scales[12]=QString::number((minTicks + lst.count())/(majTicks-1));	
+scales[11]=QString::number(d_plot->axisMaxMajor(QwtPlot::yLeft));
+scales[12]=QString::number(d_plot->axisMaxMinor(QwtPlot::yLeft));	
 }
 
 void Graph::updateScale()
@@ -5048,12 +5043,8 @@ scales[0]=QString::number(QMIN(scDiv->lBound(), scDiv->hBound()));
 scales[1]=QString::number(QMAX(scDiv->lBound(), scDiv->hBound()));
 double step = fabs(lst[1]-lst[0]);
 scales[2]=QString::number(step);
-int majTicks = lst.count();
-scales[3]=QString::number(majTicks);
-lst = scDiv->ticks (QwtScaleDiv::MinorTick);
-int minTicks = lst.count();
-lst = scDiv->ticks (QwtScaleDiv::MediumTick);
-scales[4]=QString::number((minTicks + lst.count())/(majTicks-1));
+scales[3]=QString::number(d_plot->axisMaxMajor(QwtPlot::xBottom));
+scales[4]=QString::number(d_plot->axisMaxMinor(QwtPlot::xBottom));
 
 if (!autoscale)
 	d_plot->setAxisScale (QwtPlot::xBottom, scDiv->lBound(), scDiv->hBound(), step);
@@ -5064,13 +5055,8 @@ scales[8]=QString::number(QMIN(scDiv->lBound(), scDiv->hBound()));
 scales[9]=QString::number(QMAX(scDiv->lBound(), scDiv->hBound()));
 step = fabs(lst[1]-lst[0]);
 scales[10]=QString::number(step);
-
-majTicks = lst.count();
-scales[11]=QString::number(majTicks);
-lst = scDiv->ticks (QwtScaleDiv::MinorTick);
-minTicks = lst.count();
-lst = scDiv->ticks (QwtScaleDiv::MediumTick);
-scales[12]=QString::number((minTicks + lst.count())/(majTicks-1));
+scales[11]=QString::number(d_plot->axisMaxMajor(QwtPlot::yLeft));
+scales[12]=QString::number(d_plot->axisMaxMinor(QwtPlot::yLeft));
 	
 if (!autoscale)
 	d_plot->setAxisScale (QwtPlot::yLeft, scDiv->lBound(), scDiv->hBound(), step);
@@ -5327,12 +5313,8 @@ scales[0]=QString::number(QMIN(scDiv->lBound(), scDiv->hBound()), f, prec);
 scales[1]=QString::number(QMAX(scDiv->lBound(), scDiv->hBound()), f, prec);
 double step = fabs(lst[1]-lst[0]);
 scales[2]=QString::number(step);
-int majTicks = lst.count();
-scales[3]=QString::number(majTicks);
-lst = scDiv->ticks (QwtScaleDiv::MinorTick);
-int minTicks = lst.count();
-lst = scDiv->ticks (QwtScaleDiv::MediumTick);
-scales[4]=QString::number((minTicks + lst.count())/(majTicks-1));
+scales[3]=QString::number(d_plot->axisMaxMajor(QwtPlot::xBottom));
+scales[4]=QString::number(d_plot->axisMaxMinor(QwtPlot::xBottom));
 
 d_plot->setAxisScale (QwtPlot::xTop, scDiv->lBound(), scDiv->hBound(), step);
 
@@ -5345,12 +5327,8 @@ scales[9]=QString::number(QMAX(scDiv->lBound(), scDiv->hBound()), f, prec);
  
 step = fabs(lst[1]-lst[0]);
 scales[10]=QString::number(step);
-majTicks = lst.count();
-scales[11]=QString::number(majTicks);
-lst = scDiv->ticks (QwtScaleDiv::MinorTick);
-minTicks = lst.count();
-lst = scDiv->ticks (QwtScaleDiv::MediumTick);
-scales[12]=QString::number((minTicks + lst.count())/(majTicks-1));
+scales[11]=QString::number(d_plot->axisMaxMajor(QwtPlot::yLeft));
+scales[12]=QString::number(d_plot->axisMaxMinor(QwtPlot::yLeft));
 
 d_plot->setAxisScale (QwtPlot::yRight, scDiv->lBound(), scDiv->hBound(), step);
 d_plot->replot();	

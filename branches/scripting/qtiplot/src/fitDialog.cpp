@@ -332,7 +332,7 @@ new QLabel( tr("Name: "), GroupBox2);
 covMatrixName = new QLineEdit(GroupBox2);
 covMatrixName->setText( tr( "CovMatrix" ) );
 
-scaleErrorsBox = new QCheckBox (tr("Scale Errors with sqrt(reduced chi^2)"), advancedPage);
+scaleErrorsBox = new QCheckBox (tr("Scale Errors with sqrt(Chi^2/doF)"), advancedPage);
 scaleErrorsBox->setChecked(false);
 connect( scaleErrorsBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
 
