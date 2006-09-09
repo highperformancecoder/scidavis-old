@@ -101,11 +101,11 @@ class Script : public QObject
 
   public slots:
     //! Compile the Code. Return true if the implementation doesn't support compilation.
-    virtual bool compile(bool for_eval=true) { emit_error("Script::compile called!",0); return false; }
+    virtual bool compile(bool for_eval=true);
     //! Evaluate the Code, returning QVariant() on an error / exception.
-    virtual QVariant eval() { emit_error("Script::eval called!",0); return QVariant(); }
+    virtual QVariant eval();
     //! Execute the Code, returning false on an error / exception.
-    virtual bool exec() { emit_error("Script::exec called!",0); return false; }
+    virtual bool exec();
 
     // local variables
     virtual bool setQObject(const QObject*, const char*) { return false; }

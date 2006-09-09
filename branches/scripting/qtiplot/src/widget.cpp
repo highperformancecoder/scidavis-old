@@ -11,9 +11,8 @@ w_status = Normal;
 titleBar = NULL;
 }
 
-void myWidget::setCaptionPolicy(CaptionPolicy policy)
+void myWidget::updateCaption()
 {
-caption_policy = policy;
 switch (caption_policy)
 	{
 	case Name:

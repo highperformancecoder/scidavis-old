@@ -53,6 +53,7 @@
 #include "FunctionCurve.h"
 #include "ScriptingLangDialog.h"
 #include "ScriptWindow.h"
+#include "TableStatistics.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -1195,7 +1196,7 @@ else
 
 void ApplicationWindow::plot3DRibbon()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 Table* w = (Table*)ws->activeWindow();
@@ -1261,7 +1262,7 @@ else if (w->isA("Matrix"))
 
 void ApplicationWindow::plot3DTrajectory()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 Table* w = (Table*)ws->activeWindow();
@@ -1274,7 +1275,7 @@ else
 
 void ApplicationWindow::plotVerticalBars()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotVB();
@@ -1282,7 +1283,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotHorizontalBars()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotHB();
@@ -1290,7 +1291,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotHistogram()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotHistogram();
@@ -1298,7 +1299,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotArea()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotArea();
@@ -1306,7 +1307,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotPie()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 if(int(((Table*)ws->activeWindow())->selectedColumns().count())==1)
@@ -1318,7 +1319,7 @@ else
 
 void ApplicationWindow::plotL()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotL();
@@ -1326,7 +1327,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotP()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotP();
@@ -1334,7 +1335,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotLP()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotLP();
@@ -1342,7 +1343,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotVerticalDropLines()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotVerticalDropLines();
@@ -1350,7 +1351,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotSpline()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotSpline();
@@ -1358,7 +1359,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotSteps()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotSteps();
@@ -1366,7 +1367,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotVectXYXY()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotVectXYXY();
@@ -1374,7 +1375,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::plotVectXYAM()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 	
 ((Table*)ws->activeWindow())->plotVectXYAM();
@@ -2294,7 +2295,7 @@ return g;
 
 MultiLayer* ApplicationWindow::multilayerPlot(int c, int r, int style)
 {//used when plotting with the panel menu
-if (!ws->activeWindow()|| !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return 0;
 
 Table* w = (Table*)ws->activeWindow();
@@ -2460,7 +2461,7 @@ tableHeaderFont = headerFont;
 QWidgetList *windows = windowsList(); 
 for (QWidget *w = windows->first(); w; w = windows->next())
 	{
-	if (w->isA("Table"))
+	if (w->inherits("Table"))
 		customTable((Table*)w);
 	}
 delete windows;
@@ -2882,7 +2883,7 @@ QWidget *w;
 QWidgetList *lst = windowsList();
 for (w = lst->first(); w; w = lst->next() )
 	{
-	if (w->isA("Table") && w->name() == caption)
+	if (w->inherits("Table") && w->name() == caption)
 		{
 		delete lst;
 		return (Table*)w;
@@ -3683,6 +3684,7 @@ ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 ApplicationWindow *app = new ApplicationWindow();
 app->applyUserSettings();
 app->projectname = fn;
+app->fileVersion = fileVersion;
 app->setCaption(tr("QtiPlot") + " - " + fn);
 app->showMaximized();
 
@@ -3930,6 +3932,17 @@ while ( !t.eof() && !progress.wasCanceled())
 			s = t.readLine();
 			}
 		app->results->setText(app->logInfo);
+		}
+	else if (s.left(17)=="<TableStatistics>")
+	  	{
+		QStringList lst;
+		while ( s!="</TableStatistics>" )
+			{
+			s=t.readLine();
+			lst<<s;
+			}
+		lst.pop_back();
+		app->openTableStatistics(lst)->show();
 		}
 	}
 f.close();
@@ -5442,7 +5455,7 @@ if (g)
 
 void ApplicationWindow::showExportASCIIDialog()
 {
-if ( ws->activeWindow() && ws->activeWindow()->isA("Table"))
+if ( ws->activeWindow() && ws->activeWindow()->inherits("Table"))
 	{
 	exportDialog* ed= new exportDialog(this,"exportDialog",TRUE,WStyle_ContextHelp|WDestructiveClose);
 	connect (ed, SIGNAL(exportTable(const QString&, const QString&, bool, bool)), 
@@ -5472,7 +5485,7 @@ bool confirmOverwrite = true;
 bool success = true;	
 for (QWidget *w = windows->first(); w; w = windows->next())
 	{
-	if (w->isA("Table"))
+	if (w->inherits("Table"))
 		{
 		Table *t = (Table*)w;		
 		QString fileName = dir + "/" + w->name() + ".txt";
@@ -5551,7 +5564,7 @@ if (!fname.isEmpty() )
 
 void ApplicationWindow::showRowsDialog()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 bool ok;
@@ -5563,7 +5576,7 @@ if ( ok )
 
 void ApplicationWindow::showColsDialog()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 bool ok;
@@ -5600,7 +5613,7 @@ if ( w && w->isA("Table"))
 
 void ApplicationWindow::sortActiveTable()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 if (int(((Table*)ws->activeWindow())->selectedColumns().count())>0)
@@ -5611,7 +5624,7 @@ else
 
 void ApplicationWindow::sortSelection()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 ((Table*)ws->activeWindow())->sortColumnsDialog();
@@ -5619,7 +5632,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::normalizeActiveTable()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 if (int(((Table*)ws->activeWindow())->selectedColumns().count())>0)
@@ -5630,7 +5643,7 @@ else
 
 void ApplicationWindow::normalizeSelection()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 if (int(((Table*)ws->activeWindow())->selectedColumns().count())>0)
@@ -5641,7 +5654,7 @@ else
 
 void ApplicationWindow::correlate()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 ((Table*)ws->activeWindow())->correlate();
@@ -5649,7 +5662,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::convolute()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 ((Table*)ws->activeWindow())->convolute(1);
@@ -5657,7 +5670,7 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::deconvolute()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 ((Table*)ws->activeWindow())->convolute(-1);
@@ -5665,11 +5678,21 @@ if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
 
 void ApplicationWindow::showColStatistics()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
+Table *t = (Table*)ws->activeWindow();
 
-if (int(((Table*)ws->activeWindow())->selectedColumns().count())>0)
-	((Table*)ws->activeWindow())->showColStatistics();
+if (int(t->selectedColumns().count()) > 0)
+{
+QValueList<int> targets;
+for (int i=0; i < t->tableCols(); i++)
+  if (t->isColumnSelected(i, true))
+    targets << i;
+TableStatistics* s = new TableStatistics(scriptEnv, ws, (Table*)ws->activeWindow(), TableStatistics::column, targets);
+initTable(s, s->name());
+connect((Table*)ws->activeWindow(), SIGNAL(modifiedData(Table*,const QString&)), s, SLOT(update(Table*,const QString&)));
+s->showNormal();
+}
 else
 	QMessageBox::warning(this, tr("QtiPlot - Column selection error"),
 	tr("Please select a column first!"));
@@ -5677,11 +5700,21 @@ else
 
 void ApplicationWindow::showRowStatistics()
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
+Table *t = (Table*)ws->activeWindow();
 
-if (((Table*)ws->activeWindow())->selectedRows()>0)
-	((Table*)ws->activeWindow())->showRowStatistics();
+if (t->selectedRows() > 0)
+{
+QValueList<int> targets;
+for (int i=0; i < t->tableRows(); i++)
+  if (t->isRowSelected(i, true))
+    targets << i;
+TableStatistics* s = new TableStatistics(scriptEnv, ws, t, TableStatistics::row, targets);
+initTable(s, s->name());
+connect(t, SIGNAL(modifiedData(Table*,const QString&)), s, SLOT(update(Table*,const QString&)));
+s->showNormal();
+}
 else
 	QMessageBox::warning(this, tr("QtiPlot - Row selection error"),
 	tr("Please select a row first!"));
@@ -5689,7 +5722,7 @@ else
 
 void ApplicationWindow::showColMenu(int c)
 {
-if (!ws->activeWindow() && !ws->activeWindow()->isA("Table"))
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Table"))
 	return;
 
 Table* w = (Table*)ws->activeWindow();
@@ -5947,7 +5980,7 @@ if ( ws->activeWindow() && ws->activeWindow()->isA("Matrix"))
 
 void ApplicationWindow::showColumnOptionsDialog()
 {
-if ( !ws->activeWindow() || !ws->activeWindow()->isA("Table"))
+if ( !ws->activeWindow() || !ws->activeWindow()->inherits("Table"))
 	return;
 
 Table* w = (Table*)ws->activeWindow();
@@ -7727,7 +7760,7 @@ QApplication::setOverrideCursor(waitCursor);
 
 if (g->isA("MultiLayer"))
 	w = copyGraph();
-else if (g->isA("Table"))
+else if (g->inherits("Table"))
 	w = copyTable();
 else if (g->isA("Graph3D"))
 	w = copySurfacePlot();
@@ -8017,6 +8050,8 @@ if (w->isA("Table"))
 		actionRedo->setEnabled(FALSE);
 		}
 	}
+else if (w->isA("TableStatistics"))
+    tableWindows.remove(caption);
 else if (w->isA("MultiLayer"))
 	{
 	MultiLayer *ml =  (MultiLayer*)w;
@@ -8262,7 +8297,11 @@ if (!saved)
 				tr("Cancel"), 0, 2 ) )
 		{
 		case 0:
-			saveProject();
+			if (!saveProject())
+			{
+			  ce->ignore();
+			  break;
+			}
 			saveSettings();//the recent projects must be saved 
 			ce->accept();
 		break;
@@ -8770,7 +8809,7 @@ if (!ws->activeWindow())
 
 QPopupMenu cm(this);
 
-if (ws->activeWindow()->isA("Table"))
+if (ws->activeWindow()->inherits("Table"))
 	{
 	actionShowExportASCIIDialog->addTo(&cm);
 	cm.insertSeparator();
@@ -9879,6 +9918,70 @@ for (; line!=flist.end() && *line != "</data>"; line++)
 	}
 
 w->setSpecifications(w->saveToString("geometry\n"));
+return w;
+}
+
+TableStatistics* ApplicationWindow::openTableStatistics(const QStringList &flist)
+{
+QStringList::const_iterator line = flist.begin();
+
+QStringList list=QStringList::split ("\t",*line++,TRUE);
+QString caption=list[0];
+
+QValueList<int> targets;
+for (int i=1; i <= (*line).contains('\t'); i++)
+  targets << (*line).section('\t',i,i).toInt();
+
+TableStatistics* w = new TableStatistics(scriptEnv, ws, table(list[1]), list[2]=="row" ? TableStatistics::row : TableStatistics::column, targets);
+initTable(w, caption);
+connect(table(list[1]), SIGNAL(modifiedData(Table*,const QString&)), w, SLOT(update(Table*,const QString&)));
+
+setListViewDate(caption,list[2]);
+w->setBirthDate(list[2]);
+
+for (line++; line!=flist.end(); line++)
+{
+  QStringList fields = QStringList::split("\t",*line,true);
+  if (fields[0] == "geometry") {
+		restoreWindowGeometry(this, (QWidget *)w, *line);
+  } else if (fields[0] == "header") {
+    fields.pop_front();
+    if (fileVersion >= 78)
+      w->loadHeader(fields);
+    else
+    {
+      w->setColPlotDesignation(list[4].toInt(), Table::X);
+      if (fileVersion > 50)
+	w->setColPlotDesignation(list[6].toInt(), Table::Y);
+      w->setHeader(fields);
+    }
+  } else if (fields[0] == "ColWidth") {
+    fields.pop_front();
+    w->setColWidths(fields);
+  } else if (fields[0] == "com") { // legacy code
+    w->setCommandes(*line);
+  } else if (fields[0] == "<com>") {
+    for (line++; line!=flist.end() && *line != "</com>"; line++)
+    {
+      int col = (*line).mid(9,(*line).length()-11).toInt();
+      QString formula;
+      for (line++; line!=flist.end() && *line != "</col>"; line++)
+	formula += *line + "\n";
+      formula.truncate(formula.length()-1);
+      w->setCommand(col,formula);
+    }
+  } else if (fields[0] == "ColType") { // fileVersion > 65
+    fields.pop_front();
+    w->setColumnTypes(fields);
+  } else if (fields[0] == "Comments") { // fileVersion > 71
+    fields.pop_front();
+    w->setColComments(fields);
+  } else if (fields[0] == "WindowLabel") { // fileVersion > 71
+    w->setWindowLabel(fields[1]);
+    w->setCaptionPolicy((myWidget::CaptionPolicy)fields[2].toInt());
+    setListViewLabel(w->name(), fields[1]);
+  }
+}
 return w;
 }
 
@@ -13238,7 +13341,7 @@ if (w->isA("Matrix"))
 	it->setPixmap(0, QPixmap(matrix_xpm));
 	it->setText(1, tr("Matrix"));
 	}
-else if (w->isA("Table"))
+else if (w->inherits("Table"))
 	{
 	it->setPixmap(0, QPixmap(worksheet_xpm));
 	it->setText(1, tr("Table"));
@@ -13290,7 +13393,7 @@ if (w->isA("Matrix"))
 	mbox->setIconPixmap(QPixmap(matrix_xpm));
 	s +=  tr("Type") + ": " + tr("Matrix") + "\n\n";
 	}
-else if (w->isA("Table"))
+else if (w->inherits("Table"))
 	{
 	mbox->setIconPixmap(QPixmap(worksheet_xpm));
 	s +=  tr("Type") + ": " + tr("Table") + "\n\n";
@@ -13617,7 +13720,7 @@ void ApplicationWindow::goToRow()
 if (!ws->activeWindow())
 	return;
 
-if (ws->activeWindow()->isA("Table") || ws->activeWindow()->isA("Matrix"))
+if (ws->activeWindow()->inherits("Table") || ws->activeWindow()->isA("Matrix"))
 	{
 	bool ok;
 	int row = QInputDialog::getInteger(tr("QtiPlot - Enter row number"), tr("Row"), 
@@ -13625,7 +13728,7 @@ if (ws->activeWindow()->isA("Table") || ws->activeWindow()->isA("Matrix"))
 	if ( !ok ) 
 		return;
 
-	if (ws->activeWindow()->isA("Table"))
+	if (ws->activeWindow()->inherits("Table"))
 		((Table*)ws->activeWindow())->table()->ensureCellVisible(row - 1, 0);
 	else if (ws->activeWindow()->isA("Matrix"))
 		((Matrix*)ws->activeWindow())->table()->ensureCellVisible(row - 1, 0);

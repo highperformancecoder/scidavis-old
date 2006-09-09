@@ -40,6 +40,7 @@ class FolderListItem;
 class FolderListView;
 class ScriptingEnv;
 class ScriptWindow;
+class TableStatistics;
 
 //! QtiPlot's main window
 class ApplicationWindow: public QMainWindow, public scripted
@@ -396,6 +397,7 @@ public slots:
 
 	Matrix* openMatrix(ApplicationWindow* app, const QStringList &flist);
 	Table* openTable(ApplicationWindow* app, const QStringList &flist);
+	TableStatistics* openTableStatistics(const QStringList &flist);
 	Graph3D* openSurfacePlot(ApplicationWindow* app, const QStringList &lst);
 	void openGraph(ApplicationWindow* app, MultiLayer *plot, const QStringList &list);
 

@@ -131,8 +131,6 @@ public slots:
 	int colY(int col);
 
 	int atRow(int col, double value);
-	void showColStatistics();
-	void showRowStatistics(); 
 
 	QStringList getCommandes(){return commandes;};
 	//!Slot: Set all column formulae.
@@ -177,6 +175,8 @@ public slots:
 	int selectedColumn(){return selectedCol;};
 	int firstSelectedColumn();
 	int selectedRows();
+	bool isRowSelected(int row, bool full=false) { return worksheet->isRowSelected(row, full); }
+	bool isColumnSelected(int col, bool full=false) { return worksheet->isColumnSelected(col, full); }
 	
 	void columnNumericFormat(int col, char &f, int &precision);
 	void columnNumericFormat(int col, int &f, int &precision);
@@ -213,7 +213,7 @@ public slots:
 					bool renameCols, bool stripSpaces, bool simplifySpaces, int importFileAs);
 
 	//saving
-	QString saveToString(const QString& geometry);
+	virtual QString saveToString(const QString& geometry);
 	QString saveHeader();
 	QString saveComments();
 	QString saveCommandes();
@@ -273,8 +273,10 @@ signals:
 	void showContextMenu(bool selection);
 	void createTable(const QString&,int,int,const QString&);
 	
-private:
+protected:
 	QTable *worksheet;
+
+private:
 	QString specifications, newSpecifications;
 	QStringList commandes, col_format, comments, col_label;
 	QValueList<int> colTypes, col_plot_type;

@@ -256,6 +256,7 @@ sipTypeDef *t;
       (!t->td_cname && cN == t->td_name+4))
     sipClass = sipModuleAPI_qti.em_types[i];
 %End
+  
 public:
   Table* table(const QString&);
   Table* newTable();
@@ -270,7 +271,6 @@ public:
   MultiLayer* newGraph();
   Note *note(const QString&);
   Note* newNote(const QString& = QString::null);
-
   MultiLayer *multilayerPlot(Table*, SIP_PYTUPLE, int=1) /PyName=plot/;
 %MethodCode
   QStringList l;
@@ -293,8 +293,16 @@ public:
   sipRes = sipCpp->multilayerPlot(a0, l, a2);
 %End
   
+  QWidgetList *windowsList();
+
   QTextEdit *results;
 //  QTextEdit *console;
+
+  // folders
+  Folder *current_folder;
+  void saveFolder(Folder *folder, const QString& fn);
+  Folder* projectFolder();
+
 private:
   ApplicationWindow(const ApplicationWindow&);
 };
@@ -651,6 +659,7 @@ public:
   void fit();
 };
 
+// used for output redirection
 class PythonScript
 {
 %TypeHeaderCode
@@ -661,3 +670,22 @@ public:
 private:
   PythonScript(const PythonScript&);
 };
+
+class Folder : QObject
+{
+%TypeHeaderCode
+#include "src/folder.h"
+%End
+public:
+  typedef QPtrList<myWidget> MDIWindowList;
+  MDIWindowList windowsList() /PyName=windows/;
+  void setFolderName(const QString&);
+  QString folderName();
+  QString path();
+  QStringList subfolders();
+  Folder *findSubfolder(const QString&, bool=true, bool=false);
+  myWidget* findWindow(const QString&, bool, bool, bool, bool);
+private:
+  Folder(const Folder&);
+};
+

@@ -18,10 +18,12 @@ public:
 	enum Status{Hidden = -1, Normal = 0, Minimized = 1, Maximized = 2};
 
 	QString windowLabel(){return QString(w_label);};
-	void setWindowLabel(const QString& s){w_label = s;};
+	void setWindowLabel(const QString& s){ w_label = s; updateCaption(); };
 
 	CaptionPolicy captionPolicy(){return caption_policy;};
-	void setCaptionPolicy(CaptionPolicy policy);
+	void setCaptionPolicy(CaptionPolicy policy) { caption_policy = policy; updateCaption(); }
+
+	void setName(const char *newname) { QWidget::setName(newname); updateCaption(); }
 
 	QString birthDate(){return birthdate;};
 	void setBirthDate(const QString& s){birthdate = s;};
@@ -75,6 +77,9 @@ protected:
 	QWidget *titleBar;
 	
 private:
+	//! set caption according to current CaptionPolicy, name and label
+	void updateCaption();
+
 	//!Pointer to the parent folder of the window
 	Folder *parentFolder;
 	QString w_label, birthdate;

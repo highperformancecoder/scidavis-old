@@ -141,7 +141,8 @@ HEADERS  += src/application.h \
 	 src/Fitter.h\
 	 src/customEvents.h\
 	 src/ScriptingLangDialog.h\
-	 src/ScriptWindow.h
+	 src/ScriptWindow.h\
+	 src/TableStatistics.h
      
 SOURCES  += src/application.cpp \
      src/graph.cpp \
@@ -220,7 +221,8 @@ SOURCES  += src/application.cpp \
 	 src/Fitter.cpp\
 	 src/Scripting.cpp\
 	 src/ScriptingLangDialog.cpp\
-	 src/ScriptWindow.cpp
+	 src/ScriptWindow.cpp\
+	 src/TableStatistics.cpp
 
 #Compression (zlib123)
 SOURCES+=../3rdparty/zlib123/minigzip.c
@@ -286,7 +288,9 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiLinearFit.h\
 	 ../tmp/qtiplot/sipqtiMatrix.h\
 	 ../tmp/qtiplot/sipqtiGaussFit.h\
-	 ../tmp/qtiplot/sipqtiPythonScript.h
+	 ../tmp/qtiplot/sipqtiPythonScript.h\
+	 ../tmp/qtiplot/sipqtiFolder.h\
+	 ../tmp/qtiplot/sipqtiQPtrList.h
   SOURCES +=\
 	 ../tmp/qtiplot/sipqticmodule.cpp\
 	 ../tmp/qtiplot/sipqtiApplicationWindow.cpp\
@@ -311,6 +315,8 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiLinearFit.cpp\
 	 ../tmp/qtiplot/sipqtiMatrix.cpp\
 	 ../tmp/qtiplot/sipqtiGaussFit.cpp\
-	 ../tmp/qtiplot/sipqtiPythonScript.cpp
+	 ../tmp/qtiplot/sipqtiPythonScript.cpp\
+	 ../tmp/qtiplot/sipqtiFolder.cpp\
+	 ../tmp/qtiplot/sipqtiQPtrList.cpp
 }
 

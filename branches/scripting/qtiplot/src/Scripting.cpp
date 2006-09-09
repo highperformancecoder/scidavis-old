@@ -62,6 +62,24 @@ void ScriptingEnv::decref()
     delete this;
 }
 
+bool Script::compile(bool for_eval)
+{
+  emit_error("Script::compile called!", 0);
+  return false;
+}
+
+QVariant Script::eval()
+{
+  emit_error("Script::eval called!",0);
+  return QVariant();
+}
+
+bool Script::exec()
+{
+  emit_error("Script::exec called!",0);
+  return false;
+}
+
 scripted::scripted(ScriptingEnv *env)
 {
   env->incref();
