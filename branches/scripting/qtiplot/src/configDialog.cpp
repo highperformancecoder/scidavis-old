@@ -490,6 +490,9 @@ plotLabelBox->setChecked(app->pasteFitResultsToPlot);
 
 new QLabel(QString::null, GroupBoxFitParameters);
 
+scaleErrorsBox = new QCheckBox (tr("Scale Errors with sqrt(Chi^2/doF)"), GroupBoxFitParameters);
+scaleErrorsBox->setChecked(app->fit_scale_errors);
+
 QVBoxLayout* hlayout = new QVBoxLayout(fitPage, 5, 5);
 hlayout->addWidget(GroupBoxFittingCurve);
 hlayout->addWidget(GroupBoxMultiPeak);
@@ -700,6 +703,9 @@ void configDialog::languageChange()
 	lblPrecision->setText(tr("Significant Digits"));
 	logBox->setText(tr("Write Parameters to Result Log"));
 	plotLabelBox->setText(tr("Paste Parameters to Plot"));
+	scaleErrorsBox->setText(tr("Scale Errors with sqrt(Chi^2/doF)"));
+	GroupBoxMultiPeak->setTitle(tr("Display Peak Curves for Multi-peak Fits"));
+	lblPeaksColor->setText(tr("Peaks Color"));
 }
 
 void configDialog::accept()
@@ -814,6 +820,7 @@ else if (generalDialog->visibleWidget()==(QWidget*)fitPage)
 	app->generateUniformFitPoints = generatePointsBtn->isChecked();
 	app->generatePeakCurves = GroupBoxMultiPeak->isChecked();
 	app->peakCurvesColor = boxPeaksColor->currentItem();
+	app->fit_scale_errors = scaleErrorsBox->isChecked();
 	}
 app->saveSettings();
 }

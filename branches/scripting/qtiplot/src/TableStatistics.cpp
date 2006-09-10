@@ -66,13 +66,14 @@ void TableStatistics::update(Table *t, const QString& colName)
 {
   if (t != d_base) return;
   
+  int j;
   if (d_type == row)
     for (unsigned r=0; r < d_targets.size(); r++)
     {
       int cols=d_base->tableCols();
       int i = d_targets[r];
       int m = 0;
-      for (int j = 0; j < cols; j++)
+      for (j = 0; j < cols; j++)
 	if (!d_base->text(i, j).isEmpty() && d_base->columnType(j) == Numeric)
 	  m++;
       if (m > 0)
@@ -80,7 +81,7 @@ void TableStatistics::update(Table *t, const QString& colName)
 	double *dat = new double[m];
 	gsl_vector *y = gsl_vector_alloc (m);
 	int aux = 0;
-	for (int j = 0; j<cols; j++)
+	for (j = 0; j<cols; j++)
 	{
 	  QString text = d_base->text(i,j);
 	  if (!text.isEmpty() && d_base->columnType(j) == Numeric)
@@ -117,7 +118,7 @@ void TableStatistics::update(Table *t, const QString& colName)
 
 	int rows = d_base->tableRows();
 	int start = -1, m = 0;
-	for (int j=0; j<rows; j++)
+	for (j=0; j<rows; j++)
 	  if (!d_base->text(j,i).isEmpty())
 	  {
 	    m++;
@@ -133,7 +134,7 @@ void TableStatistics::update(Table *t, const QString& colName)
 	gsl_vector_set (y, 0, val);
 	dat[0] = val;
 	double min = val, max = val;
-	for (int j = start + 1; j<rows; j++)
+	for (j = start + 1; j<rows; j++)
 	{
 	  if (!d_base->text(j, i).isEmpty())
 	  {

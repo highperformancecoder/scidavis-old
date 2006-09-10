@@ -762,6 +762,9 @@ public:
 	bool generatePeakCurves;
 	int peakCurvesColor;
 
+	//! Scale the errors output in fit operations with reduced chi^2
+	bool fit_scale_errors;
+
 	//! Number of points in a generated fit curve
 	int fitPoints;
 	bool pasteFitResultsToPlot;
@@ -778,6 +781,10 @@ public:
 	ShowWindowsPolicy show_windows_policy;
 	enum {MaxRecentProjects = 5};
 	int fileVersion;
+
+	//! Extra version information string (like "alpha", "-2", etc...)
+	QString d_extra_version;
+
 	int majVersion, minVersion, patchVersion;
 	QColor workspaceColor, panelsColor, panelsTextColor;
 	QString appStyle, workingDir;

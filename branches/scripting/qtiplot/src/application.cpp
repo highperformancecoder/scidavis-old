@@ -299,6 +299,7 @@ void ApplicationWindow::initGlobalConstants()
 #endif
 
 majVersion = 0; minVersion = 8; patchVersion = 7;
+d_extra_version = "-3";
 projectname="untitled";
 lastModified=0;
 activeGraph=0;
@@ -962,7 +963,6 @@ void ApplicationWindow::initTableAnalysisMenu()
 
 	normMenu = new QPopupMenu(this);
 	normMenu->setFont(appFont);
-	//normMenu->insertItem(tr("&Columns"), this, SLOT(normalizeSelection()));
 	actionNormalizeSelection->addTo(normMenu);
 	actionNormalizeTable->addTo(normMenu);
 	normMenuID = dataMenu->insertItem(tr("&Normalize"), normMenu);
@@ -4383,6 +4383,7 @@ generateUniformFitPoints = settings.readBoolEntry("/GenerateFunction", true);
 fitPoints = settings.readNumEntry("/Points", 100);
 generatePeakCurves = settings.readBoolEntry("/GeneratePeakCurves", true);
 peakCurvesColor = settings.readNumEntry("/PeaksColor", 2);//green color
+fit_scale_errors = settings.readBoolEntry("/ScaleErrors", false);
 settings.endGroup();
 
 settings.beginGroup("/ImportASCII");
@@ -4585,6 +4586,7 @@ settings.writeEntry("/GenerateFunction", generateUniformFitPoints);
 settings.writeEntry("/Points", fitPoints);
 settings.writeEntry("/GeneratePeakCurves", generatePeakCurves);
 settings.writeEntry("/PeaksColor", peakCurvesColor);
+settings.writeEntry("/ScaleErrors", fit_scale_errors);
 settings.endGroup();
 
 settings.beginGroup("/ImportASCII");
@@ -8093,12 +8095,12 @@ emit modified();
 void ApplicationWindow::about()
 {
 QString version = "QtiPlot " + QString::number(majVersion) + "." +
-				  QString::number(minVersion) + "." + QString::number(patchVersion);
+				  QString::number(minVersion) + "." + QString::number(patchVersion) + d_extra_version;
 
 QMessageBox::about(this,tr("About QtiPlot"),
 			 tr("<h2>"+ version + "</h2>"
 			 "<p><h3>Copyright(C): Ion Vasilief</h3>"
-			 "<p><h3>Released: 04/09/2006</h3>"));
+			 "<p><h3>Released: 10/09/2006</h3>"));
 }
 
 void ApplicationWindow::windowsMenuAboutToShow()
@@ -13655,7 +13657,7 @@ if (versionFile.open(IO_ReadOnly))
 	versionFile.remove();
 
 	QString currentVersion = QString::number(majVersion) + "." + QString::number(minVersion) +
-							"." + QString::number(patchVersion);
+							"." + QString::number(patchVersion) + d_extra_version;
 
 	if (currentVersion != version)
 		{

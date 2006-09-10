@@ -333,7 +333,7 @@ covMatrixName = new QLineEdit(GroupBox2);
 covMatrixName->setText( tr( "CovMatrix" ) );
 
 scaleErrorsBox = new QCheckBox (tr("Scale Errors with sqrt(Chi^2/doF)"), advancedPage);
-scaleErrorsBox->setChecked(false);
+scaleErrorsBox->setChecked(app->fit_scale_errors);
 connect( scaleErrorsBox, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
 
 logBox = new QCheckBox (tr("Write Parameters to Result Log"), advancedPage);
@@ -389,6 +389,7 @@ app->pasteFitResultsToPlot = plotLabelBox->isChecked();
 app->writeFitResultsToLog = logBox->isChecked();
 app->fitPoints = generatePointsBox->value();
 app->generateUniformFitPoints = generatePointsBtn->isChecked();
+app->fit_scale_errors = scaleErrorsBox->isChecked();
 app->saveSettings();
 btnApply->setEnabled(false);
 }
