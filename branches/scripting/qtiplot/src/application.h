@@ -240,7 +240,10 @@ public slots:
 	void customTable(Table* w);
 	void customizeTables(const QColor& bgColor,const QColor& textColor,
 						const QColor& headerColor,const QFont& textFont, const QFont& headerFont);
-	
+
+	TableStatistics *newTableStatistics(Table *base, int type, QValueList<int>,
+	    const QString &caption=QString::null);
+
 	void customGraph(Graph* g);
 	void setGraphDefaultSettings(bool autoscale,bool scaleFonts,bool resizeLayers);
 	void setLegendDefaultSettings(int frame, const QFont& font, 

@@ -172,6 +172,33 @@ void TableStatistics::update(Table *t, const QString& colName)
       }
 }
 
+void TableStatistics::renameCol(const QString &from, const QString &to)
+{
+  if (d_type == row) return;
+  for (unsigned c=0; c < d_targets.size(); c++)
+    if (from == QString(d_base->name())+"_"+text(c, 0))
+    {
+      setText(c, 0, to.section('_', 1, 1));
+      return;
+    }
+}
+
+void TableStatistics::removeCol(const QString &col)
+{
+  if (d_type == row)
+  {
+    update(d_base, col);
+    return;
+  }
+  for (unsigned c=0; c < d_targets.size(); c++)
+    if (col == QString(d_base->name())+"_"+text(c, 0))
+    {
+      d_targets.remove(d_targets.at(c));
+      worksheet->removeRow(c);
+      return;
+    }
+}
+
 QString TableStatistics::saveToString(const QString &geometry)
 {
   QString s = "<TableStatistics>\n";

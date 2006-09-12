@@ -22,6 +22,10 @@ class TableStatistics : public Table
   public slots:
     //! update statistics after a column has changed (to be connected with Table::modifiedData)
     void update(Table*, const QString& colName);
+    //! handle renaming of columns (to be connected with Table::changedColHeader)
+    void renameCol(const QString&, const QString&);
+    //! remove statistics of removed columns (to be connected with Table::removedCol)
+    void removeCol(const QString&);
 
   private:
     Table *d_base;

@@ -2667,6 +2667,22 @@ w->showMaximized();
 }
 
 /*
+ * !creates a new table with type statistics on target columns/rows of table base
+ */
+TableStatistics *ApplicationWindow::newTableStatistics(Table *base, int type, QValueList<int> target, const QString &caption)
+{
+TableStatistics* s = new TableStatistics(scriptEnv, ws, base, (TableStatistics::Type) type, target);
+if (caption.isEmpty())
+	initTable(s, s->name());
+else
+  	initTable(s, caption);
+connect(base, SIGNAL(modifiedData(Table*,const QString&)), s, SLOT(update(Table*,const QString&)));
+connect(base, SIGNAL(changedColHeader(const QString&, const QString&)), s, SLOT(renameCol(const QString&, const QString&)));
+connect(base, SIGNAL(removedCol(const QString&)), s, SLOT(removeCol(const QString&)));
+return s;
+}
+
+/*
 *creates a new empty note window
 */
 Note* ApplicationWindow::newNote(const QString& caption)
@@ -5690,10 +5706,7 @@ QValueList<int> targets;
 for (int i=0; i < t->tableCols(); i++)
   if (t->isColumnSelected(i, true))
     targets << i;
-TableStatistics* s = new TableStatistics(scriptEnv, ws, (Table*)ws->activeWindow(), TableStatistics::column, targets);
-initTable(s, s->name());
-connect((Table*)ws->activeWindow(), SIGNAL(modifiedData(Table*,const QString&)), s, SLOT(update(Table*,const QString&)));
-s->showNormal();
+newTableStatistics(t, TableStatistics::column, targets)->showNormal();
 }
 else
 	QMessageBox::warning(this, tr("QtiPlot - Column selection error"),
@@ -5712,10 +5725,7 @@ QValueList<int> targets;
 for (int i=0; i < t->tableRows(); i++)
   if (t->isRowSelected(i, true))
     targets << i;
-TableStatistics* s = new TableStatistics(scriptEnv, ws, t, TableStatistics::row, targets);
-initTable(s, s->name());
-connect(t, SIGNAL(modifiedData(Table*,const QString&)), s, SLOT(update(Table*,const QString&)));
-s->showNormal();
+newTableStatistics(t, TableStatistics::row, targets)->showNormal();
 }
 else
 	QMessageBox::warning(this, tr("QtiPlot - Row selection error"),
@@ -9934,9 +9944,7 @@ QValueList<int> targets;
 for (int i=1; i <= (*line).contains('\t'); i++)
   targets << (*line).section('\t',i,i).toInt();
 
-TableStatistics* w = new TableStatistics(scriptEnv, ws, table(list[1]), list[2]=="row" ? TableStatistics::row : TableStatistics::column, targets);
-initTable(w, caption);
-connect(table(list[1]), SIGNAL(modifiedData(Table*,const QString&)), w, SLOT(update(Table*,const QString&)));
+TableStatistics* w = newTableStatistics(table(list[1]), list[2]=="row" ? TableStatistics::row : TableStatistics::column, targets, caption);
 
 setListViewDate(caption,list[2]);
 w->setBirthDate(list[2]);
