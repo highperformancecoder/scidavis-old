@@ -11,14 +11,14 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
   setCaptionPolicy(myWidget::Both);
   if (d_type == row)
   {
-    setName(QString(d_base->name())+"-rowstat");
+    setName(QString(d_base->name())+"-"+tr("RowStats"));
     setWindowLabel(tr("Row Statistics of %1").arg(base->name()));
     resizeRows(d_targets.size());
     resizeCols(9);
     setColName(0, tr("Row"));
     setColName(1, tr("Cols"));
     setColName(2, tr("Mean"));
-    setColName(3, tr("Standard Dev"));
+    setColName(3, tr("StandardDev"));
     setColName(4, tr("Variance"));
     setColName(5, tr("Sum"));
     setColName(6, tr("Max"));
@@ -31,14 +31,14 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
   }
   else if (d_type == column)
   {
-    setName(QString(d_base->name())+"-colstat");
+    setName(QString(d_base->name())+"-"+tr("ColStats"));
     setWindowLabel(tr("Column Statistics of %1").arg(base->name()));
     resizeRows(d_targets.size());
     resizeCols(11);
     setColName(0, tr("Col"));
     setColName(1, tr("Rows"));
     setColName(2, tr("Mean"));
-    setColName(3, tr("Standard Dev"));
+    setColName(3, tr("StandardDev"));
     setColName(4, tr("Variance"));
     setColName(5, tr("Sum"));
     setColName(6, tr("iMax"));
@@ -60,6 +60,9 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
   else
     h=(tableRows()+1)*(worksheet->verticalHeader())->sectionSize(0);
   setGeometry(50,50,w + 45, h + 45);
+
+  setColPlotDesignation(0, Table::X);
+  setHeaderColType();
 }
 
 void TableStatistics::update(Table *t, const QString& colName)
@@ -74,8 +77,15 @@ void TableStatistics::update(Table *t, const QString& colName)
       int i = d_targets[r];
       int m = 0;
       for (j = 0; j < cols; j++)
-	if (!d_base->text(i, j).isEmpty() && d_base->columnType(j) == Numeric)
-	  m++;
+		if (!d_base->text(i, j).isEmpty() && d_base->columnType(j) == Numeric)
+			m++;
+
+	  if (!m)
+		{//clear row statistics
+		for (j = 1; j<9; j++)
+			setText(r, j, QString::null);
+		}
+
       if (m > 0)
       {
 	double *dat = new double[m];
@@ -124,6 +134,14 @@ void TableStatistics::update(Table *t, const QString& colName)
 	    m++;
 	    if (start<0) start=j;
 	  }
+
+	  if (!m)
+		{//clear col statistics
+		for (j = 1; j<11; j++)
+			setText(c, j, QString::null);
+		return;
+		}
+
 	if (start<0) return;
 
 	double *dat = new double[m];
@@ -170,6 +188,9 @@ void TableStatistics::update(Table *t, const QString& colName)
 	gsl_vector_free (y);
 	delete[] dat;
       }
+
+for (int i=0; i<worksheet->numCols(); i++)
+	emit modifiedData(this, Table::colName(i));
 }
 
 void TableStatistics::renameCol(const QString &from, const QString &to)

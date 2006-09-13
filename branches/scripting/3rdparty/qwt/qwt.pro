@@ -31,8 +31,8 @@ CONFIG           += release
 CONFIG           += thread
 
 # Only one of the following flags is allowed !
-#CONFIG           += dll 
-CONFIG           += staticlib
+CONFIG           += dll 
+#CONFIG           += staticlib
 
 # DEFINES          += QT_NO_CAST_ASCII
 # DEFINES          += QT_NO_CAST_TO_ASCII

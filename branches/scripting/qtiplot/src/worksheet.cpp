@@ -919,9 +919,7 @@ else
 	for (i=top;i<=bottom;i++)
 		{
 		for (int j=left;j<=right;j++)
-			{
 			worksheet->setText(i, j, "");
-			}
 		}
 
 	for (i=left;i<=right;i++)

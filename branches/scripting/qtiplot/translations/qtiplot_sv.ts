@@ -1,5 +1,442 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>@default</name>
+    <message>
+        <source>QtiPlot - untitled</source>
+        <translation>QtiPlot - namnlös</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation>QtiPlot - Fel</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
+        <translation>&lt;b&gt; %1 &lt;/b&gt;; Fel lokaliseringsalternativ eller så finns ingen översättning!</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt; %1 &lt;/b&gt;: Unknown command line option or the file doesn&apos;t exist!</source>
+        <translation>&lt;b&gt; %1 &lt;/b&gt;: Okänt alternativ för kommandoraden eller filen finns ej!</translation>
+    </message>
+    <message>
+        <source>QtiPlot project</source>
+        <translation>QtiPlot-projekt</translation>
+    </message>
+    <message>
+        <source>Compressed QtiPlot project</source>
+        <translation>Komprimerat QtiPlot-projekt</translation>
+    </message>
+    <message>
+        <source>Origin project</source>
+        <translation>Origin projekt</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Open Project</source>
+        <translation>QtiPlot - Öppna projekt</translation>
+    </message>
+    <message>
+        <source>QtiPlot - File openning error</source>
+        <translation>QtiPlot - Filöppningsfel</translation>
+    </message>
+    <message>
+        <source>The file: &lt;b&gt;%1&lt;/b&gt; doesn&apos;t exist!</source>
+        <translation>Filen: &lt;b&gt;&gt;%1&lt;/b&gt; saknas!</translation>
+    </message>
+    <message>
+        <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a QtiPlot or Origin project file!</source>
+        <translation>Filen: &lt;b&gt;%1&lt;/b&gt;är inte en QtiPLot- eller Origin-projektfil!!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - File Backup Error</source>
+        <translation>QtiPlot - Säkerhetskopieringsfel</translation>
+    </message>
+    <message>
+        <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you run the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
+        <translation>Kan ej göra säkerhetskopiering av &lt;b&gt;%1&lt;/b&gt; (till %2).&lt;br&gt;Om du ignorerar detta, riskerar du &lt;b&gt;dataförlust&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>QtiPlot - File Save Error</source>
+        <translation>QtiPlot - Filsparningsfel</translation>
+    </message>
+    <message>
+        <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
+        <translation>Filen: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; är redan öppnad i skrivskyddat läge</translation>
+    </message>
+    <message>
+        <source>Save Project As</source>
+        <translation>Spara projet som</translation>
+    </message>
+    <message>
+        <source>QtiPlot -- Overwrite File? </source>
+        <translation>QtiPlot - Skriva över fil? </translation>
+    </message>
+    <message>
+        <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
+Do you want to overwrite it?</source>
+        <translation>En fil med namn: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;finns redan!
+Vill du skriva över den?</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;Ja</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;Nej</translation>
+    </message>
+    <message>
+        <source>&amp;Find...</source>
+        <translation>&amp;Leta...</translation>
+    </message>
+    <message>
+        <source>App&amp;end Project...</source>
+        <translation>Lägg till proj&amp;ekt...</translation>
+    </message>
+    <message>
+        <source>Save &amp;As Project...</source>
+        <translation>Sp&amp;ara som projekt...</translation>
+    </message>
+    <message>
+        <source>Save Project &amp;As...</source>
+        <translation>Sp&amp;ara projekt som...</translation>
+    </message>
+    <message>
+        <source>&amp;Show All Windows</source>
+        <translation>&amp;Visa alla fönster</translation>
+    </message>
+    <message>
+        <source>&amp;Hide All Windows</source>
+        <translation>&amp;Göm alla fönster</translation>
+    </message>
+    <message>
+        <source>&amp;Delete Folder</source>
+        <translation>&amp;Tag bort mapp</translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation>&amp;Döp om</translation>
+    </message>
+    <message>
+        <source>New &amp;Window</source>
+        <translation>Nytt &amp;fönster</translation>
+    </message>
+    <message>
+        <source>New F&amp;older</source>
+        <translation>Ny m&amp;app</translation>
+    </message>
+    <message>
+        <source>&amp;None</source>
+        <translation>&amp;Inget</translation>
+    </message>
+    <message>
+        <source>&amp;Windows in Active Folder</source>
+        <translation>&amp;Fönster i aktiv mapp</translation>
+    </message>
+    <message>
+        <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
+        <translation>&amp;Fönster i aktiv mapp &amp;&amp; undermappar</translation>
+    </message>
+    <message>
+        <source>&amp;View Windows</source>
+        <translation>&amp;Visa fönster</translation>
+    </message>
+    <message>
+        <source>&amp;Properties...</source>
+        <translation>&amp;Egenskaper...</translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation>Dold</translation>
+    </message>
+    <message>
+        <source>Please enter a valid name!</source>
+        <translation>Mata in ett giltigt namn!</translation>
+    </message>
+    <message>
+        <source>Name already exists!</source>
+        <translation>Namnet finns redan!</translation>
+    </message>
+    <message>
+        <source>Please choose another name!</source>
+        <translation>Mata in ett annat namn!</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <source>Project</source>
+        <translation>Projekt</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation>Sökväg</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Storlek</translation>
+    </message>
+    <message>
+        <source>bytes</source>
+        <translation>byte</translation>
+    </message>
+    <message>
+        <source>Contents</source>
+        <translation>Innehåll</translation>
+    </message>
+    <message>
+        <source>Windows</source>
+        <translation>Fönster</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>Mappar</translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation>Skapad</translation>
+    </message>
+    <message>
+        <source>Modified</source>
+        <translation>Ändrad</translation>
+    </message>
+    <message>
+        <source>Properties</source>
+        <translation>Egenskaper</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation>Mapp</translation>
+    </message>
+    <message>
+        <source>New Folder</source>
+        <translation>Ny mapp</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Delete folder?</source>
+        <translation>QtiPlot - Tag bort mapp?</translation>
+    </message>
+    <message>
+        <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
+        <translation>Tag bort mapp &apos;%1&apos; och alla fönster den innehåller?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Nej</translation>
+    </message>
+    <message>
+        <source>Matrix</source>
+        <translation>Matris</translation>
+    </message>
+    <message>
+        <source>Table</source>
+        <translation>Tabell</translation>
+    </message>
+    <message>
+        <source>Note</source>
+        <translation>Notera</translation>
+    </message>
+    <message>
+        <source>Graph</source>
+        <translation>Diagram</translation>
+    </message>
+    <message>
+        <source>Graph 3D</source>
+        <translation>Rita 3D-diagram</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Etikett</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>Status</translation>
+    </message>
+    <message>
+        <source>QtiPlot - No match found</source>
+        <translation>QtiPlot - Ingen matchning hittad</translation>
+    </message>
+    <message>
+        <source>Sorry, no match found for string: &apos;%1&apos;</source>
+        <translation>Ingen matchning hittad för strängen: &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <source>Cannot move an object to itself!</source>
+        <translation>Kan ej flytta ett objekt till sig självt!</translation>
+    </message>
+    <message>
+        <source>Cannot move a parent folder into a child folder!</source>
+        <translation>Kan ej flytta en mapp till en av dess undermappar!</translation>
+    </message>
+    <message>
+        <source>QtiPlot</source>
+        <translation>QtiPlot</translation>
+    </message>
+    <message>
+        <source>Skipped Moving Folder</source>
+        <translation>Hoppar över mappflyttning</translation>
+    </message>
+    <message>
+        <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
+        <translation>Målmappen innehåller redan en mapp kallad &apos;%1*! Mappen hoppas över!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - HTTP Get Version File</source>
+        <translation>QtiPlot - HTTP hämta versionsfil</translation>
+    </message>
+    <message>
+        <source>Cannot write file %1
+%2.</source>
+        <translation>Kan ej skriva fil %1
+%2.</translation>
+    </message>
+    <message>
+        <source>Error while fetching version file with HTTP: %1.</source>
+        <translation>Fel vid hämtning av versionsfil HTTP: %1.</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Updates Available</source>
+        <translation>QtiPlot - Uppdateringar finns</translation>
+    </message>
+    <message>
+        <source>There is a newer version of QtiPlot (%1) available for download. Would you like to download it?</source>
+        <translation>Det finns en nyare version av QtiPlot (%1) tillgänglig för nerladdning. Vill du ladda ner den?</translation>
+    </message>
+    <message>
+        <source>QtiPlot - No Updates Available</source>
+        <translation>QtiPlot - Ingen uppdatering tillgänglig</translation>
+    </message>
+    <message>
+        <source>No updates available. Your current version %1 is the last version available!</source>
+        <translation>Ingen uppdatering tillgänglig. Din aktuell version %1 är den senaste!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Warning</source>
+        <translation>QtiPlot - Varning</translation>
+    </message>
+    <message>
+        <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
+        <translation>Detta kommer att rensa innehållet i alla data kopplat till tabellen. Är du säker?</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Enter row number</source>
+        <translation>QtiPlot - Mata in radnummer</translation>
+    </message>
+    <message>
+        <source>Row</source>
+        <translation>Rad</translation>
+    </message>
+    <message>
+        <source>Please select two columns for this operation!</source>
+        <translation>Välj två kolumner för denna åtgärd!</translation>
+    </message>
+    <message>
+        <source>Could not allocate memory, operation aborted!</source>
+        <translation>Kunde inte tilldela minne, åtgärden avbröts!</translation>
+    </message>
+    <message>
+        <source>Error in GSL forward FFT operation!</source>
+        <translation>Fel i GSL fram-FFT-åtgärd!</translation>
+    </message>
+    <message>
+        <source>Please select a Y column to plot!</source>
+        <translation>Välj en Y-kolumn för plottning!</translation>
+    </message>
+    <message>
+        <source>Please set a default X column for this table, first!</source>
+        <translation>Bestäm en standard X-kolumn till denna tabell först!</translation>
+    </message>
+    <message>
+        <source>Please select a column to plot!</source>
+        <translation>Välj en kolumn för plottning!</translation>
+    </message>
+    <message>
+        <source>Please select four columns for this operation!</source>
+        <translation>Välj fyra kolumner för denna åtgärd!</translation>
+    </message>
+    <message>
+        <source>You need at least two columns for this operation!</source>
+        <translation>Du behöver minst två kolumner för denna åtgärd!</translation>
+    </message>
+    <message>
+        <source>Please select a Z column for this operation!</source>
+        <translation>Välj en Z-kolumn för denna åtgärd!</translation>
+    </message>
+    <message>
+        <source>You need to define a X column first!</source>
+        <translation>Du måste definiera en X-kolumn först!</translation>
+    </message>
+    <message>
+        <source>You need to define a Y column first!</source>
+        <translation>Du måste definiera en Y-kolumn först!</translation>
+    </message>
+    <message>
+        <source>Qtiplot - Reading file...</source>
+        <translation>QtiPlot - Läser fil...</translation>
+    </message>
+    <message>
+        <source>QtiPlot - ASCII Export Error</source>
+        <translation>QtiPlot - ASCII exportfel</translation>
+    </message>
+    <message>
+        <source>Rows will be deleted from the table!</source>
+        <translation>Rader kommer att tas bort från tabellen!</translation>
+    </message>
+    <message>
+        <source>Do you really want to continue?</source>
+        <translation>Vill du verkligen fortsätta?</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+    <message>
+        <source>Columns will be deleted from the table!</source>
+        <translation>Kolumner kommer att tas bort från tabellen!</translation>
+    </message>
+    <message>
+        <source>Please select two columns for this operation:
+ the first represents the signal and the second the response function!</source>
+        <translation>Välj två kolumner för denna åtgärd:
+den första representerar signalen och den andra svarsfunktionen!</translation>
+    </message>
+    <message>
+        <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
+        <translation>Svarsdatamängden &apos;%1&apos; måste vara mindre &apos;än halva storleken på signaldatamängden &apos;%2&apos;!</translation>
+    </message>
+    <message>
+        <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
+        <translation>Svarsdatamängden &apos;%1&apos; måste innehålla ett udda antal punkter!</translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation>Frekvens</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Tid</translation>
+    </message>
+    <message>
+        <source>Real</source>
+        <translation>Real</translation>
+    </message>
+    <message>
+        <source>Imaginary</source>
+        <translation>Imaginär</translation>
+    </message>
+    <message>
+        <source>Amplitude</source>
+        <translation>Amplitud</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Vinkel</translation>
+    </message>
+</context>
+<context>
     <name>ApplicationWindow</name>
     <message>
         <source>QtiPlot - Error</source>
@@ -363,7 +800,7 @@
     </message>
     <message>
         <source>Note</source>
-        <translation>Notera</translation>
+        <translation type="obsolete">Notera</translation>
     </message>
     <message>
         <source>The matrix &apos;%1&apos; already exists. It has been renamed &apos;%2&apos;.</source>
@@ -2277,35 +2714,35 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     </message>
     <message>
         <source>&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot is open-source software and its development required hundreds of hours of work.&lt;br&gt;&lt;br&gt;<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   If you like it, you&apos;re using it in your work and you would like to see it <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   constantly improved,&lt;br&gt; please support its author by making a donation.&lt;br&gt;&lt;br&gt; <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   Would you like to make a donation for QtiPlot now?&lt;/b&gt;&lt;/font&gt;</source>
-        <translation>&lt;teckensnittsstorlek=+2, färg=mörkblå&gt;&lt;b&gt;QtiPlot är en &quot;open-source software&quot; vars utveckling krävt hundratals timmars arbete.&lt;br&gt;&lt;br&gt;<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   Om du föredrar den, använder det i ditt arbete och om du vill se att det <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   stadigt förbättras.&lt;br&gt; vänligen stöd dess författare genom en donation.&lt;br&gt;&lt;br&gt;<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   Vill du göra en donation till QtiPlot nu?&lt;/b&gt;&lt;/font&gt;</translation>
+        <translation type="obsolete">&lt;teckensnittsstorlek=+2, färg=mörkblå&gt;&lt;b&gt;QtiPlot är en &quot;open-source software&quot; vars utveckling krävt hundratals timmars arbete.&lt;br&gt;&lt;br&gt;<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   Om du föredrar den, använder det i ditt arbete och om du vill se att det <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   stadigt förbättras.&lt;br&gt; vänligen stöd dess författare genom en donation.&lt;br&gt;&lt;br&gt;<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   Vill du göra en donation till QtiPlot nu?&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
     <message>
         <source>Please support QtiPlot!</source>
-        <translation>Stöd QtiPlot!</translation>
+        <translation type="obsolete">Stöd QtiPlot!</translation>
     </message>
     <message>
         <source>Yes, I&apos;d love to!</source>
-        <translation>Ja, det vill jag gärna göra också!</translation>
+        <translation type="obsolete">Ja, det vill jag gärna göra också!</translation>
     </message>
     <message>
         <source>Ask me again later!</source>
-        <translation>Fråga mig senare!</translation>
+        <translation type="obsolete">Fråga mig senare!</translation>
     </message>
     <message>
         <source>No, stop bothering me!</source>
-        <translation>Nej, sluta med att störa mig!</translation>
+        <translation type="obsolete">Nej, sluta med att störa mig!</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
-        <translation>&lt;b&gt; %1 &lt;/b&gt;; Fel lokaliseringsalternativ eller så finns inge översättning!</translation>
+        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;; Fel lokaliseringsalternativ eller så finns inge översättning!</translation>
     </message>
     <message>
         <source>QtiPlot - File Backup Error</source>
-        <translation>QtiPlot - Säkerhetskopieringsfel</translation>
+        <translation type="obsolete">QtiPlot - Säkerhetskopieringsfel</translation>
     </message>
     <message>
         <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you run the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation>Kan ej göra säkerhetskopiering av &lt;b&gt;%1&lt;/b&gt; (till %2).&lt;br&gt;Om du ignorerar detta, riskerar du &lt;b&gt;dataförlust&lt;/b&gt;.</translation>
+        <translation type="obsolete">Kan ej göra säkerhetskopiering av &lt;b&gt;%1&lt;/b&gt; (till %2).&lt;br&gt;Om du ignorerar detta, riskerar du &lt;b&gt;dataförlust&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>QtiPlot - File Save Error</source>
@@ -2313,99 +2750,99 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     </message>
     <message>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
-        <translation>Filen: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; är redan öppnad i skruvskyddat läge</translation>
+        <translation type="obsolete">Filen: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; är redan öppnad i skruvskyddat läge</translation>
     </message>
     <message>
         <source>&amp;Find...</source>
-        <translation>&amp;Leta...</translation>
+        <translation type="obsolete">&amp;Leta...</translation>
     </message>
     <message>
         <source>App&amp;end Project...</source>
-        <translation>Lägg till proj&amp;ekt...</translation>
+        <translation type="obsolete">Lägg till proj&amp;ekt...</translation>
     </message>
     <message>
         <source>Save &amp;As Project...</source>
-        <translation>Sp&amp;ara som projekt...</translation>
+        <translation type="obsolete">Sp&amp;ara som projekt...</translation>
     </message>
     <message>
         <source>Save Project &amp;As...</source>
-        <translation>Sp&amp;ara projet som...</translation>
+        <translation type="obsolete">Sp&amp;ara projet som...</translation>
     </message>
     <message>
         <source>&amp;Show All Windows</source>
-        <translation>&amp;Visa alla fönster</translation>
+        <translation type="obsolete">&amp;Visa alla fönster</translation>
     </message>
     <message>
         <source>&amp;Hide All Windows</source>
-        <translation>&amp;Göm alla fönster</translation>
+        <translation type="obsolete">&amp;Göm alla fönster</translation>
     </message>
     <message>
         <source>&amp;Delete Folder</source>
-        <translation>&amp;Tag bort mapp</translation>
+        <translation type="obsolete">&amp;Tag bort mapp</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation>&amp;Döp om</translation>
+        <translation type="obsolete">&amp;Döp om</translation>
     </message>
     <message>
         <source>&amp;Windows in Active Folder</source>
-        <translation>&amp;Fönster i aktiv mapp</translation>
+        <translation type="obsolete">&amp;Fönster i aktiv mapp</translation>
     </message>
     <message>
         <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
-        <translation>&amp;Fönster i aktiv mapp &amp;&amp; undermappar</translation>
+        <translation type="obsolete">&amp;Fönster i aktiv mapp &amp;&amp; undermappar</translation>
     </message>
     <message>
         <source>&amp;View Windows</source>
-        <translation>&amp;Visa fönster</translation>
+        <translation type="obsolete">&amp;Visa fönster</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation>Gömd</translation>
+        <translation type="obsolete">Gömd</translation>
     </message>
     <message>
         <source>Project</source>
-        <translation>Projekt</translation>
+        <translation type="obsolete">Projekt</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation>Sökväg</translation>
+        <translation type="obsolete">Sökväg</translation>
     </message>
     <message>
         <source>bytes</source>
-        <translation>byte</translation>
+        <translation type="obsolete">byte</translation>
     </message>
     <message>
         <source>Contents</source>
-        <translation>Innehåll</translation>
+        <translation type="obsolete">Innehåll</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation>Fönster</translation>
+        <translation type="obsolete">Fönster</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation>Mappar</translation>
+        <translation type="obsolete">Mappar</translation>
     </message>
     <message>
         <source>Modified</source>
-        <translation>Ändrad</translation>
+        <translation type="obsolete">Ändrad</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation>Egenskaper</translation>
+        <translation type="obsolete">Egenskaper</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation>Ny mapp</translation>
+        <translation type="obsolete">Ny mapp</translation>
     </message>
     <message>
         <source>QtiPlot - Delete folder?</source>
-        <translation>QtiPlot - Tag bort mapp?</translation>
+        <translation type="obsolete">QtiPlot - Tag bort mapp?</translation>
     </message>
     <message>
         <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
-        <translation>Tag bort mapp &apos;%1&apos; och alla fönster den innehåller?</translation>
+        <translation type="obsolete">Tag bort mapp &apos;%1&apos; och alla fönster den innehåller?</translation>
     </message>
     <message>
         <source>Plot 3D</source>
@@ -2413,60 +2850,60 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Status</translation>
+        <translation type="obsolete">Status</translation>
     </message>
     <message>
         <source>QtiPlot - No match found</source>
-        <translation>QtiPlot - Ingen matchning hittad</translation>
+        <translation type="obsolete">QtiPlot - Ingen matchning hittad</translation>
     </message>
     <message>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
-        <translation>Ingne matchning hittad för strängen: &apos;%1&apos;</translation>
+        <translation type="obsolete">Ingne matchning hittad för strängen: &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Cannot move an object to itself!</source>
-        <translation>Kan ej flytta ett objekt till sig självt!</translation>
+        <translation type="obsolete">Kan ej flytta ett objekt till sig självt!</translation>
     </message>
     <message>
         <source>Cannot move a parent folder into a child folder!</source>
-        <translation>Kan ej flytta en mapp till en av dess undermappar!</translation>
+        <translation type="obsolete">Kan ej flytta en mapp till en av dess undermappar!</translation>
     </message>
     <message>
         <source>Skipped Moving Folder</source>
-        <translation>Hoppar över mappflyttning</translation>
+        <translation type="obsolete">Hoppar över mappflyttning</translation>
     </message>
     <message>
         <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
-        <translation>Målmappen innehåller redan en mapp kallad &apos;%1*! Mapped hoppas över!</translation>
+        <translation type="obsolete">Målmappen innehåller redan en mapp kallad &apos;%1*! Mapped hoppas över!</translation>
     </message>
     <message>
         <source>QtiPlot - HTTP Get Version File</source>
-        <translation>QtiPlot - HTTP hämta versionsfil</translation>
+        <translation type="obsolete">QtiPlot - HTTP hämta versionsfil</translation>
     </message>
     <message>
         <source>Error while fetching version file with HTTP: %1.</source>
-        <translation>Fel vid hämtning av versionsfil HTTP: %1.</translation>
+        <translation type="obsolete">Fel vid hämtning av versionsfil HTTP: %1.</translation>
     </message>
     <message>
         <source>QtiPlot - No Updates Available</source>
-        <translation>QtiPlot - Ingen uppdatering tillgänglig</translation>
+        <translation type="obsolete">QtiPlot - Ingen uppdatering tillgänglig</translation>
     </message>
     <message>
         <source>No updates available. Your current version %1 is the last version available!</source>
-        <translation>Ingen uppdatering tillgänglig. Din aktuell version %1 är den senaste!</translation>
+        <translation type="obsolete">Ingen uppdatering tillgänglig. Din aktuell version %1 är den senaste!</translation>
     </message>
     <message>
         <source>QtiPlot - Updates Available</source>
-        <translation>QtiPlot - Uppdatering tillgänglig</translation>
+        <translation type="obsolete">QtiPlot - Uppdatering tillgänglig</translation>
     </message>
     <message>
         <source>There is a newer version of QtiPlot (%1) available for download. Would you like to download it?</source>
-        <translation>Det finns en nyare version av QtiPlot (%1) tillgänglig för nerladdning. Vill du ladda ner den?</translation>
+        <translation type="obsolete">Det finns en nyare version av QtiPlot (%1) tillgänglig för nerladdning. Vill du ladda ner den?</translation>
     </message>
     <message>
         <source>Cannot write file %1
 %2.</source>
-        <translation>Kan ej skriva fil %1
+        <translation type="obsolete">Kan ej skriva fil %1
 %2.</translation>
     </message>
     <message>
@@ -2633,19 +3070,19 @@ Delar av denna fil kanske inte visas som väntat.</translation>
     </message>
     <message>
         <source>Graph 3D</source>
-        <translation>Rita 3D-diagram</translation>
+        <translation type="obsolete">Rita 3D-diagram</translation>
     </message>
     <message>
         <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
-        <translation>Detta kommer att rensa innehållet i alla data kopplat till tabellen. Är du säker?</translation>
+        <translation type="obsolete">Detta kommer att rensa innehållet i alla data kopplat till tabellen. Är du säker?</translation>
     </message>
     <message>
         <source>QtiPlot - Enter row number</source>
-        <translation>QtiPlot - Mata in radnummer</translation>
+        <translation type="obsolete">QtiPlot - Mata in radnummer</translation>
     </message>
     <message>
         <source>Row</source>
-        <translation>Rad</translation>
+        <translation type="obsolete">Rad</translation>
     </message>
 </context>
 <context>
@@ -3696,7 +4133,7 @@ Delar av denna fil kanske inte visas som väntat.</translation>
     <message>
         <source>The text in the clipboard is larger than your current selection!<byte value="x9"/>        
 Do you want to insert cells?</source>
-        <translation>Texten i urklipp är större än den aktuella markeringen!<byte value="x9"/>        
+        <translation type="obsolete">Texten i urklipp är större än den aktuella markeringen!<byte value="x9"/>        
 Vill du skjuta in celler?</translation>
     </message>
     <message>
@@ -4076,6 +4513,58 @@ Vill du skriva över den?</translation>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
         <translation>Kunde inte skriva till filen: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Verifiera att du har rättighet att skriva på denna plats!</translation>
     </message>
+    <message>
+        <source>&amp;New</source>
+        <translation>&amp;Ny</translation>
+    </message>
+    <message>
+        <source>&amp;Open...</source>
+        <translation>&amp;Öppna...</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Spara</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation>Sp&amp;ara som...</translation>
+    </message>
+    <message>
+        <source>&amp;Print</source>
+        <translation>&amp;Skriv ut</translation>
+    </message>
+    <message>
+        <source>&amp;Undo</source>
+        <translation>&amp;Ångra</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>Gö&amp;r om</translation>
+    </message>
+    <message>
+        <source>&amp;Cut</source>
+        <translation>Klipp &amp;ut</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>&amp;Kopiera</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>Klistra &amp;in</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation>&amp;Tag bort</translation>
+    </message>
+    <message>
+        <source>Execute &amp;All</source>
+        <translation>Utför &amp;allt</translation>
+    </message>
+    <message>
+        <source>&amp;Evaluate Expression</source>
+        <translation>Utvärd&amp;era uttryck</translation>
+    </message>
 </context>
 <context>
     <name>ScriptingLangDialog</name>
@@ -4199,7 +4688,7 @@ Vill du skriva över den?</translation>
     <message>
         <source>The text in the clipboard is larger than your current selection!<byte value="x9"/>        
 Do you want to insert cells?</source>
-        <translation>Texten i urklipp är större än den aktuella markeringen!<byte value="x9"/>        
+        <translation type="obsolete">Texten i urklipp är större än den aktuella markeringen!<byte value="x9"/>        
 Vill du skjuta in celler?</translation>
     </message>
     <message>
@@ -4216,168 +4705,168 @@ Vill du skjuta in celler?</translation>
     </message>
     <message>
         <source>Please select two columns for this operation!</source>
-        <translation>Vält två kolumner för denna åtgärd!</translation>
+        <translation type="obsolete">Vält två kolumner för denna åtgärd!</translation>
     </message>
     <message>
         <source>Could not allocate memory, operation aborted!</source>
-        <translation>Kunde inte tilldela minne, åtgärden avbröts!</translation>
+        <translation type="obsolete">Kunde inte tilldela minne, åtgärden avbröts!</translation>
     </message>
     <message>
         <source>Error in GSL forward FFT operation!</source>
-        <translation>Fel i GSL fram-FFT-åtgärd!</translation>
+        <translation type="obsolete">Fel i GSL fram-FFT-åtgärd!</translation>
     </message>
     <message>
         <source>Please select a Y column to plot!</source>
-        <translation>Välj en Y-kolumn för plottning!</translation>
+        <translation type="obsolete">Välj en Y-kolumn för plottning!</translation>
     </message>
     <message>
         <source>Please set a default X column for this table, first!</source>
-        <translation>Bestäm en standard X-kolumn till denna tabell först!</translation>
+        <translation type="obsolete">Bestäm en standard X-kolumn till denna tabell först!</translation>
     </message>
     <message>
         <source>Please select a column to plot!</source>
-        <translation>Välj en kolumn för plottning!</translation>
+        <translation type="obsolete">Välj en kolumn för plottning!</translation>
     </message>
     <message>
         <source>Please select four columns for this operation!</source>
-        <translation>Välj fyra kolumner för denna åtgärd!</translation>
+        <translation type="obsolete">Välj fyra kolumner för denna åtgärd!</translation>
     </message>
     <message>
         <source>You need at least two columns for this operation!</source>
-        <translation>Du behöver minst två kolumner för denna åtgärd!</translation>
+        <translation type="obsolete">Du behöver minst två kolumner för denna åtgärd!</translation>
     </message>
     <message>
         <source>Please select a Z column for this operation!</source>
-        <translation>Välj en Z-kolumn för denna åtgärd!</translation>
+        <translation type="obsolete">Välj en Z-kolumn för denna åtgärd!</translation>
     </message>
     <message>
         <source>You need to define a X column first!</source>
-        <translation>Du måste definiera en X-kolumn först!</translation>
+        <translation type="obsolete">Du måste definiera en X-kolumn först!</translation>
     </message>
     <message>
         <source>You need to define a Y column first!</source>
-        <translation>Du måste definiera en Y-kolumn först!</translation>
+        <translation type="obsolete">Du måste definiera en Y-kolumn först!</translation>
     </message>
     <message>
         <source>Qtiplot - Reading file...</source>
-        <translation>QtiPlot - Läser fil...</translation>
+        <translation type="obsolete">QtiPlot - Läser fil...</translation>
     </message>
     <message>
         <source>QtiPlot - ASCII Export Error</source>
-        <translation>QtiPlot - ASCII exportfel</translation>
+        <translation type="obsolete">QtiPlot - ASCII exportfel</translation>
     </message>
     <message>
         <source>Rows will be deleted from the table!</source>
-        <translation>Rader kommer att tas bort från tabellen!</translation>
+        <translation type="obsolete">Rader kommer att tas bort från tabellen!</translation>
     </message>
     <message>
         <source>Do you really want to continue?</source>
-        <translation>Vill du verkligen fortsätta?</translation>
+        <translation type="obsolete">Vill du verkligen fortsätta?</translation>
     </message>
     <message>
         <source>QtiPlot</source>
-        <translation>QtiPlot</translation>
+        <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
         <source>Columns will be deleted from the table!</source>
-        <translation>Kolumner kommer att tas bort från tabellen!</translation>
+        <translation type="obsolete">Kolumner kommer att tas bort från tabellen!</translation>
     </message>
     <message>
         <source>Please select two columns for this operation:
  the first represents the signal and the second the response function!</source>
-        <translation>Välj två kolumner för denna åtgärd:
+        <translation type="obsolete">Välj två kolumner för denna åtgärd:
 den första representerar signalen och den andra svarsfunktionen!</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
-        <translation>Svarsdatamängden &apos;%1&apos; måste vara mindre &apos;än halva storleken på signaldatamängden &apos;%2&apos;!</translation>
+        <translation type="obsolete">Svarsdatamängden &apos;%1&apos; måste vara mindre &apos;än halva storleken på signaldatamängden &apos;%2&apos;!</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
-        <translation>Svarsdatamängden &apos;%1&apos; måste innehålla ett udda antal punkter!</translation>
+        <translation type="obsolete">Svarsdatamängden &apos;%1&apos; måste innehålla ett udda antal punkter!</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation>Frekvens</translation>
+        <translation type="obsolete">Frekvens</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Tid</translation>
+        <translation type="obsolete">Tid</translation>
     </message>
     <message>
         <source>Real</source>
-        <translation>Real</translation>
+        <translation type="obsolete">Real</translation>
     </message>
     <message>
         <source>Imaginary</source>
-        <translation>Imaginär</translation>
+        <translation type="obsolete">Imaginär</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation>Amplitud</translation>
+        <translation type="obsolete">Amplitud</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Vinkel</translation>
+        <translation type="obsolete">Vinkel</translation>
     </message>
 </context>
 <context>
     <name>TableStatistics</name>
     <message>
         <source>Row Statistics of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Radstatistik för %1</translation>
     </message>
     <message>
         <source>Row</source>
-        <translation type="unfinished">Rad</translation>
+        <translation>Rad</translation>
     </message>
     <message>
         <source>Cols</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolumner</translation>
     </message>
     <message>
         <source>Mean</source>
-        <translation type="unfinished"></translation>
+        <translation>Medelvärde</translation>
     </message>
     <message>
         <source>Standard Dev</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardavvikelse</translation>
     </message>
     <message>
         <source>Variance</source>
-        <translation type="unfinished"></translation>
+        <translation>Varians</translation>
     </message>
     <message>
         <source>Sum</source>
-        <translation type="unfinished">Summa</translation>
+        <translation>Summa</translation>
     </message>
     <message>
         <source>Max</source>
-        <translation type="unfinished">Max</translation>
+        <translation>Max</translation>
     </message>
     <message>
         <source>Min</source>
-        <translation type="unfinished">Min</translation>
+        <translation>Min</translation>
     </message>
     <message>
         <source>Column Statistics of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolumnstatistik för %1</translation>
     </message>
     <message>
         <source>Col</source>
-        <translation type="unfinished"></translation>
+        <translation>Kol</translation>
     </message>
     <message>
         <source>Rows</source>
-        <translation type="unfinished">Rader</translation>
+        <translation>Rader</translation>
     </message>
     <message>
         <source>iMax</source>
-        <translation type="unfinished"></translation>
+        <translation>iMax</translation>
     </message>
     <message>
         <source>iMin</source>
-        <translation type="unfinished"></translation>
+        <translation>iMin</translation>
     </message>
 </context>
 <context>
@@ -5316,6 +5805,10 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
         <source>Default scripting language</source>
         <translation>Standardskriptspråk</translation>
     </message>
+    <message>
+        <source>Scale Errors with sqrt(Chi^2/doF)</source>
+        <translation>Skalfel med sqrt(Chi^2/doF)</translation>
+    </message>
 </context>
 <context>
     <name>curvesDialog</name>
@@ -6141,7 +6634,7 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
     </message>
     <message>
         <source>Scale Errors with sqrt(Chi^2/doF)</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalfel med sqt(Chi^2/doF)</translation>
     </message>
 </context>
 <context>
