@@ -111,7 +111,8 @@ appImports = (
     "matrix", "newMatrix",
     "graph", "newGraph",
     "note", "newNote",
-    "plot"
+    "plot",
+    "activeFolder", "rootFolder"
     )
 for name in appImports:
   setattr(__main__,name,getattr(qti.app,name))

@@ -45,6 +45,8 @@ private:
   myWidget(const myWidget&);
 };
 
+typedef QPtrList<myWidget> MDIWindowList;
+
 class Table: myWidget
 {
 %TypeHeaderCode
@@ -149,7 +151,6 @@ class LineMarker // : QwtPlotMarker
 #include "src/LineMarker.h"
 %End
 public:
-  // virtual properties?
   QPoint startPoint() /PyName=start/;
   void setStartPoint(QPoint) /PyName=setStart/;
   QPoint endPoint() /PyName=end/;
@@ -259,17 +260,37 @@ sipTypeDef *t;
   
 public:
   Table* table(const QString&);
+%MethodCode
+  sipRes = sipCpp->current_folder->table(*a0, false);
+  if(!sipRes)
+    sipRes = sipCpp->projectFolder()->table(*a0, true);
+%End
   Table* newTable();
   Table* newTable(const QString&, int=2, int=30);
 %MethodCode
   sipRes = sipCpp->newTable(*a0, a2, a1);
 %End
   Matrix* matrix(const QString&);
+%MethodCode
+  sipRes = sipCpp->current_folder->matrix(*a0, false);
+  if(!sipRes)
+    sipRes = sipCpp->projectFolder()->matrix(*a0, true);
+%End
   Matrix* newMatrix();
   Matrix* newMatrix(const QString&, int=32, int=32);
   MultiLayer *plot(const QString&) /PyName=graph/;
+%MethodCode
+  sipRes = sipCpp->current_folder->graph(*a0, false);
+  if(!sipRes)
+    sipRes = sipCpp->projectFolder()->graph(*a0, true);
+%End
   MultiLayer* newGraph();
   Note *note(const QString&);
+%MethodCode
+  sipRes = sipCpp->current_folder->note(*a0, false);
+  if(!sipRes)
+    sipRes = sipCpp->projectFolder()->note(*a0, true);
+%End
   Note* newNote(const QString& = QString::null);
   MultiLayer *multilayerPlot(Table*, SIP_PYTUPLE, int=1) /PyName=plot/;
 %MethodCode
@@ -293,15 +314,18 @@ public:
   sipRes = sipCpp->multilayerPlot(a0, l, a2);
 %End
   
-  QWidgetList *windowsList();
+  QWidgetList *windowsList() /PyName=windows/;
 
   QTextEdit *results;
 //  QTextEdit *console;
 
   // folders
-  Folder *current_folder;
+  Folder *activeFolder() /NoDerived/;
+%MethodCode
+  sipRes = sipCpp->current_folder;
+%End
   void saveFolder(Folder *folder, const QString& fn);
-  Folder* projectFolder();
+  Folder* projectFolder() /PyName=rootFolder/;
 
 private:
   ApplicationWindow(const ApplicationWindow&);
@@ -677,14 +701,22 @@ class Folder : QObject
 #include "src/folder.h"
 %End
 public:
-  typedef QPtrList<myWidget> MDIWindowList;
   MDIWindowList windowsList() /PyName=windows/;
-  void setFolderName(const QString&);
-  QString folderName();
+// TODO: implement signal Folder::nameChanged and make it update the project explorer; adjust renaming from GUI accordingly
+//  void setFolderName(const QString&) /PyName=setName/;
+  QString folderName() /PyName=name/;
   QString path();
-  QStringList subfolders();
-  Folder *findSubfolder(const QString&, bool=true, bool=false);
-  myWidget* findWindow(const QString&, bool, bool, bool, bool);
+
+  QPtrList<Folder> folders();
+  Folder *findSubfolder(const QString&, bool=true, bool=false)  /PyName=folder/;
+  myWidget* findWindow(const QString&, bool=true, bool=true, bool=false, bool=true);
+
+  myWidget *window(const QString &name, const char *cls="myWidget", bool recursive=false);
+  Table *table(const QString &name, bool recursive=false);
+  Matrix *matrix(const QString &name, bool recursive=false);
+  MultiLayer *graph(const QString &name, bool recursive=false);
+  Note *note(const QString &name, bool recursive=false);
+
 private:
   Folder(const Folder&);
 };

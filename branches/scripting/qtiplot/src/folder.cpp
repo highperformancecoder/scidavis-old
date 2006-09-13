@@ -84,6 +84,16 @@ Folder::Folder( Folder *parent, const QString &name )
 	lstWindows.setAutoDelete( true );
 }
 
+QPtrList<Folder> Folder::folders()
+{
+QPtrList<Folder> lst;
+QObjectList *c = (QObjectList*) children();
+if (!c) return lst;
+for (QObject *f = c->first(); f; f = c->next())
+  lst.append((Folder*) f);
+return lst;
+}
+
 QStringList Folder::subfolders()
 {
 QStringList lst = QStringList();
@@ -173,6 +183,22 @@ for (w = lstWindows.first(); w; w = lstWindows.next())
 		}
 	}
 return w;
+}
+
+myWidget *Folder::window(const QString &name, const char *cls, bool recursive)
+{
+  for (myWidget *w = lstWindows.first(); w; w=lstWindows.next())
+    if (w->inherits(cls) && name == w->name())
+      return w;
+  if (!recursive) return NULL;
+  QObjectList* folderLst = (QObjectList*)children();
+  if (!folderLst) return NULL;
+  for (QObject *f=folderLst->first(); f; f=folderLst->next())
+  {
+    myWidget *w = ((Folder*)f)->window(name, cls, true);
+    if (w) return w;
+  }
+  return NULL;
 }
 
 QString Folder::sizeToString()

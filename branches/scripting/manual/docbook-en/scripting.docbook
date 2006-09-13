@@ -743,6 +743,26 @@ n = note("momo")
 # use defaults
 n = note()
 	  </programlisting></para>
+	  <para>
+	    New objects will always be added to the active folder.
+	    The functions table, matrix, graph and note will start searching in the active folder and, failing this, continue with a depth-first recursive search of the project's root folder.
+	    In order to access other folders, there are the functions
+	    <programlisting width="40">
+f = activeFolder()
+# and
+f = rootFolder()
+</programlisting>
+	    which can be used to access subfolders and windows:
+	    <programlisting width="40">
+f2 = f.folders()[number]
+f2 = f.folder(name, caseSensitive=True, partialMatch=False)
+t = f.table(name, recursive=False)
+m = f.matrix(name, recursive=False)
+g = f.graph(name, recursive=False)
+n = f.note(name, recursive=False)
+</programlisting>
+            If you supply True for the recursive argument, a depth-first recursive search of all subfolders will be performed and the first match returned.</para>
+
 
         <para>Also, every piece of code is executed in the context of an
 	  object which you can access via the <varname>self</varname> variable. For example,
