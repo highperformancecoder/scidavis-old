@@ -3067,8 +3067,7 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type, const QSt
 				w->setText(i,c,QString::number(dev,'g',15));
 			}
 		}		
-activeGraph->addErrorBars(w, xColName, name, w, errColName, 
-						   direction, 2, 5, QColor(black), false, true, true);
+activeGraph->addErrorBars(w, xColName, name, w, errColName, direction);
 }
 
 void ApplicationWindow::defineErrorBars(const QString& curveName, const QString& errColumnName, int direction)
@@ -3099,10 +3098,7 @@ if (errTable->isEmptyColumn(errCol))
 	addErrorBars();
 	return;
 	}
-
-activeGraph->addErrorBars(w, curveName, errTable, errColumnName,
-						  direction, 2, 5, QColor(black), false, true, true);
-	
+activeGraph->addErrorBars(w, curveName, errTable, errColumnName, direction);
 emit modified();
 }
 

@@ -122,13 +122,12 @@ public slots:
 	 // error bars
 	 void addErrorBars(Table *w, const QString& xColName, const QString& yColName, 
 					   Table *errTable, const QString& errColName,
-					   int type, int width, int cap, const QColor& color,
-					   bool through, bool minus,bool plus, double xOffset = 0, double yOffset = 0);
+					   int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(black),
+					   bool through = true, bool minus = true, bool plus = true, double xOffset = 0, double yOffset = 0);
 	
-	 void addErrorBars(Table *w, const QString& yColName, 
-						 Table *errTable, const QString& errColName,
-						 int type, int width, int cap, const QColor& color,
-						 bool through, bool minus,bool plus);
+	 void addErrorBars(Table *w, const QString& yColName, Table *errTable, const QString& errColName,
+						 int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(black),
+						 bool through = true, bool minus = true, bool plus = true);
 
 	 void updateErrorBarsData(Table* w, int curve);
 	 void updateErrorBars(int curve,bool xErr,int width,int cap,

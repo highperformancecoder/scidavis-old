@@ -630,7 +630,8 @@ QStringList Table::selectedYColumns()
 QStringList names;
 for (int i=0;i<worksheet->numCols();i++)
 	{
-	if(worksheet->isColumnSelected (i,true) && col_plot_type[i] == Y)
+	if(worksheet->isColumnSelected (i,true) && 
+		(col_plot_type[i] == Y || col_plot_type[i] == yErr || col_plot_type[i] == xErr))
 		names<<QString(name())+"_"+col_label[i];
 	}
 return names;

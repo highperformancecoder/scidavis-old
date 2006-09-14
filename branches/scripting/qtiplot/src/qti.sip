@@ -181,8 +181,8 @@ public:
 
   void addErrorBars(Table *, const QString&, 
       Table *, const QString&,
-      int, int, int, const QColor&,
-      bool, bool,bool);
+      int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(black),
+	  bool through = true, bool minus = true, bool plus = true);						 
 
   void insertLineMarker(LineMarker*);
   LineMarker* lineMarker(long);
@@ -202,7 +202,7 @@ public:
 							
   void exportToSVG(const QString& fname);
   void exportToEPS(const QString& fname);
-  void exportToWmf(const QString& fname) /PyName=exportToWMF/;
+  //void exportToWmf(const QString& fname) /PyName=exportToWMF/;
 private:
   Graph(const Graph&);
 };

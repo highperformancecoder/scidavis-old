@@ -4341,7 +4341,6 @@ for (int i = 0; i<n_curves; i++ )
 		QStringList lst = QStringList::split(",", associations[i], false);
 		addErrorBars(w, lst[0].remove("(X)"), yColName, errTable, errColName,
 					type, width, cap, color, through, minus, plus);
-
 		return;
 		}
 	}
@@ -4682,13 +4681,23 @@ int xcol=w->colIndex(xColName);
 int ycol=w->colIndex(yColName);
 if (xcol < 0 || ycol < 0)
 	return false;
-	
-QMemArray<double> X(1),Y(1);
-int i, it=0;
-	
+
+int colPlotDesignation = w->colPlotDesignation(ycol);		
+if (colPlotDesignation == Table::xErr || colPlotDesignation == Table::yErr)
+	{//add error bars
+	ycol = w->colY(ycol);
+	if (colPlotDesignation == Table::xErr)
+		addErrorBars(w, xColName, w->colName(ycol), w, yColName, (int)QwtErrorPlotCurve::Horizontal);
+	else
+		addErrorBars(w, xColName, w->colName(ycol), w, yColName);
+	return true;
+	}
+
 int xColType = w->columnType(xcol);
 int yColType = w->columnType(ycol);
 
+QMemArray<double> X(1),Y(1);
+int i, it=0;
 QStringList xLabels, yLabels;// store text labels
 QTime time0;
 QDate date;
