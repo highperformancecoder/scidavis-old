@@ -2135,14 +2135,26 @@ else
 	QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
 }
 
-void Table::plotSteps()
+void Table::plotVertSteps()
 {
 if (!valid2DPlot())
 	return;
 	
 QStringList s=selectedYColumns();
 if (int(s.count())>0)
-	emit plotCol(this,s,Graph::Steps);
+	emit plotCol(this, s, Graph::VerticalSteps);
+else
+	QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+}
+
+void Table::plotHorSteps()
+{
+if (!valid2DPlot())
+	return;
+	
+QStringList s=selectedYColumns();
+if (int(s.count())>0)
+	emit plotCol(this, s, Graph::HorizontalSteps);
 else
 	QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
 }

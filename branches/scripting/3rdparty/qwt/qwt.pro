@@ -31,8 +31,8 @@ CONFIG           += release
 CONFIG           += thread
 
 # Only one of the following flags is allowed !
-CONFIG           += dll 
-#CONFIG           += staticlib
+# CONFIG           += dll 
+CONFIG           += staticlib
 
 # DEFINES          += QT_NO_CAST_ASCII
 # DEFINES          += QT_NO_CAST_TO_ASCII
@@ -158,9 +158,9 @@ SOURCES = \
 # lines
 ##############################################
 
-# QT += svg
-# HEADERS += include/qwt_plot_svgitem.h
-# SOURCES += src/qwt_plot_svgitem.cpp 
+ QT += svg
+ HEADERS += include/qwt_plot_svgitem.h
+ SOURCES += src/qwt_plot_svgitem.cpp 
 
 ##############################################
 # If you are interested in the plot widget
@@ -199,3 +199,13 @@ SOURCES += \
     src/qwt_slider.cpp \
     src/qwt_thermo.cpp \
     src/qwt_wheel.cpp
+
+unix {
+    INSTALLBASE    = /usr/local/qwt
+    target.path    = $$INSTALLBASE/lib
+    headers.path   = $$INSTALLBASE/include
+    headers.files  = $$HEADERS
+    doc.path       = $$INSTALLBASE/doc
+    doc.files      = doc/html doc/man
+    INSTALLS       = target headers doc
+}

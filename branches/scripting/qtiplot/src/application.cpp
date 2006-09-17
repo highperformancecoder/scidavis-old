@@ -912,7 +912,8 @@ void ApplicationWindow::initPlotMenu()
 
 	actionPlotVerticalDropLines->addTo(specialPlot);
 	actionPlotSpline->addTo(specialPlot);
-	actionPlotSteps->addTo(specialPlot);
+	actionPlotVertSteps->addTo(specialPlot);
+	actionPlotHorSteps->addTo(specialPlot);
 	specialPlotMenuID = plot2D->insertItem(tr("Special Line/Symb&ol"), specialPlot);
 
 	plot2D->insertSeparator();
@@ -1360,12 +1361,20 @@ if (!ws->activeWindow() || !ws->activeWindow()->inherits("Table"))
 ((Table*)ws->activeWindow())->plotSpline();
 }
 
-void ApplicationWindow::plotSteps()
+void ApplicationWindow::plotVertSteps()
 {
 if (!ws->activeWindow() || !ws->activeWindow()->inherits("Table"))
 	return;
 	
-((Table*)ws->activeWindow())->plotSteps();
+((Table*)ws->activeWindow())->plotVertSteps();
+}
+
+void ApplicationWindow::plotHorSteps()
+{
+if (!ws->activeWindow() || !ws->activeWindow()->inherits("Table"))
+	return;
+	
+((Table*)ws->activeWindow())->plotHorSteps();
 }
 
 void ApplicationWindow::plotVectXYXY()
@@ -5759,7 +5768,8 @@ Table* w = (Table*)ws->activeWindow();
 
 		specialPlot.insertItem(QPixmap(dropLines_xpm),tr("Vertical &drop lines"),w,SLOT(plotVerticalDropLines()));
 		specialPlot.insertItem(QPixmap(spline_xpm),tr("&Spline"),w,SLOT(plotSpline()));
-		specialPlot.insertItem(QPixmap(steps_xpm),tr("&Vertical Steps"),w,SLOT(plotSteps()));
+		specialPlot.insertItem(QPixmap(vert_steps_xpm),tr("&Vertical Steps"),w,SLOT(plotVertSteps()));
+		specialPlot.insertItem(QPixmap(hor_steps_xpm),tr("&Horizontal Steps"),w,SLOT(plotHorSteps()));
 		plot.insertItem(tr("Special Line/Symb&ol"),&specialPlot);
 		plot.insertSeparator();
 
@@ -5853,7 +5863,8 @@ Table* w = (Table*)ws->activeWindow();
 
 		specialPlot.insertItem(QPixmap(dropLines_xpm),tr("Vertical &drop lines"),w,SLOT(plotVerticalDropLines()));
 		specialPlot.insertItem(QPixmap(spline_xpm),tr("&Spline"),w,SLOT(plotSpline()));
-		specialPlot.insertItem(QPixmap(steps_xpm),tr("&Vertical Steps"),w,SLOT(plotSteps()));
+		specialPlot.insertItem(QPixmap(vert_steps_xpm),tr("&Vertical Steps"),w,SLOT(plotVertSteps()));
+		specialPlot.insertItem(QPixmap(hor_steps_xpm),tr("&Horizontal Steps"),w,SLOT(plotHorSteps()));
 		plot.insertItem(tr("Special Line/Symb&ol"),&specialPlot);
 		plot.insertSeparator();
 
@@ -11016,8 +11027,11 @@ void ApplicationWindow::createActions()
   actionPlotSpline = new QAction(QPixmap(spline_xpm), tr("&Spline"), QString::null, this);
   connect(actionPlotSpline, SIGNAL(activated()), this, SLOT(plotSpline()));
 
-  actionPlotSteps = new QAction(QPixmap(steps_xpm), tr("&Vertical Steps"), QString::null, this);
-  connect(actionPlotSteps, SIGNAL(activated()), this, SLOT(plotSteps()));
+  actionPlotHorSteps = new QAction(QPixmap(hor_steps_xpm), tr("&Horizontal Steps"), QString::null, this);
+  connect(actionPlotHorSteps, SIGNAL(activated()), this, SLOT(plotHorSteps()));
+
+  actionPlotVertSteps = new QAction(QPixmap(vert_steps_xpm), tr("&Vertical Steps"), QString::null, this);
+  connect(actionPlotVertSteps, SIGNAL(activated()), this, SLOT(plotVertSteps()));
 
   actionPlotVerticalBars = new QAction(QPixmap(vertBars_xpm), tr("&Columns"), QString::null, this);
   connect(actionPlotVerticalBars, SIGNAL(activated()), this, SLOT(plotVerticalBars()));
@@ -11554,7 +11568,8 @@ void ApplicationWindow::translateActionsStrings()
   actionPlotVerticalDropLines->setMenuText(tr("Vertical &drop lines"));
 
   actionPlotSpline->setMenuText(tr("&Spline"));
-  actionPlotSteps->setMenuText(tr("&Vertical Steps"));
+  actionPlotVertSteps->setMenuText(tr("&Vertical Steps"));
+  actionPlotHorSteps->setMenuText(tr("&Horizontal Steps"));
 
   actionPlotVerticalBars->setMenuText(tr("&Columns"));
   actionPlotVerticalBars->setToolTip(tr("Plot with vertical bars"));

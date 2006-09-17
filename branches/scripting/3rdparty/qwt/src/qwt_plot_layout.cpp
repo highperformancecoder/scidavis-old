@@ -63,7 +63,8 @@ void QwtPlotLayout::LayoutData::init(const QwtPlot *plot, const QRect &rect)
 {
     // legend
 
-    if ( plot->legend() )
+    if ( plot->plotLayout()->legendPosition() != QwtPlot::ExternalLegend 
+        && plot->legend() )
     {
         legend.frameWidth = plot->legend()->frameWidth();
         legend.vScrollBarWidth = 
@@ -312,8 +313,7 @@ int QwtPlotLayout::spacing() const
 
 /*!
   \brief Specify the position of the legend
-  \param pos The legend's position. Valid values are \c QwtPlot::LeftLegend,
-           \c QwtPlot::RightLegend, \c QwtPlot::TopLegend, \c QwtPlotLegend::Bottom.
+  \param pos The legend's position. 
   \param ratio Ratio between legend and the bounding rect 
                of title, canvas and axes. The legend will be shrinked
                if it would need more space than the given ratio.
@@ -345,6 +345,9 @@ void QwtPlotLayout::setLegendPosition(QwtPlot::LegendPosition pos, double ratio)
             d_data->legendRatio = ratio;
             d_data->legendPos = pos;
             break;
+        case QwtPlot::ExternalLegend:
+            d_data->legendRatio = ratio; // meaningless
+            d_data->legendPos = pos;
         default:
             break;
     }
@@ -594,7 +597,8 @@ QSize QwtPlotLayout::minimumSizeHint(const QwtPlot *plot) const
     // Compute the legend contribution
 
     const QwtLegend *legend = plot->legend();
-    if ( legend && !legend->isEmpty() )
+    if ( d_data->legendPos != QwtPlot::ExternalLegend
+        && legend && !legend->isEmpty() )
     {
         if ( d_data->legendPos == QwtPlot::LeftLegend 
             || d_data->legendPos == QwtPlot::RightLegend )
@@ -688,6 +692,8 @@ QRect QwtPlotLayout::layoutLegend(int options,
         case QwtPlot::BottomLegend:
             legendRect.setY(rect.bottom() - dim + 1);
             legendRect.setHeight(dim);
+            break;
+        case QwtPlot::ExternalLegend:
             break;
     }
 
@@ -1032,7 +1038,8 @@ void QwtPlotLayout::activate(const QwtPlot *plot,
 
     d_data->layoutData.init(plot, rect);
 
-    if (!(options & IgnoreLegend)
+    if (!(options & IgnoreLegend) 
+        && d_data->legendPos != QwtPlot::ExternalLegend
         && plot->legend() && !plot->legend()->isEmpty() )
     {
         d_data->legendRect = layoutLegend(options, rect);
@@ -1063,6 +1070,8 @@ void QwtPlotLayout::activate(const QwtPlot *plot,
                 case QwtPlot::BottomLegend:
                     rect.setBottom(rect.bottom() - d_data->spacing);
                     break;
+                case QwtPlot::ExternalLegend:
+                    break; // suppress compiler warning
             }
         }
     }

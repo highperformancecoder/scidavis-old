@@ -411,7 +411,7 @@ void QwtLegend::insert(const QwtPlotItem *plotItem, QWidget *legendItem)
             }
         }
     }
-    if (!parentWidget()->layout() )
+    if ( parentWidget() && parentWidget()->layout() == NULL )
     {
        /*
           updateGeometry() doesn't post LayoutRequest in certain

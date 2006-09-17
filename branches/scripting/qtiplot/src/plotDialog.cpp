@@ -188,15 +188,10 @@ else
 	boxConnect->setCurrentItem(1);//show line for Line and LineSymbol plots
 
 	QwtSymbol s = QwtSymbol(QwtSymbol::Ellipse, QBrush(), QPen(), QSize(9,9));
-	if (!plotType)
-		{
+	if (plotType == Graph::Line)
 		s.setStyle(QwtSymbol::None);
-		graph->setCurveStyle(curve, 1);
-		}
-	else if (plotType == 1)
-		graph->setCurveStyle(curve, 0);
-	else
-		graph->setCurveStyle(curve, 1);
+	else if (plotType == Graph::Scatter)
+		graph->setCurveStyle(curve, QwtPlotCurve::NoCurve);
 
 	if (plotType)
 		{
@@ -222,9 +217,10 @@ void plotDialog::initLinePage()
 	boxConnect->insertItem(tr("No line"));
     boxConnect->insertItem(tr("Lines"));
     boxConnect->insertItem(tr("Sticks"));
-    boxConnect->insertItem(tr("Steps"));
+    boxConnect->insertItem(tr("Horizontal Steps"));
     boxConnect->insertItem(tr("Dots"));
 	boxConnect->insertItem(tr("Spline"));
+	boxConnect->insertItem(tr("Vertical Steps"));
 	
 	new QLabel(tr( "Style" ) , GroupBox3, "TextLabel2",0 );
 
@@ -876,18 +872,22 @@ if (size>0 && curveType >= 0)
 		boxPlotType->insertItem( tr( "Scatter" ) );
 		boxPlotType->insertItem( tr( "Line + Symbol" ) ); 
 
-		if (curveType == Graph::Line || 
-			curveType == Graph::Steps || 
-			curveType == Graph::Area)
+		QwtPlotCurve *c = (QwtPlotCurve*)graph->curve(index);
+	    if (!c)
+			return Graph::Line;
+		
+		QwtSymbol s = c->symbol();
+		if (s.style() == QwtSymbol::None)
 			{
 			boxPlotType->setCurrentItem(0);
 			return Graph::Line;
 			}
-		else if (curveType == Graph::Scatter)
+		else if (c->style() == QwtPlotCurve::NoCurve)
+			{
 			boxPlotType->setCurrentItem(1);
-		else if (curveType == Graph::LineSymbols || 
-			     curveType == Graph::VerticalDropLines || 
-				 curveType == Graph::Spline)
+			return Graph::Scatter;
+			}
+		else
 			{
 			boxPlotType->setCurrentItem(2);
 			return Graph::LineSymbols;
@@ -920,7 +920,13 @@ if (size>0)
 	int curveType = graph->curveType(index);
 
 	//line page
-	boxConnect->setCurrentItem(c->style());
+	int style = c->style();
+	if (curveType == Graph::Spline)
+		style = 5;
+	else if (curveType == Graph::VerticalSteps)
+		style = 6;
+	boxConnect->setCurrentItem(style);
+
 	setPenStyle(c->pen().style());
 	boxLineColor->setColor(c->pen().color());
 	boxLineWidth->setValue(c->pen().width());		

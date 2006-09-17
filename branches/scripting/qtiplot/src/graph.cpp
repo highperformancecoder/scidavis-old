@@ -818,7 +818,7 @@ else
 	sd->enableComponent (QwtAbstractScaleDraw::Ticks);
 
 if (majTicksType == ScaleDraw::None || majTicksType == ScaleDraw::In)
-	majLength = 0;
+	majLength = 1;
 if (minTicksType == ScaleDraw::None || minTicksType == ScaleDraw::In)
 	minLength = 0;
 
@@ -925,8 +925,7 @@ if (axisOn && (axis == QwtPlot::xTop || axis == QwtPlot::yRight))
 	updateSecondaryAxis(axis);//synchronize scale divisions
 
 scalePicker->refresh();
-d_plot->updateLayout();	
-//scale->repaint();
+d_plot->updateLayout();	//This is necessary in order to enable/disable tick labels
 d_plot->replot();	
 emit modifiedGraph();
 }
@@ -3738,7 +3737,13 @@ QwtPlotCurve *c = (QwtPlotCurve*)curve(index);
 if (c)
 	{
 	s+=QString::number(style)+"\t";
-	s+=QString::number(c->style())+"\t";
+	if (style == Spline)
+		s+="5\t";
+	else if (style == VerticalSteps)
+		s+="6\t";
+	else
+		s+=QString::number(c->style())+"\t";
+
 	s+=QString::number(ColorBox::colorIndex(c->pen().color()))+"\t";
 	s+=QString::number(c->pen().style()-1)+"\t";
 	s+=QString::number(c->pen().width())+"\t";
@@ -4201,11 +4206,16 @@ curveLayout cl = initCurveLayout();
 cl.symCol=i%16;//16 is the number of predefined colors in Qt
 cl.fillCol=i%16;
 cl.sType=(i+1)%9; //9 is the number of predefined symbols in Qwt
-		
-if (style == Graph::VerticalDropLines)
+
+if (style == Graph::Line)
+	cl.sType = 0;		
+else if (style == Graph::VerticalDropLines)
 	cl.connectType=2;
-else if (style == Graph::Steps)
+else if (style == Graph::HorizontalSteps || style == Graph::VerticalSteps)
+	{
 	cl.connectType=3;
+	cl.sType = 0;
+	}
 else if (style == Graph::Spline)
 	cl.connectType=5;
 
@@ -4214,6 +4224,7 @@ if (style == Graph::VerticalBars || style == Graph::HorizontalBars)
 	cl.filledArea=1;
 	cl.lCol=0;//black color pen
 	cl.aCol=i+1;
+	cl.sType = 0;
 	QwtBarCurve *b = (QwtBarCurve*)curve(i);
 	if (b)
 		{
@@ -4227,6 +4238,7 @@ else if (style == Graph::Histogram)
 	cl.lCol=i+1;//start with red color pen
 	cl.aCol=i+1; //start with red fill color
 	cl.aStyle=4;
+	cl.sType = 0;
 	}
 else
 	cl.lCol=i%16;
@@ -4236,10 +4248,11 @@ if (i%16 == 13)
 	cl.lCol = 0; cl.symCol = 0;
 	}
 
-if (style== Graph::Area)
+if (style == Graph::Area)
 	{
 	cl.filledArea=1;
 	cl.aCol=i%16;
+	cl.sType = 0;
 	}
 return cl;
 }
@@ -4255,28 +4268,28 @@ QwtPlotCurve *c = this->curve(index);
 if (!c || c_type.isEmpty() || (int)c_type.size() < index)
 	return;
 
-int style = c_type[index];
-if (style == Scatter || style == LineSymbols ||	style == Spline || 
-	style == VerticalDropLines || style == Box)
-	{
-	QPen pen = QPen(ColorBox::color(cL->symCol),cL->penWidth, Qt::SolidLine);
-	/*if (!cL->penWidth)
-		pen.setStyle(Qt::NoPen);*/
-
-	if (cL->fillCol != -1)
-		c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType),
-					QBrush(ColorBox::color(cL->fillCol)), pen, QSize(cL->sSize,cL->sSize)));
-	else
-		c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType), QBrush(), 
-					 pen, QSize(cL->sSize,cL->sSize)));
-	}
+QPen pen = QPen(ColorBox::color(cL->symCol),cL->penWidth, Qt::SolidLine);
+if (cL->fillCol != -1)
+	c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType),
+				QBrush(ColorBox::color(cL->fillCol)), pen, QSize(cL->sSize,cL->sSize)));
 else
-	c->setSymbol(QwtSymbol(QwtSymbol::None, QBrush(), QPen(), QSize(cL->sSize,cL->sSize)));
+	c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType), QBrush(), pen, QSize(cL->sSize,cL->sSize)));
 
 c->setPen(QPen(ColorBox::color(cL->lCol),cL->lWidth,getPenStyle(cL->lStyle)));
 
+int style = c_type[index];
 if (style == Scatter)
 	c->setStyle(QwtPlotCurve::NoCurve); 
+else if (style == Spline)
+	{
+	c->setStyle(QwtPlotCurve::Lines);
+	c->setCurveAttribute(QwtPlotCurve::Fitted, true);
+	}
+else if (style == VerticalSteps)
+	{
+	c->setStyle(QwtPlotCurve::Steps);
+	c->setCurveAttribute(QwtPlotCurve::Inverted, true);
+	}
 else
 	c->setStyle((QwtPlotCurve::CurveStyle)cL->connectType); 
 
@@ -4776,7 +4789,7 @@ if (!it)
 
 associations << w->colName(xcol)+"(X),"+w->colName(ycol)+"(Y)";
 
-c_type.resize(++n_curves);
+c_type.resize(++n_curves);	
 c_type[n_curves-1] = style;
 
 long curveID=-1;
@@ -6410,6 +6423,11 @@ else
 		c->setBrush(cv->brush());
 		c->setStyle(cv->style());
 		c->setSymbol(cv->symbol());
+
+		if (cv->testCurveAttribute (QwtPlotCurve::Fitted))
+			c->setCurveAttribute(QwtPlotCurve::Fitted, true);
+		else if (cv->testCurveAttribute (QwtPlotCurve::Inverted))
+			c->setCurveAttribute(QwtPlotCurve::Inverted, true);		
 		}
 	}
 axesFormulas = g->axesFormulas;
@@ -6586,6 +6604,26 @@ void Graph::setCurveStyle(int index, int s)
 QwtPlotCurve *c = curve(index);
 if (!c)
 	return;
+
+if (s == 5)//ancient spline style in Qwt 4.2.0
+	{
+	s = QwtPlotCurve::Lines;
+	c->setCurveAttribute(QwtPlotCurve::Fitted, true);
+	c_type[index] = Spline;
+	}
+else if (s == QwtPlotCurve::Lines)
+	c->setCurveAttribute(QwtPlotCurve::Fitted, false);
+else if (s == 6)// Vertical Steps
+	{
+	s = QwtPlotCurve::Steps;
+	c->setCurveAttribute(QwtPlotCurve::Inverted, true);
+	c_type[index] = VerticalSteps;
+	}
+else if (s == QwtPlotCurve::Steps)// Horizontal Steps
+	{
+	c->setCurveAttribute(QwtPlotCurve::Inverted, false);
+	c_type[index] = HorizontalSteps;
+	}
 c->setStyle((QwtPlotCurve::CurveStyle)s); 
 }
 

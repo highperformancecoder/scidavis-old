@@ -352,7 +352,7 @@ protected:
 
     virtual QwtPickerMachine *stateMachine(int) const;
 
-    void updateDisplay();
+    virtual void updateDisplay();
 
 private:
     void init(QWidget *, int selectionFlags, RubberBand rubberBand,

@@ -131,9 +131,8 @@ QPolygonF QwtSplineCurveFitter::fitSpline(
     QPolygonF fittedPoints(d_data->splineSize);
 #endif
 
-	const int size = (int)points.size();
     const double x1 = points[0].x();
-    const double x2 = points[size - 1].x();
+    const double x2 = points[int(points.size() - 1)].x();
     const double dx = x2 - x1;
     const double delta = dx / (d_data->splineSize - 1);
 

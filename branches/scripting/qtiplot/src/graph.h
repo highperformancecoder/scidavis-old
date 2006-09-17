@@ -42,7 +42,8 @@ public:
 	enum AxisType{Numeric = 0, Txt = 1, Day = 2, Month = 3, Time = 4, Date = 5, ColHeader = 6};
 	enum MarkerType{None=-1, Text = 0, Arrow=1, Image=2};
 	enum CurveType{Line, Scatter, LineSymbols, VerticalBars, Area, Pie, VerticalDropLines, 
-				  Spline, Steps, Histogram, HorizontalBars, VectXYXY, ErrorBars, Box, VectXYAM};
+				  Spline, HorizontalSteps, Histogram, HorizontalBars, VectXYXY, ErrorBars, 
+				  Box, VectXYAM, VerticalSteps};
 
 	Plot *d_plot;
 	QwtPlotZoomer *d_zoomer;
