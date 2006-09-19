@@ -17,7 +17,7 @@
 class QwtScaleTransformation;
 
 /*!
-  Arithmetic including a tolerance
+  \brief Arithmetic including a tolerance
 */
 class QWT_EXPORT QwtScaleArithmetic
 {

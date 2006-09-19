@@ -39,7 +39,7 @@ template class QWT_EXPORT QwtArray<QwtDoublePoint>;
   
   \par Usage:
   <ol>
-  <li>First call QwtSpline::buildSpline() to determine the spline coefficients 
+  <li>First call setPoints() to determine the spline coefficients 
       for a tabulated function y(x).
   <li>After the coefficients have been set up, the interpolated
       function value for an argument x can be determined by calling 

@@ -40,6 +40,9 @@ template class QWT_EXPORT QMap<double, QwtArray<QwtDoublePoint> >;
 
 class QwtScaleMap;
 
+/*!
+  \brief QwtRasterData defines an interface to any type of raster data.
+*/
 class QWT_EXPORT QwtRasterData
 {
 public:

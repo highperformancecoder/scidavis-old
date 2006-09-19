@@ -62,14 +62,11 @@ public:
 
 	void mousePressEvent ( QMouseEvent * e );
 	void mouseReleaseEvent ( QMouseEvent * e );
-	void mouseMoveEvent ( QMouseEvent * e );
 
 	virtual void print(QPainter *, const QRect &rect,
         const QwtPlotPrintFilter & = QwtPlotPrintFilter()) const;
 	
 protected:
-	void printScale(QPainter *painter, int axisId, int startDist, int endDist, 
-						  int baseDist, const QRect &rect) const;
 	void printCanvas(QPainter *painter, const QRect &canvasRect,
    			 const QwtScaleMap map[axisCnt], const QwtPlotPrintFilter &pfilter) const;
 
@@ -83,8 +80,6 @@ signals:
 	void selectPlot();
 	void moveGraph(const QPoint&);
 	void releasedGraph();
-	void resizeGraph(const QPoint&);
-	void resizedGraph();
 
 protected:
 	Grid *d_grid;
@@ -92,7 +87,7 @@ protected:
 	QMap<int, QwtPlotMarker*> d_markers;
 
 	int minTickLength, majTickLength;
-	bool movedGraph, ShiftButton, graphToResize;
+	bool movedGraph;
 	QPoint presspos;
 	int marker_key;
 	int curve_key;

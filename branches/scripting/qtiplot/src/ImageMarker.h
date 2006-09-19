@@ -3,6 +3,7 @@
 
 #include <qpaintdevicemetrics.h>
 #include <qpixmap.h>
+#include <qwt_plot.h>
 #include <qwt_plot_marker.h>
 	
 class ImageMarker: public QwtPlotMarker
@@ -11,9 +12,10 @@ public:
 	ImageMarker(const QPixmap& p);
     virtual void draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r) const;
 	
-	QRect rect();
+	QRect rect(){return transform(plot()->canvasMap(xAxis()), plot()->canvasMap(yAxis()), d_rect);};
+	void setRect(int x, int y, int w, int h);
 
-	QSize size();
+	QSize size(){return rect().size();};
 	void setSize(const QSize& size);
 	
 	void setFileName(const QString& fn){d_fileName = fn;};
@@ -22,18 +24,17 @@ public:
 	QPixmap image(){return d_pic;};
 
 	void setOrigin(const QPoint& p);
-	QPoint getOrigin();
+	QPoint getOrigin(){return rect().topLeft();};
 
-	//! Keep the markers on screen each time the scales are modified by adding/removing curves
-	void updateOrigin();
-
-	QwtDoubleRect boundingRect() const;
+	QwtDoubleRect boundingRect() const {return d_rect;};
 	void setBoundingRect(const QwtDoubleRect& rect);
+
+	void updateBoundingRect();
 
 private:
 	QPoint d_pos;
 	QPixmap d_pic;
-	QSize d_picSize;
+	QSize d_size;
 	QString d_fileName;
 	QwtDoubleRect d_rect;
 };

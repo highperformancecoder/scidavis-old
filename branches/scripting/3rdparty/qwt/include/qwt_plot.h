@@ -41,6 +41,8 @@ class QwtPlotPrintFilter;
   are calculated from the plot items, using algorithms (QwtScaleEngine) which 
   can be configured separately for each axis. 
 
+  \image html plot.png
+
   \par Example
   The following example shows (schematically) the most simple
   way to use QwtPlot. By default, only the left and bottom axes are

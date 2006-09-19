@@ -88,7 +88,7 @@ private:
 
 
 /*!
-  QwtLinearColorMap builds a color map from color stops.
+  \brief QwtLinearColorMap builds a color map from color stops.
   
   A color stop is a color at a specific position. The valid
   range for the positions is [0.0, 1.0]. When mapping a value
@@ -144,7 +144,7 @@ private:
 };
 
 /*!
-  QwtAlphaColorMap variies the alpha value of a color
+  \brief QwtAlphaColorMap variies the alpha value of a color
 */
 class QWT_EXPORT QwtAlphaColorMap: public QwtColorMap
 {

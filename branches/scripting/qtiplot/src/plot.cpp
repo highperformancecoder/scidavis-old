@@ -24,8 +24,6 @@ minTickLength = 5;
 majTickLength = 9;
 
 movedGraph=FALSE;
-graphToResize=FALSE;
-ShiftButton=FALSE;
 
 setGeometry(QRect(0,0,500,400));
 setAxisTitle(QwtPlot::yLeft, tr("Y Axis Title"));
@@ -281,7 +279,7 @@ switch (axis)
 		{
     	for (j = 0; j < minTicks; j++)
        		{
-             x = map.transform(minTickList[j]);
+            x = map.transform(minTickList[j]);
 			if (x>low && x<high)
             	QwtPainter::drawLine(painter, x, y, x, y + minTickLength);
        	    }
@@ -295,7 +293,7 @@ switch (axis)
 
 		if (maj)
 		{
-	 	for (j = 0; j <majTicks; j++)
+	 	for (j = 0; j<majTicks; j++)
         	{
             x = map.transform(majTickList[j]);
 			if (x>low && x<high)
@@ -352,29 +350,9 @@ minTickLength = minLength;
 }
 
 void Plot::mousePressEvent ( QMouseEvent * e )
-{
-if(e->state()==Qt::ShiftButton)
-		ShiftButton=TRUE;
-	
+{	
 presspos = e->pos();
 emit selectPlot();
-}
-
-void Plot::mouseMoveEvent ( QMouseEvent * e )
-{
-if(ShiftButton)
-	{
-	graphToResize=TRUE;
-	emit resizeGraph(e->pos());	
-	}				
-/*else if ((presspos - e->pos()).manhattanLength() > QApplication::startDragDistance())
-	{
-	if (!((Graph *)parent())->zoomOn())
-		{
-		movedGraph=TRUE;
-		emit moveGraph(e->pos());
-		}
-	}*/
 }
 
 void Plot::mouseReleaseEvent ( QMouseEvent *)
@@ -383,13 +361,6 @@ if (movedGraph)
 	{
 	emit releasedGraph();
 	movedGraph=FALSE;
-	}
-
-if (graphToResize)
-	{
-	emit resizedGraph();
-	graphToResize=FALSE;
-	ShiftButton=FALSE;
 	}
 }
 
@@ -614,122 +585,6 @@ return r;
 }
 
 /*!
-  \brief Paint a scale into a given rectangle.
-  Paint the scale into a given rectangle. Reimplemented from Qwt5
-
-  \param painter Painter
-  \param axisId Axis
-  \param startDist Start border distance
-  \param endDist End border distance
-  \param baseDist Base distance
-  \param rect Bounding rectangle
-*/
-
-void Plot::printScale(QPainter *painter, int axisId, int startDist, int endDist, 
-					  int baseDist, const QRect &rect) const
-{
-    if (!axisEnabled(axisId))
-        return;
-
-    const QwtScaleWidget *scaleWidget = axisWidget(axisId);
-    if ( scaleWidget->isColorBarEnabled() 
-        && scaleWidget->colorBarWidth() > 0)
-    {
-        const QwtMetricsMap map = QwtPainter::metricsMap();
-
-        const QRect r = map.layoutToScreen(rect);
-        scaleWidget->drawColorBar(painter, scaleWidget->colorBarRect(r));
-
-        const int off = scaleWidget->colorBarWidth() + scaleWidget->spacing();
-        if ( scaleWidget->scaleDraw()->orientation() == Qt::Horizontal )
-            baseDist += map.screenToLayoutY(off);
-        else
-            baseDist += map.screenToLayoutX(off);
-    }
-
-    QwtScaleDraw::Alignment align;
-    int x, y, w;
-
-	const int bw2 = scaleWidget->penWidth() / 2;
-
-    switch(axisId)
-    {
-        case yLeft:
-        {
-            x = rect.right() - baseDist + 1 - bw2;
-            y = rect.y() + startDist;
-            w = rect.height() - startDist - endDist;
-            align = QwtScaleDraw::LeftScale;
-            break;
-        }
-        case yRight:
-        {
-            x = rect.left() + baseDist;
-			if (scaleWidget->penWidth() % 2 == 0)
-				x += 1;
-
-            y = rect.y() + startDist;
-            w = rect.height() - startDist - endDist + bw2;
-            align = QwtScaleDraw::RightScale;
-            break;
-        }
-        case xTop:
-        {
-            x = rect.left() + startDist;
-            y = rect.bottom() - baseDist + 1;
-			if (scaleWidget->penWidth() % 2 == 0)
-				y -= bw2;
-            w = rect.width() - startDist - endDist;
-            align = QwtScaleDraw::TopScale;
-            break;
-        }
-        case xBottom:
-        {
-            x = rect.left() + startDist;
-            y = rect.top() + baseDist;
-
-			if (scaleWidget->penWidth() % 2 == 1)
-				y += bw2;
-
-            w = rect.width() - startDist - endDist + bw2;
-            align = QwtScaleDraw::BottomScale;
-            break;
-        }
-        default:
-            return;
-    }
-
-    scaleWidget->drawTitle(painter, align, rect);
-
-    painter->save();
-    painter->setFont(scaleWidget->font());
-
-    QPen pen = painter->pen();
-    pen.setWidth(scaleWidget->penWidth());
-    painter->setPen(pen);
-
-    QwtScaleDraw *sd = (QwtScaleDraw *)scaleWidget->scaleDraw();
-    const QPoint sdPos = sd->pos();
-    const int sdLength = sd->length();
-
-    sd->move(x, y);
-    sd->setLength(w);
-
-#if QT_VERSION < 0x040000
-    sd->draw(painter, scaleWidget->palette().active());
-#else
-    QPalette palette = scaleWidget->palette();
-    palette.setCurrentColorGroup(QPalette::Active);
-    sd->draw(painter, palette);
-#endif
-    // reset previous values
-    sd->move(sdPos); 
-    sd->setLength(sdLength); 
-
-    painter->restore();
-}
-
-/*!
   \brief Draw the grid
   
   The grid is drawn into the bounding rectangle such that 
@@ -805,3 +660,4 @@ void Grid::drawLines(QPainter *painter, const QRect &rect,
         }
     }
 }
+

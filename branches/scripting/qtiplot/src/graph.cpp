@@ -2640,11 +2640,10 @@ if (legendMarkerID >= 0)
 	}
 }
 
-void Graph::updateImageMarker(int x, int y, int width, int height)
+void Graph::updateImageMarker(int x, int y, int w, int h)
 {
 ImageMarker* mrk=(ImageMarker*) d_plot->marker(selectedMarker);
-mrk->setOrigin(QPoint(x,y));
-mrk->setSize(QSize(width,height));
+mrk->setRect(x, y, w, h);
 d_plot->replot();
 emit modifiedGraph();
 }
@@ -4066,8 +4065,6 @@ return selectedMarker;
 
 QString Graph::saveMarkers()
 {
-int prec;
-char f;
 QString s;
 int i;
 for (i=0; i<(int)d_images.size(); i++)
@@ -4077,25 +4074,23 @@ for (i=0; i<(int)d_images.size(); i++)
 	s+=mrkI->getFileName()+"\t";
 
 	QwtDoubleRect rect = mrkI->boundingRect();
-	s += QString::number(rect.left())+"\t";
-	s += QString::number(rect.top())+"\t";	
-	s += QString::number(rect.width())+"\t";
-	s += QString::number(rect.height())+"\n";
+	s += QString::number(rect.left(), 'g', 15)+"\t";
+	s += QString::number(rect.top(), 'g', 15)+"\t";	
+	s += QString::number(rect.width(), 'g', 15)+"\t";
+	s += QString::number(rect.height(), 'g', 15)+"\n";
 	}
 for (i=0; i<(int)d_lines.size(); i++)
 	{	
 	LineMarker* mrkL=(LineMarker*) d_plot->marker(d_lines[i]);
 	s+="lineMarker\t";
 	
-	d_plot->axisLabelFormat(mrkL->xAxis(), f, prec);
 	QwtDoublePoint sp = mrkL->coordStartPoint();
-	s+=(QString::number(sp.x(), f, prec))+"\t";
-	s+=(QString::number(sp.y(), f, prec))+"\t";
+	s+=(QString::number(sp.x(), 'g', 15))+"\t";
+	s+=(QString::number(sp.y(), 'g', 15))+"\t";
 
-	d_plot->axisLabelFormat(mrkL->yAxis(), f, prec);
 	QwtDoublePoint ep = mrkL->coordEndPoint();
-	s+=(QString::number(ep.x(), f, prec))+"\t";
-	s+=(QString::number(ep.y(), f, prec))+"\t";
+	s+=(QString::number(ep.x(), 'g', 15))+"\t";
+	s+=(QString::number(ep.y(), 'g', 15))+"\t";
 
 	s+=QString::number(mrkL->width())+"\t";
 	s+=mrkL->color().name()+"\t";
@@ -4115,11 +4110,8 @@ for (i=0; i<(int)d_texts.size(); i++)
 	else
 		s+="Legend\t";
 
-	d_plot->axisLabelFormat(mrk->xAxis(), f, prec);
-	s+=QString::number(mrk->xValue(), f, prec)+"\t";
-
-	d_plot->axisLabelFormat(mrk->yAxis(), f, prec);
-	s+=QString::number(mrk->yValue(), f, prec)+"\t";
+	s+=QString::number(mrk->xValue(), 'g', 15)+"\t";
+	s+=QString::number(mrk->yValue(), 'g', 15)+"\t";
 
 	QFont f=mrk->getFont();
 	s+=f.family()+"\t";
@@ -5031,6 +5023,7 @@ if (autoscale && !removePointsEnabled && !movePointsEnabled &&
 	d_plot->setAxisAutoScale(QwtPlot::xBottom);
 	d_plot->setAxisAutoScale(QwtPlot::yLeft);
 	}
+d_plot->replot();
 updateScale();
 d_zoomer->setZoomBase();	
 }
@@ -5084,7 +5077,9 @@ if (!autoscale)
 	d_plot->setAxisScale (QwtPlot::yLeft, scDiv->lBound(), scDiv->hBound(), step);
 	
 d_plot->replot();
+
 updateMarkersBoundingRect();
+
 updateSecondaryAxis(QwtPlot::xTop);
 updateSecondaryAxis(QwtPlot::yRight);
 
@@ -5388,10 +5383,9 @@ void Graph::insertImageMarker(ImageMarker* mrk)
 {
 QPixmap photo = mrk->image();
 ImageMarker* mrk2= new ImageMarker(photo);
-long mrk2ID=d_plot->insertMarker(mrk2);
+long mrk2ID = d_plot->insertMarker(mrk2);
 mrk2->setFileName(mrk->getFileName());
-mrk2->setOrigin(mrk->getOrigin());	
-mrk2->setSize(mrk->size());	
+mrk2->setBoundingRect(mrk->boundingRect());
 
 int imagesOnPlot=d_images.size();
 d_images.resize(++imagesOnPlot);
@@ -5859,7 +5853,7 @@ for (i=0; i<(int)d_images.size(); i++)
 	{
 	ImageMarker* mrk = (ImageMarker*) d_plot->marker(d_images[i]);
 	if (mrk)
-		mrk->updateOrigin();
+		mrk->updateBoundingRect();
 	}
 }
 

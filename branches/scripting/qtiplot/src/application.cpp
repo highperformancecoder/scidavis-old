@@ -7769,7 +7769,6 @@ if (ws->activeWindow() &&  ws->activeWindow()->isA("MultiLayer"))
 		g2->setIgnoreResizeEvents(!autoResizeLayers);
 		g2->setAutoscaleFonts(autoScaleFonts);
 		}
-
 	setListViewSize(caption, plot->sizeToString());
 	}
 return plot2;

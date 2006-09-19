@@ -34,7 +34,7 @@ template class QWT_EXPORT QwtArray<QwtDoublePoint>;
 // MOC_SKIP_END
 
 /*!
-  \brief QwtData defines an interface to any type of data.
+  \brief QwtData defines an interface to any type of curve data.
 
   Classes, derived from QwtData may:
   - store the data in almost any type of container

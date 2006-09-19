@@ -2,7 +2,6 @@
 #include "colorButton.h"
 #include "LineMarker.h"
 #include "graph.h"
-#include "plot.h"
 #include "application.h"
 
 #include <qwt_plot.h>
@@ -161,20 +160,13 @@ void lineDialog::displayCoordinates(int unit)
 {
 if (unit)
 	{
-	int prec;
-	char f;
-
-	Plot *plot = (Plot *)lm->plot();
-	plot->axisLabelFormat(lm->xAxis(), f, prec);
-
 	QwtDoublePoint sp = lm->coordStartPoint();
-	xStartBox->setText(QString::number(sp.x(), f, prec));
-	yStartBox->setText(QString::number(sp.y(), f, prec));
+	xStartBox->setText(QString::number(sp.x(), 'g', 15));
+	yStartBox->setText(QString::number(sp.y(), 'g', 15));
 
-	plot->axisLabelFormat(lm->yAxis(), f, prec);
 	QwtDoublePoint ep = lm->coordEndPoint();
-	xEndBox->setText(QString::number(ep.x(), f, prec));
-	yEndBox->setText(QString::number(ep.y(), f, prec));
+	xEndBox->setText(QString::number(ep.x(), 'g', 15));
+	yEndBox->setText(QString::number(ep.y(), 'g', 15));
 	}
 else
 	{

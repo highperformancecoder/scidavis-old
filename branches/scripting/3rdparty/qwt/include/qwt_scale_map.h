@@ -14,7 +14,7 @@
 #include "qwt_math.h"
 
 /*!
-   Operations for linear or logarithmic (base 10) transformations
+   \brief Operations for linear or logarithmic (base 10) transformations
 */
 class QWT_EXPORT QwtScaleTransformation
 {

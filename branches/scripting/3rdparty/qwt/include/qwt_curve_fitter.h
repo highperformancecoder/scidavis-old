@@ -33,6 +33,9 @@ template class QWT_EXPORT QwtArray<QwtDoublePoint>;
 
 // MOC_SKIP_END
 
+/*!
+  \brief Abstract base class for a curve fitter
+*/
 class QWT_EXPORT QwtCurveFitter
 {
 public:
@@ -53,6 +56,9 @@ private:
     QwtCurveFitter &operator=( const QwtCurveFitter & );
 };
 
+/*!
+  \brief A curve fitter using cubic splines
+*/
 class QWT_EXPORT QwtSplineCurveFitter: public QwtCurveFitter
 {
 public:
