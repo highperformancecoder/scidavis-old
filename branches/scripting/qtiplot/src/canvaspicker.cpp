@@ -238,7 +238,7 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 		if (plot()->drawLineActive())
 			drawLineMarker(pos, plot()->drawArrow());
 		else if (plot()->lineProfile() || resizeLineFromStart || resizeLineFromEnd)
-			drawLineMarker(pos,FALSE);	
+			drawLineMarker(pos, false);	
 		else if (plot()->movePointsActivated())
 			plot()->move(pos); 	
 		else if (plot()->pickerActivated())
@@ -266,21 +266,22 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 				resizeLineMarker(me->pos());
 			else if (g->drawLineActive())
 				{ 	
-				LineMarker* mrk = new LineMarker(plotWidget);	
-				mrk->setStartPoint(startLinePoint);
-				mrk->setEndPoint(QPoint(me->x(), me->y()));
-
-				mrk->setColor(g->arrowDefaultColor());
-				mrk->setWidth(g->arrowDefaultWidth());
-				mrk->setStyle(g->arrowLineDefaultStyle());
-				mrk->setHeadLength(g->arrowHeadDefaultLength());
-				mrk->setHeadAngle(g->arrowHeadDefaultAngle());
-				mrk->fillArrowHead(g->arrowHeadDefaultFill());
-
-				mrk->setEndArrow(g->drawArrow());
-				mrk->setStartArrow(FALSE);
-				g->insertLineMarker(mrk);
+				LineMarker mrk;	
+				mrk.attach(g->plotWidget());
+				mrk.setStartPoint(startLinePoint);
+				mrk.setEndPoint(QPoint(me->x(), me->y()));
+				mrk.setColor(g->arrowDefaultColor());
+				mrk.setWidth(g->arrowDefaultWidth());
+				mrk.setStyle(g->arrowLineDefaultStyle());
+				mrk.setHeadLength(g->arrowHeadDefaultLength());
+				mrk.setHeadAngle(g->arrowHeadDefaultAngle());
+				mrk.fillArrowHead(g->arrowHeadDefaultFill());
+				mrk.drawEndArrow(g->drawArrow());
+				mrk.drawStartArrow(false);
+				
+				g->insertLineMarker(&mrk);
 				g->drawLine(false);
+				mrk.detach();
 				plotWidget->replot();
 				}
 			else if (plot()->lineProfile())
@@ -290,17 +291,18 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 					return FALSE;
 				else
 					{					
-					LineMarker* mrk = new LineMarker(plotWidget);	
-					mrk->setStartPoint(startLinePoint);
-					mrk->setEndPoint(endLinePoint);
-					mrk->setColor(Qt::red);
-					mrk->setWidth(1);
+					LineMarker mrk;	
+					mrk.attach(g->plotWidget());
+					mrk.setStartPoint(startLinePoint);
+					mrk.setEndPoint(endLinePoint);
+					mrk.setColor(Qt::red);
+					mrk.setWidth(1);
 					Qt::PenStyle style=Qt::SolidLine;
-					mrk->setStyle(style);
-					mrk->setEndArrow(FALSE);
-					mrk->setStartArrow(FALSE);
-				
-					plot()->insertLineMarker(mrk);
+					mrk.setStyle(style);
+					mrk.drawEndArrow(false);
+					mrk.drawStartArrow(false);
+					mrk.detach();
+					plot()->insertLineMarker(&mrk);
 					plotWidget->replot();
 					emit calculateProfile(startLinePoint,endLinePoint);
 					}
@@ -644,7 +646,8 @@ QApplication::restoreOverrideCursor();
 void CanvasPicker::drawLineMarker(const QPoint& point, bool endArrow)
 {
 plotWidget->replot();
-LineMarker mrk(plotWidget);
+LineMarker mrk;
+mrk.attach(plotWidget);
 
 int clw = plotWidget->canvas()->lineWidth();	
 mrk.setStartPoint(QPoint(startLinePoint.x() + clw, startLinePoint.y() + clw));
@@ -652,11 +655,11 @@ mrk.setEndPoint(QPoint(point.x() + clw,point.y() + clw));
 
 mrk.setWidth(1);
 mrk.setStyle(Qt::SolidLine);
-mrk.setEndArrow(endArrow);
-mrk.setStartArrow(FALSE);
+mrk.drawEndArrow(endArrow);
+mrk.drawStartArrow(false);
 
 if (plot()->drawLineActive())
-mrk.setColor(Qt::black);
+	mrk.setColor(Qt::black);
 else
 	mrk.setColor(Qt::red);
 
@@ -666,7 +669,8 @@ painter.setRasterOp(Qt::NotXorROP);
 mrk.draw(&painter, plotWidget->canvasMap(QwtPlot::xBottom), 
 		 plotWidget->canvasMap(QwtPlot::yLeft), QRect(0, 0, 0, 0));	
 
-painter.restore();	
+painter.restore();
+mrk.detach();	
 }
 
 // Selects and highlights the marker 

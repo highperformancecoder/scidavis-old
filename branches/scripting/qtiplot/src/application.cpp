@@ -7536,8 +7536,8 @@ if (g && g->markerSelected())
 		auxMrkWidth=m->width();
 		auxMrkColor=m->color();
 		auxMrkStyle=m->style();
-		startArrowOn=m->getStartArrow();
-		endArrowOn=m->getEndArrow();
+		startArrowOn=m->hasStartArrow();
+		endArrowOn=m->hasEndArrow();
 		arrowHeadLength=m->headLength();
 		arrowHeadAngle=m->headAngle();
 		fillArrowHead=m->filledArrowHead();

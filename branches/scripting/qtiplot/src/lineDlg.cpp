@@ -56,11 +56,11 @@ lineDialog::lineDialog(LineMarker *line, QWidget* parent,  const char* name, boo
 
 	startBox = new QCheckBox(GroupBox1); 
     startBox->setText( tr( "Arrow at &start" ) );
-	startBox->setChecked(lm->getStartArrow());
+	startBox->setChecked(lm->hasStartArrow());
 
 	endBox = new QCheckBox(GroupBox1, "endBox" );
     endBox->setText( tr( "Arrow at &end" ) );
-	endBox->setChecked(lm->getEndArrow());
+	endBox->setChecked(lm->hasEndArrow());
 
 	QHBoxLayout* hl1 = new QHBoxLayout(options,5,5, "hl1");
     hl1->addWidget(GroupBox1);
@@ -160,13 +160,13 @@ void lineDialog::displayCoordinates(int unit)
 {
 if (unit)
 	{
-	QwtDoublePoint sp = lm->coordStartPoint();
-	xStartBox->setText(QString::number(sp.x(), 'g', 15));
-	yStartBox->setText(QString::number(sp.y(), 'g', 15));
+	QwtDoublePoint sp = lm->startPointCoord();
+	xStartBox->setText(QString::number(sp.x(), 'g', 6));
+	yStartBox->setText(QString::number(sp.y(), 'g', 6));
 
-	QwtDoublePoint ep = lm->coordEndPoint();
-	xEndBox->setText(QString::number(ep.x(), 'g', 15));
-	yEndBox->setText(QString::number(ep.y(), 'g', 15));
+	QwtDoublePoint ep = lm->endPointCoord();
+	xEndBox->setText(QString::number(ep.x(), 'g', 6));
+	yEndBox->setText(QString::number(ep.y(), 'g', 6));
 	}
 else
 	{
@@ -185,10 +185,10 @@ void lineDialog::setCoordinates(int unit)
 {
 if (unit)
 	{
-	lm->setCoordStartPoint(QwtDoublePoint(xStartBox->text().replace(",", ".").toDouble(), 
-							yStartBox->text().replace(",", ".").toDouble()));
-	lm->setCoordEndPoint(QwtDoublePoint(xEndBox->text().replace(",", ".").toDouble(), 
-						yEndBox->text().replace(",", ".").toDouble()));
+	lm->setStartPoint(xStartBox->text().replace(",", ".").toDouble(), 
+					yStartBox->text().replace(",", ".").toDouble());
+	lm->setEndPoint(xEndBox->text().replace(",", ".").toDouble(), 
+					yEndBox->text().replace(",", ".").toDouble());
 	}
 else
 	{
@@ -204,8 +204,8 @@ if (tw->currentPage()==(QWidget *)options)
 	lm->setStyle(Graph::getPenStyle(styleBox->currentItem()));
 	lm->setColor(colorBox->color());
 	lm->setWidth(widthBox->currentText().toInt());
-	lm->setEndArrow(endBox->isChecked());
-	lm->setStartArrow(startBox->isChecked());
+	lm->drawEndArrow(endBox->isChecked());
+	lm->drawStartArrow(startBox->isChecked());
 	}
 else if (tw->currentPage()==(QWidget *)head)
 	{

@@ -2459,14 +2459,14 @@ void Graph::pasteMarker()
 {
 if (selectedMarkerType==Arrow)
 	{
-	LineMarker* mrkL=new LineMarker(d_plot);
+	LineMarker* mrkL=new LineMarker();
 	mrkL->setColor(auxMrkColor);
 	mrkL->setWidth(auxMrkWidth);
 	mrkL->setStyle(auxMrkStyle);
 	mrkL->setStartPoint(QPoint(auxMrkStart.x()+10,auxMrkStart.y()+10));
 	mrkL->setEndPoint(QPoint(auxMrkEnd.x()+10,auxMrkEnd.y()+10));
-	mrkL->setStartArrow(startArrowOn);
-	mrkL->setEndArrow(endArrowOn);
+	mrkL->drawStartArrow(startArrowOn);
+	mrkL->drawEndArrow(endArrowOn);
 	mrkL->setHeadLength(auxArrowHeadLength);
 	mrkL->setHeadAngle(auxArrowHeadAngle);
 	mrkL->fillArrowHead(auxFilledArrowHead);
@@ -3981,7 +3981,7 @@ return key;
 
 void Graph::insertLineMarker(QStringList list, int fileVersion)
 {
-LineMarker* mrk= new LineMarker(d_plot);
+LineMarker* mrk= new LineMarker();
 long mrkID=d_plot->insertMarker(mrk);
 d_lines.resize(++linesOnPlot);
 d_lines[linesOnPlot-1]=mrkID;
@@ -3993,15 +3993,15 @@ if (fileVersion < 86)
 	}
 else
 	{
-	mrk->setCoordStartPoint(QwtDoublePoint(list[1].toDouble(), list[2].toDouble()));
-	mrk->setCoordEndPoint(QwtDoublePoint(list[3].toDouble(), list[4].toDouble()));
+	mrk->setStartPoint(list[1].toDouble(), list[2].toDouble());
+	mrk->setEndPoint(list[3].toDouble(), list[4].toDouble());
 	}
 
 mrk->setWidth(list[5].toInt());
 mrk->setColor(QColor(list[6]));
 mrk->setStyle(getPenStyle(list[7]));
-mrk->setEndArrow(list[8]=="1");
-mrk->setStartArrow(list[9]=="1");
+mrk->drawEndArrow(list[8]=="1");
+mrk->drawStartArrow(list[9]=="1");
 if (list.count()>10)
 	{
 	mrk->setHeadLength(list[10].toInt());		
@@ -4012,21 +4012,20 @@ if (list.count()>10)
 
 void Graph::insertLineMarker(LineMarker* mrk)
 {
-LineMarker* aux= new LineMarker(d_plot);
-aux->setStartPoint(mrk->startPoint());	
-aux->setEndPoint(mrk->endPoint());
+LineMarker* aux = new LineMarker();
+d_lines.resize(++linesOnPlot);
+d_lines[linesOnPlot-1] = d_plot->insertMarker(aux);	
+
+aux->setStartPoint(mrk->startPointCoord().x(), mrk->startPointCoord().y());	
+aux->setEndPoint(mrk->endPointCoord().x(), mrk->endPointCoord().y());
 aux->setWidth(mrk->width());
 aux->setColor(mrk->color());
 aux->setStyle(mrk->style());
-aux->setEndArrow(mrk->getEndArrow());
-aux->setStartArrow(mrk->getStartArrow());
+aux->drawEndArrow(mrk->hasEndArrow());
+aux->drawStartArrow(mrk->hasStartArrow());
 aux->setHeadLength(mrk->headLength());
 aux->setHeadAngle(mrk->headAngle());
 aux->fillArrowHead(mrk->filledArrowHead());
-
-long mrkID=d_plot->insertMarker(aux);
-d_lines.resize(++linesOnPlot);
-d_lines[linesOnPlot-1]=mrkID;	
 }
 
 LineMarker* Graph::lineMarker(long id)
@@ -4084,19 +4083,19 @@ for (i=0; i<(int)d_lines.size(); i++)
 	LineMarker* mrkL=(LineMarker*) d_plot->marker(d_lines[i]);
 	s+="lineMarker\t";
 	
-	QwtDoublePoint sp = mrkL->coordStartPoint();
+	QwtDoublePoint sp = mrkL->startPointCoord();
 	s+=(QString::number(sp.x(), 'g', 15))+"\t";
 	s+=(QString::number(sp.y(), 'g', 15))+"\t";
 
-	QwtDoublePoint ep = mrkL->coordEndPoint();
+	QwtDoublePoint ep = mrkL->endPointCoord();
 	s+=(QString::number(ep.x(), 'g', 15))+"\t";
 	s+=(QString::number(ep.y(), 'g', 15))+"\t";
 
 	s+=QString::number(mrkL->width())+"\t";
 	s+=mrkL->color().name()+"\t";
 	s+=penStyleName(mrkL->style())+"\t";
-	s+=QString::number(mrkL->getEndArrow())+"\t";
-	s+=QString::number(mrkL->getStartArrow())+"\t";
+	s+=QString::number(mrkL->hasEndArrow())+"\t";
+	s+=QString::number(mrkL->hasStartArrow())+"\t";
 	s+=QString::number(mrkL->headLength())+"\t";
 	s+=QString::number(mrkL->headAngle())+"\t";
 	s+=QString::number(mrkL->filledArrowHead())+"\n";
