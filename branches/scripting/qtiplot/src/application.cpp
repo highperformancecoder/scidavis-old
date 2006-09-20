@@ -9371,6 +9371,9 @@ void ApplicationWindow::custom3DActions(QWidget *w)
 	if (w && w->isA("Graph3D"))
 	{
 	Graph3D* plot= (Graph3D*)w;
+	
+	actionAnimate->setOn(plot->isAnimated());
+
 	switch(plot->plotStyle())
 		{
 		case FILLEDMESH:
@@ -9661,6 +9664,13 @@ void ApplicationWindow::initPlot3DToolBar()
 	floordata->addTo( plot3DTools );
     flooriso->addTo( plot3DTools );
     floornone->addTo( plot3DTools );
+
+	plot3DTools->addSeparator();
+	actionAnimate = new QAction( this );
+    actionAnimate->setToggleAction( true );
+    actionAnimate->setIconSet(QPixmap(movie_xpm));
+	connect(actionAnimate, SIGNAL(toggled(bool)), this, SLOT(toggle3DAnimation(bool)));
+	actionAnimate->addTo( plot3DTools );
 
 	plot3DTools->hide();
 
@@ -11864,6 +11874,11 @@ void ApplicationWindow::translateActionsStrings()
     floornone->setMenuText( tr( "Empty Floor" ) );
     floornone->setToolTip( tr( "Empty Floor" ) );
     floornone->setStatusTip( tr( "Empty Floor" ) );
+
+	actionAnimate->setText( tr( "Animation" ) );
+    actionAnimate->setMenuText( tr( "Animation" ) );
+    actionAnimate->setToolTip( tr( "Animation" ) );
+    actionAnimate->setStatusTip( tr( "Animation" ) );
 }
 
 Graph3D * ApplicationWindow::openMatrixPlot3D(const QString& caption, const QString& matrix_name,
@@ -13781,6 +13796,15 @@ if (!scriptWindow->isVisible())
 	}
 else
 	scriptWindow->hide();
+}
+
+/*!
+  Turns 3D animation on or off
+*/
+void ApplicationWindow::toggle3DAnimation(bool on)
+{
+if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
+	((Graph3D*)ws->activeWindow())->animate(on);
 }
 
 ApplicationWindow::~ApplicationWindow()

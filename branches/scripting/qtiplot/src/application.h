@@ -585,6 +585,7 @@ public slots:
 				int format, int prec, int rotation, int baselineDist, const QString& formula);
 	
 	//plot3D tools	
+	void toggle3DAnimation(bool on = true);
 	void setFramed3DPlot();
 	void setBoxed3DPlot();
 	void removeAxes3DPlot();
@@ -761,7 +762,7 @@ public slots:
 signals:
 	void modified();
 	
-public:
+public:		
 	bool generateUniformFitPoints;
 	bool generatePeakCurves;
 	int peakCurvesColor;
@@ -893,7 +894,7 @@ public:
 	QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;
 	QAction *actionScriptingLang, *actionRestartScripting, *actionClearTable, *actionGoToRow;
 	QAction *actionNoteExecute, *actionNoteExecuteAll, *actionNoteEvaluate, *actionSaveNote;
-	QAction *actionShowScriptWindow;
+	QAction *actionShowScriptWindow, *actionAnimate;
 
 private:
 	//!Stores the pointers to the dragged items from the FolderListViews objects

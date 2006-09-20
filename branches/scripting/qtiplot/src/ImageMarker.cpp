@@ -24,7 +24,6 @@ void ImageMarker::setOrigin(const QPoint& p)
 d_pos = p;
 d_rect.moveTo(plot()->invTransform(xAxis(), p.x()), plot()->invTransform(yAxis(), p.y()));
 d_size = size();
-
 updateBoundingRect();
 }
 

@@ -67,8 +67,11 @@ void Graph3D::initPlot()
 	worksheet = 0;
 	matrix_ = 0;
 
-	QDateTime dt = QDateTime::currentDateTime ();
-	setBirthDate(dt.toString(Qt::LocalDate));
+	setBirthDate(QDateTime::currentDateTime().toString(Qt::LocalDate));
+
+	animation_redraw_wait = 50;
+	d_timer = new QTimer(this);
+	connect(d_timer, SIGNAL(timeout()), this, SLOT(rotate()) );
 
 	ignoreFonts = false;
 
@@ -79,6 +82,7 @@ void Graph3D::initPlot()
     sp->setScale(1,1,1);
     sp->setShift(0.15,0,0);
     sp->setZoom(0.9);
+	sp->setOrtho(false);
 
 	smoothMesh = true;
 	sp->setSmoothMesh(smoothMesh);
@@ -2928,6 +2932,26 @@ QStringList l = QStringList::split("\t", lst[3], true);
 l[1] = QString::null;
 lst[3] = l.join("\t");
 return lst.join("\n");
+}
+
+/*!
+  Turns 3D animation on or off
+*/
+void Graph3D::animate(bool on)
+{
+if ( on )
+	d_timer->start( animation_redraw_wait ); // Wait this many msecs before redraw
+else
+	d_timer->stop();
+}
+
+void Graph3D::rotate()
+{
+if (!sp)
+	return;
+
+sp->setRotation(int(sp->xRotation() + 1) % 360,
+		int(sp->yRotation() + 1) % 360, int(sp->zRotation() + 1) % 360);
 }
 
 Graph3D::~Graph3D()      

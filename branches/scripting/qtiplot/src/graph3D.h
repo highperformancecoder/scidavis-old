@@ -1,6 +1,8 @@
 #ifndef GRAPH3D_H
 #define GRAPH3D_H
 
+#include <qtimer.h> 
+
 #include <qwt3d_surfaceplot.h>
 #include <qwt3d_function.h> 
 
@@ -271,6 +273,11 @@ public slots:
 	void setPlotAssociation(const QString& s){plotAssociation = s;};
 	void setSmoothMesh(bool smooth);
 
+	//! Used for the animation: rotates the scene with 1/360 degrees
+	void rotate();
+	void animate(bool on = true);
+	bool isAnimated(){return d_timer->isActive();};
+
 signals:   
 	void showContextMenu();
 	void showOptionsDialog();
@@ -278,6 +285,10 @@ signals:
 	void custom3DActions(QWidget*);
 	
 private:
+	// Wait this many msecs before redraw 3D plot (used for animations)
+	int animation_redraw_wait; 
+
+	QTimer *d_timer;
 	QString title, plotAssociation;
 	QStringList labels;
 	QFont titleFnt;
