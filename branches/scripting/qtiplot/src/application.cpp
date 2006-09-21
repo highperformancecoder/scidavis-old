@@ -6164,24 +6164,24 @@ if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 		}
 
 	plot3DDialog* pd= new plot3DDialog(this,"plot3DDialog",TRUE,WStyle_Tool|WDestructiveClose);
+	pd->setPlot(g);
+
 	connect (pd,SIGNAL(updateColors(const QColor&,const QColor&,const QColor&,const QColor&,const QColor&,const QColor&)),
 		g,SLOT(updateColors(const QColor&,const QColor&,const QColor&,const QColor&,const QColor&,const QColor&)));
-
-	connect (pd,SIGNAL(updateDataColors(const QColor&,const QColor&)),
+	connect(pd,SIGNAL(updateDataColors(const QColor&,const QColor&)),
 		g,SLOT(setDataColors(const QColor&,const QColor&)));
-
+	connect(pd, SIGNAL(setDataColorMap(const QString&)), g, SLOT(setDataColorMap(const QString&)));
 	connect (pd,SIGNAL(updateTitle(const QString&,const QColor&,const QFont&)),
 		g,SLOT(updateTitle(const QString&,const QColor&,const QFont&)));
-	connect (pd,SIGNAL(updateResolution(int)),g,SLOT(setResolution(int)));
-	connect (pd,SIGNAL(showColorLegend(bool)),g,SLOT(showColorLegend(bool)));
-	connect (pd,SIGNAL(setOrtho(bool)), g, SLOT(setOrtho(bool)));
-	connect (pd,SIGNAL(updateLabel(int,const QString&, const QFont&)),
+	connect(pd,SIGNAL(updateResolution(int)),g,SLOT(setResolution(int)));
+	connect(pd,SIGNAL(showColorLegend(bool)),g,SLOT(showColorLegend(bool)));
+	connect(pd,SIGNAL(setOrtho(bool)), g, SLOT(setOrtho(bool)));
+	connect(pd,SIGNAL(updateLabel(int,const QString&, const QFont&)),
 		g,SLOT(updateLabel(int,const QString&, const QFont&)));
-	connect (pd,SIGNAL(updateScale(int,const QStringList&)),
+	connect(pd,SIGNAL(updateScale(int,const QStringList&)),
 		g,SLOT(updateScale(int,const QStringList&)));
-	connect (pd,SIGNAL(adjustLabels(int)),
-		g,SLOT(adjustLabels(int)));
-	connect (pd,SIGNAL(updateTickLength(int, double, double)),
+	connect(pd,SIGNAL(adjustLabels(int)), g,SLOT(adjustLabels(int)));
+	connect(pd,SIGNAL(updateTickLength(int, double, double)),
 		g,SLOT(updateTickLength(int, double, double)));
 	connect (pd,SIGNAL(setNumbersFont(const QFont&)),
 		g,SLOT(setNumbersFont(const QFont&)));
@@ -7719,7 +7719,10 @@ if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 	g2->setGrid(g->grids());
 	g2->setTitle(g->plotTitle(),g->titleColor(),g->titleFont());
 	g2->setTransparency(g->transparency());
-	g2->setDataColors(g->minDataColor(),g->maxDataColor());
+	if (!g->colorMap().isEmpty())
+		g2->setDataColorMap(g->colorMap());
+	else
+		g2->setDataColors(g->minDataColor(),g->maxDataColor());
 	g2->setColors(g->meshColor(),g->axesColor(),g->numColor(),
 				g->labelColor(), g->bgColor(),g->gridColor());
 	g2->setAxesLabels(g->axesLabels());

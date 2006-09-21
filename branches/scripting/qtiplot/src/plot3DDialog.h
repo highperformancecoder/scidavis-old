@@ -8,6 +8,8 @@
 #include <qcheckbox.h>
 
 #include <qwt3d_color.h> 
+
+#include "graph3D.h"
  
 class QComboBox;
 class QLabel;
@@ -46,7 +48,7 @@ public:
 	QPushButton* btnTitleColor, *btnTitleFont, *btnLabelFont, *btnGrid;
 	QPushButton *btnBackground, *btnMesh, *btnAxes, *btnTitle, *btnLabels, *btnNumbers;
 	QPushButton *btnNumbersFont, *btnFromColor, *btnToColor, *btnTable;
-	QPushButton *buttonAxisMinGreek, *buttonAxisMajGreek;
+	QPushButton *buttonAxisMinGreek, *buttonAxisMajGreek, *btnColorMap;
     QTabWidget* generalDialog;
 	QWidget *scale, *colors, *general, *axes, *title, *bars, *points;
 	QLineEdit *boxTitle, *boxFrom, *boxTo, *boxLabel;
@@ -134,6 +136,9 @@ public slots:
 	void addSymbol(const QString& letter);
 	void showGeneralTab();
 
+	void pickDataColorMap();
+	void setPlot(Graph3D *plot){d_plot = plot;};
+
 signals:
 	void showWorksheet();
 	void updatePoints(double, bool);
@@ -155,8 +160,10 @@ signals:
 	void updateScaling(double, double, double);
 	void updateCones(double, int);
 	void updateCross(double, double, bool, bool);
+	void setDataColorMap(const QString&);
 	
 private:
+	Graph3D *d_plot;
 	QFont titleFont, xAxisFont,yAxisFont,zAxisFont, numbersFont;
 	QStringList labels, scales, tickLengths;
 	QColor titleColor,meshColor,bgColor, axesColor, numColor,labelColor, gridColor;

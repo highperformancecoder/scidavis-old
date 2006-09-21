@@ -686,7 +686,7 @@ void configDialog::languageChange()
 	boxShowProjection->setText(tr( "Show &Projection" ));
 	btnFromColor->setText( tr( "&Data Max" ) );
 	boxSmoothMesh->setText(tr( "Smoot&h Line" ));
-	boxOrthogonal->setText(tr( "&Orthogonal" ));
+	boxOrthogonal->setText(tr( "O&rthogonal" ));
 	btnLabels->setText( tr( "Lab&els" ) );
 	btnMesh->setText( tr( "Mesh &Line" ) );
 	btnGrid->setText( tr( "&Grid" ) );

@@ -29,6 +29,7 @@
 #include <qvbox.h> 
 #include <qmessagebox.h> 
 #include <qwidgetstack.h>
+#include <qfiledialog.h>
 
 #include <qwt3d_color.h> 
 
@@ -228,6 +229,9 @@ void plot3DDialog::initColorsPage()
 	btnToColor = new QPushButton( GroupBox7, "btnTo" );
     btnToColor->setText( tr( "&Min" ) );
 
+	btnColorMap = new QPushButton( GroupBox7);
+    btnColorMap->setText( tr( "Color Ma&p" ) );
+
 	GroupBox3 = new QButtonGroup(1,QGroupBox::Horizontal,tr( "General" ),box, "GroupBox3" );
 
 	btnMesh = new QPushButton( GroupBox3, "btnMesh" );
@@ -269,6 +273,7 @@ void plot3DDialog::initColorsPage()
 	connect( btnBackground, SIGNAL( clicked() ), this, SLOT(pickBgColor() ) );
 	connect( btnFromColor, SIGNAL( clicked() ), this, SLOT(pickFromColor() ) );
 	connect( btnToColor, SIGNAL( clicked() ), this, SLOT(pickToColor() ) );
+	connect( btnColorMap, SIGNAL( clicked() ), this, SLOT(pickDataColorMap() ) );
 	connect( btnGrid, SIGNAL( clicked() ), this, SLOT(pickGridColor() ) );
 	connect( btnMesh, SIGNAL( clicked() ), this, SLOT(pickMeshColor() ) );
 	connect( boxTransparency, SIGNAL( valueChanged(int) ), 
@@ -528,6 +533,13 @@ boxLegend->setDisabled(TRUE);
 void plot3DDialog::setLabelsDistance(int dist)
 {
 boxDistance->setValue(dist);
+}
+
+void plot3DDialog::pickDataColorMap()
+{
+QString fn = QFileDialog::getOpenFileName(d_plot->colorMap(), tr("Colormap files") + " (*.map *.MAP)", this);
+if (!fn.isEmpty())
+	emit setDataColorMap(fn);
 }
 
 QColor plot3DDialog::pickFromColor()
