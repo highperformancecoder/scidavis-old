@@ -298,8 +298,8 @@ void ApplicationWindow::initGlobalConstants()
 	 appStyle = "Windows";
 #endif
 
-majVersion = 0; minVersion = 8; patchVersion = 7;
-d_extra_version = "-3";
+majVersion = 0; minVersion = 8; patchVersion = 8;
+d_extra_version = "";
 projectname="untitled";
 lastModified=0;
 activeGraph=0;
@@ -2079,6 +2079,7 @@ plot->updateColors(QColor(plot3DColors[2]), QColor(plot3DColors[6]),
 plot->setResolution(plot3DResolution);
 plot->showColorLegend(showPlot3DLegend);
 plot->setSmoothMesh(smooth3DMesh);
+plot->setOrtho(orthogonal3DPlots);
 if (showPlot3DProjection)
 	plot->setFloorData();
 
@@ -4379,6 +4380,7 @@ showPlot3DLegend=settings.readBoolEntry("/Legend",true);
 showPlot3DProjection=settings.readBoolEntry("/Projection", false);
 smooth3DMesh = settings.readBoolEntry("/Antialiasing", true);
 plot3DResolution=settings.readNumEntry ("/Resolution", 1);
+orthogonal3DPlots = settings.readBoolEntry("/Orthogonal", false);
 
 QStringList plot3DFonts = settings.readListEntry("/Fonts");
 if (plot3DFonts.size() == 12)
@@ -4575,6 +4577,7 @@ settings.writeEntry("/Legend", showPlot3DLegend);
 settings.writeEntry("/Projection", showPlot3DProjection);
 settings.writeEntry("/Antialiasing", smooth3DMesh);
 settings.writeEntry("/Resolution", plot3DResolution);
+settings.writeEntry("/Orthogonal", orthogonal3DPlots);
 
 QStringList plot3DFonts;
 plot3DFonts<<plot3DTitleFont.family();
@@ -6171,6 +6174,7 @@ if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 		g,SLOT(updateTitle(const QString&,const QColor&,const QFont&)));
 	connect (pd,SIGNAL(updateResolution(int)),g,SLOT(setResolution(int)));
 	connect (pd,SIGNAL(showColorLegend(bool)),g,SLOT(showColorLegend(bool)));
+	connect (pd,SIGNAL(setOrtho(bool)), g, SLOT(setOrtho(bool)));
 	connect (pd,SIGNAL(updateLabel(int,const QString&, const QFont&)),
 		g,SLOT(updateLabel(int,const QString&, const QFont&)));
 	connect (pd,SIGNAL(updateScale(int,const QStringList&)),
@@ -6207,6 +6211,7 @@ if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 	pd->setScaling(g->xScale(),g->yScale(),g->zScale());
 	pd->setResolution(g->resolution());
 	pd->showLegend(g->isLegendOn());
+	pd->setOrthogonal(g->isOrthogonal());
 	pd->setAxesLabels(g->axesLabels());
 	pd->setAxesTickLengths(g->axisTickLengths());
 	pd->setAxesFonts(g->xAxisLabelFont(),g->yAxisLabelFont(),g->zAxisLabelFont());
@@ -9785,15 +9790,14 @@ w->blockSignals (true);
 QString caption = w->name();
 if (s.contains ("minimized"))
 	{
-	w->setGeometry(0, 0, 500, 400);
+	w->parentWidget()->setGeometry(0, 0, 500, 400);
 	w->showMinimized();
 	((myWidget *)w)->setStatus(myWidget::Minimized);
 	app->setListView(caption, tr("Minimized"));
 	}
 else if (s.contains ("maximized"))
 	{
-	w->setGeometry(0, 0, 500, 400);
-	w->hide();//trick used in order to avoid a resize event
+	w->parentWidget()->setGeometry(0, 0, 500, 400);	
 	w->showMaximized();
 	((myWidget *)w)->setStatus(myWidget::Maximized);
 	app->setListView(caption, tr("Maximized"));
@@ -10505,7 +10509,7 @@ QString date=fList[1];
 if (date.isEmpty())
 	date = QDateTime::currentDateTime().toString(Qt::LocalDate);
 
-fList=QStringList::split ("\t",lst[2],FALSE );
+fList=QStringList::split ("\t",lst[2],false );
 Graph3D *plot=0;
 
 if (fList[1].endsWith("(Y)",TRUE))//Ribbon plot
@@ -10531,67 +10535,73 @@ plot->setBirthDate(date);
 plot->setIgnoreFonts(true);
 restoreWindowGeometry(app, (QWidget *)plot, lst[1]);
 
-fList=QStringList::split ("\t",lst[3],FALSE );
+fList=QStringList::split ("\t",lst[3],false );
 plot->setStyle(fList);
 
-fList=QStringList::split ("\t", lst[4],FALSE );
+fList=QStringList::split ("\t", lst[4],false );
 plot->setGrid(fList[1].toInt());
 
 fList=QStringList::split ("\t",lst[5],true );
 plot->setTitle(fList);
 
-fList=QStringList::split ("\t",lst[6],FALSE );
+fList=QStringList::split ("\t",lst[6],false );
 plot->setColors(fList);
 
-fList=QStringList::split ("\t",lst[7],FALSE );
+fList=QStringList::split ("\t",lst[7],false );
 fList.pop_front();
 plot->setAxesLabels(fList);
 
-fList=QStringList::split ("\t",lst[8],FALSE );
+fList=QStringList::split ("\t",lst[8],false );
 plot->setTicks(fList);
 
-fList=QStringList::split ("\t",lst[9],FALSE );
+fList=QStringList::split ("\t",lst[9],false );
 plot->setTickLengths(fList);
 
-fList=QStringList::split ("\t",lst[10],FALSE );
+fList=QStringList::split ("\t",lst[10],false );
 plot->setOptions(fList);
 
-fList=QStringList::split ("\t",lst[11],FALSE );
+fList=QStringList::split ("\t",lst[11],false );
 plot->setNumbersFont(fList);
 
-fList=QStringList::split ("\t",lst[12],FALSE );
+fList=QStringList::split ("\t",lst[12],false );
 plot->setXAxisLabelFont(fList);
 
-fList=QStringList::split ("\t",lst[13],FALSE );
+fList=QStringList::split ("\t",lst[13],false );
 plot->setYAxisLabelFont(fList);
 
-fList=QStringList::split ("\t",lst[14],FALSE );
+fList=QStringList::split ("\t",lst[14],false );
 plot->setZAxisLabelFont(fList);
 
-fList=QStringList::split ("\t",lst[15],FALSE );
+fList=QStringList::split ("\t",lst[15],false );
 plot->setRotation(fList[1].toDouble(),fList[2].toDouble(),fList[3].toDouble());
 
-fList=QStringList::split ("\t",lst[16],FALSE );
+fList=QStringList::split ("\t",lst[16],false );
 plot->setZoom(fList[1].toDouble());
 
-fList=QStringList::split ("\t",lst[17],FALSE );
+fList=QStringList::split ("\t",lst[17],false );
 plot->setScale(fList[1].toDouble(),fList[2].toDouble(),fList[3].toDouble());
 
-fList=QStringList::split ("\t",lst[18],FALSE );
+fList=QStringList::split ("\t",lst[18],false );
 plot->setShift(fList[1].toDouble(),fList[2].toDouble(),fList[3].toDouble());
 
 if (fileVersion > 50)
 	{
-	fList=QStringList::split ("\t",lst[19],FALSE );
+	fList=QStringList::split ("\t",lst[19],false );
 	plot->setMeshLineWidth(fList[1].toInt());
 	}
 
 if (fileVersion > 71)
 	{
-	fList=QStringList::split ("\t",lst[20],FALSE );
+	fList=QStringList::split ("\t",lst[20],false );
 	plot->setWindowLabel(fList[1]);
 	plot->setCaptionPolicy((myWidget::CaptionPolicy)fList[2].toInt());
 	app->setListViewLabel(plot->name(),fList[1]);
+	}
+
+if (fileVersion >= 88)
+	{
+	fList=QStringList::split ("\t",lst[21],false );
+	plot->setOrtho(fList[1].toInt());
 	}
 
 plot->update();
@@ -10864,8 +10874,13 @@ QWidgetList *windows = windowsList();
 for (int i = 0; i<int(windows->count());i++ )
 	{
 	if (windows->at(i)->isA("Graph3D"))
-		((Graph3D*)windows->at(i))->setSmoothMesh(smooth3DMesh);
+		{
+		Graph3D *g = (Graph3D*)windows->at(i);
+		g->setSmoothMesh(smooth3DMesh);
+		g->setOrtho(orthogonal3DPlots);
+		}
 	}
+delete windows;
 }
 
 void ApplicationWindow::createActions()

@@ -303,6 +303,9 @@ void configDialog::initPlots3DPage()
 	boxSmoothMesh = new QCheckBox(GroupBox77, "boxSmoothMesh" );
 	boxSmoothMesh->setChecked(app->smooth3DMesh);
 
+	boxOrthogonal = new QCheckBox(GroupBox77);
+	boxOrthogonal->setChecked(app->orthogonal3DPlots);
+
 	GroupBox3DCol = new QButtonGroup(4,QGroupBox::Horizontal,tr( "Colors" ),box, "GroupBox3DCol" );
 	btnFromColor = new QPushButton( GroupBox3DCol, "btnFrom" );
 	btnLabels = new QPushButton( GroupBox3DCol, "btnLabels" );
@@ -683,6 +686,7 @@ void configDialog::languageChange()
 	boxShowProjection->setText(tr( "Show &Projection" ));
 	btnFromColor->setText( tr( "&Data Max" ) );
 	boxSmoothMesh->setText(tr( "Smoot&h Line" ));
+	boxOrthogonal->setText(tr( "&Orthogonal" ));
 	btnLabels->setText( tr( "Lab&els" ) );
 	btnMesh->setText( tr( "Mesh &Line" ) );
 	btnGrid->setText( tr( "&Grid" ) );
@@ -807,12 +811,9 @@ else if (generalDialog->visibleWidget()==(QWidget*)plots3D)
 	app->plot3DTitleFont = plot3DTitleFont;
 	app->plot3DNumbersFont = plot3DNumbersFont;
 	app->plot3DAxesFont = plot3DAxesFont;
-
-	if (app->smooth3DMesh != boxSmoothMesh->isChecked())
-		{
-		app->smooth3DMesh = boxSmoothMesh->isChecked();
-		app->setPlot3DOptions();
-		}
+	app->orthogonal3DPlots = boxOrthogonal->isChecked();
+	app->smooth3DMesh = boxSmoothMesh->isChecked();
+	app->setPlot3DOptions();
 	}
 else if (generalDialog->visibleWidget()==(QWidget*)fitPage)
 	{

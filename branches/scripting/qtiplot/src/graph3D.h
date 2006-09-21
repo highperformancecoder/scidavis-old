@@ -79,6 +79,9 @@ public slots:
 	void setBoxed();
 	void setNoAxes();
 
+	bool isOrthogonal(){return sp->ortho();};
+	void setOrtho(bool on = true){sp->setOrtho(on);};
+
 	//mesh
 	void setNoGrid();
 	void setHiddenLineGrid();

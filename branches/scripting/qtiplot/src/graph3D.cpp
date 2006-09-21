@@ -2681,7 +2681,12 @@ s+=QString::number(sp->zShift())+"\n";
 
 s+="LineWidth\t";
 s+=QString::number(sp->meshLineWidth())+"\n";
+
 s+="WindowLabel\t" + windowLabel() + "\t" + QString::number(captionPolicy()) + "\n";
+
+s+="Orthogonal\t";
+s+=QString::number(sp->ortho())+"\n";
+
 s+="</SurfacePlot>\n";
 return s;
 }

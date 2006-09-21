@@ -279,10 +279,10 @@ void plot3DDialog::initGeneralPage()
 {
 	general = new QWidget( generalDialog, "general" );
 
-	GroupBox5 = new QButtonGroup(2,QGroupBox::Horizontal,tr( "" ),general, "GroupBox5" );
+	GroupBox5 = new QButtonGroup(2,QGroupBox::Horizontal, QString::null, general, "GroupBox5" );
 	
-	boxLegend= new QCheckBox("Show Legend",GroupBox5,"legend");
-	new QLabel( "", GroupBox5, "TextLabel466",0 );
+	boxLegend = new QCheckBox("Show Legend",GroupBox5);
+	boxOrthogonal = new QCheckBox("Orthogonal",GroupBox5);
 
 	new QLabel(tr( "Line Width" ), GroupBox5, "TextLabel4887",0);
 	boxMeshLineWidth = new QSpinBox(1, 100, 1, GroupBox5,"boxWidth");
@@ -322,6 +322,7 @@ void plot3DDialog::initGeneralPage()
 	connect( boxDistance, SIGNAL(valueChanged(int)), this, SIGNAL(adjustLabels(int)));
 	connect( boxMeshLineWidth, SIGNAL(valueChanged(int)), 
 				this, SIGNAL(updateMeshLineWidth(int)));
+	connect( boxOrthogonal, SIGNAL(toggled(bool)), this, SIGNAL(setOrtho(bool)));
 	connect( boxLegend, SIGNAL(toggled(bool)), this, SIGNAL(showColorLegend(bool)));
 	connect( boxZoom, SIGNAL(valueChanged(int)), this, SLOT(changeZoom(int)));
 	connect( boxXScale, SIGNAL(valueChanged(int)), this, SLOT(changeZoom(int)));

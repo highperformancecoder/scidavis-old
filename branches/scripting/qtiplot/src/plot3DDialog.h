@@ -5,10 +5,10 @@
 #include <qdialog.h>
 #include <qmemarray.h>
 #include <qstring.h>
+#include <qcheckbox.h>
 
 #include <qwt3d_color.h> 
  
-class QCheckBox;
 class QComboBox;
 class QLabel;
 class QLineEdit;
@@ -55,7 +55,7 @@ public:
 	QButtonGroup *GroupBox5, *GroupBox6, *GroupBox8, *TicksGroupBox;
 	QButtonGroup *GroupBox10, *GroupBox7;
 	QSpinBox *boxResolution, *boxDistance, *boxTransparency;
-	QCheckBox *boxLegend, *boxSmooth, *boxBoxed, *boxCrossSmooth;
+	QCheckBox *boxLegend, *boxSmooth, *boxBoxed, *boxCrossSmooth, *boxOrthogonal;
 	QListBox *axesList, *axesList2;
 	QComboBox *boxType, *boxPointStyle;
 	QLineEdit *boxMajorLength, *boxMinorLength, *boxConesRad;
@@ -88,7 +88,8 @@ public slots:
 
 	void setResolution(int r);
 	void showLegend(bool show);
-	
+	void setOrthogonal(bool on){boxOrthogonal->setChecked(on);};
+
 	void setAxesLabels(const QStringList& list);
 	void viewAxisOptions(int axis);
 
@@ -143,6 +144,7 @@ signals:
 	void updateTitle(const QString&,const QColor&,const QFont&);
 	void updateResolution(int);
 	void showColorLegend(bool);
+	void setOrtho(bool);
 	void updateLabel(int,const QString&, const QFont&);
 	void updateScale(int,const QStringList&);
 	void updateTickLength(int,double, double);

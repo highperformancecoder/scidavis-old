@@ -815,7 +815,7 @@ public:
 	int logID,asciiID,closeID, exportID, printAllID, ignoredLines, savingTimerId, plot3DResolution;
 	bool renameColumns, copiedLayer, strip_spaces, simplify_spaces;
 	QStringList recentProjects, tableWindows;
-	bool saved, showPlot3DProjection, showPlot3DLegend;
+	bool saved, showPlot3DProjection, showPlot3DLegend, orthogonal3DPlots;
 	QStringList plot3DColors, locales;
 	QStringList xFunctions, yFunctions, rFunctions,tetaFunctions; // user functions for parametric and polar plots
 	QStringList fitFunctions; //user-defined fit functions;
