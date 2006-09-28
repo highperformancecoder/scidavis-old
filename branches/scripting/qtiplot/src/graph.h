@@ -46,7 +46,7 @@ public:
 				  Box, VectXYAM, VerticalSteps};
 
 	Plot *d_plot;
-	QwtPlotZoomer *d_zoomer;
+	QwtPlotZoomer *d_zoomer[2];
 	TitlePicker *titlePicker;
 	ScalePicker *scalePicker;
 	CanvasPicker* cp;
@@ -141,10 +141,10 @@ public slots:
 	 void contextMenuEvent(QContextMenuEvent *);
 	 void closeEvent(QCloseEvent *e);
 
-	 // plot scales
-	 void setAxisScale(int axis,const QStringList& s);
-	 QStringList plotLimits();
-	 void setScales(const QStringList& s);
+	 //! Set axis scale
+	 void setScale(int axis, double start, double end, int majorTicks,
+		  int minorTicks, double step = 0.0, int type = 0, bool inverted = false);
+	 bool userDefinedStep(int axis){return d_user_step[axis];};
 
 	 //curves layout
 	 curveLayout initCurveLayout(int i, int curves, int style);
@@ -165,7 +165,6 @@ public slots:
 	 void movedPicker(const QPoint &pos, bool mark);
 	 void setAutoScale();
 	 void updateScale();
-	 void initScales();
 	
 	 QString saveAsTemplate();
 
@@ -617,13 +616,19 @@ private:
 	bool autoScaleFonts;
 	int selectedAxis;
 	QStringList axesFormulas;
-	QStringList axesFormatInfo;//stores columns used for axes with text labels or  time/date format info
+	//! Stores columns used for axes with text labels or  time/date format info
+	QStringList axesFormatInfo;
 	QValueList <int> axisType;
+
+	//! Structure used to define the grid
 	gridOptions grid;
+
 	MarkerType selectedMarkerType;
 	QwtPlotMarker::LineStyle mrklStyle;
-	QStringList scales,associations;
+	QStringList associations;
 
+	//! Tells weather the user specified a step for a scale
+	QMemArray<bool> d_user_step;
 	//! Curve types
 	QMemArray<int> c_type;
 	//! Arrows on plot keys

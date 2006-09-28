@@ -16,8 +16,9 @@
 CanvasPicker::CanvasPicker(Graph *plot):
     QObject(plot)
 {
-	moved = FALSE;
-	movedGraph = FALSE;
+	moved = false;
+	movedGraph = false;
+	mousePressed = false;
 	pointSelected = false;
 	resizeLineFromStart = false;
 	resizeLineFromEnd = false;
@@ -44,7 +45,21 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 	bool movePoint=plot()->movePointsActivated();
 	
     switch(e->type())
-    	{		
+    	{	
+		case QEvent::Enter:
+			{
+			mousePressed = false;
+			return false;
+			}
+		break;
+
+		case QEvent::Leave:
+			{
+			mousePressed = false;
+			return false;
+			}
+		break;
+
 		case QEvent::FocusIn:
 			{
 			if (plot()->enabledCursor()) 
@@ -86,7 +101,8 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 			{
 			const QMouseEvent *me = (const QMouseEvent *)e;	
 			presspos = me->pos();
-				
+			mousePressed = true;
+			
 			bool allAxisDisabled = true;
 			for (int i=0; i < QwtPlot::axisCnt; i++)
 				{
@@ -229,9 +245,9 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 		const QMouseEvent *me = (const QMouseEvent *)e;
 		QPoint pos = me->pos();
 
-		if ( removePoint || moveRangeSelector || dataCursorEnabled ||
+		if (plot()->zoomOn() || removePoint || moveRangeSelector || dataCursorEnabled ||
 			(presspos - pos).manhattanLength() <= QApplication::startDragDistance())
-				return false;
+				return true;
 		
 		long selectedMarker=plot()->selectedMarkerKey();
 		
@@ -245,16 +261,16 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 			plot()->movedPicker(pos, false);		
 		else if (selectedMarker>=0)
 			moveMarker(pos);
-		else if (!plot()->zoomOn())
+		else if (mousePressed) 	
 			{
 			plotWidget->canvas()->setCursor(Qt::PointingHandCursor);
-			movedGraph=TRUE;
+			movedGraph = true;
 			emit moveGraph(pos);
 			}
 		return TRUE;
 		}
        break;
-		
+
 		case QEvent::MouseButtonRelease:
 		{
 			const QMouseEvent *me = (const QMouseEvent *)e;
@@ -311,7 +327,8 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 				{	
 				plotWidget->canvas()->setCursor(Qt::arrowCursor);
 				emit releasedGraph();
-				movedGraph=FALSE;
+				movedGraph = false;
+				mousePressed = false;
 				}
 		
 		return TRUE;			

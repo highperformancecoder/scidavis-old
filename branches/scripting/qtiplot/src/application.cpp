@@ -3891,10 +3891,7 @@ while ( !t.eof() && !progress.wasCanceled())
 		plot->setCols(graph[1].toInt());
 		plot->setRows(graph[2].toInt());
 		QString date=QString::null;
-		if (fileVersion < 63)
-			date = graph[5];
-		else
-			date = graph[3];
+		date = graph[3];
 
 		app->setListViewDate(caption,date);
 		plot->setBirthDate(date);
@@ -6108,7 +6105,6 @@ if (!g->isPiePlot())
 	ad->setEnabledAxes(g->enabledAxes());
 	ad->setAxesType(g->axesType());
 	ad->setAxesBaseline(g->axesBaseline());
-	ad->setScaleLimits(g->plotLimits());
 	ad->initAxisFonts(g->axisFont(2), g->axisFont(0),g->axisFont(3),g->axisFont(1));
 	ad->setAxisTitles(g->scalesTitles());
 	ad->updateTitleBox(0);
@@ -7718,13 +7714,13 @@ if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 	g2->setStyle(g->coordStyle(),g->floorStyle(),g->plotStyle(),pt);
 	g2->setGrid(g->grids());
 	g2->setTitle(g->plotTitle(),g->titleColor(),g->titleFont());
-	g2->setTransparency(g->transparency());
 	if (!g->colorMap().isEmpty())
 		g2->setDataColorMap(g->colorMap());
 	else
 		g2->setDataColors(g->minDataColor(),g->maxDataColor());
 	g2->setColors(g->meshColor(),g->axesColor(),g->numColor(),
 				g->labelColor(), g->bgColor(),g->gridColor());
+	g2->setTransparency(g->transparency());
 	g2->setAxesLabels(g->axesLabels());
 	g2->setTicks(g->scaleTicks());
 	g2->setTickLengths(g->axisTickLengths());
@@ -9801,6 +9797,8 @@ if (s.contains ("minimized"))
 else if (s.contains ("maximized"))
 	{
 	w->parentWidget()->setGeometry(0, 0, 500, 400);	
+	if (w->isA("MultiLayer"))
+		w->hide();//trick used in order to avoid a resize event
 	w->showMaximized();
 	((myWidget *)w)->setStatus(myWidget::Maximized);
 	app->setListView(caption, tr("Maximized"));
@@ -9919,8 +9917,7 @@ for (line++; line!=flist.end(); line++)
     else
     {
       w->setColPlotDesignation(list[4].toInt(), Table::X);
-      if (fileVersion > 50)
-	w->setColPlotDesignation(list[6].toInt(), Table::Y);
+	  w->setColPlotDesignation(list[6].toInt(), Table::Y);
       w->setHeader(fields);
     }
   } else if (fields[0] == "ColWidth") {
@@ -9995,8 +9992,7 @@ for (line++; line!=flist.end(); line++)
     else
     {
       w->setColPlotDesignation(list[4].toInt(), Table::X);
-      if (fileVersion > 50)
-	w->setColPlotDesignation(list[6].toInt(), Table::Y);
+	  w->setColPlotDesignation(list[6].toInt(), Table::Y);
       w->setHeader(fields);
     }
   } else if (fields[0] == "ColWidth") {
@@ -10129,7 +10125,11 @@ for (int j=0;j<(int)list.count()-1;j++)
 			gr.minorWidth=grid[10].toInt();
 			gr.xZeroOn=grid[11].toInt();
 			gr.yZeroOn=grid[12].toInt();
-
+			if (grid.count() == 15)
+				{
+				gr.xAxis=grid[13].toInt();
+				gr.yAxis=grid[14].toInt();
+				}
 			ag->setGridOptions(gr);
 			}
 	else if (s.contains ("PieCurve"))
@@ -10141,7 +10141,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 			}
 	else if (s.left(6)=="curve\t")
 			{
-			curve = QStringList::split ("\t",s,TRUE);
+			curve = QStringList::split ("\t",s, false);
 			if (!app->renamedTables.isEmpty())
 				{
 				QString caption = (curve[2]).left((curve[2]).find("_",0));
@@ -10153,10 +10153,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 					}
 				}
 
-			if (fileVersion <= 60)
-				cl.connectType=curve[4].toInt()+1;
-			else
-				cl.connectType=curve[4].toInt();
+			cl.connectType=curve[4].toInt();
 			cl.lCol=curve[5].toInt();
 			cl.lStyle=curve[6].toInt();
 			cl.lWidth=curve[7].toInt();
@@ -10229,12 +10226,18 @@ for (int j=0;j<(int)list.count()-1;j++)
 						ag->setBarsGap(curveID, curve[15].toInt(), curve[16].toInt());
 					}
 				ag->updateCurveLayout(curveID,&cl);
+				if (fileVersion >= 88)
+					{
+					QwtPlotCurve *c = ag->curve(curveID);
+					if (c)
+						c->setAxis(curve[curve.count()-2].toInt(), curve[curve.count()-1].toInt());
+					}
 				}
 			curveID++;
 			}
 		else if (s.contains ("FunctionCurve"))
 			{
-			curve=QStringList::split ("\t",s,TRUE);
+			curve=QStringList::split ("\t",s, true);
 
 			cl.connectType=curve[6].toInt();
 			cl.lCol=curve[7].toInt();
@@ -10255,6 +10258,12 @@ for (int j=0;j<(int)list.count()-1;j++)
 			ag->insertFunctionCurve(curve[1], curve[2].toInt(), fileVersion);
 			ag->setCurveType(curveID, curve[5].toInt());
 			ag->updateCurveLayout(curveID, &cl);
+			if (fileVersion >= 88)
+				{
+				QwtPlotCurve *c = ag->curve(curveID);
+				if (c)
+				c->setAxis(curve[18].toInt(), curve[19].toInt());
+				}
 			curveID++;
 			}
 		else if (s.contains ("ErrorBars"))
@@ -10275,57 +10284,25 @@ for (int j=0;j<(int)list.count()-1;j++)
 			}
 		else if (s.left(6)=="scale\t")
 			{
-			QStringList scale=QStringList::split ("\t",s,TRUE);
-			
-			if (fileVersion < 64)
-				{//ensure backwards compatibility	
-				QStringList newScale; 
-				for (i=1; i<7; i++)
-					newScale<<scale[i];
-				
-				QString sclType = scale[7];	
-				if ( sclType == "2")
-					{
-					newScale<<"0";//linear scale
-					newScale<<"1";//inverted scale
-					}
-				else if ( sclType == "3")
-					{
-					newScale<<"1";//log scale
-					newScale<<"1";//inverted scale
-					}
-				else
-					{
-					newScale<<sclType;
-					newScale<<"0";//not inverted scale
-					}
-					
-				for (i=8; i<14; i++)
-					newScale<<scale[i];	
-				
-				sclType = scale[14];	
-				if ( sclType == "2")
-					{
-					newScale<<"0";//linear scale
-					newScale<<"1";//inverted scale
-					}
-				else if ( sclType == "3")
-					{
-					newScale<<"1";//log scale
-					newScale<<"1";//inverted scale
-					}
-				else
-					{
-					newScale<<sclType;
-					newScale<<"0";//not inverted scale
-					}
-				ag->setScales(newScale);
+			QStringList scl = QStringList::split ("\t", s, false);		
+			scl.pop_front();
+			if (fileVersion < 88)
+				{
+				double step = scl[2].toDouble();
+				if (scl[5] == "0")
+					step = 0.0;
+				ag->setScale(QwtPlot::xBottom, scl[0].toDouble(), scl[1].toDouble(), scl[3].toInt(), 
+					scl[4].toInt(), step, scl[6].toInt(), bool(scl[7].toInt()));
+
+				step = scl[10].toDouble();
+				if (scl[13] == "0")
+					step = 0.0;
+				ag->setScale(QwtPlot::yLeft, scl[8].toDouble(), scl[9].toDouble(), scl[11].toInt(), 
+					scl[12].toInt(), step, scl[14].toInt(), bool(scl[15].toInt()));
 				}
 			else
-				{
-				scale.pop_front();				
-				ag->setScales(scale);
-				}
+				ag->setScale(scl[0].toInt(), scl[1].toDouble(), scl[2].toDouble(), scl[4].toInt(), 
+					scl[5].toInt(), scl[3].toDouble(), scl[6].toInt(), bool(scl[7].toInt()));
 			}
 		else if (s.contains ("PlotTitle"))
 			{
@@ -10396,19 +10373,6 @@ for (int j=0;j<(int)list.count()-1;j++)
 		else if (s.contains ("LabelsFormat"))
 			{
 			fList=QStringList::split ("\t",s,TRUE);
-			if (fileVersion < 64)
-				{//insure backwards compatibility
-				for (i=0; i<4; i++)
-					{			
-					QString fmt = fList[2*i + 1];	
-					if ( fmt == "0")
-						fList[2*i + 1] = "1";
-					else if ( fmt == "1")
-						fList[2*i  + 1] = "2";
-					else if ( fmt == "2")
-						fList[2*i + 1] = "0";
-					}					
-				}
 			fList.pop_front();
 			ag->setLabelsNumericFormat(fList);
 			}
@@ -10587,11 +10551,8 @@ plot->setScale(fList[1].toDouble(),fList[2].toDouble(),fList[3].toDouble());
 fList=QStringList::split ("\t",lst[18],false );
 plot->setShift(fList[1].toDouble(),fList[2].toDouble(),fList[3].toDouble());
 
-if (fileVersion > 50)
-	{
-	fList=QStringList::split ("\t",lst[19],false );
-	plot->setMeshLineWidth(fList[1].toInt());
-	}
+fList=QStringList::split ("\t",lst[19],false );
+plot->setMeshLineWidth(fList[1].toInt());
 
 if (fileVersion > 71)
 	{
@@ -12626,10 +12587,7 @@ while ( !t.eof())
 		plot->setCols(graph[1].toInt());
 		plot->setRows(graph[2].toInt());
 		QString date=QString::null;
-		if (fileVersion < 63)
-			date = graph[5];
-		else
-			date = graph[3];
+		date = graph[3];
 
 		setListViewDate(caption,date);
 		plot->setBirthDate(date);

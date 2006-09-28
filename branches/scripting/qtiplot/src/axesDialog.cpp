@@ -39,10 +39,11 @@
 
 #include <qwt_plot.h>
 #include <qwt_scale_widget.h>
+#include <qwt_scale_engine.h>
 
 /* XPM */
-static char * vert_scl_xpm[] = {
-"36 36 76 1",
+static const char* const bottom_scl_xpm[] = {
+"36 38 75 1",
 " 	c None",
 ".	c #FFFFFF",
 "+	c #818181",
@@ -81,90 +82,91 @@ static char * vert_scl_xpm[] = {
 "7	c #7D7D7D",
 "8	c #050505",
 "9	c #7F7F7F",
-"0	c #F9F9F9",
-"a	c #F38C82",
-"b	c #E71E09",
-"c	c #E82612",
-"d	c #FDFDFD",
-"e	c #EA3826",
-"f	c #FBD8D5",
-"g	c #F9CEC9",
-"h	c #EA3E2C",
-"i	c #E71D08",
-"j	c #FEFCFC",
-"k	c #7D6F6F",
-"l	c #EA3C2A",
-"m	c #FAD7D3",
-"n	c #FAD5D1",
-"o	c #F2897E",
-"p	c #E71C07",
-"q	c #F28B80",
-"r	c #FDEFEE",
-"s	c #E9321F",
-"t	c #EF6D5F",
-"u	c #E71803",
+"0	c #FDFDFD",
+"a	c #7D6F6F",
+"b	c #F38C82",
+"c	c #E71E09",
+"d	c #E82612",
+"e	c #FDEFEE",
+"f	c #E9321F",
+"g	c #F7B3AC",
+"h	c #E82B17",
+"i	c #E82814",
+"j	c #F49C93",
+"k	c #EA3826",
+"l	c #FBD8D5",
+"m	c #F9CEC9",
+"n	c #EA3E2C",
+"o	c #EF6D5F",
+"p	c #E71803",
+"q	c #F9CDC8",
+"r	c #FAD6D2",
+"s	c #E7200B",
+"t	c #E71D08",
+"u	c #FEFCFC",
 "v	c #FEF7F7",
-"w	c #F7B3AC",
-"x	c #E82B17",
-"y	c #E82814",
-"z	c #F49C93",
-"A	c #F9CDC8",
-"B	c #FAD6D2",
-"C	c #E7200B",
-"D	c #FAD2CE",
-"E	c #ED5546",
-"F	c #FCE2E0",
-"G	c #ED5748",
-"H	c #FCEAE8",
-"I	c #F6ACA5",
-"J	c #ED594A",
-"K	c #FDECEB",
-" ......+@#+......$%......&*=-...... ",
-" ......;>,'......)!......%~{]...... ",
-" ......^/(^......_!........:<...... ",
-" ......^((^.......!.......[}|...... ",
-" ......123;.......!......456....... ",
-" ......78^9.......!......*!!!...... ",
-" .................0................ ",
-" abca..(!d.......!.......!.....abca ",
-" efgh..!!!!!!!!!!!!!!!!!!!!!!..efgh ",
-" i/ji..!kkkkkkkkkkkkkkkkkkkk!..i/ji ",
-" ijji.!!kkkkkkkkkkkkkkkkkkkk!!.ijji ",
-" lmne..!kkkkkkkkkkkkkkkkkkkk!..lmne ",
-" opiq..!kkkkkkkkkkkkkkkkkkkk!..opiq ",
-" ......!kkkkkkkkkkkkkkkkkkkk!...... ",
-" ......!kkkkkkkkkkkkkkkkkkkk!...... ",
-" .rs...!kkkkkkkkkkkkkkkkkkkk!...rs. ",
-" .tu...!kkkkkkkkkkkkkkkkkkkk!...tu. ",
-" .vu..!!kkkkkkkkkkkkkkkkkkkk!!..vu. ",
-" ..u...!kkkkkkkkkkkkkkkkkkkk!....u. ",
-" ..u...!kkkkkkkkkkkkkkkkkkkk!....u. ",
-" ..u...!kkkkkkkkkkkkkkkkkkkk!....u. ",
-" ......!kkkkkkkkkkkkkkkkkkkk!...... ",
-" ......!kkkkkkkkkkkkkkkkkkkk!...... ",
-" wxyz..!kkkkkkkkkkkkkkkkkkkk!..wxyz ",
-" sABC.!!kkkkkkkkkkkkkkkkkkkk!!.sABC ",
-" ..DE..!kkkkkkkkkkkkkkkkkkkk!....DE ",
-" .FGH..!kkkkkkkkkkkkkkkkkkkk!...FGH ",
-" IJK...!!!!!!!!!!!!!!!!!!!!!!..IJK. ",
-" xuuu....!........!.......!....xuuu ",
-" .................................. ",
-" ......+@#+......$%......&*=-...... ",
-" ......;>,'......)!......%~{]...... ",
-" ......^/(^......_!........:<...... ",
-" ......^((^.......!.......[}|...... ",
-" ......123;.......!......456....... ",
-" ......78^9.......!......*!!!...... "};
+"w	c #FAD2CE",
+"x	c #ED5546",
+"y	c #FCE2E0",
+"z	c #ED5748",
+"A	c #FCEAE8",
+"B	c #EA3C2A",
+"C	c #FAD7D3",
+"D	c #FAD5D1",
+"E	c #F6ACA5",
+"F	c #ED594A",
+"G	c #FDECEB",
+"H	c #F2897E",
+"I	c #E71C07",
+"J	c #F28B80",
+"....................................",
+"......+@#+......$%......&*=-........",
+"......;>,'......)!......%~{]........",
+"......^/(^......_!........:<........",
+"......^((^.......!.......[}|........",
+"......123;.......!......456.........",
+"......78^9.......!......*!!!........",
+"+@#+................................",
+";>,'...(!0.......!.......!.....+@#+.",
+"^/(^...!!!!!!!!!!!!!!!!!!!!!!..;>,'.",
+"^((^...!aaaaaaaaaaaaaaaaaaaa!..^/(^.",
+"123;..!!aaaaaaaaaaaaaaaaaaaa!!.^((^.",
+"78^9...!aaaaaaaaaaaaaaaaaaaa!..123;.",
+".......!aaaaaaaaaaaaaaaaaaaa!..78^9.",
+".......!aaaaaaaaaaaaaaaaaaaa!.......",
+"$%.....!aaaaaaaaaaaaaaaaaaaa!.......",
+")!.....!aaaaaaaaaaaaaaaaaaaa!..$%...",
+"_!.....!aaaaaaaaaaaaaaaaaaaa!..)!...",
+".!....!!aaaaaaaaaaaaaaaaaaaa!!._!...",
+".!.....!aaaaaaaaaaaaaaaaaaaa!...!...",
+".!.....!aaaaaaaaaaaaaaaaaaaa!...!...",
+".......!aaaaaaaaaaaaaaaaaaaa!...!...",
+"&*=-...!aaaaaaaaaaaaaaaaaaaa!.......",
+"%~{]...!aaaaaaaaaaaaaaaaaaaa!..&*=-.",
+"..:<...!aaaaaaaaaaaaaaaaaaaa!..%~{].",
+".[}|..!!aaaaaaaaaaaaaaaaaaaa!!...:<.",
+"456....!aaaaaaaaaaaaaaaaaaaa!...[}|.",
+"*!!!...!aaaaaaaaaaaaaaaaaaaa!..456..",
+".......!!!!!!!!!!!!!!!!!!!!!!..*!!!.",
+".........!........!.......!.........",
+"....................................",
+"........bcdb.....ef......ghij.......",
+"........klmn.....op......fqrs.......",
+"........t/ut.....vp........wx.......",
+"........tuut......p.......yzA.......",
+"........BCDk......p......EFG........",
+"........HItJ......p......hppp.......",
+"...................................."};
 
 /* XPM */
-static char * horizont_scl_xpm[] = {
+static const char* const top_scl_xpm[] = {
 "36 38 75 1",
 " 	c None",
 ".	c #FFFFFF",
 "+	c #F38C82",
 "@	c #E71E09",
 "#	c #E82612",
-"$	c #FDEFEE",
+"$	c #FEFAFA",
 "%	c #E9321F",
 "&	c #F7B3AC",
 "*	c #E82B17",
@@ -182,96 +184,320 @@ static char * horizont_scl_xpm[] = {
 "^	c #E71D08",
 "/	c #FEFEFE",
 "(	c #FEFCFC",
-"_	c #FEF7F7",
-":	c #FAD2CE",
-"<	c #ED5546",
-"[	c #FCE2E0",
-"}	c #ED5748",
-"|	c #FCEAE8",
-"1	c #EA3C2A",
-"2	c #FAD7D3",
-"3	c #FAD5D1",
-"4	c #F6ACA5",
-"5	c #ED594A",
-"6	c #FDECEB",
-"7	c #F2897E",
-"8	c #E71C07",
-"9	c #F28B80",
-"0	c #818181",
-"a	c #070707",
-"b	c #101010",
-"c	c #242424",
-"d	c #D5D5D5",
-"e	c #C9C9C9",
-"f	c #2A2A2A",
-"g	c #FCFCFC",
-"h	c #000000",
-"i	c #FDFDFD",
-"j	c #060606",
-"k	c #7D6F6F",
-"l	c #282828",
-"m	c #D3D3D3",
-"n	c #D1D1D1",
-"o	c #7D7D7D",
-"p	c #050505",
-"q	c #7F7F7F",
-"r	c #EEEEEE",
-"s	c #1D1D1D",
-"t	c #5E5E5E",
-"u	c #F7F7F7",
-"v	c #ACACAC",
-"w	c #151515",
-"x	c #121212",
-"y	c #929292",
-"z	c #C8C8C8",
-"A	c #D2D2D2",
-"B	c #090909",
-"C	c #CECECE",
-"D	c #444444",
-"E	c #E0E0E0",
-"F	c #464646",
-"G	c #E8E8E8",
-"H	c #A4A4A4",
-"I	c #484848",
+"_	c #FAD2CE",
+":	c #ED5546",
+"<	c #FCE2E0",
+"[	c #ED5748",
+"}	c #FCEAE8",
+"|	c #EA3C2A",
+"1	c #FAD7D3",
+"2	c #FAD5D1",
+"3	c #F6ACA5",
+"4	c #ED594A",
+"5	c #FDF2F1",
+"6	c #F2897E",
+"7	c #E71C07",
+"8	c #F28B80",
+"9	c #818181",
+"0	c #070707",
+"a	c #101010",
+"b	c #242424",
+"c	c #D5D5D5",
+"d	c #C9C9C9",
+"e	c #2A2A2A",
+"f	c #000000",
+"g	c #060606",
+"h	c #FCFCFC",
+"i	c #7D6F6F",
+"j	c #282828",
+"k	c #D3D3D3",
+"l	c #D1D1D1",
+"m	c #7D7D7D",
+"n	c #050505",
+"o	c #7F7F7F",
+"p	c #FAFAFA",
+"q	c #1D1D1D",
+"r	c #5E5E5E",
+"s	c #ACACAC",
+"t	c #151515",
+"u	c #121212",
+"v	c #929292",
+"w	c #C8C8C8",
+"x	c #D2D2D2",
+"y	c #090909",
+"z	c #CECECE",
+"A	c #444444",
+"B	c #E0E0E0",
+"C	c #464646",
+"D	c #E8E8E8",
+"E	c #A4A4A4",
+"F	c #484848",
+"G	c #F1F1F1",
+"H	c #EEEEEE",
+"I	c #F7F7F7",
 "J	c #EBEBEB",
 "....................................",
 ".......+@#+.....$%......&*=-........",
 ".......;>,'.....)!......%~{]........",
-".......^/(^....._!........:<........",
-".......^((^......!.......[}|........",
-".......123;......!......456.........",
-".......78^9......!......*!!!........",
-"0ab0................................",
-"cdef...ghi.......h.......h.....0ab0.",
-"j/gj...hhhhhhhhhhhhhhhhhhhhhh..cdef.",
-"jggj...hkkkkkkkkkkkkkkkkkkkkh..j/gj.",
-"lmnc..hhkkkkkkkkkkkkkkkkkkkkhh.jggj.",
-"opjq...hkkkkkkkkkkkkkkkkkkkkh..lmnc.",
-".......hkkkkkkkkkkkkkkkkkkkkh..opjq.",
-".......hkkkkkkkkkkkkkkkkkkkkh.......",
-"rs.....hkkkkkkkkkkkkkkkkkkkkh.......",
-"th.....hkkkkkkkkkkkkkkkkkkkkh..rs...",
-"uh.....hkkkkkkkkkkkkkkkkkkkkh..th...",
-".h....hhkkkkkkkkkkkkkkkkkkkkhh.uh...",
-".h.....hkkkkkkkkkkkkkkkkkkkkh...h...",
-".h.....hkkkkkkkkkkkkkkkkkkkkh...h...",
-".......hkkkkkkkkkkkkkkkkkkkkh...h...",
-"vwxy...hkkkkkkkkkkkkkkkkkkkkh.......",
-"szAB...hkkkkkkkkkkkkkkkkkkkkh..vwxy.",
-"..CD...hkkkkkkkkkkkkkkkkkkkkh..szAB.",
-".EFG..hhkkkkkkkkkkkkkkkkkkkkhh...CD.",
-"HIJ....hkkkkkkkkkkkkkkkkkkkkh...EFG.",
-"whhh...hkkkkkkkkkkkkkkkkkkkkh..HIJ..",
-".......hhhhhhhhhhhhhhhhhhhhhh..whhh.",
-".........h........h.......h.........",
+".......^/(^......!........_:........",
+".......^((^......!.......<[}........",
+".......|12;......!......345.........",
+".......67^8......!......*!!!........",
+"90a9................................",
+"bcde....f........f.......f.....90a9.",
+"g/hg...ffffffffffffffffffffff..bcde.",
+"ghhg...fiiiiiiiiiiiiiiiiiiiif..g/hg.",
+"jklb..ffiiiiiiiiiiiiiiiiiiiiff.ghhg.",
+"mngo...fiiiiiiiiiiiiiiiiiiiif..jklb.",
+".......fiiiiiiiiiiiiiiiiiiiif..mngo.",
+".......fiiiiiiiiiiiiiiiiiiiif.......",
+"pq.....fiiiiiiiiiiiiiiiiiiiif.......",
+"rf.....fiiiiiiiiiiiiiiiiiiiif..pq...",
+".f.....fiiiiiiiiiiiiiiiiiiiif..rf...",
+".f....ffiiiiiiiiiiiiiiiiiiiiff..f...",
+".f.....fiiiiiiiiiiiiiiiiiiiif...f...",
+".f.....fiiiiiiiiiiiiiiiiiiiif...f...",
+".......fiiiiiiiiiiiiiiiiiiiif...f...",
+"stuv...fiiiiiiiiiiiiiiiiiiiif.......",
+"qwxy...fiiiiiiiiiiiiiiiiiiiif..stuv.",
+"..zA...fiiiiiiiiiiiiiiiiiiiif..qwxy.",
+".BCD..ffiiiiiiiiiiiiiiiiiiiiff...zA.",
+"EFG....fiiiiiiiiiiiiiiiiiiiif...BCD.",
+"tfff...fiiiiiiiiiiiiiiiiiiiif..EFG..",
+".......ffffffffffffffffffffff..tfff.",
+".........f........f.......f.........",
 "....................................",
-".......+@#+.....$%......&*=-........",
-".......;>,'.....)!......%~{]........",
-".......^/(^....._!........:<........",
-".......^((^......!.......[}|........",
-".......123;......!......456.........",
-".......78^9......!......*!!!........",
+".......90a9......Hq......stuv.......",
+".......bcde......rf......qwxy.......",
+".......g/hg......If........zA.......",
+".......ghhg.......f.......BCD.......",
+".......jklb.......f......EFJ........",
+".......mngo.......f......tfff.......",
 "...................................."};
+
+/* XPM */
+static const char* const left_scl_xpm[] = {
+"36 36 72 1",
+" 	c None",
+".	c #FFFFFF",
+"+	c #818181",
+"@	c #070707",
+"#	c #101010",
+"$	c #FAFAFA",
+"%	c #1D1D1D",
+"&	c #ACACAC",
+"*	c #151515",
+"=	c #121212",
+"-	c #929292",
+";	c #242424",
+">	c #D5D5D5",
+",	c #C9C9C9",
+"'	c #2A2A2A",
+")	c #5E5E5E",
+"!	c #000000",
+"~	c #C8C8C8",
+"{	c #D2D2D2",
+"]	c #090909",
+"^	c #060606",
+"/	c #FEFEFE",
+"(	c #FCFCFC",
+"_	c #CECECE",
+":	c #444444",
+"<	c #E0E0E0",
+"[	c #464646",
+"}	c #E8E8E8",
+"|	c #282828",
+"1	c #D3D3D3",
+"2	c #D1D1D1",
+"3	c #A4A4A4",
+"4	c #484848",
+"5	c #F1F1F1",
+"6	c #7D7D7D",
+"7	c #050505",
+"8	c #7F7F7F",
+"9	c #F38C82",
+"0	c #E71E09",
+"a	c #E82612",
+"b	c #EA3826",
+"c	c #FBD8D5",
+"d	c #F9CEC9",
+"e	c #EA3E2C",
+"f	c #E71D08",
+"g	c #FEFCFC",
+"h	c #7D6F6F",
+"i	c #EA3C2A",
+"j	c #FAD7D3",
+"k	c #FAD5D1",
+"l	c #F2897E",
+"m	c #E71C07",
+"n	c #F28B80",
+"o	c #FEFAFA",
+"p	c #E9321F",
+"q	c #EF6D5F",
+"r	c #E71803",
+"s	c #F7B3AC",
+"t	c #E82B17",
+"u	c #E82814",
+"v	c #F49C93",
+"w	c #F9CDC8",
+"x	c #FAD6D2",
+"y	c #E7200B",
+"z	c #FAD2CE",
+"A	c #ED5546",
+"B	c #FCE2E0",
+"C	c #ED5748",
+"D	c #FCEAE8",
+"E	c #F6ACA5",
+"F	c #ED594A",
+"G	c #FDF2F1",
+".......+@#+......$%......&*=-.......",
+".......;>,'......)!......%~{].......",
+".......^/(^.......!........_:.......",
+".......^((^.......!.......<[}.......",
+".......|12;.......!......345........",
+".......67^8.......!......*!!!.......",
+"....................................",
+".90a9...!........!.......!.....+@#+.",
+".bcde..!!!!!!!!!!!!!!!!!!!!!!..;>,'.",
+".f/gf..!hhhhhhhhhhhhhhhhhhhh!..^/(^.",
+".fggf.!!hhhhhhhhhhhhhhhhhhhh!!.^((^.",
+".ijkb..!hhhhhhhhhhhhhhhhhhhh!..|12;.",
+".lmfn..!hhhhhhhhhhhhhhhhhhhh!..67^8.",
+".......!hhhhhhhhhhhhhhhhhhhh!.......",
+".......!hhhhhhhhhhhhhhhhhhhh!.......",
+"..op...!hhhhhhhhhhhhhhhhhhhh!...%...",
+"..qr...!hhhhhhhhhhhhhhhhhhhh!..)!...",
+"...r..!!hhhhhhhhhhhhhhhhhhhh!!..!...",
+"...r...!hhhhhhhhhhhhhhhhhhhh!...!...",
+"...r...!hhhhhhhhhhhhhhhhhhhh!...!...",
+"...r...!hhhhhhhhhhhhhhhhhhhh!...!...",
+".......!hhhhhhhhhhhhhhhhhhhh!.......",
+".stuv..!hhhhhhhhhhhhhhhhhhhh!..&*=-.",
+".pwxy..!hhhhhhhhhhhhhhhhhhhh!..%~{].",
+"...zA.!!hhhhhhhhhhhhhhhhhhhh!!..._:.",
+"..BCD..!hhhhhhhhhhhhhhhhhhhh!...<[}.",
+".EFG...!hhhhhhhhhhhhhhhhhhhh!..34...",
+".trrr..!!!!!!!!!!!!!!!!!!!!!!..*!!!.",
+".........!........!.......!.........",
+"....................................",
+".......+@#+......$%......&*=-.......",
+".......;>,'......)!......%~{].......",
+".......^/(^.......!........_:.......",
+".......^((^.......!.......<[}.......",
+".......|12;.......!......345........",
+".......67^8.......!......*!!!......."};
+
+/* XPM */
+static const char* const right_scl_xpm[] = {
+"36 36 72 1",
+" 	c None",
+".	c #FFFFFF",
+"+	c #818181",
+"@	c #070707",
+"#	c #101010",
+"$	c #FAFAFA",
+"%	c #1D1D1D",
+"&	c #ACACAC",
+"*	c #151515",
+"=	c #121212",
+"-	c #929292",
+";	c #242424",
+">	c #D5D5D5",
+",	c #C9C9C9",
+"'	c #2A2A2A",
+")	c #5E5E5E",
+"!	c #000000",
+"~	c #C8C8C8",
+"{	c #D2D2D2",
+"]	c #090909",
+"^	c #060606",
+"/	c #FEFEFE",
+"(	c #FCFCFC",
+"_	c #CECECE",
+":	c #444444",
+"<	c #E0E0E0",
+"[	c #464646",
+"}	c #E8E8E8",
+"|	c #282828",
+"1	c #D3D3D3",
+"2	c #D1D1D1",
+"3	c #A4A4A4",
+"4	c #484848",
+"5	c #F1F1F1",
+"6	c #7D7D7D",
+"7	c #050505",
+"8	c #7F7F7F",
+"9	c #F38C82",
+"0	c #E71E09",
+"a	c #E82612",
+"b	c #EA3826",
+"c	c #FBD8D5",
+"d	c #F9CEC9",
+"e	c #EA3E2C",
+"f	c #7D6F6F",
+"g	c #E71D08",
+"h	c #FEFCFC",
+"i	c #EA3C2A",
+"j	c #FAD7D3",
+"k	c #FAD5D1",
+"l	c #F2897E",
+"m	c #E71C07",
+"n	c #F28B80",
+"o	c #FEFAFA",
+"p	c #E9321F",
+"q	c #EF6D5F",
+"r	c #E71803",
+"s	c #F7B3AC",
+"t	c #E82B17",
+"u	c #E82814",
+"v	c #F49C93",
+"w	c #F9CDC8",
+"x	c #FAD6D2",
+"y	c #E7200B",
+"z	c #FAD2CE",
+"A	c #ED5546",
+"B	c #FCE2E0",
+"C	c #ED5748",
+"D	c #FCEAE8",
+"E	c #F6ACA5",
+"F	c #ED594A",
+"G	c #FDF2F1",
+".......+@#+......$%......&*=-.......",
+".......;>,'......)!......%~{].......",
+".......^/(^.......!........_:.......",
+".......^((^.......!.......<[}.......",
+".......|12;.......!......345........",
+".......67^8.......!......*!!!.......",
+"....................................",
+".+@#+...!........!.......!.....90a9.",
+".;>,'..!!!!!!!!!!!!!!!!!!!!!!..bcde.",
+".^/(^..!ffffffffffffffffffff!..g/hg.",
+".^((^.!!ffffffffffffffffffff!!.ghhg.",
+".|12;..!ffffffffffffffffffff!..ijkb.",
+".67^8..!ffffffffffffffffffff!..lmgn.",
+".......!ffffffffffffffffffff!.......",
+".......!ffffffffffffffffffff!.......",
+".$%....!ffffffffffffffffffff!...op..",
+".)!....!ffffffffffffffffffff!...qr..",
+"..!...!!ffffffffffffffffffff!!...r..",
+"..!....!ffffffffffffffffffff!....r..",
+"..!....!ffffffffffffffffffff!....r..",
+"..!....!ffffffffffffffffffff!....r..",
+".......!ffffffffffffffffffff!.......",
+".&*=-..!ffffffffffffffffffff!..stuv.",
+".%~{]..!ffffffffffffffffffff!..pwxy.",
+"..._:.!!ffffffffffffffffffff!!...zA.",
+"..<[}..!ffffffffffffffffffff!...BCD.",
+".345...!ffffffffffffffffffff!..EFG..",
+".*!!!..!!!!!!!!!!!!!!!!!!!!!!..trrr.",
+".........!........!.......!.........",
+"....................................",
+".......+@#+......$%......&*=-.......",
+".......;>,'......)!......%~{].......",
+".......^/(^.......!........_:.......",
+".......^((^.......!.......<[}.......",
+".......|12;.......!......345........",
+".......67^8.......!......*!!!......."};
 
 static const char* const image2_data[] = { 
 "74 77 171 2",
@@ -773,7 +999,7 @@ static const char* const image3_data[] = {
 ". . . _ D., 5 : . . . . . . . . . . . . . . . . . . . . . . . 2., , , , , j . . . . . . . . . . . . . . . . . . . 9., , , , , , 8.. . . . . . . . . "};
 
 static const char* const image4_data[] = { 
-"36 43 4 1",
+"36 32 4 1",
 "# c #000000",
 "a c #bfbfbf",
 "b c #ff0000",
@@ -809,21 +1035,10 @@ static const char* const image4_data[] = {
 ".....b.b.b.b.b.b.b.b.b.b.b.b........",
 ".....b.b.b.b.b.b.b.b.b.b.b.b........",
 ".........b.....b.....b.....b........",
-"....................................",
-"....................................",
-"....................................",
-"...####.............................",
-"...#...#........#..#................",
-"...#...#........#..#................",
-"...#...#...###..##.##..###..###.##..",
-"...####...#...#.#..#..#...#.#..#..#.",
-"...#...#..#...#.#..#..#...#.#..#..#.",
-"...#...#..#...#.#..#..#...#.#..#..#.",
-"...#...#..#...#.#..#..#...#.#..#..#.",
-"...####....###...#..#..###..#..#..#."};
+"...................................."};
 
 static const char* const image5_data[] = { 
-"33 43 4 1",
+"33 32 4 1",
 "# c #000000",
 "b c #bfbfbf",
 "a c #ff0000",
@@ -859,21 +1074,10 @@ static const char* const image5_data[] = {
 ".....#.#.#.#.#.#.#.#.#.#.#.#.....",
 ".....#.#.#.#.#.#.#.#.#.#.#.#.....",
 ".........#.....#.....#.....#.....",
-".................................",
-".................................",
-".................................",
-"...#............#................",
-"...#...........#..#..............",
-"...#...........#..#..............",
-"...#......###..##.##.............",
-"...#.....#...#.#..#..............",
-"...#.....#####.#..#..............",
-"...#.....#.....#..#..............",
-"...#.....#...#.#..#..............",
-"...#####..###..#...#............."};
+"................................."};
 
 static const char* const image6_data[] = { 
-"34 46 4 1",
+"34 34 4 1",
 "a c #000000",
 "b c #bfbfbf",
 "# c #ff0000",
@@ -911,22 +1115,10 @@ static const char* const image6_data[] = {
 ".....a.a.a.a.a.a.a.a.a.a.a.a......",
 ".........a.....a.....a.....a......",
 "..................................",
-"..................................",
-"..................................",
-"...aaaaa..........................",
-".....a............................",
-".....a............................",
-".....a.....aaa..aaaa..............",
-".....a....a...a.a...a.............",
-".....a....a...a.a...a.............",
-".....a....a...a.a...a.............",
-".....a....a...a.a...a.............",
-".....a.....aaa..aaaa..............",
-"................a.................",
-"................a................."};
+".................................."};
 
 static const char* const image7_data[] = { 
-"32 46 4 1",
+"32 32 4 1",
 "# c #000000",
 "b c #bfbfbf",
 "a c #ff0000",
@@ -962,20 +1154,6 @@ static const char* const image7_data[] = {
 "....#.#.#.#.#.#.#.#.#.#.#.#.....",
 "....#.#.#.#.#.#.#.#.#.#.#.#.....",
 "........#.....#.....#.....#.....",
-"................................",
-"................................",
-"................................",
-"..#####...#.......#.............",
-"..#....#..........#.....#.......",
-"..#....#..........#.....#.......",
-"..#....#..#..####.#.##..##......",
-"..#####...#.#...#.##..#.#.......",
-"..#....#..#.#...#.#...#.#.......",
-"..#....#..#.#...#.#...#.#.......",
-"..#....#..#.#...#.#...#.#.......",
-"..#....#..#..####.#...#..#......",
-"................#...............",
-"............####................",
 "................................"};
 
 #ifndef M_PI
@@ -1074,12 +1252,16 @@ void axesDialog::initScalesPage()
 	boxMinorValue = new QSpinBox( GroupBox2, "boxMinorValue" );
 	boxMinorValue->setDisabled(TRUE);
 
-	QPixmap image0( ( const char** ) horizont_scl_xpm );
-    QPixmap image1( ( const char** ) vert_scl_xpm );
+	QPixmap image0( ( const char** ) bottom_scl_xpm );
+    QPixmap image1( ( const char** ) left_scl_xpm );
+	QPixmap image2( ( const char** ) top_scl_xpm );
+    QPixmap image3( ( const char** ) right_scl_xpm );
 	
     axesList = new QListBox( scalesPage, "axesList" );
-    axesList->insertItem( image0, tr( "Horizontal" ) );
-    axesList->insertItem( image1, tr( "Vertical" ) );
+    axesList->insertItem( image0, tr( "Bottom" ) );
+    axesList->insertItem( image1, tr( "Left" ) );
+	axesList->insertItem( image2, tr( "Top" ) );
+    axesList->insertItem( image3, tr( "Right" ) );
 	axesList->setCurrentItem (0);
 	
 	QHBoxLayout* hlayout = new QHBoxLayout(scalesPage,5,5, "hlayout");
@@ -1102,9 +1284,9 @@ void axesDialog::initGridPage()
 {
 gridPage = new QWidget( generalDialog, "gridPage" );
 	
-	GroupBox3 = new QButtonGroup(3,QGroupBox::Horizontal,tr(""),gridPage, "GroupBox3" );
+	GroupBox3 = new QButtonGroup(3,QGroupBox::Horizontal, QString::null, gridPage);
 
-	new QLabel(tr( "" ), GroupBox3, "TextLabel1_400",0 );
+	new QLabel(QString::null, GroupBox3, "TextLabel1_400",0 );
 	
     boxMajorGrid = new QCheckBox( GroupBox3, "boxMajorGrid" );
     boxMajorGrid->setText( tr( "Major Grids" ) );
@@ -1147,6 +1329,16 @@ gridPage = new QWidget( generalDialog, "gridPage" );
 	boxWidthMinor->setValue(1);
 	boxWidthMinor->setDisabled(TRUE);
 
+	new QLabel(tr( "Axes" ), GroupBox3, "TextLabel1_4",0 );
+
+    boxGridXAxis = new QComboBox( GroupBox3);
+	boxGridXAxis->insertItem(tr("Bottom"));
+	boxGridXAxis->insertItem(tr("Top"));
+
+	boxGridYAxis = new QComboBox( GroupBox3);
+	boxGridYAxis->insertItem(tr("Left"));
+	boxGridYAxis->insertItem(tr("Right"));
+
 	new QLabel(tr( "Additional lines" ), GroupBox3, "TextLabel1_4",0 );
 
     boxXLine = new QCheckBox( GroupBox3, "boxXLine" );
@@ -1160,8 +1352,8 @@ gridPage = new QWidget( generalDialog, "gridPage" );
     QPixmap image3( ( const char** ) image3_data );
 
     axesGridList = new QListBox( gridPage, "axesGridList" );
-    axesGridList->insertItem( image3, tr( "" ) );
-    axesGridList->insertItem( image2, tr( "" ) );
+    axesGridList->insertItem( image3, tr( "Horizontal" ) );
+    axesGridList->insertItem( image2, tr( "Vertical" ) );
 	axesGridList->setCurrentItem(0);
 	
 	QHBoxLayout* hlayout2 = new QHBoxLayout(gridPage,5,5, "hlayout2");
@@ -1171,8 +1363,7 @@ gridPage = new QWidget( generalDialog, "gridPage" );
     generalDialog->insertTab( gridPage, tr( "Grid" ) );
 	
 	//grid page slot connections
-connect(axesGridList,SIGNAL(highlighted(int)),this, SLOT(updateLineBoxes(int)));
-connect(axesGridList,SIGNAL(selectionChanged()),this, SLOT(setGridOptions()));
+connect(axesGridList,SIGNAL(selectionChanged()), this, SLOT(setGridOptions()));
 connect(boxMajorGrid,SIGNAL(toggled(bool)), this, SLOT(majorGridEnabled(bool)));
 connect(boxMinorGrid,SIGNAL(toggled(bool)), this, SLOT(minorGridEnabled(bool)));
 connect(boxColorMajor,SIGNAL(activated(int)),this, SLOT(updateGrid(int)));
@@ -1196,10 +1387,10 @@ void axesDialog::initAxesPage()
     axesPage = new QWidget( generalDialog);
 	
     axesTitlesList = new QListBox(axesPage);
-    axesTitlesList->insertItem( image4, QString::null );
-    axesTitlesList->insertItem( image5, QString::null );
-    axesTitlesList->insertItem( image6, QString::null );
-    axesTitlesList->insertItem( image7, QString::null );
+    axesTitlesList->insertItem( image4, tr("Bottom") );
+    axesTitlesList->insertItem( image5, tr("Left") );
+    axesTitlesList->insertItem( image6, tr("Top") );
+    axesTitlesList->insertItem( image7, tr("Right") );
 	axesTitlesList->setCurrentItem(0);
 	axesTitlesList->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding));
 		
@@ -2102,20 +2293,6 @@ else
 	axesGridList->setSelected (0,TRUE);
 }
 
-void axesDialog::updateLineBoxes(int axis)
-{
-if (axis) 
-	{
-	boxXLine->setEnabled(TRUE);
-	boxYLine->setDisabled(TRUE);
-	}
-else
-	{
-	boxXLine->setDisabled(TRUE);
-	boxYLine->setEnabled(TRUE);
-	}
-}
-
 void axesDialog::majorGridEnabled(bool on)
 {
 boxMinorGrid->setEnabled(on);
@@ -2162,66 +2339,6 @@ boxMajorValue->setEnabled(btnMinor->isChecked ());
 btnStep->setChecked(!btnMinor->isChecked ());
 }
 
-QStringList axesDialog::scaleLimits(int axis, double start, double end, double step, 
-									const QString& majors, const QString&minors)
-{
-scales[8*axis+0]=QString::number(start);
-scales[8*axis+1]=QString::number(end);
-	
-int qwt_axis = 2;
-if (axis == 1)
-	qwt_axis = 0;
-	
-if (axesType[qwt_axis] == Graph::Time)
-	{
-	int milliseconds;
-	switch (boxUnit->currentItem())
-		{
-		case 0:
-			milliseconds = (int)step;
-		break;
-		
-		case 1:
-			milliseconds = int(step*1e3);
-		break;
-		
-		case 2:
-			milliseconds = int(step*6e4);
-		break;
-		
-		case 3:
-			milliseconds = int(step*36e5);
-		break;
-		}
-	scales[8*axis+2]=QString::number(milliseconds);	
-	}
-else if (axesType[qwt_axis] == Graph::Date)
-	{
-	int days;
-	switch (boxUnit->currentItem())
-		{
-		case 0:
-			days = (int)step;
-		break;
-		
-		case 1:
-			days = int(step*7);
-		break;
-		}
-		
-	scales[8*axis+2]=QString::number(days);	
-	}
-else	
-	scales[8*axis+2]=QString::number(step);	
-
-scales[8*axis+3]=majors;
-scales[8*axis+4]=minors;
-scales[8*axis+5]=QString::number(btnStep->isChecked());
-scales[8*axis+6]=QString::number(boxScaleType->currentItem());
-scales[8*axis+7]=QString::number(btnInvert->isChecked());
-return scales;
-}
-
 void axesDialog::setGridOptions()
 {
 putGridOptions(grid);
@@ -2230,15 +2347,29 @@ putGridOptions(grid);
 void axesDialog::putGridOptions(gridOptions gr)
 {
 if (axesGridList->currentItem())
-{
-boxMajorGrid->setChecked(gr.majorOnX);
-boxMinorGrid->setChecked(gr.minorOnX);
-}
+	{
+	boxMajorGrid->setChecked(gr.majorOnX);
+	boxMinorGrid->setChecked(gr.minorOnX);
+
+	boxXLine->setEnabled(TRUE);
+	boxYLine->setDisabled(TRUE);
+
+	boxGridXAxis->setEnabled(TRUE);
+	boxGridYAxis->setDisabled(TRUE);
+	boxGridXAxis->setCurrentItem(gr.xAxis);
+	}
 else
-{
-boxMajorGrid->setChecked(gr.majorOnY);
-boxMinorGrid->setChecked(gr.minorOnY);
-}
+	{
+	boxMajorGrid->setChecked(gr.majorOnY);
+	boxMinorGrid->setChecked(gr.minorOnY);
+
+	boxXLine->setDisabled(TRUE);
+	boxYLine->setEnabled(TRUE);
+
+	boxGridXAxis->setDisabled(TRUE);
+	boxGridYAxis->setEnabled(TRUE);
+	boxGridYAxis->setCurrentItem(gr.yAxis);
+	}
 
 boxTypeMajor->setCurrentItem(gr.majorStyle);
 boxColorMajor->setCurrentItem(gr.majorCol);
@@ -2288,6 +2419,9 @@ if (boxYLine->isChecked())
 	grid.yZeroOn=1;
 else grid.yZeroOn=0;
 
+grid.yAxis = boxGridYAxis->currentItem();
+grid.xAxis = boxGridXAxis->currentItem() + 2;
+
 return grid;
 }
 
@@ -2305,11 +2439,6 @@ setAxisColor(QColor(axesColors[a]));
 void axesDialog::setAxisColor(const QColor& c)
 {
   boxAxisColor->setColor(c);
-}
-
-void axesDialog::setScaleLimits(const QStringList& limits)
-{
-scales=limits;
 }
 
 void axesDialog::changeBaselineDist(int baseline)
@@ -2335,13 +2464,13 @@ emit showAxis(axis, boxAxisType->currentItem(), formatInfo[axis], boxShowAxis->i
 
 bool axesDialog::updatePlot()
 {
-int axis=axesList->currentItem();
 if (generalDialog->currentPage()==(QWidget*)scalesPage)
 	{
 	QString from=boxStart->text().lower();
     QString to=boxEnd->text().lower();
-	QString step=boxStep->text().lower();			
-	double start, end, stp;
+	QString step=boxStep->text().lower();
+	int a = mapToQwtAxis(axesList->currentItem());
+	double start, end, stp = 0;
 	try
 		{
 		myParser parser;
@@ -2365,7 +2494,10 @@ if (generalDialog->currentPage()==(QWidget*)scalesPage)
 		QMessageBox::critical(0, tr("QtiPlot - End limit error"),e.GetMsg());
 		boxEnd->setFocus();
 		return FALSE;
-		}	
+		}
+	
+	if (btnStep->isChecked())
+	{
 	try
 		{
 		myParser parser;	
@@ -2379,27 +2511,56 @@ if (generalDialog->currentPage()==(QWidget*)scalesPage)
 		return FALSE;
 		}
 		
-	if (stp <=0)
+	if (stp <= 0)
 		{
 		QMessageBox::critical(0,tr("QtiPlot - Step input error"),
 			tr("Please enter a positive step value!"));
 		boxStep->setFocus();
 		return FALSE;	
 		}
-			
-	d_graph->setAxisScale(axis, scaleLimits(axis, start, end, stp, 
-						boxMajorValue->text(), boxMinorValue->text()));
+				
+	if (axesType[a] == Graph::Time)
+		{
+		switch (boxUnit->currentItem())
+			{
+			case 0:
+			break;
+			case 1:
+				stp *= 1e3;
+			break;
+			case 2:
+				stp *= 6e4;
+			break;
+			case 3:
+				stp *= 36e5;
+			break;
+			}
+		}
+	else if (axesType[a] == Graph::Date)
+		{
+		switch (boxUnit->currentItem())
+			{
+			case 0:
+			break;
+			case 1:
+				stp *= 7;
+			break;
+			}
+		}
+	}
+	d_graph->setScale(a, start, end, boxMajorValue->value(), boxMinorValue->value(), 
+					 stp, boxScaleType->currentItem(), btnInvert->isChecked());
 	d_graph->emitModified();
 	d_graph->replot();
 	}
-else if (generalDialog->currentPage()==gridPage)
+else if (generalDialog->currentPage() == gridPage)
 	{
 	d_graph->setGridOptions(getGridOptions());
 	d_graph->replot();
 	}
 else if (generalDialog->currentPage()==(QWidget*)axesPage)
 	{	
-	axis=mapToQwtAxisId();
+	int axis=mapToQwtAxisId();
 	int format = boxAxisType->currentItem();
 	axesType[axis] = format;
 
@@ -2517,28 +2678,28 @@ boxMajorTicksLength->setValue(p->majorTickLength());
 
 int axesDialog::mapToQwtAxisId()
 {
-int at=axesTitlesList->currentItem();
-int axis=-1;
-	
-switch(at)   
+return mapToQwtAxis(axesTitlesList->currentItem());
+}
+
+int axesDialog::mapToQwtAxis(int axis)
+{
+int a=-1;	
+switch(axis)   
         {
         case 0:
-           axis = QwtPlot::xBottom;
+           a = QwtPlot::xBottom;
         break;
-
         case 1:
-            axis = QwtPlot::yLeft;
+            a = QwtPlot::yLeft;
         break;
-
         case 2:
-             axis = QwtPlot::xTop;
+             a = QwtPlot::xTop;
         break;
-
         case 3:
-             axis = QwtPlot::yRight;
+             a = QwtPlot::yRight;
         break;
 		}
-return axis;
+return a;
 }
 
 void axesDialog::updateScale(int axis)
@@ -2548,38 +2709,39 @@ boxEnd->clear();
 boxStep->clear();
 boxUnit->hide();
 boxUnit->clear();
-		
-boxStart->setText(scales[8*axis+0]);
-boxEnd->setText(scales[8*axis+1]);
-boxStep->setText(scales[8*axis+2]);
-boxMajorValue->setValue(scales[8*axis+3].toInt());
-boxMinorValue->setValue(scales[8*axis+4].toInt());
-	
-	int qwt_axis = 2;
-	if (axis == 1)
-		qwt_axis = 0;
-	
-	if (axesType[qwt_axis] == Graph::Time)
-		{
-		boxUnit->show();
-		boxUnit->insertItem(tr("millisec."));
-		boxUnit->insertItem(tr("sec."));
-		boxUnit->insertItem(tr("min."));
-		boxUnit->insertItem(tr("hours"));
-			
-		/*boxUnit->setCurrentItem (1);
-		double millisec = (scales[8*axis+2]).toDouble();
-		boxStep->setText(QString::number(millisec/1e3));*/
-		}
-	else if (axesType[qwt_axis] == Graph::Date)
-		{
-		boxUnit->show();
-		boxUnit->insertItem(tr("days"));
-		boxUnit->insertItem(tr("weeks"));			
-		}
 
-int stepOn=scales[8*axis+5].toInt();
-if (stepOn)
+Plot *d_plot = d_graph->plotWidget();
+
+int prec;
+char f;
+int a = mapToQwtAxis(axis);	
+d_plot->axisLabelFormat(a, f, prec);
+
+const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(a);	
+boxStart->setText(QString::number(QMIN(scDiv->lBound(), scDiv->hBound()), f, prec));
+boxEnd->setText(QString::number(QMAX(scDiv->lBound(), scDiv->hBound()), f, prec));
+
+QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
+boxStep->setText(QString::number(fabs(lst[1]-lst[0]), f, prec));
+boxMajorValue->setValue(lst.count());
+boxMinorValue->setValue(d_plot->axisMaxMinor(a));
+	
+if (axesType[a] == Graph::Time)
+	{
+	boxUnit->show();
+	boxUnit->insertItem(tr("millisec."));
+	boxUnit->insertItem(tr("sec."));
+	boxUnit->insertItem(tr("min."));
+	boxUnit->insertItem(tr("hours"));			
+	}
+else if (axesType[a] == Graph::Date)
+	{
+	boxUnit->show();
+	boxUnit->insertItem(tr("days"));
+	boxUnit->insertItem(tr("weeks"));			
+	}
+
+if (d_graph->userDefinedStep(a))
 	{
 	btnStep->setChecked(TRUE);
 	boxStep->setEnabled(TRUE);
@@ -2599,13 +2761,11 @@ else
 	boxMinorValue->setEnabled(TRUE);
 	}
 
-int scaleType=scales[8*axis+6].toInt();
-boxScaleType->setCurrentItem(scaleType);
-	
-bool inverted = false;
-if (scales[8*axis+7] == "1")
-	inverted = true;
-btnInvert->setChecked(inverted);
+const QwtScaleEngine *sc_eng = d_plot->axisScaleEngine(a);
+btnInvert->setChecked(sc_eng->testAttribute(QwtScaleEngine::Inverted));
+
+QwtScaleTransformation *tr = sc_eng->transformation();
+boxScaleType->setCurrentItem((int)tr->type());
 }
 
 void axesDialog::updateTitleBox(int axis)
@@ -2764,36 +2924,25 @@ emit showAxis(axis, type, formatInfo[axis], boxShowAxis->isChecked(), boxMajorTi
 void axesDialog::setCurrentScale(int axisPos)
 {
 int axis = -1;
-if (generalDialog->currentPage()==(QWidget*)scalesPage)
+switch (axisPos)
 	{
-	if (axisPos == QwtScaleDraw::LeftScale || axisPos == QwtScaleDraw::RightScale)
+	case QwtScaleDraw::LeftScale:
 		axis = 1;
-	else
+	break;
+	case QwtScaleDraw::BottomScale:
 		axis = 0;
+	break;
+	case QwtScaleDraw::RightScale:
+		axis = 3;
+	break;
+	case QwtScaleDraw::TopScale:
+		axis = 2;
+	break;
+	}
+if (generalDialog->currentPage()==(QWidget*)scalesPage)
 	axesList->setCurrentItem (axis);
-	}
 else if (generalDialog->currentPage()==(QWidget*)axesPage)
-	{
-	switch (axisPos)
-		{
-		case QwtScaleDraw::LeftScale:
-			axis = 1;
-		break;
-
-		case QwtScaleDraw::BottomScale:
-			axis = 0;
-		break;
-
-		case QwtScaleDraw::RightScale:
-			axis = 3;
-		break;
-
-		case QwtScaleDraw::TopScale:
-			axis = 2;
-		break;
-		}
 	axesTitlesList->setCurrentItem (axis);
-	}
 }
 
 void axesDialog::showAxesPage()

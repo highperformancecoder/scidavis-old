@@ -69,6 +69,7 @@ plotDialog::plotDialog( QWidget* parent,  const char* name, bool modal, WFlags f
 	box2->setSpacing (5);
     privateTabWidget = new QTabWidget(box2, "privateTabWidget" );
 
+	initAxesPage();
 	initLinePage();
 	initSymbolsPage();
 	initHistogramPage();
@@ -203,6 +204,33 @@ else
 	}
 
 acceptParams();
+}
+
+void plotDialog::initAxesPage()
+{
+    axesPage = new QWidget( privateTabWidget);
+
+	QButtonGroup *gr = new QButtonGroup(2,QGroupBox::Horizontal,tr( "Attach curve to: " ), axesPage);
+
+	new QLabel( tr( "x Axis" ), gr);  
+
+    boxXAxis = new QComboBox( FALSE, gr, "boxXAxis" );
+	boxXAxis->insertItem(tr("Bottom"));
+    boxXAxis->insertItem(tr("Top"));
+	
+	new QLabel(tr( "y Axis" ) , gr);
+
+    boxYAxis = new QComboBox( FALSE, gr, "boxLineStyle" );
+    boxYAxis->insertItem(tr("Left"));
+    boxYAxis->insertItem(tr("Right"));
+
+	QHBoxLayout* hlayout2 = new QHBoxLayout(axesPage, 5, 5);
+    hlayout2->addWidget(gr);
+
+	privateTabWidget->insertTab(axesPage, tr( "Axes" ) );
+
+    //connections
+	//connect(boxLineColor, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 }
 
 void plotDialog::initLinePage()
@@ -919,6 +947,10 @@ if (size>0)
 
 	int curveType = graph->curveType(index);
 
+	//axes page
+	boxXAxis->setCurrentItem(c->xAxis()-2);
+	boxYAxis->setCurrentItem(c->yAxis());
+
 	//line page
 	int style = c->style();
 	if (curveType == Graph::Spline)
@@ -1061,7 +1093,17 @@ yEndBox->setCurrentText(table + "_" + cols[3].remove("(Y)").remove("(M)"));
 
 bool plotDialog::acceptParams()
 {
-if (privateTabWidget->currentPage()==linePage)
+if (privateTabWidget->currentPage() == axesPage)
+	{
+	QwtPlotCurve *c = graph->curve(listBox->currentItem());
+	if (!c)
+		return false;
+
+	c->setAxis(boxXAxis->currentItem() + 2, boxYAxis->currentItem());
+	graph->setAutoScale();
+	return true;
+	}
+else if (privateTabWidget->currentPage()==linePage)
 	{
 	int index=listBox->currentItem();
 	graph->setCurveStyle(index, boxConnect->currentItem());
