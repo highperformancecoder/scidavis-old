@@ -143,6 +143,9 @@ public slots:
 	MultiLayer *plot(const QString& name);
 	void addLayer();
 	void deleteLayer();
+
+	//! Rearrange the layersin order to fit to the size of the plot window
+	void autoArrangeLayers();
 	void initMultilayerPlot(MultiLayer* g, const QString& name);
 	void polishGraph(Graph *g, int style);
 	void plot2VerticalLayers();
@@ -851,7 +854,7 @@ public:
     QAction *actionLoad, *actionLoadMultiple, *actionUndo, *actionRedo;
     QAction *actionCopyWindow;
     QAction *actionCutSelection, *actionCopySelection, *actionPasteSelection, *actionClearSelection;
-    QAction *actionShowExplorer, *actionShowLog, *actionAddLayer, *actionShowLayerDialog;
+    QAction *actionShowExplorer, *actionShowLog, *actionAddLayer, *actionShowLayerDialog, *actionAutomaticLayout;
 #ifdef SCRIPTING_CONSOLE
     QAction *actionShowConsole;
 #endif

@@ -414,6 +414,7 @@ void ApplicationWindow::initToolBars()
 
 	actionAddLayer->addTo(plotTools);
 	actionShowLayerDialog->addTo(plotTools);
+	actionAutomaticLayout->addTo(plotTools);
 
 	plotTools->addSeparator();
 
@@ -9746,6 +9747,17 @@ QApplication::restoreOverrideCursor();
 return w;
 }
 
+void ApplicationWindow::autoArrangeLayers()
+{
+if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
+	return;
+
+MultiLayer* plot = (MultiLayer *)ws->activeWindow();
+plot->setMargins(5, 5, 5, 5);
+plot->setSpacing(5, 5);
+plot->arrangeLayers(true, false); 
+}
+
 void ApplicationWindow::addLayer()
 {
 if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
@@ -10293,11 +10305,15 @@ for (int j=0;j<(int)list.count()-1;j++)
 					step = 0.0;
 				ag->setScale(QwtPlot::xBottom, scl[0].toDouble(), scl[1].toDouble(), scl[3].toInt(), 
 					scl[4].toInt(), step, scl[6].toInt(), bool(scl[7].toInt()));
+				ag->setScale(QwtPlot::xTop, scl[0].toDouble(), scl[1].toDouble(), scl[3].toInt(), 
+					scl[4].toInt(), step, scl[6].toInt(), bool(scl[7].toInt()));
 
 				step = scl[10].toDouble();
 				if (scl[13] == "0")
 					step = 0.0;
 				ag->setScale(QwtPlot::yLeft, scl[8].toDouble(), scl[9].toDouble(), scl[11].toInt(), 
+					scl[12].toInt(), step, scl[14].toInt(), bool(scl[15].toInt()));
+				ag->setScale(QwtPlot::yRight, scl[8].toDouble(), scl[9].toDouble(), scl[11].toInt(), 
 					scl[12].toInt(), step, scl[14].toInt(), bool(scl[15].toInt()));
 				}
 			else
@@ -10476,7 +10492,7 @@ QString date=fList[1];
 if (date.isEmpty())
 	date = QDateTime::currentDateTime().toString(Qt::LocalDate);
 
-fList=QStringList::split ("\t",lst[2],false );
+fList=QStringList::split("\t",lst[2],false);
 Graph3D *plot=0;
 
 if (fList[1].endsWith("(Y)",TRUE))//Ribbon plot
@@ -10945,6 +10961,9 @@ void ApplicationWindow::createActions()
 
   actionShowLayerDialog = new QAction(QPixmap(arrangeLayers_xpm), tr("Arran&ge Layers"), tr("ALT+A"), this);
   connect(actionShowLayerDialog, SIGNAL(activated()), this, SLOT(showLayerDialog()));
+
+  actionAutomaticLayout = new QAction(QPixmap(auto_layout_xpm), tr("Automatic Layout"), QString::null, this);
+  connect(actionAutomaticLayout, SIGNAL(activated()), this, SLOT(autoArrangeLayers()));
 
   actionExportGraph = new QAction(tr("&Current"), tr("Alt+G"), this);
   connect(actionExportGraph, SIGNAL(activated()), this, SLOT(exportGraph()));
@@ -11491,6 +11510,8 @@ void ApplicationWindow::translateActionsStrings()
 
   actionShowLayerDialog->setMenuText(tr("Arran&ge Layers"));
   actionShowLayerDialog->setAccel(tr("ALT+A"));
+
+  actionAutomaticLayout->setMenuText(tr("Automatic Layout"));
 
   actionExportGraph->setMenuText(tr("&Current"));
   actionExportGraph->setAccel(tr("Alt+G"));

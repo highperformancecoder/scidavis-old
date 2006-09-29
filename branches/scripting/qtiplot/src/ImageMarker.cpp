@@ -22,6 +22,10 @@ updateBoundingRect();
 void ImageMarker::setOrigin(const QPoint& p)
 {
 d_pos = p;
+
+if (!plot())
+	return;
+
 d_rect.moveTo(plot()->invTransform(xAxis(), p.x()), plot()->invTransform(yAxis(), p.y()));
 d_size = size();
 updateBoundingRect();
@@ -44,6 +48,9 @@ if (d_rect == rect)
 
 d_rect = rect;
 
+if (!plot())
+	return;
+
 plot()->updateLayout();
 
 QRect r = this->rect();
@@ -53,5 +60,8 @@ d_size = r.size();
 
 void ImageMarker::updateBoundingRect()
 {
+if (!plot())
+	return;
+
 d_rect = invTransform(plot()->canvasMap(xAxis()), plot()->canvasMap(yAxis()), QRect(d_pos, d_size));
 }

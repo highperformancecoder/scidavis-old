@@ -999,43 +999,43 @@ static const char* const image3_data[] = {
 ". . . _ D., 5 : . . . . . . . . . . . . . . . . . . . . . . . 2., , , , , j . . . . . . . . . . . . . . . . . . . 9., , , , , , 8.. . . . . . . . . "};
 
 static const char* const image4_data[] = { 
-"36 32 4 1",
+"35 32 4 1",
 "# c #000000",
 "a c #bfbfbf",
 "b c #ff0000",
 ". c #ffffff",
-"....................................",
-".........#.....#.....#.....#........",
-".....#.#.#.#.#.#.#.#.#.#.#.#........",
-".....#.#.#.#.#.#.#.#.#.#.#.#........",
-"....##########################......",
-"....#aaaaaaaaaaaaaaaaaaaaaaaa#......",
-"..###aaaaaaaaaaaaaaaaaaaaaaaa###....",
-"....#aaaaaaaaaaaaaaaaaaaaaaaa#......",
-"..###aaaaaaaaaaaaaaaaaaaaaaaa###....",
-"....#aaaaaaaaaaaaaaaaaaaaaaaa#......",
-".####aaaaaaaaaaaaaaaa#aaaaaaa####...",
-"....#aaaaaaaaaaaaaaa#a#aaaaaa#......",
-"..###aaaaaaaaaaaaaaa#a#aaaaaa###....",
-"....#aaaaaaaaaaaaaa#aaa#aaaaa#......",
-"..###aaaaaaa#aaaaaa#aaa#aaaaa###....",
-"....#aaaaaa#a#aaaa#aaaaa#aaaa#......",
-".####aaaaaa#a#aaaa#aaaaa#aaaa####...",
-"....#aaaaa#aaa#aa#aaaaaaa#aaa#......",
-"..###aaaaa#aaa###aaaaaaaaa######....",
-"....#aaaa#aaaaa#aaaaaaaaaaaaa#......",
-"..###aaaa#aaaaa#aaaaaaaaaaaaa###....",
-"....#aaa#aaaaaaa#aaaaaaaaaaaa#......",
-".#######aaaaaaaaa#####aaaaaaa####...",
-"....#aaaaaaaaaaaaaaaaaaaaaaaa#......",
-"..###aaaaaaaaaaaaaaaaaaaaaaaa###....",
-"....#aaaaaaaaaaaaaaaaaaaaaaaa#......",
-"....bbbbbbbbbbbbbbbbbbbbbbbbbb......",
-"....bbbbbbbbbbbbbbbbbbbbbbbbbb......",
-".....b.b.b.b.b.b.b.b.b.b.b.b........",
-".....b.b.b.b.b.b.b.b.b.b.b.b........",
-".........b.....b.....b.....b........",
-"...................................."};
+"...................................",
+".........#.....#.....#.....#.......",
+".....#.#.#.#.#.#.#.#.#.#.#.#.......",
+".....#.#.#.#.#.#.#.#.#.#.#.#.......",
+"....##########################.....",
+"....#aaaaaaaaaaaaaaaaaaaaaaaa#.....",
+"..###aaaaaaaaaaaaaaaaaaaaaaaa###...",
+"....#aaaaaaaaaaaaaaaaaaaaaaaa#.....",
+"..###aaaaaaaaaaaaaaaaaaaaaaaa###...",
+"....#aaaaaaaaaaaaaaaaaaaaaaaa#.....",
+".####aaaaaaaaaaaaaaaa#aaaaaaa####..",
+"....#aaaaaaaaaaaaaaa#a#aaaaaa#.....",
+"..###aaaaaaaaaaaaaaa#a#aaaaaa###...",
+"....#aaaaaaaaaaaaaa#aaa#aaaaa#.....",
+"..###aaaaaaa#aaaaaa#aaa#aaaaa###...",
+"....#aaaaaa#a#aaaa#aaaaa#aaaa#.....",
+".####aaaaaa#a#aaaa#aaaaa#aaaa####..",
+"....#aaaaa#aaa#aa#aaaaaaa#aaa#.....",
+"..###aaaaa#aaa###aaaaaaaaa######...",
+"....#aaaa#aaaaa#aaaaaaaaaaaaa#.....",
+"..###aaaa#aaaaa#aaaaaaaaaaaaa###...",
+"....#aaa#aaaaaaa#aaaaaaaaaaaa#.....",
+".#######aaaaaaaaa#####aaaaaaa####..",
+"....#aaaaaaaaaaaaaaaaaaaaaaaa#.....",
+"..###aaaaaaaaaaaaaaaaaaaaaaaa###...",
+"....#aaaaaaaaaaaaaaaaaaaaaaaa#.....",
+"....bbbbbbbbbbbbbbbbbbbbbbbbbb.....",
+"....bbbbbbbbbbbbbbbbbbbbbbbbbb.....",
+".....b.b.b.b.b.b.b.b.b.b.b.b.......",
+".....b.b.b.b.b.b.b.b.b.b.b.b.......",
+".........b.....b.....b.....b.......",
+"..................................."};
 
 static const char* const image5_data[] = { 
 "33 32 4 1",
@@ -2711,18 +2711,13 @@ boxUnit->hide();
 boxUnit->clear();
 
 Plot *d_plot = d_graph->plotWidget();
-
-int prec;
-char f;
 int a = mapToQwtAxis(axis);	
-d_plot->axisLabelFormat(a, f, prec);
-
 const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(a);	
-boxStart->setText(QString::number(QMIN(scDiv->lBound(), scDiv->hBound()), f, prec));
-boxEnd->setText(QString::number(QMAX(scDiv->lBound(), scDiv->hBound()), f, prec));
+boxStart->setText(QString::number(QMIN(scDiv->lBound(), scDiv->hBound())));
+boxEnd->setText(QString::number(QMAX(scDiv->lBound(), scDiv->hBound())));
 
 QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
-boxStep->setText(QString::number(fabs(lst[1]-lst[0]), f, prec));
+boxStep->setText(QString::number(fabs(lst[1]-lst[0])));
 boxMajorValue->setValue(lst.count());
 boxMinorValue->setValue(d_plot->axisMaxMinor(a));
 	
@@ -2743,22 +2738,22 @@ else if (axesType[a] == Graph::Date)
 
 if (d_graph->userDefinedStep(a))
 	{
-	btnStep->setChecked(TRUE);
-	boxStep->setEnabled(TRUE);
-	boxUnit->setEnabled(TRUE);
+	btnStep->setChecked(true);
+	boxStep->setEnabled(true);
+	boxUnit->setEnabled(true);
 		
-	btnMinor->setChecked(FALSE);
-	boxMajorValue->setEnabled(FALSE);
-	boxMinorValue->setEnabled(FALSE);
+	btnMinor->setChecked(false);
+	boxMajorValue->setEnabled(false);
+	boxMinorValue->setEnabled(false);
 	}
 else
 	{
-	btnStep->setChecked(FALSE);
-	boxStep->setEnabled(FALSE);
-	boxUnit->setEnabled(FALSE);
-	btnMinor->setChecked(TRUE);
-	boxMajorValue->setEnabled(TRUE);
-	boxMinorValue->setEnabled(TRUE);
+	btnStep->setChecked(false);
+	boxStep->setEnabled(false);
+	boxUnit->setEnabled(false);
+	btnMinor->setChecked(true);
+	boxMajorValue->setEnabled(true);
+	boxMinorValue->setEnabled(true);
 	}
 
 const QwtScaleEngine *sc_eng = d_plot->axisScaleEngine(a);
