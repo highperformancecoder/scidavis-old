@@ -15,6 +15,8 @@
   <!ENTITY email-ion "ion_vasilief@yahoo.fr">
   <!ENTITY roger "Roger Gadiou">
   <!ENTITY email-roger "Roger.Gadiou@uha.fr">
+  <!ENTITY knut "Knut Franke">
+  <!ENTITY email-knut "Knut.Franke@gmx.de">
   <!ENTITY homepage "http://soft.proindependent.com">
   <!ENTITY xml  "<acronym>XML</acronym>">
   <!ENTITY xslt "<acronym>XSLT</acronym>">
@@ -667,6 +669,13 @@
       <address><email>&email-roger;</email></address>
     </affiliation>
   </author>
+  <author>
+    <firstname>Knut</firstname>
+    <surname>Franke</surname>
+    <affiliation>
+      <address><email>&email-knut;</email></address>
+    </affiliation>
+  </author>
 </authorgroup>
 
 <copyright>
@@ -679,7 +688,7 @@
 </copyright>
 <copyright>
   <year>2006</year>
-  <holder>&ion; and &roger;</holder>
+  <holder>&roger;, &knut; and &ion;</holder>
 </copyright>
 
 <abstract>
