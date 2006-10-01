@@ -553,7 +553,7 @@ lv->setColumnText (4, tr("Created"));
 lv->setColumnText (5, tr("Label"));
 
 if (scriptWindow)
-	scriptWindow->setCaption(tr("QtiPlot - Python Script Window"));
+	scriptWindow->setCaption(tr("QtiPlot - Script Window"));
 explorerWindow->setCaption(tr("Project Explorer"));
 logWindow->setCaption(tr("Results Log"));
 #ifdef SCRIPTING_CONSOLE
@@ -10296,7 +10296,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 			}
 		else if (s.left(6)=="scale\t")
 			{
-			QStringList scl = QStringList::split ("\t", s, false);		
+			QStringList scl = QStringList::split ("\t", s, true);
 			scl.pop_front();
 			if (fileVersion < 88)
 				{
@@ -11397,7 +11397,7 @@ void ApplicationWindow::createActions()
   actionNoteEvaluate = new QAction(tr("&Evaluate Expression"), tr("Ctrl+Return"), this);
 
 #ifdef SCRIPTING_PYTHON
-  actionShowScriptWindow = new QAction(QPixmap(python_xpm), tr("&Python Script Window"), tr("F3"), this);
+  actionShowScriptWindow = new QAction(QPixmap(python_xpm), tr("Script Window"), tr("F3"), this);
   actionShowScriptWindow->setToggleAction( true );
   actionShowScriptWindow->setOn(false);
   connect(actionShowScriptWindow, SIGNAL(activated()), this, SLOT(showScriptWindow()));
@@ -11500,8 +11500,8 @@ void ApplicationWindow::translateActionsStrings()
 #endif
   
 #ifdef SCRIPTING_PYTHON
-  actionShowScriptWindow->setMenuText(tr("&Python Script Window"));
-  actionShowScriptWindow->setToolTip(tr("&Python Script Window"));
+  actionShowScriptWindow->setMenuText(tr("Script Window"));
+  actionShowScriptWindow->setToolTip(tr("Script Window"));
   actionShowScriptWindow->setAccel(tr("F3"));
 #endif
 
