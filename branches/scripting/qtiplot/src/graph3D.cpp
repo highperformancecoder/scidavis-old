@@ -21,6 +21,7 @@
 
 #include <gsl/gsl_vector.h>
 #include <math.h>
+#include <fstream>
 
 UserFunction::UserFunction(const QString& s, SurfacePlot& pw)
     :Function(pw)
