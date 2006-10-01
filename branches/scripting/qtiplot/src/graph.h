@@ -142,8 +142,8 @@ public slots:
 	 void closeEvent(QCloseEvent *e);
 
 	 //! Set axis scale
-	 void setScale(int axis, double start, double end, int majorTicks,
-		  int minorTicks, double step = 0.0, int type = 0, bool inverted = false);
+	 void setScale(int axis, double start, double end, double step = 0.0, 
+				   int majorTicks = 5, int minorTicks = 5, int type = 0, bool inverted = false);
 	 bool userDefinedStep(int axis){return d_user_step[axis];};
 
 	 //curves layout

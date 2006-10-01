@@ -958,13 +958,68 @@ l.numCurves()
 	  </programlisting></para>
 
         <para>Layers and whole Graphs can be printed and exported from within
-        Python. Before you do this, you probably want to change layer and axis
+        Python. Before you do this, you would probably want to change layer and axis
         titles as well as legend texts: <programlisting width="40">
 l.setTitle(title)
 l.setXTitle(Xtitle)
 l.setYTitle(Ytitle)
 l.setLegend(text)
-	  </programlisting> Now, here is how you can export a layer <programlisting width="40">
+	  </programlisting> You can also customize the scales of the different axes using: <programlisting width="40">
+l.setScale(int axis, double start, double end, double step = 0.0, int majorTicks = 5, int minorTicks = 5, int type = 0, bool inverted = false);
+</programlisting>
+	  where <varname>axis</varname> is a number between 0 and 3 with the following signification: <variablelist spacing="compact">
+            <varlistentry>
+              <term>0.</term>
+
+              <listitem>
+                <para>Left axis</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>1.</term>
+
+              <listitem>
+                <para>Right axis</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>2.</term>
+
+              <listitem>
+                <para>Bottom axis</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>3.</term>
+
+              <listitem>
+                <para>Top axis</para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+<varname>type</varname> specifies the desired scale type: <variablelist spacing="compact">
+            <varlistentry>
+              <term>0.</term>
+
+              <listitem>
+                <para>Linear</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>1.</term>
+
+              <listitem>
+                <para>Log10</para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+	  and <varname>step</varname> defines the size of the interval between the major scale ticks. If not specified (default value is 0.0), the step size is calculated automatically.
+	  The other flags should be self-explanatory.
+	  Now, here is how you can export a layer <programlisting width="40">
 l.print()
 l.exportToSVG(filename)
 l.exportToEPS(filename)

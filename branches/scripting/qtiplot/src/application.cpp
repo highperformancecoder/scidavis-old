@@ -8132,7 +8132,7 @@ QString version = "QtiPlot " + QString::number(majVersion) + "." +
 QMessageBox::about(this,tr("About QtiPlot"),
 			 tr("<h2>"+ version + "</h2>"
 			 "<p><h3>Copyright(C): Ion Vasilief</h3>"
-			 "<p><h3>Released: 10/09/2006</h3>"));
+			 "<p><h3>Released: 03/10/2006</h3>"));
 }
 
 void ApplicationWindow::windowsMenuAboutToShow()
@@ -10296,29 +10296,29 @@ for (int j=0;j<(int)list.count()-1;j++)
 			}
 		else if (s.left(6)=="scale\t")
 			{
-			QStringList scl = QStringList::split ("\t", s, true);
+			QStringList scl = QStringList::split ("\t", s, true);		
 			scl.pop_front();
 			if (fileVersion < 88)
 				{
 				double step = scl[2].toDouble();
 				if (scl[5] == "0")
 					step = 0.0;
-				ag->setScale(QwtPlot::xBottom, scl[0].toDouble(), scl[1].toDouble(), scl[3].toInt(), 
-					scl[4].toInt(), step, scl[6].toInt(), bool(scl[7].toInt()));
-				ag->setScale(QwtPlot::xTop, scl[0].toDouble(), scl[1].toDouble(), scl[3].toInt(), 
-					scl[4].toInt(), step, scl[6].toInt(), bool(scl[7].toInt()));
+				ag->setScale(QwtPlot::xBottom, scl[0].toDouble(), scl[1].toDouble(), step, 
+							 scl[3].toInt(), scl[4].toInt(), scl[6].toInt(), bool(scl[7].toInt()));
+				ag->setScale(QwtPlot::xTop, scl[0].toDouble(), scl[1].toDouble(), step, 
+							 scl[3].toInt(), scl[4].toInt(), scl[6].toInt(), bool(scl[7].toInt()));
 
 				step = scl[10].toDouble();
 				if (scl[13] == "0")
 					step = 0.0;
-				ag->setScale(QwtPlot::yLeft, scl[8].toDouble(), scl[9].toDouble(), scl[11].toInt(), 
-					scl[12].toInt(), step, scl[14].toInt(), bool(scl[15].toInt()));
-				ag->setScale(QwtPlot::yRight, scl[8].toDouble(), scl[9].toDouble(), scl[11].toInt(), 
-					scl[12].toInt(), step, scl[14].toInt(), bool(scl[15].toInt()));
+				ag->setScale(QwtPlot::yLeft, scl[8].toDouble(), scl[9].toDouble(), step, scl[11].toInt(), 
+							 scl[12].toInt(), scl[14].toInt(), bool(scl[15].toInt()));
+				ag->setScale(QwtPlot::yRight, scl[8].toDouble(), scl[9].toDouble(), step, scl[11].toInt(), 
+							 scl[12].toInt(), scl[14].toInt(), bool(scl[15].toInt()));
 				}
 			else
-				ag->setScale(scl[0].toInt(), scl[1].toDouble(), scl[2].toDouble(), scl[4].toInt(), 
-					scl[5].toInt(), scl[3].toDouble(), scl[6].toInt(), bool(scl[7].toInt()));
+				ag->setScale(scl[0].toInt(), scl[1].toDouble(), scl[2].toDouble(), scl[3].toDouble(),
+							scl[4].toInt(), scl[5].toInt(),  scl[6].toInt(), bool(scl[7].toInt()));
 			}
 		else if (s.contains ("PlotTitle"))
 			{

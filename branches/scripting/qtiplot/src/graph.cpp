@@ -1321,9 +1321,17 @@ d_plot->replot();
 emit modifiedGraph(); 
 }
 
-void Graph::setGridOptions(const gridOptions& options)
+void Graph::setGridOptions(const gridOptions& o)
 {
-grid=options;
+if (grid.majorCol == o.majorCol && grid.majorOnX == o.majorOnX &&
+	grid.majorOnY == o.majorOnY && grid.majorStyle == o.majorStyle &&
+	grid.majorWidth == o.majorWidth && grid.minorCol == o.minorCol &&
+	grid.minorOnX == o.minorOnX && grid.minorOnY == o.minorOnY &&
+	grid.minorStyle == o.minorStyle && grid.minorWidth == o.minorWidth &&
+	grid.xAxis == o.xAxis && grid.yAxis == o.yAxis &&
+	grid.xZeroOn == o.xZeroOn && grid.yZeroOn == o.yZeroOn) return;
+
+grid=o;
 	
 QColor minColor = ColorBox::color(grid.minorCol);
 QColor majColor = ColorBox::color(grid.majorCol);
@@ -1349,11 +1357,13 @@ else if (grid.majorOnY==0) d_plot->grid()->enableY (FALSE);
 if (grid.minorOnY) d_plot->grid()->enableYMin (TRUE);
 else d_plot->grid()->enableYMin (FALSE);
 
+d_plot->grid()->setAxis(grid.xAxis, grid.yAxis);
+
 if (mrkX<0 && grid.xZeroOn)
 	{
 	QwtPlotMarker *m = new QwtPlotMarker();
 	mrkX = d_plot->insertMarker(m);
-
+    m->setAxis(grid.xAxis, grid.yAxis);
 	m->setLineStyle(QwtPlotMarker::VLine);
 	m->setValue(0.0,0.0);
 	m->setLinePen(QPen(black, 2,SolidLine));
@@ -1368,7 +1378,7 @@ if (mrkY<0 && grid.yZeroOn)
 	{
 	QwtPlotMarker *m = new QwtPlotMarker();
 	mrkY = d_plot->insertMarker(m);
-
+	m->setAxis(grid.xAxis, grid.yAxis);
 	m->setLineStyle(QwtPlotMarker::HLine);
 	m->setValue(0.0,0.0);
 	m->setLinePen(QPen(black, 2,SolidLine));
@@ -1379,7 +1389,6 @@ else if (mrkY>=0 && !grid.yZeroOn)
 	mrkY=-1;		
 	}
 
-d_plot->grid()->setAxis(grid.xAxis, grid.yAxis);
 emit modifiedGraph();
 }
 
@@ -1477,8 +1486,8 @@ updateScale();
 emit modifiedGraph();
 }
 
-void Graph::setScale(int axis, double start, double end, int majorTicks,
-					int minorTicks, double step, int type, bool inverted)
+void Graph::setScale(int axis, double start, double end, double step, 
+					 int majorTicks, int minorTicks, int type, bool inverted)
 {
 QwtScaleEngine *sc_engine = 0;
 if (type)
@@ -1486,7 +1495,7 @@ if (type)
 else
 	sc_engine = new QwtLinearScaleEngine();
 
-QwtScaleDiv	div = sc_engine->divideScale (start, end, majorTicks, minorTicks, step);
+QwtScaleDiv	div = sc_engine->divideScale (QMIN(start, end), QMAX(start, end), majorTicks, minorTicks, step);
 d_plot->setAxisMaxMajor (axis, majorTicks);
 d_plot->setAxisMaxMinor (axis, minorTicks);
 
@@ -1504,6 +1513,7 @@ d_zoomer[1]->setZoomBase();
 
 d_user_step[axis] = (step != 0.0);
 
+d_plot->replot();
 //keep markers on canvas area
 updateMarkersBoundingRect();
 }

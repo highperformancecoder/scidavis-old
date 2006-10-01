@@ -2356,7 +2356,6 @@ if (axesGridList->currentItem())
 
 	boxGridXAxis->setEnabled(TRUE);
 	boxGridYAxis->setDisabled(TRUE);
-	boxGridXAxis->setCurrentItem(gr.xAxis);
 	}
 else
 	{
@@ -2368,9 +2367,10 @@ else
 
 	boxGridXAxis->setDisabled(TRUE);
 	boxGridYAxis->setEnabled(TRUE);
-	boxGridYAxis->setCurrentItem(gr.yAxis);
 	}
 
+boxGridXAxis->setCurrentItem(gr.xAxis - 2);
+boxGridYAxis->setCurrentItem(gr.yAxis);
 boxTypeMajor->setCurrentItem(gr.majorStyle);
 boxColorMajor->setCurrentItem(gr.majorCol);
 boxWidthMajor->setValue(gr.majorWidth);
@@ -2380,7 +2380,7 @@ boxWidthMinor->setValue(gr.minorWidth);
 boxXLine->setChecked(gr.xZeroOn);
 boxYLine->setChecked(gr.yZeroOn);
 
-grid =gr;
+grid = gr;
 }
 
 gridOptions axesDialog::getGridOptions()
@@ -2548,10 +2548,9 @@ if (generalDialog->currentPage()==(QWidget*)scalesPage)
 			}
 		}
 	}
-	d_graph->setScale(a, start, end, boxMajorValue->value(), boxMinorValue->value(), 
-					 stp, boxScaleType->currentItem(), btnInvert->isChecked());
+	d_graph->setScale(a, start, end, stp, boxMajorValue->value(), boxMinorValue->value(), 
+					 boxScaleType->currentItem(), btnInvert->isChecked());
 	d_graph->emitModified();
-	d_graph->replot();
 	}
 else if (generalDialog->currentPage() == gridPage)
 	{
