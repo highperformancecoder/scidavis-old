@@ -181,7 +181,7 @@ public:
 
   void addErrorBars(Table *, const QString&, 
       Table *, const QString&,
-      int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(black),
+      int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(Qt::black),
 	  bool through = true, bool minus = true, bool plus = true);						 
 
   void insertLineMarker(LineMarker*);
