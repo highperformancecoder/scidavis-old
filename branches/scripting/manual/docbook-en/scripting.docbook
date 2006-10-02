@@ -723,10 +723,10 @@ for i in range(1, 11):
 
         <para>Accessing the objects in your project is straight-forward,
         <programlisting width="40">
-t = table("table1")
-m = matrix("matrix1")
-g = graph("graph1")
-n = note("Note1")
+t = table("Table1")
+m = matrix("Matrix1")
+g = graph("Graph1")
+n = note("Notes1")
 	  </programlisting> as is creating new objects: <programlisting width="40">
 # create an empty table named "tony" with 5 rows and 2 columns:
 t = newTable("tony", 5, 2)
@@ -1081,10 +1081,19 @@ f.fit()
 
             <listitem>
               <para>NonLinearFit(layer, curve)</para>
+		    <programlisting width="40">
+f = NonLinearFit(layer, curve)
+f.setParameters(name1, ...)
+f.setFormula(formula_string)
+		    </programlisting>
             </listitem>
 
             <listitem>
-              <para>PluginFit(layer, curve)</para>
+		    <para>PluginFit(layer, curve)</para>
+		    <programlisting width="40">
+f = PluginFit(layer, curve)
+f.load(pluginName)
+		    </programlisting>
             </listitem>
           </itemizedlist> For each of these, you can optionally restrict the X
         range that will be used for the fit, like in <programlisting width="40">

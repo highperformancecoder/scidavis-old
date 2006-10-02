@@ -29,6 +29,7 @@ class ScriptEdit: public QTextEdit, public scripted
     void insertFunction(int);
     void setContext(QObject *context) { myScript->setContext(context); }
     void scriptPrint(const QString&);
+    void updateIndentation();
 
   protected:
     QPopupMenu *createPopupMenu (const QPoint & pos);

@@ -22,7 +22,7 @@ setCentralWidget(te);
 initActions();
 
 setIcon(QPixmap(logo_xpm));
-setCaption(tr("QtiPlot - Python Script Window"));
+setCaption(tr("QtiPlot - Script Window"));
 setFocusProxy(te);
 setFocusPolicy(QWidget::StrongFocus);
 resize(QSize(500, 300));
@@ -115,7 +115,7 @@ connect(te, SIGNAL(redoAvailable(bool)), actionRedo, SLOT(setEnabled(bool)));
 
 void ScriptWindow::languageChange()
 {
-setCaption(tr("QtiPlot - Python Script Window"));
+setCaption(tr("QtiPlot - Script Window"));
 
 menuBar()->clear();
 menuBar()->insertItem(tr("&File"), file);

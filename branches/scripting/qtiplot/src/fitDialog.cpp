@@ -480,18 +480,10 @@ QwtPlotCurve *c = graph->curve(index);
 if (!c)
 	return;
 
-if (graph->selectorsEnabled() && graph->selectedCurveID() == graph->curveKey(index))
-	{
-	double start = graph->selectedXStartValue();
-	double end = graph->selectedXEndValue();
-	boxFrom->setText(QString::number(QMIN(start, end), 'g', 15));
-	boxTo->setText(QString::number(QMAX(start, end), 'g', 15));
-	}
-else
-	{
-	boxFrom->setText(QString::number(c->minXValue(), 'g', 15));
-	boxTo->setText(QString::number(c->maxXValue(), 'g', 15));
-	}
+double start, end;
+graph->range(index, &start, &end);
+boxFrom->setText(QString::number(QMIN(start, end), 'g', 15));
+boxTo->setText(QString::number(QMAX(start, end), 'g', 15));
 };
 
 void fitDialog::saveUserFunction()
@@ -1121,7 +1113,7 @@ if (!error)
 	else
 		{
 		fitter = new NonLinearFit(app, graph);
-		fitter->setParametersList(parameters);
+		((NonLinearFit*)fitter)->setParametersList(parameters);
 		((NonLinearFit*)fitter)->setFormula(formula);
 		fitter->setInitialGuesses(paramsInit);
 		}

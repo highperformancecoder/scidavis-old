@@ -129,13 +129,20 @@ if (from>=to)
 	return;
 	}
 	
-int start, end;
+double start, end;
 int spline = boxMethod->currentItem();
-QwtPlotCurve *c = graph->getFitLimits(boxName->currentText(), from, to, spline+3, start, end);
-if (!c)
-	return;
+int cindex = graph->curveIndex(boxName->currentText());
+if (cindex < 0) return;
+graph->range(cindex, &start, &end);
 
-graph->interpolate(c, spline, start, end, boxPoints->value(), boxColor->currentItem());
+if (graph->numPoints(cindex, start, end) < spline + 3)
+	{
+	QMessageBox::critical(this,tr("QtiPlot - Error"),
+	tr("You need at least %1 points to perform this operation! Operation aborted!").arg(QString::number(spline+3)));
+	return;
+	}
+
+graph->interpolate(cindex, spline, start, end, boxPoints->value(), boxColor->currentItem());
 }
 
 void interpolationDialog::setGraph(Graph *g)

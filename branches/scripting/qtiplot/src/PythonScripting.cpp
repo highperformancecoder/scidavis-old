@@ -102,9 +102,27 @@ QString PythonScripting::errorMsg()
   if (!PyErr_Occurred()) return "";
 
   PyErr_Fetch(&exception, &value, &traceback);
-  msg.append(toString(exception,true)).remove("exceptions.").append(": ");
-  msg.append(toString(value,true));
-  msg.append("\n");
+  PyErr_NormalizeException(&exception, &value, &traceback);
+  if(PyErr_GivenExceptionMatches(exception, PyExc_SyntaxError))
+  {
+    msg.append(toString(PyObject_GetAttrString(value, "text"), true) + "\n");
+    PyObject *offset = PyObject_GetAttrString(value, "offset");
+    for (int i=1; i<PyInt_AsLong(offset); i++)
+      msg.append(" ");
+    msg.append("^\n");
+    Py_DECREF(offset);
+    msg.append("SyntaxError: ");
+    msg.append(toString(PyObject_GetAttrString(value, "msg"), true) + "\n");
+    msg.append("at ").append(toString(PyObject_GetAttrString(value, "filename"), true));
+    msg.append(":").append(toString(PyObject_GetAttrString(value, "lineno"), true));
+    msg.append("\n");
+    Py_DECREF(exception);
+    Py_DECREF(value);
+  } else {
+    msg.append(toString(exception,true)).remove("exceptions.").append(": ");
+    msg.append(toString(value,true));
+    msg.append("\n");
+  }
 
   if (traceback) {
     excit = (PyTracebackObject*)traceback;
@@ -471,7 +489,7 @@ QVariant PythonScript::eval()
   } else if (PyBool_Check(pyret))
     qret = QVariant(pyret==Py_True, 0);
   // could handle advanced types (such as PyList->QValueList) here if needed
-  /* fallback: try to convert to unicode string */
+  /* fallback: try to convert to (unicode) string */
   if(!qret.isValid()) {
     PyObject *pystring = PyObject_Unicode(pyret);
     if (pystring) {
@@ -480,6 +498,9 @@ QVariant PythonScript::eval()
       if (asUTF8) {
 	qret = QVariant(QString::fromUtf8(PyString_AS_STRING(asUTF8)));
 	Py_DECREF(asUTF8);
+      } else if (pystring = PyObject_Str(pyret)) {
+	qret = QVariant(QString(PyString_AS_STRING(pystring)));
+	Py_DECREF(pystring);
       }
     }
   }

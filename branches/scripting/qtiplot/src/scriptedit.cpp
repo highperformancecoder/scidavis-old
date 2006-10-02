@@ -19,6 +19,7 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
   
   setWordWrap(QTextEdit::NoWrap);
   setTextFormat(PlainText);
+  connect(this, SIGNAL(returnPressed()), this, SLOT(updateIndentation()));
   
   actionExecute = new QAction(NULL,"E&xecute",CTRL+Key_J, this, "execute");
   connect(actionExecute, SIGNAL(activated()), this, SLOT(execute()));
@@ -77,7 +78,7 @@ QPopupMenu *ScriptEdit::createPopupMenu (const QPoint & pos)
   functionsMenu->clear();
   functionsMenu->insertTearOffHandle();
   QStringList flist = scriptEnv->mathFunctions();
-  for (int i=0; i<flist.size(); i++)
+  for (unsigned i=0; i<flist.size(); i++)
   {
     int id = functionsMenu->insertItem(flist[i], this, SLOT(insertFunction(int)));
     functionsMenu->setItemParameter(id, i);
@@ -306,3 +307,26 @@ if ( !fn.isEmpty() )
     }
 return fn;
 }
+
+void ScriptEdit::updateIndentation()
+{
+  int para, index;
+  getCursorPosition(&para, &index);
+  if (para==0) return;
+  QString prev = text(para-1);
+  prev = prev.mid(0, prev.length()-1);
+  int i;
+  QString indent;
+  for (i=0; prev[i].isSpace(); i++);
+  indent = prev.mid(0, i);
+  QString cur = text(para);
+  cur = cur.mid(0, cur.length()-1);
+  for (i=0; cur[i].isSpace(); i++);
+  QString newtxt = indent + cur.mid(i, cur.length()-i);
+  bool last = (para == paragraphs()-1);
+  removeParagraph(para);
+  insertParagraph(newtxt, para);
+  if (last) removeParagraph(para+1);
+  setCursorPosition(para, indent.length() + index);
+}
+

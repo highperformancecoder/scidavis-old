@@ -516,40 +516,13 @@ emit createHiddenTable(label, n, 5, text);
 QApplication::restoreOverrideCursor();
 }
 
-void Graph::interpolate(QwtPlotCurve *curve, int spline, int start, int end, 
+void Graph::interpolate(int cindex, int spline, double start, double end, 
 						int points, int colorIndex)
 {
-size_t i, n = end - start + 1;
-double *x = new double[n];
-double *y = new double[n];
-for (i = 0; i < n; i++)
-    {// This is the data to be analysed 
-	x[i]=curve->x(i+start);
-    y[i]=curve->y(i+start);
-    }
+size_t i, n;
+double *x, *y;
+n = sortedCurveData(cindex, start, end, &x, &y);
 
-// Sort the elements. The unfortunate thing here is that we do not know whether they are
-// sorted or not. Use GSL library for that
-double *ytemp,*xtemp;
-xtemp=vector(0, n-1);
-ytemp=vector(0, n-1);
-	
-size_t *p=ivector(0, n-1);
-gsl_sort_index(p,x,1,n); // Find the permutation
-//Sort y
-	for (i=0;i<n;i++)
-		ytemp[i]=y[p[i]];
-	for (i=0;i<n;i++)
-		y[i]=ytemp[i];
-//sort x
-	for (i=0;i<n;i++)
-		xtemp[i]=x[p[i]];
-	for (i=0;i<n;i++)
-		x[i]=xtemp[i];	
-// free the auxilary vectors
-	free_vector(ytemp,0,n-1);free_vector(xtemp,0,n-1); free_ivector(p,0,n-1);
-	
-// Do the interpolation
 gsl_interp_accel *acc= gsl_interp_accel_alloc ();
 const gsl_interp_type *method;
 QString label, wlabel;
@@ -558,17 +531,17 @@ switch(spline)
 		case 0:
 			method=gsl_interp_linear;
 			label="LinearInt";
-			wlabel = tr("Linear interpolation of ")+curve->title().text();
+			wlabel = tr("Linear interpolation of ")+curve(cindex)->title().text();
 		break;
 		case 1:
 			method=gsl_interp_cspline;
 			label="CubicInt";
-			wlabel = tr("Cubic interpolation of ")+curve->title().text();
+			wlabel = tr("Cubic interpolation of ")+curve(cindex)->title().text();
 		break;
 		case 2:
 			method=gsl_interp_akima;
 			label="AkimaInt";
-			wlabel = tr("Akima interpolation of ")+curve->title().text();
+			wlabel = tr("Akima interpolation of ")+curve(cindex)->title().text();
 		break;
 		}
 		
@@ -596,22 +569,25 @@ gsl_interp_accel_free (acc);
 
 bool Graph::diffCurve(const QString& curveTitle)
 {
-int n, start, end;
-QwtPlotCurve *c= getValidCurve(curveTitle, 4, n, start, end);
-if (!c)
-	return false;
-	
-double *x = new double[n];
-double *y = new double[n];
-double *result = new double[n-1];
+int cindex = curveIndex(curveTitle);
+if (cindex < 0) return false;
+double start, end;
+range(cindex, &start, &end);
+double *x, *y;
+int n = curveData(cindex, start, end, &x, &y);
 
-int i,aux = 0;
-for (i = start; i <= end; i++)
-    {// The data to be fitted 
-	x[aux]=c->x(i);
-	y[aux]=c->y(i);
-	aux++;
-  	}	
+if (n < 4)
+	{
+	QMessageBox::critical(this,tr("QtiPlot - Error"),
+	tr("You need at least %1 points to perform this operation! Operation aborted!").arg(QString::number(4)));
+	delete[] x;
+	delete[] y;
+	return false;
+	}
+	
+double *result = new double[n-1];
+int i;
+
 for (i = 1; i < n-1; i++)
 	 result[i]=0.5*((y[i+1]-y[i])/(x[i+1]-x[i]) + (y[i]-y[i-1])/(x[i]-x[i-1]));
 	
@@ -624,7 +600,7 @@ for (i = 1; i < n-1; i++)
 	text+="\n";
 	}
 	
-emit createHiddenTable(c->title().text()+"\t"+ tr("Derivative of")+" "+c->title().text(),n-2,2,text);
+emit createHiddenTable(curve(cindex)->title().text()+"\t"+ tr("Derivative of")+" "+curve(cindex)->title().text(),n-2,2,text);
 delete[] x;
 delete[] y;
 delete[] result;
@@ -849,100 +825,6 @@ gsl_spline_free (interp);
 gsl_interp_accel_free (acc);
 free_vector(x,0,n-1);free_vector(y,0,n-1); free_vector(S,0,iter);free_vector(h,0,iter);
 return info;
-}
-
-QwtPlotCurve* Graph::getValidCurve(const QString& name, int params, 
-								   int &points, int &start, int &end)
-{
-QStringList cl = curvesList();
-int index=cl.findIndex(name);
-if (index < 0)
-	{
-	QMessageBox::critical(this,tr("QtiPlot - Error"),
-		tr("The curve %1 doesn't exist! Operation aborted!").arg(name));
-	return 0;
-	}
-
-QwtPlotCurve *c = curve(index);
-if (!c)
-	return 0;
-
-if (rangeSelectorsEnabled)
-	{
-	start = QMIN(startPoint, endPoint);
-	end = QMAX(startPoint, endPoint);
-	}
-else
-	{
-	start = 0;
-	end = c->dataSize() - 1;
-	}
-
-points = abs(end - start) + 1;
-if (points < params)
-	{
-	QMessageBox::critical(this,tr("QtiPlot - Error"),
-	tr("You need at least %1 points to perform this operation! Operation aborted!").arg(QString::number(params)));
-	return 0;
-	}
-return c;
-}
-
-QwtPlotCurve* Graph::getFitLimits(const QString& name, double from, double to,
-								  int params, int &start, int &end)
-{
-QStringList cl = curvesList();
-int index=cl.findIndex(name);
-if (index < 0)
-	{
-	QMessageBox::critical(this,tr("QtiPlot - Error"),
-		tr("The curve %1 doesn't exist! Operation aborted!").arg(name));
-	return 0;
-	}
-
-QwtPlotCurve *c = curve(index);
-if (!c)
-	return 0;
-
-int i,n = c->dataSize();
-if (n < params)
-	{
-	QMessageBox::critical(this,tr("QtiPlot - Error"),
-		tr("You need at least %1 points to perform this operation! Operation aborted!").arg(QString::number(params)));
-	return 0;
-	}
-
-for (i = 0; i < n; i++)
-    {
-	if (c->x(i) >= from)
-		{
-		start = i;
-		break;
-		}
-    }
-
-if (to < from)
-	end = n - 1;
-else
-	{
-	for (i = n - 1; i >= 0; i--)
-		{
-		if (c->x(i) <= to)
-			{
-			end = i;
-			break;
-			}
-		}
-	}
-
-n = abs(end - start) + 1;
-if (n < params)
-	{
-	QMessageBox::critical(this,tr("QtiPlot - Warning"),
-		tr("You need at least %1 points to perform this operation! Operation aborted!").arg(QString::number(params)));
-	return 0;
-	}
-return c;
 }
 
 void Graph::calculateLineProfile(const QPoint& start, const QPoint& end)

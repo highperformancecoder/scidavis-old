@@ -8,9 +8,6 @@
 #include <gsl/gsl_sf.h>
 #include <qasciidict.h>
 
-template <class T1, class T2> class QMap;
-typedef QMap<QString,QString> strDict;
-
 class muParserScript: public Script
 {
   Q_OBJECT
@@ -27,12 +24,20 @@ class muParserScript: public Script
     bool setDouble(double val, const char* name);
 
   private:
-    int setDynamicVars();
+    double col(const QString &arg);
+    double cell(int row, int col);
+    double *addVariable(const char *name);
+    static double mu_col(const char *arg) { return current->col(arg); }
+    static double mu_cell(double row, double col) { return current->cell(qRound(row), qRound(col)); }
+    static double *mu_addVariable(const char *name) { return current->addVariable(name); }
+    static QString compileColArg(const QString& in);
 
     mu::Parser parser, rparser;
     QAsciiDict<double> variables;
-    strDict substitute, rowIndexes, colIndexes, userVariables;
-    bool returns;
+    QStringList muCode;
+
+  public:
+    static muParserScript *current;
 };
 
 class muParserScripting: public ScriptingEnv
@@ -108,6 +113,12 @@ class muParserScripting: public ScriptingEnv
       { return gsl_sf_lngamma (x); }
     static double hazard(double x)
       { return gsl_sf_hazard (x); }
+};
+
+class EmptySourceError : public mu::ParserError
+{
+  public:
+    EmptySourceError() {}
 };
 
 #endif
