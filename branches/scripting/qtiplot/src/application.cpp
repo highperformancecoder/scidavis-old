@@ -4057,6 +4057,13 @@ bool ApplicationWindow::setScriptingLang(const QString &lang)
     for (QObjectListIt i(*receivers); !i.atLast(); ++i)
       QApplication::postEvent(i, new ScriptingChangeEvent(newEnv));
     delete receivers;
+    if (scriptWindow)
+    {
+	    receivers = scriptWindow->queryList();
+	    for (QObjectListIt i(*receivers); !i.atLast(); ++i)
+		    QApplication::postEvent(i, new ScriptingChangeEvent(newEnv));
+	    delete receivers;
+    }
     return true;
   }
   return false;
