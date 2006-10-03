@@ -23,6 +23,8 @@ public:
     lineDialog(LineMarker *line, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0);
     ~lineDialog();
 
+	enum Unit{ScaleCoordinates, Pixels};
+
 	void initGeometryTab();
 	void enableHeadTab();
 	void setCoordinates(int unit);

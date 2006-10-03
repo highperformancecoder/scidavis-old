@@ -295,7 +295,7 @@ QVariant muParserScript::eval()
       parser.SetExpr(*i);
       val = parser.Eval();
     }
-  } catch (EmptySourceError *e) {
+  } catch (EmptySourceError *) {
     return QVariant("");
   } catch (ParserError &e) {
     emit_error(e.GetMsg(), 0);
@@ -314,7 +314,7 @@ bool muParserScript::exec()
       parser.SetExpr(*i);
       parser.Eval();
     }
-  } catch (EmptySourceError *e) {
+  } catch (EmptySourceError *) {
     return true;
   } catch (mu::ParserError &e) {
     emit_error(e.GetMsg(), 0);

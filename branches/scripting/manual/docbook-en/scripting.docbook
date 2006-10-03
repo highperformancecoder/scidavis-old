@@ -965,7 +965,7 @@ l.setXTitle(Xtitle)
 l.setYTitle(Ytitle)
 l.setLegend(text)
 	  </programlisting> You can also customize the scales of the different axes using: <programlisting width="40">
-l.setScale(int axis, double start, double end, double step = 0.0, int majorTicks = 5, int minorTicks = 5, int type = 0, bool inverted = false);
+l.setScale(int axis, double start, double end, double step=0.0, int majorTicks=5, int minorTicks=5, int type=0, bool inverted=False);
 </programlisting>
 	  where <varname>axis</varname> is a number between 0 and 3 with the following signification: <variablelist spacing="compact">
             <varlistentry>
@@ -1118,6 +1118,7 @@ f.setTolerance(tolerance)
 f.setOutputPrecision(precision)
 f.setMaximumIterations(number)
 f.scaleErrors(yes = True)
+f.setColor(qt.QColor("green"))			<lineannotation>change the color of the result fit curve to green (default color is red)</lineannotation>
 	  </programlisting></para>
 
         <para>After you've called fit(), you have a number of possibilities

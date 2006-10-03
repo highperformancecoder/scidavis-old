@@ -124,8 +124,8 @@ void lineDialog::initGeometryTab()
 	
 	new QLabel(tr( "Unit" ), box1);
 	unitBox = new QComboBox(box1);
-	unitBox->insertItem(tr("Pixels"));
 	unitBox->insertItem(tr("Scale Coordinates"));
+	unitBox->insertItem(tr("Pixels"));
 
 	QHBox *box2 = new QHBox (geometry);
 	box2->setSpacing(5);
@@ -158,15 +158,15 @@ void lineDialog::initGeometryTab()
 
 void lineDialog::displayCoordinates(int unit)
 {
-if (unit)
+if (unit == ScaleCoordinates)
 	{
 	QwtDoublePoint sp = lm->startPointCoord();
-	xStartBox->setText(QString::number(sp.x(), 'g', 6));
-	yStartBox->setText(QString::number(sp.y(), 'g', 6));
+	xStartBox->setText(QString::number(sp.x()));
+	yStartBox->setText(QString::number(sp.y()));
 
 	QwtDoublePoint ep = lm->endPointCoord();
-	xEndBox->setText(QString::number(ep.x(), 'g', 6));
-	yEndBox->setText(QString::number(ep.y(), 'g', 6));
+	xEndBox->setText(QString::number(ep.x()));
+	yEndBox->setText(QString::number(ep.y()));
 	}
 else
 	{
@@ -183,7 +183,7 @@ else
 
 void lineDialog::setCoordinates(int unit)
 {
-if (unit)
+if (unit == ScaleCoordinates)
 	{
 	lm->setStartPoint(xStartBox->text().replace(",", ".").toDouble(), 
 					yStartBox->text().replace(",", ".").toDouble());

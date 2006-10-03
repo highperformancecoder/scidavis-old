@@ -519,9 +519,8 @@ QApplication::restoreOverrideCursor();
 void Graph::interpolate(int cindex, int spline, double start, double end, 
 						int points, int colorIndex)
 {
-size_t i, n;
 double *x, *y;
-n = sortedCurveData(cindex, start, end, &x, &y);
+size_t n = sortedCurveData(cindex, start, end, &x, &y);
 
 gsl_interp_accel *acc= gsl_interp_accel_alloc ();
 const gsl_interp_type *method;
