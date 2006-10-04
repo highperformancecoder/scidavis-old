@@ -11510,12 +11510,15 @@ void ApplicationWindow::translateActionsStrings()
 #endif
 
   actionAddLayer->setMenuText(tr("Add La&yer"));
+  actionAddLayer->setToolTip(tr("Add Layer"));
   actionAddLayer->setAccel(tr("ALT+L"));
 
   actionShowLayerDialog->setMenuText(tr("Arran&ge Layers"));
+  actionShowLayerDialog->setToolTip(tr("Arrange Layers"));
   actionShowLayerDialog->setAccel(tr("ALT+A"));
 
   actionAutomaticLayout->setMenuText(tr("Automatic Layout"));
+  actionAutomaticLayout->setToolTip(tr("Automatic Layout"));
 
   actionExportGraph->setMenuText(tr("&Current"));
   actionExportGraph->setAccel(tr("Alt+G"));
@@ -11549,9 +11552,11 @@ void ApplicationWindow::translateActionsStrings()
   actionShowCurvesDialog->setToolTip(tr("Add curve to graph"));
 
   actionAddErrorBars->setMenuText(tr("Add &Error Bars...")); 
+  actionAddErrorBars->setToolTip(tr("Add Error Bars...")); 
   actionAddErrorBars->setAccel(tr("Ctrl+B"));
 
   actionAddFunctionCurve->setMenuText(tr("Add &Function...")); 
+  actionAddFunctionCurve->setToolTip(tr("Add Function..."));
   actionAddFunctionCurve->setAccel(tr("Ctrl+Alt+F"));
 
   actionUnzoom->setMenuText(tr("&Rescale to show all")); 
@@ -11566,7 +11571,8 @@ void ApplicationWindow::translateActionsStrings()
   actionTimeStamp->setAccel(tr("Ctrl+ALT+T"));
   actionTimeStamp->setToolTip(tr("Date & Time "));
 
-  actionAddImage->setMenuText(tr("Add &Image")); 
+  actionAddImage->setMenuText(tr("Add &Image"));
+  actionAddImage->setToolTip(tr("Add Image"));
   actionAddImage->setAccel(tr("ALT+I"));
 
   actionPlotL->setMenuText(tr("&Line"));
@@ -11791,6 +11797,7 @@ void ApplicationWindow::translateActionsStrings()
 	btnRemovePoints->setToolTip(tr("Remove data points"));
 
 	actionAddText->setMenuText(tr("Add &Text"));
+	actionAddText->setToolTip(tr("Add Text"));
 	actionAddText->setAccel(tr("ALT+T"));
 
 	btnArrow->setMenuText(tr("Draw &Arrow"));
