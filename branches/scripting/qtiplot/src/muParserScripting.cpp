@@ -62,6 +62,7 @@ muParserScript::muParserScript(ScriptingEnv *env, const QString &code, QObject *
   : Script(env, code, context, name)
 {
   variables.setAutoDelete(true);
+  rvariables.setAutoDelete(true);
 
   parser.DefineConst("pi", M_PI);
   parser.DefineConst("Pi", M_PI);
@@ -77,13 +78,14 @@ muParserScript::muParserScript(ScriptingEnv *env, const QString &code, QObject *
     else if (i->numargs == 3 && i->fun3 != NULL)
       parser.DefineFun(i->name, i->fun3);
 
-  parser.SetVarFactory(mu_addVariable);
   if (Context->isA("Table"))
     parser.DefineFun("col", mu_col, false);
   else if (Context->isA("Matrix"))
     parser.DefineFun("cell", mu_cell);
 
   rparser = parser;
+  parser.SetVarFactory(mu_addVariable);
+  rparser.SetVarFactory(mu_addVariableR);
 }
 
 double muParserScript::col(const QString &arg)
@@ -132,6 +134,7 @@ double muParserScript::col(const QString &arg)
     row = (int) *(variables["i"]) - 1;
   else
     return 0;
+  rvariables.clear();
   if (row < 0 || row >= table->tableRows())
     throw Parser::exception_type(tr("There's no row %1 in table %2!").
         arg(row+1).arg(Context->name()).ascii());
@@ -168,6 +171,17 @@ double *muParserScript::addVariable(const char *name)
     throw Parser::exception_type(tr("Out of memory").ascii());
   *valptr = 0;
   variables.insert(name, valptr);
+  rparser.DefineVar(name, valptr);
+  return valptr;
+}
+
+double *muParserScript::addVariableR(const char *name)
+{
+  double *valptr = new double;
+  if (!valptr)
+    throw Parser::exception_type(tr("Out of memory").ascii());
+  *valptr = 0;
+  rvariables.insert(name, valptr);
   return valptr;
 }
 

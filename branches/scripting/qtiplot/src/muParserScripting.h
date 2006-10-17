@@ -27,13 +27,15 @@ class muParserScript: public Script
     double col(const QString &arg);
     double cell(int row, int col);
     double *addVariable(const char *name);
+    double *addVariableR(const char *name);
     static double mu_col(const char *arg) { return current->col(arg); }
     static double mu_cell(double row, double col) { return current->cell(qRound(row), qRound(col)); }
     static double *mu_addVariable(const char *name) { return current->addVariable(name); }
+    static double *mu_addVariableR(const char *name) { return current->addVariableR(name); }
     static QString compileColArg(const QString& in);
 
     mu::Parser parser, rparser;
-    QAsciiDict<double> variables;
+    QAsciiDict<double> variables, rvariables;
     QStringList muCode;
 
   public:
