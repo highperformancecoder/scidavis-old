@@ -107,6 +107,7 @@ setColValuesDialog::setColValuesDialog( ScriptingEnv *env, QWidget* parent,  con
 	
     btnOk = new QPushButton(box3, "btnOk" );
     btnOk->setText( tr( "OK" ) );
+	 btnOk->setDefault(true);
 
 	btnApply = new QPushButton(box3, "btnApply" );
     btnApply->setText( tr( "Apply" ) );
@@ -119,7 +120,8 @@ setColValuesDialog::setColValuesDialog( ScriptingEnv *env, QWidget* parent,  con
 	layout->addWidget(hbox3);
 
 setFunctions();
-insertExplain(0);
+if (functions->count() > 0)
+	insertExplain(0);
 
 connect(PushButton3, SIGNAL(clicked()),this, SLOT(insertFunction()));
 connect(PushButton4, SIGNAL(clicked()),this, SLOT(insertCol()));

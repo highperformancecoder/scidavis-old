@@ -66,7 +66,7 @@ value_type Parser::Sign(value_type v) { return (value_type)((v<0) ? -1 : (v>0) ?
 
 //---------------------------------------------------------------------------
 // Conditional (if then else)
-value_type Parser::Ite(value_type v1, value_type v2, value_type v3) { return (v1==1) ? v2 : v3; }
+value_type Parser::Ite(value_type v1, value_type v2, value_type v3) { return (v1!=0) ? v2 : v3; }
 
 //---------------------------------------------------------------------------
 // Unary operator Callbacks: Infix operators

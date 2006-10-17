@@ -19,6 +19,7 @@ ScriptingLangDialog::ScriptingLangDialog(ScriptingEnv *env, ApplicationWindow *p
   QHBox *box1 = new QHBox(this, "box1");
   btnOK = new QPushButton(box1, "btnOK");
   btnOK->setText(tr("OK"));
+  btnOK->setDefault(true);
   btnCancel = new QPushButton(box1, "btnCancel");
   btnCancel->setText(tr("Cancel"));
 

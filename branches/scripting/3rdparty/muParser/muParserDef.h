@@ -44,27 +44,26 @@
 #endif
 
 #if defined(_DEBUG)
-   /** \brief Debug macro to force an abortion of the programm with a 
-certain message.
-   */
-   #define MUP_FAIL(MSG)    \
-           bool MSG=false;        \
-           assert(MSG);
+  /** \brief Debug macro to force an abortion of the programm with a certain message.
+  */
+  #define MUP_FAIL(MSG)    \
+          bool MSG=false;  \
+          assert(MSG);
 
-   /** \brief An assertion that does not kill the program.
-   */
-   #define MUP_ASSERT(COND)                              \
-           if (!(COND))                                  \
-           {                                             \
-             stringstream_type ss;                       \
-             ss << _T("Assertion \""#COND"\" failed: "); \
-             ss << __FILE__ << _T(" line ") << __LINE__; \
-             ss << ".";                                  \
-             throw ParserError( ss.str() );              \
-           }
-#else				
-   #define MUP_FAIL(MSG)			
-   #define MUP_ASSERT(COND)	
+  /** \brief An assertion that does not kill the program.
+  */
+  #define MUP_ASSERT(COND)                              \
+          if (!(COND))                                  \
+          {                                             \
+            stringstream_type ss;                       \
+            ss << _T("Assertion \""#COND"\" failed: "); \
+            ss << __FILE__ << _T(" line ") << __LINE__; \
+            ss << ".";                                  \
+            throw ParserError( ss.str() );              \
+          }
+#else
+  #define MUP_FAIL(MSG)
+  #define MUP_ASSERT(COND)
 #endif
 
 //------------------------------------------------------------------------------

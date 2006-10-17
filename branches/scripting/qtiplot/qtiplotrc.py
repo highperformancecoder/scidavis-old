@@ -43,7 +43,7 @@ try:
     "struve", "modstruve", "itstruve0", "it2struve0", "itmodstruve0",
     # Gamma and Related Functions
     "gamma", "gammaln", "gammainc", "gammaincinv", "gammaincc", "gammainccinv",
-    "beta", "betaln", "betainc", "betaincinv", "betaincinva", "betaincinvb",
+    "beta", "betaln", "betainc", "betaincinv",
     "psi", "rgamma", "polygamma",
     # Error Function and Fresnel Integrals
     "erf", "erfc", "erfinv", "erfcinv", "erf_zeros",
@@ -64,12 +64,12 @@ try:
     # Parabolic Cylinder Functions
     "pbdv", "pbvv", "pbwa", "pbdv_seq", "pbvv_seq", "pbdn_seq",
     # mathieu and Related Functions (and derivatives)
-    "mathieu_a", "mathieu_b", "mathieu_even_coeff", "mathieu_odd_coeff",
+    "mathieu_a", "mathieu_b", "mathieu_even_coef", "mathieu_odd_coef",
     "mathieu_cem", "mathieu_sem", "mathieu_modcem1", "mathieu_modcem2", "mathieu_modsem1", "mathieu_modsem2",
     # Spheroidal Wave Functions
     "pro_ang1", "pro_rad1", "pro_rad2",
     "obl_ang1", "obl_rad1", "obl_rad2",
-    "pro_cv", "obl_cv", "pro_cv_seq", "obl_vc_seq",
+    "pro_cv", "obl_cv", "pro_cv_seq", "obl_cv_seq",
     "pro_ang1_cv", "pro_rad1_cv", "pro_rad2_cv",
     "obl_ang1_cv", "obl_rad1_cv", "obl_rad2_cv",
     # Kelvin Functions
@@ -78,7 +78,7 @@ try:
     "ber_zeros", "bei_zeros", "berp_zeros", "beip_zeros", "ker_zeros", "kei_zeros", "kerp_zeros", "keip_zeros",
     # Other Special Functions
     "expn", "exp1", "expi",
-    "wofz", "dawson",
+    "wofz", "dawsn",
     "shichi", "sici", "spence",
     "zeta", "zetac",
     # Convenience Functions
@@ -88,13 +88,11 @@ try:
     "round",
   ]
   for name in special_functions:
-    try:
-      f = getattr(special, name)
-      setattr(__main__, name, f)
-      # make functions available in QtiPlot's math function list
-      if callable(f):
-        qti.mathFunctions[name] = f
-    except(AttributeError): pass
+    f = getattr(special, name)
+    setattr(__main__, name, f)
+    # make functions available in QtiPlot's math function list
+    if callable(f):
+      qti.mathFunctions[name] = f
 except(ImportError):
   print("Could not load scipy.special; special functions will not be available.")
 

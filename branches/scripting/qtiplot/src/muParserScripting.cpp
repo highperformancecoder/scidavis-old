@@ -96,11 +96,11 @@ double muParserScript::col(const QString &arg)
     if (arg[i] == '"') {
       item += "\"";
       for (i++; arg[i] != QChar::null && arg[i] != '"'; i++)
-	if (arg[i] == '\\') {
-	  item += "\\";
-	  item += arg[++i];
-	} else
-	  item += arg[i];
+        if (arg[i] == '\\') {
+          item += "\\";
+          item += arg[++i];
+        } else
+          item += arg[i];
       item += "\"";
     } else if (arg[i] == ',') {
       items << item;
@@ -111,10 +111,12 @@ double muParserScript::col(const QString &arg)
   Table *table = (Table*) Context;
   int col, row;
   Parser local_parser(rparser);
-  if (items[0].startsWith("\"") && items[0].endsWith("\""))
+  if (items[0].startsWith("\"") && items[0].endsWith("\"")) {
     col = table->colNames().findIndex(items[0].mid(1,items[0].length()-2));
-  else
-  {
+    if (col<0)
+      throw Parser::exception_type(tr("There's no column named %1 in table %2!").
+          arg(items[0]).arg(Context->name()).ascii());
+  } else {
     // for backwards compatibility
     col = table->colNames().findIndex(items[0]);
     if (col<0) {
@@ -130,8 +132,12 @@ double muParserScript::col(const QString &arg)
     row = (int) *(variables["i"]) - 1;
   else
     return 0;
-  if (row < 0 || row >= table->tableRows() || col < 0 || col >= table->tableCols())
-    return 0;
+  if (row < 0 || row >= table->tableRows())
+    throw Parser::exception_type(tr("There's no row %1 in table %2!").
+        arg(row+1).arg(Context->name()).ascii());
+  if (col < 0 || col >= table->tableCols())
+    throw Parser::exception_type(tr("There's no column %1 in table %2!").
+        arg(col+1).arg(Context->name()).ascii());
   if (table->text(row,col).isEmpty())
     throw new EmptySourceError();
   else
@@ -143,8 +149,12 @@ double muParserScript::cell(int row, int col)
   if (!Context->isA("Matrix"))
     throw Parser::exception_type(tr("cell() works only on matrices!").ascii());
   Matrix *matrix = (Matrix*) Context;
-  if (row < 1 || row > matrix->numRows() || col < 1 || col > matrix->numCols())
-    return 0;
+  if (row < 1 || row > matrix->numRows())
+    throw Parser::exception_type(tr("There's no row %1 in matrix %2!").
+        arg(row).arg(Context->name()).ascii());
+  if (col < 1 || col > matrix->numCols())
+    throw Parser::exception_type(tr("There's no column %1 in matrix %2!").
+        arg(col).arg(Context->name()).ascii());
   if (matrix->text(row-1,col-1).isEmpty())
     throw new EmptySourceError();
   else
@@ -156,6 +166,7 @@ double *muParserScript::addVariable(const char *name)
   double *valptr = new double;
   if (!valptr)
     throw Parser::exception_type(tr("Out of memory").ascii());
+  *valptr = 0;
   variables.insert(name, valptr);
   return valptr;
 }
