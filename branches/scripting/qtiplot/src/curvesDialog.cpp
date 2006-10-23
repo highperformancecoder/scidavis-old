@@ -133,7 +133,7 @@ if (c->rtti() == FunctionCurve::RTTI)
 	btnAssociations->setEnabled(false);
 	btnEditFunction->setEnabled(true);
 	}
-else
+else if (c->rtti() == QwtPlotItem::Rtti_PlotCurve)
 	{
 	btnAssociations->setEnabled(true);
 	btnEditFunction->setEnabled(false);
@@ -192,7 +192,7 @@ if (n==0)
 void curvesDialog::setGraph(Graph *graph)
 {
 g = graph;
-contents->insertStringList(g->curvesList());
+contents->insertStringList(g->plotItemsList());
 enableRemoveBtn();
 }
 

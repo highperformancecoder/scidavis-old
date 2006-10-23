@@ -30,7 +30,8 @@ class CanvasPicker;
 class Plot;
 class MultiPeakFit;
 class ApplicationWindow;
-
+class Matrix
+;
 class Graph: public QWidget
 {
 	Q_OBJECT
@@ -43,7 +44,7 @@ public:
 	enum MarkerType{None=-1, Text = 0, Arrow=1, Image=2};
 	enum CurveType{Line, Scatter, LineSymbols, VerticalBars, Area, Pie, VerticalDropLines, 
 				  Spline, HorizontalSteps, Histogram, HorizontalBars, VectXYXY, ErrorBars, 
-				  Box, VectXYAM, VerticalSteps};
+				  Box, VectXYAM, VerticalSteps, ColorMap, GrayMap, ContourMap};
 
 	Plot *d_plot;
 	QwtPlotZoomer *d_zoomer[2];
@@ -102,7 +103,11 @@ public slots:
 	 QString curveXColName(const QString& curveTitle);
 
 	 void insertPlottedList(const QStringList& names);
+
+	 //! Returns the names of all the QwtPlotCurve items on the plot, as a string list 
 	 QStringList curvesList();
+	 //! Returns the names of all plot items, including spectrograms, as a string list 
+	 QStringList plotItemsList();
 	 QStringList plotAssociations();
 	 void setPlotAssociations(const QStringList& newList);
 	 void changePlotAssociation(Table* t, int curve, const QString& text);
@@ -578,6 +583,9 @@ public slots:
 	void selectPeak(const QPoint &pos);
 	bool selectPeaksOn();
 
+	//! Add a spectrogram to the graph
+	void plotSpectrogram(Matrix *m, CurveType type);
+
 signals:
 	void highlightGraph(Graph*);
     void releaseGraph(Graph*);
@@ -687,4 +695,5 @@ private:
 	bool defaultArrowHeadFill;
 	Qt::PenStyle defaultArrowLineStyle;
 };
+
 #endif // GRAPH_H

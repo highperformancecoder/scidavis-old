@@ -87,6 +87,7 @@ static const char *unzoom_xpm[]={
 #include "FunctionCurve.h"
 #include "Fitter.h"
 #include "nrutil.h"
+#include "Spectrogram.h"
 
 #include <qapplication.h>
 #include <qbitmap.h>
@@ -110,6 +111,7 @@ static const char *unzoom_xpm[]={
 #include <qwt_scale_engine.h>
 #include <qwt_text.h>
 #include <qwt_text_label.h>
+#include <qwt_color_map.h>
 
 #include <gsl/gsl_sort.h>
 
@@ -474,7 +476,7 @@ void Graph::movedPicker(const QPoint &pos, bool mark)
 
 		if (translateOn)
 			{
-			const QwtPlotCurve *c = d_plot->curve(selectedCurve);
+			const QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(selectedCurve);
 			if (!c)
 				return;
 				
@@ -1438,6 +1440,14 @@ for (int i=0; i<n_curves; i++)
 	QwtPlotCurve *c = this->curve(i);
 	if (!c)
 		continue;
+
+	if (c->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
+		{
+		Spectrogram *sp = (Spectrogram *)c;
+		if (sp->colorScaleAxis() == axis)
+			return;
+		}
+
 	if ((axis == QwtPlot::yRight && c->yAxis () == QwtPlot::yRight) ||
 		(axis == QwtPlot::xTop && c->xAxis () == QwtPlot::xTop))
 		return;
@@ -1552,7 +1562,7 @@ index = (keys.count() + index) % keys.count();
 if ( selectedCurve != keys[index] )
 	selectedCurve = keys[index];
 
-QwtPlotCurve *curve = d_plot->curve(selectedCurve);
+QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(selectedCurve);
 if ( !curve || curve->dataSize()<=0)
 	return;
 
@@ -1600,7 +1610,7 @@ if ( !curve || curve->dataSize()<=0)
 
 void Graph::shiftRangeSelector(bool shift)
 {		
-QwtPlotCurve *curve = d_plot->curve(selectedCurve);
+QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(selectedCurve);
 if ( !curve || curve->dataSize()<=0)
         return;
 
@@ -1665,7 +1675,7 @@ if (shift)
 
 void Graph::moveRangeSelector(bool up)
 {	
-QwtPlotCurve *curve = d_plot->curve(selectedCurve);
+QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(selectedCurve);
 if ( !curve )
         return;
 
@@ -1723,7 +1733,7 @@ curve->draw(&painter, d_plot->canvasMap(curve->xAxis()), d_plot->canvasMap(curve
 //places the active range selector at the selected point
 void Graph::moveRangeSelector()
 {	
-QwtPlotCurve *curve = d_plot->curve(selectedCurve);
+QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(selectedCurve);
 if ( !curve )
 	return;
 
@@ -1789,8 +1799,8 @@ bool success=FALSE;
 for (int i=n_curves-1;i>=0;i--)
 	{
 	curveID= c_keys[i]; 
-	curve=d_plot->curve(curveID);
-	if (curve && curve->dataSize()>0)
+	curve = (QwtPlotCurve *)d_plot->curve(curveID);
+	if (curve && curve->rtti() == QwtPlotItem::Rtti_PlotCurve && curve->dataSize()>0)
 		{
 		success=TRUE;
 		break;
@@ -1819,7 +1829,7 @@ if (on)
 	d_plot->canvas()->setFocus();
 	
 	int d=32;
-	QwtPlotCurve *c = d_plot->curve(selectedCurve);
+	QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(selectedCurve);
 	QwtSymbol symbol = c->symbol();
 	if (symbol.style() != QwtSymbol::None)
 		{
@@ -1899,7 +1909,7 @@ void Graph::insertPlottedList(const QStringList& names)
 QValueList<int> keys = d_plot->curveKeys();
 for (int i=0; i<(int)keys.count(); i++)
 	{
-	QwtPlotCurve *c = d_plot->curve(keys[i]);
+	QwtPlotItem *c = d_plot->curve(keys[i]);
 	if (c)
 		c->setTitle(names[i]);
 	}
@@ -1911,7 +1921,20 @@ QStringList cList;
 QValueList<int> keys = d_plot->curveKeys();
 for (int i=0; i<(int)keys.count(); i++)
 	{
-	QwtPlotCurve *c = d_plot->curve(keys[i]);
+	QwtPlotItem *c = d_plot->curve(keys[i]);
+	if (c && c->rtti() == QwtPlotItem::Rtti_PlotCurve)
+		cList << c->title().text();
+	}	
+return cList;
+}
+
+QStringList Graph::plotItemsList()
+{	
+QStringList cList;
+QValueList<int> keys = d_plot->curveKeys();
+for (int i=0; i<(int)keys.count(); i++)
+	{
+	QwtPlotItem *c = d_plot->curve(keys[i]);
 	if (c)
 		cList << c->title().text();
 	}	
@@ -2170,7 +2193,7 @@ d_plot->canvas()->setCursor(QCursor (QPixmap(vizor_xpm),-1,-1));
 
 void Graph::translateCurveTo(const QPoint& p)
 {
-QwtPlotCurve *c = d_plot->curve(selectedCurve);
+QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(selectedCurve);
 if (!c)
 	return;
 
@@ -2201,7 +2224,7 @@ translateOn=false;
 
 QString Graph::selectedCurveTitle()
 {
-const QwtPlotCurve *c = d_plot->curve(selectedCurve);
+const QwtPlotItem *c = d_plot->curve(selectedCurve);
 if (c)
 	return c->title().text();
 else
@@ -2229,7 +2252,7 @@ else
 
 void Graph::selectPeak(const QPoint &)
 {
-const QwtPlotCurve *c = d_plot->curve(selectedCurve);
+const QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(selectedCurve);
 if (!c)
 	return;
 
@@ -2276,7 +2299,7 @@ int dist, point;
 const int curve = d_plot->closestCurve(pos.x(), pos.y(), dist, point);
 if (curve >= 0 && dist < 10)//10 pixels tolerance
 	{
-	const QwtPlotCurve *c = d_plot->curve(curve);
+	const QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(curve);
 	if (!c)
 		return false;
 		
@@ -2343,7 +2366,7 @@ if ( curve >= 0 && dist < 10 ) // 10 pixels tolerance
     selectedPoint = point;
     showCursor(TRUE);
 
-	const QwtPlotCurve *c = d_plot->curve(selectedCurve);
+	const QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(selectedCurve);
 	QString info;
 	info=c->title().text();
 	info+="[";
@@ -2697,7 +2720,7 @@ QString Graph::pieLegendText()
 {
 QString text="";
 QValueList<int> keys= d_plot->curveKeys();	
-const QwtPlotCurve *curve=d_plot->curve(keys[0]);
+const QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(keys[0]);
 if (curve)
 	{
 	for (int i=0;i<int(curve->dataSize());i++)
@@ -2717,7 +2740,7 @@ void Graph::moveBy(int dx, int dy)
     if ( dx == 0 && dy == 0 )
         return;
 
-    const QwtPlotCurve *curve = d_plot->curve(selectedCurve);
+    const QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(selectedCurve);
     if ( !curve )
         return;
 
@@ -2731,7 +2754,7 @@ void Graph::moveBy(int dx, int dy)
 
 void Graph::removePoint()
 {
-    QwtPlotCurve *curve = d_plot->curve(selectedCurve);
+    QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(selectedCurve);
     if ( !curve )
         return;
 
@@ -2771,7 +2794,7 @@ void Graph::removePoint()
 // Move the selected point
 void Graph::move(const QPoint &pos)
 {
-    QwtPlotCurve *curve = d_plot->curve(selectedCurve);
+    QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(selectedCurve);
     if ( !curve )
         return;
 	
@@ -2816,7 +2839,7 @@ void Graph::move(const QPoint &pos)
 // Hightlight the selected point
 void Graph::highlightPoint(bool showIt)
 {
-    QwtPlotCurve *curve = d_plot->curve(selectedCurve);
+    QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(selectedCurve);
     if ( !curve )
         return;
 
@@ -2835,8 +2858,8 @@ void Graph::highlightPoint(bool showIt)
 
 void Graph::showCursor(bool showIt)
 {
-    QwtPlotCurve *curve = d_plot->curve(selectedCurve);
-    if ( !curve )
+    QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(selectedCurve);
+    if ( !curve || curve->rtti() != QwtPlotItem::Rtti_PlotCurve)
         return;
 
 	d_plot->replot();
@@ -2860,8 +2883,8 @@ void Graph::showCursor(bool showIt)
 // Select the next/previous neighbour of the selected point
 void Graph::shiftPointCursor(bool up)
 {
-    const QwtPlotCurve *curve = d_plot->curve(selectedCurve);
-    if ( !curve )
+    const QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(selectedCurve);
+    if ( !curve || curve->rtti() != QwtPlotItem::Rtti_PlotCurve)
         return;
 
     int index = selectedPoint + (up ? 1 : -1);
@@ -2909,8 +2932,8 @@ void Graph::shiftCurveCursor(bool up)
         showCursor(TRUE);
 		}
 
-	const QwtPlotCurve *c = d_plot->curve(selectedCurve);
-    if ( !c )
+	const QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(selectedCurve);
+    if ( !c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
         return;
 
 	QString info;
@@ -2959,7 +2982,7 @@ else if ((text.contains("(X)") == 2 && text.contains("(Y)") == 2) ||
 		 (text.contains("(A)") && text.contains("(M)")))
 	{//vectors curve
 	QStringList ls = QStringList::split (",", text, FALSE );
-	QwtPlotCurve *c = d_plot->curve(c_keys[curve]);
+	QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(c_keys[curve]);
 	if (c)
 		c->setTitle(ls[1].remove("(Y)"));//update curve name
 	associations[curve] = text;
@@ -2981,7 +3004,7 @@ else
 
 	//update curve name
 	QStringList ls = QStringList::split (",", text, FALSE );
-	QwtPlotCurve *c = d_plot->curve(c_keys[curve]);
+	QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(c_keys[curve]);
 	if (c)
 		c->setTitle(ls[1].remove("(Y)"));
 
@@ -3112,7 +3135,7 @@ if (!it)
 	}
 else
 {//update curve data
-QwtPlotCurve *c = d_plot->curve(curveID);
+QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(curveID);
 if (c_type[curve] == HorizontalBars)
 	c->setData(Y, X, it);
 else
@@ -3184,7 +3207,7 @@ for (i=0; i<n_curves; i++)
 				removeCurve(i);
 			else
 				{
-				QwtPlotCurve *c = d_plot->curve(c_keys[i]);
+				QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(c_keys[i]);
 				if (c)
 					c->setData(X, Y, it);
 				}
@@ -3238,7 +3261,7 @@ for (int i = 0; i<w->tableRows(); i++ )
 		X[it-1]=xval.toDouble();
 		}
 	}
-QwtPlotCurve *c = d_plot->curve(c_keys[curve]);
+QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(c_keys[curve]);
 if (c)
 	{
 	c->setData(X, X, it);
@@ -3282,7 +3305,7 @@ for (i = 0; i< w->tableRows(); i++ )
 if (!it)
 	removeCurve(curve);
 		
-QwtPlotCurve *c = d_plot->curve(c_keys[curve]);
+QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(c_keys[curve]);
 if (c)
 	c->setData(X, X, it);
 
@@ -4204,6 +4227,9 @@ void Graph::range(int index, double *start, double *end)
 int Graph::numPoints(int index, double start, double end)
 {
   QwtPlotCurve *c = curve(index);
+  if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
+	  return 0;
+
   int points=0;
   for (int i=0; i<c->dataSize(); i++)
     if (c->x(i) >= start && c->x(i) <= end)
@@ -4217,6 +4243,9 @@ int Graph::curveData(int index, double start, double end, double **x, double **y
   (*x) = new double[n];
   (*y) = new double[n];
   QwtPlotCurve *c = curve(index);
+  if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
+	  return 0;
+
   int i, j=0;
   for (i = 0; i < c->dataSize(); i++)
     if (c->x(i) >= start && c->x(i) <= end && j<n)
@@ -4235,6 +4264,9 @@ int Graph::sortedCurveData(int index, double start, double end, double **x, doub
   double *xtemp = vector(0, n-1);
   double *ytemp = vector(0, n-1);
   QwtPlotCurve *c = curve(index);
+  if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
+	  return 0;
+
   int i, j=0;
   for (i = 0; i < c->dataSize(); i++)
     if (c->x(i) >= start && c->x(i) <= end && j<n)
@@ -4433,7 +4465,7 @@ void Graph::addErrorBars(Table *w, const QString& yColName,
 QValueList<int> keys = d_plot->curveKeys();
 for (int i = 0; i<n_curves; i++ )
 	{
-	QwtPlotCurve *c = d_plot->curve(keys[i]);
+	QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(keys[i]);
 	if (c && c->title().text() == yColName && c_type[i] != ErrorBars)
 		{
 		QStringList lst = QStringList::split(",", associations[i], false);
@@ -4498,7 +4530,7 @@ for (i=0;i<n_curves;i++)
 	if (associations[i].contains(yColName) && c_type[i] != ErrorBars)
 		{
 		long curveID = c_keys[i];
-		QwtPlotCurve *c = d_plot->curve(curveID);
+		QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(curveID);
 		size=c->symbol().size();
 		}			
 	}
@@ -5354,7 +5386,7 @@ if (selectedMarker>=0)
 QPoint pos = d_plot->canvas()->mapFrom(d_plot, e->pos());
 int dist, point;
 const long curve = d_plot->closestCurve(pos.x(), pos.y(), dist, point);
-const QwtPlotCurve *c = d_plot->curve(curve);
+const QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(curve);
 
 if (c && dist < 5)//5 pixels tolerance
 	emit showCurveContextMenu(curve);
@@ -5385,6 +5417,18 @@ void Graph::zoom(bool on)
 {
 d_zoomer[0]->setEnabled(on);
 d_zoomer[1]->setEnabled(on);
+
+for (int i=0; i<n_curves; i++)
+	{
+	Spectrogram *sp = (Spectrogram *)this->curve(i);
+	if (sp && sp->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
+		{
+		if (sp->colorScaleAxis() == QwtPlot::xBottom || sp->colorScaleAxis() == QwtPlot::yLeft)
+			d_zoomer[0]->setEnabled(false);
+		else
+			d_zoomer[1]->setEnabled(false);
+		}
+	}
 
 QCursor cursor=QCursor (QPixmap(lens_xpm),-1,-1);
 if (on)
@@ -6381,7 +6425,10 @@ else
 	{
 	for (i=0; i<g->curves(); i++)
 		{
-		QwtPlotCurve *cv = (QwtPlotCurve *)g->curve(i);
+		QwtPlotItem *it = (QwtPlotItem *)g->curve(i);
+		if (it->rtti() == QwtPlotItem::Rtti_PlotCurve)
+		{
+		QwtPlotCurve *cv = (QwtPlotCurve *)it;
 		int n = cv->dataSize();
 		int style = g->c_type[i];
 		double *x = new double[n];
@@ -6431,10 +6478,8 @@ else
 		else
 			c = new QwtPlotCurve(cv->title());
 
-		int curveID = d_plot->insertCurve(c);
-
 		c_keys.resize(++n_curves);
-		c_keys[i] = curveID;
+		c_keys[i] = d_plot->insertCurve(c);
 
 		c_type.resize(n_curves);
 		c_type[i] = g->curveType(i);
@@ -6455,6 +6500,19 @@ else
 			c->setCurveAttribute(QwtPlotCurve::Inverted, true);	
 		
 		c->setAxis(cv->xAxis(), cv->yAxis());
+		}
+		else if (it->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
+			{
+			Spectrogram *sp = ((Spectrogram *)it)->copy();
+			c_keys.resize(++n_curves);
+			c_keys[i] = d_plot->insertCurve(sp);
+
+			sp->showColorScale(((Spectrogram *)it)->colorScaleAxis(), ((Spectrogram *)it)->hasColorScale());
+			sp->setColorBarWidth(((Spectrogram *)it)->colorBarWidth());
+
+			c_type.resize(n_curves);
+			c_type[i] = g->curveType(i);
+			}
 		}
 	}
 axesFormulas = g->axesFormulas;
@@ -6861,7 +6919,7 @@ symbolIndex = 0;
 for (int i=0; i<n_curves; i++)
 	{
 	const QwtPlotCurve *c = curve(i);
-	if (c)
+	if (c && c->rtti() == QwtPlotItem::Rtti_PlotCurve)
 		{
 		int index = ColorBox::colorIndex(c->pen().color());
 		if (index > colorIndex)
@@ -6887,10 +6945,52 @@ void Graph::deleteFitCurves()
 QValueList<int> keys = d_plot->curveKeys();
 for (int i=0; i<(int)keys.count(); i++)
 	{
-	QwtPlotCurve *c = d_plot->curve(keys[i]);
+	QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(keys[i]);
 	if (c && c->title().text().contains(tr("Fit")))
 		removeCurve(c->title().text());
 	}	
+}
+
+void Graph::plotSpectrogram(Matrix *m, CurveType type)
+{
+	if (type != GrayMap && type != ColorMap && type != ContourMap)
+		return;
+
+    Spectrogram *d_spectrogram = new Spectrogram(m);
+	if (type == GrayMap)
+		d_spectrogram->setGrayScale();
+	else if (type == ContourMap)
+		{
+		d_spectrogram->setDisplayMode(QwtPlotSpectrogram::ImageMode, false);
+		d_spectrogram->setDisplayMode(QwtPlotSpectrogram::ContourMode, true);
+		}
+	else if (type == ColorMap)
+		{
+		d_spectrogram->setDefaultColorMap();
+        d_spectrogram->setDisplayMode(QwtPlotSpectrogram::ContourMode, true);
+		}
+
+	c_keys.resize(++n_curves);
+	c_keys[n_curves-1] = d_plot->insertCurve(d_spectrogram);
+
+	c_type.resize(n_curves);
+    c_type[n_curves-1] = type;
+
+	associations << QString(m->name());
+
+    QwtScaleWidget *rightAxis = d_plot->axisWidget(QwtPlot::yRight);
+    rightAxis->setColorBarEnabled(type != ContourMap);
+    rightAxis->setColorMap(d_spectrogram->data().range(), d_spectrogram->colorMap());
+
+	d_plot->setAxisScale(QwtPlot::xBottom, m->xStart(), m->xEnd());
+	d_plot->setAxisScale(QwtPlot::yLeft, m->yStart(), m->yEnd());
+
+    d_plot->setAxisScale(QwtPlot::yRight, 
+        d_spectrogram->data().range().minValue(),
+        d_spectrogram->data().range().maxValue());
+    d_plot->enableAxis(QwtPlot::yRight, type != ContourMap);
+
+    d_plot->replot();
 }
 
 Graph::~Graph()
@@ -6900,3 +7000,6 @@ delete scalePicker;
 delete cp;
 delete d_plot;
 }
+
+
+

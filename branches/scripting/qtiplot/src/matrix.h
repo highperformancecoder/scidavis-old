@@ -4,6 +4,7 @@
 #include <qtable.h>
 #include "widget.h"
 #include "Scripting.h"
+#include <qwt_double_rect.h>
 
 class Matrix: public myWidget, public scripted
 {
@@ -81,7 +82,13 @@ public slots:
 	double xEnd(){return x_end;};
 	double yStart(){return y_start;};
 	double yEnd(){return y_end;};
+
+	//! Returns the bounding rect of the matrix coordinates
+	QwtDoubleRect boundingRect(){return QwtDoubleRect(x_start, y_start, x_end-x_start, y_end-y_start).normalized();};
 	void setCoordinates(double xs, double xe, double ys, double ye);
+
+	//! Min and max values of the matrix.
+	void range(double *min, double *max);
 
 	QTable* table(){return d_table;};
 

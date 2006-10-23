@@ -54,6 +54,7 @@
 #include "ScriptingLangDialog.h"
 #include "ScriptWindow.h"
 #include "TableStatistics.h"
+#include "Spectrogram.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -716,6 +717,11 @@ void ApplicationWindow::initMainMenu()
 
 	actionPlot3DBars->addTo(plot3DMenu);
 	actionPlot3DScatter->addTo(plot3DMenu);
+
+	plot3DMenu->insertSeparator();
+	actionColorMap->addTo(plot3DMenu);
+	actionContourMap->addTo(plot3DMenu);
+	actionGrayMap->addTo(plot3DMenu);
 
 	matrixMenu = new QPopupMenu(this);
 	matrixMenu->setFont(appFont);
@@ -1666,6 +1672,20 @@ for (QWidget *w = windows->first(); w; w = windows->next())
 	{
 	if (w->isA("Graph3D") && ((Graph3D*)w)->getMatrix() == m)
 		((Graph3D*)w)->clearData();
+	else if (w->isA("MultiLayer"))
+		{
+		QWidgetList *graphsList = ((MultiLayer*)w)->graphPtrs();
+		for (int j=0; j<(int)graphsList->count(); j++)
+			{
+			Graph* g = (Graph*)graphsList->at(j);
+			for (int i=0; i<g->curves(); i++)
+				{
+				Spectrogram *sp = (Spectrogram *)g->curve(i);
+				if (sp && sp->rtti() == QwtPlotItem::Rtti_PlotSpectrogram && sp->matrix() == m)
+					g->removeCurve(i);
+				}
+			}
+		}
 	}
 delete windows;
 QApplication::restoreOverrideCursor();
@@ -1673,7 +1693,8 @@ QApplication::restoreOverrideCursor();
 
 void ApplicationWindow::update3DMatrixPlots(QWidget *window)
 {
-if (!window)
+Matrix *m = (Matrix *)window;
+if (!m)
 	return;
 
 QApplication::setOverrideCursor(waitCursor);
@@ -1681,8 +1702,22 @@ QApplication::setOverrideCursor(waitCursor);
 QWidgetList *windows = windowsList();
 for (QWidget *w = windows->first(); w; w = windows->next())
 	{
-	if (w->isA("Graph3D") && ((Graph3D*)w)->getMatrix() == window)
-		((Graph3D*)w)->updateMatrixData((Matrix *)window);
+	if (w->isA("Graph3D") && ((Graph3D*)w)->getMatrix() == m)
+		((Graph3D*)w)->updateMatrixData(m);
+	else if (w->isA("MultiLayer"))
+		{
+		QWidgetList *graphsList = ((MultiLayer*)w)->graphPtrs();
+		for (int j=0; j<(int)graphsList->count(); j++)
+			{
+			Graph* g = (Graph*)graphsList->at(j);
+			for (int i=0; i<g->curves(); i++)
+				{
+				Spectrogram *sp = (Spectrogram *)g->curve(i);
+				if (sp && sp->rtti() == QwtPlotItem::Rtti_PlotSpectrogram && sp->matrix() == m)
+					sp->updateData(m);
+				}
+			}
+		}
 	}
 
 delete windows;
@@ -2757,12 +2792,8 @@ Matrix* ApplicationWindow::newMatrix(const QString& caption, int r, int c)
 Matrix* w = new Matrix(scriptEnv, r, c, "", ws,0,WDestructiveClose);
 initMatrix(w, caption);
 if (w->name() != caption)//the matrix was renamed
-	{
 	renamedTables << caption << w->name();
 
-	QMessageBox:: warning(this, tr("QtiPlot - Renamed Window"), 
-	tr("The matrix '%1' already exists. It has been renamed '%2'.").arg(caption).arg(w->name()));
-	}
 w->showNormal();	
 return w;
 }
@@ -5991,7 +6022,7 @@ if ( ws->activeWindow() && ws->activeWindow()->isA("Matrix"))
 	{
 	Matrix* w = (Matrix*)ws->activeWindow();
 
-	matrixSizeDialog* md= new matrixSizeDialog(this,"matrixDialog", false, WDestructiveClose);
+	matrixSizeDialog* md = new matrixSizeDialog(this,"matrixDialog", false, WDestructiveClose);
 	connect (md, SIGNAL(changeDimensions(int, int)), w, SLOT(setMatrixDimensions(int, int)));
 	connect (md, SIGNAL(changeCoordinates(double, double, double, double)), 
 			 w, SLOT(setCoordinates(double, double, double, double)));
@@ -6406,13 +6437,19 @@ activeGraph->removeCurve(activeGraph->curveIndex(curveKey));
 
 void ApplicationWindow::showCurveWorksheet(int curveKey)
 {
-const QwtPlotCurve *c = activeGraph->curve(activeGraph->curveIndex(curveKey));
+const QwtPlotItem *c = activeGraph->curve(activeGraph->curveIndex(curveKey));
 if (!c)
 	return;
 
 QString curveTitle = c->title().text();
 if (c->rtti() == FunctionCurve::RTTI)
 	activeGraph->createWorksheet(curveTitle);
+else if (c->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
+	{
+	Spectrogram *sp = (Spectrogram *)c;
+	if (sp->matrix())
+		sp->matrix()->showMaximized();
+	}
 else
 	showTable(curveTitle);
 }
@@ -6499,7 +6536,7 @@ if (plot->isEmpty())
 	}
 	
 Graph* g = (Graph*)plot->activeGraph();
-if (!g)
+if (!g || !g->validCurvesDataSize())
 	{
 	btnPointer->setOn(true);
 	return;
@@ -6547,7 +6584,7 @@ if (plot->isEmpty())
 	}
 	
 Graph* g = (Graph*)plot->activeGraph();
-if (!g)
+if (!g || !g->validCurvesDataSize())
 	return;
 
 if (g->isPiePlot())
@@ -6727,96 +6764,39 @@ fd->showNormal();
 fd->setActiveWindow();
 }
 
-void ApplicationWindow::lowPassFilterDialog()
+void ApplicationWindow::showFilterDialog(int filter)
 {
 if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
 	return;
 
 Graph* g = ((MultiLayer*)ws->activeWindow())->activeGraph();
-if ( g )
+if ( g && g->validCurvesDataSize())
 	{
-	if (!g->curves())
-		{
-		QMessageBox::warning(this, tr("QtiPlot - Warning"),
-				tr("There are no curves available on this plot!"));
-		return;
-		}
-
-	filterDialog *fd=new filterDialog(filterDialog::LowPass, this,"filterDialog",
-										TRUE,WStyle_Tool|WDestructiveClose);	
+	filterDialog *fd=new filterDialog(filter, this,"filterDialog", TRUE,WStyle_Tool|WDestructiveClose);	
 	fd->setGraph(g);
 	fd->show();
 	fd->setActiveWindow();
 	}
+}
+
+void ApplicationWindow::lowPassFilterDialog()
+{
+showFilterDialog(filterDialog::LowPass);
 }
 
 void ApplicationWindow::highPassFilterDialog()
 {
-if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
-	return;
-
-Graph* g = ((MultiLayer*)ws->activeWindow())->activeGraph();
-if ( g )
-	{
-	if (!g->curves())
-		{
-		QMessageBox::warning(this, tr("QtiPlot - Warning"),
-				tr("There are no curves available on this plot!"));
-		return;
-		}
-
-	filterDialog *fd=new filterDialog(filterDialog::HighPass, this,"filterDialog",
-										TRUE,WStyle_Tool|WDestructiveClose);	
-	fd->setGraph(g);
-	fd->show();
-	fd->setActiveWindow();
-	}
+showFilterDialog(filterDialog::HighPass);
 }
 
 void ApplicationWindow::bandPassFilterDialog()
 {
-if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
-	return;
-
-Graph* g = ((MultiLayer*)ws->activeWindow())->activeGraph();
-if ( g )
-	{
-	if (!g->curves())
-		{
-		QMessageBox::warning(this, tr("QtiPlot - Warning"),
-				tr("There are no curves available on this plot!"));
-		return;
-		}
-
-	filterDialog *fd=new filterDialog(filterDialog::BandPass, this,"filterDialog",
-										TRUE,WStyle_Tool|WDestructiveClose);	
-	fd->setGraph(g);
-	fd->show();
-	fd->setActiveWindow();
-	}
+showFilterDialog(filterDialog::BandPass);
 }
 
 void ApplicationWindow::bandBlockFilterDialog()
 {
-if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
-	return;
-
-Graph* g = ((MultiLayer*)ws->activeWindow())->activeGraph();
-if ( g )
-	{
-	if (!g->curves())
-		{
-		QMessageBox::warning(this, tr("QtiPlot - Warning"),
-				tr("There are no curves available on this plot!"));
-		return;
-		}
-
-	filterDialog *fd=new filterDialog(filterDialog::BandBlock, this,"filterDialog",
-										TRUE,WStyle_Tool|WDestructiveClose);	
-	fd->setGraph(g);
-	fd->show();
-	fd->setActiveWindow();
-	}
+showFilterDialog(filterDialog::BandBlock);
 }
 
 void ApplicationWindow::showFFTDialog()
@@ -6829,15 +6809,8 @@ FFTDialog *sd = 0;
 if (w->isA("MultiLayer"))
 	{
 	Graph* g = ((MultiLayer*)w)->activeGraph();
-	if ( g )
+	if ( g && g->validCurvesDataSize())
 		{
-		if (!g->curves())
-			{
-			QMessageBox::warning(this, tr("QtiPlot - Warning"),
-				tr("There are no curves available on this plot!"));
-			return;
-			}
-
 		sd=new FFTDialog(FFTDialog::onGraph, this,"smoothDialog",TRUE,WStyle_Tool|WDestructiveClose);	
 		sd->setGraph(g);
 		}
@@ -7104,7 +7077,7 @@ if ((Graph*)plot->activeGraph()->isPiePlot())
 QWidgetList *graphsList=plot->graphPtrs();
 for (Graph* g = (Graph*)graphsList->first(); g; g = (Graph*)graphsList->next())
 	{
-	if (!g->isPiePlot())
+	if (!g->isPiePlot() && g->validCurvesDataSize())
 		g->enableCursor(true);
 	}
 
@@ -9113,8 +9086,7 @@ if (fd)
 
 void ApplicationWindow::newFunctionPlot(int type,QStringList &formulas, const QString& var, QValueList<double> &ranges, int points)
 {
-QString label = generateUniqueName(tr("Graph"));
-MultiLayer* plot = multilayerPlot(label);
+MultiLayer* plot = multilayerPlot(generateUniqueName(tr("Graph")));
 Graph* g=plot->addLayer();
 customGraph(g);
 g->addFunctionCurve(type,formulas, var,ranges,points);
@@ -11308,6 +11280,15 @@ void ApplicationWindow::createActions()
   actionPlot3DWireSurface = new QAction(QPixmap(grid_poly_xpm), tr("3D Wire &Surface"), QString::null, this);
   connect(actionPlot3DWireSurface, SIGNAL(activated()), this, SLOT(plot3DWireSurface()));
 
+  actionColorMap = new QAction(QPixmap(color_map_xpm), tr("Contour - &Color Fill"), QString::null, this);
+  connect(actionColorMap, SIGNAL(activated()), this, SLOT(plotColorMap()));
+
+  actionContourMap = new QAction(QPixmap(contour_map_xpm), tr("Contour &Lines"), QString::null, this);
+  connect(actionContourMap, SIGNAL(activated()), this, SLOT(plotContourMap()));
+
+  actionGrayMap = new QAction(QPixmap(gray_map_xpm), tr("&Gray Scale Map"), QString::null, this);
+  connect(actionGrayMap, SIGNAL(activated()), this, SLOT(plotGrayMap()));
+
   actionSortTable = new QAction(tr("Sort Ta&ble"), QString::null, this);
   connect(actionSortTable, SIGNAL(activated()), this, SLOT(sortActiveTable()));
 
@@ -11627,6 +11608,15 @@ void ApplicationWindow::translateActionsStrings()
   actionPlot3DTrajectory->setMenuText(tr("&Trajectory"));
   actionPlot3DTrajectory->setToolTip(tr("Plot 3D Trajectory"));
 
+  actionColorMap->setMenuText(tr("Contour + &Color Fill"));
+  actionColorMap->setToolTip(tr("Contour Lines + Color Fill"));
+
+  actionContourMap->setMenuText(tr("Contour &Lines"));
+  actionContourMap->setToolTip(tr("Contour Lines"));
+
+  actionGrayMap->setMenuText(tr("&Gray Scale Map"));
+  actionGrayMap->setToolTip(tr("Gray Scale Map"));
+
   actionShowColStatistics->setMenuText(tr("Statistics on &Columns"));
   actionShowColStatistics->setToolTip(tr("Selected columns statistics"));
 
@@ -11935,6 +11925,41 @@ emit modified();
 QApplication::restoreOverrideCursor();
 }
 
+MultiLayer* ApplicationWindow::plotGrayMap()
+{
+return plotSpectrogram(Graph::GrayMap);
+}
+
+MultiLayer* ApplicationWindow::plotContourMap()
+{
+return plotSpectrogram(Graph::ContourMap);
+}
+
+MultiLayer* ApplicationWindow::plotColorMap()
+{
+return plotSpectrogram(Graph::ColorMap);
+}
+
+MultiLayer* ApplicationWindow::plotSpectrogram(Graph::CurveType type)
+{
+if (!ws->activeWindow()|| !ws->activeWindow()->isA("Matrix"))
+	return 0;
+
+QApplication::setOverrideCursor(waitCursor);
+Matrix *m = (Matrix*)ws->activeWindow();
+
+MultiLayer* g = multilayerPlot(generateUniqueName(tr("Graph")));
+Graph* plot = g->addLayer();
+customGraph(plot);
+
+plot->plotSpectrogram(m, type);
+g->showNormal();
+
+emit modified();
+QApplication::restoreOverrideCursor();
+return g;
+}
+
 ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
 {
 QApplication::setOverrideCursor(waitCursor);
@@ -12022,7 +12047,7 @@ if (g->isPiePlot())
 	btnPointer->setOn(true);
 	return;
 	}
-else
+else if (g->validCurvesDataSize())
 	{	
 	activeGraph=g;
 	btnPointer->setOn(true);
@@ -12060,7 +12085,7 @@ if (g->isPiePlot())
 	btnPointer->setOn(true);
 	return;
 	}
-else
+else if (g->validCurvesDataSize())
 	{	
 	activeGraph=g;
 	btnPointer->setOn(true);

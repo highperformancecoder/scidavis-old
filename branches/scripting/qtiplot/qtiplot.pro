@@ -49,7 +49,7 @@ win32:DEFINES  += QT_DLL QT_THREAD_SUPPORT GSL_DLL
 win32:INCLUDEPATH += ../3rdparty/qwtplot3d/include
 win32:INCLUDEPATH += ../3rdparty/zlib123/include
 #win32:INCLUDEPATH += ../3rdparty/GSL/include
-win32:INCLUDEPATH += ../3rdparty/WinGsl
+win32:INCLUDEPATH += C:/WinGsl
 
 win32:LIBS        += ../3rdparty/qwtplot3d/lib/qwtplot3d.lib
 win32:LIBS        += ../3rdparty/qwt/lib/qwt500.lib  
@@ -58,7 +58,7 @@ win32:LIBS		  += ../3rdparty/liborigin/liborigin.lib
  
 #win32:LIBS        += ../3rdparty/GSL/lib/libgsl.a
 #win32:LIBS        += ../3rdparty/GSL/lib/libgslcblas.a
-win32:LIBS        += ../3rdparty/WinGsl/Lib/WinGsl.lib
+win32:LIBS        += C:/WinGsl/Lib/WinGsl.lib
 
 win32:RC_FILE     = src/iPlot.rc
 
@@ -142,7 +142,8 @@ HEADERS  += src/application.h \
 	 src/customEvents.h\
 	 src/ScriptingLangDialog.h\
 	 src/ScriptWindow.h\
-	 src/TableStatistics.h
+	 src/TableStatistics.h\
+	 src/Spectrogram.h
      
 SOURCES  += src/application.cpp \
      src/graph.cpp \
@@ -222,7 +223,8 @@ SOURCES  += src/application.cpp \
 	 src/Scripting.cpp\
 	 src/ScriptingLangDialog.cpp\
 	 src/ScriptWindow.cpp\
-	 src/TableStatistics.cpp
+	 src/TableStatistics.cpp\
+	 src/Spectrogram.cpp
 
 #Compression (zlib123)
 SOURCES+=../3rdparty/zlib123/minigzip.c

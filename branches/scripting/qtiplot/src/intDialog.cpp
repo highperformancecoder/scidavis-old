@@ -99,7 +99,7 @@ if (curvesList.contains(curve) <= 0)
 
 int index=boxName->currentItem();
 QwtPlotCurve *c = graph->curve(index);
-if (!c || c->dataSize()<2)
+if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve || c->dataSize()<2)
 	{
 	QString s= tr("You cannot fit index:");
 	s+="<p><b>'"+boxName->currentText()+"'</b><p>";
@@ -269,7 +269,7 @@ else
 void intDialog::changeCurve(int index)
 {
 QwtPlotCurve *c = graph->curve(index);
-while(c->dataSize()<2)
+while(c && c->rtti() == QwtPlotItem::Rtti_PlotCurve && c->dataSize()<2)
 	{
 	index++;
 	c = graph->curve(index);

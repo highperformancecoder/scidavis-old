@@ -240,7 +240,7 @@ for (int i=0;i<(int)titles.count();i++)
 		else
 			{
 			const QwtPlotCurve *curve = g->curve(cv);
-			if (curve)
+			if (curve && curve->rtti() == QwtPlotItem::Rtti_PlotCurve)
 				{
 				const QwtSymbol symb=curve->symbol(); 
 				const QBrush br=curve->brush();
@@ -386,7 +386,7 @@ for (int i=0;i<(int)titles.count();i++)
 		if (cv < 0)
 			continue;
 
-		const QwtPlotCurve *c = d_plot->curve(cvs[cv]);
+		const QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(cvs[cv]);
 		if (c)
 			{
 			int l=c->symbol().size().width();

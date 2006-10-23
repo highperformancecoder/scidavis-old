@@ -326,3 +326,5 @@ QSize ColorButton::sizeHint () const
 {
 return QSize(3*btn_size, btn_size);
 }
+
+

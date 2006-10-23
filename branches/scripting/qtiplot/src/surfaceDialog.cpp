@@ -17,10 +17,6 @@ sDialog::sDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
     if ( !name )
 	setName( "sDialog" );
 	setCaption(tr("QtiPlot - Define surface plot"));
-    setMinimumSize( QSize( 310, 140 ) );
-	setMaximumSize( QSize( 310, 140 ) );
-    setMouseTracking( TRUE );
-    setSizeGripEnabled( FALSE );
 	
 	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),this,"GroupBox1" );
 	GroupBox1->setFlat (TRUE);

@@ -9,6 +9,7 @@ class QVBoxLayout;
 class QHBoxLayout; 
 class QGridLayout; 
 class QCheckBox;
+class QRadioButton;
 class QComboBox;
 class QListBox;
 class QListBoxItem;
@@ -69,7 +70,7 @@ public:
     PatternBox *boxPattern;
 	QTabWidget* privateTabWidget;
 
-	QWidget* errorsPage;
+	QWidget *errorsPage, *spectrogramPage;
 	QButtonGroup* GroupBox0;
 	QButtonGroup* GroupBox1;
 	QButtonGroup* GroupBox2;
@@ -78,7 +79,7 @@ public:
     QCheckBox* plusBox;
     QCheckBox* minusBox;
     QCheckBox* xBox;
-    ColorButton* colorBox;
+    ColorButton *colorBox, *levelsColorBox;
 	ColorBox* vectColorBox;
     QComboBox* widthBox;
     QComboBox* capBox;
@@ -104,7 +105,11 @@ public:
 	QLabel *boxRangeLabel, *whiskerCntLabel, *boxCntLabel;
 	QwtCounter *whiskerCnt, *boxCnt;
 	QButtonGroup *GroupBoxVectEnd;
-	QComboBox *vectPosBox, *boxXAxis, *boxYAxis;
+	QComboBox *vectPosBox, *boxXAxis, *boxYAxis, *colorScaleBox, *boxContourStyle;
+	QSpinBox *levelsBox, *contourWidthBox, *colorScaleWidthBox;
+	QButtonGroup *levelsGroupBox, *axisScaleBox, *imageGroupBox;
+	QGroupBox *defaultPenBox;
+	QRadioButton *defaultScaleBox, *grayScaleBox, *customScaleBox, *defaultContourBox, *autoContourBox;  
 
 public slots:
 	void showStatistics();
@@ -118,6 +123,7 @@ public slots:
 	void initVectPage();
 	void initBoxPage();
 	void initPercentilePage();
+	void initSpectrogramPage();
 
 	void customVectorsPage(bool angleMag);
 
@@ -163,6 +169,10 @@ public slots:
 	void setBoxType(int index);
 	void setBoxRangeType(int index);
 	void setWhiskersRange(int index);
+
+	//spectrograms
+	void pickContourLinesColor();
+	void showDefaultContourLinesBox(bool show);
 	
 protected:
 	Graph *graph;

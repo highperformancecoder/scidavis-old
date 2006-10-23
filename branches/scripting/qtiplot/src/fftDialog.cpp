@@ -190,7 +190,7 @@ void FFTDialog::activateCurve(int index)
 if (graph)
 	{
 	QwtPlotCurve *c = graph->curve(index);
-	if (!c)
+	if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
 		return;
 
 	boxSampling->setText(QString::number(c->x(1) - c->x(0)));

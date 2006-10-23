@@ -114,7 +114,7 @@ void smoothCurveDialog::activateCurve(int index)
 if (smooth_type == Average)
 	{
 	QwtPlotCurve *c = graph->curve(index);
-	if (!c)
+	if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
 		return;
 
 	boxPointsLeft->setMaxValue(c->dataSize()/2);

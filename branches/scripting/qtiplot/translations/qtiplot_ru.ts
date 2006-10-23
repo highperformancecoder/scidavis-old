@@ -2434,7 +2434,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you run the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation>Невозможно сделмть резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы проигнорируете эту ситуацию, то вы рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
+        <translation>Невозможно создать резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы проигнорируете эту ситуацию, то вы рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
@@ -3008,7 +3008,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - Python Script Window</source>
-        <translation>QtiPlot - Командное Окно Python</translation>
+        <translation type="obsolete">QtiPlot - Командное Окно Python</translation>
     </message>
     <message>
         <source>S&amp;cripting</source>
@@ -3149,7 +3149,7 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <source>&amp;Python Script Window</source>
-        <translation>Окно &amp;Python Скрипта</translation>
+        <translation type="obsolete">Окно &amp;Python Скрипта</translation>
     </message>
     <message>
         <source>F3</source>
@@ -3178,6 +3178,26 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <source>&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot is open-source software and its development required hundreds of hours of work.&lt;br&gt;&lt;br&gt;If you like it, you&apos;re using it in your work and you would like to see it constantly improved,&lt;br&gt; please support its author by making a donation.&lt;br&gt;&lt;br&gt; Would you like to make a donation for QtiPlot now?&lt;/b&gt;&lt;/font&gt;</source>
         <translation>&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot является программным продуктом с открытым кодом и на его разработку требуются сотени часов.&lt;br&gt;&lt;br&gt;Если Вам понравилась эта программа, вы используете её в своей работе и Вам хотелось бы видет её постоянно обнавляющейся,&lt;br&gt; пожалуйста поддержите её автора сделав пожертвование.&lt;br&gt;&lt;br&gt; Хотите ли вы сделать пожертвование?&lt;/b&gt;&lt;/font&gt;</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Script Window</source>
+        <translation>QtiPlot - Скрипт-Окно</translation>
+    </message>
+    <message>
+        <source>&amp;Horizontal Steps</source>
+        <translation>&amp;Горизонтальных Шагов</translation>
+    </message>
+    <message>
+        <source>Automatic Layout</source>
+        <translation>Авторазмещение</translation>
+    </message>
+    <message>
+        <source>Script Window</source>
+        <translation>Скрипт-Окно</translation>
+    </message>
+    <message>
+        <source>Animation</source>
+        <translation>Анимация</translation>
     </message>
 </context>
 <context>
@@ -3473,6 +3493,14 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <source> of </source>
         <translation></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation>QtiPlot - Ошибка</translation>
+    </message>
+    <message>
+        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
+        <translation>Для выполнения этой операции необходимо как минимум %1 точки(ек)! Операция прервана!</translation>
     </message>
 </context>
 <context>
@@ -4076,7 +4104,7 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <source>The curve %1 doesn&apos;t exist! Operation aborted!</source>
-        <translation>Кривая %1 не существует! Операция прервана!</translation>
+        <translation type="obsolete">Кривая %1 не существует! Операция прервана!</translation>
     </message>
 </context>
 <context>
@@ -4264,7 +4292,7 @@ Do you want to insert cells?</source>
     </message>
     <message>
         <source>QtiPlot - Guess best origin for the new layer?</source>
-        <translation>QtiPlot - Определить наилучшее начало для нового слоя?</translation>
+        <translation type="obsolete">QtiPlot - Определить наилучшее начало для нового слоя?</translation>
     </message>
     <message>
         <source>Do you want QtiPlot to rearrange the remaining layers?</source>
@@ -4293,6 +4321,10 @@ Do you want to insert cells?</source>
     <message>
         <source>enter your text here</source>
         <translation>вводите свой текст здесь</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Guess best layout?</source>
+        <translation>QtiPlot - Подобрать наилучшее расположение?</translation>
     </message>
 </context>
 <context>
@@ -4382,7 +4414,11 @@ Do you want to insert cells?</source>
     </message>
     <message>
         <source>You must provide a list containing at least 2 parameters for this type of fit. Operation aborted!</source>
-        <translation>Для данного типа приближения вы должны предусмотреть список, как минимум, из 2 параметров. Операция прервана!</translation>
+        <translation type="obsolete">Для данного типа приближения вы должны предусмотреть список, как минимум, из 2 параметров. Операция прервана!</translation>
+    </message>
+    <message>
+        <source>You must provide a list containing at least one parameter for this type of fit. Operation aborted!</source>
+        <translation>Для данного типа приближения необходим список содержащий как минимум один параметр. Операция прервана!</translation>
     </message>
 </context>
 <context>
@@ -4580,7 +4616,7 @@ Do you want to overwrite it?</source>
     <name>ScriptWindow</name>
     <message>
         <source>QtiPlot - Python Script Window</source>
-        <translation>QtiPlot - Командное Окно Python</translation>
+        <translation type="obsolete">QtiPlot - Командное Окно Python</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -4709,6 +4745,10 @@ Do you want to overwrite it?</source>
     <message>
         <source>&amp;Evaluate Expression</source>
         <translation>&amp;Вычислить Выражение</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Script Window</source>
+        <translation>QtiPlot - Скрипт-Окно</translation>
     </message>
 </context>
 <context>
@@ -4973,7 +5013,7 @@ Do you want to insert cells?</source>
     </message>
     <message>
         <source>Standard Dev</source>
-        <translation>Стандартное Отклонение</translation>
+        <translation type="obsolete">Стандартное Отклонение</translation>
     </message>
     <message>
         <source>Variance</source>
@@ -5010,6 +5050,18 @@ Do you want to insert cells?</source>
     <message>
         <source>iMin</source>
         <translation>iMin</translation>
+    </message>
+    <message>
+        <source>RowStats</source>
+        <translation>СтатСтрок</translation>
+    </message>
+    <message>
+        <source>StandardDev</source>
+        <translation>СтандОткл</translation>
+    </message>
+    <message>
+        <source>ColStats</source>
+        <translation>СтатКол</translation>
     </message>
 </context>
 <context>
@@ -5589,6 +5641,22 @@ Do you want to insert cells?</source>
         <source>millisec.</source>
         <translation>милисек.</translation>
     </message>
+    <message>
+        <source>Bottom</source>
+        <translation>По нижнему краю</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation>По левому краю</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation>По верхнему краю</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation>По правому краю</translation>
+    </message>
 </context>
 <context>
     <name>configDialog</name>
@@ -6052,6 +6120,14 @@ Do you want to insert cells?</source>
         <source>Scale Errors with sqrt(Chi^2/doF)</source>
         <translation>Масштабировать Ошибки с коэффициентом sqrt(Chi^2/doF)</translation>
     </message>
+    <message>
+        <source> Horizontal steps</source>
+        <translation> Горизонтальных Шагов</translation>
+    </message>
+    <message>
+        <source>O&amp;rthogonal</source>
+        <translation>О&amp;ртогональный</translation>
+    </message>
 </context>
 <context>
     <name>curvesDialog</name>
@@ -6126,6 +6202,10 @@ Do you want to insert cells?</source>
     <message>
         <source>&amp;Plot</source>
         <translation>&amp;График</translation>
+    </message>
+    <message>
+        <source> Horizontal steps</source>
+        <translation> Горизонтальных Шагов</translation>
     </message>
 </context>
 <context>
@@ -7393,6 +7473,14 @@ The limits must be within the range of x; If you do not know the maximum (minimu
         <source>Please enter x limits that satisfy: from &lt; to!</source>
         <translation>Пожалуйста введите пределы изменения x, удовлетворяющие соотношению: от &lt; до!</translation>
     </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation>QtiPlot - Ошибка</translation>
+    </message>
+    <message>
+        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
+        <translation>Для выполнения этой операции необходимо как минимум %1 точки(ек)! Операция прервана!</translation>
+    </message>
 </context>
 <context>
     <name>layerDialog</name>
@@ -7857,19 +7945,27 @@ The limits must be within the range of x; If you do not know the maximum (minimu
     </message>
     <message>
         <source>You cannot use imbricated columns!</source>
-        <translation>Вы не можете использовать накладывающиеся колонки!</translation>
+        <translation type="obsolete">Вы не можете использовать накладывающиеся колонки!</translation>
     </message>
     <message>
         <source>You cannot use cells recursively!</source>
-        <translation>Вы не можете использовать ячейки рекурсивно!</translation>
+        <translation type="obsolete">Вы не можете использовать ячейки рекурсивно!</translation>
     </message>
     <message>
         <source>Too many &apos;=&apos; in one line.</source>
-        <translation>Слишком много &apos;=&apos; на одной строке.</translation>
+        <translation type="obsolete">Слишком много &apos;=&apos; на одной строке.</translation>
     </message>
     <message>
         <source>Syntax error: &apos;=&apos; without variable name.</source>
-        <translation>Синтаксическая ошибка: &apos;=&apos; без имени переменной.</translation>
+        <translation type="obsolete">Синтаксическая ошибка: &apos;=&apos; без имени переменной.</translation>
+    </message>
+    <message>
+        <source>col() works only on tables!</source>
+        <translation>col() работает только с таблицами!</translation>
+    </message>
+    <message>
+        <source>cell() works only on matrices!</source>
+        <translation>cell() работает только с матрицами!</translation>
     </message>
 </context>
 <context>
@@ -8284,6 +8380,14 @@ The limits must be within the range of x; If you do not know the maximum (minimu
         <source>Show Legend</source>
         <translation type="obsolete">Отобразить Условное обозначение</translation>
     </message>
+    <message>
+        <source>Color Ma&amp;p</source>
+        <translation>Цветовая &amp;Карта</translation>
+    </message>
+    <message>
+        <source>Colormap files</source>
+        <translation>Файлы цветовой карты</translation>
+    </message>
 </context>
 <context>
     <name>plotDialog</name>
@@ -8341,7 +8445,7 @@ The limits must be within the range of x; If you do not know the maximum (minimu
     </message>
     <message>
         <source>Steps</source>
-        <translation>Ступентки</translation>
+        <translation type="obsolete">Ступентки</translation>
     </message>
     <message>
         <source>Dots</source>
@@ -8758,6 +8862,46 @@ The limits must be within the range of x; If you do not know the maximum (minimu
     <message>
         <source>Magnitude</source>
         <translation>Величина</translation>
+    </message>
+    <message>
+        <source>Attach curve to: </source>
+        <translation>Прикрепить кривую к: </translation>
+    </message>
+    <message>
+        <source>x Axis</source>
+        <translation>Ось x</translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation>По нижнему краю</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation>По верхнему краю</translation>
+    </message>
+    <message>
+        <source>y Axis</source>
+        <translation>Ось y</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation>По левому краю</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation>По правому краю</translation>
+    </message>
+    <message>
+        <source>Axes</source>
+        <translation>Оси</translation>
+    </message>
+    <message>
+        <source>Horizontal Steps</source>
+        <translation> Горизонтальных Шагов</translation>
+    </message>
+    <message>
+        <source>Vertical Steps</source>
+        <translation>Вертикальные ступеньки</translation>
     </message>
 </context>
 <context>

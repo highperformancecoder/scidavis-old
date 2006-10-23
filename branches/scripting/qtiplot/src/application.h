@@ -144,6 +144,12 @@ public slots:
 	void addLayer();
 	void deleteLayer();
 
+	//! Creates a new spectrogram graph
+	MultiLayer* plotSpectrogram(Graph::CurveType type);
+	MultiLayer* plotGrayMap();
+	MultiLayer* plotContourMap();
+	MultiLayer* plotColorMap();
+
 	//! Rearrange the layersin order to fit to the size of the plot window
 	void autoArrangeLayers();
 	void initMultilayerPlot(MultiLayer* g, const QString& name);
@@ -180,7 +186,7 @@ public slots:
 	void newSurfacePlot();
 	void editSurfacePlot();
 	void remove3DMatrixPlots(Matrix *m);
-	void update3DMatrixPlots(QWidget *w);
+	void update3DMatrixPlots(QWidget *window);
 	void add3DData();
 	void change3DData();
 	void change3DData(const QString& colName);
@@ -561,6 +567,7 @@ public slots:
 	void showSmoothSavGolDialog();
 	void showSmoothFFTDialog();
 	void showSmoothAverageDialog();
+	void showFilterDialog(int filter);
 	void lowPassFilterDialog();
 	void highPassFilterDialog();
 	void bandPassFilterDialog();
@@ -885,6 +892,7 @@ public:
 	QAction *actionMatrixDeterminant, *actionSetMatrixProperties;
 	QAction *actionSetMatrixDimensions, *actionConvertMatrix, *actionSetMatrixValues, *actionTransposeMatrix, *actionInvertMatrix;
 	QAction *actionPlot3DWireFrame, *actionPlot3DHiddenLine, *actionPlot3DPolygons, *actionPlot3DWireSurface;
+	QAction *actionColorMap, *actionContourMap, *actionGrayMap;
 	QAction *actionDeleteFitTables, *actionShowGridDialog, *actionTimeStamp;
 	QAction *actionSmoothSavGol, *actionSmoothFFT, *actionSmoothAverage, *actionFFT;
 	QAction *actionLowPassFilter, *actionHighPassFilter, *actionBandPassFilter, *actionBandBlockFilter;

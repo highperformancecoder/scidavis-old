@@ -401,7 +401,7 @@ gsl_histogram_free (h);
 void Graph::fft(long curveKey, bool forward, double sampling, 
 				bool normalizeAmp, bool order)
 {
-QwtPlotCurve *curve=d_plot->curve(curveKey);
+QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(curveKey);
 if (!curve)
 	return;
 
@@ -1003,8 +1003,8 @@ updatePlot();
 
 void Graph::smoothSavGol(long curveKey, int order, int nl, int nr, int colIndex)
 {
-QwtPlotCurve *curve=d_plot->curve(curveKey);
-if (!curve)
+QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(curveKey);
+if (!curve || curve->rtti() != QwtPlotItem::Rtti_PlotCurve)
 	return;
 
 QApplication::setOverrideCursor(waitCursor);
@@ -1065,8 +1065,8 @@ QApplication::restoreOverrideCursor();
 
 void Graph::smoothFFT(long curveKey, int points, int colIndex)
 {
-QwtPlotCurve *curve=d_plot->curve(curveKey);
-if (!curve)
+QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(curveKey);
+if (!curve || curve->rtti() != QwtPlotItem::Rtti_PlotCurve)
 	return;
 
 QApplication::setOverrideCursor(waitCursor);
@@ -1106,8 +1106,8 @@ QApplication::restoreOverrideCursor();
 
 void Graph::smoothAverage(long curveKey, int points, int colIndex)
 {
-QwtPlotCurve *curve=d_plot->curve(curveKey);
-if (!curve)
+QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(curveKey);
+if (!curve || curve->rtti() != QwtPlotItem::Rtti_PlotCurve)
 	return;
 
 QApplication::setOverrideCursor(waitCursor);
@@ -1161,8 +1161,8 @@ QApplication::restoreOverrideCursor();
 
 void Graph::filterFFT(long curveKey, int filter_type, double lf, double hf, bool DCOffset, int colIndex)
 {
-QwtPlotCurve *curve=d_plot->curve(curveKey);
-if (!curve)
+QwtPlotCurve *curve = (QwtPlotCurve *)d_plot->curve(curveKey);
+if (!curve || curve->rtti() != QwtPlotItem::Rtti_PlotCurve)
 	return;
 
 QApplication::setOverrideCursor(waitCursor);
@@ -1249,19 +1249,14 @@ if (!n_curves)
 	}
 else 
 	{
-	int check=0;
-	QwtPlotCurve *c = curve(check);
-	while(c && c->dataSize() < 2)
+	for (int i=0; i < n_curves; i++)
 		{
-		if(check==n_curves)
-			{
-			QMessageBox::warning(this, tr("QtiPlot - Error"),
-					tr("There are no curves with more than two points on this plot. Operation aborted!"));
-			return false;
-			}
-		check++;
-		c = curve(check);
+		QwtPlotCurve *c = curve(i);
+		if(c && c->rtti() == QwtPlotItem::Rtti_PlotCurve && c->dataSize() > 2)
+			return true;
 		}
+	QMessageBox::warning(this, tr("QtiPlot - Error"),
+	tr("There are no curves with more than two points on this plot. Operation aborted!"));
+	return false;
 	}
-return true;
 }
