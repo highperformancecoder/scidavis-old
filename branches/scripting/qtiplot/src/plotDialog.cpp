@@ -13,6 +13,7 @@
 #include "BoxCurve.h"
 #include "FunctionCurve.h"
 #include "Spectrogram.h"
+#include "ColorMapEditor.h"
 
 #include <qaccel.h>
 #include <qcheckbox.h>
@@ -144,8 +145,14 @@ if (!c)
 
 if (c->rtti() == FunctionCurve::RTTI)
 	app->showFunctionDialog(graph, curveIndex);
-else
+else if (c->rtti() == QwtPlotItem::Rtti_PlotCurve)
 	app->showPlotAssociations(curveIndex);
+else if (c->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
+	{
+	Spectrogram *sp = (Spectrogram *)c;
+	if (sp->matrix())
+		sp->matrix()->showMaximized();
+	}
 close();
 }
 
@@ -471,13 +478,24 @@ void plotDialog::initSpectrogramPage()
 {	
 spectrogramPage = new QWidget( privateTabWidget);
 
-imageGroupBox = new QButtonGroup(1, QGroupBox::Horizontal, tr( "Image" ), spectrogramPage);
+imageGroupBox = new QButtonGroup(2, QGroupBox::Horizontal, tr( "Image" ), spectrogramPage);
 imageGroupBox->setCheckable (true);
-imageGroupBox->setRadioButtonExclusive(true);
 
-grayScaleBox = new QRadioButton(tr("&Gray Scale"), imageGroupBox);
-defaultScaleBox = new QRadioButton(tr("&Default Color Map"), imageGroupBox);
-customScaleBox = new QRadioButton(tr("&Custom Color Map"), imageGroupBox);
+QButtonGroup *vb = new QButtonGroup(1, QGroupBox::Horizontal, imageGroupBox);
+vb->setRadioButtonExclusive(true);
+vb->setFlat(true);
+vb->setLineWidth(0);
+
+grayScaleBox = new QRadioButton(tr("&Gray Scale"), vb);
+connect(grayScaleBox, SIGNAL(toggled(bool)), this, SLOT(showColorMapEditor(bool)));
+
+defaultScaleBox = new QRadioButton(tr("&Default Colors"), vb);
+connect(defaultScaleBox, SIGNAL(toggled(bool)), this, SLOT(showColorMapEditor(bool)));
+
+customScaleBox = new QRadioButton(tr("Custom Co&lors"), vb);
+connect(customScaleBox, SIGNAL(toggled(bool)), this, SLOT(showColorMapEditor(bool)));
+
+colorMapEditor = new ColorMapEditor(imageGroupBox);
 
 levelsGroupBox = new QButtonGroup(2, QGroupBox::Horizontal, tr( "Contour Lines" ), spectrogramPage);
 levelsGroupBox->setCheckable (true);
@@ -765,7 +783,7 @@ if (!c)
 
 if (c->rtti() == FunctionCurve::RTTI)
 	contextMenu.insertItem(tr("&Edit..."), this, SLOT(editFunctionCurve()));
-else
+else if (c->rtti() == QwtPlotItem::Rtti_PlotCurve)
 	contextMenu.insertItem(tr("&Plot Associations..."), this, SLOT(showPlotAssociations()));
 
 contextMenu.exec(point);
@@ -1034,6 +1052,11 @@ if (size>0)
 		imageGroupBox->setChecked(sp->testDisplayMode(QwtPlotSpectrogram::ImageMode));
 		grayScaleBox->setChecked(sp->colorMapPolicy() == Spectrogram::GrayScale);
 		defaultScaleBox->setChecked(sp->colorMapPolicy() == Spectrogram::Default);
+		customScaleBox->setChecked(sp->colorMapPolicy() == Spectrogram::Custom);
+
+		colorMapEditor->setRange(sp->data().range().minValue(), 
+								 sp->data().range().maxValue());
+		colorMapEditor->setColorMap((const QwtLinearColorMap &)sp->colorMap());
 
 		levelsGroupBox->setChecked(sp->testDisplayMode(QwtPlotSpectrogram::ContourMode));
 		levelsBox->setValue(sp->levels());
@@ -1043,6 +1066,7 @@ if (size>0)
 
 		levelsColorBox->setColor(sp->defaultContourPen().color());
 		contourWidthBox->setValue(sp->defaultContourPen().width());
+		boxContourStyle->setCurrentItem(sp->defaultContourPen().style() - 1);
 
 		axisScaleBox->setChecked(sp->hasColorScale());
 		colorScaleBox->setCurrentItem((int)sp->colorScaleAxis());
@@ -1234,9 +1258,17 @@ else if (privateTabWidget->currentPage() == spectrogramPage)
 	sp->setDisplayMode(QwtPlotSpectrogram::ImageMode, imageGroupBox->isChecked());
 
 	if (grayScaleBox->isChecked())
+		{
 		sp->setGrayScale();
-	else
+		colorMapEditor->setColorMap(QwtLinearColorMap(Qt::black, Qt::white));
+		}
+	else if (defaultScaleBox->isChecked())
+		{
 		sp->setDefaultColorMap();
+		colorMapEditor->setColorMap(Spectrogram::defaultColorMap());
+		}
+	else
+		sp->setCustomColorMap(colorMapEditor->colorMap());
 
 	sp->showColorScale((QwtPlot::Axis)colorScaleBox->currentItem(), axisScaleBox->isChecked());
 	sp->setColorBarWidth(colorScaleWidthBox->value());
@@ -1629,6 +1661,17 @@ else
 	labelYEnd->setText(tr("Y End"));
 	labelPosition->hide();
 	vectPosBox->hide();
+	}
+}
+
+void plotDialog::showColorMapEditor(bool show)
+{
+if (grayScaleBox->isChecked() || defaultScaleBox->isChecked())
+	colorMapEditor->hide();
+else
+	{
+	colorMapEditor->show();
+	colorMapEditor->setFocus();
 	}
 }
 

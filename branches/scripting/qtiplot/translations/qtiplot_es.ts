@@ -2710,7 +2710,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>The matrix &apos;%1&apos; already exists. It has been renamed &apos;%2&apos;.</source>
-        <translation>La matriz &apos;%1&apos; ya existe. Ha sido renombrada &apos;%2&apos;.</translation>
+        <translation type="obsolete">La matriz &apos;%1&apos; ya existe. Ha sido renombrada &apos;%2&apos;.</translation>
     </message>
     <message>
         <source>Please enter a valid name!</source>
@@ -2798,7 +2798,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - Python Script Window</source>
-        <translation>QtiPlot - Ventana de Programación en Python</translation>
+        <translation type="obsolete">QtiPlot - Ventana de Programación en Python</translation>
     </message>
     <message>
         <source>S&amp;cripting</source>
@@ -3056,7 +3056,7 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
     </message>
     <message>
         <source>&amp;Python Script Window</source>
-        <translation>Ventana de Programación &amp;Python</translation>
+        <translation type="obsolete">Ventana de Programación &amp;Python</translation>
     </message>
     <message>
         <source>F3</source>
@@ -3268,6 +3268,78 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
         <source>Row</source>
         <translation type="unfinished">Fila</translation>
     </message>
+    <message>
+        <source>QtiPlot - Script Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Horizontal Steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatic Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour - &amp;Color Fill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour &amp;Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Gray Scale Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Script Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arrange Layers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Error Bars...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Function...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour + &amp;Color Fill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour Lines + Color Fill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gray Scale Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Animation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CanvasPicker</name>
@@ -3341,6 +3413,41 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
     <message>
         <source>dark gray</source>
         <translation>gris oscuro</translation>
+    </message>
+</context>
+<context>
+    <name>ColorMapEditor</name>
+    <message>
+        <source>Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished">Color</translation>
+    </message>
+    <message>
+        <source>&amp;Insert Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Scale Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, you cannot edit this value!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a valid color level value!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3545,7 +3652,7 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
     </message>
     <message>
         <source>You didn&apos;t specify a data set for this fit operation. Operation aborted!</source>
-        <translation>No especificó un conjunto de datos para esta operación. ¡Operación abortada!</translation>
+        <translation type="obsolete">No especificó un conjunto de datos para esta operación. ¡Operación abortada!</translation>
     </message>
     <message>
         <source>There are no parameters specified for this fit operation. Operation aborted!</source>
@@ -3562,6 +3669,22 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
     <message>
         <source> of </source>
         <translation> de </translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation type="unfinished">QtiPlot - Error</translation>
+    </message>
+    <message>
+        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
+        <translation type="unfinished">¡Necesita al menos %1 puntos para realizar esta operación! ¡Operación abortada!</translation>
+    </message>
+    <message>
+        <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4162,7 +4285,7 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
     </message>
     <message>
         <source>The curve %1 doesn&apos;t exist! Operation aborted!</source>
-        <translation>¡La curva %1 no existe! ¡Operación abortada!</translation>
+        <translation type="obsolete">¡La curva %1 no existe! ¡Operación abortada!</translation>
     </message>
 </context>
 <context>
@@ -4272,6 +4395,14 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
         <source>Linear</source>
         <translation>Lineal</translation>
     </message>
+    <message>
+        <source>QtiPlot - Fit Error</source>
+        <translation type="unfinished">QtiPlot - Error de Ajuste</translation>
+    </message>
+    <message>
+        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LorentzFit</name>
@@ -4345,7 +4476,7 @@ Do you want to insert cells?</source>
     </message>
     <message>
         <source>QtiPlot - Guess best origin for the new layer?</source>
-        <translation>QtiPlot - ¿Buscar origen óptimo para la capa nueva?</translation>
+        <translation type="obsolete">QtiPlot - ¿Buscar origen óptimo para la capa nueva?</translation>
     </message>
     <message>
         <source>Do you want QtiPlot to rearrange the remaining layers?</source>
@@ -4374,6 +4505,10 @@ Do you want to insert cells?</source>
     <message>
         <source>enter your text here</source>
         <translation>introduzca su texto aquí</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Guess best layout?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4470,7 +4605,11 @@ Do you want to insert cells?</source>
     </message>
     <message>
         <source>You must provide a list containing at least 2 parameters for this type of fit. Operation aborted!</source>
-        <translation>Debe proporcionar una lista conteniendo al menos 2 parámetros para este tipo de ajuste. ¡Operación abortada!</translation>
+        <translation type="obsolete">Debe proporcionar una lista conteniendo al menos 2 parámetros para este tipo de ajuste. ¡Operación abortada!</translation>
+    </message>
+    <message>
+        <source>You must provide a list containing at least one parameter for this type of fit. Operation aborted!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4599,6 +4738,14 @@ Do you want to insert cells?</source>
         <source>Polynomial</source>
         <translation>Polinomial</translation>
     </message>
+    <message>
+        <source>QtiPlot - Fit Error</source>
+        <translation type="unfinished">QtiPlot - Error de Ajuste</translation>
+    </message>
+    <message>
+        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ScriptEdit</name>
@@ -4669,7 +4816,7 @@ Do you want to overwrite it?</source>
     <name>ScriptWindow</name>
     <message>
         <source>QtiPlot - Python Script Window</source>
-        <translation>QtiPlot - Ventana de Programación Python</translation>
+        <translation type="obsolete">QtiPlot - Ventana de Programación Python</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -4798,6 +4945,10 @@ Do you want to overwrite it?</source>
     <message>
         <source>&amp;Evaluate Expression</source>
         <translation type="unfinished">&amp;Evaluar Expresión</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Script Window</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5063,10 +5214,6 @@ Do you want to insert cells?</source>
         <translation type="unfinished">Media</translation>
     </message>
     <message>
-        <source>Standard Dev</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Variance</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5100,6 +5247,18 @@ Do you want to insert cells?</source>
     </message>
     <message>
         <source>iMin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RowStats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>StandardDev</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ColStats</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5680,6 +5839,22 @@ Do you want to insert cells?</source>
         <source>millisec.</source>
         <translation>milisec.</translation>
     </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished">Inferior</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished">Izquierda</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished">Superior</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished">Derecha</translation>
+    </message>
 </context>
 <context>
     <name>configDialog</name>
@@ -6151,6 +6326,14 @@ Do you want to insert cells?</source>
         <source>Scale Errors with sqrt(Chi^2/doF)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> Horizontal steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>O&amp;rthogonal</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>curvesDialog</name>
@@ -6225,6 +6408,10 @@ Do you want to insert cells?</source>
     <message>
         <source>&amp;Plot</source>
         <translation>&amp;Gráfica</translation>
+    </message>
+    <message>
+        <source> Horizontal steps</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7530,6 +7717,14 @@ Los límites deben estar dentro del rango de x; si no conoce el máximo (mínimo
         <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
         <translation>¡La curva &lt;b&gt;%1&lt;/b&gt; ya no existe! ¡Operación abortada!</translation>
     </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation type="unfinished">QtiPlot - Error</translation>
+    </message>
+    <message>
+        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
+        <translation type="unfinished">¡Necesita al menos %1 puntos para realizar esta operación! ¡Operación abortada!</translation>
+    </message>
 </context>
 <context>
     <name>layerDialog</name>
@@ -8006,19 +8201,47 @@ Los límites deben estar dentro del rango de x; si no conoce el máximo (mínimo
     </message>
     <message>
         <source>You cannot use imbricated columns!</source>
-        <translation>¡No puede usar columnas mezcladas!</translation>
+        <translation type="obsolete">¡No puede usar columnas mezcladas!</translation>
     </message>
     <message>
         <source>You cannot use cells recursively!</source>
-        <translation>¡No puede usar las celdas recursivamente!</translation>
+        <translation type="obsolete">¡No puede usar las celdas recursivamente!</translation>
     </message>
     <message>
         <source>Too many &apos;=&apos; in one line.</source>
-        <translation>Demasiados &apos;=&apos; en una sola línea.</translation>
+        <translation type="obsolete">Demasiados &apos;=&apos; en una sola línea.</translation>
     </message>
     <message>
         <source>Syntax error: &apos;=&apos; without variable name.</source>
-        <translation>Error de sintaxis: &apos;=&apos; sin nombre de variable.</translation>
+        <translation type="obsolete">Error de sintaxis: &apos;=&apos; sin nombre de variable.</translation>
+    </message>
+    <message>
+        <source>col() works only on tables!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There&apos;s no column named %1 in table %2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There&apos;s no row %1 in table %2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There&apos;s no column %1 in table %2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cell() works only on matrices!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There&apos;s no row %1 in matrix %2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There&apos;s no column %1 in matrix %2!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8429,6 +8652,14 @@ Los límites deben estar dentro del rango de x; si no conoce el máximo (mínimo
         <source>Please enter scale limits that satisfy: from &lt; to!</source>
         <translation>¡Por favor, introduzca límites de escala tales que: inicio &lt; fin!</translation>
     </message>
+    <message>
+        <source>Color Ma&amp;p</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Colormap files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>plotDialog</name>
@@ -8486,7 +8717,7 @@ Los límites deben estar dentro del rango de x; si no conoce el máximo (mínimo
     </message>
     <message>
         <source>Steps</source>
-        <translation>Pasos</translation>
+        <translation type="obsolete">Pasos</translation>
     </message>
     <message>
         <source>Dots</source>
@@ -8903,6 +9134,90 @@ Los límites deben estar dentro del rango de x; si no conoce el máximo (mínimo
     <message>
         <source>Magnitude</source>
         <translation>Magnitud</translation>
+    </message>
+    <message>
+        <source>Attach curve to: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x Axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished">Inferior</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished">Superior</translation>
+    </message>
+    <message>
+        <source>y Axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished">Izquierda</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished">Derecha</translation>
+    </message>
+    <message>
+        <source>Axes</source>
+        <translation type="unfinished">Ejes</translation>
+    </message>
+    <message>
+        <source>Horizontal Steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical Steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Gray Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Default Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Co&amp;lors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;Color Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Default &amp;Pen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color Bar Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis</source>
+        <translation type="unfinished">Eje</translation>
+    </message>
+    <message>
+        <source>Spectrogram</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

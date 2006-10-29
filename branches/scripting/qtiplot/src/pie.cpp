@@ -5,7 +5,7 @@
 #include <qpainter.h>
 #include <qpaintdevicemetrics.h>
 
-QwtPieCurve::QwtPieCurve(QwtPlot *parent, const char *name):
+QwtPieCurve::QwtPieCurve(const char *name):
     QwtPlotCurve(name)
 {
 pieRay=100;

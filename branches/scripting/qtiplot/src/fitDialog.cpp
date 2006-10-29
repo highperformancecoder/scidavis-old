@@ -260,7 +260,6 @@ btnContinue->setText( tr( "&Fit >>" ) );
 
 buttonCancel2 = new QPushButton(vbox4, "buttonCancel2" );
 buttonCancel2->setText( tr( "&Close" ) );
-	
 
 QVBoxLayout* hlayout = new QVBoxLayout(editPage, 5, 5, "hlayout");
 hlayout->addWidget(hbox1);

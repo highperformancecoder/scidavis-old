@@ -240,7 +240,7 @@ for (int i=0;i<(int)titles.count();i++)
 		else
 			{
 			const QwtPlotCurve *curve = g->curve(cv);
-			if (curve && curve->rtti() == QwtPlotItem::Rtti_PlotCurve)
+			if (curve && curve->rtti() != QwtPlotItem::Rtti_PlotSpectrogram)
 				{
 				const QwtSymbol symb=curve->symbol(); 
 				const QBrush br=curve->brush();

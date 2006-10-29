@@ -1,8 +1,8 @@
 #include "Histogram.h"
 #include <qpainter.h>
 
-QwtHistogram::QwtHistogram(QwtPlot *parent, const char *name):
-    QwtBarCurve(parent,name)
+QwtHistogram::QwtHistogram(const char *name):
+    QwtBarCurve(name)
 {}
 
 void QwtHistogram::copy(const QwtHistogram *h)

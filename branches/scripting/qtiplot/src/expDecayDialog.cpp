@@ -123,8 +123,9 @@ connect (graph, SIGNAL(closedGraph()), this, SLOT(close()));
 void expDecayDialog::fit()
 {
 QString curve = boxName->currentText();
+QwtPlotCurve *c = graph->curve(curve);
 QStringList curvesList = graph->curvesList();
-if (curvesList.contains(curve) <= 0)
+if (!c || curvesList.contains(curve) <= 0)
 	{
 	QMessageBox::critical(this,tr("QtiPlot - Warning"),
 		tr("The curve <b> %1 </b> doesn't exist anymore! Operation aborted!").arg(curve));
@@ -156,8 +157,14 @@ else if (slopes == 1 || slopes == -1)
 	fitter->setInitialGuesses(x_init);
 	}
 
-if (fitter->setDataFromCurve(boxName->currentText(), 
-	boxStart->text().toDouble(), boxStart->text().toDouble() - 1))
+bool dataAllocated = false;
+if (graph->selectorsEnabled())
+	dataAllocated = fitter->setDataFromCurve(boxName->currentText());
+else
+	dataAllocated = fitter->setDataFromCurve(boxName->currentText(), 
+					boxStart->text().toDouble(), c->maxXValue());
+
+if (dataAllocated)
 	{
 	fitter->setColor(boxColor->currentItem());
 	fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);

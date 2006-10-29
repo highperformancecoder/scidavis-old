@@ -6,7 +6,7 @@
 #include <qwt_double_rect.h>
 #include <qpainter.h>
 
-VectorCurve::VectorCurve(VectorStyle style, QwtPlot *parent, const char *name):
+VectorCurve::VectorCurve(VectorStyle style, const char *name):
     QwtPlotCurve(name)
 {
 d_style = style;
@@ -25,9 +25,7 @@ d_headLength = vc->d_headLength;
 d_headAngle = vc->d_headAngle;
 d_position = vc->d_position;
 pen = vc->pen;
-vectorEnd = (QwtArrayData *)vc->vectorEnd->copy();
-	
-setTitle(vc->title());
+vectorEnd = (QwtArrayData *)vc->vectorEnd->copy();	
 }
 
 void VectorCurve::draw(QPainter *painter,

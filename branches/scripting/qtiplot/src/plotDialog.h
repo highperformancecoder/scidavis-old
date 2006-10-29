@@ -28,6 +28,7 @@ class ColorButton;
 class QwtSymbol;
 class Graph;
 class SymbolBox;
+class ColorMapEditor;
 class QwtCounter;
 
 typedef struct{ 
@@ -110,6 +111,7 @@ public:
 	QButtonGroup *levelsGroupBox, *axisScaleBox, *imageGroupBox;
 	QGroupBox *defaultPenBox;
 	QRadioButton *defaultScaleBox, *grayScaleBox, *customScaleBox, *defaultContourBox, *autoContourBox;  
+	ColorMapEditor *colorMapEditor;
 
 public slots:
 	void showStatistics();
@@ -173,6 +175,7 @@ public slots:
 	//spectrograms
 	void pickContourLinesColor();
 	void showDefaultContourLinesBox(bool show);
+	void showColorMapEditor(bool show);
 	
 protected:
 	Graph *graph;

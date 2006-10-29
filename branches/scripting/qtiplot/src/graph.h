@@ -30,8 +30,8 @@ class CanvasPicker;
 class Plot;
 class MultiPeakFit;
 class ApplicationWindow;
-class Matrix
-;
+class Matrix;
+
 class Graph: public QWidget
 {
 	Q_OBJECT
@@ -74,7 +74,7 @@ public slots:
 	bool insertCurve(Table* w, const QString& name, int style);
 	bool insertCurve(Table* w, int xcol, const QString& name, int style);
 	bool insertCurve(Table* w, const QString& xColName, const QString& yColName, int style);
-	void insertCurve(QwtPlotCurve *c, const QString& plotAssociation);
+	void insertPlotItem(QwtPlotItem *i, const QString& plotAssociation, int type);
 
 	//! Removes a curve defined by its index.
 	void removeCurve(int index);
@@ -131,12 +131,12 @@ public slots:
 	 void exportImage(const QString& fileName, const QString& fileType, int quality = 100, bool transparent = false);
 
 	 // error bars
-	 void addErrorBars(Table *w, const QString& xColName, const QString& yColName, 
+	 bool addErrorBars(Table *w, const QString& xColName, const QString& yColName, 
 					   Table *errTable, const QString& errColName,
 					   int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(black),
 					   bool through = true, bool minus = true, bool plus = true, double xOffset = 0, double yOffset = 0);
 	
-	 void addErrorBars(Table *w, const QString& yColName, Table *errTable, const QString& errColName,
+	 bool addErrorBars(Table *w, const QString& yColName, Table *errTable, const QString& errColName,
 						 int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(black),
 						 bool through = true, bool minus = true, bool plus = true);
 
@@ -157,7 +157,7 @@ public slots:
 	 bool userDefinedStep(int axis){return d_user_step[axis];};
 
 	 //curves layout
-	 curveLayout initCurveLayout(int i, int curves, int style);
+	 curveLayout initCurveLayout(int i, int curves, int errCurves, int style);
 	 static curveLayout initCurveLayout();
 	 void updateCurveLayout(int index,const curveLayout *cL);
 	 //! Tries to guess not already used curve color and symbol style
@@ -585,6 +585,8 @@ public slots:
 
 	//! Add a spectrogram to the graph
 	void plotSpectrogram(Matrix *m, CurveType type);
+	//! Restores a spectrogram. Used when opening a project file.
+	void restoreSpectrogram(ApplicationWindow *app, const QStringList& lst);
 
 signals:
 	void highlightGraph(Graph*);

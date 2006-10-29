@@ -2,11 +2,11 @@
 
 #include <qwt_painter.h>
 #include <qpainter.h>
+#include <qmessagebox.h>
 
-QwtErrorPlotCurve::QwtErrorPlotCurve(int orientation, QwtPlot *parent, const char *name):
+QwtErrorPlotCurve::QwtErrorPlotCurve(int orientation, const char *name):
     QwtPlotCurve(name)
 {
-pen=QPen(Qt::black,2,Qt::SolidLine);
 cap=10;
 type = orientation;
 size=QSize(1,1);
@@ -17,10 +17,9 @@ d_xOffset = 0;
 d_yOffset = 0;
 }
 
-QwtErrorPlotCurve::QwtErrorPlotCurve(QwtPlot *parent, const char *name):
+QwtErrorPlotCurve::QwtErrorPlotCurve(const char *name):
     QwtPlotCurve(name)
 {
-pen=QPen(Qt::black,2,Qt::SolidLine);
 cap=10;
 type = Vertical;
 size=QSize(1,1);
@@ -39,13 +38,11 @@ size = e->size;
 plus = e->plus;
 minus = e->minus;
 through = e->through;
-pen = e->pen;
+setPen(e->pen());
 err = e->err.copy();
 
 d_xOffset = e->xDataOffset();
-d_yOffset = e->yDataOffset();
-	
-setTitle(e->title());
+d_yOffset = e->yDataOffset();	
 }
 
 void QwtErrorPlotCurve::draw(QPainter *painter,
@@ -58,7 +55,7 @@ void QwtErrorPlotCurve::draw(QPainter *painter,
         to = dataSize() - 1;
 
     painter->save();
-    painter->setPen(pen);
+    painter->setPen(pen());
 	drawErrorBars(painter, xMap, yMap, from, to);
     painter->restore();
 }
@@ -69,95 +66,52 @@ void QwtErrorPlotCurve::drawErrorBars(QPainter *painter,
 int sh=size.height();
 int sw=size.width();
 
- for (int i = from; i <= to; i++)
+for (int i = from; i <= to; i++)
 	{
 	const int xi = xMap.transform(x(i) + d_xOffset);
 	const int yi = yMap.transform(y(i) + d_yOffset);
 	
 	if (type == Vertical)
-			{
-			const int yh = yMap.transform(y(i)+err[i]);
-			const int yl = yMap.transform(y(i)-err[i]);
-			const int yhl=yi-qRound(0.5*sh)-pen.width();
-			const int ylh=yi+qRound(0.5*sh)+pen.width();
+		{
+		const int yh = yMap.transform(y(i)+err[i]);
+		const int yl = yMap.transform(y(i)-err[i]);
+		const int yhl = yi - sh/2;
+		const int ylh = yi + sh/2;
 
-			if (abs(yl-yh)>sh)
-				{
-				if (plus)
-					{
-					QwtPainter::drawLine(painter, xi, yhl, xi, yh);
-					QwtPainter::drawLine(painter, xi-cap/2, yh, xi+cap/2, yh);
-					}
-				if (minus)
-					{
-					QwtPainter::drawLine(painter, xi, ylh, xi, yl);
-					QwtPainter::drawLine(painter, xi-cap/2, yl, xi+cap/2, yl);
-					}
-				if (through)
-					QwtPainter::drawLine(painter, xi, yhl, xi, ylh);
-				}
+		if (plus)
+			{
+			QwtPainter::drawLine(painter, xi, yhl, xi, yh);
+			QwtPainter::drawLine(painter, xi-cap/2, yh, xi+cap/2, yh);
 			}
-		else if (type == Horizontal)
+		if (minus)
 			{
-			const int xp = xMap.transform(x(i)+err[i]);
-			const int xm = xMap.transform(x(i)-err[i]);
-
-			const int xpm = xi+qRound(0.5*sw)+pen.width();
-			const int xmp = xi-qRound(0.5*sw)-pen.width();
-
-
-			if (abs(xp-xm)>sw)
-			{
-			if (plus)
-				{
-				QwtPainter::drawLine(painter, xp, yi, xpm, yi);
-				QwtPainter::drawLine(painter, xp, yi-cap/2, xp, yi+cap/2);
-				}
-			if (minus)
-				{
-				QwtPainter::drawLine(painter, xm, yi, xmp, yi);
-				QwtPainter::drawLine(painter, xm, yi-cap/2, xm, yi+cap/2);
-				}
-			if (through)
-				QwtPainter::drawLine(painter, xmp, yi, xpm, yi);
+			QwtPainter::drawLine(painter, xi, ylh, xi, yl);
+			QwtPainter::drawLine(painter, xi-cap/2, yl, xi+cap/2, yl);
 			}
+		if (through)
+			QwtPainter::drawLine(painter, xi, yhl, xi, ylh);
+		}
+	else if (type == Horizontal)
+		{
+		const int xp = xMap.transform(x(i)+err[i]);
+		const int xm = xMap.transform(x(i)-err[i]);
+		const int xpm = xi + sw/2;
+		const int xmp = xi - sw/2;
+
+		if (plus)
+			{
+			QwtPainter::drawLine(painter, xp, yi, xpm, yi);
+			QwtPainter::drawLine(painter, xp, yi-cap/2, xp, yi+cap/2);
+			}
+		if (minus)
+			{
+			QwtPainter::drawLine(painter, xm, yi, xmp, yi);
+			QwtPainter::drawLine(painter, xm, yi-cap/2, xm, yi+cap/2);
+			}
+		if (through)
+			QwtPainter::drawLine(painter, xmp, yi, xpm, yi);
 		}
 	}
-}
-
-bool QwtErrorPlotCurve::throughSymbol()
-{
-return through;
-}
-
-void QwtErrorPlotCurve::drawThroughSymbol(bool yes)
-{
-through=yes;
-}
-
-bool QwtErrorPlotCurve::minusSide()
-{
-return minus;
-}
-
-void QwtErrorPlotCurve::drawMinusSide(bool yes)
-{
-minus=yes;
-}
-
-bool QwtErrorPlotCurve::plusSide()
-{
-return plus;
-}
-
-void QwtErrorPlotCurve::drawPlusSide(bool yes)
-{
-plus=yes;
-}
-
-QwtArray<double> QwtErrorPlotCurve::errors()
-{
-return err;
 }
 
 double QwtErrorPlotCurve::errorValue(int i)
@@ -166,16 +120,6 @@ if (i >= 0 && i < dataSize())
 	return err[i];
 else 
 	return 0.0;
-}
-
-void QwtErrorPlotCurve::setErrors(const QwtArray<double>&data)
-{
-err=data;
-}
-
-void QwtErrorPlotCurve::setSymbolSize(const QSize& sz)
-{
-size=sz;
 }
 
 bool QwtErrorPlotCurve::xErrors()
@@ -195,34 +139,18 @@ else
 	type = Vertical;
 }
 
-int QwtErrorPlotCurve::capLength()
-{
-return cap;
-}
-
-void QwtErrorPlotCurve::setCapLength(int t)
-{
-cap=t;
-}
-
-int QwtErrorPlotCurve::width()
-{
-return pen.width ();
-}
-
 void QwtErrorPlotCurve::setWidth(int w)
 {
-pen.setWidth (w);
-}
-
-QColor QwtErrorPlotCurve::color()
-{
-return pen.color();
+QPen p = pen();
+p.setWidth (w);
+setPen(p);
 }
 
 void QwtErrorPlotCurve::setColor(const QColor& c)
 {
-pen.setColor(c);
+QPen p = pen();
+p.setColor(c);
+setPen(p);
 }
 
 QwtDoubleRect QwtErrorPlotCurve::boundingRect() const
@@ -230,7 +158,6 @@ QwtDoubleRect QwtErrorPlotCurve::boundingRect() const
 QwtDoubleRect rect = QwtPlotCurve::boundingRect();
 
 int size = dataSize();
-
 QwtArray <double> X(size), Y(size), min(size), max(size);
 for (int i=0; i<size; i++)
 	{
@@ -274,13 +201,3 @@ delete erMax;
 return rect;
 }
 
-double QwtErrorPlotCurve::xDataOffset() const
-{
-return d_xOffset;
-}
-
-
-double QwtErrorPlotCurve::yDataOffset() const
-{
-return d_yOffset;
-}

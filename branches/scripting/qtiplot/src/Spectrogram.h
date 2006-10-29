@@ -1,3 +1,31 @@
+/***************************************************************************
+	File                 : Spectrogram.h
+	Project              : QtiPlot
+--------------------------------------------------------------------
+	Copyright            : (C) 2006 by Ion Vasilief
+	Email                : ion_vasilief@yahoo.fr
+	Description          : QtiPlot's Spectrogram Class
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *  This program is free software; you can redistribute it and/or modify   *
+ *  it under the terms of the GNU General Public License as published by   *
+ *  the Free Software Foundation; either version 2 of the License, or      *
+ *  (at your option) any later version.                                    *
+ *                                                                         *
+ *  This program is distributed in the hope that it will be useful,        *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of         *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          *
+ *  GNU General Public License for more details.                           *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the Free Software           *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor,                    *
+ *   Boston, MA  02110-1301  USA                                           *
+ *                                                                         *
+ ***************************************************************************/
+
 #ifndef SPECTROGRAM_H
 #define SPECTROGRAM_H
 
@@ -5,6 +33,7 @@
 #include <qwt_raster_data.h>
 #include <qwt_plot.h>
 #include <qwt_plot_spectrogram.h>
+#include <qwt_color_map.h>
 
 class MatrixData;
 
@@ -31,10 +60,15 @@ public:
 
 	void setGrayScale();
 	void setDefaultColorMap();
+	static QwtLinearColorMap defaultColorMap();
 
+	void setCustomColorMap(const QwtLinearColorMap& map);
 	void updateData(Matrix *m);
 
-	ColorMapPolicy colorMapPolicy(){return color_map;};
+	//! Used when saving a project file
+	QString saveToString();
+
+	ColorMapPolicy colorMapPolicy(){return color_map_policy;};
 
 protected:
 	//! Pointer to the source data matrix
@@ -44,7 +78,9 @@ protected:
 	int color_axis;
 
 	//! Flags
-	ColorMapPolicy color_map;
+	ColorMapPolicy color_map_policy;
+
+	QwtLinearColorMap color_map;
 };
 
 

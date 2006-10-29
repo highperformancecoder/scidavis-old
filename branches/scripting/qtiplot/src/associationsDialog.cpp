@@ -93,7 +93,6 @@ if (t && graph)
 	}
 }
 
-
 QString associationsDialog::plotAssociation(const QString& text)
 {
 QString s = text;
@@ -111,6 +110,10 @@ void associationsDialog::initTablesList(QWidgetList* lst, int curve)
 {
 tables = lst;
 active_table = 0;
+
+if (curve < 0 || curve >= (int)associations->count())
+	curve = 0;
+
 associations->setCurrentItem(curve);
 }
 
@@ -271,13 +274,17 @@ for (int i=0;i<(int)names.count();i++)
 	{
 	QString s=names[i];
 	int pos=s.find("_",0);
-	if (pos>0)
+	const QwtPlotItem *c = (QwtPlotItem *)graph->curve(i);
+	if (!c)
+		continue;
+
+	if (pos>0 && c->rtti() == QwtPlotItem::Rtti_PlotCurve)
 		{
 		QString table=s.left(pos);	
 		QString cols=s.right(s.length()-pos-1);			
 		newNames<<table+": "+cols.remove(table+"_",TRUE);
 		}
-	else
+	else if (c->rtti() != QwtPlotItem::Rtti_PlotSpectrogram)
 		newNames<<s;
 	}
 associations->insertStringList(newNames, -1);

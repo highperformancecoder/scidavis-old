@@ -114,7 +114,7 @@ connect(btnCancel, SIGNAL(clicked()),this, SLOT(close()));
 connect(btnAdd, SIGNAL(clicked()),this, SLOT(enableRemoveBtn()));
 connect(btnRemove, SIGNAL(clicked()),this, SLOT(enableRemoveBtn()));
 
-connect(contents, SIGNAL(highlighted (int)), this, SLOT(showCurveBtn(int)));
+connect(contents, SIGNAL(highlighted(int)), this, SLOT(showCurveBtn(int)));
 connect(contents, SIGNAL(rightButtonClicked(QListBoxItem *, const QPoint &)), this, SLOT(deletePopupMenu(QListBoxItem *, const QPoint &)));
 connect(available, SIGNAL(rightButtonClicked(QListBoxItem *, const QPoint &)), this, SLOT(addPopupMenu(QListBoxItem *, const QPoint &)));
 
@@ -136,6 +136,11 @@ if (c->rtti() == FunctionCurve::RTTI)
 else if (c->rtti() == QwtPlotItem::Rtti_PlotCurve)
 	{
 	btnAssociations->setEnabled(true);
+	btnEditFunction->setEnabled(false);
+	}
+else if (c->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
+	{
+	btnAssociations->setEnabled(false);
 	btnEditFunction->setEnabled(false);
 	}
 }

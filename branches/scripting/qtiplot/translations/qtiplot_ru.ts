@@ -2638,7 +2638,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>The matrix &apos;%1&apos; already exists. It has been renamed &apos;%2&apos;.</source>
-        <translation>Матрица &apos;%1&apos; уже существует. Она была переименована в &apos;%2&apos;.</translation>
+        <translation type="obsolete">Матрица &apos;%1&apos; уже существует. Она была переименована в &apos;%2&apos;.</translation>
     </message>
     <message>
         <source>Please enter a valid name!</source>
@@ -3177,7 +3177,7 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <source>&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot is open-source software and its development required hundreds of hours of work.&lt;br&gt;&lt;br&gt;If you like it, you&apos;re using it in your work and you would like to see it constantly improved,&lt;br&gt; please support its author by making a donation.&lt;br&gt;&lt;br&gt; Would you like to make a donation for QtiPlot now?&lt;/b&gt;&lt;/font&gt;</source>
-        <translation>&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot является программным продуктом с открытым кодом и на его разработку требуются сотени часов.&lt;br&gt;&lt;br&gt;Если Вам понравилась эта программа, вы используете её в своей работе и Вам хотелось бы видет её постоянно обнавляющейся,&lt;br&gt; пожалуйста поддержите её автора сделав пожертвование.&lt;br&gt;&lt;br&gt; Хотите ли вы сделать пожертвование?&lt;/b&gt;&lt;/font&gt;</translation>
+        <translation type="obsolete">&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot является программным продуктом с открытым кодом и на его разработку требуются сотени часов.&lt;br&gt;&lt;br&gt;Если Вам понравилась эта программа, вы используете её в своей работе и Вам хотелось бы видет её постоянно обнавляющейся,&lt;br&gt; пожалуйста поддержите её автора сделав пожертвование.&lt;br&gt;&lt;br&gt; Хотите ли вы сделать пожертвование?&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
     <message>
         <source>QtiPlot - Script Window</source>
@@ -3198,6 +3198,62 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <source>Animation</source>
         <translation>Анимация</translation>
+    </message>
+    <message>
+        <source>Contour - &amp;Color Fill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour &amp;Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Gray Scale Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arrange Layers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Error Bars...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Function...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour + &amp;Color Fill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour Lines + Color Fill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gray Scale Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot is open-source software and its development required hundreds of hours of work.&lt;br&gt;&lt;br&gt;<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   If you like it, you&apos;re using it in your work and you would like to see it <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   constantly improved,&lt;br&gt; please support its author by making a donation.&lt;br&gt;&lt;br&gt; <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   Would you like to make a donation for QtiPlot now?&lt;/b&gt;&lt;/font&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3272,6 +3328,41 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <source>dark gray</source>
         <translation>тёмно-серый</translation>
+    </message>
+</context>
+<context>
+    <name>ColorMapEditor</name>
+    <message>
+        <source>Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished">Цвет</translation>
+    </message>
+    <message>
+        <source>&amp;Insert Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Scale Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, you cannot edit this value!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a valid color level value!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3476,7 +3567,7 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <source>You didn&apos;t specify a data set for this fit operation. Operation aborted!</source>
-        <translation>Вы не указали для данной операции приближения набор данных. Операция прервана!</translation>
+        <translation type="obsolete">Вы не указали для данной операции приближения набор данных. Операция прервана!</translation>
     </message>
     <message>
         <source>There are no parameters specified for this fit operation. Operation aborted!</source>
@@ -3501,6 +3592,14 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <source>You need at least %1 points to perform this operation! Operation aborted!</source>
         <translation>Для выполнения этой операции необходимо как минимум %1 точки(ек)! Операция прервана!</translation>
+    </message>
+    <message>
+        <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4214,6 +4313,14 @@ Various parts of this file may not be displayed as expected.</source>
         <source>Linear</source>
         <translation>Линейный</translation>
     </message>
+    <message>
+        <source>QtiPlot - Fit Error</source>
+        <translation type="unfinished">QtiPlot - Ошибка Приближения</translation>
+    </message>
+    <message>
+        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LorentzFit</name>
@@ -4271,7 +4378,7 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <source>The text in the clipboard is larger than your current selection!
 Do you want to insert cells?</source>
-        <translation>Текст в буфере обмена больше, чем текущее выделение! Вы хотите вставить ячейки?</translation>
+        <translation type="obsolete">Текст в буфере обмена больше, чем текущее выделение! Вы хотите вставить ячейки?</translation>
     </message>
     <message>
         <source>QtiPlot</source>
@@ -4280,7 +4387,7 @@ Do you want to insert cells?</source>
     <message>
         <source>The text in the clipboard is larger than your current selection!<byte value="x9"/>        
 Do you want to insert cells?</source>
-        <translation type="obsolete">Текст в буфере обмена превосходит по объёму ваше текущее выделение!
+        <translation type="unfinished">Текст в буфере обмена превосходит по объёму ваше текущее выделение!
 Вы хотите добавить ячейки?</translation>
     </message>
 </context>
@@ -4546,6 +4653,14 @@ Do you want to insert cells?</source>
     <message>
         <source>Polynomial</source>
         <translation>Полиномиальный</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Fit Error</source>
+        <translation type="unfinished">QtiPlot - Ошибка Приближения</translation>
+    </message>
+    <message>
+        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4885,7 +5000,7 @@ Do you want to overwrite it?</source>
     <message>
         <source>The text in the clipboard is larger than your current selection!
 Do you want to insert cells?</source>
-        <translation>Текст в буфере обмена больше, чем текущее выделение! Хотите ли вы вставить ячейки?</translation>
+        <translation type="obsolete">Текст в буфере обмена больше, чем текущее выделение! Хотите ли вы вставить ячейки?</translation>
     </message>
     <message>
         <source>Please select two columns for this operation!</source>
@@ -4991,6 +5106,11 @@ Do you want to insert cells?</source>
     <message>
         <source>Qtiplot - Reading file...</source>
         <translation>Qtiplot - Чтение файла...</translation>
+    </message>
+    <message>
+        <source>The text in the clipboard is larger than your current selection!<byte value="x9"/>        
+Do you want to insert cells?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7967,6 +8087,26 @@ The limits must be within the range of x; If you do not know the maximum (minimu
         <source>cell() works only on matrices!</source>
         <translation>cell() работает только с матрицами!</translation>
     </message>
+    <message>
+        <source>There&apos;s no column named %1 in table %2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There&apos;s no row %1 in table %2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There&apos;s no column %1 in table %2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There&apos;s no row %1 in matrix %2!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There&apos;s no column %1 in matrix %2!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>myWidget</name>
@@ -8902,6 +9042,50 @@ The limits must be within the range of x; If you do not know the maximum (minimu
     <message>
         <source>Vertical Steps</source>
         <translation>Вертикальные ступеньки</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Gray Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Default Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Co&amp;lors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;Color Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Default &amp;Pen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color Bar Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis</source>
+        <translation type="unfinished">Ось</translation>
+    </message>
+    <message>
+        <source>Spectrogram</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

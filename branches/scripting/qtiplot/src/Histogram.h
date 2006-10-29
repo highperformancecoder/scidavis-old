@@ -3,7 +3,7 @@
 class QwtHistogram: public QwtBarCurve
 {
 public:
-	QwtHistogram(QwtPlot *parent, const char *name=0);
+	QwtHistogram(const char *name=0);
 
 	void copy(const QwtHistogram *h);
 

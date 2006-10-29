@@ -10,7 +10,8 @@ class BoxCurve: public QwtPlotCurve
 public:
 	enum BoxStyle{NoBox, Rect, Diamond, WindBox, Notch};
 	enum Range{None, SD, SE, r25_75, r10_90, r5_95, r1_99, MinMax, UserDef};
-	BoxCurve(QwtPlot *parent, const char *name=0);
+	
+	BoxCurve(const char *name=0);
 
 	void copy(const BoxCurve *b);
 

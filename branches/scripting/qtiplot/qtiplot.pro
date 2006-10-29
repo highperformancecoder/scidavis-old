@@ -143,7 +143,8 @@ HEADERS  += src/application.h \
 	 src/ScriptingLangDialog.h\
 	 src/ScriptWindow.h\
 	 src/TableStatistics.h\
-	 src/Spectrogram.h
+	 src/Spectrogram.h\
+	 src/ColorMapEditor.h
      
 SOURCES  += src/application.cpp \
      src/graph.cpp \
@@ -224,7 +225,8 @@ SOURCES  += src/application.cpp \
 	 src/ScriptingLangDialog.cpp\
 	 src/ScriptWindow.cpp\
 	 src/TableStatistics.cpp\
-	 src/Spectrogram.cpp
+	 src/Spectrogram.cpp\
+	 src/ColorMapEditor.cpp
 
 #Compression (zlib123)
 SOURCES+=../3rdparty/zlib123/minigzip.c

@@ -299,8 +299,8 @@ void ApplicationWindow::initGlobalConstants()
 	 appStyle = "Windows";
 #endif
 
-majVersion = 0; minVersion = 8; patchVersion = 8;
-d_extra_version = "";
+majVersion = 0; minVersion = 8; patchVersion = 9;
+d_extra_version = "-rc1";
 projectname="untitled";
 lastModified=0;
 activeGraph=0;
@@ -2168,7 +2168,7 @@ for (i=0;i<(int)list.count();i++)
 	filter+=aux;
 	}
 
-QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
+QString fn = QFileDialog::getOpenFileName(imagesDirPath, filter, this, 0,
 			tr("QtiPlot - Import image from file"), 0, TRUE);
 if ( !fn.isEmpty() )
 	{
@@ -2194,7 +2194,7 @@ if ( !fn.isEmpty() )
 	setListViewLabel(m->name(), fn);
 
 	QFileInfo fi(fn);
-	workingDir = fi.dirPath(true);
+	imagesDirPath = fi.dirPath(true);
 
 	QApplication::restoreOverrideCursor();
 	}
@@ -2220,13 +2220,13 @@ for (i=0;i<(int)list.count();i++)
 	filter+=aux;
 	}
 
-QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
+QString fn = QFileDialog::getOpenFileName(imagesDirPath, filter, this, 0,
 			tr("QtiPlot - Load image from file"), 0, TRUE);
 if ( !fn.isEmpty() )
 	{
 	loadImage(fn);
 	QFileInfo fi(fn);
-	workingDir = fi.dirPath(true);
+	imagesDirPath = fi.dirPath(true);
 	}
 }
 
@@ -2236,14 +2236,6 @@ QApplication::setOverrideCursor(waitCursor);
 QPixmap photo;
 if ( fn.contains(".jpg", false))
 	photo.load(fn,"JPEG",QPixmap::Auto);
-/*else if ( fn.contains(".wmf", false))
-	{// using kwmf, the drawText function is not implemented
-	photo.resize( 1000, 1000 );
-	photo.fill(white);
-    KoWmfPaint wmf;
-    if (wmf.load( fn )) 
-       wmf.play( photo );
-	}*/
 else
 	{
 	QStringList lst=QImage::inputFormatList();
@@ -2451,16 +2443,15 @@ for (int i=0;i<(int)colList.count();i++)
 			}
 
 		QString errColName=caption+s.mid(posY+2,posErr-posY-2);	
-		ag->addErrorBars(w,xColName,yColName,w,errColName,errType,2,5,QColor(black),false,true,true);
+		ag->addErrorBars(w, xColName, yColName, w, errColName, errType);
 		}
 	else
 		{
 		if (ag->insertCurve(w, xCol, yColName, defaultCurveStyle))
 			{
-			curveLayout cl = ag->initCurveLayout(i, curves, defaultCurveStyle);
+			curveLayout cl = ag->initCurveLayout(i, curves, 1, defaultCurveStyle);
 			cl.lWidth = defaultCurveLineWidth;
 			cl.sSize = defaultSymbolSize;
-
 			ag->updateCurveLayout(i,&cl);
 			}
 		}
@@ -2966,7 +2957,7 @@ if (!renamedTables.isEmpty() && renamedTables.contains(caption))
 
 QWidget *w;
 QWidgetList *lst = windowsList();
-for (w = lst->first(); w; w = lst->next() )
+for (w = lst->first(); w; w = lst->next())
 	{
 	if (w->isA("Matrix") && w->name() == caption)
 		{
@@ -3494,7 +3485,7 @@ void ApplicationWindow::loadASCII()
 {
 QString filter=tr("All files") + " *;;" + tr("Text") + " (*.TXT *.txt);;" +
 			   tr("Data")+" (*DAT *.dat);;" + tr("Comma Separated Values") + " (*.CSV *.csv);;";
-QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
+QString fn = QFileDialog::getOpenFileName(asciiDirPath, filter, this, 0,
 			tr("QtiPlot - Import ASCII File"), 0, TRUE);
 if (!fn.isEmpty())
 	{
@@ -3512,7 +3503,7 @@ if (!fn.isEmpty())
 	t->setCaptionPolicy(myWidget::Both);
 	setListViewLabel(t->name(), fn);
 	QFileInfo fi(fn);
-	workingDir = fi.dirPath(true);
+	asciiDirPath = fi.dirPath(true);
 	}
 }
 
@@ -3522,20 +3513,20 @@ Table* t = (Table*)ws->activeWindow();
 if ( t && t->isA("Table"))
 	{
 	ImportFilesDialog *fd = new ImportFilesDialog(true, this, 0);
-	fd->setDir(workingDir);
+	fd->setDir(asciiDirPath);
 	if ( fd->exec() == QDialog::Accepted )
 		{
-		workingDir = fd->dirPath();
+		asciiDirPath = fd->dirPath();
 		loadMultipleASCIIFiles(fd->selectedFiles(), fd->importFileAs());
 		}
 	}
 else
 	{
 	ImportFilesDialog *fd = new ImportFilesDialog(false, this, 0);
-	fd->setDir(workingDir);
+	fd->setDir(asciiDirPath);
 	if ( fd->exec() == QDialog::Accepted )
 		{
-		workingDir = fd->dirPath();
+		asciiDirPath = fd->dirPath();
 		loadMultipleASCIIFiles(fd->selectedFiles(), 0);
 		}
 	}
@@ -3792,7 +3783,7 @@ progress.setLabelText(title);
 progress.setTotalSteps(widgets);
 progress.setActiveWindow();
 //progress.setMinimumDuration(10000);
-//progress.move(0,0);
+progress.move(0,0);
 
 Folder *cf = app->projectFolder();
 app->folders->blockSignals (true);
@@ -4320,6 +4311,8 @@ if (applicationFont.size() == 4)
 		helpFilePath = settings.readEntry("/HelpFile", helpFilePath);
 
 		fitPluginsPath = settings.readEntry("/FitPlugins", "fitPlugins");
+		asciiDirPath = settings.readEntry("/ASCII", qApp->applicationDirPath());
+		imagesDirPath = settings.readEntry("/Images", qApp->applicationDirPath());
 	settings.endGroup();
 settings.endGroup();
 
@@ -4503,6 +4496,8 @@ settings.writeEntry("/Font", applicationFont);
 	settings.writeEntry("/TemplatesDir", templatesDir);
 	settings.writeEntry("/HelpFile", helpFilePath);
 	settings.writeEntry("/FitPlugins", fitPluginsPath);
+	settings.writeEntry("/ASCII", asciiDirPath);
+	settings.writeEntry("/Images", imagesDirPath);
 	settings.endGroup();
 settings.endGroup();
 
@@ -5594,7 +5589,7 @@ if (!t)
 	return;
 
 QString selectedFilter;
-QString fname = QFileDialog::getSaveFileName(workingDir,"*.txt;;*.dat;;*.DAT", this,"file dialog",
+QString fname = QFileDialog::getSaveFileName(asciiDirPath, "*.txt;;*.dat;;*.DAT;;"+tr("All files")+" *;;",this,"file dialog",
 	tr("Choose a filename to save under"),&selectedFilter,TRUE);
 	
 if (!fname.isEmpty() ) 
@@ -5604,18 +5599,13 @@ if (!fname.isEmpty() )
 	if (baseName.contains(".")==0)
 			fname.append(selectedFilter.remove("*"));	
 	
-	workingDir = fi.dirPath(true);
+	asciiDirPath = fi.dirPath(true);
 
 	if ( QFile::exists(fname) &&
-        	QMessageBox::question(
-            0,
-            tr("QtiPlot - Overwrite File?"),
+        	QMessageBox::question(0, tr("QtiPlot - Overwrite File?"),
             tr("A file called: <p><b>%1</b><p>already exists. "
-                "Do you want to overwrite it?")
-                .arg(fname),
-            tr("&Yes"), tr("&No"),
-            QString::null, 0, 1 ) )
-        			return ;
+            "Do you want to overwrite it?").arg(fname), tr("&Yes"), tr("&No"), QString::null, 0, 1 ) )
+        	return ;
 	else
 		{	
 		QApplication::setOverrideCursor(waitCursor);
@@ -7206,7 +7196,7 @@ if (g)
 		filter+=aux;
 		}
 
-	QString fn = QFileDialog::getOpenFileName(workingDir, filter, this, 0,
+	QString fn = QFileDialog::getOpenFileName(imagesDirPath, filter, this, 0,
 			tr("QtiPlot - Insert image from file"), 0, TRUE);
 	if ( !fn.isEmpty() )
 		{
@@ -7227,7 +7217,7 @@ if (g)
 		g->insertImageMarker(photo,fn);
 
 		QFileInfo fi(fn);
-		workingDir = fi.dirPath(true);
+		imagesDirPath = fi.dirPath(true);
 		QApplication::restoreOverrideCursor();
 		}
 	}
@@ -7712,7 +7702,9 @@ if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 	g2->setScale(g->xScale(),g->yScale(),g->zScale());
 	g2->setShift(g->xShift(),g->yShift(),g->zShift());
 	g2->setMeshLineWidth((int)g->meshLineWidth());
+	g2->setOrtho(g->isOrthogonal());
 	g2->update();
+	g2->animate(g->isAnimated());
 	customToolBars((QWidget*)g2);
 
 	setListViewSize(caption, g->sizeToString());
@@ -8109,7 +8101,7 @@ QString version = "QtiPlot " + QString::number(majVersion) + "." +
 QMessageBox::about(this,tr("About QtiPlot"),
 			 tr("<h2>"+ version + "</h2>"
 			 "<p><h3>Copyright(C): Ion Vasilief</h3>"
-			 "<p><h3>Released: 03/10/2006</h3>"));
+			 "<p><h3>Released: 31/10/2006</h3>"));
 }
 
 void ApplicationWindow::windowsMenuAboutToShow()
@@ -10217,7 +10209,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 				if (fileVersion >= 88)
 					{
 					QwtPlotCurve *c = ag->curve(curveID);
-					if (c)
+					if (c && c->rtti() == QwtPlotItem::Rtti_PlotCurve)
 						c->setAxis(curve[curve.count()-2].toInt(), curve[curve.count()-1].toInt());
 					}
 				}
@@ -10269,6 +10261,18 @@ for (int j=0;j<(int)list.count()-1;j++)
 							curve[5].toInt(),curve[6].toInt(), QColor(curve[7]), 
 							curve[8].toInt(), curve[10].toInt(), curve[9].toInt(), xOffset, yOffset);
 				}
+			}
+		else if (s == "<spectrogram>") 
+			{
+			curveID++;
+			QStringList lst;
+			while ( s!="</spectrogram>" )
+				{
+				s = list[++j];
+				lst << s;
+				}
+			lst.pop_back();
+			ag->restoreSpectrogram(app, lst);
 			}
 		else if (s.left(6)=="scale\t")
 			{

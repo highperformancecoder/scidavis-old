@@ -165,7 +165,7 @@ d_graph->range(index, &start, &end);
 if (d_graph->numPoints(index, start, end) < d_p)
 	{
 	QMessageBox::critical(d_graph,tr("QtiPlot - Error"),
-	tr("You need at least %1 points to perform this operation! Operation aborted!").arg(QString::number(d_p)));
+	tr("You need at least %1 points to perform this operation! Operation aborted!").arg(d_p));
 	d_init_err = true;
 	return false;
 	}
@@ -475,6 +475,12 @@ if (!d_p)
 		tr("There are no parameters specified for this fit operation. Operation aborted!"));
 	return;
 	}
+if (d_p > d_n)
+	{
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"),
+		tr("You need at least %1 data points for this fit operation. Operation aborted!").arg(d_p));
+	return;
+	}
 if (d_formula.isEmpty())
 	{
 	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"),
@@ -589,7 +595,7 @@ for (int j=0; j<d_p; j++)
 	formula.replace(d_param_names[j], parameter);
 	}
 c->setFormula(formula.replace("--", "+"));
-d_graph->insertCurve(c, title);
+d_graph->insertPlotItem(c, title, Graph::Line);
 }
 
 Fit::~Fit()
@@ -1458,7 +1464,7 @@ for (int j=0; j<3; j++)
 	formula.replace(d_param_names[p], parameter);
 	}
 c->setFormula(formula.replace("--", "+"));
-d_graph->insertCurve(c, title);
+d_graph->insertPlotItem(c, title, Graph::Line);
 }
 
 void MultiPeakFit::generateFitCurve(double *par)
@@ -1566,7 +1572,7 @@ else
 	else
 		c->setPen(QPen(ColorBox::color(d_curveColorIndex), 1)); 
 	c->setData(X, Y, d_result_points);	
-	d_graph->insertCurve(c, tableName+"_1(X),"+label+"(Y)");
+	d_graph->insertPlotItem(c, tableName+"_1(X),"+label+"(Y)", Graph::Line);
 
 	if (generate_peak_curves)
 		{
@@ -1579,7 +1585,7 @@ else
 			c = new QwtPlotCurve(label);
 			c->setPen(QPen(ColorBox::color(d_peaks_color), 1)); 
 			c->setData(X, Y, d_result_points);	
-			d_graph->insertCurve(c, tableName+"_1(X),"+label+"(Y)");
+			d_graph->insertPlotItem(c, tableName+"_1(X),"+label+"(Y)", Graph::Line);
 			}
 		}
 	}
@@ -1781,6 +1787,13 @@ else
 
 void PolynomialFit::fit()
 {
+if (d_p > d_n)
+	{
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"),
+		tr("You need at least %1 data points for this fit operation. Operation aborted!").arg(d_p));
+	return;
+	}
+
 gsl_matrix *X = gsl_matrix_alloc (d_n, d_p);
 gsl_vector *c = gsl_vector_alloc (d_p);
 
@@ -1879,6 +1892,13 @@ setName(tr("Linear"));
 
 void LinearFit::fit()
 {
+if (d_p > d_n)
+	{
+	QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Fit Error"),
+		tr("You need at least %1 data points for this fit operation. Operation aborted!").arg(d_p));
+	return;
+	}
+
 gsl_vector *c = gsl_vector_alloc (d_p);
 
 double c0, c1, cov00, cov01, cov11;	

@@ -12,7 +12,7 @@ class VectorCurve: public QwtPlotCurve
 public:
 	enum VectorStyle{XYXY, XYAM};
 
-	VectorCurve(VectorStyle style, QwtPlot *parent, const char *name=0);
+	VectorCurve(VectorStyle style, const char *name=0);
 	~VectorCurve();
 
 	enum Position{Tail, Middle, Head};
