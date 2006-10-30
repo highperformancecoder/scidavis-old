@@ -41,7 +41,9 @@ ImageExportDialog::ImageExportDialog(QWidget* parent, const char*name):
 setCaption( tr( "QtiPlot - Choose a filename to save under" ) );
 
 QStringList list=QImage::outputFormatList ();
+#ifndef Q_OS_WIN
 list<<"EPS";
+#endif
 //list<<"WMF";
 list<<"SVG";
 list.sort();

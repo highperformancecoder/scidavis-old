@@ -122,13 +122,13 @@ double muParserScript::col(const QString &arg)
     // for backwards compatibility
     col = table->colNames().findIndex(items[0]);
     if (col<0) {
-      local_parser.SetExpr(items[0]);
+      local_parser.SetExpr(items[0].ascii());
       col = qRound(local_parser.Eval()) - 1;
     }
   }
   if (items.count() == 2)
   {
-    local_parser.SetExpr(items[1]);
+    local_parser.SetExpr(items[1].ascii());
     row = qRound(local_parser.Eval()) - 1;
   } else if (variables["i"])
     row = (int) *(variables["i"]) - 1;
@@ -317,7 +317,7 @@ QVariant muParserScript::eval()
   try {
     current = this;
     for (QStringList::iterator i=muCode.begin(); i != muCode.end(); i++) {
-      parser.SetExpr(*i);
+      parser.SetExpr((*i).ascii());
       val = parser.Eval();
     }
   } catch (EmptySourceError *) {
@@ -336,7 +336,7 @@ bool muParserScript::exec()
   try {
     current = this;
     for (QStringList::iterator i=muCode.begin(); i != muCode.end(); i++) {
-      parser.SetExpr(*i);
+      parser.SetExpr((*i).ascii());
       parser.Eval();
     }
   } catch (EmptySourceError *) {
