@@ -1070,18 +1070,23 @@ if (hasOverlapingLayers())
 }
 
 void MultiLayer::setFonts(const QFont& titleFnt, const QFont& scaleFnt,
-												const QFont& numbersFnt, const QFont& legendFnt)
+						  const QFont& numbersFnt, const QFont& legendFnt)
 {
 for (int i=0;i<(int)graphsList->count();i++)
 		{
 		Graph *gr=(Graph *)graphsList->at(i);
 		QwtPlot *plot=gr->plotWidget();
 			
-		plot->title().setFont(titleFnt);
-		for (int j= 0;j<QwtPlot::axisCnt;j++)
+		QwtText text = plot->title();
+		text.setFont(titleFnt);
+		plot->setTitle(text);
+		for (int j= 0; j<QwtPlot::axisCnt; j++)
 			{
 			plot->setAxisFont (j,numbersFnt);
-			plot->axisTitle(j).setFont(scaleFnt);
+
+			text = plot->axisTitle(j );
+			text.setFont(scaleFnt);
+			plot->setAxisTitle(j, text);
 			}
 			
 		QMemArray<long> keys=gr->textMarkerKeys();
@@ -1091,7 +1096,6 @@ for (int i=0;i<(int)graphsList->count();i++)
 			if (mrk)
 				mrk->setFont(legendFnt);
 			}
-			
 		plot->replot();
 		}
 emit modifiedPlot();

@@ -73,10 +73,10 @@ public:
      
 #if QT_VERSION < 0x040000
     QGuardedPtr<PickerWidget> rubberBandWidget;
-    QGuardedPtr<PickerWidget> textLabelWidget;
+    QGuardedPtr<PickerWidget> trackerWidget;
 #else
     QPointer<PickerWidget> rubberBandWidget;
-    QPointer<PickerWidget> textLabelWidget;
+    QPointer<PickerWidget> trackerWidget;
 #endif
 };
 
@@ -94,6 +94,7 @@ QwtPicker::PrivateData::PickerWidget::PickerWidget(
 #else
     setBackgroundMode(Qt::NoBackground);
     setFocusPolicy(QWidget::NoFocus);
+    setMouseTracking(true);
 #endif
     hide();
 }
@@ -207,7 +208,7 @@ QwtPicker::~QwtPicker()
     setMouseTracking(false);
     delete d_data->stateMachine;
     delete d_data->rubberBandWidget;
-    delete d_data->textLabelWidget;
+    delete d_data->trackerWidget;
     delete d_data;
 }
 
@@ -218,7 +219,7 @@ void QwtPicker::init(QWidget *parent, int selectionFlags,
     d_data = new PrivateData;
 
     d_data->rubberBandWidget = NULL;
-    d_data->textLabelWidget = NULL;
+    d_data->trackerWidget = NULL;
 
     d_data->rubberBand = rubberBand;
     d_data->enabled = false;
@@ -777,8 +778,8 @@ bool QwtPicker::eventFilter(QObject *o, QEvent *e)
                 if ( d_data->rubberBandWidget )
                     d_data->rubberBandWidget->resize(re->size());
              
-                if ( d_data->textLabelWidget )
-                    d_data->textLabelWidget->resize(re->size());
+                if ( d_data->trackerWidget )
+                    d_data->trackerWidget->resize(re->size());
                 break;
             }
             case QEvent::MouseButtonPress:
@@ -1279,9 +1280,9 @@ void QwtPicker::updateDisplay()
         delete rw;
 
 #if QT_VERSION < 0x040000
-    QGuardedPtr<PrivateData::PickerWidget> &tw = d_data->textLabelWidget;
+    QGuardedPtr<PrivateData::PickerWidget> &tw = d_data->trackerWidget;
 #else
-    QPointer<PrivateData::PickerWidget> &tw = d_data->textLabelWidget;
+    QPointer<PrivateData::PickerWidget> &tw = d_data->trackerWidget;
 #endif
     if ( showTracker )
     {
@@ -1296,3 +1297,14 @@ void QwtPicker::updateDisplay()
     else
         delete tw;
 }
+
+const QWidget *QwtPicker::rubberBandWidget() const
+{
+    return d_data->rubberBandWidget;
+}
+
+const QWidget *QwtPicker::trackerWidget() const
+{
+    return d_data->trackerWidget;
+}
+

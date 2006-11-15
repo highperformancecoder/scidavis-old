@@ -33,8 +33,15 @@ template class QWT_EXPORT QMap<double, QPolygonF>;
 #include "qwt_double_rect.h"
 #if defined(QWT_TEMPLATEDLL)
 // MOC_SKIP_BEGIN
+#ifndef QWTARRAY_TEMPLATE_QWTDOUBLEPOINT // by mjo3
+#define QWTARRAY_TEMPLATE_QWTDOUBLEPOINT
 template class QWT_EXPORT QwtArray<QwtDoublePoint>;
+#endif //end of QWTARRAY_TEMPLATE_QWTDOUBLEPOINT
+#ifndef QMAP_TEMPLATE_DOUBLE_QWTDOUBLEPOINT // by mjo3
+#define QMAP_TEMPLATE_DOUBLE_QWTDOUBLEPOINT
 template class QWT_EXPORT QMap<double, QwtArray<QwtDoublePoint> >;
+#endif //end of QMAP_TEMPLATE_QWTDOUBLEPOINT
+// MOC_SKIP_END
 #endif
 #endif
 

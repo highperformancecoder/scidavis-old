@@ -85,7 +85,7 @@ public:
     QComboBox* widthBox;
     QComboBox* capBox;
     QCheckBox* throughBox;
-	QLabel *TextLabel4_3, *TextLabel4_4, *labelPosition, *labelXEnd, *labelYEnd;
+	QLabel *labelPosition, *labelXEnd, *labelYEnd;
 
 	QButtonGroup* GroupBoxH;
 	QWidget *histogramPage, *spacingPage;
@@ -98,7 +98,7 @@ public:
 	QComboBox *xEndBox, *yEndBox, *boxType, *boxWhiskersType, *boxWhiskersRange, *boxRange;
 	SymbolBox *boxMaxStyle, *boxMinStyle, *boxMeanStyle, *box99Style, *box1Style;
 	QSpinBox* headAngleBox, *headLengthBox, *vectWidthBox, *boxPercSize, *boxEdgeWidth;
-	QCheckBox *filledHeadBox, *boxFill;
+	QCheckBox *filledHeadBox;
 	QSpinBox *boxCoef, *boxWhiskersCoef;
 	QCheckBox *boxFillSymbols, *boxFillSymbol;
 	ColorBox *boxPercFillColor, *boxEdgeColor;
@@ -145,7 +145,6 @@ public slots:
 
 	void insertTabs(int plot_type);
 	void updateTabWindow(int);
-	void showAreaColor(bool show);
 
 	void showPopupMenu(QListBoxItem *it, const QPoint &point);
 	void removeSelectedCurve();

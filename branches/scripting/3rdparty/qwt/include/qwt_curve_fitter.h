@@ -26,7 +26,10 @@ class QwtSpline;
 #if defined(QWT_TEMPLATEDLL)
 
 #if QT_VERSION < 0x040000
+#ifndef QWTARRAY_TEMPLATE_QWTDOUBLEPOINT // by mjo3
+#define QWTARRAY_TEMPLATE_QWTDOUBLEPOINT
 template class QWT_EXPORT QwtArray<QwtDoublePoint>;
+#endif //end of QWTARRAY_TEMPLATE_QWTDOUBLEPOINT
 #endif
 
 #endif

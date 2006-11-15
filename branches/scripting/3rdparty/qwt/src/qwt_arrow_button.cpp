@@ -79,6 +79,7 @@ QwtArrowButton::QwtArrowButton(int num,
     }
 }
 
+//! Destructor
 QwtArrowButton::~QwtArrowButton()
 {
     delete d_data;
@@ -135,6 +136,10 @@ QRect QwtArrowButton::labelRect() const
 }
 
 #if QT_VERSION >= 0x040000
+/*!
+   Paint event handler
+   \param event Paint event
+*/
 void QwtArrowButton::paintEvent(QPaintEvent *event)
 {
     QPushButton::paintEvent(event);
@@ -145,9 +150,11 @@ void QwtArrowButton::paintEvent(QPaintEvent *event)
 
 /*!
   \brief Draw the button label
+
+  \param painter Painter
   \sa The Qt Manual on QPushButton
 */
-void QwtArrowButton::drawButtonLabel(QPainter *p)
+void QwtArrowButton::drawButtonLabel(QPainter *painter)
 {
     const bool isVertical = d_data->arrowType == Qt::UpArrow ||
         d_data->arrowType == Qt::DownArrow;
@@ -184,10 +191,10 @@ void QwtArrowButton::drawButtonLabel(QPainter *p)
     arrowRect.moveCenter(r.center());
     arrowRect.setSize(arrow);
 
-    p->save();
+    painter->save();
     for (int i = 0; i < d_data->num; i++)
     {
-        drawArrow(p, arrowRect, d_data->arrowType);
+        drawArrow(painter, arrowRect, d_data->arrowType);
 
         int dx = 0;
         int dy = 0;
@@ -203,7 +210,7 @@ void QwtArrowButton::drawButtonLabel(QPainter *p)
         arrowRect.moveBy(dx, dy);
 #endif
     }
-    p->restore();
+    painter->restore();
 
     if ( hasFocus() )
     {
@@ -213,11 +220,11 @@ void QwtArrowButton::drawButtonLabel(QPainter *p)
         option.backgroundColor = palette().color(QPalette::Background);
 
         style()->drawPrimitive(QStyle::PE_FrameFocusRect, 
-            &option, p, this);
+            &option, painter, this);
 #else
         const QRect focusRect =  
             style().subRect(QStyle::SR_PushButtonFocusRect, this);
-        style().drawPrimitive(QStyle::PE_FocusRect, p,
+        style().drawPrimitive(QStyle::PE_FocusRect, painter,
             focusRect, colorGroup());
 #endif
     }
@@ -226,11 +233,11 @@ void QwtArrowButton::drawButtonLabel(QPainter *p)
 /*!
     Draw an arrow int a bounding rect
 
-    \param p Painter
+    \param painter Painter
     \param r Rectangle where to paint the arrow
     \param arrowType Arrow type
 */
-void QwtArrowButton::drawArrow(QPainter *p, 
+void QwtArrowButton::drawArrow(QPainter *painter, 
     const QRect &r, Qt::ArrowType arrowType) const 
 {
     QwtPolygon pa(3);
@@ -261,16 +268,16 @@ void QwtArrowButton::drawArrow(QPainter *p,
             break;
     }
 
-    p->save();
+    painter->save();
 #if QT_VERSION < 0x040000
-    p->setPen(colorGroup().buttonText());
-    p->setBrush(colorGroup().brush(QColorGroup::ButtonText));
+    painter->setPen(colorGroup().buttonText());
+    painter->setBrush(colorGroup().brush(QColorGroup::ButtonText));
 #else
-    p->setPen(palette().color(QPalette::ButtonText));
-    p->setBrush(palette().brush(QPalette::ButtonText));
+    painter->setPen(palette().color(QPalette::ButtonText));
+    painter->setBrush(palette().brush(QPalette::ButtonText));
 #endif
-    p->drawPolygon(pa);
-    p->restore();
+    painter->drawPolygon(pa);
+    painter->restore();
 }
 
 /*!

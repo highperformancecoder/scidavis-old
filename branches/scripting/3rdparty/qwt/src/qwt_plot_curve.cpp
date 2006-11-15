@@ -590,7 +590,7 @@ void QwtPlotCurve::draw(QPainter *painter,
         drawCurve(painter, d_data->style, xMap, yMap, from, to);
         painter->restore();
 
-        if (d_data->sym.style() != QwtSymbol::None)
+        if (d_data->sym.style() != QwtSymbol::NoSymbol)
         {
             painter->save();
             drawSymbols(painter, d_data->sym, xMap, yMap, from, to);
@@ -998,11 +998,11 @@ bool QwtPlotCurve::testCurveAttribute(CurveAttribute attribute) const
 /*!
   Assign the curve type
 
-  <dt>QwtPlotCurve::Yfx</dt>
+  <dt>QwtPlotCurve::Yfx
   <dd>Draws y as a function of x (the default). The
       baseline is interpreted as a horizontal line
       with y = baseline().</dd>
-  <dt>QwtPlotCurve::Xfy</dt>
+  <dt>QwtPlotCurve::Xfy
   <dd>Draws x as a function of y. The baseline is
       interpreted as a vertical line with x = baseline().</dd>
 
@@ -1259,7 +1259,7 @@ void QwtPlotCurve::updateLegend(QwtLegend *legend) const
 
     const int policy = legend->displayPolicy();
 
-    if (policy == QwtLegend::Fixed)
+    if (policy == QwtLegend::FixedIdentifier)
     {
         int mode = legend->identifierMode();
 
@@ -1276,7 +1276,7 @@ void QwtPlotCurve::updateLegend(QwtLegend *legend) const
 
         legendItem->setIdentifierMode(mode);
     }
-    else if (policy == QwtLegend::Auto)
+    else if (policy == QwtLegend::AutoIdentifier)
     {
         int mode = 0;
 
@@ -1285,7 +1285,7 @@ void QwtPlotCurve::updateLegend(QwtLegend *legend) const
             legendItem->setCurvePen(pen());
             mode |= QwtLegendItem::ShowLine;
         }
-        if (QwtSymbol::None != symbol().style())
+        if (QwtSymbol::NoSymbol != symbol().style())
         {
             legendItem->setSymbol(symbol());
             mode |= QwtLegendItem::ShowSymbol;

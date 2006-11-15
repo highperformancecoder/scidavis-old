@@ -68,12 +68,23 @@ public:
     //! Clone the color map
     virtual QwtColorMap *copy() const = 0;
 
-    //!  Map a value of a given interval into a rgb value.
-    virtual QRgb rgb(const QwtDoubleInterval &, double value) const = 0;
+    /*!  
+       Map a value of a given interval into a rgb value.
+       \param interval Range for the values
+       \param value Value
+       \return rgb value, corresponding to value
+    */
+    virtual QRgb rgb(
+        const QwtDoubleInterval &interval, double value) const = 0;
 
-    //!  Map a value of a given interval into a color index
+    /*!  
+       Map a value of a given interval into a color index
+       \param interval Range for the values
+       \param value Value
+       \return color index, corresponding to value
+     */
     virtual unsigned char colorIndex(
-        const QwtDoubleInterval &, double value) const = 0;
+        const QwtDoubleInterval &interval, double value) const = 0;
 
     QColor color(const QwtDoubleInterval &, double value) const;
 #if QT_VERSION < 0x040000

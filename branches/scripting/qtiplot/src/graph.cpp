@@ -1054,7 +1054,7 @@ else if (axis==QwtPlot::xTop)
 	else if (rotation == 0)
 		d_plot->setAxisLabelAlignment(axis, Qt::AlignHCenter|Qt::AlignTop);
 	}
-d_plot->setAxisLabelRotation (axis, double(rotation));
+d_plot->setAxisLabelRotation (axis, (double)rotation);
 }
 
 int Graph::labelsRotation(int axis)
@@ -1524,6 +1524,12 @@ d_zoomer[1]->setZoomBase();
 
 d_user_step[axis] = (step != 0.0);
 
+if (axis == QwtPlot::xBottom || axis == QwtPlot::yLeft)
+	{
+	updateSecondaryAxis(QwtPlot::xTop);
+	updateSecondaryAxis(QwtPlot::yRight);
+	}
+
 d_plot->replot();
 //keep markers on canvas area
 updateMarkersBoundingRect();
@@ -1831,7 +1837,7 @@ if (on)
 	int d=32;
 	QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(selectedCurve);
 	QwtSymbol symbol = c->symbol();
-	if (symbol.style() != QwtSymbol::None)
+	if (symbol.style() != QwtSymbol::NoSymbol)
 		{
 		QSize sz=symbol.size();
 		d+=QMAX(sz.width(),sz.height());
@@ -3538,13 +3544,8 @@ for (int i=0; i < QwtPlot::axisCnt; i++)
 
 	s += QString::number(QMIN(scDiv->lBound(), scDiv->hBound()), 'g', 15)+"\t";
 	s += QString::number(QMAX(scDiv->lBound(), scDiv->hBound()), 'g', 15)+"\t";
-
-	double step = 0.0;
-	if (d_user_step[i])
-		step = fabs(lst[1]-lst[0]);
-
-	s += QString::number(step, 'g', 15)+"\t";
-	s += QString::number(lst.count())+"\t";
+	s += QString::number(fabs(lst[1]-lst[0]), 'g', 15)+"\t";
+	s += QString::number(d_plot->axisMaxMajor(i))+"\t";
 	s += QString::number(d_plot->axisMaxMinor(i))+"\t";
 
 	const QwtScaleEngine *sc_eng = d_plot->axisScaleEngine(i);
@@ -5432,6 +5433,9 @@ void Graph::zoomOut()
 {
 d_zoomer[0]->zoom(-1);
 d_zoomer[1]->zoom(-1);
+
+updateSecondaryAxis(QwtPlot::xTop);
+updateSecondaryAxis(QwtPlot::yRight);
 }
 
 void Graph::drawText(bool on)
@@ -5837,7 +5841,6 @@ s+=saveEnabledTickLabels();
 s+=saveAxesColors();
 s+=saveAxesBaseline();
 s+=saveCanvas();
-s+=saveLabelsRotation();
 s+=saveCurves();			
 s+=saveErrorBars();
 s+=saveScale();
@@ -5848,6 +5851,7 @@ s+=saveTicksType();
 s+="TicksLength\t"+QString::number(minorTickLength())+"\t"+QString::number(majorTickLength())+"\n";
 s+="DrawAxesBackbone\t"+QString::number(drawAxesBackbone)+"\n";
 s+="AxesLineWidth\t"+QString::number(d_plot->axesLinewidth())+"\n";
+s+=saveLabelsRotation();
 s+=saveMarkers();
 s+="</graph>\n";
 return s;
@@ -5876,7 +5880,6 @@ s+=saveEnabledTickLabels();
 s+=saveAxesColors();
 s+=saveAxesBaseline();
 s+=saveCanvas();
-s+=saveLabelsRotation();
 s+=saveScale();
 s+=saveAxesFormulas();
 s+=saveLabelsFormat();
@@ -5885,6 +5888,7 @@ s+=saveTicksType();
 s+="TicksLength\t"+QString::number(minorTickLength())+"\t"+QString::number(majorTickLength())+"\n";
 s+="DrawAxesBackbone\t"+QString::number(drawAxesBackbone)+"\n";
 s+="AxesLineWidth\t"+QString::number(d_plot->axesLinewidth())+"\n";
+s+=saveLabelsRotation();
 s+=saveMarkers();
 s+="</graph>\n";
 return s;
@@ -6511,9 +6515,6 @@ axisType = g->axisType;
 axesFormatInfo = g->axesFormatInfo;
 axisType = g->axisType;
 
-setAxisLabelRotation(QwtPlot::xBottom, g->labelsRotation(QwtPlot::xBottom));
-setAxisLabelRotation(QwtPlot::xTop, g->labelsRotation(QwtPlot::xTop));
-
 for (i=0; i<QwtPlot::axisCnt; i++)
 	{
 	QwtScaleWidget *sc = plot->axisWidget(i);
@@ -6556,7 +6557,7 @@ for (i=0; i<QwtPlot::axisCnt; i++)
 	else if (se->transformation()->type() == QwtScaleTransformation::Linear)
 		sc_engine = new QwtLinearScaleEngine();
 
-	int majorTicks = (int)lst.count();
+	int majorTicks = plot->axisMaxMajor(i);
 	int minorTicks = plot->axisMaxMinor(i);
 	d_plot->setAxisMaxMajor (i, majorTicks);
 	d_plot->setAxisMaxMinor (i, minorTicks);
@@ -6586,6 +6587,9 @@ drawAxesBackbones(g->drawAxesBackbone);
 setMajorTicksType(g->plotWidget()->getMajorTicksType());
 setMinorTicksType(g->plotWidget()->getMinorTicksType());
 setTicksLength(g->minorTickLength(), g->majorTickLength());
+
+setAxisLabelRotation(QwtPlot::xBottom, g->labelsRotation(QwtPlot::xBottom));
+setAxisLabelRotation(QwtPlot::xTop, g->labelsRotation(QwtPlot::xTop));
 
 QwtArray<long> imag = g->imageMarkerKeys();
 for (i=0;i<(int)imag.size();i++)
@@ -6655,7 +6659,7 @@ for (int j = 0; j <(int)names.count(); j++)
 		c_type[n_curves-1] = Box;
 
 		c->setPen(QPen(ColorBox::color(j), 1));
-		c->setSymbol(QwtSymbol(QwtSymbol::None, QBrush(), QPen(ColorBox::color(j), 1), QSize(7,7)));
+		c->setSymbol(QwtSymbol(QwtSymbol::NoSymbol, QBrush(), QPen(ColorBox::color(j), 1), QSize(7,7)));
 		}
 	}
 

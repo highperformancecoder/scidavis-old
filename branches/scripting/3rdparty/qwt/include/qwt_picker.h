@@ -354,6 +354,9 @@ protected:
 
     virtual void updateDisplay();
 
+    const QWidget *rubberBandWidget() const;
+    const QWidget *trackerWidget() const;
+
 private:
     void init(QWidget *, int selectionFlags, RubberBand rubberBand,
         DisplayMode trackerMode);

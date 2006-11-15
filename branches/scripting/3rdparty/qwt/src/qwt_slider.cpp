@@ -47,20 +47,19 @@ public:
   \brief Constructor
   \param parent parent widget
   \param orientation Orientation of the slider. Can be Qt::Horizontal
-         or Qt::Vertical. Defaults to Horizontal.
-  \param scalePos Position of the scale.  Can be QwtSlider::None,
-         QwtSlider::Left, QwtSlider::Right, QwtSlider::Top,
-         or QwtSlider::Bottom. Defaults to QwtSlider::None.
+         or Qt::Vertical. Defaults to Qt::Horizontal.
+  \param scalePos Position of the scale.  
+         Defaults to QwtSlider::NoScale.
   \param bgStyle Background style. QwtSlider::BgTrough draws the
          slider button in a trough, QwtSlider::BgSlot draws
          a slot underneath the button. An or-combination of both
          may also be used. The default is QwtSlider::BgTrough.
 
   QwtSlider enforces valid combinations of its orientation and scale position.
-  If the combination is invalid, the scale position will be set to None. Valid
-  combinations are:
-  - Qt::Horizonal with None, Top, or Bottom;
-  - Qt::Vertical with None, Left, or Right.
+  If the combination is invalid, the scale position will be set to NoScale. 
+  Valid combinations are:
+  - Qt::Horizonal with NoScale, TopScale, or BottomScale;
+  - Qt::Vertical with NoScale, LeftScale, or RightScale.
 */
 QwtSlider::QwtSlider(QWidget *parent,
         Qt::Orientation orientation, ScalePos scalePos, BGSTYLE bgStyle): 
@@ -83,7 +82,7 @@ QwtSlider::QwtSlider(QWidget *parent, const char* name):
     QwtAbstractSlider(Qt::Horizontal, parent)
 {
     setName(name);
-    initSlider(Qt::Horizontal, None, BgTrough);
+    initSlider(Qt::Horizontal, NoScale, BgTrough);
 }
 #endif
 
@@ -132,10 +131,10 @@ void QwtSlider::initSlider(Qt::Orientation orientation,
     if ( orientation == Qt::Vertical )
     {
         // enforce a valid combination of scale position and orientation
-        if ((d_data->scalePos == Bottom) || (d_data->scalePos == Top))
-            d_data->scalePos = None;
-        // adopt the policy of layoutSlider (None lays out like Left)
-        if (d_data->scalePos == Right)
+        if ((d_data->scalePos == BottomScale) || (d_data->scalePos == TopScale))
+            d_data->scalePos = NoScale;
+        // adopt the policy of layoutSlider (NoScale lays out like Left)
+        if (d_data->scalePos == RightScale)
            align = QwtScaleDraw::RightScale;
         else
            align = QwtScaleDraw::LeftScale;
@@ -143,10 +142,10 @@ void QwtSlider::initSlider(Qt::Orientation orientation,
     else
     {
         // enforce a valid combination of scale position and orientation
-        if ((d_data->scalePos == Left) || (d_data->scalePos == Right))
-            d_data->scalePos = None;
-        // adopt the policy of layoutSlider (None lays out like Bottom)
-        if (d_data->scalePos == Top)
+        if ((d_data->scalePos == LeftScale) || (d_data->scalePos == RightScale))
+            d_data->scalePos = NoScale;
+        // adopt the policy of layoutSlider (NoScale lays out like Bottom)
+        if (d_data->scalePos == TopScale)
            align = QwtScaleDraw::TopScale;
         else
            align = QwtScaleDraw::BottomScale;
@@ -169,7 +168,7 @@ QwtSlider::~QwtSlider()
   \param o Orientation. Allowed values are Qt::Horizontal and Qt::Vertical.
   
   If the new orientation and the old scale position are an invalid combination,
-  the scale position will be set to None.
+  the scale position will be set to QwtSlider::NoScale.
   \sa QwtAbstractSlider::orientation()
 */
 void QwtSlider::setOrientation(Qt::Orientation o) 
@@ -179,13 +178,13 @@ void QwtSlider::setOrientation(Qt::Orientation o)
 
     if (o == Qt::Horizontal)
     {
-        if ((d_data->scalePos == Left) || (d_data->scalePos == Right))
-            d_data->scalePos = None;
+        if ((d_data->scalePos == LeftScale) || (d_data->scalePos == RightScale))
+            d_data->scalePos = NoScale;
     }
     else // if (o == Qt::Vertical)
     {
-        if ((d_data->scalePos == Bottom) || (d_data->scalePos == Top))
-            d_data->scalePos = None;
+        if ((d_data->scalePos == BottomScale) || (d_data->scalePos == TopScale))
+            d_data->scalePos = NoScale;
     }
 
 #if QT_VERSION >= 0x040000
@@ -219,14 +218,15 @@ void QwtSlider::setOrientation(Qt::Orientation o)
     become Qt::Vertical;
   - if the new scale position is Bottom or Top the scale orientation will
     become Qt::Horizontal;
-  - if the new scale position is None, the scale orientation will not change.
+  - if the new scale position is QwtSlider::NoScale, the scale 
+    orientation will not change.
 */
 void QwtSlider::setScalePosition(ScalePos s)
 {
     d_data->scalePos = s;
-    if ((s == Bottom) || (s == Top))
+    if ((s == BottomScale) || (s == TopScale))
         setOrientation(Qt::Horizontal);
-    else if ((s == Left) || (s == Right))
+    else if ((s == LeftScale) || (s == RightScale))
         setOrientation(Qt::Vertical);
     else
         layoutSlider();
@@ -516,7 +516,7 @@ void QwtSlider::paintEvent(QPaintEvent *e)
 //! Draw the QwtSlider
 void QwtSlider::draw(QPainter *painter, const QRect&)
 {
-    if (d_data->scalePos != None)
+    if (d_data->scalePos != NoScale)
     {
 #if QT_VERSION < 0x040000
         scaleDraw()->draw(painter, colorGroup());
@@ -556,7 +556,7 @@ void QwtSlider::layoutSlider( bool update_geometry )
     }
 
     int scd = 0;
-    if ( d_data->scalePos != None )
+    if ( d_data->scalePos != NoScale )
     {
         int d1, d2;
         scaleDraw()->getBorderDistHint(font(), d1, d2);
@@ -574,7 +574,7 @@ void QwtSlider::layoutSlider( bool update_geometry )
     {
         switch (d_data->scalePos)
         {
-            case Top:
+            case TopScale:
             {
                 d_data->sliderRect.setRect(
                     r.x() + d_data->xMargin + slo,
@@ -589,7 +589,7 @@ void QwtSlider::layoutSlider( bool update_geometry )
                 break;
             }
 
-            case Bottom:
+            case BottomScale:
             {
                 d_data->sliderRect.setRect(
                     r.x() + d_data->xMargin + slo,
@@ -604,7 +604,7 @@ void QwtSlider::layoutSlider( bool update_geometry )
                 break;
             }
 
-            case None: // like Bottom, but no scale. See QwtSlider().
+            case NoScale: // like Bottom, but no scale. See QwtSlider().
             default:   // inconsistent orientation and scale position
             {
                 d_data->sliderRect.setRect(
@@ -625,7 +625,7 @@ void QwtSlider::layoutSlider( bool update_geometry )
     {
         switch (d_data->scalePos)
         {
-            case Right:
+            case RightScale:
                 d_data->sliderRect.setRect(
                     r.x() + d_data->xMargin,
                     r.y() + d_data->yMargin + slo,
@@ -638,7 +638,7 @@ void QwtSlider::layoutSlider( bool update_geometry )
 
                 break;
 
-            case Left:
+            case LeftScale:
                 d_data->sliderRect.setRect(
                     r.x() + r.width() - sliderWidth - d_data->xMargin,
                     r.y() + d_data->yMargin + slo,
@@ -650,7 +650,7 @@ void QwtSlider::layoutSlider( bool update_geometry )
 
                 break;
 
-            case None: // like Left, but no scale. See QwtSlider().
+            case NoScale: // like Left, but no scale. See QwtSlider().
             default:   // inconsistent orientation and scale position
                 d_data->sliderRect.setRect(
                     r.x() + r.width() - sliderWidth - d_data->xMargin,
@@ -784,7 +784,7 @@ QSize QwtSlider::minimumSizeHint() const
         sliderWidth += 2 * d_data->borderWidth;
 
     int w = 0, h = 0;
-    if (d_data->scalePos != None)
+    if (d_data->scalePos != NoScale)
     {
         int d1, d2;
         scaleDraw()->getBorderDistHint(font(), d1, d2);

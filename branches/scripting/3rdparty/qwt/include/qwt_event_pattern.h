@@ -133,6 +133,7 @@ public:
         KeyPatternCount
     };
 
+    //! A pattern for mouse events
     class MousePattern
     {
     public:
@@ -146,6 +147,7 @@ public:
         int state;
     };
 
+    //! A pattern for key events
     class KeyPattern
     {
     public:

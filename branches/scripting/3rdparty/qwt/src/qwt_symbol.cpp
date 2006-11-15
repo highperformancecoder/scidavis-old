@@ -17,13 +17,13 @@
   Default Constructor
 
   The symbol is constructed with gray interior,
-  black outline with zero width, no size and style 'None'.
+  black outline with zero width, no size and style 'NoSymbol'.
 */
 QwtSymbol::QwtSymbol(): 
     d_brush(Qt::gray), 
     d_pen(Qt::black), 
     d_size(0,0),
-    d_style(QwtSymbol::None)
+    d_style(QwtSymbol::NoSymbol)
 {
 }
 
@@ -307,7 +307,7 @@ void QwtSymbol::draw(QPainter *painter, const QPoint &pos) const
   \brief Specify the symbol style
 
   The following styles are defined:<dl>
-  <dt>None<dd>No Style. The symbol cannot be drawn.
+  <dt>NoSymbol<dd>No Style. The symbol cannot be drawn.
   <dt>Ellipse<dd>Ellipse or circle
   <dt>Rect<dd>Rectangle
   <dt>Diamond<dd>Diamond

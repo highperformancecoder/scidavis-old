@@ -299,6 +299,9 @@ void QwtAbstractScale::scaleChange()
 {
 }
 
+/*!
+   \return abstractScaleDraw()->scaleMap()
+*/
 const QwtScaleMap &QwtAbstractScale::scaleMap() const
 {
     return d_data->scaleDraw->scaleMap();

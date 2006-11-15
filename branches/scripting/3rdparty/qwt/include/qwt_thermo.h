@@ -90,12 +90,19 @@ public:
     /*
       Scale position. QwtThermo tries to enforce valid combinations of its
       orientation and scale position:
-      - Qt::Horizonal combines with None, Top and Bottom
-      - Qt::Vertical combines with None, Left and Right
+      - Qt::Horizonal combines with NoScale, TopScale and BottomScale
+      - Qt::Vertical combines with NoScale, LeftScale and RightScale
       
-      \sa QwtThermo::setOrientation, QwtThermo::setScalePosition
+      \sa setOrientation, setScalePosition
     */
-    enum ScalePos {None, Left, Right, Top, Bottom};
+    enum ScalePos 
+    {
+        NoScale, 
+        LeftScale, 
+        RightScale, 
+        TopScale, 
+        BottomScale
+    };
 
     explicit QwtThermo(QWidget *parent = NULL);
 #if QT_VERSION < 0x040000

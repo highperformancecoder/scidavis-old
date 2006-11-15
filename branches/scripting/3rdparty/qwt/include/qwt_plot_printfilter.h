@@ -20,9 +20,9 @@ class QwtPlotItem;
 /*!
   \brief A base class for plot print filters.
 
-  A priint filter can be used to customize QwtPlot::print().
+  A print filter can be used to customize QwtPlot::print().
 
-  \Note In Qwt 5.0 the design of QwtPlot allows/recommends writing
+  \deprecated In Qwt 5.0 the design of QwtPlot allows/recommends writing
   individual QwtPlotItems, that are not known to QwtPlotPrintFilter.
   So this concept is outdated and QwtPlotPrintFilter will be
   removed/replaced in Qwt 6.x.

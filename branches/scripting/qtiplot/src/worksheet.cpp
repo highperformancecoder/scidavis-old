@@ -2349,6 +2349,9 @@ if ( f.open(IO_ReadOnly) )
 		line = QStringList::split(sep, s, false);	
 		int end = startCol+(int)line.count();
 		for (i=startCol; i<end; i++)
+			col_label[i] = QString::null;
+
+		for (i=startCol; i<end; i++)
 			{
 			comments[i] = line[i-startCol];
 			s = line[i-startCol].remove(QRegExp("\\W")).replace("_","-");
@@ -2495,7 +2498,10 @@ if ( f.open(IO_ReadOnly) )
   			s = s.simplifyWhiteSpace();
   		else if (stripSpaces)
   			s = s.stripWhiteSpace();
-		line = QStringList::split(sep, s, false);	
+		line = QStringList::split(sep, s, false);
+		for (i=0; i<(int)line.count(); i++)
+			col_label[i] = QString::null;
+
 		for (i=0; i<(int)line.count(); i++)
 			{
 			comments[i] = line[i];

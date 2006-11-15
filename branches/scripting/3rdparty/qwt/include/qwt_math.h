@@ -7,11 +7,6 @@
  * modify it under the terms of the Qwt License, Version 1.0
  *****************************************************************************/
 
-/*!
-  \file qwt_math.h
-  \brief A set of mathematical routines
-*/
-
 #ifndef QWT_MATH_H
 #define QWT_MATH_H
 

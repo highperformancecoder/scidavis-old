@@ -10,10 +10,12 @@
 #include "qwt_math.h"
 #include "qwt_data.h"
 
+//! Constructor
 QwtData::QwtData()
 {
 }
 
+//! Destructor
 QwtData::~QwtData()
 {
 }
@@ -57,12 +59,18 @@ QwtDoubleRect QwtData::boundingRect() const
     return QwtDoubleRect(minX, minY, maxX - minX, maxY - minY);
 }
 
+/*!
+  Constructor
+
+  \param polygon Polygon data
+  \sa QwtPlotCurve::setData()
+*/
 #if QT_VERSION >= 0x040000
-QwtPolygonFData::QwtPolygonFData(const QPolygonF &data):
+QwtPolygonFData::QwtPolygonFData(const QPolygonF &polygon):
 #else
-QwtPolygonFData::QwtPolygonFData(const QwtArray<QwtDoublePoint> &data):
+QwtPolygonFData::QwtPolygonFData(const QwtArray<QwtDoublePoint> &polygon):
 #endif
-    d_data(data)
+    d_data(polygon)
 {
 }
 
@@ -77,16 +85,29 @@ QwtPolygonFData& QwtPolygonFData::operator=(
     return *this;
 }
 
+//! \return Size of the data set 
 size_t QwtPolygonFData::size() const 
 { 
     return d_data.size(); 
 }
 
+/*!
+  Return the x value of data point i
+
+  \param i Index
+  \return x X value of data point i
+*/
 double QwtPolygonFData::x(size_t i) const 
 { 
     return d_data[int(i)].x(); 
 }
 
+/*!
+  Return the y value of data point i
+
+  \param i Index
+  \return y Y value of data point i
+*/
 double QwtPolygonFData::y(size_t i) const 
 { 
     return d_data[int(i)].y(); 
@@ -101,6 +122,9 @@ const QwtArray<QwtDoublePoint> &QwtPolygonFData::data() const
     return d_data;
 }
 
+/*!
+  \return Pointer to a copy (virtual copy constructor)
+*/
 QwtData *QwtPolygonFData::copy() const 
 { 
     return new QwtPolygonFData(d_data); 
@@ -108,8 +132,11 @@ QwtData *QwtPolygonFData::copy() const
 
 /*!
   Constructor
+
+  \param x Array of x values
+  \param y Array of y values
   
-  \sa QwtCurve::setData and QwtPlot::setCurveData.
+  \sa QwtPlotCurve::setData
 */
 QwtArrayData::QwtArrayData(
         const QwtArray<double> &x, const QwtArray<double> &y): 
@@ -121,7 +148,10 @@ QwtArrayData::QwtArrayData(
 /*!
   Constructor
   
-  \sa QwtCurve::setData and QwtPlot::setCurveData.
+  \param x Array of x values
+  \param y Array of y values
+  \param size Size of the x and y arrays
+  \sa QwtPlotCurve::setData
 */
 QwtArrayData::QwtArrayData(const double *x, const double *y, size_t size)
 {
@@ -151,31 +181,49 @@ QwtArrayData& QwtArrayData::operator=(const QwtArrayData &data)
     return *this;
 }
 
+//! \return Size of the data set 
 size_t QwtArrayData::size() const 
 { 
     return qwtMin(d_x.size(), d_y.size()); 
 }
 
+/*!
+  Return the x value of data point i
+
+  \param i Index
+  \return x X value of data point i
+*/
 double QwtArrayData::x(size_t i) const 
 { 
     return d_x[int(i)]; 
 }
 
+/*!
+  Return the y value of data point i
+
+  \param i Index
+  \return y Y value of data point i
+*/
 double QwtArrayData::y(size_t i) const 
 { 
     return d_y[int(i)]; 
 }
 
+//! \return Array of the x-values
 const QwtArray<double> &QwtArrayData::xData() const
 {
     return d_x;
 }
 
+//! \return Array of the y-values
 const QwtArray<double> &QwtArrayData::yData() const
 {
     return d_y;
 }
 
+/*!
+  \return Pointer to a copy (virtual copy constructor)
+*/
 QwtData *QwtArrayData::copy() const 
 { 
     return new QwtArrayData(d_x, d_y); 
@@ -217,9 +265,24 @@ QwtDoubleRect QwtArrayData::boundingRect() const
     return QwtDoubleRect(minX, minY, maxX - minX, maxY - minY);
 }
 
-QwtCPointerData::QwtCPointerData(const double *x, const double *y,
-                                 size_t size):
-    d_x(x), d_y(y), d_size(size)
+/*!
+  Constructor
+
+  \param x Array of x values
+  \param y Array of y values
+  \param size Size of the x and y arrays
+
+  \warning The programmer must assure that the memory blocks referenced
+           by the pointers remain valid during the lifetime of the 
+           QwtPlotCPointer object.
+
+  \sa QwtPlotCurve::setData(), QwtPlotCurve::setRawData()
+*/
+QwtCPointerData::QwtCPointerData(
+    const double *x, const double *y, size_t size):
+    d_x(x), 
+    d_y(y), 
+    d_size(size)
 {
 }
 
@@ -235,31 +298,49 @@ QwtCPointerData& QwtCPointerData::operator=(const QwtCPointerData &data)
     return *this;
 }
 
+//! \return Size of the data set 
 size_t QwtCPointerData::size() const 
 {   
     return d_size; 
 }
 
+/*!
+  Return the x value of data point i
+
+  \param i Index
+  \return x X value of data point i
+*/
 double QwtCPointerData::x(size_t i) const 
 { 
     return d_x[int(i)]; 
 }
 
+/*!
+  Return the y value of data point i
+
+  \param i Index
+  \return y Y value of data point i
+*/
 double QwtCPointerData::y(size_t i) const 
 { 
     return d_y[int(i)]; 
 }
 
+//! \return Array of the x-values
 const double *QwtCPointerData::xData() const
 {
     return d_x;
 }
 
+//! \return Array of the y-values
 const double *QwtCPointerData::yData() const
 {
     return d_y;
 }
 
+/*!
+  \return Pointer to a copy (virtual copy constructor)
+*/
 QwtData *QwtCPointerData::copy() const 
 {
     return new QwtCPointerData(d_x, d_y, d_size);

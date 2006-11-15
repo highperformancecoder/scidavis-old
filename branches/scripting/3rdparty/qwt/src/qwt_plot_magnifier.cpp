@@ -379,6 +379,9 @@ void QwtPlotMagnifier::rescale(double factor)
     bool doReplot = false;
     QwtPlot* plt = plot();
 
+    const bool autoReplot = plt->autoReplot();
+    plt->setAutoReplot(false);
+
     for ( int axisId = 0; axisId < QwtPlot::axisCnt; axisId++ )
     {
         const QwtScaleDiv *scaleDiv = plt->axisScaleDiv(axisId);
@@ -392,6 +395,8 @@ void QwtPlotMagnifier::rescale(double factor)
             doReplot = true;
         }
     }
+
+    plt->setAutoReplot(autoReplot);
 
     if ( doReplot )
         plt->replot();

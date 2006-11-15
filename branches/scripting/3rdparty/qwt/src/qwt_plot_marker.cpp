@@ -136,7 +136,7 @@ void QwtPlotMarker::draw(QPainter *p,
 
     // draw symbol
     QSize sSym(0, 0);
-    if (d_data->sym.style() != QwtSymbol::None)
+    if (d_data->sym.style() != QwtSymbol::NoSymbol)
     {
         sSym = d_data->sym.size();
         d_data->sym.draw(p, x, y);

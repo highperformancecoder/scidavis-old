@@ -181,7 +181,7 @@ void TableStatistics::update(Table *t, const QString& colName)
 	setText(c, 5, QString::number(mean*m));
 	setText(c, 6, QString::number(max_index + 1));
 	setText(c, 7, QString::number(max));
-	setText(c, 8, QString::number(min_index));
+	setText(c, 8, QString::number(min_index + 1));
 	setText(c, 9, QString::number(min));
 	setText(c, 10, QString::number(m));
 

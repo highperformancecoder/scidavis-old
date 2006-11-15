@@ -306,6 +306,13 @@ void QwtCompassMagnetNeedle::draw(QPainter *painter, const QPoint &center,
 
 /*!
   Draw a compass needle 
+
+  \param painter Painter
+  \param palette Palette
+  \param colorGroup Color group
+  \param center Center, where the needle starts
+  \param length Length of the needle
+  \param direction Direction
 */
 void QwtCompassMagnetNeedle::drawTriangleNeedle(QPainter *painter, 
     const QPalette &palette, QPalette::ColorGroup colorGroup,
@@ -365,6 +372,13 @@ void QwtCompassMagnetNeedle::drawTriangleNeedle(QPainter *painter,
 
 /*!
   Draw a compass needle 
+
+  \param painter Painter
+  \param palette Palette
+  \param colorGroup Color group
+  \param center Center, where the needle starts
+  \param length Length of the needle
+  \param direction Direction
 */
 void QwtCompassMagnetNeedle::drawThinNeedle(QPainter *painter, 
     const QPalette &palette, QPalette::ColorGroup colorGroup,
@@ -393,6 +407,14 @@ void QwtCompassMagnetNeedle::drawThinNeedle(QPainter *painter,
 
 /*!
   Draw a compass needle 
+
+  \param painter Painter
+  \param brush Brush
+  \param colorOffset Color offset
+  \param center Center, where the needle starts
+  \param length Length of the needle
+  \param width Width of the needle
+  \param direction Direction
 */
 void QwtCompassMagnetNeedle::drawPointer(
     QPainter *painter, const QBrush &brush,
@@ -435,8 +457,13 @@ void QwtCompassMagnetNeedle::drawPointer(
     painter->restore();
 }
 
-//! Constructor
+/*! 
+   Constructor
 
+   \param style Arrow style
+   \param light Light color
+   \param dark Dark color
+*/
 QwtCompassWindArrow::QwtCompassWindArrow(Style style, 
         const QColor &light, const QColor &dark):
     d_style(style)
@@ -479,6 +506,13 @@ void QwtCompassWindArrow::draw(QPainter *painter, const QPoint &center,
 
 /*!
   Draw a compass needle 
+
+ \param painter Painter
+ \param palette Palette
+ \param colorGroup colorGroup
+ \param center Center of the dial, start position for the needle
+ \param length Length of the needle
+ \param direction Direction of the needle, in degrees counter clockwise
 */
 void QwtCompassWindArrow::drawStyle1Needle(QPainter *painter, 
     const QPalette &palette, QPalette::ColorGroup colorGroup,
@@ -509,6 +543,13 @@ void QwtCompassWindArrow::drawStyle1Needle(QPainter *painter,
 
 /*!
   Draw a compass needle 
+
+ \param painter Painter
+ \param palette Palette
+ \param colorGroup colorGroup
+ \param center Center of the dial, start position for the needle
+ \param length Length of the needle
+ \param direction Direction of the needle, in degrees counter clockwise
 */
 void QwtCompassWindArrow::drawStyle2Needle(QPainter *painter, 
     const QPalette &palette, QPalette::ColorGroup colorGroup,

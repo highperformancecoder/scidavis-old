@@ -45,12 +45,18 @@ public:
     bool readOnly;
 };
 
-//! Constructor
-QwtAbstractSlider::QwtAbstractSlider(Qt::Orientation orient, QWidget *parent): 
+/*! 
+   \brief Constructor
+
+   \param orientation Orientation
+   \param parent Parent widget
+*/
+QwtAbstractSlider::QwtAbstractSlider(
+        Qt::Orientation orientation, QWidget *parent): 
     QWidget(parent, NULL)
 {
     d_data = new QwtAbstractSlider::PrivateData;
-    d_data->orientation = orient;
+    d_data->orientation = orientation;
 
 #if QT_VERSION >= 0x040000
     using namespace Qt;
@@ -74,7 +80,7 @@ QwtAbstractSlider::~QwtAbstractSlider()
   or keyboard.
 
   \param readOnly Enables in case of true
-  \sa isReadOnly
+  \sa isReadOnly()
 */
 void QwtAbstractSlider::setReadOnly(bool readOnly)
 {
@@ -87,7 +93,7 @@ void QwtAbstractSlider::setReadOnly(bool readOnly)
   or keyboard.
 
   \return true if read only
-  \sa setReadOnly
+  \sa setReadOnly()
 */
 bool QwtAbstractSlider::isReadOnly() const
 {
@@ -106,7 +112,7 @@ void QwtAbstractSlider::setOrientation(Qt::Orientation o)
 
 /*! 
   \return Orientation
-  \sa QwtAbstractSlider::setOrientation
+  \sa setOrientation()
 */
 Qt::Orientation QwtAbstractSlider::orientation() const
 {
@@ -127,7 +133,7 @@ void QwtAbstractSlider::stopMoving()
 /*!
   \brief Specify the update interval for automatic scrolling
   \param t update interval in milliseconds
-  \sa QwtAbstractSlider::getScrollMode()
+  \sa getScrollMode()
 */
 void QwtAbstractSlider::setUpdateTime(int t) 
 {
@@ -292,7 +298,10 @@ void QwtAbstractSlider::setTracking(bool enable)
     d_data->tracking = enable;
 }
 
-//! Mouse Move Event handler
+/*! 
+   Mouse Move Event handler
+   \param e Mouse event
+*/
 void QwtAbstractSlider::mouseMoveEvent(QMouseEvent *e)
 {
     if ( isReadOnly() )
@@ -320,7 +329,10 @@ void QwtAbstractSlider::mouseMoveEvent(QMouseEvent *e)
     }
 }
 
-//! Qt wheel event
+/*! 
+   Wheel Event handler
+   \param e Whell event
+*/
 void QwtAbstractSlider::wheelEvent(QWheelEvent *e)
 {
     if ( isReadOnly() )
@@ -353,9 +365,9 @@ void QwtAbstractSlider::wheelEvent(QWheelEvent *e)
   - Key_Up, Key_Right\n
     Increment by 1
 
+  \param e Key event
   \sa isReadOnly()
 */
-
 void QwtAbstractSlider::keyPressEvent(QKeyEvent *e)
 {
     if ( isReadOnly() )
@@ -398,7 +410,10 @@ void QwtAbstractSlider::keyPressEvent(QKeyEvent *e)
     }
 }
 
-//! Qt timer event
+/*! 
+   Qt timer event
+   \param e Timer event
+*/
 void QwtAbstractSlider::timerEvent(QTimerEvent *)
 {
     const double inc = step();
@@ -483,11 +498,11 @@ void QwtAbstractSlider::valueChange()
 
   Derived widgets may overload this function to make it public.
 
-  \param val new mass in kg
+  \param val New mass in kg
 
   \bug If the mass is smaller than 1g, it is set to zero.
        The maximal mass is limited to 100kg.
-  \sa QwtAbstractSlider::mass
+  \sa mass()
 */
 void QwtAbstractSlider::setMass(double val)
 {
@@ -501,7 +516,7 @@ void QwtAbstractSlider::setMass(double val)
 
 /*!
     \return mass
-    \sa QwtAbstractSlider::setMass
+    \sa setMass()
 */
 double QwtAbstractSlider::mass() const
 {   
@@ -515,7 +530,7 @@ double QwtAbstractSlider::mass() const
   This function can be used to move the slider to a value
   which is not an integer multiple of the step size.
   \param val new value
-  \sa QwtAbstractSlider::fitValue
+  \sa fitValue()
 */
 void QwtAbstractSlider::setValue(double val)
 {
@@ -528,19 +543,21 @@ void QwtAbstractSlider::setValue(double val)
 /*!
   \brief Set the slider's value to the nearest integer multiple
          of the step size.
-     \sa QwtAbstractSlider::setValue()
+
+   \param valeu Value
+   \sa setValue(), incValue()
 */
-void QwtAbstractSlider::fitValue(double val)
+void QwtAbstractSlider::fitValue(double value)
 {
     if (d_data->scrollMode == ScrMouse) 
         stopMoving();
-    QwtDoubleRange::fitValue(val);
+    QwtDoubleRange::fitValue(value);
 }
-
 
 /*!
   \brief Increment the value by a specified number of steps
   \param steps number of steps
+  \sa setValue()
 */
 void QwtAbstractSlider::incValue(int steps)
 {

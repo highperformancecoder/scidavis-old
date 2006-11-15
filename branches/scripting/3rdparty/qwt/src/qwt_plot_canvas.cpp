@@ -210,15 +210,7 @@ void QwtPlotCanvas::paintEvent(QPaintEvent *event)
         painter.restore(); 
     }
 
-#if defined(Q_WS_WIN)
-
-#ifdef __GNUC__
-#warning Clipping bugs on Win32
-#endif
-
-#else
     painter.setClipRegion(event->region() & contentsRect());
-#endif
 
     drawContents( &painter );
 #else // QT_VERSION < 0x040000
@@ -258,6 +250,15 @@ void QwtPlotCanvas::drawCanvas(QPainter *painter)
     if ( !contentsRect().isValid() )
         return;
 
+    QBrush bgBrush;
+#if QT_VERSION >= 0x040000
+        bgBrush = palette().brush(backgroundRole());
+#else
+    QColorGroup::ColorRole role = 
+        QPalette::backgroundRoleFromMode( backgroundMode() );
+    bgBrush = colorGroup().brush( role );
+#endif
+
     if ( d_data->paintAttributes & PaintCached && d_data->cache )
     {
         *d_data->cache = QPixmap(contentsRect().size());
@@ -277,14 +278,6 @@ void QwtPlotCanvas::drawCanvas(QPainter *painter)
             QPainter bgPainter(d_data->cache);
             bgPainter.setPen(Qt::NoPen);
 
-            QBrush bgBrush;
-#if QT_VERSION >= 0x040000
-                bgBrush = palette().brush(backgroundRole());
-#else
-            QColorGroup::ColorRole role = 
-                QPalette::backgroundRoleFromMode( backgroundMode() );
-            bgBrush = colorGroup().brush( role );
-#endif
             bgPainter.setBrush(bgBrush);
             bgPainter.drawRect(d_data->cache->rect());
         }
@@ -303,22 +296,19 @@ void QwtPlotCanvas::drawCanvas(QPainter *painter)
     }
     else
     {
+#if QT_VERSION >= 0x040000
         if ( d_data->paintAttributes & PaintPacked )
+#endif
         {
             painter->save();
+
             painter->setPen(Qt::NoPen);
-
-            const QBrush brush =
-#if QT_VERSION < 0x040000
-                backgroundBrush();
-#else
-                palette().brush(backgroundRole());
-#endif
-            painter->setBrush(brush);
-
+            painter->setBrush(bgBrush);
             painter->drawRect(contentsRect());
+
             painter->restore();
         }
+
         ((QwtPlot *)parent())->drawCanvas(painter);
     }
 }

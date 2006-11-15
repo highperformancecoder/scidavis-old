@@ -76,6 +76,10 @@ QwtAbstractScaleDraw &QwtAbstractScaleDraw::operator=(const QwtAbstractScaleDraw
 
 /*!  
   En/Disable a component of the scale
+
+  \param component Scale component
+  \param enable On/Off
+
   \sa QwtAbstractScaleDraw::hasComponent
 */
 void QwtAbstractScaleDraw::enableComponent(
@@ -358,13 +362,17 @@ QwtText QwtAbstractScaleDraw::label(double value) const
 }
 
 /*!
-   Convert a value into its representing label and cache it.
+   \brief Convert a value into its representing label and cache it.
 
    The conversion between value and label is called very often
-   in the layout and painting code. Also the
+   in the layout and painting code. Unfortunately the
    calculation of the label sizes might be slow (really slow
-   for rich text in Qt4). QwtAbstractScaleDraw::tickLabel
-   calls QwtAbstractScaleDraw::label and caches its result.
+   for rich text in Qt4), so it´s necessary to cache the labels. 
+
+   \param font Font
+   \param value Value
+
+   \return Tick label
 */
 const QwtText &QwtAbstractScaleDraw::tickLabel(
     const QFont &font, double value) const

@@ -303,7 +303,11 @@ QwtPolygon QwtMetricsMap::deviceToLayout(const QwtPolygon &pa,
 }
 
 /*!
-  Wrapper for QwtMatrix::mapRect. 
+  Wrapper for QMatrix::mapRect. 
+
+  \param m Matrix
+  \param rect Rectangle to translate
+  \return Translated rectangle
 */
 
 QRect QwtMetricsMap::translate(
@@ -313,9 +317,12 @@ QRect QwtMetricsMap::translate(
 }
 
 /*!
-  QwtPolygon QwtMatrix::operator*(const QwtPolygon &) const.
-*/
+  Wrapper for QMatrix::map. 
 
+  \param m Matrix
+  \param pa Polygon to translate
+  \return Translated polygon
+*/
 QwtPolygon QwtMetricsMap::translate(
     const QwtMatrix &m, const QwtPolygon &pa) 
 {

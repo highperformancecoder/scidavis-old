@@ -47,6 +47,11 @@ class QWT_EXPORT QwtAnalogClock: public QwtDial
     Q_OBJECT
 
 public:
+    /*! 
+        Hand type
+        \sa setHand(), hand()
+    */
+
     enum Hand
     {
         SecondHand,

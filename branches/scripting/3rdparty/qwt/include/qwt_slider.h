@@ -48,22 +48,35 @@ public:
     /*! 
       Scale position. QwtSlider tries to enforce valid combinations of its
       orientation and scale position:
-      - Qt::Horizonal combines with None, Top and Bottom
-      - Qt::Vertical combines with None, Left and Right
+      - Qt::Horizonal combines with NoScale, TopScale and BottomScale
+      - Qt::Vertical combines with NoScale, LeftScale and RightScale
 
       \sa QwtSlider::QwtSlider
      */
-    enum ScalePos { None, Left, Right, Top, Bottom };
+    enum ScalePos 
+    { 
+        NoScale, 
+
+        LeftScale, 
+        RightScale, 
+        TopScale, 
+        BottomScale 
+    };
 
     /*! 
       Background style.
       \sa QwtSlider::QwtSlider
      */
-    enum BGSTYLE { BgTrough = 0x1, BgSlot = 0x2, BgBoth = BgTrough | BgSlot};
+    enum BGSTYLE 
+    { 
+        BgTrough = 0x1, 
+        BgSlot = 0x2, 
+        BgBoth = BgTrough | BgSlot
+    };
 
     explicit QwtSlider(QWidget *parent,
           Qt::Orientation = Qt::Horizontal,
-          ScalePos = None, BGSTYLE bgStyle = BgTrough);
+          ScalePos = NoScale, BGSTYLE bgStyle = BgTrough);
 #if QT_VERSION < 0x040000
     explicit QwtSlider(QWidget *parent, const char *name);
 #endif

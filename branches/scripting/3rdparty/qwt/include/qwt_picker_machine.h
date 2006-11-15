@@ -32,6 +32,7 @@ class QwtEventPattern;
 class QWT_EXPORT QwtPickerMachine
 {
 public:
+    //! Commands - the output of the state machine
     enum Command
     {
         Begin,

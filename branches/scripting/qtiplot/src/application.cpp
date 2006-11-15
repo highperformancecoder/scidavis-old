@@ -3783,7 +3783,7 @@ progress.setLabelText(title);
 progress.setTotalSteps(widgets);
 progress.setActiveWindow();
 //progress.setMinimumDuration(10000);
-progress.move(0,0);
+//progress.move(0,0);
 
 Folder *cf = app->projectFolder();
 app->folders->blockSignals (true);
@@ -4262,12 +4262,11 @@ void ApplicationWindow::readSettings()
 {	
 #ifdef Q_OS_MAC // Mac 
 	QSettings settings(QSettings::Ini);
-	settings.setPath("ProIndependent", "QtiPlot", QSettings::User);
 #else
 	QSettings settings;
-	settings.setPath("ProIndependent", "QtiPlot");
 #endif
 
+settings.setPath("ProIndependent", "QtiPlot", QSettings::User);
 settings.beginGroup("/General");
 autoSearchUpdates = settings.readBoolEntry("/AutoSearchUpdates", false, 0);
 askForSupport = settings.readBoolEntry ("/Support", true, 0);
@@ -4452,12 +4451,11 @@ void ApplicationWindow::saveSettings()
 {
 #ifdef Q_OS_MAC // Mac 
 	QSettings settings(QSettings::Ini);
-	settings.setPath("ProIndependent", "QtiPlot", QSettings::User);
 #else
 	QSettings settings;
-	settings.setPath("ProIndependent", "QtiPlot");
 #endif
 
+settings.setPath("ProIndependent", "QtiPlot", QSettings::User);
 settings.beginGroup("/General");
 settings.writeEntry("/AutoSearchUpdates", autoSearchUpdates);
 settings.writeEntry("/Support", askForSupport);

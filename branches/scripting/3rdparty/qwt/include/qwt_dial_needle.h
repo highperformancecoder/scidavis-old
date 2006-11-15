@@ -73,6 +73,7 @@ private:
 class QWT_EXPORT QwtDialSimpleNeedle: public QwtDialNeedle
 {
 public:
+    //! Style of the needle
     enum Style
     {
         Arrow,
@@ -124,6 +125,7 @@ private:
 class QWT_EXPORT QwtCompassMagnetNeedle: public QwtDialNeedle
 {
 public:
+    //! Style of the needle
     enum Style
     {
         TriangleStyle,
@@ -168,6 +170,7 @@ private:
 class QWT_EXPORT QwtCompassWindArrow: public QwtDialNeedle
 {
 public:
+    //! Style of the arrow
     enum Style
     {
         Style1,

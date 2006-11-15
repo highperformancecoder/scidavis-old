@@ -94,7 +94,13 @@ private:
     int maxRowWidth(int numCols) const;
     void updateLayoutCache();
 
-    class PrivateData;
+#if QT_VERSION < 0x040000
+// xlC 5.1, the IBM/AIX C++ compiler, needs it to be public
+public:
+#endif
+   class PrivateData;
+
+private:
     PrivateData *d_data;
 };
 

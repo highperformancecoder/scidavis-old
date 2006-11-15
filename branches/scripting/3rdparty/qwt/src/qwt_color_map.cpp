@@ -397,7 +397,7 @@ public:
 
 /*! 
    Constructor
-   \param format Preferred format of the coor map
+   \param color Color of the map
 */
 QwtAlphaColorMap::QwtAlphaColorMap(const QColor &color):
     QwtColorMap(QwtColorMap::RGB)
@@ -407,7 +407,10 @@ QwtAlphaColorMap::QwtAlphaColorMap(const QColor &color):
     d_data->rgb = color.rgb() & qRgba(255, 255, 255, 0);
 }
 
-//! Copy constructor
+/*! 
+   Copy constructor
+   \param other Other color map
+*/
 QwtAlphaColorMap::QwtAlphaColorMap(const QwtAlphaColorMap &other):
     QwtColorMap(other)
 {
@@ -421,7 +424,11 @@ QwtAlphaColorMap::~QwtAlphaColorMap()
     delete d_data;
 }
 
-//! Assignment operator
+/*! 
+   Assignment operator
+   \param other Other color map
+   \return *this
+*/
 QwtAlphaColorMap &QwtAlphaColorMap::operator=(
     const QwtAlphaColorMap &other)
 {
@@ -441,6 +448,8 @@ QwtColorMap *QwtAlphaColorMap::copy() const
 
 /*!
    Set the color 
+
+   \param color Color
    \sa color()
 */
 void QwtAlphaColorMap::setColor(const QColor &color)
@@ -465,6 +474,7 @@ QColor QwtAlphaColorMap::color() const
 
   \param interval Range for all values
   \param value Value to map into a rgb value
+  \return rgb value, with an alpha value
 */
 QRgb QwtAlphaColorMap::rgb(const QwtDoubleInterval &interval,
     double value) const

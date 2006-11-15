@@ -884,7 +884,7 @@ void QwtPlotLayout::alignScales(int options,
             }
             else
             {
-                if ( d_data->alignCanvasToScales )
+                if ( d_data->alignCanvasToScales && leftOffset < 0 )
                 {
                     canvasRect.setLeft(qwtMax(canvasRect.left(), 
                         axisRect.left() - leftOffset));
@@ -906,7 +906,7 @@ void QwtPlotLayout::alignScales(int options,
             }
             else
             {
-                if ( d_data->alignCanvasToScales )
+                if ( d_data->alignCanvasToScales && rightOffset < 0 )
                 {
                     canvasRect.setRight( qwtMin(canvasRect.right(), 
                         axisRect.right() + rightOffset) );
@@ -921,7 +921,7 @@ void QwtPlotLayout::alignScales(int options,
         else // QwtPlot::yLeft, QwtPlot::yRight
         {
             const int bottomOffset = 
-                backboneOffset[QwtPlot::xBottom] - startDist;
+                backboneOffset[QwtPlot::xBottom] - endDist;
 
             if ( scaleRect[QwtPlot::xBottom].isValid() )
             {
@@ -933,7 +933,7 @@ void QwtPlotLayout::alignScales(int options,
             }
             else
             {
-                if ( d_data->alignCanvasToScales )
+                if ( d_data->alignCanvasToScales && bottomOffset < 0 )
                 {
                     canvasRect.setBottom(qwtMin(canvasRect.bottom(), 
                         axisRect.bottom() + bottomOffset));
@@ -945,7 +945,7 @@ void QwtPlotLayout::alignScales(int options,
                 }
             }
         
-            const int topOffset = backboneOffset[QwtPlot::xTop] - endDist;
+            const int topOffset = backboneOffset[QwtPlot::xTop] - startDist;
 
             if ( scaleRect[QwtPlot::xTop].isValid() )
             {
@@ -957,10 +957,10 @@ void QwtPlotLayout::alignScales(int options,
             }
             else
             {
-                if ( d_data->alignCanvasToScales )
+                if ( d_data->alignCanvasToScales && topOffset < 0 )
                 {
                     canvasRect.setTop(qwtMax(canvasRect.top(), 
-                        axisRect.top() + - topOffset));
+                        axisRect.top() - topOffset));
                 }
                 else
                 {

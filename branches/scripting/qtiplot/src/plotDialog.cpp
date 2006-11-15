@@ -285,15 +285,13 @@ void plotDialog::initLinePage()
     new QLabel( tr( "Color" ), GroupBox3, "TextLabel4",0 );
     boxLineColor = new ColorBox( FALSE, GroupBox3);
 	
-	fillGroupBox = new QButtonGroup(2,QGroupBox::Horizontal, QString::null, linePage, "fillGroupBox" );
+	fillGroupBox = new QButtonGroup(2,QGroupBox::Horizontal, tr("Fill area under curve"), linePage);
+	fillGroupBox->setCheckable (true);
 
-	boxFill = new QCheckBox(fillGroupBox, 0);
-	new QLabel(  tr( "Fill area under curve" ),fillGroupBox, "TextLabel4_3",0 );  
-
-	TextLabel4_3=new QLabel(  tr( "Fill color" ),fillGroupBox, "TextLabel4_3",0 );  
+	new QLabel(  tr( "Fill color" ),fillGroupBox);  
     boxAreaColor = new ColorBox( FALSE,fillGroupBox);
 
-	TextLabel4_4=new QLabel(tr( "Pattern" ), fillGroupBox, "TextLabel4_4",0);
+	new QLabel(tr( "Pattern" ), fillGroupBox);
 	boxPattern = new PatternBox( FALSE, fillGroupBox);
 	
 	QHBoxLayout* hlayout2 = new QHBoxLayout(linePage,5,5, "hlayout2");
@@ -308,8 +306,7 @@ void plotDialog::initLinePage()
 	connect(boxLineStyle, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(boxAreaColor, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(boxPattern, SIGNAL(activated(int)), this, SLOT(acceptParams()));
-	connect(boxFill, SIGNAL(toggled(bool)), this, SLOT(showAreaColor(bool)));
-	connect(boxFill, SIGNAL(clicked()), this, SLOT(acceptParams()));
+	connect(fillGroupBox, SIGNAL(toggled(bool)), this, SLOT(acceptParams()));
 }
 
 void plotDialog::initSymbolsPage()
@@ -847,14 +844,6 @@ graph->updateErrorBars(listBox->currentItem(),xBox->isChecked(),widthBox->curren
 					 throughBox->isChecked());
 }
 
-void plotDialog::showAreaColor(bool show)
-{
-boxAreaColor->setEnabled(show);
-TextLabel4_3->setEnabled(show);
-TextLabel4_4->setEnabled(show);
-boxPattern->setEnabled(show);
-}
-
 void plotDialog::updateTabWindow(int curveIndex)
 {
 int plot_type = setPlotType(curveIndex);
@@ -1099,8 +1088,10 @@ if (size>0)
 
 	setPenStyle(c->pen().style());
 	boxLineColor->setColor(c->pen().color());
-	boxLineWidth->setValue(c->pen().width());		
-	boxFill->setChecked(c->brush().style() != Qt::NoBrush );
+	boxLineWidth->setValue(c->pen().width());
+	fillGroupBox->blockSignals(true);
+	fillGroupBox->setChecked(c->brush().style() != Qt::NoBrush );
+	fillGroupBox->blockSignals(false);
 	boxAreaColor->setColor(c->brush().color());
 	boxPattern->setPattern(c->brush().style());
 		
@@ -1282,7 +1273,7 @@ else if (privateTabWidget->currentPage()==linePage)
 	int index=listBox->currentItem();
 	graph->setCurveStyle(index, boxConnect->currentItem());
 	QBrush br = QBrush(boxAreaColor->color(), boxPattern->getSelectedPattern());
-	if (!boxFill->isChecked())
+	if (!fillGroupBox->isChecked()) 
 		br = QBrush();
 	graph->setCurveBrush(index, br);
 	QPen pen = QPen(boxLineColor->color(),boxLineWidth->value(),Graph::getPenStyle(boxLineStyle->currentItem()));

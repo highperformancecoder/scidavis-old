@@ -139,6 +139,7 @@ void QwtCounter::initCounter()
     setFocusPolicy(StrongFocus);
 }
 
+//! Destructor
 QwtCounter::~QwtCounter()
 {
     delete d_data;

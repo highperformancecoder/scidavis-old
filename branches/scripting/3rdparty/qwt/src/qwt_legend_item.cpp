@@ -192,7 +192,7 @@ int QwtLegendItem::identifierMode() const
   Set the width for the identifier
   Default is 8 pixels
 
-  \param Width New width
+  \param width New width
 
   \sa identifierMode(), identifierWidth
 */
@@ -311,7 +311,7 @@ void QwtLegendItem::drawIdentifier(
     }
 
     if ( (d_data->identifierMode & ShowSymbol) 
-        && (d_data->symbol.style() != QwtSymbol::None) )
+        && (d_data->symbol.style() != QwtSymbol::NoSymbol) )
     {
         QSize symbolSize = 
             QwtPainter::metricsMap().screenToLayout(d_data->symbol.size());

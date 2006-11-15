@@ -26,7 +26,10 @@
 template class QWT_EXPORT QwtArray<double>;
 
 #if QT_VERSION < 0x040000
+#ifndef QWTARRAY_TEMPLATE_QWTDOUBLEPOINT // by mjo3
+#define QWTARRAY_TEMPLATE_QWTDOUBLEPOINT
 template class QWT_EXPORT QwtArray<QwtDoublePoint>;
+#endif //end of QWTARRAY_TEMPLATE_QWTDOUBLEPOINT
 #endif
 
 #endif
@@ -46,15 +49,13 @@ class QWT_EXPORT QwtData
 public:
     QwtData();
     virtual ~QwtData(); 
-    /*!
-      Return a pointer to a copy (virtual copy constructor)
-     */
+
+    //! \return Pointer to a copy (virtual copy constructor)
     virtual QwtData *copy() const = 0;
 
-    /*!
-      Return the size of the data set
-     */
+    //! \return Size of the data set
     virtual size_t size() const = 0;
+
     /*!
       Return the x value of data point i
       \param i Index
@@ -84,11 +85,6 @@ protected:
 class QWT_EXPORT QwtPolygonFData: public QwtData
 {
 public:
-    /*!
-      Constructor
-      
-      \sa QwtCurve::setData and QwtPlot::setCurveData.
-     */
 #if QT_VERSION < 0x040000
     QwtPolygonFData(const QwtArray<QwtDoublePoint> &);
 #else
@@ -148,14 +144,6 @@ private:
 class QWT_EXPORT QwtCPointerData: public QwtData
 {
 public:
-    /*!
-      Constructor
-      
-      \warning The programmer must assure that the memory blocks referenced
-      by the pointers remain valid during the lifetime of the QwtPlotCPointer
-      object.
-      \sa QwtCurve::setRawData and QwtPlot::setCurveRawData.
-     */
     QwtCPointerData(const double *x, const double *y, size_t size);
     QwtCPointerData &operator=(const QwtCPointerData &);
     virtual QwtData *copy() const;

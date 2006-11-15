@@ -52,6 +52,12 @@ static QPoint cutPoint(QPoint p11, QPoint p12, QPoint p21, QPoint p22)
     return QPoint(qRound(x), qRound(y));
 }
 
+/*!
+   Constructor
+
+   \param numThorns Number of thorns
+   \param numThornLevels Number of thorn levels
+*/
 QwtSimpleCompassRose::QwtSimpleCompassRose(int numThorns, int numThornLevels):
     d_width(0.2),
     d_numThorns(numThorns),
@@ -114,6 +120,19 @@ void QwtSimpleCompassRose::draw(QPainter *painter, const QPoint &center,
 #endif
 }
 
+/*!
+   Draw the rose
+
+   \param painter Painter
+   \param palette Palette
+   \param center Center of the rose
+   \param radius Radius of the rose
+   \param north Position pointing to north
+   \param width Width of the rose
+   \param numThorns Number of thorns
+   \param numThornLevels Number of thorn levels
+   \param shrinkFactor Factor to shrink the thorns with each level
+*/
 void QwtSimpleCompassRose::drawRose(
     QPainter *painter, 
 #if QT_VERSION < 0x040000
@@ -197,14 +216,16 @@ void QwtSimpleCompassRose::drawRose(
     painter->restore();
 }
 
-/**
-* Set the width of the rose heads. Lower value make thinner heads.
-* The range is limited from 0.03 to 0.4.
+/*!
+   Set the width of the rose heads. Lower value make thinner heads.
+   The range is limited from 0.03 to 0.4.
+
+   \param width Width
 */
 
-void QwtSimpleCompassRose::setWidth(double w) 
+void QwtSimpleCompassRose::setWidth(double width) 
 {
-   d_width = w;
+   d_width = width;
    if (d_width < 0.03) 
         d_width = 0.03;
 
@@ -212,6 +233,13 @@ void QwtSimpleCompassRose::setWidth(double w)
         d_width = 0.4;
 }
 
+/*!
+  Set the number of thorns on one level
+  The number is aligned to a multiple of 4, with a minimum of 4 
+
+  \param numThorns Number of thorns
+  \sa numThorns(), setNumThornLevels()
+*/
 void QwtSimpleCompassRose::setNumThorns(int numThorns) 
 {
     if ( numThorns < 4 )
@@ -223,16 +251,30 @@ void QwtSimpleCompassRose::setNumThorns(int numThorns)
     d_numThorns = numThorns;
 }
 
+/*!
+   \return Number of thorns
+   \sa setNumThorns(), setNumThornLevels()
+*/
 int QwtSimpleCompassRose::numThorns() const
 {
    return d_numThorns;
 }
 
+/*!
+  Set the of thorns levels
+
+  \param numThornLevels Number of thorns levels
+  \sa setNumThorns(), numThornLevels()
+*/
 void QwtSimpleCompassRose::setNumThornLevels(int numThornLevels) 
 {
     d_numThornLevels = numThornLevels;
 }
 
+/*!
+   \return Number of thorn levels
+   \sa setNumThorns(), setNumThornLevels()
+*/
 int QwtSimpleCompassRose::numThornLevels() const
 {
     return d_numThornLevels;

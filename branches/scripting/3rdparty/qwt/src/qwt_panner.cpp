@@ -24,8 +24,16 @@ public:
         button(Qt::LeftButton),
         buttonState(Qt::NoButton),
         abortKey(Qt::Key_Escape),
-        abortKeyState(Qt::NoButton)
+        abortKeyState(Qt::NoButton),
+        cursor(NULL),
+        restoreCursor(NULL)
     {
+    }
+
+    ~PrivateData()
+    {
+        delete cursor;
+        delete restoreCursor;
     }
         
     bool isEnabled;
@@ -38,7 +46,8 @@ public:
     QPoint pos;
 
     QPixmap pixmap;
-    QCursor cursor;
+    QCursor *cursor;
+    QCursor *restoreCursor;
 };
 
 /*!
@@ -50,9 +59,6 @@ QwtPanner::QwtPanner(QWidget *parent):
     QWidget(parent)
 {
     d_data = new PrivateData();
-
-    if ( parent )
-        d_data->cursor = parent->cursor();
 
 #if QT_VERSION >= 0x040000
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -118,7 +124,7 @@ void QwtPanner::getAbortKey(int &key, int &state) const
 */
 void QwtPanner::setCursor(const QCursor &cursor)
 {
-    d_data->cursor = cursor;
+    d_data->cursor = new QCursor(cursor);
 }
 
 /*!
@@ -127,7 +133,13 @@ void QwtPanner::setCursor(const QCursor &cursor)
 */
 const QCursor QwtPanner::cursor() const
 {
-    return d_data->cursor;
+    if ( d_data->cursor )
+        return *d_data->cursor;
+
+    if ( parentWidget() )
+        return parentWidget()->cursor();
+
+    return QCursor();
 }
 
 /*! 
@@ -136,7 +148,7 @@ const QCursor QwtPanner::cursor() const
   When enabled is true an event filter is installed for
   the observed widget, otherwise the event filter is removed.
 
-  \param enabled true or false
+  \param on true or false
   \sa isEnabled(), eventFilter()
 */
 void QwtPanner::setEnabled(bool on)
@@ -260,12 +272,17 @@ bool QwtPanner::eventFilter(QObject *o, QEvent *e)
 /*!
   Handle a mouse press event for the observed widget.
 
+  \param me Mouse event
   \sa eventFilter(), widgetMouseReleaseEvent(),
       widgetMouseMoveEvent(),
 */
 void QwtPanner::widgetMousePressEvent(QMouseEvent *me)
 {
     if ( me->button() != d_data->button )
+        return;
+
+    QWidget *w = parentWidget();
+    if ( w == NULL )
         return;
 
 #if QT_VERSION < 0x040000
@@ -279,7 +296,7 @@ void QwtPanner::widgetMousePressEvent(QMouseEvent *me)
         return;
     }
 
-    parentWidget()->setCursor(d_data->cursor);
+    showCursor(true);
 
     d_data->initialPos = d_data->pos = me->pos();
 
@@ -298,6 +315,7 @@ void QwtPanner::widgetMousePressEvent(QMouseEvent *me)
 /*!
   Handle a mouse release event for the observed widget.
 
+  \param me Mouse event
   \sa eventFilter(), widgetMousePressEvent(),
       widgetMouseMoveEvent(),
 */
@@ -323,7 +341,7 @@ void QwtPanner::widgetMouseReleaseEvent(QMouseEvent *me)
     if ( isVisible() )
     {
         hide();
-        parentWidget()->unsetCursor();
+        showCursor(false);
 
         d_data->pixmap = QPixmap();
         d_data->pos = me->pos();
@@ -336,6 +354,12 @@ void QwtPanner::widgetMouseReleaseEvent(QMouseEvent *me)
     }
 }
 
+/*!
+  Handle a key press event for the observed widget.
+
+  \param ke Key event
+  \sa eventFilter(), widgetKeyReleaseEvent()
+*/
 void QwtPanner::widgetKeyPressEvent(QKeyEvent *ke)
 {
     if ( ke->key() == d_data->abortKey )
@@ -351,12 +375,50 @@ void QwtPanner::widgetKeyPressEvent(QKeyEvent *ke)
         if ( matched )
         {
             hide();
-            parentWidget()->unsetCursor();
+            showCursor(false);
             d_data->pixmap = QPixmap();
         }
     }
 }
 
+/*!
+  Handle a key release event for the observed widget.
+
+  \param ke Key event
+  \sa eventFilter(), widgetKeyReleaseEvent()
+*/
 void QwtPanner::widgetKeyReleaseEvent(QKeyEvent *)
 {
+}
+
+void QwtPanner::showCursor(bool on)
+{
+    QWidget *w = parentWidget();
+    if ( w == NULL || d_data->cursor == NULL )
+        return;
+
+    if ( on )
+    {
+#if QT_VERSION < 0x040000
+        if ( w->testWState(WState_OwnCursor) )
+#else
+        if ( w->testAttribute(Qt::WA_SetCursor) )
+#endif
+        {
+            delete d_data->restoreCursor;
+            d_data->restoreCursor = new QCursor(w->cursor());
+        }
+        w->setCursor(*d_data->cursor);
+    }
+    else
+    {
+        if ( d_data->restoreCursor ) 
+        {
+            w->setCursor(*d_data->restoreCursor);
+            delete d_data->restoreCursor;
+            d_data->restoreCursor = NULL;
+        }
+        else
+            w->unsetCursor();
+    }
 }

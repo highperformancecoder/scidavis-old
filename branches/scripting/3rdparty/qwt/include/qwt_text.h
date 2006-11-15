@@ -181,9 +181,9 @@ public:
 
     void draw(QPainter *painter, const QRect &rect) const;
 
-protected:
-    const QwtTextEngine *textEngine(const QString &text,
-        QwtText::TextFormat textFormat = AutoText) const;
+    static const QwtTextEngine *textEngine(const QString &text,
+        QwtText::TextFormat = AutoText);
+    static const QwtTextEngine *textEngine(QwtText::TextFormat);
 
 private:
     class PrivateData;
@@ -191,8 +191,6 @@ private:
 
     class LayoutCache;
     LayoutCache *d_layoutCache;
-
-    class EngineDict;
 };
 
 #endif

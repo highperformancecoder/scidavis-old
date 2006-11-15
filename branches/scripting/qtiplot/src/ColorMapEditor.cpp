@@ -88,8 +88,8 @@ connect(scaleColorsBox, SIGNAL(toggled(bool)), this, SLOT(setScaledColors(bool))
 
 QVBoxLayout* vl = new QVBoxLayout(this, 0, 0);
 vl->addWidget(table);	
-vl->addWidget(scaleColorsBox);
 vl->addWidget(hb);
+vl->addWidget(scaleColorsBox);
 
 setFocusProxy(table);
 setMaximumWidth(200);

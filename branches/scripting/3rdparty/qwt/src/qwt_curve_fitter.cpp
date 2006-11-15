@@ -11,10 +11,12 @@
 #include "qwt_spline.h"
 #include "qwt_curve_fitter.h"
 
+//! Constructor
 QwtCurveFitter::QwtCurveFitter()
 {
 }
 
+//! Destructor
 QwtCurveFitter::~QwtCurveFitter()
 {
 }

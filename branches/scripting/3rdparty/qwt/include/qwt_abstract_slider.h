@@ -43,8 +43,18 @@ class QWT_EXPORT QwtAbstractSlider : public QWidget, public QwtDoubleRange
 #endif
 
 public:
-    enum ScrollMode { ScrNone, ScrMouse, 
-        ScrTimer, ScrDirect, ScrPage };
+    /*! 
+      Scroll mode
+      \sa getScrollMode()
+     */
+    enum ScrollMode 
+    { 
+        ScrNone, 
+        ScrMouse, 
+        ScrTimer, 
+        ScrDirect, 
+        ScrPage 
+    };
     
     explicit QwtAbstractSlider(Qt::Orientation, QWidget *parent = NULL);
     virtual ~QwtAbstractSlider();

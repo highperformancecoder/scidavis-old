@@ -58,7 +58,7 @@ signals:
       Signal emitted, when panning is done
 
       \param dx Offset in horizontal direction
-      \param dx Offset in vertical direction
+      \param dy Offset in vertical direction
     */
     void panned(int dx, int dy);
 
@@ -67,7 +67,7 @@ signals:
       is not finished.
 
       \param dx Offset in horizontal direction
-      \param dx Offset in vertical direction
+      \param dy Offset in vertical direction
     */
     void moved(int dx, int dy);
 
@@ -81,6 +81,8 @@ protected:
     virtual void paintEvent(QPaintEvent *);
 
 private:
+    void showCursor(bool);
+
     class PrivateData;
     PrivateData *d_data;
 };

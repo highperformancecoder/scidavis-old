@@ -30,7 +30,7 @@ class QwtSymbol;
   In readonly mode it behaves like a label, otherwise like 
   an unstylish push button.
 
-  \sa QwtLegend, QwtCurve
+  \sa QwtLegend, QwtPlotCurve
 */
 class QWT_EXPORT QwtLegendItem: public QwtTextLabel
 {

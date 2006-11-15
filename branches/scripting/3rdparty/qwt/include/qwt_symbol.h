@@ -28,7 +28,7 @@ public:
      */
     enum Style 
     { 
-        None = -1, 
+        NoSymbol = -1, 
 
         Ellipse, 
         Rect, 

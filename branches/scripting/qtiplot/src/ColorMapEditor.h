@@ -43,7 +43,7 @@ class ColorMapEditor: public QWidget
 public:
 	ColorMapEditor(QWidget* parent=0);
 	
-	QwtLinearColorMap ColorMapEditor::colorMap(){return color_map;};
+	QwtLinearColorMap colorMap(){return color_map;};
 	void setColorMap(const QwtLinearColorMap& map);
 
 	void setRange(double min, double max);

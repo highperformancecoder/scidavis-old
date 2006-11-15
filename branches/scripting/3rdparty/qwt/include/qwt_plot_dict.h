@@ -25,6 +25,15 @@ typedef QList<QwtPlotItem *>::ConstIterator QwtPlotItemIterator;
 typedef QList<QwtPlotItem *> QwtPlotItemList;
 #endif
 
+/*!
+  \brief A dictionary for plot items
+
+  QwtPlotDict organizes plot items in increasing z-order.
+  If autoDelete() is enabled, all attached items will be deleted
+  in the destructor of the dictionary.
+
+  \sa QwtPlotItem::attach(), QwtPlotItem::detach(), QwtPlotItem::z()
+*/
 class QWT_EXPORT QwtPlotDict
 {
 public:

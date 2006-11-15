@@ -41,31 +41,32 @@ public:
     /*!
       \brief Display policy
 
-       - None\n
-         the client code is responsible how to display of each legend item.
+       - NoIdentifier\n
+         The client code is responsible how to display of each legend item.
          The Qwt library will not interfere.
 
-       - Fixed\n
-         all legend items are displayed with the QwtLegendItem::IdentifierMode
+       - FixedIdentifier\n
+         All legend items are displayed with the QwtLegendItem::IdentifierMode
          to be passed in 'mode'.
 
-       - Auto\n
-         each legend item is displayed with a mode that is a bitwise or of
+       - AutoIdentifier\n
+         Each legend item is displayed with a mode that is a bitwise or of
          - QwtLegendItem::ShowLine (if its curve is drawn with a line) and
          - QwtLegendItem::ShowSymbol (if its curve is drawn with symbols) and
          - QwtLegendItem::ShowText (if the has a title).
 
-       Default is LegendDisplayPolicy::Auto.
-       \sa QwtLegend::setDisplayPolicy, QwtLegend::displayPolicy,                          QwtLegendItem::IdentifierMode
+       Default is AutoIdentifier.
+       \sa setDisplayPolicy(), displayPolicy(), QwtLegendItem::IdentifierMode
      */
 
     enum LegendDisplayPolicy
     {
-        None = 0,
-        Fixed = 1,
-        Auto = 2
+        NoIdentifier = 0,
+        FixedIdentifier = 1,
+        AutoIdentifier = 2
     };
 
+    //!  Interaction mode for the legend items
     enum LegendItemMode
     {
         ReadOnlyItem,
@@ -76,7 +77,7 @@ public:
     explicit QwtLegend(QWidget *parent = NULL);
     virtual ~QwtLegend();
     
-    void setDisplayPolicy(LegendDisplayPolicy policy, int mode = -1);
+    void setDisplayPolicy(LegendDisplayPolicy policy, int mode);
     LegendDisplayPolicy displayPolicy() const;
 
     void setItemMode(LegendItemMode);

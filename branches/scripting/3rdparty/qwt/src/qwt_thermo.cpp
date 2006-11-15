@@ -26,7 +26,7 @@ public:
         fillBrush(Qt::black),
         alarmBrush(Qt::white),
         orientation(Qt::Vertical),
-        scalePos(QwtThermo::Left),
+        scalePos(QwtThermo::LeftScale),
         borderWidth(2),
         scaleDist(3),
         thermoWidth(10),
@@ -184,7 +184,7 @@ void QwtThermo::draw(QPainter *p, const QRect& ur)
 {
     if ( !d_data->thermoRect.contains(ur) )
     {
-        if (d_data->scalePos != None)
+        if (d_data->scalePos != NoScale)
         {
 #if QT_VERSION < 0x040000
             scaleDraw()->draw(p, colorGroup());
@@ -224,7 +224,7 @@ void QwtThermo::layoutThermo( bool update_geometry )
 {
     QRect r = rect();
     int mbd = 0;
-    if ( d_data->scalePos != None )
+    if ( d_data->scalePos != NoScale )
     {
         int d1, d2;
         scaleDraw()->getBorderDistHint(font(), d1, d2);
@@ -235,7 +235,7 @@ void QwtThermo::layoutThermo( bool update_geometry )
     {
         switch ( d_data->scalePos )
         {
-            case Top:
+            case TopScale:
             {
                 d_data->thermoRect.setRect(
                     r.x() + mbd + d_data->borderWidth,
@@ -251,8 +251,8 @@ void QwtThermo::layoutThermo( bool update_geometry )
                 break;
             }
 
-            case Bottom:
-            case None: // like Bottom but without scale
+            case BottomScale:
+            case NoScale: // like Bottom but without scale
             default:   // inconsistent orientation and scale position
                        // Mapping between values and pixels requires
                        // initialization of the scale geometry
@@ -278,7 +278,7 @@ void QwtThermo::layoutThermo( bool update_geometry )
     {
         switch ( d_data->scalePos )
         {
-            case Right:
+            case RightScale:
             {
                 d_data->thermoRect.setRect(
                     r.x() + d_data->borderWidth,
@@ -294,8 +294,8 @@ void QwtThermo::layoutThermo( bool update_geometry )
                 break;
             }
 
-            case Left:
-            case None: // like Left but without scale
+            case LeftScale:
+            case NoScale: // like Left but without scale
             default:   // inconsistent orientation and scale position
                        // Mapping between values and pixels requires
                        // initialization of the scale geometry
@@ -328,16 +328,18 @@ void QwtThermo::layoutThermo( bool update_geometry )
 /*!
   \brief Set the thermometer orientation and the scale position.
 
-  The scale position None disables the scale.
+  The scale position NoScale disables the scale.
   \param o orientation. Possible values are Qt::Horizontal and Qt::Vertical.
          The default value is Qt::Vertical.
   \param s Position of the scale.
-         The default value is None.
+         The default value is NoScale.
 
   A valid combination of scale position and orientation is enforced:
-  - a horizontal thermometer can have the scale positions Top, Bottom or None;
-  - a vertical thermometer can have the scale positions Left, Right or None;
-  - an invalid scale position will default to None.
+  - a horizontal thermometer can have the scale positions TopScale, 
+    BottomScale or NoScale;
+  - a vertical thermometer can have the scale positions LeftScale, 
+    RightScale or NoScale;
+  - an invalid scale position will default to NoScale.
 
   \sa QwtThermo::setScalePosition()
 */
@@ -350,18 +352,18 @@ void QwtThermo::setOrientation(Qt::Orientation o, ScalePos s)
     {
         case Qt::Horizontal:
         {
-            if ((s == None) || (s == Bottom) || (s == Top))
+            if ((s == NoScale) || (s == BottomScale) || (s == TopScale))
                 d_data->scalePos = s;
             else
-                d_data->scalePos = None;
+                d_data->scalePos = NoScale;
             break;
         }
         case Qt::Vertical:
         {
-            if ((s == None) || (s == Left) || (s == Right))
+            if ((s == NoScale) || (s == LeftScale) || (s == RightScale))
                 d_data->scalePos = s;
             else
-                d_data->scalePos = None;
+                d_data->scalePos = NoScale;
             break;
         }
     }
@@ -396,22 +398,22 @@ void QwtThermo::setOrientation(Qt::Orientation o, ScalePos s)
   \param s Position of the scale.
   
   A valid combination of scale position and orientation is enforced:
-  - if the new scale position is Left or Right, the scale orientation will
-    become Qt::Vertical;
-  - if the new scale position is Bottom or Top, the scale orientation will
-    become Qt::Horizontal;
-  - if the new scale position is None, the scale orientation will not change.
+  - if the new scale position is LeftScale or RightScale, the 
+    scale orientation will become Qt::Vertical;
+  - if the new scale position is BottomScale or TopScale, the scale 
+    orientation will become Qt::Horizontal;
+  - if the new scale position is NoScale, the scale orientation will not change.
 
   \sa QwtThermo::setOrientation()
 */
 void QwtThermo::setScalePosition(ScalePos s)
 {
-    if ((s == Bottom) || (s == Top))
+    if ((s == BottomScale) || (s == TopScale))
         setOrientation(Qt::Horizontal, s);
-    else if ((s == Left) || (s == Right))
+    else if ((s == LeftScale) || (s == RightScale))
         setOrientation(Qt::Vertical, s);
     else
-        setOrientation(d_data->orientation, None);
+        setOrientation(d_data->orientation, NoScale);
 }
 
 //! Return the scale position.
@@ -794,7 +796,7 @@ QSize QwtThermo::minimumSizeHint() const
 {
     int w = 0, h = 0;
 
-    if ( d_data->scalePos != None )
+    if ( d_data->scalePos != NoScale )
     {
         const int sdExtent = scaleDraw()->extent( QPen(), font() );
         const int sdLength = scaleDraw()->minLength( QPen(), font() );

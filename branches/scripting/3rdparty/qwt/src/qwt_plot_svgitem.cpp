@@ -197,6 +197,12 @@ void QwtPlotSvgItem::render(QPainter *painter,
     if ( !viewBox.isValid() )
         return;
 
+#if QT_VERSION >= 0x040200
+    d_data->renderer.setViewBox(viewBox);
+    d_data->renderer.render(painter, rect);
+    return;
+#else
+
 #if QT_VERSION >= 0x040100
     const QSize paintSize(painter->window().width(),
         painter->window().height());
@@ -217,11 +223,7 @@ void QwtPlotSvgItem::render(QPainter *painter,
     painter->translate(dx, dy);
     painter->scale(mx, my);
 
-#if QT_VERSION >= 0x040200
-    d_data->renderer.setViewBox(viewBox);
-#else
     d_data->renderer.setViewBox(viewBox.toRect());
-#endif
     d_data->renderer.render(painter);
 
     painter->restore();
@@ -239,7 +241,8 @@ void QwtPlotSvgItem::render(QPainter *painter,
     d_data->picture.play(painter);
 
     painter->restore();
-#endif
+#endif // < 0x040100
+#endif // < 0x040200
 }
 
 /*!

@@ -213,7 +213,7 @@ QwtDial::~QwtDial()
   Show/Hide the area outside of the frame
   \param show Show if true, hide if false
 
-  \sa QwtDial::hasVisibleBackground, QWidget::setMask
+  \sa hasVisibleBackground(), setMask()
   \warning When QwtDial is a toplevel widget the window
            border might disappear too.
 */
@@ -229,7 +229,7 @@ void QwtDial::showBackground(bool show)
 /*!
   true when the area outside of the frame is visible
 
-  \sa QwtDial::showBackground, QWidget::setMask
+  \sa showBackground(), setMask()
 */
 bool QwtDial::hasVisibleBackground() const 
 { 
@@ -239,7 +239,7 @@ bool QwtDial::hasVisibleBackground() const
 /*!
   Sets the frame shadow value from the frame style.
   \param shadow Frame shadow
-  \sa QwtDial::setLineWidth, QFrame::setFrameShadow
+  \sa setLineWidth(), QFrame::setFrameShadow()
 */
 void QwtDial::setFrameShadow(Shadow shadow)
 {
@@ -253,8 +253,7 @@ void QwtDial::setFrameShadow(Shadow shadow)
 
 /*!
   \return Frame shadow
-  /sa QwtDial::setFrameShadow, QwtDial::lineWidth, 
-      QFrame::frameShadow
+  /sa setFrameShadow(), lineWidth(), QFrame::frameShadow
 */
 QwtDial::Shadow QwtDial::frameShadow() const 
 { 
@@ -265,7 +264,7 @@ QwtDial::Shadow QwtDial::frameShadow() const
   Sets the line width
 
   \param lineWidth Line width
-  \sa QwtDial::setFrameShadow
+  \sa setFrameShadow()
 */
 void QwtDial::setLineWidth(int lineWidth)
 {
@@ -281,8 +280,7 @@ void QwtDial::setLineWidth(int lineWidth)
 
 /*!
   \return Line width of the frame
-  \sa QwtDial::setLineWidth, QwtDial::frameShadow, 
-      QFrame::lineWidth
+  \sa setLineWidth(), frameShadow(), lineWidth()
 */
 int QwtDial::lineWidth() const 
 { 
@@ -291,7 +289,7 @@ int QwtDial::lineWidth() const
 
 /*!
   \return bounding rect of the circle inside the frame
-  \sa QwtDial::setLineWidth, QwtDial::scaleContentsRect, QwtDial::boundingRect
+  \sa setLineWidth(), scaleContentsRect(), boundingRect()
 */
 QRect QwtDial::contentsRect() const
 {
@@ -308,7 +306,7 @@ QRect QwtDial::contentsRect() const
 
 /*!
   \return bounding rect of the dial including the frame
-  \sa QwtDial::setLineWidth, QwtDial::scaleContentsRect, QwtDial::contentsRect
+  \sa setLineWidth(), scaleContentsRect(), contentsRect()
 */
 QRect QwtDial::boundingRect() const
 {
@@ -321,7 +319,7 @@ QRect QwtDial::boundingRect() const
 
 /*!
   \return rect inside the scale
-  \sa setLineWidth, QwtDial::boundingRect, QwtDial::contentsRect
+  \sa setLineWidth(), boundingRect(), contentsRect()
 */
 QRect QwtDial::scaleContentsRect() const
 {
@@ -356,7 +354,7 @@ QRect QwtDial::scaleContentsRect() const
     
   The default mode is QwtDial::RotateNeedle.
 
-  \sa QwtDial::mode, QwtDial::setValue, QwtDial::setOrigin
+  \sa mode(), setValue(), setOrigin()
 */  
 void QwtDial::setMode(Mode mode)
 {   
@@ -379,7 +377,7 @@ void QwtDial::setMode(Mode mode)
  
   The default mode is QwtDial::RotateNeedle.
 
-  \sa QwtDial::setMode, QwtDial::origin, QwtDial::setScaleArc, QwtDial::value
+  \sa setMode(), origin(), setScaleArc(), value()
 */
 QwtDial::Mode QwtDial::mode() const
 {
@@ -392,7 +390,7 @@ QwtDial::Mode QwtDial::mode() const
 
     \param wrapping en/disables wrapping
 
-    \sa QwtDial::wrapping, QwtDoubleRange::periodic
+    \sa wrapping(), QwtDoubleRange::periodic()
     \note The meaning of wrapping is like the wrapping property of QSpinBox,
           but not like it is used in QDial. 
 */
@@ -405,7 +403,7 @@ void QwtDial::setWrapping(bool wrapping)
     wrapping() holds whether it is possible to step the value from the 
     highest value to the lowest value and vice versa. 
 
-    \sa QwtDial::setWrapping, QwtDoubleRange::setPeriodic
+    \sa setWrapping(), QwtDoubleRange::setPeriodic()
     \note The meaning of wrapping is like the wrapping property of QSpinBox,
           but not like it is used in QDial. 
 */ 
@@ -414,7 +412,10 @@ bool QwtDial::wrapping() const
     return periodic();
 }
 
-//! Resize the dial widget
+/*! 
+   Resize the dial widget
+   \param e Resize event
+*/
 void QwtDial::resizeEvent(QResizeEvent *e)
 {
     QWidget::resizeEvent(e);
@@ -423,7 +424,10 @@ void QwtDial::resizeEvent(QResizeEvent *e)
         updateMask();
 }
 
-//! Repaint the dial 
+/*! 
+   Paint the dial 
+   \param e Paint event
+*/
 void QwtDial::paintEvent(QPaintEvent *e)
 {
     const QRect &ur = e->rect();
@@ -501,7 +505,7 @@ void QwtDial::drawFocusIndicator(QPainter *painter) const
   Draw the frame around the dial
 
   \param painter Painter
-  \sa QwtDial::lineWidth, QwtDial::frameShadow
+  \sa lineWidth(), frameShadow()
 */
 void QwtDial::drawFrame(QPainter *painter)
 {
@@ -563,8 +567,8 @@ void QwtDial::drawFrame(QPainter *painter)
   QColorGroup::Foreground is the background color inside the scale.
 
   \param painter Painter
-  \sa QwtDial::boundingRect, QwtDial::contentsRect,
-    QwtDial::scaleContentsRect, QWidget::setPalette
+  \sa boundingRect(), contentsRect(),
+    scaleContentsRect(), QWidget::setPalette
 */
 void QwtDial::drawContents(QPainter *painter) const
 {
@@ -670,9 +674,6 @@ void QwtDial::drawContents(QPainter *painter) const
 /*!
   Draw the needle
 
-  Qwt is missing a set of good looking needles.
-  Contributions are very welcome.
-
   \param painter Painter
   \param center Center of the dial
   \param radius Length for the needle
@@ -766,7 +767,7 @@ void QwtDial::drawScaleContents(QPainter *,
 
   \param needle Needle
   \warning The needle will be deleted, when a different needle is
-    set or in ~QwtDial
+    set or in ~QwtDial()
 */
 void QwtDial::setNeedle(QwtDialNeedle *needle)
 {
@@ -782,7 +783,7 @@ void QwtDial::setNeedle(QwtDialNeedle *needle)
 
 /*! 
   \return needle
-  \sa QwtDial::setNeedle
+  \sa setNeedle()
 */
 const QwtDialNeedle *QwtDial::needle() const 
 { 
@@ -791,7 +792,7 @@ const QwtDialNeedle *QwtDial::needle() const
 
 /*! 
   \return needle
-  \sa QwtDial::setNeedle
+  \sa setNeedle()
 */
 QwtDialNeedle *QwtDial::needle() 
 { 
@@ -806,7 +807,7 @@ void QwtDial::rangeChange()
 
 /*! 
   Update the scale with the current attributes
-  \sa QwtDial::setScale
+  \sa setScale()
 */
 void QwtDial::updateScale()
 {
@@ -838,6 +839,7 @@ const QwtDialScaleDraw *QwtDial::scaleDraw() const
 /*!
   Set an individual scale draw
 
+  \param scaleDraw Scale draw
   \warning The previous scale draw is deleted
 */
 void QwtDial::setScaleDraw(QwtDialScaleDraw *scaleDraw)
@@ -914,7 +916,10 @@ void QwtDial::setScaleTicks(int minLen, int medLen,
 }
 
 /*!
-   \return the label for a value
+   Find the label for a value
+
+   \param value Value
+   \return label 
 */
 QwtText QwtDial::scaleLabel(double value) const
 {
@@ -926,13 +931,13 @@ QwtText QwtDial::scaleLabel(double value) const
     return QString::number(value);
 }
 
-//! Return the lower limit of the scale arc
+//! \return Lower limit of the scale arc
 double QwtDial::minScaleArc() const 
 { 
     return d_data->minScaleArc; 
 }
 
-//! Return the upper limit of the scale arc
+//! \return Upper limit of the scale arc
 double QwtDial::maxScaleArc() const 
 { 
     return d_data->maxScaleArc; 
@@ -944,7 +949,7 @@ double QwtDial::maxScaleArc() const
   The origin is the angle where scale and needle is relative to.
 
   \param origin New origin
-  \sa QwtDial::origin()
+  \sa origin()
 */
 void QwtDial::setOrigin(double origin)
 {
@@ -956,7 +961,7 @@ void QwtDial::setOrigin(double origin)
   The origin is the angle where scale and needle is relative to.
 
   \return Origin of the dial
-  \sa QwtDial::setOrigin()
+  \sa setOrigin()
 */
 double QwtDial::origin() const
 {
@@ -992,7 +997,7 @@ void QwtDial::valueChange()
 }
 
 /*!
-  \return QwtDial::sizeHint()
+  \return Size hint
 */
 QSize QwtDial::sizeHint() const
 {
@@ -1042,7 +1047,7 @@ static double line2Radians(const QPoint &p1, const QPoint &p2)
 /*!
   Find the value for a given position
 
-  \param pos
+  \param pos Position
   \return Value
 */
 double QwtDial::getValue(const QPoint &pos)
@@ -1231,6 +1236,14 @@ void QwtDial::keyPressEvent(QKeyEvent *e)
         emit sliderMoved(value());
 }
 
+/*!
+   \brief Update the mask of the dial
+
+   In case of "hasVisibleBackground() == false", the backgound is
+   transparent by a mask.
+
+   \sa showBackground(), hasVisibleBackground()
+*/
 void QwtDial::updateMask()
 {
     if ( d_data->visibleBackground )

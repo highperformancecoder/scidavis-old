@@ -851,6 +851,8 @@ void QwtScaleWidget::setScaleDiv(
 
         emit scaleDivChanged();
     }
+    else
+        delete transformation;
 }
 
 void QwtScaleWidget::setColorBarEnabled(bool on)
