@@ -1,6 +1,8 @@
 #include "plot.h"
+#include "graph.h"
 #include "scales.h"
 #include "Spectrogram.h"
+#include "FunctionCurve.h"
 
 #include <qwt_plot.h>
 #include <qwt_painter.h>
@@ -12,8 +14,6 @@
 #include <qapplication.h>
 #include <qpixmap.h>
 #include <qmessagebox.h>
-
-#include "graph.h"
 
 Plot::Plot(QWidget *parent, const char *name)
 		: QwtPlot(parent)
@@ -386,7 +386,7 @@ for (QMapIterator<int, QwtPlotItem *> it = d_curves.begin(); it != d_curves.end(
 	if (!c)
 		continue;
 
-	if(c->rtti() == QwtPlotItem::Rtti_PlotCurve)
+	if(c->rtti() == QwtPlotItem::Rtti_PlotCurve || c->rtti() == FunctionCurve::RTTI)
 		{
 		QwtPlotCurve *cv = (QwtPlotCurve *)c;
 		for (int i=0; i<cv->dataSize(); i++)

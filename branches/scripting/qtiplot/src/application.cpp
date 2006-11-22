@@ -1108,24 +1108,23 @@ void ApplicationWindow::disableActions()
 {
 actionSaveTemplate->setEnabled(false);
 actionPrintAllPlots->setEnabled(false);
-actionPrint->setEnabled(FALSE);
-actionShowExportASCIIDialog->setEnabled(FALSE);
-file->setItemEnabled (exportID,FALSE);
-file->setItemEnabled (closeID,FALSE);
+actionPrint->setEnabled(false);
+actionShowExportASCIIDialog->setEnabled(false);
+file->setItemEnabled (exportID,false);
+file->setItemEnabled (closeID,false);
 
-actionUndo->setEnabled(FALSE);
-actionRedo->setEnabled(FALSE);
+actionUndo->setEnabled(false);
+actionRedo->setEnabled(false);
 
-actionCutSelection->setEnabled(FALSE);
-actionCopySelection->setEnabled(FALSE);
-actionPasteSelection->setEnabled(FALSE);
-actionClearSelection->setEnabled(FALSE);
+actionCutSelection->setEnabled(false);
+actionCopySelection->setEnabled(false);
+actionPasteSelection->setEnabled(false);
+actionClearSelection->setEnabled(false);
 }
 
 void ApplicationWindow::customToolBars(QWidget* w)
 {
-if (w)
-{
+if (w){
 	if (!projectHas3DPlots())
 		plot3DTools->hide();
 	if (!projectHas2DPlots())
@@ -1138,48 +1137,47 @@ if (w)
 	if (plotTools->isHidden())
 		plotTools->show();
 	
-	plotTools->setEnabled (TRUE);
-	plot3DTools->setEnabled (FALSE);
-	tableTools->setEnabled(FALSE);
+	plotTools->setEnabled (true);
+	plot3DTools->setEnabled (false);
+	tableTools->setEnabled(false);
 	}
 	else if (w->inherits("Table"))
 	{
 	if (tableTools->isHidden())
 		tableTools->show();
 	
-	plotTools->setEnabled (FALSE);
-	plot3DTools->setEnabled (FALSE);
-	tableTools->setEnabled (TRUE);
+	plotTools->setEnabled (false);
+	plot3DTools->setEnabled (false);
+	tableTools->setEnabled (true);
 	}
 	else if (w->isA("Matrix"))
 	{
-	plotTools->setEnabled (FALSE);
-	plot3DTools->setEnabled (FALSE);
-	tableTools->setEnabled (FALSE);
+	plotTools->setEnabled (false);
+	plot3DTools->setEnabled (false);
+	tableTools->setEnabled (false);
 	}
 	else if (w->isA("Graph3D"))
 	{
-	plotTools->setEnabled (FALSE);
-	tableTools->setEnabled (FALSE);
+	plotTools->setEnabled (false);
+	tableTools->setEnabled (false);
 
 	if (plot3DTools->isHidden())
 		plot3DTools->show();
 
 	Graph3D* plot= (Graph3D*)w;
 	if (plot->plotStyle() == Qwt3D::NOPLOT)
-		plot3DTools->setEnabled (FALSE);
+		plot3DTools->setEnabled (false);
 	else
-		plot3DTools->setEnabled (TRUE);
+		plot3DTools->setEnabled (true);
 
 	custom3DActions(w);
 	}
 	else if (w->isA("Note"))
 	{	
-	plotTools->setEnabled (FALSE);
-	plot3DTools->setEnabled (FALSE);
-	tableTools->setEnabled (FALSE);
+	plotTools->setEnabled (false);
+	plot3DTools->setEnabled (false);
+	tableTools->setEnabled (false);
 	}
-
 }
 else
 	hideToolbars();
@@ -1191,9 +1189,9 @@ void ApplicationWindow::hideToolbars()
 	plotTools->hide();
 	tableTools->hide();
 		
-	plotTools->setEnabled (FALSE);
-	tableTools->setEnabled (FALSE);
-	plot3DTools->setEnabled (FALSE);
+	plotTools->setEnabled (false);
+	tableTools->setEnabled (false);
+	plot3DTools->setEnabled (false);
 
 }
 
@@ -2366,7 +2364,9 @@ if (curves<layers)
 		activeGraph=g->addLayer();
 		if (activeGraph)
 			{
-			activeGraph->insertCurvesList(w, list[i], style, defaultCurveLineWidth, defaultSymbolSize);
+			QStringList lst;
+			lst << list[i];
+			activeGraph->insertCurvesList(w, lst, style, defaultCurveLineWidth, defaultSymbolSize);
 			customGraph(activeGraph);
 			activeGraph->setAutoscaleFonts(false);//in order to avoid to small fonts
 			activeGraph->setIgnoreResizeEvents(!autoResizeLayers);
@@ -2381,7 +2381,9 @@ else
 		activeGraph=g->addLayer();
 		if (activeGraph)
 			{
-			activeGraph->insertCurvesList(w, list[i], style, defaultCurveLineWidth, defaultSymbolSize);
+			QStringList lst;
+			lst << list[i];
+			activeGraph->insertCurvesList(w, lst, style, defaultCurveLineWidth, defaultSymbolSize);
 			customGraph(activeGraph);
 			activeGraph->setAutoscaleFonts(false);//in order to avoid to small fonts
 			activeGraph->setIgnoreResizeEvents(!autoResizeLayers);
@@ -2411,9 +2413,27 @@ Graph *ag=g->insertFirstLayer();
 customGraph(ag);
 polishGraph(ag, defaultCurveStyle);
 int curves = (int)colList.count();
-for (int i=0;i<(int)colList.count();i++)
+
+//We rearrange the list so that the error bars are placed at the end
+QStringList lst = QStringList();
+for (int j=0; j<curves; j++)
 	{
-	QString s=colList[i];
+	if (!colList[j].contains("(yErr)") && !colList[j].contains("(xErr)"))
+		lst << colList[j];
+	}
+int errorBars = 0;
+for (int k=0; k<curves; k++)
+	{
+	if (colList[k].contains("(yErr)") || colList[k].contains("(xErr)"))
+		{
+		errorBars++;
+		lst << colList[k];
+		}
+	}
+
+for (int i=0; i<curves; i++)
+	{
+	QString s = lst[i];
 	int pos=s.find(":",0);
 	QString caption=s.left(pos)+"_";
 	Table *w=(Table *)table(caption);
@@ -2428,7 +2448,6 @@ for (int i=0;i<(int)colList.count();i++)
 
 	if (s.contains("(yErr)") || s.contains("(xErr)"))
 		{
-		curves--;
 		posY=s.find(",",posY);
 		int posErr, errType;
 		if (s.contains("(yErr)"))
@@ -2441,19 +2460,15 @@ for (int i=0;i<(int)colList.count();i++)
 			errType = QwtErrorPlotCurve::Horizontal;
 			posErr=s.find("(xErr)",posY);
 			}
-
 		QString errColName=caption+s.mid(posY+2,posErr-posY-2);	
 		ag->addErrorBars(w, xColName, yColName, w, errColName, errType);
 		}
-	else
+	else if (ag->insertCurve(w, xCol, yColName, defaultCurveStyle))
 		{
-		if (ag->insertCurve(w, xCol, yColName, defaultCurveStyle))
-			{
-			curveLayout cl = ag->initCurveLayout(i, curves, 1, defaultCurveStyle);
-			cl.lWidth = defaultCurveLineWidth;
-			cl.sSize = defaultSymbolSize;
-			ag->updateCurveLayout(i,&cl);
-			}
+		curveLayout cl = ag->initCurveLayout(i, curves - errorBars, defaultCurveStyle);
+		cl.lWidth = defaultCurveLineWidth;
+		cl.sSize = defaultSymbolSize;
+		ag->updateCurveLayout(i,&cl);
 		}
 	}
 ag->updatePlot();
@@ -2692,6 +2707,7 @@ tableWindows<<name;
 w->setCaption(name);
 w->setName(name);
 w->setIcon( QPixmap(worksheet_xpm) );
+w->setSpecifications(w->saveToString(windowGeometryInfo(w)));
 	
 addListViewItem(w);
 current_folder->addWindow(w);
@@ -7828,7 +7844,6 @@ if (lastModified->isA("Table"))
 		updateTableNames(name,newCaption);
 		renameListViewItem(name,newCaption);
 		}
-
 	t->restore(t->getSpecifications());
 	actionUndo->setEnabled(FALSE);
 	actionRedo->setEnabled(TRUE);
@@ -12451,16 +12466,17 @@ return false;
 bool ApplicationWindow::projectHas2DPlots()
 {
 QWidgetList *windows = windowsList();
-for (int i=0; i<(int)windows->count(); i++)
+bool hasPlots = false;
+for (QWidget *w = windows->first(); w; w = windows->next())
 	{
-	if (windows->at(i)->isA("Graph"))
+	if (w->isA("MultiLayer"))
 		{
-		delete windows;
-		return true;
+		hasPlots = true;
+		break;
 		}
 	}
 delete windows;
-return false;
+return hasPlots;
 }
 
 bool ApplicationWindow::projectHas3DPlots()

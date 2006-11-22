@@ -4323,7 +4323,7 @@ cl.fillCol=0;
 return cl;
 }
 
-curveLayout Graph::initCurveLayout(int i, int curves, int errCurves, int style)
+curveLayout Graph::initCurveLayout(int i, int curves, int style)
 {
 curveLayout cl = initCurveLayout();
 
@@ -4351,8 +4351,8 @@ else if (style == Graph::VerticalBars || style == Graph::HorizontalBars)
 	cl.lCol = 0; //black color pen
 	cl.aCol = i+1;
 	cl.sType = 0;
-	if (!errCurves && (c_type[i] == Graph::VerticalBars || style == Graph::HorizontalBars))
-		{//TODO: find a way to set the right spacing and offsets when there are error columns in the plot list.
+	if (c_type[i] == Graph::VerticalBars || style == Graph::HorizontalBars)
+		{
 		QwtBarCurve *b = (QwtBarCurve*)curve(i);
 		if (b)
 			{
@@ -4534,6 +4534,17 @@ for (i=0; i<n_curves; i++)
 		{
 		QwtPlotCurve *c = (QwtPlotCurve *)d_plot->curve(c_keys[i]);
 		size=c->symbol().size();
+
+		if (c_type[i] == VerticalBars)
+			{
+			QwtBarCurve *bc = (QwtBarCurve *)c;
+			xOffset = bc->dataOffset();
+			}
+		else if (c_type[i] == HorizontalBars)
+			{
+			QwtBarCurve *bc = (QwtBarCurve *)c;
+			yOffset = bc->dataOffset();
+			}
 		}			
 	}
 
@@ -4755,12 +4766,19 @@ else if (style==Graph::VectXYXY || style==Graph::VectXYAM)
 else
 	{		
 	int curves = (int)names.count();
-	int errCurves = (int)w->selectedErrColumns().count();
+	int errCurves = 0;
+	for (int j=0; j<curves; j++)
+		{
+		int k = w->colIndex(names[j]);
+		if (w->colPlotDesignation(k) == Table::xErr || w->colPlotDesignation(k) == Table::yErr)
+			errCurves++;
+		}
+
 	for (int i=0; i<curves; i++)
 		{
 		if (insertCurve(w, names[i], style))
 			{
-			curveLayout cl = initCurveLayout(i, curves, errCurves, style);
+			curveLayout cl = initCurveLayout(i, curves - errCurves, style);
 			cl.sSize = sSize;
 			cl.lWidth = lWidth;
 			updateCurveLayout(i, &cl);
@@ -5917,7 +5935,7 @@ for (i=0; i<(int)d_texts.size(); i++)
 	{
 	LegendMarker* mrkT = (LegendMarker*) d_plot->marker(d_texts[i]);
 	if (mrkT)
-		mrkT->updateOrigin();	
+		mrkT->updateOrigin();
 	}	
 for (i=0; i<(int)d_images.size(); i++)
 	{
@@ -6421,7 +6439,7 @@ else
 	for (i=0; i<g->curves(); i++)
 		{
 		QwtPlotItem *it = (QwtPlotItem *)g->curve(i);
-		if (it->rtti() == QwtPlotItem::Rtti_PlotCurve)
+		if (it->rtti() == QwtPlotItem::Rtti_PlotCurve || it->rtti() == FunctionCurve::RTTI)
 		{
 		QwtPlotCurve *cv = (QwtPlotCurve *)it;
 		int n = cv->dataSize();

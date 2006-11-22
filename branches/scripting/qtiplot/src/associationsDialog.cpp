@@ -1,5 +1,6 @@
 #include "associationsDialog.h"
 #include "worksheet.h"
+#include "FunctionCurve.h"
 
 #include <qlabel.h>
 #include <qlistbox.h>
@@ -275,7 +276,7 @@ for (int i=0;i<(int)names.count();i++)
 	QString s=names[i];
 	int pos=s.find("_",0);
 	const QwtPlotItem *c = (QwtPlotItem *)graph->curve(i);
-	if (!c)
+	if (!c || c->rtti() == FunctionCurve::RTTI)
 		continue;
 
 	if (pos>0 && c->rtti() == QwtPlotItem::Rtti_PlotCurve)

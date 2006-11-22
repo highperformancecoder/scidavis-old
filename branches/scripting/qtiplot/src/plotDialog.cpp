@@ -210,7 +210,7 @@ else
 
 	QwtSymbol s = QwtSymbol(QwtSymbol::Ellipse, QBrush(), QPen(), QSize(9,9));
 	if (plotType == Graph::Line)
-		s.setStyle(QwtSymbol::None);
+		s.setStyle(QwtSymbol::NoSymbol);
 	else if (plotType == Graph::Scatter)
 		graph->setCurveStyle(curve, QwtPlotCurve::NoCurve);
 
@@ -999,7 +999,7 @@ if (size>0 && curveType >= 0)
 			return Graph::Line;
 		
 		QwtSymbol s = c->symbol();
-		if (s.style() == QwtSymbol::None)
+		if (s.style() == QwtSymbol::NoSymbol)
 			{
 			boxPlotType->setCurrentItem(0);
 			return Graph::Line;
@@ -1364,7 +1364,7 @@ else if (privateTabWidget->currentPage() == percentilePage)
 	QBrush br = QBrush(boxPercFillColor->color(), Qt::SolidPattern);
 	if (!boxFillSymbols->isChecked())
 		br = QBrush();
-	QwtSymbol s = QwtSymbol(QwtSymbol::None, br, QPen(boxEdgeColor->color(),boxEdgeWidth->value(),Qt::SolidLine), QSize(size, size));
+	QwtSymbol s = QwtSymbol(QwtSymbol::NoSymbol, br, QPen(boxEdgeColor->color(),boxEdgeWidth->value(),Qt::SolidLine), QSize(size, size));
 	graph->setCurveSymbol(listBox->currentItem(), s);
 
 	BoxCurve *b = (BoxCurve*)graph->curve(listBox->currentItem());

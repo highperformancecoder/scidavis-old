@@ -44,21 +44,17 @@ unix:INSTALLS += documentation
 
 ##################### Windows settings #####################
  
-win32:DEFINES  += QT_DLL QT_THREAD_SUPPORT GSL_DLL 
+win32:DEFINES  += QT_DLL QT_THREAD_SUPPORT GSL_DLL
 
 win32:INCLUDEPATH += ../3rdparty/qwtplot3d/include
 win32:INCLUDEPATH += ../3rdparty/zlib123/include
-#win32:INCLUDEPATH += ../3rdparty/GSL/include
-win32:INCLUDEPATH += C:/WinGsl
+win32:INCLUDEPATH += ../3rdparty/WinGsl
 
 win32:LIBS        += ../3rdparty/qwtplot3d/lib/qwtplot3d.lib
-win32:LIBS        += ../3rdparty/qwt/lib/qwt500.lib  
-win32:LIBS		  += ../3rdparty/zlib123/lib/zdll.lib
-win32:LIBS		  += ../3rdparty/liborigin/liborigin.lib
- 
-#win32:LIBS        += ../3rdparty/GSL/lib/libgsl.a
-#win32:LIBS        += ../3rdparty/GSL/lib/libgslcblas.a
-win32:LIBS        += C:/WinGsl/Lib/WinGsl.lib
+win32:LIBS        += ../3rdparty/qwt/lib/qwt.lib  
+win32:LIBS		+= ../3rdparty/zlib123/lib/zdll.lib
+win32:LIBS		+= ../3rdparty/liborigin/liborigin.lib
+win32:LIBS        += ../3rdparty/WinGsl/Lib/WinGsl.lib
 
 win32:RC_FILE     = src/iPlot.rc
 

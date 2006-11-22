@@ -157,7 +157,7 @@ public slots:
 	 bool userDefinedStep(int axis){return d_user_step[axis];};
 
 	 //curves layout
-	 curveLayout initCurveLayout(int i, int curves, int errCurves, int style);
+	 curveLayout initCurveLayout(int i, int curves, int style);
 	 static curveLayout initCurveLayout();
 	 void updateCurveLayout(int index,const curveLayout *cL);
 	 //! Tries to guess not already used curve color and symbol style

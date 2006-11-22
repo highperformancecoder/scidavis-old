@@ -100,7 +100,6 @@ accel->connectItem( accel->insertItem( Key_Tab ), this, SLOT(moveCurrentCell()))
 accel->connectItem( accel->insertItem( CTRL+Key_A ), this, SLOT(selectAllTable()) );
 
 connect(worksheet, SIGNAL(valueChanged(int,int)),this, SLOT(cellEdited(int,int)));
-specifications = saveToString("geometry\n");
 }
 
 void Table::colWidthModified(int, int, int)
@@ -653,9 +652,14 @@ QStringList Table::drawableColumnSelection()
 QStringList names;
 for (int i=0;i<worksheet->numCols();i++)
 	{
-	if(worksheet->isColumnSelected (i,true) && 
-		(col_plot_type[i] == Y || col_plot_type[i] == yErr || col_plot_type[i] == xErr))
+	if(worksheet->isColumnSelected (i,true) && col_plot_type[i] == Y)
 		names<<QString(name())+"_"+col_label[i];
+	}
+
+for (int j=0; j<worksheet->numCols(); j++)
+	{
+	if(worksheet->isColumnSelected (j,true) && (col_plot_type[j] == yErr || col_plot_type[j] == xErr))
+		names<<QString(name())+"_"+col_label[j];
 	}
 return names;
 }
@@ -2815,7 +2819,7 @@ specifications=s;
 
 void Table::setNewSpecifications()
 {
-newSpecifications= saveToString("geometry\n");
+newSpecifications = saveToString("geometry\n");
 }
 
 QString& Table::getNewSpecifications()
