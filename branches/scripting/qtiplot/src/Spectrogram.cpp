@@ -29,6 +29,7 @@
 #include "Spectrogram.h"
 #include <math.h>
 #include <qpen.h>
+#include <qmessagebox.h>
 
 #include <qwt_scale_widget.h>
 
@@ -290,8 +291,8 @@ return s+"</spectrogram>\n";
 
 double MatrixData::value(double x, double y) const
 {       
-int i = abs((int)floor((y_end - y)/dy - 1));
-int j = abs((int)floor((x - x_start)/dx - 1));
+int i = abs((int)floor((y - y_start)/dy - 1));
+int j = abs((int)floor((x - x_start)/dx));
 
 if (d_m && i < n_rows && j < n_cols)
 	return d_m[i][j];
