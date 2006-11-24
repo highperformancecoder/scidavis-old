@@ -189,7 +189,6 @@ public slots:
 	 QString saveAxesTitleColors();
 	 QString saveAxesColors();
 	 QString saveEnabledAxes();
-	 QString saveErrorBars();
 	 QString saveCanvas();
 	 QString saveTitle();
 	 QString saveAxesTitleAlignement();
@@ -517,6 +516,8 @@ public slots:
 		 QValueList<double> &ranges, int points, const QString& title = QString::null);	 
 	 //when reading from file
 	 void insertFunctionCurve(const QString& formula, int points, int fileVersion);
+     //! Returns a unique function name
+	 QString generateFunctionName();
 
 	 void createWorksheet(const QString& name);
 	 void activateGraph();
@@ -667,9 +668,6 @@ private:
 	QPoint auxMrkStart, auxMrkEnd;
 	Qt::PenStyle auxMrkStyle;
 	QString auxMrkFileName, auxMrkText;
-
-	//! The number of FunctionCurves inserted in the plot
-	int d_functions;
 
 	int n_curves, selectedCurve, selectedPoint,startPoint,endPoint, selectedCursor, pieRay;
 	int selectedCol,xCol,widthLine,fitID,linesOnPlot, defaultMarkerFrame;

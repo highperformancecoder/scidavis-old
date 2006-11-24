@@ -300,7 +300,7 @@ void ApplicationWindow::initGlobalConstants()
 #endif
 
 majVersion = 0; minVersion = 8; patchVersion = 9;
-d_extra_version = "-rc1";
+d_extra_version = "-rc2";
 projectname="untitled";
 lastModified=0;
 activeGraph=0;
@@ -8114,7 +8114,7 @@ QString version = "QtiPlot " + QString::number(majVersion) + "." +
 QMessageBox::about(this,tr("About QtiPlot"),
 			 tr("<h2>"+ version + "</h2>"
 			 "<p><h3>Copyright(C): Ion Vasilief</h3>"
-			 "<p><h3>Released: 31/10/2006</h3>"));
+			 "<p><h3>Released: 24/11/2006</h3>"));
 }
 
 void ApplicationWindow::windowsMenuAboutToShow()
@@ -9716,9 +9716,10 @@ QApplication::setOverrideCursor(waitCursor);
 Matrix* w = newMatrix("Matrix1", rows, cols);
 for (int i=0; i<rows; i++ )
  	{
+	int l = rows - i -1;
 	for (int j=0; j<cols; j++)
  		{
-		QRgb pixel = image.pixel (j,i);
+		QRgb pixel = image.pixel (j, l);
 		w->setText (i, j, QString::number(qGray(pixel)));
 		}
 	}
@@ -10274,6 +10275,7 @@ for (int j=0;j<(int)list.count()-1;j++)
 							curve[5].toInt(),curve[6].toInt(), QColor(curve[7]), 
 							curve[8].toInt(), curve[10].toInt(), curve[9].toInt(), xOffset, yOffset);
 				}
+			curveID++;
 			}
 		else if (s == "<spectrogram>") 
 			{

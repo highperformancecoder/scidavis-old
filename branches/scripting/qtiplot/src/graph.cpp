@@ -126,7 +126,6 @@ Graph::Graph(QWidget* parent, const char* name, WFlags f)
 if ( !name )
 	setName( "graph" );
 	
-d_functions = 0;
 fitter = 0;
 n_curves=0;
 linesOnPlot=0;
@@ -2710,7 +2709,7 @@ QString text="";
 for (int i=0; i<n_curves; i++)
 	{
 	const QwtPlotCurve *c = curve(i);
-	if (c &&  c_type[i] != ErrorBars)
+	if (c && c->rtti() != QwtPlotItem::Rtti_PlotSpectrogram && c_type[i] != ErrorBars )
 		{
 		text+="\\c{";
 		text+=QString::number(i+1);
@@ -3556,45 +3555,6 @@ for (int i=0; i < QwtPlot::axisCnt; i++)
 return s;
 }
 
-QString Graph::saveErrorBars()
-{
-QValueList<int> keys = d_plot->curveKeys();
-QString all;
-for (int i=0; i<n_curves; i++)
-{
-	QString s="";
-	if (c_type[i] == ErrorBars)
-	{
-		long curveID = keys[i];
-		QwtErrorPlotCurve *er=(QwtErrorPlotCurve *)d_plot->curve(curveID);
-		if (er)
-		{
-		s+="ErrorBars\t";
-		s+=QString::number(er->direction())+"\t";
-		QStringList cvs=QStringList::split(",",associations[i],FALSE);
-		
-		s+=cvs[0].remove("(X)",true)+"\t";
-		s+=cvs[1].remove("(Y)",true)+"\t";
-		if (!er->direction())
-			s+=cvs[2].remove("(xErr)",true)+"\t";
-		else
-			s+=cvs[2].remove("(yErr)",true)+"\t";
-		
-		s+=QString::number(er->width())+"\t";
-		s+=QString::number(er->capLength())+"\t";
-		s+=er->color().name()+"\t";
-		s+=QString::number(er->throughSymbol())+"\t";
-		s+=QString::number(er->plusSide())+"\t";
-		s+=QString::number(er->minusSide())+"\t";
-		s+=QString::number(er->xDataOffset())+"\t";
-		s+=QString::number(er->yDataOffset())+"\n";
-		all+=s;
-		}				
-	}
-}
-return all;
-}
-
 void Graph::setXAxisTitleColor(const QColor& c)
 {
 QwtScaleWidget *scale = (QwtScaleWidget *)d_plot->axisWidget(QwtPlot::xBottom);
@@ -3870,11 +3830,14 @@ if (piePlot)
 	s+=savePieCurveLayout();
 else
 	{	
-	for (int j=0; j<n_curves; j++)
+	for (int i=0; i<n_curves; i++)
 		{
-		if (c_type[j] != ErrorBars)
+		QwtPlotCurve *c = this->curve(i);
+		if (!c) 
+			continue;
+
+		if (c_type[i] != ErrorBars)
 			{
-			QwtPlotCurve *c = this->curve(j);
 			if (c->rtti() == FunctionCurve::RTTI)
 				s += ((FunctionCurve *)c)->saveToString();
 			else if (c->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
@@ -3882,16 +3845,39 @@ else
 				s += ((Spectrogram *)c)->saveToString();
 				continue;
 				}
-			else if (c_type[j] == Box)
+			else if (c_type[i] == Box)
 				s += "curve\t" + QString::number(c->x(0)) + "\t" + c->title().text() + "\t";
 			else
 				{
-				QStringList as=QStringList::split(",", associations[j],FALSE);
+				QStringList as=QStringList::split(",", associations[i],FALSE);
 				s += "curve\t" + as[0].remove("(X)",true) + "\t";
 				s += as[1].remove("(Y)",true) + "\t";
 				}			
-			s += saveCurveLayout(j);
+			s += saveCurveLayout(i);
 			s += QString::number(c->xAxis())+"\t"+QString::number(c->yAxis())+"\n";
+			}
+		else if (c_type[i] == ErrorBars)	
+			{
+			QwtErrorPlotCurve *er=(QwtErrorPlotCurve *)c;
+			s+="ErrorBars\t";
+			s+=QString::number(er->direction())+"\t";
+			QStringList cvs=QStringList::split(",",associations[i],FALSE);
+		
+			s+=cvs[0].remove("(X)",true)+"\t";
+			s+=cvs[1].remove("(Y)",true)+"\t";
+			if (!er->direction())
+				s+=cvs[2].remove("(xErr)",true)+"\t";
+			else
+				s+=cvs[2].remove("(yErr)",true)+"\t";
+		
+			s+=QString::number(er->width())+"\t";
+			s+=QString::number(er->capLength())+"\t";
+			s+=er->color().name()+"\t";
+			s+=QString::number(er->throughSymbol())+"\t";
+			s+=QString::number(er->plusSide())+"\t";
+			s+=QString::number(er->minusSide())+"\t";
+			s+=QString::number(er->xDataOffset())+"\t";
+			s+=QString::number(er->yDataOffset())+"\n";
 			}
 		}
 	}
@@ -5655,17 +5641,33 @@ emit modifiedGraph();
 emit modifiedFunction();
 }
 
+QString Graph::generateFunctionName()
+{
+QString newName = "F1";
+int index = 1;
+QStringList lst;
+for (int i=0; i<n_curves; i++)
+	{
+	QwtPlotCurve *c = this->curve(i);
+	if (c && c->rtti() == FunctionCurve::RTTI && c->title().text().startsWith("F"))
+		lst << c->title().text();
+	}
+
+while(lst.contains(newName)){
+	newName = "F" + QString::number(++index);}
+return newName;
+}
+
 void Graph::addFunctionCurve(int type, const QStringList &formulas, const QString &var,
 							 QValueList<double> &ranges, int points, const QString& title)
 {
 bool error=FALSE;
 QMemArray<double> X(points), Y(points);
 QString name;
-++d_functions;
 if (!title.isEmpty())
 	name = title;
 else
-	name = "F" + QString::number(d_functions);
+	name = generateFunctionName();
 
 double step=(ranges[1]-ranges[0])/(double) (points-1);
 
@@ -5860,7 +5862,7 @@ s+=saveAxesColors();
 s+=saveAxesBaseline();
 s+=saveCanvas();
 s+=saveCurves();			
-s+=saveErrorBars();
+//s+=saveErrorBars();
 s+=saveScale();
 s+=saveAxesFormulas();
 s+=saveLabelsFormat();
