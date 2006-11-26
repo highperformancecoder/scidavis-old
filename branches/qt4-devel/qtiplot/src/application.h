@@ -141,6 +141,13 @@ private:
 	QAction *conestyle, *crossHairStyle;
 	Graph *activeGraph,  *lastCopiedLayer;
 
+public:
+	/*! Generates a new unique name starting with string /param name.
+	You can force the output to be a name different of /param name, 
+	even if 'name' is not used in the project, by setting /param increment = true (the default)
+	*/
+	QString generateUnusedName(const QString& name, bool increment = true);
+	
 public slots:
 	void open();
 	ApplicationWindow* open(const QString& fn);
@@ -793,6 +800,11 @@ signals:
 	
 // TODO: a lot of this stuff should be private
 public:
+	bool generateUniformFitPoints;
+
+	//! Number of points in a generated fit curve
+	int fitPoints;
+
 	bool pasteFitResultsToPlot;
 
 	//! Write fit output information to Result Log
@@ -830,7 +842,7 @@ public:
 	QString configFilePath, logInfo, fitPluginsPath;
 	int logID,asciiID,closeID;
 	int exportID, printAllID;
-	int notes, graphs,tables, matrixes, fitNumber, ignoredLines, savingTimerId;
+	int notes, graphs,tables, matrixes, ignoredLines, savingTimerId;
 	bool renameColumns, copiedLayer, strip_spaces, simplify_spaces;
 	QStringList recentProjects, tableWindows;
 	bool saved, showPlot3DProjection, showPlot3DLegend, orthogonal3DPlots;
