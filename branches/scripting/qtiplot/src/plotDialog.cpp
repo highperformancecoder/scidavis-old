@@ -546,7 +546,7 @@ vl->addWidget(imageGroupBox);
 vl->addWidget(levelsGroupBox);
 vl->addWidget(axisScaleBox);
 
-privateTabWidget->insertTab(spectrogramPage, tr( "Spectrogram" ) );
+privateTabWidget->insertTab(spectrogramPage, tr("Contour") + " / " + tr("Image"));
 }
 
 void plotDialog::fillBoxSymbols()
@@ -925,7 +925,7 @@ else if (plot_type == Graph::Box)
 	}
 else if (plot_type == Graph::ColorMap || plot_type == Graph::GrayMap || plot_type == Graph::ContourMap)
 	{
-	privateTabWidget->addTab(spectrogramPage, tr("Spectrogram"));
+	privateTabWidget->addTab(spectrogramPage, tr("Colors") + " / " + tr("Contour"));
 	privateTabWidget->showPage(spectrogramPage);
 	}
 }
@@ -986,7 +986,7 @@ if (size>0 && curveType >= 0)
 		boxPlotType->insertItem( tr( "Box" ) );
 	else if (curveType == Graph::ColorMap || curveType == Graph::GrayMap || curveType == Graph::ContourMap)
 		{
-		boxPlotType->insertItem( tr( "Spectrogram" ) );
+		boxPlotType->insertItem(tr("Contour") + " / " + tr("Image"));
 		}
 	else 
 		{

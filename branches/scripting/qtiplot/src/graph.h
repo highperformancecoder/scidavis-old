@@ -176,10 +176,8 @@ public slots:
 	 void setAutoScale();
 	 void updateScale();
 	
-	 QString saveAsTemplate();
-
 	 // saving to file 
-	 QString saveToString();
+	 QString saveToString(bool saveAsTemplate = false);
 	 QString saveGridOptions();
 	 QString saveScale();
 	 QString saveScaleTitles();
@@ -337,11 +335,17 @@ public slots:
 	 void setRightAxisTitleAlignment(int align);
 	 void setAxesTitlesAlignment(const QStringList& align);
 
+	 QColor axisColor(int axis);
 	 QStringList axesColors();
 	 void setAxesColors(const QStringList& colors);
+
+	 QColor axisNumbersColor(int axis);
+	 QStringList axesNumColors();
+	 void setAxesNumColors(const QStringList& colors);
+
 	 void showAxis(int axis, int type, const QString& formatInfo, Table *table, bool axisOn, 
 				   int majTicksType, int minTicksType, bool labelsOn, const QColor& c, 
-				   int format, int prec, int rotation, int baselineDist, const QString& formula);
+				   int format, int prec, int rotation, int baselineDist, const QString& formula, const QColor& labelsColor);
 
 	 QMemArray<bool> enabledAxes();
 	 void enableAxes(QMemArray<bool> axesOn);

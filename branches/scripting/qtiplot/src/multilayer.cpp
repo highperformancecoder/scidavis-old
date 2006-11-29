@@ -1473,7 +1473,7 @@ s+="Alignement\t"+QString::number(hor_align)+"\t"+QString::number(vert_align)+"\
 for (int i=0;i<(int)graphsList->count();i++)
 	{
 	Graph* ag=(Graph*)graphsList->at(i);
-	s+=ag->saveAsTemplate();
+	s+=ag->saveToString(true);
 	}
 return s;
 }

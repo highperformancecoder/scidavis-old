@@ -6067,14 +6067,14 @@ else
 
 void ApplicationWindow::showAxis(int axis, int type, const QString& labelsColName, bool axisOn, 
 								 int majTicksType, int minTicksType, bool labelsOn, const QColor& c, int format, 
-								 int prec, int rotation, int baselineDist, const QString& formula)
+								 int prec, int rotation, int baselineDist, const QString& formula, const QColor& labelsColor)
 {
 Table *w = table(labelsColName);
 if ((type == Graph::Txt || type == Graph::ColHeader) && !w)
 	return;
 
 activeGraph->showAxis(axis, type, labelsColName, w, axisOn, majTicksType, minTicksType, labelsOn, 
-					  c, format, prec, rotation, baselineDist, formula);
+					  c, format, prec, rotation, baselineDist, formula, labelsColor);
 }
 
 void ApplicationWindow::showGeneralPlotDialog()
@@ -6135,8 +6135,10 @@ if (!g->isPiePlot())
 	axesDialog* ad= new axesDialog(this, 0,TRUE,WStyle_Tool|WDestructiveClose);
 	connect (ad,SIGNAL(updateAxisTitle(int,const QString&)),g,SLOT(setAxisTitle(int,const QString&)));
 	connect (ad,SIGNAL(changeAxisFont(int, const QFont &)),g,SLOT(setAxisFont(int,const QFont &)));
-	connect (ad,SIGNAL(showAxis(int, int, const QString&, bool,int, int, bool,const QColor&, int, int, int, int, const QString&)),
-			this, SLOT(showAxis(int,int, const QString&, bool, int, int, bool,const QColor&, int, int, int, int, const QString&)));
+	connect (ad,SIGNAL(showAxis(int, int, const QString&, bool,int, int, bool,const QColor&,
+						int, int, int, int, const QString&, const QColor&)),
+			this, SLOT(showAxis(int,int, const QString&, bool, int, int, bool,const QColor&, 
+						int, int, int, int, const QString&, const QColor&)));
 
 	ad->setMultiLayerPlot((MultiLayer*)w);
 	ad->insertColList(columnsList(Table::All));
@@ -6149,7 +6151,6 @@ if (!g->isPiePlot())
 	ad->setAxisTitles(g->scalesTitles());
 	ad->updateTitleBox(0);
 	ad->putGridOptions(g->getGridOptions());
-	ad->setAxesColors(g->axesColors());
 	ad->setTicksType(g->plotWidget()->getMajorTicksType(), g->plotWidget()->getMinorTicksType());
 	ad->setEnabledTickLabels(g->enabledTickLabels());
 	ad->initLabelsRotation(g->labelsRotation(QwtPlot::xBottom), g->labelsRotation(QwtPlot::xTop));
@@ -10103,6 +10104,12 @@ for (int j=0;j<(int)list.count()-1;j++)
 			fList.pop_front();
 			ag->setAxesColors(fList);
 			}
+	else if (s.contains ("AxesNumberColors"))
+			{
+			fList=QStringList::split ("\t",s,TRUE);
+			fList.pop_front();
+			ag->setAxesNumColors(fList);
+			}
 	else if (s.left(5)=="grid\t")
 			{
 			QStringList grid=QStringList::split ("\t",s,TRUE);
@@ -10414,21 +10421,36 @@ for (int j=0;j<(int)list.count()-1;j++)
 			ag->setCanvasBackground(QColor(list[1]));
 			}
 		else if (s.contains ("Legend"))
-			{
+			{// version <= 0.8.9
 			fList=QStringList::split ("\t",s,TRUE);
 			ag->insertLegend(fList, fileVersion);
 			}
-		else if (s.contains ("textMarker"))
+		else if (s.startsWith ("<legend>") && s.endsWith ("</legend>"))
 			{
+			fList=QStringList::split ("\t", s.remove("</legend>"), TRUE);
+			ag->insertLegend(fList, fileVersion);
+			}
+		else if (s.contains ("textMarker"))
+			{// version <= 0.8.9
 			fList=QStringList::split ("\t",s,TRUE);
 			ag->insertTextMarker(fList, fileVersion);
 			}
-		else if (s.contains ("lineMarker"))
+		else if (s.startsWith ("<text>") && s.endsWith ("</text>"))
 			{
+			fList=QStringList::split ("\t", s.remove("</text>"), TRUE);
+			ag->insertTextMarker(fList, fileVersion);
+			}
+		else if (s.contains ("lineMarker"))
+			{// version <= 0.8.9
 			fList=QStringList::split ("\t",s,TRUE);
 			ag->insertLineMarker(fList, fileVersion);
 			}
-		else if (s.contains ("ImageMarker"))
+		else if (s.startsWith ("<line>") && s.endsWith ("</line>"))
+			{
+			fList=QStringList::split ("\t", s.remove("</line>"), TRUE);
+			ag->insertLineMarker(fList, fileVersion);
+			}
+		else if (s.contains ("ImageMarker") || (s.startsWith ("<image>") && s.endsWith ("</image>")))
 			{
 			fList=QStringList::split ("\t",s,TRUE);
 			ag->insertImageMarker(fList, fileVersion);

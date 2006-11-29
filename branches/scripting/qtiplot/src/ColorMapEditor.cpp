@@ -74,11 +74,11 @@ connect(table, SIGNAL(currentChanged (int, int)), this, SLOT(enableButtons(int, 
 connect(table, SIGNAL(valueChanged (int, int)), this, SLOT(validateLevel(int, int)));
 
 QHBox *hb = new QHBox (this);
-insertBtn = new QPushButton(tr("&Insert Level"), hb);
+insertBtn = new QPushButton(tr("&Insert"), hb);
 insertBtn->setEnabled(false);
 connect(insertBtn, SIGNAL(clicked()), this, SLOT(insertLevel()));
 
-deleteBtn = new QPushButton(tr("&Delete Level"), hb);
+deleteBtn = new QPushButton(tr("&Delete"), hb);
 deleteBtn->setEnabled(false);
 connect(deleteBtn, SIGNAL(clicked()), this, SLOT(deleteLevel()));
 
