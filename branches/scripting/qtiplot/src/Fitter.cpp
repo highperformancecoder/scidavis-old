@@ -13,6 +13,7 @@
 #include <gsl/gsl_fit.h>
 #include <gsl/gsl_statistics.h>
 
+#include <qfile.h>
 #include <qapplication.h>
 #include <qlibrary.h>
 #include <qmessagebox.h>

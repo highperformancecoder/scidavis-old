@@ -291,7 +291,7 @@ void ColorButton::init()
 {
 btn_size = 32;
 selectButton = new QPushButton(QPixmap(palette_xpm), QString::null, this, 0);
-selectButton->setMaximumWidth(btn_size);
+selectButton->setMaximumWidth(2*btn_size);
 selectButton->setMaximumHeight(btn_size);
 
 display = new QFrame(this);

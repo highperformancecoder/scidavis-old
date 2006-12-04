@@ -1199,12 +1199,16 @@ axesDialog::axesDialog( QWidget* parent,  const char* name, bool modal, WFlags f
 	for (int i=0;i<4;i++)
 		titles<<"";
 
+	lastPage = scalesPage;
+
 	setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
 // signals and slots connections
 connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
 connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 connect( buttonApply, SIGNAL( clicked() ), this, SLOT(updatePlot() ) );
+connect( generalDialog, SIGNAL( currentChanged ( QWidget * ) ), 
+		this, SLOT(pageChanged ( QWidget * ) ) );
 }
 
 void axesDialog::initScalesPage()
@@ -1498,9 +1502,6 @@ void axesDialog::initAxesPage()
 	boxShowLabels->setText(tr("Show Labels"));
 	boxShowLabels->setChecked(TRUE);
 	
-	new QLabel(tr( "Color" ),GroupBox8);	
-	boxAxisNumColor= new ColorButton(GroupBox8);
-
 	label1 = new QLabel(tr("Table"),GroupBox8);	
 	boxColName = new QComboBox(GroupBox8, "Datasheet");
 
@@ -1516,6 +1517,9 @@ void axesDialog::initAxesPage()
 	
 	new QLabel(tr( "Angle" ),GroupBox8);		
 	boxAngle = new QSpinBox(-90,90,5,GroupBox8);
+
+	new QLabel(tr( "Color" ),GroupBox8);	
+	boxAxisNumColor= new ColorButton(GroupBox8);
 
 	boxShowFormula = new QCheckBox(tr( "For&mula" ),GroupBox8);		
 	boxFormula = new QTextEdit(GroupBox8);
@@ -3203,6 +3207,20 @@ QFont oldFont = d_graph->axisTitleFont(axis);
 QFont fnt = QFontDialog::getFont( &okF, oldFont,this);
 if (okF && fnt != oldFont)
 	d_graph->setAxisTitleFont(axis, fnt);
+}
+
+void axesDialog::pageChanged ( QWidget *page )
+{
+if (lastPage == scalesPage && page == axesPage)
+	{
+	axesTitlesList->setCurrentItem(axesList->currentItem());
+	lastPage = page;
+	}
+else if (lastPage == axesPage && page == scalesPage)
+	{
+	axesList->setCurrentItem(axesTitlesList->currentItem());
+	lastPage = page;
+	}
 }
 
 axesDialog::~axesDialog()

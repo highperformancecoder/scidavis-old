@@ -4,7 +4,7 @@
 #include <qmainwindow.h>
 #include <qlistview.h> 
 #include <qhttp.h> 
-#include <qfile.h> 
+#include <qbuffer.h>
 #include <qtextbrowser.h>
 
 #include "graph3D.h"
@@ -145,10 +145,13 @@ public slots:
 	void deleteLayer();
 
 	//! Creates a new spectrogram graph
-	MultiLayer* plotSpectrogram(Graph::CurveType type);
-	MultiLayer* plotGrayMap();
-	MultiLayer* plotContourMap();
-	MultiLayer* plotColorMap();
+	MultiLayer* plotSpectrogram(Matrix *m, Graph::CurveType type);
+	void plotGrayScale();
+	MultiLayer* plotGrayScale(Matrix *m);
+	void plotContour();
+	MultiLayer* plotContour(Matrix *m);
+	void plotColorMap();
+	MultiLayer* plotColorMap(Matrix *m);
 
 	//! Rearrange the layersin order to fit to the size of the plot window
 	void autoArrangeLayers();
@@ -293,7 +296,8 @@ public slots:
 	void pixelLineProfile();
 	void loadImage();
 	void loadImage(const QString& fn);
-	void importImage();
+	Matrix* importImage();
+	Matrix* importImage(const QString& fn);
 	
     void loadASCII();
 	void loadMultiple();
@@ -913,7 +917,7 @@ private:
 	//! Used when checking for new versions
 	QHttp http;
 	//! Used when checking for new versions
-	QFile versionFile;
+	QBuffer version_buffer;
 
 	QSplitter *explorerSplitter;
 };

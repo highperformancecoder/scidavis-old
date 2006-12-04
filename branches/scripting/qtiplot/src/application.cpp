@@ -300,7 +300,7 @@ void ApplicationWindow::initGlobalConstants()
 #endif
 
 majVersion = 0; minVersion = 8; patchVersion = 9;
-d_extra_version = "-rc2";
+d_extra_version = "";
 projectname="untitled";
 lastModified=0;
 activeGraph=0;
@@ -2146,7 +2146,7 @@ customMenu((QWidget*)plot);
 customToolBars((QWidget*)plot);
 }
 
-void ApplicationWindow::importImage()
+Matrix* ApplicationWindow::importImage()
 {
 QStringList list=QImage::inputFormatList ();
 QString filter="Images (*.jpg *.JPG ",aux;
@@ -2170,32 +2170,39 @@ QString fn = QFileDialog::getOpenFileName(imagesDirPath, filter, this, 0,
 			tr("QtiPlot - Import image from file"), 0, TRUE);
 if ( !fn.isEmpty() )
 	{
-	QApplication::setOverrideCursor(waitCursor);
-	QPixmap photo;
-	if ( fn.contains(".jpg", false))
-		photo.load(fn,"JPEG",QPixmap::Auto);
-	else
-		{
-		for (i=0;i<(int)list.count();i++)
-			{
-			if (fn.contains("." + list[i], false))
-				{
-				photo.load(fn,list[i],QPixmap::Auto);
-				break;
-				}
-			}
-		}
-
-	Matrix* m = createIntensityMatrix(photo);
-	m->setWindowLabel(fn);
-	m->setCaptionPolicy(myWidget::Both);
-	setListViewLabel(m->name(), fn);
-
 	QFileInfo fi(fn);
 	imagesDirPath = fi.dirPath(true);
-
-	QApplication::restoreOverrideCursor();
+	return 	importImage(fn);
 	}
+else return 0;
+}
+
+Matrix* ApplicationWindow::importImage(const QString& fn)
+{
+QApplication::setOverrideCursor(waitCursor);
+QPixmap photo;
+if ( fn.contains(".jpg", false))
+	photo.load(fn,"JPEG",QPixmap::Auto);
+else
+	{
+	QStringList lst=QImage::inputFormatList();
+	for (int i=0;i<(int)lst.count();i++)
+		{
+		if (fn.contains("." + lst[i], false))
+			{
+			photo.load(fn,lst[i],QPixmap::Auto);
+			break;
+			}
+		}
+	}
+
+Matrix* m = createIntensityMatrix(photo);
+m->setWindowLabel(fn);
+m->setCaptionPolicy(myWidget::Both);
+setListViewLabel(m->name(), fn);
+
+QApplication::restoreOverrideCursor();
+return m;
 }
 
 void ApplicationWindow::loadImage()
@@ -8273,9 +8280,8 @@ void ApplicationWindow::dropEvent( QDropEvent* e )
 QStringList fileNames;
 if (QUriDrag::decodeLocalFiles(e, fileNames))
 	{
-	QStringList lst=QImage::inputFormatList();
+	QStringList lst=QImage::inputFormatList() << "JPG";
 	QStringList asciiFiles;
-
 	for(int i = 0; i<(int)fileNames.count(); i++)
 		{
 		QString fn = fileNames[i];
@@ -11325,10 +11331,10 @@ void ApplicationWindow::createActions()
   connect(actionColorMap, SIGNAL(activated()), this, SLOT(plotColorMap()));
 
   actionContourMap = new QAction(QPixmap(contour_map_xpm), tr("Contour &Lines"), QString::null, this);
-  connect(actionContourMap, SIGNAL(activated()), this, SLOT(plotContourMap()));
+  connect(actionContourMap, SIGNAL(activated()), this, SLOT(plotContour()));
 
   actionGrayMap = new QAction(QPixmap(gray_map_xpm), tr("&Gray Scale Map"), QString::null, this);
-  connect(actionGrayMap, SIGNAL(activated()), this, SLOT(plotGrayMap()));
+  connect(actionGrayMap, SIGNAL(activated()), this, SLOT(plotGrayScale()));
 
   actionSortTable = new QAction(tr("Sort Ta&ble"), QString::null, this);
   connect(actionSortTable, SIGNAL(activated()), this, SLOT(sortActiveTable()));
@@ -11966,28 +11972,57 @@ emit modified();
 QApplication::restoreOverrideCursor();
 }
 
-MultiLayer* ApplicationWindow::plotGrayMap()
-{
-return plotSpectrogram(Graph::GrayMap);
-}
-
-MultiLayer* ApplicationWindow::plotContourMap()
-{
-return plotSpectrogram(Graph::ContourMap);
-}
-
-MultiLayer* ApplicationWindow::plotColorMap()
-{
-return plotSpectrogram(Graph::ColorMap);
-}
-
-MultiLayer* ApplicationWindow::plotSpectrogram(Graph::CurveType type)
+void ApplicationWindow::plotGrayScale()
 {
 if (!ws->activeWindow()|| !ws->activeWindow()->isA("Matrix"))
+	return;
+
+plotSpectrogram((Matrix*)ws->activeWindow(), Graph::GrayMap);
+}
+
+MultiLayer* ApplicationWindow::plotGrayScale(Matrix *m)
+{
+if (!m)
 	return 0;
 
+return plotSpectrogram(m, Graph::GrayMap);
+}
+
+void ApplicationWindow::plotContour()
+{
+if (!ws->activeWindow()|| !ws->activeWindow()->isA("Matrix"))
+	return;
+
+plotSpectrogram((Matrix*)ws->activeWindow(), Graph::ContourMap);
+}
+
+MultiLayer* ApplicationWindow::plotContour(Matrix *m)
+{
+if (!m)
+	return 0;
+
+return plotSpectrogram(m, Graph::ContourMap);
+}
+
+void ApplicationWindow::plotColorMap()
+{
+if (!ws->activeWindow()|| !ws->activeWindow()->isA("Matrix"))
+	return;
+
+plotSpectrogram((Matrix*)ws->activeWindow(), Graph::ColorMap);
+}
+
+MultiLayer* ApplicationWindow::plotColorMap(Matrix *m)
+{
+if (!m)
+	return 0;
+
+return plotSpectrogram(m, Graph::ColorMap);
+}
+
+MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
+{
 QApplication::setOverrideCursor(waitCursor);
-Matrix *m = (Matrix*)ws->activeWindow();
 
 MultiLayer* g = multilayerPlot(generateUniqueName(tr("Graph")));
 Graph* plot = g->addLayer();
@@ -13737,15 +13772,10 @@ folders->blockSignals(false);
 
 void ApplicationWindow::searchForUpdates()
 {
-versionFile.setName("qtiplot_last_version.txt");
-if (!versionFile.open(IO_WriteOnly))
-	{
-	QMessageBox::warning(this, tr("QtiPlot - HTTP Get Version File"),
-		tr("Cannot write file %1\n%2.").arg(versionFile.name()).arg(versionFile.errorString()));
-	return;
-	}
+version_buffer.open(IO_WriteOnly);
+
 http.setHost("soft.proindependent.com");
-http.get("/version.txt", &versionFile);
+http.get("/version.txt", &version_buffer);
 http.closeConnection();
 }
 
@@ -13758,16 +13788,14 @@ if (error)
 	return;
 	}
 
-versionFile.close();
+version_buffer.close();
 
-if (versionFile.open(IO_ReadOnly))
+if (version_buffer.open(IO_ReadOnly))
 	{
-	QTextStream t( &versionFile );
+	QTextStream t( &version_buffer );
 	t.setEncoding(QTextStream::UnicodeUTF8);
 	QString version = t.readLine();
-
-	versionFile.close();
-	versionFile.remove();
+	version_buffer.close();
 
 	QString currentVersion = QString::number(majVersion) + "." + QString::number(minVersion) +
 							"." + QString::number(patchVersion) + d_extra_version;

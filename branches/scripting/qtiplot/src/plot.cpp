@@ -60,8 +60,9 @@ for (int i= 0; i<QwtPlot::axisCnt; i++)
 		}
 	}
 	
-QwtPlotLayout *pLayout=plotLayout();
-pLayout->setCanvasMargin(0);
+QwtPlotLayout *pl=plotLayout();
+pl->setCanvasMargin(0);
+pl->setAlignCanvasToScales (true);
 
 QwtPlotCanvas* plCanvas = canvas();
 plCanvas->setFocusPolicy(QWidget::StrongFocus);
@@ -105,23 +106,31 @@ painter->restore();
 void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
     const QwtScaleMap map[axisCnt], const QwtPlotPrintFilter &pfilter) const
 {
+	painter->save();
+
 	const QwtPlotCanvas* plotCanvas=canvas();	
 	if (plotCanvas->lineWidth() > 0)
     	{
 		QPalette pal = plotCanvas->palette();
-		QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
+		QColor color = pal.color(QPalette::Active, QColorGroup::Foreground);
 		
-		painter->save();
 		painter->setPen (QPen(color, plotCanvas->lineWidth(), Qt::SolidLine));
-
-		if (canvasBackground() != Qt::white)
-			painter->setBrush(canvasBackground());
-			
+		painter->setBrush(canvasBackground());
+		
 		QwtPainter::drawRect(painter, canvasRect);
-		painter->restore();
    		}
-	
+	else
+		{
+		QRect rect = canvasRect;
+		rect.setLeft(canvasRect.x()+1);
+		rect.setTop(canvasRect.y()+1);
+
+		QwtPainter::fillRect(painter, rect, canvasBackground());
+		}
+
+	painter->restore();
 	painter->setClipping(TRUE);
+
 	QwtPainter::setClipRect(painter, canvasRect);
 
     drawItems(painter, canvasRect, map, pfilter);

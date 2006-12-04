@@ -2012,6 +2012,9 @@ QApplication::clipboard()->setData( new QImageDrag (image,d_plot,0) );
 
 QPixmap Graph::graphPixmap()
 {
+#ifdef Q_OS_MAC // Mac 
+	return QPixmap::grabWidget(this);
+#else
 int lw = d_plot->lineWidth();
 int clw = 2*d_plot->canvas()->lineWidth();
 
@@ -2034,8 +2037,8 @@ paint.end();
 
 //the initial layout is invalidated during the print operation and must be recalculated	
 layout->activate(d_plot, d_plot->rect(), 0);
-	
 return pic;
+#endif
 }
 
 void Graph::exportImage(const QString& fileName, const QString& fileType,
@@ -7131,8 +7134,3 @@ delete scalePicker;
 delete cp;
 delete d_plot;
 }
-
-
-
-
-

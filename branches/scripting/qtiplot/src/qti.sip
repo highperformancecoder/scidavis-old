@@ -395,7 +395,13 @@ public:
   l << *a1;
   sipRes = sipCpp->multilayerPlot(a0, l, a2);
 %End
-  
+
+Matrix* importImage();
+Matrix* importImage(const QString&);
+MultiLayer* plotContour(Matrix*);  
+MultiLayer* plotColorMap(Matrix*);
+MultiLayer* plotGrayScale(Matrix*);
+
   QWidgetList *windowsList() /PyName=windows/;
 
   QTextEdit *results;
@@ -811,4 +817,3 @@ public:
 private:
   Folder(const Folder&);
 };
-

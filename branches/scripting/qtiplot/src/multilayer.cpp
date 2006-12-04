@@ -865,6 +865,9 @@ if (rows != r)
 
 QPixmap MultiLayer::canvasPixmap()
 {
+#ifdef Q_OS_MAC // Mac 
+	return QPixmap::grabWidget(canvas);
+#else
 QSize size=canvas->size();
 QPixmap pic(size.width(), size.height(), -1, QPixmap::BestOptim);
 pic.fill (Qt::white);
@@ -888,6 +891,7 @@ for (int i=0;i<(int)graphsList->count();i++)
 		}		
 paint.end();
 return pic;
+#endif
 }
 	
 void MultiLayer::exportImage(const QString& fileName, const QString& fileType,
