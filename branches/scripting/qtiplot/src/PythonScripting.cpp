@@ -349,7 +349,11 @@ const QStringList PythonScripting::mathFunctions() const
 {
   QStringList flist;
   PyObject *key, *value;
+#if PY_VERSION_HEX >= 0x02050000
+  Py_ssize_t i=0;
+#else
   int i=0;
+#endif
   while(PyDict_Next(math, &i, &key, &value))
     if (PyCallable_Check(value))
       flist << PyString_AsString(key);
@@ -412,7 +416,11 @@ bool PythonScript::compile(bool for_eval)
   } else if (for_eval) { // code contains statements
     PyErr_Clear();
     PyObject *key, *value;
-    int i=0;
+#if PY_VERSION_HEX >= 0x02050000
+	 Py_ssize_t i=0;
+#else
+	 int i=0;
+#endif
     QString signature = "";
     while(PyDict_Next(localDict, &i, &key, &value))
       signature.append(PyString_AsString(key)).append(",");

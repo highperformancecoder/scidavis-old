@@ -32,7 +32,9 @@ INCLUDEPATH	+= ../3rdparty/liborigin
 ##################### Linux (Mac OS X) settings ##################### 
 
 unix:INCLUDEPATH  += -I /usr/include/qwtplot3d
+#unix:INCLUDEPATH	+=	-I /usr/include/qwt5
 unix:LIBS         += ../3rdparty/qwt/lib$${libsuff}/libqwt.a
+#unix:LIBS			+= -lqwt
 unix:LIBS         += -L /usr/lib$${libsuff} -lgsl -lgslcblas -lqwtplot3d -lz -lorigin
 
 unix:target.path=/usr/bin
@@ -258,8 +260,9 @@ contains(SCRIPTING_LANGS, Python) {
   DEFINES +=	SCRIPTING_PYTHON
   HEADERS +=	src/PythonScripting.h
   SOURCES +=	src/PythonScripting.cpp
-  unix:INCLUDEPATH += /usr/include/python2.4
-  LIBS +=	-lpython2.4 -lm
+  INCLUDEPATH += $$system(python -c 'from distutils import sysconfig; print sysconfig.get_python_inc()')
+  LIBS +=	$$system(python -c 'from distutils import sysconfig; print "-lpython"+sysconfig.get_config_var("VERSION")')
+  LIBS +=	-lm
   
   # TODO: is there a way to do this in the Makefile?
   unix:system(mkdir -p $${MOC_DIR})
