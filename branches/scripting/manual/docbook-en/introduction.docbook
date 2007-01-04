@@ -10,13 +10,13 @@ revision history. (see installation appendix comment) -->
 <title>What &appname; does</title>
 
 <para>&appname; is a program for two- and three-dimensional graphical presentation of data sets and for data analysis. The plots can be produced from data sets stored in <link linkend="sec-intro-table">tables</link> or from analytical functions.</para>
-<para>It is written by &ion;. The software aims to be a tool for analysis and graphical representation of data in the way of commercial software like Origin.</para>
+<para>The projet has been created by &ion; in 2000, and he was the only programmer between 2000 and 2005. Since 2006, new contributors have joined Ion and the project is hosted by <ulink url="www.berlios.de/projects/qtiplot/">BerliOS Developper</ulink>. The software aims to be a tool for analysis and graphical representation of data in the way of commercial software like Origin.</para>
 
 <para>&appname; is a dynamic tool, the plots created from data sets and the spreadsheets owing the data are interconected. When the spreadsheets are modified, all the objects in the depending plots (curves, axes scales, legends) are automatically updated. For example, deleting a spreadsheet or only some columns will automatically remove all the corresponding curves from the depending plots.</para>
 
 <para>All settings of a complete set of tables, matrix and plots can be saved in project files, having the extention ".qti". These project files may be opened using the <link linkend="specify-a-file">command line</link>, or using the <link linkend="sec-file-menu">File menu</link>, or by using the <emphasis>Open project</emphasis> icon from the <link linkend="sec-file-toolbar">File toolbar</link>.</para>
 
-<para>The plots can be exported to serveral graphic formats.</para>
+<para>The plots can be exported to several graphic formats such as JPEG or PNG and inserted as images in documents or presentations.</para>
 
 <para>Data analysis operations (integration, interpolation, FFT, curve fitting, etc...) can be performed on the curves in a 2D plot via the Analysis menu. The results of all these operations are also stored in the project files. They can be visualized at any moment using the &results-log-lnk; command and can be deleted from the project file via the &clear-log-lnk; command.</para>
 
@@ -59,13 +59,10 @@ qtiplot ASCII_file_name
 
 <sect1 id="general-concepts">
 <title>General Concepts and Terms</title>
-<para>Several plots and all the data related to these plots can be save in a <emphasis>project</emphasis> file, the project is therefore the main container of &appname;. The following screenshot give an example of a typical session.</para>
+<para>Several plots and all the data related to these plots can be save in a <emphasis>project</emphasis> file, the project is therefore the main container of &appname;. The following screenshot give an example of a typical session. This example shows the <link linkend="sec-intro-log-window">log panel</link> at the top of the workspace, the <link linkend="sec-intro-project-explorer">project explorer</link> at the bottom, a <link linkend="sec-intro-table">table</link> and a <link linkend="sec-intro-plot-window">plot window</link> are shown while other are docked or hidden.</para>
 
 <figure id="fig-qtiplot-session">
   <title>A typical &appname; session</title>
-  <informalexample>
-    <para>This example shows the <link linkend="sec-intro-log-window">log panel</link> at the top of the workspace, the <link linkend="sec-intro-project-explorer">project explorer</link> at the bottom, a <link linkend="sec-intro-table">table</link> and a <link linkend="sec-intro-plot-window">plot window</link> are shown while other are docked or hidden.</para>
-  </informalexample>
   <mediaobject>
     <imageobject>
       <imagedata  format="PNG" fileref="pics/qtiplot-session.png"/>
@@ -192,13 +189,10 @@ The table is the main part of QtiPlot when working with data. For controlling an
 <sect2 id="sec-intro-plot-window">
 <title>Plot Window</title>
 
-<para>The plot window is the one in which the graphic is plotted. It contains at least one layer, which is the main container of the plot window. Each new plot can be inserted in a new layer of this plot window, it has its own geometry and graphic properties (background color, frame, etc). </para>
+<para>The plot window is the one in which the graphic is plotted. It contains at least one layer, which is the main container of the plot window. Each new plot can be inserted in a new layer of this plot window, it has its own geometry and graphic properties (background color, frame, etc). The example presented below shows a graph with two layers which have different geometries.</para>
 
 <figure id="fig-plot-window">
   <title>An example of &appname; 2D graph</title>
-  <informalexample>
-    <para>This example shows a graph with two layers which have different geometries.</para>
-  </informalexample>
   <mediaobject>
     <imageobject>
       <imagedata  format="PNG" fileref="pics/plot-window.png"/>
@@ -284,14 +278,14 @@ The table is the main part of QtiPlot when working with data. For controlling an
   <title>The &appname; Project Explorer</title>
   <mediaobject>
     <imageobject>
-      <imagedata  format="PNG" fileref="pics/explorer.png"/>
+      <imagedata  format="PNG" fileref="pics/explorer1.png"/>
     </imageobject>
   </mediaobject>
 </figure>
 
 <para>It gives an overview of the structure of a project and allows the user to perform various operations on the windows (tables and plots) in the workspace: hiding, minimazing, closing, renaming, printing, etc... These functions can be reached via the context menu, by right-clicking on an item in the explorer.</para>
-
 <para>By double-clicking on an item, the corresponding window is shown maximized in the workspace, even if it was hidden before.</para>
+<para>You can organize the differents objects in folders. When selecting a folder, only the objects contained in it will be showed in the desktop window.</para>
 
 </sect2>
 

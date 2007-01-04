@@ -49,9 +49,6 @@
 
 <figure id="fig-simple-2dplot-1">
   <title>A simple 2D plot: the table.</title>
-  <informalexample>
-    <para>the unused rows have been removed.</para>
-  </informalexample>
   <mediaobject> 
     <imageobject>
       <imagedata  format="PNG" fileref="tutorial/simple-2dplot-1.png"/>
@@ -86,6 +83,26 @@
 
 <para>There are several types of plot which can be built from a table. They are presented in the &plot-menu-lnk;</para>
 
+<para>It is possible to use up to four axes for the datas:</para>
+
+<figure id="fig-two-axis-plot">
+  <title>A 2D plot with two Y axis.</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/plot-two-axes.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
+<para>In addition to the customization which have been already described. The  axes which are used for each curve were defined with the <link linkend="custom-curves-dialog">Custom Curves</link> Dialog, and two arrows were added with the &draw-arrow-lnk; command.</para>
+
+<informalfigure id="fig-two-axis-plot">
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/plot-two-axes-dialog.png"/>
+    </imageobject>
+  </mediaobject>
+</informalfigure>
 </sect2>
 
 <sect2 id="sec-2d-plot-from-function">
@@ -176,6 +193,8 @@
 <para>If you want to plot a function, you don't need a matrix. You can use directly the &new-surface-3d-plot-lnk;. This will open the corresponding <link linkend="define-surface-plot-dialog">dialog box</link> and you will be able to define the mathematical expression of your function.</para>
 </listitem>
 </itemizedlist>
+
+<para>There are several kinds of 3D plots which can be selected, see the &plot3d-menu-lnk; section of the <link linkend="reference">reference chapter</link> for a list of the availables plots.</para>
 
 <figure id="fig-exemple-3dplot">
   <title>Example of a 3D Plots.</title>

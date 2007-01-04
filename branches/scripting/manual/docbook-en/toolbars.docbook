@@ -290,9 +290,15 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
    <entry>Comes back to the normal pointer mode, this is useful when you have select other modes of the plot window such as the <link linkend="data-reader-cmd">data reader</link>.</entry>
   </row>
   <row>
-   <entry>&zoom-icon;</entry>
-   <entry><link linkend="zoom-cmd">&zoom-cmd;</link></entry>
-   <entry>&zoom-key;</entry>
+   <entry>&zoom-in-icon;</entry>
+   <entry><link linkend="zoom-in-cmd">&zoom-in-cmd;</link></entry>
+   <entry>&zoom-in-key;</entry>
+   <entry>Switches the active plot layer to the zoom mode.</entry>
+  </row>
+  <row>
+   <entry>&zoom-out-icon;</entry>
+   <entry><link linkend="zoom-out-cmd">&zoom-out-cmd;</link></entry>
+   <entry>&zoom-out-key;</entry>
    <entry>Switches the active plot layer to the zoom mode.</entry>
   </row>
   <row>
@@ -332,10 +338,16 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
    <entry>Add a new text element in the active plot.</entry>
   </row>
   <row>
-   <entry>&draw-arrow-line-icon;</entry>
-   <entry>&draw-arrow-line-lnk;</entry>
-   <entry>&draw-arrow-line-key;</entry>
-   <entry>Add a new line or a new arrow on the active plot.</entry>
+   <entry>&draw-line-icon;</entry>
+   <entry>&draw-line-lnk;</entry>
+   <entry>&draw-line-key;</entry>
+   <entry>Add a new line on the active plot.</entry>
+  </row>
+  <row>
+   <entry>&draw-arrow-icon;</entry>
+   <entry>&draw-arrow-lnk;</entry>
+   <entry>&draw-arrow-key;</entry>
+   <entry>Add a new arrow on the active plot.</entry>
   </row>
   <row>
    <entry>&add-time-stamp-icon;</entry>
