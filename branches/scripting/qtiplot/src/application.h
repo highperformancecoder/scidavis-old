@@ -62,7 +62,7 @@ public:
 	QTextEdit *console;
 #endif
 	QWorkspace* ws;
-    QToolBar *fileTools, *plotTools, *tableTools, *plot3DTools, *displayBar, *editTools;
+    QToolBar *fileTools, *plotTools, *tableTools, *plot3DTools, *displayBar, *editTools, *plotMatrixBar;
     QPopupMenu *windowsMenu,*view,*graph,*file,*format,*calcul,*edit,*dataMenu,*recent, *exportPlot;
 	QPopupMenu *help,*type,*import,*plot2D,*plot3D, *specialPlot, *panels,*stat,*decay, *filter;
 	QPopupMenu *matrixMenu, *plot3DMenu, *plotDataMenu, *tableMenu, *tablesDepend; 
@@ -651,6 +651,7 @@ public slots:
 	bool alreadyUsedName(const QString& label);
 	bool projectHas2DPlots();
 	bool projectHas3DPlots();
+	bool projectHasMatrices();
 
 	//! Returns a pointer to the window named "name"
 	QWidget* window(const QString& name);

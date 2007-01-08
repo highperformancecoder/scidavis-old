@@ -119,7 +119,14 @@ else
 
 void Matrix::cellEdited(int row,int col)
 {
-Script *script = scriptEnv->newScript(d_table->text(row,col),this,QString("<%1_%2_%3>").arg(name()).arg(row).arg(col));
+QString text = d_table->text(row,col).replace(",", ".");
+bool ok = false;
+double res = text.toDouble(&ok);
+if (!text.isEmpty() && ok)
+	d_table->setText(row, col, QString::number(res, txt_format, num_precision));
+else
+	{
+Script *script = scriptEnv->newScript(d_table->text(row,col),this,QString("<%1_%2_%3>").arg(name()).arg(row+1).arg(col+1));
 connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
 
 script->setInt(row+1, "row");
@@ -133,6 +140,7 @@ else if(ret.canCast(QVariant::Double))
 	d_table->setText(row, col, QString::number(ret.toDouble(), txt_format, num_precision));
 else
 	d_table->setText(row, col, "");
+	}
 
 emit modifiedWindow(this);
 }

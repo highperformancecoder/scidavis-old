@@ -15,7 +15,7 @@ DEFINES		+= QT_PLUGIN
 
 SCRIPTING_LANGS = muParser
 # Python support is unstable; use at your own risk
-unix:SCRIPTING_LANGS += Python
+#unix:SCRIPTING_LANGS += Python
 
 TRANSLATIONS = translations/qtiplot_de.ts \
 			   translations/qtiplot_es.ts \
@@ -23,19 +23,26 @@ TRANSLATIONS = translations/qtiplot_de.ts \
 			   translations/qtiplot_ru.ts \
 			   translations/qtiplot_sv.ts 
 
-#system(lupdate -verbose qtiplot.pro)
-#system(lrelease -verbose qtiplot.pro)
+system(lupdate -verbose qtiplot.pro)
+system(lrelease -verbose qtiplot.pro)
 
 INCLUDEPATH	+= ../3rdparty/qwt/include
 INCLUDEPATH	+= ../3rdparty/liborigin
 
 ##################### Linux (Mac OS X) settings ##################### 
 
-unix:INCLUDEPATH  += -I /usr/include/qwtplot3d
-#unix:INCLUDEPATH	+=	-I /usr/include/qwt5
-unix:LIBS         += ../3rdparty/qwt/lib$${libsuff}/libqwt.a
-#unix:LIBS			+= -lqwt
-unix:LIBS         += -L /usr/lib$${libsuff} -lgsl -lgslcblas -lqwtplot3d -lz -lorigin
+unix:INCLUDEPATH  += ../3rdparty/qwtplot3d/include
+unix:INCLUDEPATH  += ../3rdparty/qwt/include
+unix:INCLUDEPATH  += ../3rdparty/liborigin
+unix:INCLUDEPATH  += ../3rdparty/gsl
+
+unix:LIBS         += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
+unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
+unix:LIBS         += ../3rdparty/liborigin/liborigin.a
+unix:LIBS         += ../3rdparty/gsl/lib/libgsl.a
+unix:LIBS         += ../3rdparty/gsl/lib/libgslcblas.a
+
+unix:LIBS         += -L /usr/lib$${libsuff}  -lz
 
 unix:target.path=/usr/bin
 unix:INSTALLS += target
@@ -322,4 +329,3 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiFolder.cpp\
 	 ../tmp/qtiplot/sipqtiQPtrList.cpp
 }
-

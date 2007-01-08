@@ -18,9 +18,9 @@ revision history. (see installation appendix comment) -->
 
 <para>The plots can be exported to several graphic formats such as JPEG or PNG and inserted as images in documents or presentations.</para>
 
-<para>Data analysis operations (integration, interpolation, FFT, curve fitting, etc...) can be performed on the curves in a 2D plot via the Analysis menu. The results of all these operations are also stored in the project files. They can be visualized at any moment using the &results-log-lnk; command and can be deleted from the project file via the &clear-log-lnk; command.</para>
+<para>Data analysis operations (integration, interpolation, FFT, curve fitting, etc...) can be performed on the curves in a 2D plot via the Analysis menu. The results of all these operations are also stored in the project files. They can be visualized at any moment using the &results-log-lnk; and can be deleted from the project file via the &clear-log-lnk;.</para>
 
-<para>When the application is launched, an empty project file is created, resulting in an empty grey main window. In order to be operational, this workspace must be populated with tables storing data sets, either by creating empty tables first (command &new-table-lnk;) and then filling them with data, or by importing ASCII files (command &import-ascii-1-lnk;), which automatically creates new tables.</para>
+<para>When the application is launched, a new project file is created consisting of a grey main window (the workspace) which contains an empty table. In order to be operational, this workspace must be populated with tables storing data sets, either by creating empty tables first (&new-table-lnk;) and then filling them with data, or by importing ASCII files (&import-ascii-1-lnk;), which automatically creates new tables.</para>
 
 <para>The user can easily navigate through the objects of a project file using the project explorer or the Windows menu. The project explorer also allows the user to perform various operations on the windows (tables and plots) in the workspace: hiding, minimazing, closing, renaming, printing, etc...</para>
 
@@ -59,7 +59,7 @@ qtiplot ASCII_file_name
 
 <sect1 id="general-concepts">
 <title>General Concepts and Terms</title>
-<para>Several plots and all the data related to these plots can be save in a <emphasis>project</emphasis> file, the project is therefore the main container of &appname;. The following screenshot give an example of a typical session. This example shows the <link linkend="sec-intro-log-window">log panel</link> at the top of the workspace, the <link linkend="sec-intro-project-explorer">project explorer</link> at the bottom, a <link linkend="sec-intro-table">table</link> and a <link linkend="sec-intro-plot-window">plot window</link> are shown while other are docked or hidden.</para>
+<para>Several plots and all the data related to these plots can be save in a <emphasis>project</emphasis> file, the project is therefore the main container of &appname;. The following screenshot gives an example of a typical session. This example shows the <link linkend="sec-intro-log-window">log panel</link> at the top of the workspace, the <link linkend="sec-intro-project-explorer">project explorer</link> at the bottom, a <link linkend="sec-intro-table">table</link> and a <link linkend="sec-intro-plot-window">plot window</link> are shown while other are docked or hidden.</para>
 
 <figure id="fig-qtiplot-session">
   <title>A typical &appname; session</title>
@@ -79,14 +79,14 @@ qtiplot ASCII_file_name
     <listitem>
       <indexterm><primary>table</primary></indexterm>
       <para>A table is a spreadsheet which can be used to store the datas you are entering. It can also be used to do some calculations and statistical analysis of datas. In each table, columns can be labelled as X-values or Y-values for 2D-plotting, or Z-values if you plan to build a 3D-plot.</para>
-      <para>A table can be created by the &new-table-lnk;. Then there are several ways to fill the table with your data. If you want to read a table from an ASCII file, you can import the data of the file to a table with the &import-ascii-1-lnk;. You can also enter each value from the keyboard. The last way to enter your data is to fill the table with the results of a mathematical function (&set-column-values-lnk; from the &table-menu-lnk;)</para>
+      <para>A table can be created by the &new-table-lnk;. Then there are several ways to fill the table with your data. If you want to read a table from an ASCII file, you can import the data from the file to a table with the &import-ascii-1-lnk;. You can also enter each value from the keyboard. The last way to enter your data is to fill the table with the results of a mathematical function (&set-column-values-lnk; from the &table-menu-lnk;)</para>
     </listitem>
   </varlistentry>
   <varlistentry>
     <term><link linkend="sec-intro-matrix">A Matrix</link></term>
     <listitem>
       <indexterm><primary>matrix</primary></indexterm>
-      <para>A matrix is a special table which is used to store the data point for surface 3D plot. It contains Z-values and doesn't include any column or row which could be designed as X-values or Y-values. Nevertheless, you can specify the X-values and the Y-values with the &set-dimensions-lnk; command from the &matrix-menu-lnk;.</para>
+      <para>A matrix is a special table which is used to store the data points for surface 3D plots. It contains Z-values and doesn't include any column or row which could be designed as X-values or Y-values. Nevertheless, you can specify the X-values and the Y-values with the &set-dimensions-lnk; command from the &matrix-menu-lnk;.</para>
       <para>A matrix can be created by the &new-matrix-lnk;. If you want to read a matrix from an ASCII file, you can import the data of the file to a table with the &import-ascii-1-lnk; and then convert this table to a matrix with the &convert-to-matrix-lnk;. In the same way as for tables, you can also fill matrix with the results of a function z=(i,j) in which i and j are row and column numbers (&set-values-lnk; from the &matrix-menu-lnk;)</para>
     </listitem>
   </varlistentry>
@@ -104,21 +104,21 @@ qtiplot ASCII_file_name
   <varlistentry>
     <term><link linkend="sec-intro-note">A Note</link></term>
     <listitem>
-      <para>This window is just a text container which allows to insert comments and notes in a project.</para>
+      <para>This window is a text container which can simply be used to insert comments into a project, but is really far more powerfull than that. It can be used as a calculator, for executing single commands and for writing scripts.</para>
     </listitem>
   </varlistentry>
   <varlistentry>
     <term><link linkend="sec-intro-log-window">The Log Window</link></term>
     <listitem>
       <para>This window is used to store the results of all the calculations which have been done. If this window is not visible, you can find it with the <link linkend="sec-intro-project-explorer">Project Explorer</link> or with the &results-log-lnk;.</para>
-      <para>When you load a previously saved project, all the analysis are done again so that the results-log panel is re-filled with the results of the calculations.</para>
+      <para>The text in the log window is also saved in the project file, so that when you load a previously saved project, the results-log panel is re-filled with the results of the calculations.</para>
     </listitem>
   </varlistentry>
   <varlistentry>
     <term><link linkend="sec-intro-project-explorer">The Project Explorer</link></term>
     <listitem>
       <para>This window is used to list all the windows contained in a projet. The <link linkend="project-explorer-dialog">Project Explorer</link> gives a quick access to all elements of a project, hidden or visibles. It can be used to do some operations on the windows related to these items such as hidding a window, renaming windows, etc.</para>
-      <para>Since the version 0.8.5, a project file can include several independant projects. In this case, the containers or each project are stored in different folders.</para>
+      <para>Since the version 0.8.5, a project file can include several independant projects. In this case, the containers of each project are stored in different folders.</para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -144,7 +144,7 @@ The table is the main part of QtiPlot when working with data. For controlling an
   </mediaobject>
 </figure>
 
-<para> Every column of the table has a label and can be assigned a format: numeric, text, date or time. In a spreadsheet, columns can be X, Y or Z columns. The X column are abscissae columns used when creating a 2D plot from data. These default flags can be changed using the <link linkend="column-options-dialog">Column options dialog</link>. To reach this dialog you simply have to double-click on the column label or to use the  &column-options-lnk; of the &table-menu-lnk;.</para>
+<para> Every column of the table has a label and can be assigned a format: numeric, text, date or time. In a spreadsheet, columns can have the following flags: X, Y, Z, X-error, Y-error or can be simple columns without any special flag. The X columns are abscissae columns while the Y columns are ordinates columns used when creating a 2D plot from data. The X-error and Y-error columns can be used in order to add error bars to 2D plots. These flags can be changed using the <link linkend="column-options-dialog">Column options dialog</link>. To reach this dialog you simply have to double-click on the column label or to use the  &column-options-lnk; of the &table-menu-lnk;.</para>
 
 <para> You can select all the columns of the spreadsheet (<keycode>Ctrl+A</keycode>) or only some of them by clicking on the column label while keeping the <keycode>Ctrl</keycode> key pressed, or by moving the mouse over the column label. This also allows you to deselect columns.</para>
 
@@ -154,7 +154,7 @@ The table is the main part of QtiPlot when working with data. For controlling an
 
 <para> You can cut, copy and paste data between spreadsheets or between a spreadsheet and another application (Excel, Gnumeric, etc...).</para>
 
-<para> You can import single or multiple ASCII files using the &import-ascii-lnk; from the &file-menu-lnk;. The file import options can be changed via the &set-import-options-lnk;. Of course you can export the data off the spreadsheet to a text file using the &export-ascii-lnk;.</para>
+<para> You can import single or multiple ASCII files using the &import-ascii-lnk; from the &file-menu-lnk;. The file import options can be changed via the &set-import-options-lnk;. Of course you can export the data from the spreadsheet to a text file using the &export-ascii-lnk;.</para>
 
 </sect2>
 
@@ -178,7 +178,7 @@ The table is the main part of QtiPlot when working with data. For controlling an
 </figure>
 
 <para>The values which are stored in a matrix can be obtained from a function of the form z=(i,j) with the &set-values-lnk;, i and j beeing the column and row numbers. They can also be read from a file with the &import-ascii-lnk; which allows to read a file in a table, then the table can be converted to a matrix with the &convert-to-matrix-lnk; of the &matrix-menu-lnk;.</para>
-<para>The operations which can be done on a matrix are limited changes in number presentation and matrix size. The data of a matrix can be used to build a 3D plot with the commands presents in the &plot3d-menu-lnk; and in &plot3d-toolbar-lnk;.</para>
+<para>The operations which can be done on a matrix are limited changes in number presentation and matrix size. The data of a matrix can be used to build a 3D plot with the commands present in the &plot3d-menu-lnk; and in &plot3d-toolbar-lnk;.</para>
 
 </sect2>
 
@@ -253,7 +253,7 @@ The table is the main part of QtiPlot when working with data. For controlling an
 <sect2 id="sec-intro-log-window">
 <title>Log Window</title>
 
-<para>This window keep a history of all analysis which have been done in the project. This panel contains the results of all the correlations, fittings, etc.</para>
+<para>This window keeps a history of all analysis which have been done in the project. This panel contains the results of all the correlations, fittings, etc.</para>
 
 <figure id="fig-log-window">
   <title>The &appname; Log window</title>
@@ -285,7 +285,7 @@ The table is the main part of QtiPlot when working with data. For controlling an
 
 <para>It gives an overview of the structure of a project and allows the user to perform various operations on the windows (tables and plots) in the workspace: hiding, minimazing, closing, renaming, printing, etc... These functions can be reached via the context menu, by right-clicking on an item in the explorer.</para>
 <para>By double-clicking on an item, the corresponding window is shown maximized in the workspace, even if it was hidden before.</para>
-<para>You can organize the differents objects in folders. When selecting a folder, only the objects contained in it will be showed in the desktop window.</para>
+<para>You can organize the differents objects in folders. When selecting a folder, the default policy is that only the objects contained in it will be showed in the workspace window. You can also display all the objects in the subfolders if you change this policy with the "View Windows" command to "Windows in Active Folder and Subfolders".</para>
 
 </sect2>
 

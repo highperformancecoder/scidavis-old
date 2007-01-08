@@ -12,13 +12,13 @@
 )
 
 (define %root-filename%
-	;; Nom du fichier HTML principal
-	"index"
+	;; Nom du .fichier HTML principal
+	"manual-0.8.9"
 )
 
 (define %stylesheet%
 	;; Nom et emplacement de la feuille de style (CSS) utilis� par les pages HTML
-	"qtiplot.css"
+	"html/qtiplot.css"
 )
 
 (define %css-decoration%

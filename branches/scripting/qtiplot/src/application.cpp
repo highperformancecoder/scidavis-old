@@ -539,6 +539,28 @@ void ApplicationWindow::initToolBars()
 	setDockEnabled(displayBar, DockLeft, false);
 	setDockEnabled(displayBar, DockRight, false);
 	displayBar->hide();
+
+	plotMatrixBar = new QToolBar(this);
+	plotMatrixBar->setCloseMode(QDockWindow::Undocked);
+    addToolBar(plotMatrixBar, tr( "Matrix Plot" ), Bottom, FALSE );
+
+	actionPlot3DWireFrame->addTo(plotMatrixBar);
+	actionPlot3DHiddenLine->addTo(plotMatrixBar);
+
+	actionPlot3DPolygons->addTo(plotMatrixBar);
+	actionPlot3DWireSurface->addTo(plotMatrixBar);
+
+	plotMatrixBar->addSeparator();
+
+	actionPlot3DBars->addTo(plotMatrixBar);
+	actionPlot3DScatter->addTo(plotMatrixBar);
+
+	plotMatrixBar->addSeparator();
+	actionColorMap->addTo(plotMatrixBar);
+	actionContourMap->addTo(plotMatrixBar);
+	actionGrayMap->addTo(plotMatrixBar);
+
+	plotMatrixBar->hide();
 }
 
 void ApplicationWindow::insertTranslatedStrings()
@@ -565,6 +587,7 @@ tableTools->setLabel(tr("Table"));
 plotTools->setLabel(tr("Plot"));
 fileTools->setLabel(tr("File"));
 editTools->setLabel(tr("Edit"));
+plotMatrixBar->setLabel(tr("Matrix Plot"));
 plot3DTools->setLabel(tr("Surface 3D"));
 
 file->changeItem(newMenuID, tr("&New"));
@@ -1129,6 +1152,8 @@ if (w){
 		plot3DTools->hide();
 	if (!projectHas2DPlots())
 		plotTools->hide();
+	if (!projectHasMatrices())
+		plotMatrixBar->hide();
 	if ((int)tableWindows.count()<=0)
 		tableTools->hide();
 
@@ -1140,6 +1165,7 @@ if (w){
 	plotTools->setEnabled (true);
 	plot3DTools->setEnabled (false);
 	tableTools->setEnabled(false);
+	plotMatrixBar->setEnabled (false);
 	}
 	else if (w->inherits("Table"))
 	{
@@ -1149,17 +1175,23 @@ if (w){
 	plotTools->setEnabled (false);
 	plot3DTools->setEnabled (false);
 	tableTools->setEnabled (true);
+	plotMatrixBar->setEnabled (false);
 	}
 	else if (w->isA("Matrix"))
 	{
+	if (plotMatrixBar->isHidden())
+		plotMatrixBar->show();
+
 	plotTools->setEnabled (false);
 	plot3DTools->setEnabled (false);
 	tableTools->setEnabled (false);
+	plotMatrixBar->setEnabled (true);
 	}
 	else if (w->isA("Graph3D"))
 	{
 	plotTools->setEnabled (false);
 	tableTools->setEnabled (false);
+	plotMatrixBar->setEnabled (false);
 
 	if (plot3DTools->isHidden())
 		plot3DTools->show();
@@ -1177,6 +1209,7 @@ if (w){
 	plotTools->setEnabled (false);
 	plot3DTools->setEnabled (false);
 	tableTools->setEnabled (false);
+	plotMatrixBar->setEnabled (false);
 	}
 }
 else
@@ -1188,11 +1221,12 @@ void ApplicationWindow::hideToolbars()
 	plot3DTools->hide();
 	plotTools->hide();
 	tableTools->hide();
+	plotMatrixBar->hide();
 		
 	plotTools->setEnabled (false);
 	tableTools->setEnabled (false);
 	plot3DTools->setEnabled (false);
-
+	plotMatrixBar->setEnabled (false);
 }
 
 void ApplicationWindow::showExplorer()
@@ -6375,7 +6409,7 @@ if (g->curves()>0)
 		showPieDialog();
 	}
 else if (g->curves() == 0)
-			QMessageBox::warning(this, tr("QtiPlot - Empty plot"),
+	QMessageBox::warning(this, tr("QtiPlot - Empty plot"),
 			tr("There are actually no curves on the active layer!"));
 }
 else if (w->isA("Graph3D"))
@@ -6748,10 +6782,7 @@ MultiLayer* plot = 0;
 if(w->isA("MultiLayer"))
 	plot = (MultiLayer*)w;
 else if(w->isA("Table"))
-	{
-	Table *t = (Table *)w;
-	plot = multilayerPlot(t, t->selectedColumns(), Graph::LineSymbols);
-	}
+	plot = multilayerPlot((Table *)w, ((Table *)w)->drawableColumnSelection(), Graph::LineSymbols);
 
 if (!plot)
 	return;
@@ -7659,8 +7690,7 @@ if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 	if (g->userFunction())
 		{
 		g2 = newPlot3D(caption,g->formula(),g->xStart(),g->xStop(),
-								g->yStart(),g->yStop(),
-								g->zStart(),g->zStop());
+					  g->yStart(),g->yStop(), g->zStart(),g->zStop());
 		}
 	else if (s.endsWith("(Z)",TRUE))
 		g2 = dataPlotXYZ(caption,s,g->xStart(),g->xStop(),
@@ -11006,7 +11036,7 @@ void ApplicationWindow::createActions()
   actionShowImportDialog = new QAction(tr("Set import &options"), QString::null, this);
   connect(actionShowImportDialog, SIGNAL(activated()), this, SLOT(showImportDialog()));
 
-  actionCloseAllWindows = new QAction(QPixmap(quit_xpm), tr("&Quit"), tr("Alt+F4"), this);
+  actionCloseAllWindows = new QAction(QPixmap(quit_xpm), tr("&Quit"), tr("Ctrl+Q"), this);
   connect(actionCloseAllWindows, SIGNAL(activated()), qApp, SLOT(closeAllWindows()));
 
   actionClearLogInfo = new QAction(tr("Clear &log information"), QString::null, this);
@@ -11201,7 +11231,7 @@ void ApplicationWindow::createActions()
   actionShowColumnOptionsDialog = new QAction(tr("Column &Options ..."), tr("Ctrl+Alt+O"), this);
   connect(actionShowColumnOptionsDialog, SIGNAL(activated()), this, SLOT(showColumnOptionsDialog()));
 
-  actionShowColumnValuesDialog = new QAction(tr("Set Column &Values ..."), QString::null, this);
+  actionShowColumnValuesDialog = new QAction(tr("Set Column &Values ..."), tr("Alt+Q"), this);
   connect(actionShowColumnValuesDialog, SIGNAL(activated()), this, SLOT(showColumnValuesDialog()));
 
   actionTableRecalculate = new QAction(tr("Recalculate"), tr("Ctrl+Return"), this);
@@ -11565,7 +11595,7 @@ void ApplicationWindow::translateActionsStrings()
   actionShowImportDialog->setMenuText(tr("Set import &options"));
 
   actionCloseAllWindows->setMenuText(tr("&Quit")); 
-  actionCloseAllWindows->setAccel(tr("Alt+F4"));
+  actionCloseAllWindows->setAccel(tr("Ctrl+Q"));
 
   actionClearLogInfo->setMenuText(tr("Clear &log information"));
   actionDeleteFitTables->setMenuText(tr("Delete &fit tables"));
@@ -11703,7 +11733,7 @@ void ApplicationWindow::translateActionsStrings()
   actionShowColumnOptionsDialog->setAccel(tr("Ctrl+Alt+O"));
   
   actionShowColumnValuesDialog->setMenuText(tr("Set Column &Values ..."));
-  actionShowColumnValuesDialog->setAccel(tr("Ctrl+Q"));
+  actionShowColumnValuesDialog->setAccel(tr("Alt+Q"));
   actionTableRecalculate->setMenuText(tr("Recalculate"));
 
   actionShowColsDialog->setMenuText(tr("&Columns..."));
@@ -12520,6 +12550,22 @@ for (int i=0; i<(int)windows->count(); i++)
 	}
 delete windows;
 return false;
+}
+
+bool ApplicationWindow::projectHasMatrices()
+{
+QWidgetList *windows = windowsList();
+bool has = false;
+for (QWidget *w = windows->first(); w; w = windows->next())
+	{
+	if (w->isA("Matrix"))
+		{
+		has = true;
+		break;
+		}
+	}
+delete windows;
+return has;
 }
 
 bool ApplicationWindow::projectHas2DPlots()

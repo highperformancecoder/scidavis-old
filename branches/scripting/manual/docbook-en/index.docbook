@@ -753,7 +753,7 @@
 <para>this first one describe the main concepts and terms which are used in &appname;.</para>
 </listitem>
 <listitem>
-<para>The <link linkend="drawing-plots">second</link> is a tutorial on how to obtain plots from different set of data. It is the one you need to read first to understand the basics of &appname; and to be able to draw plots.</para>
+<para>The <link linkend="drawing-plots">second</link> is a tutorial on how to obtain plots from different data sets. It is the one you need to read first to understand the basics of &appname; and to be able to draw plots.</para>
 </listitem>
 <listitem>
 <para>The three following chapters are descriptions of all the <link linkend="reference">commands</link>, <link linkend="toolbars">buttons</link> and <link linkend="dialogs">dialogs</link> used in &appname;. These chapters are the reference manual of &appname;.</para>
@@ -783,6 +783,5 @@
 &analysis-chapter;
 &scripting-chapter;
 &appendix-chapter;
-&faq-chapter;
 
 </book>
