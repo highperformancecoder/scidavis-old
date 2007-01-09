@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
-			   Knut Franke
+                           Knut Franke
     Email                : ion_vasilief@yahoo.fr, thzs@gmx.net,
                            knut.franke@gmx.de
     Description          : QtiPlot's main window
@@ -231,9 +231,9 @@ public slots:
 	void newFunctionPlot(int type,QStringList &formulas, const QString& var,QList<double> &ranges, int points);
 
 	FunctionDialog* functionDialog();
+	void showFunctionDialog(int curveKey);
 	void showFunctionDialog(Graph * g, int curve);
 	void addFunctionCurve();
-	void clearFunctionsList();
 	void clearFitFunctionsList();
 	void saveFitFunctionsList(const QStringList& l);
 	void clearSurfaceFunctionsList();
@@ -523,7 +523,7 @@ public slots:
 	//dialogs
 	void showFindDialogue();	
 	void showPlotDialog();
-	void showPlotDialog(long curveKey);
+	void showPlotDialog(int curveKey);
 	QDialog* showScaleDialog();
 	QDialog* showPieDialog();
 	QDialog* showPlot3dDialog();
@@ -556,6 +556,8 @@ public slots:
 	void showGraphContextMenu();
 	void showTableContextMenu(bool selection);
 	void showWindowContextMenu();
+	void showCurveContextMenu(int curveKey);
+	void showCurveWorksheet(int curveKey);
 	void showWindowPopupMenu(Q3ListViewItem *it, const QPoint &p, int);
 
 	//! Connected to the context menu signal from lv; it's called when there are several items selected in the list
@@ -599,6 +601,9 @@ public slots:
 
 	void translateCurveHor();
 	void translateCurveVert();
+
+	//! Removes the curve identified by key 'curveKey' from a 2D plot
+	void removeCurve(int curveKey);
 
 	void setAscValues();
 	void setRandomValues();
@@ -801,6 +806,8 @@ signals:
 // TODO: a lot of this stuff should be private
 public:
 	bool generateUniformFitPoints;
+	bool generatePeakCurves;
+	int peakCurvesColor;
 
 	//! Number of points in a generated fit curve
 	int fitPoints;
@@ -838,7 +845,7 @@ public:
 	QFont appFont, plot3DTitleFont, plot3DNumbersFont, plot3DAxesFont;
 	QFont tableTextFont, tableHeaderFont, plotAxesFont, plotLegendFont, plotNumbersFont, plotTitleFont;
 	QColor tableBkgdColor, tableTextColor, tableHeaderColor;
-	QString projectname,separator, helpFilePath, appLanguage;
+	QString projectname,columnSeparator, helpFilePath, appLanguage;
 	QString configFilePath, logInfo, fitPluginsPath;
 	int logID,asciiID,closeID;
 	int exportID, printAllID;

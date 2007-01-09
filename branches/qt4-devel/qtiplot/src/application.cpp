@@ -82,6 +82,7 @@
 #include "ScriptingLangDialog.h"
 #include "TableStatistics.h"
 #include "Fitter.h"
+#include "FunctionCurve.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -353,7 +354,6 @@ void ApplicationWindow::initGlobalConstants()
 	versionSuffix = "alpha1";
 	graphs=0; tables=0; matrixes = 0; notes = 0;
 	projectname="untitled";
-	ignoredLines=0;
 	lastModified=0;
 	activeGraph=0;
 	lastCopiedLayer=0;
@@ -362,9 +362,6 @@ void ApplicationWindow::initGlobalConstants()
 	aw=0;
 	logInfo=QString();
 	savingTimerId=0;
-	renameColumns = true;
-	strip_spaces = false;
-	simplify_spaces = false;
 
 	autoSearchUpdatesRequest = false;
 
@@ -3263,7 +3260,7 @@ void ApplicationWindow::showPreferencesDialog()
 {
 	ConfigDialog* cd= new ConfigDialog(this);
 	cd->setAttribute(Qt::WA_DeleteOnClose);
-	cd->setColumnSeparator(separator);
+	cd->setColumnSeparator(columnSeparator);
 	cd->exec();
 }
 
@@ -3504,7 +3501,7 @@ ApplicationWindow * ApplicationWindow::plotFile(const QString& fn)
 	app->applyUserSettings();
 	app->showMaximized();
 
-	Table* t = app->newTable(fn, app->separator, 0, true, app->strip_spaces, app->simplify_spaces);
+	Table* t = app->newTable(fn, app->columnSeparator, 0, true, app->strip_spaces, app->simplify_spaces);
 	t->setCaptionPolicy(MyWidget::Both);	
 	app->multilayerPlot(t, t->YColumns(),Graph::LineSymbols);
 	QApplication::restoreOverrideCursor();
@@ -3518,7 +3515,7 @@ void ApplicationWindow::showImportDialog()
 	connect (id, SIGNAL(options(const QString&, int, bool, bool, bool)),
 			this, SLOT(setImportOptions(const QString&, int, bool, bool, bool)));
 
-	id->setSeparator(separator);
+	id->setSeparator(columnSeparator);
 	id->setLines(ignoredLines);
 	id->renameCols(renameColumns);
 	id->setWhiteSpaceOptions(strip_spaces, simplify_spaces);
@@ -3528,7 +3525,7 @@ void ApplicationWindow::showImportDialog()
 void ApplicationWindow::setImportOptions(const QString& sep, int lines, bool rename,
 		bool strip, bool simplify)
 {
-	separator = sep;
+	columnSeparator = sep;
 	ignoredLines = lines;
 	renameColumns = rename;
 	strip_spaces = strip;
@@ -3546,12 +3543,12 @@ void ApplicationWindow::loadASCII()
 		Table* t = (Table*)ws->activeWindow();
 		if ( t && t->isA("Table"))
 		{
-			t->importASCII(fn, separator, ignoredLines, renameColumns, 
+			t->importASCII(fn, columnSeparator, ignoredLines, renameColumns, 
 					strip_spaces, simplify_spaces, false);
 			t->setWindowLabel(fn);
 		}
 		else
-			t = newTable(fn, separator, ignoredLines, renameColumns, 
+			t = newTable(fn, columnSeparator, ignoredLines, renameColumns, 
 					strip_spaces, simplify_spaces);
 
 		t->setCaptionPolicy(MyWidget::Both);
@@ -3595,7 +3592,7 @@ void ApplicationWindow::loadMultipleASCIIFiles(const QStringList& fileNames, int
 	if (!importFileAs)
 	{
 		QString fn  = fileNames[0];
-		Table *firstTable=newTable(fn, separator, ignoredLines, renameColumns, 
+		Table *firstTable=newTable(fn, columnSeparator, ignoredLines, renameColumns, 
 				strip_spaces, simplify_spaces);
 		if (!firstTable)
 			return;
@@ -3610,7 +3607,7 @@ void ApplicationWindow::loadMultipleASCIIFiles(const QStringList& fileNames, int
 		for (int i=1;i<files;i++)
 		{
 			fn  = fileNames[i];
-			Table *w = newTable(fn, separator, ignoredLines, renameColumns, 
+			Table *w = newTable(fn, columnSeparator, ignoredLines, renameColumns, 
 					strip_spaces, simplify_spaces);
 			if (w)
 			{
@@ -3629,7 +3626,7 @@ void ApplicationWindow::loadMultipleASCIIFiles(const QStringList& fileNames, int
 			Table* t = (Table*)ws->activeWindow();
 
 			for (int i=0; i<files; i++)
-				t->importMultipleASCIIFiles(fileNames[i], separator, ignoredLines, renameColumns, 
+				t->importMultipleASCIIFiles(fileNames[i], columnSeparator, ignoredLines, renameColumns, 
 						strip_spaces, simplify_spaces, importFileAs);
 			t->setWindowLabel(fileNames.join("; "));
 			t->setCaptionPolicy(MyWidget::Name);
@@ -4320,7 +4317,6 @@ void ApplicationWindow::readSettings()
 	recentProjects=variantListToStringList(settings.value("/recentProjects").toList());
 	updateRecentProjectsList();
 
-	functions=variantListToStringList(settings.value("/functions").toList());
 	fitFunctions=variantListToStringList(settings.value("/fitFunctions").toList());
 	surfaceFunc=variantListToStringList(settings.value("/surfaceFunctions").toList());
 	xFunctions=variantListToStringList(settings.value("/xFunctions").toList());
@@ -4328,7 +4324,6 @@ void ApplicationWindow::readSettings()
 	rFunctions=variantListToStringList(settings.value("/rFunctions").toList());
 	tetaFunctions=variantListToStringList(settings.value("/tetaFunctions").toList());
 
-	separator=settings.value("/defaultColumnSeparator", "\t").toString();
 	QStringList tableColors=variantListToStringList(settings.value("/tableColors").toList());
 	QStringList tableFonts=variantListToStringList(settings.value("/tableFonts").toList());
 
@@ -4470,7 +4465,18 @@ void ApplicationWindow::readSettings()
 	writeFitResultsToLog = settings.value("/writeFitResultsToLog", true).toBool();
 	generateUniformFitPoints = settings.value("/generateUniformFitPoints", true).toBool();
 	fitPoints = settings.value("/fitPoints", 100).toInt();
+	generatePeakCurves = settings.value("/generatePeakCurves", true).toBool();
+	peakCurvesColor = settings.value("/peakCurvesColor", 2).toInt();//green color
 	settings.endGroup();
+
+	settings.beginGroup("/ImportASCII");
+	columnSeparator = settings.value("/defaultColumnSeparator", "\t").toString();
+	ignoredLines = settings.value("/ignoredLines", 0).toInt();
+	renameColumns = settings.value("/renameColumns", true).toBool();
+	strip_spaces = settings.value("/stripSpaces", false).toBool();
+	simplify_spaces = settings.value("/simplifySpaces", false).toBool();
+	settings.endGroup();
+
 }
 
 QStringList ApplicationWindow::variantListToStringList(const QList<QVariant> src)
@@ -4550,14 +4556,12 @@ void ApplicationWindow::saveSettings()
 	settings.setValue("/helpFilePath", helpFilePath);
 	settings.setValue("/ShowWindowsPolicy", show_windows_policy);
 	settings.setValue("/recentProjects", recentProjects);
-	settings.setValue("/functions", functions);
 	settings.setValue("/fitFunctions", fitFunctions);
 	settings.setValue("/surfaceFunctions", surfaceFunc);
 	settings.setValue("/xFunctions", xFunctions);
 	settings.setValue("/yFunctions", yFunctions);
 	settings.setValue("/rFunctions", rFunctions);
 	settings.setValue("/tetaFunctions", tetaFunctions);
-	settings.setValue("/defaultColumnSeparator", separator);
 	settings.setValue("/tableColors", tableColors);
 	settings.setValue("/tableFonts", tableFonts);
 	settings.setValue("/titleOn", titleOn);
@@ -4630,8 +4634,19 @@ void ApplicationWindow::saveSettings()
 	settings.setValue("/pasteFitResultsToPlot", pasteFitResultsToPlot);
 	settings.setValue("/writeFitResultsToLog", writeFitResultsToLog);
 	settings.setValue("/generateUniformFitPoints", generateUniformFitPoints);
+	settings.setValue("/generatePeakCurves", generatePeakCurves);
+	settings.setValue("/peakCurvesColor", peakCurvesColor);
 	settings.setValue("/fitPoints", fitPoints);
 	settings.endGroup();
+
+	settings.beginGroup("/ImportASCII");
+	settings.setValue("/defaultColumnSeparator", columnSeparator);
+	settings.setValue("/ignoredLines", ignoredLines);
+	settings.setValue("/renameColumns", renameColumns);
+	settings.setValue("/stripSpaces", strip_spaces);
+	settings.setValue("/simplifySpaces", simplify_spaces);
+	settings.endGroup();
+
 }
 
 void ApplicationWindow::exportGraph()
@@ -5460,7 +5475,7 @@ void ApplicationWindow::showExportASCIIDialog()
 
 		ed->setTableNames(tableWindows);
 		ed->setActiveTableName(ws->activeWindow()->name());
-		ed->setColumnSeparator(separator);
+		ed->setColumnSeparator(columnSeparator);
 		ed->exec();
 	}
 }
@@ -6335,7 +6350,7 @@ void ApplicationWindow::showPlotDialog()
 		delete showPlot3dDialog();
 }
 
-void ApplicationWindow::showPlotDialog(long curveKey)
+void ApplicationWindow::showPlotDialog(int curveKey)
 {
 	QWidget *w = ws->activeWindow();
 	if (!w)
@@ -6361,6 +6376,57 @@ void ApplicationWindow::showPlotDialog(long curveKey)
 		else
 			delete showPieDialog();
 	}
+}
+
+void ApplicationWindow::showCurveContextMenu(int curveKey)
+{
+	if (!ws->activeWindow() || !ws->activeWindow()->isA("MultiLayer"))
+		return;
+
+	activeGraph = ((MultiLayer*)ws->activeWindow())->activeGraph();
+	QwtPlotCurve *c = activeGraph->curve(activeGraph->curveIndex(curveKey));
+	if (!c)
+		return;
+
+	QMenu curveMenu(this);
+
+	QAction *act = curveMenu.addAction(c->title().text(), this, SLOT(showPlotDialog(int)));
+	act->setData(curveKey);
+	curveMenu.insertSeparator();
+ 
+	if (c->rtti() == FunctionCurve::RTTI)
+	{
+		 act = curveMenu.addAction(tr("&Edit Function..."), this, SLOT(showFunctionDialog(int)));
+		act->setData(curveKey);
+	}
+
+	act = curveMenu.addAction(tr("&Worksheet"), this, SLOT(showCurveWorksheet(int)));
+	act->setData(curveKey);
+	act = curveMenu.addAction(tr("&Plot details..."), this, SLOT(showPlotDialog(int)));
+	act->setData(curveKey);
+	curveMenu.insertSeparator();
+	act = curveMenu.addAction(QPixmap(close_xpm), tr("&Delete"), this, SLOT(removeCurve(int)));
+	act->setData(curveKey);
+ 
+	curveMenu.exec(QCursor::pos());
+}
+
+void ApplicationWindow::removeCurve(int curveKey)
+{
+	activeGraph->removeCurve(activeGraph->curveIndex(curveKey));
+}
+
+void ApplicationWindow::showCurveWorksheet(int curveKey)
+{
+	const QwtPlotCurve *c = activeGraph->curve(activeGraph->curveIndex(curveKey));
+	if (!c)
+		return;
+
+	QString curveTitle = c->title().text();
+	if (c->rtti() == FunctionCurve::RTTI)
+		activeGraph->createWorksheet(curveTitle);
+	else
+		showTable(curveTitle);
 }
 
 void ApplicationWindow::zoomIn()
@@ -8529,6 +8595,10 @@ void ApplicationWindow::showTable(const QString& curve)
 		return;
 
 	updateWindowLists(w);
+	int colIndex = w->colIndex(curve);
+	w->setSelectedCol(colIndex);
+	w->table()->clearSelection();
+	w->table()->selectColumn(colIndex);
 	w->showMaximized();
 	Q3ListViewItem *it=lv->findItem (w->name(), 0, Q3ListView::ExactMatch | Qt::CaseSensitive );
 	if (it)
@@ -8946,12 +9016,19 @@ void ApplicationWindow::showPlotWizard()
 					"<p><h4>Please create a table and try again!</h4>"));
 }
 
+void ApplicationWindow::showFunctionDialog(int curveKey)
+{	
+	if ( !activeGraph )
+		return;
+	showFunctionDialog(activeGraph, activeGraph->curveIndex(curveKey));
+}
+
 void ApplicationWindow::showFunctionDialog(Graph *g, int curve)
 {	
 	if ( !g )
 		return;
 
-	FunctionDialog* fd= functionDialog();
+	FunctionDialog* fd = functionDialog();
 	fd->setWindowTitle(tr("QtiPlot - Edit function"));
 	fd->setCurveToModify(g, curve);
 }
@@ -8960,11 +9037,9 @@ FunctionDialog* ApplicationWindow::functionDialog()
 {
 	FunctionDialog* fd= new FunctionDialog(this,"FunctionDialog",true,0);
 	fd->setAttribute(Qt::WA_DeleteOnClose);
-	connect (fd,SIGNAL(clearFunctionsList()),this,SLOT(clearFunctionsList()));
 	connect (fd,SIGNAL(clearParamFunctionsList()),this,SLOT(clearParamFunctionsList()));
 	connect (fd,SIGNAL(clearPolarFunctionsList()),this,SLOT(clearPolarFunctionsList()));
 
-	fd->insertFunctionsList(functions);
 	fd->insertParamFunctionsList(xFunctions, yFunctions);
 	fd->insertPolarFunctionsList(rFunctions, tetaFunctions);
 	fd->exec();
@@ -9025,14 +9100,6 @@ void ApplicationWindow::updateFunctionLists(int type, QStringList &formulas)
 		while ((int)yFunctions.size() > maxListSize)
 			yFunctions.pop_back();
 	}
-	else 
-	{
-		functions.remove(formulas[0]);
-		functions.push_front(formulas[0]);
-
-		while ((int)functions.size() > maxListSize)
-			functions.pop_back();
-	}
 }
 
 void ApplicationWindow::newFunctionPlot()
@@ -9081,11 +9148,6 @@ void ApplicationWindow::clearPolarFunctionsList()
 {
 	rFunctions.clear();
 	tetaFunctions.clear();
-}
-
-void ApplicationWindow::clearFunctionsList()
-{
-	functions.clear();
 }
 
 void ApplicationWindow::clearFitFunctionsList()
@@ -10235,7 +10297,8 @@ void ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			else
 				cl.penWidth = curve[17].toInt();
 
-			ag->insertFunctionCurve(curve[1], curve[3].toDouble(),curve[4].toDouble(),curve[2].toInt());
+			ag->insertFunctionCurve(curve[1], curve[3].toDouble(),
+					curve[4].toDouble(),curve[2].toInt(), fileVersion);
 			ag->setCurveType(curveID, curve[5].toInt());
 			ag->updateCurveLayout(curveID, &cl);
 			if (fileVersion >= 88)
@@ -10597,26 +10660,27 @@ void ApplicationWindow::analyzeCurve(const QString& whichFit, const QString& cur
 {
 	if(whichFit=="fitLinear" || whichFit=="fitSigmoidal" || whichFit=="fitGauss" || whichFit=="fitLorentz")
 	{
-		Fitter *fitter = 0;
-		if (whichFit=="fitLinear")
-			fitter = new LinearFitter (this, activeGraph);
-		else if (whichFit=="fitSigmoidal")
-			fitter = new SigmoidalFitter (this, activeGraph);
-		else if(whichFit=="fitGauss")
-			fitter = new GaussFitter(this, activeGraph);
-		else if(whichFit=="fitLorentz")
-			fitter = new LorentzFitter(this, activeGraph);
+		Fit *fitter = 0;
+		if (whichFit == "fitLinear")
+			fitter = new LinearFit (this, activeGraph);
+		else if (whichFit == "fitSigmoidal")
+			fitter = new SigmoidalFit (this, activeGraph);
+		else if(whichFit == "fitGauss")
+			fitter = new GaussFit(this, activeGraph);
+		else if(whichFit == "fitLorentz")
+			fitter = new LorentzFit(this, activeGraph);
 
 		if (fitter->setDataFromCurve(curveTitle))
 		{
 			if (whichFit != "fitLinear")
 				fitter->guessInitialValues();
 
+			fitter->setFitCurveParameters(generateUniformFitPoints, fitPoints);
 			fitter->fit();
 			delete fitter;
 		}
 	}
-	else if(whichFit=="differentiate" && activeGraph->diffCurve(curveTitle))
+	else if(whichFit == "differentiate" && activeGraph->diffCurve(curveTitle))
 	{
 		Table* w = table(tableWindows.last());
 		QStringList list;
@@ -10720,9 +10784,10 @@ void ApplicationWindow::connectMultilayerPlot(MultiLayer *g)
 	//connect (g,SIGNAL(changeActiveLayer(Graph *)),this,SLOT(changeActiveGraph(Graph *)));
 
 	connect (g,SIGNAL(showTextDialog()),this,SLOT(showTextDialog()));
-	connect (g,SIGNAL(showPlotDialog(long)),this,SLOT(showPlotDialog(long)));
+	connect (g,SIGNAL(showPlotDialog(int)),this,SLOT(showPlotDialog(int)));
 	connect (g,SIGNAL(showScaleDialog(int)), this, SLOT(showScalePageFromAxisDialog(int)));
 	connect (g,SIGNAL(showAxisDialog(int)), this, SLOT(showAxisPageFromAxisDialog(int)));
+	connect (g,SIGNAL(showCurveContextMenu(int)),this,SLOT(showCurveContextMenu(int)));
 
 	connect (g,SIGNAL(showWindowContextMenu()),this,SLOT(showWindowContextMenu()));
 	connect (g,SIGNAL(showCurvesDialog()),this,SLOT(showCurvesDialog()));
@@ -12137,12 +12202,12 @@ void ApplicationWindow::plotBoxDiagram()
 
 void ApplicationWindow::fitMultiPeakGauss()
 {
-	fitMultiPeak((int)MultiPeakFitter::Gauss);
+	fitMultiPeak((int)MultiPeakFit::Gauss);
 }
 
 void ApplicationWindow::fitMultiPeakLorentz()
 {
-	fitMultiPeak((int)MultiPeakFitter::Lorentz);
+	fitMultiPeak((int)MultiPeakFit::Lorentz);
 }
 
 void ApplicationWindow::fitMultiPeak(int profile)
@@ -12210,7 +12275,7 @@ void ApplicationWindow::downloadTranslation()
 
 void ApplicationWindow::showHomePage()
 {
-	QDesktopServices::openUrl(QUrl("http://soft.proindependent.com/qtiplot.html"));
+	QDesktopServices::openUrl(QUrl("http://www.qtiplot.ro"));
 }
 
 void ApplicationWindow::showForums()

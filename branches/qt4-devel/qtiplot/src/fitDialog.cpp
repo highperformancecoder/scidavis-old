@@ -174,8 +174,8 @@ void FitDialog::initFitPage()
 	buttonEdit = new QPushButton(GroupBox2, "buttonOk" );
 	buttonEdit->setText( tr( "<< &Edit function" ) );
 
-	btnDeleteTables = new QPushButton(GroupBox2, "btnDeleteTables" );
-	btnDeleteTables->setText( tr( "&Delete Fit Curves" ) );
+	btnDeleteFitCurves = new QPushButton(GroupBox2, "btnDeleteFitCurves" );
+	btnDeleteFitCurves->setText( tr( "&Delete Fit Curves" ) );
 
 	buttonOk = new QPushButton(GroupBox2, "buttonOk" );
 	buttonOk->setText( tr( "&Fit" ) );
@@ -199,7 +199,7 @@ void FitDialog::initFitPage()
 	connect( buttonOk, SIGNAL( clicked() ), this, SLOT(accept()));
 	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT(close()));
 	connect( buttonEdit, SIGNAL( clicked() ), this, SLOT(showEditPage()));
-	connect( btnDeleteTables, SIGNAL( clicked() ), (ApplicationWindow *)this->parent(), SLOT(deleteFitTables()));
+	connect( btnDeleteFitCurves, SIGNAL( clicked() ), this, SLOT(deleteFitCurves()));
 	connect( boxWeighting, SIGNAL( activated(int) ), this, SLOT( enableWeightingParameters(int) ) );
 	connect( buttonAdvanced, SIGNAL(clicked()), this, SLOT(showAdvancedPage() ) );
 
@@ -317,7 +317,7 @@ void FitDialog::initAdvancedPage()
 	Q3ButtonGroup *GroupBox1 = new Q3ButtonGroup(2,Qt::Horizontal,tr("Generated Fit Curve"), advancedPage );
 
 	generatePointsBtn = new QRadioButton (GroupBox1);
-	generatePointsBtn ->setText(tr("Uniform X"));
+	generatePointsBtn ->setText(tr("Uniform X Function"));
 	generatePointsBtn->setChecked(app->generateUniformFitPoints);
 	connect( generatePointsBtn, SIGNAL(stateChanged (int)), this, SLOT(enableApplyChanges(int)));
 
@@ -703,13 +703,16 @@ void FitDialog::setFunction(bool ok)
 					lst << "A1" << "t1" << "A2" << "t2" << "A3" << "t3" << "y0";
 					break;
 				case 5:
-					lst = MultiPeakFitter::generateParameterList(polynomOrderBox->value());
+					lst << "y0" << "A" << "xc" << "w";
 					break;
 				case 6:
-					lst = MultiPeakFitter::generateParameterList(polynomOrderBox->value());
+					lst = MultiPeakFit::generateParameterList(polynomOrderBox->value());
 					break;
 				case 7:
-					lst = PolynomialFitter::generateParameterList(polynomOrderBox->value());
+					lst = MultiPeakFit::generateParameterList(polynomOrderBox->value());
+					break;
+				case 8:
+					lst = PolynomialFit::generateParameterList(polynomOrderBox->value());
 					break;
 			}
 			boxParam->setText(lst.join(", "));
@@ -868,18 +871,17 @@ void FitDialog::showUserFunctions()
 void FitDialog::setBuiltInFunctionNames()
 {
 	builtInFunctionNames << "Boltzmann" << "ExpGrowth" << "ExpDecay1" << "ExpDecay2" << "ExpDecay3" 
-		<< "Gauss" << "Lorentz" << "Polynomial";
+		<< "GaussAmp" << "Gauss" << "Lorentz" << "Polynomial";
 }
 
 void FitDialog::setBuiltInFunctions()
 {
 	builtInFunctions << "(A1-A2)/(1+exp((x-x0)/dx))+A2";
-	builtInFunctions << "y0+a*exp(x/t)";
-	builtInFunctions << "y0+a*exp(-x/t)";
-	builtInFunctions << "y0+a1*exp(-x/t1)+a2*exp(-x/t2)";
-	builtInFunctions << "y0+a1*exp(-x/t1)+a2*exp(-x/t2)+a3*exp(-x/t3)";
-	//builtInFunctions << "y0+a*exp(-(x-xc)*(x-xc)/(2*w*w))";
-	//builtInFunctions << "y0+2*a/pi*w/(4*(x-xc)*(x-xc)+w*w)";
+	builtInFunctions << "y0+A*exp(x/t)";
+	builtInFunctions << "y0+A*exp(-x/t)";
+	builtInFunctions << "y0+A1*exp(-x/t1)+A2*exp(-x/t2)";
+	builtInFunctions << "y0+A1*exp(-x/t1)+A2*exp(-x/t2)+A3*exp(-x/t3)";
+	builtInFunctions << "y0+A*exp(-(x-xc)*(x-xc)/(2*w*w))";
 }
 
 void FitDialog::showParseFunctions()
@@ -901,17 +903,17 @@ void FitDialog::showExpression(int function)
 		if (funcBox->currentText() == tr("Gauss"))
 		{
 			polynomOrderLabel->setText(tr("Peaks"));
-			explainBox->setText(MultiPeakFitter::generateFormula(polynomOrderBox->value(), MultiPeakFitter::Gauss));
+			explainBox->setText(MultiPeakFit::generateFormula(polynomOrderBox->value(), MultiPeakFit::Gauss));
 		}
 		else if (funcBox->currentText() == tr("Lorentz"))
 		{
 			polynomOrderLabel->setText(tr("Peaks"));
-			explainBox->setText(MultiPeakFitter::generateFormula(polynomOrderBox->value(), MultiPeakFitter::Lorentz));
+			explainBox->setText(MultiPeakFit::generateFormula(polynomOrderBox->value(), MultiPeakFit::Lorentz));
 		}
 		else if (funcBox->currentText() == tr("Polynomial"))
 		{
 			polynomOrderLabel->setText(tr("Polynomial Order"));
-			explainBox->setText(PolynomialFitter::generateFormula(polynomOrderBox->value()));
+			explainBox->setText(PolynomialFit::generateFormula(polynomOrderBox->value()));
 		}
 		else
 		{
@@ -1139,22 +1141,22 @@ void FitDialog::accept()
 			fitBuiltInFunction(funcBox->currentText(), paramsInit);
 		else if (boxUseBuiltIn->isChecked() && categoryBox->currentItem() == 3)
 		{
-			fitter = new PluginFitter(app, graph);
-			if (!((PluginFitter*)fitter)->load(pluginFilesList[funcBox->currentItem()])){
+			fitter = new PluginFit(app, graph);
+			if (!((PluginFit*)fitter)->load(pluginFilesList[funcBox->currentItem()])){
 				fitter  = 0;
 				return;}
 				fitter->setInitialGuesses(paramsInit);
 		}
 		else
 		{
-			fitter = new NonLinearFitter(app, graph, formula);
+			fitter = new NonLinearFit(app, graph, formula);
 			fitter->setParametersList(parameters);
 			fitter->setInitialGuesses(paramsInit);
 		}
 		delete[] paramsInit;
 
 		if (!fitter->setDataFromCurve(curve, start, end) ||
-				!fitter->setWeightingData ((Fitter::WeightingMethod)boxWeighting->currentItem(), 
+				!fitter->setWeightingData ((Fit::WeightingMethod)boxWeighting->currentItem(), 
 					tableNamesBox->currentText()+"_"+colNamesBox->currentText()))
 		{
 			delete fitter;
@@ -1163,13 +1165,19 @@ void FitDialog::accept()
 		}
 
 		fitter->setTolerance (eps);
-		fitter->setAlgorithm((Fitter::Algorithm)boxAlgorithm->currentItem());
+		fitter->setAlgorithm((Fit::Algorithm)boxAlgorithm->currentItem());
 		fitter->setFitCurveColor(boxColor->currentItem());
 		fitter->setFitCurveParameters(generatePointsBtn->isChecked(), generatePointsBox->value());
 		fitter->setMaximumIterations(boxPoints->value());
 
+		if (fitter->name() == tr("MultiPeak") && ((MultiPeakFit *)fitter)->peaks() > 1)
+		{
+			((MultiPeakFit *)fitter)->enablePeakCurves(app->generatePeakCurves);
+			((MultiPeakFit *)fitter)->setPeakCurvesColor(app->peakCurvesColor);
+		}
+
 		fitter->fit();
-		double *res = fitter->fitResults();
+		double *res = fitter->results();
 		if (boxParams->numCols() == 3)
 		{
 			int j = 0;
@@ -1194,34 +1202,36 @@ void FitDialog::fitBuiltInFunction(const QString& function, double* initVal)
 	if (function == "ExpDecay1")
 	{
 		initVal[1] = 1/initVal[1];
-		fitter = new ExponentialFitter(false, app, graph);
+		fitter = new ExponentialFit(app, graph);
 	}
 	else if (function == "ExpGrowth")
 	{
 		initVal[1] = -1/initVal[1];
-		fitter = new ExponentialFitter(true, app, graph);
+		fitter = new ExponentialFit(app, graph, true);
 	}
 	else if (function == "ExpDecay2")
 	{
 		initVal[1] = 1/initVal[1];
 		initVal[3] = 1/initVal[3];
-		fitter = new TwoExpFitter(app, graph);
+		fitter = new TwoExpFit(app, graph);
 	}
 	else if (function == "ExpDecay3")
 	{
 		initVal[1] = 1/initVal[1];
 		initVal[3] = 1/initVal[3];
 		initVal[5] = 1/initVal[5];
-		fitter = new ThreeExpFitter(app, graph);
+		fitter = new ThreeExpFit(app, graph);
 	}
 	else if (function == "Boltzmann")		
-		fitter = new SigmoidalFitter(app, graph);
+		fitter = new SigmoidalFit(app, graph);
+	else if (function == "GaussAmp")
+		fitter = new GaussAmpFit(app, graph);
 	else if (function == "Gauss")
-		fitter = new MultiPeakFitter(app, graph, MultiPeakFitter::Gauss, polynomOrderBox->value());
+		fitter = new MultiPeakFit(app, graph, MultiPeakFit::Gauss, polynomOrderBox->value());
 	else if (function == "Lorentz")
-		fitter = new MultiPeakFitter(app, graph, MultiPeakFitter::Lorentz, polynomOrderBox->value());
+		fitter = new MultiPeakFit(app, graph, MultiPeakFit::Lorentz, polynomOrderBox->value());
 	else if (function == tr("Polynomial"))
-		fitter = new PolynomialFitter(app, graph, polynomOrderBox->value());
+		fitter = new PolynomialFit(app, graph, polynomOrderBox->value());
 
 	if (function != tr("Polynomial"))
 		fitter->setInitialGuesses(initVal);
@@ -1298,7 +1308,7 @@ void FitDialog::selectSrcTable(int tabnr)
 
 void FitDialog::enableWeightingParameters(int index)
 {
-	if (index == Fitter::ArbDataset)
+	if (index == Fit::ArbDataset)
 	{
 		tableNamesBox->setEnabled(true);
 		colNamesBox->setEnabled(true);
@@ -1321,6 +1331,16 @@ void FitDialog::closeEvent (QCloseEvent * e )
 void FitDialog::enableApplyChanges(int)
 {
 	btnApply->setEnabled(true);
+}
+
+void FitDialog::deleteFitCurves()
+{
+	QStringList lst = graph->curvesList();
+	for (int i = 0; i<lst.count(); i++)
+	{
+		if (lst[i].contains(tr("Fit")))
+			graph->removeCurve(lst[i]);
+	}
 }
 
 FitDialog::~FitDialog()

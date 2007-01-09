@@ -341,7 +341,6 @@ private:
 	int selectedCol, lastSelectedCol;
 	QStringList savedCells;
 	int savedCol;
-	bool LeftButton;
 };
 
 #endif

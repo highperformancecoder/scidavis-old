@@ -78,7 +78,6 @@ Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ign
 void Table::init(int rows, int cols)
 {
 	selectedCol=0;
-	LeftButton=false;
 	savedCol=-1;
 
 	QDateTime dt = QDateTime::currentDateTime ();

@@ -30,6 +30,7 @@
 #include "application.h"
 #include "graph.h"
 #include "colorButton.h"
+#include "colorBox.h"
 #include "pixmaps.h"
 
 
@@ -585,6 +586,18 @@ void ConfigDialog::initFittingPage()
 	samePointsBtn->setChecked(!app->generateUniformFitPoints);
 	fittingCurveLayout->addWidget(samePointsBtn, 1, 0);
 
+	groupBoxMultiPeak = new QGroupBox();
+	groupBoxMultiPeak->setCheckable(true);
+	groupBoxMultiPeak->setChecked(app->generatePeakCurves);
+
+	QHBoxLayout * multiPeakLayout = new QHBoxLayout(groupBoxMultiPeak);
+
+	lblPeaksColor = new QLabel();
+	multiPeakLayout->addWidget(lblPeaksColor);
+	boxPeaksColor = new ColorBox(0);
+	boxPeaksColor->setCurrentItem(app->peakCurvesColor);
+	multiPeakLayout->addWidget(boxPeaksColor);
+
 	groupBoxFitParameters = new QGroupBox();
 	QGridLayout * fitParamsLayout = new QGridLayout(groupBoxFitParameters);
 
@@ -604,6 +617,7 @@ void ConfigDialog::initFittingPage()
 
 	QVBoxLayout* fitPageLayout = new QVBoxLayout(fitPage);
 	fitPageLayout->addWidget(groupBoxFittingCurve);
+	fitPageLayout->addWidget(groupBoxMultiPeak);
 	fitPageLayout->addWidget(groupBoxFitParameters);
 	fitPageLayout->addStretch();
 
@@ -803,7 +817,7 @@ void ConfigDialog::languageChange()
 	boxSeparator->addItem("," + tr("SPACE"));
 	boxSeparator->addItem(";");
 	boxSeparator->addItem(",");
-	setColumnSeparator(app->separator);
+	setColumnSeparator(app->columnSeparator);
 
 	lblTableBackground->setText(tr( "Background" )); 
 	lblTextColor->setText(tr( "Text" )); 
@@ -872,9 +886,12 @@ void ConfigDialog::languageChange()
 
 	//Fitting page
 	groupBoxFittingCurve->setTitle(tr("Generated Fit Curve"));
-	generatePointsBtn->setText(tr("Uniform X"));
+	generatePointsBtn->setText(tr("Uniform X Function"));
 	lblPoints->setText( tr("Points") );
 	samePointsBtn->setText( tr( "Same X as Fitting Data" ) );
+
+	groupBoxMultiPeak->setTitle(tr("Display Peak Curves for Multi-peak Fits"));
+	lblPeaksColor->setText(tr("Peaks Color"));
 
 	groupBoxFitParameters->setTitle(tr("Parameters Output"));
 	lblPrecision->setText(tr("Significant Digits"));
@@ -909,7 +926,7 @@ void ConfigDialog::apply()
 		return;
 	}
 
-	app->separator = sep;
+	app->columnSeparator = sep;
 	app->customizeTables(buttonBackground->color(), buttonText->color(), 
 			buttonHeader->color(), textFont, headerFont);
 	// 2D plots page: options tab
@@ -966,6 +983,8 @@ void ConfigDialog::apply()
 	app->writeFitResultsToLog = logBox->isChecked();
 	app->fitPoints = generatePointsBox->value();
 	app->generateUniformFitPoints = generatePointsBtn->isChecked();
+	app->generatePeakCurves = groupBoxMultiPeak->isChecked();
+	app->peakCurvesColor = boxPeaksColor->currentIndex();
 
 	app->setPlot3DOptions();
 	app->saveSettings();

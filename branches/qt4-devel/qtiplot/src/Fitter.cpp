@@ -33,6 +33,7 @@
 #include "LegendMarker.h"
 #include "parser.h"
 #include "matrix.h"
+#include "FunctionCurve.h"
 
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_multifit_nlin.h>
@@ -45,7 +46,7 @@
 #include <qmessagebox.h>
 #include <QDateTime>
 
-Fitter::Fitter( ApplicationWindow *parent, Graph *g, const char * name)
+Fit::Fit( ApplicationWindow *parent, Graph *g, const char * name)
 : QObject( parent, name),
 	d_graph(g)
 {
@@ -65,7 +66,7 @@ Fitter::Fitter( ApplicationWindow *parent, Graph *g, const char * name)
 	is_non_linear = true;
 }
 
-gsl_multifit_fdfsolver * Fitter::fitGSL(gsl_multifit_function_fdf f, int &iterations, int &status)
+gsl_multifit_fdfsolver * Fit::fitGSL(gsl_multifit_function_fdf f, int &iterations, int &status)
 {
 	const gsl_multifit_fdfsolver_type *T;
 	if (d_solver)
@@ -94,7 +95,7 @@ gsl_multifit_fdfsolver * Fitter::fitGSL(gsl_multifit_function_fdf f, int &iterat
 	return s;
 }
 
-gsl_multimin_fminimizer * Fitter::fitSimplex(gsl_multimin_function f, int &iterations, int &status)
+gsl_multimin_fminimizer * Fit::fitSimplex(gsl_multimin_function f, int &iterations, int &status)
 {
 	const gsl_multimin_fminimizer_type *T = gsl_multimin_fminimizer_nmsimplex;
 
@@ -127,7 +128,7 @@ gsl_multimin_fminimizer * Fitter::fitSimplex(gsl_multimin_function f, int &itera
 	return s_min;
 }
 
-void Fitter::setDataFromCurve(QwtPlotCurve *curve, int start, int end)
+void Fit::setDataFromCurve(QwtPlotCurve *curve, int start, int end)
 { 
 	if (d_n > 0)
 	{//delete previousely allocated memory
@@ -153,7 +154,7 @@ void Fitter::setDataFromCurve(QwtPlotCurve *curve, int start, int end)
 	}
 }
 
-bool Fitter::setDataFromCurve(const QString& curveTitle)
+bool Fit::setDataFromCurve(const QString& curveTitle)
 {  
 	if (!d_graph)
 		return false;
@@ -167,7 +168,7 @@ bool Fitter::setDataFromCurve(const QString& curveTitle)
 	return true;
 }
 
-bool Fitter::setDataFromCurve(const QString& curveTitle, double from, double to)
+bool Fit::setDataFromCurve(const QString& curveTitle, double from, double to)
 {  
 	if (!d_graph)
 		return false;
@@ -181,24 +182,20 @@ bool Fitter::setDataFromCurve(const QString& curveTitle, double from, double to)
 	return true;
 }
 
-void Fitter::setInitialGuesses(double *x_init)
+void Fit::setInitialGuesses(double *x_init)
 {
 	for (int i = 0; i < d_p; i++)
 		gsl_vector_set(d_param_init, i, x_init[i]);
 }
 
-void Fitter::setFitCurveParameters(bool generate, int points)
+void Fit::setFitCurveParameters(bool generate, int points)
 {
 	gen_x_data = generate;
 	if (gen_x_data)
 		d_result_points = points;
-	else if (d_n > 0)
-		d_result_points = d_n;
-	else
-		d_result_points = 100;
 }
 
-QString Fitter::logFitInfo(double *par, int iterations, int status, int prec, const QString& plotName)
+QString Fit::logFitInfo(double *par, int iterations, int status, int prec, const QString& plotName)
 {
 	QDateTime dt = QDateTime::currentDateTime ();
 	QString info = "[" + dt.toString(Qt::LocalDate)+ "\t" + tr("Plot")+ ": ''" + plotName+ "'']\n";
@@ -238,11 +235,11 @@ QString Fitter::logFitInfo(double *par, int iterations, int status, int prec, co
 		info+=tr(" algorithm with tolerance = ")+QString::number(d_tolerance)+"\n";
 	}
 
-	info+=tr("From x")+" = "+QString::number(d_x[0])+" "+tr("to x")+" = "+QString::number(d_x[d_n-1])+"\n";
+	info+=tr("From x")+" = "+QString::number(d_x[0], 'g', 15)+" "+tr("to x")+" = "+QString::number(d_x[d_n-1], 'g', 15)+"\n";
 
 	for (int i=0; i<d_p; i++)
 	{
-		info += d_param_names[i] + " = " + QString::number(par[i], 'g', prec) + " +/- ";
+		info += d_param_names[i]+" "+d_param_explain[i]+" = "+QString::number(par[i], 'g', prec) + " +/- ";
 		info += QString::number(sqrt(gsl_matrix_get(covar,i,i)), 'g', prec) + "\n";
 	}
 	info += "--------------------------------------------------------------------------------------\n";
@@ -263,7 +260,7 @@ QString Fitter::logFitInfo(double *par, int iterations, int status, int prec, co
 	return info;
 }
 
-void Fitter::showLegend()
+void Fit::showLegend()
 {
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	LegendMarker* mrk = d_graph->newLegend(legendFitInfo(app->fit_output_precision));
@@ -276,7 +273,7 @@ void Fitter::showLegend()
 	d_graph->replot();
 }
 
-QString Fitter::legendFitInfo(int prec)
+QString Fit::legendFitInfo(int prec)
 {
 	QString info = tr("Dataset") + ": " + d_curve->title().text() + "\n";
 	info += tr("Function") + ": " + d_formula + "\n<br>";
@@ -295,7 +292,7 @@ QString Fitter::legendFitInfo(int prec)
 	return info;
 }
 
-bool Fitter::setWeightingData(WeightingMethod w, const QString& colName)
+bool Fit::setWeightingData(WeightingMethod w, const QString& colName)
 {
 	d_weihting = w;
 	switch (d_weihting)
@@ -365,7 +362,7 @@ bool Fitter::setWeightingData(WeightingMethod w, const QString& colName)
 	return true;
 }
 
-Table* Fitter::parametersTable(const QString& tableName)
+Table* Fit::parametersTable(const QString& tableName)
 {
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	int prec = app->fit_output_precision;
@@ -388,7 +385,7 @@ Table* Fitter::parametersTable(const QString& tableName)
 	return t;
 }
 
-Matrix* Fitter::covarianceMatrix(const QString& matrixName)
+Matrix* Fit::covarianceMatrix(const QString& matrixName)
 {
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	int prec = app->fit_output_precision;
@@ -402,16 +399,18 @@ Matrix* Fitter::covarianceMatrix(const QString& matrixName)
 	return m;
 }
 
-void Fitter::storeCustomFitResults(double *par)
+void Fit::storeCustomFitResults(double *par)
 {
 	for (int i=0; i<d_p; i++)
 		d_results[i] = par[i];
 }
 
-void Fitter::fit()
+void Fit::fit()
 {  
 	if (!d_graph)
 		return;
+
+	QApplication::setOverrideCursor(Qt::WaitCursor);
 
 	const char *function = d_formula.ascii();
 	QString names = d_param_names.join (",");
@@ -457,7 +456,6 @@ void Fitter::fit()
 			par[i]=gsl_vector_get(s->x, i);
 
 		chi_2 = pow(gsl_blas_dnrm2(s->f), 2.0);
-
 		gsl_multifit_fdfsolver_free(s);
 	}
 
@@ -469,9 +467,61 @@ void Fitter::fit()
 					app->fit_output_precision, d_graph->parentPlotName()));
 
 	generateFitCurve(par);
+	QApplication::restoreOverrideCursor();
 }
 
-Fitter::~Fitter()
+void Fit::generateFitCurve(double *par)
+{
+	if (!gen_x_data)
+		d_result_points = d_n;
+
+	double *X = new double[d_result_points]; 
+	double *Y = new double[d_result_points]; 
+
+	calculateFitCurveData(par, X, Y);
+
+	ApplicationWindow *app = (ApplicationWindow *)parent();
+	if (gen_x_data)
+	{
+		insertFitFunctionCurve(QString(name()) + tr("Fit"), X, Y, app->fit_output_precision);
+		d_graph->replot();
+		delete[] X;
+		delete[] Y;
+	}
+	else
+	{
+		d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, 
+				app->generateUnusedName(QString(name())+tr("Fit")), d_fit_type + tr(" of ") + d_curve->title().text());
+	}
+}
+
+void Fit::insertFitFunctionCurve(const QString& name, double *x, double *y, int prec, int penWidth)
+{
+	QStringList curves = d_graph->curvesList();
+	int index = 0;
+	for (int i = 0; i<(int)curves.count(); i++ )
+	{
+		if (curves[i].startsWith(name))
+			index++;
+	}
+	QString title = name + QString::number(++index);
+
+	FunctionCurve *c = new FunctionCurve(FunctionCurve::Normal, title);
+	c->setPen(QPen(Graph::color(d_curveColorIndex), penWidth)); 
+	c->setData(x, y, d_result_points);
+	c->setRange(d_x[0], d_x[d_n-1]);
+
+	QString formula = d_formula;
+	for (int j=0; j<d_p; j++)
+	{
+		QString parameter = QString::number(d_results[j], 'g', prec);
+		formula.replace(d_param_names[j], parameter);
+	}
+	c->setFormula(formula);
+	d_graph->insertCurve(c, title);
+}
+
+Fit::~Fit()
 {
 	if (d_n > 0)
 	{//delete the memory allocated for the fitting data
@@ -489,12 +539,12 @@ Fitter::~Fitter()
 
 /*****************************************************************************
  *
- * Class ExponentialFitter
+ * Class ExponentialFit
  *
  *****************************************************************************/
 
-	ExponentialFitter::ExponentialFitter(bool expGrowth, ApplicationWindow *parent, Graph *g)
-: Fitter(parent, g),
+	ExponentialFit::ExponentialFit(ApplicationWindow *parent, Graph *g, bool expGrowth)
+: Fit(parent, g),
 	is_exp_growth(expGrowth)
 {
 	d_f = exp_f;
@@ -511,17 +561,17 @@ Fitter::~Fitter()
 	{
 		setName("ExpGrowth");
 		d_fit_type = tr("Exponential growth");
-		d_formula = "y =  y0 + Aexp(x/t)";
+		d_formula = "y0 + Aexp(x/t)";
 	}
 	else
 	{
-		setName("ExpDecay1");
+		setName("ExpDecay");
 		d_fit_type = tr("Exponential decay");
-		d_formula = "y = y0 + A*exp(-x/t)";
+		d_formula = "y0 + A*exp(-x/t)";
 	}
 }
 
-void ExponentialFitter::storeCustomFitResults(double *par)
+void ExponentialFit::storeCustomFitResults(double *par)
 {
 	for (int i=0; i<d_p; i++)
 		d_results[i] = par[i];
@@ -532,10 +582,8 @@ void ExponentialFitter::storeCustomFitResults(double *par)
 		d_results[1]=1.0/d_results[1];
 }
 
-void ExponentialFitter::generateFitCurve(double *par)
+void ExponentialFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
 	if (gen_x_data)
 	{
 		double X0 = d_x[0];
@@ -555,21 +603,18 @@ void ExponentialFitter::generateFitCurve(double *par)
 		}
 	}
 	delete[] par;
-	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, 
-			((ApplicationWindow *)parent())->generateUnusedName(tr("Fit")), 
-			d_fit_type + tr(" fit of ") +  d_curve->title().text());
 }
 
 /*****************************************************************************
  *
- * Class TwoExpFitter
+ * Class TwoExpFit
  *
  *****************************************************************************/
 
-	TwoExpFitter::TwoExpFitter(ApplicationWindow *parent, Graph *g)
-: Fitter(parent, g)
+	TwoExpFit::TwoExpFit(ApplicationWindow *parent, Graph *g)
+: Fit(parent, g)
 {
-	setName("ExpDecay2");
+	setName("ExpDecay");
 	d_f = expd2_f;
 	d_df = expd2_df;
 	d_fdf = expd2_fdf;
@@ -580,10 +625,10 @@ void ExponentialFitter::generateFitCurve(double *par)
 	d_results = new double[d_p];
 	d_param_names << "A1" << "t1" << "A2" << "t2" << "y0";
 	d_fit_type = tr("Exponential decay");
-	d_formula = "y = A1*exp(-x/t1)+A2*exp(-x/t2)+y0";
+	d_formula = "A1*exp(-x/t1)+A2*exp(-x/t2)+y0";
 }
 
-void TwoExpFitter::storeCustomFitResults(double *par)
+void TwoExpFit::storeCustomFitResults(double *par)
 {
 	for (int i=0; i<d_p; i++)
 		d_results[i] = par[i];
@@ -592,11 +637,8 @@ void TwoExpFitter::storeCustomFitResults(double *par)
 	d_results[3]=1.0/d_results[3];
 }
 
-void TwoExpFitter::generateFitCurve(double *par)
+void TwoExpFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
-
 	if (gen_x_data)
 	{
 		double X0 = d_x[0];
@@ -616,21 +658,18 @@ void TwoExpFitter::generateFitCurve(double *par)
 		}
 	}
 	delete[] par;
-	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, 
-			((ApplicationWindow *)parent())->generateUnusedName(tr("Fit")),
-			d_fit_type + tr(" fit of ") +  d_curve->title().text());
 }
 
 /*****************************************************************************
  *
- * Class ThreeExpFitter
+ * Class ThreeExpFit
  *
  *****************************************************************************/
 
-	ThreeExpFitter::ThreeExpFitter(ApplicationWindow *parent, Graph *g)
-: Fitter(parent, g)
+	ThreeExpFit::ThreeExpFit(ApplicationWindow *parent, Graph *g)
+: Fit(parent, g)
 {
-	setName("ExpDecay3");
+	setName("ExpDecay");
 	d_f = expd3_f;
 	d_df = expd3_df;
 	d_fdf = expd3_fdf;
@@ -641,10 +680,10 @@ void TwoExpFitter::generateFitCurve(double *par)
 	d_results = new double[d_p];
 	d_param_names << "A1" << "t1" << "A2" << "t2" << "A3" << "t3" << "y0";
 	d_fit_type = tr("Exponential decay");
-	d_formula = "y = A1*exp(-x/t1)+A2*exp(-x/t2)+A3*exp(-x/t3)+y0";
+	d_formula = "A1*exp(-x/t1)+A2*exp(-x/t2)+A3*exp(-x/t3)+y0";
 }
 
-void ThreeExpFitter::storeCustomFitResults(double *par)
+void ThreeExpFit::storeCustomFitResults(double *par)
 {
 	for (int i=0; i<d_p; i++)
 		d_results[i] = par[i];
@@ -654,11 +693,8 @@ void ThreeExpFitter::storeCustomFitResults(double *par)
 	d_results[5]=1.0/d_results[5];
 }
 
-void ThreeExpFitter::generateFitCurve(double *par)
+void ThreeExpFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
-
 	if (gen_x_data)
 	{
 		double X0 = d_x[0];
@@ -678,20 +714,16 @@ void ThreeExpFitter::generateFitCurve(double *par)
 		}
 	}
 	delete[] par;
-
-	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex,
-			((ApplicationWindow *)parent())->generateUnusedName(tr("Fit")),
-			d_fit_type + tr(" fit of ") +  d_curve->title().text());
 }
 
 /*****************************************************************************
  *
- * Class SigmoidalFitter
+ * Class SigmoidalFit
  *
  *****************************************************************************/
 
-	SigmoidalFitter::SigmoidalFitter(ApplicationWindow *parent, Graph *g)
-: Fitter(parent, g)
+	SigmoidalFit::SigmoidalFit(ApplicationWindow *parent, Graph *g)
+: Fit(parent, g)
 {
 	setName("Boltzmann");
 	d_f = boltzmann_f;
@@ -702,16 +734,14 @@ void ThreeExpFitter::generateFitCurve(double *par)
 	d_param_init = gsl_vector_alloc(d_p);
 	covar = gsl_matrix_alloc (d_p, d_p);
 	d_results = new double[d_p];
-	d_param_names << tr("A1 (init value)") << tr("A2 (final value)") << tr("x0 (center)") << tr("dx (time constant)");
+	d_param_explain << tr("(init value)") << tr("(final value)") << tr("(center)") << tr("(time constant)");
+	d_param_names << "A1" << "A2" << "x0" << "dx";
 	d_fit_type = tr("Boltzmann (Sigmoidal)");
-	d_formula = "y = (A1-A2)/(1+exp((x-x0)/dx))+A2";
+	d_formula = "(A1-A2)/(1+exp((x-x0)/dx))+A2";
 }
 
-void SigmoidalFitter::generateFitCurve(double *par)
+void SigmoidalFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
-
 	if (gen_x_data)
 	{
 		double X0 = d_x[0];
@@ -731,12 +761,9 @@ void SigmoidalFitter::generateFitCurve(double *par)
 		}
 	}
 	delete[] par;
-	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex,
-			((ApplicationWindow *)parent())->generateUnusedName(tr("Fit")),
-			d_fit_type + tr(" fit of ") +  d_curve->title().text());
 }
 
-void SigmoidalFitter::guessInitialValues()
+void SigmoidalFit::guessInitialValues()
 {
 	gsl_vector_view x = gsl_vector_view_array (d_x, d_n);
 	gsl_vector_view y = gsl_vector_view_array (d_y, d_n);
@@ -752,14 +779,14 @@ void SigmoidalFitter::guessInitialValues()
 
 /*****************************************************************************
  *
- * Class GaussFitter
+ * Class GaussAmpFit
  *
  *****************************************************************************/
 
-	GaussFitter::GaussFitter(ApplicationWindow *parent, Graph *g)
-: Fitter(parent, g)
+	GaussAmpFit::GaussAmpFit(ApplicationWindow *parent, Graph *g)
+: Fit(parent, g)
 {
-	setName("Gauss");
+	setName("GaussAmp");
 	d_f = gauss_f;
 	d_df = gauss_df;
 	d_fdf = gauss_fdf;
@@ -768,16 +795,14 @@ void SigmoidalFitter::guessInitialValues()
 	d_param_init = gsl_vector_alloc(d_p);
 	covar = gsl_matrix_alloc (d_p, d_p);
 	d_results = new double[d_p];
-	d_param_names << "y0 (offset)" << "A (height)" << "xc (center)" << "w (width)";
-	d_fit_type = tr("Gauss");
-	d_formula = "y = y0+A*exp[-(x-xc)^2/(2*w^2)]";
+	d_param_explain << tr("(offset)") << tr("(height)") << tr("(center)") << tr("(width)");
+	d_param_names << "y0" << "A" << "xc" << "w";
+	d_fit_type = tr("GaussAmp");
+	d_formula = "y0 + A*exp(-(x-xc)^2/(2*w^2))";
 }
 
-void GaussFitter::generateFitCurve(double *par)
+void GaussAmpFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
-
 	double w2 = par[3]*par[3];
 	if (gen_x_data)
 	{
@@ -800,113 +825,18 @@ void GaussFitter::generateFitCurve(double *par)
 		}
 	}
 	delete[] par;
-	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, 
-			((ApplicationWindow *)parent())->generateUnusedName(tr("Fit")),
-			d_fit_type + tr(" fit of ") +  d_curve->title().text());
-}
-
-void GaussFitter::guessInitialValues()
-{
-	gsl_vector_view x = gsl_vector_view_array (d_x, d_n);
-	gsl_vector_view y = gsl_vector_view_array (d_y, d_n);
-
-	double min_out, max_out;
-	gsl_vector_minmax (&y.vector, &min_out, &max_out);
-
-	gsl_vector_set(d_param_init, 0, min_out);
-	gsl_vector_set(d_param_init, 1, max_out - min_out);
-	gsl_vector_set(d_param_init, 2, gsl_vector_get(&x.vector, gsl_vector_max_index (&y.vector)));
-	gsl_vector_set(d_param_init, 3, 1.0);
 }
 
 /*****************************************************************************
  *
- * Class LorentzFitter
+ * Class NonLinearFit
  *
  *****************************************************************************/
 
-	LorentzFitter::LorentzFitter(ApplicationWindow *parent, Graph *g)
-: Fitter(parent, g)
+	NonLinearFit::NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& formula)
+: Fit(parent, g)
 {
-	setName("Lorentz");
-	d_f = lorentz_f;
-	d_df = lorentz_df;
-	d_fdf = lorentz_fdf;
-	d_fsimplex = lorentz_d;
-	d_p = 4;
-	d_param_init = gsl_vector_alloc(d_p);
-	covar = gsl_matrix_alloc (d_p, d_p);
-	d_results = new double[d_p];
-	d_param_names << "y0 (offset)" << "A (area)" << "xc (center)" << "w (width)";
-	d_fit_type = tr("Lorentz");
-	d_formula = "y = y0+2A/pi*w/[4*(x-xc)^2+w^2]";
-}
-
-void LorentzFitter::storeCustomFitResults(double *par)
-{
-	for (int i=0; i<d_p; i++)
-		d_results[i] = fabs(par[i]);
-
-	d_results[1] = M_PI_2*d_results[1];
-}
-
-void LorentzFitter::generateFitCurve(double *par)
-{
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
-
-	double aw = par[1]*par[3];
-	double w2 = par[3]*par[3];
-
-	if (gen_x_data)
-	{
-		double X0 = d_x[0];
-		double step = (d_x[d_n-1]-X0)/(d_result_points-1);
-		for (int i=0; i<d_result_points; i++)
-		{
-			X[i] = X0+i*step;
-			double diff = X[i]-par[2];
-			Y[i] = aw/(4*diff*diff+w2)+par[0];
-		}
-	}
-	else
-	{
-		for (int i=0; i<d_result_points; i++)
-		{
-			X[i] = d_x[i];		
-			double diff = X[i]-par[2];
-			Y[i] = aw/(4*diff*diff+w2)+par[0];
-		}
-	}
-	delete[] par;
-	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, 
-			((ApplicationWindow *)parent())->generateUnusedName(tr("Fit")),
-			d_fit_type + tr(" fit of ") +  d_curve->title().text());
-}
-
-void LorentzFitter::guessInitialValues()
-{
-	gsl_vector_view x = gsl_vector_view_array (d_x, d_n);
-	gsl_vector_view y = gsl_vector_view_array (d_y, d_n);
-
-	double min_out, max_out;
-	gsl_vector_minmax (&y.vector, &min_out, &max_out);
-
-	gsl_vector_set(d_param_init, 0, gsl_vector_min(&y.vector));
-	gsl_vector_set(d_param_init, 1, 1.0);
-	gsl_vector_set(d_param_init, 2, gsl_vector_get(&x.vector, gsl_vector_max_index (&y.vector)));
-	gsl_vector_set(d_param_init, 3, 1.0);
-}
-
-/*****************************************************************************
- *
- * Class NonLinearFitter
- *
- *****************************************************************************/
-
-	NonLinearFitter::NonLinearFitter(ApplicationWindow *parent, Graph *g, const QString& formula)
-: Fitter(parent, g)
-{
+	setName(tr("NonLinear"));
 	d_formula = formula;
 	d_f = user_f;
 	d_df = user_df;
@@ -915,12 +845,12 @@ void LorentzFitter::guessInitialValues()
 	d_fit_type = tr("Non-linear");
 }
 
-void NonLinearFitter::setParametersList(const QStringList& lst)
+void NonLinearFit::setParametersList(const QStringList& lst)
 {
 	d_param_names = lst;
 
 	if (d_p > 0)
-	{//free previousely allocate memory
+	{//free previously allocated memory
 		gsl_vector_free(d_param_init);
 		gsl_matrix_free (covar);
 		delete[] d_results;
@@ -932,11 +862,8 @@ void NonLinearFitter::setParametersList(const QStringList& lst)
 	d_results = new double[d_p];
 }
 
-void NonLinearFitter::generateFitCurve(double *par)
+void NonLinearFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
-
 	MyParser parser;
 	for (int i=0; i<d_p; i++)
 		parser.DefineVar(d_param_names[i].ascii(), &par[i]);
@@ -966,24 +893,21 @@ void NonLinearFitter::generateFitCurve(double *par)
 		}
 	}
 	delete[] par;
-	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, 
-			((ApplicationWindow *)parent())->generateUnusedName(tr("Fit")),
-			d_fit_type + tr(" fit of ") +  d_curve->title().text());
 }
 
 /*****************************************************************************
  *
- * Class PluginFitter
+ * Class PluginFit
  *
  *****************************************************************************/
 
-	PluginFitter::PluginFitter(ApplicationWindow *parent, Graph *g)
-: Fitter(parent, g)
+	PluginFit::PluginFit(ApplicationWindow *parent, Graph *g)
+: Fit(parent, g)
 {
-	d_fit_type = tr("Non-linear");
+	d_fit_type = tr("Plugin");
 }
 
-bool PluginFitter::load(const QString& pluginName)
+bool PluginFit::load(const QString& pluginName)
 {
 	if (!QFile::exists (pluginName))
 	{
@@ -1016,7 +940,7 @@ bool PluginFitter::load(const QString& pluginName)
 	if (!d_df)
 	{
 		QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Plugin Error"), 
-				tr("The plugin does not implement a %1 method necessary for Levenberg-Marquardt fitting.").arg("function_ff"));
+				tr("The plugin does not implement a %1 method necessary for Levenberg-Marquardt fitting.").arg("function_df"));
 		return false;
 	}
 
@@ -1046,25 +970,19 @@ bool PluginFitter::load(const QString& pluginName)
 		return false;
 
 	fitFunction = (fitFunc) lib.resolve( "name" );
-	if (fitFunction)
-		d_formula = QString(fitFunction()) + " = ";
-	else
-		return false;
+	setName(QString(fitFunction()));
 
 	fitFunction = (fitFunc) lib.resolve( "function" );
 	if (fitFunction)
-		d_formula += QString(fitFunction());
+		d_formula = QString(fitFunction());
 	else
 		return false;
 
 	return true;
 }
 
-void PluginFitter::generateFitCurve(double *par)
+void PluginFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
-
 	if (gen_x_data)
 	{
 		double X0 = d_x[0];
@@ -1084,22 +1002,21 @@ void PluginFitter::generateFitCurve(double *par)
 		}
 	}
 	delete[] par;
-	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, 
-			((ApplicationWindow *)parent())->generateUnusedName(tr("Fit")),
-			d_fit_type + tr(" fit of ") +  d_curve->title().text());
 }
 
 /*****************************************************************************
  *
- * Class MultiPeakFitter
+ * Class MultiPeakFit
  *
  *****************************************************************************/
 
-	MultiPeakFitter::MultiPeakFitter(ApplicationWindow *parent, Graph *g, PeakProfile profile, int peaks)
-: Fitter(parent, g),
+	MultiPeakFit::MultiPeakFit(ApplicationWindow *parent, Graph *g, PeakProfile profile, int peaks)
+: Fit(parent, g),
 	d_profile(profile),
 	d_peaks(peaks)
 {
+	setName(tr("MultiPeak"));
+
 	if (profile == Gauss)
 	{
 		d_fit_type = tr("Gauss");
@@ -1131,9 +1048,12 @@ void PluginFitter::generateFitCurve(double *par)
 
 	d_param_names = generateParameterList(d_peaks);
 	d_formula = generateFormula(d_peaks, d_profile);
+
+	generate_peak_curves = true;
+	d_peaks_color = 2;//green
 }
 
-QStringList MultiPeakFitter::generateParameterList(int peaks)
+QStringList MultiPeakFit::generateParameterList(int peaks)
 {
 	if (peaks == 1)
 		return QStringList() << "A" << "xc" << "w" << "y0";
@@ -1150,43 +1070,74 @@ QStringList MultiPeakFitter::generateParameterList(int peaks)
 	return lst;
 }
 
-QString MultiPeakFitter::generateFormula(int peaks, PeakProfile profile)
+QString MultiPeakFit::generateFormula(int peaks, PeakProfile profile)
 {
 	if (peaks == 1)
 		switch (profile)
 		{
 			case Gauss:
-				return "y0 + A*exp(-(x-xc)^2/(2*w^2))";
+				return "y0 + A*sqrt(2/PI)/w*exp(-2*((x-xc)/w)^2)";
 				break;
 
 			case Lorentz:
-				return "y0 + 2*A/pi*w/(4*(x-xc)^2+w^2)";
+				return "y0 + 2*A/PI*w/(4*(x-xc)^2+w^2)";
 				break;
 		}
 
 	QString formula = "y0 + ";
 	for (int i = 0; i<peaks; i++)
 	{
-		QString index = QString::number(i+1);
-		switch (profile)
-		{
-			case Gauss:
-				formula += "A"+index+"*exp(-(x-xc"+index+")^2/(2*w"+index+"^2))";
-				break;
-			case Lorentz:
-				formula += "2*A"+index+"/pi*w"+index+"/(4*(x-xc"+index+")^2+w"+index+"^2)";
-				break;
-		}
+		formula += peakFormula(i+1, profile);
 		if (i < peaks - 1)
 			formula += " + ";
 	}
 	return formula;
 }
 
-void MultiPeakFitter::storeCustomFitResults(double *par)
+QString MultiPeakFit::peakFormula(int peakIndex, PeakProfile profile)
 {
-	for (int i=0; i<d_p; i++)
+	QString formula;
+	QString index = QString::number(peakIndex);
+	switch (profile)
+	{
+		case Gauss:
+			formula += "sqrt(2/PI)*A" + index + "/w" + index;
+			formula += "*exp(-2*(x-xc" + index + ")^2/w" + index + "^2)";
+			break;
+		case Lorentz:
+			formula += "2*A"+index+"/PI*w"+index+"/(4*(x-xc"+index+")^2+w"+index+"^2)";
+			break;
+	}
+	return formula;
+}
+
+void MultiPeakFit::guessInitialValues()
+{
+	if (d_peaks > 1)
+		return;
+
+	gsl_vector_view x = gsl_vector_view_array (d_x, d_n);
+	gsl_vector_view y = gsl_vector_view_array (d_y, d_n);
+
+	double min_out, max_out;
+	gsl_vector_minmax (&y.vector, &min_out, &max_out);
+
+	if (d_profile == Gauss)
+		gsl_vector_set(d_param_init, 0, sqrt(M_2_PI)*(max_out - min_out));
+	else if (d_profile == Lorentz)
+		gsl_vector_set(d_param_init, 0, 1.0);
+
+	gsl_vector_set(d_param_init, 1, gsl_vector_get(&x.vector, gsl_vector_max_index (&y.vector)));
+	gsl_vector_set(d_param_init, 2, 1.0);
+	gsl_vector_set(d_param_init, 3, min_out);
+}
+
+void MultiPeakFit::storeCustomFitResults(double *par)
+{
+	for (int i=0; i<d_p-1; i++)
 		d_results[i] = fabs(par[i]);
+
+	d_results[d_p-1] = par[d_p-1];//the offset may be negatif
 
 	if (d_profile == Lorentz)
 	{
@@ -1195,9 +1146,41 @@ void MultiPeakFitter::storeCustomFitResults(double *par)
 	}
 }
 
-void MultiPeakFitter::generateFitCurve(double *par)
+void MultiPeakFit::insertPeakFunctionCurve(double *x, double *y, int prec, int peak)
+{
+	QStringList curves = d_graph->curvesList();
+	int index = 0;
+	for (int i = 0; i<(int)curves.count(); i++ )
+	{
+		if (curves[i].startsWith(tr("Peak")))
+			index++;
+	}
+	QString title = tr("Peak") + QString::number(++index);
+
+	FunctionCurve *c = new FunctionCurve(FunctionCurve::Normal, title);
+	c->setPen(QPen(Graph::color(d_peaks_color), 1)); 
+	c->setData(x, y, d_result_points);
+	c->setRange(d_x[0], d_x[d_n-1]);
+
+	QString formula = "y0+"+peakFormula(peak + 1, d_profile);
+	QString parameter = QString::number(d_results[d_p-1], 'g', prec);
+	formula.replace(d_param_names[d_p-1], parameter);
+	for (int j=0; j<3; j++)
+	{
+		int p = 3*peak + j;
+		parameter = QString::number(d_results[p], 'g', prec);
+		formula.replace(d_param_names[p], parameter);
+	}
+	c->setFormula(formula);
+	d_graph->insertCurve(c, title);
+}
+
+void MultiPeakFit::generateFitCurve(double *par)
 {
 	ApplicationWindow *app = (ApplicationWindow *)parent();
+	if (!gen_x_data)
+		d_result_points = d_n;
+
 	gsl_matrix * m = gsl_matrix_alloc (d_result_points, d_peaks);
 	if (!m)
 	{
@@ -1205,74 +1188,116 @@ void MultiPeakFitter::generateFitCurve(double *par)
 		return;
 	}
 
-	QString tableName = app->generateUnusedName(tr("Fit"));
-	QString label = d_fit_type + " " + tr("fit of") + " " + d_curve->title().text();
-
+	double *X = new double[d_result_points]; 
+	double *Y = new double[d_result_points]; 
 	int i, j;
 	int peaks_aux = d_peaks;
 	if (d_peaks == 1)
 		peaks_aux--;
 
-	Table *t= app->newHiddenTable(tableName, label, d_result_points, peaks_aux + 2);
-	QStringList header = QStringList() << "1";
-	for (i = 0; i<peaks_aux; i++)
-		header << tr("peak") + QString::number(i+1);
-	header << "2";
-	t->setHeader(header);
-
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
-	double step = (d_x[d_n-1] - d_x[0])/(d_result_points-1);	
-	for (i = 0; i<d_result_points; i++)
+	if (gen_x_data)
 	{
-		if (gen_x_data)
-			X[i] = d_x[0] + i*step;
-		else
-			X[i] = d_x[i];
-
-		t->setText(i, 0, QString::number(X[i], 'g', app->fit_output_precision));
-
-		double yi=0;
-		for (j=0; j<d_peaks; j++)
+		double step = (d_x[d_n-1] - d_x[0])/(d_result_points-1);	
+		for (i = 0; i<d_result_points; i++)
 		{
-			double diff = X[i] - par[3*j + 1];
-			double w = par[3*j + 2];
-			double y_aux = 0;
-			if (d_profile == Gauss)
-				y_aux += par[3*j]*exp(-0.5*diff*diff/(w*w));
-			else
-				y_aux += par[3*j]*w/(4*diff*diff+w*w);
+			X[i] = d_x[0] + i*step;
+			double yi=0;
+			for (j=0; j<d_peaks; j++)
+			{
+				double diff = X[i] - par[3*j + 1];
+				double w = par[3*j + 2];
+				double y_aux = 0;
+				if (d_profile == Gauss)
+					y_aux += sqrt(M_2_PI)*par[3*j]/w*exp(-2*diff*diff/(w*w));
+				else
+					y_aux += par[3*j]*w/(4*diff*diff+w*w);
 
-			yi += y_aux;
-			y_aux += par[d_p - 1];
-			t->setText(i, j+1, QString::number(y_aux, 'g', app->fit_output_precision));
-			gsl_matrix_set(m, i, j, y_aux);
+				yi += y_aux;
+				y_aux += par[d_p - 1];
+				gsl_matrix_set(m, i, j, y_aux);
+			}
+			Y[i] = yi + par[d_p - 1];//add offset
 		}
-		Y[i] = yi + par[d_p - 1];//add offset
+
 		if (d_peaks > 1)
-			t->setText(i, d_peaks+1, QString::number(Y[i], 'g', app->fit_output_precision));
+			insertFitFunctionCurve(QString(name()) + tr("Fit"), X, Y, app->fit_output_precision, 2);
+		else
+			insertFitFunctionCurve(QString(name()) + tr("Fit"), X, Y, app->fit_output_precision);
+
+		if (generate_peak_curves)
+		{
+			for (i=0; i<peaks_aux; i++)
+			{//add the peak curves
+				for (j=0; j<d_result_points; j++)
+					Y[j] = gsl_matrix_get (m, j, i);
+
+				insertPeakFunctionCurve(X, Y, app->fit_output_precision, i);
+			}
+		}
 	}
-
-	label = tableName + "_" + "2";
-	QwtPlotCurve *c = new QwtPlotCurve(label);
-	if (d_peaks > 1)
-		c->setPen(QPen(Graph::color(d_curveColorIndex), 2)); 
 	else
-		c->setPen(QPen(Graph::color(d_curveColorIndex), 1)); 
-	c->setData(X, Y, d_result_points);	
-	d_graph->insertCurve(c, tableName+"_1(X),"+label+"(Y)");
+	{
+		QString tableName = app->generateUnusedName(tr("Fit"));
+		QString label = d_fit_type + " " + tr("fit of") + " " + d_curve->title().text();
 
-	for (i=0; i<peaks_aux; i++)
-	{//add the peak curves
-		for (j=0; j<d_result_points; j++)
-			Y[j] = gsl_matrix_get (m, j, i);
+		Table *t= app->newHiddenTable(tableName, label, d_result_points, peaks_aux + 2);
+		QStringList header = QStringList() << "1";
+		for (i = 0; i<peaks_aux; i++)
+			header << tr("peak") + QString::number(i+1);
+		header << "2";
+		t->setHeader(header);
 
-		label = tableName + "_" + tr("peak") + QString::number(i+1);
-		c = new QwtPlotCurve(label);
-		c->setPen(QPen(Qt::green,1)); 
+		for (i = 0; i<d_result_points; i++)
+		{
+			X[i] = d_x[i];
+			t->setText(i, 0, QString::number(X[i], 'g', app->fit_output_precision));
+
+			double yi=0;
+			for (j=0; j<d_peaks; j++)
+			{
+				double diff = X[i] - par[3*j + 1];
+				double w = par[3*j + 2];
+				double y_aux = 0;
+				if (d_profile == Gauss)
+					y_aux += sqrt(M_2_PI)*par[3*j]/w*exp(-2*diff*diff/(w*w));
+				else
+					y_aux += par[3*j]*w/(4*diff*diff+w*w);
+
+				yi += y_aux;
+				y_aux += par[d_p - 1];
+				t->setText(i, j+1, QString::number(y_aux, 'g', app->fit_output_precision));
+				gsl_matrix_set(m, i, j, y_aux);
+			}
+			Y[i] = yi + par[d_p - 1];//add offset
+			if (d_peaks > 1)
+				t->setText(i, d_peaks+1, QString::number(Y[i], 'g', app->fit_output_precision));
+		}
+
+		label = tableName + "_" + "2";
+		QwtPlotCurve *c = new QwtPlotCurve(label);
+		if (d_peaks > 1)
+			c->setPen(QPen(Graph::color(d_curveColorIndex), 2)); 
+		else
+			c->setPen(QPen(Graph::color(d_curveColorIndex), 1)); 
 		c->setData(X, Y, d_result_points);	
 		d_graph->insertCurve(c, tableName+"_1(X),"+label+"(Y)");
+
+		if (generate_peak_curves)
+		{
+			for (i=0; i<peaks_aux; i++)
+			{//add the peak curves
+				for (j=0; j<d_result_points; j++)
+					Y[j] = gsl_matrix_get (m, j, i);
+
+				label = tableName + "_" + tr("peak") + QString::number(i+1);
+				c = new QwtPlotCurve(label);
+				c->setPen(QPen(Graph::color(d_peaks_color), 1)); 
+				c->setData(X, Y, d_result_points);	
+				d_graph->insertCurve(c, tableName+"_1(X),"+label+"(Y)");
+			}
+		}
 	}
+	d_graph->replot();
 
 	delete[] par;
 	delete[] X;
@@ -1280,31 +1305,26 @@ void MultiPeakFitter::generateFitCurve(double *par)
 	gsl_matrix_free(m);
 }
 
-QString MultiPeakFitter::logFitInfo(double *par, int iterations, int status, int prec, const QString& plotName)
+QString MultiPeakFit::logFitInfo(double *par, int iterations, int status, int prec, const QString& plotName)
 {
-	QString info = Fitter::logFitInfo(par, iterations, status, prec, plotName);
+	QString info = Fit::logFitInfo(par, iterations, status, prec, plotName);
 	if (d_peaks == 1)
 		return info;
 
-	info += tr("Peak")+"\t";
-	if (d_profile == Lorentz)
-		info += tr("Area")+"\t";
-
-	info += tr("Center")+"\t"+tr("Width")+"\t"+tr("Height")+"\n";
+	info += tr("Peak") + "\t" + tr("Area") + "\t";
+	info += tr("Center") + "\t" + tr("Width") + "\t" + tr("Height") + "\n";
 	info += "---------------------------------------------------------------------------------------\n";
 	for (int j=0; j<d_peaks; j++)
 	{
 		info += QString::number(j+1)+"\t";
-		if (d_profile == Lorentz)
-			info += QString::number(par[3*j],'g', prec)+"\t";
-
+		info += QString::number(par[3*j],'g', prec)+"\t";
 		info += QString::number(par[3*j+1],'g', prec)+"\t";
 		info += QString::number(par[3*j+2],'g', prec)+"\t";
 
 		if (d_profile == Lorentz)
-			info += QString::number(par[3*j]/par[3*j+2]/M_PI_2,'g', prec)+"\n";
+			info += QString::number(M_2_PI*par[3*j]/par[3*j+2],'g', prec)+"\n";
 		else
-			info += QString::number(par[3*j],'g', prec)+"\n";
+			info += QString::number(sqrt(M_2_PI)*par[3*j]/par[3*j+2],'g', prec)+"\n";
 	}
 	info += "---------------------------------------------------------------------------------------\n";
 	return info;
@@ -1312,13 +1332,42 @@ QString MultiPeakFitter::logFitInfo(double *par, int iterations, int status, int
 
 /*****************************************************************************
  *
- * Class PolynomialFitter
+ * Class LorentzFit
  *
  *****************************************************************************/
 
-	PolynomialFitter::PolynomialFitter(ApplicationWindow *parent, Graph *g, int order, bool legend)
-: Fitter(parent, g), d_order(order), show_legend(legend)
+	LorentzFit::LorentzFit(ApplicationWindow *parent, Graph *g)
+: MultiPeakFit(parent, g, MultiPeakFit::Lorentz, 1)
 {
+	setName("Lorentz");
+	d_fit_type = tr("Lorentz");
+	d_param_explain << tr("(area)") << tr("(center)") << tr("(width)") << tr("(offset)");
+}
+
+/*****************************************************************************
+ *
+ * Class GaussFit
+ *
+ *****************************************************************************/
+
+	GaussFit::GaussFit(ApplicationWindow *parent, Graph *g)
+: MultiPeakFit(parent, g, MultiPeakFit::Gauss, 1)
+{
+	setName("Gauss");
+	d_fit_type = tr("Gauss");
+	d_param_explain << tr("(area)") << tr("(center)") << tr("(width)") << tr("(offset)");
+}
+
+/*****************************************************************************
+ *
+ * Class PolynomialFit
+ *
+ *****************************************************************************/
+
+	PolynomialFit::PolynomialFit(ApplicationWindow *parent, Graph *g, int order, bool legend)
+: Fit(parent, g), d_order(order), show_legend(legend)
+{
+	setName(tr("Poly"));
 	is_non_linear = false;
 	d_fit_type = tr("Polynomial");
 	d_p = order + 1;
@@ -1326,11 +1375,11 @@ QString MultiPeakFitter::logFitInfo(double *par, int iterations, int status, int
 	covar = gsl_matrix_alloc (d_p, d_p);
 	d_results = new double[d_p];
 
-	d_formula = "y = " + generateFormula(order);	
+	d_formula = generateFormula(order);	
 	d_param_names = generateParameterList(order);
 }
 
-QString PolynomialFitter::generateFormula(int order)
+QString PolynomialFit::generateFormula(int order)
 {
 	QString formula;
 	for (int i = 0; i < order+1; i++)
@@ -1347,7 +1396,7 @@ QString PolynomialFitter::generateFormula(int order)
 	return formula;
 }
 
-QStringList PolynomialFitter::generateParameterList(int order)
+QStringList PolynomialFit::generateParameterList(int order)
 {
 	QStringList lst;
 	for (int i = 0; i < order+1; i++)
@@ -1355,11 +1404,8 @@ QStringList PolynomialFitter::generateParameterList(int order)
 	return lst;
 }
 
-void PolynomialFitter::generateFitCurve(double *par)
+void PolynomialFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
-
 	if (gen_x_data)
 	{
 		double X0 = d_x[0];
@@ -1386,12 +1432,9 @@ void PolynomialFitter::generateFitCurve(double *par)
 			Y[i] = yi;
 		}
 	}
-	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, 
-			((ApplicationWindow *)parent())->generateUnusedName(tr("Fit")),
-			d_fit_type + tr(" fit of ") +  d_curve->title().text());
 }
 
-void PolynomialFitter::fit()
+void PolynomialFit::fit()
 {
 	gsl_matrix *X = gsl_matrix_alloc (d_n, d_p);
 	gsl_vector *c = gsl_vector_alloc (d_p);
@@ -1429,7 +1472,7 @@ void PolynomialFitter::fit()
 	generateFitCurve(d_results);
 }
 
-QString PolynomialFitter::legendFitInfo(int prec)
+QString PolynomialFit::legendFitInfo(int prec)
 {		
 	QString legend = "Y=" + QString::number(d_results[0], 'g', prec);		
 	for (int j = 1; j < d_p; j++)
@@ -1452,24 +1495,25 @@ QString PolynomialFitter::legendFitInfo(int prec)
 
 /*****************************************************************************
  *
- * Class LinearFitter
+ * Class LinearFit
  *
  *****************************************************************************/
 
-	LinearFitter::LinearFitter(ApplicationWindow *parent, Graph *g)
-: Fitter(parent, g)
+	LinearFit::LinearFit(ApplicationWindow *parent, Graph *g)
+: Fit(parent, g)
 {
 	d_p = 2;
 	covar = gsl_matrix_alloc (d_p, d_p);
 	d_results = new double[d_p];
 
 	is_non_linear = false;
-	d_formula = "y = A*x + B";
+	d_formula = "A*x + B";
 	d_param_names << "B" << "A";
 	d_fit_type = tr("Linear Regression");
+	setName(tr("Linear"));
 }
 
-void LinearFitter::fit()
+void LinearFit::fit()
 {
 	gsl_vector *c = gsl_vector_alloc (d_p);
 
@@ -1498,11 +1542,8 @@ void LinearFitter::fit()
 	generateFitCurve(d_results);
 }
 
-void LinearFitter::generateFitCurve(double *par)
+void LinearFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-	double *X = new double[d_result_points]; 
-	double *Y = new double[d_result_points]; 
-
 	if (gen_x_data)
 	{
 		double X0 = d_x[0];
@@ -1521,8 +1562,5 @@ void LinearFitter::generateFitCurve(double *par)
 			Y[i] = par[0]+par[1]*X[i];
 		}
 	}
-	d_graph->addResultCurve(d_result_points, X, Y, d_curveColorIndex, 
-			((ApplicationWindow *)parent())->generateUnusedName(tr("LinearFit")),
-			d_fit_type + tr(" of ") +  d_curve->title().text());
 }
 

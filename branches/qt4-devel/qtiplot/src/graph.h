@@ -63,7 +63,7 @@ class TitlePicker;
 class ScalePicker;
 class CanvasPicker;
 class Plot;
-class MultiPeakFitter;
+class MultiPeakFit;
 class ApplicationWindow;
 
 //! Graph widget
@@ -507,7 +507,8 @@ public slots:
 	 QwtPlotCurve* getFitLimits(const QString& name, double from, double to,
 			 int params, int &start, int &end);
 
-	 void setFitID(int id);
+	//! Set the number of fit curves
+	void setFitID(int id){fitID=id;};
 
 	 void addResultCurve(int n, double *x, double *y, int colorIndex,const QString& tableName, const QString& legend);
 
@@ -528,9 +529,10 @@ public slots:
 
 	 //user defined functions
 	 void modifyFunctionCurve(int curve, int type, const QStringList &formulas, const QString &var,QList<double> &ranges, int points);
-	 void addFunctionCurve(int type, const QStringList &formulas, const QString& var,QList<double> &ranges, int points);	 
+	 void addFunctionCurve(int type, const QStringList &formulas, const QString& var,
+		 QList<double> &ranges, int points, const QString& title = QString::null);	 
 	 //when reading from file
-	 void insertFunctionCurve(const QString& formula, double from, double to, int points);
+	 void insertFunctionCurve(const QString& formula, double from, double to, int points, int fileVersion);
 
 	 void createWorksheet(const QString& name);
 	 void activateGraph();
@@ -593,7 +595,7 @@ public slots:
 	 void showAxisDialog();
 	 void showScaleDialog();
 
-	 //! Initialize a multi peak fitting operations and creates a new MultiPeakFitter object
+	 //! Initialize a multi peak fitting operations and creates a new MultiPeakFit object
 	 void multiPeakFit(ApplicationWindow *app, int profile, int peaks);
 	 void selectPeak(const QPoint &pos);
 	 bool selectPeaksOn();
@@ -607,7 +609,7 @@ signals:
 	 void drawTextOff();
 	 void drawLineEnded(bool);
 	 void cursorInfo(const QString&);
-	 void showPlotDialog(long);
+	 void showPlotDialog(int);
 	 void showPieDialog();
 	 void createTable(const QString&,int,int,const QString&);
 	 void createHiddenTable(const QString&,int,int,const QString&);
@@ -627,6 +629,7 @@ signals:
 	 void modifiedPlotAssociation();
 
 	 void showContextMenu();
+	 void showCurveContextMenu(int);
 	 void showMarkerPopupMenu();
 
 	 void showAxisDialog(int);
@@ -673,6 +676,10 @@ private:
 	 Qt::PenStyle auxMrkStyle;
 	 QString auxMrkFileName, auxMrkText;
 
+	  
+	//! The number of FunctionCurves inserted in the plot
+	int d_functions;
+
 	 int n_curves, selectedCurve, selectedPoint,startPoint,endPoint, selectedCursor, pieRay;
 	 int selectedCol,xCol,widthLine,fitID,linesOnPlot, defaultMarkerFrame;
 	 QColor defaultTextMarkerColor, defaultTextMarkerBackground;
@@ -692,7 +699,7 @@ private:
 	 bool drawAxesBackbone, autoscale;
 
 	 int selected_peaks;
-	 MultiPeakFitter *fitter;
+	 MultiPeakFit *fitter;
 
 	 QColor defaultArrowColor;
 	 int defaultArrowLineWidth, defaultArrowHeadLength, defaultArrowHeadAngle;
