@@ -402,7 +402,7 @@
 <!ENTITY fill-column-with-random-values-cmd "<command>Fill Column With -> Random Numbers</command>"> 
 <!ENTITY fill-column-with-random-values-lnk '<link linkend="fill-column-with-random-values-cmd"><command>Fill Column With -> Random Numbers</command> command</link>'> 
   <!ENTITY fill-column-with-random-values-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/randomNumbers.png"/></imageobject></inlinemediaobject>'> 
-<!ENTITY clear-cmd "<command>clear</command>"> 
+<!ENTITY clear-cmd "<command>Clear</command>"> 
 <!ENTITY clear-lnk '<link linkend="clear-cmd"><command>clear</command> command</link>'> 
   <!ENTITY clear-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/erase.png"/></imageobject></inlinemediaobject>'> 
 <!ENTITY add-column-cmd "<command>Add Column</command>"> 
@@ -656,7 +656,7 @@
   <!ENTITY bar-style-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/plot_bars.png"/></imageobject></inlinemediaobject>'> 
 <!ENTITY dots-cmd "<command>Dots</command>"> 
 <!ENTITY dots-lnk '<link linkend="dots-cmd"><command>Dots</command> command</link>'> 
-  <!ENTITY dots-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/dots.png"/></imageobject></inlinemediaobject>'> 
+  <!ENTITY dots-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/pointsMesh.png"/></imageobject></inlinemediaobject>'> 
 <!ENTITY cones-cmd "<command>Cones</command>"> 
 <!ENTITY cones-lnk '<link linkend="cones-cmd"><command>Cones</command> command</link>'> 
   <!ENTITY cones-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/cones.png"/></imageobject></inlinemediaobject>'> 
@@ -783,5 +783,5 @@
 &analysis-chapter;
 &scripting-chapter;
 &appendix-chapter;
-
+&faq-chapter;
 </book>

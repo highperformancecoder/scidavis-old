@@ -117,7 +117,7 @@
 <para>This command is used to fit a curve which has a linear shape.</para>
 
   <figure id="fig-fit-linear">
-    <title>The results of a &fit-bolzmann-cmd;.</title>
+    <title>The results of a &fit-linear-cmd;.</title>
     <mediaobject> 
       <imageobject>
         <imagedata  format="PNG" fileref="pics/fit-linear.png"/>
@@ -247,8 +247,8 @@
 <sect1 id="sec-fit-multipeak">
 <title>Multi-Peaks fitting</title>
 
-<para>This kind of fitting allows to fit you data points to a sum of N gaussian or lorentzian functions.</para>
-<para>The first step is to specify the numbers of peaks. Then you must define the position of each peak on the curve. This is done by clicking on the plot, then validate your choice for each peak with the <emphasis>ENTER</emphasis> key.</para>
+<para>This kind of fitting allows to fit your data points to a sum of N gaussian or lorentzian functions.</para>
+<para>The first step is to specify the number of peaks. Then you must define the position of each peak on the curve. This is done by clicking on the plot, then validate your choice for each peak with the <emphasis>ENTER</emphasis> key.</para>
   <figure id="fig-fit-multipeak">
     <title>The results of a &fit-multipeak-gaussian-cmd;.</title>
     <mediaobject> 
@@ -272,7 +272,7 @@
       </imageobject>
     </mediaobject>
   </informalfigure>
-<para>This signal has a power spectrum with high and low frequencies. We can analyze this by doing a FFT on the data curve, this lead to the following figure:</para>
+<para>This signal has a power spectrum with high and low frequencies. We can analyze this by doing a FFT on the data curve, this leads to the following figure:</para>
   <informalfigure id="fig-fft-filter-signal-power">
     <mediaobject> 
       <imageobject>

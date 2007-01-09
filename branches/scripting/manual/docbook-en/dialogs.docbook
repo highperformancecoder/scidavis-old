@@ -520,7 +520,7 @@
 <!-- ************************************************** -->
 <sect1 id="non-linear-curve-fit-dialog">
   <title>Non linear curve fit</title>
-  <para>This dialog is activated by selecting the command <link linkend="non-linear-curve-fit-cmd">&non-linear-curve-fit-cmd;</link> from the <link linkend="sec-analysis-menu-plot">Analysis Menu</link>. This command is active if a plot or a table window is selected.</para>
+  <para>This dialog is activated by selecting the command <link linkend="non-linear-curve-fit-cmd">&non-linear-curve-fit-cmd;</link> from the <link linkend="sec-analysis-menu-plot">Analysis Menu</link>. This command is active if a plot or a table window is selected. In the latter case, this command first creates a new plot window using the list of selected columns in the table.</para>
   <para>This dialog is used to fit discrete data points with a mathematical function. The fitting is done by minimizing the least square difference between the data points and the Y values of the function.</para>
   <sidebar>
     <title>Note:</title>

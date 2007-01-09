@@ -991,7 +991,7 @@ The active items in the menus depend on the active window in the project. If the
 
 <sect1 id="sec-analysis-menu">
   <title>The Analysis Menu</title>
-  <para>The commands which are available in this menu are not the same is a table or a plot is selected.</para>
+  <para>The commands which are available in this menu are not the same if a table or a plot is selected.</para>
 <!-- ************************************************** -->
 <!--		beginning of menu Analysis		-->
 <!-- ************************************************** -->
@@ -1025,7 +1025,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="sort-column-cmd"> 
   <term>&sort-column-cmd;</term>
   <listitem>
-    <para>Sort the columns selected. If more than one column is selected, you can sort them: </para>
+    <para>Sorts the columns selected. If more than one column is selected, you can sort them: </para>
   <itemizedlist>
     <listitem>
       <para>separately: each column will be sorted in ascending or descending order</para>
@@ -1052,18 +1052,18 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="normalize-cmd"> 
   <term>&normalize-cmd;</term>
   <listitem>
-    <para>Normalize the columns selected, that is modify the data in order to obtain a range of 0 to 1. All columns selected are normalized separately. This command doesn't create new normalized columns but replace the values of the selected columns.</para>
+    <para>Normalizes the columns selected, that is modify the data in order to obtain a range of 0 to 1. All columns selected are normalized separately. This command doesn't create new normalized columns but replace the values of the selected columns.</para>
     <variablelist>
       <varlistentry id="normalize-column-cmd"> 
 	<term>&normalize-column-cmd;</term>
 	<listitem>
-	  <para>Normalize the selected column.</para>
+	  <para>Normalizes the selected column.</para>
 	</listitem>
       </varlistentry>
       <varlistentry id="normalize-table-cmd"> 
 	<term>&normalize-table-cmd;</term>
 	<listitem>
-	  <para>Normalize all the columns of the table, it is not a global normalization of all values of the table: each column is normalized separately.</para>
+	  <para>Normalizes all the columns of the table, it is not a global normalization of all values of the table: each column is normalized separately.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
@@ -1072,25 +1072,25 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="fft-cmd"> 
   <term>&fft-cmd;</term>
   <listitem>
-    <para>Compute a direct or inverse Fast Fourier Transform. The parameters used can be set with the <link linkend="fft-dialog">FFT dialog</link>. See the <link linkend="sec-fft">fft section</link> of the <link linkend="analysis">Analysis chapter</link> for more details.</para>
+    <para>Computes a direct or inverse Fast Fourier Transform. The parameters used can be set with the <link linkend="fft-dialog">FFT dialog</link>. See the <link linkend="sec-fft">fft section</link> of the <link linkend="analysis">Analysis chapter</link> for more details.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="correlate-cmd"> 
   <term>&correlate-cmd;</term>
   <listitem>
-    <para>Do a croos-correlation of the two columns which are selected. See the <link linkend="sec-correlate">correlate section</link> of the <link linkend="analysis">Analysis chapter</link> for more details.</para>
+    <para>Does a cross-correlation of the two columns which are selected. See the <link linkend="sec-correlate">correlate section</link> of the <link linkend="analysis">Analysis chapter</link> for more details.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="convolute-cmd"> 
   <term>&convolute-cmd;</term>
   <listitem>
-    <para>Do a convolution of the two columns which are selected. The first one being the response and the second the signal. See the <link linkend="sec-convolute">convolution section</link> of the <link linkend="analysis">Analysis chapter</link> for more details.</para>
+    <para>Does a convolution of the two columns which are selected. The first one being the response and the second the signal. See the <link linkend="sec-convolute">convolution section</link> of the <link linkend="analysis">Analysis chapter</link> for more details.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="deconvolute-cmd"> 
   <term>&deconvolute-cmd;</term>
   <listitem>
-    <para>Do a deconvolution of the two columns which are selected. The first one being the response and the second the signal. See the <link linkend="sec-deconvolute">deconvolution section</link> of the <link linkend="analysis">Analysis chapter</link> for more details.</para>
+    <para>Does a deconvolution of the two columns which are selected. The first one being the response and the second the signal. See the <link linkend="sec-deconvolute">deconvolution section</link> of the <link linkend="analysis">Analysis chapter</link> for more details.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="non-linear-curve-fit-cmd">
@@ -1114,7 +1114,7 @@ The active items in the menus depend on the active window in the project. If the
   <term>Analysis -> Differentiate</term>
   <listitem>
     <para>Creates a new plot displaying the resulting curve of the numerical differentiation. The computation of the derivative is done by centered finite diferences.</para>
-    <para>This command creates a new table which contain one column for X-values and one column for derivatives of Y-values. It creates also a new plot of the derivative.</para>
+    <para>This command creates a new table which contains one column for X-values and one column for derivatives of Y-values. It also creates a new plot of the derivative.</para>
   </listitem>
 </varlistentry>
 <!--************************************************************************** -->
@@ -1122,7 +1122,7 @@ The active items in the menus depend on the active window in the project. If the
   <term>Analysis -> Integrate...</term>
   <listitem>
     <para>Opens the <link linkend="integrate-dialog">Integration dialog</link>, allowing to choose the curve to integrate and the integration method.</para>
-    <para>This command can't be used to obtain a cumulative curve from a selected curve, it can only compute the integrate of the data between two limits. The result is given in the <link linkend="sec-intro-log-window">Log Panel</link>.</para>
+    <para>This command can't be used to obtain a cumulative curve from a selected curve, it can only compute the integral of the data between two limits. The result is given in the <link linkend="sec-intro-log-window">Log Panel</link>.</para>
   </listitem>
 </varlistentry>
 <!--************************************************************************** -->
@@ -1135,7 +1135,7 @@ The active items in the menus depend on the active window in the project. If the
       <varlistentry> 
 	<term>Savitski-Golay</term>
 	<listitem>
-	  <para>This command perform a smoothing of the selected curve with the Savitzky-Golay method. The formula used to smooth the curve defined by the points y<subscript>i</subscript>=f(x<subscript>i</subscript>) is:</para>
+	  <para>This command performs a smoothing of the selected curve with the Savitzky-Golay method. The formula used to smooth the curve defined by the points y<subscript>i</subscript>=f(x<subscript>i</subscript>) is:</para>
 	  <informalequation> 
 	    <mediaobject>
 	      <imageobject>
@@ -1143,7 +1143,7 @@ The active items in the menus depend on the active window in the project. If the
 	      </imageobject>
 	    </mediaobject>
 	  </informalequation>
-	  <para>The f<subscript>i</subscript> values are computed by fitting the data points to a polynome, they depends on the number of points used for the smoothing of the curve and the order of the polynome. Compared to the moving window average method, the advantage of this smoothing method is that the values of extrema are not truncated. The dialog allows to specify the curve which will be smoothed, the value of the order of the polynome, the number of data points used for the polynomial fit before and after each point and the color used to draw the smoothed curved. A new table will be created to store the data points x<subscript>i</subscript>, z<subscript>i</subscript>.</para>
+	  <para>The f<subscript>i</subscript> values are computed by fitting the data points to a polynome, they depend on the number of points used for the smoothing of the curve and the order of the polynome. Compared to the moving window average method, the advantage of this smoothing method is that the values of extrema are not truncated. The dialog allows to specify the curve which will be smoothed, the value of the order of the polynome, the number of data points used for the polynomial fit before and after each point and the color used to draw the smoothed curved. A new table will be created to store the data points x<subscript>i</subscript>, z<subscript>i</subscript>.</para>
 	  <figure id="fig-smooth-1">
 	    <title>The &moving-window-cmd; dialog.</title>
 	    <mediaobject> 
@@ -1158,7 +1158,7 @@ The active items in the menus depend on the active window in the project. If the
        <varlistentry> 
 	<term>Moving Window Average...</term>
 	<listitem>
-	  <para>This command perform a smoothing of the selected curve with the moving window average method. The formula used to smooth the curve defined by the points y<subscript>i</subscript>=f(x<subscript>i</subscript>) is:</para>
+	  <para>This command performs a smoothing of the selected curve with the moving window average method. The formula used to smooth the curve defined by the points y<subscript>i</subscript>=f(x<subscript>i</subscript>) is:</para>
 	  <informalequation> 
 	    <mediaobject>
 	      <imageobject>
@@ -1166,7 +1166,7 @@ The active items in the menus depend on the active window in the project. If the
 	      </imageobject>
 	    </mediaobject>
 	  </informalequation>
-          <para>The greater is <emphasis>n</emphasis>, the smoother the resulting curve z<subscript>i</subscript>=f(x<subscript>i</subscript>) is. The dialog allows to specify the curve which will be smoothed, the value of <emphasis>n</emphasis> and the color used to draw the smoothed curved. A new table will be created to store the data points x<subscript>i</subscript>, z<subscript>i</subscript>.</para>
+          <para>The greater the number of points <emphasis>n</emphasis>, the smoother the resulting curve z<subscript>i</subscript>=f(x<subscript>i</subscript>) is. The dialog allows to specify the curve which will be smoothed, the value of <emphasis>n</emphasis> and the color used to draw the smoothed curve. A new table will be created to store the data points x<subscript>i</subscript>, z<subscript>i</subscript>.</para>
 	  <figure id="fig-smooth-2">
 	    <title>The &moving-window-cmd; dialog.</title>
 	    <mediaobject> 
@@ -1200,7 +1200,7 @@ The active items in the menus depend on the active window in the project. If the
 	      </imageobject>
 	    </mediaobject>
 	  </figure>
-	  <para>This command creates a new table with the filtered datas, and a new curve will be added on the current plot.</para>
+	  <para>This command creates a new table with the filtered data, and a new curve will be added on the current plot.</para>
 	</listitem>
       </varlistentry>
 <!--************************************************************************** -->
@@ -1216,7 +1216,7 @@ The active items in the menus depend on the active window in the project. If the
 	      </imageobject>
 	    </mediaobject>
 	  </figure>
-	  <para>This command creates a new table with the filtered datas, and a new curve will be added on the current plot.</para>
+	  <para>This command creates a new table with the filtered data, and a new curve will be added on the current plot.</para>
 	</listitem>
       </varlistentry>
 <!--************************************************************************** -->
@@ -1232,7 +1232,7 @@ The active items in the menus depend on the active window in the project. If the
 	      </imageobject>
 	    </mediaobject>
 	  </figure>
-	  <para>This command creates a new table with the filtered datas, and a new curve will be added on the current plot.</para>
+	  <para>This command creates a new table with the filtered data, and a new curve will be added on the current plot.</para>
 	</listitem>
       </varlistentry>
 <!--************************************************************************** -->
@@ -1248,7 +1248,7 @@ The active items in the menus depend on the active window in the project. If the
 	      </imageobject>
 	    </mediaobject>
 	  </figure>
-	  <para>This command creates a new table with the filtered datas, and a new curve will be added on the current plot.</para>
+	  <para>This command creates a new table with the filtered data, and a new curve will be added on the current plot.</para>
 	</listitem>
       </varlistentry>
 <!--************************************************************************** -->
@@ -1343,13 +1343,13 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry> 
   <term>Analysis -> &fit-multipeak-gaussian-cmd;</term>
   <listitem>
-    <para>Performs a fit to a <link linkend="sec-fit-multipeak">sum of N gaussian function</link> of the selected curve.</para>
+    <para>Performs a fit to a <link linkend="sec-fit-multipeak">sum of N gaussian functions</link> of the selected curve.</para>
   </listitem>
 </varlistentry>
 <varlistentry> 
   <term>Analysis -> &fit-multipeak-lorentzian-cmd;</term>
   <listitem>
-    <para>Performs a fit to a <link linkend="sec-fit-multipeak">sum of N lorentz function</link> of the selected curve.</para>
+    <para>Performs a fit to a <link linkend="sec-fit-multipeak">sum of N lorentz functions</link> of the selected curve.</para>
   </listitem>
 </varlistentry>
 </variablelist>
@@ -1362,7 +1362,7 @@ The active items in the menus depend on the active window in the project. If the
 
 <sect1 id="sec-table-menu">
   <title>The Table Menu</title>
-  <para>This menu is only active when a table is selected</para>
+  <para>This menu is only active when a table is selected.</para>
 <!-- ************************************************** -->
 <!--		beginning of menu Table			-->
 <!-- ************************************************** -->
@@ -1370,12 +1370,12 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="set-column-as-cmd"> 
   <term>&set-column-as-cmd;</term>
   <listitem>
-    <para>These commands are used to define the kind of data which are stored in the different columns of a table.</para>
+    <para>These commands are used to define the kind of data which is stored in the different columns of a table.</para>
     <variablelist>
     <varlistentry id="set-column-as-x-cmd"> 
       <term>&set-column-as-x-cmd;</term>
       <listitem>
-        <para>Define the selected column as abscissae for the plots. You can define more than one column as X-values in a tables, they will be referenced as X1,X2, etc.</para>
+        <para>Define the selected column as abscissae for the plots. You can define more than one column as X-values in a tables, they will be referenced as X1, X2, etc.</para>
       </listitem>
     </varlistentry>
     <varlistentry id="set-column-as-y-cmd"> 
@@ -1393,13 +1393,13 @@ The active items in the menus depend on the active window in the project. If the
     <varlistentry id="set-column-as-x-error-cmd"> 
       <term>&set-column-as-x-error-cmd;</term>
       <listitem>
-        <para>Define the selected column for use as errors bar width for abscissae.</para>
+        <para>Define the selected column for use as error bars width for abscissae.</para>
       </listitem>
     </varlistentry>
     <varlistentry id="set-column-as-y-error-cmd"> 
       <term>&set-column-as-y-error-cmd;</term>
       <listitem>
-        <para>Define the selected column for use as errors bar height for Y-values.</para>
+        <para>Define the selected column for use as error bars for Y-values.</para>
       </listitem>
     </varlistentry>
     <varlistentry id="set-column-as-none-cmd"> 
@@ -1426,7 +1426,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="recalculate-cmd"> 
   <term>&recalculate-cmd;</term>
   <listitem>
-    <para>When you fill a column (named for example 'C1') with the results of a formula (by using the &set-column-values-lnk; command), the values of the column are calculated only once when you define the formula. If your formula depends on values of another column (name for example 'C2'), the values of 'C1' are not updated if you modify the values in 'C2'. This command is used to recalculate the values of the selected column.</para>
+    <para>When you fill a column (named for example 'C1') with the results of a formula (by using the &set-column-values-lnk;), the values of the column are calculated only once when you define the formula. If your formula depends on values of another column (name for example 'C2'), the values of 'C1' are not updated if you modify the values in 'C2'. This command is used to recalculate the values of the selected column.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="fill-column-with-cmd"> 
@@ -1452,13 +1452,13 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="clear-cmd"> 
   <term>&clear-cmd;</term>
   <listitem>
-    <para>Remove all the values of the selected column</para>
+    <para>Removes all the values of the selected column</para>
   </listitem>
 </varlistentry>
 <varlistentry id="add-column-cmd"> 
   <term>&add-column-cmd;</term>
   <listitem>
-    <para>Add a new column in the table. Whatever the selected column, the new one will be inserted at the right of the table after the left column.</para>
+    <para>Adds a new column in the table. Whatever the selected column, the new one will be inserted at the right of the table after the left column.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="column-cmd"> 
@@ -1476,7 +1476,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="go-to-row-cmd"> 
   <term>&go-to-row-cmd;</term>
   <listitem>
-    <para>Define the active line in the selected table.</para>
+    <para>Defines the active line in the selected table.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="convert-to-matrix-cmd"> 
@@ -1493,7 +1493,7 @@ The active items in the menus depend on the active window in the project. If the
 
 <sect1 id="sec-matrix-menu">
   <title>The Matrix Menu</title>
-  <para>This menu is only active when a matric is selected.</para>
+  <para>This menu is only active when a matrix is selected.</para>
 
 <!-- ************************************************** -->
 <!--		beginning of menu Matrix		-->
@@ -1502,19 +1502,19 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="set-properties-cmd"> 
   <term>&set-properties-cmd;</term>
   <listitem>
-    <para>This command open a <link linkend="set-properties-dialog">dialog window</link> which is used to specify some view parameters of the matrix (cell width, format of numbers).</para>
+    <para>This command opens a <link linkend="set-properties-dialog">dialog window</link> which is used to specify some view parameters of the matrix (cell width, format of numbers).</para>
   </listitem>
 </varlistentry>
 <varlistentry id="set-dimensions-cmd"> 
   <term>&set-dimensions-cmd;</term>
   <listitem>
-    <para>This command open a <link linkend="set-dimensions-dialog">dialog window</link> which is used to specify the size of a matrix. It can also be used to specify the X and Y ranges which will be used as axis ranges for a 3D-plot of the matrix data.</para>
+    <para>This command opens a <link linkend="set-dimensions-dialog">dialog window</link> which is used to specify the size of a matrix. It can also be used to specify the X and Y ranges which will be used as axis ranges for a 3D-plot of the matrix data.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="set-values-cmd"> 
   <term>&set-values-cmd;</term>
   <listitem>
-    <para>This command open a <link linkend="set-values-dialog">dialog window</link> which is used to fill in a matrix with the result of a function z=f(i,j) in which i and j stand for the row and column numbers.</para>
+    <para>This command opens a <link linkend="set-values-dialog">dialog window</link> which is used to fill in a matrix with the result of a function z=f(i,j) in which i and j stand for the row and column numbers.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="transpose-cmd"> 
@@ -1549,7 +1549,7 @@ The active items in the menus depend on the active window in the project. If the
 
 <sect1 id="sec-format-menu">
   <title>The Format Menu</title>
-  <para>This menu is only active when a plot is selected</para>
+  <para>This menu is only active when a plot is selected.</para>
 <!-- ************************************************** -->
 <!--		beginning of menu Format		-->
 <!-- ************************************************** -->
@@ -1557,7 +1557,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="format-plot-cmd"> 
   <term>&format-plot-cmd;</term>
   <listitem>
-    <para>In the case of a classical 2D plot, opens the <link linkend="plot-options-dialog">format plot dialog</link> with the general plot options tab selected. It allows to customize the lines styles and colors of plot frame, etc.</para>
+    <para>In the case of a classical 2D plot, opens the <link linkend="plot-options-dialog">format plot dialog</link> with the general plot options tab selected. It allows to customize the line styles and colors of plot frame, etc.</para>
     <para>In the case of a surface plot, this command opens the <link linkend="fig-surface-plot-options-5">surface plot options</link> with the general plot options tab selected. In this case the aspect ratio of the plot can also be modified.</para>
   </listitem>
 </varlistentry>
@@ -1571,14 +1571,14 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="format-scales-cmd"> 
   <term>&format-scales-cmd;</term>
   <listitem>
-    <para>Opens the <link linkend="fig-plot-options-1-dialog">format plot dialog</link> with the scales tab selected. It allows to customize the ranges of the differents axes. It must be remainded that any modification in the table or in the plotted curves will result in a reset of these scales to the default values.</para>
+    <para>Opens the <link linkend="fig-plot-options-1-dialog">format plot dialog</link> with the scales tab selected. It allows to customize the ranges of the differents axes. It must be reminded that any modification in the table or in the plotted curves will result in a reset of these scales to the default values.</para>
     <para>In the case of a surface plot, this command opens the <link linkend="fig-surface-plot-options-1">surface plot options</link> with the scales options tab selected.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="format-axes-cmd"> 
   <term>&format-axes-cmd;</term>
   <listitem>
-    <para>Opens the <link linkend="fig-plot-options-3-dialog">format plot dialog</link> with the axes tab selected. It allows to customize the setting for the different axes such as the size and color of axes and tips, the label of the axes, etc.</para>
+    <para>Opens the <link linkend="fig-plot-options-3-dialog">format plot dialog</link> with the axes tab selected. It allows to customize the settings for the different axes such as the size and color of axes and ticks, the label of the axes, etc.</para>
     <para>In the case of a surface plot, this command opens the <link linkend="fig-surface-plot-options-2">surface plot options</link> with the axis options tab selected.</para>
   </listitem>
 </varlistentry>
@@ -1592,7 +1592,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="format-title-cmd"> 
   <term>&format-title-cmd;</term>
   <listitem>
-    <para>Opens a <link linkend="text-options-dialog">text options dialog</link>, allowing you to modify the plot title and its properties (color, font, alignement).</para>
+    <para>Opens a <link linkend="text-options-dialog">text options dialog</link>, allowing you to modify the title of the plot and its properties (color, font, alignement).</para>
     <para>In the case of a surface plot, this command opens the <link linkend="fig-surface-plot-options-3">surface plot options</link> with the title options tab selected.</para>
   </listitem>
 </varlistentry>
@@ -1604,7 +1604,6 @@ The active items in the menus depend on the active window in the project. If the
 
 <sect1 id="sec-window-menu">
   <title>The Window Menu</title>
-  <para>This menu is only active when a plot is selected</para>
   <para>Additionaly to the items listed bellow, this menu will also display a list with the first ten windows created in the workspace. These windows can be made active or can be shown if they are hidden, by selecting their name from the list. If your project contains more then ten windows, you must use the Project explorer in order to perform these operations.</para>
 <!-- ************************************************** -->
 <!--		beginning of menu Window		-->
@@ -1641,7 +1640,7 @@ The active items in the menus depend on the active window in the project. If the
   </listitem>
 </varlistentry>
 <varlistentry id="duplicate-window-cmd"> 
-  <term>&duplicate-window-cmd;</term>
+  <term>Duplicate</term>
   <listitem>
     <para>Clonates the active window.</para>
   </listitem>
@@ -1673,21 +1672,21 @@ The active items in the menus depend on the active window in the project. If the
 <sect1 id="sec-plot3d">
 <title>Customization of 3D plots</title>
 
-<para>theses commands are not available through any menu nor by any keyboard shortcut. They can be accessed through the <link linkend="sec-plot3d-toolbar">3D toolbar</link>.</para>
+<para>Theses commands are not available through any menu nor by any keyboard shortcut. They can be accessed through the <link linkend="sec-plot3d-toolbar">3D toolbar</link>.</para>
 
 <variablelist>
 <varlistentry id="frame-cmd"> 
   <term>&frame-cmd;</term>
   <listitem>
     <para>This command can be accessed by a click on the &frame-icon;</para> 
-    <para>Draw only the three axis on the active 3D plot.</para>
+    <para>Draws only the three axis on the active 3D plot.</para>
  </listitem>
 </varlistentry>
 <varlistentry id="box-cmd"> 
   <term>&box-cmd;</term>
   <listitem>
     <para>This command can be accessed by a click on the &box-icon;</para> 
-    <para>Draw the three axis on the active 3D plot, and a box around it.</para>
+    <para>Draws the three axis on the active 3D plot, and a box around it.</para>
  </listitem>
 </varlistentry>
 <varlistentry id="no-axes-cmd"> 
@@ -1701,42 +1700,42 @@ The active items in the menus depend on the active window in the project. If the
   <term>&front-grid-cmd;</term>
   <listitem>
     <para>This command can be accessed by a click on the &front-grid-icon;</para> 
-    <para>Draw a grid on the front panel of the active 3D plot. The position of this grid is the plan defined by y=y<subscript>min</subscript>.</para>
+    <para>Draws a grid on the front panel of the active 3D plot. The position of this grid is the plan defined by y=y<subscript>min</subscript>.</para>
  </listitem>
 </varlistentry>
 <varlistentry id="back-grid-cmd"> 
   <term>&back-grid-cmd;</term>
   <listitem>
     <para>This command can be accessed by a click on the &back-grid-icon;</para> 
-    <para>Draw a grid on the back panel of the active 3D plot. The position of this grid is the plan defined by y=y<subscript>max</subscript>.</para>
+    <para>Draws a grid on the back panel of the active 3D plot. The position of this grid is the plan defined by y=y<subscript>max</subscript>.</para>
  </listitem>
 </varlistentry>
 <varlistentry id="left-grid-cmd"> 
   <term>&left-grid-cmd;</term>
   <listitem>
     <para>This command can be accessed by a click on the &left-grid-icon;</para> 
-    <para>Draw a grid on the left panel of the active 3D plot. The position of this grid is the plan defined by x=x<subscript>min</subscript>.</para>
+    <para>Draws a grid on the left panel of the active 3D plot. The position of this grid is the plan defined by x=x<subscript>min</subscript>.</para>
  </listitem>
 </varlistentry>
 <varlistentry id="right-grid-cmd"> 
   <term>&right-grid-cmd;</term>
   <listitem>
     <para>This command can be accessed by a click on the &right-grid-icon;</para> 
-    <para>Draw a grid on the right panel of the active 3D plot. The position of this grid is the plan defined by x=x<subscript>max</subscript>.</para>
+    <para>Draws a grid on the right panel of the active 3D plot. The position of this grid is the plan defined by x=x<subscript>max</subscript>.</para>
  </listitem>
 </varlistentry>
 <varlistentry id="top-grid-cmd"> 
   <term>&top-grid-cmd;</term>
   <listitem>
     <para>This command can be accessed by a click on the &top-grid-icon;</para> 
-    <para>Draw a grid on the top panel of the active 3D plot. The position of this grid is the plan defined by z=z<subscript>max</subscript>.</para>
+    <para>Draws a grid on the top panel of the active 3D plot. The position of this grid is the plan defined by z=z<subscript>max</subscript>.</para>
  </listitem>
 </varlistentry>
 <varlistentry id="floor-grid-cmd"> 
   <term>&floor-grid-cmd;</term>
   <listitem>
     <para>This command can be accessed by a click on the &floor-grid-icon;</para> 
-    <para>Draw a grid on the floor panel of the active 3D plot.  The position of this grid is the plan defined by z=z<subscript>min</subscript>.</para>
+    <para>Draws a grid on the floor panel of the active 3D plot.  The position of this grid is the plan defined by z=z<subscript>min</subscript>.</para>
  </listitem>
 </varlistentry>
 <varlistentry id="bar-style-cmd"> 
@@ -1757,7 +1756,7 @@ The active items in the menus depend on the active window in the project. If the
   <term>&cones-cmd;</term>
   <listitem>
     <para>This command can be accessed by a click on the &cones-icon;</para> 
-    <para>If the active 3D plot is a <link linkend="fig-3d-scatter">3D scatter</link>, this command is used to modify the style of the data points to cones. It it then possible to modify the drawing parameters of the cones by double clicking on the plotting area.</para>
+    <para>If the active 3D plot is a <link linkend="fig-3d-scatter">3D scatter</link>, this command is used to modify the style of the data points to cones. It is then possible to modify the drawing parameters of the cones by double clicking on the plotting area.</para>
  </listitem>
 </varlistentry>
 <varlistentry id="cross-hairs-cmd"> 

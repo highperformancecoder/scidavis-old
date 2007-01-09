@@ -10,12 +10,12 @@ MOC_DIR		= ../tmp/qtiplot
 OBJECTS_DIR	= ../tmp/qtiplot
 DESTDIR		= ./
 DEFINES		+= QT_PLUGIN
-#DEFINES		+= SCRIPTING_CONSOLE
-#DEFINES		+= SCRIPTING_DIALOG
+DEFINES		+= SCRIPTING_CONSOLE
+DEFINES		+= SCRIPTING_DIALOG
 
 SCRIPTING_LANGS = muParser
 # Python support is unstable; use at your own risk
-#unix:SCRIPTING_LANGS += Python
+unix:SCRIPTING_LANGS += Python
 
 TRANSLATIONS = translations/qtiplot_de.ts \
 			   translations/qtiplot_es.ts \
