@@ -9396,6 +9396,7 @@ void ApplicationWindow::custom3DActions(QWidget *w)
 	Graph3D* plot= (Graph3D*)w;
 	
 	actionAnimate->setOn(plot->isAnimated());
+	actionPerspective->setOn(!plot->isOrthogonal());
 
 	switch(plot->plotStyle())
 		{
@@ -9620,6 +9621,27 @@ void ApplicationWindow::initPlot3DToolBar()
 
 	plot3DTools->addSeparator();
 
+	actionPerspective = new QAction( this );
+    actionPerspective->setToggleAction( TRUE );
+    actionPerspective->setIconSet(QPixmap(perspective_xpm) );
+	actionPerspective->addTo( plot3DTools );
+	actionPerspective->setOn(!orthogonal3DPlots);
+	connect(actionPerspective, SIGNAL(toggled(bool)), this, SLOT(togglePerspective(bool)));
+	
+	actionResetRotation = new QAction( this );
+    actionResetRotation->setToggleAction( false );
+    actionResetRotation->setIconSet(QPixmap(reset_rotation_xpm));
+	actionResetRotation->addTo( plot3DTools );
+	connect(actionResetRotation, SIGNAL(activated()), this, SLOT(resetRotation()));
+
+	actionFitFrame = new QAction( this );
+    actionFitFrame->setToggleAction( false );
+    actionFitFrame->setIconSet(QPixmap(fit_frame_xpm));
+	actionFitFrame->addTo( plot3DTools );
+	connect(actionFitFrame, SIGNAL(activated()), this, SLOT(fitFrameToLayer()));
+
+	plot3DTools->addSeparator();
+
 	//plot style actions
 	plotstyle = new QActionGroup( this, "plotstyle" );
     plotstyle->setUsesDropDown( FALSE );
@@ -9656,7 +9678,6 @@ void ApplicationWindow::initPlot3DToolBar()
     barstyle->setIconSet( QPixmap(plot_bars_xpm) );
 
 	barstyle->addTo( plot3DTools );
-	plot3DTools->addSeparator();
 	pointstyle->addTo( plot3DTools );
 
 	conestyle->addTo( plot3DTools );
@@ -9689,6 +9710,7 @@ void ApplicationWindow::initPlot3DToolBar()
     floornone->addTo( plot3DTools );
 
 	plot3DTools->addSeparator();
+
 	actionAnimate = new QAction( this );
     actionAnimate->setToggleAction( true );
     actionAnimate->setIconSet(QPixmap(movie_xpm));
@@ -11957,6 +11979,21 @@ void ApplicationWindow::translateActionsStrings()
     actionAnimate->setMenuText( tr( "Animation" ) );
     actionAnimate->setToolTip( tr( "Animation" ) );
     actionAnimate->setStatusTip( tr( "Animation" ) );
+
+	actionPerspective->setText( tr( "Enable perspective" ) );
+    actionPerspective->setMenuText( tr( "Enable perspective" ) );
+    actionPerspective->setToolTip( tr( "Enable perspective" ) );
+    actionPerspective->setStatusTip( tr( "Enable perspective" ) );
+
+	actionResetRotation->setText( tr( "Reset rotation" ) );
+    actionResetRotation->setMenuText( tr( "Reset rotation" ) );
+    actionResetRotation->setToolTip( tr( "Reset rotation" ) );
+    actionResetRotation->setStatusTip( tr( "Reset rotation" ) );
+
+	actionFitFrame->setText( tr( "Fit frame to layer" ) );
+    actionFitFrame->setMenuText( tr( "Fit frame to layer" ) );
+    actionFitFrame->setToolTip( tr( "Fit frame to layer" ) );
+    actionFitFrame->setStatusTip( tr( "Fit frame to layer" ) );
 }
 
 Graph3D * ApplicationWindow::openMatrixPlot3D(const QString& caption, const QString& matrix_name,
@@ -13948,6 +13985,39 @@ void ApplicationWindow::toggle3DAnimation(bool on)
 {
 if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
 	((Graph3D*)ws->activeWindow())->animate(on);
+}
+
+/*!
+  Turns perspective mode on or off
+*/
+void ApplicationWindow::togglePerspective(bool on)
+{
+if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
+	{
+	((Graph3D*)ws->activeWindow())->setOrtho(!on);
+	}
+}
+
+/*!
+  Resets rotation of 3D plots to default values
+*/
+void ApplicationWindow::resetRotation()
+{
+if (ws->activeWindow() && ws->activeWindow()->isA("Graph3D"))
+	{
+	((Graph3D*)ws->activeWindow())->setRotation(30,0,15);
+	}
+}
+
+/*!
+  Finds best layout for the 3D plot
+*/
+void ApplicationWindow::fitFrameToLayer()
+{
+if (!ws->activeWindow() || !ws->activeWindow()->isA("Graph3D"))
+	return;
+
+((Graph3D *)ws->activeWindow())->findBestLayout(); 
 }
 
 ApplicationWindow::~ApplicationWindow()

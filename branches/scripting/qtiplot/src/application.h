@@ -600,6 +600,13 @@ public slots:
 	
 	//plot3D tools	
 	void toggle3DAnimation(bool on = true);
+	//! Turns perspective mode on or off
+	void togglePerspective(bool on = true);
+	//! Resets rotation of 3D plots to default values
+	void resetRotation();
+	//! Finds best layout for the 3D plot
+    void fitFrameToLayer();
+
 	void setFramed3DPlot();
 	void setBoxed3DPlot();
 	void removeAxes3DPlot();
@@ -910,7 +917,7 @@ public:
 	QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;
 	QAction *actionScriptingLang, *actionRestartScripting, *actionClearTable, *actionGoToRow;
 	QAction *actionNoteExecute, *actionNoteExecuteAll, *actionNoteEvaluate, *actionSaveNote;
-	QAction *actionShowScriptWindow, *actionAnimate;
+	QAction *actionShowScriptWindow, *actionAnimate, *actionPerspective, *actionFitFrame, *actionResetRotation;
 
 private:
 	//!Stores the pointers to the dragged items from the FolderListViews objects

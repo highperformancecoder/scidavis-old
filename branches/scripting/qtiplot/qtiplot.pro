@@ -1,40 +1,42 @@
 QMAKE_PROJECT_DEPTH = 0
 linux-g++-64: libsuff=64
 
-TARGET		= qtiplot
-TEMPLATE	= app
+TARGET		 = qtiplot
+TEMPLATE	 = app
 CONFIG		+= qt warn_on exceptions opengl
-CONFIG		+= release
-#CONFIG		+= debug
-MOC_DIR		= ../tmp/qtiplot
-OBJECTS_DIR	= ../tmp/qtiplot
-DESTDIR		= ./
+CONFIG		+= thread
+#CONFIG		+= release
+CONFIG		+= debug
+
+MOC_DIR		 = ../tmp/qtiplot
+OBJECTS_DIR	 = ../tmp/qtiplot
+DESTDIR		 = ./
 DEFINES		+= QT_PLUGIN
-DEFINES		+= SCRIPTING_CONSOLE
-DEFINES		+= SCRIPTING_DIALOG
+#DEFINES	+= SCRIPTING_CONSOLE
+#DEFINES	+= SCRIPTING_DIALOG
 
 SCRIPTING_LANGS = muParser
 # Python support is unstable; use at your own risk
 unix:SCRIPTING_LANGS += Python
 
-TRANSLATIONS = translations/qtiplot_de.ts \
-			   translations/qtiplot_es.ts \
-			   translations/qtiplot_fr.ts \
-			   translations/qtiplot_ru.ts \
-			   translations/qtiplot_sv.ts 
+############################################################################# 
+##################### 3rd PARTY HEADER FILES SECTION ########################
+#!!! Warning: You must modify these paths according to your computer settings
+#############################################################################
 
-system(lupdate -verbose qtiplot.pro)
-system(lrelease -verbose qtiplot.pro)
+INCLUDEPATH       += ../3rdparty/qwt/src
+INCLUDEPATH       += ../3rdparty/qwtplot3d/include
+INCLUDEPATH		  += ../3rdparty/liborigin
+unix:INCLUDEPATH  += ../3rdparty/gsl/include
+win32:INCLUDEPATH += ../3rdparty/WinGSL
+INCLUDEPATH       += ../3rdparty/zlib123/include
 
-INCLUDEPATH	+= ../3rdparty/qwt/include
-INCLUDEPATH	+= ../3rdparty/liborigin
+############################################################################# 
+##################### 3rd PARTY LIBRARIES SECTION ###########################
+#!!! Warning: You must modify these paths according to your computer settings
+############################################################################# 
 
-##################### Linux (Mac OS X) settings ##################### 
-
-unix:INCLUDEPATH  += ../3rdparty/qwtplot3d/include
-unix:INCLUDEPATH  += ../3rdparty/qwt/include
-unix:INCLUDEPATH  += ../3rdparty/liborigin
-unix:INCLUDEPATH  += ../3rdparty/gsl
+##################### Linux (Mac OS X) ###################################### 
 
 unix:LIBS         += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
 unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
@@ -51,24 +53,36 @@ unix:documentation.path = /usr/share/doc/qtiplot
 unix:documentation.files = doc/*
 unix:INSTALLS += documentation
 
-##################### Windows settings #####################
- 
-win32:DEFINES  += QT_DLL QT_THREAD_SUPPORT GSL_DLL
-
-win32:INCLUDEPATH += ../3rdparty/qwtplot3d/include
-win32:INCLUDEPATH += ../3rdparty/zlib123/include
-win32:INCLUDEPATH += ../3rdparty/WinGsl
-
+##################### Windows ###############################################
+win32:DEFINES     += QT_DLL QT_THREAD_SUPPORT GSL_DLL
 win32:LIBS        += ../3rdparty/qwtplot3d/lib/qwtplot3d.lib
-win32:LIBS        += ../3rdparty/qwt/lib/qwt.lib  
-win32:LIBS		  += ../3rdparty/zlib123/lib/zdll.lib
+win32:LIBS        += ../3rdparty/qwt/lib/qwt.lib 
+win32:LIBS        += ../3rdparty/WinGSL/Lib/WinGsl.lib
 win32:LIBS		  += ../3rdparty/liborigin/liborigin.lib
-win32:LIBS        += C:/WinGsl/Lib/WinGsl.lib
+win32:LIBS		  += ../3rdparty/zlib123/lib/zdll.lib
 
-win32:RC_FILE     = src/iPlot.rc
-
-###################### Project files #############################
+############################################################################# 
+###################### PROJECT FILES SECTION ################################
+############################################################################# 
  
+###################### ICONS ################################################
+
+win32:RC_FILE     = icons/qtiplot.rc
+mac:RC_FILE       = icons/qtiplot.icns
+
+###################### TRANSLATIONS #########################################
+
+TRANSLATIONS      = translations/qtiplot_de.ts \
+			        translations/qtiplot_es.ts \
+			        translations/qtiplot_fr.ts \
+			        translations/qtiplot_ru.ts \
+			        translations/qtiplot_sv.ts 
+
+system(lupdate -verbose qtiplot.pro)
+system(lrelease -verbose qtiplot.pro)
+
+###################### HEADERS ##############################################
+
 HEADERS  += src/application.h \
      src/graph.h \
      src/graph3D.h \
@@ -106,51 +120,53 @@ HEADERS  += src/application.h \
      src/layerDialog.h \
      src/intDialog.h \
      src/sortDialog.h\
-	 src/bars.h \
-	 src/cones.h \
-	 src/configDialog.h \
-	 src/BarCurve.h \
-	 src/BoxCurve.h \
-	 src/Histogram.h \
-	 src/VectorCurve.h \
+         src/bars.h \
+         src/cones.h \
+         src/configDialog.h \
+         src/BarCurve.h \
+         src/BoxCurve.h \
+         src/Histogram.h \
+         src/VectorCurve.h \
      src/scales.h \
-	 src/imageExportDialog.h \
-	 src/matrix.h \
-	 src/matrixDialog.h \
-	 src/matrixSizeDialog.h \
-	 src/matrixValuesDialog.h \
+         src/imageExportDialog.h \
+         src/matrix.h \
+         src/matrixDialog.h \
+         src/matrixSizeDialog.h \
+         src/matrixValuesDialog.h \
      src/analysisDialog.h \
-	 src/parser.h \
-	 src/colorBox.h \
-	 src/symbolBox.h \
-	 src/patternBox.h \
-	 src/importOPJ.h\
-	 src/symbolDialog.h \
-	 src/plot.h \
-	 src/colorButton.h \
-	 src/associationsDialog.h \
-	 src/renameWindowDialog.h \
-	 src/widget.h \
-	 src/interpolationDialog.h\
-	 src/fileDialogs.h\
-	 src/epsExportDialog.h\
-	 src/smoothCurveDialog.h\
-	 src/filterDialog.h\
-	 src/fftDialog.h\
-	 src/note.h\
-	 src/folder.h\
-	 src/findDialog.h\
-	 src/Scripting.h\
-	 src/scriptedit.h\
-	 src/FunctionCurve.h\
-	 src/Fitter.h\
-	 src/customEvents.h\
-	 src/ScriptingLangDialog.h\
-	 src/ScriptWindow.h\
-	 src/TableStatistics.h\
-	 src/Spectrogram.h\
-	 src/ColorMapEditor.h
-     
+         src/parser.h \
+         src/colorBox.h \
+         src/symbolBox.h \
+         src/patternBox.h \
+         src/importOPJ.h\
+         src/symbolDialog.h \
+         src/plot.h \
+         src/colorButton.h \
+         src/associationsDialog.h \
+         src/renameWindowDialog.h \
+         src/widget.h \
+         src/interpolationDialog.h\
+         src/fileDialogs.h\
+         src/epsExportDialog.h\
+         src/smoothCurveDialog.h\
+         src/filterDialog.h\
+         src/fftDialog.h\
+         src/note.h\
+         src/folder.h\
+         src/findDialog.h\
+         src/Scripting.h\
+         src/scriptedit.h\
+         src/FunctionCurve.h\
+         src/Fitter.h\
+         src/customEvents.h\
+         src/ScriptingLangDialog.h\
+         src/ScriptWindow.h\
+         src/TableStatistics.h\
+         src/Spectrogram.h\
+         src/ColorMapEditor.h
+ 
+###################### SOURCES  ##############################################  
+  
 SOURCES  += src/application.cpp \
      src/graph.cpp \
      src/analysis.cpp \
@@ -186,59 +202,64 @@ SOURCES  += src/application.cpp \
      src/layerDialog.cpp \
      src/intDialog.cpp \
      src/sortDialog.cpp\
-	 src/bars.cpp \
-	 src/cones.cpp \
+         src/bars.cpp \
+         src/cones.cpp \
      src/analysisDialog.cpp \
-	 src/configDialog.cpp \
-	 src/BarCurve.cpp \
-	 src/BoxCurve.cpp \
-	 src/Histogram.cpp \
-	 src/VectorCurve.cpp \
-	 src/imageExportDialog.cpp \
-	 src/matrix.cpp \
-	 src/matrixDialog.cpp \
-	 src/matrixSizeDialog.cpp \
-	 src/matrixValuesDialog.cpp \
-	 src/parser.cpp\
-	 src/colorBox.cpp \
-	 src/symbolBox.cpp \
-	 src/patternBox.cpp \
-	 src/importOPJ.cpp\
-	 src/main.cpp \
-	 src/symbolDialog.cpp \
-	 src/plot.cpp \
-	 src/colorButton.cpp \
-	 src/associationsDialog.cpp \
-	 src/renameWindowDialog.cpp \
-	 src/widget.cpp\
-	 src/interpolationDialog.cpp\
-	 src/epsExportDialog.cpp\
-	 src/nrutil.cpp\
+         src/configDialog.cpp \
+         src/BarCurve.cpp \
+         src/BoxCurve.cpp \
+         src/Histogram.cpp \
+         src/VectorCurve.cpp \
+         src/imageExportDialog.cpp \
+         src/matrix.cpp \
+         src/matrixDialog.cpp \
+         src/matrixSizeDialog.cpp \
+         src/matrixValuesDialog.cpp \
+         src/parser.cpp\
+         src/colorBox.cpp \
+         src/symbolBox.cpp \
+         src/patternBox.cpp \
+         src/importOPJ.cpp\
+         src/main.cpp \
+         src/symbolDialog.cpp \
+         src/plot.cpp \
+         src/colorButton.cpp \
+         src/associationsDialog.cpp \
+         src/renameWindowDialog.cpp \
+         src/widget.cpp\
+         src/interpolationDialog.cpp\
+         src/epsExportDialog.cpp\
+         src/nrutil.cpp\
      src/fit.cpp\
-	 src/smoothCurveDialog.cpp\
-	 src/filterDialog.cpp\
-	 src/fftDialog.cpp\
-	 src/note.cpp\
-	 src/folder.cpp\
-	 src/findDialog.cpp\
-	 src/scriptedit.cpp\
-	 src/fileDialogs.cpp\
+         src/smoothCurveDialog.cpp\
+         src/filterDialog.cpp\
+         src/fftDialog.cpp\
+         src/note.cpp\
+         src/folder.cpp\
+         src/findDialog.cpp\
+         src/scriptedit.cpp\
+         src/fileDialogs.cpp\
      src/scales.cpp\
-	 src/FunctionCurve.cpp\
-	 src/Fitter.cpp\
-	 src/Scripting.cpp\
-	 src/ScriptingLangDialog.cpp\
-	 src/ScriptWindow.cpp\
-	 src/TableStatistics.cpp\
-	 src/Spectrogram.cpp\
-	 src/ColorMapEditor.cpp
+         src/FunctionCurve.cpp\
+         src/Fitter.cpp\
+         src/Scripting.cpp\
+         src/ScriptingLangDialog.cpp\
+         src/ScriptWindow.cpp\
+         src/TableStatistics.cpp\
+         src/Spectrogram.cpp\
+         src/ColorMapEditor.cpp
 
-#Compression (zlib123)
-SOURCES+=../3rdparty/zlib123/minigzip.c
+############################################################### 
+##################### Compression (zlib123) ###################
+############################################################### 
 
-##################### Scripting Languages #####################
+SOURCES   +=../3rdparty/zlib123/minigzip.c
 
-# muParser v1.26
+############################################################### 
+##################### SCRIPTING LANGUAGES SECTION #############
+############################################################### 
+ 
+##################### Default: muParser v1.26 #################
 contains(SCRIPTING_LANGS, muParser) {
   DEFINES +=	SCRIPTING_MUPARSER
   HEADERS +=	src/muParserScripting.h \
@@ -263,18 +284,37 @@ contains(SCRIPTING_LANGS, muParser) {
 		../3rdparty/muParser/muParserError.cpp
 }
 
+##################### PYTHON + SIP + PyQT #####################
 contains(SCRIPTING_LANGS, Python) {
   DEFINES +=	SCRIPTING_PYTHON
   HEADERS +=	src/PythonScripting.h
   SOURCES +=	src/PythonScripting.cpp
-  INCLUDEPATH += $$system(python -c 'from distutils import sysconfig; print sysconfig.get_python_inc()')
-  LIBS +=	$$system(python -c 'from distutils import sysconfig; print "-lpython"+sysconfig.get_config_var("VERSION")')
-  LIBS +=	-lm
-  
-  # TODO: is there a way to do this in the Makefile?
-  unix:system(mkdir -p $${MOC_DIR})
-  unix:system(sip -I /usr/share/sip -t Qt_3_3_0 -t WS_X11 -c $${MOC_DIR} src/qti.sip)
 
+ unix {
+      INCLUDEPATH += $$system(python -c 'from distutils import sysconfig; print sysconfig.get_python_inc()')
+  	LIBS +=	$$system(python -c 'from distutils import sysconfig; print "-lpython"+sysconfig.get_config_var("VERSION")')
+  	LIBS +=	-lm
+      system(mkdir -p $${MOC_DIR})
+      unix:system(sip -I /usr/share/sip -t Qt_3_3_0 -t WS_X11 -c $${MOC_DIR} src/qti.sip)
+ 	}
+
+ macx {
+      INCLUDEPATH += /Library/Frameworks/Python.framework/Versions/2.5/include/python2.5/
+  	LIBS +=	-framework Python -lm
+      system(mkdir -p $${MOC_DIR})
+      system(sip -I/Library/Frameworks/Python.framework/Versions/2.5/share/sip -t Qt_3_3_0 -t WS_X11 -c $${MOC_DIR} src/qti.sip)
+ 	}
+
+  win32 {
+    #!!! Warning: on Windows only with QtiPlot 0.9 version and Qt4 
+    INCLUDEPATH += C:/Python24/include
+    #LIBS += C:/Python24/libs/libpython24.a
+    LIBS += C:\Windows\System32\python24.dll
+    system(md $${MOC_DIR})
+    system(C:\Python24\sip.exe -I C:\Python24\sip\PyQt4 -t Qt_4_2_1 -t WS_WIN -c $${MOC_DIR} src/qti.sip)
+    }
+
+##################### SIP generated files #####################
   HEADERS +=\
 	 ../tmp/qtiplot/sipqtiApplicationWindow.h\
 	 ../tmp/qtiplot/sipqtiGraph.h\
@@ -329,3 +369,4 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiFolder.cpp\
 	 ../tmp/qtiplot/sipqtiQPtrList.cpp
 }
+############################################################### 

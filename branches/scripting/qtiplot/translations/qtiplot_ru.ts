@@ -3,240 +3,240 @@
     <name>@default</name>
     <message>
         <source>QtiPlot - untitled</source>
-        <translation type="unfinished">QtiPlot - Без имени</translation>
+        <translation type="obsolete">QtiPlot - Без имени</translation>
     </message>
     <message>
         <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
+        <translation type="obsolete">QtiPlot - Ошибка</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
-        <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt;: Неправильная опция локализации или перевод отсутствует!</translation>
+        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;: Неправильная опция локализации или перевод отсутствует!</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Unknown command line option or the file doesn&apos;t exist!</source>
-        <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt;: Неизвестная опция командной строки или указанный файл не существует!</translation>
+        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;: Неизвестная опция командной строки или указанный файл не существует!</translation>
     </message>
     <message>
         <source>QtiPlot project</source>
-        <translation type="unfinished">QtiPlot проект</translation>
+        <translation type="obsolete">QtiPlot проект</translation>
     </message>
     <message>
         <source>Compressed QtiPlot project</source>
-        <translation type="unfinished">Сжатый QtiPlot проект</translation>
+        <translation type="obsolete">Сжатый QtiPlot проект</translation>
     </message>
     <message>
         <source>Origin project</source>
-        <translation type="unfinished">Проект Origin</translation>
+        <translation type="obsolete">Проект Origin</translation>
     </message>
     <message>
         <source>QtiPlot - Open Project</source>
-        <translation type="unfinished">QtiPlot - Открыть Проект</translation>
+        <translation type="obsolete">QtiPlot - Открыть Проект</translation>
     </message>
     <message>
         <source>QtiPlot - File openning error</source>
-        <translation type="unfinished">QtiPlot - ошибка при открытии файла</translation>
+        <translation type="obsolete">QtiPlot - ошибка при открытии файла</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; doesn&apos;t exist!</source>
-        <translation type="unfinished">Файл: &lt;b&gt;%1&lt;/b&gt; не существует!</translation>
+        <translation type="obsolete">Файл: &lt;b&gt;%1&lt;/b&gt; не существует!</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a QtiPlot or Origin project file!</source>
-        <translation type="unfinished">Файл: &lt;b&gt; %1 &lt;/b&gt; не является файлом проекта QtiPlot или Origin!</translation>
+        <translation type="obsolete">Файл: &lt;b&gt; %1 &lt;/b&gt; не является файлом проекта QtiPlot или Origin!</translation>
     </message>
     <message>
         <source>QtiPlot - File Backup Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка Резервированя Файла</translation>
+        <translation type="obsolete">QtiPlot - Ошибка Резервированя Файла</translation>
     </message>
     <message>
         <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you run the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation type="unfinished">Невозможно сделмть резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы игнорируете эту ситуацию, то вы рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
+        <translation type="obsolete">Невозможно сделмть резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы игнорируете эту ситуацию, то вы рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>QtiPlot - File Save Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка Записи в Файл</translation>
+        <translation type="obsolete">QtiPlot - Ошибка Записи в Файл</translation>
     </message>
     <message>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
-        <translation type="unfinished">Файл: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; открыт в режиме &quot;только чтение&quot;</translation>
+        <translation type="obsolete">Файл: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; открыт в режиме &quot;только чтение&quot;</translation>
     </message>
     <message>
         <source>Save Project As</source>
-        <translation type="unfinished">Сохранить Проект Как</translation>
+        <translation type="obsolete">Сохранить Проект Как</translation>
     </message>
     <message>
         <source>QtiPlot -- Overwrite File? </source>
-        <translation type="unfinished">QtiPlot - Перезаписать Файл?</translation>
+        <translation type="obsolete">QtiPlot - Перезаписать Файл?</translation>
     </message>
     <message>
         <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
 Do you want to overwrite it?</source>
-        <translation type="unfinished">Файл с именем: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;уже существует. Вы хотите перезаписать его?</translation>
+        <translation type="obsolete">Файл с именем: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;уже существует. Вы хотите перезаписать его?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Да</translation>
+        <translation type="obsolete">&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;Нет</translation>
+        <translation type="obsolete">&amp;Нет</translation>
     </message>
     <message>
         <source>&amp;Find...</source>
-        <translation type="unfinished">&amp;Найти...</translation>
+        <translation type="obsolete">&amp;Найти...</translation>
     </message>
     <message>
         <source>App&amp;end Project...</source>
-        <translation type="unfinished">&amp;Добавить Проект...</translation>
+        <translation type="obsolete">&amp;Добавить Проект...</translation>
     </message>
     <message>
         <source>Save &amp;As Project...</source>
-        <translation type="unfinished">Сохранить &amp;Как Проект...</translation>
+        <translation type="obsolete">Сохранить &amp;Как Проект...</translation>
     </message>
     <message>
         <source>Save Project &amp;As...</source>
-        <translation type="unfinished">Сохранить Проект &amp;Как...</translation>
+        <translation type="obsolete">Сохранить Проект &amp;Как...</translation>
     </message>
     <message>
         <source>&amp;Show All Windows</source>
-        <translation type="unfinished">&amp;Покозать Все Окна</translation>
+        <translation type="obsolete">&amp;Покозать Все Окна</translation>
     </message>
     <message>
         <source>&amp;Hide All Windows</source>
-        <translation type="unfinished">&amp;Скрыть Все Окна</translation>
+        <translation type="obsolete">&amp;Скрыть Все Окна</translation>
     </message>
     <message>
         <source>&amp;Delete Folder</source>
-        <translation type="unfinished">&amp;Удалить Папку</translation>
+        <translation type="obsolete">&amp;Удалить Папку</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation type="unfinished">&amp;Переименовать</translation>
+        <translation type="obsolete">&amp;Переименовать</translation>
     </message>
     <message>
         <source>New &amp;Window</source>
-        <translation type="unfinished">Новое &amp;Окно</translation>
+        <translation type="obsolete">Новое &amp;Окно</translation>
     </message>
     <message>
         <source>New F&amp;older</source>
-        <translation type="unfinished">Новая &amp;Папка</translation>
+        <translation type="obsolete">Новая &amp;Папка</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation type="unfinished">&amp;Никакой(ая)</translation>
+        <translation type="obsolete">&amp;Никакой(ая)</translation>
     </message>
     <message>
         <source>&amp;Windows in Active Folder</source>
-        <translation type="unfinished">&amp;Окна в Текущей Папке</translation>
+        <translation type="obsolete">&amp;Окна в Текущей Папке</translation>
     </message>
     <message>
         <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
-        <translation type="unfinished">Окна в &amp;Текущей и Вложенных Папках</translation>
+        <translation type="obsolete">Окна в &amp;Текущей и Вложенных Папках</translation>
     </message>
     <message>
         <source>&amp;View Windows</source>
-        <translation type="unfinished">&amp;Отображение Окон</translation>
+        <translation type="obsolete">&amp;Отображение Окон</translation>
     </message>
     <message>
         <source>&amp;Properties...</source>
-        <translation type="unfinished">&amp;Свойства...</translation>
+        <translation type="obsolete">&amp;Свойства...</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished">Скрытый</translation>
+        <translation type="obsolete">Скрытый</translation>
     </message>
     <message>
         <source>Please enter a valid name!</source>
-        <translation type="unfinished">Пожалуйста введите корректное имя!</translation>
+        <translation type="obsolete">Пожалуйста введите корректное имя!</translation>
     </message>
     <message>
         <source>Name already exists!</source>
-        <translation type="unfinished">Имя уже существует!</translation>
+        <translation type="obsolete">Имя уже существует!</translation>
     </message>
     <message>
         <source>Please choose another name!</source>
-        <translation type="unfinished">Пожалуйста выберите другое имя!</translation>
+        <translation type="obsolete">Пожалуйста выберите другое имя!</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation type="obsolete">Тип</translation>
     </message>
     <message>
         <source>Project</source>
-        <translation type="unfinished">Проект</translation>
+        <translation type="obsolete">Проект</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Путь</translation>
+        <translation type="obsolete">Путь</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation type="obsolete">Размер</translation>
     </message>
     <message>
         <source>bytes</source>
-        <translation type="unfinished">байт(ов)</translation>
+        <translation type="obsolete">байт(ов)</translation>
     </message>
     <message>
         <source>Contents</source>
-        <translation type="unfinished">Содержимое</translation>
+        <translation type="obsolete">Содержимое</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="unfinished">Окна</translation>
+        <translation type="obsolete">Окна</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation type="unfinished">Папки</translation>
+        <translation type="obsolete">Папки</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation type="unfinished">Создан</translation>
+        <translation type="obsolete">Создан</translation>
     </message>
     <message>
         <source>Modified</source>
-        <translation type="unfinished">Изменённый</translation>
+        <translation type="obsolete">Изменённый</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished">Свойства</translation>
+        <translation type="obsolete">Свойства</translation>
     </message>
     <message>
         <source>Folder</source>
-        <translation type="unfinished">Папка</translation>
+        <translation type="obsolete">Папка</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished">Новая Папка</translation>
+        <translation type="obsolete">Новая Папка</translation>
     </message>
     <message>
         <source>QtiPlot - Delete folder?</source>
-        <translation type="unfinished">QtiPlot - Удалить папку?</translation>
+        <translation type="obsolete">QtiPlot - Удалить папку?</translation>
     </message>
     <message>
         <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
-        <translation type="unfinished">Удадить папку &apos;%1&apos; и все окна содержащиеся в ней?</translation>
+        <translation type="obsolete">Удадить папку &apos;%1&apos; и все окна содержащиеся в ней?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Да</translation>
+        <translation type="obsolete">Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Нет</translation>
+        <translation type="obsolete">Нет</translation>
     </message>
     <message>
         <source>Matrix</source>
-        <translation type="unfinished">Матрица</translation>
+        <translation type="obsolete">Матрица</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation type="unfinished">Таблица</translation>
+        <translation type="obsolete">Таблица</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished">Заметка</translation>
+        <translation type="obsolete">Заметка</translation>
     </message>
     <message>
         <source>Plot</source>
@@ -248,43 +248,43 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Метка</translation>
+        <translation type="obsolete">Метка</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished">Статус</translation>
+        <translation type="obsolete">Статус</translation>
     </message>
     <message>
         <source>QtiPlot - No match found</source>
-        <translation type="unfinished">QtiPlot - Совпадения не обнаружены</translation>
+        <translation type="obsolete">QtiPlot - Совпадения не обнаружены</translation>
     </message>
     <message>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
-        <translation type="unfinished">Извините, совпадения для строки &apos;%1&apos; не обнаружены</translation>
+        <translation type="obsolete">Извините, совпадения для строки &apos;%1&apos; не обнаружены</translation>
     </message>
     <message>
         <source>Cannot move an object to itself!</source>
-        <translation type="unfinished">Нельзя переместить объект в себя!</translation>
+        <translation type="obsolete">Нельзя переместить объект в себя!</translation>
     </message>
     <message>
         <source>Cannot move a parent folder into a child folder!</source>
-        <translation type="unfinished">Нельзя переместить вложенную папку в родительскую!</translation>
+        <translation type="obsolete">Нельзя переместить вложенную папку в родительскую!</translation>
     </message>
     <message>
         <source>QtiPlot</source>
-        <translation type="unfinished">QtiPlot</translation>
+        <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
         <source>Skipped Moving Folder</source>
-        <translation type="unfinished">Пропущенная Перемещаемая Папка</translation>
+        <translation type="obsolete">Пропущенная Перемещаемая Папка</translation>
     </message>
     <message>
         <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
-        <translation type="unfinished">Папка назначения уже содержит папку с именем &apos;%1&apos;! Папка пропущена!</translation>
+        <translation type="obsolete">Папка назначения уже содержит папку с именем &apos;%1&apos;! Папка пропущена!</translation>
     </message>
     <message>
         <source>QtiPlot - HTTP Get Version File</source>
-        <translation type="unfinished">QtiPlot - HTTP Получить Версию Файла</translation>
+        <translation type="obsolete">QtiPlot - HTTP Получить Версию Файла</translation>
     </message>
     <message>
         <source>Cannot write file %1
@@ -294,152 +294,152 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Error while fetching version file with HTTP: %1.</source>
-        <translation type="unfinished">Ошибка при получении версии файла с помощью HTTP: %1.</translation>
+        <translation type="obsolete">Ошибка при получении версии файла с помощью HTTP: %1.</translation>
     </message>
     <message>
         <source>QtiPlot - Updates Available</source>
-        <translation type="unfinished">QtiPlot - Обновления Доступны</translation>
+        <translation type="obsolete">QtiPlot - Обновления Доступны</translation>
     </message>
     <message>
         <source>There is a newer version of QtiPlot (%1) available for download. Would you like to download it?</source>
-        <translation type="unfinished">Для скачивания доступна более свежая версия QtiPlot (%1). Вы хотите закачать её?</translation>
+        <translation type="obsolete">Для скачивания доступна более свежая версия QtiPlot (%1). Вы хотите закачать её?</translation>
     </message>
     <message>
         <source>QtiPlot - No Updates Available</source>
-        <translation type="unfinished">QtiPlot - Не Доступных Обновлений</translation>
+        <translation type="obsolete">QtiPlot - Не Доступных Обновлений</translation>
     </message>
     <message>
         <source>No updates available. Your current version %1 is the last version available!</source>
-        <translation type="unfinished">Нет доступных обновлений. Текущая версия %1 является последней из доступных!</translation>
+        <translation type="obsolete">Нет доступных обновлений. Текущая версия %1 является последней из доступных!</translation>
     </message>
     <message>
         <source>Please select two columns for this operation!</source>
-        <translation type="unfinished">Пожалуйста выберите две колонки для выполнения этой операции!</translation>
+        <translation type="obsolete">Пожалуйста выберите две колонки для выполнения этой операции!</translation>
     </message>
     <message>
         <source>Could not allocate memory, operation aborted!</source>
-        <translation type="unfinished">Не удалось выделить память, операция отменена!</translation>
+        <translation type="obsolete">Не удалось выделить память, операция отменена!</translation>
     </message>
     <message>
         <source>Error in GSL forward FFT operation!</source>
-        <translation type="unfinished">Ошибка в GSL операции прямое БПФ!</translation>
+        <translation type="obsolete">Ошибка в GSL операции прямое БПФ!</translation>
     </message>
     <message>
         <source>Please select a Y column to plot!</source>
-        <translation type="unfinished">Пожалуйста выберите колонку Y для отображения!</translation>
+        <translation type="obsolete">Пожалуйста выберите колонку Y для отображения!</translation>
     </message>
     <message>
         <source>Please set a default X column for this table, first!</source>
-        <translation type="unfinished">Пожалуйста установите сначала колонку X по умолчанию для данной таблицы!</translation>
+        <translation type="obsolete">Пожалуйста установите сначала колонку X по умолчанию для данной таблицы!</translation>
     </message>
     <message>
         <source>Please select a column to plot!</source>
-        <translation type="unfinished">Пожалуйста выберите колонку для отображения!</translation>
+        <translation type="obsolete">Пожалуйста выберите колонку для отображения!</translation>
     </message>
     <message>
         <source>Please select four columns for this operation!</source>
-        <translation type="unfinished">Пожалуйста выберите для данной операции четыре колонки!</translation>
+        <translation type="obsolete">Пожалуйста выберите для данной операции четыре колонки!</translation>
     </message>
     <message>
         <source>You need at least two columns for this operation!</source>
-        <translation type="unfinished">Для выполнения этой операции необходимо как минимум две колонки!</translation>
+        <translation type="obsolete">Для выполнения этой операции необходимо как минимум две колонки!</translation>
     </message>
     <message>
         <source>Please select a Z column for this operation!</source>
-        <translation type="unfinished">Пожалуйста выберите колонку Z для данной операции!</translation>
+        <translation type="obsolete">Пожалуйста выберите колонку Z для данной операции!</translation>
     </message>
     <message>
         <source>You need to define a X column first!</source>
-        <translation type="unfinished">Сначала необходимо задать колонку X!</translation>
+        <translation type="obsolete">Сначала необходимо задать колонку X!</translation>
     </message>
     <message>
         <source>You need to define a Y column first!</source>
-        <translation type="unfinished">Сначала необходимо задать колонку Y!</translation>
+        <translation type="obsolete">Сначала необходимо задать колонку Y!</translation>
     </message>
     <message>
         <source>Qtiplot - Reading file...</source>
-        <translation type="unfinished">Qtiplot - Чтение файла...</translation>
+        <translation type="obsolete">Qtiplot - Чтение файла...</translation>
     </message>
     <message>
         <source>QtiPlot - ASCII Export Error</source>
-        <translation type="unfinished">QtiPlot - ошибка при ASCII экспортировании</translation>
+        <translation type="obsolete">QtiPlot - ошибка при ASCII экспортировании</translation>
     </message>
     <message>
         <source>Rows will be deleted from the table!</source>
-        <translation type="unfinished">Строки будут удалены из таблицы!</translation>
+        <translation type="obsolete">Строки будут удалены из таблицы!</translation>
     </message>
     <message>
         <source>Do you really want to continue?</source>
-        <translation type="unfinished">Вы действительно хотите продолжить?</translation>
+        <translation type="obsolete">Вы действительно хотите продолжить?</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation type="obsolete">Отмена</translation>
     </message>
     <message>
         <source>Columns will be deleted from the table!</source>
-        <translation type="unfinished">Колонки будут удалены из данной таблицы!</translation>
+        <translation type="obsolete">Колонки будут удалены из данной таблицы!</translation>
     </message>
     <message>
         <source>Please select two columns for this operation:
  the first represents the signal and the second the response function!</source>
-        <translation type="unfinished">Пожалуйста выберите две колонки для данной операции: первая представляет сигнал, а вторая функцию-отклик!</translation>
+        <translation type="obsolete">Пожалуйста выберите две колонки для данной операции: первая представляет сигнал, а вторая функцию-отклик!</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
-        <translation type="unfinished">Объём данных отклика &apos;%1&apos; должен составлять менее половины объёма данных сигнала &apos;%2&apos;!</translation>
+        <translation type="obsolete">Объём данных отклика &apos;%1&apos; должен составлять менее половины объёма данных сигнала &apos;%2&apos;!</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
-        <translation type="unfinished">Набор данных отклика &apos;%1&apos; должен содержать нечётное число точек!</translation>
+        <translation type="obsolete">Набор данных отклика &apos;%1&apos; должен содержать нечётное число точек!</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished">Частота</translation>
+        <translation type="obsolete">Частота</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished">Время</translation>
+        <translation type="obsolete">Время</translation>
     </message>
     <message>
         <source>Real</source>
-        <translation type="unfinished">Вещественная часть</translation>
+        <translation type="obsolete">Вещественная часть</translation>
     </message>
     <message>
         <source>Imaginary</source>
-        <translation type="unfinished">Мнимая часть</translation>
+        <translation type="obsolete">Мнимая часть</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation type="unfinished">Амплитуда</translation>
+        <translation type="obsolete">Амплитуда</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Угол</translation>
+        <translation type="obsolete">Угол</translation>
     </message>
     <message>
         <source>QtiPlot - Warning</source>
-        <translation type="unfinished">QtiPlot - Предупреждение</translation>
+        <translation type="obsolete">QtiPlot - Предупреждение</translation>
     </message>
     <message>
         <source>Graph</source>
-        <translation type="unfinished">График</translation>
+        <translation type="obsolete">График</translation>
     </message>
     <message>
         <source>Graph 3D</source>
-        <translation type="unfinished">3D График</translation>
+        <translation type="obsolete">3D График</translation>
     </message>
     <message>
         <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
-        <translation type="unfinished">Все данные связанные с таблицей будет удалены. Вы уверены?</translation>
+        <translation type="obsolete">Все данные связанные с таблицей будет удалены. Вы уверены?</translation>
     </message>
     <message>
         <source>QtiPlot - Enter row number</source>
-        <translation type="unfinished">QtiPlot - Введите номер строки</translation>
+        <translation type="obsolete">QtiPlot - Введите номер строки</translation>
     </message>
     <message>
         <source>Row</source>
-        <translation type="unfinished">Строка</translation>
+        <translation type="obsolete">Строка</translation>
     </message>
 </context>
 <context>
@@ -1172,7 +1172,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="obsolete">Скрытый</translation>
+        <translation type="unfinished">Скрытый</translation>
     </message>
     <message>
         <source>Maximized</source>
@@ -2374,7 +2374,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Note</source>
-        <translation type="obsolete">Заметка</translation>
+        <translation type="unfinished">Заметка</translation>
     </message>
     <message>
         <source>Determinant of </source>
@@ -2430,15 +2430,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - File Backup Error</source>
-        <translation type="obsolete">QtiPlot - Ошибка Резервированя Файла</translation>
+        <translation type="unfinished">QtiPlot - Ошибка Резервированя Файла</translation>
     </message>
     <message>
         <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you run the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation type="obsolete">Невозможно создать резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы проигнорируете эту ситуацию, то вы рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
+        <translation type="unfinished">Невозможно создать резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы проигнорируете эту ситуацию, то вы рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
-        <translation type="obsolete">Файл: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; открыт в режиме &quot;только чтение&quot;</translation>
+        <translation type="unfinished">Файл: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; открыт в режиме &quot;только чтение&quot;</translation>
     </message>
     <message>
         <source>Save Project As</source>
@@ -2594,23 +2594,23 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Please support QtiPlot!</source>
-        <translation type="obsolete">Пожалуйста поддержите QtiPlot!</translation>
+        <translation type="unfinished">Пожалуйста поддержите QtiPlot!</translation>
     </message>
     <message>
         <source>Yes, I&apos;d love to!</source>
-        <translation type="obsolete">Да, с удовольствием!</translation>
+        <translation type="unfinished">Да, с удовольствием!</translation>
     </message>
     <message>
         <source>Ask me again later!</source>
-        <translation type="obsolete">Напомнить позже!</translation>
+        <translation type="unfinished">Напомнить позже!</translation>
     </message>
     <message>
         <source>No, stop bothering me!</source>
-        <translation type="obsolete">Нет, больше не беспокоить!</translation>
+        <translation type="unfinished">Нет, больше не беспокоить!</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
-        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;: Неправильная опция локализации или перевод отсутствует!</translation>
+        <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt;: Неправильная опция локализации или перевод отсутствует!</translation>
     </message>
     <message>
         <source>Help is not available on command line. In order to download the user manual for QtiPlot, please visit:&lt;br&gt;&lt;br&gt;&lt;font color = blue&gt; http://soft.proindependent.com/help.html&lt;/font&gt;</source>
@@ -2690,119 +2690,119 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Find...</source>
-        <translation type="obsolete">&amp;Найти...</translation>
+        <translation type="unfinished">&amp;Найти...</translation>
     </message>
     <message>
         <source>App&amp;end Project...</source>
-        <translation type="obsolete">&amp;Добавить Проект...</translation>
+        <translation type="unfinished">&amp;Добавить Проект...</translation>
     </message>
     <message>
         <source>Save &amp;As Project...</source>
-        <translation type="obsolete">Сохранить &amp;Как Проект...</translation>
+        <translation type="unfinished">Сохранить &amp;Как Проект...</translation>
     </message>
     <message>
         <source>Save Project &amp;As...</source>
-        <translation type="obsolete">Сохранить Проект &amp;Как...</translation>
+        <translation type="unfinished">Сохранить Проект &amp;Как...</translation>
     </message>
     <message>
         <source>&amp;Show All Windows</source>
-        <translation type="obsolete">&amp;Покозать Все Окна</translation>
+        <translation type="unfinished">&amp;Покозать Все Окна</translation>
     </message>
     <message>
         <source>&amp;Hide All Windows</source>
-        <translation type="obsolete">&amp;Скрыть Все Окна</translation>
+        <translation type="unfinished">&amp;Скрыть Все Окна</translation>
     </message>
     <message>
         <source>&amp;Delete Folder</source>
-        <translation type="obsolete">&amp;Удалить Папку</translation>
+        <translation type="unfinished">&amp;Удалить Папку</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation type="obsolete">&amp;Переименовать</translation>
+        <translation type="unfinished">&amp;Переименовать</translation>
     </message>
     <message>
         <source>&amp;Windows in Active Folder</source>
-        <translation type="obsolete">&amp;Окна в Текущей Папке</translation>
+        <translation type="unfinished">&amp;Окна в Текущей Папке</translation>
     </message>
     <message>
         <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
-        <translation type="obsolete">Окна в &amp;Текущей и Вложенных Папках</translation>
+        <translation type="unfinished">Окна в &amp;Текущей и Вложенных Папках</translation>
     </message>
     <message>
         <source>&amp;View Windows</source>
-        <translation type="obsolete">&amp;Отображение Окон</translation>
+        <translation type="unfinished">&amp;Отображение Окон</translation>
     </message>
     <message>
         <source>Project</source>
-        <translation type="obsolete">Проект</translation>
+        <translation type="unfinished">Проект</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="obsolete">Путь</translation>
+        <translation type="unfinished">Путь</translation>
     </message>
     <message>
         <source>bytes</source>
-        <translation type="obsolete">байт(ов)</translation>
+        <translation type="unfinished">байт(ов)</translation>
     </message>
     <message>
         <source>Contents</source>
-        <translation type="obsolete">Содержимое</translation>
+        <translation type="unfinished">Содержимое</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="obsolete">Окна</translation>
+        <translation type="unfinished">Окна</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation type="obsolete">Папки</translation>
+        <translation type="unfinished">Папки</translation>
     </message>
     <message>
         <source>Modified</source>
-        <translation type="obsolete">Изменённый</translation>
+        <translation type="unfinished">Изменённый</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="obsolete">Свойства</translation>
+        <translation type="unfinished">Свойства</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="obsolete">Новая Папка</translation>
+        <translation type="unfinished">Новая Папка</translation>
     </message>
     <message>
         <source>QtiPlot - Delete folder?</source>
-        <translation type="obsolete">QtiPlot - Удалить папку?</translation>
+        <translation type="unfinished">QtiPlot - Удалить папку?</translation>
     </message>
     <message>
         <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
-        <translation type="obsolete">Удадить папку &apos;%1&apos; и все окна содержащиеся в ней?</translation>
+        <translation type="unfinished">Удадить папку &apos;%1&apos; и все окна содержащиеся в ней?</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="obsolete">Статус</translation>
+        <translation type="unfinished">Статус</translation>
     </message>
     <message>
         <source>QtiPlot - No match found</source>
-        <translation type="obsolete">QtiPlot - Совпадения не обнаружены</translation>
+        <translation type="unfinished">QtiPlot - Совпадения не обнаружены</translation>
     </message>
     <message>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
-        <translation type="obsolete">Извините, совпадения для строки &apos;%1&apos; не обнаружены</translation>
+        <translation type="unfinished">Извините, совпадения для строки &apos;%1&apos; не обнаружены</translation>
     </message>
     <message>
         <source>Cannot move an object to itself!</source>
-        <translation type="obsolete">Нельзя переместить объект в себя!</translation>
+        <translation type="unfinished">Нельзя переместить объект в себя!</translation>
     </message>
     <message>
         <source>Cannot move a parent folder into a child folder!</source>
-        <translation type="obsolete">Нельзя переместить вложенную папку в родительскую!</translation>
+        <translation type="unfinished">Нельзя переместить вложенную папку в родительскую!</translation>
     </message>
     <message>
         <source>Skipped Moving Folder</source>
-        <translation type="obsolete">Пропущенная Перемещаемая Папка</translation>
+        <translation type="unfinished">Пропущенная Перемещаемая Папка</translation>
     </message>
     <message>
         <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
-        <translation type="obsolete">Папка назначения уже содержит папку с именем &apos;%1&apos;! Папка пропущена!</translation>
+        <translation type="unfinished">Папка назначения уже содержит папку с именем &apos;%1&apos;! Папка пропущена!</translation>
     </message>
     <message>
         <source>Scripting Console</source>
@@ -2974,27 +2974,27 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - HTTP Get Version File</source>
-        <translation type="obsolete">QtiPlot - HTTP Получить Версию Файла</translation>
+        <translation type="unfinished">QtiPlot - HTTP Получить Версию Файла</translation>
     </message>
     <message>
         <source>Error while fetching version file with HTTP: %1.</source>
-        <translation type="obsolete">Ошибка при получении версии файла с помощью HTTP: %1.</translation>
+        <translation type="unfinished">Ошибка при получении версии файла с помощью HTTP: %1.</translation>
     </message>
     <message>
         <source>QtiPlot - No Updates Available</source>
-        <translation type="obsolete">QtiPlot - Не Доступных Обновлений</translation>
+        <translation type="unfinished">QtiPlot - Не Доступных Обновлений</translation>
     </message>
     <message>
         <source>No updates available. Your current version %1 is the last version available!</source>
-        <translation type="obsolete">Нет доступных обновлений. Текущая версия %1 является последней из доступных!</translation>
+        <translation type="unfinished">Нет доступных обновлений. Текущая версия %1 является последней из доступных!</translation>
     </message>
     <message>
         <source>QtiPlot - Updates Available</source>
-        <translation type="obsolete">QtiPlot - Обновления Доступны</translation>
+        <translation type="unfinished">QtiPlot - Обновления Доступны</translation>
     </message>
     <message>
         <source>There is a newer version of QtiPlot (%1) available for download. Would you like to download it?</source>
-        <translation type="obsolete">Для скачивания доступна более свежая версия QtiPlot (%1). Вы хотите закачать её?</translation>
+        <translation type="unfinished">Для скачивания доступна более свежая версия QtiPlot (%1). Вы хотите закачать её?</translation>
     </message>
     <message>
         <source>Cannot write file %1
@@ -3157,19 +3157,19 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <source>Graph 3D</source>
-        <translation type="obsolete">3D График</translation>
+        <translation type="unfinished">3D График</translation>
     </message>
     <message>
         <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
-        <translation type="obsolete">Все данные связанные с таблицей будет удалены. Вы уверены?</translation>
+        <translation type="unfinished">Все данные связанные с таблицей будет удалены. Вы уверены?</translation>
     </message>
     <message>
         <source>QtiPlot - Enter row number</source>
-        <translation type="obsolete">QtiPlot - Введите номер строки</translation>
+        <translation type="unfinished">QtiPlot - Введите номер строки</translation>
     </message>
     <message>
         <source>Row</source>
-        <translation type="obsolete">Строка</translation>
+        <translation type="unfinished">Строка</translation>
     </message>
     <message>
         <source>&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot is open-source software and its development required hundreds of hours of work.&lt;br&gt;&lt;br&gt;If you like it, you&apos;re using it in your work and you would like to see it constantly improved,&lt;br&gt; please support its author by making a donation.&lt;br&gt;&lt;br&gt; Would you like to make a donation for QtiPlot now?&lt;/b&gt;&lt;/font&gt;</source>
@@ -3253,6 +3253,14 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <source>Alt+Q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Perspective</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot is open-source software and its development required hundreds of hours of work.&lt;br&gt;&lt;br&gt;<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   If you like it, you&apos;re using it in your work and you would like to see it <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   constantly improved,&lt;br&gt; please support its author by making a donation.&lt;br&gt;&lt;br&gt; <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>   Would you like to make a donation for QtiPlot now?&lt;/b&gt;&lt;/font&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4387,7 +4395,7 @@ Do you want to insert cells?</source>
     <message>
         <source>The text in the clipboard is larger than your current selection!<byte value="x9"/>        
 Do you want to insert cells?</source>
-        <translation type="obsolete">Текст в буфере обмена превосходит по объёму ваше текущее выделение!
+        <translation type="unfinished">Текст в буфере обмена превосходит по объёму ваше текущее выделение!
 Вы хотите добавить ячейки?</translation>
     </message>
 </context>
@@ -5004,108 +5012,113 @@ Do you want to insert cells?</source>
     </message>
     <message>
         <source>Please select two columns for this operation!</source>
-        <translation type="obsolete">Пожалуйста выберите две колонки для выполнения этой операции!</translation>
+        <translation type="unfinished">Пожалуйста выберите две колонки для выполнения этой операции!</translation>
     </message>
     <message>
         <source>Could not allocate memory, operation aborted!</source>
-        <translation type="obsolete">Не удалось выделить память, операция отменена!</translation>
+        <translation type="unfinished">Не удалось выделить память, операция отменена!</translation>
     </message>
     <message>
         <source>Error in GSL forward FFT operation!</source>
-        <translation type="obsolete">Ошибка в GSL операции прямое БПФ!</translation>
+        <translation type="unfinished">Ошибка в GSL операции прямое БПФ!</translation>
     </message>
     <message>
         <source>Please select a Y column to plot!</source>
-        <translation type="obsolete">Пожалуйста выберите колонку Y для отображения!</translation>
+        <translation type="unfinished">Пожалуйста выберите колонку Y для отображения!</translation>
     </message>
     <message>
         <source>Please set a default X column for this table, first!</source>
-        <translation type="obsolete">Пожалуйста установите сначала колонку X по умолчанию для данной таблицы!</translation>
+        <translation type="unfinished">Пожалуйста установите сначала колонку X по умолчанию для данной таблицы!</translation>
     </message>
     <message>
         <source>Please select a column to plot!</source>
-        <translation type="obsolete">Пожалуйста выберите колонку для отображения!</translation>
+        <translation type="unfinished">Пожалуйста выберите колонку для отображения!</translation>
     </message>
     <message>
         <source>Please select four columns for this operation!</source>
-        <translation type="obsolete">Пожалуйста выберите для данной операции четыре колонки!</translation>
+        <translation type="unfinished">Пожалуйста выберите для данной операции четыре колонки!</translation>
     </message>
     <message>
         <source>You need at least two columns for this operation!</source>
-        <translation type="obsolete">Для выполнения этой операции необходимо как минимум две колонки!</translation>
+        <translation type="unfinished">Для выполнения этой операции необходимо как минимум две колонки!</translation>
     </message>
     <message>
         <source>Please select a Z column for this operation!</source>
-        <translation type="obsolete">Пожалуйста выберите колонку Z для данной операции!</translation>
+        <translation type="unfinished">Пожалуйста выберите колонку Z для данной операции!</translation>
     </message>
     <message>
         <source>You need to define a X column first!</source>
-        <translation type="obsolete">Сначала необходимо задать колонку X!</translation>
+        <translation type="unfinished">Сначала необходимо задать колонку X!</translation>
     </message>
     <message>
         <source>You need to define a Y column first!</source>
-        <translation type="obsolete">Сначала необходимо задать колонку Y!</translation>
+        <translation type="unfinished">Сначала необходимо задать колонку Y!</translation>
     </message>
     <message>
         <source>QtiPlot - ASCII Export Error</source>
-        <translation type="obsolete">QtiPlot - ошибка при ASCII экспортировании</translation>
+        <translation type="unfinished">QtiPlot - ошибка при ASCII экспортировании</translation>
     </message>
     <message>
         <source>QtiPlot</source>
-        <translation type="obsolete">QtiPlot</translation>
+        <translation type="unfinished">QtiPlot</translation>
     </message>
     <message>
         <source>Columns will be deleted from the table!</source>
-        <translation type="obsolete">Колонки будут удалены из данной таблицы!</translation>
+        <translation type="unfinished">Колонки будут удалены из данной таблицы!</translation>
     </message>
     <message>
         <source>Do you really want to continue?</source>
-        <translation type="obsolete">Вы действительно хотите продолжить?</translation>
+        <translation type="unfinished">Вы действительно хотите продолжить?</translation>
     </message>
     <message>
         <source>Please select two columns for this operation:
  the first represents the signal and the second the response function!</source>
-        <translation type="obsolete">Пожалуйста выберите две колонки для данной операции: первая представляет сигнал, а вторая функцию-отклик!</translation>
+        <translation type="unfinished">Пожалуйста выберите две колонки для данной операции: первая представляет сигнал, а вторая функцию-отклик!</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
-        <translation type="obsolete">Объём данных отклика &apos;%1&apos; должен составлять менее половины объёма данных сигнала &apos;%2&apos;!</translation>
+        <translation type="unfinished">Объём данных отклика &apos;%1&apos; должен составлять менее половины объёма данных сигнала &apos;%2&apos;!</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
-        <translation type="obsolete">Набор данных отклика &apos;%1&apos; должен содержать нечётное число точек!</translation>
+        <translation type="unfinished">Набор данных отклика &apos;%1&apos; должен содержать нечётное число точек!</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="obsolete">Частота</translation>
+        <translation type="unfinished">Частота</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="obsolete">Время</translation>
+        <translation type="unfinished">Время</translation>
     </message>
     <message>
         <source>Real</source>
-        <translation type="obsolete">Вещественная часть</translation>
+        <translation type="unfinished">Вещественная часть</translation>
     </message>
     <message>
         <source>Imaginary</source>
-        <translation type="obsolete">Мнимая часть</translation>
+        <translation type="unfinished">Мнимая часть</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation type="obsolete">Амплитуда</translation>
+        <translation type="unfinished">Амплитуда</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="obsolete">Угол</translation>
+        <translation type="unfinished">Угол</translation>
     </message>
     <message>
         <source>Rows will be deleted from the table!</source>
-        <translation type="obsolete">Строки будут удалены из таблицы!</translation>
+        <translation type="unfinished">Строки будут удалены из таблицы!</translation>
     </message>
     <message>
         <source>Qtiplot - Reading file...</source>
-        <translation type="obsolete">Qtiplot - Чтение файла...</translation>
+        <translation type="unfinished">Qtiplot - Чтение файла...</translation>
+    </message>
+    <message>
+        <source>The text in the clipboard is larger than your current selection!<byte value="x9"/>        
+Do you want to insert cells?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
