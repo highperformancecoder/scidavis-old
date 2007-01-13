@@ -59,6 +59,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <qassistantclient.h>
 #include <qworkspace.h>
 #include <qimage.h>
 #include <qpixmap.h>
@@ -252,6 +253,8 @@ scriptWindow = 0;
 readSettings();
 createLanguagesList();
 insertTranslatedStrings();
+
+assistant = new QAssistantClient( QDir( "./" ).absPath(), this );
 
 QAccel *accel = new QAccel(this);
 accel->connectItem( accel->insertItem( Key_F5 ), ws, SLOT(activateNextWindow()) );
@@ -8963,34 +8966,15 @@ if (!dir.isEmpty())
 	}
 }
 
+void ApplicationWindow::showStandAloneHelp()
+{
+delete assistant;
+assistant = new QAssistantClient(QDir( "./" ).absPath());
+showHelp();
+}
+
 void ApplicationWindow::showHelp()
 {
-	QMainWindow *helpWindow= new QMainWindow(0, "browser",WDestructiveClose);
-	HelpBrowser *browser = new HelpBrowser (helpWindow,"helpBrowse");
-
-	helpWindow->setFocus();
-	helpWindow->setCentralWidget(browser);
-	helpWindow->setCaption(tr("QtiPlot - Help Browser"));
-	helpWindow->resize(QSize(800, 600));
-
-	QToolBar* toolbar = new QToolBar( helpWindow );
-    helpWindow->addToolBar( toolbar, "Toolbar");
-	QToolButton* button = new QToolButton(QPixmap(folder_open_xpm), tr("Open File"), "", browser, SLOT(open()), toolbar);
-	button->setAccel(tr("Ctrl+O"));
-	button = new QToolButton(QPixmap(fileprint_xpm), tr("Print"), "", browser, SLOT(print()), toolbar );
-	button->setAccel(tr("Ctrl+P"));
-	button = new QToolButton(QPixmap(prev_xpm), tr("Backward"), "", browser, SLOT(backward()), toolbar );
-    connect( browser, SIGNAL( backwardAvailable(bool) ), button, SLOT( setEnabled(bool) ) );
-    button->setEnabled( FALSE );
-	button = new QToolButton(QPixmap(next_xpm), tr("Forward"), "", browser, SLOT(forward()), toolbar );
-    connect( browser, SIGNAL( forwardAvailable(bool) ), button, SLOT( setEnabled(bool) ) );
-    button->setEnabled( FALSE );
-    button = new QToolButton(QPixmap(home_xpm), tr("Home"), "", browser, SLOT(home()), toolbar );
-
-	QString s=QDir::currentDirPath();
-    browser->mimeSourceFactory()->setFilePath(s);
-    browser->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-
 	QFile helpFile(helpFilePath);
 	if (!helpFile.exists())
 		{
@@ -9005,9 +8989,22 @@ void ApplicationWindow::showHelp()
 			helpFilePath=fi.absFilePath();
 			saveSettings();
 			}
-		}		
-	browser->setSource (helpFilePath);
-	helpWindow->show();
+		}	
+	
+	QFileInfo fi(helpFilePath);	
+	QString profilePath = QString(fi.dirPath(true)+"/qtiplot.adp");
+	if (!QFile(profilePath).exists())
+		{
+		QMessageBox::critical(this,tr("QtiPlot - Help Profile Not Found!"),
+			   tr("The assistant could not start because the file <b>%1</b> was not found in the help file directory!"
+			   "<p>This file is provided with the QtiPlot manual which can be downloaded from the following internet address:</p>"
+			   "<p><font color=blue>'http://soft.proindependent.com/manuals.html'</font></p>").arg("qtiplot.adp"));
+		return;
+		}	
+		
+	QStringList cmdLst = QStringList() << "-profile" << profilePath;
+	assistant->setArguments( cmdLst );
+	assistant->showPage(helpFilePath);
 }
 
 void ApplicationWindow::showPlotWizard()
@@ -10987,10 +10984,10 @@ void ApplicationWindow::createActions()
   actionSaveNote = new QAction(tr("Save Notes As..."), QString::null, this);
   connect(actionSaveNote, SIGNAL(activated()), this, SLOT(saveNoteAs()));
 
-  actionLoad = new QAction(QPixmap(import_xpm), tr("&Single file..."), QString::null, this);
+  actionLoad = new QAction(QPixmap(import_xpm), tr("&Single file..."), tr("Ctrl+K"), this);
   connect(actionLoad, SIGNAL(activated()), this, SLOT(loadASCII()));
 
-  actionLoadMultiple = new QAction(QPixmap(multiload_xpm), tr("&Multiple files..."), QString::null, this);
+  actionLoadMultiple = new QAction(QPixmap(multiload_xpm), tr("&Multiple files..."), tr("Ctrl+Alt+K"), this);
   connect(actionLoadMultiple, SIGNAL(activated()), this, SLOT(loadMultiple()));
 
   actionUndo = new QAction(QPixmap(undo_xpm), tr("&Undo"), tr("Ctrl+Z"), this);
@@ -11055,7 +11052,7 @@ void ApplicationWindow::createActions()
   actionShowExportASCIIDialog = new QAction(tr("E&xport ASCII"), QString::null, this);
   connect(actionShowExportASCIIDialog, SIGNAL(activated()), this, SLOT(showExportASCIIDialog()));
 
-  actionShowImportDialog = new QAction(tr("Set import &options"), QString::null, this);
+  actionShowImportDialog = new QAction(tr("Set import &options"), tr("Ctrl+Alt+O"), this);
   connect(actionShowImportDialog, SIGNAL(activated()), this, SLOT(showImportDialog()));
 
   actionCloseAllWindows = new QAction(QPixmap(quit_xpm), tr("&Quit"), tr("Ctrl+Q"), this);
@@ -11540,9 +11537,11 @@ void ApplicationWindow::translateActionsStrings()
 
   actionLoad->setMenuText(tr("&Single file..."));
   actionLoad->setToolTip(tr("Import data file"));
+  actionLoad->setAccel(tr("Ctrl+K"));
 
   actionLoadMultiple->setMenuText(tr("&Multiple files..."));
   actionLoadMultiple->setToolTip(tr("Import multiple data files"));
+  actionLoadMultiple->setAccel(tr("Ctrl+Alt+K"));
 
   actionUndo->setMenuText(tr("&Undo"));
   actionUndo->setToolTip(tr("Undo changes"));
@@ -12468,9 +12467,9 @@ else if (s == "-h" || s == "--help")
 	{
 	ApplicationWindow *aux = new ApplicationWindow();
 	aux->hideActiveWindow();
-	aux->showHelp();
-	aux->saveSettings();//save any changes to the help folder path
+	aux->showStandAloneHelp();
 	delete aux;
+	exit(0);
 	}
 else if (s.contains("-lang=") || s.contains("-l="))
 	{
@@ -14032,55 +14031,4 @@ if (scriptWindow)
 	delete scriptWindow;
 
 QApplication::clipboard()->clear(QClipboard::Clipboard);
-}
-
-/*****************************************************************************
- *
- * Class HelpBrowser
- *
- *****************************************************************************/
-
-HelpBrowser::HelpBrowser(QWidget * parent, const char * name)
-		:QTextBrowser (parent, name)
-{
-setPaletteBackgroundColor(QColor(Qt::lightGray));
-}
-
-void HelpBrowser::open()
-{
-QString fn = QFileDialog::getOpenFileName(QDir::currentDirPath(), "*.html", this);
-if (!fn.isEmpty() && QFile(fn).exists())
-	setSource(fn);
-}
-
-void HelpBrowser::print()
-{
-#ifndef QT_NO_PRINTER
-    QPrinter printer( QPrinter::HighResolution );
-    printer.setFullPage(TRUE);
-    if ( printer.setup( this ) ) {
-	QPainter p( &printer );
-	if( !p.isActive() ) // starting printing failed
-	    return;
-	QPaintDeviceMetrics metrics(p.device());
-	int dpiy = metrics.logicalDpiY();
-	int margin = (int) ( (2/2.54)*dpiy ); // 2 cm margins
-	QRect body( margin, margin, metrics.width() - 2*margin, metrics.height() - 2*margin );
-	QSimpleRichText richText(text(), QFont(), context(), styleSheet(), mimeSourceFactory(), body.height());
-	richText.setWidth( &p, body.width() );
-	QRect view( body );
-	int page = 1;
-	do {
-	    richText.draw( &p, body.left(), body.top(), view, colorGroup() );
-	    view.moveBy( 0, body.height() );
-	    p.translate( 0 , -body.height() );
-	    p.drawText( view.right() - p.fontMetrics().width( QString::number(page) ),
-			view.bottom() + p.fontMetrics().ascent() + 5, QString::number(page) );
-	    if ( view.top()  >= richText.height() )
-		break;
-	    printer.newPage();
-	    page++;
-	} while (TRUE);
-    }
-#endif
 }

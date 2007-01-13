@@ -12,12 +12,13 @@ MOC_DIR		 = ../tmp/qtiplot
 OBJECTS_DIR	 = ../tmp/qtiplot
 DESTDIR		 = ./
 DEFINES		+= QT_PLUGIN
-#DEFINES	+= SCRIPTING_CONSOLE
-#DEFINES	+= SCRIPTING_DIALOG
 
-SCRIPTING_LANGS = muParser
-# Python support is unstable; use at your own risk
-unix:SCRIPTING_LANGS += Python
+############################################################################# 
+##################### QAssistant ############################################
+#!!! Warning: You must modify these paths according to your computer settings
+############################################################################# 
+
+unix:LIBS         +=  /usr/lib/qt3/lib64/libqassistantclient.a
 
 ############################################################################# 
 ##################### 3rd PARTY HEADER FILES SECTION ########################
@@ -44,7 +45,7 @@ unix:LIBS         += ../3rdparty/liborigin/liborigin.a
 unix:LIBS         += ../3rdparty/gsl/lib/libgsl.a
 unix:LIBS         += ../3rdparty/gsl/lib/libgslcblas.a
 
-unix:LIBS         += -L /usr/lib$${libsuff}  -lz
+#unix:LIBS         += -L /usr/lib$${libsuff}  -lz
 
 unix:target.path=/usr/bin
 unix:INSTALLS += target
@@ -78,8 +79,8 @@ TRANSLATIONS      = translations/qtiplot_de.ts \
 			        translations/qtiplot_ru.ts \
 			        translations/qtiplot_sv.ts 
 
-system(lupdate -verbose qtiplot.pro)
-system(lrelease -verbose qtiplot.pro)
+#system(lupdate -verbose qtiplot.pro)
+#system(lrelease -verbose qtiplot.pro)
 
 ###################### HEADERS ##############################################
 
@@ -259,6 +260,13 @@ SOURCES   +=../3rdparty/zlib123/minigzip.c
 ##################### SCRIPTING LANGUAGES SECTION #############
 ############################################################### 
  
+ SCRIPTING_LANGS = muParser
+ #DEFINES	+= SCRIPTING_CONSOLE
+ #DEFINES	+= SCRIPTING_DIALOG
+
+# Python support is unstable; use at your own risk
+unix:SCRIPTING_LANGS += Python
+
 ##################### Default: muParser v1.26 #################
 contains(SCRIPTING_LANGS, muParser) {
   DEFINES +=	SCRIPTING_MUPARSER
@@ -369,4 +377,4 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiFolder.cpp\
 	 ../tmp/qtiplot/sipqtiQPtrList.cpp
 }
-############################################################### 
+###############################################################

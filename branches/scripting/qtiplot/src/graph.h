@@ -121,8 +121,6 @@ public slots:
 	 void exportToEPS(const QString& fname);
 	 void exportToEPS(const QString& fname, int res, QPrinter::Orientation o, 
 					 QPrinter::PageSize size, QPrinter::ColorMode col);
-
-	 void exportToWmf(const QString& fname);
 	 
 	 void replot();
 	 void updatePlot();
@@ -167,7 +165,7 @@ public slots:
 	 void setGridOptions(const gridOptions& options);
 
 	// zoom
-	 void zoomed (const QwtDoubleRect &rect);
+	 void zoomed (const QwtDoubleRect &);
 	 void zoom(bool on);
 	 void zoomOut();
 	 bool zoomOn();
@@ -674,7 +672,7 @@ private:
 	QString auxMrkFileName, auxMrkText;
 
 	int n_curves, selectedCurve, selectedPoint,startPoint,endPoint, selectedCursor, pieRay;
-	int selectedCol,xCol,widthLine,fitID,linesOnPlot, defaultMarkerFrame;
+	int selectedCol,xCol,widthLine,fitID, defaultMarkerFrame;
 	QColor defaultTextMarkerColor, defaultTextMarkerBackground;
 	int auxMrkAngle,auxMrkBkg,auxMrkWidth, averagePixels;
 	int auxArrowHeadLength, auxArrowHeadAngle;

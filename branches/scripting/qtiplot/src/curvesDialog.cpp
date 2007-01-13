@@ -23,7 +23,6 @@ curvesDialog::curvesDialog( QWidget* parent,  const char* name, bool modal, WFla
 {
     if ( !name )
 	setName( "curvesDialog" );
-	setMinimumSize(QSize(400,200));
     setCaption( tr( "QtiPlot - Add/Remove curves" ) );
 	setFocus();
 	
@@ -162,7 +161,7 @@ close();
 
 QSize curvesDialog::sizeHint() const 
 {
-return QSize(400, 200 );
+return QSize(600, 300);
 }
 
 void curvesDialog::deletePopupMenu(QListBoxItem *it, const QPoint &point)

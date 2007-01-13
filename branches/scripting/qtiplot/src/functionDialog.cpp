@@ -14,6 +14,7 @@
 #include <qspinbox.h>
 #include <qwidgetstack.h>
 #include <qhbox.h>
+#include <qtextedit.h>
 
 FunctionDialog::FunctionDialog( QWidget* parent, const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )

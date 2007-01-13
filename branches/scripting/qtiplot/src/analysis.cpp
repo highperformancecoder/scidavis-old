@@ -832,9 +832,9 @@ ImageMarker* mrk=(ImageMarker*) d_plot->marker(selectedMarker);
 if (!mrk)
 	{
 	QMessageBox::warning(0,tr("QtiPlot - Pixel selection warning"),  
-						"Please select the start line point inside the image rectangle!");
-	linesOnPlot--;
-	d_plot->removeMarker(d_lines[linesOnPlot]);
+						tr("Please select the start line point inside the image rectangle!"));
+	int linesOnPlot = (int)d_lines.size();
+	d_plot->removeMarker(d_lines[--linesOnPlot]);
 	d_lines.resize(linesOnPlot);
 	return;
 	}
@@ -843,9 +843,9 @@ QRect rect=mrk->rect();
 if (!rect.contains(start) || !rect.contains(end))
 	{
 	QMessageBox::warning(0,tr("QtiPlot - Pixel selection warning"),  
-						"Please select the end line point inside the image rectangle!");
-	linesOnPlot--;
-	d_plot->removeMarker(d_lines[linesOnPlot]);
+						tr("Please select the end line point inside the image rectangle!"));
+	int linesOnPlot = (int)d_lines.size();
+	d_plot->removeMarker(d_lines[--linesOnPlot]);
 	d_lines.resize(linesOnPlot);		
 	return;		
 	}

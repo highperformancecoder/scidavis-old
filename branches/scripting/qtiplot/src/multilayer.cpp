@@ -883,10 +883,8 @@ for (int i=0;i<(int)graphsList->count();i++)
 		{
 		Graph *gr=(Graph *)graphsList->at(i);
 		Plot *myPlot= gr->plotWidget();
-
 		int lw = myPlot->lineWidth();
-		QRect rect = QRect(gr->x() + lw, gr->y() + lw, myPlot->width() - 2*lw, 
-						  myPlot->height() - 2*lw);
+		QRect rect = QRect(gr->x() + lw, gr->y() + lw, myPlot->width() - 2*lw, myPlot->height() - 2*lw);
 		myPlot->print(&paint, rect, filter);
 		}		
 paint.end();

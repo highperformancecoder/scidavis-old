@@ -170,7 +170,7 @@
   <title>Bolzmann equation</title>
   <mediaobject>
     <imageobject>
-      <imagedata  format="PNG" fileref="equations/equation_bolzmann.png"/>
+      <imagedata  format="PNG" fileref="equations/equation_bolzmann.gif"/>
     </imageobject>
   </mediaobject>
 </equation>

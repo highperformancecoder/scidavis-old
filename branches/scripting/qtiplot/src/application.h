@@ -5,7 +5,6 @@
 #include <qlistview.h> 
 #include <qhttp.h> 
 #include <qbuffer.h>
-#include <qtextbrowser.h>
 
 #include "graph3D.h"
 #include "plot3DDialog.h"
@@ -26,7 +25,8 @@ class QLineEdit;
 class QDockWindow;
 class QTranslator;
 class QSplitter;
-
+class QAssistantClient;
+	
 class Matrix;
 class Table;
 class Graph;
@@ -53,6 +53,7 @@ public:
 
 	enum ShowWindowsPolicy{HideAll, ActiveFolder, SubFolders};
 
+	QAssistantClient *assistant;
 	ScriptWindow *scriptWindow;
 	QTranslator *appTranslator, *qtTranslator;
 	QDockWindow *logWindow, *explorerWindow;
@@ -548,6 +549,7 @@ public slots:
 	void showImportDialog();
 	void showMarkerPopupMenu();
 	void showHelp();
+	void showStandAloneHelp();
 	void chooseHelpFolder();
 	void showPlotWizard();
 	void showFitPolynomDialog();
@@ -780,7 +782,7 @@ public slots:
 	void scriptPrint(const QString &text);
 	//! switches to the given scripting language (if different from the current)
 	bool setScriptingLang(const QString &lang);
-
+	
 signals:
 	void modified();
 	
@@ -929,18 +931,4 @@ private:
 
 	QSplitter *explorerSplitter;
 };
-
-//! QtiPlot's help browser
-class HelpBrowser: public QTextBrowser
-{
-    Q_OBJECT
-
-public:
-    HelpBrowser(QWidget * parent = 0, const char * name = 0);
-
-public slots:
-	void print();
-	void open();
-};
-
 #endif

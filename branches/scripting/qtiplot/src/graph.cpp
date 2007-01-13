@@ -128,7 +128,6 @@ if ( !name )
 	
 fitter = 0;
 n_curves=0;
-linesOnPlot=0;
 widthLine=1;mrkX=-1;mrkY=-1;fitID=0;
 selectedCol=0;selectedPoint=-1;
 selectedCurve =-1;selectedMarker=-1;selectedCursor=-1;
@@ -1480,7 +1479,6 @@ return scaleTitles;
 
 void Graph::updateSecondaryAxis(int axis)
 {
-bool secondaryAxisUsed = false;
 for (int i=0; i<n_curves; i++)
 	{
 	QwtPlotCurve *c = this->curve(i);
@@ -2015,28 +2013,18 @@ QPixmap Graph::graphPixmap()
 #ifdef Q_OS_MAC // Mac 
 	return QPixmap::grabWidget(this);
 #else
-int lw = d_plot->lineWidth();
-int clw = 2*d_plot->canvas()->lineWidth();
-
-QPixmap pic(d_plot->width() + 2*lw + clw, d_plot->height() + 2*lw + clw, -1, QPixmap::BestOptim);
+int lw = d_plot->lineWidth();	
+QPixmap pic(d_plot->width() + 2*lw, d_plot->height() + 2*lw, -1, QPixmap::BestOptim);
 pic.fill (QColor(255, 255, 255));
 QPainter paint;
 paint.begin(&pic);
 	
-QRect rect = QRect(lw, lw, d_plot->width() - 2*lw, d_plot->height() - 2*lw);
-
-QwtPlotLayout *layout= d_plot->plotLayout ();
-layout->activate(d_plot, rect, 0);
-	
+QRect rect = QRect(lw, lw, d_plot->width(), d_plot->height());
 QwtPlotPrintFilter  filter; 
 filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle |
                   QwtPlotPrintFilter::PrintCanvasBackground);
-
 d_plot->print(&paint, rect, filter);
 paint.end();
-
-//the initial layout is invalidated during the print operation and must be recalculated	
-layout->activate(d_plot, d_plot->rect(), 0);
 return pic;
 #endif
 }
@@ -2178,22 +2166,6 @@ if (printer.setup())
 	filter.setOptions(QwtPlotPrintFilter::PrintAll | ~QwtPlotPrintFilter::PrintCanvasBackground);
 	d_plot->print(&paint, rect, filter);
 	}
-}
-
-void Graph::exportToWmf(const QString& fname) 
-{//not working properly
-//using Tobias Burnus's qwmf
-
-/*PrintFilter filter(d_plot); 	
-filter.setOptions(QwtPlotPrintFilter::PrintAll | QwtPlotPrintFilter::PrintTitle |
-				  QwtPlotPrintFilter::PrintCanvasBackground);
-
-QWMF m_wmf ;
-m_wmf.setOutputFileName(fname);
-	
-QPainter painter( &m_wmf );	
-d_plot->print(&painter , d_plot->rect(), filter);
-painter.end();*/
 }
 
 void Graph::exportToSVG(const QString& fname) 
@@ -2463,6 +2435,7 @@ if (selectedMarker>=0)
 	if (d_lines.contains(selectedMarker)>0)
 		{
 		int index=d_lines.find(selectedMarker,0);
+		int linesOnPlot = (int)d_lines.size();
 		for (int i=index; i<linesOnPlot; i++)
 			d_lines[i]=d_lines[i+1];
 		d_lines.resize(--linesOnPlot);
@@ -2542,6 +2515,10 @@ void Graph::pasteMarker()
 if (selectedMarkerType==Arrow)
 	{
 	LineMarker* mrkL=new LineMarker();
+	int linesOnPlot = (int)d_lines.size();
+	d_lines.resize(++linesOnPlot);
+	d_lines[linesOnPlot-1] = d_plot->insertMarker(mrkL);
+		
 	mrkL->setColor(auxMrkColor);
 	mrkL->setWidth(auxMrkWidth);
 	mrkL->setStyle(auxMrkStyle);
@@ -2552,10 +2529,7 @@ if (selectedMarkerType==Arrow)
 	mrkL->setHeadLength(auxArrowHeadLength);
 	mrkL->setHeadAngle(auxArrowHeadAngle);
 	mrkL->fillArrowHead(auxFilledArrowHead);
-	long mrkID=d_plot->insertMarker(mrkL);
-	linesOnPlot++;
-	d_lines.resize(linesOnPlot);
-	d_lines[linesOnPlot-1]=mrkID;
+	
 	d_plot->replot();
 	
 	selectedMarker=-1;
@@ -2565,19 +2539,21 @@ else if (selectedMarkerType==Image)
 	QString fn=auxMrkFileName;
 	QRect rect=QRect(auxMrkStart,auxMrkEnd);
 
-	QPixmap photo;
 	QFileInfo fi(fn);
 	QString baseName = fi.fileName();
 	int pos=baseName.find(".",0);
 	QString type=baseName.right(baseName.length()-pos-1);
 		
+	QPixmap photo;
 	if (type.upper()=="JPG")
 		photo.load(fn,"JPEG",QPixmap::Auto);
 	else
 		photo.load(fn,type.upper(),QPixmap::Auto);	
 
 	ImageMarker* mrk= new ImageMarker(photo);
-	long mrkID=d_plot->insertMarker(mrk);
+	int imagesOnPlot=d_images.size();
+	d_images.resize(++imagesOnPlot);
+	d_images[imagesOnPlot-1] = d_plot->insertMarker(mrk);
 	mrk->setFileName(fn);
 
 	QPoint o=d_plot->canvas()->mapFromGlobal(QCursor::pos());
@@ -2587,18 +2563,16 @@ else if (selectedMarkerType==Image)
 	mrk->setOrigin(o);
 	mrk->setSize(rect.size());
 	d_plot->replot();
-	
-	int imagesOnPlot=d_images.size();
-	d_images.resize(++imagesOnPlot);
-	d_images[imagesOnPlot-1]=mrkID;
-	
 	selectedMarker=-1;
 	}
 else
 	{	
 	LegendMarker* mrk=new LegendMarker(d_plot);
+	int texts = d_texts.size();
+	d_texts.resize(++texts);
+	d_texts[texts-1] = d_plot->insertMarker(mrk);
+		
 	QPoint o=d_plot->canvas()->mapFromGlobal(QCursor::pos());
-
 	if (!d_plot->canvas()->contentsRect().contains(o))
 		o=QPoint(auxMrkStart.x()+20,auxMrkStart.y()+20);
 	
@@ -2609,11 +2583,6 @@ else
 	mrk->setText(auxMrkText);
 	mrk->setTextColor(auxMrkColor);
 	mrk->setBackgroundColor(auxMrkBkgColor);
-	long mrkID = d_plot->insertMarker(mrk);
-
-	int texts = d_texts.size();
-	d_texts.resize(++texts);
-	d_texts[texts-1] = mrkID;
 
 	d_plot->replot();
 	selectedMarker=-1;
@@ -4076,6 +4045,7 @@ void Graph::insertLineMarker(QStringList list, int fileVersion)
 {
 LineMarker* mrk= new LineMarker();
 long mrkID=d_plot->insertMarker(mrk);
+int linesOnPlot = (int)d_lines.size();
 d_lines.resize(++linesOnPlot);
 d_lines[linesOnPlot-1]=mrkID;
 
@@ -4106,6 +4076,7 @@ if (list.count()>10)
 void Graph::insertLineMarker(LineMarker* mrk)
 {
 LineMarker* aux = new LineMarker();
+int linesOnPlot = (int)d_lines.size();
 d_lines.resize(++linesOnPlot);
 d_lines[linesOnPlot-1] = d_plot->insertMarker(aux);	
 
@@ -5461,7 +5432,7 @@ bool Graph::zoomOn()
 return (d_zoomer[0]->isEnabled() || d_zoomer[1]->isEnabled());
 }
 
-void Graph::zoomed (const QwtDoubleRect &rect)
+void Graph::zoomed (const QwtDoubleRect &)
 {	
 emit modifiedGraph();
 }
