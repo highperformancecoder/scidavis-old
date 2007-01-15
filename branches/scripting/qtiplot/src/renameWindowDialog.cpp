@@ -100,7 +100,7 @@ buttonCancel->setText( tr( "&Cancel" ) );
 void renameWindowDialog::accept()
 {
 QString name = window->name();
-QString text = boxNameLine->text().remove("_").remove("=").remove(QRegExp("\\s"));
+QString text = boxNameLine->text().remove("=").remove(QRegExp("\\s"));
 QString label = boxLabelEdit->text();
 
 myWidget::CaptionPolicy policy = getCaptionPolicy();
@@ -111,7 +111,11 @@ ApplicationWindow *app = (ApplicationWindow *)parentWidget();
 if (!app)
 	return;
 
-if (text != name)
+if (text.contains("_")){
+	QMessageBox::warning(this, tr("QtiPlot - Warning"),
+	tr("For internal consistency reasons the underscore character is replaced with a minus sign."));}
+
+if (text.replace("_", "-") != name)
 	{
 	if(!app->renameWindow(window, text))
 		return;

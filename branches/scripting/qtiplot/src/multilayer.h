@@ -18,7 +18,6 @@ class QWidget;
 class QLabel;
 class QPushButton;
 class QWidget;
-
 class Graph;
 class Table;
 class LayerButton;
@@ -185,7 +184,7 @@ private:
 	int left_margin, right_margin, top_margin, bottom_margin;
 	int l_canvas_width, l_canvas_height, hor_align, vert_align;
 	int xMouse, yMouse, xActiveGraph, yActiveGraph;//used for moving layers
-	bool movedGraph, addTextOn, highlightedLayer, ignore_resize;
+	bool movedGraph, addTextOn, highlightedLayer, ignore_resize, mousePressed;
 
 	//! Used when adding text markers on new layers
 	int defaultTextMarkerFrame;
@@ -218,4 +217,4 @@ signals:
 	void clicked(LayerButton*);
 };
 
-#endif 
+#endif

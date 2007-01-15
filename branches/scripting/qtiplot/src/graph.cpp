@@ -1577,6 +1577,7 @@ if (axis == QwtPlot::xBottom || axis == QwtPlot::yLeft)
 d_plot->replot();
 //keep markers on canvas area
 updateMarkersBoundingRect();
+d_plot->replot();
 }
 
 void Graph::copyCanvas(bool on)
@@ -6260,7 +6261,9 @@ QApplication::clipboard()->setData(new QTextDrag(d_plot->title().text(), d_plot-
 
 void Graph::removeAxisTitle()
 {
-d_plot->setAxisTitle(selectedAxis, QString::null);
+int axis = (selectedAxis + 2)%4;//unconsistent notation in Qwt enumerations between 
+								//QwtScaleDraw::alignement and QwtPlot::Axis
+d_plot->setAxisTitle(axis, QString::null);
 d_plot->replot();
 emit modifiedGraph();
 }
@@ -6273,8 +6276,11 @@ removeAxisTitle();
 
 void Graph::copyAxisTitle()
 {
-QApplication::clipboard()->setData(new QTextDrag(d_plot->axisTitle(selectedAxis).text(), 
-								   (QWidget *)d_plot->axisWidget(selectedAxis), 0));
+
+int axis = (selectedAxis + 2)%4;//unconsistent notation in Qwt enumerations between 
+								//QwtScaleDraw::alignement and QwtPlot::Axis
+QApplication::clipboard()->setData(new QTextDrag(d_plot->axisTitle(axis).text(), 
+								   (QWidget *)d_plot->axisWidget(axis), 0));
 }
 
 void Graph::showAxisTitleMenu(int axis)
@@ -6903,13 +6909,13 @@ defaultTextMarkerBackground = backgroundCol;
 
 void Graph::setArrowDefaults(int lineWidth,  const QColor& c, Qt::PenStyle style,
 									int headLength, int headAngle, bool fillHead)
-{
+{	
 defaultArrowLineWidth = lineWidth; 
 defaultArrowColor = c;
 defaultArrowLineStyle = style;
 defaultArrowHeadLength = headLength;
 defaultArrowHeadAngle = headAngle;
-defaultArrowHeadFill = fillHead;
+defaultArrowHeadFill = fillHead;	
 }
 
 QString Graph::parentPlotName()

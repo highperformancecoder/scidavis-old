@@ -160,6 +160,7 @@ hor_align = HCenter;  vert_align = VCenter;
 active_graph=0;
 addTextOn=FALSE;
 movedGraph=FALSE;
+mousePressed = false;
 highlightedLayer = false;
 ignore_resize = false;
 aux_rect = QRect();
@@ -544,12 +545,11 @@ if (!movedGraph)
 	movedGraph=TRUE;
 	showLayers(false);
 
-	xMouse=pos.x();
-	yMouse=pos.y();
+	xMouse = pos.x();
+	yMouse = pos.y();
 		
-	QPoint aux=g->pos();
-	xActiveGraph=aux.x();
-	yActiveGraph=aux.y();
+	xActiveGraph = g->pos().x();
+	yActiveGraph = g->pos().y();			
 	}
 	
 QPixmap pix = canvasPixmap();//Faster then using cache_pix;
@@ -558,7 +558,7 @@ painter.setRasterOp(Qt::NotROP);
 
 xActiveGraph+=pos.x()-xMouse;
 yActiveGraph+=pos.y()-yMouse;
-	
+			
 painter.drawRect(QRect(QPoint(xActiveGraph,yActiveGraph),g->size()));
 painter.end();
 	
@@ -566,8 +566,6 @@ bitBlt( canvas, 0, 0,&pix, 0, 0, -1, -1 );
 	
 xMouse=pos.x();
 yMouse=pos.y();
-
-emit modifiedPlot();
 }
 
 void MultiLayer::releaseGraph(Graph* g)
@@ -586,6 +584,7 @@ for (int i=0;i<(int)graphsList->count();i++)
 	gr->show();
 	}
 movedGraph=FALSE;
+emit modifiedPlot();
 }
 
 QSize MultiLayer::arrangeLayers(bool userSize)
@@ -1516,10 +1515,12 @@ QPoint pos = canvas->mapFromParent(e->pos());
 if (ar.contains(pos))
 	{// Get the initial location of the mouse
 	xMouse=pos.x();
-	yMouse=pos.y();		
+	yMouse=pos.y();	
+	mousePressed = true;
 	}
 else
 	{
+	mousePressed = false;
 	canvas->erase();
 	showLayers(true);
 	highlightedLayer = false;
@@ -1530,11 +1531,13 @@ else
 
 void MultiLayer::mouseMoveEvent ( QMouseEvent * e )
 {
-if (!highlightedLayer)
+if (!highlightedLayer || !mousePressed)
 	return;
 
 // Get the position of the mouse
 QPoint pos = canvas->mapFromParent(e->pos());
+if((QPoint(xMouse, yMouse) - pos).manhattanLength() <= QApplication::startDragDistance())
+	return;
 
 int dx = pos.x() - xMouse;
 int dy = pos.y() - yMouse;
@@ -1562,6 +1565,7 @@ else if (pos.x() < center.x() && pos.y() > center.y())
 xMouse = pos.x();
 yMouse = pos.y();
 
+aux_rect.normalize();
 drawLayerFocusRect(aux_rect);
 }
 
@@ -1674,6 +1678,7 @@ canvas->erase();
 updateTransparency();
 showLayers(true);//must be called for coloured background layers
 
+mousePressed = false;
 highlightedLayer = false;
 aux_rect = QRect();
 cache_pix = QPixmap();

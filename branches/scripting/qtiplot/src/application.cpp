@@ -3770,7 +3770,7 @@ if (projectname != "untitled")
 	if (fn == pn)
 		{
 		QMessageBox::warning(this, tr("QtiPlot - File openning error"),
-				tr("The file: <b> %1 </b> is the current file!").arg(fn));
+				tr("The file: <p><b> %1 </b><p> is the current file!").arg(fn));
 		return;
 		}
 	}
@@ -4418,7 +4418,7 @@ settings.beginGroup("/2DPlots");
 	drawBackbones=settings.readBoolEntry ("/AxesBackbones", true, 0);
 	axesLineWidth=settings.readNumEntry ("/AxesLineWidth", 1, 0);
 	autoscale2DPlots = settings.readBoolEntry ("/Autoscale", true, 0);
-	autoScaleFonts = settings.readBoolEntry ("/AutoscaleFonts", true, 0);
+	autoScaleFonts = settings.readBoolEntry ("/AutoScaleFonts", true, 0);	
 	autoResizeLayers = settings.readBoolEntry ("/AutoResizeLayers", true, 0);
 
 	QStringList graphFonts=settings.readListEntry("/Fonts");
@@ -5309,12 +5309,14 @@ if (!w)
 
 QString name = w->name();
 
-if (text.isEmpty())
+QString newName = text;
+newName.replace("-", "_");
+if (newName.isEmpty())
 	{
 	QMessageBox::critical(0, tr("QtiPlot - Error"), tr("Please enter a valid name!"));
 	return false;
 	}
-else if (text.contains(QRegExp("\\W")))
+else if (newName.contains(QRegExp("\\W")))
 	{
 	QMessageBox::critical(0, tr("QtiPlot - Error"),
 			   tr("The name you chose is not valid: only letters and digits are allowed!")+
@@ -5322,17 +5324,20 @@ else if (text.contains(QRegExp("\\W")))
 	return false;
 	}
 
-while(alreadyUsedName(text))
+newName.replace("_", "-");
+
+while(alreadyUsedName(newName))
 	{
 	QMessageBox::critical(this,tr("QtiPlot - Error"),
-				tr("Name already exists!")+"\n"+tr("Please choose another name!"));
+				tr("Name <b>%1</b> already exists!").arg(newName)+"<p>"+tr("Please choose another name!")+
+				"<p>"+tr("Warning: for internal consistency reasons the underscore character is replaced with a minus sign."));
 	return false;
 	}
 
 if (w->inherits("Table"))
 	{
 	QStringList labels=((Table *)w)->colNames();
-	if (labels.contains(text)>0)
+	if (labels.contains(newName)>0)
 		{
 		QMessageBox::critical(0,tr("QtiPlot - Error"),
 		tr("The table name must be different from the names of its columns!")+"<p>"+tr("Please choose another name!"));
@@ -5340,13 +5345,13 @@ if (w->inherits("Table"))
 		}
 
 	int id=tableWindows.findIndex(name);
-	tableWindows[id]=text;
-	updateTableNames(name,text);
+	tableWindows[id]=newName;
+	updateTableNames(name,newName);
 	}
 else if (w->isA("Matrix"))
-	changeMatrixName(name, text);
+	changeMatrixName(name, newName);
 
-w->setName(text);
+w->setName(newName);
 w->setCaptionPolicy(w->captionPolicy());
 return true;
 }
@@ -8155,7 +8160,7 @@ QString version = "QtiPlot " + QString::number(majVersion) + "." +
 QMessageBox::about(this,tr("About QtiPlot"),
 			 tr("<h2>"+ version + "</h2>"
 			 "<p><h3>Copyright(C): Ion Vasilief</h3>"
-			 "<p><h3>Released: 24/11/2006</h3>"));
+			 "<p><h3>Released: maine/01/2007</h3>"));
 }
 
 void ApplicationWindow::windowsMenuAboutToShow()
@@ -10548,11 +10553,11 @@ for (int j=0;j<(int)list.count()-1;j++)
 			}
 	}
 ag->replot();
-ag->setIgnoreResizeEvents(!autoResizeLayers);
-ag->setAutoscaleFonts(autoScaleFonts);
-ag->setTextMarkerDefaults(legendFrameStyle, plotLegendFont, legendTextColor, legendBackground);
-ag->setArrowDefaults(defaultArrowLineWidth, defaultArrowColor, defaultArrowLineStyle,
-					 defaultArrowHeadLength, defaultArrowHeadAngle, defaultArrowHeadFill);
+ag->setIgnoreResizeEvents(!app->autoResizeLayers);
+ag->setAutoscaleFonts(app->autoScaleFonts);
+ag->setTextMarkerDefaults(app->legendFrameStyle, app->plotLegendFont, app->legendTextColor, app->legendBackground);	
+ag->setArrowDefaults(app->defaultArrowLineWidth, app->defaultArrowColor, app->defaultArrowLineStyle,
+					 app->defaultArrowHeadLength, app->defaultArrowHeadAngle, app->defaultArrowHeadFill);
 plot->connectLayer(ag);
 }
 

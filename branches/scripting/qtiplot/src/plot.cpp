@@ -122,15 +122,13 @@ void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
 	else
 		{
 		QRect rect = canvasRect;
-		rect.setLeft(canvasRect.x()+1);
-		rect.setTop(canvasRect.y()+1);
-
+		rect.addCoords(1, 1, -1, -1);
 		QwtPainter::fillRect(painter, rect, canvasBackground());
 		}
 
 	painter->restore();
-	painter->setClipping(TRUE);
 
+	painter->setClipping(TRUE);
 	QwtPainter::setClipRect(painter, canvasRect);
 
     drawItems(painter, canvasRect, map, pfilter);

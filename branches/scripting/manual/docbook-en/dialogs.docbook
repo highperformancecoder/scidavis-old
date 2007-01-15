@@ -193,7 +193,7 @@
 <sect1 id="arrow-dialog">
   <title>Add Arrow</title>
   <para>This dialog allows to modify a line or an arrow which has been created by the command <emphasis>&draw-arrow-cmd;</emphasis> from the <link linkend="sec-graph-menu">Graph Menu</link> or with &draw-arrow-key;. One can also open it with a double click on an arrow or a line, or by selecting an arrow or a line and selecting <emphasis>Properties...</emphasis> with the right button of the mouse.</para>
-  <para>The first tab allows to change the color, the line type and the line width. This last parameter is set in pixels.</para>
+  <para>The first tab allows to change the color, the line type and the line width. This last parameter is set in pixels. It is possible to define a default style for all the new lines by pressing the <emphasis>Set Default</emphasis> button.</para>
   <figure id="fig-line-options-1">
     <title>The <emphasis>Arrow options</emphasis> dialog: first tab</title>
     <mediaobject> 
@@ -202,7 +202,7 @@
       </imageobject>
     </mediaobject>
   </figure>
-  <para>The <emphasis>Arrow head</emphasis> tab is used to modify the shape of the head of the arrow. The length is set in pixels and the angle is in degrees.</para>
+  <para>The <emphasis>Arrow head</emphasis> tab is used to modify the shape of the head of the arrow. The length is set in pixels and the angle is in degrees. It is also possible to define a default style for the arrow heads using the same <emphasis>Set Default</emphasis> button.</para>
   <figure id="fig-line-options-2">
     <title>The <emphasis>Arrow options</emphasis> dialog: second tab</title>
     <mediaobject> 
@@ -211,7 +211,7 @@
       </imageobject>
     </mediaobject>
   </figure>
-  <para>The <emphasis>Geometry</emphasis> tab allows to specify the start and end points of the line/arrow. The values are in pixels, and are relative to the top-left corner of the layer which contains the line.</para>
+  <para>The <emphasis>Geometry</emphasis> tab allows to specify the start and end points of the line/arrow. The coordinates can be set as a function of the scales values displayed on the left axis (Y) and on the bottom axis (X) or in pixels, by choosing the desired method from the <emphasis>Unit</emphasis> pull-down list. The pixel coordinates are relative to the top-left corner of the layer which contains the line.</para>
   <figure id="fig-line-options-3">
     <title>The <emphasis>Geometry</emphasis> dialog: third tab</title>
     <mediaobject> 
@@ -541,6 +541,7 @@
     </mediaobject>
   </figure>
   <para>The second step is to define the parameters for the fit. You have to give initial guess for the fitting parameters.</para>
+
   <figure id="fig-non-linear-curve-fit-2">
     <title>The second step of the &non-linear-curve-fit-cmd; dialog box.</title>
     <informalexample>
@@ -552,9 +553,24 @@
       </imageobject>
     </mediaobject>
   </figure>
+
+ <para> In this second tab you can also choose a weighting method for your fit (the default is <emphasis>No weighting</emphasis>). The available weighting methods are:</para>
+  
+  <orderedlist>
+  <listitem>
+   <para><emphasis>Instrumental</emphasis>: the values of the associated error bars are used as weighting coeficients. You must add Y-error bars to the analysed curve before performing the fit.</para>
+  </listitem>
+  <listitem>
+    <para><emphasis>Statistical</emphasis>: the weighting coeficients are calculated as the square-roots of each data point in the fitted curve.</para>
+  </listitem>
+  <listitem>
+    <para><emphasis>Arbitrary Dataset</emphasis>: you have the possibility to set the weighting coeficients using an arbitrary data set. The column used for the weighting must have a number of rows equal to the number of points in the fitted curve. </para>
+  </listitem>
+</orderedlist>
+
   <para>After the fit, the log window is opened to show the results of the fitting process.</para>
 
-  <para>A new table is created for each fit, it includes all the X and Y values used to compute and to plot the fitted function. This table is hidden by default, but it can be found and viewed with the <link linkend="project-explorer-dialog">project explorer</link>.</para>
+  <para>Depending on the settings in the <emphasis>Custom Output</emphasis>  tab, a function curve (option <emphasis>Uniform X Function</emphasis>) or a new table (if you choose the option <emphasis>Same X as Fitting Data</emphasis>) will be created for each fit. The new table includes all the X and Y values used to compute and to plot the fitted function and is hidden by default, but it can be found and viewed with the <link linkend="project-explorer-dialog">project explorer</link>.</para>
 </sect1>
 
 <!-- ************************************************** -->

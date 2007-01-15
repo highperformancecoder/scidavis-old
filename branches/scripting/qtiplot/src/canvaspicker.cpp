@@ -18,7 +18,6 @@ CanvasPicker::CanvasPicker(Graph *plot):
 {
 	moved = false;
 	movedGraph = false;
-	mousePressed = false;
 	pointSelected = false;
 	resizeLineFromStart = false;
 	resizeLineFromEnd = false;
@@ -45,21 +44,7 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 	bool movePoint=plot()->movePointsActivated();
 	
     switch(e->type())
-    	{	
-		case QEvent::Enter:
-			{
-			mousePressed = false;
-			return false;
-			}
-		break;
-
-		case QEvent::Leave:
-			{
-			mousePressed = false;
-			return false;
-			}
-		break;
-
+    	{
 		case QEvent::FocusIn:
 			{
 			if (plot()->enabledCursor()) 
@@ -81,7 +66,7 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 		break;
 			
 		case QEvent::Paint:
-        {   
+        	{   
             // The inPaint guard protecs from producing endless paint events.
             static bool inPaint = FALSE;
             if (plotWidget->canvas()->hasFocus() && !inPaint )
@@ -101,7 +86,6 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 			{
 			const QMouseEvent *me = (const QMouseEvent *)e;	
 			presspos = me->pos();
-			mousePressed = true;
 			
 			bool allAxisDisabled = true;
 			for (int i=0; i < QwtPlot::axisCnt; i++)
@@ -241,10 +225,13 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 		break;
 			
 		case QEvent::MouseMove:
-		{
+		{		
 		const QMouseEvent *me = (const QMouseEvent *)e;
+		if (me->state() != QMouseEvent::LeftButton)
+			return true;
+		
 		QPoint pos = me->pos();
-
+		
 		if (plot()->zoomOn() || removePoint || moveRangeSelector || dataCursorEnabled ||
 			(presspos - pos).manhattanLength() <= QApplication::startDragDistance())
 				return true;
@@ -261,7 +248,7 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 			plot()->movedPicker(pos, false);		
 		else if (selectedMarker>=0)
 			moveMarker(pos);
-		else if (mousePressed) 	
+		else 	
 			{
 			plotWidget->canvas()->setCursor(Qt::PointingHandCursor);
 			movedGraph = true;
@@ -298,7 +285,7 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 				g->insertLineMarker(&mrk);
 				g->drawLine(false);
 				mrk.detach();
-				plotWidget->replot();
+				plotWidget->replot();					
 				}
 			else if (plot()->lineProfile())
 				{ 	
@@ -328,7 +315,6 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 				plotWidget->canvas()->setCursor(Qt::arrowCursor);
 				emit releasedGraph();
 				movedGraph = false;
-				mousePressed = false;
 				}
 		
 		return TRUE;			

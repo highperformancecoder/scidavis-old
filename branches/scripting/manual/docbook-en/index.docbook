@@ -15,6 +15,8 @@
   <!ENTITY email-ion "ion_vasilief@yahoo.fr">
   <!ENTITY roger "Roger Gadiou">
   <!ENTITY email-roger "Roger.Gadiou@uha.fr">
+  <!ENTITY tilman "Tilman Hoener zu Siederdissen">
+  <!ENTITY email-tilman "thzs@gmx.de">
   <!ENTITY knut "Knut Franke">
   <!ENTITY email-knut "Knut.Franke@gmx.de">
   <!ENTITY homepage "http://soft.proindependent.com">
@@ -205,7 +207,7 @@
 <!ENTITY draw-arrow-cmd "<command>Draw Arrow</command>"> 
 <!ENTITY draw-arrow-lnk '<link linkend="draw-arrow-cmd"><command>Draw Arrow</command> command</link>'> 
   <!ENTITY draw-arrow-key "<keycode>Ctrl-Alt-A</keycode>"> 
-  <!ENTITY draw-arrow-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/line.png"/></imageobject></inlinemediaobject>'> 
+  <!ENTITY draw-arrow-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/arrow.png"/></imageobject></inlinemediaobject>'> 
 <!ENTITY draw-line-cmd "<command>Draw Line</command>"> 
 <!ENTITY draw-line-lnk '<link linkend="draw-line-cmd"><command>Draw Line</command> command</link>'> 
   <!ENTITY draw-line-key "<keycode>Ctrl-Alt-L</keycode>"> 

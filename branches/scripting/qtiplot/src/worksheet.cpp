@@ -2382,7 +2382,7 @@ if ( f.open(IO_ReadOnly) )
 		for (i=startCol; i<end; i++)
 			{
 			comments[i] = line[i-startCol];
-			s = line[i-startCol].remove(QRegExp("\\W")).replace("_","-");
+			s = line[i-startCol].replace("-","_").remove(QRegExp("\\W")).replace("_","-");
 			int n = (int)col_label.contains(s);
 			if (n)
 				{//avoid identical col names
@@ -2533,7 +2533,7 @@ if ( f.open(IO_ReadOnly) )
 		for (i=0; i<(int)line.count(); i++)
 			{
 			comments[i] = line[i];
-			s = line[i].remove(QRegExp("\\W")).replace("_","-");
+			s = line[i].replace("-","_").remove(QRegExp("\\W")).replace("_","-");
 			int n = (int)col_label.contains(s);
 			if (n)
 				{//avoid identical col names

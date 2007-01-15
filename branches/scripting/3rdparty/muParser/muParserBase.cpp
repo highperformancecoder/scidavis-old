@@ -1,4 +1,10 @@
 /*
+                 __________                                      
+    _____   __ __\______   \_____  _______  ______  ____ _______ 
+   /     \ |  |  \|     ___/\__  \ \_  __ \/  ___/_/ __ \\_  __ \
+  |  Y Y  \|  |  /|    |     / __ \_|  | \/\___ \ \  ___/ |  | \/
+  |__|_|  /|____/ |____|    (____  /|__|  /____  > \___  >|__|   
+        \/                       \/            \/      \/        
   Copyright (C) 2004-2006 Ingo Berg
 
   Permission is hereby granted, free of charge, to any person obtaining a copy of this 
@@ -11,11 +17,12 @@
   substantial portions of the Software.
 
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
-  NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+  NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
   DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
 */
+
 #include "muParser.h"
 
 #include <cassert>
@@ -38,8 +45,12 @@ namespace mu
 */
 const char_type* ParserBase::c_DefaultOprt[] = 
 { 
-  "<=", ">=", "!=", "==", "<", ">", "+", "-", "*", "/", 
-  "^", "and", "or", "xor", "=", "(", ")", ",", 0 
+  _T("<="), _T(">="), _T("!="), 
+  _T("=="), _T("<"),  _T(">"), 
+  _T("+"),  _T("-"),  _T("*"), 
+  _T("/"),  _T("^"), _T("and"), 
+  _T("or"), _T("xor"), _T("="), 
+  _T("("), _T(")"), _T(","), 0 
 };
 
 //------------------------------------------------------------------------------
@@ -183,9 +194,9 @@ void ParserBase::AddValIdent(identfun_type a_pCallback)
 }
 
 //---------------------------------------------------------------------------
-void ParserBase::SetVarFactory(facfun_type a_pFactory)
+void ParserBase::SetVarFactory(facfun_type a_pFactory, void *pUserData)
 {
-  m_pTokenReader->SetVarCreator(a_pFactory);  
+  m_pTokenReader->SetVarCreator(a_pFactory, pUserData);  
 }
 
 //---------------------------------------------------------------------------
@@ -484,21 +495,21 @@ ParserBase::token_type ParserBase::ApplyNumFunc( const token_type &a_FunTok,
 	        }
 	        break;
 
-    case 1: valTok.SetVal( ((fun_type1)a_FunTok.GetFuncAddr())(a_vArg[0].GetVal()) );  break;
-    case 2: valTok.SetVal( ((fun_type2)a_FunTok.GetFuncAddr())(a_vArg[1].GetVal(),
-		                                                           a_vArg[0].GetVal()) );  break;
-    case 3: valTok.SetVal( ((fun_type3)a_FunTok.GetFuncAddr())(a_vArg[2].GetVal(), 
-		                                                           a_vArg[1].GetVal(), 
-														                                   a_vArg[0].GetVal()) );  break;
-    case 4: valTok.SetVal( ((fun_type4)a_FunTok.GetFuncAddr())(a_vArg[3].GetVal(),
-	                                                             a_vArg[2].GetVal(), 
-				   	  	                                               a_vArg[1].GetVal(),
-													                                     a_vArg[0].GetVal()) );  break;
-    case 5: valTok.SetVal( ((fun_type5)a_FunTok.GetFuncAddr())(a_vArg[4].GetVal(), 
-														                                   a_vArg[3].GetVal(), 
-	                                                             a_vArg[2].GetVal(), 
-				   	  	                                               a_vArg[1].GetVal(),
-													                                     a_vArg[0].GetVal()) );  break;
+    case 1: valTok.SetVal( ((fun_type1)pFunc)(a_vArg[0].GetVal()) );  break;
+    case 2: valTok.SetVal( ((fun_type2)pFunc)(a_vArg[1].GetVal(),
+		                                          a_vArg[0].GetVal()) );  break;
+    case 3: valTok.SetVal( ((fun_type3)pFunc)(a_vArg[2].GetVal(), 
+		                                          a_vArg[1].GetVal(), 
+														                  a_vArg[0].GetVal()) ); break;
+    case 4: valTok.SetVal( ((fun_type4)pFunc)(a_vArg[3].GetVal(),
+	                                            a_vArg[2].GetVal(), 
+				   	  	                              a_vArg[1].GetVal(),
+													                    a_vArg[0].GetVal()) );  break;
+    case 5: valTok.SetVal( ((fun_type5)pFunc)(a_vArg[4].GetVal(), 
+														                  a_vArg[3].GetVal(), 
+	                                            a_vArg[2].GetVal(), 
+				   	  	                              a_vArg[1].GetVal(),
+													                    a_vArg[0].GetVal()) );  break;
     default: Error(ecINTERNAL_ERROR, 6);
   }
 
@@ -547,32 +558,51 @@ ParserBase::token_type ParserBase::ApplyNumFunc( const token_type &a_FunTok,
     \throw exception_type If the function token is not a string function
 */
 ParserBase::token_type ParserBase::ApplyStrFunc(const token_type &a_FunTok,
-                                                token_type &a_Arg) const
+                                                const std::vector<token_type> &a_vArg) const
 {
-  if (a_Arg.GetCode()!=cmSTRING)
+  if (a_vArg.back().GetCode()!=cmSTRING)
     Error(ecSTRING_EXPECTED, m_pTokenReader->GetPos(), a_FunTok.GetAsString());
 
-  strfun_type1 pFunc = (strfun_type1)a_FunTok.GetFuncAddr();
+  token_type  valTok;
+  int  iArgCount = (unsigned)a_vArg.size();
+  void  *pFunc = a_FunTok.GetFuncAddr();
   assert(pFunc);
-  
-  value_type fResult = pFunc( a_Arg.GetAsString().c_str() );
 
-  // Formula optimization
-  if ( m_bOptimize && 
-       !a_FunTok.IsFlagSet(token_type::flVOLATILE) )
-	{
-    m_vByteCode.AddVal( fResult );
-	}
-	else 
-	{ 
-    // operation dosnt depends on a variable or the function is flagged unoptimizeable
-    // we cant optimize here...
-    m_vByteCode.AddStrFun((void*)pFunc, a_FunTok.GetArgCount(), a_Arg.GetIdx());
-	}
+  try
+  {
+    // Collect the function arguments from the value stack
+    switch(a_FunTok.GetArgCount())
+    {
+      case 0: valTok.SetVal( ((strfun_type1)pFunc)(a_vArg[0].GetAsString().c_str()) );  break;
+      case 1: valTok.SetVal( ((strfun_type2)pFunc)(a_vArg[1].GetAsString().c_str(),
+		                                               a_vArg[0].GetVal()) );  break;
+      case 2: valTok.SetVal( ((strfun_type3)pFunc)(a_vArg[2].GetAsString().c_str(), 
+		                                               a_vArg[1].GetVal(), 
+														                       a_vArg[0].GetVal()) );  break;
+      default: Error(ecINTERNAL_ERROR);
+    }
+  }
+  catch(ParserError& /*e*/)
+  {
+    Error(ecVAL_EXPECTED, m_pTokenReader->GetPos(), a_FunTok.GetAsString());
+  }
+
+  // Find out if the result will depend on a variable
+  /** \todo remove this loop, put content in the loop that takes the argument values.
+    
+      (Attention: SetVal will reset Flags.)
+  */
+  bool bVolatile = a_FunTok.IsFlagSet(token_type::flVOLATILE);
+  for (int i=0; (bVolatile==false) && (i<iArgCount); ++i)
+    bVolatile |= a_vArg[i].IsFlagSet(token_type::flVOLATILE);
+
+  if (bVolatile)
+    valTok.AddFlags(token_type::flVOLATILE);
+
+  // string functions won't be optimized
+  m_vByteCode.AddStrFun((void*)pFunc, a_FunTok.GetArgCount(), a_vArg.back().GetIdx());
   
-  a_Arg.SetVal(fResult);
-  
-  return a_Arg;
+  return valTok;
 }
 
 //---------------------------------------------------------------------------
@@ -607,7 +637,10 @@ void ParserBase::ApplyFunc( ParserStack<token_type> &a_stOpt,
 	if ( funTok.GetCode()!=cmOPRT_BIN && iArgCount<funTok.GetArgCount() )
 	    Error(ecTOO_FEW_PARAMS, m_pTokenReader->GetPos()-1, funTok.GetAsString());
 
-  // Collect the function arguments from the value stack and store them
+  if ( funTok.GetCode()==cmFUNC_STR && iArgCount>funTok.GetArgCount() )
+	    Error(ecTOO_MANY_PARAMS, m_pTokenReader->GetPos()-1, funTok.GetAsString());
+
+  // Collect the numeric function arguments from the value stack and store them
   // in a vector
   std::vector<token_type> stArg;  
   for (int i=0; i<iArgCount; ++i)
@@ -617,23 +650,45 @@ void ParserBase::ApplyFunc( ParserStack<token_type> &a_stOpt,
       Error(ecVAL_EXPECTED, m_pTokenReader->GetPos(), funTok.GetAsString());
   }
 
+  // for string functions add the string argument
+  if (funTok.GetCode()==cmFUNC_STR)
+  {
+    stArg.push_back( a_stVal.pop() );
+    if ( stArg.back().GetType()==tpSTR && funTok.GetType()!=tpSTR )
+      Error(ecVAL_EXPECTED, m_pTokenReader->GetPos(), funTok.GetAsString());
+  }
+
+  // String functions accept only one parameter
+  if (funTok.GetType()==tpSTR)
+  {
+    token_type token( ApplyStrFunc(funTok, stArg)  );
+    a_stVal.push( token );
+  }
+  else
+  {
+    token_type token( ApplyNumFunc(funTok, stArg) );
+    a_stVal.push( token );
+  }
+/*
 #ifdef __BORLANDC__
   // Borland C++ Compiler does not support taking references on
   // unnamed temporaries
-  if (funTok.GetType()==tpSTR) {
-    ParserToken<double,std::string> pt = ApplyStrFunc(funTok, stArg.back());
+  if (funTok.GetType()==tpSTR)
+  {
+    ParserToken<value_type, string_type> pt( ApplyStrFunc(funTok, stArg.back()) );
     a_stVal.push(pt);
   }
-  else {
-    ParserToken<double,std::string> pt = ApplyNumFunc(funTok, stArg);
+  else
+  {
+    ParserToken<value_type, string_type> pt( ApplyNumFunc(funTok, stArg) );
     a_stVal.push(pt);
   }
 #else
   // String functions accept only one parameter
-  a_stVal.push( (funTok.GetType()==tpSTR) ?
-                      ApplyStrFunc(funTok, stArg.back()) :
-                      ApplyNumFunc(funTok, stArg) );
+  a_stVal.push( (funTok.GetType()==tpSTR) ? ApplyStrFunc(funTok, stArg) :
+                                            ApplyNumFunc(funTok, stArg) );
 #endif // __BORLANDC__
+*/
 }
 
 //---------------------------------------------------------------------------
@@ -689,7 +744,7 @@ void ParserBase::ApplyBinOprt( ParserStack<token_type> &a_stOpt,
                   if (valTok2.GetCode()!=cmVAR)
                     Error(ecINTERNAL_ERROR, 7);
                     
-                  double *pVar = valTok2.GetVar();
+                  value_type *pVar = valTok2.GetVar();
                   resTok.SetVal( *pVar = y );
                   a_stVal.push( resTok );
 
@@ -757,7 +812,7 @@ value_type ParserBase::ParseCmdCode() const
 
 #ifdef _DEBUG
   if (idx>=99)
-    throw exception_type(ecGENERIC, "", m_pTokenReader->GetFormula(), -1);
+    throw exception_type(ecGENERIC, _T(""), m_pTokenReader->GetFormula(), -1);
 #endif
 
   switch (iCode)
@@ -812,14 +867,20 @@ value_type ParserBase::ParseCmdCode() const
     // Next is treatment of string functions
     case cmFUNC_STR:
             {
-              i++; // skip the unused argument count
-              strfun_type1 pFun = *(strfun_type1*)(&m_pCmdCode[i]);
-              i += m_vByteCode.GetPtrSize();
+		          // The function argument count
+              int iArgCount = (int)m_pCmdCode[ i++ ];  
 
-              int iIdxStack = (int)m_pCmdCode[i++];
-
+              // The index of the string argument in the string table
+              int iIdxStack = (int)m_pCmdCode[ i++ ];  
               MUP_ASSERT( iIdxStack>=0 && iIdxStack<(int)m_vStringBuf.size() );
-              Stack[idx] = pFun(m_vStringBuf[iIdxStack].c_str());
+
+              switch(iArgCount)  // switch according to argument count
+		          {
+                case 0: Stack[idx] = (*(strfun_type1*)(&m_pCmdCode[i]))(m_vStringBuf[iIdxStack].c_str()); break;
+			          case 1: Stack[idx] = (*(strfun_type2*)(&m_pCmdCode[i]))(m_vStringBuf[iIdxStack].c_str(), Stack[idx]); break;
+			          case 2: Stack[idx] = (*(strfun_type3*)(&m_pCmdCode[i]))(m_vStringBuf[iIdxStack].c_str(), Stack[idx], Stack[idx+1]); break;
+              }
+		          i += m_vByteCode.GetPtrSize();
             }
             goto __start;
 
@@ -955,7 +1016,9 @@ value_type ParserBase::ParseString() const
                 
                 stOpt.pop(); // Take opening bracket from stack
 
-                if (iArgCount>1 && (stOpt.size()==0 || stOpt.top().GetCode()!=cmFUNC) )
+                if (iArgCount>1 && ( stOpt.size()==0 || 
+                                     (stOpt.top().GetCode()!=cmFUNC && 
+                                     stOpt.top().GetCode()!=cmFUNC_STR) ) )
                   Error(ecUNEXPECTED_ARG, m_pTokenReader->GetPos());
                 
                 if (stOpt.size() && stOpt.top().GetCode()!=cmOPRT_INFIX)
@@ -1002,12 +1065,12 @@ value_type ParserBase::ParseString() const
       // Last section contains functions and operators implicitely mapped to functions
       //
 	    case cmBO:
-              stArgCount.push(1); // we use this for counting the bracket level
+              stArgCount.push( (stOpt.size() && stOpt.top().GetCode()==cmFUNC_STR) ? 0 : 1 );
               stOpt.push(opt);
 		    	    break;
 
+      case cmFUNC_STR:  
       case cmFUNC:
-      case cmFUNC_STR:
       case cmOPRT_INFIX:
               stOpt.push(opt);
 		    	    break;
@@ -1026,7 +1089,7 @@ value_type ParserBase::ParseString() const
       break;
     }
 
-#if defined(MU_PARSER_DUMP_STACK)
+#if defined(MUP_DUMP_STACK)
     StackDump(stVal, stOpt);
     m_vByteCode.AsciiDump();
 #endif
@@ -1035,13 +1098,13 @@ value_type ParserBase::ParseString() const
   // Store pointer to start of bytecode
   m_pCmdCode = m_vByteCode.GetRawData();
 
-#if defined(MU_PARSER_DUMP_CMDCODE)
-//  m_vByteCode.AsciiDump();
+#if defined(MUP_DUMP_CMDCODE)
+  m_vByteCode.AsciiDump();
 #endif
 
   // get the last value (= final result) from the stack
   if (stVal.size()!=1)
-    Error(ecINTERNAL_ERROR, 4);
+    Error(ecEMPTY_EXPRESSION);
 
   if (stVal.top().GetType()!=tpDBL)
     Error(ecSTR_RESULT);
@@ -1121,7 +1184,7 @@ void ParserBase::ClearFormula()
 {
   m_vByteCode.clear();
   m_pCmdCode = 0;
-  m_pTokenReader->SetFormula("");
+  m_pTokenReader->SetFormula(_T(""));
   ReInit();
 }
 
@@ -1209,14 +1272,13 @@ void ParserBase::EnableByteCode(bool a_bIsOn)
 
 //------------------------------------------------------------------------------
 /** \brief Enable or disable the built in binary operators.
+    \throw nothrow
+    \sa m_bBuiltInOp, ReInit()
 
    If you disable the built in binary operators there will be no binary operators
    defined. Thus you must add them manually one by one. It is not possible to
    disable built in operators selectively. This function will Reinitialize the
    parser by calling ReInit().
-
-   \throw nothrow
-   \sa m_bBuiltInOp, ReInit()
 */
 void ParserBase::EnableBuiltInOprt(bool a_bIsOn)
 {
@@ -1241,58 +1303,62 @@ bool ParserBase::HasBuiltInOprt() const
 
     This function is used for debugging only.
 */
-void ParserBase::StackDump( const ParserStack<token_type > &a_stVal, 
-				             			  const ParserStack<token_type > &a_stOprt ) const
+void ParserBase::StackDump( const ParserStack<token_type> &a_stVal, 
+				             			  const ParserStack<token_type> &a_stOprt ) const
 {
-  using std::cout;
   ParserStack<token_type> stOprt(a_stOprt), 
                           stVal(a_stVal);
 
-  cout << "\nValue stack:\n";
+  mu::console() << _T("\nValue stack:\n");
   while ( !stVal.empty() ) 
   {
     token_type val = stVal.pop();
-    cout << " " << val.GetVal() << " ";
+    if (val.GetType()==tpSTR)
+      mu::console() << _T(" \"") << val.GetAsString() << _T("\" ");
+    else
+      mu::console() << _T(" ") << val.GetVal() << _T(" ");
   }
-  cout << "\nOperator stack:\n";
+  mu::console() << "\nOperator stack:\n";
 
   while ( !stOprt.empty() )
   {
      if (stOprt.top().GetCode()<=cmASSIGN) 
   	 {
-	  	 cout << "OPRT_INTRNL \"" 
-            << ParserBase::c_DefaultOprt[stOprt.top().GetCode()] 
-            << "\" \n";
+	  	 mu::console() << _T("OPRT_INTRNL \"")
+                     << ParserBase::c_DefaultOprt[stOprt.top().GetCode()] 
+                     << _T("\" \n");
 	   }
      else
      {
 		    switch(stOprt.top().GetCode())
 		    {
-		      case cmVAR:        cout << "VAR\n";  break;
-		      case cmVAL:        cout << "VAL\n";  break;
-		      case cmFUNC:       cout << "FUNC_NUM \"" 
-                                  << stOprt.top().GetAsString() 
-                                  << "\"\n";   break;
-		      case cmOPRT_INFIX: cout << "OPRT_INFIX \"" 
-                                  << stOprt.top().GetAsString() 
-                                  << "\"\n";   break;
-          case cmOPRT_BIN:   cout << "OPRT_BIN \"" 
-                                  << stOprt.top().GetAsString() 
-                                  << "\"\n";        break;
-          case cmFUNC_STR:   cout << "FUNC_STR\n";  break;
-		      case cmEND:        cout << "END\n";       break;
-		      case cmUNKNOWN:    cout << "UNKNOWN\n";   break;
-		      case cmBO:         cout << "BRACKET \"(\"\n";  break;
-		      case cmBC:         cout << "BRACKET \")\"\n";  break;
-		      default:           cout << stOprt.top().GetType() << " ";  break;
+        case cmVAR:   mu::console() << _T("VAR\n");  break;
+		    case cmVAL:   mu::console() << _T("VAL\n");  break;
+		    case cmFUNC:  mu::console() << _T("FUNC_NUM \"") 
+                                    << stOprt.top().GetAsString() 
+                                    << _T("\"\n");   break;
+		    case cmOPRT_INFIX: mu::console() << _T("OPRT_INFIX \"")
+                                         << stOprt.top().GetAsString() 
+                                         << _T("\"\n");   break;
+        case cmOPRT_BIN:   mu::console() << _T("OPRT_BIN \"") 
+                                         << stOprt.top().GetAsString() 
+                                         << _T("\"\n");        break;
+        case cmFUNC_STR: mu::console() << _T("FUNC_STR\n");  break;
+		    case cmEND:      mu::console() << _T("END\n");       break;
+		    case cmUNKNOWN:  mu::console() << _T("UNKNOWN\n");   break;
+		    case cmBO:       mu::console() << _T("BRACKET \"(\"\n");  break;
+		    case cmBC:       mu::console() << _T("BRACKET \")\"\n");  break;
+        default:         mu::console() << stOprt.top().GetType() << _T(" ");  break;
 		    }
      }	
      stOprt.pop();
   }
 
-  cout << dec << endl;
+  mu::console() << dec << endl;
 }
 
-#endif
+#endif // defined(MUP_DUMP_STACK) | defined(MUP_DUMP_CMDCODE)
 
 } // namespace mu
+
+

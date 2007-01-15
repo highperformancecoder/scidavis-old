@@ -10,7 +10,7 @@
     <property name="abouturl">./index.html</property>
 </profile>
 
-<DCF ref="./index.html" icon="./common/qtiplot_logo.png" title="The QtiPlot Handbook">
+<DCF ref="./index.html" title="The QtiPlot Handbook">
 <section ref="./ch01.html" title="Introduction">
 	<keyword ref="./ch01.html#sec-qtiplot-intro">What QtiPlot does</keyword>
 	<section ref="./ch01s02.html" title="Command Line Options">

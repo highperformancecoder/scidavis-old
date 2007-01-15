@@ -256,7 +256,7 @@ if (generalDialog->currentPage()==(QWidget *)layout )
 	multi_layer->setMargins(boxLeftSpace->value(), boxRightSpace->value(),
 							boxTopSpace->value(), boxBottomSpace->value());
 	
-	multi_layer->setSpacing(boxColsGap->value(), boxRowsGap->value());
+	multi_layer->setSpacing(boxRowsGap->value(), boxColsGap->value());
 	multi_layer->arrangeLayers(fitBox->isChecked(), GroupCanvasSize->isChecked());
 	
 	if (!GroupCanvasSize->isChecked())

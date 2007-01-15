@@ -366,7 +366,7 @@ switch (d_weihting)
 			}
 		if (error)
 			{
-			QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"), 
+			QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"), 
 			tr("The curve %1 has no associated Y error bars. You cannot use instrumental weighting method.").arg(yColName));
 			return false;
 			}
@@ -391,6 +391,13 @@ switch (d_weihting)
 		Table* t = ((ApplicationWindow *)parent())->table(colName);
 		if (!t)
 			return false;
+
+		if (t->tableRows() < d_n)
+			{
+			QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot - Error"), 
+			tr("The column %1 has less points than the fitted data set. Please choose another column!.").arg(colName));
+			return false;
+			}
 
 		weighting_dataset = colName;
 

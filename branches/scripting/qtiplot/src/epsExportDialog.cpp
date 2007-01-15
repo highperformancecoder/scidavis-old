@@ -10,6 +10,7 @@
 #include <qbuttongroup.h>
 #include <qimage.h>
 #include <qprinter.h>
+#include <qhbox.h>
 
 epsExportDialog::epsExportDialog(const QString& fileName, QWidget* parent, const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )
@@ -21,7 +22,9 @@ epsExportDialog::epsExportDialog(const QString& fileName, QWidget* parent, const
     setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, 0, 0, sizePolicy().hasHeightForWidth() ) );
     setSizeGripEnabled( true );
 	
-	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal,tr(""),this,"GroupBox1" );
+	QHBox* hbox = new QHBox(this);
+
+	GroupBox1 = new QButtonGroup( 2,QGroupBox::Horizontal, QString::null, hbox);
 
 	new QLabel( tr( "Orientation" ), GroupBox1, "TextLabel111",0 );
 	boxOrientation= new QComboBox(GroupBox1, "Orientation" );
@@ -37,7 +40,7 @@ epsExportDialog::epsExportDialog(const QString& fileName, QWidget* parent, const
 	boxColor->setText( tr("&Print in color if available") );
 	boxColor->setChecked(true);
 
-	GroupBox2 = new QButtonGroup(1,QGroupBox::Horizontal,tr(""),this,"GroupBox2" );
+	GroupBox2 = new QButtonGroup(1, QGroupBox::Horizontal, QString::null, hbox);
 	GroupBox2->setFlat (TRUE);
 	GroupBox2->setLineWidth (0);
 	
@@ -48,9 +51,12 @@ epsExportDialog::epsExportDialog(const QString& fileName, QWidget* parent, const
     buttonCancel = new QPushButton(GroupBox2, "buttonCancel" );
     buttonCancel->setAutoDefault( TRUE );
 	
-	QHBoxLayout* hlayout = new QHBoxLayout(this,5,5, "hlayout");
-    hlayout->addWidget(GroupBox1);
-	hlayout->addWidget(GroupBox2);
+	QVBoxLayout* vlayout = new QVBoxLayout(this, 5, 5);
+    vlayout->addWidget(hbox);
+
+	#ifdef Q_OS_WIN 		
+		vlayout->addWidget(new QLabel( tr( "Warning: Windows users need a default post-script printer enabled!" ), this ));
+	#endif
 
     languageChange();
    

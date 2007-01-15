@@ -18,7 +18,6 @@
 
 class QwtPlotCurve;
 class QwtPlotZoomer;
-
 class QwtPieCurve;	
 class Table;
 class LegendMarker;
