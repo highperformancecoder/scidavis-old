@@ -28,7 +28,7 @@
 
 namespace mu
 {
-
+  //---------------------------------------------------------------------------
   ParserCallback::ParserCallback(fun_type1 a_pFun, bool a_bAllowOpti, int a_iPrec, ECmdCode a_iCode)
     :m_pFun((void*)a_pFun)
     ,m_iArgc(1)
@@ -39,6 +39,7 @@ namespace mu
   {}
 
 
+  //---------------------------------------------------------------------------
   ParserCallback::ParserCallback( fun_type2 a_pFun, bool a_bAllowOpti, int a_iPrec, ECmdCode a_iCode)
     :m_pFun((void*)a_pFun)
     ,m_iArgc(2)
@@ -49,6 +50,7 @@ namespace mu
   {}
 
 
+  //---------------------------------------------------------------------------
   ParserCallback::ParserCallback(fun_type3 a_pFun, bool a_bAllowOpti)
     :m_pFun((void*)a_pFun)
     ,m_iArgc(3)
@@ -59,6 +61,7 @@ namespace mu
   {}
 
 
+  //---------------------------------------------------------------------------
   ParserCallback::ParserCallback(fun_type4 a_pFun, bool a_bAllowOpti)
     :m_pFun((void*)a_pFun)
     ,m_iArgc(4)
@@ -68,6 +71,8 @@ namespace mu
     ,m_bAllowOpti(a_bAllowOpti)
   {}
 
+
+  //---------------------------------------------------------------------------
   ParserCallback::ParserCallback(fun_type5 a_pFun, bool a_bAllowOpti)
     :m_pFun((void*)a_pFun)
     ,m_iArgc(5)
@@ -77,6 +82,8 @@ namespace mu
     ,m_bAllowOpti(a_bAllowOpti)
   {}
 
+
+  //---------------------------------------------------------------------------
   ParserCallback::ParserCallback(multfun_type a_pFun, bool a_bAllowOpti)
     :m_pFun((void*)a_pFun)
     ,m_iArgc(-1)
@@ -86,6 +93,8 @@ namespace mu
     ,m_bAllowOpti(a_bAllowOpti)
   {}
 
+
+  //---------------------------------------------------------------------------
   ParserCallback::ParserCallback(strfun_type1 a_pFun, bool a_bAllowOpti)
     :m_pFun((void*)a_pFun)
     ,m_iArgc(0)
@@ -95,6 +104,8 @@ namespace mu
     ,m_bAllowOpti(a_bAllowOpti)
   {}
 
+
+  //---------------------------------------------------------------------------
   ParserCallback::ParserCallback(strfun_type2 a_pFun, bool a_bAllowOpti)
     :m_pFun((void*)a_pFun)
     ,m_iArgc(1)
@@ -104,6 +115,8 @@ namespace mu
     ,m_bAllowOpti(a_bAllowOpti)
   {}
 
+
+  //---------------------------------------------------------------------------
   ParserCallback::ParserCallback(strfun_type3 a_pFun, bool a_bAllowOpti)
     :m_pFun((void*)a_pFun)
     ,m_iArgc(2)
@@ -113,6 +126,8 @@ namespace mu
     ,m_bAllowOpti(a_bAllowOpti)
   {}
 
+
+  //---------------------------------------------------------------------------
   /** \brief Default constructor. 
 
       \throw nothrow
@@ -125,6 +140,8 @@ namespace mu
     ,m_bAllowOpti(0)
   {}
 
+
+  //---------------------------------------------------------------------------
   /** \brief Copy constructor. 
 
       \throw nothrow
@@ -138,7 +155,9 @@ namespace mu
     m_iType = a_Fun.m_iType;
     m_iPri = a_Fun.m_iPri;
   }
-    
+
+
+  //---------------------------------------------------------------------------
   /** \brief Clone this instance and return a pointer to the new instance. */
   ParserCallback* ParserCallback::Clone() const
   {
@@ -146,6 +165,7 @@ namespace mu
   }
 
 
+  //---------------------------------------------------------------------------
   /** \brief Return tru if the function is conservative.
 
       Conservative functions return always the same result for the same argument.
@@ -156,6 +176,8 @@ namespace mu
     return m_bAllowOpti; 
   }
 
+
+  //---------------------------------------------------------------------------
   /** \brief Get the callback address for the parser function. 
   
       The type of the address is void. It needs to be recasted according to the
@@ -168,19 +190,24 @@ namespace mu
   { 
     return m_pFun;  
   }
-  
+
+
+  //---------------------------------------------------------------------------
   /** \brief Return the callback code. */
   ECmdCode  ParserCallback::GetCode() const 
   { 
     return m_iCode; 
   }
   
-  
+
+  //---------------------------------------------------------------------------
   ETypeCode ParserCallback::GetType() const 
   { 
     return m_iType; 
   }
 
+
+  //---------------------------------------------------------------------------
   /** \brief Return the operator priority. 
   
      Only valid if the callback token is an operator token (binary or infix).
@@ -189,7 +216,9 @@ namespace mu
   { 
     return m_iPri;  
   }
-    
+
+
+  //---------------------------------------------------------------------------
   /** \brief Returns the number of function Arguments. */
   int ParserCallback::GetArgc() const 
   { 

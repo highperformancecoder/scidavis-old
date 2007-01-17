@@ -22,7 +22,6 @@
   DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
 */
-
 #include <cassert>
 #include <cstdio>
 #include <cstring>
@@ -286,7 +285,8 @@ namespace mu
     // The GetUsedVar function must supress the error for
     // undefined variables in order to collect all variable 
     // names including the undefined ones.
-    if ( (m_bIgnoreUndefVar || m_pFactory) && IsUndefVarTok(tok) )  return tok;
+    if ( (m_bIgnoreUndefVar || m_pFactory) && IsUndefVarTok(tok) )  
+      return tok;
 
     // Check for unknown token
     // 
@@ -635,7 +635,7 @@ namespace mu
     for (item = m_vIdentFun.begin(); item!=m_vIdentFun.end(); ++item)
     {
       int iStart = m_iPos;
-      if ( (*item)(m_strFormula.c_str() + m_iPos, m_iPos, fVal) )
+      if ( (*item)(m_strFormula.c_str() + m_iPos, &m_iPos, &fVal)==1 )
       {
         strTok.assign(m_strFormula.c_str(), iStart, m_iPos);
         if (m_iSynFlags & noVAL)
@@ -712,6 +712,7 @@ namespace mu
     return true;
   }
 
+
   //---------------------------------------------------------------------------
   /** \brief Check wheter a token at a given position is an undefined variable. 
 
@@ -722,14 +723,16 @@ namespace mu
   bool ParserTokenReader::IsUndefVarTok(token_type &a_Tok)
   {
     string_type strTok;
-    int iEnd = ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos);
-    if (iEnd==m_iPos)
+    int iEnd( ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos) );
+    if ( iEnd==m_iPos )
       return false;
 
     if (m_iSynFlags & noVAR)
     {
       // <ibg/> 20061021 added token string strTok instead of a_Tok.GetAsString() as the 
-      //                token identifier.
+      //                 token identifier. 
+      // related bug report:
+      // http://sourceforge.net/tracker/index.php?func=detail&aid=1578779&group_id=137191&atid=737979
       Error(ecUNEXPECTED_VAR, m_iPos - (int)a_Tok.GetAsString().length(), strTok);
     }
 
@@ -761,9 +764,9 @@ namespace mu
     return true;
   }
 
+
   //---------------------------------------------------------------------------
   /** \brief Check wheter a token at a given position is a string.
-
       \param a_Tok [out] If a variable token has been found it will be placed here.
   	  \return true if a string token has been found.
       \sa IsOprt, IsFunTok, IsStrFunTok, IsValTok, IsVarTok, IsEOF, IsInfixOpTok, IsPostOpTok

@@ -115,9 +115,7 @@ namespace mu
 //    fVal = **(double**)dbg;
 
     for (int i=0; i<mc_iSizePtr; ++i)
-    {
-        m_vBase.push_back( *( reinterpret_cast<map_type*>(&a_pAddr) + i ) );
-    }
+      m_vBase.push_back( *( reinterpret_cast<map_type*>(&a_pAddr) + i ) );
 
     #if defined(_MSC_VER)
       #pragma warning( default : 4311 )

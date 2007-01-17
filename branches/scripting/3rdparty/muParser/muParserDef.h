@@ -231,7 +231,7 @@ namespace mu
   typedef value_type (*strfun_type3)(const char_type*, value_type, value_type);
 
   // Parser utility callback functions (unrelated to the math callbacks)
-  typedef bool (*identfun_type)(const char_type*, int&, value_type&);
+  typedef int (*identfun_type)(const char_type *sExpr, int *nPos, value_type *fVal);
   typedef value_type* (*facfun_type)(const char_type*, void*);
 } // end fo namespace
 

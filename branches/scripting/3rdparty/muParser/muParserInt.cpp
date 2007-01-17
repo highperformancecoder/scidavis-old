@@ -109,7 +109,7 @@ value_type ParserInt::Max(const value_type* a_afArg, int a_iArgc)
 
 //---------------------------------------------------------------------------
 // Default value recognition callback
-bool ParserInt::IsVal(const char_type *a_szExpr, int &a_iPos, value_type &a_fVal)
+int ParserInt::IsVal(const char_type *a_szExpr, int *a_iPos, value_type *a_fVal)
 {
   stringstream_type stream(a_szExpr);
   int iVal(0);
@@ -118,18 +118,18 @@ bool ParserInt::IsVal(const char_type *a_szExpr, int &a_iPos, value_type &a_fVal
   int iEnd = stream.tellg();   // Position after reading
 
   if (iEnd==-1)
-    return false;
+    return 0;
 
-  a_iPos += iEnd;
-  a_fVal = (value_type)iVal;
-  return true;
+  *a_iPos += iEnd;
+  *a_fVal = (value_type)iVal;
+  return 1;
 }
 
 //---------------------------------------------------------------------------
-bool ParserInt::IsHexVal(const char_type *a_szExpr, int &a_iPos, value_type &a_fVal)
+int ParserInt::IsHexVal(const char_type *a_szExpr, int *a_iPos, value_type *a_fVal)
 {
   if (a_szExpr[0]!='$') 
-    return false;
+    return 0;
 
   unsigned iVal(0);
 
@@ -140,28 +140,18 @@ bool ParserInt::IsHexVal(const char_type *a_szExpr, int &a_iPos, value_type &a_f
   nPos = ss.tellg();
 
   if (nPos==(stringstream_type::pos_type)0)
-    return false;
+    return 1;
 
-  a_iPos += 1 + nPos;
-  
-/*
-  // original code based on sscanf. Working but not UNICODE compliant!
-  int iLen(0);
-  if (sscanf(a_szExpr+1, "%x%n", &iVal, &iLen)==0)
-    return false;
-
-  a_iPos += iLen+1;
-*/
-
-  a_fVal = iVal;
+  *a_iPos += 1 + nPos;
+  *a_fVal = iVal;
   return true;
 }
 
 //---------------------------------------------------------------------------
-bool ParserInt::IsBinVal(const char_type *a_szExpr, int &a_iPos, value_type &a_fVal)
+int ParserInt::IsBinVal(const char_type *a_szExpr, int *a_iPos, value_type *a_fVal)
 {
   if (a_szExpr[0]!='#') 
-    return false;
+    return 0;
 
   unsigned iVal(0), 
            iBits(sizeof(iVal)*8),
@@ -171,15 +161,15 @@ bool ParserInt::IsBinVal(const char_type *a_szExpr, int &a_iPos, value_type &a_f
     iVal |= (int)(a_szExpr[i+1]=='1') << ((iBits-1)-i);
 
   if (i==0) 
-    return false;
+    return 0;
 
   if (i==iBits)
     throw exception_type(_T("Binary to integer conversion error (overflow)."));
 
-  a_fVal = (unsigned)(iVal >> (iBits-i) );
-  a_iPos += i+1;
+  *a_fVal = (unsigned)(iVal >> (iBits-i) );
+  *a_iPos += i+1;
 
-  return true;
+  return 1;
 }
 
 //---------------------------------------------------------------------------
@@ -188,7 +178,7 @@ bool ParserInt::IsBinVal(const char_type *a_szExpr, int &a_iPos, value_type &a_f
   Call ParserBase class constructor and trigger Function, Operator and Constant initialization.
 */
 ParserInt::ParserInt()
-:ParserBase()
+  :ParserBase()
 {
   AddValIdent(IsVal);
   AddValIdent(IsHexVal);

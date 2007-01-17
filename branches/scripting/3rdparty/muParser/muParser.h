@@ -83,7 +83,7 @@ private:
     static value_type Min(const value_type*, int);  // minimum
     static value_type Max(const value_type*, int);  // maximum
 
-    static bool IsVal(const char_type *a_szExpr, int &a_iPos, value_type &a_fVal);
+    static int IsVal(const char_type* a_szExpr, int *a_iPos, value_type *a_fVal);
 
     value_type m_fEpsilon; ///< Epsilon used for numerical differentiation.
 
