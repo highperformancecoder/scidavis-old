@@ -18,7 +18,7 @@ DEFINES		+= QT_PLUGIN
 #!!! Warning: You must modify these paths according to your computer settings
 ############################################################################# 
 
-unix:LIBS         +=  /usr/lib/qt3/lib64/libqassistantclient.a
+unix:LIBS         +=  /usr/lib/qt3/lib$${libsuff}/libqassistantclient.a
 
 ############################################################################# 
 ##################### 3rd PARTY HEADER FILES SECTION ########################
@@ -44,8 +44,6 @@ unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
 unix:LIBS         += ../3rdparty/liborigin/liborigin.a
 unix:LIBS         += ../3rdparty/gsl/lib/libgsl.a
 unix:LIBS         += ../3rdparty/gsl/lib/libgslcblas.a
-
-#unix:LIBS         += -L /usr/lib$${libsuff}  -lz
 
 unix:target.path=/usr/bin
 unix:INSTALLS += target
@@ -261,8 +259,8 @@ SOURCES   +=../3rdparty/zlib123/minigzip.c
 ############################################################### 
  
  SCRIPTING_LANGS = muParser
- #DEFINES	+= SCRIPTING_CONSOLE
- #DEFINES	+= SCRIPTING_DIALOG
+ DEFINES	+= SCRIPTING_CONSOLE
+ DEFINES	+= SCRIPTING_DIALOG
 
 # Python support is unstable; use at your own risk
 unix:SCRIPTING_LANGS += Python

@@ -84,8 +84,8 @@ muParserScript::muParserScript(ScriptingEnv *env, const QString &code, QObject *
     parser.DefineFun("cell", mu_cell);
 
   rparser = parser;
-  //parser.SetVarFactory(mu_addVariable);
-  //rparser.SetVarFactory(mu_addVariableR);
+  parser.SetVarFactory(mu_addVariable);
+  rparser.SetVarFactory(mu_addVariableR);
 }
 
 double muParserScript::col(const QString &arg)
