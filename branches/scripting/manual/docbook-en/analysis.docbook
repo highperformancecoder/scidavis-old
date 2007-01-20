@@ -6,9 +6,7 @@
 		JANUARY 2006: BASED ON VERSION 0.7.7
 
 -->
-
-<chapter id="analysis">
-  <title>Analysis of data and curves</title>
+<title>Analysis of data and curves</title>
 
 <sect1 id="sec-fft">
 <title>Fast Fourier Transform</title>
@@ -19,12 +17,12 @@
   <title>Fourier equation</title>
   <mediaobject>
     <imageobject>
-      <imagedata format="GIF" fileref="equations/equation_fourier.gif"/>
+      <imagedata format="png" fileref="equations/equation_fourier.png"/>
     </imageobject>
   </mediaobject>
 </equation>
 
-<para>in which <inlinemediaobject><imageobject><imagedata format="GIF" fileref="equations/equation_omega-n.gif"/></imageobject></inlinemediaobject> are the frequencies, a<subscript>n</subscript> are the amplitudes of each frequency and <inlinemediaobject><imageobject><imagedata format="GIF" fileref="equations/equation_psi-n.gif"/></imageobject></inlinemediaobject> are the phase corresponding frequency. &appname; will compute these parameters and build a new plot of the amplitude as a function of the frequency.</para>
+<para>in which <inlinemediaobject><imageobject><imagedata format="png" fileref="equations/equation_omega-n.png"/></imageobject></inlinemediaobject> are the frequencies, a<subscript>n</subscript> are the amplitudes of each frequency and <inlinemediaobject><imageobject><imagedata format="png" fileref="equations/equation_psi-n.png"/></imageobject></inlinemediaobject> are the phase corresponding frequency. &appname; will compute these parameters and build a new plot of the amplitude as a function of the frequency.</para>
 
 <figure id="fig-exemple-fft">
   <title>An example of a inverse FFT.</title>
@@ -51,12 +49,12 @@
   <title>Covariance function of two signals <emphasis>x(t)</emphasis> and <emphasis>y(t)</emphasis></title>
   <mediaobject>
     <imageobject>
-      <imagedata format="GIF" fileref="equations/equation_covariance.gif"/>
+      <imagedata format="png" fileref="equations/equation_covariance.png"/>
     </imageobject>
   </mediaobject>
 </equation>
 
-<para>in which <inlineequation><alt>x_m</alt><graphic fileref="equations/equation_x-m.gif"/></inlineequation> and <inlineequation><alt>y_m</alt><graphic fileref="equations/equation_y-m.gif"/></inlineequation> are the mean values of the signals <emphasis>x(t)</emphasis> and <emphasis>y(t)</emphasis> respectively.</para>
+<para>in which <inlineequation><graphic fileref="equations/equation_x-m.png"/></inlineequation> and <inlineequation><graphic fileref="equations/equation_y-m.png"/></inlineequation> are the mean values of the signals <emphasis>x(t)</emphasis> and <emphasis>y(t)</emphasis> respectively.</para>
 <para>If the number of points is <emphasis>N</emphasis>, the function will be computed between <emphasis>-N/2</emphasis> and <emphasis>N/2</emphasis>. The abscissae are therefore point numbers and not<emphasis>t</emphasis> values.</para>
 
 <figure id="fig-exemple-correlation">
@@ -170,7 +168,7 @@
   <title>Bolzmann equation</title>
   <mediaobject>
     <imageobject>
-      <imagedata  format="PNG" fileref="equations/equation_bolzmann.gif"/>
+      <imagedata  format="PNG" fileref="equations/equation_bolzmann.png"/>
     </imageobject>
   </mediaobject>
 </equation>
@@ -197,7 +195,7 @@
   <title>Gauss equation</title>
   <mediaobject>
     <imageobject>
-      <imagedata  format="GIF" fileref="equations/equation_gauss.gif"/>
+      <imagedata  format="png" fileref="equations/equation_gauss.png"/>
     </imageobject>
   </mediaobject>
 </equation>
@@ -224,7 +222,7 @@
   <title>Lorentz equation</title>
   <mediaobject>
     <imageobject>
-      <imagedata  format="GIF" fileref="equations/equation_lorentz.gif"/>
+      <imagedata  format="png" fileref="equations/equation_lorentz.png"/>
     </imageobject>
   </mediaobject>
 </equation>
@@ -393,4 +391,3 @@
   </figure>
 </sect1>
 
-</chapter>
