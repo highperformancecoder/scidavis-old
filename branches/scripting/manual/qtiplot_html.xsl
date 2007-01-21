@@ -1,5 +1,5 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version='1.0'>
-<xsl:import href="file:////usr/share/sgml/docbook/xsl-stylesheets/html/chunk.xsl"/>
+<xsl:import href="file:////usr/share/xml/docbook/stylesheet/nwalsh/html/chunk.xsl"/>
 
 	<!-- html.stylesheet
 	The html.stylesheet parameter is either empty, indicating that no 

@@ -5,7 +5,6 @@
 	This chapter gives a small overview of the features an a howto to obtain
 	the first simple plots.
 -->
-<chapter id="drawing-plots">
 <title>Drawing plots with &appname;</title>
 <!--
 ======================================================================================
@@ -364,4 +363,3 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
 
 </sect1>
 
-</chapter>

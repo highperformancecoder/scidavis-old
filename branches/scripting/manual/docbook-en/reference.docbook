@@ -1,4 +1,3 @@
-<chapter id="reference">
 <title>Command Reference</title>
 
 <para>
@@ -418,13 +417,13 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="draw-arrow-cmd">
   <term>Graph -> &draw-arrow-cmd; (&draw-arrow-key;)</term>
   <listitem>
-     <para>Changes the active layer operation mode to the drawing mode. You must click on the layer canvas in order to specify the starting point for the new arrow, and then click once more to specify its ending point. You can edit the new arrow using the Arrow  dialog. You can switch back to the normal operating mode by clicking the "Pointer" icon in the Plot toolbar.</para>
+     <para>Changes the active layer operation mode to the drawing mode. You must click on the layer canvas in order to specify the starting point for the new arrow, and then click once more to specify its ending point. You can edit the new arrow using the Arrow dialog. You can swith back to the normal operating mode by clicking the "Pointer" icon in the Plot toolbar.</para>
   </listitem>
 </varlistentry> 
 <varlistentry id="draw-line-cmd">
   <term>Graph -> &draw-line-cmd; (&draw-line-key;)</term>
   <listitem>
-     <para>Changes the active layer operation mode to the drawing mode. You must click on the layer canvas in order to specify the starting point for the new arrow, and then click once more to specify its ending point. You can edit the new arrow using the line dialog. You can switch back to the normal operating mode by clicking the "Pointer" icon in the Plot toolbar.</para>
+     <para>Changes the active layer operation mode to the drawing mode. You must click on the layer canvas in order to specify the starting point for the new arrow, and then click once more to specify its ending point. You can edit the new arrow using the line dialog. You can swith back to the normal operating mode by clicking the "Pointer" icon in the Plot toolbar.</para>
   </listitem>
 </varlistentry> 
 <varlistentry id="add-time-stamp-cmd"> 
@@ -1139,7 +1138,7 @@ The active items in the menus depend on the active window in the project. If the
 	  <informalequation> 
 	    <mediaobject>
 	      <imageobject>
-	        <imagedata format="GIF" fileref="equations/savitzky-golay.gif"/>
+	        <imagedata format="png" fileref="equations/savitzky-golay.png"/>
 	      </imageobject>
 	    </mediaobject>
 	  </informalequation>
@@ -1162,7 +1161,7 @@ The active items in the menus depend on the active window in the project. If the
 	  <informalequation> 
 	    <mediaobject>
 	      <imageobject>
-	        <imagedata format="GIF" fileref="equations/equation_moving_window.gif"/>
+	        <imagedata format="png" fileref="equations/equation_moving_window.png"/>
 	      </imageobject>
 	    </mediaobject>
 	  </informalequation>
@@ -1818,4 +1817,3 @@ The active items in the menus depend on the active window in the project. If the
 </variablelist>
 </sect1>
 
-</chapter>

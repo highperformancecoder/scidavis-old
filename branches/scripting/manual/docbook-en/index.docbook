@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
 
   <!ENTITY appname "<application>QtiPlot</application>">
@@ -700,7 +700,7 @@
 
 <bookinfo>
 
-<date>20/10/2006</date>
+<date>january 2007</date>
 <releaseinfo>Version updated for &appname; &version;</releaseinfo>
 
 <title>The &appname; Handbook</title>
@@ -748,23 +748,11 @@
 
 <abstract>
   <para>This document is a handbook for using &appname;, a program for two- and three-dimensional graphical presentation of data sets and for data analysis.</para>
-  
-<para>This manual is organized in several chapters:</para>
-<itemizedlist>
-<listitem>
-<para>this first one describe the main concepts and terms which are used in &appname;.</para>
-</listitem>
-<listitem>
-<para>The <link linkend="drawing-plots">second</link> is a tutorial on how to obtain plots from different data sets. It is the one you need to read first to understand the basics of &appname; and to be able to draw plots.</para>
-</listitem>
-<listitem>
-<para>The three following chapters are descriptions of all the <link linkend="reference">commands</link>, <link linkend="toolbars">buttons</link> and <link linkend="dialogs">dialogs</link> used in &appname;. These chapters are the reference manual of &appname;.</para>
-</listitem>
-<listitem>
-<para>The two following chapters describe more deeply some specific possibilities of &appname;, that is the <link linkend="analysis">statistical and mathematical analysis</link> of data, and the <link linkend="scripting">scripting</link>.</para>
-</listitem>
-</itemizedlist>
-
+  <para>This manual is organized in several chapters:</para>
+  <para>-The first one describe the main concepts and terms which are used in &appname;.</para>
+  <para>- The <link linkend="drawing-plots">second</link> is a tutorial on how to obtain plots from different data sets. It is the one you need to read first to understand the basics of &appname; and to be able to draw plots.</para>
+  <para>- The three following chapters are descriptions of all the <link linkend="reference">commands</link>, <link linkend="toolbars">buttons</link> and <link linkend="dialogs">dialogs</link> used in &appname;. These chapters are the reference manual of &appname;.</para>
+  <para>- The two following chapters describe more deeply some specific possibilities of &appname;, that is the <link linkend="analysis">statistical and mathematical analysis</link> of data, and the <link linkend="scripting">scripting</link>.</para>
 </abstract>
 
 <keywordset>
@@ -778,12 +766,24 @@
 </bookinfo>
 
 &introduction-chapter;
-&using-chapter;
-&reference-chapter;
-&toolbars-chapter;
-&dialogs-chapter;
-&analysis-chapter;
-&scripting-chapter;
+<chapter id="using">
+  &using-chapter;
+</chapter>
+<chapter id="reference">
+  &reference-chapter;
+</chapter>
+<chapter id="toolbars">
+  &toolbars-chapter;
+</chapter>
+<chapter id="dialogs">
+  &dialogs-chapter;
+</chapter>
+<chapter id="analysis">
+  &analysis-chapter;
+</chapter>
+<chapter id="scripting">
+  &scripting-chapter;
+</chapter>
 &appendix-chapter;
 &faq-chapter;
 </book>

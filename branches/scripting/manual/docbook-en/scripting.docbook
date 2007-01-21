@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter id="scripting">
-  <title>Mathematical Expressions and Scripting</title>
+
+<title>Mathematical Expressions and Scripting</title>
 
   <para>Starting with version 0.8.7, QtiPlot supports different interpreters
   for evaluating mathematical expressions and for executing scripts. On Windows currently only evaluation of mathematical expressions using muParser 
@@ -1135,4 +1135,3 @@ f.covarianceMatrix("cov")
       </sect3>
     </sect2>
   </sect1>
-</chapter>
