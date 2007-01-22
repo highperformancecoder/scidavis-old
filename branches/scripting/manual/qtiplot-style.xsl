@@ -22,7 +22,16 @@
   <xsl:text>}&#10;</xsl:text>
   <xsl:text>\usepackage[T1]{fontenc}&#10;</xsl:text>
   <xsl:text>\usepackage[latin1]{inputenc}&#10;</xsl:text>
+<!-- debut modification QTIPLOT 
+	1st solution: use of a4wide package
+
   <xsl:text>\usepackage{a4wide}&#10;</xsl:text>
+
+	2nd solution: use of package geometry
+-->
+  <xsl:text>\usepackage{geometry}&#10;</xsl:text>
+  <xsl:text>\geometry{verbose,a4paper,tmargin=2cm,bmargin=2cm,lmargin=1cm,rmargin=1cm}&#10;</xsl:text>
+<!-- fin modification QTIPLOT   -->
   <xsl:text>\setcounter{secnumdepth}{5}&#10;</xsl:text>
   <xsl:text>\usepackage{fancybox}&#10;</xsl:text>
   <xsl:text>\usepackage{makeidx}&#10;</xsl:text>
