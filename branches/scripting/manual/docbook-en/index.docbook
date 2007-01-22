@@ -653,6 +653,15 @@
 <!ENTITY floor-grid-cmd "<command>Floor Grid</command>"> 
 <!ENTITY floor-grid-lnk '<link linkend="floor-grid-cmd"><command>Floor Grid</command> command</link>'> 
   <!ENTITY floor-grid-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/floorGrid.png"/></imageobject></inlinemediaobject>'> 
+<!ENTITY perspective-cmd "<command>Enable perspective</command>"> 
+<!ENTITY perspective-lnk '<link linkend="perspective-cmd"><command>Enable perspective</command> command</link>'> 
+  <!ENTITY perspective-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/perspective.png"/></imageobject></inlinemediaobject>'> 
+<!ENTITY reset-rotation-cmd "<command>Reset rotation</command>"> 
+<!ENTITY reset-rotation-lnk '<link linkend="reset-rotation-cmd"><command>Reset rotation</command> command</link>'> 
+  <!ENTITY reset-rotation-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/reset_rotation.png"/></imageobject></inlinemediaobject>'> 
+<!ENTITY autoscale-cmd "<command>Fit frame to window</command>"> 
+<!ENTITY autoscale-lnk '<link linkend="autoscale-cmd"><command>Fit frame to window</command> command</link>'> 
+  <!ENTITY autoscale-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/fit_frame.png"/></imageobject></inlinemediaobject>'> 
 <!ENTITY bar-style-cmd "<command>Bars Style</command>"> 
 <!ENTITY bar-style-lnk '<link linkend="bar-style-cmd"><command>Bars Style</command> command</link>'> 
   <!ENTITY bar-style-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/plot_bars.png"/></imageobject></inlinemediaobject>'> 

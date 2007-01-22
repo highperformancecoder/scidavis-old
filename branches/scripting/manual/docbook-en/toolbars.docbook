@@ -588,6 +588,24 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
    <entry>Draw a grid on the bottom panel.</entry>
   </row>
   <row>
+   <entry>&perspective-icon;</entry>
+   <entry><link linkend="perspective-cmd">plot -> &perspective-cmd;</link></entry>
+   <entry></entry>
+   <entry>Enables/Disables the 3D perspective mode.</entry>
+  </row>
+  <row>
+   <entry>&reset-rotation-icon;</entry>
+   <entry><link linkend="reset-rotation-cmd">plot -> &reset-rotation-cmd;</link></entry>
+   <entry></entry>
+   <entry>Resets the rotation of the 3D plot to the default values.</entry>
+  </row>
+  <row>
+   <entry>&autoscale-icon;</entry>
+   <entry><link linkend="autoscale-cmd">plot -> &autoscale-cmd;</link></entry>
+   <entry></entry>
+   <entry>Finds the best layout of the 3D plot fitting the window size. It readjusts the length of the axis ticks to a default value.</entry>
+  </row>
+  <row>
    <entry>&bar-style-icon;</entry>
    <entry><link linkend="bar-style-cmd">plot -> &bar-style-cmd;</link></entry>
    <entry></entry>
@@ -652,6 +670,12 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
    <entry><link linkend="empty-cmd">plot -> &empty-cmd;</link></entry>
    <entry></entry>
    <entry>Draw an empty floor.</entry>
+  </row>
+  <row>
+   <entry>&animation-icon;</entry>
+   <entry><link linkend="animation-cmd">plot -> &animation-cmd;</link></entry>
+   <entry></entry>
+   <entry>Enables/Disables animation.</entry>
   </row>
 </tbody>
 </tgroup>

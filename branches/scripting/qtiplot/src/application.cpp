@@ -11994,10 +11994,10 @@ void ApplicationWindow::translateActionsStrings()
     actionResetRotation->setToolTip( tr( "Reset rotation" ) );
     actionResetRotation->setStatusTip( tr( "Reset rotation" ) );
 
-	actionFitFrame->setText( tr( "Fit frame to layer" ) );
-    actionFitFrame->setMenuText( tr( "Fit frame to layer" ) );
-    actionFitFrame->setToolTip( tr( "Fit frame to layer" ) );
-    actionFitFrame->setStatusTip( tr( "Fit frame to layer" ) );
+	actionFitFrame->setText( tr( "Fit frame to window" ) );
+    actionFitFrame->setMenuText( tr( "Fit frame to window" ) );
+    actionFitFrame->setToolTip( tr( "Fit frame to window" ) );
+    actionFitFrame->setStatusTip( tr( "Fit frame to window" ) );
 }
 
 Graph3D * ApplicationWindow::openMatrixPlot3D(const QString& caption, const QString& matrix_name,

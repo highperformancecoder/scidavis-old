@@ -1737,6 +1737,27 @@ The active items in the menus depend on the active window in the project. If the
     <para>Draws a grid on the floor panel of the active 3D plot.  The position of this grid is the plan defined by z=z<subscript>min</subscript>.</para>
  </listitem>
 </varlistentry>
+<varlistentry id="perspective-cmd"> 
+  <term>&perspective-cmd;</term>
+  <listitem>
+    <para>This command can be accessed by a click on the &perspective-icon;</para> 
+    <para>Enables/Disables the 3D perspective mode.</para>
+ </listitem>
+</varlistentry>
+<varlistentry id="reset-rotation-cmd"> 
+  <term>&reset-rotation-cmd;</term>
+  <listitem>
+    <para>This command can be accessed by a click on the &reset-rotation-icon;</para> 
+    <para>Resets the rotation of the 3D plot to the default values.</para>
+ </listitem>
+</varlistentry>
+<varlistentry id="autoscale-cmd"> 
+  <term>&autoscale-cmd;</term>
+  <listitem>
+    <para>This command can be accessed by a click on the &autoscale-icon;</para> 
+    <para>Finds the best layout of the 3D plot fitting the window size. It readjusts the length of the axis ticks to a default value.</para>
+ </listitem>
+</varlistentry>
 <varlistentry id="bar-style-cmd"> 
   <term>&bar-style-cmd;</term>
   <listitem>
@@ -1814,6 +1835,12 @@ The active items in the menus depend on the active window in the project. If the
     <para>If the active 3D plot is a 3D surface, this command is used to remove any projection from the floor.</para>
  </listitem>
 </varlistentry>
+<varlistentry id="animation-cmd"> 
+  <term>&animation-cmd;</term>
+  <listitem>
+    <para>This command can be accessed by a click on the &animation-icon;</para> 
+    <para>Enables/disables animation.</para>
+ </listitem>
+</varlistentry>
 </variablelist>
 </sect1>
-

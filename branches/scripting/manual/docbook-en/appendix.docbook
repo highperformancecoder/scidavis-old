@@ -10,12 +10,14 @@ file included in the KDE distribution. -->
 
 <para>&appname;</para>
 
-<para>Program copyright 2004-2007 &ion; <email>&email-ion;</email></para>
-<para>2006-2007 &tilman; <email>&email-tilman;</email>, &knut; <email>&email-knut;</email></para>
+<para>Program copyright:</para>
+<para>2004-2007 &ion; <email>&email-ion;</email></para>
+<para>2006-2007 &tilman; <email>&email-tilman;</email></para> 
+<para>2006-2007 &knut; <email>&email-knut;</email></para>
 
 <para>Documentation copyright:</para>
 <para>2004-2007 &ion; &email-ion;</para>
-<para>2006-2007 &roger; &email-roger;</para>
+<para>2006-2007 &roger; <email>&email-roger;</email></para>
 <para>2006-2007 &knut; &email-knut;</para>
 
 <para>Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.1 or any later version published by the Free Software Foundation; with no Invariant Sections, with no Front-Cover Texts, and with no Back-Cover Texts.</para>
