@@ -30,7 +30,7 @@
 	2nd solution: use of package geometry
 -->
   <xsl:text>\usepackage{geometry}&#10;</xsl:text>
-  <xsl:text>\geometry{verbose,a4paper,tmargin=2cm,bmargin=2cm,lmargin=1cm,rmargin=1cm}&#10;</xsl:text>
+  <xsl:text>\geometry{verbose,a4paper,tmargin=2cm,bmargin=1.5cm,lmargin=1cm,rmargin=1cm}&#10;</xsl:text>
 <!-- fin modification QTIPLOT   -->
   <xsl:text>\setcounter{secnumdepth}{5}&#10;</xsl:text>
   <xsl:text>\usepackage{fancybox}&#10;</xsl:text>

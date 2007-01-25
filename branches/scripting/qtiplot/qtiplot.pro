@@ -5,8 +5,8 @@ TARGET		 = qtiplot
 TEMPLATE	 = app
 CONFIG		+= qt warn_on exceptions opengl
 CONFIG		+= thread
-#CONFIG		+= release
-CONFIG		+= debug
+CONFIG		+= release
+#CONFIG		+= debug
 
 MOC_DIR		 = ../tmp/qtiplot
 OBJECTS_DIR	 = ../tmp/qtiplot
