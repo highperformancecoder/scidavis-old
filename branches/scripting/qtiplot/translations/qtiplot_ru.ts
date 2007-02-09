@@ -3,240 +3,240 @@
     <name>@default</name>
     <message>
         <source>QtiPlot - untitled</source>
-        <translation type="unfinished">QtiPlot - Без имени</translation>
+        <translation>QtiPlot - Без имени</translation>
     </message>
     <message>
         <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
+        <translation>QtiPlot - Ошибка</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
-        <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt;: Неправильная опция локализации или перевод отсутствует!</translation>
+        <translation>&lt;b&gt; %1 &lt;/b&gt;: Неправильный параметр локализации или  отсутствие перевода!</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Unknown command line option or the file doesn&apos;t exist!</source>
-        <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt;: Неизвестная опция командной строки или указанный файл не существует!</translation>
+        <translation>&lt;b&gt; %1 &lt;/b&gt;: Неизвестный параметр командной строки или отсутствие указанного файла не существует!</translation>
     </message>
     <message>
         <source>QtiPlot project</source>
-        <translation type="unfinished">QtiPlot проект</translation>
+        <translation>Проект QtiPlot</translation>
     </message>
     <message>
         <source>Compressed QtiPlot project</source>
-        <translation type="unfinished">Сжатый QtiPlot проект</translation>
+        <translation>Сжатый проект QtiPlot</translation>
     </message>
     <message>
         <source>Origin project</source>
-        <translation type="unfinished">Проект Origin</translation>
+        <translation>Проект Origin</translation>
     </message>
     <message>
         <source>QtiPlot - Open Project</source>
-        <translation type="unfinished">QtiPlot - Открыть Проект</translation>
+        <translation>QtiPlot - Открыть проект</translation>
     </message>
     <message>
         <source>QtiPlot - File openning error</source>
-        <translation type="unfinished">QtiPlot - ошибка при открытии файла</translation>
+        <translation>QtiPlot - ошибка при открытии файла</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; doesn&apos;t exist!</source>
-        <translation type="unfinished">Файл: &lt;b&gt;%1&lt;/b&gt; не существует!</translation>
+        <translation>Файл: &lt;b&gt;%1&lt;/b&gt; не существует!</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a QtiPlot or Origin project file!</source>
-        <translation type="unfinished">Файл: &lt;b&gt; %1 &lt;/b&gt; не является файлом проекта QtiPlot или Origin!</translation>
+        <translation>Файл: &lt;b&gt; %1 &lt;/b&gt; не является файлом проекта QtiPlot или Origin!</translation>
     </message>
     <message>
         <source>QtiPlot - File Backup Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка Резервированя Файла</translation>
+        <translation>QtiPlot - Ошибка создания резервной копии файла</translation>
     </message>
     <message>
         <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you run the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation type="unfinished">Невозможно сделмть резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы игнорируете эту ситуацию, то вы рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
+        <translation>Невозможно создать резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы проигнорируете эту ситуацию, то рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>QtiPlot - File Save Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка Записи в Файл</translation>
+        <translation>QtiPlot - Ошибка сохранения файла</translation>
     </message>
     <message>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
-        <translation type="unfinished">Файл: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; открыт в режиме &quot;только чтение&quot;</translation>
+        <translation>Файл: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; открыт в режиме &quot;только чтение&quot;</translation>
     </message>
     <message>
         <source>Save Project As</source>
-        <translation type="unfinished">Сохранить Проект Как</translation>
+        <translation>Сохранить проект как</translation>
     </message>
     <message>
         <source>QtiPlot -- Overwrite File? </source>
-        <translation type="unfinished">QtiPlot - Перезаписать Файл?</translation>
+        <translation>QtiPlot - Перезаписать файл?</translation>
     </message>
     <message>
         <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
 Do you want to overwrite it?</source>
-        <translation type="unfinished">Файл с именем: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;уже существует. Вы хотите перезаписать его?</translation>
+        <translation>Файл с именем: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;уже существует. Вы хотите перезаписать его?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;Нет</translation>
+        <translation>&amp;Нет</translation>
     </message>
     <message>
         <source>&amp;Find...</source>
-        <translation type="unfinished">&amp;Найти...</translation>
+        <translation>Найти...</translation>
     </message>
     <message>
         <source>App&amp;end Project...</source>
-        <translation type="unfinished">&amp;Добавить Проект...</translation>
+        <translation>&amp;Добавить в проект...</translation>
     </message>
     <message>
         <source>Save &amp;As Project...</source>
-        <translation type="unfinished">Сохранить &amp;Как Проект...</translation>
+        <translation>Сохр&amp;анить как проект...</translation>
     </message>
     <message>
         <source>Save Project &amp;As...</source>
-        <translation type="unfinished">Сохранить Проект &amp;Как...</translation>
+        <translation>Сохранить проект &amp;как...</translation>
     </message>
     <message>
         <source>&amp;Show All Windows</source>
-        <translation type="unfinished">&amp;Покозать Все Окна</translation>
+        <translation>Показать &amp;все окна</translation>
     </message>
     <message>
         <source>&amp;Hide All Windows</source>
-        <translation type="unfinished">&amp;Скрыть Все Окна</translation>
+        <translation>&amp;Скрыть все окна</translation>
     </message>
     <message>
         <source>&amp;Delete Folder</source>
-        <translation type="unfinished">&amp;Удалить Папку</translation>
+        <translation>&amp;Удалить папку</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation type="unfinished">&amp;Переименовать</translation>
+        <translation>&amp;Переименовать</translation>
     </message>
     <message>
         <source>New &amp;Window</source>
-        <translation type="unfinished">Новое &amp;Окно</translation>
+        <translation>&amp;Новое окно</translation>
     </message>
     <message>
         <source>New F&amp;older</source>
-        <translation type="unfinished">Новая &amp;Папка</translation>
+        <translation>Новая &amp;папка</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation type="unfinished">&amp;Никакой(ая)</translation>
+        <translation>&amp;Никакой(ая)</translation>
     </message>
     <message>
         <source>&amp;Windows in Active Folder</source>
-        <translation type="unfinished">&amp;Окна в Текущей Папке</translation>
+        <translation>Окна в т&amp;екущей папке</translation>
     </message>
     <message>
         <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
-        <translation type="unfinished">Окна в &amp;Текущей и Вложенных Папках</translation>
+        <translation>Окна в &amp;Текущей и вложенных папках</translation>
     </message>
     <message>
         <source>&amp;View Windows</source>
-        <translation type="unfinished">&amp;Отображение Окон</translation>
+        <translation>П&amp;росмотр окон</translation>
     </message>
     <message>
         <source>&amp;Properties...</source>
-        <translation type="unfinished">&amp;Свойства...</translation>
+        <translation>&amp;Свойства...</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished">Скрытый</translation>
+        <translation>Скрытый</translation>
     </message>
     <message>
         <source>Please enter a valid name!</source>
-        <translation type="unfinished">Пожалуйста введите корректное имя!</translation>
+        <translation>Пожалуйста введите корректное название!</translation>
     </message>
     <message>
         <source>Name already exists!</source>
-        <translation type="unfinished">Имя уже существует!</translation>
+        <translation>Имя уже существует!</translation>
     </message>
     <message>
         <source>Please choose another name!</source>
-        <translation type="unfinished">Пожалуйста выберите другое имя!</translation>
+        <translation>Пожалуйста выберите другое имя!</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>Project</source>
-        <translation type="unfinished">Проект</translation>
+        <translation>Проект</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Путь</translation>
+        <translation>Путь</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>bytes</source>
-        <translation type="unfinished">байт(ов)</translation>
+        <translation>байт</translation>
     </message>
     <message>
         <source>Contents</source>
-        <translation type="unfinished">Содержимое</translation>
+        <translation>Содержимое</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="unfinished">Окна</translation>
+        <translation>Окна</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation type="unfinished">Папки</translation>
+        <translation>Папки</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation type="unfinished">Создан</translation>
+        <translation>Создан</translation>
     </message>
     <message>
         <source>Modified</source>
-        <translation type="unfinished">Изменённый</translation>
+        <translation>Изменён</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished">Свойства</translation>
+        <translation>Свойства</translation>
     </message>
     <message>
         <source>Folder</source>
-        <translation type="unfinished">Папка</translation>
+        <translation>Папка</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished">Новая Папка</translation>
+        <translation>Новая папка</translation>
     </message>
     <message>
         <source>QtiPlot - Delete folder?</source>
-        <translation type="unfinished">QtiPlot - Удалить папку?</translation>
+        <translation>QtiPlot - Удалить папку?</translation>
     </message>
     <message>
         <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
-        <translation type="unfinished">Удадить папку &apos;%1&apos; и все окна содержащиеся в ней?</translation>
+        <translation>Удалить папку &apos;%1&apos; и все содержащиеся в ней окна?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Да</translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Нет</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Matrix</source>
-        <translation type="unfinished">Матрица</translation>
+        <translation>Матрица</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation type="unfinished">Таблица</translation>
+        <translation>Таблица</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished">Заметка</translation>
+        <translation>Заметка</translation>
     </message>
     <message>
         <source>Plot</source>
@@ -244,47 +244,47 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Plot 3D</source>
-        <translation type="obsolete">Отобразить 3D</translation>
+        <translation type="obsolete">Отобразить в виде 3D</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished">Метка</translation>
+        <translation>Метка</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished">Статус</translation>
+        <translation>Состояние</translation>
     </message>
     <message>
         <source>QtiPlot - No match found</source>
-        <translation type="unfinished">QtiPlot - Совпадения не обнаружены</translation>
+        <translation>QtiPlot - Совпадений не найдено</translation>
     </message>
     <message>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
-        <translation type="unfinished">Извините, совпадения для строки &apos;%1&apos; не обнаружены</translation>
+        <translation>Извините, совпадений для строки &apos;%1&apos; не найдено</translation>
     </message>
     <message>
         <source>Cannot move an object to itself!</source>
-        <translation type="unfinished">Нельзя переместить объект в себя!</translation>
+        <translation>Невозможно переместить объект в самого себя!</translation>
     </message>
     <message>
         <source>Cannot move a parent folder into a child folder!</source>
-        <translation type="unfinished">Нельзя переместить вложенную папку в родительскую!</translation>
+        <translation>Невозможно переместить папку в себя!</translation>
     </message>
     <message>
         <source>QtiPlot</source>
-        <translation type="unfinished">QtiPlot</translation>
+        <translation>QtiPlot</translation>
     </message>
     <message>
         <source>Skipped Moving Folder</source>
-        <translation type="unfinished">Пропущенная Перемещаемая Папка</translation>
+        <translation>Пропуск операции перемещения папки</translation>
     </message>
     <message>
         <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
-        <translation type="unfinished">Папка назначения уже содержит папку с именем &apos;%1&apos;! Папка пропущена!</translation>
+        <translation>Папка назначения уже содержит папку с именем &apos;%1&apos;! Операция пропускается!</translation>
     </message>
     <message>
         <source>QtiPlot - HTTP Get Version File</source>
-        <translation type="unfinished">QtiPlot - HTTP Получить Версию Файла</translation>
+        <translation>QtiPlot - Получить файл версии по HTTP</translation>
     </message>
     <message>
         <source>Cannot write file %1
@@ -294,156 +294,152 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Error while fetching version file with HTTP: %1.</source>
-        <translation type="unfinished">Ошибка при получении версии файла с помощью HTTP: %1.</translation>
+        <translation>Ошибка при получении файла версии с помощью HTTP: %1.</translation>
     </message>
     <message>
         <source>QtiPlot - Updates Available</source>
-        <translation type="unfinished">QtiPlot - Обновления Доступны</translation>
+        <translation>QtiPlot - Имеются обновления</translation>
     </message>
     <message>
         <source>There is a newer version of QtiPlot (%1) available for download. Would you like to download it?</source>
-        <translation type="unfinished">Для скачивания доступна более свежая версия QtiPlot (%1). Вы хотите закачать её?</translation>
+        <translation>Для скачивания доступна более свежая версия QtiPlot (%1). Вы хотите закачать её?</translation>
     </message>
     <message>
         <source>QtiPlot - No Updates Available</source>
-        <translation type="unfinished">QtiPlot - Не Доступных Обновлений</translation>
+        <translation>QtiPlot - Нет доступных обновлений</translation>
     </message>
     <message>
         <source>No updates available. Your current version %1 is the last version available!</source>
-        <translation type="unfinished">Нет доступных обновлений. Текущая версия %1 является последней из доступных!</translation>
+        <translation>Нет доступных обновлений. Текущая версия %1 является последней из доступных!</translation>
     </message>
     <message>
         <source>Please select two columns for this operation!</source>
-        <translation type="unfinished">Пожалуйста выберите две колонки для выполнения этой операции!</translation>
+        <translation>Пожалуйста выберите две колонки для выполнения этой операции!</translation>
     </message>
     <message>
         <source>Could not allocate memory, operation aborted!</source>
-        <translation type="unfinished">Не удалось выделить память, операция отменена!</translation>
+        <translation>Не удалось выделить память, операция отменена!</translation>
     </message>
     <message>
         <source>Error in GSL forward FFT operation!</source>
-        <translation type="unfinished">Ошибка в GSL операции прямое БПФ!</translation>
+        <translation>Ошибка при выполнении прямого БПФ (в библиотеке GSL)!</translation>
     </message>
     <message>
         <source>Please select a Y column to plot!</source>
-        <translation type="unfinished">Пожалуйста выберите колонку Y для отображения!</translation>
+        <translation>Пожалуйста выберите колонку Y для отображения!</translation>
     </message>
     <message>
         <source>Please set a default X column for this table, first!</source>
-        <translation type="unfinished">Пожалуйста установите сначала колонку X по умолчанию для данной таблицы!</translation>
+        <translation>Пожалуйста установите сначала колонку X по умолчанию для данной таблицы!</translation>
     </message>
     <message>
         <source>Please select a column to plot!</source>
-        <translation type="unfinished">Пожалуйста выберите колонку для отображения!</translation>
+        <translation>Пожалуйста выберите колонку для отображения!</translation>
     </message>
     <message>
         <source>Please select four columns for this operation!</source>
-        <translation type="unfinished">Пожалуйста выберите для данной операции четыре колонки!</translation>
+        <translation>Пожалуйста выберите для данной операции четыре колонки!</translation>
     </message>
     <message>
         <source>You need at least two columns for this operation!</source>
-        <translation type="unfinished">Для выполнения этой операции необходимо как минимум две колонки!</translation>
+        <translation>Для выполнения этой операции необходимо как минимум две колонки!</translation>
     </message>
     <message>
         <source>Please select a Z column for this operation!</source>
-        <translation type="unfinished">Пожалуйста выберите колонку Z для данной операции!</translation>
+        <translation>Пожалуйста выберите колонку Z для данной операции!</translation>
     </message>
     <message>
         <source>You need to define a X column first!</source>
-        <translation type="unfinished">Сначала необходимо задать колонку X!</translation>
+        <translation>Сначала необходимо задать колонку X!</translation>
     </message>
     <message>
         <source>You need to define a Y column first!</source>
-        <translation type="unfinished">Сначала необходимо задать колонку Y!</translation>
+        <translation>Сначала необходимо задать колонку Y!</translation>
     </message>
     <message>
         <source>Qtiplot - Reading file...</source>
-        <translation type="unfinished">Qtiplot - Чтение файла...</translation>
+        <translation>Qtiplot - Чтение файла...</translation>
     </message>
     <message>
         <source>QtiPlot - ASCII Export Error</source>
-        <translation type="unfinished">QtiPlot - ошибка при ASCII экспортировании</translation>
+        <translation>QtiPlot - ошибка при экспортировании в ASCII</translation>
     </message>
     <message>
         <source>Rows will be deleted from the table!</source>
-        <translation type="unfinished">Строки будут удалены из таблицы!</translation>
+        <translation>Строки будут удалены из таблицы!</translation>
     </message>
     <message>
         <source>Do you really want to continue?</source>
-        <translation type="unfinished">Вы действительно хотите продолжить?</translation>
+        <translation>Вы действительно хотите продолжить?</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Columns will be deleted from the table!</source>
-        <translation type="unfinished">Колонки будут удалены из данной таблицы!</translation>
+        <translation>Колонки будут удалены из данной таблицы!</translation>
     </message>
     <message>
         <source>Please select two columns for this operation:
  the first represents the signal and the second the response function!</source>
-        <translation type="unfinished">Пожалуйста выберите две колонки для данной операции: первая представляет сигнал, а вторая функцию-отклик!</translation>
+        <translation>Пожалуйста выберите две колонки для данной операции: первая представляет сигнал, а вторая функцию-отклик!</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
-        <translation type="unfinished">Объём данных отклика &apos;%1&apos; должен составлять менее половины объёма данных сигнала &apos;%2&apos;!</translation>
+        <translation>Объём данных отклика &apos;%1&apos; должен составлять менее половины объёма данных сигнала &apos;%2&apos;!</translation>
     </message>
     <message>
         <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
-        <translation type="unfinished">Набор данных отклика &apos;%1&apos; должен содержать нечётное число точек!</translation>
+        <translation>Набор данных отклика &apos;%1&apos; должен содержать нечётное число точек!</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished">Частота</translation>
+        <translation>Частота</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished">Время</translation>
+        <translation>Время</translation>
     </message>
     <message>
         <source>Real</source>
-        <translation type="unfinished">Вещественная часть</translation>
+        <translation>Вещественная часть</translation>
     </message>
     <message>
         <source>Imaginary</source>
-        <translation type="unfinished">Мнимая часть</translation>
+        <translation>Мнимая часть</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation type="unfinished">Амплитуда</translation>
+        <translation>Амплитуда</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Угол</translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>QtiPlot - Warning</source>
-        <translation type="unfinished">QtiPlot - Предупреждение</translation>
+        <translation>QtiPlot - Предупреждение</translation>
     </message>
     <message>
         <source>Graph</source>
-        <translation type="unfinished">График</translation>
+        <translation>График</translation>
     </message>
     <message>
         <source>Graph 3D</source>
-        <translation type="unfinished">3D График</translation>
+        <translation>Трёхмерный график</translation>
     </message>
     <message>
         <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
-        <translation type="unfinished">Все данные связанные с таблицей будет удалены. Вы уверены?</translation>
+        <translation>Все данные, связанные с таблицей, будут удалены. Вы уверены?</translation>
     </message>
     <message>
         <source>QtiPlot - Enter row number</source>
-        <translation type="unfinished">QtiPlot - Введите номер строки</translation>
+        <translation>QtiPlot - Введите номер строки</translation>
     </message>
     <message>
         <source>Row</source>
-        <translation type="unfinished">Строка</translation>
-    </message>
-    <message>
-        <source>QAssistant Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Строка</translation>
     </message>
 </context>
 <context>
@@ -454,11 +450,11 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Too many command line options (maximum accepted is 2)!</source>
-        <translation>Слишком много опций командной строки (максимальное распознаваемое число команд 2)!</translation>
+        <translation>Слишком много параметров командной строки (максимально допустимое число команд - 2)!</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Unknown command line option or the file doesn&apos;t exist!</source>
-        <translation>&lt;b&gt; %1 &lt;/b&gt;: Неизвестная опция командной строки или указанный файл не существует!</translation>
+        <translation>&lt;b&gt; %1 &lt;/b&gt;: Неизвестный параметр командной строки или указанный файл не существует!</translation>
     </message>
     <message>
         <source>Name</source>
@@ -506,15 +502,15 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>CTRL+D</source>
-        <translation></translation>
+        <translation>CTRL+D</translation>
     </message>
     <message>
         <source>&amp;Select data range</source>
-        <translation>&amp;Выберите диапазон данных</translation>
+        <translation>&amp;Выбор диапазона данных</translation>
     </message>
     <message>
         <source>ALT+S</source>
-        <translation></translation>
+        <translation>ALT+S</translation>
     </message>
     <message>
         <source>S&amp;creen reader</source>
@@ -522,35 +518,35 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&amp;Move Data Points...</source>
-        <translation>&amp;Переместить Данные...</translation>
+        <translation>&amp;Переместить данные...</translation>
     </message>
     <message>
         <source>Ctrl+M</source>
-        <translation></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <source>Remove &amp;Bad Data Points...</source>
-        <translation>Удалить &amp;Ошибочные Данные...</translation>
+        <translation>Удалить &amp;ошибочные данные...</translation>
     </message>
     <message>
         <source>Alt+B</source>
-        <translation></translation>
+        <translation>Alt+B</translation>
     </message>
     <message>
         <source>Add &amp;Text</source>
-        <translation>Добавить &amp;Текст</translation>
+        <translation>Добавить &amp;текст</translation>
     </message>
     <message>
         <source>ALT+T</source>
-        <translation></translation>
+        <translation>ALT+T</translation>
     </message>
     <message>
         <source>Draw &amp;Arrow/Line</source>
-        <translation type="obsolete">Нарисовать &amp;Стрелку/Линию</translation>
+        <translation type="obsolete">Нарисовать &amp;стрелку/линию</translation>
     </message>
     <message>
         <source>CTRL+ALT+L</source>
-        <translation></translation>
+        <translation>CTRL+ALT+L</translation>
     </message>
     <message>
         <source>Table</source>
@@ -566,11 +562,11 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>QtiPlot - Project Explorer</source>
-        <translation type="obsolete">QtiPlot - Проводник Проекта</translation>
+        <translation type="obsolete">QtiPlot - Проводник проекта</translation>
     </message>
     <message>
         <source>QtiPlot - Results Log</source>
-        <translation type="obsolete">QtiPlot - Журнал Результатов</translation>
+        <translation type="obsolete">QtiPlot - Журнал результатов</translation>
     </message>
     <message>
         <source>Surface 3D</source>
@@ -586,7 +582,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&amp;Export Graph</source>
-        <translation>&amp;Экспортировать График</translation>
+        <translation>&amp;Экспортировать график</translation>
     </message>
     <message>
         <source>&amp;Import ASCII</source>
@@ -606,7 +602,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Special Line/Symb&amp;ol</source>
-        <translation>Специальная Линия/Симв&amp;ол</translation>
+        <translation>Специальная линия/симв&amp;ол</translation>
     </message>
     <message>
         <source>Statistical &amp;Graphs</source>
@@ -618,7 +614,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Plot 3&amp;D</source>
-        <translation>3&amp;D Диаграмма</translation>
+        <translation>3&amp;D диаграмма</translation>
     </message>
     <message>
         <source>&amp;Graph</source>
@@ -654,7 +650,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&amp;Table</source>
-        <translation>&amp;Таблицы</translation>
+        <translation>&amp;Таблица</translation>
     </message>
     <message>
         <source>&amp;Data</source>
@@ -674,7 +670,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Fit E&amp;xponential Decay</source>
-        <translation>&amp;Экспоненциальный Спад</translation>
+        <translation>&amp;Экспоненциальное затухание</translation>
     </message>
     <message>
         <source>Fit &amp;Multi-peak</source>
@@ -714,7 +710,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&lt;h4&gt;There are no tables available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a table and try again!&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;В этом проекте нет ни одной доступной таблиц.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Пожалуйста создайте таблицу и попробуйте ещё раз!&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;В этом проекте нет ни одной доступной таблицы.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Пожалуйста создайте таблицу и попробуйте ещё раз!&lt;/h4&gt;</translation>
     </message>
     <message>
         <source>QtiPlot - Choose data set</source>
@@ -730,19 +726,19 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Data Plot 3D</source>
-        <translation type="obsolete">3D Отображение Данных</translation>
+        <translation type="obsolete">Отображение данных в виде 3D</translation>
     </message>
     <message>
         <source>Matrix Plot 3D</source>
-        <translation type="obsolete">3D Отображение Матрицы</translation>
+        <translation type="obsolete">Отображение матрицы в виде 3D</translation>
     </message>
     <message>
         <source>Function Plot 3D</source>
-        <translation type="obsolete">3D Отображение Функции</translation>
+        <translation type="obsolete">Отображение Функции в виде 3D</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>Обычный</translation>
+        <translation>Нормальный</translation>
     </message>
     <message>
         <source>QtiPlot - Import image from file</source>
@@ -754,11 +750,11 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Y Axis Title</source>
-        <translation>Заголовок Оси Y</translation>
+        <translation>Заголовок оси Y</translation>
     </message>
     <message>
         <source>X Axis Title</source>
-        <translation>Заголовок Оси X</translation>
+        <translation>Заголовок оси X</translation>
     </message>
     <message>
         <source>Please select a Y column to plot!</source>
@@ -770,11 +766,11 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&lt;h4&gt;There are no plot layers available in this window.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please add a layer and try again!&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;В этом окне нет ни одного дотупного графического слоя.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Пожалуйста добавьте графический слой и попробуйте ещё раз!&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;В этом окне нет ни одного доступного графического слоя.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Пожалуйста добавьте графический слой и попробуйте ещё раз!&lt;/h4&gt;</translation>
     </message>
     <message>
         <source>This functionality is not available for pie plots!</source>
-        <translation>Эта функция не доступна для круговой диаграммы!</translation>
+        <translation>Эта функция недоступна для круговой диаграммы!</translation>
     </message>
     <message>
         <source>QtiPlot - Error bars error</source>
@@ -782,7 +778,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>This feature is not available for user defined function curves!</source>
-        <translation>Эта функция недоступна для определённых пользователем кривых!</translation>
+        <translation>Эта функция недоступна для кривых, определённых пользователем!</translation>
     </message>
     <message>
         <source>The selected columns have different numbers of rows!</source>
@@ -806,7 +802,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>QtiPlot - Open Project</source>
-        <translation>QtiPlot - Открыть Проект</translation>
+        <translation>QtiPlot - Открыть проект</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is the current file!</source>
@@ -822,7 +818,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>QtiPlot - File Open Error</source>
-        <translation>QtiPlot - Ошибка Открытия Файла</translation>
+        <translation>QtiPlot - Ошибка при открытии файла</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;does not exist anymore!&lt;p&gt;It will be removed from the list.</source>
@@ -830,7 +826,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>The file: &lt;b&gt; %1 &lt;/b&gt; is the current file!</source>
-        <translation>Файл: &lt;b&gt;%1&lt;/b&gt; является текущим файлом!</translation>
+        <translation type="obsolete">Файл: &lt;b&gt;%1&lt;/b&gt; является текущим файлом!</translation>
     </message>
     <message>
         <source>&lt;h4&gt;There are no plot layers available in this window!&lt;/h4&gt;</source>
@@ -838,7 +834,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>QtiPlot - Overwrite File?</source>
-        <translation>QtiPlot - Перезаписать Файл?</translation>
+        <translation>QtiPlot - Перезаписать файл?</translation>
     </message>
     <message>
         <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists. Do you want to overwrite it?</source>
@@ -854,11 +850,11 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>QtiPlot - Export Error</source>
-        <translation>QtiPlot - Ошибка При Экспортировании</translation>
+        <translation>QtiPlot - Ошибка при экспортировании</translation>
     </message>
     <message>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation>Не возможно выполнить записать в файл: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Пожалуйста, проверьте, есть ли у Вас права на запись в данное место!</translation>
+        <translation>Невозможно выполнить запись в файл: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Пожалуйста, проверьте, есть ли у Вас права на запись в данное место!</translation>
     </message>
     <message>
         <source>&amp;All</source>
@@ -870,15 +866,15 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation>Не возможно выполнить записать в файл: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Пожалуйста, проверьте, есть ли у Вас права на запись в данное место!</translation>
+        <translation>Невозможно выполнить записать в файл: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Пожалуйста, проверьте, есть ли у Вас права на запись в данное место!</translation>
     </message>
     <message>
         <source>QtiPlot - File Save Error</source>
-        <translation>QtiPlot - Ошибка Записи в Файл</translation>
+        <translation>QtiPlot - Ошибка сохранения файла</translation>
     </message>
     <message>
         <source>QtiPlot -- Overwrite File? </source>
-        <translation>QtiPlot - Перезаписать Файл?</translation>
+        <translation>QtiPlot - Перезаписать файл?</translation>
     </message>
     <message>
         <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
@@ -887,7 +883,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Choose a directory to export the tables to</source>
-        <translation>Выберите каталог в который будет экспортирована таблица</translation>
+        <translation>Выберите каталог, в который будет экспортирована таблица</translation>
     </message>
     <message>
         <source>Choose a filename to save under</source>
@@ -923,7 +919,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&amp;Scatter</source>
-        <translation>&amp;Рассеяние</translation>
+        <translation>&amp;Точки</translation>
     </message>
     <message>
         <source>Line + s&amp;ymbol</source>
@@ -931,7 +927,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Vertical &amp;drop lines</source>
-        <translation>Вертикальная &amp;спадающие линии</translation>
+        <translation>Вертикальные &amp;спадающие линии</translation>
     </message>
     <message>
         <source>&amp;Spline</source>
@@ -939,7 +935,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&amp;Vertical Steps</source>
-        <translation>&amp;Вертикальные Ступеньки</translation>
+        <translation>&amp;Вертикальные ступеньки</translation>
     </message>
     <message>
         <source>&amp;Rows</source>
@@ -963,7 +959,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>3&amp;D Scatter</source>
-        <translation>3&amp;D Рассеяние</translation>
+        <translation>3&amp;D точки</translation>
     </message>
     <message>
         <source>3D &amp;Trajectory</source>
@@ -975,7 +971,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&amp;Stacked Histograms</source>
-        <translation>&amp;Фигурные Гистограммы</translation>
+        <translation>&amp;Фигурные гистограммы</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
@@ -1019,23 +1015,23 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&amp;Insert</source>
-        <translation>&amp;Вставить столбец</translation>
+        <translation>&amp;Вставить колонку</translation>
     </message>
     <message>
         <source>&amp;Add column</source>
-        <translation>&amp;Добавить столбец</translation>
+        <translation>&amp;Добавить колонку</translation>
     </message>
     <message>
         <source>&amp;Ascending</source>
-        <translation>По &amp;Возрастанию</translation>
+        <translation>По &amp;возрастанию</translation>
     </message>
     <message>
         <source>&amp;Descending</source>
-        <translation>По &amp;Убыванию</translation>
+        <translation>По &amp;убыванию</translation>
     </message>
     <message>
         <source>Sort Colu&amp;mn</source>
-        <translation>Сот&amp;рировать Колонку</translation>
+        <translation>Сот&amp;рировать колонку</translation>
     </message>
     <message>
         <source>Pr&amp;operties</source>
@@ -1047,19 +1043,19 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&amp;Vertical 2 Layers</source>
-        <translation>2 &amp;Вертикальных слоя</translation>
+        <translation>2 &amp;вертикальных слоя</translation>
     </message>
     <message>
         <source>&amp;Horizontal 2 Layers</source>
-        <translation>2 &amp;Горизонтальных слоя</translation>
+        <translation>2 &amp;горизонтальных слоя</translation>
     </message>
     <message>
         <source>&amp;4 Layers</source>
-        <translation>&amp;4 Слоя</translation>
+        <translation>&amp;4 слоя</translation>
     </message>
     <message>
         <source>&amp;Stacked Layers</source>
-        <translation>&amp;Упакованные(Stacked) Слои</translation>
+        <translation>&amp;Упакованные(Stacked) слои</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
@@ -1067,7 +1063,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Clea&amp;r Row</source>
-        <translation>&amp;Очистить Строку</translation>
+        <translation>&amp;Очистить строку</translation>
     </message>
     <message>
         <source>&amp;Delete Row</source>
@@ -1079,7 +1075,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>&amp;Worksheet</source>
-        <translation>Рабочая &amp;Таблица</translation>
+        <translation>Рабочая &amp;таблица</translation>
     </message>
     <message>
         <source>QtiPlot - Empty plot</source>
@@ -1116,7 +1112,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Click on plot or move cursor to display coordinates!</source>
-        <translation>Кликните на графике и переместите курсор для отображения координат!</translation>
+        <translation>Щёлкните на графике и переместите курсор для отображения координат!</translation>
     </message>
     <message>
         <source>There are no plot layers available in this window!</source>
@@ -1124,7 +1120,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Click on plot to display information!</source>
-        <translation type="obsolete">Клините на крафике для отображения информации!</translation>
+        <translation type="obsolete">Щёлкните на графике для отображения информации!</translation>
     </message>
     <message>
         <source>QtiPlot - Add new layer?</source>
@@ -1136,11 +1132,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>On &amp;New Layer</source>
-        <translation>В &amp;Новый Слой</translation>
+        <translation>В &amp;новый слой</translation>
     </message>
     <message>
         <source>On &amp;Active Layer</source>
-        <translation>В &amp;Активный Слой</translation>
+        <translation>В &amp;активный слой</translation>
     </message>
     <message>
         <source>There are no plot layers available in this window.</source>
@@ -1152,11 +1148,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - Layer Geometry</source>
-        <translation>QtiPlot - Геометрия Слоя</translation>
+        <translation>QtiPlot - Геометрия слоя</translation>
     </message>
     <message>
         <source>QtiPlot - Duplicate error</source>
-        <translation>QtiPlot - Ошибка Дублирования</translation>
+        <translation>QtiPlot - Ошибка дублирования</translation>
     </message>
     <message>
         <source>Empty 3D surface plots can not be duplicated!</source>
@@ -1172,7 +1168,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - Window Geometry</source>
-        <translation>QtiPlot - Геометрия Окна</translation>
+        <translation>QtiPlot - Геометрия окна</translation>
     </message>
     <message>
         <source>Hidden</source>
@@ -1188,7 +1184,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>About QtiPlot</source>
-        <translation>О QtiPlot</translation>
+        <translation>О программе QtiPlot</translation>
     </message>
     <message>
         <source>&amp;Cascade</source>
@@ -1212,15 +1208,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Window &amp;Geometry...</source>
-        <translation>&amp;Геометрия Окна...</translation>
+        <translation>&amp;Геометрия окна...</translation>
     </message>
     <message>
         <source>&amp;Hide Window</source>
-        <translation>&amp;Скрыть Окно</translation>
+        <translation>&amp;Скрыть окно</translation>
     </message>
     <message>
         <source>Close &amp;Window</source>
-        <translation>Закрыть &amp;Окно</translation>
+        <translation>Закрыть &amp;окно</translation>
     </message>
     <message>
         <source>More windows...</source>
@@ -1232,7 +1228,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Intensity Matrix</source>
-        <translation>Матрица &amp;Интенсивности</translation>
+        <translation>Матрица &amp;интенсивности</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
@@ -1260,23 +1256,23 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Delete Window</source>
-        <translation>&amp;Удалить Окно</translation>
+        <translation>&amp;Удалить окно</translation>
     </message>
     <message>
         <source>&amp;Rename Window</source>
-        <translation>&amp;Переименовать Окно</translation>
+        <translation>&amp;Переименовать окно</translation>
     </message>
     <message>
         <source>D&amp;epending Plots</source>
-        <translation type="obsolete">З&amp;ависимые Графики</translation>
+        <translation type="obsolete">З&amp;ависимые графики</translation>
     </message>
     <message>
         <source>D&amp;epending 3D Plots</source>
-        <translation type="obsolete">З&amp;ависимые 3D Графики</translation>
+        <translation type="obsolete">З&amp;ависимые 3D графики</translation>
     </message>
     <message>
         <source>D&amp;epends on</source>
-        <translation>Вкоючить з&amp;ависимости</translation>
+        <translation>Включить з&amp;ависимости</translation>
     </message>
     <message>
         <source>Function</source>
@@ -1332,23 +1328,23 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Delete Layer</source>
-        <translation>&amp;Удалить Слой</translation>
+        <translation>&amp;Удалить слой</translation>
     </message>
     <message>
         <source>&amp;Paste Layer</source>
-        <translation>&amp;Вставить Слой</translation>
+        <translation>&amp;Вставить слой</translation>
     </message>
     <message>
         <source>&amp;Copy Page</source>
-        <translation>&amp;Копировать Страницу</translation>
+        <translation>&amp;Копировать страницу</translation>
     </message>
     <message>
         <source>E&amp;xport Page</source>
-        <translation>&amp;Экспортировать Страницу</translation>
+        <translation>&amp;Экспортировать страницу</translation>
     </message>
     <message>
         <source>Clea&amp;r Rows</source>
-        <translation>С&amp;тереть Строки</translation>
+        <translation>С&amp;тереть строки</translation>
     </message>
     <message>
         <source>&amp;Delete Rows</source>
@@ -1364,11 +1360,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Choose &amp;Data Set...</source>
-        <translation>Выберите Набор &amp;Данных...</translation>
+        <translation>Выберите набор &amp;данных...</translation>
     </message>
     <message>
         <source>Choose &amp;Matrix...</source>
-        <translation>Выберите &amp;Матрицу...</translation>
+        <translation>Выберите &amp;матрицу...</translation>
     </message>
     <message>
         <source>C&amp;lear</source>
@@ -1376,7 +1372,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Copy Graph</source>
-        <translation>&amp;Копировать График</translation>
+        <translation>&amp;Копировать график</translation>
     </message>
     <message>
         <source>&amp;Export</source>
@@ -1384,7 +1380,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - index.html File Not Found!</source>
-        <translation>QtiPlot - index.html Файл Не Найден!</translation>
+        <translation>QtiPlot - Файл &quot;index.html&quot; не найден!</translation>
     </message>
     <message>
         <source>There is no file called &lt;b&gt;index.html&lt;/b&gt; in this folder.&lt;br&gt;Please choose another folder!</source>
@@ -1408,11 +1404,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - Help Files Not Found!</source>
-        <translation>QtiPlot - Файл Помощи Не Найден!</translation>
+        <translation>QtiPlot - Файл помощи не найден!</translation>
     </message>
     <message>
         <source>Please indicate the location of the help file!&lt;br&gt;&lt;br&gt;&lt;p&gt;The manual can be downloaded from the following internet address:&lt;/p&gt;&lt;p&gt;&lt;font color=blue&gt;&apos;http://soft.proindependent.com/manuals.html&apos;&lt;/font&gt;&lt;/p&gt;</source>
-        <translation>Пожалуйста укажите местонахождение файла помощи!&lt;br&gt;&lt;br&gt;&lt;p&gt;Руководство можно скачать по сдудующему интернет адресу:&lt;/p&gt;&lt;p&gt;&lt;font color=blue&gt;&apos;http://soft.proindependent.com/manuals.html&apos;&lt;/font&gt;&lt;/p&gt;</translation>
+        <translation>Пожалуйста укажите местонахождение справочного файла!&lt;br&gt;&lt;br&gt;&lt;p&gt;Руководство можно скачать по следующему адресу в сети интернет:&lt;/p&gt;&lt;p&gt;&lt;font color=blue&gt;&apos;http://soft.proindependent.com/manuals.html&apos;&lt;/font&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>QtiPlot - Help Browser</source>
@@ -1434,7 +1430,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Guess</source>
-        <translation>&amp;Авто</translation>
+        <translation>&amp;Автоматически</translation>
     </message>
     <message>
         <source>&amp;Top-left corner</source>
@@ -1446,7 +1442,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>New &amp;Project</source>
-        <translation>Новый &amp;Проект</translation>
+        <translation>Новый &amp;проект</translation>
     </message>
     <message>
         <source>Ctrl+N</source>
@@ -1454,7 +1450,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>New &amp;Table</source>
-        <translation>Новая &amp;Таблица</translation>
+        <translation>Новая &amp;таблица</translation>
     </message>
     <message>
         <source>Ctrl+T</source>
@@ -1462,11 +1458,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>New &amp;Matrix</source>
-        <translation>Новая &amp;Матрица</translation>
+        <translation>Новая &amp;матрица</translation>
     </message>
     <message>
         <source>New &amp;Function Plot</source>
-        <translation>Новый График &amp;Функции</translation>
+        <translation>Новый график &amp;функции</translation>
     </message>
     <message>
         <source>Ctrl+F</source>
@@ -1474,7 +1470,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>New &amp;Surface 3D Plot</source>
-        <translation>Новая 3D &amp;Поверхность</translation>
+        <translation>Новая 3D &amp;поверхность</translation>
     </message>
     <message>
         <source>Ctrl+Z</source>
@@ -1502,7 +1498,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Save Project</source>
-        <translation>&amp;Сохранить Проект</translation>
+        <translation>&amp;Сохранить проект</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
@@ -1510,7 +1506,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Save Project &amp;as...</source>
-        <translation>Сохранить Проект &amp;как...</translation>
+        <translation>Сохранить проект &amp;как...</translation>
     </message>
     <message>
         <source>&amp;Single file...</source>
@@ -1522,7 +1518,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Undo</source>
-        <translation>&amp;Откат</translation>
+        <translation>&amp;Отменить</translation>
     </message>
     <message>
         <source>Ctrl+U</source>
@@ -1570,7 +1566,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Project &amp;explorer</source>
-        <translation>&amp;Обозреватель Проекта</translation>
+        <translation>&amp;Обозреватель проекта</translation>
     </message>
     <message>
         <source>Ctrl+E</source>
@@ -1578,11 +1574,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Results &amp;Log</source>
-        <translation>&amp;Журнал Результатов</translation>
+        <translation>&amp;Журнал результатов</translation>
     </message>
     <message>
         <source>Add La&amp;yer</source>
-        <translation>Добавить С&amp;лой</translation>
+        <translation>Добавить с&amp;лой</translation>
     </message>
     <message>
         <source>ALT+L</source>
@@ -1590,7 +1586,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Arran&amp;ge Layers</source>
-        <translation>Вы&amp;ровнять Слои</translation>
+        <translation>Вы&amp;ровнять слои</translation>
     </message>
     <message>
         <source>ALT+A</source>
@@ -1614,15 +1610,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Print All Plo&amp;ts</source>
-        <translation>Печать Всех Гра&amp;фиков</translation>
+        <translation>Печать всех гра&amp;фиков</translation>
     </message>
     <message>
         <source>E&amp;xport ASCII</source>
-        <translation>&amp;Экспортировать в ASCII</translation>
+        <translation>Э&amp;кспортировать в ASCII</translation>
     </message>
     <message>
         <source>Set import &amp;options</source>
-        <translation>Задать &amp;опции импортирования</translation>
+        <translation>Задать &amp;параметры импортирования</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -1654,27 +1650,27 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Add/Remove &amp;Curve...</source>
-        <translation>Добавить/Удолить &amp;Кривую...</translation>
+        <translation>Добавить/удалить &amp;кривую...</translation>
     </message>
     <message>
         <source>ALT+C</source>
-        <translation></translation>
+        <translation>ALT+C</translation>
     </message>
     <message>
         <source>Add &amp;Error Bars...</source>
-        <translation>Показать Величину &amp;Ошибки...</translation>
+        <translation>Показать величину &amp;ошибки...</translation>
     </message>
     <message>
         <source>Ctrl+B</source>
-        <translation></translation>
+        <translation>Ctrl+B</translation>
     </message>
     <message>
         <source>Add &amp;Function...</source>
-        <translation>Добавить &amp;Функцию...</translation>
+        <translation>Добавить &amp;функцию...</translation>
     </message>
     <message>
         <source>Ctrl+Alt+F</source>
-        <translation></translation>
+        <translation>Ctrl+Alt+</translation>
     </message>
     <message>
         <source>&amp;Rescale to show all</source>
@@ -1682,11 +1678,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>New &amp;Legend</source>
-        <translation>Новое &amp;Условное обозначение</translation>
+        <translation>Новая &amp;легенда</translation>
     </message>
     <message>
         <source>Ctrl+L</source>
-        <translation></translation>
+        <translation>Ctrl+L</translation>
     </message>
     <message>
         <source>Add time stamp</source>
@@ -1694,19 +1690,19 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Ctrl+ALT+T</source>
-        <translation></translation>
+        <translation>Ctrl+ALT+</translation>
     </message>
     <message>
         <source>Add &amp;Image</source>
-        <translation>Добавить &amp;Изображение</translation>
+        <translation>Добавить &amp;изображение</translation>
     </message>
     <message>
         <source>ALT+I</source>
-        <translation></translation>
+        <translation>ALT+I</translation>
     </message>
     <message>
         <source>Line + S&amp;ymbol</source>
-        <translation>Линия + С&amp;имвол</translation>
+        <translation>Линия + с&amp;имволы</translation>
     </message>
     <message>
         <source>&amp;Vectors &amp;XYXY</source>
@@ -1714,7 +1710,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Stacked Histogram</source>
-        <translation>&amp;Фигурная Гистограмма</translation>
+        <translation>&amp;Фигурная гистограмма</translation>
     </message>
     <message>
         <source>&amp;Ribbon</source>
@@ -1730,11 +1726,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Statistics on &amp;Columns</source>
-        <translation>Статистика по &amp;Колонкам</translation>
+        <translation>Статистика по &amp;колонкам</translation>
     </message>
     <message>
         <source>Statistics on &amp;Rows</source>
-        <translation>Статисткика по &amp;Строкам</translation>
+        <translation>Статистика по &amp;строкам</translation>
     </message>
     <message>
         <source>&amp;Integrate ...</source>
@@ -1746,19 +1742,19 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Low Pass...</source>
-        <translation>Фильтр &amp;Нижних частот...</translation>
+        <translation>Фильтр &amp;нижних частот...</translation>
     </message>
     <message>
         <source>&amp;High Pass...</source>
-        <translation>Фильтр &amp;Верхних частот...</translation>
+        <translation>Фильтр &amp;верхних частот...</translation>
     </message>
     <message>
         <source>&amp;Band Pass...</source>
-        <translation>&amp;Полосовой Фильтр...</translation>
+        <translation>&amp;Полосовой фильтр...</translation>
     </message>
     <message>
         <source>&amp;Band Block...</source>
-        <translation>&amp;Режекторный Фильтр...</translation>
+        <translation>&amp;Режекторный фильтр...</translation>
     </message>
     <message>
         <source>&amp;FFT...</source>
@@ -1770,11 +1766,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;FFT Filter...</source>
-        <translation>&amp;БПФ Фильтр...</translation>
+        <translation>&amp;БПФ-фильтр...</translation>
     </message>
     <message>
         <source>Moving Window &amp;Average...</source>
-        <translation>&amp;Скользящее Среднее...</translation>
+        <translation>&amp;Скользящее среднее...</translation>
     </message>
     <message>
         <source>&amp;Differentiate</source>
@@ -1782,43 +1778,43 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Fit &amp;Linear</source>
-        <translation>&amp;Линейное Приближение</translation>
+        <translation>&amp;Линейное приближение</translation>
     </message>
     <message>
         <source>Fit &amp;Polynomial ...</source>
-        <translation>&amp;Полиномиальное Приближение...</translation>
+        <translation>&amp;Полиномиальное приближение...</translation>
     </message>
     <message>
         <source>&amp;First Order ...</source>
-        <translation>&amp;Первого Порядка...</translation>
+        <translation>&amp;Первого порядка...</translation>
     </message>
     <message>
         <source>&amp;Second Order ...</source>
-        <translation>&amp;Второго Порядка...</translation>
+        <translation>&amp;Второго порядка...</translation>
     </message>
     <message>
         <source>&amp;Third Order ...</source>
-        <translation>&amp;Третьего Порядка...</translation>
+        <translation>&amp;Третьего порядка...</translation>
     </message>
     <message>
         <source>Fit Exponential Gro&amp;wth ...</source>
-        <translation>&amp;Экспоненциальное Приближение...</translation>
+        <translation>&amp;Экспоненциальное приближение...</translation>
     </message>
     <message>
         <source>Fit &amp;Gaussian</source>
-        <translation>Приближение &amp;Гаусианом</translation>
+        <translation>Приближение &amp;гауссианом</translation>
     </message>
     <message>
         <source>Fit Lorent&amp;zian</source>
-        <translation>Приближение &amp;Лоренцианом</translation>
+        <translation>Приближение &amp;лоренцианом</translation>
     </message>
     <message>
         <source>&amp;Non-linear Curve Fit ...</source>
-        <translation>&amp;Нелинейное Приближение...</translation>
+        <translation>&amp;Нелинейное приближение...</translation>
     </message>
     <message>
         <source>Ctrl+Y</source>
-        <translation></translation>
+        <translation>Ctrl+Y</translation>
     </message>
     <message>
         <source>&amp;Plot ...</source>
@@ -1838,11 +1834,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Column &amp;Options ...</source>
-        <translation>&amp;Опции Колонки...</translation>
+        <translation>Параметы к&amp;олонки...</translation>
     </message>
     <message>
         <source>Set Column &amp;Values ...</source>
-        <translation>Задать &amp;Значения Колонки...</translation>
+        <translation>Задать &amp;значения колонки...</translation>
     </message>
     <message>
         <source>&amp;Columns...</source>
@@ -1854,23 +1850,23 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="obsolete">Информация &amp;О</translation>
+        <translation type="obsolete">Информация &amp;о</translation>
     </message>
     <message>
         <source>F1</source>
-        <translation></translation>
+        <translation>F1</translation>
     </message>
     <message>
         <source>Ctrl+H</source>
-        <translation></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <source>&amp;Choose help folder...</source>
-        <translation>&amp;Выбар папки помощи...</translation>
+        <translation>&amp;Выбор папки с файлом помощи...</translation>
     </message>
     <message>
         <source>Ctrl+W</source>
-        <translation></translation>
+        <translation>Ctrl+W</translation>
     </message>
     <message>
         <source>Add column</source>
@@ -1878,15 +1874,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Remove Layer</source>
-        <translation>&amp;Удалить Слой</translation>
+        <translation>&amp;Удалить слой</translation>
     </message>
     <message>
         <source>Alt+R</source>
-        <translation></translation>
+        <translation>Alt+R</translation>
     </message>
     <message>
         <source>&amp;Intensity table</source>
-        <translation>Таблица &amp;Интенсивности</translation>
+        <translation>Таблица &amp;интенсивности</translation>
     </message>
     <message>
         <source>&amp;Properties</source>
@@ -1894,31 +1890,31 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Activate Window</source>
-        <translation>&amp;Текущее Окно</translation>
+        <translation>&amp;Сделать окно активным</translation>
     </message>
     <message>
         <source>Mi&amp;nimize Window</source>
-        <translation>&amp;Свернуть Окно</translation>
+        <translation>&amp;Свернуть окно</translation>
     </message>
     <message>
         <source>Ma&amp;ximize Window</source>
-        <translation>&amp;Развернуть Окно</translation>
+        <translation>&amp;Развернуть окно</translation>
     </message>
     <message>
         <source>Re&amp;size Window...</source>
-        <translation>И&amp;зменить Размер Окна...</translation>
+        <translation>И&amp;зменить размер окна...</translation>
     </message>
     <message>
         <source>&amp;Print Window</source>
-        <translation>&amp;Распечатать Окно</translation>
+        <translation>&amp;Распечатать окно</translation>
     </message>
     <message>
         <source>&amp;Layer geometry</source>
-        <translation>Геометрия &amp;Слоя</translation>
+        <translation>Геометрия &amp;слоя</translation>
     </message>
     <message>
         <source>Edit 3D &amp;Surface</source>
-        <translation type="obsolete">Редиктировать 3D &amp;Поверхность</translation>
+        <translation type="obsolete">Редиктировать 3D &amp;поверхность</translation>
     </message>
     <message>
         <source>&amp;Surface...</source>
@@ -1926,19 +1922,19 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Data Set...</source>
-        <translation>Набор &amp;Данных...</translation>
+        <translation>Набор &amp;данных...</translation>
     </message>
     <message>
         <source>Set &amp;Properties...</source>
-        <translation>Установить &amp;Свойства...</translation>
+        <translation>Установить &amp;свойства...</translation>
     </message>
     <message>
         <source>Set &amp;Dimensions...</source>
-        <translation>Установить &amp;Размерности...</translation>
+        <translation>Установить &amp;размерности...</translation>
     </message>
     <message>
         <source>Set &amp;Values...</source>
-        <translation>Установить &amp;Значения...</translation>
+        <translation>Установить &amp;значения...</translation>
     </message>
     <message>
         <source>&amp;Transpose</source>
@@ -1962,31 +1958,31 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>3D &amp;Wire Frame</source>
-        <translation>3D &amp;Проволочный Каркас</translation>
+        <translation>3D &amp;Проволочный каркас</translation>
     </message>
     <message>
         <source>3D &amp;Hidden Line</source>
-        <translation>3D &amp;Скрытая Линия</translation>
+        <translation>3D &amp;Скрытая линия</translation>
     </message>
     <message>
         <source>3D &amp;Polygons</source>
-        <translation>3D &amp;Полигоны</translation>
+        <translation>3D &amp;Многоугольники</translation>
     </message>
     <message>
         <source>3D Wire &amp;Surface</source>
-        <translation>3D Проволочная &amp;Поверхность</translation>
+        <translation>3D Проволочная &amp;поверхность</translation>
     </message>
     <message>
         <source>Sort Ta&amp;ble</source>
-        <translation>Сортировать Та&amp;блицу</translation>
+        <translation>Сортировать та&amp;блицу</translation>
     </message>
     <message>
         <source>Sort Columns</source>
-        <translation>Сортировать Колонки</translation>
+        <translation>Сортировать колонки</translation>
     </message>
     <message>
         <source>Co&amp;rrelate</source>
-        <translation>Соо&amp;тнести (correlate)</translation>
+        <translation>Вычислить ко&amp;рреляцию</translation>
     </message>
     <message>
         <source>&amp;Convolute</source>
@@ -1994,7 +1990,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Deconvolute</source>
-        <translation>&amp;Обратить Свёртку</translation>
+        <translation>&amp;Обратить свёртку</translation>
     </message>
     <message>
         <source>&amp;Horizontal</source>
@@ -2006,7 +2002,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Ro&amp;w Numbers</source>
-        <translation>Номерами Стро&amp;ки</translation>
+        <translation>Номерами стро&amp;ки</translation>
     </message>
     <message>
         <source>&amp;Random values</source>
@@ -2018,11 +2014,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Box Plot</source>
-        <translation>&amp;Ящичковая Диаграмма</translation>
+        <translation>&amp;Ящичковая диаграмма</translation>
     </message>
     <message>
         <source>&amp;Gaussian...</source>
-        <translation>&amp;Гаусиан...</translation>
+        <translation>&amp;Гауссиан...</translation>
     </message>
     <message>
         <source>&amp;Lorentzian...</source>
@@ -2030,11 +2026,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Search for Updates</source>
-        <translation type="obsolete">&amp;Поиск Обновлений</translation>
+        <translation type="obsolete">&amp;Поиск обновлений</translation>
     </message>
     <message>
         <source>&amp;QtiPlot Homepage</source>
-        <translation>Домашняя Страница &amp;QtiPlot</translation>
+        <translation>Домашняя страница &amp;QtiPlot</translation>
     </message>
     <message>
         <source>Download &amp;manual</source>
@@ -2066,11 +2062,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Create a new 2D function plot</source>
-        <translation>Создать новый график 2D функции</translation>
+        <translation>Создать новый 2D график функции</translation>
     </message>
     <message>
         <source>Create a new 3D surface plot</source>
-        <translation>Создать новый график 3D поверхноси</translation>
+        <translation>Создать новый 3D график поверхности</translation>
     </message>
     <message>
         <source>Open project</source>
@@ -2138,7 +2134,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Best fit</source>
-        <translation>Лучший масштаб</translation>
+        <translation>Наиболее подходящий масштаб</translation>
     </message>
     <message>
         <source>Add new legend</source>
@@ -2146,7 +2142,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Date &amp; Time </source>
-        <translation>Дати &amp; Время</translation>
+        <translation>Дата &amp; и время</translation>
     </message>
     <message>
         <source>Plot with line</source>
@@ -2178,19 +2174,19 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Plot 3D Ribbon</source>
-        <translation>3D Лента</translation>
+        <translation>3D лента</translation>
     </message>
     <message>
         <source>Plot 3D Bars</source>
-        <translation>3D Столбики</translation>
+        <translation>3D столбики</translation>
     </message>
     <message>
         <source>Plot 3D Scatter</source>
-        <translation>Отобразить 3D Рассеяние</translation>
+        <translation>Отобразить в виде символов в трёхмерном пространстве</translation>
     </message>
     <message>
         <source>Plot 3D Trajectory</source>
-        <translation>Отобразить 3D Траекторию</translation>
+        <translation>Отобразить траекторию в трёхмерном пространстве</translation>
     </message>
     <message>
         <source>Selected columns statistics</source>
@@ -2262,47 +2258,47 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Front Grid</source>
-        <translation>Сетка на Передней Поверхности</translation>
+        <translation>Сетка на переднем плане</translation>
     </message>
     <message>
         <source>Back Grid</source>
-        <translation>Сетка на Задней Поверхности</translation>
+        <translation>Сетка на заднем плане</translation>
     </message>
     <message>
         <source>Right Grid</source>
-        <translation>Сетка на Правой Боковой Поверхности</translation>
+        <translation>Сетка на правой боковой поверхности</translation>
     </message>
     <message>
         <source>Left Grid</source>
-        <translation>Сетка на Левой Боковой Поверхности</translation>
+        <translation>Сетка на левой боковой поверхности</translation>
     </message>
     <message>
         <source>Ceiling Grid</source>
-        <translation>Сетка на Верхней Поверхности</translation>
+        <translation>Сетка на верхней поверхности</translation>
     </message>
     <message>
         <source>Floor Grid</source>
-        <translation>Сетка на Нижней Поверхности</translation>
+        <translation>Сетка на нижней поверхности</translation>
     </message>
     <message>
         <source>Plot Style</source>
-        <translation>Стиль Графика</translation>
+        <translation>Стиль графика</translation>
     </message>
     <message>
         <source>Wireframe</source>
-        <translation>Проволочный Каркас</translation>
+        <translation>Проволочный каркас</translation>
     </message>
     <message>
         <source>Hidden Line</source>
-        <translation>Скрытая Линия</translation>
+        <translation>Скрытая линия</translation>
     </message>
     <message>
         <source>Polygon only</source>
-        <translation>Только полигоны</translation>
+        <translation>Только многоугольники</translation>
     </message>
     <message>
         <source>Mesh &amp; filled Polygons</source>
-        <translation>Сетка &amp; заполненные Полигоны</translation>
+        <translation>Многоугольники,&amp; заполненные сеткой</translation>
     </message>
     <message>
         <source>Dots</source>
@@ -2322,19 +2318,19 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Floor Style</source>
-        <translation>Стиль Основания</translation>
+        <translation>Стиль основания</translation>
     </message>
     <message>
         <source>Floor Data Projection</source>
-        <translation>Проекция Данных в Основании</translation>
+        <translation>Проекция данных на основание</translation>
     </message>
     <message>
         <source>Floor Isolines</source>
-        <translation>Изолинии в Основании</translation>
+        <translation>Изолинии в основании</translation>
     </message>
     <message>
         <source>Empty Floor</source>
-        <translation>Пустое Основание</translation>
+        <translation>Пустое основание</translation>
     </message>
     <message>
         <source>QtiPlot - Enter the number of peaks</source>
@@ -2346,7 +2342,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Move cursor and click to select a point and double-click/press &apos;Enter&apos; to set the position of a peak!</source>
-        <translation>Для выделения точки подведите к ней указатель и кликните, двойной щелчёк/нажатие &apos;Enter&apos; для установки положения вершины!</translation>
+        <translation>Для выделения точки подведите к ней указатель и щёлкните, двойной щелчок/нажатие &apos;Enter&apos; для установки положения вершины!</translation>
     </message>
     <message>
         <source>English</source>
@@ -2358,15 +2354,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Ctrl+ALT+M</source>
-        <translation></translation>
+        <translation>Ctrl+ALT+M</translation>
     </message>
     <message>
         <source>Project Explorer</source>
-        <translation>Обозреватель Проекта</translation>
+        <translation>Обозреватель проекта</translation>
     </message>
     <message>
         <source>Results Log</source>
-        <translation>Журнал Результатов</translation>
+        <translation>Журнал результатов</translation>
     </message>
     <message>
         <source>There are no available columns with plot designation set to Z!</source>
@@ -2374,7 +2370,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Plot 3D</source>
-        <translation type="obsolete">Отобразить 3D</translation>
+        <translation type="obsolete">Отобразить в виде 3D</translation>
     </message>
     <message>
         <source>Note</source>
@@ -2398,15 +2394,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - Open Template File</source>
-        <translation>QtiPlot - Открыть Файл Шаблона</translation>
+        <translation>QtiPlot - Открыть файл шаблона</translation>
     </message>
     <message>
         <source>graph1</source>
-        <translation type="obsolete">график1</translation>
+        <translation type="obsolete">График1</translation>
     </message>
     <message>
         <source>table1</source>
-        <translation>таблица1</translation>
+        <translation>Таблица1</translation>
     </message>
     <message>
         <source>Matrix1</source>
@@ -2418,11 +2414,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot project</source>
-        <translation>QtiPlot проект</translation>
+        <translation>Проект QtiPlot</translation>
     </message>
     <message>
         <source>Compressed QtiPlot project</source>
-        <translation>Сжатый QtiPlot проект</translation>
+        <translation>Сжатый проект QtiPlot</translation>
     </message>
     <message>
         <source>Origin project</source>
@@ -2434,11 +2430,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - File Backup Error</source>
-        <translation type="obsolete">QtiPlot - Ошибка Резервированя Файла</translation>
+        <translation type="obsolete">QtiPlot - Ошибка создания резервной копии файла</translation>
     </message>
     <message>
         <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you run the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation type="obsolete">Невозможно создать резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы проигнорируете эту ситуацию, то вы рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
+        <translation type="obsolete">Невозможно создать резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы проигнорируете эту ситуацию, то рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
@@ -2446,79 +2442,79 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Save Project As</source>
-        <translation>Сохранить Проект Как</translation>
+        <translation>Сохранить проект как</translation>
     </message>
     <message>
         <source>QtiPlot Matrix Template</source>
-        <translation>Шаблон Матрицы QtiPlot</translation>
+        <translation>Шаблон матрицы QtiPlot</translation>
     </message>
     <message>
         <source>QtiPlot 2D Plot Template</source>
-        <translation type="obsolete">Шаблон 2D Графика QtiPlot</translation>
+        <translation type="obsolete">Шаблон 2D графика QtiPlot</translation>
     </message>
     <message>
         <source>QtiPlot Table Template</source>
-        <translation>Шаблон Таблицы QtiPlot</translation>
+        <translation>Шаблон таблицы QtiPlot</translation>
     </message>
     <message>
         <source>QtiPlot 3D Surface Template</source>
-        <translation>Шаблон 3D Поверхности QtiPlot</translation>
+        <translation>Шаблон 3D поверхности QtiPlot</translation>
     </message>
     <message>
         <source>Save Window As Template</source>
-        <translation>Сохранить Окно Как Шаблон</translation>
+        <translation>Сохранить окно как шаблон</translation>
     </message>
     <message>
         <source>QtiPlot - X Axis Title</source>
-        <translation>QtiPlot - Заголовок Оси X</translation>
+        <translation>QtiPlot - Заголовок оси X</translation>
     </message>
     <message>
         <source>QtiPlot - Y Axis Title</source>
-        <translation>QtiPlot - Заголовок Оси Y</translation>
+        <translation>QtiPlot - Заголовок оси Y</translation>
     </message>
     <message>
         <source>QtiPlot - Right Axis Title</source>
-        <translation>QtiPlot - Заголовок Правой Оси</translation>
+        <translation>QtiPlot - Заголовок правой оси</translation>
     </message>
     <message>
         <source>QtiPLot - Top Axis Title</source>
-        <translation>QtiPlot - Заголовок Верхней Оси</translation>
+        <translation>QtiPlot - Заголовок верхней оси</translation>
     </message>
     <message>
         <source>There are actually no curves on the active layer!</source>
-        <translation>В активном слое кривые отсутсвуют!</translation>
+        <translation>В активном слое кривые отсутствуют!</translation>
     </message>
     <message>
         <source>&amp;Insert Row</source>
-        <translation>&amp;Вставить Строку</translation>
+        <translation>&amp;Вставить строку</translation>
     </message>
     <message>
         <source>&amp;Insert Column</source>
-        <translation>&amp;Вставить Столбец</translation>
+        <translation>&amp;Вставить колонку</translation>
     </message>
     <message>
         <source>&amp;Delete Columns</source>
-        <translation>&amp;Удалить Столбцы</translation>
+        <translation>&amp;Удалить столбцы</translation>
     </message>
     <message>
         <source>New &amp;Graph</source>
-        <translation>Новый &amp;График</translation>
+        <translation>Новый &amp;график</translation>
     </message>
     <message>
         <source>New &amp;Note</source>
-        <translation>Новая &amp;Заметка</translation>
+        <translation>Новая &amp;заметка</translation>
     </message>
     <message>
         <source>Ctrl+ALT+Z</source>
-        <translation></translation>
+        <translation>Ctrl+ALT+Z</translation>
     </message>
     <message>
         <source>Open Temp&amp;late...</source>
-        <translation>Открыть &amp;Шаблон...</translation>
+        <translation>Открыть &amp;шаблон...</translation>
     </message>
     <message>
         <source>Save as &amp;Template...</source>
-        <translation>Сохранить как &amp;Шаблон...</translation>
+        <translation>Сохранить как ш&amp;аблон...</translation>
     </message>
     <message>
         <source>Vectors XY&amp;AM</source>
@@ -2526,7 +2522,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Fit &amp;Boltzmann (Sigmoidal)</source>
-        <translation>Приближение по &amp;Больцманну (Сигмоидальное)</translation>
+        <translation>Приближение по &amp;Больцману (Сигмоидальное)</translation>
     </message>
     <message>
         <source>&amp;Curves ...</source>
@@ -2538,7 +2534,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;About QtiPlot</source>
-        <translation>&amp;О QtiPlot</translation>
+        <translation>&amp;О программе QtiPlot</translation>
     </message>
     <message>
         <source>Create an empty 2D plot</source>
@@ -2550,27 +2546,27 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>New Table</source>
-        <translation>Новая Таблица</translation>
+        <translation>Новая таблица</translation>
     </message>
     <message>
         <source>Save Project</source>
-        <translation>Сохранить Проект</translation>
+        <translation>Сохранить проект</translation>
     </message>
     <message>
         <source>Open Te&amp;mplate...</source>
-        <translation>Открыть &amp;Шаблон...</translation>
+        <translation>Открыть &amp;шаблон...</translation>
     </message>
     <message>
         <source>Open Template</source>
-        <translation>Открыть Шаблон</translation>
+        <translation>Открыть шаблон</translation>
     </message>
     <message>
         <source>Save Window as Template</source>
-        <translation>Сохранить Окно Как Шаблон</translation>
+        <translation>Сохранить окно как шаблон</translation>
     </message>
     <message>
         <source>Print window</source>
-        <translation>Распечатать Окно</translation>
+        <translation>Распечатать содержимое окна</translation>
     </message>
     <message>
         <source>&amp;Vectors XYXY</source>
@@ -2590,7 +2586,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Box and Whiskers Plot</source>
-        <translation>Диаграмма типа Ящик с Усами</translation>
+        <translation>Диаграмма типа &quot;ящик с усами&quot;</translation>
     </message>
     <message>
         <source>&lt;font size=+2, color = darkBlue&gt;&lt;b&gt;QtiPlot is open-source software and its development required hundreds of hours of work.&lt;br&gt;&lt;br&gt;If you like it, you&apos;re using it in your work and you would like to see it constantly improved,&lt;br&gt; please support its author by making a donation.&lt;br&gt;&lt;br&gt;Would you like to make a donation for QtiPlot now?&lt;/b&gt;&lt;/font&gt;</source>
@@ -2598,7 +2594,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Please support QtiPlot!</source>
-        <translation type="obsolete">Пожалуйста поддержите QtiPlot!</translation>
+        <translation type="obsolete">Пожалуйста поддержите программу QtiPlot!</translation>
     </message>
     <message>
         <source>Yes, I&apos;d love to!</source>
@@ -2614,11 +2610,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
-        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;: Неправильная опция локализации или перевод отсутствует!</translation>
+        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;: Неправильный параметр локализации или перевод отсутствует!</translation>
     </message>
     <message>
         <source>Help is not available on command line. In order to download the user manual for QtiPlot, please visit:&lt;br&gt;&lt;br&gt;&lt;font color = blue&gt; http://soft.proindependent.com/help.html&lt;/font&gt;</source>
-        <translation type="obsolete">В командной строке помощь отсутствует. Для того, чтобы скачать руководство пользователя для QtiPlot, пожалуйста посетите:&lt;br&gt;&lt;br&gt;&lt;font color = blue&gt; http://soft.proindependent.com/help.html&lt;/font&gt;</translation>
+        <translation type="obsolete">Программа QtiPlot не имеет справки, вызываемой из командной строки. Для того, чтобы скачать руководство пользователя для QtiPlot, пожалуйста посетите:&lt;br&gt;&lt;br&gt;&lt;font color = blue&gt; http://soft.proindependent.com/help.html&lt;/font&gt;</translation>
     </message>
     <message>
         <source>Folder</source>
@@ -2626,15 +2622,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>UNTITLED</source>
-        <translation>Без заголовка</translation>
+        <translation>БЕЗЫМЯННЫЙ</translation>
     </message>
     <message>
         <source>pixels</source>
-        <translation>пикселей</translation>
+        <translation>точки</translation>
     </message>
     <message>
         <source>pixel intensity (a.u.)</source>
-        <translation>интенсивность пикселей (a.u.)</translation>
+        <translation>интенсивность точек (отн. ед.)</translation>
     </message>
     <message>
         <source>The table &apos;%1&apos; already exists. It has been renamed &apos;%2&apos;.</source>
@@ -2646,11 +2642,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Please enter a valid name!</source>
-        <translation>Пожалуйста введите корректное имя!</translation>
+        <translation>Пожалуйста введите корректное название!</translation>
     </message>
     <message>
         <source>The name you chose is not valid: only letters and digits are allowed!</source>
-        <translation>Вы выбрали некорректное имя: допускается использовать только буквы и цифры!</translation>
+        <translation>Вы выбрали некорректное название: допускается использовать только буквы и цифры!</translation>
     </message>
     <message>
         <source>Please choose another name!</source>
@@ -2658,7 +2654,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Name already exists!</source>
-        <translation>Имя уже существует!</translation>
+        <translation type="obsolete">Имя уже существует!</translation>
     </message>
     <message>
         <source>The table name must be different from the names of its columns!</source>
@@ -2666,59 +2662,59 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Delete Selection</source>
-        <translation>&amp;Удалить Выделенное</translation>
+        <translation>&amp;Удалить выделенное</translation>
     </message>
     <message>
         <source>New &amp;Window</source>
-        <translation>Новое &amp;Окно</translation>
+        <translation>&amp;Новое окно</translation>
     </message>
     <message>
         <source>New F&amp;older</source>
-        <translation>Новая &amp;Папка</translation>
+        <translation>Новая &amp;папка</translation>
     </message>
     <message>
         <source>Auto &amp;Column Width</source>
-        <translation>Авто выбор Ширины &amp;Столбца</translation>
+        <translation>&amp;Автоматический выбор ширины колонок</translation>
     </message>
     <message>
         <source>Key_Delete</source>
-        <translation></translation>
+        <translation>Клавиша &quot;Delete&quot;</translation>
     </message>
     <message>
         <source>Double-click on plot to select a data point!</source>
-        <translation>Двойной щелчок на графике для выбора точки!</translation>
+        <translation>Двойной щелчок для выделения точки на графике!</translation>
     </message>
     <message>
         <source>Sorry, QtiPlot couldn&apos;t start the default browser! Please start a browser manually and visit the following link</source>
-        <translation>Извините, QtiPlot не удалось запустить браузер по умолчанию! Пожалуйста запустите браузер вручную и посетите следующую ссылку</translation>
+        <translation>Извините, QtiPlot не удалось запустить выбранный по умолчанию обозреватель WWW. Пожалуйста, запустите его вручную и введите следующий адрес.</translation>
     </message>
     <message>
         <source>&amp;Find...</source>
-        <translation type="obsolete">&amp;Найти...</translation>
+        <translation type="obsolete">Найти...</translation>
     </message>
     <message>
         <source>App&amp;end Project...</source>
-        <translation type="obsolete">&amp;Добавить Проект...</translation>
+        <translation type="obsolete">&amp;Добавить проект</translation>
     </message>
     <message>
         <source>Save &amp;As Project...</source>
-        <translation type="obsolete">Сохранить &amp;Как Проект...</translation>
+        <translation type="obsolete">Сохр&amp;анить как проект...</translation>
     </message>
     <message>
         <source>Save Project &amp;As...</source>
-        <translation type="obsolete">Сохранить Проект &amp;Как...</translation>
+        <translation type="obsolete">Сохранить проект &amp;как</translation>
     </message>
     <message>
         <source>&amp;Show All Windows</source>
-        <translation type="obsolete">&amp;Покозать Все Окна</translation>
+        <translation type="obsolete">Показать &amp;все окна</translation>
     </message>
     <message>
         <source>&amp;Hide All Windows</source>
-        <translation type="obsolete">&amp;Скрыть Все Окна</translation>
+        <translation type="obsolete">&amp;Скрыть все окна</translation>
     </message>
     <message>
         <source>&amp;Delete Folder</source>
-        <translation type="obsolete">&amp;Удалить Папку</translation>
+        <translation type="obsolete">&amp;Удалить папку</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
@@ -2726,15 +2722,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>&amp;Windows in Active Folder</source>
-        <translation type="obsolete">&amp;Окна в Текущей Папке</translation>
+        <translation type="obsolete">Окна в т&amp;екущей папке</translation>
     </message>
     <message>
         <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
-        <translation type="obsolete">Окна в &amp;Текущей и Вложенных Папках</translation>
+        <translation type="obsolete">Окна в &amp;текущей и вложенных папках</translation>
     </message>
     <message>
         <source>&amp;View Windows</source>
-        <translation type="obsolete">&amp;Отображение Окон</translation>
+        <translation type="obsolete">П&amp;росмотр окон</translation>
     </message>
     <message>
         <source>Project</source>
@@ -2746,7 +2742,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>bytes</source>
-        <translation type="obsolete">байт(ов)</translation>
+        <translation type="obsolete">байт</translation>
     </message>
     <message>
         <source>Contents</source>
@@ -2762,7 +2758,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Modified</source>
-        <translation type="obsolete">Изменённый</translation>
+        <translation type="obsolete">Изменён</translation>
     </message>
     <message>
         <source>Properties</source>
@@ -2770,47 +2766,47 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="obsolete">Новая Папка</translation>
+        <translation type="obsolete">Новая папка</translation>
     </message>
     <message>
         <source>QtiPlot - Delete folder?</source>
-        <translation type="obsolete">QtiPlot - Удалить папку?</translation>
+        <translation type="obsolete">QtiPlot - удалить папку?</translation>
     </message>
     <message>
         <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
-        <translation type="obsolete">Удадить папку &apos;%1&apos; и все окна содержащиеся в ней?</translation>
+        <translation type="obsolete">Удалить папку &apos;%1&apos; и все находящиеся в ней окна?</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="obsolete">Статус</translation>
+        <translation type="obsolete">Состояние</translation>
     </message>
     <message>
         <source>QtiPlot - No match found</source>
-        <translation type="obsolete">QtiPlot - Совпадения не обнаружены</translation>
+        <translation type="obsolete">QtiPlot - совпадений не найдено</translation>
     </message>
     <message>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
-        <translation type="obsolete">Извините, совпадения для строки &apos;%1&apos; не обнаружены</translation>
+        <translation type="obsolete">Извините, совпадений для строки &apos;%1&apos; не найдено</translation>
     </message>
     <message>
         <source>Cannot move an object to itself!</source>
-        <translation type="obsolete">Нельзя переместить объект в себя!</translation>
+        <translation type="obsolete">Невозможно переместить объект в себя!</translation>
     </message>
     <message>
         <source>Cannot move a parent folder into a child folder!</source>
-        <translation type="obsolete">Нельзя переместить вложенную папку в родительскую!</translation>
+        <translation type="obsolete">Невозможно переместить папку во вложенную в неё папку!</translation>
     </message>
     <message>
         <source>Skipped Moving Folder</source>
-        <translation type="obsolete">Пропущенная Перемещаемая Папка</translation>
+        <translation type="obsolete">Пропуск операции перемещения папки</translation>
     </message>
     <message>
         <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
-        <translation type="obsolete">Папка назначения уже содержит папку с именем &apos;%1&apos;! Папка пропущена!</translation>
+        <translation type="obsolete">Папка назначения уже содержит вложенную папку с названнием &apos;%1&apos;! Операция пропускается!</translation>
     </message>
     <message>
         <source>Scripting Console</source>
-        <translation>Командная Консоль</translation>
+        <translation>Консоль команд</translation>
     </message>
     <message>
         <source>&amp;Zoom In</source>
@@ -2830,15 +2826,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Draw &amp;Arrow</source>
-        <translation>Нарисовать &amp;Стрелку</translation>
+        <translation>Нарисовать &amp;стрелку</translation>
     </message>
     <message>
         <source>CTRL+ALT+A</source>
-        <translation></translation>
+        <translation>CTRL+ALT+A</translation>
     </message>
     <message>
         <source>Draw &amp;Line</source>
-        <translation>Нарисовать &amp;Линию</translation>
+        <translation>Нарисовать &amp;линию</translation>
     </message>
     <message>
         <source>This operation cannot be performed on curves plotted from columns having a non-numerical format.</source>
@@ -2854,11 +2850,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Comma Separated Values</source>
-        <translation>Данные разделённые запятой</translation>
+        <translation>Данные, разделённые запятой</translation>
     </message>
     <message>
         <source>QtiPlot - Import ASCII File</source>
-        <translation>QtiPlot - Импорт ASCII Файла</translation>
+        <translation>QtiPlot - импорт файла ASCII</translation>
     </message>
     <message>
         <source>Window</source>
@@ -2874,15 +2870,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>X</source>
-        <translation></translation>
+        <translation>X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <source>Z</source>
-        <translation></translation>
+        <translation>Z</translation>
     </message>
     <message>
         <source>X Error</source>
@@ -2922,15 +2918,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Scripting &amp;Console</source>
-        <translation>Написание Скриптов &amp; Консоль</translation>
+        <translation>&amp;Консоль для написание скриптов</translation>
     </message>
     <message>
         <source>Alt+G</source>
-        <translation></translation>
+        <translation>Alt+G</translation>
     </message>
     <message>
         <source>Ctrl+Shift+R</source>
-        <translation></translation>
+        <translation>Ctrl+Shift+R</translation>
     </message>
     <message>
         <source>&amp;X</source>
@@ -2946,15 +2942,15 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>X E&amp;rror</source>
-        <translation>&amp;Ошибка X</translation>
+        <translation>&amp;Ошибка по X</translation>
     </message>
     <message>
         <source>Y &amp;Error</source>
-        <translation>&amp;Ошибка Y</translation>
+        <translation>&amp;Ошибка по Y</translation>
     </message>
     <message>
         <source>Search for &amp;Updates</source>
-        <translation>Искать &amp;Обновления</translation>
+        <translation>Искать &amp;обновления</translation>
     </message>
     <message>
         <source>&amp;Console</source>
@@ -2974,19 +2970,19 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Draw arrow</source>
-        <translation>Нарисовать Стрелку</translation>
+        <translation>Нарисовать стрелку</translation>
     </message>
     <message>
         <source>QtiPlot - HTTP Get Version File</source>
-        <translation type="obsolete">QtiPlot - HTTP Получить Версию Файла</translation>
+        <translation type="obsolete">QtiPlot - получить файла версии через HTTP</translation>
     </message>
     <message>
         <source>Error while fetching version file with HTTP: %1.</source>
-        <translation type="obsolete">Ошибка при получении версии файла с помощью HTTP: %1.</translation>
+        <translation type="obsolete">Ошибка при получении файла версии с помощью HTTP: %1.</translation>
     </message>
     <message>
         <source>QtiPlot - No Updates Available</source>
-        <translation type="obsolete">QtiPlot - Не Доступных Обновлений</translation>
+        <translation type="obsolete">QtiPlot - Нет доступных обновлений</translation>
     </message>
     <message>
         <source>No updates available. Your current version %1 is the last version available!</source>
@@ -2994,7 +2990,7 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - Updates Available</source>
-        <translation type="obsolete">QtiPlot - Обновления Доступны</translation>
+        <translation type="obsolete">QtiPlot - Имеются обновления</translation>
     </message>
     <message>
         <source>There is a newer version of QtiPlot (%1) available for download. Would you like to download it?</source>
@@ -3003,7 +2999,7 @@ Are you sure you want to continue?</source>
     <message>
         <source>Cannot write file %1
 %2.</source>
-        <translation type="obsolete">Не возможно записать файл %1
+        <translation type="obsolete">Невозможно записать файл %1
 %2.</translation>
     </message>
     <message>
@@ -3012,108 +3008,112 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>QtiPlot - Python Script Window</source>
-        <translation type="obsolete">QtiPlot - Командное Окно Python</translation>
+        <translation type="obsolete">QtiPlot - окно скриптов на языке Python</translation>
     </message>
     <message>
         <source>S&amp;cripting</source>
-        <translation>&amp;Команды</translation>
+        <translation>Написание с&amp;криптов</translation>
     </message>
     <message>
         <source>&lt;h4&gt;There are no matrices available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;В данном проекте отсутствуют матрицы.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Пожалуйста создайте матрицу и попробуйте ещё раз!&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;В этом проекте матрицы недоступны.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Пожалуйста, создайте матницу и попробуйте ещё раз!&lt;/h4&gt;</translation>
     </message>
     <message>
         <source>QtiPlot - Renamed Window</source>
-        <translation>QtiPlot - Переименованное Окно</translation>
+        <translation>QtiPlot - переименованное окно</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Примечания</translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <source>The file &quot;%1&quot; was created using &quot;%2&quot; as scripting language.
 
 Initializing support for this language FAILED; I&apos;m using &quot;%3&quot; instead.
 Various parts of this file may not be displayed as expected.</source>
-        <translation>Файл  &quot;%1&quot; был создан с использованием скриптового языка &quot;%2&quot;.
-НЕ УДАЛОСЬ инициализировать поддержку этого языка; Я использую &quot;%3&quot; вместо него.
-Некоторые части этого файла возможно будут отобажаться не так, как ожидается.</translation>
+        <translation>Файл &quot;%1&quot; написан на скриптовом языке &quot;%2&quot;
+Произошёл сбой инициализации поддержки этого языка; взамен используется &quot;%3&quot;.
+Отображение различных фрагментов этого файла может отличаться от ожидаемого.</translation>
     </message>
     <message>
         <source>QtiPlot - Scripting Error</source>
-        <translation>QtiPlot - Ошибка Скрипта</translation>
+        <translation>QtiPlot - ошибка выполнения скрипта</translation>
     </message>
     <message>
         <source>Scripting language &quot;%1&quot; failed to initialize.</source>
-        <translation>Не удалось инициализировать командный язык &quot;%1&quot;.</translation>
+        <translation>Ошибка инициализации скриптового языка &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Get existing directory</source>
-        <translation>Получить существующий папку</translation>
+        <translation>Прочитать имеющийся каталог</translation>
     </message>
     <message>
         <source>Choose a directory to export the graphs to</source>
-        <translation>Для экспорта графиков в папку, закройти её</translation>
+        <translation>Выберите каталог для экспорта графиков</translation>
     </message>
     <message>
         <source>Python Source</source>
-        <translation>Исходный код Python</translation>
+        <translation>Исходник на языке Python</translation>
     </message>
     <message>
         <source>All Files</source>
-        <translation>Все Файлы</translation>
+        <translation>Все файлы</translation>
     </message>
     <message>
         <source>Save Notes As...</source>
-        <translation>Сохранить Примечания Как...</translation>
+        <translation>Сохранить заметки как...</translation>
     </message>
     <message>
         <source>QtiPlot 2D Graph Template</source>
-        <translation>Шаблон 2D Графика QtiPlot</translation>
+        <translation>Шаблон двумерного графика QtiPlot</translation>
     </message>
     <message>
         <source>&amp;Edit Function...</source>
-        <translation>&amp;Редактировать Функцию...</translation>
+        <translation>&amp;Редактировать функцию...</translation>
     </message>
     <message>
         <source>&amp;Plot details...</source>
-        <translation>Детали &amp;отображения...</translation>
+        <translation>Детали &amp;построения...</translation>
     </message>
     <message>
         <source>D&amp;epending Graphs</source>
-        <translation>З&amp;ависимые Графики</translation>
+        <translation>&amp;Связанные графики</translation>
     </message>
     <message>
         <source>D&amp;epending 3D Graphs</source>
-        <translation>З&amp;ависимые 3D Графики</translation>
+        <translation>Связанные &amp;трёхмерные графики</translation>
     </message>
     <message>
         <source>&amp;Graph 3D</source>
-        <translation>3D &amp;График</translation>
+        <translation>Т&amp;рёхмерный график</translation>
     </message>
     <message>
         <source>Choose the location of the QtiPlot help folder!</source>
-        <translation>Укажите папку помощи QtiPlot!</translation>
+        <translation>Укажите местоположение папки со справкой QtiPlot!</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="obsolete">Открыть Файл</translation>
+        <translation type="obsolete">Открыть файл</translation>
+    </message>
+    <message>
+        <source>Alt+F4</source>
+        <translation type="obsolete">Alt+F4</translation>
     </message>
     <message>
         <source>Ctrl+Alt+O</source>
-        <translation></translation>
+        <translation>Ctrl+Alt+O</translation>
     </message>
     <message>
         <source>Ctrl+Return</source>
-        <translation></translation>
+        <translation>Ctrl+Return</translation>
     </message>
     <message>
         <source>&amp;Go to Row...</source>
-        <translation>&amp;Перейти На Строку...</translation>
+        <translation>Перейти к &amp;строке</translation>
     </message>
     <message>
         <source>Ctrl+Alt+G</source>
-        <translation></translation>
+        <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -3121,43 +3121,43 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <source>Scripting &amp;language</source>
-        <translation>Командный &amp;язык</translation>
+        <translation>Скриптовый &amp;язык</translation>
     </message>
     <message>
         <source>&amp;Restart scripting</source>
-        <translation>&amp;Перезапустить командный интерпретатор</translation>
+        <translation>&amp;Перезапустить поддержку скриптов</translation>
     </message>
     <message>
         <source>E&amp;xecute</source>
-        <translation>В&amp;ыполнить</translation>
+        <translation>&amp;Выполнить</translation>
     </message>
     <message>
         <source>Ctrl+J</source>
-        <translation></translation>
+        <translation>Ctrl+J</translation>
     </message>
     <message>
         <source>Execute &amp;All</source>
-        <translation>Выполнить &amp;Всё</translation>
+        <translation>Выполнить в&amp;сё</translation>
     </message>
     <message>
         <source>Ctrl+Shift+J</source>
-        <translation></translation>
+        <translation>Ctrl+Shift+J</translation>
     </message>
     <message>
         <source>&amp;Evaluate Expression</source>
-        <translation>&amp;Вычислить Выражение</translation>
+        <translation>&amp;Раскрыть выражение</translation>
     </message>
     <message>
         <source>&amp;Python Script Window</source>
-        <translation type="obsolete">Окно &amp;Python Скрипта</translation>
+        <translation type="obsolete">Окно скриптов на языке &amp;Python</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation></translation>
+        <translation>F3</translation>
     </message>
     <message>
         <source>Fit</source>
-        <translation>Приблизить</translation>
+        <translation>Приближение</translation>
     </message>
     <message>
         <source>Graph 3D</source>
@@ -3200,3703 +3200,4362 @@ Various parts of this file may not be displayed as expected.</source>
         <translation>Анимация</translation>
     </message>
     <message>
-        <source>Contour - &amp;Color Fill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contour &amp;Lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Gray Scale Map</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Layer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arrange Layers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Error Bars...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Function...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contour + &amp;Color Fill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contour Lines + Color Fill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contour Lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gray Scale Map</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Matrix Plot</source>
-        <translation type="unfinished"></translation>
+        <translation>График матрицы</translation>
+    </message>
+    <message>
+        <source>The file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; is the current file!</source>
+        <translation>Файл:: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; является текущим файлом!</translation>
+    </message>
+    <message>
+        <source>Name &lt;b&gt;%1&lt;/b&gt; already exists!</source>
+        <translation>Имя &lt;b&gt;%1&lt;/b&gt; уже существует!</translation>
+    </message>
+    <message>
+        <source>Warning: for internal consistency reasons the underscore character is replaced with a minus sign.</source>
+        <translation>Предупреждение: для обеспечения внутренней согласованности символ подчёркивания был заменён на знак минус.</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Help Profile Not Found!</source>
+        <translation>QtiPlot - Профиль помощи не найден!</translation>
+    </message>
+    <message>
+        <source>The assistant could not start because the file &lt;b&gt;%1&lt;/b&gt; was not found in the help file directory!&lt;p&gt;This file is provided with the QtiPlot manual which can be downloaded from the following internet address:&lt;/p&gt;&lt;p&gt;&lt;font color=blue&gt;&apos;http://soft.proindependent.com/manuals.html&apos;&lt;/font&gt;&lt;/p&gt;</source>
+        <translation>Нельзя запустить помощника так как в каталоге помощи не найден файл &lt;b&gt;%1&lt;/b&gt;!&lt;p&gt;Этот файл поставляется вместе с руководством QtiPlot которое можно скачать по следующему интернет адресу: &lt;/p&gt;&lt;p&gt;&lt;font color=blue&gt;&apos;http://soft.proindependent.com/manuals.html&apos;&lt;/font&gt;&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Ctrl+K</source>
+        <translation>Ctrl+K</translation>
+    </message>
+    <message>
+        <source>Ctrl+Alt+K</source>
+        <translation>Ctrl+Alt+K</translation>
     </message>
     <message>
         <source>Alt+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Q</translation>
+    </message>
+    <message>
+        <source>Contour - &amp;Color Fill</source>
+        <translation>Контур - заполнение &amp;цветом</translation>
+    </message>
+    <message>
+        <source>Contour &amp;Lines</source>
+        <translation>&amp;Линии контура</translation>
+    </message>
+    <message>
+        <source>&amp;Gray Scale Map</source>
+        <translation>Шкала &amp;уровней серого</translation>
+    </message>
+    <message>
+        <source>Add Layer</source>
+        <translation>Довать слой</translation>
+    </message>
+    <message>
+        <source>Arrange Layers</source>
+        <translation>Выровнять слои</translation>
+    </message>
+    <message>
+        <source>Add Error Bars...</source>
+        <translation>Добавить штрихи ошибок...</translation>
+    </message>
+    <message>
+        <source>Add Function...</source>
+        <translation>Добавить функцию...</translation>
+    </message>
+    <message>
+        <source>Add Image</source>
+        <translation>Добавить изображение</translation>
+    </message>
+    <message>
+        <source>Contour + &amp;Color Fill</source>
+        <translation>Контур + заполнение &amp;цветом</translation>
+    </message>
+    <message>
+        <source>Contour Lines + Color Fill</source>
+        <translation>Линии контура + заполнение цветом</translation>
+    </message>
+    <message>
+        <source>Contour Lines</source>
+        <translation>Линии контура</translation>
+    </message>
+    <message>
+        <source>Gray Scale Map</source>
+        <translation>Шкала уровней серого</translation>
+    </message>
+    <message>
+        <source>Add Text</source>
+        <translation>Добавить текст</translation>
     </message>
     <message>
         <source>Enable perspective</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить перспективу</translation>
     </message>
     <message>
         <source>Reset rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить вращение</translation>
     </message>
     <message>
-        <source>Fit frame to layer</source>
-        <translation type="unfinished"></translation>
+        <source>Fit frame to window</source>
+        <translation>Совместить фрейм с окном</translation>
     </message>
 </context>
 <context>
     <name>CanvasPicker</name>
     <message>
         <source>enter your text here</source>
-        <translation type="unfinished"></translation>
+        <translation>вводите свой текст здесь</translation>
     </message>
 </context>
 <context>
     <name>ColorBox</name>
     <message>
         <source>black</source>
-        <translation type="unfinished"></translation>
+        <translation>чёрный</translation>
     </message>
     <message>
         <source>red</source>
-        <translation type="unfinished"></translation>
+        <translation>красный</translation>
     </message>
     <message>
         <source>green</source>
-        <translation type="unfinished"></translation>
+        <translation>зелёный</translation>
     </message>
     <message>
         <source>blue</source>
-        <translation type="unfinished"></translation>
+        <translation>синий</translation>
     </message>
     <message>
         <source>cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>голубой</translation>
     </message>
     <message>
         <source>magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>пурпурный</translation>
     </message>
     <message>
         <source>yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>жёлтый</translation>
     </message>
     <message>
         <source>dark yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>темно-жёлтый</translation>
     </message>
     <message>
         <source>navy</source>
-        <translation type="unfinished"></translation>
+        <translation>тёмно-синий</translation>
     </message>
     <message>
         <source>purple</source>
-        <translation type="unfinished"></translation>
+        <translation>фиолетовый</translation>
     </message>
     <message>
         <source>wine</source>
-        <translation type="unfinished"></translation>
+        <translation>бордовый</translation>
     </message>
     <message>
         <source>olive</source>
-        <translation type="unfinished"></translation>
+        <translation>оливковый</translation>
     </message>
     <message>
         <source>dark cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>тёмно-голубой</translation>
     </message>
     <message>
         <source>white</source>
-        <translation type="unfinished"></translation>
+        <translation>белый</translation>
     </message>
     <message>
         <source>light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>светло-серый</translation>
     </message>
     <message>
         <source>dark gray</source>
-        <translation type="unfinished"></translation>
+        <translation>тёмно-серый</translation>
     </message>
 </context>
 <context>
     <name>ColorMapEditor</name>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Уровень</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
     </message>
     <message>
         <source>&amp;Insert</source>
-        <translation type="unfinished">&amp;Вставить столбец</translation>
+        <translation>&amp;Вставить колонку</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Удалить</translation>
+        <translation>&amp;Удалить</translation>
     </message>
     <message>
         <source>&amp;Scale Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Шкала цветов</translation>
     </message>
     <message>
         <source>QtiPlot - Input Error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода</translation>
     </message>
     <message>
         <source>Sorry, you cannot edit this value!</source>
-        <translation type="unfinished"></translation>
+        <translation>Извините, но вы не можете изменять это значение!</translation>
     </message>
     <message>
         <source>Please enter a valid color level value!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите допустимое значение уровня цвета!</translation>
     </message>
 </context>
 <context>
     <name>ExponentialFit</name>
     <message>
         <source>Exponential growth</source>
-        <translation type="unfinished"></translation>
+        <translation>Возростание по экспоненте</translation>
     </message>
     <message>
         <source>Exponential decay</source>
-        <translation type="unfinished"></translation>
+        <translation>Затухание по экспоненте</translation>
     </message>
 </context>
 <context>
     <name>FFTDialog</name>
     <message>
         <source>QtiPlot - FFT Options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - параметры БПФ</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation type="unfinished"></translation>
+        <translation>График функции</translation>
     </message>
     <message>
         <source>Sampling</source>
-        <translation type="unfinished"></translation>
+        <translation>Выборка</translation>
     </message>
     <message>
         <source>Real</source>
-        <translation type="unfinished"></translation>
+        <translation>Вещественная часть</translation>
     </message>
     <message>
         <source>Imaginary</source>
-        <translation type="unfinished"></translation>
+        <translation>Мнимая часть</translation>
     </message>
     <message>
         <source>Sampling Interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Интеграл выборки</translation>
     </message>
     <message>
         <source>&amp;Normalize Amplitude</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Нормирование амплитуды</translation>
     </message>
     <message>
         <source>&amp;Shift Results</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сдвиг результата</translation>
     </message>
     <message>
         <source>&amp;Inverse</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Обратный</translation>
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Прямой</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
         <source>QtiPlot - Sampling value error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка в выборке</translation>
     </message>
     <message>
         <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
+        <translation>QtiPlot - Ошибка</translation>
     </message>
     <message>
         <source>Please choose a column for the real part of the data!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста выберити колонку для вещественной части данных!</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Амплитуда</translation>
     </message>
 </context>
 <context>
     <name>Fit</name>
     <message>
         <source>QtiPlot - Fit Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка приближения</translation>
     </message>
     <message>
         <source>No curve assigned to the fitter! Please assign a curve first!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не указана кривая для выполнения приближения! Пожалуйста, сначала произведите выбор кривой!</translation>
     </message>
     <message>
         <source>Please enter a valid curve name!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
-    </message>
-    <message>
-        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, введите правильное название кривой!</translation>
     </message>
     <message>
         <source>Plot</source>
-        <translation type="unfinished">График</translation>
+        <translation>График</translation>
     </message>
     <message>
         <source>fit of dataset</source>
-        <translation type="unfinished"></translation>
+        <translation>приближение по набору данных</translation>
     </message>
     <message>
         <source>using function</source>
-        <translation type="unfinished"></translation>
+        <translation>используя функцию</translation>
     </message>
     <message>
         <source>Weighting Method</source>
-        <translation type="unfinished"></translation>
+        <translation>Способ взвешивания</translation>
     </message>
     <message>
         <source>No weighting</source>
-        <translation type="unfinished"></translation>
+        <translation>Без взвешивания</translation>
     </message>
     <message>
         <source>Instrumental</source>
-        <translation type="unfinished"></translation>
+        <translation>Инструментальный</translation>
     </message>
     <message>
         <source>using error bars dataset</source>
-        <translation type="unfinished"></translation>
+        <translation>с использованием набора данных об ошибках</translation>
     </message>
     <message>
         <source>Statistical</source>
-        <translation type="unfinished"></translation>
+        <translation>Статистический</translation>
     </message>
     <message>
         <source>Arbitrary Dataset</source>
-        <translation type="unfinished"></translation>
+        <translation>Произвольный набор данных</translation>
     </message>
     <message>
         <source>Nelder-Mead Simplex</source>
-        <translation type="unfinished"></translation>
+        <translation>Симплекс Нелдера-Мида</translation>
     </message>
     <message>
         <source>Unscaled Levenberg-Marquardt</source>
-        <translation type="unfinished"></translation>
+        <translation>Не масштабированный Левенберг-Макуардт</translation>
     </message>
     <message>
         <source>Scaled Levenberg-Marquardt</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштабированный Левенберг-Макуардт</translation>
     </message>
     <message>
         <source> algorithm with tolerance = </source>
-        <translation type="unfinished"></translation>
+        <translation>алгоритм с допустимым отклонением =</translation>
     </message>
     <message>
         <source>From x</source>
-        <translation type="unfinished"></translation>
+        <translation>От значения по x</translation>
     </message>
     <message>
         <source>to x</source>
-        <translation type="unfinished"></translation>
+        <translation>до значения по x</translation>
     </message>
     <message>
         <source>R^2</source>
-        <translation type="unfinished"></translation>
+        <translation>R^2</translation>
     </message>
     <message>
         <source>Iterations</source>
-        <translation type="unfinished"></translation>
+        <translation>Итераций</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished">Статус</translation>
+        <translation>Состояние</translation>
     </message>
     <message>
         <source>Dataset</source>
-        <translation type="unfinished"></translation>
+        <translation>Набор данных</translation>
     </message>
     <message>
         <source>Function</source>
-        <translation type="unfinished">Функция</translation>
+        <translation>Функция</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>The curve %1 has no associated Y error bars. You cannot use instrumental weighting method.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривой %1 не соответствует набор данных об ошибках по Y. Использование метода инструментального взвешивания невозможно.</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметр</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение</translation>
     </message>
     <message>
-        <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <source>You didn&apos;t specify a data set for this fit operation. Operation aborted!</source>
+        <translation type="obsolete">Не указан набор данных для выполнения операции. Операция прервана!</translation>
     </message>
     <message>
         <source>There are no parameters specified for this fit operation. Operation aborted!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не указаны параметры для выполнения операции. Операция прервана!</translation>
     </message>
     <message>
         <source>You must specify a valid fit function first. Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо сначала указать допустимую функцию для приближения. Операция прервана!</translation>
     </message>
     <message>
         <source>Fit</source>
-        <translation type="unfinished">Приблизить</translation>
+        <translation>Выполнить приближение</translation>
     </message>
     <message>
         <source> of </source>
-        <translation type="unfinished"></translation>
+        <translation>из</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation>QtiPlot - Ошибка</translation>
+    </message>
+    <message>
+        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
+        <translation>Для выполнения этой операции необходимо как минимум %1 точки(ек)! Операция прервана!</translation>
+    </message>
+    <message>
+        <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
+        <translation>Колонка %1 содержит меньше точек, чем обрабатываемый набор данных. Пожалуйста выберите другую колонку!.</translation>
+    </message>
+    <message>
+        <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
+        <translation>Вы не указали допустимый набор данных для этой операции. Операция прервана!</translation>
+    </message>
+    <message>
+        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
+        <translation>Необходимо как минимум %1 точек данных для этой операции приближения. Операция прервана!</translation>
     </message>
 </context>
 <context>
     <name>Folder</name>
     <message>
         <source>kB</source>
-        <translation type="unfinished"></translation>
+        <translation>кб</translation>
     </message>
     <message>
         <source>bytes</source>
-        <translation type="unfinished">байт(ов)</translation>
+        <translation>байт</translation>
     </message>
 </context>
 <context>
     <name>FunctionDialog</name>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Clear list</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить список</translation>
     </message>
     <message>
         <source>Clear Function</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить функцию</translation>
     </message>
     <message>
         <source>QtiPlot - Add function curve</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Добавить график функции</translation>
     </message>
     <message>
         <source>Curve type </source>
-        <translation type="unfinished"></translation>
+        <translation>Тип кривой </translation>
     </message>
     <message>
         <source>f(x)= </source>
-        <translation type="unfinished"></translation>
+        <translation>f(x)= </translation>
     </message>
     <message>
         <source>From x= </source>
-        <translation type="unfinished"></translation>
+        <translation>От x= </translation>
     </message>
     <message>
         <source>To x= </source>
-        <translation type="unfinished"></translation>
+        <translation>До x= </translation>
     </message>
     <message>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Точек</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметр</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>До</translation>
     </message>
     <message>
         <source>y = </source>
-        <translation type="unfinished"></translation>
+        <translation>y = </translation>
     </message>
     <message>
         <source>x = </source>
-        <translation type="unfinished"></translation>
+        <translation>x = </translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>От</translation>
     </message>
     <message>
         <source>R =</source>
-        <translation type="unfinished"></translation>
+        <translation>R =</translation>
     </message>
     <message>
         <source>Theta =</source>
-        <translation type="unfinished"></translation>
+        <translation>Theta =</translation>
     </message>
     <message>
         <source>Function</source>
-        <translation type="unfinished">Функция</translation>
+        <translation>Функция</translation>
     </message>
     <message>
         <source>Parametric plot</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметрический график</translation>
     </message>
     <message>
         <source>Polar plot</source>
-        <translation type="unfinished"></translation>
+        <translation>Полярный график</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>QtiPlot - Start limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка выбора начальной границы</translation>
     </message>
     <message>
         <source>QtiPlot - End limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка выбора конечной границы</translation>
     </message>
     <message>
         <source>QtiPlot - Input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода</translation>
     </message>
     <message>
         <source>Please enter x limits that satisfy: from &lt; end!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите пределы изменения x, удовлетворяющие соотношению: от &lt; до!</translation>
     </message>
     <message>
         <source>QtiPlot - Input function error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода функции</translation>
     </message>
     <message>
         <source>Please enter parameter limits that satisfy: from &lt; end!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите пределы изменения параметра, удовлетворяющие соотношению: от &lt; до!</translation>
     </message>
 </context>
 <context>
     <name>GaussAmpFit</name>
     <message>
         <source>(offset)</source>
-        <translation type="unfinished"></translation>
+        <translation>(смещение)</translation>
     </message>
     <message>
         <source>(height)</source>
-        <translation type="unfinished"></translation>
+        <translation>(высота)</translation>
     </message>
     <message>
         <source>(center)</source>
-        <translation type="unfinished"></translation>
+        <translation>(центр)</translation>
     </message>
     <message>
         <source>(width)</source>
-        <translation type="unfinished"></translation>
+        <translation>(ширина)</translation>
     </message>
     <message>
         <source>GaussAmp</source>
-        <translation type="unfinished"></translation>
+        <translation>GaussAmp</translation>
     </message>
 </context>
 <context>
     <name>GaussFit</name>
     <message>
         <source>Gauss</source>
-        <translation type="unfinished"></translation>
+        <translation>Гаусс</translation>
     </message>
     <message>
         <source>(area)</source>
-        <translation type="unfinished"></translation>
+        <translation>(площадь)</translation>
     </message>
     <message>
         <source>(center)</source>
-        <translation type="unfinished"></translation>
+        <translation>(центр)</translation>
     </message>
     <message>
         <source>(width)</source>
-        <translation type="unfinished"></translation>
+        <translation>(ширина)</translation>
     </message>
     <message>
         <source>(offset)</source>
-        <translation type="unfinished"></translation>
+        <translation>(смещение)</translation>
     </message>
 </context>
 <context>
     <name>Graph</name>
     <message>
-        <source>Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>QtiPlot - Warning</source>
-        <translation type="unfinished">QtiPlot - Предупреждение</translation>
+        <translation>QtiPlot - Предупреждение</translation>
     </message>
     <message>
         <source>All the curves on this plot are empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Все кривые на этом графике пустые!</translation>
     </message>
     <message>
         <source>Curve selected! Move cursor and click to choose a point and double-click/press &apos;Enter&apos; to finish!</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая выбрана! Для выбора точки подведите указатель и сделайте щелчок, двойной щелчок/нажатие &apos;Enter&apos; для завершения!</translation>
     </message>
     <message>
         <source>Peak %1 selected! Click to select a point and double-click/press &apos;Enter&apos; to set the position of the next peak!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Remove point error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This function is not available for function curves!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Move point error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
-    </message>
-    <message>
-        <source>There is no curve called &apos;%1&apos; on this layer.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>There is no curve with index %1 on this layer.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Valid indexes must have values between 0 and %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Вершина %1 выбрана! Один щелчок для выбора точки и двойной щелчок/нажатие &apos;Enter&apos;, для указания положение следующей вершины!</translation>
     </message>
     <message>
         <source>QtiPlot - File open error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Input function error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The columns</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>are empty and will not be added to the plot!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The column</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>is empty and will not be added to the plot!</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка при открытии файла</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation type="unfinished">&amp;Вырезать</translation>
+        <translation>&amp;Вырезать</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Копировать</translation>
+        <translation>&amp;Копировать</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Удалить</translation>
+        <translation>&amp;Удалить</translation>
     </message>
     <message>
         <source>&amp;Properties...</source>
-        <translation type="unfinished">&amp;Свойства...</translation>
+        <translation>&amp;Свойства...</translation>
     </message>
     <message>
         <source>&amp;Rescale to show all</source>
-        <translation type="unfinished">&amp;Перерисовать и отобразить всё</translation>
-    </message>
-    <message>
-        <source>Ctrl+Shift+R</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Перерисовать и отобразить всё</translation>
     </message>
     <message>
         <source>&amp;Hide axis</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Скрыть оси</translation>
     </message>
     <message>
         <source>&amp;Show grids</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Показать сетку</translation>
     </message>
     <message>
         <source>&amp;Scale...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fit</source>
-        <translation type="unfinished">Приблизить</translation>
+        <translation>&amp;Масштаб...</translation>
     </message>
     <message>
         <source>Error - QtiPlot</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка - QtiPlot</translation>
     </message>
     <message>
         <source>Your data is not valid. You need at least two different points for a histogram!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bins</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quantity</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sum</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Percent</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваши данные не верны. Для гистограммы необходимы как минимум две различные точки!</translation>
     </message>
     <message>
         <source>Histogram and Probabilities for</source>
-        <translation type="unfinished"></translation>
+        <translation>Гистограмма и вероятности для</translation>
     </message>
     <message>
         <source>Mean</source>
-        <translation type="unfinished"></translation>
+        <translation>Среднее</translation>
     </message>
     <message>
         <source>Standard Deviation</source>
-        <translation type="unfinished"></translation>
+        <translation>Среднеквадратичное отклонение</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимум</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимум</translation>
+    </message>
+    <message>
+        <source>Bins</source>
+        <translation>Буферы (bins)</translation>
     </message>
     <message>
         <source>Could not allocate memory, operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось выделить память, операция отменена!</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время</translation>
     </message>
     <message>
         <source>Real</source>
-        <translation type="unfinished"></translation>
+        <translation>Вещественная часть</translation>
     </message>
     <message>
         <source>Imaginary</source>
-        <translation type="unfinished"></translation>
+        <translation>Мнимая часть</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Амплитуда</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Linear interpolation of </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cubic interpolation of </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Akima interpolation of </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Derivative of</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>QtiPlot - Integration error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка интегрирования</translation>
     </message>
     <message>
         <source>You need at least 2 points to integrate! Integration aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Для интегрирования необходимо как минимум 2 точки! Интегрирование отменено!</translation>
     </message>
     <message>
         <source>Several points have the same x value causing divisions by zero, integration aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Несколько точек имеют одинаковое значение координаты x, что вызывает деление на ноль, интегрирование отменено!</translation>
+    </message>
+    <message>
+        <source>Linear regresion of </source>
+        <translation type="obsolete">Линейная регрессия</translation>
+    </message>
+    <message>
+        <source>y0 (offset)</source>
+        <translation type="obsolete">y0 (смещение)</translation>
+    </message>
+    <message>
+        <source>Lorentz</source>
+        <translation type="obsolete">Лоренц</translation>
+    </message>
+    <message>
+        <source>Gauss</source>
+        <translation type="obsolete">Гаусс</translation>
+    </message>
+    <message>
+        <source>multi-peak</source>
+        <translation type="obsolete">многовершинный</translation>
+    </message>
+    <message>
+        <source>Non-linear fit of </source>
+        <translation type="obsolete">Нелинейное приближение для</translation>
+    </message>
+    <message>
+        <source>Non-linear</source>
+        <translation type="obsolete">Нелинейный</translation>
+    </message>
+    <message>
+        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
+        <translation>Для выполнения этой операции необходимо как минимум %1 точки(ек)! Операция прервана!</translation>
+    </message>
+    <message>
+        <source>Order</source>
+        <translation type="obsolete">Порядок</translation>
+    </message>
+    <message>
+        <source>Polynomial fit of </source>
+        <translation type="obsolete">Полиномиальное приближение для</translation>
     </message>
     <message>
         <source>QtiPlot - Pixel selection warning</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Предупреждение при выборе точки</translation>
     </message>
     <message>
-        <source>Savitzky-Golay smoothing of </source>
-        <translation type="unfinished"></translation>
+        <source>QtiPlot - File not found</source>
+        <translation type="obsolete">QtiPlot - файл не найден</translation>
+    </message>
+    <message>
+        <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
+        <translation type="obsolete">Файл модуля: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;не найден. Операция прервана!</translation>
+    </message>
+    <message>
+        <source>Error when loading plugin!
+</source>
+        <translation type="obsolete">Ошибка при загрузки модуля!</translation>
+    </message>
+    <message>
+        <source>You need at least %1 points to perform the fit! Operation aborted!</source>
+        <translation type="obsolete">Для выполнения приближения необходимо как минимум %1 точки(ек)! Операция прервана!</translation>
+    </message>
+    <message>
+        <source>Error when loading plugin!</source>
+        <translation type="obsolete">Ошибка при загрузки модуля!</translation>
+    </message>
+    <message>
+        <source>Peak</source>
+        <translation type="obsolete">Вершина</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="obsolete">Высота</translation>
+    </message>
+    <message>
+        <source>Area</source>
+        <translation type="obsolete">Площадь</translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation type="obsolete">Центр</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="obsolete">Ширина</translation>
     </message>
     <message>
         <source>Low Pass FFT Filter of </source>
-        <translation type="unfinished"></translation>
+        <translation>БПФ фильтр низких частот</translation>
     </message>
     <message>
         <source>High Pass FFT Filter of </source>
-        <translation type="unfinished"></translation>
+        <translation>БПФ фильтр высоких частот</translation>
     </message>
     <message>
         <source>Band Pass FFT Filter of </source>
-        <translation type="unfinished"></translation>
+        <translation>БПФ полосовой фильтр</translation>
     </message>
     <message>
         <source>Band Block FFT Filter of </source>
-        <translation type="unfinished"></translation>
+        <translation>БПФ режекторный фильтр</translation>
     </message>
     <message>
         <source>There are no curves available on this plot!</source>
-        <translation type="unfinished">На данном графике нет доступных кривых!</translation>
+        <translation>На данном графике нет доступных кривых!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation>QtiPlot - Ошибка</translation>
     </message>
     <message>
         <source>There are no curves with more than two points on this plot. Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>На данном графике нет кривых с более чем двумя точками. Операция прервана!</translation>
+    </message>
+    <message>
+        <source>fit of</source>
+        <translation type="obsolete">приближение</translation>
+    </message>
+    <message>
+        <source>Exponential decay fit of </source>
+        <translation type="obsolete">Экспоненциальное приближение</translation>
+    </message>
+    <message>
+        <source>ExpDecay2 fit of </source>
+        <translation type="obsolete">Эксп. приближение2</translation>
+    </message>
+    <message>
+        <source>ExpDecay3 fit of </source>
+        <translation type="obsolete">Эксп. приближение3</translation>
+    </message>
+    <message>
+        <source>Exponential growth fit of </source>
+        <translation type="obsolete">Приближение экспоненциальным ростом</translation>
+    </message>
+    <message>
+        <source>Gauss fit of </source>
+        <translation type="obsolete">Приближение гауссианом</translation>
+    </message>
+    <message>
+        <source>Lorentz fit of </source>
+        <translation type="obsolete">Приближение лоренцианом</translation>
+    </message>
+    <message>
+        <source>using function</source>
+        <translation type="obsolete">используя функцию</translation>
+    </message>
+    <message>
+        <source>Unscaled Levenberg-Marquardt</source>
+        <translation type="obsolete">Не масштабированный Левенберг-Макуардт</translation>
+    </message>
+    <message>
+        <source>Scaled Levenberg-Marquardt</source>
+        <translation type="obsolete">Масштабированный Левенберг-Макуардт</translation>
+    </message>
+    <message>
+        <source> algorithm with tolerance = </source>
+        <translation type="obsolete">алгоритм с допустимым отклонением =</translation>
+    </message>
+    <message>
+        <source>From x=</source>
+        <translation type="obsolete">От x= </translation>
+    </message>
+    <message>
+        <source> to x=</source>
+        <translation type="obsolete">До x=</translation>
+    </message>
+    <message>
+        <source>Iterations = </source>
+        <translation type="obsolete">Итераций =</translation>
+    </message>
+    <message>
+        <source>Nelder-Mead Simplex</source>
+        <translation type="obsolete">Симплекс Нелдера-Мида</translation>
+    </message>
+    <message>
+        <source>Savitzky-Golay smoothing of </source>
+        <translation>Сглаживание по Савицкому-Голай</translation>
+    </message>
+    <message>
+        <source>A1 (init value)</source>
+        <translation type="obsolete">A1 (начальное значение)</translation>
+    </message>
+    <message>
+        <source>A2 (final value)</source>
+        <translation type="obsolete">A2 (конечное значение)</translation>
+    </message>
+    <message>
+        <source>x0 (center)</source>
+        <translation type="obsolete">x0 (центр)</translation>
+    </message>
+    <message>
+        <source>dx (time constant)</source>
+        <translation type="obsolete">dx (приращение времени)</translation>
+    </message>
+    <message>
+        <source>Boltzmann (Sigmoidal)</source>
+        <translation type="obsolete">Больцман (Сигмоидальный)</translation>
+    </message>
+    <message>
+        <source>Boltzmann (Sigmoidal) fit of </source>
+        <translation type="obsolete">Приближение по Больцману (Сигмоидальное)</translation>
+    </message>
+    <message>
+        <source>The columns</source>
+        <translation>Колонки</translation>
+    </message>
+    <message>
+        <source>are empty and will not be added to the plot!</source>
+        <translation>являются пустыми и их содержимое не может быть отображено на графике!</translation>
+    </message>
+    <message>
+        <source>The column</source>
+        <translation>Колонка</translation>
+    </message>
+    <message>
+        <source>is empty and will not be added to the plot!</source>
+        <translation>явлется пустой и её содержимое не может быть отображено на графике!</translation>
+    </message>
+    <message>
+        <source>Derivative of</source>
+        <translation>Производная от</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation>По левому краю</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation>По правому краю</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation>Заголовок</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Remove point error</source>
+        <translation>QtiPlot - Ошибка удаления данных</translation>
+    </message>
+    <message>
+        <source>This function is not available for function curves!</source>
+        <translation>Эта функция не доступна для графиков функций!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Move point error</source>
+        <translation>QtiPlot - Ошибка перемещения данных</translation>
+    </message>
+    <message>
+        <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
+        <translation>Файл изображения: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;больше не существует!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input function error</source>
+        <translation>QtiPlot - Ошибка ввода функции</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+R</source>
+        <translation>Ctrl+Shift+R</translation>
+    </message>
+    <message>
+        <source>Quantity</source>
+        <translation>Количество</translation>
+    </message>
+    <message>
+        <source>Sum</source>
+        <translation>Сумма</translation>
+    </message>
+    <message>
+        <source>Percent</source>
+        <translation>Процент</translation>
+    </message>
+    <message>
+        <source>Linear interpolation of </source>
+        <translation>Линейная интерполяция для </translation>
+    </message>
+    <message>
+        <source>Cubic interpolation of </source>
+        <translation>Кубическая интерполяция для </translation>
+    </message>
+    <message>
+        <source>Akima interpolation of </source>
+        <translation>Интерполяция Акима для </translation>
+    </message>
+    <message>
+        <source>Linear regression of </source>
+        <translation type="obsolete">Линейная регрессия для </translation>
+    </message>
+    <message>
+        <source>QtiPlot</source>
+        <translation type="obsolete">QtiPlot</translation>
+    </message>
+    <message>
+        <source>There is no curve called &apos;%1&apos; on this layer.</source>
+        <translation>В данном слое нет кривой с названием &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>There is no curve with index %1 on this layer.</source>
+        <translation>В данном слое нет кривой с индексом %1.</translation>
+    </message>
+    <message>
+        <source>Valid indexes must have values between 0 and %1</source>
+        <translation>Допустимый интервал индексов -- от 0 до %1.</translation>
+    </message>
+    <message>
+        <source>Fit</source>
+        <translation>Приближение</translation>
+    </message>
+    <message>
+        <source>The curve %1 doesn&apos;t exist! Operation aborted!</source>
+        <translation type="obsolete">Кривая %1 не существует! Операция прервана!</translation>
+    </message>
+    <message>
+        <source>Please select the start line point inside the image rectangle!</source>
+        <translation>Пожалуйста укажите точку начала линии внутри контура изображения!</translation>
+    </message>
+    <message>
+        <source>Please select the end line point inside the image rectangle!</source>
+        <translation>Пожалуйста укажите точку конца линии внутри контура изображения!</translation>
+    </message>
+    <message>
+        <source>Smoothed</source>
+        <translation>Сглаженный</translation>
+    </message>
+    <message>
+        <source>points</source>
+        <translation>точки</translation>
+    </message>
+    <message>
+        <source>FFT Smoothing of</source>
+        <translation>БПФ сглаживание</translation>
+    </message>
+    <message>
+        <source>average mmoothing of</source>
+        <translation>усреднённое сглаживание</translation>
     </message>
 </context>
 <context>
     <name>Graph3D</name>
     <message>
-        <source>X axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Y axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Z axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>QtiPlot - IO Error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка Ввода/Вывода</translation>
     </message>
     <message>
         <source>Choose a filename to save under</source>
-        <translation type="unfinished">Выберите имя файла для сохранения</translation>
+        <translation>Выберите имя файла для сохранения</translation>
     </message>
     <message>
         <source>QtiPlot - Overwrite File?</source>
-        <translation type="unfinished">QtiPlot - Перезаписать Файл?</translation>
+        <translation>QtiPlot - Перезаписать Файл?</translation>
     </message>
     <message>
         <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists. Do you want to overwrite it?</source>
-        <translation type="unfinished">Файл с именем: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;уже существует. Вы хотите перезаписать его?</translation>
+        <translation>Файл с названием: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;уже существует. Вы хотите перезаписать его?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;Нет</translation>
+        <translation>&amp;Нет</translation>
     </message>
     <message>
         <source>QtiPlot - Export Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка При Экспортировании</translation>
+        <translation>QtiPlot - Ошибка при экспортировании</translation>
+    </message>
+    <message>
+        <source>QtiPlot</source>
+        <translation type="obsolete">QtiPlot</translation>
+    </message>
+    <message>
+        <source>X axis</source>
+        <translation>Ось X</translation>
+    </message>
+    <message>
+        <source>Y axis</source>
+        <translation>Ось Y</translation>
+    </message>
+    <message>
+        <source>Z axis</source>
+        <translation>Ось Z</translation>
     </message>
 </context>
 <context>
     <name>ImageExportDialog</name>
     <message>
         <source>QtiPlot - Choose a filename to save under</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите имя файла для сохранения</translation>
     </message>
     <message>
         <source>Show export &amp;options</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать &amp;параметры экспорта</translation>
     </message>
 </context>
 <context>
     <name>ImportFilesDialog</name>
     <message>
         <source>QtiPlot - Import Multiple ASCII Files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation type="unfinished">Все файлы</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished">Текст</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="unfinished">Данные</translation>
-    </message>
-    <message>
-        <source>Comma Separated Values</source>
-        <translation type="unfinished">Данные разделённые запятой</translation>
-    </message>
-    <message>
-        <source>Import each file as</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot -  Импортировать несколько файлов ASCII</translation>
     </message>
     <message>
         <source>New Table</source>
-        <translation type="unfinished">Новая Таблица</translation>
+        <translation>Новая таблица</translation>
     </message>
     <message>
         <source>New Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Новые столбцы</translation>
     </message>
     <message>
         <source>New Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>Новые строки</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Все файлы</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Текст</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>Данные</translation>
+    </message>
+    <message>
+        <source>Comma Separated Values</source>
+        <translation>Данные, разделённые запятой</translation>
+    </message>
+    <message>
+        <source>Import each file as</source>
+        <translation>Импортировать каждый файл как</translation>
     </message>
 </context>
 <context>
     <name>LinearFit</name>
     <message>
         <source>Linear Regression</source>
-        <translation type="unfinished"></translation>
+        <translation>Линейная регрессия</translation>
     </message>
     <message>
         <source>Linear</source>
-        <translation type="unfinished"></translation>
+        <translation>Линейный</translation>
     </message>
     <message>
         <source>QtiPlot - Fit Error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка приближения</translation>
     </message>
     <message>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо как минимум %1 точек данных для этой операции приближения. Операция прервана!</translation>
     </message>
 </context>
 <context>
     <name>LorentzFit</name>
     <message>
         <source>Lorentz</source>
-        <translation type="unfinished"></translation>
+        <translation>Лоренц</translation>
     </message>
     <message>
         <source>(area)</source>
-        <translation type="unfinished"></translation>
+        <translation>(площадь)</translation>
     </message>
     <message>
         <source>(center)</source>
-        <translation type="unfinished"></translation>
+        <translation>(центр)</translation>
     </message>
     <message>
         <source>(width)</source>
-        <translation type="unfinished"></translation>
+        <translation>(ширина)</translation>
     </message>
     <message>
         <source>(offset)</source>
-        <translation type="unfinished"></translation>
+        <translation>(смещение)</translation>
     </message>
 </context>
 <context>
     <name>Matrix</name>
     <message>
+        <source>QtiPlot - Input error</source>
+        <translation type="obsolete">QtiPlot - Ошибка ввода</translation>
+    </message>
+    <message>
         <source>Yes</source>
-        <translation type="unfinished">Да</translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
+        <translation>QtiPlot - Ошибка</translation>
     </message>
     <message>
         <source>Calculation failed, the matrix is not square!</source>
-        <translation type="unfinished"></translation>
+        <translation>Вычисление завершилось неудачей - матрица не является квадратной!</translation>
     </message>
     <message>
         <source>Inversion failed, the matrix is not square!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка обращения, матрица не является квадратной!</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Нет</translation>
+        <translation>Нет</translation>
+    </message>
+    <message>
+        <source>The text in the clipboard is larger than your current selection!
+Do you want to insert cells?</source>
+        <translation type="obsolete">Текст в буфере обмена больше, чем текущее выделение! Вы хотите вставить ячейки?</translation>
+    </message>
+    <message>
+        <source>QtiPlot</source>
+        <translation type="obsolete">QtiPlot</translation>
+    </message>
+    <message>
+        <source>The text in the clipboard is larger than your current selection!<byte value="x9"/>        
+Do you want to insert cells?</source>
+        <translation type="obsolete">Текст в буфере обмена превосходит по объёму ваше текущее выделение!<byte value="x9"/>
+Вы хотите добавить ячейки?</translation>
     </message>
 </context>
 <context>
     <name>MultiLayer</name>
     <message>
-        <source>QtiPlot - Guess best layout?</source>
-        <translation type="unfinished"></translation>
+        <source>QtiPlot</source>
+        <translation type="obsolete">QtiPlot</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Guess best origin for the new layer?</source>
+        <translation type="obsolete">QtiPlot - Определить наилучшее начало для нового слоя?</translation>
     </message>
     <message>
         <source>Do you want QtiPlot to rearrange the remaining layers?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите, чтобы QtiPlot перегруппировал оставшиеся слои?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;Нет</translation>
+        <translation>&amp;Нет</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error: arranging layers failed!</source>
+        <translation type="obsolete">QtiPlot - Ошибка: неудача при группировки слоёв!</translation>
+    </message>
+    <message>
+        <source>There is not enaugh space available in this window.&lt;p&gt;You could try to maximize it first and to rearrange the layers using the automatic option!&lt;/p&gt;</source>
+        <translation type="obsolete">В данном окне отсутствует свободное пространство.&lt;p&gt;Вы можете его свернуть и воспользоваться фукцией автоматической перегруппировки слоёв!&lt;/p&gt;</translation>
     </message>
     <message>
         <source>enter your text here</source>
-        <translation type="unfinished"></translation>
+        <translation>вводите свой текст здесь</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Guess best layout?</source>
+        <translation>QtiPlot - Наилучшая по Гауссу схема?</translation>
     </message>
 </context>
 <context>
     <name>MultiPeakFit</name>
     <message>
         <source>MultiPeak</source>
-        <translation type="unfinished"></translation>
+        <translation>Многопиковое</translation>
     </message>
     <message>
         <source>Gauss</source>
-        <translation type="unfinished"></translation>
+        <translation>Гаусс</translation>
     </message>
     <message>
         <source>Lorentz</source>
-        <translation type="unfinished"></translation>
+        <translation>Лоренц</translation>
     </message>
     <message>
         <source>multi-peak</source>
-        <translation type="unfinished"></translation>
+        <translation>многовершинный</translation>
     </message>
     <message>
         <source>Peak</source>
-        <translation type="unfinished"></translation>
+        <translation>Вершина</translation>
     </message>
     <message>
         <source>QtiPlot - Fit Error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка выполнения приближения</translation>
     </message>
     <message>
         <source>Could not allocate enough memory for the fit curves!</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно выделить память для выполнения приближения кривых!</translation>
     </message>
     <message>
         <source>Fit</source>
-        <translation type="unfinished">Приблизить</translation>
+        <translation>Приближение</translation>
     </message>
     <message>
         <source>fit of</source>
-        <translation type="unfinished"></translation>
+        <translation>приближение</translation>
     </message>
     <message>
         <source>peak</source>
-        <translation type="unfinished"></translation>
+        <translation>пик</translation>
     </message>
     <message>
         <source>Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Площадь</translation>
     </message>
     <message>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Центр</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота</translation>
     </message>
 </context>
 <context>
     <name>NonLinearFit</name>
     <message>
         <source>NonLinear</source>
-        <translation type="unfinished"></translation>
+        <translation>Нелинейное</translation>
     </message>
     <message>
         <source>Non-linear</source>
-        <translation type="unfinished"></translation>
+        <translation>Нелинейный</translation>
     </message>
     <message>
         <source>QtiPlot - Input function error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода функции</translation>
     </message>
     <message>
         <source>Please enter a valid non-empty expression! Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите, пожалуйста, допустимое непустое выражение! Операция прервана!</translation>
     </message>
     <message>
         <source>QtiPlot - Fit Error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - ошибка приближения</translation>
     </message>
     <message>
         <source>There are no parameters specified for this fit operation. Please define a list of parameters first!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не указаны параметры для выполнения операции. Укажите сначала, пожалуйста, список параметров</translation>
+    </message>
+    <message>
+        <source>You must provide a list containing at least 2 parameters for this type of fit. Operation aborted!</source>
+        <translation type="obsolete">Для данного типа приближения необходимо указать список как минимум из двух параметров. Операция прервана!</translation>
     </message>
     <message>
         <source>You must provide a list containing at least one parameter for this type of fit. Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Для выполнения этого типа приближения список параметров должен содержать хотя бы один элемент. Операция прервана!</translation>
+    </message>
+</context>
+<context>
+    <name>Note</name>
+    <message>
+        <source>QtiPlot</source>
+        <translation type="obsolete">QtiPlot</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="obsolete">Удалить</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="obsolete">Скрыть</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">Отменить</translation>
     </message>
 </context>
 <context>
     <name>PatternBox</name>
     <message>
         <source>Solid</source>
-        <translation type="unfinished"></translation>
+        <translation>Сплошной</translation>
     </message>
     <message>
         <source>Horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Горизонтальная</translation>
     </message>
     <message>
         <source>Vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальная</translation>
     </message>
     <message>
         <source>Cross</source>
-        <translation type="unfinished"></translation>
+        <translation>Перекрестие</translation>
     </message>
     <message>
         <source>BDiagonal</source>
-        <translation type="unfinished"></translation>
+        <translation>Обратный штрих</translation>
     </message>
     <message>
         <source>FDiagonal</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямой штрих</translation>
     </message>
     <message>
         <source>DiagCross</source>
-        <translation type="unfinished"></translation>
+        <translation>Дранка</translation>
     </message>
     <message>
         <source>Dense1</source>
-        <translation type="unfinished"></translation>
+        <translation>Плотность1</translation>
     </message>
     <message>
         <source>Dense2</source>
-        <translation type="unfinished"></translation>
+        <translation>Плотность2</translation>
     </message>
     <message>
         <source>Dense3</source>
-        <translation type="unfinished"></translation>
+        <translation>Плотность3</translation>
     </message>
     <message>
         <source>Dense4</source>
-        <translation type="unfinished"></translation>
+        <translation>Плотность4</translation>
     </message>
     <message>
         <source>Dense5</source>
-        <translation type="unfinished"></translation>
+        <translation>Плотность5</translation>
     </message>
     <message>
         <source>Dense6</source>
-        <translation type="unfinished"></translation>
+        <translation>Плотность6</translation>
     </message>
     <message>
         <source>Dense7</source>
-        <translation type="unfinished"></translation>
+        <translation>Плотность7</translation>
     </message>
 </context>
 <context>
     <name>Plot</name>
     <message>
         <source>Y Axis Title</source>
-        <translation type="unfinished">Заголовок Оси Y</translation>
+        <translation>Заголовок оси Y</translation>
     </message>
     <message>
         <source>X Axis Title</source>
-        <translation type="unfinished">Заголовок Оси X</translation>
+        <translation>Заголовок оси X</translation>
     </message>
 </context>
 <context>
     <name>PluginFit</name>
     <message>
         <source>Plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Модуль</translation>
     </message>
     <message>
         <source>QtiPlot - File not found</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - файл не найден</translation>
     </message>
     <message>
         <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл модуля: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;не найден. Операция прервана!</translation>
     </message>
     <message>
         <source>QtiPlot - Plugin Error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - ошибка модуля</translation>
     </message>
     <message>
         <source>The plugin does not implement a %1 method necessary for simplex fitting.</source>
-        <translation type="unfinished"></translation>
+        <translation>В модуле отсутствует равлизация метода %1, необходимого для выполнения симплексного приближения.</translation>
     </message>
     <message>
         <source>The plugin does not implement a %1 method necessary for Levenberg-Marquardt fitting.</source>
-        <translation type="unfinished"></translation>
+        <translation>В модуле отсутствует равлизация метода %1, необходимого для выполнения приближения Левенберга-Марквардта.</translation>
     </message>
 </context>
 <context>
     <name>PolynomialFit</name>
     <message>
         <source>Poly</source>
-        <translation type="unfinished"></translation>
+        <translation>Поли</translation>
     </message>
     <message>
         <source>Polynomial</source>
-        <translation type="unfinished"></translation>
+        <translation>Полиномиальный</translation>
     </message>
     <message>
         <source>QtiPlot - Fit Error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка приближения</translation>
     </message>
     <message>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо как минимум %1 точек данных для этой операции приближения. Операция прервана!</translation>
     </message>
 </context>
 <context>
     <name>ScriptEdit</name>
     <message>
         <source>Auto&amp;exec</source>
-        <translation type="unfinished"></translation>
+        <translation>Авто&amp;выполнение</translation>
     </message>
     <message>
         <source>&amp;Functions</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Функции</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Текст</translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <source>Python Source</source>
-        <translation type="unfinished">Исходный код Python</translation>
+        <translation>Исходник на языке Python</translation>
     </message>
     <message>
         <source>All Files</source>
-        <translation type="unfinished">Все Файлы</translation>
+        <translation>Все файлы</translation>
     </message>
     <message>
         <source>QtiPlot - Import Text From File</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Импортировать текст из файла</translation>
     </message>
     <message>
         <source>QtiPlot - Error Opening File</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка открытия файла</translation>
     </message>
     <message>
         <source>Could not open file &quot;%1&quot; for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно открыть файл &quot;%1&quot; для чтения.</translation>
     </message>
     <message>
         <source>Save Text to File</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить текст в файл</translation>
     </message>
     <message>
         <source>QtiPlot -- Overwrite File? </source>
-        <translation type="unfinished">QtiPlot - Перезаписать Файл?</translation>
+        <translation>QtiPlot -- перезаписать файл?</translation>
     </message>
     <message>
         <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
 Do you want to overwrite it?</source>
-        <translation type="unfinished">Файл с именем: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;уже существует. Вы хотите перезаписать его?</translation>
+        <translation>Файл с названием: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;уже существует. Вы хотите перезаписать его?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;Нет</translation>
+        <translation>&amp;Нет</translation>
     </message>
     <message>
         <source>QtiPlot - File Save Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка Записи в Файл</translation>
+        <translation>QtiPlot - ошибка сохранения файла</translation>
     </message>
     <message>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation type="unfinished">Не возможно выполнить записать в файл: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Пожалуйста, проверьте, есть ли у Вас права на запись в данное место!</translation>
+        <translation>Невозможно выполнить запись в файл: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Пожалуйста, проверьте, есть ли у Вас права на запись в данное место!</translation>
     </message>
 </context>
 <context>
     <name>ScriptWindow</name>
     <message>
-        <source>QtiPlot - Script Window</source>
-        <translation type="unfinished">QtiPlot - Скрипт-Окно</translation>
+        <source>QtiPlot - Python Script Window</source>
+        <translation type="obsolete">QtiPlot - Окно скриптов на языке Python</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Файл</translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Правка</translation>
+        <translation>&amp;Правка</translation>
     </message>
     <message>
         <source>E&amp;xecute</source>
-        <translation type="unfinished">В&amp;ыполнить</translation>
+        <translation>&amp;Выполнить</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation type="unfinished">&amp;Новый</translation>
+        <translation>&amp;Скрыть</translation>
     </message>
     <message>
         <source>Ctrl+N</source>
-        <translation type="unfinished">Ctrl+N</translation>
-    </message>
-    <message>
-        <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+N</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished">Ctrl+O</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
-        <translation type="unfinished">Ctrl+S</translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Print</source>
-        <translation type="unfinished">&amp;Печать</translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <source>Ctrl+P</source>
-        <translation type="unfinished">Ctrl+P</translation>
-    </message>
-    <message>
-        <source>&amp;Undo</source>
-        <translation type="unfinished">&amp;Откат</translation>
+        <translation>Ctrl+P</translation>
     </message>
     <message>
         <source>Ctrl+Z</source>
-        <translation type="unfinished">Ctrl+Z</translation>
-    </message>
-    <message>
-        <source>&amp;Redo</source>
-        <translation type="unfinished">&amp;Вернуть</translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <source>Ctrl+Y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Cut</source>
-        <translation type="unfinished">&amp;Вырезать</translation>
+        <translation>Ctrl+Y</translation>
     </message>
     <message>
         <source>Ctrl+x</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Копировать</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ctrl+C</source>
-        <translation type="unfinished">Ctrl+C</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="unfinished">&amp;Вставить</translation>
+        <translation>Ctrl+C</translation>
     </message>
     <message>
         <source>Ctrl+V</source>
-        <translation type="unfinished">Ctrl+V</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Удалить</translation>
+        <translation>Ctrl+V</translation>
     </message>
     <message>
         <source>Del</source>
-        <translation type="unfinished"></translation>
+        <translation>Del</translation>
     </message>
     <message>
         <source>CTRL+J</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Execute &amp;All</source>
-        <translation type="unfinished">Выполнить &amp;Всё</translation>
+        <translation>CTRL+J</translation>
     </message>
     <message>
         <source>CTRL+SHIFT+J</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Evaluate Expression</source>
-        <translation type="unfinished">&amp;Вычислить Выражение</translation>
+        <translation>CTRL+SHIFT+J</translation>
     </message>
     <message>
         <source>CTRL+Return</source>
-        <translation type="unfinished"></translation>
+        <translation>CTRL+Return</translation>
     </message>
     <message>
         <source>QtiPlot - File Save Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка Записи в Файл</translation>
+        <translation>QtiPlot - ошибка сохранения файла</translation>
     </message>
     <message>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation type="unfinished">Не возможно выполнить записать в файл: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Пожалуйста, проверьте, есть ли у Вас права на запись в данное место!</translation>
+        <translation>Невозможно выполнить запись в файл: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Пожалуйста, проверьте, есть ли у Вас права на запись в данное место!</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation>&amp;Новый</translation>
+    </message>
+    <message>
+        <source>&amp;Open...</source>
+        <translation>&amp;Открыть...</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Сохранить</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation>Сохранить к&amp;ак</translation>
+    </message>
+    <message>
+        <source>&amp;Print</source>
+        <translation>&amp;Печать</translation>
+    </message>
+    <message>
+        <source>&amp;Undo</source>
+        <translation>&amp;Отменить</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>&amp;Вернуть</translation>
+    </message>
+    <message>
+        <source>&amp;Cut</source>
+        <translation>&amp;Вырезать</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>&amp;Копировать</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>&amp;Вставить</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation>&amp;Удалить</translation>
+    </message>
+    <message>
+        <source>Execute &amp;All</source>
+        <translation>Выполнить в&amp;сё</translation>
+    </message>
+    <message>
+        <source>&amp;Evaluate Expression</source>
+        <translation>&amp;Раскрыть выражение</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Script Window</source>
+        <translation>QtiPlot - Скрипт-Окно</translation>
     </message>
 </context>
 <context>
     <name>ScriptingLangDialog</name>
     <message>
         <source>QtiPlot - Select scripting language</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Выберите скриптовый язык</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>QtiPlot - Scripting Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка Скрипта</translation>
+        <translation>QtiPlot - Ошибка скрипта</translation>
     </message>
     <message>
         <source>Scripting language &quot;%1&quot; failed to initialize.</source>
-        <translation type="unfinished">Не удалось инициализировать командный язык &quot;%1&quot;.</translation>
+        <translation>Ошибка инициализации скриптового языка &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
     <name>SigmoidalFit</name>
     <message>
         <source>(init value)</source>
-        <translation type="unfinished"></translation>
+        <translation>(начальное значение)</translation>
     </message>
     <message>
         <source>(final value)</source>
-        <translation type="unfinished"></translation>
+        <translation>(конечное значение)</translation>
     </message>
     <message>
         <source>(center)</source>
-        <translation type="unfinished"></translation>
+        <translation>(центр)</translation>
     </message>
     <message>
         <source>(time constant)</source>
-        <translation type="unfinished"></translation>
+        <translation>(постоянная времени)</translation>
     </message>
     <message>
         <source>Boltzmann (Sigmoidal)</source>
-        <translation type="unfinished"></translation>
+        <translation>Больцманн (Сигмоидальный)</translation>
     </message>
 </context>
 <context>
     <name>SymbolBox</name>
     <message>
         <source>No Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Без символа</translation>
     </message>
     <message>
         <source>Ellipse</source>
-        <translation type="unfinished"></translation>
+        <translation>Эллипс</translation>
     </message>
     <message>
         <source>Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямоугольник</translation>
     </message>
     <message>
         <source>Diamond</source>
-        <translation type="unfinished"></translation>
+        <translation>Ромб</translation>
     </message>
     <message>
         <source>Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Треугольник</translation>
     </message>
     <message>
         <source>Down Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Треугольник с вершиной внизу</translation>
     </message>
     <message>
         <source>Up Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Треугольник с вершиной наверху</translation>
     </message>
     <message>
         <source>Left Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Треугольник с вершиной слева</translation>
     </message>
     <message>
         <source>Right Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Треугольник с вершиной справа</translation>
     </message>
     <message>
         <source>Cross</source>
-        <translation type="unfinished"></translation>
+        <translation>Перекрестие</translation>
     </message>
     <message>
         <source>Diagonal Cross</source>
-        <translation type="unfinished"></translation>
+        <translation>Диагональное Перекрестие</translation>
     </message>
     <message>
         <source>Horizontal Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Горизонтальная линия</translation>
     </message>
     <message>
         <source>Vertical Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальная линия</translation>
     </message>
     <message>
         <source>Star 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Начало 1</translation>
     </message>
     <message>
         <source>Star 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Начало 2</translation>
     </message>
     <message>
         <source>Hexagon</source>
-        <translation type="unfinished"></translation>
+        <translation>Шестиугольник</translation>
     </message>
 </context>
 <context>
     <name>Table</name>
     <message>
         <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
+        <translation>QtiPlot - Ошибка</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Да</translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Нет</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>The text in the clipboard is larger than your current selection!
+Do you want to insert cells?</source>
+        <translation type="obsolete">Текст в буфере обмена больше, чем текущее выделение! Хотите ли вы вставить ячейки?</translation>
+    </message>
+    <message>
+        <source>Please select two columns for this operation!</source>
+        <translation type="obsolete">Пожалуйста выберите две колонки для выполнения этой операции!</translation>
+    </message>
+    <message>
+        <source>Could not allocate memory, operation aborted!</source>
+        <translation type="obsolete">Не удалось выделить память, операция отменена!</translation>
+    </message>
+    <message>
+        <source>Error in GSL forward FFT operation!</source>
+        <translation type="obsolete">Ошибка в выполнении прямого БПФ (библиотекой GSL)!</translation>
+    </message>
+    <message>
+        <source>Please select a Y column to plot!</source>
+        <translation type="obsolete">Пожалуйста выберите колонку Y для отображения!</translation>
+    </message>
+    <message>
+        <source>Please set a default X column for this table, first!</source>
+        <translation type="obsolete">Пожалуйста установите сначала колонку X по умолчанию для данной таблицы!</translation>
+    </message>
+    <message>
+        <source>Please select a column to plot!</source>
+        <translation type="obsolete">Пожалуйста выберите колонку для отображения!</translation>
+    </message>
+    <message>
+        <source>Please select four columns for this operation!</source>
+        <translation type="obsolete">Пожалуйста выберите четыре колонки для данной операции!</translation>
+    </message>
+    <message>
+        <source>You need at least two columns for this operation!</source>
+        <translation type="obsolete">Для выполнения этой операции необходимо как минимум две колонки!</translation>
+    </message>
+    <message>
+        <source>Please select a Z column for this operation!</source>
+        <translation type="obsolete">Пожалуйста выберите колонку Z для данной операции!</translation>
+    </message>
+    <message>
+        <source>You need to define a X column first!</source>
+        <translation type="obsolete">Сначала необходимо задать колонку X!</translation>
+    </message>
+    <message>
+        <source>You need to define a Y column first!</source>
+        <translation type="obsolete">Сначала необходимо задать колонку Y!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - ASCII Export Error</source>
+        <translation type="obsolete">QtiPlot - ошибка при экспортировании ASCII</translation>
+    </message>
+    <message>
+        <source>QtiPlot</source>
+        <translation type="obsolete">QtiPlot</translation>
+    </message>
+    <message>
+        <source>Columns will be deleted from the table!</source>
+        <translation type="obsolete">Колонки будут удалены из данной таблицы!</translation>
+    </message>
+    <message>
+        <source>Do you really want to continue?</source>
+        <translation type="obsolete">Вы действительно хотите продолжить?</translation>
+    </message>
+    <message>
+        <source>Please select two columns for this operation:
+ the first represents the signal and the second the response function!</source>
+        <translation type="obsolete">Пожалуйста выберите две колонки для данной операции: первая представляет сигнал, а вторая функцию-отклик!</translation>
+    </message>
+    <message>
+        <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
+        <translation type="obsolete">Объём данных отклика &apos;%1&apos; должен составлять менее половины объёма данных сигнала &apos;%2&apos;!</translation>
+    </message>
+    <message>
+        <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
+        <translation type="obsolete">Набор данных отклика &apos;%1&apos; должен содержать нечётное число точек!</translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation type="obsolete">Частота</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="obsolete">Время</translation>
+    </message>
+    <message>
+        <source>Real</source>
+        <translation type="obsolete">Вещественная часть</translation>
+    </message>
+    <message>
+        <source>Imaginary</source>
+        <translation type="obsolete">Мнимая часть</translation>
+    </message>
+    <message>
+        <source>Amplitude</source>
+        <translation type="obsolete">Амплитуда</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="obsolete">Угол</translation>
+    </message>
+    <message>
+        <source>Rows will be deleted from the table!</source>
+        <translation type="obsolete">Строки будут удалены из таблицы!</translation>
+    </message>
+    <message>
+        <source>Qtiplot - Reading file...</source>
+        <translation type="obsolete">Qtiplot - Чтение файла...</translation>
     </message>
 </context>
 <context>
     <name>TableStatistics</name>
     <message>
-        <source>RowStats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Row Statistics of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Статистика строки %1</translation>
     </message>
     <message>
         <source>Row</source>
-        <translation type="unfinished">Строка</translation>
+        <translation>Строка</translation>
     </message>
     <message>
         <source>Cols</source>
-        <translation type="unfinished"></translation>
+        <translation>Колонки</translation>
     </message>
     <message>
         <source>Mean</source>
-        <translation type="unfinished"></translation>
+        <translation>Среднее</translation>
     </message>
     <message>
-        <source>StandardDev</source>
-        <translation type="unfinished"></translation>
+        <source>Standard Dev</source>
+        <translation type="obsolete">Стандартное отклонение</translation>
     </message>
     <message>
         <source>Variance</source>
-        <translation type="unfinished"></translation>
+        <translation>Вариация</translation>
     </message>
     <message>
         <source>Sum</source>
-        <translation type="unfinished"></translation>
+        <translation>Сумма</translation>
     </message>
     <message>
         <source>Max</source>
-        <translation type="unfinished"></translation>
+        <translation>Макс</translation>
     </message>
     <message>
         <source>Min</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ColStats</source>
-        <translation type="unfinished"></translation>
+        <translation>Мин</translation>
     </message>
     <message>
         <source>Column Statistics of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Статистика колонки %1</translation>
     </message>
     <message>
         <source>Col</source>
-        <translation type="unfinished"></translation>
+        <translation>Колонка</translation>
     </message>
     <message>
         <source>Rows</source>
-        <translation type="unfinished">Строк</translation>
+        <translation>Строк</translation>
     </message>
     <message>
         <source>iMax</source>
-        <translation type="unfinished"></translation>
+        <translation>iMax</translation>
     </message>
     <message>
         <source>iMin</source>
-        <translation type="unfinished"></translation>
+        <translation>iMin</translation>
+    </message>
+    <message>
+        <source>RowStats</source>
+        <translation>СтатистикаСтрок</translation>
+    </message>
+    <message>
+        <source>StandardDev</source>
+        <translation>СтандартноеОтклонение</translation>
+    </message>
+    <message>
+        <source>ColStats</source>
+        <translation>СтатистикаКолонок</translation>
     </message>
 </context>
 <context>
     <name>TextDialog</name>
     <message>
         <source>QtiPlot - Text options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры Текста</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
+    </message>
+    <message>
+        <source>Co&amp;lor</source>
+        <translation type="obsolete">Ц&amp;вет</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт</translation>
     </message>
     <message>
         <source>&amp;Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Шрифт</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Применить</translation>
     </message>
     <message>
         <source>Alignement</source>
-        <translation type="unfinished"></translation>
+        <translation>Выравнивание</translation>
     </message>
     <message>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Центр</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>По левому краю</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>По правому краю</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation type="unfinished">Рамка</translation>
+        <translation>Рамка</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Никакой(ая)</translation>
+        <translation>Никакой(ая)</translation>
     </message>
     <message>
         <source>Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямоугольник</translation>
     </message>
     <message>
         <source>Shadow</source>
-        <translation type="unfinished"></translation>
+        <translation>Тень</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Фон</translation>
     </message>
     <message>
-        <source>Set &amp;Default</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Background</source>
+        <translation type="obsolete">&amp;Фон</translation>
     </message>
     <message>
         <source>Rotate (deg.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Вращать (град.)</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>45</source>
-        <translation type="unfinished"></translation>
+        <translation>45</translation>
     </message>
     <message>
         <source>90</source>
-        <translation type="unfinished"></translation>
+        <translation>90</translation>
     </message>
     <message>
         <source>135</source>
-        <translation type="unfinished"></translation>
+        <translation>135</translation>
     </message>
     <message>
         <source>180</source>
-        <translation type="unfinished"></translation>
+        <translation>180</translation>
     </message>
     <message>
         <source>225</source>
-        <translation type="unfinished"></translation>
+        <translation>225</translation>
     </message>
     <message>
         <source>270</source>
-        <translation type="unfinished"></translation>
+        <translation>270</translation>
     </message>
     <message>
         <source>315</source>
-        <translation type="unfinished"></translation>
+        <translation>315</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>Ж</translation>
     </message>
     <message>
         <source>It</source>
-        <translation type="unfinished"></translation>
+        <translation>Кур</translation>
     </message>
     <message>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>Подч</translation>
+    </message>
+    <message>
+        <source>Set &amp;Default</source>
+        <translation>Установить По &amp;Умолчанию</translation>
     </message>
 </context>
 <context>
     <name>ThreeExpFit</name>
     <message>
         <source>Exponential decay</source>
-        <translation type="unfinished"></translation>
+        <translation>Затухание по экспоненте</translation>
     </message>
 </context>
 <context>
     <name>TwoExpFit</name>
     <message>
         <source>Exponential decay</source>
-        <translation type="unfinished"></translation>
+        <translation>Затухание по экспоненте</translation>
     </message>
 </context>
 <context>
     <name>analysisDialog</name>
     <message>
-        <source>QtiPlot - Analysis Options</source>
-        <translation type="unfinished"></translation>
+        <source>QtiPlot - Analysis Option</source>
+        <translation type="obsolete">QtiPlot - Параметры анализа</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Analysis Options</source>
+        <translation>QtiPlot - Параметры анализа</translation>
     </message>
 </context>
 <context>
     <name>associationsDialog</name>
     <message>
         <source>QtiPlot - Plot Associations</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Соответствие координат</translation>
     </message>
     <message>
         <source>Spreadsheet: </source>
-        <translation type="unfinished"></translation>
+        <translation>Таблица данных:</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Столбец</translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <source>xErr</source>
-        <translation type="unfinished"></translation>
+        <translation>xErr</translation>
     </message>
     <message>
         <source>yErr</source>
-        <translation type="unfinished"></translation>
+        <translation>yErr</translation>
     </message>
     <message>
         <source>&amp;Update curve</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Обновить кривую</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>xEnd</source>
-        <translation type="unfinished"></translation>
+        <translation>x конечное</translation>
     </message>
     <message>
         <source>yEnd</source>
-        <translation type="unfinished"></translation>
+        <translation>y конечное</translation>
     </message>
 </context>
 <context>
     <name>axesDialog</name>
     <message>
         <source>QtiPlot - General Plot Options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Общие параметы отображения графика</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Применить</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>От</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>До</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>linear</source>
-        <translation type="unfinished"></translation>
+        <translation>Линейный</translation>
     </message>
     <message>
         <source>logarithmic</source>
-        <translation type="unfinished"></translation>
+        <translation>Логарифмический</translation>
     </message>
     <message>
         <source>Inverted</source>
-        <translation type="unfinished"></translation>
+        <translation>Обратный</translation>
     </message>
     <message>
         <source>Step</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг</translation>
     </message>
     <message>
         <source>Major Ticks</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг основной разметки</translation>
     </message>
     <message>
         <source>Minor Ticks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scale</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Major Grids</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minor Grids</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thickness</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Axes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Additional lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>X=0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Y=0</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг дополнительной разметки</translation>
     </message>
     <message>
         <source>Horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Горизонтальная</translation>
     </message>
     <message>
         <source>Vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальная</translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation>Масштаб</translation>
+    </message>
+    <message>
+        <source>Major Grids</source>
+        <translation>Основная сетка</translation>
+    </message>
+    <message>
+        <source>Minor Grids</source>
+        <translation>Дополнительная сетка</translation>
+    </message>
+    <message>
+        <source>Line Color</source>
+        <translation>Цвет линии</translation>
+    </message>
+    <message>
+        <source>Line Type</source>
+        <translation>Тип линии</translation>
+    </message>
+    <message>
+        <source>Thickness</source>
+        <translation>Толщина</translation>
+    </message>
+    <message>
+        <source>Additional lines</source>
+        <translation>Дополнительные линии</translation>
+    </message>
+    <message>
+        <source>X=0</source>
+        <translation>X=0</translation>
+    </message>
+    <message>
+        <source>Y=0</source>
+        <translation>Y=0</translation>
     </message>
     <message>
         <source>Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Сетка</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>It</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок</translation>
     </message>
     <message>
         <source>Numeric</source>
-        <translation type="unfinished"></translation>
+        <translation>Цифровой</translation>
     </message>
     <message>
         <source>Text from table</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст из таблицы</translation>
     </message>
     <message>
         <source>Day of the week</source>
-        <translation type="unfinished"></translation>
+        <translation>День недели</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Месяц</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <source>Column Headings</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовки колонки</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт</translation>
     </message>
     <message>
         <source>Axis &amp;Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Шрифт оси</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
     </message>
     <message>
-        <source>None</source>
-        <translation type="unfinished">Никакой(ая)</translation>
+        <source>Co&amp;lor</source>
+        <translation type="obsolete">Ц&amp;вет</translation>
     </message>
     <message>
-        <source>Out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>In &amp; Out</source>
-        <translation type="unfinished"></translation>
+        <source>Ticks</source>
+        <translation type="obsolete">Разметка</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>Внутри</translation>
+    </message>
+    <message>
+        <source>Out</source>
+        <translation>Снаружи</translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="obsolete">С двух сторон</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Никакой(ая)</translation>
     </message>
     <message>
         <source>Stand-off</source>
-        <translation type="unfinished"></translation>
+        <translation>Отстояние</translation>
     </message>
     <message>
         <source>Show Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать метки</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation type="unfinished">Таблица</translation>
+        <translation>Таблица</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат</translation>
     </message>
     <message>
         <source>Precision</source>
-        <translation type="unfinished"></translation>
+        <translation>Точность</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>For&amp;mula</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Формула</translation>
     </message>
     <message>
         <source>Axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Ось</translation>
     </message>
     <message>
         <source>Canvas frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Рамка холста</translation>
+    </message>
+    <message>
+        <source>C&amp;olor</source>
+        <translation type="obsolete">Ц&amp;вет</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Фон</translation>
     </message>
     <message>
         <source>Border Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина границы</translation>
     </message>
     <message>
         <source>Border Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет границы</translation>
     </message>
     <message>
-        <source>Canvas Color</source>
-        <translation type="unfinished"></translation>
+        <source>Colo&amp;r</source>
+        <translation type="obsolete">Ц&amp;вет</translation>
+    </message>
+    <message>
+        <source>Axes</source>
+        <translation>Оси</translation>
     </message>
     <message>
         <source>Draw backbones</source>
-        <translation type="unfinished"></translation>
+        <translation>Нарисовать систему координат</translation>
     </message>
     <message>
         <source>Line Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширана Линии</translation>
     </message>
     <message>
         <source>Major ticks length</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина основной разметки</translation>
     </message>
     <message>
         <source>Minor ticks length</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина дополнительной разметки</translation>
     </message>
     <message>
         <source>Margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Край</translation>
     </message>
     <message>
         <source>Apply to all layers</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить во всех слоях</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Основное</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматический</translation>
     </message>
     <message>
         <source>Decimal: 100.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Десятичный: 100.0</translation>
     </message>
     <message>
         <source>Scientific: 1e2</source>
-        <translation type="unfinished"></translation>
+        <translation>Научный: 1e2</translation>
     </message>
     <message>
         <source>Scientific: 10^2</source>
-        <translation type="unfinished"></translation>
+        <translation>Научный: 10^2</translation>
     </message>
     <message>
         <source>QtiPlot - Start limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка начальной границы</translation>
     </message>
     <message>
         <source>QtiPlot - End limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка конечной границы</translation>
     </message>
     <message>
         <source>QtiPlot - Step input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка во вводённом шаге</translation>
     </message>
     <message>
         <source>Please enter a positive step value!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите положительное значение шага!</translation>
     </message>
     <message>
         <source>QtiPlot - Formula input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода формулы</translation>
     </message>
     <message>
         <source>Valid variables are &apos;x&apos; for Top/Bottom axes and &apos;y&apos; for Left/Right axes!</source>
-        <translation type="unfinished"></translation>
+        <translation>Допустимыми переменными являются &apos;x&apos; для верхней/нижней оси и &apos;y&apos; для левой/правой оси!</translation>
     </message>
     <message>
-        <source>millisec.</source>
-        <translation type="unfinished"></translation>
+        <source>milisec.</source>
+        <translation type="obsolete">мс</translation>
     </message>
     <message>
         <source>sec.</source>
-        <translation type="unfinished"></translation>
+        <translation>с</translation>
     </message>
     <message>
         <source>min.</source>
-        <translation type="unfinished"></translation>
+        <translation>мин</translation>
     </message>
     <message>
         <source>hours</source>
-        <translation type="unfinished"></translation>
+        <translation>часы</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished"></translation>
+        <translation>дни</translation>
     </message>
     <message>
         <source>weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>недели</translation>
+    </message>
+    <message>
+        <source>&amp;Font</source>
+        <translation>&amp;Шрифт</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation>Ж</translation>
+    </message>
+    <message>
+        <source>It</source>
+        <translation>Кур</translation>
+    </message>
+    <message>
+        <source>U</source>
+        <translation>Подч</translation>
+    </message>
+    <message>
+        <source>In &amp; Out</source>
+        <translation>Внути &amp; Снаружи</translation>
+    </message>
+    <message>
+        <source>Canvas Color</source>
+        <translation>Цвет холста</translation>
+    </message>
+    <message>
+        <source>millisec.</source>
+        <translation>мс</translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation>Внизу</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation>По левому краю</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation>Вверху</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation>По правому краю</translation>
     </message>
 </context>
 <context>
     <name>configDialog</name>
     <message>
+        <source>Prompt on closing</source>
+        <translation>Подтверждение при выходе</translation>
+    </message>
+    <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвета</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифты</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ticks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Application</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Prompt on closing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Confirmations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Generated Fit Curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Uniform X Function</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Points</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Same X as Fitting Data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Display Peak Curves for Multi-peak Fits</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Peaks Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parameters Output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Significant Digits</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Write Parameters to Result Log</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Paste Parameters to Plot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scale Errors with sqrt(Chi^2/doF)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fitting</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Curves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Choose default settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tables</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>2D Plots</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>3D Plots</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do not &amp;resize layers when window size changes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Axes linewidth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Major Ticks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minor Ticks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Frame width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Draw axes &amp;backbone</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Canvas Fra&amp;me</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sho&amp;w all axes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show &amp;Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scale &amp;fonts on resize</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto&amp;scale axes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="unfinished">Никакой(ая)</translation>
-    </message>
-    <message>
-        <source>Out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>In &amp; Out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation type="unfinished">Папки</translation>
-    </message>
-    <message>
-        <source>Matrixes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Text Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Labels Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A&amp;xes Legend</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Axes &amp;Numbers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Legend</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>T&amp;itle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose &amp;font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Workspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Panels text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Panels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save every</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Check for new versions at startup</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> minutes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default scripting language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default Column Separator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TAB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SPACE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished">Текст</translation>
-    </message>
-    <message>
-        <source>Labels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default curve style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Symbol size</source>
-        <translation type="unfinished"></translation>
+        <translation>Основное</translation>
     </message>
     <message>
         <source> Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Линия</translation>
     </message>
     <message>
         <source> Scatter</source>
-        <translation type="unfinished"></translation>
+        <translation>Точки</translation>
     </message>
     <message>
         <source> Line + Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Линия + Символ</translation>
     </message>
     <message>
         <source> Vertical drop lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальние спадающие линии</translation>
     </message>
     <message>
         <source> Spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Сплайн</translation>
     </message>
     <message>
         <source> Vertical steps</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> Horizontal steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальные ступеньки</translation>
     </message>
     <message>
         <source> Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Площадь</translation>
     </message>
     <message>
         <source> Vertical Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальные столбики</translation>
     </message>
     <message>
         <source> Horizontal Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Горизонтальные столбики</translation>
     </message>
     <message>
-        <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <source>QtiPlot - Choose default settings</source>
+        <translation>QtiPlot - Выберите установки по умолчанию</translation>
     </message>
     <message>
-        <source>(all data shown)</source>
-        <translation type="unfinished"></translation>
+        <source>Application</source>
+        <translation>Приложение</translation>
     </message>
     <message>
-        <source>&amp;Show Legend</source>
-        <translation type="unfinished"></translation>
+        <source>Confirmations</source>
+        <translation>Подтверждения</translation>
     </message>
     <message>
-        <source>Show &amp;Projection</source>
-        <translation type="unfinished"></translation>
+        <source>Tables</source>
+        <translation>Таблицы</translation>
     </message>
     <message>
-        <source>&amp;Data Max</source>
-        <translation type="unfinished"></translation>
+        <source>2D Plots</source>
+        <translation>2D графики</translation>
     </message>
     <message>
-        <source>Smoot&amp;h Line</source>
-        <translation type="unfinished"></translation>
+        <source>2D Curves</source>
+        <translation type="obsolete">2D кривые</translation>
     </message>
     <message>
-        <source>O&amp;rthogonal</source>
-        <translation type="unfinished"></translation>
+        <source>3D Plots</source>
+        <translation>3D графики</translation>
+    </message>
+    <message>
+        <source>Do not &amp;resize layers when window size changes</source>
+        <translation>Не &amp;изменять размеры слоёв при изменении размера окна</translation>
+    </message>
+    <message>
+        <source>Minor ticks length</source>
+        <translation type="obsolete">Длина дополнительной разметки</translation>
+    </message>
+    <message>
+        <source>Axes linewidth</source>
+        <translation>Ширина линий осей координат</translation>
+    </message>
+    <message>
+        <source>Major ticks length</source>
+        <translation type="obsolete">Длина основной разметки</translation>
+    </message>
+    <message>
+        <source>Ticks</source>
+        <translation>Разметка</translation>
+    </message>
+    <message>
+        <source>Margin</source>
+        <translation>Край</translation>
+    </message>
+    <message>
+        <source>Legend frame</source>
+        <translation type="obsolete">Рамка условного обозначения</translation>
+    </message>
+    <message>
+        <source>Frame width</source>
+        <translation>Ширина рамки</translation>
+    </message>
+    <message>
+        <source>Axes &amp;backbones</source>
+        <translation type="obsolete">&amp;Основания осей</translation>
+    </message>
+    <message>
+        <source>Canvas Fra&amp;me</source>
+        <translation>&amp;Рамка холста</translation>
+    </message>
+    <message>
+        <source>Sho&amp;w all axes</source>
+        <translation>&amp;Покозать все оси координат</translation>
+    </message>
+    <message>
+        <source>Show &amp;Title</source>
+        <translation>Отобразить &amp;Заголовок</translation>
+    </message>
+    <message>
+        <source>Scale &amp;Fonts</source>
+        <translation type="obsolete">Масштаб &amp;шрифтов</translation>
+    </message>
+    <message>
+        <source>Auto&amp;scaling</source>
+        <translation type="obsolete">Авто&amp;масштабирование</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Никакой(ая)</translation>
+    </message>
+    <message>
+        <source>Rectangle</source>
+        <translation type="obsolete">Прямоугольник</translation>
+    </message>
+    <message>
+        <source>Shadow</source>
+        <translation type="obsolete">Тень</translation>
+    </message>
+    <message>
+        <source>White out</source>
+        <translation type="obsolete">Затирание</translation>
+    </message>
+    <message>
+        <source>Black out</source>
+        <translation type="obsolete">Затемнение</translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation>Внутри</translation>
+    </message>
+    <message>
+        <source>Out</source>
+        <translation>Снаружи</translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="obsolete">С двух сторон</translation>
+    </message>
+    <message>
+        <source>Matrixes</source>
+        <translation>Матрицы</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation>&amp;Закрыть</translation>
+    </message>
+    <message>
+        <source>&amp;Apply</source>
+        <translation>&amp;Применить</translation>
+    </message>
+    <message>
+        <source>Te&amp;xt</source>
+        <translation type="obsolete">Те&amp;кст</translation>
     </message>
     <message>
         <source>Lab&amp;els</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mesh &amp;Line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Grid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Data &amp;Min</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Numbers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A&amp;xes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Метки</translation>
     </message>
     <message>
         <source>&amp;Background</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Фон</translation>
+    </message>
+    <message>
+        <source>&amp;Text Font</source>
+        <translation>Шрифт &amp;текста</translation>
+    </message>
+    <message>
+        <source>&amp;Labels Font</source>
+        <translation>Шрифт &amp;меток</translation>
+    </message>
+    <message>
+        <source>A&amp;xes Legend</source>
+        <translation>Условные обозначения &amp;осей координат</translation>
+    </message>
+    <message>
+        <source>Axes &amp;Numbers</source>
+        <translation>&amp;Номера осей</translation>
+    </message>
+    <message>
+        <source>&amp;Legend</source>
+        <translation>Условное &amp;обозначение</translation>
+    </message>
+    <message>
+        <source>T&amp;itle</source>
+        <translation>&amp;Заголовок</translation>
+    </message>
+    <message>
+        <source>&amp;Workspace</source>
+        <translation type="obsolete">Рабочая &amp;таблица</translation>
+    </message>
+    <message>
+        <source>Pa&amp;nels</source>
+        <translation type="obsolete">Па&amp;нели</translation>
+    </message>
+    <message>
+        <source>Panels Te&amp;xt</source>
+        <translation type="obsolete">&amp;Текст панелей</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation>Язык</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Стиль</translation>
+    </message>
+    <message>
+        <source>Choose &amp;font</source>
+        <translation>Выбор &amp;шрифта</translation>
+    </message>
+    <message>
+        <source>Workspace</source>
+        <translation>Рабочая таблица</translation>
+    </message>
+    <message>
+        <source>Panels text</source>
+        <translation>Текст панелей</translation>
+    </message>
+    <message>
+        <source>Panels</source>
+        <translation>Панели</translation>
+    </message>
+    <message>
+        <source>Save every</source>
+        <translation>Сохранять каждые</translation>
+    </message>
+    <message>
+        <source> minutes</source>
+        <translation>минут(ы)</translation>
+    </message>
+    <message>
+        <source>Default Column Separator</source>
+        <translation>Разделитель столбцов по умолчанию</translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation>Фон</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Текст</translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation>Метки</translation>
+    </message>
+    <message>
+        <source>Default curve style</source>
+        <translation>Стиль кривой по умолчанию</translation>
+    </message>
+    <message>
+        <source>Line width</source>
+        <translation>Ширина линии</translation>
+    </message>
+    <message>
+        <source>Symbol size</source>
+        <translation>Размер символа</translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation>Разрешение</translation>
+    </message>
+    <message>
+        <source>(all data shown)</source>
+        <translation>(все отображённые данные)</translation>
+    </message>
+    <message>
+        <source>&amp;Show Legend</source>
+        <translation>&amp;Отобразить условное обозначение</translation>
+    </message>
+    <message>
+        <source>Show &amp;Projection</source>
+        <translation>Отобразить &amp;Проекцию</translation>
+    </message>
+    <message>
+        <source>&amp;Data Max</source>
+        <translation>&amp;Максимальное значение</translation>
+    </message>
+    <message>
+        <source>Mesh &amp;Line</source>
+        <translation>&amp;Линия Сетки</translation>
+    </message>
+    <message>
+        <source>&amp;Grid</source>
+        <translation>&amp;Сетка</translation>
+    </message>
+    <message>
+        <source>Data &amp;Min</source>
+        <translation>&amp;Минимальное значение</translation>
+    </message>
+    <message>
+        <source>&amp;Numbers</source>
+        <translation>&amp;Числа</translation>
+    </message>
+    <message>
+        <source>A&amp;xes</source>
+        <translation>&amp;Оси</translation>
     </message>
     <message>
         <source>&amp;Title</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Заголовок</translation>
     </message>
     <message>
         <source>&amp;Axes Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовки &amp;Осей</translation>
+    </message>
+    <message>
+        <source>&amp;Notes</source>
+        <translation>&amp;Заметки</translation>
+    </message>
+    <message>
+        <source>TAB</source>
+        <translation>TAB</translation>
+    </message>
+    <message>
+        <source>SPACE</source>
+        <translation>Пробел</translation>
+    </message>
+    <message>
+        <source>Smoot&amp;h Line</source>
+        <translation>&amp;Гладкая линия</translation>
     </message>
     <message>
         <source>QtiPlot - Import options error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка в параметрах импортирования</translation>
     </message>
     <message>
         <source>The separator must not contain the following characters: 0-9eE.+-</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделитель не должен содержать следующих символов: 0-9eE.+-</translation>
+    </message>
+    <message>
+        <source>Folders</source>
+        <translation>Каталоги</translation>
+    </message>
+    <message>
+        <source>Curves</source>
+        <translation>Кривые</translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation>Длина</translation>
+    </message>
+    <message>
+        <source>Major Ticks</source>
+        <translation>Шаг основной разметки</translation>
+    </message>
+    <message>
+        <source>Minor Ticks</source>
+        <translation>Шаг дополнительной разметки</translation>
+    </message>
+    <message>
+        <source>Draw axes &amp;backbone</source>
+        <translation>Нарисовать &amp;основу осей</translation>
+    </message>
+    <message>
+        <source>Scale &amp;fonts on resize</source>
+        <translation>Масштабировать &amp;шрифт при изменении размера</translation>
+    </message>
+    <message>
+        <source>Auto&amp;scale axes</source>
+        <translation>Авто&amp;масштабирование осей</translation>
+    </message>
+    <message>
+        <source>In &amp; Out</source>
+        <translation>Внутрь и &amp;наружу</translation>
+    </message>
+    <message>
+        <source>Check for new versions at startup</source>
+        <translation>Проверять наличие новых версий при старте</translation>
+    </message>
+    <message>
+        <source>Generated Fit Curve</source>
+        <translation>Построенная кривая приближения</translation>
+    </message>
+    <message>
+        <source>Uniform X Function</source>
+        <translation>Функция, однородная по X</translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation>Точек</translation>
+    </message>
+    <message>
+        <source>Same X as Fitting Data</source>
+        <translation>Ось X -- та же, что и у данных приближения</translation>
+    </message>
+    <message>
+        <source>Display Peak Curves for Multi-peak Fits</source>
+        <translation>Отображать кривые пиков для многопикового приближения</translation>
+    </message>
+    <message>
+        <source>Peaks Color</source>
+        <translation>Цвета пиков</translation>
+    </message>
+    <message>
+        <source>Parameters Output</source>
+        <translation>Вывод параметров</translation>
+    </message>
+    <message>
+        <source>Significant Digits</source>
+        <translation>Значащие разряды</translation>
+    </message>
+    <message>
+        <source>Write Parameters to Result Log</source>
+        <translation>Записать параметры в журнал результатов</translation>
+    </message>
+    <message>
+        <source>Paste Parameters to Plot</source>
+        <translation>Вставить параметры на график</translation>
+    </message>
+    <message>
+        <source>Fitting</source>
+        <translation>Приближение</translation>
+    </message>
+    <message>
+        <source>Default scripting language</source>
+        <translation>Скриптовый язык по умолчанию</translation>
+    </message>
+    <message>
+        <source>Scale Errors with sqrt(Chi^2/doF)</source>
+        <translation>Масштабировать ошибки по sqrt(Chi^2/doF)</translation>
+    </message>
+    <message>
+        <source> Horizontal steps</source>
+        <translation>Горизонтальных шагов</translation>
+    </message>
+    <message>
+        <source>O&amp;rthogonal</source>
+        <translation>О&amp;ртогональный</translation>
     </message>
 </context>
 <context>
     <name>curvesDialog</name>
     <message>
         <source>QtiPlot - Add/Remove curves</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Добавить/удалить кривые</translation>
     </message>
     <message>
         <source> Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Линия</translation>
     </message>
     <message>
         <source> Scatter</source>
-        <translation type="unfinished"></translation>
+        <translation>Точки</translation>
     </message>
     <message>
         <source> Line + Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Линия + Символ</translation>
     </message>
     <message>
         <source> Vertical drop lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальние спадающие линии</translation>
     </message>
     <message>
         <source> Spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Сплайн</translation>
     </message>
     <message>
         <source> Vertical steps</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> Horizontal steps</source>
-        <translation type="unfinished"></translation>
+        <translation> Вертикальные ступеньки</translation>
     </message>
     <message>
         <source> Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Площадь</translation>
     </message>
     <message>
         <source> Vertical Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальные столбики</translation>
     </message>
     <message>
         <source> Horizontal Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Горизонтальные столбики</translation>
     </message>
     <message>
         <source>Available data</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступные данные</translation>
     </message>
     <message>
         <source>Graph contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Содержимое диаграммы</translation>
     </message>
     <message>
         <source>&amp;Plot Associations...</source>
-        <translation type="unfinished"></translation>
+        <translation>Соответствие &amp;Координат...</translation>
     </message>
     <message>
         <source>&amp;Edit Function...</source>
-        <translation type="unfinished">&amp;Редактировать Функцию...</translation>
+        <translation>&amp;Редактировать функцию...</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Удалить</translation>
+        <translation>&amp;Удалить</translation>
     </message>
     <message>
         <source>&amp;Plot</source>
-        <translation type="unfinished">&amp;График</translation>
+        <translation>&amp;График</translation>
+    </message>
+    <message>
+        <source> Horizontal steps</source>
+        <translation> Горизонтальных шагов</translation>
     </message>
 </context>
 <context>
     <name>epsExportDialog</name>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>Ориентация</translation>
     </message>
     <message>
         <source>Page Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер страницы</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешение</translation>
     </message>
     <message>
         <source>&amp;Print in color if available</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Печатать в цвете, если возможно</translation>
     </message>
     <message>
         <source>QtiPlot - EPS Export options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметны экспорта в формат EPS</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отменить</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Альбомная</translation>
     </message>
     <message>
         <source>Portrait</source>
-        <translation type="unfinished"></translation>
+        <translation>Книжная</translation>
+    </message>
+    <message>
+        <source>Warning: Windows users need a default post-script printer enabled!</source>
+        <translation>Предупреждение для Windows пользователей: должно быть разрешено использование post-script принтера по умолчанию!</translation>
     </message>
 </context>
 <context>
     <name>errDialog</name>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>QtiPlot - Error Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Штрихи ошибок</translation>
     </message>
     <message>
         <source>&amp;X Error Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Штрихи ошибок по &amp;X</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Добавить</translation>
     </message>
     <message>
         <source>Add Error Bars to</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить штрихи ошибок к</translation>
     </message>
     <message>
         <source>Source of errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Источник ошибок</translation>
     </message>
     <message>
         <source>Percent of data (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Процент данных (%)</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>Standard Deviation of Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартное отклонение для данных</translation>
     </message>
     <message>
         <source>&amp;Y Error Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Штрихи ошибокшибок &amp;Y</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
 </context>
 <context>
     <name>expDecayDialog</name>
     <message>
         <source>QtiPlot - Verify initial guesses</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Проверка начальных предположений</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Exponential Fit of</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспоненциальное приближение для</translation>
     </message>
     <message>
         <source>Growth time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время роста</translation>
     </message>
     <message>
         <source>Damping</source>
-        <translation type="unfinished"></translation>
+        <translation>Затухание</translation>
     </message>
     <message>
         <source>First decay time (t1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Первое время распада (t1)</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>Second decay time (t2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Второе время распада (t2)</translation>
     </message>
     <message>
         <source>Third decay time (t3)</source>
-        <translation type="unfinished"></translation>
+        <translation>Третье время распада (t3)</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Амплитуда</translation>
     </message>
     <message>
         <source>Initial time</source>
-        <translation type="unfinished"></translation>
+        <translation>Начальное временя</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>Y Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение по Y</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
     </message>
     <message>
         <source>&amp;Fit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выполнить приближение</translation>
     </message>
     <message>
-        <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Cancel</source>
+        <translation type="obsolete">&amp;Отмена</translation>
     </message>
     <message>
         <source>QtiPlot - Warning</source>
-        <translation type="unfinished">QtiPlot - Предупреждение</translation>
+        <translation>QtiPlot - Предупреждение</translation>
     </message>
     <message>
         <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая &lt;b&gt; %1 &lt;/b&gt; больше не существует! Операция отменена!</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation>&amp;Закрыть</translation>
     </message>
 </context>
 <context>
     <name>exportDialog</name>
     <message>
         <source>Table</source>
-        <translation type="unfinished">Таблица</translation>
+        <translation>Таблица</translation>
     </message>
     <message>
         <source>Separator</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделитель</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Export ASCII</source>
+        <translation>QtiPlot - экспорт в  ASCII</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Отмена</translation>
+    </message>
+    <message>
+        <source>Include Column &amp;Names</source>
+        <translation>Включить &amp;названия столбцов</translation>
+    </message>
+    <message>
+        <source>Export &amp;Selection</source>
+        <translation>Экспортировать &amp;выделенное</translation>
+    </message>
+    <message>
+        <source>&amp;All</source>
+        <translation>&amp;Все</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Import options error</source>
+        <translation>QtiPlot - Ошибка в параметрах импортирования</translation>
+    </message>
+    <message>
+        <source>The separator must not contain the following characters: 0-9eE.+-</source>
+        <translation>Разделитель не должен содержать следующих символов: 0-9eE.+-</translation>
     </message>
     <message>
         <source>The column separator can be customized. The following special codes can be used:
 \t for a TAB character 
 \s for a SPACE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The separator must not contain the following characters: 0-9eE.+-</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделитель столбцов можно изменять. Могут быть использованы следующие специальные коды:
+\t символ табулятора
+\s символ пробела</translation>
     </message>
     <message>
         <source>QtiPlot - Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Export ASCII</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>QtiPlot - Справка</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Помощь</translation>
-    </message>
-    <message>
-        <source>Include Column &amp;Names</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export &amp;Selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;All</source>
-        <translation type="unfinished">&amp;Все</translation>
+        <translation>&amp;Справка</translation>
     </message>
     <message>
         <source>TAB</source>
-        <translation type="unfinished"></translation>
+        <translation>TAB</translation>
     </message>
     <message>
         <source>SPACE</source>
-        <translation type="unfinished"></translation>
+        <translation>Пробел</translation>
+    </message>
+</context>
+<context>
+    <name>fDialog</name>
+    <message>
+        <source>QtiPlot - Start limit error</source>
+        <translation type="obsolete">QtiPlot - Ошибка начальной границы</translation>
     </message>
     <message>
-        <source>QtiPlot - Import options error</source>
-        <translation type="unfinished"></translation>
+        <source>QtiPlot - End limit error</source>
+        <translation type="obsolete">QtiPlot - Ошибка конечной границы</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input error</source>
+        <translation type="obsolete">QtiPlot - Ошибка ввода</translation>
+    </message>
+    <message>
+        <source>Please enter x limits that satisfy: from &lt; end!</source>
+        <translation type="obsolete">Пожалуйста введите пределы изменения x, удовлетворяющие соотношению: от &lt; до!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input function error</source>
+        <translation type="obsolete">QtiPlot - Ошибка ввода функции</translation>
+    </message>
+    <message>
+        <source>Please enter parameter limits that satisfy: from &lt; end!</source>
+        <translation type="obsolete">Пожалуйста введите пределы изменения параметра, удовлетворяющие соотношению: от &lt; до!</translation>
     </message>
 </context>
 <context>
     <name>filterDialog</name>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Filter curve: </source>
-        <translation type="unfinished"></translation>
+        <translation>Отфильтровать кривую:</translation>
     </message>
     <message>
         <source>Frequency cutoff (Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота среза (Гц)</translation>
     </message>
     <message>
         <source>Low Frequency (Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Нижняя частота (Гц)</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>High Frequency (Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Верхняя частота (Гц)</translation>
     </message>
     <message>
         <source>Add DC Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить постоянное смещение</translation>
     </message>
     <message>
         <source>Substract DC Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить постоянное смещение</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
     </message>
     <message>
         <source>QtiPlot - Filter options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры фильтра</translation>
     </message>
     <message>
         <source>&amp;Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Фильтр</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
         <source>QtiPlot - Frequency input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода частоты</translation>
     </message>
     <message>
         <source>Please enter positive frequency values!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите положительные значения частоты!</translation>
     </message>
     <message>
         <source>QtiPlot - High Frequency input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода верхней частоты</translation>
     </message>
     <message>
         <source>Please enter frequency limits that satisfy: Low &lt; High !</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите пределы частоты, удовлетворяющие соотношению: нижний &lt; верхнего!</translation>
     </message>
 </context>
 <context>
     <name>findDialog</name>
     <message>
         <source>QtiPlot</source>
-        <translation type="unfinished">QtiPlot</translation>
+        <translation>QtiPlot</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Найти</translation>
     </message>
     <message>
         <source>Start From</source>
-        <translation type="unfinished"></translation>
+        <translation>Начать с</translation>
     </message>
     <message>
         <source>Search In</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать в</translation>
     </message>
     <message>
         <source>&amp;Window Names</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Названия окон</translation>
     </message>
     <message>
         <source>Window &amp;Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Метки окон</translation>
     </message>
     <message>
         <source>Folder &amp;Names</source>
-        <translation type="unfinished"></translation>
+        <translation>Названия &amp;каталогов</translation>
     </message>
     <message>
         <source>Case &amp;Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Ч&amp;увствительный к регистру</translation>
     </message>
     <message>
         <source>&amp;Partial Match Allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Допускается &amp;частичное совпадение</translation>
     </message>
     <message>
         <source>&amp;Include Subfolders</source>
-        <translation type="unfinished"></translation>
+        <translation>Включая &amp;подкаталоги</translation>
     </message>
     <message>
         <source>&amp;Find</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Найти</translation>
     </message>
     <message>
         <source>&amp;Reset Start From</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Возобновить поиск от</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
 </context>
 <context>
     <name>fitDialog</name>
     <message>
         <source>QtiPlot - Non-linear curve fit</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Нелинейное приближение кривой</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation type="unfinished"></translation>
+        <translation>График функции</translation>
     </message>
     <message>
         <source>Function</source>
-        <translation type="unfinished">Функция</translation>
+        <translation>Функция</translation>
     </message>
     <message>
         <source>Initial guesses</source>
-        <translation type="unfinished"></translation>
+        <translation>Начальные оценки</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметр</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <source>Algorithm</source>
-        <translation type="unfinished"></translation>
+        <translation>Алгоритм</translation>
     </message>
     <message>
         <source>Scaled Levenberg-Marquardt</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштабированный Левенберг-Макуардт</translation>
     </message>
     <message>
         <source>Unscaled Levenberg-Marquardt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nelder-Mead Simplex</source>
-        <translation type="unfinished"></translation>
+        <translation>Не масштабированный Левенберг-Макуардт</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Weighting Method</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No weighting</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Instrumental</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Statistical</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arbitrary Dataset</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
     </message>
     <message>
         <source>From x=</source>
-        <translation type="unfinished"></translation>
+        <translation>От x= </translation>
     </message>
     <message>
         <source>To x=</source>
-        <translation type="unfinished"></translation>
+        <translation>До x=</translation>
     </message>
     <message>
         <source>Iterations</source>
-        <translation type="unfinished"></translation>
+        <translation>Итераций</translation>
     </message>
     <message>
         <source>Tolerance</source>
-        <translation type="unfinished"></translation>
+        <translation>Допуск</translation>
     </message>
     <message>
         <source>&lt;&lt; &amp;Edit function</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;&lt; &amp;Редактировать функцию</translation>
     </message>
     <message>
         <source>&amp;Delete Fit Curves</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Удалить кривые приближений</translation>
     </message>
     <message>
         <source>&amp;Fit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Приблизить</translation>
     </message>
     <message>
-        <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Custom &amp;Output &gt;&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Cancel</source>
+        <translation type="obsolete">&amp;Отмена</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Категория</translation>
     </message>
     <message>
         <source>User defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Определённые пользователем</translation>
     </message>
     <message>
         <source>Built-in</source>
-        <translation type="unfinished"></translation>
+        <translation>Встроенные</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Основные</translation>
     </message>
     <message>
         <source>Plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>Модули расширения</translation>
     </message>
     <message>
-        <source>Expression</source>
-        <translation type="unfinished"></translation>
+        <source>Expresion</source>
+        <translation type="obsolete">Выражение</translation>
     </message>
     <message>
         <source>Fit with &amp;built-in function</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Polynomial Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполнить приближение с помощью &amp;встроенной функции</translation>
     </message>
     <message>
         <source>&amp;Choose plugins folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выбор папки с настройками...</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Имя</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сохранить</translation>
     </message>
     <message>
         <source>Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Удалить</translation>
     </message>
     <message>
-        <source>Add &amp;expression</source>
-        <translation type="unfinished"></translation>
+        <source>Add &amp;expresion</source>
+        <translation type="obsolete">Добавить &amp;выражение</translation>
     </message>
     <message>
         <source>Add &amp;name</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить &amp;название</translation>
     </message>
     <message>
         <source>Clear user &amp;list</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить &amp;список пользователя</translation>
     </message>
     <message>
         <source>&amp;Fit &gt;&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Generated Fit Curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Uniform X Function</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Points</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Same X as Fitting Data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parameters Output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Significant Digits</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parameters Table</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Covariance Matrix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CovMatrix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scale Errors with sqrt(Chi^2/doF)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Write Parameters to Result Log</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Paste Parameters to Plot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;&lt; &amp;Fit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
-    </message>
-    <message>
-        <source>Please enter a valid name for the parameters table.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please perform a fit first and try again.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please enter a valid name for the covariance matrix.</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Приблизить &gt;&gt;</translation>
     </message>
     <message>
         <source>QtiPlot - Input function error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода функции</translation>
     </message>
     <message>
         <source>Please enter a valid function!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите допустимую функцию!</translation>
     </message>
     <message>
         <source>Please enter a function name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите имя функции!</translation>
     </message>
     <message>
         <source>Please enter at least one parameter name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите как минимум наименование одного параметра!</translation>
     </message>
     <message>
         <source>QtiPlot - Error: function name</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка: наименование функции</translation>
     </message>
     <message>
         <source> is a built-in function name&lt;p&gt;You must choose another name for your function!</source>
-        <translation type="unfinished"></translation>
+        <translation> является встроенным наименованием функции&lt;p&gt;Для вашей функции вы должны выбрать другое наименование!</translation>
     </message>
     <message>
         <source>You can&apos;t define functions recursevely!</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы не можете определять функции рекурсивно!</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation type="unfinished"></translation>
+        <translation>Константа</translation>
     </message>
     <message>
         <source>Fit with selected &amp;user function</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполнить приближение с помощью выбраной &amp;пользовательской фунцией</translation>
     </message>
     <message>
         <source>Fit using &amp;built-in function</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполнить приближение с использованием &amp;встроенной функции</translation>
     </message>
     <message>
         <source>Fit using &amp;plugin function</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполнить приближение с использованием функции из &amp;модуля расширения</translation>
     </message>
     <message>
         <source>Choose the plugins folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gauss</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Peaks</source>
-        <translation type="unfinished">Вершины</translation>
-    </message>
-    <message>
-        <source>Lorentz</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Polynomial</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите каталог с модулями расширения</translation>
     </message>
     <message>
         <source>QtiPlot - Warning</source>
-        <translation type="unfinished">QtiPlot - Предупреждение</translation>
+        <translation>QtiPlot - Предупреждение</translation>
     </message>
     <message>
         <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая &lt;b&gt; %1 &lt;/b&gt; больше не существует! Операция отменена!</translation>
     </message>
     <message>
         <source>QtiPlot - Start limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания начальной границы</translation>
     </message>
     <message>
         <source>QtiPlot - End limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания конечной границы</translation>
     </message>
     <message>
         <source>QtiPlot - Input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода</translation>
     </message>
     <message>
         <source>Please enter x limits that satisfy: from &lt; end!</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите, пожалуйста, пределы изменения x, удовлетворяющие соотношению: от &lt; до!</translation>
     </message>
     <message>
         <source>QtiPlot - Tolerance input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода допуска</translation>
     </message>
     <message>
         <source>The tolerance value must be positive and less than 1!</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение допуска должны быть положительным и меньше 1!</translation>
     </message>
     <message>
         <source>Please verify that you have initialized all the parameters!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MultiPeak</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста проверьте, что все параметры заданы!</translation>
     </message>
     <message>
         <source>Please enter initial guesses for your parameters!</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите, пожалуйста, начальные приближения параметров!</translation>
+    </message>
+    <message>
+        <source>Nelder-Mead Simplex</source>
+        <translation>Симплекс Нелдера-Мида</translation>
+    </message>
+    <message>
+        <source>Expression</source>
+        <translation>Выражение</translation>
+    </message>
+    <message>
+        <source>Add &amp;expression</source>
+        <translation>Добавить &amp;выражение</translation>
+    </message>
+    <message>
+        <source>Weighting Method</source>
+        <translation>Способ взвешивания</translation>
+    </message>
+    <message>
+        <source>No weighting</source>
+        <translation>Без взвешивания</translation>
+    </message>
+    <message>
+        <source>Instrumental</source>
+        <translation>Инструментальное</translation>
+    </message>
+    <message>
+        <source>Statistical</source>
+        <translation>Статистическое</translation>
+    </message>
+    <message>
+        <source>Arbitrary Dataset</source>
+        <translation>Из отдельного набора данных</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation>&amp;Закрыть</translation>
+    </message>
+    <message>
+        <source>Custom &amp;Output &gt;&gt;</source>
+        <translation>&amp;Пользовательский вывод &gt;&gt;</translation>
+    </message>
+    <message>
+        <source>Polynomial Order</source>
+        <translation>Порядок полинома</translation>
+    </message>
+    <message>
+        <source>Generated Fit Curve</source>
+        <translation>Построенная кривая приближения</translation>
+    </message>
+    <message>
+        <source>Uniform X Function</source>
+        <translation>Однородная по X функция</translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation>Точек</translation>
+    </message>
+    <message>
+        <source>Same X as Fitting Data</source>
+        <translation>Ось X -- та же, что и у данных приближения</translation>
+    </message>
+    <message>
+        <source>Parameters Output</source>
+        <translation>Вывод параметров</translation>
+    </message>
+    <message>
+        <source>Significant Digits</source>
+        <translation>Значащие разряды</translation>
+    </message>
+    <message>
+        <source>Parameters Table</source>
+        <translation>Таблица параметров:</translation>
+    </message>
+    <message>
+        <source>Name: </source>
+        <translation>Название:</translation>
+    </message>
+    <message>
+        <source>Covariance Matrix</source>
+        <translation>Матрица ковариаций</translation>
+    </message>
+    <message>
+        <source>CovMatrix</source>
+        <translation>МатрКов</translation>
+    </message>
+    <message>
+        <source>Write Parameters to Result Log</source>
+        <translation>Записать параметры в журнал результатов</translation>
+    </message>
+    <message>
+        <source>Paste Parameters to Plot</source>
+        <translation>Добавить параметры на график</translation>
+    </message>
+    <message>
+        <source>&lt;&lt; &amp;Fit</source>
+        <translation>&lt;&lt; &amp;Приближение</translation>
+    </message>
+    <message>
+        <source>&amp;Apply</source>
+        <translation>&amp;Применить</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation>QtiPlot - Ошибка</translation>
+    </message>
+    <message>
+        <source>Please enter a valid name for the parameters table.</source>
+        <translation>Введите, пожалуйста, допустимое название таблицы параметров.</translation>
+    </message>
+    <message>
+        <source>Please perform a fit first and try again.</source>
+        <translation>Выполните, пожалуйста, сначала операцию приближения и после этого попробуйте повторить.</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <source>Please enter a valid name for the covariance matrix.</source>
+        <translation>Введите, пожалуйста, допустимое название матрицы ковариации.</translation>
+    </message>
+    <message>
+        <source>Gauss</source>
+        <translation>Гаусс</translation>
+    </message>
+    <message>
+        <source>Peaks</source>
+        <translation>Вершины</translation>
+    </message>
+    <message>
+        <source>Lorentz</source>
+        <translation>Лоренц</translation>
+    </message>
+    <message>
+        <source>Polynomial</source>
+        <translation>Полиномиальное</translation>
+    </message>
+    <message>
+        <source>MultiPeak</source>
+        <translation>Многопиковое</translation>
+    </message>
+    <message>
+        <source>Scale Errors with sqrt(Chi^2/doF)</source>
+        <translation>Масштабировать ошибки по sqrt(Chi^2/doF)</translation>
+    </message>
+</context>
+<context>
+    <name>functionDialogui</name>
+    <message>
+        <source></source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>QtiPlot - Add function curve</source>
+        <translation type="obsolete">QtiPlot - Добавить график функции</translation>
+    </message>
+    <message>
+        <source>Curve type </source>
+        <translation type="obsolete">Тип кривой </translation>
+    </message>
+    <message>
+        <source>From x= </source>
+        <translation type="obsolete">От x= </translation>
+    </message>
+    <message>
+        <source>To x= </source>
+        <translation type="obsolete">До x= </translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation type="obsolete">Точек</translation>
+    </message>
+    <message>
+        <source>Clear list</source>
+        <translation type="obsolete">Очистить список</translation>
+    </message>
+    <message>
+        <source>Parameter</source>
+        <translation type="obsolete">Параметр</translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation type="obsolete">До</translation>
+    </message>
+    <message>
+        <source>From</source>
+        <translation type="obsolete">От</translation>
+    </message>
+    <message>
+        <source>Function</source>
+        <translation type="obsolete">Функция</translation>
+    </message>
+    <message>
+        <source>Parametric plot</source>
+        <translation type="obsolete">Параметрический график</translation>
+    </message>
+    <message>
+        <source>Polar plot</source>
+        <translation type="obsolete">Полярный график</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">Отмена</translation>
     </message>
 </context>
 <context>
     <name>imageDialog</name>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Origin</source>
-        <translation type="unfinished"></translation>
+        <translation>Начало</translation>
     </message>
     <message>
         <source>X= </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> pixels</source>
-        <translation type="unfinished"></translation>
+        <translation>X= </translation>
     </message>
     <message>
         <source>Y= </source>
-        <translation type="unfinished"></translation>
+        <translation>Y= </translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>width= </source>
-        <translation type="unfinished"></translation>
+        <translation>ширина= </translation>
     </message>
     <message>
         <source>height= </source>
-        <translation type="unfinished"></translation>
+        <translation>высота= </translation>
     </message>
     <message>
         <source>QtiPlot - Image Geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Геометрия изображения</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Применить</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
+    </message>
+    <message>
+        <source> pixels</source>
+        <translation> точек</translation>
     </message>
 </context>
 <context>
     <name>imageExportDialog</name>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Image format</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат изображения</translation>
     </message>
     <message>
         <source>Image quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Качество изображения</translation>
     </message>
     <message>
         <source>QtiPlot - Export options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры экспорта</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
 </context>
 <context>
     <name>importDialog</name>
     <message>
-        <source>The column separator can be customized. The following special codes can be used:
-\t for a TAB character 
-\s for a SPACE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The separator must not contain the following characters: 0-9eE.+-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>By checking this option all white spaces will be removed from the beginning and the end of the lines in the ASCII file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Warning: checking this option leads to column overlaping if the columns in the ASCII file don&apos;t have the same number of rows.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>To avoid this problem you should precisely define the column separator using TAB and SPACE characters.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>By checking this option all white spaces will be removed from the beginning and the end of the lines and each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove white spaces from line ends</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Simplify white spaces</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>By checking this option each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Warning: using these two last options leads to column overlaping if the columns in the ASCII file don&apos;t have the same number of rows.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - ASCII Import Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Помощь</translation>
-    </message>
-    <message>
         <source>Separator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TAB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SPACE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use first row to &amp;name columns</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Remove white spaces from line ends</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Simplify white spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделитель</translation>
     </message>
     <message>
         <source>Ignore first</source>
-        <translation type="unfinished"></translation>
+        <translation>Исключить первую</translation>
+    </message>
+    <message>
+        <source>Use first row to &amp;name columns</source>
+        <translation>Использовать первую строку как &amp;наименования столбцов</translation>
+    </message>
+    <message>
+        <source></source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>QtiPlot - ASCII Import Options</source>
+        <translation>QtiPlot - Паремтры импорта в формат ASCII</translation>
+    </message>
+    <message>
+        <source>The column separator can be customized. The following special codes can be used:
+\t for a TAB character 
+\s for a SPACE</source>
+        <translation>Разделитель столбцов можно изменить. Могут использоваться следующие специальные коды:
+\t -- символ табулятора
+\s -- символ пробела</translation>
+    </message>
+    <message>
+        <source>The separator must not contain the following characters: 0-9eE.+-</source>
+        <translation>Разделитель не должен содержать следующих символов: 0-9eE.+-</translation>
+    </message>
+    <message>
+        <source>lines</source>
+        <translation>линии(й)</translation>
+    </message>
+    <message>
+        <source>By checking this option all white spaces will be removed from the beginning and the end of the lines in the ASCII file.</source>
+        <translation>При установки этого параметра в ASCII файле будут удалены все разделители в начале и конце строк.</translation>
+    </message>
+    <message>
+        <source>Warning: checking this option leads to column overlaping if the columns in the ASCII file don&apos;t have the same number of rows.</source>
+        <translation>Предупреждение: установка этого параметра приведёт к перекрытию колонки если число строк в колонках в заданном ASCII файле отличается.</translation>
+    </message>
+    <message>
+        <source>To avoid this problem you should precisely define the column separator using TAB and SPACE characters.</source>
+        <translation>Чтобы избавиться от этой проблемы вы должны точно указать разделитель, используя символы ТАБУЛЯТОРА и ПРОБЕЛА.</translation>
+    </message>
+    <message>
+        <source>By checking this option all white spaces will be removed from the beginning and the end of the lines and each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.</source>
+        <translation>При установки этого параметра все пробелы в начале и конце строк будут удалены и все начальные разделители (включая символ ТАБУЛЯТОРА) будут заменены на единственный пробел.</translation>
+    </message>
+    <message>
+        <source>Remove white spaces from line ends</source>
+        <translation>Удалить пробелы в конце строк</translation>
+    </message>
+    <message>
+        <source>Simplify white spaces</source>
+        <translation>Упростить разделители</translation>
+    </message>
+    <message>
+        <source>By checking this option each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.</source>
+        <translation>При установки этого параметра каждая последовательность начальных разделителей (включая символ ТАБУЛЯТОРА) будет заменена единственным пробелом.</translation>
+    </message>
+    <message>
+        <source>Warning: using these two last options leads to column overlaping if the columns in the ASCII file don&apos;t have the same number of rows.</source>
+        <translation>Предупреждение: использование этого параметра приведёт к перекрытию колонки если число строк в колонках в заданном ASCII файле отличается.</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Help</source>
+        <translation>QtiPlot - Помощь</translation>
+    </message>
+    <message>
+        <source>&amp;Apply</source>
+        <translation>&amp;Применить</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation>&amp;Закрыть</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation>&amp;Помощь</translation>
+    </message>
+    <message>
+        <source>TAB</source>
+        <translation>TAB</translation>
+    </message>
+    <message>
+        <source>SPACE</source>
+        <translation>Пробел</translation>
+    </message>
+    <message>
+        <source>&amp;Remove white spaces from line ends</source>
+        <translation>&amp;Удалить пробелы в конце строк</translation>
+    </message>
+    <message>
+        <source>&amp;Simplify white spaces</source>
+        <translation>&amp;Упростить разделители</translation>
     </message>
     <message>
         <source>QtiPlot - Import options error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка в параметрах импортирования</translation>
     </message>
     <message>
         <source>QtiPlot</source>
-        <translation type="unfinished">QtiPlot</translation>
+        <translation>QtiPlot</translation>
     </message>
     <message>
         <source>Do you want to save the modifications to the ASCII import options before closing?</source>
-        <translation type="unfinished"></translation>
+        <translation>Хотите ли Вы сохранить изменения параметров импорта в формат ASCII перед закрытием?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Да</translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Нет</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отменить</translation>
     </message>
 </context>
 <context>
     <name>intDialog</name>
     <message>
         <source>QtiPlot - Integration Options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры интегрирования</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Integration of</source>
-        <translation type="unfinished"></translation>
+        <translation>Интегрирование</translation>
     </message>
     <message>
         <source>Order (1 - 5, 1 = Trapezoid Rule)</source>
-        <translation type="unfinished"></translation>
+        <translation>Порядок (1 - 5, 1 = метод трапеций)</translation>
     </message>
     <message>
         <source>Number of iterations (Max=40)</source>
-        <translation type="unfinished"></translation>
+        <translation>Число итераций (максимум=40)</translation>
     </message>
     <message>
         <source>Tolerance</source>
-        <translation type="unfinished"></translation>
+        <translation>Допуск</translation>
     </message>
     <message>
         <source>Lower limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Нижняя граница</translation>
     </message>
     <message>
         <source>Upper limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Верхняя граница</translation>
     </message>
     <message>
         <source>&amp;Integrate</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Интегрировать</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Помощь</translation>
+        <translation>&amp;Помощь</translation>
     </message>
     <message>
         <source>QtiPlot - Warning</source>
-        <translation type="unfinished">QtiPlot - Предупреждение</translation>
+        <translation>QtiPlot - Предупреждение</translation>
     </message>
     <message>
         <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая &lt;b&gt; %1 &lt;/b&gt; больше не существует! Операция отменена!</translation>
     </message>
     <message>
-        <source>You cannot fit index:</source>
-        <translation type="unfinished"></translation>
+        <source>You can not fit index:</source>
+        <translation type="obsolete">Вы не можете указывать колонку с индексом:</translation>
     </message>
     <message>
         <source>because it has less than 2 points!</source>
-        <translation type="unfinished"></translation>
+        <translation>потому, что она имеет менее чем 2 точки!</translation>
     </message>
     <message>
         <source>QtiPlot - Tolerance value error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка в значении допуска</translation>
     </message>
     <message>
         <source>QtiPlot - Input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода</translation>
     </message>
     <message>
         <source>Please give a number larger or equal to the minimum value of X, for the lower limit.
  If you do not know that value, type min in the box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста укажите число, большее или равное минимальному значению X, для нижней границы.
+Если вы не знаете этого значения, то введите &quot;min&quot; в строке ввода.</translation>
     </message>
     <message>
         <source>Please give a number smaller or equal to the maximum value of X, for the lower limit.
  If you do not know that value, type max in the box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста укажите число, меньшее или равное максимальному значению X, для нижней границы.
+Если вы не знаете этого значения, то введите &quot;max&quot; в строке ввода.</translation>
     </message>
     <message>
         <source>QtiPlot - Start limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания начальной границы</translation>
     </message>
     <message>
         <source>Please give a number smaller or equal to the maximum value of X, for the upper limit.
  If you do not know that value, type max in the box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста укажите число, меньшее или равное максимальному значению X, для верхней границы.
+Если вы не знаете этого значения, то введите &quot;max&quot; в строке ввода.</translation>
     </message>
     <message>
         <source>Please give a number larger or equal to the minimum value of X, for the upper limit.
  If you do not know that value, type min in the box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста укажите число большее или равное минимальному значению X, для верхней границы.
+Если вы не знаете этого значения, то введите &quot;min&quot; в строке ввода.</translation>
     </message>
     <message>
         <source>QtiPlot - End limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания конечной границы</translation>
     </message>
     <message>
         <source>QtiPlot - Help for Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Справка по интегрированию</translation>
+    </message>
+    <message>
+        <source>The integration of a curve consists of the following five steps:
+ 1) Choose which curve you want to integrate
+ 2) Set the order of the integration. The higher it is the more accurate the calculation is
+ 3) Choose the number of iterations 
+ 4) Choose the tollerance 
+ 5) Choose the lower and the upper limit.
+ The code integrates the curve with an iterative algorithm. The tolerance determines the termination criteria for the solver.
+ Because, sometimes we ask for too much accuracy, the number of iterations makes sure that the solver will not work for ever.
+ IMPORTANT 
+The limits must be within the range of x; If you do not know the maximum (minimum) value of x, type max (min) in the boxes.</source>
+        <translation type="obsolete">Интегрирование кривой состоит из следующих пяти шагов:
+1) Выбор кривой для интегрирования
+2) Установка порядка интегрирования. Чем он выше, тем точнее вычисления
+3) Выбор числа итераций
+4) Выбор допуска
+5) Выбор нижней и верхней границ.
+Код выполняет интегрирование кривой с помощью итеративного алгоритма. Допуск определяет критерий завершения для
+решающей программы. Так как порой мы задаём слишком высокую точность, то число итераций гарантирует, что 
+решающая программа не будет выполняться вечно.
+ВАЖНО
+Границы должны находится в пределах x; Если вы не знаете максимального (минимального) значения x, введите max (min)
+в строке ввода.</translation>
+    </message>
+    <message>
+        <source>You cannot fit index:</source>
+        <translation>Нельзя проводить приближение по индексу:</translation>
     </message>
     <message>
         <source>The integration of a curve consists of the following five steps:
@@ -6909,2119 +7568,2264 @@ Do you want to overwrite it?</source>
  Because, sometimes we ask for too much accuracy, the number of iterations makes sure that the solver will not work for ever.
  IMPORTANT 
 The limits must be within the range of x; If you do not know the maximum (minimum) value of x, type max (min) in the boxes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Интегрирование кривой включает в себя следующие пять шагов:
+1) Выбор кривой для интегрирования
+2) Установка порядка интегрирования. Чем выше порядок, тем точнее вычисления
+3) Выбор числа итераций
+4) Выбор допустимого отклонения
+5) Выбор нижнего и верхнего пределов.
+Программный код выполняет интегрирование по итеративному алгоритму. Критерий завершения работы
+алгоритма определяется заданным допустимым отклонением. Так как часто задаётся слишком высокая точность, то
+задание числа итераций позволяет избежать зацикливания в работе алгоритма. 
+ВАЖНО
+Пределы должны находится в пределах задания x; если вы не знаете максимального (минимального) значения x, 
+то укажите max(min)  в соответствующих полях.</translation>
     </message>
 </context>
 <context>
     <name>interpolationDialog</name>
     <message>
         <source>QtiPlot - Interpolation Options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры интерполяции</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Make curve from</source>
-        <translation type="unfinished"></translation>
+        <translation>Построить кривую по</translation>
     </message>
     <message>
         <source>Spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Сплайн</translation>
     </message>
     <message>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Точек</translation>
     </message>
     <message>
         <source>From Xmin</source>
-        <translation type="unfinished"></translation>
+        <translation>От Xmin</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>To Xmax</source>
-        <translation type="unfinished"></translation>
+        <translation>До Xmax</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
     </message>
     <message>
         <source>&amp;Make</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Вычислить</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
         <source>Linear</source>
-        <translation type="unfinished"></translation>
+        <translation>Линейный</translation>
     </message>
     <message>
         <source>Cubic</source>
-        <translation type="unfinished"></translation>
+        <translation>Кубический</translation>
     </message>
     <message>
         <source>Non-rounded Akima</source>
-        <translation type="unfinished"></translation>
+        <translation>Акима без округления</translation>
     </message>
     <message>
         <source>QtiPlot - Warning</source>
-        <translation type="unfinished">QtiPlot - Предупреждение</translation>
+        <translation>QtiPlot - Предупреждение</translation>
     </message>
     <message>
         <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая &lt;b&gt; %1 &lt;/b&gt; больше не существует! Операция отменена!</translation>
     </message>
     <message>
         <source>QtiPlot - Start limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка начальной границы</translation>
     </message>
     <message>
         <source>QtiPlot - End limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка конечной границы</translation>
     </message>
     <message>
         <source>QtiPlot - Input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода</translation>
     </message>
     <message>
         <source>Please enter x limits that satisfy: from &lt; to!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите пределы изменения x, удовлетворяющие соотношению: от &lt; до!</translation>
     </message>
     <message>
         <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
+        <translation>QtiPlot - Ошибка</translation>
     </message>
     <message>
         <source>You need at least %1 points to perform this operation! Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Для выполнения этой операции необходимо как минимум %1 точки(ек)! Операция прервана!</translation>
     </message>
 </context>
 <context>
     <name>layerDialog</name>
     <message>
-        <source>Number of Layers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alignement</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Сетка</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished">Столбцов</translation>
+        <translation>Столбцов</translation>
     </message>
     <message>
         <source>Rows</source>
-        <translation type="unfinished">Строк</translation>
-    </message>
-    <message>
-        <source>&amp;Layer Canvas Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> pixels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Строк</translation>
     </message>
     <message>
         <source>Spacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Интервал</translation>
     </message>
     <message>
         <source>Columns gap</source>
-        <translation type="unfinished"></translation>
+        <translation>Промежуток между колонками</translation>
     </message>
     <message>
         <source>Rows gap</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Промежуток между столбцами</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Расположение</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Arrange Layers</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифты</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Применить</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>Automatic &amp;layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Titles</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Axis Legends</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Axis Numbers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Legends</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QtiPlot - Delete Layers?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You are about to delete %1 existing layers.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Are you sure you want to continue this operation?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Расположить автоматически</translation>
     </message>
     <message>
         <source>QtiPlot - Columns input error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The number of columns you&apos;ve entered is greater than the number of graphs (%1)!</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка при вводе колонок</translation>
     </message>
     <message>
         <source>QtiPlot - Rows input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка при вводе строк</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Arrange Layers</source>
+        <translation>QtiPlot - Выравнивание слоёв</translation>
+    </message>
+    <message>
+        <source>Number of Layers</source>
+        <translation>Число слоёв</translation>
+    </message>
+    <message>
+        <source>Alignement</source>
+        <translation>Выравнивание</translation>
+    </message>
+    <message>
+        <source>Horizontal</source>
+        <translation>Горизонтальная</translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation>Центр</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation>По левому краю</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation>По правому краю</translation>
+    </message>
+    <message>
+        <source>Vertical</source>
+        <translation>Вертикальная</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation>Вверху</translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation>Внизу</translation>
+    </message>
+    <message>
+        <source>&amp;Layer Canvas Size</source>
+        <translation>Размер &amp;подложки слоя</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Ширина</translation>
+    </message>
+    <message>
+        <source> pixels</source>
+        <translation> точек</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>Высота</translation>
+    </message>
+    <message>
+        <source>Left margin</source>
+        <translation>Левый край</translation>
+    </message>
+    <message>
+        <source>Right margin</source>
+        <translation>Правый край</translation>
+    </message>
+    <message>
+        <source>Top margin</source>
+        <translation>Верхний край</translation>
+    </message>
+    <message>
+        <source>Bottom margin</source>
+        <translation>Нижний край</translation>
+    </message>
+    <message>
+        <source>Titles</source>
+        <translation>Заголовки</translation>
+    </message>
+    <message>
+        <source>Axis Legends</source>
+        <translation>Подписи к осям</translation>
+    </message>
+    <message>
+        <source>Axis Numbers</source>
+        <translation>Числа по осям</translation>
+    </message>
+    <message>
+        <source>Legends</source>
+        <translation>Подписи</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Delete Layers?</source>
+        <translation>QtiPlot - Удалить слои?</translation>
+    </message>
+    <message>
+        <source>You are about to delete %1 existing layers.</source>
+        <translation>Вы собираетесть удалить %1 существующих слоёв.</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to continue this operation?</source>
+        <translation>Вы хотите продолжить?</translation>
+    </message>
+    <message>
+        <source>&amp;Continue</source>
+        <translation>&amp;Продолжить</translation>
+    </message>
+    <message>
+        <source>The number of columns you&apos;ve entered is greater than the number of graphs (%1)!</source>
+        <translation>Введённое число колонок больше? чем число графиков (%1)!</translation>
     </message>
     <message>
         <source>The number of rows you&apos;ve entered is greater than the number of graphs (%1)!</source>
-        <translation type="unfinished"></translation>
+        <translation>Введённое число строк больше? чем число графиков (%1)!</translation>
     </message>
 </context>
 <context>
     <name>lineDialog</name>
     <message>
         <source>QtiPlot - Line options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры линии</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
+    </message>
+    <message>
+        <source>Co&amp;lor</source>
+        <translation type="obsolete">Ц&amp;вет</translation>
     </message>
     <message>
         <source>Line type</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип линии</translation>
     </message>
     <message>
         <source>Line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина линии</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>Arrow at &amp;start</source>
-        <translation type="unfinished"></translation>
+        <translation>Стрелка в &amp;начале</translation>
     </message>
     <message>
         <source>Arrow at &amp;end</source>
-        <translation type="unfinished"></translation>
+        <translation>Стрелка в &amp;конце</translation>
     </message>
     <message>
         <source>Opti&amp;ons</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Параметры</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>&amp;Filled</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Заполненная</translation>
     </message>
     <message>
         <source>Arrow &amp;Head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set &amp;Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scale Coordinates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pixels</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Наконечник стрелки</translation>
     </message>
     <message>
         <source>Start Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Начальная точка</translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <source>End Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Конечная точка</translation>
     </message>
     <message>
         <source>&amp;Geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Геометрия</translation>
+    </message>
+    <message>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <source>&amp;Apply</source>
+        <translation>&amp;Применить</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="obsolete">&amp;Отмена</translation>
+    </message>
+    <message>
+        <source>Set &amp;Default</source>
+        <translation>Установить По &amp;Умолчанию</translation>
+    </message>
+    <message>
+        <source>Unit</source>
+        <translation>Единица</translation>
+    </message>
+    <message>
+        <source>Pixels</source>
+        <translation>Точек(точки)</translation>
+    </message>
+    <message>
+        <source>Scale Coordinates</source>
+        <translation>Масштабировать координаты</translation>
     </message>
 </context>
 <context>
     <name>matrixDialog</name>
     <message>
+        <source></source>
+        <translation></translation>
+    </message>
+    <message>
         <source>Cell Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина ячейки</translation>
     </message>
     <message>
         <source>Data Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат данных</translation>
     </message>
     <message>
         <source>Numeric Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Отображение чисел</translation>
     </message>
     <message>
         <source>QtiPlot - Matrix Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Свойства матрицы</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Применить</translation>
     </message>
     <message>
         <source>Decimal: 1000</source>
-        <translation type="unfinished"></translation>
+        <translation>Десятичный: 1000</translation>
     </message>
     <message>
         <source>Scientific: 1E3</source>
-        <translation type="unfinished"></translation>
+        <translation>Научный: 1E3</translation>
     </message>
     <message>
         <source>Default Decimal Digits</source>
-        <translation type="unfinished"></translation>
+        <translation>Число десятичных разрядов по умолчанию</translation>
     </message>
     <message>
         <source>Significant Digits=</source>
-        <translation type="unfinished"></translation>
+        <translation>Значацих разрядов =</translation>
     </message>
 </context>
 <context>
     <name>matrixSizeDialog</name>
     <message>
-        <source>Dimensions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rows</source>
-        <translation type="unfinished">Строк</translation>
+        <translation>Строк</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished">Столбцов</translation>
+        <translation>Столбцов</translation>
     </message>
     <message>
-        <source>Coordinates</source>
-        <translation type="unfinished">Координаты</translation>
-    </message>
-    <message>
-        <source>X (Columns)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Y (Rows)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>First</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Last</source>
-        <translation type="unfinished"></translation>
+        <source></source>
+        <translation></translation>
     </message>
     <message>
         <source>QtiPlot - Matrix Dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Размерность матрицы</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отменить</translation>
+    </message>
+    <message>
+        <source>Dimensions</source>
+        <translation>Размерность</translation>
+    </message>
+    <message>
+        <source>Coordinates</source>
+        <translation>Координаты</translation>
+    </message>
+    <message>
+        <source>X (Columns)</source>
+        <translation>X (Столбцы)</translation>
+    </message>
+    <message>
+        <source>Y (Rows)</source>
+        <translation>Y (Строки)</translation>
+    </message>
+    <message>
+        <source>First</source>
+        <translation>Первая</translation>
+    </message>
+    <message>
+        <source>Last</source>
+        <translation>Последняя</translation>
     </message>
     <message>
         <source>QtiPlot - Input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода</translation>
     </message>
 </context>
 <context>
     <name>matrixValuesDialog</name>
     <message>
         <source>QtiPlot - Set Matrix Values</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Задание элементов матрицы</translation>
     </message>
     <message>
         <source>For row (i)</source>
-        <translation type="unfinished"></translation>
+        <translation>Строки (i) от</translation>
     </message>
     <message>
         <source>to</source>
-        <translation type="unfinished"></translation>
+        <translation>до</translation>
     </message>
     <message>
         <source>For col (j)</source>
-        <translation type="unfinished"></translation>
+        <translation>Кол. (j) от</translation>
     </message>
     <message>
         <source>Add function</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить функцию</translation>
     </message>
     <message>
         <source>Add Cell</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить ячейку</translation>
     </message>
     <message>
         <source>Cell(i,j)=</source>
-        <translation type="unfinished"></translation>
+        <translation>Ячейка(i,j)=</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input function error</source>
+        <translation type="obsolete">QtiPlot - Ошибка ввода функции</translation>
+    </message>
+    <message>
+        <source>You can not use cells recursevely!</source>
+        <translation type="obsolete">Нельзя использовать ячейки рекурсивно!</translation>
+    </message>
+    <message>
+        <source>Column and row indexes must be greater than zero!</source>
+        <translation type="obsolete">Индексы колонки и строки должны быть больше нуля!</translation>
     </message>
 </context>
 <context>
     <name>muParserScript</name>
     <message>
+        <source>Out of memory</source>
+        <translation>Вне области памяти</translation>
+    </message>
+    <message>
+        <source>You cannot use imbricated columns!</source>
+        <translation type="obsolete">Нельзя использовать накладывающиеся колонки!</translation>
+    </message>
+    <message>
+        <source>You cannot use cells recursively!</source>
+        <translation type="obsolete">Нельзя использовать ячейки рекурсивно!</translation>
+    </message>
+    <message>
+        <source>Too many &apos;=&apos; in one line.</source>
+        <translation type="obsolete">Слишком много &apos;=&apos; на одной строке.</translation>
+    </message>
+    <message>
+        <source>Syntax error: &apos;=&apos; without variable name.</source>
+        <translation type="obsolete">Синтаксическая ошибка: &apos;=&apos; без имени переменной.</translation>
+    </message>
+    <message>
         <source>col() works only on tables!</source>
-        <translation type="unfinished"></translation>
+        <translation>col() работает только с таблицами!</translation>
     </message>
     <message>
         <source>There&apos;s no column named %1 in table %2!</source>
-        <translation type="unfinished"></translation>
+        <translation>В таблице %2 нет колонки с именем %1!</translation>
     </message>
     <message>
         <source>There&apos;s no row %1 in table %2!</source>
-        <translation type="unfinished"></translation>
+        <translation>В таблице %2 нет строки %1!</translation>
     </message>
     <message>
         <source>There&apos;s no column %1 in table %2!</source>
-        <translation type="unfinished"></translation>
+        <translation>В таблице %2 нет колонки %1!</translation>
     </message>
     <message>
         <source>cell() works only on matrices!</source>
-        <translation type="unfinished"></translation>
+        <translation>cell() работает только с матрицами!</translation>
     </message>
     <message>
         <source>There&apos;s no row %1 in matrix %2!</source>
-        <translation type="unfinished"></translation>
+        <translation>В матрице %2 нет строки %1!</translation>
     </message>
     <message>
         <source>There&apos;s no column %1 in matrix %2!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Out of memory</source>
-        <translation type="unfinished"></translation>
+        <translation>В матрице %2 нет колонки %1!</translation>
     </message>
 </context>
 <context>
     <name>myWidget</name>
     <message>
         <source>QtiPlot</source>
-        <translation type="unfinished">QtiPlot</translation>
+        <translation>QtiPlot</translation>
     </message>
     <message>
         <source>Do you want to hide or delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите удалить или скрыть?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished">Обычный</translation>
+        <translation>Нормальный</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished">Скрытый</translation>
+        <translation>Скрытый</translation>
     </message>
     <message>
         <source>Minimized</source>
-        <translation type="unfinished">Свёрнутый</translation>
+        <translation>Свёрнутый</translation>
     </message>
     <message>
         <source>Maximized</source>
-        <translation type="unfinished">Развёрнутый</translation>
+        <translation>Развёрнутый</translation>
     </message>
     <message>
         <source>kB</source>
-        <translation type="unfinished"></translation>
+        <translation>кб</translation>
     </message>
 </context>
 <context>
     <name>pieDialog</name>
     <message>
         <source>QtiPlot - Pie Options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры круговой диаграммы</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Worksheet</source>
-        <translation type="unfinished">Рабочая &amp;Таблица</translation>
+        <translation>Рабочая &amp;таблица</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Применить</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>Border</source>
-        <translation type="unfinished"></translation>
+        <translation>Край</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Стиль</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <source>Fill</source>
-        <translation type="unfinished"></translation>
+        <translation>Заполнение</translation>
     </message>
     <message>
         <source>First color</source>
-        <translation type="unfinished"></translation>
+        <translation>Первый цвет</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон</translation>
     </message>
     <message>
-        <source>Pie radius</source>
-        <translation type="unfinished"></translation>
+        <source>Pie ray</source>
+        <translation type="obsolete">Доли круговой диаграммы</translation>
     </message>
     <message>
         <source>Pie</source>
-        <translation type="unfinished"></translation>
+        <translation>Круговая диаграмма</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Фон</translation>
+    </message>
+    <message>
+        <source>Co&amp;lor</source>
+        <translation type="obsolete">Ц&amp;вет</translation>
     </message>
     <message>
         <source>Border Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина границы</translation>
     </message>
     <message>
         <source>Border Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет границы</translation>
     </message>
     <message>
-        <source>Canvas Color</source>
-        <translation type="unfinished"></translation>
+        <source>Colo&amp;r</source>
+        <translation type="obsolete">Ц&amp;вет</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры</translation>
     </message>
     <message>
         <source>Margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Край</translation>
     </message>
     <message>
         <source>Apply to all layers</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить во всех слоях</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Основное</translation>
+    </message>
+    <message>
+        <source>Pie radius</source>
+        <translation>Радиус ломтя</translation>
+    </message>
+    <message>
+        <source>Canvas Color</source>
+        <translation>Цвет холста</translation>
     </message>
 </context>
 <context>
     <name>plot3DDialog</name>
     <message>
         <source>QtiPlot - Surface Plot Options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры отрисовки трёхмерной поверхности</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Применить</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отменить</translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <source>Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Z</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>От</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>До</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>linear</source>
-        <translation type="unfinished"></translation>
+        <translation>линейный</translation>
     </message>
     <message>
         <source>logarithmic</source>
-        <translation type="unfinished"></translation>
+        <translation>логарифмический</translation>
     </message>
     <message>
         <source>Major Ticks</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг основной разметки</translation>
     </message>
     <message>
         <source>MinorTicks</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг дополнительной разметки</translation>
     </message>
     <message>
         <source>&amp;Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Масштаб</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок</translation>
     </message>
     <message>
         <source>Axis Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт оси</translation>
     </message>
     <message>
         <source>&amp;Choose font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выбор шрифта</translation>
     </message>
     <message>
         <source>Major Ticks Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина основной разметки</translation>
     </message>
     <message>
         <source>Minor Ticks Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина дополнительной разметки</translation>
     </message>
     <message>
         <source>&amp;Axis</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ось</translation>
     </message>
     <message>
         <source>&amp;Color</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Цвет</translation>
     </message>
     <message>
         <source>&amp;Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Шрифт</translation>
     </message>
     <message>
         <source>&amp;Title</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Заголовок</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished">Данные</translation>
+        <translation>Данные</translation>
     </message>
     <message>
         <source>Ma&amp;x</source>
-        <translation type="unfinished"></translation>
+        <translation>Ma&amp;x</translation>
     </message>
     <message>
         <source>&amp;Min</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color Ma&amp;p</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Min</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Основное</translation>
     </message>
     <message>
         <source>&amp;Line</source>
-        <translation type="unfinished">&amp;Линия</translation>
+        <translation>&amp;Линия</translation>
     </message>
     <message>
         <source>&amp;Background</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Фон</translation>
     </message>
     <message>
         <source>Coordinate System</source>
-        <translation type="unfinished"></translation>
+        <translation>Система координат</translation>
     </message>
     <message>
         <source>&amp;Axes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Оси</translation>
     </message>
     <message>
         <source>Lab&amp;els</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Метки</translation>
     </message>
     <message>
         <source>&amp;Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Числа</translation>
     </message>
     <message>
         <source>&amp;Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сетка</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозрачность</translation>
     </message>
     <message>
         <source>&amp;Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Цвета</translation>
     </message>
     <message>
         <source>Line Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширана линии</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешение</translation>
     </message>
     <message>
         <source>Numbers Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт чисел</translation>
     </message>
     <message>
         <source>&amp;Choose Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выбор шрифта</translation>
     </message>
     <message>
         <source>Distance labels - axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние метка - ось</translation>
     </message>
     <message>
         <source>Zoom (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштабирование (%)</translation>
     </message>
     <message>
         <source>X Zoom (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштабирование по X (%)</translation>
     </message>
     <message>
         <source>Y Zoom (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштабирование по Y (%)</translation>
     </message>
     <message>
         <source>Z Zoom (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштабирование по Z (%)</translation>
     </message>
     <message>
         <source>&amp;General</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Основное</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Стиль</translation>
     </message>
     <message>
         <source>Dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка</translation>
     </message>
     <message>
         <source>Cross Hair</source>
-        <translation type="unfinished"></translation>
+        <translation>Перекрестие</translation>
     </message>
     <message>
         <source>Cone</source>
-        <translation type="unfinished"></translation>
+        <translation>Конус</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <source>Smooth angles</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол сглаживания</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Радиус</translation>
     </message>
     <message>
         <source>Smooth line</source>
-        <translation type="unfinished"></translation>
+        <translation>Гладкая линия</translation>
     </message>
     <message>
         <source>Boxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Заключённый в ящик</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Качество</translation>
     </message>
     <message>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Точек</translation>
     </message>
     <message>
         <source>Bars</source>
-        <translation type="unfinished">Столбики</translation>
-    </message>
-    <message>
-        <source>Colormap files</source>
-        <translation type="unfinished"></translation>
+        <translation>Столбики</translation>
     </message>
     <message>
         <source>QtiPlot - Start limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания начальной границы</translation>
     </message>
     <message>
         <source>QtiPlot - End limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания конечной границы</translation>
     </message>
     <message>
         <source>QtiPlot - Input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода</translation>
     </message>
     <message>
         <source>Please enter scale limits that satisfy: from &lt; to!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите пределы изменения масштаба, удовлетворяющие соотношению: от &lt; до!</translation>
+    </message>
+    <message>
+        <source>Show Legend</source>
+        <translation type="obsolete">Отобразить легенду</translation>
+    </message>
+    <message>
+        <source>Color Ma&amp;p</source>
+        <translation>Цветовая &amp;шкала</translation>
+    </message>
+    <message>
+        <source>Colormap files</source>
+        <translation>Файлы цветовой шкалы</translation>
     </message>
 </context>
 <context>
     <name>plotDialog</name>
     <message>
         <source>QtiPlot - Custom curves</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Пользовательские кривые</translation>
     </message>
     <message>
         <source>Plot type</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип графика</translation>
     </message>
     <message>
         <source>&amp;Plot Associations...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Соответствие координат...</translation>
     </message>
     <message>
         <source>&amp;Edit Function...</source>
-        <translation type="unfinished">&amp;Редактировать Функцию...</translation>
+        <translation>&amp;Редактировать функцию...</translation>
     </message>
     <message>
         <source>&amp;Worksheet</source>
-        <translation type="unfinished">Рабочая &amp;Таблица</translation>
+        <translation>Рабочая &amp;Таблица</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Применить</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
-    </message>
-    <message>
-        <source>Attach curve to: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>x Axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>y Axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Axes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Соединить</translation>
     </message>
     <message>
         <source>No line</source>
-        <translation type="unfinished"></translation>
+        <translation>Без линий</translation>
     </message>
     <message>
         <source>Lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Линии</translation>
     </message>
     <message>
         <source>Sticks</source>
-        <translation type="unfinished"></translation>
+        <translation>Штанги</translation>
     </message>
     <message>
-        <source>Horizontal Steps</source>
-        <translation type="unfinished"></translation>
+        <source>Steps</source>
+        <translation type="obsolete">Ступентки</translation>
     </message>
     <message>
         <source>Dots</source>
-        <translation type="unfinished">Точки</translation>
+        <translation>Точки</translation>
     </message>
     <message>
         <source>Spline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vertical Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Сплайн</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Стиль</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
     </message>
     <message>
         <source>Fill area under curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Заполнить пространство под кривой</translation>
     </message>
     <message>
         <source>Fill color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет заполнения</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон</translation>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Линия</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет заполнения</translation>
     </message>
     <message>
         <source>Edge Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет грани</translation>
     </message>
     <message>
         <source>Edge Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина грани</translation>
     </message>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Символ</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation type="unfinished">Короб</translation>
+        <translation>Короб</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>No Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Без фигуры</translation>
     </message>
     <message>
         <source>Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямоугольник</translation>
     </message>
     <message>
         <source>Diamond</source>
-        <translation type="unfinished"></translation>
+        <translation>Ромб</translation>
     </message>
     <message>
         <source>Perc 10, 25, 75, 90</source>
-        <translation type="unfinished"></translation>
+        <translation>Проц 10, 25, 75, 90</translation>
     </message>
     <message>
         <source>Notch</source>
-        <translation type="unfinished"></translation>
+        <translation>Катушка</translation>
     </message>
     <message>
         <source>Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Диапазон</translation>
     </message>
     <message>
         <source>Standard Deviation</source>
-        <translation type="unfinished"></translation>
+        <translation>Среднеквадратичное отклонение</translation>
     </message>
     <message>
         <source>Standard Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартная Ошибка</translation>
     </message>
     <message>
         <source>Perc 25, 75</source>
-        <translation type="unfinished"></translation>
+        <translation>Проц 25, 75</translation>
     </message>
     <message>
         <source>Perc 10, 90</source>
-        <translation type="unfinished"></translation>
+        <translation>Проц 10, 90</translation>
     </message>
     <message>
         <source>Perc 5, 95</source>
-        <translation type="unfinished"></translation>
+        <translation>Проц 5, 95</translation>
     </message>
     <message>
         <source>Perc 1, 99</source>
-        <translation type="unfinished"></translation>
+        <translation>Проц 1, 99</translation>
     </message>
     <message>
         <source>Max-Min</source>
-        <translation type="unfinished"></translation>
+        <translation>Max-Min</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation type="unfinished"></translation>
+        <translation>Константа</translation>
     </message>
     <message>
         <source>Percentile (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Процентиль (%)</translation>
     </message>
     <message>
         <source>Coef</source>
-        <translation type="unfinished"></translation>
+        <translation>Коэфф</translation>
     </message>
     <message>
         <source>Box Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина ящика</translation>
     </message>
     <message>
         <source>Whiskers</source>
-        <translation type="unfinished"></translation>
+        <translation>Усы</translation>
     </message>
     <message>
         <source>No Whiskers</source>
-        <translation type="unfinished"></translation>
+        <translation>Без усов</translation>
     </message>
     <message>
         <source>75-25</source>
-        <translation type="unfinished"></translation>
+        <translation>75-25</translation>
     </message>
     <message>
         <source>90-10</source>
-        <translation type="unfinished"></translation>
+        <translation>90-10</translation>
     </message>
     <message>
         <source>95-5</source>
-        <translation type="unfinished"></translation>
+        <translation>95-5</translation>
     </message>
     <message>
         <source>99-1</source>
-        <translation type="unfinished"></translation>
+        <translation>99-1</translation>
     </message>
     <message>
         <source>Box/Whiskers</source>
-        <translation type="unfinished"></translation>
+        <translation>Ящик/усы</translation>
     </message>
     <message>
         <source>Max</source>
-        <translation type="unfinished"></translation>
+        <translation>Макс</translation>
     </message>
     <message>
         <source>99%</source>
-        <translation type="unfinished"></translation>
+        <translation>99%</translation>
     </message>
     <message>
         <source>Mean</source>
-        <translation type="unfinished"></translation>
+        <translation>Среднее</translation>
     </message>
     <message>
         <source>1%</source>
-        <translation type="unfinished"></translation>
+        <translation>1%</translation>
     </message>
     <message>
         <source>Min</source>
-        <translation type="unfinished"></translation>
+        <translation>Мин</translation>
     </message>
     <message>
         <source>Percentile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Gray Scale</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Default Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Custom Co&amp;lors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contour Lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Levels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use &amp;Color Map</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Default &amp;Pen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color Bar Scale</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Процентиль</translation>
     </message>
     <message>
         <source>Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Направление</translation>
     </message>
     <message>
         <source>Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Плюс</translation>
     </message>
     <message>
         <source>Minus</source>
-        <translation type="unfinished"></translation>
+        <translation>Минус</translation>
     </message>
     <message>
         <source>&amp;X Error Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Штрихи ошибок по &amp;X</translation>
+    </message>
+    <message>
+        <source>Co&amp;lor</source>
+        <translation type="obsolete">Ц&amp;вет</translation>
     </message>
     <message>
         <source>Line Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина линии</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>Cap Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина шляпы</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>10</source>
-        <translation type="unfinished"></translation>
+        <translation>10</translation>
     </message>
     <message>
         <source>12</source>
-        <translation type="unfinished"></translation>
+        <translation>12</translation>
     </message>
     <message>
         <source>16</source>
-        <translation type="unfinished"></translation>
+        <translation>16</translation>
     </message>
     <message>
         <source>20</source>
-        <translation type="unfinished"></translation>
+        <translation>20</translation>
     </message>
     <message>
         <source>Through Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Через символ</translation>
     </message>
     <message>
         <source>Error Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Штрихи ошибок</translation>
     </message>
     <message>
         <source>Automatic Binning</source>
-        <translation type="unfinished"></translation>
+        <translation>Атоматически</translation>
     </message>
     <message>
         <source>&amp;Show statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Вывести статистику</translation>
     </message>
     <message>
         <source>Bin Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер столбика</translation>
     </message>
     <message>
         <source>Begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Начала</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Конец</translation>
     </message>
     <message>
         <source>Histogram Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные гистограммы</translation>
     </message>
     <message>
         <source>Gap Between Bars (in %)</source>
-        <translation type="unfinished"></translation>
+        <translation>Промежуток между столбиками (в %)</translation>
     </message>
     <message>
         <source>Offset (in %)</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение (в %)</translation>
     </message>
     <message>
         <source>Spacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Интервал</translation>
     </message>
     <message>
         <source>Arrowheads</source>
-        <translation type="unfinished"></translation>
+        <translation>Наконечники стрелок</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>&amp;Filled</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Заполненная</translation>
     </message>
     <message>
         <source>End Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Конечная Точка</translation>
     </message>
     <message>
         <source>X End</source>
-        <translation type="unfinished"></translation>
+        <translation>Конец X</translation>
     </message>
     <message>
         <source>Y End</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Middle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <translation type="unfinished"></translation>
+        <translation>Конец Y</translation>
     </message>
     <message>
         <source>Vector</source>
-        <translation type="unfinished"></translation>
+        <translation>Вектор</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Удалить</translation>
+        <translation>&amp;Удалить</translation>
     </message>
     <message>
         <source>&amp;Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Правка...</translation>
     </message>
     <message>
         <source>Vertical Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальные столбики</translation>
     </message>
     <message>
         <source>Horizontal Bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Горизонтальные столбики</translation>
     </message>
     <message>
         <source>Histogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Гистограмма</translation>
     </message>
     <message>
         <source>Vector XYXY</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vector XYAM</source>
-        <translation type="unfinished"></translation>
+        <translation>Вектор XYXY</translation>
     </message>
     <message>
         <source>Scatter</source>
-        <translation type="unfinished"></translation>
+        <translation>Точки</translation>
     </message>
     <message>
         <source>Line + Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Линия + символ</translation>
     </message>
     <message>
         <source>QtiPlot - Input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода</translation>
     </message>
     <message>
         <source>Please enter a valid start limit!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите корректную начальную границу!</translation>
     </message>
     <message>
         <source>Please enter a valid end limit!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите корректную конечную границу!</translation>
     </message>
     <message>
         <source>Please enter a valid bin size value!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите корректное значение размера столбика!</translation>
     </message>
     <message>
         <source>Please enter limits that satisfy: begin &lt; end!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите пределы, удовлетворяющие соотношению: от &lt; до!</translation>
     </message>
     <message>
         <source>QtiPlot - Bin size input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода размера столбика</translation>
     </message>
     <message>
         <source>Please enter a positive bin size value!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите положительное значение размера столбика!</translation>
+    </message>
+    <message>
+        <source>Position</source>
+        <translation>Положение</translation>
+    </message>
+    <message>
+        <source>Tail</source>
+        <translation>Конец</translation>
+    </message>
+    <message>
+        <source>Middle</source>
+        <translation>Середина</translation>
+    </message>
+    <message>
+        <source>Head</source>
+        <translation>Начало</translation>
+    </message>
+    <message>
+        <source>Vector XYAM</source>
+        <translation>Вектор XYAM</translation>
     </message>
     <message>
         <source>Vector Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные вектора</translation>
     </message>
     <message>
         <source>Magnitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Величина</translation>
+    </message>
+    <message>
+        <source>Attach curve to: </source>
+        <translation>Прикрепить кривую к: </translation>
+    </message>
+    <message>
+        <source>x Axis</source>
+        <translation>Ось x</translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation>Внизу</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation>Вверху</translation>
+    </message>
+    <message>
+        <source>y Axis</source>
+        <translation>Ось y</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation>По левому краю</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation>По правому краю</translation>
+    </message>
+    <message>
+        <source>Axes</source>
+        <translation>Оси</translation>
+    </message>
+    <message>
+        <source>Horizontal Steps</source>
+        <translation>Горизонтальные шаги</translation>
+    </message>
+    <message>
+        <source>Vertical Steps</source>
+        <translation>Вертикальные шаги</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation>Изображения</translation>
+    </message>
+    <message>
+        <source>&amp;Gray Scale</source>
+        <translation>Уровни &amp;серого</translation>
+    </message>
+    <message>
+        <source>&amp;Default Colors</source>
+        <translation>Цвета по &amp;умолчанию</translation>
+    </message>
+    <message>
+        <source>Custom Co&amp;lors</source>
+        <translation>Пользовательские &amp;цвета</translation>
+    </message>
+    <message>
+        <source>Contour Lines</source>
+        <translation>Линии контура</translation>
+    </message>
+    <message>
+        <source>Levels</source>
+        <translation>Уровни</translation>
+    </message>
+    <message>
+        <source>Use &amp;Color Map</source>
+        <translation>Использовать шкалу &amp;цветов</translation>
+    </message>
+    <message>
+        <source>Use Default &amp;Pen</source>
+        <translation>Установить карандаш по &amp;умолчанию</translation>
+    </message>
+    <message>
+        <source>Color Bar Scale</source>
+        <translation>Шкала цветов</translation>
+    </message>
+    <message>
+        <source>Axis</source>
+        <translation>Ось</translation>
+    </message>
+    <message>
+        <source>Contour</source>
+        <translation>Контур</translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation>Цвета</translation>
     </message>
 </context>
 <context>
     <name>plotWizard</name>
     <message>
         <source>QtiPlot - Select Columns to Plot</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Выберите колонки для отображения</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Worksheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Рабочая таблица</translation>
     </message>
     <message>
         <source>&amp;New curve</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Новая кривая</translation>
     </message>
     <message>
         <source>&amp;Delete curve</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Удалить кривую</translation>
     </message>
     <message>
         <source>&amp;Plot</source>
-        <translation type="unfinished">&amp;График</translation>
+        <translation>&amp;График</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>QtiPlot - Warning</source>
-        <translation type="unfinished">QtiPlot - Предупреждение</translation>
+        <translation>QtiPlot - Предупреждение</translation>
     </message>
     <message>
         <source>Redefinitions of the same curve are ignored!</source>
-        <translation type="unfinished"></translation>
+        <translation>Переопределения одной и той же кривой проигнорированы!</translation>
     </message>
     <message>
         <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
+        <translation>QtiPlot - Ошибка</translation>
     </message>
     <message>
         <source>You have allready defined a X column!</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы уже определили колонку X!</translation>
     </message>
     <message>
         <source>You must define a X column first!</source>
-        <translation type="unfinished"></translation>
+        <translation>Сначала вы должны определить колонку X!</translation>
     </message>
     <message>
         <source>You have allready defined a Y column!</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы уже определили колонку Y!</translation>
     </message>
     <message>
         <source>This kind of curve is not handled by QtiPlot!</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot не поддерживает управление кривой данного типа!</translation>
     </message>
     <message>
         <source>You have allready defined a Z column!</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы уже определили колонку Z!</translation>
     </message>
     <message>
         <source>You must define a Y column first!</source>
-        <translation type="unfinished"></translation>
+        <translation>Сначала вы должны определить колонку Y!</translation>
     </message>
     <message>
         <source>You have allready defined an error-bars column!</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы уже определили колонку ошибок!</translation>
     </message>
     <message>
         <source>You must add a new curve first!</source>
-        <translation type="unfinished"></translation>
+        <translation>Сначала вы должны добавить кривую!</translation>
     </message>
 </context>
 <context>
     <name>polynomFitDialog</name>
     <message>
         <source>QtiPlot - Polynomial Fit Options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры полиномиального приближения</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Polynomial Fit of</source>
-        <translation type="unfinished"></translation>
+        <translation>Полиномиальное приближение для</translation>
     </message>
     <message>
         <source>Order (1 - 9, 1 = linear)</source>
-        <translation type="unfinished"></translation>
+        <translation>Порядок (1 - 9, 1 = линейное)</translation>
     </message>
     <message>
         <source>Fit curve # pts</source>
-        <translation type="unfinished"></translation>
+        <translation>Число точек в рез. кривой</translation>
     </message>
     <message>
         <source>Fit curve Xmin</source>
-        <translation type="unfinished"></translation>
+        <translation>Xmin для рез. кривой</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>Fit curve Xmax</source>
-        <translation type="unfinished"></translation>
+        <translation>Xmax для рез.кривой</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
     </message>
     <message>
         <source>Show Formula on Graph?</source>
-        <translation type="unfinished"></translation>
+        <translation>Отобразить формулу на графике?</translation>
     </message>
     <message>
         <source>&amp;Fit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Приблизить</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
         <source>Not enough points</source>
-        <translation type="unfinished"></translation>
+        <translation>Недостаточно точек</translation>
     </message>
     <message>
         <source>QtiPlot - Warning</source>
-        <translation type="unfinished">QtiPlot - Предупреждение</translation>
+        <translation>QtiPlot - Предупреждение</translation>
     </message>
     <message>
         <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая &lt;b&gt; %1 &lt;/b&gt; больше не существует! Операция отменена!</translation>
     </message>
     <message>
-        <source>You cannot fit curve:</source>
-        <translation type="unfinished"></translation>
+        <source>You can not fit curve:</source>
+        <translation type="obsolete">Вы не можете приблизить кривую:</translation>
     </message>
     <message>
         <source>because it has less than 2 points!</source>
-        <translation type="unfinished"></translation>
+        <translation>потому, что она имеет менее чем 2 точки!</translation>
+    </message>
+    <message>
+        <source>You cannot fit curve:</source>
+        <translation>Невозможно выполнить приближение для кривой:</translation>
     </message>
 </context>
 <context>
     <name>renameWindowDialog</name>
     <message>
         <source>QtiPlot - Rename Window</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Окно переименования</translation>
     </message>
     <message>
         <source>Window Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок окна</translation>
     </message>
     <message>
         <source>&amp;Name (single word)</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Название (одно слово)</translation>
     </message>
     <message>
         <source>&amp;Label</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Метка</translation>
     </message>
     <message>
         <source>&amp;Both Name and Label</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Название и метка</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отменить</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Error</source>
+        <translation type="obsolete">QtiPlot - Ошибка</translation>
+    </message>
+    <message>
+        <source>Please enter a valid name!</source>
+        <translation type="obsolete">Пожалуйста введите корректное название!</translation>
+    </message>
+    <message>
+        <source>The name you chose is not valid: only letters and digits are allowed!</source>
+        <translation type="obsolete">Вы выбрали некорректное название: допускается использовать только буквы и цифры!</translation>
+    </message>
+    <message>
+        <source>Please choose another name!</source>
+        <translation type="obsolete">Пожалуйста выберите другое название!</translation>
+    </message>
+    <message>
+        <source>Name already exists!</source>
+        <translation type="obsolete">Название уже существует!</translation>
+    </message>
+    <message>
+        <source>The table name must be different from the names of its columns!</source>
+        <translation type="obsolete">Название таблицы должно отличаться от названий столбцов!</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Warning</source>
+        <translation>QtiPlot - Предупреждение</translation>
+    </message>
+    <message>
+        <source>For internal consistency reasons the underscore character is replaced with a minus sign.</source>
+        <translation>Для обеспечения внутренней согласованности символ подчёркивания был заменён на знак минус.</translation>
     </message>
 </context>
 <context>
     <name>sDialog</name>
     <message>
         <source>QtiPlot - Define surface plot</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Определение графика 3D поверхности</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>f(x,y)=</source>
-        <translation type="unfinished"></translation>
+        <translation>f(x,y)=</translation>
     </message>
     <message>
         <source>X - axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Ось X</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>От</translation>
     </message>
     <message>
         <source>-1</source>
-        <translation type="unfinished"></translation>
+        <translation>-1</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>До</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>Y - axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Ось Y</translation>
     </message>
     <message>
         <source>Z - axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Ось Z</translation>
     </message>
     <message>
         <source>Clear &amp;list</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить &amp;список</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>QtiPlot - X Start limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания начальной границы X</translation>
     </message>
     <message>
         <source>QtiPlot - X End limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания конечной границы X</translation>
     </message>
     <message>
         <source>QtiPlot - Y Start limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания начальной границы Y</translation>
     </message>
     <message>
         <source>QtiPlot - Y End limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания конечной границы Y</translation>
     </message>
     <message>
         <source>QtiPlot - Z Start limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания начальной границы Z</translation>
     </message>
     <message>
         <source>QtiPlot - Z End limit error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка задания конечной границы Z</translation>
     </message>
     <message>
         <source>QtiPlot - Input error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода</translation>
     </message>
     <message>
         <source>Please enter limits that satisfy: from &lt; end!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите пределы, удовлетворяющие соотношению: от &lt; до!</translation>
     </message>
     <message>
         <source>QtiPlot - Input function error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Ошибка ввода функции</translation>
     </message>
 </context>
 <context>
     <name>setColValuesDialog</name>
     <message>
         <source>QtiPlot - Set column values</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Установка значений столбца</translation>
     </message>
     <message>
         <source>For row (i)</source>
-        <translation type="unfinished"></translation>
+        <translation>Строки (i) от</translation>
     </message>
     <message>
         <source>to</source>
-        <translation type="unfinished"></translation>
+        <translation>до</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Add function</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить функцию</translation>
     </message>
     <message>
         <source>Add column</source>
-        <translation type="unfinished">Добавить столбец</translation>
+        <translation>Добавить столбец</translation>
     </message>
     <message>
         <source>Add cell</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить ячейку</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отменить</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Input function error</source>
+        <translation type="obsolete">QtiPlot - Ошибка ввода функции</translation>
+    </message>
+    <message>
+        <source>You can not use imbricated columns!</source>
+        <translation type="obsolete">Нельзя использовать вложенные столбцы!</translation>
     </message>
 </context>
 <context>
     <name>smoothCurveDialog</name>
     <message>
         <source>QtiPlot - Smoothing Options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры сглаживания</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation type="unfinished"></translation>
+        <translation>График функции</translation>
     </message>
     <message>
         <source>Polynomial Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Порядок полинома</translation>
     </message>
     <message>
         <source>Points to the Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Точек слева</translation>
     </message>
     <message>
         <source>Points to the Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Точек справа</translation>
     </message>
     <message>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Точек</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет</translation>
     </message>
     <message>
         <source>&amp;Smooth</source>
-        <translation type="unfinished">&amp;Сглаживание</translation>
+        <translation>&amp;Сглаживание</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
 </context>
 <context>
     <name>sortDialog</name>
     <message>
         <source>QtiPlot - Sorting Options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры сортировки</translation>
     </message>
     <message>
         <source>Sort columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Сортировать столбыц</translation>
     </message>
     <message>
         <source>Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Порядок</translation>
     </message>
     <message>
         <source>Leading column</source>
-        <translation type="unfinished"></translation>
+        <translation>Ведущая колонка</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>Separately</source>
-        <translation type="unfinished"></translation>
+        <translation>Раздельно</translation>
     </message>
     <message>
         <source>Together</source>
-        <translation type="unfinished"></translation>
+        <translation>Совместно</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>По возрастанию</translation>
     </message>
     <message>
         <source>Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>По убыванию</translation>
     </message>
 </context>
 <context>
     <name>symbolDialog</name>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>QtiPlot - Choose Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Выберите символ</translation>
     </message>
 </context>
 <context>
     <name>tableDialog</name>
     <message>
         <source>Column Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Название колонки:</translation>
     </message>
     <message>
         <source>Enumerate all to the right</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересчитать все справа</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Применить</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры</translation>
     </message>
     <message>
         <source>Plot Designation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Обозначение графика:</translation>
     </message>
     <message>
         <source>Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Отображение</translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат:</translation>
     </message>
     <message>
         <source>Precision:</source>
-        <translation type="unfinished"></translation>
+        <translation>Точность:</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Никакой(ая)</translation>
+        <translation>Никакой(ая)</translation>
     </message>
     <message>
         <source>X (abscissae)</source>
-        <translation type="unfinished"></translation>
+        <translation>X (абсцисса)</translation>
     </message>
     <message>
         <source>Y (ordinates)</source>
-        <translation type="unfinished"></translation>
+        <translation>Y (ордината)</translation>
     </message>
     <message>
         <source>Z (height)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>X Error</source>
-        <translation type="unfinished">Ошибка X</translation>
-    </message>
-    <message>
-        <source>Y Error</source>
-        <translation type="unfinished">Ошибка Y</translation>
+        <translation>Z (высота)</translation>
     </message>
     <message>
         <source>Numeric</source>
-        <translation type="unfinished"></translation>
+        <translation>Цифровой</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Текст</translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Месяц</translation>
     </message>
     <message>
         <source>Day of Week</source>
-        <translation type="unfinished"></translation>
+        <translation>День недели</translation>
     </message>
     <message>
         <source>Apply to all columns to the right</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить ко всем колонкам справа</translation>
     </message>
     <message>
         <source>Column Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина колонки:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Комментарий:</translation>
     </message>
     <message>
         <source>QtiPlot - Error</source>
-        <translation type="unfinished">QtiPlot - Ошибка</translation>
+        <translation>QtiPlot - Ошибка</translation>
     </message>
     <message>
         <source>The column names must only contain letters and digits!</source>
-        <translation type="unfinished"></translation>
+        <translation>Названия колонок должны состоять только из букв и цифр!</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию</translation>
     </message>
     <message>
         <source>Decimal: 1000</source>
-        <translation type="unfinished"></translation>
+        <translation>Десятичный: 1000</translation>
     </message>
     <message>
         <source>Scientific: 1E3</source>
-        <translation type="unfinished"></translation>
+        <translation>Научный: 1E3</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
+        <translation>гггг-ММ-дд</translation>
     </message>
     <message>
         <source>h</source>
-        <translation type="unfinished"></translation>
+        <translation>ч</translation>
     </message>
     <message>
         <source>h ap</source>
-        <translation type="unfinished"></translation>
+        <translation>ч 12</translation>
     </message>
     <message>
         <source>h AP</source>
-        <translation type="unfinished"></translation>
+        <translation>Ч 12</translation>
     </message>
     <message>
         <source>h:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>ч:мм</translation>
     </message>
     <message>
         <source>h:mm ap</source>
-        <translation type="unfinished"></translation>
+        <translation>ч:мм 12</translation>
     </message>
     <message>
         <source>hh:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>чч:мм</translation>
     </message>
     <message>
         <source>h:mm:ss</source>
-        <translation type="unfinished"></translation>
+        <translation>ч:мм:сс</translation>
     </message>
     <message>
         <source>h:mm:ss.zzz</source>
-        <translation type="unfinished"></translation>
+        <translation>ч:мм:сс.ххх</translation>
     </message>
     <message>
         <source>mm:ss</source>
-        <translation type="unfinished"></translation>
+        <translation>мм:сс</translation>
     </message>
     <message>
         <source>mm:ss.zzz</source>
-        <translation type="unfinished"></translation>
+        <translation>мм:сс.ххх</translation>
     </message>
     <message>
         <source>hmm</source>
-        <translation type="unfinished"></translation>
+        <translation>чмм</translation>
     </message>
     <message>
         <source>hmmss</source>
-        <translation type="unfinished"></translation>
+        <translation>чммсс</translation>
     </message>
     <message>
         <source>hhmmss</source>
-        <translation type="unfinished"></translation>
+        <translation>ччммсс</translation>
     </message>
     <message>
         <source>QtiPlot - Column options</source>
-        <translation type="unfinished"></translation>
+        <translation>QtiPlot - Параметры колонки</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Apply to all</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить ко всем</translation>
+    </message>
+    <message>
+        <source>X Error</source>
+        <translation>Ошибка по X</translation>
+    </message>
+    <message>
+        <source>Y Error</source>
+        <translation>Ошибка по Y</translation>
+    </message>
+    <message>
+        <source>QtiPlot - Warning</source>
+        <translation>QtiPlot - Предупреждение</translation>
+    </message>
+    <message>
+        <source>For internal consistency reasons the underscore character is replaced with a minus sign.</source>
+        <translation>Для обеспечения внутренней согласованности символ подчёркивания был заменён на знак минус.</translation>
+    </message>
+</context>
+<context>
+    <name>textDialog</name>
+    <message>
+        <source></source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>textDlg</name>
+    <message>
+        <source></source>
+        <translation></translation>
     </message>
 </context>
 </TS>
