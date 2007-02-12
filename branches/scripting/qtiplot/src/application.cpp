@@ -9865,7 +9865,7 @@ else
 	((myWidget *)w)->setStatus(myWidget::Normal);
 
 	if (lst[5] == "hidden")
-		hideWindow((myWidget* )w);
+		app->hideWindow((myWidget* )w);
 	}
 
 if (s.contains ("active"))
