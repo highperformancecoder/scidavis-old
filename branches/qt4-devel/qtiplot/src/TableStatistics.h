@@ -3,7 +3,7 @@
 	Project              : QtiPlot
 --------------------------------------------------------------------
 	Copyright            : (C) 2006 by Knut Franke
-	Email                : knut.franke@gmx.de
+	Email (use @ for *)  : knut.franke*gmx.de
 	Description          : Table subclass that displays statistics on
 	                       columns or rows of another table
 
@@ -32,7 +32,11 @@
 
 #include "worksheet.h"
 
-//! Table that computes and displays statistics on another Table
+/*!\brief Table that computes and displays statistics on another Table.
+ *
+ * \section future Future Plans
+ * Make it possible to add new columns/rows to be monitored.
+ */
 class TableStatistics : public Table
 {
 	Q_OBJECT

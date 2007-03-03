@@ -6,8 +6,8 @@
     Copyright            : (C) 2006 by Ion Vasilief, 
                            Tilman Hoener zu Siederdissen,
                            Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net,
-                           knut.franke@gmx.de
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
+                           knut.franke*gmx.de
     Description          : Evaluate mathematical expressions using muParser
                            
  ***************************************************************************/
@@ -35,7 +35,7 @@
 
 #include "Scripting.h"
 
-#include "../3rdparty/muParser/muParser.h"
+#include <muParser/muParser.h>
 #include "math.h"
 #include <gsl/gsl_sf.h>
 #include <q3asciidict.h>
@@ -60,13 +60,16 @@ class muParserScript: public Script
     double col(const QString &arg);
     double cell(int row, int col);
     double *addVariable(const char *name);
+    double *addVariableR(const char *name);
+    static double *mu_addVariableR(const char *name) { return current->addVariableR(name); }
     static double mu_col(const char *arg) { return current->col(arg); }
     static double mu_cell(double row, double col) { return current->cell(qRound(row), qRound(col)); }
-    static double *mu_addVariable(const char *name) { return current->addVariable(name); }
+    static double *mu_addVariable(const char *name, void *){ return current->addVariable(name); }
+    static double *mu_addVariableR(const char *name, void *) { return current->addVariableR(name); }
     static QString compileColArg(const QString& in);
 
     mu::Parser parser, rparser;
-    Q3AsciiDict<double> variables;
+    Q3AsciiDict<double> variables, rvariables;
     QStringList muCode;
 
   public:

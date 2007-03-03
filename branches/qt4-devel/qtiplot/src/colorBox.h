@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : A combo box to select a standard color
                            
  ***************************************************************************/
@@ -39,15 +39,9 @@ class ColorBox : public QComboBox
 public:
 	//! Constructor
 	/**
-	 * \param rw flag: box editable or not
 	 * \param parent parent widget
 	 */
-	ColorBox(bool rw, QWidget *parent);
-	//! Constructor
-	/**
-	 * \param parent parent widget
-	 */
-	ColorBox(QWidget *parent);
+	ColorBox(QWidget *parent = 0);
 	//! Set the current color
 	void setColor(const QColor& c);
 	//! Return the current color
@@ -57,6 +51,8 @@ public:
 	static int colorIndex(const QColor& c);
 	//! Return the color at index 'colorindex'
 	static QColor color(int colorIndex);
+    //! Returns TRUE if the color is included in the color box, otherwise returns FALSE.
+    static bool isValidColor(const QColor& color);
 
 protected:
 	//! Internal initialization function

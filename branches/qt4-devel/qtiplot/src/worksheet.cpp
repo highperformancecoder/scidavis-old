@@ -5,8 +5,8 @@
     Copyright            : (C) 2006 by Ion Vasilief, 
                            Tilman Hoener zu Siederdissen,
                            Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
-                           knut.franke@gmx.de
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
+                           knut.franke*gmx.de
     Description          : Table worksheet class
                            
  ***************************************************************************/
@@ -58,8 +58,8 @@
 #include <gsl/gsl_sort.h>
 #include <gsl/gsl_sort_vector.h>
 #include <gsl/gsl_fft_halfcomplex.h>
-#include <gsl/gsl_fft_real.h>
-#include <gsl/gsl_fft_complex.h>
+//#include <gsl/gsl_fft_real.h>
+//#include <gsl/gsl_fft_complex.h>
 
 Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 		bool stripSpaces, bool simplifySpaces, const QString& label, 
@@ -72,7 +72,7 @@ Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ign
 	Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
 : MyWidget(label,parent,name,f), scripted(env)
 {
-	init(r,c);	
+	init(r,c);
 }
 
 void Table::init(int rows, int cols)
@@ -141,7 +141,6 @@ void Table::init(int rows, int cols)
 	connect(accel_selectAll, SIGNAL(activated()), this, SLOT(selectAllTable()) );
 
 	connect(worksheet, SIGNAL(itemChanged(QTableWidgetItem *)),this, SLOT(cellEdited(QTableWidgetItem *)));
-	specifications = saveToString("geometry\n");
 }
 
 void Table::colWidthModified(int, int, int)
@@ -289,7 +288,40 @@ void Table::cellEdited(QTableWidgetItem * item)
 {
 	int col = worksheet->column(item);
 	QString name = colName(col);
-	emit modifiedData(this, name);
+
+	if (columnType(col) != Numeric)
+	{
+		emit modifiedData(this, colName(col));
+		emit modifiedWindow(this);
+		return;		
+	}
+	
+	char f;
+	int precision;
+  	columnNumericFormat(col, f, precision);
+  	 
+  	QString text = worksheet->text(row,col).replace(",", ".");
+  	bool ok = false;
+  	double res = text.toDouble(&ok);
+  	if (!text.isEmpty() && ok)
+  		worksheet->setText(row, col, QString::number(res, f, precision));
+  	else
+  	{
+  	Script *script = scriptEnv->newScript(worksheet->text(row,col),this,QString("<%1_%2_%3>").arg(name()).arg(row+1).arg(col+1));
+  	connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
+  	 
+  	script->setInt(row+1, "i");
+  	script->setInt(col+1, "j");
+  	QVariant ret = script->eval();
+  	if(ret.type()==QVariant::Int || ret.type()==QVariant::UInt || ret.type()==QVariant::LongLong || ret.type()==QVariant::ULongLong)
+  		worksheet->setText(row, col, ret.toString());
+  	else if(ret.canCast(QVariant::Double))
+  		worksheet->setText(row, col, QString::number(ret.toDouble(), f, precision));
+  	else
+  		worksheet->setText(row, col, "");
+  	}
+  	 
+  	emit modifiedData(this, colName(col));
 	emit modifiedWindow(this);
 }
 
@@ -337,14 +369,14 @@ void Table::setPlotDesignation(PlotDesignation pd)
 
 void Table::columnNumericFormat(int col, int &f, int &precision)
 {
-	QStringList format = QStringList::split("/", col_format[col], false);
+	QStringList format = col_format[col].split("/", QString::SkipEmptyParts);
 	f = format[0].toInt();
 	precision = format[1].toInt();
 }
 
 void Table::columnNumericFormat(int col, char &f, int &precision)
 {
-	QStringList format = QStringList::split("/", col_format[col], false);
+	QStringList format = col_format[col].split("/", QString::SkipEmptyParts);
 	switch(format[0].toInt())
 	{
 		case 0:
@@ -387,7 +419,7 @@ void Table::setColumnTypes(const QStringList& ctl)
 	int n = qMin(ctl.count(), tableCols());
 	for (int i=0; i<n; i++)
 	{
-		QStringList l= QStringList::split(";", ctl[i], true);
+		QStringList l= ctl[i].split(";");
 		colTypes[i] = l[0].toInt();
 
 		if ((int)l.count() > 0 && !l[1].isEmpty())
@@ -430,7 +462,7 @@ void Table::setCommand(int col, const QString com)
 
 void Table::setCommands(const QString& com)
 {
-	QStringList lst = QStringList::split("\t",com,true);
+	QStringList lst = com.split("\t");
 	lst.pop_front();
 	setCommands(lst);
 }
@@ -703,10 +735,38 @@ QStringList Table::selectedYColumns()
 	QStringList names;
 	for (int i=0;i<worksheet->columnCount();i++)
 	{
-		if(isColumnSelected(i, true) && 
-				(col_plot_type[i] == Y || col_plot_type[i] == yErr || col_plot_type[i] == xErr))
+		if(isColumnSelected(i,true) && col_plot_type[i] == Y)
 			names<<QString(name())+"_"+col_label[i];
 	}
+	return names;
+}
+  	 
+QStringList Table::selectedErrColumns()
+{
+  	QStringList names;
+  	for (int i=0;i<worksheet->numCols();i++)
+  		{
+  	    if(worksheet->isColumnSelected (i,true) &&
+  	       (col_plot_type[i] == yErr || col_plot_type[i] == xErr))
+  	       	names<<QString(name())+"_"+col_label[i];
+  	    }
+  	return names;
+}
+  	 
+QStringList Table::drawableColumnSelection()
+{
+  	QStringList names;
+  	for (int i=0;i<worksheet->numCols();i++)
+  	{
+	if(worksheet->isColumnSelected (i,true) && col_plot_type[i] == Y)
+		names<<QString(name())+"_"+col_label[i];
+    } 	       
+  	 
+  	for (int j=0; j<worksheet->numCols(); j++)
+  	{
+  	 	if(worksheet->isColumnSelected (j,true) && (col_plot_type[j] == yErr || col_plot_type[j] == xErr))
+  	    	names<<QString(name())+"_"+col_label[j];
+  	}
 	return names;
 }
 
@@ -786,24 +846,25 @@ QVarLengthArray<double> Table::col(int ycol)
 
 void Table::insertCols(int start, int count)
 {	
-	int i, index, max=0, xcols = 0;
+	start--;//insert new columns before the start/selected column
+
+	int max=0,i;
+
 	int cols=worksheet->columnCount();
 	for (i=0; i<cols; i++)
 	{
 		if (col_label[i].contains(QRegExp ("\\D"))==0)
 		{
-			index=col_label[i].toInt();
+			int index = col_label[i].toInt();
 			if (index>max) 
 				max=index;
 		}
-		if (col_plot_type[i] == X)
-			xcols++;
 	}
 	max++;
 
 	for(i=start+1 ; i<(count+start+1) ; i++ );
 	{
-		commands.insert(i, "col(" +col_label[0]+")");
+		commands.insert(i, QString());
 		col_format.insert(i, "0/6");
 		comments.insert(i, QString());
 		col_label.insert(i, QString());
@@ -1124,7 +1185,7 @@ void Table::copySelection()
 				theText += text(i,right)+"\n";
 			}
 		}
-	}		
+	}
 
 	// Copy text into the clipboard
 	QApplication::clipboard()->setText(theText);
@@ -1404,7 +1465,7 @@ void Table::normalizeSelection()
 	emit modifiedWindow(this);	
 }
 
-void Table::normalizeTable()
+void Table::normalize()
 {
 	for (int i=0; i<worksheet->columnCount(); i++)
 	{
@@ -1460,17 +1521,17 @@ void Table::sortTableDialog()
 	SortDialog *sortd=new SortDialog(this);
 	sortd->setAttribute(Qt::WA_DeleteOnClose);
 	connect (sortd,SIGNAL(sort(int, int, const QString&)),
-			this,SLOT(sortTable(int, int, const QString&)));
+			this,SLOT(sort(int, int, const QString&)));
 	sortd->insertColumnsList(colNames());
 	sortd->exec();
 }
 
-void Table::sortTable(int type, int order, const QString& leadCol)
+void Table::sort(int type, int order, const QString& leadCol)
 {
 	sortColumns(colNames(), type, order, leadCol);
 }
 
-void Table::sortColumns(int type, int order,const QString& leadCol)
+void Table::sortColumns(int type, int order, const QString& leadCol)
 {
 	sortColumns(selectedColumns(), type, order, leadCol);
 }
@@ -1481,179 +1542,168 @@ void Table::sortColumns(const QStringList&s, int type, int order, const QString&
 	if(!type)
 	{
 		for(int i=0;i<cols;i++)
-		{
-			selectedCol=colIndex(s[i]);
-			if(!order)
-				sortColAsc();
-			else
-				sortColDesc();
-		}
+			sortColumn(colIndex(s[i]), order);
 	}
 	else
 	{
-		int i,j, leadcol=colIndex(leadCol);
-		int rows=worksheet->rowCount();
-		QVarLengthArray<double> r(rows), rtemp(rows);
-		// Find the permutation index for the lead col
-		size_t *p= new size_t[rows];
-		for (j = 0; j <rows; j++)
-			r[j]=this->text(j,leadcol).toDouble();
-
-		gsl_sort_index(p,r.data(),1,rows);
-		// Since we have the permutation index, sort all the columns
-		for(i=0;i<cols;i++)
+		int leadcol = colIndex(leadCol);
+		if (leadcol < 0)
 		{
-			int scol=colIndex(s[i]);
-			if (!isEmptyColumn(scol))
+			QMessageBox::critical(this, tr("QtiPlot - Error"), 
+			tr("Please indicate the name of the leading column!"));
+			return;
+		}
+		if (columnType(leadcol) == Table::Text)
+		{
+			QMessageBox::critical(this, tr("QtiPlot - Error"), 
+			tr("The leading column has the type set to 'Text'! Operation aborted!"));
+			return;
+		}
+		
+		int rows=worksheet->rowCount();
+		int non_empty_cells = 0;
+		QVarLengthArray<int> valid_cell(rows);
+		QVarLengthArray<double> data_double(rows);
+		for (int j = 0; j <rows; j++)
+		{
+			if (!worksheet->text(j, leadcol).isEmpty())
 			{
-				for (j = 0; j <rows; j++)
-					r[j]=this->text(j,scol).toDouble();
-
-				for (j=0;j<rows;j++)
-				{
-					int aux=p[j];
-					rtemp[j]=r[aux];
-				}
-				for (j=0;j<rows;j++)
-					r[j]=rtemp[j];
-
-				int prec;
-				char f;
-				columnNumericFormat(scol, f, prec);
-				if(!order)
-				{
-					for (j=0;j<rows;j++)
-						setText(j,scol,QString::number(r[j], f, prec)); 
-				}
-				else
-				{
-					for (j=0;j<rows;j++)
-						setText(j,scol,QString::number(r[rows-j-1], f, prec)); 
-				}
-				emit modifiedData(this, colName(scol));
+				data_double[non_empty_cells] = this->text(j,leadcol).toDouble();
+				valid_cell[non_empty_cells] = j;
+				non_empty_cells++;
 			}
 		}
-		delete[] p;
-	}
+		
+		if (!non_empty_cells)
+		{
+			QMessageBox::critical(this, tr("QtiPlot - Error"), 
+			tr("The leading column is empty! Operation aborted!"));
+			return;
+		}
+		
+		data_double.resize(non_empty_cells);
+		valid_cell.resize(non_empty_cells);
+		QVarLengthArray<QString> data_string(non_empty_cells);
+		size_t *p= new size_t[non_empty_cells];
+
+		// Find the permutation index for the lead col
+		gsl_sort_index(p, data_double.data(), 1, non_empty_cells);
+		
+		for(int i=0;i<cols;i++)
+		{// Since we have the permutation index, sort all the columns
+            int col=colIndex(s[i]);
+            if (columnType(col) == Text)
+            {
+                for (int j=0; j<non_empty_cells; j++)
+                    data_string[j] = text(valid_cell[j], col);
+                if(!order)
+                    for (int j=0; j<non_empty_cells; j++)
+                        worksheet->setText(valid_cell[j], col, data_string[p[j]]);
+                else
+                    for (int j=0; j<non_empty_cells; j++)
+                        worksheet->setText(valid_cell[j], col, data_string[p[non_empty_cells-j-1]]);
+            }
+            else
+            {
+                for (int j = 0; j<non_empty_cells; j++)
+                    data_double[j] = text(valid_cell[j], col).toDouble();
+                int prec;
+                char f;
+                columnNumericFormat(col, f, prec);
+                if(!order)
+                    for (int j=0; j<non_empty_cells; j++)
+                        worksheet->setText(valid_cell[j], col, QString::number(data_double[p[j]], f, prec));
+                else
+                    for (int j=0; j<non_empty_cells; j++)
+                        worksheet->setText(valid_cell[j], col, QString::number(data_double[p[non_empty_cells-j-1]], f, prec));
+            }
+            emit modifiedData(this, colName(col));
+        }
+        delete[] p;
+    }
 	emit modifiedWindow(this);	
+}
+
+void Table::sortColumn(int col, int order)
+{
+	if (col < 0)
+		col = worksheet->currentColumn();
+	
+	int rows=worksheet->rowCount();
+	int non_empty_cells = 0;
+	QVarLengthArray<int> valid_cell(rows);
+	QVarLengthArray<double> r(rows);
+    QStringList text_cells;
+	for (int i = 0; i <rows; i++)
+	{
+		QString theText=this->text(i,selectedCol);
+		if (!theText.isEmpty())
+		{
+            if (columnType(col) == Table::Text)
+                text_cells << worksheet->text(i, col);
+            else
+			    r[non_empty_cells] = this->text(i,col).toDouble();
+			valid_cell[non_empty_cells] = i;
+			non_empty_cells++;
+		}
+	}
+	
+	if (!non_empty_cells)
+		return;
+		
+	valid_cell.resize(non_empty_cells);
+    if (columnType(col) == Table::Text)
+    {
+        r.clear();
+        text_cells.sort();
+    }
+    else
+    {
+        r.resize(non_empty_cells);
+        gsl_sort(r.data(), 1, non_empty_cells);
+    }
+
+    if (columnType(col) == Table::Text)
+    {
+        if (!order)
+        {
+            for (int i=0; i<non_empty_cells; i++)
+                worksheet->setText(valid_cell[i], col, text_cells[i]);
+        }
+		else
+        {
+            for (int i=0; i<non_empty_cells; i++)
+                worksheet->setText(valid_cell[i], col, text_cells[non_empty_cells-i-1]);
+        }
+    }
+    else
+    {
+	   int prec;
+	   char f;
+	   columnNumericFormat(col, f, prec);
+        if (!order)
+        {
+	       for (int i=0; i<non_empty_cells; i++)
+                worksheet->setText(valid_cell[i], col, QString::number(r[i], f, prec));
+        }
+        else
+        {
+            for (int i=0; i<non_empty_cells; i++)
+                worksheet->setText(valid_cell[i], col, QString::number(r[non_empty_cells-i-1], f, prec));
+        }
+    }
+	emit modifiedData(this, colName(col));
+	emit modifiedWindow(this);
 }
 
 void Table::sortColAsc()
 {
-	//changed from version 0.5.9
-	int rows=worksheet->rowCount();
-	QVarLengthArray<int> aux(rows);
-	QVarLengthArray<double> r(rows);
-	int i,n=0;
-	for (i = 0; i <rows; i++)
-	{
-		QString theText=this->text(i,selectedCol);
-		if (!theText.isEmpty())
-		{
-			n++;
-			aux[i]=i;
-			r[i]=theText.toDouble();
-		}
-		else
-		{
-			aux[i]=-1;
-			r[i]=0.0;
-		}
-	}
-
-	if (!n)
-		return;
-
-	gsl_vector * v = gsl_vector_alloc (n);
-	int index;
-	n=0;
-	for (i = 0; i <rows; i++)
-	{
-		index=aux[i];
-		if (index>=0)
-		{
-			gsl_vector_set (v, n, r[index]);
-			n++;
-		}	
-	}
-
-	int prec;
-	char f;
-	columnNumericFormat(selectedCol, f, prec);
-
-	gsl_sort_vector (v);
-	n=0;
-	for (i=0;i<rows;i++)
-	{
-		index=aux[i];
-		if (index>=0)
-		{
-			setText(i,selectedCol,QString::number(gsl_vector_get (v, n), f, prec)); 
-			n++;
-		}
-	}
-	gsl_vector_free (v);
-	QString name=colName(selectedCol);
-	emit modifiedData(this, name);
-	emit modifiedWindow(this);
+	sortColumn(worksheet->currentColumn ());
 }
 
 void Table::sortColDesc()
-{//changed from version 0.5.9
-	int rows=worksheet->rowCount();
-	QVarLengthArray<int> aux(rows);
-	QVarLengthArray<double> r(rows);
-	int i,n=0;
-	for (i = 0; i <rows; i++)
-	{
-		QString theText=this->text(i,selectedCol);
-		if (!theText.isEmpty())
-		{
-			n++;
-			aux[i]=i;
-			r[i]=theText.toDouble();
-		}
-		else
-		{
-			aux[i]=-1;
-			r[i]=0.0;
-		}
-	}
-
-	if (!n)
-		return;
-
-	gsl_vector * v = gsl_vector_alloc (n);
-	int index;
-	n=0;
-	for (i = 0; i <rows; i++)
-	{
-		index=aux[i];
-		if (index>=0)
-		{
-			gsl_vector_set (v, n, r[index]);
-			n++;
-		}	
-	}
-
-	gsl_sort_vector (v);
-
-	int prec;
-	char f;
-	columnNumericFormat(selectedCol, f, prec);
-	for (i=0;i<rows;i++)
-	{
-		index=aux[i];
-		if (index>=0)
-		{
-			n--;
-			setText(i,selectedCol,QString::number(gsl_vector_get (v, n), f, prec)); 
-		}
-	}
-	gsl_vector_free (v);
-	QString name=colName(selectedCol);
-	emit modifiedData(this, name);
-	emit modifiedWindow(this);
+{
+	sortColumn(worksheet->currentColumn(), 1);
 }
 
 int Table::tableRows()
@@ -2162,11 +2212,7 @@ void Table::plotL()
 	if (!valid2DPlot())
 		return;
 
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this, s,Graph::Line);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	emit plotCol(this, drawableColumnSelection(), Graph::Line);
 }
 
 void Table::plotP()
@@ -2174,11 +2220,7 @@ void Table::plotP()
 	if (!valid2DPlot())
 		return;
 
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this, s,Graph::Scatter);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	emit plotCol(this, drawableColumnSelection(), Graph::Scatter);
 }
 
 void Table::plotLP()
@@ -2186,11 +2228,7 @@ void Table::plotLP()
 	if (!valid2DPlot())
 		return;
 
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this, s, Graph::LineSymbols);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"),tr("Please select a Y column to plot!"));
+	emit plotCol(this, drawableColumnSelection(), Graph::LineSymbols);
 }
 
 void Table::plotVB()
@@ -2198,11 +2236,7 @@ void Table::plotVB()
 	if (!valid2DPlot())
 		return;
 
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this, s,Graph::VerticalBars);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	emit plotCol(this, drawableColumnSelection(), Graph::VerticalBars);
 }
 
 void Table::plotHB()
@@ -2210,11 +2244,7 @@ void Table::plotHB()
 	if (!valid2DPlot())
 		return;
 
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this, s,Graph::HorizontalBars);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	emit plotCol(this, drawableColumnSelection(), Graph::HorizontalBars);
 }
 
 void Table::plotArea()
@@ -2222,11 +2252,7 @@ void Table::plotArea()
 	if (!valid2DPlot())
 		return;
 
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this, s,Graph::Area);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	emit plotCol(this, drawableColumnSelection(), Graph::Area);
 }
 
 bool Table::noXColumn()
@@ -2271,11 +2297,7 @@ void Table::plotVerticalDropLines()
 	if (!valid2DPlot())
 		return;
 
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this,s,Graph::VerticalDropLines);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	emit plotCol(this, drawableColumnSelection(), Graph::VerticalDropLines);
 }
 
 void Table::plotSpline()
@@ -2283,11 +2305,7 @@ void Table::plotSpline()
 	if (!valid2DPlot())
 		return;
 
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this,s,Graph::Spline);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	emit plotCol(this, drawableColumnSelection(), Graph::Spline);
 }
 
 void Table::plotVertSteps()
@@ -2295,47 +2313,30 @@ void Table::plotVertSteps()
 	if (!valid2DPlot())
 		return;
 
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this, s, Graph::VerticalSteps);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	emit plotCol(this, drawableColumnSelection(), Graph::VerticalSteps);
 }
 
 void Table::plotHorSteps()
 {
 	if (!valid2DPlot())
 		return;
-
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this, s, Graph::HorizontalSteps);	
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	
+	emit plotCol(this, drawableColumnSelection(), Graph::HorizontalSteps);
 }
 
 void Table::plotHistogram()
 {
 	if (!valid2DPlot())
 		return;
-
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this,s,Graph::Histogram);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	
+	 emit plotCol(this, drawableColumnSelection(), Graph::Histogram);
 }
 
 void Table::plotBoxDiagram()
 {
 	if (!valid2DPlot())
 		return;
-
-	QStringList s=selectedYColumns();
-	if (int(s.count())>0)
-		emit plotCol(this, s, Graph::Box);
-	else
-		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+	emit plotCol(this, drawableColumnSelection(), Graph::Box);
 }
 
 void Table::plotVectXYXY()
@@ -2364,13 +2365,17 @@ void Table::plotVectXYAM()
 
 bool Table::valid2DPlot()
 {
-	if (worksheet->columnCount()<2)
+	if (!selectedYColumns().count())
+  	{
+  		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+  	    return false;
+  	}
+  	else if (worksheet->numCols()<2)
 	{
 		QMessageBox::critical(0,tr("QtiPlot - Error"),tr("You need at least two columns for this operation!"));
 		return false;
 	}
-
-	if (noXColumn())
+	else if (noXColumn())
 	{
 		QMessageBox::critical(0,tr("QtiPlot - Error"), tr("Please set a default X column for this table, first!"));
 		return false;
@@ -2453,17 +2458,18 @@ void Table::importMultipleASCIIFiles(const QString &fname, const QString &sep, i
 			t.readLine();
 
 		QString s = t.readLine();//read first line after the ignored ones
-		while ( !t.atEnd() ) 
+		while (!t.atEnd()) 
 		{
 			t.readLine(); 
 			rows++;
+			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 		}
 
 		if (simplifySpaces)
 			s = s.simplifyWhiteSpace();
 		else if (stripSpaces)
 			s = s.trimmed();
-		QStringList line = QStringList::split(sep, s, true);
+		QStringList line = s.split(sep);
 		cols = (int)line.count();
 
 		bool allNumbers = true;
@@ -2523,12 +2529,14 @@ void Table::importMultipleASCIIFiles(const QString &fname, const QString &sep, i
 			else if (stripSpaces)
 				s = s.trimmed();
 
-			line = QStringList::split(sep, s, false);	
+			line = s.split(sep, QString::SkipEmptyParts);	
 			int end = startCol+(int)line.count();
+			for (i=startCol; i<end; i++)
+  	        	col_label[i] = QString::null;
 			for (i=startCol; i<end; i++)
 			{
 				comments[i] = line[i-startCol];
-				s = line[i-startCol].remove(QRegExp("\\W")).replace("_","-");
+				s = line[i-startCol].replace("-","_").remove(QRegExp("\\W")).replace("_","-");
 				int n = col_label.count(s);
 				if(n)
 				{
@@ -2557,7 +2565,7 @@ void Table::importMultipleASCIIFiles(const QString &fname, const QString &sep, i
 					s = s.simplifyWhiteSpace();
 				else if (stripSpaces)
 					s = s.trimmed();
-				line = QStringList::split(sep, s, true);
+				line = s.split(sep);
 				for (int j=startCol; j<worksheet->columnCount(); j++)
 					setText(startRow + k, j, line[j-startCol]);
 			}
@@ -2573,7 +2581,7 @@ void Table::importMultipleASCIIFiles(const QString &fname, const QString &sep, i
 				s = s.simplifyWhiteSpace();
 			else if (stripSpaces)
 				s = s.trimmed();
-			line = QStringList::split(sep, s, true);
+			line = s.split(sep);
 			for (int j=startCol; j<worksheet->columnCount(); j++)
 				setText(i, j, line[j-startCol]);
 		}
@@ -2604,7 +2612,7 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 		QString s = t.readLine();//read first line after the ignored ones
 		while ( !t.atEnd() ) 
 		{
-			t.readLine(); 
+			t.readLine();
 			rows++;
 			qApp->processEvents(QEventLoop::ExcludeUserInput);
 		}
@@ -2614,7 +2622,7 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 		else if (stripSpaces)
 			s = s.trimmed();
 
-		QStringList line = QStringList::split(sep, s, true);
+		QStringList line = s.split(sep);
 		cols = (int)line.count();
 
 		bool allNumbers = true;
@@ -2674,11 +2682,14 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 				s = s.simplifyWhiteSpace();
 			else if (stripSpaces)
 				s = s.trimmed();
-			line = QStringList::split(sep, s, false);	
+			line = s.split(sep, QString::SkipEmptyParts);
+			for (i=0; i<(int)line.count(); i++)
+  	        	col_label[i] = QString::null;
+			
 			for (i=0; i<(int)line.count(); i++)
 			{
 				comments[i] = line[i];
-				s = line[i].remove(QRegExp("\\W")).replace("_","-");
+				s = line[i].replace("-","_").remove(QRegExp("\\W")).replace("_","-");
 				int n = col_label.count(s);
 				if(n)
 				{
@@ -2709,13 +2720,13 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 					s = s.simplifyWhiteSpace();
 				else if (stripSpaces)
 					s = s.trimmed();
-				line = QStringList::split(sep, s, true);
+				line = s.split(sep);
 				int lc = (int)line.count();
 				if (lc > cols) {
 					addColumns(lc - cols);
 					cols = lc;
 				}
-				for (int j=0; j<cols; j++)
+				for (int j=0; j<cols && j<lc; j++)
 					setText(start + k, j, line[j]);
 			}
 			progress.setValue(i);
@@ -2730,13 +2741,13 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 				s = s.simplifyWhiteSpace();
 			else if (stripSpaces)
 				s = s.trimmed();
-			line = QStringList::split(sep, s, true);
+			line = s.split(sep);
 			int lc = (int)line.count();
 			if (lc > cols) {
 				addColumns(lc - cols);
 				cols = lc;
 			}
-			for (int j=0; j<cols; j++)
+			for (int j=0; j<cols && j<lc; j++)
 				setText(i, j, line[j]);
 		}
 		progress.setValue(steps+1);
@@ -2878,11 +2889,8 @@ bool Table::exportToASCIIFile(const QString& fname, const QString& separator,
 
 void Table::contextMenuEvent(QContextMenuEvent *e)
 {
-	int w = 0;
-	for (int i = 0; i < worksheet->columnCount(); i++)
-		w += worksheet->columnWidth (i);
-
-	if (e->pos().x() > w)
+	QRect r = worksheet->horizontalHeader()->sectionRect(worksheet->numCols()-1);
+	if (e->pos().x() > r.right() + worksheet->verticalHeader()->width())
 		emit showContextMenu(false);
 	else
 		emit showContextMenu(true);
@@ -2940,6 +2948,7 @@ void Table::mousePressEvent ( QMouseEvent * e )
 			if (cur.topRow() != 0 || cur.bottomRow() != (worksheet->rowCount() - 1))
 				//select only full columns
 				worksheet->setRangeSelected(cur, false);						
+			return false;
 		}
 		else
 			worksheet->clearSelection();
@@ -3048,7 +3057,7 @@ void Table::restore(QString& spec)
 	t.readLine();	//table geometry useless info when restoring
 	s = t.readLine();//header line
 
-	list = QStringList::split ("\t",s,true);
+	list = s.split("\t");
 	list.remove(list.first());
 
 	if (!col_label.isEmpty() && col_label != list)
@@ -3077,13 +3086,13 @@ void Table::restore(QString& spec)
 	}			
 
 	s= t.readLine();	//colWidth line
-	list = QStringList::split ("\t", s,true);
+	list = s.split("\t");
 	list.remove(list.first());
 	if (columnWidths() != list)
 		setColWidths(list);
 
 	s = t.readLine();
-	list = QStringList::split ("\t", s,true);
+	list = s.split("\t");
 	if (list[0] == "com") //commands line
 	{
 		list.remove(list.first());
@@ -3105,13 +3114,13 @@ void Table::restore(QString& spec)
 	}
 
 	s= t.readLine();	//colType line ?
-	list = QStringList::split ("\t", s,true);
+	list = s.split("\t");
 	if (s.contains ("ColType",true))
 	{
 		list.remove(list.first());	
 		for (i=0; i<int(list.count()); i++)
 		{
-			QStringList l= QStringList::split(";", list[i], true);
+			QStringList l= list[i].split(";");
 			colTypes[i] = l[0].toInt();
 
 			if ((int)l.count() > 0)
@@ -3126,7 +3135,7 @@ void Table::restore(QString& spec)
 	}
 
 	s= t.readLine();	//comments line ?
-	list = QStringList::split ("\t", s,true);
+	list = s.split("\t");
 	if (s.contains ("Comments",true))
 	{
 		list.remove(list.first());
@@ -3134,7 +3143,7 @@ void Table::restore(QString& spec)
 	}
 
 	s= t.readLine();
-	list = QStringList::split ("\t", s,true);
+	list = s.split("\t");
 	if (s.contains ("WindowLabel",true))
 	{
 		setWindowLabel(list[1]);
@@ -3147,7 +3156,7 @@ void Table::restore(QString& spec)
 
 	while (!t.atEnd () && s != "</data>")
 	{
-		list = QStringList::split ("\t", s,true);
+		list = s.split("\t");
 
 		row = list[0].toInt();
 		for (j=0; j<c; j++)
@@ -3388,112 +3397,6 @@ void Table::convlv(double *sig, int n, double *dres, int m, int sign)
 	gsl_fft_halfcomplex_radix2_inverse(sig,1,n);// inverse fft
 }
 
-void Table::fft(double sampling, const QString& realColName, const QString& imagColName,
-		bool forward, bool normalize, bool order)
-{
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-	int i, i2;
-	int rows = worksheet->rowCount();
-	int n = 2*rows;
-	double *dat = new double[n];
-	double *amp = new double[rows];
-	double *x = new double[rows];
-
-	gsl_fft_complex_wavetable *wavetable = gsl_fft_complex_wavetable_alloc (rows);
-	gsl_fft_complex_workspace *workspace = gsl_fft_complex_workspace_alloc (rows);
-
-	int realCol = colIndex(realColName);
-	int imCol = -1;
-	if (!imagColName.isEmpty())
-		imCol = colIndex(imagColName);
-
-	if(dat && amp && x && wavetable && workspace) 
-	{// zero-pad data array
-		memset( dat, 0, n* sizeof( double ) );
-		for(i=0;i<rows;i++) 
-		{
-			i2 = 2*i;
-			dat[i2]=text(i, realCol).toDouble();
-			if (imCol >= 0)
-				dat[i2+1]=text(i, imCol).toDouble();
-		}
-	}
-	else
-	{
-		QMessageBox::warning(0,"QtiPlot", tr("Could not allocate memory, operation aborted!"));
-		return;
-	}
-
-	double df = 1.0/(double)(rows*sampling);//frequency sampling
-	double aMax = 0.0;//max amplitude
-	QString label, theText;
-	if(forward)
-	{
-		label="ForwardFFT-"+QString(this->name());
-		theText= tr("Frequency");
-		gsl_fft_complex_forward (dat, 1, rows, wavetable, workspace);
-	}
-	else
-	{
-		label="InverseFFT-"+QString(this->name());
-		theText= tr("Time");
-		gsl_fft_complex_inverse (dat, 1, rows, wavetable, workspace);
-	}
-
-	gsl_fft_complex_wavetable_free (wavetable);
-	gsl_fft_complex_workspace_free (workspace);
-
-	if (order)
-	{
-		int n2 = rows/2;
-		for(i=0;i<rows;i++)
-		{
-			x[i] = (i-n2)*df;
-			int j = i + rows;
-			double aux = dat[i];
-			dat[i] = dat[j];
-			dat[j] = aux;
-		}
-	}
-	else
-	{
-		for(i=0;i<rows;i++)
-			x[i] = i*df;
-	}
-
-	for(i=0;i<rows;i++)
-	{
-		i2 = 2*i;
-		double real_part = dat[i2];
-		double im_part = dat[i2+1];
-		double a = sqrt(real_part*real_part + im_part*im_part);
-		amp[i]= a;
-		if (a > aMax)
-			aMax = a;
-	}
-	theText+="\t"+tr("Real")+"\t"+tr("Imaginary")+"\t"+tr("Amplitude")+"\t"+tr("Angle")+"\n";
-	for (i=0; i<rows; i++)
-	{
-		i2 = 2*i;
-		theText+=QString::number(x[i])+"\t";
-		theText+=QString::number(dat[i2])+"\t";
-		theText+=QString::number(dat[i2+1])+"\t";
-		if (normalize)
-			theText+=QString::number(amp[i]/aMax)+"\t";
-		else
-			theText+=QString::number(amp[i])+"\t";
-		theText+=QString::number(atan(dat[i2+1]/dat[i2]))+"\n";
-	}
-
-	delete[] x;
-	delete[] amp;
-	delete[] dat;
-
-	emit createTable(label, rows, 5, theText);	
-	QApplication::restoreOverrideCursor();	
-}
-
 void Table::copy(Table *m)
 {
 	for (int i=0; i<worksheet->rowCount(); i++)
@@ -3535,10 +3438,10 @@ void Table::restore(const QStringList& lst)
 	l.remove(l.first());
 	loadHeader(l);
 
-	setColWidths(QStringList::split ("\t",(*i).right((*i).length()-9), false ));
+	setColWidths((*i).right((*i).length()-9).split("\t", QString::SkipEmptyParts));
 	i++;
 
-	l = QStringList::split ("\t", *i++, true);
+	l = (*i++).split("\t");
 	if (l[0] == "com")
 	{
 		l.remove(l.first());
@@ -3559,11 +3462,11 @@ void Table::restore(const QStringList& lst)
 		i++;
 	}
 
-	l = QStringList::split ("\t", *i++, true);
+	l = (*i++).split("\t");
 	l.remove(l.first());
 	setColumnTypes(l);
 
-	l = QStringList::split ("\t", *i++, true);
+	l = (*i++).split("\t");
 	l.remove(l.first());
 	setColComments(l);
 }
@@ -3576,8 +3479,15 @@ void Table::notifyChanges()
 	emit modifiedWindow(this);
 }
 
-Table::~Table()
+void Table::clear()
 {
+	for (int i=0; i<worksheet->numCols(); i++)
+	{
+		for (int j=0; j<worksheet->numRows(); j++)
+			worksheet->setText(j, i, QString::null);
+		emit modifiedData(this, colName(i));
+	}
+	emit modifiedWindow(this);
 }
 
 bool Table::isRowSelected(int row, bool full) 
@@ -3640,3 +3550,6 @@ bool Table::isColumnSelected(int col, bool full)
 	return false;
 }
 
+Table::~Table()
+{
+}

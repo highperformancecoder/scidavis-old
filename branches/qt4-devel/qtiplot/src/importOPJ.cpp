@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Origin project import class
                            
  ***************************************************************************/
@@ -34,7 +34,7 @@
 ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
 		mw(app)
 {	
-OPJFile opj((char *)filename.latin1());
+OPJFile opj((const char *)filename.latin1());
 parse_error = opj.Parse();
 importTables(opj);
 }

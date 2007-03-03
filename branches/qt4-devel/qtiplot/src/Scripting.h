@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, 
                            Tilman Hoener zu Siederdissen,
                            Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Scripting abstraction layer
                            
  ***************************************************************************/
@@ -33,7 +33,6 @@
 
 #include <QVariant>
 #include <QString>
-#include <q3valuelist.h>
 #include <QStringList>
 #include <QObject>
 #include <QStringList>
@@ -219,7 +218,7 @@ class ScriptingChangeEvent : public QEvent
 //! Interface for maintaining a reference to the current ScriptingEnv
   /**
    * Every class that wants to use a ScriptingEnv should subclass this one and
-   * implement slot customEvent(QEvent*) that forwards any
+   * implement slot customEvent(QEvent*) such that it forwards any
    * ScriptingChangeEvents to scripted::scriptingChangeEvent.
    */
 class scripted

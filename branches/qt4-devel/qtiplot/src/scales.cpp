@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Extension to QwtScaleDraw
                            
  ***************************************************************************/
@@ -286,7 +286,7 @@ double val = transformValue(value);
 QString txt;
 txt.setNum (val, 'e', prec);
 
-QStringList list = QStringList::split ( "e", txt, FALSE );
+QStringList list = txt.split( "e", QString::SkipEmptyParts);
 if (list[0].toDouble() == 0.0)
 	return QString("0");
 	

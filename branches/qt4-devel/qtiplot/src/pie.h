@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Pie plot class
                            
  ***************************************************************************/
@@ -33,7 +33,7 @@
 class QwtPieCurve: public QwtPlotCurve
 {
 public:
-	QwtPieCurve(QwtPlot *parent, const char *name=0);
+	QwtPieCurve(const char *name=0);
 
 	virtual void draw(QPainter *painter,const QwtScaleMap &xMap, 
 		const QwtScaleMap &yMap, int from, int to) const;

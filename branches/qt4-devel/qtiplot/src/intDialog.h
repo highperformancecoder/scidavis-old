@@ -2,8 +2,8 @@
     File                 : intDialog.h
     Project              : QtiPlot
     --------------------------------------------------------------------
-    Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Copyright            : (C) 2006 by Ion Vasilief, Vasileios Gkanis, Tilman Hoener zu Siederdissen
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Integration options dialog
                            
  ***************************************************************************/
@@ -45,7 +45,7 @@ class IntDialog : public QDialog
 
 public:
     IntDialog( QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0 );
-    ~IntDialog();
+    ~IntDialog(){};
 
     QPushButton* buttonOk;
 	QPushButton* buttonCancel;

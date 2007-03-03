@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Plot associations dialog
                            
  ***************************************************************************/
@@ -28,7 +28,8 @@
  ***************************************************************************/
 #include "associationsDialog.h"
 #include "worksheet.h"
-
+#include "FunctionCurve.h"
+	
 #include <QLabel>
 #include <QListWidget>
 #include <QPushButton>
@@ -45,6 +46,7 @@ AssociationsDialog::AssociationsDialog( QWidget* parent,  const char* name, bool
 		setName( "AssociationsDialog" );
 
     setWindowTitle( tr( "QtiPlot - Plot Associations" ) );
+	setSizeGripEnabled(true);
 	setFocus();
 	
 	QVBoxLayout *vl = new QVBoxLayout();
@@ -74,11 +76,12 @@ AssociationsDialog::AssociationsDialog( QWidget* parent,  const char* name, bool
 	btnOK->setDefault( true );
     btnCancel = new QPushButton( tr( "&Cancel" ) );
     
-    QHBoxLayout *hbox2 = new QHBoxLayout (); 	
+    QHBoxLayout *hbox2 = new QHBoxLayout (); 
+	hbox2->addStretch();	
     hbox2->addWidget(btnApply);
     hbox2->addWidget(btnOK);
     hbox2->addWidget(btnCancel);
-    
+    vl->addStretch();
     vl->addLayout(hbox2);
 	setLayout(vl);
 	
@@ -110,8 +113,8 @@ if (t && graph)
 QString AssociationsDialog::plotAssociation(const QString& text)
 {
 QString s = text;
-QStringList lst= QStringList::split(": ", s, false);
-QStringList cols = QStringList::split(",", lst[1], false);
+QStringList lst= s.split(": ", QString::SkipEmptyParts);
+QStringList cols = lst[1].split(",", QString::SkipEmptyParts);
 
 QString tableName = lst[0];
 s = tableName + "_" + cols[0];
@@ -124,13 +127,17 @@ void AssociationsDialog::initTablesList(QWidgetList* lst, int curve)
 {
 tables = lst;
 active_table = 0;
+	
+if (curve < 0 || curve >= (int)associations->count())
+	curve = 0;
+	
 associations->setCurrentRow (curve);
 }
 
 Table * AssociationsDialog::findTable(int index)
 {
 QString text = associations->item(index)->text();
-QStringList lst= QStringList::split(":", text, false);
+QStringList lst= text.split(":", QString::SkipEmptyParts);
 for (int i=0; i < (int)tables->count(); i++ )
 	{
 	if (tables->at(i)->name() == lst[0])
@@ -181,8 +188,8 @@ updateColumnTypes();
 void AssociationsDialog::updateColumnTypes()
 {
 QString text = associations->currentItem()->text();
-QStringList lst= QStringList::split(": ", text, false);
-QStringList cols = QStringList::split(",", lst[1], false);
+QStringList lst= text.split(": ", QString::SkipEmptyParts);
+QStringList cols = lst[1].split(",", QString::SkipEmptyParts);
 
 QString xColName = cols[0].remove("(X)");
 QString yColName = cols[1].remove("(Y)");
@@ -289,16 +296,20 @@ for (int i=0;i<(int)names.count();i++)
 	{
 	QString s=names[i];
 	int pos=s.find("_",0);
-	if (pos>0)
+	const QwtPlotItem *c = (QwtPlotItem *)graph->curve(i);
+  	if (!c || c->rtti() == FunctionCurve::RTTI)
+  		continue;
+	
+	if (pos>0 && c->rtti() == QwtPlotItem::Rtti_PlotCurve)
 		{
 		QString table=s.left(pos);	
 		QString cols=s.right(s.length()-pos-1);			
 		newNames<<table+": "+cols.remove(table+"_",true);
 		}
-	else
+	else if (c->rtti() != QwtPlotItem::Rtti_PlotSpectrogram)
 		newNames<<s;
 	}
-associations->insertItems(0, newNames);
+associations->addItems(newNames);
 associations->setMaximumHeight((names.count()+1)*associations->visualItemRect(associations->item(0)).height());
 plotAssociationsList = newNames;
 }
@@ -307,8 +318,8 @@ void AssociationsDialog::updatePlotAssociation(int row, int col)
 {
 int index = associations->currentRow();
 QString text = associations->currentItem()->text();
-QStringList lst= QStringList::split(": ", text, false);
-QStringList cols = QStringList::split(",", lst[1], false);
+QStringList lst= text.split(": ", QString::SkipEmptyParts);
+QStringList cols = lst[1].split(",", QString::SkipEmptyParts);
 
 if (col == 1)
 	{
@@ -356,7 +367,7 @@ for (int i=0; i<(int)plotAssociationsList.count(); i++)
 	QString as = plotAssociationsList[i];
 	if (as.contains(old_as) && (as.contains("(xErr)") || as.contains("(yErr)")))
 		{
-		QStringList ls = QStringList::split(",", as, false);
+		QStringList ls = as.split(",", QString::SkipEmptyParts);
 		as = text + "," + ls[2];
 		plotAssociationsList[i] = as;
 		}

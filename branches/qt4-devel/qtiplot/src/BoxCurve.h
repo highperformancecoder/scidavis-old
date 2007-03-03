@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Box curve
                            
  ***************************************************************************/
@@ -39,7 +39,7 @@ class BoxCurve: public QwtPlotCurve
 public:
 	enum BoxStyle{NoBox, Rect, Diamond, WindBox, Notch};
 	enum Range{None, SD, SE, r25_75, r10_90, r5_95, r1_99, MinMax, UserDef};
-	BoxCurve(QwtPlot *parent, const char *name=0);
+	BoxCurve(const char *name=0);
 
 	void copy(const BoxCurve *b);
 
@@ -93,7 +93,7 @@ private:
 class QwtSingleArrayData: public QwtData
 {
 public:
-    QwtSingleArrayData(const double x, QwtArray<double> y, size_t size)
+    QwtSingleArrayData(const double x, QwtArray<double> y, size_t)
 	{
 		d_y = y;
 		d_x = x;
@@ -111,4 +111,3 @@ private:
 };
 
 #endif
-

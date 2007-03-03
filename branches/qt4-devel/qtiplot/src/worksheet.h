@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, 
                            Tilman Hoener zu Siederdissen,
                            Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Table worksheet class
                            
  ***************************************************************************/
@@ -48,7 +48,12 @@ class QEvent;
 
 class ScriptingEnv;
 
-//! Table worksheet class
+/*!\brief MDI window providing a spreadsheet table with column logic.
+ *
+ * \section future Future Plans
+ * Port to the Model/View approach used in Qt4 and get rid of the Qt3Support dependancy.
+ * [ assigned to thzs ]
+ */
 class Table: public MyWidget, public scripted
 {
     Q_OBJECT
@@ -119,7 +124,8 @@ public slots:
 	void plotVectXYAM();
 	void plotBoxDiagram();
 	
-	//3D plots
+	//! \name 3D Plots
+	//@{
 	void plot3DRibbon();
 	void plot3DScatter();
 	void plot3DTrajectory();
@@ -127,20 +133,24 @@ public slots:
 	
 	bool valid2DPlot();
 	bool valid3DPlot();
+	//@}v
 	
 	void print();
 	
+	//! \name Event Handlers 
+	//@{
 	
 	//! Handles the behavior when a header section is double clicked
 	bool headerDoubleClickedHandler(int logicalIndex);
 
-	// event handlers 
 	void contextMenuEvent(QContextMenuEvent *e);
 	void customEvent( QCustomEvent* e);
  	void mouseMoveEvent( QMouseEvent * e);
 	void mousePressEvent( QMouseEvent * e);
-
-	// column operations 
+	//@}v
+	
+	//! \name Column Operations 
+	//@{
 	void removeCol();
 	void removeCol(const QStringList& list);
 	void clearCol();
@@ -148,26 +158,56 @@ public slots:
 	void insertCols(int start, int count);
 	void addCol(PlotDesignation pd = Y);
 	void addColumns(int c);
+	//@}
 	
-	//sorting
+	//! \name Sorting
+	//@{
+	/*!\brief Sort the current column in ascending order.
+	 * \sa sortColDesc(), sortColumn()
+	 */
 	void sortColAsc();
+	/*!\brief Sort the current column in descending order.
+	 * \sa sortColAsc(), sortColumn()
+	 */
 	void sortColDesc();
+	/*!\brief Sort the specified column.
+	 * \param col the column to be sorted
+	 * \param order 0 means ascending, anything else means descending
+	 */
+	void sortColumn(int col = -1, int order = 0);
+	/*!\brief Display a dialog with some options for sorting all columns.
+	 *
+	 * The sorting itself is done using sort(int,int,const QString&).
+	 */
 	void sortTableDialog();
-	void sortTable(int type, int order, const QString& leadCol);
-	void sortColumns(int type, int order, const QString& leadCol);
-	void sortColumns(const QStringList&s, int type, int order, const QString& leadCol);
+	//! Sort all columns as in sortColumns(const QStringList&,int,int,const QString&).
+	void sort(int type = 0, int order  = 0, const QString& leadCol = QString());
+	//! Sort selected columns as in sortColumns(const QStringList&,int,int,const QString&).
+	void sortColumns(int type = 0, int order = 0, const QString& leadCol = QString());
+	/*!\brief Sort the specified columns.
+	 * \param cols the columns to be sorted
+	 * \param type 0 means sort individually (as in sortColumn()), anything else means together
+	 * \param order 0 means ascending, anything else means descending
+	 * \param leadCol for sorting together, the column which determines the permutation
+	 */
+	void sortColumns(const QStringList& cols, int type = 0, int order = 0, const QString& leadCol = QString());
+	/*!\brief Display a dialog with some options for sorting the selected columns.
+	 *
+	 * The sorting itself is done using sortColumns(int,int,const QString&).
+	 */
 	void sortColumnsDialog();
+	//@}
 	
-	//normalization
+	//! \name Normalization
+	//@{
 	void normalizeCol(int col=-1);
 	void normalizeSelection();
-	void normalizeTable();
+	void normalize();
+	//@}
 
 	void correlate();
 	void convolute(int sign);
 	void convlv(double *sig, int n, double *dres, int m, int sign);
-	void fft(double sampling, const QString& realColName, const QString& imagColName,
-			bool forward, bool normalize, bool order);
 
 	QVarLengthArray<double> col(int ycol);
 	int firstXCol();
@@ -179,35 +219,40 @@ public slots:
 	int atRow(int col, double value);
 
 	QStringList getCommands(){return commands;};
-	//!Slot: Set all column formulae.
+	//! Set all column formulae.
 	void setCommands(const QStringList& com);
-	//!Slot: Set all column formulae.
+	//! Set all column formulae.
 	void setCommands(const QString& com);
-	//!Slot: Set formula for column col.
+	//! Set formula for column col.
 	void setCommand(int col, const QString com);
-	//!Slot: Compute specified cells from column formula.
+	//! Compute specified cells from column formula.
 	bool calculate(int col, int startRow, int endRow);
-	//!Slot: Compute selected cells from column formulae; use current cell if there's no selection.
+	//! Compute selected cells from column formulae; use current cell if there's no selection.
 	bool calculate();
 	
-	// row operations 
+	//! \name Row Operations 
+	//@{
 	void deleteSelectedRows();
 	void insertRow();
+	//@}
 
-	// selection operations 
+	//! Selection Operations 
+	//@{
 	void cutSelection();
 	void copySelection();
 	void clearSelection();
 	void pasteSelection();
 	void selectAllTable();
 	void deselect();
-	bool singleRowSelected();
-	bool multipleRowsSelected();
+	void clear();
+	//@}
 
 	void init(int rows, int cols);
 	QStringList selectedColumns();
 	QStringList selectedYColumns();
+	QStringList selectedErrColumns();
 	QStringList selectedYLabels();
+	QStringList drawableColumnSelection();
 	QStringList YColumns();
 	int selectedColsNumber();
 	void changeColName(const QString& newText);
@@ -243,9 +288,9 @@ public slots:
 	void setColumnTypes(QList<int> ctl){colTypes = ctl;};
 	void setColumnTypes(const QStringList& ctl);
 
-	//!Slot: Use a copy of column col when accessing it via text() until forgetSavedCol() is called.
+	//! Use a copy of column col when accessing it via text() until forgetSavedCol() is called.
 	void saveColToMemory(int col);
-	//!Slot: Use spreadsheat data again for all columns after saveColToMemory(int) was called.
+	//! Use spreadsheat data again for all columns after saveColToMemory(int) was called.
 	void forgetSavedCol();
 
 	QString columnFormat(int col){return col_format[col];};
@@ -269,7 +314,8 @@ public slots:
 	void importMultipleASCIIFiles(const QString &fname, const QString &sep, int ignoredLines,
 					bool renameCols, bool stripSpaces, bool simplifySpaces, int importFileAs);
 
-	//saving
+	//! \name Saving and Restoring
+	//@{
 	virtual QString saveToString(const QString& geometry);
 	QString saveHeader();
 	QString saveComments();
@@ -277,7 +323,6 @@ public slots:
 	QString saveColumnWidths();
 	QString saveColumnTypes();
 
-	//restoring
 	void setSpecifications(const QString& s);
 	QString& getSpecifications();
 	void restore(QString& spec);
@@ -285,14 +330,15 @@ public slots:
 	void setNewSpecifications();
 	
 	/*!
-	*used for restoring the table old caption stored in specifications string
-	*/ 
+	 *used for restoring the table old caption stored in specifications string
+	 */ 
 	QString oldCaption();
 	
 	/*!
-	*used for restoring the table caption stored in new specifications string
-	*/ 
+	 *used for restoring the table caption stored in new specifications string
+	 */ 
 	QString newCaption();
+	//@}
 
 	void setBackgroundColor(const QColor& col);
 	void setTextColor(const QColor& col);
@@ -315,7 +361,7 @@ public slots:
 	//! This slot notifies the main application that the table has been modified. Triggers the update of 2D plots.
 	void notifyChanges();
 
-	//!Slot: notifies the main application that the width of a table column has been modified by the user
+	//! Notifies the main application that the width of a table column has been modified by the user.
 	void colWidthModified(int, int, int);
 				
 signals:

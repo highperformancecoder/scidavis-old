@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Export ASCII dialog
                            
  ***************************************************************************/
@@ -77,8 +77,6 @@ private slots:
 	void enableTableName(bool ok);
 
 protected slots:
-	//! Set all string in the current language
-    virtual void languageChange();
 	//! Accept changes
 	void accept();
 	//! Display help

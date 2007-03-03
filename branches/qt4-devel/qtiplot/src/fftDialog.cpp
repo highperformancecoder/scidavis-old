@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Fast Fourier transform options dialog
                            
  ***************************************************************************/
@@ -33,6 +33,7 @@
 #include "multilayer.h"
 #include "worksheet.h"
 #include "plot.h"
+#include "FFT.h"
 
 #include <QRadioButton>
 #include <QGroupBox>
@@ -106,6 +107,7 @@ FFTDialog::FFTDialog(int type, QWidget* parent, const char* name, bool modal, Qt
     vbox1->addWidget(gb2);
     vbox1->addWidget(boxNormalize);
     vbox1->addWidget(boxOrder);
+	vbox1->addStretch();  
     
     buttonOK = new QPushButton(tr("&OK"));
 	buttonOK->setDefault( true );
@@ -116,10 +118,9 @@ FFTDialog::FFTDialog(int type, QWidget* parent, const char* name, bool modal, Qt
     vbox2->addWidget(buttonCancel); 
     vbox2->addStretch();  
     
-    QHBoxLayout *hbox2 = new QHBoxLayout(); 
+    QHBoxLayout *hbox2 = new QHBoxLayout(this); 
     hbox2->addLayout(vbox1);
     hbox2->addLayout(vbox2);
-    setLayout(hbox2);
     
 	setFocusProxy(boxName);
 
@@ -127,10 +128,6 @@ FFTDialog::FFTDialog(int type, QWidget* parent, const char* name, bool modal, Qt
 	connect( boxName, SIGNAL( activated(int) ), this, SLOT( activateCurve(int) ) );
 	connect( buttonOK, SIGNAL( clicked() ), this, SLOT( accept() ) );
 	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-}
-
-FFTDialog::~FFTDialog()
-{
 }
 
 void FFTDialog::accept()
@@ -149,17 +146,13 @@ void FFTDialog::accept()
 		return;
 	}		
 
-	ApplicationWindow *app = (ApplicationWindow *)this->parent();
+	ApplicationWindow *app = (ApplicationWindow *)parent();
+    FFT *fft;
 	if (graph)
 	{
-		long key = graph->curveKey(boxName->currentItem());
-		if (key < 0)
-			return;
-
-		graph->fft(key, forwardBtn->isChecked(), sampling, 
-				boxNormalize->isChecked(), boxOrder->isChecked());
+        fft = new FFT(app, graph, boxName->currentText());
 	}
-	else
+	else if (d_table)
 	{
 		if (boxReal->currentText().isEmpty())
 		{
@@ -167,46 +160,21 @@ void FFTDialog::accept()
 			boxReal->setFocus();
 			return;
 		}
-		else
-			d_table->fft(sampling, boxReal->currentText(), boxImaginary->currentText(),
-					forwardBtn->isChecked(), boxNormalize->isChecked(), boxOrder->isChecked());
+        fft = new FFT(app, d_table, boxReal->currentText(), boxImaginary->currentText());
 	}
-
-	Table* w = app->table(app->tableWindows.last());
-	QStringList list;
-	list<<QString(w->name())+"_Amplitude";
-
-	MultiLayer* d= app->multilayerPlot(w,list,0);
-	if (!d)
-	{
-		close();
-		return;
-	}
-
-	Graph* g = d->activeGraph();
-	if ( g )
-	{
-		g->removeLegend();
-
-		Plot* plot = g->plotWidget();
-		plot->setTitle(QString());
-		if (forwardBtn->isChecked())
-			plot->setAxisTitle(QwtPlot::xBottom, tr("Frequency")+" (Hz)");
-		else
-			plot->setAxisTitle(QwtPlot::xBottom, tr("Time")+" (s)");
-
-		plot->setAxisTitle(QwtPlot::yLeft, tr("Amplitude"));
-		plot->replot();
-	}
-
-	d->showMaximized();
+    fft->setInverseFFT(backwardBtn->isChecked());
+    fft->setSampling(sampling);
+    fft->normalizeAmplitudes(boxNormalize->isChecked());
+    fft->shiftFrequencies(boxOrder->isChecked());
+    fft->run();
+    delete fft;
 	close();
 }
 
 void FFTDialog::setGraph(Graph *g)
 {
 	graph = g;
-	boxName->insertStringList (g->curvesList(),-1);
+	boxName->insertStringList (g->curvesList());
 	activateCurve(0);
 };
 
@@ -215,7 +183,7 @@ void FFTDialog::activateCurve(int index)
 	if (graph)
 	{
 		QwtPlotCurve *c = graph->curve(index);
-		if (!c)
+		if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
 			return;
 
 		boxSampling->setText(QString::number(c->x(1) - c->x(0)));

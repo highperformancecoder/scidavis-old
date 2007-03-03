@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : 2 File dialogs: Import multiple ASCII/Export image
                            
  ***************************************************************************/
@@ -85,24 +85,21 @@ ImageExportDialog::ImageExportDialog( QWidget * parent, Qt::WFlags flags)
 
 	QList<QByteArray> list = QImageWriter::supportedImageFormats();
 	list<<"EPS";
-	list<<"SVG";
-	qSort(list);
+    list<<"PDF";
+	//list<<"SVG";
 
 	QStringList filters, selectedFilter;
     for(int i=0 ; i<list.count() ; i++)
 	{
 		filters << "*."+list[i].toLower();
 	}
-	setFilters( filters );
+    filters.sort();
+	setFilters(filters);
 	setFileMode( QFileDialog::AnyFile );
 
-	boxOptions = new QCheckBox();
-	boxOptions->setText( "Show export &options" );
-#ifdef Q_OS_WIN // Windows systems
-	boxOptions->setChecked( true );			
-#else
+	boxOptions = new QCheckBox(tr("Show export &options"));
 	boxOptions->setChecked( false );
-#endif
+
 	// FIXME: The following code may not work anymore
 	// if the internal layout of QFileDialog changes
 	QSpacerItem * si1 = new QSpacerItem( 20, 20 );
@@ -119,4 +116,3 @@ void ImageExportDialog::showOptionsBox ( const QString & filter)
 	else
 		boxOptions->show();
 }
-

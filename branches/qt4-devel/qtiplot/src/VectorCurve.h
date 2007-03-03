@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Vector curve class
                            
  ***************************************************************************/
@@ -41,7 +41,7 @@ class VectorCurve: public QwtPlotCurve
 public:
 	enum VectorStyle{XYXY, XYAM};
 
-	VectorCurve(VectorStyle style, QwtPlot *parent, const char *name=0);
+	VectorCurve(VectorStyle style, const char *name=0);
 	~VectorCurve();
 
 	enum Position{Tail, Middle, Head};
@@ -57,7 +57,7 @@ public:
 		const QwtScaleMap &yMap, int from, int to) const;
 	
 	void drawArrowHead(QPainter *p, int xs, int ys, int xe, int ye) const;
-	double teta(int x0, int y0, int x1, int y1) const;
+	double theta(int x0, int y0, int x1, int y1) const;
 
 	void setVectorEnd(const QwtArray<double>&x, const QwtArray<double>&y);
 
@@ -90,4 +90,3 @@ protected:
 };
 
 #endif
-

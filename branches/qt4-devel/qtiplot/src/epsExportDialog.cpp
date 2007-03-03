@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : EPS export dialog
                            
  ***************************************************************************/
@@ -59,7 +59,7 @@ EpsExportDialog::EpsExportDialog(const QString& fileName, QWidget* parent, Qt::W
 	leftLayout->addWidget( new QLabel(tr("Resolution (DPI)")), 2, 0 );
 	boxResolution= new QSpinBox();
 	boxResolution->setRange(0, 1000);
-	boxResolution->setValue(84);
+	boxResolution->setValue(QPrinter().resolution());
 	leftLayout->addWidget( boxResolution, 2, 1 );
 
 	boxColor= new QCheckBox();
@@ -92,7 +92,7 @@ EpsExportDialog::EpsExportDialog(const QString& fileName, QWidget* parent, Qt::W
 
 void EpsExportDialog::languageChange()
 {
-	setWindowTitle( tr( "QtiPlot - EPS Export options" ) );
+	setWindowTitle( tr( "QtiPlot - Export options" ) );
 	buttonOk->setText( tr( "&OK" ) );
 	buttonCancel->setText( tr( "&Cancel" ) );
 
@@ -144,7 +144,7 @@ void EpsExportDialog::accept()
 
 	QPrinter::PageSize size = pageSize();
 
-	emit exportToEPS(f_name, boxResolution->value(), o, size, col);
+	emit exportVector(f_name, boxResolution->value(), o, size, col);
 	close();
 }
 

@@ -5,8 +5,8 @@
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
 					  Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net,
-                           knut.franke@gmx.de
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
+                           knut.franke*gmx.de
     Description          : Notes window class
                            
  ***************************************************************************/
@@ -90,7 +90,7 @@ void Note::restore(const QStringList& data)
   QStringList::ConstIterator line = data.begin();
   QStringList fields;
 
-  fields = QStringList::split("\t", *line, true);
+  fields = (*line).split("\t");
   if (fields[0] == "AutoExec")
   {
     setAutoexec(fields[1] == "1");
@@ -99,7 +99,7 @@ void Note::restore(const QStringList& data)
 
   if (*line == "<content>") line++;
   while (line != data.end() && *line != "</content>")
-    te->append((*line++)+"\n");
+    te->append((*line++));
 }
 
 void Note::setAutoexec(bool exec)
@@ -110,4 +110,3 @@ void Note::setAutoexec(bool exec)
   else
     te->unsetPalette();
 }
-

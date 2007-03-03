@@ -372,9 +372,9 @@ int gauss_multi_peak_f (const gsl_vector * x, void *params, gsl_vector * f)
 	double *sigma = ((struct FitData *)params)->sigma;
 
 	size_t peaks = (p-1)/3;
-	double *a = vector (0, peaks-1);
-	double *xc = vector (0, peaks-1);
-	double *w2 = vector (0, peaks-1);
+	double *a = new double[peaks]; 
+	double *xc = new double[peaks];
+	double *w2 = new double[peaks];
 	double offset = gsl_vector_get (x, p-1);
 
 	size_t i,j;
@@ -395,9 +395,9 @@ int gauss_multi_peak_f (const gsl_vector * x, void *params, gsl_vector * f)
 		}
 		gsl_vector_set(f, i, (res + offset - Y[i])/sigma[i]);
 	}
-	free_vector(a, 0, peaks-1);
-	free_vector(xc, 0, peaks-1);
-	free_vector(w2, 0, peaks-1);
+	delete[] a;
+	delete[] xc;
+	delete[] w2;
 	return GSL_SUCCESS;
 }
 
@@ -410,9 +410,9 @@ double gauss_multi_peak_d (const gsl_vector * x, void *params)
 	double *sigma = ((struct FitData *)params)->sigma;
 
 	size_t peaks = (p-1)/3;
-	double *a = vector (0, peaks-1);
-	double *xc = vector (0, peaks-1);
-	double *w2 = vector (0, peaks-1);
+	double *a = new double[peaks]; 
+	double *xc = new double[peaks];
+	double *w2 = new double[peaks];
 	double offset = gsl_vector_get (x, p-1);
 
 	size_t i,j;
@@ -436,9 +436,9 @@ double gauss_multi_peak_d (const gsl_vector * x, void *params)
 		t = (res+offset-Y[i])/sigma[i];
 		val += t*t;
 	}
-	free_vector(a, 0, peaks-1);
-	free_vector(xc, 0, peaks-1);
-	free_vector(w2, 0, peaks-1);
+	delete[] a;
+	delete[] xc;
+	delete[] w2;
 	return val;
 }
 
@@ -450,9 +450,9 @@ int gauss_multi_peak_df (const gsl_vector * x, void *params, gsl_matrix * J)
 	double *sigma = ((struct FitData *)params)->sigma;
 
 	size_t peaks = (p-1)/3;
-	double *a = vector (0, peaks-1);
-	double *xc = vector (0, peaks-1);
-	double *w = vector (0, peaks-1);
+	double *a = new double[peaks]; 
+	double *xc = new double[peaks];
+	double *w = new double[peaks];
 
 	size_t i,j;
 	for (i = 0; i<peaks; i++)
@@ -476,9 +476,9 @@ int gauss_multi_peak_df (const gsl_vector * x, void *params, gsl_matrix * J)
 		}
 		gsl_matrix_set (J, i, p-1, 1.0/s);
 	}
-	free_vector(a, 0, peaks-1);
-	free_vector(xc, 0, peaks-1);
-	free_vector(w, 0, peaks-1);
+	delete[] a;
+	delete[] xc;
+	delete[] w;
 	return GSL_SUCCESS;
 }
 
@@ -498,9 +498,9 @@ int lorentz_multi_peak_f (const gsl_vector * x, void *params, gsl_vector * f)
 	double *sigma = ((struct FitData *)params)->sigma;
 
 	size_t peaks = (p-1)/3;
-	double *a = vector (0, peaks-1);
-	double *xc = vector (0, peaks-1);
-	double *w = vector (0, peaks-1);
+	double *a = new double[peaks]; 
+	double *xc = new double[peaks];
+	double *w = new double[peaks];
 	double offset = gsl_vector_get (x, p-1);
 
 	size_t i,j;
@@ -520,9 +520,9 @@ int lorentz_multi_peak_f (const gsl_vector * x, void *params, gsl_vector * f)
 		}
 		gsl_vector_set(f, i, (res + offset - Y[i])/sigma[i]);
 	}
-	free_vector(a, 0, peaks-1);
-	free_vector(xc, 0, peaks-1);
-	free_vector(w, 0, peaks-1);
+	delete[] a;
+	delete[] xc;
+	delete[] w;
 	return GSL_SUCCESS;
 }
 
@@ -535,9 +535,9 @@ double lorentz_multi_peak_d (const gsl_vector * x, void *params)
 	double *sigma = ((struct FitData *)params)->sigma;
 
 	size_t peaks = (p-1)/3;
-	double *a = vector (0, peaks-1);
-	double *xc = vector (0, peaks-1);
-	double *w = vector (0, peaks-1);
+	double *a = new double[peaks]; 
+	double *xc = new double[peaks];
+	double *w = new double[peaks];
 	double offset = gsl_vector_get (x, p-1);
 
 	size_t i,j;
@@ -559,9 +559,9 @@ double lorentz_multi_peak_d (const gsl_vector * x, void *params)
 		t=(res+offset-Y[i])/sigma[i];
 		val+=t*t;
 	}
-	free_vector(a, 0, peaks-1);
-	free_vector(xc, 0, peaks-1);
-	free_vector(w, 0, peaks-1);
+	delete[] a;
+	delete[] xc;
+	delete[] w;
 	return GSL_SUCCESS;
 }
 
@@ -573,9 +573,9 @@ int lorentz_multi_peak_df (const gsl_vector * x, void *params, gsl_matrix * J)
 	double *sigma = ((struct FitData *)params)->sigma;
 
 	size_t peaks = (p-1)/3;
-	double *a = vector (0, peaks-1);
-	double *xc = vector (0, peaks-1);
-	double *w = vector (0, peaks-1);
+	double *a = new double[peaks]; 
+	double *xc = new double[peaks];
+	double *w = new double[peaks];
 
 	size_t i,j;
 	for (i = 0; i<peaks; i++)
@@ -600,9 +600,9 @@ int lorentz_multi_peak_df (const gsl_vector * x, void *params, gsl_matrix * J)
 		}
 		gsl_matrix_set (J, i, p-1, 1.0/s);
 	}
-	free_vector(a, 0, peaks-1);
-	free_vector(xc, 0, peaks-1);
-	free_vector(w, 0, peaks-1);
+	delete[] a;
+	delete[] xc;
+	delete[] w;
 	return GSL_SUCCESS;
 }
 
@@ -624,7 +624,7 @@ int user_f(const gsl_vector * x, void *params, gsl_vector * f)
 	const char *function = ((struct FitData *) params)->function;
 
 	QString names = (QString)((struct FitData *) params)->names;
-	QStringList parNames= QStringList::split(",",names,FALSE);
+	QStringList parNames= names.split(",", QString::SkipEmptyParts);
 
 	MyParser parser;
 	try
@@ -632,7 +632,7 @@ int user_f(const gsl_vector * x, void *params, gsl_vector * f)
 		double *parameters = new double[p];
 		double xvar;
 		parser.DefineVar("x", &xvar);
-		for (int i=0;i<(int)p;i++)
+		for (int i=0; i<(int)p; i++)
 		{
 			parameters[i]=gsl_vector_get(x,i);
 			parser.DefineVar(parNames[i].ascii(), &parameters[i]);
@@ -647,7 +647,8 @@ int user_f(const gsl_vector * x, void *params, gsl_vector * f)
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(0,"QtiPlot - user_f",QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(0,"QtiPlot - Input function error",QString::fromStdString(e.GetMsg()));
+		return GSL_EINVAL;
 	}
 	return GSL_SUCCESS;
 }
@@ -662,7 +663,7 @@ double user_d(const gsl_vector * x, void *params)
 
 	const char *function = ((struct FitData *) params)->function;
 	QString names = (QString)((struct FitData *) params)->names;
-	QStringList parNames= QStringList::split(",",names,FALSE);
+	QStringList parNames= names.split(",", QString::SkipEmptyParts);
 
 	double val=0;
 	MyParser parser;
@@ -671,7 +672,7 @@ double user_d(const gsl_vector * x, void *params)
 		double *parameters = new double[p];
 		double xvar;
 		parser.DefineVar("x", &xvar);
-		for (int i=0;i<(int)p;i++)
+		for (int i=0; i<(int)p; i++)
 		{
 			parameters[i]=gsl_vector_get(x,i);
 			parser.DefineVar(parNames[i].ascii(), &parameters[i]);
@@ -687,10 +688,12 @@ double user_d(const gsl_vector * x, void *params)
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(0,"QtiPlot - user_f",QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(0,"QtiPlot - Input function error",QString::fromStdString(e.GetMsg()));
+		return GSL_EINVAL;
 	}
 	return val;
 }
+
 int user_df(const gsl_vector *x, void *params, gsl_matrix *J)
 {
 	size_t n = ((struct FitData *)params)->n;
@@ -700,7 +703,7 @@ int user_df(const gsl_vector *x, void *params, gsl_matrix *J)
 
 	const char *function = ((struct FitData *) params)->function;
 	QString names = (QString)((struct FitData *) params)->names;
-	QStringList parNames= QStringList::split(",",names,false);
+	QStringList parNames= names.split(",", QString::SkipEmptyParts);
 
 	try
 	{
@@ -709,7 +712,7 @@ int user_df(const gsl_vector *x, void *params, gsl_matrix *J)
 		double xvar; 
 		parser.DefineVar("x", &xvar);
 
-		for (int k=0;k<(int)p;k++)
+		for (int k=0; k<(int)p; k++)
 		{
 			param[k]=gsl_vector_get(x,k);
 			parser.DefineVar(parNames[k].ascii(), &param[k]);
@@ -725,9 +728,9 @@ int user_df(const gsl_vector *x, void *params, gsl_matrix *J)
 		}
 		delete[] param;
 	}
-	catch(mu::ParserError &e)
+	catch(mu::ParserError &)
 	{
-		QMessageBox::critical(0,"QtiPlot - Input function error",QString::fromStdString(e.GetMsg()));
+		return GSL_EINVAL;
 	}
 	return GSL_SUCCESS;
 }

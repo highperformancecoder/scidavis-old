@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Function dialog
                            
  ***************************************************************************/
@@ -29,22 +29,55 @@
 #ifndef FUNCTIONDIALOG_H
 #define FUNCTIONDIALOG_H
 
-#include "functionDialogui.h"
-#include <qvariant.h>
-#include <qdialog.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include "graph.h"
 
-class Graph;
-	
+class QStackedWidget;
+class QWidget;
+class QLineEdit;
+class QComboBox;
+class QPushButton;
+class QSpinBox;
+class QLabel;
+class QTextEdit;
+
 //! Function dialog
-class FunctionDialog : public FunctionDialogUi
+class FunctionDialog : public QDialog
 {
     Q_OBJECT
 
 public:
     FunctionDialog( QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0 );
     ~FunctionDialog();
+
+protected:
+	QComboBox* boxXFunction;
+    QComboBox* boxYFunction;  
+    QComboBox* boxPolarRadius;
+    QComboBox* boxPolarTheta;
+    QComboBox* boxType;
+    QLabel* textFunction;
+    QLineEdit* boxFrom;
+    QLineEdit* boxTo;
+	QLineEdit* boxParameter;
+    QLineEdit* boxParFrom;
+    QLineEdit* boxParTo;
+	QLineEdit* boxPolarParameter;
+    QLineEdit* boxPolarFrom;
+    QLineEdit* boxPolarTo;
+    QPushButton* buttonClear;
+    QPushButton* buttonCancel;
+    QPushButton* buttonOk;
+	QSpinBox* boxPoints;
+	QSpinBox* boxParPoints;
+	QSpinBox* boxPolarPoints;
+	QStackedWidget* optionStack;
+    QTextEdit* boxFunction;
+	QWidget* functionPage;
+	QWidget* polarPage;
+	QWidget* parametricPage;
+	
+protected slots:
+	void raiseWidget(int index);
 
 public slots:
 	void accept();
@@ -53,12 +86,11 @@ public slots:
 	void acceptPolar();
 	void setCurveToModify(Graph *g, int curve);
 	void insertParamFunctionsList(const QStringList& xList, const QStringList& yList);
-	void insertPolarFunctionsList(const QStringList& rList, const QStringList& tetaList);
+	void insertPolarFunctionsList(const QStringList& rList, const QStringList& thetaList);
 	void clearList();
 	void setGraph(Graph *g){graph = g;};
 
 signals:
-	void newFunctionPlot(int, QStringList &, const QString &, QList<double> &, int);
 	void clearParamFunctionsList();
 	void clearPolarFunctionsList();
 

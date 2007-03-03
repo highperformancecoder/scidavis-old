@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Pie plot dialog
                            
  ***************************************************************************/
@@ -28,26 +28,19 @@
  ***************************************************************************/
 #ifndef PIEDIALOG_H
 #define PIEDIALOG_H
-
-#include <qvariant.h>
-#include <qdialog.h>
-#include <q3memarray.h>
-#include <qstring.h>
-//Added by qt3to4:
-#include <QLabel>
  
+#include <QDialog>
+
 class QCheckBox;
 class QComboBox;
 class QLabel;
 class QLineEdit;
-class Q3ListBox;
-class Q3ListBoxItem;
+class QListWidget;
+class QListWidgetItem;
 class QPushButton;
-class QRadioButton;
 class QSpinBox;
 class QTabWidget;
 class QWidget;
-class QStringList;
 class ColorBox;
 class PatternBox;
 class ColorButton;
@@ -71,8 +64,7 @@ public:
     QPushButton* buttonCancel;
     QTabWidget* generalDialog;
 	QWidget* frame, *pieOptions;
-
-    Q3ListBox *curvesList;
+    QListWidget *curvesList;
     QSpinBox *boxFrameWidth;
 	QSpinBox *boxRadius, *boxMargin;
 	QCheckBox *boxFramed, *boxAll;
@@ -81,7 +73,7 @@ public:
     PatternBox *boxPattern;
 	QSpinBox *boxLineWidth, *boxBorderWidth;
 
-	ColorButton *boxBackgroundColor, *boxBorderColor;
+	ColorButton *boxBackgroundColor, *boxBorderColor, *boxCanvasColor;
 
 public slots:
 	void accept();
@@ -90,16 +82,11 @@ public slots:
 	void setFramed(bool ok);
 	void setFrameColor(const QColor& c);
 	void setFrameWidth(int w);
-	void insertCurveName(const QString& name);
-	void showPopupMenu(Q3ListBoxItem *it, const QPoint &point);
 	void removeCurve();
-	void setBorderColor(const QColor& c);
-	void setBorderWidth(int width);
-	void setPieSize(int size);
-	void setFirstColor(int c);
 
 	void pickBorderColor();
 	void pickBackgroundColor();
+	void pickCanvasColor();
 	void changeMargin(int width);
 	void updateBorder(int width);
 
@@ -108,7 +95,6 @@ public slots:
 	Qt::PenStyle style();
 	void setBorderStyle(const Qt::PenStyle& style);
 	Qt::BrushStyle pattern();
-	void setPattern(const Qt::BrushStyle& style);
 	void showWorksheet();
 	void showGeneralPage();
 
@@ -120,6 +106,9 @@ signals:
 
 private:
 	MultiLayer *mPlot;
+
+protected:
+    void contextMenuEvent(QContextMenuEvent *e);
 };
 
 #endif // PIEDIALOG_H

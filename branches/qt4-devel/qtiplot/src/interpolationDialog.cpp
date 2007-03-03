@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Interpolation options dialog
                            
  ***************************************************************************/
@@ -30,6 +30,7 @@
 #include "graph.h"
 #include "parser.h"
 #include "colorBox.h"
+#include "Interpolation.h"
 
 #include <QGroupBox>
 #include <QSpinBox>
@@ -47,7 +48,8 @@ InterpolationDialog::InterpolationDialog( QWidget* parent, const char* name, boo
 		setName( "InterpolationDialog" );
 	setWindowTitle(tr("QtiPlot - Interpolation Options"));
 	
-	QGridLayout *gl1 = new QGridLayout();
+    QGroupBox *gb1 = new QGroupBox();
+	QGridLayout *gl1 = new QGridLayout(gb1);
 	gl1->addWidget(new QLabel(tr("Make curve from")), 0, 0);
 
 	boxName = new QComboBox();
@@ -81,31 +83,24 @@ InterpolationDialog::InterpolationDialog( QWidget* parent, const char* name, boo
 	boxColor = new ColorBox(false);
 	boxColor->setColor(QColor(Qt::red));
 	gl1->addWidget(boxColor, 5, 1);
-	
-	QGroupBox *gb1 = new QGroupBox();
-    gb1->setLayout(gl1);
-	
+	gl1->setRowStretch(6, 1);
+
 	buttonFit = new QPushButton(tr( "&Make" ));
     buttonFit->setDefault( true );
     buttonCancel = new QPushButton(tr( "&Close" ));
 	
-	QHBoxLayout *hbox1 = new QHBoxLayout(); 
-    hbox1->addWidget(buttonFit);
-    hbox1->addWidget(buttonCancel);
-    
-    QVBoxLayout *vl = new QVBoxLayout();
- 	vl->addWidget(gb1);
-	vl->addLayout(hbox1);	
-	setLayout(vl);
+	QVBoxLayout *vl = new QVBoxLayout();
+ 	vl->addWidget(buttonFit);
+	vl->addWidget(buttonCancel);
+    vl->addStretch();
+
+    QHBoxLayout *hb = new QHBoxLayout(this);
+    hb->addWidget(gb1);
+    hb->addLayout(vl);
    
-    // signals and slots connections
 	connect( boxName, SIGNAL( activated(int) ), this, SLOT( activateCurve(int) ) );
 	connect( buttonFit, SIGNAL( clicked() ), this, SLOT( interpolate() ) );
     connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-}
-
-InterpolationDialog::~InterpolationDialog()
-{
 }
 
 void InterpolationDialog::interpolate()
@@ -125,8 +120,8 @@ double from, to;
 try
 	{
 	MyParser parser;
-	parser.SetExpr(boxStart->text().ascii());
-	from=parser.Eval();
+	parser.SetExpr(boxStart->text().replace(",", ".").ascii());
+	from = parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
@@ -138,8 +133,8 @@ catch(mu::ParserError &e)
 try
 	{
 	MyParser parser;	
-	parser.SetExpr(boxEnd->text().ascii());
-	to=parser.Eval();
+	parser.SetExpr(boxEnd->text().replace(",", ".").ascii());
+	to = parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
@@ -148,21 +143,20 @@ catch(mu::ParserError &e)
 	return;
 	}	
 
-if (from>=to)
+if (from >= to)
 	{
-	QMessageBox::critical(this, tr("QtiPlot - Input error"),
-				tr("Please enter x limits that satisfy: from < to!"));
+	QMessageBox::critical(this, tr("QtiPlot - Input error"), tr("Please enter x limits that satisfy: from < to!"));
 	boxEnd->setFocus();
 	return;
 	}
-	
-int start, end;
-int spline = boxMethod->currentItem();
-QwtPlotCurve *c = graph->getFitLimits(boxName->currentText(), from, to, spline+3, start, end);
-if (!c)
-	return;
 
-graph->interpolate(c, spline, start, end, boxPoints->value(), boxColor->currentItem());
+
+Interpolation *i = new Interpolation((ApplicationWindow *)this->parent(), graph, boxName->currentText(),
+                                      from, to, boxMethod->currentIndex());
+i->setOutputPoints(boxPoints->value());
+i->setColor(boxColor->currentIndex());
+i->run();
+delete i;
 }
 
 void InterpolationDialog::setGraph(Graph *g)
@@ -210,4 +204,3 @@ double end = graph->selectedXEndValue();
 boxStart->setText(QString::number(QMIN(start, end), 'g', 15));
 boxEnd->setText(QString::number(QMAX(start, end), 'g', 15));
 }
-

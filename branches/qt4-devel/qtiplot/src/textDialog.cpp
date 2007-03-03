@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Text label/axis label options dialog
                            
  ***************************************************************************/
@@ -51,15 +51,11 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 
 	textType = type;
 
-	// initialize selectedFont with something useful to
-	// prevent error if setFont is not called before show()
-	selectedFont = this->font();
-	
 	// top groupbox
 	groupBox1 = new QGroupBox(QString());
 
 	// grid layout for top groupbox
-	QGridLayout * topLayout = new QGridLayout();
+	QGridLayout * topLayout = new QGridLayout(groupBox1);
 	// add text color label
 	topLayout->addWidget(new QLabel(tr("Text Color")), 0, 0);
 
@@ -78,13 +74,11 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 	topLayout->addWidget(new QLabel(tr("Font")), 1, 0);
 
 	buttonFont = new QPushButton(tr( "&Font" ));
-	buttonFont->setAutoDefault( true );
 
 	// add font button
 	topLayout->addWidget(buttonFont, 1, 1);
 
 	buttonApply = new QPushButton(tr( "&Apply" ));
-	buttonApply->setAutoDefault( true );
 	buttonApply->setDefault( true );
 	
 	// add apply button
@@ -113,7 +107,6 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 	}
 
 	buttonCancel = new QPushButton( tr( "&Cancel" ) );
-	buttonCancel->setAutoDefault( true );	
 	// add cancel button
 	topLayout->addWidget( buttonCancel, 2, 3 );
 
@@ -125,17 +118,15 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 		// add background button
 		topLayout->addWidget( backgroundBtn, 3, 1 );	
 
-		connect(backgroundBtn, SIGNAL(clicked()), this, SLOT(pickBackgroundColor()));
+		connect( backgroundBtn, SIGNAL(clicked()), this, SLOT(pickBackgroundColor()));
 
 		buttonDefault = new QPushButton( tr( "Set As &Default" ) );
 		topLayout->addWidget( buttonDefault, 3, 3 );
-		connect(buttonDefault, SIGNAL(clicked()), this, SLOT(setDefaultValues()));
+		connect( buttonDefault, SIGNAL(clicked()), this, SLOT(setDefaultValues()));
 	}
 
 	// align the OK, Apply, and Cancel buttons to the right
 	topLayout->setColumnStretch(2, 1);
-	
-	groupBox1->setLayout( topLayout );
 
 	/* TODO: Angle feature not implemented, yet
 	 * caution: This code is still the old Qt3 code
@@ -157,6 +148,10 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 	   */
 
 	textEditBox = new QTextEdit();
+	textEditBox->setTextFormat(Qt::PlainText);
+    QFont ftemp = QFont();
+	ftemp.setPointSize(12);
+	textEditBox->setFont(ftemp);
 
 	formatButtons =  new TextFormatButtons(textEditBox);
 	formatButtons->toggleCurveButton(textType == TextDialog::TextMarker);
@@ -170,7 +165,6 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WFlags fl )
 	mainLayout->addWidget(formatButtons);
 	mainLayout->addWidget(textEditBox);
 	setLayout( mainLayout );
-
 
 	// signals and slots connections
 	connect( colorBtn, SIGNAL( clicked() ), this, SLOT( pickTextColor() ) );
@@ -252,13 +246,13 @@ void TextDialog::setAlignment(int align)
 void TextDialog::customFont()
 {
 	bool okF;
-	QFont fnt = QFontDialog::getFont( &okF,selectedFont,this);
+	QFont fnt = QFontDialog::getFont( &okF, selectedFont, this);
 	if (okF && fnt != selectedFont)
 	{
 		selectedFont = fnt;
-		buttonFont->setFont(fnt);
-		fnt.setPointSize(12);
-		textEditBox->setFont(fnt);
+		QFont font = fnt;
+		font.setPointSize(12);
+		textEditBox->setFont(font);
 	}
 	emit changeFont (fnt);
 }
@@ -331,10 +325,9 @@ QFont TextDialog::font()
 void TextDialog::setFont(const QFont & fnt)
 {
 	selectedFont = fnt;
-	buttonFont->setFont(fnt);
-	QFont ftemp = fnt;
-	ftemp.setPointSize(12);
-	textEditBox->setFont(ftemp);
+	QFont font = fnt;
+	font.setPointSize(12);
+	textEditBox->setFont(font);
 }
 	
 TextDialog::~TextDialog()

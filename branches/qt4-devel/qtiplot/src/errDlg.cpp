@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Add error bars dialog
                            
  ***************************************************************************/
@@ -152,7 +152,7 @@ void ErrDialog::setSrcTables(QWidgetList* tables)
 		tableNamesBox->insertItem((*i)->name());
 
 	if (!nameLabel->currentText().contains("="))
-		tableNamesBox->setCurrentIndex(tableNamesBox->findText(QStringList::split("_",nameLabel->currentText())[0]));
+		tableNamesBox->setCurrentIndex(tableNamesBox->findText(nameLabel->currentText().split("_", QString::SkipEmptyParts)[0]));
 	selectSrcTable(tableNamesBox->currentIndex());
 }
 

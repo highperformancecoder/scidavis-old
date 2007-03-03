@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Notes window class
                            
  ***************************************************************************/
@@ -35,7 +35,11 @@
 
 class ScriptingEnv;
 
-//! Notes window class
+/*!\brief Notes window class.
+ *
+ * \section future Future Plans
+ * - Search and replace
+ */
 class Note: public MyWidget
 {
     Q_OBJECT

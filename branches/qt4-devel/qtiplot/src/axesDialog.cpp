@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : General plot options dialog
                            
  ***************************************************************************/
@@ -36,38 +36,26 @@
 #include "multilayer.h"
 #include "textformatbuttons.h"
 
-#include <qcolordialog.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qradiobutton.h>
-#include <qspinbox.h>
-#include <qtabwidget.h>
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qimage.h>
-#include <qpixmap.h>
-#include <qmessagebox.h>
-#include <qinputdialog.h>
-#include <qfont.h>
-#include <qfontdialog.h> 
-#include <qregexp.h> 
-#include <qwidget.h>
+#include <QColorDialog>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QTabWidget>
+#include <QLayout>
+#include <QMessageBox>
+#include <QFontDialog>
+#include <QDate>
+#include <QList>
+#include <QListWidget>
+#include <QVector>
+#include <QGroupBox>
 
 #include <qwt_plot.h>
 #include <qwt_scale_widget.h>
 #include <qwt_scale_engine.h>
-
-#include <QDate>
-#include <QList>
-#include <QVector>
-#include <QListWidget>
-#include <QGroupBox>
-#include <QTextEdit>
 
 /* XPM */
 static const char* const bottom_scl_xpm[] = {
@@ -1205,7 +1193,8 @@ AxesDialog::AxesDialog( QWidget* parent, Qt::WFlags fl )
 		initFramePage();
 		
 		QHBoxLayout * bottomButtons = new QHBoxLayout();
-		
+		bottomButtons->addStretch();
+
 		buttonApply = new QPushButton();
 		buttonApply->setText( tr( "&Apply" ) );
 		bottomButtons->addWidget( buttonApply );
@@ -1226,12 +1215,13 @@ AxesDialog::AxesDialog( QWidget* parent, Qt::WFlags fl )
 		for (int i=0;i<4;i++)
 			titles<<"";
 
-				setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-
-	// signals and slots connections
-	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
-	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-	connect( buttonApply, SIGNAL( clicked() ), this, SLOT(updatePlot() ) );
+		 lastPage = scalesPage;
+		
+		connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
+		connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+		connect( buttonApply, SIGNAL( clicked() ), this, SLOT(updatePlot() ) );
+		connect( generalDialog, SIGNAL( currentChanged ( QWidget * ) ),
+  	             this, SLOT(pageChanged ( QWidget * ) ) );
 }
 
 void AxesDialog::initScalesPage()
@@ -1318,23 +1308,23 @@ void AxesDialog::initScalesPage()
 		for(i=0 ; i<axesList->count() ; i++)
 			if( fm.width(axesList->item(i)->text()) > width)
 				width = fm.width(axesList->item(i)->text());
-					axesList->setMaximumWidth( axesList->iconSize().width() + width + 50 );
-					// resize the list to the maximum width
-					axesList->resize(axesList->maximumWidth(),axesList->height());
 					
-					QHBoxLayout* mainLayout = new QHBoxLayout(scalesPage);
-					mainLayout->addWidget(axesList);
-					mainLayout->addWidget(middleBox);
-					mainLayout->addWidget(rightBox);
+		axesList->setMaximumWidth( axesList->iconSize().width() + width + 50 );
+		// resize the list to the maximum width
+		axesList->resize(axesList->maximumWidth(),axesList->height());
 					
-					generalDialog->addTab( scalesPage, tr( "Scale" ) );
+		QHBoxLayout* mainLayout = new QHBoxLayout(scalesPage);
+		mainLayout->addWidget(axesList);
+		mainLayout->addWidget(middleBox);
+		mainLayout->addWidget(rightBox);
 					
-					//slots connections
-					connect(btnInvert,SIGNAL(clicked()), this, SLOT(updatePlot()));
-					connect(axesList,SIGNAL(currentRowChanged(int) ), this, SLOT(updateScale() ) );
-					connect(boxScaleType,SIGNAL(activated(int) ), this, SLOT(updatePlot() ) );
-					connect(btnStep,SIGNAL(clicked() ), this, SLOT(stepEnabled() ) );
-					connect(btnMajor,SIGNAL(clicked() ), this, SLOT(stepDisabled() ) );	
+		generalDialog->addTab(scalesPage, tr( "Scale" ));
+					
+		connect(btnInvert,SIGNAL(clicked()), this, SLOT(updatePlot()));
+		connect(axesList,SIGNAL(currentRowChanged(int)), this, SLOT(updateScale()));
+		connect(boxScaleType,SIGNAL(activated(int)), this, SLOT(updatePlot()));
+		connect(btnStep,SIGNAL(clicked()), this, SLOT(stepEnabled()));
+		connect(btnMajor,SIGNAL(clicked()), this, SLOT(stepDisabled()));	
 }
 
 void AxesDialog::initGridPage()
@@ -1614,14 +1604,18 @@ void AxesDialog::initAxesPage()
 		boxAngle->setSingleStep(5);
 		rightBoxLayout->addWidget( boxAngle, 5, 1 );
 		
+        rightBoxLayout->addWidget(new QLabel(tr( "Color" )), 6, 0);
+  	    boxAxisNumColor = new ColorButton();
+        rightBoxLayout->addWidget( boxAxisNumColor, 6, 1 );
+
 		boxShowFormula = new QCheckBox(tr( "For&mula" ));		
-		rightBoxLayout->addWidget( boxShowFormula, 6, 0 );
+		rightBoxLayout->addWidget( boxShowFormula, 7, 0 );
 		
 		boxFormula = new QTextEdit();
 		boxFormula->setTextFormat(Qt::PlainText);
 		boxFormula->setMaximumHeight(3*metrics.width(l->text()));
 		boxFormula->hide();
-		rightBoxLayout->addWidget( boxFormula, 6, 1 );
+		rightBoxLayout->addWidget( boxFormula, 7, 1 );
 		
 		QVBoxLayout * rightLayout = new QVBoxLayout();
 		rightLayout->addLayout( topLayout );
@@ -1634,10 +1628,8 @@ void AxesDialog::initAxesPage()
 		
 		generalDialog->addTab( axesPage, tr( "Axis" ) );
 		
-		//signals and slots connections
 		connect(buttonLabelFont, SIGNAL(clicked()), this, SLOT(customAxisLabelFont()));
 		
-		connect(generalDialog,SIGNAL(currentChanged ( QWidget * )), this, SLOT(tabPageChanged(QWidget *)));	
 		connect(axesTitlesList,SIGNAL(currentRowChanged(int)), this, SLOT(updateShowBox(int) ) );	
 		connect(axesTitlesList,SIGNAL(currentRowChanged(int)), this, SLOT(updateAxisColor(int)));
 		connect(axesTitlesList,SIGNAL(currentRowChanged(int)), this, SLOT(updateTitleBox(int) ) );
@@ -1647,10 +1639,11 @@ void AxesDialog::initAxesPage()
 		
 		connect(boxShowLabels,SIGNAL(clicked()), this, SLOT(updateTickLabelsList()));
 		connect(boxAxisColor, SIGNAL(clicked()), this, SLOT(pickAxisColor()));
+        connect(boxAxisNumColor, SIGNAL(clicked()), this, SLOT(pickAxisNumColor()));
 		connect(boxShowFormula, SIGNAL(clicked()), this, SLOT(showFormulaBox()));
 
-	connect(boxMajorTicksType, SIGNAL(activated(int)), this, SLOT(updateMajTicksType(int)));
-	connect(boxMinorTicksType, SIGNAL(activated(int)), this, SLOT(updateMinTicksType(int)));
+	    connect(boxMajorTicksType, SIGNAL(activated(int)), this, SLOT(updateMajTicksType(int)));
+	    connect(boxMinorTicksType, SIGNAL(activated(int)), this, SLOT(updateMinTicksType(int)));
 	
 		connect(boxShowAxis,SIGNAL(clicked()), this, SLOT(showAxis()));
 		connect(boxFormat, SIGNAL(activated(int) ), this, SLOT(setLabelsNumericFormat(int)));
@@ -1985,9 +1978,6 @@ void AxesDialog::pickCanvasColor()
 			g->replot();
 		}
 	}
-	
-		if (c == QColor(Qt::white) && mPlot->hasOverlapingLayers())
-			mPlot->updateTransparency();
 }
 
 void AxesDialog::pickBackgroundColor()
@@ -2020,7 +2010,6 @@ void AxesDialog::pickBackgroundColor()
 			g->replot();
 		}
 	}
-	mPlot->updateTransparency();
 }
 
 void AxesDialog::pickBorderColor()
@@ -2145,7 +2134,7 @@ void AxesDialog::showAxisFormatOptions(int format)
 						boxFormat->show();
 						boxFormat->setEditable(true);
 
-						QStringList lst = QStringList::split(";", formatInfo[axis], false);
+						QStringList lst = formatInfo[axis].split(";", QString::SkipEmptyParts);
 						if (!lst[1].isEmpty())
 						{
 							boxFormat->insertItem(lst[1]);
@@ -2174,7 +2163,7 @@ void AxesDialog::showAxisFormatOptions(int format)
 						boxFormat->show();
 						boxFormat->setEditable(true);
 
-						QStringList lst = QStringList::split(";", formatInfo[axis], false);
+						QStringList lst = formatInfo[axis].split(";", QString::SkipEmptyParts);
 						if (!lst[1].isEmpty())
 						{
 							boxFormat->insertItem(lst[1]);
@@ -2226,8 +2215,9 @@ void AxesDialog::setEnabledAxes(QVector<bool> ok)
 void AxesDialog::showAxis()
 {
 	bool ok=boxShowAxis->isChecked();
-		boxTitle->setEnabled(ok);
-		boxAxisColor->setEnabled(ok);
+	boxTitle->setEnabled(ok);
+	boxAxisColor->setEnabled(ok);
+    boxAxisNumColor->setEnabled(ok);
 	btnAxesFont->setEnabled(ok);
 	boxShowLabels->setEnabled(ok);
 	boxMajorTicksType->setEnabled(ok);
@@ -2280,17 +2270,18 @@ void AxesDialog::showAxis()
 	else 
 		boxAngle->setDisabled(true);
 			
-			bool userFormat=true;
-			if (boxFormat->currentItem() == 0)
-				userFormat=false;
-					boxPrecision->setEnabled(labels && ok && userFormat);
+	bool userFormat=true;
+    if (boxFormat->currentItem() == 0)
+	       userFormat=false;
+	boxPrecision->setEnabled(labels && ok && userFormat);
 					
-					QString formula =  boxFormula->text();
-					if (!boxShowFormula->isChecked())
-						formula = QString();
-							emit showAxis(axis,boxAxisType->currentItem(), boxColName->currentText(),ok, boxMajorTicksType->currentItem(), boxMinorTicksType->currentItem(),
-									boxShowLabels->isChecked(), QColor(axesColors[axis]), boxFormat->currentItem(), 
-									boxPrecision->value(), boxAngle->value(), boxBaseline->value(), formula);
+	QString formula =  boxFormula->text();
+	if (!boxShowFormula->isChecked())
+	   formula = QString();
+
+    emit showAxis(axis,boxAxisType->currentItem(), boxColName->currentText(),ok, boxMajorTicksType->currentItem(), boxMinorTicksType->currentItem(),
+                  boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentItem(),
+                  boxPrecision->value(), boxAngle->value(), boxBaseline->value(), formula, boxAxisNumColor->color());
 }
 
 void AxesDialog::updateShowBox(int axis)
@@ -2343,6 +2334,7 @@ void AxesDialog::updateShowBox(int axis)
 	bool ok=boxShowAxis->isChecked();
 	boxTitle->setEnabled(ok);
 	boxAxisColor->setEnabled(ok);
+    boxAxisNumColor->setEnabled(ok);
 	btnAxesFont->setEnabled(ok);
 	boxShowLabels->setEnabled(ok);
 	boxMajorTicksType->setEnabled(ok);
@@ -2408,23 +2400,6 @@ void AxesDialog::accept()
 {
 	if (updatePlot())
 		close();
-}
-
-void AxesDialog::tabPageChanged(QWidget *w)
-{
-	// FIXME: Why should the selection be reset on tab change?
-	/*
-	  axesTitlesList->clearSelection();
-	  axesList->clearSelection();
-	  axesGridList->clearSelection();
-	  
-	  if (w==(QWidget*)axesPage)
-	  axesTitlesList->setItemSelected(axesTitlesList->item(0),true);
-	  else if (w==(QWidget*)scalesPage)
-	  axesList->setItemSelected(axesList->item(0),true);
-	  else
-	  axesGridList->setItemSelected(axesGridList->item(0),true);
-	  */
 }
 
 void AxesDialog::majorGridEnabled(bool on)
@@ -2559,20 +2534,11 @@ GridOptions AxesDialog::getGridOptions()
 	return grid;
 }
 
-void AxesDialog::setAxesColors(const QStringList& colors)
-{
-	axesColors=colors;
-}
-
 void AxesDialog::updateAxisColor(int)
 {
-	int a=mapToQwtAxisId();
-		setAxisColor(QColor(axesColors[a]));
-}
-
-void AxesDialog::setAxisColor(const QColor& c)
-{
-	boxAxisColor->setColor(c);
+	int a = mapToQwtAxisId();
+    boxAxisColor->setColor(d_graph->axisColor(a));
+    boxAxisNumColor->setColor(d_graph->axisNumbersColor(a));
 }
 
 void AxesDialog::changeBaselineDist(int baseline)
@@ -2591,9 +2557,9 @@ void AxesDialog::changeBaselineDist(int baseline)
 		QString formula =  boxFormula->text();
 		if (!boxShowFormula->isChecked())
 			formula = QString();
-				emit showAxis(axis, boxAxisType->currentItem(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), boxMinorTicksType->currentItem(), 
-						boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentItem(), boxPrecision->value(), 
-						boxAngle->value(), baseline, formula);	
+emit showAxis(axis, boxAxisType->currentItem(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), boxMinorTicksType->currentItem(), 
+boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentItem(), boxPrecision->value(), 
+boxAngle->value(), baseline, formula, boxAxisNumColor->color());
 }
 
 bool AxesDialog::updatePlot()
@@ -2646,8 +2612,7 @@ bool AxesDialog::updatePlot()
 
 		      if (stp <=0)
 		      {
-			  QMessageBox::critical(0,tr("QtiPlot - Step input error"),
-					tr("Please enter a positive step value!"));
+			  QMessageBox::critical(0,tr("QtiPlot - Step input error"), tr("Please enter a positive step value!"));
 			  boxStep->setFocus();
 			  return false;	
 		      }
@@ -2682,7 +2647,7 @@ bool AxesDialog::updatePlot()
 	             }
           }
 
-		d_graph->setScale(a, start, end, stp, boxMajorValue->value(), boxMinorValue->value(), 
+		d_graph->setScale(a, start, end, stp, boxMajorValue->value(), boxMinorValue->value(),
                              boxScaleType->currentIndex(), btnInvert->isChecked());
 		d_graph->emitModified();
 	}
@@ -2727,7 +2692,7 @@ bool AxesDialog::updatePlot()
 		}
 		else if (format == Graph::Time || format == Graph::Date)
 		{
-			QStringList lst = QStringList::split(";", formatInfo[axis], false);			
+			QStringList lst = formatInfo[axis].split(";", QString::SkipEmptyParts);			
 			lst[1] = boxFormat->currentText();
 			formatInfo[axis]  = lst.join(";");
 		}
@@ -2756,7 +2721,7 @@ bool AxesDialog::updatePlot()
 			formula = QString();
 		emit showAxis(axis, format, formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), boxMinorTicksType->currentItem(), 
 				boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentItem(), 
-				boxPrecision->value(), boxAngle->value(), baseline, formula);	
+				boxPrecision->value(), boxAngle->value(), baseline, formula, boxAxisNumColor->color());
 	}
 	else if (generalDialog->currentWidget()==(QWidget*)frame)
 	{
@@ -2780,7 +2745,6 @@ bool AxesDialog::updatePlot()
 				g->setCanvasBackground(boxCanvasColor->color());
 			}
 		}
-		mPlot->updateTransparency();
 	}
 
 	return true;
@@ -2852,7 +2816,7 @@ boxStart->setText(QString::number(QMIN(scDiv->lBound(), scDiv->hBound())));
 boxEnd->setText(QString::number(QMAX(scDiv->lBound(), scDiv->hBound())));
 
 QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
-boxStep->setText(QString::number(fabs(lst[1]-lst[0])));
+boxStep->setText(QString::number(d_graph->axisStep(a)));
 boxMajorValue->setValue(lst.count());
 boxMinorValue->setValue(d_plot->axisMaxMinor(a));
 	
@@ -2871,7 +2835,7 @@ else if (axesType[a] == Graph::Date)
 	boxUnit->insertItem(tr("weeks"));			
 	}
 
-if (d_graph->userDefinedStep(a))
+if (d_graph->axisStep(a) != 0.0)
 	{
 	btnStep->setChecked(true);
 	boxStep->setEnabled(true);
@@ -2893,15 +2857,14 @@ else
 
 const QwtScaleEngine *sc_eng = d_plot->axisScaleEngine(a);
 btnInvert->setChecked(sc_eng->testAttribute(QwtScaleEngine::Inverted));
-
+	
 QwtScaleTransformation *tr = sc_eng->transformation();
 boxScaleType->setCurrentItem((int)tr->type());
 }
 
 void AxesDialog::updateTitleBox(int axis)
 {
-	QString s=titles[axis];
-		boxTitle->setText(s);
+	boxTitle->setText(titles[axis]);
 }
 
 void AxesDialog::setAxisTitles(QStringList t)
@@ -2918,25 +2881,42 @@ void AxesDialog::pickAxisColor()
 	boxAxisColor->setColor ( c ) ;
 
 	int axis=mapToQwtAxisId();
-	axesColors[axis]= c.name();
-		QString formula =  boxFormula->text();
-		if (!boxShowFormula->isChecked())
-			formula = QString();
-				emit showAxis(axis, boxAxisType->currentItem(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), boxMinorTicksType->currentItem(), 
-						boxShowLabels->isChecked(), c, boxFormat->currentItem(), boxPrecision->value(), 
-						boxAngle->value(), boxBaseline->value(), formula);		
+	QString formula =  boxFormula->text();
+	if (!boxShowFormula->isChecked())
+	   formula = QString();
+
+    emit showAxis(axis, boxAxisType->currentItem(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), boxMinorTicksType->currentItem(),
+                  boxShowLabels->isChecked(), c, boxFormat->currentItem(), boxPrecision->value(),
+                  boxAngle->value(), boxBaseline->value(), formula, boxAxisNumColor->color());
+}
+
+void AxesDialog::pickAxisNumColor()
+{
+  	QColor c = QColorDialog::getColor( boxAxisNumColor->color(), this);
+  	if ( !c.isValid() || c == boxAxisNumColor->color() )
+  	     return;
+
+  	boxAxisNumColor->setColor ( c ) ;
+  	int axis=mapToQwtAxisId();
+  	QString formula = boxFormula->text();
+  	if (!boxShowFormula->isChecked())
+  	     formula = QString::null;
+
+  	emit showAxis(axis, boxAxisType->currentItem(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), boxMinorTicksType->currentItem(),
+  	              boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentItem(), boxPrecision->value(),
+  	              boxAngle->value(), boxBaseline->value(), formula, c);
 }
 
 void AxesDialog::setAxisType(int)
 {
 	int a = mapToQwtAxisId();
-		int style = axesType[a];
+	int style = axesType[a];
 		
-		boxAxisType->setCurrentIndex(style);
-		showAxisFormatOptions(style);
+	boxAxisType->setCurrentIndex(style);
+	showAxisFormatOptions(style);
 		
-		if (style == 1)
-			boxColName->setCurrentText(formatInfo[a]);
+	if (style == 1)
+		boxColName->setCurrentText(formatInfo[a]);
 }
 
 void AxesDialog::setBaselineDist(int)
@@ -2981,12 +2961,13 @@ void AxesDialog::updateMajTicksType(int)
 			return;
 
 	majTicks[axis]=type;
-		QString formula =  boxFormula->text();
-		if (!boxShowFormula->isChecked())
-			formula = QString();
-				emit showAxis(axis,boxAxisType->currentItem(),formatInfo[axis], boxShowAxis->isChecked(), type, boxMinorTicksType->currentItem(),
-						boxShowLabels->isChecked(), QColor(axesColors[axis]), boxFormat->currentItem(),boxPrecision->value(), 
-						boxAngle->value(), boxBaseline->value(), formula);		
+	QString formula =  boxFormula->text();
+	if (!boxShowFormula->isChecked())
+		formula = QString();
+
+    emit showAxis(axis,boxAxisType->currentItem(),formatInfo[axis], boxShowAxis->isChecked(), type, boxMinorTicksType->currentItem(),
+			     boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentItem(),boxPrecision->value(),
+			     boxAngle->value(), boxBaseline->value(), formula, boxAxisNumColor->color());
 }
 
 void AxesDialog::updateMinTicksType(int)
@@ -2997,12 +2978,14 @@ void AxesDialog::updateMinTicksType(int)
 			return;
 
 	minTicks[axis]=type;
-		QString formula =  boxFormula->text();
-		if (!boxShowFormula->isChecked())
-			formula = QString();
-				emit showAxis(axis,boxAxisType->currentItem(),formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), type,
-						boxShowLabels->isChecked(), QColor(axesColors[axis]), boxFormat->currentItem(),boxPrecision->value(), 
-						boxAngle->value(), boxBaseline->value(), formula);		
+	QString formula =  boxFormula->text();
+
+    if (!boxShowFormula->isChecked())
+		formula = QString();
+
+    emit showAxis(axis,boxAxisType->currentItem(),formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), type,
+				  boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentItem(),boxPrecision->value(),
+				  boxAngle->value(), boxBaseline->value(), formula, boxAxisNumColor->color());
 }
 
 void AxesDialog::setEnabledTickLabels(const QStringList& labelsOn)
@@ -3036,7 +3019,7 @@ void AxesDialog::updateTickLabelsList()
 		formatInfo[axis] = QString::number(boxFormat->currentItem());
 	else if (type == Graph::Time || type == Graph::Date)
 	{
-		QStringList lst = QStringList::split(";", formatInfo[axis], false);			
+		QStringList lst = formatInfo[axis].split(";", QString::SkipEmptyParts);			
 		lst[1] = boxFormat->currentText();
 		formatInfo[axis]  = lst.join(";");
 	}
@@ -3046,9 +3029,10 @@ void AxesDialog::updateTickLabelsList()
 	QString formula =  boxFormula->text();
 	if (!boxShowFormula->isChecked())
 	   formula = QString();
-	emit showAxis(axis, type, formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), boxMinorTicksType->currentItem(),
-         boxShowLabels->isChecked(),QColor(axesColors[axis]), boxFormat->currentItem(), boxPrecision->value(),
-	     boxAngle->value(), boxBaseline->value(), formula);			
+
+    emit showAxis(axis, type, formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), boxMinorTicksType->currentItem(),
+                  boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentItem(), boxPrecision->value(),
+	              boxAngle->value(), boxBaseline->value(), formula, boxAxisNumColor->color());
 }
 
 void AxesDialog::setCurrentScale(int axisPos)
@@ -3078,13 +3062,13 @@ else if (generalDialog->currentPage()==(QWidget*)axesPage)
 void AxesDialog::showAxesPage()
 {
 	if (generalDialog->currentWidget()!=(QWidget*)axesPage)
-		generalDialog->showPage(axesPage);
+		generalDialog->setCurrentWidget(axesPage);
 }
 
 void AxesDialog::showGridPage()
 {
 	if (generalDialog->currentWidget()!=(QWidget*)gridPage)
-		generalDialog->showPage(gridPage);
+		generalDialog->setCurrentWidget(gridPage);
 }
 
 void AxesDialog::updateGrid(int)
@@ -3120,7 +3104,7 @@ void AxesDialog::setLabelsNumericFormat(int)
 			formatInfo[axis] = QString::number(format);
 		else if (type == Graph::Time || type == Graph::Date)
 		{
-			QStringList lst = QStringList::split(";", formatInfo[axis], false);			
+			QStringList lst = formatInfo[axis].split(";", QString::SkipEmptyParts);			
 			lst[1] = boxFormat->currentText();
 			formatInfo[axis]  = lst.join(";");
 		}
@@ -3130,11 +3114,12 @@ void AxesDialog::setLabelsNumericFormat(int)
 		QString formula =  boxFormula->text();
 		if (!boxShowFormula->isChecked())
 			formula = QString();
-				emit showAxis(axis, type, formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(), 
-						boxMinorTicksType->currentItem(), boxShowLabels->isChecked(),QColor(axesColors[axis]),
-						format, prec, boxAngle->value(), boxBaseline->value(), formula);		
 
-				axesType[axis] = type;
+    emit showAxis(axis, type, formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentItem(),
+			boxMinorTicksType->currentItem(), boxShowLabels->isChecked(), boxAxisColor->color(),
+			format, prec, boxAngle->value(), boxBaseline->value(), formula, boxAxisNumColor->color());
+
+    axesType[axis] = type;
 }
 
 void AxesDialog::showAxisFormula(int axis)
@@ -3216,16 +3201,27 @@ void AxesDialog::customAxisLabelFont()
 		d_graph->setAxisTitleFont(axis, fnt);
 }
 
-AxesDialog::~AxesDialog()
+void AxesDialog::pageChanged ( QWidget *page )
 {
+  	if (lastPage == scalesPage && page == axesPage)
+  	{
+  		axesTitlesList->setCurrentRow(axesList->currentRow());
+  	    lastPage = page;
+  	}
+  	else if (lastPage == axesPage && page == scalesPage)
+  	{
+  		axesList->setCurrentRow(axesTitlesList->currentRow());
+  	    lastPage = page;
+  	}
 }
 
 int AxesDialog::exec()
 {
 	axesList->setCurrentRow(0);
-		axesGridList->setCurrentRow(0);
-		axesTitlesList->setCurrentRow(0);
+	axesGridList->setCurrentRow(0);
+	axesTitlesList->setCurrentRow(0);
 		
-		return QDialog::exec();
+    setModal(true);
+    show();
+	return 0;
 }
-

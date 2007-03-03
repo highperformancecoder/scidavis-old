@@ -4,43 +4,57 @@ linux-g++-64: libsuff=64
 TARGET       = qtiplot
 TEMPLATE     = app
 CONFIG      += qt warn_on exceptions opengl
-CONFIG	+= release
-#CONFIG	+= debug
+CONFIG      += assistant
+CONFIG	    += release
+#CONFIG	    += debug
+
 MOC_DIR      = ../tmp/qtiplot
 OBJECTS_DIR  = ../tmp/qtiplot
 DESTDIR           = ./
 DEFINES     += QT_PLUGIN
-DEFINES	+= SCRIPTING_CONSOLE
-DEFINES	+= SCRIPTING_DIALOG
+DEFINES	    += SCRIPTING_CONSOLE
+DEFINES	    += SCRIPTING_DIALOG
 QT          +=  opengl qt3support network
 
-SCRIPTING_LANGS = muParser Python
-
-TRANSLATIONS       = translations/qtiplot_de.ts \
-		         translations/qtiplot_es.ts \
-			   translations/qtiplot_fr.ts 
-
-############################################################################# 
+#############################################################################
 ##################### 3rd PARTY HEADER FILES SECTION ########################
 #!!! Warning: You must modify these paths according to your computer settings
 #############################################################################
 
-INCLUDEPATH       += ../3rdparty/qwt/include
+INCLUDEPATH       += ../3rdparty
+INCLUDEPATH       += ../3rdparty/qwt/src
 INCLUDEPATH       += ../3rdparty/qwtplot3d/include
-INCLUDEPATH		+= ../3rdparty/liborigin
+INCLUDEPATH		  += ../3rdparty/liborigin
 INCLUDEPATH       += ../3rdparty/gsl/include
 INCLUDEPATH       += ../3rdparty/zlib123/include
 
-############################################################################# 
+#############################################################################
 ##################### 3rd PARTY LIBRARIES SECTION ###########################
 #!!! Warning: You must modify these paths according to your computer settings
-############################################################################# 
+#############################################################################
 
-##################### Linux (Mac OS X) ###################################### 
+##################### Linux (Mac OS X) ######################################
 
-unix:LIBS         += ../3rdparty/qwt/lib$${libsuff}/libqwt.a
-unix:LIBS         += -L /usr/lib$${libsuff} -lgsl -lgslcblas -lz -lorigin
+#for dynamically linked libs
+unix:LIBS			+= -L /usr/lib$${libsuff}
+
+# statically link against Qwt(3D) in 3rdparty
 unix:LIBS         += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
+unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
+# dynamically link against Qwt(3D) installed system-wide
+#unix:LIBS			+= -lqwtplot3d
+#unix:LIBS			+= -lqwt
+
+# statically link against liborigin in 3rdparty
+unix:LIBS         += ../3rdparty/liborigin/liborigin.a
+# dynamically link against liborigin installed system-wide
+#unix:LIBS			+= -lorigin
+
+# statically link against GSL in 3rdparty
+unix:LIBS         += ../3rdparty/gsl/lib/libgsl.a
+unix:LIBS         += ../3rdparty/gsl/lib/libgslcblas.a
+#dynamically link against GSL installed system-wide
+#unix:LIBS			+= -lgsl -lgslcblas
 
 unix:target.path=/usr/bin
 unix:INSTALLS += target
@@ -54,19 +68,37 @@ unix:INSTALLS += documentation
 win32:DEFINES  += QT_DLL QT_THREAD_SUPPORT 
 
 win32:LIBS        += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
-win32:LIBS        += ../3rdparty/qwt/lib/libqwt.a  
+win32:LIBS        += ../3rdparty/qwt/lib/libqwt.a 
 win32:LIBS        += ../3rdparty/gsl/lib/libgsl.a
 win32:LIBS        += ../3rdparty/gsl/lib/libgslcblas.a
-win32:LIBS		+= ../3rdparty/liborigin/liborigin.a
-win32:LIBS		+= ../3rdparty/zlib123/lib/zdll.lib
- 
-win32:RC_FILE     = src/iPlot.rc
+win32:LIBS		  += ../3rdparty/zlib123/lib/zdll.lib
+win32:LIBS		  += ../3rdparty/liborigin/liborigin.a
 
 ############################################################################# 
 ###################### PROJECT FILES SECTION ################################
 ############################################################################# 
  
+###################### ICONS ################################################
+  	 
+win32:RC_FILE = icons/qtiplot.rc
+mac:RC_FILE = icons/qtiplot.icns
+
+###################### TRANSLATIONS #########################################
+
+TRANSLATIONS    = translations/qtiplot_de.ts \
+                  translations/qtiplot_es.ts \
+		          translations/qtiplot_fr.ts \
+		          translations/qtiplot_ru.ts \
+		          translations/qtiplot_ja.ts \
+		          translations/qtiplot_sv.ts 
+
+#system(lupdate -verbose qtiplot.pro)
+#system(lrelease -verbose qtiplot.pro)
+ 
+###################### HEADERS ##############################################
+
 HEADERS  += src/application.h \
+     src/globals.h\
      src/graph.h \
      src/graph3D.h \
      src/worksheet.h \
@@ -82,7 +114,6 @@ HEADERS  += src/application.h \
      src/polynomFitDialog.h \
      src/expDecayDialog.h \
      src/functionDialog.h \
-     src/functionDialogui.h \
      src/fitDialog.h \
      src/surfaceDialog.h \
      src/tableDialog.h \
@@ -144,9 +175,21 @@ HEADERS  += src/application.h \
 	 src/Fitter.h\
 	 src/customEvents.h\
 	 src/ScriptingLangDialog.h\
+	 src/ScriptWindow.h\
 	 src/textformatbuttons.h\
-	 src/TableStatistics.h
-     
+	 src/TableStatistics.h\
+	 src/Spectrogram.h\
+	 src/ColorMapEditor.h\
+	 src/SelectionMoveResizer.h\
+	 src/Filter.h\
+	 src/IntDiff.h\
+	 src/Interpolation.h\
+	 src/SmoothFilter.h\
+     src/FFTFilter.h\
+     src/FFT.h
+
+###################### SOURCES ##############################################
+	
 SOURCES  += src/application.cpp \
      src/graph.cpp \
      src/analysis.cpp \
@@ -168,7 +211,6 @@ SOURCES  += src/application.cpp \
      src/canvaspicker.cpp \
      src/expDecayDialog.cpp \
      src/functionDialog.cpp \
-     src/functionDialogui.cpp \
      src/fitDialog.cpp \
      src/surfaceDialog.cpp \
      src/lineDlg.cpp \
@@ -226,7 +268,17 @@ SOURCES  += src/application.cpp \
 	 src/Fitter.cpp\
 	 src/Scripting.cpp\
 	 src/ScriptingLangDialog.cpp\
-	 src/TableStatistics.cpp
+	 src/ScriptWindow.cpp\
+	 src/TableStatistics.cpp\
+	 src/Spectrogram.cpp\
+	 src/ColorMapEditor.cpp\
+	 src/SelectionMoveResizer.cpp\
+	 src/Filter.cpp\
+	 src/IntDiff.cpp\
+	 src/Interpolation.cpp\
+	 src/SmoothFilter.cpp\
+     src/FFTFilter.cpp\
+     src/FFT.cpp
 
 ############################################################### 
 ##################### Compression (zlib123) ###################
@@ -238,7 +290,10 @@ SOURCES+=../3rdparty/zlib123/minigzip.c
 ##################### SCRIPTING LANGUAGES SECTION #############
 ############################################################### 
 
-# muParser v1.26
+SCRIPTING_LANGS = muParser Python
+
+##################### Default: muParser v1.28 #################
+
 contains(SCRIPTING_LANGS, muParser) {
   DEFINES +=	SCRIPTING_MUPARSER
   HEADERS +=	src/muParserScripting.h \
@@ -263,25 +318,29 @@ contains(SCRIPTING_LANGS, muParser) {
 		../3rdparty/muParser/muParserError.cpp
 }
 
+##################### PYTHON + SIP + PyQT #####################
+	
 contains(SCRIPTING_LANGS, Python) {
   DEFINES +=	SCRIPTING_PYTHON
   HEADERS +=	src/PythonScripting.h
   SOURCES +=	src/PythonScripting.cpp
 
   unix {
-    INCLUDEPATH += /usr/include/python2.4
-    LIBS +=	-lpython2.4 -lm
+    INCLUDEPATH += $$system(python python-includepath.py)
+    LIBS +=	$$system(python -c "\"from distutils import sysconfig; print '-lpython'+sysconfig.get_config_var('VERSION')\"")
+	LIBS +=	-lm
     system(mkdir -p $${MOC_DIR})
-    system(sip -I /usr/share/sip -t Qt_4_2_1 -t WS_X11 -c $${MOC_DIR} src/qti.sip)
+    system($$system(python python-sipcmd.py) -c $${MOC_DIR} src/qti.sip)
   }
 
   win32 {
-    INCLUDEPATH += C:/Python24/include
-    #LIBS += C:/Python24/libs/libpython24.a
-	 LIBS += C:\Windows\System32\python24.dll
+    INCLUDEPATH += $$system(call python-includepath.py)
+    LIBS += $$system(call python-libs-win.py)
     system(md $${MOC_DIR})
-    system(C:\Python24\sip.exe -I C:\Python24\sip\PyQt4 -t Qt_4_2_1 -t WS_WIN -c $${MOC_DIR} src/qti.sip)
+    system($$system(call python-sipcmd.py) -c $${MOC_DIR} src/qti.sip)
   }
+
+##################### SIP generated files #####################
 
   HEADERS +=\
 	 ../tmp/qtiplot/sipqtiApplicationWindow.h\
@@ -296,20 +355,20 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiPythonScript.h\
 	 ../tmp/qtiplot/sipqtiPythonScripting.h\
 	 ../tmp/qtiplot/sipqtiFolder.h\
-	 ../tmp/qtiplot/sipqtiQList.h
-#	 ../tmp/qtiplot/sipqtiFit.h\
-#	 ../tmp/qtiplot/sipqtiExponentialFit.h\
-#	 ../tmp/qtiplot/sipqtiTwoExpFit.h\
-#	 ../tmp/qtiplot/sipqtiThreeExpFit.h\
-#	 ../tmp/qtiplot/sipqtiSigmoidalFit.h\
-#	 ../tmp/qtiplot/sipqtiGaussAmpFit.h\
-#	 ../tmp/qtiplot/sipqtiLorentzFit.h\
-#	 ../tmp/qtiplot/sipqtiNonLinearFit.h\
-#	 ../tmp/qtiplot/sipqtiPluginFit.h\
-#	 ../tmp/qtiplot/sipqtiMultiPeakFit.h\
-#	 ../tmp/qtiplot/sipqtiPolynomialFit.h\
-#	 ../tmp/qtiplot/sipqtiLinearFit.h\
-#	 ../tmp/qtiplot/sipqtiGaussFit.h
+	 ../tmp/qtiplot/sipqtiQList.h\
+	 ../tmp/qtiplot/sipqtiFit.h\
+	 ../tmp/qtiplot/sipqtiExponentialFit.h\
+	 ../tmp/qtiplot/sipqtiTwoExpFit.h\
+	 ../tmp/qtiplot/sipqtiThreeExpFit.h\
+	 ../tmp/qtiplot/sipqtiSigmoidalFit.h\
+	 ../tmp/qtiplot/sipqtiGaussAmpFit.h\
+	 ../tmp/qtiplot/sipqtiLorentzFit.h\
+	 ../tmp/qtiplot/sipqtiNonLinearFit.h\
+	 ../tmp/qtiplot/sipqtiPluginFit.h\
+	 ../tmp/qtiplot/sipqtiMultiPeakFit.h\
+	 ../tmp/qtiplot/sipqtiPolynomialFit.h\
+	 ../tmp/qtiplot/sipqtiLinearFit.h\
+	 ../tmp/qtiplot/sipqtiGaussFit.h
   SOURCES +=\
 	 ../tmp/qtiplot/sipqticmodule.cpp\
 	 ../tmp/qtiplot/sipqtiApplicationWindow.cpp\
@@ -324,19 +383,19 @@ contains(SCRIPTING_LANGS, Python) {
 	 ../tmp/qtiplot/sipqtiPythonScript.cpp\
 	 ../tmp/qtiplot/sipqtiPythonScripting.cpp\
 	 ../tmp/qtiplot/sipqtiFolder.cpp\
-	 ../tmp/qtiplot/sipqtiQList.cpp
-#	 ../tmp/qtiplot/sipqtiFit.cpp\
-#	 ../tmp/qtiplot/sipqtiExponentialFit.cpp\
-#	 ../tmp/qtiplot/sipqtiTwoExpFit.cpp\
-#	 ../tmp/qtiplot/sipqtiThreeExpFit.cpp\
-#	 ../tmp/qtiplot/sipqtiSigmoidalFit.cpp\
-#	 ../tmp/qtiplot/sipqtiGaussAmpFit.cpp\
-#	 ../tmp/qtiplot/sipqtiLorentzFit.cpp\
-#	 ../tmp/qtiplot/sipqtiNonLinearFit.cpp\
-#	 ../tmp/qtiplot/sipqtiPluginFit.cpp\
-#	 ../tmp/qtiplot/sipqtiMultiPeakFit.cpp\
-#	 ../tmp/qtiplot/sipqtiPolynomialFit.cpp\
-#	 ../tmp/qtiplot/sipqtiLinearFit.cpp\
-#	 ../tmp/qtiplot/sipqtiGaussFit.cpp
+	 ../tmp/qtiplot/sipqtiQList.cpp\
+	 ../tmp/qtiplot/sipqtiFit.cpp\
+	 ../tmp/qtiplot/sipqtiExponentialFit.cpp\
+	 ../tmp/qtiplot/sipqtiTwoExpFit.cpp\
+	 ../tmp/qtiplot/sipqtiThreeExpFit.cpp\
+	 ../tmp/qtiplot/sipqtiSigmoidalFit.cpp\
+	 ../tmp/qtiplot/sipqtiGaussAmpFit.cpp\
+	 ../tmp/qtiplot/sipqtiLorentzFit.cpp\
+	 ../tmp/qtiplot/sipqtiNonLinearFit.cpp\
+	 ../tmp/qtiplot/sipqtiPluginFit.cpp\
+	 ../tmp/qtiplot/sipqtiMultiPeakFit.cpp\
+	 ../tmp/qtiplot/sipqtiPolynomialFit.cpp\
+	 ../tmp/qtiplot/sipqtiLinearFit.cpp\
+	 ../tmp/qtiplot/sipqtiGaussFit.cpp
 }
-############################################################### 
+###############################################################

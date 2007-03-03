@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Pie plot dialog
                            
  ***************************************************************************/
@@ -34,64 +34,55 @@
 #include "graph.h"
 #include "multilayer.h"
 #include "plot.h"
+#include "pie.h"
 
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <q3listbox.h>
-#include <qpushbutton.h>
-#include <qspinbox.h>
-#include <qtabwidget.h>
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <q3buttongroup.h>
-#include <qcolordialog.h>
-#include <qwidget.h>
-#include <q3popupmenu.h>
+#include <QSpinBox>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QPushButton>
+#include <QLabel>
+#include <QComboBox>
+#include <QTabWidget>
+#include <QLayout>
+#include <QListWidget>
+#include <QMenu>
+#include <QColorDialog>
 
 #include <qwt_plot.h>
-//Added by qt3to4:
-#include <Q3HBoxLayout>
-#include <Q3VBoxLayout>
-#include <Q3PtrList>
-
 
 PieDialog::PieDialog( QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
-    : QDialog( parent, name, modal, fl )
+: QDialog( parent, name, modal, fl )
 {
-    if ( !name )
+	if ( !name )
 		setName( "PieDialog" );
-	setFixedWidth(521);
-	setFixedHeight(260);
-    setWindowTitle( tr( "QtiPlot - Pie Options" ) );
-    setSizeGripEnabled( false );
+	setWindowTitle( tr( "QtiPlot - Pie Options" ) );
 
-    generalDialog = new QTabWidget( this, "generalDialog" );
-	
+	generalDialog = new QTabWidget();
+
 	initPiePage();
 	initBorderPage();
-	
-	Q3ButtonGroup *GroupBox1 = new Q3ButtonGroup(4,Qt::Horizontal,tr(""),this, "GroupBox1" );
-	GroupBox1->setFlat (true);
-	
-	buttonWrk = new QPushButton( GroupBox1, "buttonWrk" );
-    buttonWrk->setText( tr( "&Worksheet" ) );
-	
-	buttonApply = new QPushButton( GroupBox1, "buttonApply" );
-    buttonApply->setText( tr( "&Apply" ) );
-	
-    buttonOk = new QPushButton(GroupBox1, "buttonOk" );
-    buttonOk->setText( tr( "&OK" ) );
-    buttonOk->setDefault( true );
-	
-    buttonCancel = new QPushButton(GroupBox1, "buttonCancel" );
-    buttonCancel->setText( tr( "&Cancel" ) );
-	
-	Q3VBoxLayout* vl = new Q3VBoxLayout(this,5,5, "vl");
+
+	QHBoxLayout *hbox1 = new QHBoxLayout(); 
+	hbox1->addStretch();	
+	buttonWrk = new QPushButton(tr( "&Worksheet" ));
+	hbox1->addWidget(buttonWrk);
+	buttonApply = new QPushButton(tr( "&Apply" ));
+	hbox1->addWidget(buttonApply);	
+	buttonOk = new QPushButton(tr( "&OK" ));
+	buttonOk->setDefault( true );
+	hbox1->addWidget(buttonOk);
+	buttonCancel = new QPushButton(tr( "&Cancel" ));
+	hbox1->addWidget(buttonCancel);
+
+	QVBoxLayout* vl = new QVBoxLayout();
 	vl->addWidget(generalDialog);
-    vl->addWidget(GroupBox1);
-   
-    // signals and slots connections
+	vl->addLayout(hbox1);
+	setLayout(vl);
+
+	resize(minimumSize());
+	setMaximumHeight(minimumSize ().height());
+
+	// signals and slots connections
 	connect( buttonWrk, SIGNAL(clicked()), this, SLOT(showWorksheet()));
 	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
 	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -100,349 +91,406 @@ PieDialog::PieDialog( QWidget* parent,  const char* name, bool modal, Qt::WFlags
 
 void PieDialog::initPiePage()
 {
-	pieOptions = new QWidget( generalDialog, "pieOptions" );
-	curvesList = new Q3ListBox(pieOptions, "listBox" );
-	
-	Q3ButtonGroup *GroupBox3 = new Q3ButtonGroup(2,Qt::Horizontal,tr( "Border" ),pieOptions, "GroupBox3" );
+	pieOptions = new QWidget();
+	curvesList = new QListWidget();
 
-    new QLabel( tr( "Color" ), GroupBox3, "TextLabel4",0 );
+	QGridLayout *gl1 = new QGridLayout();
+	gl1->addWidget(new QLabel( tr( "Color" )), 0, 0);
 
-    boxLineColor = new ColorBox( false, GroupBox3);
-	
-	new QLabel(tr( "Style" ), GroupBox3, "TextLabel31",0 );  
-    boxLineStyle = new QComboBox( false, GroupBox3, "boxLineStyle" );
-    boxLineStyle->insertItem("_____");
+	boxLineColor = new ColorBox(false);
+	gl1->addWidget(boxLineColor, 0, 1);
+
+	gl1->addWidget(new QLabel(tr( "Style" )), 1, 0);
+	boxLineStyle = new QComboBox( false );
+	boxLineStyle->insertItem("_____");
 	boxLineStyle->insertItem("- - -");
 	boxLineStyle->insertItem(".....");
 	boxLineStyle->insertItem("_._._");
 	boxLineStyle->insertItem("_.._..");
-	
-	new QLabel(tr( "Width" ), GroupBox3, "TextLabel3",0 );  
-    boxLineWidth = new QSpinBox( GroupBox3, "boxLineWidth" );
-	
-	Q3ButtonGroup *GroupBox2 = new Q3ButtonGroup(2,Qt::Horizontal,tr( "Fill" ),pieOptions, "GroupBox2" );
+	gl1->addWidget(boxLineStyle);
 
-    new QLabel( tr( "First color" ), GroupBox2, "TextLabel4",0 ); 
-    boxFirstColor = new ColorBox( false, GroupBox2);
-	
-	new QLabel( tr( "Pattern" ), GroupBox2, "TextLabel41",0 );
-	boxPattern = new PatternBox( false, GroupBox2);
-	
-	new QLabel(tr( "Pie radius" ), GroupBox2, "radiusLabel",0 );  
-    boxRadius= new QSpinBox(0,2000,10,GroupBox2, "boxRadius");
-	
-	Q3HBoxLayout* hlayout1 = new Q3HBoxLayout(pieOptions,5,5, "hlayout1");
-	hlayout1->addWidget(curvesList);
-    hlayout1->addWidget(GroupBox3);
-	hlayout1->addWidget(GroupBox2);
-	
+	gl1->addWidget(new QLabel(tr( "Width")), 2, 0);  
+	boxLineWidth = new QSpinBox();
+	gl1->addWidget(boxLineWidth, 2, 1);
+
+	QGroupBox *gb1 = new QGroupBox(tr( "Border" ));
+	gb1->setLayout(gl1);
+
+	QGridLayout *gl2 = new QGridLayout();
+	gl2->addWidget(new QLabel( tr( "First color" )), 0, 0);
+
+	boxFirstColor = new ColorBox(false);
+	gl2->addWidget(boxFirstColor, 0, 1);
+
+	gl2->addWidget(new QLabel( tr( "Pattern" )), 1, 0);
+	boxPattern = new PatternBox(false);
+	gl2->addWidget(boxPattern, 1, 1);
+	gl2->addWidget(new QLabel( tr( "Pie radius" )), 2, 0);
+
+	boxRadius= new QSpinBox();
+	boxRadius->setRange(0, 10000);
+	boxRadius->setSingleStep(10);
+
+	gl2->addWidget(boxRadius, 2, 1);
+
+	QGroupBox *gb2 = new QGroupBox(tr( "Fill" ));
+	gb2->setLayout(gl2);
+
+	QHBoxLayout* hl = new QHBoxLayout();
+	hl->addWidget(curvesList);
+	hl->addWidget(gb1);
+	hl->addWidget(gb2);
+	pieOptions->setLayout(hl);
+
 	generalDialog->insertTab(pieOptions, tr( "Pie" ) );
-
-connect(curvesList, SIGNAL(rightButtonClicked(Q3ListBoxItem *, const QPoint &)), this, SLOT(showPopupMenu(Q3ListBoxItem *, const QPoint &)));
 }
 
 void PieDialog::initBorderPage()
 {
-frame = new QWidget( generalDialog, "frame" );	
+	frame = new QWidget();	
 
-Q3ButtonGroup *GroupBox1 = new Q3ButtonGroup(2,Qt::Horizontal, tr("Background"), frame, "GroupBox5" );
-	
-new QLabel(tr("Color"), GroupBox1, "TextLabel1_53",0 );
-boxBackgroundColor= new ColorButton(GroupBox1);
-	
-new QLabel(tr("Border Width"),GroupBox1, "TextLabel1_54",0 );
-boxBorderWidth= new QSpinBox(GroupBox1);
+	QGridLayout *gl1 = new QGridLayout();
+	gl1->addWidget(new QLabel( tr( "Color" )), 0, 0);
 
-new QLabel(tr("Border Color" ),GroupBox1, "TextLabel1_53",0 );
-boxBorderColor= new ColorButton(GroupBox1);
+	boxBackgroundColor = new ColorButton();
+	gl1->addWidget(boxBackgroundColor, 0, 1);
 
-Q3ButtonGroup *GroupBox2 = new Q3ButtonGroup(2,Qt::Horizontal,tr("Options"), frame, "GroupBox2" );
-new QLabel(tr( "Margin" ),GroupBox2, "TextLabel1_541",0 );
-boxMargin= new QSpinBox(0, 1000, 5, GroupBox2);
+	gl1->addWidget(new QLabel( tr( "Border Width" )), 1, 0);
+	boxBorderWidth = new QSpinBox();
+	gl1->addWidget(boxBorderWidth, 1, 1);
 
-boxAll = new QCheckBox(tr("Apply to all layers"), GroupBox2, "boxShowAxis" );
+	gl1->addWidget(new QLabel( tr( "Border Color" )), 2, 0);
+	boxBorderColor= new ColorButton();
+	gl1->addWidget(boxBorderColor, 2, 1);
 
-Q3HBoxLayout* hlayout = new Q3HBoxLayout(frame, 5, 5, "hlayout");
-hlayout->addWidget(GroupBox1);
-hlayout->addWidget(GroupBox2);
+	gl1->addWidget(new QLabel( tr( "Canvas Color" )), 3, 0);
+	boxCanvasColor= new ColorButton();
+	gl1->addWidget(boxCanvasColor, 3, 1);
 
-generalDialog->insertTab(frame, tr( "General" ) );
-connect(boxMargin, SIGNAL(valueChanged (int)), this, SLOT(changeMargin(int)));
-connect(boxBorderColor, SIGNAL(clicked()), this, SLOT(pickBorderColor()));
-connect(boxBackgroundColor, SIGNAL(clicked()), this, SLOT(pickBackgroundColor()));
-connect(boxBorderWidth,SIGNAL(valueChanged (int)), this, SLOT(updateBorder(int)));
+	QGroupBox *gb1 = new QGroupBox(tr("Background"));
+	gb1->setLayout(gl1);
+
+	QGroupBox *gb2 = new QGroupBox(tr("Options"));
+	QGridLayout *gl2 = new QGridLayout();
+	gl2->addWidget(new QLabel( tr( "Margin" )), 0, 0);
+
+	boxMargin= new QSpinBox();
+	boxMargin->setRange(0, 1000);
+	boxMargin->setSingleStep(5);
+
+	gl2->addWidget(boxMargin, 0, 1);
+
+	boxAll = new QCheckBox(tr("Apply to all layers"));
+	gl2->addWidget(boxAll, 1, 0);
+	gb2->setLayout(gl2);
+
+	QHBoxLayout* hl = new QHBoxLayout();
+	hl->addWidget(gb1);
+	hl->addWidget(gb2);
+	frame->setLayout(hl);
+
+	generalDialog->insertTab(frame, tr( "General" ) );
+
+	connect(boxMargin, SIGNAL(valueChanged (int)), this, SLOT(changeMargin(int)));
+	connect(boxBorderColor, SIGNAL(clicked()), this, SLOT(pickBorderColor()));
+	connect(boxBackgroundColor, SIGNAL(clicked()), this, SLOT(pickBackgroundColor()));
+	connect(boxBorderWidth,SIGNAL(valueChanged (int)), this, SLOT(updateBorder(int)));
+	connect(boxCanvasColor,SIGNAL(clicked()), this, SLOT(pickCanvasColor()));
 }
 
 void PieDialog::setMultiLayerPlot(MultiLayer *m)
 {
-mPlot = m;
-Graph* g = (Graph*)mPlot->activeGraph();
-Plot *p = g->plotWidget();
-	
-boxMargin->setValue (p->margin());
-boxBorderWidth->setValue(p->lineWidth());
-boxBorderColor->setColor(p->frameColor());
-boxBackgroundColor->setColor(p->paletteBackgroundColor());
+	mPlot = m;
+	Graph* g = (Graph*)mPlot->activeGraph();
+	QwtPieCurve *pie = (QwtPieCurve *)g->curve(0);
+	if (!pie)
+		return;
+
+	Plot *p = g->plotWidget();
+
+	boxMargin->setValue (p->margin());
+	boxBorderWidth->setValue(p->lineWidth());
+	boxBorderColor->setColor(p->frameColor());
+	boxBackgroundColor->setColor(p->paletteBackgroundColor());
+
+	boxCanvasColor->setColor(p->canvasBackground());
+
+	curvesList->addItem(pie->title().text());
+	curvesList->setCurrentItem (0);
+
+	boxRadius->setValue(pie->ray());
+	boxPattern->setPattern(pie->pattern());
+	boxLineWidth->setValue(pie->pen().width());
+	boxLineColor->setColor(pie->pen().color());
+	setBorderStyle(pie->pen().style());
+	boxFirstColor->setCurrentItem(pie->first());
+}
+
+void PieDialog::pickCanvasColor()
+{
+	QColor c = QColorDialog::getColor(boxCanvasColor->color(), this);
+	if ( !c.isValid() || c == boxCanvasColor->color() )
+		return;
+
+	boxCanvasColor->setColor ( c ) ;
+
+	if (boxAll->isChecked())
+	{
+		QWidgetList allPlots = mPlot->graphPtrs();
+		for (int i=0; i<(int)allPlots.count();i++)
+		{
+			Graph* g=(Graph*)allPlots.at(i);
+			if (g)
+			{
+				g->setCanvasBackground(c);
+				g->replot();
+			}
+		}
+	}
+	else
+	{
+		Graph* g = (Graph*)mPlot->activeGraph();
+		if (g)
+		{
+			g->setCanvasBackground(c);
+			g->replot();
+		}
+	}
 }
 
 void PieDialog::pickBackgroundColor()
 {
-QColor c = QColorDialog::getColor(boxBackgroundColor->color(), this);
-if ( !c.isValid() || c == boxBackgroundColor->color() )
-	return;
+	QColor c = QColorDialog::getColor(boxBackgroundColor->color(), this);
+	if ( !c.isValid() || c == boxBackgroundColor->color() )
+		return;
 
-boxBackgroundColor->setColor ( c ) ;
+	boxBackgroundColor->setColor ( c ) ;
 
-if (boxAll->isChecked())
+	if (boxAll->isChecked())
 	{
-	QWidgetList allPlots = mPlot->graphPtrs();
-	for (int i=0; i<allPlots.count();i++)
+		QWidgetList allPlots = mPlot->graphPtrs();
+		for (int i=0; i<allPlots.count();i++)
 		{
-		Graph* g=(Graph*)allPlots.at(i);
-		if (g)
-			g->setBackgroundColor(c);
+			Graph* g=(Graph*)allPlots.at(i);
+			if (g)
+				g->setBackgroundColor(c);
 		}
 	}
-else
+	else
 	{
-	Graph* g = (Graph*)mPlot->activeGraph();
-	if (g)
-		g->setBackgroundColor(c);
+		Graph* g = (Graph*)mPlot->activeGraph();
+		if (g)
+			g->setBackgroundColor(c);
 	}
-
-if (c == QColor(Qt::white) && mPlot->hasOverlapingLayers())
-	mPlot->updateTransparency();
 }
 
 void PieDialog::pickBorderColor()
 {
-QColor c = QColorDialog::getColor(boxBorderColor->color(), this);
-if ( !c.isValid() || c == boxBorderColor->color() )
-	return;
+	QColor c = QColorDialog::getColor(boxBorderColor->color(), this);
+	if ( !c.isValid() || c == boxBorderColor->color() )
+		return;
 
-boxBorderColor->setColor ( c ) ;
+	boxBorderColor->setColor ( c ) ;
 
-if (boxAll->isChecked())
+	if (boxAll->isChecked())
 	{
-	QWidgetList allPlots = mPlot->graphPtrs();
-	for (int i=0; i<allPlots.count();i++)
+		QWidgetList allPlots = mPlot->graphPtrs();
+		for (int i=0; i<allPlots.count();i++)
 		{
-		Graph* g=(Graph*)allPlots.at(i);
-		if (g)
-			g->drawBorder(boxBorderWidth->value(), c);
+			Graph* g=(Graph*)allPlots.at(i);
+			if (g)
+				g->drawBorder(boxBorderWidth->value(), c);
 		}
 	}
-else
+	else
 	{
-	Graph* g = (Graph*)mPlot->activeGraph();
-	if (g)
-		g->drawBorder(boxBorderWidth->value(), c);
+		Graph* g = (Graph*)mPlot->activeGraph();
+		if (g)
+			g->drawBorder(boxBorderWidth->value(), c);
 	}
 }
 
 void PieDialog::updateBorder(int width)
 {
-if (generalDialog->currentPage() != frame)
-	return;
+	if (generalDialog->currentPage() != frame)
+		return;
 
-if (boxAll->isChecked())
+	if (boxAll->isChecked())
 	{
-	QWidgetList allPlots = mPlot->graphPtrs();
-	for (int i=0; i<allPlots.count();i++)
+		QWidgetList allPlots = mPlot->graphPtrs();
+		for (int i=0; i<allPlots.count();i++)
 		{
-		Graph* g=(Graph*)allPlots.at(i);
-		if (g)
-			g->drawBorder(width, boxBorderColor->color());
+			Graph* g=(Graph*)allPlots.at(i);
+			if (g)
+				g->drawBorder(width, boxBorderColor->color());
 		}
 	}
-else
+	else
 	{
-	Graph* g = (Graph*)mPlot->activeGraph();
-	if (g)
-		g->drawBorder(width, boxBorderColor->color());
+		Graph* g = (Graph*)mPlot->activeGraph();
+		if (g)
+			g->drawBorder(width, boxBorderColor->color());
 	}
 }
 
 void PieDialog::changeMargin(int width)
 {
-if (generalDialog->currentPage() != frame)
-	return;
+	if (generalDialog->currentPage() != frame)
+		return;
 
-if (boxAll->isChecked())
+	if (boxAll->isChecked())
 	{
-	QWidgetList allPlots = mPlot->graphPtrs();
-	for (int i=0; i<allPlots.count();i++)
+		QWidgetList allPlots = mPlot->graphPtrs();
+		for (int i=0; i<allPlots.count();i++)
 		{
-		Graph* g=(Graph*)allPlots.at(i);
-		if (g)
-			g->changeMargin(width);
+			Graph* g=(Graph*)allPlots.at(i);
+			if (g)
+				g->changeMargin(width);
 		}
 	}
-else
+	else
 	{
-	Graph* g = (Graph*)mPlot->activeGraph();
-	if (g)
-		g->changeMargin(width);
+		Graph* g = (Graph*)mPlot->activeGraph();
+		if (g)
+			g->changeMargin(width);
 	}
 }
 
 void PieDialog::showWorksheet()
 {
-emit worksheet(curvesList->currentText ());
-close();
+	emit worksheet(curvesList->currentItem()->text());
+	close();
 }
 
-void PieDialog::showPopupMenu(Q3ListBoxItem *, const QPoint &point)
+void PieDialog::contextMenuEvent(QContextMenuEvent *e)
 {
-Q3PopupMenu contextMenu(this);
-contextMenu.insertItem("&Delete", this, SLOT(removeCurve()));
-contextMenu.exec(point);
+	QListWidgetItem *item = curvesList->item(0);
+	if (!item)
+		return;
+
+	QPoint pos = curvesList->viewport()->mapFromGlobal(QCursor::pos());
+	QRect rect = curvesList->visualItemRect(item);
+	if (rect.contains(pos))
+	{
+		QMenu contextMenu(this);
+		contextMenu.insertItem("&Delete", this, SLOT(removeCurve()));
+		contextMenu.exec(QCursor::pos());
+	}
+	e->accept();
 }
 
 void PieDialog::removeCurve()
 {
-emit toggleCurve();
-curvesList->removeItem (0);
-}
-
-void PieDialog::setPieSize(int size)
-{
-boxRadius->setValue(size);
+	emit toggleCurve();
+	QListWidgetItem *item = curvesList->takeItem (0);
+	delete item;
+	close();
 }
 
 void PieDialog::setFramed(bool ok)
 {
-boxFramed->setChecked(ok);
+	boxFramed->setChecked(ok);
 }
 
 void PieDialog::drawFrame(bool framed)
 {
-boxFrameWidth->setEnabled(framed);
-boxFrameColor->setEnabled(framed);
-	
-emit drawFrame(framed,boxFrameWidth->text().toInt(),boxFrameColor->color());
+	boxFrameWidth->setEnabled(framed);
+	boxFrameColor->setEnabled(framed);
+
+	emit drawFrame(framed,boxFrameWidth->text().toInt(),boxFrameColor->color());
 }
 
 void PieDialog::setFrameWidth(int w)
 {
-boxFrameWidth->setValue(w);
+	boxFrameWidth->setValue(w);
 }
 
 void PieDialog::setFrameColor(const QColor& c)
 {
-  boxFrameColor->setColor(c);
-}
-
-void PieDialog::insertCurveName(const QString& name)
-{
-curvesList->clear();
-curvesList->insertItem(name,-1);
-curvesList->setCurrentItem (0);
+	boxFrameColor->setColor(c);
 }
 
 void PieDialog::accept()
 {
-updatePlot();
-close();
+	updatePlot();
+	close();
 }
 
 void PieDialog::updatePlot()
 {
-if (generalDialog->currentPage()==(QWidget *)pieOptions)
+	if (generalDialog->currentPage()==(QWidget *)pieOptions)
 	{
-	QPen pen=QPen(boxLineColor->color(),boxLineWidth->value(), style());
-	emit updatePie(pen, pattern(), boxRadius->value(), boxFirstColor->currentItem());	
+		QPen pen=QPen(boxLineColor->color(),boxLineWidth->value(), style());
+		emit updatePie(pen, pattern(), boxRadius->value(), boxFirstColor->currentItem());	
 	}
-	
-if (generalDialog->currentPage()==(QWidget*)frame)
+
+	if (generalDialog->currentPage()==(QWidget*)frame)
 	{
-	if (!boxAll->isChecked())
-		return;
-	
-	QColor c = boxBackgroundColor->color();
-	QWidgetList allPlots = mPlot->graphPtrs();
-	for (int i=0; i<allPlots.count();i++)
+		if (!boxAll->isChecked())
+			return;
+
+		QColor c = boxBackgroundColor->color();
+		QWidgetList allPlots = mPlot->graphPtrs();
+		for (int i=0; i<allPlots.count();i++)
 		{
-		Graph* g=(Graph*)allPlots.at(i);
-		if (g)
+			Graph* g=(Graph*)allPlots.at(i);
+			if (g)
 			{
-			g->drawBorder(boxBorderWidth->value(), boxBorderColor->color());
-			g->changeMargin(boxMargin->value());
-			g->setBackgroundColor(c);
+				g->drawBorder(boxBorderWidth->value(), boxBorderColor->color());
+				g->changeMargin(boxMargin->value());
+				g->setBackgroundColor(c);
+				g->setCanvasBackground(c);
 			}
 		}
-	if (c == QColor(Qt::white) && mPlot->hasOverlapingLayers())
-		mPlot->updateTransparency();
 	}
-}
-
-void PieDialog::setBorderWidth(int width)
-{
-boxLineWidth->setValue(width);
-}
-
-void PieDialog::setFirstColor(int c)
-{
-boxFirstColor->setCurrentItem(c);	
-}
-
-void PieDialog::setBorderColor(const QColor& c)
-{
-  boxLineColor->setColor(c);
 }
 
 Qt::PenStyle PieDialog::style()
 {
-Qt::PenStyle style;
-switch (boxLineStyle->currentItem())
+	Qt::PenStyle style;
+	switch (boxLineStyle->currentItem())
 	{
-	case 0:
-		style=Qt::SolidLine;
-	break;
-	case 1:
-		style=Qt::DashLine;
-	break;
-	case 2:
-		style=Qt::DotLine;
-	break;
-	case 3:
-		style=Qt::DashDotLine;
-	break;
-	case 4:
-		style=Qt::DashDotDotLine;
-	break;
+		case 0:
+			style=Qt::SolidLine;
+			break;
+		case 1:
+			style=Qt::DashLine;
+			break;
+		case 2:
+			style=Qt::DotLine;
+			break;
+		case 3:
+			style=Qt::DashDotLine;
+			break;
+		case 4:
+			style=Qt::DashDotDotLine;
+			break;
 	}
-return style;
+	return style;
 }
 
 void PieDialog::setBorderStyle(const Qt::PenStyle& style)
 {
-if(style == Qt::SolidLine)
-	boxLineStyle->setCurrentItem(0);
-if(style == Qt::DashLine)
-	boxLineStyle->setCurrentItem(1);
-if(style == Qt::DotLine)
-	boxLineStyle->setCurrentItem(2);
-if(style == Qt::DashDotLine)
-	boxLineStyle->setCurrentItem(3);
-if(style == Qt::DashDotDotLine)
-	boxLineStyle->setCurrentItem(4);
+	if(style == Qt::SolidLine)
+		boxLineStyle->setCurrentItem(0);
+	if(style == Qt::DashLine)
+		boxLineStyle->setCurrentItem(1);
+	if(style == Qt::DotLine)
+		boxLineStyle->setCurrentItem(2);
+	if(style == Qt::DashDotLine)
+		boxLineStyle->setCurrentItem(3);
+	if(style == Qt::DashDotDotLine)
+		boxLineStyle->setCurrentItem(4);
 }
-
-void PieDialog::setPattern(const Qt::BrushStyle& style)
-{
-  boxPattern->setPattern(style);
-}
-
 
 Qt::BrushStyle PieDialog::pattern()
 {
-  return boxPattern->getSelectedPattern();
+	return boxPattern->getSelectedPattern();
 }
 
 void PieDialog::showGeneralPage()
 {
-generalDialog->showPage (frame);
+	generalDialog->showPage (frame);
 }
 
 PieDialog::~PieDialog()

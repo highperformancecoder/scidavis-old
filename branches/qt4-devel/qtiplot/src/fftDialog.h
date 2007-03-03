@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Fast Fourier transform options dialog
                            
  ***************************************************************************/
@@ -48,7 +48,7 @@ public:
 	enum DataType{onGraph = 0, onTable = 1};
 
     FFTDialog(int type, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0 );
-    ~FFTDialog();
+    ~FFTDialog(){};
 
 	QPushButton* buttonOK;
 	QPushButton* buttonCancel;

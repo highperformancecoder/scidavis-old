@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Plot window class
                            
  ***************************************************************************/
@@ -29,8 +29,8 @@
 #ifndef PLOT_H
 #define PLOT_H
 
-#include <qobject.h>
-#include <qmap.h>
+#include <QObject>
+#include <QMap>
 
 #include <qwt_plot.h>
 #include <qwt_plot_curve.h>
@@ -52,14 +52,12 @@ public:
 	QwtPlotGrid *grid(){return (QwtPlotGrid *)d_grid;};
 	QList<int> curveKeys(){return d_curves.keys();};
 
-	int insertCurve(QwtPlotCurve *c);
+	int insertCurve(QwtPlotItem *c);
 	void removeCurve(int index);
 
 	int closestCurve(int xpos, int ypos, int &dist, int &point);
-	QwtPlotCurve* curve(int index){return d_curves[index];};
-	QMap<int, QwtPlotCurve*> curves(){return d_curves;};
-
-	QwtDoubleRect boundingRect();
+	QwtPlotItem* curve(int index){return d_curves[index];};
+	QMap<int, QwtPlotItem*> curves(){return d_curves;};
 
 	QwtPlotMarker* marker(int index){return d_markers[index];};
 	QList<int> markerKeys(){return d_markers.keys();};
@@ -89,9 +87,6 @@ public:
 
 	QColor frameColor();
 
-	void mousePressEvent ( QMouseEvent * e );
-	void mouseReleaseEvent ( QMouseEvent * e );
-
 	virtual void print(QPainter *, const QRect &rect,
         const QwtPlotPrintFilter & = QwtPlotPrintFilter()) const;
 	
@@ -105,19 +100,12 @@ protected:
 	void drawInwardTicks(QPainter *painter, const QRect &rect, 
 							const QwtScaleMap&map, int axis, bool min, bool maj) const;
 
-signals:
-	void selectPlot();
-	void moveGraph(const QPoint&);
-	void releasedGraph();
-
 protected:
 	Grid *d_grid;
-	QMap<int, QwtPlotCurve*> d_curves;
+	QMap<int, QwtPlotItem*> d_curves;
 	QMap<int, QwtPlotMarker*> d_markers;
 
 	int minTickLength, majTickLength;
-	bool movedGraph;
-	QPoint presspos;
 	int marker_key;
 	int curve_key;
 };

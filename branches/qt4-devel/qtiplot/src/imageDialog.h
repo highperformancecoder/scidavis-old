@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Image geometry dialog
                            
  ***************************************************************************/
@@ -29,13 +29,10 @@
 #ifndef IMAGEDIALOG_H
 #define IMAGEDIALOG_H
 
-#include <qdialog.h>
-#include <QEvent>
-
+#include <QDialog>
 #include <QSpinBox>
+#include <QCheckBox>
 #include <QPushButton>
-
-class ChainButton;
 
 //! Image geometry dialog
 class ImageDialog : public QDialog
@@ -44,7 +41,8 @@ class ImageDialog : public QDialog
 
 public:
     ImageDialog( QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0 );
-    ~ImageDialog();
+    ~ImageDialog(){};
+
 	void setOrigin(const QPoint& o);
 	void setSize(const QSize& size);
 
@@ -65,27 +63,8 @@ private:
 	QPushButton* buttonCancel;
 	QPushButton* buttonApply;
     QSpinBox* boxX, *boxY, *boxWidth, *boxHeight;
-	ChainButton *linkButton;
+	QCheckBox *keepRatioBox;
 };
 
-//! A special button to connect two values
-class ChainButton : public QPushButton
-{
-  Q_OBJECT
-
-public:
-  ChainButton(QWidget *parent = 0);
-  ~ChainButton(){};
-
-  void enterEvent ( QEvent * ){setFlat (false);};
-  void leaveEvent ( QEvent * ){setFlat (true);};
-
-public slots:
-  void changeLock();
-  bool isLocked(){return locked;};
-
-private:
-	bool locked;
-};
 
 #endif // IMAGEDIALOG_H

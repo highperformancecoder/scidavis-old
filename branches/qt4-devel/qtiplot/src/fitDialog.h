@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Nonlinear curve fitting dialog
                            
  ***************************************************************************/
@@ -29,26 +29,21 @@
 #ifndef FITDIALOG_H
 #define FITDIALOG_H
 
-#include <qvariant.h>
-#include <qdialog.h>
-//Added by qt3to4:
-#include <QLabel>
+#include "graph.h"
 
 class QPushButton;
 class QLineEdit;
 class QComboBox;
-class Q3ComboBox;
-class Q3WidgetStack;
+class QStackedWidget;
 class QWidget;
-class Q3TextEdit;
-class Q3ListBox;
+class QTextEdit;
+class QListWidget;
 class QCheckBox;
-class Q3Table;
+class QTableWidget;
 class QSpinBox;
 class QLabel;
 class QRadioButton;
 class QLineEdit;
-class Graph;
 class ColorBox;
 class Fit;
 
@@ -60,48 +55,19 @@ class FitDialog : public QDialog
 public:
     FitDialog( QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0 );
     ~FitDialog();
-
-	void initFitPage();
-	void initEditPage();
-	void initAdvancedPage();
-
-	QCheckBox* boxUseBuiltIn;
-	Q3WidgetStack* tw;
-    QPushButton* buttonOk;
-	QPushButton* buttonCancel;
-	QPushButton* buttonAdvanced;
-	QPushButton* buttonClear;
-	QPushButton* buttonPlugins;
-	QPushButton* btnBack;
-	QComboBox* boxCurve;
-	QComboBox* boxAlgorithm;
-	Q3Table* boxParams;
-	QLineEdit* boxFrom;
-	QLineEdit* boxTo;
-	QLineEdit* boxTolerance;
-	QSpinBox* boxPoints, *generatePointsBox, *boxPrecision, *polynomOrderBox;
-	QWidget *fitPage, *editPage, *advancedPage;
-	Q3TextEdit *editBox, *explainBox, *boxFunction;
-	Q3ListBox *categoryBox, *funcBox;
-	QLineEdit *boxName, *boxParam;
-	QLabel *lblFunction, *lblPoints, *polynomOrderLabel;
-	QPushButton *btnAddFunc, *btnDelFunc, *btnContinue, *btnApply;
-	QPushButton *buttonEdit, *btnAddTxt, *btnAddName, *btnDeleteFitCurves;
-	ColorBox* boxColor;
-	Q3ComboBox *boxWeighting, *tableNamesBox, *colNamesBox;
-	QRadioButton *generatePointsBtn, *samePointsBtn;
-	QPushButton *btnParamTable, *btnCovMatrix;
-	QLineEdit *covMatrixName, *paramTableName;
-	QCheckBox *plotLabelBox, *logBox;
-	Fit *fitter;
  
 protected:
 	void closeEvent (QCloseEvent * e );
+    void initFitPage();
+	void initEditPage();
+	void initAdvancedPage();
 
 public slots:
 	void accept();
 	void insertFunctionsList(const QStringList& list);
-	void clearList();
+	void clearUserList();
+    //! Clears the function editor, the parameter names and the function name
+    void resetFunction();
 	void showFitPage();
 	void showEditPage();
 	void showAdvancedPage();
@@ -134,21 +100,57 @@ public slots:
 
 	//! Applies the user changes to the numerical format of the output results
 	void applyChanges();
-	void enableApplyChanges(int);
 
 	//! Deletes the result fit curves from the plot
 	void deleteFitCurves();
+
+private slots:
+    //! Enable the "Apply" button
+	void enableApplyChanges(int = 0);
 
 signals:
 	void clearFunctionsList();
 	void saveFunctionsList(const QStringList&);
 
 private:
+    Fit *fitter;
 	Graph *graph;
 	QStringList userFunctions, userFunctionNames, userFunctionParams;
 	QStringList builtInFunctionNames, builtInFunctions;
 	QStringList pluginFunctionNames, pluginFunctions, pluginFilesList, pluginParameters;
 	QWidgetList *srcTables;
+
+    QCheckBox* boxUseBuiltIn;
+	QStackedWidget* tw;
+    QPushButton* buttonOk;
+	QPushButton* buttonCancel1;
+	QPushButton* buttonCancel2;
+	QPushButton* buttonCancel3;
+	QPushButton* buttonAdvanced;
+	QPushButton* buttonClear;
+    QPushButton* buttonClearUsrList;
+	QPushButton* buttonPlugins;
+	QPushButton* btnBack;
+	QComboBox* boxCurve;
+	QComboBox* boxAlgorithm;
+	QTableWidget* boxParams;
+	QLineEdit* boxFrom;
+	QLineEdit* boxTo;
+	QLineEdit* boxTolerance;
+	QSpinBox* boxPoints, *generatePointsBox, *boxPrecision, *polynomOrderBox;
+	QWidget *fitPage, *editPage, *advancedPage;
+	QTextEdit *editBox, *explainBox, *boxFunction;
+	QListWidget *categoryBox, *funcBox;
+	QLineEdit *boxName, *boxParam;
+	QLabel *lblFunction, *lblPoints, *polynomOrderLabel;
+	QPushButton *btnAddFunc, *btnDelFunc, *btnContinue, *btnApply;
+	QPushButton *buttonEdit, *btnAddTxt, *btnAddName, *btnDeleteFitCurves;
+	ColorBox* boxColor;
+	QComboBox *boxWeighting, *tableNamesBox, *colNamesBox;
+	QRadioButton *generatePointsBtn, *samePointsBtn;
+	QPushButton *btnParamTable, *btnCovMatrix;
+	QLineEdit *covMatrixName, *paramTableName;
+	QCheckBox *plotLabelBox, *logBox, *scaleErrorsBox;
 };
 
 #endif // FITDIALOG_H

@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Scale picker
                            
  ***************************************************************************/
@@ -38,14 +38,7 @@
 ScalePicker::ScalePicker(QwtPlot *plot):
     QObject(plot)
 {
-	movedGraph=FALSE;
-	
-    for ( uint i = 0; i < QwtPlot::axisCnt; i++ )
-		{
-        QwtScaleWidget *scale = (QwtScaleWidget *)plot->axisWidget(i);
-        if ( scale )
-            scale->installEventFilter(this);
-		}
+	refresh();
 }
 
 bool ScalePicker::eventFilter(QObject *object, QEvent *e)
@@ -64,18 +57,9 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 		const QMouseEvent *me = (const QMouseEvent *)e;	
 		if (me->button()==Qt::LeftButton)
 			{
-			presspos = me->pos();
 			((QwtScaleWidget *)object)->setFocus();
 			emit clicked();	
-
-			if (plot()->margin() < 2 && plot()->lineWidth() < 2)
-				{
-				QRect r = ((const QwtScaleWidget *)object)->rect();
-				//r.addCoords(2, 2, -2, -2);
-				if (!r.contains(me->pos()))
-					emit highlightGraph();
-				}
-			return TRUE;
+			return !scaleRect((const QwtScaleWidget *)object).contains(me->pos());
 			}
 		else if (me->button() == Qt::RightButton)
 			{
@@ -84,41 +68,12 @@ bool ScalePicker::eventFilter(QObject *object, QEvent *e)
 			}
     	}
 	
-	if ( e->type() == QEvent::MouseMove)
-    	{	
-		const QMouseEvent *me = (const QMouseEvent *)e;			
-
-		if ((presspos - me->pos()).manhattanLength() > QApplication::startDragDistance())
-			{
-			movedGraph=TRUE;
-			emit moveGraph(me->pos());
-			}
-
-        return TRUE;
-   	 }
-	
-	if ( e->type() == QEvent::MouseButtonRelease)
-    	{
-		if (movedGraph)
-			{
-			emit releasedGraph();
-			movedGraph=FALSE;
-			}
-				
-        return TRUE;
-    	}
-		
-return QObject::eventFilter(object, e);
+	return QObject::eventFilter(object, e);
 }
 
 void ScalePicker::mouseDblClicked(const QwtScaleWidget *scale, const QPoint &pos) 
 {
-QRect rect = scaleRect(scale);
-
-int margin = 1; // pixels tolerance
-rect.setRect(rect.x() - margin, rect.y() - margin, rect.width() + 2 * margin, rect.height() +  2 * margin);
-
-if ( rect.contains(pos) ) 
+if (scaleRect(scale).contains(pos) ) 
 	emit axisDblClicked(scale->alignment());
 else
 	{// Click on the title
@@ -159,7 +114,10 @@ else
 // The rect of a scale without the title
 QRect ScalePicker::scaleRect(const QwtScaleWidget *scale) const
 {
+int margin = 1; // pixels tolerance
 QRect rect = scale->rect();
+rect.setRect(rect.x() - margin, rect.y() - margin, rect.width() + 2 * margin, rect.height() +  2 * margin);
+
 if (scale->title().text().isEmpty())
 	return rect;
 
@@ -201,14 +159,12 @@ void ScalePicker::refresh()
 }
 
 TitlePicker::TitlePicker(QwtPlot *plot):
-    QObject(plot)
+	QObject(plot)
 {
-movedGraph=FALSE;
-
-title = (QwtTextLabel *)plot->titleLabel();
-title->setFocusPolicy(Qt::StrongFocus);
-if (title)
-	title->installEventFilter(this);
+	title = (QwtTextLabel *)plot->titleLabel();
+	title->setFocusPolicy(Qt::StrongFocus);
+	if (title)
+		title->installEventFilter(this);
 }
 
 bool TitlePicker::eventFilter(QObject *object, QEvent *e)
@@ -218,56 +174,19 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
 	
     if ( object->inherits("QwtTextLabel") && e->type() == QEvent::MouseButtonDblClick)
 		{
-		emit doubleClicked();
+        emit doubleClicked();
         return TRUE;
 		}
 
-	if ( object->inherits("QwtTextLabel") &&  e->type() == QEvent::MouseButtonPress )
-		{
-		const QMouseEvent *me = (const QMouseEvent *)e;	
-		presspos = me->pos();
-		emit clicked();
+	 if ( object->inherits("QwtTextLabel") &&  e->type() == QEvent::MouseButtonPress )
+	 {
+		 const QMouseEvent *me = (const QMouseEvent *)e;	
+		 emit clicked();
 
-		if (me->button()==Qt::RightButton)
-			emit showTitleMenu();
-
-		QwtPlot *plot = (QwtPlot *)title->parent();
-		if (plot->margin() < 2 && plot->lineWidth() < 2)
-			{
-			QRect r = title->rect();
-			r.addCoords(2, 2, -2, -2);
-			if (!r.contains(me->pos()))
-				emit highlightGraph();
-			}
-
-		return TRUE;
-		}
-
-	if ( object->inherits("QwtTextLabel") &&  e->type() == QEvent::MouseMove)
-		{	
-		const QMouseEvent *me = (const QMouseEvent *)e;		
-		if ((presspos - me->pos()).manhattanLength() > QApplication::startDragDistance())
-			{			
-			movedGraph=TRUE;
-			emit moveGraph(me->pos());
-			}
-        return TRUE;
-		}
-	
-	if ( object->inherits("QwtTextLabel") && e->type() == QEvent::MouseButtonRelease)
-		{
-		const QMouseEvent *me = (const QMouseEvent *)e;
-		if (me->button()== Qt::LeftButton)
-			{
-			emit clicked();
-			if (movedGraph)
-				{
-				emit releasedGraph();
-				movedGraph=FALSE;
-				}
-        	return TRUE;
-			}
-		}
+		 if (me->button()==Qt::RightButton)
+			 emit showTitleMenu();
+		 return true;
+    }
 
 	if ( object->inherits("QwtTextLabel") && 
         e->type() == QEvent::KeyPress)

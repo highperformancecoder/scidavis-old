@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Parser class based on muParser
                            
  ***************************************************************************/
@@ -29,7 +29,7 @@
 #ifndef MYPARSER_H
 #define MYPARSER_H
 
-#include "../3rdparty/muParser/muParser.h"
+#include <muParser/muParser.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_sf.h>
 
@@ -37,7 +37,15 @@
 
 using namespace mu;
 
-//! Parser class based on muParser
+/*!\brief Mathematical parser class based on muParser.
+ *
+ * \section future Future Plans
+ * Eliminate in favour of Script/ScriptingEnv.
+ * This will allow you to use e.g. Python's global variables and functions everywhere.
+ * Before this happens, a cleaner and more generic solution for accessing the current ScriptingEnv
+ * should be implemented (maybe by making it a property of Project; see ApplicationWindow).
+ * [ assigned to knut ]
+ */
 class MyParser : public Parser
 {
 public:

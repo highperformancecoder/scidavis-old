@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Legend marker (extension to QwtPlotMarker)
                            
  ***************************************************************************/
@@ -40,21 +40,36 @@
 #include "graph.h"
 #include "plot.h"
 	
-//! Legend marker (extension to QwtPlotMarker)
+/**
+ * \brief A piece of text to be drawn on a Plot.
+ *
+ * Contrary to its name, LegendMarker is not just used for the plot legend,
+ * but for any kind of text; particularly also for the "Add Text" tool.
+ * Accordingly, it is also referred to as "TextMarker" by other classes.
+ *
+ * \section future Future Plans
+ * Rename to TextMarker (or maybe TextEnrichment; see documentation of ImageMarker for details).
+ *
+ * \sa ImageMarker, LineMarker
+ */
 class LegendMarker: public QwtPlotMarker
 {
 public:
     LegendMarker(Plot *);
 	~LegendMarker();
 
+	//! The kinds of frame a LegendMarker can draw around the Text.
 	enum FrameStyle{None = 0, Line = 1, Shadow=2};
-	
-    virtual void draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r) const;
+
+	virtual void draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &r) const;
 
 	QString getText();
 	void setText(const QString& s);
 
-	QRect rect();
+	//! Bounding rectangle in paint coordinates.
+	QRect rect() const;
+	//! Bounding rectangle in plot coordinates.
+	virtual QwtDoubleRect boundingRect() const;
 
 	void setOrigin(const QPoint & p);
 

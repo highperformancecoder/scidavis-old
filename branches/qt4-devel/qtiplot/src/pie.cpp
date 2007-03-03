@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Pie plot class
                            
  ***************************************************************************/
@@ -30,9 +30,9 @@
 #include "colorBox.h"
 
 #include <qwt_painter.h>
-#include <qpainter.h>
+#include <QPainter>
 
-QwtPieCurve::QwtPieCurve(QwtPlot *parent, const char *name):
+QwtPieCurve::QwtPieCurve(const char *name):
     QwtPlotCurve(name)
 {
 pieRay=100;
@@ -121,6 +121,3 @@ if (br.style() == style)
 br.setStyle(style);
 setBrush(br);
 }
-
-
-

@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : TODO
                            
  ***************************************************************************/
@@ -29,46 +29,46 @@
 #ifndef FITTER_H
 #define FITTER_H
 
-#include <qobject.h>
-#include <qlibrary.h>
+#include <QObject>
 
 #include "application.h"
+#include "Filter.h"
 
-class QwtPlotCurve;
-class LegendMarker;
+#include <gsl/gsl_multifit_nlin.h>
+#include <gsl/gsl_multimin.h>
+
 class Table;
 class Matrix;
 
 //! TODO
-class Fit : public QObject
+class Fit : public Filter
 {
 	Q_OBJECT
 
 	public:
+
 		typedef double (*fit_function_simplex)(const gsl_vector *, void *);
 		typedef int (*fit_function)(const gsl_vector *, void *, gsl_vector *);
 		typedef int (*fit_function_df)(const gsl_vector *, void *, gsl_matrix *);
 		typedef int (*fit_function_fdf)(const gsl_vector *, void *, gsl_vector *, gsl_matrix *);
 
 		enum Algorithm{ScaledLevenbergMarquardt, UnscaledLevenbergMarquardt, NelderMeadSimplex};
-		enum WeightingMethod{NoWeighting, Instrumental, Statistical, ArbDataset};
+		enum WeightingMethod{NoWeighting, Instrumental, Statistical, Dataset};
 
 		Fit(ApplicationWindow *parent, Graph *g = 0, const char * name = 0);
 		~Fit();
 
+		//! Actually does the fit. Should be reimplemented in derived classes.
 		virtual void fit();
+        virtual bool run(){return false;};
 
+		//! Sets the data set to be used for weighting
 		bool setWeightingData(WeightingMethod w, const QString& colName = QString::null);
 
-		bool setDataFromCurve(const QString& curveTitle);
-		bool setDataFromCurve(const QString& curveTitle, double from, double to);
-		void setDataFromCurve(QwtPlotCurve *curve, int start, int end);
-
-		void setGraph(Graph *g){d_graph = g;};
+		void setDataCurve(int curve, double start, double end);
 
 		QString formula(){return d_formula;};
-		virtual void setParametersList(const QStringList& lst){};
-		int numParameters() { return d_p; }
+		int numParameters() {return d_p;}
 
 		void setInitialGuess(int parIndex, double val){gsl_vector_set(d_param_init, parIndex, val);};
 		void setInitialGuesses(double *x_init);
@@ -77,24 +77,26 @@ class Fit : public QObject
 
 		void setAlgorithm(Algorithm s){d_solver = s;};
 
-		void setTolerance(double eps){d_tolerance = eps;};
-		void setFitCurveColor(int colorId){d_curveColorIndex = colorId;};
-
-		void setFitCurveParameters(bool generate, int points = 0);
-
-		void setMaximumIterations(int iter){d_max_iterations = iter;};
-
-		//! Added a new legend to the plot. Calls virtual legendFitInfo()
-		void showLegend();
+		//! Specifies weather the result of the fit is a function curve
+		void generateFunction(bool yes, int points = 100);
 
 		//! Output string added to the plot as a new legend
-		virtual QString legendFitInfo(int prec);
+		virtual QString legendInfo();
 
 		//! Returns a vector with the fit results
 		double* results(){return d_results;};
 
+		//! Returns a vector with the standard deviations of the results
+		double* errors();
+
 		//! Returns the sum of squares of the residuals from the best-fit line
 		double chiSquare() {return chi_2;};
+
+		//! Returns R^2
+		double rSquare();
+
+		//! Specifies wheather the errors must be scaled with sqrt(chi_2/dof)
+		void scaleErrors(bool yes = true){d_scale_errors = yes;};
 
 		Table* parametersTable(const QString& tableName);
 		Matrix* covarianceMatrix(const QString& matrixName);
@@ -110,28 +112,22 @@ class Fit : public QObject
 		virtual void storeCustomFitResults(double *par);
 
 	protected:
-		//! Adds the result curve as a FunctionCurve to the plot, if gen_x_data = true
-		void insertFitFunctionCurve(const QString& name, double *x, double *y, int prec, int penWidth = 1);
+		//! Adds the result curve as a FunctionCurve to the plot, if d_gen_function = true
+		void insertFitFunctionCurve(const QString& name, double *x, double *y, int penWidth = 1);
 
 		//! Adds the result curve to the plot
 		virtual void generateFitCurve(double *par);
 
 		//! Calculates the data for the output fit curve and store itin the X an Y vectors
-		virtual void calculateFitCurveData(double *par, double *X, double *Y){};
+		virtual void calculateFitCurveData(double *par, double *X, double *Y) { Q_UNUSED(par) Q_UNUSED(X) Q_UNUSED(Y)   };
 
 		//! Output string added to the result log
-		virtual QString logFitInfo(double *par, int iterations, int status, int prec, const QString& plotName);
-
-		//! The graph where the result curve should be displayed
-		Graph *d_graph;
+		virtual QString logFitInfo(double *par, int iterations, int status, const QString& plotName);
 
 		fit_function d_f;
 		fit_function_df d_df;
 		fit_function_fdf d_fdf;
 		fit_function_simplex d_fsimplex;
-
-		//! Size of the data arrays
-		int d_n;
 
 		//! Number of fit parameters
 		int d_p;
@@ -139,21 +135,13 @@ class Fit : public QObject
 		//! Initial guesses for the fit parameters 
 		gsl_vector *d_param_init;
 
-		//! Tells weather the fitter uses non-linear/simplex fitting 
-		// with an initial parameters set, that must be freed in the destructor.
+		/*! \brief Tells whether the fitter uses non-linear/simplex fitting 
+		 * with an initial parameters set, that must be freed in the destructor.
+		 */
 		bool is_non_linear;
-
-		//! x data set to be fitted
-		double *d_x;
-
-		//! y data set to be fitted
-		double *d_y;
 
 		//! weighting data set used for the fit
 		double *d_w;
-
-		//! GSL Tolerance
-		double d_tolerance;
 
 		//! Names of the fit parameters
 		QStringList d_param_names;
@@ -161,29 +149,14 @@ class Fit : public QObject
 		//! Stores a list of short explanations for the significance of the fit parameters
 		QStringList d_param_explain;
 
-		//! Tells weather the result curve has the same x values as the fit data or not
-		bool gen_x_data;
-
-		//! Number of result points to de calculated and displayed in the result curve
-		int d_result_points;
-
-		//! Color index of the result curve
-		int d_curveColorIndex;
-
-		//! Maximum number of iterations per fit
-		int d_max_iterations;
+		//! Specifies weather the result curve is a FunctionCurve or a normal curve with the same x values as the fit data
+		bool d_gen_function;
 
 		//! Algorithm type
 		Algorithm d_solver;
 
-		//! The curve to be fitted
-		QwtPlotCurve *d_curve; 
-
 		//! The fit formula
 		QString d_formula;
-
-		//! The fit type: exponential decay, gauss etc...
-		QString d_fit_type;
 
 		//! Covariance matrix
 		gsl_matrix *covar;
@@ -197,8 +170,14 @@ class Fit : public QObject
 		//! Stores the result parameters
 		double *d_results;
 
+		//! Stores standard deviations of the result parameters
+		double *d_errors;
+
 		//! The sum of squares of the residuals from the best-fit line
 		double chi_2;
+
+		//! Specifies wheather the errors must be scaled with sqrt(chi_2/dof)
+		bool d_scale_errors;
 };
 
 class ExponentialFit : public Fit
@@ -207,8 +186,12 @@ class ExponentialFit : public Fit
 
 	public:
 		ExponentialFit(ApplicationWindow *parent, Graph *g,  bool expGrowth = false);
+		ExponentialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, bool expGrowth = false);
+		ExponentialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, 
+				double start, double end, bool expGrowth = false);
 
 	private:
+		void init();
 		void storeCustomFitResults(double *par);
 		void calculateFitCurveData(double *par, double *X, double *Y);
 
@@ -221,8 +204,11 @@ class TwoExpFit : public Fit
 
 	public:
 		TwoExpFit(ApplicationWindow *parent, Graph *g);
+		TwoExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+		TwoExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
 
 	private:
+		void init();
 		void storeCustomFitResults(double *par);
 		void calculateFitCurveData(double *par, double *X, double *Y);
 };
@@ -233,8 +219,11 @@ class ThreeExpFit : public Fit
 
 	public:
 		ThreeExpFit(ApplicationWindow *parent, Graph *g);
+		ThreeExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+		ThreeExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
 
 	private:
+		void init();
 		void storeCustomFitResults(double *par);
 		void calculateFitCurveData(double *par, double *X, double *Y);
 };
@@ -245,9 +234,12 @@ class SigmoidalFit : public Fit
 
 	public:
 		SigmoidalFit(ApplicationWindow *parent, Graph *g);
+		SigmoidalFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+		SigmoidalFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
 		void guessInitialValues();
 
 	private:
+		void init();
 		void calculateFitCurveData(double *par, double *X, double *Y);
 };
 
@@ -257,8 +249,11 @@ class GaussAmpFit : public Fit
 
 	public:
 		GaussAmpFit(ApplicationWindow *parent, Graph *g);
+		GaussAmpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+		GaussAmpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
 
 	private:
+		void init();
 		void calculateFitCurveData(double *par, double *X, double *Y);
 };
 
@@ -267,12 +262,16 @@ class NonLinearFit : public Fit
 	Q_OBJECT
 
 	public:
-		NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& formula = QString::null);
+		NonLinearFit(ApplicationWindow *parent, Graph *g);
+		NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+		NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+
 		void setParametersList(const QStringList& lst);
-		void setFormula(const QString& s){if (d_formula != s) d_formula = s;};
+		void setFormula(const QString& s);
 
 	private:
 		void calculateFitCurveData(double *par, double *X, double *Y);
+		void init();
 };
 
 class PluginFit : public Fit
@@ -280,11 +279,15 @@ class PluginFit : public Fit
 	Q_OBJECT
 
 	public:
-		typedef double (*fitFunctionEval)(double, double *);
 		PluginFit(ApplicationWindow *parent, Graph *g);
+		PluginFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+		PluginFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+
 		bool load(const QString& pluginName);
 
 	private:
+		void init();
+		typedef double (*fitFunctionEval)(double, double *);
 		void calculateFitCurveData(double *par, double *X, double *Y);
 		fitFunctionEval f_eval;
 };
@@ -298,19 +301,21 @@ class MultiPeakFit : public Fit
 		MultiPeakFit(ApplicationWindow *parent, Graph *g = 0, PeakProfile profile = Gauss, int peaks = 1);
 
 		int peaks(){return d_peaks;};
+		void setNumPeaks(int n);
 
 		void enablePeakCurves(bool on){generate_peak_curves = on;};
 		void setPeakCurvesColor(int colorIndex){d_peaks_color = colorIndex;};
 
 		static QString generateFormula(int order, PeakProfile profile);
 		static QStringList generateParameterList(int order);
+		static QStringList generateExplanationList(int order);
 
 	private:
-		QString logFitInfo(double *par, int iterations, int status, int prec, const QString& plotName);
+		QString logFitInfo(double *par, int iterations, int status, const QString& plotName);
 		void generateFitCurve(double *par);
 		static QString peakFormula(int peakIndex, PeakProfile profile);
 		//! Inserts a peak function curve into the plot 
-		void insertPeakFunctionCurve(double *x, double *y, int prec, int peak);
+		void insertPeakFunctionCurve(double *x, double *y, int peak);
 		void storeCustomFitResults(double *par);
 
 		//! Used by the GaussFit and LorentzFit derived classes to calculate initial values for the parameters 
@@ -335,6 +340,11 @@ class LorentzFit : public MultiPeakFit
 
 	public:
 		LorentzFit(ApplicationWindow *parent, Graph *g);
+		LorentzFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+		LorentzFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+
+	private:
+		void init();
 };
 
 class GaussFit : public MultiPeakFit
@@ -343,6 +353,11 @@ class GaussFit : public MultiPeakFit
 
 	public:
 		GaussFit(ApplicationWindow *parent, Graph *g);
+		GaussFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+		GaussFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+
+	private:
+		void init();
 };
 
 class PolynomialFit : public Fit
@@ -351,14 +366,17 @@ class PolynomialFit : public Fit
 
 	public:
 		PolynomialFit(ApplicationWindow *parent, Graph *g, int order = 2, bool legend = false);
+		PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, int order = 2, bool legend = false);
+		PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, double start, double end, int order = 2, bool legend = false);
 
-		virtual QString legendFitInfo(int prec);
+		virtual QString legendInfo();
 		void fit();
 
 		static QString generateFormula(int order);
 		static QStringList generateParameterList(int order);
 
 	private:
+		void init();
 		void calculateFitCurveData(double *par, double *X, double *Y);
 
 		int d_order;
@@ -371,9 +389,13 @@ class LinearFit : public Fit
 
 	public:
 		LinearFit(ApplicationWindow *parent, Graph *g);
+		LinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+		LinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+
 		void fit();
 
 	private:
+		void init();
 		void calculateFitCurveData(double *par, double *X, double *Y);
 };
 #endif

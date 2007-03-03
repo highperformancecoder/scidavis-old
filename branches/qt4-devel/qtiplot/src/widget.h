@@ -4,9 +4,9 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
-					  Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net,
-                           knut.franke@gmx.de
+                           Knut Franke
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
+                           knut.franke*gmx.de
     Description          : MDI window widget
                            
  ***************************************************************************/
@@ -38,7 +38,17 @@ class QCloseEvent;
 class QString;
 class Folder;
 
-//! Extension to QWidget
+/**
+ * \brief Base class of all MDI client windows.
+ *
+ * These are the main objects of every Qtiplot project.
+ * All content (apart from the directory structure) is managed by subclasses of MyWidget.
+ *
+ * \section future Future Plans
+ * Rename to MDIWindow (or some yet-to-find better name; ideas anyone?).
+ *
+ * \sa Folder, ApplicationWindow
+ */
 class MyWidget: public QWidget
 {
 	Q_OBJECT
@@ -61,12 +71,12 @@ public:
 	//! Return the window label
 	QString windowLabel(){return QString(w_label);};
 	//! Set the window label
-	void setWindowLabel(const QString& s) { w_label = s; updateCaption(); };
+	void setWindowLabel(const QString& s) { w_label = s; updateCaption();};
 
 	//! Return the window name
 	QString name(){return objectName();};
 	//! Set the window name
-	void setName(const QString& s){setObjectName(s);};
+	void setName(const QString& s){setObjectName(s); updateCaption();};
 
 	//! Return the caption policy
 	CaptionPolicy captionPolicy(){return caption_policy;};
@@ -78,8 +88,7 @@ public:
 	 * Both -> caption = "name - label"
 	 */
 	void setCaptionPolicy(CaptionPolicy policy) { caption_policy = policy; updateCaption(); }
-
-	//! Set the widget's name
+ 	//! Set the widget's name
 	void setName(const char *newname) { QWidget::setName(newname); updateCaption(); }
 
 	//! Return the creation date
@@ -143,9 +152,6 @@ public:
 	//! Initializes the pointer to the parent folder of the window
 	void setFolder(Folder* f){parentFolder = f;};
 
-	//! Catches parent changes (in order to gain access to the title bar)
-	virtual void reparent(QWidget * parent, Qt::WFlags f, const QPoint & p, bool showIt = false);
-
 signals:  
 	//! Emitted when the window was closed
 	void closedWindow(MyWidget *);
@@ -159,10 +165,13 @@ signals:
 	void showTitleBarMenu();
 
 protected:
+	//! Catches parent changes (in order to gain access to the title bar)
+	virtual void changeEvent(QEvent *event);
+	//! Title bar of this MDI window if it currently belongs to a QWorkspace, NULL else
 	QWidget *titleBar;
 
 private:
-	//! set caption according to current CaptionPolicy, name and label
+    //! Set caption according to current CaptionPolicy, name and label
 	void updateCaption();
 
 	//!Pointer to the parent folder of the window

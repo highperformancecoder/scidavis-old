@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Bar curve
                            
  ***************************************************************************/
@@ -37,8 +37,8 @@ class QwtBarCurve: public QwtPlotCurve
 {
 public:
 	enum BarStyle{Vertical = 0, Horizontal=1};
-	QwtBarCurve(QwtPlot *parent, const char *name=0);
-	QwtBarCurve(BarStyle style, QwtPlot *parent, const char *name=0);
+	QwtBarCurve(const char *name=0);
+	QwtBarCurve(BarStyle style, const char *name=0);
 
 	void copy(const QwtBarCurve *b);
 
@@ -62,5 +62,4 @@ private:
 	BarStyle bar_style;
 };
 
-#endif 
-
+#endif

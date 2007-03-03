@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, 
                            Tilman Hoener zu Siederdissen,
                            Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Scripting classes
                            
  ***************************************************************************/
@@ -31,15 +31,20 @@
 #ifndef SCRIPTEDIT_H
 #define SCRIPTEDIT_H
 
-#include <q3textedit.h>
-//Added by qt3to4:
-#include <QMenu>
 #include "Scripting.h"
+
+#include <QMenu>
 #include <QTextEdit>
 
 class QAction;
 class QMenu;
 
+/*!\brief Editor widget with support for evaluating expressions and executing code.
+ *
+ * \section future Future Plans
+ * - Display line numbers.
+ * - syntax highlighting, indentation, auto-completion etc. (maybe using QScintilla)
+ */
 class ScriptEdit: public QTextEdit, public scripted
 {
   Q_OBJECT

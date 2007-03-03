@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Filter options dialog
                            
  ***************************************************************************/
@@ -45,9 +45,7 @@ class FilterDialog : public QDialog
 
 public:
     FilterDialog(int type, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0 );
-    ~FilterDialog();
-
-	enum FilterType{LowPass = 1, HighPass = 2, BandPass = 3, BandBlock = 4};
+    ~FilterDialog(){};
 
 	QPushButton* buttonFilter;
 	QPushButton* buttonCancel;

@@ -5,8 +5,8 @@
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
                            Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net,
-                           knut.franke@gmx.de
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
+                           knut.franke*gmx.de
     Description          : QtiPlot's main window
                            
  ***************************************************************************/
@@ -36,9 +36,9 @@
 #include <q3listview.h> 
 #include <QHttp> 
 #include <QFile> 
-#include <QTextBrowser>
 #include <QSplitter>
 #include <QDesktopServices>
+#include <QBuffer>
 
 #include "worksheet.h"
 #include "Scripting.h"
@@ -50,10 +50,8 @@ class QTimerEvent;
 class QDragEnterEvent;
 class QTranslator;
 class QDockWidget;
-
 class QAction;
 class QActionGroup;
-class QMenu;
 class QWorkspace;
 class QLineEdit;
 class QTranslator;
@@ -61,7 +59,8 @@ class QToolButton;
 class QShortcut;
 class QMenu;
 class QToolBar;
-
+class QAssistantClient;
+	
 class Matrix;
 class Table;
 class Graph;
@@ -73,11 +72,39 @@ class FunctionDialog;
 class Folder;
 class FolderListItem;
 class FolderListView;
+class ScriptWindow;
 class Plot3DDialog;
 class MyWidget;
 class TableStatistics;
 
-//! QtiPlot's main window
+/**
+ * \brief QtiPlot's main window.
+ *
+ * This class contains the main part of the user interface as well as the central project management facilities.
+ *
+ * It manages all MyWidget MDI Windows in a project, knows about their organization in Folder objects
+ * and contains the parts of the project explorer not implemented in Folder, FolderListItem or FolderListView.
+ * 
+ * Furthermore, it is responsible for displaying most MDI Windows' context menus and opening all sorts of dialogs.
+ *
+ * \section future Future Plans
+ * Split out the project management part into a new Project class.
+ * If MyWidget maintains a reference to its parent Project, it should be possible to have its subclasses
+ * display their own context menus and dialogs.
+ * This is necessary for implementing new plot types or even completely new MyWidget subclasses in plug-ins.
+ * It will also make ApplicationWindow more manageable by removing those parts not directly related to the main window.
+ *
+ * Project would also take care of basic project file reading/writing (using Qt's XML framework), but delegate most of
+ * the work to MyWidget and its subclasses. This is necessary for providing save/restore of classes implemented in
+ * plug-ins. Support for foreign formats on the other hand could go into import/export classes (which could also be
+ * implemented in plug-ins). Those would interface directly with Project and the MyWidgets it manages. Thus, in addition
+ * to supporting QtXML-based save/restore, Project, MyWidget and subclasses will also have to provide generalized
+ * save/restore methods/constructors.
+ *
+ * Maybe split out the project explorer into a new ProjectExplorer class, depending on how much code is left
+ * in ApplicationWindow after the above reorganizations. Think about whether a Model/View approach can be
+ * used for Project/ProjectExplorer.
+ */
 class ApplicationWindow: public QMainWindow, public scripted
 {
     Q_OBJECT
@@ -88,6 +115,8 @@ public:
 
 	enum ShowWindowsPolicy{HideAll, ActiveFolder, SubFolders};
 
+	QAssistantClient *assistant;
+	ScriptWindow *scriptWindow;
 	QTranslator *appTranslator, *qtTranslator;
 	QDockWidget *logWindow, *explorerWindow;
 	QTextEdit *results;
@@ -96,7 +125,7 @@ public:
 	QTextEdit *console;
 #endif
 	QWorkspace* ws;
-    QToolBar *fileTools, *plotTools, *tableTools, *plot3DTools, *displayBar, *editTools;
+    QToolBar *fileTools, *plotTools, *tableTools, *plot3DTools, *displayBar, *editTools, *plotMatrixBar;
     QMenu *windowsMenu,*view,*graph,*file,*format,*calcul,*edit,*dataMenu,*recent, *exportPlot;
 	QMenu *help,*type,*import,*plot2D,*plot3D, *specialPlot, *panels,*stat,*decay, *filter;
 	QMenu *matrixMenu, *plot3DMenu, *plotDataMenu, *tableMenu, *tablesDepend; 
@@ -143,30 +172,56 @@ private:
 
 public:
 	/*! Generates a new unique name starting with string /param name.
-	You can force the output to be a name different of /param name, 
+	You can force the output to be a name different from /param name, 
 	even if 'name' is not used in the project, by setting /param increment = true (the default)
 	*/
-	QString generateUnusedName(const QString& name, bool increment = true);
+	QString generateUniqueName(const QString& name, bool increment = true);
 	
 public slots:
+	//! \name Projects and Project Files
+	//@{
 	void open();
 	ApplicationWindow* open(const QString& fn);
 	ApplicationWindow* openProject(const QString& fn);
 	ApplicationWindow* importOPJ(const QString& filename);
 
+	/**
+	 * \brief Create a new project from a data file.
+	 *
+	 * \param fn is read as a data file with the default column separator (as set by the user)
+	 * and inserted as a table into a new, empty project.
+	 * This table is then plotted with the Graph::LineSymbols style.
+	 */
 	ApplicationWindow * plotFile(const QString& fn);
-	void updatePlotsTransparency();
 
 	QWidgetList * windowsList();
-	void updateWindowLists(QWidget *w);
+	void updateWindowLists(MyWidget *w);
 
+	void saveProjectAs();
+	bool saveProject();
+
+	//! Set the project status to modifed
+	void modifiedProject();
+	//! Set the project status to saved (not modified)
+	void savedProject();
+	//! Set the project status to modified and save 'w' as the last modified widget
+	void modifiedProject(QWidget *w);
+	//@}
+
+	//! \name Settings
+	//@{
+	void readSettings();
+	void saveSettings();
+	void applyUserSettings();
 	void setSaveSettings(bool autoSaving, int min);
 	void changeAppStyle(const QString& s);
 	void changeAppFont(const QFont& f);
 	void updateAppFonts();
 	void setAppColors(const QColor& wc,const QColor& pc,const QColor& tpc);
+	//@}
 
-	//multilayer plots
+	//! \name Multilayer Plots
+	//@{
 	MultiLayer* copyGraph();
 	MultiLayer* multilayerPlot(int c, int r, int style);
 	MultiLayer* multilayerPlot(Table* w,const QStringList& colList, int style);
@@ -177,6 +232,16 @@ public slots:
 	void connectMultilayerPlot(MultiLayer *g);
 	void addLayer();
 	void deleteLayer();
+	
+	//! Creates a new spectrogram graph
+  	MultiLayer* plotSpectrogram(Matrix *m, Graph::CurveType type);
+  	void plotGrayScale();
+  	MultiLayer* plotGrayScale(Matrix *m);
+  	void plotContour();
+  	MultiLayer* plotContour(Matrix *m);
+  	void plotColorMap();
+  	MultiLayer* plotColorMap(Matrix *m);
+			
 	//! Rearrange the layersin order to fit to the size of the plot window
   	void autoArrangeLayers();
 	void initMultilayerPlot(MultiLayer* g, const QString& name);
@@ -186,8 +251,10 @@ public slots:
 	void plot4Layers();
 	void plotStackedLayers();
 	void plotStackedHistograms();
+	//@}
 
-	//3D data plots
+	//! \name 3D Data Plots
+	//@{
 	Graph3D* openMatrixPlot3D(const QString& caption, const QString& matrix_name,
 							 double xl,double xr,double yl,double yr,double zl,double zr);
 	Graph3D* dataPlot3D(Table* table,const QString& colName);
@@ -198,12 +265,14 @@ public slots:
 	Graph3D* dataPlotXYZ(const QString& caption,const QString& formula,
  						double xl, double xr, double yl, double yr, double zl, double zr);
 	/*!
-	* used when plotting from the wizard
-	*/
+	 * used when plotting from the wizard
+	 */
 	Graph3D* dataPlotXYZ(const QString& formula);
 	Graph3D* dataPlot3D(const QString& formula);
+	//@}
 
-	//surface plots
+	//! \name Surface Plots
+	//@{
 	Graph3D* newPlot3D(const QString& formula, double xl, double xr,
 					   double yl, double yr, double zl, double zr);
 	Graph3D* newPlot3D(const QString& caption,const QString& formula, 
@@ -213,7 +282,7 @@ public slots:
 	void newSurfacePlot();
 	void editSurfacePlot();
 	void remove3DMatrixPlots(Matrix *m);
-	void update3DMatrixPlots(QWidget *w);
+	void update3DMatrixPlots(QWidget *);
 	void add3DData();
 	void change3DData();
 	void change3DData(const QString& colName);
@@ -226,8 +295,21 @@ public slots:
 	void customPlot3D(Graph3D *plot);
 	void setPlot3DOptions();
 
-	//user-defined functions
-	void newFunctionPlot();
+	void plot3DWireframe();
+	void plot3DHiddenLine();
+	void plot3DPolygons();
+	void plot3DWireSurface();
+
+	void plot3DMatrix(int style);
+
+	void plot3DRibbon();
+	void plot3DScatter();
+	void plot3DTrajectory();
+	void plot3DBars();
+	//@}
+
+	//! \name User-defined Functions
+	//@{
 	void newFunctionPlot(int type,QStringList &formulas, const QString& var,QList<double> &ranges, int points);
 
 	FunctionDialog* functionDialog();
@@ -242,7 +324,10 @@ public slots:
 	void clearPolarFunctionsList();
 	void updateFunctionLists(int type, QStringList &formulas);
 	void updateSurfaceFuncList(const QString& s);
+	//@}
 
+	//! \name Matrices
+	//@{
 	Matrix* cloneMatrix();
 	Matrix* newMatrix();
 	Matrix* newMatrix(const QString& caption, int r, int c);
@@ -253,7 +338,10 @@ public slots:
 	void transposeMatrix();
 	void invertMatrix();
 	void matrixDeterminant();
-	
+	//@}
+
+	//! \name Tables
+	//@{
 	//! Creates an empty table
 	Table* newTable();
 	//! Used when importing an ASCII file
@@ -262,8 +350,16 @@ public slots:
 	//! Used when loading a table from a project file 
 	Table* newTable(const QString& caption,int r, int c);
 	Table* newTable(const QString& caption, int r, int c, const QString& text);
-	Table* newHiddenTable(const QString& caption, int r, int c, const QString& text);
-	Table* newHiddenTable(const QString& name, const QString& legend, int r, int c);
+	/**
+	 * \brief Create a Table which is initially hidden; used to return the result of an analysis operation.
+	 *
+	 * \param name window name (compare MyWidget::MyWidget)
+	 * \param label window label (compare MyWidget::MyWidget)
+	 * \param r number of rows
+	 * \param c number of columns
+     * \param text tab/newline - seperated initial content; may be empty
+	 */
+	Table* newHiddenTable(const QString& name, const QString& label, int r, int c, const QString& text=QString());
 	Table* table(const QString& name);
 	Table* copyTable();
 	Table* convertMatrixToTable();
@@ -276,28 +372,29 @@ public slots:
 	void customTable(Table* w);
 	void customizeTables(const QColor& bgColor,const QColor& textColor,
 						const QColor& headerColor,const QFont& textFont, const QFont& headerFont);
+	
+	void setImportOptions(const QString& sep, int lines, bool rename, bool strip, bool simplify);
+	void loadASCII();
+	void loadMultiple();
+	void loadMultipleASCIIFiles(const QStringList& fileNames, int importFileAs);
+	void exportAllTables(const QString& sep, bool colNames, bool expSelection);
+	void exportASCII(const QString& tableName, const QString& sep, bool colNames, bool expSelection);
+
+	//! recalculate selected cells of current table
+	void recalculateTable();
 
 	TableStatistics *newTableStatistics(Table *base, int type, QList<int>,
 	    const QString &caption=QString::null);
+	//@}
 
+	//! \name Graphs
+	//@{
 	void customGraph(Graph* g);
 	void setGraphDefaultSettings(bool autoscale,bool scaleFonts,bool resizeLayers);
 	void setLegendDefaultSettings(int frame, const QFont& font, 
 							 const QColor& textCol, const QColor& backgroundCol);
 	void setArrowDefaultSettings(int lineWidth,  const QColor& c, Qt::PenStyle style,
 								int headLength, int headAngle, bool fillHead);
-
-	void plot3DWireframe();
-	void plot3DHiddenLine();
-	void plot3DPolygons();
-	void plot3DWireSurface();
-
-	void plot3DMatrix(int style);
-
-	void plot3DRibbon();
-	void plot3DScatter();
-	void plot3DTrajectory();
-	void plot3DBars();
 
 	void plotL();
 	void plotP();
@@ -314,22 +411,22 @@ public slots:
 	void plotVectXYXY();
 	void plotVectXYAM();
 	void plotBoxDiagram();
+	//@}
 	
-	//image analysis
+	//! \name Image Analysis
+	//@{
 	void intensityTable();
 	void pixelLineProfile();
 	void loadImage();
 	void loadImage(const QString& fn);
-	void importImage();
-	
-    void loadASCII();
-	void loadMultiple();
-	void loadMultipleASCIIFiles(const QStringList& fileNames, int importFileAs);
-	void exportAllTables(const QString& sep, bool colNames, bool expSelection);
-	void exportASCII(const QString& tableName, const QString& sep, bool colNames, bool expSelection);
+	Matrix* importImage();
+  	Matrix* importImage(const QString& fn);
+	//@}
 
+	//! \name Export and Print
+	//@{
 	void exportLayer();
-    void exportGraph();
+	void exportGraph();
 	void exportAllGraphs();
 	void exportAllGraphs(const QString& dir, const QString& format, 
 									int quality, bool transparency);
@@ -337,30 +434,19 @@ public slots:
 										int quality, bool transparency);
 	void export3DPlotToFile(Graph3D *plot, const QString& fileName, 
 										const QString& format);
-
-	void saveProjectAs();
-	bool saveProject();
-
-	void readSettings();
-	void saveSettings();
-	void applyUserSettings();
-	//! Set the project status to modifed
-	void modifiedProject();
-	//! Set the project status to saved (not modified)
-	void savedProject();
-	//! Set the project status to modified and save 'w' as the last modified widget
-	void modifiedProject(QWidget *w);
-    void print();
+	
+	void print();
 	void print(QWidget* w);
 	void printAllPlots();
-	void setImportOptions(const QString& sep, int lines, bool rename, bool strip, bool simplify);
+	//@}
     
-	void showExplorer();
-	QStringList columnsList(Table::PlotDesignation plotType);
+	QStringList columnsList(Table::PlotDesignation plotType = Table::All);
 	
 	void undo();
 	void redo();
 	
+	//! \name MDI Windows
+	//@{
 	MyWidget* copyWindow();
 	void rename();
 	void renameWindow();
@@ -374,6 +460,8 @@ public slots:
 	void maximizeWindow(Q3ListViewItem * lbi);
 	void maximizeWindow();
 	void minimizeWindow();
+    //! Changes the geometry of the active MDI window
+    void setWindowGeometry(int x, int y, int w, int h);
 
 	void updateWindowStatus(MyWidget* );
 
@@ -388,13 +476,15 @@ public slots:
 	void hideWindow();
 	void hideActiveWindow();
 	void activateWindow();
-	void activateWindow(QWidget *);
+	void activateWindow(MyWidget *);
 	void printWindow();
+	//@}
+
 	void updateTable(const QString& caption,int row,const QString& text);
 	void updateTableColumn(const QString& colName, double *dat, int rows);
-    void about();
-    void windowsMenuAboutToShow();
-    void windowsMenuActivated( int id );
+	void about();
+	void windowsMenuAboutToShow();
+	void windowsMenuActivated( int id );
 	void removeCurves(const QString& name);
 	QStringList dependingPlots(const QString& caption);
 	QStringList depending3DPlots(Matrix *m);
@@ -409,13 +499,15 @@ public slots:
 	void resizeActiveWindow();
 	void resizeWindow();
 	
-	// list view in project explorer
+	//! \name List View in Project Explorer
+	//@{
 	void setListView(const QString& caption,const QString& view);
 	void renameListViewItem(const QString& oldName,const QString& newName);
 	void setListViewDate(const QString& caption,const QString& date);
 	QString listViewDate(const QString& caption);
 	void setListViewSize(const QString& caption,const QString& size);
 	void setListViewLabel(const QString& caption,const QString& label);
+	//@}
 	
 	void updateColNames(const QString& oldName, const QString& newName);
 	void updateTableNames(const QString& oldName, const QString& newName);
@@ -435,8 +527,12 @@ public slots:
 	void copyActiveLayer();
 	
 	void newProject();
-	void newGraph();
 
+	//! Creates a new empty multilayer plot
+	MultiLayer* newGraph(const QString& caption = tr("Graph"));
+
+	//! \name Reading from a Project File
+	//@{
 	Matrix* openMatrix(ApplicationWindow* app, const QStringList &flist);
 	Table* openTable(ApplicationWindow* app, const QStringList &flist);
 	TableStatistics* openTableStatistics(const QStringList &flist);
@@ -444,6 +540,10 @@ public slots:
 	void openGraph(ApplicationWindow* app, MultiLayer *plot, const QStringList &list);
 
 	void openRecentProject(int index);
+	//@}
+
+	//! \name Initialization
+	//@{
 	void insertTranslatedStrings();
 	void translateActionsStrings();
 	void init();
@@ -461,8 +561,10 @@ public slots:
 	void customToolBars(QWidget* w);
 	void customMenu(QWidget* w);
 	void windowActivated(QWidget *w);
+	//@}
 
-	//table tools
+	//! \name Table Tools
+	//@{
 	void sortSelection();
 	void sortActiveTable();
 	void normalizeSelection();
@@ -470,8 +572,12 @@ public slots:
 	void correlate();
 	void convolute();
 	void deconvolute();
+	void clearTable();
+	void goToRow();
+	//@}
 
-	// plot tools 
+	//! \name Plot Tools 
+	//@{
 	void newLegend();
 	void addTimeStamp();
 	void drawLine();
@@ -490,8 +596,10 @@ public slots:
 	void pickDataTool( QAction* action );
 
 	void updateLog(const QString& result);
+	//@}
 
-	//fitting
+	//! \name Fitting
+	//@{
 	void deleteFitTables();
 	void fitLinear();
 	void fitSigmoidal();
@@ -500,12 +608,15 @@ public slots:
 	void fitMultiPeak(int profile);
 	void fitMultiPeakGauss();
 	void fitMultiPeakLorentz();
+	//@}
 				 
-	//calculus
+	//! \name Calculus
+	//@{
 	void differentiate();
 	void analysis(const QString& whichFit);
 	void analyzeCurve(const QString& whichFit, const QString& curveTitle);
 	void showDataSetDialog(const QString& whichFit);
+	//@}
 
 	void addErrorBars();
 	void defineErrorBars(const QString& name,int type,const QString& percent,int direction);
@@ -513,16 +624,21 @@ public slots:
 	void movePoints();
 	void removePoints();
 
-	// event handlers 
+	//! \name Event Handlers 
+	//@{
 	void closeEvent( QCloseEvent*);
 	void timerEvent ( QTimerEvent *e);
 	void dragEnterEvent( QDragEnterEvent* e );
 	void dropEvent( QDropEvent* e );
 	void customEvent( QEvent* e);
+	//@}
 
-	//dialogs
+	//! \name Dialogs
+	//@{
 	void showFindDialogue();	
+	//! Show plot style dialog for the active MultiLayer / active Graph / first curve.
 	void showPlotDialog();
+	//! Show plot style dialog for the active MultiLayer / active Graph / specified curve.
 	void showPlotDialog(int curveKey);
 	QDialog* showScaleDialog();
 	QDialog* showPieDialog();
@@ -550,12 +666,11 @@ public slots:
 	void showColsDialog();
 	void showColMenu(int c);
 	void showColumnValuesDialog();	
-	//! recalculate selected cells of current table
-	void recalculateTable();
 
 	void showGraphContextMenu();
 	void showTableContextMenu(bool selection);
 	void showWindowContextMenu();
+	void showWindowTitleBarMenu();
 	void showCurveContextMenu(int curveKey);
 	void showCurveWorksheet(int curveKey);
 	void showWindowPopupMenu(Q3ListViewItem *it, const QPoint &p, int);
@@ -566,10 +681,12 @@ public slots:
 	//! Connected to the context menu signal from lv; it's called when there are no items selected in the list
 	void showListViewPopupMenu(const QPoint &p);
 
+	void showScriptWindow();
 	void showMoreWindows();
 	void showImportDialog();
 	void showMarkerPopupMenu();
 	void showHelp();
+	static void showStandAloneHelp();
 	void chooseHelpFolder();
 	void showPlotWizard();
 	void showFitPolynomDialog();
@@ -593,11 +710,14 @@ public slots:
 	void showSmoothSavGolDialog();
 	void showSmoothFFTDialog();
 	void showSmoothAverageDialog();
+    void showSmoothDialog(int m);
+	void showFilterDialog(int filter);
 	void lowPassFilterDialog();
 	void highPassFilterDialog();
 	void bandPassFilterDialog();
 	void bandBlockFilterDialog();
 	void showFFTDialog();
+	//@}
 
 	void translateCurveHor();
 	void translateCurveVert();
@@ -617,10 +737,17 @@ public slots:
 	void updateConfirmOptions(bool askTables, bool askMatrixes, bool askPlots2D, bool askPlots3D, bool askNotes);
 	void showAxis(int axis, int type, const QString& labelsColName, bool axisOn, 
 				int majTicksType, int minTicksType, bool labelsOn, const QColor& c, 
-				int format, int prec, int rotation, int baselineDist, const QString& formula);
+				int format, int prec, int rotation, int baselineDist, const QString& formula, const QColor& labelsColor);
 	
-	//plot3D tools	
+	//! \name Plot3D Tools
+	//@{
 	void toggle3DAnimation(bool on = true);
+	 //! Turns perspective mode on or off
+  	void togglePerspective(bool on = true);
+  	//! Resets rotation of 3D plots to default values
+  	void resetRotation();
+  	//! Finds best layout for the 3D plot
+  	void fitFrameToLayer();
 	void setFramed3DPlot();
 	void setBoxed3DPlot();
 	void removeAxes3DPlot();
@@ -646,6 +773,7 @@ public slots:
 	void pickFloorStyle( QAction* action);
 	void custom3DActions(QWidget *w);
 	void custom3DGrids(int grids);
+	//@}
 
 	void updateRecentProjectsList();
 	
@@ -669,8 +797,12 @@ public slots:
 	void downloadManual();
 	//! Show translations page in external browser
 	void downloadTranslation();
+#ifdef QTIPLOT_DEMO
+	//! Shown when the user tries to save the project.
+	void showDemoVersionMessage();
+#endif
 
-	void parseCommandLineArgument(const QString& s, int args);
+	void parseCommandLineArguments(const QStringList& args);
 	void createLanguagesList();
 	void switchToLanguage(int param);
 	void switchToLanguage(const QString& locale);
@@ -678,6 +810,7 @@ public slots:
 	bool alreadyUsedName(const QString& label);
 	bool projectHas2DPlots();
 	bool projectHas3DPlots();
+	bool projectHasMatrices();
 
 	//! Returns a pointer to the window named "name"
 	QWidget* window(const QString& name);
@@ -685,12 +818,17 @@ public slots:
 	//! Returns a list with the names of all the matrices in the project
 	QStringList matrixNames();
 
+	//! \name Notes
+	//@{
  	//! Creates a new empty note window
 	Note* newNote(const QString& caption = QString());
 	Note* openNote(ApplicationWindow* app, const QStringList &flist);
 	void initNote(Note* m, const QString& caption);
 	void saveNoteAs();
+	//@}
 	
+	//! \name Folders
+	//@{
 	//! Adds a new folder to the project
 	void addFolder();
 	//! Deletes the current folder
@@ -699,7 +837,7 @@ public slots:
 	//! Ask confirmation from user, deletes the folder f if user confirms and returns true, otherwise returns false;
 	bool deleteFolder(Folder *f);
 
-	//! Deletes the currently selected items from the list view lv
+	//! Deletes the currently selected items from the list view #lv.
 	void deleteSelectedItems();
 
 	//! Sets all items in the folders list view to be desactivated (QPixmap = folder_closed_xpm)
@@ -785,8 +923,10 @@ public slots:
 	 * \param dest destination folder item
 	 */
 	void moveFolder(FolderListItem *src, FolderListItem *dest);
+	//@}
 
-	// scripting
+	//! \name Scripting
+	//@{
 	//! notify the user that an error occured in the scripting system
 	void scriptError(const QString &message, const QString &scriptName, int lineNumber);
 	//! execute all notes marked auto-exec
@@ -799,6 +939,7 @@ public slots:
 	void scriptPrint(const QString &text);
 	//! switches to the given scripting language; if this is the same as the current one and force is true, restart it
 	bool setScriptingLang(const QString &lang, bool force=false);
+	//@}
 
 signals:
 	void modified();
@@ -808,6 +949,9 @@ public:
 	bool generateUniformFitPoints;
 	bool generatePeakCurves;
 	int peakCurvesColor;
+
+	//! Scale the errors output in fit operations with reduced chi^2
+	bool fit_scale_errors;
 
 	//! Number of points in a generated fit curve
 	int fitPoints;
@@ -825,12 +969,16 @@ public:
 	//! Describes which windows are shown when the folder becomes the current folder
 	ShowWindowsPolicy show_windows_policy;
 	enum {MaxRecentProjects = 5};
-	int fileVersion;
-	int majVersion, minVersion, patchVersion;
-	//! Extra suffix to the version string like "rc1", "beta7" or similar
-	QString versionSuffix;
+	//! File version code used when opening project files (= maj * 100 + min * 10 + patch)
+	int d_file_version;
+	//! Version string ("QtiPlot x.y.z"). Initialized in initGlobalConstants().
+	QString d_version_string;
+
 	QColor workspaceColor, panelsColor, panelsTextColor;
 	QString appStyle, workingDir;
+
+	//! Path to the folder where the last template file was opened/saved 
+	QString templatesDir;
 	bool smooth3DMesh, autoScaleFonts, autoResizeLayers, askForSupport, autoSearchUpdates;
 	bool confirmCloseTable, confirmCloseMatrix, confirmClosePlot2D, confirmClosePlot3D;
 	bool confirmCloseFolder, confirmCloseNotes;
@@ -846,27 +994,25 @@ public:
 	QFont tableTextFont, tableHeaderFont, plotAxesFont, plotLegendFont, plotNumbersFont, plotTitleFont;
 	QColor tableBkgdColor, tableTextColor, tableHeaderColor;
 	QString projectname,columnSeparator, helpFilePath, appLanguage;
-	QString configFilePath, logInfo, fitPluginsPath;
-	int logID,asciiID,closeID;
-	int exportID, printAllID;
-	int notes, graphs,tables, matrixes, ignoredLines, savingTimerId;
+	QString configFilePath, logInfo, fitPluginsPath, asciiDirPath, imagesDirPath;
+	int logID,asciiID,closeID, exportID, printAllID, ignoredLines, savingTimerId, plot3DResolution;
 	bool renameColumns, copiedLayer, strip_spaces, simplify_spaces;
 	QStringList recentProjects, tableWindows;
 	bool saved, showPlot3DProjection, showPlot3DLegend, orthogonal3DPlots;
-	int plot3DResolution;
 	QStringList plot3DColors, locales;
 	QStringList functions; //user-defined functions;
-	QStringList xFunctions, yFunctions, rFunctions,tetaFunctions; // user functions for parametric and polar plots
+	QStringList xFunctions, yFunctions, rFunctions,thetaFunctions; // user functions for parametric and polar plots
 	QStringList fitFunctions; //user-defined fit functions;
 	QStringList surfaceFunc; //user-defined surface functions;
 
-	//! List of tables and matrixes renamed in order to avoid conflicts when appending a project to a folder
+	//! List of tables and matrices renamed in order to avoid conflicts when appending a project to a folder
 	QStringList renamedTables;
 	//!active window
 	MyWidget *aw; 
 	Graph::MarkerType copiedMarkerType;
 	
-//variables used when user copy/paste markers
+	//! \name variables used when user copy/paste markers
+	//@{
 	QString auxMrkText;
 	QFont auxMrkFont;
 	QColor auxMrkColor, auxMrkBkgColor;
@@ -874,6 +1020,8 @@ public:
 	Qt::PenStyle auxMrkStyle;
 	QString auxMrkFileName;
 	int auxMrkBkg,auxMrkWidth;
+	//@}
+
 	bool startArrowOn, endArrowOn, fillArrowHead;
 	int arrowHeadLength, arrowHeadAngle, specialPlotMenuID, statMenuID, panelMenuID, plot3dID;
 	int plotMenuID, importMenuID, newMenuID, recentMenuID, setAsMenuID, fillMenuID, normMenuID;
@@ -923,6 +1071,7 @@ private:
 	QAction *actionMatrixDeterminant, *actionSetMatrixProperties;
 	QAction *actionSetMatrixDimensions, *actionConvertMatrix, *actionSetMatrixValues, *actionTransposeMatrix, *actionInvertMatrix;
 	QAction *actionPlot3DWireFrame, *actionPlot3DHiddenLine, *actionPlot3DPolygons, *actionPlot3DWireSurface;
+	QAction *actionColorMap, *actionContourMap, *actionGrayMap;
 	QAction *actionDeleteFitTables, *actionShowGridDialog, *actionTimeStamp;
 	QAction *actionSmoothSavGol, *actionSmoothFFT, *actionSmoothAverage, *actionFFT;
 	QAction *actionLowPassFilter, *actionHighPassFilter, *actionBandPassFilter, *actionBandBlockFilter;
@@ -937,7 +1086,8 @@ private:
 	QAction *actionNextWindow, *actionPrevWindow;
 	QAction *actionScriptingLang, *actionRestartScripting, *actionClearTable, *actionGoToRow;
 	QAction *actionNoteExecute, *actionNoteExecuteAll, *actionNoteEvaluate, *actionSaveNote;
-	QAction *actionAnimate;
+	QAction *actionShowScriptWindow;
+	QAction *actionAnimate, *actionPerspective, *actionFitFrame, *actionResetRotation;
 
 private:
 	//! Stores the pointers to the dragged items from the FolderListViews objects
@@ -946,26 +1096,8 @@ private:
 	//! Used when checking for new versions
 	QHttp http;
 	//! Used when checking for new versions
-	QFile versionFile;
-
-	//! Internal function to convert QList<QVariant> to QStringList
-	QStringList variantListToStringList(const QList<QVariant> src);
+	QBuffer version_buffer;
 
 	QSplitter *explorerSplitter;
 };
-
-//! QtiPlot's help browser
-class HelpBrowser: public QTextBrowser
-{
-    Q_OBJECT
-
-public:
-    HelpBrowser(QWidget * parent = 0, const char * name = 0);
-
-public slots:
-	void print();
-	void open();
-	void exportPdf();
-};
-
 #endif

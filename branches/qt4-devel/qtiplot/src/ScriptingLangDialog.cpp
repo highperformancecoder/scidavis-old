@@ -3,7 +3,7 @@
 	Project              : QtiPlot
 --------------------------------------------------------------------
 	Copyright            : (C) 2006 by Knut Franke, Ion Vasilief
-	Email                : knut.franke@gmx.de, ion_vasilief@yahoo.fr
+	Email (use @ for *)  : knut.franke*gmx.de, ion_vasilief*yahoo.fr
 	Description          : Dialog for changing the current scripting
 	                       language
 
@@ -46,17 +46,18 @@ ScriptingLangDialog::ScriptingLangDialog(ScriptingEnv *env, ApplicationWindow *p
 	btnOK = new QPushButton(tr("OK"));
 	btnCancel = new QPushButton(tr("Cancel"));
 
-    QHBoxLayout *hbox1 = new QHBoxLayout(); 
-    hbox1->addWidget(btnOK);
-    hbox1->addWidget(btnCancel);
-	
-	QVBoxLayout *vl = new QVBoxLayout();
- 	vl->addWidget(langList);
+	QHBoxLayout *hbox1 = new QHBoxLayout(); 
+    hbox1->addStretch();
+	hbox1->addWidget(btnOK);
+	hbox1->addWidget(btnCancel);
+
+	QVBoxLayout *vl = new QVBoxLayout(this);
+	vl->addWidget(langList);
 	vl->addLayout(hbox1);	
-	setLayout(vl);
 
 	connect(btnOK, SIGNAL(clicked()), this, SLOT(accept()));
 	connect(btnCancel, SIGNAL(clicked()), this, SLOT(close()));
+	connect(langList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(accept()));
 
 	updateLangList();
 }

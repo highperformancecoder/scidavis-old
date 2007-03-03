@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : A combo box to select a standard color
                            
  ***************************************************************************/
@@ -31,6 +31,8 @@
 #include <QPixmap>
 #include <algorithm>
 
+const int colorsCnt = 16;
+
 const QColor ColorBox::colors[] = {
   QColor(Qt::black),
   QColor(Qt::red),
@@ -40,24 +42,19 @@ const QColor ColorBox::colors[] = {
   QColor(Qt::magenta),
   QColor(Qt::yellow),
   QColor(Qt::darkYellow),
-  QColor(Qt::darkBlue),
-  QColor(Qt::darkMagenta),
-  QColor(Qt::darkRed),
-  QColor(Qt::darkGreen),
-  QColor(Qt::darkCyan),
+  QColor("darkBlue"),
+  QColor("darkMagenta"),
+  QColor("darkRed"),
+  QColor("darkGreen"),
+  QColor("darkCyan"),
   QColor(Qt::white),
-  QColor(Qt::lightGray),
-  QColor(Qt::darkGray),
+  QColor("lightGray"),
+  QColor("darkGray"),
 };
-
-ColorBox::ColorBox(bool rw, QWidget *parent) : QComboBox(parent)
-{
-	setEditable(rw);
-	init();
-}
 
 ColorBox::ColorBox(QWidget *parent) : QComboBox(parent)
 {
+    setEditable(false);
 	init();
 }
 
@@ -130,3 +127,15 @@ QColor ColorBox::color(int colorIndex)
 	else
 		return QColor(Qt::black); // default color is black.
 }
+
+bool ColorBox::isValidColor(const QColor& color)
+{
+	for (int i = 0; i < colorsCnt; i++)
+	{
+        if (color == colors[i])
+            return true;
+    }
+    return false;
+}
+
+

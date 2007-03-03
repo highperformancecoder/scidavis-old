@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Matrix properties dialog
                            
  ***************************************************************************/
@@ -31,11 +31,10 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QComboBox>
-#include <QGridLayout>
+#include <QLayout>
 #include <QGroupBox>
 #include <QSpinBox>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
+
 
 MatrixDialog::MatrixDialog( QWidget* parent, Qt::WFlags fl )
     : QDialog( parent, fl )

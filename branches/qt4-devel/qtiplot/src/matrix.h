@@ -5,8 +5,8 @@
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
 					  Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net,
-                           knut.franke@gmx.de
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
+                           knut.franke*gmx.de
     Description          : Matrix worksheet class
                            
  ***************************************************************************/
@@ -38,6 +38,7 @@
 #include <QEvent>
 #include "widget.h"
 #include "Scripting.h"
+#include <qwt_double_rect.h>
 
 //! Matrix worksheet class
 class Matrix: public MyWidget, public scripted
@@ -111,6 +112,7 @@ public slots:
 	void deleteSelectedColumns();
 	int numSelectedColumns();
 
+	//! This slot notifies the main application that the matrix has been modified
 	void saveCellsToMemory();
 	void forgetSavedCells();
 
@@ -118,16 +120,23 @@ public slots:
 	double xEnd(){return x_end;};
 	double yStart(){return y_start;};
 	double yEnd(){return y_end;};
+	
+	//! Returns the bounding rect of the matrix coordinates
+  	QwtDoubleRect boundingRect(){return QwtDoubleRect(x_start, y_start, x_end-x_start, y_end-y_start).normalized();};
 	void setCoordinates(double xs, double xe, double ys, double ye);
 
-	//! This slot notifies the main application that the matrix has been modified
+	 //! Min and max values of the matrix.
+  	void range(double *min, double *max);
+	Q3Table* table(){return d_table;};
+
+	//! Notifies the main application that the matrix has been modified
 	void notifyChanges(){emit modifiedWindow(this);};
 
 signals:
 	void showContextMenu();
 
 private:
-	Q3Table *table;
+	Q3Table *d_table;
 	QString formula_str;
 	QChar txt_format;
 	int selectedCol, num_precision;

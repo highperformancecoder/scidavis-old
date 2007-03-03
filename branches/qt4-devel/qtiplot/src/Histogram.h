@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Histogram class
                            
  ***************************************************************************/
@@ -32,7 +32,7 @@
 class QwtHistogram: public QwtBarCurve
 {
 public:
-	QwtHistogram(QwtPlot *parent, const char *name=0);
+	QwtHistogram(const char *name=0);
 
 	void copy(const QwtHistogram *h);
 
@@ -51,4 +51,3 @@ private:
 	bool d_autoBin;
 	double d_binSize, d_begin, d_end;
 };
-

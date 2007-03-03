@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief
-    Email                : ion_vasilief@yahoo.fr
+    Email (use @ for *)  : ion_vasilief*yahoo.fr
     Description          : Define surface plot dialog
                            
  ***************************************************************************/
@@ -31,9 +31,7 @@
 #include "application.h"
 
 #include <QMessageBox>
-#include <QGridLayout>
-#include <QBoxLayout>
-#include <QVBoxLayout>
+#include <QLayout>
 #include <QGroupBox>
 #include <QPushButton>
 #include <QLabel>
@@ -115,23 +113,23 @@ SurfaceDialog::SurfaceDialog( QWidget* parent, const char* name, bool modal, Qt:
 	
     QBoxLayout *bl2 = new QBoxLayout ( QBoxLayout::LeftToRight);
     bl2->addStretch();
-	bl2->addWidget(buttonClear);
 	bl2->addWidget(buttonOk);
+    bl2->addWidget(buttonClear);
 	bl2->addWidget(buttonCancel);
-	bl2->addStretch();
-	
-	QVBoxLayout* vl = new QVBoxLayout();
+    bl2->addStretch();
+
+	QVBoxLayout* vl = new QVBoxLayout(this);
     vl->addLayout(bl1);
 	vl->addLayout(bl3);
 	vl->addLayout(bl2);
-	setLayout(vl);
-   
-    // signals and slots connections
+    vl->addStretch();
+
+    resize(minimumSize());
+    setFocusProxy(boxFunction);
+
 	connect( buttonClear, SIGNAL( clicked() ), this, SLOT(clearList() ) );
     connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
     connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-
-	setFocusProxy(boxFunction);
 }
 
 void SurfaceDialog::clearList()

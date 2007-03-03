@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Smoothing options dialog
                            
  ***************************************************************************/
@@ -44,9 +44,7 @@ class SmoothCurveDialog : public QDialog
 
 public:
     SmoothCurveDialog(int method, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0 );
-    ~SmoothCurveDialog();
-
-	enum SmoothType{SavitzkyGolay = 1, FFT = 2, Average = 3};
+    ~SmoothCurveDialog(){};
 
 	QPushButton* btnSmooth;
 	QPushButton* buttonCancel;
@@ -61,7 +59,7 @@ public slots:
 
 private:
 	Graph *graph;
-	int smooth_type;
+	int smooth_method;
 };
 
 #endif

@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Vector curve class
                            
  ***************************************************************************/
@@ -32,9 +32,9 @@
 #include <qwt_plot_curve.h>
 #include <qwt_painter.h>
 #include <qwt_double_rect.h>
-#include <qpainter.h>
+#include <QPainter>
 
-VectorCurve::VectorCurve(VectorStyle style, QwtPlot *parent, const char *name):
+VectorCurve::VectorCurve(VectorStyle style, const char *name):
     QwtPlotCurve(name)
 {
 d_style = style;
@@ -54,8 +54,6 @@ d_headAngle = vc->d_headAngle;
 d_position = vc->d_position;
 pen = vc->pen;
 vectorEnd = (QwtArrayData *)vc->vectorEnd->copy();
-	
-setTitle(vc->title());
 }
 
 void VectorCurve::draw(QPainter *painter,
@@ -137,7 +135,7 @@ void VectorCurve::drawArrowHead(QPainter *p, int xs, int ys, int xe, int ye) con
 {
 p->save();
 p->translate(xe, ye);
-double t=teta(xs, ys, xe, ye);
+double t=theta(xs, ys, xe, ye);
 p->rotate(-t);
 	
 double pi=4*atan(-1.0);	
@@ -155,7 +153,7 @@ QwtPainter::drawPolygon(p,endArray);
 p->restore();
 }
 
-double VectorCurve::teta(int x0, int y0, int x1, int y1) const
+double VectorCurve::theta(int x0, int y0, int x1, int y1) const
 {		
 double t,pi=4*atan(-1.0);
 if (x1==x0)

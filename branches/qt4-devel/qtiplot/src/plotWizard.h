@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : A wizard type dialog to create new plots
                            
  ***************************************************************************/
@@ -46,12 +46,10 @@ public:
 	//! Constructor
 	/**
 	 * \param parent parent widget
-	 * \param name widget name
-	 * \param modal flag: decides wheather the dialog is model or not
 	 * \param fl Qt window flags
 	 */
     PlotWizard( QWidget* parent = 0, Qt::WFlags fl = 0 );
-	//! Destructor
+	 //! Destructor
     ~PlotWizard();
 
 private:

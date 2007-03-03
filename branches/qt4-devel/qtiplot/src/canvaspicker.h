@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Canvas picker
                            
  ***************************************************************************/
@@ -26,51 +26,56 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#include <qobject.h>
+#include <QObject>
 #include "plot.h"
 
 class Graph;
+class LineMarker;
 	
-//! Canvas picker
+/**
+ * \brief Handles parts of the user interaction for a Plot by registering itself as an event filter for its QwtPlotCanvas.
+ *
+ * CanvasPicker relies heavily on its parent being the Graph that owns the Plot it operates on.
+ * Additionally, parts of the code use Graph::plotWidget instead of CanvasPicker::plotWidget.
+ * 
+ * \sa Plot::mousePressEvent, Plot::mouseReleaseEvent, Plot::presspos, Plot::movedGraph
+ */
 class CanvasPicker: public QObject
 {
     Q_OBJECT
 public:
-    CanvasPicker(Graph *plot);
-    virtual bool eventFilter(QObject *, QEvent *);
-	void selectPoints(int n);
-	int selectedPoints(){return selected_points;};
-	void selectPeak(const QPoint& p);
+	 CanvasPicker(Graph *plot);
+	 virtual bool eventFilter(QObject *, QEvent *);
+	 void selectPoints(int n);
+	 void selectPeak(const QPoint& p);
 
 private:
+	//! Move selection to next marker.
+	void selectNextMarker();
 	void drawTextMarker(const QPoint&);
 	void drawLineMarker(const QPoint&, bool endArrow);
 
-	//! Called when the user releases the mouse button after a line marker resize action
+	//! Selects and highlights the marker at the given position.
 	/**
-	 * \param point the mouse position
-	*/
-	void resizeLineMarker(const QPoint& point);
+	 * \return whether a marker was found at \var point
+	 */
+	bool selectMarker(const QMouseEvent *e);
 
-	//! Selects and highlights the marker 
 	/**
-	 * \param point the mouse position
-	*/
-	bool selectMarker(const QPoint& point);
-	void moveMarker(QPoint& );
-	void releaseMarker();
-
+	 * \brief Return my parent as a Graph.
+	 *
+	 * %Note that contrary to the method name, this does NOT return the Plot I operate on.
+	 */
 	Graph *plot() { return (Graph *)parent(); }
 	
+	/**
+	 * \brief The Plot I handle user interaction for.
+	 *
+	 * %Note that this has to be owned by my parent Graph.
+	 */
 	Plot* plotWidget;	
 	QPoint startLinePoint, endLinePoint;
 
-	//! Tells if the user resizes a line marker via the mouse using the start point
-	bool resizeLineFromStart;
-	
-	//! Tells if the user resizes a line marker via the mouse using the end point
-	bool resizeLineFromEnd;	
-	
 signals:
 	void showPieDialog();
 	void showPlotDialog(int);
@@ -81,14 +86,14 @@ signals:
 	void showMarkerPopupMenu();
 	void modified();
 	void calculateProfile(const QPoint&, const QPoint&);
-	void selectPlot();
-	void moveGraph(const QPoint&);
-	void releasedGraph();
-	void highlightGraph();
 	
 private:
-    QPoint presspos;
-    int xMouse, yMouse, xMrk, yMrk, n_peaks, selected_points;
-	bool moved,	movedGraph, mousePressed, pointSelected, select_peaks;
+	bool pointSelected;
+	/*!\brief The marker that is currently being edited, or NULL.
+	 * Editing does explicitly _not_ inlude moving and resizing, which are being
+	 * handled by SelectionMoveResizer (see Graph::d_markers_selector).
+	 * Currently, only LineMarker provides any other form of editing, but this really
+	 * should be generalized. See ImageMarker for details.
+	 */
+	LineMarker *d_editing_marker;
 };
-

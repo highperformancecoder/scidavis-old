@@ -4,9 +4,9 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
-					  Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net,
-                           knut.franke@gmx.de
+                           Knut Franke
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
+                           knut.franke*gmx.de
     Description          : Multi layer widget
                            
  ***************************************************************************/
@@ -34,27 +34,33 @@
 
 #include "widget.h"
 #include "graph.h"
-
-#include <qwidget.h>
-#include <qpushbutton.h>
-#include <qobject.h>
-#include <q3hbox.h>
-#include <QList>
-#include <qprinter.h>
-#include <q3ptrlist.h>
-
-#include <gsl/gsl_vector.h>
+#include <QPushButton>
+#include <QLayout>
+#include <QPointer>
 
 class QWidget;
 class QLabel;
-class QPushButton;
 class QWidget;
-
-class Graph;
-class Table;
 class LayerButton;
+class SelectionMoveResizer;
 	
-//! Multi layer widget
+/**
+ * \brief An MDI window (MyWidget) managing one or more Graph objects.
+ *
+ * %Note that several parts of the code, as well as the user interface, refer to MultiLayer as "graph" or "plot",
+ * practically guaranteeing confusion with the classes Graph and Plot.
+ *
+ * \section future Future Plans
+ * Manage any QWidget instead of only Graph.
+ * This would allow 3D graphs to be added as well, so you could produce mixed 2D/3D arrangements.
+ * It would also allow text labels to be added directly instead of having to complicate things by wrapping them
+ * up in a Graph (see documentation of ImageMarker for details) (see documentation of ImageMarker for details).
+ *
+ * The main problem to be figured out for this is how Graph would interface with the rest of the project.
+ * A possible solution is outlined in the documentation of ApplicationWindow:
+ * If MultiLayer exposes its parent Project to the widgets it manages, they could handle things like creating
+ * tables by calling methods of Project instead of sending signals.
+ */
 class MultiLayer: public MyWidget
 {
 	Q_OBJECT
@@ -68,24 +74,19 @@ public:
 	enum HorAlignement{HCenter, Left, Right};
 	enum VertAlignement{VCenter, Top, Bottom};
 
-	//event handlers
+	//! \name Event Handlers
+	//@{
 	void mousePressEvent(QMouseEvent *);
-	void mouseMoveEvent(QMouseEvent *);
-	void mouseReleaseEvent(QMouseEvent *);
 	void contextMenuEvent(QContextMenuEvent *);
 	void wheelEvent(QWheelEvent *);
 	void keyPressEvent(QKeyEvent *);
 	bool eventFilter(QObject *object, QEvent *);
 	void releaseLayer();
-	
-	QWidgetList buttonsList, graphsList;
-	Q3HBox  *hbox1;
-	QWidget *canvas;
+	//@}
 
 public slots:
 	void resizeLayers (const QResizeEvent *re);
 
-	Graph* insertFirstLayer();
 	Graph* addLayer();
 	Graph* addLayerToOrigin();
 	Graph* addLayer(int x, int y, int width, int height);
@@ -95,17 +96,27 @@ public slots:
     void removeLayer();
 	void confirmRemoveLayer();
 
+	/*!\brief Start adding a text layer.
+	 *
+	 * This works by having #canvas grab the mouse, remembering that we are in the midst of adding
+	 * text in #addTextOn and dispatching the next mouse click to addTextLayer(const QPoint&) in eventFilter().
+	 *
+	 * \sa #defaultTexMarkerFont, #defaultTextMarkerFrame, #defaultTextMarkerColor, #defaultTextMarkerBackground
+	 */
 	void addTextLayer(int f, const QFont& font, const QColor& textCol, const QColor& backgroundCol);
+	/*!\brief Finish adding a text layer.
+	 *
+	 * An empty Graph is created and added to me.
+	 * Legend, title and axes are removed and a new LegendMarker is added with a placeholder text.
+	 *
+	 * \sa #defaultTexMarkerFont, #defaultTextMarkerFrame, #defaultTextMarkerColor, #defaultTextMarkerBackground, addTextLayer(int,const QFont&,const QColor&,const QColor&)
+	 */
 	void addTextLayer(const QPoint& pos);
 
 	Graph* activeGraph(){return active_graph;};
 	void setActiveGraph(Graph* g);
 	void activateGraph(LayerButton* button);
 	
-	void moveGraph(Graph* g, const QPoint& pos);
-	void releaseGraph(Graph* g);
-	
-	void setGraphOrigin(const QPoint& pos);
 	void setGraphGeometry(int x, int y, int w, int h);
 
 	void findBestLayout(int &rows, int &cols);
@@ -138,40 +149,36 @@ public slots:
 	int verticalAlignement(){return vert_align;};
 	void setAlignement (int ha, int va);
 
-	int graphsNumber(){return graphs;};
+	int layers(){return graphs;};
 	
-	// print and export
+	//! \name Print and Export
+	//@{
 	QPixmap canvasPixmap();
-
-	void exportImage(const QString& fileName,const QString& fileType, int quality, bool transparent);
-	void exportToSVG(const QString& fname);
-	void exportToEPS(const QString& fname);
-	void exportToEPS(const QString& fname, int res, QPrinter::Orientation o, 
-					QPrinter::PageSize pageSize, QPrinter::ColorMode col);
+	void exportGraph(const QString& fileName);
+	void exportImage(const QString& fileName, const QString& fileType = "PNG", int quality = 100, bool transparent = false);
+	void exportSVG(const QString& fname);
+	void exportEPS(const QString& fname, int res = 0, QPrinter::Orientation o = QPrinter::Landscape,
+					QPrinter::PageSize pageSize = QPrinter::A4, QPrinter::ColorMode col = QPrinter::Color);
+    void exportPDF(const QString& fname, int res = 0, QPrinter::Orientation o = QPrinter::Landscape,
+					QPrinter::PageSize pageSize = QPrinter::A4, QPrinter::ColorMode col = QPrinter::Color);
+	void exportVector(const QString& fileName, const QString& fileType = "pdf", int res = 0, 
+					QPrinter::Orientation o = QPrinter::Landscape, QPrinter::PageSize pageSize = QPrinter::A4, 
+					QPrinter::ColorMode col = QPrinter::Color);
 
 	void copyAllLayers();
 	void print();
 	void printAllLayers(QPainter *painter);
 	void printActiveLayer();
+	//@}
 	
 	void setFonts(const QFont& titleFnt, const QFont& scaleFnt,
 							const QFont& numbersFnt, const QFont& legendFnt);
-	void makeTransparentLayer(Graph *g);
-	void updateLayerTransparency(Graph *g);
-	void updateTransparency();
-	void connectLayer(Graph *g);
-	bool overlapsLayers(Graph *g);
-	bool hasOverlapingLayers();
-	bool allLayersTransparent();
 
-	void highlightLayer(Graph*g);
-	void drawLayerFocusRect(const QRect& fr);
-	void showLayers(bool ok);
+	void connectLayer(Graph *g);
 
 	QString saveToString(const QString& geometry);
 	QString saveAsTemplate(const QString& geometryInfo);
 
-	int layerButtonHeight();
 	void ignoreResizeEvent(bool ignore){ignore_resize = ignore;};
 
 signals:   
@@ -198,7 +205,8 @@ signals:
 	void viewTitleDialog();
 	void createTablePlot(const QString&,int,int,const QString&);
 	void createTable(const QString&,int,int,const QString&);
-	void createHiddenTable(const QString&,int,int,const QString&);
+	//! To be connected to ApplicationWindow::newHiddenTable; see there for documentation.
+	void createHiddenTable(const QString&,const QString&,int,int,const QString&);
 	void createHistogramTable(const QString&,int,int,const QString&);
 	void updateTable(const QString&,int,const QString&);
 	void updateTableColumn(const QString&, double *, int);
@@ -211,44 +219,43 @@ signals:
 	
 private:
 	Graph* active_graph;
-	QRect aux_rect;//used for resizing of layers
-	QPixmap cache_pix;
+	//! Used for resizing of layers.
 	int graphs, cols, rows, graph_width, graph_height, colsSpace, rowsSpace;
 	int left_margin, right_margin, top_margin, bottom_margin;
 	int l_canvas_width, l_canvas_height, hor_align, vert_align;
-	int xMouse, yMouse, xActiveGraph, yActiveGraph;//used for moving layers
-	bool movedGraph, addTextOn, highlightedLayer, ignore_resize;
+	bool addTextOn, ignore_resize;
 
 	//! Used when adding text markers on new layers
 	int defaultTextMarkerFrame;
 	QFont defaultTextMarkerFont;
 	QColor defaultTextMarkerColor, defaultTextMarkerBackground;
 
+    QWidgetList buttonsList, graphsList;
+	QHBoxLayout *layerButtonsBox;
+    QWidget *canvas;
+
+	QPointer<SelectionMoveResizer> d_layers_selector;
 };
 
 	
 //! Button with layer number
-class LayerButton: public QWidget
+class LayerButton: public QPushButton
 {
 	Q_OBJECT
 
 public:
-    LayerButton (const QString& text = QString::null, QWidget* parent = 0, const char* name = 0);
-	~LayerButton();
+    LayerButton (const QString& text = QString::null, QWidget* parent = 0);
+	~LayerButton(){};
+		
+	static int btnSize();
 
-	QPushButton  *btn;
-
-	bool eventFilter(QObject *object, QEvent *e);
-
-public slots:
-	 void setText(const QString& text);
-	 void setOn(bool on);
-	 bool isOn(){return btn->isOn();};
+protected:
+	void mousePressEvent( QMouseEvent * );
+	void mouseDoubleClickEvent ( QMouseEvent * );
 
 signals:
-	void showLayerMenu();
 	void showCurvesDialog();	
 	void clicked(LayerButton*);
 };
 
-#endif 
+#endif

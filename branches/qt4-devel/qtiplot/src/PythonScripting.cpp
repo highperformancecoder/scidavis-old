@@ -3,7 +3,7 @@
 	Project              : QtiPlot
 --------------------------------------------------------------------
 	Copyright            : (C) 2006 by Knut Franke
-	Email                : knut.franke@gmx.de
+	Email (use @ for *)  : knut.franke*gmx.de
 	Description          : Execute Python code from within QtiPlot
 
  ***************************************************************************/
@@ -177,18 +177,18 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
 	d_initialized = false;
 	if (Py_IsInitialized())
 	{
-		PyEval_AcquireLock();
+//		PyEval_AcquireLock();
 		mainmod = PyImport_ImportModule("__main__");
 		if (!mainmod)
 		{
 			PyErr_Print();
-			PyEval_ReleaseLock();
+//			PyEval_ReleaseLock();
 			return;
 		}
 		globals = PyModule_GetDict(mainmod);
 		Py_DECREF(mainmod);
 	} else {
-		PyEval_InitThreads ();
+//		PyEval_InitThreads ();
 		Py_Initialize ();
 		if (!Py_IsInitialized ())
 			return;
@@ -197,7 +197,7 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
 		mainmod = PyImport_AddModule("__main__");
 		if (!mainmod)
 		{
-			PyEval_ReleaseLock();
+//			PyEval_ReleaseLock();
 			PyErr_Print();
 			return;
 		}
@@ -207,7 +207,7 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
 	if (!globals)
 	{
 		PyErr_Print();
-		PyEval_ReleaseLock();
+//		PyEval_ReleaseLock();
 		return;
 	}
 	Py_INCREF(globals);
@@ -235,14 +235,14 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
 	} else
 		PyErr_Print();
 
-	PyEval_ReleaseLock();
+//	PyEval_ReleaseLock();
 	d_initialized = true;
 }
 
 bool PythonScripting::initialize()
 {
 	if (!d_initialized) return false;
-	PyEval_AcquireLock();
+//	PyEval_AcquireLock();
 
 	// Redirect output to the print(const QString&) signal.
 	// Also see method write(const QString&) and Python documentation on
@@ -259,7 +259,7 @@ bool PythonScripting::initialize()
 #endif
 		loadInitFile("qtiplotrc");
 
-	PyEval_ReleaseLock();
+//	PyEval_ReleaseLock();
 	return true;
 }
 
@@ -331,42 +331,23 @@ bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
 	if(!val) return false;
 	PyObject *pyobj=NULL;
 	sipTypeDef *t;
-#if SIP_VERSION >= 0x040301 && SIP_VERSION <= 0x040403
-#error "SIP versions between 4.3.1 and 4.4.3 are currently not supported. Please install another version of SIP and try again."
-#endif
-#if SIP_VERSION >= 0x040400
 	for (int i=0; i<sipModuleAPI_qti.em_nrtypes; i++)
-#else
-		for (int i=0; sipModuleAPI_qti.em_types[i] != 0; i++)
-#endif
 			// Note that the SIP API is a bit confusing here.
 			// sipTypeDef.td_cname holds the C++ class name, but is NULL if that's the same as the Python class name.
 			// sipTypeDef.td_name OTOH always holds the Python class name, but prepended by the module name ("qti.")
 			if (((t=sipModuleAPI_qti.em_types[i]->type)->td_cname && !strcmp(val->className(),t->td_cname)) ||
 					(!t->td_cname && !strcmp(val->className(),t->td_name+4)))
 			{
-#if SIP_VERSION >= 0x040400
 				pyobj=sipConvertFromInstance(val,sipModuleAPI_qti.em_types[i],NULL);
-#else
-				pyobj=sipBuildResult(NULL, "M", val, sipModuleAPI_qti.em_types[i]);
-#endif
 				if (!pyobj) return false;
 				break;
 			}
 	if (!pyobj) {
-#if SIP_VERSION >= 0x040400
 		for (int i=0; i<sipModuleAPI_qti_QtCore->em_nrtypes; i++)
-#else
-			for (int i=0; sipModuleAPI_qti_QtCore->em_types[i] != 0; i++)
-#endif
 				if (((t=sipModuleAPI_qti_QtCore->em_types[i]->type)->td_cname && !strcmp(val->className(),t->td_cname)) ||
 						(!t->td_cname && !strcmp(val->className(),t->td_name+3)))
 				{
-#if SIP_VERSION >= 0x040400
 					pyobj=sipConvertFromInstance(val,sipModuleAPI_qti_QtCore->em_types[i],NULL);
-#else
-					pyobj=sipBuildResult(NULL, "M", val, sipModuleAPI_qti_QtCore->em_types[i]);
-#endif
 					if (!pyobj) return false;
 					break;
 				}
@@ -409,7 +390,11 @@ const QStringList PythonScripting::mathFunctions() const
 {
 	QStringList flist;
 	PyObject *key, *value;
+#if PY_VERSION_HEX >= 0x02050000
+	Py_ssize_t i=0;
+#else
 	int i=0;
+#endif
 	while(PyDict_Next(math, &i, &key, &value))
 		if (PyCallable_Check(value))
 			flist << PyString_AsString(key);
@@ -501,7 +486,11 @@ bool PythonScript::compile(bool for_eval)
 		// for why there isn't an easier way to do this in Python.
 		PyErr_Clear(); // silently ignore errors
 		PyObject *key, *value;
+#if PY_VERSION_HEX >= 0x02050000
+		Py_ssize_t i=0;
+#else
 		int i=0;
+#endif
 		QString signature = "";
 		while(PyDict_Next(localDict, &i, &key, &value))
 			signature.append(PyString_AsString(key)).append(",");

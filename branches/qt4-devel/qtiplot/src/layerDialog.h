@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Arrange layers dialog
                            
  ***************************************************************************/
@@ -29,17 +29,15 @@
 #ifndef LAYERDIALOG_H
 #define LAYERDIALOG_H
 
-#include <qvariant.h>
-#include <qdialog.h>
+#include "multilayer.h"
 
-class Q3ButtonGroup;
+class QGroupBox;
 class QPushButton;
 class QSpinBox;
 class QCheckBox;
 class QTabWidget;
 class QWidget;
 class QComboBox;
-class MultiLayer;
 
 //! Arrange layers dialog
 class LayerDialog : public QDialog
@@ -57,7 +55,7 @@ public:
     QPushButton* buttonOk, *btnTitle, *btnAxesLabels, *btnAxesNumbers, *btnLegend;
 	QPushButton* buttonCancel;
 	QPushButton* buttonApply;
-    Q3ButtonGroup* GroupBox1, *GroupBox2, *GroupBox4, *GroupCanvasSize;
+    QGroupBox *GroupCanvasSize, *GroupGrid;
     QSpinBox *boxX, *boxY, *boxColsGap, *boxRowsGap;
 	QSpinBox *boxRightSpace, *boxLeftSpace, *boxTopSpace, *boxBottomSpace;
 	QSpinBox *boxCanvasWidth, *boxCanvasHeight, *layersBox;
@@ -67,7 +65,6 @@ public:
 	QComboBox *alignHorBox, *alignVertBox;
 
 protected slots:
-    virtual void languageChange();
 	void accept();
 	void update();
 	void setTitlesFont();

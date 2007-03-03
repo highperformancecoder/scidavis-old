@@ -5,8 +5,8 @@
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
 					  Knut Franke
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net,
-                           knut.franke@gmx.de
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
+                           knut.franke*gmx.de
     Description          : MDI window widget
                            
  ***************************************************************************/
@@ -51,21 +51,21 @@ void MyWidget::updateCaption()
 switch (caption_policy)
 	{
 	case Name:
-			setWindowTitle(objectName());
+        setWindowTitle(objectName());
 	break;
 
 	case Label:
 		if (!w_label.isEmpty())
-				setWindowTitle(w_label);
+            setWindowTitle(w_label);
 		else
-				setWindowTitle(objectName());
+            setWindowTitle(objectName());
 	break;
 
 	case Both:
 		if (!w_label.isEmpty())
-				setWindowTitle(objectName() + " - " + w_label);
+            setWindowTitle(objectName() + " - " + w_label);
 		else
-				setWindowTitle(objectName());
+            setWindowTitle(objectName());
 	break;
 	}
 };
@@ -74,7 +74,7 @@ void MyWidget::closeEvent( QCloseEvent *e )
 {
 if (askOnClose)
     {
-    switch( QMessageBox::information(0,tr("QtiPlot"),
+    switch( QMessageBox::information(this,tr("QtiPlot"),
 					tr("Do you want to hide or delete") + "<p><b>'" + objectName() + "'</b> ?",
 				      tr("Delete"), tr("Hide"), tr("Cancel"), 0,2)) 
 		{
@@ -167,20 +167,31 @@ QString MyWidget::sizeToString()
 return QString::number(8*sizeof(this)/1024.0, 'f', 1) + " " + tr("kB");
 }
 
-void MyWidget::reparent(QWidget * parent, Qt::WFlags f, const QPoint & p, bool showIt)
+// Modifying the title bar menu is somewhat more complicated in Qt4.
+// Apart from the trivial change in how we intercept the reparenting,
+// in Qt4 the title bar doesn't exist yet at this point.
+// Thus, we now also have to intercept the creation of the title bar
+// in MyWidget::eventFilter.
+void MyWidget::changeEvent(QEvent *event)
 {
-	titleBar = (QWidget*) parent->child("qt_ws_titlebar","QWidget",false);
-	if(titleBar) titleBar->installEventFilter(this);
-	QWidget::reparent(parent, f, p, showIt);
+	if (event->type() == QEvent::ParentChange) {
+		titleBar = 0;
+		parent()->installEventFilter(this);
+	}
+	QWidget::changeEvent(event);
 }
 
 bool MyWidget::eventFilter(QObject *object, QEvent *e)
 {
+	QWidget *tmp;
 	if (e->type()==QEvent::ContextMenu && object == titleBar)
 	{
 		emit showTitleBarMenu();
 		((QContextMenuEvent*)e)->accept();
 		return true;
+	} else if (e->type()==QEvent::ChildAdded && object == parent() && (tmp = qobject_cast<QWidget *>(((QChildEvent*)e)->child()))) {
+		(titleBar = tmp)->installEventFilter(this);
+		parent()->removeEventFilter(this);
 	}
 	return QObject::eventFilter(object, e);
 }

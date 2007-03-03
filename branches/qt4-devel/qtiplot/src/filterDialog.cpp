@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Filter options dialog
                            
  ***************************************************************************/
@@ -30,6 +30,7 @@
 #include "graph.h"
 #include "parser.h"
 #include "colorBox.h"
+#include "FFTFilter.h"
 
 #include <QGroupBox>
 #include <QCheckBox>
@@ -49,13 +50,14 @@ FilterDialog::FilterDialog(int type, QWidget* parent, const char* name, bool mod
     if ( !name )
 		setName( "FilterDialog" );
 	
-    QGridLayout *gl1 = new QGridLayout();
+    QGroupBox *gb1 = new QGroupBox();
+    QGridLayout *gl1 = new QGridLayout(gb1);
 	gl1->addWidget(new QLabel(tr("Filter curve: ")), 0, 0);
 	
 	boxName = new QComboBox();
 	gl1->addWidget(boxName, 0, 1);
 	
-	if (type <= HighPass)
+	if (type <= FFTFilter::HighPass)
 		gl1->addWidget(new QLabel(tr("Frequency cutoff (Hz)")), 1, 0);
 	else
 		gl1->addWidget(new QLabel(tr("Low Frequency (Hz)")), 1, 0);
@@ -66,7 +68,7 @@ FilterDialog::FilterDialog(int type, QWidget* parent, const char* name, bool mod
 	
 	boxColor = new ColorBox(false);
 	boxColor->setColor(QColor(Qt::red));
-	if (type >= BandPass)
+	if (type >= FFTFilter::BandPass)
 		{
 	    gl1->addWidget(new QLabel(tr("High Frequency (Hz)")), 2, 0);
 	
@@ -74,7 +76,7 @@ FilterDialog::FilterDialog(int type, QWidget* parent, const char* name, bool mod
 		boxEnd->setText(tr("0"));
         gl1->addWidget(boxEnd, 2, 1);
         
-		if (type == BandPass)
+		if (type == FFTFilter::BandPass)
 		    gl1->addWidget(new QLabel(tr("Add DC Offset")), 3, 0);
 		else
 		    gl1->addWidget(new QLabel(tr("Substract DC Offset")), 3, 0);
@@ -84,35 +86,30 @@ FilterDialog::FilterDialog(int type, QWidget* parent, const char* name, bool mod
 		
 		gl1->addWidget(new QLabel(tr("Color")), 4, 0);
 		gl1->addWidget(boxColor, 4, 1);
+        gl1->setRowStretch(5, 1);
 		}
     else
         {
         gl1->addWidget(new QLabel(tr("Color")), 2, 0);
-		gl1->addWidget(boxColor, 2, 1);                       
+		gl1->addWidget(boxColor, 2, 1);
+        gl1->setRowStretch(3, 1);
         }
-    QGroupBox *gb1 = new QGroupBox();
-    gb1->setLayout(gl1);
     
 	buttonFilter = new QPushButton(tr( "&Filter" ));
     buttonFilter->setDefault( true );
     buttonCancel = new QPushButton(tr( "&Close" ));
     
-    QHBoxLayout *hbox1 = new QHBoxLayout(); 
-    hbox1->addWidget(buttonFilter);
-    hbox1->addWidget(buttonCancel);
-    
     QVBoxLayout *vl = new QVBoxLayout();
- 	vl->addWidget(gb1);
-	vl->addLayout(hbox1);	
-	setLayout(vl);
+ 	vl->addWidget(buttonFilter);
+	vl->addWidget(buttonCancel);
+    vl->addStretch();
+
+    QHBoxLayout *hb = new QHBoxLayout(this);
+    hb->addWidget(gb1);
+    hb->addLayout(vl);
    
-    // signals and slots connections
 	connect( buttonFilter, SIGNAL( clicked() ), this, SLOT( filter() ) );
     connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-}
-
-FilterDialog::~FilterDialog()
-{
 }
 
 void FilterDialog::filter()
@@ -121,8 +118,8 @@ double from = 0.0, to = 0.0;
 try
 	{
 	MyParser parser;
-	parser.SetExpr(boxStart->text().ascii());
-	from=parser.Eval();
+	parser.SetExpr(boxStart->text().replace(",", ".").ascii());
+	from = parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
@@ -139,12 +136,12 @@ if (from < 0)
 		return;
 		}
 
-if (filter_type >= BandPass)
+if (filter_type >= FFTFilter::BandPass)
 	{	
 	try
 		{
 		MyParser parser;	
-		parser.SetExpr(boxEnd->text().ascii());
+		parser.SetExpr(boxEnd->text().replace(",", ".").ascii());
 		to=parser.Eval();
 		}
 	catch(mu::ParserError &e)
@@ -171,15 +168,23 @@ if (filter_type >= BandPass)
 		}
 	}
 
-long key = graph->curveKey(boxName->currentItem());
-if (key < 0)
-	return;
+FFTFilter *f = new FFTFilter((ApplicationWindow *)this->parent(), graph, boxName->currentText(), filter_type);
+if (filter_type == FFTFilter::BandPass)
+    {
+    f->setBand(from, to);
+    f->enableOffset(boxOffset->isChecked());
+    }
+else if (filter_type == FFTFilter::BandBlock)
+    {
+    f->setBand(from, to);
+    f->enableOffset(!boxOffset->isChecked());
+    }
+else 
+    f->setCutoff(from);
 
-if (filter_type >= BandPass)
- graph->filterFFT(key, filter_type, from, to, boxOffset->isChecked(), boxColor->currentItem());
-else
- graph->filterFFT(key, filter_type, from, to, false, boxColor->currentItem());
-
+f->setColor(boxColor->currentIndex());
+f->run();
+delete f;
 }
 
 void FilterDialog::setGraph(Graph *g)
@@ -187,5 +192,3 @@ void FilterDialog::setGraph(Graph *g)
 graph = g;
 boxName->insertStringList (g->curvesList(),-1);
 };
-
-

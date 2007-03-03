@@ -3,7 +3,7 @@
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
-    Email                : ion_vasilief@yahoo.fr, thzs@gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Plot window class
                            
  ***************************************************************************/
@@ -27,8 +27,11 @@
  *                                                                         *
  ***************************************************************************/
 #include "plot.h"
+#include "graph.h"
 #include "scales.h"
-
+#include "Spectrogram.h"
+#include "FunctionCurve.h"
+	
 #include <qwt_plot.h>
 #include <qwt_painter.h>
 #include <qwt_plot_canvas.h>
@@ -36,13 +39,7 @@
 #include <qwt_scale_widget.h>
 #include <qwt_scale_map.h>
 
-#include <qapplication.h>
-#include <qpixmap.h>
-#include <qmessagebox.h>
-
-#include "graph.h"
-
-#include <Q3ValueList>
+#include <QPainter>
 
 Plot::Plot(QWidget *parent, const char *name)
 : QwtPlot(parent)
@@ -52,8 +49,6 @@ Plot::Plot(QWidget *parent, const char *name)
 
 	minTickLength = 5;
 	majTickLength = 9;
-
-	movedGraph=FALSE;
 
 	setGeometry(QRect(0,0,500,400));
 	setAxisTitle(QwtPlot::yLeft, tr("Y Axis Title"));
@@ -81,9 +76,9 @@ Plot::Plot(QWidget *parent, const char *name)
 			scale->setTitle(title);
 
 			ScaleDraw *sd = new ScaleDraw();
-			sd->setTickLength  	(QwtScaleDiv::MinorTick, minTickLength); 
-			sd->setTickLength  	(QwtScaleDiv::MediumTick, minTickLength);
-			sd->setTickLength  	(QwtScaleDiv::MajorTick, majTickLength);
+			sd->setTickLength(QwtScaleDiv::MinorTick, minTickLength); 
+			sd->setTickLength(QwtScaleDiv::MediumTick, minTickLength);
+			sd->setTickLength(QwtScaleDiv::MajorTick, majTickLength);
 
 			setAxisScaleDraw (i, sd);
 		}
@@ -91,7 +86,8 @@ Plot::Plot(QWidget *parent, const char *name)
 
 	QwtPlotLayout *pLayout=plotLayout();
 	pLayout->setCanvasMargin(0);
-
+	pLayout->setAlignCanvasToScales (true);
+	
 	QwtPlotCanvas* plCanvas = canvas();
 	plCanvas->setFocusPolicy(Qt::StrongFocus);
 	plCanvas->setFocusIndicator(QwtPlotCanvas::ItemFocusIndicator);
@@ -99,8 +95,10 @@ Plot::Plot(QWidget *parent, const char *name)
 	plCanvas->setFrameShadow(QwtPlot::Plain);
 	plCanvas->setCursor(Qt::arrowCursor);
 	plCanvas->setLineWidth(0);
-	//plCanvas->setPaintAttribute(QwtPlotCanvas::PaintCached, false);
+	plCanvas->setPaintAttribute(QwtPlotCanvas::PaintCached, false);
+	plCanvas->setPaintAttribute(QwtPlotCanvas::PaintPacked, false);
 
+	setCanvasBackground (QColor(255, 255, 255, 0));
 	setFocusPolicy(Qt::StrongFocus);
 	setFocusProxy(plCanvas);
 	setFrameShape (QFrame::Box);
@@ -128,38 +126,40 @@ void Plot::printFrame(QPainter *painter, const QRect &rect) const
 	if (paletteBackgroundColor() != Qt::white)
 		painter->setBrush(paletteBackgroundColor());
 
-	QwtPainter::drawRect(painter, rect.x(), rect.y(), rect.width(), rect.height());
+	QwtPainter::drawRect(painter, rect.x()-lw/2, rect.y()-lw/2, rect.width()+3/2*lw, rect.height()+3/2*lw);
 	painter->restore();
 }
 
 void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
    			 const QwtScaleMap map[axisCnt], const QwtPlotPrintFilter &pfilter) const
 {
+	painter->save();
+	
 	const QwtPlotCanvas* plotCanvas=canvas();	
 	QRect rect=canvasRect;
-	int w=plotCanvas->lineWidth();
-
-	if (w>0)
+	if(plotCanvas->lineWidth() > 0)
 	{
 		QPalette pal = plotCanvas->palette();
 		QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
 
-		painter->save();
-		painter->setPen (QPen(color,w,Qt::SolidLine));
+		painter->setPen (QPen(color, plotCanvas->lineWidth(),Qt::SolidLine));
 
-		if (canvasBackground() != Qt::white)
-			painter->setBrush(canvasBackground());
+		painter->setBrush(canvasBackground());
 
-		//if (w == 1 && majorTicksType[QwtPlot::xBottom] == Plot::Out)
-		rect.setHeight(canvasRect.height() + 1);	
-
-		QwtPainter::drawRect(painter, rect.x(), rect.y(), rect.width(), rect.height());
+		QwtPainter::drawRect(painter, canvasRect);
 		painter->restore();
 	}
-
-	painter->setClipping(TRUE);
-	rect = QRect(canvasRect.x()+1, canvasRect.y()+1, canvasRect.width(), canvasRect.height()-1);
-	QwtPainter::setClipRect(painter, rect);
+	else
+  	{
+  		QRect rect = canvasRect;
+  	    rect.addCoords(1, 1, -1, -1);
+  	 
+  	    QwtPainter::fillRect(painter, rect, canvasBackground());
+    } 	                   
+  	 
+  	painter->restore();
+	painter->setClipping(true);
+	QwtPainter::setClipRect(painter, canvasRect);
 
 	drawItems(painter, canvasRect, map, pfilter);
 }
@@ -387,21 +387,6 @@ void Plot::setTickLength (int minLength, int majLength)
 	minTickLength = minLength;
 }
 
-void Plot::mousePressEvent ( QMouseEvent * e )
-{
-	presspos = e->pos();
-	emit selectPlot();
-}
-
-void Plot::mouseReleaseEvent ( QMouseEvent *)
-{
-	if (movedGraph)
-	{
-		emit releasedGraph();
-		movedGraph=FALSE;
-	}
-}
-
 void Plot::print(QPainter *painter, const QRect &plotRect,
 		const QwtPlotPrintFilter &pfilter) const
 {
@@ -417,22 +402,26 @@ int Plot::closestCurve(int xpos, int ypos, int &dist, int &point)
 
 	double dmin = 1.0e10;
 	int key = -1;
-	for (QMap<int, QwtPlotCurve *>::iterator it = d_curves.begin(); it != d_curves.end(); ++it ) 
+	for (QMap<int, QwtPlotItem *>::iterator it = d_curves.begin(); it != d_curves.end(); ++it ) 
 	{
-		QwtPlotCurve *c = (QwtPlotCurve *)it.data();
+		QwtPlotItem *c = (QwtPlotItem *)it.data();
 		if (!c)
 			continue;
 
-		for (int i=0; i<c->dataSize(); i++)
+		if(c->rtti() == QwtPlotItem::Rtti_PlotCurve || c->rtti() == FunctionCurve::RTTI)
 		{
-			double cx = map[c->xAxis()].xTransform(c->x(i)) - double(xpos);
-			double cy = map[c->yAxis()].xTransform(c->y(i)) - double(ypos);
-			double f = qwtSqr(cx) + qwtSqr(cy);
-			if (f < dmin)
+			QwtPlotCurve *cv = (QwtPlotCurve *)c;
+			for (int i=0; i<cv->dataSize(); i++)
 			{
-				dmin = f;
-				key = it.key();
-				point = i;
+				double cx = map[c->xAxis()].xTransform(cv->x(i)) - double(xpos);
+				double cy = map[c->yAxis()].xTransform(cv->y(i)) - double(ypos);
+				double f = qwtSqr(cx) + qwtSqr(cy);
+				if (f < dmin)
+				{
+					dmin = f;
+					key = it.key();
+					point = i;
+				}
 			}
 		}
 	}
@@ -457,17 +446,29 @@ int Plot::insertMarker(QwtPlotMarker *m)
 	return marker_key;
 }
 
-int Plot::insertCurve(QwtPlotCurve *c)
+int Plot::insertCurve(QwtPlotItem *c)
 {
 	curve_key++;
 	d_curves.insert (curve_key, c, false);
+	//c->setRenderHint(QwtPlotItem::RenderAntialiased);
 	c->attach(this);
 	return curve_key;
 }
 
 void Plot::removeCurve(int index)
 {
-	QwtPlotCurve *c = d_curves[index];
+	QwtPlotItem *c = d_curves[index];
+  	if (!c)
+  		return;
+  	 
+  	if (c->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
+  	{
+  		Spectrogram *sp = (Spectrogram *)c;
+  	    QwtScaleWidget *colorAxis = axisWidget(sp->colorScaleAxis());
+  	    if (colorAxis)
+  	    	colorAxis->setColorBarEnabled(false);
+  	}
+	
 	c->detach();
 	d_curves.remove (index);
 }
@@ -587,38 +588,6 @@ void Plot::setAxisLabelFormat(int axis, char f, int prec)
 		ScaleDraw *sd = (ScaleDraw *)axisScaleDraw (axis);
 		sd->setLabelFormat(f, prec);
 	}
-}
-
-QwtDoubleRect Plot::boundingRect ()
-{
-	QMap<int, QwtPlotCurve *>::iterator it = d_curves.begin();
-	QwtPlotCurve *c = (QwtPlotCurve *)it.data();
-
-	double minX = c->minXValue();
-	double minY = c->minYValue();
-	double maxX = c->maxXValue();
-	double maxY = c->maxYValue();
-
-	it++;
-
-	for (it; it != d_curves.end(); ++it) 
-	{
-		QwtPlotCurve *c = (QwtPlotCurve *)it.data();
-		if (!c)
-			continue;
-
-		minX = (c->minXValue() < minX) ? c->minXValue() : minX;
-		maxX = (c->maxXValue() > maxX) ? c->maxXValue() : maxX;
-		minY = (c->minYValue() < minY) ? c->minYValue() : minY;
-		maxY = (c->maxYValue() > maxY) ? c->maxYValue() : maxY;
-	}
-
-	QwtDoubleRect r;
-	r.setLeft(minX);
-	r.setRight(maxX);
-	r.setTop(minY);
-	r.setBottom(maxY);
-	return r;
 }
 
 /*!
