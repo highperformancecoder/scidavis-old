@@ -51,6 +51,7 @@
 #include <QPoint>
 #include <QGridLayout>
 #include <QSizePolicy>
+#include <QString>
 
 #include <QtDebug>
 
@@ -258,7 +259,7 @@ void Table::print()
 	for (int j=0;j<cols;j++)
 	{
 	int w=worksheet->columnWidth (j);
-	text=worksheet->text(i,j)+"\t";
+	text=text(i,j)+"\t";
 	tr=p.boundingRect(tr,Qt::AlignCenter,text);
 	br.setTopLeft(QPoint(right,height));	
 	br.setWidth(w);	
@@ -287,7 +288,7 @@ if (height >= metrics.height()-margin )
 void Table::cellEdited(QTableWidgetItem * item)
 {
 	int col = worksheet->column(item);
-	QString name = colName(col);
+	int row = worksheet->row(item);
 
 	if (columnType(col) != Numeric)
 	{
@@ -300,25 +301,25 @@ void Table::cellEdited(QTableWidgetItem * item)
 	int precision;
   	columnNumericFormat(col, f, precision);
   	 
-  	QString text = worksheet->text(row,col).replace(",", ".");
+  	QString the_text = text(row,col).replace(",", ".");
   	bool ok = false;
-  	double res = text.toDouble(&ok);
-  	if (!text.isEmpty() && ok)
-  		worksheet->setText(row, col, QString::number(res, f, precision));
+  	double res = the_text.toDouble(&ok);
+  	if (!the_text.isEmpty() && ok)
+  		setText(row, col, QString::number(res, f, precision));
   	else
   	{
-  	Script *script = scriptEnv->newScript(worksheet->text(row,col),this,QString("<%1_%2_%3>").arg(name()).arg(row+1).arg(col+1));
+  	Script *script = scriptEnv->newScript(text(row,col),this,QString("<%1_%2_%3>").arg(name()).arg(row+1).arg(col+1));
   	connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
   	 
   	script->setInt(row+1, "i");
   	script->setInt(col+1, "j");
   	QVariant ret = script->eval();
   	if(ret.type()==QVariant::Int || ret.type()==QVariant::UInt || ret.type()==QVariant::LongLong || ret.type()==QVariant::ULongLong)
-  		worksheet->setText(row, col, ret.toString());
+  		setText(row, col, ret.toString());
   	else if(ret.canCast(QVariant::Double))
-  		worksheet->setText(row, col, QString::number(ret.toDouble(), f, precision));
+  		setText(row, col, QString::number(ret.toDouble(), f, precision));
   	else
-  		worksheet->setText(row, col, "");
+  		setText(row, col, "");
   	}
   	 
   	emit modifiedData(this, colName(col));
@@ -744,9 +745,9 @@ QStringList Table::selectedYColumns()
 QStringList Table::selectedErrColumns()
 {
   	QStringList names;
-  	for (int i=0;i<worksheet->numCols();i++)
+  	for (int i=0;i<worksheet->columnCount();i++)
   		{
-  	    if(worksheet->isColumnSelected (i,true) &&
+  	    if(isColumnSelected (i,true) &&
   	       (col_plot_type[i] == yErr || col_plot_type[i] == xErr))
   	       	names<<QString(name())+"_"+col_label[i];
   	    }
@@ -756,15 +757,15 @@ QStringList Table::selectedErrColumns()
 QStringList Table::drawableColumnSelection()
 {
   	QStringList names;
-  	for (int i=0;i<worksheet->numCols();i++)
+  	for (int i=0;i<worksheet->columnCount();i++)
   	{
-	if(worksheet->isColumnSelected (i,true) && col_plot_type[i] == Y)
+	if(isColumnSelected (i,true) && col_plot_type[i] == Y)
 		names<<QString(name())+"_"+col_label[i];
     } 	       
   	 
-  	for (int j=0; j<worksheet->numCols(); j++)
+  	for (int j=0; j<worksheet->columnCount(); j++)
   	{
-  	 	if(worksheet->isColumnSelected (j,true) && (col_plot_type[j] == yErr || col_plot_type[j] == xErr))
+  	 	if(isColumnSelected(j,true) && (col_plot_type[j] == yErr || col_plot_type[j] == xErr))
   	    	names<<QString(name())+"_"+col_label[j];
   	}
 	return names;
@@ -875,16 +876,8 @@ void Table::insertCols(int start, int count)
 	for(i=0; i<count; i++)
 		worksheet->insertColumn(start);
 
-//	QHeaderView *head = worksheet->horizontalHeader();
-	for (i=0; i<count; i++)
-	{
-		int col = start+i;
-		col_label[col] = QString::number(max+i);
-		if (xcols>1)
-			worksheet->model()->setHeaderData(col, Qt::Horizontal, col_label[col]+"[Y"+QString::number(xcols)+"]");
-		else
-			worksheet->model()->setHeaderData(col, Qt::Horizontal, col_label[col]+"[Y]");
-	}
+	setHeaderColType();
+	emit modifiedWindow(this);
 }
 
 void Table::insertCol()
@@ -1015,58 +1008,6 @@ void Table::cutSelection()
 {
 	copySelection();
 	clearSelection();
-}
-
-bool Table::multipleRowsSelected()
-{
-	// TODO: This only returns true if multiple rows are selected in a contiguous block.
-	// Is this intended?
-	QList<QTableWidgetSelectionRange> sel = worksheet->selectedRanges();
-	QListIterator<QTableWidgetSelectionRange> it(sel);
-	QTableWidgetSelectionRange cur;
-
-	if( !it.hasNext() )
-		return false;
-	else if( sel.count() > 1 )
-		return false;  
-	else
-	{
-		cur = it.next();
-		int top = cur.topRow();
-		int bottom = cur.bottomRow();
-
-		if (top == bottom)
-			return false;
-
-		for (int i=top; i<=bottom; i++)
-		{
-			if (!isRowSelected(i, true))
-				return false;
-		}
-	}
-	return true;
-}
-
-bool Table::singleRowSelected()
-{
-	QList<QTableWidgetSelectionRange> sel = worksheet->selectedRanges();
-	QListIterator<QTableWidgetSelectionRange> it(sel);
-	QTableWidgetSelectionRange cur;
-
-	if( !it.hasNext() )
-		return false;
-
-	if( sel.count() > 1)
-		return false;
-	
-	cur = it.next();
-
-	int top = cur.topRow();	
-
-	if ( top == cur.bottomRow() && isRowSelected(top, true) )
-		return true;
-
-	return false;
 }
 
 void Table::selectAllTable()
@@ -1566,7 +1507,7 @@ void Table::sortColumns(const QStringList&s, int type, int order, const QString&
 		QVarLengthArray<double> data_double(rows);
 		for (int j = 0; j <rows; j++)
 		{
-			if (!worksheet->text(j, leadcol).isEmpty())
+			if (!text(j, leadcol).isEmpty())
 			{
 				data_double[non_empty_cells] = this->text(j,leadcol).toDouble();
 				valid_cell[non_empty_cells] = j;
@@ -1598,10 +1539,10 @@ void Table::sortColumns(const QStringList&s, int type, int order, const QString&
                     data_string[j] = text(valid_cell[j], col);
                 if(!order)
                     for (int j=0; j<non_empty_cells; j++)
-                        worksheet->setText(valid_cell[j], col, data_string[p[j]]);
+                        setText(valid_cell[j], col, data_string[p[j]]);
                 else
                     for (int j=0; j<non_empty_cells; j++)
-                        worksheet->setText(valid_cell[j], col, data_string[p[non_empty_cells-j-1]]);
+                        setText(valid_cell[j], col, data_string[p[non_empty_cells-j-1]]);
             }
             else
             {
@@ -1612,10 +1553,10 @@ void Table::sortColumns(const QStringList&s, int type, int order, const QString&
                 columnNumericFormat(col, f, prec);
                 if(!order)
                     for (int j=0; j<non_empty_cells; j++)
-                        worksheet->setText(valid_cell[j], col, QString::number(data_double[p[j]], f, prec));
+                        setText(valid_cell[j], col, QString::number(data_double[p[j]], f, prec));
                 else
                     for (int j=0; j<non_empty_cells; j++)
-                        worksheet->setText(valid_cell[j], col, QString::number(data_double[p[non_empty_cells-j-1]], f, prec));
+                        setText(valid_cell[j], col, QString::number(data_double[p[non_empty_cells-j-1]], f, prec));
             }
             emit modifiedData(this, colName(col));
         }
@@ -1640,7 +1581,7 @@ void Table::sortColumn(int col, int order)
 		if (!theText.isEmpty())
 		{
             if (columnType(col) == Table::Text)
-                text_cells << worksheet->text(i, col);
+                text_cells << text(i, col);
             else
 			    r[non_empty_cells] = this->text(i,col).toDouble();
 			valid_cell[non_empty_cells] = i;
@@ -1668,12 +1609,12 @@ void Table::sortColumn(int col, int order)
         if (!order)
         {
             for (int i=0; i<non_empty_cells; i++)
-                worksheet->setText(valid_cell[i], col, text_cells[i]);
+                setText(valid_cell[i], col, text_cells[i]);
         }
 		else
         {
             for (int i=0; i<non_empty_cells; i++)
-                worksheet->setText(valid_cell[i], col, text_cells[non_empty_cells-i-1]);
+                setText(valid_cell[i], col, text_cells[non_empty_cells-i-1]);
         }
     }
     else
@@ -1684,12 +1625,12 @@ void Table::sortColumn(int col, int order)
         if (!order)
         {
 	       for (int i=0; i<non_empty_cells; i++)
-                worksheet->setText(valid_cell[i], col, QString::number(r[i], f, prec));
+                setText(valid_cell[i], col, QString::number(r[i], f, prec));
         }
         else
         {
             for (int i=0; i<non_empty_cells; i++)
-                worksheet->setText(valid_cell[i], col, QString::number(r[non_empty_cells-i-1], f, prec));
+                setText(valid_cell[i], col, QString::number(r[non_empty_cells-i-1], f, prec));
         }
     }
 	emit modifiedData(this, colName(col));
@@ -2370,7 +2311,7 @@ bool Table::valid2DPlot()
   		QMessageBox::warning(0,tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
   	    return false;
   	}
-  	else if (worksheet->numCols()<2)
+  	else if (worksheet->columnCount()<2)
 	{
 		QMessageBox::critical(0,tr("QtiPlot - Error"),tr("You need at least two columns for this operation!"));
 		return false;
@@ -2889,10 +2830,11 @@ bool Table::exportToASCIIFile(const QString& fname, const QString& separator,
 
 void Table::contextMenuEvent(QContextMenuEvent *e)
 {
-	QRect r = worksheet->horizontalHeader()->sectionRect(worksheet->numCols()-1);
+/* TODO: what's this check for?
+	QRect r = worksheet->horizontalHeader()->sectionRect(worksheet->columnCount()-1);
 	if (e->pos().x() > r.right() + worksheet->verticalHeader()->width())
 		emit showContextMenu(false);
-	else
+	else*/
 		emit showContextMenu(true);
 	e->accept();
 }
@@ -2948,7 +2890,7 @@ void Table::mousePressEvent ( QMouseEvent * e )
 			if (cur.topRow() != 0 || cur.bottomRow() != (worksheet->rowCount() - 1))
 				//select only full columns
 				worksheet->setRangeSelected(cur, false);						
-			return false;
+			return;
 		}
 		else
 			worksheet->clearSelection();
@@ -3481,10 +3423,10 @@ void Table::notifyChanges()
 
 void Table::clear()
 {
-	for (int i=0; i<worksheet->numCols(); i++)
+	for (int i=0; i<worksheet->columnCount(); i++)
 	{
-		for (int j=0; j<worksheet->numRows(); j++)
-			worksheet->setText(j, i, QString::null);
+		for (int j=0; j<worksheet->rowCount(); j++)
+			setText(j, i, QString::null);
 		emit modifiedData(this, colName(i));
 	}
 	emit modifiedWindow(this);

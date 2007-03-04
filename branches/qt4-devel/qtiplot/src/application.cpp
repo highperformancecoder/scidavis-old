@@ -13923,9 +13923,10 @@ void ApplicationWindow::goToRow()
 			return;
 
 		if (ws->activeWindow()->isA("Table"))
-			((Table*)ws->activeWindow())->table()->ensureCellVisible(row - 1, 0);
+			((Table*)ws->activeWindow())->table()->scrollToItem( ((Table*)ws->activeWindow())->table()->item(row - 1, 0));
 		else if (ws->activeWindow()->isA("Matrix"))
 			((Matrix*)ws->activeWindow())->table()->ensureCellVisible(row - 1, 0);
+			// ((Matrix*)ws->activeWindow())->table()->scrollToItem( ((Matrix*)ws->activeWindow())->table()->item(row - 1, 0));
 	}
 }
 
