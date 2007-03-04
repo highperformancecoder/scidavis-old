@@ -994,6 +994,7 @@ void Table::deleteSelectedRows()
 
 	while( it.hasNext() )
 	{
+		cur = it.next();
 		int top = cur.topRow();
 		int bottom = cur.bottomRow();
 		int numberOfRows = bottom-top+1;
@@ -1115,6 +1116,7 @@ void Table::copySelection()
 			QListIterator<QTableWidgetSelectionRange> it(sel);
 			QTableWidgetSelectionRange cur;
 
+			cur = it.next();
 			int top = cur.topRow();
 			int bottom = cur.bottomRow();
 			int left = cur.leftColumn();
