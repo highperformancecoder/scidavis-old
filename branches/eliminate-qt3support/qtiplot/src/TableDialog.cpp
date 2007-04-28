@@ -222,7 +222,7 @@ if (!sc)
 else
 	buttonPrev->setEnabled(true);
 
-if (sc >= w->tableCols() - 1)
+if (sc >= w->numCols() - 1)
 	buttonNext->setEnabled(false);
 else
 	buttonNext->setEnabled(true);
@@ -247,7 +247,7 @@ w->saveColToMemory(sc);
 if (colType == Table::Numeric)
 	{
 	int f, prec;
-	w->columnNumericFormat(sc, f, prec);
+	w->columnNumericFormat(sc, &f, &prec);
 	formatBox->setCurrentItem(f);
 	precisionBox->setValue(prec);
 	enablePrecision(f);

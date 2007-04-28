@@ -128,7 +128,7 @@ void TranslateCurveTool::selectDestination(const QwtDoublePoint &point)
 	}
 
 	int prec; char f;
-	tab->columnNumericFormat(col, f, prec);
+	tab->columnNumericFormat(col, &f, &prec);
 	for (int i=0; i<c->dataSize(); i++)
 		if (!tab->text(i, col).isEmpty())
 			tab->setText(i + c->startRow(), col, QString::number(
