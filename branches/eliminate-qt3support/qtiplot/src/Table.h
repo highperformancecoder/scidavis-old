@@ -138,13 +138,6 @@ public slots:
 	void print(const QString& fileName);
 	void exportPDF(const QString& fileName);
 
-	//! \name Event Handlers
-	//@{
-	bool eventFilter(QObject *object, QEvent *e);
-	void contextMenuEvent(QContextMenuEvent *e);
-	void customEvent( QCustomEvent* e);
-	//@}v
-
 	//! \name Column Operations
 	//@{
 	void removeCol();
@@ -259,7 +252,10 @@ public slots:
 	void setSelectedCol(int col){selectedCol = col;};
 	int selectedColumn(){return selectedCol;};
 	int firstSelectedColumn();
-	int selectedRows();
+	//! Return the number of fully selected rows
+	int numSelectedRows();
+	//! Return the number of fully selected columns
+	int numSelectedColumns();
 	bool isRowSelected(int row, bool full=false);
 	bool isColumnSelected(int col, bool full=false);
 
@@ -369,8 +365,14 @@ protected:
 	QTableWidget *d_table;
 
 private slots:
+	//! \name Event Handlers
+	//@{
+	void contextMenuEvent(QContextMenuEvent *e);
+	void customEvent( QCustomEvent* e);
 	//! Called whenever a header section is double clicked
 	void headerDoubleClickedHandler(int section);
+	//@}v
+
 
 
 private:

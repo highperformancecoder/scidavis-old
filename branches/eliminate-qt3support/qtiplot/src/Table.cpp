@@ -56,8 +56,6 @@
 #include <QLocale>
 #include <QPainter>
 
-#include <QtDebug>
-
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_sort.h>
 #include <gsl/gsl_sort_vector.h>
@@ -81,10 +79,10 @@ void Table::init(int rows, int cols)
 	selectedCol=0;
 	savedCol=-1;
 
-	QDateTime dt = QDateTime::currentDateTime ();
+	QDateTime dt = QDateTime::currentDateTime();
 	setBirthDate(dt.toString(Qt::LocalDate));
 
-	d_table = new QTableWidget(rows, cols, 0);
+	d_table = new QTableWidget(rows, cols);
 	d_table->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
 
 	d_table->setFocusPolicy(Qt::StrongFocus);
@@ -92,16 +90,8 @@ void Table::init(int rows, int cols)
 	// only one contiguous selection supported
 	d_table->setSelectionMode(QAbstractItemView::ContiguousSelection);
 
-	// TODO: testing QHeaderView::ResizeToContents instead of setMovable(true)
 	d_table->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
-	//d_table->verticalHeader()->setMovable(true);
-	// TODO: would be useful, but then we have to interpret
-	// signal Q3Header::indexChange ( int section, int fromIndex, int toIndex )
-	// and update some variables
-	//d_table->setColumnMovingEnabled(true);
-
-	connect(d_table->verticalHeader(), SIGNAL(sectionMoved( int, int, int )),
-			this, SLOT(notifyChanges()));
+	d_table->verticalHeader()->setMovable(false);
 
 	connect(d_table->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)),
 			this, SLOT(headerDoubleClickedHandler(int)));
@@ -121,15 +111,13 @@ void Table::init(int rows, int cols)
 	}
 
 	QHeaderView* head=(QHeaderView*)d_table->horizontalHeader();
-	//	head->setMouseTracking(true);
 	head->setResizeMode(QHeaderView::Interactive);
-	head->installEventFilter(this);
-	//	connect(head, SIGNAL(sizeChange(int, int, int)), this, SLOT(colWidthModified(int, int, int)));
 	connect(head, SIGNAL(sectionResized(int, int, int)), this, SLOT(colWidthModified(int, int, int)));
 
 	col_plot_type[0] = X;
 	setHeaderColType();
 
+	// calculate initial geometry
 	int w=4*(d_table->horizontalHeader())->sectionSize(0);
 	int h;
 	if (rows>11)
@@ -137,10 +125,6 @@ void Table::init(int rows, int cols)
 	else
 		h=(rows+1)*(d_table->verticalHeader())->sectionSize(0);
 	setGeometry(50,50,w + 45, h);
-
-	d_table->verticalHeader()->setMovable(false);
-	//	d_table->verticalHeader()->setResizeEnabled(false);
-	d_table->verticalHeader()->installEventFilter(this);
 
 	// keyboard shortcuts
 	QShortcut * sel_all = new QShortcut(QKeySequence(tr("Ctrl+A", "Table: select all")), this);
@@ -172,10 +156,6 @@ void Table::setTextColor(const QColor& col)
 void Table::setTextFont(const QFont& fnt)
 {
 	d_table->setFont (fnt);
-	// TODO: remark: deactivated the following 3 lines in favor of testing QHeaderView::ResizeToContents in constructor
-	//QFontMetrics fm(fnt);
-	//int lm = fm.width( QString::number(10*d_table->rowCount()));
-	//d_table->setLeftMargin( lm );
 }
 
 void Table::setHeaderColor(const QColor& col)
@@ -327,7 +307,7 @@ void Table::cellEdited(int row, int col)
 	bool ok = true;
 	QLocale locale;
 	double res = locale.toDouble(cell_text, &ok);
-	if (!cell_text.isEmpty() && ok)
+	if (ok)
 		setText(row, col, locale.toString(res, f, precision));
 	else
 	{
@@ -377,7 +357,7 @@ int Table::colY(int col)
 		if (col_plot_type[i] == Y)
 			return i;
 	}
-	for(i=col+1; i<(int)d_table->columnCount(); i++)
+	for(i=col+1; i<d_table->columnCount(); i++)
 	{
 		if (col_plot_type[i] == Y)
 			return i;
@@ -479,13 +459,13 @@ void Table::setCommands(const QStringList& com)
 {
 	commands.clear();
 	for(int i=0; i<com.size() && i<numCols(); i++)
-		commands << com[i].stripWhiteSpace();
+		commands << com[i].trimmed();
 }
 
 void Table::setCommand(int col, const QString com)
 {
 	if(col<commands.size())
-		commands[col] = com.stripWhiteSpace();
+		commands[col] = com.trimmed();
 }
 
 void Table::setCommands(const QString& com)
@@ -522,7 +502,7 @@ bool Table::calculate(int col, int startRow, int endRow)
 	{
 		colscript->setInt(i+1,"i");
 		ret = colscript->eval();
-		if(ret.type()==QVariant::Double) {
+		if(ret.canConvert(QVariant::Double)) {
 			int prec;
 			char f;
 			columnNumericFormat(col, &f, &prec);
@@ -546,19 +526,7 @@ bool Table::calculate(int col, int startRow, int endRow)
 
 QList<QTableWidgetSelectionRange> Table::getSelection()
 {
-
 	return d_table->selectedRanges();
-
-	/*	Q3TableSelection sel;
-		if (d_table->numSelections()==0)
-		{
-		sel.init(d_table->currentRow(), d_table->currentColumn());
-		sel.expandTo(d_table->currentRow(), d_table->currentColumn());
-		} else if (d_table->currentSelection()>0)
-		sel = d_table->selection(d_table->currentSelection());
-		else
-		sel = d_table->selection(0);
-		return sel;*/
 }
 
 bool Table::calculate()
@@ -665,7 +633,7 @@ void Table::enumerateRightCols(bool checked)
 	QStringList oldLabels = colNames();
 	QString caption = QString(this->name())+"_";
 	int n=1;
-	for (int i=selectedCol; i<(int)d_table->columnCount(); i++)
+	for (int i=selectedCol; i<d_table->columnCount(); i++)
 	{
 		QString newLabel  =oldLabel+QString::number(n);
 		commands.replaceInStrings("col(\""+colLabel(i)+"\")", "col(\""+newLabel+"\")");
@@ -767,7 +735,7 @@ QStringList Table::selectedColumns()
 	QStringList names;
 	for (int i=0; i<d_table->columnCount(); i++)
 	{
-		if(isColumnSelected (i))
+		if(isColumnSelected (i, true))
 			names << QString(name()) + "_" + col_label[i];
 	}
 	return names;
@@ -854,12 +822,23 @@ int Table::firstSelectedColumn()
 	return -1;
 }
 
-int Table::selectedRows()
+int Table::numSelectedRows()
 {
 	int r=0;
 	for (int i=0;i<d_table->rowCount();i++)
 	{
 		if(isRowSelected(i,true))
+			r++;
+	}
+	return r;
+}
+
+int Table::numSelectedColumns()
+{
+	int r=0;
+	for (int i=0;i<d_table->columnCount();i++)
+	{
+		if(isColumnSelected(i,true))
 			r++;
 	}
 	return r;
@@ -953,7 +932,7 @@ void Table::addCol(PlotDesignation pd)
 	int index, max=0, cols=d_table->columnCount();
 	for (int i=0; i<cols; i++)
 	{
-		if (!col_label[i].contains(QRegExp ("\\D")))
+		if (!col_label[i].contains(QRegExp("\\D")))
 		{
 			index = col_label[i].toInt();
 			if (index > max)
@@ -962,14 +941,18 @@ void Table::addCol(PlotDesignation pd)
 	}
 	d_table->insertColumn(cols);
 
-	QTableWidgetItem * the_item = d_table->item(0, cols);
+// TODO: find out why this does not work
+// Remark by thzs: this code crashes with the error 
+// "ASSERT failure in QList<T>::operator[]: "index out of range", file /usr/include/qt4/QtCore/qlist.h, line 378"
+// in the setItem line. I have no idea why, the column should exist.
+/*	QTableWidgetItem * the_item = d_table->item(0, cols);	
 	if(!the_item)
 	{
 		the_item = new QTableWidgetItem("");
 		d_table->setItem(0, cols, the_item);
 	}
 
-	d_table->scrollToItem(the_item);
+	d_table->scrollToItem(the_item);*/
 
 	comments << QString();
 	commands << "";
@@ -984,12 +967,12 @@ void Table::addCol(PlotDesignation pd)
 
 void Table::addColumns(int c)
 {
-	int i, index,max=0, cols=d_table->columnCount();
+	int i, index, max=0, cols=d_table->columnCount();
 	for (i=0; i<cols; i++)
 	{
-		if (!col_label[i].contains(QRegExp ("\\D")))
+		if (!col_label[i].contains(QRegExp("\\D")))
 		{
-			index=col_label[i].toInt();
+			index = col_label[i].toInt();
 			if (index>max)
 				max=index;
 		}
@@ -1002,10 +985,10 @@ void Table::addColumns(int c)
 	for (i=0; i<c; i++)
 	{
 		comments << QString();
-		commands<<"";
-		colTypes<<Numeric;
-		col_format<<"0/6";
-		col_label<< QString::number(max+i);
+		commands << "";
+		colTypes << Numeric;
+		col_format << "0/6";
+		col_label << QString::number(max+i);
 		col_plot_type << Y;
 	}
 }
@@ -1307,6 +1290,11 @@ void Table::pasteSelection()
 
 	allow_modification_signals = true;
 	emit modifiedWindow(this);
+	for(j=left; j<left+cols; j++)
+	{
+		QString name = colName(j);
+		emit modifiedData(this, name);
+	}
 	QApplication::restoreOverrideCursor();
 }
 
@@ -1696,15 +1684,16 @@ double Table::cell(int row, int col)
 
 QString Table::text(int row, int col)
 {
-	if (col == savedCol)
-		return savedCells[row];
-	else if(d_table->item(row, col))
+//	if (col == savedCol)
+//		return savedCells[row];
+	//else 
+	if(d_table->item(row, col))
 		return d_table->item(row, col)->text();
 	else
 		return QString("");
 }
 
-void Table::setText (int row, int col, const QString & new_text )
+void Table::setText(int row, int col, const QString & new_text)
 {
 	if(d_table->item(row, col))
 		d_table->item(row, col)->setText(new_text);
@@ -2476,9 +2465,9 @@ void Table::importMultipleASCIIFiles(const QString &fname, const QString &sep, i
 		}
 
 		if (simplifySpaces)
-			s = s.simplifyWhiteSpace();
+			s = s.simplified();
 		else if (stripSpaces)
-			s = s.stripWhiteSpace();
+			s = s.trimmed();
 		QStringList line = s.split(sep);
 		cols = (int)line.count();
 
@@ -2535,9 +2524,9 @@ void Table::importMultipleASCIIFiles(const QString &fname, const QString &sep, i
 		{//use first line to set the table header
 			s = t.readLine();
 			if (simplifySpaces)
-				s = s.simplifyWhiteSpace();
+				s = s.simplified();
 			else if (stripSpaces)
-				s = s.stripWhiteSpace();
+				s = s.trimmed();
 
 			line = s.split(sep, QString::SkipEmptyParts);
 			int end = startCol+(int)line.count();
@@ -2572,9 +2561,9 @@ void Table::importMultipleASCIIFiles(const QString &fname, const QString &sep, i
 			{
 				s = t.readLine();
 				if (simplifySpaces)
-					s = s.simplifyWhiteSpace();
+					s = s.simplified();
 				else if (stripSpaces)
-					s = s.stripWhiteSpace();
+					s = s.trimmed();
 				line = s.split(sep);
 				for (int j=startCol; j<d_table->columnCount(); j++)
 					setText(startRow + k, j, line[j-startCol]);
@@ -2588,9 +2577,9 @@ void Table::importMultipleASCIIFiles(const QString &fname, const QString &sep, i
 		{
 			s = t.readLine();
 			if (simplifySpaces)
-				s = s.simplifyWhiteSpace();
+				s = s.simplified();
 			else if (stripSpaces)
-				s = s.stripWhiteSpace();
+				s = s.trimmed();
 			line = s.split(sep);
 			for (int j=startCol; j<d_table->columnCount(); j++)
 				setText(i, j, line[j-startCol]);
@@ -2628,9 +2617,9 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 		}
 
 		if (simplifySpaces)
-			s = s.simplifyWhiteSpace();
+			s = s.simplified();
 		else if (stripSpaces)
-			s = s.stripWhiteSpace();
+			s = s.trimmed();
 
 		QStringList line = s.split(sep);
 		cols = (int)line.count();
@@ -2689,9 +2678,9 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 		{//use first line to set the table header
 			s = t.readLine();
 			if (simplifySpaces)
-				s = s.simplifyWhiteSpace();
+				s = s.simplified();
 			else if (stripSpaces)
-				s = s.stripWhiteSpace();
+				s = s.trimmed();
 			line = s.split(sep, QString::SkipEmptyParts);
 			for (i=0; i<(int)line.count(); i++)
 				col_label[i] = QString::null;
@@ -2727,9 +2716,9 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 			{
 				s = t.readLine();
 				if (simplifySpaces)
-					s = s.simplifyWhiteSpace();
+					s = s.simplified();
 				else if (stripSpaces)
-					s = s.stripWhiteSpace();
+					s = s.trimmed();
 				line = s.split(sep);
 				int lc = (int)line.count();
 				if (lc > cols) {
@@ -2748,9 +2737,9 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 		{
 			s = t.readLine();
 			if (simplifySpaces)
-				s = s.simplifyWhiteSpace();
+				s = s.simplified();
 			else if (stripSpaces)
-				s = s.stripWhiteSpace();
+				s = s.trimmed();
 			line = s.split(sep);
 			int lc = (int)line.count();
 			if (lc > cols) {
@@ -2899,13 +2888,9 @@ bool Table::exportToASCIIFile(const QString& fname, const QString& separator,
 
 void Table::contextMenuEvent(QContextMenuEvent *e)
 {
-	qDebug() << "contextMenuEvent start";
-	//	QRect r = d_table->horizontalHeader()->sectionRect(d_table->columnCount()-1);
 	int right;
-	//	right = r.right();
 	right = d_table->columnViewportPosition(d_table->columnCount()-1) +
 		d_table->columnWidth(d_table->columnCount()-1) - 1;
-	qDebug() << "contextMenuEvent middle";
 
 	setFocus();
 	if (e->pos().x() > right + d_table->verticalHeader()->width())
@@ -2913,64 +2898,6 @@ void Table::contextMenuEvent(QContextMenuEvent *e)
 	else
 		emit showContextMenu(true);
 	e->accept();
-	qDebug() << "contextMenuEvent end";
-}
-
-bool Table::eventFilter(QObject *object, QEvent *e)
-{
-	// TODO: rewrite eventFilter
-/*
-	QHeaderView *hheader = d_table->horizontalHeader();
-	QHeaderView *vheader = d_table->verticalHeader();
-
-	if (e->type() == QEvent::MouseButtonDblClick && object == (QObject*)hheader) {
-		const QMouseEvent *me = (const QMouseEvent *)e;
-		selectedCol = hheader->logicalIndexAt(me->pos().x() + hheader->offset(), me->pos().y());
-
-		QRect rect = hheader->sectionRect (selectedCol);
-		rect.setLeft(rect.right() - 2);
-		rect.setWidth(4);
-
-		if (rect.contains (me->pos())) {
-			d_table->adjustColumn(selectedCol);
-			emit modifiedWindow(this);
-		} else
-			emit optionsDialog();
-		setActiveWindow();
-		return true;
-	} else if (e->type() == QEvent::MouseButtonPress && object == (QObject*)hheader) {
-		const QMouseEvent *me = (const QMouseEvent *)e;
-		if (me->button() == Qt::LeftButton && me->state() == Qt::ControlButton) {
-			selectedCol = hheader->sectionAt (me->pos().x() + hheader->offset());
-			d_table->selectColumn (selectedCol);
-			d_table->setCurrentCell (0, selectedCol);
-			setActiveWindow();
-			return true;
-		} else if (selectedColsNumber() <= 1) {
-			selectedCol = hheader->sectionAt (me->pos().x() + hheader->offset());
-			d_table->clearSelection();
-			d_table->selectColumn (selectedCol);
-			d_table->setCurrentCell (0, selectedCol);
-			setActiveWindow();
-			return false;
-		}
-	} else if (e->type() == QEvent::MouseButtonPress && object == (QObject*)vheader) {
-		const QMouseEvent *me = (const QMouseEvent *)e;
-		if (me->button() == Qt::RightButton && selectedRows() <= 1) {
-			d_table->clearSelection();
-			int row = vheader->sectionAt(me->pos().y() + vheader->offset());
-			d_table->selectRow (row);
-			d_table->setCurrentCell (row, 0);
-			setActiveWindow();
-		}
-	} else if (e->type()==QEvent::ContextMenu && object == titleBar) {
-		emit showTitleBarMenu();
-		((QContextMenuEvent*)e)->accept();
-		setActiveWindow();
-		return true;
-	}
-*/
-	return MyWidget::eventFilter(object, e);
 }
 
 void Table::headerDoubleClickedHandler(int section)
@@ -3233,7 +3160,6 @@ void Table::resizeCols(int c)
 	{
 		QString the_text= tr("Columns will be deleted from the table!");
 		the_text+="<p>"+tr("Do you really want to continue?");
-		QVarLengthArray<int> columns(cols-c);
 		switch( QMessageBox::information(this,tr("QtiPlot"), the_text, tr("Yes"), tr("Cancel"), 0, 1 ) )
 		{
 			case 0:
@@ -3242,7 +3168,6 @@ void Table::resizeCols(int c)
 				{
 					QString name = colName(i);
 					emit removedCol(name);
-					columns[i-c]=i;
 
 					commands.removeLast();
 					comments.removeLast();
@@ -3252,9 +3177,7 @@ void Table::resizeCols(int c)
 					col_plot_type.removeLast();
 				}
 
-				// TODO: Check this
-				for (i=cols-1; i>=c; i--)
-					d_table->removeColumn(columns[i]);
+				d_table->setColumnCount(c);
 				QApplication::restoreOverrideCursor();
 				break;
 

@@ -128,7 +128,7 @@ void Matrix::cellEdited(int row,int col)
 	bool ok = true;
 	QLocale locale;
 	double res = locale.toDouble(cell_text, &ok);
-	if (!cell_text.isEmpty() && ok)
+	if (ok)
 		setText(row, col, locale.toString(res, txt_format.toAscii(), num_precision));
 	else
 	{

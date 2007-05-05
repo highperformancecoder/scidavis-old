@@ -141,6 +141,8 @@
 #include <QAssistantClient>
 #include <QLocale>
 
+#include <QtDebug>
+
 #include <zlib.h>
 
 #include <iostream>
@@ -5444,8 +5446,12 @@ void ApplicationWindow::showColumnValuesDialog()
 	Table* w = (Table*)ws->activeWindow();
 	if ( w && w->isA("Table"))
 	{
-		// TODO: check whether w->getSelection().isEmpty() still works properly in Qt4
-		if (int(w->selectedColumns().count())>0 || !(w->getSelection().isEmpty()) )
+		QList<QTableWidgetSelectionRange> sel = w->getSelection();
+		QListIterator<QTableWidgetSelectionRange> it(sel);
+		QTableWidgetSelectionRange cur;
+		while(it.hasNext())
+			cur = it.next();
+		if (w->numSelectedColumns()>0 || !(w->getSelection().isEmpty()) )
 		{
 			SetColValuesDialog* vd= new SetColValuesDialog(scriptEnv,this,"valuesDialog",true);
 			vd->setAttribute(Qt::WA_DeleteOnClose);
@@ -5604,7 +5610,7 @@ void ApplicationWindow::showRowStatistics()
 		return;
 	Table *t = (Table*)ws->activeWindow();
 
-	if (t->selectedRows() > 0)
+	if (t->numSelectedRows() > 0)
 	{
 		QList<int> targets;
 		for (int i=0; i < t->numRows(); i++)
@@ -8814,13 +8820,14 @@ void ApplicationWindow::showTableContextMenu(bool selection)
 	QMenu cm(this);
 	if (selection)
 	{
-		if ((int)t->selectedColumns().count() > 0)
+		if (t->selectedColumns().count() > 0)
 		{
 			showColMenu(t->firstSelectedColumn());
 			return;
 		}
-		else if (t->selectedRows() == 1)
+		else if (t->numSelectedRows() == 1)
 		{
+			cm.addAction(actionShowColumnValuesDialog);
 			cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), t, SLOT(cutSelection()));
 			cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
 			cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), t, SLOT(pasteSelection()));
@@ -8832,8 +8839,9 @@ void ApplicationWindow::showTableContextMenu(bool selection)
 			cm.insertSeparator();
 			cm.addAction(actionShowRowStatistics);
 		}
-		else if (t->selectedRows() > 1)
+		else if (t->numSelectedRows() > 1)
 		{
+			cm.addAction(actionShowColumnValuesDialog);
 			cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), t, SLOT(cutSelection()));
 			cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
 			cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), t, SLOT(pasteSelection()));
@@ -8846,6 +8854,7 @@ void ApplicationWindow::showTableContextMenu(bool selection)
 		}
 		else
 		{
+			cm.addAction(actionShowColumnValuesDialog);
 			cm.insertItem(QPixmap(cut_xpm),tr("Cu&t"), t, SLOT(cutSelection()));
 			cm.insertItem(QPixmap(copy_xpm),tr("&Copy"), t, SLOT(copySelection()));
 			cm.insertItem(QPixmap(paste_xpm),tr("&Paste"), t, SLOT(pasteSelection()));

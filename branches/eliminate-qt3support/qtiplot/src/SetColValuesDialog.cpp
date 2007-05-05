@@ -46,8 +46,6 @@
 #include <QTextEdit>
 #include <QTextCursor>
 
-#include <QtDebug>
-
 SetColValuesDialog::SetColValuesDialog( ScriptingEnv *env, QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl ), scripted(env)
 {
@@ -256,23 +254,6 @@ void SetColValuesDialog::setTable(Table* w)
 	for (int i=0; i<cols; i++)
 		boxColumn->insertItem("col(\""+colNames[i]+"\")",i); 
 
-// TODO: Check this
-	/*
-	   int s = w->table()->currentSelection();
-	   if (s >= 0)
-	   {
-	   Q3TableSelection sel = w->table()->selection(s);
-	   w->setSelectedCol(sel.leftCol());
-
-	   start->setValue(sel.topRow() + 1);
-	   end->setValue(sel.bottomRow() + 1);
-	   }
-	   else
-	   {
-	   start->setValue(1);
-	   end->setValue(w->numRows());
-	   }
-	   */
 	QList<QTableWidgetSelectionRange> sel = w->getSelection();
 	QListIterator<QTableWidgetSelectionRange> it(sel);
 	QTableWidgetSelectionRange cur;
@@ -280,7 +261,6 @@ void SetColValuesDialog::setTable(Table* w)
 	if(it.hasNext())
 	{
 		cur = it.next();
-		qDebug() << "top/bottom row =" << cur.topRow() << cur.bottomRow();
 		start->setValue(cur.topRow() + 1);
 		end->setValue(cur.bottomRow() + 1);
 	}
