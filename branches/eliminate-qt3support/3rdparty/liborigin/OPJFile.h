@@ -254,24 +254,55 @@ struct graphCurve {
 
 enum AxisPosition{ Left = 0, Bottom = 1, Right = 2, Top = 3};
 
+struct graphGrid {
+	bool hidden;
+	int color;
+	int style;
+	double width;
+};
+
+struct graphAxisFormat {
+	bool hidden;
+	int color;
+	double thickness;
+	double majorTickLength;
+	int majorTicksType;
+	int minorTicksType;
+	int axisPosition;
+	double axisPositionValue;
+};
+
+struct graphAxisTick {
+	bool hidden;
+	int color;
+	int value_type;//Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5, Text&Numeric = 6
+	int value_type_specification; 
+	int decimal_places;
+	int fontsize;
+	string dataName;
+	string colName;
+	int rotation;
+};
+
+struct graphAxis {
+	int pos;
+	string label;
+	double min;
+	double max;
+	double step;
+	int majorTicks;
+	int minorTicks;
+	int scale;
+	graphGrid majorGrid;
+	graphGrid minorGrid;
+	graphAxisFormat formatAxis[2];
+	graphAxisTick tickAxis[2]; //bottom-top, left-right
+};
+
 struct graphLayer {
-	int xPos;
-	int yPos;
-	string xLabel;
-	string yLabel;
 	string legend;
-	double xMin;
-	double xMax;
-	double xStep;
-	int xMajorTicks;
-	int xMinorTicks;
-	int xScale;
-	double yMin;
-	double yMax;
-	double yStep;
-	int yMajorTicks;
-	int yMinorTicks;
-	int yScale;
+	graphAxis xAxis;
+	graphAxis yAxis;
 
 	double histogram_bin;
 	double histogram_begin;
@@ -283,7 +314,13 @@ struct graphLayer {
 struct graph {
 	string name;
 	string label;
+	bool bHidden;
 	vector<graphLayer> layer;
+	graph(string _name="")
+	:	name(_name)
+	,	label("")
+	,	bHidden(false)
+	{};
 };
 
 struct note {
@@ -362,7 +399,7 @@ public:
 	enum Plot {Line=200, Scatter=201, LineSymbol=202, Column=203, Area=204, HiLoClose=205, Box=206,
 		ColumnFloat=207, Vector=208, PlotDot=209, Wall3D=210, Ribbon3D=211, Bar3D=212, ColumnStack=213,
 		AreaStack=214, Bar=215, BarStack=216, FlowVector=218, Histogram=219, MatrixImage=220, Pie=225,
-		Contour=226, Unknown=230, ErrorBar=231, Text=232, XErrorBar=233, SurfaceColorMap=236,
+		Contour=226, Unknown=230, ErrorBar=231, TextPlot=232, XErrorBar=233, SurfaceColorMap=236,
 		SurfaceColorFill=237, SurfaceWireframe=238, SurfaceBars=239, Line3D=240, Text3D=241, Mesh3D=242,
 		XYZTriangular=245, LineSeries=246, YErrorBar=254, XYErrorBar=255, GraphScatter3D=0x8AF0,
 		GraphTrajectory3D=0x8AF1, Polar=0x00020000, SmithChart=0x00040000, FillArea=0x00800000};
@@ -373,39 +410,66 @@ public:
 
 	enum Scale{Linear=0, Log10=1, Probability=2, Probit=3, Reciprocal=4, OffsetReciprocal=5, Logit=6, Ln=7, Log2=8};
 
+	enum ValueType {Numeric=0, Text=1, Time=2, Date=3,  Month=4, Day=5, ColumnHeading=6, TickIndexedDataset=7, TextNumeric=9, Categorical=10};
+
 	int numGraphs() { return GRAPH.size(); }			//!< get number of graphs
 	const char *graphName(int s) { return GRAPH[s].name.c_str(); }	//!< get name of graph s
 	const char *graphLabel(int s) { return GRAPH[s].label.c_str(); }	//!< get name of graph s
+	bool graphHidden(int s) { return GRAPH[s].bHidden; }	//!< is graph s hidden
 	int numLayers(int s) { return GRAPH[s].layer.size(); }			//!< get number of layers of graph s
-	const char *layerXAxisTitle(int s, int l) { return GRAPH[s].layer[l].xLabel.c_str(); }		//!< get label of X-axis of layer l of graph s
-	const char *layerYAxisTitle(int s, int l) { return GRAPH[s].layer[l].yLabel.c_str(); }		//!< get label of Y-axis of layer l of graph s
+	const char *layerXAxisTitle(int s, int l) { return GRAPH[s].layer[l].xAxis.label.c_str(); }		//!< get label of X-axis of layer l of graph s
+	const char *layerYAxisTitle(int s, int l) { return GRAPH[s].layer[l].yAxis.label.c_str(); }		//!< get label of Y-axis of layer l of graph s
 	const char *layerLegend(int s, int l) { return GRAPH[s].layer[l].legend.c_str(); }		//!< get legend of layer l of graph s
 	vector<double> layerXRange(int s, int l) {
 		vector<double> range;
-		range.push_back(GRAPH[s].layer[l].xMin);
-		range.push_back(GRAPH[s].layer[l].xMax);
-		range.push_back(GRAPH[s].layer[l].xStep);
+		range.push_back(GRAPH[s].layer[l].xAxis.min);
+		range.push_back(GRAPH[s].layer[l].xAxis.max);
+		range.push_back(GRAPH[s].layer[l].xAxis.step);
 		return range;
 	} //!< get X-range of layer l of graph s
 	vector<double> layerYRange(int s, int l) {
 		vector<double> range;
-		range.push_back(GRAPH[s].layer[l].yMin);
-		range.push_back(GRAPH[s].layer[l].yMax);
-		range.push_back(GRAPH[s].layer[l].yStep);
+		range.push_back(GRAPH[s].layer[l].yAxis.min);
+		range.push_back(GRAPH[s].layer[l].yAxis.max);
+		range.push_back(GRAPH[s].layer[l].yAxis.step);
 		return range;
 	} //!< get Y-range of layer l of graph s
 	vector<int> layerXTicks(int s, int l) {
 		vector<int> tick;
-		tick.push_back(GRAPH[s].layer[l].xMajorTicks);
-		tick.push_back(GRAPH[s].layer[l].xMinorTicks);
+		tick.push_back(GRAPH[s].layer[l].xAxis.majorTicks);
+		tick.push_back(GRAPH[s].layer[l].xAxis.minorTicks);
 		return tick;
 	} //!< get X-axis ticks of layer l of graph s
 	vector<int> layerYTicks(int s, int l) {
 		vector<int> tick;
-		tick.push_back(GRAPH[s].layer[l].yMajorTicks);
-		tick.push_back(GRAPH[s].layer[l].yMinorTicks);
+		tick.push_back(GRAPH[s].layer[l].yAxis.majorTicks);
+		tick.push_back(GRAPH[s].layer[l].yAxis.minorTicks);
 		return tick;
 	} //!< get Y-axis ticks of layer l of graph s
+	vector<graphGrid> layerGrid(int s, int l) {
+		vector<graphGrid> grid;
+		grid.push_back(GRAPH[s].layer[l].xAxis.majorGrid);
+		grid.push_back(GRAPH[s].layer[l].xAxis.minorGrid);
+		grid.push_back(GRAPH[s].layer[l].yAxis.majorGrid);
+		grid.push_back(GRAPH[s].layer[l].yAxis.minorGrid);
+		return grid;
+	} //!< get grid of layer l of graph s
+	vector<graphAxisFormat> layerAxisFormat(int s, int l) {
+		vector<graphAxisFormat> format;
+		format.push_back(GRAPH[s].layer[l].yAxis.formatAxis[0]); //bottom
+		format.push_back(GRAPH[s].layer[l].yAxis.formatAxis[1]); //top
+		format.push_back(GRAPH[s].layer[l].xAxis.formatAxis[0]); //left
+		format.push_back(GRAPH[s].layer[l].xAxis.formatAxis[1]); //right
+		return format;
+	} //!< get title and format of axes of layer l of graph s
+	vector<graphAxisTick> layerAxisTickLabels(int s, int l) {
+		vector<graphAxisTick> tick;
+		tick.push_back(GRAPH[s].layer[l].yAxis.tickAxis[0]); //bottom
+		tick.push_back(GRAPH[s].layer[l].yAxis.tickAxis[1]); //top
+		tick.push_back(GRAPH[s].layer[l].xAxis.tickAxis[0]); //left
+		tick.push_back(GRAPH[s].layer[l].xAxis.tickAxis[1]); //right
+		return tick;
+	} //!< get tick labels of axes of layer l of graph s
 	vector<double> layerHistogram(int s, int l) {
 		vector<double> range;
 		range.push_back(GRAPH[s].layer[l].histogram_bin);
@@ -413,8 +477,8 @@ public:
 		range.push_back(GRAPH[s].layer[l].histogram_end);
 		return range;
 	} //!< get histogram bin of layer l of graph s
-	int layerXScale(int s, int l){ return GRAPH[s].layer[l].xScale; }		//!< get scale of X-axis of layer l of graph s
-	int layerYScale(int s, int l){ return GRAPH[s].layer[l].yScale; }		//!< get scale of Y-axis of layer l of graph s
+	int layerXScale(int s, int l){ return GRAPH[s].layer[l].xAxis.scale; }		//!< get scale of X-axis of layer l of graph s
+	int layerYScale(int s, int l){ return GRAPH[s].layer[l].yAxis.scale; }		//!< get scale of Y-axis of layer l of graph s
 	int numCurves(int s, int l) { return GRAPH[s].layer[l].curve.size(); }			//!< get number of curves of layer l of graph s
 	const char *curveDataName(int s, int l, int c) { return GRAPH[s].layer[l].curve[c].dataName.c_str(); }	//!< get data source name of curve c of layer l of graph s
 	const char *curveXColName(int s, int l, int c) { return GRAPH[s].layer[l].curve[c].xColName.c_str(); }	//!< get X-column name of curve c of layer l of graph s
@@ -461,6 +525,9 @@ private:
 	void readSpreadInfo(FILE *fopj, FILE *fdebug);
 	void readMatrixInfo(FILE *fopj, FILE *fdebug);
 	void readGraphInfo(FILE *fopj, FILE *fdebug);
+	void readGraphGridInfo(graphGrid &grid, FILE *fopj, int pos);
+	void readGraphAxisFormatInfo(graphAxisFormat &format, FILE *fopj, int pos);
+	void readGraphAxisTickLabelsInfo(graphAxisTick &tick, FILE *fopj, int pos);
 	void skipObjectInfo(FILE *fopj, FILE *fdebug);
 	void setColName(int spread);		//!< set default column name starting from spreadsheet spread
 	const char* filename;			//!< project file name
