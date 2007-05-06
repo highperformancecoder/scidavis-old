@@ -145,12 +145,11 @@ class Graph: public QWidget
 		//! \name Pie Curves
 		//@{
 		//! Returns true if this Graph is a pie plot, false otherwise.
-		bool isPiePlot(){return piePlot;};
+		bool isPiePlot(){return (c_type[0] == Pie);};
 		void plotPie(QwtPieCurve* curve);
 		void plotPie(Table* w,const QString& name, int startRow = 0, int endRow = -1);
 		//! Used when restoring a pie plot from a project file
 		void plotPie(Table* w,const QString& name, const QPen& pen, int brush, int size, int firstColor, int startRow = 0, int endRow = -1, bool visible = true);
-		void updatePie(const QPen& pen, const Qt::BrushStyle &brushStyle, int size, int firstColor);
 		void removePie();
 		QString pieLegendText();
 		QString savePieCurveLayout();
@@ -203,6 +202,8 @@ class Graph: public QWidget
   		QStringList plotItemsList();
   		 //! get plotted item by index
   	    QwtPlotItem* plotItem(int index);
+  	    //! get plot item by index
+  	    int plotItemIndex(QwtPlotItem *it) const;
 
         void updateCurveNames(const QString& oldName, const QString& newName, bool updateTableName = true);
 
@@ -236,7 +237,7 @@ class Graph: public QWidget
 				int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(Qt::black),
 				bool through = true, bool minus = true, bool plus = true);
 
-		void updateErrorBars(int curve, bool xErr,int width, int cap, const QColor& c, bool plus, bool minus, bool through);
+		void updateErrorBars(QwtErrorPlotCurve *er, bool xErr,int width, int cap, const QColor& c, bool plus, bool minus, bool through);
 
 		//! Returns a valid master curve for the error bars curve.
 		DataCurve* masterCurve(QwtErrorPlotCurve *er);
@@ -329,7 +330,7 @@ class Graph: public QWidget
 				bool start, bool end, int headLength, int headAngle, bool filledHead);
 		void setCopiedImageName(const QString& fn){auxMrkFileName=fn;};
 		QRect copiedMarkerRect(){return QRect(auxMrkStart, auxMrkEnd);};
-		QVector<long> textMarkerKeys(){return d_texts;};
+		QVector<int> textMarkerKeys(){return d_texts;};
 		LegendMarker* textMarker(long id);
 
 		void addTimeStamp();
@@ -354,7 +355,7 @@ class Graph: public QWidget
 
 		//! Used when opening a project file
 		void insertLineMarker(QStringList list, int fileVersion);
-		QVector<long> lineMarkerKeys(){return d_lines;};
+		QVector<int> lineMarkerKeys(){return d_lines;};
 
 		//!Draws a line/arrow depending on the value of "arrow"
 		void drawLine(bool on, bool arrow = FALSE);
@@ -375,7 +376,7 @@ class Graph: public QWidget
 		//! \name Image Markers
 		//@{
 		ImageMarker* imageMarker(long id);
-		QVector<long> imageMarkerKeys(){return d_images;};
+		QVector<int> imageMarkerKeys(){return d_images;};
 		void insertImageMarker(ImageMarker* mrk);
 		void insertImageMarker(const QPixmap& photo, const QString& fileName);
 
@@ -626,7 +627,6 @@ class Graph: public QWidget
 		void scaleFonts(double factor);
 		//@}
 
-		void modified();
 		void notifyChanges();
 
 		void updateSecondaryAxis(int axis);
@@ -672,16 +672,13 @@ signals:
 		void drawLineEnded(bool);
 		void cursorInfo(const QString&);
 		void showPlotDialog(int);
-		void showPieDialog();
 		void createTable(const QString&,int,int,const QString&);
-		void updateTable(const QString&,int,const QString&);
 
 		void viewImageDialog();
 		void viewTextDialog();
 		void viewLineDialog();
 		void viewTitleDialog();
 		void modifiedGraph();
-		void modifiedGraph(Graph *);
 		void hiddenPlot(QWidget*);
 
 		void showContextMenu();
@@ -696,7 +693,7 @@ signals:
 		void topAxisTitleDblClicked();
 
 		void createTablePlot(const QString&,int,int,const QString&);
-		void createIntensityTable(const QPixmap&);
+		void createIntensityTable(const QString&);
 		void dataRangeChanged();
 		void showFitResults(const QString&);
 
@@ -721,13 +718,13 @@ signals:
 		//! Curve types
 		QVector<int> c_type;
 		//! Curves on plot keys
-		QVector<long> c_keys;
+		QVector<int> c_keys;
 		//! Arrows/lines on plot keys
-		QVector<long> d_lines;
+		QVector<int> d_lines;
 		//! Images on plot keys
-		QVector<long> d_images;
+		QVector<int> d_images;
 		//! Stores the identifiers (keys) of the text objects on the plot
-		QVector<long> d_texts;
+		QVector<int> d_texts;
 
 		QPen mrkLinePen;
 		QFont auxMrkFont, defaultMarkerFont;
@@ -736,7 +733,7 @@ signals:
 		Qt::PenStyle auxMrkStyle;
 		QString auxMrkFileName, auxMrkText;
 
-		int n_curves, pieRay;
+		int n_curves;
 		int widthLine, defaultMarkerFrame;
 		QColor defaultTextMarkerColor, defaultTextMarkerBackground;
 		int auxMrkAngle,auxMrkBkg,auxMrkWidth, averagePixels;
@@ -745,8 +742,6 @@ signals:
 		long mrkX, mrkY;//x=0 et y=0 line markers keys
 		bool startArrowOn, endArrowOn, drawTextOn, drawLineOn, drawArrowOn;
 
-		//! Whether the plot is a pie plot.
-		bool piePlot;
 		//! Whether pixel line profile is asked.
 		bool lineProfileOn;
 		bool auxFilledArrowHead, ignoreResize;

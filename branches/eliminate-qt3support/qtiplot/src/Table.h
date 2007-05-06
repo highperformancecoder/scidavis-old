@@ -201,8 +201,6 @@ public slots:
 	int colX(int col);
 	int colY(int col);
 
-	int atRow(int col, double value);
-
 	QStringList getCommands(){return commands;};
 	//! Set all column formulae.
 	void setCommands(const QStringList& com);
@@ -279,16 +277,13 @@ public slots:
 	QStringList getColumnsFormat(){return col_format;};
 	void setColumnsFormat(const QStringList& lst);
 
-	void setTextFormat(bool applyToAll);
 	void setTextFormat(int col);
 	void setColNumericFormat(int f, int prec, int col);
-	void setDateFormat(const QString& format, int col);
-	void setTimeFormat(const QString& format, int col);
+	bool setDateFormat(const QString& format, int col);
+	bool setTimeFormat(const QString& format, int col);
 	void setMonthFormat(const QString& format, int col);
 	void setDayFormat(const QString& format, int col);
-	void setDateTimeFormat(int f, const QString& format,int col);
-	void setDateTimeFormat(int f, const QString& format,bool applyToAll);
-	void setNumericFormat(int f, int prec,bool applyToAll);
+	bool setDateTimeFormat(int f, const QString& format, int col);
 
 	bool exportToASCIIFile(const QString& fname, const QString& separator,
 							  bool withLabels,bool exportSelection);
@@ -346,7 +341,6 @@ public slots:
 
 	//! Notifies the main application that the width of a table column has been modified by the user.
 	void colWidthModified(int, int, int);
-
 
 signals:
 	void plot3DRibbon(Table *,const QString&);

@@ -73,10 +73,15 @@ Plot::Plot(QWidget *parent, const char *)
 		{
 			scale->setMargin(0);
 
-			//the axis title color must be initialized
+			//the axis title color must be initialized...
 			QwtText title = scale->title();
 			title.setColor(Qt::black);
 			scale->setTitle(title);
+
+            //...same for axis color
+            QPalette pal = scale->palette();
+            pal.setColor(QColorGroup::Foreground, QColor(Qt::black));
+            scale->setPalette(pal);
 
 			ScaleDraw *sd = new ScaleDraw();
 			sd->setTickLength(QwtScaleDiv::MinorTick, minTickLength);
@@ -102,10 +107,7 @@ Plot::Plot(QWidget *parent, const char *)
 	plCanvas->setPaintAttribute(QwtPlotCanvas::PaintPacked, false);
 
     QColor background = QColor(Qt::white);
-    background.setAlpha(0);
-    #ifdef Q_MAC_OS
-        background.setAlpha(255);
-    #endif
+    background.setAlpha(255);
 
 	QColorGroup cg;
     cg.setColor(QColorGroup::Window, background);
@@ -137,8 +139,7 @@ void Plot::printFrame(QPainter *painter, const QRect &rect) const
 	else
 		painter->setPen(QPen(Qt::NoPen));
 
-	if (paletteBackgroundColor() != Qt::white)
-		painter->setBrush(paletteBackgroundColor());
+    painter->setBrush(paletteBackgroundColor());
 
 	QwtPainter::drawRect(painter, rect.x()-lw/2, rect.y()-lw/2, rect.width()+3/2*lw, rect.height()+3/2*lw);
 	painter->restore();
@@ -401,8 +402,7 @@ void Plot::setTickLength (int minLength, int majLength)
 	minTickLength = minLength;
 }
 
-void Plot::print(QPainter *painter, const QRect &plotRect,
-		const QwtPlotPrintFilter &pfilter)
+void Plot::print(QPainter *painter, const QRect &plotRect, const QwtPlotPrintFilter &pfilter)
 {
     QwtText t = title();
 	printFrame(painter, plotRect);
@@ -412,7 +412,7 @@ void Plot::print(QPainter *painter, const QRect &plotRect,
 
 QwtPlotCurve* Plot::curve(int index)
 {
-    QwtPlotItem *it = d_curves[index];
+    QwtPlotItem *it = d_curves.value(index);
     if (it && it->rtti() != QwtPlotItem::Rtti_PlotSpectrogram)
         return (QwtPlotCurve*)it;
     else
@@ -466,7 +466,8 @@ void Plot::removeMarker(int index)
 int Plot::insertMarker(QwtPlotMarker *m)
 {
 	marker_key++;
-	d_markers.insert (marker_key, m, false );
+	if (!d_markers.contains(marker_key))
+		d_markers.insert (marker_key, m);
 	m->setRenderHint(QwtPlotItem::RenderAntialiased, ((Graph *)parent())->antialiasing());
 	m->attach(((QwtPlot *)this));
 	return marker_key;
@@ -475,10 +476,11 @@ int Plot::insertMarker(QwtPlotMarker *m)
 int Plot::insertCurve(QwtPlotItem *c)
 {
 	curve_key++;
-	d_curves.insert (curve_key, c, false);
+	if (!d_curves.contains(curve_key))
+		d_curves.insert (curve_key, c);
 	if (c->rtti() != QwtPlotItem::Rtti_PlotSpectrogram)
 		((QwtPlotCurve *)c)->setPaintAttribute(QwtPlotCurve::PaintFiltered);
-	
+
 	c->setRenderHint(QwtPlotItem::RenderAntialiased, ((Graph *)parent())->antialiasing());
 	c->attach(this);
 	return curve_key;
@@ -637,7 +639,7 @@ void Plot::updateLayout()
             titleLabel()->show();
     }
     else
-        titleLabel()->hide();
+		titleLabel()->hide();
 
     for (int axisId = 0; axisId < axisCnt; axisId++ )
     {

@@ -295,7 +295,6 @@ public slots:
 	//! To be used when opening a project file only!
 	Matrix* newMatrix(const QString& caption, int r, int c);
 	Matrix* matrix(const QString& name);
-	Matrix* createIntensityMatrix(const QPixmap& pic);
 	Matrix* convertTableToMatrix();
 	void initMatrix(Matrix* m, const QString& caption);
 	void transposeMatrix();
@@ -441,7 +440,6 @@ public slots:
 	void printWindow();
 	//@}
 
-	void updateTable(const QString& caption,int row,const QString& text);
 	//! Show about dialog
 	static void about();
 	//! Return a version string ("QtiPlot x.y.z")
@@ -486,7 +484,6 @@ public slots:
 	void copyMarker();
 	void pasteSelection();
 	void clearSelection();
-	void clearCellFromTable(const QString& name,double value);
 	void copyActiveLayer();
 
 	void newProject();
@@ -600,12 +597,9 @@ public slots:
 	//! \name Dialogs
 	//@{
 	void showFindDialogue();
-	//! Show plot style dialog for the active MultiLayer / active Graph / first curve.
-	void showPlotDialog();
-	//! Show plot style dialog for the active MultiLayer / active Graph / specified curve.
-	void showPlotDialog(int curveKey);
+	//! Show plot style dialog for the active MultiLayer / activeGraph / specified curve or the activeGraph options dialog if no curve is specified (curveKey = -1).
+	void showPlotDialog(int curveKey = -1);
 	QDialog* showScaleDialog();
-	QDialog* showPieDialog();
 	QDialog* showPlot3dDialog();
 	AxesDialog* showScalePageFromAxisDialog(int axisPos);
 	AxesDialog* showAxisPageFromAxisDialog(int axisPos);
@@ -918,6 +912,7 @@ signals:
 
 // TODO: a lot of this stuff should be private
 public:
+	bool d_extended_plot_dialog;
 	bool generateUniformFitPoints;
 	bool generatePeakCurves;
 	int peakCurvesColor;
@@ -1053,7 +1048,7 @@ private:
     QAction *actionDifferentiate, *actionFitLinear, *actionShowFitPolynomDialog;
     QAction *actionShowExpDecayDialog, *actionShowTwoExpDecayDialog, *actionShowExpDecay3Dialog;
     QAction *actionFitExpGrowth, *actionFitSigmoidal, *actionFitGauss, *actionFitLorentz, *actionShowFitDialog;
-    QAction *actionShowCurveFormatDialog, *actionShowAxisDialog, *actionShowTitleDialog;
+    QAction *actionShowAxisDialog, *actionShowTitleDialog;
     QAction *actionShowColumnOptionsDialog, *actionShowColumnValuesDialog, *actionShowColsDialog, *actionShowRowsDialog;
     QAction *actionTableRecalculate;
     QAction *actionAbout, *actionShowHelp, *actionChooseHelpFolder;

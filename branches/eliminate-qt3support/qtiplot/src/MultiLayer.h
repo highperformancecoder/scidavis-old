@@ -81,11 +81,14 @@ public:
 	void contextMenuEvent(QContextMenuEvent *);
 	void wheelEvent(QWheelEvent *);
 	void keyPressEvent(QKeyEvent *);
+	void changeEvent(QEvent *);
 	bool eventFilter(QObject *object, QEvent *);
 	void releaseLayer();
 
 	bool focusNextPrevChild ( bool next );
 	//@}
+
+	void setOpenMaximized(){d_open_maximized = 1;};
 
 public slots:
 	Graph* addLayer(int x = 0, int y = 0, int width = 0, int height = 0);
@@ -192,15 +195,13 @@ signals:
 	void modifiedPlot();
 	void cursorInfo(const QString&);
 	void showImageDialog();
-	void showPieDialog();
 	void showLineDialog();
 	void viewTitleDialog();
 	void createTablePlot(const QString&,int,int,const QString&);
 	void createTable(const QString&,int,int,const QString&);
-	void updateTable(const QString&,int,const QString&);
 	void showGeometryDialog();
 	void pasteMarker();
-	void createIntensityTable(const QPixmap&);
+	void createIntensityTable(const QString&);
 	void setPointerCursor();
 
 private:
@@ -223,6 +224,9 @@ private:
     QWidget *canvas;
 
 	QPointer<SelectionMoveResizer> d_layers_selector;
+    //! Stores the size of the widget in the Qt::WindowMaximized state.
+	int d_open_maximized;
+	QSize d_max_size;
 };
 
 

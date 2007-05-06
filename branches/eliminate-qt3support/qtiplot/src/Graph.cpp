@@ -159,12 +159,10 @@ Graph::Graph(QWidget* parent, const char* name, Qt::WFlags f)
 	d_active_tool = NULL;
 	widthLine=1;mrkX=-1;mrkY=-1;;
 	selectedMarker=-1;
-	pieRay=100;
 	lineProfileOn=false;
 	drawTextOn=false;
 	drawLineOn=false;
 	drawArrowOn=false;
-	piePlot = false;
 	ignoreResize = true;
 	drawAxesBackbone = true;
 	autoscale = true;
@@ -228,7 +226,9 @@ Graph::Graph(QWidget* parent, const char* name, Qt::WFlags f)
 	grid.yAxis = QwtPlot::yLeft;
 
 	legendMarkerID = -1; // no legend for an empty graph
-	d_texts = QVector<long>();
+	d_texts = QVector<int>();
+	c_type = QVector<int>();
+	c_keys = QVector<int>();
 
 	connect (cp,SIGNAL(selectPlot()),this,SLOT(activateGraph()));
 	connect (cp,SIGNAL(drawTextOff()),this,SIGNAL(drawTextOff()));
@@ -236,9 +236,7 @@ Graph::Graph(QWidget* parent, const char* name, Qt::WFlags f)
 	connect (cp,SIGNAL(viewTextDialog()),this,SIGNAL(viewTextDialog()));
 	connect (cp,SIGNAL(viewLineDialog()),this,SIGNAL(viewLineDialog()));
 	connect (cp,SIGNAL(showPlotDialog(int)),this,SIGNAL(showPlotDialog(int)));
-	connect (cp,SIGNAL(showPieDialog()),this,SIGNAL(showPieDialog()));
 	connect (cp,SIGNAL(showMarkerPopupMenu()),this,SIGNAL(showMarkerPopupMenu()));
-	connect (cp,SIGNAL(modified()), this, SLOT(modified()));
 	connect (cp,SIGNAL(modified()), this, SIGNAL(modifiedGraph()));
 	connect (cp,SIGNAL(calculateProfile(const QPoint&, const QPoint&)),
 			this,SLOT(calculateLineProfile(const QPoint&, const QPoint&)));
@@ -264,11 +262,6 @@ Graph::Graph(QWidget* parent, const char* name, Qt::WFlags f)
 void Graph::notifyChanges()
 {
 	emit modifiedGraph();
-}
-
-void Graph::modified()
-{
-	emit modifiedGraph(this);
 }
 
 void Graph::activateGraph()
@@ -865,28 +858,27 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 	if (type < Time)
 		return;
 
-	QStringList list = formatInfo.split(";");
-	if ((int)list.count() < 2 || list[0].isEmpty() || list[1].isEmpty())
-		return;
+	QStringList list = formatInfo.split(";", QString::KeepEmptyParts);
+	if ((int)list.count() < 2)
+	{
+        QMessageBox::critical(this, tr("QtiPlot - Error"), "Couldn't change the axis type to the requested format!");
+        return;
+    }
+    if (list[0].isEmpty() || list[1].isEmpty())
+    {
+        QMessageBox::critical(this, tr("QtiPlot - Error"), "Couldn't change the axis type to the requested format!");
+        return;
+    }
 
 	if (type == Time)
 	{
-		/*QTime t;
-		  if (axis == QwtPlot::xTop &&  axisType[QwtPlot::xBottom] == Time)
-		  {
-		  TimeScaleDraw *scd = (TimeScaleDraw *)d_plot->axisScaleDraw (QwtPlot::xBottom);
-		  t = QTime::fromString (scd->origin(), Qt::TextDate);
-		  }
-		  else*/
-		QTime t = QTime::fromString (list[0], Qt::TextDate);
-		TimeScaleDraw *sd = new TimeScaleDraw (t, list[1]);
+		TimeScaleDraw *sd = new TimeScaleDraw (QTime::fromString (list[0]), list[1]);
 		sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 		d_plot->setAxisScaleDraw (axis, sd);
 	}
 	else if (type == Date)
 	{
-		QDate d = QDate::fromString (list[0], Qt::ISODate);
-		DateScaleDraw *sd = new DateScaleDraw (d, list[1]);
+		DateScaleDraw *sd = new DateScaleDraw (QDate::fromString (list[0], Qt::ISODate), list[1]);
 		sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 		d_plot->setAxisScaleDraw (axis, sd);
 	}
@@ -1902,21 +1894,7 @@ void Graph::removeTitle()
 {
 	if (d_plot->titleLabel()->hasFocus())
 	{
-		QRect rect = d_plot->contentsRect();
-
-		QwtPlotLayout *layout = (QwtPlotLayout *)d_plot->plotLayout();
-		int y = 0;
-		if (d_plot->axisEnabled(QwtPlot::xTop))
-			y = layout->scaleRect(QwtPlot::xTop).y();
-		else
-			y = layout->canvasRect().y();
-
-		rect.setY(y);
-
-		d_plot->setTitle(QString::null);
-		d_plot->resize(rect.size());
-		setGeometry(rect);
-
+		d_plot->setTitle(" ");
 		emit modifiedGraph();
 	}
 }
@@ -2455,7 +2433,7 @@ QString Graph::savePieCurveLayout()
 		index=13;
 
 	s+=QString::number(index)+"\t";
-	s+=QString::number(pieRay)+"\t";
+	s+=QString::number(pieCurve->ray())+"\t";
 	s+=QString::number(pieCurve->firstColor())+"\t";
 	s+=QString::number(pieCurve->startRow())+"\t"+QString::number(pieCurve->endRow())+"\t";
 	s+=QString::number(pieCurve->isVisible())+"\n";
@@ -2551,7 +2529,7 @@ QString Graph::saveCurveLayout(int index)
 QString Graph::saveCurves()
 {
 	QString s;
-	if (piePlot)
+	if (c_type[0] == Pie)
 		s+=savePieCurveLayout();
 	else
 	{
@@ -2627,7 +2605,7 @@ void Graph::newLegend()
 	LegendMarker* mrk = new LegendMarker(d_plot);
 	mrk->setOrigin(QPoint(10, 10));
 
-	if (piePlot)
+	if (c_type[0] == Pie)
 		mrk->setText(pieLegendText());
 	else
 		mrk->setText(legendText());
@@ -2928,7 +2906,17 @@ QwtPlotItem* Graph::plotItem(int index)
     if (!n_curves || index >= n_curves || index < 0)
 		return 0;
 
-    return d_plot->plotItem(c_keys[index]);
+	return d_plot->plotItem(c_keys[index]);
+}
+
+int Graph::plotItemIndex(QwtPlotItem *it) const
+{
+	for (int i = 0; i < n_curves; i++)
+	{
+		if (d_plot->plotItem(c_keys[i]) == it)
+			return i;
+	}
+	return -1;
 }
 
 QwtPlotCurve *Graph::curve(int index)
@@ -2941,7 +2929,7 @@ QwtPlotCurve *Graph::curve(int index)
 
 int Graph::curveIndex(QwtPlotCurve *c) const
 {
-	return d_plot->curveKeys().findIndex(d_plot->curves().key(c));
+	return plotItemIndex(c);
 }
 
 int Graph::range(int index, double *start, double *end)
@@ -3077,10 +3065,9 @@ void Graph::updateCurveLayout(int index, const CurveLayout *cL)
 	c->setBrush(brush);
 }
 
-void Graph::updateErrorBars(int curve, bool xErr, int width, int cap, const QColor& c,
+void Graph::updateErrorBars(QwtErrorPlotCurve *er, bool xErr, int width, int cap, const QColor& c,
 		bool plus, bool minus, bool through)
 {
-	QwtErrorPlotCurve *er=(QwtErrorPlotCurve *)this->curve(curve);
 	if (!er)
 		return;
 
@@ -3100,6 +3087,9 @@ void Graph::updateErrorBars(int curve, bool xErr, int width, int cap, const QCol
 	er->drawThroughSymbol(through);
 	er->drawPlusSide(plus);
 	er->drawMinusSide(minus);
+
+	d_plot->replot();
+	emit modifiedGraph();
 }
 
 bool Graph::addErrorBars(const QString& yColName, Table *errTable, const QString& errColName,
@@ -3145,25 +3135,6 @@ bool Graph::addErrorBars(const QString& xColName, const QString& yColName,
 	return true;
 }
 
-void Graph::updatePie(const QPen& pen, const Qt::BrushStyle &brushStyle, int size, int firstColor)
-{
-	if (curves()>0)
-	{
-		QwtPieCurve *pieCurve=(QwtPieCurve*)curve(0);
-		if (pieCurve)
-		{
-			pieCurve->setPen(pen);
-			pieCurve->setRay(size);
-			pieCurve->setBrushStyle(brushStyle);
-			pieCurve->setFirstColor(firstColor);
-			d_plot->replot();
-
-			pieRay=size;
-			emit modifiedGraph();
-		}
-	}
-}
-
 void Graph::plotPie(QwtPieCurve* curve)
 {
 	int n = curve->dataSize();
@@ -3174,8 +3145,7 @@ void Graph::plotPie(QwtPieCurve* curve)
 	QwtPieCurve *pieCurve = new QwtPieCurve(curve->table(), curve->title().text(), curve->startRow(), curve->endRow());
 	pieCurve->setData(dat, dat, n);
     pieCurve->setPen(curve->pen());
-	pieRay = curve->ray();
-	pieCurve->setRay(pieRay);
+	pieCurve->setRay(curve->ray());
 	pieCurve->setBrushStyle(curve->pattern());
 	pieCurve->setFirstColor(curve->firstColor());
 
@@ -3186,7 +3156,6 @@ void Graph::plotPie(QwtPieCurve* curve)
 	c_type[n_curves-1] = Pie;
 
 	delete[] dat;
-	piePlot=true;
 }
 
 
@@ -3203,8 +3172,6 @@ void Graph::plotPie(Table* w, const QString& name, const QPen& pen, int brush,
 	pieCurve->setFirstColor(firstColor);
 	pieCurve->setBrushStyle(getBrushStyle(brush));
 	pieCurve->setVisible(visible);
-	piePlot = true;
-	pieRay = size;
 
 	c_keys.resize(++n_curves);
 	c_keys[n_curves-1] = d_plot->insertCurve(pieCurve);
@@ -3277,7 +3244,6 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 		angle -= value;
 	}
 
-	piePlot=true;
 	if (legendMarkerID>=0)
 	{
 		LegendMarker* mrk=(LegendMarker*) d_plot->marker(legendMarkerID);
@@ -3405,11 +3371,11 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 
 	int xColType = w->columnType(xcol);
 	int yColType = w->columnType(ycol);
-
 	int i, size=0;
+	QString date_time_fmt = w->columnFormat(xcol);
 	QStringList xLabels, yLabels;// store text labels
 	QTime time0;
-	QDate date;
+	QDate date0;
     QLocale locale;
 
 	if (endRow < 0)
@@ -3424,7 +3390,7 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 			QString xval=w->text(i,xcol);
 			if (!xval.isEmpty())
 			{
-				time0 = QTime::fromString (xval, Qt::TextDate);
+				time0 = QTime::fromString (xval, date_time_fmt);
 				if (time0.isValid())
 					break;
 			}
@@ -3437,8 +3403,8 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 			QString xval=w->text(i,xcol);
 			if (!xval.isEmpty())
 			{
-				date = QDate::fromString (xval, Qt::ISODate);
-				if (date.isValid())
+				date0 = QDate::fromString(xval, date_time_fmt);
+				if (date0.isValid())
 					break;
 			}
 		}
@@ -3458,7 +3424,7 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 			}
 			else if (xColType == Table::Time)
 			{
-				QTime time = QTime::fromString (xval, Qt::TextDate);
+				QTime time = QTime::fromString (xval, date_time_fmt);
 				if (time.isValid())
 					X[size] = time0.msecsTo (time);
 				else
@@ -3466,9 +3432,9 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 			}
 			else if (xColType == Table::Date)
 			{
-				QDate d = QDate::fromString (xval, Qt::ISODate);
+				QDate d = QDate::fromString (xval, date_time_fmt);
 				if (d.isValid())
-					X[size] = (double) date.daysTo (d);
+					X[size] = (double) date0.daysTo(d);
 			}
 			else
                 X[size] = Table::stringToDouble(xval);
@@ -3540,9 +3506,9 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 			d_plot->setAxisScaleDraw (QwtPlot::xBottom, new QwtTextScaleDraw(xLabels));
 		}
 	}
-	else if (xColType == Table::Time )
+	else if (xColType == Table::Time)
 	{
-		QString fmtInfo = time0.toString(Qt::TextDate) + ";" + w->columnFormat(xcol);
+		QString fmtInfo = time0.toString() + ";" + date_time_fmt;
 		if (style == HorizontalBars)
 			setLabelsDateTimeFormat(QwtPlot::yLeft, Time, fmtInfo);
 		else
@@ -3550,7 +3516,7 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	}
 	else if (xColType == Table::Date )
 	{
-		QString fmtInfo = date.toString(Qt::ISODate ) + ";yyyy-MM-dd";
+		QString fmtInfo = date0.toString(Qt::ISODate) + ";" + date_time_fmt;
 		if (style == HorizontalBars)
 			setLabelsDateTimeFormat(QwtPlot::yLeft, Date, fmtInfo);
 		else
@@ -3690,7 +3656,6 @@ void Graph::removePie()
 	c_keys.resize(0);
 	c_type.resize(0);
 	n_curves=0;
-	piePlot=false;
 	emit modifiedGraph();
 }
 
@@ -3764,21 +3729,13 @@ void Graph::removeCurve(int index)
 	d_plot->removeCurve(c_keys[index]);
 	n_curves--;
 
-	if (piePlot)
-	{
-		piePlot = false;
-		c_keys.resize(n_curves);
-	}
-	else
-	{
-		for (int i=index; i<n_curves; i++)
-		{
-			c_type[i] = c_type[i+1];
-			c_keys[i] = c_keys[i+1];
-		}
-		c_type.resize(n_curves);
-		c_keys.resize(n_curves);
-	}
+	for (int i=index; i<n_curves; i++)
+    {
+        c_type[i] = c_type[i+1];
+        c_keys[i] = c_keys[i+1];
+    }
+    c_type.resize(n_curves);
+    c_keys.resize(n_curves);
 	emit modifiedGraph();
 }
 
@@ -3791,7 +3748,7 @@ void Graph::removeLegendItem(int index)
 	if (!mrk)
 		return;
 
-	if (piePlot)
+	if (c_type[0] == Pie)
 	{
 		mrk->setText(QString::null);
 		return;
@@ -4195,9 +4152,8 @@ QString Graph::saveToString(bool saveAsTemplate)
 {
 	QString s="<graph>\n";
 	s+="ggeometry\t";
-	QPoint p=this->pos();
-	s+=QString::number(p.x())+"\t";
-	s+=QString::number(p.y())+"\t";
+	s+=QString::number(this->pos().x())+"\t";
+	s+=QString::number(this->pos().y())+"\t";
 	s+=QString::number(this->frameGeometry().width())+"\t";
 	s+=QString::number(this->frameGeometry().height())+"\n";
 	s+=saveTitle();
@@ -4240,8 +4196,7 @@ void Graph::showIntensityTable()
 	if (!mrk)
 		return;
 
-	QPixmap pic = mrk->pixmap();
-	emit createIntensityTable(pic);
+	emit createIntensityTable(mrk->getFileName());
 }
 
 void Graph::updateMarkersBoundingRect()
@@ -4286,29 +4241,31 @@ void Graph::resizeEvent ( QResizeEvent *e )
 
 void Graph::scaleFonts(double factor)
 {
-	QFont font;
-	int i;
-	for (i=0;i<(int)d_texts.size();i++)
+	for (int i=0;i<(int)d_texts.size();i++)
 	{
 		LegendMarker* mrk = (LegendMarker*) d_plot->marker(d_texts[i]);
-		font = mrk->font();
+		QFont font = mrk->font();
 		font.setPointSizeFloat(factor*font.pointSizeFloat());
 		mrk->setFont(font);
 	}
-	for (i = 0; i<QwtPlot::axisCnt; i++)
+	for (int i = 0; i<QwtPlot::axisCnt; i++)
 	{
-		font = axisFont(i);
+		QFont font = axisFont(i);
 		font.setPointSizeFloat(factor*font.pointSizeFloat());
-		d_plot->setAxisFont (i, font);
+		d_plot->setAxisFont(i, font);
 
-		font = axisTitleFont(i);
+		QwtText title = d_plot->axisTitle(i);
+		font = title.font();
 		font.setPointSizeFloat(factor*font.pointSizeFloat());
-		d_plot->axisTitle(i).setFont (font);
+		title.setFont(font);
+		d_plot->setAxisTitle(i, title);
 	}
 
-	font = d_plot->title().font();
+	QwtText title = d_plot->title();
+	QFont font = title.font();
 	font.setPointSizeFloat(factor*font.pointSizeFloat());
-	d_plot->title().setFont(font);
+	title.setFont(font);
+	d_plot->setTitle(title);
 
 	d_plot->replot();
 }
@@ -4877,7 +4834,7 @@ void Graph::copy(Graph* g)
 	setAxisLabelRotation(QwtPlot::xBottom, g->labelsRotation(QwtPlot::xBottom));
   	setAxisLabelRotation(QwtPlot::xTop, g->labelsRotation(QwtPlot::xTop));
 
-	QVector<long> imag = g->imageMarkerKeys();
+	QVector<int> imag = g->imageMarkerKeys();
 	for (i=0; i<(int)imag.size(); i++)
 	{
 		ImageMarker* imrk = (ImageMarker*)g->imageMarker(imag[i]);
@@ -4885,7 +4842,7 @@ void Graph::copy(Graph* g)
 			insertImageMarker(imrk);
 	}
 
-	QVector<long> txtMrkKeys=g->textMarkerKeys();
+	QVector<int> txtMrkKeys=g->textMarkerKeys();
 	for (i=0; i<(int)txtMrkKeys.size(); i++)
 	{
 		LegendMarker* mrk = (LegendMarker*)g->textMarker(txtMrkKeys[i]);
@@ -4898,7 +4855,7 @@ void Graph::copy(Graph* g)
 			insertTextMarker(mrk);
 	}
 
-	QVector<long> l = g->lineMarkerKeys();
+	QVector<int> l = g->lineMarkerKeys();
 	for (i=0; i<(int)l.size(); i++)
 	{
 		LineMarker* lmrk=(LineMarker*)g->lineMarker(l[i]);
@@ -5564,6 +5521,7 @@ void Graph::setCurveFullRange(int curveIndex)
 	{
 		c->setFullRange();
 		updatePlot();
+		emit modifiedGraph();
 	}
 }
 
@@ -5611,6 +5569,8 @@ void Graph::showCurve(int index, bool visible)
 	QwtPlotItem *it = plotItem(index);
 	if (it)
 		it->setVisible(visible);
+
+	emit modifiedGraph();
 }
 
 int Graph::visibleCurves()

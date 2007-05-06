@@ -288,7 +288,16 @@ void Table::print(const QString& fileName)
 
 void Table::cellEdited(int row, int col)
 {
-	if (columnType(col) != Numeric)
+	// if a dialog is open, return
+	// Remark: This is needed to prevent overriding the new cell
+	// text value by the saved one. The problem is that setText() emits
+	// a cellChanged() signal even if it was not altered by user input
+	// but by a dialog.
+	if(savedCol != -1)
+		return;
+
+	QString cell_text = text(row,col).remove(QRegExp("\\s"));
+	if (columnType(col) != Numeric || cell_text.isEmpty())
 	{
 		emit modifiedData(this, colName(col));
 		emit modifiedWindow(this);
@@ -298,9 +307,6 @@ void Table::cellEdited(int row, int col)
 	char f;
 	int precision;
 	columnNumericFormat(col, &f, &precision);
-
-	QString cell_text = text(row,col);
-	if(cell_text.isEmpty()) return;
 
 	QString cell_formula = cell_text;
 
@@ -941,18 +947,18 @@ void Table::addCol(PlotDesignation pd)
 	}
 	d_table->insertColumn(cols);
 
-// TODO: find out why this does not work
-// Remark by thzs: this code crashes with the error 
-// "ASSERT failure in QList<T>::operator[]: "index out of range", file /usr/include/qt4/QtCore/qlist.h, line 378"
-// in the setItem line. I have no idea why, the column should exist.
-/*	QTableWidgetItem * the_item = d_table->item(0, cols);	
-	if(!the_item)
-	{
+	// TODO: find out why this does not work
+	// Remark by thzs: this code crashes with the error 
+	// "ASSERT failure in QList<T>::operator[]: "index out of range", file /usr/include/qt4/QtCore/qlist.h, line 378"
+	// in the setItem line. I have no idea why, the column should exist.
+	/*	QTableWidgetItem * the_item = d_table->item(0, cols);	
+		if(!the_item)
+		{
 		the_item = new QTableWidgetItem("");
 		d_table->setItem(0, cols, the_item);
-	}
+		}
 
-	d_table->scrollToItem(the_item);*/
+		d_table->scrollToItem(the_item);*/
 
 	comments << QString();
 	commands << "";
@@ -995,12 +1001,18 @@ void Table::addColumns(int c)
 
 void Table::clearCol()
 {
-	int rows=d_table->rowCount();
-	for (int i=0;i<rows;i++)
+	for (int i=0; i<d_table->rowCount(); i++)
 	{
-		setText(i,selectedCol, "");
+		QTableWidgetItem * the_item = d_table->item(i, selectedCol);
+		if(!the_item)
+		{
+			the_item = new QTableWidgetItem("");
+			d_table->setItem(i, selectedCol, the_item);
+		}
+		else if(the_item->isSelected())
+			setText(i,selectedCol, "");
 	}
-	QString name=colName(selectedCol);
+	QString name = colName(selectedCol);
 	emit modifiedData(this, name);
 	emit modifiedWindow(this);
 }
@@ -1012,22 +1024,6 @@ void Table::clearCell(int row, int col)
 	QString name=colName(col);
 	emit modifiedData(this, name);
 	emit modifiedWindow(this);
-}
-
-int Table::atRow(int col, double value)
-{
-	if (colTypes[col] == Numeric)
-	{
-		int row = -1;
-		for (int i=0; i<d_table->rowCount(); i++)
-		{
-			if (text(i,col).toDouble() == value)
-				return i;
-		}
-		return row;
-	}
-	else
-		return  -1;
 }
 
 void Table::deleteSelectedRows()
@@ -1078,8 +1074,7 @@ void Table::clearSelection()
 		for (int i=0;i<n;i++)
 		{
 			QString name=list[i];
-			int id=colIndex(name);
-			selectedCol=id;
+			selectedCol = colIndex(name);
 			clearCol();
 		}
 	}
@@ -1684,10 +1679,9 @@ double Table::cell(int row, int col)
 
 QString Table::text(int row, int col)
 {
-//	if (col == savedCol)
-//		return savedCells[row];
-	//else 
-	if(d_table->item(row, col))
+	if (col == savedCol)
+		return savedCells[row];
+	else if(d_table->item(row, col))
 		return d_table->item(row, col)->text();
 	else
 		return QString("");
@@ -1716,42 +1710,20 @@ void Table::forgetSavedCol()
 	savedCol = -1;
 }
 
-void Table::setTextFormat(bool applyToAll)
-{
-	if (applyToAll)
-	{
-		for (int i=selectedCol; i<d_table->columnCount(); i++)
-			colTypes[i] = Text;
-	}
-	else
-		colTypes[selectedCol] = Text;
-}
-
 void Table::setTextFormat(int col)
 {
 	colTypes[col] = Text;
 }
 
-void Table::setNumericFormat(int f, int prec, bool applyToAll)
-{
-	int cols=d_table->columnCount();
-	if (applyToAll)
-	{
-		for (int i=selectedCol; i<cols; i++)
-			setColNumericFormat(f, prec, i);
-	}
-	else
-		setColNumericFormat(f, prec, selectedCol);
-
-	emit modifiedWindow(this);
-}
-
 void Table::setColNumericFormat(int f, int prec, int col)
 {
-	int old_f, old_prec;
-	columnNumericFormat(col, &old_f, &old_prec);
-	if (colTypes[col] == Numeric && old_f == f && old_prec == prec)
-		return;
+	if (colTypes[col] == Numeric)
+	{
+		int old_f, old_prec;
+		columnNumericFormat(col, &old_f, &old_prec);
+		if (old_f == f && old_prec == prec)
+			return;
+	}
 
 	colTypes[col] = Numeric;
 	col_format[col] = QString::number(f)+"/"+QString::number(prec);
@@ -1782,101 +1754,92 @@ void Table::setColumnsFormat(const QStringList& lst)
 	col_format = lst;
 }
 
-void Table::setDateTimeFormat(int f, const QString& format, bool applyToAll)
-{
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-	int cols=d_table->columnCount();
-	if (applyToAll)
-	{
-		for (int j=selectedCol; j<cols; j++)
-			setDateTimeFormat(f, format, j);
-	}
-	else
-		setDateTimeFormat(f, format, selectedCol);
-
-	emit modifiedWindow(this);
-
-	QApplication::restoreOverrideCursor();
-}
-
-void Table::setDateTimeFormat(int f, const QString& format, int col)
+bool Table::setDateTimeFormat(int f, const QString& format, int col)
 {
 	switch (f)
 	{
 		case 2:
-			setDateFormat(format, col);
-			break;
+			return setDateFormat(format, col);
 
 		case 3:
-			setTimeFormat(format, col);
-			break;
+			return setTimeFormat(format, col);
 
 		case 4:
 			setMonthFormat(format, col);
-			break;
+			return true;
 
 		case 5:
 			setDayFormat(format, col);
-			break;
+			return true;
 
 		default:
-			break;
+			return false;
 	}
 }
 
-void Table::setDateFormat(const QString& format, int col)
+bool Table::setDateFormat(const QString& format, int col)
 {
 	if (col_format[col] == format)
-		return;
+		return true;
 
-	colTypes[col] = Date;
-	col_format[col] = format;
-	int rows=d_table->rowCount();
-
-	for (int i=0; i<rows; i++)
+	for (int i=0; i<numRows(); i++)
 	{
 		QString s = text(i,col);
 		if (!s.isEmpty())
 		{
-			QDate d = QDate::fromString (s, Qt::ISODate);
+			QDateTime d = QDateTime::fromString (s, col_format[col]);
 			if (d.isValid())
 				setText(i, col, d.toString(format));
 			else
-				setText(i, col, "-");
+			{//This might be the first time the user assigns a date format.
+				//If Qt understands the format we break the loop, assign it to the column and return true!
+				d = QDateTime::fromString (s, format);
+				if (d.isValid())
+					break;
+				else
+					return false;
+			}
 		}
 	}
+	colTypes[col] = Date;
+	col_format[col] = format;
+	return true;
 }
 
-void Table::setTimeFormat(const QString& format, int col)
+bool Table::setTimeFormat(const QString& format, int col)
 {
 	if (col_format[col] == format)
-		return;
+		return true;
 
-	int rows=d_table->rowCount();
-
-	colTypes[col] = Time;
-	col_format[col] = format;
-
-	for (int i=0; i<rows; i++)
+	for (int i=0; i<numRows(); i++)
 	{
 		QString s = text(i,col);
 		if (!s.isEmpty())
 		{
-			QTime t = QTime::fromString (s,Qt::TextDate);
+			QTime t = QTime::fromString (s, col_format[col]);
 			if (t.isValid())
 				setText(i, col, t.toString(format));
 			else
-				setText(i, col, "-");
+			{//This might be the first time the user assigns a date format.
+				//If Qt understands the format we break the loop, assign it to the column and return true!
+				t = QTime::fromString (s, format);
+				if (t.isValid())
+					break;
+				else
+					return false;
+			}
 		}
 	}
+	colTypes[col] = Time;
+	col_format[col] = format;
+	return true;
 }
 
 void Table::setMonthFormat(const QString& format, int col)
 {
 	colTypes[col] = Month;
 	int rows=d_table->rowCount();
-	if (format == "shortMonthName")
+	if (format == QDate::shortMonthName(QDate::currentDate().month()))
 	{
 		for (int i=0;i<rows; i++)
 		{
@@ -1891,7 +1854,7 @@ void Table::setMonthFormat(const QString& format, int col)
 			}
 		}
 	}
-	else if (format == "longMonthName")
+	else if (format == QDate::longMonthName(QDate::currentDate().month()))
 	{
 		for (int i=0;i<rows; i++)
 		{
@@ -1911,8 +1874,8 @@ void Table::setMonthFormat(const QString& format, int col)
 void Table::setDayFormat(const QString& format, int col)
 {
 	colTypes[col] = Day;
-	int rows=d_table->rowCount();
-	if (format == "shortDayName")
+	int rows = numRows();	
+	if (format == QDate::shortDayName(QDate::currentDate().dayOfWeek()))
 	{
 		for (int i=0;i<rows; i++)
 		{
@@ -1927,7 +1890,7 @@ void Table::setDayFormat(const QString& format, int col)
 			}
 		}
 	}
-	else if (format == "longDayName")
+	else if (format == QDate::longDayName(QDate::currentDate().dayOfWeek()))
 	{
 		for (int i=0;i<rows; i++)
 		{
@@ -1949,14 +1912,14 @@ void Table::setRandomValues()
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
 	double max=0.0;
-	int rows=d_table->rowCount();
-	QStringList list=selectedColumns();
+	int rows = d_table->rowCount();
+	QStringList list = selectedColumns();
 	QVarLengthArray<double> r(rows);
 
-	for (int j=0;j<(int) list.count(); j++)
+	for (int j=0;j<list.count(); j++)
 	{
-		QString name=list[j];
-		selectedCol=colIndex(name);
+		QString name = list[j];
+		selectedCol = colIndex(name);
 
 		int prec;
 		char f;
@@ -1973,7 +1936,15 @@ void Table::setRandomValues()
 		for (int i=0; i<rows; i++)
 		{
 			r[i]/=max;
-			setText(i, selectedCol, QLocale().toString(r[i], f, prec));
+			QTableWidgetItem * the_item = d_table->item(i, selectedCol);
+			if(!the_item)
+			{
+				the_item = new QTableWidgetItem("");
+				d_table->setItem(i, selectedCol, the_item);
+			}
+
+			if(the_item->isSelected())
+					setText(i, selectedCol, QLocale().toString(r[i], f, prec));
 		}
 
 		emit modifiedData(this, name);
@@ -2115,7 +2086,17 @@ void Table::setAscValues()
 		columnNumericFormat(selectedCol, &f, &prec);
 
 		for (int i=0;i<rows;i++)
-			setText(i,selectedCol,QString::number(i+1, f, prec));
+		{
+			QTableWidgetItem * the_item = d_table->item(i, selectedCol);
+			if(!the_item)
+			{
+				the_item = new QTableWidgetItem("");
+				d_table->setItem(i, selectedCol, the_item);
+			}
+
+			if(the_item->isSelected())
+				setText(i,selectedCol,QString::number(i+1, f, prec));
+		}
 
 		emit modifiedData(this, name);
 	}
