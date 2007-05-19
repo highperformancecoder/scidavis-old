@@ -77,6 +77,12 @@ public:
 	//! Return value number 'index' as a string
 	virtual QString cellString(int index) const;
 	//! Set a cell value from a string
+	/**
+	 * This method is smarter than QDate::fromString()
+	 * and cloneStringColumnData() as it tries 
+	 * out several format strings until it 
+	 * gets a valid date.
+	 */
 	virtual void setCellFromString(int index, const QString& string);
 	//! Set the format String
 	/**
@@ -105,6 +111,7 @@ private:
 	bool cloneTimeColumnData(const TimeColumnData& other);
 
 	QString d_format;
+
 };
 
 #endif

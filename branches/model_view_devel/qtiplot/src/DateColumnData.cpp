@@ -123,9 +123,31 @@ QString DateColumnData::cellString(int index) const
 		return QString();
 }
 
+// Some format strings to try in setCellFromString()
+#define NUM_DATE_FMT_STRINGS 11
+static const char * common_format_strings[NUM_DATE_FMT_STRINGS] = {
+	"yyyy-M-d", // ISO 8601 w/ and w/o leading zeros
+	"yyyy/M/d", 
+	"d/M/yyyy", // European style day/month order (this order seems to be used in more countries than the US style M/d/yyyy)
+	"d/M/yy", 
+	"d-M-yyyy",
+	"d-M-yy", 
+	"d.M.yyyy", // German style
+	"d.M.yy",
+	"M/yyyy",
+	"d.M.", // German form w/o year
+	"yyyyMMdd"
+};
+
 void DateColumnData::setCellFromString(int index, const QString& string)
 {
-	(*(static_cast< QList<QDate>* >(this)))[index] = QDate::fromString(string, d_format);
+	QDate result = QDate::fromString(string, d_format);
+	// try other format strings
+	int i=0;
+	while( !result.isValid() && i<NUM_DATE_FMT_STRINGS )
+		result = QDate::fromString(string, common_format_strings[i++]);
+	
+	(*(static_cast< QList<QDate>* >(this)))[index] = result; 
 }
 
 void DateColumnData::resize(int new_size)

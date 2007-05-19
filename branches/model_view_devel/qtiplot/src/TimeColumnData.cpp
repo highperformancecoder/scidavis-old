@@ -132,9 +132,29 @@ QString TimeColumnData::cellString(int index) const
 		return QString();
 }
 
+// Some format strings to try in setCellFromString()
+#define NUM_TIME_FMT_STRINGS 9
+static const char * common_time_format_strings[NUM_TIME_FMT_STRINGS] = {
+			"h",
+			"h ap",
+			"h:mm",
+			"h:mm ap",
+			"h:mm:ss",
+			"h:mm:ss.zzz",
+			"h:mm:ss:zzz",
+			"mm:ss.zzz",
+			"hmmss",
+};
+
 void TimeColumnData::setCellFromString(int index, const QString& string)
 {
-	(*(static_cast< QList<QTime>* >(this)))[index] = QTime::fromString(string, d_format);
+	QTime result = QTime::fromString(string, d_format);
+	// try other format strings
+	int i=0;
+	while( !result.isValid() && i<NUM_TIME_FMT_STRINGS )
+		result = QTime::fromString(string, common_time_format_strings[i++]);
+	
+	(*(static_cast< QList<QTime>* >(this)))[index] = result;
 }
 
 void TimeColumnData::resize(int new_size)
