@@ -1,10 +1,10 @@
 /***************************************************************************
-    File                 : TableView.cpp
+    File                 : TableItemDelegate.cpp
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
     Email (use @ for *)  : thzs*gmx.net
-    Description          : View class for table data
+    Description          : Item delegate for TableView
 
  ***************************************************************************/
 
@@ -27,50 +27,23 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "TableView.h"
-#include "TableDataModel.h"
 #include "TableItemDelegate.h"
+#include <QEvent>
+#include <QKeyEvent>
 
-TableView::TableView(QWidget * parent, TableDataModel * model )
- : QTableView( parent ), d_model(model)
+bool TableItemDelegate::eventFilter( QObject * editor, QEvent * event )
 {
-  //  QItemSelectionModel * selections = new QItemSelectionModel(model);
-	setModel(model);
-//	setSelectionModel(selections);
-	d_delegate = new TableItemDelegate;
-	setItemDelegate(d_delegate);
-	connect(d_delegate, SIGNAL(returnPressed()), this, SLOT(advanceCell()));
+	bool result = QItemDelegate::eventFilter(editor, event);
 
-    setContextMenuPolicy(Qt::DefaultContextMenu);
-}
-
-
-TableView::~TableView() 
-{
-	delete d_delegate;
-}
-
-
-void TableView::contextMenuEvent(QContextMenuEvent *)
-{
-    qDebug("void TableView::contextMenuEvent()");
-    
-    return ;
-}
-
-
-QSize TableView::minimumSizeHint () const
-{
-	// This size will be used for new windows and when cascading etc.
-	return QSize(640,480);
-}
-
-void TableView::advanceCell()
-{
-	QModelIndex idx = currentIndex();
-    if(idx.row()+1 >= d_model->rowCount())
-        d_model->appendRows(1);
-
-	setCurrentIndex(idx.sibling(idx.row()+1, idx.column()));
+	if (event->type() == QEvent::KeyPress) 
+	{
+		switch (static_cast<QKeyEvent *>(event)->key()) 
+		{
+			case Qt::Key_Enter:
+			case Qt::Key_Return:
+				emit returnPressed();
+		}
+	}
+	return result;
 }
 

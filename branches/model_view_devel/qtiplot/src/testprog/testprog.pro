@@ -15,9 +15,11 @@ HEADERS += AbstractColumnData.h \
            StringColumnData.h \
            TableDataModel.h \
            TableView.h \
+		   TableItemDelegate.h \
            TimeColumnData.h
 SOURCES += DoubleColumnData.cpp main.cpp TableDataModel.cpp TableView.cpp \
 		   StringColumnData.cpp \
            DateColumnData.cpp \
+		   TableItemDelegate.cpp \
            TimeColumnData.cpp
 

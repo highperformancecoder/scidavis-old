@@ -1,10 +1,10 @@
 /***************************************************************************
-    File                 : TableView.cpp
+    File                 : TableItemDelegate.h
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
     Email (use @ for *)  : thzs*gmx.net
-    Description          : View class for table data
+    Description          : Item delegate for TableView
 
  ***************************************************************************/
 
@@ -27,50 +27,23 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "TableView.h"
-#include "TableDataModel.h"
-#include "TableItemDelegate.h"
+#include <QItemDelegate>
 
-TableView::TableView(QWidget * parent, TableDataModel * model )
- : QTableView( parent ), d_model(model)
+//! Item delegate for TableView
+/**
+ * This class does only one thing at the moment:
+ * It advances the current cell in the view by
+ * one row if [Return] or [Enter] was pressed.
+ */ 
+class TableItemDelegate : public QItemDelegate
 {
-  //  QItemSelectionModel * selections = new QItemSelectionModel(model);
-	setModel(model);
-//	setSelectionModel(selections);
-	d_delegate = new TableItemDelegate;
-	setItemDelegate(d_delegate);
-	connect(d_delegate, SIGNAL(returnPressed()), this, SLOT(advanceCell()));
+    Q_OBJECT
 
-    setContextMenuPolicy(Qt::DefaultContextMenu);
-}
+signals:
+	//! User pressed [Return] or [Enter] after editing a cell
+	void returnPressed();
 
-
-TableView::~TableView() 
-{
-	delete d_delegate;
-}
-
-
-void TableView::contextMenuEvent(QContextMenuEvent *)
-{
-    qDebug("void TableView::contextMenuEvent()");
-    
-    return ;
-}
-
-
-QSize TableView::minimumSizeHint () const
-{
-	// This size will be used for new windows and when cascading etc.
-	return QSize(640,480);
-}
-
-void TableView::advanceCell()
-{
-	QModelIndex idx = currentIndex();
-    if(idx.row()+1 >= d_model->rowCount())
-        d_model->appendRows(1);
-
-	setCurrentIndex(idx.sibling(idx.row()+1, idx.column()));
-}
-
+protected:
+	//! Wrapper of QItemDelegate::eventFilter that handles [Return] and [Enter]
+	virtual bool eventFilter( QObject * editor, QEvent * event );
+};

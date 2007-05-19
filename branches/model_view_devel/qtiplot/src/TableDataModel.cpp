@@ -59,10 +59,10 @@ TableDataModel::TableDataModel( QObject * parent )
 	end = d_row_count;
 	for(int i=0; i<end; i++)
 		ptr[i] = i*2;
-	insertColumns(AbstractColumnData::String, columnCount(), 2, 10);
-	insertColumns(AbstractColumnData::Date, columnCount(), 1, 10);
-	insertColumns(AbstractColumnData::Date, columnCount(), 2, 10);
-	insertColumns(AbstractColumnData::Time, columnCount(), 1, 10);
+	appendColumns(AbstractColumnData::String, 2);
+	appendColumns(AbstractColumnData::Date, 1);
+	appendColumns(AbstractColumnData::Date, 2);
+	appendColumns(AbstractColumnData::Time, 1);
 	// end of test code
 }
 
@@ -215,7 +215,7 @@ void TableDataModel::insertColumns(int type, int col_index, int count, int rows)
 	if(rows > d_row_count)
 		appendRows(rows-d_row_count); // append rows to resize table
 
-	beginInsertColumns(index(0, col_index, QModelIndex()), col_index, col_index+count-1);
+	beginInsertColumns(QModelIndex(), col_index, col_index+count-1);
 	switch(type)
 	{
 		case AbstractColumnData::String:
@@ -278,6 +278,11 @@ void TableDataModel::insertColumns(int type, int col_index, int count, int rows)
 	endInsertColumns();	
 }
 
+void TableDataModel::appendColumns(int type, int count, int rows)
+{
+	insertColumns(type, d_column_count, count, rows);
+}
+
 void TableDataModel::insertRows(int row_index, int count)
 {
 	if(count < 1) 
@@ -290,7 +295,7 @@ void TableDataModel::insertRows(int row_index, int count)
 		appendRows(count);
 	else
 	{
-		beginInsertRows(index(row_index, 0, QModelIndex()), row_index, row_index+count-1);
+		beginInsertRows(QModelIndex(), row_index, row_index+count-1);
 		AbstractColumnData * col_ptr;
 		for(int col=0; col<d_column_count; col++)
 		{
@@ -342,7 +347,7 @@ void TableDataModel::appendRows(int count)
 	if(count < 1) 
 		return;
 
-	beginInsertRows(index(d_row_count, 0, QModelIndex()), d_row_count, d_row_count+count-1);
+	beginInsertRows(QModelIndex(), d_row_count, d_row_count+count-1);
 	d_row_count += count;
 	updateVerticalHeader(d_row_count - count);
 	endInsertRows();

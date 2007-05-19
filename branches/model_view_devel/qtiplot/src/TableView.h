@@ -38,6 +38,7 @@
 #include <QSize>
 
 class TableDataModel;
+class TableItemDelegate;
 
 //! View class for table data
 class TableView : public QTableView
@@ -54,8 +55,18 @@ public:
     QSize minimumSizeHint () const;
 		
 protected:
-	//! overloaded function (cf. Qt documentation)
+	//! Overloaded function (cf. Qt documentation)
     virtual void contextMenuEvent( QContextMenuEvent * );
+
+protected slots:
+	//! Advance current cell after [Return] or [Enter] was pressed
+	void advanceCell();
+
+private:
+	//! Pointer to the item delegate
+	TableItemDelegate * d_delegate;
+	//! Pointer to the current underlying model
+	TableDataModel * d_model;
 
 };
 

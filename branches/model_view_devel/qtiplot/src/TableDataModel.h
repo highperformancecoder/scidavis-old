@@ -89,9 +89,9 @@ public:
 	 * \param type see AbstractColumnData::ColumnDataType
 	 * \param col_index index of the column to insert before
 	 * \param count number of columns to insert
-	 * \param rows number of initial rows for the column
+	 * \param rows number of initialized rows for the column
 	 */
-	void insertColumns(int type, int col_index, int count = 1, int rows = 10);
+	void insertColumns(int type, int col_index, int count, int rows = 0);
 	//! Insert rows before row number 'index'
 	/**
 	 * If index is higher than (current number of rows -1),
@@ -102,8 +102,16 @@ public:
 	void insertRows(int row_index, int count = 1);
 	//! Append rows to the table
 	void appendRows(int count);
-
+	//! Append columns to the table
+	 /**
+	 * \param type see AbstractColumnData::ColumnDataType
+	 * \param count number of columns to insert
+	 * \param rows number of initialized rows for the column
+	 */
+	void appendColumns(int type, int count, int rows = 0);
+	//! Return the number of columns in the table
 	int columnCount() { return d_column_count; }
+	//! Return the number of rows in the table
 	int rowCount() { return d_row_count; }
 	//@}
 	
