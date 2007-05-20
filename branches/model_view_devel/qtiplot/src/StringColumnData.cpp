@@ -45,7 +45,7 @@ StringColumnData::~StringColumnData()
 {
 }
 
-int StringColumnData::type() const
+AbstractColumnData::ColumnDataType StringColumnData::type() const
 {
 	return AbstractColumnData::String;
 }

@@ -63,10 +63,10 @@ public:
 	/**
 	 * \sa AbstractColumnData::ColumnDataType
 	 */
-	virtual int type() const;
-	//! Clone (if necessary convert) another vector of data
+	virtual AbstractColumnData::ColumnDataType type() const;
+	//! Copy (if necessary convert) another vector of data
 	/**
-	 * StringColumnData: QString to QDate conversion using the format string
+	 * StringColumnData: QString to QDate conversion using setCellFromString()
 	 * TimeColumnData: will result in a list of 1900/1/1 dates
 	 * DoubleColumnData: converted from the digits before the dot as 
 	 * as days relative to 1900/1/1, e.g. 5.2 will give 1900/1/6.
@@ -79,8 +79,7 @@ public:
 	//! Set a cell value from a string
 	/**
 	 * This method is smarter than QDate::fromString()
-	 * and cloneStringColumnData() as it tries 
-	 * out several format strings until it 
+	 * as it tries out several format strings until it 
 	 * gets a valid date.
 	 */
 	virtual void setCellFromString(int index, const QString& string);
@@ -101,13 +100,16 @@ public:
 	virtual int size() const;
 
 private:
-	//! Convert and clone a double column data vector
+	//! Convert and copy a double column data vector
 	bool cloneDoubleColumnData(const DoubleColumnData& other);
-	//! Convert and clone a string column data vector
+	//! Convert and copy a string column data vector
+	/**
+	 * \sa setCellFromString()
+	 */
 	bool cloneStringColumnData(const StringColumnData& other);
-	//! Clone another QDate column data vector
+	//! Copy another QDate column data vector
 	bool cloneDateColumnData(const DateColumnData& other);
-	//! Convert and clone a QTime column data vector
+	//! Convert and copy a QTime column data vector
 	bool cloneTimeColumnData(const TimeColumnData& other);
 
 	QString d_format;

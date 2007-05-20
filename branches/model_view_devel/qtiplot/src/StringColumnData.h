@@ -62,8 +62,8 @@ public:
 	/**
 	 * \sa AbstractColumnData::ColumnDataType
 	 */
-	virtual int type() const;
-	//! Clone (if necessary convert) another vector of data
+	virtual AbstractColumnData::ColumnDataType type() const;
+	//! Copy (if necessary convert) another vector of data
 	/**
 	 * \return true if cloning was successful, otherwise false
 	 */
@@ -78,13 +78,13 @@ public:
 	virtual int size() const;
 
 private:
-	//! Convert and clone a double column data vector
+	//! Convert and copy a double column data vector
 	bool cloneDoubleColumnData(const DoubleColumnData& other);
-	//! Clone another string column data vector
+	//! Copy another string column data vector
 	bool cloneStringColumnData(const StringColumnData& other);
-	//! Convert and clone a QDate column data vector
+	//! Convert and copy a QDate column data vector
 	bool cloneDateColumnData(const DateColumnData& other);
-	//! Convert and clone a QTime column data vector
+	//! Convert and copy a QTime column data vector
 	bool cloneTimeColumnData(const TimeColumnData& other);
 };
 

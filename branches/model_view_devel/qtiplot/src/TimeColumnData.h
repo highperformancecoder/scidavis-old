@@ -62,10 +62,10 @@ public:
 	/**
 	 * \sa AbstractColumnData::ColumnDataType
 	 */
-	virtual int type() const;
-	//! Clone (if necessary convert) another vector of data
+	virtual AbstractColumnData::ColumnDataType type() const;
+	//! Copy (if necessary convert) another vector of data
 	/**
-	 * StringColumnData: QString to QTime conversion using the format string
+	 * StringColumnData: QString to QTime conversion using setCellFromString()
 	 * DateColumnData: will result in a list of zero times 
 	 * DoubleColumnData: converted from the digits behind the dot as 
 	 * the fraction of a day, e.g. 0.5 and 1.5 will give 43200000 ms
@@ -78,8 +78,7 @@ public:
 	//! Set a cell value from a string
 	/**
 	 * This method is smarter than QTime::fromString()
-	 * and cloneStringColumnData() as it tries 
-	 * out several format strings until it 
+	 * as it tries out several format strings until it 
 	 * gets a valid time.
 	 */
 	virtual void setCellFromString(int index, const QString& string);
@@ -100,13 +99,16 @@ public:
 	virtual int size() const;
 
 private:
-	//! Convert and clone a double column data vector
+	//! Convert and copy a double column data vector
 	bool cloneDoubleColumnData(const DoubleColumnData& other);
-	//! Convert and clone a string column data vector
+	//! Convert and copy a string column data vector
+	/**
+	 * \sa setCellFromString()
+	 */
 	bool cloneStringColumnData(const StringColumnData& other);
-	//! Convert and clone a QDate column data vector
+	//! Convert and copy a QDate column data vector
 	bool cloneDateColumnData(const DateColumnData& other);
-	//! Clone another QTime column data vector
+	//! Copy another QTime column data vector
 	bool cloneTimeColumnData(const TimeColumnData& other);
 
 	QString d_format;

@@ -49,7 +49,7 @@ DateColumnData::~DateColumnData()
 {
 }
 
-int DateColumnData::type() const
+AbstractColumnData::ColumnDataType DateColumnData::type() const
 {
 	return AbstractColumnData::Date;
 }
@@ -89,6 +89,7 @@ bool DateColumnData::cloneDoubleColumnData(const DoubleColumnData& other)
 bool DateColumnData::cloneDateColumnData(const DateColumnData& other)
 { 
 	*(static_cast< QList<QDate>* >(this)) = static_cast< const QList<QDate>& >(other);
+	d_format = other.format();
 	return true;
 }
 
@@ -110,8 +111,11 @@ bool DateColumnData::cloneStringColumnData(const StringColumnData& other)
  	clear();
 
 	int end = other.size();
-	for(int i=0; i<end; i++)	
-		*this << QDate::fromString(other.at(i), d_format);
+	for(int i=0; i<end; i++)
+	{
+		*this << QDate();
+		setCellFromString(i, other.at(i));
+	}
 	return true;
 }
 

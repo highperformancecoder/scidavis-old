@@ -30,7 +30,8 @@
 #ifndef ABSTRACTCOLUMNDATA_H
 #define ABSTRACTCOLUMNDATA_H
 
-class QString;
+//#include "Table.h"
+#include <QString>
 
 //! Abstract base class for column data
 /**
@@ -56,8 +57,8 @@ public:
 	/**
 	 * \sa ColumnDataType
 	 */
-	virtual int type() const = 0;
-	//! Clone (if necessary convert) another vector of data
+	virtual AbstractColumnData::ColumnDataType type() const = 0;
+	//! Copy (if necessary convert) another vector of data
 	/**
 	 * \return true if cloning was successful, otherwise false
 	 */
@@ -70,6 +71,30 @@ public:
 	virtual void resize(int new_size) = 0;
 	//! Return the data vector size
 	virtual int size() const = 0;
+	//! Set the column label
+	void setLabel(const QString& label) { d_label = label; };
+	//! Return the column label
+	QString label() const { return d_label; };
+	//! Set the column comment
+	void setComment(const QString& comment) { d_comment = comment; };
+	//! Return the column comment
+	QString comment() const { return d_comment; };
+	//! Set the column plot designation
+	/**
+	 * Don't ever use Table::All here!
+	 */
+//	void setPlotDesignation(Table::PlotDesignation pd) { d_plot_designation = pd; };
+	//! Return the column plot designation
+//	QString plotDesignation() const { return d_plot_designation; };
+
+protected:
+	//! The column label
+	QString d_label;
+	//! The column comment
+	QString d_comment;
+	//! The plot designation
+//	Table::PlotDesignation d_plot_designation;
+
 };
 
 #endif

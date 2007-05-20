@@ -59,8 +59,8 @@ public:
 	/**
 	 * \sa AbstractColumnData::ColumnDataType
 	 */
-	virtual int type() const;
-	//! Clone (if necessary convert) another vector of data
+	virtual AbstractColumnData::ColumnDataType type() const;
+	//! Copy (if necessary convert) another vector of data
 	/**
 	 * StringColumnData: normal string to double conversion
 	 * DateColumnData: converted into the number of days relative to 1900/1/1
@@ -86,13 +86,13 @@ public:
 	virtual int size() const;
 
 private:
-	//! Clone another double column data vector
+	//! Copy another double column data vector
 	bool cloneDoubleColumnData(const DoubleColumnData& other);
-	//! Convert and clone a QString column data vector
+	//! Convert and copy a QString column data vector
 	bool cloneStringColumnData(const StringColumnData& other);
-	//! Convert and clone a QDate column data vector
+	//! Convert and copy a QDate column data vector
 	bool cloneDateColumnData(const DateColumnData& other);
-	//! Convert and clone a QTime column data vector
+	//! Convert and copy a QTime column data vector
 	bool cloneTimeColumnData(const TimeColumnData& other);
 
 	//! Format character as in QString::number 

@@ -50,7 +50,7 @@ TimeColumnData::~TimeColumnData()
 {
 }
 
-int TimeColumnData::type() const
+AbstractColumnData::ColumnDataType TimeColumnData::type() const
 {
 	return AbstractColumnData::Time;
 }
@@ -98,6 +98,7 @@ bool TimeColumnData::cloneDoubleColumnData(const DoubleColumnData& other)
 bool TimeColumnData::cloneTimeColumnData(const TimeColumnData& other)
 { 
 	*(static_cast< QList<QTime>* >(this)) = static_cast< const QList<QTime>& >(other);
+	d_format = other.format();
 	return true;
 }
 
@@ -119,8 +120,11 @@ bool TimeColumnData::cloneStringColumnData(const StringColumnData& other)
  	clear();
 
 	int end = other.size();
-	for(int i=0; i<end; i++)	
-		*this << QTime::fromString(other.at(i), d_format);
+	for(int i=0; i<end; i++)
+	{
+		*this << QTime();
+		setCellFromString(i, other.at(i));
+	}
 	return true;
 }
 

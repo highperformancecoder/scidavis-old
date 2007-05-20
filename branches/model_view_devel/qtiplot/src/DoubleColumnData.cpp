@@ -45,7 +45,7 @@ DoubleColumnData::~DoubleColumnData()
 {
 }
 
-int DoubleColumnData::type() const
+AbstractColumnData::ColumnDataType DoubleColumnData::type() const
 {
 	return AbstractColumnData::Double;
 }
