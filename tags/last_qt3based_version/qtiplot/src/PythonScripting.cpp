@@ -19,14 +19,15 @@ typedef struct _traceback {
 #endif
 
 #include "PythonScripting.h"
-#include "sipAPIqti.h"
-extern "C" void initqti();
 #include "application.h"
 
 #include <qobject.h>
 #include <qstringlist.h>
 #include <qvariant.h>
 #include <qdir.h>
+
+#include "sipAPIqti.h"
+extern "C" void initqti();
 
 const char* PythonScripting::langName = "Python";
 

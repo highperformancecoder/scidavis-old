@@ -1,7 +1,7 @@
 /* vim: set filetype=cpp : */
 
 %Module qti 0
-%Import qt/qtmod.sip
+%Import qt/qt/qtmod.sip
 
 class ScriptEdit: QTextEdit
 {
