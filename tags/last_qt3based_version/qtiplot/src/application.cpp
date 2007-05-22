@@ -303,7 +303,7 @@ void ApplicationWindow::initGlobalConstants()
 #endif
 
 majVersion = 0; minVersion = 8; patchVersion = 9;
-d_extra_version = "";
+d_extra_version = "-2";
 projectname="untitled";
 lastModified=0;
 activeGraph=0;
@@ -8160,7 +8160,7 @@ QString version = "QtiPlot " + QString::number(majVersion) + "." +
 QMessageBox::about(this,tr("About QtiPlot"),
 			 tr("<h2>"+ version + "</h2>"
 			 "<p><h3>Copyright(C): Ion Vasilief</h3>"
-			 "<p><h3>Released: 22/01/2007</h3>"));
+			 "<p><h3>Released: 22/05/2007</h3>"));
 }
 
 void ApplicationWindow::windowsMenuAboutToShow()
