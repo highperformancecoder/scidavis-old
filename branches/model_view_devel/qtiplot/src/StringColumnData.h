@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
     Email (use @ for *)  : thzs*gmx.net
-    Description          : Stores a vector of strings (for a table column)
+    Description          : Data source that stores a list of strings (implementation)
 
  ***************************************************************************/
 
@@ -31,61 +31,83 @@
 #define STRINGCOLUMNDATA_H
 
 #include "AbstractColumnData.h"
-class DoubleColumnData;
-class DateColumnData;
-class TimeColumnData;
+#include "AbstractStringDataSource.h"
 #include <QStringList>
 
-//! Stores a vector of strings (for a table column)
+//! Data source that stores a list of strings (implementation)
 /**
-  * This class stores a list of QStrings. All functions from QStringList
-  * can be used for convenient and fast access of the data. 
-  * For consistency with other column data classes indvidual strings
-  * can also be read by using StringColumnData::cellString().
-  * All other types of column data can be converted to a
-  * column of the according string representation
-  * by StringColumnData::clone().
+  * This class stores a list of QStrings. 
+  * It implements the interfaces defined in AbstractColumnData, 
+  * AbstractDataSource, and AbstractStringDataSource as well as the data type specific
+  * writing functions. The stored data can also be accessed by
+  * the functions of QStringList.
   * \sa AbstractColumnData
+  * \sa AbstractDataSource
+  * \sa AbstractDoubleDataSource
   */
-class StringColumnData : public AbstractColumnData, public QStringList
+class StringColumnData : public AbstractColumnData, public AbstractStringDataSource, public QStringList
 {
+	Q_OBJECT
+
 public:
 	//! Dtor
-	virtual ~StringColumnData();
+	virtual ~StringColumnData(){};
 
 	//! Ctor
 	explicit StringColumnData();
 	//! Ctor
 	explicit StringColumnData(const QStringList& list);
 
-	//! Return the data type
-	/**
-	 * \sa AbstractColumnData::ColumnDataType
-	 */
-	virtual AbstractColumnData::ColumnDataType type() const;
+	//! \name Data writing functions
+	//@{
 	//! Copy (if necessary convert) another vector of data
+	virtual bool copy(const AbstractDataSource * other);
+	//! Set a row value from a string
+	virtual void setRowFromString(int row, const QString& string);
+	//! Resize the string list
+	virtual void setNumRows(int new_size);
+	//! Set the column label
+	virtual void setLabel(const QString& label);
+	//! Set the column comment
+	virtual void setComment(const QString& comment);
+	//! Set the column plot designation
 	/**
-	 * \return true if cloning was successful, otherwise false
+	 * Don't ever use AbstractDataSource::All here!
 	 */
-	virtual bool clone(const AbstractColumnData& other);
-	//! Return string number 'index'
-	virtual QString cellString(int index) const;
-	//! Set a cell value from a string
-	virtual void setCellFromString(int index, const QString& string);
-	//! Resize the data vector
-	virtual void resize(int new_size);
-	//! Return the data vector size
-	virtual int size() const;
+	virtual void setPlotDesignation(AbstractDataSource::PlotDesignation pd);
+	//! Insert some empty rows
+	virtual void insertEmptyRows(int before, int count);
+	//! Remove 'count' rows starting from row 'first'
+	virtual void removeRows(int first, int count);
+	//! This must be called before the column is replaced by another
+	virtual void notifyReplacement(AbstractDataSource * replacement);
+	//@}
 
-private:
-	//! Convert and copy a double column data vector
-	bool cloneDoubleColumnData(const DoubleColumnData& other);
-	//! Copy another string column data vector
-	bool cloneStringColumnData(const StringColumnData& other);
-	//! Convert and copy a QDate column data vector
-	bool cloneDateColumnData(const DateColumnData& other);
-	//! Convert and copy a QTime column data vector
-	bool cloneTimeColumnData(const TimeColumnData& other);
+	//! \name Data reading functions
+	//@{
+	//! Return the list size
+	virtual int numRows() const;
+	//! Return the string in row 'row'
+	virtual QString rowString(int row) const;
+	//! Return the corresponding double value of row 'row'
+	virtual double rowValue(int row) const;
+	//! Return the column label
+	virtual QString label() const;
+	//! Return the column comment
+	virtual QString comment() const;
+	//! Return the column plot designation
+	virtual AbstractDataSource::PlotDesignation plotDesignation() const;
+	//@}
+
+protected:
+	//! The column label
+	QString d_label;
+	//! The column comment
+	QString d_comment;
+	//! The plot designation
+	AbstractDataSource::PlotDesignation d_plot_designation;
+
 };
 
 #endif
+

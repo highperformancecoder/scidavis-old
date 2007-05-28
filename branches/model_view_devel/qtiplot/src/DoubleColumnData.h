@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
     Email (use @ for *)  : thzs*gmx.net
-    Description          : Stores a vector of doubles (for a table column)
+    Description          : Data source that stores a vector of doubles (implementation)
 
  ***************************************************************************/
 
@@ -31,74 +31,109 @@
 #define DOUBLECOLUMNDATA_H
 
 #include "AbstractColumnData.h"
-class StringColumnData;
-class DateColumnData;
-class TimeColumnData;
+#include "AbstractDoubleDataSource.h"
 #include <QVector>
 
-//! Stores a vector of doubles (for a table column)
+//! Data source that stores a vector of doubles (implementation)
 /**
-  * This class stores a one-dimensional array of double precision
-  * values. All functions from QVector can be used for convenient
-  * and fast access of the data. The class also stores the format
-  * code as well as the number of displayed decimal digits for
-  * string output. Single cells can be output as a string using
-  * DoubleColumnData::cellString() and the whole column can be
-  * converted to strings by StringColumnData::clone().
+  * This class stores a vector of double precision values. 
+  * It implements the interfaces defined in AbstractColumnData, 
+  * AbstractDataSource, and AbstractDoubleDataSource as well as the data type specific
+  * writing functions. The stored data can also be accessed by
+  * the functions of QVector\<double\>.
   * \sa AbstractColumnData
+  * \sa AbstractDataSource
+  * \sa AbstractDoubleDataSource
   */
-class DoubleColumnData : public AbstractColumnData, public QVector<double>
-{
+class DoubleColumnData : public AbstractColumnData, public AbstractDoubleDataSource, public QVector<double>
+{ 
+	Q_OBJECT
+
 public:
 	//! Ctor
 	explicit DoubleColumnData(int size = 0);
 	//! Dtor
-	virtual ~DoubleColumnData();
+	virtual ~DoubleColumnData(){};
 
-	//! Return the data type
-	/**
-	 * \sa AbstractColumnData::ColumnDataType
-	 */
-	virtual AbstractColumnData::ColumnDataType type() const;
+	//! \name Data writing functions
+	//@{
 	//! Copy (if necessary convert) another vector of data
 	/**
 	 * StringColumnData: normal string to double conversion
 	 * DateColumnData: converted into the number of days relative to 1900/1/1
 	 * TimeColumnData: converted to the fraction of a day 
-	 * \return true if cloning was successful, otherwise false
+	 * \return true if copying was successful, otherwise false
 	 */
-	virtual bool clone(const AbstractColumnData& other);
+	virtual bool copy(const AbstractDataSource * other);
 	//! Set format character as in QString::number
-	void setNumericFormat(char format) { d_numeric_format = format; };
+	virtual void setNumericFormat(char format);
 	//! Set number of displayed digits
-	void setDisplayedDigits(int digits) { d_displayed_digits = digits; };
-	//! Return format character as in QString::number
-	char numericFormat() const { return d_numeric_format; };
-	//! Return the number of displayed digits
-	int displayedDigits() const { return d_displayed_digits; };
-	//! Return value number 'index' as a string
-	virtual QString cellString(int index) const;
-	//! Set a cell value from a string
-	virtual void setCellFromString(int index, const QString& string);
+	virtual void setDisplayedDigits(int digits);
+	//! Set a row value from a string
+	virtual void setRowFromString(int row, const QString& string);
 	//! Resize the data vector
-	virtual void resize(int new_size);
-	//! Return the data vector size
-	virtual int size() const;
+	virtual void setNumRows(int new_size);
+	//! Set the column label
+	virtual void setLabel(const QString& label);
+	//! Set the column comment
+	virtual void setComment(const QString& comment);
+	//! Set the column plot designation
+	/**
+	 * Don't ever use AbstractDataSource::All here!
+	 */
+	virtual void setPlotDesignation(AbstractDataSource::PlotDesignation pd);
+	//! Insert some empty rows
+	virtual void insertEmptyRows(int before, int count);
+	//! Remove 'count' rows starting from row 'first'
+	virtual void removeRows(int first, int count);
+	//! This must be called before the column is replaced by another
+	virtual void notifyReplacement(AbstractDataSource * replacement);
+	//@}
 
-private:
-	//! Copy another double column data vector
-	bool cloneDoubleColumnData(const DoubleColumnData& other);
-	//! Convert and copy a QString column data vector
-	bool cloneStringColumnData(const StringColumnData& other);
-	//! Convert and copy a QDate column data vector
-	bool cloneDateColumnData(const DateColumnData& other);
-	//! Convert and copy a QTime column data vector
-	bool cloneTimeColumnData(const TimeColumnData& other);
+	//! \name Data reading functions
+	//@{
+	//! Return the vector size
+	virtual int numRows() const;
+	//! Return the value in row 'row' in its string representation
+	virtual QString rowString(int row) const;
+	//! Return the value in row 'row'
+	virtual double rowValue(int row) const;
+	//! Return the column label
+	virtual QString label() const;
+	//! Return the column comment
+	virtual QString comment() const;
+	//! Return the column plot designation
+	virtual AbstractDataSource::PlotDesignation plotDesignation() const;
+	//! Return format character as in QString::number
+	virtual char numericFormat() const;
+	//! Return the number of displayed digits
+	virtual int displayedDigits() const;
+	//! Return a read-only array pointer for fast data access
+	/**
+	 * The pointer remains valid as long as the vector is 
+	 * not resized. When it is resized it will emit
+	 * a AbstractDataSource::dataChanged() signal.
+	 */ 
+	virtual const double * constDataPointer() const;
+	//@}
 
+protected:
 	//! Format character as in QString::number 
 	char d_numeric_format;
 	//! Display digits or precision as in QString::number  
+	/**
+	 * This has nothing to do with the internal precision. 
+	 * Internally, everything is always handled using the full
+	 * precision of the data type 'double'.
+	 */
 	int d_displayed_digits;
+	//! The column label
+	QString d_label;
+	//! The column comment
+	QString d_comment;
+	//! The plot designation
+	AbstractDataSource::PlotDesignation d_plot_designation;
+
 };
 
 #endif

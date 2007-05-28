@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
     Email (use @ for *)  : thzs*gmx.net
-    Description          : Abstract base class for column data
+    Description          : Writing interface for column based data
 
  ***************************************************************************/
 
@@ -30,70 +30,65 @@
 #ifndef ABSTRACTCOLUMNDATA_H
 #define ABSTRACTCOLUMNDATA_H
 
-//#include "Table.h"
-#include <QString>
+#include "AbstractDataSource.h"
+class QString;
 
-//! Abstract base class for column data
+//! Writing interface for column based data
 /**
-  This is the abstract base class for all classes
-  that are to store the data for a column in a table.
-  Classes derived from this will store a vector with entries
-  of one certain data type, e.g. double, QString, QDate.
+  This is an abstract base class for column-based data, 
+  i.e. mathematically a 1D vector or technically a 1D array or list.
+  It only defines the writing interface and has no data members itself. 
+  The reading interface is defined in AbstractDataSource and
+  classes derived from it.<br>
+  An object of a class derived from this is used as a column 
+  in a table or as a data source for plots, filters and fit functions.
+  In the latter case the filter/fit function must display the 
+  data in a table that is read-only to the user or at least 
+  does not support undo/redo. If an object of a class derived 
+  from this is controlled by an object that supports undo, this 
+  interface must only be avaiable to the commands (objects of a 
+  class derived from QUndoCommand) issued from that object. 
+  This is for example the case for Table.<br>
+  This class defines all non-specific write functions. Classes derived from 
+  this will store a vector with entries of one certain data type, 
+  e.g. double, QString,  QDate. To determine the data type of a 
+  class derived from this, use qobject_cast or QObject::inherits().<br>
   */
-class AbstractColumnData
+class AbstractColumnData : public QObject
 {
+	Q_OBJECT
+
 public:
-	//! Destructor
+	//! Dtor
 	virtual ~AbstractColumnData(){};
 
-	//! Emuneration of all possible data type in derived classes
-	enum ColumnDataType{Double = 0, //!< store double values
-		String = 1, //!< store QString values
-		Date = 2, //!< store QDate values
-		Time = 3 //!< store QTime values
-		};
-
-	//! Return the data type
-	/**
-	 * \sa ColumnDataType
-	 */
-	virtual AbstractColumnData::ColumnDataType type() const = 0;
 	//! Copy (if necessary convert) another vector of data
 	/**
-	 * \return true if cloning was successful, otherwise false
+	 * \return true if copying was successful, otherwise false
+	 * False means the column hast been filled with a
+	 * standard value in some or all rows and some or
+	 * all data could not be converted to the stored data type.
 	 */
-	virtual bool clone(const AbstractColumnData& other) = 0;
-	//! Return value number 'index' in its string representation
-	virtual QString cellString(int index) const = 0;
-	//! Set a cell value from a string
-	virtual void setCellFromString(int index, const QString& string) = 0;
+	virtual bool copy(const AbstractDataSource * other) = 0;
+	//! Set a row value from a string
+	virtual void setRowFromString(int row, const QString& string) = 0;
 	//! Resize the data vector
-	virtual void resize(int new_size) = 0;
-	//! Return the data vector size
-	virtual int size() const = 0;
+	virtual void setNumRows(int new_size) = 0;
 	//! Set the column label
-	void setLabel(const QString& label) { d_label = label; };
-	//! Return the column label
-	QString label() const { return d_label; };
+	virtual void setLabel(const QString& label) = 0; 
 	//! Set the column comment
-	void setComment(const QString& comment) { d_comment = comment; };
-	//! Return the column comment
-	QString comment() const { return d_comment; };
+	virtual void setComment(const QString& comment) = 0;
 	//! Set the column plot designation
 	/**
-	 * Don't ever use Table::All here!
+	 * Don't ever use AbstractDataSource::All here!
 	 */
-//	void setPlotDesignation(Table::PlotDesignation pd) { d_plot_designation = pd; };
-	//! Return the column plot designation
-//	QString plotDesignation() const { return d_plot_designation; };
-
-protected:
-	//! The column label
-	QString d_label;
-	//! The column comment
-	QString d_comment;
-	//! The plot designation
-//	Table::PlotDesignation d_plot_designation;
+	virtual void setPlotDesignation(AbstractDataSource::PlotDesignation pd) = 0;
+	//! Insert some empty (or initialized with zero) rows
+	virtual void insertEmptyRows(int before, int count) = 0;
+	//! Remove 'count' rows starting from row 'first'
+	virtual void removeRows(int first, int count) = 0;
+	//! This must be called before the column is replaced by another
+	virtual void notifyReplacement(AbstractDataSource * replacement) = 0;
 
 };
 

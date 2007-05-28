@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
     Email (use @ for *)  : thzs*gmx.net
-    Description          : Stores a vector of QTimes (for a table column)
+    Description          : Data source that stores a list of QTimes (write functions)
 
  ***************************************************************************/
 
@@ -29,114 +29,82 @@
 
 #include "TimeColumnData.h"
 #include "DoubleColumnData.h"
-#include "DateColumnData.h"
 #include "StringColumnData.h"
-#include <QTime>
-#include <QDate>
-#include <QString>
+#include "DateColumnData.h"
+#include <QObject>
 
-TimeColumnData::TimeColumnData()
+TimeColumnData::TimeColumnData() 
+	: d_format("hh:mm:ss.zzz")
 {
-	d_format = "hh:mm:ss.zzz";
 }
 
 TimeColumnData::TimeColumnData(const QList<QTime>& list)
-{
-	d_format = "hh:mm:ss.zzz";
-	*(static_cast< QList<QTime>* >(this)) = list;
-}
-
-TimeColumnData::~TimeColumnData()
-{
-}
-
-AbstractColumnData::ColumnDataType TimeColumnData::type() const
-{
-	return AbstractColumnData::Time;
-}
-
-bool TimeColumnData::clone(const AbstractColumnData& other)
-{
-	switch(other.type())
-	{
-		case AbstractColumnData::Double:
-			return cloneDoubleColumnData((DoubleColumnData &)other);
-
-		case AbstractColumnData::String:
-			return cloneStringColumnData((StringColumnData &)other);
-
-		case AbstractColumnData::Date:
-			return cloneDateColumnData((DateColumnData &)other);
-
-		case AbstractColumnData::Time:
-			return cloneTimeColumnData((TimeColumnData &)other);
-	
-		default:
-			return false;
-	}
-}
-	
-bool TimeColumnData::cloneDoubleColumnData(const DoubleColumnData& other)
+	: d_format("hh:mm:ss.zzz") 
 { 
- 	clear();
-
-	int end = other.size();
-	double temp;
-	int itemp;
-	QTime ref_time = QTime(0,0,0,0);
-	for(int i=0; i<end; i++)
-	{
-		temp = other.at(i);
-		itemp = int(temp);
-		temp -= double(itemp); // we only want the digits behind the dot
-		temp *= 86400000.0; // convert from fraction of day to milliseconds
-		*this << ref_time.addMSecs(int(temp));
-	}
-	return true;
+	*(static_cast< QList<QTime>* >(this)) = list; 
 }
 
-bool TimeColumnData::cloneTimeColumnData(const TimeColumnData& other)
-{ 
-	*(static_cast< QList<QTime>* >(this)) = static_cast< const QList<QTime>& >(other);
-	d_format = other.format();
-	return true;
-}
 
-bool TimeColumnData::cloneDateColumnData(const DateColumnData& other)
-{  
- 	clear();
-
-	int end = other.size();
-	for(int i=0; i<end; i++)
-		*this << QTime(0,0,0,0);
-	// converting QDate to QTime does not make much sense
-	// therefore this will result in a list of zero times
-	// and will return false since the column information is lost
+bool TimeColumnData::copy(const AbstractDataSource * other)
+{
+	if(other->inherits("AbstractDoubleDataSource"))
+			return copyDoubleDataSource(static_cast<const AbstractDoubleDataSource *>(other));
+	if(other->inherits("AbstractStringDataSource"))
+			return copyStringDataSource(static_cast<const AbstractStringDataSource *>(other));
+	if(other->inherits("AbstractDateDataSource"))
+			return copyDateDataSource(static_cast<const AbstractDateDataSource *>(other));
+	if(other->inherits("AbstractTimeDataSource"))
+			return copyTimeDataSource(static_cast<const AbstractTimeDataSource *>(other));
 	return false;
 }
-
-bool TimeColumnData::cloneStringColumnData(const StringColumnData& other)
+	
+int TimeColumnData::numRows() const 
 { 
- 	clear();
-
-	int end = other.size();
-	for(int i=0; i<end; i++)
-	{
-		*this << QTime();
-		setCellFromString(i, other.at(i));
-	}
-	return true;
+	return size(); 
 }
 
-QString TimeColumnData::cellString(int index) const
+QString TimeColumnData::label() const
+{ 
+	return d_label;
+}
+
+QString TimeColumnData::comment() const
+{ 
+	return d_comment;
+}
+
+AbstractDataSource::PlotDesignation TimeColumnData::plotDesignation() const
+{ 
+	return d_plot_designation;
+}
+
+void TimeColumnData::setLabel(const QString& label) 
+{ 
+	emit descriptionAboutToChange(this);
+	d_label = label; 
+	emit descriptionChanged(this);
+}
+
+void TimeColumnData::setComment(const QString& comment) 
+{ 
+	emit descriptionAboutToChange(this);
+	d_comment = comment; 
+	emit descriptionChanged(this);
+}
+
+void TimeColumnData::setPlotDesignation(AbstractDataSource::PlotDesignation pd) 
+{ 
+	emit plotDesignationAboutToChange(this);
+	d_plot_designation = pd; 
+	emit plotDesignationChanged(this);
+}
+
+void TimeColumnData::notifyReplacement(AbstractDataSource * replacement)
 {
-	if(index < size())
-		return at(index).toString(d_format);
-	else
-		return QString();
+	emit aboutToBeReplaced(this, replacement); 
 }
 
-// Some format strings to try in setCellFromString()
+// Some format strings to try in setRowFromString()
 #define NUM_TIME_FMT_STRINGS 9
 static const char * common_time_format_strings[NUM_TIME_FMT_STRINGS] = {
 			"h",
@@ -150,23 +118,26 @@ static const char * common_time_format_strings[NUM_TIME_FMT_STRINGS] = {
 			"hmmss",
 };
 
-void TimeColumnData::setCellFromString(int index, const QString& string)
+void TimeColumnData::setRowFromString(int row, const QString& string)
 {
+	emit dataAboutToChange(this);
 	QTime result = QTime::fromString(string, d_format);
 	// try other format strings
 	int i=0;
 	while( !result.isValid() && i<NUM_TIME_FMT_STRINGS )
 		result = QTime::fromString(string, common_time_format_strings[i++]);
 	
-	(*(static_cast< QList<QTime>* >(this)))[index] = result;
+	(*(static_cast< QList<QTime>* >(this)))[row] = result;
+	emit dataChanged(this);
 }
 
-void TimeColumnData::resize(int new_size)
+
+void TimeColumnData::setNumRows(int new_size)
 {
-	int old_size = size();
-	int count = new_size - old_size;
+	int count = new_size - numRows();
 	if(count == 0) return;
 
+	emit dataAboutToChange(this);
 	if(count > 0)
 	{
 		for(int i=0; i<count; i++)
@@ -176,11 +147,120 @@ void TimeColumnData::resize(int new_size)
 	{
 		for(int i=0; i>count; i--)
 			removeLast();
-		
 	}
+	emit dataChanged(this);
 }
 
-int TimeColumnData::size() const
+void TimeColumnData::insertEmptyRows(int before, int count)
 {
-	return QList<QTime>::size();
+	emit dataAboutToChange(this);
+	for(int i=0; i<count; i++)
+		insert(before, QTime());
+	emit dataChanged(this);
 }
+
+void TimeColumnData::removeRows(int first, int count)
+{
+	emit dataAboutToChange(this);
+	for(int i=0; i<count; i++)
+		removeAt(first);
+	emit dataChanged(this);
+}
+
+void TimeColumnData::setFormat(const QString& format) 
+{ 
+	emit specificDataAboutToChange(this);
+	d_format = format; 
+	emit specificDataChanged(this);
+}
+
+QString TimeColumnData::rowString(int row) const 
+{ 
+	return at(row).toString(d_format); 
+}
+
+double TimeColumnData::rowValue(int row) const 
+{ 
+	return double( -at(row).msecsTo(QTime(0,0,0,0))/86400000.0 );
+}
+
+QString TimeColumnData::format() const 
+{ 
+	return d_format; 
+}
+
+QTime TimeColumnData::timeAt(int row) const 
+{ 
+	return at(row); 
+}
+
+bool TimeColumnData::copyDoubleDataSource(const AbstractDoubleDataSource * other)
+{ 
+	emit dataAboutToChange(this);
+ 	clear();
+
+	double temp;
+	int itemp;
+	QTime ref_time(0,0,0,0);
+	int end = other->numRows();
+	for(int i=0; i<end; i++)
+	{
+		temp = other->rowValue(i);
+		itemp = int(temp);
+		temp -= double(itemp); // we only want the digits behind the dot
+		temp *= 86400000.0; // convert from fraction of day to milliseconds
+		*this << ref_time.addMSecs(int(temp));
+	}
+	emit dataChanged(this);
+	return true;
+}
+
+bool TimeColumnData::copyTimeDataSource(const AbstractTimeDataSource * other)
+{ 
+	emit dataAboutToChange(this);
+ 	clear();
+
+	int end = other->numRows();
+	for(int i=0; i<end; i++)
+		*this << other->timeAt(i);
+	d_format = other->format();
+	emit dataChanged(this);
+	return true;
+}
+
+bool TimeColumnData::copyDateDataSource(const AbstractDateDataSource * other)
+{  
+	emit dataAboutToChange(this);
+ 	clear();
+
+	int end = other->numRows();
+	for(int i=0; i<end; i++)
+		*this << QTime(0,0,0,0);
+	// converting QDate to QTime does not make much sense
+	// therefore this will result in a list of zero times
+	// and will return false since the column information is lost
+	emit dataChanged(this);
+	return false;
+}
+
+bool TimeColumnData::copyStringDataSource(const AbstractStringDataSource * other)
+{ 
+	emit dataAboutToChange(this);
+ 	clear();
+
+	int end = other->numRows(),j;
+	QTime result;
+	for(int i=0; i<end; i++)
+	{
+		result = QTime::fromString(other->rowString(i), d_format);
+		// try other format strings
+		j=0;
+		while( !result.isValid() && j<NUM_TIME_FMT_STRINGS )
+			result = QTime::fromString(other->rowString(i), common_time_format_strings[j++]);
+	
+		*this << result;
+	}
+	emit dataChanged(this);
+	return true;
+}
+

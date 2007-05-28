@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
     Email (use @ for *)  : thzs*gmx.net
-    Description          : Stores a vector of QDates (for a table column)
+    Description          : Data source that stores a list of QDates (implementation)
 
  ***************************************************************************/
 
@@ -28,108 +28,84 @@
  ***************************************************************************/
 
 #include "DateColumnData.h"
-#include "DoubleColumnData.h"
-#include "StringColumnData.h"
-#include "TimeColumnData.h"
-#include <QDate>
-#include <QTime>
+#include "AbstractDoubleDataSource.h"
+#include "AbstractStringDataSource.h"
+#include "AbstractTimeDataSource.h"
+#include <QObject>
 
-DateColumnData::DateColumnData()
+DateColumnData::DateColumnData() 
+	: d_format("yyyy-MM-dd")
 {
-	d_format = "yyyy-MM-dd";
 }
 
 DateColumnData::DateColumnData(const QList<QDate>& list)
-{
-	d_format = "yyyy-MM-dd";
-	*(static_cast< QList<QDate>* >(this)) = list;
-}
-
-DateColumnData::~DateColumnData()
-{
-}
-
-AbstractColumnData::ColumnDataType DateColumnData::type() const
-{
-	return AbstractColumnData::Date;
-}
-
-bool DateColumnData::clone(const AbstractColumnData& other)
-{
-	switch(other.type())
-	{
-		case AbstractColumnData::Double:
-			return cloneDoubleColumnData((DoubleColumnData &)other);
-
-		case AbstractColumnData::String:
-			return cloneStringColumnData((StringColumnData &)other);
-
-		case AbstractColumnData::Date:
-			return cloneDateColumnData((DateColumnData &)other);
-
-		case AbstractColumnData::Time:
-			return cloneTimeColumnData((TimeColumnData &)other);
-	
-		default:
-			return false;
-	}
-}
-	
-bool DateColumnData::cloneDoubleColumnData(const DoubleColumnData& other)
+	: d_format("yyyy-MM-dd") 
 { 
- 	clear();
-
-	int end = other.size();
-	QDate ref_date = QDate(1900,1,1);
-	for(int i=0; i<end; i++)
-		*this << ref_date.addDays(int(other.at(i)));
-	return true;
+	*(static_cast< QList<QDate>* >(this)) = list; 
 }
 
-bool DateColumnData::cloneDateColumnData(const DateColumnData& other)
-{ 
-	*(static_cast< QList<QDate>* >(this)) = static_cast< const QList<QDate>& >(other);
-	d_format = other.format();
-	return true;
-}
-
-bool DateColumnData::cloneTimeColumnData(const TimeColumnData& other)
-{  
- 	clear();
-
-	int end = other.size();
-	for(int i=0; i<end; i++)
-		*this << QDate(1900,1,1);
-	// converting QTime to QDate does not make much sense
-	// therefore this will result in a list of 1900/1/1
-	// and will return false since the column information is lost
+bool DateColumnData::copy(const AbstractDataSource * other)
+{
+	if(other->inherits("AbstractDoubleDataSource"))
+			return copyDoubleDataSource(static_cast<const AbstractDoubleDataSource *>(other));
+	if(other->inherits("AbstractStringDataSource"))
+			return copyStringDataSource(static_cast<const AbstractStringDataSource *>(other));
+	if(other->inherits("AbstractDateDataSource"))
+			return copyDateDataSource(static_cast<const AbstractDateDataSource *>(other));
+	if(other->inherits("AbstractTimeDataSource"))
+			return copyTimeDataSource(static_cast<const AbstractTimeDataSource *>(other));
 	return false;
 }
-
-bool DateColumnData::cloneStringColumnData(const StringColumnData& other)
+	
+int DateColumnData::numRows() const 
 { 
- 	clear();
-
-	int end = other.size();
-	for(int i=0; i<end; i++)
-	{
-		*this << QDate();
-		setCellFromString(i, other.at(i));
-	}
-	return true;
+	return size(); 
 }
 
-QString DateColumnData::cellString(int index) const
+QString DateColumnData::label() const
+{ 
+	return d_label;
+}
+
+QString DateColumnData::comment() const
+{ 
+	return d_comment;
+}
+
+AbstractDataSource::PlotDesignation DateColumnData::plotDesignation() const
+{ 
+	return d_plot_designation;
+}
+
+void DateColumnData::setLabel(const QString& label) 
+{ 
+	emit descriptionAboutToChange(this);
+	d_label = label; 
+	emit descriptionChanged(this);
+}
+
+void DateColumnData::setComment(const QString& comment) 
+{ 
+	emit descriptionAboutToChange(this);
+	d_comment = comment; 
+	emit descriptionChanged(this);
+}
+
+void DateColumnData::setPlotDesignation(AbstractDataSource::PlotDesignation pd) 
+{ 
+	emit plotDesignationAboutToChange(this);
+	d_plot_designation = pd; 
+	emit plotDesignationChanged(this);
+}
+
+void DateColumnData::notifyReplacement(AbstractDataSource * replacement)
 {
-	if(index < size())
-		return at(index).toString(d_format);
-	else
-		return QString();
+	emit aboutToBeReplaced(this, replacement); 
 }
 
-// Some format strings to try in setCellFromString()
+// Some format strings to try in setRowFromString()
 #define NUM_DATE_FMT_STRINGS 11
-static const char * common_format_strings[NUM_DATE_FMT_STRINGS] = {
+static const char * common_date_format_strings[NUM_DATE_FMT_STRINGS] = {
 	"yyyy-M-d", // ISO 8601 w/ and w/o leading zeros
 	"yyyy/M/d", 
 	"d/M/yyyy", // European style day/month order (this order seems to be used in more countries than the US style M/d/yyyy)
@@ -143,23 +119,25 @@ static const char * common_format_strings[NUM_DATE_FMT_STRINGS] = {
 	"yyyyMMdd"
 };
 
-void DateColumnData::setCellFromString(int index, const QString& string)
+void DateColumnData::setRowFromString(int row, const QString& string)
 {
+	emit dataAboutToChange(this);
 	QDate result = QDate::fromString(string, d_format);
 	// try other format strings
 	int i=0;
 	while( !result.isValid() && i<NUM_DATE_FMT_STRINGS )
-		result = QDate::fromString(string, common_format_strings[i++]);
+		result = QDate::fromString(string, common_date_format_strings[i++]);
 	
-	(*(static_cast< QList<QDate>* >(this)))[index] = result; 
+	(*(static_cast< QList<QDate>* >(this)))[row] = result; 
+	emit dataChanged(this);
 }
 
-void DateColumnData::resize(int new_size)
+void DateColumnData::setNumRows(int new_size)
 {
-	int old_size = size();
-	int count = new_size - old_size;
+	int count = new_size - numRows();
 	if(count == 0) return;
 
+	emit dataAboutToChange(this);
 	if(count > 0)
 	{
 		for(int i=0; i<count; i++)
@@ -169,12 +147,112 @@ void DateColumnData::resize(int new_size)
 	{
 		for(int i=0; i>count; i--)
 			removeLast();
-		
 	}
+	emit dataChanged(this);
 }
 
-int DateColumnData::size() const
+void DateColumnData::insertEmptyRows(int before, int count)
 {
-	return QList<QDate>::size();
+	emit dataAboutToChange(this);
+	for(int i=0; i<count; i++)
+		insert(before, QDate());
+	emit dataChanged(this);
+}
+
+void DateColumnData::removeRows(int first, int count)
+{
+	emit dataAboutToChange(this);
+	for(int i=0; i<count; i++)
+		removeAt(first);
+	emit dataChanged(this);
+}
+
+void DateColumnData::setFormat(const QString& format) 
+{ 
+	emit specificDataAboutToChange(this);
+	d_format = format; 
+	emit specificDataChanged(this);
+}
+
+QString DateColumnData::rowString(int row) const 
+{ 
+	return at(row).toString(d_format); 
+}
+
+double DateColumnData::rowValue(int row) const 
+{ 
+	return double( -at(row).daysTo(QDate(1900,1,1)) ); 
+}
+
+QString DateColumnData::format() const 
+{ 
+	return d_format; 
+}
+
+QDate DateColumnData::dateAt(int row) const 
+{ 
+	return at(row); 
+}
+
+bool DateColumnData::copyDoubleDataSource(const AbstractDoubleDataSource * other)
+{ 
+	emit dataAboutToChange(this);
+ 	clear();
+
+	int end = other->numRows();
+	QDate ref_date = QDate(1900,1,1);
+	for(int i=0; i<end; i++)
+		*this << ref_date.addDays(int(other->rowValue(i)));
+	emit dataChanged(this);
+	return true;
+}
+
+bool DateColumnData::copyDateDataSource(const AbstractDateDataSource * other)
+{ 
+	emit dataAboutToChange(this);
+ 	clear();
+
+	int end = other->numRows();
+	for(int i=0; i<end; i++)
+		*this << other->dateAt(i);
+	d_format = other->format();
+	emit dataChanged(this);
+	return true;
+}
+
+bool DateColumnData::copyTimeDataSource(const AbstractTimeDataSource * other)
+{  
+	emit dataAboutToChange(this);
+ 	clear();
+
+	int end = other->numRows();
+	for(int i=0; i<end; i++)
+		*this << QDate(1900,1,1);
+	// converting QTime to QDate does not make much sense
+	// therefore this will result in a list of 1900/1/1
+	// and will return false since the column information is lost
+	emit dataChanged(this);
+	return false;
+}
+
+bool DateColumnData::copyStringDataSource(const AbstractStringDataSource * other)
+{ 
+	emit dataAboutToChange(this);
+ 	clear();
+
+	int end = other->numRows(),j;
+	QDate result;
+	for(int i=0; i<end; i++)
+	{
+		result = QDate::fromString(other->rowString(i), d_format);
+		// try other format strings
+		j=0;
+		while( !result.isValid() && j<NUM_DATE_FMT_STRINGS )
+			result = QDate::fromString(other->rowString(i), common_date_format_strings[j++]);
+	
+		*this << result;
+	}
+	emit dataChanged(this);
+	return true;
 }
 

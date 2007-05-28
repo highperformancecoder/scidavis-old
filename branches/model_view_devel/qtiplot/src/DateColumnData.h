@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
     Email (use @ for *)  : thzs*gmx.net
-    Description          : Stores a vector of QDates (for a table column)
+    Description          : Data source that stores a list of QDates (implementation)
 
  ***************************************************************************/
 
@@ -31,89 +31,131 @@
 #define DATECOLUMNDATA_H
 
 #include "AbstractColumnData.h"
-class DoubleColumnData;
-class StringColumnData;
-class TimeColumnData;
+#include "AbstractDateDataSource.h"
 #include <QList>
-#include <QString>
-class QDate;
+#include <QDate>
+class AbstractDoubleDataSource;
+class AbstractStringDataSource;
+class AbstractTimeDataSource;
 
-
-//! Stores a vector of QDates (for a table column)
+//! Data source that stores a list of QDates (implementation)
 /**
-  * This class stores a list of QDate. All functions from QList<QDate>
-  * can be used for convenient and fast access of the data. 
-  * The class also stores a format string that is
-  * used by cellString() to output the string representation.
-  * The whole column of times can be
-  * converted to strings by StringColumnData::clone().
+  * This class stores a list of QDates. It implements the
+  * interfaces defined in AbstractColumnData, AbstractDataSource,
+  * and AbstractDateDataSource as well as the data type specific
+  * writing functions. The stored data can also be accessed by
+  * the functions of QList\<QDate\>.
   * \sa AbstractColumnData
+  * \sa AbstractDataSource
+  * \sa AbstractDateDataSource
   */
-class DateColumnData : public AbstractColumnData, public QList<QDate>
+class DateColumnData : public AbstractColumnData, public AbstractDateDataSource, public QList<QDate>
 {
+	Q_OBJECT
+
 public:
 	//! Dtor
-	virtual ~DateColumnData();
+	virtual ~DateColumnData(){};
 	//! Ctor
 	DateColumnData();
 	//! Ctor
 	explicit DateColumnData(const QList<QDate>& list);
 
-	//! Return the data type
-	/**
-	 * \sa AbstractColumnData::ColumnDataType
-	 */
-	virtual AbstractColumnData::ColumnDataType type() const;
+	//! \name Data writing functions
+	//@{
 	//! Copy (if necessary convert) another vector of data
 	/**
-	 * StringColumnData: QString to QDate conversion using setCellFromString()
+	 * StringColumnData: QString to QDate conversion using setRowFromString()
 	 * TimeColumnData: will result in a list of 1900/1/1 dates
 	 * DoubleColumnData: converted from the digits before the dot as 
 	 * as days relative to 1900/1/1, e.g. 5.2 will give 1900/1/6.
-	 * \return true if cloning was successful, otherwise false
+	 * \return true if copying was successful, otherwise false
 	 * \sa format(), setFormat()
 	 */
-	virtual bool clone(const AbstractColumnData& other);
-	//! Return value number 'index' as a string
-	virtual QString cellString(int index) const;
-	//! Set a cell value from a string
+	virtual bool copy(const AbstractDataSource * other);
+	//! Set a row value from a string
 	/**
 	 * This method is smarter than QDate::fromString()
 	 * as it tries out several format strings until it 
 	 * gets a valid date.
 	 */
-	virtual void setCellFromString(int index, const QString& string);
+	virtual void setRowFromString(int row, const QString& string);
 	//! Set the format String
 	/**
+	 * The default format string is "yyyy-MM-dd".
 	 * \sa QDate::toString()
 	 */
-	void setFormat(const QString& format) { d_format = format; };
+	virtual void setFormat(const QString& format);
+	//! Resize the date list
+	virtual void setNumRows(int new_size);
+	//! Set the column label
+	virtual void setLabel(const QString& label);
+	//! Set the column comment
+	virtual void setComment(const QString& comment);
+	//! Set the column plot designation
+	/**
+	 * Don't ever use AbstractDataSource::All here!
+	 */
+	virtual void setPlotDesignation(AbstractDataSource::PlotDesignation pd);
+	//! Insert some empty rows
+	virtual void insertEmptyRows(int before, int count);
+	//! Remove 'count' rows starting from row 'first'
+	virtual void removeRows(int first, int count);
+	//! This must be called before the column is replaced by another
+	virtual void notifyReplacement(AbstractDataSource * replacement);
+	//@}
+	
+	//! \name Data reading functions
+	//@{
+	//! Return the column label
+	virtual QString label() const;
+	//! Return the column comment
+	virtual QString comment() const;
+	//! Return the column plot designation
+	virtual AbstractDataSource::PlotDesignation plotDesignation() const;
+	//! Return the value in row 'row' in its string representation
+	virtual QString rowString(int row) const;
+	//! Return the value in row 'row' as a double
+	/**
+	 * This returns the number of days relative to 1900-01-01.
+	 */ 
+	virtual double rowValue(int row) const;
 	//! Return the format string
 	/**
 	 * The default format string is "yyyy-MM-dd".
 	 * \sa QDate::toString()
 	 */
-	QString format() const { return d_format; };
-	//! Resize the data vector
-	virtual void resize(int new_size);
-	//! Return the data vector size
-	virtual int size() const;
+	virtual QString format() const;
+	//! Return the list size
+	virtual int numRows() const;
+	//! Return the date in row 'row'
+	virtual QDate dateAt(int row) const;
+	//@}
 
-private:
-	//! Convert and copy a double column data vector
-	bool cloneDoubleColumnData(const DoubleColumnData& other);
-	//! Convert and copy a string column data vector
-	/**
-	 * \sa setCellFromString()
-	 */
-	bool cloneStringColumnData(const StringColumnData& other);
-	//! Copy another QDate column data vector
-	bool cloneDateColumnData(const DateColumnData& other);
-	//! Convert and copy a QTime column data vector
-	bool cloneTimeColumnData(const TimeColumnData& other);
-
+protected:
+	//! The column label
+	QString d_label;
+	//! The column comment
+	QString d_comment;
+	//! The plot designation
+	AbstractDataSource::PlotDesignation d_plot_designation;
+	//! Format string for QDate::toString()
 	QString d_format;
+
+	//! Convert and copy a double column data source
+	bool copyDoubleDataSource(const AbstractDoubleDataSource * other);
+	//! Convert and copy a string column data source
+	/**
+	 * \sa setRowFromString()
+	 */
+	bool copyStringDataSource(const AbstractStringDataSource * other);
+	//! Copy another QDate column data source
+	bool copyDateDataSource(const AbstractDateDataSource * other);
+	//! Convert and copy a QTime column data source
+	bool copyTimeDataSource(const AbstractTimeDataSource * other);
 
 };
 
 #endif
+
+

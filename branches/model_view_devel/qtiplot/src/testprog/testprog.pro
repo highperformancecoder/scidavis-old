@@ -14,13 +14,23 @@ HEADERS += AbstractColumnData.h \
            DateColumnData.h \
            DoubleColumnData.h \
            StringColumnData.h \
-           TableDataModel.h \
-           TableView.h \
-		   TableItemDelegate.h \
-           TimeColumnData.h
-SOURCES += DoubleColumnData.cpp main.cpp TableDataModel.cpp TableView.cpp \
-		   StringColumnData.cpp \
+           TimeColumnData.h \
+		   AbstractDataSource.h \
+		   AbstractDateDataSource.h \
+		   AbstractDoubleDataSource.h \
+		   AbstractStringDataSource.h \
+		   AbstractTimeDataSource.h
+
+#           TableDataModel.h \
+#           TableView.h \
+#		   TableItemDelegate.h \
+SOURCES += main.cpp 
+
+#TableDataModel.cpp TableView.cpp \
+
+SOURCES += StringColumnData.cpp \
            DateColumnData.cpp \
-		   TableItemDelegate.cpp \
-           TimeColumnData.cpp
+		   DoubleColumnData.cpp \
+           TimeColumnData.cpp 
+#		   TableItemDelegate.cpp 
 

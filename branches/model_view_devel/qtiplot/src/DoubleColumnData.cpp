@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
     Email (use @ for *)  : thzs*gmx.net
-    Description          : Stores a vector of doubles (for a table column)
+    Description          : Data source that stores a vector of doubles (implementation)
 
  ***************************************************************************/
 
@@ -28,120 +28,142 @@
  ***************************************************************************/
 
 #include "DoubleColumnData.h"
-#include "StringColumnData.h"
-#include "DateColumnData.h"
-#include "TimeColumnData.h"
-#include <QDate>
-#include <QTime>
+#include <QObject>
 
 DoubleColumnData::DoubleColumnData(int size)
-: QVector<double>(size)
-{
-	d_numeric_format = 'e';
-	d_displayed_digits = 6;
-}
-
-DoubleColumnData::~DoubleColumnData()
+	: QVector<double>(size), d_numeric_format('e'), d_displayed_digits(6)
 {
 }
 
-AbstractColumnData::ColumnDataType DoubleColumnData::type() const
+bool DoubleColumnData::copy(const AbstractDataSource * other)
 {
-	return AbstractColumnData::Double;
-}
-
-bool DoubleColumnData::clone(const AbstractColumnData& other)
-{
-	switch(other.type())
+	emit dataAboutToChange(this);
+	if(other->inherits("AbstractDoubleDataSource"))
 	{
-		case AbstractColumnData::Double:
-			return cloneDoubleColumnData((DoubleColumnData &)other);
-
-		case AbstractColumnData::String:
-			return cloneStringColumnData((StringColumnData &)other);
-
-		case AbstractColumnData::Date:
-			return cloneDateColumnData((DateColumnData &)other);
-
-		case AbstractColumnData::Time:
-			return cloneTimeColumnData((TimeColumnData &)other);
-	
-		default:
-			return false;
+		d_numeric_format = static_cast< const AbstractDoubleDataSource* >(other)->numericFormat();
+		d_displayed_digits = static_cast< const AbstractDoubleDataSource* >(other)->displayedDigits();
 	}
+
+	int end = other->numRows();
+	setNumRows(end);
+	double * ptr = data();
+	for(int i=0; i<end; i++)
+		ptr[i] = other->rowValue(i);
+	emit dataChanged(this);
+	return true;
 }
 	
-bool DoubleColumnData::cloneDoubleColumnData(const DoubleColumnData& other)
-{
-	*(static_cast< QVector<double> * >(this)) = static_cast< QVector<double> >(other);
-	d_numeric_format = other.numericFormat();
-	d_displayed_digits = other.displayedDigits();
-	return true;
-}
-
-bool DoubleColumnData::cloneStringColumnData(const StringColumnData& other)
+int DoubleColumnData::numRows() const 
 { 
-	resize(other.size());
- 	
-	int end = size();
-	bool ok, result = true;
-	double * rawdata = data();
-	for(int i=0; i<end; i++)  
-	{
-    	rawdata[i] = other[i].toDouble(&ok);
-		if(!ok)
-			result = false;
-	}
-	return result;
+	return size(); 
 }
 
-bool DoubleColumnData::cloneDateColumnData(const DateColumnData& other)
+QString DoubleColumnData::label() const
 { 
-	resize(other.size());
- 	
-	int end = size();
-	double * rawdata = data();
-	QDate ref_date(1900, 1, 1);
-	for(int i=0; i<end; i++)  
-    	rawdata[i] = double(- other[i].daysTo(ref_date));
-	return true;
+	return d_label;
 }
 
-bool DoubleColumnData::cloneTimeColumnData(const TimeColumnData& other)
+QString DoubleColumnData::comment() const
 { 
-	resize(other.size());
- 	
-	int end = size();
-	double * rawdata = data();
-	QTime ref_time(0,0,0,0);
-	for(int i=0; i<end; i++)  
-    	rawdata[i] = double(- other[i].msecsTo(ref_time))/86400000.0;
-	return true;
+	return d_comment;
 }
 
-
-QString DoubleColumnData::cellString(int index) const
-{
-	if(index < size())
-		return QString::number(at(index), d_numeric_format, d_displayed_digits);
-	else
-		return QString();
+AbstractDataSource::PlotDesignation DoubleColumnData::plotDesignation() const
+{ 
+	return d_plot_designation;
 }
 
-void DoubleColumnData::setCellFromString(int index, const QString& string)
-{
-    data()[index] = string.toDouble();
+void DoubleColumnData::setLabel(const QString& label) 
+{ 
+	emit descriptionAboutToChange(this);
+	d_label = label; 
+	emit descriptionChanged(this);
 }
 
+void DoubleColumnData::setComment(const QString& comment) 
+{ 
+	emit descriptionAboutToChange(this);
+	d_comment = comment; 
+	emit descriptionChanged(this);
+}
 
-void DoubleColumnData::resize(int new_size)
+void DoubleColumnData::setPlotDesignation(AbstractDataSource::PlotDesignation pd) 
+{ 
+	emit plotDesignationAboutToChange(this);
+	d_plot_designation = pd; 
+	emit plotDesignationChanged(this);
+}
+
+void DoubleColumnData::notifyReplacement(AbstractDataSource * replacement)
 {
+	emit aboutToBeReplaced(this, replacement); 
+}
+
+void DoubleColumnData::setRowFromString(int row, const QString& string)
+{
+	emit dataAboutToChange(this);
+    data()[row] = string.toDouble();
+	emit dataChanged(this);
+}
+
+void DoubleColumnData::setNumRows(int new_size)
+{
+	if(new_size == numRows())
+		return;
+	emit dataAboutToChange(this);
 	QVector<double>::resize(new_size);
+	emit dataChanged(this);
 }
 
-
-int DoubleColumnData::size() const
+void DoubleColumnData::insertEmptyRows(int before, int count)
 {
-	return QVector<double>::size();
+	emit dataAboutToChange(this);
+	insert(before, count, 0.0);
+	emit dataChanged(this);
 }
 
+void DoubleColumnData::removeRows(int first, int count)
+{
+	emit dataAboutToChange(this);
+	remove(first, count);
+	emit dataChanged(this);
+}
+
+void DoubleColumnData::setNumericFormat(char format) 
+{ 
+	emit specificDataAboutToChange(this);
+	d_numeric_format = format; 
+	emit specificDataChanged(this);
+}
+
+void DoubleColumnData::setDisplayedDigits(int digits) 
+{ 
+	emit specificDataAboutToChange(this);
+	d_displayed_digits = digits; 
+	emit specificDataChanged(this);
+}
+
+char DoubleColumnData::numericFormat() const
+{ 
+	return d_numeric_format; 
+}
+
+int DoubleColumnData::displayedDigits() const 
+{ 
+	return d_displayed_digits; 
+}
+
+QString DoubleColumnData::rowString(int row) const
+{ 
+		return QString::number(at(row), d_numeric_format, d_displayed_digits);
+}
+
+double DoubleColumnData::rowValue(int row) const 
+{ 
+	return at(row); 
+}
+
+const double * DoubleColumnData::constDataPointer() const 
+{ 
+	return data(); 
+}

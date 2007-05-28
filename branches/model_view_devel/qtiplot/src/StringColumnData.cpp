@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
     Email (use @ for *)  : thzs*gmx.net
-    Description          : Stores a vector of strings (for a table column)
+    Description          : Data source that stores a list of strings (implementation)
 
  ***************************************************************************/
 
@@ -28,104 +28,86 @@
  ***************************************************************************/
 
 #include "StringColumnData.h"
-#include "DoubleColumnData.h"
-#include "DateColumnData.h"
-#include "TimeColumnData.h"
 
 StringColumnData::StringColumnData()
 {
 }
 
 StringColumnData::StringColumnData(const QStringList& list)
-{
-	*(static_cast< QStringList* >(this)) = list;
+{ 
+	*(static_cast< QStringList* >(this)) = list; 
 }
 
-StringColumnData::~StringColumnData()
+bool StringColumnData::copy(const AbstractDataSource * other)
 {
-}
-
-AbstractColumnData::ColumnDataType StringColumnData::type() const
-{
-	return AbstractColumnData::String;
-}
-
-bool StringColumnData::clone(const AbstractColumnData& other)
-{
-	switch(other.type())
-	{
-		case AbstractColumnData::Double:
-			return cloneDoubleColumnData((DoubleColumnData &)other);
-
-		case AbstractColumnData::String:
-			return cloneStringColumnData((StringColumnData &)other);
-
-		case AbstractColumnData::Date:
-			return cloneDateColumnData((DateColumnData &)other);
-
-		case AbstractColumnData::Time:
-			return cloneTimeColumnData((TimeColumnData &)other);
-	
-		default:
-			return false;
-	}
+	emit dataAboutToChange(this);
+	clear();
+	int end = other->numRows();
+	for(int i=0; i<end; i++)
+		*this << other->rowString(i);
+	emit dataChanged(this);
+	return true;
 }
 	
-bool StringColumnData::cloneDoubleColumnData(const DoubleColumnData& other)
+int StringColumnData::numRows() const 
 { 
- 	clear();
-
-	int end = other.size();
-	for(int i=0; i<end; i++)	
-		*this << other.cellString(i);
-	return true;
+	return size(); 
 }
 
-bool StringColumnData::cloneStringColumnData(const StringColumnData& other)
+QString StringColumnData::label() const
 { 
-	*(static_cast< QStringList* >(this)) = static_cast< const QStringList& >(other);
-	return true;
+	return d_label;
 }
 
-bool StringColumnData::cloneDateColumnData(const DateColumnData& other)
+QString StringColumnData::comment() const
 { 
- 	clear();
-
-	int end = other.size();
-	for(int i=0; i<end; i++)	
-		*this << other.cellString(i);
-	return true;
+	return d_comment;
 }
 
-bool StringColumnData::cloneTimeColumnData(const TimeColumnData& other)
+AbstractDataSource::PlotDesignation StringColumnData::plotDesignation() const
 { 
- 	clear();
-
-	int end = other.size();
-	for(int i=0; i<end; i++)	
-		*this << other.cellString(i);
-	return true;
+	return d_plot_designation;
 }
 
-QString StringColumnData::cellString(int index) const
+void StringColumnData::setLabel(const QString& label) 
+{ 
+	emit descriptionAboutToChange(this);
+	d_label = label; 
+	emit descriptionChanged(this);
+}
+
+void StringColumnData::setComment(const QString& comment) 
+{ 
+	emit descriptionAboutToChange(this);
+	d_comment = comment; 
+	emit descriptionChanged(this);
+}
+
+void StringColumnData::setPlotDesignation(AbstractDataSource::PlotDesignation pd) 
+{ 
+	emit plotDesignationAboutToChange(this);
+	d_plot_designation = pd; 
+	emit plotDesignationChanged(this);
+}
+
+void StringColumnData::notifyReplacement(AbstractDataSource * replacement)
 {
-	if(index < size())
-		return at(index);
-	else
-		return QString();
+	emit aboutToBeReplaced(this, replacement); 
 }
 
-void StringColumnData::setCellFromString(int index, const QString& string)
+void StringColumnData::setRowFromString(int row, const QString& string)
 {
-	(*(static_cast< QStringList* >(this)))[index] = string;
+	emit dataAboutToChange(this);
+    replace(row, string);
+	emit dataChanged(this);
 }
 
-void StringColumnData::resize(int new_size)
+void StringColumnData::setNumRows(int new_size)
 {
-	int old_size = size();
-	int count = new_size - old_size;
+	int count = new_size - numRows();
 	if(count == 0) return;
 
+	emit dataAboutToChange(this);
 	if(count > 0)
 	{
 		for(int i=0; i<count; i++)
@@ -135,11 +117,34 @@ void StringColumnData::resize(int new_size)
 	{
 		for(int i=0; i>count; i--)
 			removeLast();
-		
 	}
+	emit dataChanged(this);
 }
 
-int StringColumnData::size() const
+void StringColumnData::insertEmptyRows(int before, int count)
 {
-	return QStringList::size();
+	emit dataAboutToChange(this);
+	for(int i=0; i<count; i++)
+		insert(before, QString());
+	emit dataChanged(this);
 }
+
+void StringColumnData::removeRows(int first, int count)
+{
+	emit dataAboutToChange(this);
+	for(int i=0; i<count; i++)
+		removeAt(first);
+	emit dataChanged(this);
+}
+
+QString StringColumnData::rowString(int row) const
+{ 
+		return at(row);
+}
+
+double StringColumnData::rowValue(int row) const 
+{ 
+	return at(row).toDouble(); 
+}
+
+
