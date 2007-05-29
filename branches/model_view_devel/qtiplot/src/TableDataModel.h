@@ -41,11 +41,13 @@
 /**
   This model class provides the interface to column based data 
   (i.e. 1D vector based data like x-values and y-values for a plot).
-  It contains the overloaded functions of QAbstractItemModel to be 
-  called from views as well as functions for fast, direct access
-  to the saved data.<br>
+  It implements the QAbstractItemModel interface, allowing it to be 
+  used with Qt's standard views, and additionally provides methods for fast,
+  direct access to the stored data.
+
   Each column saves its data in a class derived from AbstractColumnData
-  and can be directly accessed by the pointer return by columnPointer().<br>
+  and can be directly accessed by the pointer return by columnPointer().
+
   Important: For memory saving reasons the columns usually have less
   rows than the displayed number of rows and are not automatically
   resized when the number of rows in the table is increased. 

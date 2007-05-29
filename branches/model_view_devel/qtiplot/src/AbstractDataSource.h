@@ -33,20 +33,22 @@
 #include <QObject>
 class QString;
 
-//! Reading interface for column based data
+//! Reading interface for column-based data
 /**
   This is the abstract base class for column-based data, 
   i.e. mathematically a 1D vector or technically a 1D array or list.
   It only defines the reading interface and has no data members itself. 
   The writing interface is defined in AbstractColumnData and
-  classes derived from it.<br>
+  classes derived from it.
+
   An object of a class derived from this is used as a column 
   in a table or as a data source for plots, filters and fit functions.
   This class defines all non-specific read functions and signals that
   indicate a data change. Classes derived from this will store a 
   vector with entries of one certain data type, e.g. double, QString, 
   QDate. To determine the data type of a class derived from this, 
-  use qobject_cast or QObject::inherits().<br>
+  use qobject_cast or QObject::inherits().
+
   Any class implementing writing functions must emit the according 
   signals. In some cases it will be necessary for a class using 
   data sources to connect QObject::destroyed() also, to react 
@@ -142,10 +144,11 @@ signals:
 	 * column, possibly of another type. This is
 	 * necessary because changing a column's type
 	 * cannot be done without changing the pointer
-	 * to the data source. The new column must
-	 * already be created and can be accessed though
-	 * 'new_col'.<br>
-	 * 'source' is always the this pointer of the column that
+	 * to the data source.
+	 *
+	 * \param new_col Pointer to the column this one is to be replaced with.
+	 *
+	 * \param source is always a pointer to the column that
 	 * emitted this signal. This way it's easier to use
 	 * one handler for lots of columns.
 	 */

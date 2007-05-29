@@ -33,26 +33,29 @@
 #include "AbstractDataSource.h"
 class QString;
 
-//! Writing interface for column based data
+//! Writing interface for column-based data
 /**
   This is an abstract base class for column-based data, 
   i.e. mathematically a 1D vector or technically a 1D array or list.
   It only defines the writing interface and has no data members itself. 
   The reading interface is defined in AbstractDataSource and
-  classes derived from it.<br>
-  An object of a class derived from this is used as a column 
-  in a table or as a data source for plots, filters and fit functions.
+  classes derived from it.
+
+  An instance of a subclass of this class represents a column
+  in a TableDataModel or as a data source for plots and filters.
   In the latter case the filter/fit function must display the 
   data in a table that is read-only to the user or at least 
-  does not support undo/redo. If an object of a class derived 
-  from this is controlled by an object that supports undo, this 
-  interface must only be avaiable to the commands (objects of a 
-  class derived from QUndoCommand) issued from that object. 
-  This is for example the case for Table.<br>
-  This class defines all non-specific write functions. Classes derived from 
-  this will store a vector with entries of one certain data type, 
-  e.g. double, QString,  QDate. To determine the data type of a 
-  class derived from this, use qobject_cast or QObject::inherits().<br>
+  does not support undo/redo. If instances of a subclass of AbstractColumnData
+  are managed by something that supports undo, the write access
+  provided by AbstractColumnData must only be available to the managing
+  class itself and to its commands (QUndoCommand subclasses).
+  This is for example the case for DoubleColumnData and Table.
+
+  AbstractColumnData defines write-access methods which do not require
+  knowledge of the type of data being handled. Classes derived from 
+  this one will store a vector with entries of one certain data type, 
+  e.g. double, QString, or QDate. To determine the data type of a 
+  class derived from this, use qobject_cast or QObject::inherits().
   */
 class AbstractColumnData : public QObject
 {
