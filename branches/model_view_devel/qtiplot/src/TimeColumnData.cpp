@@ -174,12 +174,12 @@ void TimeColumnData::setFormat(const QString& format)
 	emit specificDataChanged(this);
 }
 
-QString TimeColumnData::rowString(int row) const 
+QString TimeColumnData::textAt(int row) const 
 { 
-	return at(row).toString(d_format); 
+	return QLocale().toString(at(row), d_format); 
 }
 
-double TimeColumnData::rowValue(int row) const 
+double TimeColumnData::valueAt(int row) const 
 { 
 	return double( -at(row).msecsTo(QTime(0,0,0,0))/86400000.0 );
 }
@@ -205,7 +205,7 @@ bool TimeColumnData::copyDoubleDataSource(const AbstractDoubleDataSource * other
 	int end = other->numRows();
 	for(int i=0; i<end; i++)
 	{
-		temp = other->rowValue(i);
+		temp = other->valueAt(i);
 		itemp = int(temp);
 		temp -= double(itemp); // we only want the digits behind the dot
 		temp *= 86400000.0; // convert from fraction of day to milliseconds
@@ -252,11 +252,11 @@ bool TimeColumnData::copyStringDataSource(const AbstractStringDataSource * other
 	QTime result;
 	for(int i=0; i<end; i++)
 	{
-		result = QTime::fromString(other->rowString(i), d_format);
+		result = QTime::fromString(other->textAt(i), d_format);
 		// try other format strings
 		j=0;
 		while( !result.isValid() && j<NUM_TIME_FMT_STRINGS )
-			result = QTime::fromString(other->rowString(i), common_time_format_strings[j++]);
+			result = QTime::fromString(other->textAt(i), common_time_format_strings[j++]);
 	
 		*this << result;
 	}

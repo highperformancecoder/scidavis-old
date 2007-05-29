@@ -44,7 +44,7 @@ bool StringColumnData::copy(const AbstractDataSource * other)
 	clear();
 	int end = other->numRows();
 	for(int i=0; i<end; i++)
-		*this << other->rowString(i);
+		*this << other->textAt(i);
 	emit dataChanged(this);
 	return true;
 }
@@ -137,14 +137,14 @@ void StringColumnData::removeRows(int first, int count)
 	emit dataChanged(this);
 }
 
-QString StringColumnData::rowString(int row) const
+QString StringColumnData::textAt(int row) const
 { 
 		return at(row);
 }
 
-double StringColumnData::rowValue(int row) const 
+double StringColumnData::valueAt(int row) const 
 { 
-	return at(row).toDouble(); 
+	return QLocale().toDouble(at(row)); 
 }
 
 

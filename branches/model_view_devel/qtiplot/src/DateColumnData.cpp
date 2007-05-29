@@ -174,12 +174,12 @@ void DateColumnData::setFormat(const QString& format)
 	emit specificDataChanged(this);
 }
 
-QString DateColumnData::rowString(int row) const 
+QString DateColumnData::textAt(int row) const 
 { 
-	return at(row).toString(d_format); 
+	return QLocale().toString(at(row), d_format); 
 }
 
-double DateColumnData::rowValue(int row) const 
+double DateColumnData::valueAt(int row) const 
 { 
 	return double( -at(row).daysTo(QDate(1900,1,1)) ); 
 }
@@ -202,7 +202,7 @@ bool DateColumnData::copyDoubleDataSource(const AbstractDoubleDataSource * other
 	int end = other->numRows();
 	QDate ref_date = QDate(1900,1,1);
 	for(int i=0; i<end; i++)
-		*this << ref_date.addDays(int(other->rowValue(i)));
+		*this << ref_date.addDays(int(other->valueAt(i)));
 	emit dataChanged(this);
 	return true;
 }
@@ -244,11 +244,11 @@ bool DateColumnData::copyStringDataSource(const AbstractStringDataSource * other
 	QDate result;
 	for(int i=0; i<end; i++)
 	{
-		result = QDate::fromString(other->rowString(i), d_format);
+		result = QDate::fromString(other->textAt(i), d_format);
 		// try other format strings
 		j=0;
 		while( !result.isValid() && j<NUM_DATE_FMT_STRINGS )
-			result = QDate::fromString(other->rowString(i), common_date_format_strings[j++]);
+			result = QDate::fromString(other->textAt(i), common_date_format_strings[j++]);
 	
 		*this << result;
 	}

@@ -48,7 +48,7 @@ bool DoubleColumnData::copy(const AbstractDataSource * other)
 	setNumRows(end);
 	double * ptr = data();
 	for(int i=0; i<end; i++)
-		ptr[i] = other->rowValue(i);
+		ptr[i] = other->valueAt(i);
 	emit dataChanged(this);
 	return true;
 }
@@ -102,7 +102,7 @@ void DoubleColumnData::notifyReplacement(AbstractDataSource * replacement)
 void DoubleColumnData::setRowFromString(int row, const QString& string)
 {
 	emit dataAboutToChange(this);
-    data()[row] = string.toDouble();
+    data()[row] = QLocale().toDouble(string);
 	emit dataChanged(this);
 }
 
@@ -153,12 +153,12 @@ int DoubleColumnData::displayedDigits() const
 	return d_displayed_digits; 
 }
 
-QString DoubleColumnData::rowString(int row) const
+QString DoubleColumnData::textAt(int row) const
 { 
-		return QString::number(at(row), d_numeric_format, d_displayed_digits);
+		return QLocale().toString(at(row), d_numeric_format, d_displayed_digits);
 }
 
-double DoubleColumnData::rowValue(int row) const 
+double DoubleColumnData::valueAt(int row) const 
 { 
 	return at(row); 
 }

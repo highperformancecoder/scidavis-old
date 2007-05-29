@@ -95,9 +95,9 @@ public:
 	//! Return the vector size
 	virtual int numRows() const;
 	//! Return the value in row 'row' in its string representation
-	virtual QString rowString(int row) const;
+	virtual QString textAt(int row) const;
 	//! Return the value in row 'row'
-	virtual double rowValue(int row) const;
+	virtual double valueAt(int row) const;
 	//! Return the column label
 	virtual QString label() const;
 	//! Return the column comment

@@ -64,8 +64,8 @@ public:
 	virtual ~AbstractDataSource(){};
 
 	//! Types of plot designations
-	enum PlotDesignation{All = -1, //!< Used for selection operations
-	None = 0, //!< no plot designation
+	enum PlotDesignation{
+	noDesignation = 0, //!< no plot designation
 	X = 1,  //!< x values
 	Y = 2, //!< y values 
 	Z = 3, //!< z values
@@ -74,13 +74,13 @@ public:
 	};
 
 	//! Return the value in row 'row' in its string representation
-	virtual QString rowString(int row) const = 0;
+	virtual QString textAt(int row) const = 0;
 	//! Return the value in row 'row' as a floating point number
 	/**
 	 * If the value cannot be converted to a meaningful
 	 * value, this will return 0.0.
 	 */
-	virtual double rowValue(int row) const = 0;
+	virtual double valueAt(int row) const = 0;
 	//! Return the data vector size
 	/**
 	 * \sa AbstractColumnData::setNumRows()

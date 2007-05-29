@@ -114,12 +114,12 @@ public:
 	//! Return the column plot designation
 	virtual AbstractDataSource::PlotDesignation plotDesignation() const;
 	//! Return the value in row 'row' in its string representation
-	virtual QString rowString(int row) const;
+	virtual QString textAt(int row) const;
 	//! Return the value in row 'row' as a double
 	/**
 	 * This returns the fraction of a full day.
 	 */ 
-	virtual double rowValue(int row) const;
+	virtual double valueAt(int row) const;
 	//! Return the format string
 	/**
 	 * The default format string is "hh:mm:ss.zzz".

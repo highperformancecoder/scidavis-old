@@ -88,9 +88,9 @@ public:
 	//! Return the list size
 	virtual int numRows() const;
 	//! Return the string in row 'row'
-	virtual QString rowString(int row) const;
+	virtual QString textAt(int row) const;
 	//! Return the corresponding double value of row 'row'
-	virtual double rowValue(int row) const;
+	virtual double valueAt(int row) const;
 	//! Return the column label
 	virtual QString label() const;
 	//! Return the column comment
