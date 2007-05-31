@@ -49,10 +49,10 @@ class DifferentiationFilter : public AbstractDoubleDataSource, public AbstractFi
 	public:
 		virtual int numInputs() const { return 2; }
 		virtual int numOutputs() const { return 2; }
-		virtual const AbstractDataSource* output(int port) const {
+		virtual AbstractDataSource* output(int port) const {
 			switch(port) {
-				case 0: return &d_x_truncator;
-				case 1: return this;
+				case 0: return const_cast<TruncatedDoubleDataSource*>(&d_x_truncator);
+				case 1: return const_cast<DifferentiationFilter*>(this);
 				default: return 0;
 			}
 		}

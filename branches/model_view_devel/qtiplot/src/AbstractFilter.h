@@ -122,7 +122,7 @@ class AbstractFilter
 		 * The returned pointer may be 0, for example if not all required input ports
 		 * have been connected.
 		 */
-		virtual const AbstractDataSource* output(int port) const = 0;
+		virtual AbstractDataSource* output(int port) const = 0;
 		// virtual void saveTo(QXmlStreamWriter *) = 0;
 		// virtual void loadFrom(QXmlStreamReader *) = 0;
 

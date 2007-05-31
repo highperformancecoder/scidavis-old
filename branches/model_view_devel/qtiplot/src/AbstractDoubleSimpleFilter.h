@@ -46,7 +46,7 @@ class AbstractDoubleSimpleFilter : public AbstractDoubleDataSource, public Abstr
 	public:
 		virtual int numInputs() const { return 1; }
 		virtual int numOutputs() const { return 1; }
-		virtual const AbstractDataSource* output(int port) const { return port == 0 ? this : 0; }
+		virtual AbstractDataSource* output(int port) const { return port == 0 ? const_cast<AbstractDoubleSimpleFilter*>(this) : 0; }
 		virtual PlotDesignation plotDesignation() const { return d_inputs.value(0) ? d_inputs[0]->plotDesignation() : noDesignation; }
 
 	protected:
