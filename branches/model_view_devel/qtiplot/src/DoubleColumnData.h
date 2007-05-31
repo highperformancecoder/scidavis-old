@@ -45,7 +45,7 @@
   * \sa AbstractDataSource
   * \sa AbstractDoubleDataSource
   */
-class DoubleColumnData : public AbstractColumnData, public AbstractDoubleDataSource, public QVector<double>
+class DoubleColumnData : public AbstractDoubleDataSource, public AbstractColumnData, public QVector<double>
 { 
 	Q_OBJECT
 

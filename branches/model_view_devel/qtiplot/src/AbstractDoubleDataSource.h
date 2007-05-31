@@ -31,6 +31,7 @@
 #define DOUBLEDATASOURCE_H
 
 #include "AbstractDataSource.h"
+#include <QLocale>
 
 //! Type-specific reading interface for a double data source
 /**
@@ -45,21 +46,45 @@ class AbstractDoubleDataSource : public AbstractDataSource
 	Q_OBJECT
 
 public:
+	//! Ctor
+	AbstractDoubleDataSource() {
+		d_data_cache = 0;
+		connect(this, SIGNAL(dataChanged(AbstractDataSource*)),
+				this, SLOT(resetCache()));
+	}	
 	//! Dtor
-	virtual ~AbstractDoubleDataSource(){};
+	virtual ~AbstractDoubleDataSource() {
+		if(d_data_cache) delete[] d_data_cache;
+	}
 
 	//! Return format character as in QString::number
-	virtual char numericFormat() const = 0;
+	virtual char numericFormat() const { return 'e'; }
 	//! Return the number of displayed digits
-	virtual int displayedDigits() const = 0;
+	virtual int displayedDigits() const { return 6; }
+	//! Return the value in row 'row' in its string representation
+	virtual QString textAt(int row) const { return QLocale().toString(valueAt(row), numericFormat(), displayedDigits()); }
 	//! Return a read-only array pointer for fast data access
 	/**
 	 * The pointer remains valid as long as the vector is 
 	 * not resized. When it is resized it will emit
 	 * a AbstractDataSource::dataChanged() signal.
 	 */ 
-	virtual const double * constDataPointer() const = 0;
+	virtual const double * constDataPointer() const {
+		if(!d_data_cache) {
+			 d_data_cache = new double[numRows()];
+			 for (int i=0; i<numRows(); i++)
+				 d_data_cache[i] = valueAt(i);
+		 }
+		 return d_data_cache;
+	}
 
+private:
+	mutable double *d_data_cache;
+	private slots:
+		void resetCache() {
+			if(d_data_cache) delete[] d_data_cache;
+			d_data_cache = 0;
+		}
 };
 
 #endif

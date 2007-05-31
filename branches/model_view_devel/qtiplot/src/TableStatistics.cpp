@@ -30,7 +30,6 @@
 #include "TableStatistics.h"
 
 #include <QList>
-#include <gsl/gsl_vector.h>
 #include <gsl/gsl_statistics.h>
 
 TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base, Type t, QList<int> targets)
@@ -182,11 +181,9 @@ void TableStatistics::update(Table *t, const QString& colName)
 				if (start<0) return;
 
 				double *dat = new double[m];
-				gsl_vector *y = gsl_vector_alloc (m);
 
 				int aux = 0, min_index = start, max_index = start;
 				double val = d_base->text(start, i).toDouble();
-				gsl_vector_set (y, 0, val);
 				dat[0] = val;
 				double min = val, max = val;
 				for (j = start + 1; j<rows; j++)
@@ -195,7 +192,6 @@ void TableStatistics::update(Table *t, const QString& colName)
 					{
 						aux++;
 						val = d_base->text(j, i).toDouble();
-						gsl_vector_set (y, aux, val);
 						dat[aux] = val;
 						if (val < min)
 						{
@@ -222,7 +218,6 @@ void TableStatistics::update(Table *t, const QString& colName)
 				setText(c, 9, QString::number(min));
 				setText(c, 10, QString::number(m));
 
-				gsl_vector_free (y);
 				delete[] dat;
 			}
 

@@ -57,9 +57,8 @@ class QString;
   e.g. double, QString, or QDate. To determine the data type of a 
   class derived from this, use qobject_cast or QObject::inherits().
   */
-class AbstractColumnData : public QObject
+class AbstractColumnData
 {
-	Q_OBJECT
 
 public:
 	//! Dtor

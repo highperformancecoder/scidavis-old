@@ -49,7 +49,7 @@ class AbstractTimeDataSource;
   * \sa AbstractDataSource
   * \sa AbstractDateDataSource
   */
-class DateColumnData : public AbstractColumnData, public AbstractDateDataSource, public QList<QDate>
+class DateColumnData : public AbstractDateDataSource, public AbstractColumnData, public QList<QDate>
 {
 	Q_OBJECT
 

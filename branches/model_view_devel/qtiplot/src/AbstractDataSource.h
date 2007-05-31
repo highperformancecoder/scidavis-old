@@ -89,7 +89,7 @@ public:
 	//! Return the column label
 	virtual QString label() const = 0;
 	//! Return the column comment
-	virtual QString comment() const = 0;
+	virtual QString comment() const { return QString(); }
 	//! Return the column plot designation
 	virtual AbstractDataSource::PlotDesignation plotDesignation() const = 0;
 

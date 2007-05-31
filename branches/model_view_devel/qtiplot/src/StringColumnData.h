@@ -45,7 +45,7 @@
   * \sa AbstractDataSource
   * \sa AbstractDoubleDataSource
   */
-class StringColumnData : public AbstractColumnData, public AbstractStringDataSource, public QStringList
+class StringColumnData : public AbstractStringDataSource, public AbstractColumnData, public QStringList
 {
 	Q_OBJECT
 
