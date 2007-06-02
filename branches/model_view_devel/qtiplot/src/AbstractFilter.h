@@ -125,6 +125,15 @@ class AbstractFilter
 		 */
 		bool input(AbstractFilter *sources);
 		/**
+		 * \brief Return the label associated to the given input port.
+		 *
+		 * Default labels are In1, In2, ... (or translated equivalents), but implementations can
+		 * reimplement this method to produce more meaningful labels.
+		 *
+		 * Output ports are implicitly labeled through AbstractDataSource::label().
+		 */
+		virtual QString inputLabel(int port) const;
+		/**
 		 * \brief Get the data source associated with the specified output port.
 		 *
 		 * The returned pointer may be 0, for example if not all required input ports

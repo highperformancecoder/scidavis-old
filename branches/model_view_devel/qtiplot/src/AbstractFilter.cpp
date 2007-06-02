@@ -76,6 +76,11 @@ bool AbstractFilter::input(AbstractFilter* sources)
 	return result;
 }
 
+QString AbstractFilter::inputLabel(int port) const
+{
+	return QObject::tr("In%1").arg(port + 1);
+}
+
 void AbstractFilter::inputDescriptionAboutToChange(AbstractDataSource* source)
 {
 	inputDescriptionAboutToChange(d_inputs.indexOf(source));

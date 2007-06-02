@@ -56,6 +56,9 @@ class DifferentiationFilter : public AbstractDoubleDataSource, public AbstractFi
 				default: return 0;
 			}
 		}
+		virtual QString inputLabel(int port) const {
+			return port == 0 ? "X" : "Y";
+		}
 	protected:
 		virtual void inputDescriptionAboutToChange(AbstractDataSource*) { emit descriptionAboutToChange(this); }
 		virtual void inputDescriptionChanged(AbstractDataSource*) { emit descriptionChanged(this); }
