@@ -39,14 +39,14 @@
  * This filter is functionally equivalent to TableStatistics (except that row statics
  * are not implemented yet). It takes any number of inputs, computes statistics on
  * each and returns them on its outputs. Each output port corresponds to one
- * statistical item and provides as many rows as input ports are conected.
+ * statistical item and provides as many rows as input ports are connected.
  */
 class StatisticsFilter : public AbstractFilter {
 	public:
 		//! Standard constructor.
 		StatisticsFilter();
 		//! Destructor.
-		~StatisticsFilter();
+		virtual ~StatisticsFilter();
 		//! Accept any number of inputs.
 		virtual int numInputs() const { return -1; }
 		//! Currently, 11 statistics items are computed (see the private StatItem enum).
@@ -58,7 +58,7 @@ class StatisticsFilter : public AbstractFilter {
 		virtual void inputDescriptionAboutToChange(AbstractDataSource*) { d_strings[0]->dataAboutToChange(d_doubles[0]); }
 		virtual void inputDescriptionChanged(AbstractDataSource*) { d_strings[0]->dataChanged(d_doubles[0]); }
 		virtual void inputDataAboutToChange(AbstractDataSource*);
-		//! This is where the magic happens.
+		//! This is where the magic happens: data changes on an input port cause the corresponding entry in #d_s to be recomputed.
 		virtual void inputDataChanged(int port);
 	private:
 		//! The values being cached for each input column provided.

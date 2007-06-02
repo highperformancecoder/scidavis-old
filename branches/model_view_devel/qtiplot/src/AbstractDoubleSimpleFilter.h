@@ -39,14 +39,22 @@
  * This class is only meant to simplify implementation of a restricted subtype of filter.
  * It should not be used as type for variables, which should always use either
  * AbstractFilter or (if necessary) an actual (non-abstract) implementation.
+ *
+ * The trick here is that, in a sense, the filter is its own output port. This means you
+ * can implement a complete filter in only one class and don't have to coordinate data
+ * transfer between a filter class and a data source class.
  */
 class AbstractDoubleSimpleFilter : public AbstractDoubleDataSource, public AbstractFilter
 {
 	Q_OBJECT
 	public:
+		//! Default to one input port (it's safe to override this).
 		virtual int numInputs() const { return 1; }
+		//! We manage only one output port (don't override unless you really know what you are doing).
 		virtual int numOutputs() const { return 1; }
+		//! Return a pointer to myself on port 0.
 		virtual AbstractDataSource* output(int port) const { return port == 0 ? const_cast<AbstractDoubleSimpleFilter*>(this) : 0; }
+		//! Default to plot designation of input port 0 (safe to override).
 		virtual PlotDesignation plotDesignation() const { return d_inputs.value(0) ? d_inputs[0]->plotDesignation() : noDesignation; }
 
 	protected:

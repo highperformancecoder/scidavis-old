@@ -38,9 +38,9 @@
  * The data provided to the second input port is considered as a function of
  * the data provided to the first input port. The numerical derivative is
  * computed and returned on the second output port. The first output port
- * yields the first input port truncated to the range for wich the numerical
- * derivative is defined (2 points less than the minimum of the row numbers
- * of both input ports).
+ * yields the first input port truncated to the range for which the numerical
+ * derivative is defined (the minimum of the row numbers of both input ports
+ * minus the two end points).
  */
 class DifferentiationFilter : public AbstractDoubleDataSource, public AbstractFilter {
 	Q_OBJECT

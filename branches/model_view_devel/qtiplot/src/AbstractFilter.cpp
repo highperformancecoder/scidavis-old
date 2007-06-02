@@ -66,6 +66,16 @@ bool AbstractFilter::input(int port, AbstractDataSource *source)
 	return true;
 }
 
+bool AbstractFilter::input(AbstractFilter* sources)
+{
+	if (!sources) return false;
+	bool result = true;
+	for (int i=0; i<sources->numOutputs(); i++)
+		if (!input(i, sources->output(i)))
+			result = false;
+	return result;
+}
+
 void AbstractFilter::inputDescriptionAboutToChange(AbstractDataSource* source)
 {
 	inputDescriptionAboutToChange(d_inputs.indexOf(source));

@@ -20,6 +20,9 @@ HEADERS += AbstractColumnData.h \
 			  AbstractDoubleSimpleFilter.h \
 			  TruncatedDoubleDataSource.h \
 			  DifferentiationFilter.h \
+#			  ReadOnlyTableModel.h \
+#			  TableModel.h \
+			  DoubleTransposeFilter.h \
 
 SOURCES += StringColumnData.cpp \
 			  DoubleColumnData.cpp \
@@ -27,5 +30,6 @@ SOURCES += StringColumnData.cpp \
 			  DateColumnData.cpp \
 			  AbstractFilter.cpp \
 			  StatisticsFilter.cpp \
+#			  TableModel.cpp \
 			  main.cpp \
 

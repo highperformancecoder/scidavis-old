@@ -31,6 +31,12 @@
 
 #include "AbstractDoubleSimpleFilter.h"
 
+/**
+ * \brief A simple filter which truncates its (single) input.
+ *
+ * After connecting a data source to its input port, you have to tell AbstractDoubleDataSource
+ * which (continuous) subset of the input to return by calling setStartSkip() and setNumRows().
+ */
 class TruncatedDoubleDataSource : public AbstractDoubleSimpleFilter
 {
 	Q_OBJECT
@@ -63,6 +69,12 @@ class TruncatedDoubleDataSource : public AbstractDoubleSimpleFilter
 			if (row<0 || row>=d_num_rows) return 0;
 			return d_inputs[0]->valueAt(d_start + row);
 		}
+		virtual void inputDataChanged(AbstractDataSource* source)  {
+			if (!d_inputs.value(0) || d_start+d_num_rows>=d_inputs[0]->numRows())
+				d_num_rows = 0;
+			AbstractDoubleSimpleFilter::inputDataChanged(source);
+		}
 };
 
 #endif // ifndef TRUNCATED_DOUBLE_DATA_SOURCE
+

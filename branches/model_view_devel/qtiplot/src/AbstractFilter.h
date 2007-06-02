@@ -79,7 +79,7 @@ class AbstractFilterSlotMachine : public QObject {
  * for the simples possible implementation (CopyThroughFilter). To the same end, a little
  * additional complexity has been accepted in the form of AbstractFilterSlotMachine,
  * which on the other hand greatly simplifies filters with only one output port like
- * TruncatedDoubleDataSource (DifferentiatonFilter uses a similar approach, although
+ * TruncatedDoubleDataSource (DifferentiationFilter uses a similar approach, although
  * it provides two output ports).
  *
  * While filters can optionally handle inputs themselves by reimplementing input(),
@@ -106,7 +106,7 @@ class AbstractFilter
 		/**
 		 * \brief Return the number of output ports provided by the filter.
 		 *
-		 * Note that this number need not be static, but can be dynamically determined, for example
+		 * %Note that this number need not be static, but can be dynamically determined, for example
 		 * based on the inputs provided to the filter.
 		 */
 		virtual int numOutputs() const = 0;
@@ -116,6 +116,14 @@ class AbstractFilter
 		 * \returns true if the connection was accepted, false otherwise.
 		 */
 		virtual bool input(int port, AbstractDataSource *source);
+		/**
+		 * \brief Connect all outputs of the provided filter to the corresponding inputs of this filter.
+		 *
+		 * Overloaded method provided for convenience.
+		 *
+		 * \returns true if all connections were accepted, false otherwise.
+		 */
+		bool input(AbstractFilter *sources);
 		/**
 		 * \brief Get the data source associated with the specified output port.
 		 *
@@ -127,19 +135,64 @@ class AbstractFilter
 		// virtual void loadFrom(QXmlStreamReader *) = 0;
 
 	protected:
+		/**
+		 * \brief Column label and/or comment of an input will be changed.
+		 *
+		 * \param source is always the this pointer of the column that emitted the signal.
+		 */
 		virtual void inputDescriptionAboutToChange(AbstractDataSource* source);
+		//! Overloaded method provided for convenience.
 		virtual void inputDescriptionAboutToChange(int port) { Q_UNUSED(port); }
+		//! 
+		/**
+		 * \brief Column label and/or comment of an input changed.
+		 *
+		 * \param source is always the this pointer of the column that emitted the signal.
+		 */
 		virtual void inputDescriptionChanged(AbstractDataSource* source);
+		//! Overloaded method provided for convenience.
 		virtual void inputDescriptionChanged(int port) { Q_UNUSED(port); }
+		/**
+		 * \brief The plot designation of an input is about to change.
+		 *
+		 * \param source is always the this pointer of the column that emitted the signal.
+		 */
 		virtual void inputPlotDesignationAboutToChange(AbstractDataSource* source);
+		//! Overloaded method provided for convenience.
 		virtual void inputPlotDesignationAboutToChange(int port) { Q_UNUSED(port); }
+		/**
+		 * \brief The plot designation of an input changed.
+		 *
+		 * \param source is always the this pointer of the column that emitted the signal.
+		 */
 		virtual void inputPlotDesignationChanged(AbstractDataSource* source);
+		//! Overloaded method provided for convenience.
 		virtual void inputPlotDesignationChanged(int port) { Q_UNUSED(port); }
+		/**
+		 * \brief The data of an input is about to change.
+		 *
+		 * \param source is always the this pointer of the column that emitted the signal.
+		 */
 		virtual void inputDataAboutToChange(AbstractDataSource* source);
+		//! Overloaded method provided for convenience.
 		virtual void inputDataAboutToChange(int port) { Q_UNUSED(port); }
+		/**
+		 * \brief The data of an input has changed.
+		 *
+		 * \param source is always the this pointer of the column that emitted the signal.
+		 */
 		virtual void inputDataChanged(AbstractDataSource* source);
+		//! Overloaded method provided for convenience.
 		virtual void inputDataChanged(int port) { Q_UNUSED(port); }
+		/**
+		 * \brief An input is about to be replaced.
+		 *
+		 * This signal is handled by AbstractFilter and mapped to inputDataAboutToChange(AbstractDataSource*) and
+		 * inputDataChanged(AbstractDataSource*), so filter implementations won't have to bother with it
+		 * most of the time.
+		 */
 		virtual void inputAboutToBeReplaced(AbstractDataSource* source, AbstractDataSource* replacement);
+		//! The data sources connected to my input ports.
 		QVector<AbstractDataSource*> d_inputs;
 
 	private:
@@ -158,7 +211,7 @@ class CopyThroughFilter : public AbstractFilter
 {
 	//! Accept any number of inputs.
 	virtual int numInputs() const { return -1; }
-	//! Provide as many output port as inputs have been connected.
+	//! Provide as many output ports as inputs have been connected.
 	virtual int numOutputs() const { return d_inputs.size(); }
 	//! When asked for an output port, just return the corresponding input port.
 	virtual AbstractDataSource* output(int port) const { return d_inputs.value(port); }
