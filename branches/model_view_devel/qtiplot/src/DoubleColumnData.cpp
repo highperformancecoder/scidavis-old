@@ -29,6 +29,7 @@
 
 #include "DoubleColumnData.h"
 #include <QObject>
+#include <QLocale>
 
 DoubleColumnData::DoubleColumnData(int size)
 	: QVector<double>(size), d_numeric_format('e'), d_displayed_digits(6)
@@ -155,12 +156,12 @@ int DoubleColumnData::displayedDigits() const
 
 QString DoubleColumnData::textAt(int row) const
 { 
-		return QLocale().toString(at(row), d_numeric_format, d_displayed_digits);
+		return QLocale().toString(value(row), d_numeric_format, d_displayed_digits);
 }
 
 double DoubleColumnData::valueAt(int row) const 
 { 
-	return at(row); 
+	return value(row); 
 }
 
 const double * DoubleColumnData::constDataPointer() const 

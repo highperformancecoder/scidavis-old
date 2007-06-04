@@ -54,11 +54,12 @@ class QString;
   AbstractColumnData defines write-access methods which do not require
   knowledge of the type of data being handled. Classes derived from 
   this one will store a vector with entries of one certain data type, 
-  e.g. double, QString, or QDate. To determine the data type of a 
+  e.g. double, QString, or QDateTime. To determine the data type of a 
   class derived from this, use qobject_cast or QObject::inherits().
   */
-class AbstractColumnData
+class AbstractColumnData : public QObject
 {
+	Q_OBJECT
 
 public:
 	//! Dtor
@@ -81,9 +82,6 @@ public:
 	//! Set the column comment
 	virtual void setComment(const QString& comment) = 0;
 	//! Set the column plot designation
-	/**
-	 * Don't ever use AbstractDataSource::All here!
-	 */
 	virtual void setPlotDesignation(AbstractDataSource::PlotDesignation pd) = 0;
 	//! Insert some empty (or initialized with zero) rows
 	virtual void insertEmptyRows(int before, int count) = 0;

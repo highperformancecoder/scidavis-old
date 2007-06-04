@@ -54,9 +54,9 @@ public:
 	virtual ~StringColumnData(){};
 
 	//! Ctor
-	explicit StringColumnData();
+	StringColumnData();
 	//! Ctor
-	explicit StringColumnData(const QStringList& list);
+	StringColumnData(const QStringList& list);
 
 	//! \name Data writing functions
 	//@{
@@ -71,9 +71,6 @@ public:
 	//! Set the column comment
 	virtual void setComment(const QString& comment);
 	//! Set the column plot designation
-	/**
-	 * Don't ever use AbstractDataSource::All here!
-	 */
 	virtual void setPlotDesignation(AbstractDataSource::PlotDesignation pd);
 	//! Insert some empty rows
 	virtual void insertEmptyRows(int before, int count);

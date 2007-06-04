@@ -46,7 +46,7 @@ class QString;
   This class defines all non-specific read functions and signals that
   indicate a data change. Classes derived from this will store a 
   vector with entries of one certain data type, e.g. double, QString, 
-  QDate. To determine the data type of a class derived from this, 
+  QDateTime. To determine the data type of a class derived from this, 
   use qobject_cast or QObject::inherits().
 
   Any class implementing writing functions must emit the according 

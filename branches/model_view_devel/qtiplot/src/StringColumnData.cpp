@@ -28,6 +28,7 @@
  ***************************************************************************/
 
 #include "StringColumnData.h"
+#include <QLocale>
 
 StringColumnData::StringColumnData()
 {
@@ -139,12 +140,12 @@ void StringColumnData::removeRows(int first, int count)
 
 QString StringColumnData::textAt(int row) const
 { 
-		return at(row);
+		return value(row);
 }
 
 double StringColumnData::valueAt(int row) const 
 { 
-	return QLocale().toDouble(at(row)); 
+	return QLocale().toDouble(value(row)); 
 }
 
 

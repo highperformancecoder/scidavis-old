@@ -218,6 +218,7 @@ class AbstractFilter
  */
 class CopyThroughFilter : public AbstractFilter
 {
+	public:
 	//! Accept any number of inputs.
 	virtual int numInputs() const { return -1; }
 	//! Provide as many output ports as inputs have been connected.
