@@ -175,9 +175,9 @@ void DateTimeColumnData::removeRows(int first, int count)
 
 void DateTimeColumnData::setFormat(const QString& format) 
 { 
-	emit specificDataAboutToChange(this);
+	emit formatAboutToChange(this);
 	d_format = format; 
-	emit specificDataChanged(this);
+	emit formatChanged(this);
 }
 
 QString DateTimeColumnData::textAt(int row) const 

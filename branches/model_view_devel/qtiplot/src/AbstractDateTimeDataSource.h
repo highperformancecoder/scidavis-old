@@ -65,6 +65,21 @@ public:
 	 */
 	virtual QString format() const = 0;
 
+signals:
+	//! The format string will change
+	/**
+	 * 'source' is always the this pointer of the column that
+	 * emitted this signal. This way it's easier to use
+	 * one handler for lots of columns.
+	 */
+	void formatAboutToChange(AbstractDataSource * source); 
+	//! The format string hast changed
+	/**
+	 * 'source' is always the this pointer of the column that
+	 * emitted this signal. This way it's easier to use
+	 * one handler for lots of columns.
+	 */
+	void formatDataChanged(AbstractDataSource * source); 
 };
 
 #endif

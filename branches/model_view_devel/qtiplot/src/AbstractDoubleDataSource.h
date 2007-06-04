@@ -85,6 +85,22 @@ private:
 			if(d_data_cache) delete[] d_data_cache;
 			d_data_cache = 0;
 		}
+
+signals:
+	//! The format code and/or the displayed digits will change
+	/**
+	 * 'source' is always the this pointer of the column that
+	 * emitted this signal. This way it's easier to use
+	 * one handler for lots of columns.
+	 */
+	void formatAboutToChange(AbstractDataSource * source); 
+	//! The format code and/or the displayed digits has changed
+	/**
+	 * 'source' is always the this pointer of the column that
+	 * emitted this signal. This way it's easier to use
+	 * one handler for lots of columns.
+	 */
+	void formatDataChanged(AbstractDataSource * source); 
 };
 
 #endif

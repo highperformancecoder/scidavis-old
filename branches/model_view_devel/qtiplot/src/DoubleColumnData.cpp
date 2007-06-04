@@ -132,16 +132,16 @@ void DoubleColumnData::removeRows(int first, int count)
 
 void DoubleColumnData::setNumericFormat(char format) 
 { 
-	emit specificDataAboutToChange(this);
+	emit formatAboutToChange(this);
 	d_numeric_format = format; 
-	emit specificDataChanged(this);
+	emit formatChanged(this);
 }
 
 void DoubleColumnData::setDisplayedDigits(int digits) 
 { 
-	emit specificDataAboutToChange(this);
+	emit formatAboutToChange(this);
 	d_displayed_digits = digits; 
-	emit specificDataChanged(this);
+	emit formatChanged(this);
 }
 
 char DoubleColumnData::numericFormat() const

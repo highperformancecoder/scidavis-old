@@ -153,20 +153,6 @@ signals:
 	 * one handler for lots of columns.
 	 */
 	void aboutToBeReplaced(AbstractDataSource * source, AbstractDataSource * new_col); 
-	//! Some type specific data will change
-	/**
-	 * 'source' is always the this pointer of the column that
-	 * emitted this signal. This way it's easier to use
-	 * one handler for lots of columns.
-	 */
-	void specificDataAboutToChange(AbstractDataSource * source); 
-	//! Some type specific data has changed
-	/**
-	 * 'source' is always the this pointer of the column that
-	 * emitted this signal. This way it's easier to use
-	 * one handler for lots of columns.
-	 */
-	void specificDataChanged(AbstractDataSource * source); 
 
 };
 
