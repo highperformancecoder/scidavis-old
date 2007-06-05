@@ -32,7 +32,8 @@
  
 
 #include "AbstractDataSource.h"
-#include<QLocale>
+#include "DataSourceAttributes.h"
+#include <QLocale>
 
 //! Type-specific reading interface for a string data source
 /**
@@ -44,7 +45,7 @@
   * \sa AbstractDataSource
   * \sa AbstractColumnData
   */
-class AbstractStringDataSource : public AbstractDataSource
+class AbstractStringDataSource : public DataSourceAttributes
 {
 	Q_OBJECT
 

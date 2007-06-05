@@ -31,6 +31,7 @@
 #define DATETIMEDATASOURCE_H
 
 #include "AbstractDataSource.h"
+#include "DataSourceAttributes.h"
 class QDate;
 class QTime;
 class QDateTime;
@@ -44,7 +45,7 @@ class QString;
   * \sa AbstractDataSource
   * \sa AbstractColumnData
   */
-class AbstractDateTimeDataSource : public AbstractDataSource
+class AbstractDateTimeDataSource : public DataSourceAttributes
 {
 	Q_OBJECT
 
@@ -79,7 +80,7 @@ signals:
 	 * emitted this signal. This way it's easier to use
 	 * one handler for lots of columns.
 	 */
-	void formatDataChanged(AbstractDataSource * source); 
+	void formatChanged(AbstractDataSource * source); 
 };
 
 #endif
