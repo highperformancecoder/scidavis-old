@@ -159,13 +159,20 @@ void DataSourceAttributes::setMasked(Interval i, bool mask)
 void DataSourceAttributes::setFormula(Interval i, QString formula)
 {
 	for(int c=0; c<d_formula_intervals.size(); c++)
-		if( ( d_formula_intervals.at(c).touches(i) || 
+	{
+		if(i.contains(d_formula_intervals.at(c)))
+		{
+			d_formula_intervals.removeAt(c);
+			d_formulas.removeAt(c);
+		}
+		else if( ( d_formula_intervals.at(c).touches(i) || 
 			d_formula_intervals.at(c).intersects(i) ) &&
 			d_formulas.at(c) == formula)
 		{
 			d_formula_intervals.replace(c, Interval::merge(d_formula_intervals.at(c), i));
 			return;
 		}
+	}
 	d_formula_intervals.append(i);
 	d_formulas.append(formula);
 }
