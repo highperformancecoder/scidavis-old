@@ -60,15 +60,13 @@ QList<Interval> DataSourceAttributes::selectedIntervals() const
 
 QString DataSourceAttributes::formula(int row) const 
 { 
-	QString result;
-	int c;
-	for(c=0; c<d_formula_intervals.size(); c++)
+	for(int c=d_formula_intervals.size()-1; c>=0; c--)
 	{
 		// find the last formula used for that row
 		if(d_formula_intervals.at(c).contains(row))
-			result = d_formulas.at(c);
+			return d_formulas.at(c);
 	}
-	return result; 
+	return QString(); 
 }
 
 bool DataSourceAttributes::isRowMasked(int row) const
@@ -158,21 +156,38 @@ void DataSourceAttributes::setMasked(Interval i, bool mask)
 
 void DataSourceAttributes::setFormula(Interval i, QString formula)
 {
+	// first: subtract the new interval from all others
+	QList<Interval> temp_list;
 	for(int c=0; c<d_formula_intervals.size(); c++)
 	{
-		if(i.contains(d_formula_intervals.at(c)))
+		temp_list = Intervall::subtract(d_formula_intervals.at(c), i);
+		if(temp_list.isEmpty())
 		{
 			d_formula_intervals.removeAt(c);
-			d_formulas.removeAt(c);
+			d_formulas.removeAt(c--);
 		}
-		else if( ( d_formula_intervals.at(c).touches(i) || 
-			d_formula_intervals.at(c).intersects(i) ) &&
-			d_formulas.at(c) == formula)
+		else 
+		{
+			d_formula_intervals.replace(c, temp_list.at(0));
+			if(temp_list.size()>1)
+			{
+				d_formula_intervals.insert(c, temp_list.at(1));
+				d_formulas.insert(c, d_formulas.at(c));
+			}
+		}
+	}
+	
+	// second: try to merge the new interval with an old one 
+	for(int c=0; c<d_formula_intervals.size(); c++)
+	{
+		if( d_formula_intervals.at(c).touches(i) &&
+			d_formulas.at(c) == formula )
 		{
 			d_formula_intervals.replace(c, Interval::merge(d_formula_intervals.at(c), i));
 			return;
 		}
 	}
+	// if it could not be merged, just append it
 	d_formula_intervals.append(i);
 	d_formulas.append(formula);
 }
