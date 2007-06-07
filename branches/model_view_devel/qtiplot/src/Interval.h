@@ -27,6 +27,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef INTERVAL_H
+#define INTERVAL_H
+
 // TODO: remove this after testing
 #include <QtDebug>
 
@@ -41,6 +44,7 @@ class Interval
 public:
 	Interval() : d_start(-1), d_end(-1){}
 	Interval(int start, int end) : d_start(start), d_end(end){}
+	Interval(const Interval& other) : d_start(other.start()), d_end(other.end()){}
 	int start() const { return d_start; }
 	int end() const { return d_end; }
 	int size() const { return d_end - d_start + 1; }
@@ -52,7 +56,8 @@ public:
 	bool intersects(const Interval& other) const { return ( contains(other.start()) || contains(other.end()) ); }
 	bool touches(const Interval& other) const;
 	void translate(int offset) { d_start += offset; d_end += offset; }
-	bool operator==(Interval other) const { return ( d_start == other.start() && d_end == other.end() ); }
+	bool operator==(const Interval& other) const { return ( d_start == other.start() && d_end == other.end() ); }
+	Interval& operator=(const Interval& other); 
 	//! Merge two intervals that touch or intersect
 	static Interval merge(const Interval& a, const Interval& b);
 	//! Subtract an interval from another
@@ -82,4 +87,6 @@ private:
 	//! Interval end
 	int d_end;
 };
+
+#endif
 

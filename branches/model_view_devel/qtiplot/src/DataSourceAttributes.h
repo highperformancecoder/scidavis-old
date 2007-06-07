@@ -31,75 +31,97 @@
 #define DATASOURCEATTRIBUTES_H
 
 #include "AbstractDataSource.h"
+#include "IntervalAttribute.h"
 #include <QStringList>
 
 //! Base class for data sources supporting interval-based attributes
 /**
-  This class implements data type independent additional information
+  This class implements data type independent column information
   based on intervals. This includes validity, selection, masking as
   well as a formula string that can be associated with a range of rows.
   */
 
-class DataSourceAttributes : public AbstractDataSource
+class DataSourceAttributes
 {
 public:
 	// \name Interval based information handling (reading functions)
 	//@{
 	//! Return whether a certain row contains a valid value
-	virtual bool isRowValid(int row) const;
+	bool isValid(int row) const;
 	//! Return whether a certain interval of rows contains only valid values
-	virtual bool isValid(Interval i) const;
+	bool isValid(Interval i) const;
 	//! Return whether a certain row is selected
-	virtual bool isSelected(int row) const;
+	bool isSelected(int row) const;
 	//! Return all selected intervals 
-	virtual QList<Interval> selectedIntervals() const;
+	QList<Interval> selectedIntervals() const;
 	//! Return the formula associated with row 'row'
 	QString formula(int row) const;
 	//! Return whether a certain row is masked
-	virtual bool isRowMasked(int row) const;
+	bool isMasked(int row) const;
 	//! Return whether a certain interval of rows rows is fully masked
-	virtual bool isMasked(Interval i) const;
+	bool isMasked(Interval i) const;
 	//@}
 	
 	// \name Interval based information handling (writing functions)
 	//@{
 	//! Clear all validity information
-	virtual void clearValidity();
+	void clearValidity();
 	//! Clear all selection information
-	virtual void clearSelections();
+	void clearSelections();
 	//! Clear all masking information
-	virtual void clearMasks();
+	void clearMasks();
 	//! Clear all formulas
-	virtual void clearFormulas();
+	void clearFormulas();
 	//! Set an interval valid or invalid
 	/**
 	 * \param i the interval
 	 * \param valid true: set valid, false: set invalid
 	 */ 
-	virtual void setValid(Interval i, bool valid = true);
+	void setValid(Interval i, bool valid = true);
 	//! Select of deselect a certain interval
 	/**
 	 * \param i the interval
 	 * \param select true: select, false: deselect
 	 */ 
-	virtual void setSelected(Interval i, bool select = true);
+	void setSelected(Interval i, bool select = true);
 	//! Set an interval masked
 	/**
 	 * \param i the interval
 	 * \param mask true: mask, false: unmask
 	 */ 
-	virtual void setMasked(Interval i, bool mask = true);
+	void setMasked(Interval i, bool mask = true);
 	//! Set a forumla string for an interval of rows
-	virtual void setFormula(Interval i, QString formula);
+	void setFormula(Interval i, QString formula);
 	//@}
 
+public slots:
+	//! Insert rows
+	/**
+	 *	This slot must be connected to the rowsInserted()
+	 *	signal of the corresponding data source.
+	 *
+	 *	\param source this will be ignored
+	 *	\param before the row to insert before
+	 *	\param count the number of rows to be inserted
+	 */
+	void insertRows(AbstractDataSource * source, int before, int count); 
+	//! Delete rows
+	/**
+	 *	This slot must be connected to the rowsDeleted()
+	 *	signal of the corresponding data source.
+	 *
+	 *	\param source this will be ignored
+	 *	\param first the first row to be deleted
+	 *	\param count the number of rows to be deleted
+	 */
+	void deleteRows(AbstractDataSource * source, int first, int count); 
+
+
 private:
-	QList<Interval> d_valid_intervals;
-	QList<Interval> d_selected_intervals;
-	QList<Interval> d_formula_intervals;
-	QStringList d_formulas;
-	QList<Interval> d_masked_intervals;
-	
+	IntervalAttribute<bool> d_validity;
+	IntervalAttribute<bool> d_selection;
+	IntervalAttribute<bool> d_masking;
+	IntervalAttribute<QString> d_formulas;
 };
 
 #endif

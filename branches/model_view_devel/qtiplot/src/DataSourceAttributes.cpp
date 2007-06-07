@@ -29,167 +29,97 @@
 
 #include "DataSourceAttributes.h"
 
-bool DataSourceAttributes::isRowValid(int row) const 
+bool DataSourceAttributes::isValid(int row) const 
 { 
-	foreach(Interval iv, d_valid_intervals)
-		if(iv.contains(row))
-			return true;
-	return false;
+	return d_validity.isSet(row);
 }
 
 bool DataSourceAttributes::isValid(Interval i) const
 { 
-	foreach(Interval iv, d_valid_intervals)
-		if(iv.contains(i))
-			return true;
-	return false;
+	return d_validity.isSet(i);
 }
 
 bool DataSourceAttributes::isSelected(int row) const 
 { 
-	foreach(Interval iv, d_selected_intervals)
-		if(iv.contains(row))
-			return true;
-	return false; 
+	return d_selection.isSet(row);
 }
 
 QList<Interval> DataSourceAttributes::selectedIntervals() const 
 { 
-	return d_selected_intervals; 
+	return d_selection.intervals(); 
 }
 
 QString DataSourceAttributes::formula(int row) const 
 { 
-	for(int c=d_formula_intervals.size()-1; c>=0; c--)
-	{
-		// find the last formula used for that row
-		if(d_formula_intervals.at(c).contains(row))
-			return d_formulas.at(c);
-	}
-	return QString(); 
+	return d_formulas.value(row);
 }
 
-bool DataSourceAttributes::isRowMasked(int row) const
+bool DataSourceAttributes::isMasked(int row) const
 { 
-	foreach(Interval iv, d_masked_intervals)
-		if(iv.contains(row))
-			return true;
-	return false;
+	return d_masking.isSet(row);
 }
 
 bool DataSourceAttributes::isMasked(Interval i) const
 { 
-	foreach(Interval iv, d_masked_intervals)
-		if(iv.contains(i))
-			return true;
-	return false;
+	return d_masking.isSet(i);
 }
 
 void DataSourceAttributes::clearValidity() 
 { 
-	d_valid_intervals.clear(); 
+	d_validity.clear(); 
 }
 
 void DataSourceAttributes::clearSelections() 
 { 
-	d_selected_intervals.clear(); 
+	d_selection.clear(); 
 }
 
 void DataSourceAttributes::clearMasks() 
 { 
-	d_masked_intervals.clear(); 
+	d_masking.clear(); 
 }
 
 void DataSourceAttributes::clearFormulas() 
 { 
-	d_formula_intervals.clear(); 
 	d_formulas.clear(); 
 }
 
 void DataSourceAttributes::setValid(Interval i, bool valid)
 { 
-	if(valid)
-	{
-		foreach(Interval iv, d_valid_intervals)
-			if(iv.contains(i)) 
-				return;
-
-		Interval::mergeIntervalIntoList(&d_valid_intervals, i);
-	}
-	else // set invalid
-	{
-		Interval::subtractIntervalFromList(&d_valid_intervals, i);
-	}
+	d_validity.setValue(i, valid);
 }
 
 void DataSourceAttributes::setSelected(Interval i, bool select)
 { 
-	if(select)
-	{
-		foreach(Interval iv, d_selected_intervals)
-			if(iv.contains(i)) 
-				return;
-
-		Interval::mergeIntervalIntoList(&d_selected_intervals, i);
-	}
-	else // deselect
-	{
-		Interval::subtractIntervalFromList(&d_selected_intervals, i);
-	}
+	d_selection.setValue(i, select);
 }
 
 void DataSourceAttributes::setMasked(Interval i, bool mask)
 { 
-	if(mask)
-	{
-		foreach(Interval iv, d_masked_intervals)
-			if(iv.contains(i)) 
-				return;
-
-		Interval::mergeIntervalIntoList(&d_masked_intervals, i);
-	}
-	else // unmask
-	{
-		Interval::subtractIntervalFromList(&d_masked_intervals, i);
-	}
+	d_selection.setValue(i, mask);
 }
 
 void DataSourceAttributes::setFormula(Interval i, QString formula)
 {
-	// first: subtract the new interval from all others
-	QList<Interval> temp_list;
-	for(int c=0; c<d_formula_intervals.size(); c++)
-	{
-		temp_list = Intervall::subtract(d_formula_intervals.at(c), i);
-		if(temp_list.isEmpty())
-		{
-			d_formula_intervals.removeAt(c);
-			d_formulas.removeAt(c--);
-		}
-		else 
-		{
-			d_formula_intervals.replace(c, temp_list.at(0));
-			if(temp_list.size()>1)
-			{
-				d_formula_intervals.insert(c, temp_list.at(1));
-				d_formulas.insert(c, d_formulas.at(c));
-			}
-		}
-	}
-	
-	// second: try to merge the new interval with an old one 
-	for(int c=0; c<d_formula_intervals.size(); c++)
-	{
-		if( d_formula_intervals.at(c).touches(i) &&
-			d_formulas.at(c) == formula )
-		{
-			d_formula_intervals.replace(c, Interval::merge(d_formula_intervals.at(c), i));
-			return;
-		}
-	}
-	// if it could not be merged, just append it
-	d_formula_intervals.append(i);
-	d_formulas.append(formula);
+	d_formulas.setValue(i, formula);
+}
+
+void DataSourceAttributes::insertRows(AbstractDataSource * source, int before, int count)
+{
+	Q_UNUSED(source);
+	d_validity.insertRows(before, count);
+	d_selection.insertRows(before, count);
+	d_masking.insertRows(before, count);
+	d_formulas.insertRows(before, count);
+}
+
+void DataSourceAttributes::deleteRows(AbstractDataSource * source, int first, int count)
+{
+	Q_UNUSED(source);
+	d_validity.deleteRows(first, count);
+	d_selection.deleteRows(first, count);
+	d_masking.deleteRows(first, count);
+	d_formulas.deleteRows(first, count);
 }
 
 

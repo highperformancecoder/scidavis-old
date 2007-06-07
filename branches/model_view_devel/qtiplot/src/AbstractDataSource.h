@@ -58,12 +58,6 @@ class QString;
   data sources to connect QObject::destroyed() also, to react 
   to a column's deletion, e.g. a filter's reaction to a 
   table deletion.
-
-  This class also defines the reading interface to additional data type 
-  independent information based on intervals. This includes validity, 
-  selection, masking as well as a formula string that can be associated 
-  with a range of rows. In the standard implementation all rows are
-  valid, none are selected, none are masked and all formulas are empty.
   */
 class AbstractDataSource : public QObject
 {
@@ -103,21 +97,6 @@ public:
 	//! Return the column plot designation
 	virtual AbstractDataSource::PlotDesignation plotDesignation() const = 0;
 	
-	//! Return whether a certain row contains a valid value
-	virtual bool isRowValid(int row) const { return ( row >= 0 && row < numRows() ); }
-	//! Return whether a certain interval of rows contains only valid values
-	virtual bool isValid(Interval i) const { return Interval(0, numRows()-1).contains(i); }
-	//! Return whether a certain row is selected
-	virtual bool isSelected(int row) const { return false; }
-	//! Return all selected intervals 
-	virtual QList<Interval> selectedIntervals() const { return QList<Interval>(); }
-	//! Return the formula associated with row 'row'
-	virtual QString formula(int row) const { return QString(); }
-	//! Return whether a certain row is masked
-	virtual bool isRowMasked(int row) const { return false; }
-	//! Return whether a certain interval of rows rows is fully masked
-	virtual bool isMasked(Interval i) const { return false; }
-
 signals: 
 	//! Column label and/or comment will be changed
 	/**
@@ -178,6 +157,34 @@ signals:
 	 * one handler for lots of columns.
 	 */
 	void aboutToBeReplaced(AbstractDataSource * source, AbstractDataSource * new_col); 
+	//! Rows will be inserted
+	/**
+	 *	\param source the column that emitted the signal
+	 *	\param before the row to insert before
+	 *	\param count the number of rows to be inserted
+	 */
+	void rowsAboutToBeInserted(AbstractDataSource * source, int before, int count); 
+	//! Rows have been inserted
+	/**
+	 *	\param source the column that emitted the signal
+	 *	\param before the row to insert before
+	 *	\param count the number of rows to be inserted
+	 */
+	void rowsInserted(AbstractDataSource * source, int before, int count); 
+	//! Rows will be deleted
+	/**
+	 *	\param source the column that emitted the signal
+	 *	\param first the first row to be deleted
+	 *	\param count the number of rows to be deleted
+	 */
+	void rowsAboutToBeDeleted(AbstractDataSource * source, int first, int count); 
+	//! Rows have been deleted
+	/**
+	 *	\param source the column that emitted the signal
+	 *	\param first the first row that was deleted
+	 *	\param count the number of deleted rows
+	 */
+	void rowsDeleted(AbstractDataSource * source, int first, int count); 
 
 };
 

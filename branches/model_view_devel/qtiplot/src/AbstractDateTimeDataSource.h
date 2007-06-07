@@ -31,7 +31,6 @@
 #define DATETIMEDATASOURCE_H
 
 #include "AbstractDataSource.h"
-#include "DataSourceAttributes.h"
 class QDate;
 class QTime;
 class QDateTime;
@@ -45,7 +44,7 @@ class QString;
   * \sa AbstractDataSource
   * \sa AbstractColumnData
   */
-class AbstractDateTimeDataSource : public DataSourceAttributes
+class AbstractDateTimeDataSource : public AbstractDataSource
 {
 	Q_OBJECT
 

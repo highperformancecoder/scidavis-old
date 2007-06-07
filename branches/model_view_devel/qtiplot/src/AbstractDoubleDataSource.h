@@ -31,7 +31,6 @@
 #define DOUBLEDATASOURCE_H
 
 #include "AbstractDataSource.h"
-#include "DataSourceAttributes.h"
 #include <QLocale>
 
 //! Type-specific reading interface for a double data source
@@ -42,7 +41,7 @@
   * \sa AbstractDataSource
   * \sa AbstractColumnData
   */
-class AbstractDoubleDataSource : public DataSourceAttributes
+class AbstractDoubleDataSource : public AbstractDataSource
 {
 	Q_OBJECT
 

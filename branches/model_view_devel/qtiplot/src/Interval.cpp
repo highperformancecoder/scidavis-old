@@ -132,3 +132,10 @@ QList<Interval> Interval::split(const Interval& i, int before)
 	return list;
 }
 
+Interval& Interval::operator=(const Interval& other) 
+{ 
+	d_start = other.start(); 
+	d_end = other.end(); 
+	return *this; 
+}
+
