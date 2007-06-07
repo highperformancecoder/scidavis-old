@@ -140,37 +140,40 @@ void DateTimeColumnData::setRowFromString(int row, const QString& string)
 
 void DateTimeColumnData::setNumRows(int new_size)
 {
-	int count = new_size - numRows();
+	int old_size = numRows();
+	int count = new_size - old_size;
 	if(count == 0) return;
 
-	emit dataAboutToChange(this);
 	if(count > 0)
 	{
+		emit rowsAboutToBeInserted(this, old_size, count);
 		for(int i=0; i<count; i++)
 			*this << QDateTime();
+		emit rowsInserted(this, old_size, count);
 	}
 	else // count < 0
 	{
+		emit rowsAboutToBeDeleted(this, new_size, -count);
 		for(int i=0; i>count; i--)
 			removeLast();
+		emit rowsDeleted(this, new_size, -count);
 	}
-	emit dataChanged(this);
 }
 
 void DateTimeColumnData::insertEmptyRows(int before, int count)
 {
-	emit dataAboutToChange(this);
+	emit rowsAboutToBeInserted(this, before, count);
 	for(int i=0; i<count; i++)
 		insert(before, QDateTime());
-	emit dataChanged(this);
+	emit rowsInserted(this, before, count);
 }
 
 void DateTimeColumnData::removeRows(int first, int count)
 {
-	emit dataAboutToChange(this);
+	emit rowsAboutToBeDeleted(this, first, count);
 	for(int i=0; i<count; i++)
 		removeAt(first);
-	emit dataChanged(this);
+	emit rowsDeleted(this, first, count);
 }
 
 void DateTimeColumnData::setFormat(const QString& format) 

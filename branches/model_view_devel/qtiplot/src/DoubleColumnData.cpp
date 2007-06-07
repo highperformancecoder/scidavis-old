@@ -109,25 +109,37 @@ void DoubleColumnData::setRowFromString(int row, const QString& string)
 
 void DoubleColumnData::setNumRows(int new_size)
 {
-	if(new_size == numRows())
-		return;
+	int old_size = numRows();
+	int count = new_size - old_size;
+	if(count == 0) return;
+
 	emit dataAboutToChange(this);
-	QVector<double>::resize(new_size);
-	emit dataChanged(this);
+	if(count > 0)
+	{
+		emit rowsAboutToBeInserted(this, old_size, count);
+		QVector<double>::resize(new_size);
+		emit rowsInserted(this, old_size, count);
+	}
+	else // count < 0
+	{
+		emit rowsAboutToBeDeleted(this, new_size, -count);
+		QVector<double>::resize(new_size);
+		emit rowsDeleted(this, new_size, -count);
+	}
 }
 
 void DoubleColumnData::insertEmptyRows(int before, int count)
 {
-	emit dataAboutToChange(this);
+	emit rowsAboutToBeInserted(this, before, count);
 	insert(before, count, 0.0);
-	emit dataChanged(this);
+	emit rowsInserted(this, before, count);
 }
 
 void DoubleColumnData::removeRows(int first, int count)
 {
-	emit dataAboutToChange(this);
+	emit rowsAboutToBeDeleted(this, first, count);
 	remove(first, count);
-	emit dataChanged(this);
+	emit rowsDeleted(this, first, count);
 }
 
 void DoubleColumnData::setNumericFormat(char format) 

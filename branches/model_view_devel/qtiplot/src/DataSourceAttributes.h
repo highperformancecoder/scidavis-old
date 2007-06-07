@@ -30,9 +30,9 @@
 #ifndef DATASOURCEATTRIBUTES_H
 #define DATASOURCEATTRIBUTES_H
 
-#include "AbstractDataSource.h"
 #include "IntervalAttribute.h"
-#include <QStringList>
+#include <QObject>
+class AbstractDataSource;
 
 //! Base class for data sources supporting interval-based attributes
 /**
@@ -41,8 +41,10 @@
   well as a formula string that can be associated with a range of rows.
   */
 
-class DataSourceAttributes
+class DataSourceAttributes : public QObject
 {
+	Q_OBJECT
+
 public:
 	// \name Interval based information handling (reading functions)
 	//@{

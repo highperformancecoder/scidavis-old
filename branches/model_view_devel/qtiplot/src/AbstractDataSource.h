@@ -35,6 +35,7 @@
 #include <QList>
 class QString;
 #include "Interval.h"
+#include "DataSourceAttributes.h"
 
 
 //! Reading interface for column-based data
@@ -54,7 +55,9 @@ class QString;
   use qobject_cast or QObject::inherits().
 
   Any class implementing writing functions must emit the according 
-  signals. In some cases it will be necessary for a class using 
+  signals. These signal notify any object working with the
+  data source before and after a change of the data source.
+  In some cases it will be necessary for a class using 
   data sources to connect QObject::destroyed() also, to react 
   to a column's deletion, e.g. a filter's reaction to a 
   table deletion.
@@ -64,8 +67,10 @@ class AbstractDataSource : public QObject
 	Q_OBJECT
 
 public:
-	//! Destructor
-	virtual ~AbstractDataSource(){};
+	//! Ctor
+	AbstractDataSource() { d_attributes = 0; }
+	//! Dtor
+	virtual ~AbstractDataSource(){ if(d_attributes) delete d_attributes; }
 
 	//! Types of plot designations
 	enum PlotDesignation{
@@ -96,6 +101,21 @@ public:
 	virtual QString comment() const { return QString(); }
 	//! Return the column plot designation
 	virtual AbstractDataSource::PlotDesignation plotDesignation() const = 0;
+	//! Attach an object storing interval-based attributes
+	/**
+	 * The DataSourceAttribute object will automatically be deleted 
+	 * when it is replaced or the data source is destroyed.
+	 */
+	void attachAttributes(DataSourceAttributes * attr)
+	{
+		if(d_attributes)
+			delete d_attributes;
+		d_attributes = attr;
+		connect(this, SIGNAL(rowsInserted(AbstractDataSource*,int,int)), attr, SLOT(insertRows(AbstractDataSource*,int,int)) );
+		connect(this, SIGNAL(rowsDeleted(AbstractDataSource*,int,int)), attr, SLOT(deleteRows(AbstractDataSource*,int,int)) );
+	}
+	//! Return a pointer to the attribute object
+	DataSourceAttributes * attributes() const { return d_attributes; }
 	
 signals: 
 	//! Column label and/or comment will be changed
@@ -128,7 +148,6 @@ signals:
 	void plotDesignationChanged(AbstractDataSource * source); 
 	//! Data of the column will be changed
 	/**
-	 * This can also mean that the column will be resized.
 	 * 'source' is always the this pointer of the column that
 	 * emitted this signal. This way it's easier to use
 	 * one handler for lots of columns.
@@ -136,7 +155,6 @@ signals:
 	void dataAboutToChange(AbstractDataSource * source); 
 	//! Data of the column has changed
 	/**
-	 * This can also mean that the column was resized.
 	 * 'source' is always the this pointer of the column that
 	 * emitted this signal. This way it's easier to use
 	 * one handler for lots of columns.
@@ -185,6 +203,9 @@ signals:
 	 *	\param count the number of deleted rows
 	 */
 	void rowsDeleted(AbstractDataSource * source, int first, int count); 
+
+private:
+	DataSourceAttributes * d_attributes;
 
 };
 

@@ -105,37 +105,40 @@ void StringColumnData::setRowFromString(int row, const QString& string)
 
 void StringColumnData::setNumRows(int new_size)
 {
-	int count = new_size - numRows();
+	int old_size = numRows();
+	int count = new_size - old_size;
 	if(count == 0) return;
 
-	emit dataAboutToChange(this);
 	if(count > 0)
 	{
+		emit rowsAboutToBeInserted(this, old_size, count);
 		for(int i=0; i<count; i++)
 			*this << QString();
+		emit rowsInserted(this, old_size, count);
 	}
 	else // count < 0
 	{
+		emit rowsAboutToBeDeleted(this, new_size, -count);
 		for(int i=0; i>count; i--)
 			removeLast();
+		emit rowsDeleted(this, new_size, -count);
 	}
-	emit dataChanged(this);
 }
 
 void StringColumnData::insertEmptyRows(int before, int count)
 {
-	emit dataAboutToChange(this);
+	emit rowsAboutToBeInserted(this, before, count);
 	for(int i=0; i<count; i++)
 		insert(before, QString());
-	emit dataChanged(this);
+	emit rowsInserted(this, before, count);
 }
 
 void StringColumnData::removeRows(int first, int count)
 {
-	emit dataAboutToChange(this);
+	emit rowsAboutToBeDeleted(this, first, count);
 	for(int i=0; i<count; i++)
 		removeAt(first);
-	emit dataChanged(this);
+	emit rowsDeleted(this, first, count);
 }
 
 QString StringColumnData::textAt(int row) const
