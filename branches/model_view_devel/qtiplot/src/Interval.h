@@ -57,6 +57,8 @@ public:
 	static Interval merge(const Interval& a, const Interval& b);
 	//! Subtract an interval from another
 	static QList<Interval> subtract(const Interval& src_iv, const Interval& minus_iv);
+	//! Split an interval into two
+	static QList<Interval> split(const Interval& i, int before);
 	//! Merge an interval into a list
 	/*
 	 * This function merges all intervals in the list until none of them

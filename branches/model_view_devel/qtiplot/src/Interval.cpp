@@ -32,15 +32,11 @@
 void Interval::setStart(int start) 
 {
 	d_start = start;
-	if(d_start > d_end && d_end != -1)
-		qSwap(d_start, d_end);
 }
 
 void Interval::setEnd(int end) 
 {
 	d_end = end;
-	if(d_start > d_end && d_start != -1)
-		qSwap(d_start, d_end);
 }
 
 bool Interval::touches(const Interval& other) const 
@@ -115,3 +111,24 @@ void Interval::subtractIntervalFromList(QList<Interval> * list, Interval i)
 			}
 		}
 }
+
+
+QList<Interval> Interval::split(const Interval& i, int before)
+{
+	QList<Interval> list;
+	if( before < i.start() || before > i.end() )
+	{
+		list.append(i);
+	}
+	else
+	{
+		Interval left(i.start(), before-1);
+		Interval right(before, i.end());
+		if(left.isValid())
+			list.append(left);
+		if(right.isValid())
+			list.append(right);
+	}
+	return list;
+}
+
