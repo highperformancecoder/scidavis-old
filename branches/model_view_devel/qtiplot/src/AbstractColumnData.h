@@ -31,6 +31,7 @@
 #define ABSTRACTCOLUMNDATA_H
 
 #include "AbstractDataSource.h"
+#include "IntervalAttribute.h"
 class QString;
 
 //! Writing interface for column-based data
@@ -56,6 +57,9 @@ class QString;
   this one will store a vector with entries of one certain data type, 
   e.g. double, QString, or QDateTime. To determine the data type of a 
   class derived from this, use qobject_cast or QObject::inherits().
+
+  This class also implements functions to assign formulas to
+  intervals of rows.
   */
 class AbstractColumnData : public QObject
 {
@@ -90,6 +94,59 @@ public:
 	//! This must be called before the column is replaced by another
 	virtual void notifyReplacement(AbstractDataSource * replacement) = 0;
 
+	//! \name IntervalAttribute related functions
+	//@{
+	//! Clear all validity information
+	virtual void clearValidity() = 0;
+	//! Clear all selection information
+	virtual void clearSelections() = 0;
+	//! Clear all masking information
+	virtual void clearMasks() = 0;
+	//! Set an interval valid or invalid
+	/**
+	 * \param i the interval
+	 * \param valid true: set valid, false: set invalid
+	 */ 
+	virtual void setValid(Interval i, bool valid = true) = 0;
+	//! Select of deselect a certain interval
+	/**
+	 * \param i the interval
+	 * \param select true: select, false: deselect
+	 */ 
+	virtual void setSelected(Interval i, bool select = true) = 0;
+	//! Set an interval masked
+	/**
+	 * \param i the interval
+	 * \param mask true: mask, false: unmask
+	 */ 
+	virtual void setMasked(Interval i, bool mask = true) = 0;
+	//@}
+	
+	//! \name Formula related functions
+	//@{
+	//! Return the formula associated with row 'row' 	 
+	QString formula(int row) const { return d_formulas.value(row); }
+	//! Set a formula string for an interval of rows
+	void setFormula(Interval i, QString formula) { d_formulas.setValue(i, formula); }
+	//! Return the intervals that have associated formulas
+	/**
+	 * This can be used to make a list of formulas with their intervals.
+	 * Here is some example code:
+	 *
+	 * <code>
+	 * QStringList list;<br>
+	 * QList<Intervals> ivs = my_column.formulaIntervals();<br>
+	 * foreach(Interval iv, ivs)<br>
+	 * &nbsp;&nbsp;list << QString(iv.toString() + ": " + my_column.formula(iv.start()));<br>
+	 * </code>
+	 */
+	QList<Interval> formulaIntervals() const { return d_formulas.intervals(); }
+	//! Clear all formulas
+	void clearFormulas();
+	//@}
+
+protected:
+	IntervalAttribute<QString> d_formulas;
 };
 
 #endif

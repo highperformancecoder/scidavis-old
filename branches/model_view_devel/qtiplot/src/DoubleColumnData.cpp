@@ -118,12 +118,20 @@ void DoubleColumnData::setNumRows(int new_size)
 	{
 		emit rowsAboutToBeInserted(this, old_size, count);
 		QVector<double>::resize(new_size);
+		d_validity.insertRows(old_size, count);
+		d_selection.insertRows(old_size, count);
+		d_masking.insertRows(old_size, count);
+		d_formulas.insertRows(old_size, count);
 		emit rowsInserted(this, old_size, count);
 	}
 	else // count < 0
 	{
 		emit rowsAboutToBeDeleted(this, new_size, -count);
 		QVector<double>::resize(new_size);
+		d_validity.removeRows(new_size, -count);
+		d_selection.removeRows(new_size, -count);
+		d_masking.removeRows(new_size, -count);
+		d_formulas.removeRows(new_size, -count);
 		emit rowsDeleted(this, new_size, -count);
 	}
 }
@@ -132,6 +140,10 @@ void DoubleColumnData::insertEmptyRows(int before, int count)
 {
 	emit rowsAboutToBeInserted(this, before, count);
 	insert(before, count, 0.0);
+	d_validity.insertRows(before, count);
+	d_selection.insertRows(before, count);
+	d_masking.insertRows(before, count);
+	d_formulas.insertRows(before, count);
 	emit rowsInserted(this, before, count);
 }
 
@@ -139,6 +151,10 @@ void DoubleColumnData::removeRows(int first, int count)
 {
 	emit rowsAboutToBeDeleted(this, first, count);
 	remove(first, count);
+	d_validity.removeRows(first, count);
+	d_selection.removeRows(first, count);
+	d_masking.removeRows(first, count);
+	d_formulas.removeRows(first, count);
 	emit rowsDeleted(this, first, count);
 }
 

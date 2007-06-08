@@ -30,8 +30,8 @@
 #ifndef INTERVAL_H
 #define INTERVAL_H
 
-// TODO: remove this after testing
-#include <QtDebug>
+#include <QList>
+#include <QString>
 
 //! Auxiliary class for interval based data
 /**
@@ -54,6 +54,7 @@ public:
 	bool contains(const Interval& other) const { return ( d_start <= other.start() && d_end >= other.end() ); }
 	bool contains(int value) const { return ( d_start <= value && d_end >= value ); }
 	bool intersects(const Interval& other) const { return ( contains(other.start()) || contains(other.end()) ); }
+	//! Returns true if no gap is between to intervals
 	bool touches(const Interval& other) const;
 	void translate(int offset) { d_start += offset; d_end += offset; }
 	bool operator==(const Interval& other) const { return ( d_start == other.start() && d_end == other.end() ); }
@@ -75,12 +76,9 @@ public:
 	 * Remark: This may increase or decrease the list size.
 	 */
 	static void subtractIntervalFromList(QList<Interval> * list, Interval i);
+	//! Return a string in the format '[start,end]'
+	QString toString() const { return "[" + QString::number(d_start) + "," + QString::number(d_end) + "]"; }
 
-// TODO: remove this after testing
-	void print() const
-	{
-		qDebug() << "[" << d_start << "," << d_end << "]";
-	}
 private:
 	//! Interval start
 	int d_start; 

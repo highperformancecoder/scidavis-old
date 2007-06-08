@@ -114,7 +114,90 @@ public:
 	virtual const double * constDataPointer() const;
 	//@}
 
+	//! \name IntervalAttribute related reading functions
+	//@{
+	//! Return whether a certain row contains a valid value 	 
+	virtual bool isValid(int row) const { return d_validity.isSet(row); } 	 
+	//! Return whether a certain interval of rows contains only valid values 	 
+	virtual bool isValid(Interval i) const { return d_validity.isSet(i); } 	 
+	//! Return all intervals of valid rows
+	virtual QList<Interval> validIntervals() const { return d_validity.intervals(); } 	 
+	//! Return whether a certain row is selected 	 
+	virtual bool isSelected(int row) const { return d_selection.isSet(row); } 	 
+	//! Return whether a certain interval of rows is fully selected
+	virtual bool isSelected(Interval i) const { return d_selection.isSet(i); } 	 
+	//! Return all selected intervals 	 
+	virtual QList<Interval> selectedIntervals() const { return d_selection.intervals(); } 	 
+	//! Return whether a certain row is masked 	 
+	virtual bool isMasked(int row) const { return d_masking.isSet(row); } 	 
+	//! Return whether a certain interval of rows rows is fully masked 	 
+	virtual bool isMasked(Interval i) const { return d_masking.isSet(i); }
+	//! Return all intervals of masked rows
+	virtual QList<Interval> maskedIntervals() const { return d_masking.intervals(); } 	 
+	//@}
+	
+	//! \name IntervalAttribute related writing functions
+	//@{
+	//! Clear all validity information
+	virtual void clearValidity()
+	{
+		emit validityAboutToChange(this);	
+		d_validity.clear();
+		emit validityChanged(this);	
+	}
+	//! Clear all selection information
+	virtual void clearSelections()
+	{
+		emit selectionAboutToChange(this);	
+		d_selection.clear();
+		emit selectionChanged(this);	
+	}
+	//! Clear all masking information
+	virtual void clearMasks()
+	{
+		emit maskingAboutToChange(this);	
+		d_masking.clear();
+		emit maskingChanged(this);	
+	}
+	//! Set an interval valid or invalid
+	/**
+	 * \param i the interval
+	 * \param valid true: set valid, false: set invalid
+	 */ 
+	virtual void setValid(Interval i, bool valid = true)
+	{
+		emit validityAboutToChange(this);	
+		d_validity.setValue(i, valid);
+		emit validityChanged(this);	
+	}
+	//! Select of deselect a certain interval
+	/**
+	 * \param i the interval
+	 * \param select true: select, false: deselect
+	 */ 
+	virtual void setSelected(Interval i, bool select = true)
+	{
+		emit selectionAboutToChange(this);	
+		d_selection.setValue(i, select);
+		emit selectionChanged(this);	
+	}
+	//! Set an interval masked
+	/**
+	 * \param i the interval
+	 * \param mask true: mask, false: unmask
+	 */ 
+	virtual void setMasked(Interval i, bool mask = true)
+	{
+		emit maskingAboutToChange(this);	
+		d_masking.setValue(i, mask);
+		emit maskingChanged(this);	
+	}
+	//@}
+	
 protected:
+	IntervalAttribute<bool> d_validity;
+	IntervalAttribute<bool> d_selection;
+	IntervalAttribute<bool> d_masking;
 	//! Format character as in QString::number 
 	char d_numeric_format;
 	//! Display digits or precision as in QString::number  

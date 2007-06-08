@@ -149,6 +149,10 @@ void DateTimeColumnData::setNumRows(int new_size)
 		emit rowsAboutToBeInserted(this, old_size, count);
 		for(int i=0; i<count; i++)
 			*this << QDateTime();
+		d_validity.insertRows(old_size, count);
+		d_selection.insertRows(old_size, count);
+		d_masking.insertRows(old_size, count);
+		d_formulas.insertRows(old_size, count);
 		emit rowsInserted(this, old_size, count);
 	}
 	else // count < 0
@@ -156,6 +160,10 @@ void DateTimeColumnData::setNumRows(int new_size)
 		emit rowsAboutToBeDeleted(this, new_size, -count);
 		for(int i=0; i>count; i--)
 			removeLast();
+		d_validity.removeRows(new_size, -count);
+		d_selection.removeRows(new_size, -count);
+		d_masking.removeRows(new_size, -count);
+		d_formulas.removeRows(new_size, -count);
 		emit rowsDeleted(this, new_size, -count);
 	}
 }
@@ -165,6 +173,10 @@ void DateTimeColumnData::insertEmptyRows(int before, int count)
 	emit rowsAboutToBeInserted(this, before, count);
 	for(int i=0; i<count; i++)
 		insert(before, QDateTime());
+	d_validity.insertRows(before, count);
+	d_selection.insertRows(before, count);
+	d_masking.insertRows(before, count);
+	d_formulas.insertRows(before, count);
 	emit rowsInserted(this, before, count);
 }
 
@@ -173,6 +185,10 @@ void DateTimeColumnData::removeRows(int first, int count)
 	emit rowsAboutToBeDeleted(this, first, count);
 	for(int i=0; i<count; i++)
 		removeAt(first);
+	d_validity.removeRows(first, count);
+	d_selection.removeRows(first, count);
+	d_masking.removeRows(first, count);
+	d_formulas.removeRows(first, count);
 	emit rowsDeleted(this, first, count);
 }
 

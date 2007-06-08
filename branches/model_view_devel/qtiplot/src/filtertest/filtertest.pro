@@ -3,18 +3,17 @@ TARGET =
 DEPENDPATH += . ..
 INCLUDEPATH += . ..
 CONFIG += debug
-LIBS += -lgsl
+LIBS         += -L /usr/lib -lgsl -lgslcblas
+#LIBS += -lgsl
 
 HEADERS += AbstractColumnData.h \
-           DateColumnData.h \
+           DateTimeColumnData.h \
            DoubleColumnData.h \
            StringColumnData.h \
-           TimeColumnData.h \
 			  AbstractDataSource.h \
-			  AbstractDateDataSource.h \
+			  AbstractDateTimeDataSource.h \
 			  AbstractDoubleDataSource.h \
 			  AbstractStringDataSource.h \
-			  AbstractTimeDataSource.h \
 			  AbstractFilter.h \
 			  StatisticsFilter.h \
 			  AbstractDoubleSimpleFilter.h \
@@ -26,8 +25,7 @@ HEADERS += AbstractColumnData.h \
 
 SOURCES += StringColumnData.cpp \
 			  DoubleColumnData.cpp \
-			  TimeColumnData.cpp \
-			  DateColumnData.cpp \
+			  DateTimeColumnData.cpp \
 			  AbstractFilter.cpp \
 			  StatisticsFilter.cpp \
 #			  TableModel.cpp \

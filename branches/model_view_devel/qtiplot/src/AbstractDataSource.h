@@ -68,9 +68,9 @@ class AbstractDataSource : public QObject
 
 public:
 	//! Ctor
-	AbstractDataSource() { d_attributes = 0; }
+	AbstractDataSource() {}
 	//! Dtor
-	virtual ~AbstractDataSource(){ if(d_attributes) delete d_attributes; }
+	virtual ~AbstractDataSource() {}
 
 	//! Types of plot designations
 	enum PlotDesignation{
@@ -101,22 +101,29 @@ public:
 	virtual QString comment() const { return QString(); }
 	//! Return the column plot designation
 	virtual AbstractDataSource::PlotDesignation plotDesignation() const = 0;
-	//! Attach an object storing interval-based attributes
-	/**
-	 * The DataSourceAttribute object will automatically be deleted 
-	 * when it is replaced or the data source is destroyed.
-	 */
-	void attachAttributes(DataSourceAttributes * attr)
-	{
-		if(d_attributes)
-			delete d_attributes;
-		d_attributes = attr;
-		connect(this, SIGNAL(rowsInserted(AbstractDataSource*,int,int)), attr, SLOT(insertRows(AbstractDataSource*,int,int)) );
-		connect(this, SIGNAL(rowsDeleted(AbstractDataSource*,int,int)), attr, SLOT(deleteRows(AbstractDataSource*,int,int)) );
-	}
-	//! Return a pointer to the attribute object
-	DataSourceAttributes * attributes() const { return d_attributes; }
 	
+	//! \name IntervalAttribute related functions
+	//@{
+	//! Return whether a certain row contains a valid value 	 
+	virtual bool isValid(int row) const { return ( row >= 0 && row < numRows() ); } 	 
+	//! Return whether a certain interval of rows contains only valid values 	 
+	virtual bool isValid(Interval i) const { return Interval(0, numRows()-1).contains(i); } 	 
+	//! Return all intervals of valid rows
+	virtual QList<Interval> validIntervals() const { return QList<Interval>(); } 	 
+	//! Return whether a certain row is selected 	 
+	virtual bool isSelected(int row) const { Q_UNUSED(row); return false; } 	 
+	//! Return whether a certain interval of rows is fully selected
+	virtual bool isSelected(Interval i) const { Q_UNUSED(i); return false; } 	 
+	//! Return all selected intervals 	 
+	virtual QList<Interval> selectedIntervals() const { return QList<Interval>(); } 	 
+	//! Return whether a certain row is masked 	 
+	virtual bool isMasked(int row) const { Q_UNUSED(row); return false; } 	 
+	//! Return whether a certain interval of rows rows is fully masked 	 
+	virtual bool isMasked(Interval i) const { Q_UNUSED(i); return false; }
+	//! Return all intervals of masked rows
+	virtual QList<Interval> maskedIntervals() const { return QList<Interval>(); } 	 
+	//@}
+
 signals: 
 	//! Column label and/or comment will be changed
 	/**
@@ -203,9 +210,18 @@ signals:
 	 *	\param count the number of deleted rows
 	 */
 	void rowsDeleted(AbstractDataSource * source, int first, int count); 
-
-private:
-	DataSourceAttributes * d_attributes;
+	//! IntervalAttribute related signal
+	void validityAboutToChange(AbstractDataSource * source); 
+	//! IntervalAttribute related signal
+	void validityChanged(AbstractDataSource * source); 
+	//! IntervalAttribute related signal
+	void selectionAboutToChange(AbstractDataSource * source); 
+	//! IntervalAttribute related signal
+	void selectionChanged(AbstractDataSource * source); 
+	//! IntervalAttribute related signal
+	void maskingAboutToChange(AbstractDataSource * source); 
+	//! IntervalAttribute related signal
+	void maskingChanged(AbstractDataSource * source); 
 
 };
 

@@ -18,7 +18,6 @@ HEADERS += AbstractColumnData.h \
 		   AbstractDateTimeDataSource.h \
 		   AbstractDoubleDataSource.h \
 		   AbstractStringDataSource.h \
-		   DataSourceAttributes.h \
 		   AbstractFilter.h \
 		   IntervalAttribute.h \
 		   Interval.h
@@ -30,6 +29,5 @@ SOURCES += StringColumnData.cpp \
            DateTimeColumnData.cpp \
 		   DoubleColumnData.cpp \
 		   Interval.cpp \
-		   DataSourceAttributes.cpp \
 		   AbstractFilter.cpp 
 

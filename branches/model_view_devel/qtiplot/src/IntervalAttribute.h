@@ -119,7 +119,7 @@ template<class T> class IntervalAttribute
 			
 		}
 
-		void deleteRows(int first, int count)
+		void removeRows(int first, int count)
 		{
 			QList<Interval> temp_list;
 			int c,cc;
@@ -242,7 +242,7 @@ template<> class IntervalAttribute<bool>
 			
 		}
 
-		void deleteRows(int first, int count)
+		void removeRows(int first, int count)
 		{
 			int c;
 			// first: remove the relevant rows from all intervals
