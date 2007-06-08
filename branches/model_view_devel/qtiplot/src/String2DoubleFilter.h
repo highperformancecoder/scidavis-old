@@ -1,11 +1,11 @@
 /***************************************************************************
-    File                 : TruncatedDoubleDataSource.h
+    File                 : String2DoubleFilter.h
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
-    Description          : A simple filter which truncates its (single) input.
-
+    Description          : Locale-aware converter QString -> double.
+                           
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,55 +26,37 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef TRUNCATED_DOUBLE_DATA_SOURCE
-#define TRUNCATED_DOUBLE_DATA_SOURCE
+#ifndef STRING2DOUBLE_FILTER_H
+#define STRING2DOUBLE_FILTER_H
 
-#include "AbstractDoubleSimpleFilter.h"
+#include "AbstractSimpleFilter.h"
+#include "AbstractStringDataSource.h"
+#include <QLocale>
 
-/**
- * \brief A simple filter which truncates its (single) input.
- *
- * After connecting a data source to its input port, you have to tell AbstractDoubleDataSource
- * which (continuous) subset of the input to return by calling setStartSkip() and setNumRows().
- */
-class TruncatedDoubleDataSource : public AbstractDoubleSimpleFilter
+//! Locale-aware converter QString -> double.
+class String2DoubleFilter : public AbstractSimpleFilter<double>
 {
 	Q_OBJECT
 
-// specific to this class
 	public:
-		TruncatedDoubleDataSource() : d_start(0), d_num_rows(0) {}
-		bool setStartSkip(int n) {
-			if (!d_inputs.value(0) || n<0 || n>d_inputs[0]->numRows()) return false;
-			d_start = n;
-			return true;
-		}
-		bool setNumRows(int n) {
-			if (!d_inputs.value(0) || n<0 || d_start+n>=d_inputs[0]->numRows()) return false;
-			d_num_rows = n;
-			return true;
-		}
-	private:
-		int d_start, d_num_rows;
-
 // simplified filter interface
-	public:
+		//! Using typed ports: only string inputs are accepted.
+		virtual bool input(int port, AbstractDataSource *source) {
+			if (!source->inherits("AbstractStringDataSource"))
+				return false;
+			return AbstractSimpleFilter<double>::input(port, source);
+		}
 		virtual QString label() const {
-			return d_inputs.value(0) ?
-				QString("%1 [%2:%3]").arg(d_inputs.at(0)->label()).arg(d_start+1).arg(d_start+d_num_rows) :
-				QString();
+			return d_inputs.value(0) ? d_inputs.at(0)->label() : QString();
 		}
-		virtual int numRows() const { return d_num_rows; }
+		virtual int numRows() const {
+			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
+		}
 		virtual double valueAt(int row) const {
-			if (row<0 || row>=d_num_rows) return 0;
-			return d_inputs[0]->valueAt(d_start + row);
-		}
-		virtual void inputDataChanged(AbstractDataSource* source)  {
-			if (!d_inputs.value(0) || d_start+d_num_rows>=d_inputs[0]->numRows())
-				d_num_rows = 0;
-			AbstractDoubleSimpleFilter::inputDataChanged(source);
+			if (!d_inputs.value(0) || row >= d_inputs.at(0)->numRows()) return 0;
+			return QLocale().toDouble(d_inputs.at(0)->textAt(row));
 		}
 };
 
-#endif // ifndef TRUNCATED_DOUBLE_DATA_SOURCE
+#endif // ifndef STRING2DOUBLE_FILTER_H
 

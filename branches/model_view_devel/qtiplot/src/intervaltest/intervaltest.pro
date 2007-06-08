@@ -28,6 +28,5 @@ SOURCES += main.cpp
 SOURCES += StringColumnData.cpp \
            DateTimeColumnData.cpp \
 		   DoubleColumnData.cpp \
-		   Interval.cpp \
 		   AbstractFilter.cpp 
 

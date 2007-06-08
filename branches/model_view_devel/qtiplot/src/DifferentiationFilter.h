@@ -30,7 +30,7 @@
 #define DIFFERENTIATION_FILTER_H
 
 #include "AbstractFilter.h"
-#include "TruncatedDoubleDataSource.h"
+#include "TruncationFilter.h"
 
 /**
  * \brief Calculates numerical derivatives.
@@ -51,7 +51,7 @@ class DifferentiationFilter : public AbstractDoubleDataSource, public AbstractFi
 		virtual int numOutputs() const { return 2; }
 		virtual AbstractDataSource* output(int port) const {
 			switch(port) {
-				case 0: return const_cast<TruncatedDoubleDataSource*>(&d_x_truncator);
+				case 0: return const_cast<TruncationFilter<double>*>(&d_x_truncator);
 				case 1: return const_cast<DifferentiationFilter*>(this);
 				default: return 0;
 			}
@@ -97,7 +97,7 @@ class DifferentiationFilter : public AbstractDoubleDataSource, public AbstractFi
 
 // specific to this class
 	private:
-		TruncatedDoubleDataSource d_x_truncator;
+		TruncationFilter<double> d_x_truncator;
 };
 
 #endif // ifndef DIFFERENTIATION_FILTER_H

@@ -64,7 +64,7 @@ class StatisticsFilter : public AbstractFilter {
 		//! The values being cached for each input column provided.
 		struct Statistics {
 			int first_valid_row, last_valid_row, min_index, max_index, N;
-			double min, max, mean, sigma, variance;
+			double min, max, mean, variance;
 		};
 		enum StatItem { Label, Rows, Mean, Sigma, Variance, Sum, iMax, Max, iMin, Min, N };
 		//! Implements the double-typed output ports.

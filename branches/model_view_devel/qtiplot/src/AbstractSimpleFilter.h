@@ -1,11 +1,11 @@
 /***************************************************************************
-    File                 : AbstractDoubleSimpleFilter.h
+    File                 : AbstractSimpleFilter.h
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
     Description          : Simplified filter interface for filters with
-                           only one double-typed output port.
+                           only one output port.
 
  ***************************************************************************/
 
@@ -27,14 +27,21 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef ABSTRACT_DOUBLE_SIMPLE_FILTER
-#define ABSTRACT_DOUBLE_SIMPLE_FILTER
+#ifndef ABSTRACT_SIMPLE_FILTER
+#define ABSTRACT_SIMPLE_FILTER
 
 #include "AbstractFilter.h"
 #include "AbstractDoubleDataSource.h"
+#include "AbstractStringDataSource.h"
+#include "AbstractDateTimeDataSource.h"
+
+template<class T> class AbstractDataSourceTemplate {};
+template<> class AbstractDataSourceTemplate<double> : public AbstractDoubleDataSource {};
+template<> class AbstractDataSourceTemplate<QString> : public AbstractStringDataSource {};
+template<> class AbstractDataSourceTemplate<QDateTime> : public AbstractDateTimeDataSource {};
 
 /**
- * \brief Simplified filter interface for filters with only one double-typed output port.
+ * \brief Simplified filter interface for filters with only one output port.
  *
  * This class is only meant to simplify implementation of a restricted subtype of filter.
  * It should not be used as type for variables, which should always use either
@@ -43,19 +50,24 @@
  * The trick here is that, in a sense, the filter is its own output port. This means you
  * can implement a complete filter in only one class and don't have to coordinate data
  * transfer between a filter class and a data source class.
+ *
+ * For the template argument, only double, QString and QDateTime are supported.
  */
-class AbstractDoubleSimpleFilter : public AbstractDoubleDataSource, public AbstractFilter
+template<class T> class AbstractSimpleFilter : public AbstractDataSourceTemplate<T>, public AbstractFilter
 {
-	Q_OBJECT
 	public:
 		//! Default to one input port (it's safe to override this).
 		virtual int numInputs() const { return 1; }
 		//! We manage only one output port (don't override unless you really know what you are doing).
 		virtual int numOutputs() const { return 1; }
 		//! Return a pointer to myself on port 0.
-		virtual AbstractDataSource* output(int port) const { return port == 0 ? const_cast<AbstractDoubleSimpleFilter*>(this) : 0; }
+		virtual AbstractDataSource* output(int port) const { return port == 0 ? const_cast<AbstractSimpleFilter<T>*>(this) : 0; }
 		//! Default to plot designation of input port 0 (safe to override).
-		virtual PlotDesignation plotDesignation() const { return d_inputs.value(0) ? d_inputs[0]->plotDesignation() : noDesignation; }
+		virtual AbstractDataSource::PlotDesignation plotDesignation() const {
+			return d_inputs.value(0) ?
+				d_inputs[0]->plotDesignation() :
+				AbstractDataSource::noDesignation;
+		}
 
 	protected:
 		virtual void inputDescriptionAboutToChange(AbstractDataSource*) { emit descriptionAboutToChange(this); }
@@ -66,5 +78,5 @@ class AbstractDoubleSimpleFilter : public AbstractDoubleDataSource, public Abstr
 		virtual void inputDataChanged(AbstractDataSource*) { emit dataChanged(this); }
 };
 
-#endif // ifndef ABSTRACT_DOUBLE_SIMPLE_FILTER
+#endif // ifndef ABSTRACT_SIMPLE_FILTER
 

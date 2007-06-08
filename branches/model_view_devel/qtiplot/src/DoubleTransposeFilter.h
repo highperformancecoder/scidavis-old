@@ -40,8 +40,6 @@
  * number of rows of the inputs (shorter ones being padded with zeroes), or non-greedy,
  * meaning that the number of output ports equals the smallest number of rows of the inputs
  * (loosing some of the data).
- *
- * TODO: in greedy mode, padding cells should be empty, not zero
  */
 class DoubleTransposeFilter : public AbstractFilter {
 	public:
@@ -97,9 +95,12 @@ class DoubleTransposeFilter : public AbstractFilter {
 				OutputColumn(DoubleTransposeFilter *parent, int row) : d_parent(parent), d_row(row) {}
 				virtual int numRows() const { return d_parent->d_inputs.size(); }
 				virtual double valueAt(int col) const {
-					return d_parent->d_inputs.value(col) && d_row < d_parent->d_inputs.at(col)->numRows() ?
+					return isRowValid(col) ?
 						d_parent->d_inputs.at(col)->valueAt(d_row) :
 						0;
+				}
+				virtual bool isRowValid(int col) const {
+					return d_parent->d_inputs.value(col) && d_row < d_parent->d_inputs.at(col)->numRows();
 				}
 				virtual QString label() const { return QString::number(d_row + 1); }
 				virtual PlotDesignation plotDesignation() const { return noDesignation; }

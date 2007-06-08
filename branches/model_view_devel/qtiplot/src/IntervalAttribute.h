@@ -37,13 +37,13 @@
 template<class T> class IntervalAttribute
 {
 	public:
-		void setValue(Interval i, T value) 
+		void setValue(Interval<> i, T value) 
 		{
 			// first: subtract the new interval from all others
-			QList<Interval> temp_list;
+			QList<Interval<> > temp_list;
 			for(int c=0; c<d_intervals.size(); c++)
 			{
-				temp_list = Interval::subtract(d_intervals.at(c), i);
+				temp_list = Interval<>::subtract(d_intervals.at(c), i);
 				if(temp_list.isEmpty())
 				{
 					d_intervals.removeAt(c);
@@ -66,7 +66,7 @@ template<class T> class IntervalAttribute
 				if( d_intervals.at(c).touches(i) &&
 						d_values.at(c) == value )
 				{
-					d_intervals.replace(c, Interval::merge(d_intervals.at(c), i));
+					d_intervals.replace(c, Interval<>::merge(d_intervals.at(c), i));
 					return;
 				}
 			}
@@ -78,7 +78,7 @@ template<class T> class IntervalAttribute
 		// overloaded for convenience
 		void setValue(int row, T value) 
 		{
-			setValue(Interval(row, row), value);
+			setValue(Interval<>(row, row), value);
 		}
 
 		T value(int row) const 
@@ -93,14 +93,14 @@ template<class T> class IntervalAttribute
 
 		void insertRows(int before, int count)
 		{
-			QList<Interval> temp_list;
+			QList<Interval<> > temp_list;
 			int c;
 			// first: split all intervals that contain 'before'
 			for(c=0; c<d_intervals.size(); c++)
 			{
 				if(d_intervals.at(c).contains(before))
 				{
-					temp_list = Interval::split(d_intervals.at(c), before);
+					temp_list = Interval<>::split(d_intervals.at(c), before);
 					d_intervals.replace(c, temp_list.at(0));
 					if(temp_list.size()>1)
 					{
@@ -121,13 +121,13 @@ template<class T> class IntervalAttribute
 
 		void removeRows(int first, int count)
 		{
-			QList<Interval> temp_list;
+			QList<Interval<> > temp_list;
 			int c,cc;
-			Interval i(first, first+count-1);
+			Interval<> i(first, first+count-1);
 			// first: remove the relevant rows from all intervals
 			for(int c=0; c<d_intervals.size(); c++)
 			{
-				temp_list = Interval::subtract(d_intervals.at(c), i);
+				temp_list = Interval<>::subtract(d_intervals.at(c), i);
 				if(temp_list.isEmpty())
 				{
 					d_intervals.removeAt(c);
@@ -151,7 +151,7 @@ template<class T> class IntervalAttribute
 			}
 			// third: merge as many intervals as possible
 			QList<T> values_copy = d_values;
-			QList<Interval> intervals_copy = d_intervals;
+			QList<Interval<> > intervals_copy = d_intervals;
 			d_values.clear();
 			d_intervals.clear();
 			for(c=0; c<intervals_copy.size(); c++)
@@ -163,7 +163,7 @@ template<class T> class IntervalAttribute
 					if( d_intervals.at(cc).touches(i) &&
 							d_values.at(cc) == value )
 					{
-						d_intervals.replace(c, Interval::merge(d_intervals.at(cc),i));
+						d_intervals.replace(c, Interval<>::merge(d_intervals.at(cc),i));
 						return;
 					}
 				}
@@ -175,43 +175,43 @@ template<class T> class IntervalAttribute
 
 		void clear() { d_values.clear(); d_intervals.clear(); }
 
-		QList<Interval> intervals() const { return d_intervals; }
+		QList<Interval<> > intervals() const { return d_intervals; }
 		QList<T> values() const { return d_values; }
 
 	private:
 		QList<T> d_values;
-		QList<Interval> d_intervals;
+		QList<Interval<> > d_intervals;
 };
 
 //! A class representing an interval-based attribute (bool version)
 template<> class IntervalAttribute<bool>
 {
 	public:
-		void setValue(Interval i, bool value=true) 
+		void setValue(Interval<> i, bool value=true) 
 		{
 			if(value) 
 			{
-				foreach(Interval iv, d_intervals)
+				foreach(Interval<> iv, d_intervals)
 					if(iv.contains(i)) 
 						return;
 
-				Interval::mergeIntervalIntoList(&d_intervals, i);
+				Interval<>::mergeIntervalIntoList(&d_intervals, i);
 			} else { // unset
-				Interval::subtractIntervalFromList(&d_intervals, i);
+				Interval<>::subtractIntervalFromList(&d_intervals, i);
 			}
 		}
 
 		bool isSet(int row) const 
 		{
-			foreach(Interval iv, d_intervals)
+			foreach(Interval<> iv, d_intervals)
 				if(iv.contains(row))
 					return true;
 			return false;
 		}
 
-		bool isSet(Interval i) const 
+		bool isSet(Interval<> i) const 
 		{
-			foreach(Interval iv, d_intervals)
+			foreach(Interval<> iv, d_intervals)
 				if(iv.contains(i))
 					return true;
 			return false;
@@ -219,14 +219,14 @@ template<> class IntervalAttribute<bool>
 
 		void insertRows(int before, int count)
 		{
-			QList<Interval> temp_list;
+			QList<Interval<> > temp_list;
 			int c;
 			// first: split all intervals that contain 'before'
 			for(c=0; c<d_intervals.size(); c++)
 			{
 				if(d_intervals.at(c).contains(before))
 				{
-					temp_list = Interval::split(d_intervals.at(c), before);
+					temp_list = Interval<>::split(d_intervals.at(c), before);
 					d_intervals.replace(c, temp_list.at(0));
 					if(temp_list.size()>1)
 						d_intervals.insert(c++, temp_list.at(1));
@@ -246,7 +246,7 @@ template<> class IntervalAttribute<bool>
 		{
 			int c;
 			// first: remove the relevant rows from all intervals
-			Interval::subtractIntervalFromList(&d_intervals, Interval(first, first+count-1));
+			Interval<>::subtractIntervalFromList(&d_intervals, Interval<>(first, first+count-1));
 			// second: translate all intervals that start at 'first+count' or later
 			for(c=0; c<d_intervals.size(); c++)
 			{
@@ -256,20 +256,20 @@ template<> class IntervalAttribute<bool>
 			// third: merge as many intervals as possible
 			for(c=d_intervals.size()-1; c>=0; c--)
 			{
-				Interval iv = d_intervals.takeAt(c);
+				Interval<> iv = d_intervals.takeAt(c);
 				int size_before = d_intervals.size();
-				Interval::mergeIntervalIntoList(&d_intervals, iv);
+				Interval<>::mergeIntervalIntoList(&d_intervals, iv);
 				if(size_before == d_intervals.size()) // merge successful
 					c--;
 			}
 		}
 
-		QList<Interval> intervals() const { return d_intervals; }
+		QList<Interval<> > intervals() const { return d_intervals; }
 
 		void clear() { d_intervals.clear(); }
 
 	private:
-		QList<Interval> d_intervals;
+		QList<Interval<> > d_intervals;
 };
 
 #endif

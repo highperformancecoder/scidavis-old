@@ -34,7 +34,6 @@
 #include <QtAlgorithms>
 #include <QList>
 class QString;
-#include "Interval.h"
 #include "DataSourceAttributes.h"
 
 
@@ -107,21 +106,21 @@ public:
 	//! Return whether a certain row contains a valid value 	 
 	virtual bool isValid(int row) const { return ( row >= 0 && row < numRows() ); } 	 
 	//! Return whether a certain interval of rows contains only valid values 	 
-	virtual bool isValid(Interval i) const { return Interval(0, numRows()-1).contains(i); } 	 
+	virtual bool isValid(Interval<> i) const { return Interval<>(0, numRows()-1).contains(i); } 	 
 	//! Return all intervals of valid rows
-	virtual QList<Interval> validIntervals() const { return QList<Interval>(); } 	 
+	virtual QList<Interval<> > validIntervals() const { return QList<Interval<> >(); } 	 
 	//! Return whether a certain row is selected 	 
 	virtual bool isSelected(int row) const { Q_UNUSED(row); return false; } 	 
 	//! Return whether a certain interval of rows is fully selected
-	virtual bool isSelected(Interval i) const { Q_UNUSED(i); return false; } 	 
+	virtual bool isSelected(Interval<> i) const { Q_UNUSED(i); return false; } 	 
 	//! Return all selected intervals 	 
-	virtual QList<Interval> selectedIntervals() const { return QList<Interval>(); } 	 
+	virtual QList<Interval<> > selectedIntervals() const { return QList<Interval<> >(); } 	 
 	//! Return whether a certain row is masked 	 
 	virtual bool isMasked(int row) const { Q_UNUSED(row); return false; } 	 
 	//! Return whether a certain interval of rows rows is fully masked 	 
-	virtual bool isMasked(Interval i) const { Q_UNUSED(i); return false; }
+	virtual bool isMasked(Interval<> i) const { Q_UNUSED(i); return false; }
 	//! Return all intervals of masked rows
-	virtual QList<Interval> maskedIntervals() const { return QList<Interval>(); } 	 
+	virtual QList<Interval<> > maskedIntervals() const { return QList<Interval<> >(); } 	 
 	//@}
 
 signals: 

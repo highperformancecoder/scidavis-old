@@ -11,23 +11,27 @@ HEADERS += AbstractColumnData.h \
            DoubleColumnData.h \
            StringColumnData.h \
 			  AbstractDataSource.h \
+			  Interval.h \
 			  AbstractDateTimeDataSource.h \
 			  AbstractDoubleDataSource.h \
 			  AbstractStringDataSource.h \
 			  AbstractFilter.h \
 			  StatisticsFilter.h \
-			  AbstractDoubleSimpleFilter.h \
-			  TruncatedDoubleDataSource.h \
+			  AbstractSimpleFilter.h \
+			  TruncationFilter.h \
 			  DifferentiationFilter.h \
-#			  ReadOnlyTableModel.h \
+			  ReadOnlyTableModel.h \
 #			  TableModel.h \
 			  DoubleTransposeFilter.h \
+			  String2DoubleFilter.h \
+			  Double2StringFilter.h \
 
 SOURCES += StringColumnData.cpp \
 			  DoubleColumnData.cpp \
 			  DateTimeColumnData.cpp \
 			  AbstractFilter.cpp \
 			  StatisticsFilter.cpp \
+			  ReadOnlyTableModel.cpp \
 #			  TableModel.cpp \
 			  main.cpp \
 
