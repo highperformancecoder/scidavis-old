@@ -135,12 +135,12 @@ public:
 	 *
 	 * <code>
 	 * QStringList list;<br>
-	 * QList<Interval<> > ivs = my_column.formulaIntervals();<br>
+	 * QList< Interval<> > ivs = my_column.formulaIntervals();<br>
 	 * foreach(Interval<> iv, ivs)<br>
 	 * &nbsp;&nbsp;list << QString(iv.toString() + ": " + my_column.formula(iv.start()));<br>
 	 * </code>
 	 */
-	QList<Interval<> > formulaIntervals() const { return d_formulas.intervals(); }
+	QList< Interval<> > formulaIntervals() const { return d_formulas.intervals(); }
 	//! Clear all formulas
 	void clearFormulas();
 	//@}

@@ -73,8 +73,8 @@ template<class T> class IntervalBase
 			return Interval<T>( qMin(a.start(), b.start()), qMax(a.end(), b.end()) );
 		}
 		//! Subtract an interval from another
-		static QList<Interval<T> > subtract(const Interval<T>& src_iv, const Interval<T>& minus_iv) {
-			QList<Interval<T> > list;
+		static QList< Interval<T> > subtract(const Interval<T>& src_iv, const Interval<T>& minus_iv) {
+			QList< Interval<T> > list;
 			if( (src_iv == minus_iv) || (minus_iv.contains(src_iv)) )
 				return list;
 
@@ -92,8 +92,8 @@ template<class T> class IntervalBase
 			return list;
 		}
 		//! Split an interval into two
-		static QList<Interval<T> > split(const Interval<T>& i, T before) {
-			QList<Interval<T> > list;
+		static QList< Interval<T> > split(const Interval<T>& i, T before) {
+			QList< Interval<T> > list;
 			if( before < i.start() || before > i.end() )
 			{
 				list.append(i);
@@ -114,7 +114,7 @@ template<class T> class IntervalBase
 		 * This function merges all intervals in the list until none of them
 		 * intersect of touch anymore.
 		 */
-		static void mergeIntervalIntoList(QList<Interval<T> > * list, Interval<T> i) {
+		static void mergeIntervalIntoList(QList< Interval<T> > * list, Interval<T> i) {
 			for(int c=0; c<list->size(); c++)
 			{
 				if( list->at(c).touches(i) || list->at(c).intersects(i) )
@@ -130,8 +130,8 @@ template<class T> class IntervalBase
 		/**
 		 * Remark: This may increase or decrease the list size.
 		 */
-		static void subtractIntervalFromList(QList<Interval<T> > * list, Interval<T> i) {
-			QList<Interval<T> > temp_list;
+		static void subtractIntervalFromList(QList< Interval<T> > * list, Interval<T> i) {
+			QList< Interval<T> > temp_list;
 			for(int c=0; c<list->size(); c++)
 			{
 				temp_list = subtract(list->at(c), i);
