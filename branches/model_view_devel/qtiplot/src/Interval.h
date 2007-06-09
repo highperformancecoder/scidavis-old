@@ -166,125 +166,58 @@ template<class T> class IntervalBase
  *	For the template argument (T), only numerical types ((unsigned) short, (unsigned) int,
  *	(unsigned) long, float, double, long double) are supported.
  */
-template<class T=int> class Interval : public IntervalBase<T>
+template<class T> class Interval : public IntervalBase<T>
 {
 	public:
 		Interval() {}
 		Interval(T start, T end) : IntervalBase<T>(start, end) {}
 		Interval(const Interval<T>& other) : IntervalBase<T>(other) {}
-		T size() const { return IntervalBase<T>::d_end - IntervalBase<T>::d_start; }
-		bool isValid() const { return ( IntervalBase<T>::d_start <= IntervalBase<T>::d_end ); }
+		T size() const {
+			return IntervalBase<T>::d_end - IntervalBase<T>::d_start + 1;
+		}
+		bool isValid() const {
+			return ( IntervalBase<T>::d_start >= 0 && IntervalBase<T>::d_end >= 0 &&
+					IntervalBase<T>::d_start <= IntervalBase<T>::d_end );
+		}
 		bool touches(const Interval<T>& other) const {
-			return ( (other.end() == IntervalBase<T>::d_start) ||
-					(other.start() == IntervalBase<T>::d_end) );
+			return ( (other.end() == IntervalBase<T>::d_start-1) ||
+					(other.start() == IntervalBase<T>::d_end+1) );
 		}
 };
 
-template<> class Interval<short> : public IntervalBase<short>
-{
-	public:
+template<> class Interval<float> : public IntervalBase<float> {
 		Interval() {}
-		Interval(short start, short end) : IntervalBase<short>(start, end) {}
-		Interval(const Interval<short>& other) : IntervalBase<short>(other) {}
-		short size() const {
-			return IntervalBase<short>::d_end - IntervalBase<short>::d_start + 1;
-		}
-		bool isValid() const {
-			return ( IntervalBase<short>::d_start >= 0 && IntervalBase<short>::d_end >= 0 &&
-					IntervalBase<short>::d_start <= IntervalBase<short>::d_end );
-		}
-		bool touches(const Interval<short>& other) const {
-			return ( (other.end() == IntervalBase<short>::d_start-1) ||
-					(other.start() == IntervalBase<short>::d_end+1) );
+		Interval(float start, float end) : IntervalBase<float>(start, end) {}
+		Interval(const Interval<float>& other) : IntervalBase<float>(other) {}
+		float size() const { return IntervalBase<float>::d_end - IntervalBase<float>::d_start; }
+		bool isValid() const { return ( IntervalBase<float>::d_start <= IntervalBase<float>::d_end ); }
+		bool touches(const Interval<float>& other) const {
+			return ( (other.end() == IntervalBase<float>::d_start) ||
+					(other.start() == IntervalBase<float>::d_end) );
 		}
 };
 
-template<> class Interval<unsigned short> : public IntervalBase<unsigned short>
-{
-	public:
+template<> class Interval<double> : public IntervalBase<double> {
 		Interval() {}
-		Interval(unsigned short start, unsigned short end) : IntervalBase<unsigned short>(start, end) {}
-		Interval(const Interval<unsigned short>& other) : IntervalBase<unsigned short>(other) {}
-		unsigned short size() const {
-			return IntervalBase<unsigned short>::d_end - IntervalBase<unsigned short>::d_start + 1;
-		}
-		bool isValid() const {
-			return ( IntervalBase<unsigned short>::d_start <= IntervalBase<unsigned short>::d_end );
-		}
-		bool touches(const Interval<unsigned short>& other) const {
-			return ( (other.end() == IntervalBase<unsigned short>::d_start-1) ||
-					(other.start() == IntervalBase<unsigned short>::d_end+1) );
+		Interval(double start, double end) : IntervalBase<double>(start, end) {}
+		Interval(const Interval<double>& other) : IntervalBase<double>(other) {}
+		double size() const { return IntervalBase<double>::d_end - IntervalBase<double>::d_start; }
+		bool isValid() const { return ( IntervalBase<double>::d_start <= IntervalBase<double>::d_end ); }
+		bool touches(const Interval<double>& other) const {
+			return ( (other.end() == IntervalBase<double>::d_start) ||
+					(other.start() == IntervalBase<double>::d_end) );
 		}
 };
 
-template<> class Interval<int> : public IntervalBase<int>
-{
-	public:
+template<> class Interval<long double> : public IntervalBase<long double> {
 		Interval() {}
-		Interval(int start, int end) : IntervalBase<int>(start, end) {}
-		Interval(const Interval<int>& other) : IntervalBase<int>(other) {}
-		int size() const { return IntervalBase<int>::d_end - IntervalBase<int>::d_start + 1; }
-		bool isValid() const {
-			return ( IntervalBase<int>::d_start >= 0 && IntervalBase<int>::d_end >= 0 &&
-					IntervalBase<int>::d_start <= IntervalBase<int>::d_end );
-		}
-		bool touches(const Interval<int>& other) const {
-			return ( (other.end() == IntervalBase<int>::d_start-1) ||
-					(other.start() == IntervalBase<int>::d_end+1) );
-		}
-};
-
-template<> class Interval<unsigned int> : public IntervalBase<unsigned int>
-{
-	public:
-		Interval() {}
-		Interval(unsigned int start, unsigned int end) : IntervalBase<unsigned int>(start, end) {}
-		Interval(const Interval<unsigned int>& other) : IntervalBase<unsigned int>(other) {}
-		unsigned int size() const {
-			return IntervalBase<unsigned int>::d_end - IntervalBase<unsigned int>::d_start + 1;
-		}
-		bool isValid() const {
-			return ( IntervalBase<unsigned int>::d_start <= IntervalBase<unsigned int>::d_end );
-		}
-		bool touches(const Interval<unsigned int>& other) const {
-			return ( (other.end() == IntervalBase<unsigned int>::d_start-1) || (other.start() == IntervalBase<unsigned int>::d_end+1) );
-		}
-};
-
-template<> class Interval<long> : public IntervalBase<long>
-{
-	public:
-		Interval() {}
-		Interval(long start, long end) : IntervalBase<long>(start, end) {}
-		Interval(const Interval<long>& other) : IntervalBase<long>(other) {}
-		long size() const {
-			return IntervalBase<long>::d_end - IntervalBase<long>::d_start + 1;
-		}
-		bool isValid() const {
-			return ( IntervalBase<long>::d_start >= 0 && IntervalBase<long>::d_end >= 0 &&
-					IntervalBase<long>::d_start <= IntervalBase<long>::d_end );
-		}
-		bool touches(const Interval<long>& other) const {
-			return ( (other.end() == IntervalBase<long>::d_start-1) ||
-					(other.start() == IntervalBase<long>::d_end+1) );
-		}
-};
-
-template<> class Interval<unsigned long> : public IntervalBase<unsigned long>
-{
-	public:
-		Interval() {}
-		Interval(unsigned long start, unsigned long end) : IntervalBase<unsigned long>(start, end) {}
-		Interval(const Interval<unsigned long>& other) : IntervalBase<unsigned long>(other) {}
-		unsigned long size() const {
-			return IntervalBase<unsigned long>::d_end - IntervalBase<unsigned long>::d_start + 1;
-		}
-		bool isValid() const {
-			return ( IntervalBase<unsigned long>::d_start <= IntervalBase<unsigned long>::d_end );
-		}
-		bool touches(const Interval<unsigned long>& other) const {
-			return ( (other.end() == IntervalBase<unsigned long>::d_start-1) ||
-					(other.start() == IntervalBase<unsigned long>::d_end+1) );
+		Interval(long double start, long double end) : IntervalBase<long double>(start, end) {}
+		Interval(const Interval<long double>& other) : IntervalBase<long double>(other) {}
+		long double size() const { return IntervalBase<long double>::d_end - IntervalBase<long double>::d_start; }
+		bool isValid() const { return ( IntervalBase<long double>::d_start <= IntervalBase<long double>::d_end ); }
+		bool touches(const Interval<long double>& other) const {
+			return ( (other.end() == IntervalBase<long double>::d_start) ||
+					(other.start() == IntervalBase<long double>::d_end) );
 		}
 };
 
