@@ -107,19 +107,19 @@ public:
 	 * \param i the interval
 	 * \param valid true: set valid, false: set invalid
 	 */ 
-	virtual void setValid(Interval<> i, bool valid = true) = 0;
+	virtual void setValid(Interval<int> i, bool valid = true) = 0;
 	//! Select of deselect a certain interval
 	/**
 	 * \param i the interval
 	 * \param select true: select, false: deselect
 	 */ 
-	virtual void setSelected(Interval<> i, bool select = true) = 0;
+	virtual void setSelected(Interval<int> i, bool select = true) = 0;
 	//! Set an interval masked
 	/**
 	 * \param i the interval
 	 * \param mask true: mask, false: unmask
 	 */ 
-	virtual void setMasked(Interval<> i, bool mask = true) = 0;
+	virtual void setMasked(Interval<int> i, bool mask = true) = 0;
 	//@}
 	
 	//! \name Formula related functions
@@ -127,7 +127,7 @@ public:
 	//! Return the formula associated with row 'row' 	 
 	QString formula(int row) const { return d_formulas.value(row); }
 	//! Set a formula string for an interval of rows
-	void setFormula(Interval<> i, QString formula) { d_formulas.setValue(i, formula); }
+	void setFormula(Interval<int> i, QString formula) { d_formulas.setValue(i, formula); }
 	//! Return the intervals that have associated formulas
 	/**
 	 * This can be used to make a list of formulas with their intervals.
@@ -135,12 +135,12 @@ public:
 	 *
 	 * <code>
 	 * QStringList list;<br>
-	 * QList< Interval<> > ivs = my_column.formulaIntervals();<br>
-	 * foreach(Interval<> iv, ivs)<br>
+	 * QList< Interval<int> > ivs = my_column.formulaIntervals();<br>
+	 * foreach(Interval<int> iv, ivs)<br>
 	 * &nbsp;&nbsp;list << QString(iv.toString() + ": " + my_column.formula(iv.start()));<br>
 	 * </code>
 	 */
-	QList< Interval<> > formulaIntervals() const { return d_formulas.intervals(); }
+	QList< Interval<int> > formulaIntervals() const { return d_formulas.intervals(); }
 	//! Clear all formulas
 	void clearFormulas();
 	//@}

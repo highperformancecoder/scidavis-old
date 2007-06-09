@@ -101,21 +101,21 @@ public:
 	//! Return whether a certain row contains a valid value 	 
 	virtual bool isValid(int row) const { return d_validity.isSet(row); } 	 
 	//! Return whether a certain interval of rows contains only valid values 	 
-	virtual bool isValid(Interval<> i) const { return d_validity.isSet(i); } 	 
+	virtual bool isValid(Interval<int> i) const { return d_validity.isSet(i); } 	 
 	//! Return all intervals of valid rows
-	virtual QList< Interval<> > validIntervals() const { return d_validity.intervals(); } 	 
+	virtual QList< Interval<int> > validIntervals() const { return d_validity.intervals(); } 	 
 	//! Return whether a certain row is selected 	 
 	virtual bool isSelected(int row) const { return d_selection.isSet(row); } 	 
 	//! Return whether a certain interval of rows is fully selected
-	virtual bool isSelected(Interval<> i) const { return d_selection.isSet(i); } 	 
+	virtual bool isSelected(Interval<int> i) const { return d_selection.isSet(i); } 	 
 	//! Return all selected intervals 	 
-	virtual QList< Interval<> > selectedIntervals() const { return d_selection.intervals(); } 	 
+	virtual QList< Interval<int> > selectedIntervals() const { return d_selection.intervals(); } 	 
 	//! Return whether a certain row is masked 	 
 	virtual bool isMasked(int row) const { return d_masking.isSet(row); } 	 
 	//! Return whether a certain interval of rows rows is fully masked 	 
-	virtual bool isMasked(Interval<> i) const { return d_masking.isSet(i); }
+	virtual bool isMasked(Interval<int> i) const { return d_masking.isSet(i); }
 	//! Return all intervals of masked rows
-	virtual QList< Interval<> > maskedIntervals() const { return d_masking.intervals(); } 	 
+	virtual QList< Interval<int> > maskedIntervals() const { return d_masking.intervals(); } 	 
 	//@}
 	
 	//! \name IntervalAttribute related writing functions
@@ -146,7 +146,7 @@ public:
 	 * \param i the interval
 	 * \param valid true: set valid, false: set invalid
 	 */ 
-	virtual void setValid(Interval<> i, bool valid = true)
+	virtual void setValid(Interval<int> i, bool valid = true)
 	{
 		emit validityAboutToChange(this);	
 		d_validity.setValue(i, valid);
@@ -157,7 +157,7 @@ public:
 	 * \param i the interval
 	 * \param select true: select, false: deselect
 	 */ 
-	virtual void setSelected(Interval<> i, bool select = true)
+	virtual void setSelected(Interval<int> i, bool select = true)
 	{
 		emit selectionAboutToChange(this);	
 		d_selection.setValue(i, select);
@@ -168,7 +168,7 @@ public:
 	 * \param i the interval
 	 * \param mask true: mask, false: unmask
 	 */ 
-	virtual void setMasked(Interval<> i, bool mask = true)
+	virtual void setMasked(Interval<int> i, bool mask = true)
 	{
 		emit maskingAboutToChange(this);	
 		d_masking.setValue(i, mask);
