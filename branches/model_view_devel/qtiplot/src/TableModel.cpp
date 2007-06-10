@@ -84,6 +84,7 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 				AbstractFilter * out_fltr = outputFilter(index.column());
 				out_fltr->input(0, col_ptr->asDataSource());
 				return QVariant(static_cast<AbstractStringDataSource *>(out_fltr->output(0))->textAt(index.row()));
+				out_fltr->input(0, 0);
 			}
 		case Qt::BackgroundRole:
 			{
