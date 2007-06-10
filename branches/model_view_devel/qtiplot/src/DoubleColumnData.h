@@ -54,23 +54,12 @@ public:
 	explicit DoubleColumnData(int size = 0);
 	//! Dtor
 	virtual ~DoubleColumnData(){};
+	virtual AbstractDataSource *asDataSource() { return this; }
 
 	//! \name Data writing functions
 	//@{
-	//! Copy (if necessary convert) another vector of data
-	/**
-	 * StringColumnData: normal string to double conversion
-	 * DateColumnData: converted into the number of days relative to 1900/1/1
-	 * TimeColumnData: converted to the fraction of a day 
-	 * \return true if copying was successful, otherwise false
-	 */
 	virtual bool copy(const AbstractDataSource * other);
-	//! Set format character as in QString::number
-	virtual void setNumericFormat(char format);
-	//! Set number of displayed digits
-	virtual void setDisplayedDigits(int digits);
-	//! Set a row value from a string
-	virtual void setRowFromString(int row, const QString& string);
+	virtual bool copy(const AbstractDataSource * other, int source_start, int dest_start, int num_rows);
 	//! Resize the data vector
 	virtual void setNumRows(int new_size);
 	//! Set the column label
@@ -91,8 +80,6 @@ public:
 	//@{
 	//! Return the vector size
 	virtual int numRows() const;
-	//! Return the value in row 'row' in its string representation
-	virtual QString textAt(int row) const;
 	//! Return the value in row 'row'
 	virtual double valueAt(int row) const;
 	//! Return the column label
@@ -101,10 +88,6 @@ public:
 	virtual QString comment() const;
 	//! Return the column plot designation
 	virtual AbstractDataSource::PlotDesignation plotDesignation() const;
-	//! Return format character as in QString::number
-	virtual char numericFormat() const;
-	//! Return the number of displayed digits
-	virtual int displayedDigits() const;
 	//! Return a read-only array pointer for fast data access
 	/**
 	 * The pointer remains valid as long as the vector is 
@@ -198,15 +181,6 @@ protected:
 	IntervalAttribute<bool> d_validity;
 	IntervalAttribute<bool> d_selection;
 	IntervalAttribute<bool> d_masking;
-	//! Format character as in QString::number 
-	char d_numeric_format;
-	//! Display digits or precision as in QString::number  
-	/**
-	 * This has nothing to do with the internal precision. 
-	 * Internally, everything is always handled using the full
-	 * precision of the data type 'double'.
-	 */
-	int d_displayed_digits;
 	//! The column label
 	QString d_label;
 	//! The column comment

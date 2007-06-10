@@ -43,50 +43,53 @@
  */
 class DoubleTransposeFilter : public AbstractFilter {
 	public:
-	DoubleTransposeFilter(bool greedy) : d_greedy(greedy) {}
-	virtual ~DoubleTransposeFilter() {
-		foreach(OutputColumn *o, d_output_columns)
-			delete o;
-	}
-	virtual int numInputs() const { return -1; }
-	virtual int numOutputs() const {
-		if (!d_inputs.value(0)) return 0;
-		int result = -1;
-		foreach(AbstractDataSource *i, d_inputs) {
-			if (!i) continue;
-			int n;
-			if (d_greedy) {
-				if ((n = i->numRows()) > result)
-					result = n;
-			} else {
-				if ((n = i->numRows()) < result || result == -1)
-					result = n;
-			}
+		DoubleTransposeFilter(bool greedy) : d_greedy(greedy) {}
+		virtual ~DoubleTransposeFilter() {
+			foreach(OutputColumn *o, d_output_columns)
+				delete o;
 		}
-		return result;
-	}
-	virtual AbstractDataSource *output(int port) const { return d_output_columns.value(port); }
+		virtual int numInputs() const { return -1; }
+		virtual int numOutputs() const {
+			if (!d_inputs.value(0)) return 0;
+			int result = -1;
+			foreach(AbstractDataSource *i, d_inputs) {
+				if (!i) continue;
+				int n;
+				if (d_greedy) {
+					if ((n = i->numRows()) > result)
+						result = n;
+				} else {
+					if ((n = i->numRows()) < result || result == -1)
+						result = n;
+				}
+			}
+			return result;
+		}
+		virtual AbstractDataSource *output(int port) const { return d_output_columns.value(port); }
 
 	protected:
-	virtual void inputDataAboutToChange(AbstractDataSource*) {
-		foreach(OutputColumn *o, d_output_columns)
-			o->dataAboutToChange(o);
-	}
-	virtual void inputDataChanged(int port) {
-		int old_num_columns = d_output_columns.size();
-		int new_num_columns = numOutputs();
-		if (new_num_columns > old_num_columns) {
-			d_output_columns.resize(new_num_columns);
-			for (int i = old_num_columns; i < new_num_columns; i++)
-				d_output_columns[i] = new OutputColumn(this, i);
-		} else if (new_num_columns < old_num_columns) {
-			for (int i = new_num_columns; i < old_num_columns; i++)
-				delete d_output_columns.at(i);
-			d_output_columns.resize(new_num_columns);
+		virtual bool inputAcceptable(int, AbstractDataSource *source) {
+			return source->inherits("AbstractDoubleDataSource");
 		}
-		foreach(OutputColumn *o, d_output_columns)
-			o->dataChanged(o);
-	}
+		virtual void inputDataAboutToChange(AbstractDataSource*) {
+			foreach(OutputColumn *o, d_output_columns)
+				o->dataAboutToChange(o);
+		}
+		virtual void inputDataChanged(AbstractDataSource*) {
+			int old_num_columns = d_output_columns.size();
+			int new_num_columns = numOutputs();
+			if (new_num_columns > old_num_columns) {
+				d_output_columns.resize(new_num_columns);
+				for (int i = old_num_columns; i < new_num_columns; i++)
+					d_output_columns[i] = new OutputColumn(this, i);
+			} else if (new_num_columns < old_num_columns) {
+				for (int i = new_num_columns; i < old_num_columns; i++)
+					delete d_output_columns.at(i);
+				d_output_columns.resize(new_num_columns);
+			}
+			foreach(OutputColumn *o, d_output_columns)
+				o->dataChanged(o);
+		}
 
 	private:
 		bool d_greedy;
@@ -96,7 +99,7 @@ class DoubleTransposeFilter : public AbstractFilter {
 				virtual int numRows() const { return d_parent->d_inputs.size(); }
 				virtual double valueAt(int col) const {
 					return isRowValid(col) ?
-						d_parent->d_inputs.at(col)->valueAt(d_row) :
+						static_cast<AbstractDoubleDataSource*>(d_parent->d_inputs.at(col))->valueAt(d_row) :
 						0;
 				}
 				virtual bool isRowValid(int col) const {

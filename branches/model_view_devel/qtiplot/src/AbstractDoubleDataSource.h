@@ -56,13 +56,9 @@ public:
 	virtual ~AbstractDoubleDataSource() {
 		if(d_data_cache) delete[] d_data_cache;
 	}
+	//! Return the value in row 'row'.
+	virtual double valueAt(int row) const = 0;
 
-	//! Return format character as in QString::number
-	virtual char numericFormat() const { return 'e'; }
-	//! Return the number of displayed digits
-	virtual int displayedDigits() const { return 6; }
-	//! Return the value in row 'row' in its string representation
-	virtual QString textAt(int row) const { return QLocale().toString(valueAt(row), numericFormat(), displayedDigits()); }
 	//! Return a read-only array pointer for fast data access
 	/**
 	 * The pointer remains valid as long as the vector is 
@@ -85,22 +81,6 @@ private:
 			if(d_data_cache) delete[] d_data_cache;
 			d_data_cache = 0;
 		}
-
-signals:
-	//! The format code and/or the displayed digits will change
-	/**
-	 * 'source' is always the this pointer of the column that
-	 * emitted this signal. This way it's easier to use
-	 * one handler for lots of columns.
-	 */
-	void formatAboutToChange(AbstractDataSource * source); 
-	//! The format code and/or the displayed digits has changed
-	/**
-	 * 'source' is always the this pointer of the column that
-	 * emitted this signal. This way it's easier to use
-	 * one handler for lots of columns.
-	 */
-	void formatChanged(AbstractDataSource * source); 
 };
 
 #endif

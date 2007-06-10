@@ -42,8 +42,9 @@
 class ReadOnlyTableModel : public QAbstractItemModel, public AbstractFilter
 {
 	Q_OBJECT
-
 	public:
+	~ReadOnlyTableModel();
+
 	//! \name Reimplemented from QAbstractItemModel
 	//@{
 	Qt::ItemFlags flags( const QModelIndex & index ) const;
@@ -60,8 +61,17 @@ class ReadOnlyTableModel : public QAbstractItemModel, public AbstractFilter
 	virtual int numInputs() const;
 	virtual int numOutputs() const;
 	virtual AbstractDataSource* output(int) const;
+
+	protected:
+	virtual bool inputAcceptable(int port, AbstractDataSource *source);
 	virtual void inputDataChanged(int port);
 	virtual void inputDescriptionChanged(int port);
 	//@}
+
+	private:
+	//! Filters used for converting the data received to QString.
+	QList<AbstractFilter*> d_output_filters;
+	//! Constructs a <type of source> -> QString filter and connects its first input to source.
+	AbstractFilter *newOutputFilterFor(AbstractDataSource *source);
 };
 

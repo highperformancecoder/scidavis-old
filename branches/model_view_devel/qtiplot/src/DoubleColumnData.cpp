@@ -32,28 +32,38 @@
 #include <QLocale>
 
 DoubleColumnData::DoubleColumnData(int size)
-	: QVector<double>(size), d_numeric_format('e'), d_displayed_digits(6)
+	: QVector<double>(size)
 {
 }
 
 bool DoubleColumnData::copy(const AbstractDataSource * other)
 {
+	const AbstractDoubleDataSource *other_as_double = qobject_cast<const AbstractDoubleDataSource*>(other);
+	if (!other_as_double) return false;
 	emit dataAboutToChange(this);
-	if(other->inherits("AbstractDoubleDataSource"))
-	{
-		d_numeric_format = static_cast< const AbstractDoubleDataSource* >(other)->numericFormat();
-		d_displayed_digits = static_cast< const AbstractDoubleDataSource* >(other)->displayedDigits();
-	}
-
-	int end = other->numRows();
+	int end = other_as_double->numRows();
 	setNumRows(end);
 	double * ptr = data();
 	for(int i=0; i<end; i++)
-		ptr[i] = other->valueAt(i);
+		ptr[i] = other_as_double->valueAt(i);
 	emit dataChanged(this);
 	return true;
 }
-	
+
+bool DoubleColumnData::copy(const AbstractDataSource * source, int source_start, int dest_start, int num_rows)
+{
+	const AbstractDoubleDataSource *source_as_double = qobject_cast<const AbstractDoubleDataSource*>(source);
+	if (!source_as_double) return false;
+	emit dataAboutToChange(this);
+	if (dest_start + num_rows > numRows())
+		setNumRows(dest_start + num_rows);
+	double * ptr = data();
+	for (int source_row = source_start, dest_row = dest_start; source_row-source_start < num_rows;)
+		ptr[dest_row++] = source_as_double->valueAt(source_row++);
+	emit dataChanged(this);
+	return true;
+}
+
 int DoubleColumnData::numRows() const 
 { 
 	return size(); 
@@ -98,13 +108,6 @@ void DoubleColumnData::setPlotDesignation(AbstractDataSource::PlotDesignation pd
 void DoubleColumnData::notifyReplacement(AbstractDataSource * replacement)
 {
 	emit aboutToBeReplaced(this, replacement); 
-}
-
-void DoubleColumnData::setRowFromString(int row, const QString& string)
-{
-	emit dataAboutToChange(this);
-    data()[row] = QLocale().toDouble(string);
-	emit dataChanged(this);
 }
 
 void DoubleColumnData::setNumRows(int new_size)
@@ -156,35 +159,6 @@ void DoubleColumnData::removeRows(int first, int count)
 	d_masking.removeRows(first, count);
 	d_formulas.removeRows(first, count);
 	emit rowsDeleted(this, first, count);
-}
-
-void DoubleColumnData::setNumericFormat(char format) 
-{ 
-	emit formatAboutToChange(this);
-	d_numeric_format = format; 
-	emit formatChanged(this);
-}
-
-void DoubleColumnData::setDisplayedDigits(int digits) 
-{ 
-	emit formatAboutToChange(this);
-	d_displayed_digits = digits; 
-	emit formatChanged(this);
-}
-
-char DoubleColumnData::numericFormat() const
-{ 
-	return d_numeric_format; 
-}
-
-int DoubleColumnData::displayedDigits() const 
-{ 
-	return d_displayed_digits; 
-}
-
-QString DoubleColumnData::textAt(int row) const
-{ 
-		return QLocale().toString(value(row), d_numeric_format, d_displayed_digits);
 }
 
 double DoubleColumnData::valueAt(int row) const 

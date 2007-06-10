@@ -1,10 +1,11 @@
 /***************************************************************************
-    File                 : AbstractDateTimeDataSource.h
+    File                 : CopyThroughFilter.h
     Project              : QtiPlot
     --------------------------------------------------------------------
-    Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
-    Email (use @ for *)  : thzs*gmx.net
-    Description          : Type-specific reading interface for a date+time data source
+    Copyright            : (C) 2007 by Knut Franke
+    Email (use @ for *)  : knut.franke*gmx.de
+    Description          : Filter which copies all provided inputs unaltered
+                           to an equal number of outputs.
 
  ***************************************************************************/
 
@@ -26,38 +27,28 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
+#ifndef COPY_THROUGH_FILTER_H
+#define COPY_THROUGH_FILTER_H
 
-#ifndef DATETIMEDATASOURCE_H
-#define DATETIMEDATASOURCE_H
+#include "AbstractFilter.h"
 
-#include "AbstractDataSource.h"
-class QDate;
-class QTime;
-class QDateTime;
-class QString;
-
-//! Type-specific reading interface for a date+time data source
 /**
-  * This class defines the specific reading interface for
-  * a class storing a list of QDateTimes. It only defines
-  * the interface and has no data members itself.
-  * \sa AbstractDataSource
-  * \sa AbstractColumnData
-  */
-class AbstractDateTimeDataSource : public AbstractDataSource
+ * \brief Filter which copies all provided inputs unaltered to an equal number of outputs.
+ *
+ * This is probably the simplest filter you can possibly write.
+ * It accepts an arbitrary number of inputs and provides the same AbstractDataSource objects
+ * as outputs again.
+ */
+class CopyThroughFilter : public AbstractFilter
 {
-	Q_OBJECT
-
-public:
-	//! Dtor
-	virtual ~AbstractDateTimeDataSource(){};
-
-	//! Return the date part of row 'row'
-	virtual QDate dateAt(int row) const = 0;
-	//! Return the time part of row 'row'
-	virtual QTime timeAt(int row) const = 0;
-	//! Return the QDateTime in row 'row'
-	virtual QDateTime dateTimeAt(int row) const = 0;
+	public:
+	//! Accept any number of inputs.
+	virtual int numInputs() const { return -1; }
+	//! Provide as many output ports as inputs have been connected.
+	virtual int numOutputs() const { return d_inputs.size(); }
+	//! When asked for an output port, just return the corresponding input port.
+	virtual AbstractDataSource* output(int port) const { return d_inputs.value(port); }
 };
 
-#endif
+#endif // ifndef COPY_THROUGH_FILTER_H
+

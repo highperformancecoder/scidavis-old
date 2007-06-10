@@ -36,8 +36,6 @@
 #include <QDateTime>
 #include <QDate>
 #include <QTime>
-class AbstractDoubleDataSource;
-class AbstractStringDataSource;
 class AbstractDateTimeDataSource;
 
 //! Data source that stores a list of QDateTimes (implementation)
@@ -57,7 +55,7 @@ class AbstractDateTimeDataSource;
   * \sa AbstractDataSource
   * \sa AbstractDateTimeDataSource
   */
-class DateTimeColumnData : public AbstractColumnData, public AbstractDateTimeDataSource, public QList<QDateTime>
+class DateTimeColumnData : public AbstractDateTimeDataSource, public AbstractColumnData, public QList<QDateTime>
 {
 	Q_OBJECT
 
@@ -68,33 +66,12 @@ public:
 	DateTimeColumnData();
 	//! Ctor
 	DateTimeColumnData(const QList<QDateTime>& list);
+	virtual AbstractDataSource *asDataSource() { return this; }
 
 	//! \name Data writing functions
 	//@{
-	//! Copy (if necessary convert) another vector of data
-	/**
-	 * StringColumnData: QString to QDateTime conversion using the format string
-	 * DoubleColumnData: converted from the digits before the dot as 
-	 * as the julian day and the digits after the dot as a fraction
-	 * of a day (0 = noon).
-	 * \return true if copying was successful, otherwise false
-	 * \sa format(), setFormat()
-	 */
 	virtual bool copy(const AbstractDataSource * other);
-	//! Set a row value from a string
-	/**
-	 * This method is smarter than QDateTime::fromString()
-	 * as it tries out several format strings until it 
-	 * gets a valid date if d_format does not match.
-	 */
-	virtual void setRowFromString(int row, const QString& string);
-	//! Set the format String
-	/**
-	 * The default format string is "yyyy-MM-dd hh:mm:ss.zzz".
-	 * \sa QDateTime::toString()
-	 */
-	virtual void setFormat(const QString& format);
-	//! Resize the list
+	virtual bool copy(const AbstractDataSource * other, int source_start, int dest_start, int num_rows);
 	virtual void setNumRows(int new_size);
 	//! Set the column label
 	virtual void setLabel(const QString& label);
@@ -118,20 +95,6 @@ public:
 	virtual QString comment() const;
 	//! Return the column plot designation
 	virtual AbstractDataSource::PlotDesignation plotDesignation() const;
-	//! Return the value in row 'row' in its string representation
-	virtual QString textAt(int row) const;
-	//! Return the value in row 'row' as a double
-	/**
-	 * This returns the julian day + the time as a
-	 * fraction of the day (0 = noon).
-	 */ 
-	virtual double valueAt(int row) const;
-	//! Return the format string
-	/**
-	 * The default format string is "yyyy-MM-dd hh:mm:ss.zzz".
-	 * \sa QDateTime::toString()
-	 */
-	virtual QString format() const;
 	//! Return the list size
 	virtual int numRows() const;
 	//! Return the date part of row 'row'
@@ -232,23 +195,6 @@ protected:
 	QString d_comment;
 	//! The plot designation
 	AbstractDataSource::PlotDesignation d_plot_designation;
-	//! Format string for QDateTime::toString()
-	QString d_format;
-
-	//! Convert and copy a double column data source
-	bool copyDoubleDataSource(const AbstractDoubleDataSource * other);
-	//! Convert and copy a string column data source
-	/**
-	 * \sa setRowFromString()
-	 */
-	bool copyStringDataSource(const AbstractStringDataSource * other);
-	//! Copy another QDateTime column data source
-	bool copyDateTimeDataSource(const AbstractDateTimeDataSource * other);
-
-private:
-	//! Read a datetime from a string
-	static QDateTime dateTimeFromString(const QString& string, const QString& format);
-
 };
 
 #endif

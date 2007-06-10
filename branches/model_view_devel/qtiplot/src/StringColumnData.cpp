@@ -41,15 +41,30 @@ StringColumnData::StringColumnData(const QStringList& list)
 
 bool StringColumnData::copy(const AbstractDataSource * other)
 {
+	const AbstractStringDataSource *other_as_string = qobject_cast<const AbstractStringDataSource*>(other);
+	if (!other_as_string) return false;
 	emit dataAboutToChange(this);
 	clear();
-	int end = other->numRows();
+	int end = other_as_string->numRows();
 	for(int i=0; i<end; i++)
-		*this << other->textAt(i);
+		*this << other_as_string->textAt(i);
 	emit dataChanged(this);
 	return true;
 }
-	
+
+bool StringColumnData::copy(const AbstractDataSource * source, int source_start, int dest_start, int num_rows)
+{
+	const AbstractStringDataSource *source_as_string = qobject_cast<const AbstractStringDataSource*>(source);
+	if (!source_as_string) return false;
+	emit dataAboutToChange(this);
+	if (dest_start + num_rows > numRows())
+		setNumRows(dest_start + num_rows);
+	for (int source_row = source_start, dest_row = dest_start; source_row-source_start < num_rows;)
+		replace(dest_row++, source_as_string->textAt(source_row++));
+	emit dataChanged(this);
+	return true;
+}
+
 int StringColumnData::numRows() const 
 { 
 	return size(); 
@@ -94,13 +109,6 @@ void StringColumnData::setPlotDesignation(AbstractDataSource::PlotDesignation pd
 void StringColumnData::notifyReplacement(AbstractDataSource * replacement)
 {
 	emit aboutToBeReplaced(this, replacement); 
-}
-
-void StringColumnData::setRowFromString(int row, const QString& string)
-{
-	emit dataAboutToChange(this);
-    replace(row, string);
-	emit dataChanged(this);
 }
 
 void StringColumnData::setNumRows(int new_size)
@@ -160,11 +168,6 @@ void StringColumnData::removeRows(int first, int count)
 QString StringColumnData::textAt(int row) const
 { 
 		return value(row);
-}
-
-double StringColumnData::valueAt(int row) const 
-{ 
-	return QLocale().toDouble(value(row)); 
 }
 
 

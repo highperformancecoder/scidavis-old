@@ -19,19 +19,28 @@ HEADERS += \
 			  AbstractDateTimeDataSource.h \
 			  AbstractDoubleDataSource.h \
 			  AbstractStringDataSource.h \
-			  AbstractFilter.h \
 			  IntervalAttribute.h \
+			  AbstractFilter.h \
+			  CopyThroughFilter.h \
+			  String2DoubleFilter.h \
+			  Double2StringFilter.h \
+			  DateTime2DoubleFilter.h \
+			  DateTime2StringFilter.h \
+			  Double2DateTimeFilter.h \
+			  String2DateTimeFilter.h \
 
 SOURCES += \
 			  StringColumnData.cpp \
 			  DateTimeColumnData.cpp \
 			  DoubleColumnData.cpp \
-			  AbstractFilter.cpp 
+			  AbstractFilter.cpp \
+			  String2DateTimeFilter.cpp \
 
 # test cases
 HEADERS += \
 	IntervalTest.h \
 	ColumnDataTest.h \
+	ConversionFilterTest.h \
 
 SOURCES += main.cpp
 

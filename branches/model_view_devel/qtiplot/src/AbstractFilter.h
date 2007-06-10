@@ -70,13 +70,17 @@ class AbstractFilterSlotMachine : public QObject {
  * input(int port, AbstractDataSource *source). Every output(int port) is realized
  * again by an AbstractDataSource, which you can connect to as many other filters, tables
  * or plots as you like.
+ * Ownership of the data sources always stays with the class which is providing the data,
+ * that is, neither input() nor output() transfer ownership.
+ *
  * Furthermore, you can use numInputs() and numOutputs() to query the number of
- * input and output ports, respectively. This allows generic filter handling routines
- * to be written, which is important for using filters provided by plugins.
+ * input and output ports, respectively and you can obtain label strings for inputs (via
+ * inputLabel()) and outputs (via AbstractDataSource::label()). This allows generic filter
+ * handling routines to be written, which is important for using filters provided by plugins.
  *
  * The main design goal was to make implementing new filters as easy as possible.
  * Only the pure virtual methods numInputs(), numOutputs() and output() have to be provided
- * for the simples possible implementation (CopyThroughFilter). To the same end, a little
+ * for the simplest possible implementation (CopyThroughFilter). To the same end, a little
  * additional complexity has been accepted in the form of AbstractFilterSlotMachine,
  * which on the other hand greatly simplifies filters with only one output port like
  * TruncatedDoubleDataSource (DifferentiationFilter uses a similar approach, although
@@ -92,6 +96,8 @@ class AbstractFilterSlotMachine : public QObject {
  * Its simplicity of use notwithstanding, AbstractFilter provides a powerful and versatile
  * basis also for analysis operations that would not commonly be referred to as "filter".
  * An example of such a more advanced filter implementation is StatisticsFilter.
+ *
+ * \sa AbstractSimpleFilter
  */
 class AbstractFilter
 {
@@ -115,7 +121,7 @@ class AbstractFilter
 		 *
 		 * \returns true if the connection was accepted, false otherwise.
 		 */
-		virtual bool input(int port, AbstractDataSource *source);
+		bool input(int port, AbstractDataSource *source);
 		/**
 		 * \brief Connect all outputs of the provided filter to the corresponding inputs of this filter.
 		 *
@@ -136,14 +142,18 @@ class AbstractFilter
 		/**
 		 * \brief Get the data source associated with the specified output port.
 		 *
-		 * The returned pointer may be 0, for example if not all required input ports
-		 * have been connected.
+		 * The returned pointer may be 0 even for valid port numbers, for example if not all required
+		 * input ports have been connected.
 		 */
 		virtual AbstractDataSource* output(int port) const = 0;
 		// virtual void saveTo(QXmlStreamWriter *) = 0;
 		// virtual void loadFrom(QXmlStreamReader *) = 0;
 
 	protected:
+		//! Give implementations a chance to reject connections to their input ports.
+		virtual bool inputAcceptable(int port, AbstractDataSource *source) {
+			Q_UNUSED(port); Q_UNUSED(source); return true;
+		}
 		/**
 		 * \brief Column label and/or comment of an input will be changed.
 		 *
@@ -207,24 +217,6 @@ class AbstractFilter
 	private:
 		friend class AbstractFilterSlotMachine;
 		AbstractFilterSlotMachine d_slot_machine;
-};
-
-/**
- * \brief Filter which copies all provided inputs unaltered to an equal number of outputs.
- *
- * This is probably the simplest filter you can possibly write.
- * It accepts an arbitrary number of inputs and provides the same AbstractDataSource objects
- * as outputs again.
- */
-class CopyThroughFilter : public AbstractFilter
-{
-	public:
-	//! Accept any number of inputs.
-	virtual int numInputs() const { return -1; }
-	//! Provide as many output ports as inputs have been connected.
-	virtual int numOutputs() const { return d_inputs.size(); }
-	//! When asked for an output port, just return the corresponding input port.
-	virtual AbstractDataSource* output(int port) const { return d_inputs.value(port); }
 };
 
 #endif // ifndef ABSTRACT_FILTER_H

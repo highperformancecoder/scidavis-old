@@ -28,10 +28,7 @@
  ***************************************************************************/
 
 #include "TableModel.h"
-#include "DoubleColumnData.h"
 #include "StringColumnData.h"
-#include "DateColumnData.h"
-#include "TimeColumnData.h"
 #include <QString>
 #include <QDate>
 #include <QTime>
@@ -50,18 +47,12 @@ TableModel::TableModel( QObject * parent )
 TableModel::~TableModel()
 {
 	// delete the columns and filters
-	int end = d_columns.size();
-	for(int i=0; i<end; i++)
-		if(d_columns.at(i))
-			delete d_columns.at(i);
-	int end = d_input_filters.size();
-	for(int i=0; i<end; i++)
-		if(d_input_filters.at(i))
-			delete d_input_filters.at(i);
-	int end = d_output_filters.size();
-	for(int i=0; i<end; i++)
-		if(d_output_filters.at(i))
-			delete d_output_filters.at(i);
+	foreach(AbstractColumnData *i, d_columns)
+		if(i) delete i;
+	foreach(AbstractFilter *i, d_input_filters)
+		if(i) delete i;
+	foreach(AbstractFilter *i, d_output_filters)
+		if(i) delete i;
 }
 
 Qt::ItemFlags TableModel::flags(const QModelIndex & index ) const
@@ -83,22 +74,24 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 		case Qt::DisplayRole:
 		case Qt::EditRole:
 		case Qt::ToolTipRole:
+			{
+				AbstractColumnData * col_ptr = d_columns.at(index.column());
+				if(!col_ptr || !col_ptr->asDataSource()->isValid(index.row()))
+					return QVariant();
 
-			AbstractColumnData * col_ptr = d_columns[col];
-			if(!col_ptr->isValid(index.row()))
-				return QVariant();
-			
-			AbstractFilter * out_fltr = outputFilter(col);
-			out_fltr->input(0, col_ptr);
-			return QVariant(static_cast<StringColumnData *>(out_fltr->output(0))->valueAt(index.row()));
+				AbstractFilter * out_fltr = outputFilter(index.column());
+				out_fltr->input(0, col_ptr->asDataSource());
+				return QVariant(static_cast<AbstractStringDataSource *>(out_fltr->output(0))->textAt(index.row()));
+			}
 
 		case Qt::BackgroundRole:
-			// TODO: Make masked color customizable
-			// masked cells are displayed as hatched
-			if(d_columns[index.column()]->isMasked(index.row()))
-				return QVariant(QBrush(QColor(0xff,0,0), Qt::DiagCrossPattern));
-			else
+			{
+				// TODO: Make masked color customizable
+				// masked cells are displayed as hatched
+				if(d_columns.at(index.column())->asDataSource()->isMasked(index.row()))
+					return QVariant(QBrush(QColor(0xff,0,0), Qt::DiagCrossPattern));
 				break;
+			}
 	}
 
 	return QVariant();
@@ -137,19 +130,19 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
 		return false;
 
 	int row = index.row();
-	int column = index.column();
 	
 	if(role == Qt::EditRole)
 	{  
-			AbstractColumnData * col_ptr = d_columns[col];
-			if(col_ptr->size() <= row)
-				col_ptr->resize(row+1);
+			AbstractColumnData * col_ptr = d_columns[index.column()];
+			if(col_ptr->asDataSource()->numRows() <= row)
+				col_ptr->setNumRows(row+1);
 
-			AbstractFilter * in_fltr = inputFilter(col);
+			AbstractFilter * in_fltr = inputFilter(index.column());
 			StringColumnData sd;
 			sd << value.toString();
 			in_fltr->input(0, &sd);
 			col_ptr->copy(in_fltr->output(0), 0, row, 1); 
+			col_ptr->setValid(Interval<int>(row,row));
 			emit dataChanged(index, index);
 			return true;
 	}
@@ -163,18 +156,18 @@ QModelIndex TableModel::index(int row, int column, const QModelIndex &parent) co
 	return createIndex(row, column);
 }
 
-QModelIndex TableModel::parent(const QModelIndex & child) const
+QModelIndex TableModel::parent(const QModelIndex &) const
 {
     return QModelIndex();
 }
 
 
-AbstractColumnData * TableModel::output(int port) const
+AbstractDataSource * TableModel::output(int port) const
 {
-	if( (col < 0) || (col >= d_column_count) )
+	if( (port < 0) || (port >= d_column_count) || !d_columns.value(port))
 		return 0;
 	
-	return d_columns[col];
+	return d_columns.at(port)->asDataSource();
 }
 
 void TableModel::setOutputFilter(int col, AbstractFilter * filter)
@@ -210,16 +203,17 @@ void TableModel::replaceColumn(int col, AbstractColumnData * new_col)
 		return;
 	
 	d_columns[col] = new_col;
-	emit dataChanged(index(0, col), index(d_row_count-1, col));
+	emit dataChanged(index(0, col, QModelIndex()), index(d_row_count-1, col, QModelIndex()));
 }
 
 void TableModel::emitDataChanged(int top, int left, int bottom, int right)
 {
-	emit dataChanged(index(top, left), index(bottom, right));
+	emit dataChanged(index(top, left, QModelIndex()), index(bottom, right, QModelIndex()));
 }
 
-void TableModel::insertColumns(QList<AbstractColumnData *> cols, int first, int count)
+void TableModel::insertColumns(QList<AbstractColumnData *> cols, int first)
 {
+	int count = cols.size();
 	if(count < 1) 
 		return;
 
@@ -231,7 +225,7 @@ void TableModel::insertColumns(QList<AbstractColumnData *> cols, int first, int 
 	int i, rows;
 	for(i=0; i<count; i++)
 	{
-		rows = cols.at(i)->numRows();
+		rows = cols.at(i)->asDataSource()->numRows();
 		if(rows > d_row_count)
 			appendRows(rows-d_row_count); // append rows to resize table
 	}
@@ -294,7 +288,7 @@ void TableModel::insertRows(int first, int count)
 		for(int col=0; col<d_column_count; col++)
 		{
 			col_ptr = d_columns[col];
-			if(col_ptr->size() <= first) // no need to append empty rows
+			if(col_ptr->asDataSource()->numRows() <= first) // no need to append empty rows
 				continue;
 			col_ptr->insertEmptyRows(first, count);
 		}
@@ -328,35 +322,35 @@ void TableModel::updateVerticalHeader(int start_row)
 
 void TableModel::updateHorizontalHeader(int start_col, int end_col)
 {
-	if(numColsWithPD(Table::X)>1)
+	if(numColsWithPD(AbstractDataSource::X)>1)
 	{
-		x_cols = 0;
+		int x_cols = 0;
 		for (int i=0; i<d_column_count; i++)
 		{
-			if (columnPlotDesignation(i) == Table::X)
+			if (columnPlotDesignation(i) == AbstractDataSource::X)
 				composeColumnHeader(i, columnLabel(i)+"[X" + QString::number(++x_cols) +"]");
-			else if (columnPlotDesignation(i) == Table::Y)
+			else if (columnPlotDesignation(i) == AbstractDataSource::Y)
 			{
 				if(x_cols>0)
 					composeColumnHeader(i, columnLabel(i)+"[Y"+ QString::number(x_cols) +"]");
 				else
 					composeColumnHeader(i, columnLabel(i)+"[Y]");
 			}
-			else if (columnPlotDesignation(i) == Table::Z)
+			else if (columnPlotDesignation(i) == AbstractDataSource::Z)
 			{
 				if(x_cols>0)
 					composeColumnHeader(i, columnLabel(i)+"[Z"+ QString::number(x_cols) +"]");
 				else
 					composeColumnHeader(i, columnLabel(i)+"[Z]");
 			}
-			else if (columnPlotDesignation(i) == Table::xErr)
+			else if (columnPlotDesignation(i) == AbstractDataSource::xErr)
 			{
 				if(x_cols>0)
 					composeColumnHeader(i, columnLabel(i)+"[xEr"+ QString::number(x_cols) +"]");
 				else
 					composeColumnHeader(i, columnLabel(i)+"[xEr]");
 			}
-			else if (columnPlotDesignation(i) == Table::yErr)
+			else if (columnPlotDesignation(i) == AbstractDataSource::yErr)
 			{
 				if(x_cols>0)
 					composeColumnHeader(i, columnLabel(i)+"[yEr"+ QString::number(x_cols) +"]");
@@ -371,15 +365,15 @@ void TableModel::updateHorizontalHeader(int start_col, int end_col)
 	{
 		for (int i=0; i<d_column_count; i++)
 		{
-			if (columnPlotDesignation(i) == Table::X)
+			if (columnPlotDesignation(i) == AbstractDataSource::X)
 				composeColumnHeader(i, columnLabel(i)+"[X]");
-			else if(columnPlotDesignation(i) == Table::Y)
+			else if(columnPlotDesignation(i) == AbstractDataSource::Y)
 				composeColumnHeader(i, columnLabel(i)+"[Y]");
-			else if(columnPlotDesignation(i) == Table::Z)
+			else if(columnPlotDesignation(i) == AbstractDataSource::Z)
 				composeColumnHeader(i, columnLabel(i)+"[Z]");
-			else if(columnPlotDesignation(i) == Table::xErr)
+			else if(columnPlotDesignation(i) == AbstractDataSource::xErr)
 				composeColumnHeader(i, columnLabel(i)+"[xEr]");
-			else if(columnPlotDesignation(i) == Table::yErr)
+			else if(columnPlotDesignation(i) == AbstractDataSource::yErr)
 				composeColumnHeader(i, columnLabel(i)+"[yEr]");
 			else
 				composeColumnHeader(i, columnLabel(i));
@@ -399,7 +393,10 @@ void TableModel::composeColumnHeader(int col, const QString& label)
 		s += "\n" + QString(lines, '_') + "\n" + columnComment(col);
 	}
 	
-	d_horizontal_header_data.replace(col, s);
+	if (col >= d_horizontal_header_data.size())
+		d_horizontal_header_data << s;
+	else
+		d_horizontal_header_data.replace(col, s);
 }
 
 void TableModel::setColumnLabel(int column, const QString& label)
@@ -410,7 +407,7 @@ void TableModel::setColumnLabel(int column, const QString& label)
 	
 QString TableModel::columnLabel(int column) const
 {
-	return d_columns[column]->label();
+	return d_columns[column]->asDataSource()->label();
 }
 
 void TableModel::setColumnComment(int column, const QString& comment)
@@ -421,20 +418,19 @@ void TableModel::setColumnComment(int column, const QString& comment)
 	
 QString TableModel::columnComment(int column) const
 {
-	return d_columns[column]->comment();
+	return d_columns[column]->asDataSource()->comment();
 	
 }
 
-void TableModel::setColumnPlotDesignation(int column, Table::PlotDesignation pd)
+void TableModel::setColumnPlotDesignation(int column, AbstractDataSource::PlotDesignation pd)
 {
 	d_columns[column]->setPlotDesignation(pd);
 	updateHorizontalHeader(column, column);
 }
 	
-Table::PlotDesignation TableModel::columnPlotDesignation(int column) const
+AbstractDataSource::PlotDesignation TableModel::columnPlotDesignation(int column) const
 {
-	return d_columns[column]->plotDesignation();
-	
+	return d_columns[column]->asDataSource()->plotDesignation();
 }
 
 void TableModel::showComments(bool on)
@@ -453,14 +449,11 @@ bool TableModel::areCommentsShown()
 
 QString TableModel::columnHeader(int col)
 {
-	return headerData(int section, Qt::Horizontal).toString();
+	return headerData(col, Qt::Horizontal, Qt::DisplayRole).toString();
 }
 
-int TableModel::numColsWithPD(Table::PlotDesignation pd)
+int TableModel::numColsWithPD(AbstractDataSource::PlotDesignation pd)
 {
-	if(pd == Table::All)
-		return d_column_count;
-
 	int count = 0;
 	
 	for (int i=0; i<d_column_count; i++)

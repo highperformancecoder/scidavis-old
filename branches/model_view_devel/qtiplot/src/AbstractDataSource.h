@@ -80,14 +80,6 @@ public:
 	yErr = 5 //!< y errors
 	};
 
-	//! Return the value in row 'row' in its string representation
-	virtual QString textAt(int row) const = 0;
-	//! Return the value in row 'row' as a floating point number
-	/**
-	 * If the value cannot be converted to a meaningful
-	 * value, this will return 0.0.
-	 */
-	virtual double valueAt(int row) const = 0;
 	//! Return the data vector size
 	/**
 	 * \sa AbstractColumnData::setNumRows()

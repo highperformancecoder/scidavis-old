@@ -1,10 +1,10 @@
 /***************************************************************************
-    File                 : String2DoubleFilter.h
+    File                 : Double2DateTimeFilter.h
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
-    Description          : Locale-aware conversion filter QString -> double.
+    Description          : Conversion filter double -> QDateTime (using Julian day).
                            
  ***************************************************************************/
 
@@ -26,15 +26,17 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef STRING2DOUBLE_FILTER_H
-#define STRING2DOUBLE_FILTER_H
+#ifndef DOUBLE2DATE_TIME_FILTER_H
+#define DOUBLE2DATE_TIME_FILTER_H
 
 #include "AbstractSimpleFilter.h"
-#include "AbstractStringDataSource.h"
-#include <QLocale>
+#include "AbstractDoubleDataSource.h"
+#include <QDateTime>
+#include <QDate>
+#include <QTime>
 
-//! Locale-aware conversion filter QString -> double.
-class String2DoubleFilter : public AbstractSimpleFilter<double>
+//! Conversion filter double -> QDateTime (using Julian day).
+class Double2DateTimeFilter : public AbstractSimpleFilter<QDateTime>
 {
 	Q_OBJECT
 
@@ -46,17 +48,27 @@ class String2DoubleFilter : public AbstractSimpleFilter<double>
 		virtual int numRows() const {
 			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
 		}
-		virtual double valueAt(int row) const {
-			if (!d_inputs.value(0) || row >= d_inputs.at(0)->numRows()) return 0;
-			return QLocale().toDouble(static_cast<AbstractStringDataSource*>(d_inputs.at(0))->textAt(row));
+		virtual QDate dateAt(int row) const {
+			if (!d_inputs.value(0) || !d_inputs.at(0)->isValid(row)) return QDate();
+			return QDate::fromJulianDay(int(static_cast<AbstractDoubleDataSource*>(d_inputs.at(0))->valueAt(row)));
+		}
+		virtual QTime timeAt(int row) const {
+			if (!d_inputs.value(0) || !d_inputs.at(0)->isValid(row)) return QTime();
+			// we only want the digits behind the dot and 
+			// convert them from fraction of day to milliseconds
+			double val = static_cast<AbstractDoubleDataSource*>(d_inputs.at(0))->valueAt(row);
+			return QTime(12,0,0,0).addMSecs(int( (val - int(val)) * 86400000.0 ));
+		}
+		virtual QDateTime dateTimeAt(int row) const {
+			return QDateTime(dateAt(row), timeAt(row));
 		}
 
 	protected:
-		//! Using typed ports: only string inputs are accepted.
+		//! Using typed ports: only double inputs are accepted.
 		virtual bool inputAcceptable(int, AbstractDataSource *source) {
-			return source->inherits("AbstractStringDataSource");
+			return source->inherits("AbstractDoubleDataSource");
 		}
 };
 
-#endif // ifndef STRING2DOUBLE_FILTER_H
+#endif // ifndef DOUBLE2DATE_TIME_FILTER_H
 

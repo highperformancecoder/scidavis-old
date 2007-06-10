@@ -1,10 +1,11 @@
 /***************************************************************************
-    File                 : String2DoubleFilter.h
+    File                 : String2DateTimeFilter.h
     Project              : QtiPlot
     --------------------------------------------------------------------
-    Copyright            : (C) 2007 by Knut Franke
-    Email (use @ for *)  : knut.franke*gmx.de
-    Description          : Locale-aware conversion filter QString -> double.
+    Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
+                           Knut Franke
+    Email (use @ for *)  : thzs*gmx.net, knut.franke*gmx.de
+    Description          : Conversion filter QString -> QDateTime.
                            
  ***************************************************************************/
 
@@ -26,19 +27,41 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef STRING2DOUBLE_FILTER_H
-#define STRING2DOUBLE_FILTER_H
+#ifndef STRING2DATE_TIME_FILTER_H
+#define STRING2DATE_TIME_FILTER_H
 
 #include "AbstractSimpleFilter.h"
 #include "AbstractStringDataSource.h"
-#include <QLocale>
+#include <QDateTime>
+#include <QDate>
+#include <QTime>
 
-//! Locale-aware conversion filter QString -> double.
-class String2DoubleFilter : public AbstractSimpleFilter<double>
+/**
+ * \brief Conversion filter QString -> QDateTime.
+ *
+ * The standard use of this filter is explicitly specifiying the date/time format of the strings
+ * on the input, either in the constructor or via setFormat().
+ * However, if the input fails to comply to this format, String2DateTimeFilter
+ * tries to guess the format, using internal lists of common date and time formats (#date_formats
+ * and #time_formats).
+ */
+class String2DateTimeFilter : public AbstractSimpleFilter<QDateTime>
 {
 	Q_OBJECT
 
 	public:
+// select conversion format
+		//! Standard constructor.
+		explicit String2DateTimeFilter(QString format="yyyy-MM-dd hh:mm:ss.zzz") : d_format(format) {}
+		//! Set the format string to be used for conversion.
+		void setFormat(QString format) { d_format = format; }
+		//! Return the format string
+		/**
+		 * The default format string is "yyyy-MM-dd hh:mm:ss.zzz".
+		 * \sa QDate::toString()
+		 */
+		QString format() const { return d_format; }
+
 // simplified filter interface
 		virtual QString label() const {
 			return d_inputs.value(0) ? d_inputs.at(0)->label() : QString();
@@ -46,17 +69,23 @@ class String2DoubleFilter : public AbstractSimpleFilter<double>
 		virtual int numRows() const {
 			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
 		}
-		virtual double valueAt(int row) const {
-			if (!d_inputs.value(0) || row >= d_inputs.at(0)->numRows()) return 0;
-			return QLocale().toDouble(static_cast<AbstractStringDataSource*>(d_inputs.at(0))->textAt(row));
-		}
+		virtual QDateTime dateTimeAt(int row) const;
+		virtual QDate dateAt(int row) const { return dateTimeAt(row).date(); }
+		virtual QTime timeAt(int row) const { return dateTimeAt(row).time(); }
 
 	protected:
 		//! Using typed ports: only string inputs are accepted.
 		virtual bool inputAcceptable(int, AbstractDataSource *source) {
 			return source->inherits("AbstractStringDataSource");
 		}
+
+	private:
+		//! The format string.
+		QString d_format;
+
+		static const char * date_formats[];
+		static const char * time_formats[];
 };
 
-#endif // ifndef STRING2DOUBLE_FILTER_H
+#endif // ifndef STRING2DATE_TIME_FILTER_H
 

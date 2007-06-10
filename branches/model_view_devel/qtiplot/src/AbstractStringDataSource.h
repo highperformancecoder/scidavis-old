@@ -52,7 +52,8 @@ public:
 	//! Dtor
 	virtual ~AbstractStringDataSource(){};
 
-	virtual double valueAt(int row) const { return QLocale().toDouble(textAt(row)); }
+	//! Return the content of row 'row'.
+	virtual QString textAt(int row) const = 0;
 };
 
 #endif

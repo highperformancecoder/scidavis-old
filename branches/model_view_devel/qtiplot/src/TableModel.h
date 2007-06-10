@@ -30,7 +30,6 @@
 #ifndef TABLEDATAMODEL_H
 #define TABLEDATAMODEL_H
 
-#include "Table.h"
 #include <QAbstractItemModel>
 #include <QList>
 #include <QStringList>
@@ -93,7 +92,7 @@ public:
 	/**
 	 * \return returns a pointer to the column data or zero if 'port' is invalid
 	 */
-	AbstractColumnData *output(int port) const;
+	virtual AbstractDataSource *output(int port) const;
 	//! Return the output filter for column 'col'
 	AbstractFilter * outputFilter(int col) const;
 	//! Return the input filter for column 'col'
@@ -128,7 +127,7 @@ public:
 	 * \param cols a list of column data objects
 	 * \param before index of the column to insert before
 	 */
-	void insertColumns(QList<AbstractColumnData *> cols, int before);
+	void insertColumns(QList<AbstractColumnData *> cols, int first);
 	//! Remove Columns
 	 /**
 	  * This does not delete the removed columns because this
@@ -148,11 +147,6 @@ public:
 	//! Append rows to the table
 	void appendRows(int count);
 	//! Append columns to the table
-	 /**
-	 * \param type see AbstractColumnData::ColumnDataType
-	 * \param count number of columns to insert
-	 * \param rows number of initialized rows for the column
-	 */
 	void appendColumns(QList<AbstractColumnData *> cols);
 	//! Return the number of columns in the table
 	int columnCount() const { return d_column_count; }
@@ -167,9 +161,9 @@ public:
 	//! Return a column's comment
 	QString columnComment(int column) const;
 	//! Set a column's plot designation
-	void setColumnPlotDesignation(int column, Table::PlotDesignation pd);
+	void setColumnPlotDesignation(int column, AbstractDataSource::PlotDesignation pd);
 	//! Return a column's plot designation
-	Table::PlotDesignation columnPlotDesignation(int column) const;
+	AbstractDataSource::PlotDesignation columnPlotDesignation(int column) const;
 	//! Show or hide (if on = false) the column comments
 	void showComments(bool on = true);
 	//! Return whether comments are show currently
@@ -177,7 +171,7 @@ public:
 	//! Return the full column header string
 	QString columnHeader(int col);
 	//! Return the number of columns with a given plot designation
-	int numColsWithPD(Table::PlotDesignation pd);
+	int numColsWithPD(AbstractDataSource::PlotDesignation pd);
 	//! This must be called whenever columns were changed directly
 	/**
 	 * \param top first modified row

@@ -95,11 +95,11 @@ void StatisticsFilter::inputDataChanged(int port)
 	// initialize some entries fo the following iteration
 	s->min_index = s->max_index = s->first_valid_row;
 	double *data = new double[s->N]; // only for GSL
-	data[0] = s->min = s->max = d_inputs[port]->valueAt(s->first_valid_row);
+	data[0] = s->min = s->max = static_cast<AbstractDoubleDataSource*>(d_inputs[port])->valueAt(s->first_valid_row);
 
 	// iterate over target range, determining min and max, and fill *data
 	for (int i = 1; i < s->N; i++) {
-		data[i] = d_inputs[port]->valueAt(s->first_valid_row+i);
+		data[i] = static_cast<AbstractDoubleDataSource*>(d_inputs[port])->valueAt(s->first_valid_row+i);
 		if (data[i] < s->min) {
 			s->min = data[i];
 			s->min_index = s->first_valid_row + i;
@@ -162,7 +162,7 @@ QString StatisticsFilter::StringStatisticsColumn::textAt(int row) const
 			return d_parent->d_inputs.value(row) ?
 				d_parent->d_inputs[row]->label() :
 				QString();
-		case Rows: return QString("[%1:%2]").arg(s->first_valid_row + 1).arg(s->last_valid_row+1);
+		case Rows: return QString("[%1,%2]").arg(s->first_valid_row + 1).arg(s->last_valid_row+1);
 		default: return QString();
 	}
 }

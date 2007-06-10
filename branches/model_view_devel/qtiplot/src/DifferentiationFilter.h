@@ -60,6 +60,9 @@ class DifferentiationFilter : public AbstractDoubleDataSource, public AbstractFi
 			return port == 0 ? "X" : "Y";
 		}
 	protected:
+		virtual bool inputAcceptable(int, AbstractDataSource *source) {
+			return source->inherits("AbstractDoubleDataSource");
+		}
 		virtual void inputDescriptionAboutToChange(AbstractDataSource*) { emit descriptionAboutToChange(this); }
 		virtual void inputDescriptionChanged(AbstractDataSource*) { emit descriptionChanged(this); }
 		virtual void inputPlotDesignationAboutToChange(AbstractDataSource*) { emit plotDesignationAboutToChange(this); }
@@ -81,8 +84,10 @@ class DifferentiationFilter : public AbstractDoubleDataSource, public AbstractFi
 		}
 		virtual double valueAt(int row) const {
 			if (row<0 || row>=numRows()) return 0;
-			double d1 = (d_inputs[1]->valueAt(row+1)-d_inputs[1]->valueAt(row)) / (d_inputs[0]->valueAt(row+1)-d_inputs[0]->valueAt(row));
-			double d2 = (d_inputs[1]->valueAt(row+2)-d_inputs[1]->valueAt(row+1)) / (d_inputs[0]->valueAt(row+2)-d_inputs[0]->valueAt(row+1));
+			AbstractDoubleDataSource *x = static_cast<AbstractDoubleDataSource*>(d_inputs[0]);
+			AbstractDoubleDataSource *y = static_cast<AbstractDoubleDataSource*>(d_inputs[1]);
+			double d1 = (y->valueAt(row+1)-y->valueAt(row))   / (x->valueAt(row+1)-x->valueAt(row));
+			double d2 = (y->valueAt(row+2)-y->valueAt(row+1)) / (x->valueAt(row+2)-x->valueAt(row+1));
 			return 0.5*(d1 + d2);
 		}
 		virtual QString label() const {

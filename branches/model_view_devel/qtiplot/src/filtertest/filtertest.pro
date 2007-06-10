@@ -16,15 +16,19 @@ HEADERS += AbstractColumnData.h \
 			  AbstractDoubleDataSource.h \
 			  AbstractStringDataSource.h \
 			  AbstractFilter.h \
+			  CopyThroughFilter.h \
 			  StatisticsFilter.h \
 			  AbstractSimpleFilter.h \
 			  TruncationFilter.h \
 			  DifferentiationFilter.h \
 			  ReadOnlyTableModel.h \
-#			  TableModel.h \
+			  TableModel.h \
 			  DoubleTransposeFilter.h \
 			  String2DoubleFilter.h \
 			  Double2StringFilter.h \
+			  DateTime2StringFilter.h \
+			  String2DateTimeFilter.h \
+			  Double2DateTimeFilter.h \
 
 SOURCES += StringColumnData.cpp \
 			  DoubleColumnData.cpp \
@@ -32,6 +36,7 @@ SOURCES += StringColumnData.cpp \
 			  AbstractFilter.cpp \
 			  StatisticsFilter.cpp \
 			  ReadOnlyTableModel.cpp \
-#			  TableModel.cpp \
+			  String2DateTimeFilter.cpp \
+			  TableModel.cpp \
 			  main.cpp \
 

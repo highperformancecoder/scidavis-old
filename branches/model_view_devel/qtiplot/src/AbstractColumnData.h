@@ -69,16 +69,24 @@ public:
 	//! Dtor
 	virtual ~AbstractColumnData(){};
 
-	//! Copy (if necessary convert) another vector of data
+	//! Cast me to a data source (for read-access).
+	/**
+	 * Implementations of AbstractColumnData (the generic write interface) also implement
+	 * AbstractDataSource (the generic read interface). Because of limitations of the C++
+	 * language, you cannot safely cross-cast AbstractColumnData to AbstractDataSource, though.
+	 * This has to be done on a per-implementation basis; thus this virtual casting method.
+	 */
+	virtual AbstractDataSource *asDataSource() = 0;
+	//! Copy another vector of data
 	/**
 	 * \return true if copying was successful, otherwise false
+	 *
 	 * False means the column hast been filled with a
 	 * standard value in some or all rows and some or
 	 * all data could not be converted to the stored data type.
 	 */
 	virtual bool copy(const AbstractDataSource * other) = 0;
-	//! Set a row value from a string
-	virtual void setRowFromString(int row, const QString& string) = 0;
+	virtual bool copy(const AbstractDataSource * source, int source_start, int dest_start, int num_rows) = 0;
 	//! Resize the data vector
 	virtual void setNumRows(int new_size) = 0;
 	//! Set the column label

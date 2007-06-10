@@ -30,6 +30,16 @@
  ***************************************************************************/
 
 #include "ReadOnlyTableModel.h"
+#include "AbstractStringDataSource.h"
+#include "CopyThroughFilter.h"
+#include "Double2StringFilter.h"
+#include "DateTime2StringFilter.h"
+
+ReadOnlyTableModel::~ReadOnlyTableModel()
+{
+	foreach(AbstractFilter *i, d_output_filters)
+		if (i) delete i;
+}
 
 Qt::ItemFlags ReadOnlyTableModel::flags(const QModelIndex & index ) const
 {
@@ -44,10 +54,10 @@ QVariant ReadOnlyTableModel::data(const QModelIndex &index, int role) const
 {
 	if( !index.isValid() ||
 			((role != Qt::DisplayRole) && (role != Qt::EditRole) && (role != Qt::ToolTipRole) ) ||
-			!d_inputs.value(index.column()) )
+			!d_output_filters.value(index.column()) )
 		return QVariant();
 
-	return QVariant(d_inputs.at(index.column())->textAt(index.row()));
+	return QVariant(static_cast<AbstractStringDataSource*>(d_output_filters.at(index.column())->output(0))->textAt(index.row()));
 }
 
 
@@ -99,6 +109,13 @@ int ReadOnlyTableModel::numInputs() const
 	return -1; 
 }
 
+bool ReadOnlyTableModel::inputAcceptable(int, AbstractDataSource *source)
+{
+	return source->inherits("AbstractStringDataSource") ||
+		source->inherits("AbstractDoubleDataSource") ||
+		source->inherits("AbstractDateTimeDataSource");
+}
+
 int ReadOnlyTableModel::numOutputs() const 
 { 
 	return 0; 
@@ -111,7 +128,43 @@ AbstractDataSource* ReadOnlyTableModel::output(int) const
 
 void ReadOnlyTableModel::inputDataChanged(int port) 
 {
+	if (port >= d_output_filters.size())
+		d_output_filters.insert(port, 0);
+	AbstractFilter *old_filter = d_output_filters.at(port);
+	if (d_inputs.at(port)) {
+		if (old_filter) {
+			// input is connected and there's already a filter for it
+			if (!old_filter->input(0, d_inputs.at(port))) {
+				// can't connect => type of input changed
+				delete old_filter;
+				d_output_filters[port] = newOutputFilterFor(d_inputs.at(port));
+			}
+		} else // just create a new filter for the input
+			d_output_filters[port] = newOutputFilterFor(d_inputs.at(port));
+	} else {
+		// input disconnected, therefore we delete its filter
+		if (old_filter)
+			delete old_filter;
+		// shrink d_output_filters to size of d_inputs
+		for (int i=d_output_filters.size(); i>d_inputs.size(); i--)
+			d_output_filters.removeLast();
+	}
 	emit dataChanged(createIndex(0,port), createIndex(d_inputs[port]->numRows()-1,port));
+}
+
+AbstractFilter *ReadOnlyTableModel::newOutputFilterFor(AbstractDataSource *source)
+{
+	AbstractFilter *result = 0;
+	if (source->inherits("AbstractStringDataSource"))
+		result = new CopyThroughFilter();
+	else if (source->inherits("AbstractDoubleDataSource"))
+		result = new Double2StringFilter();
+	else if (source->inherits("AbstractDateTimeDataSource"))
+		result = new DateTime2StringFilter();
+	else
+		return 0;
+	result->input(0, source);
+	return result;
 }
 
 void ReadOnlyTableModel::inputDescriptionChanged(int port) 

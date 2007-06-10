@@ -122,7 +122,6 @@ template<class T> class IntervalAttribute
 		void removeRows(int first, int count)
 		{
 			QList< Interval<int> > temp_list;
-			int c,cc;
 			Interval<int> i(first, first+count-1);
 			// first: remove the relevant rows from all intervals
 			for(int c=0; c<d_intervals.size(); c++)
@@ -144,7 +143,7 @@ template<class T> class IntervalAttribute
 				}
 			}
 			// second: translate all intervals that start at 'first+count' or later
-			for(c=0; c<d_intervals.size(); c++)
+			for(int c=0; c<d_intervals.size(); c++)
 			{
 				if(d_intervals.at(c).start() >= first+count)
 					d_intervals[c].translate(-count);
@@ -154,7 +153,7 @@ template<class T> class IntervalAttribute
 			QList< Interval<int> > intervals_copy = d_intervals;
 			d_values.clear();
 			d_intervals.clear();
-			for(c=0; c<intervals_copy.size(); c++)
+			for(int c=0; c<intervals_copy.size(); c++)
 			{
 				i = intervals_copy.at(c);
 				T value = values_copy.at(c);

@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
-    Description          : Locale-aware converter double -> QString.
+    Description          : Locale-aware conversion filter double -> QString.
                            
  ***************************************************************************/
 
@@ -33,26 +33,29 @@
 #include "AbstractDoubleDataSource.h"
 #include <QLocale>
 
-//! Locale-aware converter double -> QString.
+//! Locale-aware conversion filter double -> QString.
 class Double2StringFilter : public AbstractSimpleFilter<QString>
 {
 	Q_OBJECT
 
 	public:
+		explicit Double2StringFilter(char format='e', int digits=6) : d_format(format), d_digits(digits) {}
 // select conversion format
 		//! Set format character as in QString::number
-		virtual void setNumericFormat(char format) { d_format = format; }
+		void setNumericFormat(char format) { d_format = format; }
 		//! Set number of displayed digits
-		virtual void setNumDigits(int digits) { d_digits = digits; }
+		void setNumDigits(int digits) { d_digits = digits; }
+		//! Get format character as in QString::number
+		char numericFormat() const { return d_format; }
+		//! Get number of displayed digits
+		int numDigits() const { return d_digits; }
 
 // simplified filter interface
 		virtual QString textAt(int row) const {
-			// if we're using filters like this one for conversion, we can drop
-			// AbstractDataSource::valueAt() and AbstractDataSource::textAt(), replacing them with
-			// virtual Type TypeDataSource::valueAt(int row)
-			// format options could then be removed from *DataSource and *ColumnData
 			if (!d_inputs.value(0) || row >= d_inputs.at(0)->numRows()) return QString();
-			return QLocale().toString(d_inputs.at(0)->valueAt(row), d_format, d_digits);
+			return QLocale().toString(
+					static_cast<AbstractDoubleDataSource*>(d_inputs.at(0))->valueAt(row),
+					d_format, d_digits);
 		}
 		virtual QString label() const {
 			return d_inputs.value(0) ? d_inputs.at(0)->label() : QString();
@@ -60,15 +63,17 @@ class Double2StringFilter : public AbstractSimpleFilter<QString>
 		virtual int numRows() const {
 			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
 		}
+
+	protected:
 		//! Using typed ports: only double inputs are accepted.
-		virtual bool input(int port, AbstractDataSource *source) {
-			if (!source->inherits("AbstractDoubleDataSource"))
-				return false;
-			return AbstractSimpleFilter<QString>::input(port, source);
+		virtual bool inputAcceptable(int, AbstractDataSource *source) {
+			return source->inherits("AbstractDoubleDataSource");
 		}
 
 	private:
+		//! Format character as in QString::number 
 		char d_format;
+		//! Display digits or precision as in QString::number  
 		int d_digits;
 };
 

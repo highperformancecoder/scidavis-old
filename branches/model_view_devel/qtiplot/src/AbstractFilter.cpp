@@ -32,8 +32,9 @@ void AbstractFilterSlotMachine::inputAboutToBeReplaced(AbstractDataSource* sourc
 bool AbstractFilter::input(int port, AbstractDataSource *source)
 {
 	if (port<0 || (numInputs()>=0 && port>=numInputs())) return false;
+	if (!inputAcceptable(port, source)) return false;
 	if (d_inputs.size() <= port) d_inputs.resize(port+1);
-	if (d_inputs[port]) { // disconnect the old input
+	if (d_inputs.at(port)) { // disconnect the old input's signals
 		d_inputs[port]->disconnect(SIGNAL(descriptionAboutToChange(AbstractDataSource*)), &d_slot_machine);
 		d_inputs[port]->disconnect(SIGNAL(descriptionChanged(AbstractDataSource*)), &d_slot_machine);
 		d_inputs[port]->disconnect(SIGNAL(plotDesignationAboutToChange(AbstractDataSource*)), &d_slot_machine);
@@ -42,6 +43,7 @@ bool AbstractFilter::input(int port, AbstractDataSource *source)
 		d_inputs[port]->disconnect(SIGNAL(dataChanged(AbstractDataSource*)), &d_slot_machine);
 		d_inputs[port]->disconnect(SIGNAL(aboutToBeReplaced(AbstractDataSource*,AbstractDataSource*)), &d_slot_machine);
 	}
+	// replace input, notifying the filter implementation of the changes
 	inputDescriptionAboutToChange(d_inputs[port]);
 	inputPlotDesignationAboutToChange(d_inputs[port]);
 	inputDataAboutToChange(d_inputs[port]);
@@ -49,20 +51,28 @@ bool AbstractFilter::input(int port, AbstractDataSource *source)
 	inputDescriptionChanged(source);
 	inputPlotDesignationChanged(source);
 	inputDataChanged(source);
-	QObject::connect(source, SIGNAL(descriptionAboutToChange(AbstractDataSource*)),
-			&d_slot_machine, SLOT(inputDescriptionAboutToChange(AbstractDataSource*)));
-	QObject::connect(source, SIGNAL(descriptionChanged(AbstractDataSource*)),
-			&d_slot_machine, SLOT(inputDescriptionChanged(AbstractDataSource*)));
-	QObject::connect(source, SIGNAL(plotDesignationAboutToChange(AbstractDataSource*)),
-			&d_slot_machine, SLOT(inputPlotDesignationAboutToChange(AbstractDataSource*)));
-	QObject::connect(source, SIGNAL(plotDesignationChanged(AbstractDataSource*)),
-			&d_slot_machine, SLOT(inputPlotDesignationChanged(AbstractDataSource*)));
-	QObject::connect(source, SIGNAL(dataAboutToChange(AbstractDataSource*)),
-			&d_slot_machine, SLOT(inputDataAboutToChange(AbstractDataSource*)));
-	QObject::connect(source, SIGNAL(dataChanged(AbstractDataSource*)),
-			&d_slot_machine, SLOT(inputDataChanged(AbstractDataSource*)));
-	QObject::connect(source, SIGNAL(aboutToBeReplaced(AbstractDataSource*,AbstractDataSource*)),
-			&d_slot_machine, SLOT(inputAboutToBeReplaced(AbstractDataSource*,AbstractDataSource*)));
+	if (source) { // we really have a new source, so connect its signals
+		QObject::connect(source, SIGNAL(descriptionAboutToChange(AbstractDataSource*)),
+				&d_slot_machine, SLOT(inputDescriptionAboutToChange(AbstractDataSource*)));
+		QObject::connect(source, SIGNAL(descriptionChanged(AbstractDataSource*)),
+				&d_slot_machine, SLOT(inputDescriptionChanged(AbstractDataSource*)));
+		QObject::connect(source, SIGNAL(plotDesignationAboutToChange(AbstractDataSource*)),
+				&d_slot_machine, SLOT(inputPlotDesignationAboutToChange(AbstractDataSource*)));
+		QObject::connect(source, SIGNAL(plotDesignationChanged(AbstractDataSource*)),
+				&d_slot_machine, SLOT(inputPlotDesignationChanged(AbstractDataSource*)));
+		QObject::connect(source, SIGNAL(dataAboutToChange(AbstractDataSource*)),
+				&d_slot_machine, SLOT(inputDataAboutToChange(AbstractDataSource*)));
+		QObject::connect(source, SIGNAL(dataChanged(AbstractDataSource*)),
+				&d_slot_machine, SLOT(inputDataChanged(AbstractDataSource*)));
+		QObject::connect(source, SIGNAL(aboutToBeReplaced(AbstractDataSource*,AbstractDataSource*)),
+				&d_slot_machine, SLOT(inputAboutToBeReplaced(AbstractDataSource*,AbstractDataSource*)));
+	} else { // source==0, that is, the input port has been disconnected
+		// try to shrink d_inputs
+		int num_connected_inputs = d_inputs.size();
+		while (d_inputs.at(num_connected_inputs-1) == 0)
+			num_connected_inputs--;
+		d_inputs.resize(num_connected_inputs);
+	}
 	return true;
 }
 

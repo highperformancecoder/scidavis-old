@@ -28,33 +28,43 @@
  ***************************************************************************/
 
 #include "DateTimeColumnData.h"
-#include "AbstractDoubleDataSource.h"
-#include "AbstractStringDataSource.h"
 #include <QObject>
-#include <QStringList>
 
 DateTimeColumnData::DateTimeColumnData() 
-	: d_format("yyyy-MM-dd hh:mm:ss.zzz")
 {
 }
 
 DateTimeColumnData::DateTimeColumnData(const QList<QDateTime>& list)
-	: d_format("yyyy-MM-dd hh:mm:ss.zzz") 
 { 
 	*(static_cast< QList<QDateTime>* >(this)) = list; 
 }
 
 bool DateTimeColumnData::copy(const AbstractDataSource * other)
 {
-	if(other->inherits("AbstractDoubleDataSource"))
-			return copyDoubleDataSource(static_cast<const AbstractDoubleDataSource *>(other));
-	if(other->inherits("AbstractStringDataSource"))
-			return copyStringDataSource(static_cast<const AbstractStringDataSource *>(other));
-	if(other->inherits("AbstractDateTimeDataSource"))
-			return copyDateTimeDataSource(static_cast<const AbstractDateTimeDataSource *>(other));
-	return false;
+	const AbstractDateTimeDataSource *other_as_date_time = qobject_cast<const AbstractDateTimeDataSource*>(other);
+	if(!other_as_date_time) return false;
+	emit dataAboutToChange(this);
+ 	clear();
+	int end = other_as_date_time->numRows();
+	for(int i=0; i<end; i++)
+		*this << other_as_date_time->dateTimeAt(i);
+	emit dataChanged(this);
+	return true;
 }
-	
+
+bool DateTimeColumnData::copy(const AbstractDataSource * source, int source_start, int dest_start, int num_rows)
+{
+	const AbstractDateTimeDataSource *source_as_date_time = qobject_cast<const AbstractDateTimeDataSource*>(source);
+	if (!source_as_date_time) return false;
+	emit dataAboutToChange(this);
+	if (dest_start + num_rows > numRows())
+		setNumRows(dest_start + num_rows);
+	for (int source_row = source_start, dest_row = dest_start; source_row-source_start < num_rows;)
+		replace(dest_row++, source_as_date_time->dateTimeAt(source_row++));
+	emit dataChanged(this);
+	return true;
+}
+
 int DateTimeColumnData::numRows() const 
 { 
 	return size(); 
@@ -99,43 +109,6 @@ void DateTimeColumnData::setPlotDesignation(AbstractDataSource::PlotDesignation 
 void DateTimeColumnData::notifyReplacement(AbstractDataSource * replacement)
 {
 	emit aboutToBeReplaced(this, replacement); 
-}
-
-// Some format strings to try in setRowFromString()
-#define NUM_DATE_FMT_STRINGS 11
-static const char * common_date_format_strings[NUM_DATE_FMT_STRINGS] = {
-	"yyyy-M-d", // ISO 8601 w/ and w/o leading zeros
-	"yyyy/M/d", 
-	"d/M/yyyy", // European style day/month order (this order seems to be used in more countries than the US style M/d/yyyy)
-	"d/M/yy", 
-	"d-M-yyyy",
-	"d-M-yy", 
-	"d.M.yyyy", // German style
-	"d.M.yy",
-	"M/yyyy",
-	"d.M.", // German form w/o year
-	"yyyyMMdd"
-};
-
-#define NUM_TIME_FMT_STRINGS 9
-static const char * common_time_format_strings[NUM_TIME_FMT_STRINGS] = {
-			"h",
-			"h ap",
-			"h:mm",
-			"h:mm ap",
-			"h:mm:ss",
-			"h:mm:ss.zzz",
-			"h:mm:ss:zzz",
-			"mm:ss.zzz",
-			"hmmss",
-};
-
-
-void DateTimeColumnData::setRowFromString(int row, const QString& string)
-{
-	emit dataAboutToChange(this);
-	(*(static_cast< QList<QDateTime>* >(this)))[row] = dateTimeFromString(string, d_format);
-	emit dataChanged(this);
 }
 
 void DateTimeColumnData::setNumRows(int new_size)
@@ -192,31 +165,6 @@ void DateTimeColumnData::removeRows(int first, int count)
 	emit rowsDeleted(this, first, count);
 }
 
-void DateTimeColumnData::setFormat(const QString& format) 
-{ 
-	emit formatAboutToChange(this);
-	d_format = format; 
-	emit formatChanged(this);
-}
-
-QString DateTimeColumnData::textAt(int row) const 
-{ 
-	QDateTime temp = value(row);
-	if(!temp.date().isValid() && temp.time().isValid())
-		temp.setDate(QDate(1900,1,1)); // see class documentation
-	return temp.toString(d_format);
-}
-
-double DateTimeColumnData::valueAt(int row) const 
-{ 
-	return double(value(row).date().toJulianDay()) + double( -at(row).time().msecsTo(QTime(12,0,0,0))/86400000.0 );
-}
-
-QString DateTimeColumnData::format() const 
-{ 
-	return d_format; 
-}
-
 QDate DateTimeColumnData::dateAt(int row) const 
 { 
 	return value(row).date(); 
@@ -229,92 +177,5 @@ QTime DateTimeColumnData::timeAt(int row) const
 QDateTime DateTimeColumnData::dateTimeAt(int row) const 
 { 
 	return value(row); 
-}
-
-bool DateTimeColumnData::copyDoubleDataSource(const AbstractDoubleDataSource * other)
-{ 
-	emit dataAboutToChange(this);
- 	clear();
-
-	int end = other->numRows();
-	QDateTime temp;
-	double val;
-	for(int i=0; i<end; i++)
-	{
-		val = other->valueAt(i);
-		temp.setDate( QDate::fromJulianDay(int(val + 0.5)) ); 
-								// we only want the digits behind the dot and 
-								// convert them from fraction of day to milliseconds
-		temp.setTime( QTime(12,0,0,0).addMSecs( int(val - int(other->valueAt(i)) * 86400000.0) ) );
-		*this << temp;
-	}
-		
-	emit dataChanged(this);
-	return true;
-}
-
-bool DateTimeColumnData::copyDateTimeDataSource(const AbstractDateTimeDataSource * other)
-{ 
-	emit dataAboutToChange(this);
- 	clear();
-
-	int end = other->numRows();
-	for(int i=0; i<end; i++)
-		*this << other->dateTimeAt(i);
-	d_format = other->format();
-	emit dataChanged(this);
-	return true;
-}
-
-bool DateTimeColumnData::copyStringDataSource(const AbstractStringDataSource * other)
-{ 
-	emit dataAboutToChange(this);
- 	clear();
-
-	int end = other->numRows();
-	for(int i=0; i<end; i++)
-		*this << dateTimeFromString(other->textAt(i), d_format);
-	emit dataChanged(this);
-	return true;
-}
-
-
-QDateTime DateTimeColumnData::dateTimeFromString(const QString& string, const QString& format)
-{
-	QDateTime result = QDateTime::fromString(string, format);
-	if(result.date().isValid() || result.time().isValid())
-		return result;
-
-	// try other format strings 
-	// comma and space are valid separators between date and time
-	QStringList strings = string.simplified().split(",", QString::SkipEmptyParts);
-	if(strings.size() == 1) strings = strings.at(0).split(" ", QString::SkipEmptyParts);
-
-	if(strings.size() < 1)
-		return result;
-	
-	QDate date_result;
-	QTime time_result;
-
-	QString date_string = strings.at(0).trimmed();
-	QString time_string;
-	if(strings.size() > 1)
-		time_string = strings.at(1).trimmed();
-	else
-		time_string = date_string;
-
-	int i=0;
-	// find a valid date
-	while( !date_result.isValid() && i<NUM_DATE_FMT_STRINGS )
-		date_result = QDate::fromString(date_string, common_date_format_strings[i++]);
-	i=0;
-	// find a valid time
-	while( !time_result.isValid() && i<NUM_TIME_FMT_STRINGS )
-		time_result = QTime::fromString(time_string, common_time_format_strings[i++]);
-
-	if(!date_result.isValid())
-		date_result.setDate(1900,1,1); // this is what QDateTime does e.g. for
-										// QDateTime::fromString("00:00","hh:mm");
-	return QDateTime(date_result, time_result);
 }
 

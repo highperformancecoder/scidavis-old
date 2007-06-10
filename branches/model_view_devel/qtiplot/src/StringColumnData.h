@@ -57,13 +57,12 @@ public:
 	StringColumnData();
 	//! Ctor
 	StringColumnData(const QStringList& list);
+	virtual AbstractDataSource *asDataSource() { return this; }
 
 	//! \name Data writing functions
 	//@{
-	//! Copy (if necessary convert) another vector of data
 	virtual bool copy(const AbstractDataSource * other);
-	//! Set a row value from a string
-	virtual void setRowFromString(int row, const QString& string);
+	virtual bool copy(const AbstractDataSource * other, int source_start, int dest_start, int num_rows);
 	//! Resize the string list
 	virtual void setNumRows(int new_size);
 	//! Set the column label
@@ -86,8 +85,6 @@ public:
 	virtual int numRows() const;
 	//! Return the string in row 'row'
 	virtual QString textAt(int row) const;
-	//! Return the corresponding double value of row 'row'
-	virtual double valueAt(int row) const;
 	//! Return the column label
 	virtual QString label() const;
 	//! Return the column comment

@@ -1,11 +1,12 @@
 /***************************************************************************
-    File                 : AbstractDateTimeDataSource.h
+    File                 : DateTime2DoubleFilter.h
     Project              : QtiPlot
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
-    Email (use @ for *)  : thzs*gmx.net
-    Description          : Type-specific reading interface for a date+time data source
-
+                           Knut Franke
+    Email (use @ for *)  : thzs*gmx.net, knut.franke*gmx.de
+    Description          : Conversion filter QDateTime -> double (using Julian day).
+                           
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,38 +27,40 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
+#ifndef DATE_TIME2DOUBLE_FILTER_H
+#define DATE_TIME2DOUBLE_FILTER_H
 
-#ifndef DATETIMEDATASOURCE_H
-#define DATETIMEDATASOURCE_H
+#include "AbstractSimpleFilter.h"
+#include "AbstractDateTimeDataSource.h"
+#include <QDateTime>
+#include <QDate>
+#include <QTime>
 
-#include "AbstractDataSource.h"
-class QDate;
-class QTime;
-class QDateTime;
-class QString;
-
-//! Type-specific reading interface for a date+time data source
-/**
-  * This class defines the specific reading interface for
-  * a class storing a list of QDateTimes. It only defines
-  * the interface and has no data members itself.
-  * \sa AbstractDataSource
-  * \sa AbstractColumnData
-  */
-class AbstractDateTimeDataSource : public AbstractDataSource
+//! Conversion filter QDateTime -> double (using Julian day).
+class DateTime2DoubleFilter : public AbstractSimpleFilter<double>
 {
 	Q_OBJECT
 
-public:
-	//! Dtor
-	virtual ~AbstractDateTimeDataSource(){};
+	public:
+		virtual QString label() const {
+			return d_inputs.value(0) ? d_inputs.at(0)->label() : QString();
+		}
+		virtual int numRows() const {
+			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
+		}
+		virtual double valueAt(int row) const {
+			if (!d_inputs.value(0) || !d_inputs.at(0)->isValid(row)) return 0;
+			QDateTime dt = static_cast<AbstractDateTimeDataSource*>(d_inputs.at(0))->dateTimeAt(row);
+			return double(dt.date().toJulianDay()) +
+				double( -dt.time().msecsTo(QTime(12,0,0,0))/86400000.0 );
+		}
 
-	//! Return the date part of row 'row'
-	virtual QDate dateAt(int row) const = 0;
-	//! Return the time part of row 'row'
-	virtual QTime timeAt(int row) const = 0;
-	//! Return the QDateTime in row 'row'
-	virtual QDateTime dateTimeAt(int row) const = 0;
+	protected:
+		//! Using typed ports: only DateTime inputs are accepted.
+		virtual bool inputAcceptable(int, AbstractDataSource *source) {
+			return source->inherits("AbstractDateTimeDataSource");
+		}
 };
 
-#endif
+#endif // ifndef DATE_TIME2DOUBLE_FILTER_H
+

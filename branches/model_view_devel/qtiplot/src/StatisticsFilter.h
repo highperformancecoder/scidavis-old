@@ -55,6 +55,9 @@ class StatisticsFilter : public AbstractFilter {
 		//! Number of rows = number of inputs that have been provided.
 		int numRows() const;
 	protected:
+		virtual bool inputAcceptable(int, AbstractDataSource *source) {
+			return source->inherits("AbstractDoubleDataSource");
+		}
 		virtual void inputDescriptionAboutToChange(AbstractDataSource*) { d_strings[0]->dataAboutToChange(d_doubles[0]); }
 		virtual void inputDescriptionChanged(AbstractDataSource*) { d_strings[0]->dataChanged(d_doubles[0]); }
 		virtual void inputDataAboutToChange(AbstractDataSource*);

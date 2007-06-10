@@ -4,6 +4,7 @@
 #include <cppunit/CompilerOutputter.h>
 #include "IntervalTest.h"
 #include "ColumnDataTest.h"
+#include "ConversionFilterTest.h"
 
 int main()
 {
@@ -14,6 +15,7 @@ int main()
 
 	runner.addTest(IntervalTest::suite());
 	runner.addTest(ColumnDataTest::suite());
+	runner.addTest(ConversionFilterTest::suite());
 
 	runner.run(result);
 	CppUnit::CompilerOutputter out(&collector, CppUnit::stdCOut());

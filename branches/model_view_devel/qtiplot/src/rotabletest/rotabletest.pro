@@ -19,7 +19,10 @@ HEADERS += AbstractColumnData.h \
 		   AbstractDoubleDataSource.h \
 		   AbstractStringDataSource.h \
 		   AbstractFilter.h \
-		   ReadOnlyTableModel.h 
+			CopyThroughFilter.h \
+			Double2StringFilter.h \
+			DateTime2StringFilter.h \
+		   ReadOnlyTableModel.h \
 
 SOURCES += main.cpp 
 

@@ -145,6 +145,21 @@ template<class T> class IntervalBase
 				}
 			}
 		}
+		QList< Interval<T> > operator-(QList< Interval<T> > subtrahend) {
+			QList< Interval<T> > *tmp1, *tmp2;
+			tmp1 = new QList< Interval<T> >();
+			*tmp1 << *static_cast< Interval<T>* >(this);
+			foreach(Interval<T> i, subtrahend) {
+				tmp2 = new QList< Interval<T> >();
+				foreach(Interval<T> j, *tmp1)
+					*tmp2 << subtract(j, i);
+				delete tmp1;
+				tmp1 = tmp2;
+			}
+			QList< Interval<T> > result = *tmp1;
+			delete tmp1;
+			return result;
+		}
 	//! Return a string in the format '[start,end]'
 	QString toString() const {
 		return "[" + QString::number(d_start) + "," + QString::number(d_end) + "]";

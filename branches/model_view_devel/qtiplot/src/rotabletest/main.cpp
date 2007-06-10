@@ -12,6 +12,7 @@
 #include "ReadOnlyTableModel.h"
 
 #include "AbstractFilter.h"
+#include "CopyThroughFilter.h"
 
 #define DOUT(col) {for(int i=0;i<(col).numRows();i++)qDebug() << (col).textAt(i) << " ";qDebug() << "\n";}
 
