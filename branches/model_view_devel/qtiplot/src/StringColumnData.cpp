@@ -46,6 +46,7 @@ bool StringColumnData::copy(const AbstractDataSource * other)
 
 	int count = other_as_string->numRows();
 	setNumRows(count);
+
 	emit dataAboutToChange(this);
 	for(int i=0; i<count; i++)
 	{

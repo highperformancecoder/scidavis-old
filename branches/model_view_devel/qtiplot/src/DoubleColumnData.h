@@ -58,7 +58,24 @@ public:
 
 	//! \name Data writing functions
 	//@{
+	//! Copy another double data source
+	/**
+	 * This function will return false if the data type
+	 * of 'other' is not the same as the type of 'this'.
+	 * The validity information for the rows is also copied.
+	 * Use a filter to convert a data source.
+	 */
 	virtual bool copy(const AbstractDataSource * other);
+	//! Copies part of another data source of the same type
+	/**
+	 * This function will return false if the data type
+	 * of 'other' is not the same as the type of 'this'.
+	 * The validity information for the rows is also copied.
+	 * \param other pointer to the data source to copy
+	 * \param src_start first row to copy in the data source to copy
+	 * \param dest_start first row to copy in
+	 * \param num_rows the number of rows to copy
+	 */ 
 	virtual bool copy(const AbstractDataSource * other, int source_start, int dest_start, int num_rows);
 	//! Resize the data vector
 	virtual void setNumRows(int new_size);
@@ -74,6 +91,8 @@ public:
 	virtual void removeRows(int first, int count);
 	//! This must be called before the column is replaced by another
 	virtual void notifyReplacement(AbstractDataSource * replacement);
+	//! Clear the whole column
+	virtual void clear();
 	//@}
 
 	//! \name Data reading functions
@@ -153,6 +172,8 @@ public:
 		d_validity.setValue(i, valid);
 		emit validityChanged(this);	
 	}
+	//! Overloaded function for convenience
+	virtual void setValid(int row, bool valid = true) { setValid(Interval<int>(row,row), valid); }
 	//! Select of deselect a certain interval
 	/**
 	 * \param i the interval
@@ -164,6 +185,8 @@ public:
 		d_selection.setValue(i, select);
 		emit selectionChanged(this);	
 	}
+	//! Overloaded function for convenience
+	virtual void setSelected(int row, bool select = true) { setSelected(Interval<int>(row,row), select); }
 	//! Set an interval masked
 	/**
 	 * \param i the interval
@@ -175,6 +198,8 @@ public:
 		d_masking.setValue(i, mask);
 		emit maskingChanged(this);	
 	}
+	//! Overloaded function for convenience
+	virtual void setMasked(int row, bool mask = true) { setMasked(Interval<int>(row,row), mask); }
 	//@}
 	
 protected:

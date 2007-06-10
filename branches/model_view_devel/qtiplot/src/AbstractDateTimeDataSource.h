@@ -52,8 +52,12 @@ public:
 	//! Dtor
 	virtual ~AbstractDateTimeDataSource(){};
 
+	//! Return the date part of row 'row'
+	virtual QDate dateAt(int row) const = 0;
+	//! Return the time part of row 'row'
+	virtual QTime timeAt(int row) const = 0;
 	//! Return the QDateTime in row 'row'
-	virtual QDateTime valueAt(int row) const = 0;
+	virtual QDateTime dateTimeAt(int row) const = 0;
 };
 
 #endif

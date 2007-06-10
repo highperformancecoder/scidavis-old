@@ -56,8 +56,6 @@ public:
 	virtual ~AbstractDoubleDataSource() {
 		if(d_data_cache) delete[] d_data_cache;
 	}
-	//! Return the value in row 'row'.
-	virtual double valueAt(int row) const = 0;
 
 	//! Return a read-only array pointer for fast data access
 	/**

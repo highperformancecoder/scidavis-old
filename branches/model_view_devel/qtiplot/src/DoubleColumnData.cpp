@@ -40,12 +40,17 @@ bool DoubleColumnData::copy(const AbstractDataSource * other)
 {
 	const AbstractDoubleDataSource *other_as_double = qobject_cast<const AbstractDoubleDataSource*>(other);
 	if (!other_as_double) return false;
+
+	int count = other_as_double->numRows();
+	setNumRows(count);
+
 	emit dataAboutToChange(this);
-	int end = other_as_double->numRows();
-	setNumRows(end);
 	double * ptr = data();
-	for(int i=0; i<end; i++)
+	for(int i=0; i<count; i++)
+	{
 		ptr[i] = other_as_double->valueAt(i);
+		setValid(i, other_as_double->isValid(i));
+	}
 	emit dataChanged(this);
 	return true;
 }
@@ -54,12 +59,17 @@ bool DoubleColumnData::copy(const AbstractDataSource * source, int source_start,
 {
 	const AbstractDoubleDataSource *source_as_double = qobject_cast<const AbstractDoubleDataSource*>(source);
 	if (!source_as_double) return false;
-	emit dataAboutToChange(this);
+
 	if (dest_start + num_rows > numRows())
 		setNumRows(dest_start + num_rows);
+
+	emit dataAboutToChange(this);
 	double * ptr = data();
-	for (int source_row = source_start, dest_row = dest_start; source_row-source_start < num_rows;)
-		ptr[dest_row++] = source_as_double->valueAt(source_row++);
+	for(int i=0; i<num_rows; i++)
+	{
+		ptr[dest_start+i] = source_as_double->valueAt(source_start+i);
+		setValid(dest_start+i, source_as_double->isValid(source_start+i));
+	}
 	emit dataChanged(this);
 	return true;
 }
@@ -169,4 +179,9 @@ double DoubleColumnData::valueAt(int row) const
 const double * DoubleColumnData::constDataPointer() const 
 { 
 	return data(); 
+}
+
+void DoubleColumnData::clear()
+{
+	removeRows(0, size());
 }

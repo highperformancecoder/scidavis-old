@@ -43,11 +43,16 @@ bool DateTimeColumnData::copy(const AbstractDataSource * other)
 {
 	const AbstractDateTimeDataSource *other_as_date_time = qobject_cast<const AbstractDateTimeDataSource*>(other);
 	if(!other_as_date_time) return false;
+
+	int count = other_as_date_time->numRows();
+	setNumRows(count);
+
 	emit dataAboutToChange(this);
- 	clear();
-	int end = other_as_date_time->numRows();
-	for(int i=0; i<end; i++)
-		*this << other_as_date_time->dateTimeAt(i);
+	for(int i=0; i<count; i++)
+	{
+		replace(i, other_as_date_time->dateTimeAt(i));
+		setValid(i, other_as_date_time->isValid(i));
+	}
 	emit dataChanged(this);
 	return true;
 }
@@ -56,11 +61,16 @@ bool DateTimeColumnData::copy(const AbstractDataSource * source, int source_star
 {
 	const AbstractDateTimeDataSource *source_as_date_time = qobject_cast<const AbstractDateTimeDataSource*>(source);
 	if (!source_as_date_time) return false;
-	emit dataAboutToChange(this);
+
 	if (dest_start + num_rows > numRows())
 		setNumRows(dest_start + num_rows);
-	for (int source_row = source_start, dest_row = dest_start; source_row-source_start < num_rows;)
-		replace(dest_row++, source_as_date_time->dateTimeAt(source_row++));
+
+	emit dataAboutToChange(this);
+	for(int i=0; i<num_rows; i++)
+	{
+		replace(dest_start+i, source_as_date_time->dateTimeAt(source_start+i));
+		setValid(dest_start+i, source_as_date_time->isValid(source_start+i));
+	}
 	emit dataChanged(this);
 	return true;
 }
@@ -174,8 +184,14 @@ QTime DateTimeColumnData::timeAt(int row) const
 { 
 	return value(row).time(); 
 }
+
 QDateTime DateTimeColumnData::dateTimeAt(int row) const 
 { 
 	return value(row); 
+}
+
+void DateTimeColumnData::clear()
+{
+	removeRows(0, size());
 }
 

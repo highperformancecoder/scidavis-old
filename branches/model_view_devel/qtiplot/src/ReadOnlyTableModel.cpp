@@ -44,7 +44,7 @@ ReadOnlyTableModel::~ReadOnlyTableModel()
 Qt::ItemFlags ReadOnlyTableModel::flags(const QModelIndex & index ) const
 {
 	if (index.isValid())
-		return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+		return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 	else
 		return Qt::ItemIsEnabled;
 }
