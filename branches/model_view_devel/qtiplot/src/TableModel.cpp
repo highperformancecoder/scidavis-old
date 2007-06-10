@@ -29,6 +29,8 @@
 
 #include "TableModel.h"
 #include "StringColumnData.h"
+//#include "DoubleColumnData.h"
+//#include "DateTimeColumnData.h"
 #include <QString>
 #include <QDate>
 #include <QTime>
@@ -83,13 +85,12 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 				out_fltr->input(0, col_ptr->asDataSource());
 				return QVariant(static_cast<AbstractStringDataSource *>(out_fltr->output(0))->textAt(index.row()));
 			}
-
 		case Qt::BackgroundRole:
 			{
 				// TODO: Make masked color customizable
 				// masked cells are displayed as hatched
 				if(d_columns.at(index.column())->asDataSource()->isMasked(index.row()))
-					return QVariant(QBrush(QColor(0xff,0,0), Qt::DiagCrossPattern));
+					return QVariant(QBrush(QColor(0xff,0,0), Qt::BDiagPattern));
 				break;
 			}
 	}
@@ -133,16 +134,18 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
 	
 	if(role == Qt::EditRole)
 	{  
-			AbstractColumnData * col_ptr = d_columns[index.column()];
+			AbstractColumnData * col_ptr = d_columns.at(index.column());
 			if(col_ptr->asDataSource()->numRows() <= row)
 				col_ptr->setNumRows(row+1);
 
 			AbstractFilter * in_fltr = inputFilter(index.column());
 			StringColumnData sd;
 			sd << value.toString();
+			sd.setValid(0);
 			in_fltr->input(0, &sd);
-			col_ptr->copy(in_fltr->output(0), 0, row, 1); 
-			col_ptr->setValid(Interval<int>(row,row));
+			// remark: the validity of the cell is determined by the input filter
+			col_ptr->copy(in_fltr->output(0), 0, row, 1);  
+			in_fltr->input(0, 0); // disconnect sd
 			emit dataChanged(index, index);
 			return true;
 	}
@@ -156,8 +159,9 @@ QModelIndex TableModel::index(int row, int column, const QModelIndex &parent) co
 	return createIndex(row, column);
 }
 
-QModelIndex TableModel::parent(const QModelIndex &) const
+QModelIndex TableModel::parent(const QModelIndex & child) const
 {
+	Q_UNUSED(child)
     return QModelIndex();
 }
 
@@ -213,7 +217,8 @@ void TableModel::emitDataChanged(int top, int left, int bottom, int right)
 
 void TableModel::insertColumns(QList<AbstractColumnData *> cols, int first)
 {
-	int count = cols.size();
+	int count = cols.count();
+
 	if(count < 1) 
 		return;
 
@@ -284,13 +289,11 @@ void TableModel::insertRows(int first, int count)
 	else
 	{
 		beginInsertRows(QModelIndex(), first, first+count-1);
-		AbstractColumnData * col_ptr;
 		for(int col=0; col<d_column_count; col++)
 		{
-			col_ptr = d_columns[col];
-			if(col_ptr->asDataSource()->numRows() <= first) // no need to append empty rows
+			if(d_columns.at(col)->asDataSource()->numRows() <= first) // no need to append empty rows
 				continue;
-			col_ptr->insertEmptyRows(first, count);
+			d_columns.at(col)->insertEmptyRows(first, count);
 		}
 		d_row_count += count;
 		updateVerticalHeader(first);
@@ -322,6 +325,9 @@ void TableModel::updateVerticalHeader(int start_row)
 
 void TableModel::updateHorizontalHeader(int start_col, int end_col)
 {
+	while(d_horizontal_header_data.size() < d_column_count)
+		d_horizontal_header_data << QString();
+
 	if(numColsWithPD(AbstractDataSource::X)>1)
 	{
 		int x_cols = 0;
@@ -401,36 +407,36 @@ void TableModel::composeColumnHeader(int col, const QString& label)
 
 void TableModel::setColumnLabel(int column, const QString& label)
 {
-	d_columns[column]->setLabel(label);
+	d_columns.at(column)->setLabel(label);
 	updateHorizontalHeader(column, column);
 }
 	
 QString TableModel::columnLabel(int column) const
 {
-	return d_columns[column]->asDataSource()->label();
+	return d_columns.at(column)->asDataSource()->label();
 }
 
 void TableModel::setColumnComment(int column, const QString& comment)
 {
-	d_columns[column]->setComment(comment);
+	d_columns.at(column)->setComment(comment);
 	updateHorizontalHeader(column, column);
 }
 	
 QString TableModel::columnComment(int column) const
 {
-	return d_columns[column]->asDataSource()->comment();
+	return d_columns.at(column)->asDataSource()->comment();
 	
 }
 
 void TableModel::setColumnPlotDesignation(int column, AbstractDataSource::PlotDesignation pd)
 {
-	d_columns[column]->setPlotDesignation(pd);
+	d_columns.at(column)->setPlotDesignation(pd);
 	updateHorizontalHeader(column, column);
 }
 	
 AbstractDataSource::PlotDesignation TableModel::columnPlotDesignation(int column) const
 {
-	return d_columns[column]->asDataSource()->plotDesignation();
+	return d_columns.at(column)->asDataSource()->plotDesignation();
 }
 
 void TableModel::showComments(bool on)

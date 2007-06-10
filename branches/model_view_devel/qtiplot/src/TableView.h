@@ -37,7 +37,7 @@
 #include <QHeaderView>
 #include <QSize>
 
-class TableDataModel;
+class TableModel;
 class TableItemDelegate;
 
 //! View class for table data
@@ -47,7 +47,9 @@ class TableView : public QTableView
 
 public:
     //! Constructor
-    TableView(QWidget * parent, TableDataModel * model );
+    TableView(QWidget * parent, TableModel * model );
+    //! Constructor
+    TableView(QWidget * parent, TableModel * model, int rows, int columns );
     //! Destructor
     ~TableView();
 
@@ -66,7 +68,7 @@ private:
 	//! Pointer to the item delegate
 	TableItemDelegate * d_delegate;
 	//! Pointer to the current underlying model
-	TableDataModel * d_model;
+	TableModel * d_model;
 
 };
 

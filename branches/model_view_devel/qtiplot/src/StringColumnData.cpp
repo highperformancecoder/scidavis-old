@@ -43,11 +43,15 @@ bool StringColumnData::copy(const AbstractDataSource * other)
 {
 	const AbstractStringDataSource *other_as_string = qobject_cast<const AbstractStringDataSource*>(other);
 	if (!other_as_string) return false;
+
+	int count = other_as_string->numRows();
+	setNumRows(count);
 	emit dataAboutToChange(this);
-	clear();
-	int end = other_as_string->numRows();
-	for(int i=0; i<end; i++)
-		*this << other_as_string->textAt(i);
+	for(int i=0; i<count; i++)
+	{
+		replace(i, other_as_string->textAt(i));
+		setValid(i, other_as_string->isValid(i));
+	}
 	emit dataChanged(this);
 	return true;
 }
@@ -56,11 +60,16 @@ bool StringColumnData::copy(const AbstractDataSource * source, int source_start,
 {
 	const AbstractStringDataSource *source_as_string = qobject_cast<const AbstractStringDataSource*>(source);
 	if (!source_as_string) return false;
-	emit dataAboutToChange(this);
+
 	if (dest_start + num_rows > numRows())
 		setNumRows(dest_start + num_rows);
-	for (int source_row = source_start, dest_row = dest_start; source_row-source_start < num_rows;)
-		replace(dest_row++, source_as_string->textAt(source_row++));
+
+	emit dataAboutToChange(this);
+	for(int i=0; i<num_rows; i++)
+	{
+		replace(dest_start+i, source_as_string->textAt(source_start+i));
+		setValid(dest_start+i, source_as_string->isValid(source_start+i));
+	}
 	emit dataChanged(this);
 	return true;
 }
@@ -165,9 +174,13 @@ void StringColumnData::removeRows(int first, int count)
 	emit rowsDeleted(this, first, count);
 }
 
-QString StringColumnData::textAt(int row) const
+QString StringColumnData::textAt(int row) const 
 { 
 		return value(row);
 }
 
+void StringColumnData::clear()
+{
+	removeRows(0, size());
+}
 

@@ -73,6 +73,8 @@ public:
 		 }
 		 return d_data_cache;
 	}
+	//! Return the double value in row 'row'
+	virtual double valueAt(int row) const = 0;
 
 private:
 	mutable double *d_data_cache;

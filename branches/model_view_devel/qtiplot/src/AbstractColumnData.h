@@ -77,15 +77,24 @@ public:
 	 * This has to be done on a per-implementation basis; thus this virtual casting method.
 	 */
 	virtual AbstractDataSource *asDataSource() = 0;
-	//! Copy another vector of data
+	//! Copy another data source of the same type
 	/**
-	 * \return true if copying was successful, otherwise false
-	 *
-	 * False means the column hast been filled with a
-	 * standard value in some or all rows and some or
-	 * all data could not be converted to the stored data type.
+	 * This function will return false if the data type
+	 * of 'other' is not the same as the type of 'this'.
+	 * The validity information for the rows is also copied.
+	 * Use a filter to convert a data source.
 	 */
 	virtual bool copy(const AbstractDataSource * other) = 0;
+	//! Copies part of another data source of the same type
+	/**
+	 * This function will return false if the data type
+	 * of 'other' is not the same as the type of 'this'.
+	 * The validity information for the rows is also copied.
+	 * \param other pointer to the data source to copy
+	 * \param src_start first row to copy in the data source to copy
+	 * \param dest_start first row to copy in
+	 * \param num_rows the number of rows to copy
+	 */ 
 	virtual bool copy(const AbstractDataSource * source, int source_start, int dest_start, int num_rows) = 0;
 	//! Resize the data vector
 	virtual void setNumRows(int new_size) = 0;
@@ -101,6 +110,8 @@ public:
 	virtual void removeRows(int first, int count) = 0;
 	//! This must be called before the column is replaced by another
 	virtual void notifyReplacement(AbstractDataSource * replacement) = 0;
+	//! Clear the whole column
+	virtual void clear() = 0;
 
 	//! \name IntervalAttribute related functions
 	//@{
@@ -116,18 +127,24 @@ public:
 	 * \param valid true: set valid, false: set invalid
 	 */ 
 	virtual void setValid(Interval<int> i, bool valid = true) = 0;
+	//! Overloaded function for convenience
+	virtual void setValid(int row, bool valid = true) = 0;
 	//! Select of deselect a certain interval
 	/**
 	 * \param i the interval
 	 * \param select true: select, false: deselect
 	 */ 
 	virtual void setSelected(Interval<int> i, bool select = true) = 0;
+	//! Overloaded function for convenience
+	virtual void setSelected(int row, bool select = true) = 0;
 	//! Set an interval masked
 	/**
 	 * \param i the interval
 	 * \param mask true: mask, false: unmask
 	 */ 
 	virtual void setMasked(Interval<int> i, bool mask = true) = 0;
+	//! Overloaded function for convenience
+	virtual void setMasked(int row, bool mask = true) = 0;
 	//@}
 	
 	//! \name Formula related functions
@@ -136,6 +153,8 @@ public:
 	QString formula(int row) const { return d_formulas.value(row); }
 	//! Set a formula string for an interval of rows
 	void setFormula(Interval<int> i, QString formula) { d_formulas.setValue(i, formula); }
+	//! Overloaded function for convenience
+	void setFormula(int row, QString formula) { setFormula(Interval<int>(row,row), formula); }
 	//! Return the intervals that have associated formulas
 	/**
 	 * This can be used to make a list of formulas with their intervals.

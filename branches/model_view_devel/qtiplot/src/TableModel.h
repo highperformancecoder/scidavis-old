@@ -27,12 +27,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TABLEDATAMODEL_H
-#define TABLEDATAMODEL_H
+#ifndef TABLEMODEL_H
+#define TABLEMODEL_H
 
 #include <QAbstractItemModel>
 #include <QList>
 #include <QStringList>
+#include "AbstractDataSource.h"
 #include "AbstractColumnData.h"
 #include "AbstractFilter.h"
 
@@ -85,12 +86,12 @@ public:
 	//! \name Other functions
 	//@{
 	//! Overloaded from AbstractFilter
-	int numInputs() const { return 0; }
+	virtual int numInputs() const { return 0; }
 	//! Overloaded from AbstractFilter
-	int numOutputs() const { return d_column_count; }
-	//! Return a pointer to column number 'port'
+	virtual int numOutputs() const { return d_column_count; }
+	//! Return a pointer to the data source at column number 'port'
 	/**
-	 * \return returns a pointer to the column data or zero if 'port' is invalid
+	 * \return returns a pointer to the column data source or zero if 'port' is invalid
 	 */
 	virtual AbstractDataSource *output(int port) const;
 	//! Return the output filter for column 'col'

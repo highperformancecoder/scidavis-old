@@ -69,8 +69,11 @@ bool AbstractFilter::input(int port, AbstractDataSource *source)
 	} else { // source==0, that is, the input port has been disconnected
 		// try to shrink d_inputs
 		int num_connected_inputs = d_inputs.size();
-		while (d_inputs.at(num_connected_inputs-1) == 0)
+		while ( d_inputs.at(num_connected_inputs-1) == 0 )
+		{
 			num_connected_inputs--;
+			if(!num_connected_inputs) break;
+		}
 		d_inputs.resize(num_connected_inputs);
 	}
 	return true;

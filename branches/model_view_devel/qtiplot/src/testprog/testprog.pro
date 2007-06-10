@@ -11,26 +11,24 @@ CONFIG += debug
 
 # Input
 HEADERS += AbstractColumnData.h \
-           DateColumnData.h \
-           DoubleColumnData.h \
+#           DateTimeColumnData.h \
+#           DoubleColumnData.h \
            StringColumnData.h \
-           TimeColumnData.h \
 		   AbstractDataSource.h \
-		   AbstractDateDataSource.h \
-		   AbstractDoubleDataSource.h \
+		   AbstractFilter.h \
+#		   AbstractDateTimeDataSource.h \
+#		   AbstractDoubleDataSource.h \
 		   AbstractStringDataSource.h \
-		   AbstractTimeDataSource.h
+           TableModel.h \
+           TableView.h \
+           CopyThroughFilter.h \
+		   TableItemDelegate.h 
 
-#           TableDataModel.h \
-#           TableView.h \
-#		   TableItemDelegate.h \
-SOURCES += main.cpp 
-
-#TableDataModel.cpp TableView.cpp \
+SOURCES += main.cpp TableModel.cpp TableView.cpp 
 
 SOURCES += StringColumnData.cpp \
-           DateColumnData.cpp \
-		   DoubleColumnData.cpp \
-           TimeColumnData.cpp 
-#		   TableItemDelegate.cpp 
+#           DateTimeColumnData.cpp \
+#		   DoubleColumnData.cpp \
+		   AbstractFilter.cpp \
+		   TableItemDelegate.cpp 
 

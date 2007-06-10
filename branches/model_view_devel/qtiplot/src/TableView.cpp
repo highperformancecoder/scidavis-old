@@ -28,10 +28,14 @@
  ***************************************************************************/
 
 #include "TableView.h"
-#include "TableDataModel.h"
+#include "TableModel.h"
 #include "TableItemDelegate.h"
 
-TableView::TableView(QWidget * parent, TableDataModel * model )
+#include "StringColumnData.h"
+#include "AbstractFilter.h"
+#include "CopyThroughFilter.h"
+
+TableView::TableView(QWidget * parent, TableModel * model )
  : QTableView( parent ), d_model(model)
 {
   //  QItemSelectionModel * selections = new QItemSelectionModel(model);
@@ -42,8 +46,47 @@ TableView::TableView(QWidget * parent, TableDataModel * model )
 	connect(d_delegate, SIGNAL(returnPressed()), this, SLOT(advanceCell()));
 
     setContextMenuPolicy(Qt::DefaultContextMenu);
+	
+	// test code
+	StringColumnData *sc1 = new StringColumnData();
+	StringColumnData *sc2 = new StringColumnData();
+	sc1->setPlotDesignation(AbstractDataSource::X);
+	sc2->setPlotDesignation(AbstractDataSource::Y);
+	sc1->setLabel("col1");
+	sc2->setLabel("col2");
+	*sc1 << "one" << "two" << "three";
+	*sc2 << "1" << "2" << "3";
+	sc1->setValid(Interval<int>(0,2));
+	sc2->setValid(Interval<int>(0,2));
+	sc1->setMasked(1);
+	QList<AbstractColumnData *> list;
+	list << sc1 << sc2;
+	model->appendColumns(list);
+	model->setInputFilter(0, new CopyThroughFilter());
+	model->setInputFilter(1, new CopyThroughFilter());
+	model->setOutputFilter(0, new CopyThroughFilter());
+	model->setOutputFilter(1, new CopyThroughFilter());
+
+	// end of test code
+	
 }
 
+TableView::TableView(QWidget * parent, TableModel * model, int rows, int columns )
+ : QTableView( parent ), d_model(model)
+{
+  /*
+  //  QItemSelectionModel * selections = new QItemSelectionModel(model);
+	setModel(model);
+	model->appendColumns(AbstractColumnData::Double, columns);
+	model->appendRows(rows);
+//	setSelectionModel(selections);
+	d_delegate = new TableItemDelegate;
+	setItemDelegate(d_delegate);
+	connect(d_delegate, SIGNAL(returnPressed()), this, SLOT(advanceCell()));
+
+    setContextMenuPolicy(Qt::DefaultContextMenu);
+	*/
+}
 
 TableView::~TableView() 
 {
