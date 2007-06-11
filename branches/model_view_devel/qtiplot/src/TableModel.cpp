@@ -71,28 +71,39 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 	if( !index.isValid() )
 		return QVariant();
 	
+	AbstractColumnData * col_ptr = d_columns.value(index.column());
+	if(!col_ptr)
+		return QVariant();
+
 	switch(role)
 	{
 		case Qt::DisplayRole:
 		case Qt::EditRole:
 		case Qt::ToolTipRole:
 			{
-				AbstractColumnData * col_ptr = d_columns.at(index.column());
-				if(!col_ptr || !col_ptr->asDataSource()->isValid(index.row()))
-					return QVariant();
+				if(col_ptr->asDataSource()->isInvalid(index.row()))
+					return QVariant(tr("invalid","string for invalid rows"));
 
 				AbstractFilter * out_fltr = outputFilter(index.column());
 				out_fltr->input(0, col_ptr->asDataSource());
-				return QVariant(static_cast<AbstractStringDataSource *>(out_fltr->output(0))->textAt(index.row()));
+				QVariant result = QVariant(static_cast<AbstractStringDataSource *>(out_fltr->output(0))->textAt(index.row()));
 				out_fltr->input(0, 0);
+				return result;
 			}
 		case Qt::BackgroundRole:
 			{
 				// TODO: Make masked color customizable
 				// masked cells are displayed as hatched
-				if(d_columns.at(index.column())->asDataSource()->isMasked(index.row()))
+				if(col_ptr->asDataSource()->isMasked(index.row()))
 					return QVariant(QBrush(QColor(0xff,0,0), Qt::BDiagPattern));
 				break;
+			}
+		case Qt::ForegroundRole:
+			{
+				if(col_ptr->asDataSource()->isInvalid(index.row()))
+					return QVariant(QBrush(QColor(0xff,0,0)));
+				else
+					return QVariant(QBrush(QColor(0,0,0)));
 			}
 	}
 
@@ -142,7 +153,6 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
 			AbstractFilter * in_fltr = inputFilter(index.column());
 			StringColumnData sd;
 			sd << value.toString();
-			sd.setValid(0);
 			in_fltr->input(0, &sd);
 			// remark: the validity of the cell is determined by the input filter
 			col_ptr->copy(in_fltr->output(0), 0, row, 1);  

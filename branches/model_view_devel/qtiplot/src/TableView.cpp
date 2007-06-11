@@ -32,8 +32,14 @@
 #include "TableItemDelegate.h"
 
 #include "StringColumnData.h"
+#include "DoubleColumnData.h"
+#include "DateTimeColumnData.h"
 #include "AbstractFilter.h"
 #include "CopyThroughFilter.h"
+#include "Double2StringFilter.h"
+#include "String2DoubleFilter.h"
+#include "DateTime2StringFilter.h"
+#include "String2DateTimeFilter.h"
 
 #include <QKeyEvent>
 #include <QtDebug>
@@ -50,28 +56,6 @@ TableView::TableView(QWidget * parent, TableModel * model )
 //	connect(d_delegate, SIGNAL(returnPressed()), this, SLOT(advanceCell()));
 
     setContextMenuPolicy(Qt::DefaultContextMenu);
-	
-	// test code
-	StringColumnData *sc1 = new StringColumnData();
-	StringColumnData *sc2 = new StringColumnData();
-	sc1->setPlotDesignation(AbstractDataSource::X);
-	sc2->setPlotDesignation(AbstractDataSource::Y);
-	sc1->setLabel("col1");
-	sc2->setLabel("col2");
-	*sc1 << "one" << "two" << "three";
-	*sc2 << "1" << "2" << "3";
-	sc2->setInvalid(Interval<int>(1,1));
-	sc1->setMasked(1);
-	QList<AbstractColumnData *> list;
-	list << sc1 << sc2;
-	model->appendColumns(list);
-	model->setInputFilter(0, new CopyThroughFilter());
-	model->setInputFilter(1, new CopyThroughFilter());
-	model->setOutputFilter(0, new CopyThroughFilter());
-	model->setOutputFilter(1, new CopyThroughFilter());
-
-	// end of test code
-	
 }
 
 TableView::TableView(QWidget * parent, TableModel * model, int rows, int columns )
