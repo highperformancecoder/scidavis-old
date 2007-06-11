@@ -114,12 +114,12 @@ public:
 
 	//! \name IntervalAttribute related reading functions
 	//@{
-	//! Return whether a certain row contains a valid value 	 
-	virtual bool isValid(int row) const { return d_validity.isSet(row); } 	 
-	//! Return whether a certain interval of rows contains only valid values 	 
-	virtual bool isValid(Interval<int> i) const { return d_validity.isSet(i); } 	 
-	//! Return all intervals of valid rows
-	virtual QList< Interval<int> > validIntervals() const { return d_validity.intervals(); } 	 
+	//! Return whether a certain row contains a invalid value 	 
+	virtual bool isInvalid(int row) const { return d_validity.isSet(row); } 	 
+	//! Return whether a certain interval of rows contains only invalid values 	 
+	virtual bool isInvalid(Interval<int> i) const { return d_validity.isSet(i); } 	 
+	//! Return all intervals of invalid rows
+	virtual QList< Interval<int> > invalidIntervals() const { return d_validity.intervals(); } 	 
 	//! Return whether a certain row is selected 	 
 	virtual bool isSelected(int row) const { return d_selection.isSet(row); } 	 
 	//! Return whether a certain interval of rows is fully selected
@@ -139,9 +139,9 @@ public:
 	//! Clear all validity information
 	virtual void clearValidity()
 	{
-		emit validityAboutToChange(this);	
+		emit dataAboutToChange(this);	
 		d_validity.clear();
-		emit validityChanged(this);	
+		emit dataChanged(this);	
 	}
 	//! Clear all selection information
 	virtual void clearSelections()
@@ -157,19 +157,19 @@ public:
 		d_masking.clear();
 		emit maskingChanged(this);	
 	}
-	//! Set an interval valid or invalid
+	//! Set an interval invalid or valid
 	/**
 	 * \param i the interval
-	 * \param valid true: set valid, false: set invalid
+	 * \param invalid true: set invalid, false: set valid
 	 */ 
-	virtual void setValid(Interval<int> i, bool valid = true)
+	virtual void setInvalid(Interval<int> i, bool invalid = true)
 	{
-		emit validityAboutToChange(this);	
-		d_validity.setValue(i, valid);
-		emit validityChanged(this);	
+		emit dataAboutToChange(this);	
+		d_validity.setValue(i, invalid);
+		emit dataChanged(this);	
 	}
 	//! Overloaded function for convenience
-	virtual void setValid(int row, bool valid = true) { setValid(Interval<int>(row,row), valid); }
+	virtual void setInvalid(int row, bool invalid = true) { setInvalid(Interval<int>(row,row), invalid); }
 	//! Select of deselect a certain interval
 	/**
 	 * \param i the interval

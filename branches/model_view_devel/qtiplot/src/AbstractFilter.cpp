@@ -71,16 +71,8 @@ bool AbstractFilter::input(int port, AbstractDataSource *source)
 	if (source && !inputAcceptable(port, source)) return false;
 	if (d_inputs.size() <= port) d_inputs.resize(port+1);
 	AbstractDataSource *old_input = d_inputs.value(port);
-	if (old_input) { // disconnect the old input's signals
-		old_input->disconnect(SIGNAL(descriptionAboutToChange(AbstractDataSource*)), &d_slot_machine);
-		old_input->disconnect(SIGNAL(descriptionChanged(AbstractDataSource*)), &d_slot_machine);
-		old_input->disconnect(SIGNAL(plotDesignationAboutToChange(AbstractDataSource*)), &d_slot_machine);
-		old_input->disconnect(SIGNAL(plotDesignationChanged(AbstractDataSource*)), &d_slot_machine);
-		old_input->disconnect(SIGNAL(dataAboutToChange(AbstractDataSource*)), &d_slot_machine);
-		old_input->disconnect(SIGNAL(dataChanged(AbstractDataSource*)), &d_slot_machine);
-		old_input->disconnect(SIGNAL(aboutToBeReplaced(AbstractDataSource*,AbstractDataSource*)), &d_slot_machine);
-		old_input->disconnect(SIGNAL(destroyed()), &d_slot_machine);
-	}
+	if (old_input)  // disconnect the old input's signals
+		old_input->disconnect(&d_slot_machine); // disconnect all signals
 	// replace input, notifying the filter implementation of the changes
 	inputDescriptionAboutToChange(old_input);
 	inputPlotDesignationAboutToChange(old_input);

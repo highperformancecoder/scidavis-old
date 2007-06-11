@@ -94,12 +94,12 @@ public:
 	
 	//! \name IntervalAttribute related functions
 	//@{
-	//! Return whether a certain row contains a valid value 	 
-	virtual bool isValid(int row) const { return ( row >= 0 && row < numRows() ); } 	 
-	//! Return whether a certain interval of rows contains only valid values 	 
-	virtual bool isValid(Interval<int> i) const { return Interval<int>(0, numRows()-1).contains(i); } 	 
-	//! Return all intervals of valid rows
-	virtual QList< Interval<int> > validIntervals() const { return QList< Interval<int> >(); } 	 
+	//! Return whether a certain row contains an invalid value 	 
+	virtual bool isInvalid(int row) const { return !Interval<int>(0, numRows()).contains(row); } 	 
+	//! Return whether a certain interval of rows contains only invalid values 	 
+	virtual bool isInvalid(Interval<int> i) const { return !Interval<int>(0, numRows()-1).contains(i); } 	 
+	//! Return all intervals of invalid rows
+	virtual QList< Interval<int> > invalidIntervals() const { return QList< Interval<int> >(); } 	 
 	//! Return whether a certain row is selected 	 
 	virtual bool isSelected(int row) const { Q_UNUSED(row); return false; } 	 
 	//! Return whether a certain interval of rows is fully selected
@@ -143,14 +143,14 @@ signals:
 	 * one handler for lots of columns.
 	 */
 	void plotDesignationChanged(AbstractDataSource * source); 
-	//! Data of the column will be changed
+	//! Data (including validity) of the column will be changed
 	/**
 	 * 'source' is always the this pointer of the column that
 	 * emitted this signal. This way it's easier to use
 	 * one handler for lots of columns.
 	 */
 	void dataAboutToChange(AbstractDataSource * source); 
-	//! Data of the column has changed
+	//! Data (including validity) of the column has changed
 	/**
 	 * 'source' is always the this pointer of the column that
 	 * emitted this signal. This way it's easier to use
@@ -200,10 +200,6 @@ signals:
 	 *	\param count the number of deleted rows
 	 */
 	void rowsDeleted(AbstractDataSource * source, int first, int count); 
-	//! IntervalAttribute related signal
-	void validityAboutToChange(AbstractDataSource * source); 
-	//! IntervalAttribute related signal
-	void validityChanged(AbstractDataSource * source); 
 	//! IntervalAttribute related signal
 	void selectionAboutToChange(AbstractDataSource * source); 
 	//! IntervalAttribute related signal

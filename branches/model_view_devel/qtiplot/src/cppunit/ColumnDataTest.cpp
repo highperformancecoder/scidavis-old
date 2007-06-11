@@ -47,16 +47,16 @@ class ColumnDataTest : public CppUnit::TestFixture {
 				CPPUNIT_ASSERT_EQUAL(dummy1[i], sc_var.textAt(i));
 		}
 		void testIsValid() {
-			CPPUNIT_ASSERT(dc1->isValid(10) == false);
-			CPPUNIT_ASSERT(dc1->isValid(Interval<int>(10,10)) == false);
-			dc1->setValid(Interval<int>(10,19), true);
-			CPPUNIT_ASSERT(dc1->isValid(10) == true);
+			CPPUNIT_ASSERT(dc1->isInvalid(10) == false);
+			CPPUNIT_ASSERT(dc1->isInvalid(Interval<int>(10,10)) == false);
+			dc1->setInvalid(Interval<int>(10,19), true);
+			CPPUNIT_ASSERT(dc1->isInvalid(10) == true);
 			dc1->removeRows(10,5);
 			dc1->insertEmptyRows(5,5);
-			dc1->setValid(Interval<int>(10,20));
-			CPPUNIT_ASSERT(dc1->isValid(Interval<int>(12,13)) == true);
-			dc1->setValid(Interval<int>(12,13), false);
-			CPPUNIT_ASSERT(dc1->isValid(Interval<int>(12,13)) == false);
+			dc1->setInvalid(Interval<int>(10,20), false);
+			CPPUNIT_ASSERT(dc1->isInvalid(Interval<int>(12,13)) == false);
+			dc1->setInvalid(Interval<int>(12,13), true);
+			CPPUNIT_ASSERT(dc1->isInvalid(Interval<int>(12,13)) == true);
 		}
 		void testIntervals() {
 			dc2->setSelected(Interval<int>(1,20));

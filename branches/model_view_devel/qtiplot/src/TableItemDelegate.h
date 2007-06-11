@@ -29,6 +29,9 @@
 
 #include <QItemDelegate>
 
+//TODO: Unless there is another purpose for this than handling
+// [Return]/[Enter], this class can be deleted
+
 //! Item delegate for TableView
 /**
  * This class does only one thing at the moment:

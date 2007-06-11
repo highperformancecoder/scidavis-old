@@ -49,7 +49,7 @@ bool DoubleColumnData::copy(const AbstractDataSource * other)
 	for(int i=0; i<count; i++)
 	{
 		ptr[i] = other_as_double->valueAt(i);
-		setValid(i, other_as_double->isValid(i));
+		setInvalid(i, other_as_double->isInvalid(i));
 	}
 	emit dataChanged(this);
 	return true;
@@ -68,7 +68,7 @@ bool DoubleColumnData::copy(const AbstractDataSource * source, int source_start,
 	for(int i=0; i<num_rows; i++)
 	{
 		ptr[dest_start+i] = source_as_double->valueAt(source_start+i);
-		setValid(dest_start+i, source_as_double->isValid(source_start+i));
+		setInvalid(dest_start+i, source_as_double->isInvalid(source_start+i));
 	}
 	emit dataChanged(this);
 	return true;

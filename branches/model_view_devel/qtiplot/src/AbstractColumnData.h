@@ -121,14 +121,14 @@ public:
 	virtual void clearSelections() = 0;
 	//! Clear all masking information
 	virtual void clearMasks() = 0;
-	//! Set an interval valid or invalid
+	//! Set an interval invalid or valid
 	/**
 	 * \param i the interval
-	 * \param valid true: set valid, false: set invalid
+	 * \param invalid true: set invalid, false: set valid
 	 */ 
-	virtual void setValid(Interval<int> i, bool valid = true) = 0;
+	virtual void setInvalid(Interval<int> i, bool invalid = true) = 0;
 	//! Overloaded function for convenience
-	virtual void setValid(int row, bool valid = true) = 0;
+	virtual void setInvalid(int row, bool invalid = true) = 0;
 	//! Select of deselect a certain interval
 	/**
 	 * \param i the interval

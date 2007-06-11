@@ -12,7 +12,6 @@
 #include "DateTimeColumnData.h"
 #include "ReadOnlyTableModel.h"
 
-#include "DataSourceAttributes.h"
 #include "IntervalAttribute.h"
 #include "AbstractFilter.h"
 

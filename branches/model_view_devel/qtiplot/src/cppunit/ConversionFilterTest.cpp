@@ -39,17 +39,14 @@ class ConversionFilterTest : public CppUnit::TestFixture {
 		void setUp() {
 			dc = new DoubleColumnData();
 			*dc << 3.4 << 18 << 21;
-			dc->setValid(Interval<int>(0,2));
 			sc = new StringColumnData();
 			*sc << "4.5" << "2,3" << "2007-01-15" << "12" << "10/03/72 12:14:31:004";
-			sc->setValid(Interval<int>(0,4));
 			dtc = new DateTimeColumnData();
 			*dtc << QDateTime(QDate::fromJulianDay(321), QTime(6,3))
 				<< QDateTime(QDate(1890,12,30), QTime(10,23))
 				<< QDateTime(QDate(2007,6,5), QTime(12,28))
 				<< QDateTime(QDate(3,4,5), QTime(6,7))
 				<< QDateTime(QDate(12,5,1), QTime(0,0));
-			dtc->setValid(Interval<int>(0,2));
 		}
 		void tearDown() {
 			delete dc;

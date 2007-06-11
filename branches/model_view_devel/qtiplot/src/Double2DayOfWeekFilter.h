@@ -45,6 +45,7 @@ class Double2DayOfWeekFilter : public AbstractSimpleFilter<QDateTime>
 			return QDate::fromJulianDay(qRound(doubleInput()->valueAt(row) - 1.0));
 		}
 		virtual QTime timeAt(int row) const {
+			Q_UNUSED(row)
 			return QTime(0,0,0,0);
 			/*
 			if (!d_inputs.value(0)) return QTime();

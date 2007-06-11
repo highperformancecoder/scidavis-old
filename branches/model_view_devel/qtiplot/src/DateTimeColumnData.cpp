@@ -51,7 +51,7 @@ bool DateTimeColumnData::copy(const AbstractDataSource * other)
 	for(int i=0; i<count; i++)
 	{
 		replace(i, other_as_date_time->dateTimeAt(i));
-		setValid(i, other_as_date_time->isValid(i));
+		setInvalid(i, other_as_date_time->isInvalid(i));
 	}
 	emit dataChanged(this);
 	return true;
@@ -69,7 +69,7 @@ bool DateTimeColumnData::copy(const AbstractDataSource * source, int source_star
 	for(int i=0; i<num_rows; i++)
 	{
 		replace(dest_start+i, source_as_date_time->dateTimeAt(source_start+i));
-		setValid(dest_start+i, source_as_date_time->isValid(source_start+i));
+		setInvalid(dest_start+i, source_as_date_time->isInvalid(source_start+i));
 	}
 	emit dataChanged(this);
 	return true;

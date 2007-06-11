@@ -35,15 +35,19 @@
 #include "AbstractFilter.h"
 #include "CopyThroughFilter.h"
 
+#include <QKeyEvent>
+#include <QtDebug>
+
 TableView::TableView(QWidget * parent, TableModel * model )
  : QTableView( parent ), d_model(model)
 {
   //  QItemSelectionModel * selections = new QItemSelectionModel(model);
 	setModel(model);
 //	setSelectionModel(selections);
-	d_delegate = new TableItemDelegate;
-	setItemDelegate(d_delegate);
-	connect(d_delegate, SIGNAL(returnPressed()), this, SLOT(advanceCell()));
+//TODO: The use of a custom item delegate may not be necessary
+//	d_delegate = new TableItemDelegate;
+//	setItemDelegate(d_delegate);
+//	connect(d_delegate, SIGNAL(returnPressed()), this, SLOT(advanceCell()));
 
     setContextMenuPolicy(Qt::DefaultContextMenu);
 	
@@ -56,8 +60,7 @@ TableView::TableView(QWidget * parent, TableModel * model )
 	sc2->setLabel("col2");
 	*sc1 << "one" << "two" << "three";
 	*sc2 << "1" << "2" << "3";
-	sc1->setValid(Interval<int>(0,2));
-	sc2->setValid(Interval<int>(0,2));
+	sc2->setInvalid(Interval<int>(1,1));
 	sc1->setMasked(1);
 	QList<AbstractColumnData *> list;
 	list << sc1 << sc2;
@@ -100,6 +103,14 @@ void TableView::contextMenuEvent(QContextMenuEvent *)
     
     return ;
 }
+	
+void TableView::keyPressEvent(QKeyEvent * event)
+{
+    if(event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
+		advanceCell();
+	QTableView::keyPressEvent(event);
+}
+
 
 
 QSize TableView::minimumSizeHint () const
