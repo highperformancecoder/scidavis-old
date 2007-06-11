@@ -37,7 +37,7 @@ class QString;
 //! Writing interface for column-based data
 /**
   This is an abstract base class for column-based data, 
-  i.e. mathematically a 1D vector or technically a 1D array or list.
+  i.e. mathematically a vector or technically a 1D array or list.
   It only defines the writing interface and has no data members itself. 
   The reading interface is defined in AbstractDataSource and
   classes derived from it.

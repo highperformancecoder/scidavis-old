@@ -1,11 +1,11 @@
 /***************************************************************************
-    File                 : String2DateTimeFilter.h
+    File                 : Double2MonthFilter.h
     Project              : QtiPlot
     --------------------------------------------------------------------
-    Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
-                           Knut Franke
-    Email (use @ for *)  : thzs*gmx.net, knut.franke*gmx.de
-    Description          : Conversion filter QString -> QDateTime.
+    Copyright            : (C) 2007 by Knut Franke
+    Email (use @ for *)  : knut.franke*gmx.de
+    Description          : Conversion filter double -> QDateTime, interpreting
+                           the input numbers as months of the year.
                            
  ***************************************************************************/
 
@@ -27,58 +27,46 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef STRING2DATE_TIME_FILTER_H
-#define STRING2DATE_TIME_FILTER_H
+#ifndef DOUBLE2MONTH_FILTER_H
+#define DOUBLE2MONTH_FILTER_H
 
 #include "AbstractSimpleFilter.h"
 #include <QDateTime>
-#include <QDate>
-#include <QTime>
+#include <math.h>
 
-/**
- * \brief Conversion filter QString -> QDateTime.
- *
- * The standard use of this filter is explicitly specifiying the date/time format of the strings
- * on the input, either in the constructor or via setFormat().
- * However, if the input fails to comply to this format, String2DateTimeFilter
- * tries to guess the format, using internal lists of common date and time formats (#date_formats
- * and #time_formats).
- */
-class String2DateTimeFilter : public AbstractSimpleFilter<QDateTime>
+//! Conversion filter double -> QDateTime, interpreting the input numbers as days of the week (1 = Monday).
+class Double2MonthFilter : public AbstractSimpleFilter<QDateTime>
 {
 	Q_OBJECT
-
 	public:
-		//! Standard constructor.
-		explicit String2DateTimeFilter(QString format="yyyy-MM-dd hh:mm:ss.zzz") : d_format(format) {}
-		//! Set the format string to be used for conversion.
-		void setFormat(QString format) { d_format = format; }
-		//! Return the format string
-		/**
-		 * The default format string is "yyyy-MM-dd hh:mm:ss.zzz".
-		 * \sa QDate::toString()
-		 */
-		QString format() const { return d_format; }
-
-	private:
-		//! The format string.
-		QString d_format;
-
-		static const char * date_formats[];
-		static const char * time_formats[];
-
-// simplified filter interface
-	public:
-		virtual QDateTime dateTimeAt(int row) const;
-		virtual QDate dateAt(int row) const { return dateTimeAt(row).date(); }
-		virtual QTime timeAt(int row) const { return dateTimeAt(row).time(); }
+		virtual QDate dateAt(int row) const {
+			return dateTimeAt(row).date();
+		}
+		virtual QTime timeAt(int row) const {
+			return dateTimeAt(row).time();
+		}
+		virtual QDateTime dateTimeAt(int row) const {
+			if (!d_inputs.value(0)) return QDateTime();
+			double input_value = doubleInput()->valueAt(row);
+			// Julian day 0 is a January, the first. We want 1 -> January, so our
+			// reference month is the December before Julian epoch.
+			QDate result_date = QDate::fromJulianDay(0).addMonths(int(input_value) - 1);
+			/*
+			// translate fractional digits to fractions of the target month
+			double day_of_month = double(input_value - int(input_value)) * double(result_date.daysInMonth()) + 1.0;
+			result_date = result_date.addDays(int(day_of_month - 0.5));
+			// translate fraction of the day to time after noon
+			QTime result_time = QTime(12,0,0,0).addMSecs(int( (day_of_month - int(day_of_month - 0.5)) * 86400000.0 ));
+			*/
+			QTime result_time = QTime(0,0,0,0);
+			return QDateTime(result_date, result_time);
+		}
 
 	protected:
-		//! Using typed ports: only string inputs are accepted.
 		virtual bool inputAcceptable(int, AbstractDataSource *source) {
-			return source->inherits("AbstractStringDataSource");
+			return source->inherits("AbstractDoubleDataSource");
 		}
 };
 
-#endif // ifndef STRING2DATE_TIME_FILTER_H
+#endif // ifndef DOUBLE2MONTH_FILTER_H
 

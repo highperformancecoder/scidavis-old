@@ -76,7 +76,7 @@ public:
 	 * The validity information for the rows is also copied.
 	 * \param other pointer to the data source to copy
 	 * \param src_start first row to copy in the data source to copy
-	 * \param dest_start first row to copy in
+	 * \param dest_start first row to copy into
 	 * \param num_rows the number of rows to copy
 	 */ 
 	virtual bool copy(const AbstractDataSource * other, int source_start, int dest_start, int num_rows);

@@ -1,4 +1,6 @@
 #include <cppunit/extensions/HelperMacros.h>
+#include "assertion_traits.h"
+
 #include "Interval.h"
 
 class IntervalTest : public CppUnit::TestFixture {
@@ -30,13 +32,13 @@ class IntervalTest : public CppUnit::TestFixture {
 	private:
 		Interval<int> *int_4_6, *int_4_4, *int_5_6, *int_7_19, *int_10_14, *int_4_19;
 		void testEquality() {
-			CPPUNIT_ASSERT(*int_4_6 == *int_4_6);
+			CPPUNIT_ASSERT_EQUAL(*int_4_6, *int_4_6);
 			CPPUNIT_ASSERT(!(*int_4_6 == *int_4_4));
 		}
 		void testSplit() {
-			CPPUNIT_ASSERT(Interval<int>::split(*int_4_6, 5) == QList< Interval<int> >() << *int_4_4 << *int_5_6);
-			CPPUNIT_ASSERT(Interval<int>::split(*int_4_6, 4) == QList< Interval<int> >() << *int_4_6);
-			CPPUNIT_ASSERT(Interval<int>::split(*int_4_6, 7) == QList< Interval<int> >() << *int_4_6);
+			CPPUNIT_ASSERT_EQUAL(QList< Interval<int> >() << *int_4_4 << *int_5_6, Interval<int>::split(*int_4_6, 5));
+			CPPUNIT_ASSERT_EQUAL(QList< Interval<int> >() << *int_4_6, Interval<int>::split(*int_4_6, 4));
+			CPPUNIT_ASSERT_EQUAL(QList< Interval<int> >() << *int_4_6, Interval<int>::split(*int_4_6, 7));
 		}
 		void testTouches() {
 			CPPUNIT_ASSERT(int_4_6->touches(*int_7_19) == true);
@@ -46,16 +48,18 @@ class IntervalTest : public CppUnit::TestFixture {
 			CPPUNIT_ASSERT(int_4_6->intersects(*int_4_4) == true);
 		}
 		void testMerge() {
-			CPPUNIT_ASSERT(Interval<int>::merge(*int_4_6, *int_7_19) == *int_4_19);
-			CPPUNIT_ASSERT(Interval<int>::merge(*int_4_19, *int_10_14) == *int_4_19);
-			CPPUNIT_ASSERT(Interval<int>::merge(*int_4_6, Interval<int>(6,19)) == *int_4_19);
-			CPPUNIT_ASSERT(Interval<int>::merge(*int_4_6, *int_10_14) == *int_4_6);
+			CPPUNIT_ASSERT_EQUAL(*int_4_19, Interval<int>::merge(*int_4_6, *int_7_19));
+			CPPUNIT_ASSERT_EQUAL(*int_4_19, Interval<int>::merge(*int_4_19, *int_10_14));
+			CPPUNIT_ASSERT_EQUAL(*int_4_19, Interval<int>::merge(*int_4_6, Interval<int>(6,19)));
+			CPPUNIT_ASSERT_EQUAL(*int_4_6, Interval<int>::merge(*int_4_6, *int_10_14));
 		}
 		void testCopy() {
-			CPPUNIT_ASSERT(Interval<int>(*int_7_19) == *int_7_19);
+			CPPUNIT_ASSERT_EQUAL(*int_7_19, Interval<int>(*int_7_19));
 			Interval<int> tmp;
 			tmp = *int_10_14;
-			CPPUNIT_ASSERT(tmp == *int_10_14);
+			CPPUNIT_ASSERT_EQUAL(tmp, *int_10_14);
 		}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION( IntervalTest );
 

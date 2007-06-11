@@ -39,7 +39,7 @@ class QString;
 //! Reading interface for column-based data
 /**
   This is the abstract base class for column-based data, 
-  i.e. mathematically a 1D vector or technically a 1D array or list.
+  i.e. mathematically a vector or technically a 1D array or list.
   It only defines the reading interface and has no data members itself. 
   The writing interface is defined in AbstractColumnData and
   classes derived from it.
@@ -47,13 +47,13 @@ class QString;
   An object of a class derived from this is used as a column 
   in a table or as a data source for plots, filters and fit functions.
   This class defines all non-specific read functions and signals that
-  indicate a data change. Classes derived from this will store a 
+  indicate a data change. Classes derived from this will either store a 
   vector with entries of one certain data type, e.g. double, QString, 
-  QDateTime. To determine the data type of a class derived from this, 
-  use qobject_cast or QObject::inherits().
+  QDateTime, or generate such values on demand. To determine the data
+  type of a class derived from this, use qobject_cast or QObject::inherits().
 
-  Any class implementing writing functions must emit the according 
-  signals. These signal notify any object working with the
+  Any class whose output values are subject to change over time must emit
+  the according signals. These signals notify any object working with the
   data source before and after a change of the data source.
   In some cases it will be necessary for a class using 
   data sources to connect QObject::destroyed() also, to react 
@@ -68,7 +68,7 @@ public:
 	//! Ctor
 	AbstractDataSource() {}
 	//! Dtor
-	virtual ~AbstractDataSource() {}
+	virtual ~AbstractDataSource() { emit aboutToBeDestroyed(this); }
 
 	//! Types of plot designations
 	enum PlotDesignation{
@@ -212,6 +212,15 @@ signals:
 	void maskingAboutToChange(AbstractDataSource * source); 
 	//! IntervalAttribute related signal
 	void maskingChanged(AbstractDataSource * source); 
+	//! Emitted shortly before this data source is deleted.
+	/**
+	 * \param source the object emitting this signal
+	 *
+	 * This is need by AbstractFilter. QObject::destroyed() does not work there because its argument
+	 * can't be cast to AbstractDataSource properly (qobject_cast and lookup of the pointer in
+	 * AbstractFilter::d_inputs fail).
+	 */
+	void aboutToBeDestroyed(AbstractDataSource * source);
 
 };
 

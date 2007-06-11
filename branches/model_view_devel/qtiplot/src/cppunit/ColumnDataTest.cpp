@@ -1,4 +1,6 @@
 #include <cppunit/extensions/HelperMacros.h>
+#include "assertion_traits.h"
+
 #include "DoubleColumnData.h"
 #include "StringColumnData.h"
 #include "DateTimeColumnData.h"
@@ -29,9 +31,9 @@ class ColumnDataTest : public CppUnit::TestFixture {
 			DoubleColumnData dc_var;
 
 			dc_var.copy(&dc_const);
-			CPPUNIT_ASSERT(dc_const.numRows() == dc_var.numRows());
+			CPPUNIT_ASSERT_EQUAL(dc_const.numRows(), dc_var.numRows());
 			for (int i=0; i<dc_var.size();i++)
-				CPPUNIT_ASSERT(dc_var.valueAt(i) == dc_const.valueAt(i));
+				CPPUNIT_ASSERT_EQUAL(dc_const.valueAt(i), dc_var.valueAt(i));
 		}
 		void testString() {
 			QStringList dummy1, dummy2;
@@ -40,10 +42,9 @@ class ColumnDataTest : public CppUnit::TestFixture {
 			StringColumnData sc_const(dummy2);
 			StringColumnData sc_var(dummy1);
 
-			CPPUNIT_ASSERT(sc_var.numRows() == dummy1.size());
+			CPPUNIT_ASSERT_EQUAL(dummy1.size(), sc_var.numRows());
 			for (int i=0; i<sc_var.numRows(); i++)
-				CPPUNIT_ASSERT(sc_var.textAt(i) == dummy1[i]);
-			//TODO: change textAt to valueAt after removing textAt in AbstractDataSource.h and moving valueAt to *DataSource
+				CPPUNIT_ASSERT_EQUAL(dummy1[i], sc_var.textAt(i));
 		}
 		void testIsValid() {
 			CPPUNIT_ASSERT(dc1->isValid(10) == false);
@@ -61,29 +62,31 @@ class ColumnDataTest : public CppUnit::TestFixture {
 			dc2->setSelected(Interval<int>(1,20));
 			dc2->setFormula(Interval<int>(10,20), "foo bar");
 			dc2->setFormula(Interval<int>(1,9), "bar baz");
-			CPPUNIT_ASSERT(dc2->selectedIntervals() == QList< Interval<int> >() << Interval<int>(1,20));
+			CPPUNIT_ASSERT_EQUAL(QList< Interval<int> >() << Interval<int>(1,20), dc2->selectedIntervals());
 			dc2->removeRows(10,5);
-			CPPUNIT_ASSERT(dc2->selectedIntervals() == QList< Interval<int> >() << Interval<int>(1,15));
+			CPPUNIT_ASSERT_EQUAL(QList< Interval<int> >() << Interval<int>(1,15), dc2->selectedIntervals());
 			dc2->setSelected(Interval<int>(20,30));
-			CPPUNIT_ASSERT(dc2->selectedIntervals().size() == 2);
+			CPPUNIT_ASSERT_EQUAL(2, dc2->selectedIntervals().size());
 			CPPUNIT_ASSERT(dc2->selectedIntervals().contains(Interval<int>(1,15)));
 			CPPUNIT_ASSERT(dc2->selectedIntervals().contains(Interval<int>(20,30)));
 			dc2->removeRows(15,5);
-			CPPUNIT_ASSERT(dc2->selectedIntervals() == QList< Interval<int> >() << Interval<int>(1,25));
+			CPPUNIT_ASSERT_EQUAL(QList< Interval<int> >() << Interval<int>(1,25), dc2->selectedIntervals());
 			dc2->insertEmptyRows(5,5);
-			CPPUNIT_ASSERT(dc2->selectedIntervals().size() == 2);
+			CPPUNIT_ASSERT_EQUAL(2, dc2->selectedIntervals().size());
 			CPPUNIT_ASSERT(dc2->selectedIntervals().contains(Interval<int>(1,4)));
 			CPPUNIT_ASSERT(dc2->selectedIntervals().contains(Interval<int>(10,30)));
-			CPPUNIT_ASSERT(dc2->formula(1) == "bar baz");
-			CPPUNIT_ASSERT(dc2->formula(4) == "bar baz");
-			CPPUNIT_ASSERT(dc2->formula(5) == "");
-			CPPUNIT_ASSERT(dc2->formula(10) == "bar baz");
-			CPPUNIT_ASSERT(dc2->formula(14) == "bar baz");
-			CPPUNIT_ASSERT(dc2->formula(15) == "foo bar");
-			CPPUNIT_ASSERT(dc2->formula(17) == "foo bar");
-			CPPUNIT_ASSERT(dc2->formula(19) == "foo bar");
-			CPPUNIT_ASSERT(dc2->formula(20) == "");
-			CPPUNIT_ASSERT(dc2->formula(30) == "");
+			CPPUNIT_ASSERT_EQUAL(QString("bar baz"), dc2->formula(1));
+			CPPUNIT_ASSERT_EQUAL(QString("bar baz"), dc2->formula(4));
+			CPPUNIT_ASSERT_EQUAL(QString(""), dc2->formula(5));
+			CPPUNIT_ASSERT_EQUAL(QString("bar baz"), dc2->formula(10));
+			CPPUNIT_ASSERT_EQUAL(QString("bar baz"), dc2->formula(14));
+			CPPUNIT_ASSERT_EQUAL(QString("foo bar"), dc2->formula(15));
+			CPPUNIT_ASSERT_EQUAL(QString("foo bar"), dc2->formula(17));
+			CPPUNIT_ASSERT_EQUAL(QString("foo bar"), dc2->formula(19));
+			CPPUNIT_ASSERT_EQUAL(QString(""), dc2->formula(20));
+			CPPUNIT_ASSERT_EQUAL(QString(""), dc2->formula(30));
 		}
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION( ColumnDataTest );
 

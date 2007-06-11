@@ -94,9 +94,8 @@ template<class T> class IntervalAttribute
 		void insertRows(int before, int count)
 		{
 			QList< Interval<int> > temp_list;
-			int c;
 			// first: split all intervals that contain 'before'
-			for(c=0; c<d_intervals.size(); c++)
+			for(int c=0; c<d_intervals.size(); c++)
 			{
 				if(d_intervals.at(c).contains(before))
 				{
@@ -105,13 +104,14 @@ template<class T> class IntervalAttribute
 					if(temp_list.size()>1)
 					{
 						d_intervals.insert(c, temp_list.at(1));
-						d_values.insert(c++, d_values.at(c));
+						d_values.insert(c, d_values.at(c));
+						c++;
 					}
 					
 				}
 			}
 			// second: translate all intervals that start at 'before' or later
-			for(c=0; c<d_intervals.size(); c++)
+			for(int c=0; c<d_intervals.size(); c++)
 			{
 				if(d_intervals.at(c).start() >= before)
 					d_intervals[c].translate(count);
@@ -138,7 +138,8 @@ template<class T> class IntervalAttribute
 					if(temp_list.size()>1)
 					{
 						d_intervals.insert(c, temp_list.at(1));
-						d_values.insert(c++, d_values.at(c));
+						d_values.insert(c, d_values.at(c));
+						c++;
 					}
 				}
 			}

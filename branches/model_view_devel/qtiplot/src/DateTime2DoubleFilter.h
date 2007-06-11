@@ -31,7 +31,6 @@
 #define DATE_TIME2DOUBLE_FILTER_H
 
 #include "AbstractSimpleFilter.h"
-#include "AbstractDateTimeDataSource.h"
 #include <QDateTime>
 #include <QDate>
 #include <QTime>
@@ -42,17 +41,11 @@ class DateTime2DoubleFilter : public AbstractSimpleFilter<double>
 	Q_OBJECT
 
 	public:
-		virtual QString label() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->label() : QString();
-		}
-		virtual int numRows() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
-		}
 		virtual double valueAt(int row) const {
-			if (!d_inputs.value(0) || !d_inputs.at(0)->isValid(row)) return 0;
-			QDateTime dt = static_cast<AbstractDateTimeDataSource*>(d_inputs.at(0))->dateTimeAt(row);
-			return double(dt.date().toJulianDay()) +
-				double( -dt.time().msecsTo(QTime(12,0,0,0))/86400000.0 );
+			if (!d_inputs.value(0)) return 0;
+			QDateTime input_value = dateTimeInput()->dateTimeAt(row);
+			return double(input_value.date().toJulianDay()) +
+				double( -input_value.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
 		}
 
 	protected:

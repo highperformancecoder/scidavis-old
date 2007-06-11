@@ -4,7 +4,8 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
-    Description          : Conversion filter double -> QDateTime (using Julian day).
+    Description          : Conversion filter double -> QDateTime, interpreting
+                           the input numbers as (fractional) Julian days.
                            
  ***************************************************************************/
 
@@ -30,34 +31,26 @@
 #define DOUBLE2DATE_TIME_FILTER_H
 
 #include "AbstractSimpleFilter.h"
-#include "AbstractDoubleDataSource.h"
 #include <QDateTime>
 #include <QDate>
 #include <QTime>
 
-//! Conversion filter double -> QDateTime (using Julian day).
+//! Conversion filter double -> QDateTime, interpreting the input numbers as (fractional) Julian days.
 class Double2DateTimeFilter : public AbstractSimpleFilter<QDateTime>
 {
 	Q_OBJECT
 
 	public:
-// simplified filter interface
-		virtual QString label() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->label() : QString();
-		}
-		virtual int numRows() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
-		}
 		virtual QDate dateAt(int row) const {
-			if (!d_inputs.value(0) || !d_inputs.at(0)->isValid(row)) return QDate();
-			return QDate::fromJulianDay(int(static_cast<AbstractDoubleDataSource*>(d_inputs.at(0))->valueAt(row)));
+			if (!d_inputs.value(0)) return QDate();
+			return QDate::fromJulianDay(qRound(doubleInput()->valueAt(row)));
 		}
 		virtual QTime timeAt(int row) const {
-			if (!d_inputs.value(0) || !d_inputs.at(0)->isValid(row)) return QTime();
+			if (!d_inputs.value(0)) return QTime();
+			double input_value = doubleInput()->valueAt(row);
 			// we only want the digits behind the dot and 
 			// convert them from fraction of day to milliseconds
-			double val = static_cast<AbstractDoubleDataSource*>(d_inputs.at(0))->valueAt(row);
-			return QTime(12,0,0,0).addMSecs(int( (val - int(val)) * 86400000.0 ));
+			return QTime(12,0,0,0).addMSecs(int( (input_value - int(input_value)) * 86400000.0 ));
 		}
 		virtual QDateTime dateTimeAt(int row) const {
 			return QDateTime(dateAt(row), timeAt(row));

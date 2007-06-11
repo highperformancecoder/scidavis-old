@@ -30,7 +30,6 @@
 #define STRING2DOUBLE_FILTER_H
 
 #include "AbstractSimpleFilter.h"
-#include "AbstractStringDataSource.h"
 #include <QLocale>
 
 //! Locale-aware conversion filter QString -> double.
@@ -39,16 +38,9 @@ class String2DoubleFilter : public AbstractSimpleFilter<double>
 	Q_OBJECT
 
 	public:
-// simplified filter interface
-		virtual QString label() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->label() : QString();
-		}
-		virtual int numRows() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
-		}
 		virtual double valueAt(int row) const {
-			if (!d_inputs.value(0) || row >= d_inputs.at(0)->numRows()) return 0;
-			return QLocale().toDouble(static_cast<AbstractStringDataSource*>(d_inputs.at(0))->textAt(row));
+			if (!d_inputs.value(0)) return 0;
+			return QLocale().toDouble(stringInput()->textAt(row));
 		}
 
 	protected:

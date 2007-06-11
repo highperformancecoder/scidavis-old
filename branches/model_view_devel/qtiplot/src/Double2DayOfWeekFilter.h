@@ -1,11 +1,11 @@
 /***************************************************************************
-    File                 : String2DateTimeFilter.h
+    File                 : Double2DayOfWeekFilter.h
     Project              : QtiPlot
     --------------------------------------------------------------------
-    Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
-                           Knut Franke
-    Email (use @ for *)  : thzs*gmx.net, knut.franke*gmx.de
-    Description          : Conversion filter QString -> QDateTime.
+    Copyright            : (C) 2007 by Knut Franke
+    Email (use @ for *)  : knut.franke*gmx.de
+    Description          : Conversion filter double -> QDateTime, interpreting
+                           the input numbers as days of the week (1 -> Monday).
                            
  ***************************************************************************/
 
@@ -27,58 +27,40 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef STRING2DATE_TIME_FILTER_H
-#define STRING2DATE_TIME_FILTER_H
+#ifndef DOUBLE2DAY_OF_WEEK_FILTER_H
+#define DOUBLE2DAY_OF_WEEK_FILTER_H
 
 #include "AbstractSimpleFilter.h"
 #include <QDateTime>
-#include <QDate>
-#include <QTime>
 
-/**
- * \brief Conversion filter QString -> QDateTime.
- *
- * The standard use of this filter is explicitly specifiying the date/time format of the strings
- * on the input, either in the constructor or via setFormat().
- * However, if the input fails to comply to this format, String2DateTimeFilter
- * tries to guess the format, using internal lists of common date and time formats (#date_formats
- * and #time_formats).
- */
-class String2DateTimeFilter : public AbstractSimpleFilter<QDateTime>
+//! Conversion filter double -> QDateTime, interpreting the input numbers as days of the week (1 = Monday).
+class Double2DayOfWeekFilter : public AbstractSimpleFilter<QDateTime>
 {
 	Q_OBJECT
-
 	public:
-		//! Standard constructor.
-		explicit String2DateTimeFilter(QString format="yyyy-MM-dd hh:mm:ss.zzz") : d_format(format) {}
-		//! Set the format string to be used for conversion.
-		void setFormat(QString format) { d_format = format; }
-		//! Return the format string
-		/**
-		 * The default format string is "yyyy-MM-dd hh:mm:ss.zzz".
-		 * \sa QDate::toString()
-		 */
-		QString format() const { return d_format; }
-
-	private:
-		//! The format string.
-		QString d_format;
-
-		static const char * date_formats[];
-		static const char * time_formats[];
-
-// simplified filter interface
-	public:
-		virtual QDateTime dateTimeAt(int row) const;
-		virtual QDate dateAt(int row) const { return dateTimeAt(row).date(); }
-		virtual QTime timeAt(int row) const { return dateTimeAt(row).time(); }
+		virtual QDate dateAt(int row) const {
+			if (!d_inputs.value(0)) return QDate();
+			// Julian day 0 is a Monday, but we want to have 1 -> Monday,
+			// so our reference date is Julian day -1.
+			return QDate::fromJulianDay(qRound(doubleInput()->valueAt(row) - 1.0));
+		}
+		virtual QTime timeAt(int row) const {
+			return QTime(0,0,0,0);
+			/*
+			if (!d_inputs.value(0)) return QTime();
+			double input_value = doubleInput()->valueAt(row);
+			return QTime(12,0,0,0).addMSecs(int( (input_value - int(input_value)) * 86400000.0 ));
+			*/
+		}
+		virtual QDateTime dateTimeAt(int row) const {
+			return QDateTime(dateAt(row), timeAt(row));
+		}
 
 	protected:
-		//! Using typed ports: only string inputs are accepted.
+		//! Using typed ports: only double inputs are accepted.
 		virtual bool inputAcceptable(int, AbstractDataSource *source) {
-			return source->inherits("AbstractStringDataSource");
+			return source->inherits("AbstractDoubleDataSource");
 		}
 };
 
-#endif // ifndef STRING2DATE_TIME_FILTER_H
-
+#endif // ifndef DOUBLE2DAY_OF_WEEK_FILTER_H

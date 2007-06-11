@@ -61,15 +61,17 @@ class StatisticsFilter : public AbstractFilter {
 		virtual void inputDescriptionAboutToChange(AbstractDataSource*) { d_strings[0]->dataAboutToChange(d_doubles[0]); }
 		virtual void inputDescriptionChanged(AbstractDataSource*) { d_strings[0]->dataChanged(d_doubles[0]); }
 		virtual void inputDataAboutToChange(AbstractDataSource*);
+		virtual void inputAboutToBeDisconnected(AbstractDataSource*);
 		//! This is where the magic happens: data changes on an input port cause the corresponding entry in #d_s to be recomputed.
 		virtual void inputDataChanged(int port);
 	private:
 		//! The values being cached for each input column provided.
 		struct Statistics {
 			int first_valid_row, last_valid_row, min_index, max_index, N;
-			double min, max, mean, variance;
+			double min, max, sum, variance;
 		};
 		enum StatItem { Label, Rows, Mean, Sigma, Variance, Sum, iMax, Max, iMin, Min, N };
+
 		//! Implements the double-typed output ports.
 		class DoubleStatisticsColumn : public AbstractDoubleDataSource {
 			public:

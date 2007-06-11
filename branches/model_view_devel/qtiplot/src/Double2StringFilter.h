@@ -30,7 +30,6 @@
 #define DOUBLE2STRING_FILTER_H
 
 #include "AbstractSimpleFilter.h"
-#include "AbstractDoubleDataSource.h"
 #include <QLocale>
 
 //! Locale-aware conversion filter double -> QString.
@@ -39,8 +38,8 @@ class Double2StringFilter : public AbstractSimpleFilter<QString>
 	Q_OBJECT
 
 	public:
+		//! Standard constructor.
 		explicit Double2StringFilter(char format='e', int digits=6) : d_format(format), d_digits(digits) {}
-// select conversion format
 		//! Set format character as in QString::number
 		void setNumericFormat(char format) { d_format = format; }
 		//! Set number of displayed digits
@@ -50,18 +49,17 @@ class Double2StringFilter : public AbstractSimpleFilter<QString>
 		//! Get number of displayed digits
 		int numDigits() const { return d_digits; }
 
+	private:
+		//! Format character as in QString::number 
+		char d_format;
+		//! Display digits or precision as in QString::number  
+		int d_digits;
+
 // simplified filter interface
+	public:
 		virtual QString textAt(int row) const {
-			if (!d_inputs.value(0) || row >= d_inputs.at(0)->numRows()) return QString();
-			return QLocale().toString(
-					static_cast<AbstractDoubleDataSource*>(d_inputs.at(0))->valueAt(row),
-					d_format, d_digits);
-		}
-		virtual QString label() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->label() : QString();
-		}
-		virtual int numRows() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
+			if (!d_inputs.value(0)) return QString();
+			return QLocale().toString(doubleInput()->valueAt(row), d_format, d_digits);
 		}
 
 	protected:
@@ -69,12 +67,6 @@ class Double2StringFilter : public AbstractSimpleFilter<QString>
 		virtual bool inputAcceptable(int, AbstractDataSource *source) {
 			return source->inherits("AbstractDoubleDataSource");
 		}
-
-	private:
-		//! Format character as in QString::number 
-		char d_format;
-		//! Display digits or precision as in QString::number  
-		int d_digits;
 };
 
 #endif // ifndef DOUBLE2STRING_FILTER_H

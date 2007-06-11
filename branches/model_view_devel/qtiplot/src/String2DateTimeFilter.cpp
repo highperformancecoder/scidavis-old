@@ -36,7 +36,7 @@ const char * String2DateTimeFilter::date_formats[] = {
 	"d/M/yyyy", // European style day/month order (this order seems to be used in more countries than the US style M/d/yyyy)
 	"d/M/yy", 
 	"d-M-yyyy",
-	"d-M-yy", 
+	"d-M-yy",
 	"d.M.yyyy", // German style
 	"d.M.yy",
 	"M/yyyy",
@@ -61,21 +61,21 @@ const char * String2DateTimeFilter::time_formats[] = {
 QDateTime String2DateTimeFilter::dateTimeAt(int row) const
 {
 	if (!d_inputs.value(0)) return QDateTime();
-	QString string = static_cast<AbstractStringDataSource*>(d_inputs.at(0))->textAt(row);
+	QString input_value = stringInput()->textAt(row);
 
 	// first try the selected format string d_format
-	QDateTime result = QDateTime::fromString(string, d_format);
+	QDateTime result = QDateTime::fromString(input_value, d_format);
 	if(result.date().isValid() || result.time().isValid())
 		return result;
 
 	// fallback:
 	// try other format strings built from date_formats and time_formats
 	// comma and space are valid separators between date and time
-	QStringList strings = string.simplified().split(",", QString::SkipEmptyParts);
+	QStringList strings = input_value.simplified().split(",", QString::SkipEmptyParts);
 	if(strings.size() == 1) strings = strings.at(0).split(" ", QString::SkipEmptyParts);
 
 	if(strings.size() < 1)
-		return result;
+		return result; // invalid date/time from first attempt
 
 	QDate date_result;
 	QTime time_result;
@@ -87,14 +87,18 @@ QDateTime String2DateTimeFilter::dateTimeAt(int row) const
 	else
 		time_string = date_string;
 
-	int i=0;
-	// find a valid date
-	while( !date_result.isValid() && date_formats[i] )
-		date_result = QDate::fromString(date_string, date_formats[i++]);
-	i=0;
-	// find a valid time
-	while( !time_result.isValid() && time_formats[i] )
-		time_result = QTime::fromString(time_string, time_formats[i++]);
+	// try to find a valid date
+	for (const char **format = date_formats; *format != 0; format++) {
+		date_result = QDate::fromString(date_string, *format);
+		if (date_result.isValid())
+			break;
+	}
+	// try to find a valid time
+	for (const char **format = time_formats; *format != 0; format++) {
+		time_result = QTime::fromString(time_string, *format);
+		if (time_result.isValid())
+			break;
+	}
 
 	if(!date_result.isValid())
 		date_result.setDate(1900,1,1);	// this is what QDateTime does e.g. for

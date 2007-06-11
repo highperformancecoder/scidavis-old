@@ -55,6 +55,15 @@ class AbstractFilterSlotMachine : public QObject {
 			void inputDataAboutToChange(AbstractDataSource* source);
 			void inputDataChanged(AbstractDataSource* source);
 			void inputAboutToBeReplaced(AbstractDataSource* source, AbstractDataSource* replacement);
+			void inputRowsAboutToBeInserted(AbstractDataSource* source, int before, int count);
+			void inputRowsInserted(AbstractDataSource* source, int before, int count);
+			void inputRowsAboutToBeDeleted(AbstractDataSource* source, int first, int count);
+			void inputRowsDeleted(AbstractDataSource* source, int first, int count);
+			void inputValidityAboutToChange(AbstractDataSource* source);
+			void inputValidityChanged(AbstractDataSource* source);
+			void inputMaskingAboutToChange(AbstractDataSource* source);
+			void inputMaskingChanged(AbstractDataSource* source);
+			void inputAboutToBeDestroyed(AbstractDataSource* source);
 	private:
 		AbstractFilter *d_parent;
 };
@@ -107,7 +116,7 @@ class AbstractFilter
 		//! Destructor.
 		virtual ~AbstractFilter() {}
 
-		//! Return the number of input port supported by the filter or -1 if any number of inputs is acceptable.
+		//! Return the number of input ports supported by the filter or -1 if any number of inputs is acceptable.
 		virtual int numInputs() const = 0;
 		/**
 		 * \brief Return the number of output ports provided by the filter.
@@ -120,6 +129,10 @@ class AbstractFilter
 		 * \brief Connect the provided data source to the specified input port.
 		 *
 		 * \returns true if the connection was accepted, false otherwise.
+		 *
+		 * If applicable, the previously connected data source is disconnected before replacing it.
+		 * You can also use this method to disconnect an input without replacing it with a new one by
+		 * calling it with source=0.
 		 */
 		bool input(int port, AbstractDataSource *source);
 		/**
@@ -145,12 +158,16 @@ class AbstractFilter
 		 * The returned pointer may be 0 even for valid port numbers, for example if not all required
 		 * input ports have been connected.
 		 */
-		virtual AbstractDataSource* output(int port) const = 0;
+		virtual AbstractDataSource* output(int port=0) const = 0;
 		// virtual void saveTo(QXmlStreamWriter *) = 0;
 		// virtual void loadFrom(QXmlStreamReader *) = 0;
 
 	protected:
-		//! Give implementations a chance to reject connections to their input ports.
+		/**
+		 * \brief Give implementations a chance to reject connections to their input ports.
+		 *
+		 * If not reimplemented, all connections to ports within [0, numInputs()-1] will be accepted.
+		 */
 		virtual bool inputAcceptable(int port, AbstractDataSource *source) {
 			Q_UNUSED(port); Q_UNUSED(source); return true;
 		}
@@ -211,6 +228,35 @@ class AbstractFilter
 		 * most of the time.
 		 */
 		virtual void inputAboutToBeReplaced(AbstractDataSource* source, AbstractDataSource* replacement);
+		virtual void inputRowsAboutToBeInserted(AbstractDataSource* source, int before, int count) {
+			Q_UNUSED(source); Q_UNUSED(before); Q_UNUSED(count);
+		}
+		virtual void inputRowsInserted(AbstractDataSource* source, int before, int count) {
+			Q_UNUSED(source); Q_UNUSED(before); Q_UNUSED(count);
+		}
+		virtual void inputRowsAboutToBeDeleted(AbstractDataSource* source, int first, int count) {
+			Q_UNUSED(source); Q_UNUSED(first); Q_UNUSED(count);
+		}
+		virtual void inputRowsDeleted(AbstractDataSource* source, int first, int count) {
+			Q_UNUSED(source); Q_UNUSED(first); Q_UNUSED(count);
+		}
+		virtual void inputValidityAboutToChange(AbstractDataSource* source) {
+			inputDataAboutToChange(source);
+		}
+		virtual void inputValidityChanged(AbstractDataSource* source) {
+			inputDataChanged(source);
+		}
+		virtual void inputMaskingAboutToChange(AbstractDataSource* source) {
+			Q_UNUSED(source);
+		}
+		virtual void inputMaskingChanged(AbstractDataSource* source) {
+			Q_UNUSED(source);
+		}
+		void inputAboutToBeDestroyed(AbstractDataSource* source) {
+			input(d_inputs.indexOf(source), 0);
+		}
+		virtual void inputAboutToBeDisconnected(AbstractDataSource* source) { Q_UNUSED(source); }
+
 		//! The data sources connected to my input ports.
 		QVector<AbstractDataSource*> d_inputs;
 

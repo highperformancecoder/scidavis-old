@@ -27,7 +27,6 @@
  *                                                                         *
  ***************************************************************************/
 #include "StatisticsFilter.h"
-#include <gsl/gsl_statistics.h>
 #include <math.h>
 
 StatisticsFilter::StatisticsFilter()
@@ -69,50 +68,54 @@ void StatisticsFilter::inputDataAboutToChange(AbstractDataSource*)
 		d_doubles[i]->dataAboutToChange(d_doubles[i]);
 }
 
+void StatisticsFilter::inputAboutToBeDisconnected(AbstractDataSource *source)
+{
+	if (d_inputs.indexOf(source)+1 == d_s.size())
+		d_s.resize(d_s.size()-1);
+}
+
 void StatisticsFilter::inputDataChanged(int port)
 {
 	if (port >= d_s.size()) d_s.resize(port+1);
 	Statistics *s = &d_s[port];
-
-	// TODO
-	// determine target range first_valid_row..last_valid_row
-	/*
-	for (s->first_valid_row=0; s->first_valid_row < d_inputs[port]->numRows(); s->first_valid_row++)
-		if (d_inputs[port]->isRowValid(s->first_valid_row)) break;
-	if (s->first_valid_row == d_inputs[port]->numRows()) {
+	QList< Interval<int> > valid_intervals = d_inputs.at(port)->validIntervals();
+	if (valid_intervals.isEmpty()) {
 		s->first_valid_row = -1;
-		s->N = 0;
 		return;
 	}
-	for (s->last_valid_row=s->first_valid_row; s->last_valid_row < d_inputs[port]->numRows(); s->last_valid_row++)
-		if (!d_inputs[port]->isRowValid(s->last_valid_row)) break;
-	--(s->last_valid_row);
-	*/
-	s->first_valid_row = 0; s->last_valid_row = d_inputs.at(port)->numRows() - 1; // remove me
 
-	s->N = s->last_valid_row - s->first_valid_row + 1;
+	// initialize some entries for the following iteration
+	s->sum = 0; s->N = 0;
+	s->min_index = s->max_index = s->first_valid_row = s->last_valid_row = valid_intervals.at(0).start();
+	s->min = s->max = static_cast<AbstractDoubleDataSource*>(d_inputs.at(port))->valueAt(s->first_valid_row);
 
-	// initialize some entries fo the following iteration
-	s->min_index = s->max_index = s->first_valid_row;
-	double *data = new double[s->N]; // only for GSL
-	data[0] = s->min = s->max = static_cast<AbstractDoubleDataSource*>(d_inputs[port])->valueAt(s->first_valid_row);
-
-	// iterate over target range, determining min and max, and fill *data
-	for (int i = 1; i < s->N; i++) {
-		data[i] = static_cast<AbstractDoubleDataSource*>(d_inputs[port])->valueAt(s->first_valid_row+i);
-		if (data[i] < s->min) {
-			s->min = data[i];
-			s->min_index = s->first_valid_row + i;
-		} else if (data[i] > s->max) {
-			s->max = data[i];
-			s->max_index = s->first_valid_row + i;
+	// iterate over all valid rows, determining first_valid_row, last_valid_row, N, min, max and sum
+	foreach(Interval<int> i, valid_intervals) {
+		if (i.start() < s->first_valid_row)
+			s->first_valid_row = i.start();
+		if (i.end() > s->last_valid_row)
+			s->last_valid_row = i.end();
+		for (int row = i.start(); row <= i.end(); row++) {
+			s->N++;
+			double val = static_cast<AbstractDoubleDataSource*>(d_inputs.at(port))->valueAt(row);
+			if (val < s->min) {
+				s->min = val;
+				s->min_index = row;
+			} else if (val > s->max) {
+				s->max = val;
+				s->max_index = row;
+			}
+			s->sum += val;
 		}
 	}
 
-	// GSL to compute mean value and variance
-	s->mean = gsl_stats_mean(data, 1, s->N);
-	s->variance = gsl_stats_variance(data, 1, s->N);
-	delete[] data;
+	// iterate a second time, using the now-known mean to compute the variance
+	double mean = s->sum / double(s->N);
+	s->variance = 0;
+	foreach(Interval<int> i, valid_intervals)
+		for (int row = i.start(); row <= i.end(); row++)
+			s->variance += pow(static_cast<AbstractDoubleDataSource*>(d_inputs.at(port))->valueAt(row) - mean, 2);
+	s->variance /= double(s->N);
 
 	// emit signals on all output ports that might have changed
 	d_strings[1]->dataChanged(d_strings[1]);
@@ -125,10 +128,10 @@ double StatisticsFilter::DoubleStatisticsColumn::valueAt(int row) const
 	if (row<0 || row>=d_parent->numRows()) return 0;
 	const Statistics *s = &(d_parent->d_s.at(row));
 	switch(d_item) {
-		case Mean: return s->mean;
+		case Mean: return s->sum / double(s->N);
 		case Sigma: return sqrt(s->variance);
 		case Variance: return s->variance;
-		case Sum: return s->mean * s->N;
+		case Sum: return s->sum;
 		case iMax: return s->max_index + 1;
 		case Max: return s->max;
 		case iMin: return s->min_index + 1;

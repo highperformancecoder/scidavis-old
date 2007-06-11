@@ -116,6 +116,7 @@ public:
 	void setOutputFilter(int col, AbstractFilter * filter);
 	//! Replace a column completely
 	/**
+	 * TableModel takes over ownership of the column.
 	 * \param col the column index
 	 * \param new_col pointer to the column that replaces the old one
 	 * This does not delete the replaced column!
@@ -125,6 +126,7 @@ public:
 	/**
 	 * If 'first' is higher than (current number of columns -1),
 	 * the columns will be appended.
+	 * TableModel takes over ownership of the columns.
 	 * \param cols a list of column data objects
 	 * \param before index of the column to insert before
 	 */
@@ -148,6 +150,9 @@ public:
 	//! Append rows to the table
 	void appendRows(int count);
 	//! Append columns to the table
+	/**
+	 * TableModel takes over ownership of the column.
+	 */
 	void appendColumns(QList<AbstractColumnData *> cols);
 	//! Return the number of columns in the table
 	int columnCount() const { return d_column_count; }

@@ -2,22 +2,19 @@
 #include <cppunit/TestResult.h>
 #include <cppunit/TestResultCollector.h>
 #include <cppunit/CompilerOutputter.h>
-#include "IntervalTest.h"
-#include "ColumnDataTest.h"
-#include "ConversionFilterTest.h"
+#include <cppunit/extensions/TestFactoryRegistry.h>
 
 int main()
 {
 	CppUnit::TestResult result;
 	CppUnit::TestResultCollector collector;
 	result.addListener(&collector);
+
 	CppUnit::TextUi::TestRunner runner;
-
-	runner.addTest(IntervalTest::suite());
-	runner.addTest(ColumnDataTest::suite());
-	runner.addTest(ConversionFilterTest::suite());
-
+	CppUnit::TestFactoryRegistry &registry = CppUnit::TestFactoryRegistry::getRegistry();
+	runner.addTest(registry.makeTest());
 	runner.run(result);
+
 	CppUnit::CompilerOutputter out(&collector, CppUnit::stdCOut());
 	out.write();
 	return collector.wasSuccessful() ? 0 : 1;

@@ -3,7 +3,7 @@ TARGET =
 DEPENDPATH += . ..
 INCLUDEPATH += . ..
 CONFIG += debug
-LIBS         += -L /usr/lib -lgsl -lgslcblas
+#LIBS         += -L /usr/lib -lgsl -lgslcblas
 #LIBS += -lgsl
 
 HEADERS += AbstractColumnData.h \

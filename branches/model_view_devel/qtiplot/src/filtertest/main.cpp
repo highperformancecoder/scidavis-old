@@ -5,6 +5,7 @@ using namespace std;
 #include "DoubleColumnData.h"
 #include "StringColumnData.h"
 #include "DateTimeColumnData.h"
+
 #include "StatisticsFilter.h"
 #include "DifferentiationFilter.h"
 #include "DoubleTransposeFilter.h"
@@ -17,13 +18,14 @@ using namespace std;
 
 #include "TableModel.h"
 #include "ReadOnlyTableModel.h"
+
 #include <QApplication>
 #include <QMainWindow>
 #include <QTableView>
 #include <QVBoxLayout>
 #include <QTime>
 
-Double2StringFilter double2string;
+Double2StringFilter double2string('d',4);
 DateTime2StringFilter date_time2string;
 
 void dumpDataSource(AbstractDataSource *source)
@@ -61,22 +63,20 @@ void dumpFilterOutput(const char* header, const AbstractFilter *filter)
 int main(int argc, char **argv)
 {
 	QApplication a(argc,argv);
-	double2string.setNumericFormat('d');
-	double2string.setNumDigits(4);
 
-	DoubleColumnData dc_one(7);
-	for(int i=0;i<dc_one.size();i++)
-		dc_one[i] = i;
-	dc_one.setLabel("x");
-	dc_one.setValid(Interval<int>(0,6));
-	DoubleColumnData dc_two;
-	dc_two << 2.3 << 45 << 1.1 << 9 << 12;
-	dc_two.setLabel("y");
-	dc_two.setValid(Interval<int>(0,4));
+	DoubleColumnData *dc_one = new DoubleColumnData(7);
+	for(int i=0;i<dc_one->size();i++)
+		(*dc_one)[i] = i;
+	dc_one->setLabel("x");
+	dc_one->setValid(Interval<int>(0,6));
+	DoubleColumnData *dc_two = new DoubleColumnData();
+	*dc_two << 2.3 << 45 << 1.1 << 9 << 12;
+	dc_two->setLabel("y");
+	dc_two->setValid(Interval<int>(0,4));
 
 	CopyThroughFilter inputs;
-	inputs.input(0, &dc_one);
-	inputs.input(1, &dc_two);
+	inputs.input(0, dc_one);
+	inputs.input(1, dc_two);
 	dumpFilterOutput("Input Data", &inputs);
 
 	DifferentiationFilter diff_filter;
@@ -107,7 +107,8 @@ int main(int argc, char **argv)
 	cout << "allocated (took " << t.elapsed() << "ms)... " << flush;
 	t.restart();
 	for (int i=0; i<dc_random.numRows(); i++)
-		dc_random[i] = rand();
+		dc_random.replace(i, rand());
+	dc_random.setValid(Interval<int>(0,dc_random.numRows()-1));
 	cout << "filled (took " << t.elapsed() << "ms)... " << endl;
 	StatisticsFilter huge_stat;
 	t.restart();
@@ -154,7 +155,7 @@ int main(int argc, char **argv)
 	editView.setModel(&edit);
 	layout.addWidget(&editView);
 	QList<AbstractColumnData *> data_list;
-	data_list << &dc_one << &dc_two;
+	data_list << dc_one << dc_two;
 	edit.appendColumns(data_list);
 	// TODO: should be handled by TableModel (?)
 	edit.setOutputFilter(0, new Double2StringFilter());

@@ -31,8 +31,8 @@
 #define DATE_TIME2STRING_FILTER_H
 
 #include "AbstractSimpleFilter.h"
-#include "AbstractDateTimeDataSource.h"
 #include <QDateTime>
+#include <QRegExp>
 
 //! Conversion filter QDateTime -> QString.
 class DateTime2StringFilter : public AbstractSimpleFilter<QString>
@@ -40,7 +40,6 @@ class DateTime2StringFilter : public AbstractSimpleFilter<QString>
 	Q_OBJECT
 
 	public:
-// select conversion format
 		//! Standard constructor.
 		explicit DateTime2StringFilter(QString format="yyyy-MM-dd hh:mm:ss.zzz") : d_format(format) {}
 		//! Set the format string to be used for conversion.
@@ -52,29 +51,33 @@ class DateTime2StringFilter : public AbstractSimpleFilter<QString>
 		 */
 		QString format() const { return d_format; }
 
+	private:
+		//! The format string.
+		QString d_format;
+
 // simplified filter interface
-		virtual QString label() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->label() : QString();
-		}
-		virtual int numRows() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
-		}
+	public:
 		virtual QString textAt(int row) const {
 			if (!d_inputs.value(0)) return QString();
-			QDateTime temp = static_cast<AbstractDateTimeDataSource*>(d_inputs.at(0))->dateTimeAt(row);
-			if(!temp.date().isValid() && temp.time().isValid())
-				temp.setDate(QDate(1900,1,1)); // see class documentation
-			return temp.toString(d_format);
+			QDateTime input_value = dateTimeInput()->dateTimeAt(row);
+			if(!input_value.date().isValid() && input_value.time().isValid())
+				input_value.setDate(QDate(1900,1,1));
+			// QDate::toString produces shortened year numbers for "yyyy"
+			// in violation of ISO 8601 and ambiguous with respect to "yy" format
+			QString format(d_format);
+			format.replace("yyyy","YYYYyyyyYYYY");
+			QString result = input_value.toString(format);
+			result.replace(QRegExp("YYYY(-)?(\\d\\d\\d\\d)YYYY"), "\\1\\2");
+			result.replace(QRegExp("YYYY(-)?(\\d\\d\\d)YYYY"), "\\10\\2");
+			result.replace(QRegExp("YYYY(-)?(\\d\\d)YYYY"), "\\100\\2");
+			result.replace(QRegExp("YYYY(-)?(\\d)YYYY"), "\\1000\\2");
+			return result;
 		}
 	protected:
 		//! Using typed ports: only DateTime inputs are accepted.
 		virtual bool inputAcceptable(int, AbstractDataSource *source) {
 			return source->inherits("AbstractDateTimeDataSource");
 		}
-
-	private:
-		//! The format string.
-		QString d_format;
 };
 
 #endif // ifndef DATE_TIME2STRING_FILTER_H

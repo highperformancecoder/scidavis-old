@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = unittest
+TARGET = unittests
 DEPENDPATH += . ..
 INCLUDEPATH += . ..
 unix:LIBS += -lcppunit
@@ -28,6 +28,10 @@ HEADERS += \
 			  DateTime2StringFilter.h \
 			  Double2DateTimeFilter.h \
 			  String2DateTimeFilter.h \
+			  Double2MonthFilter.h \
+			  Double2DayOfWeekFilter.h \
+			  Month2DoubleFilter.h \
+			  DayOfWeek2DoubleFilter.h \
 
 SOURCES += \
 			  StringColumnData.cpp \
@@ -38,9 +42,10 @@ SOURCES += \
 
 # test cases
 HEADERS += \
-	IntervalTest.h \
-	ColumnDataTest.h \
-	ConversionFilterTest.h \
+	assertion_traits.h \
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+	IntervalTest.cpp \
+	ColumnDataTest.cpp \
+	ConversionFilterTest.cpp \
 
