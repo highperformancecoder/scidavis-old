@@ -33,6 +33,7 @@
 #include "AbstractDataSource.h"
 #include "IntervalAttribute.h"
 class QString;
+#include <QObject>
 
 //! Writing interface for column-based data
 /**
@@ -61,9 +62,8 @@ class QString;
   This class also implements functions to assign formulas to
   intervals of rows.
   */
-class AbstractColumnData : public QObject
+class AbstractColumnData
 {
-	Q_OBJECT
 
 public:
 	//! Dtor
@@ -77,6 +77,15 @@ public:
 	 * This has to be done on a per-implementation basis; thus this virtual casting method.
 	 */
 	virtual AbstractDataSource *asDataSource() = 0;
+	//! Cast me to a qobject (for qobject_cast).
+	/**
+	 * Implementations of AbstractColumnData (the generic write interface) also implement
+	 * AbstractDataSource (the generic read interface) which inherits from QObject. 
+	 * Because of limitations of the C++ language, you cannot safely cross-cast 
+	 * AbstractColumnData to QObject, though.
+	 * This has to be done on a per-implementation basis; thus this virtual casting method.
+	 */
+	virtual QObject *asQObject() = 0;
 	//! Copy another data source of the same type
 	/**
 	 * This function will return false if the data type

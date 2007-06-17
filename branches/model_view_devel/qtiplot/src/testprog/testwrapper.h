@@ -37,12 +37,6 @@ public:
 	TableViewTestWrapper(QWidget * parent, TableModel * model )
 		: TableView(parent, model )
 	{
-//		d_delegate = new TableItemDelegate;
-//		setItemDelegate(d_delegate);
-
-		//TODO: move this to Table
-		connect(this->itemDelegate(), SIGNAL(userInput(const QModelIndex&)), this, SLOT(handleUserInput(const QModelIndex&)) );
-
 		// test code
 		StringColumnData *sc1 = new StringColumnData();
 		StringColumnData *sc2 = new StringColumnData();
@@ -68,8 +62,8 @@ public:
 		dc2->setPlotDesignation(AbstractDataSource::Y);
 		dc1->setLabel("dcol1");
 		dc2->setLabel("dcol2");
-		*dc1 << 1.1 << 2.2 << 3.3 << 4.4 << 5.5;
-		*dc2 << 5.6 << 12 << 128.7;
+		*dc1 << 1.1 << 2.2 << 3.3 << 4.4 << 5.5 << 6.6 << 7.7;
+		*dc2 << 5.6 << 12 << 128.7 << 33 << 144;
 		dc2->setInvalid(Interval<int>(3,4));
 		dc1->setMasked(2);
 		list.clear();
@@ -87,9 +81,9 @@ public:
 		dtc1->setLabel("dtcol1");
 		dtc2->setLabel("dtcol2");
 		*dtc1 << QDateTime(QDate(2007,6,11),QTime(22,0,0,0));
-		*dtc2 << QDateTime(QDate(),QTime()) << QDateTime(QDate(2000,1,1),QTime(0,0,0,0));
-		dtc2->setInvalid(Interval<int>(5,6));
-		dtc1->setMasked(3);
+		*dtc2 << QDateTime(QDate(),QTime()) << QDateTime(QDate(2000,1,1),QTime(0,0,0,0)) << QDateTime() << QDateTime() << QDateTime();
+		dtc2->setInvalid(Interval<int>(3,4));
+		dtc2->setMasked(1);
 		list.clear();
 		list << dtc1 << dtc2;
 		model->appendColumns(list);
@@ -119,16 +113,8 @@ public:
 		temp->setFormat("MMMM");
 		model->setOutputFilter(7, temp); 
 
-		undo_stack = new QUndoStack(this);
+		undo_stack = model->undoStack();
 		undoTest();
-	}
-
-private slots:
-	//TODO: move this to Table
-	//! Provide a command to the undo system for user input in cells
-	void handleUserInput(const QModelIndex& index)
-	{
-		undo_stack->push(new TableUserInputCmd(d_model, index) );		
 	}
 
 private:
@@ -141,14 +127,13 @@ private:
 	undo_stack->push(new TableSetColumnLabelCmd(d_model, 4, "col five") );
 	undo_stack->push(new TableSetColumnCommentCmd(d_model, 0, "a comment") );
 	undo_stack->push(new TableShowCommentsCmd(d_model, true) );
-	undo_stack->push(new TableClearColumnCmd(d_model, 2) );
+	undo_stack->push(new TableClearColumnCmd(d_model, 3) );
 	undo_stack->push(new TableClearColumnCmd(d_model, 1) );
 	undo_stack->push(new TableSetColumnCommentCmd(d_model, 1, "I am\na long\nmultiline\ncomment") );
 	undo_stack->push(new TableSetColumnCommentCmd(d_model, 2, "I am\nanother\nlong\nmultiline\ncomment") );
 	undo_stack->push(new TableShowCommentsCmd(d_model, false) );
 	undo_stack->push(new TableSetColumnCommentCmd(d_model, 3, "I am\nanother\nlong\nmultiline\ncomment") );
 	undo_stack->push(new TableShowCommentsCmd(d_model, true) );
-		
 	}
 
 };

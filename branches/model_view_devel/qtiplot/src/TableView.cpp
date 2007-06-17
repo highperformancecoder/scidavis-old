@@ -30,6 +30,7 @@
 #include "TableView.h"
 #include "TableModel.h"
 #include "TableItemDelegate.h"
+#include "tablecommands.h"
 
 #include "StringColumnData.h"
 #include "DoubleColumnData.h"
@@ -71,7 +72,7 @@ TableView::TableView(QWidget * parent, TableModel * model )
 
 	d_delegate = new TableItemDelegate;
 	setItemDelegate(d_delegate);
-
+	
 	setHorizontalHeader(new AutoResizeHHeader);
 	QHeaderView * v_header = verticalHeader();
 	QHeaderView * h_header = horizontalHeader();
@@ -80,6 +81,7 @@ TableView::TableView(QWidget * parent, TableModel * model )
 	h_header->setDefaultAlignment(Qt::AlignTop);
 	h_header->setResizeMode(QHeaderView::Interactive);
 
+	connect(d_delegate, SIGNAL(userInput(const QModelIndex&)), d_model, SLOT(handleUserInput(const QModelIndex&)) );
 	connect(d_model, SIGNAL(headerDataChanged(Qt::Orientation,int,int)), this, SLOT(updateHeaderGeometry(Qt::Orientation,int,int)) ); 
 
     setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -151,7 +153,7 @@ void TableView::advanceCell()
 {
 	QModelIndex idx = currentIndex();
     if(idx.row()+1 >= d_model->rowCount())
-        d_model->appendRows(1);
+        d_model->undoStack()->push(new TableAppendRowsCmd(d_model, 1) );
 
 	setCurrentIndex(idx.sibling(idx.row()+1, idx.column()));
 }

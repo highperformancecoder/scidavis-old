@@ -36,6 +36,8 @@
 #include "AbstractDataSource.h"
 #include "AbstractColumnData.h"
 #include "AbstractFilter.h"
+#include <QColor>
+class QUndoStack;
 
 #include <QtDebug>
 
@@ -156,6 +158,8 @@ public:
 	void insertRows(int first, int count);
 	//! Append rows to the table
 	void appendRows(int count);
+	//! Remove rows from the table
+	void removeRows(int first, int count);
 	//! Append columns to the table
 	/**
 	 * TableModel takes over ownership of the column.
@@ -193,9 +197,18 @@ public:
 	 * \param right last modified column
 	 */
 	void emitDataChanged(int top, int left, int bottom, int right);
+	//! Return a pointer to the undo stack
+	virtual QUndoStack *undoStack() const;
+	//! The the color for masked cells
+	void setMaskingColor(const QColor& color);
+	//! Return the color for masked cells
+	QColor maskingColor() const;
 	//@}
 	
-	
+public slots:
+	//! Push a command on the undo stack to provide undo for user input in cells
+	void handleUserInput(const QModelIndex& index);
+
 private:
 	//! The number of columns
 	int d_column_count;
@@ -213,6 +226,10 @@ private:
 	QList<AbstractFilter *> d_output_filters;	
 	//! Flag: show/high column comments
 	bool d_show_comments;
+	//! The undo stack
+	QUndoStack *d_undo_stack;
+	//! The color for masked cells
+	QColor d_masking_color;
 	
 	//! Update the vertical header labels
 	/**

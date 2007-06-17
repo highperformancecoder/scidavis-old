@@ -58,6 +58,7 @@ public:
 	//! Ctor
 	StringColumnData(const QStringList& list);
 	virtual AbstractDataSource *asDataSource() { return this; }
+	virtual QObject *asQObject() { return this; }
 
 	//! \name Data writing functions
 	//@{

@@ -195,6 +195,10 @@ private:
 	QVariant d_old_data;
 	//! The previous data
 	QVariant d_new_data;
+	//! Validity flag for undo
+	bool d_invalid_before;
+	//! Validity flag for redo
+	bool d_invalid_after;
 	//! The state flag 
 	/**
 	 * true means that his command has been undone at least once
@@ -207,4 +211,29 @@ private:
 ///////////////////////////////////////////////////////////////////////////
 // end of class TableUserInputCmd
 ///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableAppendRowsCmd
+///////////////////////////////////////////////////////////////////////////
+//! Handles user input
+class TableAppendRowsCmd : public QUndoCommand
+{
+public:
+	TableAppendRowsCmd( TableModel * model, int count, QUndoCommand * parent = 0 );
+	~TableAppendRowsCmd();
+
+	virtual void redo();
+	virtual void undo();
+
+private:
+	//! The model to modify
+	TableModel * d_model;
+	//! Number of rows
+	int d_count;
+};
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableAppendRowsCmd
+///////////////////////////////////////////////////////////////////////////
+
 

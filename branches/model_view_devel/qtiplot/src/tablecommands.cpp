@@ -158,11 +158,9 @@ void TableClearColumnCmd::redo()
 	if(!d_cleared_col) // no previous undo
 	{
 		// create a column of the correct type
-		//if(dynamic_cast<StringColumnData *>(d_model->columnPointer(d_col)))
-		if((d_model->columnPointer(d_col))->inherits("StringColumnData"))
+		if(qobject_cast<StringColumnData *>(d_model->columnPointer(d_col)->asQObject()))
 			d_cleared_col = new StringColumnData();
-		if(dynamic_cast<DoubleColumnData *>(d_model->columnPointer(d_col)))
-		//else if((d_model->columnPointer(d_col))->inherits("DoubleColumnData"))
+		else if(qobject_cast<DoubleColumnData *>(d_model->columnPointer(d_col)->asQObject()))
 			d_cleared_col = new DoubleColumnData();
 		else
 			d_cleared_col = new DateTimeColumnData();
@@ -201,6 +199,7 @@ TableUserInputCmd::TableUserInputCmd( TableModel * model, const QModelIndex& ind
 	d_previous_undo = false;
 	setText(QObject::tr("user input"));
 }
+
 TableUserInputCmd::~TableUserInputCmd()
 {
 }
@@ -208,21 +207,56 @@ TableUserInputCmd::~TableUserInputCmd()
 void TableUserInputCmd::redo()
 {
 	if(d_previous_undo) 
+	{
 		d_model->setData(d_index, d_new_data, Qt::EditRole); 
+		d_model->columnPointer(d_index.column())->setInvalid(d_index.row(), d_invalid_after);
+	}
 	else
+	{
 		d_old_data = d_model->data(d_index, Qt::EditRole);
+		d_invalid_before = d_model->output(d_index.column())->isInvalid(d_index.row());
+	}
 }
 
 void TableUserInputCmd::undo()
 {
 		d_new_data = d_model->data(d_index, Qt::EditRole);
+		d_invalid_after = d_model->output(d_index.column())->isInvalid(d_index.row());
 		d_model->setData(d_index, d_old_data, Qt::EditRole); 
+		d_model->columnPointer(d_index.column())->setInvalid(d_index.row(), d_invalid_before);
 		d_previous_undo = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // end of class TableUserInputCmd
 ///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableAppendRowsCmd
+///////////////////////////////////////////////////////////////////////////
+TableAppendRowsCmd::TableAppendRowsCmd( TableModel * model, int count, QUndoCommand * parent )
+ : QUndoCommand( parent ), d_model(model), d_count(count)
+{
+	setText(QObject::tr("append rows"));
+}
+TableAppendRowsCmd::~TableAppendRowsCmd()
+{
+}
+
+void TableAppendRowsCmd::redo()
+{
+	d_model->appendRows(d_count);
+}
+
+void TableAppendRowsCmd::undo()
+{
+	d_model->removeRows(d_model->rowCount()-d_count, d_count);
+}
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableAppendRowsCmd
+///////////////////////////////////////////////////////////////////////////
+
 
 
 

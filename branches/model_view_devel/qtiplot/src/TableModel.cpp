@@ -28,6 +28,7 @@
  ***************************************************************************/
 
 #include "TableModel.h"
+#include "tablecommands.h"
 #include "StringColumnData.h"
 #include "DoubleColumnData.h"
 #include "DateTimeColumnData.h"
@@ -37,6 +38,7 @@
 #include <QBrush>
 #include <QFont>
 #include <QFontMetrics>
+#include <QUndoStack>
 
 
 TableModel::TableModel( QObject * parent )
@@ -45,8 +47,9 @@ TableModel::TableModel( QObject * parent )
 	d_column_count = 0;
 	d_row_count = 0;
 	d_show_comments = false;
+	d_undo_stack = new QUndoStack(this);
+	d_masking_color = QColor(0xff,0,0);
 }
-
 
 TableModel::~TableModel()
 {
@@ -79,9 +82,13 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 
 	switch(role)
 	{
-		case Qt::DisplayRole:
 		case Qt::EditRole:
+				if(col_ptr->asDataSource()->isInvalid(index.row()))
+					return QVariant();
 		case Qt::ToolTipRole:
+				if(col_ptr->asDataSource()->isInvalid(index.row()))
+					return QVariant(tr("invalid cell","tooltip string for invalid rows"));
+		case Qt::DisplayRole:
 			{
 				if(col_ptr->asDataSource()->isInvalid(index.row()))
 					return QVariant(tr("invalid","string for invalid rows"));
@@ -94,10 +101,9 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 			}
 		case Qt::BackgroundRole:
 			{
-				// TODO: Make masked color customizable
 				// masked cells are displayed as hatched
 				if(col_ptr->asDataSource()->isMasked(index.row()))
-					return QVariant(QBrush(QColor(0xff,0,0), Qt::BDiagPattern));
+					return QVariant(QBrush(d_masking_color, Qt::BDiagPattern));
 				break;
 			}
 		case Qt::ForegroundRole:
@@ -299,6 +305,25 @@ void TableModel::appendColumns(QList<AbstractColumnData *> cols)
 	insertColumns(cols, d_column_count);
 }
 
+void TableModel::removeRows(int first, int count)
+{
+	if( (count < 1) || (first < 0) || (first >= d_row_count) )
+		return;
+
+	if(first+count > d_row_count)
+		count = d_row_count - first;
+
+	beginRemoveRows(QModelIndex(), first, first+count-1);
+	for(int col=0; col<d_column_count; col++)
+	{
+		if(d_columns.at(col)->asDataSource()->numRows() > first)
+			d_columns.at(col)->removeRows(first, count);
+	}
+	d_row_count -= count;
+	updateVerticalHeader(first);
+	endRemoveRows();
+}
+
 void TableModel::insertRows(int first, int count)
 {
 	if(count < 1) 
@@ -489,5 +514,27 @@ int TableModel::numColsWithPD(AbstractDataSource::PlotDesignation pd)
 			count++;
 	
 	return count;
+}
+
+
+QUndoStack *TableModel::undoStack() const
+{
+	return d_undo_stack;
+}
+
+void TableModel::handleUserInput(const QModelIndex& index)
+{
+		d_undo_stack->push(new TableUserInputCmd(this, index) );		
+}
+
+
+void TableModel::setMaskingColor(const QColor& color)
+{
+	d_masking_color = color;
+}
+
+QColor TableModel::maskingColor() const
+{
+	return d_masking_color;
 }
 

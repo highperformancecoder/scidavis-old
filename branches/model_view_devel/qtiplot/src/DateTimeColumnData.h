@@ -67,6 +67,7 @@ public:
 	//! Ctor
 	DateTimeColumnData(const QList<QDateTime>& list);
 	virtual AbstractDataSource *asDataSource() { return this; }
+	virtual QObject *asQObject() { return this; }
 
 	//! \name Data writing functions
 	//@{
