@@ -29,12 +29,14 @@
 
 #include "TableModel.h"
 #include "StringColumnData.h"
-//#include "DoubleColumnData.h"
-//#include "DateTimeColumnData.h"
+#include "DoubleColumnData.h"
+#include "DateTimeColumnData.h"
 #include <QString>
 #include <QDate>
 #include <QTime>
 #include <QBrush>
+#include <QFont>
+#include <QFontMetrics>
 
 
 TableModel::TableModel( QObject * parent )
@@ -86,9 +88,9 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 
 				AbstractFilter * out_fltr = outputFilter(index.column());
 				out_fltr->input(0, col_ptr->asDataSource());
-				QVariant result = QVariant(static_cast<AbstractStringDataSource *>(out_fltr->output(0))->textAt(index.row()));
-				out_fltr->input(0, 0);
-				return result;
+				AbstractStringDataSource * sds = dynamic_cast<AbstractStringDataSource *>(out_fltr->output(0));
+				if(!sds) return QVariant();
+				return QVariant(sds->textAt(index.row()));
 			}
 		case Qt::BackgroundRole:
 			{
@@ -117,7 +119,7 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation,
 	       (role == Qt::DisplayRole || role == Qt::EditRole) ) )
 		return QVariant();
 		
-	if (orientation == Qt::Horizontal)
+	if(orientation == Qt::Horizontal)
 		return d_horizontal_header_data.at(section);
 	else if (orientation == Qt::Vertical)
 		return d_vertical_header_data.at(section);
@@ -156,7 +158,6 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
 			in_fltr->input(0, &sd);
 			// remark: the validity of the cell is determined by the input filter
 			col_ptr->copy(in_fltr->output(0), 0, row, 1);  
-			in_fltr->input(0, 0); // disconnect sd
 			emit dataChanged(index, index);
 			return true;
 	}
@@ -183,6 +184,14 @@ AbstractDataSource * TableModel::output(int port) const
 		return 0;
 	
 	return d_columns.at(port)->asDataSource();
+}
+
+AbstractColumnData * TableModel::columnPointer(int col) const
+{
+	if( (col < 0) || (col >= d_column_count) )
+		return 0;
+	
+	return d_columns.value(col);
 }
 
 void TableModel::setOutputFilter(int col, AbstractFilter * filter)
@@ -217,6 +226,9 @@ void TableModel::replaceColumn(int col, AbstractColumnData * new_col)
 	if( (col < 0) || (col >= d_column_count) )
 		return;
 	
+	if(d_columns.at(col))
+		d_columns.at(col)->notifyReplacement(new_col->asDataSource());
+
 	d_columns[col] = new_col;
 	emit dataChanged(index(0, col, QModelIndex()), index(d_row_count-1, col, QModelIndex()));
 }
@@ -407,7 +419,7 @@ void TableModel::composeColumnHeader(int col, const QString& label)
 	{
 		int lines = 10; // TODO: this needs improvement
 		s.remove("\n");
-		s += "\n" + QString(lines, '_') + "\n" + columnComment(col);
+		s += "\n" + QString(lines, '_') + "\n"  + columnComment(col);
 	}
 	
 	if (col >= d_horizontal_header_data.size())
@@ -436,13 +448,12 @@ void TableModel::setColumnComment(int column, const QString& comment)
 QString TableModel::columnComment(int column) const
 {
 	return d_columns.at(column)->asDataSource()->comment();
-	
 }
 
 void TableModel::setColumnPlotDesignation(int column, AbstractDataSource::PlotDesignation pd)
 {
 	d_columns.at(column)->setPlotDesignation(pd);
-	updateHorizontalHeader(column, column);
+	updateHorizontalHeader(column, d_column_count-1);
 }
 	
 AbstractDataSource::PlotDesignation TableModel::columnPlotDesignation(int column) const

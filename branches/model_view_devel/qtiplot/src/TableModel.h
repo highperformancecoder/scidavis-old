@@ -94,6 +94,13 @@ public:
 	 * \return returns a pointer to the column data source or zero if 'port' is invalid
 	 */
 	virtual AbstractDataSource *output(int port) const;
+	//! Return a pointer to the column data at column number 'col'
+	/**
+	 * This is mainly used be the table commands.
+	 *
+	 * \return returns a pointer to the column data or zero if 'col' is invalid
+	 */
+	AbstractColumnData *columnPointer(int col) const;
 	//! Return the output filter for column 'col'
 	AbstractFilter * outputFilter(int col) const;
 	//! Return the input filter for column 'col'

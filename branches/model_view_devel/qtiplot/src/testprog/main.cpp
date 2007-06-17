@@ -4,9 +4,14 @@
 #include <QTime>
 #include <QDate>
 #include <QString>
+#include <QUndoView>
+#include <QUndoStack>
+#include <QUndoCommand>
+#include <QHBoxLayout>
 
 #include "TableView.h"
 #include "TableModel.h"
+#include "tablecommands.h"
 
 #include "StringColumnData.h"
 #include "DoubleColumnData.h"
@@ -20,13 +25,13 @@
 
 class TableViewTestWrapper : public TableView
 {
-	
 public:
+	QUndoStack * undo_stack;
+
+
 	TableViewTestWrapper(QWidget * parent, TableModel * model )
 		: TableView(parent, model )
 	{
-
-		// test code
 		StringColumnData *sc1 = new StringColumnData();
 		StringColumnData *sc2 = new StringColumnData();
 		sc1->setPlotDesignation(AbstractDataSource::X);
@@ -101,9 +106,31 @@ public:
 		temp = new DateTime2StringFilter();
 		temp->setFormat("MMMM");
 		model->setOutputFilter(7, temp); 
-		// end of test code
 
+		undo_stack = new QUndoStack(this);
+		undoTest();
 	}
+
+private:
+	void undoTest()
+	{
+		
+	undo_stack->push(new TableSetColumnPlotDesignationCmd(d_model, 1, AbstractDataSource::X) );
+	undo_stack->push(new TableSetColumnPlotDesignationCmd(d_model, 3, AbstractDataSource::X) );
+	undo_stack->push(new TableSetColumnLabelCmd(d_model, 1, "col two") );
+	undo_stack->push(new TableSetColumnLabelCmd(d_model, 4, "col five") );
+	undo_stack->push(new TableSetColumnCommentCmd(d_model, 0, "a comment") );
+	undo_stack->push(new TableShowCommentsCmd(d_model, true) );
+	undo_stack->push(new TableClearColumnCmd(d_model, 2) );
+	undo_stack->push(new TableClearColumnCmd(d_model, 1) );
+	undo_stack->push(new TableSetColumnCommentCmd(d_model, 1, "I am\na long\nmultiline\ncomment") );
+	undo_stack->push(new TableSetColumnCommentCmd(d_model, 2, "I am\nanother\nlong\nmultiline\ncomment") );
+	undo_stack->push(new TableShowCommentsCmd(d_model, false) );
+	undo_stack->push(new TableSetColumnCommentCmd(d_model, 3, "I am\nanother\nlong\nmultiline\ncomment") );
+	undo_stack->push(new TableShowCommentsCmd(d_model, true) );
+		
+	}
+
 };
 
 
@@ -111,13 +138,18 @@ int main(int argc, char **argv)
 {
 	QApplication a(argc,argv);
 
+	QWidget mw;
+	mw.resize(1000,600);
+	QHBoxLayout lo(&mw);
 
-	QMainWindow mw;
-	mw.resize(800,600);
-
-	TableViewTestWrapper tw(&mw, new TableModel(&mw));
-	tw.resize(600,400);
+	TableViewTestWrapper tw(0, new TableModel(&mw));
+	tw.resize(800,400);
+	QUndoView uw(tw.undo_stack, &mw);
+	uw.resize(200,400);
+	lo.addWidget(&tw);
+	lo.addWidget(&uw);
 	mw.show();
+	tw.show();
 
 	a.exec();
 

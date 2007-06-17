@@ -43,6 +43,24 @@
 
 #include <QKeyEvent>
 #include <QtDebug>
+#include <QHeaderView>
+#include <QRect>
+#include <QSize>
+#include <QFontMetrics>
+#include <QFont>
+
+//! Internal class for TableView
+class AutoResizeHHeader : public QHeaderView
+{ 
+public:
+	AutoResizeHHeader() : QHeaderView(Qt::Horizontal) {}
+	virtual QSize sizeHint() const
+	{
+		qDebug() << "sizeHint :" << QHeaderView::sizeHint();
+		return QHeaderView::sizeHint();
+	}
+};
+
 
 TableView::TableView(QWidget * parent, TableModel * model )
  : QTableView( parent ), d_model(model)
@@ -55,8 +73,30 @@ TableView::TableView(QWidget * parent, TableModel * model )
 //	setItemDelegate(d_delegate);
 //	connect(d_delegate, SIGNAL(returnPressed()), this, SLOT(advanceCell()));
 
+	setHorizontalHeader(new AutoResizeHHeader);
+	QHeaderView * v_header = verticalHeader();
+	QHeaderView * h_header = horizontalHeader();
+	v_header->setResizeMode(QHeaderView::ResizeToContents);
+	v_header->setMovable(false);
+	h_header->setDefaultAlignment(Qt::AlignTop);
+	h_header->setResizeMode(QHeaderView::Interactive);
+
+	connect(d_model, SIGNAL(headerDataChanged(Qt::Orientation,int,int)), this, SLOT(updateHeaderGeometry(Qt::Orientation,int,int)) ); 
+
     setContextMenuPolicy(Qt::DefaultContextMenu);
 }
+	
+void TableView::updateHeaderGeometry(Qt::Orientation o, int first, int last)
+{
+	Q_UNUSED(first)
+	Q_UNUSED(last)
+	if(o != Qt::Horizontal) return;
+	qDebug() << "header geomery update";
+	horizontalHeader()->setStretchLastSection(true);  // ugly hack (flaw in Qt?)
+	horizontalHeader()->updateGeometry();
+	horizontalHeader()->setStretchLastSection(false); // ugly hack part 2
+}
+
 
 TableView::TableView(QWidget * parent, TableModel * model, int rows, int columns )
  : QTableView( parent ), d_model(model)
@@ -77,7 +117,8 @@ TableView::TableView(QWidget * parent, TableModel * model, int rows, int columns
 
 TableView::~TableView() 
 {
-	delete d_delegate;
+//	TODO: remove custom delegate?
+//	delete d_delegate;
 }
 
 
@@ -85,6 +126,11 @@ void TableView::contextMenuEvent(QContextMenuEvent *)
 {
     qDebug("void TableView::contextMenuEvent()");
     
+	QHeaderView * hdr = horizontalHeader();
+	QRect rect = hdr->geometry();
+	rect.setHeight(200);
+	hdr->setGeometry(rect);
+
     return ;
 }
 	

@@ -65,13 +65,16 @@ protected:
 protected slots:
 	//! Advance current cell after [Return] or [Enter] was pressed
 	void advanceCell();
+	//! Cause a repaint of the header
+	void updateHeaderGeometry(Qt::Orientation o, int first, int last);
 
-private:
+protected:
 	//! Pointer to the item delegate
 	TableItemDelegate * d_delegate;
 	//! Pointer to the current underlying model
 	TableModel * d_model;
 
 };
+
 
 #endif
