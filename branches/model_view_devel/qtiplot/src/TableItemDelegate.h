@@ -29,24 +29,22 @@
 
 #include <QItemDelegate>
 
-//TODO: Unless there is another purpose for this than handling
-// [Return]/[Enter], this class can be deleted
-
 //! Item delegate for TableView
 /**
- * This class does only one thing at the moment:
- * It advances the current cell in the view by
- * one row if [Return] or [Enter] was pressed.
+ * This class makes sure the undo system of
+ * is notified when a user finished editing
+ * a cell.
  */ 
 class TableItemDelegate : public QItemDelegate
 {
     Q_OBJECT
 
-signals:
-	//! User pressed [Return] or [Enter] after editing a cell
-	void returnPressed();
+public:
+	//! Wrapper function that emits userInput()
+	virtual void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
 
-protected:
-	//! Wrapper of QItemDelegate::eventFilter that handles [Return] and [Enter]
-	virtual bool eventFilter( QObject * editor, QEvent * event );
+signals:
+	//! User finished editing a cell
+	void userInput(const QModelIndex& index) const; 
+
 };

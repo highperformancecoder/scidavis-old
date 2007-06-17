@@ -68,10 +68,9 @@ TableView::TableView(QWidget * parent, TableModel * model )
   //  QItemSelectionModel * selections = new QItemSelectionModel(model);
 	setModel(model);
 //	setSelectionModel(selections);
-//TODO: The use of a custom item delegate may not be necessary
-//	d_delegate = new TableItemDelegate;
-//	setItemDelegate(d_delegate);
-//	connect(d_delegate, SIGNAL(returnPressed()), this, SLOT(advanceCell()));
+
+	d_delegate = new TableItemDelegate;
+	setItemDelegate(d_delegate);
 
 	setHorizontalHeader(new AutoResizeHHeader);
 	QHeaderView * v_header = verticalHeader();
@@ -117,8 +116,7 @@ TableView::TableView(QWidget * parent, TableModel * model, int rows, int columns
 
 TableView::~TableView() 
 {
-//	TODO: remove custom delegate?
-//	delete d_delegate;
+	delete d_delegate;
 }
 
 

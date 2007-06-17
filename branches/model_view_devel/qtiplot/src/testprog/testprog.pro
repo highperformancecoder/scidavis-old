@@ -23,7 +23,8 @@ HEADERS += AbstractColumnData.h \
            DateTime2StringFilter.h \
            String2DateTimeFilter.h \
 		   tablecommands.h \
-		   TableItemDelegate.h 
+		   TableItemDelegate.h \
+		   testwrapper.h
 
 SOURCES += main.cpp TableModel.cpp TableView.cpp 
 

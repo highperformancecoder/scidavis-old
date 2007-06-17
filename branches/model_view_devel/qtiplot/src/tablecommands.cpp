@@ -37,7 +37,7 @@
 ///////////////////////////////////////////////////////////////////////////
 // class TableShowCommentsCmd
 ///////////////////////////////////////////////////////////////////////////
-TableShowCommentsCmd::TableShowCommentsCmd( TableModel * model, bool show, QUndoCommand * parent)
+TableShowCommentsCmd::TableShowCommentsCmd( TableModel * model, bool show, QUndoCommand * parent )
  : QUndoCommand( parent ), d_new_state(show), d_model(model)
 {
 	if(show)
@@ -64,7 +64,7 @@ void TableShowCommentsCmd::undo()
 ///////////////////////////////////////////////////////////////////////////
 // class TableSetColumnPlotDesignationCmd
 ///////////////////////////////////////////////////////////////////////////
-TableSetColumnPlotDesignationCmd::TableSetColumnPlotDesignationCmd( TableModel * model, int col, AbstractDataSource::PlotDesignation pd , QUndoCommand * parent)
+TableSetColumnPlotDesignationCmd::TableSetColumnPlotDesignationCmd( TableModel * model, int col, AbstractDataSource::PlotDesignation pd , QUndoCommand * parent )
  : QUndoCommand( parent ), d_col(col), d_new_pd(pd), d_model(model)
 {
 		setText(QObject::tr("set column plot designation"));
@@ -88,7 +88,7 @@ void TableSetColumnPlotDesignationCmd::undo()
 ///////////////////////////////////////////////////////////////////////////
 // class TableSetColumnLabelCmd
 ///////////////////////////////////////////////////////////////////////////
-TableSetColumnLabelCmd::TableSetColumnLabelCmd( TableModel * model, int col, const QString& label , QUndoCommand * parent)
+TableSetColumnLabelCmd::TableSetColumnLabelCmd( TableModel * model, int col, const QString& label , QUndoCommand * parent )
  : QUndoCommand( parent ), d_col(col), d_new_label(label), d_model(model)
 {
 		setText(QObject::tr("set column label"));
@@ -112,7 +112,7 @@ void TableSetColumnLabelCmd::undo()
 ///////////////////////////////////////////////////////////////////////////
 // class TableSetColumnCommentCmd
 ///////////////////////////////////////////////////////////////////////////
-TableSetColumnCommentCmd::TableSetColumnCommentCmd( TableModel * model, int col, const QString& comment , QUndoCommand * parent)
+TableSetColumnCommentCmd::TableSetColumnCommentCmd( TableModel * model, int col, const QString& comment , QUndoCommand * parent )
  : QUndoCommand( parent ), d_col(col), d_new_comment(comment), d_model(model)
 {
 		setText(QObject::tr("set column comment"));
@@ -136,7 +136,7 @@ void TableSetColumnCommentCmd::undo()
 ///////////////////////////////////////////////////////////////////////////
 // class TableClearColumnCmd
 ///////////////////////////////////////////////////////////////////////////
-TableClearColumnCmd::TableClearColumnCmd( TableModel * model, int col, QUndoCommand * parent)
+TableClearColumnCmd::TableClearColumnCmd( TableModel * model, int col, QUndoCommand * parent )
  : QUndoCommand( parent ), d_col(col), d_model(model)
 {
 	d_orig_col = 0;
@@ -191,5 +191,38 @@ void TableClearColumnCmd::undo()
 ///////////////////////////////////////////////////////////////////////////
 // end of class TableClearColumnCmd
 ///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableUserInputCmd
+///////////////////////////////////////////////////////////////////////////
+TableUserInputCmd::TableUserInputCmd( TableModel * model, const QModelIndex& index, QUndoCommand * parent )
+ : QUndoCommand( parent ), d_index(index), d_model(model)
+{
+	d_previous_undo = false;
+	setText(QObject::tr("user input"));
+}
+TableUserInputCmd::~TableUserInputCmd()
+{
+}
+
+void TableUserInputCmd::redo()
+{
+	if(d_previous_undo) 
+		d_model->setData(d_index, d_new_data, Qt::EditRole); 
+	else
+		d_old_data = d_model->data(d_index, Qt::EditRole);
+}
+
+void TableUserInputCmd::undo()
+{
+		d_new_data = d_model->data(d_index, Qt::EditRole);
+		d_model->setData(d_index, d_old_data, Qt::EditRole); 
+		d_previous_undo = true;
+}
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableUserInputCmd
+///////////////////////////////////////////////////////////////////////////
+
 
 

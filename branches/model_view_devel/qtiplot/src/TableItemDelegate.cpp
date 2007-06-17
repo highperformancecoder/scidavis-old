@@ -27,23 +27,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <QtDebug>
 #include "TableItemDelegate.h"
-#include <QEvent>
-#include <QKeyEvent>
 
-bool TableItemDelegate::eventFilter( QObject * editor, QEvent * event )
+void TableItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
+                                    const QModelIndex &index) const
 {
-	bool result = QItemDelegate::eventFilter(editor, event);
-
-	if (event->type() == QEvent::KeyPress) 
-	{
-		switch (static_cast<QKeyEvent *>(event)->key()) 
-		{
-			case Qt::Key_Enter:
-			case Qt::Key_Return:
-				emit returnPressed();
-		}
-	}
-	return result;
+	 emit userInput(index);
+	 QItemDelegate::setModelData(editor, model, index);
 }
-

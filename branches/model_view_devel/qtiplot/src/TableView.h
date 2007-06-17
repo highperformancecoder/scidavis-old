@@ -51,7 +51,7 @@ public:
     //! Constructor
     TableView(QWidget * parent, TableModel * model, int rows, int columns );
     //! Destructor
-    ~TableView();
+    virtual ~TableView();
 
 	//! Overloaded function: give decent size hint
     QSize minimumSizeHint () const;

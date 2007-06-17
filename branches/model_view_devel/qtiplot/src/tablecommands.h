@@ -28,6 +28,8 @@
  ***************************************************************************/
 
 #include <QUndoCommand>
+#include <QAbstractItemModel>
+#include <QModelIndex>
 class TableModel;
 #include "AbstractDataSource.h"
 #include "AbstractColumnData.h"
@@ -125,13 +127,13 @@ public:
 	virtual void undo();
 
 private:
+	//! The changed column's index
 	int d_col;
-	//! The model to modify
 	//! New column comment
 	QString d_new_comment;
 	//! Old column comment
 	QString d_old_comment;
-	//! The changed column's index
+	//! The model to modify
 	TableModel * d_model;
 };
 
@@ -159,17 +161,50 @@ public:
 	virtual void undo();
 
 private:
+	//! The cleared column's index
+	int d_col;
 	//! The original column
 	AbstractColumnData * d_orig_col;
 	//! The cleared column
 	AbstractColumnData * d_cleared_col;
-	//! The cleared column's index
-	int d_col;
 	//! The model to modify
 	TableModel * d_model;
 };
 
 ///////////////////////////////////////////////////////////////////////////
 // end of class TableClearColumnCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableUserInputCmd
+///////////////////////////////////////////////////////////////////////////
+//! Handles user input
+class TableUserInputCmd : public QUndoCommand
+{
+public:
+	TableUserInputCmd( TableModel * model, const QModelIndex& index, QUndoCommand * parent = 0 );
+	~TableUserInputCmd();
+
+	virtual void redo();
+	virtual void undo();
+
+private:
+	//! The model index of the edited cell
+	QModelIndex d_index;
+	//! The previous data
+	QVariant d_old_data;
+	//! The previous data
+	QVariant d_new_data;
+	//! The state flag 
+	/**
+	 * true means that his command has been undone at least once
+	 */
+	bool d_previous_undo;
+	//! The model to modify
+	TableModel * d_model;
+};
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableUserInputCmd
 ///////////////////////////////////////////////////////////////////////////
 
