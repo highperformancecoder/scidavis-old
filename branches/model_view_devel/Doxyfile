@@ -1,8 +1,8 @@
 #---------------------------------------------------------------------------
 # Project related configuration options
 #---------------------------------------------------------------------------
-PROJECT_NAME           = QtiPlot
-PROJECT_NUMBER         = 0.9.0-rc1
+PROJECT_NAME           = SciDAVis
+PROJECT_NUMBER         = 0.00
 OUTPUT_DIRECTORY       = API
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English

@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : globals.h
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
@@ -27,6 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 
+//  TODO: adjust the version number
 //  Don't forget to change the Doxyfile when changing these!
 //! Major version number
 const int maj_version = 0;

@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : ConfigDialog.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
@@ -741,7 +741,7 @@ void ConfigDialog::initConfirmationsPage()
 
 void ConfigDialog::languageChange()
 {
-	setWindowTitle( tr( "QtiPlot - Choose default settings" ) );
+	setWindowTitle( tr( "SciDAVis - Choose default settings" ) );
 	ApplicationWindow *app = (ApplicationWindow *)parentWidget();
 
 	// pages list
@@ -984,7 +984,7 @@ void ConfigDialog::apply()
 
 	if (sep.contains(QRegExp("[0-9.eE+-]"))!=0)
 	{
-		QMessageBox::warning(0, tr("QtiPlot - Import options error"),
+		QMessageBox::warning(0, tr("SciDAVis - Import options error"),
 				tr("The separator must not contain the following characters: 0-9eE.+-"));
 		return;
 	}
@@ -1412,7 +1412,7 @@ void ConfigDialog::insertLanguagesList()
 		else
 		{
 			QTranslator translator;
-			translator.load("qtiplot_"+locales[i], qmPath);
+			translator.load("scidavis_"+locales[i], qmPath);
 
 			QString language = translator.translate("ApplicationWindow", "English");
 			if (!language.isEmpty())

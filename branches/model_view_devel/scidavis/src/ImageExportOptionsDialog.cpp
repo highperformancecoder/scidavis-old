@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : imageExportDialog.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
@@ -42,7 +42,7 @@
 ImageExportOptionsDialog::ImageExportOptionsDialog( bool exportAllPlots, QWidget* parent, Qt::WFlags fl )
     : QDialog( parent, fl )
 {
-    setWindowTitle( tr( "QtiPlot - Export options" ) );
+    setWindowTitle( tr( "SciDAVis - Export options" ) );
 
 	int row = 0;
 	groupBox1 = new QGroupBox();

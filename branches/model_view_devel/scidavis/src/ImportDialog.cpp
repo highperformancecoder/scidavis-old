@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : ImportDialog.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
@@ -44,7 +44,7 @@
 ImportDialog::ImportDialog( QWidget* parent, Qt::WFlags fl )
 : QDialog( parent, fl )
 {
-	setWindowTitle( tr( "QtiPlot - ASCII Import Options" ) );
+	setWindowTitle( tr( "SciDAVis - ASCII Import Options" ) );
 	setSizeGripEnabled( true );
 	
 	QGridLayout * mainLayout = new QGridLayout(this);
@@ -160,7 +160,7 @@ void ImportDialog::help()
 	s +="\n\n"+tr("Warning: using these two last options leads to column overlaping if the columns in the ASCII file don't have the same number of rows.");
 	s +="\n"+tr("To avoid this problem you should precisely define the column separator using TAB and SPACE characters.");
 
-	QMessageBox::about(0, tr("QtiPlot - Help"),s);
+	QMessageBox::about(0, tr("SciDAVis - Help"),s);
 }
 
 void ImportDialog::setSeparator(const QString& sep)
@@ -203,7 +203,7 @@ void ImportDialog::accept()
 		
 	if (sep.contains(QRegExp("[0-9.eE+-]")))
 	{
-		QMessageBox::warning(0, tr("QtiPlot - Import options error"),
+		QMessageBox::warning(0, tr("SciDAVis - Import options error"),
 				tr("The separator must not contain the following characters: 0-9eE.+-"));
 	}
 	else
@@ -220,7 +220,7 @@ void ImportDialog::quit()
 {
 	if (buttonOk->isEnabled())
 	{
-		switch( QMessageBox::information((QWidget *)this->parent(), tr("QtiPlot"),
+		switch( QMessageBox::information((QWidget *)this->parent(), tr("SciDAVis"),
 					tr("Do you want to save the modifications to the ASCII import options before closing?"),
 					tr("Yes"), tr("No"), tr("Cancel"), 0, 2)) 
 		{

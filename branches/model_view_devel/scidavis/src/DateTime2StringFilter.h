@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : DateTime2StringFilter.h
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Tilman Hoener zu Siederdissen,
                            Knut Franke

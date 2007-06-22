@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : Correlation.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Ion Vasilief
     Email (use @ for *)  : ion_vasilief*yahoo.fr
@@ -51,14 +51,14 @@ void Correlation::setDataFromTable(Table *t, const QString& colName1, const QStr
 
 	if (col1 < 0)
 	{
-		QMessageBox::warning((ApplicationWindow *)parent(), tr("QtiPlot") + " - " + tr("Error"),
+		QMessageBox::warning((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
 		tr("The data set %1 does not exist!").arg(colName1));
 		d_init_err = true;
 		return;
 	}
 	else if (col2 < 0)
 	{
-		QMessageBox::warning((ApplicationWindow *)parent(), tr("QtiPlot") + " - " + tr("Error"),
+		QMessageBox::warning((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
 		tr("The data set %1 does not exist!").arg(colName2));
 		d_init_err = true;
 		return;
@@ -90,7 +90,7 @@ void Correlation::setDataFromTable(Table *t, const QString& colName1, const QStr
 	}
 	else
 	{
-		QMessageBox::critical((ApplicationWindow *)parent(), tr("QtiPlot") + " - " + tr("Error"),
+		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
                         tr("Could not allocate memory, operation aborted!"));
         d_init_err = true;
 		d_n = 0;
@@ -120,7 +120,7 @@ void Correlation::output()
 	}
 	else
 	{
-		QMessageBox::warning((ApplicationWindow *)parent(), tr("QtiPlot") + " - " + tr("Error"),
+		QMessageBox::warning((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
                              tr("Error in GSL forward FFT operation!"));
 		return;
 	}

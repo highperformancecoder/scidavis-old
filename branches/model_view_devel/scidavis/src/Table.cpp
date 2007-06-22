@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : Table.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
@@ -192,7 +192,7 @@ void Table::print(const QString& fileName)
 
 	if (!fileName.isEmpty())
 	{
-		printer.setCreator("QtiPlot");
+		printer.setCreator("SciDAVis");
 		printer.setOutputFormat(QPrinter::PdfFormat);
 		printer.setOutputFileName(fileName);
 	}
@@ -739,7 +739,7 @@ void Table::changeColName(const QString& new_name)
 
 	if (caption == new_name)
 	{
-		QMessageBox::critical(0,tr("QtiPlot - Error"),
+		QMessageBox::critical(0,tr("SciDAVis - Error"),
 				tr("The column name must be different from the table name : <b>"+caption+"</b></b>!<p>Please choose another name!"));
 		return;
 	}
@@ -747,7 +747,7 @@ void Table::changeColName(const QString& new_name)
 	QStringList labels=colNames();
 	if (labels.contains(new_name)>0)
 	{
-		QMessageBox::critical(0,tr("QtiPlot - Error"),
+		QMessageBox::critical(0,tr("SciDAVis - Error"),
 				tr("There is already a column called : <b>"+new_name+"</b> in table <b>"+caption+"</b>!<p>Please choose another name!"));
 		return;
 	}
@@ -1262,7 +1262,7 @@ void Table::pasteSelection()
 		// TODO: I find the insert cells option awkward
 		// I would prefer the behavior of OpenOffice Calc
 		// here - thzs
-		switch( QMessageBox::information(0,"QtiPlot",
+		switch( QMessageBox::information(0,"SciDAVis",
 					tr("The text in the clipboard is larger than your current selection!\
 						\nDo you want to insert cells?"),
 					tr("Yes"), tr("No"), tr("Cancel"), 0, 0) )
@@ -1468,13 +1468,13 @@ void Table::sortColumns(const QStringList&s, int type, int order, const QString&
 		int leadcol = colIndex(leadCol);
 		if (leadcol < 0)
 		{
-			QMessageBox::critical(this, tr("QtiPlot - Error"),
+			QMessageBox::critical(this, tr("SciDAVis - Error"),
 					tr("Please indicate the name of the leading column!"));
 			return;
 		}
 		if (columnType(leadcol) == Table::Text)
 		{
-			QMessageBox::critical(this, tr("QtiPlot - Error"),
+			QMessageBox::critical(this, tr("SciDAVis - Error"),
 					tr("The leading column has the type set to 'Text'! Operation aborted!"));
 			return;
 		}
@@ -1496,7 +1496,7 @@ void Table::sortColumns(const QStringList&s, int type, int order, const QString&
 
 		if (!non_empty_cells)
 		{
-			QMessageBox::critical(this, tr("QtiPlot - Error"),
+			QMessageBox::critical(this, tr("SciDAVis - Error"),
 					tr("The leading column is empty! Operation aborted!"));
 			allow_modification_signals = true;
 			return;
@@ -2237,7 +2237,7 @@ void Table::plotPie()
 {
 	if (noXColumn())
 	{
-		QMessageBox::critical(0,tr("QtiPlot - Error"), tr("Please set a default X column for this table, first!"));
+		QMessageBox::critical(0,tr("SciDAVis - Error"), tr("Please set a default X column for this table, first!"));
 		return;
 	}
 
@@ -2252,7 +2252,7 @@ void Table::plotPie()
 		emit plotCol(this, s, Graph::Pie, cur.topRow(), cur.bottomRow());
 	}
 	else
-		QMessageBox::warning(this, tr("QtiPlot - Error"), tr("Please select a column to plot!"));
+		QMessageBox::warning(this, tr("SciDAVis - Error"), tr("Please select a column to plot!"));
 }
 
 void Table::plotVerticalDropLines()
@@ -2349,7 +2349,7 @@ void Table::plotVectXYXY()
 		emit plotCol(this, s, Graph::VectXYXY, cur.topRow(), cur.bottomRow());
 	}
 	else
-		QMessageBox::warning(this, tr("QtiPlot - Error"), tr("Please select four columns for this operation!"));
+		QMessageBox::warning(this, tr("SciDAVis - Error"), tr("Please select four columns for this operation!"));
 }
 
 void Table::plotVectXYAM()
@@ -2368,24 +2368,24 @@ void Table::plotVectXYAM()
 		emit plotCol(this, s, Graph::VectXYAM, cur.topRow(), cur.bottomRow());
 	}
 	else
-		QMessageBox::warning(this, tr("QtiPlot - Error"), tr("Please select four columns for this operation!"));
+		QMessageBox::warning(this, tr("SciDAVis - Error"), tr("Please select four columns for this operation!"));
 }
 
 bool Table::valid2DPlot()
 {
 	if (!selectedYColumns().count())
 	{
-		QMessageBox::warning(this, tr("QtiPlot - Error"), tr("Please select a Y column to plot!"));
+		QMessageBox::warning(this, tr("SciDAVis - Error"), tr("Please select a Y column to plot!"));
 		return false;
 	}
 	else if (d_table->columnCount()<2)
 	{
-		QMessageBox::critical(this, tr("QtiPlot - Error"),tr("You need at least two columns for this operation!"));
+		QMessageBox::critical(this, tr("SciDAVis - Error"),tr("You need at least two columns for this operation!"));
 		return false;
 	}
 	else if (noXColumn())
 	{
-		QMessageBox::critical(this, tr("QtiPlot - Error"), tr("Please set a default X column for this table, first!"));
+		QMessageBox::critical(this, tr("SciDAVis - Error"), tr("Please set a default X column for this table, first!"));
 		return false;
 	}
 
@@ -2428,22 +2428,22 @@ bool Table::valid3DPlot()
 {
 	if (d_table->columnCount()<2)
 	{
-		QMessageBox::critical(0,tr("QtiPlot - Error"),tr("You need at least two columns for this operation!"));
+		QMessageBox::critical(0,tr("SciDAVis - Error"),tr("You need at least two columns for this operation!"));
 		return false;
 	}
 	if (selectedCol < 0 || col_plot_type[selectedCol] != Z)
 	{
-		QMessageBox::critical(0,tr("QtiPlot - Error"),tr("Please select a Z column for this operation!"));
+		QMessageBox::critical(0,tr("SciDAVis - Error"),tr("Please select a Z column for this operation!"));
 		return false;
 	}
 	if (noXColumn())
 	{
-		QMessageBox::critical(0,tr("QtiPlot - Error"),tr("You need to define a X column first!"));
+		QMessageBox::critical(0,tr("SciDAVis - Error"),tr("You need to define a X column first!"));
 		return false;
 	}
 	if (noYColumn())
 	{
-		QMessageBox::critical(0,tr("QtiPlot - Error"),tr("You need to define a Y column first!"));
+		QMessageBox::critical(0,tr("SciDAVis - Error"),tr("You need to define a Y column first!"));
 		return false;
 	}
 	return true;
@@ -2495,7 +2495,7 @@ void Table::importMultipleASCIIFiles(const QString &fname, const QString &sep, i
 		int steps = int(rows/1000);
 
 		QProgressDialog progress(this);
-		progress.setWindowTitle("Qtiplot - Reading file...");
+		progress.setWindowTitle("SciDAVis - Reading file...");
 		progress.setLabelText(fname);
 		progress.setActiveWindow();
 		progress.setRange(0, steps+1);
@@ -2647,7 +2647,7 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 		int steps = int(rows/1000);
 
 		QProgressDialog progress(this);
-		progress.setWindowTitle("Qtiplot - Reading file...");
+		progress.setWindowTitle("SciDAVis - Reading file...");
 		progress.setLabelText(fname);
 		progress.setActiveWindow();
 		progress.setRange(0, steps+1);
@@ -2785,7 +2785,7 @@ bool Table::exportToASCIIFile(const QString& fname, const QString& separator,
 	if ( !f.open( QIODevice::WriteOnly ) )
 	{
 		QApplication::restoreOverrideCursor();
-		QMessageBox::critical(0, tr("QtiPlot - ASCII Export Error"),
+		QMessageBox::critical(0, tr("SciDAVis - ASCII Export Error"),
 				tr("Could not write to file: <br><h4>"+fname+ "</h4><p>Please verify that you have the right to write to this location!").arg(fname));
 		return false;
 	}
@@ -3135,7 +3135,7 @@ void Table::resizeRows(int r)
 		QString the_text= tr("Rows will be deleted from the table!");
 		the_text+="<p>"+tr("Do you really want to continue?");
 		int i,cols = d_table->columnCount();
-		switch( QMessageBox::information(this,tr("QtiPlot"), the_text, tr("Yes"), tr("Cancel"), 0, 1 ) )
+		switch( QMessageBox::information(this,tr("SciDAVis"), the_text, tr("Yes"), tr("Cancel"), 0, 1 ) )
 		{
 			case 0:
 				QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -3171,7 +3171,7 @@ void Table::resizeCols(int c)
 	{
 		QString the_text= tr("Columns will be deleted from the table!");
 		the_text+="<p>"+tr("Do you really want to continue?");
-		switch( QMessageBox::information(this,tr("QtiPlot"), the_text, tr("Yes"), tr("Cancel"), 0, 1 ) )
+		switch( QMessageBox::information(this,tr("SciDAVis"), the_text, tr("Yes"), tr("Cancel"), 0, 1 ) )
 		{
 			case 0:
 				QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));

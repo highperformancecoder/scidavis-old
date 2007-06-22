@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : Graph.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
@@ -861,12 +861,12 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 	QStringList list = formatInfo.split(";", QString::KeepEmptyParts);
 	if ((int)list.count() < 2)
 	{
-        QMessageBox::critical(this, tr("QtiPlot - Error"), "Couldn't change the axis type to the requested format!");
+        QMessageBox::critical(this, tr("SciDAVis - Error"), "Couldn't change the axis type to the requested format!");
         return;
     }
     if (list[0].isEmpty() || list[1].isEmpty())
     {
-        QMessageBox::critical(this, tr("QtiPlot - Error"), "Couldn't change the axis type to the requested format!");
+        QMessageBox::critical(this, tr("SciDAVis - Error"), "Couldn't change the axis type to the requested format!");
         return;
     }
 
@@ -1485,7 +1485,7 @@ void Graph::exportToFile(const QString& fileName)
 {
 	if ( fileName.isEmpty() )
 	{
-		QMessageBox::critical(this, tr("QtiPlot - Error"), tr("Please provide a valid file name!"));
+		QMessageBox::critical(this, tr("SciDAVis - Error"), tr("Please provide a valid file name!"));
         return;
 	}
 
@@ -1505,7 +1505,7 @@ void Graph::exportToFile(const QString& fileName)
 				return;
 			}
 		}
-    	QMessageBox::critical(this, tr("QtiPlot - Error"), tr("File format not handled, operation aborted!"));
+    	QMessageBox::critical(this, tr("SciDAVis - Error"), tr("File format not handled, operation aborted!"));
 	}
 }
 
@@ -1544,12 +1544,12 @@ void Graph::exportVector(const QString& fileName, int res, bool color)
 {
 	if ( fileName.isEmpty() )
 	{
-		QMessageBox::critical(this, tr("QtiPlot - Error"), tr("Please provide a valid file name!"));
+		QMessageBox::critical(this, tr("SciDAVis - Error"), tr("Please provide a valid file name!"));
         return;
 	}
 
 	QPrinter printer;
-    printer.setCreator("QtiPlot");
+    printer.setCreator("SciDAVis");
 	printer.setFullPage(true);
 	if (res)
 		printer.setResolution(res);
@@ -3928,7 +3928,7 @@ void Graph::insertImageMarker(const QStringList& lst, int fileVersion)
 	QString fn = lst[1];
 	if (!QFile::exists(fn))
 	{
-		QMessageBox::warning(0, tr("QtiPlot - File open error"),
+		QMessageBox::warning(0, tr("SciDAVis - File open error"),
 				tr("Image file: <p><b> %1 </b><p>does not exist anymore!").arg(fn));
 	}
 	else
@@ -4445,11 +4445,11 @@ void Graph::showPlotErrorMessage(QWidget *parent, const QStringList& emptyColumn
 		for (int i = 0; i < n; i++)
 			columns += "<p><b>" + emptyColumns[i] + "</b></p>";
 
-		QMessageBox::warning(parent, tr("QtiPlot - Warning"),
+		QMessageBox::warning(parent, tr("SciDAVis - Warning"),
 				tr("The columns") + ": " + columns + tr("are empty and will not be added to the plot!"));
 	}
 	else if (n == 1)
-		QMessageBox::warning(parent, tr("QtiPlot - Warning"),
+		QMessageBox::warning(parent, tr("SciDAVis - Warning"),
 				tr("The column") + " <b>" + emptyColumns[0] + "</b> " + tr("is empty and will not be added to the plot!"));
 }
 
@@ -5247,7 +5247,7 @@ bool Graph::validCurvesDataSize()
 {
 	if (!n_curves)
 	{
-		QMessageBox::warning(this, tr("QtiPlot - Warning"), tr("There are no curves available on this plot!"));
+		QMessageBox::warning(this, tr("SciDAVis - Warning"), tr("There are no curves available on this plot!"));
 		return false;
 	}
 	else
@@ -5262,7 +5262,7 @@ bool Graph::validCurvesDataSize()
                     return true;
   	         }
   	    }
-		QMessageBox::warning(this, tr("QtiPlot - Error"),
+		QMessageBox::warning(this, tr("SciDAVis - Error"),
 		tr("There are no curves with more than two points on this plot. Operation aborted!"));
 		return false;
 	}

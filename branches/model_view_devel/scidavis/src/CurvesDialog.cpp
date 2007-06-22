@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : CurvesDialog.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
@@ -53,7 +53,7 @@ CurvesDialog::CurvesDialog( QWidget* parent,  const char* name, bool modal, Qt::
 	if ( !name )
 		setName( "CurvesDialog" );
 
-	setWindowTitle( tr( "QtiPlot - Add/Remove curves" ) );
+	setWindowTitle( tr( "SciDAVis - Add/Remove curves" ) );
     setSizeGripEnabled(true);
 	setFocus();
 

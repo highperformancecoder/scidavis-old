@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : IntervalAttribute.h
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Knut Franke, Tilman Hoener zu Siederdissen
     Email (use @ for *)  : knut.franke*gmx.de, thzs*gmx.net

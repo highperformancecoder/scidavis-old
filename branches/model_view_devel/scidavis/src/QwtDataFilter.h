@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : QwtDataFilter.h
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
@@ -36,7 +36,7 @@
 /**
  * \brief Wraps two input ports into a QwtData object.
  *
- * Just a few lines of glue code between QtiPlot's data source model and Qwt's (less generic) data model.
+ * Just a few lines of glue code between SciDAVis's data source model and Qwt's (less generic) data model.
  */
 class QwtDataFilter : public QwtData, public AbstractFilter
 {

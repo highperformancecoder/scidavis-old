@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : TranslateCurveTool.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006,2007 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen, Knut Franke
@@ -80,7 +80,7 @@ void TranslateCurveTool::selectDestination(const QwtDoublePoint &point)
 	{
 	    if (d_dir == Horizontal)
 	    {
-            QMessageBox::warning(d_graph, tr("QtiPlot - Warning"),
+            QMessageBox::warning(d_graph, tr("SciDAVis - Warning"),
             tr("This operation cannot be performed on function curves."));
         }
         else
@@ -123,7 +123,7 @@ void TranslateCurveTool::selectDestination(const QwtDoublePoint &point)
 	if (!tab) return;
 	int col = tab->colIndex(col_name);
 	if (tab->columnType(col) != Table::Numeric) {
-		QMessageBox::warning(d_graph, tr("QtiPlot - Warning"),
+		QMessageBox::warning(d_graph, tr("SciDAVis - Warning"),
 				tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
 		return;
 	}

@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : Matrix.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
@@ -374,7 +374,7 @@ void Matrix::setMatrixDimensions(int rows, int cols)
 	{
 		QString msg_text = tr("Deleting rows/columns from the matrix!","set matrix dimensions");
 		msg_text += tr("<p>Do you really want to continue?","set matrix dimensions");
-		switch( QMessageBox::information(0,tr("QtiPlot"), msg_text,tr("Yes"), tr("Cancel"), 0, 1 ) )
+		switch( QMessageBox::information(0,tr("SciDAVis"), msg_text,tr("Yes"), tr("Cancel"), 0, 1 ) )
 		{
 			case 0: // Yes
 				QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -420,7 +420,7 @@ double Matrix::determinant()
 
 	if (rows != cols)
 	{
-		QMessageBox::critical(0,tr("QtiPlot - Error"),
+		QMessageBox::critical(0,tr("SciDAVis - Error"),
 				tr("Calculation failed, the matrix is not square!"));
 		return GSL_POSINF;
 	}
@@ -458,7 +458,7 @@ void Matrix::invert()
 
 	if (rows != cols)
 	{
-		QMessageBox::critical(0,tr("QtiPlot - Error"),
+		QMessageBox::critical(0,tr("SciDAVis - Error"),
 				tr("Inversion failed, the matrix is not square!"));
 		allow_modification_signals = true;
 		return;
@@ -838,7 +838,7 @@ void Matrix::pasteSelection()
 		// TODO: I find the insert cells option awkward
 		// I would prefer the behavior of OpenOffice Calc
 		// here - thzs
-		switch( QMessageBox::information(0,"QtiPlot",
+		switch( QMessageBox::information(0,"SciDAVis",
 					tr("The text in the clipboard is larger than your current selection!\
 						\nDo you want to insert cells?"),
 					tr("Yes"), tr("No"), tr("Cancel"), 0, 0) )
@@ -933,7 +933,7 @@ void Matrix::print(const QString& fileName)
 
 	if (!fileName.isEmpty())
 	{
-	    printer.setCreator("QtiPlot");
+	    printer.setCreator("SciDAVis");
 	    printer.setOutputFormat(QPrinter::PdfFormat);
         printer.setOutputFileName(fileName);
 	}

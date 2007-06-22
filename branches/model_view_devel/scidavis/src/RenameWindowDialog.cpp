@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : RenameWindowDialog.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
@@ -130,7 +130,7 @@ RenameWindowDialog::~RenameWindowDialog()
 
 void RenameWindowDialog::languageChange()
 {
-	setWindowTitle(tr("QtiPlot - Rename Window"));
+	setWindowTitle(tr("SciDAVis - Rename Window"));
 	buttonOk->setText( tr( "&OK" ) );
 	buttonCancel->setText( tr( "&Cancel" ) );
 }
@@ -150,7 +150,7 @@ void RenameWindowDialog::accept()
 		return;
 
 	if (text.contains("_")){
-  		QMessageBox::warning(this, tr("QtiPlot - Warning"),
+  		QMessageBox::warning(this, tr("SciDAVis - Warning"),
   	    tr("For internal consistency reasons the underscore character is replaced with a minus sign."));}
   	 
   	if (text.replace("_", "-") != name)

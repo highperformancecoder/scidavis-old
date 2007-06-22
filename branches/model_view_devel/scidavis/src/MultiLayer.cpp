@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : MultiLayer.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
@@ -278,8 +278,8 @@ void MultiLayer::confirmRemoveLayer()
 	if (graphs>1)
 	{
 		switch(QMessageBox::information(this,
-					tr("QtiPlot - Guess best layout?"),
-					tr("Do you want QtiPlot to rearrange the remaining layers?"),
+					tr("SciDAVis - Guess best layout?"),
+					tr("Do you want SciDAVis to rearrange the remaining layers?"),
 					tr("&Yes"), tr("&No"), tr("&Cancel"),
 					0, 2) )
 		{
@@ -634,7 +634,7 @@ void MultiLayer::exportToFile(const QString& fileName)
 {
 	if ( fileName.isEmpty() )
 	{
-		QMessageBox::critical(0, tr("QtiPlot - Error"), tr("Please provide a valid file name!"));
+		QMessageBox::critical(0, tr("SciDAVis - Error"), tr("Please provide a valid file name!"));
         return;
 	}
 
@@ -654,7 +654,7 @@ void MultiLayer::exportToFile(const QString& fileName)
 				return;
 			}
 		}
-    	QMessageBox::critical(this, tr("QtiPlot - Error"), tr("File format not handled, operation aborted!"));
+    	QMessageBox::critical(this, tr("SciDAVis - Error"), tr("File format not handled, operation aborted!"));
 	}
 }
 
@@ -697,14 +697,14 @@ void MultiLayer::exportVector(const QString& fileName, int res, bool color)
 {
 	if ( fileName.isEmpty() )
 	{
-		QMessageBox::critical(this, tr("QtiPlot - Error"),
+		QMessageBox::critical(this, tr("SciDAVis - Error"),
 		tr("Please provide a valid file name!"));
         return;
 	}
 
 	QPrinter printer;
     printer.setDocName (this->name());
-    printer.setCreator("QtiPlot");
+    printer.setCreator("SciDAVis");
 	printer.setFullPage(true);
 	printer.setOutputFileName(fileName);
     if (fileName.contains(".eps"))

@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : ImageExportDialog.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Hoener zu Siederdissen
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
@@ -33,7 +33,7 @@
 ImageExportDialog::ImageExportDialog( QWidget * parent, Qt::WFlags flags)
 : QFileDialog( parent, flags )
 {
-	setWindowTitle( tr( "QtiPlot - Choose a filename to save under" ) );
+	setWindowTitle( tr( "SciDAVis - Choose a filename to save under" ) );
     setAcceptMode(QFileDialog::AcceptSave);
 
 	QList<QByteArray> list = QImageWriter::supportedImageFormats();

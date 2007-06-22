@@ -1,6 +1,6 @@
 /***************************************************************************
     File                 : ScriptEdit.cpp
-    Project              : QtiPlot
+    Project              : SciDAVis
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
@@ -272,7 +272,7 @@ void ScriptEdit::exportPDF(const QString& fileName)
 	QTextDocument *doc = document();
 	QPrinter printer;
 	printer.setColorMode(QPrinter::GrayScale);
-	printer.setCreator("QtiPlot");
+	printer.setCreator("SciDAVis");
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setOutputFileName(fileName);
 	doc->print(&printer);
@@ -299,14 +299,14 @@ QString ScriptEdit::importASCII(const QString &filename)
 
 	QString f;
 	if (filename.isEmpty())
-		f = QFileDialog::getOpenFileName(name(),  filter, this, 0, tr("QtiPlot - Import Text From File"));
+		f = QFileDialog::getOpenFileName(name(),  filter, this, 0, tr("SciDAVis - Import Text From File"));
 	else
 		f = filename;
 	if (f.isEmpty()) return QString::null;
 	QFile file(f);
 	if (!file.open(IO_ReadOnly))
 	{
-		QMessageBox::critical(this, tr("QtiPlot - Error Opening File"), tr("Could not open file \"%1\" for reading.").arg(f));
+		QMessageBox::critical(this, tr("SciDAVis - Error Opening File"), tr("Could not open file \"%1\" for reading.").arg(f));
 		return QString::null;
 	}
 	QTextStream s(&file);
@@ -343,7 +343,7 @@ QString ScriptEdit::exportASCII(const QString &filename)
 		}
 
 		if ( QFile::exists(fn) &&
-				QMessageBox::question(this, tr("QtiPlot -- Overwrite File? "),
+				QMessageBox::question(this, tr("SciDAVis -- Overwrite File? "),
 					tr("A file called: <p><b>%1</b><p>already exists.\n"
 						"Do you want to overwrite it?")
 					.arg(fn), tr("&Yes"), tr("&No"),QString::null, 0, 1 ) )
@@ -353,7 +353,7 @@ QString ScriptEdit::exportASCII(const QString &filename)
 			QFile f(fn);
 			if ( !f.open( IO_WriteOnly ) )
 			{
-				QMessageBox::critical(0, tr("QtiPlot - File Save Error"),
+				QMessageBox::critical(0, tr("SciDAVis - File Save Error"),
 						tr("Could not write to file: <br><h4> %1 </h4><p>Please verify that you have the right to write to this location!").arg(fn));
 				return QString::null;
 			}
