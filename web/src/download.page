@@ -3,7 +3,10 @@ title: Download
 inMenu: true
 ---
 
-The first release (SciDAVis 0.1.0) is planned within the next weeks.
+The first release (SciDAVis 0.1.0) is roughly planned for the end of July, depending on
+how long the changes detailled "here":about/roadmap.html#0.1.0 will take.
+Since we're all working on this project in our spare time, it's a bit difficult to
+give precise dates.
 
 Until then, you can check out the development version using "Subversion":http://subversion.tigris.org.
 Here's how to do it:

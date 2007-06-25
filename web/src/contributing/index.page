@@ -3,24 +3,50 @@ title: Why and How
 inMenu: true
 ---
 
-h1. Introduction
+h1. SciDAVis lives from your contributions
 
-SciDAVis lives from your contributions. There's many ways in which you
-can "contribute":contributing.html, and only one or two of them require any programming
+This project is entirely run by means of voluntary contributions people make in their spare time.
+Since all project-related resources are hosted by <a href="http://sourceforge.net">SourceForge.net</a>
+free of charge and membership is also free, the only investment we make and we ask you
+to make if you're using SciDAVis is some time.
+
+There's many good reasons for contributing, including:
+* Adapting SciDAVis to your needs without having to port your changes to new versions.
+* You make sure that the software you're using will continue to be improved and maintained.
+  The more people contribute, the less likely it is that the project will be abandoned.
+* You can influence (through words and actions) the direction the project is taking.
+* The dicision what, when and how much to contribute is up to you, so you could actually
+  have some fun along the way (we certainly do :-)). Before you start, you should
+  announce your plans on
+  "scidavis-contributors":https://lists.sourceforge.net/lists/listinfo/scidavis-contributors
+  though, so we're not doing the same work twice and to see how your ideas fit in with
+  everybody else's plans.
+* Particularly if you're using a lot of free software, you can see it as a chance to give
+  something back to the community at large.
+* You can acquire skills that might be useful for your job, on the technical as well as
+  on the social side (hard and soft skills).
+
+h1. Yes, yes, I'd like to - but how?
+
+There's many ways in which you
+can contribute, and only one or two of them require any programming
 knowledge. Depending on your skills and the amount of time you are
-willing to invest, you can provide help on the forums, improve or write
-documentation, report bugs, suggest features, translate SciDAVis into a
-new language or update an existing translation, package SciDAVis for your
+willing to invest, you can provide help on the
+"forum":https://sourceforge.net/forum/forum.php?forum_id=708156, improve
+or write documentation,
+"report bugs":http://sourceforge.net/tracker/?func=add&group_id=199120&atid=968214,
+"suggest features":http://sourceforge.net/tracker/?func=add&group_id=199120&atid=968217,
+translate SciDAVis into a new language or update an existing translation, package SciDAVis for your
 favorite distribution or platform, write new features, create artwork
 (icons, splash screen, mascot), etc., etc.
 
-h1. Writing Code
+Some of the above require additional explanations to get you started.
+Please see the submenu to the left for available documents.
+We plan to expand these pages in the future, in order to better help you to help us. :-)
 
-h1. Translating SciDAVis
+--- sidebar, textile
 
-h1. Writing Documentation or Tutorials
+h2. Developers:
 
-h1. Translating Documenation
-
-h1. Packaging
+We have <a href="../contributing/API/index.html" target="_blank">API docs</a> and "more":coding.html for you.
 

@@ -20,14 +20,17 @@ contact.page:
 about/index.page:
    orderInfo: 1
 
-about/features.page:
+about/screenshots.page:
    orderInfo: 2
 
-about/roadmap.page:
+about/features.page:
    orderInfo: 3
 
-about/team.page:
+about/roadmap.page:
    orderInfo: 4
+
+about/team.page:
+   orderInfo: 5
 
 about/license.page:
    orderInfo: 99
@@ -45,15 +48,40 @@ help/forum.page:
 help/scidavis-users.page:
    orderInfo: 4
 
+
 contributing/index.page:
    orderInfo: 1
 
+contributing/coding.page:
+   orderInfo: 2
+
+contributing/documenting.page:
+   orderInfo: 3
+
+contributing/packaging.page:
+   orderInfo: 4
+
+contributing/translating-doc.page:
+   orderInfo: 5
+
+contributing/translating-app.page:
+   orderInfo: 6
+
 ---
+
+about/screenshots.page:
+   url: https://sourceforge.net/project/screenshots.php?group_id=199120
+   title: Screenshots
+   inMenu: true
+   linkAttrs:
+      target: _blank
 
 help/manual.page:
    url: help/manual/index.html
    title: Manual
-   inMenu: true
+   inMenu: false
+   linkAttrs:
+      target: _blank
 
 help/forum.page:
    url: https://sourceforge.net/forum/forum.php?forum_id=708156

@@ -3,7 +3,7 @@ title: Roadmap
 inMenu: true
 ---
 
-h1. Release Policy
+h1(#policy). Release Policy
 
 Release numbers will follow the scheme major.minor.bugfix.
 
@@ -11,7 +11,7 @@ Release numbers will follow the scheme major.minor.bugfix.
 particularly with respect to plugins. Therefore, they will occur only very infrequently.
 
 "minor" releases add some new functionality, but do not change existing interfaces or otherwise
-break other people's code. If they do, that's a bug and, obviously, we're trying to avoid bugs. :)
+break other people's code. If they do, that's a bug and, obviously, we're trying to avoid bugs. :-)
 
 As the name suggests, "bugfix" releases fix bugs in the previous minor release, but do not add
 new functionality, so they're unlikely to introduce new bugs.
@@ -22,30 +22,39 @@ In the following, only x.y.0 releases are discussed. Concurrently to the develop
 next feature release, bugs we get to know about will be fixed and, depending on their
 number and severity, bugfix releases (x.y.z) will be provided.
 
-h1. 0.1.0: Slightly improved QtiPlot 0.9
+h1(#0.1.0). 0.1.0: Improved user interface and fixes to project file loading
 
-This is mainly to establish the fork, provide people with a choice early on and hopefully
-gather some contributors, bug reporters, etc.
+Starting point is the QtiPlot codebase somewhere between 0.9-rc2 and 0.9 (Subversion
+revision 621, to be precise).
 
-h1. 0.2.0: Parts of 1.0.0 (?)
+The goal of this release is to improve some aspects of the user interface so that prospective
+users and contributors can see where we're going. For example, a few unnecessarily complicated
+menus like "Analysis" and dialogs like those for graph settings will be cleaned up.
+Also, some bugs have to be fixed; particularly in the area of loading project files.
+
+h1(#0.2.0). 0.2.0: Parts of 1.0.0 (?)
 
 Many of the features planned for 1.0.0 are interdependent, which is why so many large-scale changes
 are scheduled for one release.
 However, if it will turn out to be viable, we'll release one or more versions with a subset of these
 features. Possibly a version with multi-level undo/redo for tables only.
 
-h1. 1.0.0: Internal reorganizations, Undo, Plugins
+h1(#1.0.0). 1.0.0: Internal reorganizations, undo, plugins
 
 Most notably for users, this release will feature multi-level undo/redo
 for changes to tables, matrices and notes; possibly also for graphs.
-Due to the complexity, it might prove necessary to postpone undo of graphs,
-but this definitely also is something we'd like to have.
+Due to the complexity and pending changes in 1.1.0, it might prove necessary
+to postpone undo of graphs, but this definitely also is something we'd like to have.
 
 SciDAVis 1.0.0 will be extensible with custom functionality by writing
 plugins in C++; using a flexible data analysis
 architecture based on the column-based abstraction of a typed data source and
-filters modelled by integrated electronic circuits (in the sense that they are a "black box"
+filters modelled on integrated electronic circuits (in the sense that they are a "black box"
 with a number of input and output ports).
+The plugin system will be very generic at its core, but probably not all functionality
+will be added in this release. Particularly, implementing new plot/curve types
+will be influenced by the changes planned for version 1.1.0, so these parts will
+probably be postponed until 1.1.0.
 
 Furthermore, several of the core classes will be split into smaller ones or completely
 rewritten, following the Model/View/Controller approach. This is necessary to integrate a sufficiently
@@ -64,18 +73,18 @@ and maintainability.
 Modules will reside in separate directories and compile separately, but most if not all of
 the current functionality will remain part of the main executable.
 
-h1. 1.1.0: New visualisation engine
+h1(#1.1.0). 1.1.0: New visualisation engine
 
 The Qwt library will be replaced by a new engine based on Qt's GraphicsView framework,
 allowing, among other benefits, the use of floating-point linewidths, support for
 polar and ternary plots and plots with broken axes.
 Seeing that this will be a major task in its own right, we can only hope that it will
-be possible without invalidating changes from 1.0.0.
+be possible without invalidating changes done in 1.0.0.
 
 It may be necessary to delay large parts of the plugin interface until 1.1.0 in order
 to be able to guarantee backwards-compatibility between 1.0.0 and 1.1.0.
 
-h1. 1.2.0: Features facilitated by the 1.0.0/1.1.0 architecture
+h1(#1.2.0). 1.2.0: Features facilitated by the 1.0.0/1.1.0 architecture
 
 The integration of Python will be completed by removing the last muParser-specific parts.
 It will be possible to use Python's global variables and functions everywhere, e.g. for function
@@ -84,8 +93,11 @@ plotting.
 Add more demo plugins and tutorials, encourage users to contribute plugins for inclusion into
 future versions and/or to a central plugin database.
 
-Add polar and ternary plots to the new engine.
+Add polar and ternary plots to the new engine, if not already done in 1.1.0.
 
 Lots of other features like baseline-detection, import/export filters for OpenDocument spreadsheets,
-waterfall plots etc. Probably not all of them an 1.2.0.
+waterfall plots etc. Probably not all of them in 1.2.0.
+
+The crystal ball becomes really fuzzy from this point on.
+Que sera, sera. ;-)
 

@@ -8,21 +8,20 @@ h1. What can you find here?
 
 This page aims to give you an overview of where you can find help on using SciDAVis.
 It does not contain help related to contributing to or developing SciDAVis, which
-is "here":contributing/index.html.
+is "here":../contributing/index.html.
 
-h1. The manual
+h1. The user's manual
 
-The first place to go if you want to get started or have questions concerning the usage of SciDAVis
-is the "user's manual":manual/index.html.
-It explains everything from basic techniques to menus and dialogs to advanced usage.
+[ coming soon ]
 
 h1. The help forum
 
-No manual can possibly answer all your questions. Maybe you can't find the right section to look for your problem in the manual or something doesn't work like you'd expect it to but you're
+No manual can possibly answer all your questions. Maybe you can't find the right section to look
+for your problem in the manual or something doesn't work like you'd expect it to but you're
 not 100% sure it's a bug.
 For these cases, the "Help & Tips":https://sourceforge.net/forum/forum.php?forum_id=708156
 forum was established. Here, users can help each other with their problems.
-Since we're using SciDAVis too, you can expect us to drop by now and then. :)
+Since we're using SciDAVis too, you can expect us to drop by now and then. :-)
 
 h1. The user's mailing list
 
@@ -34,7 +33,16 @@ discussions.
 
 h1. Tutorials and example projects
 
-In the future, we hope we can present you a list of user contributed tutorials, useful scripts, and example projects here.
+In the future, we hope we can present you a list of user contributed tutorials, useful scripts, and
+example projects here.
+
+
+--- to.be.used.when.we.have.a.manual, textile
+h1. The user's manual
+
+The first place to go if you want to get started or have questions concerning the usage of SciDAVis
+is the "user's manual":manual/index.html.
+It explains everything from basic techniques over menus and dialogs to advanced usage.
 
 --- to.be.used.when.we.have.plugins, textile
 This page aims to give you an overview of where you can find help on using SciDAVis.
