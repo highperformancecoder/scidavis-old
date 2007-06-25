@@ -1,0 +1,66 @@
+index.page:
+   orderInfo: 0
+
+about/:
+   orderInfo: 1
+
+download.page:
+   orderInfo: 3
+
+help/:
+   orderInfo: 4
+
+contributing/:
+   orderInfo: 5
+
+contact.page:
+   orderInfo: 6
+
+
+about/index.page:
+   orderInfo: 1
+
+about/features.page:
+   orderInfo: 2
+
+about/roadmap.page:
+   orderInfo: 3
+
+about/team.page:
+   orderInfo: 4
+
+about/license.page:
+   orderInfo: 99
+
+
+help/index.page:
+   orderInfo: 1
+
+help/manual.page:
+   orderInfo: 2
+
+help/forum.page:
+   title: Forum
+
+help/scidavis-users.page:
+   orderInfo: 4
+
+contributing/index.page:
+   orderInfo: 1
+
+---
+
+help/manual.page:
+   url: help/manual/index.html
+   title: Manual
+   inMenu: true
+
+help/forum.page:
+   url: https://sourceforge.net/forum/forum.php?forum_id=708156
+   inMenu: true
+   orderInfo: 3
+
+help/scidavis-users.page:
+   url: https://lists.sourceforge.net/lists/listinfo/scidavis-users
+   title: Mailinglist
+   inMenu: true

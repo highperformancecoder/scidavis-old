@@ -1,0 +1,16 @@
+This directory contains the source files for generating the SciDAVis homepage
+using webgen (http://webgen.rubyforge.org). It uses Textile for the page descriptions,
+so you'll also have to install RedCloth (http://www.whytheluckystiff.net/ruby/redcloth),
+and it uses webgen's SyntaxHighlighter, which depends on coderay
+(http://coderay.rubychan.de/).
+
+If you have rubygems (http://rubyforge.org/projects/rubygems) installed, you can pull
+in all required packages using gem install:
+
+gem install webgen
+gem install redcloth
+gem install coderay
+
+After that, all you have to do is run the command "webgen" from this directory.
+This will produce a new subdirectory "output" containing the generated site.
+

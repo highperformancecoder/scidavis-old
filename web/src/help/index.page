@@ -1,0 +1,40 @@
+---
+directoryName: Help
+title: Summary
+inMenu: true;
+---
+
+h1. What can you find here?
+
+This page aims to give you an overview of where you can find help on using SciDAVis.
+It does not contain help related to contributing to or developing SciDAVis, which
+is "here":contributing/index.html.
+
+h1. The manual
+
+The first place to go if you want to get started or have questions concerning the usage of SciDAVis
+is the "user's manual":manual/index.html.
+It explains everything from basic techniques over menus and dialogs to advanced usage.
+
+h1. The help forum
+
+No manual can possible answer all of your questions. Maybe you can't even find an ansatz for what to
+try or where in the manual to search, or something doesn't work like you'd expect it to but you're
+not 100% sure it's a bug.
+For these cases, we have the "Help & Tips":https://sourceforge.net/forum/forum.php?forum_id=708156
+forum, where users can help each other with their problems.
+Since we're using SciDAVis too, you can expect us to drop by now and then. :)
+
+h1. The user's mailing list
+
+Some people prefer using email for discussions, so we're offering a
+"user's mailing list":https://lists.sourceforge.net/lists/listinfo/scidavis-users
+where you can ask questions, share your insights and just discuss anything related to using SciDAVis.
+By subscribing to this list, you also get the chance to learn from other people's questions and
+discussions.
+
+--- to.be.used.when.we.have.plugins, textile
+This page aims to give you an overview of where you can find help on using SciDAVis.
+It does not contain information about using or developing plugins, which you can find
+"here":plugins/index.html, or help related to contributing to or developing SciDAVis, which
+is "here":contributing/index.html.

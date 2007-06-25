@@ -1,0 +1,21 @@
+---
+title: Feature Summary
+inMenu: true
+---
+
+This is a brief summary of what SciDAVis can do.
+If you are still unsure whether it meets your needs, you can also take a look at the
+"screenshots":screenshots.html or simply "download":../download.html SciDAVis and
+see for yourself!
+
+* Tables, Matrices, Graphs and Notes are gathered in a Project and can be organized using folders.
+* Tables for entering data directly or importing from ASCII files.
+* Column-based computations using standard and special functions (and much more if you have
+  "Python":http://www.python.org installed).
+* Many built-in analysis operations like column/row statistics, (de)convolution, FFT and FFT-based filters.
+* Extensive support for fitting linear and nonlinear functions to the data, including multi-peak fitting.
+* Publication-quality 2D plots in a variety of formats, including symbols/lines, bars and pie charts.
+* Interactive 3D plots with export to a variety of formats, including EPS and PDF.
+* Note windows with support for in-place evaluation of mathematical expressions. With Python installed, you
+  can even access other objects in the project, e.g. for rapidly writing an import filter for a custom data format.
+

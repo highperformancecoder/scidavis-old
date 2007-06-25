@@ -1,0 +1,37 @@
+---
+title: Introduction
+inMenu: true
+---
+
+h1. Mission Statement
+
+SciDAVis is a free interactive application aimed at data analysis and
+publication-quality plotting. It combines a shallow learning curve and
+an intuitive, easy-to-use graphical user interface with powerful
+features such as scriptability and extensibility. SciDAVis runs on
+GNU/Linux, Windows and MacOS X; possibly also on other platforms like
+*BSD, although this is untested.
+
+SciDAVis is similar in its field of application to proprietary Windows
+applications like "Origin":http://www.originlab.com and
+"SigmaPlot":http://www.systat.com/products/SigmaPlot as well as free applications
+like "QtiPlot":http://qtiplot.ro, "Labplot":http://labplot.sourceforge.net and
+"Gnuplot":http://www.gnuplot.info/.
+
+What sets SciDAVis apart from the above is its emphasis on providing a
+friendly and open environment (in the software as well as the project)
+for new and experienced users alike. Particularly, this means that we
+will try to provide good documentation on all levels, ranging from
+"user's manual":manual.html over tutorials down to and including
+"documentation of the internal APIs":apidoc.html.
+We encourage users to share their experiences on our "forums":https://sourceforge.net/forum/?group_id=199120
+and on our "mailing lists":https://sourceforge.net/mail/?group_id=199120.
+
+h1. History
+
+SciDAVis has been started as a fork off of "QtiPlot":http://qtiplot.ro with the aim of introducing some changes
+in design as well as project structure.
+The current code base - what will become SciDAVis 0.1.0 shortly - is very close to that of QtiPlot 0.9x,
+but we expect it to deviate considerably with our move towards a modular design and a less Origin-like interface
+(see "roadmap":roadmap.html for details).
+

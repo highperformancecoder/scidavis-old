@@ -1,0 +1,18 @@
+---
+title: Download
+inMenu: true
+---
+
+The first release (SciDAVis 0.1.0) is planned within the next one or two weeks.
+
+Until then, you can check out the development version using "Subversion":http://subversion.tigris.org.
+Here's how to do it:
+
+{hlblock: {blockName: svnco, highlight: plaintext}}
+
+Instructions for compiling can be found in the file "README.html" included with the source.
+
+You might also be interested in our "roadmap":about/roadmap.html.
+
+--- svnco, html
+svn co https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis
