@@ -4,9 +4,9 @@ title: Welcome
 inMenu: true
 ---
 
-h1. What is it?
+h1. What is SciDAVis?
 
-SciDAVis is a free Application for <u>Sci</u>entific <u>D</u>ata <u>A</u>nalysis and <u>Vis</u>ualisation.
+SciDAVis is a free application for <u>Sci</u>entific <u>D</u>ata <u>A</u>nalysis and <u>Vis</u>ualisation.
 
 p=. !images/screenshot.png!
 

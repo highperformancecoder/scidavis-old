@@ -3,7 +3,7 @@ title: License
 inMenu: true
 ---
 
-SciDAVis is free software; you can redistribute it and/or modify it under the terms of the
+SciDAVis is "free software":http://www.gnu.org/philosophy/free-sw.html; you can redistribute it and/or modify it under the terms of the
 "GNU General Public License":http://www.fsf.org/licensing/licenses/gpl.html
 as published by the "Free Software Foundation":http://www.fsf.org/ ; either version 2 of the License, or
 (at your option) any later version.

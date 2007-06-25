@@ -38,8 +38,8 @@
 			<div class="block" style="text-align: center">
 				<form action="http://www.google.com/search" method="get" class="roundtopsmall">
 					<input value="scidavis.sourceforge.net" name="sitesearch" type="hidden">
-					<input size="18" name="q" id="query" type="text" value="Search with Google">&nbsp; 
-					<input name="Search" value="Search" type="submit">
+					<input size="16" name="q" id="query" type="text" value="Search with Google">&nbsp; 
+					<input name="Search this site" value="Search this site" type="submit">
 				</form>
 			</div>
 		</div>

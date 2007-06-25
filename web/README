@@ -8,7 +8,7 @@ If you have rubygems (http://rubyforge.org/projects/rubygems) installed, you can
 in all required packages using gem install:
 
 gem install webgen
-gem install redcloth
+gem install RedCloth
 gem install coderay
 
 After that, all you have to do is run the command "webgen" from this directory.

@@ -5,7 +5,7 @@ inMenu: true
 
 h1. Release Policy
 
-Relase numbers will follow the scheme major.minor.bugfix.
+Release numbers will follow the scheme major.minor.bugfix.
 
 "major" releases differ considerably in architectur and potentially break backwards-compatibilty,
 particularly with respect to plugins. Therefore, they will occur only very infrequently.
@@ -44,7 +44,7 @@ but this definitely also is something we'd like to have.
 SciDAVis 1.0.0 will be extensible with custom functionality by writing
 plugins in C++; using a flexible data analysis
 architecture based on the column-based abstraction of a typed data source and
-filters modelled on integrated electronic circuits (in the sense that they are a "black box"
+filters modelled by integrated electronic circuits (in the sense that they are a "black box"
 with a number of input and output ports).
 
 Furthermore, several of the core classes will be split into smaller ones or completely
@@ -56,8 +56,8 @@ For users, this will hopefully mean that we can drop many of the existing restri
 column names.
 
 A new, completely XML-based file format will be introduced, allowing us to use existing
-parsers, almost certainly improving reliability of project file opening.
-The legacy format will continue to be supported.
+parsers and validity checkers, almost certainly improving reliability of project file opening and saving.
+Loading files in the legacy format will continue to be supported.
 
 The classes will be reorganized into a number of modules in order to improve code readability
 and maintainability.
@@ -66,7 +66,7 @@ the current functionality will remain part of the main executable.
 
 h1. 1.1.0: New visualisation engine
 
-The Qwt library will be replaced by a new engine based on Qt's Graphics View framework,
+The Qwt library will be replaced by a new engine based on Qt's GraphicsView framework,
 allowing, among other benefits, the use of floating-point linewidths, support for
 polar and ternary plots and plots with broken axes.
 Seeing that this will be a major task in its own right, we can only hope that it will
