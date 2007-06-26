@@ -10,6 +10,35 @@ img {
 	border: 0px;
 }
 
+.left, .right, .center {
+	padding: 0px 1em;
+}
+
+.left {
+	float: left;
+	text-align: left;
+}
+
+.right {
+	float: right;
+	text-align: right;
+}
+
+.center {
+	width: 100%;
+	text-align: center;
+}
+
+h1
+{
+	border-bottom: 1px solid #101010;
+	color: #000000;
+	font-size: 1.6em;
+}
+h2, h3 { color: #275AC0; }
+h2 { font-size: 1.3em; }
+h3 { font-size: 1.1em; }
+
 /* logo */
 #logo {
 	text-align=center;
@@ -18,9 +47,9 @@ img {
 	margin-bottom: 0px;
 }
 
-/* menu */
+/* menus */
 
-.webgen-menu-horiz {
+#header {
 	width:100%;
 	height:60px;
 	background: #8FAFED url('images/navi_bar.png') repeat-x top;
@@ -98,7 +127,7 @@ img {
 	text-decoration: underline;
 }
 
-/* headers */
+/* headers and footer */
 /*
 #header {
 	border-bottom: 1px solid black;
@@ -133,25 +162,23 @@ img {
 	border-bottom: 1px solid #000000;
 }
 
-/* sidebar */
+/* sidebars */
 
-#sidebar {
+#sidebar-left {
 	float: left;
 	text-align: left;
 	margin: 0px;
 	padding: 0px;
 }
 
-#news {
+#sidebar-right {
 	float: right;
-	width: 126px;
+	text-align: right;
+	margin: 0px;
+	padding: 0px;
 }
 
-#news h1 {
-	text-align: center;
-}
-
-.block, #news {
+.block {
 	width: 126px;
 	background: #FFFFFF url('images/block.png') repeat-x top;
 	margin: 10px;
@@ -161,40 +188,20 @@ img {
 	border-color: #000000;
 }
 
+.block h1 {
+	text-align: center;
+}
+
+#search input {
+	width: 116px;
+}
+
 /* content */
 
-#body {
+#content {
 	margin: 10px;
 	margin-left: 160px;
 	margin-right: 160px;
 	padding: 10px;
 }
 
-.left, .right, .center {
-	padding: 0px 1em;
-}
-
-.left {
-	float: left;
-	text-align: left;
-}
-
-.right {
-	float: right;
-	text-align: right;
-}
-
-.center {
-	width: 100%;
-	text-align: center;
-}
-
-h1
-{
-	border-bottom: 1px solid #101010;
-	color: #000000;
-	font-size: 1.6em;
-}
-h2, h3 { color: #275AC0; }
-h2 { font-size: 1.3em; }
-h3 { font-size: 1.1em; }

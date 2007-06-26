@@ -12,9 +12,10 @@
 		<link href="http://scidavis.sourceforge.net" rel="bookmark" title="SciDAVis Website" type="text/html">
 	</head>
 	<body>
-		<div id="logo"><img src="{relocatable: images/scidavis-logo.png}" alt="SciDAVis-Logo" /></div>
-
-		{menu: {menuStyle: horizontal, options: {startLevel: 1, maxLevels: 1}}}
+		<div id="header">
+			<div id="logo"><img src="{relocatable: images/scidavis-logo.png}" alt="SciDAVis-Logo" /></div>
+			{menu: {menuStyle: horizontal, options: {startLevel: 1, maxLevels: 1}}}
+		</div>
 
 		<div id="subheader">
 			<div class="left">Location: {breadcrumbTrail: } </div>
@@ -23,7 +24,7 @@
 			<div style="clear:both"></div>
 		</div>
 
-		<div id="sidebar">
+		<div id="sidebar-left">
 			<% if node.level > 1 %>
 			<div id="submenu">
 				<h1>{parent: }</h1>
@@ -35,21 +36,23 @@
 				{block: sidebar}
 			</div>
 			<% end %>
-			<div class="block" style="text-align: center">
+			<div id="search" class="block" style="text-align: center">
 				<form action="http://www.google.com/search" method="get" class="roundtopsmall">
 					<input value="scidavis.sourceforge.net" name="sitesearch" type="hidden">
-					<input size="16" name="q" id="query" type="text" value="Search with Google">&nbsp; 
+					<input size="16" name="q" id="query" type="text" value="Search with Google">
 					<input name="Search this site" value="Search this site" type="submit">
 				</form>
 			</div>
 		</div>
 
-		<div id="news">
-			<h1>News</h1>
-			<!--#include file="http://sourceforge.net/export/projnews.php?group_id=199120&limit=5&flat=0&show_summaries=1" -->
+		<div id="sidebar-right">
+			<div class="block">
+				<h1>News</h1>
+				<!--#include file="http://sourceforge.net/export/projnews.php?group_id=199120&limit=5&flat=0&show_summaries=1" -->
+			</div>
 		</div>
 
-		<div id="body">
+		<div id="content">
 			{block: }
 		</div>
 
