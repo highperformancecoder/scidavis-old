@@ -81,7 +81,7 @@ time if you don't coordinate your work with the rest of us.
 
 h1. Contributing code and joining the team
 
-If you just want to submit a bugfix or contribute the odd enhancement, submit your patch
+If you just want to submit a bugfix or contribute an occasional enhancement, submit your patch
 "here":https://sourceforge.net/tracker/?group_id=199120&atid=968216.
 Either you have an IDE or graphical diff tool for this, or
 (for Linux, possibly also MacOS X and "cygwin":http://cygwin.com/) you

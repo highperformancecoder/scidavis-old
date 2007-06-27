@@ -34,7 +34,7 @@ for how to use it.
 
 h2(#docbook). DocBook
 
-This one is considerably more involved than the simple formats above, but in exchanges it allows
+This one is considerably more involved than the simple formats above, but in exchange it allows
 sophisticated documents to written that can easily be converted to HTML (for web publishing),
 PDF (for printing) or pretty much anything else. This is the format we use for our
 user's manual.
