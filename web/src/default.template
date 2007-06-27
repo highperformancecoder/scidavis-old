@@ -49,6 +49,15 @@
 			<div class="block">
 				<h1>News</h1>
 				<!--#include file="http://sourceforge.net/export/projnews.php?group_id=199120&limit=5&flat=0&show_summaries=1" -->
+				<%=
+				if $newscontent.nil?
+					require 'open-uri'
+					open('http://sourceforge.net/export/projnews.php?group_id=199120&limit=5&flat=0&show_summaries=1') do |http|
+						$newscontent = http.read
+					end
+				end
+				$newscontent
+				%>
 			</div>
 		</div>
 

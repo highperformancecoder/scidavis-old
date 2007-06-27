@@ -173,7 +173,7 @@ h3 { font-size: 1.1em; }
 
 #sidebar-right {
 	float: right;
-	text-align: right;
+	text-align: left;
 	margin: 0px;
 	padding: 0px;
 }
