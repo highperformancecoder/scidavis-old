@@ -1,0 +1,66 @@
+---
+Title: Credits
+inMenu: true
+---
+
+h1. Code
+
+The following people have written parts of SciDAVis, ranging from a few lines to large chunks.
+In alphabetical order.
+
+Shen Chen,
+Borries Demeler,
+José Antonio Lorenzo Fernández,
+Knut Franke,
+Vasileios Gkanis,
+Gudjon Gudjonsson,
+Tilman Hoener zu Siederdissen,
+Alex Kargovsky,
+Michael Mac-Vicar,
+Tomomasa Ohkubo,
+Aaron Van Tassle,
+Branimir Vasilic,
+Ion Vasilief,
+Vincent Wagelaar
+
+h1. Documentation
+
+The following people have written parts of the manual and/or other documentation.
+In alphabetical order.
+
+Knut Franke, Roger Gadiou, Ion Vasilief
+
+h1. Translations
+
+The following people have contributed translations or parts thereof.
+In alphabetical order.
+
+Markus Bongard,
+Tobias Burnus,
+Rémy Claverie,
+Jose Antonio Lorenzo Fernandez,
+Tilman Hoener zu Siederdissen,
+Daniel Klaer,
+Peter Landgren,
+Tomomasa Ohkubo,
+Mikhail Shevyakov
+
+h1. Special Thanks
+
+We also want to acknowledge the people having helped us indirectly by contributing to the following
+fine pieces of software. In no particular order.
+
+"Qt":http://doc.trolltech.com/4.3/credits.html,
+"Qwt":http://qwt.sourceforge.net/#credits,
+"Qwtplot3D":http://qwtplot3d.sourceforge.net/,
+"muParser":http://muparser.sourceforge.net/,
+"Python":http://www.python.org/,
+"liborigin":http://sourceforge.net/projects/liborigin/,
+"Vim":http://www.vim.org/thanks.php/,
+"webgen":http://webgen.rubyforge.org/,
+"Doxygen":http://www.doxygen.org/,
+"Subversion":http://subversion.tigris.org/,
+"GSL":http://www.gnu.org/software/gsl/
+
+... and many more we just forgot to mention.
+

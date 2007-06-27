@@ -32,6 +32,9 @@ about/roadmap.page:
 about/team.page:
    orderInfo: 5
 
+about/credits.page:
+   orderInfo: 6
+
 about/license.page:
    orderInfo: 99
 

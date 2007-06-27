@@ -5,8 +5,8 @@ inMenu: true
 
 This is a brief summary of what SciDAVis can do.
 If you are still unsure whether it meets your needs, you can also take a look at the
-"screenshots":screenshots.html or simply "download":../download.html SciDAVis and
-see for yourself!
+"screenshots":https://sourceforge.net/project/screenshots.php?group_id=199120 or simply
+"download":../download.html SciDAVis and see for yourself!
 
 * Tables, Matrices, Graphs and Notes are gathered in a Project and can be organized using folders.
 * Tables for entering data directly or importing from ASCII files.

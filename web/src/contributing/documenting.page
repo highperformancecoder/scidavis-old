@@ -3,4 +3,88 @@ title: Documenting
 inMenu: true
 ---
 
-h1. Writing Documentation or Tutorials
+h1(#writing). Writing documentation or tutorials
+
+Generally, we're pretty open with respect to topics as well as format.
+You should know however that sending in a Microsoft Word file might be easy and obvious for you,
+but means additional work for us because it needs to be converted to something suitable for
+web publishing. Also keep in mind that not everyone has Word installed and the format is
+proprietary, meaning that importing complicated files into other applications may fail.
+We prefer open formats, i.e. those not specific to one application.
+If you really want to do us a favour, use one of the following formats:
+
+h2(#textile). Textile
+
+This is the format used to generate the page you are just reading. Essentially, it boils
+down to marking things like headings, emphasis and links using some simple conventions.
+"This reference":http://hobix.com/textile explains pretty much everything you need to know
+in order to start writing. Make sure you save your text as plain text (*.txt) when
+sending it to us.
+
+Here's a short impression of how it looks like:
+
+{hlblock: {blockName: textile, highlight: plaintext}}
+
+h2(#markdown). Markdown
+
+Similar to Textile, just as easy to integrate into our website, only with slightly different
+conventions. See the
+"introduction on the Markdown homepage":http://daringfireball.net/projects/markdown/basics
+for how to use it.
+
+h2(#docbook). DocBook
+
+This one is considerably more involved than the simple formats above, but in exchanges it allows
+sophisticated documents to written that can easily be converted to HTML (for web publishing),
+PDF (for printing) or pretty much anything else. This is the format we use for our
+user's manual.
+
+More information like links to tutorials and editors pending.
+
+h2(#latex). LaTeX
+
+Very popular among scientists and easy to convert to a number of formats.
+Several implementations are available for pretty much every platform.
+If you don't know it already, see the
+"LaTeX home page":http://www.latex-project.org or
+the "TeX Users Group":http://www.tug.org.
+
+h2(#htmlpdf). HTML and PDF
+
+You can also send in HTML or PDF documents directly, although they severely limit our ability to
+update your documentation to new versions of SciDAVis and to convert it to different formats.
+(PDF makes both impossible for all practical purposes, HTML makes it tedious at best).
+Therefore, we ask you to seriously consider the other formats instead.
+
+h1(#nontext). Other forms of documentation
+
+You can also help us with non-textual forms of documentation like demo projects, screenshots
+or screencasts. If you're thinking about doing the latter, you might want to have a look
+at "Istanbul":http://live.gnome.org/Istanbul (a screencast application for Linux) and
+these "cool screencasts":http://plone.org/about/movies of the "Plone CMS":http://plone.org
+(for inspiration). For screenshots, you can use "the Gimp":http://www.gimp.org.
+
+h1(#doxygen). Documentation of the internal APIs
+
+Documenting the source code as such (using Doxygen) is covered "here":coding.html#doxygen.
+
+--- textile, html
+h1. Introduction
+
+This is my tutorial on the topic of foo bar, which is _very_ *important*.
+For some reason that will become clear later in the text, it has to do with "Google":http://google.com.
+
+h2. A table
+
+Still part of the introduction. Here's some numbers for you to ponder on:
+
+| x | y | z |
+| 1 | 3 | 7 |
+| 9 | 8 | 2 |
+
+h2. An image
+
+Introducing... the great image I've included:
+
+!great_image.png!
+

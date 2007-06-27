@@ -5,4 +5,162 @@ inMenu: true
 
 h1. Getting started
 
+If you're already familiar with C++, Qt and Doxygen, you can safely skip this section;
+although if you do have a minute, scanning it for bits you don't know yet won't hurt.
 
+h2. C++
+
+SciDAVis is written in the C++ language (not counting some lines of Python code in scidavisrc.py
+and scidavisUtil.py). This means that fixing bugs and adding sophisticated new features, i.e.
+anything not (yet) possible with Python, requires at least basic knowledge of C++.
+
+If you want to learn C++, or you're looking for a reference, here's some links that might help you:
+
+* "C++ Language Tutorial":http://www.cplusplus.com/doc/tutorial
+* "Programming Tutorials":http://www.cprogramming.com/tutorial.html (including ??C++ Made Easy??)
+* "C++ Programming Wikibook":http://en.wikibooks.org/wiki/C%2B%2B_Programming
+* "C++ FAQ Lite":http://www.parashift.com/c++-faq-lite
+* "FreeNode ##C++ Wiki":http://jcatki.no-ip.org/fncpp (read this before asking questions on the ##C++ IRC channel)
+* "&lt;/dream-in-code>":http://www.dreamincode.net (tutorials and forums)
+
+Naturally, we can't list every link for a popular topic like C++.
+Plus, there's lots and lots of books about C++ like ??Thinking in C++?? by Bruce Eckel,
+??You Can Program in C++: A Programmer's Introduction?? by Francis Glassborow
+or ??Using C++: An Introduction to Programming?? by Julien Hennefeld, Laura Baker, and Charles Burchard.
+I haven't read any of those, but they've received good ratings on Amazon.com. :-)
+
+If you're a self-learner, the above should be enough to get you going.
+If not, and books or online resources don't help, please understand that as much as we would value
+your contribution, we can't take you by the hand and teach you C++ or how to program.
+Also, if you're looking for a forum on C++ in general, asking Google for "C++ forum" will give you
+a lot to choose from.
+That said, you're welcome to ask questions, including newbie questions, directly related to developing
+SciDAVis on our mailing list.
+
+h2. Qt
+
+SciDAVis makes extensive use of the "Qt library":http://trolltech.com/products/qt library developed
+by "Trolltech":http://trolltech.com. We're using it for platform abstraction, signals and slots,
+the user interface and more; so there's hardly any part of the code you can understand
+without knowing about Qt. Luckily, Qt comes with an excellent
+"documentation":http://doc.trolltech.com/4.3/index.html (also available locally after you've
+installed Qt).
+Additionally, there's a large and active community around Qt, see for example the
+"Qt Centre":http://www.qtcentre.org or this "list of OpenSource Qt Applications":http://www.qt-apps.org.
+
+h2(#doxygen). Doxygen
+
+Documenting your code is important, both for maintaining it over any length of time and for helping
+other developers understand what you've done. We're using "Doxygen":http://www.doxygen.org to make
+this task as easy as possible. Not all of the legacy code is documented yet, but we're continually
+improving the situation and we're documenting everything we add. Obviously, any help with this is
+highly welcome. :-)
+
+As an absolute minimum, you should add short descriptions to class and method declarations as follows:
+
+{hlblock: {blockName: doxygen_short, highlight: c}}
+
+Adding some more information is often a good idea, especially when you've put a lot of thought
+into the design of an interface. Writing down what's on your mind is a lot easier for you than it is
+for others (or for yourself half a year later) to re-think everything. Here's how:
+
+{hlblock: {blockName: doxygen_long, highlight: c}}
+
+For more information on the syntax and advanced usage, please refer to the
+"Doxygen manual":http://www.stack.nl/~dimitri/doxygen/manual.html (also available locally after
+installing Doxygen).
+
+h1. Before you start
+
+Before seriously starting to work on a large improvement to SciDAVis, you should announce your
+plans on the "mailing list":https://lists.sourceforge.net/lists/listinfo/scidavis-contributors.
+This is in your own interest: someone else could already be working on your idea, or
+later start working on it without knowing about your plans, or it might be foreseeable that
+your code will be invalidated by someone else's changes. In short, you risk wasting your
+time if you don't coordinate your work with the rest of us.
+
+h1. Contributing code and joining the team
+
+If you just want to submit a bugfix or contribute the odd enhancement, submit your patch
+"here":https://sourceforge.net/tracker/?group_id=199120&atid=968216.
+Either you have an IDE or graphical diff tool for this, or
+(for Linux, possibly also MacOS X and "cygwin":http://cygwin.com/) you
+do
+
+{hlblock: {blockName: patch_generation, highlight: plaintext}}
+
+in a terminal. This means you have to keep around a copy of the unchanged file or directory.
+It's easier when you're checking out the source from our
+"subversion repository":https://sourceforge.net/svn/?group_id=199120,
+which has the additional benefit that it contains the changes we made since the last release.
+That is, before you start, you do
+
+{hlblock: {blockName: svnco, highlight: plaintext}}
+
+then you do your changes, finally generating the patch as follows:
+
+{hlblock: {blockName: patch_generation_svn, highlight: plaintext}}
+
+If you're planning to contribute on a regular basis and you'd like to join the team, please
+understand that we want to get to know you and your work before granting you write access
+to the repository. Everything we have is publicly readable, so you can work on anything
+you want without being an "official" project member. The only difference is that you send your
+changes via the "patch tracker":https://sourceforge.net/tracker/?group_id=199120&atid=968216
+instead of checking them in via subversion.
+
+If you object to your code being reviewed, you should think twice about whether you really want to
+join the project. We encourage everyone to read everybody else's
+changes as a way of improving overall code quality. In the science community, this
+is known as "peer review". Becoming an "official" member simply means that your
+changes are reviewed after submission instead of before.
+
+Introduce yourself and your plans on the
+"mailing list":https://lists.sourceforge.net/lists/listinfo/scidavis-contributors,
+possibly also announcing your wish to join your project.
+If you're contributing regularly, respecting the few
+"coding rules":http://scidavis.sourceforge.net/contributing/API/style.html
+we have and not blatantly misbehaving, at some point we'll ask you for your
+SourceForge.net user name and give you write access to the repository.
+In case we forget about this, send us a short reminder -- just don't do it
+after every patch you send. Having you send in everything via the patch
+tracker is more work for us than it is for you, so chances are we won't forget.
+
+--- doxygen_short, html
+//! A computer built by pan-dimensional, hyper-intelligent beings known to men as mice.
+class DeepThought
+{
+public:
+	//! Return the ultimate answer to life, the universe and everything.
+	int calculateAnswer() const {
+		sleep(7.5e6*365*24*60*60);
+		return 42;
+	}
+};
+
+--- doxygen_long, html
+//! A computer built by pan-dimensional, hyper-intelligent beings known to men as mice.
+/**
+ * Here's where you can elaborate on the usage and design ideas of your class, provide
+ * usage examples etc.
+ */
+class DeepThought
+{
+public:
+	//! Return the ultimate answer to life, the universe and everything.
+	/**
+	 * Additional information about the method, its arguments and its return value.
+	 */
+	int calculateAnswer() const {
+		sleep(7.5e6*365*24*60*60);
+		return 42;
+	}
+};
+
+--- patch_generation, html
+diff -uNr file-or-dir.orig file-or-dir.changed > your.patch
+
+--- patch_generation_svn, html
+svn diff > your.patch
+
+--- svnco, html
+svn co https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis
