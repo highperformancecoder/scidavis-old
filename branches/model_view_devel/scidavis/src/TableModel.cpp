@@ -92,11 +92,15 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 			{
 				if(col_ptr->asDataSource()->isInvalid(index.row()))
 					return QVariant(tr("invalid","string for invalid rows"));
-
+				
 				AbstractFilter * out_fltr = outputFilter(index.column());
 				out_fltr->input(0, col_ptr->asDataSource());
 				AbstractStringDataSource * sds = dynamic_cast<AbstractStringDataSource *>(out_fltr->output(0));
 				if(!sds) return QVariant();
+				// TODO: remove testing code that shows selection by []
+				if( col_ptr->asDataSource()->isSelected(index.row()) && role != Qt::EditRole)
+					return QVariant(QString("[" + sds->textAt(index.row()) + "]"));
+
 				return QVariant(sds->textAt(index.row()));
 			}
 		case Qt::BackgroundRole:

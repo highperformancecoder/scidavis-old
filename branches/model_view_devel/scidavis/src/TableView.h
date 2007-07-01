@@ -67,6 +67,8 @@ protected slots:
 	void advanceCell();
 	//! Cause a repaint of the header
 	void updateHeaderGeometry(Qt::Orientation o, int first, int last);
+	//! Selection change handler
+	void selectionChanged(const QItemSelection & selected, const QItemSelection & deselected );
 
 protected:
 	//! Pointer to the item delegate

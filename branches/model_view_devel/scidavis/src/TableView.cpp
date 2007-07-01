@@ -49,6 +49,8 @@
 #include <QSize>
 #include <QFontMetrics>
 #include <QFont>
+#include <QItemSelectionModel>
+#include <QItemSelection>
 
 //! Internal class for TableView
 class AutoResizeHHeader : public QHeaderView
@@ -85,6 +87,7 @@ TableView::TableView(QWidget * parent, TableModel * model )
 	connect(d_model, SIGNAL(headerDataChanged(Qt::Orientation,int,int)), this, SLOT(updateHeaderGeometry(Qt::Orientation,int,int)) ); 
 
     setContextMenuPolicy(Qt::DefaultContextMenu);
+
 }
 	
 void TableView::updateHeaderGeometry(Qt::Orientation o, int first, int last)
@@ -158,3 +161,28 @@ void TableView::advanceCell()
 	setCurrentIndex(idx.sibling(idx.row()+1, idx.column()));
 }
 
+void TableView::selectionChanged(const QItemSelection & selected, const QItemSelection & deselected )
+{
+	int left, right, top, bottom, i, col;
+	for(i=0; i<selected.size(); i++)
+	{
+		QItemSelectionRange range = selected.at(i);
+		left = range.left();
+		right = range.right();
+		top = range.top();
+		bottom = range.bottom();
+		for(col=left; col<=right; col++)
+			d_model->columnPointer(col)->setSelected(Interval<int>(top, bottom));
+	}
+	for(i=0; i<deselected.size(); i++)
+	{
+		QItemSelectionRange range = deselected.at(i);
+		left = range.left();
+		right = range.right();
+		top = range.top();
+		bottom = range.bottom();
+		for(col=left; col<=right; col++)
+			d_model->columnPointer(col)->setSelected(Interval<int>(top, bottom), false);
+	}
+	QTableView::selectionChanged(selected, deselected);
+}
