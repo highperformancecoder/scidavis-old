@@ -187,6 +187,9 @@ template<class T> class IntervalAttribute
 template<> class IntervalAttribute<bool>
 {
 	public:
+		IntervalAttribute<bool>() {}
+		IntervalAttribute<bool>(QList< Interval<int> > intervals) : d_intervals(intervals) {}
+
 		void setValue(Interval<int> i, bool value=true) 
 		{
 			if(value) 

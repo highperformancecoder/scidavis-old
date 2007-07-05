@@ -30,10 +30,13 @@
 #include <QUndoCommand>
 #include <QAbstractItemModel>
 #include <QModelIndex>
+#include <QItemSelection>
 class TableModel;
 #include "AbstractDataSource.h"
 #include "AbstractColumnData.h"
+#include "StringColumnData.h"
 #include "AbstractFilter.h"
+#include "IntervalAttribute.h"
 
 ///////////////////////////////////////////////////////////////////////////
 // class TableShowCommentsCmd
@@ -215,7 +218,7 @@ private:
 ///////////////////////////////////////////////////////////////////////////
 // class TableAppendRowsCmd
 ///////////////////////////////////////////////////////////////////////////
-//! Handles user input
+//! Append rows
 class TableAppendRowsCmd : public QUndoCommand
 {
 public:
@@ -236,4 +239,194 @@ private:
 // end of class TableAppendRowsCmd
 ///////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////
+// class TableRemoveRowsCmd
+///////////////////////////////////////////////////////////////////////////
+//! Remove rows
+class TableRemoveRowsCmd : public QUndoCommand
+{
+public:
+	TableRemoveRowsCmd( TableModel * model, int first, int count, QUndoCommand * parent = 0 );
+	~TableRemoveRowsCmd();
+
+	virtual void redo();
+	virtual void undo();
+
+private:
+	//! The model to modify
+	TableModel * d_model;
+	//! The first row
+	int d_first;
+	//! The number of rows to be removed
+	int d_count;
+	//! Columns saving the removed rows
+	QList<AbstractColumnData *> d_old_cols;
+};
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableRemoveRowsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableRemoveColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+//! Remove columns
+class TableRemoveColumnsCmd : public QUndoCommand
+{
+public:
+	TableRemoveColumnsCmd( TableModel * model, int first, int count, QUndoCommand * parent = 0 );
+	~TableRemoveColumnsCmd();
+
+	virtual void redo();
+	virtual void undo();
+
+private:
+	//! The model to modify
+	TableModel * d_model;
+	//! The first column
+	int d_first;
+	//! The number of columns to be removed
+	int d_count;
+	//! The removed columns
+	QList<AbstractColumnData *> d_old_cols;
+	//! The removed input filters
+	QList<AbstractFilter *> d_in_filters;
+	//! The removed output filters
+	QList<AbstractFilter *> d_out_filters;
+};
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableRemoveColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableInsertRowsCmd
+///////////////////////////////////////////////////////////////////////////
+//! Insert rows
+class TableInsertRowsCmd : public QUndoCommand
+{
+public:
+	TableInsertRowsCmd( TableModel * model, int before, int count, QUndoCommand * parent = 0 );
+	~TableInsertRowsCmd();
+
+	virtual void redo();
+	virtual void undo();
+
+private:
+	//! The model to modify
+	TableModel * d_model;
+	//! Row to insert before
+	int d_before;
+	//! Number of rows
+	int d_count;
+};
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableInsertRowsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableAppendColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+//! Append columns
+class TableAppendColumnsCmd : public QUndoCommand
+{
+public:
+	TableAppendColumnsCmd( TableModel * model, QList<AbstractColumnData *> cols,
+		QList<AbstractFilter *> in_filters, QList<AbstractFilter *> out_filters, QUndoCommand * parent = 0 );
+	~TableAppendColumnsCmd();
+
+	virtual void redo();
+	virtual void undo();
+
+private:
+	//! The model to modify
+	TableModel * d_model;
+	//! The new columns
+	QList<AbstractColumnData *> d_cols;
+	//! The input filters
+	QList<AbstractFilter *> d_in_filters;
+	//! The output filters
+	QList<AbstractFilter *> d_out_filters;
+};
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableAppendColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableInsertColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+//! Insert columns
+class TableInsertColumnsCmd : public QUndoCommand
+{
+public:
+	TableInsertColumnsCmd( TableModel * model, int before, QList<AbstractColumnData *> cols,
+		QList<AbstractFilter *> in_filters, QList<AbstractFilter *> out_filters, QUndoCommand * parent = 0 );
+	~TableInsertColumnsCmd();
+
+	virtual void redo();
+	virtual void undo();
+
+private:
+	//! The model to modify
+	TableModel * d_model;
+	//! Column to insert before
+	int d_before;
+	//! The new columns
+	QList<AbstractColumnData *> d_cols;
+	//! The input filters
+	QList<AbstractFilter *> d_in_filters;
+	//! The output filters
+	QList<AbstractFilter *> d_out_filters;
+};
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableInsertColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableSetColumnValuesCmd
+///////////////////////////////////////////////////////////////////////////
+//! Set column values from a string list
+/**
+ * Make sure data contains at least one string. 
+ * The input filter must be a filter that converts
+ * from string to the type of the corresponding
+ * column. The output filter must be a filter that 
+ * converts from the type of the corresponding
+ * column to string.
+ */
+class TableSetColumnValuesCmd : public QUndoCommand
+{
+public:
+	TableSetColumnValuesCmd( TableModel * model, int col, const QStringList& data, QUndoCommand * parent = 0 );
+	~TableSetColumnValuesCmd();
+
+	virtual void redo();
+	virtual void undo();
+
+private:
+	//! The model to modify
+	TableModel * d_model;
+	//! The changed column's index
+	int d_col;
+	//! Pointer to the column to be changed
+	AbstractColumnData * d_col_ptr;
+	//! The input filter
+	AbstractFilter * d_in;
+	//! The output filter
+	AbstractFilter * d_out;
+	//! The data as strings
+	StringColumnData * d_data;	
+	//! The data that gets replaced
+	StringColumnData * d_backup;
+	//! The selection
+	IntervalAttribute<bool> * d_selection;
+
+};
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableSetColumnValuesCmd
+///////////////////////////////////////////////////////////////////////////
 

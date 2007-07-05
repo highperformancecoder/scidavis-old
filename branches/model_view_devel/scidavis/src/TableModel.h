@@ -112,7 +112,8 @@ public:
 	 * Input filters must be filters that convert
 	 * from string to the type of the corresponding
 	 * column. Input filters are automatically
-	 * deleted when replaced.
+	 * deleted when replaced. Each column needs its
+	 * own filter object.
 	 */
 	void setInputFilter(int col, AbstractFilter * filter);
 	//! Set the output filter for column 'col'
@@ -131,7 +132,7 @@ public:
 	 * This does not delete the replaced column!
 	 */
 	void replaceColumn(int col, AbstractColumnData * new_col);
-	//! Insert columns before column number 'first'
+	//! Insert columns before column number 'before'
 	/**
 	 * If 'first' is higher than (current number of columns -1),
 	 * the columns will be appended.
@@ -139,7 +140,7 @@ public:
 	 * \param cols a list of column data objects
 	 * \param before index of the column to insert before
 	 */
-	void insertColumns(QList<AbstractColumnData *> cols, int first);
+	void insertColumns(QList<AbstractColumnData *> cols, int before);
 	//! Remove Columns
 	 /**
 	  * This does not delete the removed columns because this

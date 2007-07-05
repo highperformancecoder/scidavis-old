@@ -80,14 +80,17 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 	if(!col_ptr)
 		return QVariant();
 
+	QString postfix;
 	switch(role)
 	{
+		case Qt::ToolTipRole:
+				if(col_ptr->asDataSource()->isMasked(index.row()))
+					postfix = " " + tr("(masked)");
+				if(col_ptr->asDataSource()->isInvalid(index.row()))
+					return QVariant(tr("invalid cell","tooltip string for invalid rows") + postfix);
 		case Qt::EditRole:
 				if(col_ptr->asDataSource()->isInvalid(index.row()))
 					return QVariant();
-		case Qt::ToolTipRole:
-				if(col_ptr->asDataSource()->isInvalid(index.row()))
-					return QVariant(tr("invalid cell","tooltip string for invalid rows"));
 		case Qt::DisplayRole:
 			{
 				if(col_ptr->asDataSource()->isInvalid(index.row()))
@@ -97,17 +100,28 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 				out_fltr->input(0, col_ptr->asDataSource());
 				AbstractStringDataSource * sds = dynamic_cast<AbstractStringDataSource *>(out_fltr->output(0));
 				if(!sds) return QVariant();
-				// TODO: remove testing code that shows selection by []
+				// TODO: remove testing code that marks selected cells with []
 				if( col_ptr->asDataSource()->isSelected(index.row()) && role != Qt::EditRole)
 					return QVariant(QString("[" + sds->textAt(index.row()) + "]"));
 
-				return QVariant(sds->textAt(index.row()));
+				return QVariant(sds->textAt(index.row()) + postfix);
 			}
 		case Qt::BackgroundRole:
 			{
 				// masked cells are displayed as hatched
+				// TODO: this is not an optimal solution
+				// since you cannot see the masking in 
+				// selected cells
+				//if(col_ptr->asDataSource()->isMasked(index.row()))
+				//	return QVariant(QBrush(d_masking_color, Qt::BDiagPattern));
+				break;
+			}
+		case Qt::DecorationRole:
+			{
+				// TODO: see if this is a good solution
+				// to mark masked cells
 				if(col_ptr->asDataSource()->isMasked(index.row()))
-					return QVariant(QBrush(d_masking_color, Qt::BDiagPattern));
+					return QVariant(QColor(d_masking_color));
 				break;
 			}
 		case Qt::ForegroundRole:
@@ -248,17 +262,17 @@ void TableModel::emitDataChanged(int top, int left, int bottom, int right)
 	emit dataChanged(index(top, left, QModelIndex()), index(bottom, right, QModelIndex()));
 }
 
-void TableModel::insertColumns(QList<AbstractColumnData *> cols, int first)
+void TableModel::insertColumns(QList<AbstractColumnData *> cols, int before)
 {
 	int count = cols.count();
 
 	if(count < 1) 
 		return;
 
-	if(first < 0)
-		first = 0;
-	if(first > d_column_count)
-		first = d_column_count;
+	if(before < 0)
+		before = 0;
+	if(before > d_column_count)
+		before = d_column_count;
 
 	int i, rows;
 	for(i=0; i<count; i++)
@@ -268,15 +282,15 @@ void TableModel::insertColumns(QList<AbstractColumnData *> cols, int first)
 			appendRows(rows-d_row_count); // append rows to resize table
 	}
 
-	beginInsertColumns(QModelIndex(), first, first+count-1);
+	beginInsertColumns(QModelIndex(), before, before+count-1);
 	for(int i=count-1; i>=0; i--)
 	{
-		d_columns.insert(first, cols.at(i));
-		d_input_filters.insert(first, 0);
-		d_output_filters.insert(first, 0);
+		d_columns.insert(before, cols.at(i));
+		d_input_filters.insert(before, 0);
+		d_output_filters.insert(before, 0);
 	}
 	d_column_count += count;
-	updateHorizontalHeader(first, first+count-1);
+	updateHorizontalHeader(before, before+count-1);
 	endInsertColumns();	
 }
 

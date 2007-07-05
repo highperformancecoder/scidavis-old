@@ -32,7 +32,9 @@
 #include "StringColumnData.h"
 #include "DoubleColumnData.h"
 #include "DateTimeColumnData.h"
+#include "Interval.h"
 #include <QObject>
+#include <QtDebug>
 
 ///////////////////////////////////////////////////////////////////////////
 // class TableShowCommentsCmd
@@ -239,6 +241,7 @@ TableAppendRowsCmd::TableAppendRowsCmd( TableModel * model, int count, QUndoComm
 {
 	setText(QObject::tr("append rows"));
 }
+
 TableAppendRowsCmd::~TableAppendRowsCmd()
 {
 }
@@ -257,6 +260,348 @@ void TableAppendRowsCmd::undo()
 // end of class TableAppendRowsCmd
 ///////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////
+// class TableRemoveRowsCmd
+///////////////////////////////////////////////////////////////////////////
+TableRemoveRowsCmd::TableRemoveRowsCmd( TableModel * model, int first, int count, QUndoCommand * parent )
+ : QUndoCommand( parent ), d_model(model), d_first(first), d_count(count)
+{
+	setText(QObject::tr("remove rows"));
+}
+
+TableRemoveRowsCmd::~TableRemoveRowsCmd()
+{
+	for(int i=0; i<d_old_cols.size(); i++)
+		delete d_old_cols.at(i);
+}
+
+void TableRemoveRowsCmd::redo()
+{
+	int cols = d_model->columnCount();
+	if(d_old_cols.size() == 0) // no previous undo
+		for(int i=0; i<cols; i++)
+		{
+			AbstractDataSource * src = d_model->output(i);
+			if(qobject_cast<AbstractDoubleDataSource *>(src))
+			{
+				d_old_cols.append(new DoubleColumnData());
+			}
+			else if(qobject_cast<AbstractStringDataSource *>(src))
+			{
+				d_old_cols.append(new StringColumnData());
+			}
+			else
+			{
+				d_old_cols.append(new DateTimeColumnData());
+			}
+			d_old_cols.at(i)->copy(src, d_first, 0, d_count);
+			
+			// copy masking 
+			QList< Interval<int> > masking = src->maskedIntervals();
+			Interval<int>::restrictList(&masking, Interval<int>(d_first, d_first + d_count -1));
+			foreach(Interval<int> mask_iv, masking)
+			{	
+				mask_iv.translate(-d_first);
+				d_old_cols.at(i)->setMasked( mask_iv );
+			}
+
+			// copy formulas
+			AbstractColumnData * fsrc = d_model->columnPointer(i);
+			QList< Interval<int> > formula_ivs = fsrc->formulaIntervals();
+			Interval<int>::restrictList(&formula_ivs, Interval<int>(d_first, d_first + d_count -1));
+	 		foreach(Interval<int> fiv, formula_ivs)
+			{
+				QString formula = fsrc->formula(fiv.start());
+				fiv.translate(-d_first);
+				d_old_cols.at(i)->setFormula( fiv, formula );
+			}
+		} // end for all cols
+
+	d_model->removeRows(d_first, d_count);
+}
+
+void TableRemoveRowsCmd::undo()
+{
+	d_model->insertRows(d_first, d_count);
+
+	int cols = d_model->columnCount();
+	for(int i=0; i<cols; i++)
+	{
+		AbstractDataSource * src = d_old_cols.at(i)->asDataSource();
+		AbstractColumnData * dest = d_model->columnPointer(i);
+		dest->copy(src, 0, d_first, d_count);
+
+		// copy masking 
+		QList< Interval<int> > masking = src->maskedIntervals();
+		foreach(Interval<int> mask_iv, masking)
+		{	
+			mask_iv.translate(d_first);
+			dest->setMasked( mask_iv );
+		}
+
+		// copy formulas
+		AbstractColumnData * fsrc = d_old_cols.at(i);
+		QList< Interval<int> > formula_ivs = fsrc->formulaIntervals();
+		foreach(Interval<int> fiv, formula_ivs)
+		{
+			QString formula = fsrc->formula(fiv.start());
+			fiv.translate(d_first);
+			dest->setFormula( fiv, formula );
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableRemoveRowsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableRemoveColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+TableRemoveColumnsCmd::TableRemoveColumnsCmd( TableModel * model, int first, int count, QUndoCommand * parent )
+ : QUndoCommand( parent ), d_model(model), d_first(first), d_count(count)
+{
+	setText(QObject::tr("remove columns"));
+}
+
+TableRemoveColumnsCmd::~TableRemoveColumnsCmd()
+{
+	for(int i=0; i<d_old_cols.size(); i++)
+	{
+		delete d_old_cols.at(i);
+		delete d_in_filters.at(i);
+		delete d_out_filters.at(i);
+	}
+}
+
+void TableRemoveColumnsCmd::redo()
+{
+	for(int i=d_first; i<(d_first+d_count); i++)
+	{
+		d_old_cols.append(d_model->columnPointer(i));
+		d_in_filters.append(d_model->inputFilter(i));
+		d_out_filters.append(d_model->outputFilter(i));
+	}
+
+	d_model->removeColumns(d_first, d_count);
+}
+
+void TableRemoveColumnsCmd::undo()
+{
+	d_model->insertColumns(d_old_cols, d_first);
+	for(int i=0; i<d_count; i++)
+	{
+		d_model->setInputFilter(d_first +i, d_in_filters.at(i));
+		d_model->setOutputFilter(d_first +i, d_out_filters.at(i));
+	}
+	d_old_cols.clear();
+	d_in_filters.clear();
+	d_out_filters.clear();
+}
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableRemoveColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableInsertRowsCmd
+///////////////////////////////////////////////////////////////////////////
+TableInsertRowsCmd::TableInsertRowsCmd( TableModel * model, int before, int count, QUndoCommand * parent )
+ : QUndoCommand( parent ), d_model(model), d_before(before), d_count(count)
+{
+	setText(QObject::tr("insert rows"));
+}
+
+TableInsertRowsCmd::~TableInsertRowsCmd()
+{
+}
+
+void TableInsertRowsCmd::redo()
+{
+	d_model->insertRows(d_before, d_count);
+}
+
+void TableInsertRowsCmd::undo()
+{
+	d_model->removeRows(d_before, d_count);
+}
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableInsertRowsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableAppendColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+TableAppendColumnsCmd::TableAppendColumnsCmd( TableModel * model, QList<AbstractColumnData *> cols,
+		QList<AbstractFilter *> in_filters, QList<AbstractFilter *> out_filters, QUndoCommand * parent)
+ : QUndoCommand( parent ), d_model(model), d_cols(cols), d_in_filters(in_filters), d_out_filters(out_filters)
+{
+	setText(QObject::tr("append columns"));
+}
+
+TableAppendColumnsCmd::~TableAppendColumnsCmd()
+{
+}
+
+void TableAppendColumnsCmd::redo()
+{
+	int old_size = d_model->columnCount();
+	d_model->appendColumns(d_cols);
+	int new_size = d_model->columnCount();
+	for(int i=old_size; i<new_size; i++)
+	{
+		d_model->setInputFilter(i, d_in_filters.at(i - old_size));
+		d_model->setOutputFilter(i, d_out_filters.at(i - old_size));
+	}
+}
+
+void TableAppendColumnsCmd::undo()
+{
+	d_model->removeColumns(d_model->columnCount()-d_cols.size(), d_cols.size());
+}
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableAppendColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableInsertColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+TableInsertColumnsCmd::TableInsertColumnsCmd( TableModel * model, int before, QList<AbstractColumnData *> cols,
+		QList<AbstractFilter *> in_filters, QList<AbstractFilter *> out_filters, QUndoCommand * parent)
+ : QUndoCommand( parent ), d_model(model), d_before(before), d_cols(cols), d_in_filters(in_filters), d_out_filters(out_filters)
+{
+	setText(QObject::tr("insert columns"));
+}
+
+TableInsertColumnsCmd::~TableInsertColumnsCmd()
+{
+}
+
+void TableInsertColumnsCmd::redo()
+{
+	int count = d_cols.size();
+	d_model->insertColumns(d_cols, d_before);
+	for(int i=0; i<count; i++)
+	{
+		d_model->setInputFilter(d_before + i, d_in_filters.at(i));
+		d_model->setOutputFilter(d_before + i, d_out_filters.at(i));
+	}
+}
+
+void TableInsertColumnsCmd::undo()
+{
+	d_model->removeColumns(d_before, d_cols.size());
+}
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableInsertColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableSetColumnValuesCmd
+///////////////////////////////////////////////////////////////////////////
+TableSetColumnValuesCmd::TableSetColumnValuesCmd( TableModel * model, int col, 
+	const QStringList& data, QUndoCommand * parent )
+ : QUndoCommand( parent ), d_model(model), d_col(col)
+{
+	d_data = new StringColumnData(data);
+	d_backup = new StringColumnData();
+	setText(QObject::tr("set column values"));
+}
+
+TableSetColumnValuesCmd::~TableSetColumnValuesCmd()
+{
+	delete d_data;
+	delete d_backup;
+	delete d_selection;
+}
+
+void TableSetColumnValuesCmd::redo()
+{
+	int strings = d_data->numRows();
+	int index = 0; // index in the string list
+	int rows = d_model->rowCount();
+
+	if(d_backup->numRows() > 0)  // after previous undo
+	{
+		// prepare input filter
+		d_in->input(0, d_data);
+		AbstractDataSource * src = d_in->output(0);
+
+		for(int i=0; i<rows; i++)
+		{
+			if(d_selection->isSet(i))
+			{
+				d_col_ptr->copy(src, index, i, 1);  
+				index++;
+				if(index >= strings) index = 0; // wrap around in the string array
+			}
+		}
+	}
+	else
+	{
+		d_col_ptr = d_model->columnPointer(d_col);
+		d_in = d_model->inputFilter(d_col);
+		d_out = d_model->outputFilter(d_col);
+
+		// store the selection intervals in a internal interval attribute
+		d_selection = new IntervalAttribute<bool>(d_col_ptr->asDataSource()->selectedIntervals());
+
+		// prepare output filter
+		d_out->input(0, d_col_ptr->asDataSource());
+		AbstractStringDataSource * sds = static_cast<AbstractStringDataSource *>(d_out->output(0));
+
+		// prepare input filter
+		d_in->input(0, d_data);
+		AbstractDataSource * src = d_in->output(0);
+
+		for(int i=0; i<rows; i++)
+		{
+			if(d_selection->isSet(i))
+			{
+				d_backup->append(sds->textAt(i));
+				d_col_ptr->copy(src, index, i, 1);  
+				index++;
+				if(index >= strings) index = 0; // wrap around in the string array
+			}
+		}
+	}
+
+	// notify the view of the data change
+	QList< Interval<int> > intervals = d_selection->intervals();
+	foreach(Interval<int> iv, intervals)
+		d_model->emitDataChanged(iv.start(), d_col, iv.end(), d_col);
+}
+
+void TableSetColumnValuesCmd::undo()
+{
+	int rows = d_col_ptr->asDataSource()->numRows();
+	int index = 0; // index in the string list
+
+	// prepare input filter
+	d_in->input(0, d_backup);
+	AbstractDataSource * src = d_in->output(0);
+
+	for(int i=0; i<rows; i++)
+	{
+		if(d_selection->isSet(i))
+		{
+			d_col_ptr->copy(src, index, i, 1);  
+			index++;
+		}
+	}
+
+	// notify the view of the data change
+	QList< Interval<int> > intervals = d_selection->intervals();
+	foreach(Interval<int> iv, intervals)
+		d_model->emitDataChanged(iv.start(), d_col, iv.end(), d_col);
+}
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableSetColumnValuesCmd
+///////////////////////////////////////////////////////////////////////////
 
 
 

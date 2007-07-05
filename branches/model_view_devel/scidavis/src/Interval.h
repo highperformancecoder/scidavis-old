@@ -33,6 +33,7 @@
 
 #include <QList>
 #include <QString>
+#include <QtGlobal>
 
 // forward declaration
 template<class T> class Interval;
@@ -57,6 +58,14 @@ template<class T> class IntervalBase
 		bool contains(const Interval<T>& other) const { return ( d_start <= other.start() && d_end >= other.end() ); }
 		bool contains(T value) const { return ( d_start <= value && d_end >= value ); }
 		bool intersects(const Interval<T>& other) const { return ( contains(other.start()) || contains(other.end()) ); }
+		//! Return the intersection of two intervals
+		/**
+		 * This function returns an invalid interval if the two intervals do not intersect.
+		 */
+		static Interval<T> intersection(const Interval<T>& first, const Interval<T>& second) 
+		{ 
+			return Interval<T>( qMax(first.start(), second.start()), qMin(first.end(), second.end()) ); 
+		}
 		void translate(T offset) { d_start += offset; d_end += offset; }
 		bool operator==(const Interval<T>& other) const { return ( d_start == other.start() && d_end == other.end() ); }
 		Interval<T>& operator=(const Interval<T>& other) {
@@ -112,7 +121,7 @@ template<class T> class IntervalBase
 		//! Merge an interval into a list
 		/*
 		 * This function merges all intervals in the list until none of them
-		 * intersect of touch anymore.
+		 * intersect or touch anymore.
 		 */
 		static void mergeIntervalIntoList(QList< Interval<T> > * list, Interval<T> i) {
 			for(int c=0; c<list->size(); c++)
@@ -126,7 +135,24 @@ template<class T> class IntervalBase
 			}
 			list->append(i);
 		}
-		//! Substact an interval from all intervals in the list
+		//! Restrict all intervals in the list to their intersection with a given interval
+		/**
+		 * Remark: This may decrease the list size.
+		 */
+		static void restrictList(QList< Interval<T> > * list, Interval<T> i) 
+		{
+			Interval<T> temp;
+			for(int c=0; c<list->size(); c++)
+			{
+				temp = intersection(list->at(c), i);
+				if(!temp.isValid())
+					list->removeAt(c--);
+				else
+					list->replace(c, temp);
+			}
+			
+		}
+		//! Subtract an interval from all intervals in the list
 		/**
 		 * Remark: This may increase or decrease the list size.
 		 */
