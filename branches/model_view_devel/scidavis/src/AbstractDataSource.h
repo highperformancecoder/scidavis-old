@@ -152,9 +152,13 @@ signals:
 	void dataAboutToChange(AbstractDataSource * source); 
 	//! Data (including validity) of the column has changed
 	/**
+	 * Important: When data has changed also the number
+	 * of rows in the column may have increased without
+	 * any other signal emission.
 	 * 'source' is always the this pointer of the column that
 	 * emitted this signal. This way it's easier to use
 	 * one handler for lots of columns.
+	 * \sa AbstractColumnData::expand()
 	 */
 	void dataChanged(AbstractDataSource * source); 
 	//! The column will be replaced

@@ -105,8 +105,17 @@ public:
 	 * \param num_rows the number of rows to copy
 	 */ 
 	virtual bool copy(const AbstractDataSource * source, int source_start, int dest_start, int num_rows) = 0;
-	//! Resize the data vector
-	virtual void setNumRows(int new_size) = 0;
+	//! Expand the vector by the specified number of rows
+	/**
+	 * Since selecting and masking rows higher than the
+	 * real internal number of rows is supported, this
+	 * does not change the interval attributes. Also
+	 * no signal is emitted. If the new rows are filled
+	 * with values AbstractDataSource::dataChanged()
+	 * must be emitted.
+	 * \sa AbstractDataSource::dataChanged()
+	 */
+	virtual void expand(int new_rows) = 0;
 	//! Set the column label
 	virtual void setLabel(const QString& label) = 0; 
 	//! Set the column comment

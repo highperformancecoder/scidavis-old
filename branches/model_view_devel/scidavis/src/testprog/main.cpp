@@ -1,3 +1,4 @@
+#include <QTimer>
 #include "testwrapper.h"
 
 
@@ -10,12 +11,12 @@ int main(int argc, char **argv)
 	QHBoxLayout lo(&mw);
 
 	TableViewTestWrapper tw(0, new TableModel(&mw));
-	tw.resize(800,400);
+//	tw.resize(800,400);
 	QUndoView uw(tw.undo_stack, &mw);
-	uw.resize(200,400);
-	lo.addWidget(&tw);
+//	uw.resize(200,400);
+	lo.addWidget(&tw,1);
 	lo.addWidget(&uw);
-	mw.show();
+	mw.showMaximized();
 	tw.show();
 
 	a.exec();

@@ -45,9 +45,18 @@ bool StringColumnData::copy(const AbstractDataSource * other)
 	if (!other_as_string) return false;
 
 	int count = other_as_string->numRows();
-	setNumRows(count);
 
-	emit dataAboutToChange(this);
+	if(count > numRows())
+	{
+		emit dataAboutToChange(this);
+		expand(count - numRows()); 
+	}
+	else
+	{
+		removeRows(count, numRows() - count);
+		emit dataAboutToChange(this);
+	}
+
 	for(int i=0; i<count; i++)
 	{
 		replace(i, other_as_string->textAt(i));
@@ -62,10 +71,10 @@ bool StringColumnData::copy(const AbstractDataSource * source, int source_start,
 	const AbstractStringDataSource *source_as_string = qobject_cast<const AbstractStringDataSource*>(source);
 	if (!source_as_string) return false;
 
-	if (dest_start + num_rows > numRows())
-		setNumRows(dest_start + num_rows);
-
 	emit dataAboutToChange(this);
+	if (dest_start + num_rows > numRows())
+		expand(dest_start + num_rows - numRows());
+
 	for(int i=0; i<num_rows; i++)
 	{
 		replace(dest_start+i, source_as_string->textAt(source_start+i));
@@ -121,34 +130,13 @@ void StringColumnData::notifyReplacement(AbstractDataSource * replacement)
 	emit aboutToBeReplaced(this, replacement); 
 }
 
-void StringColumnData::setNumRows(int new_size)
+void StringColumnData::expand(int new_rows)
 {
-	int old_size = numRows();
-	int count = new_size - old_size;
-	if(count == 0) return;
-
-	if(count > 0)
-	{
-		emit rowsAboutToBeInserted(this, old_size, count);
-		for(int i=0; i<count; i++)
-			*this << QString();
-		d_validity.insertRows(old_size, count);
-		d_selection.insertRows(old_size, count);
-		d_masking.insertRows(old_size, count);
-		d_formulas.insertRows(old_size, count);
-		emit rowsInserted(this, old_size, count);
-	}
-	else // count < 0
-	{
-		emit rowsAboutToBeDeleted(this, new_size, -count);
-		for(int i=0; i>count; i--)
-			removeLast();
-		d_validity.removeRows(new_size, -count);
-		d_selection.removeRows(new_size, -count);
-		d_masking.removeRows(new_size, -count);
-		d_formulas.removeRows(new_size, -count);
-		emit rowsDeleted(this, new_size, -count);
-	}
+	for(int i=0; i<new_rows; i++)
+		*this << QString();
+	// Remark: this does not change the logical
+	// number of rows, therefore no changes
+	// to the interval attributes here
 }
 
 void StringColumnData::insertEmptyRows(int before, int count)

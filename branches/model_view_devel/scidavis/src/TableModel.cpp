@@ -76,35 +76,38 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 	if( !index.isValid() )
 		return QVariant();
 	
-	AbstractColumnData * col_ptr = d_columns.value(index.column());
+	int row = index.row();
+	int column = index.column();
+	AbstractColumnData * col_ptr = d_columns.value(column);
 	if(!col_ptr)
 		return QVariant();
+	AbstractDataSource * col_src = col_ptr->asDataSource();
 
 	QString postfix;
 	switch(role)
 	{
 		case Qt::ToolTipRole:
-				if(col_ptr->asDataSource()->isMasked(index.row()))
+				if(col_src->isMasked(row))
 					postfix = " " + tr("(masked)");
-				if(col_ptr->asDataSource()->isInvalid(index.row()))
+				if(col_src->isInvalid(row))
 					return QVariant(tr("invalid cell","tooltip string for invalid rows") + postfix);
 		case Qt::EditRole:
-				if(col_ptr->asDataSource()->isInvalid(index.row()))
+				if(col_src->isInvalid(row))
 					return QVariant();
 		case Qt::DisplayRole:
 			{
-				if(col_ptr->asDataSource()->isInvalid(index.row()))
+				if(col_src->isInvalid(row))
 					return QVariant(tr("invalid","string for invalid rows"));
 				
-				AbstractFilter * out_fltr = outputFilter(index.column());
-				out_fltr->input(0, col_ptr->asDataSource());
+				AbstractFilter * out_fltr = outputFilter(column);
+				out_fltr->input(0, col_src);
 				AbstractStringDataSource * sds = dynamic_cast<AbstractStringDataSource *>(out_fltr->output(0));
 				if(!sds) return QVariant();
 				// TODO: remove testing code that marks selected cells with []
-				if( col_ptr->asDataSource()->isSelected(index.row()) && role != Qt::EditRole)
+				if( col_src->isSelected(row) && role != Qt::EditRole)
 					return QVariant(QString("[" + sds->textAt(index.row()) + "]"));
 
-				return QVariant(sds->textAt(index.row()) + postfix);
+				return QVariant(sds->textAt(row) + postfix);
 			}
 		case Qt::BackgroundRole:
 			{
@@ -112,7 +115,7 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 				// TODO: this is not an optimal solution
 				// since you cannot see the masking in 
 				// selected cells
-				//if(col_ptr->asDataSource()->isMasked(index.row()))
+				//if(col_src->isMasked(index.row()))
 				//	return QVariant(QBrush(d_masking_color, Qt::BDiagPattern));
 				break;
 			}
@@ -120,13 +123,13 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 			{
 				// TODO: see if this is a good solution
 				// to mark masked cells
-				if(col_ptr->asDataSource()->isMasked(index.row()))
+				if(col_src->isMasked(row))
 					return QVariant(QColor(d_masking_color));
 				break;
 			}
 		case Qt::ForegroundRole:
 			{
-				if(col_ptr->asDataSource()->isInvalid(index.row()))
+				if(col_src->isInvalid(index.row()))
 					return QVariant(QBrush(QColor(0xff,0,0)));
 				else
 					return QVariant(QBrush(QColor(0,0,0)));
@@ -173,8 +176,9 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
 	if(role == Qt::EditRole)
 	{  
 			AbstractColumnData * col_ptr = d_columns.at(index.column());
-			if(col_ptr->asDataSource()->numRows() <= row)
-				col_ptr->setNumRows(row+1);
+			int size = col_ptr->asDataSource()->numRows();
+			if(row >= size)
+				col_ptr->expand(row + 1 - size);
 
 			AbstractFilter * in_fltr = inputFilter(index.column());
 			StringColumnData sd;

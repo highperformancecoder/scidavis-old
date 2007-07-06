@@ -42,9 +42,18 @@ bool DoubleColumnData::copy(const AbstractDataSource * other)
 	if (!other_as_double) return false;
 
 	int count = other_as_double->numRows();
-	setNumRows(count);
 
-	emit dataAboutToChange(this);
+	if(count > numRows())
+	{
+		emit dataAboutToChange(this);
+		expand(count - numRows()); 
+	}
+	else
+	{
+		removeRows(count, numRows() - count);
+		emit dataAboutToChange(this);
+	}
+
 	double * ptr = data();
 	for(int i=0; i<count; i++)
 	{
@@ -60,10 +69,10 @@ bool DoubleColumnData::copy(const AbstractDataSource * source, int source_start,
 	const AbstractDoubleDataSource *source_as_double = qobject_cast<const AbstractDoubleDataSource*>(source);
 	if (!source_as_double) return false;
 
-	if (dest_start + num_rows > numRows())
-		setNumRows(dest_start + num_rows);
-
 	emit dataAboutToChange(this);
+	if (dest_start + num_rows > numRows())
+		expand(dest_start + num_rows - numRows());
+
 	double * ptr = data();
 	for(int i=0; i<num_rows; i++)
 	{
@@ -120,33 +129,12 @@ void DoubleColumnData::notifyReplacement(AbstractDataSource * replacement)
 	emit aboutToBeReplaced(this, replacement); 
 }
 
-void DoubleColumnData::setNumRows(int new_size)
+void DoubleColumnData::expand(int new_rows)
 {
-	int old_size = numRows();
-	int count = new_size - old_size;
-	if(count == 0) return;
-
-	emit dataAboutToChange(this);
-	if(count > 0)
-	{
-		emit rowsAboutToBeInserted(this, old_size, count);
-		QVector<double>::resize(new_size);
-		d_validity.insertRows(old_size, count);
-		d_selection.insertRows(old_size, count);
-		d_masking.insertRows(old_size, count);
-		d_formulas.insertRows(old_size, count);
-		emit rowsInserted(this, old_size, count);
-	}
-	else // count < 0
-	{
-		emit rowsAboutToBeDeleted(this, new_size, -count);
-		QVector<double>::resize(new_size);
-		d_validity.removeRows(new_size, -count);
-		d_selection.removeRows(new_size, -count);
-		d_masking.removeRows(new_size, -count);
-		d_formulas.removeRows(new_size, -count);
-		emit rowsDeleted(this, new_size, -count);
-	}
+	QVector<double>::resize(size() + new_rows);
+	// Remark: this does not change the logical
+	// number of rows, therefore no changes
+	// to the interval attributes here
 }
 
 void DoubleColumnData::insertEmptyRows(int before, int count)

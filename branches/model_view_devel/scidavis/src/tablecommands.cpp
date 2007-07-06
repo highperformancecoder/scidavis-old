@@ -562,7 +562,7 @@ void TableSetColumnValuesCmd::redo()
 			if(d_selection->isSet(i))
 			{
 				d_backup->append(sds->textAt(i));
-				d_col_ptr->copy(src, index, i, 1);  
+				d_col_ptr->copy(src, index, i, 1);  									
 				index++;
 				if(index >= strings) index = 0; // wrap around in the string array
 			}

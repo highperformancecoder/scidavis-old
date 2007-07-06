@@ -11,6 +11,8 @@
 #include <QObject>
 #include <QItemSelectionModel>
 #include <QLocale>
+#include <QMenu>
+#include <QContextMenuEvent>
 
 #include "TableView.h"
 #include "TableModel.h"
@@ -118,6 +120,11 @@ class TableViewTestWrapper : public TableView
 			model->setOutputFilter(7, temp); 
 
 			undo_stack = model->undoStack();
+		}
+
+	public slots:
+		void startTests()
+		{
 			undoTest();
 			setValuesTest();
 		}
@@ -141,18 +148,25 @@ class TableViewTestWrapper : public TableView
 			undo_stack->push(new TableRemoveRowsCmd(d_model, 1, 3) );
 			undo_stack->push(new TableRemoveColumnsCmd(d_model, 3, 2) );
 			undo_stack->push(new TableInsertRowsCmd(d_model, 0, 2) );
+			
 			QList<AbstractColumnData *> cols;
 			QList<AbstractFilter *> in_filters;
 			QList<AbstractFilter *> out_filters;
 			int max=1;
-			for(int i=0; i <2; i++)
-			{
-				cols << new DoubleColumnData();
-				cols.at(i)->setLabel(QString::number(max++));
-				in_filters << new String2DoubleFilter();
-				out_filters << new Double2StringFilter();
-			}
+			cols << new DoubleColumnData();
+			cols.at(0)->setLabel(QString::number(max++));
+			in_filters << new String2DoubleFilter();
+			out_filters << new Double2StringFilter();
+			for(int i=0; i<d_model->rowCount(); i++)
+				static_cast<DoubleColumnData*>(cols.at(0))->append(i);
+
+			cols << new StringColumnData();
+			cols.at(1)->setLabel(QString::number(max++));
+			in_filters << new CopyThroughFilter();
+			out_filters << new CopyThroughFilter();
+
 			undo_stack->push(new TableAppendColumnsCmd(d_model, cols, in_filters, out_filters) );
+
 			cols.clear();
 			in_filters.clear();
 			out_filters.clear();
@@ -176,9 +190,69 @@ class TableViewTestWrapper : public TableView
 		sm->select(d_model->index(2, 8, QModelIndex()), QItemSelectionModel::Select);
 		sm->select(d_model->index(4, 8, QModelIndex()), QItemSelectionModel::Select);
 		sm->select(d_model->index(5, 8, QModelIndex()), QItemSelectionModel::Select);
+		sm->select(d_model->index(1, 9, QModelIndex()), QItemSelectionModel::Select);
+		sm->select(d_model->index(2, 9, QModelIndex()), QItemSelectionModel::Select);
 		undo_stack->push( new TableSetColumnValuesCmd(d_model, 8, values) );
+
+		sm->select(d_model->index(0, 2, QModelIndex()), QItemSelectionModel::Select);
+		sm->select(d_model->index(1, 2, QModelIndex()), QItemSelectionModel::Select);
+		sm->select(d_model->index(4, 2, QModelIndex()), QItemSelectionModel::Select);
+		sm->select(d_model->index(5, 2, QModelIndex()), QItemSelectionModel::Select);
+
+		sm->select(d_model->index(0, 1, QModelIndex()), QItemSelectionModel::Select);
+		sm->select(d_model->index(1, 1, QModelIndex()), QItemSelectionModel::Select);
+		sm->select(d_model->index(4, 1, QModelIndex()), QItemSelectionModel::Select);
+		sm->select(d_model->index(7, 1, QModelIndex()), QItemSelectionModel::Select);
+
+		// row numbers
+		int rows = d_model->rowCount();
+		int columns = d_model->columnCount();
+		QStringList data;
+
+		for(int i=0; i<columns; i++)
+		{
+			data.clear();
+			for(int j=0; j<rows; j++)
+			{
+				if(d_model->output(i)->isSelected(j))
+					data << QString::number(j+1);
+			}
+			if(data.count() > 0)
+			{
+				QUndoCommand * temp = new TableSetColumnValuesCmd(d_model, i, data);
+				temp->setText("set column values: row numbers");
+				undo_stack->push( temp );
+			}
+		}
+
+		// random values
+		qsrand(QTime::currentTime().msec());
+
+		for(int i=0; i<columns; i++)
+		{
+			data.clear();
+			for(int j=0; j<rows; j++)
+			{
+				if(d_model->output(i)->isSelected(j))
+					data << QString::number(double(qrand())/double(RAND_MAX));
+			}
+			if(data.count() > 0)
+			{
+				QUndoCommand * temp = new TableSetColumnValuesCmd(d_model, i, data);
+				temp->setText("set column values: random values");
+				undo_stack->push( temp );
+			}
+		}
+
 	}
 
+	protected:
+		void contextMenuEvent ( QContextMenuEvent * e ) 
+		{
+			QMenu contextMenu(this);
+			contextMenu.addAction("start tests", this, SLOT(startTests()));
+			contextMenu.exec(e->globalPos());
+		}
 };
 
 

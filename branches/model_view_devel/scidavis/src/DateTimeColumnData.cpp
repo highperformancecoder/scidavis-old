@@ -45,9 +45,18 @@ bool DateTimeColumnData::copy(const AbstractDataSource * other)
 	if(!other_as_date_time) return false;
 
 	int count = other_as_date_time->numRows();
-	setNumRows(count);
 
-	emit dataAboutToChange(this);
+	if(count > numRows())
+	{
+		emit dataAboutToChange(this);
+		expand(count - numRows()); 
+	}
+	else
+	{
+		removeRows(count, numRows() - count);
+		emit dataAboutToChange(this);
+	}
+
 	for(int i=0; i<count; i++)
 	{
 		replace(i, other_as_date_time->dateTimeAt(i));
@@ -62,10 +71,10 @@ bool DateTimeColumnData::copy(const AbstractDataSource * source, int source_star
 	const AbstractDateTimeDataSource *source_as_date_time = qobject_cast<const AbstractDateTimeDataSource*>(source);
 	if (!source_as_date_time) return false;
 
-	if (dest_start + num_rows > numRows())
-		setNumRows(dest_start + num_rows);
-
 	emit dataAboutToChange(this);
+	if (dest_start + num_rows > numRows())
+		expand(dest_start + num_rows - numRows());
+
 	for(int i=0; i<num_rows; i++)
 	{
 		replace(dest_start+i, source_as_date_time->dateTimeAt(source_start+i));
@@ -121,34 +130,13 @@ void DateTimeColumnData::notifyReplacement(AbstractDataSource * replacement)
 	emit aboutToBeReplaced(this, replacement); 
 }
 
-void DateTimeColumnData::setNumRows(int new_size)
+void DateTimeColumnData::expand(int new_rows)
 {
-	int old_size = numRows();
-	int count = new_size - old_size;
-	if(count == 0) return;
-
-	if(count > 0)
-	{
-		emit rowsAboutToBeInserted(this, old_size, count);
-		for(int i=0; i<count; i++)
-			*this << QDateTime();
-		d_validity.insertRows(old_size, count);
-		d_selection.insertRows(old_size, count);
-		d_masking.insertRows(old_size, count);
-		d_formulas.insertRows(old_size, count);
-		emit rowsInserted(this, old_size, count);
-	}
-	else // count < 0
-	{
-		emit rowsAboutToBeDeleted(this, new_size, -count);
-		for(int i=0; i>count; i--)
-			removeLast();
-		d_validity.removeRows(new_size, -count);
-		d_selection.removeRows(new_size, -count);
-		d_masking.removeRows(new_size, -count);
-		d_formulas.removeRows(new_size, -count);
-		emit rowsDeleted(this, new_size, -count);
-	}
+	for(int i=0; i<new_rows; i++)
+		*this << QDateTime();
+	// Remark: this does not change the logical
+	// number of rows, therefore no changes
+	// to the interval attributes here
 }
 
 void DateTimeColumnData::insertEmptyRows(int before, int count)
