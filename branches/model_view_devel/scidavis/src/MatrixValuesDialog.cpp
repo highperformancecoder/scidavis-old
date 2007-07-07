@@ -174,8 +174,8 @@ void MatrixValuesDialog::setMatrix(Matrix* m)
 	    QTableWidgetSelectionRange selection = lst.first();
 	    if (selection.columnCount() == 1 && selection.rowCount() == 1)
 	    {
-	        endCol->setValue(m->numCols());
-            endRow->setValue(m->numRows());
+	        endCol->setValue(m->columnCount());
+            endRow->setValue(m->rowCount());
         }
         else
         {
@@ -187,8 +187,8 @@ void MatrixValuesDialog::setMatrix(Matrix* m)
     }
     else
     {
-        endCol->setValue(m->numCols());
-        endRow->setValue(m->numRows());
+        endCol->setValue(m->columnCount());
+        endRow->setValue(m->rowCount());
     }
 }
 

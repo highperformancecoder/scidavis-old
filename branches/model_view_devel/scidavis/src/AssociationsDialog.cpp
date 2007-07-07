@@ -28,6 +28,7 @@
  ***************************************************************************/
 #include "AssociationsDialog.h"
 #include "Table.h"
+#include "Graph.h"
 #include "FunctionCurve.h"
 #include "PlotCurve.h"
 #include "QwtErrorPlotCurve.h"

@@ -44,16 +44,16 @@ bool StringColumnData::copy(const AbstractDataSource * other)
 	const AbstractStringDataSource *other_as_string = qobject_cast<const AbstractStringDataSource*>(other);
 	if (!other_as_string) return false;
 
-	int count = other_as_string->numRows();
+	int count = other_as_string->rowCount();
 
-	if(count > numRows())
+	if(count > rowCount())
 	{
 		emit dataAboutToChange(this);
-		expand(count - numRows()); 
+		expand(count - rowCount()); 
 	}
 	else
 	{
-		removeRows(count, numRows() - count);
+		removeRows(count, rowCount() - count);
 		emit dataAboutToChange(this);
 	}
 
@@ -72,8 +72,8 @@ bool StringColumnData::copy(const AbstractDataSource * source, int source_start,
 	if (!source_as_string) return false;
 
 	emit dataAboutToChange(this);
-	if (dest_start + num_rows > numRows())
-		expand(dest_start + num_rows - numRows());
+	if (dest_start + num_rows > rowCount())
+		expand(dest_start + num_rows - rowCount());
 
 	for(int i=0; i<num_rows; i++)
 	{
@@ -84,7 +84,7 @@ bool StringColumnData::copy(const AbstractDataSource * source, int source_start,
 	return true;
 }
 
-int StringColumnData::numRows() const 
+int StringColumnData::rowCount() const 
 { 
 	return size(); 
 }

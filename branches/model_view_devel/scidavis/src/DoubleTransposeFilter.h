@@ -56,10 +56,10 @@ class DoubleTransposeFilter : public AbstractFilter {
 				if (!i) continue;
 				int n;
 				if (d_greedy) {
-					if ((n = i->numRows()) > result)
+					if ((n = i->rowCount()) > result)
 						result = n;
 				} else {
-					if ((n = i->numRows()) < result || result == -1)
+					if ((n = i->rowCount()) < result || result == -1)
 						result = n;
 				}
 			}
@@ -96,14 +96,14 @@ class DoubleTransposeFilter : public AbstractFilter {
 		class OutputColumn : public AbstractDoubleDataSource {
 			public:
 				OutputColumn(DoubleTransposeFilter *parent, int row) : d_parent(parent), d_row(row) {}
-				virtual int numRows() const { return d_parent->d_inputs.size(); }
+				virtual int rowCount() const { return d_parent->d_inputs.size(); }
 				virtual double valueAt(int col) const {
 					return isRowValid(col) ?
 						static_cast<AbstractDoubleDataSource*>(d_parent->d_inputs.at(col))->valueAt(d_row) :
 						0;
 				}
 				virtual bool isRowValid(int col) const {
-					return d_parent->d_inputs.value(col) && d_row < d_parent->d_inputs.at(col)->numRows();
+					return d_parent->d_inputs.value(col) && d_row < d_parent->d_inputs.at(col)->rowCount();
 				}
 				virtual QString label() const { return QString::number(d_row + 1); }
 				virtual PlotDesignation plotDesignation() const { return noDesignation; }

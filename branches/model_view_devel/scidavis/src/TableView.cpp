@@ -68,9 +68,12 @@ public:
 TableView::TableView(QWidget * parent, TableModel * model )
  : QTableView( parent ), d_model(model)
 {
-  //  QItemSelectionModel * selections = new QItemSelectionModel(model);
+	init(model);
+}
+
+void TableView::init(TableModel * model)
+{
 	setModel(model);
-//	setSelectionModel(selections);
 
 	d_delegate = new TableItemDelegate;
 	setItemDelegate(d_delegate);
@@ -87,36 +90,43 @@ TableView::TableView(QWidget * parent, TableModel * model )
 	connect(d_model, SIGNAL(headerDataChanged(Qt::Orientation,int,int)), this, SLOT(updateHeaderGeometry(Qt::Orientation,int,int)) ); 
 
     setContextMenuPolicy(Qt::DefaultContextMenu);
-
 }
 	
+TableView::TableView(QWidget * parent, TableModel * model, int rows, int columns )
+ : QTableView( parent ), d_model(model) 
+{
+	init(model);
+
+	QList<AbstractColumnData *> cols;
+	QList<AbstractFilter *> in_filters;
+	QList<AbstractFilter *> out_filters;
+	
+	for(int i=0; i<columns; i++)
+	{
+		cols << new DoubleColumnData();
+		cols.at(i)->setLabel(QString::number(i+1));
+		in_filters << new String2DoubleFilter();
+		out_filters << new Double2StringFilter();
+	}
+
+	d_model->appendColumns(cols);
+
+	for(int i=0; i<columns; i++)
+	{
+		d_model->setInputFilter(i, in_filters.at(i));
+		d_model->setOutputFilter(i, out_filters.at(i));
+	}
+	d_model->appendRows(rows);
+}
+
 void TableView::updateHeaderGeometry(Qt::Orientation o, int first, int last)
 {
 	Q_UNUSED(first)
 	Q_UNUSED(last)
 	if(o != Qt::Horizontal) return;
-	qDebug() << "header geomery update";
-	horizontalHeader()->setStretchLastSection(true);  // ugly hack (flaw in Qt?)
+	horizontalHeader()->setStretchLastSection(true);  // ugly hack (flaw in Qt? Does anyone know a better way?)
 	horizontalHeader()->updateGeometry();
 	horizontalHeader()->setStretchLastSection(false); // ugly hack part 2
-}
-
-
-TableView::TableView(QWidget * parent, TableModel * model, int rows, int columns )
- : QTableView( parent ), d_model(model)
-{
-  /*
-  //  QItemSelectionModel * selections = new QItemSelectionModel(model);
-	setModel(model);
-	model->appendColumns(AbstractColumnData::Double, columns);
-	model->appendRows(rows);
-//	setSelectionModel(selections);
-	d_delegate = new TableItemDelegate;
-	setItemDelegate(d_delegate);
-	connect(d_delegate, SIGNAL(returnPressed()), this, SLOT(advanceCell()));
-
-    setContextMenuPolicy(Qt::DefaultContextMenu);
-	*/
 }
 
 TableView::~TableView() 

@@ -28,6 +28,7 @@
  ***************************************************************************/
 
 #include <QVarLengthArray>
+#include "AbstractDataSource.h"
 
 static const char *cut_xpm[]={
 "18 18 3 1",
@@ -831,7 +832,7 @@ void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName
 			return;
 
 		axesFormatInfo[axis] = labelsColName;
-		int r = table->numRows();
+		int r = table->rowCount();
 		int col = table->colIndex(labelsColName);
 
 		for (int i=0; i < r; i++)
@@ -843,10 +844,10 @@ void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName
 			return;
 
 		axesFormatInfo[axis] = table->name();
-		for (int i=0; i<table->numCols(); i++)
+		for (int i=0; i<table->columnCount(); i++)
 		{
-			if (table->colPlotDesignation(i) == Table::Y)
-				list<<table->colLabel(i);
+			if (table->plotDesignation(i) == AbstractDataSource::Y)
+				list<<table->columnLabel(i);
 		}
 	}
 	d_plot->setAxisScaleDraw (axis, new QwtTextScaleDraw(list));
@@ -3171,7 +3172,7 @@ void Graph::plotPie(Table* w, const QString& name, const QPen& pen, int brush,
 					int size, int firstColor, int startRow, int endRow, bool visible)
 {
 	if (endRow < 0)
-		endRow = w->numRows() - 1;
+		endRow = w->rowCount() - 1;
 
 	QwtPieCurve *pieCurve = new QwtPieCurve(w, name, startRow, endRow);
 	pieCurve->loadData();
@@ -3195,7 +3196,7 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 	double sum = 0.0;
 
 	if (endRow < 0)
-		endRow = w->numRows() - 1;
+		endRow = w->rowCount() - 1;
 
 	QVarLengthArray<double> Y(abs(endRow - startRow) + 1);
 	for (int i = startRow; i<= endRow; i++)
@@ -3312,7 +3313,7 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
         for (int i=0; i<curves; i++)
         {//We rearrange the list so that the error bars are placed at the end
         	int j = w->colIndex(names[i]);
-  	        if (w->colPlotDesignation(j) == Table::xErr || w->colPlotDesignation(j) == Table::yErr)
+  	        if (w->plotDesignation(j) == AbstractDataSource::xErr || w->plotDesignation(j) == AbstractDataSource::yErr)
 			{
 				errCurves++;
 				lst << names[i];
@@ -3325,13 +3326,13 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
 		{
             int j = w->colIndex(names[i]);
             bool ok = false;
-            if (w->colPlotDesignation(j) == Table::xErr || w->colPlotDesignation(j) == Table::yErr)
+            if (w->plotDesignation(j) == AbstractDataSource::xErr || w->plotDesignation(j) == AbstractDataSource::yErr)
 			{
 				int ycol = w->colY(w->colIndex(names[i]));
                 if (ycol < 0)
                     return false;
 
-                if (w->colPlotDesignation(j) == Table::xErr)
+                if (w->plotDesignation(j) == AbstractDataSource::xErr)
                     ok = addErrorBars(w->colName(ycol), w, names[i], (int)QwtErrorPlotCurve::Horizontal);
                 else
                     ok = addErrorBars(w->colName(ycol), w, names[i]);
@@ -3387,7 +3388,7 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
     QLocale locale;
 
 	if (endRow < 0)
-		endRow = w->numRows() - 1;
+		endRow = w->rowCount() - 1;
 
 	int r = abs(endRow - startRow) + 1;
     QVector<double> X(r), Y(r);
@@ -3550,7 +3551,7 @@ void Graph::plotVectorCurve(Table* w, const QStringList& colList, int style, int
 		return;
 
 	if (endRow < 0)
-		endRow = w->numRows() - 1;
+		endRow = w->rowCount() - 1;
 
 	VectorCurve *v = 0;
 	if (style == VectXYAM)
@@ -4871,7 +4872,7 @@ void Graph::copy(Graph* g)
 void Graph::plotBoxDiagram(Table *w, const QStringList& names, int startRow, int endRow)
 {
 	if (endRow < 0)
-		endRow = w->numRows() - 1;
+		endRow = w->rowCount() - 1;
 
 	for (int j = 0; j <(int)names.count(); j++)
 	{
@@ -4967,7 +4968,7 @@ void Graph::openBoxDiagram(Table *w, const QStringList& l, int fileVersion)
         return;
 
     int startRow = 0;
-    int endRow = w->numRows()-1;
+    int endRow = w->rowCount()-1;
     if (fileVersion >= 90)
     {
         startRow = l[l.count()-3].toInt();

@@ -63,11 +63,11 @@ class QwtDataFilter : public QwtData, public AbstractFilter
 			if(!d_inputs.value(0) || !d_inputs.value(1)) return 0;
 			QwtDataFilter *result = new QwtDataFilter();
 
-			result->d_data[0] = new DoubleColumnData(d_inputs.at(0)->numRows());
+			result->d_data[0] = new DoubleColumnData(d_inputs.at(0)->rowCount());
 			result->d_data[0]->copy(d_inputs.at(0));
 			result->input(0, result->d_data[0]);
 
-			result->d_data[1] = new DoubleColumnData(d_inputs.at(1)->numRows());
+			result->d_data[1] = new DoubleColumnData(d_inputs.at(1)->rowCount());
 			result->d_data[1]->copy(d_inputs.at(1));
 			result->input(1, result->d_data[1]);
 
@@ -75,7 +75,7 @@ class QwtDataFilter : public QwtData, public AbstractFilter
 		}
 		virtual size_t size() const {
 			return (d_inputs.value(0) && d_inputs.value(1)) ?
-				qMin(d_inputs.at(0)->numRows(), d_inputs.at(1)->numRows()) :
+				qMin(d_inputs.at(0)->rowCount(), d_inputs.at(1)->rowCount()) :
 				0;
 		}
 		virtual double x(size_t i) const {

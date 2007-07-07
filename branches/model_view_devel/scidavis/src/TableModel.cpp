@@ -176,7 +176,7 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
 	if(role == Qt::EditRole)
 	{  
 			AbstractColumnData * col_ptr = d_columns.at(index.column());
-			int size = col_ptr->asDataSource()->numRows();
+			int size = col_ptr->asDataSource()->rowCount();
 			if(row >= size)
 				col_ptr->expand(row + 1 - size);
 
@@ -281,7 +281,7 @@ void TableModel::insertColumns(QList<AbstractColumnData *> cols, int before)
 	int i, rows;
 	for(i=0; i<count; i++)
 	{
-		rows = cols.at(i)->asDataSource()->numRows();
+		rows = cols.at(i)->asDataSource()->rowCount();
 		if(rows > d_row_count)
 			appendRows(rows-d_row_count); // append rows to resize table
 	}
@@ -338,7 +338,7 @@ void TableModel::removeRows(int first, int count)
 	beginRemoveRows(QModelIndex(), first, first+count-1);
 	for(int col=0; col<d_column_count; col++)
 	{
-		if(d_columns.at(col)->asDataSource()->numRows() > first)
+		if(d_columns.at(col)->asDataSource()->rowCount() > first)
 			d_columns.at(col)->removeRows(first, count);
 	}
 	d_row_count -= count;
@@ -361,7 +361,7 @@ void TableModel::insertRows(int first, int count)
 		beginInsertRows(QModelIndex(), first, first+count-1);
 		for(int col=0; col<d_column_count; col++)
 		{
-			if(d_columns.at(col)->asDataSource()->numRows() <= first) // no need to append empty rows
+			if(d_columns.at(col)->asDataSource()->rowCount() <= first) // no need to append empty rows
 				continue;
 			d_columns.at(col)->insertEmptyRows(first, count);
 		}

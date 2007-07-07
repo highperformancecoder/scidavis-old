@@ -30,6 +30,7 @@
 #define TABLEDIALOG_H
 
 #include "Table.h"
+#include <QDialog>
 
 class QPushButton;
 class QLineEdit;

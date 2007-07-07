@@ -126,7 +126,7 @@ public:
 	//! Return the column plot designation
 	virtual AbstractDataSource::PlotDesignation plotDesignation() const;
 	//! Return the list size
-	virtual int numRows() const;
+	virtual int rowCount() const;
 	//! Return the date part of row 'row'
 	virtual QDate dateAt(int row) const;
 	//! Return the time part of row 'row'

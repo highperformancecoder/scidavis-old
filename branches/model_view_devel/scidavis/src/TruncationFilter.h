@@ -38,12 +38,12 @@ template<class T> class TruncationFilterBase : public AbstractSimpleFilter<T>
 	public:
 		TruncationFilterBase() : d_start(0), d_num_rows(0) {}
 		bool setStartSkip(int n) {
-			if (!AbstractSimpleFilter<T>::d_inputs.value(0) || n<0 || n>AbstractSimpleFilter<T>::d_inputs[0]->numRows()) return false;
+			if (!AbstractSimpleFilter<T>::d_inputs.value(0) || n<0 || n>AbstractSimpleFilter<T>::d_inputs[0]->rowCount()) return false;
 			d_start = n;
 			return true;
 		}
 		bool setNumRows(int n) {
-			if (!AbstractSimpleFilter<T>::d_inputs.value(0) || n<0 || d_start+n>=AbstractSimpleFilter<T>::d_inputs[0]->numRows()) return false;
+			if (!AbstractSimpleFilter<T>::d_inputs.value(0) || n<0 || d_start+n>=AbstractSimpleFilter<T>::d_inputs[0]->rowCount()) return false;
 			d_num_rows = n;
 			return true;
 		}
@@ -57,9 +57,9 @@ template<class T> class TruncationFilterBase : public AbstractSimpleFilter<T>
 				QString("%1 [%2,%3]").arg(AbstractSimpleFilter<T>::d_inputs.at(0)->label()).arg(d_start+1).arg(d_start+d_num_rows) :
 				QString();
 		}
-		virtual int numRows() const { return d_num_rows; }
+		virtual int rowCount() const { return d_num_rows; }
 		virtual void inputDataChanged(AbstractDataSource* source)  {
-			if (!AbstractSimpleFilter<T>::d_inputs.value(0) || d_start+d_num_rows>=AbstractSimpleFilter<T>::d_inputs[0]->numRows())
+			if (!AbstractSimpleFilter<T>::d_inputs.value(0) || d_start+d_num_rows>=AbstractSimpleFilter<T>::d_inputs[0]->rowCount())
 				d_num_rows = 0;
 			AbstractSimpleFilter<T>::inputDataChanged(source);
 		}

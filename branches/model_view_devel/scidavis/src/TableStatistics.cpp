@@ -27,9 +27,11 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
+#include "TableView.h"
 #include "TableStatistics.h"
 
 #include <QList>
+#include <gsl/gsl_vector.h>
 #include <gsl/gsl_statistics.h>
 
 TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base, Type t, QList<int> targets)
@@ -43,8 +45,8 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 	{
 		setName(QString(d_base->name())+"-"+tr("RowStats"));
 		setWindowLabel(tr("Row Statistics of %1").arg(base->name()));
-		resizeRows(d_targets.size());
-		resizeCols(9);
+		setRowCount(d_targets.size());
+		setColumnCount(9);
 		setColName(0, tr("Row"));
 		setColName(1, tr("Cols"));
 		setColName(2, tr("Mean"));
@@ -55,8 +57,9 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 		setColName(7, tr("Min"));
 		setColName(8, "N");
 
-		for (int i=0; i < 9; i++)
-			setColumnType(i, Text);
+		// TODO
+//		for (int i=0; i < 9; i++)
+//			setColumnType(i, Text);
 
 		for (int i=0; i < d_targets.size(); i++)
 			setText(i, 0, QString::number(d_targets[i]+1));
@@ -66,8 +69,8 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 	{
 		setName(QString(d_base->name())+"-"+tr("ColStats"));
 		setWindowLabel(tr("Column Statistics of %1").arg(base->name()));
-		resizeRows(d_targets.size());
-		resizeCols(11);
+		setRowCount(d_targets.size());
+		setColumnCount(11);
 		setColName(0, tr("Col"));
 		setColName(1, tr("Rows"));
 		setColName(2, tr("Mean"));
@@ -80,8 +83,9 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 		setColName(9, tr("Min"));
 		setColName(10, "N");
 
-		for (int i=0; i < 11; i++)
-			setColumnType(i, Text);
+		// TODO
+//		for (int i=0; i < 11; i++)
+//			setColumnType(i, Text);
 
 		for (int i=0; i < d_targets.size(); i++)
 		{
@@ -89,16 +93,17 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 			update(d_base, d_base->colName(d_targets[i]));
 		}
 	}
-	int w=9*(d_table->horizontalHeader())->sectionSize(0);
+	int w=9*(d_table_view->horizontalHeader())->sectionSize(0);
 	int h;
-	if (numRows()>11)
-		h=11*(d_table->verticalHeader())->sectionSize(0);
+	if (rowCount()>11)
+		h=11*(d_table_view->verticalHeader())->sectionSize(0);
 	else
-		h=(numRows()+1)*(d_table->verticalHeader())->sectionSize(0);
+		h=(rowCount()+1)*(d_table_view->verticalHeader())->sectionSize(0);
 	setGeometry(50,50,w + 45, h + 45);
 
-	setColPlotDesignation(0, Table::X);
-	setHeaderColType();
+	setColPlotDesignation(0, AbstractDataSource::X);
+// TODO
+//	setHeaderColType();
 }
 
 void TableStatistics::update(Table *t, const QString& colName)
@@ -109,7 +114,7 @@ void TableStatistics::update(Table *t, const QString& colName)
 	if (d_type == row)
 		for (int r=0; r < d_targets.size(); r++)
 		{
-			int cols=d_base->numCols();
+			int cols=d_base->columnCount();
 			int i = d_targets[r];
 			int m = 0;
 			for (j = 0; j < cols; j++)
@@ -142,7 +147,7 @@ void TableStatistics::update(Table *t, const QString& colName)
 				double min, max;
 				gsl_vector_minmax (y, &min, &max);
 
-				setText(r, 1, QString::number(d_base->numCols()));
+				setText(r, 1, QString::number(d_base->columnCount()));
 				setText(r, 2, QString::number(mean));
 				setText(r, 3, QString::number(gsl_stats_sd(dat, 1, m)));
 				setText(r, 4, QString::number(gsl_stats_variance(dat, 1, m)));
@@ -162,7 +167,7 @@ void TableStatistics::update(Table *t, const QString& colName)
 				int i = d_base->colIndex(colName);
 				if (d_base->columnType(i) != Numeric) return;
 
-				int rows = d_base->numRows();
+				int rows = d_base->rowCount();
 				int start = -1, m = 0;
 				for (j=0; j<rows; j++)
 					if (!d_base->text(j,i).isEmpty())
@@ -221,8 +226,9 @@ void TableStatistics::update(Table *t, const QString& colName)
 				delete[] dat;
 			}
 
-	for (int i=0; i<numCols(); i++)
-		emit modifiedData(this, Table::colName(i));
+// TODO
+//	for (int i=0; i<columnCount(); i++)
+//		emit modifiedData(this, Table::colName(i));
 }
 
 void TableStatistics::renameCol(const QString &from, const QString &to)
@@ -238,6 +244,8 @@ void TableStatistics::renameCol(const QString &from, const QString &to)
 
 void TableStatistics::removeCol(const QString &col)
 {
+	//TODO
+	/*
 	if (d_type == row)
 	{
 		update(d_base, col);
@@ -247,13 +255,16 @@ void TableStatistics::removeCol(const QString &col)
 		if (col == QString(d_base->name())+"_"+text(c, 0))
 		{
 			d_targets.remove(d_targets.at(c));
-			d_table->removeRow(c);
+			d_table_view->removeRow(c);
 			return;
 		}
+	*/
 }
 
 QString TableStatistics::saveToString(const QString &geometry)
 {
+	// TODO
+	/*
 	QString s = "<TableStatistics>\n";
 	s += QString(name())+"\t";
 	s += QString(d_base->name())+"\t";
@@ -271,4 +282,5 @@ QString TableStatistics::saveToString(const QString &geometry)
 	s += saveComments();
 	s += "WindowLabel\t" + windowLabel() + "\t" + QString::number(captionPolicy()) + "\n";
 	return s + "</TableStatistics>\n";
+	*/
 }

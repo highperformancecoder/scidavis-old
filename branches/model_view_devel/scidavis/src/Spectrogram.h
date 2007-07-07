@@ -91,8 +91,8 @@ public:
         QwtRasterData(m->boundingRect()),
 		d_matrix(m)
     {
-	n_rows = d_matrix->numRows();
-	n_cols = d_matrix->numCols();
+	n_rows = d_matrix->rowCount();
+	n_cols = d_matrix->columnCount();
 
 	d_m = new double* [n_rows];
 	for ( int l = 0; l < n_rows; ++l)

@@ -44,16 +44,16 @@ bool DateTimeColumnData::copy(const AbstractDataSource * other)
 	const AbstractDateTimeDataSource *other_as_date_time = qobject_cast<const AbstractDateTimeDataSource*>(other);
 	if(!other_as_date_time) return false;
 
-	int count = other_as_date_time->numRows();
+	int count = other_as_date_time->rowCount();
 
-	if(count > numRows())
+	if(count > rowCount())
 	{
 		emit dataAboutToChange(this);
-		expand(count - numRows()); 
+		expand(count - rowCount()); 
 	}
 	else
 	{
-		removeRows(count, numRows() - count);
+		removeRows(count, rowCount() - count);
 		emit dataAboutToChange(this);
 	}
 
@@ -72,8 +72,8 @@ bool DateTimeColumnData::copy(const AbstractDataSource * source, int source_star
 	if (!source_as_date_time) return false;
 
 	emit dataAboutToChange(this);
-	if (dest_start + num_rows > numRows())
-		expand(dest_start + num_rows - numRows());
+	if (dest_start + num_rows > rowCount())
+		expand(dest_start + num_rows - rowCount());
 
 	for(int i=0; i<num_rows; i++)
 	{
@@ -84,7 +84,7 @@ bool DateTimeColumnData::copy(const AbstractDataSource * source, int source_star
 	return true;
 }
 
-int DateTimeColumnData::numRows() const 
+int DateTimeColumnData::rowCount() const 
 { 
 	return size(); 
 }

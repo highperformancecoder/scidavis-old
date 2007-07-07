@@ -42,8 +42,12 @@
 #include <QBuffer>
 
 #include "Table.h"
+#include "Graph.h"
+#include "Graph3D.h"
 #include "ScriptingEnv.h"
 #include "Script.h"
+#include "AbstractDataSource.h"
+#include "AbstractColumnData.h"
 
 class QPixmap;
 class QCloseEvent;
@@ -62,6 +66,7 @@ class QShortcut;
 class QMenu;
 class QToolBar;
 class QAssistantClient;
+class QTextEdit;
 
 class Matrix;
 class Table;
@@ -79,6 +84,7 @@ class Plot3DDialog;
 class MyWidget;
 class TableStatistics;
 class CurveRangeDialog;
+class AxesDialog;
 
 /**
  * \brief SciDAVis's main window.
@@ -223,7 +229,7 @@ public slots:
 	Graph3D* openMatrixPlot3D(const QString& caption, const QString& matrix_name,
 							 double xl,double xr,double yl,double yr,double zl,double zr);
 	Graph3D* dataPlot3D(Table* table,const QString& colName);
-	Graph3D* dataPlotXYZ(Table* table,const QString& zColName, int type);
+	Graph3D* dataPlotXYZ(Table* table,const QString& zColName, Graph3D::PlotType type);
 	Graph3D* dataPlot3D(const QString& caption,const QString& formula,
 						double xl, double xr, double yl, double yr, double zl, double zr);
 	Graph3D* dataPlotXYZ(const QString& caption,const QString& formula,
@@ -400,7 +406,7 @@ public slots:
 	void printAllPlots();
 	//@}
 
-	QStringList columnsList(Table::PlotDesignation plotType = Table::All);
+	QStringList columnsList(AbstractDataSource::PlotDesignation plotType);
 
 	void undo();
 	void redo();
@@ -992,6 +998,12 @@ public:
 	QString defaultScriptingLang;
 
 private:
+	//! Check whether a table is valid for a 3D plot and display an appropriate error if not
+	bool validFor3DPlot(Table *table);
+	//! Check whether a table is valid for a 2D plot and display an appropriate error if not
+	bool validFor2DPlot(Table *table);
+	//! Generate a new 2D graph
+	void generate2DGraph(Graph::CurveType type);
 
 	//! Workaround for the new colors introduced in rev 447
 	int convertOldToNewColorIndex(int cindex);

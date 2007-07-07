@@ -82,7 +82,7 @@ int ReadOnlyTableModel::rowCount(const QModelIndex &) const
 	foreach(AbstractDataSource *i, d_inputs) 
 	{
 		if (!i) continue;
-		if ((rows = i->numRows()) > result)
+		if ((rows = i->rowCount()) > result)
 			result = rows;
 	}
 	return result;
@@ -149,7 +149,7 @@ void ReadOnlyTableModel::inputDataChanged(int port)
 		for (int i=d_output_filters.size(); i>d_inputs.size(); i--)
 			d_output_filters.removeLast();
 	}
-	emit dataChanged(createIndex(0,port), createIndex(d_inputs[port]->numRows()-1,port));
+	emit dataChanged(createIndex(0,port), createIndex(d_inputs[port]->rowCount()-1,port));
 }
 
 AbstractFilter *ReadOnlyTableModel::newOutputFilterFor(AbstractDataSource *source)

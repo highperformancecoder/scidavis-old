@@ -325,7 +325,7 @@ bool Fit::setWeightingData(WeightingMethod w, const QString& colName)
 				if (!t)
 					return false;
 
-				if (t->numRows() < d_n)
+				if (t->rowCount() < d_n)
   	            {
   	            	QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis - Error"),
   	                tr("The column %1 has less points than the fitted data set. Please choose another column!.").arg(colName));
@@ -355,10 +355,11 @@ Table* Fit::parametersTable(const QString& tableName)
 		t->setText(i, 2, QLocale().toString(sqrt(gsl_matrix_get(covar,i,i)), 'g', d_prec));
 	}
 
-	t->setColPlotDesignation(2, Table::yErr);
-	t->setHeaderColType();
-	for (int j=0; j<3; j++)
-		t->table()->resizeColumnToContents(j);
+	t->setColPlotDesignation(2, AbstractDataSource::yErr);
+	// TODO 
+	// t->setHeaderColType();
+//	for (int j=0; j<3; j++)
+//		t->table()->resizeColumnToContents(j);
 
 	t->showNormal();
 	return t;

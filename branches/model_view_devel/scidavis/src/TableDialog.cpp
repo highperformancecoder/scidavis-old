@@ -230,9 +230,11 @@ void TableDialog::updateColumn(int sc)
     else
         buttonNext->setEnabled(true);
 
+	// TODO replace the commented out lines (###)
+	// acessing TableView from outside Table is absolutely forbidden
     d_table->setSelectedCol(sc);
-    d_table->table()->clearSelection ();
-    d_table->table()->selectColumn(sc);
+    //### d_table->table()->clearSelection ();
+    //### d_table->table()->selectColumn(sc);
     columnsBox->setCurrentIndex(d_table->colPlotDesignation(sc));
 
     QString colLabel = d_table->colLabel(sc);
@@ -245,7 +247,7 @@ void TableDialog::updateColumn(int sc)
     displayBox->setCurrentIndex(colType);
     updateDisplay(colType);
 	
-    d_table->saveToMemory();
+    //### d_table->saveToMemory();
 
     if (colType == Table::Numeric)
 	{
@@ -327,8 +329,9 @@ switch(colType)
 
 void TableDialog::closeEvent( QCloseEvent* ce )
 {
-d_table->freeMemory();
-ce->accept();
+	// TODO: is this needed anymore?
+	//### d_table->freeMemory();
+	ce->accept();
 }
 
 void TableDialog::setPlotDesignation(int i)
@@ -336,27 +339,27 @@ void TableDialog::setPlotDesignation(int i)
 switch(i)
 	{
 	case 0:
-		d_table->setPlotDesignation(Table::None);
+		d_table->setPlotDesignation(AbstractDataSource::noDesignation);
 	break;
 
 	case 1:
-		d_table->setPlotDesignation(Table::X);
+		d_table->setPlotDesignation(AbstractDataSource::X);
 	break;
 
 	case 2:
-		d_table->setPlotDesignation(Table::Y);
+		d_table->setPlotDesignation(AbstractDataSource::Y);
 	break;
 
 	case 3:
-		d_table->setPlotDesignation(Table::Z);
+		d_table->setPlotDesignation(AbstractDataSource::Z);
 	break;
 
 	case 4:
-		d_table->setPlotDesignation(Table::xErr);
+		d_table->setPlotDesignation(AbstractDataSource::xErr);
 	break;
 
 	case 5:
-		d_table->setPlotDesignation(Table::yErr);
+		d_table->setPlotDesignation(AbstractDataSource::yErr);
 	break;
 	}
 }
@@ -471,6 +474,8 @@ else
 
 void TableDialog::setDateTimeFormat(int type, const QString& format, bool allRightColumns)
 {
+	// TODO
+	/*
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     bool ok = false;
 	int sc = d_table->selectedColumn();
@@ -501,10 +506,13 @@ void TableDialog::setDateTimeFormat(int type, const QString& format, bool allRig
         formatBox->setCurrentText(format);
     }
     d_table->notifyChanges();
+	*/
 }
 
 void TableDialog::setNumericFormat(int type, int prec, bool allRightColumns)
 {
+	// TODO
+	/*
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 	int sc = d_table->selectedColumn();
 	if (allRightColumns)
@@ -517,10 +525,13 @@ void TableDialog::setNumericFormat(int type, int prec, bool allRightColumns)
 
 	d_table->notifyChanges();
 	QApplication::restoreOverrideCursor();
+	*/
 }
 
 void TableDialog::setTextFormat(bool allRightColumns)
 {
+	// TODO
+	/*
 	int sc = d_table->selectedColumn();
 	if (allRightColumns)
 	{
@@ -529,4 +540,5 @@ void TableDialog::setTextFormat(bool allRightColumns)
 	}
 	else
 		d_table->setTextFormat(sc);
+	*/
 }

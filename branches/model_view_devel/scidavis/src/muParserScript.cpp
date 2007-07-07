@@ -117,10 +117,10 @@ double muParserScript::col(const QString &arg)
 	else
 		return 0;
 	rvariables.clear();
-	if (row < 0 || row >= table->numRows())
+	if (row < 0 || row >= table->rowCount())
 		throw Parser::exception_type(tr("There's no row %1 in table %2!").
 				arg(row+1).arg(Context->name()).ascii());
-	if (col < 0 || col >= table->numCols())
+	if (col < 0 || col >= table->columnCount())
 		throw Parser::exception_type(tr("There's no column %1 in table %2!").
 				arg(col+1).arg(Context->name()).ascii());
 	if (table->text(row,col).isEmpty())
@@ -134,10 +134,10 @@ double muParserScript::cell(int row, int col)
 	if (!Context->isA("Matrix"))
 		throw Parser::exception_type(tr("cell() works only on matrices!").ascii());
 	Matrix *matrix = (Matrix*) Context;
-	if (row < 1 || row > matrix->numRows())
+	if (row < 1 || row > matrix->rowCount())
 		throw Parser::exception_type(tr("There's no row %1 in matrix %2!").
 				arg(row).arg(Context->name()).ascii());
-	if (col < 1 || col > matrix->numCols())
+	if (col < 1 || col > matrix->columnCount())
 		throw Parser::exception_type(tr("There's no column %1 in matrix %2!").
 				arg(col).arg(Context->name()).ascii());
 	if (matrix->text(row-1,col-1).isEmpty())

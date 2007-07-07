@@ -71,7 +71,7 @@ void Convolution::setDataFromTable(Table *t, const QString& signalColName, const
 	}
 
 	d_n_response = 0;
-	int rows = d_table->numRows();
+	int rows = d_table->rowCount();
 	for (int i=0; i<rows; i++)
 	{
 		if (!d_table->text(i, response_col).isEmpty())
@@ -126,7 +126,7 @@ void Convolution::output()
 
 void Convolution::addResultCurve()
 {
-	int cols = d_table->numCols();
+	int cols = d_table->columnCount();
 	int cols2 = cols+1;
 
 	d_table->addCol();
@@ -143,8 +143,9 @@ void Convolution::addResultCurve()
 
 	d_table->setColName(cols, tr("Index") + id);
 	d_table->setColName(cols2, label);
-	d_table->setColPlotDesignation(cols, Table::X);
-	d_table->setHeaderColType();
+	d_table->setColPlotDesignation(cols, AbstractDataSource::X);
+	// TODO
+	// d_table->setHeaderColType();
 
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	MultiLayer *ml = app->newGraph(name() + tr("Plot"));

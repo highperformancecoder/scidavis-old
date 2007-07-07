@@ -65,8 +65,8 @@ public:
 	 */ 
 	virtual const double * constDataPointer() const {
 		if(!d_data_cache) {
-			 d_data_cache = new double[numRows()];
-			 for (int i=0; i<numRows(); i++)
+			 d_data_cache = new double[rowCount()];
+			 for (int i=0; i<rowCount(); i++)
 				 d_data_cache[i] = valueAt(i);
 		 }
 		 return d_data_cache;

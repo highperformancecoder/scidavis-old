@@ -28,6 +28,7 @@
  ***************************************************************************/
 #include "QwtErrorPlotCurve.h"
 #include "QwtBarCurve.h"
+#include "Graph.h"
 
 #include <qwt_painter.h>
 #include <qwt_symbol.h>

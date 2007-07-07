@@ -111,7 +111,7 @@ public:
 	//! \name Data reading functions
 	//@{
 	//! Return the list size
-	virtual int numRows() const;
+	virtual int rowCount() const;
 	//! Return the string in row 'row'
 	virtual QString textAt(int row) const;
 	//! Return the column label

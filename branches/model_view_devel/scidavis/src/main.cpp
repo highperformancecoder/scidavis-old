@@ -140,7 +140,6 @@ int main( int argc, char ** argv )
 		mw->newTable();
 		mw->showMaximized();
 		mw->savedProject();
-		mw->showDonationDialog();
 		if (mw->autoSearchUpdates)
 		{
 			mw->autoSearchUpdatesRequest = true;

@@ -27,6 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "BoxCurve.h"
+#include "Graph.h"
 #include <QPainter>
 
 #include <gsl/gsl_sort.h>

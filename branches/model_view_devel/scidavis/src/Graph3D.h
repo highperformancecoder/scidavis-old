@@ -89,7 +89,7 @@ public slots:
 	void addData(Table* table,const QString& xColName,const QString& yColName);
 	void addData(Table* table,const QString& xColName,const QString& yColName,
 							double xl, double xr, double yl, double yr, double zl, double zr);
-	void addData(Table* table, int xCol,int yCol,int zCol, int type);
+	void addData(Table* table, int xCol,int yCol,int zCol, PlotType type);
 	void addData(Table* table, int xCol,int yCol,int zCol,
 							double xl, double xr, double yl, double yr, double zl, double zr);
 

@@ -238,7 +238,7 @@ void Graph3D::insertFunction(const QString& s,double xl,double xr,double yl,
 void Graph3D::addData(Table* table, int xcol, int ycol)
 {
 	worksheet=table;
-	int r=table->numRows();
+	int r=table->rowCount();
 	int i, xmesh=0, ymesh=2;
 	for (i = 0; i < r; i++)
 	{
@@ -321,8 +321,8 @@ void Graph3D::addMatrixData(Matrix* m)
 	matrix_ = m;
 	plotAssociation = "matrix<" + QString(m->name()) + ">";
 
-	int cols = m->numCols();
-	int rows = m->numRows();
+	int cols = m->columnCount();
+	int rows = m->rowCount();
 	double **data_matrix = Matrix::allocateMatrixData(rows, cols);
 	for (int i = 0; i < rows; i++ )
 	{
@@ -359,7 +359,7 @@ void Graph3D::addData(Table* table,const QString& xColName,const QString& yColNa
 		double xl, double xr, double yl, double yr, double zl, double zr)
 {
 	worksheet=table;
-	int r=table->numRows();
+	int r=table->rowCount();
 	int xcol=table->colIndex(xColName);
 	int ycol=table->colIndex(yColName);
 
@@ -439,10 +439,10 @@ void Graph3D::changeDataColumn(Table* table, const QString& colName)
 		findBestLayout();
 }
 
-void Graph3D::addData(Table* table, int xCol,int yCol,int zCol, int type)
+void Graph3D::addData(Table* table, int xCol,int yCol,int zCol, PlotType type)
 {
 	worksheet=table;
-	int r=table->numRows();
+	int r=table->rowCount();
 
 	QString s=table->colName(xCol)+"(X),";
 	s+=table->colName(yCol)+"(Y),";
@@ -513,7 +513,7 @@ void Graph3D::addData(Table* table, int xCol,int yCol,int zCol,
 		double xl, double xr, double yl, double yr, double zl, double zr)
 {
 	worksheet=table;
-	int r=table->numRows();
+	int r=table->rowCount();
 
 	QString s=table->colName(xCol)+"(X),";
 	s+=table->colName(yCol)+"(Y),";
@@ -604,7 +604,7 @@ void Graph3D::updateData(Table* table)
 
 void Graph3D::updateDataXY(Table* table, int xCol, int yCol)
 {
-	int r=table->numRows();
+	int r=table->rowCount();
 	int i, j, xmesh=0, ymesh=2;
 
 	for (i = 0; i < r; i++)
@@ -662,7 +662,7 @@ void Graph3D::updateDataXY(Table* table, int xCol, int yCol)
 
 void Graph3D::updateDataXYZ(Table* table, int xCol, int yCol, int zCol)
 {
-	int r=table->numRows();
+	int r=table->rowCount();
 	int i,j,columns=0;
 
 	for ( i = 0; i < r; i++)
@@ -715,8 +715,8 @@ void Graph3D::updateDataXYZ(Table* table, int xCol, int yCol, int zCol)
 
 void Graph3D::updateMatrixData(Matrix* m)
 {
-	int cols=m->numCols();
-	int rows=m->numRows();
+	int cols=m->columnCount();
+	int rows=m->rowCount();
 
 	double **data = Matrix::allocateMatrixData(rows, cols);
 	for (int i = 0; i < rows; i++ )
@@ -1427,8 +1427,8 @@ void Graph3D::updateScales(double xl, double xr, double yl, double yr, double zl
 void Graph3D::updateScalesFromMatrix(double xl, double xr, double yl,
 		double yr, double zl, double zr)
 {
-	double dx = (matrix_->xEnd() - matrix_->xStart())/(matrix_->numCols()-1);
-	double dy = (matrix_->yEnd() - matrix_->yStart())/(matrix_->numRows()-1);
+	double dx = (matrix_->xEnd() - matrix_->xStart())/(matrix_->columnCount()-1);
+	double dy = (matrix_->yEnd() - matrix_->yStart())/(matrix_->rowCount()-1);
 
 	int nc = int((xr - xl)/dx)+1;
 	int nr = int((yr - yl)/dy)+1;
@@ -1462,7 +1462,7 @@ void Graph3D::updateScalesFromMatrix(double xl, double xr, double yl,
 void Graph3D::updateScales(double xl, double xr, double yl, double yr,double zl, double zr,
 		int xcol, int ycol)
 {
-	int r=worksheet->numRows();
+	int r=worksheet->rowCount();
 	int i, j, xmesh=0, ymesh=2;
 	double xv, yv;
 
@@ -1512,7 +1512,7 @@ void Graph3D::updateScales(double xl, double xr, double yl, double yr,double zl,
 void Graph3D::updateScales(double xl, double xr, double yl, double yr, double zl, double zr,
 		int xCol, int yCol, int zCol)
 {
-	int r=worksheet->numRows();
+	int r=worksheet->rowCount();
 	int i,j,columns=0;
 	double xv, yv, zv;
 	for ( i = 0; i < r; i++)

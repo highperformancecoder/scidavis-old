@@ -28,6 +28,7 @@
  ***************************************************************************/
 #include "QwtHistogram.h"
 #include <QPainter>
+#include <QVarLengthArray>
 
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_histogram.h>

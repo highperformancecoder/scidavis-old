@@ -265,6 +265,8 @@ bool DataPickerTool::keyEventFilter(QKeyEvent *ke)
 
 void DataPickerTool::removePoint()
 {
+	// TODO
+	/*
 	if ( !d_selected_curve )
 		return;
 	if (((PlotCurve *)d_selected_curve)->type() == Graph::Function)
@@ -291,6 +293,7 @@ void DataPickerTool::removePoint()
 	d_graph->plotWidget()->replot();
 	d_graph->setFocus();
 	d_selected_curve = NULL;
+	*/
 }
 
 void DataPickerTool::movePoint(const QPoint &pos)

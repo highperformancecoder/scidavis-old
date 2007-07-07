@@ -107,8 +107,8 @@ void CurveRangeDialog::setCurveToModify(Graph *g, int curve)
     Table *t = d_curve->table();
 	if (t)
 	{
-		boxStart->setMaxValue(t->numRows());
-		boxEnd->setMaxValue(t->numRows());
+		boxStart->setMaxValue(t->rowCount());
+		boxEnd->setMaxValue(t->rowCount());
 	}
 
 	boxName->setText(d_curve->title().text());

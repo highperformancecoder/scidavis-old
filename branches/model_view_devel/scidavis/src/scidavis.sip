@@ -86,7 +86,7 @@ class Table: MyWidget
     int col;\
     if (PyInt_Check(arg)) {\
       col = (int)PyInt_AsLong(arg) - 1;\
-		if (col < 0 || col >= sipCpp->numCols()) {\
+		if (col < 0 || col >= sipCpp->columnCount()) {\
 			sipIsErr = 1;\
 			PyErr_Format(PyExc_ValueError, "There's no column %d in table %s!", col+1, sipCpp->name().ascii());\
 		}\
@@ -107,7 +107,7 @@ class Table: MyWidget
 	 }
 #define CHECK_TABLE_ROW(arg)\
    int row = arg-1;\
-	if (row < 0 || row >= sipCpp->numRows()) {\
+	if (row < 0 || row >= sipCpp->rowCount()) {\
 		sipIsErr = 1;\
 		PyErr_Format(PyExc_ValueError, "There's no row %d in table %s!", row+1, sipCpp->name().ascii());\
 	}
@@ -115,8 +115,8 @@ class Table: MyWidget
 %End
 
 public:
-  int numRows() /PyName=numRows/;
-  int numCols() /PyName=numCols/;
+  int rowCount() /PyName=numRows/;
+  int columnCount() /PyName=numCols/;
   void resizeRows(int) /PyName=setNumRows/;
   void resizeCols(int) /PyName=setNumCols/;
 
@@ -166,7 +166,7 @@ public:
 %End
   SIP_PYOBJECT colName(int);
 %MethodCode
-   if (a0 < 1 || a0 > sipCpp->numCols()) {\
+   if (a0 < 1 || a0 > sipCpp->columnCount()) {\
 		sipIsErr = 1;\
 		PyErr_SetString(PyExc_ValueError, "Invalid column argument");\
 	} else
@@ -220,20 +220,20 @@ class Matrix: MyWidget
 #include "src/Matrix.h"
 #define CHECK_MATRIX_COL(arg)\
 	int col = arg-1;\
-   if (col < 0 || col >= sipCpp->numCols()) {\
+   if (col < 0 || col >= sipCpp->columnCount()) {\
 		sipIsErr = 1;\
 		PyErr_Format(PyExc_ValueError, "There's no column %d in matrix %s!", col+1, sipCpp->name().ascii());\
 	}
 #define CHECK_MATRIX_ROW(arg)\
    int row = arg-1;\
-	if (row < 0 || row >= sipCpp->numRows()) {\
+	if (row < 0 || row >= sipCpp->rowCount()) {\
 		sipIsErr = 1;\
 		PyErr_Format(PyExc_ValueError, "There's no row %d in matrix %s!", row+1, sipCpp->name().ascii());\
 	}
 %End
 public:
-  int numRows();
-  int numCols();
+  int rowCount();
+  int columnCount();
   SIP_PYOBJECT text(int, int);
 %MethodCode
 	sipIsErr = 0;

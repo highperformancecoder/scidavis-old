@@ -283,17 +283,11 @@ void TableRemoveRowsCmd::redo()
 		{
 			AbstractDataSource * src = d_model->output(i);
 			if(qobject_cast<AbstractDoubleDataSource *>(src))
-			{
 				d_old_cols.append(new DoubleColumnData());
-			}
 			else if(qobject_cast<AbstractStringDataSource *>(src))
-			{
 				d_old_cols.append(new StringColumnData());
-			}
 			else
-			{
 				d_old_cols.append(new DateTimeColumnData());
-			}
 			d_old_cols.at(i)->copy(src, d_first, 0, d_count);
 			
 			// copy masking 
@@ -520,11 +514,11 @@ TableSetColumnValuesCmd::~TableSetColumnValuesCmd()
 
 void TableSetColumnValuesCmd::redo()
 {
-	int strings = d_data->numRows();
+	int strings = d_data->rowCount();
 	int index = 0; // index in the string list
 	int rows = d_model->rowCount();
 
-	if(d_backup->numRows() > 0)  // after previous undo
+	if(d_backup->rowCount() > 0)  // after previous undo
 	{
 		// prepare input filter
 		d_in->input(0, d_data);
@@ -577,7 +571,7 @@ void TableSetColumnValuesCmd::redo()
 
 void TableSetColumnValuesCmd::undo()
 {
-	int rows = d_col_ptr->asDataSource()->numRows();
+	int rows = d_col_ptr->asDataSource()->rowCount();
 	int index = 0; // index in the string list
 
 	// prepare input filter

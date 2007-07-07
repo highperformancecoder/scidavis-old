@@ -53,7 +53,7 @@ class StatisticsFilter : public AbstractFilter {
 		virtual int numOutputs() const { return 11; }
 		virtual AbstractDataSource *output(int port) const;
 		//! Number of rows = number of inputs that have been provided.
-		int numRows() const;
+		int rowCount() const;
 	protected:
 		virtual bool inputAcceptable(int, AbstractDataSource *source) {
 			return source->inherits("AbstractDoubleDataSource");
@@ -76,7 +76,7 @@ class StatisticsFilter : public AbstractFilter {
 		class DoubleStatisticsColumn : public AbstractDoubleDataSource {
 			public:
 				DoubleStatisticsColumn(const StatisticsFilter *parent, StatItem item) : d_parent(parent), d_item(item) {}
-				virtual int numRows() const { return d_parent->numRows(); }
+				virtual int rowCount() const { return d_parent->rowCount(); }
 				virtual double valueAt(int row) const;
 				virtual QString label() const; 
 				virtual PlotDesignation plotDesignation() const { return noDesignation; }
@@ -90,7 +90,7 @@ class StatisticsFilter : public AbstractFilter {
 		class StringStatisticsColumn : public AbstractStringDataSource {
 			public:
 				StringStatisticsColumn(const StatisticsFilter *parent, StatItem item) : d_parent(parent), d_item(item) {}
-				virtual int numRows() const { return d_parent->numRows(); }
+				virtual int rowCount() const { return d_parent->rowCount(); }
 				virtual QString textAt(int row) const;
 				virtual QString label() const;
 				virtual PlotDesignation plotDesignation() const { return noDesignation; }

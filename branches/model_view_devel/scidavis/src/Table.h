@@ -5,7 +5,8 @@
     Copyright            : (C) 2006 by Ion Vasilief,
                            Tilman Hoener zu Siederdissen,
                            Knut Franke
-    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
+    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
+                           knut.franke*gmx.de
     Description          : Table worksheet class
 
  ***************************************************************************/
@@ -31,359 +32,237 @@
 #ifndef TABLE_H
 #define TABLE_H
 
-#include <QWidget>
-#include <QTableWidget>
-#include <QTableWidgetItem>
-#include <QHeaderView>
-#include <QContextMenuEvent>
-#include <QList>
-#include <QVarLengthArray>
-#include <QTableWidgetSelectionRange>
-class QEvent;
+class QUndoStack;
 
-#include "Graph.h"
 #include "MyWidget.h"
+#include "tablecommands.h"
+#include "AbstractDataSource.h"
+#include "AbstractColumnData.h"
 #include "ScriptingEnv.h"
 #include "Script.h"
+class TableView;
+class TableModel;
+class QUndoStack;
 
 /*!\brief MDI window providing a spreadsheet table with column logic.
  *
- * \section future Future Plans
- * Port to the Model/View approach used in Qt4 
- * [ assigned to thzs ]
- */
+\section Class Table, the model/view architecture and the undo framework
+To use Qt's model/view framework, increase the performance for large datasets, 
+and to prepare class Table for the upcoming undo/redo framework, this class 
+has been rewritten using the following design:<br>
+The whole functionality is split up into several classes each having its special
+purpose:
+<ul>
+<li> class Table: This class communicates with the application, the main window, plot
+windows and dialogs, i.e. provide the functionality of an MDI window. It handles script
+evaluation, import/export, and saving and loading of a complete table. Most of the communication
+with plot windows has been moved out of this class. The underlying model must not 
+be visible to the plot windows since the undo/redo framework sits between the 
+GUI (Table and TableView) and the model.</li>
+<li> class TableView: This class is purely a GUI handling user input and displaying of
+the table. It should not contain any data that would be saved in project file. It should
+also not have any methods to be called from outside Table.</li>
+<li> class TableDataModel: This class stores all data using column logic. It's supposed
+to contain all data that would be saved to project file (except things like the 
+geometry of Table). It receives commands from Table though the undo stack.</li>
+<li> classes derived from AbstractColumnData: These classes store the data related
+to one column. Each of them is optimized to store a special type of data (doubles, 
+strings, dates, times). TableDataModel wraps around these classes but it is also 
+possible to read them directly if this leads to a significant speed increase or 
+column type specific data shall be read. The speed advantage mostly applies 
+to double columns which can be accessed as contiguous arrays. Writing directly 
+to columns is not a good idea since the undo/redo framework must have 
+control over all changes.</li>
+</ul>
+The undo/redo framework works as a layer between Table/TableView
+and TableDataModel/...ColumnData. Table and TableView send commands to TableDataModel that
+can then be undone.
+*/
 class Table: public MyWidget, public scripted
 {
     Q_OBJECT
 
 public:
-	enum PlotDesignation{All = -1, None = 0, X = 1, Y = 2, Z = 3, xErr = 4, yErr = 5};
-	enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5};
+	Table(ScriptingEnv *env, int rows,int cols, const QString &label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
 
-   	Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
-		 bool stripSpaces, bool simplifySpaces, const QString &label,
-		 QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
-	Table(ScriptingEnv *env, int r,int c, const QString &label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
+	//! The column mode (defines output and input filter)
+	enum ColumnMode{Numeric = 0, //<! column contains doubles
+	Text = 1, //!< column contains strings
+	Date = 2,//!< obsolete legacy value, use DateTime instead
+	Time = 3, //!< obsolete legacy value, use DateTime instead
+	Month = 4, //!< column contains month names
+	Day = 5, //!< column containts day of week names
+	DateTime = 6 //!< column contains dates and/or times
+	};
 
-	QList<QTableWidgetSelectionRange> getSelection();
-
-public slots:
-	QTableWidget* table(){return d_table;};
-	void copy(Table *m);
-	int numRows();
-	int numCols();
-	void setNumRows(int rows);
-	void setNumCols(int cols);
-	void resizeRows(int);
-	void resizeCols(int);
-
-	//! Return the value of the cell as a double
-	double cell(int row, int col);
-	QString text(int row, int col);
-	QStringList columnsList();
-	QStringList colNames(){return col_label;}
-	QString colName(int col);
-	QString colLabel(int col){return col_label[col];};
-	int colIndex(const QString& name);
-
-	int colPlotDesignation(int col){return col_plot_type[col];};
-	void setColPlotDesignation(int col, PlotDesignation d){col_plot_type[col]=d;};
-	void setPlotDesignation(PlotDesignation pd);
-	QList<int> plotDesignations(){return col_plot_type;};
-
-	void setColName(int col,const QString& new_name);
-	void setHeader(QStringList header);
-	void loadHeader(QStringList header);
-	void setHeaderColType();
-	void setText(int row,int col,const QString & new_text);
-	void setRandomValues();
-	void setAscValues();
-
-	void cellEdited(int,int col);
-	void clearCell(int row, int col);
-	QString saveText();
-	bool isEmptyRow(int row);
-	bool isEmptyColumn(int col);
-	int nonEmptyRows();
-
-	void plotL();
-	void plotLP();
-	void plotP();
-	void plotVB();
-	void plotHB();
-	void plotArea();
-	void plotPie();
-	void plotVerticalDropLines();
-	void plotSpline();
-	void plotVertSteps();
-    void plotHorSteps();
-	void plotHistogram();
-	void plotVectXYXY();
-	void plotVectXYAM();
-	void plotBoxDiagram();
-
-	//! \name 3D Plots
-	//@{
-	void plot3DRibbon();
-	void plot3DScatter();
-	void plot3DTrajectory();
-	void plot3DBars();
-
-	bool valid2DPlot();
-	bool valid3DPlot();
-	//@}v
-
-	void print();
-	void print(const QString& fileName);
-	void exportPDF(const QString& fileName);
-
-	//! \name Column Operations
-	//@{
-	void removeCol();
-	void removeCol(const QStringList& list);
-	void clearCol();
-	void insertCol();
-	void insertCols(int start, int count);
-	void addCol(PlotDesignation pd = Y);
-	void addColumns(int c);
-	//@}
-
-	//! \name Sorting
-	//@{
-	/*!\brief Sort the current column in ascending order.
-	 * \sa sortColDesc(), sortColumn(), QTableWidget::currentColumn()
-	 */
-	void sortColAsc();
-	/*!\brief Sort the current column in descending order.
-	 * \sa sortColAsc(), sortColumn(), QTable::currentColumn()
-	 */
-	void sortColDesc();
-	/*!\brief Sort the specified column.
-	 * \param col the column to be sorted
-	 * \param order 0 means ascending, anything else means descending
-	 */
-	void sortColumn(int col = -1, int order = 0);
-	/*!\brief Display a dialog with some options for sorting all columns.
-	 *
-	 * The sorting itself is done using sort(int,int,const QString&).
-	 */
-	void sortTableDialog();
-	//! Sort all columns as in sortColumns(const QStringList&,int,int,const QString&).
-	void sort(int type = 0, int order  = 0, const QString& leadCol = QString());
-	//! Sort selected columns as in sortColumns(const QStringList&,int,int,const QString&).
-	void sortColumns(int type = 0, int order = 0, const QString& leadCol = QString());
-	/*!\brief Sort the specified columns.
-	 * \param cols the columns to be sorted
-	 * \param type 0 means sort individually (as in sortColumn()), anything else means together
-	 * \param order 0 means ascending, anything else means descending
-	 * \param leadCol for sorting together, the column which determines the permutation
-	 */
-	void sortColumns(const QStringList& cols, int type = 0, int order = 0, const QString& leadCol = QString());
-	/*!\brief Display a dialog with some options for sorting the selected columns.
-	 *
-	 * The sorting itself is done using sortColumns(int,int,const QString&).
-	 */
-	void sortColumnsDialog();
-	//@}
-
-	//! \name Normalization
-	//@{
-	void normalizeCol(int col=-1);
-	void normalizeSelection();
-	void normalize();
-	//@}
-
-	QVarLengthArray<double> col(int ycol);
-	int firstXCol();
-	bool noXColumn();
-	bool noYColumn();
-	int colX(int col);
-	int colY(int col);
-
-	QStringList getCommands(){return commands;};
-	//! Set all column formulae.
-	void setCommands(const QStringList& com);
-	//! Set all column formulae.
-	void setCommands(const QString& com);
-	//! Set formula for column col.
-	void setCommand(int col, const QString com);
-	//! Compute specified cells from column formula.
-	bool calculate(int col, int startRow, int endRow);
-	//! Compute selected cells from column formulae; use current cell if there's no selection.
-	bool calculate();
-
-	//! \name Row Operations
-	//@{
-	void deleteSelectedRows();
-	void insertRow();
-	//@}
-
-	//! Selection Operations
-	//@{
-	void cutSelection();
-	void copySelection();
-	void clearSelection();
-	void pasteSelection();
-	void selectAllTable();
-	void deselect();
-	void clear();
-	//@}
-
-	void init(int rows, int cols);
-	QStringList selectedColumns();
-	QStringList selectedYColumns();
-	QStringList selectedErrColumns();
-	QStringList selectedYLabels();
-	QStringList drawableColumnSelection();
-	QStringList YColumns();
-	int selectedColsNumber();
-	void changeColName(const QString& new_name);
-	void enumerateRightCols(bool checked);
-
-	void changeColWidth(int width, bool allCols);
-	void changeColWidth(int width, int col);
-	int columnWidth(int col);
-	QStringList columnWidths();
-	void setColWidths(const QStringList& widths);
-
-	void setSelectedCol(int col){selectedCol = col;};
-	int selectedColumn(){return selectedCol;};
-	int firstSelectedColumn();
-	//! Return the number of fully selected rows
-	int numSelectedRows();
-	//! Return the number of fully selected columns
-	int numSelectedColumns();
-	bool isRowSelected(int row, bool full=false);
-	bool isColumnSelected(int col, bool full=false);
-
-	//! Scroll to row (row starts with 1)
-	void goToRow(int row);
-
-	void columnNumericFormat(int col, char *f, int *precision);
-	void columnNumericFormat(int col, int *f, int *precision);
-	int columnType(int col){return colTypes[col];};
-
-	QList<int> columnTypes(){return colTypes;};
-	void setColumnTypes(QList<int> ctl){colTypes = ctl;};
-	void setColumnTypes(const QStringList& ctl);
-	void setColumnType(int col, ColType val) { colTypes[col] = val; }
-
-	void saveToMemory();
-	void freeMemory();
-
-	QString columnFormat(int col){return col_format[col];};
-	QStringList getColumnsFormat(){return col_format;};
-	void setColumnsFormat(const QStringList& lst);
-
-	void setTextFormat(int col);
-	void setColNumericFormat(int f, int prec, int col);
-	bool setDateFormat(const QString& format, int col);
-	bool setTimeFormat(const QString& format, int col);
-	void setMonthFormat(const QString& format, int col);
-	void setDayFormat(const QString& format, int col);
-	bool setDateTimeFormat(int f, const QString& format, int col);
-
-	bool exportToASCIIFile(const QString& fname, const QString& separator,
-							  bool withLabels,bool exportSelection);
-	void importASCII(const QString &fname, const QString &sep, int ignoredLines,
-						bool renameCols, bool stripSpaces, bool simplifySpaces, bool newTable);
-	void importMultipleASCIIFiles(const QString &fname, const QString &sep, int ignoredLines,
-					bool renameCols, bool stripSpaces, bool simplifySpaces, int importFileAs);
-
-	//! \name Saving and Restoring
-	//@{
-	virtual QString saveToString(const QString& geometry);
-	QString saveHeader();
-	QString saveComments();
-	QString saveCommands();
-	QString saveColumnWidths();
-	QString saveColumnTypes();
-
-	void setSpecifications(const QString& s);
-	QString& getSpecifications();
-	void restore(QString& spec);
-	QString& getNewSpecifications();
-	void setNewSpecifications();
-
-	/*!
-	 *used for restoring the table old caption stored in specifications string
-	 */
-	QString oldCaption();
-
-	/*!
-	 *used for restoring the table caption stored in new specifications string
-	 */
-	QString newCaption();
-	//@}
-
+	//! Return a pointer to the undo stack
+	virtual QUndoStack *undoStack() const;
+	//! Return all selected columns
+	/**
+	 * If full is true, this function only returns a column if the whole 
+	 * column is selected.
+	*/
+	QList<AbstractDataSource *> selectedColumns(bool full = false);
+	//! Return how many columns are selected
+	/**
+	 * If full is true, this function only returns the number of fully 
+	 * selected columns.
+	*/
+	int selectedColumnCount(bool full = false);
+	//! Return how many columns with the given plot designation are (at least partly) selected
+	int selectedColumnCount(AbstractDataSource::PlotDesignation pd);
+	//! Returns true if column 'col' is selected; otherwise false
+	/**
+	 * If full is true, this function only returns true if the whole 
+	 * column is selected.
+	*/
+	bool isColumnSelected(int col, bool full = false);
+	//! Return how many rows are (at least partly) selected
+	/**
+	 * If full is true, this function only returns the number of fully 
+	 * selected rows.
+	*/
+	int selectedRowCount(bool full = false);
+	//! Returns true if row 'row' is selected; otherwise false
+	/**
+	 * If full is true, this function only returns true if the whole 
+	 * row is selected.
+	*/
+	bool isRowSelected(int row, bool full = false);
+	//! Return a column's label
+	QString columnLabel(int col);
+	//! The the column's label
+	void setColumnLabel(int col, const QString& label);
+	//! Return the column's comment
+	QString columnComment(int col);
+	//! The the column's comment
+	void setColumnComment(int col, const QString& comment);
+	//! Return a column's plot designation
+	AbstractDataSource::PlotDesignation columnPlotDesignation(int col);
+	//! Return the number of columns matching the given designation
+	int columnCount(AbstractDataSource::PlotDesignation pd);
+	//! Return the total number of columns in the table
+	int columnCount();
+	//! Return the total number of rows in the table
+	int rowCount();
+	//! Set the color of the table background
 	void setBackgroundColor(const QColor& col);
+	//! Set the text color
 	void setTextColor(const QColor& col);
+	//! Set the header color
 	void setHeaderColor(const QColor& col);
+	//! Set the cell text font
 	void setTextFont(const QFont& fnt);
+	//! Set the font for both headers
 	void setHeaderFont(const QFont& fnt);
-
-	int verticalHeaderWidth(){return d_table->verticalHeader()->width();};
-
-	QString colComment(int col){return comments[col];};
-	void setColComment(int col, const QString& s);
-	QStringList colComments(){return comments;};
-	void setColComments(const QStringList& lst){comments = lst;};
+	//! Show or hide (if on = false) the column comments
 	void showComments(bool on = true);
+	//! Return a list of all column labels
+	QStringList columnLabels();
+	//! Set the number of rows
+	void setRowCount(int new_size);
+	//! Set the number of columns
+	void setColumnCount(int new_size);
+	//! Copy another table
+	void copy(Table * other);
+	//! Fill the selected cells with row numbers
+	void setAscendingValues();
+	//! Fill the selected cells random values
+	void setRandomValues();
+	//! Return the index of the first selected column
+	/**
+	 * If full is true, this function only looks for fully 
+	 * selected columns.
+	*/
+	int firstSelectedColumn(bool full = false);
+	//! Return the index of the last selected column
+	/**
+	 * If full is true, this function only looks for fully 
+	 * selected columns.
+	*/
+	int lastSelectedColumn(bool full = false);
+	//! Return whether a cell is selected
+	bool isCellSelected(int row, int col);
+	//! Set the plot designation for a given column or all selected
+	/*
+	 *  If 'col' is -1 (the default), the plot designation is set for all
+	 *  (at least partially) selected columns.
+	 */
+	void setPlotDesignation(AbstractDataSource::PlotDesignation pd, int col = -1);
+	//! Return the plot designation for the given column
+	AbstractDataSource::PlotDesignation plotDesignation(int col);
+	//! Set the plot designation for the given column
+	void setPlotDesignation(int col, AbstractDataSource::PlotDesignation pd);
+	//! Clear the given column
+	void clearColumn(int col);
+	//! Clear the whole table
+	void clear();
+	//! Scroll to the specified cell
+	void goToCell(int row, int col);
+	//! Determine the corresponding X column
+	int colX(int col);
+	//! Determine the corresponding Y column
+	int colY(int col);
+	//! Return the column mode
+	Table::ColumnMode columnMode(int col);
+	//! Return the width of column 'col' in pixels
+	int columnWidth(int col);
 
-	QString saveAsTemplate(const QString& geometryInfo);
-	void restore(const QStringList& lst);
-
-	//! This slot notifies the main application that the table has been modified. Triggers the update of 2D plots.
-	void notifyChanges();
-
-	//! Notifies the main application that the width of a table column has been modified by the user.
-	void colWidthModified(int, int, int);
-
-signals:
-	void plot3DRibbon(Table *,const QString&);
-	void plotXYZ(Table *,const QString&, int);
-	void plotCol(Table *,const QStringList&, int, int, int);
-	void changedColHeader(const QString&, const QString&);
-	void removedCol(const QString&);
-	void modifiedData(Table *, const QString&);
-	void optionsDialog();
-	void colValuesDialog();
-	void resizedTable(QWidget*);
-	void showContextMenu(bool selection);
-	void createTable(const QString&,int,int,const QString&);
-
+	
 protected:
-	QTableWidget *d_table;
-
-private slots:
-	//! \name Event Handlers
-	//@{
-	void contextMenuEvent(QContextMenuEvent *e);
-	void customEvent( QCustomEvent* e);
-	//! Called whenever a header section is double clicked
-	void headerDoubleClickedHandler(int section);
-	//@}v
-
-
+	//! The table widget
+	TableView *d_table_view;
+	//! The model storing the data
+	TableModel *d_table_model;
 
 private:
-	bool d_show_comments;
-	QString specifications, newSpecifications;
-	QStringList commands, col_format, comments, col_label;
-	QList<int> colTypes, col_plot_type;
-	int selectedCol;
-	double **d_saved_cells;
-	/*!
-	 * \brief Toggle between allow/suppress the emission of modification signals
-	 *
-	 * Set this to false during long operations to
-	 * prevent "emit modifiedWindow(this)" being
-	 * called for each cell.
-	 * \sa MyWidget::modifiedWindow()
-	 */
-	bool allow_modification_signals;
-	//! Internal function to change the column header
-	void setColumnHeader(int index, const QString& label);
+	//! Initialize table
+	void init(int rows, int cols);
+
+signals:
+
+	
+public:
+	// obsolete transition functions (to be removed or rewritten later)
+	int colIndex(const QString& name);
+	QString text(int row, int col);
+	QString colName(int col);
+	int columnType(int col);
+	QString columnFormat(int col);
+	QStringList selectedYLabels();
+	double cell(int row, int col);
+	int selectedColumn();
+	void setSelectedCol(int col);
+	QStringList colNames();
+	void setText(int row, int col, QString text);
+	void setHeader(QStringList header);
+	int colPlotDesignation(int col);
+	QString colLabel(int col);
+	QString colComment(int col);
+	int numRows();
+	int numCols();
+	void columnNumericFormat(int col, char *f, int *precision);
+	void columnNumericFormat(int col, int *f, int *precision);
+	void changeColWidth(int width, bool all = false);
+	void enumerateRightCols(bool checked);
+	void setColComment(int col, const QString& s);
+	void changeColName(const QString& new_name);
+	void setColName(int col,const QString& new_name);
+	void setCommand(int col, const QString& com);
+	void setColPlotDesignation(int col, AbstractDataSource::PlotDesignation pd);
+	void setColNumericFormat(int f, int prec, int col);
+	void setTextFormat(int col);
+	void setDateFormat(const QString& format, int col);
+	void setTimeFormat(const QString& format, int col);
+	void setMonthFormat(const QString& format, int col);
+	void setDayFormat(const QString& format, int col);
+	bool setDateTimeFormat(int col, int f, const QString& format);
+	int verticalHeaderWidth();
+	QStringList columnsList();
+	QStringList selectedColumnsOld();
+	int firstXCol();
+	void addCol();
+
 };
 
 #endif

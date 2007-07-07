@@ -270,7 +270,7 @@ void CurvesDialog::init()
     ApplicationWindow *app = (ApplicationWindow *)this->parent();
     if (app)
     {
-        QStringList tables = app->columnsList(Table::Y);
+        QStringList tables = app->columnsList(AbstractDataSource::Y);
         if (!tables.isEmpty())
         {
             boxStyle->show();

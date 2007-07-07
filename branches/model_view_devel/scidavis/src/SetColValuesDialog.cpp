@@ -175,17 +175,20 @@ void SetColValuesDialog::updateColumn(int sc)
 	else
 		buttonPrev->setEnabled(true);
 
-	if (sc >= table->numCols() - 1)
+	if (sc >= table->columnCount() - 1)
 		buttonNext->setEnabled(false);
 	else
 		buttonNext->setEnabled(true);
 
 	table->setSelectedCol(sc);
-	table->table()->clearSelection();
-	table->table()->selectColumn(sc);
-	colNameLabel->setText("col(\""+table->colLabel(sc)+"\")= ");
+	// TODO replace the commented out lines (###)
+	// acessing TableView from outside Table is absolutely forbidden
+//###	table->table()->clearSelection();
+//###	table->table()->selectColumn(sc);
+	colNameLabel->setText("col(\""+table->columnLabel(sc)+"\")= ");
 
-	QStringList com = table->getCommands();
+	//### QStringList com = table->getCommands();
+	QStringList com;
 	commands->setText(com[sc]);
 	QTextCursor cursor = commands->textCursor();
 	cursor.movePosition(QTextCursor::End,QTextCursor::KeepAnchor);
@@ -210,14 +213,15 @@ void SetColValuesDialog::accept()
 
 bool SetColValuesDialog::apply()
 {
+	// TODO replace the commented out lines (###)
 	int col = table->selectedColumn();
 	QString formula = commands->text();
-	QString oldFormula = table->getCommands()[col];
+	QString oldFormula; //### = table->getCommands()[col];
 
-	table->setCommand(col,formula);
-	if(table->calculate(col,start->value()-1,end->value()-1))
-		return true;
-	table->setCommand(col,oldFormula);
+	//### table->setCommand(col,formula);
+	//### if(table->calculate(col,start->value()-1,end->value()-1))
+	//###	return true;
+	//### table->setCommand(col,oldFormula);
 	return false;
 }
 
@@ -251,10 +255,12 @@ void SetColValuesDialog::setTable(Table* w)
 {
 	table=w;
 	QStringList colNames=w->colNames();
-	int cols = w->numCols();
+	int cols = w->columnCount();
 	for (int i=0; i<cols; i++)
 		boxColumn->insertItem("col(\""+colNames[i]+"\")",i); 
 
+	// TODO
+	/*
 	QList<QTableWidgetSelectionRange> sel = w->getSelection();
 	QListIterator<QTableWidgetSelectionRange> it(sel);
 	QTableWidgetSelectionRange cur;
@@ -268,11 +274,12 @@ void SetColValuesDialog::setTable(Table* w)
 	else
 	{
 		start->setValue(1);
-		end->setValue(w->numRows());
+		end->setValue(w->rowCount());
 	}
 
 	updateColumn(w->selectedColumn());
 	commands->setContext(w);
+	*/
 }
 
 

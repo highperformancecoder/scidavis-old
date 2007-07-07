@@ -108,7 +108,7 @@ public:
 	//! \name Data reading functions
 	//@{
 	//! Return the vector size
-	virtual int numRows() const;
+	virtual int rowCount() const;
 	//! Return the value in row 'row'
 	virtual double valueAt(int row) const;
 	//! Return the column label

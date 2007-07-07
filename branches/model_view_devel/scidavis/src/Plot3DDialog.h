@@ -29,8 +29,10 @@
 #ifndef PLOT3DDIALOG_H
 #define PLOT3DDIALOG_H
 
+#include <QDialog>
 #include "Graph3D.h"
 #include <QCheckBox>
+#include <QGroupBox>
 
 class QComboBox;
 class QLabel;

@@ -52,7 +52,7 @@ AbstractDataSource *StatisticsFilter::output(int port) const
 	return d_doubles[port-2];
 }
 
-int StatisticsFilter::numRows() const
+int StatisticsFilter::rowCount() const
 {
 	int result = 0;
 	foreach(AbstractDataSource* i, d_inputs)
@@ -125,7 +125,7 @@ void StatisticsFilter::inputDataChanged(int port)
 
 double StatisticsFilter::DoubleStatisticsColumn::valueAt(int row) const
 {
-	if (row<0 || row>=d_parent->numRows()) return 0;
+	if (row<0 || row>=d_parent->rowCount()) return 0;
 	const Statistics *s = &(d_parent->d_s.at(row));
 	switch(d_item) {
 		case Mean: return s->sum / double(s->N);

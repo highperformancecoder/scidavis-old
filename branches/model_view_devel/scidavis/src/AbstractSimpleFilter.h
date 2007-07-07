@@ -77,8 +77,8 @@ template<class T> class AbstractSimpleFilter : public AbstractDataSourceTemplate
 				AbstractDataSource::noDesignation;
 		}
 		//! Assume a 1:1 correspondence between input and output rows.
-		virtual int numRows() const {
-			return d_inputs.value(0) ? d_inputs.at(0)->numRows() : 0;
+		virtual int rowCount() const {
+			return d_inputs.value(0) ? d_inputs.at(0)->rowCount() : 0;
 		}
 
 	protected:

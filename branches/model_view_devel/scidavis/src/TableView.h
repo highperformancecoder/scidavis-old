@@ -76,6 +76,10 @@ protected:
 	//! Pointer to the current underlying model
 	TableModel * d_model;
 
+private:
+	//! Initialization common to all ctors
+	void init(TableModel * model);
+
 };
 
 

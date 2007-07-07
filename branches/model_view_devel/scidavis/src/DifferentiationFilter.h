@@ -70,7 +70,7 @@ class DifferentiationFilter : public AbstractDoubleDataSource, public AbstractFi
 		virtual void inputDataAboutToChange(AbstractDataSource*) { emit dataAboutToChange(this); }
 		virtual void inputDataChanged(AbstractDataSource* source) {
 			emit dataChanged(this);
-			d_x_truncator.setNumRows(numRows());
+			d_x_truncator.setNumRows(rowCount());
 			if (d_inputs.indexOf(source) == 1) return;
 			d_x_truncator.input(0, source);
 			d_x_truncator.setStartSkip(1);
@@ -78,12 +78,12 @@ class DifferentiationFilter : public AbstractDoubleDataSource, public AbstractFi
 
 // DataSource interface
 	public:
-		virtual int numRows() const {
+		virtual int rowCount() const {
 			if (!d_inputs.value(0) || !d_inputs.value(1)) return 0;
-			return qMin(d_inputs[0]->numRows(), d_inputs[1]->numRows()) - 2;
+			return qMin(d_inputs[0]->rowCount(), d_inputs[1]->rowCount()) - 2;
 		}
 		virtual double valueAt(int row) const {
-			if (row<0 || row>=numRows()) return 0;
+			if (row<0 || row>=rowCount()) return 0;
 			AbstractDoubleDataSource *x = static_cast<AbstractDoubleDataSource*>(d_inputs[0]);
 			AbstractDoubleDataSource *y = static_cast<AbstractDoubleDataSource*>(d_inputs[1]);
 			double d1 = (y->valueAt(row+1)-y->valueAt(row))   / (x->valueAt(row+1)-x->valueAt(row));

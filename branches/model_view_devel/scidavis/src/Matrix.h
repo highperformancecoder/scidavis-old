@@ -68,9 +68,9 @@ public:
 	~Matrix(){};
 
 	//! Return the number of rows
-	int numRows();
+	int rowCount();
 	//! Return the number of columns
-	int numCols();
+	int columnCount();
 
 	//! Returns whether the row is empty or not
 	bool isEmptyRow(int row);

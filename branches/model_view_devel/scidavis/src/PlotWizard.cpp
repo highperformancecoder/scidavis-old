@@ -394,7 +394,7 @@ void PlotWizard::plot3D(const QStringList& lst)
                 Graph3D *g = app->newPlot3D();
                 if (g)
                 {
-                    g->addData(t, xCol, yCol, zCol, 1);
+                    g->addData(t, xCol, yCol, zCol, Graph3D::Trajectory);
                     g->update();
                 }
             }

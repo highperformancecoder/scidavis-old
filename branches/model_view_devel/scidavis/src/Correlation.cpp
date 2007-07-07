@@ -70,7 +70,7 @@ void Correlation::setDataFromTable(Table *t, const QString& colName1, const QStr
 		delete[] d_y;
 	}
 
-	int rows = d_table->numRows();
+	int rows = d_table->rowCount();
 	d_n = 16; // tmp number of points
 	while (d_n < rows)
 		d_n *= 2;
@@ -132,12 +132,12 @@ void Correlation::output()
 
 void Correlation::addResultCurve()
 {
-	int cols = d_table->numCols();
+	int cols = d_table->columnCount();
 	int cols2 = cols+1;
 	d_table->addCol();
 	d_table->addCol();
-	int n = d_table->numRows()/2;
-	for (int i = 0; i<d_table->numRows(); i++)
+	int n = d_table->rowCount()/2;
+	for (int i = 0; i<d_table->rowCount(); i++)
 	{
 		double y = 0;
 		if(i < n)
@@ -155,8 +155,9 @@ void Correlation::addResultCurve()
 
 	d_table->setColName(cols, tr("Lag") + id);
 	d_table->setColName(cols2, label);
-	d_table->setColPlotDesignation(cols, Table::X);
-	d_table->setHeaderColType();
+	d_table->setColPlotDesignation(cols, AbstractDataSource::X);
+	// TODO
+//	d_table->setHeaderColType();
 
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	MultiLayer *ml = app->newGraph(name() + tr("Plot"));

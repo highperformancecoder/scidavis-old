@@ -215,7 +215,7 @@ void FFTDialog::setTable(Table *t)
 		boxSampling->setText(QString::number(x1 - x0));
 	}
 
-	l = t->selectedColumns();
+	l = t->selectedColumnsOld();
 	int selected = (int)l.size();
 	if (!selected)
 	{

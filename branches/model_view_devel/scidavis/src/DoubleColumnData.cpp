@@ -41,16 +41,16 @@ bool DoubleColumnData::copy(const AbstractDataSource * other)
 	const AbstractDoubleDataSource *other_as_double = qobject_cast<const AbstractDoubleDataSource*>(other);
 	if (!other_as_double) return false;
 
-	int count = other_as_double->numRows();
+	int count = other_as_double->rowCount();
 
-	if(count > numRows())
+	if(count > rowCount())
 	{
 		emit dataAboutToChange(this);
-		expand(count - numRows()); 
+		expand(count - rowCount()); 
 	}
 	else
 	{
-		removeRows(count, numRows() - count);
+		removeRows(count, rowCount() - count);
 		emit dataAboutToChange(this);
 	}
 
@@ -70,8 +70,8 @@ bool DoubleColumnData::copy(const AbstractDataSource * source, int source_start,
 	if (!source_as_double) return false;
 
 	emit dataAboutToChange(this);
-	if (dest_start + num_rows > numRows())
-		expand(dest_start + num_rows - numRows());
+	if (dest_start + num_rows > rowCount())
+		expand(dest_start + num_rows - rowCount());
 
 	double * ptr = data();
 	for(int i=0; i<num_rows; i++)
@@ -83,7 +83,7 @@ bool DoubleColumnData::copy(const AbstractDataSource * source, int source_start,
 	return true;
 }
 
-int DoubleColumnData::numRows() const 
+int DoubleColumnData::rowCount() const 
 { 
 	return size(); 
 }
