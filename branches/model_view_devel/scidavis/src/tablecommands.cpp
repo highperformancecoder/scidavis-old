@@ -382,12 +382,7 @@ void TableRemoveColumnsCmd::redo()
 
 void TableRemoveColumnsCmd::undo()
 {
-	d_model->insertColumns(d_old_cols, d_first);
-	for(int i=0; i<d_count; i++)
-	{
-		d_model->setInputFilter(d_first +i, d_in_filters.at(i));
-		d_model->setOutputFilter(d_first +i, d_out_filters.at(i));
-	}
+	d_model->insertColumns(d_old_cols, d_in_filters, d_out_filters, d_first);
 	d_old_cols.clear();
 	d_in_filters.clear();
 	d_out_filters.clear();
@@ -432,27 +427,30 @@ TableAppendColumnsCmd::TableAppendColumnsCmd( TableModel * model, QList<Abstract
  : QUndoCommand( parent ), d_model(model), d_cols(cols), d_in_filters(in_filters), d_out_filters(out_filters)
 {
 	setText(QObject::tr("append columns"));
+	d_undone = false;
 }
 
 TableAppendColumnsCmd::~TableAppendColumnsCmd()
 {
+	if(d_undone) // if the columns are not needed anymore, delete them
+		for(int i=0; i<d_cols.size(); i++)
+		{
+			delete d_cols.at(i);
+			delete d_in_filters.at(i);
+			delete d_out_filters.at(i);
+		}
 }
 
 void TableAppendColumnsCmd::redo()
 {
-	int old_size = d_model->columnCount();
-	d_model->appendColumns(d_cols);
-	int new_size = d_model->columnCount();
-	for(int i=old_size; i<new_size; i++)
-	{
-		d_model->setInputFilter(i, d_in_filters.at(i - old_size));
-		d_model->setOutputFilter(i, d_out_filters.at(i - old_size));
-	}
+	d_model->appendColumns(d_cols, d_in_filters, d_out_filters);
+	d_undone = false;
 }
 
 void TableAppendColumnsCmd::undo()
 {
 	d_model->removeColumns(d_model->columnCount()-d_cols.size(), d_cols.size());
+	d_undone = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -467,26 +465,30 @@ TableInsertColumnsCmd::TableInsertColumnsCmd( TableModel * model, int before, QL
  : QUndoCommand( parent ), d_model(model), d_before(before), d_cols(cols), d_in_filters(in_filters), d_out_filters(out_filters)
 {
 	setText(QObject::tr("insert columns"));
+	d_undone = false;
 }
 
 TableInsertColumnsCmd::~TableInsertColumnsCmd()
 {
+	if(d_undone) // if the columns are not needed anymore, delete them
+		for(int i=0; i<d_cols.size(); i++)
+		{
+			delete d_cols.at(i);
+			delete d_in_filters.at(i);
+			delete d_out_filters.at(i);
+		}
 }
 
 void TableInsertColumnsCmd::redo()
 {
-	int count = d_cols.size();
-	d_model->insertColumns(d_cols, d_before);
-	for(int i=0; i<count; i++)
-	{
-		d_model->setInputFilter(d_before + i, d_in_filters.at(i));
-		d_model->setOutputFilter(d_before + i, d_out_filters.at(i));
-	}
+	d_model->insertColumns(d_cols, d_in_filters, d_out_filters, d_before);
+	d_undone = false;
 }
 
 void TableInsertColumnsCmd::undo()
 {
 	d_model->removeColumns(d_before, d_cols.size());
+	d_undone = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////

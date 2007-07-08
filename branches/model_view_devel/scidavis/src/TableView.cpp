@@ -78,13 +78,14 @@ void TableView::init(TableModel * model)
 	d_delegate = new TableItemDelegate;
 	setItemDelegate(d_delegate);
 	
-	setHorizontalHeader(new AutoResizeHHeader);
+//	setHorizontalHeader(new AutoResizeHHeader);
 	QHeaderView * v_header = verticalHeader();
 	QHeaderView * h_header = horizontalHeader();
 	v_header->setResizeMode(QHeaderView::ResizeToContents);
 	v_header->setMovable(false);
 	h_header->setDefaultAlignment(Qt::AlignTop);
 	h_header->setResizeMode(QHeaderView::Interactive);
+	h_header->setMovable(false);
 
 	connect(d_delegate, SIGNAL(userInput(const QModelIndex&)), d_model, SLOT(handleUserInput(const QModelIndex&)) );
 	connect(d_model, SIGNAL(headerDataChanged(Qt::Orientation,int,int)), this, SLOT(updateHeaderGeometry(Qt::Orientation,int,int)) ); 
@@ -109,13 +110,7 @@ TableView::TableView(QWidget * parent, TableModel * model, int rows, int columns
 		out_filters << new Double2StringFilter();
 	}
 
-	d_model->appendColumns(cols);
-
-	for(int i=0; i<columns; i++)
-	{
-		d_model->setInputFilter(i, in_filters.at(i));
-		d_model->setOutputFilter(i, out_filters.at(i));
-	}
+	d_model->appendColumns(cols, in_filters, out_filters);
 	d_model->appendRows(rows);
 }
 

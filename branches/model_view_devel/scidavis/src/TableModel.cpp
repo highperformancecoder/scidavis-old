@@ -266,7 +266,8 @@ void TableModel::emitDataChanged(int top, int left, int bottom, int right)
 	emit dataChanged(index(top, left, QModelIndex()), index(bottom, right, QModelIndex()));
 }
 
-void TableModel::insertColumns(QList<AbstractColumnData *> cols, int before)
+void TableModel::insertColumns(QList<AbstractColumnData *> cols, QList<AbstractFilter *> in_filters,
+		QList<AbstractFilter *> out_filters, int before)
 {
 	int count = cols.count();
 
@@ -290,8 +291,8 @@ void TableModel::insertColumns(QList<AbstractColumnData *> cols, int before)
 	for(int i=count-1; i>=0; i--)
 	{
 		d_columns.insert(before, cols.at(i));
-		d_input_filters.insert(before, 0);
-		d_output_filters.insert(before, 0);
+		d_input_filters.insert(before, in_filters.at(i));
+		d_output_filters.insert(before, out_filters.at(i));
 	}
 	d_column_count += count;
 	updateHorizontalHeader(before, before+count-1);
@@ -322,9 +323,10 @@ void TableModel::removeColumns(int first, int count)
 	endRemoveColumns();	
 }
 
-void TableModel::appendColumns(QList<AbstractColumnData *> cols)
+void TableModel::appendColumns(QList<AbstractColumnData *> cols, QList<AbstractFilter *> in_filters,
+		QList<AbstractFilter *> out_filters)
 {
-	insertColumns(cols, d_column_count);
+	insertColumns(cols, in_filters, out_filters, d_column_count);
 }
 
 void TableModel::removeRows(int first, int count)

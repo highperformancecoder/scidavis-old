@@ -348,6 +348,8 @@ private:
 	QList<AbstractFilter *> d_in_filters;
 	//! The output filters
 	QList<AbstractFilter *> d_out_filters;
+	//! Flag to determine whether the columns can be deleted in the dtor
+	bool d_undone;
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -379,6 +381,8 @@ private:
 	QList<AbstractFilter *> d_in_filters;
 	//! The output filters
 	QList<AbstractFilter *> d_out_filters;
+	//! Flag to determine whether the columns can be deleted in the dtor
+	bool d_undone;
 };
 
 ///////////////////////////////////////////////////////////////////////////

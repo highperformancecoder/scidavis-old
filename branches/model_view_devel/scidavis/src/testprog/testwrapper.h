@@ -54,11 +54,11 @@ class TableViewTestWrapper : public TableView
 			sc1->setMasked(Interval<int>(2,4));
 			QList<AbstractColumnData *> list;
 			list << sc1 << sc2;
-			model->appendColumns(list);
-			model->setInputFilter(0, new CopyThroughFilter());
-			model->setInputFilter(1, new CopyThroughFilter());
-			model->setOutputFilter(0, new CopyThroughFilter());
-			model->setOutputFilter(1, new CopyThroughFilter());
+			QList<AbstractFilter *> in_filters;
+			QList<AbstractFilter *> out_filters;
+			in_filters << new CopyThroughFilter() << new CopyThroughFilter();
+			out_filters << new CopyThroughFilter() << new CopyThroughFilter();
+			model->appendColumns(list, in_filters, out_filters);
 
 			DoubleColumnData *dc1 = new DoubleColumnData();
 			DoubleColumnData *dc2 = new DoubleColumnData();
@@ -73,12 +73,12 @@ class TableViewTestWrapper : public TableView
 			dc2->setMasked(1);
 			dc1->setInvalid(Interval<int>(3,6));
 			list.clear();
+			in_filters.clear();
+			out_filters.clear();
 			list << dc1 << dc2;
-			model->appendColumns(list);
-			model->setInputFilter(2, new String2DoubleFilter());
-			model->setInputFilter(3, new String2DoubleFilter());
-			model->setOutputFilter(2, new Double2StringFilter());
-			model->setOutputFilter(3, new Double2StringFilter());
+			in_filters << new String2DoubleFilter() <<  new String2DoubleFilter();
+			out_filters << new Double2StringFilter() << new Double2StringFilter();
+			model->appendColumns(list, in_filters, out_filters);
 
 			DateTimeColumnData *dtc1 = new DateTimeColumnData();
 			DateTimeColumnData *dtc2 = new DateTimeColumnData();
@@ -91,12 +91,12 @@ class TableViewTestWrapper : public TableView
 			dtc2->setInvalid(Interval<int>(3,4));
 			dtc2->setMasked(1);
 			list.clear();
+			in_filters.clear();
+			out_filters.clear();
 			list << dtc1 << dtc2;
-			model->appendColumns(list);
-			model->setInputFilter(4, new String2DateTimeFilter());
-			model->setInputFilter(5, new String2DateTimeFilter());
-			model->setOutputFilter(4, new DateTime2StringFilter());
-			model->setOutputFilter(5, new DateTime2StringFilter());
+			in_filters << new String2DateTimeFilter() << new String2DateTimeFilter();
+			out_filters << new DateTime2StringFilter() << new DateTime2StringFilter();
+			model->appendColumns(list, in_filters, out_filters);
 
 			DateTimeColumnData *dtc3 = new DateTimeColumnData();
 			DateTimeColumnData *dtc4 = new DateTimeColumnData();
@@ -107,19 +107,22 @@ class TableViewTestWrapper : public TableView
 			*dtc3 << QDateTime(QDate(2007,6,11),QTime(22,0,0,0)) << QDateTime(QDate(0,12,1),QTime(12,0,0,0));
 			*dtc4 << QDateTime(QDate(2007,6,11),QTime(22,0,0,0)) << QDateTime(QDate(0,12,1),QTime(12,0,0,0));
 			list.clear();
+			in_filters.clear();
+			out_filters.clear();
 			list << dtc3 << dtc4;
-			model->appendColumns(list);
-			model->setInputFilter(6, new String2DateTimeFilter()); //TODO: use String2DayOfWeekFilter
-			model->setInputFilter(7, new String2DateTimeFilter());  //TODO: use String2MonthFilter
+			in_filters << new String2DateTimeFilter() << new String2DateTimeFilter(); 
+			//TODO: use String2DayOfWeekFilter and String2MonthFilter
 			DateTime2StringFilter * temp;
 			temp = new DateTime2StringFilter();
 			temp->setFormat("dddd");
-			model->setOutputFilter(6, temp);
+			out_filters << temp;
 			temp = new DateTime2StringFilter();
 			temp->setFormat("MMMM");
-			model->setOutputFilter(7, temp); 
+			out_filters << temp;
+			model->appendColumns(list, in_filters, out_filters);
 
 			undo_stack = model->undoStack();
+
 		}
 
 	public slots:

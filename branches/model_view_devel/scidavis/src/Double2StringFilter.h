@@ -59,6 +59,7 @@ class Double2StringFilter : public AbstractSimpleFilter<QString>
 	public:
 		virtual QString textAt(int row) const {
 			if (!d_inputs.value(0)) return QString();
+			if (doubleInput()->rowCount() <= row) return QString();
 			return QLocale().toString(doubleInput()->valueAt(row), d_format, d_digits);
 		}
 

@@ -136,11 +136,15 @@ public:
 	/**
 	 * If 'first' is higher than (current number of columns -1),
 	 * the columns will be appended.
-	 * TableModel takes over ownership of the columns.
+	 * TableModel takes over ownership of the columns. For each column
+	 * an appropriate input and output filter must be given.
 	 * \param cols a list of column data objects
+	 * \param in_filter a list of the corresponding input filters
+	 * \param out_filter a list of the corresponding output filters
 	 * \param before index of the column to insert before
 	 */
-	void insertColumns(QList<AbstractColumnData *> cols, int before);
+	void insertColumns(QList<AbstractColumnData *> cols, QList<AbstractFilter *> in_filters,
+		QList<AbstractFilter *> out_filters, int before);
 	//! Remove Columns
 	 /**
 	  * This does not delete the removed columns because this
@@ -164,8 +168,11 @@ public:
 	//! Append columns to the table
 	/**
 	 * TableModel takes over ownership of the column.
+	 *
+	 * \sa insertColumns()
 	 */
-	void appendColumns(QList<AbstractColumnData *> cols);
+	void appendColumns(QList<AbstractColumnData *> cols, QList<AbstractFilter *> in_filters,
+		QList<AbstractFilter *> out_filters);
 	//! Return the number of columns in the table
 	int columnCount() const { return d_column_count; }
 	//! Return the number of rows in the table

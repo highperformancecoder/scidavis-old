@@ -50,7 +50,7 @@
 #include "AbstractDateTimeDataSource.h"
 #include "DateTime2StringFilter.h"
 
-#define OBSOLETE qDebug("obsolete Table function called\n");
+#define OBSOLETE qDebug("obsolete Table function called");
 
 Table::Table(ScriptingEnv *env, int rows, int cols, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
 : MyWidget(label,parent,name,f), scripted(env)
