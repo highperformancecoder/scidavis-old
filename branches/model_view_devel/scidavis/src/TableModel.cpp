@@ -340,8 +340,14 @@ void TableModel::removeRows(int first, int count)
 	beginRemoveRows(QModelIndex(), first, first+count-1);
 	for(int col=0; col<d_column_count; col++)
 	{
-		if(d_columns.at(col)->asDataSource()->rowCount() > first)
-			d_columns.at(col)->removeRows(first, count);
+		int row_count = d_columns.at(col)->asDataSource()->rowCount();
+		if(row_count > first)
+		{
+			int current_count = count;
+			if(first+current_count > row_count)
+				current_count = row_count - first;
+			d_columns.at(col)->removeRows(first, current_count);
+		}
 	}
 	d_row_count -= count;
 	updateVerticalHeader(first);

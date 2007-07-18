@@ -28,6 +28,8 @@
 #include "String2DoubleFilter.h"
 #include "DateTime2StringFilter.h"
 #include "String2DateTimeFilter.h"
+#include "String2MonthFilter.h"
+#include "String2DayOfWeekFilter.h"
 
 class TableViewTestWrapper : public TableView
 {
@@ -110,8 +112,7 @@ class TableViewTestWrapper : public TableView
 			in_filters.clear();
 			out_filters.clear();
 			list << dtc3 << dtc4;
-			in_filters << new String2DateTimeFilter() << new String2DateTimeFilter(); 
-			//TODO: use String2DayOfWeekFilter and String2MonthFilter
+			in_filters << new String2DayOfWeekFilter() << new String2MonthFilter(); 
 			DateTime2StringFilter * temp;
 			temp = new DateTime2StringFilter();
 			temp->setFormat("dddd");

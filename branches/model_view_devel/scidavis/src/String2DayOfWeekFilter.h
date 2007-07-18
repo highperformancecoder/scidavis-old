@@ -1,11 +1,11 @@
 /***************************************************************************
-    File                 : Double2MonthFilter.h
+    File                 : String2DayOfWeekFilter.h
     Project              : SciDAVis
     --------------------------------------------------------------------
-    Copyright            : (C) 2007 by Knut Franke
-    Email (use @ for *)  : knut.franke*gmx.de
-    Description          : Conversion filter double -> QDateTime, interpreting
-                           the input numbers as months of the year.
+    Copyright            : (C) 2007 by Knut Franke, Tilman Hoener zu Siederdissen
+    Email (use @ for *)  : knut.franke*gmx.de, thzs*gmx.net
+    Description          : Conversion filter String -> QDateTime, interpreting
+                           the input as days of the week (either numeric or "Mon" etc).
                            
  ***************************************************************************/
 
@@ -27,39 +27,72 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef DOUBLE2MONTH_FILTER_H
-#define DOUBLE2MONTH_FILTER_H
+#ifndef STRING2DAYOFWEEK_FILTER_H
+#define STRING2DAYOFWEEK_FILTER_H
 
 #include "AbstractSimpleFilter.h"
 #include <QDateTime>
 #include <math.h>
 
-//! Conversion filter double -> QDateTime, interpreting the input numbers as months of the year.
-class Double2MonthFilter : public AbstractSimpleFilter<QDateTime>
+//! Conversion filter String -> QDateTime, interpreting the input as days of the week (either numeric or "Mon" etc).
+class String2DayOfWeekFilter : public AbstractSimpleFilter<QDateTime>
 {
 	Q_OBJECT
+
 	public:
-		virtual QDate dateAt(int row) const {
+		virtual QDate dateAt(int row) const 
+		{
 			return dateTimeAt(row).date();
 		}
-		virtual QTime timeAt(int row) const {
+
+		virtual QTime timeAt(int row) const 
+		{
 			return dateTimeAt(row).time();
 		}
-		virtual QDateTime dateTimeAt(int row) const {
+
+		virtual QDateTime dateTimeAt(int row) const
+		{
 			if (!d_inputs.value(0)) return QDateTime();
-			double input_value = doubleInput()->valueAt(row);
+
+			QString input_value = stringInput()->textAt(row);
+			bool ok;
+			int day_value = input_value.toInt(&ok);
+			if(!ok)
+			{
+#if QT_VERSION <= 0x040300  // TODO: adjust this with every new Qt version until QDate::fromString(..., "dddd"); is fixed
+				// workaround for Qt bug
+				QDate temp = QDate(1900,1,1);
+				for(int i=1; i<=7; i++)
+					if( (input_value.toLower() == QDate::longDayName(i).toLower())
+							|| (input_value.toLower() == QDate::shortDayName(i).toLower()) )
+					{
+						temp = QDate(1900,1,i);
+						break;
+					}
+
+#else // this will hopefully work in some future Qt version
+				QDate temp = QDate::fromString(input_value, "ddd");
+				if(!temp.isValid())
+					temp = QDate::fromString(input_value, "dddd");
+#endif
+				if(!temp.isValid())
+					day_value = 1;
+				else
+					day_value = temp.dayOfWeek();
+			}
+
 			// Don't use Julian days here since support for years < 1 is bad
-			// Use 1900-01-01 instead
-			QDate result_date = QDate(1900,1,1).addMonths(int(input_value) - 1);
+			// Use 1900-01-01 instead (a Monday)
+			QDate result_date = QDate(1900,1,1).addDays(day_value - 1);
 			QTime result_time = QTime(0,0,0,0);
 			return QDateTime(result_date, result_time);
 		}
 
 	protected:
 		virtual bool inputAcceptable(int, AbstractDataSource *source) {
-			return source->inherits("AbstractDoubleDataSource");
+			return source->inherits("AbstractStringDataSource");
 		}
 };
 
-#endif // ifndef DOUBLE2MONTH_FILTER_H
+#endif // ifndef STRING2DAYOFWEEK_FILTER_H
 

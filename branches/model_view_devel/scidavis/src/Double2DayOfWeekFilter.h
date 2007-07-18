@@ -40,18 +40,13 @@ class Double2DayOfWeekFilter : public AbstractSimpleFilter<QDateTime>
 	public:
 		virtual QDate dateAt(int row) const {
 			if (!d_inputs.value(0)) return QDate();
-			// Julian day 0 is a Monday, but we want to have 1 -> Monday,
-			// so our reference date is Julian day -1.
-			return QDate::fromJulianDay(qRound(doubleInput()->valueAt(row) - 1.0));
+			// Don't use Julian days here since support for years < 1 is bad
+			// Use 1900-01-01 instead (a Monday)
+			return QDate(1900,1,1).addDays(qRound(doubleInput()->valueAt(row) - 1.0));
 		}
 		virtual QTime timeAt(int row) const {
 			Q_UNUSED(row)
 			return QTime(0,0,0,0);
-			/*
-			if (!d_inputs.value(0)) return QTime();
-			double input_value = doubleInput()->valueAt(row);
-			return QTime(12,0,0,0).addMSecs(int( (input_value - int(input_value)) * 86400000.0 ));
-			*/
 		}
 		virtual QDateTime dateTimeAt(int row) const {
 			return QDateTime(dateAt(row), timeAt(row));

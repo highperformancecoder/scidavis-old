@@ -81,6 +81,9 @@ void TableView::init(TableModel * model)
 //	setHorizontalHeader(new AutoResizeHHeader);
 	QHeaderView * v_header = verticalHeader();
 	QHeaderView * h_header = horizontalHeader();
+	// Remark: ResizeToContents works in Qt 4.2.3 but is broken in 4.3.0
+	// Should be fixed in 4.3.1 though, see:
+	// http://trolltech.com/developer/task-tracker/index_html?method=entry&id=165567
 	v_header->setResizeMode(QHeaderView::ResizeToContents);
 	v_header->setMovable(false);
 	h_header->setDefaultAlignment(Qt::AlignTop);
@@ -176,7 +179,7 @@ void TableView::selectionChanged(const QItemSelection & selected, const QItemSel
 		right = range.right();
 		top = range.top();
 		bottom = range.bottom();
-		for(col=left; col<=right; col++)
+		for(col=left; col<=right && col>= 0; col++)
 			d_model->columnPointer(col)->setSelected(Interval<int>(top, bottom));
 	}
 	for(i=0; i<deselected.size(); i++)
@@ -186,7 +189,7 @@ void TableView::selectionChanged(const QItemSelection & selected, const QItemSel
 		right = range.right();
 		top = range.top();
 		bottom = range.bottom();
-		for(col=left; col<=right; col++)
+		for(col=left; col<=right && col>= 0; col++)
 			d_model->columnPointer(col)->setSelected(Interval<int>(top, bottom), false);
 	}
 	QTableView::selectionChanged(selected, deselected);

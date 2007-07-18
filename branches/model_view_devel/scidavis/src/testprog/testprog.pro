@@ -1,4 +1,6 @@
-QMAKE_CXX = distcc
+#QMAKE_CXX = distcc
+QMAKE_CXXFLAGS += -gstabs+
+QMAKE_LFLAGS += -g
 TEMPLATE = app
 TARGET = 
 DEPENDPATH += . ..
@@ -22,6 +24,8 @@ HEADERS += AbstractColumnData.h \
            String2DoubleFilter.h \
            DateTime2StringFilter.h \
            String2DateTimeFilter.h \
+           String2MonthFilter.h \
+           String2DayOfWeekFilter.h \
 		   tablecommands.h \
 		   TableItemDelegate.h \
 		   testwrapper.h

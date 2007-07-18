@@ -46,17 +46,10 @@ class Month2DoubleFilter : public AbstractSimpleFilter<double>
 		virtual double valueAt(int row) const {
 			if (!d_inputs.value(0)) return 0;
 			return double(dateTimeInput()->dateAt(row).month());
-			/*
-			QDateTime input_value = dateTimeInput()->dateTimeAt(row);
-			return double((4713+input_value.date().year())*12 + input_value.date().month()) // integer part plus...
-				+ ( double(input_value.date().day() - 1) // ...days into month...
-						+ double( -input_value.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0 ) // ...and fractional days...
-				/ double(input_value.date().daysInMonth()); // ...as fraction of the month.
-			*/
 		}
 
 	protected:
-		//! Using typed ports: only string inputs are accepted.
+		//! Using typed ports: only date-time inputs are accepted.
 		virtual bool inputAcceptable(int, AbstractDataSource *source) {
 			return source->inherits("AbstractDateTimeDataSource");
 		}
