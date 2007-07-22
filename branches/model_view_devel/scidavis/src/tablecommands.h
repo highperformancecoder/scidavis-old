@@ -360,6 +360,9 @@ private:
 // class TableInsertColumnsCmd
 ///////////////////////////////////////////////////////////////////////////
 //! Insert columns
+/**
+ * The number of inserted columns is cols.size().
+ */
 class TableInsertColumnsCmd : public QUndoCommand
 {
 public:
@@ -383,6 +386,9 @@ private:
 	QList<AbstractFilter *> d_out_filters;
 	//! Flag to determine whether the columns can be deleted in the dtor
 	bool d_undone;
+	//! Row count before the command
+	int d_rows_before;
+
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -432,5 +438,51 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////
 // end of class TableSetColumnValuesCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class TableReplaceColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+//! Replace columns
+/**
+ * The number of replaced columns is cols.size(). You must
+ * check that there are enough columns to be replaced 
+ * before using this command.
+ */
+class TableReplaceColumnsCmd : public QUndoCommand
+{
+public:
+	TableReplaceColumnsCmd( TableModel * model, int first, QList<AbstractColumnData *> cols,
+		QList<AbstractFilter *> in_filters, QList<AbstractFilter *> out_filters, QUndoCommand * parent = 0 );
+	~TableReplaceColumnsCmd();
+
+	virtual void redo();
+	virtual void undo();
+
+private:
+	//! The model to modify
+	TableModel * d_model;
+	//! The first column to be replaced
+	int d_first;
+	//! The new columns
+	QList<AbstractColumnData *> d_cols;
+	//! The input filters
+	QList<AbstractFilter *> d_in_filters;
+	//! The output filters
+	QList<AbstractFilter *> d_out_filters;
+	//! The old columns
+	QList<AbstractColumnData *> d_old_cols;
+	//! The old input filters
+	QList<AbstractFilter *> d_old_in_filters;
+	//! The old output filters
+	QList<AbstractFilter *> d_old_out_filters;
+	//! Flag to determine whether the columns can be deleted in the dtor
+	bool d_undone;
+	//! Row count before the command
+	int d_rows_before;
+};
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableReplaceColumnsCmd
 ///////////////////////////////////////////////////////////////////////////
 

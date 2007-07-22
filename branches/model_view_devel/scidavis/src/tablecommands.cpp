@@ -177,14 +177,18 @@ void TableClearColumnCmd::redo()
 			d_cleared_col->setFormula(i, d_orig_col->formula(i.start()));
 	}
 	// replace the column with the cleared one
-	d_model->replaceColumn(d_col, d_cleared_col);
+	QList<AbstractColumnData *> list;
+	list << d_cleared_col;
+	d_model->replaceColumns(d_col, list);
 	d_cleared_col = 0; // don't delete the active col in dtor
 }
 
 void TableClearColumnCmd::undo()
 {
 	d_cleared_col = d_model->columnPointer(d_col);
-	d_model->replaceColumn(d_col, d_orig_col);
+	QList<AbstractColumnData *> list;
+	list << d_orig_col;
+	d_model->replaceColumns(d_col, list);
 	d_orig_col = 0; // don't delete the active col in dtor
 }
 
@@ -382,7 +386,7 @@ void TableRemoveColumnsCmd::redo()
 
 void TableRemoveColumnsCmd::undo()
 {
-	d_model->insertColumns(d_old_cols, d_in_filters, d_out_filters, d_first);
+	d_model->insertColumns(d_first, d_old_cols, d_in_filters, d_out_filters);
 	d_old_cols.clear();
 	d_in_filters.clear();
 	d_out_filters.clear();
@@ -481,13 +485,16 @@ TableInsertColumnsCmd::~TableInsertColumnsCmd()
 
 void TableInsertColumnsCmd::redo()
 {
-	d_model->insertColumns(d_cols, d_in_filters, d_out_filters, d_before);
+	d_rows_before = d_model->rowCount();
+	d_model->insertColumns(d_before, d_cols, d_in_filters, d_out_filters);
 	d_undone = false;
 }
 
 void TableInsertColumnsCmd::undo()
 {
 	d_model->removeColumns(d_before, d_cols.size());
+	if(d_rows_before < d_model->rowCount())
+		d_model->removeRows(d_rows_before, d_model->rowCount() - d_rows_before);
 	d_undone = true;
 }
 
@@ -599,5 +606,61 @@ void TableSetColumnValuesCmd::undo()
 // end of class TableSetColumnValuesCmd
 ///////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////
+// class TableReplaceColumnsCmd
+///////////////////////////////////////////////////////////////////////////
+TableReplaceColumnsCmd::TableReplaceColumnsCmd( TableModel * model, int first, QList<AbstractColumnData *> cols,
+		QList<AbstractFilter *> in_filters, QList<AbstractFilter *> out_filters, QUndoCommand * parent)
+ : QUndoCommand( parent ), d_model(model), d_first(first), d_cols(cols), d_in_filters(in_filters), d_out_filters(out_filters)
+{
+	setText(QObject::tr("replace columns"));
+	d_undone = false;
+}
 
+TableReplaceColumnsCmd::~TableReplaceColumnsCmd()
+{
+	if(d_undone) 
+		for(int i=0; i<d_cols.size(); i++)
+		{
+			delete d_cols.at(i);
+			delete d_in_filters.at(i);
+			delete d_out_filters.at(i);
+		}
+	else
+		for(int i=0; i<d_old_cols.size(); i++)
+		{
+			delete d_old_cols.at(i);
+			delete d_old_in_filters.at(i);
+			delete d_old_out_filters.at(i);
+		}
+}
+
+void TableReplaceColumnsCmd::redo()
+{
+	d_rows_before = d_model->rowCount();
+	if(d_old_cols.isEmpty())
+	{
+		for(int i=0; i<d_cols.size(); i++)
+		{
+			d_old_cols.append(d_model->columnPointer(d_first+i));
+			d_old_in_filters.append(d_model->inputFilter(d_first+i));
+			d_old_out_filters.append(d_model->outputFilter(d_first+i));
+		}
+		
+	}
+	d_model->replaceColumns(d_first, d_cols, d_in_filters, d_out_filters);
+	d_undone = false;
+}
+
+void TableReplaceColumnsCmd::undo()
+{
+	d_model->replaceColumns(d_first, d_old_cols, d_old_in_filters, d_old_out_filters);
+	if(d_rows_before < d_model->rowCount())
+		d_model->removeRows(d_rows_before, d_model->rowCount() - d_rows_before);
+	d_undone = true;
+}
+
+///////////////////////////////////////////////////////////////////////////
+// end of class TableReplaceColumnsCmd
+///////////////////////////////////////////////////////////////////////////
 

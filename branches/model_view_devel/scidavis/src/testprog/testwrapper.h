@@ -131,6 +131,7 @@ class TableViewTestWrapper : public TableView
 		{
 			undoTest();
 			setValuesTest();
+			replaceTest();
 		}
 
 	private:
@@ -176,7 +177,9 @@ class TableViewTestWrapper : public TableView
 			out_filters.clear();
 			for(int i=0; i <2; i++)
 			{
-				cols << new DoubleColumnData();
+				DoubleColumnData *dc = new DoubleColumnData();
+				*dc << 0.1 << 1.1 << 2.2 << 3.3 << 4.4 << 5.5 << 6.6 << 7.7 << 8.8 << 9.9 << 10.10;
+				cols << dc;
 				cols.at(i)->setLabel(QString::number(max++));
 				in_filters << new String2DoubleFilter();
 				out_filters << new Double2StringFilter();
@@ -248,6 +251,25 @@ class TableViewTestWrapper : public TableView
 			}
 		}
 
+	}
+
+	void replaceTest()
+	{
+			DoubleColumnData *dc1 = new DoubleColumnData();
+			DoubleColumnData *dc2 = new DoubleColumnData();
+			dc1->setPlotDesignation(AbstractDataSource::X);
+			dc2->setPlotDesignation(AbstractDataSource::Y);
+			dc1->setLabel("replaced_col1");
+			dc2->setLabel("replaced_col2");
+			*dc1 << 0.0 << 0.0 << 0.1 << 1.1 << 2.2 << 3.3 << 4.4 << 5.5 << 6.6 << 7.7 << 8.8 << 9.9 << 10.10;
+			*dc2 << 5.6 << 12 << 128.7 << 33 << 144;
+			QList<AbstractColumnData *> list;
+			QList<AbstractFilter *> in_filters;
+			QList<AbstractFilter *> out_filters;
+			list << dc1 << dc2;
+			in_filters << new String2DoubleFilter() <<  new String2DoubleFilter();
+			out_filters << new Double2StringFilter() << new Double2StringFilter();
+			undo_stack->push(new TableReplaceColumnsCmd(d_model, 0, list, in_filters, out_filters) );
 	}
 
 	protected:

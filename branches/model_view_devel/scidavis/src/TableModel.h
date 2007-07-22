@@ -124,27 +124,39 @@ public:
 	 * deleted when replaced.
 	 */
 	void setOutputFilter(int col, AbstractFilter * filter);
-	//! Replace a column completely
+	//! Replace columns completely
 	/**
-	 * TableModel takes over ownership of the column.
-	 * \param col the column index
-	 * \param new_col pointer to the column that replaces the old one
-	 * This does not delete the replaced column!
+	 * The new columns must have the same types, otherwise the
+	 * filters have to be replaced as well.
+	 * TableModel takes over ownership of the new columns.
+	 * \param first the first column to be replaced
+	 * \param new_cols list of the columns that replace the old ones
+	 * This does not delete the replaced columns.
 	 */
-	void replaceColumn(int col, AbstractColumnData * new_col);
+	void replaceColumns(int first, QList<AbstractColumnData *> new_cols);
+	//! Replace columns and their filters completely
+	/**
+	 * TableModel takes over ownership of the new columns.
+	 * \param first the first column to be replaced
+	 * \param new_cols list of the columns that replace the old ones
+	 * \param in the corresponding input filters
+	 * \param out the corresponding output filters
+	 * This does not delete the replaced columns.
+	 */
+	void replaceColumns(int first, QList<AbstractColumnData *> new_col, QList<AbstractFilter *> in, QList<AbstractFilter *> out);
 	//! Insert columns before column number 'before'
 	/**
 	 * If 'first' is higher than (current number of columns -1),
 	 * the columns will be appended.
 	 * TableModel takes over ownership of the columns. For each column
 	 * an appropriate input and output filter must be given.
+	 * \param before index of the column to insert before
 	 * \param cols a list of column data objects
 	 * \param in_filter a list of the corresponding input filters
 	 * \param out_filter a list of the corresponding output filters
-	 * \param before index of the column to insert before
 	 */
-	void insertColumns(QList<AbstractColumnData *> cols, QList<AbstractFilter *> in_filters,
-		QList<AbstractFilter *> out_filters, int before);
+	void insertColumns(int before, QList<AbstractColumnData *> cols, QList<AbstractFilter *> in_filters,
+		QList<AbstractFilter *> out_filters);
 	//! Remove Columns
 	 /**
 	  * This does not delete the removed columns because this

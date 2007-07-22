@@ -248,17 +248,48 @@ AbstractFilter * TableModel::inputFilter(int col) const
 	return d_input_filters[col];
 }
 
-
-void TableModel::replaceColumn(int col, AbstractColumnData * new_col)
+void TableModel::replaceColumns(int first, QList<AbstractColumnData *> new_cols)
 {
-	if( (col < 0) || (col >= d_column_count) )
+	if( (first < 0) || (first + new_cols.size() > d_column_count) )
+		return;
+
+	int count = new_cols.size();
+	for(int i=0; i<count; i++)
+	{
+		int rows = new_cols.at(i)->asDataSource()->rowCount();
+		if(rows > d_row_count)
+			appendRows(rows-d_row_count); // append rows to resize table
+
+		if(d_columns.at(first+i))
+			d_columns.at(first+i)->notifyReplacement(new_cols.at(i)->asDataSource());
+
+		d_columns[first+i] = new_cols.at(i);
+	}
+	updateHorizontalHeader(first, first+count-1);
+	emit dataChanged(index(0, first, QModelIndex()), index(d_row_count-1, first+count-1, QModelIndex()));
+}
+
+void TableModel::replaceColumns(int first, QList<AbstractColumnData *> new_cols, QList<AbstractFilter *> in, QList<AbstractFilter *> out)
+{
+	if( (first < 0) || (first + new_cols.size() > d_column_count) )
 		return;
 	
-	if(d_columns.at(col))
-		d_columns.at(col)->notifyReplacement(new_col->asDataSource());
+	int count = new_cols.size();
+	for(int i=0; i<count; i++)
+	{
+		int rows = new_cols.at(i)->asDataSource()->rowCount();
+		if(rows > d_row_count)
+			appendRows(rows-d_row_count); // append rows to resize table
 
-	d_columns[col] = new_col;
-	emit dataChanged(index(0, col, QModelIndex()), index(d_row_count-1, col, QModelIndex()));
+		if(d_columns.at(first+i))
+			d_columns.at(first+i)->notifyReplacement(new_cols.at(i)->asDataSource());
+
+		d_columns[first+i] = new_cols.at(i);
+		d_input_filters[first+i] = in.at(i);
+		d_output_filters[first+i] = out.at(i);
+	}
+	updateHorizontalHeader(first, first+count-1);
+	emit dataChanged(index(0, first, QModelIndex()), index(d_row_count-1, first+count-1, QModelIndex()));
 }
 
 void TableModel::emitDataChanged(int top, int left, int bottom, int right)
@@ -266,8 +297,8 @@ void TableModel::emitDataChanged(int top, int left, int bottom, int right)
 	emit dataChanged(index(top, left, QModelIndex()), index(bottom, right, QModelIndex()));
 }
 
-void TableModel::insertColumns(QList<AbstractColumnData *> cols, QList<AbstractFilter *> in_filters,
-		QList<AbstractFilter *> out_filters, int before)
+void TableModel::insertColumns(int before, QList<AbstractColumnData *> cols, QList<AbstractFilter *> in_filters,
+		QList<AbstractFilter *> out_filters)
 {
 	int count = cols.count();
 
@@ -326,7 +357,7 @@ void TableModel::removeColumns(int first, int count)
 void TableModel::appendColumns(QList<AbstractColumnData *> cols, QList<AbstractFilter *> in_filters,
 		QList<AbstractFilter *> out_filters)
 {
-	insertColumns(cols, in_filters, out_filters, d_column_count);
+	insertColumns(d_column_count, cols, in_filters, out_filters);
 }
 
 void TableModel::removeRows(int first, int count)
@@ -465,7 +496,6 @@ void TableModel::updateHorizontalHeader(int start_col, int end_col)
 	}
 	emit headerDataChanged(Qt::Horizontal, start_col, end_col);	
 }
-
 
 void TableModel::composeColumnHeader(int col, const QString& label)
 {
