@@ -48,7 +48,6 @@ TableModel::TableModel( QObject * parent )
 	d_row_count = 0;
 	d_show_comments = false;
 	d_undo_stack = new QUndoStack(this);
-	d_masking_color = QColor(0xff,0,0);
 }
 
 TableModel::~TableModel()
@@ -109,24 +108,6 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 
 				return QVariant(sds->textAt(row) + postfix);
 			}
-		case Qt::BackgroundRole:
-			{
-				// masked cells are displayed as hatched
-				// TODO: this is not an optimal solution
-				// since you cannot see the masking in 
-				// selected cells
-				//if(col_src->isMasked(index.row()))
-				//	return QVariant(QBrush(d_masking_color, Qt::BDiagPattern));
-				break;
-			}
-		case Qt::DecorationRole:
-			{
-				// TODO: see if this is a good solution
-				// to mark masked cells
-				if(col_src->isMasked(row))
-					return QVariant(QColor(d_masking_color));
-				break;
-			}
 		case Qt::ForegroundRole:
 			{
 				if(col_src->isInvalid(index.row()))
@@ -134,6 +115,8 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 				else
 					return QVariant(QBrush(QColor(0,0,0)));
 			}
+		case MaskingRole:
+			return QVariant(col_src->isMasked(row));
 	}
 
 	return QVariant();
@@ -585,16 +568,5 @@ QUndoStack *TableModel::undoStack() const
 void TableModel::handleUserInput(const QModelIndex& index)
 {
 		d_undo_stack->push(new TableUserInputCmd(this, index) );		
-}
-
-
-void TableModel::setMaskingColor(const QColor& color)
-{
-	d_masking_color = color;
-}
-
-QColor TableModel::maskingColor() const
-{
-	return d_masking_color;
 }
 

@@ -71,6 +71,10 @@ public:
     //! Destructor
     ~TableModel();
 
+	 //! Custom data roles used in addition to Qt::ItemDataRole
+	 enum CustomDataRole {
+		 MaskingRole = Qt::UserRole, //!< bool determining whether the cell is masked
+	 };
 
 	//! \name Overloaded functions from QAbstractItemModel
 	//@{
@@ -219,10 +223,6 @@ public:
 	void emitDataChanged(int top, int left, int bottom, int right);
 	//! Return a pointer to the undo stack
 	virtual QUndoStack *undoStack() const;
-	//! The the color for masked cells
-	void setMaskingColor(const QColor& color);
-	//! Return the color for masked cells
-	QColor maskingColor() const;
 	//@}
 	
 public slots:
@@ -248,8 +248,6 @@ private:
 	bool d_show_comments;
 	//! The undo stack
 	QUndoStack *d_undo_stack;
-	//! The color for masked cells
-	QColor d_masking_color;
 	
 	//! Update the vertical header labels
 	/**
