@@ -178,12 +178,12 @@ public:
 	 * This can be used to make a list of formulas with their intervals.
 	 * Here is some example code:
 	 *
-	 * <code>
-	 * QStringList list;<br>
-	 * QList< Interval<int> > ivs = my_column.formulaIntervals();<br>
-	 * foreach(Interval<int> iv, ivs)<br>
-	 * &nbsp;&nbsp;list << QString(iv.toString() + ": " + my_column.formula(iv.start()));<br>
-	 * </code>
+	 * \code
+	 * QStringList list;
+	 * QList< Interval<int> > intervals = my_column.formulaIntervals();
+	 * foreach(Interval<int> interval, intervals)
+	 * 	list << QString(interval.toString() + ": " + my_column.formula(interval.start()));
+	 * \endcode
 	 */
 	QList< Interval<int> > formulaIntervals() const { return d_formulas.intervals(); }
 	//! Clear all formulas

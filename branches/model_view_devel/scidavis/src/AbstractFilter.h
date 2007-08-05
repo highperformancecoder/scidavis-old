@@ -39,7 +39,7 @@ class AbstractFilter;
  *
  * This class makes it possible for AbstractFilter to receive signals without being a QObject.
  * This way, it can provide standard reactions to changes in input data and still allow filter
- * classes to inherit from QObject. See TruncatedDoubleDataSource for a typical example that
+ * classes to inherit from QObjects. See TruncatedDoubleDataSource for a typical example that
  * would get considerably more complicated if it couldn't inherit from both AbstractFilter
  * and AbstractDoubleDataSource.
  */
@@ -75,6 +75,7 @@ class AbstractFilterSlotMachine : public QObject {
  * electronic filtering circuit: From the outside, a filter appears as a black box with
  * a number of input and output ports (obviously, those numbers do not necessarily agree).
  * 
+ * \section using Using AbstractFilter
  * You can connect one AbstractDataSource to each input port using
  * input(int port, AbstractDataSource *source). Every output(int port) is realized
  * again by an AbstractDataSource, which you can connect to as many other filters, tables
@@ -87,24 +88,28 @@ class AbstractFilterSlotMachine : public QObject {
  * inputLabel()) and outputs (via AbstractDataSource::label()). This allows generic filter
  * handling routines to be written, which is important for using filters provided by plugins.
  *
- * The main design goal was to make implementing new filters as easy as possible.
- * Only the pure virtual methods numInputs(), numOutputs() and output() have to be provided
- * for the simplest possible implementation (CopyThroughFilter). To the same end, a little
- * additional complexity has been accepted in the form of AbstractFilterSlotMachine,
- * which on the other hand greatly simplifies filters with only one output port like
- * TruncatedDoubleDataSource (DifferentiationFilter uses a similar approach, although
- * it provides two output ports).
- *
- * While filters can optionally handle inputs themselves by reimplementing input(),
- * possibly rejecting inputs based on their data type, for most cases the default
- * implementation will be sufficient: the input port is checked for validity against numInputs()
- * and, having passed, the AbstractDataSource is recorded in #d_inputs.
- * Signals are automatically connected to a set of corresponding virtual methods, which
- * can be used by implementations to react on changes in their inputs.
- *
  * Its simplicity of use notwithstanding, AbstractFilter provides a powerful and versatile
  * basis also for analysis operations that would not commonly be referred to as "filter".
  * An example of such a more advanced filter implementation is StatisticsFilter.
+ * It even provides the basis for TableModel (which has no input ports) and ReadOnlyTableModel
+ * (which has no output ports).
+ *
+ * \section subclassing Subclassing AbstractFilter
+ * The main design goal was to make implementing new filters as easy as possible.
+ * To this end, a little additional complexity has been accepted in the form of
+ * AbstractFilterSlotMachine, which on the other hand greatly simplifies filters with only one
+ * output port (see AbstractSimpleFilter). Filters with more than one output port have to subclass
+ * AbstractFilter directly, which is slightly more involved, because at least one additional
+ * class (subclassing AbstractDoubleDataSource, AbstractStringDataSource or
+ * AbstractDateTimeDataSource) has to be written in order to supply the output ports and in
+ * addition to data transfer between these classes the signals defined by AbstractDataSource
+ * have to be handled on both inputs and outputs. Signals from data sources connected to the input
+ * ports are automatically connected to a matching set of virtual methods, which can be
+ * reimplemented by subclasses to handle these events.
+ *
+ * While AbstractFilter handles the tedious part of connecting a data source to an input port,
+ * its subclasses are given a chance to reject such connections (e.g., based on the data type
+ * of the source) by reimplementing inputAcceptable().
  *
  * \sa AbstractSimpleFilter
  */
@@ -127,20 +132,26 @@ class AbstractFilter
 		virtual int numOutputs() const = 0;
 		/**
 		 * \brief Connect the provided data source to the specified input port.
-		 *
+		 * \param port the port number to which to connect
+		 * \param source the data source to connect to the input port
 		 * \returns true if the connection was accepted, false otherwise.
 		 *
+		 * The port number is checked for validity against numInputs() and both port number and data
+		 * source are passed to inputAcceptable() for review. If both checks succeed,the
+		 * source is recorded in #d_inputs.
 		 * If applicable, the previously connected data source is disconnected before replacing it.
+		 *
 		 * You can also use this method to disconnect an input without replacing it with a new one by
 		 * calling it with source=0.
+		 *
+		 * \sa inputAcceptable(), #d_inputs
 		 */
 		bool input(int port, AbstractDataSource *source);
 		/**
 		 * \brief Connect all outputs of the provided filter to the corresponding inputs of this filter.
+		 * \returns true if all connections were accepted, false otherwise
 		 *
 		 * Overloaded method provided for convenience.
-		 *
-		 * \returns true if all connections were accepted, false otherwise.
 		 */
 		bool input(AbstractFilter *sources);
 		/**
@@ -171,6 +182,16 @@ class AbstractFilter
 		virtual bool inputAcceptable(int port, AbstractDataSource *source) {
 			Q_UNUSED(port); Q_UNUSED(source); return true;
 		}
+		/**
+		 * \brief Called whenever an input is disconnected or deleted.
+		 *
+		 * This is only to notify implementations of the event, the default implementation is a
+		 * no-op.
+		 */
+		virtual void inputAboutToBeDisconnected(AbstractDataSource* source) { Q_UNUSED(source); }
+
+		//!\name signal handlers
+		//@{
 		/**
 		 * \brief Column label and/or comment of an input will be changed.
 		 *
@@ -223,9 +244,11 @@ class AbstractFilter
 		/**
 		 * \brief An input is about to be replaced.
 		 *
-		 * This signal is handled by AbstractFilter and mapped to inputDataAboutToChange(AbstractDataSource*) and
-		 * inputDataChanged(AbstractDataSource*), so filter implementations won't have to bother with it
-		 * most of the time.
+		 * This signal is handled by AbstractFilter and mapped to input(int,AbstractDataSource*),
+		 * which calls inputDescriptionAboutToChange(), inputPlotDesignationAboutToChange(),
+		 * inputDataAboutToChange(AbstractDataSource*), inputDescripionChanged(),
+		 * inputPlotDesignationChanged() and inputDataChanged(AbstractDataSource*).
+		 * Thus, filter implementations won't have to bother with it most of the time.
 		 */
 		virtual void inputAboutToBeReplaced(AbstractDataSource* source, AbstractDataSource* replacement);
 		virtual void inputRowsAboutToBeInserted(AbstractDataSource* source, int before, int count) {
@@ -255,7 +278,7 @@ class AbstractFilter
 		void inputAboutToBeDestroyed(AbstractDataSource* source) {
 			input(d_inputs.indexOf(source), 0);
 		}
-		virtual void inputAboutToBeDisconnected(AbstractDataSource* source) { Q_UNUSED(source); }
+		//@}
 
 		//! The data sources connected to my input ports.
 		QVector<AbstractDataSource*> d_inputs;

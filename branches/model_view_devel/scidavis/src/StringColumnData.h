@@ -124,7 +124,7 @@ public:
 
 	//! \name IntervalAttribute related reading functions
 	//@{
-	//! Return whether a certain row contains a invalid value 	 
+	//! Return whether a certain row contains an invalid value 	 
 	virtual bool isInvalid(int row) const { return d_validity.isSet(row); } 	 
 	//! Return whether a certain interval of rows contains only invalid values 	 
 	virtual bool isInvalid(Interval<int> i) const { return d_validity.isSet(i); } 	 

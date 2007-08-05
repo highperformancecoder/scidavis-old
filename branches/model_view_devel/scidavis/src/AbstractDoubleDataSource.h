@@ -31,7 +31,6 @@
 #define DOUBLEDATASOURCE_H
 
 #include "AbstractDataSource.h"
-#include <QLocale>
 
 //! Type-specific reading interface for a double data source
 /**
@@ -59,9 +58,8 @@ public:
 
 	//! Return a read-only array pointer for fast data access
 	/**
-	 * The pointer remains valid as long as the vector is 
-	 * not resized. When it is resized it will emit
-	 * a AbstractDataSource::dataChanged() signal.
+	 * The pointer remains valid as long as the data does not change.
+	 * When it does, AbstractDataSource::dataChanged() is emitted.
 	 */ 
 	virtual const double * constDataPointer() const {
 		if(!d_data_cache) {

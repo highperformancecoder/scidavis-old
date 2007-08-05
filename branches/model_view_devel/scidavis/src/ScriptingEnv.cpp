@@ -40,9 +40,10 @@
 #include "PythonScripting.h"
 #endif
 
-	ScriptingEnv::ScriptingEnv(ApplicationWindow *parent, const char *langName)
-: QObject(0, langName), d_parent(parent)
+	ScriptingEnv::ScriptingEnv(ApplicationWindow *parent, const char *lang_name)
+: QObject(0), d_parent(parent)
 {
+	setObjectName(lang_name);
 	d_initialized=false;
 	d_refcount=0;
 }
@@ -53,7 +54,7 @@ const QString ScriptingEnv::fileFilter() const
 	if (extensions.isEmpty())
 		return "";
 	else
-		return tr("%1 Source (*.%2);;").arg(name()).arg(extensions.join(" *."));
+		return tr("%1 Source (*.%2);;").arg(objectName()).arg(extensions.join(" *."));
 }
 
 void ScriptingEnv::incref()

@@ -68,11 +68,9 @@ int main(int argc, char **argv)
 	for(int i=0;i<dc_one->size();i++)
 		(*dc_one)[i] = i;
 	dc_one->setLabel("x");
-	dc_one->setValid(Interval<int>(0,6));
 	DoubleColumnData *dc_two = new DoubleColumnData();
 	*dc_two << 2.3 << 45 << 1.1 << 9 << 12;
 	dc_two->setLabel("y");
-	dc_two->setValid(Interval<int>(0,4));
 
 	CopyThroughFilter inputs;
 	inputs.input(0, dc_one);
@@ -108,7 +106,6 @@ int main(int argc, char **argv)
 	t.restart();
 	for (int i=0; i<dc_random.numRows(); i++)
 		dc_random.replace(i, rand());
-	dc_random.setValid(Interval<int>(0,dc_random.numRows()-1));
 	cout << "filled (took " << t.elapsed() << "ms)... " << endl;
 	StatisticsFilter huge_stat;
 	t.restart();
@@ -120,14 +117,12 @@ int main(int argc, char **argv)
 	StringColumnData *sc = new StringColumnData();
 	*sc << "4.5" << "2,3" << "2007-01-15" << "12" << "10/03/72 12:14:31:004" << "2004-01-22 01:02:03.456";
 	sc->setLabel("test strings");
-	sc->setValid(Interval<int>(0, sc->numRows() - 1));
 	String2DateTimeFilter f;
 	f.input(0, sc);
 	dumpFilterOutput("String -> DateTime", &f);
 
 	DoubleColumnData *dc = new DoubleColumnData();
 	*dc << 3.4 << 18 << 21;
-	dc->setValid(Interval<int>(0, dc->numRows() - 1));
 	Double2DateTimeFilter f2;
 	f2.input(0, dc);
 	dumpFilterOutput("Double -> DateTime", &f2);
@@ -136,7 +131,6 @@ int main(int argc, char **argv)
 	*dtc << QDateTime(QDate::fromJulianDay(321), QTime(6,3))
 		<< QDateTime(QDate(1890,12,30), QTime(10,23))
 		<< QDateTime(QDate(2007,6,5), QTime(12,28));
-	dtc->setValid(Interval<int>(0,2));
 	dtc->setLabel("DateTime data");
 	DateTime2StringFilter f3;
 	String2DateTimeFilter f4;
@@ -158,8 +152,8 @@ int main(int argc, char **argv)
 	data_list << dc_one << dc_two;
 	edit.appendColumns(data_list);
 	// TODO: should be handled by TableModel (?)
-	edit.setOutputFilter(0, new Double2StringFilter());
-	edit.setOutputFilter(1, new Double2StringFilter());
+	edit.setOutputFilter(0, new Double2StringFilter('d',2));
+	edit.setOutputFilter(1, new Double2StringFilter('d',2));
 	edit.setInputFilter(0, new String2DoubleFilter());
 	edit.setInputFilter(1, new String2DoubleFilter());
 

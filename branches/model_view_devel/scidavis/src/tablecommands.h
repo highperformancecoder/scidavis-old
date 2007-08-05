@@ -27,6 +27,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef TABLE_COMMANDS_H
+#define TABLE_COMMANDS_H
+
 #include <QUndoCommand>
 #include <QAbstractItemModel>
 #include <QModelIndex>
@@ -486,3 +489,4 @@ private:
 // end of class TableReplaceColumnsCmd
 ///////////////////////////////////////////////////////////////////////////
 
+#endif // ifndef TABLE_COMMANDS_H

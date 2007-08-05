@@ -80,10 +80,11 @@ bool AbstractFilter::input(int port, AbstractDataSource *source)
 	if (!source)
 		inputAboutToBeDisconnected(old_input);
 	d_inputs[port] = source;
-	if (source) { // we have a new source, so connect its signals
+	if (source) { // we have a new source
 		inputDescriptionChanged(source);
 		inputPlotDesignationChanged(source);
 		inputDataChanged(source);
+		// connect the source's signals
 		QObject::connect(source, SIGNAL(descriptionAboutToChange(AbstractDataSource*)),
 				&d_slot_machine, SLOT(inputDescriptionAboutToChange(AbstractDataSource*)));
 		QObject::connect(source, SIGNAL(descriptionChanged(AbstractDataSource*)),
