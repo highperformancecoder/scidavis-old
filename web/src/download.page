@@ -3,17 +3,16 @@ title: Download
 inMenu: true
 ---
 
-The first release (SciDAVis 0.1.0) is roughly planned for the end of July, depending on
-how long the changes detailled "here":about/roadmap.html#0.1.0 will take.
-Since we're all working on this project in our spare time, it's a bit difficult to
-give precise dates.
+You can download the source code, the manual, and translation files from "here":http://sourceforge.net/project/showfiles.php?group_id=199120&package_id=236207. 
 
-Until then, you can check out the development version using "Subversion":http://subversion.tigris.org.
+Precompiled binaries are avaiable "here":http://sourceforge.net/project/showfiles.php?group_id=199120&package_id=241098.
+
+You can also check out the development version using "Subversion":http://subversion.tigris.org.
 Here's how to do it:
 
 {hlblock: {blockName: svnco, highlight: plaintext}}
 
-Instructions for compiling can be found in the file "README.html" included with the source.
+Instructions for compiling can be found in the file "INSTALL.html" included with the source.
 
 You might also be interested in our "roadmap":about/roadmap.html.
 

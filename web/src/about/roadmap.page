@@ -32,6 +32,18 @@ users and contributors can see where we're going. For example, a few unnecessari
 menus like "Analysis" and dialogs like those for graph settings will be cleaned up.
 Also, some bugs have to be fixed; particularly in the area of loading project files.
 
+<b>Released 2007-08-05</b><br>
+Most important changes (since QtiPlot 0.9-rc2):
+* improved handling of custom decimal separators
+* many improvements/additions to Python scripting
+* improved user interface: restructured menus and tool bars, several restructured dialogs
+* script window removed since notes offer the same capabilities
+* more stable project loading/saving
+* easier ASCII import/export, improved appending of projects and Origin graphs
+* lots of small improvements and bug fixes
+* export to eps and pdf without large white borders
+
+
 h1(#0.2.0). 0.2.0: Parts of 1.0.0 (?)
 
 Many of the features planned for 1.0.0 are interdependent, which is why so many large-scale changes
