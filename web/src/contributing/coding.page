@@ -39,14 +39,14 @@ SciDAVis on our mailing list.
 
 h2. Qt
 
-SciDAVis makes extensive use of the "Qt library":http://trolltech.com/products/qt library developed
+SciDAVis makes extensive use of the "Qt library":http://trolltech.com/products/qt developed
 by "Trolltech":http://trolltech.com. We're using it for platform abstraction, signals and slots,
 the user interface and more; so there's hardly any part of the code you can understand
 without knowing about Qt. Luckily, Qt comes with an excellent
 "documentation":http://doc.trolltech.com/4.3/index.html (also available locally after you've
 installed Qt).
 Additionally, there's a large and active community around Qt, see for example the
-"Qt Centre":http://www.qtcentre.org or this "list of OpenSource Qt Applications":http://www.qt-apps.org.
+"Qt Centre":http://www.qtcentre.org, QtForum.org":http://www.qt-forum.org or this "list of OpenSource Qt Applications":http://www.qt-apps.org.
 
 h2(#doxygen). Doxygen
 

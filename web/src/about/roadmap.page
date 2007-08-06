@@ -7,7 +7,7 @@ h1(#policy). Release Policy
 
 Release numbers will follow the scheme major.minor.bugfix.
 
-"major" releases differ considerably in architectur and potentially break backwards-compatibilty,
+"major" releases differ considerably in architecture and potentially break backwards-compatibility,
 particularly with respect to plugins. Therefore, they will occur only very infrequently.
 
 "minor" releases add some new functionality, but do not change existing interfaces or otherwise
@@ -24,15 +24,14 @@ number and severity, bugfix releases (x.y.z) will be provided.
 
 h1(#0.1.0). 0.1.0: Improved user interface and fixes to project file loading
 
-Starting point is the QtiPlot codebase somewhere between 0.9-rc2 and 0.9 (Subversion
+Starting point was the QtiPlot codebase somewhere between 0.9-rc2 and 0.9 (Subversion
 revision 621, to be precise).
 
-The goal of this release is to improve some aspects of the user interface so that prospective
-users and contributors can see where we're going. For example, a few unnecessarily complicated
-menus like "Analysis" and dialogs like those for graph settings will be cleaned up.
-Also, some bugs have to be fixed; particularly in the area of loading project files.
+The goal of this release was to improve some aspects of the user interface so that prospective
+users and contributors can see where we're going.
 
-<b>Released 2007-08-05</b><br>
+h2. Released 2007-08-05
+
 Most important changes (since QtiPlot 0.9-rc2):
 * improved handling of custom decimal separators
 * many improvements/additions to Python scripting
