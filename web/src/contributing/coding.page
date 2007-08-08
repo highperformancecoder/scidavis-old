@@ -46,7 +46,7 @@ without knowing about Qt. Luckily, Qt comes with an excellent
 "documentation":http://doc.trolltech.com/4.3/index.html (also available locally after you've
 installed Qt).
 Additionally, there's a large and active community around Qt, see for example the
-"Qt Centre":http://www.qtcentre.org, QtForum.org":http://www.qt-forum.org or this "list of OpenSource Qt Applications":http://www.qt-apps.org.
+"Qt Centre":http://www.qtcentre.org, "QtForum.org":http://www.qt-forum.org or this "list of OpenSource Qt Applications":http://www.qt-apps.org.
 
 h2(#doxygen). Doxygen
 

@@ -7,8 +7,11 @@ You can get the source tarball or precompiled binaries for Linux and Windows on 
 "Sourcefore.net download page":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=236207.
 Optionally, you can also download the manual or updated translations.
 
-We're looking for people willing to contribute packages for various Linux distributions and maybe a Windows installer,
-as well as translators for updating existing and contributing new translations.
+Thanks to Quentin Denis, there are
+"packages for openSUSE 10.2":http://packman.links2linux.org/package/scidavis.
+
+We're looking for people willing to contribute packages for more Linux distributions, MacOS X and maybe a graphical
+Windows installer, as well as translators for updating existing and contributing new translations.
 
 You can also check out the development version using "Subversion":http://subversion.tigris.org.
 Here's how to do it:
