@@ -3,24 +3,87 @@ title: Download
 inMenu: true
 ---
 
-You can get the source tarball or precompiled binaries for Linux and Windows on our
-"Sourcefore.net download page":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=236207.
-Optionally, you can also download the manual or updated translations.
+h1. Windows
 
-Thanks to Quentin Denis, there are
-"packages for openSUSE 10.2":http://packman.links2linux.org/package/scidavis.
+In order to run the pre-compiled binaries we provide for Windows, you need
 
-We're looking for people willing to contribute packages for more Linux distributions, MacOS X and maybe a graphical
-Windows installer, as well as translators for updating existing and contributing new translations.
+* "Qt/Windows Open Source Edition >= 4.3.0":http://trolltech.com/developer/downloads/qt/windows
+* "Python >= 2.4":http://www.python.org/download/
+* "SIP >= 4.7":http://www.riverbankcomputing.co.uk/sip/download.php
+* "PyQt4 >= 4.3":http://www.riverbankcomputing.co.uk/pyqt/download.php
 
-You can also check out the development version using "Subversion":http://subversion.tigris.org.
-Here's how to do it:
+Get the file "scidavis-x.y.z-windows.zip" from
+"here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=236207,
+open it and copy (unzip) the content to some convenient location.
+Finally, start SciDAVis by double-clicking on scidavis.exe.
+If you want a link on your desktop and/or start menu, you currently have to create it manually
+(by dragging the scidavis executable to the desired destination).
+
+Also, the manual is not included due to its size and our intention to update it in between releases.
+If you want to install it, get it
+"here":http://sourceforge.net/project/showfiles.php?group_id=199120&package_id=241381
+(you only need the zip file) and unpack it like the binaries.
+You can view it either from the Help menu in SciDAVis or by opening the file "index.html" in your browser.
+
+We're looking for someone with the necessary know-how to create a graphical installer.
+
+h1. Linux
+
+h2. SUSE
+
+Thanks to Quentin Denis, packages of the application as well as the manual are available
+"here":http://packman.links2linux.org/package/scidavis.
+
+h2. Other distributions
+
+For all distributions that don't have specific packages yet, we offer a universal binary.
+You need to install the following dependencies, either from your package manager or by following the links below:
+
+* "Qt >= 4.3.0":http://trolltech.com/developer/downloads/qt/x11
+* "Python >= 2.4":http://www.python.org/download/
+* "SIP >= 4.7":http://www.riverbankcomputing.co.uk/sip/download.php
+* "PyQt4 >= 4.3":http://www.riverbankcomputing.co.uk/pyqt/download.php
+
+Get scidavis-x.y.z-linux.tar.bz2 from
+"here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=236207.
+If you don't know how to open this file, start a terminal, cd to the directory containing it and enter
+
+{hlblock: {blockName: linux, highlight: plaintext}}
+
+This will create a directory "scidavis-x.y.z" with the binary and some additional files.
+
+h1. MacOS X
+
+Currently, we do not have anyone to test SciDAVis on MacOS X or provide pre-compiled binaries.
+The sources should compile though (please tell us if they don't).
+Any help in this area will be greatly appreciated.
+
+h1. Source tarballs
+
+Even though the INSTALL.html file included in the source tarballs contains pretty detailled instructions for
+compiling SciDAVis, this is more difficult than installing pre-compiled packages.
+If you've never compiled an application before, you'll probably spend some time figuring out how to install
+all the dependencies (including development packages).
+You have been warned.
+
+That said, you can get the sources either as .tar.bz2 or .zip archive
+"here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=236207.
+
+h1. The bleeding edge (subversion repository)
+
+You only need to get this if you want to participate in developing SciDAVis or test the things we are
+currently working on (which is to say, they are generally unfinished and not suitable for normal usage).
+
+To check out the development version, you need a "Subversion":http://subversion.tigris.org
+client.
+Here's how to do it using the command-line client:
 
 {hlblock: {blockName: svnco, highlight: plaintext}}
 
-Instructions for compiling can be found in the file "INSTALL.html" included with the source.
-
-You might also be interested in our "roadmap":about/roadmap.html.
+After that, you proceed as with the source tarballs.
 
 --- svnco, html
 svn co https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis
+
+--- linux, html
+tar xjvf scidavis-x.y.z-linux.tar.bz2
