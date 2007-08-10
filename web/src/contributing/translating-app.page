@@ -9,13 +9,91 @@ h2. Using Qt Linguist
 
 You may be surprised how easy translating SciDAVis is. Here are step by step instructions:
 
-# Make sure you have Qt Linguist installed on your system. On Windows it will come with the "Qt/Windows Open Source Edition":http://trolltech.com/developer/downloads/qt/windows. On Linux you just have to install it using your package manager.<br><br>
-# Download the latest source code of SciDAVis and locate the "translations" folder.<br><br>
-# Start Qt Linguist and open the .ts file corresponding to the language you want to translate SciDAVis to. The file name will be "scidavis_XX.ts" where "XX" is the two letter code for language. It is "scidavis_de.ts" for German, "scidavis_fr.ts" for French and so on. If it is available, open the corresponding phrase book "scidavis_XX.qph" too. Phrase books help keeping translations of frequently occurring words and expressions consistent. For more information on phrase books, please refer to the "Qt Linguist Manual":http://doc.trolltech.com/4.3/linguist-translators.html. If the file for your language does not exist yet, create it as described in the "appendix":translating-app.html#appendix below.<br><br>
-# The window of the Qt Linguist should look like this:
-!.../images/linguist.png!<br><br>
-# Now you can start translating:<br> At the left hand side, the is a list with all string pairs, i.e. source strings and translation strings. You can totally ignore all strings with a gray checkmark, these are texts removed from the application. They are only kept as hints for similar strings. All strings marked with a green checkmark are already finished. Ignore them unless you want to proof read existing translations. So you only have to concern yourself with strings marked by a question mark or an exclamation mark. As soon as you select one, the source text and a possible unconfirmed translation will appear on the upper right side. Below that, translation hints are given. All you have to do now ist enter the correct translation below "Translation" and press Ctrl+Return. You can use the phases and guesses below by simply double clicking them. Ctrl+B will copy the source string into the translation field.<br><br>
-# Once you are finished, just save the file and send it (and the phrase file if you modified it) to the SciDAVis developers. <br><br>
+#	<p>
+	Make sure you have Qt Linguist installed on your system. On Windows it will come with the
+	"Qt/Windows Open Source Edition":http://trolltech.com/developer/downloads/qt/windows.
+	On Linux you just have to install it using your package manager.
+	</p>
+#	<p>
+	Download the translation sources. The file name will be "scidavis_XX.ts" where "XX" is the
+	"ISO two-letter code":http://www.loc.gov/standards/iso639-2/php/langcodes-search.php
+	for the language in question ("scidavis_de.ts" for German, "scidavis_fr.ts" for French
+	and so on). If it is available, get the corresponding phrase book "scidavis_XX.qph" too.
+	Phrase books help keeping translations of frequently occurring words and expressions consistent.
+	For more information on phrase books, please refer to the
+	"Qt Linguist Manual":http://doc.trolltech.com/4.3/linguist-translators.html.
+	</p>
+	<p>
+	If the file for your language does not exist yet, create it as described in the
+	"appendix":translating-app.html#appendix below.
+	</p>
+	<table>
+		<tr>
+			<th>Language</th>
+			<th>Translation Source</th>
+			<th>Phrase Book</th>
+			<th>Status</th>
+		</tr>
+		<tr>
+			<td>French</td>
+			<td>"scidavis_fr.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_fr.ts?revision=HEAD</td>
+			<td></td>
+			<td align="right">31%</td>
+		</tr>
+		<tr>
+			<td>German</td>
+			<td>"scidavis_de.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_de.ts?revision=HEAD</td>
+			<td>"scidavis_de.qph":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_de.qph?revision=HEAD</td>
+			<td align="right">100%</td>
+		</tr>
+		<tr>
+			<td>Russian</td>
+			<td>"scidavis_ru.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_ru.ts?revision=HEAD</td>
+			<td></td>
+			<td align="right">31%</td>
+		</tr>
+		<tr>
+			<td>Spanish</td>
+			<td>"scidavis_es.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_es.ts?revision=HEAD</td>
+			<td></td>
+			<td align="right">31%</td>
+		</tr>
+		<tr>
+			<td>Swedish</td>
+			<td>"scidavis_sv.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_sv.ts?revision=HEAD</td>
+			<td></td>
+			<td align="right">31%</td>
+		</tr>
+	</table>
+#	<p>
+	Start Qt Linguist and open the .ts file corresponding to the language you want to translate SciDAVis to.
+	</p>
+#	<p>
+	The window of the Qt Linguist should look like this:
+	!.../images/linguist.png!
+	</p>
+#	<p>
+	Now you can start translating:
+	</p>
+
+	<p>
+	At the left hand side, there is a list with all string pairs, i.e. source strings and translation
+	strings. You can totally ignore all strings with a gray checkmark, these are texts removed from
+	the application. They are only kept as hints for similar strings. All strings marked with a
+	green checkmark are already finished. Ignore them unless you want to proof read existing
+	translations. So you only have to concern yourself with strings marked by a question mark or an
+	exclamation mark.
+	</p>
+	<p>
+	As soon as you select one, the source text and a possible unconfirmed translation will appear on
+	the upper right side. Below that, translation hints are given. All you have to do now ist enter
+	the correct translation below "Translation" and press Ctrl+Return. You can use the phrases and
+	guesses below by simply double clicking them. Ctrl+B will copy the source string into the
+	translation field.
+	</p>
+#	<p>
+	Once you are finished, just save the file and send it (and the phrase file if you modified it) to the SciDAVis developers.
+	</p>
 
 That's all!
 
@@ -32,7 +110,7 @@ h3. Generating a new .ts file for your language
 {hlblock: {blockName: lupdate, highlight: plaintext}}
 * Open the language file with Qt Linguist, go to the "Edit" menu and adjust the translation file settings accordingly.
 
-h3. Testing you translation
+h3. Testing your translation
 
 * Go to the "scidavis" directory of the source code.
 * Execute 
