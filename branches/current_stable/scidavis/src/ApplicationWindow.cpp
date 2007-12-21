@@ -216,6 +216,7 @@ void ApplicationWindow::init()
 	explorerSplitter->addWidget(folders);
 	explorerSplitter->addWidget(lv);
 	explorerWindow->setWidget(explorerSplitter);
+	explorerSplitter->setSizes( QList<int>() << 50 << 50);
 	explorerWindow->hide();
 
 	logWindow = new QDockWidget(this);
