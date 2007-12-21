@@ -39,6 +39,7 @@
 #include "MultiLayer.h"
 #include "Note.h"
 #include "QwtHistogram.h"
+#include "Grid.h"
 
 #define OBJECTXOFFSET 200
 
@@ -64,7 +65,7 @@ ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
 	mw->showResults(opj.resultsLogString(),mw->logWindow->isVisible());
 }
 
-int ImportOPJ::translateOrigin2SciDAVisLineStyle(int linestyle) {
+int ImportOPJ::translateOrigin2ScidavisLineStyle(int linestyle) {
 	int scidavisstyle=0;
 	switch (linestyle)
 	{
@@ -729,22 +730,24 @@ bool ImportOPJ::importGraphs(OPJFile opj)
 
 			//grid
 			vector<graphGrid> grids=opj.layerGrid(g,l);
-			GridOptions grid;
-			grid.majorOnX=(grids[0].hidden?0:1);
-			grid.minorOnX=(grids[1].hidden?0:1);
-			grid.majorOnY=(grids[2].hidden?0:1);
-			grid.minorOnY=(grids[3].hidden?0:1);
-			grid.majorStyle=translateOrigin2SciDAVisLineStyle(grids[0].style);
-			grid.majorCol=grids[0].color;
-			grid.majorWidth=ceil(grids[0].width);
-			grid.minorStyle=translateOrigin2SciDAVisLineStyle(grids[1].style);
-			grid.minorCol=grids[1].color;
-			grid.minorWidth=ceil(grids[1].width);
-			grid.xZeroOn=0;
-			grid.yZeroOn=0;
-			grid.xAxis=2;
-			grid.yAxis=0;
-			graph->setGridOptions(grid);
+			Grid *grid = graph->grid();
+			grid->enableX(grids[0].hidden?0:1);
+			grid->enableXMin(grids[1].hidden?0:1);
+			grid->enableY(grids[2].hidden?0:1);
+			grid->enableYMin(grids[3].hidden?0:1);
+
+			grid->setMajPenX(QPen(ColorBox::color(grids[0].color), ceil(grids[0].width),
+							Graph::getPenStyle(translateOrigin2ScidavisLineStyle(grids[0].style))));
+			grid->setMinPenX(QPen(ColorBox::color(grids[1].color), ceil(grids[1].width),
+							Graph::getPenStyle(translateOrigin2ScidavisLineStyle(grids[1].style))));
+			grid->setMajPenY(QPen(ColorBox::color(grids[2].color), ceil(grids[2].width),
+							Graph::getPenStyle(translateOrigin2ScidavisLineStyle(grids[2].style))));
+			grid->setMinPenY(QPen(ColorBox::color(grids[3].color), ceil(grids[3].width),
+							Graph::getPenStyle(translateOrigin2ScidavisLineStyle(grids[3].style))));
+
+			grid->setAxis(2, 0);
+			grid->enableZeroLineX(0);
+			grid->enableZeroLineY(0);
 
 			vector<graphAxisFormat> formats=opj.layerAxisFormat(g,l);
 			vector<graphAxisTick> ticks=opj.layerAxisTickLabels(g,l);

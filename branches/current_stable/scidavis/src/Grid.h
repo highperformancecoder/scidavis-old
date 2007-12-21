@@ -1,10 +1,10 @@
 /***************************************************************************
-    File                 : importOPJ.h
+    File                 : Grid.h
     Project              : SciDAVis
     --------------------------------------------------------------------
-    Copyright            : (C) 2006-2007 by Ion Vasilief, Alex Kargovsky, Tilman Hoener zu Siederdissen
-    Email (use @ for *)  : ion_vasilief*yahoo.fr, kargovsky*yumr.phys.msu.su, thzs*gmx.net
-    Description          : Origin project import class
+    Copyright            : (C) 2007 by Ion Vasilief
+    Email (use @ for *)  : ion_vasilief*yahoo.fr
+    Description          : 2D Grid class
 
  ***************************************************************************/
 
@@ -26,31 +26,49 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef IMPORTOPJ_H
-#define IMPORTOPJ_H
+#ifndef GRID_H
+#define GRID_H
 
-#include "ApplicationWindow.h"
+#include <qwt_plot.h>
+#include <qwt_plot_grid.h>
+#include <qwt_plot_marker.h>
 
-class OPJFile;
-
-//! Origin project import class
-class ImportOPJ
+//! 2D Grid class
+class Grid : public QwtPlotGrid
 {
-public:
-	ImportOPJ(ApplicationWindow *app, const QString& filename);
+	public:
+		Grid();
 
-	bool importTables (OPJFile opj);
-	bool importGraphs (OPJFile opj);
-	bool importNotes (OPJFile opj);
-	int error(){return parse_error;};
+		void draw (QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &rect) const;
+		void drawLines(QPainter *painter, const QRect &rect, Qt::Orientation orientation, const QwtScaleMap &map,
+				const QwtValueList &values) const;
 
-private:
-	int translateOrigin2ScidavisLineStyle(int linestyle);
-	QString parseOriginText(const QString &str);
-	QString parseOriginTags(const QString &str);
-	int parse_error;
-	int xoffset;
-	ApplicationWindow *mw;
+		bool xZeroLineEnabled(){return (mrkX >= 0)?true:false;};
+		void enableZeroLineX(bool enable = true);
+		bool yZeroLineEnabled(){return (mrkY >= 0)?true:false;};
+		void enableZeroLineY(bool enable = true);
+
+		void setMajPenX(const QPen &p){	setMajPen(p);};
+		const QPen& majPenX() const {return majPen();};
+
+		void setMinPenX(const QPen &p){	setMinPen(p);};
+		const QPen& minPenX() const {return minPen();};
+
+		void setMajPenY(const QPen &p){	if (d_maj_pen_y != p) d_maj_pen_y = p;};
+		const QPen& majPenY() const {return d_maj_pen_y;};
+
+		void setMinPenY(const QPen &p){	if (d_min_pen_y != p) d_min_pen_y = p;};
+		const QPen& minPenY() const {return d_min_pen_y;};
+
+		void load(const QStringList& );
+		void copy(Grid *);
+		QString saveToString();
+
+	private:
+		QPen d_maj_pen_y;
+		QPen d_min_pen_y;
+
+		long mrkX, mrkY;//x=0 et y=0 line markers keys
 };
 
-#endif //IMPORTOPJ_H
+#endif

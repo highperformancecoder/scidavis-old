@@ -1709,7 +1709,7 @@ bool Table::setDateFormat(const QString& format, int col, bool updateCells)
 			}
 
 		    if (d_saved_cells){
-                d = QDateTime(QDate::fromJulianDay(d_saved_cells[col][i]+1));
+                d = QDateTime(QDate::fromJulianDay(int(d_saved_cells[col][i]+1)));
                 double secs = (d_saved_cells[col][i] - int(d_saved_cells[col][i]))*86400;
                 d.setTime(d.time().addSecs(int(secs)+1));
 
@@ -1754,7 +1754,7 @@ bool Table::setTimeFormat(const QString& format, int col, bool updateCells)
 				if (d_saved_cells[col][i] < 1)// import of Origin files
                 	t = ref.addMSecs(int(d_saved_cells[col][i]*86400000));
 				else
-					t = ref.addMSecs(d_saved_cells[col][i]);
+					t = ref.addMSecs(int(d_saved_cells[col][i]));
 
 				if (t.isValid())
 					d_table->setText(i, col, t.toString(format));

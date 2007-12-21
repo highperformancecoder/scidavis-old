@@ -30,6 +30,7 @@
 #include <QVarLengthArray>
 
 #include "Graph.h"
+#include "Grid.h"
 #include "CanvasPicker.h"
 #include "QwtErrorPlotCurve.h"
 #include "Legend.h"
@@ -97,7 +98,7 @@ Graph::Graph(QWidget* parent, const char* name, Qt::WFlags f)
 
 	n_curves=0;
 	d_active_tool = NULL;
-	widthLine=1;mrkX=-1;mrkY=-1;;
+	widthLine=1;
 	selectedMarker=-1;
 	drawTextOn=false;
 	drawLineOn=false;
@@ -149,22 +150,6 @@ Graph::Graph(QWidget* parent, const char* name, Qt::WFlags f)
 	setFocusPolicy(Qt::StrongFocus);
 	setFocusProxy(d_plot);
 	setMouseTracking(true );
-
-	grid.majorOnX=0;
-	grid.majorOnY=0;
-	grid.minorOnX=0;
-	grid.minorOnY=0;
-	grid.majorCol=3;
-	grid.majorStyle=0;
-	grid.majorWidth=1;
-	grid.minorCol=18;
-	grid.minorStyle=2;
-	grid.minorWidth=1;
-	grid.xZeroOn=0;
-	grid.yZeroOn=0;
-	setGridOptions(grid);
-	grid.xAxis = QwtPlot::xBottom;
-	grid.yAxis = QwtPlot::yLeft;
 
 	legendMarkerID = -1; // no legend for an empty graph
 	d_texts = QVector<int>();
@@ -1058,28 +1043,28 @@ void Graph::setTitleFont(const QFont &fnt)
 
 void Graph::setYAxisTitle(const QString& text)
 {
-	d_plot->setAxisTitle(0,text);
+	d_plot->setAxisTitle(QwtPlot::yLeft, text);
 	d_plot->replot();
 	emit modifiedGraph();
 }
 
 void Graph::setXAxisTitle(const QString& text)
 {
-	d_plot->setAxisTitle(2,text);
+	d_plot->setAxisTitle(QwtPlot::xBottom, text);
 	d_plot->replot();
 	emit modifiedGraph();
 }
 
 void Graph::setRightAxisTitle(const QString& text)
 {
-	d_plot->setAxisTitle(1,text);
+	d_plot->setAxisTitle(QwtPlot::yRight, text);
 	d_plot->replot();
 	emit modifiedGraph();
 }
 
 void Graph::setTopAxisTitle(const QString& text)
 {
-	d_plot->setAxisTitle(3,text);
+	d_plot->setAxisTitle(QwtPlot::xTop, text);
 	d_plot->replot();
 	emit modifiedGraph();
 }
@@ -1140,97 +1125,11 @@ void Graph::setRightAxisTitleAlignment(int align)
 
 void Graph::setAxisTitle(int axis, const QString& text)
 {
-	int a;
-	switch (axis)
-	{
-		case 0:
-			a=2;
-        break;
-		case 1:
-			a=0;
-        break;
-		case 2:
-			a=3;
-        break;
-		case 3:
-			a=1;
-        break;
-	}
-	d_plot->setAxisTitle(a, text);
+	d_plot->setAxisTitle(axis, text);
 	d_plot->replot();
 	emit modifiedGraph();
 }
 
-void Graph::setGridOptions(const GridOptions& o)
-{
-	if (grid.majorCol == o.majorCol && grid.majorOnX == o.majorOnX &&
-			grid.majorOnY == o.majorOnY && grid.majorStyle == o.majorStyle &&
-			grid.majorWidth == o.majorWidth && grid.minorCol == o.minorCol &&
-			grid.minorOnX == o.minorOnX && grid.minorOnY == o.minorOnY &&
-			grid.minorStyle == o.minorStyle && grid.minorWidth == o.minorWidth &&
-			grid.xAxis == o.xAxis && grid.yAxis == o.yAxis &&
-			grid.xZeroOn == o.xZeroOn && grid.yZeroOn == o.yZeroOn) return;
-
-	grid=o;
-
-	QColor minColor = ColorBox::color(grid.minorCol);
-	QColor majColor = ColorBox::color(grid.majorCol);
-
-	Qt::PenStyle majStyle = getPenStyle(grid.majorStyle);
-	Qt::PenStyle minStyle = getPenStyle(grid.minorStyle);
-
-	QPen majPen=QPen (majColor,grid.majorWidth,majStyle);
-	d_plot->grid()->setMajPen (majPen);
-
-	QPen minPen=QPen (minColor,grid.minorWidth,minStyle);
-	d_plot->grid()->setMinPen(minPen);
-
-	if (grid.majorOnX) d_plot->grid()->enableX (true);
-	else if (grid.majorOnX==0) d_plot->grid()->enableX (false);
-
-	if (grid.minorOnX) d_plot->grid()->enableXMin (true);
-	else if (grid.minorOnX==0) d_plot->grid()->enableXMin (false);
-
-	if (grid.majorOnY) d_plot->grid()->enableY (true);
-	else if (grid.majorOnY==0) d_plot->grid()->enableY (false);
-
-	if (grid.minorOnY) d_plot->grid()->enableYMin (true);
-	else d_plot->grid()->enableYMin (false);
-
-	d_plot->grid()->setAxis(grid.xAxis, grid.yAxis);
-
-	if (mrkX<0 && grid.xZeroOn)
-	{
-		QwtPlotMarker *m = new QwtPlotMarker();
-		mrkX = d_plot->insertMarker(m);
-		m->setAxis(grid.xAxis, grid.yAxis);
-		m->setLineStyle(QwtPlotMarker::VLine);
-		m->setValue(0.0,0.0);
-		m->setLinePen(QPen(Qt::black, 2,Qt::SolidLine));
-	}
-	else if (mrkX>=0 && !grid.xZeroOn)
-	{
-		d_plot->removeMarker(mrkX);
-		mrkX=-1;
-	}
-
-	if (mrkY<0 && grid.yZeroOn)
-	{
-		QwtPlotMarker *m = new QwtPlotMarker();
-		mrkY = d_plot->insertMarker(m);
-		m->setAxis(grid.xAxis, grid.yAxis);
-		m->setLineStyle(QwtPlotMarker::HLine);
-		m->setValue(0.0,0.0);
-		m->setLinePen(QPen(Qt::black, 2,Qt::SolidLine));
-	}
-	else if (mrkY>=0 && !grid.yZeroOn)
-	{
-		d_plot->removeMarker(mrkY);
-		mrkY=-1;
-	}
-
-	emit modifiedGraph();
-}
 
 QStringList Graph::scalesTitles()
 {
@@ -1512,13 +1411,13 @@ void Graph::exportVector(const QString& fileName, int res, bool color, bool keep
         if (page_aspect > plot_aspect){
             int margin = (int) ((0.1/2.54)*printer.logicalDpiY()); // 1 mm margins
             int height = printer.height() - 2*margin;
-            int width = height*plot_aspect;
+            int width = int(height*plot_aspect);
             int x = (printer.width()- width)/2;
             plotRect = QRect(x, margin, width, height);
         } else if (plot_aspect >= page_aspect){
             int margin = (int) ((0.1/2.54)*printer.logicalDpiX()); // 1 mm margins
             int width = printer.width() - 2*margin;
-            int height = width/plot_aspect;
+            int height = int(width/plot_aspect);
             int y = (printer.height()- height)/2;
             plotRect = QRect(margin, y, width, height);
         }
@@ -2507,26 +2406,6 @@ QString Graph::saveCurves()
 	return s;
 }
 
-QString Graph::saveGridOptions()
-{
-	QString s="grid\t";
-	s+=QString::number(grid.majorOnX)+"\t";
-	s+=QString::number(grid.minorOnX)+"\t";
-	s+=QString::number(grid.majorOnY)+"\t";
-	s+=QString::number(grid.minorOnY)+"\t";
-	s+=QString::number(grid.majorCol)+"\t";
-	s+=QString::number(grid.majorStyle)+"\t";
-	s+=QString::number(grid.majorWidth)+"\t";
-	s+=QString::number(grid.minorCol)+"\t";
-	s+=QString::number(grid.minorStyle)+"\t";
-	s+=QString::number(grid.minorWidth)+"\t";
-	s+=QString::number(grid.xZeroOn)+"\t";
-	s+=QString::number(grid.yZeroOn)+"\t";
-	s+=QString::number(grid.xAxis)+"\t";
-	s+=QString::number(grid.yAxis)+"\n";
-	return s;
-}
-
 Legend* Graph::newLegend()
 {
 	Legend* mrk = new Legend(d_plot);
@@ -2656,7 +2535,7 @@ long Graph::insertTextMarker(const QStringList& list, int fileVersion)
 
 void Graph::addArrow(QStringList list, int fileVersion)
 {
-	ArrowMarker* mrk= new ArrowMarker();
+	ArrowMarker* mrk = new ArrowMarker();
 	long mrkID=d_plot->insertMarker(mrk);
     int linesOnPlot = (int)d_lines.size();
 	d_lines.resize(++linesOnPlot);
@@ -2686,7 +2565,7 @@ void Graph::addArrow(QStringList list, int fileVersion)
 
 void Graph::addArrow(ArrowMarker* mrk)
 {
-	ArrowMarker* aux= new ArrowMarker();
+	ArrowMarker* aux = new ArrowMarker();
     int linesOnPlot = (int)d_lines.size();
 	d_lines.resize(++linesOnPlot);
 	d_lines[linesOnPlot-1] = d_plot->insertMarker(aux);
@@ -3180,8 +3059,8 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 		d_texts[texts-1] = d_plot->insertMarker(aux);
 
 		aux->setOrigin(canvas_rect.center() +
-				QPoint(radius*cos(alabel) - 0.5*aux->rect().width(),
-					-radius*sin(alabel) - 0.5*aux->rect().height()));
+				QPoint(int(radius*cos(alabel) - 0.5*aux->rect().width()),
+					int(-radius*sin(alabel) - 0.5*aux->rect().height())));
 
 		angle -= value;
 	}
@@ -4063,7 +3942,7 @@ QString Graph::saveToString(bool saveAsTemplate)
 	s+=QString::number(d_plot->paletteBackgroundColor().alpha()) + "\n";
 	s+="Margin\t"+QString::number(d_plot->margin())+"\n";
 	s+="Border\t"+QString::number(d_plot->lineWidth())+"\t"+d_plot->frameColor().name()+"\n";
-	s+=saveGridOptions();
+	s+=grid()->saveToString();
 	s+=saveEnabledAxes();
 	s+="AxesTitles\t"+saveScaleTitles();
 	s+=saveAxesTitleColors();
@@ -4121,6 +4000,7 @@ void Graph::updateMarkersBoundingRect()
 		if (mrk)
 			mrk->updateBoundingRect();
 	}
+	d_plot->replot();
 }
 
 void Graph::resizeEvent ( QResizeEvent *e )
@@ -4376,7 +4256,7 @@ void Graph::copyTitle()
 void Graph::removeAxisTitle()
 {
 	int axis = (selectedAxis + 2)%4;//unconsistent notation in Qwt enumerations between
-  	//QwtScaleDraw::alignement and QwtPlot::Axis
+  	//QwtScaleDraw::alignment and QwtPlot::Axis
   	d_plot->setAxisTitle(axis, QString::null);
 	d_plot->replot();
 	emit modifiedGraph();
@@ -4391,7 +4271,7 @@ void Graph::cutAxisTitle()
 void Graph::copyAxisTitle()
 {
 	int axis = (selectedAxis + 2)%4;//unconsistent notation in Qwt enumerations between
-  	//QwtScaleDraw::alignement and QwtPlot::Axis
+  	//QwtScaleDraw::alignment and QwtPlot::Axis
   	QApplication::clipboard()->setText(d_plot->axisTitle(axis).text(), QClipboard::Clipboard);
 	}
 
@@ -4437,11 +4317,14 @@ void Graph::showAxisContextMenu(int axis)
 	menu.addAction(tr("&Hide axis"), this, SLOT(hideSelectedAxis()));
 
 	QAction * gridsID = menu.addAction(tr("&Show grids"), this, SLOT(showGrids()));
-	if (axis == QwtScaleDraw::LeftScale || axis == QwtScaleDraw::RightScale){
-		if (grid.majorOnY)
+	if (axis == QwtScaleDraw::LeftScale || axis == QwtScaleDraw::RightScale)
+	{
+		if (d_plot->grid()->yEnabled())
 			gridsID->setChecked(true);
-	} else {
-		if (grid.majorOnX)
+	} 
+	else 
+	{
+		if (d_plot->grid()->xEnabled())
 			gridsID->setChecked(true);
 	}
 
@@ -4487,16 +4370,16 @@ void Graph::showGrid()
 
 void Graph::showGrid(int axis)
 {
+	Grid *grid = d_plot->grid();
+	if (!grid)
+		return;
+
 	if (axis == QwtScaleDraw::LeftScale || axis == QwtScaleDraw::RightScale){
-		grid.majorOnY = 1 - grid.majorOnY;
-		d_plot->grid()->enableY(grid.majorOnY);
-		grid.minorOnY = 1 - grid.minorOnY;
-		d_plot->grid()->enableYMin(grid.minorOnY);
+		grid->enableY(!grid->yEnabled());
+		grid->enableYMin(!grid->yMinEnabled());
 	} else if (axis == QwtScaleDraw::BottomScale || axis == QwtScaleDraw::TopScale){
-		grid.majorOnX = 1 - grid.majorOnX;
-		d_plot->grid()->enableX(grid.majorOnX);
-		grid.minorOnX = 1 - grid.minorOnX;
-		d_plot->grid()->enableXMin(grid.minorOnX);
+		grid->enableX(!grid->xEnabled());
+		grid->enableXMin(!grid->xMinEnabled());
 	} else
 		return;
 
@@ -4521,7 +4404,8 @@ void Graph::copy(Graph* g)
     setAxesNumColors(g->axesNumColors());
 	setAxesBaseline(g->axesBaseline());
 
-	setGridOptions(g->gridOptions());
+	grid()->copy(g->grid());
+	
 
 	d_plot->setTitle (g->plotWidget()->title());
 
@@ -5426,3 +5310,25 @@ QPrinter::PageSize Graph::minPageSize(const QPrinter& printer, const QRect& r)
 
 	return size;
 }
+
+int Graph::mapToQwtAxis(int axis)
+{
+	int a=-1;
+	switch(axis)
+	{
+		case 0:
+			a = QwtPlot::xBottom;
+			break;
+		case 1:
+			a = QwtPlot::yLeft;
+			break;
+		case 2:
+			a = QwtPlot::xTop;
+			break;
+		case 3:
+			a = QwtPlot::yRight;
+			break;
+	}
+	return a;
+}
+

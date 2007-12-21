@@ -45,6 +45,7 @@
 #include "ImageMarker.h"
 #include "Graph.h"
 #include "Plot.h"
+#include "Grid.h"
 #include "PlotWizard.h"
 #include "PolynomFitDialog.h"
 #include "ExpDecayDialog.h"
@@ -5902,25 +5903,6 @@ void ApplicationWindow::showColumnOptionsDialog()
 		QMessageBox::warning(this, tr("SciDAVis"), tr("Please select a column first!"));
 }
 
-void ApplicationWindow::showAxis(int axis, int type, const QString& labelsColName, bool axisOn,
-		int majTicksType, int minTicksType, bool labelsOn, const QColor& c, int format,
-		int prec, int rotation, int baselineDist, const QString& formula, const QColor& labelsColor)
-{
-	Table *w = table(labelsColName);
-	if ((type == Graph::Txt || type == Graph::ColHeader) && !w)
-		return;
-
-    if (!ws->activeWindow() || !ws->activeWindow()->inherits("MultiLayer"))
-		return;
-
-	Graph* g = ((MultiLayer*)ws->activeWindow())->activeGraph();
-	if (!g)
-		return;
-
-	g->showAxis(axis, type, labelsColName, w, axisOn, majTicksType, minTicksType, labelsOn,
-			c, format, prec, rotation, baselineDist, formula, labelsColor);
-}
-
 void ApplicationWindow::showGeneralPlotDialog()
 {
 	QWidget* plot = ws->activeWindow();
@@ -5969,28 +5951,9 @@ QDialog* ApplicationWindow::showScaleDialog()
 
 		Graph* g = ((MultiLayer*)w)->activeGraph();
 		AxesDialog* ad = new AxesDialog(this);
-        connect (ad,SIGNAL(updateAxisTitle(int,const QString&)),g,SLOT(setAxisTitle(int,const QString&)));
-        connect (ad,SIGNAL(changeAxisFont(int, const QFont &)),g,SLOT(setAxisFont(int,const QFont &)));
-        connect (ad,SIGNAL(showAxis(int, int, const QString&, bool,int, int, bool,const QColor&,int, int, int, int, const QString&, const QColor&)),
-					this, SLOT(showAxis(int,int, const QString&, bool, int, int, bool,const QColor&, int, int, int, int, const QString&, const QColor&)));
-
-        ad->setGraph(g);
-        ad->insertColList(columnsList(Table::All));
-        ad->insertTablesList(tableWindows);
-        ad->setAxesLabelsFormatInfo(g->axesLabelsFormatInfo());
-        ad->setEnabledAxes(g->enabledAxes());
-        ad->setAxesType(g->axesType());
-        ad->setAxesBaseline(g->axesBaseline());
-
-        ad->initAxisFonts(g->axisFont(2), g->axisFont(0),g->axisFont(3),g->axisFont(1));
-        ad->setAxisTitles(g->scalesTitles());
-        ad->updateTitleBox(0);
-        ad->putGridOptions(g->gridOptions());
-        ad->setTicksType(g->plotWidget()->getMajorTicksType(), g->plotWidget()->getMinorTicksType());
-        ad->setEnabledTickLabels(g->enabledTickLabels());
-        ad->initLabelsRotation(g->labelsRotation(QwtPlot::xBottom), g->labelsRotation(QwtPlot::xTop));
-        ad->exec();
-        return ad;
+		ad->setGraph(g);
+		ad->exec();
+		return ad;
 	}
 	else if (w->inherits("Graph3D"))
 		return showPlot3dDialog();
@@ -9892,28 +9855,9 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			fList.pop_front();
 			ag->setAxesNumColors(fList);
 		}
-		else if (s.left(5)=="grid\t")
+	 	else if (s.left(5)=="grid\t")
 		{
-			QStringList grid=s.split("\t");
-			GridOptions gr;
-			gr.majorOnX=grid[1].toInt();
-			gr.minorOnX=grid[2].toInt();
-			gr.majorOnY=grid[3].toInt();
-			gr.minorOnY=grid[4].toInt();
-			gr.majorCol=grid[5].toInt();
-			gr.majorStyle=grid[6].toInt();
-			gr.majorWidth=grid[7].toInt();
-			gr.minorCol=grid[8].toInt();
-			gr.minorStyle=grid[9].toInt();
-			gr.minorWidth=grid[10].toInt();
-			gr.xZeroOn=grid[11].toInt();
-			gr.yZeroOn=grid[12].toInt();
-			if (grid.count() == 15)
-			{
-				gr.xAxis=grid[13].toInt();
-				gr.yAxis=grid[14].toInt();
-			}
-			ag->setGridOptions(gr);
+			ag->plotWidget()->grid()->load(s.split("\t"));
 		}
 		else if (s.startsWith ("<Antialiasing>") && s.endsWith ("</Antialiasing>"))
 		{
@@ -10217,8 +10161,8 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			legend.pop_front();
 			for (int i=0; i<4; i++)
 			{
-			    if (legend.count() > i)
-                    ag->setAxisTitle(i, legend[i]);
+			    if (legend.count() > i) 
+                    ag->setAxisTitle(Graph::mapToQwtAxis(i), legend[i]);
 			}
 		}
 		else if (s.contains ("AxesTitleColors"))

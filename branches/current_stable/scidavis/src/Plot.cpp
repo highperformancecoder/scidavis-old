@@ -28,6 +28,7 @@
  ***************************************************************************/
 #include "Plot.h"
 #include "Graph.h"
+#include "Grid.h"
 #include "ScaleDraw.h"
 #include "Spectrogram.h"
 #include "PlotCurve.h"
@@ -61,8 +62,8 @@ Plot::Plot(QWidget *parent, const char *)
 	d_grid = new Grid;
 	d_grid->enableX(false);
 	d_grid->enableY(false);
-	d_grid->setMajPen(QPen(Qt::blue, 0, Qt::SolidLine));
-	d_grid->setMinPen(QPen(Qt::gray, 0 , Qt::DotLine));
+	d_grid->setMajPenX(QPen(Qt::blue, 0, Qt::SolidLine));
+	d_grid->setMinPenX(QPen(Qt::gray, 0, Qt::DotLine));
 	d_grid->attach(this);
 
 	//custom scale
@@ -655,87 +656,4 @@ void Plot::updateLayout()
 const QColor & Plot::paletteBackgroundColor() const
 {
 	return	palette().color(QPalette::Window);
-}
-
-/*****************************************************************************
- *
- * Class Grid
- *
- *****************************************************************************/
-
-/*!
-  \brief Draw the grid
-
-  The grid is drawn into the bounding rectangle such that
-  gridlines begin and end at the rectangle's borders. The X and Y
-  maps are used to map the scale divisions into the drawing region
-  screen.
-  \param painter  Painter
-  \param mx X axis map
-  \param my Y axis
-  \param r Contents rect of the plot canvas
-  */
-void Grid::draw(QPainter *painter,
-		const QwtScaleMap &mx, const QwtScaleMap &my,
-		const QRect &r) const
-{
-	//  draw minor gridlines
-	painter->setPen(minPen());
-
-	if (xEnabled() && xMinEnabled())
-	{
-		drawLines(painter, r, Qt::Vertical, mx,
-				xScaleDiv().ticks(QwtScaleDiv::MinorTick));
-		drawLines(painter, r, Qt::Vertical, mx,
-				xScaleDiv().ticks(QwtScaleDiv::MediumTick));
-	}
-
-	if (yEnabled() && yMinEnabled())
-	{
-		drawLines(painter, r, Qt::Horizontal, my,
-				yScaleDiv().ticks(QwtScaleDiv::MinorTick));
-		drawLines(painter, r, Qt::Horizontal, my,
-				yScaleDiv().ticks(QwtScaleDiv::MediumTick));
-	}
-
-	//  draw major gridlines
-	painter->setPen(majPen());
-
-	if (xEnabled())
-	{
-		drawLines(painter, r, Qt::Vertical, mx,
-				xScaleDiv().ticks (QwtScaleDiv::MajorTick));
-	}
-
-	if (yEnabled())
-	{
-		drawLines(painter, r, Qt::Horizontal, my,
-				yScaleDiv().ticks (QwtScaleDiv::MajorTick));
-	}
-}
-
-void Grid::drawLines(QPainter *painter, const QRect &rect,
-		Qt::Orientation orientation, const QwtScaleMap &map,
-		const QwtValueList &values) const
-{
-	const int x1 = rect.left();
-	const int x2 = rect.right() + 1;
-	const int y1 = rect.top();
-	const int y2 = rect.bottom() + 1;
-	const int margin = 10;
-
-	for (uint i = 0; i < (uint)values.count(); i++)
-	{
-		const int value = map.transform(values[i]);
-		if ( orientation == Qt::Horizontal )
-		{
-			if ((value >= y1 + margin) && (value <= y2 - margin))
-				QwtPainter::drawLine(painter, x1, value, x2, value);
-		}
-		else
-		{
-			if ((value >= x1 + margin) && (value <= x2 - margin))
-				QwtPainter::drawLine(painter, value, y1, value, y2);
-		}
-	}
 }

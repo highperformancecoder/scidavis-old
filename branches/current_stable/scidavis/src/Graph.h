@@ -129,6 +129,8 @@ class Graph: public QWidget
 		ScalePicker *scalePicker;
 		CanvasPicker* cp;
 
+		static int mapToQwtAxis(int axis);
+
 		//! Returns the name of the parent MultiLayer object.
 		QString parentPlotName();
 
@@ -136,6 +138,8 @@ class Graph: public QWidget
 		void setActiveTool(PlotToolInterface *tool) { if(d_active_tool) delete d_active_tool; d_active_tool=tool; }
 		//! Return the active tool, or NULL if none is active.
 		PlotToolInterface* activeTool() const { return d_active_tool; }
+
+		Grid *grid(){return d_plot->grid();};
 
 	public slots:
 		//! Accessor method for #d_plot.
@@ -276,9 +280,6 @@ class Graph: public QWidget
 		void guessUniqueCurveLayout(int& colorIndex, int& symbolIndex);
 		//@}
 
-		GridOptions gridOptions(){return grid;};
-		void setGridOptions(const GridOptions& options);
-
 		//! \name Zoom
 		//@{
 		void zoomed (const QwtDoubleRect &);
@@ -293,7 +294,6 @@ class Graph: public QWidget
 		//! \name Saving to File
 		//@{
 		QString saveToString(bool saveAsTemplate = false);
-		QString saveGridOptions();
 		QString saveScale();
 		QString saveScaleTitles();
 		QString saveFonts();
@@ -431,6 +431,7 @@ class Graph: public QWidget
 		void setRightAxisTitle(const QString& text);
 		void setTopAxisTitle(const QString& text);
 		void setAxisTitle(int axis, const QString& text);
+		QString axisTitle(int axis) { return d_plot->axisTitle(axis).text(); }
 
 		QFont axisTitleFont(int axis);
 		void setXAxisTitleFont(const QFont &fnt);
@@ -721,8 +722,6 @@ signals:
 		//! Stores columns used for axes with text labels or time/date format info
 		QStringList axesFormatInfo;
 		QList <int> axisType;
-		//! Structure used to define the grid
-		GridOptions grid;
 		MarkerType selectedMarkerType;
 		QwtPlotMarker::LineStyle mrklStyle;
 
@@ -752,7 +751,6 @@ signals:
 		int auxMrkAngle,auxMrkBkg,auxMrkWidth;
 		int auxArrowHeadLength, auxArrowHeadAngle;
 		long selectedMarker,legendMarkerID;
-		long mrkX, mrkY;//x=0 et y=0 line markers keys
 		bool startArrowOn, endArrowOn, drawTextOn, drawLineOn, drawArrowOn;
 
 		bool auxFilledArrowHead, ignoreResize;

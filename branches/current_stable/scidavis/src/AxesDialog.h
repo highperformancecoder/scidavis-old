@@ -53,24 +53,6 @@ class ColorButton;
 class Graph;
 class TextFormatButtons;
 
-//! Structure containing grid properties
-typedef struct{
-  int majorOnX;
-  int minorOnX;
-  int majorOnY;
-  int minorOnY;
-  int majorStyle;
-  int majorCol;
-  int majorWidth;
-  int minorStyle;
-  int minorCol;
-  int minorWidth;
-  int xZeroOn;
-  int yZeroOn;
-  int xAxis;
-  int yAxis;
-}  GridOptions;
-
 //! General plot options dialog
 /**
  * Remark: Don't use this dialog as a non modal dialog!
@@ -149,52 +131,41 @@ protected:
 	TextFormatButtons *formatButtons;
 
 public slots:
-	void setAxesType(const QList<int>& list);
 	void setAxisType(int axis);
 	void updateAxisType(int axis);
-	void setAxisTitles(QStringList t);
 	void updateTitleBox(int axis);
 	bool updatePlot();
 	void updateScale();
+	void stepEnabled();
+	void stepDisabled();
 	void majorGridEnabled(bool on);
 	void minorGridEnabled(bool on);
-	GridOptions getGridOptions();
-	void putGridOptions(GridOptions gr);
-	void setGridOptions();
+    void showGridOptions(int axis);
 	void accept();
 	void customAxisFont();
 	void showAxis();
 	void updateShowBox(int axis);
-	void setEnabledAxes(QVector<bool> ok);
 	void drawFrame(bool framed);
 
 	void pickAxisColor();
 	void pickAxisNumColor();
 	void updateAxisColor(int);
-	int mapToQwtAxis(int axis);
 	int mapToQwtAxisId();
-	void setEnabledTickLabels(const QStringList& labelsOn);
 	void updateTickLabelsList(bool);
 	void updateMinorTicksList(int scaleType);
-	void setTicksType(const QList<int>& majLst, const QList<int>& minLst);
 	void setTicksType(int);
 	void setCurrentScale(int axisPos);
-	void initAxisFonts(const QFont& xB, const QFont& yL, const QFont& xT, const QFont& yR );
 
 	void updateMajTicksType(int);
 	void updateMinTicksType(int);
-	void updateGrid(int);
+	void updateGrid();
 	void updateFrame(int);
 	void setLabelsNumericFormat(int);
 	void updateLabelsFormat(int);
-	void initLabelsRotation(int xAngle, int yAngle);
 	void insertColList(const QStringList& cols);
-	void insertTablesList(const QStringList& l);
-	void setAxesLabelsFormatInfo(const QStringList& lst);
 	void showAxisFormatOptions(int format);
 	void setBaselineDist(int);
 	void changeBaselineDist(int baseline);
-	void setAxesBaseline(const QList<int>& lst);
 	void changeMinorTicksLength (int minLength);
 	void changeMajorTicksLength (int majLength);
 	void pickCanvasFrameColor();
@@ -218,19 +189,15 @@ public slots:
 private slots:
 	void pageChanged ( QWidget *page);
 
-signals:
-	void updateAxisTitle(int,const QString&);
-	void changeAxisFont(int, const QFont &);
+protected:
 	void showAxis(int, int, const QString&, bool, int, int, bool,
 				  const QColor&, int, int, int, int, const QString&, const QColor&);
 
-protected:
-	QStringList titles, tickLabelsOn, formatInfo;
+	QStringList tickLabelsOn, formatInfo;
 	QStringList	tablesList;
 	QList<int> majTicks, minTicks, axesType, axesBaseline;
 	QFont xBottomFont, yLeftFont, xTopFont, yRightFont;
-	GridOptions grid;
-	bool xAxisOn,yAxisOn,topAxisOn,rightAxisOn;
+	bool xAxisOn, yAxisOn, topAxisOn, rightAxisOn;
 	int xBottomLabelsRotation, xTopLabelsRotation;
 
 	Graph* d_graph;

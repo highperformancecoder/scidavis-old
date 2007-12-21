@@ -49,7 +49,7 @@ public:
 
 	enum LabelFormat{Automatic, Decimal, Scientific, Superscripts};
 
-	QwtPlotGrid *grid(){return (QwtPlotGrid *)d_grid;};
+	Grid *grid(){return (Grid *)d_grid;};
 	QList<int> curveKeys(){return d_curves.keys();};
 	QList<QwtPlotItem *> curvesList(){return d_curves.values();};
 	
@@ -110,15 +110,4 @@ protected:
 	int marker_key;
 	int curve_key;
 };
-
-class Grid : public QwtPlotGrid
-{
-public:
-    Grid(){};
-
-void draw (QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &rect) const;
-void drawLines(QPainter *painter, const QRect &rect, Qt::Orientation orientation, const QwtScaleMap &map,
-    const QwtValueList &values) const;
-};
-
 #endif

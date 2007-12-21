@@ -138,6 +138,7 @@ HEADERS  += src/ApplicationWindow.h \
             src/PlotEnrichement.h\
             src/ExtensibleFileDialog.h\
             src/OpenProjectDialog.h\
+	    src/Grid.h\
 
 ###################### SOURCES ##############################################
 
@@ -247,6 +248,7 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/PlotEnrichement.cpp\
             src/ExtensibleFileDialog.cpp\
             src/OpenProjectDialog.cpp\
+	    src/Grid.cpp\
 
 ###############################################################
 ##################### Compression #############################
