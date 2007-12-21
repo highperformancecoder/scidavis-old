@@ -77,7 +77,7 @@ public slots:
 						  double yr,double zl,double zr);
 	void insertNewData(Table* table, const QString& colName);
 
-	Matrix * matrix(){return matrix_;};
+	Matrix * matrix(){return d_matrix;};
 	void addMatrixData(Matrix* m);//used to plot matrixes
 	void addMatrixData(Matrix* m,double xl,double xr,double yl,double yr,double zl,double zr);
 	void updateMatrixData(Matrix* m);
@@ -385,7 +385,7 @@ private:
 	int conesQuality;
 	PointStyle pointStyle;
 	Table *worksheet;
-	Matrix *matrix_;
+	Matrix *d_matrix;
 	Qwt3D::PLOTSTYLE style_;
 };
 

@@ -89,7 +89,7 @@ UserFunction::~UserFunction()
 void Graph3D::initPlot()
 {
 	worksheet = 0;
-	matrix_ = 0;
+	d_matrix = 0;
     plotAssociation = QString();
 
 	QDateTime dt = QDateTime::currentDateTime ();
@@ -303,7 +303,7 @@ void Graph3D::addData(Table* table,const QString& xColName,const QString& yColNa
 
 void Graph3D::changeMatrix(Matrix* m)
 {
-	if (matrix_ == m)
+	if (d_matrix == m)
 		return;
 
 	addMatrixData(m);
@@ -311,14 +311,14 @@ void Graph3D::changeMatrix(Matrix* m)
 
 void Graph3D::addMatrixData(Matrix* m)
 {
-	if (matrix_ == m)
+	if (d_matrix == m)
 		return;
 
 	bool first_time = false;
-	if(!matrix_)
+	if(!d_matrix)
 		first_time = true;
 
-	matrix_ = m;
+	d_matrix = m;
 	plotAssociation = "matrix<" + QString(m->name()) + ">";
 
 	int cols = m->numCols();
@@ -349,7 +349,7 @@ void Graph3D::addMatrixData(Matrix* m)
 void Graph3D::addMatrixData(Matrix* m, double xl, double xr,
 		double yl, double yr, double zl, double zr)
 {
-	matrix_ = m;
+	d_matrix = m;
 	plotAssociation = "matrix<" + QString(m->name()) + ">";
 
 	updateScalesFromMatrix(xl, xr, yl, yr, zl, zr);
@@ -1388,7 +1388,7 @@ void Graph3D::updateScales(double xl, double xr, double yl, double yr, double zl
 {
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	if (matrix_)
+	if (d_matrix)
 		updateScalesFromMatrix(xl, xr, yl, yr, zl, zr);
 	else
 	{
@@ -1943,8 +1943,8 @@ void Graph3D::setCrossMesh()
 
 void Graph3D::clearData()
 {
-	if (matrix_)
-		matrix_ = 0;
+	if (d_matrix)
+		d_matrix = 0;
 	else if (worksheet)
 		worksheet = 0;
 	else if (func)
@@ -2918,8 +2918,8 @@ void Graph3D::showWorksheet()
 {
 	if (worksheet)
 		worksheet->showMaximized();
-	else if (matrix_)
-		matrix_->showMaximized();
+	else if (d_matrix)
+		d_matrix->showMaximized();
 }
 
 void Graph3D::setSmoothMesh(bool smooth)

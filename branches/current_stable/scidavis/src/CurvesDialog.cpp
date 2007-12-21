@@ -202,8 +202,8 @@ void CurvesDialog::showCurveRangeDialog()
     ApplicationWindow *app = (ApplicationWindow *)this->parent();
     if (app)
     {
-        CurveRangeDialog *crd = app->showCurveRangeDialog(d_graph, curve);
-        connect((QObject *)crd, SIGNAL(destroyed()), this, SLOT(updateCurveRange()));
+		app->showCurveRangeDialog(d_graph, curve);
+		updateCurveRange();
     }
 }
 
