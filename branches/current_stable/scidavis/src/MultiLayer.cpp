@@ -793,9 +793,22 @@ void MultiLayer::exportSVG(const QString& fname)
 
 void MultiLayer::copyAllLayers()
 {
+	bool selectionOn = false;
+	if (d_layers_selector)
+	{
+		d_layers_selector->hide();
+		selectionOn = true;
+	}
+
+	foreach (QWidget* g, graphsList)
+		((Graph *)g)->deselectMarker();
+
 	QPixmap pic = canvasPixmap();
 	QImage image= pic.convertToImage();
 	QApplication::clipboard()->setImage(image);
+
+	if (selectionOn)
+		d_layers_selector->show();
 }
 
 void MultiLayer::printActiveLayer()

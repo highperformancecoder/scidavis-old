@@ -10,3 +10,9 @@ Most important changes (since QtiPlot 0.9-rc2):
 - easier ASCII import/export, improved appending of projects and Origin graphs
 - lots of small improvements and bug fixes
 - export to eps and pdf without large white borders
+
+=== Release 0.1.1, 2007-12-21 ===
+Most important changes (since 0.1.0)
+- several bugs fixed
+
+

@@ -479,7 +479,18 @@ void Table::setCommands(const QString& com)
 
 bool Table::calculate(int col, int startRow, int endRow)
 {
+	if (col < 0 || col >= d_table->numCols())
+		return false;
+
 	QApplication::setOverrideCursor(Qt::WaitCursor);
+
+	if (commands[col].isEmpty())
+	{
+		for (int i=startRow; i<=endRow; i++)
+			setText(i, col, "");
+		QApplication::restoreOverrideCursor();
+		return true;
+	}
 
 	Script *colscript = scriptEnv->newScript(commands[col], this,  QString("<%1>").arg(colName(col)));
 	connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
