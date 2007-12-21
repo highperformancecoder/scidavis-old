@@ -27,7 +27,8 @@
  *                                                                         *
  ***************************************************************************/
 
-//  Don't forget to change the Doxyfile when changing these!
+//  Don't forget to change the Doxyfile (and the splash screen) 
+//  when changing these!
 //! SciDAVis version number
 /**
  * 0xMMmmbb means MM.mm.bb with<br>
