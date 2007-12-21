@@ -168,7 +168,6 @@ FunctionDialog::FunctionDialog( QWidget* parent, Qt::WFlags fl )
 	setLayout(vbox1);
 	languageChange();
 	setFocusProxy (boxFunction);
-    resize(minimumSize());
 
 	connect( boxType, SIGNAL( activated(int) ), this, SLOT( raiseWidget(int) ) );
 	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );

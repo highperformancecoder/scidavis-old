@@ -129,8 +129,6 @@ PlotDialog::PlotDialog(bool showExtended, QWidget* parent, Qt::WFlags fl )
     hb2->addStretch();
     gl->addLayout(hb2, 1, 1);
 
-	resize(minimumSize());
-
 	connect(btnMore, SIGNAL(toggled(bool)), this, SLOT(showAll(bool)));
 
 	connect( buttonOk, SIGNAL(clicked()), this, SLOT(quit() ) );

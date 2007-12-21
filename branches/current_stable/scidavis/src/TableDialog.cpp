@@ -174,7 +174,6 @@ TableDialog::TableDialog(Table *t, QWidget* parent, Qt::WFlags fl )
 	setFocusProxy (colName);
 
 	updateColumn(d_table->selectedColumn());
-	resize(minimumSize());
 
 	// signals and slots connections
 	connect(colWidth, SIGNAL(valueChanged(int)), this, SLOT(changeColWidth(int)));

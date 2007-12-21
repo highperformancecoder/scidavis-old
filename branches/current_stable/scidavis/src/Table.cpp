@@ -1483,22 +1483,22 @@ bool Table::isEmptyColumn(int col)
 
 QString Table::saveText()
 {
-	QString text = "<data>\n";
-	int cols=d_table->numCols();
-	int rows=d_table->numRows();
+	QString out_text = "<data>\n";
+	int cols = d_table->numCols();
+	int rows = d_table->numRows();
 
 	for (int i=0; i<rows; i++)
 	{
 		if (!isEmptyRow(i))
 		{
-			text += QString::number(i)+"\t";
+			out_text += QString::number(i)+"\t";
 			for (int j=0; j<cols-1; j++)
-				text += QString::number(cell(i,j), 'e', 16)+"\t";
+				out_text += text(i,j)+"\t";
 
-			text += QString::number(cell(i,cols-1), 'e', 16)+"\n";
+			out_text += text(i,cols-1)+"\n";
 		}
 	}
-	return text + "</data>\n";
+	return out_text + "</data>\n";
 }
 
 int Table::nonEmptyRows()

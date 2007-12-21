@@ -101,7 +101,6 @@ PolynomFitDialog::PolynomFitDialog( QWidget* parent, Qt::WFlags fl )
 	hlayout->addLayout(vl);
 
 	languageChange();
-	resize(minimumSize());
 
 	connect( buttonFit, SIGNAL( clicked() ), this, SLOT( fit() ) );
 	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );

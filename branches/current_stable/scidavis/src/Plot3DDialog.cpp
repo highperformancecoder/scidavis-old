@@ -81,8 +81,6 @@ Plot3DDialog::Plot3DDialog( QWidget* parent, Qt::WFlags fl )
 	vl->addWidget(generalDialog);
 	vl->addLayout(hbox);
 
-    resize(minimumSize());
-
 	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
 	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 	connect( buttonApply, SIGNAL( clicked() ), this, SLOT(updatePlot() ) );

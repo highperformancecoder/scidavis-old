@@ -84,7 +84,6 @@ FitDialog::FitDialog( QWidget* parent, Qt::WFlags fl )
 	QVBoxLayout* vl = new QVBoxLayout();
 	vl->addWidget(tw);
     setLayout(vl);
-    resize(minimumSize());
 
 	setBuiltInFunctionNames();
 	setBuiltInFunctions();
