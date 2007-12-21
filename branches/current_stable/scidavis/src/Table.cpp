@@ -1113,12 +1113,14 @@ void Table::pasteSelection()
 
 	QTextStream ts( &text, QIODevice::ReadOnly );
 	QString s = ts.readLine();
-	QStringList cellTexts=s.split("\t");
-	int cols = int(cellTexts.count());
+	QStringList cellTexts = s.split("\t");
+	int cols = cellTexts.count();
 	int rows = 1;
 	while(!ts.atEnd()){
-		rows++;
 		s = ts.readLine();
+		int temp = s.split("\t").count();
+		if (temp > cols)
+			cols = temp;
 	}
 	ts.reset();
 
@@ -1155,14 +1157,18 @@ void Table::pasteSelection()
 		s = ts2.readLine();
 		cellTexts=s.split("\t");
 		for (int j=left; j<left+cols; j++){
-			double value = system_locale.toDouble(cellTexts[j-left], &numeric);
+			int col_index = j-left;
+			if (col_index >= cellTexts.count())
+				break;
+
+			double value = system_locale.toDouble(cellTexts[col_index], &numeric);
 			if (numeric){
 			    int prec;
                 char f;
 				columnNumericFormat(j, &f, &prec);
 				d_table->setText(i, j, locale.toString(value, f, prec));
 			} else
-				d_table->setText(i, j, cellTexts[j-left]);
+				d_table->setText(i, j, cellTexts[col_index]);
 		}
 	}
 

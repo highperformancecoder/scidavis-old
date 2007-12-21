@@ -823,6 +823,9 @@ void Matrix::pasteSelection()
 	while(!ts.atEnd()){
 		rows++;
 		s = ts.readLine();
+		int temp = s.split("\t").count();
+		if (temp > cols)
+			cols = temp;
 	}
 	ts.reset();
 
@@ -863,13 +866,19 @@ void Matrix::pasteSelection()
 	QLocale system_locale = QLocale::system();
 	for(int i=top; i<top+rows; i++){
 		s = ts2.readLine();
-		cellTexts=s.split("\t");
-		for(int j=left; j<left+cols; j++){
-			double value = system_locale.toDouble(cellTexts[j-left], &numeric);
+		cellTexts = s.split("\t");
+
+		for(int j=left; j<left+cols; j++)
+		{
+			int col_index = j-left;
+			if (col_index >= cellTexts.count())
+				break;
+
+			double value = system_locale.toDouble(cellTexts[col_index], &numeric);
 			if (numeric)
 				setText(i, j, QLocale().toString(value, txt_format.toAscii(), num_precision));
 			else
-				setText(i, j, cellTexts[j-left]);
+				setText(i, j, cellTexts[col_index]);
 		}
 	}
 
