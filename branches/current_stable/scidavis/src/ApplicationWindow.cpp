@@ -3347,12 +3347,14 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 		case ImportASCIIDialog::NewTables:
 			{
 				int dx, dy;
-				for (int i=0; i<files.size(); i++){
-					Table *w = newTable(files[i], local_column_separator, local_ignored_lines,
+				QStringList sorted_files = files;
+				sorted_files.sort();
+				for (int i=0; i<sorted_files.size(); i++){
+					Table *w = newTable(sorted_files[i], local_column_separator, local_ignored_lines,
 							local_rename_columns, local_strip_spaces, local_simplify_spaces);
 					if (!w) continue;
 					w->setCaptionPolicy(MyWidget::Both);
-					setListViewLabel(w->name(), files[i]);
+					setListViewLabel(w->name(), sorted_files[i]);
 					if (i==0) {
 						dx = w->verticalHeaderWidth();
 						dy = w->parentWidget()->frameGeometry().height() - w->height();

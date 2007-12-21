@@ -64,7 +64,6 @@ public:
     QComboBox* boxSelectColumn;
     QPushButton* btnAddFunction; 
     QPushButton* btnAddCol;
-    QPushButton* btnOk;
     QPushButton* btnCancel;
     QPushButton *buttonPrev;
     QPushButton *buttonNext;
@@ -76,7 +75,6 @@ public:
 	QLabel *colNameLabel;
 
 public slots:
-	void accept();
 	bool apply();
 	void prevColumn();
 	void nextColumn();

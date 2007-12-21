@@ -119,12 +119,10 @@ SetColValuesDialog::SetColValuesDialog( ScriptingEnv *env, QWidget* parent, Qt::
 	commands = new ScriptEdit( scriptEnv);
 
 	QVBoxLayout *vbox2 = new QVBoxLayout(); 
-	btnOk = new QPushButton(tr( "&OK" ));
-	vbox2->addWidget(btnOk);
 	btnApply = new QPushButton(tr( "&Apply" ));
 
 	vbox2->addWidget(btnApply);
-	btnCancel = new QPushButton(tr( "Cancel" ));
+	btnCancel = new QPushButton(tr( "&Close" ));
 	vbox2->addWidget(btnCancel);
 	vbox2->addStretch();
 
@@ -149,7 +147,6 @@ SetColValuesDialog::SetColValuesDialog( ScriptingEnv *env, QWidget* parent, Qt::
 	connect(btnAddFunction, SIGNAL(clicked()),this, SLOT(insertFunction()));
 	connect(btnAddCol, SIGNAL(clicked()),this, SLOT(insertCol()));
 	connect(addCellButton, SIGNAL(clicked()),this, SLOT(insertCell()));
-	connect(btnOk, SIGNAL(clicked()),this, SLOT(accept()));
 	connect(btnApply, SIGNAL(clicked()),this, SLOT(apply()));
 	connect(btnCancel, SIGNAL(clicked()),this, SLOT(close()));
 	connect(functions, SIGNAL(activated(int)),this, SLOT(insertExplain(int)));
@@ -198,15 +195,13 @@ void SetColValuesDialog::customEvent(QEvent *e)
 		scriptingChangeEvent((ScriptingChangeEvent*)e);
 }
 
-void SetColValuesDialog::accept()
-{
-	if (apply())
-		close();
-}
-
 bool SetColValuesDialog::apply()
 {
 	int col = d_table->selectedColumn();
+
+	if (col < 0 || col >= d_table->numCols())
+		return false;
+
 	QString formula = commands->text();
 	QString oldFormula = d_table->getCommands()[col];
 
