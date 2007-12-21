@@ -1423,27 +1423,37 @@ void Graph3D::updateScales(double xl, double xr, double yl, double yr, double zl
 void Graph3D::updateScalesFromMatrix(double xl, double xr, double yl,
 		double yr, double zl, double zr)
 {
-	double dx = (matrix_->xEnd() - matrix_->xStart())/(matrix_->numCols()-1);
-	double dy = (matrix_->yEnd() - matrix_->yStart())/(matrix_->numRows()-1);
+	double xStart = qMin(d_matrix->xStart(), d_matrix->xEnd());
+	double xEnd = qMax(d_matrix->xStart(), d_matrix->xEnd());
+	double yStart = qMin(d_matrix->yStart(), d_matrix->yEnd());
+	double yEnd = qMax(d_matrix->yStart(), d_matrix->yEnd());
 
-	int nc = int((xr - xl)/dx)+1;
-	int nr = int((yr - yl)/dy)+1;
+	double dx = fabs((xEnd - xStart)/double(d_matrix->numCols()-1));
+	double dy = fabs((yEnd - yStart)/double(d_matrix->numRows()-1));
 
-	int start_row = int((yl - matrix_->yStart())/dy);
-	int start_col = int((xl - matrix_->xStart())/dx);
+	int nc = int(fabs(xr - xl)/dx)+1;
+	int nr = int(fabs(yr - yl)/dy)+1;
+
+    double x_begin = qMin(xl, xr);
+	double y_begin = qMin(yl, yr);
 
 	double **data_matrix = Matrix::allocateMatrixData(nc, nr);
-	for (int j = 0; j < nr; j++)
-	{
-		for (int i = 0; i < nc; i++)
-		{
-			double val = matrix_->cell(j + start_row, i + start_col);
-			if (val > zr)
-				data_matrix[i][j] = zr;
-			else if (val < zl)
-				data_matrix[i][j] = zl;
-			else
-				data_matrix[i][j] = val;
+	for (int i = 0; i < nc; i++){
+		double x = x_begin + i*dx;
+		for (int j = 0; j < nr; j++){
+			double y = y_begin + j*dy;
+			if (x >= xStart && x <= xEnd && y >= yStart && y <= yEnd){
+				int k = abs((y - yStart)/dy);
+				int l = abs((x - xStart)/dx);
+				double val = d_matrix->cell(k, l);
+				if (val > zr)
+					data_matrix[i][j] = zr;
+				else if (val < zl)
+					data_matrix[i][j] = zl;
+				else
+					data_matrix[i][j] = val;
+			} else
+				data_matrix[i][j] = 0.0;
 		}
 	}
 	sp->loadFromData(data_matrix, nc, nr, xl, xr, yl, yr);
