@@ -34,6 +34,11 @@ h2. SUSE
 Thanks to Quentin Denis, packages of the application as well as the manual are available
 "here":http://packman.links2linux.org/package/scidavis.
 
+h2. Debian
+
+Thanks to Burkhard Bunk, packages for Debian Etch are available
+"here":http://debian.physik.hu-berlin.de.
+
 h2. Other distributions
 
 For all distributions that don't have specific packages yet, we offer a universal binary.
