@@ -1132,6 +1132,7 @@ void Table::pasteSelection()
 		int temp = s.split("\t").count();
 		if (temp > cols)
 			cols = temp;
+		rows++;
 	}
 	ts.reset();
 
