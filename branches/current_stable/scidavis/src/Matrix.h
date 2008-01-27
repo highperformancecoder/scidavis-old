@@ -45,6 +45,23 @@
 #define _Matrix_initial_rows_ 10
 #define _Matrix_initial_columns_ 3
 
+//! Helper class for Matrix
+class TableWidget : public QTableWidget
+{
+    Q_OBJECT
+
+	public:
+		TableWidget(QWidget * parent = 0) : QTableWidget(parent) {};
+		TableWidget(int rows, int columns, QWidget * parent = 0) : QTableWidget(rows, columns, parent) {}
+
+	protected:
+		//! Overloaded function (cf. Qt documentation)
+		virtual void keyPressEvent( QKeyEvent * event );
+
+	signals:
+		void advanceCell();
+};
+
 //! Matrix worksheet class
 class Matrix: public MyWidget, public scripted
 {
@@ -254,8 +271,8 @@ public slots:
 
 	 //! Min and max values of the matrix.
   	void range(double *min, double *max);
-	//! Return a pointer to the QTableWidget
-	QTableWidget* table(){return d_table;};
+	//! Return a pointer to the TableWidget
+	TableWidget* table(){return d_table;};
 
 	//! Scroll to cell
 	void goToCell(int row, int col);
@@ -269,6 +286,10 @@ public slots:
 
     void copy(Matrix *m);
 
+protected slots:
+		//! Advance current cell after [Return] or [Enter] was pressed
+		void advanceCell();
+
 signals:
 	//! Show the context menu
 	void showContextMenu();
@@ -278,7 +299,7 @@ private:
 	void init(int rows, int cols);
 
 	//! Pointer to the table widget
-	QTableWidget *d_table;
+	TableWidget *d_table;
 	//! Last formula used to calculate cell values
 	QString formula_str;
 	//! Format code for displaying numbers

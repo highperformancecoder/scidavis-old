@@ -78,7 +78,8 @@ void Matrix::init(int rows, int cols)
 	setBirthDate(dt.toString(Qt::LocalDate));
 
 	// create the main table widget
-	d_table = new QTableWidget(rows, cols, 0);
+	d_table = new TableWidget(rows, cols, 0);
+	connect(d_table, SIGNAL(advanceCell()), this, SLOT(advanceCell()));
 	d_table->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
 	d_table->setFocusPolicy(Qt::StrongFocus);
 	d_table->setFocus();
@@ -151,9 +152,14 @@ void Matrix::cellEdited(int row,int col)
     if(row+1 >= numRows())
         d_table->setRowCount(row + 2);
 
-	d_table->setCurrentCell(row+1, col);
-
     emit modifiedWindow(this);
+}
+
+void Matrix::advanceCell()
+{
+	int row = d_table->currentRow();
+    if(row+1 < numRows())
+		d_table->setCurrentCell(row+1, d_table->currentColumn());
 }
 
 double Matrix::cell(int row, int col)
@@ -1184,3 +1190,11 @@ void Matrix::copy(Matrix *m)
 	formula_str = m->formula();
 	setTextFormat(m->textFormat(), m->precision());
 }
+
+void TableWidget::keyPressEvent(QKeyEvent * event)
+{
+    if(event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
+		emit advanceCell();
+	QTableWidget::keyPressEvent(event);
+}
+
