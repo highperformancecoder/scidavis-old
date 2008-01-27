@@ -431,12 +431,13 @@ void Fit::fit()
 
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
-	const char *function = d_formula.toAscii().constData();
 	QString names = d_param_names.join (",");
-	const char *parNames = names.toAscii().constData();
+	QByteArray ba_formula = d_formula.toAscii();
+	const char *function = ba_formula.constData();
+	QByteArray ba_names = names.toAscii();
+	const char *parNames = ba_names.constData();
 
 	struct FitData d_data = {d_n, d_p, d_x, d_y, d_w, function, parNames};
-
 	int status, iterations = d_max_iterations;
 	double *par = new double[d_p];
 	if(d_solver == NelderMeadSimplex)
@@ -479,12 +480,12 @@ void Fit::fit()
 	}
 
 	storeCustomFitResults(par);
+	generateFitCurve(par);
 
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	if (app->writeFitResultsToLog)
 		app->updateLog(logFitInfo(d_results, iterations, status, d_graph->parentPlotName()));
 
-	generateFitCurve(par);
 	QApplication::restoreOverrideCursor();
 }
 
