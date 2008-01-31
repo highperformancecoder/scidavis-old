@@ -3,15 +3,22 @@ title: Roadmap
 inMenu: true
 ---
 
-h1(#policy). Release Policy
+h1. Roadmap
+
+This roadmap describes the current plans and milestones for future releases of SciDAVis. 
+
+h2(#policy). Release Policy
 
 Release numbers will follow the scheme major.minor.bugfix.
 
 "major" releases differ considerably in architecture and potentially break backwards-compatibility,
-particularly with respect to plugins. Therefore, they will occur only very infrequently.
+particularly with respect to scripts and plugins. Therefore, they will occur only very infrequently.
 
 "minor" releases add some new functionality, but do not change existing interfaces or otherwise
 break other people's code. If they do, that's a bug and, obviously, we're trying to avoid bugs. :-)
+An exception to this are minor releases before the first major release (1.0.0) when the main
+architecture is not finished yet. To indicate that there is a bigger change than a normal minor 
+release, a release number may be skipped.
 
 As the name suggests, "bugfix" releases fix bugs in the previous minor release, but do not add
 new functionality, so they're unlikely to introduce new bugs.
@@ -43,71 +50,64 @@ Most important changes (since QtiPlot 0.9-rc2):
 * export to eps and pdf without large white borders
 
 
-h1(#0.2.0). 0.2.0: Parts of 1.0.0 (?)
+h1(#0.3.0). 0.3.0: Aspect-framework/hierarchial project structure, undo/redo for tables and matrices, UI improvements
 
-Many of the features planned for 1.0.0 are interdependent, which is why so many large-scale changes
-are scheduled for one release.
-However, if it will turn out to be viable, we'll release one or more versions with a subset of these
-features. Possibly a version with multi-level undo/redo for tables only.
+Plans: Most notably for users, this release will feature multi-level undo/redo
+for changes to tables and matrices. Additionally, the options dialogs for tables and matrices
+will be integrated into their views (sub-windows) so they can be accessed faster. The way the
+project contents are shown in the project explorer will also change considerably. You will for example
+be able to change label and comment of a column in the project explorer.
+Internally, from this release on SciDAVis will be using a flexible data analysis and data storage
+architecture based on a column-based abstraction of a typed data source and
+filters modelled after integrated electronic circuits (in the sense that they are a "black box"
+with a number of input and output ports). This includes storing of numbers with full
+precision even if not all digits are shown. It will also greatly faciliate improving the handling of
+dates/times in columns in the future. The new internal data structures are optimized to use
+less memory than those before which is very important to free some memory for the undo/redo 
+framework. The project will internally be stored in a hierarchial tree consisting of
+what we call "aspects". The aspects and related classes will follow a design close to the
+model/view/presenter paradigm. This will greatly improve the long-term maintainability
+of the application.
 
-h1(#1.0.0). 1.0.0: Internal reorganizations, undo, plugins
+h1(#0.5.0). 0.5.0: New visualisation engine, XML file format
 
-Most notably for users, this release will feature multi-level undo/redo
-for changes to tables, matrices and notes; possibly also for graphs.
-Due to the complexity and pending changes in 1.1.0, it might prove necessary
-to postpone undo of graphs, but this definitely also is something we'd like to have.
+Plans: The Qwt library will be replaced by a new engine based on Qt's GraphicsView framework,
+allowing, among other benefits, the use of floating-point linewidths. This will solve
+many problems such as ugly gaps between axes and bad scaling. The visualization engine
+will be optimized to achieve optimum ouput quality. The resolution of the the output
+will be totally independent of the screen resolutions and the size of the plot windows. 
+Custom page sizes for PDF exports will be supported making exported PDF figures ideal
+to use with PdfLaTex.
+The file format for SciDAVis projects will be replaced by a completely XML based one. This 
+allows to use robust XML parsers, much better error handling and easy validity-checking of project files.
+Loading files in the legacy format will continue to be supported as an import function.
 
-SciDAVis 1.0.0 will be extensible with custom functionality by writing
-plugins in C++; using a flexible data analysis
-architecture based on the column-based abstraction of a typed data source and
-filters modelled on integrated electronic circuits (in the sense that they are a "black box"
-with a number of input and output ports).
-The plugin system will be very generic at its core, but probably not all functionality
-will be added in this release. Particularly, implementing new plot/curve types
-will be influenced by the changes planned for version 1.1.0, so these parts will
-probably be postponed until 1.1.0.
+h1(#0.7.0). 0.7.0: Removal of muParser dependence in favor of Python, improved plotting
 
-Furthermore, several of the core classes will be split into smaller ones or completely
-rewritten, following the Model/View/Controller approach. This is necessary to integrate a sufficiently
-flexible plugin interface, but also to ensure longterm-maintainability of the code.
-Particularly, internal APIs relying on undocumented string formats will be eliminated
-in favour of the data source abstraction.
-For users, this will hopefully mean that we can drop many of the existing restrictions on aspect and
-column names.
+* All muParser-specific parts will be rewritten to use Python and allow using
+of python defined functions for curve fitting etc.
+* Improvements to the Python bindings to allow more powerful Python scripts.
+* Improvements to the plotting engine such as support for axes breaks, polar and ternary plots, 
+waterfall plots and maybe other things. 
+* XML for copy and paste
 
-A new, completely XML-based file format will be introduced, allowing us to use existing
-parsers and validity checkers, almost certainly improving reliability of project file opening and saving.
-Loading files in the legacy format will continue to be supported.
+h1(#1.0.0). 1.0.0: Polishing, bug fixing, bring the handbook up-to-date, relaxNG schema
 
-The classes will be reorganized into a number of modules in order to improve code readability
-and maintainability.
-Modules will reside in separate directories and compile separately, but most if not all of
-the current functionality will remain part of the main executable.
+* Polishing of the new features introduced in the previous versions; bring
+everything in a state that allows minor releases that don't break anything that worked
+in the previous version
+* Bring the handbook up-to-date to release 1.0.0 with a really nice handbook that
+contains all new features
+* write a relaxNG schema for the SciDAVis file format to check the validity of project files
 
-h1(#1.1.0). 1.1.0: New visualisation engine
+h1. Possible plans beyond 1.0.0:
 
-The Qwt library will be replaced by a new engine based on Qt's GraphicsView framework,
-allowing, among other benefits, the use of floating-point linewidths, support for
-polar and ternary plots and plots with broken axes.
-Seeing that this will be a major task in its own right, we can only hope that it will
-be possible without invalidating changes done in 1.0.0.
-
-It may be necessary to delay large parts of the plugin interface until 1.1.0 in order
-to be able to guarantee backwards-compatibility between 1.0.0 and 1.1.0.
-
-h1(#1.2.0). 1.2.0: Features facilitated by the 1.0.0/1.1.0 architecture
-
-The integration of Python will be completed by removing the last muParser-specific parts.
-It will be possible to use Python's global variables and functions everywhere, e.g. for function
-plotting.
-
-Add more demo plugins and tutorials, encourage users to contribute plugins for inclusion into
+* Support for other scripting languages such as Ruby (maybe use Kross when its more mature and KDE independent)
+* Plugins in C++ and/or scripting languages, e.g. for implementing new plot/curve types
+* Add more demo scripts, plugins and tutorials, encourage users to contribute plugins for inclusion into
 future versions and/or to a central plugin database.
-
-Add polar and ternary plots to the new engine, if not already done in 1.1.0.
-
-Lots of other features like baseline-detection, import/export filters for OpenDocument spreadsheets,
-waterfall plots etc. Probably not all of them in 1.2.0.
+* Lots of other features like baseline-detection, 
+* Import/export filters for OpenDocument spreadsheets.
 
 The crystal ball becomes really fuzzy from this point on.
 Que sera, sera. ;-)
