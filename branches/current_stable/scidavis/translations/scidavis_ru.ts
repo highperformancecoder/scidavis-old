@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1">
+<!DOCTYPE TS><TS version="1.1" language="ru">
+<defaultcodec></defaultcodec>
 <context>
     <name>@default</name>
     <message>
@@ -692,7 +693,7 @@ Do you want to overwrite it?</source>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="13452"/>
         <source>Table</source>
-        <translation>Таблица</translation>
+        <translation>Table</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="614"/>
@@ -5624,7 +5625,7 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/AxesDialog.cpp" line="469"/>
         <source>Table</source>
-        <translation type="unfinished">Таблица</translation>
+        <translation>Table</translation>
     </message>
     <message>
         <location filename="../src/AxesDialog.cpp" line="475"/>
@@ -9302,7 +9303,7 @@ The following special codes can be used:
     <message>
         <location filename="../src/Graph.cpp" line="3928"/>
         <source>Table</source>
-        <translation type="unfinished">Таблица</translation>
+        <translation>Table</translation>
     </message>
     <message>
         <location filename="../src/Graph.h" line="602"/>
