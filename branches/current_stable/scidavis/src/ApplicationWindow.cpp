@@ -14108,6 +14108,7 @@ void ApplicationWindow::selectPlotType(int type)
 	MultiLayer *ml = qobject_cast<MultiLayer*>(ws->activeWindow());
 	if (ml) {
 		Graph *g = ml->activeGraph();
-		g->setCurveType(g->curves()-1, (Graph::CurveType)type);
+		if(g->curves() > 0)
+			g->setCurveType(g->curves()-1, (Graph::CurveType)type);
 	}
 }

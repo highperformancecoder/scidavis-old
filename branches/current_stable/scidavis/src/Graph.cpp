@@ -2858,9 +2858,6 @@ void Graph::setCurveType(int curve_index, CurveType type, bool update)
 	c_type[curve_index] = type;
 	if (!update) return;
 
-	DataCurve *c = static_cast<DataCurve*>(curve(curve_index));
-	insertCurve(c->table(), c->xColumnName(), c->yColumnName() , type, c->startRow(), c->endRow());
-	removeCurve(curve_index);
 	CurveLayout cl = initCurveLayout(type, 1);
 	updateCurveLayout(curve_index, &cl);
 	updatePlot();
