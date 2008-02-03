@@ -36,10 +36,10 @@
  * mm = minor version
  * bb = bugfix version
  */
-int scidavis_version = 0x000101;
+int scidavis_version = 0x000102;
 //! Extra version information string (like "-alpha", "-beta", "-rc1", etc...)
 const char * extra_version = "";
 //! Copyright string containing the author names etc.
 const char * copyright_string = "Developers (alphabetical order):\nKnut Franke\nTilman Hoener zu Siederdissen\n\nDocumentation:\nRoger Gadiou\n\nSpecial thanks to (alphabetical order):\nBurkhard Bunk\nQuentin Denis\nGudjon I. Gudjonsson\nAlex Kargovsky\nMauricio Troviano\nIon Vasilief\n\nThanks to (no particular order):\nthe developers of Qt, Qwt, QwtPlot3D, GSL, muParser, zlib, Python, PyQt, and liborigin\nall bug reporters, translators and other contributors";
 //! Release date as a string
-const char * release_date = " 2007-12-21";
+const char * release_date = " 2008-02-03";

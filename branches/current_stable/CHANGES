@@ -15,4 +15,11 @@ Most important changes (since QtiPlot 0.9-rc2):
 Most important changes (since 0.1.0)
 - several bugs fixed
 
+=== Release 0.1.2, 2008-02-03 ===
+Most important changes (since 0.1.1)
+- fixed crash when changing the type of a curve
+- fixed crash when plotting an empty table
+- fixed the fit wizard which did not accept function definition
+- fixed pasting into tables
+- fixed some other minor issues
 
