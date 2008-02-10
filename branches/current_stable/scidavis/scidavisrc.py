@@ -244,4 +244,9 @@ for name in appImports:
 # import utility module
 import sys
 sys.path.append(".")
-import_to_global("scidavisUtil")
+try:
+	import_to_global("scidavisUtil")
+	print "scidavisUtil successfully imported"
+except(ImportError): 
+	print "failed to import scidavisUtil"
+

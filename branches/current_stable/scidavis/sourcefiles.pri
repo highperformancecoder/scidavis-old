@@ -15,17 +15,36 @@ TRANSLATIONS    = translations/scidavis_de.ts \
                   translations/scidavis_ja.ts \
                   translations/scidavis_sv.ts
 
-#system(lupdate -verbose scidavis.pro)
-#system(lrelease -verbose scidavis.pro)
+contains( INSTALLS, translationfiles ){
+    exists(translations/scidavis_de.ts){
+        translationfiles.files =     translations/scidavis_de.qm \
+                             translations/scidavis_es.qm \
+                             translations/scidavis_fr.qm \
+                             translations/scidavis_ru.qm \
+                             translations/scidavis_ja.qm \
+                             translations/scidavis_sv.qm
+
+        tstarget.target = translations/scidavis_de.qm
+        tstarget.commands = $$LUPDATE_BIN scidavis.pro && $$LRELEASE_BIN scidavis.pro
+
+        QMAKE_EXTRA_TARGETS += tstarget
+        PRE_TARGETDEPS += translations/scidavis_de.qm
+    }
+    !exists(translations/scidavis_de.ts){
+        message("=======================================")   
+        message("Could not find translation (.ts) files.")   
+        message("=======================================")   
+    }
+}
 
 ###################### DOCUMENTATION ########################################
 
 documentation.files += ../manual/html \
                        ../INSTALL.html \
                        ../scidavis.css \
-					   ../scidavis-logo.png \
-					   ../README \
-					   ../CHANGES \
+                       ../scidavis-logo.png \
+                       ../README \
+                       ../CHANGES \
                        ../gpl.txt 
 
 ###################### HEADERS ##############################################
@@ -138,7 +157,7 @@ HEADERS  += src/ApplicationWindow.h \
             src/PlotEnrichement.h\
             src/ExtensibleFileDialog.h\
             src/OpenProjectDialog.h\
-	    src/Grid.h\
+        src/Grid.h\
 
 ###################### SOURCES ##############################################
 
@@ -248,7 +267,7 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/PlotEnrichement.cpp\
             src/ExtensibleFileDialog.cpp\
             src/OpenProjectDialog.cpp\
-	    src/Grid.cpp\
+            src/Grid.cpp\
 
 ###############################################################
 ##################### Compression #############################

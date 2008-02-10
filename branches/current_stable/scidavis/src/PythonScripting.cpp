@@ -252,14 +252,16 @@ bool PythonScripting::initialize()
 	setQObject(this, "stdout", sys);
 	setQObject(this, "stderr", sys);
 
-#ifdef Q_WS_WIN
-	loadInitFile(QDir::homeDirPath()+"/scidavisrc") ||
-		loadInitFile(QCoreApplication::instance()->applicationDirPath()+"/scidavisrc") ||
-#else
-	loadInitFile(QDir::homeDirPath()+"/.scidavisrc") ||
-		loadInitFile(QDir::rootDirPath()+"etc/scidavisrc") ||
+	bool initialized;
+	initialized = loadInitFile(QDir::homeDirPath()+"/scidavisrc");
+	if(!initialized) initialized = loadInitFile(QDir::homeDirPath()+"/.scidavisrc");
+#ifdef PYTHON_CONFIG_PATH 
+	if(!initialized) initialized = loadInitFile(PYTHON_CONFIG_PATH"/scidavisrc");
+	if(!initialized) initialized = loadInitFile(PYTHON_CONFIG_PATH"/.scidavisrc");
 #endif
-		loadInitFile("scidavisrc");
+	if(!initialized) initialized = loadInitFile(QDir::rootDirPath()+"etc/scidavisrc");
+	if(!initialized) initialized = loadInitFile(QCoreApplication::instance()->applicationDirPath()+"/scidavisrc");
+	if(!initialized) initialized = loadInitFile("scidavisrc");
 
 //	PyEval_ReleaseLock();
 	return true;
@@ -272,8 +274,13 @@ PythonScripting::~PythonScripting()
 	Py_XDECREF(sys);
 }
 
+#ifndef PYTHON_UTIL_PATH
+#define PYTHON_UTIL_PATH "."
+#endif
+
 bool PythonScripting::loadInitFile(const QString &path)
 {
+	PyRun_SimpleString("import sys\nsys.path.append('"PYTHON_UTIL_PATH"')"); 
 	QFileInfo pyFile(path+".py"), pycFile(path+".pyc");
 	bool success = false;
 	if (pycFile.isReadable() && (pycFile.lastModified() >= pyFile.lastModified())) {

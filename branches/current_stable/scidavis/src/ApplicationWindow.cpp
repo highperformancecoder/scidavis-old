@@ -12350,7 +12350,7 @@ void ApplicationWindow::createLanguagesList()
 	qApp->installTranslator(appTranslator);
 	qApp->installTranslator(qtTranslator);
 
-	QString qmPath = qApp->applicationDirPath() + "/translations";
+	QString qmPath = TS_PATH;
 	QDir dir(qmPath);
 	QStringList fileNames = dir.entryList("scidavis_*.qm");
 	for (int i=0; i < (int)fileNames.size(); i++)

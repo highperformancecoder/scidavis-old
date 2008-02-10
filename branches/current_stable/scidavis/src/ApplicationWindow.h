@@ -82,6 +82,10 @@ class MyWidget;
 class TableStatistics;
 class CurveRangeDialog;
 
+#ifndef TS_PATH
+#define TS_PATH (qApp->applicationDirPath() + "/translations")
+#endif
+
 /**
  * \brief SciDAVis's main window.
  *
