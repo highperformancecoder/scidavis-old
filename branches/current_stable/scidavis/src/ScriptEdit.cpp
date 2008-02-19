@@ -41,7 +41,7 @@
 #include <QTextStream>
 
 ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
-  : QTextEdit(parent, name), scripted(env)
+  : QTextEdit(parent, name), scripted(env), d_error(false)
 {
 	myScript = scriptEnv->newScript("", this, name);
 	connect(myScript, SIGNAL(error(const QString&,const QString&,int)), this, SLOT(insertErrorMsg(const QString&)));
@@ -51,6 +51,10 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
 	setTextFormat(Qt::PlainText);
 	setAcceptRichText (false);
 	setFamily("Monospace");
+
+	d_fmt_default.setBackground(palette().brush(QPalette::Base));
+	d_fmt_success.setBackground(QBrush(QColor(128, 255, 128)));
+	d_fmt_failure.setBackground(QBrush(QColor(255,128,128)));
 
 	printCursor = textCursor();
 
@@ -78,6 +82,8 @@ ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
 	functionsMenu = new QMenu(this);
 	Q_CHECK_PTR(functionsMenu);
 	connect(functionsMenu, SIGNAL(triggered(QAction *)), this, SLOT(insertFunction(QAction *)));
+
+	connect(document(), SIGNAL(contentsChange(int,int,int)), this, SLOT(handleContentsChange(int,int,int)));
 }
 
 void ScriptEdit::customEvent(QEvent *e)
@@ -165,6 +171,7 @@ void ScriptEdit::insertErrorMsg(const QString &message)
 	printCursor.insertText(err);
 	printCursor.setPosition(start, QTextCursor::KeepAnchor);
 	setTextCursor(printCursor);
+	d_error = true;
 }
 
 void ScriptEdit::scriptPrint(const QString &text)
@@ -203,6 +210,14 @@ int ScriptEdit::lineNumber(int pos) const
 	return n;
 }
 
+void ScriptEdit::handleContentsChange(int position, int, int)
+{
+	if (d_changing_fmt) return; // otherwise we overwrite our own changes
+	QTextCursor cursor = textCursor();
+	cursor.setPosition(position);
+	cursor.mergeBlockFormat(d_fmt_default);
+}
+
 void ScriptEdit::execute()
 {
 	QString fname = "<%1:%2>";
@@ -219,6 +234,13 @@ void ScriptEdit::execute()
 	printCursor.setPosition(codeCursor.selectionEnd(), QTextCursor::MoveAnchor);
 	printCursor.movePosition(QTextCursor::EndOfLine, QTextCursor::MoveAnchor);
 	myScript->exec();
+	d_changing_fmt = true;
+	if (d_error)
+		codeCursor.mergeBlockFormat(d_fmt_failure);
+	else
+		codeCursor.mergeBlockFormat(d_fmt_success);
+	d_changing_fmt = false;
+	d_error = false;
 }
 
 void ScriptEdit::executeAll()
@@ -247,16 +269,25 @@ void ScriptEdit::evaluate()
 	printCursor.setPosition(codeCursor.selectionEnd(), QTextCursor::MoveAnchor);
 	printCursor.movePosition(QTextCursor::EndOfLine, QTextCursor::MoveAnchor);
 	QVariant res = myScript->eval();
+
+	d_changing_fmt = true;
+	if (d_error)
+		codeCursor.mergeBlockFormat(d_fmt_failure);
+	else
+		codeCursor.mergeBlockFormat(d_fmt_success);
+
 	if (res.isValid())
 		if (!res.isNull() && res.canConvert(QVariant::String)){
 			QString strVal = res.toString();
 			strVal.replace("\n", "\n#> ");
+			printCursor.insertText("\n");
+			printCursor.mergeBlockFormat(d_fmt_default);
 			if (!strVal.isEmpty())
-				printCursor.insertText("\n#> "+strVal+"\n");
-			else
-				printCursor.insertText("\n");
+				printCursor.insertText("#> "+strVal+"\n");
 		}
 
+	d_changing_fmt = false;
+	d_error = false;
 	setTextCursor(printCursor);
 }
 

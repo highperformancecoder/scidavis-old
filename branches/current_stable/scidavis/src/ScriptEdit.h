@@ -51,9 +51,12 @@ class ScriptEdit: public QTextEdit, public scripted
   Q_OBJECT
 
   public:
+    //! Constructor.
     ScriptEdit(ScriptingEnv *env, QWidget *parent=0, const char *name=0);
 
+	 //! Handle changing of scripting environment.
     void customEvent(QEvent*);
+	 //! Map cursor positions to line numbers.
     int lineNumber(int pos) const;
 
   public slots:
@@ -75,13 +78,33 @@ class ScriptEdit: public QTextEdit, public scripted
     virtual void keyPressEvent(QKeyEvent *e);
 
   private:
+	 //! Script used for executing/evaluating code or expressions.
     Script *myScript;
     QAction *actionExecute, *actionExecuteAll, *actionEval, *actionPrint, *actionImport, *actionExport;
+	 //! Submenu of context menu with mathematical functions.
     QMenu *functionsMenu;
+	 //! Cursor used for output of evaluation results and error messages.
     QTextCursor printCursor;
+	 //! Format used for resetting success/failure markers.
+	 QTextBlockFormat d_fmt_default;
+	 //! Format used for marking code that was executed or evaluated successfully.
+	 QTextBlockFormat d_fmt_success;
+	 //! Format used for marking code that resulted in an error.
+	 QTextBlockFormat d_fmt_failure;
+	 //! True iff we are inside evaluate(), execute() or executeAll() there were errors.
+	 bool d_error;
+	 //! True iff the text is programmatically changed and handleContentsChange() should do nothing.
+	 bool d_changing_fmt;
 
   private slots:
+    //! Insert an error message from the scripting system at printCursor.
+	 /**
+	  * After insertion, the text cursor will have the error message selected, allowing the user to
+	  * delete it and fix the error.
+	  */
     void insertErrorMsg(const QString &message);
+    //! Called whenever the contents of the text document changes.
+    void handleContentsChange(int position, int chars_removed, int chars_added);
 };
 
 #endif

@@ -315,7 +315,7 @@ void FitDialog::initEditPage()
 
 	connect( buttonPlugins, SIGNAL( clicked() ), this, SLOT(choosePluginsFolder()));
     connect( buttonClear, SIGNAL( clicked() ), this, SLOT(resetFunction()));
-	connect( buttonClearUsrList, SIGNAL( clicked() ), this, SLOT(clearUserList()));
+	connect( buttonClearUsrList, SIGNAL( clicked() ), this, SLOT(clearUserFunctions()));
 	connect( categoryBox, SIGNAL(currentRowChanged (int)), this, SLOT(showFunctionsList(int) ) );
 	connect( funcBox, SIGNAL(currentRowChanged(int)), this, SLOT(showExpression(int)));
 	connect( boxUseBuiltIn, SIGNAL(toggled(bool)), this, SLOT(setFunction(bool) ) );
