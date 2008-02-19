@@ -8,7 +8,8 @@
     <title>muParser</title>
     <indexterm><primary>Scripting</primary><secondary>MuParser</secondary></indexterm>
     <para>The constants _e=e=E and _pi=pi=PI=Pi are defined, as well as the
-    following operators and functions.</para>
+		 following operators and functions. muParser is purely a parser for mathematical
+		 expressions and as such does not support executing scripts.</para>
 
     <table frame="sides" pgwide="1" tocentry="1">
       <title>Supported Mathematical Operators</title>
@@ -437,147 +438,215 @@
     in-depth information on the language itself, please refer to its excellent
     <ulink url="http://www.python.org/doc">documentation</ulink>.</para>
 
-    <sect2 id="Python-init">
-      <title>The Initialization File</title>
+    <sect2>
+		 <title>Getting Started</title>
 
-      <para>This file allows you to customize the Python environment, import
-      modules and define functions and classes that will be available in all
-      of your projects. The default initialization file shipped with &appname;
-      imports Python's <link linkend="Python-functions">standard math
-      functions</link> as well as special functions from <ulink
-      url="http://www.scipy.org">SciPy</ulink> (if available). Also, it
-      creates some handy shortcuts, like
-      <userinput>table("table1")</userinput> for
-      <userinput>&python-pref;.app.table("table1")</userinput>.</para>
+		 <para>Make sure your current project uses Python as its interpreter by
+			 selecting the menu point Scripting->Scripting Language and
+			 double-clicking on "Python" in the resulting dialog (if the dialog
+			 appears, but does not contain the "Python" item, your installation
+			 of &appname; has been compiled without Python support).
+			 Next, open a Notes window and enter
+			 <userinput>print "Hello World!"</userinput>. Position the cursor
+			 anywhere on this line and press Ctrl+J, or select "Execute" from
+			 the context menu. The string "Hello World!" should appear below the
+			 line you entered. Congratulations, you've made contact with Python!
+			 You can also enter more complex code fragments, such as function or
+			 class definitions, in which case you have to select the whole code
+			 block before executing it.</para>
 
-      <para>When activating Python support, &appname; searches the following
-      places, executing the first file it can find:</para>
+		 <para>You can also use Notes windows as a handy calculator. Enter a
+			 mathematical expression on a line of its own - say,
+			 <userinput>5*sin(pi/2)</userinput>. Press Ctr+Enter, or select
+			 "Evaluate" from the context menu. You are rewarded by a new line,
+			 stating (to general astonishment), that the result of evaluating
+			 your expression is <computeroutput>#&gt; 5</computeroutput>. If
+			 you have <ulink url="http://www.scipy.org">SciPy</ulink> and/or
+			 <ulink url="http://pygsl.sf.net">PyGSL</ulink> installed, you
+			 will have immediate access to a huge number of interesting
+			 functions, browsable via the submenu "Functions" of the context
+			 menu. Pressing Shift+F1 while in this menu will give you a short
+			 description of the current function. The advantage of only
+			 executing/evaluating single lines or selections on request is that
+			 you can freely mix text and calculations within a Notes window.</para>
 
-      <orderedlist>
-        <listitem>
-          <para>~/.&python-rc;[c]</para>
-        </listitem>
+		 <para>Another particularly handy place for using Python code are
+			 column formulas. These work just like evaluating expressions
+			 in Note windows, with the additional advantage of some pre-defined
+			 variables: i (the row currently being computed), j (the column
+			 number), sr (start row), er (end row) and self (the table to which the
+			 column being computed belongs; see below for what you can do with it).
+		 </para>
 
-        <listitem>
-          <para>/etc/&python-rc;[c]</para>
-        </listitem>
-
-        <listitem>
-          <para>./&python-rc;[c]</para>
-        </listitem>
-      </orderedlist>
-
-      <para>Files ending in .pyc are compiled versions of the .py source files
-      and therefore load a bit faster. The compiled version will be used if
-      the source file is older or nonexistent. Otherwise, &appname; will try to
-      compile the source file (if you've got write permissions for the output
-      file).</para>
-    </sect2>
+		 <para>If you are already familiar with Python, you might ask yourself at
+			 this point if you can use more complicated column formulas than just
+			 single expressions (for instance, if:/else: decisions based on the
+			 current row number). The answer is: yes, you can. For the benefit of
+			 those not familiar with Python, we will give a short introduction to
+			 the language before discussing how to do this.</para>
+	 </sect2>
 
     <sect2>
       <title>Python Basics</title>
 
-      <para>Mathematical expressions work largely as expected. However,
-      there's one caveat, especially when switching from muParser (which has
-      been used exclusively in previous versions of &appname;):
-      <userinput>a^b</userinput> does not mean "raise a to the power of b" but
-      rather "bitwise exclusive or of a and b"; Python's power operator is **.
-      Thus: <screen width="40">
+		<sect3>
+			<title>Expressions</title>
+
+			<para>Mathematical expressions work largely as expected. However,
+				there's one caveat, especially when switching from muParser:
+				<userinput>a^b</userinput> does not mean "raise a to the power of b" but
+				rather "bitwise exclusive or of a and b"; Python's power operator is **.
+				Thus: <screen width="40">
 <userinput>2^3 # read: 10 xor 11 = 01</userinput>
 <computeroutput>#&gt; 1</computeroutput>
 <userinput>2**3</userinput>
 <computeroutput>#&gt; 8</computeroutput>
-</screen></para>
+			</screen></para>
+		</sect3>
 
-      <para>One thing you have to know when working with Python is that
-      indentation is very important. It is used for grouping (most other
-      languages use either braces or keywords like
-      <userinput>do...end</userinput> for this). For example, <programlisting
-      width="40">
+		<sect3>
+			<title>Statements</title>
+
+			<para>One thing you have to know when working with Python is that
+				indentation is very important. It is used for grouping (most other
+				languages use either braces or keywords like
+				<userinput>do...end</userinput> for this). For example, executing the
+				following: <programlisting
+					width="40">
 x=23
 for i in (1,4,5):
 	x=i**2
 	print(x)
-	</programlisting> will do what you would expect: it prints out the numbers 1, 16 and
-      25; each on a line of its own. Deleting just a bit of space will change
-      the functionality of your program: <programlisting width="40">
+				</programlisting> will do what you would expect: it prints out the numbers 1, 16 and
+				25; each on a line of its own. Deleting just a bit of space will change
+				the functionality of your program: <programlisting width="40">
 x=23
 for i in (1,4,5):
 	x=i**2
 print(x)
-	</programlisting> will print out only one number - no, not 23, but rather 25. This
-      example was designed to also teach you something about variable scoping:
-      There are no block-local variables in Python.</para>
+			</programlisting> will print out only one number - no, not 23, but rather 25. This
+				example was designed to also teach you something about variable scoping:
+				There are no block-local variables in Python.</para>
 
-      <para>There are two different variable scopes to be aware of: local and
-      global variables. Unless specified otherwise, variables are local to the
-      context in which they were defined. Thus, the variable
-      <varname>x</varname> can have three different values in, say, two
-      different Note windows and a column formula. Global variables on the
-      other hand can be accessed from everywhere within your project. A
-      variable <varname>x</varname> is declared global by executing the
-      statement <userinput>global x</userinput>. You have to do this before
-      assigning a value to <varname>x</varname>, but you have to do it only
-      once within the project (no need to "import" the variable before using
-      it). Note that there is a slight twist to these rules when you <link
-      linkend="Python-def">define your own functions</link>.</para>
-    </sect2>
+				<para>There are two different variable scopes to be aware of: local and
+				global variables. Unless specified otherwise, variables are local to the
+				context in which they were defined. Thus, the variable
+				<varname>x</varname> can have three different values in, say, two
+				different Note windows and a column formula. Global variables on the
+				other hand can be accessed from everywhere within your project. A
+				variable <varname>x</varname> is declared global by executing the
+				statement <userinput>global x</userinput>. You have to do this before
+				assigning a value to <varname>x</varname>, but you have to do it only
+				once within the project (no need to "import" the variable before using
+				it). Note that there is a slight twist to these rules when you
+				define your own functions.</para>
 
-    <sect2 id="Python-def">
-      <title>Defining Functions and Control Flow</title>
-
-      <para>The basic syntax for defining a function (for use within one
-      particular note, for example) is <programlisting width="40">
+				<para>The basic syntax for defining a function (for use within one
+				particular note, for example) is <programlisting width="40">
 def answer():
 	return 42
-	</programlisting> If you want your function to be accessible from the rest of your
-      project, you have to declare it global before the definition: <programlisting
+			</programlisting> If you want your function to be accessible from the rest of your
+				project, you have to declare it global before the definition: <programlisting
       width="40">
 global answer
 def answer():
 	return 42
-	</programlisting> You can add your own function to &appname;'s function list. We'll
-      also provide a documentation string that will show up, for example, in
-      the "set column values" dialog: <programlisting width="40">
+			</programlisting> You can add your own function to &appname;'s function list. We'll
+				also provide a documentation string that will show up, for example, in
+				the "set column values" dialog: <programlisting width="40">
 global answer
 def answer():
 	"Return the answer to the ultimate question about life, the universe and everything."
 	return 42
 &python-pref;.mathFunctions["answer"] = answer
-	</programlisting> If you want to remove a function from the list, do: <programlisting
+			</programlisting> If you want to remove a function from the list,
+			execute <programlisting
       width="40">
 del &python-pref;.mathFunctions["answer"]
 	</programlisting></para>
 
-      <para>Note that functions have their own local scope. That means that if
-      you enter a function definition in a Note, you will not be able to
-      access (neither reading nor writing) Note-local variables from within
-      the function. However, you can access global variables as usual.</para>
+				<para>Note that functions have their own local scope. That means that if
+				you enter a function definition in a Notes window, you will not be able to
+				access (neither reading nor writing) Notes-local variables from within
+				the function. However, you can access global variables as usual.</para>
 
-      <para>If-then-else decisions are entered as follows: <programlisting width="40">
+				<para>If-then-else decisions are entered as follows: <programlisting width="40">
 if x&gt;23:
 	print(x)
 else:
 	print("The value is too small.")
-	</programlisting></para>
+			</programlisting></para>
 
-      <para>You can do loops, too: <programlisting width="40">
-for i in range(1, 11):
-	print(i)
-	</programlisting> This will print out the numbers between 1 and 10 inclusively (the
-      upper limit does not belong to the range, while the lower limit
-      does).</para>
-    </sect2>
+				<para>You can do loops, too: <programlisting width="40">
+		for i in range(1, 11):
+			print(i)
+			</programlisting> This will print out the numbers between 1 and 10 inclusively (the
+				upper limit does not belong to the range, while the lower limit
+				does).</para>
+		</sect3>
+		</sect2>
+
+		<sect2>
+			<title>Evaluation Reloaded</title>
+
+			<para>As we've already mentioned above, there's a bit more to evaluation
+				than just expressions. Note that Python itself can indeed only
+				evaluate expressions; the following describes a feature of &appname;
+				added on top of Python in order to support more interesting column
+				formulas.</para>
+
+			<para>If you use statements (e.g. variable assignments or control
+				structures) in a formula, &appname; will assume it to be the body of a
+				function. That is, the following code will not work:
+				<programlisting width="40">
+a=1
+a+a
+</programlisting>
+				The statement in the first line means that the formula cannot
+				be evaluated as a single expression. Instead, the above code assigns
+				every row in the column the return value of the following function:
+				<programlisting width="40">
+def f():
+	a=1
+	a+a
+</programlisting>
+				However, since Python does not implicitly interpret expressions as
+				something to return, this evaluates to nothing. The correct way
+				to enter formulas with statements in them is to explicitly return
+				something: <programlisting width="40">
+a=1
+return a+a
+</programlisting></para>
+
+		<para>There is a slight catch associated with this strategy. In a Notes
+			window, &appname; will allow you to <emphasis>evaluate</emphasis>
+			variable assignments like <userinput>ee=1.6021773e-19</userinput>
+			without complaining - but this will not lead to the result presumably
+			intended, i.e. introducing a shortcut for the elementary charge to be
+			used within the notes window. What actually happens is this: &appname;
+			evaluates the function <programlisting width="40">
+def f():
+	ee=1.6021773e-19
+</programlisting>
+			As mentioned in the Python introduction above, the function f has its
+			own variable scope and (unless it happens to be declared global) the
+			variable ee will only be visible within this scope (instead of the
+			Notes window's scope). The solution is simple: always
+			<emphasis>execute</emphasis> things like assignments and function
+			definitions, never <emphasis>evaluate</emphasis> them.</para>
+	 </sect2>
 
     <sect2 id="Python-functions">
       <title>Mathematical Functions</title>
-    <indexterm><primary>Scripting</primary><secondary>MuParser</secondary><tertiary>Mathematical functions</tertiary></indexterm>
+    <indexterm><primary>Scripting</primary><secondary>Python</secondary><tertiary>Mathematical functions</tertiary></indexterm>
 
       <para>Python comes with some basic mathematical functions that are
       automatically imported (if you use the <link
       linkend="Python-init">initialization file</link> shipped with &appname;).
       Along with them, the constants e (Euler's number) and pi (the one and
-      only) are defined.</para>
+      only) are defined. Many, many more functions can be obtained by installing
+		<ulink url="http://www.scipy.org">SciPy</ulink> and/or
+		<ulink url="http://pygsl.sf.net">PyGSL</ulink>.</para>
 
       <table frame="sides" pgwide="1" tocentry="1">
         <title>Supported Mathematical Functions</title>
@@ -1176,4 +1245,43 @@ f.covarianceMatrix("cov")
 	  </programlisting></para>
       </sect3>
     </sect2>
+
+    <sect2 id="Python-init">
+      <title>The Initialization File</title>
+
+      <para>This file allows you to customize the Python environment, import
+      modules and define functions and classes that will be available in all
+      of your projects. The default initialization file shipped with &appname;
+      imports Python's <link linkend="Python-functions">standard math
+      functions</link> as well as special functions from <ulink
+		url="http://www.scipy.org">SciPy</ulink> and <ulink
+		url="http://pygsl.sf.net">PyGSL</ulink>(if available). Also, it
+      creates some handy shortcuts, like
+      <userinput>table("table1")</userinput> for
+      <userinput>&python-pref;.app.table("table1")</userinput>.</para>
+
+      <para>When activating Python support, &appname; searches the following
+      places, executing the first file it can find:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>~/.&python-rc;[c]</para>
+        </listitem>
+
+        <listitem>
+          <para>/etc/&python-rc;[c]</para>
+        </listitem>
+
+        <listitem>
+          <para>./&python-rc;[c]</para>
+        </listitem>
+      </orderedlist>
+
+      <para>Files ending in .pyc are compiled versions of the .py source files
+      and therefore load a bit faster. The compiled version will be used if
+      the source file is older or nonexistent. Otherwise, &appname; will try to
+      compile the source file (if you've got write permissions for the output
+      file).</para>
+    </sect2>
+
   </sect1>
