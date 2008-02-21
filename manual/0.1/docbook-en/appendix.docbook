@@ -121,7 +121,7 @@ Updates and news can be found there.
 
 <para>
 &appname; is distributed as a package with sources which have to be compiled. 
-Compiled packages suitable for most Linux distributions, Windows, and Mac OS X 10.4 also be obtained. 
+Compiled packages suitable for most Linux distributions and Windows can also be obtained. 
 If you want to build &appname; from sources, don't forget first to download and install the 
 <ulink url="http://www.trolltech.com/products/qt/index.html">Qt</ulink>,
 <ulink url="http://qwtplot3d.sourceforge.net/">QwtPlot3D</ulink>,
