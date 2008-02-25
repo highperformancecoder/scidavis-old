@@ -8,6 +8,13 @@ h1. Code
 The following people have written parts of SciDAVis, ranging from a few lines to large chunks.
 In alphabetical order.
 
+Knut Franke,
+Tilman Hoener zu Siederdissen
+
+h2. QtiPlot
+
+SciDAVis uses code from QtiPlot, which consisted (at the time of fork) of code by the following people:
+
 Shen Chen,
 Borries Demeler,
 José Antonio Lorenzo Fernández,
@@ -27,6 +34,12 @@ h1. Documentation
 
 The following people have written parts of the manual and/or other documentation.
 In alphabetical order.
+
+Knut Franke, Roger Gadiou
+
+h2. Manual
+
+The SciDAVis manual is based on the QtiPlot manual, written by (in alphabetical order):
 
 Knut Franke, Roger Gadiou, Ion Vasilief
 
