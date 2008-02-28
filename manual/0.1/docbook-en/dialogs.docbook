@@ -159,34 +159,16 @@
   <para>This dialog is activated by selecting the command &arrange-layers-cmd; from the <link linkend="sec-graph-menu">Graph Menu</link> or by the key code &arrange-layers-key;.</para>
   <para>It allows to modify the geometrical arrangement of the plots which are already present in the active window. You can also add new layers or remove existing ones.</para>
   <figure id="fig-define-layer-1">
-    <title>The &arrange-layers-cmd; dialog: the geometry tab</title>
+    <title>The &arrange-layers-cmd; dialog</title>
     <mediaobject> 
       <imageobject>
         <imagedata  format="PNG" fileref="pics/arrange-layers-dialog1.png"/>
       </imageobject>
     </mediaobject>
   </figure>
-  <para>The <emphasis>Layout</emphasis> tab is used to modify the geometrical arrangement of the plots. You can specify the numbers of rows and columns which will define a table of plots. As pointed out above, you can also add or remove layers with this dialog, using the "Number of Layers" box.</para>
-  <para>With the default setting, &appname; compute the size of the layers from the size of the window. If you check the <emphasis>Layer Canvas Size</emphasis>, you can set the size of the layers and &appname; will modify the size of the window.</para>
+  <para>The <emphasis>Arrange Layers</emphasis> dialog is used to modify the geometrical arrangement of the plots. You can specify the numbers of rows and columns which will define a table of plots. As pointed out above, you can also add or remove layers with this dialog, using the "Number of Layers" box.</para>
+  <para>With the default setting, &appname; computes the size of the layers from the size of the window. If you check the <emphasis>Layer Canvas Size</emphasis>, you can set the size of the layers and &appname; will modify the size of the window.</para>
   <para>The two right zones allow to set the alignement of the layers in the window, and the margins between the layer borders and the window limits.</para>
-  <figure id="fig-define-layer-2">
-    <title>The &arrange-layers-cmd; dialog: the font tab</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/arrange-layers-dialog2.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-  <para>The second tab can be used to modify the generals formats of the multilayer plot. Refer to the corresponding dialogs for details. It must be noticed that the formatting commands used here will be applied to <emphasis>all</emphasis> the plots of the window, and the initial formatting of each plot will be cancelled.</para>
-  <para>The layers will be arranged in order to obtain a good alignment of the vertical and horizontal axis.</para>
-  <figure id="fig-define-layer-3">
-    <title>Exemple of a vertical arrangement for two plots.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/define-layout-3.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
   <para>If you do some modifications on your plot, the alignment of the different axis may not be conserved. You can exec again the &arrange-layers-cmd; to re-arrange your plot.</para>
 </sect1>
 
@@ -361,15 +343,6 @@
     <mediaobject> 
       <imageobject>
         <imagedata  format="PNG" fileref="pics/custom-curves-pie-1.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-  <para>The second tab defines some global properties of the plot, such as the color of the background (default=none), the width and the color of the frame which is drawn around the layer (default is none). The margin is the number of pixels between the layer and the frame in which the pie plot is drawn.</para>
-  <figure id="fig-custom-curves-pie-2">
-    <title>The Custom Curves Dialog for pies: global formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-pie-2.png"/>
       </imageobject>
     </mediaobject>
   </figure>
