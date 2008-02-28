@@ -516,7 +516,7 @@ void FitDialog::setGraph(Graph *g)
 	if (!selectedCurve.isEmpty())
 	{
 	    int index = boxCurve->findText (selectedCurve);
-		boxCurve->setCurrentItem(index);
+		boxCurve->setCurrentIndex(index);
 	}
     activateCurve(boxCurve->currentText());
 

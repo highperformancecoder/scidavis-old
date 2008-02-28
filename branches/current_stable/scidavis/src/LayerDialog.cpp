@@ -196,8 +196,8 @@ void LayerDialog::setMultiLayer(MultiLayer *g)
 	boxBottomSpace->setValue(g->bottomMargin());
 	boxCanvasWidth->setValue(g->layerCanvasSize().width());
 	boxCanvasHeight->setValue(g->layerCanvasSize().height());
-	alignHorBox->setCurrentItem(g->horizontalAlignement());
-	alignVertBox->setCurrentItem(g->verticalAlignement());
+	alignHorBox->setCurrentIndex(g->horizontalAlignement());
+	alignVertBox->setCurrentIndex(g->verticalAlignement());
 }
 
 void LayerDialog::update()

@@ -94,7 +94,7 @@ void Plot3DDialog::initScalesPage()
 	axesList->addItem(tr( "Y" ) );
 	axesList->addItem(tr( "Z" ) );
 	axesList->setFixedWidth(50);
-	axesList->setCurrentItem(0);
+	axesList->setCurrentRow(0);
 
     QGridLayout *gl1 = new QGridLayout();
     gl1->addWidget(new QLabel(tr("From")), 0, 0);
@@ -145,7 +145,7 @@ void Plot3DDialog::initAxesPage()
 	axesList2->addItem(tr( "Y" ) );
 	axesList2->addItem(tr( "Z" ) );
 	axesList2->setFixedWidth(50);
-	axesList2->setCurrentItem (0);
+	axesList2->setCurrentRow(0);
 
     QGridLayout *gl1 = new QGridLayout();
     gl1->addWidget(new QLabel(tr("Title")), 0, 0);
@@ -504,17 +504,20 @@ void Plot3DDialog::disableAxesOptions()
 void Plot3DDialog::showBarsTab(double rad)
 {
 	bars = new QWidget( generalDialog );
+	QHBoxLayout * bars_layout = new QHBoxLayout();
+	bars->setLayout(bars_layout);
 
-	new QLabel( tr( "Width" ));
+	bars_layout->addWidget(new QLabel( tr( "Width" )));
 	boxBarsRad = new QLineEdit();
 	boxBarsRad->setText(QString::number(rad));
+	bars_layout->addWidget(boxBarsRad);
 
 	generalDialog->insertTab(bars, tr( "Bars" ),4 );
 }
 
 void Plot3DDialog::showPointsTab(double rad, bool smooth)
 {
-	boxPointStyle->setCurrentItem(0);
+	boxPointStyle->setCurrentIndex(0);
 	boxSize->setText(QString::number(rad));
 	boxSmooth->setChecked(smooth);
 	optionStack->setCurrentIndex (0);
@@ -522,7 +525,7 @@ void Plot3DDialog::showPointsTab(double rad, bool smooth)
 
 void Plot3DDialog::showConesTab(double rad, int quality)
 {
-	boxPointStyle->setCurrentItem(2);
+	boxPointStyle->setCurrentIndex(2);
 	boxConesRad->setText(QString::number(rad));
 	boxQuality->setValue(quality);
 	optionStack->setCurrentIndex (2);
@@ -530,7 +533,7 @@ void Plot3DDialog::showConesTab(double rad, int quality)
 
 void Plot3DDialog::showCrossHairTab(double rad, double linewidth, bool smooth, bool boxed)
 {
-	boxPointStyle->setCurrentItem(1);
+	boxPointStyle->setCurrentIndex(1);
 	boxCrossRad->setText(QString::number(rad));
 	boxCrossLinewidth->setText(QString::number(linewidth));
 	boxCrossSmooth->setChecked(smooth);
@@ -684,7 +687,7 @@ void Plot3DDialog::setScales(const QStringList& list)
 	boxTo->setText(scales[1]);
 	boxMajors->setValue(scales[2].toInt());
 	boxMinors->setValue(scales[3].toInt());
-	boxType->setCurrentItem(scales[4].toInt());
+	boxType->setCurrentIndex(scales[4].toInt());
 }
 
 void Plot3DDialog::setAxesTickLengths(const QStringList& list)
@@ -700,7 +703,7 @@ void Plot3DDialog::viewScaleLimits(int axis)
 	boxTo->setText(scales[5*axis+1]);
 	boxMajors->setValue(scales[5*axis+2].toInt());
 	boxMinors->setValue(scales[5*axis+3].toInt());
-	boxType->setCurrentItem(scales[5*axis+4].toInt());
+	boxType->setCurrentIndex(scales[5*axis+4].toInt());
 }
 
 void Plot3DDialog::setTitle(const QString& title)
@@ -878,6 +881,7 @@ bool Plot3DDialog::updatePlot()
 QStringList Plot3DDialog::scaleOptions(int axis, double start, double end,
 		const QString& majors, const QString& minors)
 {
+	Q_ASSERT(0 <= axis < scales.size()/5 - 1);
 	QStringList l;
 	l<<QString::number(start);
 	l<<QString::number(end);

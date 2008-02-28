@@ -81,7 +81,7 @@ LineDialog::LineDialog( ArrowMarker *line, QWidget* parent, Qt::WFlags fl )
     widthBox->insertItem( tr( "4" ) );
     widthBox->insertItem( tr( "5" ) );
 	widthBox->setEditable (true);
-	widthBox->setCurrentItem(0);
+	widthBox->setCurrentIndex(0);
 	widthBox->setEditText(QString::number(lm->width()));
 	gl1->addWidget(widthBox, 2, 1);
 
@@ -292,15 +292,15 @@ close();
 void LineDialog::setLineStyle(Qt::PenStyle style)
 {
 if (style==Qt::SolidLine)
-	styleBox->setCurrentItem(0);
+	styleBox->setCurrentIndex(0);
 else if (style==Qt::DashLine)
-	styleBox->setCurrentItem(1);
+	styleBox->setCurrentIndex(1);
 else if (style==Qt::DotLine)
-	styleBox->setCurrentItem(2);
+	styleBox->setCurrentIndex(2);
 else if (style==Qt::DashDotLine)
-	styleBox->setCurrentItem(3);
+	styleBox->setCurrentIndex(3);
 else if (style==Qt::DashDotDotLine)
-	styleBox->setCurrentItem(4);
+	styleBox->setCurrentIndex(4);
 }
 
 void LineDialog::enableHeadTab()

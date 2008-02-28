@@ -156,9 +156,9 @@ void PatternBox::setPattern(const Qt::BrushStyle& style)
 {
   const Qt::BrushStyle*ite = std::find(patterns, patterns + sizeof(patterns), style);
   if (ite == patterns + sizeof(patterns))
-    this->setCurrentItem(0); // default pattern is solid.
+    this->setCurrentIndex(0); // default pattern is solid.
   else
-    this->setCurrentItem(ite - patterns);
+    this->setCurrentIndex(ite - patterns);
 }
 
 Qt::BrushStyle PatternBox::getSelectedPattern() const

@@ -142,7 +142,7 @@ void PolynomFitDialog::setGraph(Graph *g)
 	if (!selectedCurve.isEmpty())
 	{
 	    int index = boxName->findText (selectedCurve);
-		boxName->setCurrentItem(index);
+		boxName->setCurrentIndex(index);
 	}
     activateCurve(boxName->currentText());
 

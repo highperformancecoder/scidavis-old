@@ -282,25 +282,25 @@ void CurvesDialog::init()
 
         int style = app->defaultCurveStyle;
         if (style == Graph::Line)
-            boxStyle->setCurrentItem(0);
+            boxStyle->setCurrentIndex(0);
         else if (style == Graph::Scatter)
-            boxStyle->setCurrentItem(1);
+            boxStyle->setCurrentIndex(1);
         else if (style == Graph::LineSymbols)
-            boxStyle->setCurrentItem(2);
+            boxStyle->setCurrentIndex(2);
         else if (style == Graph::VerticalDropLines)
-            boxStyle->setCurrentItem(3);
+            boxStyle->setCurrentIndex(3);
         else if (style == Graph::Spline)
-            boxStyle->setCurrentItem(4);
+            boxStyle->setCurrentIndex(4);
         else if (style == Graph::VerticalSteps)
-            boxStyle->setCurrentItem(5);
+            boxStyle->setCurrentIndex(5);
         else if (style == Graph::HorizontalSteps)
-            boxStyle->setCurrentItem(6);
+            boxStyle->setCurrentIndex(6);
         else if (style == Graph::Area)
-            boxStyle->setCurrentItem(7);
+            boxStyle->setCurrentIndex(7);
         else if (style == Graph::VerticalBars)
-            boxStyle->setCurrentItem(8);
+            boxStyle->setCurrentIndex(8);
         else if (style == Graph::HorizontalBars)
-            boxStyle->setCurrentItem(9);
+            boxStyle->setCurrentIndex(9);
     }
 
 	if (!available->count())

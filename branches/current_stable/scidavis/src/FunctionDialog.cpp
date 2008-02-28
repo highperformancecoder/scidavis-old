@@ -212,7 +212,7 @@ void FunctionDialog::setCurveToModify(Graph *g, int curve)
 	else if (c->functionType() == FunctionCurve::Polar)
 	{
 		optionStack->setCurrentIndex(2);
-		boxType->setCurrentItem(2);
+		boxType->setCurrentIndex(2);
 
 		boxPolarRadius->setCurrentText(formulas[0]);
 		boxPolarTheta->setCurrentText(formulas[1]);
@@ -223,7 +223,7 @@ void FunctionDialog::setCurveToModify(Graph *g, int curve)
 	}
 	else if (c->functionType() == FunctionCurve::Parametric)
 	{
-		boxType->setCurrentItem(1);
+		boxType->setCurrentIndex(1);
 		optionStack->setCurrentIndex(1);
 
 		boxXFunction->setCurrentText(formulas[0]);

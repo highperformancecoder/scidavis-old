@@ -7191,7 +7191,7 @@ void ApplicationWindow::showLineDialog()
 		if (!lm)
 			return;
 
-		LineDialog *ld = new LineDialog(lm, this, Qt::Tool);
+		LineDialog *ld = new LineDialog(lm, this);
 		ld->setAttribute(Qt::WA_DeleteOnClose);
 		ld->exec();
 	}

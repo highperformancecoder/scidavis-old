@@ -208,7 +208,7 @@ void FFTDialog::setTable(Table *t)
 	int xcol = t->firstXCol();
 	if (xcol >= 0)
 	{
-		boxName->setCurrentItem(xcol);
+		boxName->setCurrentIndex(xcol);
 
 		double x0 = t->text(0, xcol).toDouble();
 		double x1 = t->text(1, xcol).toDouble();
@@ -224,12 +224,12 @@ void FFTDialog::setTable(Table *t)
 	}
 	else if (selected == 1)
 	{
-		boxReal->setCurrentItem(t->colIndex(l[0]));
+		boxReal->setCurrentIndex(t->colIndex(l[0]));
 		boxImaginary->setCurrentText(QString());
 	}
 	else
 	{
-		boxReal->setCurrentItem(t->colIndex(l[0]));
-		boxImaginary->setCurrentItem(t->colIndex(l[1]));
+		boxReal->setCurrentIndex(t->colIndex(l[0]));
+		boxImaginary->setCurrentIndex(t->colIndex(l[1]));
 	}
 };

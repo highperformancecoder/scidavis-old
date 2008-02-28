@@ -1056,7 +1056,7 @@ void AxesDialog::showGridOptions(int axis)
     	boxWidthMajor->setValue(majPenX.width());
 
 		QPen minPenX = grd->minPenX();
-    	boxTypeMinor->setCurrentItem(minPenX.style() - 1);
+    	boxTypeMinor->setCurrentIndex(minPenX.style() - 1);
     	boxColorMinor->setColor(minPenX.color());
     	boxWidthMinor->setValue(minPenX.width());
     } else if (axis == 0) {
@@ -1075,7 +1075,7 @@ void AxesDialog::showGridOptions(int axis)
     	boxWidthMajor->setValue(majPenY.width());
 
 		QPen minPenY = grd->minPenY();
-    	boxTypeMinor->setCurrentItem(minPenY.style() - 1);
+    	boxTypeMinor->setCurrentIndex(minPenY.style() - 1);
     	boxColorMinor->setColor(minPenY.color());
     	boxWidthMinor->setValue(minPenY.width());
 	}
@@ -1421,7 +1421,7 @@ void AxesDialog::updateScale()
 	btnInvert->setChecked(sc_eng->testAttribute(QwtScaleEngine::Inverted));
 
 	QwtScaleTransformation *tr = sc_eng->transformation();
-	boxScaleType->setCurrentItem((int)tr->type());
+	boxScaleType->setCurrentIndex((int)tr->type());
 
 	boxMinorValue->clear();
 	if (tr->type())//log scale

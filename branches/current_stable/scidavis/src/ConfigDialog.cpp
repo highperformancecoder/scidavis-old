@@ -526,7 +526,7 @@ void ConfigDialog::initAppPage()
 	boxScriptingLanguage = new QComboBox();
 	QStringList llist = ScriptingLangManager::languages();
 	boxScriptingLanguage->insertStringList(llist);
-	boxScriptingLanguage->setCurrentItem(llist.indexOf(app->defaultScriptingLang));
+	boxScriptingLanguage->setCurrentIndex(llist.indexOf(app->defaultScriptingLang));
 	topBoxLayout->addWidget( boxScriptingLanguage, 3, 1 );
 
     boxSave= new QCheckBox();
@@ -665,7 +665,7 @@ void ConfigDialog::initFittingPage()
 	lblPeaksColor = new QLabel();
 	multiPeakLayout->addWidget(lblPeaksColor);
 	boxPeaksColor = new ColorBox(0);
-	boxPeaksColor->setCurrentItem(app->peakCurvesColor);
+	boxPeaksColor->setCurrentIndex(app->peakCurvesColor);
 	multiPeakLayout->addWidget(boxPeaksColor);
 
 	groupBoxFitParameters = new QGroupBox();
@@ -941,25 +941,25 @@ void ConfigDialog::languageChange()
 
 	int style = app->defaultCurveStyle;
 	if (style == Graph::Line)
-		boxCurveStyle->setCurrentItem(0);
+		boxCurveStyle->setCurrentIndex(0);
 	else if (style == Graph::Scatter)
-		boxCurveStyle->setCurrentItem(1);
+		boxCurveStyle->setCurrentIndex(1);
 	else if (style == Graph::LineSymbols)
-		boxCurveStyle->setCurrentItem(2);
+		boxCurveStyle->setCurrentIndex(2);
 	else if (style == Graph::VerticalDropLines)
-		boxCurveStyle->setCurrentItem(3);
+		boxCurveStyle->setCurrentIndex(3);
 	else if (style == Graph::Spline)
-		boxCurveStyle->setCurrentItem(4);
+		boxCurveStyle->setCurrentIndex(4);
 	else if (style == Graph::VerticalSteps)
-		boxCurveStyle->setCurrentItem(5);
+		boxCurveStyle->setCurrentIndex(5);
 	else if (style == Graph::HorizontalSteps)
-		boxCurveStyle->setCurrentItem(6);
+		boxCurveStyle->setCurrentIndex(6);
 	else if (style == Graph::Area)
-		boxCurveStyle->setCurrentItem(7);
+		boxCurveStyle->setCurrentIndex(7);
 	else if (style == Graph::VerticalBars)
-		boxCurveStyle->setCurrentItem(8);
+		boxCurveStyle->setCurrentIndex(8);
 	else if (style == Graph::HorizontalBars)
-		boxCurveStyle->setCurrentItem(9);
+		boxCurveStyle->setCurrentIndex(9);
 
 	//plots 3D
 	lblResolution->setText(tr("Resolution"));

@@ -1561,13 +1561,13 @@ void PlotDialog::setActiveCurve(CurveTreeItem *item)
         boxPieLineWidth->setValue(pie->pen().width());
         boxPieLineColor->setColor(pie->pen().color());
         setPiePenStyle(pie->pen().style());
-        boxFirstColor->setCurrentItem(pie->firstColor());
+        boxFirstColor->setCurrentIndex(pie->firstColor());
         return;
     }
 
     //axes page
-    boxXAxis->setCurrentItem(i->xAxis()-2);
-    boxYAxis->setCurrentItem(i->yAxis());
+    boxXAxis->setCurrentIndex(i->xAxis()-2);
+    boxYAxis->setCurrentIndex(i->yAxis());
 
     if (i->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
     {
@@ -1596,7 +1596,7 @@ void PlotDialog::setActiveCurve(CurveTreeItem *item)
             boxContourStyle->setCurrentIndex(0);
 
         axisScaleBox->setChecked(sp->hasColorScale());
-        colorScaleBox->setCurrentItem((int)sp->colorScaleAxis());
+        colorScaleBox->setCurrentIndex((int)sp->colorScaleAxis());
         colorScaleWidthBox->setValue(sp->colorBarWidth());
         return;
     }
@@ -1841,8 +1841,8 @@ bool PlotDialog::acceptParams()
   	   sp->setColorBarWidth(colorScaleWidthBox->value());
 
   	   //Update axes page
-  	   boxXAxis->setCurrentItem(sp->xAxis()-2);
-  	   boxYAxis->setCurrentItem(sp->yAxis());
+  	   boxXAxis->setCurrentIndex(sp->xAxis()-2);
+  	   boxYAxis->setCurrentIndex(sp->yAxis());
   	}
 	else if (privateTabWidget->currentWidget()==linePage)
 	{
@@ -2118,15 +2118,15 @@ bool PlotDialog::validInput()
 void PlotDialog::setPiePenStyle(const Qt::PenStyle& style)
 {
 	if(style == Qt::SolidLine)
-		boxPieLineStyle->setCurrentItem(0);
+		boxPieLineStyle->setCurrentIndex(0);
 	if(style == Qt::DashLine)
-		boxPieLineStyle->setCurrentItem(1);
+		boxPieLineStyle->setCurrentIndex(1);
 	if(style == Qt::DotLine)
-		boxPieLineStyle->setCurrentItem(2);
+		boxPieLineStyle->setCurrentIndex(2);
 	if(style == Qt::DashDotLine)
-		boxPieLineStyle->setCurrentItem(3);
+		boxPieLineStyle->setCurrentIndex(3);
 	if(style == Qt::DashDotDotLine)
-		boxPieLineStyle->setCurrentItem(4);
+		boxPieLineStyle->setCurrentIndex(4);
 }
 
 void PlotDialog::setPenStyle(Qt::PenStyle style)

@@ -154,9 +154,9 @@ void SymbolBox::setStyle(const QwtSymbol::Style& style)
 {
   const QwtSymbol::Style*ite = std::find(symbols, symbols + sizeof(symbols), style);
   if (ite == symbols + sizeof(symbols))
-    this->setCurrentItem(0);
+    this->setCurrentIndex(0);
   else 
-    this->setCurrentItem(ite - symbols);
+    this->setCurrentIndex(ite - symbols);
 }
 
 QwtSymbol::Style SymbolBox::selectedSymbol() const
