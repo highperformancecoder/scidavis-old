@@ -4155,16 +4155,28 @@ void ApplicationWindow::readSettings()
 	if (help_file_setting.isValid())
 		helpFilePath = help_file_setting.toString();
 	else {
-		QString locale = QLocale().name(); // language_country according to ISO 639 and 3166, respectively
-		QStringList help_dir_suffixes;
-		help_dir_suffixes << locale << locale.section('_',0,0) << appLanguage << "en";
 		QFileInfo help_file_info;
+		QString help_dir_base = QString("/usr/share/doc/scidavis-%1.%2.%3")
+			.arg((scidavis_version & 0xff0000) >> 16)
+			.arg((scidavis_version & 0x00ff00) >> 8)
+			.arg(scidavis_version & 0x0000ff);
+		help_file_info.setFile(help_dir_base);
+		if (!help_file_info.exists())
+			help_dir_base = "/usr/share/doc/scidavis";
+		QStringList help_dir_suffixes;
+		QString locale = QLocale().name(); // language_country according to ISO 639 and 3166, respectively
+		help_dir_suffixes
+			<< QString("-") + locale
+			<< QString("-") + locale.section('_',0,0)
+			<< QString("-") + appLanguage
+			<< "-en"
+			<< "";
 		foreach (QString suffix, help_dir_suffixes) {
-			help_file_info.setFile(QString("/usr/share/doc/scidavis/manual-%1/index.html").arg(suffix));
+			help_file_info.setFile(help_dir_base + QString("/manual%1/index.html").arg(suffix));
 			if (help_file_info.exists())
 				break;
 		}
-		// intentionally defaults to .../manual-en/index.html even if it doesn't exist
+		// intentionally defaults to /usr/share/doc/scidavis/manual/index.html even if it doesn't exist
 		helpFilePath = help_file_info.absoluteFilePath();
 	}
 	fitPluginsPath = settings.value("/FitPlugins", "/usr/lib/scidavis/plugins").toString();
