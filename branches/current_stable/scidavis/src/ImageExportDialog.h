@@ -59,7 +59,8 @@ private:
 	QCheckBox *d_color;
 	QCheckBox *d_keep_aspect;
 	QCheckBox *d_standard_page;
-	QComboBox *boxPageSize;
+	QComboBox *d_box_page_size;
+	QComboBox *d_box_page_orientation;
 	// raster format options
 	//! Container widget for all options available for raster formats.
 	QGroupBox *d_raster_options;
@@ -83,7 +84,9 @@ public:
 	bool keepAspect() const { return d_keep_aspect->isChecked(); }
     //! For vector formats: returns a standard output page size (default: QPrinter::Custom).
 	QPrinter::PageSize pageSize() const;
-	void setPageSize(int size);
+	void setPageSize(QPrinter::PageSize size);
+	QPrinter::Orientation pageOrientation() const;
+	void setOrientation(QPrinter::Orientation orientation);
 	//! Return the quality (in percent) the user selected for export to raster formats.
 	int quality() const { return d_quality->value(); }
 	//! Return whether the output's background should be transparent.

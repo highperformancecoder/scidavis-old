@@ -696,7 +696,7 @@ void MultiLayer::exportPDF(const QString& fname)
 	exportVector(fname);
 }
 
-void MultiLayer::exportVector(const QString& fileName, int res, bool color, bool keepAspect, QPrinter::PageSize pageSize)
+void MultiLayer::exportVector(const QString& fileName, int res, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPrinter::Orientation orientation)
 {
 	if ( fileName.isEmpty() ){
 		QMessageBox::critical(this, tr("Error"),
@@ -716,16 +716,13 @@ void MultiLayer::exportVector(const QString& fileName, int res, bool color, bool
 		printer.setResolution(res);
 
 	QRect canvasRect = canvas->rect();
+	printer.setOrientation(orientation);
     if (pageSize == QPrinter::Custom)
         printer.setPageSize(Graph::minPageSize(printer, canvasRect));
     else
         printer.setPageSize(pageSize);
 
 	double canvas_aspect = double(canvasRect.width())/double(canvasRect.height());
-	if (canvas_aspect < 1)
-		printer.setOrientation(QPrinter::Portrait);
-	else
-		printer.setOrientation(QPrinter::Landscape);
 
 	if (color)
 		printer.setColorMode(QPrinter::Color);

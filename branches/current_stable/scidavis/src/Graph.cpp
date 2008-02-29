@@ -1372,7 +1372,7 @@ void Graph::exportImage(const QString& fileName, int quality, bool transparent)
 	pic.save(fileName, 0, quality);
 }
 
-void Graph::exportVector(const QString& fileName, int res, bool color, bool keepAspect, QPrinter::PageSize pageSize)
+void Graph::exportVector(const QString& fileName, int res, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPrinter::Orientation orientation)
 {
 	if ( fileName.isEmpty() ){
 		QMessageBox::critical(this, tr("Error"), tr("Please provide a valid file name!"));
@@ -1395,16 +1395,13 @@ void Graph::exportVector(const QString& fileName, int res, bool color, bool keep
 		printer.setColorMode(QPrinter::GrayScale);
 
     QRect plotRect = d_plot->rect();
+	printer.setOrientation(orientation);
     if (pageSize == QPrinter::Custom)
         printer.setPageSize(minPageSize(printer, plotRect));
     else
         printer.setPageSize(pageSize);
 
     double plot_aspect = double(d_plot->frameGeometry().width())/double(d_plot->frameGeometry().height());
-	if (plot_aspect < 1)
-		printer.setOrientation(QPrinter::Portrait);
-	else
-		printer.setOrientation(QPrinter::Landscape);
 
     if (keepAspect){// export should preserve plot aspect ratio
         double page_aspect = double(printer.width())/double(printer.height());
