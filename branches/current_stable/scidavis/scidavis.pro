@@ -33,6 +33,9 @@ unix: target.path = "$$INSTALLBASE/bin"               # where to install the bin
 win32: target.path = "$$INSTALLBASE"                  # where to install the exe on Windows
 unix: documentation.path = "$$INSTALLBASE/share/doc/scidavis"      # where to install the documentation files on Linux/MacOS X
 win32: documentation.path = "$$INSTALLBASE"                        # ... on Winodws
+### Usually, the manual will be expected in the "manual" subfolder of "documentation.path" (see above).
+### You can override this, uncomment and adjust the path behind the '=' in the next line.
+# manual.path = $$INSTALLBASE/share/doc/scidavis/manual
 ### Important: translationfiles.path will be the directory where scidavis expects
 ### the translation .qm files at runtime. Therefore you need to set it corretly even if 
 ### you do not use this project file to generate the translation files.

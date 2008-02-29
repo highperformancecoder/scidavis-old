@@ -4144,12 +4144,13 @@ void ApplicationWindow::readSettings()
 
 	settings.beginGroup("/Paths");
 	workingDir = settings.value("/WorkingDir", qApp->applicationDirPath()).toString();
-#ifdef Q_OS_WIN
+
+#ifdef MANUAL_PATH
+	helpFilePath = settings.value("/HelpFile", MANUAL_PATH "/index.html").toString();
+#elif defined(DOC_PATH)
+	helpFilePath = settings.value("/HelpFile", DOC_PATH "/manual/index.html").toString();
+#elif defined(Q_OS_WIN)
 	helpFilePath = settings.value("/HelpFile", qApp->applicationDirPath()+"/manual/index.html").toString();
-	fitPluginsPath = settings.value("/FitPlugins", "fitPlugins").toString();
-	templatesDir = settings.value("/TemplatesDir", qApp->applicationDirPath()).toString();
-	asciiDirPath = settings.value("/ASCII", qApp->applicationDirPath()).toString();
-	imagesDirPath = settings.value("/Images", qApp->applicationDirPath()).toString();
 #else
 	QVariant help_file_setting = settings.value("/HelpFile");
 	if (help_file_setting.isValid())
@@ -4179,6 +4180,14 @@ void ApplicationWindow::readSettings()
 		// intentionally defaults to /usr/share/doc/scidavis/manual/index.html even if it doesn't exist
 		helpFilePath = help_file_info.absoluteFilePath();
 	}
+#endif
+
+#ifdef Q_OS_WIN
+	fitPluginsPath = settings.value("/FitPlugins", "fitPlugins").toString();
+	templatesDir = settings.value("/TemplatesDir", qApp->applicationDirPath()).toString();
+	asciiDirPath = settings.value("/ASCII", qApp->applicationDirPath()).toString();
+	imagesDirPath = settings.value("/Images", qApp->applicationDirPath()).toString();
+#else
 	fitPluginsPath = settings.value("/FitPlugins", "/usr/lib/scidavis/plugins").toString();
 	templatesDir = settings.value("/TemplatesDir", QDir::homePath()).toString();
 	asciiDirPath = settings.value("/ASCII", QDir::homePath()).toString();
