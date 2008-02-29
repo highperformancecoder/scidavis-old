@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+MimeType=application/x-sciprj
+Terminal=false
+Name=SciDAVis
+Comment=Application for scientific data analysis and visualization
+Comment[de]=Programm zur wissenschaftlichen Datenauswertung und Visualisierung
+Exec=scidavis
+Icon=scidavis
+Type=Application
+Categories=Qt;Education;Science;Physics;Math;

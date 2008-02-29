@@ -12407,7 +12407,7 @@ void ApplicationWindow::switchToLanguage(const QString& locale)
 	}
 	else
 	{
-		QString qmPath = qApp->applicationDirPath() + "/translations";
+		QString qmPath = TS_PATH;
 		appTranslator->load("scidavis_" + locale, qmPath);
 		qtTranslator->load("qt_" + locale, qmPath+"/qt");
 	}
