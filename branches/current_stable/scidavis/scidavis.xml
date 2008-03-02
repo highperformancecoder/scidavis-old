@@ -3,6 +3,7 @@
 	<mime-type type="application/x-sciprj">
 		<comment xml:lang="en">SciDAVis project</comment>
 		<comment xml:lang="de">SciDAVis-Projekt</comment>
+		<comment xml:lang="fr">Projet Scidavis</comment>
 		<magic priority="50">
 			<match type="string" value="SciDAVis" offset="0"/>
 		</magic>
