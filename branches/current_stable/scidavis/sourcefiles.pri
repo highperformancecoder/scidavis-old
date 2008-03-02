@@ -47,6 +47,41 @@ documentation.files += ../manual/html \
                        ../CHANGES \
                        ../gpl.txt 
 
+###################### DESKTOP INTEGRATION ##################################
+
+unix {
+	desktop_entry.files = scidavis.desktop
+	desktop_entry.path = /usr/share/applications
+	INSTALLS += desktop_entry
+
+	mime_package.files = scidavis.xml
+	mime_package.path = /usr/share/mime/packages
+	INSTALLS += mime_package
+
+	#deprecated
+	mime_entry.files = x-sciprj.desktop
+	mime_entry.path = /usr/share/mimelnk/application
+	INSTALLS += mime_entry
+	
+	icon_hicolor_scalable.files = icons/scidavis.svg
+	icon_hicolor_scalable.path = /usr/share/icons/hicolor/scalable/apps
+	INSTALLS += icon_hicolor_scalable
+
+	resolutions = 16 22 32 48 64 128
+	for(res, resolutions) {
+		eval(icon_hicolor_$${res}.files = icons/hicolor-$${res}/scidavis.png)
+		eval(icon_hicolor_$${res}.path = /usr/share/icons/hicolor/$${res}x$${res}/apps)
+		INSTALLS += icon_hicolor_$${res}
+	}
+
+	resolutions = 16 22 32
+	for(res, resolutions) {
+		eval(icon_locolor_$${res}.files = icons/locolor-$${res}/scidavis.png)
+		eval(icon_locolor_$${res}.path = /usr/share/icons/locolor/$${res}x$${res}/apps)
+		INSTALLS += icon_locolor_$${res}
+	}
+}
+
 ###################### HEADERS ##############################################
 
 HEADERS  += src/ApplicationWindow.h \

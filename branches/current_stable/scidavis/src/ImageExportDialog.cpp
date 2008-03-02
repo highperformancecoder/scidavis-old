@@ -136,7 +136,7 @@ void ImageExportDialog::initAdvancedOptions()
 	d_box_page_size->addItem(tr("Tabloid 279 x 432 mm"), QVariant(QPrinter::Tabloid));
 
 	vector_layout->addWidget(new QLabel(tr("Page size")), 4, 0);
-    setPageSize(app->d_export_vector_size);
+	setPageSize((QPrinter::PageSize)app->d_export_vector_size);
 	d_standard_page->setChecked(app->d_export_vector_size != QPrinter::Custom);
 	d_box_page_size->setEnabled(app->d_export_vector_size != QPrinter::Custom);
 	vector_layout->addWidget(d_box_page_size, 4, 1, 1, 2);
