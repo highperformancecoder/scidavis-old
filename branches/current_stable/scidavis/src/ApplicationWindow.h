@@ -908,6 +908,8 @@ public:
     int d_export_quality;
     int d_export_resolution;
     bool d_export_color;
+	 //! Default paper orientation for image exports.
+	 int d_export_orientation;
 	//! Locale used to specify the decimal separators in imported ASCII files
 	QLocale d_ASCII_import_locale;
     //! Last selected filter in import ASCII dialog

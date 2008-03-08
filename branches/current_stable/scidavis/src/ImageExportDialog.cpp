@@ -145,6 +145,7 @@ void ImageExportDialog::initAdvancedOptions()
 	d_box_page_orientation = new QComboBox();
 	d_box_page_orientation->addItem(tr("Portrait","page orientation"), QVariant(QPrinter::Portrait));
 	d_box_page_orientation->addItem(tr("Landscape","page orientation"), QVariant(QPrinter::Landscape));
+	d_box_page_orientation->setCurrentIndex(app->d_export_orientation);
 	vector_layout->addWidget(d_box_page_orientation, 5, 1, 1, 2);
 
     connect(d_standard_page, SIGNAL(toggled(bool)), d_box_page_size, SLOT(setEnabled(bool)));
@@ -199,6 +200,7 @@ void ImageExportDialog::closeEvent(QCloseEvent* e)
         app->d_export_color = d_color->isChecked();
         app->d_export_vector_size = (int)pageSize();
         app->d_keep_plot_aspect = d_keep_aspect->isChecked();
+		  app->d_export_orientation = d_box_page_orientation->currentIndex();
 	}
 
 	e->accept();
