@@ -4405,12 +4405,11 @@ void Graph::copy(Graph* g)
 
 	drawCanvasFrame(g->framed(),g->canvasFrameWidth(), g->canvasFrameColor());
 
-	QStringList lst = g->scalesTitles();
-	for (i=0;i<(int)lst.count();i++)
-		setAxisTitle(i, lst[i]);
-
 	for (i=0;i<4;i++)
+	{	
+		setAxisTitle(i, g->axisTitle(i));
 		setAxisFont(i,g->axisFont(i));
+	}
 
 	setXAxisTitleColor(g->axisTitleColor(2));
 	setXAxisTitleFont(g->axisTitleFont(2));
