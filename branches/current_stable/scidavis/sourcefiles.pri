@@ -5,6 +5,7 @@
 ###################### ICONS ################################################
 RESOURCES    +=        appicons.qrc
 RESOURCES    +=        icons.qrc
+RC_FILE      =         scidavis.rc
 
 ###################### TRANSLATIONS #########################################
 
