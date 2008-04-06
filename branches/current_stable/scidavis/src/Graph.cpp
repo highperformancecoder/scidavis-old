@@ -1832,8 +1832,12 @@ void Graph::updateCurvesData(Table* w, const QString& yColName)
         if(((DataCurve *)it)->updateData(w, yColName))
             updated_curves++;
 	}
-    if (updated_curves)
-        updatePlot();
+    if (updated_curves) {
+		 if (isPiePlot())
+			 updatePlot();
+		 else
+			 d_plot->replot();
+	 }
 }
 
 QString Graph::saveEnabledAxes()
