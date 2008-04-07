@@ -65,8 +65,9 @@ h1. Packagers
 The following people have made installing SciDAVis easier by providing specialized binary packages.
 In alphabetical order.
 
-Burkhard Bunk, 
-Quentin Denis
+Burkhard Bunk (Debian),
+Quentin Denis (SUSE),
+Mauricio Troviano (Windows installer)
 
 h1. Special Thanks
 
