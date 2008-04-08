@@ -5,27 +5,15 @@ inMenu: true
 
 h1. Windows
 
-In order to run the pre-compiled binaries we provide for Windows, you need
+Thanks to Mauricio Troviano, we have an installer for Windows.
 
-* "Qt/Windows Open Source Edition >= 4.3.0":http://trolltech.com/developer/downloads/qt/windows
-* "Python >= 2.4":http://www.python.org/download/
-* "SIP >= 4.7":http://www.riverbankcomputing.co.uk/sip/download.php
-* "PyQt4 >= 4.3":http://www.riverbankcomputing.co.uk/pyqt/download.php
+Before rushing ahead, you should know that Python and PyQt currently have to be installed manually
+in order for everything to work (instructions follow). Also, the manual is not included due to its
+size and our intention to update it in between releases. Likewise, translations currently have to be
+installed seperately. Future releases of the installer may be extended to handle these things.
 
-Get the file "scidavis-x.y.z-windows.zip" from
-"here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=236207,
-open it and copy (unzip) the content to some convenient location.
-Finally, start SciDAVis by double-clicking on scidavis.exe.
-If you want a link on your desktop and/or start menu, you currently have to create it manually
-(by dragging the scidavis executable to the desired destination).
-
-Also, the manual is not included due to its size and our intention to update it in between releases.
-If you want to install it, get it
-"here":http://sourceforge.net/project/showfiles.php?group_id=199120&package_id=241381
-(you only need the zip file) and unpack it like the binaries.
-You can view it either from the Help menu in SciDAVis or by opening the file "index.html" in your browser.
-
-We're looking for someone with the necessary know-how to create a graphical installer.
+That said, all necessary links and files can be found
+"here":http://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=7767.
 
 h1. Linux
 
@@ -59,8 +47,10 @@ This will create a directory "scidavis-x.y.z" with the binary and some additiona
 
 h1. MacOS X
 
+As of SciDAVis 0.1.2, you need to edit scidavis/scidavis.pro and replace every occurence of "LIBS +=
+-L /some/directory" with "LIBS += -L/some/directory". This will be fixed in SciDAVis 0.1.3.
+
 Currently, we do not have anyone to test SciDAVis on MacOS X or provide pre-compiled binaries.
-The sources should compile though (please tell us if they don't).
 Any help in this area will be greatly appreciated.
 
 h1. Source tarballs
