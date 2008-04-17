@@ -1,0 +1,117 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+
+
+
+CFLAGS = -Wall -g
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+else
+	CFLAGS += -O2
+endif
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	# Add here commands to configure the package.
+	cd 3rdparty/qwt; qmake-qt4
+	cd 3rdparty/qwtplot3d; qmake-qt4
+	cd 3rdparty/muparser; ./configure --disable-shared
+	qmake-qt4
+
+	touch configure-stamp
+
+
+build: build-stamp
+
+build-stamp: configure-stamp 
+	dh_testdir
+
+	# Add here commands to compile the package.
+	cd 3rdparty/qwt; $(MAKE)
+	cd 3rdparty/qwtplot3d; $(MAKE)
+	cd 3rdparty/muparser; $(MAKE)
+	$(MAKE)
+	cd scidavis; lrelease-qt4 scidavis.pro
+	#docbook-to-man debian/scidavis.sgml > scidavis.1
+
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+
+	# Add here commands to clean up after the build process.
+	-$(MAKE) clean
+
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	dh_installdirs
+
+	# Add here commands to install the package into debian/scidavis.
+	$(MAKE) INSTALL_ROOT=$(CURDIR)/debian/scidavis install
+	install -d $(CURDIR)/debian/scidavis/usr/bin/translations
+	install -m 644 scidavis/translations/*.qm \
+		$(CURDIR)/debian/scidavis/usr/bin/translations
+	install -d $(CURDIR)/debian/scidavis/usr/share/applnk/Science
+	install -m 644 debian/SciDAVis.desktop \
+		$(CURDIR)/debian/scidavis/usr/share/applnk/Science
+	install -d $(CURDIR)/debian/scidavis/usr/share/icons
+	install -m 644 scidavis/icons/scidavis-icon.png \
+		$(CURDIR)/debian/scidavis/usr/share/icons
+
+
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installdocs
+	dh_installexamples
+#	dh_install
+#	dh_installmenu
+#	dh_installdebconf	
+#	dh_installlogrotate
+#	dh_installemacsen
+#	dh_installpam
+#	dh_installmime
+#	dh_python
+	dh_pysupport
+#	dh_installinit
+#	dh_installcron
+#	dh_installinfo
+	dh_installman
+	dh_link /usr/share/doc/scidavis-doc/manual-en /usr/share/doc/scidavis/manual-en
+	dh_strip
+	dh_compress
+	dh_fixperms
+#	dh_perl
+	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure
