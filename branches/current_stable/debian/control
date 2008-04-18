@@ -1,6 +1,6 @@
 Source: scidavis
-Section: unknown
-Priority: extra
+Section: math
+Priority: optional
 Maintainer: Burkhard Bunk <bunk@physik.hu-berlin.de>
 Build-Depends: debhelper (>= 5),
 	libgsl0-dev, zlib1g-dev, libqt4-dev, libglu1-mesa-dev,
@@ -15,6 +15,7 @@ Depends: ${shlibs:Depends}, ${python:Depends}, ${misc:Depends},
 	python-qt4, python-sip4
 Suggests: scidavis-doc
 Description: SciDAVis - Scientific Data Analysis and Visualization
- SciDAVis is a free (GPL), user-friendly, platform independent data
- analysis and visualization application similar, based on QtiPlot,
- and similar to the non-free Windows program Origin.
+ SciDAVis is a user-friendly data analysis and visualization program 
+ primarily aimed at high-quality plotting of scientific data. It 
+ strives to combine an intuitive, easy-to-use graphical user interface 
+ with powerful features such as Python scriptability.
