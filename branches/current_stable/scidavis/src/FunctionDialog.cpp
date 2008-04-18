@@ -258,7 +258,7 @@ void FunctionDialog::clearList()
 	}
 }
 
-void FunctionDialog::acceptFunction()
+bool FunctionDialog::acceptFunction()
 {
 	QString from=boxFrom->text().toLower();
 	QString to=boxTo->text().toLower();
@@ -275,7 +275,7 @@ void FunctionDialog::acceptFunction()
 	{
 		QMessageBox::critical(0, tr("Start limit error"), QString::fromStdString(e.GetMsg()));
 		boxFrom->setFocus();
-		return;
+		return false;
 	}
 	try
 	{
@@ -287,7 +287,7 @@ void FunctionDialog::acceptFunction()
 	{
 		QMessageBox::critical(0, tr("End limit error"), QString::fromStdString(e.GetMsg()));
 		boxTo->setFocus();
-		return;
+		return false;
 	}
 
 	if (start>=end)
@@ -295,7 +295,7 @@ void FunctionDialog::acceptFunction()
 		QMessageBox::critical(0, tr("Input error"),
 				tr("Please enter x limits that satisfy: from < end!"));
 		boxTo->setFocus();
-		return;
+		return false;
 	}
 
 	double x;
@@ -340,10 +340,11 @@ void FunctionDialog::acceptFunction()
 			else
 				graph->addFunctionCurve(type,formulas, "x", ranges, boxPoints->value());
 		}
+		return true;
 	}
-
+	return false;
 }
-void FunctionDialog::acceptParametric()
+bool FunctionDialog::acceptParametric()
 {
 	QString from=boxParFrom->text().toLower();
 	QString to=boxParTo->text().toLower();
@@ -360,7 +361,7 @@ void FunctionDialog::acceptParametric()
 	{
 		QMessageBox::critical(0, tr("Start limit error"), QString::fromStdString(e.GetMsg()));
 		boxParFrom->setFocus();
-		return;
+		return false;
 	}
 
 	try
@@ -373,7 +374,7 @@ void FunctionDialog::acceptParametric()
 	{
 		QMessageBox::critical(0, tr("End limit error"), QString::fromStdString(e.GetMsg()));
 		boxParTo->setFocus();
-		return;
+		return false;
 	}
 
 	if (start>=end)
@@ -381,7 +382,7 @@ void FunctionDialog::acceptParametric()
 		QMessageBox::critical(0, tr("Input error"),
 				tr("Please enter parameter limits that satisfy: from < end!"));
 		boxParTo->setFocus();
-		return;
+		return false;
 	}
 
 	double parameter;
@@ -444,10 +445,12 @@ void FunctionDialog::acceptParametric()
 			else
 				graph->addFunctionCurve(type,formulas, boxParameter->text(),ranges, boxParPoints->value());
 		}
+		return true;
 	}
+	return false;
 }
 
-void FunctionDialog::acceptPolar()
+bool FunctionDialog::acceptPolar()
 {
 	QString from=boxPolarFrom->text().toLower();
 	QString to=boxPolarTo->text().toLower();
@@ -464,7 +467,7 @@ void FunctionDialog::acceptPolar()
 	{
 		QMessageBox::critical(0, tr("Start limit error"), QString::fromStdString(e.GetMsg()));
 		boxPolarFrom->setFocus();
-		return;
+		return false;
 	}
 
 	try
@@ -477,7 +480,7 @@ void FunctionDialog::acceptPolar()
 	{
 		QMessageBox::critical(0, tr("End limit error"), QString::fromStdString(e.GetMsg()));
 		boxPolarTo->setFocus();
-		return;
+		return false;
 	}
 
 	if (start>=end)
@@ -485,7 +488,7 @@ void FunctionDialog::acceptPolar()
 		QMessageBox::critical(0, tr("Input error"),
 				tr("Please enter parameter limits that satisfy: from < end!"));
 		boxPolarTo->setFocus();
-		return;
+		return false;
 	}
 
 	double parameter;
@@ -549,26 +552,30 @@ void FunctionDialog::acceptPolar()
 			else
 				graph->addFunctionCurve(type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
 		}
+		return true;
 	}
+	return false;
 }
 
 void FunctionDialog::accept()
 {
+	bool ok = true;
 	switch (boxType->currentIndex())
 	{
 		case 0:
-			acceptFunction();
+			ok = acceptFunction();
 			break;
 
 		case 1:
-			acceptParametric();
+			ok = acceptParametric();
 			break;
 
 		case 2:
-			acceptPolar();
+			ok = acceptPolar();
 			break;
 	}
-	close();
+	if (ok)
+		close();
 }
 
 void FunctionDialog::insertParamFunctionsList(const QStringList& xList, const QStringList& yList)
