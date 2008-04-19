@@ -28,12 +28,16 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SciDaVis"
-!define PRODUCT_VERSION "0.1.2"
+!define PRODUCT_VERSION "0.1.3"
 !define PRODUCT_WEB_SITE "http://scidavis.sourceforge.net/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\scidavis.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
+!define PYTHON_URL "http://www.python.org/ftp/python/2.5.2/python-2.5.2.msi"
+!define PYTHON_INSTALLER "python-2.5.2.msi"
+!define PYQT_URL "http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-Py2.5-gpl-4.3.3-2.exe"
+!define PYQT_INSTALLER "PyQt-Py2.5-gpl-4.3.3-2.exe"
 
 SetCompressor /SOLID lzma
 
@@ -184,3 +188,56 @@ Section Uninstall
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
   SetAutoClose true
 SectionEnd
+
+; Ask whether to install Python and PyQt
+Section -Requirements
+  SetOutPath $INSTDIR
+  ReadRegStr $3 HKLM "SOFTWARE\Python\PythonCore\2.5\InstallPath" ""
+  StrCmp $3 "" 0 pythonInstFound
+  StrCpy $4 "No Python 2.5 found on your system. Install Python 2.5 from the internet?"
+  Goto skip1
+  pythonInstFound:
+  StrCpy $4 "Python 2.5 found on your system. Install Python 2.5 from the internet nevertheless?"
+  skip1:
+  MessageBox MB_YESNO $4 /SD IDYES IDNO endInstPython
+        StrCpy $2 "$TEMP\${PYTHON_INSTALLER}"
+        nsisdl::download /TIMEOUT=30000 ${PYTHON_URL} $2
+        Pop $R0 ;Get the return value
+                StrCmp $R0 "success" +3
+                MessageBox MB_OK "Download failed: $R0"
+                Quit
+	ExecWait '"msiexec" /i "$2"'
+        Delete $2
+    Goto endInstPython
+  endInstPython:
+
+;;; Install PyQt and SIP provided with the installer.
+;;; The PyQt_SIP.exe install was build as follows:
+;;; - compile and install PyQt and SIP in some arbitrary dir
+;;; - pack contents if this dir
+;;; - use NSIS to make an installer out of the ZIP
+  ReadRegStr $2 HKLM "SOFTWARE\Python\PythonCore\2.5\InstallPath" ""
+  StrCmp $2 "" 0 pythonFound
+    MessageBox MB_OK "Could not find Python 2.5 installation (required). Aborting."
+    Quit
+  pythonFound:
+    MessageBox MB_YESNO "Python found in $2. Install PyQt and SIP provided with SciDAVis now? (Recommended. PyQt binaries from Riverbank are reported to be incompatible with SciDAVis.)" /SD IDYES IDNO endExtraInst
+    SetOutPath "$2"
+    File "PyQt_SIP.exe"
+    ExecWait "$2\PyQt_SIP.exe"
+    Delete "$2\PyQt_SIP.exe"
+
+;;; Downloading and Installing PyQt works, but SciDAVis crashed using this binary.
+;  MessageBox MB_YESNO "Install PyQt (requires active internet connection)?" /SD IDYES IDNO endInstPyQt
+;        StrCpy $2 "$TEMP\${PYQT_INSTALLER}"
+;        nsisdl::download /TIMEOUT=30000 ${PYQT_URL} $2
+;        Pop $R0 ;Get the return value
+;                StrCmp $R0 "success" +3
+;                MessageBox MB_OK "Download failed: $R0"
+;                Quit
+;	ExecWait $2
+;        Delete $2
+;  endInstPyQt:
+  endExtraInst:
+SectionEnd
+
