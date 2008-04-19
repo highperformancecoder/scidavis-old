@@ -25,7 +25,8 @@ contains( INSTALLS, translationfiles ){
                              translations/scidavis_ja.qm \
                              translations/scidavis_sv.qm
 
-        tstarget.target = translations/scidavis_de.qm
+        unix: tstarget.target = translations/scidavis_de.qm
+        win32: tstarget.target = translations\scidavis_de.qm
         tstarget.commands = $$LUPDATE_BIN scidavis.pro && $$LRELEASE_BIN scidavis.pro
 
         QMAKE_EXTRA_TARGETS += tstarget
