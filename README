@@ -37,14 +37,20 @@ http://scidavis.sourceforge.net
 === Authors ===
 
 These are the people currently working on SciDAVis, in alphabetical order:
+o Tilman Benkert[1] (thzs at gmx.net) - developer, project admin
 o Knut Franke (knut.franke at gmx.de) - developer, project admin
 o Roger Gadiou - documentation, screenshots
-o Tilman Hoener zu Siederdissen (thzs at gmx.net) - developer, project admin
 
+[1] birth name: Tilman Hoener zu Siederdissen
 
 === Credits ===
 
 The following people have written parts of SciDAVis, ranging from a few lines to large chunks.
+In alphabetical order:
+
+Tilman Benkert, Knut Franke
+
+SciDAVis uses code from QtiPlot, which consisted (at the time of fork) of code by the following people:
 In alphabetical order:
 
 Shen Chen, Borries Demeler, Jose Antonio Lorenzo Fernandez, Knut Franke, Vasileios Gkanis,
@@ -59,9 +65,9 @@ Knut Franke, Roger Gadiou, Ion Vasilief
 The following people have contributed translations or parts thereof.
 In alphabetical order:
 
-Markus Bongard, Tobias Burnus, Remy Claverie, Jose Antonio Lorenzo Fernandez,
-Tilman Hoener zu Siederdissen, Daniel Klaer, Peter Landgren, Tomomasa Ohkubo,
-Mikhail Shevyakov
+Tilman Benkert, Markus Bongard, Tobias Burnus, Remy Claverie, f0ma, Jose Antonio Lorenzo Fernandez,
+Daniel Klaer, Peter Landgren, Tomomasa Ohkubo,
+Mikhail Shevyakov, Mauricio Troviano
 
 We also want to acknowledge the people having helped us indirectly by contributing to the following
 fine pieces of software. In no particular order:

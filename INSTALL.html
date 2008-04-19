@@ -52,7 +52,8 @@
 				either from your package manager or from the sources.
 				If you are using precompiled packages, make sure you also install the corresponding development packages (*-dev or *-devel).
 				If you want to display the manual from within SciDAVis (you can also view it with your favorite browser),
-				you need to have the Qt Assistant installed, which sometimes comes in a separate package (qt4-dev-tools for Ubuntu edgy).</li>
+				you need to have the Qt Assistant installed, which sometimes comes in a separate package (qt4-dev-tools for Ubuntu edgy).
+				</li>
 				<li>Open a terminal window.</li>
 				<li>Get <a href="http://qwt.sourceforge.net/index.html">Qwt (>=5.0.0)</a> sources and unpack them to the 3rdparty folder:<br>
 				<code>cd scidavis-X.X.X/3rdparty<br>tar -xvjf /path/to/qwt-Y.Y.Y.tar.bz2</code></li>
@@ -61,7 +62,8 @@
 				<li>We want to build the static version of Qwt in order to avoid potential conflicts with an already installed version.
 				Open the file qwt/qwtconfig.pri and comment out the line<br>
 				<code>CONFIG += QwtDll</code></li>
-				<li>Build Qwt:<br><code>cd qwt; qmake &amp;&amp; make; cd ..</code></li>
+				<li>Build Qwt:<br><code>cd qwt; qmake &amp;&amp; make; cd ..</code><br>
+				On some systems (such as Debian, Ubuntu, ...) the <code>qmake</code>-Tool for Qt 4.x is called <code>qmake-qt4</code>. Make sure you don't use the version that belongs to Qt 3.x.
 				<li>Get <a href="http://qwtplot3d.sourceforge.net/">QwtPlot3D</a> sources and also unpack them to scidavis-X.X.X/3rdparty:<br>
 				<code>tar -xvzf qwtplot3d-Z.Z.Z.tgz</code></li>
 				<li>We also want to build a static version here, so open qwtplot3d/qwtplot3d.pro in your favorite text editor and add the line<br>
