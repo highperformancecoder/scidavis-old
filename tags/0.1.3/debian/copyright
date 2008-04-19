@@ -1,0 +1,61 @@
+This package was debianized by Burkhard Bunk <bunk@physik.hu-berlin.de> on
+Thu,  3 Jan 2008 19:21:28 +0100.
+
+It was downloaded from http://scidavis.sourceforge.net
+
+Upstream Authors:
+	Knut Franke <knut.franke@gmx.de>
+	Roger Gadiou <Roger.Gadiou@uha.fr>
+	Tilman Benkert <thzs@gmx.net>
+
+Copyright:
+	(C) 2004-2007 Ion Vasilief <ion_vasilief@yahoo.fr>
+	(C) 2006-2008 Tilman Benkert <thzs@gmx.net>
+	(C) 2006-2008 Knut Franke <knut.franke@gmx.de>
+
+License:
+
+   This package is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This package is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this package; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+On Debian systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.
+
+The Debian packaging is (C) 2008, Burkhard Bunk <bunk@physik.hu-berlin.de> and
+is licensed under the GPL, see above.
+
+qwt-5.0.2 was downloaded from
+	http://sourceforge.net/projects/qwt
+	Copyright (C) 1997   Josef Wilgen
+	Copyright (C) 2002   Uwe Rathmann
+	License: LGPL
+
+qwtplot3d-0.2.7 was downloaded from
+	http://qwtplot3d.sourceforge.net/
+	Copyright (C) 2003-2005 Michael Bieber
+	under the QwtPlot3D license, see
+	http://qwtplot3d.sourceforge.net
+
+muparser-1.28 was downloaded from
+	http://muparser.sourceforge.net/
+   	Copyright (C) 2004, 2005 Ingo Berg
+   	under the MIT license, see
+	http://www.opensource.org/licenses/mit-license.php
+
+scidavis contains liborigin code from
+	http://sourceforge.net/projects/liborigin/
+	Copyright (C) 2005-2007 Stefan Gerlach
+		  (C) 2007 by Alex Kargovsky, Ion Vasilief
+	License: GPL
+
