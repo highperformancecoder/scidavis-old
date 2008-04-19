@@ -8,8 +8,8 @@ h1. Code
 The following people have written parts of SciDAVis, ranging from a few lines to large chunks.
 In alphabetical order.
 
-Knut Franke,
-Tilman Hoener zu Siederdissen
+Tilman Benkert[1], 
+Knut Franke
 
 h2. QtiPlot
 
@@ -21,7 +21,7 @@ José Antonio Lorenzo Fernández,
 Knut Franke,
 Vasileios Gkanis,
 Gudjon Gudjonsson,
-Tilman Hoener zu Siederdissen,
+Tilman Benkert[1],
 Alex Kargovsky,
 Michael Mac-Vicar,
 Tomomasa Ohkubo,
@@ -53,7 +53,7 @@ Tobias Burnus,
 Rémy Claverie,
 f0ma,
 Jose Antonio Lorenzo Fernandez,
-Tilman Hoener zu Siederdissen,
+Tilman Benkert[1],
 Daniel Klaer,
 Peter Landgren,
 Tomomasa Ohkubo,
@@ -88,3 +88,6 @@ fine pieces of software. In no particular order.
 
 ... and many more we just forgot to mention.
 
+<br><br><br>
+<hr>
+fn1. birth name: Tilman Hoener zu Siederdissen

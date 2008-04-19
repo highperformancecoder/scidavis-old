@@ -7,8 +7,8 @@ h1. Windows
 
 Thanks to Mauricio Troviano, we have an installer for Windows.
 
-Before rushing ahead, you should know that Python and PyQt currently have to be installed manually
-in order for everything to work (instructions follow). Also, the manual is not included due to its
+The installer contains the necessary Qt dlls, is able to download and install Python 
+and provides a binary version of PyQt that works with SciDAVis. The manual is not included due to its
 size and our intention to update it in between releases. Likewise, translations currently have to be
 installed seperately. Future releases of the installer may be extended to handle these things.
 
@@ -48,7 +48,7 @@ This will create a directory "scidavis-x.y.z" with the binary and some additiona
 h1. MacOS X
 
 As of SciDAVis 0.1.2, you need to edit scidavis/scidavis.pro and replace every occurence of "LIBS +=
--L /some/directory" with "LIBS += -L/some/directory". This will be fixed in SciDAVis 0.1.3.
+-L /some/directory" with "LIBS += -L/some/directory" (remove the space character). This is fixed in SciDAVis 0.1.3.
 
 Currently, we do not have anyone to test SciDAVis on MacOS X or provide pre-compiled binaries.
 Any help in this area will be greatly appreciated.
@@ -69,16 +69,27 @@ h1. The bleeding edge (subversion repository)
 You only need to get this if you want to participate in developing SciDAVis or test the things we are
 currently working on (which is to say, they are generally unfinished and not suitable for normal usage).
 
-To check out the development version, you need a "Subversion":http://subversion.tigris.org
+To check out the code in development, you need a "Subversion":http://subversion.tigris.org
 client.
-Here's how to do it using the command-line client:
+The latest stable code can be obtained as follows:
+
+{hlblock: {blockName: svncostable, highlight: plaintext}}
+
+The code of the unstable version (possibly very unstable) can be obtained from the so-called
+'trunk' where the newest features are developed:
 
 {hlblock: {blockName: svnco, highlight: plaintext}}
 
-After that, you proceed as with the source tarballs.
+If you are interested in the development version, we highly recommend contacting us
+on the scidavis-contributers mailing list.
+
+After the svn checkout, you proceed as with the source tarballs.
+
+--- svncostable, html
+svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/branches/current_stable scidavis
 
 --- svnco, html
-svn co https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis
+svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis
 
 --- linux, html
 tar xjvf scidavis-x.y.z-linux.tar.bz2

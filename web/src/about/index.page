@@ -31,7 +31,7 @@ h1. History
 
 SciDAVis has been started as a fork off of "QtiPlot":http://qtiplot.ro with the aim of introducing some changes
 in design and establishing an open and friendly community.
-The current stable version - SciDAVis 0.1.1 - is still very close to that of QtiPlot 0.9.x,
+The current stable version - SciDAVis 0.1.3 - is still very close to that of QtiPlot 0.9.x,
 but new features and a revision of existing ones are in development. SciDAVis will soon deviate considerably from QtiPlot with our move towards a modular design and a less Origin-like interface
 (see "roadmap":roadmap.html for details).
 
