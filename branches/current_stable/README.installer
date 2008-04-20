@@ -29,6 +29,7 @@ Here's how to build the Windows installer for SciDAVis:
    QtSql4.dll
    QtSvg4.dll
    QtXml4.dll
+	assistant.exe
 	- from whever you've put QwtPlot3D -
    qwtplot3d.dll
 	- from fitPlugins\* -

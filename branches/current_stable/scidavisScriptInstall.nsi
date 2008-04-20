@@ -27,17 +27,17 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; HM NIS Edit Wizard helper defines
-!define PRODUCT_NAME "SciDaVis"
+!define PRODUCT_NAME "SciDAVis"
 !define PRODUCT_VERSION "0.1.3"
 !define PRODUCT_WEB_SITE "http://scidavis.sourceforge.net/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\scidavis.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
-!define PYTHON_URL "http://www.python.org/ftp/python/2.5.2/python-2.5.2.msi"
 !define PYTHON_INSTALLER "python-2.5.2.msi"
-!define PYQT_URL "http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-Py2.5-gpl-4.3.3-2.exe"
+!define PYTHON_URL "http://www.python.org/ftp/python/2.5.2/${PYTHON_INSTALLER}"
 !define PYQT_INSTALLER "PyQt-Py2.5-gpl-4.3.3-2.exe"
+!define PYQT_URL "http://www.riverbankcomputing.com/static/Downloads/PyQt4/${PYQT_INSTALLER}"
 
 SetCompressor /SOLID lzma
 
@@ -59,7 +59,7 @@ SetCompressor /SOLID lzma
 ; Start menu page
 var ICONS_GROUP
 !define MUI_STARTMENUPAGE_NODISABLE
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER "SciDaVis"
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER "${PRODUCT_NAME}"
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT "${PRODUCT_UNINST_ROOT_KEY}"
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "${PRODUCT_UNINST_KEY}"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "${PRODUCT_STARTMENU_REGVAL}"
@@ -84,7 +84,7 @@ var ICONS_GROUP
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "scidavis-${PRODUCT_VERSION}-setup.exe"
-InstallDir "$PROGRAMFILES\SciDaVis"
+InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
@@ -113,14 +113,15 @@ Section "Select components" SEC01
   File "scidavisrc.py"
   File "scidavisrc.pyc"
   File "scidavisUtil.py"
+  File "assistant.exe"
   SetOutPath "$INSTDIR\plugins"
   File "plugins\fitRational0.dll"
   File "plugins\fitRational1.dll"
 ; Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP"
-  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\SciDaVis.lnk" "$INSTDIR\scidavis.exe"
-  CreateShortCut "$DESKTOP\SciDaVis.lnk" "$INSTDIR\scidavis.exe"
+  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk" "$INSTDIR\scidavis.exe"
+  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\scidavis.exe"
   !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
@@ -173,12 +174,13 @@ Section Uninstall
   Delete "$INSTDIR\mingwm10.dll"
   Delete "$INSTDIR\gpl.txt"
   Delete "$INSTDIR\CHANGES.txt"
+  Delete "$INSTDIR\assistant.exe"
   Delete "$INSTDIR\plugins\fitRational1.dll"
   Delete "$INSTDIR\plugins\fitRational0.dll"
 
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
-  Delete "$DESKTOP\SciDaVis.lnk"
-  Delete "$SMPROGRAMS\$ICONS_GROUP\SciDaVis.lnk"
+  Delete "$DESKTOP\${PRODUCT_NAME}.lnk"
+  Delete "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk"
 
   RMDir "$SMPROGRAMS\$ICONS_GROUP"
   RMDir "$INSTDIR\plugins"
