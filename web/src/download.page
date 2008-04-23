@@ -27,6 +27,10 @@ h2. Debian
 Thanks to Burkhard Bunk, packages for Debian Etch are available
 "here":http://debian.physik.hu-berlin.de.
 
+h2. Fedora
+
+Thanks to Eric Tanguy, SciDAVis is now included in Fedora 8 and the following versions.
+
 h2. Other distributions
 
 For all distributions that don't have specific packages yet, we offer a universal binary.
