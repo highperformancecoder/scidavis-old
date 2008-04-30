@@ -51,11 +51,14 @@ This will create a directory "scidavis-x.y.z" with the binary and some additiona
 
 h1. MacOS X
 
-As of SciDAVis 0.1.2, you need to edit scidavis/scidavis.pro and replace every occurence of "LIBS +=
--L /some/directory" with "LIBS += -L/some/directory" (remove the space character). This is fixed in SciDAVis 0.1.3.
+Thanks to Yu-Hung Lien, a MacOS X binary for Intel Macs is available 
+"here":https://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=8143.
 
-Currently, we do not have anyone to test SciDAVis on MacOS X or provide pre-compiled binaries.
+Currently, we do not have anyone to test SciDAVis on a PowerPC based Mac or provide pre-compiled PowerPC binaries.
 Any help in this area will be greatly appreciated.
+
+Special note for compiling SciDAVis 0.1.2: before compiling you need to edit scidavis/scidavis.pro and replace every occurence of "LIBS +=
+-L /some/directory" with "LIBS += -L/some/directory" (remove the space character). This is fixed in SciDAVis 0.1.3.
 
 h1. Source tarballs
 
