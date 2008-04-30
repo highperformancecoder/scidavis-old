@@ -18,10 +18,17 @@ INSTALLS        += documentation     # README, INSTALL.html, manual (if present 
 INSTALLS        += translationfiles
 
 ### names of the lupdate and lrelease programs (needed if you want to compile and install the translations automatically)
-unix: LUPDATE_BIN = lupdate-qt4
-unix: LRELEASE_BIN = lrelease-qt4
-win32: LUPDATE_BIN = lupdate
-win32: LRELEASE_BIN = lrelease
+### (you only need to adjust the two lines for your plaform)
+win32 {                    ### Windows
+LUPDATE_BIN = lupdate
+LRELEASE_BIN = lrelease
+} else:macx {              ### MacOS X
+LUPDATE_BIN = lupdate
+LRELEASE_BIN = lrelease
+} else {                   ### Linux (and other Unix systems)
+LUPDATE_BIN = lupdate-qt4
+LRELEASE_BIN = lrelease-qt4
+}
 
 ### 64 Linux only suffix
 linux-g++-64: libsuff = 64 
