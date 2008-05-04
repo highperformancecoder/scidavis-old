@@ -196,11 +196,9 @@ Section -Requirements
   SetOutPath $INSTDIR
   ReadRegStr $3 HKLM "SOFTWARE\Python\PythonCore\2.5\InstallPath" ""
   StrCmp $3 "" 0 pythonInstFound
+  ReadRegStr $3 HKCU "SOFTWARE\Python\PythonCore\2.5\InstallPath" ""
+  StrCmp $3 "" 0 pythonInstFound
   StrCpy $4 "No Python 2.5 found on your system. Install Python 2.5 from the internet?"
-  Goto skip1
-  pythonInstFound:
-  StrCpy $4 "Python 2.5 found on your system. Install Python 2.5 from the internet nevertheless?"
-  skip1:
   MessageBox MB_YESNO $4 /SD IDYES IDNO endInstPython
         StrCpy $2 "$TEMP\${PYTHON_INSTALLER}"
         nsisdl::download /TIMEOUT=30000 ${PYTHON_URL} $2
@@ -210,7 +208,7 @@ Section -Requirements
                 Quit
 	ExecWait '"msiexec" /i "$2"'
         Delete $2
-    Goto endInstPython
+  pythonInstFound:
   endInstPython:
 
 ;;; Install PyQt and SIP provided with the installer.
@@ -220,10 +218,16 @@ Section -Requirements
 ;;; - use NSIS to make an installer out of the ZIP
   ReadRegStr $2 HKLM "SOFTWARE\Python\PythonCore\2.5\InstallPath" ""
   StrCmp $2 "" 0 pythonFound
-    MessageBox MB_OK "Could not find Python 2.5 installation (required). Aborting."
+  ReadRegStr $2 HKCU "SOFTWARE\Python\PythonCore\2.5\InstallPath" ""
+  StrCmp $2 "" 0 pythonFound
+    MessageBox MB_YESNO "Could not find Python 2.5 installation (required). Abort?" /SD IDYES IDNO continueWOPython
     Quit
   pythonFound:
     MessageBox MB_YESNO "Python found in $2. Install PyQt and SIP provided with SciDAVis now? (Recommended. PyQt binaries from Riverbank are reported to be incompatible with SciDAVis.)" /SD IDYES IDNO endExtraInst
+  Goto skip
+  continueWOPython:
+    MessageBox MB_YESNO "Do you want to install PyQt and SIP provided with SciDAVis now? (Recommended. PyQt binaries from Riverbank are reported to be incompatible with SciDAVis.) IMPORTANT: Python was not found but you must install PyQt and SIP in the same folder as Python 2.5!" /SD IDYES IDNO endExtraInst
+  skip:
     SetOutPath "$2"
     File "PyQt_SIP.exe"
     ExecWait "$2\PyQt_SIP.exe"
