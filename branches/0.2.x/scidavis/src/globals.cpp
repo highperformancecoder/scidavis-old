@@ -14,6 +14,8 @@
 #include <QObject>
 #include <QMetaObject>
 #include <QMetaEnum>
+#include <QtDebug>
+#include "ui_SciDAVisAbout.h"
 
 //  Don't forget to change the Doxyfile when changing these!
 const int SciDAVis::scidavis_version = 0x000200;
@@ -42,7 +44,7 @@ Knut Franke, Roger Gadiou\n\
 The following people have contributed translations or parts thereof.\n\
 In alphabetical order.\n\
 \n\
-Markus Bongard, Tobias Burnus, RÃ©my Claverie, f0ma, Jose Antonio Lorenzo Fernandez, Tilman Benkert[1],\n\
+Markus Bongard, Tobias Burnus, Rémy Claverie, f0ma, José Antonio Lorenzo Fernández, Tilman Benkert[1],\n\
 Daniel Klaer, Peter Landgren, Tomomasa Ohkubo, Mikhail Shevyakov, Mauricio Troviano\n\
 \n\
 --- Packagers ---\n\
@@ -57,7 +59,7 @@ Mauricio Troviano (Windows installer), Yu-Hung Lien (Intel-Mac binary)\n\
 \n\
 SciDAVis uses code from QtiPlot, which consisted (at the time of the fork, i.e. QtiPlot 0.9-rc2) of code by the following people:\n\
 \n\
-Shen Chen, Borries Demeler, JosÃ© Antonio Lorenzo FernÃ¡ndez, Knut Franke, Vasileios Gkanis, Gudjon Gudjonsson, Tilman Benkert[1], \n\
+Shen Chen, Borries Demeler, José Antonio Lorenzo Fernández, Knut Franke, Vasileios Gkanis, Gudjon Gudjonsson, Tilman Benkert[1], \n\
 Alex Kargovsky, Michael Mac-Vicar, Tomomasa Ohkubo, Aaron Van Tassle, Branimir Vasilic, Ion Vasilief, Vincent Wagelaar\n\
 \n\
 The SciDAVis manual is based on the QtiPlot manual, written by (in alphabetical order):\n\
@@ -65,7 +67,7 @@ The SciDAVis manual is based on the QtiPlot manual, written by (in alphabetical 
 Knut Franke, Roger Gadiou, Ion Vasilief\n\
 \n\
 footnotes:\n\
-[1] birth name: Tilman Hoener zu Siederdissen\n\
+[1] birth name: Tilman Höner zu Siederdissen\n\
 \n\
 === Special Thanks ===\n\
 \n\
@@ -106,20 +108,34 @@ QString SciDAVis::extraVersion()
 	return	QString(extra_version);
 }
 
-
 void SciDAVis::about()
 {
-	QString text = "<h2>"+ versionString() + extraVersion() + "</h2>";
-	text += "<h3>" + QObject::tr("Released") + ": " + QString(SciDAVis::release_date) + "</h3>";
-	text +=	"<h3>" + QString(SciDAVis::copyright_string).replace("\n", "<br>") + "</h3>";
+	QString text = QString(SciDAVis::copyright_string);
+	text.replace(QRegExp("\\[1\\]"), "<sup>1</sup>");
+	text.replace("é","&eacute;");
+	text.replace("á","&aacute;");
+	text.replace("ö", "&ouml;");
+	text.replace("\n", "<br>");
+	text.replace("=== ", "<h1>");
+	text.replace(" ===","</h1>");
+	text.replace("--- ", "<h2>");
+	text.replace(" ---","</h2>");
+	text.replace(" ---","</h2>");
+	text.replace("</h1><br><br>", "</h1>");
+	text.replace("</h2><br><br>", "</h2>");
+	text.replace("<br><h1>", "<h1>");
+	text.replace("<br><h2>", "<h2>");
 
-	QMessageBox *mb = new QMessageBox();
-	mb->setAttribute(Qt::WA_DeleteOnClose);
-	mb->setWindowTitle(QObject::tr("About SciDAVis"));
-	mb->setWindowIcon(QIcon(":/appicon"));
-	mb->setIconPixmap(QPixmap(":/appicon"));
-	mb->setText(text);
-	mb->exec();
+	QDialog *dialog = new QDialog();
+	Ui::SciDAVisAbout ui;
+	ui.setupUi(dialog);
+	dialog->setAttribute(Qt::WA_DeleteOnClose);
+	dialog->setWindowTitle(QObject::tr("About SciDAVis"));
+	ui.version_label->setText(versionString() + extraVersion());
+	ui.release_date_label->setText(QObject::tr("Released") + ": " + QString(SciDAVis::release_date));
+	ui.credits_box->setHtml(text);
+
+	dialog->exec();
 }
 
 QString SciDAVis::copyrightString()

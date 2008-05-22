@@ -30,8 +30,8 @@
 #ifndef ABSTRACT_SIMPLE_FILTER
 #define ABSTRACT_SIMPLE_FILTER
 
-#include "AbstractFilter.h"
-#include "AbstractColumn.h"
+#include "core/AbstractFilter.h"
+#include "core/AbstractColumn.h"
 #include "lib/IntervalAttribute.h"
 #include "lib/XmlStreamReader.h"
 #include <QUndoCommand>

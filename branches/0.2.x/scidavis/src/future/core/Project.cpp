@@ -28,12 +28,14 @@
  *                                                                         *
  ***************************************************************************/
 #include "core/Project.h"
+#ifndef LEGACY_CODE_0_2_x
 #include "core/ProjectWindow.h"
 #include "core/ScriptingEngineManager.h"
+#endif
 #include "core/interfaces.h"
 #include "core/globals.h"
 #include "lib/XmlStreamReader.h"
-#include "ProjectConfigPage.h"
+#include "core/ProjectConfigPage.h"
 #include <QUndoStack>
 #include <QString>
 #include <QKeySequence>
@@ -55,22 +57,30 @@ class Project::Private
 			primary_view(0),
 			scripting_engine(0) {}
 		~Private() {
+#ifndef LEGACY_CODE_0_2_x
 			delete primary_view;
+#endif
 		}
 		QUndoStack undo_stack;
 		MdiWindowVisibility mdi_window_visibility;
+#ifndef LEGACY_CODE_0_2_x
 		ProjectWindow * primary_view;
+#else
+		void * primary_view;
+#endif
 		AbstractScriptingEngine * scripting_engine;
 		QString file_name;
 };
 
 Project::Project()
-	: Folder(tr("Unnamed")), d(new Private())
+	: future::Folder(tr("Unnamed")), d(new Private())
 {
+#ifndef LEGACY_CODE_0_2_x
 	// TODO: intelligent engine choosing
 	Q_ASSERT(ScriptingEngineManager::instance()->engineNames().size() > 0);
 	QString engine_name = ScriptingEngineManager::instance()->engineNames()[0];
 	d->scripting_engine = ScriptingEngineManager::instance()->engine(engine_name);
+#endif
 
 	// TODO: how to do something like this statically?
 	// defaults for global settings
@@ -94,27 +104,44 @@ QUndoStack *Project::undoStack() const
 	return &d->undo_stack;
 }
 
+#ifndef LEGACY_CODE_0_2_x
 ProjectWindow *Project::view()
 {
 	if (!d->primary_view)
 		d->primary_view = new ProjectWindow(this);
 	return d->primary_view;
+#else
+void *Project::view()
+{
+	return NULL;
+#endif
 }
 
 QMenu *Project::createContextMenu() const
 {
+#ifndef LEGACY_CODE_0_2_x
 	return const_cast<Project *>(this)->view()->createContextMenu();
+#else
+	return NULL;
+#endif
 }
 		
-QMenu *Project::createFolderContextMenu(const Folder * folder) const
+QMenu *Project::createFolderContextMenu(const future::Folder * folder) const
 {
+#ifndef LEGACY_CODE_0_2_x
 	return const_cast<Project *>(this)->view()->createFolderContextMenu(folder);
+#else
+	Q_UNUSED(folder)
+	return NULL;
+#endif
 }
 
 void Project::setMdiWindowVisibility(MdiWindowVisibility visibility)
 { 
 	d->mdi_window_visibility = visibility; 
+#ifndef LEGACY_CODE_0_2_x
 	view()->updateMdiWindowVisibility();
+#endif
 }
 		
 Project::MdiWindowVisibility Project::mdiWindowVisibility() const 
@@ -155,7 +182,7 @@ void Project::save(QXmlStreamWriter * writer) const
 	writer->writeAttribute("version", QString::number(SciDAVis::version()));
 	// TODO: write project attributes
 	writer->writeStartElement("project_root");
-	Folder::save(writer);
+	future::Folder::save(writer);
 	writer->writeEndElement(); // "project_root"
 	writer->writeEndElement(); // "scidavis_project"
 	writer->writeEndDocument();
@@ -192,7 +219,7 @@ bool Project::load(XmlStreamReader * reader)
 					if (reader->name() == "project_root")
 					{
 						if (!reader->skipToNextTag()) return false;
-						if (!Folder::load(reader)) return false;
+						if (!future::Folder::load(reader)) return false;
 						if (!reader->skipToNextTag()) return false;
 						Q_ASSERT(reader->isEndElement() && reader->name() == "project_root");
 					}

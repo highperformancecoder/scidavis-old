@@ -39,7 +39,9 @@ class QDateTime;
 class QUndoCommand;
 class QIcon;
 class QMenu;
+namespace future{
 class Folder;
+}
 class XmlStreamReader;
 class QXmlStreamWriter;
 class QAction;
@@ -89,7 +91,7 @@ class AbstractAspect : public QObject
 		/**
 		 * The returned folder may be the aspect itself if it inherits Folder.
 		*/
-		Folder * folder();
+		future::Folder * folder();
 		//! Return whether the there is a path upwards to the given aspect
 		/**
 		 * This also returns true if other==this.

@@ -32,7 +32,7 @@
 
 #include <QUndoCommand>
 #include <QStringList>
-#include "Column.h"
+#include "core/column/Column.h"
 #include "core/AbstractSimpleFilter.h"
 #include "lib/IntervalAttribute.h"
 

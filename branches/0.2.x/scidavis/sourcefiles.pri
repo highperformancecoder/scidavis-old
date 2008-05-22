@@ -305,6 +305,76 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/ExtensibleFileDialog.cpp\
             src/OpenProjectDialog.cpp\
             src/Grid.cpp\
+            src/globals.cpp \
+
+###################### FORMS ##############################################
+FORMS +=   src/SciDAVisAbout.ui
+
+########### Future code backported from the aspect framework ##################
+DEFINES += LEGACY_CODE_0_2_x
+INCLUDEPATH  += src/future
+
+FORMS += src/future/matrix/matrixcontroltabs.ui \
+         src/future/core/ProjectConfigPage.ui
+
+HEADERS += src/future/core/AbstractAspect.h \
+           src/future/core/AbstractPart.h \
+           src/future/core/AspectPrivate.h \
+           src/future/core/aspectcommands.h \
+           src/future/core/future_Folder.h \
+           src/future/core/Project.h \
+           src/future/core/ProjectConfigPage.h \
+           src/future/core/PartMdiView.h \
+           src/future/core/AbstractColumn.h \
+           src/future/core/column/Column.h \
+           src/future/core/column/ColumnPrivate.h \
+           src/future/core/column/columncommands.h \
+           src/future/core/AbstractFilter.h \
+           src/future/core/AbstractSimpleFilter.h \
+           src/future/core/datatypes/SimpleCopyThroughFilter.h \
+           src/future/core/datatypes/DateTime2DoubleFilter.h \
+           src/future/core/datatypes/DateTime2StringFilter.h \
+           src/future/core/datatypes/DayOfWeek2DoubleFilter.h \
+           src/future/core/datatypes/Double2DateTimeFilter.h \
+           src/future/core/datatypes/Double2DayOfWeekFilter.h \
+           src/future/core/datatypes/Double2MonthFilter.h \
+           src/future/core/datatypes/Double2StringFilter.h \
+           src/future/core/datatypes/Month2DoubleFilter.h \
+           src/future/core/datatypes/String2DateTimeFilter.h \
+           src/future/core/datatypes/String2DayOfWeekFilter.h \
+           src/future/core/datatypes/String2DoubleFilter.h \
+           src/future/core/datatypes/String2MonthFilter.h \
+           src/future/lib/macros.h \
+           src/future/lib/XmlStreamReader.h \
+           src/future/lib/ActionManager.h \
+           src/future/lib/ConfigPageWidget.h \
+           src/future/matrix/future_Matrix.h \
+           src/future/matrix/MatrixModel.h \
+           src/future/matrix/MatrixView.h \
+           src/future/matrix/matrixcommands.h \
+
+SOURCES += src/future/core/AbstractAspect.cpp \
+           src/future/core/AbstractPart.cpp \
+           src/future/core/AspectPrivate.cpp \
+           src/future/core/future_Folder.cpp \
+           src/future/core/PartMdiView.cpp \
+           src/future/core/Project.cpp \
+           src/future/core/column/Column.cpp \
+           src/future/core/column/ColumnPrivate.cpp \
+           src/future/core/column/columncommands.cpp \
+           src/future/core/datatypes/DateTime2StringFilter.cpp \
+           src/future/core/datatypes/String2DateTimeFilter.cpp \
+           src/future/core/datatypes/Double2StringFilter.cpp \
+           src/future/core/AbstractSimpleFilter.cpp \
+           src/future/core/AbstractFilter.cpp \
+           src/future/core/ProjectConfigPage.cpp \
+           src/future/lib/XmlStreamReader.cpp \
+           src/future/lib/ActionManager.cpp \
+           src/future/lib/ConfigPageWidget.cpp \
+           src/future/matrix/future_Matrix.cpp \
+           src/future/matrix/MatrixModel.cpp \
+           src/future/matrix/MatrixView.cpp \
+           src/future/matrix/matrixcommands.cpp \
 
 ###############################################################
 ##################### Compression #############################

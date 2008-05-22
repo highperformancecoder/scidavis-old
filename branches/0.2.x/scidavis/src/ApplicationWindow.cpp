@@ -5015,9 +5015,7 @@ void ApplicationWindow::saveAsTemplate()
 			return;
 		}
 		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-		QString text = "SciDAVis " + QString::number((scidavis_version & 0xFF0000) >> 16) + "." + 
-			QString::number((scidavis_version & 0x00FF00) >> 8) + "." +
-			QString::number(scidavis_version & 0x0000FF) + " template file\n";
+		QString text = SciDAVis::versionString() + " template file\n";
 		text += w->saveAsTemplate(windowGeometryInfo(w));
 		QTextStream t( &f );
 		t.setEncoding(QTextStream::UnicodeUTF8);
@@ -7774,16 +7772,7 @@ void ApplicationWindow::closeWindow(MyWidget* window)
 
 void ApplicationWindow::about()
 {
-QString text = "<h2>"+ versionString() + "</h2>";
-text += "<h3>" + tr("Released") + ": " + QString(release_date) + "</h3>";
-text +=	"<h3>" + QString(copyright_string).replace("\n", "<br>") + "</h3>";
-
-QMessageBox *mb = new QMessageBox();
-mb->setWindowTitle(tr("About SciDAVis"));
-mb->setWindowIcon(QIcon(":/appicon"));
-mb->setIconPixmap(QPixmap(":/appicon"));
-mb->setText(text);
-mb->exec();
+	SciDAVis::about();
 }
 
 void ApplicationWindow::windowsMenuAboutToShow()
@@ -12280,9 +12269,10 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 		}
 		else if (str == "-v" || str == "--version")
 		{
-			QString s = versionString() + "\n";
-			s += QString(copyright_string) + "\n";
-			s += tr("Released") + ": " + release_date + "\n";
+			QString s = SciDAVis::versionString() + SciDAVis::extraVersion() + "\n";
+			s += QObject::tr("Released") + ": " + SciDAVis::releaseDateString() + "\n";
+			s += SciDAVis::copyrightString() + "\n";
+
 			#ifdef Q_OS_WIN
                 hide();
 				QMessageBox::information(this, tr("SciDAVis") + " - " + tr("Version"), s);
@@ -12829,10 +12819,7 @@ void ApplicationWindow::saveFolder(Folder *folder, const QString& fn)
 	text += "<log>\n"+logInfo+"</log>";
 	text.prepend("<windows>\t"+QString::number(windows)+"\n");
 	text.prepend("<scripting-lang>\t"+QString(scriptEnv->name())+"\n");
-	text.prepend("SciDAVis " + 
-			QString::number((scidavis_version & 0xFF0000) >> 16)+"."+ 
-			QString::number((scidavis_version & 0x00FF00) >> 8)+"."+
-			QString::number(scidavis_version & 0x0000FF) + " project file\n");
+	text.prepend(SciDAVis::versionString() + " project file\n");
 
 	QTextStream t( &f );
 	t.setEncoding(QTextStream::UnicodeUTF8);
@@ -13731,7 +13718,7 @@ void ApplicationWindow::receivedVersionFile(bool error)
 		{
 			int available_version = list.at(0).toInt() << 16 + list.at(1).toInt() << 8 +list.at(2).toInt();
 
-			if (available_version > scidavis_version)
+			if (available_version > SciDAVis::version())
 			{
 				if(QMessageBox::question(this, tr("Updates Available"),
 							tr("There is a newer version of SciDAVis (%1) available for download. Would you like to download it now?").arg(version_line),
@@ -13881,10 +13868,7 @@ ApplicationWindow::~ApplicationWindow()
 
 QString ApplicationWindow::versionString()
 {
-	return tr("SciDAVis ","usually, this should not be translated") + 
-			QString::number((scidavis_version & 0xFF0000) >> 16)+"."+ 
-			QString::number((scidavis_version & 0x00FF00) >> 8)+"."+
-			QString::number(scidavis_version & 0x0000FF) + QString(extra_version);
+	return SciDAVis::versionString();
 }
 
 

@@ -58,7 +58,7 @@
 #include <gsl/gsl_math.h>
 
 Matrix::Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
-: MyWidget(label, parent, name, f), scripted(env)
+: MyWidget(label, parent, name, f), scripted(env), d_future_matrix(0, r, c, label)
 {
 	init(r, c);
 }

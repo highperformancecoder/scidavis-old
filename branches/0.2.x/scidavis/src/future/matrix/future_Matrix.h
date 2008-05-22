@@ -28,14 +28,15 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef MATRIX_H
-#define MATRIX_H
-namespace future{
+#ifndef FUTURE_MATRIX_H
+#define FUTURE_MATRIX_H
 
-#include "future/core/AbstractScriptingEngine.h"
-#include "future/core/AbstractPart.h"
-#include "future/MatrixView.h"
-#include "future/lib/macros.h"
+#ifndef LEGACY_CODE_0_2_x
+#include "core/AbstractScriptingEngine.h"
+#endif
+#include "core/AbstractPart.h"
+#include "matrix/MatrixView.h"
+#include "lib/macros.h"
 
 class QContextMenuEvent;
 class QEvent;
@@ -47,8 +48,13 @@ class ActionManager;
 
 // TODO: move all selection related stuff to the primary view
 
+namespace future{
+#ifndef LEGACY_CODE_0_2_x
 //! Aspect providing a spreadsheet to manage MxN matrix data
 class Matrix : public AbstractPart, public scripted
+#else
+class Matrix : public AbstractPart
+#endif
 {
     Q_OBJECT
 
@@ -64,7 +70,11 @@ class Matrix : public AbstractPart, public scripted
 		 * \param cols initial number of columns
 		 * \param name object name
 		 */
+#ifndef LEGACY_CODE_0_2_x
 		Matrix(AbstractScriptingEngine *engine, int rows, int cols, const QString& name);
+#else
+		Matrix(void *, int rows, int cols, const QString& name);
+#endif
 		~Matrix();
 
 		//! Return an icon to be used for decorating my views.

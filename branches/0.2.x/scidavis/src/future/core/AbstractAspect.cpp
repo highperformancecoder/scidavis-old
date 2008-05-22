@@ -29,7 +29,7 @@
 #include "core/AbstractAspect.h"
 #include "core/AspectPrivate.h"
 #include "core/aspectcommands.h"
-#include "core/Folder.h"
+#include "core/future_Folder.h"
 #include "lib/XmlStreamReader.h"
 
 #include <QIcon>
@@ -273,13 +273,13 @@ QMenu *AbstractAspect::createContextMenu() const
 	return menu;
 }
 
-Folder * AbstractAspect::folder()
+future::Folder * AbstractAspect::folder()
 {
-	if(inherits("Folder")) return static_cast<Folder *>(this);
+	if(inherits("future::Folder")) return static_cast<future::Folder *>(this);
 	AbstractAspect * parent_aspect = parentAspect();
-	while(parent_aspect && !parent_aspect->inherits("Folder")) 
+	while(parent_aspect && !parent_aspect->inherits("future::Folder")) 
 		parent_aspect = parent_aspect->parentAspect();
-	return static_cast<Folder *>(parent_aspect);	
+	return static_cast<future::Folder *>(parent_aspect);	
 }
 
 bool AbstractAspect::isDescendantOf(AbstractAspect *other)

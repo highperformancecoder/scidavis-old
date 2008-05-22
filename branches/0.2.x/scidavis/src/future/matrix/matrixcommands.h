@@ -31,7 +31,7 @@
 #define MATRIX_COMMANDS_H
 
 #include <QUndoCommand>
-#include "future/matrix/Matrix.h"
+#include "matrix/future_Matrix.h"
 
 ///////////////////////////////////////////////////////////////////////////
 // class MatrixInsertColumnsCmd
@@ -40,7 +40,7 @@
 class MatrixInsertColumnsCmd : public QUndoCommand
 {
 public:
-	MatrixInsertColumnsCmd( Future::Matrix::Private * private_obj, int before, int count, QUndoCommand * parent = 0 );
+	MatrixInsertColumnsCmd( future::Matrix::Private * private_obj, int before, int count, QUndoCommand * parent = 0 );
 	~MatrixInsertColumnsCmd();
 
 	virtual void redo();
@@ -48,7 +48,7 @@ public:
 
 private:
 	//! The private object to modify
-	Future::Matrix::Private * d_private_obj;
+	future::Matrix::Private * d_private_obj;
 	//! Column to insert before
 	int d_before;
 	//! The number of new columns
@@ -66,7 +66,7 @@ private:
 class MatrixInsertRowsCmd : public QUndoCommand
 {
 public:
-	MatrixInsertRowsCmd( Future::Matrix::Private * private_obj, int before, int count, QUndoCommand * parent = 0 );
+	MatrixInsertRowsCmd( future::Matrix::Private * private_obj, int before, int count, QUndoCommand * parent = 0 );
 	~MatrixInsertRowsCmd();
 
 	virtual void redo();
@@ -74,7 +74,7 @@ public:
 
 private:
 	//! The private object to modify
-	Future::Matrix::Private * d_private_obj;
+	future::Matrix::Private * d_private_obj;
 	//! Row to insert before
 	int d_before;
 	//! The number of new rows
@@ -92,7 +92,7 @@ private:
 class MatrixRemoveColumnsCmd : public QUndoCommand
 {
 public:
-	MatrixRemoveColumnsCmd( Future::Matrix::Private * private_obj, int first, int count, QUndoCommand * parent = 0 );
+	MatrixRemoveColumnsCmd( future::Matrix::Private * private_obj, int first, int count, QUndoCommand * parent = 0 );
 	~MatrixRemoveColumnsCmd();
 
 	virtual void redo();
@@ -100,7 +100,7 @@ public:
 
 private:
 	//! The private object to modify
-	Future::Matrix::Private * d_private_obj;
+	future::Matrix::Private * d_private_obj;
 	//! First column to remove
 	int d_first;
 	//! The number of columns to remove
@@ -120,7 +120,7 @@ private:
 class MatrixRemoveRowsCmd : public QUndoCommand
 {
 public:
-	MatrixRemoveRowsCmd( Future::Matrix::Private * private_obj, int first, int count, QUndoCommand * parent = 0 );
+	MatrixRemoveRowsCmd( future::Matrix::Private * private_obj, int first, int count, QUndoCommand * parent = 0 );
 	~MatrixRemoveRowsCmd();
 
 	virtual void redo();
@@ -128,7 +128,7 @@ public:
 
 private:
 	//! The private object to modify
-	Future::Matrix::Private * d_private_obj;
+	future::Matrix::Private * d_private_obj;
 	//! First row to remove
 	int d_first;
 	//! The number of rows to remove
@@ -148,7 +148,7 @@ private:
 class MatrixClearCmd : public QUndoCommand
 {
 public:
-	MatrixClearCmd( Future::Matrix::Private * private_obj, QUndoCommand * parent = 0 );
+	MatrixClearCmd( future::Matrix::Private * private_obj, QUndoCommand * parent = 0 );
 	~MatrixClearCmd();
 
 	virtual void redo();
@@ -156,7 +156,7 @@ public:
 
 private:
 	//! The private object to modify
-	Future::Matrix::Private * d_private_obj;
+	future::Matrix::Private * d_private_obj;
 	//! Backups of the cleared cells
 	QVector< QVector<double> > d_backups;
 };
@@ -172,7 +172,7 @@ private:
 class MatrixClearColumnCmd : public QUndoCommand
 {
 public:
-	MatrixClearColumnCmd( Future::Matrix::Private * private_obj, int col, QUndoCommand * parent = 0 );
+	MatrixClearColumnCmd( future::Matrix::Private * private_obj, int col, QUndoCommand * parent = 0 );
 	~MatrixClearColumnCmd();
 
 	virtual void redo();
@@ -180,7 +180,7 @@ public:
 
 private:
 	//! The private object to modify
-	Future::Matrix::Private * d_private_obj;
+	future::Matrix::Private * d_private_obj;
 	//! The index of the column
 	int d_col;
 	//! Backup of the cleared column
@@ -198,7 +198,7 @@ private:
 class MatrixSetCellValueCmd : public QUndoCommand
 {
 public:
-	MatrixSetCellValueCmd( Future::Matrix::Private * private_obj, int row, int col, double value, QUndoCommand * parent = 0 );
+	MatrixSetCellValueCmd( future::Matrix::Private * private_obj, int row, int col, double value, QUndoCommand * parent = 0 );
 	~MatrixSetCellValueCmd();
 
 	virtual void redo();
@@ -206,7 +206,7 @@ public:
 
 private:
 	//! The private object to modify
-	Future::Matrix::Private * d_private_obj;
+	future::Matrix::Private * d_private_obj;
 	//! The index of the row
 	int d_row;
 	//! The index of the column
@@ -228,7 +228,7 @@ private:
 class MatrixSetCoordinatesCmd : public QUndoCommand
 {
 public:
-	MatrixSetCoordinatesCmd( Future::Matrix::Private * private_obj, double x1, double x2, double y1, double y2, QUndoCommand * parent = 0 );
+	MatrixSetCoordinatesCmd( future::Matrix::Private * private_obj, double x1, double x2, double y1, double y2, QUndoCommand * parent = 0 );
 	~MatrixSetCoordinatesCmd();
 
 	virtual void redo();
@@ -236,7 +236,7 @@ public:
 
 private:
 	//! The private object to modify
-	Future::Matrix::Private * d_private_obj;
+	future::Matrix::Private * d_private_obj;
 	double d_new_x1;
 	double d_new_x2;
 	double d_new_y1;
@@ -258,14 +258,14 @@ private:
 class MatrixSetFormatCmd : public QUndoCommand
 {
 	public:
-		MatrixSetFormatCmd( Future::Matrix::Private * private_obj, char new_format);
+		MatrixSetFormatCmd( future::Matrix::Private * private_obj, char new_format);
 
 		virtual void redo();
 		virtual void undo();
 
 	private:
 		//! The private object to modify
-		Future::Matrix::Private * d_private_obj;
+		future::Matrix::Private * d_private_obj;
 		char d_other_format;
 };
 ///////////////////////////////////////////////////////////////////////////
@@ -279,14 +279,14 @@ class MatrixSetFormatCmd : public QUndoCommand
 class MatrixSetDigitsCmd : public QUndoCommand
 {
 	public:
-		MatrixSetDigitsCmd( Future::Matrix::Private * private_obj, int new_digits);
+		MatrixSetDigitsCmd( future::Matrix::Private * private_obj, int new_digits);
 
 		virtual void redo();
 		virtual void undo();
 
 	private:
 		//! The private object to modify
-		Future::Matrix::Private * d_private_obj;
+		future::Matrix::Private * d_private_obj;
 		int d_other_digits;
 };
 ///////////////////////////////////////////////////////////////////////////
@@ -300,14 +300,14 @@ class MatrixSetDigitsCmd : public QUndoCommand
 class MatrixSetFormulaCmd : public QUndoCommand
 {
 	public:
-		MatrixSetFormulaCmd( Future::Matrix::Private * private_obj, QString formula);
+		MatrixSetFormulaCmd( future::Matrix::Private * private_obj, QString formula);
 
 		virtual void redo();
 		virtual void undo();
 
 	private:
 		//! The private object to modify
-		Future::Matrix::Private * d_private_obj;
+		future::Matrix::Private * d_private_obj;
 		QString d_other_formula;
 };
 ///////////////////////////////////////////////////////////////////////////

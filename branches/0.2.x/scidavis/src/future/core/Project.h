@@ -30,7 +30,7 @@
 #ifndef PROJECT_H
 #define PROJECT_H
 
-#include "core/Folder.h"
+#include "core/future_Folder.h"
 #include "core/interfaces.h"
 
 class QString;
@@ -43,7 +43,7 @@ class AbstractScriptingEngine;
  * Project manages an undo stack and is responsible for creating ProjectWindow instances
  * as views on itself.
  */
-class Project : public Folder
+class Project : public future::Folder
 {
 	Q_OBJECT
 
@@ -66,10 +66,14 @@ class Project : public Folder
 		virtual Project *project() { return this; }
 		virtual QUndoStack *undoStack() const;
 		virtual QString path() const { return name(); }
+#ifndef LEGACY_CODE_0_2_x
 		virtual ProjectWindow *view();
+#else
+		virtual void *view();
+#endif
 		virtual QMenu *createContextMenu() const;
 		//@}
-		virtual QMenu *createFolderContextMenu(const Folder * folder) const;
+		virtual QMenu *createFolderContextMenu(const future::Folder * folder) const;
 
 		AbstractScriptingEngine * scriptingEngine() const;
 

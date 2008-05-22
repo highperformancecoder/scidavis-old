@@ -28,11 +28,11 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#include "furture/matrix/Matrix.h"
-#include "future/core/AbstractScript.h"
-#include "furure/matrix/matrixcommands.h"
-#include "future/lib/ActionManager.h"
-#include "future/lib/XmlStreamReader.h"
+#include "matrix/future_Matrix.h"
+#include "core/AbstractScript.h"
+#include "matrix/matrixcommands.h"
+#include "lib/ActionManager.h"
+#include "lib/XmlStreamReader.h"
 
 #include <QtGlobal>
 #include <QTextStream>
@@ -70,8 +70,13 @@ namespace future{
 int Matrix::default_column_width = 120;
 int Matrix::default_row_height = 20;
 
+#ifndef LEGACY_CODE_0_2_x
 Matrix::Matrix(AbstractScriptingEngine *engine, int rows, int cols, const QString& name)
 	: AbstractPart(name), d_plot_menu(0), scripted(engine)
+#else
+Matrix::Matrix(void *, int rows, int cols, const QString& name)
+	: AbstractPart(name), d_plot_menu(0)
+#endif
 {
 	d_matrix_private = new Private(this);
 
@@ -84,8 +89,13 @@ Matrix::Matrix(AbstractScriptingEngine *engine, int rows, int cols, const QStrin
 	connectActions();
 }
 
+#ifndef LEGACY_CODE_0_2_x
 Matrix::Matrix()
 	: AbstractPart("temp"), scripted(0)
+#else
+Matrix::Matrix()
+	: AbstractPart("temp")
+#endif
 {
 	createActions();
 }

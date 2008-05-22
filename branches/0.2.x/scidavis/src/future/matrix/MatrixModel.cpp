@@ -27,13 +27,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "future/matrix/Matrix.h"
-#include "future/matrix/MatrixModel.h"
+#include "matrix/future_Matrix.h"
+#include "matrix/MatrixModel.h"
 #include <QString>
 #include <QBrush>
 #include <QColor>
 
-MatrixModel::MatrixModel(Future::Matrix * matrix)
+MatrixModel::MatrixModel(future::Matrix * matrix)
 	: QAbstractItemModel(0), d_matrix(matrix)
 {
 	connect(d_matrix, SIGNAL(columnsAboutToBeInserted(int, int)),

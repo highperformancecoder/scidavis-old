@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1">
 <context>
+    <name>AbstractAspect</name>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="75"/>
+        <source>XML read error: </source>
+        <comment>prefix for XML error messages</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="76"/>
+        <source> (loading failed)</source>
+        <comment>postfix for XML error messages</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="85"/>
+        <source>aspect name missing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="94"/>
+        <source>Invalid creation time for &apos;%1&apos;. Using current time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="115"/>
+        <source>%1: add %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="131"/>
+        <source>Renaming &quot;%1&quot; to &quot;%2&quot; in order to avoid name collision.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="129"/>
+        <source>%1: insert %2 at position %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="142"/>
+        <source>%1: remove %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="214"/>
+        <source>Intended name &quot;%1&quot; diverted to &quot;%2&quot; in order to avoid name collision.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="314"/>
+        <source>%1: remove all children.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AbstractPart</name>
+    <message>
+        <location filename="../src/future/core/AbstractPart.cpp" line="51"/>
+        <source>&amp;Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractPart.cpp" line="56"/>
+        <source>Mi&amp;nimize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/core/AbstractPart.cpp" line="61"/>
+        <source>Ma&amp;ximize</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ApplicationWindow</name>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="654"/>
@@ -8368,6 +8441,40 @@ The limits must be within the range of x; If you do not know the maximum (minimu
     </message>
 </context>
 <context>
+    <name>MatrixView</name>
+    <message>
+        <location filename="../src/future/matrix/MatrixView.cpp" line="138"/>
+        <source>Ctrl+A</source>
+        <comment>Matrix: select all</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/MatrixView.cpp" line="166"/>
+        <source>Show/hide control tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/MatrixView.cpp" line="169"/>
+        <source>Decimal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/MatrixView.cpp" line="170"/>
+        <source>Scientific (e)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/MatrixView.cpp" line="171"/>
+        <source>Scientific (E)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/MatrixView.cpp" line="465"/>
+        <source>Example: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MultiLayer</name>
     <message>
         <location filename="../src/MultiLayer.cpp" line="289"/>
@@ -10165,6 +10272,114 @@ The limits must be within the range of x; If you do not know the maximum (minimu
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/future/core/AbstractAspect.cpp" line="270"/>
+        <source>&amp;Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="38"/>
+        <source>%1: insert %2 column(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="90"/>
+        <source>%1: remove %2 column(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="125"/>
+        <source>%1: remove %2 row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="64"/>
+        <source>%1: insert %2 row(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="153"/>
+        <source>%1: set matrix size to %2x%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="160"/>
+        <source>%1: clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="320"/>
+        <source>%1: insert empty column(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="344"/>
+        <source>%1: remove selected column(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="355"/>
+        <source>%1: clear selected column(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="373"/>
+        <source>%1: insert empty rows(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="397"/>
+        <source>%1: remove selected rows(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="412"/>
+        <source>%1: clear selected rows(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="857"/>
+        <source>%1: add %2 rows(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="868"/>
+        <source>%1: add %2 column(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="195"/>
+        <source>%1: clear column %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="225"/>
+        <source>%1: set cell value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="252"/>
+        <source>%1: set matrix coordinates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="289"/>
+        <source>%1: set numeric format to &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="314"/>
+        <source>%1: set decimal digits to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/matrixcommands.cpp" line="339"/>
+        <source>%1: set formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RangeSelectorTool</name>
     <message>
         <location filename="../src/RangeSelectorTool.cpp" line="56"/>
@@ -11372,6 +11587,251 @@ The limits must be within the range of x; If you do not know the maximum (minimu
     <message>
         <location filename="../src/ExponentialFit.cpp" line="167"/>
         <source>Exponential decay</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>future::Matrix</name>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="201"/>
+        <source>%1: cut selected cell(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="247"/>
+        <source>%1: paste from clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="434"/>
+        <source>%1: clear selected cell(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="449"/>
+        <source>E&amp;xport to ASCII</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="527"/>
+        <source>Cu&amp;t</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="530"/>
+        <source>&amp;Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="533"/>
+        <source>Past&amp;e</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="539"/>
+        <source>Clea&amp;r</source>
+        <comment>clear selection</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="547"/>
+        <source>Assign &amp;Formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="554"/>
+        <source>Recalculate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="568"/>
+        <source>Select All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="575"/>
+        <source>Clear Matrix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="582"/>
+        <source>&amp;Go to Cell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="586"/>
+        <source>&amp;Dimensions</source>
+        <comment>matrix size</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="589"/>
+        <source>Set &amp;Coordinates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="592"/>
+        <source>Set Display &amp;Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="599"/>
+        <source>&amp;Insert Empty Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="606"/>
+        <source>Remo&amp;ve Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="613"/>
+        <source>Clea&amp;r Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="620"/>
+        <source>&amp;Add Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="628"/>
+        <source>&amp;Insert Empty Rows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="635"/>
+        <source>Remo&amp;ve Rows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="642"/>
+        <source>Clea&amp;r Rows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="649"/>
+        <source>&amp;Add Rows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="710"/>
+        <source>&amp;Matrix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="772"/>
+        <source>Go to Cell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="768"/>
+        <source>Enter column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="772"/>
+        <source>Enter row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="826"/>
+        <source>Set Matrix Dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="822"/>
+        <source>Enter number of columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="826"/>
+        <source>Enter number of rows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1030"/>
+        <source>invalid row or column count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1061"/>
+        <source>unknown element &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1069"/>
+        <source>no matrix element found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1082"/>
+        <source>invalid or missing numeric format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1091"/>
+        <source>invalid or missing number of displayed digits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1110"/>
+        <source>invalid x start value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1118"/>
+        <source>invalid x end value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1126"/>
+        <source>invalid y start value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1134"/>
+        <source>invalid y end value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1210"/>
+        <source>invalid or missing row index</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1164"/>
+        <source>invalid row height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1216"/>
+        <source>invalid or missing column index</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1188"/>
+        <source>invalid column width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1224"/>
+        <source>invalid cell value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1255"/>
+        <source>Hide Controls</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1257"/>
+        <source>Show Controls</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/matrix/Matrix.cpp" line="1276"/>
+        <source>Matrix</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

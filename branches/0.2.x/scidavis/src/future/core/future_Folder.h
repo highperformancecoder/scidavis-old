@@ -30,8 +30,9 @@
 #ifndef FOLDER_H
 #define FOLDER_H
 
-#include "AbstractAspect.h"
+#include "core/AbstractAspect.h"
 
+namespace future{
 //! Folder in a project
 class Folder : public AbstractAspect
 {
@@ -61,4 +62,5 @@ class Folder : public AbstractAspect
 		//@}
 };
 
+} // namespace
 #endif // ifndef FOLDER_H

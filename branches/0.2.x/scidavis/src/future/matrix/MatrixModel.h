@@ -34,7 +34,9 @@
 #include <QVector>
 #include <QColor>
 
-class Future::Matrix;
+namespace future{
+class Matrix;
+}
 
 //! Model for the access to a Matrix
 /**
@@ -50,7 +52,7 @@ class MatrixModel : public QAbstractItemModel
 
 	public:
 		//! Constructor
-		explicit MatrixModel(Future::Matrix * matrix);
+		explicit MatrixModel(future::Matrix * matrix);
 		//! Destructor
 		~MatrixModel();
 
@@ -84,7 +86,7 @@ class MatrixModel : public QAbstractItemModel
 		//@}
 
 	private:
-		Future::Matrix * d_matrix;
+		future::Matrix * d_matrix;
 }; 
 
 #endif

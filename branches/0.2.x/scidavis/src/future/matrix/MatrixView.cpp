@@ -29,12 +29,12 @@
 
 #include <limits>
 
-#include "future/matrix/Matrix.h"
-#include "future/matrix/MatrixView.h"
-#include "future/matrix/MatrixModel.h"
-#include "future/matrix/matrixcommands.h"
+#include "matrix/future_Matrix.h"
+#include "matrix/MatrixView.h"
+#include "matrix/MatrixModel.h"
+#include "matrix/matrixcommands.h"
 
-#include "future/core/AbstractFilter.h"
+#include "core/AbstractFilter.h"
 
 #include <QKeyEvent>
 #include <QtDebug>
@@ -53,7 +53,7 @@
 #include <QMenu>
 #include <QtDebug>
 
-MatrixView::MatrixView(Future::Matrix *matrix)
+MatrixView::MatrixView(future::Matrix *matrix)
  : d_matrix(matrix) 
 {
 	d_model = new MatrixModel(matrix);
@@ -117,8 +117,8 @@ void MatrixView::init()
 	h_header->setResizeMode(QHeaderView::Interactive);
 	v_header->setMovable(false);
 	h_header->setMovable(false);
-	v_header->setDefaultSectionSize(Future::Matrix::defaultRowHeight());
-	h_header->setDefaultSectionSize(Future::Matrix::defaultColumnWidth());
+	v_header->setDefaultSectionSize(future::Matrix::defaultRowHeight());
+	h_header->setDefaultSectionSize(future::Matrix::defaultColumnWidth());
 
 	v_header->installEventFilter(this);
 	h_header->installEventFilter(this);

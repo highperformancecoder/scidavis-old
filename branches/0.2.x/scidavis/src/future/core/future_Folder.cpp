@@ -28,7 +28,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "core/Project.h"
-#include "core/Folder.h"
+#include "core/future_Folder.h"
 #include "lib/XmlStreamReader.h"
 #include "core/column/Column.h"
 
@@ -39,6 +39,7 @@
 #include <QPluginLoader>
 #include <QtDebug>
 
+namespace future{
 Folder::Folder(const QString &name)
 	: AbstractAspect(name)
 {
@@ -180,3 +181,4 @@ bool Folder::readChildAspectElement(XmlStreamReader * reader)
 	return !reader->hasError();
 }
 
+} // namespace

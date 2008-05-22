@@ -47,10 +47,13 @@
 #include <QComboBox>
 #include <QSpinBox> 
 #include <QScrollArea>
-#include "furure/core/globals.h"
+#include "core/globals.h"
 #include "ui_matrixcontroltabs.h"
 
-class Future::Matrix;
+namespace future{
+class Matrix;
+}
+
 class MatrixModel;
 
 //! Helper class for MatrixView
@@ -80,7 +83,7 @@ class MatrixView : public QWidget
 
 	public:
 		//! Constructor
-		MatrixView(Future::Matrix *matrix);
+		MatrixView(future::Matrix *matrix);
 		//! Destructor
 		virtual ~MatrixView();
 		bool isControlTabBarVisible() { return d_control_tabs->isVisible(); }
@@ -193,7 +196,7 @@ class MatrixView : public QWidget
 		//! Button to toogle the visibility of #d_tool_box
 		QToolButton * d_hide_button;
 		QHBoxLayout * d_main_layout;
-		Future::Matrix * d_matrix;
+		future::Matrix * d_matrix;
 
 		//! Initialization
 		void init();

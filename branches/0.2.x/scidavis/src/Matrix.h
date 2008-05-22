@@ -40,6 +40,7 @@
 #include "ScriptingEnv.h"
 #include "Script.h"
 #include <qwt_double_rect.h>
+#include "future/matrix/future_Matrix.h"
 
 // (maximum) initial matrix size
 #define _Matrix_initial_rows_ 10
@@ -312,6 +313,8 @@ private:
 	x_end,  //!< X value corresponding to the last column
 	y_start,  //!< Y value corresponding to row 1
 	y_end;  //!< Y value corresponding to the last row
+
+	future::Matrix d_future_matrix;
 };
 
 #endif
