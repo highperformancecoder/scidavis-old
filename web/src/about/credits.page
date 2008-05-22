@@ -3,47 +3,24 @@ Title: Credits
 inMenu: true
 ---
 
-h1. Code
+h1. Credits
 
-The following people have written parts of SciDAVis, ranging from a few lines to large chunks.
+h2. Developers
+
+The following people have written parts of the SciDAVis source code, ranging from a few lines to large chunks.
 In alphabetical order.
 
 Tilman Benkert[1], 
 Knut Franke
 
-h2. QtiPlot
-
-SciDAVis uses code from QtiPlot, which consisted (at the time of fork) of code by the following people:
-
-Shen Chen,
-Borries Demeler,
-José Antonio Lorenzo Fernández,
-Knut Franke,
-Vasileios Gkanis,
-Gudjon Gudjonsson,
-Tilman Benkert[1],
-Alex Kargovsky,
-Michael Mac-Vicar,
-Tomomasa Ohkubo,
-Aaron Van Tassle,
-Branimir Vasilic,
-Ion Vasilief,
-Vincent Wagelaar
-
-h1. Documentation
+h2. Documentation
 
 The following people have written parts of the manual and/or other documentation.
 In alphabetical order.
 
 Knut Franke, Roger Gadiou
 
-h2. Manual
-
-The SciDAVis manual is based on the QtiPlot manual, written by (in alphabetical order):
-
-Knut Franke, Roger Gadiou, Ion Vasilief
-
-h1. Translations
+h2. Translations
 
 The following people have contributed translations or parts thereof.
 In alphabetical order.
@@ -60,7 +37,7 @@ Tomomasa Ohkubo,
 Mikhail Shevyakov,
 Mauricio Troviano
 
-h1. Packagers
+h2. Packagers
 
 The following people have made installing SciDAVis easier by providing specialized binary packages.
 In alphabetical order.
@@ -70,6 +47,29 @@ Quentin Denis (SUSE),
 Eric Tanguy (Fedora),
 Mauricio Troviano (Windows installer),
 Yu-Hung Lien (Intel-Mac binary)
+
+h2. QtiPlot
+
+SciDAVis uses code from QtiPlot, which consisted (at the time of the fork, i.e. QtiPlot 0.9-rc2) of code by the following people:
+
+Shen Chen,
+Borries Demeler,
+José Antonio Lorenzo Fernández,
+Knut Franke,
+Vasileios Gkanis,
+Gudjon Gudjonsson,
+Tilman Benkert[1],
+Alex Kargovsky,
+Michael Mac-Vicar,
+Tomomasa Ohkubo,
+Aaron Van Tassle,
+Branimir Vasilic,
+Ion Vasilief,
+Vincent Wagelaar
+
+The SciDAVis manual is based on the QtiPlot manual, written by (in alphabetical order):
+
+Knut Franke, Roger Gadiou, Ion Vasilief
 
 h1. Special Thanks
 
@@ -92,4 +92,4 @@ fine pieces of software. In no particular order.
 
 <br><br><br>
 <hr>
-fn1. birth name: Tilman Hoener zu Siederdissen
+fn1. birth name: Tilman H&ouml;ner zu Siederdissen
