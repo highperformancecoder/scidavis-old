@@ -1,10 +1,11 @@
 /***************************************************************************
     File                 : globals.h
     Project              : SciDAVis
+    Description          : Definition of global constants and enums
     --------------------------------------------------------------------
-    Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
-    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
-    Description          : Definition of global constants
+    Copyright            : (C) 2006-2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
+                           (replace * with @ in the email addresses) 
 
  ***************************************************************************/
 
@@ -27,20 +28,95 @@
  *                                                                         *
  ***************************************************************************/
 
-//  Don't forget to change the Doxyfile (and the splash screen) 
-//  when changing these!
-//! SciDAVis version number
-/**
- * 0xMMmmbb means MM.mm.bb with<br>
- * MM = major version
- * mm = minor version
- * bb = bugfix version
- */
-int scidavis_version = 0x000103;
-//! Extra version information string (like "-alpha", "-beta", "-rc1", etc...)
-const char * extra_version = "";
-//! Copyright string containing the author names etc.
-const char * copyright_string = "Developers (alphabetical order):\nTilman Benkert\nKnut Franke\n\nDocumentation:\nRoger Gadiou\n\nSpecial thanks to (alphabetical order):\nBurkhard Bunk\nQuentin Denis\nGudjon I. Gudjonsson\nAlex Kargovsky\nEric Tanguy\nMauricio Troviano\nIon Vasilief\n\nThanks to (no particular order):\nthe developers of Qt, Qwt, QwtPlot3D, GSL, muParser, zlib, Python, PyQt, and liborigin\nall bug reporters, translators and other contributors";
+#ifndef SCIDAVIS_GLOBALS_H
+#define SCIDAVIS_GLOBALS_H
 
-//! Release date as a string
-const char * release_date = " 2008-04-19";
+#include <QObject>
+#include <QString>
+
+//! Definition of global constants and enums
+/**
+ * This class must not be instanced. All members are static.
+ */
+class SciDAVis : public QObject
+{
+	Q_OBJECT
+	Q_ENUMS(PlotDesignation)
+	Q_ENUMS(ColumnMode)
+	Q_ENUMS(ColumnDataType)
+
+	private:
+		SciDAVis() {} // don't allow instancing
+
+	public:
+		virtual ~SciDAVis() {} // avoid the warning message
+		//! Types of plot designations
+		enum PlotDesignation
+		{
+			noDesignation = 0, //!< no plot designation
+			X = 1,  //!< x values
+			Y = 2, //!< y values 
+			Z = 3, //!< z values
+			xErr = 4, //!< x errors
+			yErr = 5 //!< y errors
+		};
+
+		//! The column mode (defines output and input filter for table columns)
+		enum ColumnMode
+		{
+			Numeric = 0, //!< column contains doubles
+			Text,        //!< column contains strings
+			Month,       //!< column contains month names
+			Day,         //!< column containts day of week names
+			DateTime,    //!< column contains dates and/or times
+		};
+
+		//! Column data type
+		enum ColumnDataType
+		{
+			TypeDouble = 1,
+			TypeQString = 2,
+			TypeQDateTime = 3
+		};
+
+		//! Return the SciDAVis version number
+		static int version();
+
+		static QString enumValueToString(int key, const QString& enum_name);
+		static int enumStringToValue(const QString& string, const QString& enum_name);
+
+		//! Return the SciDAVis version string ("SciDAVis x.y.z" without extra version)
+		static QString versionString();
+
+		//! Return the extra version as a string
+		static QString extraVersion();
+
+		//! Return the copyright string
+		static QString copyrightString();
+
+		//! Return the release date as a string
+		static QString releaseDateString();
+
+		//! Show about dialog
+		static void about();
+
+	private:
+		//  Don't forget to change the Doxyfile when changing these!
+		//! SciDAVis version number
+		/**
+		 * 0xMMmmbb means MM.mm.bb with<br>
+		 * MM = major version
+		 * mm = minor version
+		 * bb = bugfix version
+		 */
+		static const int scidavis_version;
+		//! Extra version information string (like "-alpha", "-beta", "-rc1", etc...)
+		static const char * extra_version;
+		//! Copyright string containing the author names etc.
+		static const char * copyright_string;
+		//! Release date as a string
+		static const char * release_date;
+};
+
+#endif
+
