@@ -9451,50 +9451,16 @@ Matrix* ApplicationWindow::importImage(const QString& fileName)
 {
     QImage image(fileName);
     if (image.isNull())
-        return 0;
+        return NULL;
 
-	int cols = image.width();
-	int rows = image.height();
-
-	QProgressDialog progress(this);
-	progress.setRange(0, rows);
-	progress.setMinimumWidth(width()/2);
-	progress.setWindowTitle(tr("SciDAVis") + " - " + tr("Import image..."));
-	progress.setLabelText(fileName);
-	progress.setActiveWindow();
-
-	Matrix* m = new Matrix(scriptEnv, rows, cols, "", ws);
+	Matrix* m = Matrix::fromImage(image);
+	if (!m) return NULL;
+		QMessageBox::information(0, tr("Error importing image"), tr("Import of image '%1' failed").arg(fileName));
 	m->setAttribute(Qt::WA_DeleteOnClose);
-	m->table()->blockSignals(true);
-
-	int aux = rows - 1;
-	for (int i=0; i<rows; i++ ){
-		int l = aux - i;
-		for (int j=0; j<cols; j++)
-			m->setCell(i, j, qGray(image.pixel (j, l)));
-
-		if (i%10 == 9){
-		    progress.setValue(i);
-		    QApplication::processEvents();
-		}
-
-        if (progress.wasCanceled())
-            break;
-	}
-
-	if (!progress.wasCanceled()){
-		QString caption = generateUniqueName(tr("Matrix"));
-		initMatrix(m, caption);
-    	m->show();
-    	m->setWindowLabel(fileName);
-    	m->setCaptionPolicy(MyWidget::Both);
-    	setListViewLabel(m->name(), fileName);
-    	m->table()->blockSignals(false);
-		return m;
-	} else {
-		delete m;
-		return 0;
-	}
+	QString caption = generateUniqueName(tr("Matrix"));
+	initMatrix(m, caption);
+	m->showNormal();
+	return m;
 }
 
 void ApplicationWindow::autoArrangeLayers()
@@ -9583,7 +9549,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 		if (fields[0] == "geometry") {
 			restoreWindowGeometry(app, w, *line);
 		} else if (fields[0] == "ColWidth") {
-			w->setColumnsWidth(fields[1].toInt());
+// TODO			w->setColumnsWidth(fields[1].toInt());
 		} else if (fields[0] == "Formula") {
 			w->setFormula(fields[1]);
 		} else if (fields[0] == "<formula>") {
@@ -9608,7 +9574,9 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 	}
 	if (*line == "<data>") line++;
 
-    w->table()->blockSignals(true);
+
+// TODO: is signal blocking necessary here?
+	// w->table()->blockSignals(true);
 	//read and set table values
 	for (; line!=flist.end() && *line != "</data>"; line++)
 	{
@@ -9629,7 +9597,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 		}
 		qApp->processEvents(QEventLoop::ExcludeUserInput);
 	}
-    w->table()->blockSignals(false);
+//    w->table()->blockSignals(false);
 	return w;
 }
 

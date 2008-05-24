@@ -91,7 +91,7 @@ public:
 	void setName(const char *newname) { QWidget::setObjectName(newname); updateCaption(); }
 
 	//! Return the creation date
-	QString birthDate(){return birthdate;};
+	virtual QString birthDate(){return birthdate;};
 	//! Set the creation date
 	void setBirthDate(const QString& s){birthdate = s;};
 

@@ -343,7 +343,10 @@ bool ImportOPJ::importTables(OPJFile opj)
 		matrix->setWindowLabel(opj.matrixLabel(s));
 		matrix->setFormula(opj.matrixFormula(s));
 		matrix->setColumnsWidth(opj.matrixWidth(s)*SciDAVis_scaling_factor);
+// TODO
+#if 0
 		matrix->table()->blockSignals(true);
+#endif
 		for (int j=0; j<nr_cols; j++)
 		{
 			for (int i=0; i<nr_rows; i++)
@@ -373,12 +376,20 @@ bool ImportOPJ::importTables(OPJFile opj)
 			break;
 		}
 		matrix->setNumericFormat(f, opj.matrixSignificantDigits(s));
+// TODO
+#if 0
         matrix->table()->blockSignals(false);
+#endif
 		matrix->showNormal();
 
 		//cascade the matrices
+#if 0
 		int dx=matrix->verticalHeaderWidth();
 		int dy=matrix->parentWidget()->frameGeometry().height() - matrix->height();
+#endif	
+// TODO
+		int dx = 100;
+		int dy = 100;
 		matrix->parentWidget()->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
 		visible_count++;
 

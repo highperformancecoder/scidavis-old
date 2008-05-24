@@ -30,30 +30,14 @@
  ***************************************************************************/
 #include "matrix/future_Matrix.h"
 #include "core/AbstractScript.h"
-#include "matrix/matrixcommands.h"
+#include "core/future_Folder.h"
+#include "matrixcommands.h"
 #include "lib/ActionManager.h"
 #include "lib/XmlStreamReader.h"
 
-#include <QtGlobal>
-#include <QTextStream>
-#include <QList>
-#include <QEvent>
-#include <QContextMenuEvent>
-#include <QVBoxLayout>
-#include <QMouseEvent>
-#include <QApplication>
-#include <QMessageBox>
-#include <QClipboard>
-#include <QShortcut>
-#include <QPrinter>
-#include <QPrintDialog>
-#include <QPainter>
-#include <QLocale>
-#include <QMenu>
-#include <QInputDialog>
-#include <QXmlStreamWriter>
-#include <QDateTime>
-#include <QDebug>
+#include <QtCore>
+#include <QtGui>
+#include <QtDebug>
 
 #include <stdlib.h>
 #include <math.h>
@@ -79,7 +63,6 @@ Matrix::Matrix(void *, int rows, int cols, const QString& name)
 #endif
 {
 	d_matrix_private = new Private(this);
-
 	// set initial number of rows and columns
 	appendColumns(cols);
 	appendRows(rows);
@@ -456,7 +439,7 @@ QMenu *Matrix::createContextMenu() const
 	Q_ASSERT(menu);
 	menu->addSeparator();
 	
-	new QAction(tr("E&xport to ASCII"), menu);
+	menu->addAction(action_duplicate);
 	// TODO menu->addAction( ....
 
 	return menu;
@@ -593,6 +576,21 @@ void Matrix::createActions()
 	actionManager()->addAction(action_go_to_cell, "go_to_cell"); 
 	delete icon_temp;
 
+	action_transpose = new QAction(tr("&Transpose"), this);
+	actionManager()->addAction(action_transpose, "transpose"); 
+
+	action_mirror_horizontally = new QAction(tr("Mirror &Horizontally"), this);
+	actionManager()->addAction(action_mirror_horizontally, "mirror_horizontally"); 
+
+	action_mirror_vertically = new QAction(tr("Mirror &Vertically"), this);
+	actionManager()->addAction(action_mirror_vertically, "mirror_vertically"); 
+
+	action_import_image = new QAction(tr("&Import Image", "import image as matrix"), this);
+	actionManager()->addAction(action_import_image, "import_image"); 
+	
+	action_duplicate = new QAction(QIcon(QPixmap(":/duplicate.xpm")), tr("&Duplicate", "duplicate matrix"), this);
+	actionManager()->addAction(action_duplicate, "duplicate"); 
+	
 	action_dimensions_dialog = new QAction(QIcon(QPixmap(":/resize.xpm")), tr("&Dimensions", "matrix size"), this);
 	actionManager()->addAction(action_dimensions_dialog, "dimensions_dialog"); 
 	
@@ -674,8 +672,13 @@ void Matrix::connectActions()
 //	connect(action_recalculate, SIGNAL(triggered()), this, SLOT(recalculate()));
 	connect(action_select_all, SIGNAL(triggered()), this, SLOT(selectAll()));
 	connect(action_clear_matrix, SIGNAL(triggered()), this, SLOT(clear()));
+	connect(action_transpose, SIGNAL(triggered()), this, SLOT(transpose()));
+	connect(action_mirror_horizontally, SIGNAL(triggered()), this, SLOT(mirrorHorizontally()));
+	connect(action_mirror_vertically, SIGNAL(triggered()), this, SLOT(mirrorVertically()));
 	connect(action_go_to_cell, SIGNAL(triggered()), this, SLOT(goToCell()));
 	connect(action_dimensions_dialog, SIGNAL(triggered()), this, SLOT(dimensionsDialog()));
+	connect(action_import_image, SIGNAL(triggered()), this, SLOT(importImageDialog()));
+	connect(action_duplicate, SIGNAL(triggered()), this, SLOT(duplicate()));
 	connect(action_insert_columns, SIGNAL(triggered()), this, SLOT(insertEmptyColumns()));
 	connect(action_remove_columns, SIGNAL(triggered()), this, SLOT(removeSelectedColumns()));
 	connect(action_clear_columns, SIGNAL(triggered()), this, SLOT(clearSelectedColumns()));
@@ -702,8 +705,13 @@ void Matrix::addActionsToView()
 	d_view->addAction(action_toggle_tabbar);
 	d_view->addAction(action_select_all);
 	d_view->addAction(action_clear_matrix);
+	d_view->addAction(action_transpose);
+	d_view->addAction(action_mirror_horizontally);
+	d_view->addAction(action_mirror_vertically);
 	d_view->addAction(action_go_to_cell);
 	d_view->addAction(action_dimensions_dialog);
+	d_view->addAction(action_import_image);
+	d_view->addAction(action_duplicate);
 	d_view->addAction(action_insert_columns);
 	d_view->addAction(action_remove_columns);
 	d_view->addAction(action_clear_columns);
@@ -729,6 +737,12 @@ bool Matrix::fillProjectMenu(QMenu * menu)
 	menu->addAction(action_recalculate);
 	menu->addSeparator();
 	menu->addAction(action_clear_matrix);
+	menu->addAction(action_transpose);
+	menu->addAction(action_mirror_horizontally);
+	menu->addAction(action_mirror_vertically);
+	menu->addSeparator();
+	menu->addAction(action_duplicate);
+	menu->addAction(action_import_image);
 	menu->addSeparator();
 	menu->addAction(action_go_to_cell);
 
@@ -788,9 +802,27 @@ void Matrix::goToCell()
 
 void Matrix::copy(Matrix * other)
 {
-	Q_UNUSED(other);
-	// TODO
-	QMessageBox::information(0, "info", "not yet implemented");
+	WAIT_CURSOR;
+	beginMacro(QObject::tr("%1: copy %2").arg(name()).arg(other->name()));
+	int rows = other->rowCount();
+	int columns = other->columnCount();
+	setDimensions(rows, columns);
+	for (int i=0; i<rows; i++)
+		setRowHeight(i, other->rowHeight(i));
+	for (int i=0; i<columns; i++)
+		setColumnWidth(i, other->columnWidth(i));
+	d_matrix_private->blockChangeSignals(true);
+	for (int i=0; i<columns; i++)
+		setColumnCells(i, 0, rows-1, other->columnCells(i, 0, rows-1));
+	setCoordinates(other->xStart(), other->xEnd(), other->yStart(), other->yEnd());
+	setNumericFormat(other->numericFormat());
+	setDisplayedDigits(other->displayedDigits());
+	setFormula(other->formula());
+	d_matrix_private->blockChangeSignals(false);
+	emit dataChanged(0, 0, rows-1, columns-1);
+	if (d_view) d_view->rereadSectionSizes();
+	endMacro();
+	RESET_CURSOR;
 }
 
 void Matrix::setPlotMenu(QMenu * menu)
@@ -838,6 +870,45 @@ void Matrix::dimensionsDialog()
 	if ( !ok ) return;
 	
 	setDimensions(rows, cols);
+}
+
+void Matrix::importImageDialog()
+{
+	QList<QByteArray> formats = QImageReader::supportedImageFormats();
+	QString filter = tr("Images") + " (";
+	for (int i=0; i<formats.count(); i++)
+		filter += " *."+formats.at(i)+" ";
+	filter += ");;";
+	for (int i=0; i<formats.count(); i++)
+		filter += " *."+formats.at(i)+" (*." + formats.at(i) +");;";
+
+	QString images_path = global("images_path").toString();
+	QString file_name = QFileDialog::getOpenFileName(0, tr("Import image from file"), images_path, filter);
+	if ( !file_name.isEmpty() )
+	{
+		QFileInfo file_info(file_name);
+		images_path = file_info.canonicalPath();
+		setGlobal("images_path", images_path);
+		QImage image(file_name);
+		Matrix * matrix = NULL;
+		if (!image.isNull())
+			matrix = Matrix::fromImage(image);
+		if (matrix)
+		{
+			copy(matrix);
+			delete matrix;
+		}
+		else
+			QMessageBox::information(0, tr("Error importing image"), tr("Import of image '%1' failed").arg(file_name));
+	}
+}
+
+void Matrix::duplicate()
+{
+	Matrix * matrix = new Matrix(0, rowCount(), columnCount(), name());
+	matrix->copy(this);
+	if (folder())
+		folder()->addChild(matrix);
 }
 
 void Matrix::editFormat()
@@ -1267,6 +1338,51 @@ void Matrix::adjustTabBarAction(bool visible)
 		action_toggle_tabbar->setText(tr("Show Controls"));
 }
 
+QVector<double> Matrix::columnCells(int col, int first_row, int last_row)
+{
+	return d_matrix_private->columnCells(col, first_row, last_row);
+}
+
+void Matrix::setColumnCells(int col, int first_row, int last_row, const QVector<double> & values)
+{
+	WAIT_CURSOR;
+	exec(new MatrixSetColumnCellsCmd(d_matrix_private, col, first_row, last_row, values));
+	RESET_CURSOR;
+}
+
+QVector<double> Matrix::rowCells(int row, int first_column, int last_column)
+{
+	return d_matrix_private->rowCells(row, first_column, last_column);
+}
+
+void Matrix::setRowCells(int row, int first_column, int last_column, const QVector<double> & values)
+{
+	WAIT_CURSOR;
+	exec(new MatrixSetRowCellsCmd(d_matrix_private, row, first_column, last_column, values));
+	RESET_CURSOR;
+}
+
+void Matrix::transpose()
+{
+	WAIT_CURSOR;
+	exec(new MatrixTransposeCmd(d_matrix_private));
+	RESET_CURSOR;
+}
+
+void Matrix::mirrorHorizontally()
+{
+	WAIT_CURSOR;
+	exec(new MatrixMirrorHorizontallyCmd(d_matrix_private));
+	RESET_CURSOR;
+}
+
+void Matrix::mirrorVertically()
+{
+	WAIT_CURSOR;
+	exec(new MatrixMirrorVerticallyCmd(d_matrix_private));
+	RESET_CURSOR;
+}
+
 /* ========================= static methods ======================= */
 ActionManager * Matrix::action_manager = 0;
 
@@ -1288,11 +1404,52 @@ void Matrix::initActionManager()
 	delete action_creator;
 }
 
+Matrix * Matrix::fromImage(const QImage & image)
+{
+	int cols = image.width();
+	int rows = image.height();
+
+	QProgressDialog progress;
+	progress.setRange(0, cols);
+	progress.setWindowTitle(tr("SciDAVis") + " - " + tr("Import image..."));
+	progress.raise();
+
+	Matrix * matrix = new Matrix(0, rows, cols, tr("Matrix %1").arg(1));
+
+	QVector<double> values;
+	values.resize(rows);
+
+	for (int i=0; i<cols; i++)
+	{
+		for (int j=0; j<rows; j++)
+			values[j] = qGray(image.pixel(i, rows - 1 - j));
+		
+		matrix->setColumnCells(i, 0, rows-1, values);
+
+		if (i%5 == 4)
+		{
+		    progress.setValue(i);
+		    QApplication::processEvents();
+		}
+
+        if (progress.wasCanceled())
+            break;
+	}
+
+	if (progress.wasCanceled())
+	{
+		delete matrix;
+		return NULL;
+	}
+	return matrix;
+}
+
 /* ========================== Matrix::Private ====================== */
 
 Matrix::Private::Private(Matrix *owner) 
 	: d_owner(owner), d_column_count(0), d_row_count(0) 
 {
+	d_block_change_signals = false;
 	d_numeric_format = 'f';
 	d_displayed_digits = 6;
 	d_x_start = 0.0;
@@ -1370,7 +1527,8 @@ void Matrix::Private::setCell(int row, int col, double value)
 	Q_ASSERT(row >= 0 && row < d_row_count);
 	Q_ASSERT(col >= 0 && col < d_column_count);
 	d_data[col][row] = value;
-	emit d_owner->dataChanged(row, col, row, col);
+	if (!d_block_change_signals)
+		emit d_owner->dataChanged(row, col, row, col);
 }
 
 QVector<double> Matrix::Private::columnCells(int col, int first_row, int last_row)
@@ -1387,7 +1545,7 @@ QVector<double> Matrix::Private::columnCells(int col, int first_row, int last_ro
 	return result;
 }
 
-void Matrix::Private::setColumnCells(int col, int first_row, int last_row, QVector<double> values)
+void Matrix::Private::setColumnCells(int col, int first_row, int last_row, const QVector<double> & values)
 {
 	Q_ASSERT(first_row >= 0 && first_row < d_row_count);
 	Q_ASSERT(last_row >= 0 && last_row < d_row_count);
@@ -1397,18 +1555,45 @@ void Matrix::Private::setColumnCells(int col, int first_row, int last_row, QVect
 	{
 		d_data[col] = values;
 		d_data[col].resize(d_row_count);  // values may be larger
+		if (!d_block_change_signals)
+			emit d_owner->dataChanged(first_row, col, last_row, col);
 		return;
 	}
 
 	for(int i=first_row; i<=last_row; i++)
 		d_data[col][i] = values.at(i-first_row);
-	emit d_owner->dataChanged(first_row, col, last_row, col);
+	if (!d_block_change_signals)
+		emit d_owner->dataChanged(first_row, col, last_row, col);
+}
+
+QVector<double> Matrix::Private::rowCells(int row, int first_column, int last_column)
+{
+	Q_ASSERT(first_column >= 0 && first_column < d_column_count);
+	Q_ASSERT(last_column >= 0 && last_column < d_column_count);
+
+	QVector<double> result;
+	for(int i=first_column; i<=last_column; i++)
+		result.append(d_data.at(i).at(row));
+	return result;
+}
+
+void Matrix::Private::setRowCells(int row, int first_column, int last_column, const QVector<double> & values)
+{
+	Q_ASSERT(first_column >= 0 && first_column < d_column_count);
+	Q_ASSERT(last_column >= 0 && last_column < d_column_count);
+	Q_ASSERT(values.count() > last_column - first_column);
+
+	for(int i=first_column; i<=last_column; i++)
+		d_data[i][row] = values.at(i-first_column);
+	if (!d_block_change_signals)
+		emit d_owner->dataChanged(row, first_column, row, last_column);
 }
 
 void Matrix::Private::clearColumn(int col)
 {
 	d_data[col].fill(0.0);
-	emit d_owner->dataChanged(0, col, d_row_count-1, col);
+	if (!d_block_change_signals)
+		emit d_owner->dataChanged(0, col, d_row_count-1, col);
 }
 
 double Matrix::Private::xStart() const

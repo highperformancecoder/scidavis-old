@@ -36,6 +36,7 @@
 #include <QContextMenuEvent>
 #include <QEvent>
 #include <QHeaderView>
+#include <QDateTime>
 #include "MyWidget.h"
 #include "ScriptingEnv.h"
 #include "Script.h"
@@ -45,23 +46,6 @@
 // (maximum) initial matrix size
 #define _Matrix_initial_rows_ 10
 #define _Matrix_initial_columns_ 3
-
-//! Helper class for Matrix
-class TableWidget : public QTableWidget
-{
-    Q_OBJECT
-
-	public:
-		TableWidget(QWidget * parent = 0) : QTableWidget(parent) {};
-		TableWidget(int rows, int columns, QWidget * parent = 0) : QTableWidget(rows, columns, parent) {}
-
-	protected:
-		//! Overloaded function (cf. Qt documentation)
-		virtual void keyPressEvent( QKeyEvent * event );
-
-	signals:
-		void advanceCell();
-};
 
 //! Matrix worksheet class
 class Matrix: public MyWidget, public scripted
@@ -94,7 +78,8 @@ public:
 	void setNumCols(int cols);
 
 	//! Returns whether the row is empty or not
-	bool isEmptyRow(int row);
+	// TODO: is this used anywhere at all?
+//	bool isEmptyRow(int row);
 
 	//event handlers
 	/*!
@@ -104,8 +89,6 @@ public:
 	 * title bar.
 	 */
 	bool eventFilter(QObject *object, QEvent *e);
-	//! Context menu event handler
-	void contextMenuEvent(QContextMenuEvent *e);
 	//! Custom event handler
 	/**
 	 * Currently handles SCRIPTING_CHANGE_EVENT only.
@@ -120,12 +103,20 @@ public slots:
 	void print();
 	//! Print the Matrix to fileName
 	void print(const QString& fileName);
+#if 0
 	//! Called if any cell value was changed
 	void cellEdited(int,int);
+#endif
+	void handleChange();
 
+#if 0
 	//! Return the width of all columns
 	int columnsWidth();
-	//! Set the width of all columns
+#endif
+	//! Set the width of all columns (obsolete, only for OPJ import)
+	/**
+	 * Don't uses this. Use view()->setColumnWidth(column, width) instead.
+	 */
 	void setColumnsWidth(int width);
 
 	//! Set the Matrix size
@@ -137,7 +128,7 @@ public slots:
 	//! Calculate the determinant of the matrix
 	double determinant();
 
-	//! Calculate matrix values using the #formula_str
+	//! Calculate matrix values using the formula
 	bool calculate(int startRow = 0, int endRow = -1, int startCol = 0, int endCol = -1);
 
 	//! Return the content of the cell as a string
@@ -154,20 +145,20 @@ public slots:
 	 *
 	 * \sa setNumerFormat(), setTextFormat()
 	 */
-	QChar textFormat(){return txt_format;};
+	QChar textFormat() {return d_future_matrix->numericFormat();};
 	/*!
 	 * \brief Return the number precision digits
 	 *
 	 * See arguments of setNumericFormat().
 	 * \sa setNumericFormat(), setTextFormat()
 	 */
-	int precision(){return num_precision;};
+	int precision() {return d_future_matrix->displayedDigits();};
 	/*!
 	 * \brief Set the number of significant digits
 	 *
 	 * \sa precision(), setNumericFormat(), setTextFormat()
 	 */
-	void setNumericPrecision(int prec){num_precision = prec;};
+	void setNumericPrecision(int prec) { d_future_matrix->setDisplayedDigits(prec);};
 
 	/*!
 	 * \brief Set the number format for the cells
@@ -199,8 +190,6 @@ public slots:
 	//! Set the matrix forumla
 	void setFormula(const QString &s);
 
-	//! Load the matrix from a string list (i.e. lines from a project file)
-	void restore(const QStringList &l);
 	//! Format the matrix format in a string to save it in a template file
 	QString saveAsTemplate(const QString &info);
 
@@ -257,23 +246,21 @@ public slots:
 	void forgetSavedCells();
 
 	//! Return the X value corresponding to column 1
-	double xStart(){return x_start;};
+	double xStart(){return d_future_matrix->xStart();};
 	//! Return the X value corresponding to the last column
-	double xEnd(){return x_end;};
+	double xEnd(){return d_future_matrix->xEnd();};
 	//! Return the Y value corresponding to row 1
-	double yStart(){return y_start;};
+	double yStart(){return d_future_matrix->yStart();};
 	//! Return the Y value corresponding to the last row
-	double yEnd(){return y_end;};
+	double yEnd(){return d_future_matrix->yEnd();};
 
 	//! Returns the bounding rect of the matrix coordinates
-  	QwtDoubleRect boundingRect(){return QwtDoubleRect(x_start, y_start, x_end-x_start, y_end-y_start).normalized();};
+  	QwtDoubleRect boundingRect() {return QwtDoubleRect(xStart(), yStart(), xEnd()-xStart(), yEnd()-yStart()).normalized();};
 	//! Set the X and Y coordinate intervals
 	void setCoordinates(double xs, double xe, double ys, double ye);
 
 	 //! Min and max values of the matrix.
   	void range(double *min, double *max);
-	//! Return a pointer to the TableWidget
-	TableWidget* table(){return d_table;};
 
 	//! Scroll to cell
 	void goToCell(int row, int col);
@@ -283,13 +270,11 @@ public slots:
 	//! Free memory used for a matrix buffer
 	static void freeMatrixData(double **data, int rows);
 
-	int verticalHeaderWidth(){return table()->verticalHeader()->width();}
-
+	static Matrix * fromImage(const QImage & image);
     void copy(Matrix *m);
-
-protected slots:
-		//! Advance current cell after [Return] or [Enter] was pressed
-		void advanceCell();
+	
+	//! Return the creation date
+	virtual QString birthDate(){return d_future_matrix->creationTime().toString(Qt::LocalDate); };
 
 signals:
 	//! Show the context menu
@@ -299,14 +284,7 @@ private:
 	//! Initialize the matrix
 	void init(int rows, int cols);
 
-	//! Pointer to the table widget
-	TableWidget *d_table;
-	//! Last formula used to calculate cell values
-	QString formula_str;
-	//! Format code for displaying numbers
-	QChar txt_format;
-	//! Number of significant digits
-	int num_precision;
+	MatrixView *d_view;
 	//! Stores the matrix data only before the user opens the matrix dialog in order to avoid data loses during number format changes.
 	double **dMatrix;
 	double x_start, //!< X value corresponding to column 1
@@ -314,7 +292,7 @@ private:
 	y_start,  //!< Y value corresponding to row 1
 	y_end;  //!< Y value corresponding to the last row
 
-	future::Matrix d_future_matrix;
+	future::Matrix *d_future_matrix;
 };
 
 #endif

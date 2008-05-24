@@ -80,8 +80,14 @@ MatrixDialog::MatrixDialog( Matrix *matrix, QWidget *parent, Qt::WFlags fl )
 	mainLayout->addLayout(topLayout);
 	mainLayout->addLayout(bottomLayout);
 
+// TODO MatrixDialog is obsolete
+#if 0
 	d_initial_col_width = matrix->columnsWidth();
     boxColWidth->setValue(matrix->columnsWidth());
+#else
+	d_initial_col_width = 100;
+    boxColWidth->setValue(100);
+#endif
 
     if (matrix->textFormat() == 'f')
 		boxFormat->setCurrentIndex(0);
@@ -109,14 +115,14 @@ void MatrixDialog::changePrecision(int precision)
 
 void MatrixDialog::apply()
 {
-	d_matrix->setColumnsWidth(boxColWidth->value());
+//	d_matrix->setColumnsWidth(boxColWidth->value());
     changePrecision(boxPrecision->value());
-	d_initial_col_width = d_matrix->columnsWidth();
+//	d_initial_col_width = d_matrix->columnsWidth();
 }
 
 void MatrixDialog::cancel()
 {
-    d_matrix->setColumnsWidth(d_initial_col_width);
+//    d_matrix->setColumnsWidth(d_initial_col_width);
 	close();
 }
 

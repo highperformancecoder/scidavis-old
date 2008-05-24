@@ -355,3 +355,183 @@ void MatrixSetFormulaCmd::undo()
 // end of class MatrixSetFormulaCmd
 ///////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////
+// class MatrixSetColumnCellsCmd
+///////////////////////////////////////////////////////////////////////////
+MatrixSetColumnCellsCmd::MatrixSetColumnCellsCmd( future::Matrix::Private * private_obj, int col, int first_row, 
+		int last_row, const QVector<double> & values, QUndoCommand * parent)
+ : QUndoCommand( parent ), d_private_obj(private_obj), d_col(col), d_first_row(first_row), 
+ 		d_last_row(last_row), d_values(values)
+{
+	setText(QObject::tr("%1: set cell values").arg(d_private_obj->name()));
+}
+
+MatrixSetColumnCellsCmd::~MatrixSetColumnCellsCmd()
+{
+}
+
+void MatrixSetColumnCellsCmd::redo()
+{
+	if (d_old_values.isEmpty())
+		d_old_values = d_private_obj->columnCells(d_col, d_first_row, d_last_row);
+	d_private_obj->setColumnCells(d_col, d_first_row, d_last_row, d_values);
+}
+
+void MatrixSetColumnCellsCmd::undo()
+{
+	d_private_obj->setColumnCells(d_col, d_first_row, d_last_row, d_old_values);
+}
+///////////////////////////////////////////////////////////////////////////
+// end of class MatrixSetColumnCellsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class MatrixSetRowCellsCmd
+///////////////////////////////////////////////////////////////////////////
+MatrixSetRowCellsCmd::MatrixSetRowCellsCmd( future::Matrix::Private * private_obj, int row, int first_column, 
+		int last_column, const QVector<double> & values, QUndoCommand * parent)
+ : QUndoCommand( parent ), d_private_obj(private_obj), d_row(row), d_first_column(first_column), 
+ 		d_last_column(last_column), d_values(values)
+{
+	setText(QObject::tr("%1: set cell values").arg(d_private_obj->name()));
+}
+
+MatrixSetRowCellsCmd::~MatrixSetRowCellsCmd()
+{
+}
+
+void MatrixSetRowCellsCmd::redo()
+{
+	if (d_old_values.isEmpty())
+		d_old_values = d_private_obj->rowCells(d_row, d_first_column, d_last_column);
+	d_private_obj->setRowCells(d_row, d_first_column, d_last_column, d_values);
+}
+
+void MatrixSetRowCellsCmd::undo()
+{
+	d_private_obj->setRowCells(d_row, d_first_column, d_last_column, d_old_values);
+}
+///////////////////////////////////////////////////////////////////////////
+// end of class MatrixSetRowCellsCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class MatrixTransposeCmd
+///////////////////////////////////////////////////////////////////////////
+MatrixTransposeCmd::MatrixTransposeCmd( future::Matrix::Private * private_obj, QUndoCommand * parent)
+ : QUndoCommand( parent ), d_private_obj(private_obj)
+{
+	setText(QObject::tr("%1: transpose").arg(d_private_obj->name()));
+}
+
+MatrixTransposeCmd::~MatrixTransposeCmd()
+{
+}
+
+void MatrixTransposeCmd::redo()
+{
+	int rows = d_private_obj->rowCount();
+	int cols = d_private_obj->columnCount();
+	int temp_size = qMax(rows, cols);
+	d_private_obj->blockChangeSignals(true);
+	if (cols < rows)
+		d_private_obj->insertColumns(cols, temp_size - cols);
+	else if (cols > rows)
+		d_private_obj->insertRows(rows, temp_size - rows);
+	for(int i = 1; i<temp_size; i++)
+	{
+		QVector<double> row = d_private_obj->rowCells(i, 0, i-1);
+		QVector<double> col = d_private_obj->columnCells(i, 0, i-1);
+		d_private_obj->setRowCells(i, 0, i-1, col);
+		d_private_obj->setColumnCells(i, 0, i-1, row);
+	}
+	if (cols < rows)
+		d_private_obj->removeRows(cols, temp_size - cols);
+	else if (cols > rows)
+		d_private_obj->removeColumns(rows, temp_size - rows);
+	d_private_obj->blockChangeSignals(false);
+	d_private_obj->emitDataChanged(0, 0, d_private_obj->rowCount()-1, d_private_obj->columnCount()-1);
+}
+
+void MatrixTransposeCmd::undo()
+{
+	redo();
+}
+///////////////////////////////////////////////////////////////////////////
+// end of class MatrixTransposeCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class MatrixMirrorHorizontallyCmd
+///////////////////////////////////////////////////////////////////////////
+MatrixMirrorHorizontallyCmd::MatrixMirrorHorizontallyCmd( future::Matrix::Private * private_obj, QUndoCommand * parent)
+ : QUndoCommand( parent ), d_private_obj(private_obj)
+{
+	setText(QObject::tr("%1: mirror horizontally").arg(d_private_obj->name()));
+}
+
+MatrixMirrorHorizontallyCmd::~MatrixMirrorHorizontallyCmd()
+{
+}
+
+void MatrixMirrorHorizontallyCmd::redo()
+{
+	int rows = d_private_obj->rowCount();
+	int cols = d_private_obj->columnCount();
+	int middle = cols/2;
+	d_private_obj->blockChangeSignals(true);
+	for(int i = 0; i<middle; i++)
+	{
+		QVector<double> temp = d_private_obj->columnCells(i, 0, rows-1);
+		d_private_obj->setColumnCells(i, 0, rows-1, d_private_obj->columnCells(cols-i-1, 0, rows-1));
+		d_private_obj->setColumnCells(cols-i-1, 0, rows-1, temp);
+	}
+	d_private_obj->blockChangeSignals(false);
+	d_private_obj->emitDataChanged(0, 0, rows-1, cols-1);
+}
+
+void MatrixMirrorHorizontallyCmd::undo()
+{
+	redo();
+}
+///////////////////////////////////////////////////////////////////////////
+// end of class MatrixMirrorHorizontallyCmd
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// class MatrixMirrorVerticallyCmd
+///////////////////////////////////////////////////////////////////////////
+MatrixMirrorVerticallyCmd::MatrixMirrorVerticallyCmd( future::Matrix::Private * private_obj, QUndoCommand * parent)
+ : QUndoCommand( parent ), d_private_obj(private_obj)
+{
+	setText(QObject::tr("%1: mirror vertically").arg(d_private_obj->name()));
+}
+
+MatrixMirrorVerticallyCmd::~MatrixMirrorVerticallyCmd()
+{
+}
+
+void MatrixMirrorVerticallyCmd::redo()
+{
+	int rows = d_private_obj->rowCount();
+	int cols = d_private_obj->columnCount();
+	int middle = rows/2;
+	d_private_obj->blockChangeSignals(true);
+	for(int i = 0; i<middle; i++)
+	{
+		QVector<double> temp = d_private_obj->rowCells(i, 0, cols-1);
+		d_private_obj->setRowCells(i, 0, cols-1, d_private_obj->rowCells(rows-i-1, 0, cols-1));
+		d_private_obj->setRowCells(rows-i-1, 0, cols-1, temp);
+	}
+	d_private_obj->blockChangeSignals(false);
+	d_private_obj->emitDataChanged(0, 0, rows-1, cols-1);
+}
+
+void MatrixMirrorVerticallyCmd::undo()
+{
+	redo();
+}
+///////////////////////////////////////////////////////////////////////////
+// end of class MatrixMirrorVerticallyCmd
+///////////////////////////////////////////////////////////////////////////
+

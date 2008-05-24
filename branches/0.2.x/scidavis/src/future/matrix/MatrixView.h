@@ -155,6 +155,7 @@ class MatrixView : public QWidget
 
 
 	public slots:
+		void rereadSectionSizes();
 		void goToCell(int row, int col);
 		void selectAll();
 		void toggleControlTabBar();

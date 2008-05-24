@@ -160,6 +160,8 @@ void MatrixValuesDialog::setMatrix(Matrix* m)
     if (!m)
         return;
 
+// TODO
+#if 0
 	matrix = m;
 	commands->setText(m->formula());
 	commands->setContext(m);
@@ -187,6 +189,7 @@ void MatrixValuesDialog::setMatrix(Matrix* m)
         endCol->setValue(m->numCols());
         endRow->setValue(m->numRows());
     }
+#endif
 }
 
 void MatrixValuesDialog::setFunctions()
