@@ -135,6 +135,8 @@ public slots:
 
 	//! Calculate matrix values using the formula
 	bool calculate(int startRow = 0, int endRow = -1, int startCol = 0, int endCol = -1);
+	//! Calculate matrix values using the formula for all selected cells
+	bool recalculate();
 
 	//! Return the content of the cell as a string
 	QString text(int row, int col);
@@ -230,12 +232,6 @@ public slots:
 	void deleteSelectedColumns();
 	//! Return the number of selected columns
 	int numSelectedColumns();
-	//! Returns whether a column contains selected cells (full=false) or is fully selected (full=true)
-	bool isColumnSelected(int col, bool full=false);
-	//! Returns whether a row contains selected cells (full=false) or is fully selected (full=true)
-	bool isRowSelected(int row, bool full=false);
-	//! Return the first fully selected column or -1 if no column is fully selected
-	int firstSelectedColumn();
 
 	/*!
 	 * \brief Temporally save the cell values to memory
@@ -267,9 +263,6 @@ public slots:
 	 //! Min and max values of the matrix.
   	void range(double *min, double *max);
 
-	//! Scroll to cell
-	void goToCell(int row, int col);
-
 	//! Allocate memory for a matrix buffer
 	static double** allocateMatrixData(int rows, int columns);
 	//! Free memory used for a matrix buffer
@@ -285,17 +278,17 @@ signals:
 	//! Show the context menu
 	void showContextMenu();
 
+protected slots:
+    void applyFormula();
+	void addFunction();
+	void addCell();
+
 private:
 	//! Initialize the matrix
 	void init(int rows, int cols);
 
-	MatrixView *d_view;
 	//! Stores the matrix data only before the user opens the matrix dialog in order to avoid data loses during number format changes.
 	double **dMatrix;
-	double x_start, //!< X value corresponding to column 1
-	x_end,  //!< X value corresponding to the last column
-	y_start,  //!< Y value corresponding to row 1
-	y_end;  //!< Y value corresponding to the last row
 
 };
 

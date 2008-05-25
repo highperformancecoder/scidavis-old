@@ -30,6 +30,8 @@
  *                                                                         *
  ***************************************************************************/
 #include "Matrix.h"
+#include "future/matrix/MatrixView.h"
+#include "ScriptEdit.h"
 
 #include <QtGlobal>
 #include <QTextStream>
@@ -68,7 +70,6 @@ void Matrix::init(int rows, int cols)
 {	
 	MatrixView::setMatrix(d_future_matrix);	
 	d_future_matrix->setView(this);	
-	d_view = this;	
 	d_future_matrix->setNumericFormat('f');
 	d_future_matrix->setDisplayedDigits(6);
 	d_future_matrix->setCoordinates(1.0, 10.0, 1.0, 10.0);
@@ -77,9 +78,28 @@ void Matrix::init(int rows, int cols)
 
 	setBirthDate(d_future_matrix->creationTime().toString(Qt::LocalDate));
 
+	// this is not very nice but works for the moment
+	ui.gridLayout2->removeWidget(ui.formula_box);
+	delete ui.formula_box;
+    ui.formula_box = new ScriptEdit(scriptEnv, ui.formula_tab);
+    ui.formula_box->setObjectName(QString::fromUtf8("formula_box"));
+    ui.formula_box->setMinimumSize(QSize(60, 10));
+    ui.formula_box->setAcceptRichText(false);
+	ui.gridLayout2->addWidget(ui.formula_box, 1, 0, 1, 3);
+
+	ui.add_cell_combobox->addItem("cell(i, j)");
+	ui.add_function_combobox->addItems(scriptEnv->mathFunctions());
+
+	connect(ui.button_set_formula, SIGNAL(pressed()), 
+		this, SLOT(applyFormula()));
+	connect(ui.add_function_button, SIGNAL(pressed()), 
+		this, SLOT(addFunction()));
+	connect(ui.add_cell_button, SIGNAL(pressed()), 
+		this, SLOT(addCell()));
+
 	// keyboard shortcuts
 	QShortcut * sel_all = new QShortcut(QKeySequence(tr("Ctrl+A", "Matrix: select all")), this);
-	connect(sel_all, SIGNAL(activated()), d_view, SLOT(selectAll()));
+	connect(sel_all, SIGNAL(activated()), this, SLOT(selectAll()));
 	// remark: the [TAB] behaviour is now nicely done by Qt4
 
 	connect(d_future_matrix, SIGNAL(columnsInserted(int, int)), this, SLOT(handleChange()));
@@ -91,13 +111,6 @@ void Matrix::init(int rows, int cols)
 	connect(d_future_matrix, SIGNAL(formulaChanged()), this, SLOT(handleChange()));
 	connect(d_future_matrix, SIGNAL(formatChanged()), this, SLOT(handleChange()));
 
-#if 0
-	connect(d_view, SIGNAL(cellChanged(int,int)), this, SLOT(cellEdited(int,int))))
-#endif
-//	QVBoxLayout *lo = new QVBoxLayout(this);
-//	lo->setSpacing(0);
-//	lo->setContentsMargins(0, 0, 0, 0);
-//	lo->addWidget(d_view);
 }
 
 void Matrix::handleChange()
@@ -140,7 +153,7 @@ void Matrix::cellEdited(int row,int col)
 	}
 
     if(row+1 >= numRows())
-        d_view->setRowCount(row + 2);
+        this->setRowCount(row + 2);
 
     emit modifiedWindow(this);
 }
@@ -165,17 +178,33 @@ QString Matrix::text(int row, int col)
 	return d_future_matrix->text(row, col);
 }
 
-void Matrix::setText (int row, int col, const QString & new_text )
+void Matrix::setText(int row, int col, const QString & new_text )
 {
-//TODO
-	d_future_matrix->setCell(row, col, new_text.toDouble());
+	bool ok = true;
+    QLocale locale;
+  	double res = locale.toDouble(new_text, &ok);
+	if (ok)
+		d_future_matrix->setCell(row, col, res);
+	else
+	{
+		Script *script = scriptEnv->newScript(new_text, this, QString("<%1_%2_%3>").arg(name()).arg(row).arg(col));
+		connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
+
+		script->setInt(row+1, "row");
+		script->setInt(row+1, "i");
+		script->setInt(col+1, "col");
+		script->setInt(col+1, "j");
+
+		QVariant ret = script->eval();
+		setCell(row, col, ret.toDouble());
+	}
 }
 
 	// TODO: is this used anywhere at all?
 #if 0
 bool Matrix::isEmptyRow(int row)
 {
-	int cols = d_view->columnCount();
+	int cols = this->columnCount();
 
 	for(int i=0; i<cols; i++)
 		if (!text(row, i).isEmpty())
@@ -198,7 +227,7 @@ QString Matrix::saveToString(const QString &info)
 	s += QString::number(numCols())+"\t";
 	s += birthDate() + "\n";
 	s += info;
-	s += "ColWidth\t" + QString::number(d_view->columnWidth(0))+"\n";
+	s += "ColWidth\t" + QString::number(columnWidth(0))+"\n";
 	s += "<formula>\n" + formula() + "\n</formula>\n";
 	s += "TextFormat\t" + QString(d_future_matrix->numericFormat()) + "\t" + QString::number(d_future_matrix->displayedDigits()) + "\n";
 	s += "WindowLabel\t" + windowLabel() + "\t" + QString::number(captionPolicy()) + "\n";
@@ -215,7 +244,7 @@ QString Matrix::saveAsTemplate(const QString &info)
 	s+= QString::number(numRows())+"\t";
 	s+= QString::number(numCols())+"\n";
 	s+= info;
-	s+= "ColWidth\t" + QString::number(d_view->columnWidth(0))+"\n";
+	s+= "ColWidth\t" + QString::number(columnWidth(0))+"\n";
 	s+= "<formula>\n" + formula() + "\n</formula>\n";
 	s+= "TextFormat\t" + QString(d_future_matrix->numericFormat()) + "\t" + QString::number(d_future_matrix->displayedDigits()) + "\n";
 	s+= "Coordinates\t" + QString::number(xStart(),'g',15) + "\t" +QString::number(xEnd(),'g',15) + "\t";
@@ -269,14 +298,14 @@ void Matrix::setTextFormat(const QChar &format, int precision)
 #if 0
 int Matrix::columnsWidth()
 {
-	return d_view->columnWidth(0);
+	return this->columnWidth(0);
 }
 #endif
 
 void Matrix::setColumnsWidth(int width)
 {
 	for(int i=0; i<d_future_matrix->columnCount(); i++)
-		d_view->setColumnWidth(i, width);
+		setColumnWidth(i, width);
 }
 
 void Matrix::setDimensions(int rows, int cols)
@@ -364,12 +393,12 @@ void Matrix::invert()
 	gsl_matrix_free(A);
 	gsl_permutation_free(p);
 
-    d_view->blockSignals(true);
+    this->blockSignals(true);
 	for(i=0; i<rows; i++){
 		for(int j=0; j<cols; j++)
 			setCell(i, j, gsl_matrix_get(inverse, i, j));
 	}
-    d_view->blockSignals(false);
+    this->blockSignals(false);
 
 	gsl_matrix_free(inverse);
 	QApplication::restoreOverrideCursor();
@@ -448,20 +477,63 @@ void Matrix::forgetSavedCells()
 	dMatrix = 0;
 }
 
-// TODO
-bool Matrix::calculate(int startRow, int endRow, int startCol, int endCol)
+bool Matrix::recalculate()
 {
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-#if 0
 	Script *script = scriptEnv->newScript(formula(), this, QString("<%1>").arg(name()));
 	connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
 	connect(script, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
-	if (!script->compile()){
+	if (!script->compile())
+	{
 		QApplication::restoreOverrideCursor();
 		return false;
 	}
 
-    d_view->blockSignals(true);
+    this->blockSignals(true);
+
+	int startRow = firstSelectedRow(false);
+	int	endRow = lastSelectedRow(false);
+	int startCol = firstSelectedColumn(false);
+	int	endCol = lastSelectedColumn(false);
+
+	QVariant ret;
+	saveCellsToMemory();
+	double dx = fabs(xEnd()-xStart())/(double)(numRows()-1);
+	double dy = fabs(yEnd()-yStart())/(double)(numCols()-1);
+	for(int row = startRow; row <= endRow; row++)
+		for(int col = startCol; col <= endCol; col++)
+		{
+			if (!isCellSelected(row, col)) continue;
+			script->setInt(row+1, "i");
+			script->setInt(row+1, "row");
+			script->setDouble(yStart()+row*dy, "y");
+			script->setInt(col+1, "j");
+			script->setInt(col+1, "col");
+			script->setDouble(xStart()+col*dx, "x");
+			ret = script->eval();
+			setCell(row, col, ret.toDouble());
+		}
+	forgetSavedCells();
+
+    this->blockSignals(false);
+	emit modifiedWindow(this);
+	QApplication::restoreOverrideCursor();
+	return true;
+}
+
+bool Matrix::calculate(int startRow, int endRow, int startCol, int endCol)
+{
+	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+	Script *script = scriptEnv->newScript(formula(), this, QString("<%1>").arg(name()));
+	connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
+	connect(script, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
+	if (!script->compile())
+	{
+		QApplication::restoreOverrideCursor();
+		return false;
+	}
+
+    this->blockSignals(true);
 	int rows = numRows();
 	int cols = numCols();
 
@@ -470,9 +542,9 @@ bool Matrix::calculate(int startRow, int endRow, int startCol, int endCol)
 	if (endCol < 0)
 		endCol = cols - 1;
 	if (endCol >= cols)
-		d_view->setColumnCount(endCol+1);
+		setNumCols(endCol+1);
 	if (endRow >= rows)
-		d_view->setRowCount(endRow+1);
+		setNumRows(endRow+1);
 
 	QVariant ret;
 	saveCellsToMemory();
@@ -488,23 +560,12 @@ bool Matrix::calculate(int startRow, int endRow, int startCol, int endCol)
 			script->setInt(col+1, "col");
 			script->setDouble(xStart()+col*dx, "x");
 			ret = script->eval();
-			if (ret.type()==QVariant::Int || ret.type()==QVariant::UInt || ret.type()==QVariant::LongLong
-					|| ret.type()==QVariant::ULongLong)
-				setText(row, col, ret.toString());
-			else if (ret.canConvert(QVariant::Double))
-				setText(row, col, QLocale().toString(ret.toDouble(), d_future_matrix->numericFormat().toAscii(), num_precision));
-			else{
-				setText(row, col, "");
-				d_view->blockSignals(false);
-				QApplication::restoreOverrideCursor();
-				return false;
-			}
+			setCell(row, col, ret.toDouble());
 		}
 	forgetSavedCells();
 
-    d_view->blockSignals(false);
+    this->blockSignals(false);
 	emit modifiedWindow(this);
-#endif
 	QApplication::restoreOverrideCursor();
 	return true;
 }
@@ -530,7 +591,7 @@ bool Matrix::rowsSelected()
 {
 	for(int i=0; i<numRows(); i++)
 	{
-		if (d_view->isRowSelected (i, true))
+		if (this->isRowSelected (i, true))
 			return true;
 	}
 	return false;
@@ -550,7 +611,7 @@ bool Matrix::columnsSelected()
 {
 	for(int i=0; i<numCols(); i++)
 	{
-		if (d_view->isColumnSelected (i, true))
+		if (this->isColumnSelected (i, true))
 			return true;
 	}
 	return false;
@@ -565,7 +626,7 @@ int Matrix::numSelectedRows()
 {
 	int r=0;
 	for(int i=0; i<numRows(); i++)
-		if (d_view->isRowSelected(i, true))
+		if (this->isRowSelected(i, true))
 			r++;
 	return r;
 }
@@ -574,7 +635,7 @@ int Matrix::numSelectedColumns()
 {
 	int c=0;
 	for(int i=0; i<numCols(); i++)
-		if (d_view->isColumnSelected(i, true))
+		if (this->isColumnSelected(i, true))
 			c++;
 	return c;
 }
@@ -643,7 +704,7 @@ void Matrix::print(const QString& fileName)
 		int dpiy = printer.logicalDpiY();
 		const int margin = (int) ( (1/2.54)*dpiy ); // 1 cm margins
 
-		QHeaderView *vHeader = d_view->verticalHeader();
+		QHeaderView *vHeader = this->verticalHeader();
 
 		int rows = numRows();
 		int cols = numCols();
@@ -653,18 +714,18 @@ void Matrix::print(const QString& fileName)
 
 		// print header
 		p.setFont(QFont());
-		QString header_label = d_view->model()->headerData(0, Qt::Horizontal).toString();
+		QString header_label = this->model()->headerData(0, Qt::Horizontal).toString();
 		QRect br = p.boundingRect(br, Qt::AlignCenter, header_label);
 		p.drawLine(right, height, right, height+br.height());
 		QRect tr(br);
 
 		for(i=0;i<cols;i++)
 		{
-			int w = d_view->columnWidth(i);
+			int w = this->columnWidth(i);
 			tr.setTopLeft(QPoint(right,height));
 			tr.setWidth(w);
 			tr.setHeight(br.height());
-			header_label = d_view->model()->headerData(i, Qt::Horizontal).toString();
+			header_label = this->model()->headerData(i, Qt::Horizontal).toString();
 			p.drawText(tr, Qt::AlignCenter, header_label,-1);
 			right += w;
 			p.drawLine(right, height, right, height+tr.height());
@@ -681,7 +742,7 @@ void Matrix::print(const QString& fileName)
 		for(i=0;i<rows;i++)
 		{
 			right = margin;
-			QString cell_text = d_view->model()->headerData(i, Qt::Horizontal).toString()+"\t";
+			QString cell_text = this->model()->headerData(i, Qt::Horizontal).toString()+"\t";
 			tr = p.boundingRect(tr, Qt::AlignCenter, cell_text);
 			p.drawLine(right, height, right, height+tr.height());
 
@@ -694,7 +755,7 @@ void Matrix::print(const QString& fileName)
 
 			for(int j=0;j<cols;j++)
 			{
-				int w = d_view->columnWidth (j);
+				int w = this->columnWidth (j);
 				cell_text = text(i,j)+"\t";
 				tr = p.boundingRect(tr,Qt::AlignCenter,cell_text);
 				br.setTopLeft(QPoint(right,height));
@@ -742,21 +803,6 @@ void Matrix::range(double *min, double *max)
 	*max = d_max;
 }
 
-bool Matrix::isColumnSelected(int col, bool full)
-{
-	return d_view->isColumnSelected(col, full);
-}
-
-bool Matrix::isRowSelected(int row, bool full)
-{
-	return d_view->isRowSelected(row, full);
-}
-
-int Matrix::firstSelectedColumn()
-{
-	return d_view->firstSelectedColumn(true);
-}
-
 double** Matrix::allocateMatrixData(int rows, int columns)
 {
 	double** data = new double* [rows];
@@ -774,14 +820,9 @@ void Matrix::freeMatrixData(double **data, int rows)
 	delete [] data;
 }
 
-void Matrix::goToCell(int row, int col)
-{
-	d_view->goToCell(row, col);
-}
-
 void Matrix::updateDecimalSeparators()
 {
-	d_view->update();
+	this->update();
 }
 
 void Matrix::copy(Matrix *m)
@@ -801,4 +842,21 @@ Matrix * Matrix::fromImage(const QImage & image)
 	m->d_future_matrix = fm;
 	return m;
 }
+
+void Matrix::applyFormula()
+{
+	setFormula(ui.formula_box->toPlainText());
+	recalculate();
+}
+
+void Matrix::addFunction()
+{
+	static_cast<ScriptEdit *>(ui.formula_box)->insertFunction(ui.add_function_combobox->currentText());
+}
+
+void Matrix::addCell()
+{
+	ui.formula_box->insertPlainText(ui.add_cell_combobox->currentText());
+}
+
 

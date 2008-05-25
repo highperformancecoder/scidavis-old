@@ -171,7 +171,9 @@ class MatrixView : public MyWidget
 		void applyCoordinates();
 		void updateCoordinatesTab();
 		void updateFormulaTab();
+#ifndef LEGACY_CODE_0_2_x
 		void applyFormula();
+#endif
 		void updateFormatTab();
 		void applyFormat();
 		void handleHorizontalSectionResized(int logicalIndex, int oldSize, int newSize); 
@@ -194,7 +196,7 @@ class MatrixView : public MyWidget
 
 		bool eventFilter( QObject * watched, QEvent * event);
 
-	private:
+	protected:
 		Ui::MatrixControlTabs ui;
 		//! The matrix view (first part of the UI)
 		MatrixViewWidget * d_view_widget;

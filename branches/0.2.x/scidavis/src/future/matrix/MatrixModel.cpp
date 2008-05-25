@@ -27,6 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "Matrix.h"
 #include "matrix/future_Matrix.h"
 #include "matrix/MatrixModel.h"
 #include <QString>
@@ -161,7 +162,7 @@ bool MatrixModel::setData(const QModelIndex & index, const QVariant & value, int
 
 	if(role ==  Qt::EditRole)
 	{
-			d_matrix->setCell(row, column, value.toDouble());
+			static_cast< ::Matrix *>(d_matrix->view())->setText(row, column, value.toString());
 			return true;
 	}
 	return false;

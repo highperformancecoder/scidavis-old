@@ -108,6 +108,7 @@ void MatrixView::init()
 	ui.last_row_spinbox->setMinimum(std::numeric_limits<double>::min());
 	ui.last_col_spinbox->setMaximum(std::numeric_limits<double>::max());
 	ui.last_col_spinbox->setMinimum(std::numeric_limits<double>::min());
+
 	updateCoordinatesTab();
 	updateFormulaTab();
 	updateFormatTab();
@@ -155,8 +156,10 @@ void MatrixView::init()
 
 	connect(ui.button_set_coordinates, SIGNAL(pressed()), 
 		this, SLOT(applyCoordinates()));
+#ifndef LEGACY_CODE_0_2_x
 	connect(ui.button_set_formula, SIGNAL(pressed()), 
 		this, SLOT(applyFormula()));
+#endif
 	connect(ui.button_set_format, SIGNAL(pressed()), 
 		this, SLOT(applyFormat()));
 	connect(ui.format_box, SIGNAL(currentIndexChanged(int)), this, SLOT(updateTypeInfo()));
@@ -417,10 +420,12 @@ void MatrixView::updateFormulaTab()
 	ui.formula_box->setPlainText(d_matrix->formula());
 }
 
+#ifndef LEGACY_CODE_0_2_x
 void MatrixView::applyFormula()
 {
 	d_matrix->setFormula(ui.formula_box->toPlainText());
 }
+#endif
 
 void MatrixView::updateFormatTab()
 {
