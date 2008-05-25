@@ -60,9 +60,6 @@
 #include "DataSetDialog.h"
 #include "IntDialog.h"
 #include "ConfigDialog.h"
-#include "MatrixDialog.h"
-#include "MatrixSizeDialog.h"
-#include "MatrixValuesDialog.h"
 #include "importOPJ.h"
 #include "AssociationsDialog.h"
 #include "RenameWindowDialog.h"
@@ -815,22 +812,6 @@ void ApplicationWindow::initMainMenu()
 	matrixMenu = new QMenu(this);
 	matrixMenu->setFont(appFont);
 
-	matrixMenu->addAction(actionSetMatrixProperties);
-	matrixMenu->addAction(actionSetMatrixDimensions);
-	matrixMenu->addSeparator();
-	matrixMenu->addAction(actionSetMatrixValues);
-	matrixMenu->addAction(actionTableRecalculate);
-	matrixMenu->addSeparator();
-
-	matrixMenu->addAction(actionTransposeMatrix);
-	matrixMenu->addAction(actionInvertMatrix);
-	matrixMenu->addAction(actionMatrixDeterminant);
-
-	matrixMenu->addSeparator();
-	matrixMenu->addAction(actionGoToCell);
-	matrixMenu->addSeparator();
-	matrixMenu->addAction(actionConvertMatrix);
-
 	initPlotMenu();
 	initTableAnalysisMenu();
 	initTableMenu();
@@ -1169,20 +1150,14 @@ void ApplicationWindow::customMenu(QWidget* w)
 			actionTableRecalculate->setEnabled(true);
 			menuBar()->insertItem(tr("3D &Plot"), plot3DMenu);
 
-			menuBar()->insertItem(tr("&Matrix"), matrixMenu);
-			QMenu * matrixMenu2 = new QMenu();
-			static_cast<Matrix *>(w)->d_future_matrix->fillProjectMenu(matrixMenu2);
-			menuBar()->insertItem(tr("&Matrix2"), matrixMenu2);
-			/*
 			matrixMenu->clear();
 			static_cast<Matrix *>(w)->d_future_matrix->fillProjectMenu(matrixMenu);
 			menuBar()->insertItem(tr("&Matrix"), matrixMenu);
-			*/
-			matrixMenu2->addSeparator();
-			matrixMenu2->addAction(actionInvertMatrix);
-			matrixMenu2->addAction(actionMatrixDeterminant);
-			matrixMenu2->addSeparator();
-			matrixMenu2->addAction(actionConvertMatrix);
+			matrixMenu->addSeparator();
+			matrixMenu->addAction(actionInvertMatrix);
+			matrixMenu->addAction(actionMatrixDeterminant);
+			matrixMenu->addSeparator();
+			matrixMenu->addAction(actionConvertMatrix);
 		}
 		else if (w->inherits("Note"))
 		{
@@ -2675,17 +2650,6 @@ Matrix* ApplicationWindow::newMatrix(const QString& caption, int r, int c)
 
 	w->showNormal();
 	return w;
-}
-
-void ApplicationWindow::transposeMatrix()
-{
-	Matrix* m = (Matrix*)ws->activeWindow();
-	if (!m)
-		return;
-
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-	m->transpose();
-	QApplication::restoreOverrideCursor();
 }
 
 void ApplicationWindow::matrixDeterminant()
@@ -5881,48 +5845,6 @@ void ApplicationWindow::plotStackedLayers()
 void ApplicationWindow::plotStackedHistograms()
 {
 	multilayerPlot(1, -1, Graph::Histogram);
-}
-
-void ApplicationWindow::showMatrixDialog()
-{
-	if ( ws->activeWindow() && ws->activeWindow()->inherits("Matrix"))
-	{
-		Matrix* matrix = (Matrix*)ws->activeWindow();
-
-		MatrixDialog* md = new MatrixDialog(matrix, this);
-		md->setAttribute(Qt::WA_DeleteOnClose);
-		md->exec();
-	}
-}
-
-void ApplicationWindow::showMatrixSizeDialog()
-{
-	if ( ws->activeWindow() && ws->activeWindow()->inherits("Matrix"))
-	{
-		Matrix* w = (Matrix*)ws->activeWindow();
-
-		MatrixSizeDialog* md= new MatrixSizeDialog(this);
-		md->setAttribute(Qt::WA_DeleteOnClose);
-		connect (md, SIGNAL(changeDimensions(int, int)), w, SLOT(setDimensions(int, int)));
-		connect (md, SIGNAL(changeCoordinates(double, double, double, double)),
-				w, SLOT(setCoordinates(double, double, double, double)));
-
-		md->setCoordinates(w->xStart(), w->xEnd(), w->yStart(), w->yEnd());
-		md->setColumns(w->numCols());
-		md->setRows(w->numRows());
-		md->exec();
-	}
-}
-
-void ApplicationWindow::showMatrixValuesDialog()
-{
-	if ( ws->activeWindow() && ws->activeWindow()->inherits("Matrix"))
-	{
-		MatrixValuesDialog* md = new MatrixValuesDialog(scriptEnv, this);
-		md->setAttribute(Qt::WA_DeleteOnClose);
-		md->setMatrix((Matrix*)ws->activeWindow());
-		md->exec();
-	}
 }
 
 void ApplicationWindow::showColumnOptionsDialog()
@@ -11130,18 +11052,6 @@ void ApplicationWindow::createActions()
 	actionAdd3DData = new QAction(tr("&Data Set..."), this);
 	connect(actionAdd3DData, SIGNAL(activated()), this, SLOT(add3DData()));
 
-	actionSetMatrixProperties = new QAction(tr("Set &Properties..."), this);
-	connect(actionSetMatrixProperties, SIGNAL(activated()), this, SLOT(showMatrixDialog()));
-
-	actionSetMatrixDimensions = new QAction(tr("Set &Dimensions..."), this);
-	connect(actionSetMatrixDimensions, SIGNAL(activated()), this, SLOT(showMatrixSizeDialog()));
-
-	actionSetMatrixValues = new QAction(tr("Set &Values..."), this);
-	connect(actionSetMatrixValues, SIGNAL(activated()), this, SLOT(showMatrixValuesDialog()));
-
-	actionTransposeMatrix = new QAction(tr("&Transpose"), this);
-	connect(actionTransposeMatrix, SIGNAL(activated()), this, SLOT(transposeMatrix()));
-
 	actionInvertMatrix = new QAction(tr("&Invert"), this);
 	connect(actionInvertMatrix, SIGNAL(activated()), this, SLOT(invertMatrix()));
 
@@ -11621,10 +11531,6 @@ void ApplicationWindow::translateActionsStrings()
 	actionShowPlotGeometryDialog->setMenuText(tr("&Layer Geometry"));
 	actionEditSurfacePlot->setMenuText(tr("&Surface..."));
 	actionAdd3DData->setMenuText(tr("&Data Set..."));
-	actionSetMatrixProperties->setMenuText(tr("Set &Properties..."));
-	actionSetMatrixDimensions->setMenuText(tr("Set &Dimensions..."));
-	actionSetMatrixValues->setMenuText(tr("Set &Values..."));
-	actionTransposeMatrix->setMenuText(tr("&Transpose"));
 	actionInvertMatrix->setMenuText(tr("&Invert"));
 	actionMatrixDeterminant->setMenuText(tr("&Determinant"));
 	actionConvertMatrix->setMenuText(tr("&Convert to Spreadsheet"));

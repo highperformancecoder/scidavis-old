@@ -132,9 +132,6 @@ HEADERS  += src/ApplicationWindow.h \
             src/VectorCurve.h \
             src/ScaleDraw.h \
             src/Matrix.h \
-            src/MatrixDialog.h \
-            src/MatrixSizeDialog.h \
-            src/MatrixValuesDialog.h \
             src/DataSetDialog.h \
             src/MyParser.h \
             src/ColorBox.h \
@@ -241,9 +238,6 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/QwtHistogram.cpp \
             src/VectorCurve.cpp \
             src/Matrix.cpp \
-            src/MatrixDialog.cpp \
-            src/MatrixSizeDialog.cpp \
-            src/MatrixValuesDialog.cpp \
             src/MyParser.cpp\
             src/ColorBox.cpp \
             src/SymbolBox.cpp \

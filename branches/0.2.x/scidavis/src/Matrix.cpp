@@ -73,7 +73,6 @@ void Matrix::init(int rows, int cols)
 	d_future_matrix->setNumericFormat('f');
 	d_future_matrix->setDisplayedDigits(6);
 	d_future_matrix->setCoordinates(1.0, 10.0, 1.0, 10.0);
-	// TODO
 	dMatrix = 0;
 
 	setBirthDate(d_future_matrix->creationTime().toString(Qt::LocalDate));
@@ -118,50 +117,8 @@ void Matrix::handleChange()
     emit modifiedWindow(this);
 }
 
-	// TODO: handle formula entry
-#if 0
-void Matrix::cellEdited(int row,int col)
-{
-	QString cell_text = text(row,col);
-	if(cell_text.isEmpty()) return;
-
-	QString cell_formula = cell_text;
-
-	bool ok = true;
-    QLocale locale;
-  	double res = locale.toDouble(cell_text, &ok);
-	if (ok)
-		setText(row, col, locale.toString(res, d_future_matrix->numericFormat().toAscii(), num_precision));
-	else
-	{
-		Script *script = scriptEnv->newScript(cell_formula, this, QString("<%1_%2_%3>").arg(name()).arg(row).arg(col));
-		connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
-
-		script->setInt(row+1, "row");
-		script->setInt(row+1, "i");
-		script->setInt(col+1, "col");
-		script->setInt(col+1, "j");
-
-		QVariant ret = script->eval();
-		if(ret.type()==QVariant::Int || ret.type()==QVariant::UInt || ret.type()==QVariant::LongLong
-				|| ret.type()==QVariant::ULongLong)
-			setText(row, col, ret.toString());
-		else if(ret.canConvert(QVariant::Double))
-			setText(row, col, locale.toString(ret.toDouble(), d_future_matrix->numericFormat().toAscii(), num_precision));
-		else
-			setText(row, col, "");
-	}
-
-    if(row+1 >= numRows())
-        this->setRowCount(row + 2);
-
-    emit modifiedWindow(this);
-}
-#endif
-
 double Matrix::cell(int row, int col)
 {
-	// TODO
 	if(dMatrix)
 		return dMatrix[row][col];
 	else 
@@ -199,20 +156,6 @@ void Matrix::setText(int row, int col, const QString & new_text )
 		setCell(row, col, ret.toDouble());
 	}
 }
-
-	// TODO: is this used anywhere at all?
-#if 0
-bool Matrix::isEmptyRow(int row)
-{
-	int cols = this->columnCount();
-
-	for(int i=0; i<cols; i++)
-		if (!text(row, i).isEmpty())
-			return false;
-
-	return true;
-}
-#endif
 
 void Matrix::setCoordinates(double xs, double xe, double ys, double ye)
 {
@@ -293,14 +236,6 @@ void Matrix::setTextFormat(const QChar &format, int precision)
 	d_future_matrix->setNumericFormat(format.toAscii());
 	d_future_matrix->setDisplayedDigits(precision);
 }
-
-// TODO: remove this
-#if 0
-int Matrix::columnsWidth()
-{
-	return this->columnWidth(0);
-}
-#endif
 
 void Matrix::setColumnsWidth(int width)
 {
@@ -410,67 +345,16 @@ void Matrix::transpose()
 	d_future_matrix->transpose();
 }
 
-//TODO
 void Matrix::saveCellsToMemory()
 {
 	int rows = numRows();
 	int cols = numCols();
 	dMatrix = allocateMatrixData(rows, cols);
-	for(int i=0; i<rows; i++)
-	{// initialize the matrix to zero
-		for(int j=0; j<cols; j++)
-			dMatrix[i][j] = 0.0;
-	}
-
-    bool ok = true;
 	for (int i=0; i<rows; i++)
-	{
         for (int j=0; j<cols; j++)
-        {
-            dMatrix[i][j] = QLocale().toDouble(text(i, j), &ok);
-            if (!ok)
-                break;
-        }
-	}
-	if (!ok){// fall back to C locale
-	    ok = true;
-        for (int i=0; i<rows; i++)
-        {
-            for (int j=0; j<cols; j++)
-            {
-                dMatrix[i][j] = QLocale::c().toDouble(text(i, j), &ok);
-                if (!ok)
-                    break;
-            }
-        }
-	}
-	if (!ok){// fall back to German locale
-	    ok = true;
-        for (int i=0; i<rows; i++)
-        {
-            for (int j=0; j<cols; j++)
-            {
-                dMatrix[i][j] = QLocale(QLocale::German).toDouble(text(i, j), &ok);
-                if (!ok)
-                    break;
-            }
-        }
-	}
-	if (!ok){// fall back to French locale
-	    ok = true;
-        for (int i=0; i<rows; i++)
-        {
-            for (int j=0; j<cols; j++)
-            {
-                dMatrix[i][j] = QLocale(QLocale::French).toDouble(text(i, j), &ok);
-                if (!ok)
-                    break;
-            }
-        }
-	}
+            dMatrix[i][j] = cell(i, j);
 }
 
-// TODO
 void Matrix::forgetSavedCells()
 {
 	freeMatrixData(dMatrix, numRows());
@@ -574,7 +458,6 @@ void Matrix::clearSelection()
 {
 	d_future_matrix->clearSelectedCells();
 }
-
 
 void Matrix::copySelection()
 {
@@ -680,10 +563,8 @@ void Matrix::print()
 
 void Matrix::print(const QString& fileName)
 {
-// TODO
-#if 0
 	QPrinter printer;
-	printer.setColorMode (QPrinter::GrayScale);
+	printer.setColorMode(QPrinter::GrayScale);
 
 	if (!fileName.isEmpty())
 	{
@@ -697,88 +578,88 @@ void Matrix::print(const QString& fileName)
         if (printDialog.exec() != QDialog::Accepted)
             return;
     }
-		printer.setFullPage( true );
-		QPainter p;
-		if ( !p.begin(&printer ) )
-			return; // paint on printer
-		int dpiy = printer.logicalDpiY();
-		const int margin = (int) ( (1/2.54)*dpiy ); // 1 cm margins
 
-		QHeaderView *vHeader = this->verticalHeader();
+	printer.setFullPage( true );
+	QPainter p;
+	if ( !p.begin(&printer) )
+		return; // paint on printer
+	int dpiy = printer.logicalDpiY();
+	const int margin = (int) ( (1/2.54)*dpiy ); // 1 cm margins
 
-		int rows = numRows();
-		int cols = numCols();
-		int height = margin;
-		int i, vertHeaderWidth = vHeader->width();
-		int right = margin + vertHeaderWidth;
+	QHeaderView *vHeader = d_view_widget->verticalHeader();
 
-		// print header
-		p.setFont(QFont());
-		QString header_label = this->model()->headerData(0, Qt::Horizontal).toString();
-		QRect br = p.boundingRect(br, Qt::AlignCenter, header_label);
-		p.drawLine(right, height, right, height+br.height());
-		QRect tr(br);
+	int rows = numRows();
+	int cols = numCols();
+	int height = margin;
+	int i, vertHeaderWidth = vHeader->width();
+	int right = margin + vertHeaderWidth;
 
-		for(i=0;i<cols;i++)
+	// print header
+	p.setFont(QFont());
+	QString header_label = d_view_widget->model()->headerData(0, Qt::Horizontal).toString();
+	QRect br = p.boundingRect(br, Qt::AlignCenter, header_label);
+	p.drawLine(right, height, right, height+br.height());
+	QRect tr(br);
+
+	for(i=0;i<cols;i++)
+	{
+		int w = columnWidth(i);
+		tr.setTopLeft(QPoint(right,height));
+		tr.setWidth(w);
+		tr.setHeight(br.height());
+		header_label = d_view_widget->model()->headerData(i, Qt::Horizontal).toString();
+		p.drawText(tr, Qt::AlignCenter, header_label,-1);
+		right += w;
+		p.drawLine(right, height, right, height+tr.height());
+
+		if (right >= printer.width()-2*margin )
+			break;
+	}
+
+	p.drawLine(margin + vertHeaderWidth, height, right-1, height);//first horizontal line
+	height += tr.height();
+	p.drawLine(margin, height, right-1, height);
+
+	// print table values
+	for(i=0;i<rows;i++)
+	{
+		right = margin;
+		QString cell_text = d_view_widget->model()->headerData(i, Qt::Horizontal).toString()+"\t";
+		tr = p.boundingRect(tr, Qt::AlignCenter, cell_text);
+		p.drawLine(right, height, right, height+tr.height());
+
+		br.setTopLeft(QPoint(right,height));
+		br.setWidth(vertHeaderWidth);
+		br.setHeight(tr.height());
+		p.drawText(br,Qt::AlignCenter,cell_text,-1);
+		right += vertHeaderWidth;
+		p.drawLine(right, height, right, height+tr.height());
+
+		for(int j=0;j<cols;j++)
 		{
-			int w = this->columnWidth(i);
-			tr.setTopLeft(QPoint(right,height));
-			tr.setWidth(w);
-			tr.setHeight(br.height());
-			header_label = this->model()->headerData(i, Qt::Horizontal).toString();
-			p.drawText(tr, Qt::AlignCenter, header_label,-1);
+			int w = this->columnWidth (j);
+			cell_text = text(i,j)+"\t";
+			tr = p.boundingRect(tr,Qt::AlignCenter,cell_text);
+			br.setTopLeft(QPoint(right,height));
+			br.setWidth(w);
+			br.setHeight(tr.height());
+			p.drawText(br, Qt::AlignCenter, cell_text, -1);
 			right += w;
 			p.drawLine(right, height, right, height+tr.height());
 
 			if (right >= printer.width()-2*margin )
 				break;
 		}
-
-		p.drawLine(margin + vertHeaderWidth, height, right-1, height);//first horizontal line
-		height += tr.height();
+		height += br.height();
 		p.drawLine(margin, height, right-1, height);
 
-		// print table values
-		for(i=0;i<rows;i++)
+		if (height >= printer.height()-margin )
 		{
-			right = margin;
-			QString cell_text = this->model()->headerData(i, Qt::Horizontal).toString()+"\t";
-			tr = p.boundingRect(tr, Qt::AlignCenter, cell_text);
-			p.drawLine(right, height, right, height+tr.height());
-
-			br.setTopLeft(QPoint(right,height));
-			br.setWidth(vertHeaderWidth);
-			br.setHeight(tr.height());
-			p.drawText(br,Qt::AlignCenter,cell_text,-1);
-			right += vertHeaderWidth;
-			p.drawLine(right, height, right, height+tr.height());
-
-			for(int j=0;j<cols;j++)
-			{
-				int w = this->columnWidth (j);
-				cell_text = text(i,j)+"\t";
-				tr = p.boundingRect(tr,Qt::AlignCenter,cell_text);
-				br.setTopLeft(QPoint(right,height));
-				br.setWidth(w);
-				br.setHeight(tr.height());
-				p.drawText(br, Qt::AlignCenter, cell_text, -1);
-				right += w;
-				p.drawLine(right, height, right, height+tr.height());
-
-				if (right >= printer.width()-2*margin )
-					break;
-			}
-			height += br.height();
-			p.drawLine(margin, height, right-1, height);
-
-			if (height >= printer.height()-margin )
-			{
-				printer.newPage();
-				height = margin;
-				p.drawLine(margin, height, right, height);
-			}
+			printer.newPage();
+			height = margin;
+			p.drawLine(margin, height, right, height);
 		}
-#endif
+	}
 }
 
 void Matrix::range(double *min, double *max)

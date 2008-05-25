@@ -79,10 +79,6 @@ public:
 	int numCols();
 	void setNumCols(int cols);
 
-	//! Returns whether the row is empty or not
-	// TODO: is this used anywhere at all?
-//	bool isEmptyRow(int row);
-
 	//event handlers
 	/*!
 	 * \brief Event filter
@@ -108,16 +104,8 @@ public slots:
 	void print();
 	//! Print the Matrix to fileName
 	void print(const QString& fileName);
-#if 0
-	//! Called if any cell value was changed
-	void cellEdited(int,int);
-#endif
 	void handleChange();
 
-#if 0
-	//! Return the width of all columns
-	int columnsWidth();
-#endif
 	//! Set the width of all columns (obsolete, only for OPJ import)
 	/**
 	 * Don't uses this. Use view()->setColumnWidth(column, width) instead.

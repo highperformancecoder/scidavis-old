@@ -313,7 +313,6 @@ public slots:
 	Matrix* matrix(const QString& name);
 	Matrix* convertTableToMatrix();
 	void initMatrix(Matrix* m, const QString& caption);
-	void transposeMatrix();
 	void invertMatrix();
 	void matrixDeterminant();
 	//@}
@@ -661,9 +660,6 @@ public slots:
 	void showPlotGeometryDialog();
 	void showLayerDialog();
 	void showPreferencesDialog();
-	void showMatrixDialog();
-	void showMatrixSizeDialog();
-	void showMatrixValuesDialog();
 	void showSmoothSavGolDialog();
 	void showSmoothFFTDialog();
 	void showSmoothAverageDialog();
@@ -1082,8 +1078,8 @@ private:
     QAction *actionShowLineDialog, *actionShowImageDialog, *actionShowTextDialog;
     QAction *actionActivateWindow, *actionMinimizeWindow, *actionMaximizeWindow, *actionResizeWindow, *actionPrintWindow;
     QAction *actionShowPlotGeometryDialog, *actionEditSurfacePlot, *actionAdd3DData;
-	QAction *actionMatrixDeterminant, *actionSetMatrixProperties;
-	QAction *actionSetMatrixDimensions, *actionConvertMatrix, *actionSetMatrixValues, *actionTransposeMatrix, *actionInvertMatrix;
+	QAction *actionMatrixDeterminant;
+	QAction *actionConvertMatrix, *actionInvertMatrix;
 	QAction *actionPlot3DWireFrame, *actionPlot3DHiddenLine, *actionPlot3DPolygons, *actionPlot3DWireSurface;
 	QAction *actionColorMap, *actionContourMap, *actionGrayMap;
 	QAction *actionDeleteFitTables, *actionShowGridDialog, *actionTimeStamp;
