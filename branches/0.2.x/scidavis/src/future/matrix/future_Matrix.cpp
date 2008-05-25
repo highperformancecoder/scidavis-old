@@ -87,8 +87,17 @@ Matrix::~Matrix()
 {
 }
 
+void Matrix::setView(MatrixView * view)
+{
+	d_view = view; 
+	addActionsToView();
+	connect(d_view, SIGNAL(controlTabBarStatusChanged(bool)), this, SLOT(adjustTabBarAction(bool)));
+	adjustTabBarAction(true);
+}
+
 QWidget *Matrix::view()
 {
+#ifndef LEGACY_CODE_0_2_x
 	if (!d_view)
 	{
 		d_view = new MatrixView(this); 
@@ -96,6 +105,9 @@ QWidget *Matrix::view()
 		connect(d_view, SIGNAL(controlTabBarStatusChanged(bool)), this, SLOT(adjustTabBarAction(bool)));
 		adjustTabBarAction(true);
 	}
+#else
+	Q_ASSERT(d_view != NULL);
+#endif
 	return d_view;
 }
 
@@ -545,6 +557,7 @@ void Matrix::createActions()
 	icon_temp->addPixmap(QPixmap(":/16x16/recalculate.png"));
 	icon_temp->addPixmap(QPixmap(":/32x32/recalculate.png"));
 	action_recalculate = new QAction(*icon_temp, tr("Recalculate"), this);
+	action_recalculate->setShortcut(tr("Ctrl+Return"));
 	actionManager()->addAction(action_recalculate, "recalculate"); 
 	delete icon_temp;
 
@@ -573,6 +586,7 @@ void Matrix::createActions()
 	icon_temp->addPixmap(QPixmap(":/16x16/go_to_cell.png"));
 	icon_temp->addPixmap(QPixmap(":/32x32/go_to_cell.png"));
 	action_go_to_cell = new QAction(*icon_temp, tr("&Go to Cell"), this);
+	action_go_to_cell->setShortcut(tr("Ctrl+Alt+G"));
 	actionManager()->addAction(action_go_to_cell, "go_to_cell"); 
 	delete icon_temp;
 
@@ -711,7 +725,9 @@ void Matrix::addActionsToView()
 	d_view->addAction(action_go_to_cell);
 	d_view->addAction(action_dimensions_dialog);
 	d_view->addAction(action_import_image);
+#ifndef LEGACY_CODE_0_2_x
 	d_view->addAction(action_duplicate);
+#endif
 	d_view->addAction(action_insert_columns);
 	d_view->addAction(action_remove_columns);
 	d_view->addAction(action_clear_columns);
@@ -741,7 +757,9 @@ bool Matrix::fillProjectMenu(QMenu * menu)
 	menu->addAction(action_mirror_horizontally);
 	menu->addAction(action_mirror_vertically);
 	menu->addSeparator();
+#ifndef LEGACY_CODE_0_2_x
 	menu->addAction(action_duplicate);
+#endif
 	menu->addAction(action_import_image);
 	menu->addSeparator();
 	menu->addAction(action_go_to_cell);
@@ -905,10 +923,12 @@ void Matrix::importImageDialog()
 
 void Matrix::duplicate()
 {
+#ifndef LEGACY_CODE_0_2_x
 	Matrix * matrix = new Matrix(0, rowCount(), columnCount(), name());
 	matrix->copy(this);
 	if (folder())
 		folder()->addChild(matrix);
+#endif
 }
 
 void Matrix::editFormat()
@@ -921,7 +941,6 @@ void Matrix::editCoordinates()
 {
 	if (!d_view) return;
 	d_view->showControlCoordinatesTab();
-	d_view->toggleControlTabBar();
 }
 
 void Matrix::editFormula()

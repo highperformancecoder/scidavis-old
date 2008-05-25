@@ -1168,7 +1168,21 @@ void ApplicationWindow::customMenu(QWidget* w)
 		{
 			actionTableRecalculate->setEnabled(true);
 			menuBar()->insertItem(tr("3D &Plot"), plot3DMenu);
+
 			menuBar()->insertItem(tr("&Matrix"), matrixMenu);
+			QMenu * matrixMenu2 = new QMenu();
+			static_cast<Matrix *>(w)->d_future_matrix->fillProjectMenu(matrixMenu2);
+			menuBar()->insertItem(tr("&Matrix2"), matrixMenu2);
+			/*
+			matrixMenu->clear();
+			static_cast<Matrix *>(w)->d_future_matrix->fillProjectMenu(matrixMenu);
+			menuBar()->insertItem(tr("&Matrix"), matrixMenu);
+			*/
+			matrixMenu2->addSeparator();
+			matrixMenu2->addAction(actionInvertMatrix);
+			matrixMenu2->addAction(actionMatrixDeterminant);
+			matrixMenu2->addSeparator();
+			matrixMenu2->addAction(actionConvertMatrix);
 		}
 		else if (w->inherits("Note"))
 		{

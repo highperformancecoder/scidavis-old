@@ -49,6 +49,7 @@
 #include <QScrollArea>
 #include "core/globals.h"
 #include "ui_matrixcontroltabs.h"
+#include "MyWidget.h"
 
 namespace future{
 class Matrix;
@@ -77,13 +78,18 @@ class MatrixViewWidget : public QTableView
 };
 
 //! View class for Matrix
-class MatrixView : public QWidget
+class MatrixView : public MyWidget
 {
     Q_OBJECT
 
 	public:
 		//! Constructor
+#ifndef LEGACY_CODE_0_2_x
 		MatrixView(future::Matrix *matrix);
+#else
+		MatrixView(const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
+		void setMatrix(future::Matrix *matrix);
+#endif
 		//! Destructor
 		virtual ~MatrixView();
 		bool isControlTabBarVisible() { return d_control_tabs->isVisible(); }

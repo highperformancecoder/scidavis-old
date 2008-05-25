@@ -74,6 +74,7 @@ class Matrix : public AbstractPart
 		Matrix(AbstractScriptingEngine *engine, int rows, int cols, const QString& name);
 #else
 		Matrix(void *, int rows, int cols, const QString& name);
+		void setView(MatrixView * view);
 #endif
 		~Matrix();
 

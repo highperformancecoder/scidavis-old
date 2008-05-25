@@ -53,16 +53,32 @@
 #include <QMenu>
 #include <QtDebug>
 
+#ifndef LEGACY_CODE_0_2_x
 MatrixView::MatrixView(future::Matrix *matrix)
  : d_matrix(matrix) 
+#else
+MatrixView::MatrixView(const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
+ : MyWidget(label, parent, name, f)
+#endif
 {
+#ifndef LEGACY_CODE_0_2_x
 	d_model = new MatrixModel(matrix);
 	init();
+#else
+	d_model = NULL;
+#endif
 }
 
 MatrixView::~MatrixView() 
 {
 	delete d_model;
+}
+
+void MatrixView::setMatrix(future::Matrix * matrix)
+{
+	d_matrix = matrix;
+	d_model = new MatrixModel(matrix);
+	init();
 }
 
 void MatrixView::init()
@@ -131,9 +147,11 @@ void MatrixView::init()
 
 	rereadSectionSizes();
 
+#ifndef LEGACY_CODE_0_2_x
 	// keyboard shortcuts
 	QShortcut * sel_all = new QShortcut(QKeySequence(tr("Ctrl+A", "Matrix: select all")), d_view_widget);
 	connect(sel_all, SIGNAL(activated()), d_view_widget, SLOT(selectAll()));
+#endif
 
 	connect(ui.button_set_coordinates, SIGNAL(pressed()), 
 		this, SLOT(applyCoordinates()));
@@ -331,6 +349,12 @@ bool MatrixView::eventFilter(QObject * watched, QEvent * event)
 
 	if (event->type() == QEvent::ContextMenu) 
 	{
+		if (watched == titleBar)
+		{
+			emit showTitleBarMenu();
+			((QContextMenuEvent*)event)->accept();
+			return true;
+		}
 		QContextMenuEvent *cm_event = static_cast<QContextMenuEvent *>(event);
 		QPoint global_pos = cm_event->globalPos();
 		if(watched == v_header)	
@@ -340,12 +364,14 @@ bool MatrixView::eventFilter(QObject * watched, QEvent * event)
 		else if(watched == d_view_widget)
 			d_matrix->showMatrixViewContextMenu(global_pos);
 		else
-			return QWidget::eventFilter(watched, event);
+			emit showTitleBarMenu();
+		//	return MyWidget::eventFilter(watched, event);
+			((QContextMenuEvent*)event)->accept();
 
 		return true;
 	} 
 	else 
-		return QWidget::eventFilter(watched, event);
+		return MyWidget::eventFilter(watched, event);
 }
 	
 void MatrixView::showControlCoordinatesTab()

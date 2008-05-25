@@ -58,14 +58,17 @@
 #include <gsl/gsl_math.h>
 
 Matrix::Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
-: MyWidget(label, parent, name, f), scripted(env), d_future_matrix(new future::Matrix(0, r, c, label))
+	: MatrixView(label, parent, name, f), scripted(env)
 {
+	d_future_matrix = new future::Matrix(0, r, c, label);
 	init(r, c);
 }
 
 void Matrix::init(int rows, int cols)
 {	
-	d_view = static_cast<MatrixView *>(d_future_matrix->view());
+	MatrixView::setMatrix(d_future_matrix);	
+	d_future_matrix->setView(this);	
+	d_view = this;	
 	d_future_matrix->setNumericFormat('f');
 	d_future_matrix->setDisplayedDigits(6);
 	d_future_matrix->setCoordinates(1.0, 10.0, 1.0, 10.0);
@@ -91,6 +94,10 @@ void Matrix::init(int rows, int cols)
 #if 0
 	connect(d_view, SIGNAL(cellChanged(int,int)), this, SLOT(cellEdited(int,int))))
 #endif
+//	QVBoxLayout *lo = new QVBoxLayout(this);
+//	lo->setSpacing(0);
+//	lo->setContentsMargins(0, 0, 0, 0);
+//	lo->addWidget(d_view);
 }
 
 void Matrix::handleChange()
@@ -597,7 +604,7 @@ bool Matrix::eventFilter(QObject *object, QEvent *e)
 		return true;
 	}
 
-	return MyWidget::eventFilter(object, e);
+	return MatrixView::eventFilter(object, e);
 }
 
 void Matrix::exportPDF(const QString& fileName)

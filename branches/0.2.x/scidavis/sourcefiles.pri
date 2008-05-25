@@ -312,6 +312,7 @@ FORMS +=   src/SciDAVisAbout.ui
 
 ########### Future code backported from the aspect framework ##################
 DEFINES += LEGACY_CODE_0_2_x
+INCLUDEPATH  += src
 INCLUDEPATH  += src/future
 
 FORMS += src/future/matrix/matrixcontroltabs.ui \

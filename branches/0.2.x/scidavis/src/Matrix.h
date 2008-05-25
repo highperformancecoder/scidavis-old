@@ -42,17 +42,19 @@
 #include "Script.h"
 #include <qwt_double_rect.h>
 #include "future/matrix/future_Matrix.h"
+#include "future/matrix/MatrixView.h"
 
 // (maximum) initial matrix size
 #define _Matrix_initial_rows_ 10
 #define _Matrix_initial_columns_ 3
 
 //! Matrix worksheet class
-class Matrix: public MyWidget, public scripted
+class Matrix: public MatrixView, public scripted
 {
     Q_OBJECT
 
 public:
+	future::Matrix *d_future_matrix;
 
 	/*!
 	 * \brief Constructor
@@ -67,7 +69,7 @@ public:
 	 * \param f window flags
 	 */
 	Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
-	~Matrix(){};
+	~Matrix() { delete d_future_matrix; };
 
 	//! Return the number of rows
 	int numRows();
@@ -96,6 +98,9 @@ public:
 	void customEvent(QEvent *e);
 
 	void updateDecimalSeparators();
+
+	virtual QWidget *view() {return d_future_matrix->view(); }
+
 
 public slots:
 	void exportPDF(const QString& fileName);
@@ -292,7 +297,6 @@ private:
 	y_start,  //!< Y value corresponding to row 1
 	y_end;  //!< Y value corresponding to the last row
 
-	future::Matrix *d_future_matrix;
 };
 
 #endif
