@@ -7663,10 +7663,7 @@ void ApplicationWindow::closeWindow(MyWidget* window)
 	if (window->inherits("Matrix"))
 		window->setParent(0);
 	else
-	{
-		window->setParent(0);
-		window->close();
-	}
+		window->deleteLater();
 	emit modified();
 }
 
