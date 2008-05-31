@@ -274,6 +274,9 @@ class Matrix : public AbstractPart
 		void coordinatesChanged();
 		void formulaChanged();
 		void formatChanged();
+#ifdef LEGACY_CODE_0_2_x
+		void recalculate();
+#endif
 
 	private slots:
 		void adjustTabBarAction(bool visible);

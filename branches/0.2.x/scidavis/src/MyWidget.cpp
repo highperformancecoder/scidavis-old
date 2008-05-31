@@ -1,13 +1,12 @@
 /***************************************************************************
     File                 : MyWidget.cpp
     Project              : SciDAVis
-    --------------------------------------------------------------------
-    Copyright            : (C) 2006 by Ion Vasilief,
-                           Tilman Benkert,
-					  Knut Franke
-    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
-                           knut.franke*gmx.de
     Description          : MDI window widget
+    --------------------------------------------------------------------
+    Copyright            : (C) 2006-2008 Knut Franke (knut.franke*gmx.de)
+    Copyright            : (C) 2006-2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2006-2007 by Ion Vasilief (ion_vasilief*yahoo.fr)
+                           (replace * with @ in the email address)
 
  ***************************************************************************/
 
@@ -37,9 +36,11 @@
 #include <QCloseEvent>
 #include <QString>
 #include <QLocale>
+#include <QIcon>
+#include <QtDebug>
 
 MyWidget::MyWidget(const QString& label, QWidget * parent, const char * name, Qt::WFlags f):
-		QWidget (parent, f)
+	QWidget (parent, f)
 {
 	w_label = label;
 	caption_policy = Both;
@@ -51,25 +52,25 @@ MyWidget::MyWidget(const QString& label, QWidget * parent, const char * name, Qt
 
 void MyWidget::updateCaption()
 {
-switch (caption_policy)
+	switch (caption_policy)
 	{
-	case Name:
-        setWindowTitle(objectName());
-	break;
+		case Name:
+			setWindowTitle(name());
+			break;
 
-	case Label:
-		if (!w_label.isEmpty())
-            setWindowTitle(w_label);
-		else
-            setWindowTitle(objectName());
-	break;
+		case Label:
+			if (!windowLabel().isEmpty())
+				setWindowTitle(windowLabel());
+			else
+				setWindowTitle(name());
+			break;
 
-	case Both:
-		if (!w_label.isEmpty())
-            setWindowTitle(objectName() + " - " + w_label);
-		else
-            setWindowTitle(objectName());
-	break;
+		case Both:
+			if (!windowLabel().isEmpty())
+				setWindowTitle(name() + " - " + windowLabel());
+			else
+				setWindowTitle(name());
+			break;
 	}
 };
 
@@ -105,25 +106,25 @@ else
 
 QString MyWidget::aspect()
 {
-QString s = tr("Normal");
-switch (w_status)
+	QString s = tr("Normal");
+	switch (w_status)
 	{
-	case Hidden:
-		return tr("Hidden");
-	break;
+		case Hidden:
+			return tr("Hidden");
+			break;
 
-	case Normal:
-	break;
+		case Normal:
+			break;
 
-	case Minimized:
-		return tr("Minimized");
-	break;
+		case Minimized:
+			return tr("Minimized");
+			break;
 
-	case Maximized:
-		return tr("Maximized");
-	break;
+		case Maximized:
+			return tr("Maximized");
+			break;
 	}
-return s;
+	return s;
 }
 
 // Modifying the title bar menu is somewhat more complicated in Qt4.
@@ -160,11 +161,14 @@ bool MyWidget::eventFilter(QObject *object, QEvent *e)
 		emit showTitleBarMenu();
 		((QContextMenuEvent*)e)->accept();
 		return true;
-	} else if (e->type()==QEvent::ChildAdded && object == parent() && (tmp = qobject_cast<QWidget *>(((QChildEvent*)e)->child()))) {
+	} 
+	else if (e->type()==QEvent::ChildAdded && object == parent() && (tmp = qobject_cast<QWidget *>(((QChildEvent*)e)->child()))) 
+	{
 		(titleBar = tmp)->installEventFilter(this);
 		parent()->removeEventFilter(this);
+		return true;
 	}
-	return QObject::eventFilter(object, e);
+	return false;
 }
 
 void MyWidget::setStatus(Status s)

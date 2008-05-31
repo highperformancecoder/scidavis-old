@@ -1,13 +1,12 @@
 /***************************************************************************
     File                 : ApplicationWindow.h
     Project              : SciDAVis
-    --------------------------------------------------------------------
-    Copyright            : (C) 2006 by Ion Vasilief,
-                           Tilman Benkert,
-                           Knut Franke
-    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
-                           knut.franke*gmx.de
     Description          : SciDAVis's main window
+    --------------------------------------------------------------------
+    Copyright            : (C) 2006-2008 Knut Franke (knut.franke*gmx.de)
+    Copyright            : (C) 2006-2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2004-2007 by Ion Vasilief (ion_vasilief*yahoo.fr)
+                           (replace * with @ in the email address)
 
  ***************************************************************************/
 
@@ -33,7 +32,7 @@
 #define APPLICATION_H
 
 #include <QMainWindow>
-#include <q3listview.h>
+#include <Q3ListView>
 #include <Q3Header>
 #include <QHttp>
 #include <QFile>
@@ -81,6 +80,8 @@ class Plot3DDialog;
 class MyWidget;
 class TableStatistics;
 class CurveRangeDialog;
+class Project;
+class AbstractAspect;
 
 #ifndef TS_PATH
 #define TS_PATH (qApp->applicationDirPath() + "/translations")
@@ -132,7 +133,7 @@ public:
 	QDockWidget *consoleWindow;
 	QTextEdit *console;
 #endif
-	QWorkspace* ws;
+	QWorkspace* d_workspace;
 	QToolBar *file_tools, *graph_tools, *table_tools, *plot_tools, *graph_3D_tools, *edit_tools, *matrix_plot_tools;
 	FolderListView *lv, *folders;
 	QToolButton *btnResults;
@@ -312,7 +313,7 @@ public slots:
 	Matrix* newMatrix(const QString& caption, int r, int c);
 	Matrix* matrix(const QString& name);
 	Matrix* convertTableToMatrix();
-	void initMatrix(Matrix* m, const QString& caption);
+	void initMatrix(Matrix* m);
 	void invertMatrix();
 	void matrixDeterminant();
 	//@}
@@ -1134,6 +1135,8 @@ private:
 
 	QLabel *d_status_info;
 
+	Project * d_project;
+
 private slots:
 	//! Set the active window selected from the context menu's dependency list
 	/**
@@ -1148,5 +1151,9 @@ private slots:
 	 */
 	void selectPlotType(int type);
 
+	void handleAspectAdded(const AbstractAspect * aspect, int index);
+	void handleAspectAboutToBeRemoved(const AbstractAspect * aspect, int index);
 };
+
 #endif
+

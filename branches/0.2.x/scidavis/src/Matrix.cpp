@@ -51,6 +51,7 @@
 #include <QPrintDialog>
 #include <QPainter>
 #include <QLocale>
+#include <QtDebug>
 
 #include <stdlib.h>
 #include <math.h>
@@ -63,6 +64,13 @@ Matrix::Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* p
 	: MatrixView(label, parent, name, f), scripted(env)
 {
 	d_future_matrix = new future::Matrix(0, r, c, label);
+	init(r, c);
+}
+	
+Matrix::Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
+	: MatrixView(label, parent, name, f), scripted(env)
+{
+	d_future_matrix = future_matrix;
 	init(r, c);
 }
 
@@ -88,7 +96,10 @@ void Matrix::init(int rows, int cols)
 
 	ui.add_cell_combobox->addItem("cell(i, j)");
 	ui.add_function_combobox->addItems(scriptEnv->mathFunctions());
-
+	updateFunctionDoc();
+	
+	connect(ui.add_function_combobox, SIGNAL(currentIndexChanged(int)), 
+		this, SLOT(updateFunctionDoc()));
 	connect(ui.button_set_formula, SIGNAL(pressed()), 
 		this, SLOT(applyFormula()));
 	connect(ui.add_function_button, SIGNAL(pressed()), 
@@ -109,7 +120,11 @@ void Matrix::init(int rows, int cols)
 	connect(d_future_matrix, SIGNAL(coordinatesChanged()), this, SLOT(handleChange()));
 	connect(d_future_matrix, SIGNAL(formulaChanged()), this, SLOT(handleChange()));
 	connect(d_future_matrix, SIGNAL(formatChanged()), this, SLOT(handleChange()));
+	connect(d_future_matrix, SIGNAL(recalculate()), this, SLOT(recalculate()));
+}
 
+Matrix::~Matrix()
+{
 }
 
 void Matrix::handleChange()
@@ -539,18 +554,6 @@ void Matrix::customEvent(QEvent *e)
 		scriptingChangeEvent((ScriptingChangeEvent*)e);
 }
 
-bool Matrix::eventFilter(QObject *object, QEvent *e)
-{
-	if (e->type()==QEvent::ContextMenu && object == titleBar)
-	{
-		emit showTitleBarMenu();
-		((QContextMenuEvent*)e)->accept();
-		return true;
-	}
-
-	return MatrixView::eventFilter(object, e);
-}
-
 void Matrix::exportPDF(const QString& fileName)
 {
 	print(fileName);
@@ -714,14 +717,11 @@ void Matrix::copy(Matrix *m)
 	d_future_matrix->copy(m->d_future_matrix);
 }
 
-Matrix * Matrix::fromImage(const QImage & image)
+Matrix * Matrix::fromImage(const QImage & image, ScriptingEnv *env)
 {
 	future::Matrix * fm = future::Matrix::fromImage(image);
 	if (!fm) return NULL;
-	Matrix * m = new Matrix(0, image.height(), image.width(), tr("Matrix %1").arg(1));
-	delete m->d_future_matrix;
-	m->d_future_matrix = fm;
-	return m;
+	return new Matrix(fm, env, image.height(), image.width(), tr("Matrix %1").arg(1));
 }
 
 void Matrix::applyFormula()
@@ -738,6 +738,11 @@ void Matrix::addFunction()
 void Matrix::addCell()
 {
 	ui.formula_box->insertPlainText(ui.add_cell_combobox->currentText());
+}
+
+void Matrix::updateFunctionDoc()
+{
+	ui.add_function_combobox->setToolTip(scriptEnv->mathFunctionDoc(ui.add_function_combobox->currentText()));
 }
 
 

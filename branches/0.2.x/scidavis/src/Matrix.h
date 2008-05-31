@@ -56,6 +56,14 @@ class Matrix: public MatrixView, public scripted
 public:
 	future::Matrix *d_future_matrix;
 
+	//! Return the window name
+	virtual QString name() { return d_matrix->name();} 
+	//! Set the window name
+	virtual void setName(const QString& s) { d_matrix->setName(s); setObjectName(s); updateCaption(); }
+	//! Return the window label
+	virtual QString windowLabel() { return d_matrix->comment(); }
+	//! Set the window label
+	virtual void setWindowLabel(const QString& s) { d_matrix->setComment(s); updateCaption(); }
 	/*!
 	 * \brief Constructor
 	 *
@@ -69,7 +77,7 @@ public:
 	 * \param f window flags
 	 */
 	Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
-	~Matrix() { delete d_future_matrix; };
+	~Matrix();
 
 	//! Return the number of rows
 	int numRows();
@@ -80,13 +88,6 @@ public:
 	void setNumCols(int cols);
 
 	//event handlers
-	/*!
-	 * \brief Event filter
-	 *
-	 * Currently only reacts to events of the
-	 * title bar.
-	 */
-	bool eventFilter(QObject *object, QEvent *e);
 	//! Custom event handler
 	/**
 	 * Currently handles SCRIPTING_CHANGE_EVENT only.
@@ -256,7 +257,7 @@ public slots:
 	//! Free memory used for a matrix buffer
 	static void freeMatrixData(double **data, int rows);
 
-	static Matrix * fromImage(const QImage & image);
+	static Matrix * fromImage(const QImage & image, ScriptingEnv * env);
     void copy(Matrix *m);
 	
 	//! Return the creation date
@@ -270,6 +271,7 @@ protected slots:
     void applyFormula();
 	void addFunction();
 	void addCell();
+	void updateFunctionDoc();
 
 private:
 	//! Initialize the matrix
@@ -278,6 +280,7 @@ private:
 	//! Stores the matrix data only before the user opens the matrix dialog in order to avoid data loses during number format changes.
 	double **dMatrix;
 
+	Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
 };
 
 #endif

@@ -29,6 +29,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "matrix/future_Matrix.h"
+#include "Matrix.h"
 #include "core/AbstractScript.h"
 #include "core/future_Folder.h"
 #include "matrixcommands.h"
@@ -80,11 +81,13 @@ Matrix::Matrix()
 	: AbstractPart("temp")
 #endif
 {
+	d_view = NULL;
 	createActions();
 }
 
 Matrix::~Matrix()
 {
+	delete d_view;
 }
 
 void Matrix::setView(MatrixView * view)
@@ -682,8 +685,9 @@ void Matrix::connectActions()
 	connect(action_edit_coordinates, SIGNAL(triggered()), this, SLOT(editCoordinates()));
 	connect(action_edit_format, SIGNAL(triggered()), this, SLOT(editFormat()));
 	connect(action_clear_selection, SIGNAL(triggered()), this, SLOT(clearSelectedCells()));
-// TODO: Formula support
-//	connect(action_recalculate, SIGNAL(triggered()), this, SLOT(recalculate()));
+#ifdef LEGACY_CODE_0_2_x
+	connect(action_recalculate, SIGNAL(triggered()), this, SIGNAL(recalculate()));
+#endif
 	connect(action_select_all, SIGNAL(triggered()), this, SLOT(selectAll()));
 	connect(action_clear_matrix, SIGNAL(triggered()), this, SLOT(clear()));
 	connect(action_transpose, SIGNAL(triggered()), this, SLOT(transpose()));
@@ -714,8 +718,7 @@ void Matrix::addActionsToView()
 	d_view->addAction(action_edit_coordinates);
 	d_view->addAction(action_edit_format);
 	d_view->addAction(action_clear_selection);
-	// TODO: Formula support
-	//		d_view->addAction(action_recalculate);
+	d_view->addAction(action_recalculate);
 	d_view->addAction(action_toggle_tabbar);
 	d_view->addAction(action_select_all);
 	d_view->addAction(action_clear_matrix);

@@ -195,7 +195,7 @@ void MatrixView::changeEvent(QEvent * event)
 {
 	if (event->type() == QEvent::LanguageChange) 
 		retranslateStrings();
-	QWidget::changeEvent(event);	
+	MyWidget::changeEvent(event);	
 }
 
 void MatrixView::retranslateStrings()
@@ -352,12 +352,6 @@ bool MatrixView::eventFilter(QObject * watched, QEvent * event)
 
 	if (event->type() == QEvent::ContextMenu) 
 	{
-		if (watched == titleBar)
-		{
-			emit showTitleBarMenu();
-			((QContextMenuEvent*)event)->accept();
-			return true;
-		}
 		QContextMenuEvent *cm_event = static_cast<QContextMenuEvent *>(event);
 		QPoint global_pos = cm_event->globalPos();
 		if(watched == v_header)	
@@ -367,14 +361,13 @@ bool MatrixView::eventFilter(QObject * watched, QEvent * event)
 		else if(watched == d_view_widget)
 			d_matrix->showMatrixViewContextMenu(global_pos);
 		else
-			emit showTitleBarMenu();
-		//	return MyWidget::eventFilter(watched, event);
-			((QContextMenuEvent*)event)->accept();
-
+			return MyWidget::eventFilter(watched, event);
+			
+		event->accept();
 		return true;
 	} 
 	else 
-		return MyWidget::eventFilter(watched, event);
+			return MyWidget::eventFilter(watched, event);
 }
 	
 void MatrixView::showControlCoordinatesTab()

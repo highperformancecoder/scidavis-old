@@ -27,8 +27,8 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef FOLDER_H
-#define FOLDER_H
+#ifndef FUTURE_FOLDER_H
+#define FUTURE_FOLDER_H
 
 #include "core/AbstractAspect.h"
 
@@ -63,4 +63,4 @@ class Folder : public AbstractAspect
 };
 
 } // namespace
-#endif // ifndef FOLDER_H
+#endif // ifndef FUTURE_FOLDER_H

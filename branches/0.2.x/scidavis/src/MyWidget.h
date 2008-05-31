@@ -1,13 +1,12 @@
 /***************************************************************************
     File                 : MyWidget.h
     Project              : SciDAVis
-    --------------------------------------------------------------------
-    Copyright            : (C) 2006 by Ion Vasilief,
-                           Tilman Benkert,
-                           Knut Franke
-    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
-                           knut.franke*gmx.de
     Description          : MDI window widget
+    --------------------------------------------------------------------
+    Copyright            : (C) 2006-2008 Knut Franke (knut.franke*gmx.de)
+    Copyright            : (C) 2006-2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2006-2007 by Ion Vasilief (ion_vasilief*yahoo.fr)
+                           (replace * with @ in the email address)
 
  ***************************************************************************/
 
@@ -74,21 +73,19 @@ public:
 	enum Status{Hidden = -1, Normal = 0, Minimized = 1, Maximized = 2};
 
 	//! Return the window label
-	QString windowLabel(){return QString(w_label);};
+	virtual QString windowLabel(){return QString(w_label);};
 	//! Set the window label
-	void setWindowLabel(const QString& s) { w_label = s; updateCaption();};
+	virtual void setWindowLabel(const QString& s) { w_label = s; updateCaption();};
 
 	//! Return the window name
-	QString name(){return objectName();};
+	virtual QString name(){return objectName();};
 	//! Set the window name
-	void setName(const QString& s){setObjectName(s); updateCaption();};
+	virtual void setName(const QString& s){setObjectName(s); updateCaption();};
 
 	//! Return the caption policy
 	CaptionPolicy captionPolicy(){return caption_policy;};
 	//! Set the caption policy
 	void setCaptionPolicy(CaptionPolicy policy) { caption_policy = policy; updateCaption(); }
- 	//! Set the widget's name
-	void setName(const char *newname) { QWidget::setObjectName(newname); updateCaption(); }
 
 	//! Return the creation date
 	virtual QString birthDate(){return birthdate;};
@@ -158,7 +155,6 @@ protected:
 	//! Title bar of this MDI window if it currently belongs to a QWorkspace, NULL else
 	QWidget *titleBar;
 
-private:
     //! Set caption according to current CaptionPolicy, name and label
 	void updateCaption();
 
