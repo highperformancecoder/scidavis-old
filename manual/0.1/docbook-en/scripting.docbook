@@ -1282,6 +1282,30 @@ f.covarianceMatrix("cov")
       the source file is older or nonexistent. Otherwise, &appname; will try to
       compile the source file (if you've got write permissions for the output
       file).</para>
+
+		<sect3>
+			<title>Recommended approach to per-user configuration</title>
+
+			<para>
+				In order to give you full controll over the process of setting up the
+				Python environment within &appname;, a per-user configuration file
+				(.&python-rc;) will supersede any system-wide configuration file. That
+				is, GSL and SciPy functions as well as many &appname;-specific
+				functions (like table(), newTable(), plot(), etc.) will be missing,
+				unless you explicitly import them into the global namespace. In order
+				to keep the overview over their customizations and profit from updates
+				to the global configuration files (e.g. with new versions of
+				&appname;), most users will want to import the global configuration
+				file from within their custom one. Here's how to do this:
+			</para>
+
+			<programlisting width="40">
+import sys 
+sys.path.append("/etc") 
+import scidavisrc 
+# your custom stuff
+</programlisting>
+		</sect3>
     </sect2>
 
   </sect1>
