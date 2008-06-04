@@ -225,7 +225,8 @@ global QtCore
 from PyQt4 import QtCore
 
 # import SciDAVis' classes to the global namespace (particularly useful for fits)
-from __main__.scidavis import *
+for name in dir(__main__.scidavis):
+	setattr(__main__, name, getattr(__main__.scidavis, name))
 
 # import selected methods of ApplicationWindow into the global namespace
 appImports = (
