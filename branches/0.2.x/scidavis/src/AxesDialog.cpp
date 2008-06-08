@@ -1319,7 +1319,7 @@ void AxesDialog::setGraph(Graph *g)
 	tablesList = app->tableWindows;
 	boxTableName->insertStringList(tablesList);
 
-	boxColName-> insertStringList(app->columnsList(Table::All));
+	boxColName-> insertStringList(app->columnsList());
 
 	xAxisOn = p->axisEnabled(QwtPlot::xBottom);
 	yAxisOn = p->axisEnabled(QwtPlot::yLeft);

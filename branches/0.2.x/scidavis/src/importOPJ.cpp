@@ -115,17 +115,17 @@ bool ImportOPJ::importTables(OPJFile opj)
 			table->changeColWidth(opj.colWidth(s,j)*SciDAVis_scaling_factor, j);
 
 			if (QString(opj.colType(s,j)) == "X")
-				table->setColPlotDesignation(j, Table::X);
+				table->setColPlotDesignation(j, SciDAVis::X);
 			else if (QString(opj.colType(s,j)) == "Y")
-				table->setColPlotDesignation(j, Table::Y);
+				table->setColPlotDesignation(j, SciDAVis::Y);
 			else if (QString(opj.colType(s,j)) == "Z")
-				table->setColPlotDesignation(j, Table::Z);
+				table->setColPlotDesignation(j, SciDAVis::Z);
 			else if (QString(opj.colType(s,j)) == "DX")
-				table->setColPlotDesignation(j, Table::xErr);
+				table->setColPlotDesignation(j, SciDAVis::xErr);
 			else if (QString(opj.colType(s,j)) == "DY")
-				table->setColPlotDesignation(j, Table::yErr);
+				table->setColPlotDesignation(j, SciDAVis::yErr);
 			else
-				table->setColPlotDesignation(j, Table::None);
+				table->setColPlotDesignation(j, SciDAVis::noDesignation);
 
             table->setHeaderColType();//update header
 

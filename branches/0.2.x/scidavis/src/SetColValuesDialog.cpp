@@ -156,13 +156,13 @@ SetColValuesDialog::SetColValuesDialog( ScriptingEnv *env, QWidget* parent, Qt::
 
 void SetColValuesDialog::prevColumn()
 {
-	int sc = d_table->selectedColumn();
+	int sc = d_table->firstSelectedColumn();
 	updateColumn(--sc);
 }
 
 void SetColValuesDialog::nextColumn()
 {
-	int sc = d_table->selectedColumn();
+	int sc = d_table->firstSelectedColumn();
 	updateColumn(++sc);
 }
 
@@ -173,9 +173,8 @@ void SetColValuesDialog::updateColumn(int sc)
 
 	boxSelectColumn->setCurrentIndex(sc);
 
-	d_table->setSelectedCol(sc);
-	d_table->table()->clearSelection();
-	d_table->table()->selectColumn(sc);
+	d_table->deselectAll();
+	d_table->setCellsSelected(0, sc, d_table->numRows()-1, sc);
 	colNameLabel->setText("col(\""+d_table->colLabel(sc)+"\")= ");
 
 	QStringList com = d_table->getCommands();
@@ -197,7 +196,7 @@ void SetColValuesDialog::customEvent(QEvent *e)
 
 bool SetColValuesDialog::apply()
 {
-	int col = d_table->selectedColumn();
+	int col = d_table->firstSelectedColumn();
 
 	if (col < 0 || col >= d_table->numCols())
 		return false;
@@ -248,6 +247,8 @@ void SetColValuesDialog::setTable(Table* w)
 	for (int i=0; i<cols; i++)
 		boxSelectColumn->addItem(colNames[i]); 
 
+// TODO
+#if 0
 	int s = w->table()->currentSelection();
 	if (s >= 0)
 	{
@@ -258,13 +259,14 @@ void SetColValuesDialog::setTable(Table* w)
 		end->setValue(sel.bottomRow() + 1);
 	}
 	else
+#endif
 	{
 		start->setValue(1);
 		end->setValue(w->numRows());
 	}
 
-	boxSelectColumn->setCurrentIndex(w->selectedColumn());
-	updateColumn(w->selectedColumn());
+	boxSelectColumn->setCurrentIndex(w->firstSelectedColumn());
+	updateColumn(w->firstSelectedColumn());
 	commands->setContext(w);
 	connect(boxSelectColumn, SIGNAL(currentIndexChanged(int)), this, SLOT(updateColumn(int)));
 }

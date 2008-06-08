@@ -27,18 +27,18 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "tablecommands.h"
-#include "Table.h"
-#include "Column.h"
-#include "Interval.h"
-#include "Double2StringFilter.h"
+#include "table/tablecommands.h"
+#include "table/future_Table.h"
+#include "core/column/Column.h"
+#include "lib/Interval.h"
+#include "core/datatypes/Double2StringFilter.h"
 #include <QObject>
 #include <QtDebug>
 
 ///////////////////////////////////////////////////////////////////////////
 // class TableInsertColumnsCmd
 ///////////////////////////////////////////////////////////////////////////
-TableInsertColumnsCmd::TableInsertColumnsCmd( Table::Private * private_obj, int before, QList<Column*> cols, QUndoCommand * parent)
+TableInsertColumnsCmd::TableInsertColumnsCmd( future::Table::Private * private_obj, int before, QList<Column*> cols, QUndoCommand * parent)
  : QUndoCommand( parent ), d_private_obj(private_obj), d_before(before), d_cols(cols)
 {
 	setText(QObject::tr("%1: insert %2 column(s)").arg(d_private_obj->name()).arg(d_cols.size()));
@@ -67,7 +67,7 @@ void TableInsertColumnsCmd::undo()
 ///////////////////////////////////////////////////////////////////////////
 // class TableSetNumberOfRowsCmd
 ///////////////////////////////////////////////////////////////////////////
-TableSetNumberOfRowsCmd::TableSetNumberOfRowsCmd( Table::Private * private_obj, int rows, QUndoCommand * parent )
+TableSetNumberOfRowsCmd::TableSetNumberOfRowsCmd( future::Table::Private * private_obj, int rows, QUndoCommand * parent )
  : QUndoCommand( parent ), d_private_obj(private_obj), d_rows(rows)
 {
 	setText(QObject::tr("%1: set the number of rows to %2").arg(d_private_obj->name()).arg(rows));
@@ -95,7 +95,7 @@ void TableSetNumberOfRowsCmd::undo()
 ///////////////////////////////////////////////////////////////////////////
 // class TableRemoveColumnsCmd
 ///////////////////////////////////////////////////////////////////////////
-TableRemoveColumnsCmd::TableRemoveColumnsCmd( Table::Private * private_obj, int first, int count, QList<Column*> cols, QUndoCommand * parent )
+TableRemoveColumnsCmd::TableRemoveColumnsCmd( future::Table::Private * private_obj, int first, int count, QList<Column*> cols, QUndoCommand * parent )
  : QUndoCommand( parent ), d_private_obj(private_obj), d_first(first), d_count(count), d_old_cols(cols)
 {
 	setText(QObject::tr("%1: remove %2 column(s)").arg(d_private_obj->name()).arg(count));
@@ -122,7 +122,7 @@ void TableRemoveColumnsCmd::undo()
 ///////////////////////////////////////////////////////////////////////////
 // class TableMoveColumnCmd
 ///////////////////////////////////////////////////////////////////////////
-TableMoveColumnCmd::TableMoveColumnCmd( Table::Private * private_obj, int from, int to, QUndoCommand * parent )
+TableMoveColumnCmd::TableMoveColumnCmd( future::Table::Private * private_obj, int from, int to, QUndoCommand * parent )
  : QUndoCommand( parent ), d_private_obj(private_obj), d_from(from), d_to(to)
 {
 	setText(QObject::tr("%1: move column %2 from position %3 to %4")

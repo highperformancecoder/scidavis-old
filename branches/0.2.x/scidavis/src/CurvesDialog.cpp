@@ -530,7 +530,7 @@ void CurvesDialog::showCurrentFolder(bool currentFolder)
 
 				Table *t = (Table *)w;
 				for (int i=0; i < t->numCols(); i++){
-					if(t->colPlotDesignation(i) == Table::Y)
+					if(t->colPlotDesignation(i) == SciDAVis::Y)
 						columns << QString(t->name()) + "_" + t->colLabel(i);
 				}
 			}
@@ -538,7 +538,7 @@ void CurvesDialog::showCurrentFolder(bool currentFolder)
 		}
     }
 	else
-        available->addItems(app->columnsList(Table::Y));
+        available->addItems(app->columnsList(SciDAVis::Y));
 }
 
 void CurvesDialog::closeEvent(QCloseEvent* e)

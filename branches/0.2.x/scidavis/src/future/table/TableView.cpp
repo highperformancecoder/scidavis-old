@@ -27,14 +27,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "Table.h"
-#include "TableView.h"
-#include "TableModel.h"
-#include "TableItemDelegate.h"
-#include "tablecommands.h"
-#include "TableDoubleHeaderView.h"
+#include "table/future_Table.h"
+#include "table/TableView.h"
+#include "table/TableModel.h"
+#include "table/TableItemDelegate.h"
+#include "table/tablecommands.h"
+#include "table/TableDoubleHeaderView.h"
 
-#include "Column.h"
+#include "core/column/Column.h"
 #include "core/AbstractFilter.h"
 #include "core/datatypes/SimpleCopyThroughFilter.h"
 #include "core/datatypes/Double2StringFilter.h"
@@ -58,16 +58,32 @@
 #include <QScrollArea>
 #include <QMenu>
 
-TableView::TableView(Table *table)
+#ifndef LEGACY_CODE_0_2_x
+TableView::TableView(future::Table *table)
  : d_table(table) 
+#else
+TableView::TableView(const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
+ : MyWidget(label, parent, name, f)
+#endif
 {
+#ifndef LEGACY_CODE_0_2_x
 	d_model = new TableModel(table);
 	init();
+#else
+	d_model = NULL;
+#endif
 }
 
 TableView::~TableView() 
 {
 	delete d_model;
+}
+
+void TableView::setTable(future::Table * table)
+{
+	d_table = table;
+	d_model = new TableModel(table);
+	init();
 }
 
 void TableView::init()
@@ -200,6 +216,11 @@ void TableView::goToCell(int row, int col)
 void TableView::selectAll()
 {
 	d_view_widget->selectAll();
+}
+
+void TableView::deselectAll()
+{
+	d_view_widget->clearSelection();
 }
 
 void TableView::toggleControlTabBar() 
@@ -576,16 +597,18 @@ bool TableView::isCellSelected(int row, int col)
 	return d_view_widget->selectionModel()->isSelected(d_model->index(row, col));
 }
 
-void TableView::setCellSelected(int row, int col)
+void TableView::setCellSelected(int row, int col, bool select)
 {
-	 d_view_widget->selectionModel()->select(d_model->index(row, col), QItemSelectionModel::Select);
+	 d_view_widget->selectionModel()->select(d_model->index(row, col), 
+			 select ? QItemSelectionModel::Select : QItemSelectionModel::Deselect);
 }
 
-void TableView::setCellsSelected(int first_row, int first_col, int last_row, int last_col)
+void TableView::setCellsSelected(int first_row, int first_col, int last_row, int last_col, bool select)
 {
 	QModelIndex top_left = d_model->index(first_row, first_col);
 	QModelIndex bottom_right = d_model->index(last_row, last_col);
-	d_view_widget->selectionModel()->select(QItemSelection(top_left, bottom_right), QItemSelectionModel::SelectCurrent);
+	d_view_widget->selectionModel()->select(QItemSelection(top_left, bottom_right), 
+			select ? QItemSelectionModel::SelectCurrent : QItemSelectionModel::Deselect);
 }
 
 void TableView::getCurrentCell(int * row, int * col)

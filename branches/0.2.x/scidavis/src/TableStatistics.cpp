@@ -57,7 +57,7 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 		setColName(8, "N");
 
 		for (int i=0; i < 9; i++)
-			setColumnType(i, Text);
+			setColumnType(i, SciDAVis::Text);
 
 		for (int i=0; i < d_targets.size(); i++)
 			setText(i, 0, QString::number(d_targets[i]+1));
@@ -82,7 +82,7 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 		setColName(10, "N");
 
 		for (int i=0; i < 11; i++)
-			setColumnType(i, Text);
+			setColumnType(i, SciDAVis::Text);
 
 		for (int i=0; i < d_targets.size(); i++)
 		{
@@ -90,6 +90,8 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 			update(d_base, d_base->colName(d_targets[i]));
 		}
 	}
+// TODO: remove or replace this
+#if 0
 	int w=9*(d_table->horizontalHeader())->sectionSize(0);
 	int h;
 	if (numRows()>11)
@@ -97,8 +99,9 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 	else
 		h=(numRows()+1)*(d_table->verticalHeader())->sectionSize(0);
 	setGeometry(50,50,w + 45, h + 45);
+#endif
 
-	setColPlotDesignation(0, Table::X);
+	setColPlotDesignation(0, SciDAVis::X);
 	setHeaderColType();
 }
 
@@ -243,6 +246,8 @@ void TableStatistics::renameCol(const QString &from, const QString &to)
 
 void TableStatistics::removeCol(const QString &col)
 {
+// TODO
+#if 0
 	if (d_type == row)
 	{
 		update(d_base, col);
@@ -255,6 +260,7 @@ void TableStatistics::removeCol(const QString &col)
 			d_table->removeRow(c);
 			return;
 		}
+#endif
 }
 
 QString TableStatistics::saveToString(const QString &geometry)

@@ -1,13 +1,12 @@
 /***************************************************************************
     File                 : Matrix.cpp
     Project              : SciDAVis
-    --------------------------------------------------------------------
-    Copyright            : (C) 2006 by Ion Vasilief,
-                           Tilman Benkert,
-                           Knut Franke
-    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
-                           knut.franke*gmx.de
     Description          : Matrix worksheet class
+    --------------------------------------------------------------------
+    Copyright            : (C) 2006-2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2006-2008 Knut Franke (knut.franke*gmx.de)
+    Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
+                           (replace * with @ in the email addresses) 
 
  ***************************************************************************/
 
@@ -107,10 +106,13 @@ void Matrix::init(int rows, int cols)
 	connect(ui.add_cell_button, SIGNAL(pressed()), 
 		this, SLOT(addCell()));
 
+// TODO: this should not be needed anymore
+#if 0
 	// keyboard shortcuts
 	QShortcut * sel_all = new QShortcut(QKeySequence(tr("Ctrl+A", "Matrix: select all")), this);
 	connect(sel_all, SIGNAL(activated()), this, SLOT(selectAll()));
 	// remark: the [TAB] behaviour is now nicely done by Qt4
+#endif
 
 	connect(d_future_matrix, SIGNAL(columnsInserted(int, int)), this, SLOT(handleChange()));
 	connect(d_future_matrix, SIGNAL(columnsRemoved(int, int)), this, SLOT(handleChange()));
@@ -640,7 +642,7 @@ void Matrix::print(const QString& fileName)
 
 		for(int j=0;j<cols;j++)
 		{
-			int w = this->columnWidth (j);
+			int w = columnWidth (j);
 			cell_text = text(i,j)+"\t";
 			tr = p.boundingRect(tr,Qt::AlignCenter,cell_text);
 			br.setTopLeft(QPoint(right,height));

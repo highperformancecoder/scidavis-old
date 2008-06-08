@@ -37,7 +37,7 @@
 #include <QColor>
 
 class Column;
-class Table;
+namespace future{ class Table; }
 
 //! Model for the access to a Table
 /**
@@ -55,7 +55,7 @@ class TableModel : public QAbstractItemModel
 
 	public:
 		//! Constructor
-		explicit TableModel(Table * table);
+		explicit TableModel(future::Table * table);
 		//! Destructor
 		~TableModel();
 
@@ -95,7 +95,7 @@ class TableModel : public QAbstractItemModel
 		//@}
 
 	private:
-		Table * d_table;
+		future::Table * d_table;
 }; 
 
 #endif

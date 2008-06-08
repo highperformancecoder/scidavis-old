@@ -27,13 +27,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "Column.h"
-#include "Table.h"
-#include "TableModel.h"
+#include "core/column/Column.h"
+#include "table/future_Table.h"
+#include "table/TableModel.h"
 #include <QString>
 #include <QBrush>
 
-TableModel::TableModel(Table * table)
+TableModel::TableModel(future::Table * table)
 	: QAbstractItemModel(0), d_table(table)
 {
 	connect(d_table, SIGNAL(columnsAboutToBeInserted(int, QList<Column *>)),

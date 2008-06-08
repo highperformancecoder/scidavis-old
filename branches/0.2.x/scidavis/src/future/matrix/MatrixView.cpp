@@ -126,12 +126,7 @@ void MatrixView::init()
 	d_view_widget->setCornerButtonEnabled(true);
 #endif
 
-	// TODO: check whether extended selections can be supported in 0.2.x
-#ifndef LEGACY_CODE_0_2_x
 	d_view_widget->setSelectionMode(QAbstractItemView::ExtendedSelection);
-#else
-	d_view_widget->setSelectionMode(QAbstractItemView::ContiguousSelection);
-#endif
 
 	QHeaderView * h_header = d_view_widget->horizontalHeader();
 	QHeaderView * v_header = d_view_widget->verticalHeader();

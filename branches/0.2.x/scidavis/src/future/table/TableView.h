@@ -50,9 +50,10 @@
 #include "ui_controltabs.h"
 #include <QtDebug>
 #include "globals.h"
+#include "MyWidget.h"
 
 class Column;
-class Table;
+namespace future{ class Table; }
 class TableModel;
 class TableItemDelegate;
 class TableDoubleHeaderView;
@@ -81,13 +82,18 @@ class TableViewWidget : public QTableView
 };
 
 //! View class for Table
-class TableView : public QWidget
+class TableView : public MyWidget
 {
     Q_OBJECT
 
 	public:
 		//! Constructor
-		TableView(Table *table);
+#ifndef LEGACY_CODE_0_2_x
+		TableView(future::Table * table);
+#else
+		TableView(const QString & label, QWidget * parent=0, const char * name=0, Qt::WFlags f=0);
+		void setTable(future::Table * table);
+#endif
 		//! Destructor
 		virtual ~TableView();
 		bool isControlTabBarVisible() { return d_control_tabs->isVisible(); }
@@ -156,10 +162,10 @@ class TableView : public QWidget
 		int lastSelectedRow(bool full = false);
 		//! Return whether a cell is selected
 		bool isCellSelected(int row, int col);
-		//! Select a cell
-		void setCellSelected(int row, int col);
-		//! Select a range of cells
-		void setCellsSelected(int first_row, int first_col, int last_row, int last_col);
+		//! Select/Deselect a cell
+		void setCellSelected(int row, int col, bool select = true);
+		//! Select/Deselect a range of cells
+		void setCellsSelected(int first_row, int first_col, int last_row, int last_col, bool select = true);
 		//! Determine the current cell (-1 if no cell is designated as the current)
 		void getCurrentCell(int * row, int * col);
 		//@}
@@ -167,6 +173,7 @@ class TableView : public QWidget
 	public slots:
 		void goToCell(int row, int col);
 		void selectAll();
+		void deselectAll();
 		void toggleControlTabBar();
 		void toggleComments();
 		void showControlDescriptionTab();
@@ -197,7 +204,6 @@ class TableView : public QWidget
 
 		bool eventFilter( QObject * watched, QEvent * event);
 
-	private:
 		//! UI with options tabs (description, format, formula etc.)
 		Ui::ControlTabs ui;
 		//! The table view (first part of the UI)
@@ -208,7 +214,7 @@ class TableView : public QWidget
 		QToolButton * d_hide_button;
 		QHBoxLayout * d_main_layout;
 		TableDoubleHeaderView * d_horizontal_header;
-		Table * d_table;
+		future::Table * d_table;
 
 		//! Initialization
 		void init();

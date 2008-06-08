@@ -355,11 +355,13 @@ Table* Fit::parametersTable(const QString& tableName)
 		t->setText(i, 2, QLocale().toString(sqrt(gsl_matrix_get(covar,i,i)), 'g', d_prec));
 	}
 
-	t->setColPlotDesignation(2, Table::yErr);
+	t->setColPlotDesignation(2, SciDAVis::yErr);
 	t->setHeaderColType();
+// TODO: replace or remove this
+#if 0
 	for (int j=0; j<3; j++)
 		t->table()->adjustColumn(j);
-
+#endif
 	t->showNormal();
 	return t;
 }

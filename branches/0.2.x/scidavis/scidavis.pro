@@ -61,7 +61,7 @@ win32: pythonutils.path = $$INSTALLBASE
 ### building without muParser does not work yet (but will in a future version)
 include( muparser.pri )
 ### comment out the following line to deactivate Python scripting support
-include( python.pri )
+#include( python.pri )  ######## Python disabled until the integration of the new Table class is finished
 
 ### Note to packagers: If you want to use systemwide installed liborigin
 ### instead of the one provided in "3rdparty", uncomment the following 2 lines:

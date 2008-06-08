@@ -93,6 +93,7 @@
 #include "QwtHistogram.h"
 #include "OpenProjectDialog.h"
 #include "core/Project.h"
+#include "core/column/Column.h"
 
 // TODO: move tool-specific code to an extension manager
 #include "ScreenPickerTool.h"
@@ -139,6 +140,7 @@
 #include <QSignalMapper>
 #include <QUndoStack>
 #include <QtDebug>
+#include "table/future_Table.h"
 
 #include <zlib.h>
 
@@ -1145,16 +1147,18 @@ void ApplicationWindow::customMenu(QWidget* w)
 		else if (w->inherits("Table"))
 		{
 			menuBar()->insertItem(tr("&Plot"), plot2D);
-			if (w->inherits("Table"))
-			{
-				menuBar()->insertItem(tr("&Analysis"), dataMenu);
-				menuBar()->insertItem(tr("&Table"), tableMenu);
-			}
+			menuBar()->insertItem(tr("&Analysis"), dataMenu);
+			menuBar()->insertItem(tr("&Table"), tableMenu);
 
 			actionShowExportASCIIDialog->setEnabled(true);
 			actionTableRecalculate->setEnabled(true);
 			file->setItemEnabled (exportID,false);
 			file->setItemEnabled (closeID,true);
+
+			// TODO: merge both menus
+			QMenu * menu = new QMenu();
+			static_cast<Table *>(w)->d_future_table->fillProjectMenu(menu);
+			menuBar()->insertItem(tr("&future::Table"), menu);
 		}
 		else if (w->inherits("Matrix"))
 		{
@@ -1359,7 +1363,7 @@ void ApplicationWindow::plot3DRibbon()
 	{
 		if (!validFor3DPlot(table))
 			return;
-		dataPlot3D(table, table->colName(table->selectedColumn()));
+		dataPlot3D(table, table->colName(table->firstSelectedColumn()));
 	}
 	else
 		QMessageBox::warning(this,tr("Plot error"),tr("You must select exactly one column for plotting!"));
@@ -1398,7 +1402,7 @@ void ApplicationWindow::plot3DBars()
 			return;
 
 		if(table->selectedColumns().count() == 1)
-			dataPlotXYZ(table, table->colName(table->selectedColumn()), Graph3D::Bars);
+			dataPlotXYZ(table, table->colName(table->firstSelectedColumn()), Graph3D::Bars);
 		else
 			QMessageBox::warning(this, tr("Plot error"),tr("You must select exactly one column for plotting!"));
 	}
@@ -1419,7 +1423,7 @@ void ApplicationWindow::plot3DScatter()
 			return;
 
 		if(table->selectedColumns().count() == 1)
-			dataPlotXYZ(table, table->colName(table->selectedColumn()), Graph3D::Scatter);
+			dataPlotXYZ(table, table->colName(table->firstSelectedColumn()), Graph3D::Scatter);
 		else
 			QMessageBox::warning(this, tr("Plot error"),tr("You must select exactly one column for plotting!"));
 	}
@@ -1440,7 +1444,7 @@ void ApplicationWindow::plot3DTrajectory()
 			return;
 
 		if(table->selectedColumns().count() == 1)
-			dataPlotXYZ(table, table->colName(table->selectedColumn()), Graph3D::Trajectory);
+			dataPlotXYZ(table, table->colName(table->firstSelectedColumn()), Graph3D::Trajectory);
 		else
 			QMessageBox::warning(this, tr("Plot error"),tr("You must select exactly one column for plotting!"));
 	}
@@ -1468,8 +1472,7 @@ void ApplicationWindow::plotPie()
 	QStringList s = table->selectedColumns();
 	if (s.count()>0)
 	{
-		Q3TableSelection sel = table->getSelection();
-		multilayerPlot(table, s, Graph::Pie, sel.topRow(), sel.bottomRow());
+		multilayerPlot(table, s, Graph::Pie, table->firstSelectedRow(), table->lastSelectedRow());
 	}
 	else
 		QMessageBox::warning(this, tr("Error"), tr("Please select a column to plot!"));
@@ -1488,8 +1491,7 @@ void ApplicationWindow::plotVectXYXY()
 	QStringList s = table->selectedColumns();
 	if (s.count() == 4)
 	{
-		Q3TableSelection sel = table->getSelection();
-		multilayerPlot(table, s, Graph::VectXYXY, sel.topRow(), sel.bottomRow());
+		multilayerPlot(table, s, Graph::VectXYXY, table->firstSelectedRow(), table->lastSelectedRow());
 	}
 	else
 		QMessageBox::warning(this, tr("Error"), tr("Please select four columns for this operation!"));
@@ -1508,8 +1510,7 @@ void ApplicationWindow::plotVectXYAM()
 	QStringList s = table->selectedColumns();
 	if (s.count() == 4)
 	{
-		Q3TableSelection sel = table->getSelection();
-		multilayerPlot(table, s, Graph::VectXYAM, sel.topRow(), sel.bottomRow());
+		multilayerPlot(table, s, Graph::VectXYAM, table->firstSelectedRow(), table->lastSelectedRow());
 	}
 	else
 		QMessageBox::warning(this, tr("Error"), tr("Please select four columns for this operation!"));
@@ -1702,7 +1703,8 @@ void ApplicationWindow::add3DData()
 		return;
 	}
 
-	QStringList zColumns = columnsList(Table::Z);
+	// TODO: string list -> Column * list
+	QStringList zColumns = columnsList(SciDAVis::Z);
 	if ((int)zColumns.count() <= 0)
 	{
 		QMessageBox::critical(this,tr("Warning"),
@@ -1725,7 +1727,8 @@ void ApplicationWindow::change3DData()
 	connect (ad,SIGNAL(options(const QString&)), this, SLOT(change3DData(const QString&)));
 
 	ad->setWindowTitle(tr("Choose data set"));
-	ad->setCurveNames(columnsList(Table::Z));
+	// TODO: string list -> Column * list
+	ad->setCurveNames(columnsList(SciDAVis::Z));
 	ad->exec();
 }
 
@@ -2460,9 +2463,8 @@ Table* ApplicationWindow::newTable(const QString& fname, const QString &sep,
 			simplifySpaces, fname, d_workspace, 0, 0);
 	if (w)
 	{
-		w->setAttribute(Qt::WA_DeleteOnClose);
-		initTable(w, generateUniqueName(tr("Table")));
-		w->show();
+		w->setName(generateUniqueName(tr("Table")));
+		d_project->addChild(w->d_future_table);
 	}
 	return w;
 }
@@ -2473,9 +2475,8 @@ Table* ApplicationWindow::newTable(const QString& fname, const QString &sep,
 Table* ApplicationWindow::newTable()
 {
 	Table* w = new Table(scriptEnv, 30, 2, "", d_workspace, 0);
-	w->setAttribute(Qt::WA_DeleteOnClose);
-	initTable(w, generateUniqueName(tr("Table")));
-	w->showNormal();
+	w->setName(generateUniqueName(tr("Table")));
+	d_project->addChild(w->d_future_table);
 	return w;
 }
 
@@ -2485,8 +2486,8 @@ Table* ApplicationWindow::newTable()
 Table* ApplicationWindow::newTable(const QString& caption, int r, int c)
 {
 	Table* w = new Table(scriptEnv, r, c, "", d_workspace, 0);
-	w->setAttribute(Qt::WA_DeleteOnClose);
-	initTable(w, caption);
+	w->setName(caption);
+	d_project->addChild(w->d_future_table);
 	if (w->name() != caption)//the table was renamed
 	{
 		renamedTables << caption << w->name();
@@ -2494,15 +2495,14 @@ Table* ApplicationWindow::newTable(const QString& caption, int r, int c)
 		QMessageBox:: warning(this, tr("Renamed Window"),
 				tr("The table '%1' already exists. It has been renamed '%2'.").arg(caption).arg(w->name()));
 	}
-	w->showNormal();
 	return w;
 }
 
 Table* ApplicationWindow::newTable(int r, int c, const QString& name, const QString& legend)
 {
 	Table* w = new Table(scriptEnv, r, c, legend, d_workspace, 0);
-	w->setAttribute(Qt::WA_DeleteOnClose);
-	initTable(w, name);
+	w->setName(name);
+	d_project->addChild(w->d_future_table);
 	return w;
 }
 
@@ -2514,7 +2514,6 @@ Table* ApplicationWindow::newTable(const QString& caption, int r, int c, const Q
         legend = lst[1];
 
 	Table* w = new Table(scriptEnv, r, c, legend, d_workspace, 0);
-	w->setAttribute(Qt::WA_DeleteOnClose);
 
 	QStringList rows = text.split("\n", QString::SkipEmptyParts);
 	QString rlist = rows[0];
@@ -2529,15 +2528,14 @@ Table* ApplicationWindow::newTable(const QString& caption, int r, int c, const Q
 			w->setText(i, j, list[j]);
 	}
 
-	initTable(w, lst[0]);
-	w->showNormal();
+	w->setName(lst[0]);
+	d_project->addChild(w->d_future_table);
 	return w;
 }
 
 Table* ApplicationWindow::newHiddenTable(const QString& name, const QString& label, int r, int c, const QString& text)
 {
 	Table* w = new Table(scriptEnv, r, c, label, 0, 0);
-	w->setAttribute(Qt::WA_DeleteOnClose);
 
 	if (!text.isEmpty()) {
 		QStringList rows = text.split("\n", QString::SkipEmptyParts);
@@ -2553,33 +2551,28 @@ Table* ApplicationWindow::newHiddenTable(const QString& name, const QString& lab
 				w->setText(i, j, list[j]);
 		}
 	}
-
-	initTable(w, name);
+	
+	w->setName(name);
+	d_project->addChild(w->d_future_table);
 	hideWindow(w);
 	return w;
 }
 
-void ApplicationWindow::initTable(Table* w, const QString& caption)
+void ApplicationWindow::initTable(Table* w)
 {
-	QString name = caption;
-	name = name.replace ("_","-");
-
-	while(name.isEmpty() || alreadyUsedName(name))
-		name = generateUniqueName(tr("Table"));
-
+	w->setWindowTitle(w->name());
+	w->setIcon( QPixmap(":/worksheet.xpm") );
 	current_folder->addWindow(w);
 	w->setFolder(current_folder);
 	d_workspace->addWindow(w);
+	addListViewItem(w);
+	w->showNormal();
 
 	connectTable(w);
 	customTable(w);
 
-	tableWindows << name;
-	w->setName(name);
-	w->setIcon( QPixmap(":/worksheet.xpm") );
-	w->setSpecifications(w->saveToString(windowGeometryInfo(w)));
+	tableWindows << w->name();
 
-	addListViewItem(w);
 	emit modified();
 }
 
@@ -2590,13 +2583,15 @@ TableStatistics *ApplicationWindow::newTableStatistics(Table *base, int type, QL
 {
 	TableStatistics* s = new TableStatistics(scriptEnv, d_workspace, base, (TableStatistics::Type) type, target);
 	if (caption.isEmpty())
-		initTable(s, s->name());
+		d_project->addChild(s->d_future_table);
 	else
-		initTable(s, caption);
+	{
+		s->setName(caption);
+		d_project->addChild(s->d_future_table);
+	}
 	connect(base, SIGNAL(modifiedData(Table*,const QString&)), s, SLOT(update(Table*,const QString&)));
 	connect(base, SIGNAL(changedColHeader(const QString&, const QString&)), s, SLOT(renameCol(const QString&, const QString&)));
 	connect(base, SIGNAL(removedCol(const QString&)), s, SLOT(removeCol(const QString&)));
-	s->showNormal();
 	return s;
 }
 
@@ -2700,14 +2695,14 @@ Table* ApplicationWindow::convertMatrixToTable()
 	int cols = m->numCols();
 
 	Table* w = new Table(scriptEnv, rows, cols, "", d_workspace, 0);
-	w->setAttribute(Qt::WA_DeleteOnClose);
 	for (int i = 0; i<rows; i++)
 	{
 		for (int j = 0; j<cols; j++)
 			w->setText(i, j, m->text(i,j));
 	}
 
-	initTable(w, generateUniqueName(tr("Table")));
+	w->setName(generateUniqueName(tr("Table")));
+	d_project->addChild(w->d_future_table);
 	w->setWindowLabel(m->windowLabel());
 	w->setCaptionPolicy(m->captionPolicy());
 	w->resize(m->size());
@@ -2905,9 +2900,9 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type, const QSt
 		return;
 
 	if (direction == QwtErrorPlotCurve::Horizontal)
-		w->addCol(Table::xErr);
+		w->addCol(SciDAVis::xErr);
 	else
-		w->addCol(Table::yErr);
+		w->addCol(SciDAVis::yErr);
 
 	int r=w->numRows();
 	int c=w->numCols()-1;
@@ -2925,8 +2920,9 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type, const QSt
 	{
 		for (int i=0;i<r;i++)
 		{
-			if (!w->text(i,ycol).isEmpty())
-				w->setText(i,c,QString::number(Y[i]*prc/100.0,'g',15));
+		// TODO:
+		////	if (!w->text(i,ycol).isEmpty())
+		////		w->setText(i,c,QString::number(Y[i]*prc/100.0,'g',15));
 		}
 	}
 	else if (type==1)
@@ -2941,8 +2937,9 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type, const QSt
 		dev=sqrt(dev/(r-1));
 		for (i=0;i<r;i++)
 		{
-			if (!w->table()->item(i,ycol)->text().isEmpty())
-				w->setText(i,c,QString::number(dev,'g',15));
+			// TODO:
+			//// if (!w->table()->item(i,ycol)->text().isEmpty())
+			////	w->setText(i,c,QString::number(dev,'g',15));
 		}
 	}
 	g->addErrorBars(xColName, name, w, errColName, direction);
@@ -2969,10 +2966,10 @@ void ApplicationWindow::defineErrorBars(const QString& curveName, const QString&
 	}
 
 	int errCol=errTable->colIndex(errColumnName);
-	if (errTable->isEmptyColumn(errCol))
+	if (errTable->d_future_table->column(errCol)->dataType() != SciDAVis::TypeDouble)
 	{
 		QMessageBox::critical(this,tr("Error"),
-				tr("The selected error column is empty!"));
+				tr("You can only define error bars for numeric columns."));
 		addErrorBars();
 		return;
 	}
@@ -5100,7 +5097,8 @@ bool ApplicationWindow::renameWindow(MyWidget *w, const QString &text)
 	return true;
 }
 
-QStringList ApplicationWindow::columnsList(Table::PlotDesignation plotType)
+	// TODO: string list -> Column * list
+QStringList ApplicationWindow::columnsList(SciDAVis::PlotDesignation plotType)
 {
 	QList<QWidget*> *windows = windowsList();
 	QStringList list;
@@ -5112,8 +5110,29 @@ QStringList ApplicationWindow::columnsList(Table::PlotDesignation plotType)
 		Table *t = (Table *)w;
 		for (int i=0; i < t->numCols(); i++)
 		{
-			if (t->colPlotDesignation(i) == plotType || plotType == Table::All)
+			if (t->colPlotDesignation(i) == plotType)
 				list << QString(t->name()) + "_" + t->colLabel(i);
+		}
+	}
+
+	delete windows;
+	return list;
+}
+
+	// TODO: string list -> Column * list
+QStringList ApplicationWindow::columnsList()
+{
+	QList<QWidget*> *windows = windowsList();
+	QStringList list;
+	foreach (QWidget *w, *windows)
+	{
+		if (!w->inherits("Table"))
+			continue;
+
+		Table *t = (Table *)w;
+		for (int i=0; i < t->numCols(); i++)
+		{
+			list << QString(t->name()) + "_" + t->colLabel(i);
 		}
 	}
 
@@ -5438,7 +5457,7 @@ void ApplicationWindow::showColumnValuesDialog()
 	if ( w && w->inherits("Table"))
 	{
 		if(w->numCols() == 0) return;
-		if (int(w->selectedColumns().count())>0 || !(w->getSelection().isEmpty()) )
+		if (int(w->selectedColumns().count())>0 /*|| !(w->getSelection().isEmpty()) */) // TODO
 		{
 			SetColValuesDialog* vd= new SetColValuesDialog(scriptEnv,this);
 			vd->setAttribute(Qt::WA_DeleteOnClose);
@@ -5635,7 +5654,8 @@ void ApplicationWindow::showColMenu(int c)
 
 	if ((int)w->selectedColumns().count()==1)
 	{
-		w->setSelectedCol(c);
+	//// TODO: remove next line
+	////	w->setSelectedCol(c);
 		plot.addAction(actionPlotL);
 		plot.addAction(actionPlotP);
 		plot.addAction(actionPlotLP);
@@ -5685,15 +5705,15 @@ void ApplicationWindow::showColMenu(int c)
 		colType.addSeparator();
 		QAction * noneID=colType.addAction(tr("None"), this, SLOT(disregardCol()));
 
-		if (w->colPlotDesignation(c) == Table::X)
+		if (w->colPlotDesignation(c) == SciDAVis::X)
 			xColID->setChecked(true);
-		else if (w->colPlotDesignation(c) == Table::Y)
+		else if (w->colPlotDesignation(c) == SciDAVis::Y)
 			yColID->setChecked(true);
-		else if (w->colPlotDesignation(c) == Table::Z)
+		else if (w->colPlotDesignation(c) == SciDAVis::Z)
 			zColID->setChecked(true);
-		else if (w->colPlotDesignation(c) == Table::xErr)
+		else if (w->colPlotDesignation(c) == SciDAVis::xErr)
 			xErrColID->setChecked(true);
-		else if (w->colPlotDesignation(c) == Table::yErr)
+		else if (w->colPlotDesignation(c) == SciDAVis::yErr)
 			yErrColID->setChecked(true);
 		else
 			noneID->setChecked(true);
@@ -7378,12 +7398,15 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
 		nw = multilayerPlot(generateUniqueName(tr("Graph")));
 		((MultiLayer *)nw)->copy((MultiLayer *)w);
 	} else if (w->inherits("Table")){
+	// TODO: port
+#if 0
 		Table *t = (Table *)w;
 		QString caption = generateUniqueName(tr("Table"));
     	nw = newTable(caption, t->numRows(), t->numCols());
     	((Table *)nw)->copy(t);
     	QString spec = t->saveToString("geometry\n");
     	((Table *)nw)->setSpecifications(spec.replace(t->name(), caption));
+#endif
 	} else if (w->inherits("Graph3D")){
 		Graph3D *g = (Graph3D *)w;
 		if (!g->hasData()){
@@ -7661,6 +7684,8 @@ void ApplicationWindow::closeWindow(MyWidget* window)
 		lv->takeItem(it);
 
 	if (window->inherits("Matrix"))
+		window->setParent(0);
+	else if (window->inherits("Table"))
 		window->setParent(0);
 	else
 		window->deleteLater();
@@ -8010,9 +8035,8 @@ void ApplicationWindow::showTable(const QString& curve)
 
 	updateWindowLists(w);
 	int colIndex = w->colIndex(curve);
-	w->setSelectedCol(colIndex);
-	w->table()->clearSelection();
-	w->table()->selectColumn(colIndex);
+	w->deselectAll();
+	w->setCellsSelected(0, colIndex, w->d_future_table->rowCount()-1, colIndex);
 	w->showMaximized();
 	Q3ListViewItem *it=lv->findItem (w->name(), 0, Q3ListView::ExactMatch | Qt::CaseSensitive );
 	if (it)
@@ -8576,7 +8600,8 @@ void ApplicationWindow::showPlotWizard()
 		connect (pw,SIGNAL(plot(const QStringList&)),this,SLOT(multilayerPlot(const QStringList&)));
 
 		pw->insertTablesList(tableWindows);
-		pw->setColumnsList(columnsList(Table::All));
+	// TODO: string list -> Column * list
+		pw->setColumnsList(columnsList());
 		pw->changeColumnsList(tableWindows[0]);
 		pw->exec();
 	}
@@ -9526,8 +9551,8 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 				w->loadHeader(fields);
 			else
 			{
-				w->setColPlotDesignation(list[4].toInt(), Table::X);
-				w->setColPlotDesignation(list[6].toInt(), Table::Y);
+				w->setColPlotDesignation(list[4].toInt(), SciDAVis::X);
+				w->setColPlotDesignation(list[6].toInt(), SciDAVis::Y);
 				w->setHeader(fields);
 			}
 		} else if (fields[0] == "ColWidth") {
@@ -9560,7 +9585,8 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 	}
 
 	QApplication::setOverrideCursor(Qt::WaitCursor);
-	w->table()->blockSignals(true);
+/// TODO: is any blocking necessary here?
+///	w->table()->blockSignals(true);
 	for (line++; line!=flist.end() && *line != "</data>"; line++)
 	{//read and set table values
 		QStringList fields = (*line).split("\t");
@@ -9584,8 +9610,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 	}
     QApplication::restoreOverrideCursor();
 
-	w->setSpecifications(w->saveToString("geometry\n"));
-	w->table()->blockSignals(false);
+////	w->table()->blockSignals(false);
 	return w;
 }
 
@@ -9617,8 +9642,8 @@ TableStatistics* ApplicationWindow::openTableStatistics(const QStringList &flist
 				w->loadHeader(fields);
 			else
 			{
-				w->setColPlotDesignation(list[4].toInt(), Table::X);
-				w->setColPlotDesignation(list[6].toInt(), Table::Y);
+				w->setColPlotDesignation(list[4].toInt(), SciDAVis::X);
+				w->setColPlotDesignation(list[6].toInt(), SciDAVis::Y);
 				w->setHeader(fields);
 			}
 		} else if (fields[0] == "ColWidth") {
@@ -11988,7 +12013,7 @@ void ApplicationWindow::setXErrCol()
 	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
 		return;
 
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(Table::xErr);
+	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::xErr);
 }
 
 void ApplicationWindow::setYErrCol()
@@ -11996,7 +12021,7 @@ void ApplicationWindow::setYErrCol()
 	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
 		return;
 
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(Table::yErr);
+	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::yErr);
 }
 
 void ApplicationWindow::setXCol()
@@ -12004,7 +12029,7 @@ void ApplicationWindow::setXCol()
 	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
 		return;
 
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(Table::X);
+	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::X);
 }
 
 void ApplicationWindow::setYCol()
@@ -12012,7 +12037,7 @@ void ApplicationWindow::setYCol()
 	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
 		return;
 
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(Table::Y);
+	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::Y);
 }
 
 void ApplicationWindow::setZCol()
@@ -12020,7 +12045,7 @@ void ApplicationWindow::setZCol()
 	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
 		return;
 
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(Table::Z);
+	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::Z);
 }
 
 void ApplicationWindow::disregardCol()
@@ -12028,7 +12053,7 @@ void ApplicationWindow::disregardCol()
 	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
 		return;
 
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(Table::None);
+	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::noDesignation);
 }
 
 void ApplicationWindow::fitMultiPeakGauss()
@@ -13915,7 +13940,7 @@ bool ApplicationWindow::validFor3DPlot(Table *table)
 		QMessageBox::critical(0,tr("Error"),tr("You need at least two columns for this operation!"));
 		return false;
 	}
-	if (table->selectedColumn() < 0 || table->colPlotDesignation(table->selectedColumn()) != Table::Z)
+	if (table->firstSelectedColumn() < 0 || table->colPlotDesignation(table->firstSelectedColumn()) != SciDAVis::Z)
 	{
 		QMessageBox::critical(0,tr("Error"),tr("Please select a Z column for this operation!"));
 		return false;
@@ -13961,8 +13986,8 @@ void ApplicationWindow::selectPlotType(int type)
 
 	Table *table = qobject_cast<Table *>(d_workspace->activeWindow());
 	if (table && validFor2DPlot(table)) {
-		Q3TableSelection sel = table->getSelection();
-		multilayerPlot(table, table->drawableColumnSelection(), (Graph::CurveType)type, sel.topRow(), sel.bottomRow());
+		multilayerPlot(table, table->drawableColumnSelection(), (Graph::CurveType)type, 
+				table->firstSelectedRow(), table->lastSelectedRow());
 	}
 
 	MultiLayer *ml = qobject_cast<MultiLayer*>(d_workspace->activeWindow());
@@ -13978,7 +14003,16 @@ void ApplicationWindow::handleAspectAdded(const AbstractAspect *parent, int inde
 	AbstractAspect * aspect = parent->child(index);
 	future::Matrix * matrix = qobject_cast<future::Matrix *>(aspect);
 	if (matrix)
+	{
 		initMatrix(static_cast<Matrix *>(matrix->view()));
+		return;
+	}
+	future::Table * table = qobject_cast<future::Table *>(aspect);
+	if (table)
+	{
+		initTable(static_cast<Table *>(table->view()));
+		return;
+	}
 }
 
 void ApplicationWindow::handleAspectAboutToBeRemoved(const AbstractAspect *parent, int index)
@@ -13986,5 +14020,15 @@ void ApplicationWindow::handleAspectAboutToBeRemoved(const AbstractAspect *paren
 	AbstractAspect * aspect = parent->child(index);
 	future::Matrix * matrix = qobject_cast<future::Matrix *>(aspect);
 	if (matrix)
+	{
 		closeWindow(static_cast<Matrix *>(matrix->view()));
+		return;
+	}
+	future::Table * table = qobject_cast<future::Table *>(aspect);
+	if (table)
+	{
+		closeWindow(static_cast<Table *>(table->view()));
+		return;
+	}
 }
+

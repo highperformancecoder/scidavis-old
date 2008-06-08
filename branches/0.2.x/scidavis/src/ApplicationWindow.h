@@ -345,7 +345,7 @@ public slots:
 
 	void connectTable(Table* w);
 	void newWrksheetPlot(const QString& caption,int r, int c, const QString& text);
-	void initTable(Table* w, const QString& caption);
+	void initTable(Table* w);
 	void customTable(Table* w);
 	void customizeTables(const QColor& bgColor,const QColor& textColor,
 						const QColor& headerColor,const QFont& textFont,
@@ -398,7 +398,8 @@ public slots:
 	void printAllPlots();
 	//@}
 
-	QStringList columnsList(Table::PlotDesignation plotType = Table::All);
+	QStringList columnsList(SciDAVis::PlotDesignation plotType);
+	QStringList columnsList();
 
 	void undo();
 	void redo();

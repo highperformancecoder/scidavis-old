@@ -85,10 +85,10 @@ class MatrixView : public MyWidget
 	public:
 		//! Constructor
 #ifndef LEGACY_CODE_0_2_x
-		MatrixView(future::Matrix *matrix);
+		MatrixView(future::Matrix * matrix);
 #else
-		MatrixView(const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
-		void setMatrix(future::Matrix *matrix);
+		MatrixView(const QString & label, QWidget * parent=0, const char * name=0, Qt::WFlags f=0);
+		void setMatrix(future::Matrix * matrix);
 #endif
 		//! Destructor
 		virtual ~MatrixView();

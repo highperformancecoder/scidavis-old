@@ -1,12 +1,12 @@
 /***************************************************************************
     File                 : Table.h
     Project              : SciDAVis
-    --------------------------------------------------------------------
-    Copyright            : (C) 2006 by Ion Vasilief,
-                           Tilman Benkert,
-                           Knut Franke
-    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Table worksheet class
+    --------------------------------------------------------------------
+    Copyright            : (C) 2006-2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2006-2008 Knut Franke (knut.franke*gmx.de)
+    Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
+                           (replace * with @ in the email addresses) 
 
  ***************************************************************************/
 
@@ -40,15 +40,9 @@
 #include "MyWidget.h"
 #include "ScriptingEnv.h"
 #include "Script.h"
-
-class MyTable : public Q3Table
-{
-public:
-    MyTable(QWidget * parent = 0, const char * name = 0);
-    MyTable(int numRows, int numCols, QWidget * parent = 0, const char * name = 0);
-
-    void activateNextCell();
-};
+#include "future/table/future_Table.h"
+#include "future/table/TableView.h"
+#include "globals.h"
 
 /*!\brief MDI window providing a spreadsheet table with column logic.
  *
@@ -56,20 +50,21 @@ public:
  * Port to the Model/View approach used in Qt4 and get rid of the Qt3Support dependancy.
  * [ assigned to thzs ]
  */
-class Table: public MyWidget, public scripted
+class Table: public TableView, public scripted
 {
     Q_OBJECT
 
 public:
-	enum PlotDesignation{All = -1, None = 0, X = 1, Y = 2, Z = 3, xErr = 4, yErr = 5};
+	future::Table *d_future_table;
+
+// TODO: remove obsolete enum
+//	enum PlotDesignation{All = -1, None = 0, X = 1, Y = 2, Z = 3, xErr = 4, yErr = 5};
 	enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5};
 
    	Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 		 bool stripSpaces, bool simplifySpaces, const QString &label,
 		 QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
 	Table(ScriptingEnv *env, int r,int c, const QString &label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
-
-	Q3TableSelection getSelection();
 
 	//! Sets the number of significant digits
 	void setNumericPrecision(int prec);
@@ -79,7 +74,10 @@ public:
 	void updateDecimalSeparators(const QLocale& oldSeparators);
 
 public slots:
+// TODO: remove this
+#if 0
 	MyTable* table(){return d_table;};
+#endif
 	void copy(Table *m);
 	int numRows();
 	int numCols();
@@ -87,6 +85,7 @@ public slots:
 	void setNumCols(int cols);
 	void resizeRows(int);
 	void resizeCols(int);
+	void handleChange();
 
 	//! Return the value of the cell as a double
 	double cell(int row, int col);
@@ -94,15 +93,15 @@ public slots:
 
 	QString text(int row, int col);
 	QStringList columnsList();
-	QStringList colNames(){return col_label;}
+	QStringList colNames();
 	QString colName(int col);
-	QString colLabel(int col){return col_label[col];};
+	QString colLabel(int col);
 	int colIndex(const QString& name);
 
-	int colPlotDesignation(int col){return col_plot_type[col];};
-	void setColPlotDesignation(int col, PlotDesignation d){col_plot_type[col]=d;};
-	void setPlotDesignation(PlotDesignation pd);
-	Q3ValueList<int> plotDesignations(){return col_plot_type;};
+	SciDAVis::PlotDesignation colPlotDesignation(int col);
+	void setColPlotDesignation(int col, SciDAVis::PlotDesignation d);
+	void setPlotDesignation(SciDAVis::PlotDesignation pd);
+	QList<int> plotDesignations();
 
 	void setColName(int col,const QString& text);
 	void setHeader(QStringList header);
@@ -112,13 +111,10 @@ public slots:
 	void setRandomValues();
 	void setAscValues();
 
-	void cellEdited(int,int col);
+/////	void cellEdited(int,int col);
 	void moveCurrentCell();
 	void clearCell(int row, int col);
 	QString saveText();
-	bool isEmptyRow(int row);
-	bool isEmptyColumn(int col);
-	int nonEmptyRows();
 
 	void print();
 	void print(const QString& fileName);
@@ -126,8 +122,8 @@ public slots:
 
 	//! \name Event Handlers
 	//@{
-	bool eventFilter(QObject *object, QEvent *e);
-	void contextMenuEvent(QContextMenuEvent *e);
+///TODO: remove:	bool eventFilter(QObject *object, QEvent *e);
+////	void contextMenuEvent(QContextMenuEvent *e);
 	void customEvent( QEvent* e);
 	//@}v
 
@@ -138,7 +134,7 @@ public slots:
 	void clearCol();
 	void insertCol();
 	void insertCols(int start, int count);
-	void addCol(PlotDesignation pd = Y);
+	void addCol(SciDAVis::PlotDesignation pd = SciDAVis::Y);
 	void addColumns(int c);
 	//@}
 
@@ -147,16 +143,16 @@ public slots:
 	/*!\brief Sort the current column in ascending order.
 	 * \sa sortColDesc(), sortColumn(), Q3Table::currentColumn()
 	 */
-	void sortColAsc();
+////	void sortColAsc();
 	/*!\brief Sort the current column in descending order.
 	 * \sa sortColAsc(), sortColumn(), Q3Table::currentColumn()
 	 */
-	void sortColDesc();
+////	void sortColDesc();
 	/*!\brief Sort the specified column.
 	 * \param col the column to be sorted
 	 * \param order 0 means ascending, anything else means descending
 	 */
-	void sortColumn(int col = -1, int order = 0);
+////	void sortColumn(int col = -1, int order = 0);
 	/*!\brief Display a dialog with some options for sorting all columns.
 	 *
 	 * The sorting itself is done using sort(int,int,const QString&).
@@ -172,7 +168,7 @@ public slots:
 	 * \param order 0 means ascending, anything else means descending
 	 * \param leadCol for sorting together, the column which determines the permutation
 	 */
-	void sortColumns(const QStringList& cols, int type = 0, int order = 0, const QString& leadCol = QString());
+////	void sortColumns(const QStringList& cols, int type = 0, int order = 0, const QString& leadCol = QString());
 	/*!\brief Display a dialog with some options for sorting the selected columns.
 	 *
 	 * The sorting itself is done using sortColumns(int,int,const QString&).
@@ -182,7 +178,7 @@ public slots:
 
 	//! \name Normalization
 	//@{
-	void normalizeCol(int col=-1);
+	void normalizeCol(int col);
 	void normalizeSelection();
 	void normalize();
 	//@}
@@ -194,7 +190,7 @@ public slots:
 	int colX(int col);
 	int colY(int col);
 
-	QStringList getCommands(){return commands;};
+	QStringList getCommands();
 	//! Set all column formulae.
 	void setCommands(const QStringList& com);
 	//! Set all column formulae.
@@ -240,30 +236,27 @@ public slots:
 	QStringList columnWidths();
 	void setColWidths(const QStringList& widths);
 
+#if 0 // remove
 	void setSelectedCol(int col){selectedCol = col;};
 	int selectedColumn(){return selectedCol;};
-	int firstSelectedColumn();
+#endif
 	int numSelectedRows();
-	bool isRowSelected(int row, bool full=false) { return d_table->isRowSelected(row, full); }
-	bool isColumnSelected(int col, bool full=false) { return d_table->isColumnSelected(col, full); }
-	//! Scroll to cell 
-	void goToCell(int row, int col);
 
 	void columnNumericFormat(int col, char *f, int *precision);
 	void columnNumericFormat(int col, int *f, int *precision);
-	int columnType(int col){return colTypes[col];};
+	int columnType(int col);
 
-	Q3ValueList<int> columnTypes(){return colTypes;};
-	void setColumnTypes(Q3ValueList<int> ctl){colTypes = ctl;};
+	QList<int> columnTypes();
+	void setColumnTypes(QList<int> ctl);
 	void setColumnTypes(const QStringList& ctl);
-	void setColumnType(int col, ColType val) { colTypes[col] = val; }
+	void setColumnType(int col, SciDAVis::ColumnMode mode);
 
-    void saveToMemory(double **cells){d_saved_cells = cells;};
+    void saveToMemory(double **cells);
 	void saveToMemory();
 	void freeMemory();
 
-	QString columnFormat(int col){return col_format[col];};
-	QStringList getColumnsFormat(){return col_format;};
+	QString columnFormat(int col);
+	QStringList getColumnsFormat();
 	void setColumnsFormat(const QStringList& lst);
 
 	void setTextFormat(int col);
@@ -288,22 +281,6 @@ public slots:
 	QString saveCommands();
 	QString saveColumnWidths();
 	QString saveColumnTypes();
-
-	void setSpecifications(const QString& s);
-	QString& getSpecifications();
-	void restore(QString& spec);
-	QString& getNewSpecifications();
-	void setNewSpecifications();
-
-	/*!
-	 *used for restoring the table old caption stored in specifications string
-	 */
-	QString oldCaption();
-
-	/*!
-	 *used for restoring the table caption stored in new specifications string
-	 */
-	QString newCaption();
 	//@}
 
 	void setBackgroundColor(const QColor& col);
@@ -312,14 +289,13 @@ public slots:
 	void setTextFont(const QFont& fnt);
 	void setHeaderFont(const QFont& fnt);
 
-	int verticalHeaderWidth(){return d_table->verticalHeader()->width();};
+	int verticalHeaderWidth();
 
-	QString colComment(int col){return comments[col];};
+	QString colComment(int col);
 	void setColComment(int col, const QString& s);
-	QStringList colComments(){return comments;};
-	void setColComments(const QStringList& lst){comments = lst;};
-	void showComments(bool on = true);
-	bool commentsEnabled(){return d_show_comments;}
+	QStringList colComments();
+	void setColComments(const QStringList& lst);
+	bool commentsEnabled();
 
 	QString saveAsTemplate(const QString& geometryInfo);
 	void restore(const QStringList& lst);
@@ -328,7 +304,7 @@ public slots:
 	void notifyChanges();
 
 	//! Notifies the main application that the width of a table column has been modified by the user.
-	void colWidthModified(int, int, int);
+////	void colWidthModified(int, int, int);
 
 signals:
 	void changedColHeader(const QString&, const QString&);
@@ -340,16 +316,7 @@ signals:
 	void showContextMenu(bool selection);
 	void createTable(const QString&,int,int,const QString&);
 
-protected:
-	MyTable *d_table;
-
 private:
-	bool d_show_comments;
-	QString specifications, newSpecifications;
-	QStringList commands, col_format, comments, col_label;
-	QList<int> colTypes, col_plot_type;
-	int selectedCol;
-	int d_numeric_precision;
 	double **d_saved_cells;
 
 	//! Internal function to change the column header

@@ -26,7 +26,7 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#include "SortDialog.h"
+#include "table/future_SortDialog.h"
 
 #include <QPushButton>
 #include <QLabel>
@@ -34,6 +34,8 @@
 #include <QGroupBox>
 #include <QLayout>
 #include <QApplication>
+
+namespace future{
 
 SortDialog::SortDialog( QWidget* parent, Qt::WFlags fl )
     : QDialog( parent, fl )
@@ -106,3 +108,5 @@ void SortDialog::changeType(int Type)
 	else
 		ui.columns_list->setEnabled(false);
 }
+
+} //namespace

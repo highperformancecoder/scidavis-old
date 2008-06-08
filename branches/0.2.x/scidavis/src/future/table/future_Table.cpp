@@ -28,8 +28,8 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#include "Table.h"
-#include "Project.h"
+#include "table/future_Table.h"
+#include "core/Project.h"
 #include "lib/ActionManager.h"
 
 #include <QItemSelectionModel>
@@ -50,13 +50,13 @@
 #include <QMenuBar>
 #include <QClipboard>
 
-#include "AbstractScript.h"
-#include "AspectPrivate.h"
-#include "TableModel.h"
-#include "TableView.h"
-#include "tablecommands.h"
-#include "table/SortDialog.h"
-#include "Column.h"
+#include "core/AbstractScript.h"
+#include "core/AspectPrivate.h"
+#include "table/TableModel.h"
+#include "table/TableView.h"
+#include "table/tablecommands.h"
+#include "table/future_SortDialog.h"
+#include "core/column/Column.h"
 #include "core/AbstractFilter.h"
 #include "core/datatypes/String2DoubleFilter.h"
 #include "core/datatypes/Double2StringFilter.h"
@@ -73,12 +73,20 @@
 #define WAIT_CURSOR QApplication::setOverrideCursor(QCursor(Qt::WaitCursor))
 #define RESET_CURSOR QApplication::restoreOverrideCursor()
 
+namespace future
+{
+
 bool Table::d_default_comment_visibility = false;
 
 // TODO: move all selection related stuff to the primary view ?
 
+#ifndef LEGACY_CODE_0_2_x
 Table::Table(AbstractScriptingEngine *engine, int rows, int columns, const QString& name)
 	: AbstractPart(name), d_plot_menu(0), scripted(engine)
+#else
+Table::Table(void *engine, int rows, int columns, const QString& name)
+	: AbstractPart(name), d_plot_menu(0)
+#endif
 {
 	d_table_private = new Private(this);
 
@@ -94,14 +102,21 @@ Table::Table(AbstractScriptingEngine *engine, int rows, int columns, const QStri
 	connectActions();
 }
 
+#ifndef LEGACY_CODE_0_2_x
 Table::Table()
 	: AbstractPart("temp"), scripted(0)
+#else
+Table::Table()
+	: AbstractPart("temp")
+#endif
 {
+	d_view = NULL;
 	createActions();
 }
 
 Table::~Table()
 {
+	delete d_view;
 }
 
 Column * Table::column(int index) const
@@ -120,14 +135,25 @@ Column * Table::column(const QString & name) const
 	return NULL;
 }
 
+void Table::setView(TableView * view)
+{
+	d_view = view;
+	addActionsToView();
+	d_view->showComments(d_default_comment_visibility);
+}
+
 QWidget *Table::view()
 {
+#ifndef LEGACY_CODE_0_2_x
 	if (!d_view)
 	{
 		d_view = new TableView(this); 
 		addActionsToView();
 		d_view->showComments(d_default_comment_visibility);
 	}
+#else
+	Q_ASSERT(d_view != NULL);
+#endif
 	return d_view;
 }
 
@@ -1410,7 +1436,7 @@ void Table::sortDialog(QList<Column*> cols)
 {
 	if(cols.isEmpty()) return;
 
-	SortDialog *sortd = new SortDialog();
+	SortDialog *sortd = new future::SortDialog();
 	sortd->setAttribute(Qt::WA_DeleteOnClose);
 	connect(sortd, SIGNAL(sort(Column*,QList<Column*>,bool)), this, SLOT(sortColumns(Column*,QList<Column*>,bool)));
 	sortd->setColumnsList(cols);
@@ -2123,3 +2149,4 @@ QVariant Table::Private::headerData(int section, Qt::Orientation orientation, in
 	return QVariant();
 }
 
+} // namespace

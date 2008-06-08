@@ -310,7 +310,8 @@ INCLUDEPATH  += src
 INCLUDEPATH  += src/future
 
 FORMS += src/future/matrix/matrixcontroltabs.ui \
-         src/future/core/ProjectConfigPage.ui
+         src/future/core/ProjectConfigPage.ui \
+		 src/future/table/controltabs.ui
 
 HEADERS += src/future/core/AbstractAspect.h \
            src/future/core/AbstractPart.h \
@@ -347,6 +348,14 @@ HEADERS += src/future/core/AbstractAspect.h \
            src/future/matrix/MatrixModel.h \
            src/future/matrix/MatrixView.h \
            src/future/matrix/matrixcommands.h \
+           src/future/table/future_Table.h \
+           src/future/table/TableModel.h \
+           src/future/table/TableView.h \
+           src/future/table/tablecommands.h \
+           src/future/table/TableDoubleHeaderView.h \
+           src/future/table/TableItemDelegate.h \
+           src/future/table/TableCommentsHeaderModel.h \
+           src/future/table/future_SortDialog.h \
 
 SOURCES += src/future/core/AbstractAspect.cpp \
            src/future/core/AbstractPart.cpp \
@@ -370,6 +379,14 @@ SOURCES += src/future/core/AbstractAspect.cpp \
            src/future/matrix/MatrixModel.cpp \
            src/future/matrix/MatrixView.cpp \
            src/future/matrix/matrixcommands.cpp \
+           src/future/table/future_Table.cpp \
+           src/future/table/TableModel.cpp \
+           src/future/table/TableView.cpp \
+           src/future/table/tablecommands.cpp \
+           src/future/table/TableDoubleHeaderView.cpp \
+           src/future/table/TableItemDelegate.cpp \
+           src/future/table/TableCommentsHeaderModel.cpp \
+           src/future/table/future_SortDialog.cpp \
 
 ###############################################################
 ##################### Compression #############################

@@ -28,13 +28,16 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef TABLE_H
-#define TABLE_H
+#ifndef FUTURE_TABLE_H
+#define FUTURE_TABLE_H
 
-#include "AbstractPart.h"
+#include "core/AbstractPart.h"
+#ifndef LEGACY_CODE_0_2_x
 #include "AbstractScriptingEngine.h"
+#endif
 #include "globals.h"
 #include <QList>
+#include <QStringList>
 
 class TableView;
 class QUndoStack;
@@ -44,6 +47,9 @@ class QPoint;
 class QAction;
 class AbstractColumn;
 class ActionManager;
+
+namespace future
+{
 
 /*!\brief Aspect providing a spreadsheet table with column logic.
  *
@@ -68,7 +74,11 @@ of the user interaction are handled by actions provides by Table, e.g., via a co
 Selections are handled by TableView and can be queried by Table. All selection based functions
 do nothing unless the view exists. The view is created by the first call to view();
 */
+#ifndef LEGACY_CODE_0_2_x
 class Table : public AbstractPart, public scripted
+#else
+class Table : public AbstractPart
+#endif
 {
 	Q_OBJECT
 
@@ -76,7 +86,12 @@ class Table : public AbstractPart, public scripted
 		class Private; // This could also be private, but then all commands need to be friend classes
 		friend class Private;
 
+#ifndef LEGACY_CODE_0_2_x
 		Table(AbstractScriptingEngine *engine, int rows, int columns, const QString &name);
+#else
+		Table(void *engine, int rows, int columns, const QString &name);
+		void setView(TableView * view);
+#endif
 		~Table();
 
 		//! Return an icon to be used for decorating my views.
@@ -119,10 +134,6 @@ class Table : public AbstractPart, public scripted
 		int columnCount() const;
 		//! Return the total number of rows in the table
 		int rowCount() const;
-		//! Show or hide (if on = false) the column comments
-		void showComments(bool on = true);
-		//! Return whether comments are show currently
-		bool areCommentsShown() const;
 		//! Return the number of columns matching the given designation
 		int columnCount(SciDAVis::PlotDesignation pd) const;
 		//! Return column number 'index'
@@ -510,6 +521,8 @@ class Table::Private
 		 */
 		void composeColumnHeader(int col, const QString& label);
 };
+
+} // namespace
 
 #endif
 

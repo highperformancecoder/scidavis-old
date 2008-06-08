@@ -34,11 +34,11 @@
 #include <QAbstractItemModel>
 #include <QModelIndex>
 #include <QItemSelection>
-#include "Column.h"
-#include "ColumnPrivate.h"
-#include "Table.h"
-#include "AbstractFilter.h"
-#include "IntervalAttribute.h"
+#include "core/column/Column.h"
+#include "core/column/ColumnPrivate.h"
+#include "table/future_Table.h"
+#include "core/AbstractFilter.h"
+#include "lib/IntervalAttribute.h"
 
 ///////////////////////////////////////////////////////////////////////////
 // class TableInsertColumnsCmd
@@ -50,7 +50,7 @@
 class TableInsertColumnsCmd : public QUndoCommand
 {
 public:
-	TableInsertColumnsCmd( Table::Private * private_obj, int before, QList<Column*> cols, QUndoCommand * parent = 0 );
+	TableInsertColumnsCmd( future::Table::Private * private_obj, int before, QList<Column*> cols, QUndoCommand * parent = 0 );
 	~TableInsertColumnsCmd();
 
 	virtual void redo();
@@ -58,7 +58,7 @@ public:
 
 private:
 	//! The private object to modify
-	Table::Private * d_private_obj;
+	future::Table::Private * d_private_obj;
 	//! Column to insert before
 	int d_before;
 	//! The new columns
@@ -79,7 +79,7 @@ private:
 class TableSetNumberOfRowsCmd : public QUndoCommand
 {
 public:
-	TableSetNumberOfRowsCmd( Table::Private * private_obj, int rows, QUndoCommand * parent = 0 );
+	TableSetNumberOfRowsCmd( future::Table::Private * private_obj, int rows, QUndoCommand * parent = 0 );
 	~TableSetNumberOfRowsCmd();
 
 	virtual void redo();
@@ -87,7 +87,7 @@ public:
 
 private:
 	//! The private object to modify
-	Table::Private * d_private_obj;
+	future::Table::Private * d_private_obj;
 	//! Number of rows
 	int d_rows;
 	//! Number of rows before
@@ -105,7 +105,7 @@ private:
 class TableRemoveColumnsCmd : public QUndoCommand
 {
 public:
-	TableRemoveColumnsCmd( Table::Private * private_obj, int first, int count, QList<Column*> cols, QUndoCommand * parent = 0 );
+	TableRemoveColumnsCmd( future::Table::Private * private_obj, int first, int count, QList<Column*> cols, QUndoCommand * parent = 0 );
 	~TableRemoveColumnsCmd();
 
 	virtual void redo();
@@ -113,7 +113,7 @@ public:
 
 private:
 	//! The private object to modify
-	Table::Private * d_private_obj;
+	future::Table::Private * d_private_obj;
 	//! The first column
 	int d_first;
 	//! The number of columns to be removed
@@ -133,7 +133,7 @@ private:
 class TableMoveColumnCmd : public QUndoCommand
 {
 public:
-	TableMoveColumnCmd( Table::Private * private_obj, int from, int to, QUndoCommand * parent = 0 );
+	TableMoveColumnCmd( future::Table::Private * private_obj, int from, int to, QUndoCommand * parent = 0 );
 	~TableMoveColumnCmd();
 
 	virtual void redo();
@@ -141,7 +141,7 @@ public:
 
 private:
 	//! The private object to modify
-	Table::Private * d_private_obj;
+	future::Table::Private * d_private_obj;
 	//! The old column index
 	int d_from;
 	//! The new column index

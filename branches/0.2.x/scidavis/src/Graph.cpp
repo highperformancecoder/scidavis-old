@@ -771,7 +771,7 @@ void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName
 		axesFormatInfo[axis] = table->name();
 		for (int i=0; i<table->numCols(); i++)
 		{
-			if (table->colPlotDesignation(i) == Table::Y)
+			if (table->colPlotDesignation(i) == SciDAVis::Y)
 				list<<table->colLabel(i);
 		}
 	}
@@ -3111,7 +3111,7 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
         for (int i=0; i<curves; i++)
         {//We rearrange the list so that the error bars are placed at the end
         	int j = w->colIndex(names[i]);
-  	        if (w->colPlotDesignation(j) == Table::xErr || w->colPlotDesignation(j) == Table::yErr)
+  	        if (w->colPlotDesignation(j) == SciDAVis::xErr || w->colPlotDesignation(j) == SciDAVis::yErr)
 			{
 				errCurves++;
 				lst << names[i];
@@ -3124,13 +3124,13 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
 		{
             int j = w->colIndex(names[i]);
             bool ok = false;
-            if (w->colPlotDesignation(j) == Table::xErr || w->colPlotDesignation(j) == Table::yErr)
+            if (w->colPlotDesignation(j) == SciDAVis::xErr || w->colPlotDesignation(j) == SciDAVis::yErr)
 			{
 				int ycol = w->colY(w->colIndex(names[i]));
                 if (ycol < 0)
                     return false;
 
-                if (w->colPlotDesignation(j) == Table::xErr)
+                if (w->colPlotDesignation(j) == SciDAVis::xErr)
                     ok = addErrorBars(w->colName(ycol), w, names[i], (int)QwtErrorPlotCurve::Horizontal);
                 else
                     ok = addErrorBars(w->colName(ycol), w, names[i]);

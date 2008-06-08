@@ -26,14 +26,16 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef SORTDIALOG_H
-#define SORTDIALOG_H
+#ifndef FUTURE_SORTDIALOG_H
+#define FUTURE_SORTDIALOG_H
 
-#include "Column.h"
+#include "core/column/Column.h"
 #include <QDialog>
 
 class QPushButton;
 class QComboBox;
+
+namespace future{
 
 //! Sorting options dialog
 class SortDialog : public QDialog
@@ -65,5 +67,7 @@ class SortDialog : public QDialog
 		QComboBox *columns_list;
 		} ui;
 };
+
+} // namespace
 
 #endif
