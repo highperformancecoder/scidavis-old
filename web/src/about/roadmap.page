@@ -11,8 +11,10 @@ h2(#policy). Release Policy
 
 Release numbers will follow the scheme major.minor.bugfix.
 
-"major" releases differ considerably in architecture and potentially break backwards-compatibility,
-particularly with respect to scripts and plugins. Therefore, they will occur only very infrequently.
+"major" releases differ considerably in architecture and potentially break backwards-compatibility
+to versions with a different major version number, particularly with respect to scripts and plugins. 
+Therefore, they will occur only very infrequently. Usually, a major version change also means that
+a very important milestone has been reached.
 
 "minor" releases add some new functionality, but do not change existing interfaces or otherwise
 break other people's code. If they do, that's a bug and, obviously, we're trying to avoid bugs. :-)
@@ -50,23 +52,34 @@ Most important changes (since QtiPlot 0.9-rc2):
 * export to eps and pdf without large white borders
 
 
-h1(#0.3.0). 0.3.0: Aspect-framework/hierarchial project structure, undo/redo for tables and matrices, UI improvements
+h1(#0.2.0). 0.2.0: Undo/redo for tables and matrices, UI improvements
 
 Plans: Most notably for users, this release will feature multi-level undo/redo
 for changes to tables and matrices. Additionally, the options dialogs for tables and matrices
-will be integrated into their views (sub-windows) so they can be accessed faster. The way the
-project contents are shown in the project explorer will also change considerably. You will for example
+will be integrated into their views (sub-windows) so they can be accessed faster. 
+A complete rewrite of the table and matrix internals will speed up the execution
+of all related operations considerably. This also includes storing of numbers with full 
+precision even if not all digits are shown. 
+
+Internally, from this release on SciDAVis will start using a new data storage
+architecture based on a column-based abstraction of a typed data source. The data will be 
+separated from the GUI and the API to allow the insertion of undo/redo commands and
+generally improve code flexibility. It will also greatly faciliate improving the handling of
+dates/times in columns in the future. The new internal data structures are optimized to use
+less memory than those before which is very important to free some memory for the undo/redo 
+framework. 
+
+h1(#0.3.0). 0.3.0: Aspect-framework/hierarchial project structure
+
+Plans: Most notably for users, the way the project contents are shown in the project explorer 
+will change considerably. You will for example
 be able to change label and comment of a column in the project explorer.
 Internally, from this release on SciDAVis will be using a flexible data analysis and data storage
 architecture based on a column-based abstraction of a typed data source and
 filters modelled after integrated electronic circuits (in the sense that they are a "black box"
-with a number of input and output ports). This includes storing of numbers with full
-precision even if not all digits are shown. It will also greatly faciliate improving the handling of
-dates/times in columns in the future. The new internal data structures are optimized to use
-less memory than those before which is very important to free some memory for the undo/redo 
-framework. The project will internally be stored in a hierarchial tree consisting of
-what we call "aspects". The aspects and related classes will follow a design close to the
-model/view/presenter paradigm. This will greatly improve the long-term maintainability
+with a number of input and output ports). The project will internally be stored in a hierarchial tree consisting of
+what we call "aspects". The aspects and related classes will follow a "5 layer design" somewhat comparable
+with the model/view/presenter paradigm. This will greatly improve the long-term maintainability
 of the application.
 
 h1(#0.5.0). 0.5.0: New visualisation engine, XML file format
@@ -82,9 +95,9 @@ The file format for SciDAVis projects will be replaced by a completely XML based
 allows to use robust XML parsers, much better error handling and easy validity-checking of project files.
 Loading files in the legacy format will continue to be supported as an import function.
 
-h1(#0.7.0). 0.7.0: Removal of muParser dependence in favor of Python, improved plotting
+h1(#0.7.0). 0.7.0: Removal of muParser dependence such that everything can be done in Python, improved plotting
 
-* All muParser-specific parts will be rewritten to use Python and allow using
+* All muParser-specific parts will be rewritten to also be able to use Python and allow using
 of python defined functions for curve fitting etc.
 * Improvements to the Python bindings to allow more powerful Python scripts.
 * Improvements to the plotting engine such as support for axes breaks, polar and ternary plots, 
