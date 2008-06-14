@@ -1148,17 +1148,19 @@ void ApplicationWindow::customMenu(QWidget* w)
 		{
 			menuBar()->insertItem(tr("&Plot"), plot2D);
 			menuBar()->insertItem(tr("&Analysis"), dataMenu);
-			menuBar()->insertItem(tr("&Table"), tableMenu);
 
 			actionShowExportASCIIDialog->setEnabled(true);
 			actionTableRecalculate->setEnabled(true);
 			file->setItemEnabled (exportID,false);
 			file->setItemEnabled (closeID,true);
 
-			// TODO: merge both menus
 			QMenu * menu = new QMenu();
 			static_cast<Table *>(w)->d_future_table->fillProjectMenu(menu);
-			menuBar()->insertItem(tr("&future::Table"), menu);
+			menu->addSeparator();
+			menu->addAction(actionShowExportASCIIDialog);
+			menu->addSeparator();
+			menu->addAction(actionConvertTable);
+			menuBar()->insertItem(tr("&Table"), menu);
 		}
 		else if (w->inherits("Matrix"))
 		{
@@ -2572,6 +2574,7 @@ void ApplicationWindow::initTable(Table* w)
 	customTable(w);
 
 	tableWindows << w->name();
+	w->d_future_table->setPlotMenu(plot2D);
 
 	emit modified();
 }
@@ -11047,7 +11050,7 @@ void ApplicationWindow::createActions()
 	actionMatrixDeterminant = new QAction(tr("&Determinant"), this);
 	connect(actionMatrixDeterminant, SIGNAL(activated()), this, SLOT(matrixDeterminant()));
 
-	actionConvertMatrix = new QAction(tr("&Convert to Spreadsheet"), this);
+	actionConvertMatrix = new QAction(tr("&Convert to Table"), this);
 	connect(actionConvertMatrix, SIGNAL(activated()), this, SLOT(convertMatrixToTable()));
 
 	actionConvertTable= new QAction(tr("Convert to &Matrix"), this);
@@ -11522,7 +11525,7 @@ void ApplicationWindow::translateActionsStrings()
 	actionAdd3DData->setMenuText(tr("&Data Set..."));
 	actionInvertMatrix->setMenuText(tr("&Invert"));
 	actionMatrixDeterminant->setMenuText(tr("&Determinant"));
-	actionConvertMatrix->setMenuText(tr("&Convert to Spreadsheet"));
+	actionConvertMatrix->setMenuText(tr("&Convert to Table"));
 	actionConvertTable->setMenuText(tr("Convert to &Matrix"));
 	actionPlot3DWireFrame->setMenuText(tr("3D &Wire Frame"));
 	actionPlot3DHiddenLine->setMenuText(tr("3D &Hidden Line"));
@@ -13960,12 +13963,12 @@ bool ApplicationWindow::validFor3DPlot(Table *table)
 
 bool ApplicationWindow::validFor2DPlot(Table *table)
 {
-	if (!table->selectedYColumns().count())
+	if (table->selectedColumnCount(SciDAVis::Y) < 1)
   	{
   		QMessageBox::warning(this, tr("Error"), tr("Please select a Y column to plot!"));
   	    return false;
   	}
-  	else if (table->numCols()<2)
+  	else if (table->numCols() < 2)
 	{
 		QMessageBox::critical(this, tr("Error"),tr("You need at least two columns for this operation!"));
 		return false;

@@ -93,7 +93,11 @@ Table::Table(void *engine, int rows, int columns, const QString& name)
 	// set initial number of rows and columns
 	QList<Column*> cols;
 	for(int i=0; i<columns; i++)
-		cols << new Column(QString::number(i+1), SciDAVis::Numeric);
+	{
+		Column * new_col = new Column(QString::number(i+1), SciDAVis::Numeric);
+		new_col->setPlotDesignation(i == 0 ? SciDAVis::X : SciDAVis::Y);
+		cols << new_col;
+	}
 	appendColumns(cols);
 	setRowCount(rows);
 
@@ -258,7 +262,11 @@ void Table::setColumnCount(int new_size)
 	{
 		QList<Column*> cols;
 		for(int i=0; i<new_size-old_size; i++)
-			cols << new Column(QString::number(i+1), SciDAVis::Numeric);
+		{
+			Column * new_col = new Column(QString::number(i+1), SciDAVis::Numeric);
+			new_col->setPlotDesignation(SciDAVis::Y);
+			cols << new_col;
+		}
 		appendColumns(cols);
 	}
 	RESET_CURSOR;
@@ -280,6 +288,7 @@ void Table::clear()
 	RESET_CURSOR;
 }
 
+#ifndef LEGACY_CODE_0_2_x
 void Table::clearMasks()
 {
 	WAIT_CURSOR;
@@ -290,6 +299,7 @@ void Table::clearMasks()
 	endMacro();
 	RESET_CURSOR;
 }
+#endif
 
 void Table::addColumn()
 {
@@ -419,7 +429,11 @@ void Table::pasteIntoSelection()
 			{
 				QList<Column*> cols;
 				for(int i=0; i<last_col+1-columnCount(); i++)
-					cols << new Column(QString::number(i+1), SciDAVis::Text);
+				{
+					Column * new_col = new Column(QString::number(i+1), SciDAVis::Text);
+					new_col->setPlotDesignation(SciDAVis::Y);
+					cols << new_col;
+				}
 				appendColumns(cols);
 			}
 			if(last_row >= rowCount())
@@ -452,6 +466,7 @@ void Table::pasteIntoSelection()
 	RESET_CURSOR;
 }
 
+#ifndef LEGACY_CODE_0_2_x
 void Table::maskSelection()
 {
 	if (!d_view) return;
@@ -491,6 +506,7 @@ void Table::unmaskSelection()
 	endMacro();
 	RESET_CURSOR;
 }
+#endif
 
 void Table::setFormulaForSelection()
 {
@@ -598,7 +614,11 @@ void Table::insertEmptyColumns()
 		while( current <= last && d_view->isColumnSelected(current) ) current++;
 		count = current-first;
 		for(int i=0; i<count; i++)
-			cols << new Column(QString::number(i+1), SciDAVis::Numeric);
+		{
+			Column * new_col = new Column(QString::number(i+1), SciDAVis::Numeric);
+			new_col->setPlotDesignation(SciDAVis::Y);
+			cols << new_col;
+		}
 		insertColumns(first, cols);
 		cols.clear();
 		current += count;
@@ -836,15 +856,42 @@ bool Table::fillProjectMenu(QMenu * menu)
 {
 	menu->setTitle(tr("&Table"));
 
+	QMenu * submenu = new QMenu(tr("S&et Column(s) As"));
+	submenu->addAction(action_set_as_x);
+	submenu->addAction(action_set_as_y);
+	submenu->addAction(action_set_as_z);
+	submenu->addSeparator();
+	submenu->addAction(action_set_as_xerr);
+	submenu->addAction(action_set_as_yerr);
+	submenu->addSeparator();
+	submenu->addAction(action_set_as_none);
+	menu->addMenu(submenu);
+	menu->addSeparator();
+
+	submenu = new QMenu("Fi&ll Selection with");
+	submenu->addAction(action_fill_row_numbers);
+	submenu->addAction(action_fill_random);
+	menu->addMenu(submenu);
+	menu->addSeparator();
+
+	connect(menu, SIGNAL(aboutToShow()), this, SLOT(adjustActionNames()));
 	menu->addAction(action_toggle_comments);
 	menu->addAction(action_toggle_tabbar);
 	menu->addSeparator();
 	menu->addAction(action_clear_table);
+#ifndef LEGACY_CODE_0_2_x
 	menu->addAction(action_clear_masks);
+#endif
 	menu->addAction(action_sort_table);
+	menu->addSeparator();
+	menu->addAction(action_set_formula);
+	menu->addAction(action_recalculate);
 	menu->addSeparator();
 	menu->addAction(action_add_column);
 	menu->addAction(action_dimensions_dialog);
+	menu->addSeparator();
+	menu->addAction(action_edit_description);
+	menu->addAction(action_type_format);
 	menu->addSeparator();
 	menu->addAction(action_go_to_cell);
 
@@ -889,11 +936,13 @@ void Table::createActions()
 	action_paste_into_selection = new QAction(QIcon(QPixmap(":/paste.xpm")), tr("Past&e"), this);
 	actionManager()->addAction(action_paste_into_selection, "paste_into_selection"); 
 
+#ifndef LEGACY_CODE_0_2_x
 	action_mask_selection = new QAction(QIcon(QPixmap(":/mask.xpm")), tr("&Mask","mask selection"), this);
 	actionManager()->addAction(action_mask_selection, "mask_selection"); 
 
 	action_unmask_selection = new QAction(QIcon(QPixmap(":/unmask.xpm")), tr("&Unmask","unmask selection"), this);
 	actionManager()->addAction(action_unmask_selection, "unmask_selection"); 
+#endif
 
 	icon_temp = new QIcon();
 	icon_temp->addPixmap(QPixmap(":/16x16/fx.png"));
@@ -958,8 +1007,10 @@ void Table::createActions()
 	actionManager()->addAction(action_clear_table, "clear_table"); 
 	delete icon_temp;
 
+#ifndef LEGACY_CODE_0_2_x
 	action_clear_masks = new QAction(QIcon(QPixmap(":/unmask.xpm")), tr("Clear Masks"), this);
 	actionManager()->addAction(action_clear_masks, "clear_masks"); 
+#endif
 
 	icon_temp = new QIcon();
 	icon_temp->addPixmap(QPixmap(":/16x16/sort.png"));
@@ -1102,8 +1153,10 @@ void Table::connectActions()
 	connect(action_cut_selection, SIGNAL(triggered()), this, SLOT(cutSelection()));
 	connect(action_copy_selection, SIGNAL(triggered()), this, SLOT(copySelection()));
 	connect(action_paste_into_selection, SIGNAL(triggered()), this, SLOT(pasteIntoSelection()));
+#ifndef LEGACY_CODE_0_2_x
 	connect(action_mask_selection, SIGNAL(triggered()), this, SLOT(maskSelection()));
 	connect(action_unmask_selection, SIGNAL(triggered()), this, SLOT(unmaskSelection()));
+#endif
 	connect(action_set_formula, SIGNAL(triggered()), this, SLOT(setFormulaForSelection()));
 	connect(action_clear_selection, SIGNAL(triggered()), this, SLOT(clearSelectedCells()));
 	connect(action_recalculate, SIGNAL(triggered()), this, SLOT(recalculateSelectedCells()));
@@ -1112,7 +1165,9 @@ void Table::connectActions()
 	connect(action_select_all, SIGNAL(triggered()), this, SLOT(selectAll()));
 	connect(action_add_column, SIGNAL(triggered()), this, SLOT(addColumn()));
 	connect(action_clear_table, SIGNAL(triggered()), this, SLOT(clear()));
+#ifndef LEGACY_CODE_0_2_x
 	connect(action_clear_masks, SIGNAL(triggered()), this, SLOT(clearMasks()));
+#endif
 	connect(action_sort_table, SIGNAL(triggered()), this, SLOT(sortTable()));
 	connect(action_go_to_cell, SIGNAL(triggered()), this, SLOT(goToCell()));
 	connect(action_dimensions_dialog, SIGNAL(triggered()), this, SLOT(dimensionsDialog()));
@@ -1146,8 +1201,10 @@ void Table::addActionsToView()
 	d_view->addAction(action_cut_selection);
 	d_view->addAction(action_copy_selection);
 	d_view->addAction(action_paste_into_selection);
+#ifndef LEGACY_CODE_0_2_x
 	d_view->addAction(action_mask_selection);
 	d_view->addAction(action_unmask_selection);
+#endif
 	d_view->addAction(action_set_formula);
 	d_view->addAction(action_clear_selection);
 	d_view->addAction(action_recalculate);
@@ -1158,7 +1215,9 @@ void Table::addActionsToView()
 	d_view->addAction(action_select_all);
 	d_view->addAction(action_add_column);
 	d_view->addAction(action_clear_table);
+#ifndef LEGACY_CODE_0_2_x
 	d_view->addAction(action_clear_masks);
+#endif
 	d_view->addAction(action_sort_table);
 	d_view->addAction(action_go_to_cell);
 	d_view->addAction(action_dimensions_dialog);
@@ -1193,23 +1252,16 @@ void Table::showTableViewContextMenu(const QPoint& pos)
 //	context_menu.addAction(undoAction(&context_menu));
 //	context_menu.addAction(redoAction(&context_menu));
 
+	if(d_plot_menu)
+	{
+		context_menu.addMenu(d_plot_menu);
+		context_menu.addSeparator();
+	}
+
 	createSelectionMenu(&context_menu);
 	context_menu.addSeparator();
 	createTableMenu(&context_menu);
 	context_menu.addSeparator();
-
-	QString action_name;
-	if(d_view->areCommentsShown()) 
-		action_name = tr("Hide Comments");
-	else
-		action_name = tr("Show Comments");
-	action_toggle_comments->setText(action_name);
-
-	if(d_view->isControlTabBarVisible()) 
-		action_name = tr("Hide Controls");
-	else
-		action_name = tr("Show Controls");
-	action_toggle_tabbar->setText(action_name);
 
 	context_menu.exec(pos);
 }
@@ -1255,22 +1307,25 @@ QMenu * Table::createSelectionMenu(QMenu * append_to)
 	if(!menu)
 		menu = new QMenu();
 
+	QMenu * submenu = new QMenu("Fi&ll Selection with");
+	submenu->addAction(action_fill_row_numbers);
+	submenu->addAction(action_fill_random);
+	menu->addMenu(submenu);
+	menu->addSeparator();
+
 	menu->addAction(action_cut_selection);
 	menu->addAction(action_copy_selection);
 	menu->addAction(action_paste_into_selection);
 	menu->addAction(action_clear_selection);
 	menu->addSeparator();
+#ifndef LEGACY_CODE_0_2_x
 	menu->addAction(action_mask_selection);
 	menu->addAction(action_unmask_selection);
 	menu->addSeparator();
+#endif
 	menu->addAction(action_set_formula);
 	menu->addAction(action_recalculate);
 	menu->addSeparator();
-
-	QMenu * submenu = new QMenu("Fi&ll with");
-	submenu->addAction(action_fill_row_numbers);
-	submenu->addAction(action_fill_random);
-	menu->addMenu(submenu);
 
 	return menu;
 }
@@ -1282,29 +1337,42 @@ QMenu * Table::createColumnMenu(QMenu * append_to)
 	if(!menu)
 		menu = new QMenu();
 
+	QMenu * submenu = new QMenu(tr("S&et Column(s) As"));
+	submenu->addAction(action_set_as_x);
+	submenu->addAction(action_set_as_y);
+	submenu->addAction(action_set_as_z);
+	submenu->addSeparator();
+	submenu->addAction(action_set_as_xerr);
+	submenu->addAction(action_set_as_yerr);
+	submenu->addSeparator();
+	submenu->addAction(action_set_as_none);
+	menu->addMenu(submenu);
+	menu->addSeparator();
+
+	submenu = new QMenu("Fi&ll Selection with");
+	submenu->addAction(action_fill_row_numbers);
+	submenu->addAction(action_fill_random);
+	menu->addMenu(submenu);
+	menu->addSeparator();
+
 	menu->addAction(action_insert_columns);
 	menu->addAction(action_remove_columns);
 	menu->addAction(action_clear_columns);
 	menu->addAction(action_add_columns);
 	menu->addSeparator();
 	
-	QMenu * submenu = new QMenu("S&et As");
-
-	submenu->addAction(action_set_as_x);
-	submenu->addAction(action_set_as_y);
-	submenu->addAction(action_set_as_z);
-	submenu->addAction(action_set_as_xerr);
-	submenu->addAction(action_set_as_yerr);
-	submenu->addAction(action_set_as_none);
-	menu->addMenu(submenu);
+	menu->addAction(action_normalize_columns);
+	menu->addAction(action_sort_columns);
 	menu->addSeparator();
+
 	menu->addAction(action_edit_description);
 	menu->addAction(action_type_format);
 	menu->addSeparator();
 
-	menu->addAction(action_normalize_columns);
-	menu->addAction(action_sort_columns);
+	connect(menu, SIGNAL(aboutToShow()), this, SLOT(adjustActionNames()));
+	menu->addAction(action_toggle_comments);
 	menu->addSeparator();
+
 	menu->addAction(action_statistics_columns);
 
 	return menu;
@@ -1316,13 +1384,16 @@ QMenu * Table::createTableMenu(QMenu * append_to)
 	if(!menu)
 		menu = new QMenu();
 
+	connect(menu, SIGNAL(aboutToShow()), this, SLOT(adjustActionNames()));
 	menu->addAction(action_toggle_comments);
 	menu->addAction(action_toggle_tabbar);
 	menu->addSeparator();
 	menu->addAction(action_select_all);
 	menu->addAction(action_clear_table);
+#ifndef LEGACY_CODE_0_2_x
 	menu->addAction(action_clear_masks);
 	menu->addAction(action_sort_table);
+#endif
 	menu->addSeparator();
 	menu->addAction(action_add_column);
 	menu->addSeparator();
@@ -1341,6 +1412,11 @@ QMenu * Table::createRowMenu(QMenu * append_to)
 	menu->addAction(action_remove_rows);
 	menu->addAction(action_clear_rows);
 	menu->addAction(action_add_rows);
+	menu->addSeparator();
+	QMenu *submenu = new QMenu("Fi&ll Selection with");
+	submenu->addAction(action_fill_row_numbers);
+	submenu->addAction(action_fill_random);
+	menu->addMenu(submenu);
 	menu->addSeparator();
 	menu->addAction(action_statistics_rows);
 
@@ -1888,6 +1964,25 @@ bool Table::load(XmlStreamReader * reader)
 
 	return !reader->hasError();
 }
+
+void Table::adjustActionNames()
+{
+	if (!d_view) return;
+
+	QString action_name;
+	if(d_view->areCommentsShown()) 
+		action_name = tr("Hide Comments");
+	else
+		action_name = tr("Show Comments");
+	action_toggle_comments->setText(action_name);
+
+	if(d_view->isControlTabBarVisible()) 
+		action_name = tr("Hide Controls");
+	else
+		action_name = tr("Show Controls");
+	action_toggle_tabbar->setText(action_name);
+}
+
 /* ========================= static methods ======================= */
 ActionManager * Table::action_manager = 0;
 

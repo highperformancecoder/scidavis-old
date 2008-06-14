@@ -223,8 +223,10 @@ class Table : public AbstractPart
 	public slots:
 		//! Clear the whole table
 		void clear();
+#ifndef LEGACY_CODE_0_2_x
 		//! Clear all mask in the table
 		void clearMasks();
+#endif
 
 		//! Append one column
 		void addColumn();
@@ -237,8 +239,10 @@ class Table : public AbstractPart
 		void pasteIntoSelection();
 		void clearSelectedCells();
 		void goToCell();
+#ifndef LEGACY_CODE_0_2_x
 		void maskSelection();
 		void unmaskSelection();
+#endif
 		void setFormulaForSelection();
 		void recalculateSelectedCells();
 		void fillSelectedCellsWithRowNumbers();
@@ -321,6 +325,7 @@ class Table : public AbstractPart
 		void handleRowsAboutToBeRemoved(const AbstractColumn * col, int first, int count);
 		void handleRowsRemoved(const AbstractColumn * col, int first, int count);
 		//@}
+		void adjustActionNames();
 
 	signals:
 		void columnsAboutToBeInserted(int before, QList<Column*> new_cols);
@@ -348,8 +353,10 @@ class Table : public AbstractPart
 		QAction * action_cut_selection;
 		QAction * action_copy_selection;
 		QAction * action_paste_into_selection;
+#ifndef LEGACY_CODE_0_2_x
 		QAction * action_mask_selection;
 		QAction * action_unmask_selection;
+#endif
 		QAction * action_set_formula;
 		QAction * action_clear_selection;
 		QAction * action_recalculate;
@@ -363,7 +370,9 @@ class Table : public AbstractPart
 		QAction * action_select_all;
 		QAction * action_add_column;
 		QAction * action_clear_table;
+#ifndef LEGACY_CODE_0_2_x
 		QAction * action_clear_masks;
+#endif
 		QAction * action_sort_table;
 		QAction * action_go_to_cell;
 		QAction * action_dimensions_dialog;

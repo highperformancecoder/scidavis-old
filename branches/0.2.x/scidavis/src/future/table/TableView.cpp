@@ -174,7 +174,7 @@ void TableView::changeEvent(QEvent * event)
 {
 	if (event->type() == QEvent::LanguageChange) 
 		retranslateStrings();
-	QWidget::changeEvent(event);	
+	MyWidget::changeEvent(event);	
 }
 
 void TableView::retranslateStrings()
@@ -641,12 +641,12 @@ bool TableView::eventFilter(QObject * watched, QEvent * event)
 		else if(watched == d_view_widget)
 			d_table->showTableViewContextMenu(global_pos);
 		else
-			return QWidget::eventFilter(watched, event);
+			return MyWidget::eventFilter(watched, event);
 
 		return true;
 	} 
 	else 
-		return QWidget::eventFilter(watched, event);
+		return MyWidget::eventFilter(watched, event);
 }
 	
 /* ================== TableViewWidget ================ */

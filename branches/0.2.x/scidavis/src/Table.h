@@ -87,6 +87,16 @@ public slots:
 	void resizeCols(int);
 	void handleChange();
 
+	//! Return column number 'index'
+	Column* column(int index) const { return d_future_table->column(index); }
+	//! Return the column determined by the given name
+	/**
+	 * This method should not be used unless absolutely necessary. 
+	 * Columns should be addressed by their index. 
+	 * This method is mainly meant to be used in scripts.
+	 */
+	Column* column(const QString & name) const { return d_future_table->column(name); }
+
 	//! Return the value of the cell as a double
 	double cell(int row, int col);
 	void setCell(int row, int col, double val);

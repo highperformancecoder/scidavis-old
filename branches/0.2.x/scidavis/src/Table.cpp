@@ -33,6 +33,7 @@
 #include "TableDialog.h"
 #include "core/column/Column.h"
 #include "lib/Interval.h"
+#include "table/TableModel.h"
 
 #include <QMessageBox>
 #include <QDateTime>
@@ -737,8 +738,8 @@ QStringList Table::selectedColumns()
 	QStringList names;
 	for (int i=0; i<numCols(); i++)
 	{
-		if(isColumnSelected (i, true))
-			names << QString(name()) + "_" + d_future_table->column(i)->name();
+		if(isColumnSelected (i))
+			names << name() + "_" + column(i)->name();
 	}
 	return names;
 }
@@ -749,80 +750,74 @@ QStringList Table::YColumns()
 	QStringList names;
 	for (int i=0;i<numCols();i++)
 	{
-		if(d_future_table->column(i)->plotDesignation() == SciDAVis::Y)
-			names << QString(name()) + "_" + d_future_table->column(i)->name();
+		if(column(i)->plotDesignation() == SciDAVis::Y)
+			names << name() + "_" + column(i)->name();
 	}
 	return names;
 }
 
 QStringList Table::selectedYColumns()
 {
-// TODO
+// TODO: Column * list
 	QStringList names;
 	for (int i=0;i<numCols();i++)
 	{
-		if(isColumnSelected (i) && d_future_table->column(i)->plotDesignation() == SciDAVis::Y)
-			names << QString(name()) + "_" + d_future_table->column(i)->name();
+		if(isColumnSelected (i) && column(i)->plotDesignation() == SciDAVis::Y)
+			names << name() + "_" + column(i)->name();
 	}
 	return names;
 }
 
 QStringList Table::selectedErrColumns()
 {
-// TODO
+// TODO: Column * list
 	QStringList names;
 	for (int i=0;i<numCols();i++)
 	{
 		if (isColumnSelected (i) && 
-				(d_future_table->column(i)->plotDesignation() == SciDAVis::xErr || 
-				 d_future_table->column(i)->plotDesignation() == SciDAVis::yErr) )
-			names << QString(name()) + "_" + d_future_table->column(i)->name();
+				(column(i)->plotDesignation() == SciDAVis::xErr || 
+				 column(i)->plotDesignation() == SciDAVis::yErr) )
+			names << name() + "_" + column(i)->name();
 	}
 	return names;
 }
 
 QStringList Table::drawableColumnSelection()
 {
-// TODO
+// TODO: Column * list
 	QStringList names;
 	for (int i=0; i<numCols(); i++)
 	{
-		if(isColumnSelected (i) && d_future_table->column(i)->plotDesignation() == SciDAVis::Y)
-			names << QString(name()) + "_" + d_future_table->column(i)->name();
+		if(isColumnSelected (i) && column(i)->plotDesignation() == SciDAVis::Y)
+			names << name() + "_" + column(i)->name();
 	}
 
 	for (int i=0; i<numCols(); i++)
 	{
 		if (isColumnSelected (i) && 
-				(d_future_table->column(i)->plotDesignation() == SciDAVis::xErr || 
-				 d_future_table->column(i)->plotDesignation() == SciDAVis::yErr) )
-			names << QString(name()) + "_" + d_future_table->column(i)->name();
+				(column(i)->plotDesignation() == SciDAVis::xErr || 
+				 column(i)->plotDesignation() == SciDAVis::yErr) )
+			names << name() + "_" + column(i)->name();
 	}
 	return names;
 }
 
 QStringList Table::selectedYLabels()
 {
-// TODO
 	QStringList names;
-#if 0
-	for (int i=0;i<numCols();i++)
+	for (int i=0;i <numCols(); i++)
 	{
-		if(d_table->isColumnSelected (i) && col_plot_type[i] == Y)
-			names<<col_label[i];
+		if(isColumnSelected (i) && column(i)->plotDesignation() == SciDAVis::Y)
+			names << column(i)->name();
 	}
-#endif
 	return names;
 }
 
 QStringList Table::columnsList()
 {
-// TODO
 	QStringList names;
-#if 0
-	for (int i=0;i<numCols();i++)
-		names<<QString(name())+"_"+col_label[i];
-#endif
+	for (int i=0; i<numCols(); i++)
+		names << name() +"_" + column(i)->name();
 
 	return names;
 }
@@ -1219,7 +1214,8 @@ void Table::setCell(int row, int col, double val)
 
 QString Table::text(int row, int col)
 {
-	return d_future_table->column(col)->textAt(row);
+////	return d_future_table->column(col)->textAt(row);
+	return d_model->data(d_model->index(row, col), Qt::DisplayRole).toString();
 }
 
 void Table::setText(int row, int col, const QString & text)
