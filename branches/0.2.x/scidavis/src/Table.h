@@ -118,8 +118,6 @@ public slots:
 	void loadHeader(QStringList header);
 	void setHeaderColType();
 	void setText(int row,int col,const QString & text);
-	void setRandomValues();
-	void setAscValues();
 
 /////	void cellEdited(int,int col);
 	void moveCurrentCell();
@@ -129,13 +127,7 @@ public slots:
 	void print();
 	void print(const QString& fileName);
 	void exportPDF(const QString& fileName);
-
-	//! \name Event Handlers
-	//@{
-///TODO: remove:	bool eventFilter(QObject *object, QEvent *e);
-////	void contextMenuEvent(QContextMenuEvent *e);
-	void customEvent( QEvent* e);
-	//@}v
+    void customEvent(QEvent* e);
 
 	//! \name Column Operations
 	//@{
@@ -320,8 +312,6 @@ signals:
 	void changedColHeader(const QString&, const QString&);
 	void removedCol(const QString&);
 	void modifiedData(Table *, const QString&);
-	void optionsDialog();
-	void colValuesDialog();
 	void resizedTable(QWidget*);
 	void showContextMenu(bool selection);
 	void createTable(const QString&,int,int,const QString&);

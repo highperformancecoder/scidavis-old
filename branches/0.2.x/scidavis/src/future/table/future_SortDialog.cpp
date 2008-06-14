@@ -71,15 +71,15 @@ SortDialog::SortDialog( QWidget* parent, Qt::WFlags fl )
     ui.button_ok->setDefault( true );
 	hl->addWidget(ui.button_ok);
 
-    ui.button_cancel = new QPushButton(tr("&Cancel"));
-	hl->addWidget(ui.button_cancel);
+    ui.button_close = new QPushButton(tr("&Close"));
+	hl->addWidget(ui.button_close);
 
 	QVBoxLayout * mainlayout = new QVBoxLayout(this);
     mainlayout->addWidget(group_box1);
 	mainlayout->addLayout(hl);
 
     connect( ui.button_ok, SIGNAL( clicked() ), this, SLOT( accept() ) );
-    connect( ui.button_cancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+    connect( ui.button_close, SIGNAL( clicked() ), this, SLOT( close() ) );
     connect( ui.box_type, SIGNAL( currentIndexChanged(int) ), this, SLOT(changeType(int)));
 }
 
@@ -89,7 +89,6 @@ void SortDialog::accept()
 	if(ui.box_type->currentIndex() == Together) 
 		leading = d_columns_list.at(ui.columns_list->currentIndex());
 	emit sort(leading, d_columns_list, ui.box_order->currentIndex() == Ascending );
-	//close();
 }
 
 void SortDialog::setColumnsList(QList<Column*> list)

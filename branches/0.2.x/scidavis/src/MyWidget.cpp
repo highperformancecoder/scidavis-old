@@ -136,7 +136,7 @@ void MyWidget::changeEvent(QEvent *event)
 {
 	if (event->type() == QEvent::ParentChange) {
 		titleBar = 0;
-		parent()->installEventFilter(this);
+		if (parent()) parent()->installEventFilter(this);
 	}
 	else if (!isHidden() && event->type() == QEvent::WindowStateChange) {
 	    if (((QWindowStateChangeEvent *)event)->oldState() == windowState())

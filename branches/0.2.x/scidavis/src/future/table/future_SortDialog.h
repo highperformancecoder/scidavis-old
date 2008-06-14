@@ -60,7 +60,7 @@ class SortDialog : public QDialog
 		QList<Column*> d_columns_list;
 		struct {
 		QPushButton* button_ok;
-		QPushButton* button_cancel;
+		QPushButton* button_close;
 		QPushButton* button_help;
 		QComboBox* box_type;
 		QComboBox* box_order;

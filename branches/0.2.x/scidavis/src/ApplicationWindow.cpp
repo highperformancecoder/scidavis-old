@@ -36,8 +36,6 @@
 #include "LineDialog.h"
 #include "TextDialog.h"
 #include "ExportDialog.h"
-#include "TableDialog.h"
-#include "SetColValuesDialog.h"
 #include "ErrDialog.h"
 #include "Legend.h"
 #include "ArrowMarker.h"
@@ -602,10 +600,6 @@ void ApplicationWindow::initToolBars()
 	table_tools->setIconSize( QSize(16,20) );
 	addToolBar( Qt::TopToolBarArea, table_tools );
 
-	table_tools->addAction(actionAddColToTable);
-	table_tools->addAction(actionShowColStatistics);
-	table_tools->addAction(actionShowRowStatistics);
-
 	graph_tools->hide();
 	table_tools->hide();
 	plot_tools->hide();
@@ -674,11 +668,6 @@ void ApplicationWindow::insertTranslatedStrings()
 	plot2D->changeItem(statMenuID, tr("Statistical &Graphs"));
 	plot2D->changeItem(panelMenuID, tr("Pa&nel"));
 	plot2D->changeItem(plot3dID, tr("3&D Plot"));
-
-	dataMenu->changeItem(normMenuID, tr("&Normalize"));
-
-	tableMenu->changeItem(setAsMenuID, tr("Set Columns &As"));
-	tableMenu->changeItem(fillMenuID, tr("&Fill Columns With"));
 
 	calcul->changeItem(translateMenuID, tr("&Translate"));
 	calcul->changeItem(smoothMenuID, tr("&Smooth"));
@@ -825,9 +814,11 @@ void ApplicationWindow::initMainMenu()
 	matrixMenu = new QMenu(this);
 	matrixMenu->setFont(appFont);
 
+	tableMenu = new QMenu(this);
+	tableMenu->setFont(appFont);
+
 	initPlotMenu();
 	initTableAnalysisMenu();
-	initTableMenu();
 	initPlotDataMenu();
 
 	calcul = new QMenu( this );
@@ -927,47 +918,6 @@ void ApplicationWindow::initMainMenu()
 	disableActions();
 }
 
-void ApplicationWindow::initTableMenu()
-{
-	tableMenu = new QMenu(this);
-	tableMenu->setFont(appFont);
-
-	setAsMenu = new QMenu(this);
-	setAsMenu->setFont(appFont);
-
-	setAsMenu->addAction(actionSetXCol);
-	setAsMenu->addAction(actionSetYCol);
-	setAsMenu->addAction(actionSetZCol);
-	setAsMenu->addSeparator();
-	setAsMenu->addAction(actionSetYErrCol);
-	setAsMenu->addAction(actionSetXErrCol);
-	setAsMenu->addSeparator();
-
-	setAsMenu->addAction(actionDisregardCol);
-	setAsMenuID = tableMenu->insertItem(tr("Set Columns &As"), setAsMenu);
-
-	tableMenu->addAction(actionShowColumnOptionsDialog);
-	tableMenu->addSeparator();
-
-	tableMenu->addAction(actionShowColumnValuesDialog);
-	tableMenu->addAction(actionTableRecalculate);
-
-	fillMenu = new QMenu(this);
-	fillMenu->setFont(appFont);
-	fillMenu->addAction(actionSetAscValues);
-	fillMenu->addAction(actionSetRandomValues);
-	fillMenuID = tableMenu->insertItem(tr("&Fill Columns With"),fillMenu);
-
-	tableMenu->addAction(actionClearTable);
-	tableMenu->addSeparator();
-	tableMenu->addAction(actionAddColToTable);
-	tableMenu->addAction(actionShowColsDialog);
-	tableMenu->addAction(actionShowRowsDialog);
-	tableMenu->addAction(actionGoToCell);
-	tableMenu->addSeparator();
-	tableMenu->addAction(actionConvertTable);
-}
-
 void ApplicationWindow::initPlotDataMenu()
 {
 	plotDataMenu = new QMenu(this);
@@ -1053,17 +1003,6 @@ void ApplicationWindow::initTableAnalysisMenu()
 	dataMenu->addAction(actionShowRowStatistics);
 
 	dataMenu->addSeparator();
-
-	dataMenu->addAction(actionSortSelection);
-	dataMenu->addAction(actionSortTable);
-
-	normMenu = new QMenu(this);
-	normMenu->setFont(appFont);
-	normMenu->addAction(actionNormalizeSelection);
-	normMenu->addAction(actionNormalizeTable);
-	normMenuID = dataMenu->insertItem(tr("&Normalize"), normMenu);
-
-	dataMenu->addSeparator();
 	dataMenu->addAction(actionFFT);
 	dataMenu->addSeparator();
 	dataMenu->addAction(actionCorrelate);
@@ -1092,7 +1031,6 @@ void ApplicationWindow::customMenu(QWidget* w)
 
 	// these use the same keyboard shortcut (Ctrl+Return) and should not be enabled at the same time
 	actionNoteEvaluate->setEnabled(false);
-	actionTableRecalculate->setEnabled(false);
 
 	if(w)
 	{
@@ -1150,31 +1088,29 @@ void ApplicationWindow::customMenu(QWidget* w)
 			menuBar()->insertItem(tr("&Analysis"), dataMenu);
 
 			actionShowExportASCIIDialog->setEnabled(true);
-			actionTableRecalculate->setEnabled(true);
 			file->setItemEnabled (exportID,false);
 			file->setItemEnabled (closeID,true);
 
-			QMenu * menu = new QMenu();
-			static_cast<Table *>(w)->d_future_table->fillProjectMenu(menu);
-			menu->addSeparator();
-			menu->addAction(actionShowExportASCIIDialog);
-			menu->addSeparator();
-			menu->addAction(actionConvertTable);
-			menuBar()->insertItem(tr("&Table"), menu);
+			tableMenu->clear();
+			static_cast<Table *>(w)->d_future_table->fillProjectMenu(tableMenu);
+			tableMenu->addSeparator();
+			tableMenu->addAction(actionShowExportASCIIDialog);
+			tableMenu->addSeparator();
+			tableMenu->addAction(actionConvertTable);
+			menuBar()->insertItem(tr("&Table"), tableMenu);
 		}
 		else if (w->inherits("Matrix"))
 		{
-			actionTableRecalculate->setEnabled(true);
 			menuBar()->insertItem(tr("3D &Plot"), plot3DMenu);
 
 			matrixMenu->clear();
 			static_cast<Matrix *>(w)->d_future_matrix->fillProjectMenu(matrixMenu);
-			menuBar()->insertItem(tr("&Matrix"), matrixMenu);
 			matrixMenu->addSeparator();
 			matrixMenu->addAction(actionInvertMatrix);
 			matrixMenu->addAction(actionMatrixDeterminant);
 			matrixMenu->addSeparator();
 			matrixMenu->addAction(actionConvertMatrix);
+			menuBar()->insertItem(tr("&Matrix"), matrixMenu);
 		}
 		else if (w->inherits("Note"))
 		{
@@ -1271,10 +1207,12 @@ void ApplicationWindow::customToolBars(QWidget* w)
 		}
 		else if (w->inherits("Table"))
 		{
+			table_tools->clear();
+			static_cast<Table *>(w)->d_future_table->fillProjectToolBar(table_tools);
 			if (table_tools->isHidden())
 				table_tools->show();
-
 			table_tools->setEnabled (true);
+
 			graph_tools->setEnabled (false);
 			graph_3D_tools->setEnabled (false);
 			matrix_plot_tools->setEnabled (false);
@@ -3113,10 +3051,7 @@ void ApplicationWindow::updateAppFonts()
 	plotDataMenu->setFont(appFont);
 	tableMenu->setFont(appFont);
 	exportPlot->setFont(appFont);
-	normMenu->setFont(appFont);
 	translateMenu->setFont(appFont);
-	fillMenu->setFont(appFont);
-	setAsMenu->setFont(appFont);
 	multiPeakMenu->setFont(appFont);
 }
 
@@ -5430,49 +5365,6 @@ void ApplicationWindow::exportASCII(const QString& tableName, const QString& sep
 	}
 }
 
-void ApplicationWindow::showRowsDialog()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	bool ok;
-	int rows = QInputDialog::getInteger(tr("Enter rows number"), tr("Rows"),
-			((Table*)d_workspace->activeWindow())->numRows(), 0, 1000000, 1, &ok, this );
-	if ( ok )
-		((Table*)d_workspace->activeWindow())->resizeRows(rows);
-}
-
-void ApplicationWindow::showColsDialog()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	bool ok;
-	int cols = QInputDialog::getInteger(tr("Enter columns number"), tr("Columns"),
-			((Table*)d_workspace->activeWindow())->numCols(), 0, 1000000, 1, &ok, this );
-	if ( ok )
-		((Table*)d_workspace->activeWindow())->resizeCols(cols);
-}
-
-void ApplicationWindow::showColumnValuesDialog()
-{
-	Table* w = (Table*)d_workspace->activeWindow();
-	if ( w && w->inherits("Table"))
-	{
-		if(w->numCols() == 0) return;
-		if (int(w->selectedColumns().count())>0 /*|| !(w->getSelection().isEmpty()) */) // TODO
-		{
-			SetColValuesDialog* vd= new SetColValuesDialog(scriptEnv,this);
-			vd->setAttribute(Qt::WA_DeleteOnClose);
-			vd->setTable(w);
-			vd->exec();
-		}
-		else
-			QMessageBox::warning(this, tr("Column selection error"),
-					tr("Please select a column first!"));
-	}
-}
-
 void ApplicationWindow::recalculateTable()
 {
 	QWidget* w = d_workspace->activeWindow();
@@ -5483,25 +5375,6 @@ void ApplicationWindow::recalculateTable()
 		((Table*)w)->calculate();
 	else if (w->inherits("Matrix"))
 		((Matrix*)w)->calculate();
-}
-
-void ApplicationWindow::sortActiveTable()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	if (int(((Table*)d_workspace->activeWindow())->selectedColumns().count())>0)
-		((Table*)d_workspace->activeWindow())->sortTableDialog();
-	else
-		QMessageBox::warning(this, "Column selection error","Please select a column first!");
-}
-
-void ApplicationWindow::sortSelection()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	((Table*)d_workspace->activeWindow())->sortColumnsDialog();
 }
 
 void ApplicationWindow::normalizeActiveTable()
@@ -5637,219 +5510,6 @@ void ApplicationWindow::showRowStatistics()
 				tr("Please select a row first!"));
 }
 
-void ApplicationWindow::showColMenu(int c)
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	Table* w = (Table*)d_workspace->activeWindow();
-
-	QMenu contextMenu(this);
-	QMenu plot(this);
-	QMenu specialPlot(this);
-	QMenu fill(this);
-	QMenu sorting(this);
-	QMenu colType(this);
-	colType.setCheckable ( true );
-	QMenu panels(this);
-	QMenu stat(this);
-	QMenu norm(this);
-
-	if ((int)w->selectedColumns().count()==1)
-	{
-	//// TODO: remove next line
-	////	w->setSelectedCol(c);
-		plot.addAction(actionPlotL);
-		plot.addAction(actionPlotP);
-		plot.addAction(actionPlotLP);
-
-		specialPlot.addAction(actionPlotVerticalDropLines);
-		specialPlot.addAction(actionPlotSpline);
-		specialPlot.addAction(actionPlotVertSteps);
-		specialPlot.addAction(actionPlotHorSteps);
-		specialPlot.setTitle(tr("Special Line/Symb&ol"));
-		plot.addMenu(&specialPlot);
-		plot.addSeparator();
-
-		plot.addAction(actionPlotVerticalBars);
-		plot.addAction(actionPlotHorizontalBars);
-		plot.addAction(actionPlotArea);
-		plot.addAction(actionPlotPie);
-		plot.addSeparator();
-
-		plot.addAction(actionPlot3DRibbon);
-		plot.addAction(actionPlot3DBars);
-		plot.addAction(actionPlot3DScatter);
-		plot.addAction(actionPlot3DTrajectory);
-
-		plot.addSeparator();
-
-		stat.addAction(actionBoxPlot);
-		stat.addAction(actionPlotHistogram);
-		stat.addAction(actionPlotStackedHistograms);
-		stat.setTitle(tr("Statistical &Graphs"));
-		plot.addMenu(&stat);
-
-		plot.setTitle(tr("&Plot"));
-		contextMenu.addMenu(&plot);
-		contextMenu.addSeparator();
-
-		contextMenu.addAction(QIcon(QPixmap(":/cut.xpm")),tr("Cu&t"), w, SLOT(cutSelection()));
-		contextMenu.addAction(QIcon(QPixmap(":/copy.xpm")),tr("&Copy"), w, SLOT(copySelection()));
-		contextMenu.addAction(QIcon(QPixmap(":/paste.xpm")),tr("Past&e"), w, SLOT(pasteSelection()));
-		contextMenu.addSeparator();
-
-		QAction * xColID=colType.addAction(tr("X"), this, SLOT(setXCol()));
-		QAction * yColID=colType.addAction(tr("Y"), this, SLOT(setYCol()));
-		QAction * zColID=colType.addAction(tr("Z"), this, SLOT(setZCol()));
-		colType.addSeparator();
-		QAction * xErrColID =colType.addAction(QIcon(QPixmap(":/xerror.xpm")), tr("X Error"), this, SLOT(setXErrCol()));
-		QAction * yErrColID = colType.addAction(QIcon(QPixmap(":/yerror.xpm")), tr("Y Error"), this, SLOT(setYErrCol()));
-		colType.addSeparator();
-		QAction * noneID=colType.addAction(tr("None"), this, SLOT(disregardCol()));
-
-		if (w->colPlotDesignation(c) == SciDAVis::X)
-			xColID->setChecked(true);
-		else if (w->colPlotDesignation(c) == SciDAVis::Y)
-			yColID->setChecked(true);
-		else if (w->colPlotDesignation(c) == SciDAVis::Z)
-			zColID->setChecked(true);
-		else if (w->colPlotDesignation(c) == SciDAVis::xErr)
-			xErrColID->setChecked(true);
-		else if (w->colPlotDesignation(c) == SciDAVis::yErr)
-			yErrColID->setChecked(true);
-		else
-			noneID->setChecked(true);
-
-		colType.setTitle(tr("Set As"));
-		contextMenu.addMenu(&colType);
-		if (d_workspace->activeWindow()->inherits("Table"))
-		{
-			contextMenu.addSeparator();
-
-			contextMenu.addAction(actionShowColumnValuesDialog);
-			contextMenu.addAction(actionTableRecalculate);
-			fill.addAction(actionSetAscValues);
-			fill.addAction(actionSetRandomValues);
-			fill.setTitle(tr("&Fill Column With"));
-			contextMenu.addMenu(&fill);
-
-			norm.addAction(tr("&Column"), w, SLOT(normalizeSelection()));
-			norm.addAction(actionNormalizeTable);
-			norm.setTitle(tr("&Normalize"));
-			contextMenu.addMenu(& norm);
-
-			contextMenu.addSeparator();
-			contextMenu.addAction(actionShowColStatistics);
-
-			contextMenu.addSeparator();
-
-			contextMenu.addAction(QIcon(QPixmap(":/erase.xpm")), tr("Clea&r"), w, SLOT(clearCol()));
-			contextMenu.addAction(QIcon(QPixmap(":/close.xpm")), tr("&Delete"), w, SLOT(removeCol()));
-			contextMenu.addAction(tr("&Insert"), w, SLOT(insertCol()));
-			contextMenu.addAction(tr("&Add Column"),w, SLOT(addCol()));
-			contextMenu.addSeparator();
-
-			sorting.addAction(tr("&Ascending"),w, SLOT(sortColAsc()));
-			sorting.addAction(tr("&Descending"),w, SLOT(sortColDesc()));
-			sorting.setTitle(tr("Sort Colu&mn"));
-			contextMenu.addMenu(&sorting);
-
-			contextMenu.addAction(actionSortTable);
-		}
-
-		contextMenu.addSeparator();
-		contextMenu.addAction(actionShowColumnOptionsDialog);
-	}
-	else if ((int)w->selectedColumns().count()>1)
-	{
-		plot.addAction(actionPlotL);
-		plot.addAction(actionPlotP);
-		plot.addAction(actionPlotLP);
-
-		specialPlot.addAction(actionPlotVerticalDropLines);
-		specialPlot.addAction(actionPlotSpline);
-		specialPlot.addAction(actionPlotVertSteps);
-		specialPlot.addAction(actionPlotHorSteps);
-		specialPlot.setTitle(tr("Special Line/Symb&ol"));
-		plot.addMenu(&specialPlot);
-		plot.addSeparator();
-
-		plot.addAction(actionPlotVerticalBars);
-		plot.addAction(actionPlotHorizontalBars);
-		plot.addAction(actionPlotArea);
-		plot.addAction(actionPlotVectXYXY);
-		plot.addAction(actionPlotVectXYAM);
-		plot.addSeparator();
-
-		stat.addAction(actionBoxPlot);
-		stat.addAction(actionPlotHistogram);
-		stat.addAction(actionPlotStackedHistograms);
-		stat.setTitle(tr("Statistical &Graphs"));
-		plot.addMenu(&stat);
-
-		panels.addAction(actionPlot2VerticalLayers);
-		panels.addAction(actionPlot2HorizontalLayers);
-		panels.addAction(actionPlot4Layers);
-		panels.addAction(actionPlotStackedLayers);
-		panels.setTitle(tr("Pa&nel"));
-		plot.addMenu(&panels);
-
-		plot.setTitle(tr("&Plot"));
-		contextMenu.addMenu(&plot);
-		contextMenu.addSeparator();
-		contextMenu.addAction(QIcon(QPixmap(":/cut.xpm")),tr("Cu&t"), w, SLOT(cutSelection()));
-		contextMenu.addAction(QIcon(QPixmap(":/copy.xpm")),tr("&Copy"), w, SLOT(copySelection()));
-		contextMenu.addAction(QIcon(QPixmap(":/paste.xpm")),tr("Past&e"), w, SLOT(pasteSelection()));
-		contextMenu.addSeparator();
-
-		if (d_workspace->activeWindow()->inherits("Table"))
-		{
-			contextMenu.addAction(QIcon(QPixmap(":/erase.xpm")),tr("Clea&r"), w, SLOT(clearSelection()));
-			contextMenu.addAction(QIcon(QPixmap(":/close.xpm")),tr("&Delete"), w, SLOT(removeCol()));
-			contextMenu.addSeparator();
-			contextMenu.addAction(tr("&Insert"), w, SLOT(insertCol()));
-			contextMenu.addAction(tr("&Add Column"),w, SLOT(addCol()));
-			contextMenu.addSeparator();
-		}
-
-		colType.addAction(actionSetXCol);
-		colType.addAction(actionSetYCol);
-		colType.addAction(actionSetZCol);
-		colType.addSeparator();
-		colType.addAction(actionSetXErrCol);
-		colType.addAction(actionSetYErrCol);
-		colType.addSeparator();
-		colType.addAction(actionDisregardCol);
-		colType.setTitle(tr("Set As"));
-		contextMenu.addMenu(&colType);
-
-		if (d_workspace->activeWindow()->inherits("Table"))
-		{
-			contextMenu.addSeparator();
-
-			fill.addAction(actionSetAscValues);
-			fill.addAction(actionSetRandomValues);
-			fill.setTitle(tr("&Fill Columns With"));
-			contextMenu.addMenu(&fill);
-
-			norm.addAction(actionNormalizeSelection);
-			norm.addAction(actionNormalizeTable);
-			norm.setTitle(tr("&Normalize"));
-			contextMenu.addMenu(&norm);
-
-			contextMenu.addSeparator();
-			contextMenu.addAction(actionSortSelection);
-			contextMenu.addAction(actionSortTable);
-			contextMenu.addSeparator();
-			contextMenu.addAction(actionShowColStatistics);
-		}
-	}
-
-	QPoint posMouse=QCursor::pos();
-	contextMenu.exec(posMouse);
-}
-
 void ApplicationWindow::plot2VerticalLayers()
 {
 	multilayerPlot(1, 2, defaultCurveStyle);
@@ -5873,22 +5533,6 @@ void ApplicationWindow::plotStackedLayers()
 void ApplicationWindow::plotStackedHistograms()
 {
 	multilayerPlot(1, -1, Graph::Histogram);
-}
-
-void ApplicationWindow::showColumnOptionsDialog()
-{
-	if ( !d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	Table *t = (Table*)d_workspace->activeWindow();
-	if(t->selectedColumns().count()>0)
-	{
-		TableDialog* td = new TableDialog(t, this);
-		td->setAttribute(Qt::WA_DeleteOnClose);
-		td->exec();
-	}
-	else
-		QMessageBox::warning(this, tr("SciDAVis"), tr("Please select a column first!"));
 }
 
 void ApplicationWindow::showGeneralPlotDialog()
@@ -8437,70 +8081,6 @@ void ApplicationWindow::showWindowTitleBarMenu()
 	showWindowMenu(qobject_cast<MyWidget *>(d_workspace->activeWindow()));
 }
 
-void ApplicationWindow::showTableContextMenu(bool selection)
-{
-	Table *t = (Table*)d_workspace->activeWindow();
-	if (!t)
-		return;
-
-	QMenu cm(this);
-	if (selection)
-	{
-		if ((int)t->selectedColumns().count() > 0)
-		{
-			showColMenu(t->firstSelectedColumn());
-			return;
-		}
-		else if (t->numSelectedRows() == 1)
-		{
-			cm.addAction(actionShowColumnValuesDialog);
-			cm.insertItem(QPixmap(":/cut.xpm"),tr("Cu&t"), t, SLOT(cutSelection()));
-			cm.insertItem(QPixmap(":/copy.xpm"),tr("&Copy"), t, SLOT(copySelection()));
-			cm.insertItem(QPixmap(":/paste.xpm"),tr("&Paste"), t, SLOT(pasteSelection()));
-			cm.addSeparator();
-			cm.addAction(actionTableRecalculate);
-			cm.insertItem(tr("&Insert Row"), t, SLOT(insertRow()));
-			cm.insertItem(QPixmap(":/close.xpm"), tr("&Delete Row"), t, SLOT(deleteSelectedRows()));
-			cm.insertItem(QPixmap(":/erase.xpm"),tr("Clea&r Row"), t, SLOT(clearSelection()));
-			cm.addSeparator();
-			cm.addAction(actionShowRowStatistics);
-		}
-		else if (t->numSelectedRows() > 1)
-		{
-			cm.addAction(actionShowColumnValuesDialog);
-			cm.insertItem(QPixmap(":/cut.xpm"),tr("Cu&t"), t, SLOT(cutSelection()));
-			cm.insertItem(QPixmap(":/copy.xpm"),tr("&Copy"), t, SLOT(copySelection()));
-			cm.insertItem(QPixmap(":/paste.xpm"),tr("&Paste"), t, SLOT(pasteSelection()));
-			cm.addSeparator();
-			cm.addAction(actionTableRecalculate);
-			cm.insertItem(QPixmap(":/close.xpm"), tr("&Delete Rows"), t, SLOT(deleteSelectedRows()));
-			cm.insertItem(QPixmap(":/erase.xpm"),tr("Clea&r Rows"), t, SLOT(clearSelection()));
-			cm.addSeparator();
-			cm.addAction(actionShowRowStatistics);
-		}
-		else
-		{
-			cm.addAction(actionShowColumnValuesDialog);
-			cm.insertItem(QPixmap(":/cut.xpm"),tr("Cu&t"), t, SLOT(cutSelection()));
-			cm.insertItem(QPixmap(":/copy.xpm"),tr("&Copy"), t, SLOT(copySelection()));
-			cm.insertItem(QPixmap(":/paste.xpm"),tr("&Paste"), t, SLOT(pasteSelection()));
-			cm.addSeparator();
-			cm.addAction(actionTableRecalculate);
-			cm.insertItem(QPixmap(":/erase.xpm"),tr("Clea&r"), t, SLOT(clearSelection()));
-		}
-	}
-	else
-	{
-		cm.addAction(actionShowExportASCIIDialog);
-		cm.addSeparator();
-		cm.addAction(actionAddColToTable);
-		cm.addAction(actionClearTable);
-		cm.addSeparator();
-		cm.addAction(actionGoToCell);
-	}
-	cm.exec(QCursor::pos());
-}
-
 void ApplicationWindow::chooseHelpFolder()
 {
 	QString dir = QFileDialog::getExistingDirectory(this, tr("Choose the location of the SciDAVis help folder!"),
@@ -10550,9 +10130,6 @@ void ApplicationWindow::connectTable(Table* w)
 	connect (w,SIGNAL(modifiedData(Table *, const QString&)),
 			this,SLOT(updateCurves(Table *, const QString&)));
 	connect (w,SIGNAL(modifiedWindow(QWidget*)),this,SLOT(modifiedProject(QWidget*)));
-	connect (w,SIGNAL(optionsDialog()),this,SLOT(showColumnOptionsDialog()));
-	connect (w,SIGNAL(colValuesDialog()),this,SLOT(showColumnValuesDialog()));
-	connect (w,SIGNAL(showContextMenu(bool)),this,SLOT(showTableContextMenu(bool)));
 	connect (w,SIGNAL(changedColHeader(const QString&,const QString&)),this,SLOT(updateColNames(const QString&,const QString&)));
 	connect (w,SIGNAL(createTable(const QString&,int,int,const QString&)),this,SLOT(newTable(const QString&,int,int,const QString&)));
 
@@ -10946,24 +10523,6 @@ void ApplicationWindow::createActions()
 	actionShowTitleDialog = new QAction(tr("&Title ..."), this);
 	connect(actionShowTitleDialog, SIGNAL(activated()), this, SLOT(showTitleDialog()));
 
-	actionShowColumnOptionsDialog = new QAction(tr("Column &Options ..."), this);
-	actionShowColumnOptionsDialog->setShortcut(tr("Ctrl+Alt+O"));
-	connect(actionShowColumnOptionsDialog, SIGNAL(activated()), this, SLOT(showColumnOptionsDialog()));
-
-	actionShowColumnValuesDialog = new QAction(tr("Set Column &Values ..."), this);
-	connect(actionShowColumnValuesDialog, SIGNAL(activated()), this, SLOT(showColumnValuesDialog()));
-	actionShowColumnValuesDialog->setShortcut(tr("Alt+Q"));
-
-	actionTableRecalculate = new QAction(tr("Recalculate"), this);
-	actionTableRecalculate->setShortcut(tr("Ctrl+Return"));
-	connect(actionTableRecalculate, SIGNAL(activated()), this, SLOT(recalculateTable()));
-
-	actionShowColsDialog = new QAction(tr("&Columns..."), this);
-	connect(actionShowColsDialog, SIGNAL(activated()), this, SLOT(showColsDialog()));
-
-	actionShowRowsDialog = new QAction(tr("&Rows..."), this);
-	connect(actionShowRowsDialog, SIGNAL(activated()), this, SLOT(showRowsDialog()));
-
 	actionAbout = new QAction(tr("&About SciDAVis"), this);
 	actionAbout->setShortcut( tr("F1") );
 	connect(actionAbout, SIGNAL(activated()), this, SLOT(about()));
@@ -10981,16 +10540,6 @@ void ApplicationWindow::createActions()
 	actionCloseWindow = new QAction(QIcon(QPixmap(":/close.xpm")), tr("Close &Window"), this);
 	actionCloseWindow->setShortcut( tr("Ctrl+W") );
 	connect(actionCloseWindow, SIGNAL(activated()), this, SLOT(closeActiveWindow()));
-
-	actionAddColToTable = new QAction(QIcon(QPixmap(":/addCol.xpm")), tr("Add Column"), this);
-	connect(actionAddColToTable, SIGNAL(activated()), this, SLOT(addColToTable()));
-
-	actionGoToCell = new QAction(tr("&Go to Cell..."), this);
-	actionGoToCell->setShortcut(tr("Ctrl+Alt+G"));
-	connect(actionGoToCell, SIGNAL(activated()), this, SLOT(goToCell()));
-
-	actionClearTable = new QAction(QPixmap(":/erase.xpm"), tr("Clear"), this);
-	connect(actionClearTable, SIGNAL(activated()), this, SLOT(clearTable()));
 
 	actionDeleteLayer = new QAction(QIcon(QPixmap(":/erase.xpm")), tr("&Remove Layer"), this);
 	actionDeleteLayer->setShortcut( tr("Alt+R") );
@@ -11077,18 +10626,6 @@ void ApplicationWindow::createActions()
 	actionGrayMap = new QAction(QIcon(QPixmap(":/gray_map.xpm")), tr("&Gray Scale Map"), this);
 	connect(actionGrayMap, SIGNAL(activated()), this, SLOT(plotGrayScale()));
 
-	actionSortTable = new QAction(tr("Sort Ta&ble"), this);
-	connect(actionSortTable, SIGNAL(activated()), this, SLOT(sortActiveTable()));
-
-	actionSortSelection = new QAction(tr("Sort Columns"), this);
-	connect(actionSortSelection, SIGNAL(activated()), this, SLOT(sortSelection()));
-
-	actionNormalizeTable = new QAction(tr("&Table"), this);
-	connect(actionNormalizeTable, SIGNAL(activated()), this, SLOT(normalizeActiveTable()));
-
-	actionNormalizeSelection = new QAction(tr("&Columns"), this);
-	connect(actionNormalizeSelection, SIGNAL(activated()), this, SLOT(normalizeSelection()));
-
 	actionCorrelate = new QAction(tr("Co&rrelate"), this);
 	connect(actionCorrelate, SIGNAL(activated()), this, SLOT(correlate()));
 
@@ -11106,30 +10643,6 @@ void ApplicationWindow::createActions()
 
 	actionTranslateVert = new QAction(tr("&Vertical"), this);
 	connect(actionTranslateVert, SIGNAL(activated()), this, SLOT(translateCurveVert()));
-
-	actionSetAscValues = new QAction(QIcon(QPixmap(":/rowNumbers.xpm")),tr("Ro&w Numbers"), this);
-	connect(actionSetAscValues, SIGNAL(activated()), this, SLOT(setAscValues()));
-
-	actionSetRandomValues = new QAction(QIcon(QPixmap(":/randomNumbers.xpm")),tr("&Random Values"), this);
-	connect(actionSetRandomValues, SIGNAL(activated()), this, SLOT(setRandomValues()));
-
-	actionSetXCol = new QAction(tr("&X"), this);
-	connect(actionSetXCol, SIGNAL(activated()), this, SLOT(setXCol()));
-
-	actionSetYCol = new QAction(tr("&Y"), this);
-	connect(actionSetYCol, SIGNAL(activated()), this, SLOT(setYCol()));
-
-	actionSetZCol = new QAction(tr("&Z"), this);
-	connect(actionSetZCol, SIGNAL(activated()), this, SLOT(setZCol()));
-
-	actionSetXErrCol = new QAction(QPixmap(":/xerror.xpm"), tr("X E&rror"), this);
-	connect(actionSetXErrCol, SIGNAL(activated()), this, SLOT(setXErrCol()));
-
-	actionSetYErrCol = new QAction(QIcon(QPixmap(":/yerror.xpm")), tr("Y &Error"), this);
-	connect(actionSetYErrCol, SIGNAL(activated()), this, SLOT(setYErrCol()));
-
-	actionDisregardCol = new QAction(tr("&None"), this);
-	connect(actionDisregardCol, SIGNAL(activated()), this, SLOT(disregardCol()));
 
 	actionBoxPlot = new QAction(QIcon(QPixmap(":/boxPlot.xpm")),tr("&Box Plot"), this);
 	connect(actionBoxPlot, SIGNAL(activated()), d_plot_mapper, SLOT(map()));
@@ -11477,13 +10990,6 @@ void ApplicationWindow::translateActionsStrings()
 	actionShowAxisDialog->setMenuText(tr("&Axes..."));
 	actionShowGridDialog->setMenuText(tr("&Grid ..."));
 	actionShowTitleDialog->setMenuText(tr("&Title ..."));
-	actionShowColumnOptionsDialog->setMenuText(tr("Column &Options ..."));
-	actionShowColumnOptionsDialog->setShortcut(tr("Ctrl+Alt+O"));
-	actionShowColumnValuesDialog->setMenuText(tr("Set Column &Values ..."));
-	actionShowColumnValuesDialog->setShortcut(tr("Alt+Q"));
-	actionTableRecalculate->setMenuText(tr("Recalculate"));
-	actionShowColsDialog->setMenuText(tr("&Columns..."));
-	actionShowRowsDialog->setMenuText(tr("&Rows..."));
 
 	actionAbout->setMenuText(tr("&About SciDAVis"));
 	actionAbout->setShortcut(tr("F1"));
@@ -11496,13 +11002,6 @@ void ApplicationWindow::translateActionsStrings()
 
 	actionCloseWindow->setMenuText(tr("Close &Window"));
 	actionCloseWindow->setShortcut(tr("Ctrl+W"));
-
-	actionAddColToTable->setMenuText(tr("Add Column"));
-	actionAddColToTable->setToolTip(tr("Add Column"));
-
-	actionClearTable->setMenuText(tr("Clear"));
-	actionGoToCell->setMenuText(tr("&Go to Cell..."));
-	actionGoToCell->setShortcut(tr("Ctrl+Alt+G"));
 
 	actionDeleteLayer->setMenuText(tr("&Remove Layer"));
 	actionDeleteLayer->setShortcut(tr("Alt+R"));
@@ -11531,24 +11030,12 @@ void ApplicationWindow::translateActionsStrings()
 	actionPlot3DHiddenLine->setMenuText(tr("3D &Hidden Line"));
 	actionPlot3DPolygons->setMenuText(tr("3D &Polygons"));
 	actionPlot3DWireSurface->setMenuText(tr("3D Wire &Surface"));
-	actionSortTable->setMenuText(tr("Sort Ta&ble"));
-	actionSortSelection->setMenuText(tr("Sort Columns"));
-	actionNormalizeTable->setMenuText(tr("&Table"));
-	actionNormalizeSelection->setMenuText(tr("&Columns"));
 	actionCorrelate->setMenuText(tr("Co&rrelate"));
 	actionAutoCorrelate->setMenuText(tr("&Autocorrelate"));
 	actionConvolute->setMenuText(tr("&Convolute"));
 	actionDeconvolute->setMenuText(tr("&Deconvolute"));
 	actionTranslateHor->setMenuText(tr("&Horizontal"));
 	actionTranslateVert->setMenuText(tr("&Vertical"));
-	actionSetAscValues->setMenuText(tr("Ro&w Numbers"));
-	actionSetRandomValues->setMenuText(tr("&Random Values"));
-	actionSetXCol->setMenuText(tr("&X"));
-	actionSetYCol->setMenuText(tr("&Y"));
-	actionSetZCol->setMenuText(tr("&Z"));
-	actionSetXErrCol->setMenuText(tr("X E&rror"));
-	actionSetYErrCol->setMenuText(tr("Y &Error"));
-	actionDisregardCol->setMenuText(tr("&None"));
 
 	actionBoxPlot->setMenuText(tr("&Box Plot"));
 	actionBoxPlot->setToolTip(tr("Box and whiskers plot"));
@@ -11993,70 +11480,6 @@ void ApplicationWindow::translateCurveVert()
 		btnPointer->setChecked(true);
 		g->setActiveTool(new TranslateCurveTool(g, this, TranslateCurveTool::Vertical, d_status_info, SLOT(setText(const QString&))));
 	}
-}
-
-void ApplicationWindow::setAscValues()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	((Table *)d_workspace->activeWindow())->setAscValues();
-}
-
-void ApplicationWindow::setRandomValues()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	((Table *)d_workspace->activeWindow())->setRandomValues();
-}
-
-void ApplicationWindow::setXErrCol()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::xErr);
-}
-
-void ApplicationWindow::setYErrCol()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::yErr);
-}
-
-void ApplicationWindow::setXCol()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::X);
-}
-
-void ApplicationWindow::setYCol()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::Y);
-}
-
-void ApplicationWindow::setZCol()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::Z);
-}
-
-void ApplicationWindow::disregardCol()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	((Table *)d_workspace->activeWindow())->setPlotDesignation(SciDAVis::noDesignation);
 }
 
 void ApplicationWindow::fitMultiPeakGauss()
@@ -13666,40 +13089,6 @@ void ApplicationWindow::clearTable()
 		return;
 	else
 		t->clear();
-}
-
-void ApplicationWindow::goToCell()
-{
-	if (!d_workspace->activeWindow())
-		return;
-	int num_rows, num_cols;
-	bool ok;
-
-	if (d_workspace->activeWindow()->inherits("Table"))
-	{
-		num_rows = ((Table *)d_workspace->activeWindow())->numRows();
-		num_cols = ((Table *)d_workspace->activeWindow())->numCols();
-	}
-	else if (d_workspace->activeWindow()->inherits("Matrix")) 
-	{
-		num_rows = ((Matrix *)d_workspace->activeWindow())->numRows();
-		num_cols = ((Matrix *)d_workspace->activeWindow())->numCols();
-	}
-	else return;
-
-	int row = QInputDialog::getInteger(tr("Go to Cell"), tr("Enter row"),
-			1, 1, num_rows, 1, &ok, this );
-	if ( !ok )
-		return;
-	int col = QInputDialog::getInteger(tr("Go to Cell"), tr("Enter column"),
-			1, 1, num_cols, 1, &ok, this );
-	if ( !ok )
-		return;
-
-	if (d_workspace->activeWindow()->inherits("Table"))
-		((Table *)d_workspace->activeWindow())->goToCell(row-1, col-1);
-	else if (d_workspace->activeWindow()->inherits("Matrix"))
-		((Matrix *)d_workspace->activeWindow())->goToCell(row-1, col-1);
 }
 
 /*!

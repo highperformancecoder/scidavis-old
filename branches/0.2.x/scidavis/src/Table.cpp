@@ -30,7 +30,6 @@
  ***************************************************************************/
 #include "Table.h"
 #include "SortDialog.h"
-#include "TableDialog.h"
 #include "core/column/Column.h"
 #include "lib/Interval.h"
 #include "table/TableModel.h"
@@ -1551,37 +1550,6 @@ void Table::setDayFormat(const QString& format, int col, bool updateCells)
 #endif
 }
 
-void Table::setRandomValues()
-{
-	// TODO: obsolete
-#if 0
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-	int rows=numRows();
-	QStringList list=selectedColumns();
-
-	time_t tmp;
-	srand(time(&tmp));
-
-	for (int j=0;j<(int) list.count(); j++)
-	{
-		QString name=list[j];
-		selectedCol=colIndex(name);
-
-		int prec;
-		char f;
-		columnNumericFormat(selectedCol, &f, &prec);
-
-		for (int i=0; i<rows; i++)
-			setText(i, selectedCol, QLocale().toString(double(rand())/double(RAND_MAX), f, prec));
-
-		emit modifiedData(this, name);
-	}
-
-	emit modifiedWindow(this);
-	QApplication::restoreOverrideCursor();
-#endif
-}
 
 void Table::loadHeader(QStringList header)
 {
@@ -1703,40 +1671,6 @@ void Table::setHeaderColType()
 				setColumnHeader(i, col_label[i]);
 		}
 	}
-#endif
-}
-
-void Table::setAscValues()
-{
-	// TODO: obsolete
-#if 0
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-	int rows=numRows();
-	QStringList list=selectedColumns();
-
-	for (int j=0;j<(int) list.count(); j++)
-	{
-		QString name=list[j];
-		selectedCol=colIndex(name);
-
-		if (columnType(selectedCol) != Numeric) {
-			d_future_table->column(selectedCol)->setColumnMode( Numeric);
-			col_format[selectedCol] = "0/6";
-		}
-
-		int prec;
-		char f;
-		columnNumericFormat(selectedCol, &f, &prec);
-
-		for (int i=0; i<rows; i++)
-			setText(i,selectedCol,QString::number(i+1, f, prec));
-
-		emit modifiedData(this, name);
-	}
-
-	emit modifiedWindow(this);
-	QApplication::restoreOverrideCursor();
 #endif
 }
 
@@ -2194,21 +2128,6 @@ bool Table::exportASCII(const QString& fname, const QString& separator,
 	return true;
 }
 
-// TODO: obsolete
-#if 0
-void Table::contextMenuEvent(QContextMenuEvent *e)
-{
-	// TODO: remove
-	QRect r = d_table->horizontalHeader()->sectionRect(numCols()-1);
-	setFocus();
-	if (e->pos().x() > r.right() + d_table->verticalHeader()->width())
-		emit showContextMenu(false);
-	else
-		emit showContextMenu(true);
-	e->accept();
-}
-#endif
-
 void Table::moveCurrentCell()
 {
 	// TODO: remove
@@ -2233,64 +2152,6 @@ void Table::moveCurrentCell()
 	}
 #endif
 }
-
-	// TODO: remove
-#if 0
-bool Table::eventFilter(QObject *object, QEvent *e)
-{
-	Q3Header *hheader = d_table->horizontalHeader();
-	Q3Header *vheader = d_table->verticalHeader();
-
-	if (e->type() == QEvent::MouseButtonDblClick && object == (QObject*)hheader) {
-		const QMouseEvent *me = (const QMouseEvent *)e;
-		selectedCol = hheader->sectionAt (me->pos().x() + hheader->offset());
-
-		QRect rect = hheader->sectionRect (selectedCol);
-		rect.setLeft(rect.right() - 2);
-		rect.setWidth(4);
-
-		if (rect.contains (me->pos())) {
-			d_table->adjustColumn(selectedCol);
-			emit modifiedWindow(this);
-		} else
-			emit optionsDialog();
-		setActiveWindow();
-		return true;
-	} else if (e->type() == QEvent::MouseButtonPress && object == (QObject*)hheader) {
-		const QMouseEvent *me = (const QMouseEvent *)e;
-		if (me->button() == Qt::LeftButton && me->state() == Qt::ControlButton) {
-			selectedCol = hheader->sectionAt (me->pos().x() + hheader->offset());
-			d_table->selectColumn (selectedCol);
-			d_table->setCurrentCell (0, selectedCol);
-			setActiveWindow();
-			return true;
-		} else if (selectedColsNumber() <= 1) {
-			selectedCol = hheader->sectionAt (me->pos().x() + hheader->offset());
-			d_table->clearSelection();
-			d_table->selectColumn (selectedCol);
-			d_table->setCurrentCell (0, selectedCol);
-			setActiveWindow();
-			return false;
-		}
-	} else if (e->type() == QEvent::MouseButtonPress && object == (QObject*)vheader) {
-		const QMouseEvent *me = (const QMouseEvent *)e;
-		if (me->button() == Qt::RightButton && numSelectedRows() <= 1) {
-			d_table->clearSelection();
-			int row = vheader->sectionAt(me->pos().y() + vheader->offset());
-			d_table->selectRow (row);
-			d_table->setCurrentCell (row, 0);
-			setActiveWindow();
-		}
-	} else if (e->type()==QEvent::ContextMenu && object == titleBar) {
-		emit showTitleBarMenu();
-		((QContextMenuEvent*)e)->accept();
-		setActiveWindow();
-		return true;
-	}
-
-	return MyWidget::eventFilter(object, e);
-}
-#endif
 
 void Table::customEvent(QEvent *e)
 {

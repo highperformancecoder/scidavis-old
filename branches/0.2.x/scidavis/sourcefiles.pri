@@ -92,7 +92,6 @@ HEADERS  += src/ApplicationWindow.h \
             src/Graph3D.h \
             src/Table.h \
             src/CurvesDialog.h \
-            src/SetColValuesDialog.h \
             src/PlotDialog.h \
             src/Plot3DDialog.h \
             src/PlotWizard.h \
@@ -103,7 +102,6 @@ HEADERS  += src/ApplicationWindow.h \
             src/FunctionDialog.h \
             src/FitDialog.h \
             src/SurfaceDialog.h \
-            src/TableDialog.h \
             src/TextDialog.h \
             src/LineDialog.h \
             src/ScalePicker.h \
@@ -199,7 +197,6 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/Graph.cpp \
             src/Graph3D.cpp \
             src/Table.cpp \
-            src/SetColValuesDialog.cpp \
             src/CurvesDialog.cpp \
             src/PlotDialog.cpp \
             src/Plot3DDialog.cpp \
@@ -207,7 +204,6 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/ExportDialog.cpp \
             src/AxesDialog.cpp \
             src/PolynomFitDialog.cpp \
-            src/TableDialog.cpp \
             src/TextDialog.cpp \
             src/ScalePicker.cpp\
             src/TitlePicker.cpp \

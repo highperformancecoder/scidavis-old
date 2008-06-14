@@ -33,6 +33,7 @@
 
 class PartMdiView;
 class QMenu;
+class QToolBar;
 
 //! Base class of Aspects with MDI windows as views.
 /**
@@ -67,6 +68,11 @@ class AbstractPart : public AbstractAspect
 		 * \return true on success, otherwise false (e.g. part has no actions).
 		 */
 		virtual bool fillProjectMenu(QMenu * menu) { Q_UNUSED(menu); return false; }
+		//! Fill the part specific tool bar for the main window including setting the title
+		/**
+		 * \return true on success, otherwise false (e.g. part has no actions to be shown in a toolbar).
+		 */
+		virtual bool fillProjectToolBar(QToolBar * bar) { Q_UNUSED(bar); return false; }
 
 	public slots:
 		//! Copy current selection.

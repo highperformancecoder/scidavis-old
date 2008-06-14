@@ -508,7 +508,6 @@ public slots:
 	void createActions();
 	void initMainMenu();
 	void initPlotMenu();
-	void initTableMenu();
 	void initTableAnalysisMenu();
 	void initPlotDataMenu();
 	void initToolBars();
@@ -522,8 +521,6 @@ public slots:
 
 	//! \name Table Tools
 	//@{
-	void sortSelection();
-	void sortActiveTable();
 	void normalizeSelection();
 	void normalizeActiveTable();
 	void correlate();
@@ -531,7 +528,6 @@ public slots:
 	void convolute();
 	void deconvolute();
 	void clearTable();
-	void goToCell();
 	//@}
 
 	//! \name Plot Tools
@@ -618,15 +614,9 @@ public slots:
 	void showYAxisTitleDialog();
 	void showRightAxisTitleDialog();
 	void showTopAxisTitleDialog();
-	void showColumnOptionsDialog();
-	void showRowsDialog();
-	void showColsDialog();
-	void showColMenu(int c);
-	void showColumnValuesDialog();
 
 	void showGraphContextMenu();
 	void showLayerButtonContextMenu();
-	void showTableContextMenu(bool selection);
 	void showWindowContextMenu();
 	void showWindowTitleBarMenu();
 	void showCurveContextMenu(int curveKey);
@@ -683,15 +673,6 @@ public slots:
 	void hideOtherCurves();
 	void showAllCurves();
 	void setCurveFullRange();
-
-	void setAscValues();
-	void setRandomValues();
-	void setXCol();
-	void setYCol();
-	void setZCol();
-	void setXErrCol();
-	void setYErrCol();
-	void disregardCol();
 
 	void updateConfirmOptions(bool askTables, bool askMatrixes, bool askPlots2D, bool askPlots3D, bool askNotes);
 
@@ -1003,7 +984,7 @@ public:
 
 	bool startArrowOn, endArrowOn, fillArrowHead;
 	int arrowHeadLength, arrowHeadAngle, specialPlotMenuID, statMenuID, panelMenuID, plot3dID;
-	int plotMenuID, newMenuID, recentMenuID, setAsMenuID, fillMenuID, normMenuID;
+	int plotMenuID, newMenuID, recentMenuID, setAsMenuID, fillMenuID; 
 	int translateMenuID, smoothMenuID, filterMenuID, fitExpMenuID, multiPeakMenuID;
 
 	//! Equals true if an automatical search for updates was performed on start-up otherwise is set to false;
@@ -1041,7 +1022,7 @@ private:
 	QMenu *d_quick_fit_menu;
 	QMenu *help,*type,*plot2D,*plot3D, *specialPlot, *panels,*stat,*decay, *filter;
 	QMenu *matrixMenu, *plot3DMenu, *plotDataMenu, *tableMenu;
-	QMenu *smooth, *normMenu, *translateMenu, *fillMenu, *setAsMenu, *multiPeakMenu;
+	QMenu *smooth, *translateMenu, *multiPeakMenu;
 	QMenu *scriptingMenu;
 	QAction *actionCopyStatusBarText;
 	QAction *actionEditCurveRange, *actionCurveFullRange, *actionShowAllCurves, *actionHideCurve, *actionHideOtherCurves;
@@ -1070,8 +1051,6 @@ private:
     QAction *actionShowExpDecayDialog, *actionShowTwoExpDecayDialog, *actionShowExpDecay3Dialog;
     QAction *actionFitExpGrowth, *actionFitSigmoidal, *actionFitGauss, *actionFitLorentz, *actionShowFitDialog;
     QAction *actionShowAxisDialog, *actionShowTitleDialog;
-    QAction *actionShowColumnOptionsDialog, *actionShowColumnValuesDialog, *actionShowColsDialog, *actionShowRowsDialog;
-    QAction *actionTableRecalculate;
     QAction *actionAbout, *actionShowHelp, *actionChooseHelpFolder;
     QAction *actionRename, *actionCloseWindow, *actionConvertTable;
     QAction *actionAddColToTable, *actionDeleteLayer, *actionInterpolate;
@@ -1087,10 +1066,8 @@ private:
 	QAction *actionDeleteFitTables, *actionShowGridDialog, *actionTimeStamp;
 	QAction *actionSmoothSavGol, *actionSmoothFFT, *actionSmoothAverage, *actionFFT;
 	QAction *actionLowPassFilter, *actionHighPassFilter, *actionBandPassFilter, *actionBandBlockFilter;
-	QAction *actionSortTable, *actionSortSelection, *actionNormalizeSelection;
-	QAction *actionNormalizeTable, *actionConvolute, *actionDeconvolute, *actionCorrelate, *actionAutoCorrelate;
-	QAction *actionTranslateHor, *actionTranslateVert, *actionSetAscValues, *actionSetRandomValues;
-	QAction *actionSetXCol, *actionSetYCol, *actionSetZCol, *actionDisregardCol, *actionSetXErrCol, *actionSetYErrCol;
+	QAction *actionConvolute, *actionDeconvolute, *actionCorrelate, *actionAutoCorrelate;
+	QAction *actionTranslateHor, *actionTranslateVert;
 	QAction *actionBoxPlot, *actionMultiPeakGauss, *actionMultiPeakLorentz, *actionCheckUpdates;
 	QAction *actionHomePage, *actionDownloadManual, *actionTranslations;
 	QAction *actionHelpForums, *actionHelpBugReports;

@@ -183,6 +183,11 @@ class Table : public AbstractPart
 		 * \return true on success, otherwise false (e.g. part has no actions).
 		 */
 		virtual bool fillProjectMenu(QMenu * menu);
+		//! Fill the part specific tool bar for the main window including setting the title
+		/**
+		 * \return true on success, otherwise false (e.g. part has no actions to be shown in a toolbar).
+		 */
+		virtual bool fillProjectToolBar(QToolBar * bar);
 
 		//! Determine the corresponding X column
 		int colX(int col);
