@@ -92,6 +92,7 @@
 #include "OpenProjectDialog.h"
 #include "core/Project.h"
 #include "core/column/Column.h"
+#include "lib/XmlStreamReader.h"
 
 // TODO: move tool-specific code to an extension manager
 #include "ScreenPickerTool.h"
@@ -9040,73 +9041,89 @@ Note* ApplicationWindow::openNote(ApplicationWindow* app, const QStringList &fli
 // TODO: most of this code belongs into matrix
 Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList &flist)
 {
-	QStringList::const_iterator line = flist.begin();
-
-	QStringList list=(*line).split("\t");
-	QString caption=list[0];
-	int rows = list[1].toInt();
-	int cols = list[2].toInt();
-
-	Matrix* w = app->newMatrix(caption, rows, cols);
-	app->setListViewDate(caption,list[3]);
-	w->setBirthDate(list[3]);
-
-	for (line++; line!=flist.end(); line++)
+	if (app->d_file_version < 0x000200)
 	{
-		QStringList fields = (*line).split("\t");
-		if (fields[0] == "geometry") {
-			restoreWindowGeometry(app, w, *line);
-		} else if (fields[0] == "ColWidth") {
-// TODO			w->setColumnsWidth(fields[1].toInt());
-		} else if (fields[0] == "Formula") {
-			w->setFormula(fields[1]);
-		} else if (fields[0] == "<formula>") {
-			QString formula;
-			for (line++; line!=flist.end() && *line != "</formula>"; line++)
-				formula += *line + "\n";
-			formula.truncate(formula.length()-1);
-			w->setFormula(formula);
-		} else if (fields[0] == "TextFormat") {
-			if (fields[1] == "f")
-				w->setTextFormat('f', fields[2].toInt());
-			else
-				w->setTextFormat('e', fields[2].toInt());
-		} else if (fields[0] == "WindowLabel") { // d_file_version > 71
-			w->setWindowLabel(fields[1]);
-			w->setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
-			app->setListViewLabel(w->name(), fields[1]);
-		} else if (fields[0] == "Coordinates") { // d_file_version > 81
-			w->setCoordinates(fields[1].toDouble(), fields[2].toDouble(), fields[3].toDouble(), fields[4].toDouble());
-		} else // <data> or values
-			break;
-	}
-	if (*line == "<data>") line++;
+		QStringList::const_iterator line = flist.begin();
 
+		QStringList list=(*line).split("\t");
+		QString caption=list[0];
+		int rows = list[1].toInt();
+		int cols = list[2].toInt();
 
-// TODO: is signal blocking necessary here?
-	// w->table()->blockSignals(true);
-	//read and set table values
-	for (; line!=flist.end() && *line != "</data>"; line++)
-	{
-		QStringList fields = (*line).split("\t");
-		int row = fields[0].toInt();
-		for (int col=0; col<cols; col++)
+		Matrix* w = app->newMatrix(caption, rows, cols);
+		app->setListViewDate(caption,list[3]);
+		w->setBirthDate(list[3]);
+
+		for (line++; line!=flist.end(); line++)
 		{
-		    QString cell = fields[col+1];
-		    if (cell.isEmpty())
-                continue;
-
-		    if (d_file_version < 90)
-                w->setCell(row, col, QLocale::c().toDouble(cell));
-		    else if (d_file_version >= 0x000100)
-                w->setCell(row, col, cell.toDouble());
-            else
-                w->setText(row, col, cell);
+			QStringList fields = (*line).split("\t");
+			if (fields[0] == "geometry") {
+				restoreWindowGeometry(app, w, *line);
+			} else if (fields[0] == "ColWidth") {
+				w->setColumnsWidth(fields[1].toInt());
+			} else if (fields[0] == "Formula") {
+				w->setFormula(fields[1]);
+			} else if (fields[0] == "<formula>") {
+				QString formula;
+				for (line++; line!=flist.end() && *line != "</formula>"; line++)
+					formula += *line + "\n";
+				formula.truncate(formula.length()-1);
+				w->setFormula(formula);
+			} else if (fields[0] == "TextFormat") {
+				if (fields[1] == "f")
+					w->setTextFormat('f', fields[2].toInt());
+				else
+					w->setTextFormat('e', fields[2].toInt());
+			} else if (fields[0] == "WindowLabel") { // d_file_version > 71
+				w->setWindowLabel(fields[1]);
+				w->setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
+				app->setListViewLabel(w->name(), fields[1]);
+			} else if (fields[0] == "Coordinates") { // d_file_version > 81
+				w->setCoordinates(fields[1].toDouble(), fields[2].toDouble(), fields[3].toDouble(), fields[4].toDouble());
+			} else // <data> or values
+				break;
 		}
-		qApp->processEvents(QEventLoop::ExcludeUserInput);
+		if (*line == "<data>") line++;
+
+
+		// TODO: is signal blocking necessary here?
+		// w->table()->blockSignals(true);
+		//read and set table values
+		for (; line!=flist.end() && *line != "</data>"; line++)
+		{
+			QStringList fields = (*line).split("\t");
+			int row = fields[0].toInt();
+			for (int col=0; col<cols; col++)
+			{
+				QString cell = fields[col+1];
+				if (cell.isEmpty())
+					continue;
+
+				if (d_file_version < 90)
+					w->setCell(row, col, QLocale::c().toDouble(cell));
+				else if (d_file_version >= 0x000100)
+					w->setCell(row, col, cell.toDouble());
+				else
+					w->setText(row, col, cell);
+			}
+			qApp->processEvents(QEventLoop::ExcludeUserInput);
+		}
+		//    w->table()->blockSignals(false);
+
+		return w;
 	}
-//    w->table()->blockSignals(false);
-	return w;
+	else
+	{
+		Matrix* w = app->newMatrix("matrix", 1, 1);
+		QString xml(flist.at(1));
+		XmlStreamReader reader(xml);
+		reader.readNext();
+		reader.readNext(); // read the start document
+		w->d_future_matrix->load(&reader);
+		restoreWindowGeometry(app, w, flist.at(2));
+
+		return w;
+	}
 }
 
 // TODO: most of this code belongs into Table

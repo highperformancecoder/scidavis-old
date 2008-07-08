@@ -50,6 +50,7 @@
 #include <QPrintDialog>
 #include <QPainter>
 #include <QLocale>
+#include <QXmlStreamWriter>
 #include <QtDebug>
 
 #include <stdlib.h>
@@ -182,6 +183,17 @@ void Matrix::setCoordinates(double xs, double xe, double ys, double ye)
 QString Matrix::saveToString(const QString &info)
 {
 	QString s = "<matrix>\n";
+	QString xml;
+	QXmlStreamWriter writer(&xml);
+	d_future_matrix->save(&writer);
+	s += QString::number(xml.length()) + "\n"; // don't know if this is needed, can't hurt though
+	s += xml + "\n";
+	s += info + "\n";
+	s +="</matrix>\n";
+	return s;
+
+#if 0
+	QString s = "<matrix>\n";
 	s += QString(name()) + "\t";
 	s += QString::number(numRows())+"\t";
 	s += QString::number(numCols())+"\t";
@@ -196,6 +208,7 @@ QString Matrix::saveToString(const QString &info)
 	s += saveText();
 	s +="</matrix>\n";
 	return s;
+#endif
 }
 
 QString Matrix::saveAsTemplate(const QString &info)
