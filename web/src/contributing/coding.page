@@ -101,29 +101,9 @@ then you do your changes, finally generating the patch as follows:
 
 {hlblock: {blockName: patch_generation_svn, highlight: plaintext}}
 
-If you're planning to contribute on a regular basis and you'd like to join the team, please
-understand that we want to get to know you and your work before granting you write access
-to the repository. Everything we have is publicly readable, so you can work on anything
-you want without being an "official" project member. The only difference is that you send your
-changes via the "patch tracker":https://sourceforge.net/tracker/?group_id=199120&atid=968216
-instead of checking them in via subversion.
-
-If you object to your code being reviewed, you should think twice about whether you really want to
-join the project. We encourage everyone to read everybody else's
-changes as a way of improving overall code quality. In the science community, this
-is known as "peer review". Becoming an "official" member simply means that your
-changes are reviewed after submission instead of before.
-
-Introduce yourself and your plans on the
-"mailing list":https://lists.sourceforge.net/lists/listinfo/scidavis-contributors,
-possibly also announcing your wish to join your project.
-If you're contributing regularly, respecting the few
-"coding rules":http://scidavis.sourceforge.net/contributing/API/style.html
-we have and not blatantly misbehaving, at some point we'll ask you for your
-SourceForge.net user name and give you write access to the repository.
-In case we forget about this, send us a short reminder -- just don't do it
-after every patch you send. Having you send in everything via the patch
-tracker is more work for us than it is for you, so chances are we won't forget.
+If you're planning to contribute on a regular basis and you'd like to join the team,  introduce yourself and your plans on the
+"mailing list":https://lists.sourceforge.net/lists/listinfo/scidavis-contributors or contact project member 
+"directly":http://scidavis.sourceforge.net/contact.html.
 
 --- doxygen_short, html
 //! A computer built by pan-dimensional, hyper-intelligent beings known to men as mice.

@@ -69,7 +69,8 @@ dates/times in columns in the future. The new internal data structures are optim
 less memory than those before which is very important to free some memory for the undo/redo 
 framework. 
 
-h1(#0.3.0). 0.3.0: Aspect-framework/hierarchial project structure
+h1(#0.3.0). 0.3.0: Aspect-framework/hierarchial project structure, modular structure using Qt's
+plug-in system, XML file format
 
 Plans: Most notably for users, the way the project contents are shown in the project explorer 
 will change considerably. You will for example
@@ -81,8 +82,13 @@ with a number of input and output ports). The project will internally be stored 
 what we call "aspects". The aspects and related classes will follow a "5 layer design" somewhat comparable
 with the model/view/presenter paradigm. This will greatly improve the long-term maintainability
 of the application.
+The application code will be separated into several independent modules interacting through Qt's plug-in system. This will 
+faciliate adding new features later and also improve the maintainability.
+The file format for SciDAVis projects will be replaced by a completely XML based one. This 
+allows to use robust XML parsers, much better error handling and easy validity-checking of project files.
+Loading files in the legacy format will continue to be supported as an import function.
 
-h1(#0.5.0). 0.5.0: New visualisation engine, XML file format
+h1(#0.5.0). 0.5.0: New visualisation engine
 
 Plans: The Qwt library will be replaced by a new engine based on Qt's GraphicsView framework,
 allowing, among other benefits, the use of floating-point linewidths. This will solve
@@ -91,9 +97,6 @@ will be optimized to achieve optimum ouput quality. The resolution of the the ou
 will be totally independent of the screen resolutions and the size of the plot windows. 
 Custom page sizes for PDF exports will be supported making exported PDF figures ideal
 to use with PdfLaTex.
-The file format for SciDAVis projects will be replaced by a completely XML based one. This 
-allows to use robust XML parsers, much better error handling and easy validity-checking of project files.
-Loading files in the legacy format will continue to be supported as an import function.
 
 h1(#0.7.0). 0.7.0: Removal of muParser dependence such that everything can be done in Python, improved plotting
 
@@ -111,7 +114,8 @@ everything in a state that allows minor releases that don't break anything that 
 in the previous version
 * Bring the handbook up-to-date to release 1.0.0 with a really nice handbook that
 contains all new features
-* write a relaxNG schema for the SciDAVis file format to check the validity of project files
+* write a relaxNG schema for the SciDAVis file format to check the validity of project files (this
+may not make sense if saving of unknown plug-ins is supported)
 
 h1. Possible plans beyond 1.0.0:
 
