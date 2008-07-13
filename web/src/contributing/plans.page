@@ -1,0 +1,183 @@
+---
+title: Plans and tasks
+inMenu: true
+---
+
+h1(#longtermplans). Summary of the most important long term plans (until version 1.0)
+
+* Organize all project data related classes as described by the _aspect framework/5 layer model_. 
+* Split the application into _modules_ that are linked as (static or dynamic) _plugins_ using Qt's plugin 
+system. The code that is not part of a plugin module is stored in the "core" and "lib" 
+directories (let's call this core classes). The interface of the plugins are defined in interfaces.h using 
+Q_DECLARE_INTERFACE. The plugins may call the interface of core classes (e.g., Project) 
+directly while core classes may not call any other functions of the modules other than 
+those defined in interfaces.h.
+* Change the _file format_ to be pure _XML_ which is parsed by methods based on QXmlStreamReader and
+QXmlStreamWriter (or derived classes).
+* Extend the _scripting framework_ to be completely _language independent_. I.e., SciDAVis 
+must compile as long as one scripting language is enabled, be it muParser, Python or (in the future) 
+any other scripting language.
+* Replace the 2D graphics code by a _new graphics framework using QGraphicsView_. The most important point 
+is having floating-point coordinates for true scaling and optimum output quality. 
+We already have a name for the new graphics framework: _LithoGraph_. This framework will be optimized for file 
+export aiming at publication quality output for scientific publications. This will require
+careful planning before it can be started.
+* _Undo/Redo framework_: Make every change of project data by the user or by a script undoable by separating data and UI and wrapping
+all writing operations into command objects (based on QUndoCommand and QUndoStack).
+* GUI: Avoid having dialogs for often used functionality. Instead, integrate this 
+functionality into the MDI subwindows as (what we call) _control tabs_. In general, the UI should
+not be overloaded with control elements. It may be a good idea to have an option to enable/disable 
+advanced functionality that only an experienced user would use (this is open to discussion).
+
+h1(#plandetails). Detailed description of the goals and plans
+
+h2(#maintainablility). Maintainability, modularity, extensibility, scripting
+
+It is very important that SciDAVis remains maintainable in the long run. This is
+done by separating the application's functionality into modules that 
+interact though a well defined interface. Most of the current features should remain 
+part of the main executable, but use interfaces similar or identical to those used by plugins. 
+This interface is defined in the
+"core" classes. Thus, if a developer works on one module (e.g., "table"), he
+only needs to know the module code as well as the "core" code. Monster 
+classes that depend on almost every other class such as ApplicationWindow 
+in the 0.1.x code are to be strictly avoided. Additionally, data should
+be passed as pointers, not strings that need to be parsed 
+(such as table_name + "_" + column_name). If components (aspects) are saved, 
+they can be unambiguously identified by their path in the aspect hierarchy. 
+This also reduces the restrictions on object/column/table names.
+
+The split-up into modules also serves a second purpose: Making SciDAVis 
+easier to extend. Ultimately, it should be rather easy for any C++ programmer
+to add a plugin using the plugin interface that all the existing
+modules such as "table" and "matrix" implement. Additionally, the functionality
+will be extensible using the scripting framework. For example, ideally it 
+should be possible to implement new plot or marker types without 
+modifying existing classes. The scripting system is
+a combination of extending and embedding the scripting language. That means
+the interpreter is embedded into SciDAVis and the scripting language is
+extended by functions to access objects within SciDAVis. The Python bindings
+are generated using "SIP":http://www.riverbankcomputing.co.uk/software/sip/intro. 
+The scripting system is planned to be language independent
+with Python as a standard implementation. Python is a good candidate for this as it
+is widely used and offers very good mathematical 
+libraries that can be used from within SciDAVis. 
+But other scripting languages such as Ruby should also be supported by SciDAVis,
+provided someone maintains the Ruby bindings. For stability reasons, not the
+whole SciDAVis API should be made accessible by the scripting system but
+only the "public API" (see aspect framework description in the doxygen documentation
+in /trunk). 
+
+The hardest part of the modularization is to keep the features of version 0.1.x 
+while internally almost everything is restructured.
+
+Current status (estimated percentage of completion, 0% means 0.1.x code) of the modules:
+* Module "analysis": 0% (all old code)
+* Module "core": rough estimate: 60%
+* Module "graph": <5% (almost all old code)
+* Module "graph3D": ~20% (basic 3D plotting works but still a lot to do)
+* Module "lib": ? (this contains utility classes that are very independent of the rest)
+* Module "matrix": ~75%
+* Module "muparser": 0% (all old code)
+* Module "notes": <10% (only very basic functionality)
+* Module "origin": 0%
+* Module "python": 0% (all old code)
+* Module "table": ~70%
+
+h2(#userinterface). User interface
+
+The most noticeable features planned for the user interface are a full-featured multi-level 
+undo/redo framework (based on QUndoCommand), easy access to options/controls previously
+placed in modal dialogs in the control tabs, and support for non-contiguous selections
+(see: QAbstractItemView::ExtendedSelection). 
+How the undo/redo functionality works is defined in the aspect framework. 
+The control tabs are already implemented for Table and Matrix. They can be 
+shown/hidden using only one mouse click and typically process all selected cells.
+
+Status: Control tabs in Table and Matrix are about 80% finished. Whether control tabs
+are useful for other parts is not completely decided. The undo/redo framework goes hand
+in hand with the aspect framework. So far only the core class as well as Table and Matrix 
+have undo commands.
+
+h2(#fileformat). File format
+
+We plan to switch file format to a completely XML-based one. This allows for writing a 
+robust parser based on Qt's XML support, more precisely QXmlStreamReader and
+QXmlStreamWriter. These are very fast and easy to use.
+Legacy support for the old format could be outsourced into a plugin. 
+
+Status: As good as finished for Table and Matrix. Project and Folder are pretty far as well. 
+
+h2(#LithoGraph). The new graphics engine: LithoGraph
+
+SciDAVis currently uses the Qwt library for plotting which has two main
+drawbacks: It is geared toward displaying plot in widgets on screen while
+SciDAVis will focus on export quality. Secondly, it is backward compatible
+to Qt3 and shares it's limitations. Qt4's QGraphicsView is much more powerful 
+than anything Qt3 offered and Qwt does not make use of that. LithoGraph is
+intended to replace Qwt completely. The goals are to use as many features from
+QGraphicsView as possible, support undo/redo, integrate with the aspect framework, 
+flexible support of different coordinate systems (cartesian, polar, ternary, ...),
+separation into data and style (similar to CSS) with styles replacing the need for
+graph templates. LithoGraph still needs a lot of planning and probably
+should not be started before the aspect framework is completely implemented and
+ApplicationWindow is fully replaced. Once LithoGraph is in an advanced stage, new
+plot types including waterfall plots, polar charts, and ternary plots as well
+as axes breaks are planned.
+
+Status: The requirements are known, the design is still open. No code written yet.
+
+
+h2(#othertasks). Other tasks
+
+* There are still qt3suppert classes (Q3...) used in some parts of SciDAVis. These
+are to be completely eliminated. (A complete independence of the qt3suport
+library should be achieved until release 0.3.0).
+* Document as much as possible using doxygen and write simple demo
+plugins. Also a collection of demo projects, tutorials etc. would
+be nice. The latter could be contributed by non-developers.
+* Add support for custom page sizes once Trolltech fixes this issue:
+ http://trolltech.com/developer/task-tracker/index_html?method=entry&id=99441. 
+ This has finally been fixed in Qt 4.4.
+* A good method to ensure the software quality is writing automated unit
+tests based on cpptest (http://cpptest.sourceforge.net/). Some examples
+can be already be found in /trunk/tests.
+* SciDAVis currently uses an older version of liborigin (http://sourceforge.net/projects/liborigin/). 
+Although Origin import is a rather low priority in the project, it would be nice to
+support the latest version of liborigin. The preferred way would be to write an
+importer plugin.
+* Modularize the build process so that Python support could use SIP's
+ build system instead of the current hacks. 
+* Improved data analysis: base-line detection tool, more built-in fit functions... (low priority, maybe after release 1.0)
+* The current support for gzipped files is not very elegant. Maybe one could
+give Quazip (http://quazip.sourceforge.net/) a try. (low priority, maybe after release 1.0)
+* Import/export filter for OpenDocument spreadsheets. (low priority, maybe after release 1.0)
+
+
+h1. Release plans
+
+0.2.0: The current plans are to finish the modules "table" and "matrix" while integrating them into the 0.1.x code
+by hiding them behind the old interface of Table and Matrix. The result shall become 0.2.0. name conflicts are resolved by putting new code into the namespace "future". 
+
+0.3.0: This should be a full port to the aspect framework. Plotting will still be based on Qwt. 
+
+0.5.0: Replacement of Qwt by LithoGraph. Due to the large changes the version number 0.4.0 could be skipped.
+
+
+h1(#assignments). Current assignments/responsibilities/core working fields
+
+Tilman:
+* Undo/Redo framework.
+* Control tabs.
+* XML file format.
+* Modules table and matrix.
+* Integration of Table, Matrix and related classes into the 0.1.x code. Release the result as 0.2.x.
+* Finalization of the aspect framework design.
+
+Knut:
+* Scripting system, Python bindings.
+* Plugin system.
+* Finalization of the aspect framework design.
+* Filter concept.
+
+
