@@ -521,8 +521,6 @@ public slots:
 
 	//! \name Table Tools
 	//@{
-	void normalizeSelection();
-	void normalizeActiveTable();
 	void correlate();
 	void autoCorrelate();
 	void convolute();

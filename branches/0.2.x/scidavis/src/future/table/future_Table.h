@@ -266,6 +266,7 @@ class Table : public AbstractPart
 		void setSelectedColumnsAsYError();
 		void setSelectedColumnsAsNone();
 		void normalizeSelectedColumns();
+		void normalizeSelection();
 		void sortSelectedColumns();
 		void statisticsOnSelectedColumns();
 		void statisticsOnSelectedRows();
@@ -345,6 +346,9 @@ class Table : public AbstractPart
 		void rowsRemoved(int first, int count);
 		void dataChanged(int top, int left, int bottom, int right);
 		void headerDataChanged(Qt::Orientation orientation, int first, int last);
+#ifdef LEGACY_CODE_0_2_x
+		void recalculate();
+#endif
 
 	private:
 		void createActions();
@@ -367,6 +371,7 @@ class Table : public AbstractPart
 		QAction * action_recalculate;
 		QAction * action_fill_row_numbers;
 		QAction * action_fill_random;
+		QAction * action_normalize_selection;
 		//@}
 		//! \name table related actions
 		//@{

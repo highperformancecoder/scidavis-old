@@ -68,10 +68,6 @@ public:
 
 	//! Sets the number of significant digits
 	void setNumericPrecision(int prec);
-	//! Updates the decimal separators in the numerical columns on user request
-	void updateDecimalSeparators();
-	//! Updates the decimal separators when importing ASCII files on user request
-	void updateDecimalSeparators(const QLocale& oldSeparators);
 
 public slots:
 // TODO: remove this
@@ -122,7 +118,6 @@ public slots:
 /////	void cellEdited(int,int col);
 	void moveCurrentCell();
 	void clearCell(int row, int col);
-	QString saveText();
 
 	void print();
 	void print(const QString& fileName);
@@ -140,52 +135,6 @@ public slots:
 	void addColumns(int c);
 	//@}
 
-	//! \name Sorting
-	//@{
-	/*!\brief Sort the current column in ascending order.
-	 * \sa sortColDesc(), sortColumn(), Q3Table::currentColumn()
-	 */
-////	void sortColAsc();
-	/*!\brief Sort the current column in descending order.
-	 * \sa sortColAsc(), sortColumn(), Q3Table::currentColumn()
-	 */
-////	void sortColDesc();
-	/*!\brief Sort the specified column.
-	 * \param col the column to be sorted
-	 * \param order 0 means ascending, anything else means descending
-	 */
-////	void sortColumn(int col = -1, int order = 0);
-	/*!\brief Display a dialog with some options for sorting all columns.
-	 *
-	 * The sorting itself is done using sort(int,int,const QString&).
-	 */
-	void sortTableDialog();
-	//! Sort all columns as in sortColumns(const QStringList&,int,int,const QString&).
-	void sort(int type = 0, int order  = 0, const QString& leadCol = QString());
-	//! Sort selected columns as in sortColumns(const QStringList&,int,int,const QString&).
-	void sortColumns(int type = 0, int order = 0, const QString& leadCol = QString());
-	/*!\brief Sort the specified columns.
-	 * \param cols the columns to be sorted
-	 * \param type 0 means sort individually (as in sortColumn()), anything else means together
-	 * \param order 0 means ascending, anything else means descending
-	 * \param leadCol for sorting together, the column which determines the permutation
-	 */
-////	void sortColumns(const QStringList& cols, int type = 0, int order = 0, const QString& leadCol = QString());
-	/*!\brief Display a dialog with some options for sorting the selected columns.
-	 *
-	 * The sorting itself is done using sortColumns(int,int,const QString&).
-	 */
-	void sortColumnsDialog();
-	//@}
-
-	//! \name Normalization
-	//@{
-	void normalizeCol(int col);
-	void normalizeSelection();
-	void normalize();
-	//@}
-
-	QVarLengthArray<double> col(int ycol);
 	int firstXCol();
 	bool noXColumn();
 	bool noYColumn();
@@ -230,12 +179,10 @@ public slots:
 	QStringList YColumns();
 	int selectedColsNumber();
 	void changeColName(const QString& text);
-	void enumerateRightCols(bool checked);
 
 	void changeColWidth(int width, bool allCols);
 	void changeColWidth(int width, int col);
 	int columnWidth(int col);
-	QStringList columnWidths();
 	void setColWidths(const QStringList& widths);
 
 #if 0 // remove

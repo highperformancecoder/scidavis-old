@@ -33,6 +33,7 @@
 #include "core/column/Column.h"
 #include "lib/Interval.h"
 #include "table/TableModel.h"
+#include "core/datatypes/Double2StringFilter.h"
 
 #include <QMessageBox>
 #include <QDateTime>
@@ -84,64 +85,6 @@ void Table::init(int rows, int cols)
 
 	setBirthDate(d_future_table->creationTime().toString(Qt::LocalDate));
 
-// TODO: remove this
-#if 0
-	d_table = new MyTable(rows, cols, this, "table");
-	d_table->setFocusPolicy(Qt::StrongFocus);
-	d_table->setFocus();
-	d_table->setSelectionMode (Q3Table::Single);
-	d_table->setRowMovingEnabled(true);
-	// TODO: would be useful, but then we have to interpret
-	// signal Q3Header::indexChange ( int section, int fromIndex, int toIndex )
-	// and update some variables
-	//d_table->setColumnMovingEnabled(true);
-
-	connect(d_table->verticalHeader(), SIGNAL(indexChange ( int, int, int )),
-			this, SLOT(notifyChanges()));
-
-	QHBoxLayout* hlayout = new QHBoxLayout(this);
-	hlayout->setMargin(0);
-	hlayout->addWidget(d_table);
-
-	for (int i=0; i<cols; i++)
-	{
-		commands << "";
-		colTypes << Numeric;
-		col_format << "0/16";
-		comments << "";
-		col_label << QString::number(i+1);
-		col_plot_type << Y;
-	}
-
-	Q3Header* head=(Q3Header*)d_table->horizontalHeader();
-	head->setMouseTracking(true);
-	head->setResizeEnabled(true);
-	head->installEventFilter(this);
-	connect(head, SIGNAL(sizeChange(int, int, int)), this, SLOT(colWidthModified(int, int, int)));
-
-	col_plot_type[0] = X;
-	setHeaderColType();
-
-	int w=4*(d_table->horizontalHeader())->sectionSize(0);
-	int h;
-	if (rows>11)
-		h=11*(d_table->verticalHeader())->sectionSize(0);
-	else
-		h=(rows+1)*(d_table->verticalHeader())->sectionSize(0);
-	setGeometry(50, 50, w + 45, h);
-
-	d_table->verticalHeader()->setResizeEnabled(false);
-	d_table->verticalHeader()->installEventFilter(this);
-
-	QShortcut *accelTab = new QShortcut(QKeySequence(Qt::Key_Tab), this);
-	connect(accelTab, SIGNAL(activated()), this, SLOT(moveCurrentCell()));
-
-	QShortcut *accelAll = new QShortcut(QKeySequence(Qt::CTRL+Qt::Key_A), this);
-	connect(accelAll, SIGNAL(activated()), this, SLOT(selectAllTable()));
-
-	connect(d_table, SIGNAL(valueChanged(int,int)),this, SLOT(cellEdited(int,int)));
-#endif
-
 	connect(d_future_table, SIGNAL(columnsInserted(int, int)), this, SLOT(handleChange()));
 	connect(d_future_table, SIGNAL(columnsReplaced(int, int)), this, SLOT(handleChange()));
 	connect(d_future_table, SIGNAL(columnsRemoved(int, int)), this, SLOT(handleChange()));
@@ -149,7 +92,7 @@ void Table::init(int rows, int cols)
 	connect(d_future_table, SIGNAL(rowsRemoved(int, int)), this, SLOT(handleChange()));
 	connect(d_future_table, SIGNAL(dataChanged(int, int, int, int)), this, SLOT(handleChange()));
 	connect(d_future_table, SIGNAL(headerDataChanged(Qt::Orientation, int, int)), this, SLOT(handleChange()));
-// TODO	connect(d_future_table, SIGNAL(recalculate()), this, SLOT(recalculate()));
+	connect(d_future_table, SIGNAL(recalculate()), this, SLOT(recalculate()));
 	// TODO: Check whether the columns have to be connected too
 }
 
@@ -157,14 +100,6 @@ void Table::handleChange()
 {
     emit modifiedWindow(this);
 }
-
-#if 0
-void Table::colWidthModified(int, int, int)
-{
-	emit modifiedWindow(this);
-	setHeaderColType();
-}
-#endif
 
 void Table::setBackgroundColor(const QColor& col)
 {
@@ -362,66 +297,53 @@ void Table::setPlotDesignation(SciDAVis::PlotDesignation pd)
 
 void Table::columnNumericFormat(int col, int *f, int *precision)
 {
-// TODO
-#if 0
-	QStringList format = col_format[col].split("/", QString::KeepEmptyParts);
-	if (format.count() == 2)
+	if (column(col)->dataType() == SciDAVis::TypeDouble)
 	{
-		*f = format[0].toInt();
-		*precision = format[1].toInt();
+		Double2StringFilter *pFilter = qobject_cast<Double2StringFilter*>(column(col)->outputFilter());
+		if (pFilter)
+		{
+			*precision = pFilter->numDigits();	
+			switch(pFilter->numericFormat())
+			{
+				case 'f':
+					*f = 1;
+					break;
+
+				case 'e':
+					*f = 2;
+					break;
+
+				default:
+				case 'g':
+					*f = 0;
+					break;
+			}
+			return;
+		}
 	}
-	else
-	{
-		*f = 0;
-		*precision = 14;
-	}
-#endif
+	*f = 0;
+	*precision = 14;
 }
 
 void Table::columnNumericFormat(int col, char *f, int *precision)
 {
-// TODO
-#if 0
-	QStringList format = col_format[col].split("/", QString::KeepEmptyParts);
-	if (format.count() == 2)
+	if (column(col)->dataType() == SciDAVis::TypeDouble)
 	{
-		switch(format[0].toInt())
+		Double2StringFilter *pFilter = qobject_cast<Double2StringFilter*>(column(col)->outputFilter());
+		if (pFilter)
 		{
-			case 0:
-				*f = 'g';
-				break;
-
-			case 1:
-				*f = 'f';
-				break;
-
-			case 2:
-				*f = 'e';
-				break;
+			*precision = pFilter->numDigits();	
+			*f = pFilter->numericFormat();
+			return;
 		}
-		*precision = format[1].toInt();
 	}
-	else
-	{
-		*f = 'g';
-		*precision = 14;
-	}
-#endif
+	*f = 'g';
+	*precision = 14;
 }
 
 int Table::columnWidth(int col)
 {
 	return d_view_widget->columnWidth(col);
-}
-
-QStringList Table::columnWidths()
-{
-// TODO: replace
-	QStringList widths;
-	for (int i=0;i<numCols();i++)
-		widths << QString::number(columnWidth(i));
-
-	return widths;
 }
 
 void Table::setColWidths(const QStringList& widths)
@@ -432,25 +354,37 @@ void Table::setColWidths(const QStringList& widths)
 
 void Table::setColumnTypes(const QStringList& ctl)
 {
-// TODO: replace
-#if 0
+// TODO: obsolete, remove in 0.3.0
 	int n = qMin((int)ctl.count(), numCols());
 	for (int i=0; i<n; i++)
 	{
 		QStringList l = ctl[i].split(";");
-		colTypes[i] = l[0].toInt();
-
-		if ((int)l.count() == 2 && !l[1].isEmpty())
-			col_format[i] = l[1];
-		else
-			col_format[i] = "0/6";
+		switch (l[0].toInt())
+		{
+			//	old enum: enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5};
+			case 0:
+				column(i)->setColumnMode(SciDAVis::Numeric);
+				break;
+			case 1:
+				column(i)->setColumnMode(SciDAVis::Text);
+				break;
+			case 2:
+			case 3:
+				column(i)->setColumnMode(SciDAVis::DateTime);
+				break;
+			case 4:
+				column(i)->setColumnMode(SciDAVis::Month);
+				break;
+			case 5:
+				column(i)->setColumnMode(SciDAVis::Day);
+				break;
+		}
 	}
-#endif
 }
 
 QString Table::saveColumnWidths()
 {
-// TODO: move to "import old format" code
+// TODO: obsolete, remove in 0.3.0
 	QString s="ColWidth\t";
 	for (int i=0;i<numCols();i++)
 		s+=QString::number(columnWidth(i))+"\t";
@@ -460,12 +394,10 @@ QString Table::saveColumnWidths()
 
 QString Table::saveColumnTypes()
 {
-// TODO: move to "import old format" code
+// TODO: obsolete, remove in 0.3.0
 	QString s="ColType";
-#if 0
 	for (int i=0; i<numCols(); i++)
-		s += "\t"+QString::number(colTypes[i])+";"+col_format[i];
-#endif
+		s += "\t"+QString::number(column(i)->columnMode())+";0/6";
 	return s+"\n";
 }
 
@@ -489,7 +421,6 @@ void Table::setCommands(const QString& com)
 
 bool Table::calculate(int col, int startRow, int endRow)
 {
-// TODO
 	if (col < 0 || col >= numCols())
 		return false;
 
@@ -497,8 +428,14 @@ bool Table::calculate(int col, int startRow, int endRow)
 
 	if (d_future_table->column(col)->formula(0).isEmpty())
 	{
+#if 0 // TODO: should an empty formula really mean 0, "", standard date? Wouldn't it be better to not change the cell?
 		for (int i=startRow; i<=endRow; i++)
+		{
 			setText(i, col, "");
+			column(i)->setValueAt(i, 0.0);
+			column(i)->setDataTimeAt(i, QDateTime(QDate(1900,1,1), QTime(12,0,0,0)));
+		}
+#endif
 		QApplication::restoreOverrideCursor();
 		return true;
 	}
@@ -515,6 +452,7 @@ bool Table::calculate(int col, int startRow, int endRow)
 	if (endRow >= numRows())
 		resizeRows(endRow + 1);
 
+// TODO vvvvvvv
 	colscript->setInt(col+1, "j");
 	colscript->setInt(startRow+1, "sr");
 	colscript->setInt(endRow+1, "er");
@@ -523,14 +461,18 @@ bool Table::calculate(int col, int startRow, int endRow)
 	{
 		colscript->setInt(i+1,"i");
 		ret = colscript->eval();
-		if(ret.type()==QVariant::Double) {
+		if(ret.type() == QVariant::Double) 
+		{
 			int prec;
 			char f;
 			columnNumericFormat(col, &f, &prec);
+			column(col)->setValueAt(i, ret.toDouble());
 			setText(i, col, QLocale().toString(ret.toDouble(), f, prec));
-		} else if(ret.canConvert(QVariant::String))
+		} 
+		else if(ret.canConvert(QVariant::String))
 			setText(i, col, ret.toString());
-		else {
+		else 
+		{
 			QApplication::restoreOverrideCursor();
 			return false;
 		}
@@ -554,76 +496,70 @@ bool Table::calculate()
 
 QString Table::saveCommands()
 {
-// TODO: obsolete
+// TODO: obsolete, remove for 0.3.0, only needed for template saving
 	QString s="<com>\n";
-#if 0
 	for (int col=0; col<numCols(); col++)
-		if (!commands[col].isEmpty())
+		if (!column(col)->formula(0).isEmpty())
 		{
 			s += "<col nr=\""+QString::number(col)+"\">\n";
-			s += commands[col];
+			s += column(col)->formula(0);
 			s += "\n</col>\n";
 		}
-#endif
 	s += "</com>\n";
 	return s;
 }
 
 QString Table::saveComments()
 {
-// TODO: obsolete
+// TODO: obsolete, remove for 0.3.0, only needed for template saving
 	QString s = "Comments\t";
-#if 0
 	for (int i=0; i<numCols(); i++)
 	{
-		if (comments.count() > i)
-			s += comments[i] + "\t";
-		else
-			s += "\t";
+		s += column(i)->comment() + "\t";
 	}
-#endif
 	return s + "\n";
 }
 
 QString Table::saveToString(const QString& geometry)
 {
-// TODO: obsolete
-	QString s="<table>\n";
-	s+=QString(name())+"\t";
-	s+=QString::number(numRows())+"\t";
-	s+=QString::number(numCols())+"\t";
-	s+=birthDate()+"\n";
-	s+=geometry;
-	s+=saveHeader();
-	s+=saveColumnWidths();
-	s+=saveCommands();
-	s+=saveColumnTypes();
-	s+=saveComments();
-	s+="WindowLabel\t" + windowLabel() + "\t" + QString::number(captionPolicy()) + "\n";
-	s+=saveText();
-	return s+="</table>\n";
+	QString s = "<table>\n";
+	QString xml;
+	QXmlStreamWriter writer(&xml);
+	d_future_table->save(&writer);
+	s += QString::number(xml.length()) + "\n"; // don't know if this is needed, can't hurt though
+	s += xml + "\n";
+	s += geometry + "\n";
+	s +="</table>\n";
+	return s;
 }
 
 QString Table::saveHeader()
 {
-// TODO: obsolete
+// TODO: obsolete, remove for 0.3.0, only needed for template saving
 	QString s = "header";
-#if 0
-	for (int j=0; j<numCols(); j++){
-		if (col_plot_type[j] == X)
-			s += "\t" + colLabel(j) + "[X]";
-		else if (col_plot_type[j] == Y)
-			s += "\t" + colLabel(j) + "[Y]";
-		else if (col_plot_type[j] == Z)
-			s += "\t" + colLabel(j) + "[Z]";
-		else if (col_plot_type[j] == xErr)
-			s += "\t" + colLabel(j) + "[xEr]";
-		else if (col_plot_type[j] == yErr)
-			s += "\t" + colLabel(j) + "[yEr]";
-		else
-			s += "\t" + colLabel(j);
+	for (int j=0; j<numCols(); j++)
+	{
+		switch (column(j)->plotDesignation())
+		{
+			case SciDAVis::X:
+				s += "\t" + colLabel(j) + "[X]";
+				break;
+			case SciDAVis::Y:
+				s += "\t" + colLabel(j) + "[Y]";
+				break;
+			case SciDAVis::Z:
+				s += "\t" + colLabel(j) + "[Z]";
+				break;
+			case SciDAVis::xErr:
+				s += "\t" + colLabel(j) + "[xEr]";
+				break;
+			case SciDAVis::yErr:
+				s += "\t" + colLabel(j) + "[yEr]";
+				break;
+			default:
+				s += "\t" + colLabel(j);
+		}
 	}
-#endif
 	return s += "\n";
 }
 
@@ -635,29 +571,6 @@ int Table::firstXCol()
 			return j;
 	}
 	return -1;
-}
-
-void Table::enumerateRightCols(bool checked)
-{
-// TODO: decide what to do with this
-#if 0
-	if (!checked)
-		return;
-
-	QString oldLabel = colLabel(selectedCol);
-	QStringList oldLabels = colNames();
-	QString caption = QString(this->name())+"_";
-	int n=1;
-	for (int i=selectedCol; i<numCols(); i++)
-	{
-		QString newLabel = oldLabel + QString::number(n);
-		commands.replaceInStrings("col(\""+colLabel(i)+"\")", "col(\""+newLabel+"\")");
-		setColName(i, newLabel);
-		emit changedColHeader(caption+oldLabels[i],colName(i));
-		n++;
-	}
-	emit modifiedWindow(this);
-#endif
 }
 
 void Table::setColComment(int col, const QString& s)
@@ -685,7 +598,7 @@ void Table::changeColWidth(int width, bool allCols)
 
 void Table::changeColWidth(int width, int col)
 {
-// TODO
+// TODO: obsolete
 	if (columnWidth(col) == width)
 		return;
 
@@ -697,7 +610,8 @@ void Table::changeColName(const QString& text)
 {
 // TODO
 	QString caption = this->name();
-	QString oldName = colName(firstSelectedColumn());
+	int index = firstSelectedColumn();
+	QString oldName = colName(index);
 	QString newName = caption+"_"+text;
 
 	if (oldName == newName)
@@ -718,11 +632,19 @@ void Table::changeColName(const QString& text)
 		return;
 	}
 
-// TODO: port this functionality
-///	commands.replaceInStrings("col(\""+colLabel(selectedCol)+"\")", "col(\""+text+"\")");
+	for (int col=0; col<d_future_table->columnCount(); col++)
+	{
+		Column * current_col = d_future_table->column(col);
+		for (int row=0; row<d_future_table->rowCount(); row++)
+		{
+			if (!current_col->formula(row).isEmpty())
+				current_col->setFormula(row, current_col->formula(row).replace("col(\""+colLabel(index)+"\")", "col(\""+text+"\")"));
+		}
+	}
+		
 
-////	setColName(selectedCol, text);
-	emit changedColHeader(oldName, newName);
+	setColName(index, text);
+	emit changedColHeader(oldName, newName); // TODO: sync this with future::Table signals
 	emit modifiedWindow(this);
 }
 
@@ -839,21 +761,6 @@ QString Table::colName(int col)
 	return QString(name() + "_" + d_future_table->column(col)->name());
 }
 
-QVarLengthArray<double> Table::col(int ycol)
-{
-// TODO: replace with Column
-	int i;
-	int rows=numRows();
-	int cols=numCols();
-	QVarLengthArray<double> Y(rows);
-	if (ycol<=cols)
-	{
-		for (i=0;i<rows;i++)
-			Y[i]=text(i,ycol).toDouble();
-	}
-	return Y;
-}
-
 void Table::insertCols(int start, int count)
 {
 	if (start < 0)
@@ -945,234 +852,6 @@ void Table::removeCol(const QStringList& list)
 		d_future_table->removeColumn(d_future_table->column(name));
 }
 
-void Table::normalizeSelection()
-{
-	for (int i=0; i<numCols(); i++)
-	{
-		if (isColumnSelected(i))
-			normalizeCol(i);
-	}
-}
-
-void Table::normalize()
-{
-	for (int i=0; i<numCols(); i++)
-		normalizeCol(i);
-}
-
-void Table::normalizeCol(int col)
-{
-	// TODO: implement normalize in future::Table
-	if (col<0) col = firstSelectedColumn();
-	double max=text(0,col).toDouble();
-	double aux=0.0;
-	int rows=numRows();
-	for (int i=0; i<rows; i++)
-	{
-		QString text=this->text(i,col);
-		aux=text.toDouble();
-		if (!text.isEmpty() && fabs(aux)>fabs(max))
-			max=aux;
-	}
-
-	if (max == 1.0)
-		return;
-
-	int prec;
-	char f;
-	columnNumericFormat(col, &f, &prec);
-
-	for (int i=0; i<rows; i++)
-	{
-		QString text = this->text(i, col);
-		aux=text.toDouble();
-		if ( !text.isEmpty() )
-			setText(i, col, QLocale().toString(aux/max, f, prec));
-	}
-
-	QString name=colName(col);
-	emit modifiedData(this, name);
-}
-
-void Table::sortColumnsDialog()
-{
-	d_future_table->sortSelectedColumns();
-}
-
-void Table::sortTableDialog()
-{
-	d_future_table->sortTable();
-}
-
-void Table::sort(int type, int order, const QString& leadCol)
-{
-	// TODO
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-////	sortColumns(col_label, type, order, leadCol);
-	QApplication::restoreOverrideCursor();
-}
-
-void Table::sortColumns(int type, int order, const QString& leadCol)
-{
-	// TODO
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-////	sortColumns(selectedColumns(), type, order, leadCol);
-	QApplication::restoreOverrideCursor();
-}
-
-
-	// TODO: replace
-#if 0
-void Table::sortColumns(const QStringList&s, int type, int order, const QString& leadCol)
-{
-	int cols=s.count();
-	if(!type){//Sort columns separately
-		for(int i=0;i<cols;i++)
-			sortColumn(colIndex(s[i]), order);
-	}else{
-		int leadcol = colIndex(leadCol);
-		if (leadcol < 0){
-			QMessageBox::critical(this, tr("Error"),
-					tr("Please indicate the name of the leading column!"));
-			return;
-		}
-		if (columnType(leadcol) == Table::Text){
-			QMessageBox::critical(this, tr("Error"),
-					tr("The leading column has the type set to 'Text'! Operation aborted!"));
-			return;
-		}
-
-		int rows=numRows();
-		int non_empty_cells = 0;
-		QVarLengthArray<int> valid_cell(rows);
-		QVarLengthArray<double> data_double(rows);
-		for (int j = 0; j <rows; j++){
-			if (!text(j, leadcol).isEmpty()){
-				data_double[non_empty_cells] = cell(j,leadcol);
-				valid_cell[non_empty_cells] = j;
-				non_empty_cells++;
-			}
-		}
-
-		if (!non_empty_cells){
-			QMessageBox::critical(this, tr("Error"),
-					tr("The leading column is empty! Operation aborted!"));
-			return;
-		}
-
-		data_double.resize(non_empty_cells);
-		valid_cell.resize(non_empty_cells);
-		QVarLengthArray<QString> data_string(non_empty_cells);
-		size_t *p= new size_t[non_empty_cells];
-
-		// Find the permutation index for the lead col
-		gsl_sort_index(p, data_double.data(), 1, non_empty_cells);
-
-		for(int i=0;i<cols;i++){// Since we have the permutation index, sort all the columns
-			int col=colIndex(s[i]);
-			if (columnType(col) == Text){
-				for (int j=0; j<non_empty_cells; j++)
-					data_string[j] = text(valid_cell[j], col);
-				if(!order)
-					for (int j=0; j<non_empty_cells; j++)
-						setText(valid_cell[j], col, data_string[p[j]]);
-				else
-					for (int j=0; j<non_empty_cells; j++)
-						setText(valid_cell[j], col, data_string[p[non_empty_cells-j-1]]);
-			}else{
-				for (int j = 0; j<non_empty_cells; j++)
-					data_double[j] = cell(valid_cell[j], col);
-				int prec;
-				char f;
-				columnNumericFormat(col, &f, &prec);
-				if(!order)
-					for (int j=0; j<non_empty_cells; j++)
-						setText(valid_cell[j], col, QLocale().toString(data_double[p[j]], f, prec));
-				else
-					for (int j=0; j<non_empty_cells; j++)
-						setText(valid_cell[j], col, QLocale().toString(data_double[p[non_empty_cells-j-1]], f, prec));
-			}
-			emit modifiedData(this, colName(col));
-		}
-		delete[] p;
-	}
-	emit modifiedWindow(this);
-}
-
-void Table::sortColumn(int col, int order)
-{
-	if (col < 0)
-		col = d_table->currentColumn();
-
-	int rows=numRows();
-	int non_empty_cells = 0;
-	QVarLengthArray<int> valid_cell(rows);
-	QVarLengthArray<double> r(rows);
-	QStringList text_cells;
-	for (int i = 0; i <rows; i++){
-		if (!text(i, col).isEmpty()){
-			if (columnType(col) == Table::Text)
-				text_cells << text(i, col);
-			else
-				r[non_empty_cells] = this->text(i,col).toDouble();
-			valid_cell[non_empty_cells] = i;
-			non_empty_cells++;
-		}
-	}
-
-	if (!non_empty_cells)
-		return;
-
-	valid_cell.resize(non_empty_cells);
-	if (columnType(col) == Table::Text){
-		r.clear();
-		text_cells.sort();
-	} else {
-		r.resize(non_empty_cells);
-		gsl_sort(r.data(), 1, non_empty_cells);
-	}
-
-	if (columnType(col) == Table::Text){
-		if (!order){
-			for (int i=0; i<non_empty_cells; i++)
-				setText(valid_cell[i], col, text_cells[i]);
-		} else {
-			for (int i=0; i<non_empty_cells; i++)
-				setText(valid_cell[i], col, text_cells[non_empty_cells-i-1]);
-		}
-	} else {
-		int prec;
-		char f;
-		columnNumericFormat(col, &f, &prec);
-		if (!order) {
-			for (int i=0; i<non_empty_cells; i++)
-				setText(valid_cell[i], col, QLocale().toString(r[i], f, prec));
-		} else {
-			for (int i=0; i<non_empty_cells; i++)
-				setText(valid_cell[i], col, QLocale().toString(r[non_empty_cells-i-1], f, prec));
-		}
-	}
-	emit modifiedData(this, colName(col));
-	emit modifiedWindow(this);
-}
-#endif
-
-// TODO: remove?
-#if 0
-void Table::sortColAsc()
-{
-	sortColumn(d_table->currentColumn ());
-}
-#endif
-
-// TODO: remove?
-#if 0
-void Table::sortColDesc()
-{
-	sortColumn(d_table->currentColumn(), 1);
-}
-#endif
-
 int Table::numRows()
 {
 	return d_future_table->rowCount();
@@ -1181,23 +860,6 @@ int Table::numRows()
 int Table::numCols()
 {
 	return d_future_table->columnCount();
-}
-
-QString Table::saveText()
-{
-	QString out_text = "<data>\n";
-	int cols = numCols();
-	int rows = numRows();
-
-	for (int i=0; i<rows; i++)
-	{
-		out_text += QString::number(i)+"\t";
-		for (int j=0; j<cols-1; j++)
-			out_text += text(i,j)+"\t";
-
-		out_text += text(i,cols-1)+"\n";
-	}
-	return out_text + "</data>\n";
 }
 
 double Table::cell(int row, int col)
@@ -2376,48 +2038,6 @@ void Table::setNumericPrecision(int prec)
 	for (int i=0; i<numCols(); i++)
 		col_format[i] = "0/"+QString::number(prec);
 #endif
-}
-
-void Table::updateDecimalSeparators(const QLocale& oldSeparators)
-{
-	// TODO: replace
-	for (int i=0; i<numCols(); i++){
-		if (d_future_table->column(i)->columnMode() != Numeric)
-			continue;
-
-		char format;
-		int prec;
-		columnNumericFormat(i, &format, &prec);
-
-		for (int j=0; j<numRows(); j++){
-			if (!text(j, i).isEmpty()){
-				double val = oldSeparators.toDouble(text(j, i));
-				setText(j, i, QLocale().toString(val, format, prec));
-			}
-		}
-	}
-}
-
-void Table::updateDecimalSeparators()
-{
-	// TODO: replace
-	saveToMemory();
-
-	for (int i=0; i<numCols(); i++){
-		if (d_future_table->column(i)->columnMode() != Numeric)
-			continue;
-
-		char format;
-		int prec;
-		columnNumericFormat(i, &format, &prec);
-
-		for (int j=0; j<numRows(); j++){
-			if (!text(j, i).isEmpty())
-				setText(j, i, QLocale().toString(d_saved_cells[i][j], format, prec));
-		}
-	}
-
-	freeMemory();
 }
 
 QStringList Table::colNames()

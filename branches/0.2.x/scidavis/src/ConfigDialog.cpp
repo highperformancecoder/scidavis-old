@@ -1101,19 +1101,6 @@ void ConfigDialog::apply()
 
     if (QLocale() != locale){
         QLocale::setDefault(locale);
-
-        QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-        if (boxUpdateSeparators->isChecked()){
-            QList<QWidget*> *lst = app->windowsList();
-            foreach(QWidget *w, *lst){
-                if(w->inherits("Table"))
-                    ((Table *)w)->updateDecimalSeparators();
-                else if(w->inherits("Matrix"))
-                    ((Matrix *)w)->updateDecimalSeparators();
-            }
-            delete lst;
-        }
-        QApplication::restoreOverrideCursor();
     }
 
 	// general page: confirmations tab

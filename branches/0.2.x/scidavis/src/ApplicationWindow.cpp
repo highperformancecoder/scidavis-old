@@ -2848,23 +2848,28 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type, const QSt
 
 	int r=w->numRows();
 	int c=w->numCols()-1;
-	int ycol=w->colIndex(name);
+	w->column(c)->setColumnMode(SciDAVis::Numeric);
+	Column * ycol = w->d_future_table->column(name);
 	if (!direction)
-		ycol=w->colIndex(xColName);
+		ycol = w->d_future_table->column(xColName);
 
 	QVarLengthArray<double> Y(r);
-	Y=w->col(ycol);
-	QString errColName=w->colName(c);
+	for (int i=0; i<w->numRows(); i++)
+	{
+		if (i< ycol->rowCount())
+			Y.append(ycol->valueAt(i));
+		else
+			Y.append(0.0);
+	}
+	QString errColName = w->colName(c);
 
 	double prc=percent.toDouble();
-	double moyenne=0.0;
+	double average=0.0;
 	if (type==0)
 	{
 		for (int i=0;i<r;i++)
 		{
-		// TODO:
-		////	if (!w->text(i,ycol).isEmpty())
-		////		w->setText(i,c,QString::number(Y[i]*prc/100.0,'g',15));
+			w->column(c)->setValueAt(i, Y[i]*prc/100.0);
 		}
 	}
 	else if (type==1)
@@ -2872,16 +2877,14 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type, const QSt
 		int i;
 		double dev=0.0;
 		for (i=0;i<r;i++)
-			moyenne+=Y[i];
-		moyenne/=r;
+			average+=Y[i];
+		average/=r;
 		for (i=0;i<r;i++)
-			dev+=(Y[i]-moyenne)*(Y[i]-moyenne);
+			dev+=(Y[i]-average)*(Y[i]-average);
 		dev=sqrt(dev/(r-1));
 		for (i=0;i<r;i++)
 		{
-			// TODO:
-			//// if (!w->table()->item(i,ycol)->text().isEmpty())
-			////	w->setText(i,c,QString::number(dev,'g',15));
+			w->column(c)->setValueAt(i, dev);
 		}
 	}
 	g->addErrorBars(xColName, name, w, errColName, direction);
@@ -3281,8 +3284,6 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 					} else
 						w->parentWidget()->move(QPoint(i*dx,i*dy));
 
-					if (use_custom_locale)
-						w->updateDecimalSeparators(local_separators);
 				}
 				modifiedProject();
 				break;
@@ -3297,8 +3298,6 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 							local_strip_spaces, local_simplify_spaces, import_mode);
 					t->setWindowLabel(files.join("; "));
 					t->setCaptionPolicy(MyWidget::Name);
-					if (use_custom_locale)
-						t->updateDecimalSeparators(local_separators);
 					t->notifyChanges();
 					emit modifiedProject(t);
 				}
@@ -3310,15 +3309,11 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 				if ( t && t->inherits("Table")){
 					t->importASCII(files[0], local_column_separator, local_ignored_lines, local_rename_columns,
 							local_strip_spaces, local_simplify_spaces, false);
-					if (use_custom_locale)
-						t->updateDecimalSeparators(local_separators);
 					t->setWindowLabel(files[0]);
 					t->notifyChanges();
 				} else {
 					t = newTable(files[0], local_column_separator, local_ignored_lines,
 							local_rename_columns, local_strip_spaces, local_simplify_spaces);
-					if (use_custom_locale)
-						t->updateDecimalSeparators(local_separators);
 				}
 
 				if (t){
@@ -5376,29 +5371,6 @@ void ApplicationWindow::recalculateTable()
 		((Table*)w)->calculate();
 	else if (w->inherits("Matrix"))
 		((Matrix*)w)->calculate();
-}
-
-void ApplicationWindow::normalizeActiveTable()
-{
-	Table* w = (Table*)d_workspace->activeWindow();
-	if ( w && tableWindows.contains(w->name()))
-	{
-		if (int(w->selectedColumns().count())>0)
-			w->normalize();
-		else
-			QMessageBox::warning(this, tr("Column selection error"), tr("Please select a column first!"));
-	}
-}
-
-void ApplicationWindow::normalizeSelection()
-{
-	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("Table"))
-		return;
-
-	if (int(((Table*)d_workspace->activeWindow())->selectedColumns().count())>0)
-		((Table*)d_workspace->activeWindow())->normalizeSelection();
-	else
-		QMessageBox::warning(this, tr("Column selection error"), tr("Please select a column first!"));
 }
 
 void ApplicationWindow::correlate()
@@ -9198,9 +9170,9 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 		        if (cell.isEmpty())
                     continue;
 
-		        if (d_file_version < 90 && w->columnType(col) == Table::Numeric)
+		        if (d_file_version < 90 && w->columnType(col) == SciDAVis::Numeric)
                     w->setCell(row, col, QLocale::c().toDouble(cell.replace(",", ".")));
-		        else if (d_file_version >= 0x000100 && w->columnType(col) == Table::Numeric)
+		        else if (d_file_version >= 0x000100 && w->columnType(col) == SciDAVis::Numeric)
                     w->setCell(row, col, cell.toDouble());
 		        else
                     w->setText(row, col, cell);
@@ -13036,7 +13008,7 @@ void ApplicationWindow::receivedVersionFile(bool error)
 		QStringList list = version_line.split(".");
 		if(list.count() > 2)
 		{
-			int available_version = list.at(0).toInt() << 16 + list.at(1).toInt() << 8 +list.at(2).toInt();
+			int available_version = (list.at(0).toInt() << 16) + (list.at(1).toInt() << 8) + list.at(2).toInt();
 
 			if (available_version > SciDAVis::version())
 			{

@@ -705,8 +705,57 @@ void Table::setSelectedColumnsAsNone()
 
 void Table::normalizeSelectedColumns()
 {
-	// TODO
-	QMessageBox::information(0, "info", "not yet implemented");
+	if (!d_view) return;
+
+	WAIT_CURSOR;
+	beginMacro(QObject::tr("%1: normalize column(s)").arg(name()));
+	QList< Column* > cols = d_view->selectedColumns();
+	foreach(Column * col, cols)
+	{
+		if (col->dataType() == SciDAVis::TypeDouble)
+		{
+			double max = 0.0;
+			for (int row=0; row<col->rowCount(); row++)
+			{
+				if (col->valueAt(row) > max)
+					max = col->valueAt(row);
+			}
+			if (max != 0.0) // avoid division by zero
+				for (int row=0; row<col->rowCount(); row++)
+					col->setValueAt(row, col->valueAt(row) / max);
+		}
+	}
+	endMacro();
+	RESET_CURSOR;
+}
+
+void Table::normalizeSelection()
+{
+	if (!d_view) return;
+
+	WAIT_CURSOR;
+	beginMacro(QObject::tr("%1: normalize selection").arg(name()));
+	double max = 0.0;
+	for (int col=d_view->firstSelectedColumn(); col<d_view->lastSelectedColumn(); col++)
+		if (column(col)->dataType() == SciDAVis::TypeDouble)
+			for (int row=0; row<rowCount(); row++)
+			{
+				if (d_view->isCellSelected(row, col) && column(col)->valueAt(row) > max)
+					max = column(col)->valueAt(row);
+			}
+
+	if (max != 0.0) // avoid division by zero
+	{
+		for (int col=d_view->firstSelectedColumn(); col<d_view->lastSelectedColumn(); col++)
+			if (column(col)->dataType() == SciDAVis::TypeDouble)
+				for (int row=0; row<rowCount(); row++)
+				{
+					if (d_view->isCellSelected(row, col))
+						column(col)->setValueAt(row, column(col)->valueAt(row) / max);
+				}
+	}
+	endMacro();
+	RESET_CURSOR;
 }
 
 void Table::sortSelectedColumns()
@@ -1105,6 +1154,13 @@ void Table::createActions()
 	delete icon_temp;
 
 	icon_temp = new QIcon();
+	icon_temp->addPixmap(QPixmap(":/16x16/normalize.png"));
+	icon_temp->addPixmap(QPixmap(":/32x32/normalize.png"));
+	action_normalize_selection = new QAction(*icon_temp, tr("&Normalize Selection"), this);
+	actionManager()->addAction(action_normalize_selection, "normalize_selection"); 
+	delete icon_temp;
+
+	icon_temp = new QIcon();
 	icon_temp->addPixmap(QPixmap(":/16x16/sort.png"));
 	icon_temp->addPixmap(QPixmap(":/32x32/sort.png"));
 	action_sort_columns = new QAction(*icon_temp, tr("&Sort Columns"), this);
@@ -1197,6 +1253,7 @@ void Table::connectActions()
 	connect(action_set_as_yerr, SIGNAL(triggered()), this, SLOT(setSelectedColumnsAsYError()));
 	connect(action_set_as_none, SIGNAL(triggered()), this, SLOT(setSelectedColumnsAsNone()));
 	connect(action_normalize_columns, SIGNAL(triggered()), this, SLOT(normalizeSelectedColumns()));
+	connect(action_normalize_selection, SIGNAL(triggered()), this, SLOT(normalizeSelection()));
 	connect(action_sort_columns, SIGNAL(triggered()), this, SLOT(sortSelectedColumns()));
 	connect(action_statistics_columns, SIGNAL(triggered()), this, SLOT(statisticsOnSelectedColumns()));
 	connect(action_type_format, SIGNAL(triggered()), this, SLOT(editTypeAndFormatOfSelectedColumns()));
@@ -1247,6 +1304,7 @@ void Table::addActionsToView()
 	d_view->addAction(action_set_as_yerr);
 	d_view->addAction(action_set_as_none);
 	d_view->addAction(action_normalize_columns);
+	d_view->addAction(action_normalize_selection);
 	d_view->addAction(action_sort_columns);
 	d_view->addAction(action_statistics_columns);
 	d_view->addAction(action_type_format);
@@ -1338,6 +1396,8 @@ QMenu * Table::createSelectionMenu(QMenu * append_to)
 	menu->addAction(action_unmask_selection);
 	menu->addSeparator();
 #endif
+	menu->addAction(action_normalize_selection);
+	menu->addSeparator();
 	menu->addAction(action_set_formula);
 	menu->addAction(action_recalculate);
 	menu->addSeparator();

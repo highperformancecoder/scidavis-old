@@ -81,17 +81,6 @@ Project::Project()
 	QString engine_name = ScriptingEngineManager::instance()->engineNames()[0];
 	d->scripting_engine = ScriptingEngineManager::instance()->engine(engine_name);
 #endif
-
-	// TODO: how to do something like this statically?
-	// defaults for global settings
-	Project::setGlobalDefault("default_mdi_window_visibility", Project::folderOnly);
-	Project::setGlobalDefault("auto_save", true);
-	Project::setGlobalDefault("auto_save_interval", 15);
-	Project::setGlobalDefault("default_scripting_language", QString("muParser"));
-	// TODO: not really Project-specific; maybe put these somewhere else:
-	Project::setGlobalDefault("language", QString("en"));
-	Project::setGlobalDefault("auto_search_updates", false);
-	Project::setGlobalDefault("locale_use_group_separator", false);
 }
 
 Project::~Project()
@@ -239,3 +228,4 @@ bool Project::load(XmlStreamReader * reader)
 
 	return !reader->hasError();
 }
+

@@ -180,7 +180,7 @@ void Matrix::setCoordinates(double xs, double xe, double ys, double ye)
 	d_future_matrix->setCoordinates(xs, xe, ys, ye);
 }
 
-QString Matrix::saveToString(const QString &info)
+QString Matrix::saveToString(const QString &geometry)
 {
 	QString s = "<matrix>\n";
 	QString xml;
@@ -188,7 +188,7 @@ QString Matrix::saveToString(const QString &info)
 	d_future_matrix->save(&writer);
 	s += QString::number(xml.length()) + "\n"; // don't know if this is needed, can't hurt though
 	s += xml + "\n";
-	s += info + "\n";
+	s += geometry + "\n";
 	s +="</matrix>\n";
 	return s;
 
