@@ -135,7 +135,7 @@ HEADERS  += src/ApplicationWindow.h \
             src/ColorBox.h \
             src/SymbolBox.h \
             src/PatternBox.h \
-            src/importOPJ.h\
+#            src/importOPJ.h\
             src/SymbolDialog.h \
             src/Plot.h \
             src/ColorButton.h \
@@ -238,7 +238,7 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/ColorBox.cpp \
             src/SymbolBox.cpp \
             src/PatternBox.cpp \
-            src/importOPJ.cpp\
+#            src/importOPJ.cpp\
             src/main.cpp \
             src/SymbolDialog.cpp \
             src/Plot.cpp \

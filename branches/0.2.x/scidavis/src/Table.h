@@ -70,10 +70,6 @@ public:
 	void setNumericPrecision(int prec);
 
 public slots:
-// TODO: remove this
-#if 0
-	MyTable* table(){return d_table;};
-#endif
 	void copy(Table *m);
 	int numRows();
 	int numCols();
@@ -82,6 +78,10 @@ public slots:
 	void resizeRows(int);
 	void resizeCols(int);
 	void handleChange();
+	void handleRowChange();
+	void handleColumnChange(int,int);
+	void handleColumnChange(int,int,int,int);
+	void handleColumnsRemoved(int,int);
 
 	//! Return column number 'index'
 	Column* column(int index) const { return d_future_table->column(index); }
@@ -111,8 +111,7 @@ public slots:
 
 	void setColName(int col,const QString& text);
 	void setHeader(QStringList header);
-	void loadHeader(QStringList header);
-	void setHeaderColType();
+	void importV0x0001XXHeader(QStringList header);
 	void setText(int row,int col,const QString & text);
 
 /////	void cellEdited(int,int col);
@@ -178,10 +177,7 @@ public slots:
 	QStringList drawableColumnSelection();
 	QStringList YColumns();
 	int selectedColsNumber();
-	void changeColName(const QString& text);
 
-	void changeColWidth(int width, bool allCols);
-	void changeColWidth(int width, int col);
 	int columnWidth(int col);
 	void setColWidths(const QStringList& widths);
 
@@ -200,20 +196,9 @@ public slots:
 	void setColumnTypes(const QStringList& ctl);
 	void setColumnType(int col, SciDAVis::ColumnMode mode);
 
-    void saveToMemory(double **cells);
-	void saveToMemory();
-	void freeMemory();
 
 	QString columnFormat(int col);
 	QStringList getColumnsFormat();
-	void setColumnsFormat(const QStringList& lst);
-
-	void setTextFormat(int col);
-	void setColNumericFormat(int f, int prec, int col, bool updateCells = true);
-	bool setDateFormat(const QString& format, int col, bool updateCells = true);
-	bool setTimeFormat(const QString& format, int col, bool updateCells = true);
-	void setMonthFormat(const QString& format, int col, bool updateCells = true);
-	void setDayFormat(const QString& format, int col, bool updateCells = true);
 
 	bool exportASCII(const QString& fname, const QString& separator,
 					bool withLabels = false, bool exportSelection = false);
@@ -249,9 +234,6 @@ public slots:
 	QString saveAsTemplate(const QString& geometryInfo);
 	void restore(const QStringList& lst);
 
-	//! This slot notifies the main application that the table has been modified. Triggers the update of 2D plots.
-	void notifyChanges();
-
 	//! Notifies the main application that the width of a table column has been modified by the user.
 ////	void colWidthModified(int, int, int);
 
@@ -264,8 +246,6 @@ signals:
 	void createTable(const QString&,int,int,const QString&);
 
 private:
-	double **d_saved_cells;
-
 	//! Internal function to change the column header
 	void setColumnHeader(int index, const QString& label);
 };

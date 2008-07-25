@@ -168,7 +168,6 @@ void Correlation::addResultCurve()
 	d_table->setColName(cols, tr("Lag") + id);
 	d_table->setColName(cols2, label);
 	d_table->setColPlotDesignation(cols, SciDAVis::X);
-	d_table->setHeaderColType();
 
 	MultiLayer *ml = app->newGraph(name() + tr("Plot"));
 	if (!ml)

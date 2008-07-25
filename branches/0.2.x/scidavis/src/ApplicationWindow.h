@@ -157,7 +157,9 @@ public slots:
 	void open();
 	ApplicationWindow* open(const QString& fn);
 	ApplicationWindow* openProject(const QString& fn);
+#ifdef REVIVE_OPJ_SUPPERT
 	ApplicationWindow* importOPJ(const QString& filename);
+#endif
 
 	/**
 	 * \brief Create a new project from a data file.

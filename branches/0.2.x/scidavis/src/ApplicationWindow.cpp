@@ -57,7 +57,9 @@
 #include "DataSetDialog.h"
 #include "IntDialog.h"
 #include "ConfigDialog.h"
+#ifdef REVIVE_OPJ_SUPPERT
 #include "importOPJ.h"
+#endif
 #include "AssociationsDialog.h"
 #include "RenameWindowDialog.h"
 #include "QwtErrorPlotCurve.h"
@@ -3390,7 +3392,14 @@ ApplicationWindow* ApplicationWindow::open(const QString& fn)
 {
 	if (fn.endsWith(".opj", Qt::CaseInsensitive) || fn.endsWith(".ogm", Qt::CaseInsensitive) ||
 		fn.endsWith(".ogw", Qt::CaseInsensitive) || fn.endsWith(".ogg", Qt::CaseInsensitive))
+#ifdef REVIVE_OPJ_SUPPERT
 		return importOPJ(fn);
+#else
+		{
+                QMessageBox::critical(this, tr("File opening error"),  tr("SciDAVis currently does not support Origin import. If you are interested in reviving an maintaining an Origin import filter, contact the developers.").arg(fn));
+				return 0;
+		}
+#endif
 	else if (fn.endsWith(".py", Qt::CaseInsensitive))
 		return loadScript(fn);
 	else if (!( fn.endsWith(".sciprj",Qt::CaseInsensitive) || fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) ||
@@ -9120,7 +9129,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 		} else if (fields[0] == "header") {
 			fields.pop_front();
 			if (d_file_version >= 78)
-				w->loadHeader(fields);
+				w->importV0x0001XXHeader(fields);
 			else
 			{
 				w->setColPlotDesignation(list[4].toInt(), SciDAVis::X);
@@ -9211,7 +9220,7 @@ TableStatistics* ApplicationWindow::openTableStatistics(const QStringList &flist
 		else if (fields[0] == "header") {
 			fields.pop_front();
 			if (d_file_version >= 78)
-				w->loadHeader(fields);
+				w->importV0x0001XXHeader(fields);
 			else
 			{
 				w->setColPlotDesignation(list[4].toInt(), SciDAVis::X);
@@ -11297,6 +11306,7 @@ MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
 	return g;
 }
 
+#ifdef REVIVE_OPJ_SUPPERT
 ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
 {
     if (filename.endsWith(".opj", Qt::CaseInsensitive) || filename.endsWith(".ogg", Qt::CaseInsensitive))
@@ -11327,6 +11337,7 @@ ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
     }
 	else return 0;
 }
+#endif
 
 void ApplicationWindow::deleteFitTables()
 {
@@ -11584,7 +11595,11 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 			s += "-m " + tr("or") + " --manual: " + tr("show SciDAVis manual in a standalone window") + "\n";
 			s += "-v " + tr("or") + " --version: " + tr("print SciDAVis version and release date") + "\n";
 			s += "-x " + tr("or") + " --execute: " + tr("execute the script file given as argument") + "\n\n";
+#ifdef REVIVE_OPJ_SUPPERT
 			s += "'" + tr("file") + "_" + tr("name") + "' " + tr("can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py or ASCII file") + "\n";
+#else
+			s += "'" + tr("file") + "_" + tr("name") + "' " + tr("can be any .sciprj, .sciprj.gz, .qti, qti.gz, .py or ASCII file") + "\n";
+#endif
 			#ifdef Q_OS_WIN
                 hide();
 				QMessageBox::information(this, tr("SciDAVis - Help"), s);
@@ -11846,7 +11861,14 @@ void ApplicationWindow::appendProject(const QString& fn)
 
 	if (fn.contains(".opj", Qt::CaseInsensitive) || fn.contains(".ogm", Qt::CaseInsensitive) ||
         fn.contains(".ogw", Qt::CaseInsensitive) || fn.contains(".ogg", Qt::CaseInsensitive))
+#ifdef REVIVE_OPJ_SUPPERT
 		ImportOPJ(this, fn);
+#else
+		{
+                QMessageBox::critical(this, tr("File opening error"),  tr("SciDAVis currently does not support Origin import. If you are interested in reviving an maintaining an Origin import filter, contact the developers.").arg(fn));
+				return;
+		}
+#endif
 	else
 	{
 		QFile f(fname);

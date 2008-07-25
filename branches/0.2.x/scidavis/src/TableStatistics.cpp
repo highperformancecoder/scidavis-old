@@ -102,7 +102,6 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 #endif
 
 	setColPlotDesignation(0, SciDAVis::X);
-	setHeaderColType();
 }
 
 void TableStatistics::update(Table *t, const QString& colName)

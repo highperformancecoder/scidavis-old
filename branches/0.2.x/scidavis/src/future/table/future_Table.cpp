@@ -50,6 +50,7 @@
 #include <QMenuBar>
 #include <QClipboard>
 #include <QToolBar>
+#include <QtDebug>
 
 #include "core/AbstractScript.h"
 #include "core/AspectPrivate.h"

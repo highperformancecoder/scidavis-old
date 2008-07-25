@@ -356,7 +356,6 @@ Table* Fit::parametersTable(const QString& tableName)
 	}
 
 	t->setColPlotDesignation(2, SciDAVis::yErr);
-	t->setHeaderColType();
 // TODO: replace or remove this
 #if 0
 	for (int j=0; j<3; j++)
