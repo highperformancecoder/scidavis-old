@@ -352,6 +352,8 @@ HEADERS += src/future/core/AbstractAspect.h \
            src/future/table/TableItemDelegate.h \
            src/future/table/TableCommentsHeaderModel.h \
            src/future/table/future_SortDialog.h \
+           src/future/table/AsciiTableImportFilter.h \
+           src/future/core/AbstractImportFilter.h \
 
 SOURCES += src/future/core/AbstractAspect.cpp \
            src/future/core/AbstractPart.cpp \
@@ -383,6 +385,7 @@ SOURCES += src/future/core/AbstractAspect.cpp \
            src/future/table/TableItemDelegate.cpp \
            src/future/table/TableCommentsHeaderModel.cpp \
            src/future/table/future_SortDialog.cpp \
+           src/future/table/AsciiTableImportFilter.cpp \
 
 ###############################################################
 ##################### Compression #############################

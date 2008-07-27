@@ -27,10 +27,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "AsciiTableImportFilter.h"
-#include "Table.h"
-#include "IntervalAttribute.h"
-#include "Column.h"
+#include "table/AsciiTableImportFilter.h"
+#include "table/future_Table.h"
+#include "lib/IntervalAttribute.h"
+#include "core/column/Column.h"
 
 #include <QTextStream>
 #include <QStringList>
@@ -98,7 +98,7 @@ AbstractAspect * AsciiTableImportFilter::importAspect(QIODevice * input)
 	for (i=0; i<data.size(); ++i)
 		cols << new Column(column_names[i], data[i], invalid_cells[i]);
 	// renaming will be done by the kernel
-	Table * result = new Table(0, 0, 0, tr("Table"));
+	future::Table * result = new future::Table(0, 0, 0, tr("Table"));
 	result->appendColumns(cols);
 	return result;
 }

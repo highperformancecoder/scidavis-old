@@ -95,6 +95,7 @@
 #include "core/Project.h"
 #include "core/column/Column.h"
 #include "lib/XmlStreamReader.h"
+#include "table/AsciiTableImportFilter.h"
 
 // TODO: move tool-specific code to an extension manager
 #include "ScreenPickerTool.h"
@@ -3267,23 +3268,27 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 	if (files.isEmpty())
 		return;
 
-	switch(import_mode) {
+	switch(import_mode) 
+	{
 		case ImportASCIIDialog::NewTables:
 			{
 				int dx, dy;
 				QStringList sorted_files = files;
 				sorted_files.sort();
-				for (int i=0; i<sorted_files.size(); i++){
+				for (int i=0; i<sorted_files.size(); i++)
+				{
 					Table *w = newTable(sorted_files[i], local_column_separator, local_ignored_lines,
 							local_rename_columns, local_strip_spaces, local_simplify_spaces);
 					if (!w) continue;
 					w->setCaptionPolicy(MyWidget::Both);
 					setListViewLabel(w->name(), sorted_files[i]);
-					if (i==0) {
+					if (i==0) 
+					{
 						dx = w->verticalHeaderWidth();
 						dy = w->parentWidget()->frameGeometry().height() - w->height();
 						w->parentWidget()->move(QPoint(0,0));
-					} else
+					} 
+					else
 						w->parentWidget()->move(QPoint(i*dx,i*dy));
 
 				}
@@ -3291,37 +3296,105 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 				break;
 			}
 		case ImportASCIIDialog::NewColumns:
+			{
+				for (int i=0; i<files.size(); i++)
+				{
+					Table *temp = new Table(scriptEnv, files[i], local_column_separator, local_ignored_lines,
+							local_rename_columns, local_strip_spaces, local_simplify_spaces, "temp", 0, 0, 0);
+					if (!temp) continue;
+					Table *table = (Table*) d_workspace->activeWindow();
+					if (table && table->inherits("Table"))
+					{
+						while (temp->d_future_table->childCount() > 0)
+							temp->d_future_table->reparentChild(table->d_future_table, temp->d_future_table->child(0));
+						table->setWindowLabel(files.join("; "));
+						table->setCaptionPolicy(MyWidget::Name);
+						table->notifyChanges();
+						emit modifiedProject(table);
+					}
+					delete temp;
+				}
+				modifiedProject();
+				break;
+			}
 		case ImportASCIIDialog::NewRows:
 			{
-				Table *t = (Table*) d_workspace->activeWindow();
-				if (t && t->inherits("Table")){
-					for (int i=0; i<files.size(); i++)
-					t->importMultipleASCIIFiles(files[i], local_column_separator, local_ignored_lines, local_rename_columns,
-							local_strip_spaces, local_simplify_spaces, import_mode);
-					t->setWindowLabel(files.join("; "));
-					t->setCaptionPolicy(MyWidget::Name);
-					t->notifyChanges();
-					emit modifiedProject(t);
+				for (int i=0; i<files.size(); i++)
+				{
+					Table *temp = new Table(scriptEnv, files[i], local_column_separator, local_ignored_lines,
+							local_rename_columns, local_strip_spaces, local_simplify_spaces, "temp", 0, 0, 0);
+					if (!temp) continue;
+					Table *table = (Table*) d_workspace->activeWindow();
+					if (table && table->inherits("Table"))
+					{
+						int missing_columns = temp->columnCount() - table->columnCount();
+						if (missing_columns > 0)
+						{
+							QList<Column*> cols;
+							for(int col=0; col<missing_columns; col++)
+							{
+								Column * new_col = new Column(tr("new_by_import") + QString::number(col+1), SciDAVis::Text);
+								new_col->setPlotDesignation(SciDAVis::Y);
+								cols << new_col;
+							}
+							table->d_future_table->appendColumns(cols);
+						}
+						Q_ASSERT(table->columnCount() >= temp->columnCount());
+						int start_row = table->rowCount();
+						table->d_future_table->setRowCount(table->rowCount() + temp->rowCount());
+						for (int col=0; col<temp->columnCount(); col++)
+						{
+							Column * src_col = temp->column(col);
+							Q_ASSERT(src_col->dataType() == SciDAVis::TypeQString);
+							Column * dst_col = table->column(col);
+							for (int j=0; j<src_col->rowCount(); j++)
+								dst_col->asStringColumn()->setTextAt(start_row+j, src_col->textAt(j));
+						}
+						table->setWindowLabel(files.join("; "));
+						table->setCaptionPolicy(MyWidget::Name);
+						table->notifyChanges();
+						emit modifiedProject(table);
+					}
+					delete temp;
 				}
+				modifiedProject();
 				break;
 			}
 		case ImportASCIIDialog::Overwrite:
 			{
-				Table *t = (Table*) d_workspace->activeWindow();
-				if ( t && t->inherits("Table")){
-					t->importASCII(files[0], local_column_separator, local_ignored_lines, local_rename_columns,
-							local_strip_spaces, local_simplify_spaces, false);
-					t->setWindowLabel(files[0]);
-					t->notifyChanges();
-				} else {
-					t = newTable(files[0], local_column_separator, local_ignored_lines,
-							local_rename_columns, local_strip_spaces, local_simplify_spaces);
+				Table *temp = new Table(scriptEnv, files[0], local_column_separator, local_ignored_lines,
+						local_rename_columns, local_strip_spaces, local_simplify_spaces, "temp", 0, 0, 0);
+				if (!temp) return;
+				Table *table = (Table*) d_workspace->activeWindow();
+				if (table && table->inherits("Table"))
+				{
+					if (table->rowCount() < temp->rowCount())
+						table->d_future_table->setRowCount(temp->rowCount());
+					for (int col=0; col<table->columnCount() && col<temp->columnCount(); col++)
+					{
+						Column * src_col = temp->column(col);
+						Q_ASSERT(src_col->dataType() == SciDAVis::TypeQString);
+						Column * dst_col = table->column(col);
+						for (int j=0; j<temp->rowCount(); j++)
+							dst_col->asStringColumn()->setTextAt(j, src_col->textAt(j));
+					}
+					if (temp->columnCount() > table->columnCount())
+					{
+						temp->d_future_table->removeColumns(0, table->columnCount());
+						while (temp->d_future_table->childCount() > 0)
+							temp->d_future_table->reparentChild(table->d_future_table, temp->d_future_table->child(0));
+					}
+					table->setWindowLabel(files.join("; "));
+					table->setCaptionPolicy(MyWidget::Name);
+					table->notifyChanges();
+					emit modifiedProject(table);
 				}
-
-				if (t){
-					t->setCaptionPolicy(MyWidget::Both);
-					setListViewLabel(t->name(), files[0]);
-					modifiedProject(t);
+				delete temp;
+				if (table)
+				{
+					table->setCaptionPolicy(MyWidget::Both);
+					setListViewLabel(table->name(), files[0]);
+					modifiedProject(table);
 				}
 				break;
 			}

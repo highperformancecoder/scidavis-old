@@ -69,10 +69,20 @@ public:
 	//! Sets the number of significant digits
 	void setNumericPrecision(int prec);
 
+	//! Return the window name
+	virtual QString name() { return d_future_table->name();} 
+	//! Set the window name
+	virtual void setName(const QString& s) { d_future_table->setName(s); setObjectName(s); updateCaption(); }
+	//! Return the window label
+	virtual QString windowLabel() { return d_future_table->comment(); }
+	//! Set the window label
+	virtual void setWindowLabel(const QString& s) { d_future_table->setComment(s); updateCaption(); }
 public slots:
 	void copy(Table *m);
 	int numRows();
 	int numCols();
+	int rowCount();
+	int columnCount();
 	void setNumRows(int rows);
 	void setNumCols(int cols);
 	void resizeRows(int);
@@ -169,7 +179,7 @@ public slots:
 	void clear();
 	//@}
 
-	void init(int rows, int cols);
+	void init();
 	QStringList selectedColumns();
 	QStringList selectedYColumns();
 	QStringList selectedErrColumns();
@@ -202,10 +212,6 @@ public slots:
 
 	bool exportASCII(const QString& fname, const QString& separator,
 					bool withLabels = false, bool exportSelection = false);
-	void importASCII(const QString &fname, const QString &sep, int ignoredLines,
-						bool renameCols, bool stripSpaces, bool simplifySpaces, bool newTable);
-	void importMultipleASCIIFiles(const QString &fname, const QString &sep, int ignoredLines,
-					bool renameCols, bool stripSpaces, bool simplifySpaces, int importFileAs);
 
 	//! \name Saving and Restoring
 	//@{

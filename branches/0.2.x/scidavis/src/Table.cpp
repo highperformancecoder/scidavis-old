@@ -34,6 +34,7 @@
 #include "lib/Interval.h"
 #include "table/TableModel.h"
 #include "core/datatypes/Double2StringFilter.h"
+#include "table/AsciiTableImportFilter.h"
 
 #include <QMessageBox>
 #include <QDateTime>
@@ -64,20 +65,34 @@ Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ign
 			 QWidget* parent, const char* name, Qt::WFlags f)
 	: TableView(label, parent, name,f), scripted(env)
 {
-	d_future_table = new future::Table(0, 0, 0, label);
-	TableView::setTable(d_future_table);	
-	d_future_table->setView(this);	
-	importASCII(fname, sep, ignoredLines, renameCols, stripSpaces, simplifySpaces, true);
+
+	AsciiTableImportFilter filter;
+	filter.set_ignored_lines(ignoredLines);
+	filter.set_separator(sep);
+	filter.set_first_row_names_columns(renameCols);
+	filter.set_trim_whitespace(stripSpaces);
+	filter.set_simplify_whitespace(simplifySpaces);
+
+	QFile file(fname);
+	if ( file.open(QIODevice::ReadOnly) )
+	{
+		d_future_table = static_cast<future::Table *>(filter.importAspect(&file));
+		if (!d_future_table)
+			d_future_table = new future::Table(0, 0, 0, label);
+		else
+			d_future_table->setName(label);
+	}
+	init();
 }
 
 Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
 	: TableView(label, parent, name,f), scripted(env)
 {
 	d_future_table = new future::Table(0, r, c, label);
-	init(r,c);
+	init();
 }
 
-void Table::init(int rows, int cols)
+void Table::init()
 {
 	TableView::setTable(d_future_table);	
 	d_future_table->setView(this);	
@@ -782,6 +797,16 @@ int Table::numCols()
 	return d_future_table->columnCount();
 }
 
+int Table::rowCount()
+{
+	return d_future_table->rowCount();
+}
+
+int Table::columnCount()
+{
+	return d_future_table->columnCount();
+}
+
 double Table::cell(int row, int col)
 {
 	return column(col)->valueAt(row);
@@ -872,336 +897,6 @@ bool Table::noXColumn()
 bool Table::noYColumn()
 {
 	return d_future_table->columnCount(SciDAVis::Y) == 0;
-}
-
-// TODO: vvvvv
-
-void Table::importMultipleASCIIFiles(const QString &fname, const QString &sep, int ignoredLines,
-		bool renameCols, bool stripSpaces, bool simplifySpaces,
-		int importFileAs)
-{
-	// TODO: port
-#if 0
-	QFile f(fname);
-	Q3TextStream t( &f );// use a text stream
-	if ( f.open(QIODevice::ReadOnly) ){
-		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-		int i, rows = 1, cols = 0;
-		int r = numRows();
-		int c = numCols();
-		for (i=0; i<ignoredLines; i++)
-			t.readLine();
-
-		QString s = t.readLine();//read first line after the ignored ones
-		while (!t.atEnd()){
-			t.readLine();
-			rows++;
-			qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-		}
-
-		if (simplifySpaces)
-			s = s.simplifyWhiteSpace();
-		else if (stripSpaces)
-			s = s.trimmed();
-		QStringList line = s.split(sep);
-		cols = (int)line.count();
-
-		bool allNumbers = true;
-		for (i=0; i<cols; i++)
-		{//verify if the strings in the line used to rename the columns are not all numbers
-			QLocale().toDouble(line[i], &allNumbers);
-			if (!allNumbers)
-				break;
-		}
-
-		if (renameCols && !allNumbers)
-			rows--;
-
-		QProgressDialog progress(this);
-		int steps = int(rows/1000);
-		progress.setRange(0, steps+1);
-		progress.setWindowTitle("Reading file...");
-		progress.setLabelText(fname);
-		progress.setActiveWindow();
-
-		QApplication::restoreOverrideCursor();
-
-		if (!importFileAs)
-			init (rows, cols);
-		else if (importFileAs == 1){//new cols
-			addColumns(cols);
-			if (r < rows)
-				d_table->setNumRows(rows);
-		}
-		else if (importFileAs == 2){//new rows
-			if (c < cols)
-				addColumns(cols-c);
-			d_table->setNumRows(r+rows);
-		}
-
-		f.reset();
-		for (i=0; i<ignoredLines; i++)
-			t.readLine();
-
-		int startRow = 0, startCol =0;
-		if (importFileAs == 2)
-			startRow = r;
-		else if (importFileAs == 1)
-			startCol = c;
-
-		if (renameCols && !allNumbers)
-		{//use first line to set the table header
-			s = t.readLine();
-			if (simplifySpaces)
-				s = s.simplifyWhiteSpace();
-			else if (stripSpaces)
-				s = s.trimmed();
-
-			line = s.split(sep, QString::SkipEmptyParts);
-			int end = startCol+(int)line.count();
-			for (i=startCol; i<end; i++)
-				col_label[i] = QString::null;
-			for (i=startCol; i<end; i++){
-				comments[i] = line[i-startCol];
-				s = line[i-startCol].replace("-","_").remove(QRegExp("\\W")).replace("_","-");
-				int n = col_label.count(s);
-				if(n){
-					//avoid identical col names
-					while (col_label.contains(s+QString::number(n)))
-						n++;
-					s += QString::number(n);
-				}
-				col_label[i] = s;
-			}
-		}
-		d_table->blockSignals(true);
-		setHeaderColType();
-
-		for (i=0; i<steps; i++){
-			if (progress.wasCanceled()){
-				f.close();
-				return;
-			}
-
-			for (int k=0; k<1000; k++){
-				s = t.readLine();
-				if (simplifySpaces)
-					s = s.simplifyWhiteSpace();
-				else if (stripSpaces)
-					s = s.trimmed();
-				line = s.split(sep);
-				for (int j=startCol; j<numCols(); j++)
-					setText(startRow + k, j, line[j-startCol]);
-			}
-
-			startRow += 1000;
-			progress.setValue(i);
-		}
-
-		for (i=startRow; i<numRows(); i++){
-			s = t.readLine();
-			if (simplifySpaces)
-				s = s.simplifyWhiteSpace();
-			else if (stripSpaces)
-				s = s.trimmed();
-			line = s.split(sep);
-			for (int j=startCol; j<numCols(); j++)
-				setText(i, j, line[j-startCol]);
-		}
-		progress.setValue(steps+1);
-		d_table->blockSignals(false);
-		f.close();
-
-		if (importFileAs)
-		{
-			for (i=0; i<numCols(); i++)
-				emit modifiedData(this, colName(i));
-		}
-	}
-#endif
-}
-
-void Table::importASCII(const QString &fname, const QString &sep, int ignoredLines,
-		bool renameCols, bool stripSpaces, bool simplifySpaces, bool newTable)
-{
-	// TODO: port
-#if 0
-	QFile f(fname);
-	if (f.open(QIODevice::ReadOnly)) //| QIODevice::Text | QIODevice::Unbuffered ))
-	{
-		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-		Q3TextStream t(&f);//TODO: use QTextStream instead and find a way to make it read the end-of-line char correctly.
-		//Opening the file with the above combination doesn't seem to help: problems on Mac OS X generated ASCII files!
-
-		int i, c, rows = 1, cols = 0;
-		for (i=0; i<ignoredLines; i++)
-			t.readLine();
-
-		QString s = t.readLine();//read first line after the ignored ones
-		while ( !t.atEnd() ){
-			t.readLine();
-			rows++;
-			qApp->processEvents(QEventLoop::ExcludeUserInput);
-		}
-
-		if (simplifySpaces)
-			s = s.simplifyWhiteSpace();
-		else if (stripSpaces)
-			s = s.trimmed();
-
-		QStringList line = s.split(sep);
-		cols = (int)line.count();
-
-		bool allNumbers = true;
-		for (i=0; i<cols; i++)
-		{//verify if the strings in the line used to rename the columns are not all numbers
-			QLocale().toDouble(line[i], &allNumbers);
-			if (!allNumbers)
-				break;
-		}
-
-		if (renameCols && !allNumbers)
-			rows--;
-		int steps = int(rows/1000);
-
-		QProgressDialog progress(this);
-		progress.setWindowTitle("Reading file...");
-		progress.setLabelText(fname);
-		progress.setActiveWindow();
-		progress.setAutoClose(true);
-		progress.setAutoReset(true);
-		progress.setRange(0, steps+1);
-
-		QApplication::restoreOverrideCursor();
-
-		QStringList oldHeader;
-		if (newTable)
-			init (rows, cols);
-		else{
-			if (numRows() != rows)
-				d_table->setNumRows(rows);
-
-			c = numCols();
-			oldHeader = col_label;
-			if (c != cols){
-				if (c < cols)
-					addColumns(cols - c);
-				else{
-					d_table->setNumCols(cols);
-					for (int i=c-1; i>=cols; i--){
-						emit removedCol(QString(name()) + "_" + oldHeader[i]);
-						commands.removeLast();
-						comments.removeLast();
-						col_format.removeLast();
-						col_label.removeLast();
-						colTypes.removeLast();
-						col_plot_type.removeLast();
-					}
-				}
-			}
-		}
-
-		f.reset();
-		for (i=0; i<ignoredLines; i++)
-			t.readLine();
-
-		if (renameCols && !allNumbers)
-		{//use first line to set the table header
-			s = t.readLine();
-			if (simplifySpaces)
-				s = s.simplifyWhiteSpace();
-			else if (stripSpaces)
-				s = s.trimmed();
-			line = s.split(sep, QString::SkipEmptyParts);
-			for (i=0; i<(int)line.count(); i++)
-				col_label[i] = QString::null;
-
-			for (i=0; i<(int)line.count(); i++)
-			{
-				comments[i] = line[i];
-				s = line[i].replace("-","_").remove(QRegExp("\\W")).replace("_","-");
-				int n = col_label.count(s);
-				if(n)
-				{
-					//avoid identical col names
-					while (col_label.contains(s+QString::number(n)))
-						n++;
-					s += QString::number(n);
-				}
-				col_label[i] = s;
-			}
-		}
-
-		d_table->blockSignals(true);
-		setHeaderColType();
-
-		int start = 0;
-		for (i=0; i<steps; i++)
-		{
-			if (progress.wasCanceled())
-			{
-				f.close();
-				return;
-			}
-
-			start = i*1000;
-			for (int k=0; k<1000; k++)
-			{
-				s = t.readLine();
-				if (simplifySpaces)
-					s = s.simplifyWhiteSpace();
-				else if (stripSpaces)
-					s = s.trimmed();
-				line = s.split(sep);
-				int lc = (int)line.count();
-				if (lc > cols) {
-					addColumns(lc - cols);
-					cols = lc;
-				}
-				for (int j=0; j<cols && j<lc; j++)
-					setText(start + k, j, line[j]);
-			}
-			progress.setValue(i);
-			qApp->processEvents();
-		}
-
-		start = steps*1000;
-		for (i=start; i<rows; i++)
-		{
-			s = t.readLine();
-			if (simplifySpaces)
-				s = s.simplifyWhiteSpace();
-			else if (stripSpaces)
-				s = s.trimmed();
-			line = s.split(sep);
-			int lc = (int)line.count();
-			if (lc > cols) {
-				addColumns(lc - cols);
-				cols = lc;
-			}
-			for (int j=0; j<cols && j<lc; j++)
-				setText(i, j, line[j]);
-		}
-		progress.setValue(steps+1);
-		qApp->processEvents();
-		d_table->blockSignals(false);
-		f.close();
-
-		if (!newTable)
-		{
-			if (cols > c)
-				cols = c;
-			for (i=0; i<cols; i++)
-			{
-				emit modifiedData(this, colName(i));
-				if (colLabel(i) != oldHeader[i])
-					emit changedColHeader(QString(name())+"_"+oldHeader[i],
-							QString(name())+"_"+colLabel(i));
-			}
-		}
-	}
-#endif
 }
 
 bool Table::exportASCII(const QString& fname, const QString& separator,

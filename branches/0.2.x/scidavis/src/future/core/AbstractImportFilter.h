@@ -95,3 +95,5 @@ class AbstractImportFilter : public QObject
 };
 
 #endif // ifndef ABSTRACT_IMPORT_FILTER_H
+
+

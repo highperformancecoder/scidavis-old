@@ -56,13 +56,13 @@ public:
 	future::Matrix *d_future_matrix;
 
 	//! Return the window name
-	virtual QString name() { return d_matrix->name();} 
+	virtual QString name() { return d_future_matrix->name();} 
 	//! Set the window name
-	virtual void setName(const QString& s) { d_matrix->setName(s); setObjectName(s); updateCaption(); }
+	virtual void setName(const QString& s) { d_future_matrix->setName(s); setObjectName(s); updateCaption(); }
 	//! Return the window label
-	virtual QString windowLabel() { return d_matrix->comment(); }
+	virtual QString windowLabel() { return d_future_matrix->comment(); }
 	//! Set the window label
-	virtual void setWindowLabel(const QString& s) { d_matrix->setComment(s); updateCaption(); }
+	virtual void setWindowLabel(const QString& s) { d_future_matrix->setComment(s); updateCaption(); }
 	/*!
 	 * \brief Constructor
 	 *
