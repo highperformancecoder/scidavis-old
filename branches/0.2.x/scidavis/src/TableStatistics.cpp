@@ -44,8 +44,8 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 	{
 		setName(QString(d_base->name())+"-"+tr("RowStats"));
 		setWindowLabel(tr("Row Statistics of %1").arg(base->name()));
-		resizeRows(d_targets.size());
-		resizeCols(9);
+		d_future_table->setRowCount(d_targets.size());
+		d_future_table->setColumnCount(9);
 		setColName(0, tr("Row"));
 		setColName(1, tr("Cols"));
 		setColName(2, tr("Mean"));
@@ -67,8 +67,8 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 	{
 		setName(QString(d_base->name())+"-"+tr("ColStats"));
 		setWindowLabel(tr("Column Statistics of %1").arg(base->name()));
-		resizeRows(d_targets.size());
-		resizeCols(11);
+		d_future_table->setRowCount(d_targets.size());
+		d_future_table->setColumnCount(11);
 		setColName(0, tr("Col"));
 		setColName(1, tr("Rows"));
 		setColName(2, tr("Mean"));

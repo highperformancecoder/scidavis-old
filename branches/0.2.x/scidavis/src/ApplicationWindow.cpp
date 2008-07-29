@@ -2344,7 +2344,6 @@ void ApplicationWindow::customTable(Table* w)
 	w->setTextFont(tableTextFont);
 	w->setHeaderFont(tableHeaderFont);
 	w->showComments(d_show_table_comments);
-	w->setNumericPrecision(d_decimal_digits);
 }
 
 void ApplicationWindow::setPreferences(Graph* g)

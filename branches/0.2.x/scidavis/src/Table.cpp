@@ -454,7 +454,7 @@ bool Table::calculate(int col, int startRow, int endRow)
 		return false;
 	}
 	if (endRow >= numRows())
-		resizeRows(endRow + 1);
+		d_future_table->setRowCount(endRow + 1);
 
 	colscript->setInt(col+1, "j");
 	colscript->setInt(startRow+1, "sr");
@@ -900,144 +900,106 @@ bool Table::noYColumn()
 }
 
 bool Table::exportASCII(const QString& fname, const QString& separator,
-		bool withLabels,bool exportSelection)
+		bool withLabels, bool exportSelection)
 {
-	// TODO: port
-#if 0
-	QFile f(fname);
-	if ( !f.open( QIODevice::WriteOnly ) ){
+	QFile file(fname);
+	if ( !file.open( QIODevice::WriteOnly ) )
+	{
 		QApplication::restoreOverrideCursor();
 		QMessageBox::critical(0, tr("ASCII Export Error"),
 				tr("Could not write to file: <br><h4>"+fname+ "</h4><p>Please verify that you have the right to write to this location!").arg(fname));
 		return false;
 	}
 
-	QString text;
+	QString output_text;
 	int i,j;
-	int rows=numRows();
-	int cols=numCols();
+	int rows = numRows();
+	int cols = numCols();
 	int selectedCols = 0;
 	int topRow = 0, bottomRow = 0;
 	int *sCols;
-	if (exportSelection){
-		for (i=0; i<cols; i++){
-			if (d_table->isColumnSelected(i))
+	if (exportSelection)
+	{
+		for (i=0; i<cols; i++)
+		{
+			if (isColumnSelected(i))
 				selectedCols++;
 		}
 
 		sCols = new int[selectedCols];
-		int aux = 1;
-		for (i=0; i<cols; i++){
-			if (d_table->isColumnSelected(i)){
-				sCols[aux] = i;
-				aux++;
+		int temp = 1;
+		for (i=0; i<cols; i++)
+		{
+			if (isColumnSelected(i))
+			{
+				sCols[temp] = i;
+				temp++;
 			}
 		}
 
-		for (i=0; i<rows; i++)
-		{
-			if (d_table->isRowSelected(i))
-			{
-				topRow = i;
-				break;
-			}
-		}
-
-		for (i=rows - 1; i>0; i--)
-		{
-			if (d_table->isRowSelected(i))
-			{
-				bottomRow = i;
-				break;
-			}
-		}
+		topRow = firstSelectedRow();
+		bottomRow = lastSelectedRow();
 	}
 
 	if (withLabels)
 	{
-		QStringList header=colNames();
-		QStringList ls=header.grep ( QRegExp ("\\D"));
+		QStringList header = colNames();
+		QStringList ls = header.filter(QRegExp ("\\D"));
 		if (exportSelection)
 		{
-			for (i=1;i<selectedCols;i++)
+			for (i=1; i<selectedCols; i++)
 			{
 				if (ls.count()>0)
-					text+=header[sCols[i]]+separator;
+					output_text += header[sCols[i]] + separator;
 				else
-					text+="C"+header[sCols[i]]+separator;
+					output_text += "C"+header[sCols[i]] + separator;
 			}
 
 			if (ls.count()>0)
-				text+=header[sCols[selectedCols]] + "\n";
+				output_text += header[sCols[selectedCols]] + "\n";
 			else
-				text+="C"+header[sCols[selectedCols]] + "\n";
+				output_text += "C" + header[sCols[selectedCols]] + "\n";
 		}
 		else
 		{
 			if (ls.count()>0)
 			{
 				for (j=0; j<cols-1; j++)
-					text+=header[j]+separator;
-				text+=header[cols-1]+"\n";
+					output_text += header[j]+separator;
+				output_text += header[cols-1]+"\n";
 			}
 			else
 			{
 				for (j=0; j<cols-1; j++)
-					text+="C"+header[j]+separator;
-				text+="C"+header[cols-1]+"\n";
+					output_text += "C" + header[j] + separator;
+				output_text += "C" + header[cols-1] + "\n";
 			}
 		}
 	}// finished writting labels
 
 	if (exportSelection)
 	{
-		for (i=topRow;i<=bottomRow; i++)
+		for (i=topRow; i<=bottomRow; i++)
 		{
-			for (j=1;j<selectedCols;j++)
-				text+=text(i, sCols[j]) + separator;
-			text+=text(i, sCols[selectedCols]) + "\n";
+			for (j=1; j<selectedCols; j++)
+				output_text += text(i, sCols[j]) + separator;
+			output_text += text(i, sCols[selectedCols]) + "\n";
 		}
-		delete[] sCols;//free memory
+		delete[] sCols; //free memory
 	}
 	else
 	{
 		for (i=0;i<rows;i++)
 		{
 			for (j=0;j<cols-1;j++)
-				text+=text(i,j)+separator;
-			text+=text(i,cols-1)+"\n";
+				output_text += text(i,j)+separator;
+			output_text += text(i,cols-1)+"\n";
 		}
 	}
-	QTextStream t( &f );
-	t << text;
-	f.close();
-#endif
+	QTextStream text_stream( &file );
+	text_stream << output_text;
+	file.close();
 	return true;
-}
-
-void Table::moveCurrentCell()
-{
-	// TODO: remove
-#if 0
-	int cols=numCols();
-	int row=d_table->currentRow();
-	int col=d_table->currentColumn();
-	d_table->clearSelection (true);
-
-	if (col+1<cols)
-	{
-		d_table->setCurrentCell(row, col+1);
-		d_table->selectCells(row, col+1, row, col+1);
-	}
-	else
-	{
-		if(row+1 >= numRows())
-			d_table->setNumRows(row + 11);
-
-		d_table->setCurrentCell (row+1, 0);
-		d_table->selectCells(row+1, 0, row+1, 0);
-	}
-#endif
 }
 
 void Table::customEvent(QEvent *e)
@@ -1056,113 +1018,12 @@ void Table::setNumCols(int cols)
 	d_future_table->setColumnCount(cols);
 }
 
-void Table::resizeRows(int r)
-{
-	// TODO: obsolete
-	int rows = numRows();
-	if (rows == r)
-		return;
-
-	if (rows > r)
-	{
-		QString text= tr("Rows will be deleted from the table!");
-		text+="<p>"+tr("Do you really want to continue?");
-		int i,cols = numCols();
-		switch( QMessageBox::information(this,tr("SciDAVis"), text, tr("Yes"), tr("Cancel"), 0, 1 ) )
-		{
-			case 0:
-				QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-				setNumRows(r);
-				for (i=0; i<cols; i++)
-					emit modifiedData(this, colName(i));
-
-				QApplication::restoreOverrideCursor();
-				break;
-
-			case 1:
-				return;
-				break;
-		}
-	}
-	else
-	{
-		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-		setNumRows(r);
-		QApplication::restoreOverrideCursor();
-	}
-
-	emit modifiedWindow(this);
-}
-
-void Table::resizeCols(int c)
-{
-	// TODO: obsolete
-#if 0
-	int cols = numCols();
-	if (cols == c)
-		return;
-
-	if (cols > c){
-		QString text= tr("Columns will be deleted from the table!");
-		text+="<p>"+tr("Do you really want to continue?");
-		switch( QMessageBox::information(this,tr("SciDAVis"), text, tr("Yes"), tr("Cancel"), 0, 1 ) ){
-			case 0: {
-						QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-						Q3MemArray<int> columns(cols-c);
-						for (int i=cols-1; i>=c; i--){
-							QString name = colName(i);
-							emit removedCol(name);
-							columns[i-c]=i;
-
-							commands.removeLast();
-							comments.removeLast();
-							col_format.removeLast();
-							col_label.removeLast();
-							colTypes.removeLast();
-							col_plot_type.removeLast();
-						}
-
-						d_table->removeColumns(columns);
-						QApplication::restoreOverrideCursor();
-						break;
-					}
-
-			case 1:
-					return;
-					break;
-		}
-	}
-	else{
-		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-		addColumns(c-cols);
-		setHeaderColType();
-		QApplication::restoreOverrideCursor();
-	}
-	emit modifiedWindow(this);
-#endif
-}
-
 void Table::copy(Table *m)
 {
-	// TODO: port
-#if 0
-	for (int i=0; i<numRows(); i++)
-	{
-		for (int j=0; j<numCols(); j++)
-			setText(i,j,m->text(i,j));
-	}
-
-	setColWidths(m->columnWidths());
-	col_label = m->colNames();
-	col_plot_type = m->plotDesignations();
-	d_show_comments = m->commentsEnabled();
-	comments = m->colComments();
-	setHeaderColType();
-
-	commands = m->getCommands();
-	setColumnTypes(m->columnTypes());
-	col_format = m->getColumnsFormat();
-#endif
+	if (!m)
+        return;
+	
+	d_future_table->copy(m->d_future_table);
 }
 
 QString Table::saveAsTemplate(const QString& geometryInfo)
@@ -1178,82 +1039,57 @@ QString Table::saveAsTemplate(const QString& geometryInfo)
 	return s;
 }
 
-void Table::restore(const QStringList& lst)
+// TODO vvvvvvv
+
+void Table::restore(const QStringList& list_in)
 {
-	// TODO: ...
-#if 0
-	QStringList l;
-	QStringList::const_iterator i=lst.begin();
+// TODO: obsolete, remove in 0.3.0, only needed for template loading
+	QStringList temp_list;
+	QStringList::const_iterator iterator=list_in.begin();
 
-	l= (*i++).split("\t");
-	l.remove(l.first());
-	importV0x0001XXHeader(l);
+	temp_list= (*iterator++).split("\t");
+	temp_list.removeFirst();
+	importV0x0001XXHeader(temp_list);
 
-	setColWidths((*i).right((*i).length()-9).split("\t", QString::SkipEmptyParts));
-	i++;
+	setColWidths((*iterator).right((*iterator).length()-9).split("\t", QString::SkipEmptyParts));
+	iterator++;
 
-	l = (*i++).split("\t");
-	if (l[0] == "com")
+	temp_list = (*iterator++).split("\t");
+	if (temp_list[0] == "com")
 	{
-		l.remove(l.first());
-		setCommands(l);
-	} else if (l[0] == "<com>") {
-		commands.clear();
+		temp_list.removeFirst();
+		setCommands(temp_list);
+	} 
+	else if (temp_list[0] == "<com>") 
+	{
+		QStringList commands;
 		for (int col=0; col<numCols(); col++)
 			commands << "";
-		for (; i != lst.end() && *i != "</com>"; i++)
+		for (; iterator != list_in.end() && *iterator != "</com>"; iterator++)
 		{
-			int col = (*i).mid(9,(*i).length()-11).toInt();
+			int col = (*iterator).mid(9,(*iterator).length()-11).toInt();
 			QString formula;
-			for (i++; i!=lst.end() && *i != "</col>"; i++)
-				formula += *i + "\n";
+			for (iterator++; iterator!=list_in.end() && *iterator != "</col>"; iterator++)
+				formula += *iterator + "\n";
 			formula.truncate(formula.length()-1);
 			commands[col] = formula;
 		}
-		i++;
+		iterator++;
+		setCommands(commands);
 	}
 
-	l = (*i++).split("\t");
-	l.remove(l.first());
-	setColumnTypes(l);
+	temp_list = (*iterator++).split("\t");
+	temp_list.removeFirst();
+	setColumnTypes(temp_list);
 
-	l = (*i++).split("\t");
-	l.remove(l.first());
-	setColComments(l);
-#endif
+	temp_list = (*iterator++).split("\t");
+	temp_list.removeFirst();
+	setColComments(temp_list);
 }
 
 void Table::clear()
 {
 	d_future_table->clear();
-}
-
-void Table::setColumnHeader(int index, const QString& label)
-{
-	// TODO: remove
-#if 0
-	Q3Header *head = d_table->horizontalHeader();
-
-	if (d_show_comments)
-	{
-		QString s = label;
-
-		int lines = d_table->columnWidth(index)/d_table->horizontalHeader()->fontMetrics().averageCharWidth();
-		head->setLabel(index, s.remove("\n") + "\n" + QString(lines, '_') + "\n" + comments[index]);
-	}
-	else
-		head->setLabel(index, label);
-#endif
-}
-
-void Table::setNumericPrecision(int prec)
-{
-	// TODO: obsolete
-#if 0
-	d_numeric_precision = prec;
-	for (int i=0; i<numCols(); i++)
-		col_format[i] = "0/"+QString::number(prec);
-#endif
 }
 
 QStringList Table::colNames()
@@ -1287,16 +1123,6 @@ QList<int> Table::plotDesignations()
 	return list;
 }
 
-QStringList Table::getCommands()
-{
-	QStringList list;
-	if (d_future_table->rowCount() < 1) 
-		return list;
-	for (int i=0; i<d_future_table->columnCount(); i++)
-		list << column(i)->formula(0);
-	return list;
-}
-
 QList<int> Table::columnTypes()
 {
 	QList<int> list;
@@ -1312,6 +1138,7 @@ int Table::columnType(int col)
 
 void Table::setColumnTypes(QList<int> ctl)
 {
+	// TODO: convert Date/Time -> DateTime
 	Q_ASSERT(ctl.size() == d_future_table->columnCount());
 	for (int i=0; i<d_future_table->columnCount(); i++)
 		column(i)->setColumnMode((SciDAVis::ColumnMode)ctl.at(i));
@@ -1326,12 +1153,6 @@ QString Table::columnFormat(int col)
 {
 	// TODO: obsolete
 	return QString();
-}
-
-QStringList Table::getColumnsFormat()
-{
-	// TODO: obsolete
-	return QStringList();
 }
 
 int Table::verticalHeaderWidth()

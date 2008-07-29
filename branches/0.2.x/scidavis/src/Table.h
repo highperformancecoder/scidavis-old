@@ -85,8 +85,6 @@ public slots:
 	int columnCount();
 	void setNumRows(int rows);
 	void setNumCols(int cols);
-	void resizeRows(int);
-	void resizeCols(int);
 	void handleChange();
 	void handleRowChange();
 	void handleColumnChange(int,int);
@@ -124,8 +122,6 @@ public slots:
 	void importV0x0001XXHeader(QStringList header);
 	void setText(int row,int col,const QString & text);
 
-/////	void cellEdited(int,int col);
-	void moveCurrentCell();
 	void clearCell(int row, int col);
 
 	void print();
@@ -150,7 +146,6 @@ public slots:
 	int colX(int col);
 	int colY(int col);
 
-	QStringList getCommands();
 	//! Set all column formulae.
 	void setCommands(const QStringList& com);
 	//! Set all column formulae.
@@ -191,10 +186,6 @@ public slots:
 	int columnWidth(int col);
 	void setColWidths(const QStringList& widths);
 
-#if 0 // remove
-	void setSelectedCol(int col){selectedCol = col;};
-	int selectedColumn(){return selectedCol;};
-#endif
 	int numSelectedRows();
 
 	void columnNumericFormat(int col, char *f, int *precision);
@@ -208,7 +199,6 @@ public slots:
 
 
 	QString columnFormat(int col);
-	QStringList getColumnsFormat();
 
 	bool exportASCII(const QString& fname, const QString& separator,
 					bool withLabels = false, bool exportSelection = false);
@@ -240,9 +230,6 @@ public slots:
 	QString saveAsTemplate(const QString& geometryInfo);
 	void restore(const QStringList& lst);
 
-	//! Notifies the main application that the width of a table column has been modified by the user.
-////	void colWidthModified(int, int, int);
-
 signals:
 	void changedColHeader(const QString&, const QString&);
 	void removedCol(const QString&);
@@ -251,9 +238,6 @@ signals:
 	void showContextMenu(bool selection);
 	void createTable(const QString&,int,int,const QString&);
 
-private:
-	//! Internal function to change the column header
-	void setColumnHeader(int index, const QString& label);
 };
 
 #endif
