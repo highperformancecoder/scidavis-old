@@ -346,18 +346,7 @@ void Table::cutSelection()
 	WAIT_CURSOR;
 	beginMacro(tr("%1: cut selected cell(s)").arg(name()));
 	copySelection();
-	QList<Column*> list = d_view->selectedColumns();
-	Column * temp = new Column("temp", QStringList(QString()));
-	foreach(Column * col_ptr, list)
-	{
-		AbstractSimpleFilter * in_fltr = col_ptr->inputFilter();
-		in_fltr->input(0, temp);
-		int col = columnIndex(col_ptr);
-		for(int row=first; row<last; row++)
-			if(d_view->isCellSelected(row, col)) col_ptr->copy(in_fltr->output(0), 0, row, 1);  
-		in_fltr->input(0, 0);
-	}
-	delete temp;
+	clearSelectedCells();
 	endMacro();
 	RESET_CURSOR;
 }
@@ -382,9 +371,21 @@ void Table::copySelection()
 	for(int r=0; r<rows; r++)
 	{
 		for(int c=0; c<cols; c++)
-		{
+		{	
+			Column *col_ptr = column(first_col + c);
 			if(d_view->isCellSelected(first_row + r, first_col + c))
-				output_str += text(first_row + r, first_col + c);
+			{
+				if (col_ptr->dataType() == SciDAVis::TypeDouble)
+				{
+					Double2StringFilter * out_fltr = static_cast<Double2StringFilter *>(col_ptr->outputFilter());
+					output_str += QLocale().toString(col_ptr->valueAt(first_row + r), 
+							out_fltr->numericFormat(), 16); // copy with max. precision
+				}
+				else
+				{
+					output_str += text(first_row + r, first_col + c);
+				}
+			}
 			if(c < cols-1)
 				output_str += "\t";
 		}
@@ -470,7 +471,7 @@ void Table::pasteIntoSelection()
 					AbstractSimpleFilter * in_fltr = col_ptr->inputFilter();
 					temp->setTextAt(0, cell_texts.at(r).at(c));
 					in_fltr->input(0, temp);
-					col_ptr->copy(in_fltr->output(0), 0, first_row+c, 1);  
+					col_ptr->copy(in_fltr->output(0), 0, first_row+r, 1);  
 					in_fltr->input(0,0);
 				}
 			}
@@ -1027,6 +1028,7 @@ void Table::createActions()
 	icon_temp->addPixmap(QPixmap(":/16x16/fx.png"));
 	icon_temp->addPixmap(QPixmap(":/32x32/fx.png"));
 	action_set_formula = new QAction(*icon_temp, tr("Assign &Formula"), this);
+	action_set_formula->setShortcut(tr("Alt+Q"));
 	actionManager()->addAction(action_set_formula, "set_formula"); 
 	delete icon_temp;
 
@@ -1041,6 +1043,7 @@ void Table::createActions()
 	icon_temp->addPixmap(QPixmap(":/16x16/recalculate.png"));
 	icon_temp->addPixmap(QPixmap(":/32x32/recalculate.png"));
 	action_recalculate = new QAction(*icon_temp, tr("Recalculate"), this);
+	action_recalculate->setShortcut(tr("Ctrl+Return"));
 	actionManager()->addAction(action_recalculate, "recalculate"); 
 	delete icon_temp;
 
@@ -1062,6 +1065,7 @@ void Table::createActions()
 	icon_temp->addPixmap(QPixmap(":/16x16/table_options.png"));
 	icon_temp->addPixmap(QPixmap(":/32x32/table_options.png"));
 	action_toggle_tabbar = new QAction(*icon_temp, QString("Show/Hide Controls"), this); // show/hide control tabs
+	action_toggle_tabbar->setShortcut(tr("F12"));
 	actionManager()->addAction(action_toggle_tabbar, "toggle_tabbar"); 
 	delete icon_temp;
 
@@ -1103,6 +1107,7 @@ void Table::createActions()
 	icon_temp->addPixmap(QPixmap(":/16x16/go_to_cell.png"));
 	icon_temp->addPixmap(QPixmap(":/32x32/go_to_cell.png"));
 	action_go_to_cell = new QAction(*icon_temp, tr("&Go to Cell"), this);
+	action_go_to_cell->setShortcut(tr("Ctrl+Alt+G"));
 	actionManager()->addAction(action_go_to_cell, "go_to_cell"); 
 	delete icon_temp;
 
@@ -1186,7 +1191,7 @@ void Table::createActions()
 	actionManager()->addAction(action_sort_columns, "sort_columns"); 
 	delete icon_temp;
 
-	action_statistics_columns = new QAction(QIcon(QPixmap(":/col_stat.xpm")), tr("Statisti&cs"), this);
+	action_statistics_columns = new QAction(QIcon(QPixmap(":/col_stat.xpm")), tr("Column Statisti&cs"), this);
 	action_statistics_columns->setToolTip(tr("statistics on columns"));
 	actionManager()->addAction(action_statistics_columns, "statistics_columns"); 
 
@@ -1194,6 +1199,7 @@ void Table::createActions()
 	icon_temp->addPixmap(QPixmap(":/16x16/column_format_type.png"));
 	icon_temp->addPixmap(QPixmap(":/32x32/column_format_type.png"));
 	action_type_format = new QAction(*icon_temp, tr("Change &Type && Format"), this);
+	action_type_format->setShortcut(tr("Ctrl+Alt+O"));
 	actionManager()->addAction(action_type_format, "type_format"); 
 	delete icon_temp;
 
@@ -1233,7 +1239,7 @@ void Table::createActions()
 	actionManager()->addAction(action_add_rows, "add_rows"); 
 	delete icon_temp;
 
-	action_statistics_rows = new QAction(QIcon(QPixmap(":/stat_rows.xpm")), tr("Statisti&cs"), this);
+	action_statistics_rows = new QAction(QIcon(QPixmap(":/stat_rows.xpm")), tr("Row Statisti&cs"), this);
 	action_statistics_rows->setToolTip(tr("statistics on rows"));
 	actionManager()->addAction(action_statistics_rows, "statistics_rows"); 
 }

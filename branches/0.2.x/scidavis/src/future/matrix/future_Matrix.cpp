@@ -235,7 +235,8 @@ void Matrix::copySelection()
 		for(int c=0; c<cols; c++)
 		{
 			if(d_view->isCellSelected(first_row + r, first_col + c))
-				output_str += text(first_row + r, first_col + c);
+				output_str += QLocale().toString(cell(first_row + r, first_col + c), 
+						d_matrix_private->numericFormat(), 16); // copy with max. precision
 			if(c < cols-1)
 				output_str += "\t";
 		}
@@ -553,6 +554,7 @@ void Matrix::createActions()
 	icon_temp->addPixmap(QPixmap(":/16x16/fx.png"));
 	icon_temp->addPixmap(QPixmap(":/32x32/fx.png"));
 	action_set_formula = new QAction(*icon_temp, tr("Assign &Formula"), this);
+	action_set_formula->setShortcut(tr("Alt+Q"));
 	actionManager()->addAction(action_set_formula, "set_formula"); 
 	delete icon_temp;
 	
@@ -568,6 +570,7 @@ void Matrix::createActions()
 	icon_temp->addPixmap(QPixmap(":/16x16/table_options.png"));
 	icon_temp->addPixmap(QPixmap(":/32x32/table_options.png"));
 	action_toggle_tabbar = new QAction(*icon_temp, QString("Show/Hide Controls"), this); // show/hide control tabs
+	action_toggle_tabbar->setShortcut(tr("F12"));
 	actionManager()->addAction(action_toggle_tabbar, "toggle_tabbar"); 
 	delete icon_temp;
 
