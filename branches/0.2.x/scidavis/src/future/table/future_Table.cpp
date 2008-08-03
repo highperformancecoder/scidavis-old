@@ -226,9 +226,21 @@ void Table::insertRows(int before, int count)
 
 void Table::setRowCount(int new_size)
 {
-	if( (new_size < 0) || (new_size == rowCount()) ) return;
+	if( (new_size < 0) || (new_size == d_table_private->rowCount()) ) return;
 	WAIT_CURSOR;
+	beginMacro(QObject::tr("%1: set the number of rows to %2").arg(name()).arg(new_size));
+	if (new_size < d_table_private->rowCount())
+	{
+		int end = d_table_private->columnCount();
+		for(int col=0; col<end; col++)
+		{	
+			Column *col_ptr = d_table_private->column(col);
+			if (col_ptr->rowCount() > new_size)
+				col_ptr->removeRows(new_size, col_ptr->rowCount() - new_size);
+		}
+	}
 	exec(new TableSetNumberOfRowsCmd(d_table_private, new_size));
+	endMacro();
 	RESET_CURSOR;
 }
 
@@ -520,8 +532,9 @@ void Table::setFormulaForSelection()
 void Table::recalculateSelectedCells()
 {
 	if (!d_view) return;
-	// TODO
-	QMessageBox::information(0, "info", "not yet implemented");
+#ifdef LEGACY_CODE_0_2_x
+	emit recalculate();
+#endif
 }
 
 void Table::fillSelectedCellsWithRowNumbers()
@@ -769,14 +782,18 @@ void Table::sortSelectedColumns()
 
 void Table::statisticsOnSelectedColumns()
 {
-	// TODO
-	QMessageBox::information(0, "info", "not yet implemented");
+#ifdef LEGACY_CODE_0_2_x
+	// TODO: this is only an ugly hack for 0.2.0
+	emit requestColumnStatistics();
+#endif
 }
 
 void Table::statisticsOnSelectedRows()
 {
-	// TODO
-	QMessageBox::information(0, "info", "not yet implemented");
+#ifdef LEGACY_CODE_0_2_x
+	// TODO: this is only an ugly hack for 0.2.0
+	emit requestRowStatistics();
+#endif
 }
 
 void Table::insertEmptyRows()
@@ -2019,6 +2036,10 @@ bool Table::load(XmlStreamReader * reader)
 {
 	if(reader->isStartElement() && reader->name() == "table") 
 	{
+		setColumnCount(0);
+		setRowCount(0);
+		setComment("");
+
 		if (!readBasicAttributes(reader)) return false;
 
 		// read dimensions
@@ -2031,8 +2052,6 @@ bool Table::load(XmlStreamReader * reader)
 			reader->raiseError(tr("invalid row or column count"));
 			return false;
 		}
-		setRowCount(rows);
-
 		QList<Column *> columns;
 		// read child elements
 		while (!reader->atEnd()) 
@@ -2068,6 +2087,7 @@ bool Table::load(XmlStreamReader * reader)
 				}
 			} 
 		}
+		setRowCount(rows);
 		appendColumns(columns);
 		if (cols != columnCount())
 			reader->raiseWarning(tr("columns attribute and number of read columns do not match"));
@@ -2229,7 +2249,7 @@ void Table::Private::removeColumns(int first, int count)
 		d_column_widths.removeAt(first);
 	}
 	d_column_count -= count;
-	updateHorizontalHeader(first, d_column_count);
+	updateHorizontalHeader(first, d_column_count-1);
 	emit d_owner->columnsRemoved(first, count);
 }
 
@@ -2301,6 +2321,8 @@ void Table::Private::updateVerticalHeader(int start_row)
 
 void Table::Private::updateHorizontalHeader(int start_col, int end_col)
 {
+	if (start_col > end_col) return;
+
 	while(d_horizontal_header_data.size() < d_column_count)
 		d_horizontal_header_data << QString();
 

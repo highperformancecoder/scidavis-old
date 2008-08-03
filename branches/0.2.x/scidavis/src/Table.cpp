@@ -404,7 +404,6 @@ QString Table::saveColumnTypes()
 	return s+"\n";
 }
 
-// TODO: decide whether multiple formulas can be supported, otherwise make sure the formula is copied on row inserts
 void Table::setCommands(const QStringList& com)
 {
 	for(int i=0; i<(int)com.size() && i<numCols(); i++)
@@ -423,75 +422,56 @@ void Table::setCommands(const QString& com)
 	setCommands(lst);
 }
 
-bool Table::calculate(int col, int startRow, int endRow)
+bool Table::recalculate()
 {
-	if (col < 0 || col >= numCols())
-		return false;
-
 	QApplication::setOverrideCursor(Qt::WaitCursor);
-
-	if (column(col)->formula(0).isEmpty())
+	for (int col=firstSelectedColumn(); col<lastSelectedColumn(); col++)
 	{
-#if 0 // TODO: should an empty formula really mean 0, "", standard date? Wouldn't it be better to not change the cell?
-		for (int i=startRow; i<=endRow; i++)
-		{
-			setText(i, col, "");
-			column(i)->setValueAt(i, 0.0);
-			column(i)->setDataTimeAt(i, QDateTime(QDate(1900,1,1), QTime(12,0,0,0)));
-		}
-#endif
-		QApplication::restoreOverrideCursor();
-		return true;
-	}
+		Column *col_ptr=column(col);
 
-	Script *colscript = scriptEnv->newScript(column(col)->formula(0), this,  QString("<%1>").arg(colName(col)));
-	connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
-	connect(colscript, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
-
-	if (!colscript->compile())
-	{
-		QApplication::restoreOverrideCursor();
-		return false;
-	}
-	if (endRow >= numRows())
-		d_future_table->setRowCount(endRow + 1);
-
-	colscript->setInt(col+1, "j");
-	colscript->setInt(startRow+1, "sr");
-	colscript->setInt(endRow+1, "er");
-	QVariant ret;
-	for (int i=startRow; i<=endRow; i++)
-	{
-		colscript->setInt(i+1,"i");
-		ret = colscript->eval();
-		if(ret.type() == QVariant::Double) 
+		QList< Interval<int> > formula_intervals = col_ptr->formulaIntervals();
+		foreach(Interval<int> interval, formula_intervals)
 		{
-			int prec;
-			char f;
-			columnNumericFormat(col, &f, &prec);
-			column(col)->setValueAt(i, ret.toDouble());
-			setText(i, col, QLocale().toString(ret.toDouble(), f, prec));
-		} 
-		else if(ret.canConvert(QVariant::String))
-			setText(i, col, ret.toString());
-		else 
-		{
-			QApplication::restoreOverrideCursor();
-			return false;
+			QString formula = col_ptr->formula(interval.start());
+			if (formula.isEmpty())
+				continue;
+
+			Script *colscript = scriptEnv->newScript(formula, this,  QString("<%1>").arg(colName(col)));
+			connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
+			connect(colscript, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
+
+			if (!colscript->compile())
+				continue;
+
+			colscript->setInt(col+1, "j");
+			QVariant ret;
+			int start_row = interval.start();
+			int end_row = interval.end();
+			for (int i=start_row; i<=end_row; i++)
+			{
+				colscript->setInt(i+1,"i");
+				ret = colscript->eval();
+				if(ret.type() == QVariant::Double) 
+				{
+					if (col_ptr->dataType() == SciDAVis::TypeDouble)
+						column(col)->setValueAt(i, ret.toDouble());
+					else
+					{
+						int prec;
+						char f;
+						columnNumericFormat(col, &f, &prec);
+						setText(i, col, QLocale().toString(ret.toDouble(), f, prec));
+					}
+				} 
+				else if(ret.canConvert(QVariant::String))
+					setText(i, col, ret.toString());
+				else 
+					break;
+			}
 		}
 	}
-
 	QApplication::restoreOverrideCursor();
 	return true;
-}
-
-bool Table::calculate()
-{
-	bool success = true;
-	for (int col=firstSelectedColumn(); col<=lastSelectedColumn(); col++)
-		if (!calculate(col, firstSelectedRow(), lastSelectedRow()))
-			success = false;
-	return success;
 }
 
 QString Table::saveCommands()
@@ -1008,6 +988,38 @@ void Table::customEvent(QEvent *e)
 		scriptingChangeEvent((ScriptingChangeEvent*)e);
 }
 
+void Table::closeEvent( QCloseEvent *e )
+{
+	if (askOnClose)
+	{
+		switch( QMessageBox::information(this,tr("SciDAVis"),
+					tr("Do you want to hide or delete") + "<p><b>'" + objectName() + "'</b> ?",
+					tr("Delete"), tr("Hide"), tr("Cancel"), 0,2))
+		{
+			case 0:
+				e->accept();
+				d_future_table->remove();
+				return;
+
+			case 1:
+				e->ignore();
+				emit hiddenWindow(this);
+				break;
+
+			case 2:
+				e->ignore();
+				break;
+		}
+	}
+	else
+	{
+		e->accept();
+		d_future_table->remove();
+		return;
+	}
+}
+
+
 void Table::setNumRows(int rows)
 {
 	d_future_table->setRowCount(rows);
@@ -1038,8 +1050,6 @@ QString Table::saveAsTemplate(const QString& geometryInfo)
 	s+=saveComments();
 	return s;
 }
-
-// TODO vvvvvvv
 
 void Table::restore(const QStringList& list_in)
 {
@@ -1138,10 +1148,31 @@ int Table::columnType(int col)
 
 void Table::setColumnTypes(QList<int> ctl)
 {
-	// TODO: convert Date/Time -> DateTime
 	Q_ASSERT(ctl.size() == d_future_table->columnCount());
 	for (int i=0; i<d_future_table->columnCount(); i++)
-		column(i)->setColumnMode((SciDAVis::ColumnMode)ctl.at(i));
+	{
+		switch (ctl.at(i))
+		{
+			//	old enum: enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5};
+			case 0:
+				column(i)->setColumnMode(SciDAVis::Numeric);
+				break;
+			case 1:
+				column(i)->setColumnMode(SciDAVis::Text);
+				break;
+			case 2:
+			case 3:
+			case 6:
+				column(i)->setColumnMode(SciDAVis::DateTime);
+				break;
+			case 4:
+				column(i)->setColumnMode(SciDAVis::Month);
+				break;
+			case 5:
+				column(i)->setColumnMode(SciDAVis::Day);
+				break;
+		}
+	}
 }
 
 void Table::setColumnType(int col, SciDAVis::ColumnMode mode) 

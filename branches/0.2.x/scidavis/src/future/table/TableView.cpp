@@ -297,6 +297,7 @@ void TableView::toggleComments()
 void TableView::showComments(bool on)
 {
 	d_horizontal_header->showComments(on);
+	update();
 }
 
 void TableView::currentColumnChanged(const QModelIndex & current, const QModelIndex & previous)

@@ -79,6 +79,11 @@ class TableModel : public QAbstractItemModel
 		QModelIndex parent(const QModelIndex & child) const;
 		//@}
 
+#ifdef LEGACY_CODE_0_2_x
+		bool isReadOnly() const { return d_read_only; }
+		void setReadOnly(bool read_only) { d_read_only =  read_only; }
+#endif
+
 		Column * column(int index); // this is needed for the comment header view
 	private slots:
 		//! \name Handlers for events from Table
@@ -96,6 +101,10 @@ class TableModel : public QAbstractItemModel
 
 	private:
 		future::Table * d_table;
+
+#ifdef LEGACY_CODE_0_2_x
+		bool d_read_only;
+#endif
 }; 
 
 #endif

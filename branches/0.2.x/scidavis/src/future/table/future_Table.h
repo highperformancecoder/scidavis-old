@@ -47,6 +47,7 @@ class QPoint;
 class QAction;
 class AbstractColumn;
 class ActionManager;
+class TableStatistics;
 
 namespace future
 {
@@ -91,6 +92,7 @@ class Table : public AbstractPart
 #else
 		Table(void *engine, int rows, int columns, const QString &name);
 		void setView(TableView * view);
+		friend class ::TableStatistics;
 #endif
 		~Table();
 
@@ -128,7 +130,7 @@ class Table : public AbstractPart
 		void removeRows(int first, int count);
 		void insertRows(int before, int count);
 		void appendRows(int count) { insertRows(rowCount(), count); }
-		//! Set the number of rows
+		//! Set the number of rows of the table
 		void setRowCount(int new_size);
 		//! Return the total number of columns in the table
 		int columnCount() const;
@@ -361,6 +363,8 @@ class Table : public AbstractPart
 		void headerDataChanged(Qt::Orientation orientation, int first, int last);
 #ifdef LEGACY_CODE_0_2_x
 		void recalculate();
+		void requestRowStatistics();
+		void requestColumnStatistics();
 #endif
 
 	private:

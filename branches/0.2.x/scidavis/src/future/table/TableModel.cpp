@@ -35,6 +35,9 @@
 
 TableModel::TableModel(future::Table * table)
 	: QAbstractItemModel(0), d_table(table)
+#ifdef LEGACY_CODE_0_2_x
+	, d_read_only(false)
+#endif
 {
 	connect(d_table, SIGNAL(columnsAboutToBeInserted(int, QList<Column *>)),
 			this, SLOT(handleColumnsAboutToBeInserted(int, QList<Column *>)));
@@ -64,8 +67,15 @@ TableModel::~TableModel()
 
 Qt::ItemFlags TableModel::flags(const QModelIndex & index ) const
 {
+#ifdef LEGACY_CODE_0_2_x
+	Qt::ItemFlags result = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+	if (!isReadOnly()) result |= Qt::ItemIsEditable;
+	if (index.isValid())
+		return result;
+#else
 	if (index.isValid())
 		return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+#endif
 	else
 		return Qt::ItemIsEnabled;
 }

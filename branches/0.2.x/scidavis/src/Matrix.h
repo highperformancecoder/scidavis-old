@@ -92,6 +92,7 @@ public:
 	 * Currently handles SCRIPTING_CHANGE_EVENT only.
 	 */
 	void customEvent(QEvent *e);
+	void closeEvent( QCloseEvent *);
 
 	void updateDecimalSeparators();
 
@@ -121,8 +122,6 @@ public slots:
 	//! Calculate the determinant of the matrix
 	double determinant();
 
-	//! Calculate matrix values using the formula
-	bool calculate(int startRow = 0, int endRow = -1, int startCol = 0, int endCol = -1);
 	//! Calculate matrix values using the formula for all selected cells
 	bool recalculate();
 

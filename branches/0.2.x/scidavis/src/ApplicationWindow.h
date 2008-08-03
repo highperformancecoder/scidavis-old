@@ -359,9 +359,6 @@ public slots:
 	void exportAllTables(const QString& sep, bool colNames, bool expSelection);
 	void exportASCII(const QString& tableName, const QString& sep, bool colNames, bool expSelection);
 
-	//! recalculate selected cells of current table
-	void recalculateTable();
-
 	TableStatistics *newTableStatistics(Table *base, int type, QList<int>,
 	    const QString &caption=QString::null);
 	//@}
@@ -1116,6 +1113,7 @@ private:
 	Project * d_project;
 
 private slots:
+	void removeDependentTableStatistics(const AbstractAspect *aspect);
 	//! Set the active window selected from the context menu's dependency list
 	/**
 	 * See also: http://doc.trolltech.com/4.3/mainwindows-recentfiles-mainwindow-cpp.html

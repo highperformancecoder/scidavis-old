@@ -435,55 +435,6 @@ bool Matrix::recalculate()
 	return true;
 }
 
-bool Matrix::calculate(int startRow, int endRow, int startCol, int endCol)
-{
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-	Script *script = scriptEnv->newScript(formula(), this, QString("<%1>").arg(name()));
-	connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
-	connect(script, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
-	if (!script->compile())
-	{
-		QApplication::restoreOverrideCursor();
-		return false;
-	}
-
-    this->blockSignals(true);
-	int rows = numRows();
-	int cols = numCols();
-
-	if (endRow < 0)
-		endRow = rows - 1;
-	if (endCol < 0)
-		endCol = cols - 1;
-	if (endCol >= cols)
-		setNumCols(endCol+1);
-	if (endRow >= rows)
-		setNumRows(endRow+1);
-
-	QVariant ret;
-	saveCellsToMemory();
-	double dx = fabs(xEnd()-xStart())/(double)(numRows()-1);
-	double dy = fabs(yEnd()-yStart())/(double)(numCols()-1);
-	for(int row = startRow; row <= endRow; row++)
-		for(int col = startCol; col <= endCol; col++)
-		{
-			script->setInt(row+1, "i");
-			script->setInt(row+1, "row");
-			script->setDouble(yStart()+row*dy, "y");
-			script->setInt(col+1, "j");
-			script->setInt(col+1, "col");
-			script->setDouble(xStart()+col*dx, "x");
-			ret = script->eval();
-			setCell(row, col, ret.toDouble());
-		}
-	forgetSavedCells();
-
-    this->blockSignals(false);
-	emit modifiedWindow(this);
-	QApplication::restoreOverrideCursor();
-	return true;
-}
-
 void Matrix::clearSelection()
 {
 	d_future_matrix->clearSelectedCells();
@@ -567,6 +518,37 @@ void Matrix::customEvent(QEvent *e)
 {
 	if (e->type() == SCRIPTING_CHANGE_EVENT)
 		scriptingChangeEvent((ScriptingChangeEvent*)e);
+}
+
+void Matrix::closeEvent( QCloseEvent *e )
+{
+	if (askOnClose)
+	{
+		switch( QMessageBox::information(this,tr("SciDAVis"),
+					tr("Do you want to hide or delete") + "<p><b>'" + objectName() + "'</b> ?",
+					tr("Delete"), tr("Hide"), tr("Cancel"), 0,2))
+		{
+			case 0:
+				e->accept();
+				d_future_matrix->remove();
+				return;
+
+			case 1:
+				e->ignore();
+				emit hiddenWindow(this);
+				break;
+
+			case 2:
+				e->ignore();
+				break;
+		}
+	}
+	else
+	{
+		e->accept();
+		d_future_matrix->remove();
+		return;
+	}
 }
 
 void Matrix::exportPDF(const QString& fileName)

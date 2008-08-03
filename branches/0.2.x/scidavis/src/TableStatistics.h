@@ -43,7 +43,7 @@ class TableStatistics : public Table
 
 	public:
 		//! supported statistics types
-		enum Type { row, column };
+		enum Type { StatRow, StatColumn };
 		TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base, Type, QList<int> targets);
 		//! return the type of statistics
 		Type type() const { return d_type; }
@@ -59,6 +59,9 @@ class TableStatistics : public Table
 		void renameCol(const QString&, const QString&);
 		//! remove statistics of removed columns (to be connected with Table::removedCol)
 		void removeCol(const QString&);
+
+	protected:
+		bool eventFilter( QObject * watched, QEvent * event);
 
 	private:
 		Table *d_base;

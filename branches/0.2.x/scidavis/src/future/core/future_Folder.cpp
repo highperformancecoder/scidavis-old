@@ -84,6 +84,9 @@ bool Folder::load(XmlStreamReader * reader)
 {
 	if(reader->isStartElement() && reader->name() == "folder") 
 	{
+		setComment("");
+		removeAllChildAspects();
+
 		if (!readBasicAttributes(reader)) return false;
 
 		// read child elements

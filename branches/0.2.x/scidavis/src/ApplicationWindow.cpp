@@ -2526,17 +2526,32 @@ void ApplicationWindow::initTable(Table* w)
 TableStatistics *ApplicationWindow::newTableStatistics(Table *base, int type, QList<int> target, const QString &caption)
 {
 	TableStatistics* s = new TableStatistics(scriptEnv, d_workspace, base, (TableStatistics::Type) type, target);
-	if (caption.isEmpty())
-		d_project->addChild(s->d_future_table);
-	else
-	{
+	if (!caption.isEmpty())
 		s->setName(caption);
-		d_project->addChild(s->d_future_table);
-	}
+
+	d_project->addChild(s->d_future_table);
 	connect(base, SIGNAL(modifiedData(Table*,const QString&)), s, SLOT(update(Table*,const QString&)));
 	connect(base, SIGNAL(changedColHeader(const QString&, const QString&)), s, SLOT(renameCol(const QString&, const QString&)));
 	connect(base, SIGNAL(removedCol(const QString&)), s, SLOT(removeCol(const QString&)));
+	connect(base->d_future_table, SIGNAL(aspectAboutToBeRemoved(const AbstractAspect *)), 
+			this, SLOT(removeDependentTableStatistics(const AbstractAspect *)));
 	return s;
+}
+
+void ApplicationWindow::removeDependentTableStatistics(const AbstractAspect *aspect)
+{
+	future::Table *future_table = qobject_cast<future::Table *>(const_cast<AbstractAspect *>(aspect));
+	if (!future_table) return;
+	QWidgetList *windows = windowsList();
+	foreach(QWidget *win, *windows)
+	{
+		TableStatistics *table_stat = qobject_cast<TableStatistics *>(win);
+		if (!table_stat) continue;
+		Table *table = qobject_cast<Table *>(future_table->view());
+		if (!table) continue;
+		if (table_stat->base() == table)
+			d_project->removeChild(table_stat->d_future_table);
+	}
 }
 
 /*
@@ -2716,7 +2731,8 @@ QWidget* ApplicationWindow::window(const QString& name)
 	QWidgetList *windows = windowsList();
 	for (int i = 0; i < windows->count();i++ )
 	{
-		if (windows->at(i)->name() == name)
+		MyWidget *widget = qobject_cast<MyWidget *>(windows->at(i));
+		if (widget && widget->name() == name)
 		{
 			w = windows->at(i);
 			break;
@@ -2734,7 +2750,7 @@ Table* ApplicationWindow::table(const QString& name)
 	QList<QWidget*> *lst = windowsList();
 	foreach(QWidget *w, *lst)
 	{
-		if (w->inherits("Table") && w->name() == caption)
+		if (w->inherits("Table") && static_cast<Table *>(w)->name() == caption)
 		{
 			delete lst;
 			return (Table*)w;
@@ -2756,7 +2772,7 @@ Matrix* ApplicationWindow::matrix(const QString& name)
 	QWidgetList *lst = windowsList();
 	foreach(QWidget *w, *lst)
 	{
-		if (w->inherits("Matrix") && w->name() == caption)
+		if (w->inherits("Matrix") && static_cast<Matrix *>(w)->name() == caption)
 		{
 			delete lst;
 			return (Matrix*)w;
@@ -5350,7 +5366,8 @@ void ApplicationWindow::showTopAxisTitleDialog()
 
 void ApplicationWindow::showExportASCIIDialog()
 {
-	if ( d_workspace->activeWindow() && d_workspace->activeWindow()->inherits("Table"))
+	Table *table = qobject_cast<Table *>(d_workspace->activeWindow());
+	if (table)
 	{
 		ExportDialog* ed= new ExportDialog(this,Qt::WindowContextHelpButtonHint);
 		ed->setAttribute(Qt::WA_DeleteOnClose);
@@ -5360,7 +5377,7 @@ void ApplicationWindow::showExportASCIIDialog()
 				this, SLOT(exportAllTables(const QString&, bool, bool)));
 
 		ed->setTableNames(tableWindows);
-		ed->setActiveTableName(d_workspace->activeWindow()->name());
+		ed->setActiveTableName(table->name());
 		ed->setColumnSeparator(columnSeparator);
 		ed->exec();
 	}
@@ -5383,7 +5400,7 @@ void ApplicationWindow::exportAllTables(const QString& sep, bool colNames, bool 
 			if (w->inherits("Table"))
 			{
 				Table *t = (Table*)w;
-				QString fileName = dir + "/" + w->name() + ".txt";
+				QString fileName = dir + "/" + t->name() + ".txt";
 				QFile f(fileName);
 				if (f.exists(fileName) && confirmOverwrite)
 				{
@@ -5440,18 +5457,6 @@ void ApplicationWindow::exportASCII(const QString& tableName, const QString& sep
 		t->exportASCII(fname, sep, colNames, expSelection);
 		QApplication::restoreOverrideCursor();
 	}
-}
-
-void ApplicationWindow::recalculateTable()
-{
-	QWidget* w = d_workspace->activeWindow();
-	if (!w)
-		return;
-
-	if (w->inherits("Table"))
-		((Table*)w)->calculate();
-	else if (w->inherits("Matrix"))
-		((Matrix*)w)->calculate();
 }
 
 void ApplicationWindow::correlate()
@@ -5536,9 +5541,9 @@ void ApplicationWindow::showColStatistics()
 	{
 		QList<int> targets;
 		for (int i=0; i < t->numCols(); i++)
-			if (t->isColumnSelected(i, true))
+			if (t->isColumnSelected(i, false))
 				targets << i;
-		newTableStatistics(t, TableStatistics::column, targets)->showNormal();
+		newTableStatistics(t, TableStatistics::StatColumn, targets)->showNormal();
 	}
 	else
 		QMessageBox::warning(this, tr("Column selection error"),
@@ -5555,9 +5560,9 @@ void ApplicationWindow::showRowStatistics()
 	{
 		QList<int> targets;
 		for (int i=0; i < t->numRows(); i++)
-			if (t->isRowSelected(i, true))
+			if (t->isRowSelected(i, false))
 				targets << i;
-		newTableStatistics(t, TableStatistics::row, targets)->showNormal();
+		newTableStatistics(t, TableStatistics::StatRow, targets)->showNormal();
 	}
 	else
 		QMessageBox::warning(this, tr("Row selection error"),
@@ -7099,15 +7104,10 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
 		nw = multilayerPlot(generateUniqueName(tr("Graph")));
 		((MultiLayer *)nw)->copy((MultiLayer *)w);
 	} else if (w->inherits("Table")){
-	// TODO: port
-#if 0
 		Table *t = (Table *)w;
 		QString caption = generateUniqueName(tr("Table"));
     	nw = newTable(caption, t->numRows(), t->numCols());
     	((Table *)nw)->copy(t);
-    	QString spec = t->saveToString("geometry\n");
-    	((Table *)nw)->setSpecifications(spec.replace(t->name(), caption));
-#endif
 	} else if (w->inherits("Graph3D")){
 		Graph3D *g = (Graph3D *)w;
 		if (!g->hasData()){
@@ -7426,7 +7426,9 @@ void ApplicationWindow::windowsMenuAboutToShow()
 		windowsMenu->addSeparator();
 		for (int i = 0; i<n; ++i )
 		{
-			int id = windowsMenu->insertItem(windows.at(i)->name(),
+			MyWidget *widget = qobject_cast<MyWidget *>(windows.at(i));
+			if (!widget) continue;
+			int id = windowsMenu->insertItem(widget->name(),
 					this, SLOT( windowsMenuActivated( int ) ) );
 			windowsMenu->setItemParameter( id, i );
 			windowsMenu->setItemChecked( id, d_workspace->activeWindow() == windows.at(i) );
@@ -7437,7 +7439,9 @@ void ApplicationWindow::windowsMenuAboutToShow()
 		windowsMenu->addSeparator();
 		for ( int i = 0; i<9; ++i )
 		{
-			int id = windowsMenu->insertItem(windows.at(i)->name(),
+			MyWidget *widget = qobject_cast<MyWidget *>(windows.at(i));
+			if (!widget) continue;
+			int id = windowsMenu->insertItem(widget->name(),
 					this, SLOT( windowsMenuActivated( int ) ) );
 			windowsMenu->setItemParameter( id, i );
 			windowsMenu->setItemChecked( id, d_workspace->activeWindow() == windows.at(i) );
@@ -7487,7 +7491,7 @@ void ApplicationWindow::showMoreWindows()
 void ApplicationWindow::windowsMenuActivated( int id )
 {
 	QList<QWidget*> windows = d_workspace->windowList();
-	QWidget* w = windows.at( id );
+	MyWidget* w = qobject_cast<MyWidget *>(windows.at(id));
 	if ( w )
 	{
 		w->showNormal();
@@ -7751,8 +7755,8 @@ QStringList ApplicationWindow::depending3DPlots(Matrix *m)
 	QStringList plots;
 	for (int i=0; i<(int)windows->count(); i++)
 	{
-		QWidget *w = windows->at(i);
-		if (w->inherits("Graph3D") && ((Graph3D *)w)->matrix() == m)
+		MyWidget *w = qobject_cast<MyWidget *>(windows->at(i));
+		if (w && w->inherits("Graph3D") && ((Graph3D *)w)->matrix() == m)
 			plots << w->name();
 	}
 	delete windows;
@@ -7767,7 +7771,8 @@ QStringList ApplicationWindow::dependingPlots(const QString& name)
 
 	for (int i=0; i<windows->count(); i++)
 	{
-		QWidget *w = windows->at(i);
+		MyWidget *w = qobject_cast<MyWidget *>(windows->at(i));
+		if (!w) continue;
 		if (w->inherits("MultiLayer"))
 		{
 			QWidgetList lst = ((MultiLayer*)w)->graphPtrs();
@@ -9182,89 +9187,105 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 // TODO: most of this code belongs into Table
 Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &flist)
 {
-	QStringList::const_iterator line = flist.begin();
-
-	QStringList list=(*line).split("\t");
-	QString caption=list[0];
-	int rows = list[1].toInt();
-	int cols = list[2].toInt();
-
-	Table* w = app->newTable(caption, rows, cols);
-	app->setListViewDate(caption, list[3]);
-	w->setBirthDate(list[3]);
-
-	for (line++; line!=flist.end(); line++)
+	if (app->d_file_version < 0x000200)
 	{
-		QStringList fields = (*line).split("\t");
-		if (fields[0] == "geometry" || fields[0] == "tgeometry") {
-			restoreWindowGeometry(app, w, *line);
-		} else if (fields[0] == "header") {
-			fields.pop_front();
-			if (d_file_version >= 78)
-				w->importV0x0001XXHeader(fields);
-			else
-			{
-				w->setColPlotDesignation(list[4].toInt(), SciDAVis::X);
-				w->setColPlotDesignation(list[6].toInt(), SciDAVis::Y);
-				w->setHeader(fields);
-			}
-		} else if (fields[0] == "ColWidth") {
-			fields.pop_front();
-			w->setColWidths(fields);
-		} else if (fields[0] == "com") { // legacy code
-			w->setCommands(*line);
-		} else if (fields[0] == "<com>") {
-			for (line++; line!=flist.end() && *line != "</com>"; line++)
-			{
-				int col = (*line).mid(9,(*line).length()-11).toInt();
-				QString formula;
-				for (line++; line!=flist.end() && *line != "</col>"; line++)
-					formula += *line + "\n";
-				formula.truncate(formula.length()-1);
-				w->setCommand(col,formula);
-			}
-		} else if (fields[0] == "ColType") { // d_file_version > 65
-			fields.pop_front();
-			w->setColumnTypes(fields);
-		} else if (fields[0] == "Comments") { // d_file_version > 71
-			fields.pop_front();
-			w->setColComments(fields);
-		} else if (fields[0] == "WindowLabel") { // d_file_version > 71
-			w->setWindowLabel(fields[1]);
-			w->setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
-			app->setListViewLabel(w->name(), fields[1]);
-		} else // <data> or values
-			break;
-	}
+		QStringList::const_iterator line = flist.begin();
 
-	QApplication::setOverrideCursor(Qt::WaitCursor);
-/// TODO: is any blocking necessary here?
-///	w->table()->blockSignals(true);
-	for (line++; line!=flist.end() && *line != "</data>"; line++)
-	{//read and set table values
-		QStringList fields = (*line).split("\t");
-		int row = fields[0].toInt();
-		for (int col=0; col<cols; col++)
+		QStringList list=(*line).split("\t");
+		QString caption=list[0];
+		int rows = list[1].toInt();
+		int cols = list[2].toInt();
+
+		Table* w = app->newTable(caption, rows, cols);
+		app->setListViewDate(caption, list[3]);
+		w->setBirthDate(list[3]);
+
+		for (line++; line!=flist.end(); line++)
 		{
-		    if (fields.count() >= col+2){
-		        QString cell = fields[col+1];
-		        if (cell.isEmpty())
-                    continue;
-
-		        if (d_file_version < 90 && w->columnType(col) == SciDAVis::Numeric)
-                    w->setCell(row, col, QLocale::c().toDouble(cell.replace(",", ".")));
-		        else if (d_file_version >= 0x000100 && w->columnType(col) == SciDAVis::Numeric)
-                    w->setCell(row, col, cell.toDouble());
-		        else
-                    w->setText(row, col, cell);
-		    }
+			QStringList fields = (*line).split("\t");
+			if (fields[0] == "geometry" || fields[0] == "tgeometry") {
+				restoreWindowGeometry(app, w, *line);
+			} else if (fields[0] == "header") {
+				fields.pop_front();
+				if (d_file_version >= 78)
+					w->importV0x0001XXHeader(fields);
+				else
+				{
+					w->setColPlotDesignation(list[4].toInt(), SciDAVis::X);
+					w->setColPlotDesignation(list[6].toInt(), SciDAVis::Y);
+					w->setHeader(fields);
+				}
+			} else if (fields[0] == "ColWidth") {
+				fields.pop_front();
+				w->setColWidths(fields);
+			} else if (fields[0] == "com") { // legacy code
+				w->setCommands(*line);
+			} else if (fields[0] == "<com>") {
+				for (line++; line!=flist.end() && *line != "</com>"; line++)
+				{
+					int col = (*line).mid(9,(*line).length()-11).toInt();
+					QString formula;
+					for (line++; line!=flist.end() && *line != "</col>"; line++)
+						formula += *line + "\n";
+					formula.truncate(formula.length()-1);
+					w->setCommand(col,formula);
+				}
+			} else if (fields[0] == "ColType") { // d_file_version > 65
+				fields.pop_front();
+				w->setColumnTypes(fields);
+			} else if (fields[0] == "Comments") { // d_file_version > 71
+				fields.pop_front();
+				w->setColComments(fields);
+			} else if (fields[0] == "WindowLabel") { // d_file_version > 71
+				w->setWindowLabel(fields[1]);
+				w->setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
+				app->setListViewLabel(w->name(), fields[1]);
+			} else // <data> or values
+				break;
 		}
-		QApplication::processEvents(QEventLoop::ExcludeUserInput);
-	}
-    QApplication::restoreOverrideCursor();
 
-////	w->table()->blockSignals(false);
-	return w;
+		QApplication::setOverrideCursor(Qt::WaitCursor);
+		/// TODO: is any blocking necessary here?
+		///	w->table()->blockSignals(true);
+		for (line++; line!=flist.end() && *line != "</data>"; line++)
+		{//read and set table values
+			QStringList fields = (*line).split("\t");
+			int row = fields[0].toInt();
+			for (int col=0; col<cols; col++)
+			{
+				if (fields.count() >= col+2){
+					QString cell = fields[col+1];
+					if (cell.isEmpty())
+						continue;
+
+					if (d_file_version < 90 && w->columnType(col) == SciDAVis::Numeric)
+						w->setCell(row, col, QLocale::c().toDouble(cell.replace(",", ".")));
+					else if (d_file_version >= 0x000100 && w->columnType(col) == SciDAVis::Numeric)
+						w->setCell(row, col, cell.toDouble());
+					else
+						w->setText(row, col, cell);
+				}
+			}
+			QApplication::processEvents(QEventLoop::ExcludeUserInput);
+		}
+		QApplication::restoreOverrideCursor();
+
+		////	w->table()->blockSignals(false);
+
+		return w;
+	}
+	else
+	{
+		Table* w = app->newTable("table", 1, 1);
+		QString xml(flist.at(1));
+		XmlStreamReader reader(xml);
+		reader.readNext();
+		reader.readNext(); // read the start document
+		w->d_future_table->load(&reader);
+		restoreWindowGeometry(app, w, flist.at(2));
+
+		return w;
+	}
 }
 
 TableStatistics* ApplicationWindow::openTableStatistics(const QStringList &flist)
@@ -9279,7 +9300,7 @@ TableStatistics* ApplicationWindow::openTableStatistics(const QStringList &flist
 		targets << (*line).section('\t',i,i).toInt();
 
 	TableStatistics* w = newTableStatistics(table(list[1]),
-			list[2]=="row" ? TableStatistics::row : TableStatistics::column, targets, caption);
+			list[2]=="row" ? TableStatistics::StatRow : TableStatistics::StatColumn, targets, caption);
 
 	setListViewDate(caption,list[3]);
 	w->setBirthDate(list[3]);
@@ -10203,6 +10224,10 @@ void ApplicationWindow::connectTable(Table* w)
 	connect (w,SIGNAL(changedColHeader(const QString&,const QString&)),this,SLOT(updateColNames(const QString&,const QString&)));
 	connect (w,SIGNAL(createTable(const QString&,int,int,const QString&)),this,SLOT(newTable(const QString&,int,int,const QString&)));
 
+#ifdef LEGACY_CODE_0_2_x
+	connect(w->d_future_table, SIGNAL(requestRowStatistics()), this, SLOT(showRowStatistics()));
+	connect(w->d_future_table, SIGNAL(requestColumnStatistics()), this, SLOT(showColStatistics()));
+#endif
 	w->askOnCloseEvent(confirmCloseTable);
 }
 
@@ -11602,7 +11627,6 @@ void ApplicationWindow::fitMultiPeak(int profile)
 	}
 }
 
-// TODO: adjust the directories hier to point directly to the correct sections
 void ApplicationWindow::downloadManual()
 {
 	QDesktopServices::openUrl(QUrl("http://sourceforge.net/project/showfiles.php?group_id=199120"));
@@ -11800,7 +11824,7 @@ QStringList ApplicationWindow::matrixNames()
 	QWidgetList *windows = windowsList();
 	foreach(QWidget *w, *windows){
 		if (w->inherits("Matrix"))
-			names << w->name();
+			names << static_cast<Matrix *>(w)->name();
 	}
 	delete windows;
 	return names;
@@ -11809,8 +11833,11 @@ QStringList ApplicationWindow::matrixNames()
 bool ApplicationWindow::alreadyUsedName(const QString& label)
 {
 	QWidgetList *windows = windowsList();
-	foreach(QWidget *w, *windows){
-		if (w->name() == label){
+	foreach(QWidget *w, *windows)
+	{
+		MyWidget *widget = qobject_cast<MyWidget *>(w);
+		if (widget && widget->name() == label)
+		{
 			delete windows;
 			return true;
 		}
@@ -12325,9 +12352,11 @@ void ApplicationWindow::setShowWindowsPolicy(int p)
 		QList<QWidget*> *lst = windowsList();
 		foreach(QWidget *w, *lst)
 		{
-			hiddenWindows->append(w);
-			w->hide();
-			setListView(w->name(),tr("Hidden"));
+			MyWidget *widget = qobject_cast<MyWidget *>(w);
+			if (!widget) continue;
+			hiddenWindows->append(widget);
+			widget->hide();
+			setListView(widget->name(),tr("Hidden"));
 		}
 		delete lst;
 	}
@@ -13140,8 +13169,10 @@ QString ApplicationWindow::generateUniqueName(const QString& name, bool incremen
 
 	for (int i = 0; i < windows->count();i++ )
 	{
-		lst << windows->at(i)->name();
-		if (QString(windows->at(i)->name()).startsWith(name))
+		MyWidget *widget = qobject_cast<MyWidget *>(windows->at(i));
+		if (!widget) continue;
+		lst << widget->name();
+		if (QString(widget->name()).startsWith(name))
 			index++;
 	}
 	delete windows;

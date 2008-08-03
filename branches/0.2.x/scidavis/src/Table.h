@@ -57,8 +57,6 @@ class Table: public TableView, public scripted
 public:
 	future::Table *d_future_table;
 
-// TODO: remove obsolete enum
-//	enum PlotDesignation{All = -1, None = 0, X = 1, Y = 2, Z = 3, xErr = 4, yErr = 5};
 	enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5};
 
    	Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
@@ -77,6 +75,7 @@ public:
 	virtual QString windowLabel() { return d_future_table->comment(); }
 	//! Set the window label
 	virtual void setWindowLabel(const QString& s) { d_future_table->setComment(s); updateCaption(); }
+	void closeEvent( QCloseEvent *);
 public slots:
 	void copy(Table *m);
 	int numRows();
@@ -152,10 +151,8 @@ public slots:
 	void setCommands(const QString& com);
 	//! Set formula for column col.
 	void setCommand(int col, const QString& com);
-	//! Compute specified cells from column formula.
-	bool calculate(int col, int startRow, int endRow);
-	//! Compute selected cells from column formulae; use current cell if there's no selection.
-	bool calculate();
+	//! Compute selected cells from the cell formulas
+	bool recalculate();
 
 	//! \name Row Operations
 	//@{
