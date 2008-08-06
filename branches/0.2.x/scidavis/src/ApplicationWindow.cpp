@@ -7106,15 +7106,15 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
 	} else if (w->inherits("Table")){
 		Table *t = (Table *)w;
 		QString caption = generateUniqueName(tr("Table"));
-    	nw = newTable(caption, t->numRows(), t->numCols());
-    	((Table *)nw)->copy(t);
+		nw = newTable(caption, t->numRows(), t->numCols());
+		((Table *)nw)->copy(t);
 	} else if (w->inherits("Graph3D")){
 		Graph3D *g = (Graph3D *)w;
 		if (!g->hasData()){
-        	QApplication::restoreOverrideCursor();
-        	QMessageBox::warning(this, tr("Duplicate error"), tr("Empty 3D surface plots cannot be duplicated!"));
-        	return 0;
-    	}
+			QApplication::restoreOverrideCursor();
+			QMessageBox::warning(this, tr("Duplicate error"), tr("Empty 3D surface plots cannot be duplicated!"));
+			return 0;
+		}
 
 		QString caption = generateUniqueName(tr("Graph"));
 		QString s = g->formula();

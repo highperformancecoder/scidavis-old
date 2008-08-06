@@ -34,7 +34,9 @@
 #include "lib/Interval.h"
 #include "table/TableModel.h"
 #include "core/datatypes/Double2StringFilter.h"
+#include "core/datatypes/DateTime2StringFilter.h"
 #include "table/AsciiTableImportFilter.h"
+#include "ScriptEdit.h"
 
 #include <QMessageBox>
 #include <QDateTime>
@@ -97,7 +99,34 @@ void Table::init()
 	TableView::setTable(d_future_table);	
 	d_future_table->setView(this);	
 
-	setBirthDate(d_future_table->creationTime().toString(Qt::LocalDate));
+	birthdate = d_future_table->creationTime().toString(Qt::LocalDate);
+
+	ui.gridLayout1->removeWidget(ui.formula_box);
+	delete ui.formula_box;
+    ui.formula_box = new ScriptEdit(scriptEnv, ui.formula_tab);
+    ui.formula_box->setObjectName(QString::fromUtf8("formula_box"));
+    ui.formula_box->setMinimumSize(QSize(60, 10));
+    ui.formula_box->setAcceptRichText(false);
+	ui.gridLayout1->addWidget(ui.formula_box, 1, 0, 1, 3);
+
+
+	for (int i=0; i<columnCount(); i++)
+	{
+		ui.add_reference_combobox->addItem("col(\""+column(i)->name()+"\")"); 
+		ui.add_reference_combobox->addItem("col(\""+column(i)->name()+"\", i)"); 
+	}
+
+	ui.add_function_combobox->addItems(scriptEnv->mathFunctions());
+	updateFunctionDoc();
+	
+	connect(ui.add_function_combobox, SIGNAL(currentIndexChanged(int)), 
+		this, SLOT(updateFunctionDoc()));
+	connect(ui.set_formula_button, SIGNAL(pressed()), 
+		this, SLOT(applyFormula()));
+	connect(ui.add_function_button, SIGNAL(pressed()), 
+		this, SLOT(addFunction()));
+	connect(ui.add_reference_button, SIGNAL(pressed()), 
+		this, SLOT(addReference()));
 
 	connect(d_future_table, SIGNAL(columnsRemoved(int, int)), this, SLOT(handleColumnsRemoved(int, int)));
 	connect(d_future_table, SIGNAL(rowsInserted(int, int)), this, SLOT(handleRowChange()));
@@ -425,7 +454,7 @@ void Table::setCommands(const QString& com)
 bool Table::recalculate()
 {
 	QApplication::setOverrideCursor(Qt::WaitCursor);
-	for (int col=firstSelectedColumn(); col<lastSelectedColumn(); col++)
+	for (int col=firstSelectedColumn(); col<=lastSelectedColumn(); col++)
 	{
 		Column *col_ptr=column(col);
 
@@ -449,6 +478,7 @@ bool Table::recalculate()
 			int end_row = interval.end();
 			for (int i=start_row; i<=end_row; i++)
 			{
+				if (!isCellSelected(i, col)) continue;
 				colscript->setInt(i+1,"i");
 				ret = colscript->eval();
 				if(ret.type() == QVariant::Double) 
@@ -1182,8 +1212,15 @@ void Table::setColumnType(int col, SciDAVis::ColumnMode mode)
 
 QString Table::columnFormat(int col)
 {
-	// TODO: obsolete
-	return QString();
+	// TODO: obsolete, remove in 0.3.0
+	Column * col_ptr = column(col);
+	if (col_ptr->columnMode() != SciDAVis::DateTime &&
+		col_ptr->columnMode() != SciDAVis::Month &&
+		col_ptr->columnMode() != SciDAVis::Day)
+		return QString();
+
+	DateTime2StringFilter *filter = static_cast<DateTime2StringFilter *>(col_ptr->outputFilter());
+	return filter->format();
 }
 
 int Table::verticalHeaderWidth()
@@ -1214,4 +1251,37 @@ bool Table::commentsEnabled()
 {
 	return areCommentsShown();
 }
+
+void Table::applyFormula()
+{
+	QString formula = ui.formula_box->toPlainText();
+	for (int col=firstSelectedColumn(); col<=lastSelectedColumn(); col++)
+	{
+		Column *col_ptr = column(col);
+		for (int row=0; row<d_future_table->rowCount(); row++)
+		{
+			if (isCellSelected(row, col))
+				col_ptr->setFormula(row, formula);
+		}
+	}
+	
+	recalculate();
+}
+
+void Table::addFunction()
+{
+	static_cast<ScriptEdit *>(ui.formula_box)->insertFunction(ui.add_function_combobox->currentText());
+}
+
+void Table::addReference()
+{
+	ui.formula_box->insertPlainText(ui.add_reference_combobox->currentText());
+}
+
+void Table::updateFunctionDoc()
+{
+	ui.add_function_combobox->setToolTip(scriptEnv->mathFunctionDoc(ui.add_function_combobox->currentText()));
+}
+
+
 

@@ -31,10 +31,8 @@
 #ifndef TABLE_H
 #define TABLE_H
 
-#include <q3table.h>
-#include <q3header.h>
-#include <Q3ValueList>
 #include <QVarLengthArray>
+#include <QDateTime>
 
 #include "Graph.h"
 #include "MyWidget.h"
@@ -75,6 +73,30 @@ public:
 	virtual QString windowLabel() { return d_future_table->comment(); }
 	//! Set the window label
 	virtual void setWindowLabel(const QString& s) { d_future_table->setComment(s); updateCaption(); }
+	//! Set the caption policy
+	void setCaptionPolicy(CaptionPolicy policy) 
+	{ 
+		caption_policy = policy; updateCaption(); 
+		switch (policy)
+		{
+			case Name:
+				d_future_table->setCaptionSpec("%n");
+				break;
+			case Label:
+				d_future_table->setCaptionSpec("%c");
+				break;
+			case Both:
+				d_future_table->setCaptionSpec("%n%C{ - }%c");
+				break;
+		}
+	}
+	//! Set the creation date
+	virtual void setBirthDate(const QString& s)
+	{
+		birthdate = s;
+		d_future_table->importV0x0001XXCreationTime(s);
+	}
+
 	void closeEvent( QCloseEvent *);
 public slots:
 	void copy(Table *m);
@@ -235,6 +257,11 @@ signals:
 	void showContextMenu(bool selection);
 	void createTable(const QString&,int,int,const QString&);
 
+protected slots:
+    void applyFormula();
+	void addFunction();
+	void addReference();
+	void updateFunctionDoc();
 };
 
 #endif

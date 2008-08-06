@@ -83,14 +83,14 @@ public:
 	virtual void setName(const QString& s){setObjectName(s); updateCaption();};
 
 	//! Return the caption policy
-	CaptionPolicy captionPolicy(){return caption_policy;};
+	virtual CaptionPolicy captionPolicy(){return caption_policy;};
 	//! Set the caption policy
-	void setCaptionPolicy(CaptionPolicy policy) { caption_policy = policy; updateCaption(); }
+	virtual void setCaptionPolicy(CaptionPolicy policy) { caption_policy = policy; updateCaption(); }
 
 	//! Return the creation date
 	virtual QString birthDate(){return birthdate;};
 	//! Set the creation date
-	void setBirthDate(const QString& s){birthdate = s;};
+	virtual void setBirthDate(const QString& s){birthdate = s;};
 
 	//! Return the window status as a string
 	QString aspect();

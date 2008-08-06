@@ -83,7 +83,7 @@ void Matrix::init(int rows, int cols)
 	d_future_matrix->setCoordinates(1.0, 10.0, 1.0, 10.0);
 	dMatrix = 0;
 
-	setBirthDate(d_future_matrix->creationTime().toString(Qt::LocalDate));
+	birthdate = d_future_matrix->creationTime().toString(Qt::LocalDate);
 
 	// this is not very nice but works for the moment
 	ui.gridLayout2->removeWidget(ui.formula_box);
@@ -106,14 +106,6 @@ void Matrix::init(int rows, int cols)
 		this, SLOT(addFunction()));
 	connect(ui.add_cell_button, SIGNAL(pressed()), 
 		this, SLOT(addCell()));
-
-// TODO: this should not be needed anymore
-#if 0
-	// keyboard shortcuts
-	QShortcut * sel_all = new QShortcut(QKeySequence(tr("Ctrl+A", "Matrix: select all")), this);
-	connect(sel_all, SIGNAL(activated()), this, SLOT(selectAll()));
-	// remark: the [TAB] behaviour is now nicely done by Qt4
-#endif
 
 	connect(d_future_matrix, SIGNAL(columnsInserted(int, int)), this, SLOT(handleChange()));
 	connect(d_future_matrix, SIGNAL(columnsRemoved(int, int)), this, SLOT(handleChange()));

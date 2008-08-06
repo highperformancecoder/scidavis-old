@@ -30,6 +30,7 @@
 #define ABSTRACT_ASPECT_H
 
 #include <QObject>
+#include <QDateTime>
 
 class AspectPrivate;
 class Project;
@@ -239,6 +240,13 @@ class AbstractAspect : public QObject
 		virtual void remove() { if(parentAspect()) parentAspect()->removeChild(parentAspect()->indexOfChild(this)); }
 		//! Make the specified name unique among my children by incrementing a trailing number.
 		QString uniqueNameFor(const QString &current_name) const;
+
+	public:
+		void importV0x0001XXCreationTime(const QString& str)
+		{
+			setCreationTime(QDateTime::fromString(str, Qt::LocalDate));
+		}
+
 
 	signals:
 		//! Emit this before the name, comment or caption spec is changed

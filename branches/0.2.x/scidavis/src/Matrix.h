@@ -63,6 +63,30 @@ public:
 	virtual QString windowLabel() { return d_future_matrix->comment(); }
 	//! Set the window label
 	virtual void setWindowLabel(const QString& s) { d_future_matrix->setComment(s); updateCaption(); }
+	//! Set the caption policy
+	void setCaptionPolicy(CaptionPolicy policy) 
+	{ 
+		caption_policy = policy; updateCaption(); 
+		switch (policy)
+		{
+			case Name:
+				d_future_matrix->setCaptionSpec("%n");
+				break;
+			case Label:
+				d_future_matrix->setCaptionSpec("%c");
+				break;
+			case Both:
+				d_future_matrix->setCaptionSpec("%n%C{ - }%c");
+				break;
+		}
+	}
+	//! Set the creation date
+	virtual void setBirthDate(const QString& s)
+	{
+		birthdate = s;
+		d_future_matrix->importV0x0001XXCreationTime(s);
+	}
+
 	/*!
 	 * \brief Constructor
 	 *

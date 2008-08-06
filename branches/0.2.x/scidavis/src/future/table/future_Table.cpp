@@ -2255,8 +2255,8 @@ void Table::Private::removeColumns(int first, int count)
 		d_column_widths.removeAt(first);
 	}
 	d_column_count -= count;
-	updateHorizontalHeader(first, d_column_count-1);
 	emit d_owner->columnsRemoved(first, count);
+	updateHorizontalHeader(first, d_column_count-1);
 }
 
 void Table::Private::appendColumns(QList<Column*> cols)
