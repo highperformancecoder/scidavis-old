@@ -340,6 +340,8 @@ HEADERS += src/future/core/AbstractAspect.h \
            src/future/lib/XmlStreamReader.h \
            src/future/lib/ActionManager.h \
            src/future/lib/ConfigPageWidget.h \
+           src/future/lib/Interval.h \
+           src/future/lib/IntervalAttribute.h \
            src/future/matrix/future_Matrix.h \
            src/future/matrix/MatrixModel.h \
            src/future/matrix/MatrixView.h \
