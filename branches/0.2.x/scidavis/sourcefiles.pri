@@ -401,9 +401,15 @@ SOURCES += ../3rdparty/minigzip/minigzip.c
 ################# Origin Import (liborigin) ###################
 ###############################################################
 
-!dynamic_liborigin{
-INCLUDEPATH  += ../3rdparty/liborigin
+############ liborigin support has been discontinued due to the lack 
+############ of a developer who maintains the Origin import code;
+############ if you are interested in reviving Origin support, please contact 
+############ the SciDAVis developers
 
-HEADERS += ../3rdparty/liborigin/OPJFile.h
-SOURCES += ../3rdparty/liborigin/OPJFile.cpp
-}
+#!dynamic_liborigin{
+#INCLUDEPATH  += ../3rdparty/liborigin
+#
+#HEADERS += ../3rdparty/liborigin/OPJFile.h
+#SOURCES += ../3rdparty/liborigin/OPJFile.cpp
+#}
+

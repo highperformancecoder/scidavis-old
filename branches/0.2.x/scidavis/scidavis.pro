@@ -63,12 +63,18 @@ include( muparser.pri )
 ### comment out the following line to deactivate Python scripting support
 #include( python.pri )  ######## Python disabled until the integration of the new Table class is finished
 
+################### start of liborigin block 
+############ liborigin support has been discontinued due to the lack 
+############ of a developer who maintains the Origin import code;
+############ if you are interested in reviving Origin support, please contact 
+############ the SciDAVis developers
 ### Note to packagers: If you want to use systemwide installed liborigin
 ### instead of the one provided in "3rdparty", uncomment the following 2 lines:
 # CONFIG += dynamic_liborigin
 # LIBS += -lorigin
 ### Unfortunately, due to liborigin being in alpha stage, we cannot promise
 ### that SciDAVis works with any other version that the one in "3rdparty".
+################### end of liborigin block 
 
 #############################################################################
 ### Default settings for Linux / Mac OS X
