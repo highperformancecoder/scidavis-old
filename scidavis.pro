@@ -1,22 +1,14 @@
-### IMPORTANT: user-servicable part is now in config.pri
-
-include(config.pri)
+#################################################
+# SciDAVis main project file
+# run "qmake scidavis.pro" to generate the Makefile
+# I most cases you don't have to make changes to
+# this file but to the "scidavis.pro" file in the
+# "scidavis" subdirectory.
+#################################################
 TEMPLATE = subdirs
-CONFIG += ordered
-SUBDIRS = $${MODULES} core
 
-### update translations
-#system(lupdate -verbose scidavis-translations.pro)
-#system(lrelease -verbose scidavis-translations.pro)
+SUBDIRS = scidavis
 
-### DOCUMENTATION
-
-documentation.files += \
-	README \
-	CHANGES \
-	gpl.txt \
-	INSTALL.html \
-	scidavis.css \
-	scidavis-logo.png \
-	manual/html \
-
+# optional fit plugins
+SUBDIRS += fitPlugins/fitRational0\
+           fitPlugins/fitRational1

@@ -29,17 +29,13 @@
 				<li><a href="http://www.trolltech.com/products/qt/index.html">Qt (>=4.2)</a>,</li>
 				<li><a href="http://qwt.sourceforge.net/index.html">Qwt (>=5.0.0)</a>,</li>
 				<li><a href="http://qwtplot3d.sourceforge.net/">QwtPlot3D (>=0.2.6)</a>,</li>
-				<li><a href="http://sources.redhat.com/gsl/">GSL (>=1.8)</a>,</li>
+				<li><a href="http://www.gnu.org/software/gsl/">GSL (>=1.8)</a>,</li>
 				<li><a href="http://muparser.sourceforge.net">muParser (>=1.28)</a> and</li>
 				<li><a href="http://www.zlib.net/">zlib (>=1.2.3)</a>.</li>
 			</ul>
 			<strong>QwtPlot3D and Qwt must be compiled against Qt 4.x! If these are compiled with Qt3,
 				the application will crash!</strong>
 			See below for how to ensure this.
-			</p><p>
-			This version of SciDAVis uses a modified version of
-			<a href="http://sourceforge.net/projects/liborigin/">liborigin</a> which is supplied in the "3rdparty" folder.
-			It is already included in the scidavis/scidavis.pro file and does not need to be compiled or installed separately.
 			</p>
 
 			<h1>Linux / Mac OS X</h1>
@@ -52,7 +48,8 @@
 				either from your package manager or from the sources.
 				If you are using precompiled packages, make sure you also install the corresponding development packages (*-dev or *-devel).
 				If you want to display the manual from within SciDAVis (you can also view it with your favorite browser),
-				you need to have the Qt Assistant installed, which sometimes comes in a separate package (qt4-dev-tools for Ubuntu edgy).</li>
+				you need to have the Qt Assistant installed, which sometimes comes in a separate package (qt4-dev-tools for Ubuntu edgy).
+				</li>
 				<li>Open a terminal window.</li>
 				<li>Get <a href="http://qwt.sourceforge.net/index.html">Qwt (>=5.0.0)</a> sources and unpack them to the 3rdparty folder:<br>
 				<code>cd scidavis-X.X.X/3rdparty<br>tar -xvjf /path/to/qwt-Y.Y.Y.tar.bz2</code></li>
@@ -61,7 +58,8 @@
 				<li>We want to build the static version of Qwt in order to avoid potential conflicts with an already installed version.
 				Open the file qwt/qwtconfig.pri and comment out the line<br>
 				<code>CONFIG += QwtDll</code></li>
-				<li>Build Qwt:<br><code>cd qwt; qmake &amp;&amp; make; cd ..</code></li>
+				<li>Build Qwt:<br><code>cd qwt; qmake &amp;&amp; make; cd ..</code><br>
+				On some systems (such as Debian, Ubuntu, ...) the <code>qmake</code>-Tool for Qt 4.x is called <code>qmake-qt4</code>. Make sure you don't use the version that belongs to Qt 3.x.
 				<li>Get <a href="http://qwtplot3d.sourceforge.net/">QwtPlot3D</a> sources and also unpack them to scidavis-X.X.X/3rdparty:<br>
 				<code>tar -xvzf qwtplot3d-Z.Z.Z.tgz</code></li>
 				<li>We also want to build a static version here, so open qwtplot3d/qwtplot3d.pro in your favorite text editor and add the line<br>
@@ -71,8 +69,8 @@
 				<li>Go to the directory scidavis-X.X.X/scidavis:<br><code>cd ../scidavis</code></li>
 				<li>If you want to use Python expressions and scripts, make sure you have the following additional dependencies installed:
 				<a href="http://www.python.org/">Python</a> 2.5,
-				<a href="http://www.riverbankcomputing.co.uk/sip">SIP</a> 4.5.2 or 4.6,
-				<a href="http://www.riverbankcomputing.co.uk/pyqt">PyQt</a> 4.2.
+				<a href="http://www.riverbankcomputing.co.uk/software/sip/intro">SIP</a> 4.5.2 or 4.6,
+				<a href="http://www.riverbankcomputing.co.uk/software/pyqt/intro">PyQt</a> 4.2.
 				Other versions as those indicated above may or may not work.
 				Specifically, there are known issues with a number of SIP versions and
 				a given version of PyQt will only work with a limited range of SIP
@@ -105,11 +103,11 @@
 			<code>;D:\Qt\4.2.3\bin;D:\MinGW\bin;D:\Python25</code> (use the paths where you installed Qt, Python, and MinGW) to the existing string there.
 			</li>
 			<li>Download the SIP source code for Windows from
-			<a href="http://www.riverbankcomputing.co.uk/sip/download.php">http://www.riverbankcomputing.co.uk/sip/download.php</a>
+			<a href="http://www.riverbankcomputing.co.uk/software/sip/download">http://www.riverbankcomputing.co.uk/software/sip/download</a>
 			and unpack it.
 			</li>
 			<li>Download the PyQt v4 source code for Windows from
-			<a href="http://www.riverbankcomputing.co.uk/pyqt/download.php">http://www.riverbankcomputing.co.uk/pyqt/download.php</a>
+			<a href="http://www.riverbankcomputing.co.uk/software/pyqt/download">http://www.riverbankcomputing.co.uk/software/pyqt/download</a>
 			and unpack it.
 			</li>
 			<li>Download the "Developer files" of the GSL from
