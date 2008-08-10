@@ -116,6 +116,9 @@ void Matrix::init(int rows, int cols)
 	connect(d_future_matrix, SIGNAL(formulaChanged()), this, SLOT(handleChange()));
 	connect(d_future_matrix, SIGNAL(formatChanged()), this, SLOT(handleChange()));
 	connect(d_future_matrix, SIGNAL(recalculate()), this, SLOT(recalculate()));
+
+	connect(d_future_matrix, SIGNAL(aspectDescriptionChanged(const AbstractAspect*)), 
+			this, SLOT(handleAspectDescriptionChange(const AbstractAspect *)));
 }
 
 Matrix::~Matrix()
@@ -616,7 +619,7 @@ void Matrix::print(const QString& fileName)
 	for(i=0;i<rows;i++)
 	{
 		right = margin;
-		QString cell_text = d_view_widget->model()->headerData(i, Qt::Horizontal).toString()+"\t";
+		QString cell_text = d_view_widget->model()->headerData(i, Qt::Vertical).toString()+"\t";
 		tr = p.boundingRect(tr, Qt::AlignCenter, cell_text);
 		p.drawLine(right, height, right, height+tr.height());
 
@@ -715,8 +718,14 @@ Matrix * Matrix::fromImage(const QImage & image, ScriptingEnv *env)
 
 void Matrix::applyFormula()
 {
+	QApplication::setOverrideCursor(Qt::WaitCursor);
+	d_future_matrix->beginMacro(tr("%1: apply formula to selection").arg(name()));
+
 	setFormula(ui.formula_box->toPlainText());
 	recalculate();
+
+	d_future_matrix->endMacro();
+	QApplication::restoreOverrideCursor();
 }
 
 void Matrix::addFunction()
@@ -733,5 +742,13 @@ void Matrix::updateFunctionDoc()
 {
 	ui.add_function_combobox->setToolTip(scriptEnv->mathFunctionDoc(ui.add_function_combobox->currentText()));
 }
+
+void Matrix::handleAspectDescriptionChange(const AbstractAspect *aspect)
+{
+	if (aspect != d_future_matrix) return;
+	setObjectName(d_future_matrix->name());
+	updateCaption();
+}
+
 
 

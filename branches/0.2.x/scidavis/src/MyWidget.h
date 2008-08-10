@@ -149,14 +149,15 @@ signals:
 	//! Emitted when the title bar recieves a QContextMenuEvent
 	void showTitleBarMenu();
 
+protected slots:
+    //! Set caption according to current CaptionPolicy, name and label
+	void updateCaption();
+
 protected:
 	//! Catches parent changes (in order to gain access to the title bar)
 	virtual void changeEvent(QEvent *event);
 	//! Title bar of this MDI window if it currently belongs to a QWorkspace, NULL else
 	QWidget *titleBar;
-
-    //! Set caption according to current CaptionPolicy, name and label
-	void updateCaption();
 
 	//!Pointer to the parent folder of the window
 	Folder *parentFolder;

@@ -142,6 +142,11 @@ void Table::init()
 	connect(d_future_table, SIGNAL(dataChanged(int, int, int, int)), this, SLOT(handleChange()));
 	connect(d_future_table, SIGNAL(headerDataChanged(Qt::Orientation, int, int)), this, SLOT(handleChange()));
 	connect(d_future_table, SIGNAL(recalculate()), this, SLOT(recalculate()));
+
+	connect(d_future_table, SIGNAL(aspectDescriptionChanged(const AbstractAspect*)), 
+			this, SLOT(handleAspectDescriptionChange(const AbstractAspect *)));
+	connect(d_future_table, SIGNAL(aspectDescriptionAboutToChange(const AbstractAspect*)), 
+			this, SLOT(handleAspectDescriptionAboutToChange(const AbstractAspect *)));
 }
 
 void Table::handleChange()
@@ -273,7 +278,7 @@ void Table::print(const QString& fileName)
 	for (i=0;i<rows;i++)
 	{
 		right = margin;
-		QString cell_text = d_view_widget->model()->headerData(i, Qt::Horizontal).toString()+"\t";
+		QString cell_text = d_view_widget->model()->headerData(i, Qt::Vertical).toString()+"\t";
 		tr = p.boundingRect(tr, Qt::AlignCenter, cell_text);
 		p.drawLine(right, height, right, height+tr.height());
 
@@ -1254,6 +1259,9 @@ bool Table::commentsEnabled()
 
 void Table::applyFormula()
 {
+	QApplication::setOverrideCursor(Qt::WaitCursor);
+	d_future_table->beginMacro(tr("%1: apply formula to selection").arg(name()));
+
 	QString formula = ui.formula_box->toPlainText();
 	for (int col=firstSelectedColumn(); col<=lastSelectedColumn(); col++)
 	{
@@ -1266,6 +1274,9 @@ void Table::applyFormula()
 	}
 	
 	recalculate();
+
+	d_future_table->endMacro();
+	QApplication::restoreOverrideCursor();
 }
 
 void Table::addFunction()
@@ -1283,5 +1294,46 @@ void Table::updateFunctionDoc()
 	ui.add_function_combobox->setToolTip(scriptEnv->mathFunctionDoc(ui.add_function_combobox->currentText()));
 }
 
+void Table::handleAspectDescriptionAboutToChange(const AbstractAspect *aspect)
+{
+	const Column * col = qobject_cast<const Column *>(aspect);
+	if (col && d_future_table->columnIndex(col) != -1)
+	{
+		d_stored_column_labels[col] = aspect->name();
+	}
+}
 
+void Table::handleAspectDescriptionChange(const AbstractAspect *aspect)
+{
+	if (aspect == d_future_table)
+	{
+		setObjectName(d_future_table->name());
+		updateCaption();
+		return;
+	}
+	const Column * col = qobject_cast<const Column *>(aspect);
+	if (col)
+	if (d_future_table->columnIndex(col) != -1) 
+	if (d_stored_column_labels.contains(col))
+	{
+		QString old_name = d_stored_column_labels.value(col);
+		QString new_name = col->name();
+		emit changedColHeader(name() + "_" + old_name,
+				name() + "_" + new_name);
+
+		for (int i=0; i<d_future_table->columnCount(); i++)
+		{
+			QList< Interval<int> > formula_intervals = column(i)->formulaIntervals();
+			foreach(Interval<int> interval, formula_intervals)
+			{
+				QString formula = column(i)->formula(interval.start());
+				if (formula.contains("\"" + old_name + "\""))
+				{
+					formula.replace("\"" + old_name + "\"", "\"" + new_name + "\"");
+					column(i)->setFormula(interval, formula);
+				}
+			}
+		}
+	}
+}
 

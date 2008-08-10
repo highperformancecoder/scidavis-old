@@ -534,7 +534,11 @@ void Table::recalculateSelectedCells()
 {
 	if (!d_view) return;
 #ifdef LEGACY_CODE_0_2_x
+	WAIT_CURSOR;
+	beginMacro(tr("%1: apply formula to selection").arg(name()));
 	emit recalculate();
+	endMacro();
+	RESET_CURSOR;
 #endif
 }
 
@@ -2058,7 +2062,8 @@ bool Table::load(XmlStreamReader * reader)
 			reader->raiseError(tr("invalid row or column count"));
 			return false;
 		}
-		QList<Column *> columns;
+
+		setRowCount(rows);
 		// read child elements
 		while (!reader->atEnd()) 
 		{
@@ -2075,12 +2080,14 @@ bool Table::load(XmlStreamReader * reader)
 				else if(reader->name() == "column")
 				{
 					Column * column = new Column(tr("Column %1").arg(1), SciDAVis::Text);
-					columns.append(column);
 					if (!column->load(reader))
 					{
-						qDeleteAll(columns);
+						setColumnCount(0);
 						return false;
 					}
+					QList<Column *> columns;
+					columns.append(column);
+					appendColumns(columns);
 				}
 				else if(reader->name() == "column_width")
 				{
@@ -2093,8 +2100,6 @@ bool Table::load(XmlStreamReader * reader)
 				}
 			} 
 		}
-		setRowCount(rows);
-		appendColumns(columns);
 		if (cols != columnCount())
 			reader->raiseWarning(tr("columns attribute and number of read columns do not match"));
 	}

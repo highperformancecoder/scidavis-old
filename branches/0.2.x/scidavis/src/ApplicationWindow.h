@@ -160,6 +160,7 @@ public slots:
 #ifdef REVIVE_OPJ_SUPPERT
 	ApplicationWindow* importOPJ(const QString& filename);
 #endif
+	void showHistory();
 
 	/**
 	 * \brief Create a new project from a data file.
@@ -956,7 +957,8 @@ public:
 	QString configFilePath, logInfo, fitPluginsPath, asciiDirPath, imagesDirPath;
 	int logID,asciiID,closeID, exportID, printAllID, ignoredLines, savingTimerId, plot3DResolution;
 	bool renameColumns, copiedLayer, strip_spaces, simplify_spaces;
-	QStringList recentProjects, tableWindows;
+	QStringList recentProjects;
+	QStringList tableWindows();
 	bool saved, showPlot3DProjection, showPlot3DLegend, orthogonal3DPlots, autoscale3DPlots;
 	QStringList plot3DColors, locales;
 	QStringList functions; //user-defined functions;
@@ -1030,6 +1032,7 @@ private:
     QAction *actionCopyWindow;
     QAction *actionCutSelection, *actionCopySelection, *actionPasteSelection, *actionClearSelection;
     QAction *actionShowExplorer, *actionShowLog, *actionAddLayer, *actionShowLayerDialog, *actionAutomaticLayout;
+	QAction *actionShowHistory;
 #ifdef SCRIPTING_CONSOLE
     QAction *actionShowConsole;
 #endif

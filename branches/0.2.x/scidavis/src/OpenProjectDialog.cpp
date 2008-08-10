@@ -44,11 +44,12 @@ OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WFlags 
 		<< tr("Compressed SciDAVis project") + " (*.sciprj.gz)"
 		<< tr("QtiPlot project") + " (*.qti)"
 		<< tr("Compressed QtiPlot project") + " (*.qti.gz)"
+#ifdef REVIVE_OPJ_SUPPERT
 		<< tr("Origin project") + " (*.opj *.OPJ)"
 		<< tr("Origin matrix") + " (*.ogm *.OGM)"
 		<< tr("Origin worksheet") + " (*.ogw *.OGW)"
 		<< tr("Origin graph") + " (*.ogg *.OGG)"
-		<< tr("Backup files") + " (*.sciprj~)"
+#endif		<< tr("Backup files") + " (*.sciprj~)"
 		//<< tr("Python Source") + " (*.py *.PY)"
 		<< tr("All files") + " (*)";
 	setFilters(filters);

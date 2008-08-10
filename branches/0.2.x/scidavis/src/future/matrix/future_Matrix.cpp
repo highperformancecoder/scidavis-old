@@ -689,7 +689,7 @@ void Matrix::connectActions()
 	connect(action_edit_format, SIGNAL(triggered()), this, SLOT(editFormat()));
 	connect(action_clear_selection, SIGNAL(triggered()), this, SLOT(clearSelectedCells()));
 #ifdef LEGACY_CODE_0_2_x
-	connect(action_recalculate, SIGNAL(triggered()), this, SIGNAL(recalculate()));
+	connect(action_recalculate, SIGNAL(triggered()), this, SLOT(recalculateSelectedCells()));
 #endif
 	connect(action_select_all, SIGNAL(triggered()), this, SLOT(selectAll()));
 	connect(action_clear_matrix, SIGNAL(triggered()), this, SLOT(clear()));
@@ -1414,6 +1414,19 @@ void Matrix::mirrorVertically()
 	exec(new MatrixMirrorVerticallyCmd(d_matrix_private));
 	RESET_CURSOR;
 }
+
+void Matrix::recalculateSelectedCells()
+{
+	if (!d_view) return;
+#ifdef LEGACY_CODE_0_2_x
+	WAIT_CURSOR;
+	beginMacro(tr("%1: apply formula to selection").arg(name()));
+	emit recalculate();
+	endMacro();
+	RESET_CURSOR;
+#endif
+}
+
 
 /* ========================= static methods ======================= */
 ActionManager * Matrix::action_manager = 0;

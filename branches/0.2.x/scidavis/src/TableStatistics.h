@@ -52,9 +52,9 @@ class TableStatistics : public Table
 		// saving
 		virtual QString saveToString(const QString &geometry);
 
-		public slots:
-			//! update statistics after a column has changed (to be connected with Table::modifiedData)
-			void update(Table*, const QString& colName);
+	public slots:
+		//! update statistics after a column has changed (to be connected with Table::modifiedData)
+		void update(Table*, const QString& colName);
 		//! handle renaming of columns (to be connected with Table::changedColHeader)
 		void renameCol(const QString&, const QString&);
 		//! remove statistics of removed columns (to be connected with Table::removedCol)

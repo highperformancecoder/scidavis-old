@@ -33,3 +33,36 @@ Most important changes (since 0.1.2)
 - fixed unnecessary graph rescaling
 - several other bugs fixed
 
+=== Release 0.2.0-beta1, 2008-04-19 ===
+Most important changes (since 0.1.3)
+- multi-level undo/redo for all operations on
+  tables and matrices
+- many operations on tables and matrices now support
+  non-contiguous selections
+- the important options/controls for matrices
+  and tables are now integrated in a sidebar
+  of control tabs which make working with
+  column or matrix based data much more
+  convenient (almost no more opening and closing of
+  dialogs necessary)
+- tables now support different formulas
+  for each cell
+- numeric values are now stored independent of
+  their textual representation, i.e., you don't
+  lose data when hiding decimal digits
+- date/time values are now internally stored
+  as QDateTime objects which opens up many
+  new possibilities of date/time manipulation 
+  using PyQt/Python scripting
+
+Known issues (to be fixed until 0.2.0 stable):
+- the Python bindings for the new table
+  features are not finished yet
+- there is currently no way to display which
+  formula has been assigned to which cell
+  in a table
+- the date/time column functionality has
+  not been completely integrated and may
+  lead to empty plots in many cases
+
+

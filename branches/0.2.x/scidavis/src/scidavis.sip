@@ -120,8 +120,8 @@ class Table: MyWidget
 public:
   int numRows() /PyName=numRows/;
   int numCols() /PyName=numCols/;
-  void resizeRows(int) /PyName=setNumRows/;
-  void resizeCols(int) /PyName=setNumCols/;
+  void setNumRows(int);
+  void setNumCols(int);
 
   SIP_PYOBJECT text(SIP_PYOBJECT, int);
 %MethodCode
@@ -180,9 +180,9 @@ public:
 %End
   void notifyChanges();
 
-  void importASCII(const QString&, const QString&="\t", int=0, bool=false, bool=true, bool=false, bool=false);
+//  void importASCII(const QString&, const QString&="\t", int=0, bool=false, bool=true, bool=false, bool=false);
   bool exportASCII(const QString&, const QString&="\t", bool=false, bool=false);
-  void normalizeCol(SIP_PYOBJECT) /PyName=normalize/;
+/*  void normalizeCol(SIP_PYOBJECT) /PyName=normalize/;
 %MethodCode
 	sipIsErr = 0;
 	CHECK_TABLE_COL(a0);
@@ -215,7 +215,7 @@ public:
   }
   sipCpp->sortColumns(l, a1, a2, *a3);
 %End
-
+*/
 	void setCommand(SIP_PYOBJECT, const QString&);
 %MethodCode
   	sipIsErr = 0;
@@ -300,7 +300,7 @@ public:
     void setCoordinates(double xs, double xe, double ys, double ye);
 
     void setFormula(const QString &s);
-    bool calculate(int startRow = 0, int endRow = -1, int startCol = 0, int endCol = -1);
+//    bool calculate(int startRow = 0, int endRow = -1, int startCol = 0, int endCol = -1);
 
     void setNumericPrecision(int prec);
 

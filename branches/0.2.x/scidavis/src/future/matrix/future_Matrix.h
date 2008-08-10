@@ -260,6 +260,9 @@ class Matrix : public AbstractPart
 		void importImageDialog();
 		//! Duplicate the matrix inside its folder
 		void duplicate();
+#ifdef LEGACY_CODE_0_2_x
+		void recalculateSelectedCells();
+#endif
 
 	signals:
 		void columnsAboutToBeInserted(int before, int count);

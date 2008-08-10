@@ -96,6 +96,7 @@
 #include "core/column/Column.h"
 #include "lib/XmlStreamReader.h"
 #include "table/AsciiTableImportFilter.h"
+#include "table/future_Table.h"
 
 // TODO: move tool-specific code to an extension manager
 #include "ScreenPickerTool.h"
@@ -142,7 +143,9 @@
 #include <QSignalMapper>
 #include <QUndoStack>
 #include <QtDebug>
-#include "table/future_Table.h"
+#include <QDialogButtonBox>
+#include <QUndoView>
+#include <QUndoStack>
 
 #include <zlib.h>
 
@@ -770,6 +773,7 @@ void ApplicationWindow::initMainMenu()
 	view->addAction(actionShowPlotWizard);
 	view->addAction(actionShowExplorer);
 	view->addAction(actionShowLog);
+	view->addAction(actionShowHistory);
 #ifdef SCRIPTING_CONSOLE
 	view->addAction(actionShowConsole);
 #endif
@@ -1171,7 +1175,7 @@ void ApplicationWindow::customToolBars(QWidget* w)
 			graph_tools->hide();
 		if (!projectHasMatrices())
 			matrix_plot_tools->hide();
-		if ((int)tableWindows.count()<=0) {
+		if (tableWindows().count()<=0) {
 			table_tools->hide();
 			plot_tools->hide();
 		}
@@ -1639,7 +1643,7 @@ void ApplicationWindow::updateMatrixPlots(QWidget *window)
 
 void ApplicationWindow::add3DData()
 {
-	if (tableWindows.count() <= 0)
+	if (tableWindows().count() <= 0)
 	{
 		QMessageBox::warning(this,tr("Warning"),
 				tr("<h4>There are no tables available in this project.</h4>"
@@ -2503,7 +2507,6 @@ Table* ApplicationWindow::newHiddenTable(const QString& name, const QString& lab
 
 void ApplicationWindow::initTable(Table* w)
 {
-	w->setWindowTitle(w->name());
 	w->setIcon( QPixmap(":/worksheet.xpm") );
 	current_folder->addWindow(w);
 	w->setFolder(current_folder);
@@ -2514,7 +2517,6 @@ void ApplicationWindow::initTable(Table* w)
 	connectTable(w);
 	customTable(w);
 
-	tableWindows << w->name();
 	w->d_future_table->setPlotMenu(plot2D);
 
 	emit modified();
@@ -2674,7 +2676,6 @@ Table* ApplicationWindow::convertMatrixToTable()
 
 void ApplicationWindow::initMatrix(Matrix* m)
 {
-	m->setWindowTitle(m->name());
 	m->setIcon( QPixmap(":/matrix.xpm") );
 	m->askOnCloseEvent(confirmCloseMatrix);
 	m->setNumericPrecision(d_decimal_digits);
@@ -5115,8 +5116,6 @@ bool ApplicationWindow::renameWindow(MyWidget *w, const QString &text)
 			return false;
 		}
 
-		int id=tableWindows.indexOf(name);
-		tableWindows[id]=newName;
 		updateTableNames(name,newName);
 	}
 	else if (w->inherits("Matrix"))
@@ -5376,7 +5375,7 @@ void ApplicationWindow::showExportASCIIDialog()
 		connect (ed, SIGNAL(exportAllTables(const QString&, bool, bool)),
 				this, SLOT(exportAllTables(const QString&, bool, bool)));
 
-		ed->setTableNames(tableWindows);
+		ed->setTableNames(tableWindows());
 		ed->setActiveTableName(table->name());
 		ed->setColumnSeparator(columnSeparator);
 		ed->exec();
@@ -7348,14 +7347,11 @@ void ApplicationWindow::removeWindowFromLists(MyWidget* w)
 			QString name=m->colName(i);
 			removeCurves(name);
 		}
-		tableWindows.remove(caption);
 		if (w == lastModified){
 			actionUndo->setEnabled(false);
 			actionRedo->setEnabled(false);
 		}
 	}
-	else if (w->inherits("TableStatistics"))
-		tableWindows.remove(caption);
 	else if (w->inherits("MultiLayer")){
 		MultiLayer *ml =  (MultiLayer*)w;
 		Graph *g = ml->activeGraph();
@@ -8235,16 +8231,16 @@ void ApplicationWindow::showHelp()
 
 void ApplicationWindow::showPlotWizard()
 {
-	if (tableWindows.count()>0)
+	if (tableWindows().count()>0)
 	{
 		PlotWizard* pw = new PlotWizard(this, 0);
 		pw->setAttribute(Qt::WA_DeleteOnClose);
 		connect (pw,SIGNAL(plot(const QStringList&)),this,SLOT(multilayerPlot(const QStringList&)));
 
-		pw->insertTablesList(tableWindows);
+		pw->insertTablesList(tableWindows());
 	// TODO: string list -> Column * list
 		pw->setColumnsList(columnsList());
-		pw->changeColumnsList(tableWindows[0]);
+		pw->changeColumnsList(tableWindows()[0]);
 		pw->exec();
 	}
 	else
@@ -10367,6 +10363,9 @@ void ApplicationWindow::createActions()
 
 	actionShowLog = logWindow->toggleViewAction();
 	actionShowLog->setIcon(QPixmap(":/log.xpm"));
+
+	actionShowHistory = new QAction(tr("Undo/Redo &History"), this);
+	connect(actionShowHistory, SIGNAL(triggered(bool)), this, SLOT(showHistory()));
 
 #ifdef SCRIPTING_CONSOLE
 	actionShowConsole = consoleWindow->toggleViewAction();
@@ -13538,3 +13537,36 @@ void ApplicationWindow::handleAspectAboutToBeRemoved(const AbstractAspect *paren
 	}
 }
 
+void ApplicationWindow::showHistory()
+{
+	if (!d_project->undoStack()) return;
+	QDialog dialog;
+	QVBoxLayout layout(&dialog);
+
+    QDialogButtonBox button_box;
+	button_box.setOrientation(Qt::Horizontal);
+    button_box.setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok);
+    QObject::connect(&button_box, SIGNAL(accepted()), &dialog, SLOT(accept()));
+    QObject::connect(&button_box, SIGNAL(rejected()), &dialog, SLOT(reject()));
+
+	int index = d_project->undoStack()->index();
+	QUndoView undo_view(d_project->undoStack());
+
+	layout.addWidget(&undo_view);
+	layout.addWidget(&button_box);
+
+	dialog.setWindowTitle(tr("Undo/Redo History"));
+	if (dialog.exec() == QDialog::Accepted)
+		return;
+
+	d_project->undoStack()->setIndex(index);
+}
+
+QStringList ApplicationWindow::tableWindows()
+{
+	QList<AbstractAspect *> tables = d_project->descendantsThatInherit("future::Table");
+	QStringList result;
+	foreach(AbstractAspect *aspect, tables)
+		result.append(aspect->name());
+	return result;
+}

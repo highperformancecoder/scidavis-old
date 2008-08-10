@@ -58,7 +58,7 @@ public:
 	//! Return the window name
 	virtual QString name() { return d_future_matrix->name();} 
 	//! Set the window name
-	virtual void setName(const QString& s) { d_future_matrix->setName(s); setObjectName(s); updateCaption(); }
+	virtual void setName(const QString& s) { d_future_matrix->setName(s); }
 	//! Return the window label
 	virtual QString windowLabel() { return d_future_matrix->comment(); }
 	//! Set the window label
@@ -294,6 +294,7 @@ protected slots:
 	void addFunction();
 	void addCell();
 	void updateFunctionDoc();
+	void handleAspectDescriptionChange(const AbstractAspect *aspect);
 
 private:
 	//! Initialize the matrix

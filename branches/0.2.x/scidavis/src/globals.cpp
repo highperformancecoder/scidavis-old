@@ -44,7 +44,7 @@ Knut Franke, Roger Gadiou\n\
 The following people have contributed translations or parts thereof.\n\
 In alphabetical order.\n\
 \n\
-Markus Bongard, Tobias Burnus, Rémy Claverie, f0ma, José Antonio Lorenzo Fernández, Tilman Benkert[1],\n\
+Tilman Benkert[1], Markus Bongard, Tobias Burnus, Rémy Claverie, f0ma, José Antonio Lorenzo Fernández,\n\
 Daniel Klaer, Peter Landgren, Tomomasa Ohkubo, Mikhail Shevyakov, Mauricio Troviano\n\
 \n\
 --- Packagers ---\n\
@@ -59,7 +59,7 @@ Mauricio Troviano (Windows installer), Yu-Hung Lien (Intel-Mac binary)\n\
 \n\
 SciDAVis uses code from QtiPlot, which consisted (at the time of the fork, i.e. QtiPlot 0.9-rc2) of code by the following people:\n\
 \n\
-Shen Chen, Borries Demeler, José Antonio Lorenzo Fernández, Knut Franke, Vasileios Gkanis, Gudjon Gudjonsson, Tilman Benkert[1], \n\
+Tilman Benkert[1], Shen Chen, Borries Demeler, José Antonio Lorenzo Fernández, Knut Franke, Vasileios Gkanis, Gudjon Gudjonsson, \n\
 Alex Kargovsky, Michael Mac-Vicar, Tomomasa Ohkubo, Aaron Van Tassle, Branimir Vasilic, Ion Vasilief, Vincent Wagelaar\n\
 \n\
 The SciDAVis manual is based on the QtiPlot manual, written by (in alphabetical order):\n\
@@ -88,7 +88,7 @@ GSL (http://www.gnu.org/software/gsl/)\n\
 \n\
 ... and many more we just forgot to mention.\n";
 
-const char * SciDAVis::release_date = " XXXX-XX-XX";
+const char * SciDAVis::release_date = " 2008-08-10";
 
 int SciDAVis::version()
 {

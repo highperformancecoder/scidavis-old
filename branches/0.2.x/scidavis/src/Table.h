@@ -33,6 +33,7 @@
 
 #include <QVarLengthArray>
 #include <QDateTime>
+#include <QHash>
 
 #include "Graph.h"
 #include "MyWidget.h"
@@ -68,7 +69,7 @@ public:
 	//! Return the window name
 	virtual QString name() { return d_future_table->name();} 
 	//! Set the window name
-	virtual void setName(const QString& s) { d_future_table->setName(s); setObjectName(s); updateCaption(); }
+	virtual void setName(const QString& s) { d_future_table->setName(s); }
 	//! Return the window label
 	virtual QString windowLabel() { return d_future_table->comment(); }
 	//! Set the window label
@@ -262,6 +263,11 @@ protected slots:
 	void addFunction();
 	void addReference();
 	void updateFunctionDoc();
+	void handleAspectDescriptionChange(const AbstractAspect *aspect);
+	void handleAspectDescriptionAboutToChange(const AbstractAspect *aspect);
+
+private:
+	QHash<const AbstractAspect *, QString> d_stored_column_labels;
 };
 
 #endif
