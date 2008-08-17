@@ -172,8 +172,10 @@ class TableView : public MyWidget
 
 		void setColumnWidth(int col, int width);
 		int columnWidth(int col) const;
+		bool formulaModeActive() const;
 
 	public slots:
+		void activateFormulaMode(bool on);
 		void goToCell(int row, int col);
 		void rereadSectionSizes();
 		void selectAll();

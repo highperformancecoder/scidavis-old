@@ -70,6 +70,8 @@
              $${SIP_DIR}/sipscidavisCorrelation.h \
              $${SIP_DIR}/sipscidavisConvolution.h \
              $${SIP_DIR}/sipscidavisDeconvolution.h \
+             $${SIP_DIR}/sipscidavisAbstractAspect.h\
+             $${SIP_DIR}/sipscidavisColumn.h\
 
   SOURCES += $${SIP_DIR}/sipscidaviscmodule.cpp\
              $${SIP_DIR}/sipscidavisApplicationWindow.cpp\
@@ -110,4 +112,6 @@
              $${SIP_DIR}/sipscidavisCorrelation.cpp \
              $${SIP_DIR}/sipscidavisConvolution.cpp \
              $${SIP_DIR}/sipscidavisDeconvolution.cpp \
+             $${SIP_DIR}/sipscidavisAbstractAspect.cpp \
+             $${SIP_DIR}/sipscidavisColumn.cpp \
 ###############################################################

@@ -33,6 +33,132 @@
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 
+class AbstractAspect : QObject /PyName=Aspect/
+{
+%TypeHeaderCode
+#include "core/AbstractAspect.h"
+%End
+	public:
+		AbstractAspect(const QString &name);
+		AbstractAspect * parentAspect() const;
+//		future::Folder * folder();
+		bool isDescendantOf(AbstractAspect *other);
+		void addChild(AbstractAspect* child /Transfer/);
+		void insertChild(AbstractAspect *child /Transfer/, int index);
+		void removeChild(AbstractAspect* child);
+		void removeChild(int index);
+		AbstractAspect* child(int index) const;
+		int childCount() const;
+		int indexOfChild(const AbstractAspect * child) const;
+		int index() const;
+		void moveChild(int from, int to);
+		void reparentChild(AbstractAspect *new_parent, AbstractAspect *child, int d_new_index);
+		void reparentChild(AbstractAspect *new_parent, AbstractAspect *child);
+		QList<AbstractAspect *> descendantsThatInherit(const char *class_name);
+		void removeAllChildAspects();
+//		const Project *project() const;
+//		Project *project();
+		QString path() const;
+		QIcon icon() const;
+		QMenu *createContextMenu() const;
+		QString name() const;
+		QString comment() const;
+		QString captionSpec() const;
+		QDateTime creationTime() const;
+		QString caption() const;
+		QUndoStack *undoStack() const;
+		void exec(QUndoCommand *command);
+		void beginMacro(const QString& text);
+		void endMacro();
+		static QVariant global(const QString &key);
+		static void setGlobal(const QString &key, const QVariant &value);
+		static void setGlobalDefault(const QString &key, const QVariant &value);
+//		void save(QXmlStreamWriter *) const;
+//		bool load(XmlStreamReader *);
+	public slots:
+		void setName(const QString &value);
+		void setComment(const QString &value);
+		void setCaptionSpec(const QString &value);
+		void remove();
+		QString uniqueNameFor(const QString &current_name) const;
+	signals:
+		void aspectDescriptionAboutToChange(const AbstractAspect *aspect);
+		void aspectDescriptionChanged(const AbstractAspect *aspect);
+		void aspectAboutToBeAdded(const AbstractAspect *parent, int index);
+		void aspectAdded(const AbstractAspect *aspect);
+		void aspectAdded(const AbstractAspect *parent, int index);
+		void aspectAboutToBeRemoved(const AbstractAspect *aspect);
+		void aspectAboutToBeRemoved(const AbstractAspect *parent, int index);
+		void aspectRemoved(const AbstractAspect *parent, int index);
+		void statusInfo(const QString &text);
+};
+
+class Column: AbstractAspect
+{
+%TypeHeaderCode
+#include "core/globals.h"
+#include "core/column/Column.h"
+%End
+	public:
+		SIP_PYOBJECT dataType() const;
+%MethodCode
+		int mode = sipCpp->dataType();
+  		sipRes = PyString_FromString(SciDAVis::enumValueToString(mode, "ColumnDataType"));
+%End
+		SIP_PYOBJECT columnMode() const;
+%MethodCode
+		int mode = sipCpp->columnMode();
+  		sipRes = PyString_FromString(SciDAVis::enumValueToString(mode, "ColumnMode"));
+%End
+		void setColumnMode(QString mode);
+%MethodCode
+		int mode_code = SciDAVis::enumStringToValue(*a0, "ColumnMode");
+		if(mode_code != -1)
+			sipCpp->setColumnMode((SciDAVis::ColumnMode)mode_code);
+%End
+		bool copy(const Column * other);
+		bool copy(const Column * source, int source_start, int dest_start, int num_rows);
+		int rowCount() const;
+		void insertRows(int before, int count);
+		void removeRows(int first, int count);
+		SIP_PYOBJECT plotDesignation() const;
+%MethodCode
+		int pd = sipCpp->plotDesignation();
+  		sipRes = PyString_FromString(SciDAVis::enumValueToString(pd, "PlotDesignation"));
+%End
+		void setPlotDesignation(QString pd);
+%MethodCode
+		int mode_code = SciDAVis::enumStringToValue(*a0, "PlotDesignation");
+		if(mode_code != -1)
+			sipCpp->setColumnMode((SciDAVis::ColumnMode)mode_code);
+%End
+		void clear();
+		bool isInvalid(int row) const;
+//		bool isMasked(int row) const;
+		void clearValidity();
+//		void clearMasks();
+		void setInvalid(int row, bool invalid = true);
+//		void setMasked(int row, bool mask = true);
+		QString formula(int row) const;
+		void setFormula(int row, QString formula);
+		void clearFormulas();
+		QString textAt(int row) const;
+		void setTextAt(int row, const QString& new_value);
+		void replaceTexts(int first, const QStringList& new_values);
+		QDate dateAt(int row) const;
+		void setDateAt(int row, const QDate& new_value);
+		QTime timeAt(int row) const;
+		void setTimeAt(int row, const QTime& new_value);
+		QDateTime dateTimeAt(int row) const;
+		void setDateTimeAt(int row, const QDateTime& new_value);
+		void replaceDateTimes(int first, const QList<QDateTime>& new_values);
+		double valueAt(int row) const;
+		void setValueAt(int row, double new_value);
+		void replaceValues(int first, const QVector<double>& new_values);
+private:
+  Column(const Column&);
+};
+
 class ScriptEdit: QTextEdit
 {
 %TypeHeaderCode
@@ -80,6 +206,8 @@ private:
 
 typedef QList<MyWidget*> MDIWindowList;
 
+
+
 class Table: MyWidget
 {
 %TypeHeaderCode
@@ -120,8 +248,12 @@ class Table: MyWidget
 public:
   int numRows() /PyName=numRows/;
   int numCols() /PyName=numCols/;
+  int rowCount();
+  int columnCount();
   void setNumRows(int);
   void setNumCols(int);
+  Column * column(int index) const;
+  Column * column(const QString & name) const;
 
   SIP_PYOBJECT text(SIP_PYOBJECT, int);
 %MethodCode

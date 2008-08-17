@@ -85,6 +85,10 @@ class TableModel : public QAbstractItemModel
 #endif
 
 		Column * column(int index); // this is needed for the comment header view
+
+		void activateFormulaMode(bool on) { d_formula_mode = on; }
+		bool formulaModeActive() const { return d_formula_mode; }
+
 	private slots:
 		//! \name Handlers for events from Table
 		//@{
@@ -105,6 +109,8 @@ class TableModel : public QAbstractItemModel
 #ifdef LEGACY_CODE_0_2_x
 		bool d_read_only;
 #endif
+		//! Toggle flag for formula mode
+		bool d_formula_mode;
 }; 
 
 #endif
