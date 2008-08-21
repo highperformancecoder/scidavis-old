@@ -1,0 +1,11 @@
+Latest screenshots were done using the Cleanlooks style shipped with Qt 4.2
+and later and KDE 3.5 with settings chosen to match Cleanlooks (see below).
+
+Window decorations: Clearlooks
+	http://www.kde-look.org/content/show.php/Clearlooks-KDE?content=52772
+	with display of window icon, without caption shadow
+
+Color scheme: KDE 1 (shipped with KDE)
+
+Window title font: Sans Serif 9pt bold
+
