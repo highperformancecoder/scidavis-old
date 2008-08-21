@@ -1,4 +1,4 @@
-BASE=scidavis-manual-0.1_`date --iso`
+BASE=scidavis-manual-0.2_`date --iso`
 html-en:
 	docbook2html --dsl scidavis.dsl docbook-en/index.docbook
 
