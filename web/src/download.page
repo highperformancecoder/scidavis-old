@@ -8,12 +8,12 @@ h1. Windows
 Thanks to Mauricio Troviano, we have an installer for Windows.
 
 The installer contains the necessary Qt dlls, is able to download and install Python 
-and provides a binary version of PyQt that works with SciDAVis. The manual is not included due to its
-size and our intention to update it in between releases. Likewise, translations currently have to be
-installed seperately. Future releases of the installer may be extended to handle these things.
+and PyQt. The manual is not included due to its
+size and our intention to update it in between releases. Translations are also included 
+typically updated translations will be available a few days or weeks after a release.
 
 That said, all necessary links and files can be found
-"here":http://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=7767.
+"here":http://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=8193.
 
 h1. Linux
 
@@ -71,6 +71,12 @@ You have been warned.
 That said, you can get the sources either as .tar.bz2 or .zip archive
 "here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=236207.
 
+h1. Unstable releases
+
+Before we release a new stable version with many new features, we usually release beta versions in the
+hope that many people test them an report bugs. These development versions are available 
+"here":http://sourceforge.net/project/showfiles.php?group_id=199120&package_id=287353.
+
 h1. The bleeding edge (subversion repository)
 
 You only need to get this if you want to participate in developing SciDAVis or test the things we are
@@ -82,10 +88,13 @@ The latest stable code can be obtained as follows:
 
 {hlblock: {blockName: svncostable, highlight: plaintext}}
 
-The code of the unstable version (possibly very unstable) can be obtained from the so-called
+The code of the development version (possibly very unstable) can be obtained from the so-called
 'trunk' where the newest features are developed:
 
 {hlblock: {blockName: svnco, highlight: plaintext}}
+
+At times the development of certain features may be taking place in other branches. Contact the 
+developers about this.
 
 If you are interested in the development version, we highly recommend contacting us
 on the scidavis-contributers mailing list.
