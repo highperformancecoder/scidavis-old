@@ -42,6 +42,7 @@
   <!ENTITY scripting-chapter SYSTEM "scripting.docbook">
   <!ENTITY appendix-chapter SYSTEM "appendix.docbook">
   <!ENTITY faq-chapter SYSTEM "faq.docbook">
+  <!ENTITY index SYSTEM "index-manuel.docbook">
 
 <!--
 ======================== COMMANDS ENTITIES ============================
@@ -924,10 +925,9 @@
 <chapter id="faq">
 &faq-chapter;
 </chapter>
-
-
 <index id="test">
 <title>index</title>
+&index;
 </index>
 
 </book>

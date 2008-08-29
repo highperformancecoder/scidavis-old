@@ -16,7 +16,7 @@ revision history. (see installation appendix comment) -->
 <para>All settings of a complete set of tables, matrix and plots can be saved in project files, having the extention ".&file-ext;". These project files may be opened using the <link linkend="specify-a-file">command line</link>, or using the <link linkend="sec-file-menu">File menu</link>, or by using the <emphasis>Open project</emphasis> icon from the <link linkend="sec-file-toolbar">File toolbar</link>.</para>
 <para>The plots can be exported to several graphic formats such as JPEG or PNG and inserted as images in documents or presentations.</para>
 <para>Data analysis operations (integration, interpolation, FFT, curve fitting, etc...) can be performed on the curves in a 2D plot via the Analysis menu. The results of all these operations are also stored in the project files. They can be visualized at any moment using the &results-log-lnk; and can be deleted from the project file via the &clear-log-lnk;.</para>
-<para>When the application is launched, a new project file is created consisting of a grey main window (the workspace) which contains an empty table. In order to be operational, this workspace must be populated with tables storing data sets, either by creating empty tables first (&new-table-lnk;) and then filling them with data, or by importing ASCII files (&import-ascii-1-lnk;), which automatically creates new tables.</para>
+<para>When the application is launched, a new project file is created consisting of a grey main window (the workspace) which contains an empty table. In order to be operational, this workspace must be populated with tables storing data sets, either by creating empty tables first (&new-table-lnk;) and then filling them with data, or by importing ASCII files (&import-ascii-lnk;), which automatically creates new tables.</para>
 <para>The user can easily navigate through the objects of a project file using the project explorer or the Windows menu. The project explorer also allows the user to perform various operations on the windows (tables and plots) in the workspace: hiding, minimazing, closing, renaming, printing, etc...</para>
 
 </sect1>
@@ -40,7 +40,7 @@ revision history. (see installation appendix comment) -->
 &appname; ASCII_file_name
 </screen>
 
-<para> In this latter case a new "untitled" project will be created, containing a spreadsheet with the ASCII data in the file and a 2D plot of all columns as a function of the first column in the file. You must take care of the format of the ASCII file because it will be read with the current values of the &set-import-options-lnk; dialog. These default values are:</para>
+<para> In this latter case a new "untitled" project will be created, containing a spreadsheet with the ASCII data in the file and a 2D plot of all columns as a function of the first column in the file. You must take care of the format of the ASCII file because it will be read with the current values of the &import-ascii-lnk; dialog. The default values are:</para>
 <itemizedlist>
   <listitem><para>the default field separator is ; but it can be changed in the &preferences-lnk; dialog,</para></listitem>
   <listitem><para>all lines are read,</para></listitem>
@@ -91,16 +91,16 @@ revision history. (see installation appendix comment) -->
     <term><link linkend="sec-intro-table">A Table</link></term>
     <listitem>
       <indexterm><primary>Table</primary></indexterm>
-      <para>A table is a spreadsheet which can be used to store the datas you are entering. It can also be used to do some calculations and statistical analysis of datas. In each table, columns can be labelled as X-values or Y-values for 2D-plotting, or Z-values if you plan to build a 3D-plot.</para>
-      <para>A table can be created by the &new-table-lnk;. Then there are several ways to fill the table with your data. If you want to read a table from an ASCII file, you can import the data from the file to a table with the &import-ascii-1-lnk;. You can also enter each value from the keyboard. The last way to enter your data is to fill the table with the results of a mathematical function (&set-column-values-lnk; from the &table-menu-lnk;)</para>
+      <para>A table is a spreadsheet which can be used to store the datas you are entering. It can also be used to do some calculations and statistical analysis of datas. In each table, columns can be labelled as X-values or Y-values for 2D-plotting, or Z-values if you plan to build a 3D-plot. In addition, columns can be labelled as error on X or on Y values.</para>
+      <para>A table can be created by the &new-table-lnk;. Then there are several ways to fill the table with your data. If you want to read a table from an ASCII file, you can import the data from the file to a table with the &import-ascii-lnk;. You can also enter each value from the keyboard. The last way to enter your data is to fill the table with the results of a mathematical function (&assign-formula-lnk; from the &table-menu-lnk;)</para>
     </listitem>
   </varlistentry>
   <varlistentry>
     <term><link linkend="sec-intro-matrix">A Matrix</link></term>
     <listitem>
       <indexterm><primary>Matrix</primary></indexterm>
-      <para>A matrix is a special table which is used to store the data points for surface 3D plots. It contains Z-values and doesn't include any column or row which could be designed as X-values or Y-values. Nevertheless, you can specify the X-values and the Y-values with the &set-dimensions-lnk; command from the &matrix-menu-lnk;.</para>
-      <para>A matrix can be created by the &new-matrix-lnk;. If you want to read a matrix from an ASCII file, you can import the data of the file to a table with the &import-ascii-1-lnk; and then convert this table to a matrix with the &convert-to-matrix-lnk;. In the same way as for tables, you can also fill matrix with the results of a function z=(i,j) in which i and j are row and column numbers (&set-values-lnk; from the &matrix-menu-lnk;)</para>
+      <para>A matrix is a special table which is used to store the data points for surface 3D plots. It contains Z-values and doesn't include any column or row which could be designed as X-values or Y-values. Nevertheless, you can specify the X-values and the Y-values with the &table-dimensions-lnk; command from the &matrix-menu-lnk;.</para>
+      <para>A matrix can be created by the &new-matrix-lnk;. If you want to read a matrix from an ASCII file, you can import the data of the file to a table with the &import-ascii-lnk; and then convert this table to a matrix with the &convert-to-matrix-lnk;. In the same way as for tables, you can also fill matrix with the results of a function z=(i,j) in which i and j are row and column numbers (&assign-formula-lnk; from the &matrix-menu-lnk;)</para>
     </listitem>
   </varlistentry>
   <varlistentry>
@@ -140,14 +140,12 @@ revision history. (see installation appendix comment) -->
 -->
 <sect2 id="sec-intro-table">
 <title>Tables</title>
-
       <indexterm><primary>Table</primary></indexterm>
-<para>
-The table is the main part of &appname; when working with data. For controlling and converting data the spreadsheet contains a highly customizable table: all colors and font preferences can be set using the &preferences-lnk; of the &view-menu-lnk;. You can resize a table in terms of rows and columns using the &table-menu-lnk; with &rows-lnk; or &columns-lnk;. 
-</para>
+
+<para>The table is the main part of &appname; when working with data. For controlling and converting data the spreadsheet contains a highly customizable table: all colors and font preferences can be set using the &preferences-lnk; of the &edit-menu-lnk;. You can resize a table in terms of rows and columns using the &table-dimensions-lnk; command of the &table-menu-lnk;. On the left side of the table, the button can be used to develop the properties tags. This allows to customize the main parameters of the table.</para>
 
 <figure id="fig-the-table">
-  <title>The &appname; table</title>
+  <title>A &appname; table with the properties dialog developped and the type tag selected.</title>
   <mediaobject>
     <imageobject>
       <imagedata  format="PNG" fileref="pics/table.png"/>
@@ -155,17 +153,51 @@ The table is the main part of &appname; when working with data. For controlling 
   </mediaobject>
 </figure>
 
-<para> Every column of the table has a label and can be assigned a format: numeric, text, date or time. In a spreadsheet, columns can have the following flags: X, Y, Z, X-error, Y-error or can be simple columns without any special flag. The X columns are abscissae columns while the Y columns are ordinates columns used when creating a 2D plot from data. The X-error and Y-error columns can be used in order to add error bars to 2D plots. These flags can be changed using the <link linkend="column-options-dialog">Column options dialog</link>. To reach this dialog you simply have to double-click on the column label or to use the  &column-options-lnk; of the &table-menu-lnk;.</para>
+<para>In a spreadsheet, columns can have the following flags: X, Y, Z, X-error, Y-error or can be simple columns without any special flag. The X columns are abscissae columns while the Y columns are ordinates columns used when creating a 2D plot from data. The X-error and Y-error columns can be used in order to add error bars to 2D plots. These flags can be changed using the &set-column-as-lnk;.</para>
+
+<para>The tag which is selected in the following figure is used to assign a type to columns: numeric, text, date or time. The format used to display the data can then be chosen, the format in tables is not used for plots (use the &format-axes-lnk; to define display format for axes labels).</para>
+
+<figure id="fig-the-table_2">
+  <title>The two other tags of the properties dialog of &appname; tables.</title>
+  <mediaobject>
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/table_tag_1_3.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
+<indexterm><primary>Table</primary><secondary>Labels</secondary></indexterm>
+<para>Every column of the table has a label, this can be defined in the description tag.  This label will be used by default in plots for curve selection and legend display. You can use complex labels with spaces and special characters like "Vol (cc/g)" if needed. This command can also be reached by the &edit-column-description-lnk; of the &table-menu-lnk;.</para>
+
+<para>The last tag of the properties dialog correspond to the command &assign-formula-lnk; of the &table-menu-lnk;. It is used to fill the column with the result of a mathematic expression. Refer to the &assign-formula-lnk; for more details.</para>
 
 <para> You can select all the columns of the spreadsheet (<keycode>Ctrl+A</keycode>) or only some of them by clicking on the column label while keeping the <keycode>Ctrl</keycode> key pressed, or by moving the mouse over the column label. This also allows you to deselect columns.</para>
 
-<para> On the selected columns you can perform various operations: fill with data, normalize, sort, view statistics and finally make plots out of your data. All these functions can be reached by right clicking on the column label or by using the &table-menu-lnk;.</para>
+<para> On the selected columns you can perform various operations: </para>
+<itemizedlist>
+  <listitem>
+     <para>Fill with data. You can insert the row numbers (&fill-column-with-row-numbers-lnk;), random numbers (&fill-column-with-random-values-lnk;), or the result of a function (&assign-formula-lnk;);</para>
+  </listitem>
+  <listitem>
+     <para>normalize columns;</para>
+  </listitem>
+  <listitem>
+    <para>sort columns;</para>
+  </listitem>
+  <listitem>
+    <para>compute statistical data on columns;</para>
+  </listitem>
+  <listitem>
+    <para>build a plot from selected columns;</para>
+  </listitem>
+</itemizedlist>
+<para>All these functions can be reached by right clicking on the column label. Some of them can also be reached by using the &table-menu-lnk;.</para>
 
-<para> Any other spreadsheet function: rename, duplicate, export, print, close can be reached via the context menu (right click anywhere in the table outside the column labels area). </para>
+<para> Any other spreadsheet function: rename, duplicate, print, close can be reached via the context menu (right click anywhere in the table outside the column labels area). </para>
 
 <para> You can cut, copy and paste data between spreadsheets or between a spreadsheet and another application (Excel, Gnumeric, etc...).</para>
 
-<para> You can import single or multiple ASCII files using the &import-ascii-lnk; from the &file-menu-lnk;. The file import options can be changed via the &set-import-options-lnk;. Of course you can export the data from the spreadsheet to a text file using the &export-ascii-lnk;.</para>
+<para> You can import single or multiple ASCII files using the &import-ascii-lnk; from the &file-menu-lnk;. Of course you can export the data from the spreadsheet to a text file using the &export-ascii-lnk;.</para>
 
 </sect2>
 
@@ -176,7 +208,8 @@ The table is the main part of &appname; when working with data. For controlling 
 <sect2 id="sec-intro-matrix">
   <title>Matrix</title>
   <indexterm><primary>Matrix</primary></indexterm>
-  <para>The matrix is a special table which is used for data which depends on two variables. This special table is used to store data for 3D-plots. The difference between a table and a matrix is that there is no special column nor special row for X or Y labels or values. Nevertheless, you can specify an X-scale and an Y-scale with the &set-dimensions-lnk;.</para>
+  <para>The matrix is a special table which is used for data which depends on two variables. This special table is used to store data for 3D-plots. The difference between a table and a matrix is that there is that columns are assigned to the abscissae x while rows define abscissae y.</para>
+  <para>The defaut size of a matrix is 32x32 cells. You can modify this size with the &matrix-dimensions-lnk;. Column and row numbers are named i and j respectively, ranging from 1 to the size of the matrix. You can specify an X-scale and an Y-scale with the &set-coordinates-lnk;, this define values of x and y for columns and rows.</para>
 
 <figure id="fig-matrix">
   <title>The &appname; matrix</title>
@@ -187,8 +220,9 @@ The table is the main part of &appname; when working with data. For controlling 
   </mediaobject>
 </figure>
 
-  <para>The values which are stored in a matrix can be obtained from a function of the form z=(i,j) with the &set-values-lnk;, i and j beeing the column and row numbers. They can also be read from a file with the &import-ascii-lnk; which allows to read a file in a table, then the table can be converted to a matrix with the &convert-to-matrix-lnk; of the &matrix-menu-lnk;.</para>
-  <para>The operations which can be done on a matrix are limited changes in number presentation and matrix size. The data of a matrix can be used to build a 3D plot with the commands present in the &plot3d-menu-lnk; and in &plot3d-toolbar-lnk;.</para>
+  <para>The values which are stored in a matrix can be obtained from a function of the form z=f(i,j) or z=f(x,y) with the &assign-formula-lnk;. They can also be read from a file with the &import-ascii-lnk; which allows to read a file in a table, then the table can be converted to a matrix with the &convert-to-matrix-lnk; of the &matrix-menu-lnk;.</para>
+  <para>As in the case of tables, a property tag can be shown or hidden by clicking on the vertical button on the right.</para>
+  <para>Through the &matrix-menu-lnk;, several operations can be done on a matrix like transposition (&transpose-lnk;), mirroring (&mirror-horizontally-lnk; and &mirror-vertically-lnk;), inversion (&invert-lnk;), computation of the determinant (&determinant-lnk;). The data of a matrix can then be used to build a 3D plot with the commands present in the &plot3d-menu-lnk; and in &plot3d-toolbar-lnk;.</para>
 
 </sect2>
 
@@ -199,10 +233,14 @@ The table is the main part of &appname; when working with data. For controlling 
 <sect2 id="sec-intro-plot-window">
 <title>Plot Window</title>
 
-<para>The plot window is the one in which the graphic is plotted. It contains at least one layer, which is the main container of the plot window. Each new plot can be inserted in a new layer of this plot window, it has its own geometry and graphic properties (background color, frame, etc). The example presented below shows a graph with two layers which have different geometries.</para>
+<indexterm><primary>Plot</primary></indexterm>
+<indexterm><primary>Plot</primary><secondary>Layer</secondary></indexterm>
+
+<para>The plot window is the one in which the graphic is plotted. The main container of the plot window is the layer. You can have several layers in a plot, which may be arranged as you want. Each layer can contain a plot, or another item like a label.</para>
+<para>Each new plot can be inserted in a new layer of this plot window, it has its own geometry and graphic properties (background color, frame, etc). The example presented below shows a graph with two layers which have different geometries.</para>
 
 <figure id="fig-plot-window">
-  <title>An example of &appname; 2D graph</title>
+  <title>An example of &appname; 2D graph with 2 layers.</title>
   <mediaobject>
     <imageobject>
       <imagedata  format="PNG" fileref="pics/plot-window.png"/>
@@ -226,6 +264,7 @@ The table is the main part of &appname; when working with data. For controlling 
 </listitem>
 </itemizedlist>
 
+<para>All these functions can be reached through the &format-menu-lnk;.</para>
 </sect2>
 
 <!--
@@ -263,16 +302,18 @@ The table is the main part of &appname; when working with data. For controlling 
 <sect2 id="sec-intro-log-window">
 <title>Log Window</title>
 
-<para>This window keeps a history of all analysis which have been done in the project. This panel contains the results of all the correlations, fittings, etc.</para>
+<para>This window keeps a history of all analysis which have been done in the project. This panel contains the results of all the correlations, fittings, etc. It can be shown or hidden with the &results-log-lnk; of the &view-menu-lnk;.</para>
 
 <figure id="fig-log-window">
-  <title>The &appname; Log window</title>
+  <title>The &appname; Log window with the information related to a fit on a curve</title>
   <mediaobject>
     <imageobject>
       <imagedata  format="PNG" fileref="pics/log-window.png"/>
     </imageobject>
   </mediaobject>
 </figure>
+<para>You can clear the content of the log window with the command &clear-log-information-lnk; of the &edit-menu-lnk;.</para>
+
 </sect2>
 
 <!--
