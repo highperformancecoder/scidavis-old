@@ -1,0 +1,280 @@
+<index>
+
+<!-- This file was produced by collateindex.pl.         -->
+<!-- Remove this comment if you edit this file by hand! -->
+<!-- ULINK is abused here.
+
+      The URL attribute holds the URL that points from the index entry
+      back to the appropriate place in the output produced by the HTML
+      stylesheet. (It's much easier to calculate this URL in the first
+      pass.)
+
+      The Role attribute holds the ID (either real or manufactured) of
+      the corresponding INDEXTERM.  This is used by the print backends
+      to produce page numbers.
+
+      The entries below are sorted and collated into the correct order.
+      Duplicates may be removed in the HTML backend, but in the print
+      backends, it is impossible to suppress duplicate pages or coalesce
+      sequences of pages into a range.
+-->
+
+<indexentry>
+  <primaryie>Arrows and Lines
+  </primaryie>
+  <secondaryie>Add an arrow/line,
+    <ulink url="x3442.html" role="AEN3444">Add Arrow</ulink>
+  </secondaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Command line parameters
+  </primaryie>
+  <secondaryie>Options,
+    <ulink url="x94.html#scidavis-options" role="AEN127">Command Line Options</ulink>
+  </secondaryie>
+  <secondaryie>Specify a File,
+    <ulink url="x94.html#specify-a-file" role="AEN98">Specify a File</ulink>
+  </secondaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Curve analysis
+  </primaryie>
+  <secondaryie>Curve filtering,
+    <ulink url="x4281.html" role="AEN4286">Filtering of data curves</ulink>
+  </secondaryie>
+  <tertiaryie>Band pass FFT,
+    <ulink url="x4281.html#sec-fft-filter-band" role="AEN4336">FFT band pass filter</ulink>
+  </tertiaryie>
+  <tertiaryie>Block pass FFT,
+    <ulink url="x4281.html#sec-fft-filter-block" role="AEN4353">FFT block band filter</ulink>
+  </tertiaryie>
+  <tertiaryie>High pass FFT,
+    <ulink url="x4281.html#sec-fft-filter-high" role="AEN4319">FFT high pass filter</ulink>
+  </tertiaryie>
+  <tertiaryie>Low pass FFT,
+    <ulink url="x4281.html#sec-fft-filter-low" role="AEN4302">FFT low pass filter</ulink>
+  </tertiaryie>
+  <secondaryie>Curve fitting
+  </secondaryie>
+  <tertiaryie>Bolzmann function,
+    <ulink url="x4162.html#sec-fit-bolzmann" role="AEN4204">Fitting to a Bolzmann function</ulink>
+  </tertiaryie>
+  <tertiaryie>Gaussian function,
+    <ulink url="x4162.html#sec-fit-gaussian" role="AEN4226">Fitting to a Gauss function</ulink>
+  </tertiaryie>
+  <tertiaryie>line,
+    <ulink url="x4162.html#sec-fit-linear" role="AEN4167">Fitting to a line</ulink>
+  </tertiaryie>
+  <tertiaryie>Lorentz function,
+    <ulink url="x4162.html#sec-fit-lorentzian" role="AEN4247">Fitting to a Lorentz function</ulink>
+  </tertiaryie>
+  <tertiaryie>Multi peak,
+    <ulink url="x4266.html" role="AEN4268">Multi-Peaks fitting</ulink>
+  </tertiaryie>
+  <tertiaryie>Non linear function,
+    <ulink url="x3693.html" role="AEN3695">Non linear curve fit</ulink>,
+    <ulink url="x4144.html" role="AEN4146">Non Linear Curve Fit</ulink>
+  </tertiaryie>
+  <tertiaryie>Polynom,
+    <ulink url="x4162.html#sec-fit-polynomial" role="AEN4186">Fitting to a polynome</ulink>
+  </tertiaryie>
+  <secondaryie>FFT,
+    <ulink url="x3649.html" role="AEN3651">Fast Fourier Transform</ulink>,
+    <ulink url="c4061.html#sec-fft" role="AEN4065">Fast Fourier Transform</ulink>
+  </secondaryie>
+  <secondaryie>Integration,
+    <ulink url="x3677.html" role="AEN3679">Integrate dialog</ulink>
+  </secondaryie>
+  <secondaryie>interpolation,
+    <ulink url="x4368.html" role="AEN4370">Interpolation</ulink>
+  </secondaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Filtering
+  </primaryie>
+    <seeie>Curve analysis</seeie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Matrix,
+    <ulink url="x145.html" role="AEN180">General Concepts and Terms</ulink>,
+    <ulink url="x145.html#sec-intro-matrix" role="AEN303">Matrix</ulink>
+  </primaryie>
+  <secondaryie>Create a new matrix,
+    <ulink url="c750.html#sec-file-menu" role="AEN761">The File Menu</ulink>
+  </secondaryie>
+  <secondaryie>Dimensions,
+    <ulink url="x3901.html" role="AEN3904">Dimensions</ulink>
+  </secondaryie>
+  <secondaryie>Fill with a function,
+    <ulink url="x3917.html" role="AEN3920">Assign Formula</ulink>
+  </secondaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Multilayers plot,
+    <ulink url="x678.html" role="AEN680">Multilayer Plots</ulink>
+  </primaryie>
+  <secondaryie>Add a new layer,
+    <ulink url="x3356.html" role="AEN3358">Add Layer</ulink>
+  </secondaryie>
+  <secondaryie>Organize the layers,
+    <ulink url="x3419.html" role="AEN3421">Arrange Layers</ulink>
+  </secondaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Options,
+    <ulink url="x3811.html" role="AEN3813">Preferences Dialog</ulink>
+  </primaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Plot,
+    <ulink url="x145.html" role="AEN200">General Concepts and Terms</ulink>,
+    <ulink url="x145.html#sec-intro-plot-window" role="AEN341">Plot Window</ulink>,
+    <ulink url="c413.html#sec-2d-plots" role="AEN417">2D plots</ulink>
+  </primaryie>
+  <secondaryie>Add a curve,
+    <ulink url="x3374.html" role="AEN3376">Add/Remove curves.</ulink>
+  </secondaryie>
+  <secondaryie>Change default options,
+    <ulink url="x3811.html" role="AEN3841">Preferences Dialog</ulink>
+  </secondaryie>
+  <secondaryie>Create a new plot,
+    <ulink url="c750.html#sec-file-menu" role="AEN764">The File Menu</ulink>
+  </secondaryie>
+  <secondaryie>Create from data,
+    <ulink url="c413.html#sec-2d-plot-from-data" role="AEN444">2D plot from data.</ulink>
+  </secondaryie>
+  <secondaryie>Create from function,
+    <ulink url="c413.html#sec-2d-plot-from-function" role="AEN534">2D plot from function.</ulink>
+  </secondaryie>
+  <secondaryie>Create with the assistant,
+    <ulink url="x3781.html" role="AEN3783">Plot Wizard</ulink>
+  </secondaryie>
+  <secondaryie>Curves options,
+    <ulink url="x3525.html" role="AEN3527">Custom Curves</ulink>
+  </secondaryie>
+  <secondaryie>Error bars,
+    <ulink url="c3281.html#add-error-bars-dialog" role="AEN3285">Add Error bars</ulink>
+  </secondaryie>
+  <secondaryie>Layer,
+    <ulink url="x145.html#sec-intro-plot-window" role="AEN343">Plot Window</ulink>
+  </secondaryie>
+  <secondaryie>Plot a function,
+    <ulink url="x3319.html" role="AEN3321">Add Function</ulink>
+  </secondaryie>
+  <secondaryie>Properties,
+    <ulink url="x3745.html" role="AEN3747">General Plot Options</ulink>
+  </secondaryie>
+  <secondaryie>Remove a curve,
+    <ulink url="x3374.html" role="AEN3379">Add/Remove curves.</ulink>
+  </secondaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Printing,
+    <ulink url="x3887.html" role="AEN3889">Printer-setup</ulink>
+  </primaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Project explorer,
+    <ulink url="x3801.html" role="AEN3803">Project Explorer</ulink>
+  </primaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Scripting,
+    <ulink url="c4386.html" role="AEN4388">Mathematical Expressions and Scripting</ulink>
+  </primaryie>
+  <secondaryie>MuParser,
+    <ulink url="c4386.html#sec-muParser" role="AEN4393">muParser</ulink>
+  </secondaryie>
+  <secondaryie>Python,
+    <ulink url="x4600.html" role="AEN4602">Python</ulink>
+  </secondaryie>
+  <tertiaryie>Mathematical functions,
+    <ulink url="x4600.html#Python-functions" role="AEN4666">Mathematical Functions</ulink>
+  </tertiaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Surface plot,
+    <ulink url="x582.html" role="AEN584">3D plots</ulink>
+  </primaryie>
+  <secondaryie>Change default options,
+    <ulink url="x3811.html" role="AEN3844">Preferences Dialog</ulink>
+  </secondaryie>
+  <secondaryie>Coutour curves options,
+    <ulink url="x3480.html" role="AEN3482">Contour Curves Options</ulink>
+  </secondaryie>
+  <secondaryie>Create a new surface plot,
+    <ulink url="c750.html#sec-file-menu" role="AEN767">The File Menu</ulink>
+  </secondaryie>
+  <secondaryie>Create from data,
+    <ulink url="x582.html#sec-3d-plot-matrix" role="AEN650">3D plot from a matrix</ulink>
+  </secondaryie>
+  <secondaryie>Create from function,
+    <ulink url="x582.html#sec-3d-plot-function" role="AEN617">Direct 3D plot from a function</ulink>,
+    <ulink url="x3617.html" role="AEN3619">Define surface plot</ulink>
+  </secondaryie>
+  <secondaryie>Options,
+    <ulink url="x3936.html" role="AEN3991">Surface plot options</ulink>
+  </secondaryie>
+  <secondaryie>Properties,
+    <ulink url="x3936.html" role="AEN3938">Surface plot options</ulink>
+  </secondaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Table,
+    <ulink url="x145.html" role="AEN165">General Concepts and Terms</ulink>,
+    <ulink url="x145.html#sec-intro-table" role="AEN237">Tables</ulink>
+  </primaryie>
+  <secondaryie>Columns
+  </secondaryie>
+  <tertiaryie>Fill with values,
+    <ulink url="x1832.html" role="AEN1891">The Table Menu</ulink>
+  </tertiaryie>
+  <secondaryie>Create a new table,
+    <ulink url="c750.html#sec-file-menu" role="AEN758">The File Menu</ulink>
+  </secondaryie>
+  <secondaryie>Export to file,
+    <ulink url="x3631.html" role="AEN3633">Export ASCII</ulink>
+  </secondaryie>
+  <secondaryie>Labels,
+    <ulink url="i261.html" role="AEN262">Index</ulink>
+  </secondaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Table analysis
+  </primaryie>
+  <secondaryie>Convolution,
+    <ulink url="x4132.html" role="AEN4134">Convolution</ulink>
+  </secondaryie>
+  <secondaryie>Correlation function,
+    <ulink url="x4094.html" role="AEN4096">Correlation</ulink>
+  </secondaryie>
+  <secondaryie>Deconvolution,
+    <ulink url="x4138.html" role="AEN4140">Deconvolution</ulink>
+  </secondaryie>
+</indexentry>
+
+<indexentry>
+  <primaryie>Text label
+  </primaryie>
+  <secondaryie>Add a text label,
+    <ulink url="x3399.html" role="AEN3401">Add Text</ulink>
+  </secondaryie>
+  <secondaryie>Properties,
+    <ulink url="x3999.html" role="AEN4001">Text options</ulink>
+  </secondaryie>
+</indexentry>
+
+</index>

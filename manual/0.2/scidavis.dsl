@@ -21,6 +21,15 @@
 	;; extension of HTML output files
 	".html")
 
+(define %html-index%
+  ;; HTML indexing?
+  #t)
+
+(define %html-index-filename%
+  ;; Name of HTML index file
+  "index-manuel.html")
+
+
 (define %root-filename%
 	;; name of main HTML file (without extension)
 	"index")

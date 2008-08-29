@@ -1,6 +1,8 @@
 BASE=scidavis-manual-0.2_`date --iso`
 html-en:
 	docbook2html --dsl scidavis.dsl docbook-en/index.docbook
+	collateindex.pl html/HTML.index >docbook-en/index-manuel.docbook
+	docbook2html --dsl scidavis.dsl docbook-en/index.docbook
 
 html-packages:
 	rm -rf manual
