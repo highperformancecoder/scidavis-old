@@ -32,46 +32,7 @@
 
 ##################### SIP generated files #####################
 
-  HEADERS += $${SIP_DIR}/sipscidavisApplicationWindow.h\
-             $${SIP_DIR}/sipscidavisGraph.h\
-             $${SIP_DIR}/sipscidavisArrowMarker.h\
-             $${SIP_DIR}/sipscidavisImageMarker.h\
-             $${SIP_DIR}/sipscidavisLegend.h\
-             $${SIP_DIR}/sipscidavisMultiLayer.h\
-             $${SIP_DIR}/sipscidavisTable.h\
-             $${SIP_DIR}/sipscidavisMatrix.h\
-             $${SIP_DIR}/sipscidavisMyWidget.h\
-             $${SIP_DIR}/sipscidavisScriptEdit.h\
-             $${SIP_DIR}/sipscidavisNote.h\
-             $${SIP_DIR}/sipscidavisPythonScript.h\
-             $${SIP_DIR}/sipscidavisPythonScripting.h\
-             $${SIP_DIR}/sipscidavisFolder.h\
-             $${SIP_DIR}/sipscidavisQList.h\
-             $${SIP_DIR}/sipscidavisFit.h \
-             $${SIP_DIR}/sipscidavisExponentialFit.h \
-             $${SIP_DIR}/sipscidavisTwoExpFit.h \
-             $${SIP_DIR}/sipscidavisThreeExpFit.h \
-             $${SIP_DIR}/sipscidavisSigmoidalFit.h \
-             $${SIP_DIR}/sipscidavisGaussAmpFit.h \
-             $${SIP_DIR}/sipscidavisLorentzFit.h \
-             $${SIP_DIR}/sipscidavisNonLinearFit.h \
-             $${SIP_DIR}/sipscidavisPluginFit.h \
-             $${SIP_DIR}/sipscidavisMultiPeakFit.h \
-             $${SIP_DIR}/sipscidavisPolynomialFit.h \
-             $${SIP_DIR}/sipscidavisLinearFit.h \
-             $${SIP_DIR}/sipscidavisGaussFit.h \
-             $${SIP_DIR}/sipscidavisFilter.h \
-             $${SIP_DIR}/sipscidavisDifferentiation.h \
-             $${SIP_DIR}/sipscidavisIntegration.h \
-             $${SIP_DIR}/sipscidavisInterpolation.h \
-             $${SIP_DIR}/sipscidavisSmoothFilter.h \
-             $${SIP_DIR}/sipscidavisFFTFilter.h \
-             $${SIP_DIR}/sipscidavisFFT.h \
-             $${SIP_DIR}/sipscidavisCorrelation.h \
-             $${SIP_DIR}/sipscidavisConvolution.h \
-             $${SIP_DIR}/sipscidavisDeconvolution.h \
-             $${SIP_DIR}/sipscidavisAbstractAspect.h\
-             $${SIP_DIR}/sipscidavisColumn.h\
+  HEADERS += $${SIP_DIR}/sipAPIscidavis.h
 
   SOURCES += $${SIP_DIR}/sipscidaviscmodule.cpp\
              $${SIP_DIR}/sipscidavisApplicationWindow.cpp\
