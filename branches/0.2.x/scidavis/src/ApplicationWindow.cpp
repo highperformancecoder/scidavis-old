@@ -9156,7 +9156,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 				if (d_file_version < 90)
 					w->setCell(row, col, QLocale::c().toDouble(cell));
 				else if (d_file_version >= 0x000100)
-					w->setCell(row, col, cell.toDouble());
+					w->setCell(row, col, QLocale().toDouble(cell));
 				else
 					w->setText(row, col, cell);
 			}
@@ -9257,7 +9257,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 					if (d_file_version < 90 && w->columnType(col) == SciDAVis::Numeric)
 						w->setCell(row, col, QLocale::c().toDouble(cell.replace(",", ".")));
 					else if (d_file_version >= 0x000100 && w->columnType(col) == SciDAVis::Numeric)
-						w->setCell(row, col, cell.toDouble());
+						w->setCell(row, col, QLocale().toDouble(cell));
 					else
 						w->setText(row, col, cell);
 				}

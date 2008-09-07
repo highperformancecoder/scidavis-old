@@ -16,7 +16,7 @@ DEFINES       += DOC_PATH="\\\"$$replace(documentation.path," ","\ ")\\\"
 DEFINES       += MANUAL_PATH="\\\"$$replace(manual.path," ","\ ")\\\"
 }
 win32:DEFINES += QT_DLL QT_THREAD_SUPPORT
-QT            += opengl qt3support network svg
+QT            += opengl qt3support network svg xml
 
 MOC_DIR        = ../tmp/scidavis
 OBJECTS_DIR    = ../tmp/scidavis
