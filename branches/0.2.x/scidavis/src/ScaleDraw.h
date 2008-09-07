@@ -120,6 +120,22 @@ private:
 	QString t_format;
 };
 
+class DateTimeScaleDraw: public ScaleDraw
+{
+public:
+	DateTimeScaleDraw(const QDateTime & origin, const QString & format);
+	~DateTimeScaleDraw(){};
+
+	QString origin();
+
+	QString format() { return d_format; };
+	QwtText label(double value) const;
+
+private:
+	QDateTime d_origin;
+	QString d_format;
+};
+
 class WeekDayScaleDraw: public ScaleDraw
 {
 public:

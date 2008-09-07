@@ -197,6 +197,28 @@ return QwtText(t.toString ( t_format ));
 
 /*****************************************************************************
  *
+ * Class DateTimeScaleDraw
+ *
+ *****************************************************************************/
+
+DateTimeScaleDraw::DateTimeScaleDraw(const QDateTime & origin, const QString& format):
+	d_origin (origin), d_format (format)
+{
+}
+
+QString DateTimeScaleDraw::origin()
+{
+	return d_origin.toString(d_format);
+}
+
+QwtText DateTimeScaleDraw::label(double value) const
+{
+	QDateTime dt = d_origin.addDays( (int) value );
+	return QwtText(dt.toString(d_format));
+}
+
+/*****************************************************************************
+ *
  * Class WeekDayScaleDraw
  *
  *****************************************************************************/

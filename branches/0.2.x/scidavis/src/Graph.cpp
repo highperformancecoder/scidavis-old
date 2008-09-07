@@ -431,7 +431,7 @@ QString Graph::saveAxesLabelsType()
 	{
 		int type = axisType[i];
 		s+=QString::number(type);
-		if (type == Time || type == Date || type == Txt ||
+		if (type == Time || type == Date || type == DateTime || type == Txt ||
 				type == ColHeader || type == Day || type == Month)
 			s += ";" + axesFormatInfo[i];
 		s+="\t";
@@ -685,7 +685,7 @@ void Graph::showAxis(int axis, int type, const QString& formatInfo, Table *table
 			setLabelsDayFormat (axis, format);
 		else if (type == Month)
 			setLabelsMonthFormat (axis, format);
-		else if (type == Time || type == Date)
+		else if (type == Time || type == Date || type == DateTime)
 			setLabelsDateTimeFormat (axis, type, formatInfo);
 		else
 			setLabelsTextFormat(axis, type, formatInfo, table);
@@ -805,6 +805,12 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 	else if (type == Date)
 	{
 		DateScaleDraw *sd = new DateScaleDraw (QDate::fromString (list[0], Qt::ISODate), list[1]);
+		sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
+		d_plot->setAxisScaleDraw (axis, sd);
+	}
+	else if (type == DateTime)
+	{
+		DateTimeScaleDraw *sd = new DateTimeScaleDraw (QDateTime::fromString (list[0], Qt::ISODate), list[1]);
 		sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 		d_plot->setAxisScaleDraw (axis, sd);
 	}
@@ -3187,6 +3193,7 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	QStringList xLabels, yLabels;// store text labels
 	QTime time0;
 	QDate date0;
+	QDateTime date_time0;
     QLocale locale;
 
 	if (endRow < 0)
@@ -3214,6 +3221,16 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 			}
 		}
 	}
+	else if (xColType == Table::DateTime){ 
+		for (i = startRow; i<=endRow; i++ ){
+			QString xval=w->text(i,xcol);
+			if (!xval.isEmpty()){
+				date_time0 = QDateTime::fromString(xval, date_time_fmt);
+				if (date_time0.isValid())
+					break;
+			}
+		}
+	}
 
 	for (i = startRow; i<=endRow; i++ ){
 		QString xval=w->text(i,xcol);
@@ -3236,6 +3253,11 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 				QDate d = QDate::fromString (xval, date_time_fmt);
 				if (d.isValid())
 					X[size] = (double) date0.daysTo(d);
+			}
+			else if (xColType == Table::DateTime){
+				QDateTime dt = QDateTime::fromString (xval, date_time_fmt);
+				if (dt.isValid())
+					X[size] = (double) date_time0.daysTo(dt);
 			}
 			else
                 X[size] = QLocale().toDouble(xval, &valid_data);
@@ -3314,6 +3336,13 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 			setLabelsDateTimeFormat(QwtPlot::yLeft, Date, fmtInfo);
 		else
 			setLabelsDateTimeFormat(QwtPlot::xBottom, Date, fmtInfo);
+	}
+	else if (xColType == Table::DateTime ){
+		QString fmtInfo = date_time0.toString(Qt::ISODate) + ";" + date_time_fmt;
+		if (style == HorizontalBars)
+			setLabelsDateTimeFormat(QwtPlot::yLeft, DateTime, fmtInfo);
+		else
+			setLabelsDateTimeFormat(QwtPlot::xBottom, DateTime, fmtInfo);
 	}
 
 	if (yColType == Table::Text){
@@ -4570,7 +4599,7 @@ void Graph::copy(Graph* g)
 				setLabelsDayFormat(i, axesFormatInfo[i].toInt());
 			else if (axisType[i] == Graph::Month)
 				setLabelsMonthFormat(i, axesFormatInfo[i].toInt());
-			else if (axisType[i] == Graph::Time || axisType[i] == Graph::Date)
+			else if (axisType[i] == Graph::Time || axisType[i] == Graph::Date || axisType[i] == Graph::DateTime)
 				setLabelsDateTimeFormat(i, axisType[i], axesFormatInfo[i]);
 			else
 			{

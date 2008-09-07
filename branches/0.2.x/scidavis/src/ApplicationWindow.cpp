@@ -9869,7 +9869,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 					ag->setLabelsDayFormat(i, lst[1].toInt());
 				else if (format == Graph::Month)
 					ag->setLabelsMonthFormat(i, lst[1].toInt());
-				else if (format == Graph::Time || format == Graph::Date)
+				else if (format == Graph::Time || format == Graph::Date || format == Graph::DateTime)
 					ag->setLabelsDateTimeFormat(i, format, lst[1]+";"+lst[2]);
 				else if (lst.size() > 1)
 				{
