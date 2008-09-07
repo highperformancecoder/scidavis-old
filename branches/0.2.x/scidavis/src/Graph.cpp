@@ -2802,7 +2802,7 @@ CurveLayout Graph::initCurveLayout(int style, int curves)
 		cl.lCol=0;//black color pen
 		cl.aCol=i+1;
 		cl.sType = 0;
-		if (c_type[i] == Graph::VerticalBars || style == Graph::HorizontalBars)
+		if (style == Graph::VerticalBars || style == Graph::HorizontalBars)
 		{
 			QwtBarCurve *b = (QwtBarCurve*)curve(i);
 			if (b)
@@ -3122,10 +3122,12 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
 
 		for (int i=0; i<curves; i++)
 		{
+			CurveType type_of_i;
             int j = w->colIndex(names[i]);
             bool ok = false;
             if (w->colPlotDesignation(j) == SciDAVis::xErr || w->colPlotDesignation(j) == SciDAVis::yErr)
 			{
+				type_of_i = ErrorBars;
 				int ycol = w->colY(w->colIndex(names[i]));
                 if (ycol < 0)
                     return false;
@@ -3135,12 +3137,14 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
                 else
                     ok = addErrorBars(w->colName(ycol), w, names[i]);
 			}
-			else
-                ok = insertCurve(w, names[i], style, startRow, endRow);
+			else {
+				type_of_i = (CurveType) style;
+				ok = insertCurve(w, names[i], style, startRow, endRow);
+			}
 
             if (ok)
 			{
-				CurveLayout cl = initCurveLayout(style, curves - errCurves);
+				CurveLayout cl = initCurveLayout(type_of_i, curves - errCurves);
 				cl.sSize = sSize;
 				cl.lWidth = lWidth;
 				updateCurveLayout(i, &cl);

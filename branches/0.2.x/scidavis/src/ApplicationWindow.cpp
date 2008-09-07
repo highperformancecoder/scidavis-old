@@ -13493,6 +13493,7 @@ void ApplicationWindow::selectPlotType(int type)
 	if (table && validFor2DPlot(table)) {
 		multilayerPlot(table, table->drawableColumnSelection(), (Graph::CurveType)type, 
 				table->firstSelectedRow(), table->lastSelectedRow());
+		return;
 	}
 
 	MultiLayer *ml = qobject_cast<MultiLayer*>(d_workspace->activeWindow());
