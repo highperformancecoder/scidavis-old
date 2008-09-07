@@ -11,6 +11,8 @@ The installer contains the necessary Qt dlls, is able to download and install Py
 and PyQt. The manual is not included due to its
 size and our intention to update it in between releases. Translations are also included 
 typically updated translations will be available a few days or weeks after a release.
+Note: The installer is designed for 32bit Windows. It is reported to run on 64bit Windows as well
+as long as the 32bit version of Python is installed.
 
 That said, all necessary links and files can be found
 "here":http://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=8193.
