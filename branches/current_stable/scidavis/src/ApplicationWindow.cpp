@@ -14127,11 +14127,4 @@ void ApplicationWindow::selectPlotType(int type)
 		Q3TableSelection sel = table->getSelection();
 		multilayerPlot(table, table->drawableColumnSelection(), (Graph::CurveType)type, sel.topRow(), sel.bottomRow());
 	}
-
-	MultiLayer *ml = qobject_cast<MultiLayer*>(ws->activeWindow());
-	if (ml) {
-		Graph *g = ml->activeGraph();
-		if(g->curves() > 0)
-			g->setCurveType(g->curves()-1, (Graph::CurveType)type);
-	}
 }
