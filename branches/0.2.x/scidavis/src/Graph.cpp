@@ -3257,7 +3257,10 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 			else if (xColType == Table::DateTime){
 				QDateTime dt = QDateTime::fromString (xval, date_time_fmt);
 				if (dt.isValid())
-					X[size] = (double) date_time0.daysTo(dt);
+				{
+					X[size] = double(dt.date().toJulianDay()) +
+						double( -dt.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
+				}
 			}
 			else
                 X[size] = QLocale().toDouble(xval, &valid_data);

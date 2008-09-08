@@ -73,6 +73,8 @@ public:
 
 	void setGraph(Graph *g);
 
+	int currentSelectedAxisType();
+
 protected:
 	//! generate UI for the axes page
 	void initAxesPage();
@@ -132,7 +134,6 @@ protected:
 
 public slots:
 	void setAxisType(int axis);
-	void updateAxisType(int axis);
 	void updateTitleBox(int axis);
 	bool updatePlot();
 	void updateScale();

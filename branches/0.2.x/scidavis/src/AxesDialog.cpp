@@ -411,13 +411,14 @@ void AxesDialog::initAxesPage()
 	leftBoxLayout->addWidget( new QLabel(tr( "Type" )), 0, 0 );
 
 	boxAxisType= new QComboBox();
-	boxAxisType->addItem(tr("Numeric"));
-	boxAxisType->addItem(tr("Text from table"));
-	boxAxisType->addItem(tr("Day of the week"));
-	boxAxisType->addItem(tr("Month"));
-	boxAxisType->addItem(tr("Time"));
-	boxAxisType->addItem(tr("Date"));
-	boxAxisType->addItem(tr("Column Headings"));
+	boxAxisType->addItem(tr("Numeric"), Graph::Numeric);
+	boxAxisType->addItem(tr("Text from table"), Graph::Text);
+	boxAxisType->addItem(tr("Day of the week"), Graph::Day);
+	boxAxisType->addItem(tr("Month"), Graph::Month);
+	boxAxisType->addItem(tr("Time"), Graph::Time);
+	boxAxisType->addItem(tr("Date"), Graph::Date);
+	boxAxisType->addItem(tr("Date & Time"), Graph::DateTime);
+	boxAxisType->addItem(tr("Column Headings"), Graph::ColHeader);
 	leftBoxLayout->addWidget( boxAxisType, 0, 1 );
 
 	leftBoxLayout->addWidget( new QLabel(tr( "Font" )), 1, 0 );
@@ -790,12 +791,6 @@ void AxesDialog::insertColList(const QStringList& cols)
 	boxColName-> insertStringList(cols);
 }
 
-void AxesDialog::updateAxisType(int)
-{
-	int a=mapToQwtAxisId();
-	boxAxisType->setCurrentIndex(a);
-}
-
 void AxesDialog::showAxis()
 {
 	bool ok=boxShowAxis->isChecked();
@@ -863,7 +858,7 @@ void AxesDialog::showAxis()
 	if (!boxShowFormula->isChecked())
 		formula = QString();
 
-	showAxis(axis,boxAxisType->currentIndex(), boxColName->currentText(),ok, boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
+	showAxis(axis, currentSelectedAxisType(), boxColName->currentText(),ok, boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
 			boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentIndex(),
 			boxPrecision->value(), boxAngle->value(), boxBaseline->value(), formula, boxAxisNumColor->color());
 }
@@ -1134,7 +1129,7 @@ void AxesDialog::changeBaselineDist(int baseline)
 	QString formula =  boxFormula->text();
 	if (!boxShowFormula->isChecked())
 		formula = QString();
-	showAxis(axis, boxAxisType->currentIndex(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
+	showAxis(axis, currentSelectedAxisType(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
 			boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentIndex(), boxPrecision->value(),
 			boxAngle->value(), baseline, formula, boxAxisNumColor->color());
 }
@@ -1235,7 +1230,7 @@ bool AxesDialog::updatePlot()
 	else if (generalDialog->currentWidget()==(QWidget*)axesPage)
 	{
 		int axis=mapToQwtAxisId();
-		int format = boxAxisType->currentIndex();
+		int format = currentSelectedAxisType();
 		axesType[axis] = format;
 
 		int baseline = boxBaseline->value();
@@ -1451,7 +1446,7 @@ void AxesDialog::pickAxisColor()
 	if (!boxShowFormula->isChecked())
 		formula = QString();
 
-	showAxis(axis, boxAxisType->currentIndex(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
+	showAxis(axis, currentSelectedAxisType(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
 			boxShowLabels->isChecked(), c, boxFormat->currentIndex(), boxPrecision->value(),
 			boxAngle->value(), boxBaseline->value(), formula, boxAxisNumColor->color());
 }
@@ -1468,7 +1463,7 @@ void AxesDialog::pickAxisNumColor()
 	if (!boxShowFormula->isChecked())
 		formula = QString::null;
 
-	showAxis(axis, boxAxisType->currentIndex(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
+	showAxis(axis, currentSelectedAxisType(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
 			boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentIndex(), boxPrecision->value(),
 			boxAngle->value(), boxBaseline->value(), formula, c);
 }
@@ -1478,7 +1473,7 @@ void AxesDialog::setAxisType(int)
 	int a = mapToQwtAxisId();
 	int style = axesType[a];
 
-	boxAxisType->setCurrentIndex(style);
+	boxAxisType->setCurrentIndex(boxAxisType->findData(style));
 	showAxisFormatOptions(style);
 
 	if (style == 1)
@@ -1510,7 +1505,7 @@ void AxesDialog::updateMajTicksType(int)
 	if (!boxShowFormula->isChecked())
 		formula = QString();
 
-	showAxis(axis,boxAxisType->currentIndex(),formatInfo[axis], boxShowAxis->isChecked(), type, boxMinorTicksType->currentIndex(),
+	showAxis(axis, currentSelectedAxisType(), formatInfo[axis], boxShowAxis->isChecked(), type, boxMinorTicksType->currentIndex(),
 			boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentIndex(),boxPrecision->value(),
 			boxAngle->value(), boxBaseline->value(), formula, boxAxisNumColor->color());
 }
@@ -1528,7 +1523,7 @@ void AxesDialog::updateMinTicksType(int)
 	if (!boxShowFormula->isChecked())
 		formula = QString();
 
-	showAxis(axis,boxAxisType->currentIndex(),formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), type,
+	showAxis(axis, currentSelectedAxisType(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), type,
 			boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentIndex(),boxPrecision->value(),
 			boxAngle->value(), boxBaseline->value(), formula, boxAxisNumColor->color());
 }
@@ -1548,7 +1543,7 @@ void AxesDialog::updateTickLabelsList(bool on)
 		return;
 	tickLabelsOn[axis]=QString::number(on);
 
-	int type = boxAxisType->currentIndex();
+	int type = currentSelectedAxisType();
 	if (type == Graph::Day || type == Graph::Month)
 		formatInfo[axis] = QString::number(boxFormat->currentIndex());
 	else if (type == Graph::Time || type == Graph::Date)
@@ -1608,7 +1603,7 @@ void AxesDialog::showGridPage()
 void AxesDialog::setLabelsNumericFormat(int)
 {
 	int axis = mapToQwtAxisId();
-	int type = boxAxisType->currentIndex();
+	int type = currentSelectedAxisType();
 	int prec = boxPrecision->value();
 	int format = boxFormat->currentIndex();
 
@@ -1667,7 +1662,7 @@ void AxesDialog::showAxisFormula(int axis)
 
 void AxesDialog::updateLabelsFormat(int)
 {
-	if (boxAxisType->currentIndex() != Graph::Numeric)
+	if (currentSelectedAxisType() != Graph::Numeric)
 		return;
 
 	int a = mapToQwtAxisId();
@@ -1776,3 +1771,9 @@ void AxesDialog::showAxis(int axis, int type, const QString& labelsColName, bool
 			c, format, prec, rotation, baselineDist, formula, labelsColor);
 }
 
+int AxesDialog::currentSelectedAxisType()
+{
+	int index = boxAxisType->currentIndex();
+	if (index < 0) return Graph::Numeric;
+	return boxAxisType->itemData(index).toInt();
+}
