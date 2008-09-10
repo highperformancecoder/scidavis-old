@@ -5,7 +5,7 @@ inMenu: true
 
 h1(#longtermplans). Summary of the most important long term plans (until version 1.0)
 
-* Organize all project data related classes as described by the _aspect framework/5 layer model_. 
+* Organize all project data related classes as described by the "aspect framework/5 layer model":aspect-framework.html. 
 * Split the application into _modules_ that are linked as (static or dynamic) _plugins_ using Qt's plugin 
 system. The code that is not part of a plugin module is stored in the "core" and "lib" 
 directories (let's call this core classes). The interface of the plugins are defined in interfaces.h using 

@@ -73,6 +73,9 @@ contributing/translating-app.page:
 contributing/plans.page:
    orderInfo: 10
 
+contributing/aspect-framework.page:
+   orderInfo: 12
+
 ---
 
 about/screenshots.page:
