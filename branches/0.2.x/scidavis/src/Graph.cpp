@@ -3235,7 +3235,6 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	for (i = startRow; i<=endRow; i++ ){
 		QString xval=w->text(i,xcol);
 		QString yval=w->text(i,ycol);
-		if (!xval.isEmpty() && !yval.isEmpty()){
 		    bool valid_data = true;
 			if (xColType == Table::Text){
 				if (xLabels.contains(xval) == 0)
@@ -3274,7 +3273,6 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 
             if (valid_data)
                 size++;
-		}
 	}
 
 	if (!size)
