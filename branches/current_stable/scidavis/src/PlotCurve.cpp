@@ -163,7 +163,6 @@ void DataCurve::loadData()
 	for (int i = d_start_row; i <= d_end_row; i++ ){
 		QString xval = d_table->text(i,xcol);
 		QString yval = d_table->text(i,ycol);
-		if (!xval.isEmpty() && !yval.isEmpty()){
 		    bool valid_data = true;
 			if (xColType == Table::Text){
 				xLabels << xval;
@@ -187,7 +186,6 @@ void DataCurve::loadData()
 
             if (valid_data)
                 size++;
-		}
 	}
 
     X.resize(size);
