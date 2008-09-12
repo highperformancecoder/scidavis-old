@@ -7384,6 +7384,7 @@ void ApplicationWindow::pasteSelection()
 			QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
 			Graph* g = plot->addLayer();
+			setPreferences(g);
 			g->copy(lastCopiedLayer);
 			QPoint pos=plot->mapFromGlobal(QCursor::pos());
 			plot->setGraphGeometry(pos.x(), pos.y()-20, lastCopiedLayer->width(), lastCopiedLayer->height());

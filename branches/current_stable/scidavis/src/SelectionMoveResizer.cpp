@@ -326,8 +326,13 @@ void SelectionMoveResizer::operateOnTargets()
 		i->setOrigin(new_rect.topLeft());
 		i->setSize(new_rect.size());
 	}
-	foreach(QWidget *i, d_widgets)
+	foreach(QWidget *i, d_widgets) {
 		i->setGeometry(operateOn(i->geometry()));
+		// ugly hack
+		// see Graph::setIgnoreResizeEvents() and Graph::resizeEvent()
+		Graph * g = qobject_cast<Graph*>(i);
+		if (g) g->plotWidget()->resize(i->size());
+	}
 	recalcBoundingRect();
 
 	d_op_start = d_op_dp = QPoint(0,0);
