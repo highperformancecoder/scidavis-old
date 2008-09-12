@@ -119,7 +119,7 @@ SurfaceDialog::SurfaceDialog( QWidget* parent, Qt::WFlags fl )
 	vl->addLayout(bl3);
 	vl->addLayout(bl2);
 
-    resize(minimumSize());
+    resize(vl->minimumSize());
     setFocusProxy(boxFunction);
 
 	connect( buttonClear, SIGNAL( clicked() ), this, SLOT(clearList() ) );

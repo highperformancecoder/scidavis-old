@@ -96,6 +96,7 @@ unix:LIBS         += -lgsl -lgslcblas -lz -lmuparser
 ## WARNING: make sure they are compiled against >= Qt4.2
 ## Mixing Qt 4.2 and Qt >= 4.3 compiled stuff may also 
 ## cause problems.
+#unix:INCLUDEPATH  += /usr/include/qwtplot3d
 #unix:LIBS         += -lqwtplot3d
 #unix:LIBS         += -lqwt
 ##dynamically link against GSL and zlib installed system-wide
