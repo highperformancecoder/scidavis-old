@@ -28,7 +28,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SciDAVis"
-!define PRODUCT_VERSION "0.1.3"
+!define PRODUCT_VERSION "0.2.0-beta1"
 !define PRODUCT_WEB_SITE "http://scidavis.sourceforge.net/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\scidavis.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -36,7 +36,7 @@
 !define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
 !define PYTHON_INSTALLER "python-2.5.2.msi"
 !define PYTHON_URL "http://www.python.org/ftp/python/2.5.2/${PYTHON_INSTALLER}"
-!define PYQT_INSTALLER "PyQt-Py2.5-gpl-4.3.3-2.exe"
+!define PYQT_INSTALLER "PyQt-Py2.5-gpl-4.4.3-1.exe"
 !define PYQT_URL "http://www.riverbankcomputing.com/static/Downloads/PyQt4/${PYQT_INSTALLER}"
 
 SetCompressor /SOLID lzma
@@ -54,6 +54,8 @@ SetCompressor /SOLID lzma
 !insertmacro MUI_PAGE_WELCOME
 ; License page
 !insertmacro MUI_PAGE_LICENSE "gpl.txt"
+; Components page
+!insertmacro MUI_PAGE_COMPONENTS
 ; Directory page
 !insertmacro MUI_PAGE_DIRECTORY
 ; Start menu page
@@ -89,7 +91,8 @@ InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
 
-Section "Select components" SEC01
+Section "SciDAVis" SEC01
+  SectionIn RO
   SetOutPath "$INSTDIR"
   CreateDirectory $INSTDIR\plugins
   SetOverwrite try
@@ -121,9 +124,21 @@ Section "Select components" SEC01
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk" "$INSTDIR\scidavis.exe"
-  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\scidavis.exe"
   !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
+
+Section /o "Desktop shortcut" SEC02
+  SectionIn 1
+  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\scidavis.exe"
+SectionEnd
+
+LangString DESC_Section1 ${LANG_ENGLISH} "The application."
+LangString DESC_Section2 ${LANG_ENGLISH} "Create desktop shortcut."
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC01} $(DESC_Section1)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC02} $(DESC_Section2)
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section -AdditionalIcons
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
@@ -223,26 +238,28 @@ Section -Requirements
     MessageBox MB_YESNO "Could not find Python 2.5 installation (required). Abort?" /SD IDYES IDNO continueWOPython
     Quit
   pythonFound:
-    MessageBox MB_YESNO "Python found in $2. Install PyQt and SIP provided with SciDAVis now? (Recommended. PyQt binaries from Riverbank are reported to be incompatible with SciDAVis.)" /SD IDYES IDNO endExtraInst
+    MessageBox MB_YESNO "Python found in $2. Download and install PyQt now?" /SD IDYES IDNO endExtraInst
+
+;and SIP provided with SciDAVis now? (Recommended. PyQt binaries from Riverbank are reported to be incompatible with SciDAVis.)" 
   Goto skip
   continueWOPython:
-    MessageBox MB_YESNO "Do you want to install PyQt and SIP provided with SciDAVis now? (Recommended. PyQt binaries from Riverbank are reported to be incompatible with SciDAVis.) IMPORTANT: Python was not found but you must install PyQt and SIP in the same folder as Python 2.5!" /SD IDYES IDNO endExtraInst
+    MessageBox MB_YESNO "Do you want to download and install PyQt now? IMPORTANT: Python has not been found but you must install PyQt and SIP in the same folder as Python 2.5!" /SD IDYES IDNO endExtraInst
   skip:
-    SetOutPath "$2"
-    File "PyQt_SIP.exe"
-    ExecWait "$2\PyQt_SIP.exe"
-    Delete "$2\PyQt_SIP.exe"
+;    SetOutPath "$2"
+;    File "PyQt_SIP.exe"
+;    ExecWait "$2\PyQt_SIP.exe"
+;    Delete "$2\PyQt_SIP.exe"
 
 ;;; Downloading and Installing PyQt works, but SciDAVis crashed using this binary.
 ;  MessageBox MB_YESNO "Install PyQt (requires active internet connection)?" /SD IDYES IDNO endInstPyQt
-;        StrCpy $2 "$TEMP\${PYQT_INSTALLER}"
-;        nsisdl::download /TIMEOUT=30000 ${PYQT_URL} $2
-;        Pop $R0 ;Get the return value
-;                StrCmp $R0 "success" +3
-;                MessageBox MB_OK "Download failed: $R0"
-;                Quit
-;	ExecWait $2
-;        Delete $2
+        StrCpy $2 "$TEMP\${PYQT_INSTALLER}"
+        nsisdl::download /TIMEOUT=30000 ${PYQT_URL} $2
+        Pop $R0 ;Get the return value
+                StrCmp $R0 "success" +3
+                MessageBox MB_OK "Download failed: $R0"
+                Quit
+	ExecWait $2
+        Delete $2
 ;  endInstPyQt:
   endExtraInst:
 SectionEnd
