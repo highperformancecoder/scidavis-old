@@ -36,11 +36,11 @@
  * mm = minor version
  * bb = bugfix version
  */
-int scidavis_version = 0x000103;
+int scidavis_version = 0x000104;
 //! Extra version information string (like "-alpha", "-beta", "-rc1", etc...)
 const char * extra_version = "";
 //! Copyright string containing the author names etc.
-const char * copyright_string = "Developers (alphabetical order):\nTilman Benkert\nKnut Franke\n\nDocumentation:\nRoger Gadiou\n\nSpecial thanks to (alphabetical order):\nBurkhard Bunk\nQuentin Denis\nGudjon I. Gudjonsson\nAlex Kargovsky\nEric Tanguy\nMauricio Troviano\nIon Vasilief\n\nThanks to (no particular order):\nthe developers of Qt, Qwt, QwtPlot3D, GSL, muParser, zlib, Python, PyQt, and liborigin\nall bug reporters, translators and other contributors";
+const char * copyright_string = "Developers (alphabetical order):\nTilman Benkert\nKnut Franke\n\nDocumentation:\nRoger Gadiou\n\nSpecial thanks to (alphabetical order):\nBurkhard Bunk\nQuentin Denis\nGudjon I. Gudjonsson\nAlex Kargovsky\nYu-Hung Lien\nEric Tanguy\nMauricio Troviano\nIon Vasilief\n\nThanks to (no particular order):\nthe developers of Qt, Qwt, QwtPlot3D, GSL, muParser, zlib, Python, PyQt, and liborigin\nall bug reporters, translators and other contributors";
 
 //! Release date as a string
-const char * release_date = " 2008-04-19";
+const char * release_date = "XXXX-XX-XX";
