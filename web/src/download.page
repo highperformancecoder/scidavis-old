@@ -53,11 +53,10 @@ This will create a directory "scidavis-x.y.z" with the binary and some additiona
 
 h1. MacOS X
 
-Thanks to Yu-Hung Lien, a MacOS X binary for Intel Macs is available 
+Thanks to Yu-Hung Lien, we can offer you MacOS X binaries of SciDAVis.
+A MacOS X binary for Intel Macs of the stable version is available 
 "here":https://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=8143.
-
-Currently, we do not have anyone to test SciDAVis on a PowerPC based Mac or provide pre-compiled PowerPC binaries.
-Any help in this area will be greatly appreciated.
+Intel and universal binaries of the unstable version can be found "here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=287353.
 
 Special note for compiling SciDAVis 0.1.2: before compiling you need to edit scidavis/scidavis.pro and replace every occurence of "LIBS +=
 -L /some/directory" with "LIBS += -L/some/directory" (remove the space character). This is fixed in SciDAVis 0.1.3.
