@@ -57,11 +57,11 @@ Fit::Fit( ApplicationWindow *parent, Graph *g, const char * name)
 	d_curve = 0;
 	d_formula = QString::null;
 	d_explanation = QString::null;
-	d_weihting = NoWeighting;
-	weighting_dataset = QString::null;
+	d_y_error_source = UnknownErrors;
+	d_y_error_dataset = QString::null;
 	is_non_linear = true;
 	d_results = 0;
-	d_errors = 0;
+	d_result_errors = 0;
 	d_prec = parent->fit_output_precision;
 	d_init_err = false;
 	chi_2 = -1;
@@ -94,6 +94,16 @@ gsl_multifit_fdfsolver * Fit::fitGSL(gsl_multifit_function_fdf f, int &iteration
 	while (status == GSL_CONTINUE && (int)iter < d_max_iterations);
 
 	gsl_multifit_covar (s->J, 0.0, covar);
+	if (d_y_error_source == UnknownErrors) {
+		// multiply covar by variance of residuals, which is used as an estimate for the
+		// statistical errors (this relies on the Y errors being set to 1.0, so that
+		// s->f is properly normalized)
+		double var = 0;
+		for (int i=0; i<d_p; i++)
+			var += pow(gsl_vector_get(s->f, i), 2);
+		var /= d_n - d_p;
+		gsl_matrix_scale(covar, var);
+	}
 	iterations = iter;
 	return s;
 }
@@ -134,30 +144,13 @@ gsl_multimin_fminimizer * Fit::fitSimplex(gsl_multimin_function f, int &iteratio
 void Fit::setDataCurve(int curve, double start, double end)
 {
     if (d_n > 0)
-		delete[] d_w;
+		delete[] d_y_errors;
 
     Filter::setDataCurve(curve, start, end);
 
-    d_w = new double[d_n];
-    if (d_graph && d_curve && ((PlotCurve *)d_curve)->type() != Graph::Function)
-    {
-        QList<DataCurve *> lst = ((DataCurve *)d_curve)->errorBarsList();
-        foreach (DataCurve *c, lst)
-        {
-            QwtErrorPlotCurve *er = (QwtErrorPlotCurve *)c;
-            if (!er->xErrors())
-            {
-                d_weihting = Instrumental;
-                for (int i=0; i<d_n; i++)
-                    d_w[i] = er->errorValue(i); //d_w are equal to the error bar values
-                weighting_dataset = er->title().text();
-                return;
-            }
-        }
-    }
-	// if no error bars initialize the weighting data to 1.0
-    for (int i=0; i<d_n; i++)
-        d_w[i] = 1.0;
+    d_y_errors = new double[d_n];
+	 if (!setYErrorSource(AssociatedErrors, QString::null, true))
+		 setYErrorSource(UnknownErrors);
 }
 
 void Fit::setInitialGuesses(double *x_init)
@@ -183,20 +176,20 @@ QString Fit::logFitInfo(double *par, int iterations, int status, const QString& 
 	else
 		info +="\n";
 
-	info += tr("Weighting Method") + ": ";
-	switch(d_weihting)
+	info += tr("Y standard errors") + ": ";
+	switch(d_y_error_source)
 	{
-		case NoWeighting:
-			info += tr("No weighting");
+		case UnknownErrors:
+			info += tr("Unknown");
 			break;
-		case Instrumental:
-			info += tr("Instrumental") + ", " + tr("using error bars dataset") + ": " + weighting_dataset;
+		case AssociatedErrors:
+			info += tr("Associated dataset (%1)").arg(d_y_error_dataset);
 			break;
-		case Statistical:
-			info += tr("Statistical");
+		case PoissonErrors:
+			info += tr("Statistical (assuming Poisson distribution)");
 			break;
-		case Dataset:
-			info += tr("Arbitrary Dataset") + ": " + weighting_dataset;
+		case CustomErrors:
+			info += tr("Arbitrary Dataset") + ": " + d_y_error_dataset;
 			break;
 	}
 	info +="\n";
@@ -226,8 +219,7 @@ QString Fit::logFitInfo(double *par, int iterations, int status, const QString& 
 	info += "--------------------------------------------------------------------------------------\n";
 	info += "Chi^2/doF = " + QLocale().toString(chi_2_dof, 'g', d_prec) + "\n";
 
-	double sst = (d_n-1)*gsl_stats_variance(d_y, 1, d_n);
-	info += tr("R^2") + " = " + QLocale().toString(1 - chi_2/sst, 'g', d_prec) + "\n";
+	info += tr("R^2") + " = " + QLocale().toString(rSquare(), 'g', d_prec) + "\n";
 	info += "---------------------------------------------------------------------------------------\n";
 	if (is_non_linear)
 	{
@@ -240,7 +232,16 @@ QString Fit::logFitInfo(double *par, int iterations, int status, const QString& 
 
 double Fit::rSquare()
 {
-	double sst = (d_n-1)*gsl_stats_variance(d_y, 1, d_n);
+	double sst;
+	if (d_y_error_source == UnknownErrors)
+		sst = gsl_stats_tss(d_y, 1, d_n);
+	else {
+		double * weights = new double[d_n];
+		for (int i=0; i<d_n; i++)
+			weights[i] = 1.0/pow(d_y_errors[i], 2);
+		sst = gsl_stats_wtss(weights, 1, d_y, 1, d_n);
+		delete[] weights;
+	}
 	return 1 - chi_2/sst;
 }
 
@@ -251,8 +252,7 @@ QString Fit::legendInfo()
 
 	double chi_2_dof = chi_2/(d_n - d_p);
 	info += "Chi^2/doF = " + QLocale().toString(chi_2_dof, 'g', d_prec) + "\n";
-	double sst = (d_n-1)*gsl_stats_variance(d_y, 1, d_n);
-	info += tr("R^2") + " = " + QLocale().toString(1 - chi_2/sst, 'g', d_prec) + "\n";
+	info += tr("R^2") + " = " + QLocale().toString(rSquare(), 'g', d_prec) + "\n";
 
 	for (int i=0; i<d_p; i++)
 	{
@@ -265,23 +265,25 @@ QString Fit::legendInfo()
 	return info;
 }
 
-bool Fit::setWeightingData(WeightingMethod w, const QString& colName)
+bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_silently)
 {
-	d_weihting = w;
-	switch (d_weihting)
+	d_y_error_source = err;
+	switch (d_y_error_source)
 	{
-		case NoWeighting:
+		case UnknownErrors:
 			{
-				weighting_dataset = QString::null;
+				d_y_error_dataset = QString::null;
+				// using 1.0 here is important for correct error estimates,
+				// cmp. Fit::fitGSL()
 				for (int i=0; i<d_n; i++)
-					d_w[i] = 1.0;
+					d_y_errors[i] = 1.0;
 			}
 			break;
-		case Instrumental:
+		case AssociatedErrors:
 			{
 				bool error = true;
 				QwtErrorPlotCurve *er = 0;
-				if (((PlotCurve *)d_curve)->type() != Graph::Function)
+				if (d_curve && ((PlotCurve *)d_curve)->type() != Graph::Function)
 				{
 					QList<DataCurve *> lst = ((DataCurve *)d_curve)->errorBarsList();
                 	foreach (DataCurve *c, lst)
@@ -289,7 +291,7 @@ bool Fit::setWeightingData(WeightingMethod w, const QString& colName)
                     	er = (QwtErrorPlotCurve *)c;
                     	if (!er->xErrors())
                     	{
-                        	weighting_dataset = er->title().text();
+                        	d_y_error_dataset = er->title().text();
                         	error = false;
                         	break;
                     	}
@@ -297,27 +299,28 @@ bool Fit::setWeightingData(WeightingMethod w, const QString& colName)
                 }
 				if (error)
 				{
-					QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
-					tr("The curve %1 has no associated Y error bars. You cannot use instrumental weighting method.").arg(d_curve->title().text()));
+					if (!fail_silently)
+						QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
+								tr("The curve %1 has no associated Y error bars.").arg(d_curve->title().text()));
 					return false;
 				}
 				if (er)
 				{
 					for (int j=0; j<d_n; j++)
-						d_w[j] = er->errorValue(j); //d_w are equal to the error bar values
+						d_y_errors[j] = er->errorValue(j);
 				}
 			}
 			break;
-		case Statistical:
+		case PoissonErrors:
 			{
-				weighting_dataset = d_curve->title().text();
+				d_y_error_dataset = d_curve->title().text();
 
 				for (int i=0; i<d_n; i++)
-					d_w[i] = sqrt(d_y[i]);
+					d_y_errors[i] = sqrt(d_y[i]);
 			}
 			break;
-		case Dataset:
-			{//d_w are equal to the values of the arbitrary dataset
+		case CustomErrors:
+			{//d_y_errors are equal to the values of the arbitrary dataset
 				if (colName.isEmpty())
 					return false;
 
@@ -327,16 +330,17 @@ bool Fit::setWeightingData(WeightingMethod w, const QString& colName)
 
 				if (t->numRows() < d_n)
   	            {
-  	            	QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
-  	                tr("The column %1 has less points than the fitted data set. Please choose another column!.").arg(colName));
+						if (!fail_silently)
+							QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
+									tr("The column %1 has less points than the fitted data set. Please choose another column!.").arg(colName));
   	                return false;
   	            }
 
-				weighting_dataset = colName;
+				d_y_error_dataset = colName;
 
 				int col = t->colIndex(colName);
 				for (int i=0; i<d_n; i++)
-					d_w[i] = t->cell(i, col);
+					d_y_errors[i] = t->cell(i, col);
 			}
 			break;
 	}
@@ -380,18 +384,18 @@ Matrix* Fit::covarianceMatrix(const QString& matrixName)
 
 double *Fit::errors()
 {
-	if (!d_errors) {
-		d_errors = new double[d_p];
+	if (!d_result_errors) {
+		d_result_errors = new double[d_p];
 		double chi_2_dof = chi_2/(d_n - d_p);
 		for (int i=0; i<d_p; i++)
 		{
 			if (d_scale_errors)
-				d_errors[i] = sqrt(chi_2_dof*gsl_matrix_get(covar,i,i));
+				d_result_errors[i] = sqrt(chi_2_dof*gsl_matrix_get(covar,i,i));
 			else
-				d_errors[i] = sqrt(gsl_matrix_get(covar,i,i));
+				d_result_errors[i] = sqrt(gsl_matrix_get(covar,i,i));
 		}
 	}
-	return d_errors;
+	return d_result_errors;
 }
 
 void Fit::storeCustomFitResults(double *par)
@@ -438,7 +442,7 @@ void Fit::fit()
 	QByteArray ba_names = names.toAscii();
 	const char *parNames = ba_names.constData();
 
-	struct FitData d_data = {d_n, d_p, d_x, d_y, d_w, function, parNames};
+	struct FitData d_data = {d_n, d_p, d_x, d_y, d_y_errors, function, parNames};
 	int status, iterations = d_max_iterations;
 	double *par = new double[d_p];
 	if(d_solver == NelderMeadSimplex)
@@ -539,6 +543,6 @@ Fit::~Fit()
 		gsl_vector_free(d_param_init);
 
 	if (d_results) delete[] d_results;
-	if (d_errors) delete[] d_errors;
+	if (d_result_errors) delete[] d_result_errors;
 	gsl_matrix_free (covar);
 }

@@ -9,7 +9,7 @@ struct FitData {
   size_t p;
   double * X;
   double * Y;
-  double * sigma; // weighting data
+  double * sigma; // standard deviation of Y (for weighting)
   const char *function;
   const char *names;
 };

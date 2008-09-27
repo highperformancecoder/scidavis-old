@@ -167,13 +167,13 @@ void FitDialog::initFitPage()
     hbox1->addWidget(gb3);
 
     QHBoxLayout *hbox2 = new QHBoxLayout();
-	hbox2->addWidget(new QLabel(tr( "Weighting Method" )));
-	boxWeighting = new QComboBox();
-	boxWeighting->addItem(tr("No weighting"));
-	boxWeighting->addItem(tr("Instrumental"));
-	boxWeighting->addItem(tr("Statistical"));
-	boxWeighting->addItem(tr("Arbitrary Dataset"));
-    hbox2->addWidget(boxWeighting);
+	hbox2->addWidget(new QLabel(tr( "Y Error Source" )));
+	boxYErrorSource = new QComboBox();
+	boxYErrorSource->addItem(tr("Errors Unknown"));
+	boxYErrorSource->addItem(tr("Associated"));
+	boxYErrorSource->addItem(tr("Statistical (Poisson)"));
+	boxYErrorSource->addItem(tr("Arbitrary Dataset"));
+    hbox2->addWidget(boxYErrorSource);
     QGroupBox *gb4 = new QGroupBox();
     gb4->setLayout(hbox2);
 
@@ -213,7 +213,7 @@ void FitDialog::initFitPage()
 	connect( buttonCancel1, SIGNAL( clicked() ), this, SLOT(close()));
 	connect( buttonEdit, SIGNAL( clicked() ), this, SLOT(showEditPage()));
 	connect( btnDeleteFitCurves, SIGNAL( clicked() ), this, SLOT(deleteFitCurves()));
-	connect( boxWeighting, SIGNAL( activated(int) ), this, SLOT( enableWeightingParameters(int) ) );
+	connect( boxYErrorSource, SIGNAL( activated(int) ), this, SLOT( yErrorSourceChanged(int) ) );
 	connect( buttonAdvanced, SIGNAL(clicked()), this, SLOT(showAdvancedPage() ) );
     connect( tableNamesBox, SIGNAL( activated(int) ), this, SLOT( selectSrcTable(int) ) );
 
@@ -608,6 +608,8 @@ void FitDialog::saveUserFunction()
 
 void FitDialog::removeUserFunction()
 {
+	if (!funcBox->currentItem())
+		return;
 	QString name = funcBox->currentItem()->text();
 	if (d_user_function_names.contains(name))
 	{
@@ -1018,6 +1020,8 @@ void FitDialog::pasteExpression()
 
 void FitDialog::pasteFunctionName()
 {
+	if (!funcBox->currentItem())
+		return;
 	editBox->insert(funcBox->currentItem()->text());
 	editBox->setFocus();
 }
@@ -1217,7 +1221,7 @@ void FitDialog::accept()
 		delete[] paramsInit;
 				
 		if (!d_fitter->setDataFromCurve(curve, start, end) ||
-			!d_fitter->setWeightingData ((Fit::WeightingMethod)boxWeighting->currentIndex(),
+			!d_fitter->setYErrorSource ((Fit::ErrorSource)boxYErrorSource->currentIndex(),
 					       tableNamesBox->currentText()+"_"+colNamesBox->currentText()))
 		{
 			delete d_fitter;
@@ -1374,9 +1378,9 @@ void FitDialog::selectSrcTable(int tabnr)
 	}
 }
 
-void FitDialog::enableWeightingParameters(int index)
+void FitDialog::yErrorSourceChanged(int index)
 {
-	if (index == Fit::Dataset)
+	if (index == Fit::CustomErrors)
 	{
 		tableNamesBox->setEnabled(true);
 		colNamesBox->setEnabled(true);
