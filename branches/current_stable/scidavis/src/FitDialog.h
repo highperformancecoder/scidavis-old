@@ -123,8 +123,8 @@ public slots:
 	void setSrcTables(QWidgetList* tables);
 	//! Select a table from the source tables list
 	void selectSrcTable(int tabnr);
-	//! Enable the selection of a column as weigting data set
-	void enableWeightingParameters(int index);
+	//! Enable/disable widgets for selection of custom error source.
+	void yErrorSourceChanged(int index);
 	//! Enable the X points spin box
 	void showPointsBox(bool);
 	//! Display the parameters table
@@ -180,7 +180,7 @@ private:
 	QPushButton *btnAddFunc, *btnDelFunc, *btnContinue, *btnApply;
 	QPushButton *buttonEdit, *btnAddTxt, *btnAddName, *btnDeleteFitCurves;
 	ColorBox* boxColor;
-	QComboBox *boxWeighting, *tableNamesBox, *colNamesBox;
+	QComboBox *boxYErrorSource, *tableNamesBox, *colNamesBox;
 	QRadioButton *generatePointsBtn, *samePointsBtn;
 	QPushButton *btnParamTable, *btnCovMatrix;
 	QLineEdit *covMatrixName, *paramTableName;

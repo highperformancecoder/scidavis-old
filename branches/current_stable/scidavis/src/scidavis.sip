@@ -597,14 +597,14 @@ class Fit : QObject
 %End
 public:
   enum Algorithm{ScaledLevenbergMarquardt, UnscaledLevenbergMarquardt, NelderMeadSimplex};
-  enum WeightingMethod{NoWeighting, Instrumental, Statistical, Dataset};
+  enum ErrorSource {UnknownErrors, AssociatedErrors, PoissonErrors, CustomErrors};
 
   Fit(ApplicationWindow* /TransferThis/, Graph*=0, const char*=0);
   ~Fit();
 
   virtual void fit();
 
-  bool setWeightingData(WeightingMethod, const QString&=QString::null);
+  bool setYErrorSource(ErrorSource err, const QString& colName = QString::null);
 
   bool setDataFromCurve(const QString&, Graph*=0);
   bool setDataFromCurve(const QString&, double, double, Graph*=0);

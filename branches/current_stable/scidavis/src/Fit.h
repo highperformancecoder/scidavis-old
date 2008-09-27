@@ -53,17 +53,16 @@ class Fit : public Filter
 		typedef int (*fit_function_fdf)(const gsl_vector *, void *, gsl_vector *, gsl_matrix *);
 
 		enum Algorithm{ScaledLevenbergMarquardt, UnscaledLevenbergMarquardt, NelderMeadSimplex};
-		enum WeightingMethod{NoWeighting, Instrumental, Statistical, Dataset};
+		enum ErrorSource {UnknownErrors, AssociatedErrors, PoissonErrors, CustomErrors};
 
 		Fit(ApplicationWindow *parent, Graph *g = 0, const char * name = 0);
 		~Fit();
 
 		//! Actually does the fit. Should be reimplemented in derived classes.
 		virtual void fit();
-        virtual bool run(){return false;};
 
-		//! Sets the data set to be used for weighting
-		bool setWeightingData(WeightingMethod w, const QString& colName = QString::null);
+		//! Sets the data set to be used as source of Y errors.
+		bool setYErrorSource(ErrorSource err, const QString& colName = QString::null, bool fail_silently=false);
 
 		void setDataCurve(int curve, double start, double end);
 
@@ -140,8 +139,8 @@ class Fit : public Filter
 		 */
 		bool is_non_linear;
 
-		//! weighting data set used for the fit
-		double *d_w;
+		//! Standard deviations of Y input data.
+		double *d_y_errors;
 
 		//! Names of the fit parameters
 		QStringList d_param_names;
@@ -161,17 +160,17 @@ class Fit : public Filter
 		//! Covariance matrix
 		gsl_matrix *covar;
 
-		//! The kind of weighting to be performed on the data
-		WeightingMethod d_weihting;
+		//! Where standard errors of the input data are taken from.
+		ErrorSource d_y_error_source;
 
-		//! The name of the weighting dataset
-		QString weighting_dataset;
+		//! The name of the dataset containing Y standard errors (if applicable).
+		QString d_y_error_dataset;
 
 		//! Stores the result parameters
 		double *d_results;
 
 		//! Stores standard deviations of the result parameters
-		double *d_errors;
+		double *d_result_errors;
 
 		//! The sum of squares of the residuals from the best-fit line
 		double chi_2;
