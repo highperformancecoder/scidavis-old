@@ -11,4 +11,7 @@ SUBDIRS = scidavis
 
 # optional fit plugins
 SUBDIRS += fitPlugins/fitRational0\
-           fitPlugins/fitRational1
+           fitPlugins/fitRational1\
+           fitPlugins/explin\
+           fitPlugins/exp_saturation\
+
