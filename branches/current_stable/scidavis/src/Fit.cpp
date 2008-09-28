@@ -99,7 +99,7 @@ gsl_multifit_fdfsolver * Fit::fitGSL(gsl_multifit_function_fdf f, int &iteration
 		// statistical errors (this relies on the Y errors being set to 1.0, so that
 		// s->f is properly normalized)
 		double var = 0;
-		for (int i=0; i<d_p; i++)
+		for (int i=0; i<d_n; i++)
 			var += pow(gsl_vector_get(s->f, i), 2);
 		var /= d_n - d_p;
 		gsl_matrix_scale(covar, var);
