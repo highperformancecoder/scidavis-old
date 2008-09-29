@@ -7,7 +7,166 @@ All toolbars can be moved and docked to a more convenient location (left, right 
 The same approach is used for showing/hidding the toolbars: if there are no more visible tables in the workspace, the Table toolbar will be automatically hidden and will be shown again when the users adds a new table into the project. A toolbar can be manually shown/hidden by the user, at any time, by right-clicking on the main window menu area and checking/unchecking the corresponding box in the pop-up menu. 
 </para>
 
+<!--
+***********************************************************************************
 
+			Toolbar File
+
+***********************************************************************************
+-->
+<sect1 id="sec-file-toolbar">
+<title>The File Toolbar</title>
+
+<para>
+The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the &file-menu-lnk;. Refer to this section for a more complete description of these commands.
+</para>
+
+<figure id="fig-file-toolbar">
+  <title>The &appname; File Toolbar</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/file-toolbar.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
+<table tocentry="1" pgwide="1" frame="sides">
+<title>File toolbar commands.</title>
+<tgroup cols="4">
+  <colspec colname="icon" colwidth="1*" align="center"/>
+  <colspec colname="command" colwidth="5*" align="left"/>
+  <colspec colname="key" colwidth="2*" align="center"/>
+  <colspec colname="description" colwidth="10*" align="justify"/>
+  <thead>
+    <row>
+      <entry>Icon</entry>
+      <entry>Command</entry>
+      <entry>Key</entry>
+      <entry>Description</entry>
+    </row>
+  </thead>
+ <tbody>
+  <row>
+   <entry>&new-project-icon;</entry>
+   <entry>&new-project-lnk;</entry>
+   <entry>&new-project-key;</entry>
+   <entry>Create a new project.</entry>
+  </row>
+  <row>
+   <entry>&new-icon;</entry>
+   <entry>&new-lnk;</entry>
+   <entry></entry>
+   <entry>Access to the <emphasis>New</emphasis> sub-menu.</entry>
+  </row>
+  <row>
+   <entry>&new-table-icon;</entry>
+   <entry>&new-table-lnk;</entry>
+   <entry>&new-table-key;</entry>
+   <entry>Create a new table.</entry>
+  </row>
+  <row>
+   <entry>&new-matrix-icon;</entry>
+   <entry>&new-matrix-lnk;</entry>
+   <entry>&new-matrix-key;</entry>
+   <entry>Create a new matrix.</entry>
+  </row>
+  <row>
+   <entry>&new-note-icon;</entry>
+   <entry>&new-note-lnk;</entry>
+   <entry></entry>
+   <entry>Create a new note window, this object can be used as a calculator or to use scripts.</entry>
+  </row>
+  <row>
+   <entry>&new-graph-icon;</entry>
+   <entry>&new-graph-lnk;</entry>
+   <entry>&new-graph-key;</entry>
+   <entry>Create a new empty 2D plot.</entry>
+  </row>
+  <row>
+   <entry>&new-function-plot-icon;</entry>
+   <entry>&new-function-plot-lnk;</entry>
+   <entry>&new-function-plot-key;</entry>
+   <entry>Creates a new plot based on a function Y=f(X).</entry>
+  </row>
+  <row>
+   <entry>&new-surface-3d-plot-icon;</entry>
+   <entry>&new-surface-3d-plot-lnk;</entry>
+   <entry>&new-surface-3d-plot-key;</entry>
+   <entry>Creates a new 3D plot based on a function Z=f(X,Y).</entry>
+  </row>
+  <row>
+   <entry>&open-icon;</entry>
+   <entry>&open-lnk;</entry>
+   <entry>&open-key;</entry>
+   <entry>Opens an existing &appname; project file.</entry>
+  </row>
+  <row>
+   <entry>&open-template-icon;</entry>
+   <entry>&open-template-lnk;</entry>
+   <entry></entry>
+   <entry>Opens an existing template &appname; project file.</entry>
+  </row>
+   <row>
+   <entry>&save-project-icon;</entry>
+   <entry>&save-project-lnk;</entry>
+   <entry>&save-project-key;</entry>
+   <entry>Saves the current project.</entry>
+  </row>
+   <row>
+   <entry>&save-as-template-icon;</entry>
+   <entry>&save-as-template-lnk;</entry>
+   <entry></entry>
+   <entry>Saves the current project as a template.</entry>
+  </row>
+  <row>
+   <entry>&import-ascii-icon;</entry>
+   <entry>&import-ascii-lnk;</entry>
+   <entry></entry>
+   <entry>Imports an ASCII file into one or multiple tables.</entry>
+  </row>
+<!--			removed in 0.20
+  <row>
+   <entry>&duplicate-window-icon;</entry>
+   <entry>&duplicate-window-lnk;</entry>
+   <entry></entry>
+   <entry>Clonates the active window.</entry>
+  </row>
+-->
+  <row>
+   <entry>&print-icon;</entry>
+   <entry>&print-lnk;</entry>
+   <entry>&print-key;</entry>
+   <entry>Print the active window.</entry>
+  </row>
+  <row>
+   <entry>&export-to-pdf-icon;</entry>
+   <entry>&export-to-pdf-lnk;</entry>
+   <entry></entry>
+   <entry>Export to PDF.</entry>
+  </row>
+  <row>
+   <entry>&project-explorer-icon;</entry>
+   <entry>&project-explorer-lnk;</entry>
+   <entry>&project-explorer-key;</entry>
+   <entry>Show or hide the project explorer.</entry>
+  </row>
+  <row>
+   <entry>&results-log-icon;</entry>
+   <entry>&results-log-lnk;</entry>
+   <entry></entry>
+   <entry>Show or hide the results window.</entry>
+  </row>
+</tbody>
+</tgroup>
+</table>
+</sect1>
+<!--
+***********************************************************************************
+
+			Toolbar Edit
+
+***********************************************************************************
+-->
 <sect1 id="sec-edit-toolbar">
 <title>The Edit Toolbar</title>
 
@@ -76,31 +235,34 @@ The same approach is used for showing/hidding the toolbars: if there are no more
 </tgroup>
 </table>
 </sect1>
+<!--
+***********************************************************************************
 
+			Toolbar Plot
 
-<sect1 id="sec-file-toolbar">
-<title>The File Toolbar</title>
+***********************************************************************************
+-->
+<sect1 id="sec-plot-toolbar">
+<title>The Plot Toolbar.</title>
 
-<para>
-The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the &file-menu-lnk;. Refer to this section for a more complete description of these commands.
-</para>
+<para>This toolbar is only active when a table is selected. It allows the quick access to the commands of the &plot-menu-lnk; which are used for the creation of new plots.</para>
 
-<figure id="fig-file-toolbar">
-  <title>The &appname; File Toolbar</title>
-  <mediaobject> 
+<figure id="plot-file-toolbar">
+  <title>The &appname; Plot Toolbar with its different sub-menus</title>
+  <mediaobject>
     <imageobject>
-      <imagedata  format="PNG" fileref="pics/file-toolbar.png"/>
+      <imagedata  format="PNG" fileref="pics/plot-toolbar.png"/>
     </imageobject>
   </mediaobject>
 </figure>
 
 <table tocentry="1" pgwide="1" frame="sides">
-<title>File toolbar commands.</title>
+<title>Plot toolbar commands</title>
 <tgroup cols="4">
   <colspec colname="icon" colwidth="1*" align="center"/>
-  <colspec colname="command" colwidth="5*" align="left"/>
+  <colspec colname="command" colwidth="6*" align="left"/>
   <colspec colname="key" colwidth="2*" align="center"/>
-  <colspec colname="description" colwidth="10*" align="justify"/>
+  <colspec colname="description" colwidth="9*" align="justify"/>
   <thead>
     <row>
       <entry>Icon</entry>
@@ -111,121 +273,121 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
   </thead>
  <tbody>
   <row>
-   <entry>&new-project-icon;</entry>
-   <entry>&new-project-lnk;</entry>
-   <entry>&new-project-key;</entry>
-   <entry>Create a new project.</entry>
+   <entry>&line-symbol-icon;</entry>
+   <entry namest="command" nameend="description" align="center"><emphasis>Access to the submenus for lines/Symbol plot types.</emphasis></entry>
   </row>
   <row>
-   <entry>&new-table-icon;</entry>
-   <entry>&new-table-lnk;</entry>
-   <entry>&new-table-key;</entry>
-   <entry>Create a new table.</entry>
-  </row>
-  <row>
-   <entry>&new-matrix-icon;</entry>
-   <entry>&new-matrix-lnk;</entry>
+   <entry>&line-icon;</entry>
+   <entry>&line-lnk;</entry>
    <entry></entry>
-   <entry>Create a new matrix.</entry>
+   <entry>Build a graph with data plotted as lines</entry>
   </row>
   <row>
-   <entry>&new-note-icon;</entry>
-   <entry>&new-note-lnk;</entry>
+   <entry>&scatter-icon;</entry>
+   <entry>&scatter-lnk;</entry>
    <entry></entry>
-   <entry>Create a new note window.</entry>
+   <entry>Build a graph with data plotted as scatter of points</entry>
   </row>
   <row>
-   <entry>&new-graph-icon;</entry>
-   <entry>&new-graph-lnk;</entry>
-   <entry>&new-graph-key;</entry>
-   <entry>Create a new empty 2D plot.</entry>
-  </row>
-  <row>
-   <entry>&new-function-plot-icon;</entry>
-   <entry>&new-function-plot-lnk;</entry>
-   <entry>&new-function-plot-key;</entry>
-   <entry>Creates a new plot based on a function Y=f(X).</entry>
-  </row>
-  <row>
-   <entry>&new-surface-3d-plot-icon;</entry>
-   <entry>&new-surface-3d-plot-lnk;</entry>
-   <entry>&new-surface-3d-plot-key;</entry>
-   <entry>Creates a new 3D plot based on a function Z=f(X,Y).</entry>
-  </row>
-  <row>
-   <entry>&open-icon;</entry>
-   <entry>&open-lnk;</entry>
-   <entry>&open-key;</entry>
-   <entry>Opens an existing &appname; project file.</entry>
-  </row>
-  <row>
-   <entry>&open-template-icon;</entry>
-   <entry>&open-template-lnk;</entry>
+   <entry>&line-symbol-icon;</entry>
+   <entry>&line-symbol-lnk;</entry>
    <entry></entry>
-   <entry>Opens an existing template &appname; project file.</entry>
+   <entry>Build a graph with data plotted as lines with symbols</entry>
+  </row>
+  <row>
+   <entry>&spline-icon;</entry>
+   <entry>&spline-lnk;</entry>
+   <entry></entry>
+   <entry>Build a graph with data plotted as smoothed lines</entry>
+  </row>
+  <row>
+   <entry>&vertical-drop-lines-icon;</entry>
+   <entry>&vertical-drop-lines-lnk;</entry>
+   <entry></entry>
+   <entry>Build a graph with data plotted as vertical drop lines</entry>
+  </row>
+  <row>
+   <entry>&horizontal-steps-icon;</entry>
+   <entry>&horizontal-steps-lnk;</entry>
+   <entry></entry>
+   <entry>Build a graph with data plotted as horizontal step lines</entry>
+  </row>
+  <row>
+   <entry>&vertical-steps-icon;</entry>
+   <entry>&vertical-steps-lnk;</entry>
+   <entry></entry>
+   <entry>Build a graph with data plotted as vertical step lines</entry>
+  </row>
+  <row>
+   <entry>&columns-icon;</entry>
+   <entry namest="command" nameend="description" align="center"><emphasis>Access to the sub-menu for columns and rows plots</emphasis></entry>
   </row>
    <row>
-   <entry>&save-project-icon;</entry>
-   <entry>&save-project-lnk;</entry>
-   <entry>&save-project-key;</entry>
-   <entry>Saves the current project.</entry>
-  </row>
-   <row>
-   <entry>&save-as-template-icon;</entry>
-   <entry>&save-as-template-lnk;</entry>
+   <entry>&columns-icon;</entry>
+   <entry>&columns-lnk;</entry>
    <entry></entry>
-   <entry>Saves the current project as a template.</entry>
+   <entry>Build a graph with data plotted as columns</entry>
   </row>
-  <row>
-   <entry>&import-ascii-1-icon;</entry>
-   <entry>&import-ascii-1-lnk;</entry>
+ <row>
+   <entry>&rows-icon;</entry>
+   <entry>&rows-lnk;</entry>
    <entry></entry>
-   <entry>Imports an ASCII file into one single table.</entry>
+   <entry>Build a graph with data plotted as rows</entry>
   </row>
   <row>
-   <entry>&import-ascii-n-icon;</entry>
-   <entry>&import-ascii-n-lnk;</entry>
+   <entry>&area-icon;</entry>
+   <entry>&area-lnk;</entry>
    <entry></entry>
-   <entry>Imports an ASCII file into multiple tables.</entry>
+   <entry>Build a graph with data plotted as lines with a filling of areas.</entry>
   </row>
   <row>
-   <entry>&duplicate-window-icon;</entry>
-   <entry>&duplicate-window-lnk;</entry>
+   <entry>&histogram-icon;</entry>
+   <entry>&histogram-lnk;</entry>
    <entry></entry>
-   <entry>Clonates the active window.</entry>
+   <entry>Build a graph with data plotted as an histogram.</entry>
   </row>
   <row>
-   <entry>&print-icon;</entry>
-   <entry>&print-lnk;</entry>
-   <entry>&print-key;</entry>
-   <entry>Print the active window.</entry>
-  </row>
-  <row>
-   <entry>&project-explorer-icon;</entry>
-   <entry>&project-explorer-lnk;</entry>
-   <entry>&project-explorer-key;</entry>
-   <entry>Show or hide the project explorer.</entry>
-  </row>
-  <row>
-   <entry>&results-log-icon;</entry>
-   <entry>&results-log-lnk;</entry>
+   <entry>&box-icon;</entry>
+   <entry>&box-lnk;</entry>
    <entry></entry>
-   <entry>Show or hide the results window.</entry>
+   <entry>Build a graph with data plotted as an histogram.</entry>
+  </row>
+  <row>
+   <entry>&vectors-xyxy-icon;</entry>
+   <entry namest="command" nameend="description" align="center"><emphasis>access to the sub-menu for vector plots.</emphasis></entry>
+  </row>
+  <row>
+   <entry>&vectors-xyxy-icon;</entry>
+   <entry>&vectors-xyxy-lnk;</entry>
+   <entry></entry>
+   <entry>Build a graph with data plotted as vectors defined by two points.</entry>
+  </row>
+  <row>
+   <entry>&vectors-xyam-icon;</entry>
+   <entry>&vectors-xyam-lnk;</entry>
+   <entry></entry>
+   <entry>Build a graph with data plotted as vectors defined by an origin and a direction.</entry>
   </row>
 </tbody>
 </tgroup>
 </table>
 </sect1>
+<!--
+***********************************************************************************
 
-<sect1 id="sec-plot-toolbar">
-<title>The Plot Toolbar.</title>
+			Toolbar Graph
 
-<para>This toolbar is only active when a plot window is selected. It allows the quick access to the commands of the &graph-menu-lnk; and of the &data-menu-lnk; which are used for the modification of the plots and of the data points of the plots.</para>
-<figure id="plot-file-toolbar">
-  <title>The &appname; Plot Toolbar</title>
-  <mediaobject> 
+***********************************************************************************
+-->
+<sect1 id="sec-graph-toolbar">
+<title>The Graph Toolbar.</title>
+
+<para>This toolbar is only active when a plot window is selected. It allows the quick access to the commands of the &graph-menu-lnk; which are used for the modification of the plots and of the data points of the plots.</para>
+<figure id="graph-file-toolbar">
+  <title>The &appname; Graph Toolbar with its different sub-menus</title>
+  <mediaobject>
     <imageobject>
-      <imagedata  format="PNG" fileref="pics/plot-toolbar.png"/>
+      <imagedata  format="PNG" fileref="pics/graph-toolbar.png"/>
     </imageobject>
   </mediaobject>
 </figure>
@@ -247,23 +409,90 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
   </thead>
  <tbody>
   <row>
-   <entry>&add-layer-icon;</entry>
-   <entry><link linkend="add-layer-cmd">&add-layer-cmd;</link></entry>
-   <entry>&add-layer-key;</entry>
-   <entry>Adds a new layer to the active plot window.</entry>
+   <entry>&pointer-icon;</entry>
+   <entry>&pointer-lnk;</entry>
+   <entry></entry>
+   <entry>Comes back to the normal pointer mode, this is useful when you have select other modes of the plot window such as the <link linkend="data-reader-cmd">data reader</link>.</entry>
+  </row>
+
+  <row>
+   <entry>&arrange-layers-icon;</entry>
+   <entry namest="command" nameend="description" align="center"><emphasis>Access to the layers commands.</emphasis></entry>
   </row>
   <row>
    <entry>&arrange-layers-icon;</entry>
-   <entry><link linkend="arrange-layers-cmd">&arrange-layers-cmd;</link></entry>
+   <entry>&arrange-layers-lnk;</entry>
    <entry>&arrange-layers-key;</entry>
    <entry>Arranges the different layers of the active plot window.</entry>
   </row>
   <row>
+   <entry>&add-layer-icon;</entry>
+   <entry>&add-layer-lnk;</entry>
+   <entry>&add-layer-key;</entry>
+   <entry>Adds a new layer to the active plot window, or remove a layer from the selected plot window.</entry>
+  </row>
+
+  <row>
    <entry>&add-remove-curve-icon;</entry>
-   <entry><link linkend="add-remove-curve-cmd">&add-remove-curve-cmd;</link></entry>
+   <entry></entry>
+   <entry></entry>
+   <entry namest="command" nameend="description" align="center"><emphasis>Access to the curves sub-menu.</emphasis></entry>
+  </row>
+  <row>
+   <entry>&add-remove-curve-icon;</entry>
+   <entry>&add-remove-curve-lnk;</entry>
    <entry>&add-remove-curve-key;</entry>
    <entry>Adds or removes curves to the active plot window.</entry>
   </row>
+
+  <row>
+   <entry>&add-text-icon;</entry>
+   <entry namest="command" nameend="description" align="center"><emphasis>Access to the commands for addition of graphics objects to the current plot.</emphasis></entry>
+  </row>
+  <row>
+   <entry>&add-text-icon;</entry>
+   <entry>&add-text-lnk;</entry>
+   <entry>&add-text-key;</entry>
+   <entry>Add a new text element in the active plot.</entry>
+  </row>
+
+  <row>
+   <entry>&zoom-in-icon;</entry>
+   <entry>&zoom-in-lnk;</entry>
+   <entry>&zoom-in-key;</entry>
+   <entry>Switches the active plot layer to the zoom mode.</entry>
+  </row>
+  <row>
+   <entry>&zoom-out-icon;</entry>
+   <entry>&zoom-out-lnk;</entry>
+   <entry>&zoom-out-key;</entry>
+   <entry>Switches the active plot layer to the zoom mode.</entry>
+  </row>
+  <row>
+   <entry>&rescale-icon;</entry>
+   <entry>&rescale-lnk;</entry>
+   <entry>&rescale-key;</entry>
+   <entry>Reset the zoom in order to show all the data.</entry>
+  </row>
+  <row>
+   <entry>&screen-reader-icon;</entry>
+   <entry>&screen-reader-lnk;</entry>
+   <entry></entry>
+   <entry>Switches the active plot layer to the &screen-reader-cmd; mode.</entry>
+  </row>
+  <row>
+   <entry>&data-reader-icon;</entry>
+   <entry>&data-reader-lnk;</entry>
+   <entry>&data-reader-key;</entry>
+   <entry>Switches the data display mode.</entry>
+  </row>
+  <row>
+   <entry>&select-data-range-icon;</entry>
+   <entry>&select-data-range-lnk;</entry>
+   <entry>&select-data-range-key;</entry>
+   <entry>Switches the active plot to the &select-data-range-cmd; mode.</entry>
+  </row>
+<!-- remove from toolbar in 0.20 -> transfer to sub menus
   <row>
    <entry>&add-error-bars-icon;</entry>
    <entry><link linkend="add-error-bars-cmd">&add-error-bars-cmd;</link></entry>
@@ -283,42 +512,6 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
    <entry>Adds a new legend to the active plot window.</entry>
   </row>
   <row>
-   <entry>&pointer-icon;</entry>
-   <entry><link linkend="pointer-cmd">&pointer-cmd;</link></entry>
-   <entry></entry>
-   <entry>Comes back to the normal pointer mode, this is useful when you have select other modes of the plot window such as the <link linkend="data-reader-cmd">data reader</link>.</entry>
-  </row>
-  <row>
-   <entry>&zoom-in-icon;</entry>
-   <entry><link linkend="zoom-in-cmd">&zoom-in-cmd;</link></entry>
-   <entry>&zoom-in-key;</entry>
-   <entry>Switches the active plot layer to the zoom mode.</entry>
-  </row>
-  <row>
-   <entry>&zoom-out-icon;</entry>
-   <entry><link linkend="zoom-out-cmd">&zoom-out-cmd;</link></entry>
-   <entry>&zoom-out-key;</entry>
-   <entry>Switches the active plot layer to the zoom mode.</entry>
-  </row>
-  <row>
-   <entry>&data-reader-icon;</entry>
-   <entry><link linkend="data-reader-cmd">&data-reader-cmd;</link></entry>
-   <entry>&data-reader-key;</entry>
-   <entry>Switches the data display mode.</entry>
-  </row>
-  <row>
-   <entry>&select-data-range-icon;</entry>
-   <entry><link linkend="select-data-range-cmd">&select-data-range-cmd;</link></entry>
-   <entry>&select-data-range-key;</entry>
-   <entry>Switches the active plot to the &select-data-range-cmd; mode.</entry>
-  </row>
-  <row>
-   <entry>&screen-reader-icon;</entry>
-   <entry><link linkend="screen-reader-cmd">&screen-reader-cmd;</link></entry>
-   <entry></entry>
-   <entry>Switches the active plot layer to the &screen-reader-cmd; mode.</entry>
-  </row>
-  <row>
    <entry>&move-data-points-icon;</entry>
    <entry><link linkend="move-data-points-cmd">&move-data-points-cmd;</link></entry>
    <entry>&move-data-points-key;</entry>
@@ -329,12 +522,6 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
    <entry><link linkend="remove-data-points-cmd">&remove-data-points-cmd;</link></entry>
    <entry>&remove-data-points-key;</entry>
    <entry>Allows to remove data points on the active plot.</entry>
-  </row>
-  <row>
-   <entry>&add-text-icon;</entry>
-   <entry>&add-text-lnk;</entry>
-   <entry>&add-text-key;</entry>
-   <entry>Add a new text element in the active plot.</entry>
   </row>
   <row>
    <entry>&draw-line-icon;</entry>
@@ -360,19 +547,25 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
    <entry>&add-image-key;</entry>
    <entry>Insert a new image in the active plot.</entry>
   </row>
+-->
 </tbody>
 </tgroup>
 </table>
-
-
 </sect1>
+<!--
+***********************************************************************************
+
+			Toolbar Table
+
+***********************************************************************************
+-->
 
 <sect1 id="sec-table-toolbar">
 <title>The Table Toolbar.</title>
 
-<para>This toolbar allows a quick access to the commands of the <link linkend="sec-plot-menu">Plot Menu</link> used to plot the datas of the table.</para>
+<para>This toolbar allows a quick access to the commands of the &table-menu-lnk; used to modify a table.</para>
 
-<figure id="plot-table-toolbar">
+<figure id="table-toolbar">
   <title>The &appname; Table Toolbar</title>
   <mediaobject> 
     <imageobject>
@@ -397,6 +590,7 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
     </row>
   </thead>
  <tbody>
+<!--
   <row>
    <entry>&line-icon;</entry>
    <entry><link linkend="line-cmd">plot -> &line-cmd;</link></entry>
@@ -475,21 +669,28 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
    <entry></entry>
    <entry>plot with the trajectory style.</entry>
   </row>
+-->
+  <row>
+   <entry>&table-dimensions-icon;</entry>
+   <entry>&table-dimensions-lnk;</entry>
+   <entry></entry>
+   <entry>modify the number of rows and columns of the table</entry>
+  </row>
   <row>
    <entry>&add-column-icon;</entry>
-   <entry><link linkend="add-column-cmd">plot -> &add-column-cmd;</link></entry>
+   <entry>&add-column-lnk;</entry>
    <entry></entry>
    <entry>add a new column to the table</entry>
   </row>
   <row>
    <entry>&statistics-on-columns-icon;</entry>
-   <entry><link linkend="statistics-on-columns-cmd">plot -> &statistics-on-columns-cmd;</link></entry>
+   <entry>&statistics-on-columns-lnk;</entry>
    <entry></entry>
    <entry>compute statistical parameters on selected columns</entry>
   </row>
   <row>
    <entry>&statistics-on-rows-icon;</entry>
-   <entry><link linkend="statistics-on-rows-cmd">plot -> &statistics-on-rows-cmd;</link></entry>
+   <entry>&statistics-on-rows-lnk;</entry>
    <entry></entry>
    <entry>compute statistical parameters on selected row</entry>
   </row>
@@ -497,13 +698,19 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
 </tgroup>
 </table>
 </sect1>
+<!--
+***********************************************************************************
 
-<sect1 id="sec-plot3d-toolbar">
-<title>The Plot 3D Toolbar.</title>
+			Toolbar Matrix Plot
+
+***********************************************************************************
+-->
+<sect1 id="sec-matrix-plot-toolbar">
+<title>The matrix plot Toolbar.</title>
 
 <para></para>
-<figure id="plot-plot3d-toolbar">
-  <title>The &appname; Plot 3D Toolbar</title>
+<figure id="matrix-plot-toolbar">
+  <title>The &appname; matrix Plot Toolbar</title>
   <mediaobject> 
     <imageobject>
       <imagedata  format="PNG" fileref="pics/plot3d-toolbar.png"/>
@@ -528,152 +735,249 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
   </thead>
  <tbody>
   <row>
-   <entry>&frame-icon;</entry>
-   <entry><link linkend="frame-cmd">plot -> &frame-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw only the three axes.</entry>
-  </row>
-  <row>
-   <entry>&box-icon;</entry>
-   <entry><link linkend="box-cmd">plot -> &box-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw the three axes and the 3D box around the plot.</entry>
-  </row>
-  <row>
-   <entry>&no-axes-icon;</entry>
-   <entry><link linkend="no-axes-cmd">plot -> &no-axes-cmd;</link></entry>
-   <entry></entry>
-   <entry>Doesn't draw the axes nor the box.</entry>
-  </row>
-  <row>
-   <entry>&front-grid-icon;</entry>
-   <entry><link linkend="front-grid-cmd">plot -> &front-grid-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw a grid on the front panel.</entry>
-  </row>
-  <row>
-   <entry>&back-grid-icon;</entry>
-   <entry><link linkend="back-grid-cmd">plot -> &back-grid-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw a grid on the back panel.</entry>
-  </row>
-  <row>
-   <entry>&left-grid-icon;</entry>
-   <entry><link linkend="left-grid-cmd">plot -> &left-grid-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw a grid on the left panel.</entry>
-  </row>
-  <row>
-   <entry>&right-grid-icon;</entry>
-   <entry><link linkend="right-grid-cmd">plot -> &right-grid-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw a grid on the right panel.</entry>
-  </row>
-  <row>
-   <entry>&top-grid-icon;</entry>
-   <entry><link linkend="top-grid-cmd">plot -> &top-grid-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw a grid on the top panel.</entry>
-  </row>
-  <row>
-   <entry>&floor-grid-icon;</entry>
-   <entry><link linkend="floor-grid-cmd">plot -> &floor-grid-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw a grid on the bottom panel.</entry>
-  </row>
-  <row>
-   <entry>&floor-grid-icon;</entry>
-   <entry><link linkend="floor-grid-cmd">plot -> &floor-grid-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw a grid on the bottom panel.</entry>
-  </row>
-  <row>
-   <entry>&perspective-icon;</entry>
-   <entry><link linkend="perspective-cmd">plot -> &perspective-cmd;</link></entry>
-   <entry></entry>
-   <entry>Enables/Disables the 3D perspective mode.</entry>
-  </row>
-  <row>
-   <entry>&reset-rotation-icon;</entry>
-   <entry><link linkend="reset-rotation-cmd">plot -> &reset-rotation-cmd;</link></entry>
-   <entry></entry>
-   <entry>Resets the rotation of the 3D plot to the default values.</entry>
-  </row>
-  <row>
-   <entry>&autoscale-icon;</entry>
-   <entry><link linkend="autoscale-cmd">plot -> &autoscale-cmd;</link></entry>
-   <entry></entry>
-   <entry>Finds the best layout of the 3D plot fitting the window size. It readjusts the length of the axis ticks to a default value.</entry>
-  </row>
-  <row>
-   <entry>&bar-style-icon;</entry>
-   <entry><link linkend="bar-style-cmd">plot -> &bar-style-cmd;</link></entry>
-   <entry></entry>
-   <entry>Changes the styles of the bars.</entry>
-  </row>
-  <row>
-   <entry>&dots-icon;</entry>
-   <entry><link linkend="dots-cmd">plot -> &dots-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw the 3D scatter points with the dot style.</entry>
-  </row>
-  <row>
-   <entry>&cones-icon;</entry>
-   <entry><link linkend="cones-cmd">plot -> &cones-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw the 3D scatter points with the cone style.</entry>
-  </row>
-  <row>
-   <entry>&cross-hairs-icon;</entry>
-   <entry><link linkend="cross-hairs-cmd">plot -> &cross-hairs-cmd;</link></entry>
-   <entry></entry>
-   <entry>Draw the 3D scatter points with the cross-hairs style.</entry>
-  </row>
-  <row>
    <entry>&mesh-icon;</entry>
-   <entry><link linkend="mesh-cmd">plot -> &mesh-cmd;</link></entry>
+   <entry>&mesh-lnk;</entry>
    <entry></entry>
    <entry>Draw a surface with the wireframe style.</entry>
   </row>
   <row>
    <entry>&mesh-hidden-icon;</entry>
-   <entry><link linkend="mesh-hidden-cmd">plot -> &mesh-hidden-cmd;</link></entry>
+   <entry>&mesh-hidden-lnk;</entry>
    <entry></entry>
    <entry>Draw a surface with the mesh style (with hidden lines).</entry>
   </row>
   <row>
    <entry>&polygons-icon;</entry>
-   <entry><link linkend="polygons-cmd">plot -> &polygons-cmd;</link></entry>
+   <entry>&polygons-lnk;</entry>
    <entry></entry>
    <entry>Draw a surface with the polygons style.</entry>
   </row>
   <row>
    <entry>&mesh-polygons-icon;</entry>
-   <entry><link linkend="mesh-polygons-cmd">plot -> &mesh-polygons-cmd;</link></entry>
+   <entry>&mesh-polygons-lnk;</entry>
    <entry></entry>
    <entry>Draw a surface with the mesh+polygons style.</entry>
   </row>
   <row>
-   <entry>&floor-icon;</entry>
-   <entry><link linkend="floor-cmd">plot -> &floor-cmd;</link></entry>
+   <entry>&bar-style-icon;</entry>
+   <entry>&bar-style-lnk;</entry>
    <entry></entry>
-   <entry>Draw a projection of the plot on the floor.</entry>
+   <entry>Changes the styles of the bars.</entry>
   </row>
   <row>
-   <entry>&isolines-icon;</entry>
-   <entry><link linkend="isolines-cmd">plot -> &isolines-cmd;</link></entry>
+   <entry>&scatter3d-icon;</entry>
+   <entry>&scatter3d-lnk;</entry>
    <entry></entry>
-   <entry>Draw an isolines projection on the floor.</entry>
+   <entry>Draw data points as a clouds of points in a 3D space.</entry>
   </row>
   <row>
-   <entry>&empty-icon;</entry>
-   <entry><link linkend="empty-cmd">plot -> &empty-cmd;</link></entry>
+   <entry>&contour-color-icon;</entry>
+   <entry>&contour-color-lnk;</entry>
    <entry></entry>
-   <entry>Draw an empty floor.</entry>
+   <entry>Draw data points as a map with a color filling between isolines.</entry>
   </row>
   <row>
-   <entry>&animation-icon;</entry>
-   <entry><link linkend="animation-cmd">plot -> &animation-cmd;</link></entry>
+   <entry>&contour-lines-icon;</entry>
+   <entry>&contour-lines-lnk;</entry>
+   <entry></entry>
+   <entry>Draw data points as a map with isolines.</entry>
+  </row>
+  <row>
+   <entry>&gray-scale-icon;</entry>
+   <entry>&gray-scale-lnk;</entry>
+   <entry></entry>
+   <entry>Draw data points as a map with a gray palette filling between isolines.</entry>
+  </row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<!--
+***********************************************************************************
+
+			Toolbar 3D surfaces
+
+***********************************************************************************
+-->
+
+<sect1 id="sec-plot3d-toolbar">
+<title>The 3D Surfaces Toolbar.</title>
+
+<para></para>
+<figure id="surfaces-3d-toolbar">
+  <title>The &appname; 3D Surfaces Toolbar</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/3d-surfaces-toolbar.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
+<table tocentry="1" pgwide="1" frame="sides">
+<title>3D Plot toolbar commands.</title>
+<tgroup cols="4">
+  <colspec colname="icon" colwidth="1*" align="center"/>
+  <colspec colname="command" colwidth="5*" align="left"/>
+  <colspec colname="key" colwidth="2*" align="center"/>
+  <colspec colname="description" colwidth="10*" align="justify"/>
+  <thead>
+    <row>
+      <entry>Icon</entry>
+      <entry>Command</entry>
+      <entry>Key</entry>
+      <entry>Description</entry>
+    </row>
+  </thead>
+ <tbody>
+  <row>
+   <entry id="frame-cmd">&frame-icon;</entry>
+   <entry>&frame-cmd;</entry>
+   <entry></entry>
+   <entry>Draw only the three axes.</entry>
+  </row>
+  <row>
+   <entry id="box-cmd">&box-icon;</entry>
+   <entry>&box-cmd;</entry>
+   <entry></entry>
+   <entry>Draw the three axes and the 3D box around the plot.</entry>
+  </row>
+  <row>
+   <entry id="no-axes-cmd">&no-axes-icon;</entry>
+   <entry>&no-axes-cmd;</entry>
+   <entry></entry>
+   <entry>Doesn't draw the axes nor the box.</entry>
+  </row>
+  <row>
+   <entry id="front-grid-cmd">&front-grid-icon;</entry>
+   <entry>&front-grid-cmd;</entry>
+   <entry></entry>
+   <entry>Draw a grid on the front panel. The position of this grid is the plan defined by y=y<subscript>min</subscript>.</entry>
+  </row>
+  <row>
+   <entry id="back-grid-cmd">&back-grid-icon;</entry>
+   <entry>&back-grid-cmd;</entry>
+   <entry></entry>
+   <entry>Draw a grid on the back panel. The position of this grid is the plan defined by y=y<subscript>max</subscript>.</entry>
+  </row>
+  <row>
+   <entry id="left-grid-cmd">&left-grid-icon;</entry>
+   <entry>&left-grid-cmd;</entry>
+   <entry></entry>
+   <entry>Draw a grid on the left panel. The position of this grid is the plan defined by x=x<subscript>min</subscript>.</entry>
+  </row>
+  <row>
+   <entry id="right-grid-cmd">&right-grid-icon;</entry>
+   <entry>&right-grid-cmd;</entry>
+   <entry></entry>
+   <entry>Draw a grid on the right panel. The position of this grid is the plan defined by x=x<subscript>max</subscript>.</entry>
+  </row>
+  <row>
+   <entry id="top-grid-cmd">&top-grid-icon;</entry>
+   <entry>&top-grid-cmd;</entry>
+   <entry></entry>
+   <entry>Draw a grid on the top panel. The position of this grid is the plan defined by z=z<subscript>max</subscript>.</entry>
+  </row>
+  <row>
+   <entry>&floor-grid-icon;</entry>
+   <entry><link linkend="floor-grid-cmd">plot -> &floor-grid-cmd;</link></entry>
+   <entry></entry>
+   <entry>Draw a grid on the bottom panel.</entry>
+  </row>
+  <row>
+   <entry id="floor-grid-cmd">&floor-grid-icon;</entry>
+   <entry>&floor-grid-cmd;</entry>
+   <entry></entry>
+   <entry>Draw a grid on the bottom panel. The position of this grid is the plan defined by z=z<subscript>min</subscript>.</entry>
+  </row>
+  <row>
+   <entry id="perspective-cmd">&perspective-icon;</entry>
+   <entry>&perspective-cmd;</entry>
+   <entry></entry>
+   <entry>Enables/Disables the 3D perspective mode.</entry>
+  </row>
+  <row>
+   <entry id="reset-rotation-cmd">&reset-rotation-icon;</entry>
+   <entry>&reset-rotation-cmd;</entry>
+   <entry></entry>
+   <entry>Resets the rotation of the 3D plot to the default values.</entry>
+  </row>
+  <row>
+   <entry id="autoscale-cmd">&autoscale-icon;</entry>
+   <entry>&autoscale-cmd;</entry>
+   <entry></entry>
+   <entry>Finds the best layout of the 3D plot fitting the window size. It readjusts the length of the axis ticks to a default value.</entry>
+  </row>
+  <row>
+   <entry id="bar-style-cmd">&bar-style-icon;</entry>
+   <entry>&bar-style-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a <link linkend="fig-3d-bars">3D histogram</link>, this command is used to modify the style of the bars.</entry>
+  </row>
+  <row>
+   <entry id="dots-cmd">&dots-icon;</entry>
+   <entry>&dots-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a <link linkend="fig-3d-scatter">3D scatter</link>, this command is used to modify the style of the data points to dots.</entry>
+  </row>
+  <row>
+   <entry id="cones-cmd">&cones-icon;</entry>
+   <entry>&cones-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a <link linkend="fig-3d-scatter">3D scatter</link>, this command is used to modify the style of the data points to cones. It is then possible to modify the drawing parameters of the cones by double clicking on the plotting area.</entry>
+  </row>
+  <row>
+   <entry id="cross-hairs-cmd">&cross-hairs-icon;</entry>
+   <entry>&cross-hairs-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a <link linkend="fig-3d-scatter">3D scatter</link>, this command is used to modify the style of the data points to cross-hairs. It it then possible to modify the drawing parameters of the crosses by double clicking on the plotting area.</entry>
+  </row>
+  <row>
+   <entry id="mesh-cmd">&mesh-icon;</entry>
+   <entry>&mesh-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a 3D surface, this command is used to modify the style of the surface to a simple wireframe.</entry>
+  </row>
+  <row>
+   <entry id="mesh-hidden-cmd">&mesh-hidden-icon;</entry>
+   <entry>&mesh-hidden-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a 3D surface, this command is used to modify the style of the surface to a wireframe. A computation of the hidden line is done.</entry>
+  </row>
+  <row>
+   <entry id="polygons-cmd">&polygons-icon;</entry>
+   <entry>&polygons-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a 3D surface, this command is used to modify the style of the surface to polygons.</entry>
+  </row>
+  <row>
+   <entry id="mesh-polygons-cmd">&mesh-polygons-icon;</entry>
+   <entry>&mesh-polygons-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a 3D surface, this command is used to modify the style of the surface to polygons with a mesh.</entry>
+  </row>
+  <row>
+   <entry id="floor-cmd">&floor-icon;</entry>
+   <entry>&floor-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a 3D surface, this command is used to add a filled area projection of the surface on the floor of the plot.</entry>
+  </row>
+  <row>
+   <entry id="isolines-cmd">&isolines-icon;</entry>
+   <entry>&isolines-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a 3D surface, this command is used to add an isoline.</entry>
+  </row>
+  <row>
+   <entry id="empty-cmd">&empty-icon;</entry>
+   <entry>&empty-cmd;</entry>
+   <entry></entry>
+   <entry>If the active 3D plot is a 3D surface, this command is used to remove any projection from the floor.</entry>
+  </row>
+  <row>
+   <entry id="animation-cmd">&animation-icon;</entry>
+   <entry>&animation-cmd;</entry>
    <entry></entry>
    <entry>Enables/Disables animation.</entry>
   </row>

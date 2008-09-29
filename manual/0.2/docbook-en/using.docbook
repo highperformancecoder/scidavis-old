@@ -7,7 +7,7 @@
 -->
 <title>Drawing plots with &appname;</title>
 <!--
-======================================================================================
+================================================================================
 
 		2D plots
 		========
@@ -19,13 +19,13 @@
 
 <itemizedlist>
   <listitem>
-    <para>You can have your (X,Y) values in a <link linkend="sec-intro-table">table</link>. You need to select at least one column as X values and one column as Y values. This is specified with the &column-options-lnk;. Then you can select the columns and use one command of the &plot-menu-lnk; to plot the data.</para>
+    <para>You can have your (X,Y) values in a <link linkend="sec-intro-table">table</link>. You need to select at least one column as X values and one column as Y values. This is specified with the &set-column-as-lnk;. Then you can select the columns and use one command of the &plot-menu-lnk; to plot the data.</para>
   </listitem>
   <listitem>
-    <para>If you want to plot a function, you don't need a table. You can use directly the &new-function-plot-lnk;. This will open the corresponding <link linkend="add-function-dialog">dialog box</link> and you will be able to define the mathematical expression of your function.</para>
+    <para>If you want to plot a function, you don't need a table. You can use directly the &new-function-plot-lnk;. This will open the corresponding dialog box and you will be able to define the mathematical expression of your function.</para>
   </listitem>
   <listitem>
-    <para>The combined way is to define a <link linkend="sec-intro-table">table</link>, and then to fill in the table with the results of functions. This can be done with the &set-column-values-lnk;. Then you can select the columns and use one command of the &plot-menu-lnk; to plot the data.</para>
+    <para>The combined way is to define a <link linkend="sec-intro-table">table</link>, and then to fill in the table with the results of functions. This can be done with the &assign-formula-lnk;. Then you can select the columns and use one command of the &plot-menu-lnk; to plot the data.</para>
   </listitem>
 </itemizedlist>
 
@@ -35,7 +35,7 @@
 <!--
 ======================================================================================
 
-		small tutorial to obtain a 2D plot
+		small tutorial to obtain a 2D plot from a table
 -->
 <sect2 id="sec-2d-plot-from-data">
 <title>2D plot from data.</title>
@@ -44,7 +44,7 @@
 
 <para>The first step is to create an empty project with the &new-project-lnk; from the &file-menu-lnk;, you can also use the key &new-project-key; or the &new-project-icon; icon from the &file-toolbar-lnk;. Then create a new table with the &new-table-lnk; from the &file-menu-lnk; or with the &new-table-key; or with the &new-table-icon; icon from the &file-toolbar-lnk;.</para>
 
-<para>At its creation, the table has two column (one for X and one for Y) and 32 rows. You can add rows and columns by selecting a row or a column and using the right button of the mouse, you can also modify the number of rows and columns with the &rows-lnk; and &columns-lnk; from the &table-menu-lnk;. You enter your values, and obtain this table:</para> 
+<para>At its creation, the table has two column (one for X and one for Y) and 32 rows. You can add rows and columns by selecting a row or a column and using the right button of the mouse, you can also modify the number of rows and columns with the &table-dimensions-lnk; from the &table-menu-lnk;. Then, enter your values, and you obtain this table:</para> 
 
 <figure id="fig-simple-2dplot-1">
   <title>A simple 2D plot: the table.</title>
@@ -55,7 +55,7 @@
   </mediaobject>
 </figure>
 
-<para>The you have to select the two columns, and build your plot (here a simple 2D scatter) with the &scatter-lnk; from the context menu, or by clicking on the corresponding &scatter-icon; icon from the &plot-toolbar-lnk; or with the &scatter-lnk; from the &plot-menu-lnk;. A plot is created which uses the default options for all elements. You can customize these default options with the <link linkend="preferences-dialog">preferences dialog</link>. With the default options, you obtain the following plot:</para>
+<para>Then, you have to select the two columns, and build your plot (here a simple 2D scatter) with the &scatter-lnk; from the context menu, or by clicking on the corresponding &scatter-icon; icon from the &plot-toolbar-lnk; or with the &scatter-lnk; from the &plot-menu-lnk;. A plot is created which uses the default options for all elements. You can customize these default options with the <link linkend="sec-preferences-2d-plot">2D plot preferences dialog</link>. With the default options, you obtain the following plot:</para>
 
 <figure id="fig-simple-2dplot-2">
   <title>A simple 2D plot: the default plot.</title>
@@ -66,7 +66,7 @@
   </mediaobject>
 </figure>
 
-<para>You can then customize your plot. By double clicking on the points, you open the <link linkend="custom-curves-dialog">Custom curves dialog</link> which is used to modify the symbols. Then a double-click on the axes opens the <link linkend="plot-options-dialog">general plot options dialog</link>, and you can change the scales, the fonts for the axes labels, etc. You can also add grid lines on X or Y axes, etc. Finally, a double click on each text item (X title, Y title, plot title) allows to change the text and the presentation of these elements. The final plot is:</para>
+<para>You can now customize your plot with the commands of the &format-menu-lnk;. By double clicking on the data points, you open the &format-plot-lnk; dialog which is used to modify the symbols. Then a double-click on the axes opens the &format-axes-lnk; dialog, and you can change the scales, the fonts for the axes labels, etc. You can also add grid lines on X or Y axes (&format-grid-lnk;), etc. Finally, a double click on each text item (X title, Y title, plot title) allows to change the text and the presentation of these elements. See the <link linkend="sec-customize-2d-plot">customize section</link> for more details. The final plot is for example:</para>
 
 <figure id="fig-simple-2dplot-3">
   <title>A simple 2D plot: the plot finished.</title>
@@ -82,26 +82,29 @@
 
 <para>There are several types of plots which can be built from a table. They are presented in the &plot-menu-lnk;</para>
 
-<para>It is possible to use up to four axes for the data:</para>
+<para>It is possible to use up to four axes for the data. For example, create a new table, modify its dimension to 4 columns and 7 rows. Then select the third column and set it as X, and you can enter the values of two series (X1,Y1) and (X2,Y2).</para>
 
 <figure id="fig-two-axes-plot">
-  <title>A 2D plot with two Y axis.</title>
+  <title>A table with two series of values (X1,Y1) and (X2,Y2).</title>
   <mediaobject> 
     <imageobject>
-      <imagedata  format="PNG" fileref="pics/plot-two-axes.png"/>
+      <imagedata  format="PNG" fileref="tutorial/2axes-2dplot-1.png"/>
     </imageobject>
   </mediaobject>
 </figure>
 
-<para>In addition to the customization which has been already described, the  axes which are used for each curve were defined with the <link linkend="custom-curves-dialog">Custom Curves</link> Dialog, and two arrows were added with the &draw-arrow-lnk;.</para>
+<para>To build the plot, select the two Y column (select Y1, and the select Y2 with CTRL key), use the &plot-menu-lnk;. You obtain a simple plot with two axes, then use the &format-plot-lnk;. In the left window, select the data serie for which you want to change the axes, click on the <emphasis>axes</emphasis> tag and define the axes you want to use. After this, the plot is modified but the new axes are not shown. Use the &format-axes-lnk;, select the new axes and click on the <emphasis>show</emphasis> checkbox. You can then customize your plot as before to obtain the following result.</para>
 
-<informalfigure id="fig-two-axes-dialog">
+<figure id="fig-two-axes-plot-1">
+  <title>A 2D plot with two Y and two X axis.</title>
   <mediaobject> 
     <imageobject>
-      <imagedata  format="PNG" fileref="pics/plot-two-axes-dialog.png"/>
+      <imagedata  format="PNG" fileref="tutorial/2axes-2dplot-2.png"/>
     </imageobject>
   </mediaobject>
-</informalfigure>
+</figure>
+
+<para>In addition to the customization which has been already described, four arrows were added with the &draw-arrow-lnk;.</para>
 </sect2>
 
 <sect2 id="sec-2d-plot-from-function">
@@ -114,25 +117,33 @@
 
 <para>If you just want to plot a function, you can use the &new-function-plot-lnk; from the &file-menu-lnk; or with the &new-function-plot-key; or with the &new-function-plot-icon; icon from the &file-toolbar-lnk;.</para>
 
-<para>This command will open the <link linkend="add-function-dialog">Add Function Curve dialog</link>. You can then enter the expression of your mathematical function, the X range used for the plot, and the number of points used in this X range. Beside classical Y=f(X) functions, parametric and polar functions can be defined.</para>
+<para>You can then enter the expression of your mathematical function, the X range used for the plot, and the number of points used in this X range. Beside classical Y=f(X) functions, parametric functions and polar functions can be defined. See the &add-function-lnk; for details.</para>
 
 <figure id="fig-direct-function-plot">
   <title>Direct plot of a function.</title>
   <mediaobject> 
     <imageobject>
-      <imagedata  format="PNG" fileref="pics/direct-function-plot.png"/>
+      <imagedata  format="PNG" fileref="tutorial/direct-function-plot.png"/>
     </imageobject>
   </mediaobject>
 </figure>
 
-</sect3>
+<para>The generic plot which is created by this command can then be customized as explained in the previous section.</para>
 
-<sect3>
+</sect3>
+<!--
+***********************************************************************************
+
+			filling of a table with a function
+
+***********************************************************************************
+-->
+<sect3 id="sec-table-function-plot">
 <title>Filling of a table with the values of a function.</title>
 
-<para>If you just want to work not only with the plot but also with the data, you can create a new table as explained in the <link linkend="sec-2d-plot-from-data">previous section</link>. Then you can fill this table with the values of a function with the &set-column-values-lnk;.</para>
+<para>If you just want to work not only with the plot but also with the data, you can create a new table as explained in the <link linkend="sec-2d-plot-from-data">previous section</link>. Then you can fill this table with the values of a function with the &assign-formula-lnk;. The main advantage of this method is that you can do further analysis of the calculated data as the are kept in a table.</para>
 
-<para>To obtain the same plot as in the previous example, you need to create a new table (key &new-table-key;), then select the first column and use the command &set-column-values-lnk; from the context menu, or from the &table-menu-lnk;. The row number symbol is <emphasis>i</emphasis>, so you can enter the function expression <emphasis>i/10</emphasis> and use 300 rows.</para>
+<para>To obtain the same plot as in the previous example, you need to create a new table (key &new-table-key;) and use the &table-dimensions-lnk; to define 300 rows, then select the first column and use the command &assign-formula-lnk; from the context menu, or from the &table-menu-lnk;. The row number symbol is <emphasis>i</emphasis>, so you can enter the function expression <emphasis>i/10</emphasis>.</para>
 
 <figure id="fig-table-function-plot-1">
   <title>Function plot: filling of the X column.</title>
@@ -159,6 +170,254 @@
 </sect3>
 
 </sect2>
+<!--
+*******************************************************************
+
+		customization of 2D plots
+
+*******************************************************************
+-->
+<sect2 id="sec-customize-2d-plot">
+<title>Customization of a 2D plot</title>
+
+  <indexterm><primary>Plot</primary><secondary>Curves options</secondary></indexterm>
+  <para>This dialog is activated by selecting the command <link linkend="format-plot-cmd">&format-plot-cmd;</link> from the <link linkend="sec-format-menu">Format Menu</link>. It is also activated by a double click on the plot. If there are more than one layer in the window, &appname; will select the layer which contain the plot under the mouse pointer.</para>
+  <figure id="fig-custom-curves-1">
+    <title>The Custom Curves Dialog: Line formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-1.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  <para>The right part of the dialog box contains several tabs which depend on the kind of plot that you are using, they are described in the following subsections. The left part of the dialog window shows the curves which are plotted in the active layer. All the modifications will be done on the selected curve. You can change the columns which are used by clicking on the <emphasis>Plot Associations...</emphasis> button. This will open a dialog which can be used to select the columns of the table which are used as X and Y values.</para>
+ 
+  <figure id="fig-custom-curves-3">
+    <title>The Custom Curves Dialog: Plot Associations.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-3.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+ <para>The button <emphasis>Worksheet</emphasis> can be used to access to the table which contains the columns selected.</para>
+
+<sect3 id="custom-curves-dialog-lines">
+<title>Custom curves for lines and scatter plots</title>
+
+  <para>This dialog box is activated for plots drawn with <emphasis>symbols</emphasis>, <emphasis>line+symbols</emphasis>, <emphasis>lines</emphasis>, <emphasis>vertical drop lines</emphasis>, <emphasis>steps</emphasis> and <emphasis>splines</emphasis>.</para>
+  <para>The first tab of the right part of the dialog window allows to modify the style of the line (color, line style, thickness). The connect button allows to change the style which is used to draw the selected curve (steps, droplines, etc). See the &plot-menu-lnk; to see the different types of plot available.</para>
+  <figure id="fig-custom-curves-line-1">
+    <title>The Custom Curves Dialog: Line formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-1.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para>A second tab can be activated to select the symbol, and to modify the size, the color and the filling color of the symbols.</para>
+  <figure id="fig-custom-curves-line-2">
+    <title>The Custom Curves Dialog: Symbol formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-2.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+</sect3>
+
+<sect3 id="custom-curves-dialog-pie">
+<title>Custom curves for pie plots</title>
+  <para>These commands are available for <link linkend="pie-cmd">pie plots</link>. The first tab allows the customization of the pie segments. The left fields are used to modify the border which is drawn round each segment: color, type and width of line. The default is no border (line width = 0).</para>
+  <para>The right fields are used to define the filling of the plots. The color button defines the one used for the first segment, then the others segments will have colors which follow the order defined in the list. The default value for this field is black, so segment 2, 3, etc will be red, green, etc.</para>
+  <para>The pattern will be used for all segments of the pie, the default value is solid filling. The last field defines the size of the pie in pixels.</para>
+  <figure id="fig-custom-curves-pie-1">
+    <title>The Custom Curves Dialog for pies: pie segment formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-pie-1.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+</sect3>
+
+<sect3 id="custom-curves-dialog-box">
+<title>Custom curves for box plots</title>
+<para>x</para>
+  <figure id="fig-custom-curves-box-1">
+    <title>The Custom Curves Dialog for box: pattern formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-box-1.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <figure id="fig-custom-curves-box-2">
+    <title>The Custom Curves Dialog for box: whiskers formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-box-2.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <figure id="fig-custom-curves-box-3">
+    <title>The Custom Curves Dialog for box: percentile formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-box-3.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+</sect3>
+
+<sect3 id="custom-curves-dialog-histogram">
+<title>Custom curves for pie histogram</title>
+<para>x</para>
+  <figure id="fig-custom-curves-histogram-1">
+    <title>The Custom Curves Dialog for histogram: pattern formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-histogram-1.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  <figure id="fig-custom-curves-histogram-2">
+    <title>The Custom Curves Dialog for histogram: spacing formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-histogram-2.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  <figure id="fig-custom-curves-histogram-3">
+    <title>The Custom Curves Dialog for histogram: data formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/custom-curves-histogram-3.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+</sect3>
+
+<sect3 id="sec-adding-objects">
+<title>Adding objects to a 2D plot</title>
+
+<!-- ************************************************** -->
+<!--		Text options				-->
+<!-- ************************************************** -->
+<sect4 id="sec-adding-text">
+  <title>Adding a text label</title>
+  <indexterm><primary>Text label</primary><secondary>Properties</secondary></indexterm>
+  <para>This dialog can be opened by several commands such as &format-title-lnk; or when you double click on a text object in your plot. It allows to add/customize the text objects.</para>
+  <figure id="fig-text-options">
+    <title>The text options dialog.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/text-options-dialog.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  <para>The <emphasis>Color</emphasis>, <emphasis>Font</emphasis> and <emphasis>Alignment</emphasis> commands allow the modification of the general settings of the text label.</para>
+  <para>The text item can be modified in the text window. Several improvements can be added to the text:</para>
+  <itemizedlist>
+    <listitem><para>&lt;sub&gt;text&lt;/sub&gt; will draw the text as subscripts. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon1.png"/></imageobject></inlinemediaobject>.</para></listitem>
+    <listitem><para>&lt;sup&gt;text&lt;/sup&gt; will draw the text as superscripts. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon2.png"/></imageobject></inlinemediaobject>.</para></listitem>
+    <listitem><para>By clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon3.png"/></imageobject></inlinemediaobject>, you can open a new dialog which allows to select greek characters:</para>
+    <informalfigure id="fig-text-options1">
+      <mediaobject> 
+        <imageobject>
+          <imagedata  format="PNG" fileref="pics/text-options-dialog.png"/>
+        </imageobject>
+      </mediaobject>
+    </informalfigure>
+    </listitem>
+    <listitem><para>By clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon4.png"/></imageobject></inlinemediaobject>, you can open a new dialog which allows to select various mathematical symbols:</para>
+    <informalfigure id="fig-text-options2">
+      <mediaobject> 
+        <imageobject>
+          <imagedata  format="PNG" fileref="pics/text-options-symbols.png"/>
+        </imageobject>
+      </mediaobject>
+    </informalfigure>
+    </listitem>
+    <listitem><para>&lt;b&gt;text&lt;/b&gt; will draw the text with bold characters. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon5.png"/></imageobject></inlinemediaobject>.</para></listitem>
+    <listitem><para>&lt;i&gt;text&lt;/i&gt; will draw the text with italic characters. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon6.png"/></imageobject></inlinemediaobject>.</para></listitem>
+    <listitem><para>&lt;u&gt;text&lt;/u&gt; will draw the text with underlined characters. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon7.png"/></imageobject></inlinemediaobject>.</para></listitem>
+  </itemizedlist>
+</sect4>
+
+</sect3>
+
+</sect2>
+<!--
+*******************************************************************
+
+		preferences and use of template
+
+*******************************************************************
+-->
+<sect2 id="sec-default-2d-plot">
+<title>Changing default 2D plot options</title>
+<indexterm><primary>Options</primary><secondary>2D plot</secondary></indexterm>
+
+<para>There are two ways to modify the default style which is used for plots. The first one applies to all plot and is reached by the &preferences-lnk; (in the &edit-menu-lnk;). And the second one is to define templates for a specific family of plots with the &save-as-template-lnk;.</para>
+
+<sect3 id="sec-preferences-2d-plot">
+<title>Modification of default options</title>
+  <indexterm><primary>Plot</primary><secondary>Change default options</secondary></indexterm>
+  <para>In the dialog box which is opened by the &preferences-cmd;, the second set of options is used to customize the default aspect of <emphasis>2D plots</emphasis>.</para>
+  <figure id="fig-preferences-dialog-3a">
+    <title>The preferences dialog: 2D plot options.</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/preferences-dialog3a.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  <para>The second tab named <emphasis>Curves</emphasis> defines the default style used when you create a new plot.</para>
+  <informalfigure id="fig-preferences-dialog-3b">
+    <mediaobject>
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/preferences-dialog3b.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+  <para>The third tab named <emphasis>Ticks</emphasis> defines the default style for the ticks of the axes used when you create a new plot.</para>
+  <informalfigure id="fig-preferences-dialog-3c">
+    <mediaobject>
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/preferences-dialog3c.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+  <para>The fourth tab named <emphasis>Fonts</emphasis> defines the default style for the fonts used for the axes, used when you create a new plot.</para>
+  <informalfigure id="fig-preferences-dialog-3d">
+    <mediaobject>
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/preferences-dialog3d.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+  <informalfigure id="fig-preferences-dialog-3e">
+    <mediaobject>
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/preferences-dialog3e.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+ </sect3>
+
+<sect3 id="sec-template-2d-plot">
+<title>Working with templates</title>
+<para></para>
+</sect3>
+
+</sect2>
 
 </sect1>
 <!--
@@ -170,11 +429,11 @@
 <sect1 id="sec-3d-plots">
 <title>3D plots</title>
 <indexterm><primary>Surface plot</primary></indexterm>
-<para>3D plot are generated from data defined as Z=f(X,Y). As for 2D plots, there are two ways to obtain a 3D plot depending on the way the (X,Y,Z) values are defined:</para>
+<para>3D plot are generated from data defined as <emphasis>Z=f(X,Y)</emphasis>. As for 2D plots, there are two ways to obtain a 3D plot depending on the way the (X,Y,Z) values are defined:</para>
 
 <itemizedlist>
   <listitem>
-    <para>You can have your Z values in a <link linkend="sec-intro-matrix">matrix</link>. &appname; will consider that all the data present in the matrix are Z values, and the X and Y values can be defined as a function of the columns and rows numbers.</para>
+    <para>You can have your Z values in a <link linkend="sec-intro-matrix">matrix</link>. &appname; will consider that all the data present in the matrix are Z values, and the X and Y values can be defined as a linear function of the columns and rows numbers.</para>
     <para>The data in the matrix can be entered in several ways:</para>
     <itemizedlist>
       <listitem>
@@ -189,7 +448,7 @@
     </itemizedlist>
   </listitem>
 <listitem>
-<para>If you want to plot a function, you don't need a matrix. You can use directly the &new-surface-3d-plot-lnk;. This will open the corresponding <link linkend="define-surface-plot-dialog">dialog box</link> and you will be able to define the mathematical expression of your function.</para>
+<para>If you want to plot a function, you don't need a matrix. You can use directly the &new-surface-3d-plot-lnk;.</para>
 </listitem>
 </itemizedlist>
 
@@ -212,8 +471,10 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
 
 <sect2 id="sec-3d-plot-function">
 <title>Direct 3D plot from a function</title>
+
 <indexterm><primary>Surface plot</primary><secondary>Create from function</secondary></indexterm>
-<para>This is the simplest way to obtain a 3d plot. It is done with the &new-surface-3d-plot-lnk; from the &file-menu-lnk; or directly with the &new-surface-3d-plot-key;. This will open the folowing <link linkend="define-surface-plot-dialog">dialog box</link>:</para>
+
+<para>This is the simplest way to obtain a 3d plot. It is done with the &new-surface-3d-plot-lnk; from the &file-menu-lnk; or directly with the &new-surface-3d-plot-key;. This will open the following dialog box:</para>
 
 <figure id="fig-define-surface-plot">
   <title>Definition of a new surface 3D plot</title>
@@ -235,7 +496,7 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
   </mediaobject>
 </figure>
 
-<para>You can then customize this plot by opening the <link linkend="surface-plot-options-dialog">Surface plot options dialog</link>. You can modify the axis ranges and parameters, add a title, change the colors of the different items, and modify the aspect ratio of the plot. In addition, you can use the different commands of the &plot3d-toolbar-lnk; to add grids on the walls or to modify the style of the plot. After some modifications, you can obtain the following plot:</para>
+<para>You can then customize this plot by opening the <link linkend="sec-customize-3d-plot">Surface plot options dialog</link>. You can modify the axis ranges and parameters, add a title, change the colors of the different items, and modify the aspect ratio of the plot. In addition, you can use the different commands of the &plot3d-toolbar-lnk; to add grids on the walls or to modify the style of the plot. After some modifications, you can obtain the following plot:</para>
 
 <figure id="fig-modified-surface-plot">
   <title>The 3D surface plot after customizations</title>
@@ -246,15 +507,15 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
   </mediaobject>
 </figure>
 
-<para>If you want to modify the function itself, you can use the <command>surface...</command> command which can be activated from the context menu with a right click on the 3D plot. This will re-open the <link linkend="define-surface-plot-dialog">define surface function dialog box</link>.</para>
+<para>If you want to modify the function itself, you can use the <command>surface...</command> command which can be activated from the context menu with a right click on the 3D plot. This will re-open the <emphasis>define surface function dialog box</emphasis>.</para>
 </sect2>
 
 <sect2 id="sec-3d-plot-matrix">
 <title>3D plot from a matrix</title>
 <indexterm><primary>Surface plot</primary><secondary>Create from data</secondary></indexterm>
-<para>The second way to obtain a 3D plot is to use a <link linkend="sec-intro-matrix">matrix</link>. Therefore, the first step is to fill the matrix.This can be done by defining a function.</para>
-<para>The &new-matrix-lnk; create a default empty matrix with 32x32 cells. Then use the &set-dimensions-lnk; to modify the number of rows and columns of the matrix. This <link linkend="set-dimensions-dialog">dialog box</link> is also used to define the X and Y ranges. </para>
-
+<para>The second way to obtain a 3D plot is to use a <link linkend="sec-intro-matrix">matrix</link>. Therefore, the first step is to fill the matrix. This can be done by defining a function.</para>
+<para>The &new-matrix-lnk; create a default empty matrix with 32x32 cells. Then use the &matrix-dimensions-lnk; from the &matrix-menu-lnk; to modify the number of rows and columns of the matrix. The &set-coordinates-lnk; can then be used to define the X and Y ranges. </para>
+<!--
   <informalfigure>
     <mediaobject> 
       <imageobject>
@@ -262,13 +523,139 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
       </imageobject>
     </mediaobject>
   </informalfigure>
+-->
+<para>Then use the &assign-formula-lnk; to fill the cells with numbers. The ranges of X and Y defined in the previous step are not known by this dialog box, then the function is defined with the row and column numbers (i and j) as entry parameters.</para>
 
-<para>Then use the &set-values-lnk; to fill the cells with numbers. The ranges of X and Y defined in the previous step are not known by this dialog box, then the function is defined with the row and column numbers (i and j) as entry parameters (see the section <link linkend="set-values-dialog">set-values</link> for details).</para>
+<figure id="fig-assign-formula-matrix">
+  <title>Assigning a multi-lines formula to a matrix</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/assign-formula-matrix.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
 
-<para>The other way to obtain a matrix is to import an ASCII file into a table with the &import-ascii-1-lnk; from the &file-menu-lnk;. The table can then be transformed in a matrix with the command &convert-to-matrix-lnk; from the &table-menu-lnk;.</para>
+<para>The other way to obtain a matrix is to import an ASCII file into a table with the &import-ascii-lnk; from the &file-menu-lnk;. The table can then be transformed in a matrix with the command &convert-to-matrix-lnk; from the &table-menu-lnk;.</para>
 
 <para>You can then use this matrix to build a 3D plot with one of the command of the &plot-menu-lnk;.</para>
 
+</sect2>
+<!--
+*******************************************************************
+
+		customization of 3D plots
+
+*******************************************************************
+-->
+<sect2 id="sec-customize-3d-plot">
+<title>Customization of a 3D plot</title>
+
+  <indexterm><primary>Surface plot</primary><secondary>Coutour curves options</secondary></indexterm>
+  <para>This dialog is activated by double clicking on a contour curve (or on the plotting area) when a 3D plot has been created from a matrix with one of the following commands of the &plot3d-menu-lnk;: &contour-color-lnk;, &contour-lines-lnk; or &gray-scale-lnk;.</para>
+  <figure id="fig-contour-options-1">
+    <title>The Contour curves options dialog.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/contour-curve-dialog-1.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  <para>The first group of settings <emphasis>Image</emphasis> is checked if you want to have a color or gray level filling of the contour plot. The default gray and color maps are the following: </para>
+  <informalfigure id="fig-contour-options-2">
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/contour-curve-dialog-2.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+  <informalfigure id="fig-contour-options-3">
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/contour-curve-dialog-3.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+  <para>You can customize this colormap by checking the <emphasis>Custom Colors</emphasis> box. A table with a set of numbers (the Z levels) and the corresponding colors is presented. You can then add or delete new levels for the definition of the colormap, and modify the corresponding Z levels. You are not allowed to modify the first and last levels, which are set to the minimum and maximum Z values. Beware that this is only the definition of the colormap, it won't change the number of contour lines of your plot. An example of classical custom colormap is given here:</para>
+    <informalfigure id="fig-contour-options-4">
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/contour-curve-dialog-4.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+  <para>If you want to obtain discrete colors for each level,you must uncheck the <emphasis>Scale Colors</emphasis> checkbox. In this case you must define enough levels in your colormap.</para>
+    <informalfigure id="fig-contour-options-5">
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/contour-curve-dialog-5.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+  <para>The second group of settings is used to customize the contour lines. You can select the number of lines and their color. If you check <emphasis>Use Default Pen</emphasis>, the color of the line will follow the settings defined in the group at the left of the checkbox. If you check <emphasis>Use Color Map</emphasis>, the lines will be colored as a function of the Z levels following the colormap defined in the <emphasis>image</emphasis> setting group.</para>
+  <para>The last group of settings must be checked if you want to have a bar scale on your plot. You can then define its position and width.</para>
+
+<sect3 id="sec-color-schemes">
+<title>Modification of color schemes</title>
+
+  <para>The fourth tab allows to modify the colors used in the different elements of the plot.</para>
+  <informalfigure id="fig-surface-plot-options-4">
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/surface-plot-options-dialog4.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+  <para>The first set of two colors (data min and data max) defines the color scheme which is used to show the Z-values. They are the colors used for the minimum value of Z (Z<subscript>min</subscript>) and the maximum value of Z (Z<subscript>max</subscript>). We can define the colors by their Red, Green and Blue parameters: [R,G,B]. Then, a value Z will be represented by a color defined as a linear interpolation:</para>
+  <informalequation> 
+  <mediaobject>
+    <imageobject>
+      <imagedata  format="PNG" fileref="equations/equation_couleur.png"/>
+    </imageobject>
+  </mediaobject>
+  </informalequation>
+  <para>The default colors for Z<subscript>min</subscript> and Z<subscript>max</subscript> are respectively blue ( [R,G,B] = [0,0,255] ) and red ( [R,G,B] = [255,0,0] ). This lead to the following color scheme:</para>
+
+  <informalfigure id="fig-default-color-scheme">
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/default-color-scheme.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+
+<para>Another classical color scheme can be built with Z<subscript>min</subscript> = [160,32,32] and Z<subscript>max</subscript> = [255,255,0] (yellow). It leads to:</para>
+
+  <informalfigure id="fig-color-scheme-1">
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/color-scheme-1.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+
+<para>Another way to define colors is to read a colormap from a file. The format of the file is simple: each line defines a color by red, green and blue values as integers between 0 and 255. The numbers should be separated by spaces. You can find several examples of colormaps on the <ulink url="http://sourceforge.net/project/showfiles.php?group_id=78209">QwtPlot3D web site</ulink>.</para>
+</sect3>
+
+</sect2>
+
+<!--
+*******************************************************************
+
+		preferences and use of template
+
+*******************************************************************
+-->
+<sect2 id="sec-default-3d-plot">
+<title>Changing default 3D plot options</title>
+  <indexterm><primary>Surface plot</primary><secondary>Change default options</secondary></indexterm>
+  <figure id="fig-preferences-dialog-4">
+    <title>The preferences dialog: 3D plot options.</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/preferences-dialog4.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
 </sect2>
 
 </sect1>
@@ -282,7 +669,7 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
 <title>Multilayer Plots</title>
 <indexterm><primary>Multilayers plot</primary></indexterm>
 <para>The multilayer windows can contain multiple plots (layers) with different characteristics. Each layer has a corresponding button, which displays a number and is pressed when the layer is the currently active layer. There is only one active layer at a time, and the plot tools (zoom, cursors, drawing tools, delete and move points) can only operate on this layer. Each plot can be made active by clicking on it or on its corresponding button.</para>
-<para>To arrange the layers use the <link linkend="arrange-layers-dialog">&arrange-layers-cmd; dialog</link>. You can add or remove layers with the &add-layer-lnk; and &remove-layer-lnk; or copy/paste layers from one multilayer window to another. All these functions can be reached via the &graph-menu-lnk;, by using the &plot-toolbar-lnk; or via the context menu (right click in the multilayer window anywhere outside a plot area).</para>
+<para>To arrange the layers use the &arrange-layers-lnk;. You can add or remove layers with the &add-layer-lnk; and &remove-layer-lnk; or copy/paste layers from one multilayer window to another. All these functions can be reached via the &graph-menu-lnk;, by using the &plot-toolbar-lnk; or via the context menu (right click in the multilayer window anywhere outside a plot area).</para>
 <para>You can resize and move a layer using the Layer geometry dialog. You can also arrange and resize the plots by hand. A whole plot can be moved by drag and drop: click on the plot and keep the left mouse button pressed.</para>
 <para>By keeping the Shift key pressed and dragging the border of a plot you can scale a plot as needed. When moving the mouse over the borders of a plot, you will see the corresponding arrows.</para>
 <para>You can also use the mouse wheel in order to resize the layers: keeping the Ctrl key pressed and scrolling will resize the hight of the plot canvas, while keeping the Alt key pressed and scrolling will resize its width. By keeping the Shift key pressed and scrolling you can resize the plot in both dimensions.</para>
@@ -319,7 +706,7 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
     </mediaobject>
   </informalfigure>
 
-<para>Then, select the plot window and use the &add-layer-lnk; from the &graph-menu-lnk;. This will activate the <link linkend="add-layer-dialog">&add-layer-cmd; dialog</link>. If you choose "Guess" you will obtain a panel with two columns, if you choose "corner" you will obtain two superposed layers, you can then modify these two layers.</para>
+<para>Then, select the plot window and use the &add-layer-lnk; from the &graph-menu-lnk;. This will activate a dialog box. If you choose "Guess" you will obtain a panel with two columns, if you choose "corner" you will obtain two superposed layers, you can then modify these two layers.</para>
 
   <informalfigure>
     <mediaobject> 

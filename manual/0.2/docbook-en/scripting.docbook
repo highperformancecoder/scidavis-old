@@ -428,7 +428,7 @@
       </table>
   </sect1>
 
-  <sect1 id="Python">
+  <sect1 id="sec-python">
     <title>Python</title>
     <indexterm><primary>Scripting</primary><secondary>Python</secondary></indexterm>
 
