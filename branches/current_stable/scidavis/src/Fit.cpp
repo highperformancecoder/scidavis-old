@@ -459,6 +459,11 @@ void Fit::fit()
 		gsl_matrix *J = gsl_matrix_alloc(d_n, d_p);
 		d_df(s_min->x,(void*)f.params, J);
 		gsl_multifit_covar (J, 0.0, covar);
+		if (d_y_error_source == UnknownErrors) {
+			// multiply covar by variance of residuals, which is used as an estimate for the
+			// statistical errors (this relies on the Y errors being set to 1.0)
+			gsl_matrix_scale(covar, gsl_multimin_fminimizer_minimum(s_min)/(d_n-d_p));
+		}
 		chi_2 = s_min->fval;
 
 		// free previousely allocated memory
