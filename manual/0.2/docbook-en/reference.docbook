@@ -257,7 +257,7 @@ The active items in the menus depend on the active window in the project. If the
         </imageobject>
       </mediaobject>
     </figure>
-  <para>The last format which can be selected is the Scalable Vector Graphic format. With this format, the files can be modified in vector drawing software such as <ulink url="http://www.sodipodi.com/index.php3">Sodipodi</ulink>, <ulink url="http://www.inkscape.org/">Inkscape</ulink> or <ulink url="http://www.openoffice.org/">OpenOffice Draw</ulink>. You can therefore built more complex images from the pristine &appname plot.</para>
+  <para>The last format which can be selected is the Scalable Vector Graphic format. With this format, the files can be modified in vector drawing software such as <ulink url="http://www.sodipodi.com/index.php3">Sodipodi</ulink>, <ulink url="http://www.inkscape.org/">Inkscape</ulink> or <ulink url="http://www.openoffice.org/">OpenOffice Draw</ulink>. You can therefore build more complex images from the pristine &appname; plot.</para>
      <variablelist>
        <varlistentry id="export-graph-current-cmd">
          <term>&export-graph-current-cmd; (&export-graph-current-key;)</term>
