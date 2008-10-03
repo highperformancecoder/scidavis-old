@@ -1319,7 +1319,7 @@ void MultiLayer::setLayersNumber(int n)
 	emit modifiedPlot();
 }
 
-void MultiLayer::copy(MultiLayer* ml)
+void MultiLayer::copy(ApplicationWindow * parent, MultiLayer* ml)
 {
 	hide();//FIXME: find a better way to avoid a resize event
     resize(ml->size());
@@ -1332,7 +1332,7 @@ void MultiLayer::copy(MultiLayer* ml)
 	for (int i=0; i<graphsList.count(); i++){
 		Graph* g = (Graph*)graphsList.at(i);
 		Graph* g2 = addLayer(g->pos().x(), g->pos().y(), g->width(), g->height());
-		g2->copy(g);
+		g2->copy(parent, g);
 		g2->setIgnoreResizeEvents(g->ignoresResizeEvents());
 		g2->setAutoscaleFonts(g->autoscaleFonts());
 	}

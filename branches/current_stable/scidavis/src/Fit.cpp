@@ -522,18 +522,19 @@ void Fit::generateFitCurve(double *par)
 void Fit::insertFitFunctionCurve(const QString& name, double *x, double *y, int penWidth)
 {
     QString title = d_graph->generateFunctionName(name);
-	FunctionCurve *c = new FunctionCurve(FunctionCurve::Normal, title);
+	FunctionCurve *c = new FunctionCurve((ApplicationWindow *)parent(), FunctionCurve::Normal, title);
 	c->setPen(QPen(ColorBox::color(d_curveColorIndex), penWidth));
 	c->setData(x, y, d_points);
 	c->setRange(d_x[0], d_x[d_n-1]);
 
-	QString formula = d_formula;
+	QString formula;
 	for (int j=0; j<d_p; j++)
-	{
-		QString parameter = QString::number(d_results[j], 'g', d_prec);
-		formula.replace(d_param_names[j], parameter);
-	}
-	c->setFormula(formula.replace("--", "+").replace("-+", "-").replace("+-", "-"));
+		formula += QString("%1=%2\n")
+				.arg(d_param_names[j])
+				.arg(d_results[j], 0, 'g', d_prec);
+	formula += "\n";
+	formula += d_formula;
+	c->setFormula(formula);
 	d_graph->insertPlotItem(c, Graph::Line);
 	d_graph->addFitCurve(c);
 }

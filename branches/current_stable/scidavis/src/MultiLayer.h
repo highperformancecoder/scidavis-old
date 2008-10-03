@@ -43,6 +43,7 @@ class QLabel;
 class QWidget;
 class LayerButton;
 class SelectionMoveResizer;
+class ApplicationWindow;
 
 /**
  * \brief An MDI window (MyWidget) managing one or more Graph objects.
@@ -70,7 +71,7 @@ public:
 	QWidgetList graphPtrs(){return graphsList;};
 	Graph *layer(int num);
 	LayerButton* addLayerButton();
-	void copy(MultiLayer* ml);
+	void copy(ApplicationWindow * parent, MultiLayer* ml);
 
 	enum HorAlignement{HCenter, Left, Right};
 	enum VertAlignement{VCenter, Top, Bottom};

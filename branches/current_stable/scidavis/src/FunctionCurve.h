@@ -30,15 +30,18 @@
 #define FUNCTIONCURVE_H
 
 #include "PlotCurve.h"
+#include "Script.h"
+#include <QObject>
 
 // Function curve class
-class FunctionCurve: public PlotCurve
+class FunctionCurve: public QObject, public PlotCurve, public scripted
 {
+	Q_OBJECT
 public:
 	enum FunctionType{Normal = 0, Parametric = 1, Polar = 2};
 
-	FunctionCurve(const FunctionType& t, const char *name=0);
-	FunctionCurve(const char *name=0);
+	FunctionCurve(ApplicationWindow * parent, const FunctionType& t, const char *name=0);
+	FunctionCurve(ApplicationWindow * parent, const char *name=0);
 
 	double startRange(){return d_from;};
 	double endRange(){return d_to;};
@@ -64,7 +67,10 @@ public:
 	//! Returns a string that can be displayed in a plot legend
 	QString legend();
 
-	void loadData(int points = 0);
+	bool loadData(int points = 0);
+
+protected slots:
+	void scriptError(const QString & message, const QString & scriptName, int lineNumber);
 
 private:
 	FunctionType d_function_type;

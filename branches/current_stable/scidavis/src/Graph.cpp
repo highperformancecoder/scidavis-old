@@ -3754,12 +3754,12 @@ void Graph::drawLine(bool on, bool arrow)
 		emit drawLineEnded(true);
 }
 
-void Graph::modifyFunctionCurve(int curve, int type, const QStringList &formulas,
+bool Graph::modifyFunctionCurve(ApplicationWindow * parent, int curve, int type, const QStringList &formulas,
 		const QString& var,QList<double> &ranges, int points)
 {
 	FunctionCurve *c = (FunctionCurve *)this->curve(curve);
 	if (!c)
-		return;
+		return false;
 
 	if (c->functionType() == type &&
 		c->variable() == var &&
@@ -3767,27 +3767,33 @@ void Graph::modifyFunctionCurve(int curve, int type, const QStringList &formulas
 		c->startRange() == ranges[0] &&
 		c->endRange() == ranges[1] &&
 		c->dataSize() == points)
-		return;
+		return true;
 
-	QString oldLegend = c->legend();
+	FunctionCurve backup(parent);
+	backup.copy(c);
 
 	c->setFunctionType((FunctionCurve::FunctionType)type);
 	c->setRange(ranges[0], ranges[1]);
 	c->setFormulas(formulas);
 	c->setVariable(var);
-	c->loadData(points);
+	if (!c->loadData(points)) {
+		c->copy(&backup);
+		c->loadData(points);
+		return false;
+	}
 
 	if (legendMarkerID >= 0)
 	{//update the legend marker
 		Legend* mrk=(Legend*) d_plot->marker(legendMarkerID);
 		if (mrk)
 		{
-			QString text = (mrk->text()).replace(oldLegend, c->legend());
+			QString text = (mrk->text()).replace(backup.legend(), c->legend());
 			mrk->setText(text);
 		}
 	}
 	updatePlot();
 	emit modifiedGraph();
+	return true;
 }
 
 QString Graph::generateFunctionName(const QString& name)
@@ -3811,7 +3817,7 @@ QString Graph::generateFunctionName(const QString& name)
   	return newName;
 }
 
-void Graph::addFunctionCurve(int type, const QStringList &formulas, const QString &var,
+bool Graph::addFunctionCurve(ApplicationWindow *parent, int type, const QStringList &formulas, const QString &var,
 		QList<double> &ranges, int points, const QString& title)
 {
 	QString name;
@@ -3820,12 +3826,15 @@ void Graph::addFunctionCurve(int type, const QStringList &formulas, const QStrin
 	else
 		name = generateFunctionName();
 
-	FunctionCurve *c = new FunctionCurve((const FunctionCurve::FunctionType)type, name);
+	FunctionCurve *c = new FunctionCurve(parent, (const FunctionCurve::FunctionType)type, name);
 	c->setPen(QPen(QColor(Qt::black), widthLine));
 	c->setRange(ranges[0], ranges[1]);
 	c->setFormulas(formulas);
 	c->setVariable(var);
-	c->loadData(points);
+	if (!c->loadData(points)) {
+		delete c;
+		return false;
+	}
 
 	c_type.resize(++n_curves);
 	c_type[n_curves-1] = Line;
@@ -3837,9 +3846,10 @@ void Graph::addFunctionCurve(int type, const QStringList &formulas, const QStrin
 	updatePlot();
 
 	emit modifiedGraph();
+	return true;
 }
 
-void Graph::insertFunctionCurve(const QString& formula, int points, int fileVersion)
+void Graph::insertFunctionCurve(ApplicationWindow * parent, const QString& formula, int points, int fileVersion)
 {
 	int type;
 	QStringList formulas;
@@ -3897,7 +3907,7 @@ void Graph::insertFunctionCurve(const QString& formula, int points, int fileVers
 			ranges += curve[6].toDouble();
 		}
 	}
-	addFunctionCurve(type, formulas, var, ranges, points, name);
+	addFunctionCurve(parent, type, formulas, var, ranges, points, name);
 }
 
 void Graph::createTable(const QString& curveName)
@@ -4387,7 +4397,7 @@ void Graph::showGrid(int axis)
 	emit modifiedGraph();
 }
 
-void Graph::copy(Graph* g)
+void Graph::copy(ApplicationWindow *parent, Graph* g)
 {
 	int i;
 	Plot *plot = g->plotWidget();
@@ -4461,7 +4471,7 @@ void Graph::copy(Graph* g)
 			}
 			else if (style == Function)
 			{
-				c = new FunctionCurve(cv->title().text());
+				c = new FunctionCurve(parent, cv->title().text());
 				((FunctionCurve*)c)->copy((FunctionCurve*)cv);
 			}
 			else if (style == VerticalBars || style == HorizontalBars)

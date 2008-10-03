@@ -27,19 +27,22 @@
  *                                                                         *
  ***************************************************************************/
 #include "FunctionCurve.h"
-#include "MyParser.h"
 
 #include <QMessageBox>
 
-FunctionCurve::FunctionCurve(const char *name):
-	PlotCurve(name)
+// FIXME: While FunctionCurve itself supports arbitrary scripting
+// interpreters now, fit curves assume muParser in many formulas (using
+// "^" as power operator). Thus, simply having FunctionCurve honour the
+// application-wide scripting environment would break fit curve plotting.
+FunctionCurve::FunctionCurve(ApplicationWindow * parent, const char *name):
+	PlotCurve(name), scripted(ScriptingLangManager::newEnv("muParser", parent))
 {
 	d_variable = "x";
 	setType(Graph::Function);
 }
 
-FunctionCurve::FunctionCurve(const FunctionType& t, const char *name):
-	PlotCurve(name),
+FunctionCurve::FunctionCurve(ApplicationWindow * parent, const FunctionType& t, const char *name):
+	PlotCurve(name), scripted(ScriptingLangManager::newEnv("muParser", parent)),
 	d_function_type(t)
 {
 	d_variable = "x";
@@ -92,71 +95,64 @@ QString FunctionCurve::legend()
 	return label;
 }
 
-void FunctionCurve::loadData(int points)
+bool FunctionCurve::loadData(int points)
 {
-    if (!points)
-        points = dataSize();
+	if (!points)
+		points = dataSize();
 
-    double X[points], Y[points];
-    double step = (d_to - d_from)/(double)(points - 1);
-    bool error = false;
+	double X[points], Y[points];
+	double step = (d_to - d_from)/(double)(points - 1);
 
-	if (d_function_type == Normal)
-	{
-		MyParser parser;
-		double x;
-		try
-		{
-			parser.DefineVar(d_variable.toAscii().constData(), &x);
-			parser.SetExpr(d_formulas[0].toAscii().constData());
-
-			X[0] = d_from; x = d_from; Y[0]=parser.Eval();
-			for (int i = 1; i<points; i++ )
+	switch(d_function_type) {
+		case Normal:
 			{
-				x += step;
-				X[i] = x;
-				Y[i] = parser.Eval();
+				Script * script = scriptEnv->newScript(d_formulas[0], 0, title().text());
+				QObject::connect(script, SIGNAL(error(const QString&,const QString&,int)),
+						this, SLOT(scriptError(const QString&,const QString&,int)));
+				int i;
+				double x;
+				for (i=0, x=d_from; i<points; i++, x+=step) {
+					X[i] = x;
+					script->setDouble(x, d_variable.toAscii().constData());
+					QVariant result = script->eval();
+					if (result.type() != QVariant::Double)
+						return false;
+					Y[i] = result.toDouble();
+				}
+				break;
 			}
-		}
-		catch(mu::ParserError &)
-		{
-			error = true;
-		}
-	}
-	else if (d_function_type == Parametric || d_function_type == Polar)
-	{
-		QStringList aux = d_formulas;
-		MyParser xparser;
-		MyParser yparser;
-		double par;
-		if (d_function_type == Polar)
-		{
-			QString swap=aux[0];
-			aux[0]="("+swap+")*cos("+aux[1]+")";
-			aux[1]="("+swap+")*sin("+aux[1]+")";
-		}
-		try
-		{
-			xparser.DefineVar(d_variable.toAscii().constData(), &par);
-			yparser.DefineVar(d_variable.toAscii().constData(), &par);
-			xparser.SetExpr(aux[0].toAscii().constData());
-			yparser.SetExpr(aux[1].toAscii().constData());
-			par = d_from;
-			for (int i = 0; i<points; i++ )
+		case Parametric:
+		case Polar:
 			{
-				X[i]=xparser.Eval();
-				Y[i]=yparser.Eval();
-				par+=step;
+				Script * script_x = scriptEnv->newScript(d_formulas[0], 0, title().text());
+				Script * script_y = scriptEnv->newScript(d_formulas[1], 0, title().text());
+				int i;
+				double par;
+				for (i=0, par=d_from; i<points; i++, par+=step) {
+					script_x->setDouble(par, d_variable.toAscii().constData());
+					script_y->setDouble(par, d_variable.toAscii().constData());
+					QVariant result_x = script_x->eval();
+					QVariant result_y = script_y->eval();
+					if (result_x.type() != QVariant::Double || result_y.type() != QVariant::Double)
+						return false;
+					if (d_function_type == Polar) {
+						X[i] = result_x.toDouble()*cos(result_y.toDouble());
+						Y[i] = result_x.toDouble()*sin(result_y.toDouble());
+					} else {
+						X[i] = result_x.toDouble();
+						Y[i] = result_y.toDouble();
+					}
+				}
+				break;
 			}
-		}
-		catch(mu::ParserError &)
-		{
-			error = true;
-		}
+
 	}
-
-	if (error)
-		return;
-
 	setData(X, Y, points);
+	return true;
+}
+
+void FunctionCurve::scriptError(const QString & message, const QString & scriptName, int lineNumber)
+{
+	QMessageBox::critical(0, tr("Input function error"),
+			QString("%1:%2\n\n%3").arg(scriptName).arg(lineNumber).arg(message));
 }

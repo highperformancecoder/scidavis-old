@@ -212,21 +212,23 @@ void MultiPeakFit::insertPeakFunctionCurve(double *x, double *y, int peak)
 	}
 	QString title = tr("Peak") + QString::number(++index);
 
-	FunctionCurve *c = new FunctionCurve(FunctionCurve::Normal, title);
+	FunctionCurve *c = new FunctionCurve((ApplicationWindow *)parent(), FunctionCurve::Normal, title);
 	c->setPen(QPen(ColorBox::color(d_peaks_color), 1));
 	c->setData(x, y, d_points);
 	c->setRange(d_x[0], d_x[d_n-1]);
 
-	QString formula = "y0+"+peakFormula(peak + 1, d_profile);
-	QString parameter = QString::number(d_results[d_p-1], 'g', d_prec);
-	formula.replace(d_param_names[d_p-1], parameter);
-	for (int j=0; j<3; j++)
-	{
+	QString formula;
+	for (int j=0; j<3; j++) {
 		int p = 3*peak + j;
-		parameter = QString::number(d_results[p], 'g', d_prec);
-		formula.replace(d_param_names[p], parameter);
+		formula += QString("%1=%2\n")
+				.arg(d_param_names[p])
+				.arg(d_results[p], 0, 'g', d_prec);
 	}
-	c->setFormula(formula.replace("--", "+").replace("-+", "-").replace("+-", "-"));
+	formula += QString("%1=%2\n\ny0+%3")
+		.arg(d_param_names[d_p-1])
+		.arg(d_results[d_p-1], 1, 'g', d_prec)
+		.arg(peakFormula(peak + 1, d_profile));
+	c->setFormula(formula);
 	d_graph->insertPlotItem(c, Graph::Line);
 	d_graph->addFitCurve(c);
 }

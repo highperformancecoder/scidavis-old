@@ -288,7 +288,7 @@ public slots:
 
 	//! \name User-defined Functions
 	//@{
-	void newFunctionPlot(int type,QStringList &formulas, const QString& var,QList<double> &ranges, int points);
+	bool newFunctionPlot(int type,QStringList &formulas, const QString& var,QList<double> &ranges, int points);
 
 	FunctionDialog* functionDialog();
 	void showFunctionDialog();
