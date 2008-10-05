@@ -107,6 +107,7 @@ void Table::init()
     ui.formula_box->setObjectName(QString::fromUtf8("formula_box"));
     ui.formula_box->setMinimumSize(QSize(60, 10));
     ui.formula_box->setAcceptRichText(false);
+    ui.formula_box->setLineWrapMode(QTextEdit::WidgetWidth);
 	ui.gridLayout1->addWidget(ui.formula_box, 1, 0, 1, 3);
 
 
@@ -671,14 +672,14 @@ QStringList Table::drawableColumnSelection()
 	return names;
 }
 
-QStringList Table::selectedYLabels()
+QMap<int, QString> Table::selectedYLabels()
 {
 // TODO for 0.3.0: Column * list
-	QStringList names;
+	QMap<int, QString> names;
 	for (int i=0;i <numCols(); i++)
 	{
 		if(isColumnSelected(i) && column(i)->plotDesignation() == SciDAVis::Y)
-			names << column(i)->name();
+			names.insert(i, column(i)->name());
 	}
 	return names;
 }

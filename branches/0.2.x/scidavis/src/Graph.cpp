@@ -53,6 +53,7 @@
 #include "RangeSelectorTool.h"
 #include "PlotCurve.h"
 #include "ApplicationWindow.h"
+#include "core/column/Column.h"
 
 #include <QApplication>
 #include <QBitmap>
@@ -735,7 +736,7 @@ void Graph::setLabelsMonthFormat(int axis, int format)
 	d_plot->setAxisScaleDraw (axis, sd);
 }
 
-void Graph::setLabelsTextFormat(int axis, int type, const QString& name, const QStringList& lst)
+void Graph::setLabelsTextFormat(int axis, int type, const QString& name, const QMap<int, QString>& lst)
 {
 	if (type != Txt && type != ColHeader)
 		return;
@@ -750,7 +751,7 @@ void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName
 	if (type != Txt && type != ColHeader)
 		return;
 
-	QStringList list;
+	QMap<int, QString> list;
 	if (type == Txt)
 	{
 		if (!table)
@@ -761,7 +762,7 @@ void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName
 		int col = table->colIndex(labelsColName);
 
 		for (int i=0; i < r; i++)
-			list<<table->text(i, col);
+			list.insert(i, table->text(i, col));
 	}
 	else if (type == ColHeader)
 	{
@@ -772,7 +773,7 @@ void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName
 		for (int i=0; i<table->numCols(); i++)
 		{
 			if (table->colPlotDesignation(i) == SciDAVis::Y)
-				list<<table->colLabel(i);
+				list.insert(i, table->colLabel(i));
 		}
 	}
 	d_plot->setAxisScaleDraw (axis, new QwtTextScaleDraw(list));
@@ -3185,12 +3186,14 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	int ycol=w->colIndex(yColName);
 	if (xcol < 0 || ycol < 0)
 		return false;
+	Column *x_col_ptr = w->column(xcol);
+	Column *y_col_ptr = w->column(ycol);
 
 	int xColType = w->columnType(xcol);
 	int yColType = w->columnType(ycol);
-	int i, size=0;
+	int row, size=0;
 	QString date_time_fmt = w->columnFormat(xcol);
-	QStringList xLabels, yLabels;// store text labels
+	QMap<int, QString> xLabels, yLabels;// store text labels
 	QTime time0;
 	QDate date0;
 	QDateTime date_time0;
@@ -3202,77 +3205,101 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	int r = abs(endRow - startRow) + 1;
     QVector<double> X(r), Y(r);
 	if (xColType == Table::Time){
-		for (i = startRow; i<=endRow; i++ ){
-			QString xval=w->text(i,xcol);
-			if (!xval.isEmpty()){
-				time0 = QTime::fromString (xval, date_time_fmt);
+		for (row = startRow; row<=endRow; row++ ){
+			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
+				time0 = x_col_ptr->timeAt(row);
 				if (time0.isValid())
 					break;
 			}
 		}
 	}
 	else if (xColType == Table::Date){
-		for (i = startRow; i<=endRow; i++ ){
-			QString xval=w->text(i,xcol);
-			if (!xval.isEmpty()){
-				date0 = QDate::fromString(xval, date_time_fmt);
+		for (row = startRow; row<=endRow; row++ ){
+			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
+				date0 = x_col_ptr->dateAt(row);
 				if (date0.isValid())
 					break;
 			}
 		}
 	}
-	else if (xColType == Table::DateTime){ 
-		for (i = startRow; i<=endRow; i++ ){
-			QString xval=w->text(i,xcol);
-			if (!xval.isEmpty()){
-				date_time0 = QDateTime::fromString(xval, date_time_fmt);
+	else if (xColType == Table::DateTime) { 
+		for (row = startRow; row<=endRow; row++ ) {
+			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
+				date_time0 = x_col_ptr->dateTimeAt(row);
 				if (date_time0.isValid())
 					break;
 			}
 		}
 	}
 
-	for (i = startRow; i<=endRow; i++ ){
-		QString xval=w->text(i,xcol);
-		QString yval=w->text(i,ycol);
-		    bool valid_data = true;
-			if (xColType == Table::Text){
-				if (xLabels.contains(xval) == 0)
-					xLabels << xval;
-				X[size] = (double)(xLabels.indexOf(xval)+1);
+	for (row = startRow; row<=endRow; row++ ) {
+		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
+			if (xColType == Table::Text) {
+				QString xval = x_col_ptr->textAt(row);
+				xLabels.insert(row, xval);
+				X[size] = (double)row;
 			}
-			else if (xColType == Table::Time){
-				QTime time = QTime::fromString (xval, date_time_fmt);
+			else if (xColType == Table::Time) {
+				QTime time = x_col_ptr->timeAt(row);
 				if (time.isValid())
 					X[size] = time0.msecsTo (time);
 				else
-					X[size] = 0;
+					continue;
 			}
-			else if (xColType == Table::Date){
-				QDate d = QDate::fromString (xval, date_time_fmt);
+			else if (xColType == Table::Date) {
+				QDate d = x_col_ptr->dateAt(row);
 				if (d.isValid())
 					X[size] = (double) date0.daysTo(d);
+				else 
+					continue;
 			}
-			else if (xColType == Table::DateTime){
-				QDateTime dt = QDateTime::fromString (xval, date_time_fmt);
+			else if (xColType == Table::DateTime) {
+				QDateTime dt = x_col_ptr->dateTimeAt(row);
 				if (dt.isValid())
 				{
 					X[size] = double(dt.date().toJulianDay()) +
 						double( -dt.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
 				}
+				else
+					continue;
 			}
 			else
-                X[size] = QLocale().toDouble(xval, &valid_data);
+                X[size] = x_col_ptr->valueAt(row);
 
-			if (yColType == Table::Text){
-				yLabels << yval;
+			if (yColType == Table::Text) {
+				yLabels.insert(size+1, y_col_ptr->textAt(row));
 				Y[size] = (double) (size + 1);
 			}
+			else if (yColType == Table::Time) {
+				QTime yval = y_col_ptr->timeAt(row);
+				if (yval.isValid()) {
+					Y[size] = double( -yval.msecsTo(QTime(12,0,0,0)) );
+				}
+				else 
+					Y[size] = 0.0;
+			}
+			else if (yColType == Table::Date) {
+				QDate yval = y_col_ptr->dateAt(row);
+				if (yval.isValid()) {
+					Y[size] = double( yval.toJulianDay() );
+				}
+				else 
+					Y[size] = 0.0;
+			}
+			else if (yColType == Table::DateTime) {
+				QDateTime yval = y_col_ptr->dateTimeAt(row);
+				if (yval.isValid()) {
+					Y[size] = double(yval.date().toJulianDay()) +
+						double( -yval.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
+				}
+				else 
+					Y[size] = 0.0;
+			}
 			else
-                Y[size] = QLocale().toDouble(yval, &valid_data);
+                Y[size] = y_col_ptr->valueAt(row);
 
-            if (valid_data)
                 size++;
+			}
 	}
 
 	if (!size)
@@ -4605,7 +4632,7 @@ void Graph::copy(Graph* g)
 			else
 			{
 				QwtTextScaleDraw *sd = (QwtTextScaleDraw *)plot->axisScaleDraw (i);
-				d_plot->setAxisScaleDraw(i, new QwtTextScaleDraw(sd->labelsList()));
+				d_plot->setAxisScaleDraw(i, new QwtTextScaleDraw(sd->labelsMap()));
 			}
 		}
 		else

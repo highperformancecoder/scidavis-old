@@ -307,7 +307,8 @@ INCLUDEPATH  += src/future
 
 FORMS += src/future/matrix/matrixcontroltabs.ui \
          src/future/core/ProjectConfigPage.ui \
-		 src/future/table/controltabs.ui
+		 src/future/table/controltabs.ui \
+		 src/future/table/DimensionsDialog.ui
 
 HEADERS += src/future/core/AbstractAspect.h \
            src/future/core/AbstractPart.h \

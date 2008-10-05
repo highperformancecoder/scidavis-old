@@ -885,7 +885,7 @@ void ConfigDialog::languageChange()
 
     boxUpdateSeparators->setText(tr("Update separators in Tables/Matrices"));
     boxUseGroupSeparator->setText(tr("Use group separator","option: use separator every 3 digits"));
-	lblAppPrecision->setText(tr("Number of Decimal Digits"));
+	lblAppPrecision->setText(tr("Default Number of Decimal Digits"));
 	lblDecimalSeparator->setText(tr("Decimal Separators"));
 	boxDecimalSeparator->clear();
 	boxDecimalSeparator->addItem(tr("default") + " (" + QLocale::system().toString(1000.0, 'f', 1) +")");

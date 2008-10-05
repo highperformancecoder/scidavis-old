@@ -5442,7 +5442,7 @@ void ApplicationWindow::exportASCII(const QString& tableName, const QString& sep
 		return;
 
 	QString selectedFilter;
-	QString fname = QFileDialog::getSaveFileName(this, tr("Choose a filename to save under"), asciiDirPath, "*.txt;;*.dat;;*.DAT", &selectedFilter);
+	QString fname = QFileDialog::getSaveFileName(this, tr("Choose a filename to save under"), asciiDirPath, "*.txt;;*.csv;;*.dat;;*.DAT", &selectedFilter);
 	if (!fname.isEmpty() )
 	{
 		QFileInfo fi(fname);

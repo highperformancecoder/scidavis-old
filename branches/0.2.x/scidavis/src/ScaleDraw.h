@@ -32,6 +32,7 @@
 #include <QDateTime>
 #include <QStringList>
 #include <QLocale>
+#include <QMap>
 
 #include <qwt_scale_draw.h>
 
@@ -78,14 +79,15 @@ private:
 class QwtTextScaleDraw: public ScaleDraw
 {
 public:
-	QwtTextScaleDraw(const QStringList& list);
+	QwtTextScaleDraw(const QMap<int, QString>& list);
 	~QwtTextScaleDraw(){};
 
 	QwtText label(double value) const;
 
-	QStringList labelsList(){return labels;};
+	QStringList labelsList() { return QStringList(labels.values()); }
+	QMap<int, QString> labelsMap() { return labels; }
 private:
-	QStringList labels;
+	QMap<int, QString> labels;
 };
 
 class TimeScaleDraw: public ScaleDraw

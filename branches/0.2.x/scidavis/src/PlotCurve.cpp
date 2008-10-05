@@ -134,7 +134,7 @@ void DataCurve::loadData()
 	int xColType = d_table->columnType(xcol);
 	int yColType = d_table->columnType(ycol);
 
-	QStringList xLabels, yLabels;// store text labels
+	QMap<int, QString> xLabels, yLabels;// store text labels
 
 	QTime time0;
 	QDate date0;
@@ -175,8 +175,8 @@ void DataCurve::loadData()
 		QString yval = d_table->text(i,ycol);
 		    bool valid_data = true;
 			if (xColType == Table::Text){
-				xLabels << xval;
-				X[size] = (double)(size + 1);
+				xLabels.insert(i, xval);
+				X[size] = i;
 			} else if (xColType == Table::Time){
 				QTime time = QTime::fromString (xval, date_time_fmt);
 				if (time.isValid())
@@ -193,7 +193,7 @@ void DataCurve::loadData()
 				X[size] = QLocale().toDouble(xval, &valid_data);
 
 			if (yColType == Table::Text){
-				yLabels << yval;
+				yLabels.insert(i, yval);
 				Y[size] = (double)(size + 1);
 			} else
 				Y[size] = QLocale().toDouble(yval, &valid_data);

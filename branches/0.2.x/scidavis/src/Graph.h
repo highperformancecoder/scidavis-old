@@ -34,6 +34,7 @@
 #include <QPrinter>
 #include <QVector>
 #include <QEvent>
+#include <QMap>
 
 #include <qwt_plot.h>
 #include <qwt_plot_marker.h>
@@ -518,7 +519,7 @@ class Graph: public QWidget
 		QString axisFormatInfo(int axis);
 		QStringList axesLabelsFormatInfo(){return axesFormatInfo;};
 
-		void setLabelsTextFormat(int axis, int type, const QString& name, const QStringList& lst);
+		void setLabelsTextFormat(int axis, int type, const QString& name, const QMap<int, QString>& lst);
 		void setLabelsTextFormat(int axis, int type, const QString& labelsColName, Table *table);
 
 		QStringList getAxesFormulas(){return axesFormulas;};

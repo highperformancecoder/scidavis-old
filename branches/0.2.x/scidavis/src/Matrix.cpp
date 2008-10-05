@@ -92,6 +92,7 @@ void Matrix::init(int rows, int cols)
     ui.formula_box->setObjectName(QString::fromUtf8("formula_box"));
     ui.formula_box->setMinimumSize(QSize(60, 10));
     ui.formula_box->setAcceptRichText(false);
+    ui.formula_box->setLineWrapMode(QTextEdit::WidgetWidth);
 	ui.gridLayout2->addWidget(ui.formula_box, 1, 0, 1, 3);
 
 	ui.add_cell_combobox->addItem("cell(i, j)");

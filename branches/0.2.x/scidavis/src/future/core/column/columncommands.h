@@ -175,6 +175,8 @@ private:
 	int d_num_rows;
 	//! Previous number of rows in the destination column
 	int d_old_row_count;
+	//! The old validity information
+	IntervalAttribute<bool> d_old_validity;
 	
 
 };
@@ -546,6 +548,8 @@ private:
 	QString d_old_value;
 	//! The old number of rows
 	int d_row_count;
+	//! The old validity
+	IntervalAttribute<bool> d_validity;
 
 };
 ///////////////////////////////////////////////////////////////////////////
@@ -580,6 +584,8 @@ private:
 	double d_old_value;
 	//! The old number of rows
 	int d_row_count;
+	//! The old validity
+	IntervalAttribute<bool> d_validity;
 
 };
 ///////////////////////////////////////////////////////////////////////////
@@ -614,6 +620,8 @@ private:
 	QDateTime d_old_value;
 	//! The old number of rows
 	int d_row_count;
+	//! The old validity
+	IntervalAttribute<bool> d_validity;
 
 };
 ///////////////////////////////////////////////////////////////////////////
@@ -650,6 +658,8 @@ private:
 	bool d_copied;
 	//! The old number of rows
 	int d_row_count;
+	//! The old validity
+	IntervalAttribute<bool> d_validity;
 
 };
 ///////////////////////////////////////////////////////////////////////////
@@ -686,6 +696,8 @@ private:
 	bool d_copied;
 	//! The old number of rows
 	int d_row_count;
+	//! The old validity
+	IntervalAttribute<bool> d_validity;
 
 };
 ///////////////////////////////////////////////////////////////////////////
@@ -722,6 +734,8 @@ private:
 	bool d_copied;
 	//! The old number of rows
 	int d_row_count;
+	//! The old validity
+	IntervalAttribute<bool> d_validity;
 
 };
 ///////////////////////////////////////////////////////////////////////////

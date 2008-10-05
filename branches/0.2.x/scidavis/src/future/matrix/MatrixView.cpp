@@ -100,6 +100,7 @@ void MatrixView::init()
 	connect(d_hide_button, SIGNAL(pressed()), this, SLOT(toggleControlTabBar()));
 	d_control_tabs = new QWidget();
     ui.setupUi(d_control_tabs);
+#if 0 // this seems not to work
 	ui.first_row_spinbox->setMaximum(std::numeric_limits<double>::max());
 	ui.first_row_spinbox->setMinimum(std::numeric_limits<double>::min());
 	ui.first_col_spinbox->setMaximum(std::numeric_limits<double>::max());
@@ -108,6 +109,7 @@ void MatrixView::init()
 	ui.last_row_spinbox->setMinimum(std::numeric_limits<double>::min());
 	ui.last_col_spinbox->setMaximum(std::numeric_limits<double>::max());
 	ui.last_col_spinbox->setMinimum(std::numeric_limits<double>::min());
+#endif
 
 	updateCoordinatesTab();
 	updateFormulaTab();

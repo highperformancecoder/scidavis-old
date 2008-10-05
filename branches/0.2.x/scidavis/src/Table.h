@@ -34,6 +34,7 @@
 #include <QVarLengthArray>
 #include <QDateTime>
 #include <QHash>
+#include <QMap>
 
 #include "Graph.h"
 #include "MyWidget.h"
@@ -198,7 +199,7 @@ public slots:
 	QStringList selectedColumns();
 	QStringList selectedYColumns();
 	QStringList selectedErrColumns();
-	QStringList selectedYLabels();
+	QMap<int, QString> selectedYLabels();
 	QStringList drawableColumnSelection();
 	QStringList YColumns();
 	int selectedColsNumber();

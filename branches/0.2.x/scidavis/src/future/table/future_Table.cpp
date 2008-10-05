@@ -72,6 +72,8 @@
 #include "core/datatypes/DateTime2DoubleFilter.h"
 #include "core/datatypes/SimpleCopyThroughFilter.h"
 
+#include "ui_DimensionsDialog.h"
+
 #define WAIT_CURSOR QApplication::setOverrideCursor(QCursor(Qt::WaitCursor))
 #define RESET_CURSOR QApplication::restoreOverrideCursor()
 
@@ -968,6 +970,8 @@ bool Table::fillProjectMenu(QMenu * menu)
 	menu->addAction(action_toggle_comments);
 	menu->addAction(action_toggle_tabbar);
 	menu->addAction(action_formula_mode);
+	menu->addAction(action_edit_description);
+	menu->addAction(action_type_format);
 	menu->addSeparator();
 	menu->addAction(action_clear_table);
 #ifndef LEGACY_CODE_0_2_x
@@ -980,9 +984,6 @@ bool Table::fillProjectMenu(QMenu * menu)
 	menu->addSeparator();
 	menu->addAction(action_add_column);
 	menu->addAction(action_dimensions_dialog);
-	menu->addSeparator();
-	menu->addAction(action_edit_description);
-	menu->addAction(action_type_format);
 	menu->addSeparator();
 	menu->addAction(action_go_to_cell);
 
@@ -1494,8 +1495,6 @@ QMenu * Table::createColumnMenu(QMenu * append_to)
 
 	menu->addAction(action_edit_description);
 	menu->addAction(action_type_format);
-	menu->addSeparator();
-
 	connect(menu, SIGNAL(aboutToShow()), this, SLOT(adjustActionNames()));
 	menu->addAction(action_toggle_comments);
 	menu->addSeparator();
@@ -1569,18 +1568,20 @@ void Table::goToCell()
 
 void Table::dimensionsDialog()
 {
-	bool ok;
+	Ui::DimensionsDialog ui;
+	QDialog dialog;
+	ui.setupUi(&dialog);
+	dialog.setWindowTitle(tr("Set Table Dimensions"));
+	ui.columnsSpinBox->setValue(columnCount());
+	ui.rowsSpinBox->setValue(rowCount());
+	connect(ui.buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
+	connect(ui.buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
 
-	int cols = QInputDialog::getInteger(0, tr("Set Table Dimensions"), tr("Enter number of columns"),
-			columnCount(), 1, 1e9, 1, &ok);
-	if ( !ok ) return;
-
-	int rows = QInputDialog::getInteger(0, tr("Set Table Dimensions"), tr("Enter number of rows"),
-			rowCount(), 1, 1e9, 1, &ok);
-	if ( !ok ) return;
-	
-	setColumnCount(cols);
-	setRowCount(rows);
+	if (dialog.exec())
+	{
+		setColumnCount(ui.columnsSpinBox->value());
+		setRowCount(ui.rowsSpinBox->value());
+	}
 }
 
 void Table::moveColumn(int from, int to)
