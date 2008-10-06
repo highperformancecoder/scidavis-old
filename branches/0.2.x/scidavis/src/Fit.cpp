@@ -69,76 +69,126 @@ Fit::Fit( ApplicationWindow *parent, Graph *g, const char * name)
 	d_sort_data = true;
 }
 
-gsl_multifit_fdfsolver * Fit::fitGSL(gsl_multifit_function_fdf f, int &iterations, int &status)
+double * Fit::fitGslMultifit(int &iterations, int &status)
 {
-	const gsl_multifit_fdfsolver_type *T;
-	if (d_solver)
-		T = gsl_multifit_fdfsolver_lmder;
-	else
-		T = gsl_multifit_fdfsolver_lmsder;
+	double * result = new double[d_p];
 
+	// declare input data
+	struct FitData data = {
+		d_n,
+		d_p,
+		d_x,
+		d_y,
+		d_y_errors,
+		d_formula.toAscii().constData(),
+		d_param_names.join(",").toAscii().constData()
+	};
+	gsl_multifit_function_fdf f;
+	f.f = d_f;
+	f.df = d_df;
+	f.fdf = d_fdf;
+	f.n = d_n;
+	f.p = d_p;
+	f.params = &data;
+
+	// initialize solver
+	const gsl_multifit_fdfsolver_type *T;
+	switch(d_solver) {
+		case ScaledLevenbergMarquardt:
+			T = gsl_multifit_fdfsolver_lmsder;
+			break;
+		case UnscaledLevenbergMarquardt:
+			T = gsl_multifit_fdfsolver_lmder;
+			break;
+	}
 	gsl_multifit_fdfsolver *s = gsl_multifit_fdfsolver_alloc (T, d_n, d_p);
 	gsl_multifit_fdfsolver_set (s, &f, d_param_init);
 
-	size_t iter = 0;
-	do
-	{
-		iter++;
+	// iterate solver algorithm
+	for (iterations=0; iterations < d_max_iterations; iterations++) {
 		status = gsl_multifit_fdfsolver_iterate (s);
-
-		if (status)
-			break;
+		if (status) break;
 
 		status = gsl_multifit_test_delta (s->dx, s->x, d_tolerance, d_tolerance);
+		if (status != GSL_CONTINUE) break;
 	}
-	while (status == GSL_CONTINUE && (int)iter < d_max_iterations);
 
+	// grab results
+	for (int i=0; i<d_p; i++)
+		result[i] = gsl_vector_get(s->x, i);
+	gsl_blas_ddot(s->f, s->f, &chi_2);
 	gsl_multifit_covar (s->J, 0.0, covar);
 	if (d_y_error_source == UnknownErrors) {
 		// multiply covar by variance of residuals, which is used as an estimate for the
 		// statistical errors (this relies on the Y errors being set to 1.0, so that
 		// s->f is properly normalized)
-		double var = 0;
-		for (int i=0; i<d_n; i++)
-			var += pow(gsl_vector_get(s->f, i), 2);
-		var /= d_n - d_p;
-		gsl_matrix_scale(covar, var);
+		gsl_matrix_scale(covar, chi_2/(d_n-d_p));
 	}
-	iterations = iter;
-	return s;
+
+	// free memory allocated for fitting
+	gsl_multifit_fdfsolver_free(s);
+
+	return result;
 }
 
-gsl_multimin_fminimizer * Fit::fitSimplex(gsl_multimin_function f, int &iterations, int &status)
+double * Fit::fitGslMultimin(int &iterations, int &status)
 {
+	double * result = new double[d_p];
+
+	// declare input data
+	struct FitData data = {
+		d_n,
+		d_p,
+		d_x,
+		d_y,
+		d_y_errors,
+		d_formula.toAscii().constData(),
+		d_param_names.join(",").toAscii().constData()
+	};
+	gsl_multimin_function f;
+	f.f = d_fsimplex;
+	f.n = d_p;
+	f.params = &data;
+
+	// step size (size of the simplex)
+	// can be increased for faster convergence
+	gsl_vector *ss = gsl_vector_alloc (f.n);
+	gsl_vector_set_all (ss, 10.0);
+
+	// initialize minimizer
 	const gsl_multimin_fminimizer_type *T = gsl_multimin_fminimizer_nmsimplex;
-
-	//size of the simplex
-	gsl_vector *ss;
-	//initial vertex size vector
-	ss = gsl_vector_alloc (f.n);
-	//set all step sizes to 1 can be increased to converge faster
-	gsl_vector_set_all (ss,10.0);
-
 	gsl_multimin_fminimizer *s_min = gsl_multimin_fminimizer_alloc (T, f.n);
-	status = gsl_multimin_fminimizer_set (s_min, &f, d_param_init, ss);
-	double size;
-	size_t iter = 0;
-	do
-	{
-		iter++;
-		status = gsl_multimin_fminimizer_iterate (s_min);
+	gsl_multimin_fminimizer_set (s_min, &f, d_param_init, ss);
 
-		if (status)
-			break;
-		size=gsl_multimin_fminimizer_size (s_min);
+	// iterate minimization algorithm
+	for (iterations = 0; iterations < d_max_iterations; iterations++) {
+		status = gsl_multimin_fminimizer_iterate (s_min);
+		if (status) break;
+
+		double size = gsl_multimin_fminimizer_size (s_min);
 		status = gsl_multimin_test_size (size, d_tolerance);
+		if (status != GSL_CONTINUE) break;
 	}
 
-	while (status == GSL_CONTINUE && (int)iter < d_max_iterations);
+	// grab results
+	for (int i=0; i<d_p; i++)
+		result[i] = gsl_vector_get(s_min->x, i);
+	chi_2 = s_min->fval;
+	gsl_matrix *J = gsl_matrix_alloc(d_n, d_p);
+	d_df(s_min->x,(void*)f.params, J);
+	gsl_multifit_covar (J, 0.0, covar);
+	if (d_y_error_source == UnknownErrors) {
+		// multiply covar by variance of residuals, which is used as an estimate for the
+		// statistical errors (this relies on the Y errors being set to 1.0)
+		gsl_matrix_scale(covar, chi_2/(d_n-d_p));
+	}
 
-	iterations = iter;
+	// free previously allocated memory
+	gsl_matrix_free (J);
+	gsl_multimin_fminimizer_free (s_min);
 	gsl_vector_free(ss);
-	return s_min;
+
+	return result;
 }
 
 void Fit::setDataCurve(int curve, double start, double end)
@@ -274,7 +324,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 			{
 				d_y_error_dataset = QString::null;
 				// using 1.0 here is important for correct error estimates,
-				// cmp. Fit::fitGSL()
+				// cmp. Fit::fitGslMultifit and Fit::fitGslMultimin
 				for (int i=0; i<d_n; i++)
 					d_y_errors[i] = 1.0;
 			}
@@ -436,56 +486,18 @@ void Fit::fit()
 
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
-	QString names = d_param_names.join (",");
-	QByteArray ba_formula = d_formula.toAscii();
-	const char *function = ba_formula.constData();
-	QByteArray ba_names = names.toAscii();
-	const char *parNames = ba_names.constData();
+	int status, iterations;
+	double *par;
 
-	struct FitData d_data = {d_n, d_p, d_x, d_y, d_y_errors, function, parNames};
-	int status, iterations = d_max_iterations;
-	double *par = new double[d_p];
 	if(d_solver == NelderMeadSimplex)
-	{
-		gsl_multimin_function f;
-		f.f = d_fsimplex;
-		f.n = d_p;
-		f.params = &d_data;
-		gsl_multimin_fminimizer *s_min = fitSimplex(f, iterations, status);
-
-		for (int i=0; i<d_p; i++)
-			par[i]=gsl_vector_get(s_min->x, i);
-
-		// allocate memory and calculate covariance matrix based on residuals
-		gsl_matrix *J = gsl_matrix_alloc(d_n, d_p);
-		d_df(s_min->x,(void*)f.params, J);
-		gsl_multifit_covar (J, 0.0, covar);
-		chi_2 = s_min->fval;
-
-		// free previousely allocated memory
-		gsl_matrix_free (J);
-		gsl_multimin_fminimizer_free (s_min);
-	}
+		par = fitGslMultimin(iterations, status);
 	else
-	{
-		gsl_multifit_function_fdf f;
-		f.f = d_f;
-		f.df = d_df;
-		f.fdf = d_fdf;
-		f.n = d_n;
-		f.p = d_p;
-		f.params = &d_data;
-		gsl_multifit_fdfsolver *s = fitGSL(f, iterations, status);
-
-		for (int i=0; i<d_p; i++)
-			par[i]=gsl_vector_get(s->x, i);
-
-		chi_2 = pow(gsl_blas_dnrm2(s->f), 2.0);
-		gsl_multifit_fdfsolver_free(s);
-	}
+		par = fitGslMultifit(iterations, status);
 
 	storeCustomFitResults(par);
 	generateFitCurve(par);
+
+	delete[] par;
 
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	if (app->writeFitResultsToLog)

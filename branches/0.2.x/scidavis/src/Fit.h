@@ -91,7 +91,7 @@ class Fit : public Filter
 		//! Returns the sum of squares of the residuals from the best-fit line
 		double chiSquare() {return chi_2;};
 
-		//! Returns R^2
+		//! Returns the coefficient of determination, R^2
 		double rSquare();
 
 		//! Specifies wheather the errors must be scaled with sqrt(chi_2/dof)
@@ -101,11 +101,11 @@ class Fit : public Filter
 		Matrix* covarianceMatrix(const QString& matrixName);
 
 	private:
-		//! Pointer to the GSL multifit minimizer (for simplex algorithm)
-		gsl_multimin_fminimizer * fitSimplex(gsl_multimin_function f, int &iterations, int &status);
+		//! Execute the fit using GSL multidimensional minimization (Nelder-Mead Simplex).
+		double * fitGslMultimin(int &iterations, int &status);
 
-		//! Pointer to the GSL multifit solver
-		gsl_multifit_fdfsolver * fitGSL(gsl_multifit_function_fdf f, int &iterations, int &status);
+		//! Execute the fit using GSL non-linear least-squares fitting (Levenberg-Marquardt).
+		double * fitGslMultifit(int &iterations, int &status);
 
 		//! Customs and stores the fit results according to the derived class specifications. Used by exponential fits.
 		virtual void storeCustomFitResults(double *par);
