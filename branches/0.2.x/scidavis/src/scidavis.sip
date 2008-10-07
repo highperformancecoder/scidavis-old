@@ -575,6 +575,15 @@ class QwtSymbol
 
 	 // convenience methods for scripting
 
+	 void setColor(const QColor& color) /NoDerived/;
+%MethodCode
+	QPen pen = sipCpp->pen();
+	pen.setColor(*a0);
+	sipCpp->setPen(pen);
+	QBrush brush = sipCpp->brush();
+	brush.setColor(*a0);
+	sipCpp->setBrush(brush);
+%End
 	 void setColor(int color) /NoDerived/;
 %MethodCode
 	QPen pen = sipCpp->pen();
@@ -584,11 +593,23 @@ class QwtSymbol
 	brush.setColor(ColorBox::color(a0));
 	sipCpp->setBrush(brush);
 %End
+	 void setOutlineColor(const QColor& color) /NoDerived/;
+%MethodCode
+	QPen pen = sipCpp->pen();
+	pen.setColor(*a0);
+	sipCpp->setPen(pen);
+%End
 	 void setOutlineColor(int color) /NoDerived/;
 %MethodCode
 	QPen pen = sipCpp->pen();
 	pen.setColor(ColorBox::color(a0));
 	sipCpp->setPen(pen);
+%End
+	 void setFillColor(const QColor& color) /NoDerived/;
+%MethodCode
+	QBrush brush = sipCpp->brush();
+	brush.setColor(*a0);
+	sipCpp->setBrush(brush);
 %End
 	 void setFillColor(int color) /NoDerived/;
 %MethodCode
@@ -627,6 +648,15 @@ class QwtPlotCurve
 
 	 // convenience methods for scripting
 	 
+	 void setColor(const QColor& color) /NoDerived/;
+%MethodCode
+	QPen pen = sipCpp->pen();
+	pen.setColor(*a0);
+	sipCpp->setPen(pen);
+	QBrush brush = sipCpp->brush();
+	brush.setColor(*a0);
+	sipCpp->setBrush(brush);
+%End
 	 void setColor(int color) /NoDerived/;
 %MethodCode
 	QPen pen = sipCpp->pen();
@@ -636,11 +666,23 @@ class QwtPlotCurve
 	brush.setColor(ColorBox::color(a0));
 	sipCpp->setBrush(brush);
 %End
+	 void setOutlineColor(const QColor& color) /NoDerived/;
+%MethodCode
+	QPen pen = sipCpp->pen();
+	pen.setColor(*a0);
+	sipCpp->setPen(pen);
+%End
 	 void setOutlineColor(int color) /NoDerived/;
 %MethodCode
 	QPen pen = sipCpp->pen();
 	pen.setColor(ColorBox::color(a0));
 	sipCpp->setPen(pen);
+%End
+	 void setFillColor(const QColor& color) /NoDerived/;
+%MethodCode
+	QBrush brush = sipCpp->brush();
+	brush.setColor(*a0);
+	sipCpp->setBrush(brush);
 %End
 	 void setFillColor(int color) /NoDerived/;
 %MethodCode
@@ -664,6 +706,8 @@ class Graph : QWidget /PyName=Layer/
 %TypeHeaderCode
 #include "src/Graph.h"
 #include "src/Legend.h"
+#include "src/ColorBox.h"
+#include <qwt_plot_canvas.h>
 %End
 public:
   bool isPiePlot();
@@ -672,8 +716,32 @@ public:
   sipRes = PyString_FromString(sipCpp->pieLegendText());
 %End
 
-  bool insertCurve(Table*, const QString&, int=1);
-  bool insertCurve(Table*, const QString&, const QString&, int=1);
+  bool insertCurve(Table*, const QString&, int=1, int color=-1) /NoDerived/;
+%MethodCode
+	if (sipCpp->insertCurve(a0, *a1, a2)) {
+		QwtPlotCurve * c = sipCpp->curve(sipCpp->curves()-1);
+		if (a3 >= 0) {
+			QPen pen = c->pen();
+			pen.setColor(ColorBox::color(a3));
+			c->setPen(pen);
+		}
+		sipRes = true;
+	} else
+		sipRes = false;
+%End
+  bool insertCurve(Table*, const QString&, const QString&, int=1, int color=-1);
+%MethodCode
+	if (sipCpp->insertCurve(a0, *a1, *a2, a3)) {
+		QwtPlotCurve * c = sipCpp->curve(sipCpp->curves()-1);
+		if (a3 >= 0) {
+			QPen pen = c->pen();
+			pen.setColor(ColorBox::color(a4));
+			c->setPen(pen);
+		}
+		sipRes = true;
+	} else
+		sipRes = false;
+%End
   void removeCurve(int);
   void removeCurve(const QString&);
   void deleteFitCurves();
@@ -732,6 +800,11 @@ public:
   void setAutoscaleFonts(bool = true);
   void setAntialiasing(bool on = true, bool update = true);
 
+  QWidget * canvas() const /NoDerived/;
+%MethodCode
+	sipRes = sipCpp->d_plot->canvas();
+%End
+
 private:
   Graph(const Graph&);
 };
@@ -782,6 +855,7 @@ class ApplicationWindow: QMainWindow
 {
 %TypeHeaderCode
 #include "src/ApplicationWindow.h"
+#include "src/ColorBox.h"
 %End
 %ConvertToSubClassCode
 // we have to do this to override casting in qt/qobject.sip (PyQt 3.16)
@@ -828,7 +902,7 @@ public:
     sipRes = sipCpp->projectFolder()->note(*a0, true);
 %End
   Note* newNote(const QString& = QString::null);
-  MultiLayer *multilayerPlot(Table*, SIP_PYTUPLE, int=1) /PyName=plot/;
+  MultiLayer *plot(Table*, SIP_PYTUPLE, int style=1, int color=-1) /NoDerived/;
 %MethodCode
   QStringList l;
   int n = PyTuple_Size(a1);
@@ -843,12 +917,24 @@ public:
     }
   }
   sipRes = sipCpp->multilayerPlot(a0, l, a2);
+  if (a3 >= 0) {
+	  QwtPlotCurve * c = sipRes->activeGraph()->curve(0);
+	  QPen pen = c->pen();
+	  pen.setColor(ColorBox::color(a3));
+	  c->setPen(pen);
+  }
 %End
-  MultiLayer *multiLayerPlot(Table*, const QString&, int=1) /PyName=plot/;
+  MultiLayer *plot(Table*, const QString&, int style=1, int color=-1) /NoDerived/;
 %MethodCode
   QStringList l;
   l << *a1;
   sipRes = sipCpp->multilayerPlot(a0, l, a2);
+  if (a3 >= 0) {
+	  QwtPlotCurve * c = sipRes->activeGraph()->curve(0);
+	  QPen pen = c->pen();
+	  pen.setColor(ColorBox::color(a3));
+	  c->setPen(pen);
+  }
 %End
 
 	Matrix* importImage();
