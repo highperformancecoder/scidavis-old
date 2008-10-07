@@ -75,4 +75,6 @@
              $${SIP_DIR}/sipscidavisDeconvolution.cpp \
              $${SIP_DIR}/sipscidavisAbstractAspect.cpp \
              $${SIP_DIR}/sipscidavisColumn.cpp \
+				 $${SIP_DIR}/sipscidavisQwtSymbol.cpp \
+				 $${SIP_DIR}/sipscidavisQwtPlotCurve.cpp \
 ###############################################################

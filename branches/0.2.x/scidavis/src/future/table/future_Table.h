@@ -272,6 +272,7 @@ class Table : public AbstractPart
 		void setSelectedColumnsAsXError();
 		void setSelectedColumnsAsYError();
 		void setSelectedColumnsAsNone();
+		void normalizeColumns(QList< Column* > cols);
 		void normalizeSelectedColumns();
 		void normalizeSelection();
 		void sortSelectedColumns();

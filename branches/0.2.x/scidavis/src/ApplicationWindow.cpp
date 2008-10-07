@@ -3903,9 +3903,13 @@ bool ApplicationWindow::setScriptingLang(const QString &lang, bool force)
 	if (!force && lang == scriptEnv->name()) return true;
 	if (lang.isEmpty()) return false;
 
+	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
 	ScriptingEnv *newEnv = ScriptingLangManager::newEnv(lang, this);
-	if (!newEnv)
+	if (!newEnv) {
+		QApplication::restoreOverrideCursor();
 		return false;
+	}
 
 	connect(newEnv, SIGNAL(error(const QString&,const QString&,int)),
 			this, SLOT(scriptError(const QString&,const QString&,int)));
@@ -3913,6 +3917,7 @@ bool ApplicationWindow::setScriptingLang(const QString &lang, bool force)
 	if (!newEnv->initialize())
 	{
 		delete newEnv;
+		QApplication::restoreOverrideCursor();
 		return false;
 	}
 
@@ -3923,6 +3928,8 @@ bool ApplicationWindow::setScriptingLang(const QString &lang, bool force)
 
 	foreach(QObject *i, findChildren<QWidget*>())
 		QApplication::postEvent(i, new ScriptingChangeEvent(newEnv));
+
+	QApplication::restoreOverrideCursor();
 
 	return true;
 }

@@ -33,7 +33,7 @@
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 
-class AbstractAspect : QObject /PyName=Aspect/
+class AbstractAspect : QObject
 {
 %TypeHeaderCode
 #include "core/AbstractAspect.h"
@@ -246,8 +246,8 @@ class Table: MyWidget
 %End
 
 public:
-  int numRows() /PyName=numRows/;
-  int numCols() /PyName=numCols/;
+  int numRows();
+  int numCols();
   int rowCount();
   int columnCount();
   void setNumRows(int);
@@ -314,40 +314,61 @@ public:
 
 //  void importASCII(const QString&, const QString&="\t", int=0, bool=false, bool=true, bool=false, bool=false);
   bool exportASCII(const QString&, const QString&="\t", bool=false, bool=false);
-/*  void normalizeCol(SIP_PYOBJECT) /PyName=normalize/;
+  void normalize(SIP_PYOBJECT) /NoDerived/;
 %MethodCode
 	sipIsErr = 0;
 	CHECK_TABLE_COL(a0);
 	if (sipIsErr == 0)
-		sipCpp->normalizeCol(col);
+		sipCpp->d_future_table->normalizeColumns(QList< Column* >() << sipCpp->column(col));
 %End
-  void normalize();
+  void normalize() /NoDerived/;
+%MethodCode
+	QList< Column* > cols;
+	for (int i=0; i<sipCpp->numCols(); i++)
+		cols << sipCpp->column(i);
+	sipCpp->d_future_table->normalizeColumns(cols);
+%End
 
-  void sortColumn(SIP_PYOBJECT, int order = 0);
+  void sortColumn(SIP_PYOBJECT, int order = 0) /NoDerived/;
 %MethodCode
   	sipIsErr = 0;
   	CHECK_TABLE_COL(a0);
 	if (sipIsErr == 0)
-		sipCpp->sortColumn(col, a1);
+		sipCpp->d_future_table->sortColumns(0, QList<Column*>() << sipCpp->column(col), a1==0);
 %End
-  void sort(int type = 0, int order = 0, const QString& leadCol = QString());
+  void sort(int type = 0, int order = 0, const QString& leadCol = QString()) /NoDerived/;
+%MethodCode
+	Column * lead;
+	if (a0 == 0)
+		lead = 0; // sort separately
+	else
+		lead = sipCpp->column(*a2);
+	QList< Column* > cols;
+	for (int i=0; i<sipCpp->numCols(); i++)
+		cols << sipCpp->column(i);
+	sipCpp->d_future_table->sortColumns(lead, cols, a1==0);
+%End
   void sortColumns(SIP_PYTUPLE, int=0, int=0, const QString&=QString());
 %MethodCode
-  QStringList l;
+	Column * lead;
+	if (a1 == 0)
+		lead = 0; // sort separately
+	else
+		lead = sipCpp->column(*a3);
+	QList< Column* > cols;
   int n = PyTuple_Size(a0);
   for (int i=0; i<n; i++) {
-    PyObject *str = PyObject_Str(PyTuple_GET_ITEM(a0,i));
-    if (str) {
-      l << PyString_AsString(str);
-		Py_DECREF(str);
-	 } else {
-      sipIsErr = 1;
-      break;
-    }
+	  PyObject *str = PyObject_Str(PyTuple_GET_ITEM(a0,i));
+	  if (str) {
+		  cols << sipCpp->column(PyString_AsString(str));
+		  Py_DECREF(str);
+	  } else {
+		  sipIsErr = 1;
+		  break;
+	  }
   }
-  sipCpp->sortColumns(l, a1, a2, *a3);
+  sipCpp->d_future_table->sortColumns(lead, cols, a2==0);
 %End
-*/
 	void setCommand(SIP_PYOBJECT, const QString&);
 %MethodCode
   	sipIsErr = 0;
@@ -506,6 +527,138 @@ private:
   Legend(const Legend&);
 };
 
+class QwtSymbol
+{
+%TypeHeaderCode
+#include <qwt_symbol.h>
+#include "ColorBox.h"
+%End
+	public:
+    enum Style 
+    { 
+        NoSymbol = -1, 
+
+        Ellipse, 
+        Rect, 
+        Diamond, 
+        Triangle, 
+        DTriangle,
+        UTriangle, 
+        LTriangle, 
+        RTriangle, 
+        Cross, 
+        XCross, 
+        HLine, 
+        VLine, 
+        Star1, 
+        Star2, 
+        Hexagon, 
+
+        StyleCnt 
+    };
+
+    QwtSymbol();
+    QwtSymbol(Style st, const QBrush &bd, const QPen &pn, const QSize &s);
+
+    virtual QwtSymbol *clone() const;
+
+    void setSize(const QSize &s);
+    void setSize(int a, int b = -1);
+    void setBrush(const QBrush& b);
+    void setPen(const QPen &p);
+    void setStyle (Style s);
+
+    const QBrush& brush() const;
+    const QPen& pen() const;
+    const QSize& size() const;
+    Style style() const;
+
+	 // convenience methods for scripting
+
+	 void setColor(int color) /NoDerived/;
+%MethodCode
+	QPen pen = sipCpp->pen();
+	pen.setColor(ColorBox::color(a0));
+	sipCpp->setPen(pen);
+	QBrush brush = sipCpp->brush();
+	brush.setColor(ColorBox::color(a0));
+	sipCpp->setBrush(brush);
+%End
+	 void setOutlineColor(int color) /NoDerived/;
+%MethodCode
+	QPen pen = sipCpp->pen();
+	pen.setColor(ColorBox::color(a0));
+	sipCpp->setPen(pen);
+%End
+	 void setFillColor(int color) /NoDerived/;
+%MethodCode
+	QBrush brush = sipCpp->brush();
+	brush.setColor(ColorBox::color(a0));
+	sipCpp->setBrush(brush);
+%End
+
+	private:
+QwtSymbol(const QwtSymbol&);
+};
+
+class QwtPlotCurve
+{
+%TypeHeaderCode
+#include <qwt_plot_curve.h>
+#include "Graph.h"
+%End
+	public:
+		int dataSize() const;
+		double x(int i) const;
+		double y(int i) const;
+		double minXValue() const;
+		double maxXValue() const;
+		double minYValue() const;
+		double maxYValue() const;
+
+		void setPen(const QPen &);
+		const QPen &pen() const;
+
+		void setBrush(const QBrush &);
+		const QBrush &brush() const;
+
+		void setSymbol(const QwtSymbol &s);
+		const QwtSymbol& symbol() const;
+
+	 // convenience methods for scripting
+	 
+	 void setColor(int color) /NoDerived/;
+%MethodCode
+	QPen pen = sipCpp->pen();
+	pen.setColor(ColorBox::color(a0));
+	sipCpp->setPen(pen);
+	QBrush brush = sipCpp->brush();
+	brush.setColor(ColorBox::color(a0));
+	sipCpp->setBrush(brush);
+%End
+	 void setOutlineColor(int color) /NoDerived/;
+%MethodCode
+	QPen pen = sipCpp->pen();
+	pen.setColor(ColorBox::color(a0));
+	sipCpp->setPen(pen);
+%End
+	 void setFillColor(int color) /NoDerived/;
+%MethodCode
+	QBrush brush = sipCpp->brush();
+	brush.setColor(ColorBox::color(a0));
+	sipCpp->setBrush(brush);
+%End
+	 void setFillStyle(Qt::BrushStyle style) /NoDerived/;
+%MethodCode
+	QBrush brush = sipCpp->brush();
+	brush.setStyle(a0);
+	sipCpp->setBrush(brush);
+%End
+
+	private:
+		QwtPlotCurve(const QwtPlotCurve&);
+};
+
 class Graph : QWidget /PyName=Layer/
 {
 %TypeHeaderCode
@@ -525,6 +678,10 @@ public:
   void removeCurve(const QString&);
   void deleteFitCurves();
   int curves() /PyName=numCurves/;
+  void showCurve(int index, bool visible=true);
+
+  QwtPlotCurve* curve(int index);
+  QwtPlotCurve* curve(const QString &title);
 
   void addErrorBars(const QString&, Table *, const QString&,
 		  int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(Qt::black),

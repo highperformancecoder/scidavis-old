@@ -728,13 +728,12 @@ void Table::setSelectedColumnsAsNone()
 	setSelectionAs(SciDAVis::noDesignation);
 }
 
-void Table::normalizeSelectedColumns()
+void Table::normalizeColumns(QList< Column* > cols)
 {
 	if (!d_view) return;
 
 	WAIT_CURSOR;
 	beginMacro(QObject::tr("%1: normalize column(s)").arg(name()));
-	QList< Column* > cols = d_view->selectedColumns();
 	foreach(Column * col, cols)
 	{
 		if (col->dataType() == SciDAVis::TypeDouble)
@@ -752,6 +751,11 @@ void Table::normalizeSelectedColumns()
 	}
 	endMacro();
 	RESET_CURSOR;
+}
+
+void Table::normalizeSelectedColumns()
+{
+	normalizeColumns(d_view->selectedColumns());
 }
 
 void Table::normalizeSelection()

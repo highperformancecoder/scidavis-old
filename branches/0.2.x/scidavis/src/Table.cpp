@@ -52,16 +52,6 @@
 #include <QProgressDialog>
 #include <QFile>
 
-#include <Q3TextStream>
-#include <q3paintdevicemetrics.h>
-#include <q3dragobject.h>
-#include <Q3TableSelection>
-#include <Q3MemArray>
-
-#include <gsl/gsl_vector.h>
-#include <gsl/gsl_sort.h>
-#include <gsl/gsl_sort_vector.h>
-
 Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 			 bool stripSpaces, bool simplifySpaces, const QString& label,
 			 QWidget* parent, const char* name, Qt::WFlags f)
