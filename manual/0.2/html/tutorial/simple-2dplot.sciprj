@@ -1,0 +1,62 @@
+SciDAVis 0.2.0 project file
+<scripting-lang>	muParser
+<windows>	2
+<table>
+2523
+<table creation_time="2008-10-09 22:32:25:365" caption_spec="%n%C{ - }%c" name="Table1" columns="2" rows="7"><comment><![CDATA[]]></comment><column creation_time="2008-10-09 22:32:25:365" caption_spec="%n%C{ - }%c" name="1" type="TypeDouble" mode="Numeric" plot_designation="X"><comment><![CDATA[]]></comment><input_filter><simple_filter creation_time="2008-10-09 22:32:25:365" caption_spec="%n%C{ - }%c" name="InputFilter" filter_name="String2DoubleFilter"><comment><![CDATA[]]></comment></simple_filter></input_filter><output_filter><simple_filter creation_time="2008-10-09 22:32:25:365" caption_spec="%n%C{ - }%c" name="OutputFilter" format="e" digits="6" filter_name="Double2StringFilter"><comment><![CDATA[]]></comment></simple_filter></output_filter><row type="TypeDouble" index="0" invalid="no">1.0000000000000000e+00</row><row type="TypeDouble" index="1" invalid="no">2.2000000000000002e+00</row><row type="TypeDouble" index="2" invalid="no">3.0000000000000000e+00</row><row type="TypeDouble" index="3" invalid="no">4.5000000000000000e+00</row><row type="TypeDouble" index="4" invalid="no">5.2000000000000002e+00</row><row type="TypeDouble" index="5" invalid="no">7.0999999999999996e+00</row><row type="TypeDouble" index="6" invalid="no">8.1999999999999993e+00</row></column><column creation_time="2008-10-09 22:32:25:366" caption_spec="%n%C{ - }%c" name="2" type="TypeDouble" mode="Numeric" plot_designation="Y"><comment><![CDATA[]]></comment><input_filter><simple_filter creation_time="2008-10-09 22:32:25:366" caption_spec="%n%C{ - }%c" name="InputFilter" filter_name="String2DoubleFilter"><comment><![CDATA[]]></comment></simple_filter></input_filter><output_filter><simple_filter creation_time="2008-10-09 22:32:25:366" caption_spec="%n%C{ - }%c" name="OutputFilter" format="e" digits="6" filter_name="Double2StringFilter"><comment><![CDATA[]]></comment></simple_filter></output_filter><row type="TypeDouble" index="0" invalid="no">4.2000000000000002e+00</row><row type="TypeDouble" index="1" invalid="no">3.1000000000000001e+00</row><row type="TypeDouble" index="2" invalid="no">1.7000000000000000e+00</row><row type="TypeDouble" index="3" invalid="no">-2.1000000000000001e+00</row><row type="TypeDouble" index="4" invalid="no">-3.2000000000000002e+00</row><row type="TypeDouble" index="5" invalid="no">-1.2000000000000000e+00</row><row type="TypeDouble" index="6" invalid="no">5.0000000000000000e-01</row></column><column_width column="0">120</column_width><column_width column="1">120</column_width></table>
+geometry	43	39	600	294	minimized	
+
+</table>
+<multiLayer>
+Graph1	1	1	10/09/08 22:41
+geometry	271	10	508	428	active
+WindowLabel		2
+Margins	5	5	5	5
+Spacing	5	5
+LayerCanvasSize	443	295
+Alignement	0	0
+<graph>
+ggeometry	5	5	489	369
+PlotTitle	Simple 2D plot <i>(from (x,y) values)</i>	#000000	4
+<Antialiasing>1</Antialiasing>
+Background	#ffffff	255
+Margin	0
+Border	0	#000000
+grid	1	0	1	0	#c0c0c0	1	1	#a0a0a4	2	1	#c0c0c0	1	1	#a0a0a4	2	1	0	1	2	0
+EnabledAxes	1	0	1	0	
+AxesTitles	X values	Y values			
+AxesTitleColors	#000000	#000000	#000000	#000000	
+AxesTitleAlignment	132	4	132	4
+TitleFont	Times New Roman	16	75	0	0	0
+ScaleFont0	Times New Roman	12	75	0	0	0
+ScaleFont1	Sans Serif	9	75	0	0	0
+ScaleFont2	Times New Roman	12	75	0	0	0
+ScaleFont3	Sans Serif	9	75	0	0	0
+AxisFont0	Times New Roman	12	50	0	0	0
+AxisFont1	Sans Serif	9	50	0	0	0
+AxisFont2	Times New Roman	12	50	0	0	0
+AxisFont3	Sans Serif	9	50	0	0	0
+EnabledTickLabels	1	1	1	1	
+AxesColors	#000000	#000000	#000000	#000000
+AxesNumberColors	#000000	#000000	#000000	#000000
+AxesBaseline	0	0	0	0	
+CanvasFrame	1	#000000
+CanvasBackground	#ffffff	255
+curve	Table1_1	Table1_2	1	0	0	0	1	15	3	0	2	0	0	0	1	2	0	0	6	1
+scale	0	-4	6	0	8	5	0	0
+scale	1	-4	6	0	8	5	0	0
+scale	2	0	10	0	10	5	0	0
+scale	3	0	10	0	8	5	0	0
+LabelsFormat	0	4	0	4	0	4	0	4	
+AxisType	0	0	0	0	
+MajorTicks	1	1	1	1	
+MinorTicks	1	1	1	1	
+TicksLength	5	9
+DrawAxesBackbone	1
+AxesLineWidth	2
+LabelsRotation	0	0
+<legend>	6.63551401869159	4.84057971014493	Times New Roman	12	75	0	0	0	#000000	2	0	#ffffff	255	\c{1}Table1_2	</legend>
+</graph>
+</multiLayer>
+<log>
+</log>
