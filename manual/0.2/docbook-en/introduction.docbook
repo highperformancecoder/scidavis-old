@@ -1,4 +1,3 @@
-<chapter id="introduction">
 <title>Introduction</title>
 
 <!-- The introduction chapter contains a brief introduction for the
@@ -13,18 +12,30 @@ revision history. (see installation appendix comment) -->
 <para>The &appname; project started as a fork of QtiPlot with the aim of introducing some changes in design as well as project structure. The QtiPlot development was initiated in 2004 by &ion;. He was the only programmer until May 2006 when &knut; and &tilman; joined the project. Not much later, &roger; officially joined as the main documentation writer. In June 2007, insuperable disagreements among the developers lead to the fork and the creation of the &appname; project by &knut; and &tilman;, soon followed by &roger;. The project is hosted at <ulink url="&homepage;">Sourceforge</ulink>.</para>
 <para>&appname; aims to be a tool for analysis and graphical representation of data, allowing powerfull mathematical treatment and visualization of scientific data while keeping a user-friendly graphical user interface. Another keypoint for the &appname; project is to be a multi-system software, it should work on Windows, Linux, and OS-X systems.</para>
 <para>&appname; is a dynamic tool, the plots created from data sets and the spreadsheets owing the data are interconected. When the spreadsheets are modified, all the objects in the depending plots (curves, axes scales, legends) are automatically updated. For example, deleting a spreadsheet or only some columns will automatically remove all the corresponding curves from the depending plots.</para>
-<para>All settings of a complete set of tables, matrix and plots can be saved in project files, having the extention ".&file-ext;". These project files may be opened using the <link linkend="specify-a-file">command line</link>, using the <link linkend="sec-file-menu">File menu</link>, or by using the &open-icon; icon from the &file-toolbar-lnk;.</para>
+<para>All settings of a complete set of tables, matrix and plots can be saved in project files, having the extention ".&file-ext;". These project files may be opened using the <link linkend="specify-a-file">command line</link>, using the &file-menu-lnk;, or by using the &open-icon; icon from the &file-toolbar-lnk;.</para>
 <para>The plots can be exported to several graphic formats such as JPEG or PNG and inserted as images in documents or presentations.</para>
-<para>Data analysis operations (integration, interpolation, FFT, curve fitting, etc...) can be performed on the curves in a 2D plot via the &analysis-plots-menu-lnk;. The results of all these operations are also stored in the project files. They can be visualized at any moment using the &results-log-lnk; and can be deleted from the project file via the &clear-log-information-lnk;.</para>
+<para>Data analysis operations (integration, interpolation, FFT, curve fitting, etc) can be performed on the curves in a 2D plot via the &analysis-plots-menu-lnk;. The results of all these operations are also stored in the project files. They can be visualized at any moment using the &results-log-lnk; and can be deleted from the project file via the &clear-log-information-lnk;.</para>
 <para>When the application is launched, a new project file is created consisting of a grey main window (the workspace) which contains an empty table. In order to be operational, this workspace must be populated with tables storing data sets, either by creating empty tables first (&new-table-lnk;) and then filling them with data, or by importing ASCII files (&import-ascii-lnk;), which automatically creates new tables.</para>
-<para>The user can easily navigate through the objects of a project file using the &project-explorer-lnk; or the &windows-menu-lnk;. The project explorer also allows the user to perform various operations on the windows (tables and plots) in the workspace: hiding, minimazing, closing, renaming, printing, etc...</para>
+<para>The user can easily navigate through the objects of a project file using the &project-explorer-lnk; or the &windows-menu-lnk;. The project explorer also allows the user to perform various operations on the windows (tables and plots) in the workspace: hiding, minimazing, closing, renaming, printing, etc.</para>
 
 </sect1>
+<!--
+************************************************************************
 
+			Command line parameters
+
+************************************************************************
+-->
 <sect1 id="command-line-options">
 <title>Command Line Parameters</title>
+
 <sect2 id="specify-a-file">
-	<sect2info><indexterm><primary>Command line parameters</primary><secondary>Specify a File</secondary></indexterm></sect2info>
+  <sect2info>
+    <indexterm>
+      <primary>Command line parameters</primary>
+      <secondary>Specify a File</secondary>
+    </indexterm>
+  </sect2info>
 <title>Specify a File</title>
 
 <para>When starting &appname; from the command prompt, you can supply the name of a project file:</para>
@@ -52,7 +63,12 @@ revision history. (see installation appendix comment) -->
 </sect2>
 
 <sect2 id="scidavis-options">
-	<sect2info><indexterm><primary>Command line parameters</primary><secondary>Options</secondary></indexterm></sect2info>
+  <sect2info>
+    <indexterm>
+      <primary>Command line parameters</primary>
+      <secondary>Options</secondary>
+    </indexterm>
+  </sect2info>
 <title>Command Line Options</title>
 
 <para>Valid options are:</para>
@@ -69,12 +85,11 @@ revision history. (see installation appendix comment) -->
 
 </sect1>
 <!--
+**************************************************************************
 
-***************************************************************************************
+			General concepts and terms
 
-				General concepts and terms
-
-***************************************************************************************
+**************************************************************************
 -->
 <sect1 id="general-concepts">
 <title>General Concepts and Terms</title>
@@ -91,19 +106,19 @@ revision history. (see installation appendix comment) -->
 </figure>
 
 <para>There are numerous commands available in &appname; depending on the element which is selected. Therefore, the main menu bar changes when you select a particular element of the project. Moreover, you can access to the set of commands relevant of an element by activating the context menu with the right button of the mouse.</para>
-<para>In a project, the containers which can be used are:</para>
+<para>In a project, the objects which can be used are:</para>
 
 <variablelist>
   <varlistentry>
-    <term><link linkend="sec-intro-table">A Table</link></term>
+    <term><link linkend="sec-intro-table">Tables</link></term>
     <listitem>
       <indexterm><primary>Table</primary></indexterm>
-      <para>A table is a spreadsheet which can be used to store the datas you are entering. It can also be used to do some calculations and statistical analysis of datas. In each table, columns can be labelled as X-values or Y-values for 2D-plotting, or Z-values if you plan to build a 3D-plot. In addition, columns can be labelled as error on X or on Y values.</para>
+      <para>A table is a spreadsheet which can be used to store the datas you are entering. It can also be used to do some calculations and statistical analysis of datas. In each table, columns can be labelled as X-values or Y-values for 2D-plotting, or Z-values if you plan to build a 3D-plot. In addition, columns can be labelled as errors on X or on Y values (see &set-column-as-lnk;).</para>
       <para>A table can be created by the &new-table-lnk;. Then there are several ways to fill the table with your data. If you want to read a table from an ASCII file, you can import the data from the file to a table with the &import-ascii-lnk;. You can also enter each value from the keyboard, or copy and paste from another spreadsheet software. The last way to enter your data is to fill the table with the results of a mathematical function (&assign-formula-lnk; from the &table-menu-lnk;)</para>
     </listitem>
   </varlistentry>
   <varlistentry>
-    <term><link linkend="sec-intro-matrix">A Matrix</link></term>
+    <term><link linkend="sec-intro-matrix">Matrix</link></term>
     <listitem>
       <indexterm><primary>Matrix</primary></indexterm>
       <para>A matrix is a special table which is used to store the data points for surface 3D plots. It contains Z-values and doesn't include any column or row which could be designed as X-values or Y-values. Nevertheless, you can specify the X-values and the Y-values with the &set-coordinates-lnk; command from the &matrix-menu-lnk;.</para>
@@ -147,7 +162,10 @@ revision history. (see installation appendix comment) -->
 -->
 <sect2 id="sec-intro-table">
 <title>Tables</title>
-      <indexterm><primary>Table</primary></indexterm>
+
+<indexterm>
+  <primary>Table</primary>
+</indexterm>
 
 <para>The table is the main part of &appname; when working with data. For controlling and converting data the spreadsheet contains a highly customizable table: all colors and font preferences can be set using the &preferences-lnk; of the &edit-menu-lnk;. You can resize a table in terms of rows and columns using the &table-dimensions-lnk; command of the &table-menu-lnk;. On the left side of the table, the button can be used to develop the properties tags. This allows to customize the main parameters of the table.</para>
 
@@ -162,7 +180,10 @@ revision history. (see installation appendix comment) -->
 
 <para>In a spreadsheet, columns can have the following flags: X, Y, Z, X-error, Y-error or can be simple columns without any special flag. The X columns are abscissae columns while the Y columns are ordinates columns used when creating a 2D plot from data. The X-error and Y-error columns can be used in order to add error bars to 2D plots. These flags can be changed using the &set-column-as-lnk;.</para>
 
-<para>The tag which is selected in the following figure is used to assign a type to columns: numeric, text, date or time. The format used to display the data can then be chosen, the format in tables is not used for plots (use the &format-axes-lnk; to define display format for axes labels).</para>
+<indexterm>
+  <primary>Table</primary><secondary>Number format</secondary>
+</indexterm>
+<para>The tag which is selected in figure <xref xrefstyle="select: labelnumber" linkend="fig-the-table"/> is used to assign a type to columns: numeric, text, date or time. The format used to display the data can then be chosen, the format in tables is not used for plots (use the &format-axes-lnk; to define display format for axes labels).</para>
 
 <figure id="fig-the-table_2">
   <title>The two other tags of the properties dialog of &appname; tables.</title>
@@ -173,41 +194,51 @@ revision history. (see installation appendix comment) -->
   </mediaobject>
 </figure>
 
-<indexterm><primary>Table</primary><secondary>Labels</secondary></indexterm>
-<para>Every column of the table has a label, this can be defined in the description tag.  This label will be used by default in plots for curve selection and legend display. You can use complex labels with spaces and special characters like "Vol (cc/g)" if needed. This command can also be reached by the &edit-column-description-lnk; of the &table-menu-lnk;.</para>
+<indexterm>
+  <primary>Table</primary><secondary>Labels</secondary>
+</indexterm>
+<para>Every column of the table has a label, this can be defined in the description tag (figure <xref xrefstyle="select: labelnumber" linkend="fig-the-table_2"/>). This label will be used by default in plots for curve selection and legend display. You can use complex labels with spaces and special characters like "Vol (cc/g)" if needed. This command can also be reached by the &edit-column-description-lnk; of the &table-menu-lnk;.</para>
 
-<para>The last tag of the properties dialog correspond to the command &assign-formula-lnk; of the &table-menu-lnk;. It is used to fill the column with the result of a mathematic expression. Refer to the &assign-formula-lnk; for more details.</para>
+<indexterm>
+  <primary>Table</primary><secondary>Assign formula</secondary>
+</indexterm>
+<para>The last tag of the properties dialog correspond to the command &assign-formula-lnk; of the &table-menu-lnk; (figure <xref xrefstyle="select: labelnumber" linkend="fig-the-table_2"/>). It is used to fill the column with the result of a mathematic expression. Refer to the &assign-formula-lnk; for more details.</para>
 
 <para> You can select all the columns of the spreadsheet (<keycode>Ctrl+A</keycode>) or only some of them by clicking on the column label while keeping the <keycode>Ctrl</keycode> key pressed, or by moving the mouse over the column label. This also allows you to deselect columns.</para>
 
 <para> On the selected columns you can perform various operations: </para>
 <itemizedlist>
   <listitem>
-     <para>Fill with data. You can insert the row numbers (&fill-column-with-row-number-lnk;), random numbers (&fill-column-with-random-values-lnk;), or the result of a function (&assign-formula-lnk;);</para>
+    <para>Fill with data. You can insert the row numbers (&fill-column-with-row-number-lnk;), random numbers (&fill-column-with-random-values-lnk;), or the result of a function (&assign-formula-lnk;);</para>
   </listitem>
   <listitem>
-     <para>normalize columns;</para>
+    <para>
+    <indexterm>
+      <primary>table</primary><secondary>normalize columns</secondary>
+    </indexterm>
+    normalize columns with the <command>Normalize Columns</command> command of the context menu;</para>
   </listitem>
   <listitem>
-    <para>sort columns;</para>
+    <para>
+    <indexterm>
+      <primary>table</primary><secondary>sort columns</secondary>
+     </indexterm>
+    sort columns with the &sort-table-lnk; of the &table-menu-lnk; or with the <command>sort column</command> command of the context menu;</para>
   </listitem>
   <listitem>
-    <para>compute statistical data on columns;</para>
+    <para>compute statistical data on columns and rows with the &statistics-on-columns-lnk; and &statistics-on-rows-lnk; of the &analysis-tables-menu-lnk;;</para>
   </listitem>
   <listitem>
-    <para>build a plot from selected columns;</para>
+    <para>build a plot from selected columns with the <command>plot</command> command of the context menu or with the commands of the &plot-menu-lnk;.</para>
   </listitem>
 </itemizedlist>
-<para>All these functions can be reached by right clicking on the column label. Some of them can also be reached by using the &table-menu-lnk;.</para>
+<para>All these functions can be reached by right clicking when a column is selected. Most of them can also be reached by using the &table-menu-lnk;.</para>
 
-<para> Any other spreadsheet function: rename, duplicate, print, close can be reached via the context menu (right click anywhere in the table outside the column labels area). </para>
+<para>You can cut, copy and paste data between spreadsheets or between a spreadsheet and another application (Excel, Gnumeric, OpenOffice Calc, etc).</para>
 
-<para> You can cut, copy and paste data between spreadsheets or between a spreadsheet and another application (Excel, Gnumeric, etc...).</para>
-
-<para> You can import single or multiple ASCII files using the &import-ascii-lnk; from the &file-menu-lnk;. Of course you can export the data from the spreadsheet to a text file using the &export-ascii-lnk;.</para>
+<para>You can import single or multiple ASCII files using the &import-ascii-lnk; from the &file-menu-lnk;. This will create one or more new tables. You can also export the data from the spreadsheet to a text file using the &export-ascii-lnk;.</para>
 
 </sect2>
-
 <!--
 		General description of a matrix
 		===============================
@@ -216,7 +247,7 @@ revision history. (see installation appendix comment) -->
   <title>Matrix</title>
   <indexterm><primary>Matrix</primary></indexterm>
   <para>The matrix is a special table which is used for data which depends on two variables. This special table is used to store data for 3D-plots. The difference between a table and a matrix is that there is that columns are assigned to the abscissae x while rows define abscissae y.</para>
-  <para>The defaut size of a matrix is 32x32 cells. You can modify this size with the &matrix-dimensions-lnk;. Column and row numbers are named i and j respectively, ranging from 1 to the size of the matrix. You can specify an X-scale and an Y-scale with the &set-coordinates-lnk;, this define values of x and y for columns and rows.</para>
+  <para>The defaut size of a matrix is 32x32 cells. You can modify this size with the &matrix-dimensions-lnk;. Column and row numbers are named i and j respectively, ranging from 1 to the size of the matrix. You can specify an X-scale and an Y-scale with the &set-coordinates-lnk;, this define values of x and y for columns and rows (figure <xref xrefstyle="select: labelnumber" linkend="fig-matrix"/>).</para>
 
 <figure id="fig-matrix">
   <title>The &appname; matrix</title>
@@ -244,7 +275,7 @@ revision history. (see installation appendix comment) -->
 <indexterm><primary>Plot</primary><secondary>Layer</secondary></indexterm>
 
 <para>The plot window is the one in which the graphic is plotted. The main container of the plot window is the layer. You can have several layers in a plot, which may be arranged as you want. Each layer can contain a plot, or another item like a label.</para>
-<para>Each new plot can be inserted in a new layer of this plot window, it has its own geometry and graphic properties (background color, frame, etc). The example presented below shows a graph with two layers which have different geometries.</para>
+<para>Each new plot can be inserted in a new layer of this plot window, it has its own geometry and graphic properties (background color, frame, etc). The figure <xref xrefstyle="select: labelnumber" linkend="fig-plot-window"/> shows a graph with two layers which have different geometries. Inside a layer, the area in which the curves are plotted is the <emphasis>canvas</emphasis>.</para>
 
 <figure id="fig-plot-window">
   <title>An example of &appname; 2D graph with 2 layers.</title>
@@ -255,9 +286,7 @@ revision history. (see installation appendix comment) -->
   </mediaobject>
 </figure>
 
-<para>Each layer can be activated by clicking on the corresponding gray button  <inlinemediaobject><imageobject><imagedata format="PNG" fileref="pics/layer-button.png"/></imageobject></inlinemediaobject> in the top-left corner of the window.</para>
-
-<para>The elements which can be accessed by a double click in a layer are:</para>
+<para>Each layer can be activated by clicking on the corresponding gray button  <inlinemediaobject><imageobject><imagedata format="PNG" fileref="pics/layer-button.png"/></imageobject></inlinemediaobject> in the top-left corner of the window. The elements which can be accessed by a double click in a layer are:</para>
 
 <itemizedlist>
 <listitem>
@@ -277,15 +306,13 @@ format-plot-cmd">Plot details</link> dialog box. You can then change the way the
 
 <!--
 		General description of a note
-		===========================================
+		=============================
 -->
 <sect2 id="sec-intro-note">
 <title>Note</title>
 
 <indexterm><primary>Note</primary></indexterm>
-<para>A note can simply be used to insert text (comments, notes, etc) into a project,
-  but is really far more powerfull than that. It can be used as a calculator,
-  for executing single commands and for writing scripts.</para>
+<para>A note can simply be used to insert text (comments, notes, etc) into a project, but is really far more powerfull than that. It can be used as a calculator, for executing single commands and for writing scripts.</para>
 
 <figure id="fig-note-window">
   <title>The &appname; Note Window</title>
@@ -298,9 +325,11 @@ format-plot-cmd">Plot details</link> dialog box. You can then change the way the
 
 <para>You can also change the text input method. <emphasis>Simple Composing Input Method</emphasis> is the standard method to enter text in QT applications. <emphasis>Xim</emphasis> is the X input method, it is the legacy system of the X window environment to support localized text input. The default choice is the second one, it allows to enter special characters and accents from your localised environment.</para>
 
-<indexterm><primary>Calculator</primary><see>Note</see></indexterm>
+<indexterm>
+  <primary>Calculator</primary><see>Note</see>
+</indexterm>
 
-<para>Evaluation of mathematical expressions and execution of code is done via a note's context menu, the Scripting menu or the convenient keyboard shortcuts. In the following figure, you just need to place the cursor on an expression and use the <keycode>Ctrl-Return</keycode> command to evaluate the expression.</para>
+<para>The second use of notes is calculator. The evaluation of mathematical expressions and execution of code is done via a note's context menu, the Scripting menu or the convenient keyboard shortcuts. In figure <xref xrefstyle="select: labelnumber" linkend="fig-note-window-1"/>, it is shown that you just need to place the cursor on an expression and use the <keycode>Ctrl-Return</keycode> command to evaluate the expression.</para>
 
 <figure id="fig-note-window-1">
   <title>The &appname; Note Window used as a calculator</title>
@@ -310,6 +339,8 @@ format-plot-cmd">Plot details</link> dialog box. You can then change the way the
     </imageobject>
   </mediaobject>
 </figure>
+
+<para>you can define variables and refer to them to build complex expressions, but you must evaluate each line with the <keycode>Ctrl-Return</keycode> command to fill the variable with its value. All variable are private to the note in which it is defined, and you can't refer to it in another note. With a right click, you access to the context menu which contains the list of all available mathematical functions.</para>
 
 <para>For information on expression syntax, supported mathematical functions and how to write scripts, see the <link linkend="scripting">scripting section</link>.</para>
 
@@ -321,6 +352,12 @@ format-plot-cmd">Plot details</link> dialog box. You can then change the way the
 -->
 <sect2 id="sec-intro-log-window">
 <title>Log Window</title>
+<indexterm>
+  <primary>Log Window</primary>
+</indexterm>
+<indexterm>
+  <primary>Analysis</primary><secondary>Results</secondary>
+</indexterm>
 
 <para>This window keeps a history of all analysis which have been done in the project. This panel contains the results of all the correlations, fittings, etc. It can be shown or hidden with the &results-log-lnk; of the &view-menu-lnk;.</para>
 
@@ -332,7 +369,7 @@ format-plot-cmd">Plot details</link> dialog box. You can then change the way the
     </imageobject>
   </mediaobject>
 </figure>
-<para>You can clear the content of the log window with the command &clear-log-information-lnk; of the &edit-menu-lnk;.</para>
+<para>You can clear the content of the log window with the command &clear-log-information-lnk; of the &edit-menu-lnk;. If you load a project for which some analysis has been done, the computations will be done again and the log window will be filled with the results.</para>
 
 </sect2>
 
@@ -342,6 +379,9 @@ format-plot-cmd">Plot details</link> dialog box. You can then change the way the
 -->
 <sect2 id="sec-intro-project-explorer">
 <title>The Project Explorer</title>
+<indexterm>
+  <primary>Project Explorer</primary>
+</indexterm>
 
 <para>The project explorer can be opened/closed using the &project-explorer-lnk; from the &view-menu-lnk; or by clicking on the &project-explorer-icon; in the <link linkend="sec-file-toolbar">file toolbar</link>.</para>
 
@@ -362,5 +402,4 @@ format-plot-cmd">Plot details</link> dialog box. You can then change the way the
 
 </sect1>
 
-</chapter>
 
