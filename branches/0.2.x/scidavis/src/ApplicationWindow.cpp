@@ -9177,12 +9177,16 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 	else
 	{
 		Matrix* w = app->newMatrix("matrix", 1, 1);
-		QString xml(flist.at(1));
+		int length = flist.at(0).toInt();
+		int index = 1;
+		QString xml(flist.at(index++));
+		while (xml.length() < length && index < flist.size())
+			xml += '\n' + flist.at(index++);
 		XmlStreamReader reader(xml);
 		reader.readNext();
 		reader.readNext(); // read the start document
 		w->d_future_matrix->load(&reader);
-		restoreWindowGeometry(app, w, flist.at(2));
+		restoreWindowGeometry(app, w, flist.at(index));
 
 		return w;
 	}
@@ -9281,12 +9285,16 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 	else
 	{
 		Table* w = app->newTable("table", 1, 1);
-		QString xml(flist.at(1));
+		int length = flist.at(0).toInt();
+		int index = 1;
+		QString xml(flist.at(index++));
+		while (xml.length() < length && index < flist.size())
+			xml += '\n' + flist.at(index++);
 		XmlStreamReader reader(xml);
 		reader.readNext();
 		reader.readNext(); // read the start document
 		w->d_future_table->load(&reader);
-		restoreWindowGeometry(app, w, flist.at(2));
+		restoreWindowGeometry(app, w, flist.at(index));
 
 		return w;
 	}

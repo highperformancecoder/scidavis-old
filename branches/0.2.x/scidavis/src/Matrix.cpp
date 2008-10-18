@@ -182,7 +182,7 @@ QString Matrix::saveToString(const QString &geometry)
 	QString xml;
 	QXmlStreamWriter writer(&xml);
 	d_future_matrix->save(&writer);
-	s += QString::number(xml.length()) + "\n"; // don't know if this is needed, can't hurt though
+	s += QString::number(xml.length()) + "\n"; // this is need in case there are newlines in the XML
 	s += xml + "\n";
 	s += geometry + "\n";
 	s +="</matrix>\n";

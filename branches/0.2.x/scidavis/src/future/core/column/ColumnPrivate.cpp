@@ -325,7 +325,7 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode)
 				QSettings settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
 #endif
 				settings.beginGroup("/General");
-				static_cast<Double2StringFilter *>(d_output_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
+				static_cast<Double2StringFilter *>(new_out_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
 			}
 #endif
 			connect(static_cast<Double2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),

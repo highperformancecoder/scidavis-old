@@ -28,6 +28,7 @@
  ***************************************************************************/
 #include "PlotCurve.h"
 #include "ScaleDraw.h"
+#include "core/column/Column.h"
 #include <QDateTime>
 #include <QMessageBox>
 #include <qwt_symbol.h>
@@ -128,8 +129,18 @@ void DataCurve::loadData()
 		remove();
 		return;
 	}
+	
+	Column *x_col_ptr = d_table->column(xcol);
+	Column *y_col_ptr = d_table->column(ycol);
+	
+	int endRow = d_end_row;
+	if (d_end_row >= x_col_ptr->rowCount())
+		endRow = x_col_ptr->rowCount() - 1;
 
-	int r = abs(d_end_row - d_start_row) + 1;
+	if (d_end_row >= y_col_ptr->rowCount())
+		endRow = y_col_ptr->rowCount() - 1;
+
+	int r = abs(endRow - d_start_row) + 1;
     QVarLengthArray<double> X(r), Y(r);
 	int xColType = d_table->columnType(xcol);
 	int yColType = d_table->columnType(ycol);
@@ -141,28 +152,27 @@ void DataCurve::loadData()
 	QDateTime date_time0;
 	QString date_time_fmt = d_table->columnFormat(xcol);
 	if (xColType == Table::Time){
-		for (int i = d_start_row; i <= d_end_row; i++ ){
-			QString xval=d_table->text(i,xcol);
-			if (!xval.isEmpty()){
-				time0 = QTime::fromString (xval, date_time_fmt);
+		for (int row = d_start_row; row <= endRow; row++ ) {
+			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
+				time0 = x_col_ptr->timeAt(row);
 				if (time0.isValid())
 					break;
 			}
 		}
 	} else if (xColType == Table::Date){
-		for (int i = d_start_row; i <= d_end_row; i++ ){
-			QString xval=d_table->text(i,xcol);
-			if (!xval.isEmpty()){
-				date0 = QDate::fromString (xval, date_time_fmt);
+		for (int row = d_start_row; row <= endRow; row++ ){
+			QString xval=d_table->text(row,xcol);
+			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
+				date0 = x_col_ptr->dateAt(row);
 				if (date0.isValid())
 					break;
 			}
 		}
 	} else if (xColType == Table::DateTime){
-		for (int i = d_start_row; i <= d_end_row; i++ ){
-			QString xval=d_table->text(i,xcol);
-			if (!xval.isEmpty()){
-				date_time0 = QDateTime::fromString (xval, date_time_fmt);
+		for (int row = d_start_row; row <= endRow; row++ ){
+			QString xval=d_table->text(row,xcol);
+			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
+				date_time0 = x_col_ptr->dateTimeAt(row);
 				if (date_time0.isValid())
 					break;
 			}
@@ -170,36 +180,74 @@ void DataCurve::loadData()
 	}
 
 	int size = 0;
-	for (int i = d_start_row; i <= d_end_row; i++ ){
-		QString xval = d_table->text(i,xcol);
-		QString yval = d_table->text(i,ycol);
-		    bool valid_data = true;
-			if (xColType == Table::Text){
-				xLabels.insert(i, xval);
-				X[size] = i;
-			} else if (xColType == Table::Time){
-				QTime time = QTime::fromString (xval, date_time_fmt);
+	for (int row = d_start_row; row <= endRow; row++ ) {
+		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
+			if (xColType == Table::Text) {
+				QString xval = x_col_ptr->textAt(row);
+				xLabels.insert(row, xval);
+				X[size] = (double)row;
+			}
+			else if (xColType == Table::Time) {
+				QTime time = x_col_ptr->timeAt(row);
 				if (time.isValid())
-					X[size]= time0.msecsTo (time);
-			} else if (xColType == Table::Date){
-				QDate d = QDate::fromString (xval, date_time_fmt);
+					X[size] = time0.msecsTo (time);
+				else
+					continue;
+			}
+			else if (xColType == Table::Date) {
+				QDate d = x_col_ptr->dateAt(row);
 				if (d.isValid())
 					X[size] = (double) date0.daysTo(d);
-			} else if (xColType == Table::DateTime){
-				QDateTime dt = QDateTime::fromString (xval, date_time_fmt);
+				else 
+					continue;
+			}
+			else if (xColType == Table::DateTime) {
+				QDateTime dt = x_col_ptr->dateTimeAt(row);
 				if (dt.isValid())
-					X[size] = (double) date_time0.daysTo(dt);
-			} else
-				X[size] = QLocale().toDouble(xval, &valid_data);
+				{
+					X[size] = double(dt.date().toJulianDay()) +
+						double( -dt.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
+				}
+				else
+					continue;
+			}
+			else
+				X[size] = x_col_ptr->valueAt(row);
 
-			if (yColType == Table::Text){
-				yLabels.insert(i, yval);
-				Y[size] = (double)(size + 1);
-			} else
-				Y[size] = QLocale().toDouble(yval, &valid_data);
+			if (yColType == Table::Text) {
+				yLabels.insert(size+1, y_col_ptr->textAt(row));
+				Y[size] = (double) (size + 1);
+			}
+			else if (yColType == Table::Time) {
+				QTime yval = y_col_ptr->timeAt(row);
+				if (yval.isValid()) {
+					Y[size] = double( -yval.msecsTo(QTime(12,0,0,0)) );
+				}
+				else 
+					Y[size] = 0.0;
+			}
+			else if (yColType == Table::Date) {
+				QDate yval = y_col_ptr->dateAt(row);
+				if (yval.isValid()) {
+					Y[size] = double( yval.toJulianDay() );
+				}
+				else 
+					Y[size] = 0.0;
+			}
+			else if (yColType == Table::DateTime) {
+				QDateTime yval = y_col_ptr->dateTimeAt(row);
+				if (yval.isValid()) {
+					Y[size] = double(yval.date().toJulianDay()) +
+						double( -yval.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
+				}
+				else 
+					Y[size] = 0.0;
+			}
+			else
+				Y[size] = y_col_ptr->valueAt(row);
 
-            if (valid_data)
-                size++;
+			size++;
+		}
 	}
 
     X.resize(size);

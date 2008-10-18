@@ -29,6 +29,7 @@
 #include "QwtPieCurve.h"
 #include "ColorBox.h"
 #include "Table.h"
+#include "core/column/Column.h"
 
 #include <QPaintDevice>
 #include <QPainter>
@@ -112,20 +113,29 @@ void QwtPieCurve::setBrushStyle(const Qt::BrushStyle& style)
 
 void QwtPieCurve::loadData()
 {
-	QVarLengthArray<double> X(abs(d_end_row - d_start_row) + 1);
+	QVarLengthArray<double> Y(abs(d_end_row - d_start_row) + 1);
 	int size = 0;
 	int ycol = d_table->colIndex(title().text());
-	for (int i = d_start_row; i <= d_end_row; i++ ){
-		QString xval = d_table->text(i, ycol);
-		bool valid_data = true;
-		if (!xval.isEmpty()){
-            X[size] = QLocale().toDouble(xval, &valid_data);
-            if (valid_data)
-                size++;
+	Column *y_col_ptr = d_table->column(ycol);
+	int yColType = d_table->columnType(ycol);
+
+	for (int row = d_start_row; row <= d_end_row && row < y_col_ptr->rowCount(); row++ ) {
+		if (!y_col_ptr->isInvalid(row)) {
+			if (yColType == Table::Text) {
+				QString yval = y_col_ptr->textAt(row);
+				bool valid_data = true;
+				Y[size] = QLocale().toDouble(yval, &valid_data);
+				if (!valid_data)
+					continue;
+			}
+			else
+				Y[size] = y_col_ptr->valueAt(row);
+
+			size++;
 		}
 	}
-	X.resize(size);
-	setData(X.data(), X.data(), size);
+	Y.resize(size);
+	setData(Y.data(), Y.data(), size);
 }
 
 void QwtPieCurve::updateBoundingRect()

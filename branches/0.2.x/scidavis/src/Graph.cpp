@@ -3007,6 +3007,9 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 	int ycol = w->colIndex(name);
 	int size = 0;
 	double sum = 0.0;
+	
+	Column *y_col_ptr = w->column(ycol);
+	int yColType = w->columnType(ycol);
 
 	if (endRow < 0)
 		endRow = w->numRows() - 1;
@@ -3020,15 +3023,20 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 	static_cast<QwtPlotCanvas*>(d_plot->canvas())->setLineWidth(1);
 
 	QVarLengthArray<double> Y(abs(endRow - startRow) + 1);
-	for (int i = startRow; i<= endRow; i++){
-		QString yval = w->text(i,ycol);
-		if (!yval.isEmpty()){
-		    bool valid_data = true;
-			Y[size] = QLocale().toDouble(yval, &valid_data);
-			if (valid_data){
-                sum += Y[size];
-                size++;
+	for (int row = startRow; row<= endRow && row<y_col_ptr->rowCount(); row++) {
+		if (!y_col_ptr->isInvalid(row)) {
+			if (yColType == Table::Text) {
+				QString yval = y_col_ptr->textAt(row);
+				bool valid_data = true;
+				Y[size] = QLocale().toDouble(yval, &valid_data);
+				if (!valid_data)
+					continue;
 			}
+			else
+				Y[size] = y_col_ptr->valueAt(row);
+
+			sum += Y[size];
+			size++;
 		}
 	}
 	if (!size)
@@ -3194,6 +3202,7 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	int row, size=0;
 	QString date_time_fmt = w->columnFormat(xcol);
 	QMap<int, QString> xLabels, yLabels;// store text labels
+
 	QTime time0;
 	QDate date0;
 	QDateTime date_time0;
@@ -3201,6 +3210,11 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 
 	if (endRow < 0)
 		endRow = w->numRows() - 1;
+
+	if (endRow >= x_col_ptr->rowCount())
+		endRow = x_col_ptr->rowCount() - 1;
+	if (endRow >= y_col_ptr->rowCount())
+		endRow = y_col_ptr->rowCount() - 1;
 
 	int r = abs(endRow - startRow) + 1;
     QVector<double> X(r), Y(r);
@@ -3264,7 +3278,7 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 					continue;
 			}
 			else
-                X[size] = x_col_ptr->valueAt(row);
+				X[size] = x_col_ptr->valueAt(row);
 
 			if (yColType == Table::Text) {
 				yLabels.insert(size+1, y_col_ptr->textAt(row));
@@ -3296,10 +3310,10 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 					Y[size] = 0.0;
 			}
 			else
-                Y[size] = y_col_ptr->valueAt(row);
+				Y[size] = y_col_ptr->valueAt(row);
 
-                size++;
-			}
+			size++;
+		}
 	}
 
 	if (!size)
