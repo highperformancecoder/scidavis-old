@@ -467,6 +467,7 @@ void TableView::showControlDescriptionTab()
 	d_control_tabs->setVisible(true);
 	d_hide_button->setArrowType(Qt::RightArrow);
 	ui.tab_widget->setCurrentIndex(0);
+	ui.tab_widget->setFocus();
 }
 
 void TableView::showControlTypeTab()
@@ -474,6 +475,7 @@ void TableView::showControlTypeTab()
 	d_control_tabs->setVisible(true);
 	d_hide_button->setArrowType(Qt::RightArrow);
 	ui.tab_widget->setCurrentIndex(1);
+	ui.tab_widget->setFocus();
 }
 
 void TableView::showControlFormulaTab()
@@ -481,6 +483,7 @@ void TableView::showControlFormulaTab()
 	d_control_tabs->setVisible(true);
 	d_hide_button->setArrowType(Qt::RightArrow);
 	ui.tab_widget->setCurrentIndex(2);
+	ui.tab_widget->setFocus();
 }
 
 void TableView::applyDescription()

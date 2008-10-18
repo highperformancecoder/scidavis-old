@@ -926,6 +926,8 @@ public:
 	//! default precision to be used for all other operations than fitting
 	int d_decimal_digits;
 
+	char d_default_numeric_format;
+
 	//! pointer to the current folder in the project
 	Folder *current_folder;
 	//! Describes which windows are shown when the folder becomes the current folder

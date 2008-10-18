@@ -607,9 +607,12 @@ void ConfigDialog::initAppPage()
 	boxSeparatorPreview->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 	numericFormatLayout->addWidget(boxSeparatorPreview, 2, 1);
 
-    boxUpdateSeparators = new QCheckBox();
-    boxUpdateSeparators->setChecked(true);
-    numericFormatLayout->addWidget(boxUpdateSeparators, 3, 0);
+	lblDefaultNumericFormat = new QLabel();
+	boxDefaultNumericFormat = new QComboBox();
+
+    numericFormatLayout->addWidget(lblDefaultNumericFormat, 3, 0);
+    numericFormatLayout->addWidget(boxDefaultNumericFormat, 3, 1);
+
 	numericFormatLayout->setRowStretch(4, 1);
 
 	appTabWidget->addTab( numericFormatPage, QString() );
@@ -883,7 +886,14 @@ void ConfigDialog::languageChange()
 	boxMinutes->setSuffix(tr(" minutes"));
 	lblScriptingLanguage->setText(tr("Default scripting language"));
 
-    boxUpdateSeparators->setText(tr("Update separators in Tables/Matrices"));
+    lblDefaultNumericFormat->setText(tr("Default numeric format"));
+	boxDefaultNumericFormat->clear();
+	boxDefaultNumericFormat->addItem(tr("Decimal"), QVariant('f'));
+	boxDefaultNumericFormat->addItem(tr("Scientific (e)"), QVariant('e'));
+	boxDefaultNumericFormat->addItem(tr("Scientific (E)"), QVariant('E'));
+	int format_index = boxDefaultNumericFormat->findData(app->d_default_numeric_format);
+	boxDefaultNumericFormat->setCurrentIndex(format_index);
+
     boxUseGroupSeparator->setText(tr("Use group separator","option: use separator every 3 digits"));
 	lblAppPrecision->setText(tr("Default Number of Decimal Digits"));
 	lblDecimalSeparator->setText(tr("Decimal Separators"));
@@ -1093,6 +1103,12 @@ void ConfigDialog::apply()
             locale = QLocale(QLocale::French);
         break;
     }
+
+	int currentBoxIndex = boxDefaultNumericFormat->currentIndex();
+	if (currentBoxIndex > -1)
+	{
+		app->d_default_numeric_format = boxDefaultNumericFormat->itemData(currentBoxIndex).toChar().toAscii();
+	}
 
     if(boxUseGroupSeparator->isChecked())
 		locale.setNumberOptions(locale.numberOptions() & ~QLocale::OmitGroupSeparator);

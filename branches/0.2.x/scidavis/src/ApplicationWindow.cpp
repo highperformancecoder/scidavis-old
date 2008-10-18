@@ -2678,7 +2678,7 @@ void ApplicationWindow::initMatrix(Matrix* m)
 {
 	m->setIcon( QPixmap(":/matrix.xpm") );
 	m->askOnCloseEvent(confirmCloseMatrix);
-	m->setNumericPrecision(d_decimal_digits);
+	m->setNumericFormat(d_default_numeric_format, d_decimal_digits);
 	m->setFolder(current_folder);
 	
 	current_folder->addWindow(m);
@@ -4132,6 +4132,7 @@ void ApplicationWindow::readSettings()
 	QLocale::setDefault(temp_locale);
 
 	d_decimal_digits = settings.value("/DecimalDigits", 14).toInt();
+	d_default_numeric_format = settings.value("/DefaultNumericFormat", 'f').toChar().toAscii();
 
 	//restore dock windows and tool bars
 	restoreState(settings.value("/DockWindows").toByteArray());
@@ -4402,6 +4403,7 @@ void ApplicationWindow::saveSettings()
 	settings.setValue("/Locale", QLocale().name());
 	settings.setValue("/LocaleUseGroupSeparator", bool(!(QLocale().numberOptions() & QLocale::OmitGroupSeparator)));
 	settings.setValue("/DecimalDigits", d_decimal_digits);
+	settings.setValue("/DefaultNumericFormat", QChar(d_default_numeric_format));
 
 	settings.setValue("/DockWindows", saveState());
 	settings.setValue("/ExplorerSplitter", explorerSplitter->saveState());

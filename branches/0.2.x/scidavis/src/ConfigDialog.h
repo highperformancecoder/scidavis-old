@@ -132,7 +132,7 @@ private:
 	QFont plot3DTitleFont, plot3DNumbersFont, plot3DAxesFont;
 	QStringList plot3DColors;
 
-	QCheckBox *boxScaleLayersOnPrint, *boxPrintCropmarks, *boxUpdateSeparators, *linearFit2PointsBox;
+	QCheckBox *boxScaleLayersOnPrint, *boxPrintCropmarks, *linearFit2PointsBox;
 	QTabWidget *plotsTabWidget, *appTabWidget;
 	QPushButton *btnBackground3D, *btnMesh, *btnAxes, *btnLabels, *btnNumbers;
 	QPushButton *btnFromColor, *btnToColor, *btnGrid;
@@ -149,6 +149,8 @@ private:
 	QCheckBox *boxSave, *boxBackbones, *boxAllAxes, *boxShowLegend, *boxSmoothMesh;
 	QCheckBox *boxAutoscaling, *boxShowProjection, *boxMatrices, *boxScaleFonts, *boxResize, *boxUseGroupSeparator;
 	QComboBox *boxMajTicks, *boxMinTicks, *boxStyle, *boxCurveStyle, *boxSeparator, *boxLanguage, *boxDecimalSeparator;
+	QLabel *lblDefaultNumericFormat;
+	QComboBox *boxDefaultNumericFormat;
 	QLabel *boxSeparatorPreview;
 	QSpinBox *boxMinutes, *boxLineWidth, *boxFrameWidth, *boxResolution, *boxMargin, *boxPrecision, *boxAppPrecision;
 	QSpinBox *boxCurveLineWidth, *boxSymbolSize, *boxMinTicksLength, *boxMajTicksLength, *generatePointsBox;
