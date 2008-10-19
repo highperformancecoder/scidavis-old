@@ -815,7 +815,19 @@ int Table::columnCount()
 
 double Table::cell(int row, int col)
 {
-	return column(col)->valueAt(row);
+	if (!column(col)->isInvalid(row)) {
+		if (column(col)->columnMode() == Table::Text) {
+			QString yval = column(col)->textAt(row);
+			bool valid_data = true;
+			double dbval = QLocale().toDouble(yval, &valid_data);
+			if (!valid_data)
+				return 0.0;
+			return dbval;
+		}
+		return column(col)->valueAt(row);
+	}
+	else
+		return 0.0;
 }
 
 void Table::setCell(int row, int col, double val)

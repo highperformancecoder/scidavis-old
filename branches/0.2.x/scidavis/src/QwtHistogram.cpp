@@ -27,6 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "QwtHistogram.h"
+#include "core/column/Column.h"
 #include <QPainter>
 #include <QLocale>
 
@@ -99,16 +100,24 @@ void QwtHistogram::loadData()
 	QVarLengthArray<double> Y(r);
 
     int ycol = d_table->colIndex(title().text());
+	Column *y_col_ptr = d_table->column(ycol);
+	int yColType = d_table->columnType(ycol);
 	int size = 0;
-	for (int i = 0; i<r; i++ ){
-		QString yval = d_table->text(i, ycol);
-		if (!yval.isEmpty()){
-		    bool valid_data = true;
-            Y[size] = QLocale().toDouble(yval, &valid_data);
-            if (valid_data)
-                size++;
+	for (int row = d_start_row; row <= d_end_row && row < y_col_ptr->rowCount(); row++) {
+		if (!y_col_ptr->isInvalid(row)) {
+			if (yColType == Table::Text) {
+				QString yval = y_col_ptr->textAt(row);
+				bool valid_data = true;
+				Y[size] = QLocale().toDouble(yval, &valid_data);
+				if (!valid_data)
+					continue;
+			}
+			else
+				Y[size] = y_col_ptr->valueAt(row);
+			size++;
 		}
 	}
+
 	if(size < 2 || (size==2 && Y[0] == Y[1])){//non valid histogram
 		double X[2];
 		Y.resize(2);

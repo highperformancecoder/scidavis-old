@@ -28,6 +28,7 @@
  ***************************************************************************/
 #include "QwtErrorPlotCurve.h"
 #include "QwtBarCurve.h"
+#include "core/column/Column.h"
 
 #include <qwt_painter.h>
 #include <qwt_symbol.h>
@@ -248,51 +249,61 @@ void QwtErrorPlotCurve::loadData()
 
 	int xcol = mt->colIndex(d_master_curve->xColumnName());
 	int ycol = mt->colIndex(d_master_curve->title().text());
+
 	int errcol = d_table->colIndex(title().text());
 	if (xcol<0 || ycol<0 || errcol<0)
 		return;
 
+	Column *x_col_ptr = d_table->column(xcol);
+	Column *y_col_ptr = d_table->column(ycol);
+	Column *err_col_ptr = d_table->column(errcol);
 	int xColType = mt->columnType(xcol);
 	int yColType = mt->columnType(ycol);
+	int errColType = mt->columnType(errcol);
 
 	d_start_row = d_master_curve->startRow();
 	d_end_row = d_master_curve->endRow();
-    int r = abs(d_end_row - d_start_row) + 1;
+
+	int endRow = d_end_row;
+	if (d_end_row >= x_col_ptr->rowCount())
+		endRow = x_col_ptr->rowCount() - 1;
+
+	if (d_end_row >= y_col_ptr->rowCount())
+		endRow = y_col_ptr->rowCount() - 1;
+
+	int r = abs(endRow - d_start_row) + 1;
 	QVector<double> X(r), Y(r), err(r);
-    int data_size = 0;
-	for (int i = d_start_row; i <= d_end_row; i++){
-		QString xval = mt->text(i, xcol);
-		QString yval = mt->text(i, ycol);
-		QString errval = d_table->text(i, errcol);
-		if (!xval.isEmpty() && !yval.isEmpty() && !errval.isEmpty()){
-		    bool ok = true;
-			if (xColType == Table::Text)
-				X[data_size] = (double)(data_size + 1);
-			else
-				X[data_size] = QLocale().toDouble(xval, &ok);
+    int size = 0;
 
-			if (yColType == Table::Text)
-				Y[data_size] = (double)(data_size + 1);
-			else
-				Y[data_size] = QLocale().toDouble(yval, &ok);
 
-            if (!ok)
-                continue;
+	for (int row = d_start_row; row <= endRow; row++) {
+		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row) && !err_col_ptr->isInvalid(row)) {
+			if (xColType == Table::Text) {
+				QString xval = x_col_ptr->textAt(row);
+				X[size] = (double)row;
+			} else
+				X[size] = x_col_ptr->valueAt(row);
 
-			err[data_size] = QLocale().toDouble(errval, &ok);
-			if (ok)
-                data_size++;
+			if (yColType == Table::Text) {
+				QString yval = y_col_ptr->textAt(row);
+				Y[size] = (double)row;
+			} else
+				Y[size] = y_col_ptr->valueAt(row);
+
+			err[size] = err_col_ptr->valueAt(row);
+
+			size++;
 		}
 	}
 
-	if (!data_size)
+	if (size == 0)
 		remove();
 
-    X.resize(data_size);
-	Y.resize(data_size);
-	err.resize(data_size);
+    X.resize(size);
+	Y.resize(size);
+	err.resize(size);
 
-	setData(X.data(), Y.data(), data_size);
+	setData(X.data(), Y.data(), size);
 	setErrors(err);
 }
 

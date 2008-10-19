@@ -30,6 +30,7 @@
 #include "Bar.h"
 #include "Cone3D.h"
 #include "MyParser.h"
+#include "core/column/Column.h"
 
 #include <QApplication>
 #include <QMessageBox>
@@ -242,7 +243,7 @@ void Graph3D::addData(Table* table, int xcol, int ycol)
 	int i, xmesh=0, ymesh=2;
 	for (i = 0; i < r; i++)
 	{
-		if (!table->text(i,xcol).isEmpty() && !table->text(i,ycol).isEmpty())
+		if (!table->column(xcol)->isInvalid(i) && !table->column(ycol)->isInvalid(i))
 			xmesh++;
 	}
 
@@ -258,7 +259,7 @@ void Graph3D::addData(Table* table, int xcol, int ycol)
 		int k=0;
 		for (i = 0; i < r; i++)
 		{
-			if (!table->text(i,xcol).isEmpty() && !table->text(i,ycol).isEmpty())
+			if (!table->column(xcol)->isInvalid(i) && !table->column(ycol)->isInvalid(i))
 			{
 				gsl_vector_set (x, k, table->cell(i, xcol));
 
@@ -372,7 +373,7 @@ void Graph3D::addData(Table* table,const QString& xColName,const QString& yColNa
 
 	for (i = 0; i < r; i++)
 	{
-		if (!table->text(i,xcol).isEmpty() && !table->text(i,ycol).isEmpty())
+		if (!table->column(xcol)->isInvalid(i) && !table->column(ycol)->isInvalid(i))
 		{
 			xv=table->cell(i, xcol);
 			if (xv>=xl && xv <= xr)
@@ -389,7 +390,7 @@ void Graph3D::addData(Table* table,const QString& xColName,const QString& yColNa
 		int k=0;
 		for ( i = 0; i < r; i++)
 		{
-			if (!table->text(i,xcol).isEmpty() && !table->text(i,ycol).isEmpty())
+			if (!table->column(xcol)->isInvalid(i) && !table->column(ycol)->isInvalid(i))
 			{
 				xv=table->cell(i,xcol);
 				if (xv>=xl && xv <= xr)
@@ -452,7 +453,7 @@ void Graph3D::addData(Table* table, int xCol,int yCol,int zCol, int type)
 	int i,j,columns=0;
 	for ( i = 0; i < r; i++)
 	{
-		if (!table->text(i,xCol).isEmpty() && !table->text(i,yCol).isEmpty() && !table->text(i,zCol).isEmpty())
+		if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
 			columns++;
 	}
 
@@ -465,7 +466,7 @@ void Graph3D::addData(Table* table, int xCol,int yCol,int zCol, int type)
 		int k=0;
 		for ( i = 0; i < r; i++)
 		{
-			if(!table->text(i,xCol).isEmpty() && !table->text(i,yCol).isEmpty() && !table->text(i,zCol).isEmpty())
+			if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
 			{
 				double xv=table->cell(i,xCol);
 				double yv=table->cell(i,yCol);
@@ -524,7 +525,7 @@ void Graph3D::addData(Table* table, int xCol,int yCol,int zCol,
 	double xv,yv;
 	for ( i = 0; i < r; i++)
 	{
-		if (!table->text(i,xCol).isEmpty() && !table->text(i,yCol).isEmpty() && !table->text(i,zCol).isEmpty())
+		if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
 		{
 			xv=table->cell(i,xCol);
 			yv=table->cell(i,yCol);
@@ -542,7 +543,7 @@ void Graph3D::addData(Table* table, int xCol,int yCol,int zCol,
 		int k=0;
 		for ( i = 0; i < r; i++)
 		{
-			if (!table->text(i,xCol).isEmpty() && !table->text(i,yCol).isEmpty() && !table->text(i,zCol).isEmpty())
+			if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
 			{
 				xv=table->cell(i,xCol);
 				yv=table->cell(i,yCol);
@@ -609,7 +610,7 @@ void Graph3D::updateDataXY(Table* table, int xCol, int yCol)
 
 	for (i = 0; i < r; i++)
 	{
-		if (!table->text(i,xCol).isEmpty() && !table->text(i,yCol).isEmpty())
+		if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i))
 			xmesh++;
 	}
 
@@ -629,7 +630,7 @@ void Graph3D::updateDataXY(Table* table, int xCol, int yCol)
 		int k=0;
 		for ( i = 0; i < r; i++)
 		{
-			if (!table->text(i,xCol).isEmpty() && !table->text(i,yCol).isEmpty())
+			if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i))
 			{
 				double xv=table->cell(i,xCol);
 				double yv=table->cell(i,yCol);
@@ -667,7 +668,7 @@ void Graph3D::updateDataXYZ(Table* table, int xCol, int yCol, int zCol)
 
 	for ( i = 0; i < r; i++)
 	{
-		if (!table->text(i,xCol).isEmpty() && !table->text(i,yCol).isEmpty() && !table->text(i,zCol).isEmpty())
+		if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
 			columns++;
 	}
 
@@ -686,7 +687,7 @@ void Graph3D::updateDataXYZ(Table* table, int xCol, int yCol, int zCol)
 		int k=0;
 		for ( i = 0; i < r; i++)
 		{
-			if (!table->text(i,xCol).isEmpty() && !table->text(i,yCol).isEmpty() && !table->text(i,zCol).isEmpty())
+			if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
 			{
 				double xv=table->cell(i,xCol);
 				double yv=table->cell(i,yCol);
@@ -1474,7 +1475,7 @@ void Graph3D::updateScales(double xl, double xr, double yl, double yr,double zl,
 
 	for (i = 0; i < r; i++)
 	{
-		if (!worksheet->text(i,xcol).isEmpty() && !worksheet->text(i,ycol).isEmpty())
+		if (!worksheet->column(xcol)->isInvalid(i) && !worksheet->column(ycol)->isInvalid(i))
 		{
 			xv=worksheet->cell(i,xcol);
 			if (xv >= xl && xv <= xr)
@@ -1492,7 +1493,7 @@ void Graph3D::updateScales(double xl, double xr, double yl, double yr,double zl,
 		int k=0;
 		for ( i = 0; i < r; i++)
 		{
-			if (!worksheet->text(i,xcol).isEmpty() && !worksheet->text(i,ycol).isEmpty())
+			if (!worksheet->column(xcol)->isInvalid(i) && !worksheet->column(ycol)->isInvalid(i))
 			{
 				xv=worksheet->cell(i,xcol);
 				if (xv >= xl && xv <= xr)
@@ -1523,7 +1524,7 @@ void Graph3D::updateScales(double xl, double xr, double yl, double yr, double zl
 	double xv, yv, zv;
 	for ( i = 0; i < r; i++)
 	{
-		if (!worksheet->text(i,xCol).isEmpty() && !worksheet->text(i,yCol).isEmpty() && !worksheet->text(i,zCol).isEmpty())
+		if (!worksheet->column(xCol)->isInvalid(i) && !worksheet->column(yCol)->isInvalid(i) && !worksheet->column(zCol)->isInvalid(i))
 		{
 			xv=worksheet->cell(i,xCol);
 			yv=worksheet->cell(i,yCol);
@@ -1541,7 +1542,7 @@ void Graph3D::updateScales(double xl, double xr, double yl, double yr, double zl
 		int k=0;
 		for ( i = 0; i < r; i++)
 		{
-			if (!worksheet->text(i,xCol).isEmpty() && !worksheet->text(i,yCol).isEmpty() && !worksheet->text(i,zCol).isEmpty())
+			if (!worksheet->column(xCol)->isInvalid(i) && !worksheet->column(yCol)->isInvalid(i) && !worksheet->column(zCol)->isInvalid(i))
 			{
 				xv=worksheet->cell(i,xCol);
 				yv=worksheet->cell(i,yCol);
