@@ -61,6 +61,15 @@
 -->
   <!ENTITY % commands-entities SYSTEM "commands.docbook">
   %commands-entities;
+<!--
+	some entities for variable or parameters often used
+-->
+  <!ENTITY ymin "<emphasis>Y<subscript>min</subscript></emphasis>">
+  <!ENTITY ymax "<emphasis>Y<subscript>max</subscript></emphasis>">
+  <!ENTITY ymean "<emphasis>Y<subscript>mean</subscript></emphasis>">
+  <!ENTITY xmin "<emphasis>X<subscript>min</subscript></emphasis>">
+  <!ENTITY xmax "<emphasis>X<subscript>max</subscript></emphasis>">
+  <!ENTITY xmean "<emphasis>X<subscript>mean</subscript></emphasis>">
 ]
 >
 

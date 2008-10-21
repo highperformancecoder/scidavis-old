@@ -2,49 +2,53 @@
 		tutorial
 		========
 
-	This chapter gives a small overview of the features an a howto to obtain
-	the first simple plots.
+	This chapter gives an overview of the features 
+	and a howto to obtain most kinds of plots.
 -->
 <title>Drawing plots with &appname;</title>
 <!--
-================================================================================
+=========================================================================
 
-		2D plots
-		========
+		2D X-Y plots
+		============
 -->
 <sect1 id="sec-2d-plots">
-<title>2D plots</title>
+<title>2D X-Y plots</title>
+
 <indexterm><primary>Plot</primary></indexterm>
-<para>A 2D plot is based on curves which are defined by Y values as functions of X values. There are two ways to obtain a 2D plot depending on the way the (X,Y) values are defined:</para>
+<para>A 2D plot is based on curves which are defined by Y values as functions of X values. There are different ways to obtain a 2D plot depending on the way the (X,Y) values are defined:</para>
 
 <itemizedlist>
   <listitem>
     <para>You can have your (X,Y) values in a <link linkend="sec-intro-table">table</link>. You need to select at least one column as X values and one column as Y values. This is specified with the &set-column-as-lnk;. Then you can select the columns and use one command of the &plot-menu-lnk; to plot the data.</para>
   </listitem>
   <listitem>
-    <para>If you want to plot a function, you don't need a table. You can use directly the &new-function-plot-lnk;. This will open the corresponding dialog box and you will be able to define the mathematical expression of your function.</para>
+    <para>If you want to plot a function, you don't need a table. You can use directly the &new-function-plot-lnk;. This will open the corresponding dialog box and you will be able to define the mathematical expression of your function. In this case, plot can be obtained from functions in cartesian coordinates Y(X), but also in parametered coordinates (X(t),Y(t)), or in angular coordinates r(&thgr;);.</para>
   </listitem>
   <listitem>
     <para>The combined way is to define a <link linkend="sec-intro-table">table</link>, and then to fill in the table with the results of functions. This can be done with the &assign-formula-lnk;. Then you can select the columns and use one command of the &plot-menu-lnk; to plot the data.</para>
   </listitem>
 </itemizedlist>
 
-<para>&appname; will create a new plot window, and the plot will be inserted in a new layer</para>
+<para>&appname; will create a new graph window, and the plot will be inserted in a new layer.</para>
 
 <para>Once the plot is created, you can customize all the graphic items of the plot with the commands of the <link linkend="sec-format-menu">Format Menu</link>. You can add new items (text labels, lines or arrows, new legend, images) on the plot with the commands of the <link linkend="sec-graph-menu">Graph Menu</link>.</para>
 <!--
-======================================================================================
+============================================================================
 
-		small tutorial to obtain a 2D plot from a table
+		how to obtain a 2D plot from a table
+
 -->
 <sect2 id="sec-2d-plot-from-data">
 <title>2D plot from data.</title>
-<indexterm><primary>Plot</primary><secondary>Create from data</secondary></indexterm>
+<indexterm>
+  <primary>Plot</primary><secondary>Create from data</secondary>
+</indexterm>
 <para>The data must be stored in a <link linkend="sec-intro-table">table</link>. There are several possibilities to insert your (X,Y) values in the table: you can write them directly from the keyboard, or read them from a file. Here we will use the first solution, refer to the &import-ascii-lnk; to use the second one.</para>
 
 <para>The first step is to create an empty project with the &new-project-lnk; from the &file-menu-lnk;, you can also use the key &new-project-key; or the &new-project-icon; icon from the &file-toolbar-lnk;. Then create a new table with the &new-table-lnk; from the &file-menu-lnk; or with the &new-table-key; or with the &new-table-icon; icon from the &file-toolbar-lnk;.</para>
 
-<para>At its creation, the table has two column (one for X and one for Y) and 32 rows. You can add rows and columns by selecting a row or a column and using the right button of the mouse, you can also modify the number of rows and columns with the &table-dimensions-lnk; from the &table-menu-lnk;. Then, enter your values, and you obtain this table:</para> 
+<para>At its creation, the table has two column (one for X and one for Y) and 32 rows. You can add rows and columns by selecting a row or a column and using the right button of the mouse, you can also modify the number of rows and columns with the &table-dimensions-lnk; from the &table-menu-lnk;. Then, enter your values, and you obtain the table shown in figure <xref xrefstyle="select: labelnumber" linkend="fig-simple-2dplot-1"/></para> 
 
 <figure id="fig-simple-2dplot-1">
   <title>A simple 2D plot: the table.</title>
@@ -55,7 +59,7 @@
   </mediaobject>
 </figure>
 
-<para>Then, you have to select the two columns, and build your plot (here a simple 2D scatter) with the &scatter-lnk; from the context menu, or by clicking on the corresponding &scatter-icon; icon from the &plot-toolbar-lnk; or with the &scatter-lnk; from the &plot-menu-lnk;. A plot is created which uses the default options for all elements. You can customize these default options with the <link linkend="sec-preferences-2d-plot">2D plot preferences dialog</link>. With the default options, you obtain the following plot:</para>
+<para>Then, you have to select the two columns, and build your plot (here a simple 2D scatter) with the &scatter-lnk; from the context menu, or by clicking on the corresponding &scatter-icon; icon from the &plot-toolbar-lnk; or with the &scatter-lnk; from the &plot-menu-lnk;. A plot is created which uses the default options for all elements. You can customize these default options with the <link linkend="sec-preferences-2d-plot">2D plot preferences dialog</link>. With the default options, you obtain the plot shown in figure <xref xrefstyle="select: labelnumber" linkend="fig-simple-2dplot-2"/>.</para>
 
 <figure id="fig-simple-2dplot-2">
   <title>A simple 2D plot: the default plot.</title>
@@ -66,7 +70,7 @@
   </mediaobject>
 </figure>
 
-<para>You can now customize your plot with the commands of the &format-menu-lnk;. By double clicking on the data points, you open the &format-plot-lnk; dialog which is used to modify the symbols. Then a double-click on the axes opens the &format-axes-lnk; dialog, and you can change the scales, the fonts for the axes labels, etc. You can also add grid lines on X or Y axes (&format-grid-lnk;), etc. Finally, a double click on each text item (X title, Y title, plot title) allows to change the text and the presentation of these elements. See the <link linkend="sec-customize-2d-plot">customize section</link> for more details. The final plot is for example:</para>
+<para>You can now customize your plot with the commands of the &format-menu-lnk;. By double clicking on the data points, you open the &format-plot-lnk; dialog which is used to modify the symbols. Then a double-click on the axes opens the &format-axes-lnk; dialog, and you can change the scales, the fonts for the axes labels, etc. You can also add grid lines on X or Y axes (&format-grid-lnk;), etc. Finally, a double click on each text item (X title, Y title, plot title) allows to change the text and the presentation of these elements. See the <link linkend="sec-customize-2d-plot">customize section</link> for more details. An example of the final plot is shown in figure <xref xrefstyle="select: labelnumber" linkend="fig-simple-2dplot-3"/>.</para>
 
 <figure id="fig-simple-2dplot-3">
   <title>A simple 2D plot: the plot finished.</title>
@@ -80,9 +84,10 @@
 <para>Finally, you have to save your project in a '.&file-ext;' file with the &save-project-lnk; from the &file-menu-lnk; or with the &save-project-key; or with the &save-project-icon; icon from the &file-toolbar-lnk;. Depending on your application, you can export your plot to a standard image file with the command  &export-graph-current-lnk; from the &file-menu-lnk; (or with the &export-graph-current-key; keycode).
 </para>
 
-<para>There are several types of plots which can be built from a table. They are presented in the &plot-menu-lnk;</para>
-
-<para>It is possible to use up to four axes for the data. For example, create a new table, modify its dimension to 4 columns and 7 rows. Then select the third column and set it as X, and you can enter the values of two series (X1,Y1) and (X2,Y2).</para>
+<indexterm>
+  <primary>Plot</primary><secondary>secondary axis</secondary>
+</indexterm>
+<para>There are several types of plots which can be built from a table. They are presented in the &plot-menu-lnk;. One important feature is that it is possible to use up to four axis for the data. For example, create a new table, modify its dimension to 4 columns and 7 rows. Then select the third column and set it as X with the &set-column-as-lnk; from the &table-menu-lnk;; you can then enter the values of two series (X1,Y1) and (X2,Y2) as show in the figure <xref xrefstyle="select: labelnumber" linkend="fig-two-axes-plot"/>.</para>
 
 <figure id="fig-two-axes-plot">
   <title>A table with two series of values (X1,Y1) and (X2,Y2).</title>
@@ -93,7 +98,7 @@
   </mediaobject>
 </figure>
 
-<para>To build the plot, select the two Y column (select Y1, and the select Y2 with CTRL key), use the &plot-menu-lnk;. You obtain a simple plot with two axes, then use the &format-plot-lnk;. In the left window, select the data serie for which you want to change the axes, click on the <emphasis>axes</emphasis> tag and define the axes you want to use. After this, the plot is modified but the new axes are not shown. Use the &format-axes-lnk;, select the new axes and click on the <emphasis>show</emphasis> checkbox. You can then customize your plot as before to obtain the following result.</para>
+<para>To build the plot, select the two Y column (select Y1, and the select Y2 with CTRL key), use the &plot-menu-lnk;. You obtain a simple plot with two axes, then use the &format-plot-lnk;. In the left window, select the data serie for which you want to change the axes, click on the <emphasis>axis</emphasis> tag and define the axes you want to use. After this, the plot is modified but the new axes are not shown. Use the &format-axes-lnk;, select the new axes and click on the <emphasis>show</emphasis> checkbox. You can then customize your plot in order to obtain the result presented in figure <xref xrefstyle="select: labelnumber" linkend="fig-two-axes-plot-1"/>.</para>
 
 <figure id="fig-two-axes-plot-1">
   <title>A 2D plot with two Y and two X axis.</title>
@@ -105,11 +110,19 @@
 </figure>
 
 <para>In addition to the customization which has been already described, four arrows were added with the &draw-arrow-lnk;.</para>
-</sect2>
 
+</sect2>
+<!--
+======================================================================
+
+		how to obtain a 2D plot from a function
+
+-->
 <sect2 id="sec-2d-plot-from-function">
 <title>2D plot from function.</title>
-<indexterm><primary>Plot</primary><secondary>Create from function</secondary></indexterm>
+<indexterm>
+  <primary>Plot</primary><secondary>Create from function</secondary>
+</indexterm>
 <para>There are two ways to obtain such a plot: you can plot directly a function or fill a table with the values calculated from this function before doing a plot in the classical way.</para>
 
 <sect3>
@@ -117,9 +130,9 @@
 
 <para>If you just want to plot a function, you can use the &new-function-plot-lnk; from the &file-menu-lnk; or with the &new-function-plot-key; or with the &new-function-plot-icon; icon from the &file-toolbar-lnk;.</para>
 
-<para>You can then enter the expression of your mathematical function, the X range used for the plot, and the number of points used in this X range. Beside classical Y=f(X) functions, parametric functions and polar functions can be defined. See the &add-function-lnk; for details.</para>
+<para>You can then enter the expression of your mathematical function, the X range used for the plot, and the number of points used in this X range. See the &add-function-lnk; for details.</para>
 
-<figure id="fig-direct-function-plot">
+<figure id="fig-direct-function-plot-1">
   <title>Direct plot of a function.</title>
   <mediaobject> 
     <imageobject>
@@ -128,22 +141,45 @@
   </mediaobject>
 </figure>
 
-<para>The generic plot which is created by this command can then be customized as explained in the previous section.</para>
+<para>The generic plot which is created by this command can then be customized as explained in the previous section. Beside classical Y=f(X) functions, parametric functions and polar functions can be defined. In parametric coordinates, <emphasis>X</emphasis> and <emphasis>Y</emphasis> are defined as functions of an independant parameter <emphasis>m</emphasis>. You can define these functions, the range for <emphasis>m</emphasis> and the number of points computed in this range.</para>
+
+<figure id="fig-direct-function-plot-2">
+  <title>Direct plot of a parametric function.</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="tutorial/direct-function-plot-parametric.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
+<para>Polar coordinate are defined as a radius <emphasis>R</emphasis> and an angle <emphasis>&thgr;</emphasis> (in radian). The coordinates are then obtained by <emphasis>X=R.cos(&thgr;)</emphasis> and <emphasis>Y=R.sin(&thgr;)</emphasis>. You can use a parametric definition: <emphasis>R=f(t)</emphasis> and  <emphasis>&thgr;=f(t)</emphasis>, the range for <emphasis>t</emphasis> and the number of points computed in this range.</para>
+
+<figure id="fig-direct-function-plot-3">
+  <title>Direct plot of a function in polar coordinates.</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="tutorial/direct-function-plot-polar.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
 
 </sect3>
 <!--
-***********************************************************************************
+**********************************************************************
 
-			filling of a table with a function
+		filling of a table with a function
 
-***********************************************************************************
+**********************************************************************
 -->
 <sect3 id="sec-table-function-plot">
 <title>Filling of a table with the values of a function.</title>
 
+<indexterm>
+  <primary>Columns</primary><secondary>Assign formula</secondary>
+</indexterm>
 <para>If you just want to work not only with the plot but also with the data, you can create a new table as explained in the <link linkend="sec-2d-plot-from-data">previous section</link>. Then you can fill this table with the values of a function with the &assign-formula-lnk;. The main advantage of this method is that you can do further analysis of the calculated data as the are kept in a table.</para>
 
-<para>To obtain the same plot as in the previous example, you need to create a new table (key &new-table-key;) and use the &table-dimensions-lnk; to define 300 rows, then select the first column and use the command &assign-formula-lnk; from the context menu, or from the &table-menu-lnk;. The row number symbol is <emphasis>i</emphasis>, so you can enter the function expression <emphasis>i/10</emphasis>.</para>
+<para>To obtain the same plot as in the previous example, you need to create a new table (key &new-table-key;) and use the &table-dimensions-lnk; to define 300 rows, then select the first column and use the command &assign-formula-lnk; from the context menu, or from the &table-menu-lnk;. The row number symbol is <emphasis>i</emphasis>, so you can enter the function expression <emphasis>i/10</emphasis> (figure <xref xrefstyle="select: labelnumber" linkend="fig-table-function-plot-1"/>).</para>
 
 <figure id="fig-table-function-plot-1">
   <title>Function plot: filling of the X column.</title>
@@ -154,7 +190,7 @@
   </mediaobject>
 </figure>
 
-<para>The second step is to select the second column and use the same command. The expression is a function of the X values, that is the first column named <emphasis>col(1)</emphasis>.</para>
+<para>The second step is to select the second column and use the same command. The expression is a function of the X values, that is the first column named <emphasis>col(1)</emphasis> (figure <xref xrefstyle="select: labelnumber" linkend="fig-table-function-plot-2"/>).</para>
 
 <figure id="fig-table-function-plot-2">
   <title>Function plot: filling of the Y column.</title>
@@ -180,175 +216,97 @@
 <sect2 id="sec-customize-2d-plot">
 <title>Customization of a 2D plot</title>
 
-  <indexterm><primary>Plot</primary><secondary>Curves options</secondary></indexterm>
-  <para>This dialog is activated by selecting the command <link linkend="format-plot-cmd">&format-plot-cmd;</link> from the <link linkend="sec-format-menu">Format Menu</link>. It is also activated by a double click on the plot. If there are more than one layer in the window, &appname; will select the layer which contain the plot under the mouse pointer.</para>
-  <figure id="fig-custom-curves-1">
-    <title>The Custom Curves Dialog: Line formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-1.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-  <para>The right part of the dialog box contains several tabs which depend on the kind of plot that you are using, they are described in the following subsections. The left part of the dialog window shows the curves which are plotted in the active layer. All the modifications will be done on the selected curve. You can change the columns which are used by clicking on the <emphasis>Plot Associations...</emphasis> button. This will open a dialog which can be used to select the columns of the table which are used as X and Y values.</para>
- 
-  <figure id="fig-custom-curves-3">
-    <title>The Custom Curves Dialog: Plot Associations.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-3.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
- <para>The button <emphasis>Worksheet</emphasis> can be used to access to the table which contains the columns selected.</para>
+<para>There are many way to improve and modify the plots:</para>
+<itemizedlist>
+  <listitem>
+    <para>The first part of the commands are used to modify the main elements of the plot, that is axis, labels, etc. They can be accessed through the &format-menu-lnk;.</para>
+  </listitem>
+  <listitem>
+    <para>The second part of commands can be used to insert additional objects likes arrows, images, text labels, etc. They can be accessed in the &graph-menu-lnk;.</para>
+  </listitem>
+</itemizedlist>
 
-<sect3 id="custom-curves-dialog-lines">
+<sect3 id="sec-2d-plot-format-commands">
+<title>Formatting the main objects of the plot</title>
+
+<sect4 id="sec-2d-plot-general">
+<title>General options</title>
+
+<indexterm>
+  <primary>Plot</primary><secondary>General options</secondary>
+</indexterm>
+<para>The main dialog is activated by selecting the &format-plot-lnk; from the &format-menu-lnk;. If it is activated by a double click on a curve in the plot, the same dialog will be opened with the corresponding curve selected (see <link linkend="custom-curves-dialog-lines">next section</link> for details). If there are more than one layer in the window, &appname; will select the layer which contain the plot under the mouse pointer.</para>
+
+<figure id="fig-format-layer">
+  <title>The Custom Curves Dialog: curves formatting.</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/format-layer.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
+<para>This dialog can be used to modify the background color of the global plot area (i.e. the layer), the color of the canvas (that is the area in which curves are plotted), and the border of the plot. This border is for the global plot, if you want to add a border to the canvas, you can use the <emphasis>general</emphasis> tag of the &format-axes-lnk;. If the image format use to save the plots support it, you can also control the transparency of these objects (see the &export-graph-lnk; for details on image formats).</para> 
+</sect4>
+
+<sect4 id="custom-curves-dialog-lines">
 <title>Custom curves for lines and scatter plots</title>
 
-  <para>This dialog box is activated for plots drawn with <emphasis>symbols</emphasis>, <emphasis>line+symbols</emphasis>, <emphasis>lines</emphasis>, <emphasis>vertical drop lines</emphasis>, <emphasis>steps</emphasis> and <emphasis>splines</emphasis>.</para>
-  <para>The first tab of the right part of the dialog window allows to modify the style of the line (color, line style, thickness). The connect button allows to change the style which is used to draw the selected curve (steps, droplines, etc). See the &plot-menu-lnk; to see the different types of plot available.</para>
-  <figure id="fig-custom-curves-line-1">
-    <title>The Custom Curves Dialog: Line formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-1.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
+<indexterm>
+  <primary>Plot</primary><secondary>Options for lines and symbols</secondary>
+</indexterm>
+<para>The commands can be accessed by a double click on a curve, or by using the &format-plot-lnk; and selecting a curve in the window on the left. The right part of the dialog box contains several tabs which depend on the kind of plot that you are using. The left part of the dialog window shows the curves which are plotted in the active layer. All the modifications will be done on the selected curve.</para>
+<!--
+		remark on plot associations buttons
+-->
+<informaltable cellpadding="5" width="80%">
+  <tgroup cols='1'>
+  <tbody>
+    <row>
+      <entry bgcolor="#FFFFC0">
+        <indexterm>
+          <primary>Plot</primary><secondary>Specification of X and Y series</secondary>
+        </indexterm>
+        <para><emphasis>Plot associations</emphasis></para>
+        <para>In this dialog box, beside the customization of data curves, you can change the columns which are used by clicking on the <emphasis>Plot Associations...</emphasis> button. This will open a dialog which can be used to select the columns of the table which are used as X and Y values.</para>
+        <figure id="fig-plot-associations">
+          <title>The Custom Curves Dialog: Plot Associations.</title>
+          <mediaobject> 
+            <imageobject>
+              <imagedata  format="PNG" fileref="pics/plot-associations.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </entry>
+    </row>
+  </tbody>
+  </tgroup>
+</informaltable>
 
-  <para>A second tab can be activated to select the symbol, and to modify the size, the color and the filling color of the symbols.</para>
-  <figure id="fig-custom-curves-line-2">
-    <title>The Custom Curves Dialog: Symbol formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-2.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
+<para>The button <emphasis>Worksheet</emphasis> can be used to access to the table which contains the columns selected.</para>
+<para>The dialog presented in figure <xref xrefstyle="select: labelnumber" linkend="fig-format-lines"/> is activated for plots drawn with <emphasis>symbols</emphasis>, <emphasis>line+symbols</emphasis>, <emphasis>lines</emphasis>, <emphasis>vertical drop lines</emphasis>, <emphasis>steps</emphasis> and <emphasis>splines</emphasis>. The first tab labelled <emphasis>axis</emphasis> can be used to select the axis which are used for each curve of the plot: bottom (default) or top for abscissae, and left (default) or right for Y values. Beware that whatever your choice the right and top axis will not be drawn, you need to use the &format-axes-lnk; to obtain a plot in which these axis are shown.</para>
+<para>The second tab allows to modify the style of the line (color, line style, thickness). The connect button allows to change the style which is used to draw the selected curve (steps, droplines, etc). See the &plot-menu-lnk; to see examples of the different types of plot available.</para>
 
-</sect3>
+<figure id="fig-format-lines">
+  <title>The Custom Curves Dialog: Line formatting.</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/format-lines.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
 
-<sect3 id="custom-curves-dialog-pie">
-<title>Custom curves for pie plots</title>
-  <para>These commands are available for <link linkend="pie-cmd">pie plots</link>. The first tab allows the customization of the pie segments. The left fields are used to modify the border which is drawn round each segment: color, type and width of line. The default is no border (line width = 0).</para>
-  <para>The right fields are used to define the filling of the plots. The color button defines the one used for the first segment, then the others segments will have colors which follow the order defined in the list. The default value for this field is black, so segment 2, 3, etc will be red, green, etc.</para>
-  <para>The pattern will be used for all segments of the pie, the default value is solid filling. The last field defines the size of the pie in pixels.</para>
-  <figure id="fig-custom-curves-pie-1">
-    <title>The Custom Curves Dialog for pies: pie segment formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-pie-1.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-</sect3>
+<para>If you select a style with symbols (scatter or symbol+lines), a last tab can be activated to select the symbol, and to modify the size, the color and the filling color of the symbols.</para>
 
-<sect3 id="custom-curves-dialog-box">
-<title>Custom curves for box plots</title>
-<para>x</para>
-  <figure id="fig-custom-curves-box-1">
-    <title>The Custom Curves Dialog for box: pattern formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-box-1.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
+<figure id="fig-format-symbols">
+  <title>The Custom Curves Dialog: Symbol formatting.</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/format-symbols.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
 
-  <figure id="fig-custom-curves-box-2">
-    <title>The Custom Curves Dialog for box: whiskers formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-box-2.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-
-  <figure id="fig-custom-curves-box-3">
-    <title>The Custom Curves Dialog for box: percentile formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-box-3.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-
-</sect3>
-
-<sect3 id="custom-curves-dialog-histogram">
-<title>Custom curves for pie histogram</title>
-<para>x</para>
-  <figure id="fig-custom-curves-histogram-1">
-    <title>The Custom Curves Dialog for histogram: pattern formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-histogram-1.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-  <figure id="fig-custom-curves-histogram-2">
-    <title>The Custom Curves Dialog for histogram: spacing formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-histogram-2.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-  <figure id="fig-custom-curves-histogram-3">
-    <title>The Custom Curves Dialog for histogram: data formatting.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/custom-curves-histogram-3.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-</sect3>
-
-<sect3 id="sec-adding-objects">
-<title>Adding objects to a 2D plot</title>
-
-<!-- ************************************************** -->
-<!--		Text options				-->
-<!-- ************************************************** -->
-<sect4 id="sec-adding-text">
-  <title>Adding a text label</title>
-  <indexterm><primary>Text label</primary><secondary>Properties</secondary></indexterm>
-  <para>This dialog can be opened by several commands such as &format-title-lnk; or when you double click on a text object in your plot. It allows to add/customize the text objects.</para>
-  <figure id="fig-text-options">
-    <title>The text options dialog.</title>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/text-options-dialog.png"/>
-      </imageobject>
-    </mediaobject>
-  </figure>
-  <para>The <emphasis>Color</emphasis>, <emphasis>Font</emphasis> and <emphasis>Alignment</emphasis> commands allow the modification of the general settings of the text label.</para>
-  <para>The text item can be modified in the text window. Several improvements can be added to the text:</para>
-  <itemizedlist>
-    <listitem><para>&lt;sub&gt;text&lt;/sub&gt; will draw the text as subscripts. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon1.png"/></imageobject></inlinemediaobject>.</para></listitem>
-    <listitem><para>&lt;sup&gt;text&lt;/sup&gt; will draw the text as superscripts. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon2.png"/></imageobject></inlinemediaobject>.</para></listitem>
-    <listitem><para>By clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon3.png"/></imageobject></inlinemediaobject>, you can open a new dialog which allows to select greek characters:</para>
-    <informalfigure id="fig-text-options1">
-      <mediaobject> 
-        <imageobject>
-          <imagedata  format="PNG" fileref="pics/text-options-dialog.png"/>
-        </imageobject>
-      </mediaobject>
-    </informalfigure>
-    </listitem>
-    <listitem><para>By clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon4.png"/></imageobject></inlinemediaobject>, you can open a new dialog which allows to select various mathematical symbols:</para>
-    <informalfigure id="fig-text-options2">
-      <mediaobject> 
-        <imageobject>
-          <imagedata  format="PNG" fileref="pics/text-options-symbols.png"/>
-        </imageobject>
-      </mediaobject>
-    </informalfigure>
-    </listitem>
-    <listitem><para>&lt;b&gt;text&lt;/b&gt; will draw the text with bold characters. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon5.png"/></imageobject></inlinemediaobject>.</para></listitem>
-    <listitem><para>&lt;i&gt;text&lt;/i&gt; will draw the text with italic characters. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon6.png"/></imageobject></inlinemediaobject>.</para></listitem>
-    <listitem><para>&lt;u&gt;text&lt;/u&gt; will draw the text with underlined characters. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon7.png"/></imageobject></inlinemediaobject>.</para></listitem>
-  </itemizedlist>
 </sect4>
 
 </sect3>
@@ -411,6 +369,12 @@
     </mediaobject>
   </informalfigure>
  </sect3>
+<!--
+=========================================================================
+
+		working with templates
+		======================
+-->
 
 <sect3 id="sec-template-2d-plot">
 <title>Working with templates</title>
@@ -420,8 +384,236 @@
 </sect2>
 
 </sect1>
+
+<sect1 id="sec-special-plots">
+<title>Other special 2D plots</title>
+
 <!--
-======================================================================================
+=========================================================================
+
+		pie plots
+		=========
+-->
+<sect2 id="sec-pie-plots">
+<title>Pie plots</title>
+
+
+  <figure id="fig-example-pie">
+    <title>An example of pie plot.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/example-pie.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+<sect3 id="sec-format-pie">
+  <title>Formatting of pie plots</title>
+
+  <indexterm>
+    <primary>Plot</primary><secondary>Options for pie-plots</secondary>
+  </indexterm>
+  <para>These commands are available for the plots generated by the &pie-lnk;. The first tab allows the customization of the pie segments. The left fields are used to modify the border which is drawn round each segment: color, type and width of line. The default is no border (line width = 0).</para>
+  <para>The right fields are used to define the filling of the plots. The color button defines the one used for the first segment, then the others segments will have colors which follow the order defined in the list. The default value for this field is black, so segment 2, 3, etc will be red, green, etc.</para>
+  <para>The pattern will be used for all segments of the pie, the default value is solid filling. The last field defines the size of the pie in pixels.</para>
+  <figure id="fig-format-pie">
+    <title>Pie segment formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/format-pie.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+</sect3>
+
+</sect2>
+<!--
+=========================================================================
+
+		vectors plots
+		=============
+-->
+<sect2 id="sec-vectors-plots">
+<title>Vectors plots</title>
+
+</sect2>
+
+</sect1>
+<!--
+=========================================================================
+
+		statistical plots
+		=================
+-->
+<sect1 id="sec-statistical-plots">
+<title>Statistical plots</title>
+
+<indexterm>
+  <primary>Statistical plots</primary>
+</indexterm>
+
+<para>Statistical plots are different from conventional 2D-plots since they are not use to show the data themselves. Instead, they are able to present the results of some statistical analysis of the data. Following this, histogram are completely different from the plots obtained by the &columns-lnk;.</para>
+
+<sect2 id="sec-box-plots">
+<title>Box plots</title>
+
+<indexterm>
+  <primary>Statistical Plot</primary><secondary>Box plots</secondary>
+</indexterm>
+<sect3 id="sec-box-plots-description">
+<title>Description of box plots</title>
+
+<para>Box plots are used to show some statistical values which are significant parameters of the distribution of the data. Let's assume that we have a table with 12 values in a column. If you select this column and build a box plot with the &box-plot-lnk;, you will obtain a graph which is close to the one presented in the figure <xref xrefstyle="select: labelnumber" linkend="fig-description-box-plot"/>. By default, the values which are computed from your data are (figure <xref xrefstyle="select: labelnumber" linkend="fig-description-box-plot"/>):</para>
+
+<itemizedlist>
+  <listitem>
+    <para><emphasis>Y<subscript>max</subscript></emphasis> The maximum value of Y</para>
+  </listitem>
+  <listitem>
+    <para><emphasis>Y<subscript>5%</subscript></emphasis> The value of Y corresponding to the top 5% of the distribution of numbers</para>
+  </listitem>
+  <listitem>
+    <para><emphasis>Y<subscript>25%</subscript></emphasis> The value of Y corresponding to the top 25% of the distribution of numbers</para>
+  </listitem>
+  <listitem>
+    <para><emphasis>Y<subscript>50%</subscript></emphasis> The value of Y corresponding to the top 50% of the distribution of numbers (also known as the median value)</para>
+  </listitem>
+  <listitem>
+    <para><emphasis>Y<subscript>mean</subscript></emphasis> The average value of Y</para>
+  </listitem>
+  <listitem>
+    <para><emphasis>Y<subscript>75%</subscript></emphasis> The value of Y corresponding to the top 75% of the distribution of numbers</para>
+  </listitem>
+  <listitem>
+    <para><emphasis>Y<subscript>95%</subscript></emphasis> The value of Y corresponding to the top 95% of the distribution of numbers</para>
+  </listitem>
+  <listitem>
+    <para><emphasis>Y<subscript>min</subscript></emphasis> The minimum value of Y</para>
+  </listitem>
+</itemizedlist>
+
+  <figure id="fig-description-box-plot">
+    <title>An example of a box plot for three columns.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/description-box-plot.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+<para>All these parameters give informations on the distribution of data in the column. For example, the difference between <emphasis>Y<subscript>mean</subscript></emphasis> and <emphasis>Y<subscript>50%</subscript></emphasis> is an indication of the symetry of the distribution. Statistical parameters can be used also to compare distribution of data, you just have to select all the columns and build the box plot.</para>
+
+</sect3>
+
+<sect3 id="sec-format-box-plots">
+  <title>Customization of box plots</title>
+
+  <para>There are two ways to modify a box plot: you can modify the statistical parameters which are shown. As in all other plots, you can also modify the appearance of the graphic items.</para>
+
+  <figure id="fig-format-box-1">
+    <title>The Custom Curves Dialog for box: pattern formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/format-box-1.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <indexterm>
+    <primary>Whiskers</primary>
+  </indexterm>
+  <para>This tab is used to modify the aspect of the box and of the upper and lower whiskers which are attached to it. You can also remove the box and/or the whiskers.</para>
+  <figure id="fig-format-box-2">
+    <title>The Custom Curves Dialog for box: whiskers formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/format-box-2.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <indexterm>
+    <primary>Percentile</primary>
+  </indexterm>
+  <para>As explained above, the default is to draw 3 symbols corresponding to &ymin;, &ymean; and &ymax;. These symbols can be modified (or removed) here. Moreover, you can add two other symbols corresponding to <emphasis>Y<subscript>99%</subscript></emphasis> and <emphasis>Y<subscript>1%</subscript></emphasis>.</para>
+  <figure id="fig-format-box-3">
+    <title>The Custom Curves Dialog for box: percentile formatting.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/format-box-3.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="sec-histograms">
+  <title>Histograms</title>
+
+  <indexterm>
+    <primary>Statistical Plot</primary><secondary>Histograms</secondary>
+  </indexterm>
+  <indexterm>
+    <primary>Histograms</primary>
+  </indexterm>
+  <sect3 id="sec-description-histograms">
+    <title>Building of an histogram</title>
+
+    <para>An histogram can be used to show the distribution of the values, that is the numbers of values which are in given intervals. Let's assume that you have a set of data in a column. You can select this column and use the &histogram-lnk;. After some customization (see next section), you can obtain a plot like the one presented in the figure <xref xrefstyle="select: labelnumber" linkend="fig-example-histogram"/>.</para>
+
+    <figure id="fig-example-histogram">
+      <title>An example of histogram.</title>
+      <mediaobject> 
+        <imageobject>
+          <imagedata  format="PNG" fileref="pics/example-histogram.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+  </sect3>
+
+  <sect3 id="sec-format-histogram">
+    <title>customization of histograms</title>
+
+    <para>As for other plots, you can access to the dialog plot through the &format-plot-lnk; of the &format-menu-lnk;. You can also use the other commands of the &format-menu-lnk; to modify axes, labels, titles, etc. The first tab can used to modify the appearance of the columns: lines and filling.</para>
+    <figure id="fig-format-histogram-1">
+      <title>Pattern formatting in histograms.</title>
+      <mediaobject> 
+        <imageobject>
+          <imagedata  format="PNG" fileref="pics/format-histogram-1.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>The second tab allows to modify the geometrical parameters of the columns. The parameter <emphasis>gap between bars</emphasis> define the distance between two adjascent columns. This is not a true distance, it define the fraction of space which is occupied by the intervalles between columns. By default, this parameter is at 0% so that there is no space between columns. In the example of figure <xref xrefstyle="select: labelnumber" linkend="fig-example-histogram"/>, a value of 50% has been used, so that the width of space and columns are equal.</para>
+    <para>the second parameter <emphasis>Offset</emphasis> can be used to shift the bars from their default position. For example, In the figure <xref xrefstyle="select: labelnumber" linkend="fig-example-histogram"/>, the number of values between 3 and 4 is 6, and the corresponding column should be plotted at an abscissae of 3.5. In order to have this column corresponding to the value X=3, a negative shift has been applied. The value of the shift is a percentage of the width of the column, the maximum width of the columns is &Delta;X=1 in this example and a a gap of 50% is used so a value of -100% has been used, corresponding to a shift &Delta;X=-0.5.</para>
+    <figure id="fig-format-histogram-2">
+      <title>Whiskers formatting in histograms.</title>
+      <mediaobject> 
+        <imageobject>
+          <imagedata  format="PNG" fileref="pics/format-histogram-2.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>The last tab is used to define the number of columns used for the plot. It is defined by the X range used for the statistical analysis, and the size of each interval. The default is to use 10 interval in the range [&ymin;:&ymax;].</para>
+    <figure id="fig-format-histogram-3">
+      <title>Interval selection in histograms.</title>
+      <mediaobject> 
+        <imageobject>
+          <imagedata  format="PNG" fileref="pics/format-histogram-3.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </sect3>
+
+</sect2>
+
+</sect1>
+
+<!--
+=============================================================================
 
 		3D plots
 		========
@@ -660,7 +852,7 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
 
 </sect1>
 <!--
-======================================================================================
+=============================================================================
 
 		Multilayer plots
 		================
@@ -750,3 +942,55 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
 
 </sect1>
 
+
+<sect1 id="sec-adding-objects">
+<title>Adding objects to a plot</title>
+
+<!-- 
+*********************************************************************
+
+		Text options
+
+-->
+<sect2 id="sec-adding-text">
+  <title>Adding a text label</title>
+  <indexterm><primary>Text label</primary><secondary>Properties</secondary></indexterm>
+  <para>This dialog can be opened by several commands such as &format-title-lnk; or when you double click on a text object in your plot. It allows to add/customize the text objects.</para>
+  <figure id="fig-text-options">
+    <title>The text options dialog.</title>
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/text-options-dialog.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  <para>The <emphasis>Color</emphasis>, <emphasis>Font</emphasis> and <emphasis>Alignment</emphasis> commands allow the modification of the general settings of the text label.</para>
+  <para>The text item can be modified in the text window. Several improvements can be added to the text:</para>
+  <itemizedlist>
+    <listitem><para>&lt;sub&gt;text&lt;/sub&gt; will draw the text as subscripts. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon1.png"/></imageobject></inlinemediaobject>.</para></listitem>
+    <listitem><para>&lt;sup&gt;text&lt;/sup&gt; will draw the text as superscripts. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon2.png"/></imageobject></inlinemediaobject>.</para></listitem>
+    <listitem><para>By clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon3.png"/></imageobject></inlinemediaobject>, you can open a new dialog which allows to select greek characters:</para>
+    <informalfigure id="fig-text-options1">
+      <mediaobject> 
+        <imageobject>
+          <imagedata  format="PNG" fileref="pics/text-options-dialog.png"/>
+        </imageobject>
+      </mediaobject>
+    </informalfigure>
+    </listitem>
+    <listitem><para>By clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon4.png"/></imageobject></inlinemediaobject>, you can open a new dialog which allows to select various mathematical symbols:</para>
+    <informalfigure id="fig-text-options2">
+      <mediaobject> 
+        <imageobject>
+          <imagedata  format="PNG" fileref="pics/text-options-symbols.png"/>
+        </imageobject>
+      </mediaobject>
+    </informalfigure>
+    </listitem>
+    <listitem><para>&lt;b&gt;text&lt;/b&gt; will draw the text with bold characters. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon5.png"/></imageobject></inlinemediaobject>.</para></listitem>
+    <listitem><para>&lt;i&gt;text&lt;/i&gt; will draw the text with italic characters. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon6.png"/></imageobject></inlinemediaobject>.</para></listitem>
+    <listitem><para>&lt;u&gt;text&lt;/u&gt; will draw the text with underlined characters. You can insert this sequence by clicking on the <inlinemediaobject><imageobject><imagedata  format="PNG" fileref="pics/text-options-icon7.png"/></imageobject></inlinemediaobject>.</para></listitem>
+  </itemizedlist>
+</sect2>
+
+</sect1>
