@@ -1403,7 +1403,7 @@ public:
 %End
 
   void setMethod(int n);
-  void setMethod(InterpolationMethod m);
+  void setMethod(InterpolationMethod m /Constrained/);
   bool run();
 };
 
@@ -1427,7 +1427,7 @@ public:
 %End
 
   void setMethod(int);
-  void setMethod(SmoothMethod);
+  void setMethod(SmoothMethod /Constrained/);
 
   void setSmoothPoints(int, int = 0);
   void setPolynomOrder(int);
@@ -1455,7 +1455,7 @@ public:
 %End
 
   void setFilterType(int);
-  void setFilterType(FilterType);
+  void setFilterType(FilterType /Constrained/);
 
   void setCutoff(double);
   void setBand(double, double);
