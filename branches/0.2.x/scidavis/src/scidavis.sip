@@ -204,8 +204,6 @@ private:
   MyWidget(const MyWidget&);
 };
 
-typedef QList<MyWidget*> MDIWindowList;
-
 
 
 class Table: MyWidget
@@ -1569,7 +1567,7 @@ class Folder : QObject
 #include "src/Folder.h"
 %End
 public:
-  MDIWindowList windowsList() /PyName=windows/;
+  QList<MyWidget*> windowsList() /PyName=windows/;
 // TODO: implement signal Folder::nameChanged and make it update the project explorer; adjust renaming from GUI accordingly
 //  void setFolderName(const QString&) /PyName=setName/;
   QString name();
