@@ -421,7 +421,7 @@ class Graph: public QWidget
 		void deselectMarker();
 		MarkerType copiedMarkerType(){return selectedMarkerType;};
 		//@}
-
+    	
 		//! \name Axes
 		//@{
 		QList<int> axesType();
@@ -679,6 +679,11 @@ class Graph: public QWidget
 		bool antialiasing(){return d_antialiasing;};
 		//! Enables/Disables antialiasing of plot items.
 		void setAntialiasing(bool on = true, bool update = true);
+
+		void deselect();
+		void print(QPainter *, const QRect &rect, const QwtPlotPrintFilter & = QwtPlotPrintFilter());
+		void printCanvas(QPainter *painter, const QRect &canvasRect,
+   			 const QwtScaleMap map[QwtPlot::axisCnt], const QwtPlotPrintFilter &pfilter) const;
 
 signals:
 		void selectedGraph (Graph*);
