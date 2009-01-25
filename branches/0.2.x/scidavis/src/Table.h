@@ -108,7 +108,7 @@ public slots:
 	void handleRowChange();
 	void handleColumnChange(int,int);
 	void handleColumnChange(int,int,int,int);
-	void handleColumnsRemoved(int,int);
+	void handleColumnsAboutToBeRemoved(int,int);
 
 	//! Return column number 'index'
 	Column* column(int index) const { return d_future_table->column(index); }

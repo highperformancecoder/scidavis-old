@@ -119,7 +119,7 @@ void Table::init()
 	connect(ui.add_reference_button, SIGNAL(pressed()), 
 		this, SLOT(addReference()));
 
-	connect(d_future_table, SIGNAL(columnsRemoved(int, int)), this, SLOT(handleColumnsRemoved(int, int)));
+	connect(d_future_table, SIGNAL(columnsAboutToBeRemoved(int, int)), this, SLOT(handleColumnsAboutToBeRemoved(int, int)));
 	connect(d_future_table, SIGNAL(rowsInserted(int, int)), this, SLOT(handleRowChange()));
 	connect(d_future_table, SIGNAL(rowsRemoved(int, int)), this, SLOT(handleRowChange()));
 	connect(d_future_table, SIGNAL(dataChanged(int, int, int, int)), this, SLOT(handleColumnChange(int, int, int, int)));
@@ -158,7 +158,7 @@ void Table::handleColumnChange(int top, int left, int bottom, int right)
 	handleColumnChange(left, right-left+1);
 }
 
-void Table::handleColumnsRemoved(int first, int count)
+void Table::handleColumnsAboutToBeRemoved(int first, int count)
 {
 	for (int i=first; i<first+count; i++)
 	    emit removedCol(colName(i));
