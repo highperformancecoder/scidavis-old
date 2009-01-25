@@ -349,6 +349,16 @@ void AxesDialog::initAxesPage()
 
 	axesPage = new QWidget();
 
+	boxAxisType= new QComboBox();
+	boxAxisType->addItem(tr("Numeric"), (int)Graph::Numeric);
+	boxAxisType->addItem(tr("Text from table"), (int)Graph::Txt);
+	boxAxisType->addItem(tr("Day of the week"), (int)Graph::Day);
+	boxAxisType->addItem(tr("Month"), (int)Graph::Month);
+	boxAxisType->addItem(tr("Time"), (int)Graph::Time);
+	boxAxisType->addItem(tr("Date"), (int)Graph::Date);
+	boxAxisType->addItem(tr("Date & Time"), (int)Graph::DateTime);
+	boxAxisType->addItem(tr("Column Headings"), (int)Graph::ColHeader);
+
 	axesTitlesList = new QListWidget();
 	axesTitlesList->addItem( new QListWidgetItem(image4, tr("Bottom")));
 	axesTitlesList->addItem( new QListWidgetItem(image5, tr("Left")));
@@ -410,15 +420,6 @@ void AxesDialog::initAxesPage()
 
 	leftBoxLayout->addWidget( new QLabel(tr( "Type" )), 0, 0 );
 
-	boxAxisType= new QComboBox();
-	boxAxisType->addItem(tr("Numeric"), Graph::Numeric);
-	boxAxisType->addItem(tr("Text from table"), Graph::Text);
-	boxAxisType->addItem(tr("Day of the week"), Graph::Day);
-	boxAxisType->addItem(tr("Month"), Graph::Month);
-	boxAxisType->addItem(tr("Time"), Graph::Time);
-	boxAxisType->addItem(tr("Date"), Graph::Date);
-	boxAxisType->addItem(tr("Date & Time"), Graph::DateTime);
-	boxAxisType->addItem(tr("Column Headings"), Graph::ColHeader);
 	leftBoxLayout->addWidget( boxAxisType, 0, 1 );
 
 	leftBoxLayout->addWidget( new QLabel(tr( "Font" )), 1, 0 );
@@ -1471,7 +1472,7 @@ void AxesDialog::pickAxisNumColor()
 void AxesDialog::setAxisType(int)
 {
 	int a = mapToQwtAxisId();
-	int style = axesType[a];
+	int style = (int)d_graph->axesType()[a];
 
 	boxAxisType->setCurrentIndex(boxAxisType->findData(style));
 	showAxisFormatOptions(style);
