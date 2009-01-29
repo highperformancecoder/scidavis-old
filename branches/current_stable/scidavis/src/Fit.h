@@ -31,17 +31,19 @@
 
 #include <QObject>
 
-#include "ApplicationWindow.h"
 #include "Filter.h"
+#include "Script.h"
 
 #include <gsl/gsl_multifit_nlin.h>
 #include <gsl/gsl_multimin.h>
 
 class Table;
 class Matrix;
+class ApplicationWindow;
+class Script;
 
 //! Fit base class
-class Fit : public Filter
+class Fit : public Filter, public scripted
 {
 	Q_OBJECT
 
@@ -99,6 +101,14 @@ class Fit : public Filter
 
 		Table* parametersTable(const QString& tableName);
 		Matrix* covarianceMatrix(const QString& matrixName);
+
+                int evaluate_f(const gsl_vector * x, gsl_vector * f);
+                double evaluate_d(const gsl_vector * x);
+                int evaluate_df(const gsl_vector *x, gsl_matrix *J);
+                static double evaluate_df_helper(double x, void * param);
+
+        protected slots:
+                void scriptError(const QString& message,const QString& script_name,int line_number);
 
 	private:
 		//! Pointer to the GSL multifit minimizer (for simplex algorithm)
@@ -177,6 +187,9 @@ class Fit : public Filter
 
 		//! Specifies wheather the errors must be scaled with sqrt(chi_2/dof)
 		bool d_scale_errors;
+
+                //! Script used to evaluate user-defined functions.
+                Script * d_script;
 };
 
 #endif

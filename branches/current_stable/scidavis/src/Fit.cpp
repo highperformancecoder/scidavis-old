@@ -34,9 +34,11 @@
 #include "Legend.h"
 #include "FunctionCurve.h"
 #include "ColorBox.h"
+#include "Script.h"
 
 #include <gsl/gsl_statistics.h>
 #include <gsl/gsl_blas.h>
+#include <gsl/gsl_deriv.h>
 
 #include <QApplication>
 #include <QMessageBox>
@@ -44,7 +46,8 @@
 #include <QLocale>
 
 Fit::Fit( ApplicationWindow *parent, Graph *g, const char * name)
-: Filter( parent, g, name)
+: Filter( parent, g, name),
+scripted(ScriptingLangManager::newEnv("muParser", parent))
 {
 	d_p = 0;
 	d_n = 0;
@@ -435,13 +438,11 @@ void Fit::fit()
 
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
-	QString names = d_param_names.join (",");
-	QByteArray ba_formula = d_formula.toAscii();
-	const char *function = ba_formula.constData();
-	QByteArray ba_names = names.toAscii();
-	const char *parNames = ba_names.constData();
+        d_script = scriptEnv->newScript(d_formula, this, metaObject()->className());
+        connect(d_script, SIGNAL(error(const QString&,const QString&,int)),
+                this, SLOT(scriptError(const QString&,const QString&,int)));
 
-	struct FitData d_data = {d_n, d_p, d_x, d_y, d_y_errors, function, parNames};
+        struct FitData d_data = {d_n, d_p, d_x, d_y, d_y_errors, this};
 	int status, iterations = d_max_iterations;
 	double *par = new double[d_p];
 	if(d_solver == NelderMeadSimplex)
@@ -489,13 +490,94 @@ void Fit::fit()
 	}
 
 	storeCustomFitResults(par);
-	generateFitCurve(par);
+        if (status == GSL_SUCCESS)
+            generateFitCurve(par);
+
+        delete d_script;
 
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	if (app->writeFitResultsToLog)
 		app->updateLog(logFitInfo(d_results, iterations, status, d_graph->parentPlotName()));
 
 	QApplication::restoreOverrideCursor();
+}
+
+void Fit::scriptError(const QString& message,const QString& script_name,int line_number)
+{
+    QMessageBox::critical(qobject_cast<QWidget*>(parent()), tr("Input function error"),
+                          QString("%1:%2\n").arg(script_name).arg(line_number)+message);
+}
+
+int Fit::evaluate_f(const gsl_vector * x, gsl_vector * f)
+{
+    for (int i=0; i<d_p; i++)
+        d_script->setDouble(gsl_vector_get(x,i), d_param_names[i]);
+    for (int j=0; j<d_n; j++) {
+        d_script->setDouble(d_x[j], "x");
+        bool success;
+        gsl_vector_set(f, j, (d_script->eval().toDouble(&success)-d_y[j])/d_y_errors[j]);
+        if (!success)
+            return GSL_EINVAL;
+    }
+    return GSL_SUCCESS;
+}
+
+double Fit::evaluate_d(const gsl_vector * x)
+{
+    double result = 0.0;
+    for (int i=0; i<d_p; i++)
+        d_script->setDouble(gsl_vector_get(x,i), d_param_names[i]);
+    for (int j=0; j<d_n; j++) {
+        d_script->setDouble(d_x[j], "x");
+        bool success;
+        result += pow((d_script->eval().toDouble(&success)-d_y[j])/d_y_errors[j], 2);
+        if (!success)
+            return GSL_EINVAL;
+    }
+    return result;
+}
+
+typedef struct {
+    Script * script;
+    QString param;
+    bool success;
+} DiffData;
+
+double Fit::evaluate_df_helper(double x, void * params)
+{
+    DiffData * data = static_cast<DiffData*>(params);
+    data->script->setDouble(x, data->param);
+    bool success;
+    double result = data->script->eval().toDouble(&success);
+    if (!success) {
+        data->script->disconnect(SIGNAL(error(const QString&,const QString&,int)));
+        data->success = false;
+    }
+    return result;
+}
+
+int Fit::evaluate_df(const gsl_vector *x, gsl_matrix *J)
+{
+    double result, abserr;
+    gsl_function F;
+    F.function = &evaluate_df_helper;
+    DiffData data;
+    F.params = &data;
+    data.script = d_script;
+    data.success = true;
+    for (int i=0; i<d_p; i++)
+        d_script->setDouble(gsl_vector_get(x,i), d_param_names[i]);
+        for (int i=0; i<d_n; i++) {
+        d_script->setDouble(d_x[i], "x");
+        for (int j=0; j<d_p; j++) {
+            data.param = d_param_names[j];
+            gsl_deriv_central(&F, gsl_vector_get(x,j), 1e-8, &result, &abserr);
+            if (!data.success)
+                return GSL_EINVAL;
+            gsl_matrix_set(J, i, j, result/d_y_errors[j]);
+        }
+    }
+    return GSL_SUCCESS;
 }
 
 void Fit::generateFitCurve(double *par)
