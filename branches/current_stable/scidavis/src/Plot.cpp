@@ -226,20 +226,24 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 	{
 		case QwtPlot::yLeft:
 			x=x1;
-			low=y1+majTickLength;
-			high=y2-majTickLength;
+			low=y1;
+			if (axisEnabled(QwtPlot::xTop))
+				low += majTickLength;
+			high=y2;
+			if (axisEnabled(QwtPlot::xBottom))
+				high -= majTickLength;
 			if (min)
 			{
 				for (j = 0; j < minTicks; j++)
 				{
 					y = map.transform(minTickList[j]);
-					if (y>low && y< high)
+					if (y >= low && y <= high)
 						QwtPainter::drawLine(painter, x, y, x+minTickLength, y);
 				}
 				for (j = 0; j < medTicks; j++)
 				{
 					y = map.transform(medTickList[j]);
-					if (y>low && y< high)
+					if (y >= low && y <= high)
 						QwtPainter::drawLine(painter, x, y, x+minTickLength, y);
 				}
 			}
@@ -249,7 +253,7 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 				for (j = 0; j < majTicks; j++)
 				{
 					y = map.transform(majTickList[j]);
-					if (y>low && y< high)
+					if (y >= low && y <= high)
 						QwtPainter::drawLine(painter, x, y, x+majTickLength, y);
 				}
 			}
@@ -258,20 +262,24 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 		case QwtPlot::yRight:
 			{
 				x=x2;
-				low=y1+majTickLength;
-				high=y2-majTickLength;
+				low=y1;
+				if (axisEnabled(QwtPlot::xTop))
+					low += majTickLength;
+				high=y2;
+				if (axisEnabled(QwtPlot::xBottom))
+					high -= majTickLength;
 				if (min)
 				{
 					for (j = 0; j < minTicks; j++)
 					{
 						y = map.transform(minTickList[j]);
-						if (y>low && y< high)
+						if (y >= low && y <= high)
 							QwtPainter::drawLine(painter, x+1, y, x-minTickLength, y);
 					}
 					for (j = 0; j < medTicks; j++)
 					{
 						y = map.transform(medTickList[j]);
-						if (y>low && y< high)
+						if (y >= low && y <= high)
 							QwtPainter::drawLine(painter, x+1, y, x-minTickLength, y);
 					}
 				}
@@ -281,7 +289,7 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 					for (j = 0; j <majTicks; j++)
 					{
 						y = map.transform(majTickList[j]);
-						if (y>low && y< high)
+						if (y >= low && y <= high)
 							QwtPainter::drawLine(painter, x+1, y, x-majTickLength, y);
 					}
 				}
@@ -290,20 +298,24 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 
 		case QwtPlot::xBottom:
 			y=y2;
-			low=x1+majTickLength;
-			high=x2-majTickLength;
+			low=x1;
+			if (axisEnabled(QwtPlot::yLeft))
+				low += majTickLength;
+			high=x2;
+			if (axisEnabled(QwtPlot::yRight))
+				high -= majTickLength;
 			if (min)
 			{
 				for (j = 0; j < minTicks; j++)
 				{
 					x = map.transform(minTickList[j]);
-					if (x>low && x<high)
+					if (x >= low && x <= high)
 						QwtPainter::drawLine(painter, x, y+1, x, y-minTickLength);
 				}
 				for (j = 0; j < medTicks; j++)
 				{
 					x = map.transform(medTickList[j]);
-					if (x>low && x<high)
+					if (x >= low && x <= high)
 						QwtPainter::drawLine(painter, x, y+1, x, y-minTickLength);
 				}
 			}
@@ -313,7 +325,7 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 				for (j = 0; j < majTicks; j++)
 				{
 					x = map.transform(majTickList[j]);
-					if (x>low && x<high)
+					if (x >= low && x <= high)
 						QwtPainter::drawLine(painter, x, y+1, x, y-majTickLength);
 				}
 			}
@@ -321,21 +333,25 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 
 		case QwtPlot::xTop:
 			y=y1;
-			low=x1+majTickLength;
-			high=x2-majTickLength;
+			low=x1;
+			if (axisEnabled(QwtPlot::yLeft))
+				low += majTickLength;
+			high=x2;
+			if (axisEnabled(QwtPlot::yRight))
+				high -= majTickLength;
 
 			if (min)
 			{
 				for (j = 0; j < minTicks; j++)
 				{
 					x = map.transform(minTickList[j]);
-					if (x>low && x<high)
+					if (x >= low && x <= high)
 						QwtPainter::drawLine(painter, x, y, x, y + minTickLength);
 				}
 				for (j = 0; j < medTicks; j++)
 				{
 					x = map.transform(medTickList[j]);
-					if (x>low && x<high)
+					if (x >= low && x <= high)
 						QwtPainter::drawLine(painter, x, y, x, y + minTickLength);
 				}
 			}
@@ -345,7 +361,7 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 				for (j = 0; j <majTicks; j++)
 				{
 					x = map.transform(majTickList[j]);
-					if (x>low && x<high)
+					if (x >= low && x <= high)
 						QwtPainter::drawLine(painter, x, y, x, y + majTickLength);
 				}
 			}

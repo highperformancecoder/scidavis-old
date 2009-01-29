@@ -44,7 +44,7 @@ class TableStatistics : public Table
 	public:
 		//! supported statistics types
 		enum Type { row, column };
-		TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base, Type, QList<int> targets);
+		TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base, Type, QList<int> targets, bool show_comments);
 		//! return the type of statistics
 		Type type() const { return d_type; }
 		//! return the base table of which statistics are displayed

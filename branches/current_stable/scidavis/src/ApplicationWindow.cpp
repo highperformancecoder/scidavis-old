@@ -2457,7 +2457,7 @@ Table* ApplicationWindow::newTable(const QString& fname, const QString &sep,
 		bool simplifySpaces)
 {
 	Table* w = new Table(scriptEnv, fname, sep, lines, renameCols, stripSpaces,
-			simplifySpaces, fname, ws, 0, 0);
+			simplifySpaces, fname, ws, 0, 0, d_show_table_comments);
 	if (w)
 	{
 		w->setAttribute(Qt::WA_DeleteOnClose);
@@ -2472,7 +2472,7 @@ Table* ApplicationWindow::newTable(const QString& fname, const QString &sep,
  */
 Table* ApplicationWindow::newTable()
 {
-	Table* w = new Table(scriptEnv, 30, 2, "", ws, 0);
+	Table* w = new Table(scriptEnv, 30, 2, "", ws, 0, 0, d_show_table_comments);
 	w->setAttribute(Qt::WA_DeleteOnClose);
 	initTable(w, generateUniqueName(tr("Table")));
 	w->showNormal();
@@ -2484,7 +2484,7 @@ Table* ApplicationWindow::newTable()
  */
 Table* ApplicationWindow::newTable(const QString& caption, int r, int c)
 {
-	Table* w = new Table(scriptEnv, r, c, "", ws, 0);
+	Table* w = new Table(scriptEnv, r, c, "", ws, 0, 0, d_show_table_comments);
 	w->setAttribute(Qt::WA_DeleteOnClose);
 	initTable(w, caption);
 	if (w->name() != caption)//the table was renamed
@@ -2500,7 +2500,7 @@ Table* ApplicationWindow::newTable(const QString& caption, int r, int c)
 
 Table* ApplicationWindow::newTable(int r, int c, const QString& name, const QString& legend)
 {
-	Table* w = new Table(scriptEnv, r, c, legend, ws, 0);
+	Table* w = new Table(scriptEnv, r, c, legend, ws, 0, 0, d_show_table_comments);
 	w->setAttribute(Qt::WA_DeleteOnClose);
 	initTable(w, name);
 	return w;
@@ -2513,7 +2513,7 @@ Table* ApplicationWindow::newTable(const QString& caption, int r, int c, const Q
     if (lst.count() == 2)
         legend = lst[1];
 
-	Table* w = new Table(scriptEnv, r, c, legend, ws, 0);
+	Table* w = new Table(scriptEnv, r, c, legend, ws, 0, 0, d_show_table_comments);
 	w->setAttribute(Qt::WA_DeleteOnClose);
 
 	QStringList rows = text.split("\n", QString::SkipEmptyParts);
@@ -2536,7 +2536,7 @@ Table* ApplicationWindow::newTable(const QString& caption, int r, int c, const Q
 
 Table* ApplicationWindow::newHiddenTable(const QString& name, const QString& label, int r, int c, const QString& text)
 {
-	Table* w = new Table(scriptEnv, r, c, label, 0, 0);
+	Table* w = new Table(scriptEnv, r, c, label, 0, 0, 0, d_show_table_comments);
 	w->setAttribute(Qt::WA_DeleteOnClose);
 
 	if (!text.isEmpty()) {
@@ -2588,7 +2588,7 @@ void ApplicationWindow::initTable(Table* w, const QString& caption)
  */
 TableStatistics *ApplicationWindow::newTableStatistics(Table *base, int type, QList<int> target, const QString &caption)
 {
-	TableStatistics* s = new TableStatistics(scriptEnv, ws, base, (TableStatistics::Type) type, target);
+	TableStatistics* s = new TableStatistics(scriptEnv, ws, base, (TableStatistics::Type) type, target, d_show_table_comments);
 	if (caption.isEmpty())
 		initTable(s, s->name());
 	else
@@ -2711,7 +2711,7 @@ Table* ApplicationWindow::convertMatrixToTable()
 	int rows = m->numRows();
 	int cols = m->numCols();
 
-	Table* w = new Table(scriptEnv, rows, cols, "", ws, 0);
+	Table* w = new Table(scriptEnv, rows, cols, "", ws, 0, 0, d_show_table_comments);
 	w->setAttribute(Qt::WA_DeleteOnClose);
 	for (int i = 0; i<rows; i++)
 	{

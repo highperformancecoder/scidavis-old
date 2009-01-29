@@ -66,8 +66,8 @@ public:
 
    	Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 		 bool stripSpaces, bool simplifySpaces, const QString &label,
-		 QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
-	Table(ScriptingEnv *env, int r,int c, const QString &label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
+		 QWidget* parent=0, const char* name=0, Qt::WFlags f=0, bool show_comments=false);
+	Table(ScriptingEnv *env, int r,int c, const QString &label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0, bool show_comments=false);
 
 	Q3TableSelection getSelection();
 
@@ -317,7 +317,11 @@ public slots:
 	QString colComment(int col){return comments[col];};
 	void setColComment(int col, const QString& s);
 	QStringList colComments(){return comments;};
-	void setColComments(const QStringList& lst){comments = lst;};
+	void setColComments(const QStringList& lst) {
+		comments = lst;
+		if (d_show_comments)
+			setHeaderColType();
+	};
 	void showComments(bool on = true);
 	bool commentsEnabled(){return d_show_comments;}
 

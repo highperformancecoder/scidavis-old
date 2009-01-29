@@ -4404,6 +4404,7 @@ void Graph::copy(ApplicationWindow *parent, Graph* g)
 	d_plot->setMargin(plot->margin());
 
 	setAntialiasing(g->antialiasing());
+	autoScaleFonts = g->autoscaleFonts();
 
 	setBackgroundColor(plot->paletteBackgroundColor());
 	setFrame(plot->lineWidth(), plot->frameColor());

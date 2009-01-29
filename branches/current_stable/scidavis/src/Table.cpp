@@ -59,14 +59,15 @@
 
 Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 			 bool stripSpaces, bool simplifySpaces, const QString& label,
-			 QWidget* parent, const char* name, Qt::WFlags f)
-: MyWidget(label, parent,name,f), scripted(env)
+			 QWidget* parent, const char* name, Qt::WFlags f, bool show_comments)
+: MyWidget(label, parent,name,f), scripted(env),
+	d_show_comments(show_comments)
 {
 	importASCII(fname, sep, ignoredLines, renameCols, stripSpaces, simplifySpaces, true);
 }
 
-	Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
-: MyWidget(label,parent,name,f), scripted(env)
+Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f, bool show_comments)
+: MyWidget(label,parent,name,f), scripted(env), d_show_comments(show_comments)
 {
 	init(r,c);
 }
@@ -75,7 +76,6 @@ void Table::init(int rows, int cols)
 {
 	selectedCol=-1;
 	d_saved_cells = 0;
-	d_show_comments = false;
 	d_numeric_precision = 14;
 
 	setBirthDate(QDateTime::currentDateTime().toString(Qt::LocalDate));
