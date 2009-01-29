@@ -203,19 +203,20 @@ void Legend::drawFrame(QPainter *p, int type, const QRect& rect) const
 
 	if (type == Line)
 	{
-		p->setBrush(d_text->backgroundBrush());
+		// drawing/filling in one go broken for PDF export:
+		// pen "inherits" alpha value of background brush
+		QwtPainter::fillRect(p, rect, d_text->backgroundBrush());
 		QwtPainter::drawRect(p, rect);
 	}
 	else if (type == Shadow)
 	{
+		QwtPainter::fillRect(p, rect, d_text->backgroundBrush());
+		QwtPainter::drawRect(p,rect);
+
 		QRect shadow_right = QRect(rect.right(), rect.y() + d_shadow_size_y, d_shadow_size_x, rect.height()-1);
 		QRect shadow_bottom = QRect(rect.x() + d_shadow_size_x, rect.bottom(), rect.width()-1, d_shadow_size_y);
-		p->setBrush(QBrush(Qt::black));
-		QwtPainter::drawRect(p, shadow_right);
-		QwtPainter::drawRect(p, shadow_bottom);
-
-		p->setBrush(d_text->backgroundBrush());
-		QwtPainter::drawRect(p,rect);
+		QwtPainter::fillRect(p, shadow_right, QBrush(Qt::black));
+		QwtPainter::fillRect(p, shadow_bottom, QBrush(Qt::black));
 	}
 	p->restore();
 }
