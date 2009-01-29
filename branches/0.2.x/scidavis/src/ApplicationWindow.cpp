@@ -7058,7 +7058,7 @@ void ApplicationWindow::pasteSelection()
 
 			Graph* g = plot->addLayer();
 			setPreferences(g);
-			g->copy(lastCopiedLayer);
+			g->copy(this, lastCopiedLayer);
 			QPoint pos=plot->mapFromGlobal(QCursor::pos());
 			plot->setGraphGeometry(pos.x(), pos.y()-20, lastCopiedLayer->width(), lastCopiedLayer->height());
 
@@ -7111,7 +7111,7 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
 
 	if (w->inherits("MultiLayer")){
 		nw = multilayerPlot(generateUniqueName(tr("Graph")));
-		((MultiLayer *)nw)->copy((MultiLayer *)w);
+		((MultiLayer *)nw)->copy(this, (MultiLayer *)w);
 	} else if (w->inherits("Table")){
 		Table *t = (Table *)w;
 		QString caption = generateUniqueName(tr("Table"));
@@ -8388,13 +8388,28 @@ void ApplicationWindow::updateFunctionLists(int type, QStringList &formulas)
 	}
 }
 
-void ApplicationWindow::newFunctionPlot(int type,QStringList &formulas, const QString& var, QList<double> &ranges, int points)
+bool ApplicationWindow::newFunctionPlot(int type,QStringList &formulas, const QString& var, QList<double> &ranges, int points)
 {
-    MultiLayer *ml = newGraph();
-    if (ml)
-        ml->activeGraph()->addFunctionCurve(type,formulas, var,ranges,points);
+	FunctionCurve *c = new FunctionCurve(this, (FunctionCurve::FunctionType)type, tr("F")+"1");
+	c->setPen(QPen(QColor(Qt::black), 1));
+	c->setRange(ranges[0], ranges[1]);
+	c->setFormulas(formulas);
+	c->setVariable(var);
+	if (!c->loadData(points)) {
+		delete c;
+		return false;
+	}
+
+	MultiLayer *ml = newGraph();
+	if (!ml) {
+		delete c;
+		return false;
+	}
+
+	ml->activeGraph()->insertPlotItem(c, Graph::Line);
 
 	updateFunctionLists(type, formulas);
+	return true;
 }
 
 void ApplicationWindow::clearLogInfo()
@@ -9666,7 +9681,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			else
 				cl.penWidth = cl.lWidth;
 
-			ag->insertFunctionCurve(curve[1], curve[2].toInt(), d_file_version);
+			ag->insertFunctionCurve(app, curve[1], curve[2].toInt(), d_file_version);
 			ag->setCurveType(curveID, (Graph::CurveType)curve[5].toInt(), false);
 			ag->updateCurveLayout(curveID, &cl);
 			if (d_file_version >= 88)
@@ -10040,7 +10055,7 @@ void ApplicationWindow::copyActiveLayer()
 	lastCopiedLayer = new Graph (0, 0, 0);
 	lastCopiedLayer->setAttribute(Qt::WA_DeleteOnClose);
 	lastCopiedLayer->setGeometry(0, 0, g->width(), g->height());
-	lastCopiedLayer->copy(g);
+	lastCopiedLayer->copy(this,g);
 	g->copyImage();
 }
 

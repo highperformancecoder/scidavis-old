@@ -61,52 +61,11 @@ void NonLinearFit::init()
 	d_fdf = user_fdf;
 	d_fsimplex = user_d;
 	d_explanation = tr("Non-linear");
+        d_init_err = false;
 }
 
 void NonLinearFit::setFormula(const QString& s)
 {
-	if (s.isEmpty())
-	{
-		QMessageBox::critical((ApplicationWindow *)parent(),  tr("Input function error"),
-				tr("Please enter a valid non-empty expression! Operation aborted!"));
-		d_init_err = true;
-		return;
-	}
-
-	if (!d_p)
-	{
-		QMessageBox::critical((ApplicationWindow *)parent(), tr("Fit Error"),
-				tr("There are no parameters specified for this fit operation. Please define a list of parameters first!"));
-		d_init_err = true;
-		return;
-	}
-
-	if (d_formula == s)
-		return;
-
-	try
-	{
-		double *param = new double[d_p];
-		MyParser parser;
-		double xvar;
-		parser.DefineVar("x", &xvar);
-		for (int k=0; k<(int)d_p; k++)
-		{
-			param[k]=gsl_vector_get(d_param_init, k);
-			parser.DefineVar(d_param_names[k].toAscii().constData(), &param[k]);
-		}
-		parser.SetExpr(s.toAscii().constData());
-		parser.Eval() ;
-		delete[] param;
-	}
-	catch(mu::ParserError &e)
-	{
-		QMessageBox::critical((ApplicationWindow *)parent(),  tr("Input function error"), QString::fromStdString(e.GetMsg()));
-		d_init_err = true;
-		return;
-	}
-
-	d_init_err = false;
 	d_formula = s;
 }
 
@@ -144,33 +103,22 @@ void NonLinearFit::setParametersList(const QStringList& lst)
 
 void NonLinearFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-	MyParser parser;
-	for (int i=0; i<d_p; i++)
-		parser.DefineVar(d_param_names[i].toAscii().constData(), &par[i]);
+    for (int i=0; i<d_p; i++)
+        d_script->setDouble(par[i], d_param_names[i]);
 
-	double xvar;
-	parser.DefineVar("x", &xvar);
-	parser.SetExpr(d_formula.toAscii().constData());
-
-	if (d_gen_function)
-	{
-		double X0 = d_x[0];
-		double step = (d_x[d_n-1]-X0)/(d_points-1);
-		for (int i=0; i<d_points; i++)
-		{
-			X[i] = X0+i*step;
-			xvar = X[i];
-			Y[i] = parser.Eval();
-		}
-	}
-	else
-	{
-		for (int i=0; i<d_points; i++)
-		{
-			X[i] = d_x[i];
-			xvar = X[i];
-			Y[i] = parser.Eval();
-		}
-	}
-	delete[] par;
+    if (d_gen_function) {
+        double X0 = d_x[0];
+        double step = (d_x[d_n-1]-X0)/(d_points-1);
+        for (int i=0; i<d_points; i++) {
+            X[i] = X0+i*step;
+            d_script->setDouble(X[i], "x");
+            Y[i] = d_script->eval().toDouble();
+        }
+    } else {
+        for (int i=0; i<d_points; i++) {
+            X[i] = d_x[i];
+            d_script->setDouble(X[i], "x");
+            Y[i] = d_script->eval().toDouble();
+        }
+    }
 }

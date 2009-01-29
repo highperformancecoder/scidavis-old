@@ -14,7 +14,7 @@ def import_to_global(modname, attrs=None, math=False):
 		f = getattr(mod, name)
 		setattr(__main__, name, f)
 		# make functions available in SciDAVis' math function list
-		if math and callable(f): scidavis.mathFunctions[name] = f
+		if math and callable(f): __main__.scidavis.mathFunctions[name] = f
 
 # Import standard math functions and constants into global namespace.
 import_to_global("math", None, True)
@@ -228,7 +228,8 @@ global Qt
 from PyQt4.QtCore import Qt
 
 # import SciDAVis' classes to the global namespace (particularly useful for fits)
-from scidavis import *
+for name in dir(__main__.scidavis):
+	setattr(__main__, name, getattr(__main__.scidavis, name))
 
 # import selected methods of ApplicationWindow into the global namespace
 appImports = (
@@ -242,7 +243,7 @@ appImports = (
 	"importImage"
 	)
 for name in appImports:
-	setattr(__main__,name,getattr(scidavis.app,name))
+	setattr(__main__,name,getattr(__main__.scidavis.app,name))
 
 # import utility module
 import sys

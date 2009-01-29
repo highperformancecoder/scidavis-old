@@ -3,6 +3,8 @@
 
 #include <gsl/gsl_vector.h>
 
+class Fit;
+
 //! Structure for fitting data
 struct FitData {
   size_t n;
@@ -10,8 +12,7 @@ struct FitData {
   double * X;
   double * Y;
   double * sigma; // standard deviation of Y (for weighting)
-  const char *function;
-  const char *names;
+  Fit * fit;
 };
 
 int expd3_fdf (const gsl_vector * x, void *params, gsl_vector * f, gsl_matrix * J);

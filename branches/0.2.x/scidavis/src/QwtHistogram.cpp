@@ -36,7 +36,9 @@
 
 QwtHistogram::QwtHistogram(Table *t, const QString& xColName, const char *name, int startRow, int endRow):
 	QwtBarCurve(QwtBarCurve::Vertical, t, xColName, name, startRow, endRow)
-{}
+{
+	d_autoBin = true;
+}
 
 void QwtHistogram::copy(const QwtHistogram *h)
 {

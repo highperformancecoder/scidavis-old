@@ -298,27 +298,7 @@ bool FunctionDialog::acceptFunction()
 		return false;
 	}
 
-	double x;
-	QString formula = boxFunction->text().simplified();
-	bool error=false;
-
-	try
-	{
-		MyParser parser;
-		parser.DefineVar("x", &x);
-		parser.SetExpr(formula.toAscii().constData());
-
-		x=start;
-		parser.Eval();
-		x=end;
-		parser.Eval();
-	}
-	catch(mu::ParserError &e)
-	{
-		QMessageBox::critical(0, tr("Input function error"), QString::fromStdString(e.GetMsg()));
-		boxFunction->setFocus();
-		error=true;
-	}
+	QString formula = boxFunction->text().replace(QChar::ParagraphSeparator,"\n");
 
 	// Collecting all the information
 	int type = boxType->currentItem();
@@ -327,23 +307,22 @@ bool FunctionDialog::acceptFunction()
 	formulas+=formula;
 	ranges+=start;
 	ranges+=end;
-	if (!error)
-	{
-		ApplicationWindow *app = (ApplicationWindow *)this->parent();
-		app->updateFunctionLists(type,formulas);
-		if (!graph)
-			app->newFunctionPlot(type, formulas, "x", ranges, boxPoints->value());
+
+	bool result;
+	ApplicationWindow *app = (ApplicationWindow *)this->parent();
+	app->updateFunctionLists(type,formulas);
+	if (!graph)
+		result = app->newFunctionPlot(type, formulas, "x", ranges, boxPoints->value());
+	else {
+		if (curveID >= 0)
+			result = graph->modifyFunctionCurve(app, curveID, type, formulas, "x", ranges, boxPoints->value());
 		else
-		{
-			if (curveID >= 0)
-				graph->modifyFunctionCurve(curveID, type, formulas, "x", ranges, boxPoints->value());
-			else
-				graph->addFunctionCurve(type,formulas, "x", ranges, boxPoints->value());
-		}
-		return true;
+			result = graph->addFunctionCurve(app, type,formulas, "x", ranges, boxPoints->value());
 	}
-	return false;
+	if (!result) boxFunction->setFocus();
+	return result;
 }
+
 bool FunctionDialog::acceptParametric()
 {
 	QString from=boxParFrom->text().toLower();
@@ -385,45 +364,9 @@ bool FunctionDialog::acceptParametric()
 		return false;
 	}
 
-	double parameter;
-	QString xformula=boxXFunction->currentText();
-	QString yformula=boxYFunction->currentText();
-	bool error=false;
+	QString xformula=boxXFunction->currentText().replace(QChar::ParagraphSeparator,"\n");
+	QString yformula=boxYFunction->currentText().replace(QChar::ParagraphSeparator,"\n");
 
-	try
-	{
-		MyParser parser;
-		parser.DefineVar((boxParameter->text()).toAscii().constData(), &parameter);
-		parser.SetExpr(xformula.toAscii().constData());
-
-		parameter=start;
-		parser.Eval();
-		parameter=end;
-		parser.Eval();
-	}
-	catch(mu::ParserError &e)
-	{
-		QMessageBox::critical(0, tr("Input function error"), QString::fromStdString(e.GetMsg()));
-		boxXFunction->setFocus();
-		error=true;
-	}
-	try
-	{
-		MyParser parser;
-		parser.DefineVar((boxParameter->text()).toAscii().constData(), &parameter);
-		parser.SetExpr(yformula.toAscii().constData());
-
-		parameter=start;
-		parser.Eval();
-		parameter=end;
-		parser.Eval();
-	}
-	catch(mu::ParserError &e)
-	{
-		QMessageBox::critical(0, tr("Input function error"), QString::fromStdString(e.GetMsg()));
-		boxYFunction->setFocus();
-		error=true;
-	}
 	// Collecting all the information
 	int type = boxType->currentItem();
 	QStringList formulas;
@@ -432,22 +375,20 @@ bool FunctionDialog::acceptParametric()
 	formulas+=yformula;
 	ranges+=start;
 	ranges+=end;
-	if (!error)
-	{
-		ApplicationWindow *app = (ApplicationWindow *)this->parent();
-		app->updateFunctionLists(type,formulas);
-		if (!graph)
-			app->newFunctionPlot(type, formulas, boxParameter->text(),ranges, boxParPoints->value());
+
+	bool result;
+	ApplicationWindow *app = (ApplicationWindow *)this->parent();
+	app->updateFunctionLists(type,formulas);
+	if (!graph)
+		result = app->newFunctionPlot(type, formulas, boxParameter->text(),ranges, boxParPoints->value());
+	else {
+		if (curveID >= 0)
+			result = graph->modifyFunctionCurve(app, curveID, type, formulas, boxParameter->text(),ranges, boxParPoints->value());
 		else
-		{
-			if (curveID >= 0)
-				graph->modifyFunctionCurve(curveID, type, formulas, boxParameter->text(),ranges, boxParPoints->value());
-			else
-				graph->addFunctionCurve(type,formulas, boxParameter->text(),ranges, boxParPoints->value());
-		}
-		return true;
+			result = graph->addFunctionCurve(app, type,formulas, boxParameter->text(),ranges, boxParPoints->value());
 	}
-	return false;
+	if (!result) boxXFunction->setFocus();
+	return result;
 }
 
 bool FunctionDialog::acceptPolar()
@@ -491,45 +432,9 @@ bool FunctionDialog::acceptPolar()
 		return false;
 	}
 
-	double parameter;
-	QString rformula=boxPolarRadius->currentText();
-	QString tformula=boxPolarTheta->currentText();
-	bool error=false;
+	QString rformula=boxPolarRadius->currentText().replace(QChar::ParagraphSeparator,"\n");
+	QString tformula=boxPolarTheta->currentText().replace(QChar::ParagraphSeparator,"\n");
 
-	try
-	{
-		MyParser parser;
-		parser.DefineVar((boxPolarParameter->text()).toAscii().constData(), &parameter);
-		parser.SetExpr(rformula.toAscii().constData());
-
-		parameter=start;
-		parser.Eval();
-		parameter=end;
-		parser.Eval();
-	}
-	catch(mu::ParserError &e)
-	{
-		QMessageBox::critical(0, tr("Input function error"), QString::fromStdString(e.GetMsg()));
-		boxPolarRadius->setFocus();
-		error=true;
-	}
-	try
-	{
-		MyParser parser;
-		parser.DefineVar((boxPolarParameter->text()).toAscii().constData(), &parameter);
-		parser.SetExpr(tformula.toAscii().constData());
-
-		parameter=start;
-		parser.Eval();
-		parameter=end;
-		parser.Eval();
-	}
-	catch(mu::ParserError &e)
-	{
-		QMessageBox::critical(0, tr("Input function error"), QString::fromStdString(e.GetMsg()));
-		boxPolarTheta->setFocus();
-		error=true;
-	}
 	// Collecting all the information
 	int type = boxType->currentItem();
 	QStringList formulas;
@@ -538,23 +443,22 @@ bool FunctionDialog::acceptPolar()
 	formulas+=tformula;
 	ranges+=start;
 	ranges+=end;
-	if (!error)
-	{
-		ApplicationWindow *app = (ApplicationWindow *)this->parent();
-		app->updateFunctionLists(type,formulas);
 
-		if (!graph)
-			app->newFunctionPlot(type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
+	bool result;
+	ApplicationWindow *app = (ApplicationWindow *)this->parent();
+	app->updateFunctionLists(type,formulas);
+
+	if (!graph)
+		result = app->newFunctionPlot(type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
+	else {
+		if (curveID >= 0)
+			result = graph->modifyFunctionCurve(app, curveID, type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
 		else
-		{
-			if (curveID >= 0)
-				graph->modifyFunctionCurve(curveID, type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
-			else
-				graph->addFunctionCurve(type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
+			result = graph->addFunctionCurve(app, type, formulas, boxPolarParameter->text(),ranges, boxPolarPoints->value());
 		}
-		return true;
-	}
-	return false;
+	if (!result)
+		boxPolarRadius->setFocus();
+	return result;
 }
 
 void FunctionDialog::accept()

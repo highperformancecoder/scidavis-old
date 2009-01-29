@@ -60,11 +60,11 @@ muParserScript::muParserScript(ScriptingEnv *env, const QString &code, QObject *
     else if (i->numargs == 3 && i->fun3 != NULL)
       parser.DefineFun(i->name, i->fun3);
 
-  if (Context->inherits("Table")) {
+  if (Context && Context->inherits("Table")) {
 	  parser.DefineFun("col", mu_col, false);
 	  parser.DefineFun("cell", mu_tableCell);
 	  parser.DefineFun("tablecol", mu_tablecol, false);
-  } else if (Context->inherits("Matrix"))
+  } else if (Context && Context->inherits("Matrix"))
 	  parser.DefineFun("cell", mu_cell);
 
   rparser = parser;
@@ -74,7 +74,7 @@ muParserScript::muParserScript(ScriptingEnv *env, const QString &code, QObject *
 
 double muParserScript::col(const QString &arg)
 {
-	if (!Context->inherits("Table"))
+	if (!Context || !Context->inherits("Table"))
 		throw Parser::exception_type(tr("col() works only on tables!").toAscii().constData());
 	QStringList items;
 	QString item = "";
@@ -134,7 +134,7 @@ double muParserScript::col(const QString &arg)
 
 double muParserScript::tablecol(const QString &arg)
 {
-	if (!Context->inherits("Table"))
+	if (!Context || !Context->inherits("Table"))
 		throw Parser::exception_type(tr("tablecol() works only on tables!").toAscii().constData());
 	QStringList items;
 	QString item = "";
@@ -193,7 +193,7 @@ double muParserScript::tablecol(const QString &arg)
 
 double muParserScript::cell(int row, int col)
 {
-	if (!Context->inherits("Matrix"))
+	if (!Context || !Context->inherits("Matrix"))
 		throw Parser::exception_type(tr("cell() works only on tables and matrices!").toAscii().constData());
 	Matrix *matrix = (Matrix*) Context;
 	if (row < 1 || row > matrix->numRows())
@@ -210,7 +210,7 @@ double muParserScript::cell(int row, int col)
 
 double muParserScript::tableCell(int col, int row)
 {
-	if (!Context->inherits("Table"))
+	if (!Context || !Context->inherits("Table"))
 		throw Parser::exception_type(tr("cell() works only on tables and matrices!").toAscii().constData());
 	Table *table = (Table*) Context;
 	if (row < 1 || row > table->numRows())

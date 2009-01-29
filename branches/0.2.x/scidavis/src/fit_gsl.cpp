@@ -8,7 +8,7 @@
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_math.h>
 #include "fit_gsl.h"
-#include "MyParser.h"
+#include "Fit.h"
 
 int expd3_f (const gsl_vector * x, void *params,
 		gsl_vector * f)
@@ -614,124 +614,17 @@ int lorentz_multi_peak_fdf (const gsl_vector * x, void *params, gsl_vector * f, 
 
 int user_f(const gsl_vector * x, void *params, gsl_vector * f)
 {
-	size_t n = ((struct FitData *)params)->n;
-	size_t p = ((struct FitData *)params)->p;
-	double *X = ((struct FitData *)params)->X;
-	double *Y = ((struct FitData *)params)->Y;
-	double *sigma = ((struct FitData *)params)->sigma;
-
-	const char *function = ((struct FitData *) params)->function;
-
-	QString names = (QString)((struct FitData *) params)->names;
-	QStringList parNames= names.split(",", QString::SkipEmptyParts);
-
-	MyParser parser;
-	try
-	{
-		double *parameters = new double[p];
-		double xvar;
-		parser.DefineVar("x", &xvar);
-		for (int i=0; i<(int)p; i++)
-		{
-			parameters[i]=gsl_vector_get(x,i);
-			parser.DefineVar(parNames[i].toAscii().constData(), &parameters[i]);
-		}	
-		parser.SetExpr(function);
-		for (int j = 0; j < (int)n; j++)
-		{
-			xvar=X[j];
-			gsl_vector_set (f, j, (parser.Eval() - Y[j])/sigma[j]);
-		}
-		delete[] parameters;
-	}
-	catch(mu::ParserError &e)
-	{
-		QMessageBox::critical(0,"Input function error",QString::fromStdString(e.GetMsg()));
-		return GSL_EINVAL;
-	}
-	return GSL_SUCCESS;
+        static_cast<struct FitData*>(params)->fit->evaluate_f(x, f);
 }
 
 double user_d(const gsl_vector * x, void *params)
 {
-	size_t n = ((struct FitData *)params)->n;
-	size_t p = ((struct FitData *)params)->p;
-	double *X = ((struct FitData *)params)->X;
-	double *Y = ((struct FitData *)params)->Y;
-	double *sigma = ((struct FitData *)params)->sigma;
-
-	const char *function = ((struct FitData *) params)->function;
-	QString names = (QString)((struct FitData *) params)->names;
-	QStringList parNames= names.split(",", QString::SkipEmptyParts);
-
-	double val=0;
-	MyParser parser;
-	try
-	{
-		double *parameters = new double[p];
-		double xvar;
-		parser.DefineVar("x", &xvar);
-		for (int i=0; i<(int)p; i++)
-		{
-			parameters[i]=gsl_vector_get(x,i);
-			parser.DefineVar(parNames[i].toAscii().constData(), &parameters[i]);
-		}	
-		parser.SetExpr(function);
-		for (int j = 0; j < (int)n; j++)
-		{
-			xvar=X[j];
-			double t=(parser.Eval() - Y[j])/sigma[j];
-			val+=t*t;
-		}
-		delete[] parameters;
-	}
-	catch(mu::ParserError &e)
-	{
-		QMessageBox::critical(0,"Input function error",QString::fromStdString(e.GetMsg()));
-		return GSL_EINVAL;
-	}
-	return val;
+        return static_cast<struct FitData*>(params)->fit->evaluate_d(x);
 }
 
 int user_df(const gsl_vector *x, void *params, gsl_matrix *J)
 {
-	size_t n = ((struct FitData *)params)->n;
-	size_t p = ((struct FitData *)params)->p;
-	double *X = ((struct FitData *)params)->X;
-	double *sigma = ((struct FitData *)params)->sigma;
-
-	const char *function = ((struct FitData *) params)->function;
-	QString names = (QString)((struct FitData *) params)->names;
-	QStringList parNames= names.split(",", QString::SkipEmptyParts);
-
-	try
-	{
-		double *param = new double[p];
-		MyParser parser;
-		double xvar; 
-		parser.DefineVar("x", &xvar);
-
-		for (int k=0; k<(int)p; k++)
-		{
-			param[k]=gsl_vector_get(x,k);
-			parser.DefineVar(parNames[k].toAscii().constData(), &param[k]);
-		}
-
-		parser.SetExpr(function);
-
-		for (int i = 0; i<(int)n; i++)
-		{
-			xvar = X[i];	 
-			for (int j=0; j<(int)p; j++)
-				gsl_matrix_set (J, i, j, 1/sigma[i]*parser.Diff(&param[j], param[j]));
-		}
-		delete[] param;
-	}
-	catch(mu::ParserError &)
-	{
-		return GSL_EINVAL;
-	}
-	return GSL_SUCCESS;
+    return static_cast<struct FitData*>(params)->fit->evaluate_df(x, J);
 }
 
 int user_fdf(const gsl_vector * x, void *params, gsl_vector * f, gsl_matrix * J)

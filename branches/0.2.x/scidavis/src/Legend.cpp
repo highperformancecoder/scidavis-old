@@ -58,6 +58,8 @@ Legend::Legend(Plot *plot):
 	hspace = 30;
 	left_margin = 10;
 	top_margin = 5;
+	d_shadow_size_x = 5;
+	d_shadow_size_y = 5;
 }
 
 void Legend::draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &) const
@@ -65,12 +67,15 @@ void Legend::draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap,
 	const int x = xMap.transform(xValue());
 	const int y = yMap.transform(yValue());
 
+	QwtPainter::setMetricsMap(plot(), p->device());
+	const QwtMetricsMap map = QwtPainter::metricsMap();
+
 	const int symbolLineLength = symbolsMaxLineLength();
 
 	int width, height;
-	QwtArray<long> heights = itemsHeight(y, symbolLineLength, width, height);
+	QwtArray<long> heights = itemsHeight(map.deviceToLayoutY(y), symbolLineLength, width, height);
 
-	QRect rs = QRect(QPoint(x, y), QSize(width, height));
+	QRect rs = QRect(map.deviceToLayout(QPoint(x, y)), QSize(width, height));
 
 	drawFrame(p, d_frame, rs);
 	drawSymbols(p, rs, heights, symbolLineLength);
@@ -194,23 +199,24 @@ void Legend::drawFrame(QPainter *p, int type, const QRect& rect) const
 	p->save();
 	p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin));
 	if (type == None)
-		p->fillRect (rect, d_text->backgroundBrush());
+		QwtPainter::fillRect (p, rect, d_text->backgroundBrush());
 
 	if (type == Line)
 	{
-		p->setBrush(d_text->backgroundBrush());
+		// drawing/filling in one go broken for PDF export:
+		// pen "inherits" alpha value of background brush
+		QwtPainter::fillRect(p, rect, d_text->backgroundBrush());
 		QwtPainter::drawRect(p, rect);
 	}
 	else if (type == Shadow)
 	{
-		QRect shadow_right = QRect(rect.right(), rect.y() + 5, 5, rect.height()-1);
-		QRect shadow_bottom = QRect(rect.x() + 5, rect.bottom(), rect.width()-1, 5);
-		p->setBrush(QBrush(Qt::black));
-		p->drawRect(shadow_right);
-		p->drawRect(shadow_bottom);
-
-		p->setBrush(d_text->backgroundBrush());
+		QwtPainter::fillRect(p, rect, d_text->backgroundBrush());
 		QwtPainter::drawRect(p,rect);
+
+		QRect shadow_right = QRect(rect.right(), rect.y() + d_shadow_size_y, d_shadow_size_x, rect.height()-1);
+		QRect shadow_bottom = QRect(rect.x() + d_shadow_size_x, rect.bottom(), rect.width()-1, d_shadow_size_y);
+		QwtPainter::fillRect(p, shadow_right, QBrush(Qt::black));
+		QwtPainter::fillRect(p, shadow_bottom, QBrush(Qt::black));
 	}
 	p->restore();
 }
@@ -254,8 +260,8 @@ void Legend::drawSymbols(QPainter *p, const QRect& rect,
 {
 	Graph *g = (Graph *) d_plot->parent();
 
-	int w = rect.x() + 10;
-	int l = symbolLineLength + 20;
+	int w = rect.x() + left_margin;
+	int l = symbolLineLength + 2*left_margin;
 
 	QString text = d_text->text().trimmed();
 	QStringList titles = text.split("\n", QString::KeepEmptyParts);
@@ -367,6 +373,15 @@ void Legend::drawLegends(QPainter *p, const QRect& rect,
 		aux.setColor(d_text->color());
 
 		QSize size = aux.textSize();
+		// bug in Qwt; workaround in QwtText::textSize() only works for short texts.
+		// Thus, we work around the workaround.
+		const QwtMetricsMap map = QwtPainter::metricsMap();
+		if (!map.isIdentity()) {
+			int screen_width = map.layoutToScreenX(size.width());
+			screen_width -= 3;
+			screen_width *= 1.1;
+			size = QSize(map.screenToLayoutX(screen_width), size.height());
+		}
 
 		QRect tr = QRect(QPoint(x, height[i] - size.height()/2), size);
 		aux.draw(p, tr);
@@ -396,6 +411,15 @@ QwtArray<long> Legend::itemsHeight(int y, int symbolLineLength, int &width, int 
 
 		QwtText aux(parse(str));
 		QSize size = aux.textSize(d_text->font());
+		// bug in Qwt; workaround in QwtText::textSize() only works for short texts.
+		// Thus, we work around the workaround.
+		const QwtMetricsMap map = QwtPainter::metricsMap();
+		if (!map.isIdentity()) {
+			int screen_width = map.layoutToScreenX(size.width());
+			screen_width -= 3;
+			screen_width *= 1.1;
+			size = QSize(map.screenToLayoutX(screen_width), size.height());
+		}
 		textL += size.width();
 		if (textL > maxL)
 			maxL = textL;

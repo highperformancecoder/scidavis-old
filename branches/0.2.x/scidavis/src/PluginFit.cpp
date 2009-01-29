@@ -158,6 +158,5 @@ void PluginFit::calculateFitCurveData(double *par, double *X, double *Y)
 			Y[i]= f_eval(X[i], par);
 		}
 	}
-	delete[] par;
 }
 

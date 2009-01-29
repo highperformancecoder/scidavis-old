@@ -519,7 +519,7 @@ bool ImportOPJ::importGraphs(OPJFile opj)
 						formulas << opj.functionFormula(s);
 						ranges << opj.functionBegin(s) << opj.functionEnd(s);
 					}
-					graph->addFunctionCurve(type, formulas, "x", ranges, opj.functionPoints(s), opj.functionName(s));
+					graph->addFunctionCurve(mw, type, formulas, "x", ranges, opj.functionPoints(s), opj.functionName(s));
 
 					mw->updateFunctionLists(type, formulas);
 					break;

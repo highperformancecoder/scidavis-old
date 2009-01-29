@@ -145,7 +145,7 @@ class Graph: public QWidget
 	public slots:
 		//! Accessor method for #d_plot.
 		Plot* plotWidget(){return d_plot;};
-		void copy(Graph* g);
+		void copy(ApplicationWindow *parent, Graph* g);
 
 		//! \name Pie Curves
 		//@{
@@ -595,11 +595,11 @@ class Graph: public QWidget
 
 		//! \name User-defined Functions
 		//@{
-		void modifyFunctionCurve(int curve, int type, const QStringList &formulas, const QString &var,QList<double> &ranges, int points);
-		void addFunctionCurve(int type, const QStringList &formulas, const QString& var,
+		bool modifyFunctionCurve(ApplicationWindow * parent, int curve, int type, const QStringList &formulas, const QString &var,QList<double> &ranges, int points);
+		bool addFunctionCurve(ApplicationWindow *parent, int type, const QStringList &formulas, const QString& var,
 				QList<double> &ranges, int points, const QString& title = QString::null);
 		//! Used when reading from a project file.
-		void insertFunctionCurve(const QString& formula, int points, int fileVersion);
+		void insertFunctionCurve(ApplicationWindow * parent, const QString& formula, int points, int fileVersion);
 		//! Returns an unique function name
         QString generateFunctionName(const QString& name = tr("F"));
 		//@}

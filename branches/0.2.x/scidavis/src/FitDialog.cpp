@@ -1115,151 +1115,125 @@ void FitDialog::accept()
 		n=rows;
 
 	QStringList parameters;
-	MyParser parser;
-	bool error=FALSE;
-
 	double *paramsInit = new double[n];
-	QString formula = boxFunction->text();
-	try
-	{
-		bool withNames = containsUserFunctionName(formula);
-		while(withNames)
-		{
-			for (i=0; i<d_user_function_names.count(); i++)
-			{
-				if (formula.contains(d_user_function_names[i]))
-				{
-					QStringList l = d_user_functions[i].split("=");
-					formula.replace(d_user_function_names[i], "(" + l[1] + ")");
-				}
+	QString formula;
+
+	// recursively define variables for user functions used in formula
+	bool found_uf;
+	do {
+		found_uf = false;
+		for (i=0; i<d_user_function_names.count(); i++)
+			if (boxFunction->text().contains(d_user_function_names[i])) {
+				QStringList l = d_user_functions[i].split("=");
+				formula += QString("%1=%2\n")
+						.arg(d_user_function_names[i])
+						.arg(l[1]);
+				found_uf = true;
 			}
-			withNames = containsUserFunctionName(formula);
-		}
+	} while (found_uf);
+	formula += boxFunction->text();
 
-		for (i=0; i<d_built_in_function_names.count(); i++)
-		{
-			if (formula.contains(d_built_in_function_names[i]))
-				formula.replace(d_built_in_function_names[i], "(" + d_built_in_functions[i] + ")");
-		}
+	// define variables for builtin functions used in formula
+	for (i=0; i<d_built_in_function_names.count(); i++)
+		if (formula.contains(d_built_in_function_names[i]))
+			formula.prepend(QString("%1=%2\n")
+					.arg(d_built_in_function_names[i])
+					.arg(d_built_in_functions[i]));
 
-		if (!boxParams->isColumnHidden(2))
-		{
-			int j = 0;
-			for (i=0;i<rows;i++)
-			{
+
+        if (!boxParams->isColumnHidden(2))
+        {
+            int j = 0;
+            for (i=0;i<rows;i++)
+            {
                 QCheckBox *cb = (QCheckBox*)boxParams->cellWidget(i, 2);
-				if (!cb->isChecked())
-				{
-					paramsInit[j] = QLocale().toDouble(boxParams->item(i,1)->text());
-					parser.DefineVar(boxParams->item(i,0)->text().toAscii().constData(), &paramsInit[j]);
-					parameters << boxParams->item(i,0)->text();
-					j++;
-				}
-				else
-					formula.replace(boxParams->item(i,0)->text(), 
-						CONFS(boxParams->item(i,1)->text()) );
-			}
-		}
-		else
-		{
-			for (i=0;i<n;i++)
-			{
-				paramsInit[i] = QLocale().toDouble(boxParams->item(i,1)->text());
-				parser.DefineVar(boxParams->item(i,0)->text().toAscii().constData(), &paramsInit[i]);
-				parameters << boxParams->item(i,0)->text();
-			}
-		}
+                if (!cb->isChecked())
+                {
+                    paramsInit[j] = QLocale().toDouble(boxParams->item(i,1)->text());
+                    parameters << boxParams->item(i,0)->text();
+                    j++;
+                }
+                else
+                    formula.prepend(QString("%1=%2\n")
+                                    .arg(boxParams->item(i,0)->text())
+                                    .arg(CONFS(boxParams->item(i,1)->text())));
+            }
+        }
+        else
+        {
+            for (i=0;i<n;i++)
+            {
+                paramsInit[i] = QLocale().toDouble(boxParams->item(i,1)->text());
+                parameters << boxParams->item(i,0)->text();
+            }
+        }
 
-		parser.SetExpr(formula.toAscii().constData());
-		double x=start;
-		parser.DefineVar("x", &x);
-		parser.Eval();
-	}
-	catch(mu::ParserError &e)
-	{
-		QString errorMsg = boxFunction->text() + " = " + formula + "\n" + QString::fromStdString(e.GetMsg()) + "\n";
+        ApplicationWindow *app = (ApplicationWindow *)this->parent();
 
-#if 0 // muParser 1.30 does not use ecUNEXPECTED_COMMA anymore
-		if(e.GetCode() == ecUNEXPECTED_COMMA)
-			errorMsg += tr("You have to use a dot as decimal separator in formulas.");
-		else
-#endif
-			errorMsg += tr("Please verify that you have initialized all the parameters!");
+        if (d_fitter)
+        {
+            delete d_fitter;
+            d_fitter  = 0;
+        }
 
-		QMessageBox::critical(0, tr("Input function error"), errorMsg);
-		boxFunction->setFocus();
-		error = true;
-	}
+        if (boxUseBuiltIn->isChecked() && categoryBox->currentRow() == 1)
+            fitBuiltInFunction(funcBox->currentItem()->text(), paramsInit);
+        else if (boxUseBuiltIn->isChecked() && categoryBox->currentRow() == 3)
+        {
+            d_fitter = new PluginFit(app, d_graph);
+            if (!((PluginFit*)d_fitter)->load(d_plugin_files_list[funcBox->currentRow()])){
+                d_fitter  = 0;
+                return;}
+            d_fitter->setInitialGuesses(paramsInit);
+        }
+        else
+        {
+            d_fitter = new NonLinearFit(app, d_graph);
+            ((NonLinearFit*)d_fitter)->setParametersList(parameters);
+            ((NonLinearFit*)d_fitter)->setFormula(formula);
+            d_fitter->setInitialGuesses(paramsInit);
+        }
+        delete[] paramsInit;
 
-	if (!error)
-	{
-		ApplicationWindow *app = (ApplicationWindow *)this->parent();
+        if (!d_fitter->setDataFromCurve(curve, start, end) ||
+            !d_fitter->setYErrorSource ((Fit::ErrorSource)boxYErrorSource->currentIndex(),
+                                        tableNamesBox->currentText()+"_"+colNamesBox->currentText()))
+        {
+            delete d_fitter;
+            d_fitter  = 0;
+            return;
+        }
 
-		if (d_fitter)
-		{
-			delete d_fitter;
-			d_fitter  = 0;
-		}
+        d_fitter->setTolerance (eps);
+        d_fitter->setAlgorithm((Fit::Algorithm)boxAlgorithm->currentIndex());
+        d_fitter->setColor(boxColor->currentIndex());
+        d_fitter->generateFunction(generatePointsBtn->isChecked(), generatePointsBox->value());
+        d_fitter->setMaximumIterations(boxPoints->value());
+        d_fitter->scaleErrors(scaleErrorsBox->isChecked());
 
-		if (boxUseBuiltIn->isChecked() && categoryBox->currentRow() == 1)
-			fitBuiltInFunction(funcBox->currentItem()->text(), paramsInit);
-		else if (boxUseBuiltIn->isChecked() && categoryBox->currentRow() == 3)
-		{
-			d_fitter = new PluginFit(app, d_graph);
-			if (!((PluginFit*)d_fitter)->load(d_plugin_files_list[funcBox->currentRow()])){
-				d_fitter  = 0;
-				return;}
-				d_fitter->setInitialGuesses(paramsInit);
-		}
-		else
-		{
-			d_fitter = new NonLinearFit(app, d_graph);
-			((NonLinearFit*)d_fitter)->setParametersList(parameters);
-			((NonLinearFit*)d_fitter)->setFormula(formula);
-			d_fitter->setInitialGuesses(paramsInit);
-		}
-		delete[] paramsInit;
-				
-		if (!d_fitter->setDataFromCurve(curve, start, end) ||
-			!d_fitter->setYErrorSource ((Fit::ErrorSource)boxYErrorSource->currentIndex(),
-					       tableNamesBox->currentText()+"_"+colNamesBox->currentText()))
-		{
-			delete d_fitter;
-			d_fitter  = 0;
-			return;
-		}
-				
-		d_fitter->setTolerance (eps);
-		d_fitter->setAlgorithm((Fit::Algorithm)boxAlgorithm->currentIndex());
-		d_fitter->setColor(boxColor->currentIndex());
-		d_fitter->generateFunction(generatePointsBtn->isChecked(), generatePointsBox->value());
-		d_fitter->setMaximumIterations(boxPoints->value());
-		d_fitter->scaleErrors(scaleErrorsBox->isChecked());
+        if (d_fitter->name() == tr("MultiPeak") && ((MultiPeakFit *)d_fitter)->peaks() > 1)
+        {
+            ((MultiPeakFit *)d_fitter)->enablePeakCurves(app->generatePeakCurves);
+            ((MultiPeakFit *)d_fitter)->setPeakCurvesColor(app->peakCurvesColor);
+        }
 
-		if (d_fitter->name() == tr("MultiPeak") && ((MultiPeakFit *)d_fitter)->peaks() > 1)
-		{
-			((MultiPeakFit *)d_fitter)->enablePeakCurves(app->generatePeakCurves);
-			((MultiPeakFit *)d_fitter)->setPeakCurvesColor(app->peakCurvesColor);
-		}
-
-		d_fitter->fit();
-		double *res = d_fitter->results();
-		if (!boxParams->isColumnHidden(2))
-		{
-			int j = 0;
-			for (i=0;i<rows;i++)
-			{
+        d_fitter->fit();
+        double *res = d_fitter->results();
+        if (!boxParams->isColumnHidden(2))
+        {
+            int j = 0;
+            for (i=0;i<rows;i++)
+            {
                 QCheckBox *cb = (QCheckBox*)boxParams->cellWidget(i, 2);
-				if (!cb->isChecked())
-					boxParams->item(i, 1)->setText(QLocale().toString(res[j++], 'g', boxPrecision->value()));
-			}
-		}
-		else
-		{
-			for (i=0;i<rows;i++)
-				boxParams->item(i, 1)->setText(QLocale().toString(res[i], 'g', boxPrecision->value()));
-		}
-	}
+                if (!cb->isChecked())
+                    boxParams->item(i, 1)->setText(QLocale().toString(res[j++], 'g', boxPrecision->value()));
+            }
+        }
+        else
+        {
+            for (i=0;i<rows;i++)
+                boxParams->item(i, 1)->setText(QLocale().toString(res[i], 'g', boxPrecision->value()));
+        }
 }
 
 void FitDialog::fitBuiltInFunction(const QString& function, double* initVal)

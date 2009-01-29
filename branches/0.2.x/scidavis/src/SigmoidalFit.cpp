@@ -90,7 +90,6 @@ void SigmoidalFit::calculateFitCurveData(double *par, double *X, double *Y)
 			Y[i] = (par[0]-par[1])/(1+exp((X[i]-par[2])/par[3]))+par[1];
 		}
 	}
-	delete[] par;
 }
 
 void SigmoidalFit::guessInitialValues()

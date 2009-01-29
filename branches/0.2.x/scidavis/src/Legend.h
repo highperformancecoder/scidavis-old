@@ -127,6 +127,8 @@ protected:
 
 	//!Distance between frame and content
 	int left_margin, top_margin;
+
+        int d_shadow_size_x, d_shadow_size_y;
 };
 
 #endif

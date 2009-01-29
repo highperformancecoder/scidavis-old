@@ -111,7 +111,7 @@ void FFTFilter::calculateOutputData(double *x, double *y)
 	   y[i] = d_y[i];
 	}
 
-    double df = 0.5/(double)(d_n*(x[1]-x[0]));//half frequency sampling due to GSL storing
+	double df = 1.0/(double)(d_n*(x[1]-x[0]));
 
 	gsl_fft_real_workspace *work = gsl_fft_real_workspace_alloc(d_n);
 	gsl_fft_real_wavetable *real = gsl_fft_real_wavetable_alloc(d_n);
@@ -128,28 +128,21 @@ void FFTFilter::calculateOutputData(double *x, double *y)
 	{
 		case 1://low pass
 			d_explanation += tr("Low Pass FFT Filter");
-			for (int i = 0; i < d_n; i++)
-				y[i] = i*df > d_low_freq ? 0 : y[i];
+			for (int i = d_n-1; i >= 0 && ((i+1)/2)*df > d_low_freq; i--)
+				y[i] = 0;
 			break;
 
 		case 2://high pass
 			d_explanation += tr("High Pass FFT Filter");
-			for (int i = 0; i < d_n; i++)
-				y[i] = i*df < d_low_freq ? 0 : y[i];
+			for (int i = 0; i < d_n && ((i+1)/2)*df < d_low_freq; i++)
+				y[i] = 0;
 			break;
 
 		case 3://band pass
 			d_explanation += tr("Band Pass FFT Filter");
-			if(d_offset)
-			{// keep DC offset
-				for (int i = 1; i < d_n; i++)
-					y[i] = ((i*df > d_low_freq ) && (i*df < d_high_freq )) ? y[i] : 0;
-			}
-			else
-			{
-				for (int i = 0; i < d_n; i++)
-					y[i] = ((i*df > d_low_freq ) && (i*df < d_high_freq )) ? y[i] : 0;
-			}
+			for (int i = d_offset ? 1 : 0; i < d_n; i++)
+				if ((((i+1)/2)*df <= d_low_freq ) || (((i+1)/2)*df >= d_high_freq ))
+					y[i] = 0;
 			break;
 
 		case 4://band block
@@ -159,7 +152,8 @@ void FFTFilter::calculateOutputData(double *x, double *y)
 				y[0] = 0;//substract DC offset
 
 			for (int i = 1; i < d_n; i++)
-				y[i] = ((i*df > d_low_freq ) && (i*df < d_high_freq )) ? 0 : y[i];
+				if ((((i+1)/2)*df > d_low_freq ) && (((i+1)/2)*df < d_high_freq ))
+					y[i] = 0;
 			break;
 	}
 
