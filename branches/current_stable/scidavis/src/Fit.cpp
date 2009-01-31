@@ -235,17 +235,24 @@ QString Fit::logFitInfo(double *par, int iterations, int status, const QString& 
 
 double Fit::rSquare()
 {
-	double sst;
-	if (d_y_error_source == UnknownErrors)
-		sst = gsl_stats_tss(d_y, 1, d_n);
-	else {
-		double * weights = new double[d_n];
-		for (int i=0; i<d_n; i++)
-			weights[i] = 1.0/pow(d_y_errors[i], 2);
-		sst = gsl_stats_wtss(weights, 1, d_y, 1, d_n);
-		delete[] weights;
+        double mean = 0.0, tss = 0.0, weights_sum = 0.0;
+
+        if (d_y_error_source == UnknownErrors) {
+            for (int i=0; i<d_n; i++)
+                mean += d_y[i];
+            mean /= d_n;
+            for (int i=0; i<d_n; i++)
+                tss += (d_y[i] - mean)*(d_y[i] - mean);
+        } else {
+            for (int i=0; i<d_n; i++) {
+                mean += d_y[i]/(d_y_errors[i]*d_y_errors[i]);
+                weights_sum += 1.0/(d_y_errors[i]*d_y_errors[i]);
+            }
+            mean /= weights_sum;
+            for (int i=0; i<d_n; i++)
+                tss += (d_y[i] - mean)*(d_y[i] - mean)/(d_y_errors[i]*d_y_errors[i]);
 	}
-	return 1 - chi_2/sst;
+        return 1 - chi_2/tss;
 }
 
 QString Fit::legendInfo()

@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys
-pyver = sys.version_info
-#print 'c:\windows\system32\python' + str(pyver[0]) + str(pyver[1]) + '.dll'
-print '-Lc:\\Python25\\libs -lpython25'
+from PyQt4 import pyqtconfig
+config = pyqtconfig.Configuration()
+
+print "-L%s -lpython%d%d" % (config.py_lib_dir, config.py_version >> 16, (config.py_version  >> 8) & 0xff)
