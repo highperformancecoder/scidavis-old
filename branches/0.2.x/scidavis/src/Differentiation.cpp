@@ -29,6 +29,7 @@
 #include "Differentiation.h"
 #include "MultiLayer.h"
 #include "Legend.h"
+#include "core/column/Column.h"
 
 #include <QLocale>
 
@@ -68,10 +69,12 @@ void Differentiation::output()
     QString tableName = app->generateUniqueName(QString(name()));
     QString curveTitle = d_curve->title().text();
     Table *t = app->newHiddenTable(tableName, tr("Derivative") + " " + tr("of","Derivative of")  + " " + curveTitle, d_n-2, 2);
+	Column *xCol = t->column(0);
+	Column *yCol = t->column(1);
 	for (int i = 1; i < d_n-1; i++)
 	{
-		t->setText(i-1, 0, QLocale().toString(d_x[i], 'g', app->d_decimal_digits));
-		t->setText(i-1, 1, QLocale().toString(result[i], 'g', app->d_decimal_digits));
+		xCol->setValueAt(i-1, d_x[i]);
+		yCol->setValueAt(i-1, result[i]);
 	}
     delete[] result;
 
