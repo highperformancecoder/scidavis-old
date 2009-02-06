@@ -113,15 +113,27 @@ void QwtErrorPlotCurve::drawErrorBars(QPainter *painter,
 			const int ylh = yi + sh/2;
 
 			if (plus){
-				QwtPainter::drawLine(painter, xi, yhl, xi, yh);
 				QwtPainter::drawLine(painter, xi-cap/2, yh, xi+cap/2, yh);
 			}
 			if (minus){
-				QwtPainter::drawLine(painter, xi, ylh, xi, yl);
 				QwtPainter::drawLine(painter, xi-cap/2, yl, xi+cap/2, yl);
 			}
 			if (through)
-				QwtPainter::drawLine(painter, xi, yhl, xi, ylh);
+			{
+				if (plus && minus)
+					QwtPainter::drawLine(painter, xi, yl, xi, yh);
+				else if (plus)
+					QwtPainter::drawLine(painter, xi, yi, xi, yh);
+				else if (minus)
+					QwtPainter::drawLine(painter, xi, yl, xi, yi);
+			}
+			else
+			{
+				if (plus && (yh < yhl))
+					QwtPainter::drawLine(painter, xi, yhl, xi, yh);
+				if (minus && (yl > ylh))
+					QwtPainter::drawLine(painter, xi, ylh, xi, yl);
+			}
 		} else if (type == Horizontal) {
 			const int xp = xMap.transform(x(i)+err[i]);
 			const int xm = xMap.transform(x(i)-err[i]);
@@ -129,15 +141,27 @@ void QwtErrorPlotCurve::drawErrorBars(QPainter *painter,
   	        const int xmp = xi - sw/2;
 
 			if (plus){
-				QwtPainter::drawLine(painter, xp, yi, xpm, yi);
 				QwtPainter::drawLine(painter, xp, yi-cap/2, xp, yi+cap/2);
 			}
 			if (minus){
-				QwtPainter::drawLine(painter, xm, yi, xmp, yi);
 				QwtPainter::drawLine(painter, xm, yi-cap/2, xm, yi+cap/2);
 			}
 			if (through)
-				QwtPainter::drawLine(painter, xmp, yi, xpm, yi);
+			{
+				if (plus && minus)
+					QwtPainter::drawLine(painter, xm, yi, xp, yi);
+				else if (plus)
+					QwtPainter::drawLine(painter, xi, yi, xp, yi);
+				else if (minus)
+					QwtPainter::drawLine(painter, xm, yi, xi, yi);
+			}
+			else
+			{
+				if (plus && (xp > xpm))
+					QwtPainter::drawLine(painter, xp, yi, xpm, yi);
+				if (minus && (xm < xmp))
+					QwtPainter::drawLine(painter, xm, yi, xmp, yi);
+			}
 		}
 	}
 }
