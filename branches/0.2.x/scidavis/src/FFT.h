@@ -47,10 +47,10 @@ public:
 private:
     void init();
     void output();
-    void output(const QString &text);
+    void output(QList<Column *> columns);
 
-    QString fftCurve();
-    QString fftTable();
+    QList<Column *> fftCurve();
+    QList<Column *> fftTable();
 
     void setDataFromTable(Table *t, const QString& realColName, const QString& imagColName = QString());
 

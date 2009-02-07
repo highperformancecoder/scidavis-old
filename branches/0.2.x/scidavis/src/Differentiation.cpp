@@ -68,9 +68,9 @@ void Differentiation::output()
     ApplicationWindow *app = (ApplicationWindow *)parent();
     QString tableName = app->generateUniqueName(QString(name()));
     QString curveTitle = d_curve->title().text();
-    Table *t = app->newHiddenTable(tableName, tr("Derivative") + " " + tr("of","Derivative of")  + " " + curveTitle, d_n-2, 2);
-	Column *xCol = t->column(0);
-	Column *yCol = t->column(1);
+	Column *xCol = new Column(tr("1", "differention table x column name"), SciDAVis::Numeric);
+	Column *yCol = new Column(tr("2", "differention table y column name"), SciDAVis::Numeric);
+    Table *t = app->newHiddenTable(tableName, tr("Derivative") + " " + tr("of","Derivative of")  + " " + curveTitle, QList<Column *>() << xCol << yCol);
 	for (int i = 1; i < d_n-1; i++)
 	{
 		xCol->setValueAt(i-1, d_x[i]);
@@ -79,7 +79,8 @@ void Differentiation::output()
     delete[] result;
 
     MultiLayer *ml = app->newGraph(tr("Plot")+tr("Derivative"));
-    ml->activeGraph()->insertCurve(t, tableName + "_2", 0);
+    ml->activeGraph()->insertCurve(t, tableName + "_" + yCol->name(), 0);
     Legend *l = ml->activeGraph()->legend();
     l->setText("\\c{1}" + tr("Derivative") + " " + tr("of","Derivative of") + " " + curveTitle);
 }
+

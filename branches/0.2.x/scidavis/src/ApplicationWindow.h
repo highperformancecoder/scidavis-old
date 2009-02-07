@@ -341,7 +341,7 @@ public slots:
 	 * \param c number of columns
      * \param text tab/newline - seperated initial content; may be empty
 	 */
-	Table* newHiddenTable(const QString& name, const QString& label, int r, int c, const QString& text=QString());
+	Table* newHiddenTable(const QString& name, const QString& label, QList<Column *> columns);
 	Table* table(const QString& name);
 	Table* convertMatrixToTable();
 	QWidgetList* tableList();

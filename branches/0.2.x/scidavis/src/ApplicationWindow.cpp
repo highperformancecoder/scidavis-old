@@ -2480,25 +2480,10 @@ Table* ApplicationWindow::newTable(const QString& caption, int r, int c, const Q
 	return w;
 }
 
-Table* ApplicationWindow::newHiddenTable(const QString& name, const QString& label, int r, int c, const QString& text)
+Table* ApplicationWindow::newHiddenTable(const QString& name, const QString& label, QList<Column *> columns)
 {
-	Table* w = new Table(scriptEnv, r, c, label, 0, 0);
-
-	if (!text.isEmpty()) {
-		QStringList rows = text.split("\n", QString::SkipEmptyParts);
-		QStringList list = rows[0].split("\t");
-		w->setHeader(list);
-
-		QString rlist;
-		for (int i=0; i<r; i++)
-		{
-			rlist=rows[i+1];
-			list = rlist.split("\t");
-			for (int j=0; j<c; j++)
-				w->setText(i, j, list[j]);
-		}
-	}
-	
+	Table* w = new Table(scriptEnv, 0, 0, label, 0, 0);
+	w->d_future_table->appendColumns(columns);
 	w->setName(name);
 	d_project->addChild(w->d_future_table);
 	hideWindow(w);

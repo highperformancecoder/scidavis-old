@@ -32,6 +32,7 @@
 #include "Table.h"
 #include "FunctionCurve.h"
 #include "PlotCurve.h"
+#include "core/column/Column.h"
 
 #include <QApplication>
 #include <QMessageBox>
@@ -304,14 +305,17 @@ QwtPlotCurve* Filter::addResultCurve(double *x, double *y)
 {
     ApplicationWindow *app = (ApplicationWindow *)parent();
     const QString tableName = app->generateUniqueName(QString(this->name()));
-    Table *t = app->newHiddenTable(tableName, d_explanation + " " + tr("of") + " " + d_curve->title().text(), d_points, 2);
+	Column *xCol = new Column(tr("1", "filter table x column name"), SciDAVis::Numeric);
+	Column *yCol = new Column(tr("2", "filter table y column name"), SciDAVis::Numeric);
+    Table *t = app->newHiddenTable(tableName, d_explanation + " " + tr("of") + " " + d_curve->title().text(), 
+		QList<Column *>() << xCol << yCol);
 	for (int i=0; i<d_points; i++)
 	{
-		t->setText(i, 0, QLocale().toString(x[i], 'g', app->d_decimal_digits));
-		t->setText(i, 1, QLocale().toString(y[i], 'g', app->d_decimal_digits));
+		xCol->setValueAt(i, x[i]);
+		yCol->setValueAt(i, y[i]);
 	}
 
-	DataCurve *c = new DataCurve(t, tableName + "_1", tableName + "_2");
+	DataCurve *c = new DataCurve(t, tableName + "_" + xCol->name(), tableName + "_" + yCol->name());
 	c->setData(x, y, d_points);
     c->setPen(QPen(ColorBox::color(d_curveColorIndex), 1));
 	d_graph->insertPlotItem(c, Graph::Line);

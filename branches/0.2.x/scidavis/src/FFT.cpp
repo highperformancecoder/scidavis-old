@@ -30,6 +30,7 @@
 #include "MultiLayer.h"
 #include "Plot.h"
 #include "ColorBox.h"
+#include "core/column/Column.h"
 
 #include <QMessageBox>
 #include <QLocale>
@@ -62,7 +63,7 @@ void FFT::init ()
 	d_sampling = 1.0;
 }
 
-QString FFT::fftCurve()
+QList<Column *> FFT::fftCurve()
 {
     int i, i2;
 	int n2 = d_n/2;
@@ -74,16 +75,16 @@ QString FFT::fftCurve()
 		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
                         tr("Could not allocate memory, operation aborted!"));
         d_init_err = true;
-        return "";
+        return QList<Column *>();
 	}
 
 	double df = 1.0/(double)(d_n*d_sampling);//frequency sampling
 	double aMax = 0.0;//max amplitude
-	QString text;
+	QList<Column *> columns;
 	if(!d_inverse)
 	{
         d_explanation = tr("Forward") + " " + tr("FFT") + " " + tr("of") + " " + d_curve->title().text();
-		text = tr("Frequency");
+		columns << new Column(tr("Frequency"), SciDAVis::Numeric);
 
 		gsl_fft_real_workspace *work=gsl_fft_real_workspace_alloc(d_n);
 		gsl_fft_real_wavetable *real=gsl_fft_real_wavetable_alloc(d_n);
@@ -93,7 +94,7 @@ QString FFT::fftCurve()
 			QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
                         tr("Could not allocate memory, operation aborted!"));
             d_init_err = true;
-			return "";
+			return QList<Column *>();
 		}
 
 		gsl_fft_real_transform(d_y, 1, d_n, real,work);
@@ -105,7 +106,7 @@ QString FFT::fftCurve()
 	else
 	{
         d_explanation = tr("Inverse") + " " + tr("FFT") + " " + tr("of") + " " + d_curve->title().text();
-		text = tr("Time");
+		columns << new Column(tr("Time"), SciDAVis::Numeric);
 
 		gsl_fft_real_unpack (d_y, result, 1, d_n);
 		gsl_fft_complex_wavetable *wavetable = gsl_fft_complex_wavetable_alloc (d_n);
@@ -116,7 +117,7 @@ QString FFT::fftCurve()
 			QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
                         tr("Could not allocate memory, operation aborted!"));
             d_init_err = true;
-			return "";
+			return QList<Column *>();
 		}
 
 		gsl_fft_complex_inverse (result, 1, d_n, wavetable, workspace);
@@ -153,27 +154,34 @@ QString FFT::fftCurve()
 	}
 
 	ApplicationWindow *app = (ApplicationWindow *)parent();
-	int prec = app->d_decimal_digits;
 
-	text += "\t"+tr("Real")+"\t"+tr("Imaginary")+"\t"+ tr("Amplitude")+"\t"+tr("Angle")+"\n";
+	columns << new Column(tr("Real"), SciDAVis::Numeric);
+	columns << new Column(tr("Imaginary"), SciDAVis::Numeric);
+	columns << new Column(tr("Amplitude"), SciDAVis::Numeric);
+	columns << new Column(tr("Angle"), SciDAVis::Numeric);
 	for (i=0;i<d_n;i++)
 	{
 		i2 = 2*i;
-		text += QLocale().toString(d_x[i], 'g', prec)+"\t";
-		text += QLocale().toString(result[i2], 'g', prec)+"\t";
-		text += QLocale().toString(result[i2+1], 'g', prec)+"\t";
+		columns.at(0)->setValueAt(i, d_x[i]);
+		columns.at(1)->setValueAt(i, result[i2]);
+		columns.at(2)->setValueAt(i, result[i2+1]);
 		if (d_normalize)
-			text += QLocale().toString(amp[i]/aMax, 'g', prec)+"\t";
+			columns.at(3)->setValueAt(i, amp[i]/aMax);
 		else
-			text += QLocale().toString(amp[i], 'g', prec)+"\t";
-		text += QLocale().toString(atan(result[i2+1]/result[i2]), 'g', prec)+"\n";
+			columns.at(3)->setValueAt(i, amp[i]);
+		columns.at(4)->setValueAt(i, atan(result[i2+1]/result[i2]));
 	}
 	delete[] amp;
 	delete[] result;
-    return text;
+	columns.at(0)->setPlotDesignation(SciDAVis::X);
+	columns.at(1)->setPlotDesignation(SciDAVis::Y);
+	columns.at(2)->setPlotDesignation(SciDAVis::Y);
+	columns.at(3)->setPlotDesignation(SciDAVis::Y);
+	columns.at(4)->setPlotDesignation(SciDAVis::Y);
+    return columns;
 }
 
-QString FFT::fftTable()
+QList<Column *> FFT::fftTable()
 {
     int i;
 	int rows = d_table->numRows();
@@ -187,20 +195,20 @@ QString FFT::fftTable()
 		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
                         tr("Could not allocate memory, operation aborted!"));
         d_init_err = true;
-        return "";
+        return QList<Column *>();
 	}
 
 	double df = 1.0/(double)(rows*d_sampling);//frequency sampling
 	double aMax = 0.0;//max amplitude
-	QString text;
+	QList<Column *> columns;
 	if(!d_inverse)
 	{
-		text = tr("Frequency");
+		columns << new Column(tr("Frequency"), SciDAVis::Numeric);
 		gsl_fft_complex_forward (d_y, 1, rows, wavetable, workspace);
 	}
 	else
 	{
-		text = tr("Time");
+		columns << new Column(tr("Time"), SciDAVis::Numeric);
 		gsl_fft_complex_inverse (d_y, 1, rows, wavetable, workspace);
 	}
 
@@ -234,43 +242,48 @@ QString FFT::fftTable()
 			aMax = a;
 	}
 
-    ApplicationWindow *app = (ApplicationWindow *)parent();
-	int prec = app->d_decimal_digits;
-
-	text += "\t"+tr("Real")+"\t"+tr("Imaginary")+"\t"+tr("Amplitude")+"\t"+tr("Angle")+"\n";
+	columns << new Column(tr("Real"), SciDAVis::Numeric);
+	columns << new Column(tr("Imaginary"), SciDAVis::Numeric);
+	columns << new Column(tr("Amplitude"), SciDAVis::Numeric);
+	columns << new Column(tr("Angle"), SciDAVis::Numeric);
 	for (i=0; i<rows; i++)
 	{
 		int i2 = 2*i;
-		text += QLocale().toString(d_x[i], 'g', prec)+"\t";
-		text += QLocale().toString(d_y[i2], 'g', prec)+"\t";
-		text += QLocale().toString(d_y[i2+1], 'g', prec)+"\t";
+		columns.at(0)->setValueAt(i, d_x[i]);
+		columns.at(1)->setValueAt(i, d_y[i2]);
+		columns.at(2)->setValueAt(i, d_y[i2+1]);
 		if (d_normalize)
-			text += QLocale().toString(amp[i]/aMax, 'g', prec)+"\t";
+			columns.at(3)->setValueAt(i, amp[i]/aMax);
 		else
-			text += QLocale().toString(amp[i], 'g', prec)+"\t";
-		text += QLocale().toString(atan(d_y[i2+1]/d_y[i2]), 'g', prec)+"\n";
+			columns.at(3)->setValueAt(i, amp[i]);
+		columns.at(4)->setValueAt(i, atan(d_y[i2+1]/d_y[i2]));
 	}
 	delete[] amp;
-    return text;
+	columns.at(0)->setPlotDesignation(SciDAVis::X);
+	columns.at(1)->setPlotDesignation(SciDAVis::Y);
+	columns.at(2)->setPlotDesignation(SciDAVis::Y);
+	columns.at(3)->setPlotDesignation(SciDAVis::Y);
+	columns.at(4)->setPlotDesignation(SciDAVis::Y);
+    return columns;
 }
 
 void FFT::output()
 {
-    QString text;
+    QList<Column *> columns;
     if (d_graph && d_curve)
-        text = fftCurve();
+        columns = fftCurve();
     else if (d_table)
-        text = fftTable();
+        columns = fftTable();
 
-    if (!text.isEmpty())
-        output(text);
+    if (!columns.isEmpty())
+        output(columns);
 }
 
-void FFT::output(const QString &text)
+void FFT::output(QList<Column *> columns)
 {
     ApplicationWindow *app = (ApplicationWindow *)parent();
     QString tableName = app->generateUniqueName(QString(name()));
-    Table *t = app->newHiddenTable(tableName, d_explanation, d_n, 5, text);
+    Table *t = app->newHiddenTable(tableName, d_explanation, columns);
 	MultiLayer *ml = app->multilayerPlot(t, QStringList() << tableName + "_" + tr("Amplitude"), 0);
    	if (!ml)
 		return;
