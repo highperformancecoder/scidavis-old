@@ -344,3 +344,4 @@ QwtDoubleRect PlotCurve::boundingRect() const
 
     return QwtDoubleRect(d_x_left, d_y_top, qAbs(d_x_right - d_x_left), qAbs(d_y_bottom - d_y_top));
 }
+

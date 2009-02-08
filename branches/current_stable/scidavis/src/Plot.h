@@ -44,6 +44,8 @@ class Plot: public QwtPlot
 {
     Q_OBJECT
 
+	friend class Graph; // part of axes gaps workaround
+
 public:
 	Plot(QWidget *parent = 0, const char *name = 0);
 

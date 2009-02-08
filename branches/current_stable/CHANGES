@@ -33,3 +33,44 @@ Most important changes (since 0.1.2)
 - fixed unnecessary graph rescaling
 - several other bugs fixed
 
+=== Release 0.1.4, 2009-02-08 ===
+Most important changes (since 0.1.3)
+
+- Weighted linear and polynomial fits required actual weights
+ (1/sigma^2) to be specified in place of standard errors, while all others
+ (as well as error bar plots) needed the standard errors themselves.
+ Solution:  Switched everything to using standard errors, eliminating the term
+				"weighting" from the GUI and most of the source code.
+ Rationale: Avoid confusion for users, especially given the previous
+				inconsistent treatment of the matter. Avoid confusion for
+				devs. Arbitrary weights don't work naturally with non-linear fits;
+				and they almost certainly lead to nonsensical error estimates of
+				results (unless you _really_ know what you're doing, in which case
+				you can simply specify 1/sqrt(weight) as standard error).
+
+- Fixed estimation of parameter errors in case of non-linear fitting with
+  unknown Y errors.
+
+- Fixed computation of R^2 in case of known Y errors.
+
+- Fixed handling of parameters in fit curve formulas as well as constant
+  fit parameters; both of which used naive string-substitution; i.e. if
+  you used parameter names which appeared elsewhere as substrings of other
+  parameter names or functions, you'd get weird errors. Unfortunately, the fix
+  makes non-linear fitting with user-supplied formulas a bit slower; hopefully,
+  we'll come up with a Really Good Solution(tm) for one of the next major
+  releases.
+
+- Fixed problem with FFT filters which could lead to incorrect results:
+  Cutoffs could fall between real and imaginary part of a Fourier component,
+  producing a reduced amplitude and bogus phase at this point.
+
+- Fixed crash when creating bargraph with errorbars.
+
+- New Russian translation by f0ma.
+
+- Ported the hack that prevents axes gaps in graph vector exports
+  (eps, pdf, svg) from QtiPlot.
+
+- Numerous small tweaks and bug fixes.
+

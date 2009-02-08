@@ -38,6 +38,9 @@ class TitlePicker: public QObject
 public:
     TitlePicker(QwtPlot *plot);
 
+    void setSelected(bool select = true);
+	bool selected() { return d_selected; }
+
 signals:
 	void clicked();
 	void doubleClicked();
@@ -47,4 +50,6 @@ signals:
 private:
 	bool eventFilter(QObject *, QEvent *);
 	QwtTextLabel *title;
+	bool d_selected;
 };
+

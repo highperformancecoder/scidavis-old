@@ -43,4 +43,4 @@ const char * extra_version = "";
 const char * copyright_string = "Developers (alphabetical order):\nTilman Benkert\nKnut Franke\n\nDocumentation:\nRoger Gadiou\n\nSpecial thanks to (alphabetical order):\nBurkhard Bunk\nQuentin Denis\nGudjon I. Gudjonsson\nAlex Kargovsky\nYu-Hung Lien\nEric Tanguy\nMauricio Troviano\nIon Vasilief\n\nThanks to (no particular order):\nthe developers of Qt, Qwt, QwtPlot3D, GSL, muParser, zlib, Python, PyQt, and liborigin\nall bug reporters, translators and other contributors";
 
 //! Release date as a string
-const char * release_date = "XXXX-XX-XX";
+const char * release_date = "2009-02-08";

@@ -141,9 +141,16 @@ void Plot::printFrame(QPainter *painter, const QRect &rect) const
 		painter->setPen(QPen(Qt::NoPen));
 
     painter->setBrush(paletteBackgroundColor());
-    QwtPainter::drawRect(painter, rect);
+
+	int lw2 = lw/2;
+	if (lw % 2)
+		painter->drawRect(rect.adjusted(lw2, lw2, -(lw2 + 1), -(lw2 + 1)));
+	else
+		painter->drawRect(rect.adjusted(lw2, lw2, -lw2, -lw2));
+
 	painter->restore();
 }
+
 
 void Plot::printCanvas(QPainter *painter, const QRect &canvasRect,
    			 const QwtScaleMap map[axisCnt], const QwtPlotPrintFilter &pfilter) const

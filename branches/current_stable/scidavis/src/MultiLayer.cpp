@@ -712,6 +712,15 @@ void MultiLayer::exportVector(const QString& fileName, int res, bool color, bool
     if (fileName.contains(".eps"))
     	printer.setOutputFormat(QPrinter::PostScriptFormat);
 
+#ifdef Q_OS_MAC
+    if (fileName.contains(".pdf")) // use native Mac OS X print engine
+    	printer.setOutputFormat(QPrinter::NativeFormat);
+#endif
+	if (color)
+		printer.setColorMode(QPrinter::Color);
+	else
+		printer.setColorMode(QPrinter::GrayScale);
+
 	if (res)
 		printer.setResolution(res);
 
@@ -723,11 +732,6 @@ void MultiLayer::exportVector(const QString& fileName, int res, bool color, bool
         printer.setPageSize(pageSize);
 
 	double canvas_aspect = double(canvasRect.width())/double(canvasRect.height());
-
-	if (color)
-		printer.setColorMode(QPrinter::Color);
-	else
-		printer.setColorMode(QPrinter::GrayScale);
 
     int x_margin, y_margin, width, height;
     if (keepAspect){// export should preserve plot aspect ratio
@@ -764,7 +768,7 @@ void MultiLayer::exportVector(const QString& fileName, int res, bool color, bool
         int layer_width = int(myPlot->frameGeometry().width()*scaleFactorX);
         int layer_height = int(myPlot->frameGeometry().height()*scaleFactorY);
 
-        myPlot->print(&paint, QRect(pos, QSize(layer_width, layer_height)));
+        gr->print(&paint, QRect(pos, QSize(layer_width, layer_height)));
     }
 }
 
@@ -782,7 +786,7 @@ void MultiLayer::exportSVG(const QString& fname)
 			Plot *myPlot = (Plot *)gr->plotWidget();
 
 			QPoint pos = QPoint(gr->pos().x(), gr->pos().y());
-			myPlot->print(&p, QRect(pos, myPlot->size()));
+			gr->print(&p, QRect(pos, myPlot->size()));
 		}
 		p.end();
 	#endif
@@ -875,7 +879,7 @@ void MultiLayer::printAllLayers(QPainter *painter)
 			int width=int(myPlot->frameGeometry().width()*scaleFactorX);
 			int height=int(myPlot->frameGeometry().height()*scaleFactorY);
 
-			myPlot->print(painter, QRect(pos, QSize(width,height)));
+			gr->print(painter, QRect(pos, QSize(width,height)));
 		}
 	}
 	else
@@ -893,7 +897,7 @@ void MultiLayer::printAllLayers(QPainter *painter)
 
 			QPoint pos = gr->pos();
 			pos = QPoint(x_margin + pos.x(), y_margin + pos.y());
-			myPlot->print(painter, QRect(pos, myPlot->size()));
+			gr->print(painter, QRect(pos, myPlot->size()));
 		}
 	}
 	if (d_print_cropmarks)

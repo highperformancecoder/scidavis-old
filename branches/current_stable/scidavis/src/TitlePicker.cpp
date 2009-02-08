@@ -32,10 +32,12 @@
 #include <qwt_text_label.h>
 
 #include <QMouseEvent>
+#include <QPen>
 
 TitlePicker::TitlePicker(QwtPlot *plot):
 	QObject(plot)
 {
+    d_selected = false;
 	title = (QwtTextLabel *)plot->titleLabel();
 	title->setFocusPolicy(Qt::StrongFocus);
 	if (title)
@@ -50,6 +52,7 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
     if ( object->inherits("QwtTextLabel") && e->type() == QEvent::MouseButtonDblClick)
 		{
         emit doubleClicked();
+		d_selected = true;
         return TRUE;
 		}
 
@@ -76,3 +79,20 @@ bool TitlePicker::eventFilter(QObject *object, QEvent *e)
 
     return QObject::eventFilter(object, e);
 }
+
+void TitlePicker::setSelected(bool select)
+{
+    if (!title || d_selected == select)
+        return;
+
+    d_selected = select;
+
+    QwtText text = title->text();
+    if (select)
+        text.setBackgroundPen(QPen(Qt::blue));
+    else
+        text.setBackgroundPen(QPen(Qt::NoPen));
+
+    ((QwtPlot *)parent())->setTitle(text);
+}
+

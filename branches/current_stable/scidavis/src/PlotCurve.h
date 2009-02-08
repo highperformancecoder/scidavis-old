@@ -103,6 +103,9 @@ public:
 
 	void setVisible(bool on);
 
+	bool hasSelectedLabels();
+	void setLabelsSelected(bool on = true);
+
 protected:
 	//! List of the error bar curves associated to this curve.
 	QList <DataCurve *> d_error_bars;
@@ -116,5 +119,6 @@ protected:
 
 	int d_start_row;
 	int d_end_row;
+	bool validCurveType();
 };
 #endif
