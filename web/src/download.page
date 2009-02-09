@@ -38,18 +38,17 @@ h2. Other distributions
 For all distributions that don't have specific packages yet, we offer a universal binary.
 You need to install the following dependencies, either from your package manager or by following the links below:
 
-* "Qt >= 4.3.0":http://trolltech.com/developer/downloads/qt/x11
-* "Python >= 2.4":http://www.python.org/download/
-* "SIP >= 4.7":http://www.riverbankcomputing.co.uk/sip/download.php
+* "Qt == 4.4.x":http://trolltech.com/developer/downloads/qt/x11
+* "Python == 2.5":http://www.python.org/download/
 * "PyQt4 >= 4.3":http://www.riverbankcomputing.co.uk/pyqt/download.php
 
-Get scidavis-x.y.z-linux.tar.bz2 from
+Get scidavis-x.y.z-x86-linux-Qt4.4-Py2.5.tar.bz2 from
 "here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=236207.
 If you don't know how to open this file, start a terminal, cd to the directory containing it and enter
 
 {hlblock: {blockName: linux, highlight: plaintext}}
 
-This will create a directory "scidavis-x.y.z" with the binary and some additional files.
+This will create a directory "scidavis-x.y.z-x86-linux" with the binary and some additional files.
 
 h1. MacOS X
 
@@ -109,4 +108,4 @@ svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/branches/curr
 svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis
 
 --- linux, html
-tar xjvf scidavis-x.y.z-linux.tar.bz2
+tar xjvf scidavis-x.y.z-x86-linux-Qt4.4-Py2.5.tar.bz2
