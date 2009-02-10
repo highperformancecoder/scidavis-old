@@ -34,10 +34,8 @@
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
-!define PYTHON_INSTALLER "python-2.5.2.msi"
-!define PYTHON_URL "http://www.python.org/ftp/python/2.5.2/${PYTHON_INSTALLER}"
-!define PYQT_INSTALLER "PyQt-Py2.5-gpl-4.4.3-1.exe"
-!define PYQT_URL "http://www.riverbankcomputing.com/static/Downloads/PyQt4/${PYQT_INSTALLER}"
+!define PYTHON_INSTALLER "python-2.6.1.msi"
+!define PYTHON_URL "http://www.python.org/ftp/python/2.6.1/${PYTHON_INSTALLER}"
 
 SetCompressor /SOLID lzma
 
@@ -95,6 +93,7 @@ Section "SciDAVis" SEC01
   SectionIn RO
   SetOutPath "$INSTDIR"
   CreateDirectory $INSTDIR\plugins
+  CreateDirectory $INSTDIR\PyQt4
   SetOverwrite try
 
   File "CHANGES.txt"
@@ -120,6 +119,26 @@ Section "SciDAVis" SEC01
   SetOutPath "$INSTDIR\plugins"
   File "plugins\fitRational0.dll"
   File "plugins\fitRational1.dll"
+  File "plugins\exp_saturation.dll"
+  File "plugins\explin.dll"
+  SetOutPath "$INSTDIR\PyQt4"
+  File "PyQt4\__init__.py"
+  File "PyQt4\__init__.pyc"
+  File "PyQt4\Qt.pyd"
+  File "PyQt4\QtAssistant.pyd"
+  File "PyQt4\QtCore.pyd"
+  File "PyQt4\QtDesigner.pyd"
+  File "PyQt4\QtGui.pyd"
+  File "PyQt4\QtHelp.pyd"
+  File "PyQt4\QtNetwork.pyd"
+  File "PyQt4\QtOpenGL.pyd"
+  File "PyQt4\QtScript.pyd"
+  File "PyQt4\QtSql.pyd"
+  File "PyQt4\QtSvg.pyd"
+  File "PyQt4\QtTest.pyd"
+  File "PyQt4\QtWebKit.pyd"
+  File "PyQt4\QtXml.pyd"
+  File "PyQt4\QtXmlPatterns.pyd"
 ; Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP"
@@ -192,6 +211,25 @@ Section Uninstall
   Delete "$INSTDIR\assistant.exe"
   Delete "$INSTDIR\plugins\fitRational1.dll"
   Delete "$INSTDIR\plugins\fitRational0.dll"
+  Delete "$INSTDIR\plugins\exp_saturation.dll"
+  Delete "$INSTDIR\plugins\explin.dll"
+  Delete "$INSTDIR\PyQt4\__init__.py"
+  Delete "$INSTDIR\PyQt4\__init__.pyc"
+  Delete "$INSTDIR\PyQt4\Qt.pyd"
+  Delete "$INSTDIR\PyQt4\QtAssistant.pyd"
+  Delete "$INSTDIR\PyQt4\QtCore.pyd"
+  Delete "$INSTDIR\PyQt4\QtDesigner.pyd"
+  Delete "$INSTDIR\PyQt4\QtGui.pyd"
+  Delete "$INSTDIR\PyQt4\QtHelp.pyd"
+  Delete "$INSTDIR\PyQt4\QtNetwork.pyd"
+  Delete "$INSTDIR\PyQt4\QtOpenGL.pyd"
+  Delete "$INSTDIR\PyQt4\QtScript.pyd"
+  Delete "$INSTDIR\PyQt4\QtSql.pyd"
+  Delete "$INSTDIR\PyQt4\QtSvg.pyd"
+  Delete "$INSTDIR\PyQt4\QtTest.pyd"
+  Delete "$INSTDIR\PyQt4\QtWebKit.pyd"
+  Delete "$INSTDIR\PyQt4\QtXml.pyd"
+  Delete "$INSTDIR\PyQt4\QtXmlPatterns.pyd"
 
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
   Delete "$DESKTOP\${PRODUCT_NAME}.lnk"
@@ -199,6 +237,7 @@ Section Uninstall
 
   RMDir "$SMPROGRAMS\$ICONS_GROUP"
   RMDir "$INSTDIR\plugins"
+  RMDir "$INSTDIR\PyQt4"
   RMDir "$INSTDIR"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
@@ -206,14 +245,14 @@ Section Uninstall
   SetAutoClose true
 SectionEnd
 
-; Ask whether to install Python and PyQt
+; Ask whether to install Python
 Section -Requirements
   SetOutPath $INSTDIR
-  ReadRegStr $3 HKLM "SOFTWARE\Python\PythonCore\2.5\InstallPath" ""
+  ReadRegStr $3 HKLM "SOFTWARE\Python\PythonCore\2.6\InstallPath" ""
   StrCmp $3 "" 0 pythonInstFound
-  ReadRegStr $3 HKCU "SOFTWARE\Python\PythonCore\2.5\InstallPath" ""
+  ReadRegStr $3 HKCU "SOFTWARE\Python\PythonCore\2.6\InstallPath" ""
   StrCmp $3 "" 0 pythonInstFound
-  StrCpy $4 "No Python 2.5 found on your system. Install Python 2.5 from the internet?"
+  StrCpy $4 "No Python 2.6 found on your system. Install Python 2.6 from the internet?"
   MessageBox MB_YESNO $4 /SD IDYES IDNO endInstPython
         StrCpy $2 "$TEMP\${PYTHON_INSTALLER}"
         nsisdl::download /TIMEOUT=30000 ${PYTHON_URL} $2
@@ -225,42 +264,5 @@ Section -Requirements
         Delete $2
   pythonInstFound:
   endInstPython:
-
-;;; Install PyQt and SIP provided with the installer.
-;;; The PyQt_SIP.exe install was build as follows:
-;;; - compile and install PyQt and SIP in some arbitrary dir
-;;; - pack contents if this dir
-;;; - use NSIS to make an installer out of the ZIP
-  ReadRegStr $2 HKLM "SOFTWARE\Python\PythonCore\2.5\InstallPath" ""
-  StrCmp $2 "" 0 pythonFound
-  ReadRegStr $2 HKCU "SOFTWARE\Python\PythonCore\2.5\InstallPath" ""
-  StrCmp $2 "" 0 pythonFound
-    MessageBox MB_YESNO "Could not find Python 2.5 installation (required). Abort?" /SD IDYES IDNO continueWOPython
-    Quit
-  pythonFound:
-    MessageBox MB_YESNO "Python found in $2. Download and install PyQt now?" /SD IDYES IDNO endExtraInst
-
-;and SIP provided with SciDAVis now? (Recommended. PyQt binaries from Riverbank are reported to be incompatible with SciDAVis.)" 
-  Goto skip
-  continueWOPython:
-    MessageBox MB_YESNO "Do you want to download and install PyQt now? IMPORTANT: Python has not been found but you must install PyQt and SIP in the same folder as Python 2.5!" /SD IDYES IDNO endExtraInst
-  skip:
-;    SetOutPath "$2"
-;    File "PyQt_SIP.exe"
-;    ExecWait "$2\PyQt_SIP.exe"
-;    Delete "$2\PyQt_SIP.exe"
-
-;;; Downloading and Installing PyQt works, but SciDAVis crashed using this binary.
-;  MessageBox MB_YESNO "Install PyQt (requires active internet connection)?" /SD IDYES IDNO endInstPyQt
-        StrCpy $2 "$TEMP\${PYQT_INSTALLER}"
-        nsisdl::download /TIMEOUT=30000 ${PYQT_URL} $2
-        Pop $R0 ;Get the return value
-                StrCmp $R0 "success" +3
-                MessageBox MB_OK "Download failed: $R0"
-                Quit
-	ExecWait $2
-        Delete $2
-;  endInstPyQt:
-  endExtraInst:
 SectionEnd
 
