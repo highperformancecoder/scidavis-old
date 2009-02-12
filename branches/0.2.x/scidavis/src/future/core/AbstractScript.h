@@ -1,14 +1,12 @@
 /***************************************************************************
     File                 : AbstractScript.h
     Project              : SciDAVis
-    --------------------------------------------------------------------
-    Copyright            : (C) 2006 by Ion Vasilief, 
-                           Tilman Benkert,
-                           Knut Franke
-    Copyright            : (C) 2008 by Knut Franke
-    Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
-                           knut.franke*gmx.de
     Description          : A chunk of scripting code.
+    --------------------------------------------------------------------
+    Copyright            : (C) 2006-2009 Knut Franke (knut.franke*gmx.de)
+    Copyright            : (C) 2006-2009 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
+                           (replace * with @ in the email addresses) 
                            
  ***************************************************************************/
 

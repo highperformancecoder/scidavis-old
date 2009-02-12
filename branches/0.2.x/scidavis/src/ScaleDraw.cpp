@@ -140,9 +140,9 @@ QwtText QwtTextScaleDraw::label(double value) const
 	if (!scDiv.contains (value))
 		return QwtText();
 
-	int index = (int)value - 1;
-	if (value-1-index < 1e-6 && index >= 0 && index < (int)labels.count())
-		return QwtText(labels[index]);
+	int int_value = (int)(value + value/1e6);
+	if (labels.contains(int_value))
+		return QwtText(labels[int_value]);
 	else
 		return QwtText();
 }

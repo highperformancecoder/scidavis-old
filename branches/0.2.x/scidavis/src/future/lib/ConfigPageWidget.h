@@ -3,7 +3,7 @@
     Project              : SciDAVis
     Description          : Widget for configuration pages that has an apply slot
     --------------------------------------------------------------------
-    Copyright            : (C) 2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2008-2009 Tilman Benkert (thzs*gmx.net)
                            (replace * with @ in the email addresses) 
                            
  ***************************************************************************/

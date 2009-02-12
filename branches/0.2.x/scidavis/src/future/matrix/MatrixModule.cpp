@@ -3,8 +3,8 @@
     Project              : SciDAVis
     Description          : Module providing the matrix Part and support classes.
     --------------------------------------------------------------------
-    Copyright            : (C) 2008 Knut Franke (knut.franke*gmx.de)
-    Copyright            : (C) 2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2008-2009 Knut Franke (knut.franke*gmx.de)
+    Copyright            : (C) 2008-2009 Tilman Benkert (thzs*gmx.net)
                            (replace * with @ in the email address)
 
  ***************************************************************************/

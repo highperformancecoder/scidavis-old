@@ -2,7 +2,7 @@
     File                 : AsciiTableImportFilter.h
     Project              : SciDAVis
     --------------------------------------------------------------------
-    Copyright            : (C) 2008 Knut Franke
+    Copyright            : (C) 2008-2009 Knut Franke
     Email (use @ for *)  : Knut.Franke*gmx.net
     Description          : Import an ASCII file as Table.
 

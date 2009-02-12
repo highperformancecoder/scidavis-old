@@ -2,7 +2,7 @@
     File                 : AbstractScriptingEngine.cpp
     Project              : SciDAVis
     --------------------------------------------------------------------
-    Copyright            : (C) 2006,2008 by Knut Franke
+    Copyright            : (C) 2006-2009 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
     Description          : Implementations of generic scripting classes
                            

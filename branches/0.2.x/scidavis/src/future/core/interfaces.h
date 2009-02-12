@@ -2,7 +2,7 @@
     File                 : interfaces.h
     Project              : SciDAVis
     --------------------------------------------------------------------
-    Copyright            : (C) 2008 by Knut Franke
+    Copyright            : (C) 2008-2009 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
     Description          : Interfaces the kernel uses to talk to modules
 

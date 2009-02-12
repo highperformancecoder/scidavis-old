@@ -2,7 +2,7 @@
     File                 : AbstractFit.h
     Project              : SciDAVis
     --------------------------------------------------------------------
-    Copyright            : (C) 2007,2008 by Knut Franke
+    Copyright            : (C) 2007-2009 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
     Description          : Base class for doing fits using the algorithms
                            provided by GSL.

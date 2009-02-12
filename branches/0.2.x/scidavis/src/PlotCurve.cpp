@@ -184,8 +184,8 @@ void DataCurve::loadData()
 		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
 			if (xColType == Table::Text) {
 				QString xval = x_col_ptr->textAt(row);
-				xLabels.insert(row, xval);
-				X[size] = (double)row;
+				xLabels.insert(row+1, xval);
+				X[size] = (double) (row + 1);
 			}
 			else if (xColType == Table::Time) {
 				QTime time = x_col_ptr->timeAt(row);

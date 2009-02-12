@@ -2,7 +2,7 @@
     File                 : ProjectConfigPage.cpp
     Project              : SciDAVis
     --------------------------------------------------------------------
-    Copyright            : (C) 2008 Tilman Benkert
+    Copyright            : (C) 2008-2009 Tilman Benkert
     Email (use @ for *)  : thzs*gmx.net
     Description          : Project settings page for preferences dialog.
 

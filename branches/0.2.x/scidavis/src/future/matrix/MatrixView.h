@@ -3,7 +3,7 @@
     Project              : SciDAVis
     Description          : View class for Matrix
     --------------------------------------------------------------------
-    Copyright            : (C) 2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2008-2009 Tilman Benkert (thzs*gmx.net)
                            (replace * with @ in the email addresses) 
 
  ***************************************************************************/

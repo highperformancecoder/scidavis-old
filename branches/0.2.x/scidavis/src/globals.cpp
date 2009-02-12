@@ -2,7 +2,7 @@
     File                 : globals.cpp
     Description          : Definition of global constants and enums
     --------------------------------------------------------------------
-    Copyright            : (C) 2006-2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2006-2009 Tilman Benkert (thzs*gmx.net)
     Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
                            (replace * with @ in the email addresses) 
 
@@ -20,7 +20,7 @@
 //  Don't forget to change the Doxyfile when changing these!
 const int SciDAVis::scidavis_version = 0x000200;
 
-const char * SciDAVis::extra_version = "-beta1";
+const char * SciDAVis::extra_version = "";
 
 const char * SciDAVis::copyright_string = "\
 === Credits ===\n\
@@ -44,7 +44,7 @@ Knut Franke, Roger Gadiou\n\
 The following people have contributed translations or parts thereof.\n\
 In alphabetical order.\n\
 \n\
-Tilman Benkert[1], Markus Bongard, Tobias Burnus, Rémy Claverie, f0ma, José Antonio Lorenzo Fernández,\n\
+Tilman Benkert[1], Markus Bongard, Tobias Burnus, Rémy Claverie, f0ma, José Antonio Lorenzo Fernández, \
 Daniel Klaer, Peter Landgren, Tomomasa Ohkubo, Mikhail Shevyakov, Mauricio Troviano\n\
 \n\
 --- Packagers ---\n\
@@ -52,14 +52,14 @@ Daniel Klaer, Peter Landgren, Tomomasa Ohkubo, Mikhail Shevyakov, Mauricio Trovi
 The following people have made installing SciDAVis easier by providing specialized binary packages.\n\
 In alphabetical order.\n\
 \n\
-Burkhard Bunk (Debian), Quentin Denis (SUSE), Eric Tanguy (Fedora),\n\
-Mauricio Troviano (Windows installer), Yu-Hung Lien (Intel-Mac binary)\n\
+Burkhard Bunk (Debian), Quentin Denis (SUSE), Yu-Hung Lien (Mac OS X), Eric Tanguy (Fedora), \
+Mauricio Troviano (Windows installer)\n\
 \n\
 --- QtiPlot ---\n\
 \n\
 SciDAVis uses code from QtiPlot, which consisted (at the time of the fork, i.e. QtiPlot 0.9-rc2) of code by the following people:\n\
 \n\
-Tilman Benkert[1], Shen Chen, Borries Demeler, José Antonio Lorenzo Fernández, Knut Franke, Vasileios Gkanis, Gudjon Gudjonsson, \n\
+Tilman Benkert[1], Shen Chen, Borries Demeler, José Antonio Lorenzo Fernández, Knut Franke, Vasileios Gkanis, Gudjon Gudjonsson, \
 Alex Kargovsky, Michael Mac-Vicar, Tomomasa Ohkubo, Aaron Van Tassle, Branimir Vasilic, Ion Vasilief, Vincent Wagelaar\n\
 \n\
 The SciDAVis manual is based on the QtiPlot manual, written by (in alphabetical order):\n\
@@ -88,7 +88,7 @@ GSL (http://www.gnu.org/software/gsl/)\n\
 \n\
 ... and many more we just forgot to mention.\n";
 
-const char * SciDAVis::release_date = " 2008-08-10";
+const char * SciDAVis::release_date = " 2009-02-14";
 
 int SciDAVis::version()
 {

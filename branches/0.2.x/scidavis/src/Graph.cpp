@@ -762,7 +762,13 @@ void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName
 		int col = table->colIndex(labelsColName);
 
 		for (int i=0; i < r; i++)
-			list.insert(i, table->text(i, col));
+			list.insert(i+1, table->text(i, col));
+		// TODO: The whole text labels functionality is very limited. Specifying
+		// only one column for the labels will always mean that the labels
+		// correspond to 1, 2, 3, 4, etc.. Other label mappings such as
+		// a -> 1.5, b -> 4.5, c -> 16.5 (with step set to 0.5) or similar 
+		// require to have an additional column with numeric values. 
+		// This should be supported in our new plotting framework.
 	}
 	else if (type == ColHeader)
 	{
@@ -3250,8 +3256,8 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
 			if (xColType == Table::Text) {
 				QString xval = x_col_ptr->textAt(row);
-				xLabels.insert(row, xval);
-				X[size] = (double)row;
+				xLabels.insert(row+1, xval);
+				X[size] = (double)(row+1);
 			}
 			else if (xColType == Table::Time) {
 				QTime time = x_col_ptr->timeAt(row);

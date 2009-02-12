@@ -3,7 +3,7 @@
     Project              : SciDAVis
     Description          : Commands used in Matrix (part of the undo/redo framework)
     --------------------------------------------------------------------
-    Copyright            : (C) 2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2008-2009 Tilman Benkert (thzs*gmx.net)
                            (replace * with @ in the email addresses) 
                            
  ***************************************************************************/

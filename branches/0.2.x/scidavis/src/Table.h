@@ -3,8 +3,8 @@
     Project              : SciDAVis
     Description          : Table worksheet class
     --------------------------------------------------------------------
-    Copyright            : (C) 2006-2008 Tilman Benkert (thzs*gmx.net)
-    Copyright            : (C) 2006-2008 Knut Franke (knut.franke*gmx.de)
+    Copyright            : (C) 2006-2009 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2006-2009 Knut Franke (knut.franke*gmx.de)
     Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
                            (replace * with @ in the email addresses) 
 

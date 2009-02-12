@@ -3,10 +3,12 @@
 /***************************************************************************
 	File                 : scidavis.sip
 	Project              : SciDAVis
---------------------------------------------------------------------
-	Copyright            : (C) 2006 by Knut Franke, Ion Vasilief
-	Email                : knut.franke@gmx.de, ion_vasilief@yahoo.fr
 	Description          : Specifications for Python bindings
+    --------------------------------------------------------------------
+    Copyright            : (C) 2006-2009 Knut Franke (knut.franke*gmx.de)
+    Copyright            : (C) 2008-2009 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
+                           (replace * with @ in the email addresses) 
 
  ***************************************************************************/
 
@@ -130,7 +132,7 @@ class Column: AbstractAspect
 %MethodCode
 		int mode_code = SciDAVis::enumStringToValue(*a0, "PlotDesignation");
 		if(mode_code != -1)
-			sipCpp->setColumnMode((SciDAVis::ColumnMode)mode_code);
+			sipCpp->setPlotDesignation((SciDAVis::PlotDesignation)mode_code);
 %End
 		void clear();
 		bool isInvalid(int row) const;

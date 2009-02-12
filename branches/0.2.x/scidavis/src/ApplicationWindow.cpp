@@ -3,8 +3,8 @@
 	Project              : SciDAVis
 	Description          : SciDAVis's main window
     --------------------------------------------------------------------
-    Copyright            : (C) 2006-2008 Knut Franke (knut.franke*gmx.de)
-    Copyright            : (C) 2006-2008 Tilman Benkert (thzs*gmx.net)
+    Copyright            : (C) 2006-2009 Knut Franke (knut.franke*gmx.de)
+    Copyright            : (C) 2006-2009 Tilman Benkert (thzs*gmx.net)
     Copyright            : (C) 2004-2007 by Ion Vasilief (ion_vasilief*yahoo.fr)
                            (replace * with @ in the email address)
 
