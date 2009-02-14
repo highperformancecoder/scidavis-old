@@ -26,8 +26,8 @@
 			<p>
 			In order to compile SciDAVis, you need to install the following libraries:
 			<ul>
-				<li><a href="http://www.trolltech.com/products/qt/index.html">Qt (>=4.2)</a>,</li>
-				<li><a href="http://qwt.sourceforge.net/index.html">Qwt (>=5.0.0)</a>,</li>
+				<li><a href="http://www.qtsoftware.com/downloads/opensource/appdev">Qt for C++ (>=4.3)</a>,</li>
+				<li><a href="http://qwt.sourceforge.net/index.html">Qwt (>=5.1.0)</a>,</li>
 				<li><a href="http://qwtplot3d.sourceforge.net/">QwtPlot3D (>=0.2.6)</a>,</li>
 				<li><a href="http://www.gnu.org/software/gsl/">GSL (>=1.8)</a>,</li>
 				<li><a href="http://muparser.sourceforge.net">muParser (>=1.28)</a> and</li>
@@ -41,7 +41,7 @@
 			<h1>Linux</h1>
 			<ol>
 				<li>Install
-				<a href="http://www.trolltech.com/products/qt/index.html">Qt (>=4.2)</a>,
+				<a href="http://www.qtsoftware.com/downloads/opensource/appdev/linux-x11-cpp">Qt (>=4.3)</a>,
 				<a href="http://sources.redhat.com/gsl/">GSL</a>,
 				<a href="http://muparser.sourceforge.net">muParser</a> and
 				<a href="http://www.zlib.net/">zlib</a>;
@@ -51,7 +51,7 @@
 				you need to have the Qt Assistant installed, which sometimes comes in a separate package (qt4-dev-tools for Ubuntu edgy).
 				</li>
 				<li>Open a terminal window.</li>
-				<li>Get <a href="http://qwt.sourceforge.net/index.html">Qwt (>=5.0.0)</a> sources and unpack them to the 3rdparty folder:<br>
+				<li>Get <a href="http://qwt.sourceforge.net/index.html">Qwt (>=5.1.0)</a> sources and unpack them to the 3rdparty folder:<br>
 				<code>cd scidavis-X.X.X/3rdparty<br>tar -xvjf /path/to/qwt-Y.Y.Y.tar.bz2</code></li>
 				<li>Rename the new directory to <code>qwt</code>:<br>
 				<code>mv qwt-Y.Y.Y qwt</code></li>
@@ -68,9 +68,9 @@
 				<li>Build qwtplot3d:<br><code>cd qwtplot3d; qmake &amp;&amp; make; cd ..</code></li>
 				<li>Go to the directory scidavis-X.X.X/scidavis:<br><code>cd ../scidavis</code></li>
 				<li>If you want to use Python expressions and scripts, make sure you have the following additional dependencies installed:
-				<a href="http://www.python.org/">Python</a> 2.5,
-				<a href="http://www.riverbankcomputing.co.uk/software/sip/intro">SIP</a> 4.5.2 or 4.6,
-				<a href="http://www.riverbankcomputing.co.uk/software/pyqt/intro">PyQt</a> 4.2.
+				<a href="http://www.python.org/">Python</a> (>=2.5),
+				<a href="http://www.riverbankcomputing.co.uk/software/sip/intro">SIP</a> (>=4.6),
+				<a href="http://www.riverbankcomputing.co.uk/software/pyqt/intro">PyQt</a> (>=4.3).
 				Other versions as those indicated above may or may not work.
 				Specifically, there are known issues with a number of SIP versions and
 				a given version of PyQt will only work with a limited range of SIP
@@ -88,7 +88,7 @@
 
 			<ol>
 			<li>Download the "Qt/Windows Open Source Edition" from
-			<a href="http://trolltech.com/developer/downloads/qt/windows">http://trolltech.com/developer/downloads/qt/windows</a>.
+			<a href="http://www.qtsoftware.com/downloads/opensource/appdev/windows-cpp">http://www.qtsoftware.com/downloads/opensource/appdev/windows-cpp</a>.
 			It comes with a graphical installer. When the Qt installer asks you to install MinGW, say yes unless you already have it on your system. In that case you have to tell the Qt installer where to find it. In the case that PyQt (see blow) does not yet support the latest version of Qt, you can get older versions here:
 			
 			<a href="ftp://ftp.trolltech.com/qt/source/">ftp://ftp.trolltech.com/qt/source/</a>.
@@ -100,7 +100,7 @@
 			</li>
 			<li>Go to the control panel, open "system properties", go to the advanced tab and edit the environment variable "Path":
 			Append 
-			<code>;D:\Qt\4.2.3\bin;D:\MinGW\bin;D:\Python25</code> (use the paths where you installed Qt, Python, and MinGW) to the existing string there.
+			<code>;D:\Qt\4.3.3\bin;D:\MinGW\bin;D:\Python25</code> (use the paths where you installed Qt, Python, and MinGW) to the existing string there.
 			</li>
 			<li>Download the SIP source code for Windows from
 			<a href="http://www.riverbankcomputing.co.uk/software/sip/download">http://www.riverbankcomputing.co.uk/software/sip/download</a>
