@@ -1505,8 +1505,14 @@ void Graph::exportSVG(const QString& fname)
 {
 	#if QT_VERSION >= 0x040300
 		QSvgGenerator svg;
-        svg.setFileName(fname);
-        svg.setSize(d_plot->size());
+		svg.setFileName(fname);
+		svg.setSize(d_plot->size());
+		// Workaround for resolution-dependent bug somewhere between Qt and Qwt:
+		// While QwtText uses QTextDocument to draw rich texts, it introduces
+		// or triggers a layout bug concerning sub- and superscripts. This is all pretty
+		// obscure, since exporting to SVG/EPS @ 96 dpi doesn't trigger the bug, nor does
+		// exporting to EPS @ 72 dpi; but exporting to SVG @ 72 dpi (the default) does.
+		svg.setResolution(96);
 
 		QPainter p(&svg);
 		print(&p, d_plot->rect());
