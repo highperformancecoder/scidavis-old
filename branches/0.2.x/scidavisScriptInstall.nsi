@@ -93,6 +93,7 @@ Section "SciDAVis" SEC01
   SectionIn RO
   SetOutPath "$INSTDIR"
   CreateDirectory $INSTDIR\plugins
+  CreateDirectory $INSTDIR\translations
   CreateDirectory $INSTDIR\PyQt4
   SetOverwrite try
 
@@ -121,6 +122,13 @@ Section "SciDAVis" SEC01
   File "plugins\fitRational1.dll"
   File "plugins\exp_saturation.dll"
   File "plugins\explin.dll"
+  SetOutPath "$INSTDIR\translations"
+  File "translations\scidavis_de.qm"
+  File "translations\scidavis_es.qm"
+  File "translations\scidavis_fr.qm"
+  File "translations\scidavis_ja.qm"
+  File "translations\scidavis_ru.qm"
+  File "translations\scidavis_sv.qm"
   SetOutPath "$INSTDIR\PyQt4"
   File "PyQt4\__init__.py"
   File "PyQt4\__init__.pyc"
@@ -213,6 +221,12 @@ Section Uninstall
   Delete "$INSTDIR\plugins\fitRational0.dll"
   Delete "$INSTDIR\plugins\exp_saturation.dll"
   Delete "$INSTDIR\plugins\explin.dll"
+  Delete "$INSTDIR\translations\scidavis_de.qm"
+  Delete "$INSTDIR\translations\scidavis_es.qm"
+  Delete "$INSTDIR\translations\scidavis_fr.qm"
+  Delete "$INSTDIR\translations\scidavis_ja.qm"
+  Delete "$INSTDIR\translations\scidavis_ru.qm"
+  Delete "$INSTDIR\translations\scidavis_sv.qm"
   Delete "$INSTDIR\PyQt4\__init__.py"
   Delete "$INSTDIR\PyQt4\__init__.pyc"
   Delete "$INSTDIR\PyQt4\Qt.pyd"
@@ -237,6 +251,7 @@ Section Uninstall
 
   RMDir "$SMPROGRAMS\$ICONS_GROUP"
   RMDir "$INSTDIR\plugins"
+  RMDir "$INSTDIR\translations"
   RMDir "$INSTDIR\PyQt4"
   RMDir "$INSTDIR"
 
