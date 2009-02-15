@@ -116,6 +116,7 @@ Section "SciDAVis" SEC01
   File "scidavisrc.py"
   File "scidavisrc.pyc"
   File "scidavisUtil.py"
+  File "scidavisUtil.pyc"
   File "assistant.exe"
   SetOutPath "$INSTDIR\plugins"
   File "plugins\fitRational0.dll"
@@ -197,6 +198,7 @@ FunctionEnd
 Section Uninstall
   !insertmacro MUI_STARTMENU_GETFOLDER "Application" $ICONS_GROUP
   Delete "$INSTDIR\uninst.exe"
+  Delete "$INSTDIR\scidavisUtil.pyc"
   Delete "$INSTDIR\scidavisUtil.py"
   Delete "$INSTDIR\scidavisrc.pyc"
   Delete "$INSTDIR\scidavisrc.py"
