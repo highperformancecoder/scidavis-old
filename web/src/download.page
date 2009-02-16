@@ -26,12 +26,18 @@ Thanks to Quentin Denis, packages of the application as well as the manual are a
 
 h2. Debian
 
-Thanks to Burkhard Bunk, packages for Debian Etch are available
+Thanks to Burkhard Bunk, packages for Debian Etch and Lenny are available
 "here":http://debian.physik.hu-berlin.de.
 
 h2. Fedora
 
 Thanks to Eric Tanguy, SciDAVis is now included in Fedora 8 and the following versions.
+
+h2. Slackware
+
+Fellype do Nascimento provides a
+"package for Slackware 12.2":http://www.linuxpackages.net/pkg_details.php?id=12869
+at linuxpackages.net.
 
 h2. Other distributions
 
