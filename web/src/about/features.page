@@ -8,13 +8,14 @@ If you are still unsure whether it meets your needs, you can also take a look at
 "screenshots":https://sourceforge.net/project/screenshots.php?group_id=199120 or simply
 "download":../download.html SciDAVis and see for yourself!
 
-* Tables, Matrices, Graphs and Notes are gathered in a Project and can be organized using folders.
-* Tables for entering data directly or importing from ASCII files.
-* Column-based computations using standard and special functions (and much more if you have
-  "Python":http://www.python.org installed).
+* Tables (2D data), matrices (3D data), graphs (2D or 3D plots) and notes (text notes or scripts) are gathered in a Project and can be organized using folders.
+* Data for tables or matrices can be entered directly or imported from ASCII files. 
+* Cell values in tables can be computed using standard and special functions (and much more if you have
+  "Python":http://www.python.org installed). Each table cell can be assigned an individual formula.
+* Multi-level undo/redo for tables and matrices.
 * Many built-in analysis operations like column/row statistics, (de)convolution, FFT and FFT-based filters.
 * Extensive support for fitting linear and nonlinear functions to the data, including multi-peak fitting.
-* Publication-quality 2D plots in a variety of formats, including symbols/lines, bars and pie charts.
+* Publication-quality 2D plots of various types including symbols/lines, bars and pie charts which can be exported to a variety of formats (JPG, PNG, EPS, PDF, SVG and more).
 * Interactive 3D plots with export to a variety of formats, including EPS and PDF.
 * Note windows with support for in-place evaluation of mathematical expressions. With Python installed, you
   can even access other objects in the project, e.g. for rapidly writing an import filter for a custom data format.

@@ -25,12 +25,12 @@ h2. Translations
 The following people have contributed translations or parts thereof.
 In alphabetical order.
 
+Tilman Benkert[1],
 Markus Bongard,
 Tobias Burnus,
 Rémy Claverie,
 f0ma,
 Jose Antonio Lorenzo Fernandez,
-Tilman Benkert[1],
 Daniel Klaer,
 Peter Landgren,
 Tomomasa Ohkubo,
@@ -44,21 +44,21 @@ In alphabetical order.
 
 Burkhard Bunk (Debian),
 Quentin Denis (SUSE),
+Yu-Hung Lien (Mac OS X binary),
 Eric Tanguy (Fedora),
-Mauricio Troviano (Windows installer),
-Yu-Hung Lien (Intel-Mac binary)
+Mauricio Troviano (Windows installer)
 
 h2. QtiPlot
 
 SciDAVis uses code from QtiPlot, which consisted (at the time of the fork, i.e. QtiPlot 0.9-rc2) of code by the following people:
 
+Tilman Benkert[1],
 Shen Chen,
 Borries Demeler,
 José Antonio Lorenzo Fernández,
 Knut Franke,
 Vasileios Gkanis,
 Gudjon Gudjonsson,
-Tilman Benkert[1],
 Alex Kargovsky,
 Michael Mac-Vicar,
 Tomomasa Ohkubo,

@@ -31,10 +31,18 @@ h1. History
 
 SciDAVis has been started as a fork off of "QtiPlot":http://qtiplot.ro with the aim of introducing some changes
 in design and establishing an open and friendly community.
-The current stable version - SciDAVis 0.1.3 - is still very close to that of QtiPlot 0.9.x,
-but new features and a revision of existing ones are in development. 
-SciDAVis will soon deviate considerably from QtiPlot with our move towards a modular design and a less Origin-like interface
-(see "roadmap":roadmap.html for details). Beta releases of the upcoming SciDAVis 0.2.0 are available
+The versions labelled SciDAVis 0.1.0 to 0.1.4 are still very close to QtiPlot 0.9.x. But many new features 
+and a revision of existing ones have been introduced in release 0.2.0. This is especially true for tables and matrices
+which have internally been rewritten almost completely.
+SciDAVis will deviate more and more from QtiPlot in the future with our move towards a modular design and a less Origin-like interface
+(see "roadmap":roadmap.html for details). Beta releases of the upcoming SciDAVis versions are available
 "here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=287353.
+
+At some time in 2008, the developer teams of "LabPlot":http://labplot.sourceforge.net and SciDAVis found their project goals 
+to be very similar (and since LabPlot 2.x is based on the same library as SciDAVis, i.e., Qt4.x)
+decided to start a close cooperation. The current plans are to use a common backend with two frontends, 
+one with full KDE4 integration (called LabPlot 2.x) and one with no KDE depenencies (pure Qt so to say) 
+for easier cross-platform use (called SciDAVis). This promises a faster development speed for both projects 
+while focussing on slightly different audiences. From the user's point of view, there will still be two different applications.
 
 

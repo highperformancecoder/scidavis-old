@@ -38,31 +38,37 @@ You may be surprised how easy translating SciDAVis is. Here are step by step ins
 			<td>French</td>
 			<td>"scidavis_fr.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_fr.ts?revision=HEAD</td>
 			<td></td>
-			<td align="right">31%</td>
+			<td align="right">23%</td>
 		</tr>
 		<tr>
 			<td>German</td>
 			<td>"scidavis_de.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_de.ts?revision=HEAD</td>
 			<td>"scidavis_de.qph":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_de.qph?revision=HEAD</td>
-			<td align="right">100%</td>
+			<td align="right">68%</td>
 		</tr>
 		<tr>
 			<td>Russian</td>
 			<td>"scidavis_ru.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_ru.ts?revision=HEAD</td>
 			<td></td>
-			<td align="right">100%</td>
+			<td align="right">65%</td>
 		</tr>
 		<tr>
 			<td>Spanish</td>
 			<td>"scidavis_es.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_es.ts?revision=HEAD</td>
 			<td></td>
-			<td align="right">100%</td>
+			<td align="right">77%</td>
 		</tr>
 		<tr>
 			<td>Swedish</td>
 			<td>"scidavis_sv.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_sv.ts?revision=HEAD</td>
 			<td></td>
-			<td align="right">31%</td>
+			<td align="right">20%</td>
+		</tr>
+		<tr>
+			<td>Japanese</td>
+			<td>"scidavis_ja.ts":http://scidavis.svn.sourceforge.net/viewvc/*checkout*/scidavis/branches/current_stable/scidavis/translations/scidavis_ja.ts?revision=HEAD</td>
+			<td></td>
+			<td align="right">1%</td>
 		</tr>
 	</table>
 #	<p>

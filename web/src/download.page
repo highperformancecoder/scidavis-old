@@ -9,8 +9,8 @@ Thanks to Mauricio Troviano, we have an installer for Windows.
 
 The installer contains the necessary Qt dlls, is able to download and install Python 
 and PyQt. The manual is not included due to its
-size and our intention to update it in between releases. Translations are also included 
-typically updated translations will be available a few days or weeks after a release.
+size and our intention to update it in between releases. Translations are also included but usually
+not completed for the new release yet. Typically, updated translations will be available a few days or weeks after a release.
 Note: The installer is designed for 32bit Windows. It is reported to run on 64bit Windows as well
 as long as the 32bit version of Python is installed.
 
@@ -35,16 +35,11 @@ Thanks to Eric Tanguy, SciDAVis is now included in Fedora 8 and the following ve
 
 h2. Other distributions
 
-For all distributions that don't have specific packages yet, we offer a universal binary.
-You need to install the following dependencies, either from your package manager or by following the links below:
+For all distributions that don't have specific packages yet, we offer a universal binary with most dependencies statically linked in.
+Information about dependencies and installation instructions can be found 
+"here":http://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=7811.
 
-* "Qt == 4.4.x":http://trolltech.com/developer/downloads/qt/x11
-* "Python == 2.5":http://www.python.org/download/
-* "PyQt4 >= 4.3":http://www.riverbankcomputing.co.uk/pyqt/download.php
-
-Get scidavis-x.y.z-x86-linux-Qt4.4-Py2.5.tar.bz2 from
-"here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=236207.
-If you don't know how to open this file, start a terminal, cd to the directory containing it and enter
+If you don't know how to open scidavis-x.y.z-x86-linux-Qt4.4-Py2.5.tar.bz2, start a terminal, cd to the directory containing it and enter
 
 {hlblock: {blockName: linux, highlight: plaintext}}
 
@@ -53,9 +48,10 @@ This will create a directory "scidavis-x.y.z-x86-linux" with the binary and some
 h1. MacOS X
 
 Thanks to Yu-Hung Lien, we can offer you MacOS X binaries of SciDAVis.
-A MacOS X binary for Intel Macs of the stable version is available 
-"here":https://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=8143.
-Intel and universal binaries of the unstable version can be found "here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=287353.
+A Mac OS X binary of the latest stable version is made available 
+"here":https://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=8143 shortly after each release. 
+
+Binaries of the unstable version can be found "here":https://sourceforge.net/project/showfiles.php?group_id=199120&package_id=287353.
 
 Special note for compiling SciDAVis 0.1.2: before compiling you need to edit scidavis/scidavis.pro and replace every occurence of "LIBS +=
 -L /some/directory" with "LIBS += -L/some/directory" (remove the space character). This is fixed in SciDAVis 0.1.3.
