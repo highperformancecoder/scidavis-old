@@ -39,6 +39,11 @@ Fellype do Nascimento provides a
 "package for Slackware 12.2":http://www.linuxpackages.net/pkg_details.php?id=12869
 at linuxpackages.net.
 
+h2. Arch Linux
+
+"PKGBUILD on AUR":http://aur.archlinux.org/packages.php?ID=19201 started by
+Olaf Leidinger and currently maintained by Knut Franke.
+
 h2. Other distributions
 
 For all distributions that don't have specific packages yet, we offer a universal binary with most dependencies statically linked in.
