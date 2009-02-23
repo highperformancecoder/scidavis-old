@@ -146,6 +146,7 @@
 #include <QDialogButtonBox>
 #include <QUndoView>
 #include <QUndoStack>
+#include <QTemporaryFile>
 
 #include <zlib.h>
 
@@ -155,8 +156,8 @@ using namespace Qwt3D;
 
 extern "C"
 {
+#include <zlib.h>
 void file_compress(char  *file, char  *mode);
-void file_uncompress(char  *file);
 }
 
 ApplicationWindow::ApplicationWindow()
@@ -3464,8 +3465,12 @@ void ApplicationWindow::open()
 
 ApplicationWindow* ApplicationWindow::open(const QString& fn)
 {
-	if (fn.endsWith(".opj", Qt::CaseInsensitive) || fn.endsWith(".ogm", Qt::CaseInsensitive) ||
-		fn.endsWith(".ogw", Qt::CaseInsensitive) || fn.endsWith(".ogg", Qt::CaseInsensitive))
+	if (
+			fn.endsWith(".opj", Qt::CaseInsensitive) ||
+			fn.endsWith(".ogm", Qt::CaseInsensitive) ||
+			fn.endsWith(".ogw", Qt::CaseInsensitive) ||
+			fn.endsWith(".ogg", Qt::CaseInsensitive)
+			)
 #ifdef REVIVE_OPJ_SUPPERT
 		return importOPJ(fn);
 #else
@@ -3476,66 +3481,19 @@ ApplicationWindow* ApplicationWindow::open(const QString& fn)
 #endif
 	else if (fn.endsWith(".py", Qt::CaseInsensitive))
 		return loadScript(fn);
-	else if (!( fn.endsWith(".sciprj",Qt::CaseInsensitive) || fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) ||
-				fn.endsWith(".qti",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
-                fn.endsWith(".qti~",Qt::CaseInsensitive)))
+	else if (
+			fn.endsWith(".sciprj",Qt::CaseInsensitive) ||
+			fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) ||
+			fn.endsWith(".qti",Qt::CaseInsensitive) ||
+			fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
+			fn.endsWith(".sciprj~",Qt::CaseInsensitive) ||
+			fn.endsWith(".sciprj.gz~",Qt::CaseInsensitive) ||
+			fn.endsWith(".qti~",Qt::CaseInsensitive) ||
+			fn.endsWith(".qti.gz~",Qt::CaseInsensitive)
+			)
+		return openProject(fn);
+	else
 		return plotFile(fn);
-
-	QString fname = fn;
-	bool compressed = false;
-	if ( fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive))
-	{//decompress using zlib
-		file_uncompress((char *)fname.toAscii().constData());
-		fname = fname.left(fname.size() - 3);
-		compressed = true;
-	}
-
-	QFile f(fname);
-	QTextStream t( &f );
-	f.open(QIODevice::ReadOnly);
-	QString s = t.readLine();
-    QStringList list = s.split(QRegExp("\\s"), QString::SkipEmptyParts);
-    if (list.count() < 2 || (list[0] != "SciDAVis" && list[0] != "QtiPlot"))
-    {
-        f.close();
-        if (QFile::exists(fname + "~"))
-        {
-            int choice = QMessageBox::question(this, tr("File opening error"),
-					tr("The file <b>%1</b> is corrupted, but there exists a backup copy.<br>Do you want to open the backup instead?").arg(fn),
-					QMessageBox::Yes|QMessageBox::Default, QMessageBox::No|QMessageBox::Escape);
-            if (choice == QMessageBox::Yes)
-                return open(fname + "~");
-            else
-                QMessageBox::critical(this, tr("File opening error"),  tr("The file <b>%1</b> is not a valid project file.").arg(fn));
-            return 0;
-		}
-    }
-
-    QStringList vl = list[1].split(".", QString::SkipEmptyParts);
-	if(fn.endsWith(".qti",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive) )
-	{
-	    d_file_version = 100*(vl[0]).toInt()+10*(vl[1]).toInt()+(vl[2]).toInt();
-		if(d_file_version > 90)
-		{
-                QMessageBox::critical(this, tr("File opening error"),  tr("SciDAVis does not support QtiPlot project files from versions later than 0.9.0.").arg(fn));
-				return 0;
-		}
-	}
-	else 
-		d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
-
-	ApplicationWindow* app = openProject(fname);
-
-	app->recentProjects.remove(fn);
-	app->recentProjects.push_front(fn);
-	app->updateRecentProjectsList();
-
-	f.close();
-	if (compressed)
-	{// recompress the file after loading it
-		file_compress((char *)fname.toAscii().constData(), "wb9");
-	}
-	return app;
 }
 
 void ApplicationWindow::openRecentProject(int index)
@@ -3580,28 +3538,115 @@ void ApplicationWindow::openRecentProject(int index)
 	}
 }
 
+QFile * ApplicationWindow::openCompressedFile(const QString& fn)
+{
+	QTemporaryFile * file;
+	char buf[16384];
+	int len, err;
+
+	gzFile in = gzopen(fn.toAscii().constData(), "rb");
+	if (!in) {
+		QMessageBox::critical(this, tr("File opening error"), tr("zlib can't open %1.").arg(fn));
+		return 0;
+	}
+	file = new QTemporaryFile();
+	if (!file || !file->open()) {
+		gzclose(in);
+		QMessageBox::critical(this, tr("File opening error"), tr("Can't create temporary file for writing uncompressed copy of %1.").arg(fn));
+		return 0;
+	}
+
+	forever {
+		len = gzread(in, buf, sizeof(buf));
+		if (len == 0) break;
+		if (len < 0) {
+			QMessageBox::critical(this, tr("File opening error"), gzerror(in, &err));
+			gzclose(in);
+			file->close(); delete file;
+			return 0;
+		}
+		if (file->write(buf, len) != len) {
+			QMessageBox::critical(this, tr("File opening error"), tr("Error writing to temporary file: %1").arg(file->errorString()));
+			gzclose(in);
+			file->close(); delete file;
+			return 0;
+		}
+	}
+
+	gzclose(in);
+	file->reset();
+	return file;
+}
+
 ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 {
+	QFile * file;
+
+	if (fn.endsWith(".gz", Qt::CaseInsensitive) || fn.endsWith(".gz~", Qt::CaseInsensitive)) {
+		file = openCompressedFile(fn);
+		if (!file) return 0;
+	} else {
+		file = new QFile(fn);
+		file->open(QIODevice::ReadOnly);
+	}
+
+	QTextStream t(file);
+	t.setEncoding(QTextStream::UnicodeUTF8);
+	QString s;
+	QStringList list;
+
+	s = t.readLine();
+	list = s.split(QRegExp("\\s"), QString::SkipEmptyParts);
+	if (list.count() < 2 || (list[0] != "SciDAVis" && list[0] != "QtiPlot")) {
+		file->close(); delete file;
+		if (QFile::exists(fn + "~")) {
+			int choice = QMessageBox::question(this, tr("File opening error"),
+					tr("The file <b>%1</b> is corrupted, but there exists a backup copy.<br>Do you want to open the backup instead?").arg(fn),
+					QMessageBox::Yes|QMessageBox::Default, QMessageBox::No|QMessageBox::Escape);
+			if (choice == QMessageBox::Yes) {
+				QMessageBox::information(this, tr("Opening backup copy"),
+						tr("The original (corrupt) file is being left untouched, in case you want to "\
+							"try rescuing data manually. If you want to continue working with the "\
+							"automatically restored backup copy, you have to explicitly overwrite the "\
+							"original file."));
+				return openProject(fn + "~");
+			}
+		}
+		QMessageBox::critical(this, tr("File opening error"),  tr("The file <b>%1</b> is not a valid project file.").arg(fn));
+		return 0;
+	}
+
+	QStringList vl = list[1].split(".", QString::SkipEmptyParts);
+	if(
+			fn.endsWith(".qti",Qt::CaseInsensitive) ||
+			fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
+			fn.endsWith(".qti~",Qt::CaseInsensitive) ||
+			fn.endsWith(".qti.gz~",Qt::CaseInsensitive)
+	  ) {
+		d_file_version = 100*(vl[0]).toInt()+10*(vl[1]).toInt()+(vl[2]).toInt();
+		if(d_file_version > 90) {
+			file->close(); delete file;
+			QMessageBox::critical(this, tr("File opening error"),
+					tr("SciDAVis does not support QtiPlot project files from versions later than 0.9.0.").arg(fn));
+			return 0;
+		}
+	} else 
+		d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
+
 	ApplicationWindow *app = new ApplicationWindow();
 	app->applyUserSettings();
 	app->projectname = fn;
 	app->d_file_version = d_file_version;
 	app->setWindowTitle(tr("SciDAVis") + " - " + fn);
 
-	QFile f(fn);
-	QTextStream t( &f );
-	t.setEncoding(QTextStream::UnicodeUTF8);
-	f.open(QIODevice::ReadOnly);
-
 	QFileInfo fi(fn);
 	QString baseName = fi.fileName();
 
-	t.readLine();
 	if (d_file_version < 73)
 		t.readLine();
 
-	QString s = t.readLine();
-	QStringList list=s.split("\t", QString::SkipEmptyParts);
+	s = t.readLine();
+	list=s.split("\t", QString::SkipEmptyParts);
 	if (list[0] == "<scripting-lang>")
 	{
 		if (!app->setScriptingLang(list[1], true))
@@ -3724,17 +3769,17 @@ ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 				app->current_folder = parent;
 		}
 	}
-	f.close();
 
 	if (progress.wasCanceled())
 	{
+		file->close(); delete file;
 		app->saved = true;
 		app->close();
 		return 0;
 	}
 
 	//process the rest
-	f.open(QIODevice::ReadOnly);
+	file->reset();
 
 	MultiLayer *plot=0;
 	while ( !t.atEnd() && !progress.wasCanceled())
@@ -3831,7 +3876,7 @@ ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 			app->results->setText(app->logInfo);
 		}
 	}
-	f.close();
+	file->close(); delete file;
 
 	if (progress.wasCanceled())
 	{
@@ -3842,9 +3887,6 @@ ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 
 	app->logInfo=app->logInfo.remove ("</log>\n", false);
 
-	QFileInfo fi2(f);
-	QString fileName = fi2.absFilePath();
-
 	app->folders->setCurrentItem(cf->folderListItem());
 	app->folders->blockSignals (false);
 	//change folder to user defined current folder
@@ -3853,9 +3895,14 @@ ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 	app->blockSignals (false);
 	app->renamedTables.clear();
 
-   	app->showMaximized();
+	app->showMaximized();
 	app->executeNotes();
-    app->savedProject();
+	app->savedProject();
+
+	app->recentProjects.remove(fn);
+	app->recentProjects.push_front(fn);
+	app->updateRecentProjectsList();
+
 	return app;
 }
 
@@ -11920,6 +11967,8 @@ void ApplicationWindow::appendProject(const QString& fn)
 	if (fn.isEmpty())
 		return;
 
+	QFile * file;
+
 	QFileInfo fi(fn);
 	workingDir = fi.dirPath(true);
 
@@ -11943,18 +11992,19 @@ void ApplicationWindow::appendProject(const QString& fn)
 		return;
 	}
 
+	if (fn.endsWith(".gz", Qt::CaseInsensitive) || fn.endsWith(".gz~", Qt::CaseInsensitive)) {
+		file = openCompressedFile(fn);
+		if (!file) return;
+	} else {
+		file = new QFile(fn);
+		file->open(QIODevice::ReadOnly);
+	}
+
     recentProjects.remove(fn);
     recentProjects.push_front(fn);
     updateRecentProjectsList();
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-	QString fname = fn;
-	if ( fn.contains(".sciprj.gz") || fn.contains(".qti.gz"))
-	{//decompress using zlib
-		file_uncompress((char *)fname.toAscii().constData());
-		fname.remove(".gz");
-	}
 
 	Folder *cf = current_folder;
 	FolderListItem *item = (FolderListItem *)current_folder->folderListItem();
@@ -11987,10 +12037,8 @@ void ApplicationWindow::appendProject(const QString& fn)
 #endif
 	else
 	{
-		QFile f(fname);
-		QTextStream t( &f );
+		QTextStream t(file);
 		t.setEncoding(QTextStream::UnicodeUTF8);
-		f.open(QIODevice::ReadOnly);
 
 		QString s = t.readLine();
 		lst = s.split(QRegExp("\\s"), QString::SkipEmptyParts);
@@ -12072,10 +12120,9 @@ void ApplicationWindow::appendProject(const QString& fn)
 					current_folder = parent;
 			}
 		}
-		f.close();
 
 		//process the rest
-		f.open(QIODevice::ReadOnly);
+		file->reset();
 
 		MultiLayer *plot=0;
 		while ( !t.atEnd())
@@ -12155,7 +12202,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 					current_folder = parent;
 			}
 		}
-		f.close();
+		file->close(); delete file;
 	}
 
 	folders->blockSignals (false);

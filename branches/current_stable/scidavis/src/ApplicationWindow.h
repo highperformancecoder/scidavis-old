@@ -156,6 +156,11 @@ public slots:
 	//@{
 	void open();
 	ApplicationWindow* open(const QString& fn);
+	//! Returns temporary file ready for reading uncompressed content
+	/**
+	 * Close and delete after you're done with it.
+	 */
+	QFile * openCompressedFile(const QString& fn);
 	ApplicationWindow* openProject(const QString& fn);
 #ifdef REVIVE_OPJ_SUPPERT
 	ApplicationWindow* importOPJ(const QString& filename);
