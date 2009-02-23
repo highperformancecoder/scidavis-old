@@ -80,7 +80,7 @@ Qwtplot3D (http://qwtplot3d.sourceforge.net/),\n\
 muParser (http://muparser.sourceforge.net/),\n\
 Python (http://www.python.org/),\n\
 liborigin (http://sourceforge.net/projects/liborigin/),\n\
-Vim (http://www.vim.org/thanks.php/),\n\\n\
+Vim (http://www.vim.org/thanks.php/),\n\
 webgen (http://webgen.rubyforge.org/),\n\
 Doxygen (http://www.doxygen.org/),\n\
 Subversion (http://subversion.tigris.org/),\n\

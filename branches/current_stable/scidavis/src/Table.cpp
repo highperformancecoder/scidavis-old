@@ -74,6 +74,7 @@ Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ign
 		else
 			d_future_table->setName(label);
 	}
+	setWindowLabel(fname);
 	init();
 }
 
