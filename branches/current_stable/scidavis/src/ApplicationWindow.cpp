@@ -9713,7 +9713,20 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			else
 				cl.penWidth = cl.lWidth;
 
-			ag->insertFunctionCurve(app, curve[1], curve[2].toInt(), d_file_version);
+			QStringList func_spec;
+			func_spec << curve[1];
+
+			j++;
+			while (list[j] == "<formula>") { // d_file_version >= 0x000105
+				QString formula;
+				for(j++; list[j] != "</formula>"; j++)
+					formula += list[j] + "\n";
+				func_spec << formula;
+				j++;
+			}
+			j--;
+
+			ag->insertFunctionCurve(app, func_spec, curve[2].toInt(), d_file_version);
 			ag->setCurveType(curveID, (Graph::CurveType)curve[5].toInt(), false);
 			ag->updateCurveLayout(curveID, &cl);
 			if (d_file_version >= 88)

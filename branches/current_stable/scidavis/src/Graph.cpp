@@ -2391,20 +2391,30 @@ QString Graph::saveCurves()
                 continue;
             }
 
-            DataCurve *c = (DataCurve *)it;
+            PlotCurve *c = static_cast<PlotCurve *>(it);
 			if (c->type() != ErrorBars)
 			{
-				if (c->type() == Function)
-					s += ((FunctionCurve *)c)->saveToString();
-				else if (c->type() == Box)
+				if (c->type() == Function) {
+					s += "FunctionCurve\t";
+					s += QString::number(static_cast<FunctionCurve*>(c)->functionType()) + ",";
+					s += c->title().text() + ",";
+					s += static_cast<FunctionCurve*>(c)->variable() + ",";
+					s += QString::number(static_cast<FunctionCurve*>(c)->startRange(),'g',15)+",";
+					s += QString::number(static_cast<FunctionCurve*>(c)->endRange(),'g',15)+"\t";
+					s += QString::number(static_cast<FunctionCurve*>(c)->dataSize())+"\t\t\t";
+					//the 2 last tabs are legacy code, kept for compatibility with old project files
+				} else if (c->type() == Box)
 					s += "curve\t" + QString::number(c->x(0)) + "\t" + c->title().text() + "\t";
 				else
-					s += "curve\t" + c->xColumnName() + "\t" + c->title().text() + "\t";
+					s += "curve\t" + static_cast<DataCurve*>(c)->xColumnName() + "\t" + c->title().text() + "\t";
 
 				s += saveCurveLayout(i);
 				s += QString::number(c->xAxis())+"\t"+QString::number(c->yAxis())+"\t";
-				s += QString::number(c->startRow())+"\t"+QString::number(c->endRow())+"\t";
+				s += QString::number(static_cast<DataCurve*>(c)->startRow())+"\t"+QString::number(static_cast<DataCurve*>(c)->endRow())+"\t";
 				s += QString::number(c->isVisible())+"\n";
+				if (c->type() == Function) {
+					s += "<formula>\n" + static_cast<FunctionCurve*>(c)->formulas().join("\n</formula>\n<formula>\n") + "\n</formula>\n";
+				}
 			}
 		    else if (c->type() == ErrorBars)
   	        {
@@ -3934,16 +3944,29 @@ bool Graph::addFunctionCurve(ApplicationWindow *parent, int type, const QStringL
 	return true;
 }
 
-void Graph::insertFunctionCurve(ApplicationWindow * parent, const QString& formula, int points, int fileVersion)
+void Graph::insertFunctionCurve(ApplicationWindow * parent, const QStringList& func_spec, int points, int fileVersion)
 {
 	int type;
 	QStringList formulas;
 	QString var, name = QString::null;
 	QList<double> ranges;
 
-	QStringList curve = formula.split(",");
-	if (fileVersion < 87)
-	{
+	QStringList curve = func_spec[0].split(",");
+	if (fileVersion >= 0x000105) {
+		// SciDAVis 0.1.4 and 0.2.0 crash when trying to save a function curve;
+		// thus, it's safe to assume every version from 0.1.5 on uses the new format,
+		// even though 0.2.0 doesn't actually contain the revised code yet
+		type = curve[0].toInt();
+		name = curve[1];
+		var = curve[2];
+		ranges += curve[3].toDouble();
+		ranges += curve[4].toDouble();
+
+		formulas << func_spec[1];
+		if (type != FunctionCurve::Normal)
+			formulas << func_spec[2];
+
+	} else if (fileVersion < 87) {
 		if (curve[0][0]=='f')
 		{
 			type = FunctionCurve::Normal;

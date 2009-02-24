@@ -64,19 +64,6 @@ void FunctionCurve::copy(FunctionCurve* f)
 	d_to = f->endRange();
 }
 
-QString FunctionCurve::saveToString()
-{
-	QString s = "FunctionCurve\t";
-	s += QString::number(d_function_type) + ",";
-	s += title().text() + ",";
-	s += d_formulas.join(",") + "," + d_variable + ",";
-	s += QString::number(d_from,'g',15)+",";
-	s += QString::number(d_to,'g',15)+"\t";
-	s += QString::number(dataSize())+"\t\t\t";
-	//the 2 last tabs are legacy code, kept for compatibility with old project files
-	return s;
-}
-
 QString FunctionCurve::legend()
 {
 	QString label = title().text() + ": ";

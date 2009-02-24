@@ -61,9 +61,6 @@ public:
 
 	void copy(FunctionCurve *f);
 
-	//! Returns a string used when saving to a project file
-	QString saveToString();
-
 	//! Returns a string that can be displayed in a plot legend
 	QString legend();
 
