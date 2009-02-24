@@ -318,6 +318,16 @@ void SymbolDialog::initMathSymbols()
 		buttons->addButton(btn,counter+1);
 		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
+	// per mille and per ten thousand
+	for ( i=0; i <= (0x2031-0x2030) ; i++,counter++ )
+	{
+		QPushButton *btn = new QPushButton(QString(QChar(i+0x2030)));
+		btn->setMaximumWidth(40);
+		btn->setFlat ( true );
+		btn->setAutoDefault (false);
+		buttons->addButton(btn,counter+1);
+		gridLayout->addWidget(btn,counter/8,counter%8);
+	}
 	numButtons = counter;
 }
 

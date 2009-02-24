@@ -1372,7 +1372,6 @@ void PlotDialog::insertTabs(int plot_type)
 	else if (plot_type == Graph::VectXYXY || plot_type == Graph::VectXYAM)
 	{
 		boxConnect->setEnabled(true);
-		privateTabWidget->addTab (linePage, tr("Line"));
 		privateTabWidget->addTab (vectPage, tr("Vector"));
 		customVectorsPage(plot_type == Graph::VectXYAM);
 		privateTabWidget->setCurrentIndex(privateTabWidget->indexOf(vectPage));
@@ -1846,26 +1845,34 @@ bool PlotDialog::acceptParams()
   	}
 	else if (privateTabWidget->currentWidget()==linePage)
 	{
-		int index = item->plotItemIndex();
-		graph->setCurveStyle(index, boxConnect->currentIndex());
-		QBrush br = QBrush(boxAreaColor->color(), boxPattern->getSelectedPattern());
-		if (!fillGroupBox->isChecked())
-			br = QBrush();
-		graph->setCurveBrush(index, br);
-		QPen pen = QPen(boxLineColor->color(),boxLineWidth->value(),Graph::getPenStyle(boxLineStyle->currentIndex()));
-		QwtPlotCurve *curve = (QwtPlotCurve *)plotItem;
-		curve->setPen(pen);
+		if (boxConnect->currentIndex() == 0) // no line => we really have a scatter plotter
+			boxPlotType->setCurrentIndex(1);
+		else {
+			int index = item->plotItemIndex();
+			graph->setCurveStyle(index, boxConnect->currentIndex());
+			QBrush br = QBrush(boxAreaColor->color(), boxPattern->getSelectedPattern());
+			if (!fillGroupBox->isChecked())
+				br = QBrush();
+			graph->setCurveBrush(index, br);
+			QPen pen = QPen(boxLineColor->color(),boxLineWidth->value(),Graph::getPenStyle(boxLineStyle->currentIndex()));
+			QwtPlotCurve *curve = (QwtPlotCurve *)plotItem;
+			curve->setPen(pen);
+		}
 	}
 	else if (privateTabWidget->currentWidget()==symbolPage)
 	{
-		int size = 2*boxSymbolSize->value()+1;
-		QBrush br = QBrush(boxFillColor->color(), Qt::SolidPattern);
-		if (!boxFillSymbol->isChecked())
-			br = QBrush();
-		QPen pen = QPen(boxSymbolColor->color(),boxPenWidth->value(),Qt::SolidLine);
-		QwtSymbol s = QwtSymbol(boxSymbolStyle->selectedSymbol(), br, pen, QSize(size, size));
-		QwtPlotCurve *curve = (QwtPlotCurve *)plotItem;
-		curve->setSymbol(s);
+		if (boxSymbolStyle->selectedSymbol() == QwtSymbol::NoSymbol) // no symbol => line plot
+			boxPlotType->setCurrentIndex(0);
+		else {
+			int size = 2*boxSymbolSize->value()+1;
+			QBrush br = QBrush(boxFillColor->color(), Qt::SolidPattern);
+			if (!boxFillSymbol->isChecked())
+				br = QBrush();
+			QPen pen = QPen(boxSymbolColor->color(),boxPenWidth->value(),Qt::SolidLine);
+			QwtSymbol s = QwtSymbol(boxSymbolStyle->selectedSymbol(), br, pen, QSize(size, size));
+			QwtPlotCurve *curve = (QwtPlotCurve *)plotItem;
+			curve->setSymbol(s);
+		}
 	}
 	else if (privateTabWidget->currentWidget()==histogramPage)
 	{

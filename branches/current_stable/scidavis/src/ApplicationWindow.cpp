@@ -5844,6 +5844,7 @@ void ApplicationWindow::showPlotDialog(int curveKey)
 		PlotDialog* pd = new PlotDialog(d_extended_plot_dialog, this);
         pd->setAttribute(Qt::WA_DeleteOnClose);
         pd->setMultiLayer((MultiLayer*)w);
+		  pd->insertColumnsList(columnsList());
         if (curveKey >= 0)
 		{
 			Graph *g = ((MultiLayer*)w)->activeGraph();
