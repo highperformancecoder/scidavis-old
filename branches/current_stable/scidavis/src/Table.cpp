@@ -103,10 +103,7 @@ void Table::init()
 
 
 	for (int i=0; i<columnCount(); i++)
-	{
 		ui.add_reference_combobox->addItem("col(\""+column(i)->name()+"\")"); 
-		ui.add_reference_combobox->addItem("col(\""+column(i)->name()+"\", i)"); 
-	}
 
 	ui.add_function_combobox->addItems(scriptEnv->mathFunctions());
 	updateFunctionDoc();
@@ -450,51 +447,56 @@ void Table::setCommands(const QString& com)
 
 bool Table::recalculate()
 {
-	QApplication::setOverrideCursor(Qt::WaitCursor);
 	for (int col=firstSelectedColumn(); col<=lastSelectedColumn(); col++)
+		if (!recalculate(col, true))
+			return false;
+	return true;
+}
+
+bool Table::recalculate(int col, bool only_selected_rows)
+{
+	QApplication::setOverrideCursor(Qt::WaitCursor);
+	Column *col_ptr=column(col);
+
+	QList< Interval<int> > formula_intervals = col_ptr->formulaIntervals();
+	foreach(Interval<int> interval, formula_intervals)
 	{
-		Column *col_ptr=column(col);
+		QString formula = col_ptr->formula(interval.start());
+		if (formula.isEmpty())
+			continue;
 
-		QList< Interval<int> > formula_intervals = col_ptr->formulaIntervals();
-		foreach(Interval<int> interval, formula_intervals)
+		Script *colscript = scriptEnv->newScript(formula, this,  QString("<%1>").arg(colName(col)));
+		connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
+		connect(colscript, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
+
+		if (!colscript->compile())
+			continue;
+
+		colscript->setInt(col+1, "j");
+		QVariant ret;
+		int start_row = interval.start();
+		int end_row = interval.end();
+		for (int i=start_row; i<=end_row; i++)
 		{
-			QString formula = col_ptr->formula(interval.start());
-			if (formula.isEmpty())
-				continue;
-
-			Script *colscript = scriptEnv->newScript(formula, this,  QString("<%1>").arg(colName(col)));
-			connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
-			connect(colscript, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
-
-			if (!colscript->compile())
-				continue;
-
-			colscript->setInt(col+1, "j");
-			QVariant ret;
-			int start_row = interval.start();
-			int end_row = interval.end();
-			for (int i=start_row; i<=end_row; i++)
+			if (only_selected_rows && !isCellSelected(i, col)) continue;
+			colscript->setInt(i+1,"i");
+			ret = colscript->eval();
+			if(ret.type() == QVariant::Double) 
 			{
-				if (!isCellSelected(i, col)) continue;
-				colscript->setInt(i+1,"i");
-				ret = colscript->eval();
-				if(ret.type() == QVariant::Double) 
+				if (col_ptr->dataType() == SciDAVis::TypeDouble)
+					column(col)->setValueAt(i, ret.toDouble());
+				else
 				{
-					if (col_ptr->dataType() == SciDAVis::TypeDouble)
-						column(col)->setValueAt(i, ret.toDouble());
-					else
-					{
-						int prec;
-						char f;
-						columnNumericFormat(col, &f, &prec);
-						setText(i, col, QLocale().toString(ret.toDouble(), f, prec));
-					}
-				} 
-				else if(ret.canConvert(QVariant::String))
-					setText(i, col, ret.toString());
-				else 
-					break;
-			}
+					int prec;
+					char f;
+					columnNumericFormat(col, &f, &prec);
+					setText(i, col, QLocale().toString(ret.toDouble(), f, prec));
+				}
+			} 
+			else if(ret.canConvert(QVariant::String))
+				setText(i, col, ret.toString());
+			else 
+				break;
 		}
 	}
 	QApplication::restoreOverrideCursor();
@@ -1264,20 +1266,16 @@ bool Table::commentsEnabled()
 void Table::applyFormula()
 {
 	QApplication::setOverrideCursor(Qt::WaitCursor);
-	d_future_table->beginMacro(tr("%1: apply formula to selection").arg(name()));
+	d_future_table->beginMacro(tr("%1: apply formula to column").arg(name()));
 
 	QString formula = ui.formula_box->toPlainText();
 	for (int col=firstSelectedColumn(); col<=lastSelectedColumn(); col++)
 	{
 		Column *col_ptr = column(col);
-		for (int row=0; row<d_future_table->rowCount(); row++)
-		{
-			if (isCellSelected(row, col))
-				col_ptr->setFormula(row, formula);
-		}
+		col_ptr->insertRows(col_ptr->rowCount(), rowCount()-col_ptr->rowCount());
+		col_ptr->setFormula(Interval<int>(0,rowCount()-1), formula);
+		recalculate(col, false);
 	}
-	
-	recalculate();
 
 	d_future_table->endMacro();
 	QApplication::restoreOverrideCursor();
@@ -1316,9 +1314,7 @@ void Table::handleAspectDescriptionChange(const AbstractAspect *aspect)
 		return;
 	}
 	const Column * col = qobject_cast<const Column *>(aspect);
-	if (col)
-	if (d_future_table->columnIndex(col) != -1) 
-	if (d_stored_column_labels.contains(col))
+	if (col && d_future_table->columnIndex(col) != -1 && d_stored_column_labels.contains(col))
 	{
 		QString old_name = d_stored_column_labels.value(col);
 		QString new_name = col->name();

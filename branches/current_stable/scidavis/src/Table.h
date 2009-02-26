@@ -171,7 +171,9 @@ public slots:
 	void setCommands(const QString& com);
 	//! Set formula for column col.
 	void setCommand(int col, const QString& com);
-	//! Compute selected cells from the cell formulas
+	//! Compute cells from the cell formulas
+	bool recalculate(int col, bool only_selected_rows=true);
+	//! Recalculate selected cells
 	bool recalculate();
 
 	//! \name Row Operations

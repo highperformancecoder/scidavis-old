@@ -150,6 +150,8 @@ void TableView::init()
 		SLOT(updateHeaderGeometry(Qt::Orientation,int,int)) ); 
 	connect(d_model, SIGNAL(headerDataChanged(Qt::Orientation,int,int)), this, 
 		SLOT(handleHeaderDataChanged(Qt::Orientation,int,int)) ); 
+	connect(d_table, SIGNAL(aspectDescriptionChanged(const AbstractAspect*)),
+			this, SLOT(handleAspectDescriptionChanged(const AbstractAspect*)));
 
 	rereadSectionSizes();
 	
@@ -314,21 +316,48 @@ void TableView::currentColumnChanged(const QModelIndex & current, const QModelIn
 	Q_UNUSED(previous);
 	int col = current.column();	
 	if(col < 0 || col >= d_table->columnCount()) return;
-	setColumnForDescriptionTab(col);
+	setColumnForControlTabs(col);
 }
 
-void TableView::setColumnForDescriptionTab(int col)
+void TableView::setColumnForControlTabs(int col)
 {
 	if(col < 0 || col >= d_table->columnCount()) return;
 	Column *col_ptr = d_table->column(col);
 
-	QString str = QString(tr("Current column:\nName: %1\nPosition: %2"))\
+	QString str = tr("Current column:\nName: %1\nPosition: %2")\
 		.arg(col_ptr->name()).arg(col+1);
 		
-	// TODO: currently, this eats up considerable screen space for duplicate information - do we need it?
-	//ui.column_info->document()->setPlainText(str);
 	ui.name_edit->setText(col_ptr->name());
 	ui.comment_box->document()->setPlainText(col_ptr->comment());
+	ui.type_box->setCurrentIndex(ui.type_box->findData((int)col_ptr->columnMode()));
+	switch(col_ptr->columnMode()) {
+		case SciDAVis::Numeric:
+			{
+				Double2StringFilter * filter = static_cast<Double2StringFilter*>(col_ptr->outputFilter());
+				ui.format_box->setCurrentIndex(ui.format_box->findData(filter->numericFormat()));
+				ui.digits_box->setValue(filter->numDigits());
+				break;
+			}
+		case SciDAVis::Month:
+		case SciDAVis::Day:
+		case SciDAVis::DateTime:
+			{
+				DateTime2StringFilter * filter = static_cast<DateTime2StringFilter*>(col_ptr->outputFilter());
+				ui.format_box->setCurrentIndex(ui.format_box->findData(filter->format()));
+				break;
+			}
+		default:
+			break;
+	}
+	ui.formula_box->setText(col_ptr->formula(0));
+}
+
+void TableView::handleAspectDescriptionChanged(const AbstractAspect * aspect)
+{
+	const Column * col = qobject_cast<const Column*>(aspect);
+	if (!col || col->parentAspect() != static_cast<AbstractAspect*>(d_table))
+		return;
+	ui.add_reference_combobox->setItemText(d_table->columnIndex(col), "col(\"" + col->name() + "\")");
 }
 
 void TableView::selectionChanged(const QItemSelection & selected, const QItemSelection & deselected)
@@ -512,8 +541,9 @@ void TableView::applyType()
 			{
 				col->setColumnMode(mode);
 				Double2StringFilter * filter = static_cast<Double2StringFilter*>(col->outputFilter());
+				int digits = ui.digits_box->value(); // setNumericFormat causes digits_box to be modified...
 				filter->setNumericFormat(ui.format_box->itemData(format_index).toChar().toLatin1());
-				filter->setNumDigits(ui.digits_box->value());
+				filter->setNumDigits(digits);
 				// TODO: make sure this is done by a signal from the filter to the column on to the table
 	//			d_model->emitColumnChanged(col); 
 				}
@@ -545,7 +575,7 @@ void TableView::handleHeaderDataChanged(Qt::Orientation orientation, int first, 
 
 	int col = sel_model->currentIndex().column();
 	if(col < first || col > last) return;
-	setColumnForDescriptionTab(col);
+	setColumnForControlTabs(col);
 }
 
 int TableView::selectedColumnCount(bool full)

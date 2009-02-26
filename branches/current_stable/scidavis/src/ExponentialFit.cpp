@@ -121,7 +121,6 @@ void ExponentialFit::calculateFitCurveData(double *par, double *X, double *Y)
 			Y[i] = par[0]*exp(-par[1]*X[i])+par[2];
 		}
 	}
-	delete[] par;
 }
 
 /*****************************************************************************
@@ -198,7 +197,6 @@ void TwoExpFit::calculateFitCurveData(double *par, double *X, double *Y)
 			Y[i] = par[0]*exp(-par[1]*X[i])+par[2]*exp(-par[3]*X[i])+par[4];
 		}
 	}
-	delete[] par;
 }
 
 /*****************************************************************************
@@ -276,5 +274,4 @@ void ThreeExpFit::calculateFitCurveData(double *par, double *X, double *Y)
 			Y[i]=par[0]*exp(-X[i]*par[1])+par[2]*exp(-X[i]*par[3])+par[4]*exp(-X[i]*par[5])+par[6];
 		}
 	}
-	delete[] par;
 }

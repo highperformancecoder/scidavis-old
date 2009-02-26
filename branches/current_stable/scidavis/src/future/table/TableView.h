@@ -57,6 +57,7 @@ namespace future{ class Table; }
 class TableModel;
 class TableItemDelegate;
 class TableDoubleHeaderView;
+class AbstractAspect;
 
 //! Helper class for TableView
 class TableViewWidget : public QTableView
@@ -194,6 +195,7 @@ class TableView : public MyWidget
 		void advanceCell();
 		void handleHorizontalSectionMoved(int index, int from, int to);
 		void handleHorizontalHeaderDoubleClicked(int index);
+		void handleAspectDescriptionChanged(const AbstractAspect * aspect);
 		void updateTypeInfo();
 		void updateFormatBox();
 		void handleHeaderDataChanged(Qt::Orientation orientation, int first, int last);
@@ -210,7 +212,7 @@ class TableView : public MyWidget
 
 		virtual void changeEvent(QEvent * event);
 		void retranslateStrings();
-		void setColumnForDescriptionTab(int col);
+		void setColumnForControlTabs(int col);
 
 		bool eventFilter( QObject * watched, QEvent * event);
 
