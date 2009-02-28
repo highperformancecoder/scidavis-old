@@ -729,7 +729,9 @@ void Table::insertRow()
 void Table::addCol(SciDAVis::PlotDesignation pd)
 {
 	d_future_table->addColumn();
+	column(d_future_table->columnCount()-1)->setColumnMode(SciDAVis::Numeric); // in case we ever change the default
 	column(d_future_table->columnCount()-1)->setPlotDesignation(pd);
+
 }
 
 void Table::addColumns(int c)
@@ -747,7 +749,10 @@ void Table::clearCol()
 
 void Table::clearCell(int row, int col)
 {
-	setText(row, col, "");
+	column(col)->setTextAt(row, QString());
+	column(col)->setValueAt(row, 0.0);
+	column(col)->setDateTimeAt(row, QDateTime());
+	column(col)->setInvalid(row, true);
 }
 
 void Table::deleteSelectedRows()

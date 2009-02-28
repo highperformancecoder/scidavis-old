@@ -2645,7 +2645,7 @@ Table* ApplicationWindow::convertMatrixToTable()
 	for (int i = 0; i<rows; i++)
 	{
 		for (int j = 0; j<cols; j++)
-			w->setText(i, j, m->text(i,j));
+			w->setCell(i, j, m->cell(i,j));
 	}
 
 	w->setName(generateUniqueName(tr("Table")));

@@ -38,6 +38,7 @@
 #include <QMessageBox>
 #include <QLocale>
 #include <qwt_plot_curve.h>
+#include "core/column/Column.h"
 
 TranslateCurveTool::TranslateCurveTool(Graph *graph, ApplicationWindow *app, Direction dir, const QObject *status_target, const char *status_slot)
 	: PlotToolInterface(graph),
@@ -114,7 +115,7 @@ void TranslateCurveTool::selectDestination(const QwtDoublePoint &point)
 	Table *tab = d_app->table(col_name);
 	if (!tab) return;
 	int col = tab->colIndex(col_name);
-	if (tab->columnType(col) != Table::Numeric) {
+	if (tab->columnType(col) != SciDAVis::Numeric) {
 		QMessageBox::warning(d_graph, tr("Warning"),
 				tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
 		return;
@@ -125,9 +126,8 @@ void TranslateCurveTool::selectDestination(const QwtDoublePoint &point)
 	int row_start = c->tableRow(0);
     int row_end = row_start + c->dataSize();
 	for (int i=row_start; i<row_end; i++){
-		if (!tab->text(i, col).isEmpty())
-			tab->setText(i, col, QLocale().toString(
-					(d_dir==Horizontal ? d_selected_curve->x(i) : d_selected_curve->y(i)) + d, f, prec));
+		if (!tab->column(col)->isInvalid(i))
+			tab->column(col)->setValueAt(i, (d_dir==Horizontal ? d_selected_curve->x(i) : d_selected_curve->y(i)) + d);
 	}
 	d_app->updateCurves(tab, col_name);
 	d_app->modifiedProject();

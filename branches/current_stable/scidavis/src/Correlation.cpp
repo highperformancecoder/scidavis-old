@@ -33,6 +33,7 @@
 #include "ColorBox.h"
 #include <QMessageBox>
 #include <QLocale>
+#include "core/column/Column.h"
 
 #include <gsl/gsl_fft_halfcomplex.h>
 
@@ -157,8 +158,8 @@ void Correlation::addResultCurve()
 		else
 			y_temp[i] = d_x[i-n];
 
-		d_table->setText(i, cols, QString::number(x));
-		d_table->setText(i, cols2, QLocale().toString(y, 'g', app->d_decimal_digits));
+		d_table->column(cols)->setValueAt(i, x);
+		d_table->column(cols2)->setValueAt(i, y);
 	}
 
 	QStringList l = d_table->colNames().grep(tr("Lag"));

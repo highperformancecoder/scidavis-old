@@ -31,6 +31,7 @@
 #include "Plot.h"
 #include "PlotCurve.h"
 #include "ColorBox.h"
+#include "core/column/Column.h"
 
 #include <QMessageBox>
 #include <QLocale>
@@ -143,8 +144,8 @@ void Convolution::addResultCurve()
 		double x = i+1;
 		x_temp[i] = x;
 
-		d_table->setText(i, cols, QString::number(x));
-		d_table->setText(i, cols2, QLocale().toString(d_x[i], 'g', app->d_decimal_digits));
+		d_table->column(cols)->setValueAt(i, x);
+		d_table->column(cols2)->setValueAt(i, d_x[i]);
 	}
 
 	QStringList l = d_table->colNames().grep(tr("Index"));

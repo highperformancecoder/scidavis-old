@@ -35,6 +35,7 @@
 #include "PlotCurve.h"
 #include "QwtErrorPlotCurve.h"
 #include "ApplicationWindow.h"
+#include "core/column/Column.h"
 
 #include <qwt_symbol.h>
 #include <qwt_plot_picker.h>
@@ -308,7 +309,10 @@ void DataPickerTool::removePoint()
 
 	int col = t->colIndex(d_selected_curve->title().text());
 	if (t->columnType(col) == Table::Numeric)
-		t->clearCell(((DataCurve *)d_selected_curve)->tableRow(d_selected_point), col);
+	{
+		t->column(col)->setValueAt(((DataCurve *)d_selected_curve)->tableRow(d_selected_point), 0.0);
+		t->column(col)->setInvalid(((DataCurve *)d_selected_curve)->tableRow(d_selected_point), true);
+	}
 	else {
 		QMessageBox::warning(d_graph, tr("Warning"),
 					tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
@@ -356,20 +360,22 @@ void DataPickerTool::movePoint(const QPoint &pos)
 	int row = ((DataCurve *)d_selected_curve)->tableRow(d_selected_point);
 	int xcol = t->colIndex(((DataCurve *)d_selected_curve)->xColumnName());
 	int ycol = t->colIndex(d_selected_curve->title().text());
+	QString selected_curve_text = d_selected_curve->title().text();
 	if (t->columnType(xcol) == Table::Numeric && t->columnType(ycol) == Table::Numeric)
 	{
-		t->setText(row, xcol, QLocale().toString(new_x_val));
-		t->setText(row, ycol, QLocale().toString(new_y_val));
+		t->column(xcol)->setValueAt(row, new_x_val);
+		t->column(ycol)->setValueAt(row, new_y_val);
 		d_app->updateCurves(t, d_selected_curve->title().text());
 		d_app->modifiedProject();
 	}
 	else
 		QMessageBox::warning(d_graph, tr("Warning"),
 				tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
+				// the message box causes d_selected_curve to be set to NULL!
 
 
 	emit statusText(QString("%1[%2]: x=%3; y=%4")
-			.arg(d_selected_curve->title().text())
+			.arg(selected_curve_text)
 			.arg(row + 1)
 			.arg(QLocale().toString(new_x_val, 'G', d_app->d_decimal_digits))
 			.arg(QLocale().toString(new_y_val, 'G', d_app->d_decimal_digits)) );

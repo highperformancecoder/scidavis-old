@@ -42,6 +42,7 @@
 #include "Spectrogram.h"
 #include "QwtPieCurve.h"
 #include "ColorMapEditor.h"
+#include "core/column/Column.h"
 
 #include <QTreeWidget>
 #include <QLineEdit>
@@ -1097,10 +1098,10 @@ void PlotDialog::showStatistics()
         for (int i = 0; i<h->dataSize(); i++ )
         {
             sum += h->y(i);
-            t->setText(i, 0, QString::number(h->x(i)));
-            t->setText(i, 1, QString::number(h->y(i)));
-            t->setText(i, 2, QString::number(sum));
-            t->setText(i, 3, QString::number(sum/h_sum*100));
+            t->column(0)->setValueAt(i, h->x(i));
+            t->column(1)->setValueAt(i, h->y(i));
+            t->column(2)->setValueAt(i, sum);
+            t->column(3)->setValueAt(i, sum/h_sum*100);
         }
         t->setHeader(QStringList() << tr("Bins") << tr("Quantity") << tr("Sum") << tr("Percent"));
         t->showMaximized();

@@ -35,6 +35,7 @@
 #include "FunctionCurve.h"
 #include "ColorBox.h"
 #include "Script.h"
+#include "core/column/Column.h"
 
 #include <gsl/gsl_statistics.h>
 #include <gsl/gsl_blas.h>
@@ -410,14 +411,17 @@ Table* Fit::parametersTable(const QString& tableName)
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	Table *t = app->newTable(tableName, d_p, 3);
 	t->setHeader(QStringList() << tr("Parameter") << tr("Value") << tr ("Error"));
+	t->column(0)->setColumnMode(SciDAVis::Text);
+	t->column(1)->setColumnMode(SciDAVis::Numeric);
+	t->column(2)->setColumnMode(SciDAVis::Numeric);
 	for (int i=0; i<d_p; i++)
 	{
-		t->setText(i, 0, d_param_names[i]);
-		t->setText(i, 1, QLocale().toString(d_results[i], 'g', d_prec));
-		t->setText(i, 2, QLocale().toString(sqrt(gsl_matrix_get(covar,i,i)), 'g', d_prec));
+		t->column(0)->setTextAt(i, d_param_names[i]);
+		t->column(1)->setValueAt(i, d_results[i]);
+		t->column(2)->setValueAt(i, sqrt(gsl_matrix_get(covar,i,i)));
 	}
 
-	t->setColPlotDesignation(2, SciDAVis::yErr);
+	t->column(2)->setPlotDesignation(SciDAVis::yErr);
 // TODO: replace or remove this
 #if 0
 	for (int j=0; j<3; j++)
