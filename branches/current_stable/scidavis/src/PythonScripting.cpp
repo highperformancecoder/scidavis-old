@@ -223,7 +223,11 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
 	{
 		PyDict_SetItemString(globals, "scidavis", scidavismod);
 		PyObject *scidavisDict = PyModule_GetDict(scidavismod);
-		setQObject(d_parent, "app", scidavisDict);
+		if (!setQObject(d_parent, "app", scidavisDict))
+			QMessageBox::warning(d_parent, tr("Failed to export SciDAVis API"),
+					tr("Accessing SciDAVis functions or objects from Python code won't work."\
+						"Probably your version of SIP differs from the one SciDAVis was compiled against;"\
+						"try updating SIP or recompiling SciDAVis."));
 		PyDict_SetItemString(scidavisDict, "mathFunctions", math);
 		Py_DECREF(scidavismod);
 	} else
@@ -339,28 +343,9 @@ bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
 {
 	if(!val) return false;
 	PyObject *pyobj=NULL;
-	sipTypeDef *t;
-	for (int i=0; i<sipModuleAPI_scidavis.em_nrtypes; i++)
-			// Note that the SIP API is a bit confusing here.
-			// sipTypeDef.td_cname holds the C++ class name, but is NULL if that's the same as the Python class name.
-			// sipTypeDef.td_name OTOH always holds the Python class name, but prepended by the module name ("scidavis.")
-			if (((t=sipModuleAPI_scidavis.em_types[i]->type)->td_cname && !strcmp(val->className(),t->td_cname)) ||
-					(!t->td_cname && !strcmp(val->className(),t->td_name+9)))
-			{
-				pyobj=sipConvertFromInstance(val,sipModuleAPI_scidavis.em_types[i],NULL);
-				if (!pyobj) return false;
-				break;
-			}
-	if (!pyobj) {
-		for (int i=0; i<sipModuleAPI_scidavis_QtCore->em_nrtypes; i++)
-				if (((t=sipModuleAPI_scidavis_QtCore->em_types[i]->type)->td_cname && !strcmp(val->className(),t->td_cname)) ||
-						(!t->td_cname && !strcmp(val->className(),t->td_name+3)))
-				{
-					pyobj=sipConvertFromInstance(val,sipModuleAPI_scidavis_QtCore->em_types[i],NULL);
-					if (!pyobj) return false;
-					break;
-				}
-	} 
+	sipWrapperType * klass = sipFindClass(val->className());
+	if (!klass) return false;
+	pyobj = sipConvertFromInstance(val, klass, NULL);
 	if (!pyobj) return false;
 
 	if (dict)

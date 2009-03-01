@@ -857,16 +857,6 @@ class ApplicationWindow: QMainWindow
 #include "src/ApplicationWindow.h"
 #include "src/ColorBox.h"
 %End
-%ConvertToSubClassCode
-// we have to do this to override casting in qt/qobject.sip (PyQt 3.16)
-sipClass=NULL;
-QString cN = sipCpp->className();
-sipTypeDef *t;
-  for (int i=0; i<sipModuleAPI_scidavis.em_nrtypes; i++)
-  if (((t=sipModuleAPI_scidavis.em_types[i]->type)->td_cname && cN == t->td_cname) ||
-      (!t->td_cname && cN == t->td_name+4))
-    sipClass = sipModuleAPI_scidavis.em_types[i];
-%End
 
 public:
   Table* table(const QString&);
