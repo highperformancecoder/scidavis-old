@@ -60,7 +60,6 @@ class DataPickerTool : public QwtPlotPicker, public PlotToolInterface
 		//! Emitted whenever a new data point has been selected.
 		void selected(QwtPlotCurve*, int);
 	protected:
-		void movePoint(const QPoint &cursor);
 		void removePoint();
 		virtual void append(const QPoint &point);
 		virtual void move(const QPoint &point);
@@ -74,7 +73,7 @@ class DataPickerTool : public QwtPlotPicker, public PlotToolInterface
 		QwtPlotCurve *d_selected_curve;
 		int d_selected_point;
 		MoveMode d_move_mode;
-		QPoint d_restricted_move_pos;
+		QPoint d_move_target_pos;
 };
 
 #endif // ifndef DATA_PICKER_TOOL_H

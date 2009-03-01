@@ -117,7 +117,7 @@ void DataPickerTool::setSelection(QwtPlotCurve *curve, int point_index)
 
 	setAxis(d_selected_curve->xAxis(), d_selected_curve->yAxis());
 
-    d_restricted_move_pos = QPoint(plot()->transform(xAxis(), d_selected_curve->x(d_selected_point)),
+    d_move_target_pos = QPoint(plot()->transform(xAxis(), d_selected_curve->x(d_selected_point)),
                                     plot()->transform(yAxis(), d_selected_curve->y(d_selected_point)));
 
     if (((PlotCurve *)d_selected_curve)->type() == Graph::Function)
@@ -324,89 +324,66 @@ void DataPickerTool::removePoint()
 	d_selected_curve = NULL;
 }
 
-void DataPickerTool::movePoint(const QPoint &pos)
-{
-	if ( !d_selected_curve )
-		return;
-	if ( ((PlotCurve *)d_selected_curve)->type() == Graph::Function)
-	{
-		QMessageBox::critical(d_graph, tr("Move point error"),
-				tr("Sorry, but moving points of a function is not possible."));
-		return;
-	}
-	Table *t = ((DataCurve *)d_selected_curve)->table();
-	if (!t)
-		return;
-
-	double new_x_val = d_graph->plotWidget()->invTransform(d_selected_curve->xAxis(), pos.x());
-	double new_y_val = d_graph->plotWidget()->invTransform(d_selected_curve->yAxis(), pos.y());
-
-	switch (d_move_mode){
-        case Free:
-            d_restricted_move_pos = pos;
-        break;
-        case Vertical:
-            d_restricted_move_pos.setY(pos.y());
-        break;
-        case Horizontal:
-            d_restricted_move_pos.setX(pos.x());
-        break;
-    }
-
-    d_selection_marker.setValue(new_x_val, new_y_val);
-	if (d_selection_marker.plot() == NULL)
-		d_selection_marker.attach(d_graph->plotWidget());
-
-	int row = ((DataCurve *)d_selected_curve)->tableRow(d_selected_point);
-	int xcol = t->colIndex(((DataCurve *)d_selected_curve)->xColumnName());
-	int ycol = t->colIndex(d_selected_curve->title().text());
-	QString selected_curve_text = d_selected_curve->title().text();
-	if (t->columnType(xcol) == Table::Numeric && t->columnType(ycol) == Table::Numeric)
-	{
-		t->column(xcol)->setValueAt(row, new_x_val);
-		t->column(ycol)->setValueAt(row, new_y_val);
-		d_app->updateCurves(t, d_selected_curve->title().text());
-		d_app->modifiedProject();
-	}
-	else
-		QMessageBox::warning(d_graph, tr("Warning"),
-				tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
-				// the message box causes d_selected_curve to be set to NULL!
-
-
-	emit statusText(QString("%1[%2]: x=%3; y=%4")
-			.arg(selected_curve_text)
-			.arg(row + 1)
-			.arg(QLocale().toString(new_x_val, 'G', d_app->d_decimal_digits))
-			.arg(QLocale().toString(new_y_val, 'G', d_app->d_decimal_digits)) );
-}
-
 void DataPickerTool::move(const QPoint &point)
 {
-	QPoint p = point;
-	if (d_mode == Move){
+	if (d_mode == Move && d_selected_curve){
 	    switch (d_move_mode){
 	        case Free:
-                movePoint(point);
-            break;
-            case Vertical:
-                p = QPoint(d_restricted_move_pos.x(), point.y());
-                movePoint(p);
+				  d_move_target_pos = point;
+				break;
+				case Vertical:
+					d_move_target_pos.setY(point.y());
             break;
             case Horizontal:
-                p = QPoint(point.x(), d_restricted_move_pos.y());
-                movePoint(p);
+					d_move_target_pos.setX(point.x());
             break;
 	    }
+		 double new_x_val = d_graph->plotWidget()->invTransform(d_selected_curve->xAxis(), d_move_target_pos.x());
+		 double new_y_val = d_graph->plotWidget()->invTransform(d_selected_curve->yAxis(), d_move_target_pos.y());
+		 d_selection_marker.setValue(new_x_val, new_y_val);
+		 if (d_selection_marker.plot() == NULL)
+			 d_selection_marker.attach(d_graph->plotWidget());
+		 d_graph->replot();
+
+		 int row = ((DataCurve *)d_selected_curve)->tableRow(d_selected_point);
+		 emit statusText(QString("%1[%2]: x=%3; y=%4")
+				 .arg(d_selected_curve->title().text())
+				 .arg(row + 1)
+				 .arg(QLocale().toString(new_x_val, 'G', d_app->d_decimal_digits))
+				 .arg(QLocale().toString(new_y_val, 'G', d_app->d_decimal_digits)) );
 	}
 
-	QwtPlotPicker::move(p);
+	QwtPlotPicker::move(d_move_target_pos);
 }
 
 bool DataPickerTool::end(bool ok)
 {
-	if (d_mode == Move)
-		d_selected_curve = NULL;
+	if (d_mode == Move && d_selected_curve) {
+		if ( ((PlotCurve *)d_selected_curve)->type() == Graph::Function)
+		{
+			QMessageBox::critical(d_graph, tr("Move point error"),
+					tr("Sorry, but moving points of a function is not possible."));
+			return QwtPlotPicker::end(ok);
+		}
+		Table *t = ((DataCurve *)d_selected_curve)->table();
+		if (!t)
+			return QwtPlotPicker::end(ok);
+		double new_x_val = d_graph->plotWidget()->invTransform(d_selected_curve->xAxis(), d_move_target_pos.x());
+		double new_y_val = d_graph->plotWidget()->invTransform(d_selected_curve->yAxis(), d_move_target_pos.y());
+		int row = ((DataCurve *)d_selected_curve)->tableRow(d_selected_point);
+		int xcol = t->colIndex(((DataCurve *)d_selected_curve)->xColumnName());
+		int ycol = t->colIndex(d_selected_curve->title().text());
+		if (t->columnType(xcol) == Table::Numeric && t->columnType(ycol) == Table::Numeric)
+		{
+			t->column(xcol)->setValueAt(row, new_x_val);
+			t->column(ycol)->setValueAt(row, new_y_val);
+			d_app->updateCurves(t, d_selected_curve->title().text());
+			d_app->modifiedProject();
+		}
+		else
+			QMessageBox::warning(d_graph, tr("Warning"),
+					tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
+	}
 	return QwtPlotPicker::end(ok);
 }
 
@@ -414,6 +391,6 @@ void DataPickerTool::moveBy(int dx, int dy)
 {
 	if ( !d_selected_curve )
 		return;
-	movePoint(transform(QwtDoublePoint(d_selected_curve->x(d_selected_point),
-					d_selected_curve->y(d_selected_point))) + QPoint(dx, dy));
+	move(d_move_target_pos + QPoint(dx, dy));
+	end(true);
 }
