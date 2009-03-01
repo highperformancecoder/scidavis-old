@@ -857,6 +857,12 @@ class ApplicationWindow: QMainWindow
 #include "src/ApplicationWindow.h"
 #include "src/ColorBox.h"
 %End
+%ConvertToSubClassCode
+// we have to do this to override casting in qt/qobject.sip
+// without this, app.windows() returns Tables as QWidgets (strangely, Notes
+// are returned correctly in any case)
+sipClass = sipFindClass(sipCpp->className());
+%End
 
 public:
   Table* table(const QString&);
