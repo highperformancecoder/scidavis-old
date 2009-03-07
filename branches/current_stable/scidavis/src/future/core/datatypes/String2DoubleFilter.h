@@ -40,9 +40,11 @@ class String2DoubleFilter : public AbstractSimpleFilter
 	Q_OBJECT
 
 	public:
+		void setNumericLocale(QLocale locale) { d_numeric_locale = locale; }
+
 		virtual double valueAt(int row) const {
 			if (!d_inputs.value(0)) return 0;
-			return QLocale().toDouble(d_inputs.value(0)->textAt(row));
+			return d_numeric_locale.toDouble(d_inputs.value(0)->textAt(row));
 		}
 
 		//! Return the data type of the column
@@ -53,6 +55,9 @@ class String2DoubleFilter : public AbstractSimpleFilter
 		virtual bool inputAcceptable(int, const AbstractColumn *source) {
 			return source->dataType() == SciDAVis::TypeQString;
 		}
+
+	private:
+		QLocale d_numeric_locale;
 };
 
 #endif // ifndef STRING2DOUBLE_FILTER_H

@@ -31,6 +31,7 @@
 #include "table/future_Table.h"
 #include "lib/IntervalAttribute.h"
 #include "core/column/Column.h"
+#include "core/datatypes/String2DoubleFilter.h"
 
 #include <QTextStream>
 #include <QStringList>
@@ -97,7 +98,18 @@ AbstractAspect * AsciiTableImportFilter::importAspect(QIODevice * input)
 	QList<Column*> cols;
 	for (i=0; i<data.size(); ++i)
 	{
-		Column *new_col = new Column(column_names[i], data[i], invalid_cells[i]);
+		Column *new_col;
+		if (d_convert_to_numeric) {
+			Column * string_col = new Column(column_names[i], data[i], invalid_cells[i]);
+			String2DoubleFilter * filter = new String2DoubleFilter;
+			filter->setNumericLocale(d_numeric_locale);
+			filter->input(0, string_col);
+			new_col = new Column(column_names[i], SciDAVis::Numeric);
+			new_col->copy(filter->output(0));
+			delete filter;
+			delete string_col;
+		} else
+			new_col = new Column(column_names[i], data[i], invalid_cells[i]);
 		if (i == 0) 
 			new_col->setPlotDesignation(SciDAVis::X);
 		else

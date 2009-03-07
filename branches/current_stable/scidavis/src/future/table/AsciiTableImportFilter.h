@@ -31,15 +31,20 @@
 #define ASCII_TABLE_IMPORT_FILTER_H
 
 #include "core/AbstractImportFilter.h"
+#include <QLocale>
 
 //! Import an ASCII file as Table.
 /**
  * This is a complete rewrite of equivalent functionality previously found in Table.
  *
- * Transition note:
- * Conversion to numeric format intentionally not supported, since this can easily be done via
- * Table's control tabs and automatic conversion would artificially limit the types of data that
- * can be imported. The Type tab should be improved to allow custom decimal separators to be specified.
+ * Originally, this filter wasn't meant to handle conversion of ASCII text to other
+ * data types. While it's conceptually elegant and flexible to import text data as
+ * text columns, testing this in everyday usage revealed that, for the common use case
+ * of importing lots of numeric data, having to convert imported tables to numeric
+ * by hand is a bit of a nuisance. Therefore, AsciiTableImportFilter has an option
+ * for converting all columns to Numeric. Importing non-numeric data is possible by
+ * disabling this and (optionally) converting texts to other formats using Table's
+ * type control tab.
  *
  * TODO: port options GUI from ImportTableDialog
  */
@@ -53,7 +58,10 @@ class AsciiTableImportFilter : public AbstractImportFilter
 			d_separator("\t"),
 			d_first_row_names_columns(true),
 			d_trim_whitespace(false),
-			d_simplify_whitespace(false) {}
+			d_simplify_whitespace(false),
+			d_convert_to_numeric(false),
+			d_numeric_locale(QLocale::c())
+		{}
 		virtual AbstractAspect * importAspect(QIODevice * input);
 		virtual QStringList fileExtensions() const;
 		virtual QString name() const { return QObject::tr("ASCII table"); }
@@ -74,12 +82,20 @@ class AsciiTableImportFilter : public AbstractImportFilter
 		ACCESSOR(bool, simplify_whitespace);
 		Q_PROPERTY(bool simplify_whitespace READ simplify_whitespace WRITE set_simplify_whitespace);
 
+		ACCESSOR(bool, convert_to_numeric);
+		Q_PROPERTY(bool convert_to_numeric READ convert_to_numeric WRITE set_convert_to_numeric);
+
+		ACCESSOR(QLocale, numeric_locale);
+		Q_PROPERTY(QLocale numeric_locale READ numeric_locale WRITE set_numeric_locale);
+
 	private:
 		int d_ignored_lines;
 		QString d_separator;
 		bool d_first_row_names_columns;
 		bool d_trim_whitespace;
 		bool d_simplify_whitespace;
+		bool d_convert_to_numeric;
+		QLocale d_numeric_locale;
 };
 
 #endif // ifndef ASCII_TABLE_IMPORT_FILTER_H

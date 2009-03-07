@@ -53,7 +53,7 @@
 #include <QFile>
 
 Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
-			 bool stripSpaces, bool simplifySpaces, const QString& label,
+			 bool stripSpaces, bool simplifySpaces, bool convertToNumeric, QLocale numericLocale, const QString& label,
 			 QWidget* parent, const char* name, Qt::WFlags f)
 	: TableView(label, parent, name,f), scripted(env)
 {
@@ -64,6 +64,8 @@ Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ign
 	filter.set_first_row_names_columns(renameCols);
 	filter.set_trim_whitespace(stripSpaces);
 	filter.set_simplify_whitespace(simplifySpaces);
+	filter.set_convert_to_numeric(convertToNumeric);
+	filter.set_numeric_locale(numericLocale);
 
 	QFile file(fname);
 	if ( file.open(QIODevice::ReadOnly) )

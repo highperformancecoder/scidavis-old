@@ -87,10 +87,10 @@ public:
 	//! Set the selected columns separator.
 	void setColumnSeparator(const QString &sep);
 	
-	//! Returns the locale chosen for the import by the user
+	//! Returns the locale chosen for conversion to numeric format
 	QLocale decimalSeparators();
-	//! Returns whether a custom locale should be used
-	bool useCustomLocale() const { return d_use_custom_locale->isChecked(); };
+	//! Returns whether imported data should be interpreted as numbers
+	bool convertToNumeric() const { return d_convert_to_numeric->isChecked(); };
 		
 private slots:
 	//! Display help for advanced options.
@@ -105,7 +105,7 @@ private:
 
 	//! Container widget for all advanced options.
 	QGroupBox *d_advanced_options;
-	QCheckBox *d_remember_options, *d_use_custom_locale;
+	QCheckBox *d_remember_options, *d_convert_to_numeric;
 	QPushButton *d_help_button;
 	// the actual options
 	QComboBox *d_import_mode, *d_column_separator, *boxDecimalSeparator;

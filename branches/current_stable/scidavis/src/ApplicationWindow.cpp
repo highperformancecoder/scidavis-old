@@ -95,7 +95,6 @@
 #include "core/Project.h"
 #include "core/column/Column.h"
 #include "lib/XmlStreamReader.h"
-#include "table/AsciiTableImportFilter.h"
 #include "table/future_Table.h"
 
 // TODO: move tool-specific code to an extension manager
@@ -2405,10 +2404,10 @@ void ApplicationWindow::newWrksheetPlot(const QString& name,const QString& label
  */
 Table* ApplicationWindow::newTable(const QString& fname, const QString &sep,
 		int lines, bool renameCols, bool stripSpaces,
-		bool simplifySpaces)
+		bool simplifySpaces, bool convertToNumeric, QLocale numericLocale)
 {
 	Table* w = new Table(scriptEnv, fname, sep, lines, renameCols, stripSpaces,
-			simplifySpaces, fname, d_workspace, 0, 0);
+			simplifySpaces, convertToNumeric, numericLocale, fname, d_workspace, 0, 0);
 	if (w)
 	{
 		w->setName(generateUniqueName(tr("Table")));
@@ -3208,7 +3207,8 @@ ApplicationWindow * ApplicationWindow::plotFile(const QString& fn)
 	app->applyUserSettings();
 	app->showMaximized();
 
-	Table* t = app->newTable(fn, app->columnSeparator, 0, true, app->strip_spaces, app->simplify_spaces);
+	Table* t = app->newTable(fn, app->columnSeparator, 0, true, app->strip_spaces,
+			app->simplify_spaces, app->d_convert_to_numeric, app->d_ASCII_import_locale);
 	t->setCaptionPolicy(MyWidget::Both);
 	app->multilayerPlot(t, t->YColumns(),Graph::LineSymbols);
 	QApplication::restoreOverrideCursor();
@@ -3231,7 +3231,7 @@ void ApplicationWindow::importASCII()
 		strip_spaces = import_dialog->stripSpaces();
 		simplify_spaces = import_dialog->simplifySpaces();
 		d_ASCII_import_locale = import_dialog->decimalSeparators();
-		d_use_custom_locale = import_dialog->useCustomLocale();
+		d_convert_to_numeric = import_dialog->convertToNumeric();
 		saveSettings();
 	}
 
@@ -3242,12 +3242,12 @@ void ApplicationWindow::importASCII()
 			import_dialog->renameColumns(),
 			import_dialog->stripSpaces(),
 			import_dialog->simplifySpaces(),
-			import_dialog->useCustomLocale(),
+			import_dialog->convertToNumeric(),
 			import_dialog->decimalSeparators());
 }
 
 void ApplicationWindow::importASCII(const QStringList& files, int import_mode, const QString& local_column_separator, int local_ignored_lines,
-		bool local_rename_columns, bool local_strip_spaces, bool local_simplify_spaces, bool use_custom_locale, QLocale local_separators)
+		bool local_rename_columns, bool local_strip_spaces, bool local_simplify_spaces, bool local_convert_to_numeric, QLocale local_numeric_locale)
 {
 	if (files.isEmpty())
 		return;
@@ -3262,7 +3262,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 				for (int i=0; i<sorted_files.size(); i++)
 				{
 					Table *w = newTable(sorted_files[i], local_column_separator, local_ignored_lines,
-							local_rename_columns, local_strip_spaces, local_simplify_spaces);
+							local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric, local_numeric_locale);
 					if (!w) continue;
 					w->setCaptionPolicy(MyWidget::Both);
 					setListViewLabel(w->name(), sorted_files[i]);
@@ -3284,7 +3284,8 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 				for (int i=0; i<files.size(); i++)
 				{
 					Table *temp = new Table(scriptEnv, files[i], local_column_separator, local_ignored_lines,
-							local_rename_columns, local_strip_spaces, local_simplify_spaces, "temp", 0, 0, 0);
+							local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric,
+							local_numeric_locale, "temp", 0, 0, 0);
 					if (!temp) continue;
 					Table *table = (Table*) d_workspace->activeWindow();
 					if (table && table->inherits("Table"))
@@ -3306,7 +3307,8 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 				for (int i=0; i<files.size(); i++)
 				{
 					Table *temp = new Table(scriptEnv, files[i], local_column_separator, local_ignored_lines,
-							local_rename_columns, local_strip_spaces, local_simplify_spaces, "temp", 0, 0, 0);
+							local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric,
+							local_numeric_locale, "temp", 0, 0, 0);
 					if (!temp) continue;
 					Table *table = (Table*) d_workspace->activeWindow();
 					if (table && table->inherits("Table"))
@@ -3347,7 +3349,8 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 		case ImportASCIIDialog::Overwrite:
 			{
 				Table *temp = new Table(scriptEnv, files[0], local_column_separator, local_ignored_lines,
-						local_rename_columns, local_strip_spaces, local_simplify_spaces, "temp", 0, 0, 0);
+						local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric,
+						local_numeric_locale, "temp", 0, 0, 0);
 				if (!temp) return;
 				Table *table = (Table*) d_workspace->activeWindow();
 				if (table && table->inherits("Table"))
@@ -4379,8 +4382,8 @@ void ApplicationWindow::readSettings()
 	strip_spaces = settings.value("/StripSpaces", false).toBool();
 	simplify_spaces = settings.value("/SimplifySpaces", false).toBool();
 	d_ASCII_file_filter = settings.value("/AsciiFileTypeFilter", "*").toString();
-	d_ASCII_import_locale = settings.value("/AsciiImportLocale", QLocale::system().name()).toString();
-	d_use_custom_locale = settings.value("/UseCustomLocale", true).toBool();
+	d_ASCII_import_locale = settings.value("/AsciiImportLocale", "C").toString();
+	d_convert_to_numeric = settings.value("/ConvertToNumeric", false).toBool();
 	settings.endGroup(); // Import ASCII
 
     settings.beginGroup("/ExportImage");
@@ -4624,7 +4627,7 @@ void ApplicationWindow::saveSettings()
 	settings.setValue("/SimplifySpaces", simplify_spaces);
     settings.setValue("/AsciiFileTypeFilter", d_ASCII_file_filter);
 	settings.setValue("/AsciiImportLocale", d_ASCII_import_locale.name());
-	settings.setValue("/UseCustomLocale", d_use_custom_locale);
+	settings.setValue("/ConvertToNumeric", d_convert_to_numeric);
 	settings.endGroup(); // ImportASCII
 
     settings.beginGroup("/ExportImage");
@@ -7600,7 +7603,7 @@ void ApplicationWindow::dropEvent( QDropEvent* e )
 		}
 
 		importASCII(asciiFiles, ImportASCIIDialog::NewTables, columnSeparator, ignoredLines, renameColumns,
-				strip_spaces, simplify_spaces, d_use_custom_locale, d_ASCII_import_locale);
+				strip_spaces, simplify_spaces, d_convert_to_numeric, d_ASCII_import_locale);
 	}
 }
 

@@ -332,7 +332,8 @@ public slots:
 	Table* newTable();
 	//! Used when importing an ASCII file
 	Table* newTable(const QString& fname, const QString &sep, int lines,
-		            bool renameCols, bool stripSpaces, bool simplifySpaces);
+		            bool renameCols, bool stripSpaces, bool simplifySpaces,
+						bool convertToNumeric, QLocale numericLocale);
 	//! Used when loading a table from a project file
 	Table* newTable(const QString& caption,int r, int c);
 	Table* newTable(int r, int c, const QString& name = QString(),const QString& legend = QString());
@@ -361,7 +362,7 @@ public slots:
 
 	void importASCII();
 	void importASCII(const QStringList& files, int import_mode, const QString& local_column_separator, int local_ignored_lines,
-		 bool local_rename_columns, bool local_strip_spaces, bool local_simplify_spaces, bool update_dec_separators, QLocale local_separators);
+		 bool local_rename_columns, bool local_strip_spaces, bool local_simplify_spaces, bool local_convert_to_numeric, QLocale local_numeric_locale);
 	void exportAllTables(const QString& sep, bool colNames, bool expSelection);
 	void exportASCII(const QString& tableName, const QString& sep, bool colNames, bool expSelection);
 
@@ -896,7 +897,7 @@ public:
 	QLocale d_ASCII_import_locale;
     //! Last selected filter in import ASCII dialog
     QString d_ASCII_file_filter;
-	bool d_use_custom_locale;
+	bool d_convert_to_numeric;
 	//! Specifies if only the Tables/Matrices in the current folder should be displayed in the Add/remove curve dialog.
 	bool d_show_current_folder;
 	bool d_scale_plots_on_print, d_print_cropmarks;
