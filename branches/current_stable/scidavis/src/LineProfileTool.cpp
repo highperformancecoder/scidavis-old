@@ -89,7 +89,14 @@ void LineProfileTool::calculateLineProfile(const QPoint& start, const QPoint& en
 		y2 = int(y2*ratioY);
 	}
 
-	QString text = tr("pixel") + "\tx\ty\t" + tr("intensity") + "\n";
+	Column *pixelCol = new Column(tr("pixel"), SciDAVis::Numeric);
+	Column *xCol = new Column(tr("x"), SciDAVis::Numeric);
+	Column *yCol = new Column(tr("y"), SciDAVis::Numeric);
+	Column *intCol = new Column(tr("intensity"), SciDAVis::Numeric);
+	pixelCol->setPlotDesignation(SciDAVis::X);
+	xCol->setPlotDesignation(SciDAVis::Y);
+	yCol->setPlotDesignation(SciDAVis::Y);
+	intCol->setPlotDesignation(SciDAVis::Y);
 
 	//uses the fast Bresenham's line-drawing algorithm
 #define sgn(x) ((x<0)?-1:((x>0)?1:0))
@@ -119,10 +126,10 @@ void LineProfileTool::calculateLineProfile(const QPoint& start, const QPoint& en
 			px+=sdx;
 
 			n=dxabs;
-			text+=QString::number(i)+"\t";
-			text+=QString::number(px)+"\t";
-			text+=QString::number(py)+"\t";
-			text+=QString::number(averageImagePixel(image, px, py, true))+"\n";
+			pixelCol->setValueAt(i, i);
+			xCol->setValueAt(i, px);
+			yCol->setValueAt(i, py);
+			intCol->setValueAt(i, averageImagePixel(image, px, py, true));
 		}
 	}
 	else // the line is more vertical than horizontal
@@ -138,14 +145,14 @@ void LineProfileTool::calculateLineProfile(const QPoint& start, const QPoint& en
 			py+=sdy;
 
 			n=dyabs;
-			text+=QString::number(i)+"\t";
-			text+=QString::number(px)+"\t";
-			text+=QString::number(py)+"\t";
-			text+=QString::number(averageImagePixel(image, px, py, false))+"\n";
+			pixelCol->setValueAt(i, i);
+			xCol->setValueAt(i, px);
+			yCol->setValueAt(i, py);
+			intCol->setValueAt(i, averageImagePixel(image, px, py, false));
 		}
 	}
-	QString caption = tr("Table") + "1";
-	emit createTablePlot(caption, n, 4, text);
+	QString caption = tr("Line profile %1").arg(1);
+	emit createTablePlot(caption, QString(), QList<Column *>() << pixelCol << xCol << yCol << intCol);
 }
 
 int LineProfileTool::averageImagePixel(const QImage& image, int px, int py, bool moreHorizontal)

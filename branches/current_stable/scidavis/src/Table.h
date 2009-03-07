@@ -255,7 +255,6 @@ signals:
 	void modifiedData(Table *, const QString&);
 	void resizedTable(QWidget*);
 	void showContextMenu(bool selection);
-	void createTable(const QString&,int,int,const QString&);
 
 protected slots:
     void applyFormula();

@@ -4036,14 +4036,18 @@ void Graph::createTable(const QwtPlotCurve* curve)
         return;
 
     int size = curve->dataSize();
-    QString text = "1\t2\n";
-    for (int i=0; i<size; i++)
+
+	Column *xCol = new Column(tr("1", "curve data table x column name"), SciDAVis::Numeric);
+	Column *yCol = new Column(tr("2", "curve data table y column name"), SciDAVis::Numeric);
+	xCol->setPlotDesignation(SciDAVis::X);
+	yCol->setPlotDesignation(SciDAVis::Y);
+	for (int i=0; i<size; i++)
 	{
-        text += QString::number(curve->x(i))+"\t";
-        text += QString::number(curve->y(i))+"\n";
-    }
+		xCol->setValueAt(i, curve->x(i));
+		yCol->setValueAt(i, curve->y(i));
+	}
     QString legend = tr("Data set generated from curve") + ": " + curve->title().text();
-    emit createTable(tr("Table") + "1" + "\t" + legend, size, 2, text);
+    emit createTable(tr("Curve data %1").arg(1), legend, QList<Column *>() << xCol << yCol);
 }
 
 QString Graph::saveToString(bool saveAsTemplate)

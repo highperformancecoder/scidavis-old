@@ -336,7 +336,7 @@ public slots:
 	//! Used when loading a table from a project file
 	Table* newTable(const QString& caption,int r, int c);
 	Table* newTable(int r, int c, const QString& name = QString(),const QString& legend = QString());
-	Table* newTable(const QString& caption, int r, int c, const QString& text);
+	Table* newTable(const QString& name, const QString& legend, QList<Column *> columns);
 	/**
 	 * \brief Create a Table which is initially hidden; used to return the result of an analysis operation.
 	 *
@@ -352,7 +352,7 @@ public slots:
 	QWidgetList* tableList();
 
 	void connectTable(Table* w);
-	void newWrksheetPlot(const QString& caption,int r, int c, const QString& text);
+	void newWrksheetPlot(const QString& name,const QString& label, QList<Column *> columns);
 	void initTable(Table* w);
 	void customTable(Table* w);
 	void customizeTables(const QColor& bgColor,const QColor& textColor,

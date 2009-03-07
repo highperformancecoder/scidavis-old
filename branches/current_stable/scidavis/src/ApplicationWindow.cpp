@@ -2387,9 +2387,9 @@ void ApplicationWindow::setPreferences(Graph* g)
 	g->setAntialiasing(antialiasing2DPlots);
 }
 
-void ApplicationWindow::newWrksheetPlot(const QString& caption, int r, int c, const QString& text)
+void ApplicationWindow::newWrksheetPlot(const QString& name,const QString& label, QList<Column *> columns)
 {
-	Table* w = newTable(caption, r, c, text);
+	Table* w = newTable(name, label, columns);
 	MultiLayer* plot=multilayerPlot(w, QStringList(QString(w->name())+"_intensity"), 0);
 	Graph *g=(Graph*)plot->activeGraph();
 	if (g)
@@ -2454,29 +2454,11 @@ Table* ApplicationWindow::newTable(int r, int c, const QString& name, const QStr
 	return w;
 }
 
-Table* ApplicationWindow::newTable(const QString& caption, int r, int c, const QString& text)
+Table* ApplicationWindow::newTable(const QString& name, const QString& legend, QList<Column *> columns)
 {
-	QStringList lst = caption.split("\t", QString::SkipEmptyParts);
-    QString legend = QString();
-    if (lst.count() == 2)
-        legend = lst[1];
-
-	Table* w = new Table(scriptEnv, r, c, legend, d_workspace, 0);
-
-	QStringList rows = text.split("\n", QString::SkipEmptyParts);
-	QString rlist = rows[0];
-	QStringList list = rlist.split("\t");
-	w->setHeader(list);
-
-	for (int i=0; i<r; i++)
-	{
-		rlist=rows[i+1];
-		list=rlist.split("\t");
-		for (int j=0; j<c; j++)
-			w->setText(i, j, list[j]);
-	}
-
-	w->setName(lst[0]);
+	Table* w = new Table(scriptEnv, 0, 0, legend, 0, 0);
+	w->d_future_table->appendColumns(columns);
+	w->setName(name);
 	d_project->addChild(w->d_future_table);
 	return w;
 }
@@ -9051,8 +9033,8 @@ void ApplicationWindow::pixelLineProfile()
 		return;
 
 	LineProfileTool *lpt = new LineProfileTool(g, res);
-	connect(lpt, SIGNAL(createTablePlot(const QString&,int,int,const QString&)),
-			this, SLOT(newWrksheetPlot(const QString&,int,int,const QString&)));
+	connect(lpt, SIGNAL(createTablePlot(const QString&,const QString&,QList<Column*>)),
+			this, SLOT(newWrksheetPlot(const QString&,const QString&,QList<Column*>)));
 	g->setActiveTool(lpt);
 }
 
@@ -10270,8 +10252,8 @@ void ApplicationWindow::connectMultilayerPlot(MultiLayer *g)
 	connect (g,SIGNAL(statusChanged(MyWidget*)),this, SLOT(updateWindowStatus(MyWidget*)));
 	connect (g,SIGNAL(cursorInfo(const QString&)),d_status_info,SLOT(setText(const QString&)));
 	connect (g,SIGNAL(showImageDialog()),this,SLOT(showImageDialog()));
-	connect (g,SIGNAL(createTable(const QString&,int,int,const QString&)),
-			this,SLOT(newTable(const QString&,int,int,const QString&)));
+	connect (g,SIGNAL(createTable(const QString&,const QString&,QList<Column*>)),
+			this,SLOT(newTable(const QString&,const QString&,QList<Column*>)));
 	connect (g,SIGNAL(viewTitleDialog()),this,SLOT(showTitleDialog()));
 	connect (g,SIGNAL(modifiedWindow(QWidget*)),this,SLOT(modifiedProject(QWidget*)));
 	connect (g,SIGNAL(modifiedPlot()),this,SLOT(modifiedProject()));
@@ -10297,7 +10279,6 @@ void ApplicationWindow::connectTable(Table* w)
 			this,SLOT(updateCurves(Table *, const QString&)));
 	connect (w,SIGNAL(modifiedWindow(QWidget*)),this,SLOT(modifiedProject(QWidget*)));
 	connect (w,SIGNAL(changedColHeader(const QString&,const QString&)),this,SLOT(updateColNames(const QString&,const QString&)));
-	connect (w,SIGNAL(createTable(const QString&,int,int,const QString&)),this,SLOT(newTable(const QString&,int,int,const QString&)));
 
 #ifdef LEGACY_CODE_0_2_x
 	connect(w->d_future_table, SIGNAL(requestRowStatistics()), this, SLOT(showRowStatistics()));

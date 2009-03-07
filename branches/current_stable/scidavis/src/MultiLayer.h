@@ -37,6 +37,7 @@
 #include <QPushButton>
 #include <QLayout>
 #include <QPointer>
+#include "core/column/Column.h"
 
 class QWidget;
 class QLabel;
@@ -208,7 +209,7 @@ signals:
 	void showImageDialog();
 	void showLineDialog();
 	void viewTitleDialog();
-	void createTable(const QString&,int,int,const QString&);
+	void createTable(const QString&,const QString&,QList<Column*>);
 	void showGeometryDialog();
 	void pasteMarker();
 	void createIntensityTable(const QString&);

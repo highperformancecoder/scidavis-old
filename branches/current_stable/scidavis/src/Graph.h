@@ -44,6 +44,7 @@
 #include "Table.h"
 #include "AxesDialog.h"
 #include "PlotToolInterface.h"
+#include "core/column/Column.h"
 
 class QwtPlotCurve;
 class QwtPlotZoomer;
@@ -692,7 +693,7 @@ signals:
 		void drawLineEnded(bool);
 		void cursorInfo(const QString&);
 		void showPlotDialog(int);
-		void createTable(const QString&,int,int,const QString&);
+		void createTable(const QString&,const QString&,QList<Column*>);
 
 		void viewImageDialog();
 		void viewTextDialog();

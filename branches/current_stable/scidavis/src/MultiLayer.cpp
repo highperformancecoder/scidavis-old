@@ -951,8 +951,8 @@ void MultiLayer::connectLayer(Graph *g)
 	connect (g,SIGNAL(drawLineEnded(bool)), this, SIGNAL(drawLineEnded(bool)));
 	connect (g,SIGNAL(drawTextOff()),this,SIGNAL(drawTextOff()));
 	connect (g,SIGNAL(showPlotDialog(int)),this,SIGNAL(showPlotDialog(int)));
-	connect (g,SIGNAL(createTable(const QString&,int,int,const QString&)),
-			this,SIGNAL(createTable(const QString&,int,int,const QString&)));
+	connect (g,SIGNAL(createTable(const QString&,const QString&,QList<Column*>)),
+			this,SIGNAL(createTable(const QString&,const QString&,QList<Column*>)));
 	connect (g,SIGNAL(viewLineDialog()),this,SIGNAL(showLineDialog()));
 	connect (g,SIGNAL(showContextMenu()),this,SIGNAL(showGraphContextMenu()));
 	connect (g,SIGNAL(showLayerButtonContextMenu()),this,SIGNAL(showLayerButtonContextMenu()));

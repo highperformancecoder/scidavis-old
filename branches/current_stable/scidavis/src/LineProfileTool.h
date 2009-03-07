@@ -33,6 +33,7 @@
 #define LINE_PROFILE_TOOL_H
 
 #include "PlotToolInterface.h"
+#include "core/column/Column.h"
 
 #include <QWidget>
 
@@ -74,7 +75,7 @@ class LineProfileTool : public QWidget, public PlotToolInterface
 		 * You don't have to connect to this signal if you alreay specified a reciever during initialization.
 		 */
 		void statusText(const QString&);
-		void createTablePlot(const QString& caption, int r, int c, const QString& content);
+		void createTablePlot(const QString&,const QString&,QList<Column*>);
 
 	protected:
 		int averageImagePixel(const QImage &image, int px, int py, bool moreHorizontal);
