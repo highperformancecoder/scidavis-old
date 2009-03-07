@@ -307,13 +307,16 @@ QwtPlotCurve* Filter::addResultCurve(double *x, double *y)
     const QString tableName = app->generateUniqueName(QString(this->name()));
 	Column *xCol = new Column(tr("1", "filter table x column name"), SciDAVis::Numeric);
 	Column *yCol = new Column(tr("2", "filter table y column name"), SciDAVis::Numeric);
-    Table *t = app->newHiddenTable(tableName, d_explanation + " " + tr("of") + " " + d_curve->title().text(), 
-		QList<Column *>() << xCol << yCol);
+	xCol->setPlotDesignation(SciDAVis::X);
+	yCol->setPlotDesignation(SciDAVis::Y);
 	for (int i=0; i<d_points; i++)
 	{
 		xCol->setValueAt(i, x[i]);
 		yCol->setValueAt(i, y[i]);
 	}
+	// first set the values, then add the columns to the table, otherwise, we generate too many undo commands
+    Table *t = app->newHiddenTable(tableName, d_explanation + " " + tr("of") + " " + d_curve->title().text(), 
+		QList<Column *>() << xCol << yCol);
 
 	DataCurve *c = new DataCurve(t, tableName + "_" + xCol->name(), tableName + "_" + yCol->name());
 	c->setData(x, y, d_points);

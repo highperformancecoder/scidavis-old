@@ -1962,7 +1962,11 @@ void Table::handleDataChange(const AbstractColumn * col)
 {
 	int index = columnIndex(static_cast<const Column *>(col));
 	if(index != -1)
+	{
+		if (col->rowCount() > rowCount())
+			setRowCount(col->rowCount());
 		emit dataChanged(0, index, col->rowCount()-1, index);	
+	}
 }
 
 void Table::handleRowsAboutToBeInserted(const AbstractColumn * col, int before, int count)
