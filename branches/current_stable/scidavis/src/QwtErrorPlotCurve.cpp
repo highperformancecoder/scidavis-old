@@ -108,60 +108,74 @@ void QwtErrorPlotCurve::drawErrorBars(QPainter *painter,
 		const int yi = yMap.transform(y(i) + d_yOffset);
 
 		if (type == Vertical){
-			const int yh = yMap.transform(y(i)+err[i]);
-			const int yl = yMap.transform(y(i)-err[i]);
-			const int yhl = yi - sh/2;
-			const int ylh = yi + sh/2;
+			int y_plus = yMap.transform(y(i)+err[i]);
+			int y_minus = yMap.transform(y(i)-err[i]);
+			bool y_minus_is_finite = true;
 
-			if (plus){
-				QwtPainter::drawLine(painter, xi-cap/2, yh, xi+cap/2, yh);
+			if (yMap.transformation()->type() == QwtScaleTransformation::Log10 && err[i] >= y(i)) {
+				y_minus = yMap.transform(qMin(yMap.s1(), yMap.s2()));
+				y_minus_is_finite = false;
 			}
-			if (minus){
-				QwtPainter::drawLine(painter, xi-cap/2, yl, xi+cap/2, yl);
-			}
-			if (through)
-			{
+
+			// draw caps
+			if (plus)
+				QwtPainter::drawLine(painter, xi-cap/2, y_plus, xi+cap/2, y_plus);
+			if (minus && y_minus_is_finite)
+				QwtPainter::drawLine(painter, xi-cap/2, y_minus, xi+cap/2, y_minus);
+
+			// draw vertical line
+			if (through) {
 				if (plus && minus)
-					QwtPainter::drawLine(painter, xi, yl, xi, yh);
+					QwtPainter::drawLine(painter, xi, y_minus, xi, y_plus);
 				else if (plus)
-					QwtPainter::drawLine(painter, xi, yi, xi, yh);
+					QwtPainter::drawLine(painter, xi, yi, xi, y_plus);
 				else if (minus)
-					QwtPainter::drawLine(painter, xi, yl, xi, yi);
-			}
-			else
-			{
-				if (plus && (yh < yhl))
-					QwtPainter::drawLine(painter, xi, yhl, xi, yh);
-				if (minus && (yl > ylh))
-					QwtPainter::drawLine(painter, xi, ylh, xi, yl);
+					QwtPainter::drawLine(painter, xi, y_minus, xi, yi);
+			} else if (y_plus <= y_minus) {
+				if (plus && y_plus < yi-sh/2)
+					QwtPainter::drawLine(painter, xi, yi-sh/2, xi, y_plus);
+				if (minus && y_minus > yi+sh/2)
+					QwtPainter::drawLine(painter, xi, yi+sh/2, xi, y_minus);
+			} else { // inverted scale
+				if (plus && y_plus > yi+sh/2)
+					QwtPainter::drawLine(painter, xi, yi+sh/2, xi, y_plus);
+				if (minus && y_minus < yi-sh/2)
+					QwtPainter::drawLine(painter, xi, yi-sh/2, xi, y_minus);
 			}
 		} else if (type == Horizontal) {
-			const int xp = xMap.transform(x(i)+err[i]);
-			const int xm = xMap.transform(x(i)-err[i]);
-  			const int xpm = xi + sw/2;
-  	        const int xmp = xi - sw/2;
+			int x_plus = xMap.transform(x(i)+err[i]);
+			int x_minus = xMap.transform(x(i)-err[i]);
+			bool x_minus_is_finite = true;
 
-			if (plus){
-				QwtPainter::drawLine(painter, xp, yi-cap/2, xp, yi+cap/2);
+			if (xMap.transformation()->type() == QwtScaleTransformation::Log10 && err[i] >= x(i)) {
+				x_minus = xMap.transform(qMin(xMap.s1(), xMap.s2()));
+				x_minus_is_finite = false;
 			}
-			if (minus){
-				QwtPainter::drawLine(painter, xm, yi-cap/2, xm, yi+cap/2);
-			}
-			if (through)
-			{
+
+			// draw caps
+			if (plus)
+				QwtPainter::drawLine(painter, x_plus, yi-cap/2, x_plus, yi+cap/2);
+			if (minus && x_minus_is_finite)
+				QwtPainter::drawLine(painter, x_minus, yi-cap/2, x_minus, yi+cap/2);
+
+			// draw vertical line
+			if (through) {
 				if (plus && minus)
-					QwtPainter::drawLine(painter, xm, yi, xp, yi);
+					QwtPainter::drawLine(painter, x_minus, yi, x_plus, yi);
 				else if (plus)
-					QwtPainter::drawLine(painter, xi, yi, xp, yi);
+					QwtPainter::drawLine(painter, xi, yi, x_plus, yi);
 				else if (minus)
-					QwtPainter::drawLine(painter, xm, yi, xi, yi);
-			}
-			else
-			{
-				if (plus && (xp > xpm))
-					QwtPainter::drawLine(painter, xp, yi, xpm, yi);
-				if (minus && (xm < xmp))
-					QwtPainter::drawLine(painter, xm, yi, xmp, yi);
+					QwtPainter::drawLine(painter, x_minus, yi, xi, yi);
+			} else if (x_plus >= x_minus) {
+				if (plus && x_plus > xi+sh/2)
+					QwtPainter::drawLine(painter, xi+sh/2, yi, x_plus, yi);
+				if (minus && x_minus < xi-sh/2)
+					QwtPainter::drawLine(painter, xi-sh/2, yi, x_minus, yi);
+			} else { // inverted scale
+				if (plus && x_plus < xi-sh/2)
+					QwtPainter::drawLine(painter, xi-sh/2, yi, x_plus, yi);
+				if (minus && x_minus > xi+sh/2)
+					QwtPainter::drawLine(painter, xi+sh/2, yi, x_minus, yi);
 			}
 		}
 	}
