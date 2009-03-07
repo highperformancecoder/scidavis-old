@@ -9284,6 +9284,8 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 				break;
 		}
 
+		QTime t;
+		t.start();
 		QApplication::setOverrideCursor(Qt::WaitCursor);
 		/// TODO: is any blocking necessary here?
 		///	w->table()->blockSignals(true);
@@ -9306,7 +9308,11 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 						w->setText(row, col, cell);
 				}
 			}
-			QApplication::processEvents(QEventLoop::ExcludeUserInput);
+			if (t.elapsed() > 100)
+			{
+				QApplication::processEvents(QEventLoop::ExcludeUserInput);
+				t.start();
+			}
 		}
 		QApplication::restoreOverrideCursor();
 
