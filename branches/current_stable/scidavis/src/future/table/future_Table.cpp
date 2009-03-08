@@ -2308,6 +2308,7 @@ void Table::Private::moveColumn(int from, int to)
 	if( to < 0 || to >= d_column_count) return;
 	
 	d_columns.move(from, to);
+	d_owner->connectColumn(d_columns.at(to));
 	d_column_widths.move(from, to);
 	updateHorizontalHeader(qMin(from, to), qMax(from, to));
 	emit d_owner->dataChanged(0, from, d_row_count-1, from);
