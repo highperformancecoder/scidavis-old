@@ -720,9 +720,17 @@ bool TableView::eventFilter(QObject * watched, QEvent * event)
 		QPoint global_pos = cm_event->globalPos();
 		if(watched == v_header)	
 			d_table->showTableViewRowContextMenu(global_pos);
-		else if(watched == d_horizontal_header)
+		else if(watched == d_horizontal_header) {	
+			int col = d_horizontal_header->logicalIndexAt(cm_event->pos());
+			if (!isColumnSelected(col, true)) {
+				QItemSelectionModel * sel_model = d_view_widget->selectionModel();
+				sel_model->clearSelection();
+				sel_model->select(QItemSelection(d_model->index(0, col, QModelIndex()),
+							d_model->index(d_model->rowCount()-1, col, QModelIndex())),
+						QItemSelectionModel::Select);
+			}
 			d_table->showTableViewColumnContextMenu(global_pos);
-		else if(watched == d_view_widget)
+		} else if(watched == d_view_widget)
 			d_table->showTableViewContextMenu(global_pos);
 		else
 			return MyWidget::eventFilter(watched, event);
