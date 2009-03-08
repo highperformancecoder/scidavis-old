@@ -4149,7 +4149,7 @@ void ApplicationWindow::readSettings()
 	QLocale::setDefault(temp_locale);
 
 	d_decimal_digits = settings.value("/DecimalDigits", 14).toInt();
-	d_default_numeric_format = settings.value("/DefaultNumericFormat", 'f').toChar().toAscii();
+	d_default_numeric_format = settings.value("/DefaultNumericFormat", 'g').toChar().toAscii();
 
 	//restore dock windows and tool bars
 	restoreState(settings.value("/DockWindows").toByteArray());

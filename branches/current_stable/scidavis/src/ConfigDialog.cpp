@@ -891,6 +891,8 @@ void ConfigDialog::languageChange()
 	boxDefaultNumericFormat->addItem(tr("Decimal"), QVariant('f'));
 	boxDefaultNumericFormat->addItem(tr("Scientific (e)"), QVariant('e'));
 	boxDefaultNumericFormat->addItem(tr("Scientific (E)"), QVariant('E'));
+	boxDefaultNumericFormat->addItem(tr("Automatic (e)"), QVariant('g'));
+	boxDefaultNumericFormat->addItem(tr("Automatic (E)"), QVariant('G'));
 	int format_index = boxDefaultNumericFormat->findData(app->d_default_numeric_format);
 	boxDefaultNumericFormat->setCurrentIndex(format_index);
 
