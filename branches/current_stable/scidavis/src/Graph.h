@@ -600,7 +600,7 @@ class Graph: public QWidget
 		bool addFunctionCurve(ApplicationWindow *parent, int type, const QStringList &formulas, const QString& var,
 				QList<double> &ranges, int points, const QString& title = QString::null);
 		//! Used when reading from a project file.
-		void insertFunctionCurve(ApplicationWindow * parent, const QStringList& func_spec, int points, int fileVersion);
+		bool insertFunctionCurve(ApplicationWindow * parent, const QStringList& func_spec, int points, int fileVersion);
 		//! Returns an unique function name
         QString generateFunctionName(const QString& name = tr("F"));
 		//@}

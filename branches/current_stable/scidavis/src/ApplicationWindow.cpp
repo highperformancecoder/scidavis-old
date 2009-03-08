@@ -9537,6 +9537,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.left(6)=="curve\t")
 		{
+			bool curve_loaded = false; // Graph::insertCurve may fail
 			QStringList curve = s.split("\t", QString::SkipEmptyParts);
 			if (!app->renamedTables.isEmpty())
 			{
@@ -9605,6 +9606,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 					}
 
 					ag->plotVectorCurve(w, colsList, plotType, startRow, endRow);
+					curve_loaded = true;
 
 					if (d_file_version <= 77)
 					{
@@ -9622,23 +9624,23 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 									curve[18].toInt(), curve[19].toInt(), curve[22].toInt());
 					}
 				}
-				else if(plotType == Graph::Box)
+				else if(plotType == Graph::Box) {
 					ag->openBoxDiagram(w, curve, d_file_version);
-				else
-				{
+					curve_loaded = true;
+				} else {
 					if (d_file_version < 72)
-						ag->insertCurve(w, curve[1].toInt(), curve[2], plotType);
+						curve_loaded = ag->insertCurve(w, curve[1].toInt(), curve[2], plotType);
 					else if (d_file_version < 90)
-						ag->insertCurve(w, curve[1], curve[2], plotType);
+						curve_loaded = ag->insertCurve(w, curve[1], curve[2], plotType);
 					else
 					{
 						int startRow = curve[curve.count()-3].toInt();
 						int endRow = curve[curve.count()-2].toInt();
-						ag->insertCurve(w, curve[1], curve[2], plotType, startRow, endRow);
+						curve_loaded = ag->insertCurve(w, curve[1], curve[2], plotType, startRow, endRow);
 					}
 				}
 
-				if(plotType == Graph::Histogram)
+				if(curve_loaded && plotType == Graph::Histogram)
 				{
 				    QwtHistogram *h = (QwtHistogram *)ag->curve(curveID);
 					if (d_file_version <= 76)
@@ -9648,15 +9650,16 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                     h->loadData();
 				}
 
-				if(plotType == Graph::VerticalBars || plotType == Graph::HorizontalBars ||
-						plotType == Graph::Histogram)
+				if(curve_loaded && (plotType == Graph::VerticalBars || plotType == Graph::HorizontalBars ||
+						plotType == Graph::Histogram))
 				{
 					if (d_file_version <= 76)
 						ag->setBarsGap(curveID, curve[15].toInt(), 0);
 					else
 						ag->setBarsGap(curveID, curve[15].toInt(), curve[16].toInt());
 				}
-				ag->updateCurveLayout(curveID, &cl);
+				if (curve_loaded)
+					ag->updateCurveLayout(curveID, &cl);
 				if (d_file_version >= 88)
 				{
 					QwtPlotCurve *c = ag->curve(curveID);
@@ -9672,7 +9675,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 					}
 				}
 			}
-			curveID++;
+			if (curve_loaded) curveID++;
 		}
 		else if (s.contains ("FunctionCurve"))
 		{
@@ -9718,9 +9721,9 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			}
 			j--;
 
-			ag->insertFunctionCurve(app, func_spec, curve[2].toInt(), d_file_version);
-			ag->setCurveType(curveID, (Graph::CurveType)curve[5].toInt(), false);
-			ag->updateCurveLayout(curveID, &cl);
+			if (ag->insertFunctionCurve(app, func_spec, curve[2].toInt(), d_file_version)) {
+				ag->setCurveType(curveID, (Graph::CurveType)curve[5].toInt(), false);
+				ag->updateCurveLayout(curveID, &cl);
 			if (d_file_version >= 88)
 			{
 				QwtPlotCurve *c = ag->curve(curveID);
@@ -9733,9 +9736,10 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 					else
 						c->setVisible(true);
 				}
-
 			}
-			curveID++;
+			if (ag->curve(curveID))
+				curveID++;
+			}
 		}
 		else if (s.contains ("ErrorBars"))
 		{

@@ -3944,7 +3944,7 @@ bool Graph::addFunctionCurve(ApplicationWindow *parent, int type, const QStringL
 	return true;
 }
 
-void Graph::insertFunctionCurve(ApplicationWindow * parent, const QStringList& func_spec, int points, int fileVersion)
+bool Graph::insertFunctionCurve(ApplicationWindow * parent, const QStringList& func_spec, int points, int fileVersion)
 {
 	int type;
 	QStringList formulas;
@@ -4015,7 +4015,7 @@ void Graph::insertFunctionCurve(ApplicationWindow * parent, const QStringList& f
 			ranges += curve[6].toDouble();
 		}
 	}
-	addFunctionCurve(parent, type, formulas, var, ranges, points, name);
+	return addFunctionCurve(parent, type, formulas, var, ranges, points, name);
 }
 
 void Graph::createTable(const QString& curveName)

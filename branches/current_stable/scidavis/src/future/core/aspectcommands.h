@@ -121,12 +121,12 @@ class AspectCreationTimeChangeCmd : public QUndoCommand
 class AspectChildRemoveCmd : public QUndoCommand
 {
 	public:
-		AspectChildRemoveCmd(AbstractAspect::Private * target, AbstractAspect* child)
-			: d_target(target), d_child(child), d_index(-1), d_removed(false) {
+		AspectChildRemoveCmd(AbstractAspect::Private * target, AbstractAspect* child, bool detach)
+			: d_target(target), d_child(child), d_index(-1), d_removed(false), d_detach(detach) {
 				setText(QObject::tr("%1: remove %2").arg(d_target->name()).arg(d_child->name()));
 			}
 		~AspectChildRemoveCmd() {
-			if (d_removed)			
+			if (d_removed && !d_detach)
 				delete d_child;
 		}
 
@@ -147,14 +147,14 @@ class AspectChildRemoveCmd : public QUndoCommand
 		AbstractAspect::Private * d_target;
 		AbstractAspect* d_child;
 		int d_index;
-		bool d_removed;
+		bool d_removed, d_detach;
 };
 
 class AspectChildAddCmd : public AspectChildRemoveCmd
 {
 	public:
 		AspectChildAddCmd(AbstractAspect::Private * target, AbstractAspect* child, int index)
-			: AspectChildRemoveCmd(target, child) {
+			: AspectChildRemoveCmd(target, child, false) {
 				setText(QObject::tr("%1: add %2").arg(d_target->name()).arg(d_child->name()));
 				d_index = index;
 			}

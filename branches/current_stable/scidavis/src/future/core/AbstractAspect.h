@@ -105,11 +105,14 @@ class AbstractAspect : public QObject
 		void insertChild(AbstractAspect *child, int index);
 		//! Remove the given Aspect from my list of children.
 		/**
-		 * The ownership of the child is transfered to the undo command,
-		 * i.e., the aspect is deleted by the undo command.
+		 * Usually, the ownership of the child is transfered to the undo command,
+		 * i.e., the aspect is deleted by the undo command. But by setting detach
+		 * to true, you can remove a child from the Aspect tree without deleting
+		 * it. Of course, that means whovere detaches an Aspect in responsible
+		 * for deleting it (or re-attaching it somewhere in the tree).
 		 * \sa reparentChild()
 		 */
-		void removeChild(AbstractAspect* child);
+		void removeChild(AbstractAspect* child, bool detach=false);
 		//! Remove the Aspect at the given index from my list of children.
 		/**
 		 * The ownership of the child is transfered to the undo command,

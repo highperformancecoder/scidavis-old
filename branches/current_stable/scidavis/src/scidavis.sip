@@ -47,7 +47,7 @@ class AbstractAspect : QObject
 		bool isDescendantOf(AbstractAspect *other);
 		void addChild(AbstractAspect* child /Transfer/);
 		void insertChild(AbstractAspect *child /Transfer/, int index);
-		void removeChild(AbstractAspect* child);
+		void removeChild(AbstractAspect* child, bool detach=false);
 		void removeChild(int index);
 		AbstractAspect* child(int index) const;
 		int childCount() const;

@@ -896,17 +896,35 @@ void Table::importV0x0001XXHeader(QStringList header)
 			col_plot_type << SciDAVis::noDesignation;
 		}
 	}
+	QList<Column*> quarantine;
 	for (int i=0; i<col_label.count() && i<d_future_table->columnCount();i++)
-	{
-		column(i)->setName(col_label.at(i));
-		column(i)->setPlotDesignation(col_plot_type.at(i));
+		quarantine << column(i);
+	int i = 0;
+	foreach(Column * col, quarantine) {
+		d_future_table->removeChild(col, true);
+		// setting column name while col is still part of table triggers renaming
+		// to prevent name clashes
+		col->setName(col_label.at(i));
+		col->setPlotDesignation(col_plot_type.at(i));
+		i++;
 	}
+	d_future_table->appendColumns(quarantine);
 }
 
 void Table::setHeader(QStringList header)
 {
+	QList<Column*> quarantine;
 	for (int i=0; i<header.count() && i<d_future_table->columnCount();i++)
-		column(i)->setName(header.at(i));
+		quarantine << column(i);
+	int i = 0;
+	foreach(Column * col, quarantine) {
+		d_future_table->removeChild(col, true);
+		// setting column name while col is still part of table triggers renaming
+		// to prevent name clashes
+		col->setName(header.at(i));
+		i++;
+	}
+	d_future_table->appendColumns(quarantine);
 }
 
 int Table::colIndex(const QString& name)

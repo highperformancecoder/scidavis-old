@@ -140,12 +140,12 @@ void AbstractAspect::insertChild(AbstractAspect* child, int index)
 	endMacro();
 }
 
-void AbstractAspect::removeChild(AbstractAspect* child)
+void AbstractAspect::removeChild(AbstractAspect* child, bool detach)
 {
 	Q_ASSERT(indexOfChild(child) != -1);
 	beginMacro(tr("%1: remove %2.").arg(name()).arg(child->name()));
 	prepareAspectRemoval(child);
-	exec(new AspectChildRemoveCmd(d_aspect_private, child));
+	exec(new AspectChildRemoveCmd(d_aspect_private, child, detach));
 	endMacro();
 }
 
