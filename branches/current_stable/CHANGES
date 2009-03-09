@@ -135,3 +135,14 @@ Most important changes (since 0.1.4)
   using PyQt/Python scripting
 - many bug fixes
 
+=== Release 0.2.1, 2009-03-09 ===
+Most important changes (since 0.2.0)
+- fixed saving of project files with function/fit curves
+- fixed opening of backup copy on discovery of a corrupt project file
+- Spanish translation update by Mauricio Troviano
+- fixed several regressions introduced by the table/matrix rewrites in 0.2.0
+- added per mille and per ten thousand signs to SymbolDialog
+- compatibility problems between SIP versions triggers a warning instead of a
+  crash (happens sometimes when SIP version at runtime differs from the one
+  used at compile time)
+

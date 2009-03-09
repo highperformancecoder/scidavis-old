@@ -137,7 +137,7 @@
 			Now you have everything you need and you can start compiling. Make sure you compile everything with the same version of Qt, otherwise you may encounter problems.
 			</li>
 			<li>Compile Qwt: 
-			First edit the qwtconfig.pri file. Comment out the line <code>CONFIG += QwtDll</code> by prepending a '#'. You can also comment out the line <code>CONFIG += QwtWidgets</code> since the  Qwt widgets are not used in SciDAVis. The same is true for the Qt designer plugin (comment out <code>CONFIG QwtDesigner</code>). If you want, change the line <code>INSTALLBASE = C:/Qwt-5.0.2</code> to some other folder to install to. 
+			First edit the qwtconfig.pri file. Comment out the line <code>CONFIG += QwtDll</code> by prepending a '#'. You can also comment out the line <code>CONFIG += QwtWidgets</code> since the  Qwt widgets are not used in SciDAVis. The same is true for the Qt designer plugin (comment out <code>CONFIG QwtDesigner</code>). If you want, change the line <code>INSTALLBASE = C:/Qwt-5.1.0</code> to some other folder to install to. 
 			Now open a DOS prompt and go to the folder containing qwt.pro and qwtcontig.pri using the <code>cd</code> command. Then type <code>qmake</code>. If everything goes right, no message will be displayed and a "Makefile" will be created. Next execute <code>make</code> and wait for Qwt to compile. Finally type <code>make install</code> to install Qwt in the folder specified by <code>INSTALLBASE</code>.
 			</li>
 			<li>Compile QwtPlot3D:

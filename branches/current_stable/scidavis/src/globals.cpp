@@ -17,8 +17,8 @@
 #include <QtDebug>
 #include "ui_SciDAVisAbout.h"
 
-//  Don't forget to change the Doxyfile when changing these!
-const int SciDAVis::scidavis_version = 0x000200;
+//  Don't forget to change the Doxyfile and the splash screen when changing these!
+const int SciDAVis::scidavis_version = 0x000201;
 
 const char * SciDAVis::extra_version = "";
 
@@ -88,7 +88,7 @@ GSL (http://www.gnu.org/software/gsl/)\n\
 \n\
 ... and many more we just forgot to mention.\n";
 
-const char * SciDAVis::release_date = " 2009-02-14";
+const char * SciDAVis::release_date = " 2009-03-09";
 
 int SciDAVis::version()
 {
