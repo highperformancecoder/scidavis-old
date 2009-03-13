@@ -5,3 +5,4 @@ HEADERS += src/muParserScript.h \
 
 SOURCES += src/muParserScript.cpp \
            src/muParserScripting.cpp \
+

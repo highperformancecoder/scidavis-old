@@ -77,4 +77,5 @@
              $${SIP_DIR}/sipscidavisColumn.cpp \
 				 $${SIP_DIR}/sipscidavisQwtSymbol.cpp \
 				 $${SIP_DIR}/sipscidavisQwtPlotCurve.cpp \
+
 ###############################################################
