@@ -5,6 +5,7 @@ Name=SciDAVis
 Comment=Application for scientific data analysis and visualization
 Comment[de]=Programm zur wissenschaftlichen Datenauswertung und Visualisierung
 Comment[fr]=Outil d'analyse scientifique de données
+Comment[pt_BR]=Programa para visualização e análise da dados científico
 Icon=scidavis
 Exec=scidavis
 Terminal=false

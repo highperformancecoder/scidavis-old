@@ -14,7 +14,8 @@ TRANSLATIONS    = translations/scidavis_de.ts \
                   translations/scidavis_fr.ts \
                   translations/scidavis_ru.ts \
                   translations/scidavis_ja.ts \
-                  translations/scidavis_sv.ts
+                  translations/scidavis_sv.ts \
+						translations/scidavis_pt-br.ts \
 
 contains( INSTALLS, translationfiles ){
     exists(translations/scidavis_de.ts){
@@ -23,7 +24,8 @@ contains( INSTALLS, translationfiles ){
                              translations/scidavis_fr.qm \
                              translations/scidavis_ru.qm \
                              translations/scidavis_ja.qm \
-                             translations/scidavis_sv.qm
+                             translations/scidavis_sv.qm \
+									  translations/scidavis_pt-br.qm \
 
         unix: tstarget.target = translations/scidavis_de.qm
         win32: tstarget.target = translations\scidavis_de.qm
