@@ -22,7 +22,7 @@ h1. Linux
 h2. SUSE
 
 Thanks to Quentin Denis, packages of the application as well as the manual are available
-"here":http://packman.links2linux.org/package/scidavis.
+"here":http://packman.links2linux.org/package/scidavis (outdated version as of 2009-03-16).
 
 h2. Debian
 
@@ -36,7 +36,7 @@ Thanks to Eric Tanguy, SciDAVis is now included in Fedora 8 and the following ve
 h2. Slackware
 
 Fellype do Nascimento provides a
-"package for Slackware 12.2":http://www.linuxpackages.net/pkg_details.php?id=12869
+"package for Slackware 12.2":http://www.linuxpackages.net/search_view.php?by=name&name=scidavis&ver=12.2
 at linuxpackages.net.
 
 h2. Arch Linux
@@ -50,7 +50,7 @@ For all distributions that don't have specific packages yet, we offer a universa
 Information about dependencies and installation instructions can be found 
 "here":http://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=13808.
 
-If you don't know how to open scidavis-x.y.z-x86-linux-Qt4.4-Py2.5.tar.bz2, start a terminal, cd to the directory containing it and enter
+If you don't know how to open scidavis-x.y.z-x86-linux-qt4.4-py2.5.tar.bz2, start a terminal, cd to the directory containing it and enter
 
 {hlblock: {blockName: linux, highlight: plaintext}}
 
@@ -115,4 +115,4 @@ svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/branches/curr
 svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis
 
 --- linux, html
-tar xjvf scidavis-x.y.z-x86-linux-Qt4.4-Py2.5.tar.bz2
+tar xjvf scidavis-x.y.z-x86-linux-qt4.4-py2.5.tar.bz2
