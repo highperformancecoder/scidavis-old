@@ -70,6 +70,8 @@ void Differentiation::output()
     QString curveTitle = d_curve->title().text();
 	Column *xCol = new Column(tr("1", "differention table x column name"), SciDAVis::Numeric);
 	Column *yCol = new Column(tr("2", "differention table y column name"), SciDAVis::Numeric);
+	xCol->setPlotDesignation(SciDAVis::X);
+	yCol->setPlotDesignation(SciDAVis::Y);
     Table *t = app->newHiddenTable(tableName, tr("Derivative") + " " + tr("of","Derivative of")  + " " + curveTitle, QList<Column *>() << xCol << yCol);
 	for (int i = 1; i < d_n-1; i++)
 	{

@@ -847,12 +847,12 @@ void Table::setCell(int row, int col, double val)
 
 QString Table::text(int row, int col)
 {
-	return d_model->data(d_model->index(row, col), Qt::DisplayRole).toString();
+	return column(col)->asStringColumn()->textAt(row);
 }
 
 void Table::setText(int row, int col, const QString & text)
 {
-	d_model->setData(d_model->index(row, col), text, Qt::DisplayRole);
+	column(col)->asStringColumn()->setTextAt(row, text);
 }
 
 void Table::importV0x0001XXHeader(QStringList header)
