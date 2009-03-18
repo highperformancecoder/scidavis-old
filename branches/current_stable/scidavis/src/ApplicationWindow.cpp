@@ -305,7 +305,6 @@ void ApplicationWindow::init()
 			this, SLOT(scriptError(const QString&,const QString&,int)));
 	connect(scriptEnv, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
 
-	connect(recent, SIGNAL(activated(int)), this, SLOT(openRecentProject(int)));
 	connect(&http, SIGNAL(done(bool)), this, SLOT(receivedVersionFile(bool)));
 
 	// this has to be done after connecting scriptEnv
@@ -3481,9 +3480,11 @@ ApplicationWindow* ApplicationWindow::open(const QString& fn)
 		return plotFile(fn);
 }
 
-void ApplicationWindow::openRecentProject(int index)
+void ApplicationWindow::openRecentProject()
 {
-	QString fn = recent->text(index);
+	QAction *trigger = qobject_cast<QAction*>(sender());
+	if (!trigger) return;
+	QString fn = trigger->text();
 	int pos = fn.find(" ",0);
 	fn = fn.right(fn.length()-pos-1);
 
@@ -11575,10 +11576,12 @@ void ApplicationWindow::updateRecentProjectsList()
 	while ((int)recentProjects.size() > MaxRecentProjects)
 		recentProjects.pop_back();
 
-	recent->clear();
+	foreach(QAction *action, recent->actions())
+		action->deleteLater();
 
 	for (int i = 0; i<(int)recentProjects.size(); i++ )
-		recent->insertItem("&" + QString::number(i+1) + " " + recentProjects[i]);
+		connect(recent->addAction("&" + QString::number(i+1) + " " + recentProjects[i]), SIGNAL(triggered()),
+				this, SLOT(openRecentProject()));
 }
 
 void ApplicationWindow::translateCurveHor()
