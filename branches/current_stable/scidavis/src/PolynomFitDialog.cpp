@@ -61,30 +61,23 @@ PolynomFitDialog::PolynomFitDialog( QWidget* parent, Qt::WFlags fl )
 	boxOrder->setValue(2);
     gl1->addWidget(boxOrder, 1, 1);
 
-    gl1->addWidget(new QLabel( tr("Fit curve # pts")), 2, 0);
-	boxPoints = new QSpinBox();
-    boxPoints->setRange(1, 1000);
-    boxPoints->setSingleStep(50);
-    boxPoints->setSpecialValueText(tr("Not enough points"));
-    gl1->addWidget(boxPoints, 2, 1);
-
-    gl1->addWidget(new QLabel( tr("Fit curve Xmin")), 3, 0);
+    gl1->addWidget(new QLabel( tr("Fit curve Xmin")), 2, 0);
 	boxStart = new QLineEdit(tr("0"));
-    gl1->addWidget(boxStart, 3, 1);
+    gl1->addWidget(boxStart, 2, 1);
 
-    gl1->addWidget(	new QLabel( tr("Fit curve Xmax")), 4, 0);
+    gl1->addWidget(	new QLabel( tr("Fit curve Xmax")), 3, 0);
 	boxEnd = new QLineEdit();
-    gl1->addWidget(boxEnd, 4, 1);
+    gl1->addWidget(boxEnd, 3, 1);
 
-    gl1->addWidget(new QLabel( tr("Color")), 5, 0);
+    gl1->addWidget(new QLabel( tr("Color")), 4, 0);
 	boxColor = new ColorBox( false);
 	boxColor->setColor(QColor(Qt::red));
-    gl1->addWidget(boxColor, 5, 1);
+    gl1->addWidget(boxColor, 4, 1);
 
 	boxShowFormula = new QCheckBox(tr( "Show Formula on Graph?" ));
 	boxShowFormula->setChecked( false );
-    gl1->addWidget(boxShowFormula, 6, 1);
-    gl1->setRowStretch(7, 1);
+    gl1->addWidget(boxShowFormula, 5, 1);
+    gl1->setRowStretch(6, 1);
 
 	buttonFit = new QPushButton(tr( "&Fit" ));
 	buttonFit->setDefault( true );
@@ -157,7 +150,6 @@ void PolynomFitDialog::activateCurve(const QString& curveName)
 
 	boxStart->setText(QString::number(start, 'g', 15));
 	boxEnd->setText(QString::number(end, 'g', 15));
-	boxPoints->setValue(QMAX(n_points, 100));
 };
 
 void PolynomFitDialog::changeDataRange()

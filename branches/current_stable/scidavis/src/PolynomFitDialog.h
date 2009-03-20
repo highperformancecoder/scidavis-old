@@ -61,7 +61,6 @@ private:
     QCheckBox* boxShowFormula;
 	QComboBox* boxName;
 	QSpinBox* boxOrder;
-	QSpinBox* boxPoints;
 	QLineEdit* boxStart;
 	QLineEdit* boxEnd;
 	ColorBox* boxColor;
