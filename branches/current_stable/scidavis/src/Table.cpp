@@ -929,10 +929,7 @@ void Table::setHeader(QStringList header)
 
 int Table::colIndex(const QString& name)
 {
-	// TODO for 0.3.0: remove all name concatenation with _ in favor of Column * pointers
-	int pos=name.find("_",false);
-	QString label=name.right(name.length()-pos-1);
-	return d_future_table->columnIndex(column(label));
+	return d_future_table->columnIndex(column(name));
 }
 
 bool Table::noXColumn()

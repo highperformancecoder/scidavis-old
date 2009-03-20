@@ -135,9 +135,12 @@ Column * Table::column(int index) const
 
 Column * Table::column(const QString & name) const
 { 
+	// TODO for 0.3.0: remove all name concatenation with _ in favor of Column * pointers
+	int pos=name.find("_",false);
+	QString label=name.right(name.length()-pos-1);
 	for (int i=0; i<columnCount(); i++)
 	{
-		if (d_table_private->column(i)->name() == name)
+		if (d_table_private->column(i)->name() == label)
 			return d_table_private->column(i);
 	}
 

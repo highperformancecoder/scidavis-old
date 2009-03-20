@@ -2826,53 +2826,36 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type, const QSt
 	if (xColName.isEmpty())
 		return;
 
-	if (direction == QwtErrorPlotCurve::Horizontal)
-		w->addCol(SciDAVis::xErr);
-	else
-		w->addCol(SciDAVis::yErr);
-
-	int r=w->numRows();
-	int c=w->numCols()-1;
-	w->column(c)->setColumnMode(SciDAVis::Numeric);
-	Column * ycol = w->d_future_table->column(name);
-	if (!direction)
-		ycol = w->d_future_table->column(xColName);
-
-	QVarLengthArray<double> Y(r);
-	for (int i=0; i<w->numRows(); i++)
-	{
-		if (i< ycol->rowCount())
-			Y.append(ycol->valueAt(i));
-		else
-			Y.append(0.0);
+	Column * errors = new Column("1", SciDAVis::Numeric);
+	Column * data;
+	if (direction == QwtErrorPlotCurve::Horizontal) {
+		errors->setPlotDesignation(SciDAVis::xErr);
+		data = w->d_future_table->column(xColName);
+	} else {
+		errors->setPlotDesignation(SciDAVis::yErr);
+		data = w->d_future_table->column(name);
 	}
-	QString errColName = w->colName(c);
+	if (!data) return;
 
-	double prc=percent.toDouble();
-	double average=0.0;
-	if (type==0)
-	{
-		for (int i=0;i<r;i++)
-		{
-			w->column(c)->setValueAt(i, Y[i]*prc/100.0);
-		}
-	}
-	else if (type==1)
-	{
-		int i;
+	int rows = data->rowCount();
+	if (type==0) {
+		double fraction = percent.toDouble()/100.0;
+		for (int i=0; i<rows; i++)
+			errors->setValueAt(i, data->valueAt(i)*fraction);
+	} else if (type==1) {
+		double average=0.0;
 		double dev=0.0;
-		for (i=0;i<r;i++)
-			average+=Y[i];
-		average/=r;
-		for (i=0;i<r;i++)
-			dev+=(Y[i]-average)*(Y[i]-average);
-		dev=sqrt(dev/(r-1));
-		for (i=0;i<r;i++)
-		{
-			w->column(c)->setValueAt(i, dev);
-		}
+		for (int i=0; i<rows; i++)
+			average += data->valueAt(i);
+		average /= rows;
+		for (int i=0; i<rows; i++)
+			dev += pow(data->valueAt(i)-average, 2);
+		dev = sqrt(dev/rows);
+		for (int i=0; i<rows; i++)
+			errors->setValueAt(i, dev);
 	}
-	g->addErrorBars(xColName, name, w, errColName, direction);
+	w->d_future_table->addChild(errors);
+	g->addErrorBars(xColName, name, w, errors->name(), direction);
 }
 
 void ApplicationWindow::defineErrorBars(const QString& curveName, const QString& errColumnName, int direction)
