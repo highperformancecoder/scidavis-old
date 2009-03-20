@@ -953,27 +953,24 @@ void FitDialog::showExpression(int function)
 		polynomOrderLabel->show();
 		polynomOrderBox->show();
 
-		if (funcBox->currentItem()->text() == tr("Gauss"))
-		{
-			polynomOrderLabel->setText(tr("Peaks"));
-			explainBox->setText(MultiPeakFit::generateFormula(polynomOrderBox->value(), MultiPeakFit::Gauss));
-		}
-		else if (funcBox->currentItem()->text() == tr("Lorentz"))
-		{
-			polynomOrderLabel->setText(tr("Peaks"));
-			explainBox->setText(MultiPeakFit::generateFormula(polynomOrderBox->value(), MultiPeakFit::Lorentz));
-		}
-		else if (funcBox->currentItem()->text() == tr("Polynomial"))
-		{
-			polynomOrderLabel->setText(tr("Polynomial Order"));
-			explainBox->setText(PolynomialFit::generateFormula(polynomOrderBox->value()));
-		}
-		else
-		{
-			polynomOrderLabel->hide();
-			polynomOrderBox->hide();
-			polynomOrderBox->setValue(1);
-			explainBox->setText(d_built_in_functions[function]);
+		switch(funcBox->currentRow ()) {
+			case 6: // Gauss
+				polynomOrderLabel->setText(tr("Peaks"));
+				explainBox->setText(MultiPeakFit::generateFormula(polynomOrderBox->value(), MultiPeakFit::Gauss));
+				break;
+			case 7: // Lorentz
+				polynomOrderLabel->setText(tr("Peaks"));
+				explainBox->setText(MultiPeakFit::generateFormula(polynomOrderBox->value(), MultiPeakFit::Lorentz));
+				break;
+			case 8: // Polynomial
+				polynomOrderLabel->setText(tr("Polynomial Order"));
+				explainBox->setText(PolynomialFit::generateFormula(polynomOrderBox->value()));
+				break;
+			default:
+				polynomOrderLabel->hide();
+				polynomOrderBox->hide();
+				polynomOrderBox->setValue(1);
+				explainBox->setText(d_built_in_functions[function]);
 		}
 		setFunction(boxUseBuiltIn->isChecked());
 	}
