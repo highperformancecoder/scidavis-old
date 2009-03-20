@@ -196,6 +196,8 @@ class TableView : public MyWidget
 		void handleHorizontalSectionMoved(int index, int from, int to);
 		void handleHorizontalHeaderDoubleClicked(int index);
 		void handleAspectDescriptionChanged(const AbstractAspect * aspect);
+		void handleAspectAdded(const AbstractAspect *aspect);
+		void handleAspectAboutToBeRemoved(const AbstractAspect *aspect, int index);
 		void updateTypeInfo();
 		void updateFormatBox();
 		void handleHeaderDataChanged(Qt::Orientation orientation, int first, int last);

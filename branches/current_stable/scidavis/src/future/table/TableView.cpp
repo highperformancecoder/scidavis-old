@@ -152,6 +152,10 @@ void TableView::init()
 		SLOT(handleHeaderDataChanged(Qt::Orientation,int,int)) ); 
 	connect(d_table, SIGNAL(aspectDescriptionChanged(const AbstractAspect*)),
 			this, SLOT(handleAspectDescriptionChanged(const AbstractAspect*)));
+	connect(d_table, SIGNAL(aspectAdded(const AbstractAspect*)),
+			this, SLOT(handleAspectAdded(const AbstractAspect*)));
+	connect(d_table, SIGNAL(aspectAboutToBeRemoved(const AbstractAspect*,int)),
+			this, SLOT(handleAspectAboutToBeRemoved(const AbstractAspect*,int)));
 
 	rereadSectionSizes();
 	
@@ -358,6 +362,19 @@ void TableView::handleAspectDescriptionChanged(const AbstractAspect * aspect)
 	if (!col || col->parentAspect() != static_cast<AbstractAspect*>(d_table))
 		return;
 	ui.add_reference_combobox->setItemText(d_table->columnIndex(col), "col(\"" + col->name() + "\")");
+}
+
+void TableView::handleAspectAdded(const AbstractAspect *aspect) {
+	const Column * col = qobject_cast<const Column*>(aspect);
+	if (!col || col->parentAspect() != static_cast<AbstractAspect*>(d_table))
+		return;
+	ui.add_reference_combobox->insertItem(d_table->indexOfChild(aspect), "col(\"" + col->name() + "\")");
+}
+
+void TableView::handleAspectAboutToBeRemoved(const AbstractAspect *parent, int index) {
+	if (parent != d_table)
+		return;
+	ui.add_reference_combobox->removeItem(index);
 }
 
 void TableView::selectionChanged(const QItemSelection & selected, const QItemSelection & deselected)
