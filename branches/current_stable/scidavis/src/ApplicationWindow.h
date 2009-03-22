@@ -414,8 +414,7 @@ public slots:
 	//@{
 	MyWidget* clone();
 	MyWidget* clone(MyWidget*);
-	void rename();
-	void renameWindow();
+	void renameActiveWindow();
 
 	//!  Called when the user presses F2 and an item is selected in lv.
 	void renameWindow(Q3ListViewItem *item, int, const QString &s);

@@ -151,11 +151,16 @@
 
 #include <iostream>
 
+#ifdef Q_OS_WIN
+#include <io.h> // for _commit()
+#else
+#include <unistd.h> // for fsync()
+#endif
+
 using namespace Qwt3D;
 
 extern "C"
 {
-#include <zlib.h>
 void file_compress(char  *file, char  *mode);
 }
 
@@ -5047,7 +5052,7 @@ void ApplicationWindow::saveAsTemplate()
 	}
 }
 
-void ApplicationWindow::rename()
+void ApplicationWindow::renameActiveWindow()
 {
 	MyWidget* m = (MyWidget*)d_workspace->activeWindow();
 	if (!m)
@@ -5056,19 +5061,6 @@ void ApplicationWindow::rename()
 	RenameWindowDialog *rwd = new RenameWindowDialog(this);
 	rwd->setAttribute(Qt::WA_DeleteOnClose);
 	rwd->setWidget(m);
-	rwd->exec();
-}
-
-void ApplicationWindow::renameWindow()
-{
-	WindowListItem *it = (WindowListItem *)lv->currentItem();
-	MyWidget *w = it->window();
-	if (!w)
-		return;
-
-	RenameWindowDialog *rwd = new RenameWindowDialog(this,0);
-	rwd->setAttribute(Qt::WA_DeleteOnClose);
-	rwd->setWidget(w);
 	rwd->exec();
 }
 
@@ -10686,7 +10678,7 @@ void ApplicationWindow::createActions()
 	connect(actionChooseHelpFolder, SIGNAL(activated()), this, SLOT(chooseHelpFolder()));
 
 	actionRename = new QAction(tr("&Rename Window"), this);
-	connect(actionRename, SIGNAL(activated()), this, SLOT(rename()));
+	connect(actionRename, SIGNAL(activated()), this, SLOT(renameActiveWindow()));
 
 	actionCloseWindow = new QAction(QIcon(QPixmap(":/close.xpm")), tr("Close &Window"), this);
 	actionCloseWindow->setShortcut( tr("Ctrl+W") );
@@ -12209,34 +12201,22 @@ void ApplicationWindow::appendProject(const QString& fn)
 
 void ApplicationWindow::saveFolder(Folder *folder, const QString& fn)
 {
-	QFile f( fn );
-	if (f.exists())
-	{// make byte-copy of current file so that there's always a copy of the data on disk
-		while (!f.open(QIODevice::ReadOnly))
-		{
-			if (f.isOpen())
-				f.close();
-			int choice = QMessageBox::warning(this, tr("File backup error"),
-					tr("Cannot make a backup copy of <b>%1</b> (to %2).<br>If you ignore this, you run the risk of <b>data loss</b>.").arg(projectname).arg(projectname+"~"),
-					QMessageBox::Retry|QMessageBox::Default, QMessageBox::Abort|QMessageBox::Escape, QMessageBox::Ignore);
-			if (choice == QMessageBox::Abort)
+	// file saving procedure follows
+	// https://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54
+	QFile f(fn + ".new");
+	while (!f.open(QIODevice::WriteOnly)) {
+		if (f.isOpen()) f.close();
+		// The following message is slightly misleading, since it may be that fn.new can't be opened
+		// _at_all_. However, changing this would break translations, in a bugfix release.
+		// TODO: rephrase message for next minor release
+		switch(QMessageBox::critical(this, tr("File save error"),
+					tr("The file: <br><b>%1</b> is opened in read-only mode").arg(fn + ".new"),
+					QMessageBox::Retry|QMessageBox::Default, QMessageBox::Abort|QMessageBox::Escape)) {
+			case QMessageBox::Abort:
 				return;
-			if (choice == QMessageBox::Ignore)
-				break;
-		}
-
-		if (f.isOpen())
-		{
-            QFile::copy (fn, fn + "~");
-			f.close();
 		}
 	}
 
-	if ( !f.open( QIODevice::WriteOnly ) )
-	{
-		QMessageBox::about(this, tr("File save error"), tr("The file: <br><b>%1</b> is opened in read-only mode").arg(fn));
-		return;
-	}
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
 	QList<MyWidget *> lst = folder->windowsList();
@@ -12295,7 +12275,38 @@ void ApplicationWindow::saveFolder(Folder *folder, const QString& fn)
 	QTextStream t( &f );
 	t.setEncoding(QTextStream::UnicodeUTF8);
 	t << text;
+
+	// second part of secure file saving (see comment at the start of this method)
+#ifdef Q_OS_WIN
+	// this one was taken from
+	// http://support.microsoft.com/kb/148505/en-us
+	// http://msdn.microsoft.com/en-us/library/17618685(VS.80).aspx
+	if (!f.flush() || _commit(f.handle()) != 0) {
+#else
+	if (!f.flush() || fsync(f.handle()) != 0) {
+#endif
+		QApplication::restoreOverrideCursor();
+		QMessageBox::critical(this, tr("Error writing data to disk"),
+				tr("<html>%1<br><br>Your data may or may not have ended up in <em>%2</em> (%3). \
+					If there already was a version of this project on disk, it has not been touched.</html>")
+				.arg(QString::fromLocal8Bit(strerror(errno))).arg(fn + ".new").arg(f.handle()));
+		f.close();
+		return;
+	}
 	f.close();
+	// we want to atomically replace existing files, so we can't use QFile::rename()
+	if ((QFile::exists(fn) && rename(QFile::encodeName(fn), QFile::encodeName(fn + "~")) != 0) ||
+			rename(QFile::encodeName(fn + ".new"), QFile::encodeName(fn)) != 0) {
+		QApplication::restoreOverrideCursor();
+		QMessageBox::critical(this, tr("Error renaming backup files"),
+				tr("<html>%1<br><br>Data was written to <em>%2</em>, but saving the original file as <em>%3</em>\
+					and moving the new file to <em>%4</em> failed. In case you wonder why the original file hasn't\
+					been simply replaced, see here:\
+					<a href=\"http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54\">\
+					http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54</a>.</html>")
+				.arg(QString::fromLocal8Bit(strerror(errno))).arg(fn + ".new").arg(fn + "~").arg(fn));
+		return;
+	}
 
 	QApplication::restoreOverrideCursor();
 }
