@@ -3239,118 +3239,97 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 	if (files.isEmpty())
 		return;
 
-	switch(import_mode) 
-	{
-		case ImportASCIIDialog::NewTables:
+	// this is very much a special case, and thus is handled completely in its own block
+	if (import_mode == ImportASCIIDialog::NewTables) {
+		int dx, dy;
+		QStringList sorted_files = files;
+		sorted_files.sort();
+		for (int i=0; i<sorted_files.size(); i++)
+		{
+			Table *w = newTable(sorted_files[i], local_column_separator, local_ignored_lines,
+					local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric, local_numeric_locale);
+			if (!w) continue;
+			w->setCaptionPolicy(MyWidget::Both);
+			setListViewLabel(w->name(), sorted_files[i]);
+			if (i==0) 
 			{
-				int dx, dy;
-				QStringList sorted_files = files;
-				sorted_files.sort();
-				for (int i=0; i<sorted_files.size(); i++)
-				{
-					Table *w = newTable(sorted_files[i], local_column_separator, local_ignored_lines,
-							local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric, local_numeric_locale);
-					if (!w) continue;
-					w->setCaptionPolicy(MyWidget::Both);
-					setListViewLabel(w->name(), sorted_files[i]);
-					if (i==0) 
-					{
-						dx = w->verticalHeaderWidth();
-						dy = w->parentWidget()->frameGeometry().height() - w->height();
-						w->parentWidget()->move(QPoint(0,0));
-					} 
-					else
-						w->parentWidget()->move(QPoint(i*dx,i*dy));
+				dx = w->verticalHeaderWidth();
+				dy = w->parentWidget()->frameGeometry().height() - w->height();
+				w->parentWidget()->move(QPoint(0,0));
+			} 
+			else
+				w->parentWidget()->move(QPoint(i*dx,i*dy));
 
-				}
-				modifiedProject();
-				break;
-			}
-		case ImportASCIIDialog::NewColumns:
-			{
-				for (int i=0; i<files.size(); i++)
-				{
-					Table *temp = new Table(scriptEnv, files[i], local_column_separator, local_ignored_lines,
-							local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric,
-							local_numeric_locale, "temp", 0, 0, 0);
-					if (!temp) continue;
-					Table *table = (Table*) d_workspace->activeWindow();
-					if (table && table->inherits("Table"))
-					{
-						while (temp->d_future_table->childCount() > 0)
-							temp->d_future_table->reparentChild(table->d_future_table, temp->d_future_table->child(0));
-						table->setWindowLabel(files.join("; "));
-						table->setCaptionPolicy(MyWidget::Name);
-						table->notifyChanges();
-						emit modifiedProject(table);
+		}
+		modifiedProject();
+		return;
+	}
+
+	Table *table = qobject_cast<Table *>(d_workspace->activeWindow());
+	if (!table) return;
+
+	foreach(QString file, files) {
+		Table *temp = new Table(scriptEnv, file, local_column_separator, local_ignored_lines,
+				local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric,
+				local_numeric_locale, "temp", 0, 0, 0);
+		if (!temp) continue;
+
+		// need to check data types of columns for append/overwrite
+		if (import_mode == ImportASCIIDialog::NewRows || import_mode == ImportASCIIDialog::Overwrite)
+			if (local_convert_to_numeric) {
+				for (int col=0; col < qMin(temp->columnCount(), table->columnCount()); col++)
+					if (table->column(col)->columnMode() != SciDAVis::Numeric) {
+						QMessageBox::critical(this, tr("ASCII Import Failed"),
+								tr("Numeric data cannot be imported into non-numeric column \"%1\".").arg(table->column(col)->name()));
+						delete temp;
+						return;
 					}
-					delete temp;
-				}
-				modifiedProject();
-				break;
-			}
-		case ImportASCIIDialog::NewRows:
-			{
-				for (int i=0; i<files.size(); i++)
-				{
-					Table *temp = new Table(scriptEnv, files[i], local_column_separator, local_ignored_lines,
-							local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric,
-							local_numeric_locale, "temp", 0, 0, 0);
-					if (!temp) continue;
-					Table *table = (Table*) d_workspace->activeWindow();
-					if (table && table->inherits("Table"))
-					{
-						int missing_columns = temp->columnCount() - table->columnCount();
-						if (missing_columns > 0)
-						{
-							QList<Column*> cols;
-							for(int col=0; col<missing_columns; col++)
-							{
-								Column * new_col = new Column(tr("new_by_import") + QString::number(col+1), SciDAVis::Text);
-								new_col->setPlotDesignation(SciDAVis::Y);
-								cols << new_col;
-							}
-							table->d_future_table->appendColumns(cols);
-						}
-						Q_ASSERT(table->columnCount() >= temp->columnCount());
-						int start_row = table->rowCount();
-						table->d_future_table->setRowCount(table->rowCount() + temp->rowCount());
-						for (int col=0; col<temp->columnCount(); col++)
-						{
-							Column * src_col = temp->column(col);
-							Q_ASSERT(src_col->dataType() == SciDAVis::TypeQString);
-							Column * dst_col = table->column(col);
-							for (int j=0; j<src_col->rowCount(); j++)
-								dst_col->asStringColumn()->setTextAt(start_row+j, src_col->textAt(j));
-						}
-						table->setWindowLabel(files.join("; "));
-						table->setCaptionPolicy(MyWidget::Name);
-						table->notifyChanges();
-						emit modifiedProject(table);
+			} else {
+				for (int col=0; col < qMin(temp->columnCount(), table->columnCount()); col++)
+					if (table->column(col)->columnMode() != SciDAVis::Text) {
+						QMessageBox::critical(this, tr("ASCII Import Failed"),
+								tr("Non-numeric data cannot be imported into non-text column \"%1\".").arg(table->column(col)->name()));
+						delete temp;
+						return;
 					}
-					delete temp;
-				}
-				modifiedProject();
-				break;
 			}
-		case ImportASCIIDialog::Overwrite:
-			{
-				Table *temp = new Table(scriptEnv, files[0], local_column_separator, local_ignored_lines,
-						local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric,
-						local_numeric_locale, "temp", 0, 0, 0);
-				if (!temp) return;
-				Table *table = (Table*) d_workspace->activeWindow();
-				if (table && table->inherits("Table"))
+
+		// copy or move data from temp to table
+		switch(import_mode) {
+			case ImportASCIIDialog::NewColumns:
+				while (temp->d_future_table->childCount() > 0)
+					temp->d_future_table->reparentChild(table->d_future_table, temp->d_future_table->child(0));
+				break;
+			case ImportASCIIDialog::NewRows:
+				{
+					int missing_columns = temp->columnCount() - table->columnCount(); 
+					for (int col=0; col<missing_columns; col++) {
+						Column * new_col = new Column(tr("new_by_import") + QString::number(col+1), SciDAVis::Text);
+						new_col->setPlotDesignation(SciDAVis::Y);
+						table->d_future_table->addChild(new_col);
+					}
+					Q_ASSERT(table->columnCount() >= temp->columnCount());
+					int start_row = table->rowCount();
+					table->d_future_table->setRowCount(table->rowCount() + temp->rowCount());
+					for (int col=0; col<temp->columnCount(); col++)
+					{
+						Column * src_col = temp->column(col);
+						Column * dst_col = table->column(col);
+						Q_ASSERT(src_col->dataType() == dst_col->dataType());
+						dst_col->copy(src_col, 0, start_row, src_col->rowCount());
+					}
+					break;
+				}
+			case ImportASCIIDialog::Overwrite:
 				{
 					if (table->rowCount() < temp->rowCount())
 						table->d_future_table->setRowCount(temp->rowCount());
 					for (int col=0; col<table->columnCount() && col<temp->columnCount(); col++)
 					{
 						Column * src_col = temp->column(col);
-						Q_ASSERT(src_col->dataType() == SciDAVis::TypeQString);
 						Column * dst_col = table->column(col);
-						for (int j=0; j<temp->rowCount(); j++)
-							dst_col->asStringColumn()->setTextAt(j, src_col->textAt(j));
+						Q_ASSERT(src_col->dataType() == dst_col->dataType());
+						dst_col->copy(src_col, 0, 0, temp->rowCount());
 					}
 					if (temp->columnCount() > table->columnCount())
 					{
@@ -3358,21 +3337,16 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 						while (temp->d_future_table->childCount() > 0)
 							temp->d_future_table->reparentChild(table->d_future_table, temp->d_future_table->child(0));
 					}
-					table->setWindowLabel(files.join("; "));
-					table->setCaptionPolicy(MyWidget::Name);
-					table->notifyChanges();
-					emit modifiedProject(table);
+					break;
 				}
-				delete temp;
-				if (table)
-				{
-					table->setCaptionPolicy(MyWidget::Both);
-					setListViewLabel(table->name(), files[0]);
-					modifiedProject(table);
-				}
-				break;
-			}
+		}
+		delete temp;
 	}
+
+	table->setWindowLabel(files.join("; "));
+	table->notifyChanges();
+	emit modifiedProject(table);
+	modifiedProject();
 }
 
 void ApplicationWindow::open()

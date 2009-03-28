@@ -160,7 +160,12 @@ void AbstractAspect::reparentChild(AbstractAspect *new_parent, AbstractAspect *c
 	Q_ASSERT(indexOfChild(child) != -1);
 	Q_ASSERT(new_index > 0 && new_index <= new_parent->childCount());
 	Q_ASSERT(new_parent != NULL);
+	QString new_name = new_parent->d_aspect_private->uniqueNameFor(child->name());
 	beginMacro(tr("%1: move %2 to %3.").arg(name()).arg(child->name()).arg(new_parent->name()));
+	if (new_name != child->name()) {
+		info(tr("Renaming \"%1\" to \"%2\" in order to avoid name collision.").arg(child->name()).arg(new_name));
+		child->setName(new_name);
+	}
 	prepareAspectRemoval(child);
 	exec(new AspectChildReparentCmd(d_aspect_private, new_parent->d_aspect_private, child, new_index));
 	new_parent->completeAspectInsertion(child, new_index);
