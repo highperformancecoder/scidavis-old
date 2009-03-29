@@ -314,7 +314,6 @@ class Column : public AbstractColumn
 		ColumnStringIO * d_string_io;
 
 		friend class ColumnStringIO;
-		friend class Column::Private;
 };
 
 //! String-IO interface of Column.

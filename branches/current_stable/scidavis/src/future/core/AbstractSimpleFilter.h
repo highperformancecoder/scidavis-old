@@ -242,7 +242,7 @@ class AbstractSimpleFilter : public AbstractFilter
 		//! Return all intervals of invalid rows
 		virtual QList< Interval<int> > invalidIntervals() const 
 		{
-			return d_inputs.value(0) ? d_inputs.at(0)->maskedIntervals() : QList< Interval<int> >(); 
+			return d_inputs.value(0) ? d_inputs.at(0)->invalidIntervals() : QList< Interval<int> >(); 
 		}
 
 		//! \name XML related functions

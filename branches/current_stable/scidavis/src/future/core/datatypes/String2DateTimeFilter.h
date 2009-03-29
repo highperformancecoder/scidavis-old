@@ -84,6 +84,29 @@ class String2DateTimeFilter : public AbstractSimpleFilter
 		virtual QDateTime dateTimeAt(int row) const;
 		virtual QDate dateAt(int row) const { return dateTimeAt(row).date(); }
 		virtual QTime timeAt(int row) const { return dateTimeAt(row).time(); }
+		virtual bool isInvalid(int row) const { 
+			const AbstractColumn *col = d_inputs.value(0);
+			if (!col) return false;
+			return !(dateTimeAt(row).isValid()) || col->isInvalid(row);
+		}
+		virtual bool isInvalid(Interval<int> i) const {
+			if (!d_inputs.value(0)) return false;
+			for (int row = i.start(); row <= i.end(); row++) {
+				if (!isInvalid(row))
+					return false;
+			}
+			return true;
+		}
+		virtual QList< Interval<int> > invalidIntervals() const 
+		{
+			IntervalAttribute<bool> validity;
+			if (d_inputs.value(0)) {
+				int rows = d_inputs.value(0)->rowCount();
+				for (int i=0; i<rows; i++) 
+					validity.setValue(i, isInvalid(i));
+			}
+			return validity.intervals();
+		}
 
 	protected:
 		//! Using typed ports: only string inputs are accepted.

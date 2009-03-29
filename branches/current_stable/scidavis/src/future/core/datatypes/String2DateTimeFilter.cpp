@@ -64,10 +64,11 @@ QDateTime String2DateTimeFilter::dateTimeAt(int row) const
 {
 	if (!d_inputs.value(0)) return QDateTime();
 	QString input_value = d_inputs.value(0)->textAt(row);
+	if (input_value.isEmpty()) return QDateTime();
 
 	// first try the selected format string d_format
 	QDateTime result = QDateTime::fromString(input_value, d_format);
-	if(result.date().isValid() || result.time().isValid())
+	if(result.isValid())
 		return result;
 
 	// fallback:
@@ -102,7 +103,7 @@ QDateTime String2DateTimeFilter::dateTimeAt(int row) const
 			break;
 	}
 
-	if(!date_result.isValid())
+	if(!date_result.isValid() && time_result.isValid())
 		date_result.setDate(1900,1,1);	// this is what QDateTime does e.g. for
 													// QDateTime::fromString("00:00","hh:mm");
 	return QDateTime(date_result, time_result);

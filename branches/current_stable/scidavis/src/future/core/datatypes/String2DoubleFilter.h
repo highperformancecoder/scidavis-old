@@ -33,6 +33,7 @@
 #include <QLocale>
 #include "lib/XmlStreamReader.h"
 #include <QXmlStreamWriter>
+#include <QtDebug>
 
 //! Locale-aware conversion filter QString -> double.
 class String2DoubleFilter : public AbstractSimpleFilter
@@ -40,12 +41,49 @@ class String2DoubleFilter : public AbstractSimpleFilter
 	Q_OBJECT
 
 	public:
-		void setNumericLocale(QLocale locale) { d_numeric_locale = locale; }
+		String2DoubleFilter() : d_use_default_locale(true) {}
+		void setNumericLocale(QLocale locale) { d_numeric_locale = locale; d_use_default_locale = false; }
+		void setNumericLocaleToDefault() { d_use_default_locale = true; }
 
 		virtual double valueAt(int row) const {
 			if (!d_inputs.value(0)) return 0;
+			if (d_use_default_locale) // we need a new QLocale instance here in case the default changed since the last call
+				return QLocale().toDouble(d_inputs.value(0)->textAt(row));
 			return d_numeric_locale.toDouble(d_inputs.value(0)->textAt(row));
 		}
+		virtual bool isInvalid(int row) const { 
+			if (!d_inputs.value(0)) return false;
+			bool ok;
+			if (d_use_default_locale)
+				QLocale().toDouble(d_inputs.value(0)->textAt(row), &ok);
+			else
+				d_numeric_locale.toDouble(d_inputs.value(0)->textAt(row), &ok);
+			return !ok;
+		}
+		virtual bool isInvalid(Interval<int> i) const {
+			if (!d_inputs.value(0)) return false;
+			QLocale locale;
+			if (!d_use_default_locale)
+				locale = d_numeric_locale;
+			for (int row = i.start(); row <= i.end(); row++) {
+				bool ok;
+				locale.toDouble(d_inputs.value(0)->textAt(row), &ok);
+				if (ok)
+					return false;
+			}
+			return true;
+		}
+		virtual QList< Interval<int> > invalidIntervals() const 
+		{
+			IntervalAttribute<bool> validity;
+			if (d_inputs.value(0)) {
+				int rows = d_inputs.value(0)->rowCount();
+				for (int i=0; i<rows; i++) 
+					validity.setValue(i, isInvalid(i));
+			}
+			return validity.intervals();
+		}
+
 
 		//! Return the data type of the column
 		virtual SciDAVis::ColumnDataType dataType() const { return SciDAVis::TypeDouble; }
@@ -58,6 +96,7 @@ class String2DoubleFilter : public AbstractSimpleFilter
 
 	private:
 		QLocale d_numeric_locale;
+		bool d_use_default_locale;
 };
 
 #endif // ifndef STRING2DOUBLE_FILTER_H
