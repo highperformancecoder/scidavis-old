@@ -25,7 +25,7 @@ win32:LIBS        += c:/gsl/lib/libgslcblas.a
 # Dynamically link against GSL installed system-wide.
 # This is used as default on unix systems such as
 # Linux, Mac OS X and *BSD.
-unix:LIBS += -L /usr/lib$${libsuff} -lgsl -lgslcblas
+unix:LIBS += -L/usr/lib$${libsuff} -lgsl -lgslcblas
 
 # where to install the plugins
 unix:target.path=/usr/lib$${libsuff}/scidavis/plugins

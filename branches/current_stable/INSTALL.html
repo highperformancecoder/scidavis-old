@@ -254,30 +254,11 @@ SUBDIRS += fitPlugins/fitRational0\
 
 			<li value=24> Type "make". The same option "clean" of make in (7) is still applicable here. </li>
 
+			<li value=25> Change to the directory scidavis*/ and type "qmake -spec macx-g++" </li>
 
-			<li value=25> Change to the directory scidavis*/fitplugins/fitrational0. </li>
+			<li value=26> Type "sudo make" </li>
 
-			<li value=26> Open fitrational0.pro with any text editor, and remove the white space between -L and /usr/........... in the line "unix:LIBS += -L /usr/lib$${libsuff} -lgsl -lgslcblas" </li>
-
-
-			<li value=27> Change to the directory scidavis*/fitplugins/fitrational1. </li>
-
-			<li value=28> Open fitrational1.pro with any text editor, and remove the white space between -L and /usr/........... in the line "unix:LIBS += -L /usr/lib$${libsuff} -lgsl -lgslcblas" </li>
-
-
-			<li value=29> Open scidavis*/scidavis/src/future/core/AbstractAspect.h with any text editor </li>
-
-			<li value=30> Add "#include <QXmlStreamWriter>" but remove "class QXmlStreamWriter;" to account a Qt XML bug in Mac OS X. The related discussions can be found at: 
-			<a href="https://sourceforge.net/forum/forum.php?thread_id=2177079&forum_id=708156">https://sourceforge.net/forum/forum.php?thread_id=2177079&forum_id=708156</a>
-			<a href="http://lists.trolltech.com/qt-interest/2008-07/thread00798-0.html">http://lists.trolltech.com/qt-interest/2008-07/thread00798-0.html</a>
-			</li>
-
-
-			<li value=31> Back to scidavis*/ and type "qmake -spec macx-g++" </li>
-
-			<li value=32> Type "sudo make" </li>
-
-			<li value=33> As the building ends up with no error, the scidavis application will be in scidavis*/scidavis. Unfortunately, the icon seems missed for some unknown reason and shows as a generic application icon. </li>
+			<li value=27> As the building ends up with no error, the scidavis application will be in scidavis*/scidavis. Unfortunately, the icon seems missed for some unknown reason and shows as a generic application icon. </li>
 			</ol>
 
 			<b>(II) Building Universal Binaries (UB):</b><br>

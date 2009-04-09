@@ -44,7 +44,14 @@ namespace future{
 class Folder;
 }
 class XmlStreamReader;
+#ifdef Q_OS_MAC32
+// A hack in Qt 4.4 and later forces us to include QXmlStream* headers on MacOS instead of simple
+// forward declarations. See
+// http://lists.trolltech.com/qt-interest/2008-07/thread00798-0.html
+#include <QXmlStreamWriter>
+#else
 class QXmlStreamWriter;
+#endif
 class QAction;
 
 //! Base class of all persistent objects in a Project.
