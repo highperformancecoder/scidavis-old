@@ -4951,10 +4951,12 @@ void ApplicationWindow::saveProjectAs()
 				fn.append(".gz");
 		}
 		projectname = fn;
+		if (projectname.endsWith(".gz"))
+			projectname = projectname.left(projectname.length() -3);
 		if (saveProject())
 		{
-			recentProjects.remove(projectname);
-			recentProjects.push_front(projectname);
+			recentProjects.remove(fn);
+			recentProjects.push_front(fn);
 			updateRecentProjectsList();
 
 			QFileInfo fi(fn);
@@ -4962,7 +4964,7 @@ void ApplicationWindow::saveProjectAs()
 			FolderListItem *item = (FolderListItem *)folders->firstChild();
 			item->setText(0, baseName);
 			item->folder()->setName(baseName);
-			if (baseName.endsWith(".gz"))
+			if (fn.endsWith(".gz"))
 			{
 				fn = fn.left(fn.size() - 3);
 				file_compress((char *)fn.toAscii().constData(), "wb9");
