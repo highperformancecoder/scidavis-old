@@ -9133,8 +9133,8 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 		if (*line == "<data>") line++;
 
 
-		// TODO: is signal blocking necessary here?
-		// w->table()->blockSignals(true);
+		QTime t;
+		t.start();
 		//read and set table values
 		for (; line!=flist.end() && *line != "</data>"; line++)
 		{
@@ -9153,9 +9153,12 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 				else
 					w->setText(row, col, cell);
 			}
-			qApp->processEvents(QEventLoop::ExcludeUserInput);
+			if (t.elapsed() > 1000)
+			{
+				QApplication::processEvents(QEventLoop::ExcludeUserInput);
+				t.start();
+			}
 		}
-		//    w->table()->blockSignals(false);
 
 		return w;
 	}
@@ -9240,8 +9243,6 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 		QTime t;
 		t.start();
 		QApplication::setOverrideCursor(Qt::WaitCursor);
-		/// TODO: is any blocking necessary here?
-		///	w->table()->blockSignals(true);
 		for (line++; line!=flist.end() && *line != "</data>"; line++)
 		{//read and set table values
 			QStringList fields = (*line).split("\t");
@@ -9261,15 +9262,13 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 						w->setText(row, col, cell);
 				}
 			}
-			if (t.elapsed() > 100)
+			if (t.elapsed() > 1000)
 			{
 				QApplication::processEvents(QEventLoop::ExcludeUserInput);
 				t.start();
 			}
 		}
 		QApplication::restoreOverrideCursor();
-
-		////	w->table()->blockSignals(false);
 
 		return w;
 	}
