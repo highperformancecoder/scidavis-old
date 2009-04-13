@@ -1,5 +1,5 @@
 /***************************************************************************
-    File                 : muParserScripting.h
+    File                 : MuParserScripting.h
     Project              : SciDAVis
     --------------------------------------------------------------------
 
@@ -35,7 +35,7 @@
 
 #include "ScriptingEnv.h"
 #include "Script.h"
-#include "muParserScript.h"
+#include "MuParserScript.h"
 
 #include <muParser.h>
 #include "math.h"
@@ -43,19 +43,19 @@
 #include <q3asciidict.h>
 
 //! TODO
-class muParserScripting: public ScriptingEnv
+class MuParserScripting: public ScriptingEnv
 {
   Q_OBJECT
 
   public:
     static const char *langName;
-    muParserScripting(ApplicationWindow *parent) : ScriptingEnv(parent, langName) { d_initialized=true; }
-    static ScriptingEnv *constructor(ApplicationWindow *parent) { return new muParserScripting(parent); }
+    MuParserScripting(ApplicationWindow *parent) : ScriptingEnv(parent, langName) { d_initialized=true; }
+    static ScriptingEnv *constructor(ApplicationWindow *parent) { return new MuParserScripting(parent); }
 
     bool isRunning() const { return true; }
     Script *newScript(const QString &code, QObject *context, const QString &name="<input>")
     {
-      return new muParserScript(this, code, context, name);
+      return new MuParserScript(this, code, context, name);
     }
 
     // we do not support global variables

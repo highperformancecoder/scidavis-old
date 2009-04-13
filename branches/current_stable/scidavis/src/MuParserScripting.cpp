@@ -1,5 +1,5 @@
 /***************************************************************************
-    File                 : muParserScripting.cpp
+    File                 : MuParserScripting.cpp
     Project              : SciDAVis
     --------------------------------------------------------------------
 
@@ -30,8 +30,8 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#include "muParserScript.h"
-#include "muParserScripting.h"
+#include "MuParserScript.h"
+#include "MuParserScripting.h"
 #include "Table.h"
 #include "Matrix.h"
 
@@ -39,11 +39,11 @@
 
 using namespace mu;
 
-const char* muParserScripting::langName = "muParser";
+const char* MuParserScripting::langName = "muParser";
 
 // functions without function pointer (fun1,fun2,fun3 == NULL,NULL,NULL) are implemented
 // in mu::Parser
-const muParserScripting::mathFunction muParserScripting::math_functions[] = {
+const MuParserScripting::mathFunction MuParserScripting::math_functions[] = {
   { "abs", 1, NULL,NULL,NULL, "abs(x):\n Absolute value of x." },
   { "acos", 1, NULL,NULL,NULL, "acos(x):\n Inverse cos function." },
   { "acosh", 1, NULL,NULL,NULL, "acosh(x):\n Hyperbolic inverse cos function." },
@@ -94,7 +94,7 @@ const muParserScripting::mathFunction muParserScripting::math_functions[] = {
   {0,0,NULL,NULL,NULL,0}
 };
   
-const QStringList muParserScripting::mathFunctions() const
+const QStringList MuParserScripting::mathFunctions() const
 {
   QStringList l;
   for (const mathFunction *i=math_functions; i->name; i++)
@@ -102,7 +102,7 @@ const QStringList muParserScripting::mathFunctions() const
   return l;
 }
 
-const QString muParserScripting::mathFunctionDoc (const QString &name) const
+const QString MuParserScripting::mathFunctionDoc (const QString &name) const
 {
   for (const mathFunction *i=math_functions; i->name; i++)
     if (name==i->name)

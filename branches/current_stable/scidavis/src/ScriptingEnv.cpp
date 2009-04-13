@@ -32,8 +32,8 @@
 #include <string.h>
 
 #ifdef SCRIPTING_MUPARSER
-#include "muParserScript.h"
-#include "muParserScripting.h"
+#include "MuParserScript.h"
+#include "MuParserScripting.h"
 #endif
 #ifdef SCRIPTING_PYTHON
 #include "PythonScript.h"

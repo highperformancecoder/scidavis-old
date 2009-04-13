@@ -1,8 +1,8 @@
 DEFINES += SCRIPTING_MUPARSER
 
-HEADERS += src/muParserScript.h \
-           src/muParserScripting.h \
+HEADERS += src/MuParserScript.h \
+           src/MuParserScripting.h \
 
-SOURCES += src/muParserScript.cpp \
-           src/muParserScripting.cpp \
+SOURCES += src/MuParserScript.cpp \
+           src/MuParserScripting.cpp \
 
