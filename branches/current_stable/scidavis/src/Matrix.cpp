@@ -378,7 +378,7 @@ void Matrix::saveCellsToMemory()
 	dMatrix = allocateMatrixData(rows, cols);
 	for (int i=0; i<rows; i++)
         for (int j=0; j<cols; j++)
-            dMatrix[i][j] = cell(i, j);
+            dMatrix[i][j] = d_future_matrix->cell(i, j);
 }
 
 void Matrix::forgetSavedCells()

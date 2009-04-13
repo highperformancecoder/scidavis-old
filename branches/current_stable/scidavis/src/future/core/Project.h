@@ -65,7 +65,7 @@ class Project : public future::Folder
 		virtual const Project *project() const { return this; }
 		virtual Project *project() { return this; }
 		virtual QUndoStack *undoStack() const;
-		virtual QString path() const { return name(); }
+		virtual QString path() const { return ""; }
 #ifndef LEGACY_CODE_0_2_x
 		virtual ProjectWindow *view();
 #else
