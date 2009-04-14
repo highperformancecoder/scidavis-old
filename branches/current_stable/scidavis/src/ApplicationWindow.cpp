@@ -9286,6 +9286,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 		reader.readNext();
 		reader.readNext(); // read the start document
 		w->d_future_table->load(&reader);
+		w->setBirthDate(w->d_future_table->creationTime().toString(Qt::LocalDate));
 		restoreWindowGeometry(app, w, flist.at(index));
 
 		return w;

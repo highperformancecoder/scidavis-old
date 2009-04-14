@@ -115,6 +115,8 @@ QString Integration::logInfo()
 			S[0]=0.5*(d_to-d_from)*(ylow+yup);
 		else
 		{
+			h[j] = 0.25*h[j-1];
+			S[j] = S[j-1];
 			for(it=1,l=1;l<j-1;l++)it<<=1;
 			tnm=it;
 			del=(d_to-d_from)/tnm;
@@ -138,8 +140,6 @@ QString Integration::logInfo()
 			polint(&h[j-d_method],&S[j-d_method],d_method,0,&ss,&dss);
 			S[j]=ss;
 		}
-		h[j+1]=0.25*h[j];
-		S[j+1]=S[j];
 		error=fabs(S[j]-S[j-1]);
 		if(error<=d_tolerance) success = true;
 		if(success) break;
