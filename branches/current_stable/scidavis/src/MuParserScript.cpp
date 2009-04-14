@@ -541,7 +541,7 @@ bool MuParserScript::translateLegacyFunctions(QString &input) {
 		}
 		arguments << currentArgument;
 
-		// select replacement functions call
+		// select replacement function call
 		Table *table = qobject_cast<Table *>(Context);
 		if (legacyFunction.cap(2) == "col") {
 			QString columnArgument;
@@ -647,7 +647,7 @@ bool MuParserScript::compile(bool asFunction) {
 	QString intermediate = Code.trimmed(); // pre-processed version of #Code
 
 	// remove comments
-	intermediate.remove(QRegExp("#[^\n](\n|$)"));
+	intermediate.remove(QRegExp("#[^\n]*(\n|$)"));
 
 	// simplify statement separators
 	intermediate.replace(QRegExp("([;\\n]\\s*)+"),"; ");
@@ -658,7 +658,7 @@ bool MuParserScript::compile(bool asFunction) {
 			return false;
 
 	try {
-		m_parser.SetExpr(intermediate.toAscii().data());
+		m_parser.SetExpr(qPrintable(intermediate));
 	} catch (mu::ParserError &e) {
 		emit_error(QString::fromLocal8Bit(e.GetMsg().c_str()), 0);
 		return false;
