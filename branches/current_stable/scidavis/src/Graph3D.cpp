@@ -1211,176 +1211,80 @@ QStringList Graph3D::scaleTicks()
 
 void Graph3D::updateScale(int axis,const QStringList& options)
 {
-	QString st=QString::number(scaleType[axis]);
-	double start,stop;
-	double xl,xr,yl,yr;
-	int majors,minors, newMaj, newMin;
+	double xMin,xMax,yMin,yMax,zMin,zMax;
+	double *min, *max;
+	int majors, minors, newMaj, newMin;
+	Qwt3D::Axis *targetAxes[4];
 
 	sp->makeCurrent();
-	switch(axis)
-	{
+
+	switch (axis) {
 		case 0:
-			majors=sp->coordinates()->axes[X1].majors ();
-  	        minors=sp->coordinates()->axes[X1].minors ();
-			sp->coordinates()->axes[X1].limits(xl,xr);
-			if (xl !=options[0].toDouble() || xr != options[1].toDouble())
-			{
-				xl=options[0].toDouble();
-				xr=options[1].toDouble();
-				sp->coordinates()->axes[Y1].limits(yl,yr);
-				sp->coordinates()->axes[Z1].limits(start,stop);
-
-				if (func)
-				{
-					func->setDomain(xl,xr,yl,yr);
-					func->create ();
-					sp->createCoordinateSystem(Triple(xl, yl, start), Triple(xr, yr, stop));
-				}
-				else
-					updateScales(xl, xr, yl, yr, start, stop);
-			}
-
-			if(st != options[4])
-			{
-				if (options[4]=="0")
-				{
-					sp->coordinates()->axes[X1].setScale (LINEARSCALE);
-					scaleType[axis]=0;
-				}
-				else
-				{
-					sp->coordinates()->axes[X1].setScale (LOG10SCALE);
-					scaleType[axis]=1;
-				}
-			}
-
-			newMaj= options[2].toInt();
-			if (majors != newMaj)
-			{
-				sp->coordinates()->axes[X1].setMajors(newMaj);
-				sp->coordinates()->axes[X2].setMajors(newMaj);
-				sp->coordinates()->axes[X3].setMajors(newMaj);
-				sp->coordinates()->axes[X4].setMajors(newMaj);
-			}
-
-			newMin= options[3].toInt();
-			if (minors != newMin)
-			{
-				sp->coordinates()->axes[X1].setMinors(newMin);
-				sp->coordinates()->axes[X2].setMinors(newMin);
-				sp->coordinates()->axes[X3].setMinors(newMin);
-				sp->coordinates()->axes[X4].setMinors(newMin);
-			}
+			targetAxes[0] = &sp->coordinates()->axes[X1];
+			targetAxes[1] = &sp->coordinates()->axes[X2];
+			targetAxes[2] = &sp->coordinates()->axes[X3];
+			targetAxes[3] = &sp->coordinates()->axes[X4];
+			min = &xMin; max = &xMax;
 			break;
-
 		case 1:
-			majors=sp->coordinates()->axes[Y1].majors ();
-  	        minors=sp->coordinates()->axes[Y1].minors ();
-			sp->coordinates()->axes[Y1].limits(yl,yr);
-			if (yl != options[0].toDouble() || yr != options[1].toDouble())
-			{
-				yl=options[0].toDouble();
-				yr=options[1].toDouble();
-				sp->coordinates()->axes[X1].limits(xl,xr);
-				sp->coordinates()->axes[Z1].limits(start,stop);
-
-				if (func)
-				{
-					func->setDomain(xl,xr,yl,yr);
-					func->create ();
-					sp->createCoordinateSystem(Triple(xl, yl, start), Triple(xr, yr, stop));
-				}
-				else
-					updateScales(xl, xr, yl, yr,start,stop);
-			}
-
-			newMaj= options[2].toInt();
-			if (majors != newMaj )
-			{
-				sp->coordinates()->axes[Y1].setMajors(newMaj);
-				sp->coordinates()->axes[Y2].setMajors(newMaj);
-				sp->coordinates()->axes[Y3].setMajors(newMaj);
-				sp->coordinates()->axes[Y4].setMajors(newMaj);
-			}
-
-			minors=sp->coordinates()->axes[Y1].minors ();
-			if (minors != newMin)
-			{
-				sp->coordinates()->axes[Y1].setMinors(newMin);
-				sp->coordinates()->axes[Y2].setMinors(newMin);
-				sp->coordinates()->axes[Y3].setMinors(newMin);
-				sp->coordinates()->axes[Y4].setMinors(newMin);
-			}
-
-			if(st != options[4])
-			{
-				if (options[4]=="0")
-				{
-					sp->coordinates()->axes[Y1].setScale (LINEARSCALE);
-					scaleType[axis]=0;
-				}
-				else
-				{
-					sp->coordinates()->axes[Y1].setScale (LOG10SCALE);
-					scaleType[axis]=1;
-				}
-			}
+			targetAxes[0] = &sp->coordinates()->axes[Y1];
+			targetAxes[1] = &sp->coordinates()->axes[Y2];
+			targetAxes[2] = &sp->coordinates()->axes[Y3];
+			targetAxes[3] = &sp->coordinates()->axes[Y4];
+			min = &yMin; max = &yMax;
 			break;
-
 		case 2:
-			majors=sp->coordinates()->axes[Z1].majors();
-			minors=sp->coordinates()->axes[Z1].minors();
-			sp->coordinates()->axes[Z1].limits(start,stop);
-			if (start != options[0].toDouble() || stop != options[1].toDouble())
-			{
-				start=options[0].toDouble();
-				stop=options[1].toDouble();
-				sp->coordinates()->axes[X1].limits(xl,xr);
-  	            sp->coordinates()->axes[Y1].limits(yl,yr);
-				if (func)
-				{
-					func->setMinZ(start);
-					func->setMaxZ(stop);
-					func->create ();
-					sp->createCoordinateSystem(Triple(xl, yl, start), Triple(xr, yr, stop));
-				}
-				else
-					updateScales(xl, xr, yl, yr, start, stop);
-				sp->legend()->setLimits(start,stop);
-			}
-
-			newMaj= options[2].toInt();
-			if (majors != newMaj )
-			{
-				sp->coordinates()->axes[Z1].setMajors(newMaj);
-				sp->coordinates()->axes[Z2].setMajors(newMaj);
-				sp->coordinates()->axes[Z3].setMajors(newMaj);
-				sp->coordinates()->axes[Z4].setMajors(newMaj);
-			}
-
-			newMin = options[3].toInt();
-			if (minors != newMin)
-			{
-				sp->coordinates()->axes[Z1].setMinors(newMin);
-				sp->coordinates()->axes[Z2].setMinors(newMin);
-				sp->coordinates()->axes[Z3].setMinors(newMin);
-				sp->coordinates()->axes[Z4].setMinors(newMin);
-			}
-			if(st != options[4])
-  	        {
-  	         	if (options[4]=="0")
-  	            {
-  	             	sp->coordinates()->axes[Z1].setScale (LINEARSCALE);
-  	            	scaleType[axis]=0;
-  	            }
-  	            else
-  	            {
-  	            	sp->coordinates()->axes[Z1].setScale (LOG10SCALE);
-  	                scaleType[axis]=1;
-  	            }
-  	        }
+			targetAxes[0] = &sp->coordinates()->axes[Z1];
+			targetAxes[1] = &sp->coordinates()->axes[Z2];
+			targetAxes[2] = &sp->coordinates()->axes[Z3];
+			targetAxes[3] = &sp->coordinates()->axes[Z4];
+			min = &zMin; max = &zMax;
 			break;
 	}
+
+	majors = targetAxes[0]->majors();
+	minors = targetAxes[0]->minors();
+
+	sp->coordinates()->axes[X1].limits(xMin,xMax);
+	sp->coordinates()->axes[Y1].limits(yMin,yMax);
+	sp->coordinates()->axes[Z1].limits(zMin,zMax);
+
+	if (*min != options[0].toDouble() || *max != options[1].toDouble()) {
+			*min = options[0].toDouble();
+			*max = options[1].toDouble();
+			if (func) {
+					func->setDomain(xMin, xMax, yMin, yMax);
+					func->setMinZ(zMin); func->setMaxZ(zMax);
+					func->create();
+					sp->createCoordinateSystem(Triple(xMin, yMin, zMin), Triple(xMax, yMax, zMax));
+			} else
+					updateScales(xMin, xMax, yMin, yMax, zMin, zMax);
+			sp->legend()->setLimits(zMin, zMax);
+	}
+
+	if (QString::number(scaleType[axis]) != options[4]) {
+			if (options[4] == "0") {
+					targetAxes[0]->setScale(LINEARSCALE);
+					if (axis == 2) sp->legend()->setScale(LINEARSCALE);
+					scaleType[axis] = 0;
+			} else {
+					targetAxes[0]->setScale(LOG10SCALE);
+					if (axis == 2) sp->legend()->setScale(LOG10SCALE);
+					scaleType[axis] = 1;
+			}
+	}
+
+
+	newMaj = options[2].toInt();
+	if (majors != newMaj)
+			for (int i=0; i<4; i++)
+					targetAxes[i]->setMajors(newMaj);
+
+	newMin = options[3].toInt();
+	if (minors != newMin)
+			for (int i=0; i<4; i++)
+					targetAxes[i]->setMinors(newMin);
+
 	update();
 	emit modified();
 }

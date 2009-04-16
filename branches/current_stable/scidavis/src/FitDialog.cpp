@@ -1267,10 +1267,10 @@ void FitDialog::fitBuiltInFunction(const QString& function, double* initVal)
 		d_fitter = new MultiPeakFit(app, d_graph, MultiPeakFit::Gauss, polynomOrderBox->value());
 	else if (function == "Lorentz")
 		d_fitter = new MultiPeakFit(app, d_graph, MultiPeakFit::Lorentz, polynomOrderBox->value());
-	else if (function == tr("Polynomial"))
+	else if (function == "Polynomial")
 		d_fitter = new PolynomialFit(app, d_graph, polynomOrderBox->value());
 
-	if (function != tr("Polynomial"))
+	if (function != "Polynomial")
 		d_fitter->setInitialGuesses(initVal);
 }
 
