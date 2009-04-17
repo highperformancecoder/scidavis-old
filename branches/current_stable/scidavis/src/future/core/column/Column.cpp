@@ -546,9 +546,6 @@ bool Column::XmlReadRow(XmlStreamReader * reader)
 		return false;
 	}
 
-	str = attribs.value(reader->namespaceUri().toString(), "invalid").toString();
-	if(str == "yes") setInvalid(index);
-
 	str = reader->readElementText();
 	switch(dataType())
 	{
@@ -572,6 +569,10 @@ bool Column::XmlReadRow(XmlStreamReader * reader)
 			setDateTimeAt(index, date_time);
 			break;
 	}
+
+	str = attribs.value(reader->namespaceUri().toString(), "invalid").toString();
+	if(str == "yes") setInvalid(index);
+
 
 	return true;
 }
