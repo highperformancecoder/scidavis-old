@@ -170,9 +170,9 @@ MuParserScript::MuParserScript(ScriptingEnv *environment, const QString &code, Q
 
 	// tell parser about table/matrix access functions
 	if (Context && Context->inherits("Table")) {
-		m_parser.DefineFun("column", tableColumnFunction);
-		m_parser.DefineFun("column_", tableColumn_Function);
-		m_parser.DefineFun("column__", tableColumn__Function);
+		m_parser.DefineFun("column", tableColumnFunction, false);
+		m_parser.DefineFun("column_", tableColumn_Function, false);
+		m_parser.DefineFun("column__", tableColumn__Function, false);
 		m_parser.DefineFun("cell", tableCellFunction);
 		m_parser.DefineFun("cell_", tableCell_Function);
 	} else if (Context && Context->inherits("Matrix"))
