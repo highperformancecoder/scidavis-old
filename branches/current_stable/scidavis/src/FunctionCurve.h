@@ -62,7 +62,7 @@ public:
 	void copy(FunctionCurve *f);
 
 	//! Returns a string that can be displayed in a plot legend
-	QString legend();
+	QString legend() const;
 
 	bool loadData(int points = 0);
 

@@ -64,7 +64,7 @@ void FunctionCurve::copy(FunctionCurve* f)
 	d_to = f->endRange();
 }
 
-QString FunctionCurve::legend()
+QString FunctionCurve::legend() const
 {
 	QString label = title().text() + ": ";
 	if (d_function_type == Normal)

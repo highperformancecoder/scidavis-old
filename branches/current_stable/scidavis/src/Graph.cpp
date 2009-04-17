@@ -1808,7 +1808,11 @@ QString Graph::legendText()
 			text+="\\c{";
 			text+=QString::number(i+1);
 			text+="}";
-			text+=c->title().text();
+			const FunctionCurve *fc = dynamic_cast<const FunctionCurve*>(c);
+			if (fc)
+				text += fc->legend();
+			else
+				text += c->title().text();
 			text+="\n";
 		}
 	}

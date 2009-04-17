@@ -8360,23 +8360,11 @@ void ApplicationWindow::updateFunctionLists(int type, QStringList &formulas)
 
 bool ApplicationWindow::newFunctionPlot(int type,QStringList &formulas, const QString& var, QList<double> &ranges, int points)
 {
-	FunctionCurve *c = new FunctionCurve(this, (FunctionCurve::FunctionType)type, tr("F")+"1");
-	c->setPen(QPen(QColor(Qt::black), 1));
-	c->setRange(ranges[0], ranges[1]);
-	c->setFormulas(formulas);
-	c->setVariable(var);
-	if (!c->loadData(points)) {
-		delete c;
-		return false;
-	}
-
 	MultiLayer *ml = newGraph();
-	if (!ml) {
-		delete c;
-		return false;
-	}
+	if (!ml) return false;
 
-	ml->activeGraph()->insertPlotItem(c, Graph::Line);
+	if (!ml->activeGraph()->addFunctionCurve(this, type, formulas, var, ranges, points))
+		return false;
 
 	updateFunctionLists(type, formulas);
 	return true;
