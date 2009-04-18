@@ -510,7 +510,7 @@ bool Column::Private::copy(const AbstractColumn * source, int source_start, int 
 	}
 	// copy the validity information
 	for(int i=0; i<num_rows; i++)
-		setInvalid(dest_start+i, source->isInvalid(source_start+i));
+		d_validity.setValue(dest_start+i, source->isInvalid(source_start+i));
 
 	emit d_owner->dataChanged(d_owner);
 
@@ -588,7 +588,7 @@ bool Column::Private::copy(const Private * source, int source_start, int dest_st
 	}
 	// copy the validity information
 	for(int i=0; i<num_rows; i++)
-		setInvalid(dest_start+i, source->isInvalid(source_start+i));
+		d_validity.setValue(dest_start+i, source->isInvalid(source_start+i));
 
 	emit d_owner->dataChanged(d_owner);
 
