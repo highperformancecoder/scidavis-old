@@ -137,7 +137,7 @@ class Graph: public QWidget
 		QString parentPlotName();
 
 		//! Change the active tool, deleting the old one if it exists.
-		void setActiveTool(PlotToolInterface *tool) { if(d_active_tool) delete d_active_tool; d_active_tool=tool; }
+		void setActiveTool(PlotToolInterface *tool);
 		//! Return the active tool, or NULL if none is active.
 		PlotToolInterface* activeTool() const { return d_active_tool; }
 

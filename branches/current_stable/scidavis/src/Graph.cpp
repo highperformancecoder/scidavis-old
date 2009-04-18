@@ -4909,6 +4909,19 @@ void Graph::openBoxDiagram(Table *w, const QStringList& l, int fileVersion)
 	c->setWhiskersRange(l[25].toInt(), l[26].toDouble());
 }
 
+void Graph::setActiveTool(PlotToolInterface *tool) {
+	if (d_active_tool) delete d_active_tool;
+	d_active_tool = tool;
+	if (d_range_selector) {
+		if (tool)
+			// we want to use tool now, so disable range selection
+			d_range_selector->setEnabled(false);
+		else
+			// re-enable range selection
+			d_range_selector->setEnabled(true);
+	}
+}
+
 void Graph::disableTools()
 {
 	if (zoomOn())
@@ -4922,8 +4935,8 @@ void Graph::disableTools()
 
 bool Graph::enableRangeSelectors(const QObject *status_target, const char *status_slot)
 {
-	if (d_range_selector)
-		delete d_range_selector;
+	// disable other tools, otherwise it's undefined what tool should handle mouse clicks
+	disableTools();
 	d_range_selector = new RangeSelectorTool(this, status_target, status_slot);
 	connect(d_range_selector, SIGNAL(changed()), this, SIGNAL(dataRangeChanged()));
 	return true;
