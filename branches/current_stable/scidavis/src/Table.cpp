@@ -1359,3 +1359,28 @@ void Table::handleAspectDescriptionChange(const AbstractAspect *aspect)
 	}
 }
 
+// this function is for backwards compatibility (used by Python), 
+// it does not support the latest features such as direct convertion to numerical data
+void Table::importASCII(const QString &fname, const QString &sep, int ignoredLines,
+		bool renameCols, bool stripSpaces, bool simplifySpaces, bool newTable) {
+  	Q_UNUSED(newTable)
+
+	AsciiTableImportFilter filter;
+	filter.set_ignored_lines(ignoredLines);
+	filter.set_separator(sep);
+	filter.set_first_row_names_columns(renameCols);
+	filter.set_trim_whitespace(stripSpaces);
+	filter.set_simplify_whitespace(simplifySpaces);
+
+	QFile file(fname);
+	if ( file.open(QIODevice::ReadOnly) )
+	{
+		future::Table *temp = static_cast<future::Table *>(filter.importAspect(&file));
+		if (temp) {
+			while (temp->childCount() > 0)
+				temp->reparentChild(d_future_table, temp->child(0));
+			setWindowLabel(fname);
+		}
+	}
+}
+

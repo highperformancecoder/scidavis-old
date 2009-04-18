@@ -219,8 +219,10 @@ public slots:
 
 	QString columnFormat(int col);
 
+	void importASCII(const QString &fname, const QString &sep, int ignoredLines,
+			bool renameCols, bool stripSpaces, bool simplifySpaces, bool newTable);
 	bool exportASCII(const QString& fname, const QString& separator,
-					bool withLabels = false, bool exportSelection = false);
+			bool withLabels = false, bool exportSelection = false);
 
 	//! \name Saving and Restoring
 	//@{

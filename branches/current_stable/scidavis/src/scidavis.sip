@@ -312,7 +312,7 @@ public:
 %End
   void notifyChanges();
 
-//  void importASCII(const QString&, const QString&="\t", int=0, bool=false, bool=true, bool=false, bool=false);
+  void importASCII(const QString&, const QString&="\t", int=0, bool=false, bool=true, bool=false, bool=false);
   bool exportASCII(const QString&, const QString&="\t", bool=false, bool=false);
   void normalize(SIP_PYOBJECT) /NoDerived/;
 %MethodCode
