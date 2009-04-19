@@ -343,6 +343,9 @@ bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
 {
 	if(!val) return false;
 	PyObject *pyobj=NULL;
+
+	PyGILState_STATE state = PyGILState_Ensure();
+
 	sipWrapperType * klass = sipFindClass(val->className());
 	if (!klass) return false;
 	pyobj = sipConvertFromInstance(val, klass, NULL);
@@ -353,6 +356,8 @@ bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
 	else
 		PyDict_SetItemString(globals,name,pyobj);
 	Py_DECREF(pyobj);
+
+	PyGILState_Release(state);
 	return true;
 }
 
