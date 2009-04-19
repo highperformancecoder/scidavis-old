@@ -146,3 +146,18 @@ Most important changes (since 0.2.0)
   crash (happens sometimes when SIP version at runtime differs from the one
   used at compile time)
 
+=== Release 0.2.2, 2009-04-19 ===
+Most important changes (since 0.2.1)
+- added Brazilian Portuguese translation by Fellype do Nascimento
+- fixed opening of legacy files with non-numeric data
+- fixed various crashes
+- fixed importing of numeric data as new rows or overwriting the current table
+- fixed various issues with invalid/empty cells
+- implemented a more sophisticated file-saving protocol, which is supposed to
+  protect against data loss in the event of a system crash shortly after saving
+  the file; see
+  http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54
+- performance improvements
+- Python function Table.importASCII() reimplemented, which was missing in
+  SciDAVis 0.2.0 and 0.2.1.
+
