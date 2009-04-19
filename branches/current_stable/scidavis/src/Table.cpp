@@ -34,6 +34,7 @@
 #include "lib/Interval.h"
 #include "table/TableModel.h"
 #include "core/datatypes/Double2StringFilter.h"
+#include "core/datatypes/String2DoubleFilter.h"
 #include "core/datatypes/DateTime2StringFilter.h"
 #include "table/AsciiTableImportFilter.h"
 #include "ScriptEdit.h"
@@ -1360,7 +1361,6 @@ void Table::handleAspectDescriptionChange(const AbstractAspect *aspect)
 }
 
 // this function is for backwards compatibility (used by Python), 
-// it does not support the latest features such as direct convertion to numerical data
 void Table::importASCII(const QString &fname, const QString &sep, int ignoredLines,
 		bool renameCols, bool stripSpaces, bool simplifySpaces, bool newTable) {
   	Q_UNUSED(newTable)
@@ -1376,11 +1376,26 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 	if ( file.open(QIODevice::ReadOnly) )
 	{
 		future::Table *temp = static_cast<future::Table *>(filter.importAspect(&file));
-		if (temp) {
-			while (temp->childCount() > 0)
-				temp->reparentChild(d_future_table, temp->child(0));
-			setWindowLabel(fname);
+		if (!temp) return;
+		int preexisting_cols = columnCount();
+		int overwritten_cols = qMin(temp->columnCount(), preexisting_cols);
+		for (int i=0; i<overwritten_cols; i++) {
+			column(i)->asStringColumn()->copy(temp->column(i));
+			if (renameCols)
+				column(i)->setName(temp->column(i)->name());
 		}
+		for (int i=overwritten_cols; i<preexisting_cols; i++)
+			column(i)->remove();
+		String2DoubleFilter * filter = new String2DoubleFilter;
+		for (int i=overwritten_cols; i<temp->columnCount(); i++) {
+			filter->input(0, temp->column(i));
+			Column *new_col = new Column(temp->column(i)->name(), SciDAVis::Numeric);
+			new_col->copy(filter->output(0));
+			d_future_table->addChild(new_col);
+		}
+		delete filter;
+		delete temp;
+		setWindowLabel(fname);
 	}
 }
 

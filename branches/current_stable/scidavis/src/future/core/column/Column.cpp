@@ -662,3 +662,11 @@ void ColumnStringIO::setTextAt(int row, const QString &value)
 	d_setting = false;
 	d_to_set.clear();
 }
+
+bool ColumnStringIO::copy(const AbstractColumn *other) {
+	if (other->columnMode() != SciDAVis::Text) return false;
+	d_owner->d_column_private->inputFilter()->input(0,other);
+	d_owner->copy(d_owner->d_column_private->inputFilter()->output(0));
+	d_owner->d_column_private->inputFilter()->input(0,this);
+	return true;
+}

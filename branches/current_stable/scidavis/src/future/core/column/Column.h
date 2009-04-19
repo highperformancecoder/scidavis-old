@@ -335,6 +335,7 @@ class ColumnStringIO : public AbstractColumn
 			else
 				return d_owner->isInvalid(row);
 		}
+		virtual bool copy(const AbstractColumn *other);
 
 	private:
 		Column * d_owner;
