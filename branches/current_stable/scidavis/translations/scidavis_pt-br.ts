@@ -8101,9 +8101,31 @@ p, li { white-space: pre-wrap; }
         <translation>Crescimento exponencial</translation>
     </message>
     <message>
+        <location filename="../src/ExponentialFit.cpp" line="82"/>
+        <location filename="../src/ExponentialFit.cpp" line="89"/>
+        <source>(amplitude)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="82"/>
+        <source>(lifetime)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="82"/>
+        <location filename="../src/ExponentialFit.cpp" line="89"/>
+        <source>(offset)</source>
+        <translation type="unfinished">(offset)</translation>
+    </message>
+    <message>
         <location filename="../src/ExponentialFit.cpp" line="87"/>
         <source>Exponential decay</source>
         <translation>Decaimento exponencial</translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="89"/>
+        <source>(e-folding time)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11918,6 +11940,16 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
 <context>
     <name>LinearFit</name>
     <message>
+        <location filename="../src/PolynomialFit.cpp" line="240"/>
+        <source>(y-intercept)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/PolynomialFit.cpp" line="240"/>
+        <source>(slope)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/PolynomialFit.cpp" line="241"/>
         <source>Linear Regression</source>
         <translation>Regressão linear</translation>
@@ -12463,6 +12495,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/MuParserScript.cpp" line="308"/>
         <location filename="../src/MuParserScript.cpp" line="448"/>
         <location filename="../src/MuParserScript.cpp" line="457"/>
+        <location filename="../src/MuParserScript.cpp" line="463"/>
         <source>Couldn&apos;t find a table named %1.</source>
         <translation>Não foi possível encontrar a tabela chamada %1.</translation>
     </message>
@@ -12489,17 +12522,17 @@ p, li { white-space: pre-wrap; }
         <translation>O acesso a valores de tabelas (ainda) não é suportado neste contexto.</translation>
     </message>
     <message>
-        <location filename="../src/MuParserScript.cpp" line="467"/>
+        <location filename="../src/MuParserScript.cpp" line="470"/>
         <source>There&apos;s no column named %1 in table %2!</source>
         <translation>Não existe uma coluna chamada %1 na tabela %2!</translation>
     </message>
     <message>
-        <location filename="../src/MuParserScript.cpp" line="578"/>
+        <location filename="../src/MuParserScript.cpp" line="581"/>
         <source>tablecol: wrong number of arguments (need 2, got %1)</source>
         <translation>tablecol: número incorreto de argumentos (necessários 2, obter %1) </translation>
     </message>
     <message>
-        <location filename="../src/MuParserScript.cpp" line="605"/>
+        <location filename="../src/MuParserScript.cpp" line="608"/>
         <source>cell: wrong number of arguments (need 2, got %1)</source>
         <translation>cell: número incorreto de argumentos (necessários 2, obter %1) </translation>
     </message>
@@ -12665,6 +12698,42 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/MultiPeakFit.cpp" line="76"/>
         <source>Lorentz Fit</source>
         <translation>Ajuste Lorentziano</translation>
+    </message>
+    <message>
+        <location filename="../src/MultiPeakFit.cpp" line="117"/>
+        <source>(amplitude)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MultiPeakFit.cpp" line="117"/>
+        <source>(center)</source>
+        <translation type="unfinished">(central)</translation>
+    </message>
+    <message>
+        <location filename="../src/MultiPeakFit.cpp" line="117"/>
+        <source>(width)</source>
+        <translation type="unfinished">(largura)</translation>
+    </message>
+    <message>
+        <location filename="../src/MultiPeakFit.cpp" line="117"/>
+        <location filename="../src/MultiPeakFit.cpp" line="127"/>
+        <source>(offset)</source>
+        <translation type="unfinished">(offset)</translation>
+    </message>
+    <message>
+        <location filename="../src/MultiPeakFit.cpp" line="123"/>
+        <source>(amplitude %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MultiPeakFit.cpp" line="124"/>
+        <source>(center %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MultiPeakFit.cpp" line="125"/>
+        <source>(width %1)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="246"/>
@@ -16999,7 +17068,42 @@ valores de ponto flutuante (float)
 <context>
     <name>ThreeExpFit</name>
     <message>
-        <location filename="../src/ExponentialFit.cpp" line="242"/>
+        <location filename="../src/ExponentialFit.cpp" line="245"/>
+        <source>(first amplitude)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="245"/>
+        <source>(first lifetime)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="245"/>
+        <source>(second amplitude)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="246"/>
+        <source>(second lifetime)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="246"/>
+        <source>(third amplitude)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="246"/>
+        <source>(third lifetime)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="246"/>
+        <source>(offset)</source>
+        <translation type="unfinished">(offset)</translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="243"/>
         <source>Exponential decay</source>
         <translation>Decaimento exponencial</translation>
     </message>
@@ -17034,6 +17138,31 @@ valores de ponto flutuante (float)
 </context>
 <context>
     <name>TwoExpFit</name>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="168"/>
+        <source>(first amplitude)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="168"/>
+        <source>(first lifetime)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="168"/>
+        <source>(second amplitude)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="169"/>
+        <source>(second lifetime)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExponentialFit.cpp" line="169"/>
+        <source>(offset)</source>
+        <translation type="unfinished">(offset)</translation>
+    </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="166"/>
         <source>Exponential decay</source>

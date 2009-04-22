@@ -237,7 +237,7 @@ void LinearFit::init()
 	is_non_linear = false;
 	d_formula = "A*x+B";
 	d_param_names << "B" << "A";
-	d_param_explain << "(y-intercept)" << "(slope)";
+	d_param_explain << tr("(y-intercept)") << tr("(slope)");
 	d_explanation = tr("Linear Regression");
 	setName(tr("Linear"));
 }

@@ -114,17 +114,17 @@ QStringList MultiPeakFit::generateParameterList(int peaks)
 QStringList MultiPeakFit::generateExplanationList(int peaks)
 {
 	if (peaks == 1)
-		return QStringList() << "(amplitude)" << "(center)" << "(width)" << "(offset)";
+		return QStringList() << tr("(amplitude)") << tr("(center)") << tr("(width)") << tr("(offset)");
 
 	QStringList lst;
 	for (int i = 0; i<peaks; i++)
 	{
 		QString index = QString::number(i+1);
-		lst << "(amplitude " + index + ")";
-		lst << "(center " + index + ")";
-		lst << "(width " + index + ")";
+		lst << tr("(amplitude %1)").arg(index);
+		lst << tr("(center %1)").arg(index);
+		lst << tr("(width %1)").arg(index);
 	}
-	lst << "(offset)";
+	lst << tr("(offset)");
 	return lst;
 }
 
