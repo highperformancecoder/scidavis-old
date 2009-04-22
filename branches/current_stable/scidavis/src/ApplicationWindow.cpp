@@ -4353,7 +4353,7 @@ void ApplicationWindow::readSettings()
 	d_image_export_filter = settings.value("/ImageFileTypeFilter", ".png").toString();
 	d_export_transparency = settings.value("/ExportTransparency", false).toBool();
 	d_export_quality = settings.value("/ImageQuality", 100).toInt();
-	d_export_resolution = settings.value("/Resolution", QPrinter().resolution()).toInt();
+	d_export_resolution = settings.value("/Resolution", 72).toInt();
 	d_export_color = settings.value("/ExportColor", true).toBool();
 	d_export_vector_size = settings.value("/ExportPageSize", QPrinter::Custom).toInt();
 	d_keep_plot_aspect = settings.value("/KeepAspect", true).toBool();

@@ -1390,6 +1390,7 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 		for (int i=overwritten_cols; i<temp->columnCount(); i++) {
 			filter->input(0, temp->column(i));
 			Column *new_col = new Column(temp->column(i)->name(), SciDAVis::Numeric);
+			new_col->setPlotDesignation(SciDAVis::Y);
 			new_col->copy(filter->output(0));
 			d_future_table->addChild(new_col);
 		}
