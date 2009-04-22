@@ -459,6 +459,9 @@ Column *MuParserScript::resolveColumnPath(const QString &path) {
 			}
 			table = folder->table(tableName);
 		}
+		if (!table)
+			throw mu::Parser::exception_type(qPrintable(tr("Couldn't find a table named %1.")
+						.arg(pathComponents.join("/")+"/"+tableName)));
 	}
 
 	// finally, look up the column in the table

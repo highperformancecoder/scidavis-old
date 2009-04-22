@@ -423,14 +423,14 @@ void Table::pasteIntoSelection()
 
 	if(mime_data->hasFormat("text/plain"))
 	{
-		QString input_str = QString(mime_data->data("text/plain"));
+		QString input_str = QString(mime_data->data("text/plain")).trimmed();
 		QList< QStringList > cell_texts;
 		QStringList input_rows(input_str.split("\n"));
 		input_row_count = input_rows.count();
 		input_col_count = 0;
 		for(int i=0; i<input_row_count; i++)
 		{
-			cell_texts.append(input_rows.at(i).split("\t"));
+			cell_texts.append(input_rows.at(i).trimmed().split(QRegExp("\\s+")));
 			if(cell_texts.at(i).count() > input_col_count) input_col_count = cell_texts.at(i).count();
 		}
 
