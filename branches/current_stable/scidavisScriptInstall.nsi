@@ -131,6 +131,7 @@ Section "SciDAVis" SEC01
   File "translations\scidavis_ja.qm"
   File "translations\scidavis_ru.qm"
   File "translations\scidavis_sv.qm"
+  file "translations\scidavis_pt-br.qm"
   SetOutPath "$INSTDIR\PyQt4"
   File "PyQt4\__init__.py"
   File "PyQt4\__init__.pyc"
@@ -150,6 +151,7 @@ Section "SciDAVis" SEC01
   File "PyQt4\QtXml.pyd"
   File "PyQt4\QtXmlPatterns.pyd"
 ; Shortcuts
+  SetOutPath "$INSTDIR"
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk" "$INSTDIR\scidavis.exe"
@@ -231,6 +233,7 @@ Section Uninstall
   Delete "$INSTDIR\translations\scidavis_ja.qm"
   Delete "$INSTDIR\translations\scidavis_ru.qm"
   Delete "$INSTDIR\translations\scidavis_sv.qm"
+  Delete "$INSTDIR\translations\scidavis_pt-br.qm"
   Delete "$INSTDIR\PyQt4\__init__.py"
   Delete "$INSTDIR\PyQt4\__init__.pyc"
   Delete "$INSTDIR\PyQt4\Qt.pyd"
