@@ -121,8 +121,6 @@ void TranslateCurveTool::selectDestination(const QwtDoublePoint &point)
 		return;
 	}
 
-	int prec; char f;
-	tab->columnNumericFormat(col, &f, &prec);
 	int row_start = c->tableRow(0);
     int row_end = row_start + c->dataSize();
 	for (int i=row_start; i<row_end; i++){

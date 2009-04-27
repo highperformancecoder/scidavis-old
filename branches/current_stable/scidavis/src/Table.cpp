@@ -323,52 +323,6 @@ void Table::setPlotDesignation(SciDAVis::PlotDesignation pd)
 	d_future_table->setSelectionAs(pd);
 }
 
-void Table::columnNumericFormat(int col, int *f, int *precision)
-{
-	if (column(col)->dataType() == SciDAVis::TypeDouble)
-	{
-		Double2StringFilter *pFilter = qobject_cast<Double2StringFilter*>(column(col)->outputFilter());
-		if (pFilter)
-		{
-			*precision = pFilter->numDigits();	
-			switch(pFilter->numericFormat())
-			{
-				case 'f':
-					*f = 1;
-					break;
-
-				case 'e':
-					*f = 2;
-					break;
-
-				default:
-				case 'g':
-					*f = 0;
-					break;
-			}
-			return;
-		}
-	}
-	*f = 0;
-	*precision = 14;
-}
-
-void Table::columnNumericFormat(int col, char *f, int *precision)
-{
-	if (column(col)->dataType() == SciDAVis::TypeDouble)
-	{
-		Double2StringFilter *pFilter = qobject_cast<Double2StringFilter*>(column(col)->outputFilter());
-		if (pFilter)
-		{
-			*precision = pFilter->numDigits();	
-			*f = pFilter->numericFormat();
-			return;
-		}
-	}
-	*f = 'g';
-	*precision = 14;
-}
-
 int Table::columnWidth(int col)
 {
 	return d_view_widget->columnWidth(col);

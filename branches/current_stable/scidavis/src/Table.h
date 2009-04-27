@@ -207,8 +207,6 @@ public slots:
 
 	int numSelectedRows();
 
-	void columnNumericFormat(int col, char *f, int *precision);
-	void columnNumericFormat(int col, int *f, int *precision);
 	int columnType(int col);
 
 	QList<int> columnTypes();
