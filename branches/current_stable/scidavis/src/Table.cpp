@@ -479,27 +479,39 @@ bool Table::recalculate(int col, bool only_selected_rows)
 		QVariant ret;
 		int start_row = interval.start();
 		int end_row = interval.end();
-		for (int i=start_row; i<=end_row; i++)
-		{
-			if (only_selected_rows && !isCellSelected(i, col)) continue;
-			colscript->setInt(i+1,"i");
-			ret = colscript->eval();
-			if(ret.type() == QVariant::Double) 
-			{
-				if (col_ptr->dataType() == SciDAVis::TypeDouble)
-					column(col)->setValueAt(i, ret.toDouble());
-				else
+		switch (col_ptr->columnMode()) {
+			case SciDAVis::Numeric:
 				{
-					int prec;
-					char f;
-					columnNumericFormat(col, &f, &prec);
-					setText(i, col, QLocale().toString(ret.toDouble(), f, prec));
+					QVector<double> results(end_row-start_row+1);
+					for (int i=start_row; i<=end_row; i++) {
+						if (only_selected_rows && !isCellSelected(i, col)) continue;
+						colscript->setInt(i+1,"i");
+						ret = colscript->eval();
+						if (ret.canConvert(QVariant::Double))
+							results[i-start_row] = ret.toDouble();
+						else
+							results[i-start_row] = NAN;
+					}
+					col_ptr->replaceValues(start_row, results);
+					break;
 				}
-			} 
-			else if(ret.canConvert(QVariant::String))
-				setText(i, col, ret.toString());
-			else 
-				break;
+			default:
+				{
+					QStringList results;
+					for (int i=start_row; i<=end_row; i++) {
+						if (only_selected_rows && !isCellSelected(i, col)) continue;
+						colscript->setInt(i+1,"i");
+						ret = colscript->eval();
+						if (ret.type() == QVariant::Double)
+							results << QLocale().toString(ret.toDouble(), 'g', 14);
+						else if(ret.canConvert(QVariant::String))
+							results << ret.toString();
+						else 
+							results << QString();
+					}
+					col_ptr->asStringColumn()->replaceTexts(start_row, results);
+					break;
+				}
 		}
 	}
 	QApplication::restoreOverrideCursor();

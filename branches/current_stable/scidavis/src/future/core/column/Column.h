@@ -336,6 +336,8 @@ class ColumnStringIO : public AbstractColumn
 				return d_owner->isInvalid(row);
 		}
 		virtual bool copy(const AbstractColumn *other);
+		virtual bool copy(const AbstractColumn *source, int source_start, int dest_start, int num_rows);
+		virtual void replaceTexts(int start_row, const QStringList &texts);
 
 	private:
 		Column * d_owner;

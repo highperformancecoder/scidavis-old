@@ -670,3 +670,16 @@ bool ColumnStringIO::copy(const AbstractColumn *other) {
 	d_owner->d_column_private->inputFilter()->input(0,this);
 	return true;
 }
+
+bool ColumnStringIO::copy(const AbstractColumn *source, int source_start, int dest_start, int num_rows) {
+	if (source->columnMode() != SciDAVis::Text) return false;
+	d_owner->d_column_private->inputFilter()->input(0,source);
+	d_owner->copy(d_owner->d_column_private->inputFilter()->output(0), source_start, dest_start, num_rows);
+	d_owner->d_column_private->inputFilter()->input(0,this);
+	return true;
+}
+
+void ColumnStringIO::replaceTexts(int start_row, const QStringList &texts) {
+	Column tmp("tmp", texts);
+	copy(&tmp, 0, start_row, texts.size());
+}
