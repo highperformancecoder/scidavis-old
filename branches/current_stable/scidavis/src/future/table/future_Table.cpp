@@ -559,14 +559,32 @@ void Table::fillSelectedCellsWithRowNumbers()
 	
 	WAIT_CURSOR;
 	beginMacro(tr("%1: fill cells with row numbers").arg(name()));
-	QList<Column*> list = d_view->selectedColumns();
-	Column * temp = new Column("temp", QStringList(QString()));
-	foreach(Column * col_ptr, list)
-	{
+	foreach(Column *col_ptr, d_view->selectedColumns()) {
 		int col = columnIndex(col_ptr);
-		for(int row=first; row<=last; row++)
-			if(d_view->isCellSelected(row, col)) 
-				col_ptr->asStringColumn()->setTextAt(row, QString::number(row+1));
+		switch (col_ptr->columnMode()) {
+			case SciDAVis::Numeric:
+				{
+					QVector<double> results(last-first+1);
+					for (int row=first; row<=last; row++)
+						if(d_view->isCellSelected(row, col)) 
+							results[row-first] = row+1;
+						else
+							results[row-first] = col_ptr->valueAt(row);
+					col_ptr->replaceValues(first, results);
+					break;
+				}
+			case SciDAVis::Text:
+				{
+					QStringList results;
+					for (int row=first; row<=last; row++)
+						if (d_view->isCellSelected(row, col))
+							results << QString::number(row+1);
+						else
+							results << col_ptr->textAt(row);
+					col_ptr->replaceTexts(first, results);
+					break;
+				}
+		}
 	}
 	endMacro();
 	RESET_CURSOR;
@@ -583,26 +601,50 @@ void Table::fillSelectedCellsWithRandomNumbers()
 	WAIT_CURSOR;
 	beginMacro(tr("%1: fill cells with random values").arg(name()));
 	qsrand(QTime::currentTime().msec());
-	QList<Column*> list = d_view->selectedColumns();
-	foreach(Column * col_ptr, list)
-	{
+	foreach(Column *col_ptr, d_view->selectedColumns()) {
 		int col = columnIndex(col_ptr);
-		for(int row=first; row<=last; row++)
-			if(d_view->isCellSelected(row, col)) 
-			{
-				if (col_ptr->columnMode() == SciDAVis::Numeric)
-					col_ptr->setValueAt(row, double(qrand())/double(RAND_MAX));
-				else if (col_ptr->dataType() == SciDAVis::TypeQDateTime)
+		switch (col_ptr->columnMode()) {
+			case SciDAVis::Numeric:
 				{
-					QDate date(1,1,1);
-					QTime time(0,0,0,0);
-					int days = (int)( (double)date.daysTo(QDate(2999,12,31)) * double(qrand())/double(RAND_MAX) );
-					qint64 msecs = (qint64)(double(qrand())/double(RAND_MAX) * 1000.0 * 60.0 * 60.0 * 24.0);
-					col_ptr->setDateTimeAt(row, QDateTime(date.addDays(days), time.addMSecs(msecs)));
+					QVector<double> results(last-first+1);
+					for (int row=first; row<=last; row++)
+						if (d_view->isCellSelected(row, col))
+							results[row-first] = double(qrand())/double(RAND_MAX);
+						else
+							results[row-first] = col_ptr->valueAt(row);
+					col_ptr->replaceValues(first, results);
+					break;
 				}
-				else
-					col_ptr->setTextAt(row, QString::number(double(qrand())/double(RAND_MAX)));
-			}
+			case SciDAVis::Text:
+				{
+					QStringList results;
+					for (int row=first; row<=last; row++)
+						if (d_view->isCellSelected(row, col))
+							results << QString::number(double(qrand())/double(RAND_MAX));
+						else
+							results << col_ptr->textAt(row);
+					col_ptr->replaceTexts(first, results);
+					break;
+				}
+			case SciDAVis::DateTime:
+			case SciDAVis::Month:
+			case SciDAVis::Day:
+				{
+					QList<QDateTime> results;
+					QDate earliestDate(1,1,1);
+					QDate latestDate(2999,12,31);
+					QTime midnight(0,0,0,0);
+					for (int row=first; row<=last; row++)
+						if (d_view->isCellSelected(row, col))
+							results << QDateTime(
+									earliestDate.addDays(((double)qrand())*((double)earliestDate.daysTo(latestDate))/((double)RAND_MAX)),
+									midnight.addMSecs(((qint64)qrand())*1000*60*60*24/RAND_MAX));
+						else
+							results << col_ptr->dateTimeAt(row);
+					col_ptr->replaceDateTimes(first, results);
+					break;
+				}
+		}
 	}
 	endMacro();
 	RESET_CURSOR;
