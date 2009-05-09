@@ -796,32 +796,37 @@ void Graph::setLabelsColHeaderFormat(int axis, Table *table) {
 
 void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInfo)
 {
-	if (type < Time)
-		return;
-
 	QStringList list = formatInfo.split(";", QString::KeepEmptyParts);
 	if ((int)list.count() < 2 || list[0].isEmpty() || list[1].isEmpty()) {
 		QMessageBox::critical(this, tr("Error"), tr("Couldn't change the axis type to the requested format!"));
 		return;
 	}
 
-	if (type == Time)
-	{
-		TimeScaleDraw *sd = new TimeScaleDraw (QTime::fromString (list[0]), list[1]);
-		sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
-		d_plot->setAxisScaleDraw (axis, sd);
-	}
-	else if (type == Date)
-	{
-		DateScaleDraw *sd = new DateScaleDraw (QDate::fromString (list[0], Qt::ISODate), list[1]);
-		sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
-		d_plot->setAxisScaleDraw (axis, sd);
-	}
-	else if (type == DateTime)
-	{
-		DateTimeScaleDraw *sd = new DateTimeScaleDraw (QDateTime::fromString (list[0], Qt::ISODate), list[1]);
-		sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
-		d_plot->setAxisScaleDraw (axis, sd);
+	switch(type) {
+		case Time:
+			{
+				TimeScaleDraw *sd = new TimeScaleDraw (QTime::fromString (list[0]), list[1]);
+				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
+				d_plot->setAxisScaleDraw (axis, sd);
+				break;
+			}
+		case Date:
+			{
+				DateScaleDraw *sd = new DateScaleDraw (QDate::fromString (list[0], Qt::ISODate), list[1]);
+				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
+				d_plot->setAxisScaleDraw (axis, sd);
+				break;
+			}
+		case DateTime:
+			{
+				DateTimeScaleDraw *sd = new DateTimeScaleDraw (QDateTime::fromString (list[0], Qt::ISODate), list[1]);
+				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
+				d_plot->setAxisScaleDraw (axis, sd);
+				break;
+			}
+		default:
+			// safeguard - such an argument is invalid for this method
+			return;
 	}
 
 	axisType[axis] = type;
