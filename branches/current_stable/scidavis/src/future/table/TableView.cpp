@@ -694,6 +694,15 @@ int TableView::lastSelectedRow(bool full)
 	return -2;
 }
 
+IntervalAttribute<bool> TableView::selectedRows(bool full) {
+	IntervalAttribute<bool> result;
+	int rows = d_table->rowCount();
+	for (int i=0; i<rows; i++)
+		if (isRowSelected(i, full))
+			result.setValue(i, true);
+	return result;
+}
+
 bool TableView::isCellSelected(int row, int col)
 {
 	if(row < 0 || col < 0 || row >= d_table->rowCount() || col >= d_table->columnCount()) return false;

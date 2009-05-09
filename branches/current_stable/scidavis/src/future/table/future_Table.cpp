@@ -884,14 +884,11 @@ void Table::insertEmptyRows()
 void Table::removeSelectedRows()
 {
 	if (!d_view) return;
-	int first = d_view->firstSelectedRow();
-	int last = d_view->lastSelectedRow();
-	if( first < 0 ) return;
 
 	WAIT_CURSOR;
 	beginMacro(QObject::tr("%1: remove selected rows(s)").arg(name()));
-	for(int i=last; i>=first; i--)
-		if(d_view->isRowSelected(i, false)) removeRows(i, 1);
+	foreach(Interval<int> i, d_view->selectedRows().intervals())
+		removeRows(i.start(), i.size());
 	endMacro();
 	RESET_CURSOR;
 }
@@ -909,24 +906,18 @@ void Table::clearSelectedRows()
 	foreach(Column * col_ptr, list)
 	{
 		if (d_view->formulaModeActive())
-		{
-			for(int row=last; row>=first; row--)
-				if(d_view->isRowSelected(row, false))
-				{
-					col_ptr->setFormula(row, "");  
-				}
-		}
+			foreach(Interval<int> i, d_view->selectedRows().intervals())
+				col_ptr->setFormula(i, "");
 		else
-		{
-			for(int row=last; row>=first; row--)
-				if(d_view->isRowSelected(row, false))
-				{
-					if(row == (col_ptr->rowCount()-1) )
-						col_ptr->removeRows(row,1);
-					else if(row < col_ptr->rowCount())
-						col_ptr->asStringColumn()->setTextAt(row, "");
+			foreach(Interval<int> i, d_view->selectedRows().intervals())
+				if (i.end() == col_ptr->rowCount()-1)
+					col_ptr->removeRows(i.start(), i.size());
+				else {
+					QStringList empties;
+					for (int j=0; j<i.size(); j++)
+						empties << QString();
+					col_ptr->asStringColumn()->replaceTexts(i.start(), empties);
 				}
-		}
 	}
 	endMacro();
 	RESET_CURSOR;

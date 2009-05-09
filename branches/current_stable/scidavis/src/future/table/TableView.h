@@ -51,6 +51,7 @@
 #include <QtDebug>
 #include "globals.h"
 #include "MyWidget.h"
+#include "lib/IntervalAttribute.h"
 
 class Column;
 namespace future{ class Table; }
@@ -161,6 +162,8 @@ class TableView : public MyWidget
 		 * selected rows.
 		 */
 		int lastSelectedRow(bool full = false);
+		//! Get the complete set of selected rows.
+		IntervalAttribute<bool> selectedRows(bool full = false);
 		//! Return whether a cell is selected
 		bool isCellSelected(int row, int col);
 		//! Select/Deselect a cell
