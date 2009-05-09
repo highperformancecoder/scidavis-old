@@ -54,6 +54,7 @@
 #include "PlotCurve.h"
 #include "ApplicationWindow.h"
 #include "core/column/Column.h"
+#include "core/datatypes/DateTime2StringFilter.h"
 
 #include <QApplication>
 #include <QBitmap>
@@ -420,11 +421,6 @@ void Graph::setLabelsNumericFormat(const QStringList& l)
 		setLabelsNumericFormat (axis, l);
 }
 
-void Graph::setAxesType(const QList<int> tl)
-{
-	axisType = tl;
-}
-
 QString Graph::saveAxesLabelsType()
 {
 	QString s="AxisType\t";
@@ -757,12 +753,23 @@ void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName
 		if (!table)
 			return;
 
-		axesFormatInfo[axis] = labelsColName;
-		int r = table->numRows();
-		int col = table->colIndex(labelsColName);
+		Column *col = table->column(labelsColName);
+		if (!col) {
+			QMessageBox::critical(this, tr("Internal Error"),
+					tr("<html>Failed to set axis labels on Graph %1. Maybe you're trying to open a corrupted"
+						" project file; or there's some problem within SciDAVis. Please report this"
+						" as a bug (together with detailed instructions how to reproduce this message or"
+						" the corrupted file).<p>"
+						"<a href=\"https://sourceforge.net/tracker/?group_id=199120&atid=968214>\">"
+						"bug tracker: https://sourceforge.net/tracker/?group_id=199120&atid=968214</a></html>")
+					.arg(objectName()));
+			return;
+		}
+		int r = col->rowCount();
 
+		axesFormatInfo[axis] = labelsColName;
 		for (int i=0; i < r; i++)
-			list.insert(i+1, table->text(i, col));
+			list.insert(i+1, col->textAt(i));
 		// TODO: The whole text labels functionality is very limited. Specifying
 		// only one column for the labels will always mean that the labels
 		// correspond to 1, 2, 3, 4, etc.. Other label mappings such as
@@ -3216,17 +3223,18 @@ bool Graph::insertCurve(Table* w, int xcol, const QString& name, int style)
 
 bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColName, int style, int startRow, int endRow)
 {
-	int xcol=w->colIndex(xColName);
-	int ycol=w->colIndex(yColName);
-	if (xcol < 0 || ycol < 0)
+	if (!w) return false;
+	Column *x_col_ptr = w->column(xColName);
+	Column *y_col_ptr = w->column(yColName);
+	if (!x_col_ptr || !y_col_ptr)
 		return false;
-	Column *x_col_ptr = w->column(xcol);
-	Column *y_col_ptr = w->column(ycol);
 
-	int xColType = w->columnType(xcol);
-	int yColType = w->columnType(ycol);
+	int xColType = x_col_ptr->columnMode();
+	int yColType = y_col_ptr->columnMode();
 	int row, size=0;
-	QString date_time_fmt = w->columnFormat(xcol);
+	QString date_time_fmt;
+	if (xColType == SciDAVis::DateTime || xColType == SciDAVis::Month || xColType == SciDAVis::Day)
+		date_time_fmt = static_cast<DateTime2StringFilter *>(x_col_ptr->outputFilter())->format();
 	QMap<int, QString> xLabels, yLabels;// store text labels
 
 	QTime time0;

@@ -792,16 +792,18 @@ int Table::columnCount()
 
 double Table::cell(int row, int col)
 {
-	if (!column(col)->isInvalid(row)) {
-		if (column(col)->columnMode() == Table::Text) {
-			QString yval = column(col)->textAt(row);
+	Column *colPtr = column(col);
+	if (!colPtr) return 0.0;
+	if (!colPtr->isInvalid(row)) {
+		if (colPtr->columnMode() == Table::Text) {
+			QString yval = colPtr->textAt(row);
 			bool valid_data = true;
 			double dbval = QLocale().toDouble(yval, &valid_data);
 			if (!valid_data)
 				return 0.0;
 			return dbval;
 		}
-		return column(col)->valueAt(row);
+		return colPtr->valueAt(row);
 	}
 	else
 		return 0.0;
@@ -814,7 +816,9 @@ void Table::setCell(int row, int col, double val)
 
 QString Table::text(int row, int col)
 {
-	return column(col)->asStringColumn()->textAt(row);
+	Column *colPtr = column(col);
+	if (!colPtr) return QString();
+	return colPtr->asStringColumn()->textAt(row);
 }
 
 void Table::setText(int row, int col, const QString & text)

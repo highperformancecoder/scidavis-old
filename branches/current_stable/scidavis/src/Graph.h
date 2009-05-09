@@ -426,7 +426,6 @@ class Graph: public QWidget
 		//! \name Axes
 		//@{
 		QList<int> axesType();
-		void setAxesType(const QList<int> tl);
 
 		QStringList scalesTitles();
 		void setXAxisTitle(const QString& text);
