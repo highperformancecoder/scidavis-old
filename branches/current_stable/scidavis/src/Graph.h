@@ -519,8 +519,9 @@ class Graph: public QWidget
 		QString axisFormatInfo(int axis);
 		QStringList axesLabelsFormatInfo(){return axesFormatInfo;};
 
-		void setLabelsTextFormat(int axis, int type, const QString& name, const QMap<int, QString>& lst);
-		void setLabelsTextFormat(int axis, int type, const QString& labelsColName, Table *table);
+		void setLabelsTextFormat(int axis, const Column *column, int startRow, int endRow);
+		void setLabelsTextFormat(int axis, Table *table, const QString& columnName);
+		void setLabelsColHeaderFormat(int axis, Table *table);
 
 		QStringList getAxesFormulas(){return axesFormulas;};
 		void setAxesFormulas(const QStringList& l){axesFormulas = l;};

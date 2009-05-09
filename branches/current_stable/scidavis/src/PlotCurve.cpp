@@ -145,8 +145,6 @@ void DataCurve::loadData()
 	int xColType = d_table->columnType(xcol);
 	int yColType = d_table->columnType(ycol);
 
-	QMap<int, QString> xLabels, yLabels;// store text labels
-
 	QTime time0;
 	QDate date0;
 	QDateTime date_time0;
@@ -183,8 +181,6 @@ void DataCurve::loadData()
 	for (int row = d_start_row; row <= endRow; row++ ) {
 		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
 			if (xColType == Table::Text) {
-				QString xval = x_col_ptr->textAt(row);
-				xLabels.insert(row+1, xval);
 				X[size] = (double) (row + 1);
 			}
 			else if (xColType == Table::Time) {
@@ -215,8 +211,7 @@ void DataCurve::loadData()
 				X[size] = x_col_ptr->valueAt(row);
 
 			if (yColType == Table::Text) {
-				yLabels.insert(size+1, y_col_ptr->textAt(row));
-				Y[size] = (double) (size + 1);
+				Y[size] = (double) (row + 1);
 			}
 			else if (yColType == Table::Time) {
 				QTime yval = y_col_ptr->timeAt(row);
@@ -268,10 +263,8 @@ void DataCurve::loadData()
 		}
 
 		if (xColType == Table::Text){
-			if (d_type == Graph::HorizontalBars)
-				g->setLabelsTextFormat(QwtPlot::yLeft, Graph::Txt, d_x_column, xLabels);
-			else
-                g->setLabelsTextFormat(QwtPlot::xBottom, Graph::Txt, d_x_column, xLabels);
+			g->setLabelsTextFormat(d_type == Graph::HorizontalBars ? QwtPlot::yLeft : QwtPlot::xBottom,
+					x_col_ptr, d_start_row, endRow);
 		} else if (xColType == Table::Time ){
 			if (d_type == Graph::HorizontalBars){
 				QStringList lst = g->axisFormatInfo(QwtPlot::yLeft).split(";");
@@ -305,7 +298,7 @@ void DataCurve::loadData()
 		}
 
 		if (yColType == Table::Text)
-            g->setLabelsTextFormat(QwtPlot::yLeft, Graph::Txt, title().text(), yLabels);
+			g->setLabelsTextFormat(QwtPlot::yLeft, y_col_ptr, d_start_row, endRow);
 	}
 }
 

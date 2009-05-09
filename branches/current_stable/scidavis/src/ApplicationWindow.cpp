@@ -9875,32 +9875,47 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		else if (s.contains("AxisType"))
 		{
 			QStringList fList=s.split("\t");
-			for (int i=0; i<4; i++)
-			{
-				QStringList lst = fList[i+1].split(";", QString::SkipEmptyParts);
-				int format = lst[0].toInt();
-				if (format == Graph::Day)
-					ag->setLabelsDayFormat(i, lst[1].toInt());
-				else if (format == Graph::Month)
-					ag->setLabelsMonthFormat(i, lst[1].toInt());
-				else if (format == Graph::Time || format == Graph::Date || format == Graph::DateTime)
-					ag->setLabelsDateTimeFormat(i, format, lst[1]+";"+lst[2]);
-				else if (lst.size() > 1)
-				{
-					Table *nw = app->table(lst[1]);
-					ag->setLabelsTextFormat(i, format, lst[1], nw);
+			if (fList.size() >= 5)
+				for (int i=0; i<4; i++) {
+					QStringList lst = fList[i+1].split(";", QString::SkipEmptyParts);
+					if (lst.size() < 2) continue;
+					int format = lst[0].toInt();
+					switch(format) {
+						case Graph::Day:
+							ag->setLabelsDayFormat(i, lst[1].toInt());
+							break;
+						case Graph::Month:
+							ag->setLabelsMonthFormat(i, lst[1].toInt());
+							break;
+						case Graph::Time:
+						case Graph::Date:
+						case Graph::DateTime:
+							ag->setLabelsDateTimeFormat(i, format, lst[1]+";"+lst[2]);
+							break;
+						case Graph::Txt:
+							ag->setLabelsTextFormat(i, app->table(lst[1]), lst[1]);
+							break;
+						case Graph::ColHeader:
+							ag->setLabelsColHeaderFormat(i, app->table(lst[1]));
+							break;
+					}
 				}
-			}
 		}
 		else if (d_file_version < 69 && s.contains ("AxesTickLabelsCol"))
 		{
 			QStringList fList = s.split("\t");
-			QList<int> axesTypes = ag->axesType();
-			for (int i=0; i<4; i++)
-			{
-				QString colName = fList[i+1];
-				Table *nw = app->table(colName);
-				ag->setLabelsTextFormat(i, axesTypes[i], colName, nw);
+			if (fList.size() >= 5) {
+				QList<int> axesTypes = ag->axesType();
+				for (int i=0; i<4; i++) {
+					switch(axesTypes[i]) {
+						case Graph::Txt:
+							ag->setLabelsTextFormat(i, app->table(fList[i+1]), fList[i+1]);
+							break;
+						case Graph::ColHeader:
+							ag->setLabelsColHeaderFormat(i, app->table(fList[i+1]));
+							break;
+					}
+				}
 			}
 		}
 	}

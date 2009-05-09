@@ -676,16 +676,28 @@ void Graph::showAxis(int axis, int type, const QString& formatInfo, Table *table
 		sclDraw->enableComponent (QwtAbstractScaleDraw::Labels, false);
 	else
 	{
-		if (type == Numeric)
-			setLabelsNumericFormat(axis, format, prec, formula);
-		else if (type == Day)
-			setLabelsDayFormat (axis, format);
-		else if (type == Month)
-			setLabelsMonthFormat (axis, format);
-		else if (type == Time || type == Date || type == DateTime)
-			setLabelsDateTimeFormat (axis, type, formatInfo);
-		else
-			setLabelsTextFormat(axis, type, formatInfo, table);
+		switch(type) {
+			case Numeric:
+				setLabelsNumericFormat(axis, format, prec, formula);
+				break;
+			case Day:
+				setLabelsDayFormat (axis, format);
+				break;
+			case Month:
+				setLabelsMonthFormat (axis, format);
+				break;
+			case Time:
+			case Date:
+			case DateTime:
+				setLabelsDateTimeFormat (axis, type, formatInfo);
+				break;
+			case Txt:
+				setLabelsTextFormat(axis, table, formatInfo);
+				break;
+			case ColHeader:
+				setLabelsColHeaderFormat(axis, table);
+				break;
+		}
 
 		setAxisLabelRotation(axis, rotation);
 	}
@@ -732,65 +744,54 @@ void Graph::setLabelsMonthFormat(int axis, int format)
 	d_plot->setAxisScaleDraw (axis, sd);
 }
 
-void Graph::setLabelsTextFormat(int axis, int type, const QString& name, const QMap<int, QString>& lst)
-{
-	if (type != Txt && type != ColHeader)
-		return;
+void Graph::setLabelsTextFormat(int axis, const Column *column, int startRow, int endRow) {
+	// TODO: The whole text labels functionality is very limited. Specifying
+	// only one column for the labels will always mean that the labels
+	// correspond to 1, 2, 3, 4, etc.. Other label mappings such as
+	// a -> 1.5, b -> 4.5, c -> 16.5 (with step set to 0.5) or similar 
+	// require to have an additional column with numeric values. 
+	// This should be supported in our new plotting framework.
+	if (!column) return;
+	future::Table *table = qobject_cast<future::Table*>(column->parentAspect());
+	if (!table) return;
 
-    axesFormatInfo[axis] = name;
-	d_plot->setAxisScaleDraw (axis, new QwtTextScaleDraw(lst));
-	axisType[axis] = type;
-}
-
-void Graph::setLabelsTextFormat(int axis, int type, const QString& labelsColName, Table *table)
-{
-	if (type != Txt && type != ColHeader)
-		return;
+	axisType[axis] = Txt;
+	axesFormatInfo[axis] = table->name() + "_" + column->name();
 
 	QMap<int, QString> list;
-	if (type == Txt)
-	{
-		if (!table)
-			return;
+	for (int row = startRow; row <= endRow; row++)
+		if (!column->isInvalid(row))
+			list.insert(row+1, column->textAt(row));
+	d_plot->setAxisScaleDraw(axis, new QwtTextScaleDraw(list));
+}
 
-		Column *col = table->column(labelsColName);
-		if (!col) {
-			QMessageBox::critical(this, tr("Internal Error"),
-					tr("<html>Failed to set axis labels on Graph %1. Maybe you're trying to open a corrupted"
-						" project file; or there's some problem within SciDAVis. Please report this"
-						" as a bug (together with detailed instructions how to reproduce this message or"
-						" the corrupted file).<p>"
-						"<a href=\"https://sourceforge.net/tracker/?group_id=199120&atid=968214>\">"
-						"bug tracker: https://sourceforge.net/tracker/?group_id=199120&atid=968214</a></html>")
-					.arg(objectName()));
-			return;
-		}
-		int r = col->rowCount();
-
-		axesFormatInfo[axis] = labelsColName;
-		for (int i=0; i < r; i++)
-			list.insert(i+1, col->textAt(i));
-		// TODO: The whole text labels functionality is very limited. Specifying
-		// only one column for the labels will always mean that the labels
-		// correspond to 1, 2, 3, 4, etc.. Other label mappings such as
-		// a -> 1.5, b -> 4.5, c -> 16.5 (with step set to 0.5) or similar 
-		// require to have an additional column with numeric values. 
-		// This should be supported in our new plotting framework.
+void Graph::setLabelsTextFormat(int axis, Table *table, const QString& columnName) {
+	Column *col = 0;
+	if (!table || !(col = table->column(columnName))) {
+		QMessageBox::critical(this, tr("Internal Error"),
+				tr("<html>Failed to set axis labels on Graph %1. Maybe you're trying to open a corrupted"
+					" project file; or there's some problem within SciDAVis. Please report this"
+					" as a bug (together with detailed instructions how to reproduce this message or"
+					" the corrupted file).<p>"
+					"<a href=\"https://sourceforge.net/tracker/?group_id=199120&atid=968214>\">"
+					"bug tracker: https://sourceforge.net/tracker/?group_id=199120&atid=968214</a></html>")
+				.arg(objectName()));
+		return;
 	}
-	else if (type == ColHeader)
-	{
-		if (!table)
-			return;
+	setLabelsTextFormat(axis, col, 0, col->rowCount()-1);
+}
 
-		axesFormatInfo[axis] = table->name();
-		for (int i=0; i<table->numCols(); i++)
-		{
-			if (table->colPlotDesignation(i) == SciDAVis::Y)
-				list.insert(i, table->colLabel(i));
-		}
-	}
-	d_plot->setAxisScaleDraw (axis, new QwtTextScaleDraw(list));
-	axisType[axis] = type;
+void Graph::setLabelsColHeaderFormat(int axis, Table *table) {
+	if (!table) return;
+
+	axisType[axis] = ColHeader;
+	axesFormatInfo[axis] = table->name();
+
+	QMap<int, QString> list;
+	for (int col=0; col < table->columnCount(); col++)
+		if (table->colPlotDesignation(col) == SciDAVis::Y)
+			list.insert(col, table->colLabel(col));
+	d_plot->setAxisScaleDraw(axis, new QwtTextScaleDraw(list));
 }
 
 void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInfo)
@@ -799,16 +800,10 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 		return;
 
 	QStringList list = formatInfo.split(";", QString::KeepEmptyParts);
-	if ((int)list.count() < 2)
-	{
-        QMessageBox::critical(this, tr("Error"), "Couldn't change the axis type to the requested format!");
-        return;
-    }
-    if (list[0].isEmpty() || list[1].isEmpty())
-    {
-        QMessageBox::critical(this, tr("Error"), "Couldn't change the axis type to the requested format!");
-        return;
-    }
+	if ((int)list.count() < 2 || list[0].isEmpty() || list[1].isEmpty()) {
+		QMessageBox::critical(this, tr("Error"), tr("Couldn't change the axis type to the requested format!"));
+		return;
+	}
 
 	if (type == Time)
 	{
@@ -3235,7 +3230,6 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	QString date_time_fmt;
 	if (xColType == SciDAVis::DateTime || xColType == SciDAVis::Month || xColType == SciDAVis::Day)
 		date_time_fmt = static_cast<DateTime2StringFilter *>(x_col_ptr->outputFilter())->format();
-	QMap<int, QString> xLabels, yLabels;// store text labels
 
 	QTime time0;
 	QDate date0;
@@ -3283,8 +3277,6 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	for (row = startRow; row<=endRow; row++ ) {
 		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
 			if (xColType == Table::Text) {
-				QString xval = x_col_ptr->textAt(row);
-				xLabels.insert(row+1, xval);
 				X[size] = (double)(row+1);
 			}
 			else if (xColType == Table::Time) {
@@ -3315,8 +3307,7 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 				X[size] = x_col_ptr->valueAt(row);
 
 			if (yColType == Table::Text) {
-				yLabels.insert(size+1, y_col_ptr->textAt(row));
-				Y[size] = (double) (size + 1);
+				Y[size] = (double) (row + 1);
 			}
 			else if (yColType == Table::Time) {
 				QTime yval = y_col_ptr->timeAt(row);
@@ -3387,16 +3378,16 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 
 	if (xColType == Table::Text ){
 		if (style == HorizontalBars){
-			axesFormatInfo[QwtPlot::yLeft] = xColName;
-			axesFormatInfo[QwtPlot::yRight] = xColName;
-			axisType[QwtPlot::yLeft] = Txt;
-			d_plot->setAxisScaleDraw (QwtPlot::yLeft, new QwtTextScaleDraw(xLabels));
+			setLabelsTextFormat(QwtPlot::yLeft, x_col_ptr, startRow, endRow);
+			// change default for right axis, but don't mess up an existing one
+			if (!d_plot->axisEnabled(QwtPlot::yRight))
+				axesFormatInfo[QwtPlot::yRight] = xColName;
 		}
 		else{
-			axesFormatInfo[QwtPlot::xBottom] = xColName;
-			axesFormatInfo[QwtPlot::xTop] = xColName;
-			axisType[QwtPlot::xBottom] = Txt;
-			d_plot->setAxisScaleDraw (QwtPlot::xBottom, new QwtTextScaleDraw(xLabels));
+			setLabelsTextFormat(QwtPlot::xBottom, x_col_ptr, startRow, endRow);
+			// change default for top axis, but don't mess up an existing one
+			if (!d_plot->axisEnabled(QwtPlot::xTop))
+				axesFormatInfo[QwtPlot::xTop] = xColName;
 		}
 	}
 	else if (xColType == Table::Time){
@@ -3422,10 +3413,10 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	}
 
 	if (yColType == Table::Text){
-		axesFormatInfo[QwtPlot::yLeft] = yColName;
-		axesFormatInfo[QwtPlot::yRight] = yColName;
-		axisType[QwtPlot::yLeft] = Txt;
-		d_plot->setAxisScaleDraw (QwtPlot::yLeft, new QwtTextScaleDraw(yLabels));
+		setLabelsTextFormat(QwtPlot::yLeft, y_col_ptr, startRow, endRow);
+		// change default for right axis, but don't mess up an existing one
+		if (!d_plot->axisEnabled(QwtPlot::yRight))
+			axesFormatInfo[QwtPlot::yRight] = yColName;
 	}
 
 	addLegendItem(yColName);
@@ -5273,7 +5264,7 @@ bool Graph::focusNextPrevChild ( bool )
 
 QString Graph::axisFormatInfo(int axis)
 {
-	if (axis < 0 || axis > QwtPlot::axisCnt)
+	if (axis < 0 || axis >= QwtPlot::axisCnt)
 		return QString();
 	else
 		return axesFormatInfo[axis];
