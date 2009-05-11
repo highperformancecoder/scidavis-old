@@ -44,6 +44,14 @@ h2. Arch Linux
 "PKGBUILD on AUR":http://aur.archlinux.org/packages.php?ID=19201 started by
 Olaf Leidinger and currently maintained by Knut Franke.
 
+h2. Ubuntu
+
+A package for Ubuntu "has been requested":https://bugs.launchpad.net/ubuntu/+bug/178364 and can be made from the Debian package source (see above), but so far there's no official maintainer. We've been provided with a build of SciDAVis 0.2.2 for Ubuntu 9.04 64bit by Björn Laurritzen, which we're making available "here":http://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=16022.
+
+h2. PCLinuxOS
+
+SciDAVis is included in PCLinuxOS and can easily be installed using its package manager.
+
 h2. Other distributions
 
 For all distributions that don't have specific packages yet, we offer a universal binary with most dependencies statically linked in.
