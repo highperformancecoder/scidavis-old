@@ -1373,8 +1373,13 @@ void AxesDialog::updateScale()
 	Plot *d_plot = d_graph->plotWidget();
 	int a = Graph::mapToQwtAxis(axis);
 	const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(a);
+#if QWT_VERSION >= 0x050200
+	boxStart->setText(QString::number(QMIN(scDiv->lowerBound(), scDiv->upperBound())));
+	boxEnd->setText(QString::number(QMAX(scDiv->lowerBound(), scDiv->upperBound())));
+#else
 	boxStart->setText(QString::number(QMIN(scDiv->lBound(), scDiv->hBound())));
 	boxEnd->setText(QString::number(QMAX(scDiv->lBound(), scDiv->hBound())));
+#endif
 
 	QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
 	boxStep->setText(QString::number(d_graph->axisStep(a)));

@@ -2095,8 +2095,13 @@ QString Graph::saveScale()
 		const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(i);
 		QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
 
+#if QWT_VERSION >= 0x050200
+		s += QString::number(qMin(scDiv->lowerBound(), scDiv->upperBound()), 'g', 15)+"\t";
+		s += QString::number(qMax(scDiv->lowerBound(), scDiv->upperBound()), 'g', 15)+"\t";
+#else
 		s += QString::number(qMin(scDiv->lBound(), scDiv->hBound()), 'g', 15)+"\t";
 		s += QString::number(qMax(scDiv->lBound(), scDiv->hBound()), 'g', 15)+"\t";
+#endif
 		s += QString::number(d_user_step[i], 'g', 15)+"\t";
 		s += QString::number(d_plot->axisMaxMajor(i))+"\t";
 		s += QString::number(d_plot->axisMaxMinor(i))+"\t";
@@ -3512,7 +3517,11 @@ void Graph::updateScale()
 	double step = fabs(lst[1]-lst[0]);
 
 	if (!autoscale)
+#if QWT_VERSION >= 0x050200
+		d_plot->setAxisScale (QwtPlot::xBottom, scDiv->lowerBound(), scDiv->upperBound(), step);
+#else
 		d_plot->setAxisScale (QwtPlot::xBottom, scDiv->lBound(), scDiv->hBound(), step);
+#endif
 
 	scDiv=d_plot->axisScaleDiv(QwtPlot::yLeft);
 	lst = scDiv->ticks (QwtScaleDiv::MajorTick);
@@ -3520,7 +3529,11 @@ void Graph::updateScale()
 	step = fabs(lst[1]-lst[0]);
 
 	if (!autoscale)
+#if QWT_VERSION >= 0x050200
+		d_plot->setAxisScale (QwtPlot::yLeft, scDiv->lowerBound(), scDiv->upperBound(), step);
+#else
 		d_plot->setAxisScale (QwtPlot::yLeft, scDiv->lBound(), scDiv->hBound(), step);
+#endif
 
 	d_plot->replot();
 	updateMarkersBoundingRect();
@@ -4735,8 +4748,13 @@ void Graph::copy(ApplicationWindow *parent, Graph* g)
 
 		d_user_step[i] = g->axisStep(i);
 
+#if QWT_VERSION >= 0x050200
+		QwtScaleDiv div = sc_engine->divideScale (qMin(sd->lowerBound(), sd->upperBound()),
+				qMax(sd->lowerBound(), sd->upperBound()), majorTicks, minorTicks, d_user_step[i]);
+#else
 		QwtScaleDiv div = sc_engine->divideScale (qMin(sd->lBound(), sd->hBound()),
 				qMax(sd->lBound(), sd->hBound()), majorTicks, minorTicks, d_user_step[i]);
+#endif
 
 		if (se->testAttribute(QwtScaleEngine::Inverted))
 		{
@@ -5592,7 +5610,11 @@ void Graph::print(QPainter *painter, const QRect &plotRect,
         map[axisId].setTransformation(d_plot->axisScaleEngine(axisId)->transformation());
 
         const QwtScaleDiv &scaleDiv = *(d_plot->axisScaleDiv(axisId));
+#if QWT_VERSION >= 0x050200
+        map[axisId].setScaleInterval(scaleDiv.lowerBound(), scaleDiv.upperBound());
+#else
         map[axisId].setScaleInterval(scaleDiv.lBound(), scaleDiv.hBound());
+#endif
 
         double from, to;
         if ( d_plot->axisEnabled(axisId) ){
