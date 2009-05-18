@@ -172,7 +172,7 @@ void SymbolDialog::initMathSymbols()
 		buttons->addButton(btn,counter+1);
 		gridLayout->addWidget(btn,counter/8,counter%8);
 	}
-	for ( i=0 ; i <= (0x2211-0x220F) ; i++,counter++ )
+	for ( i=0 ; i <= (0x2212-0x220F) ; i++,counter++ )
 	{
 		QPushButton *btn = new QPushButton(QString(QChar(i+0x220F)));
 		btn->setMaximumWidth(40);
