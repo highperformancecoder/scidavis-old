@@ -15,7 +15,7 @@ win32: target.path = c:/scidavis/plugins
 win32:INCLUDEPATH += c:/gsl/include
 win32:LIBS        += c:/gsl/lib/libgsl.a
 
-unix:LIBS += -L/usr/lib$${libsuff} -lgsl
+unix:LIBS += -L/usr/lib$${libsuff} -lgsl -lgslcblas
 
 SOURCES = explin.c
 
