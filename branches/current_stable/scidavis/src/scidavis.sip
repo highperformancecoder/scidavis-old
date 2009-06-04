@@ -912,24 +912,34 @@ public:
       break;
     }
   }
-  sipRes = sipCpp->multilayerPlot(a0, l, a2);
-  if (a3 >= 0) {
-	  QwtPlotCurve * c = sipRes->activeGraph()->curve(0);
-	  QPen pen = c->pen();
-	  pen.setColor(ColorBox::color(a3));
-	  c->setPen(pen);
+  if (a0==0) {
+	  sipIsErr = 1;
+	  PyErr_Format(PyExc_ValueError, "Invalid table in argument to plot().");
+  } else {
+    sipRes = sipCpp->multilayerPlot(a0, l, a2);
+    if (a3 >= 0) {
+       QwtPlotCurve * c = sipRes->activeGraph()->curve(0);
+       QPen pen = c->pen();
+       pen.setColor(ColorBox::color(a3));
+       c->setPen(pen);
+    }
   }
 %End
   MultiLayer *plot(Table*, const QString&, int style=1, int color=-1) /NoDerived/;
 %MethodCode
-  QStringList l;
-  l << *a1;
-  sipRes = sipCpp->multilayerPlot(a0, l, a2);
-  if (a3 >= 0) {
-	  QwtPlotCurve * c = sipRes->activeGraph()->curve(0);
-	  QPen pen = c->pen();
-	  pen.setColor(ColorBox::color(a3));
-	  c->setPen(pen);
+  if (a0==0) {
+	  sipIsErr = 1;
+	  PyErr_Format(PyExc_ValueError, "Invalid table in argument to plot().");
+  } else {
+    QStringList l;
+    l << *a1;
+    sipRes = sipCpp->multilayerPlot(a0, l, a2);
+    if (a3 >= 0) {
+       QwtPlotCurve * c = sipRes->activeGraph()->curve(0);
+       QPen pen = c->pen();
+       pen.setColor(ColorBox::color(a3));
+       c->setPen(pen);
+    }
   }
 %End
 

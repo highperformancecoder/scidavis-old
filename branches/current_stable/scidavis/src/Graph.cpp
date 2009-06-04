@@ -3164,6 +3164,7 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
         for (int i=0; i<curves; i++)
         {//We rearrange the list so that the error bars are placed at the end
         	int j = w->colIndex(names[i]);
+			if (j < 0) continue;
   	        if (w->colPlotDesignation(j) == SciDAVis::xErr || w->colPlotDesignation(j) == SciDAVis::yErr)
 			{
 				errCurves++;
@@ -3177,6 +3178,7 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
 		{
 			CurveType type_of_i;
             int j = w->colIndex(names[i]);
+				if (j < 0) continue;
             bool ok = false;
             if (w->colPlotDesignation(j) == SciDAVis::xErr || w->colPlotDesignation(j) == SciDAVis::yErr)
 			{
