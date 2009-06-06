@@ -12273,9 +12273,16 @@ void ApplicationWindow::saveFolder(Folder *folder, const QString& fn)
 		return;
 	}
 	f.close();
+#ifdef Q_OS_WIN
+	// unfortunately, Windows doesn't support atomic renames; so Windows users will have to live with
+	// the risk of losing the file in case of a crash between remove and rename
+	if ((QFile::exists(fn) && ((QFile::exists(fn + "~") && !QFile::remove(fn + "~"))
+	    || !QFile::rename(fn, fn + "~"))) || !QFile::rename(fn + ".new", fn)) {
+#else
 	// we want to atomically replace existing files, so we can't use QFile::rename()
 	if ((QFile::exists(fn) && rename(QFile::encodeName(fn), QFile::encodeName(fn + "~")) != 0) ||
 			rename(QFile::encodeName(fn + ".new"), QFile::encodeName(fn)) != 0) {
+#endif
 		QApplication::restoreOverrideCursor();
 		QMessageBox::critical(this, tr("Error renaming backup files"),
 				tr("<html>%1<br><br>Data was written to <em>%2</em>, but saving the original file as <em>%3</em>\
