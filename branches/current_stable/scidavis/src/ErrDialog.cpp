@@ -159,7 +159,8 @@ void ErrDialog::setSrcTables(QWidgetList* tables)
 void ErrDialog::selectSrcTable(int tabnr)
 {
 	colNamesBox->clear();
-	colNamesBox->addItems(((Table*)srcTables->at(tabnr))->colNames());
+	if (tabnr > -1)
+		colNamesBox->addItems(((Table*)srcTables->at(tabnr))->colNames());
 }
 
 void ErrDialog::add()
