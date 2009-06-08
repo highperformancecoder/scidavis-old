@@ -1845,10 +1845,11 @@ QString Graph::pieLegendText()
 	return text;
 }
 
-void Graph::updateCurvesData(Table* w, const QString& yColName)
+void Graph::updateCurvesData(Table* w, const QString& colName)
 {
     QList<int> keys = d_plot->curveKeys();
     int updated_curves = 0;
+	 QList<PlotCurve*> to_remove; // curves which changed too much to be kept
 	for (int i=0; i<(int)keys.count(); i++)
 	{
 		QwtPlotItem *it = d_plot->plotItem(keys[i]);
@@ -1856,11 +1857,36 @@ void Graph::updateCurvesData(Table* w, const QString& yColName)
             continue;
         if (it->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
             continue;
-        if (((PlotCurve *)it)->type() == Function)
-            continue;
-
-        if(((DataCurve *)it)->updateData(w, yColName))
+        if (static_cast<PlotCurve*>(it)->type() == Function) continue;
+		  DataCurve *c = static_cast<DataCurve*>(it);
+		  if (c->table() == w && (c->xColumnName() == colName || c->yColumnName() == colName)) {
+			  int colType = w->column(colName)->columnMode();
+			  AxisType atype;
+			  if (c->xColumnName() == colName) {
+				  if (c->type() == HorizontalBars)
+					  atype = (AxisType)axisType[QwtPlot::yLeft];
+				  else
+					  atype = (AxisType)axisType[QwtPlot::xBottom];
+			  } else {
+				  if (c->type() == HorizontalBars)
+					  atype = (AxisType)axisType[QwtPlot::xBottom];
+				  else
+					  atype = (AxisType)axisType[QwtPlot::yLeft];
+			  }
+			  // compare setLabels*Format() calls in insertCurve()
+			  if (  (colType == Table::Text && atype != Txt) ||
+					  (colType == Table::Time && atype != Time) ||
+					  (colType == Table::Date && atype != Date) ||
+					  (colType == Table::DateTime && atype != DateTime))
+				  to_remove << c;
+			  else if (c->updateData(w, colName))
+				  updated_curves++;
+		  } else if(((DataCurve *)it)->updateData(w, colName))
             updated_curves++;
+	}
+	foreach (PlotCurve *c, to_remove) {
+		removeCurve(curveIndex(c));
+		updated_curves++;
 	}
     if (updated_curves) {
 		 if (isPiePlot())
