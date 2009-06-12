@@ -7615,7 +7615,15 @@ void ApplicationWindow::customEvent(QEvent *e)
 	if (e->type() == SCRIPTING_CHANGE_EVENT)
 	{
 		scriptingChangeEvent((ScriptingChangeEvent*)e);
-		connect(scriptEnv,SIGNAL(error(const QString&,const QString&,int)),this,SLOT(scriptError(const QString&,const QString&,int)));
+		// If the event is triggered by setScriptingLang(), the connections are already made
+		// (for messages emitted during initialization). However, it's good programming practice not
+		// to assume a particular call path for an event; which means that we don't know for sure
+		// at this point whether scriptEnv is connected or not.
+		scriptEnv->disconnect(this);
+		connect(scriptEnv, SIGNAL(error(const QString&,const QString&,int)),
+				this, SLOT(scriptError(const QString&,const QString&,int)));
+		connect(scriptEnv, SIGNAL(print(const QString&)),
+				this, SLOT(scriptPrint(const QString&)));
 	}
 }
 

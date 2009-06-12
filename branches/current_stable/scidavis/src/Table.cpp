@@ -426,8 +426,11 @@ bool Table::recalculate(int col, bool only_selected_rows)
 		connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
 		connect(colscript, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
 
-		if (!colscript->compile())
-			continue;
+		if (!colscript->compile()) {
+			delete colscript;
+			QApplication::restoreOverrideCursor();
+			return false;
+		}
 
 		colscript->setInt(col+1, "j");
 		QVariant ret;
@@ -441,6 +444,11 @@ bool Table::recalculate(int col, bool only_selected_rows)
 						if (only_selected_rows && !isCellSelected(i, col)) continue;
 						colscript->setInt(i+1,"i");
 						ret = colscript->eval();
+						if (!ret.isValid()) {
+							delete colscript;
+							QApplication::restoreOverrideCursor();
+							return false;
+						}
 						if (ret.canConvert(QVariant::Double))
 							results[i-start_row] = ret.toDouble();
 						else
@@ -456,6 +464,11 @@ bool Table::recalculate(int col, bool only_selected_rows)
 						if (only_selected_rows && !isCellSelected(i, col)) continue;
 						colscript->setInt(i+1,"i");
 						ret = colscript->eval();
+						if (!ret.isValid()) {
+							delete colscript;
+							QApplication::restoreOverrideCursor();
+							return false;
+						}
 						if (ret.type() == QVariant::Double)
 							results << QLocale().toString(ret.toDouble(), 'g', 14);
 						else if(ret.canConvert(QVariant::String))
@@ -467,6 +480,7 @@ bool Table::recalculate(int col, bool only_selected_rows)
 					break;
 				}
 		}
+		delete colscript;
 	}
 	QApplication::restoreOverrideCursor();
 	return true;
@@ -1267,7 +1281,8 @@ void Table::applyFormula()
 		Column *col_ptr = column(col);
 		col_ptr->insertRows(col_ptr->rowCount(), rowCount()-col_ptr->rowCount());
 		col_ptr->setFormula(Interval<int>(0,rowCount()-1), formula);
-		recalculate(col, false);
+		if (!recalculate(col, false))
+			break;
 	}
 
 	d_future_table->endMacro();
