@@ -6928,9 +6928,9 @@ void ApplicationWindow::copySelection()
 		if (!plot || plot->layers() == 0)
 			return;
 
-		plot->copyAllLayers();
 		Graph* g = (Graph*)plot->activeGraph();
-		if (g && g->markerSelected())
+		if (!g) return;
+		if (g->markerSelected())
 			copyMarker();
 		else
 			copyActiveLayer();
@@ -6956,8 +6956,14 @@ void ApplicationWindow::cutSelection()
 			return;
 
 		Graph* g = (Graph*)plot->activeGraph();
-		copyMarker();
-		g->removeMarker();
+		if(!g) return;
+		if (g->markerSelected()) {
+			copyMarker();
+			g->removeMarker();
+		} else {
+			copyActiveLayer();
+			plot->removeLayer();
+		}
 	}
 	else if (m->inherits("Note"))
 		((Note*)m)->textWidget()->cut();
