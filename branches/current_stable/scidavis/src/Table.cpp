@@ -414,8 +414,15 @@ bool Table::recalculate(int col, bool only_selected_rows)
 {
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 	Column *col_ptr=column(col);
+	if (!col_ptr) return false;
 
 	QList< Interval<int> > formula_intervals = col_ptr->formulaIntervals();
+	if (only_selected_rows) {
+		// remove non-selected rows from list of intervals
+		QList< Interval<int> > deselected = Interval<int>(0,col_ptr->rowCount()-1) - selectedRows().intervals();
+		foreach(Interval<int> i, deselected)
+			Interval<int>::subtractIntervalFromList(&formula_intervals, i);
+	}
 	foreach(Interval<int> interval, formula_intervals)
 	{
 		QString formula = col_ptr->formula(interval.start());
@@ -441,7 +448,6 @@ bool Table::recalculate(int col, bool only_selected_rows)
 				{
 					QVector<double> results(end_row-start_row+1);
 					for (int i=start_row; i<=end_row; i++) {
-						if (only_selected_rows && !isCellSelected(i, col)) continue;
 						colscript->setInt(i+1,"i");
 						ret = colscript->eval();
 						if (!ret.isValid()) {
@@ -461,7 +467,6 @@ bool Table::recalculate(int col, bool only_selected_rows)
 				{
 					QStringList results;
 					for (int i=start_row; i<=end_row; i++) {
-						if (only_selected_rows && !isCellSelected(i, col)) continue;
 						colscript->setInt(i+1,"i");
 						ret = colscript->eval();
 						if (!ret.isValid()) {
