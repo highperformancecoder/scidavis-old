@@ -4114,6 +4114,9 @@ void ApplicationWindow::readSettings()
 	d_decimal_digits = settings.value("/DecimalDigits", 14).toInt();
 	d_default_numeric_format = settings.value("/DefaultNumericFormat", 'g').toChar().toAscii();
 
+	//restore geometry of main window
+	restoreGeometry(settings.value("/ProjectWindow/Geometry").toByteArray());
+
 	//restore dock windows and tool bars
 	restoreState(settings.value("/DockWindows").toByteArray());
 	explorerSplitter->restoreState(settings.value("/ExplorerSplitter").toByteArray());
@@ -4385,6 +4388,7 @@ void ApplicationWindow::saveSettings()
 	settings.setValue("/DecimalDigits", d_decimal_digits);
 	settings.setValue("/DefaultNumericFormat", QChar(d_default_numeric_format));
 
+	settings.setValue("/ProjectWindow/Geometry", saveGeometry());
 	settings.setValue("/DockWindows", saveState());
 	settings.setValue("/ExplorerSplitter", explorerSplitter->saveState());
 

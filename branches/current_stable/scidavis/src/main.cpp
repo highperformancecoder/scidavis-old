@@ -145,7 +145,7 @@ int main( int argc, char ** argv )
 		ApplicationWindow *mw = new ApplicationWindow();
 		mw->applyUserSettings();
 		mw->newTable();
-		mw->showMaximized();
+		mw->show();
 		mw->savedProject();
 		if (mw->autoSearchUpdates){
 			mw->autoSearchUpdatesRequest = true;
