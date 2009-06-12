@@ -812,14 +812,14 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 			}
 		case Date:
 			{
-				DateScaleDraw *sd = new DateScaleDraw (QDate::fromString (list[0], Qt::ISODate), list[1]);
+				DateScaleDraw *sd = new DateScaleDraw (QDate::fromString (list[0], "YYYY-MM-DD"), list[1]);
 				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 				d_plot->setAxisScaleDraw (axis, sd);
 				break;
 			}
 		case DateTime:
 			{
-				DateTimeScaleDraw *sd = new DateTimeScaleDraw (QDateTime::fromString (list[0], Qt::ISODate), list[1]);
+				DateTimeScaleDraw *sd = new DateTimeScaleDraw (QDateTime::fromString (list[0], "YYYY-MM-DDTHH:MM:SS"), list[1]);
 				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 				d_plot->setAxisScaleDraw (axis, sd);
 				break;
@@ -3436,14 +3436,14 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 			setLabelsDateTimeFormat(QwtPlot::xBottom, Time, fmtInfo);
 	}
 	else if (xColType == Table::Date ){
-		QString fmtInfo = date0.toString(Qt::ISODate) + ";" + date_time_fmt;
+		QString fmtInfo = date0.toString("YYYY-MM-DD") + ";" + date_time_fmt;
 		if (style == HorizontalBars)
 			setLabelsDateTimeFormat(QwtPlot::yLeft, Date, fmtInfo);
 		else
 			setLabelsDateTimeFormat(QwtPlot::xBottom, Date, fmtInfo);
 	}
 	else if (xColType == Table::DateTime ){
-		QString fmtInfo = date_time0.toString(Qt::ISODate) + ";" + date_time_fmt;
+		QString fmtInfo = date_time0.toString("YYYY-MM-DDTHH:MM:SS") + ";" + date_time_fmt;
 		if (style == HorizontalBars)
 			setLabelsDateTimeFormat(QwtPlot::yLeft, DateTime, fmtInfo);
 		else

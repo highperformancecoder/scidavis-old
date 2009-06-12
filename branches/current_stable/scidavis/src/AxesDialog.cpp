@@ -681,9 +681,8 @@ void AxesDialog::showAxisFormatOptions(int format)
 	boxTableName->hide();
 	labelTable->hide();
 
-	switch (format)
-	{
-		case 0:
+	switch (static_cast<Graph::AxisType>(boxAxisType->itemData(format).toInt())) {
+		case Graph::Numeric:
 			label2->show();
 			boxFormat->show();
 			boxFormat->insertItem(tr( "Automatic" ) );
@@ -699,12 +698,12 @@ void AxesDialog::showAxisFormatOptions(int format)
 			showAxisFormula(mapToQwtAxisId());
 			break;
 
-		case 1:
+		case Graph::Txt:
 			label1->show();
 			boxColName->show();
 			break;
 
-		case 2:
+		case Graph::Day:
 			{
 				int day = (QDate::currentDate()).dayOfWeek();
 				label2->show();
@@ -716,7 +715,7 @@ void AxesDialog::showAxisFormatOptions(int format)
 			}
 			break;
 
-		case 3:
+		case Graph::Month:
 			{
 				int month = (QDate::currentDate()).month();
 				label2->show();
@@ -728,7 +727,7 @@ void AxesDialog::showAxisFormatOptions(int format)
 			}
 			break;
 
-		case 4:
+		case Graph::Time:
 			{
 				label2->show();
 				boxFormat->show();
@@ -757,7 +756,7 @@ void AxesDialog::showAxisFormatOptions(int format)
 			}
 			break;
 
-		case 5:
+		case Graph::Date:
 			{
 				label2->show();
 				boxFormat->show();
@@ -776,7 +775,53 @@ void AxesDialog::showAxisFormatOptions(int format)
 			}
 			break;
 
-		case 6:
+		case Graph::DateTime:
+			{
+				label2->show();
+				boxFormat->show();
+				boxFormat->setEditable(true);
+
+				QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
+				if (lst.count() == 2)
+				{
+					boxFormat->insertItem(lst[1]);
+					boxFormat->setCurrentText(lst[1]);
+				}
+
+				const char * date_strings[] = {
+					"yyyy-MM-dd", 	
+					"yyyy/MM/dd", 
+					"dd/MM/yyyy", 
+					"dd/MM/yy", 
+					"dd.MM.yyyy", 	
+					"dd.MM.yy",
+					"MM/yyyy",
+					"dd.MM.", 
+					"yyyyMMdd",
+					0
+				};
+
+				const char * time_strings[] = {
+					"hh",
+					"hh ap",
+					"hh:mm",
+					"hh:mm ap",
+					"hh:mm:ss",
+					"hh:mm:ss.zzz",
+					"hh:mm:ss:zzz",
+					"mm:ss.zzz",
+					"hhmmss",
+					0
+				};
+				int j,i;
+				for(i=0; date_strings[i] != 0; i++)
+					for(j=0; time_strings[j] != 0; j++)
+						boxFormat->addItem(QString("%1 %2").arg(date_strings[i]).arg(time_strings[j]), 
+							QVariant(QString(date_strings[i]) + " " + QString(time_strings[j])));
+			}
+			break;
+
+		case Graph::ColHeader:
 			{
 				labelTable->show();
 				if (tablesList.contains(formatInfo[axis]))
@@ -1262,7 +1307,7 @@ bool AxesDialog::updatePlot()
 				}
 			}
 		}
-		else if (format == Graph::Time || format == Graph::Date)
+		else if (format == Graph::Time || format == Graph::Date || format == Graph::DateTime)
 		{
 			QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
 			if ((int)lst.count() >= 2)
@@ -1477,12 +1522,12 @@ void AxesDialog::pickAxisNumColor()
 void AxesDialog::setAxisType(int)
 {
 	int a = mapToQwtAxisId();
-	int style = (int)d_graph->axesType()[a];
+	int type = d_graph->axesType()[a];
 
-	boxAxisType->setCurrentIndex(boxAxisType->findData(style));
-	showAxisFormatOptions(style);
+	boxAxisType->setCurrentIndex(boxAxisType->findData(type));
+	showAxisFormatOptions(boxAxisType->findData(type));
 
-	if (style == 1)
+	if (type == Graph::Txt)
 		boxColName->setCurrentText(formatInfo[a]);
 }
 
@@ -1552,7 +1597,7 @@ void AxesDialog::updateTickLabelsList(bool on)
 	int type = currentSelectedAxisType();
 	if (type == Graph::Day || type == Graph::Month)
 		formatInfo[axis] = QString::number(boxFormat->currentIndex());
-	else if (type == Graph::Time || type == Graph::Date)
+	else if (type == Graph::Time || type == Graph::Date || type == Graph::DateTime)
 	{
 		QStringList lst = formatInfo[axis].split(";", QString::SkipEmptyParts);
 		lst[1] = boxFormat->currentText();
@@ -1628,9 +1673,9 @@ void AxesDialog::setLabelsNumericFormat(int)
 	}
 	else if (type == Graph::Day || type == Graph::Month)
 		formatInfo[axis] = QString::number(format);
-	else if (type == Graph::Time || type == Graph::Date)
+	else if (type == Graph::Time || type == Graph::Date || type == Graph::DateTime)
 	{
-		QStringList lst = formatInfo[axis].split(";", QString::SkipEmptyParts);
+		QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
 		lst[1] = boxFormat->currentText();
 		formatInfo[axis]  = lst.join(";");
 	}

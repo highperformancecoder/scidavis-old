@@ -278,21 +278,21 @@ void DataCurve::loadData()
 		} else if (xColType == Table::Date ) {
 			if (d_type == Graph::HorizontalBars){
 				QStringList lst = g->axisFormatInfo(QwtPlot::yLeft).split(";");
-				QString fmtInfo = date0.toString(Qt::ISODate) + ";" + lst[1];
+				QString fmtInfo = date0.toString("YYYY-MM-DD") + ";" + lst[1];
 				g->setLabelsDateTimeFormat(QwtPlot::yLeft, Graph::Date, fmtInfo);
 			} else {
 				QStringList lst = g->axisFormatInfo(QwtPlot::xBottom).split(";");
-				QString fmtInfo = date0.toString(Qt::ISODate) + ";" + lst[1];
+				QString fmtInfo = date0.toString("YYYY-MM-DD") + ";" + lst[1];
 				g->setLabelsDateTimeFormat(QwtPlot::xBottom, Graph::Date, fmtInfo);
 			}
 		} else if (xColType == Table::DateTime ) {
 			if (d_type == Graph::HorizontalBars){
 				QStringList lst = g->axisFormatInfo(QwtPlot::yLeft).split(";");
-				QString fmtInfo = date_time0.toString(Qt::ISODate) + ";" + lst[1];
+				QString fmtInfo = date_time0.toString("YYYY-MM-DDTHH:MM:SS") + ";" + lst[1];
 				g->setLabelsDateTimeFormat(QwtPlot::yLeft, Graph::DateTime, fmtInfo);
 			} else {
 				QStringList lst = g->axisFormatInfo(QwtPlot::xBottom).split(";");
-				QString fmtInfo = date_time0.toString(Qt::ISODate) + ";" + lst[1];
+				QString fmtInfo = date_time0.toString("YYYY-MM-DDTHH:MM:SS") + ";" + lst[1];
 				g->setLabelsDateTimeFormat(QwtPlot::xBottom, Graph::DateTime, fmtInfo);
 			}
 		}
