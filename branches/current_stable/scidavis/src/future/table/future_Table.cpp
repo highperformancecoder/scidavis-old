@@ -140,8 +140,9 @@ Column * Table::column(const QString & name) const
 	QString label=name.right(name.length()-pos-1);
 	for (int i=0; i<columnCount(); i++)
 	{
-		if (d_table_private->column(i)->name() == label)
-			return d_table_private->column(i);
+		Column *col = d_table_private->column(i);
+		if (col->name() == name || col->name() == label)
+			return col;
 	}
 
 	return NULL;
