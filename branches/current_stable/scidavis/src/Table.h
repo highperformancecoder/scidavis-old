@@ -109,6 +109,7 @@ public slots:
 	void handleColumnChange(int,int);
 	void handleColumnChange(int,int,int,int);
 	void handleColumnsAboutToBeRemoved(int,int);
+	void handleColumnsRemoved(int,int);
 
 	//! Return column number 'index'
 	Column* column(int index) const { return d_future_table->column(index); }
@@ -257,6 +258,7 @@ public slots:
 
 signals:
 	void changedColHeader(const QString&, const QString&);
+	void aboutToRemoveCol(const QString&);
 	void removedCol(const QString&);
 	void modifiedData(Table *, const QString&);
 	void resizedTable(QWidget*);

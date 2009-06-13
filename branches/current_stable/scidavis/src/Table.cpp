@@ -121,6 +121,7 @@ void Table::init()
 		this, SLOT(addReference()));
 
 	connect(d_future_table, SIGNAL(columnsAboutToBeRemoved(int, int)), this, SLOT(handleColumnsAboutToBeRemoved(int, int)));
+	connect(d_future_table, SIGNAL(columnsRemoved(int, int)), this, SLOT(handleColumnsRemoved(int, int)));
 	connect(d_future_table, SIGNAL(rowsInserted(int, int)), this, SLOT(handleRowChange()));
 	connect(d_future_table, SIGNAL(rowsRemoved(int, int)), this, SLOT(handleRowChange()));
 	connect(d_future_table, SIGNAL(dataChanged(int, int, int, int)), this, SLOT(handleColumnChange(int, int, int, int)));
@@ -160,6 +161,12 @@ void Table::handleColumnChange(int top, int left, int bottom, int right)
 }
 
 void Table::handleColumnsAboutToBeRemoved(int first, int count)
+{
+	for (int i=first; i<first+count; i++)
+	    emit aboutToRemoveCol(colName(i));
+}
+
+void Table::handleColumnsRemoved(int first, int count)
 {
 	for (int i=first; i<first+count; i++)
 	    emit removedCol(colName(i));
@@ -814,7 +821,7 @@ double Table::cell(int row, int col)
 	Column *colPtr = column(col);
 	if (!colPtr) return 0.0;
 	if (!colPtr->isInvalid(row)) {
-		if (colPtr->columnMode() == Table::Text) {
+		if (colPtr->columnMode() == SciDAVis::Text) {
 			QString yval = colPtr->textAt(row);
 			bool valid_data = true;
 			double dbval = QLocale().toDouble(yval, &valid_data);

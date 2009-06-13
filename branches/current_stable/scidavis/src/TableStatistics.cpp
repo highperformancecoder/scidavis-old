@@ -95,13 +95,14 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 		setColName(7, tr("Min"));
 		setColName(8, "N");
 
-		for (int i=0; i < 1; i++)
-			setColumnType(i, SciDAVis::Text);
-		
-		for (int i=1; i < 9; i++)
+		for (int i=0; i < 9; i++)
 			setColumnType(i, SciDAVis::Numeric);
 
-		Double2StringFilter *pFilter = qobject_cast<Double2StringFilter*>(column(1)->outputFilter());
+		Double2StringFilter *pFilter = qobject_cast<Double2StringFilter*>(column(0)->outputFilter());
+		Q_ASSERT(pFilter != NULL);
+		pFilter->setNumDigits(0);	
+		pFilter->setNumericFormat('f');	
+		pFilter = qobject_cast<Double2StringFilter*>(column(1)->outputFilter());
 		Q_ASSERT(pFilter != NULL);
 		pFilter->setNumDigits(0);	
 		pFilter->setNumericFormat('f');	
@@ -109,9 +110,6 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 		Q_ASSERT(pFilter != NULL);
 		pFilter->setNumDigits(0);	
 		pFilter->setNumericFormat('f');	
-
-		for (int i=0; i < d_targets.size(); i++)
-			column(0)->setTextAt(i, QString::number(d_targets[i]+1));
 
 		update(d_base, QString());
 	}
@@ -153,10 +151,7 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 		pFilter->setNumericFormat('f');	
 
 		for (int i=0; i < d_targets.size(); i++)
-		{
-			column(0)->setTextAt(i, d_base->colLabel(d_targets[i]));
-			update(d_base, d_base->colName(d_targets[i]));
-		}
+			update(d_base, d_base->colName(d_targets.at(i)));
 	}
 	setColPlotDesignation(0, SciDAVis::X);
 }
@@ -165,110 +160,123 @@ void TableStatistics::update(Table *t, const QString& colName)
 {
 	if (t != d_base) return;
 
-	int j;
-	if (d_type == TableStatistics::StatRow)
-		for (int r=0; r < d_targets.size(); r++)
-		{
-			int cols=d_base->numCols();
-			int i = d_targets[r];
-			int m = 0;
-			for (j = 0; j < cols; j++)
-				if (d_base->column(j)->rowCount() > i && d_base->column(j)->columnMode() == SciDAVis::Numeric)
-					m++;
+	if (d_type == TableStatistics::StatRow) {
+		int columns = d_base->numCols();
+		if (columns > 0) {
+			
+			for (int destRow = 0; destRow < d_targets.size(); destRow++) {
+				int srcRow = d_targets[destRow];
 
-			if (cols == 0)
-			{//clear row statistics
-				for (j = 1; j<9; j++)
-					column(j)->clear();
-			}
-
-			if (m > 0)
-			{
-				double *dat = new double[m];
-				gsl_vector *y = gsl_vector_alloc (m);
-				int temp = 0;
-				for (j = 0; j<cols; j++)
-				{
-					if (d_base->column(j)->rowCount() > i && d_base->column(j)->columnMode() == SciDAVis::Numeric)
-					{					
-						double val = d_base->column(j)->valueAt(i);
-						gsl_vector_set (y, temp, val);
-						dat[temp] = val;
-						temp++;
-					}
+				QList<int> validCells;
+				for (int col = 0; col < columns; col++) {
+					if (d_base->column(col)->rowCount() > srcRow 
+							&& d_base->column(col)->columnMode() == SciDAVis::Numeric 
+							&& !d_base->column(col)->isInvalid(srcRow))
+						validCells.append(col);
 				}
-				double mean = gsl_stats_mean (dat, 1, m);
-				double min, max;
-				gsl_vector_minmax (y, &min, &max);
 
-				column(1)->setValueAt(r, d_base->numCols());
-				column(2)->setValueAt(r, mean);
-				column(3)->setValueAt(r, gsl_stats_sd(dat, 1, m));
-				column(4)->setValueAt(r, gsl_stats_variance(dat, 1, m));
-				column(5)->setValueAt(r, mean*m);
-				column(6)->setValueAt(r, max);
-				column(7)->setValueAt(r, min);
-				column(8)->setValueAt(r, m);
+				column(0)->setValueAt(destRow, srcRow+1);
+				column(1)->setValueAt(destRow, columns);
+				if (validCells.count() > 0) {
+					double *data = new double[validCells.count()];
+					gsl_vector *y = gsl_vector_alloc(validCells.count());
 
-				gsl_vector_free (y);
-				delete[] dat;
+					int index = 0;
+					foreach(int col, validCells) {
+						double val = d_base->column(col)->valueAt(srcRow);
+						gsl_vector_set(y, index, val);
+						data[index++] = val;
+					}
+					double mean = gsl_stats_mean(data, 1, validCells.count());
+					double min, max;
+					gsl_vector_minmax(y, &min, &max);
+
+					column(2)->setValueAt(destRow, mean);
+					column(3)->setValueAt(destRow, gsl_stats_sd(data, 1, validCells.count()));
+					column(4)->setValueAt(destRow, gsl_stats_variance(data, 1, validCells.count()));
+					column(5)->setValueAt(destRow, mean * validCells.count());
+					column(6)->setValueAt(destRow, max);
+					column(7)->setValueAt(destRow, min);
+					column(8)->setValueAt(destRow, validCells.count());
+
+					gsl_vector_free (y);
+					delete[] data;
+				} else {
+					for (int i=2; i < 8; i++)
+						column(i)->setInvalid(destRow, true);
+					column(8)->setValueAt(destRow, 0);
+				}
 			}
 		}
-	else if (d_type == TableStatistics::StatColumn)
-		for (int c=0; c < d_targets.size(); c++)
-			if (colName == QString(d_base->name())+"_"+d_base->colLabel(d_targets[c]))
+	} else if (d_type == TableStatistics::StatColumn) {
+		for (int destRow=0; destRow < d_targets.size(); destRow++) {
+			if (colName == QString(d_base->name())+"_"+d_base->colLabel(d_targets[destRow]))
 			{
 				int i = d_base->colIndex(colName);
 				Column *col = d_base->column(i);
 				
-				if (col->columnMode() != SciDAVis::Numeric) return;
+				if (col->columnMode() != SciDAVis::Numeric) 
+					return;
 
 				int rows = col->rowCount();
 				if (rows == 0)
-				{
-					col->clear();
 					return;
-				}
-				double *dat = new double[rows];
-				gsl_vector *y = gsl_vector_alloc(rows);
 
-				int min_index = 0, max_index = 0;
-				double val = col->valueAt(0);
-				gsl_vector_set (y, 0, val);
-				dat[0] = val;
+				QList<int> validCells;
+				for (int row = 0; row < rows; ++row) {
+					if (!col->isInvalid(row))
+						validCells.append(row);
+				}
+				if (validCells.count() == 0)
+					return;
+
+				double *data = new double[validCells.count()];
+				gsl_vector *y = gsl_vector_alloc(validCells.count());
+
+				int minIndex = validCells.at(0);
+				int maxIndex = validCells.at(0);
+				double val = col->valueAt(validCells.at(0));
+				gsl_vector_set(y, 0, val);
+				data[0] = val;
 				double min = val, max = val;
-				for (j = 1; j<rows; j++)
-				{
-					val = col->valueAt(j);
-					gsl_vector_set (y, j, val);
-					dat[j] = val;
-					if (val < min)
-					{
-						min = val;
-						min_index = j;
+				int index = 0;
+				foreach(int row, validCells) {
+					if (index > 0) {
+						val = col->valueAt(row);
+						gsl_vector_set(y, index, val);
+						data[index] = val;
+						if (val < min)
+						{
+							min = val;
+							minIndex = row;
+						}
+						if (val > max)
+						{
+							max = val;
+							maxIndex = row;
+						}
 					}
-					if (val > max)
-					{
-						max = val;
-						max_index = j;
-					}
+					index++;
 				}
-				double mean=gsl_stats_mean (dat, 1, rows);
+				double mean = gsl_stats_mean(data, 1, validCells.count());
 
-				column(1)->setTextAt(c, "[1:"+QString::number(rows)+"]");
-				column(2)->setValueAt(c, mean);
-				column(3)->setValueAt(c, gsl_stats_sd(dat, 1, rows));
-				column(4)->setValueAt(c, gsl_stats_variance(dat, 1, rows));
-				column(5)->setValueAt(c, mean*rows);
-				column(6)->setValueAt(c, max_index + 1);
-				column(7)->setValueAt(c, max);
-				column(8)->setValueAt(c, min_index + 1);
-				column(9)->setValueAt(c, min);
-				column(10)->setValueAt(c, rows);
+				column(0)->setTextAt(destRow, d_base->colLabel(destRow));
+				column(1)->setTextAt(destRow, "[1:"+QString::number(rows)+"]");
+				column(2)->setValueAt(destRow, mean);
+				column(3)->setValueAt(destRow, gsl_stats_sd(data, 1, validCells.count()));
+				column(4)->setValueAt(destRow, gsl_stats_variance(data, 1, validCells.count()));
+				column(5)->setValueAt(destRow, mean * validCells.count());
+				column(6)->setValueAt(destRow, maxIndex + 1);
+				column(7)->setValueAt(destRow, max);
+				column(8)->setValueAt(destRow, minIndex + 1);
+				column(9)->setValueAt(destRow, min);
+				column(10)->setValueAt(destRow, validCells.count());
 
 				gsl_vector_free (y);
-				delete[] dat;
+				delete[] data;
 			}
+		}
+	}
 
 	for (int i=0; i<numCols(); i++)
 		emit modifiedData(this, Table::colName(i));

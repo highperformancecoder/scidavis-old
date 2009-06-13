@@ -10260,7 +10260,7 @@ void ApplicationWindow::connectTable(Table* w)
 	connect (w,SIGNAL(statusChanged(MyWidget*)),this, SLOT(updateWindowStatus(MyWidget*)));
 	connect (w,SIGNAL(hiddenWindow(MyWidget*)),this, SLOT(hideWindow(MyWidget*)));
 	connect (w,SIGNAL(closedWindow(MyWidget*)),this, SLOT(closeWindow(MyWidget*)));
-	connect (w,SIGNAL(removedCol(const QString&)),this,SLOT(removeCurves(const QString&)));
+	connect (w,SIGNAL(aboutToRemoveCol(const QString&)),this,SLOT(removeCurves(const QString&)));
 	connect (w,SIGNAL(modifiedData(Table *, const QString&)),
 			this,SLOT(updateCurves(Table *, const QString&)));
 	connect (w,SIGNAL(modifiedWindow(QWidget*)),this,SLOT(modifiedProject(QWidget*)));
