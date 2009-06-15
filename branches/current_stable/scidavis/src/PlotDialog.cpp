@@ -1891,7 +1891,7 @@ bool PlotDialog::acceptParams()
             if (h->autoBinning() == automaticBox->isChecked() &&
                 h->binSize() == binSizeBox->text().toDouble() &&
                 h->begin() == histogramBeginBox->text().toDouble() &&
-                h->end() == histogramEndBox->text().toDouble()) return false;
+                h->end() == histogramEndBox->text().toDouble()) return true;
 
             h->setBinning(automaticBox->isChecked(), binSizeBox->text().toDouble(),
                          histogramBeginBox->text().toDouble(), histogramEndBox->text().toDouble());
