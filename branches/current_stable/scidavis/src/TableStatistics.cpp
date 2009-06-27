@@ -212,8 +212,8 @@ void TableStatistics::update(Table *t, const QString& colName)
 		for (int destRow=0; destRow < d_targets.size(); destRow++) {
 			if (colName == QString(d_base->name())+"_"+d_base->colLabel(d_targets[destRow]))
 			{
-				int i = d_base->colIndex(colName);
-				Column *col = d_base->column(i);
+				int colIndex = d_base->colIndex(colName);
+				Column *col = d_base->column(colIndex);
 				
 				if (col->columnMode() != SciDAVis::Numeric) 
 					return;
@@ -260,7 +260,7 @@ void TableStatistics::update(Table *t, const QString& colName)
 				}
 				double mean = gsl_stats_mean(data, 1, validCells.count());
 
-				column(0)->setTextAt(destRow, d_base->colLabel(destRow));
+				column(0)->setTextAt(destRow, d_base->colLabel(colIndex));
 				column(1)->setTextAt(destRow, "[1:"+QString::number(rows)+"]");
 				column(2)->setValueAt(destRow, mean);
 				column(3)->setValueAt(destRow, gsl_stats_sd(data, 1, validCells.count()));
