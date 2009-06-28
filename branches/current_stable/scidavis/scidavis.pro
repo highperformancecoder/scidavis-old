@@ -18,16 +18,15 @@ INSTALLS        += documentation     # README, INSTALL.html, manual (if present 
 INSTALLS        += translationfiles
 
 ### names of the lupdate and lrelease programs (needed if you want to compile and install the translations automatically)
-### (you only need to adjust the two lines for your plaform)
-win32 {                    ### Windows
-LUPDATE_BIN = lupdate
-LRELEASE_BIN = lrelease
-} else:macx {              ### MacOS X
-LUPDATE_BIN = lupdate
-LRELEASE_BIN = lrelease
-} else {                   ### Linux (and other Unix systems)
-LUPDATE_BIN = lupdate-qt4
-LRELEASE_BIN = lrelease-qt4
+### possibly needs to be adapted if you have an usual installation
+exists(/usr/bin/lupdate-qt4) {
+	# Debian, Ubuntu, Fedora
+	LUPDATE_BIN = lupdate-qt4
+	LRELEASE_BIN = lrelease-qt4
+} else {
+	# anything else
+	LUPDATE_BIN = lupdate
+	LRELEASE_BIN = lrelease
 }
 
 ### 64 Linux only suffix
