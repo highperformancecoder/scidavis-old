@@ -639,7 +639,7 @@ class Graph: public QWidget
 		void notifyChanges();
 
 		void updateSecondaryAxis(int axis);
-		void enableAutoscaling(bool yes){autoscale = yes;};
+		void enableAutoscaling(bool yes){m_autoscale = yes;};
 
 		bool autoscaleFonts(){return autoScaleFonts;};
 		void setAutoscaleFonts(bool yes){autoScaleFonts = yes;};
@@ -762,7 +762,7 @@ signals:
 		bool startArrowOn, endArrowOn, drawTextOn, drawLineOn, drawArrowOn;
 
 		bool auxFilledArrowHead, ignoreResize;
-		bool drawAxesBackbone, autoscale;
+		bool drawAxesBackbone, m_autoscale;
 
 		QColor defaultArrowColor;
 		int defaultArrowLineWidth, defaultArrowHeadLength, defaultArrowHeadAngle;

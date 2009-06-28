@@ -107,7 +107,7 @@ Graph::Graph(QWidget* parent, const char* name, Qt::WFlags f)
 	drawArrowOn=false;
 	ignoreResize = true;
 	drawAxesBackbone = true;
-	autoscale = true;
+	m_autoscale = true;
 	autoScaleFonts = false;
 	d_antialiasing = true;
 	d_scale_on_print = true;
@@ -1888,12 +1888,19 @@ void Graph::updateCurvesData(Table* w, const QString& colName)
 		removeCurve(curveIndex(c));
 		updated_curves++;
 	}
-    if (updated_curves) {
-		 if (isPiePlot())
-			 updatePlot();
-		 else
-			 d_plot->replot();
-	 }
+	if (updated_curves) {
+		if (isPiePlot())
+			updatePlot();
+		else {
+			if (m_autoscale) {
+				for (int i = 0; i < QwtPlot::axisCnt; i++)
+					d_plot->setAxisAutoScale(i);
+				d_plot->replot();
+			}
+			else
+				updateScale();
+		}
+	}
 }
 
 QString Graph::saveEnabledAxes()
@@ -3517,7 +3524,7 @@ void Graph::updateVectorsLayout(int curve, const QColor& color, int width,
 
 void Graph::updatePlot()
 {
-	if (autoscale && !zoomOn() && d_active_tool==NULL)	{
+	if (m_autoscale && !zoomOn() && d_active_tool==NULL)	{
 		for (int i = 0; i < QwtPlot::axisCnt; i++)
 			d_plot->setAxisAutoScale(i);
 	}
@@ -3544,7 +3551,7 @@ void Graph::updateScale()
 
 	double step = fabs(lst[1]-lst[0]);
 
-	if (!autoscale)
+	if (!m_autoscale)
 #if QWT_VERSION >= 0x050200
 		d_plot->setAxisScale (QwtPlot::xBottom, scDiv->lowerBound(), scDiv->upperBound(), step);
 #else
@@ -3556,7 +3563,7 @@ void Graph::updateScale()
 
 	step = fabs(lst[1]-lst[0]);
 
-	if (!autoscale)
+	if (!m_autoscale)
 #if QWT_VERSION >= 0x050200
 		d_plot->setAxisScale (QwtPlot::yLeft, scDiv->lowerBound(), scDiv->upperBound(), step);
 #else
