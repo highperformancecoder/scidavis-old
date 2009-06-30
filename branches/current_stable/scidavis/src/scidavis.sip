@@ -190,6 +190,9 @@ public:
 %End
   void setWindowLabel(const QString&);
 
+  QString name();
+  void setName(const QString& s);
+
   CaptionPolicy captionPolicy();
   void setCaptionPolicy(CaptionPolicy);
 
