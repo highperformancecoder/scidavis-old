@@ -9181,7 +9181,19 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 		XmlStreamReader reader(xml);
 		reader.readNext();
 		reader.readNext(); // read the start document
-		w->d_future_matrix->load(&reader);
+		if (w->d_future_matrix->load(&reader) == false)
+		{
+			QString msg_text = reader.errorString();
+			QMessageBox::critical(this, tr("Error reading matrix from project file"), msg_text);
+		}
+		if (reader.hasWarnings())
+		{
+			QString msg_text = tr("The following problems occured when loading the project file:\n");
+			QStringList warnings = reader.warningStrings();
+			foreach(QString str, warnings)
+				msg_text += str + "\n";
+			QMessageBox::warning(this, tr("Project loading partly failed"), msg_text);
+		}
 		restoreWindowGeometry(app, w, flist.at(index));
 
 		return w;
@@ -9291,7 +9303,19 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 		XmlStreamReader reader(xml);
 		reader.readNext();
 		reader.readNext(); // read the start document
-		w->d_future_table->load(&reader);
+		if (w->d_future_table->load(&reader) == false)
+		{
+			QString msg_text = reader.errorString();
+			QMessageBox::critical(this, tr("Error reading table from project file"), msg_text);
+		}
+		if (reader.hasWarnings())
+		{
+			QString msg_text = tr("The following problems occured when loading the project file:\n");
+			QStringList warnings = reader.warningStrings();
+			foreach(QString str, warnings)
+				msg_text += str + "\n";
+			QMessageBox::warning(this, tr("Project loading partly failed"), msg_text);
+		}
 		w->setBirthDate(w->d_future_table->creationTime().toString(Qt::LocalDate));
 		restoreWindowGeometry(app, w, flist.at(index));
 

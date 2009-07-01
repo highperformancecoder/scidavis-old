@@ -40,7 +40,7 @@ QSettings * AbstractAspect::Private::g_settings =
 QHash<QString, QVariant> AbstractAspect::Private::g_defaults;
 
 AbstractAspect::Private::Private(AbstractAspect * owner, const QString& name)
-	: d_name(name), d_caption_spec("%n%C{ - }%c"), d_owner(owner), d_parent(0)
+	: d_name(name.isEmpty() ? "-" : name), d_caption_spec("%n%C{ - }%c"), d_owner(owner), d_parent(0)
 {
 	d_creation_time = QDateTime::currentDateTime();
 }

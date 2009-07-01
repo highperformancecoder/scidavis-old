@@ -77,7 +77,7 @@ void AbstractAspect::writeBasicAttributes(QXmlStreamWriter * writer) const
 bool AbstractAspect::readBasicAttributes(XmlStreamReader * reader)
 {
 	QString prefix(tr("XML read error: ","prefix for XML error messages"));
-	QString postfix(tr(" (loading failed)", "postfix for XML error messages"));
+	QString postfix(tr(" (non-critical)", "postfix for XML error messages"));
 
 	QXmlStreamAttributes attribs = reader->attributes();
 	QString str;
@@ -86,8 +86,7 @@ bool AbstractAspect::readBasicAttributes(XmlStreamReader * reader)
 	str = attribs.value(reader->namespaceUri().toString(), "name").toString();
 	if(str.isEmpty())
 	{
-		reader->raiseError(prefix+tr("aspect name missing")+postfix);
-		return false;
+		reader->raiseWarning(prefix+tr("aspect name missing or empty")+postfix);
 	}
 	setName(str);
 	// read creation time
@@ -234,6 +233,10 @@ QString AbstractAspect::name() const
 
 void AbstractAspect::setName(const QString &value)
 {
+	if (value.isEmpty()) {
+		setName("-");
+		return;
+	}
 	if (value == d_aspect_private->name()) return;
 	if (d_aspect_private->parent()) {
 		QString new_name = d_aspect_private->parent()->uniqueNameFor(value);
