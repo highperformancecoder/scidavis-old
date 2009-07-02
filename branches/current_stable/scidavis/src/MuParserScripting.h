@@ -40,7 +40,7 @@
 #include <muParser.h>
 #include "math.h"
 #include <gsl/gsl_sf.h>
-#include <q3asciidict.h>
+#include <gsl/gsl_errno.h>
 
 //! TODO
 class MuParserScripting: public ScriptingEnv
@@ -49,7 +49,10 @@ class MuParserScripting: public ScriptingEnv
 
   public:
     static const char *langName;
-    MuParserScripting(ApplicationWindow *parent) : ScriptingEnv(parent, langName) { d_initialized=true; }
+    MuParserScripting(ApplicationWindow *parent) : ScriptingEnv(parent, langName) {
+		d_initialized=true;
+		gsl_set_error_handler_off();
+	}
     static ScriptingEnv *constructor(ApplicationWindow *parent) { return new MuParserScripting(parent); }
 
     bool isRunning() const { return true; }
@@ -78,6 +81,8 @@ class MuParserScripting: public ScriptingEnv
     static const mathFunction math_functions[];
 
   private:
+#define SPECIAL(fname, arg) gsl_sf_result result; if (gsl_sf_##fname##_e(arg, &result) == GSL_SUCCESS) return result.val; else return NAN
+#define SPECIAL2(fname, arg1, arg2) gsl_sf_result result; if (gsl_sf_##fname##_e(arg1, arg2, &result) == GSL_SUCCESS) return result.val; else return NAN
     static double ceil(double x)
       { return ceil(x); }
     static double floor(double x)
@@ -87,39 +92,39 @@ class MuParserScripting: public ScriptingEnv
     static double mypow(double x, double y)
       { return pow(x,y); }
     static double bessel_J0(double x)
-      { return gsl_sf_bessel_J0 (x); }
+      { SPECIAL(bessel_J0 ,x); }
     static double bessel_J1(double x)
-      { return gsl_sf_bessel_J1 (x); }
+      { SPECIAL(bessel_J1 ,x); }
     static double bessel_Jn(double x, double n)
-      { return gsl_sf_bessel_Jn ((int)n, x); }
+      { SPECIAL2(bessel_Jn ,(int)n, x); }
     static double bessel_Yn(double x, double n)
-      { return gsl_sf_bessel_Yn ((int)n, x); }
+      { SPECIAL2(bessel_Yn ,(int)n, x); }
     static double bessel_Jn_zero(double n, double s)
-      { return gsl_sf_bessel_zero_Jnu(n, (unsigned int) s); }
+      { SPECIAL2(bessel_zero_Jnu,n, (unsigned int) s); }
     static double bessel_Y0(double x)
-      { return gsl_sf_bessel_Y0 (x); }
+      { SPECIAL(bessel_Y0 ,x); }
     static double bessel_Y1(double x)
-      { return gsl_sf_bessel_Y1 (x); }
+      { SPECIAL(bessel_Y1 ,x); }
     static double beta(double a, double b)
-      { return gsl_sf_beta (a,b); }
+      { SPECIAL2(beta ,a,b); }
     static double erf(double x)
-      { return gsl_sf_erf (x); }
+      { SPECIAL(erf ,x); }
     static double erfc(double x)
-      { return gsl_sf_erfc (x); }
+      { SPECIAL(erfc ,x); }
     static double erf_Z(double x)
-      { return gsl_sf_erf_Z (x); }
+      { SPECIAL(erf_Z ,x); }
     static double erf_Q(double x)
-      { return gsl_sf_erf_Q (x); }
+      { SPECIAL(erf_Q ,x); }
     static double gamma(double x)
-      { return gsl_sf_gamma (x); }
+      { SPECIAL(gamma ,x); }
     static double lngamma(double x)
-      { return gsl_sf_lngamma (x); }
+      { SPECIAL(lngamma ,x); }
     static double hazard(double x)
-      { return gsl_sf_hazard (x); }
+      { SPECIAL(hazard ,x); }
 	 static double lambert_W0(double x)
-	   { return gsl_sf_lambert_W0(x); }
+	   { SPECIAL(lambert_W0,x); }
 	 static double lambert_Wm1(double x)
-	   { return gsl_sf_lambert_Wm1(x); }
+	   { SPECIAL(lambert_Wm1,x); }
 };
 
 class EmptySourceError : public mu::ParserError
