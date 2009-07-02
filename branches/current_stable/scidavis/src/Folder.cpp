@@ -294,17 +294,22 @@ if (isRenaming())
 	e->ignore();
 	return;
 	}
+Q3ListViewItem *item = currentItem();
+if (!item) {
+	Q3ListView::keyPressEvent ( e );
+	return;
+}
 
-if (currentItem()->rtti() == FolderListItem::RTTI &&
+if (item->rtti() == FolderListItem::RTTI &&
 	(e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return))
 	{
-	emit doubleClicked(currentItem());
+	emit doubleClicked(item);
 	e->accept();
 	}
 else if (e->key() == Qt::Key_F2)
 	{
-	if (currentItem())
-		emit renameItem(currentItem());
+	if (item)
+		emit renameItem(item);
 	e->accept();
 	}
 else if(e->key() == Qt::Key_A && e->state() == Qt::ControlModifier)
