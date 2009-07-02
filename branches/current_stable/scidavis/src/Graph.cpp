@@ -4641,7 +4641,7 @@ void Graph::copy(ApplicationWindow *parent, Graph* g)
 			else if (style == Function)
 			{
 				c = new FunctionCurve(parent, cv->title().text());
-				((FunctionCurve*)c)->copy((FunctionCurve*)cv);
+				static_cast<FunctionCurve*>(c)->copy(static_cast<FunctionCurve*>(it));
 			}
 			else if (style == VerticalBars || style == HorizontalBars)
 			{
