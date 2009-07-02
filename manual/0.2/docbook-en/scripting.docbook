@@ -850,9 +850,9 @@ m = newMatrix()
 # create an empty graph window
 g = newGraph()
 # create an empty note named "momo"
-n = note("momo")
+n = newNote("momo")
 # use defaults
-n = note()
+n = newNote()
 	  </programlisting></para>
 	  <para>
 	    New objects will always be added to the active folder.
