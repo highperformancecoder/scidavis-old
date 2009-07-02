@@ -849,7 +849,13 @@ class Note: MyWidget
 %End
 public:
   void execute() const;
+  void executeAll();
   bool autoexec() const;
+  void setAutoexec(bool);
+  QString text();
+  void setText(const QString &s);
+  QString exportASCII(const QString &file);
+  QString importASCII(const QString &file);
 private:
   Note(const Note&);
 };
