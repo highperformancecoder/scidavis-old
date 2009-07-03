@@ -169,7 +169,7 @@ double QwtBarCurve::dataOffset()
 		{
 			for (int i = 2; i<dataSize(); i++)
 			{
-				int min = abs(xMap.transform(x(i+1))-xMap.transform(x(i)));
+				int min = abs(xMap.transform(x(i))-xMap.transform(x(i-1)));
 				if (min <= dx)
 					dx=min;
 			}
@@ -188,7 +188,7 @@ double QwtBarCurve::dataOffset()
 		{
 			for (int i=2; i<dataSize(); i++)
 			{
-				int min = abs(yMap.transform(y(i+1))-yMap.transform(y(i)));
+				int min = abs(yMap.transform(y(i))-yMap.transform(y(i-1)));
 				if (min <= dy)
 					dy=min;
 			}
