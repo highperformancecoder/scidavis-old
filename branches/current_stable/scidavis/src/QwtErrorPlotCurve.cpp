@@ -318,13 +318,13 @@ void QwtErrorPlotCurve::loadData()
 		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row) && !err_col_ptr->isInvalid(row)) {
 			if (xColType == Table::Text) {
 				QString xval = x_col_ptr->textAt(row);
-				X[size] = (double)row;
+				X[size] = (double)(row+1);
 			} else
 				X[size] = x_col_ptr->valueAt(row);
 
 			if (yColType == Table::Text) {
 				QString yval = y_col_ptr->textAt(row);
-				Y[size] = (double)row;
+				Y[size] = (double)(row+1);
 			} else
 				Y[size] = y_col_ptr->valueAt(row);
 
