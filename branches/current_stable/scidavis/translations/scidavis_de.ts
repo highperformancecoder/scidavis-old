@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="de">
-<defaultcodec></defaultcodec>
 <context>
     <name>@default</name>
     <message>
@@ -4192,37 +4191,38 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
         <location filename="../src/ApplicationWindow.cpp" line="3282"/>
         <location filename="../src/ApplicationWindow.cpp" line="3290"/>
         <source>ASCII Import Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>ASCII-Import fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3283"/>
         <source>Numeric data cannot be imported into non-numeric column &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Numerische Daten können nicht in nicht-numerische Splate &quot;%1&quot; importiert werden.</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3291"/>
         <source>Non-numeric data cannot be imported into non-text column &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht-numerische Daten können nicht in nicht-Text-Spalte &quot;%1&quot; importiert werden.</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="12253"/>
         <source>Error writing data to disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Schreiben der Daten</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="12254"/>
         <source>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Your data may or may not have ended up in &lt;em&gt;%2&lt;/em&gt; (%3). 					If there already was a version of this project on disk, it has not been touched.&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Ihre Daten sind möglicherweise in &lt;em&gt;%2&lt;/em&gt;, möglicherweise aber auch nicht.(%3) Falls bereits eine Version dieses Projektes auf der Festplatte vorhanden war, wurde sie nicht verändert.&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="12265"/>
         <source>Error renaming backup files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Umbenennen der Backup-Dateien</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="12266"/>
         <source>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Data was written to &lt;em&gt;%2&lt;/em&gt;, but saving the original file as &lt;em&gt;%3&lt;/em&gt;					and moving the new file to &lt;em&gt;%4&lt;/em&gt; failed. In case you wonder why the original file hasn&apos;t					been simply replaced, see here:					&lt;a href=&quot;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&quot;&gt;					http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Daten wurden in Datei &lt;em&gt;%2&lt;/em&gt; geschrieben, aber das Sichern der Originaldatei unter &lt;em&gt;%3&lt;/em&gt; und Verschieben der neuen Datei nach &lt;em&gt;%4&lt;/em&gt; ist fehlgeschlagen. Falls Sie sich wundern, warum die Originaldatei nicht einfach ersetzt wurde, finden Sie Hintergrundinformationen unter:
+&lt;a href=&quot;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&quot;&gt;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="12337"/>
@@ -8671,18 +8671,18 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/ExponentialFit.cpp" line="82"/>
         <location filename="../src/ExponentialFit.cpp" line="89"/>
         <source>(amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Amplitude)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="82"/>
         <source>(lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Lebensdauer)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="82"/>
         <location filename="../src/ExponentialFit.cpp" line="89"/>
         <source>(offset)</source>
-        <translation type="unfinished">(Offset)</translation>
+        <translation>(Offset)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="87"/>
@@ -8692,7 +8692,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ExponentialFit.cpp" line="89"/>
         <source>(e-folding time)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Ver-e-fachungs-Zeit)</translation>
     </message>
 </context>
 <context>
@@ -13366,12 +13366,12 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/PolynomialFit.cpp" line="240"/>
         <source>(y-intercept)</source>
-        <translation type="unfinished"></translation>
+        <translation>(y-Achsenabschnitt)</translation>
     </message>
     <message>
         <location filename="../src/PolynomialFit.cpp" line="240"/>
         <source>(slope)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Steigung)</translation>
     </message>
     <message>
         <location filename="../src/PolynomialFit.cpp" line="241"/>
@@ -13892,19 +13892,19 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/MuParserScript.cpp" line="274"/>
         <source>col() works only on tables!</source>
-        <translation type="unfinished">col() funktioniert nur bei Tabellen!</translation>
+        <translation>col() funktioniert nur bei Tabellen!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="277"/>
         <location filename="../src/MuParserScript.cpp" line="312"/>
         <location filename="../src/MuParserScript.cpp" line="354"/>
         <source>There&apos;s no column %1 in table %2!</source>
-        <translation type="unfinished">Es gibt keine Spalte namens %1 in Tabelle %2!</translation>
+        <translation>Es gibt keine Spalte namens %1 in Tabelle %2!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="305"/>
         <source>tablecol() works only on tables!</source>
-        <translation type="unfinished">tablecol() funktioniert nur bei Tabellen!</translation>
+        <translation>tablecol() funktioniert nur bei Tabellen!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="308"/>
@@ -13912,44 +13912,44 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/MuParserScript.cpp" line="457"/>
         <location filename="../src/MuParserScript.cpp" line="463"/>
         <source>Couldn&apos;t find a table named %1.</source>
-        <translation type="unfinished">Konnte keine Tabelle namens %1 finden.</translation>
+        <translation>Konnte keine Tabelle namens %1 finden.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="351"/>
         <location filename="../src/MuParserScript.cpp" line="371"/>
         <source>cell() works only on tables and matrices!</source>
-        <translation type="unfinished">cell() funktioniert nur bei Tabellen und Matrizen!</translation>
+        <translation>cell() funktioniert nur bei Tabellen und Matrizen!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="375"/>
         <source>There&apos;s no row %1 in matrix %2!</source>
-        <translation type="unfinished">Es gibt keine Zeile %1 in Matrix %2!</translation>
+        <translation>Es gibt keine Zeile %1 in Matrix %2!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="378"/>
         <source>There&apos;s no column %1 in matrix %2!</source>
-        <translation type="unfinished">Es gibt keine Spalte namens %1 in Matrix %2!</translation>
+        <translation>Es gibt keine Spalte namens %1 in Matrix %2!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="425"/>
         <location filename="../src/MuParserScript.cpp" line="431"/>
         <source>Accessing table values is not (yet) supported in this context.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabellenwerte abzufragen wird (noch) nicht unterstützt in diesem Kontext.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="470"/>
         <source>There&apos;s no column named %1 in table %2!</source>
-        <translation type="unfinished">Es gibt keine Spalte namens %1 in Tabelle %2!</translation>
+        <translation>Es gibt keine Spalte namens %1 in Tabelle %2!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="581"/>
         <source>tablecol: wrong number of arguments (need 2, got %1)</source>
-        <translation type="unfinished">tablecol: falsche Anzahl von Argumenten (2 benötigt, %1 angegeben)</translation>
+        <translation>tablecol: falsche Anzahl von Argumenten (2 benötigt, %1 angegeben)</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="608"/>
         <source>cell: wrong number of arguments (need 2, got %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>cell: falsche Anzahl Argumente (2 benötigt, %1 angegeben)</translation>
     </message>
 </context>
 <context>
@@ -14133,38 +14133,38 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="117"/>
         <source>(amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Amplitude)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="117"/>
         <source>(center)</source>
-        <translation type="unfinished">(Mitte)</translation>
+        <translation>(Mitte)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="117"/>
         <source>(width)</source>
-        <translation type="unfinished">(Breite)</translation>
+        <translation>(Breite)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="117"/>
         <location filename="../src/MultiPeakFit.cpp" line="127"/>
         <source>(offset)</source>
-        <translation type="unfinished">(Offset)</translation>
+        <translation>(Offset)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="123"/>
         <source>(amplitude %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Amplitude %1)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="124"/>
         <source>(center %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Mitte %1)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="125"/>
         <source>(width %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Breite %1)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="246"/>
@@ -18976,37 +18976,37 @@ doppelter Präzision
     <message>
         <location filename="../src/ExponentialFit.cpp" line="245"/>
         <source>(first amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(erste Amplitude)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="245"/>
         <source>(first lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(erste Lebensdauer)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="245"/>
         <source>(second amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(zweite Amplitude)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(second lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(zweite Lebensdauer)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(third amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(dritte Amplitude)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(third lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(dritte Lebensdauer)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(offset)</source>
-        <translation type="unfinished">(Offset)</translation>
+        <translation>(Offset)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="243"/>
@@ -19047,27 +19047,27 @@ doppelter Präzision
     <message>
         <location filename="../src/ExponentialFit.cpp" line="168"/>
         <source>(first amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(erste Amplitude)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="168"/>
         <source>(first lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(erste Lebensdauer)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="168"/>
         <source>(second amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(zweite Amplitude)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="169"/>
         <source>(second lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(zweite Lebensdauer)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="169"/>
         <source>(offset)</source>
-        <translation type="unfinished">(Offset)</translation>
+        <translation>(Offset)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="166"/>
