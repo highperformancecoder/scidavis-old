@@ -39,7 +39,7 @@ class PlotCurve: public QwtPlotCurve
 public:
 	PlotCurve(const char *name = 0): QwtPlotCurve(name), d_type(0){};
 
-	int type(){return d_type;};
+	int type() const {return d_type;};
 	void setType(int t){d_type = t;};
 
 	QwtDoubleRect boundingRect() const;

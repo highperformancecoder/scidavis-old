@@ -82,9 +82,6 @@ public:
 	int position(){return d_position;};
 	void setPosition(int pos){d_position = pos;};
 
-	int vectorStyle(){return d_style;};
-	void setVectorStyle(int style){d_style = style;};
-
 	bool updateData(Table *t, const QString& colName);
 	void loadData();
 
@@ -95,7 +92,7 @@ protected:
 	QwtArrayData *vectorEnd;
 	QPen pen;
 	bool filledArrow;
-	int d_style, d_headLength, d_headAngle, d_position;
+	int d_headLength, d_headAngle, d_position;
 
 	QString d_end_x_a;
 	QString d_end_y_m;

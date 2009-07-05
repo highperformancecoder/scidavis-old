@@ -37,7 +37,14 @@ VectorCurve::VectorCurve(VectorStyle style, Table *t, const QString& xColName, c
 				const QString& endCol1, const QString& endCol2, int startRow, int endRow):
     DataCurve(t, xColName, name, startRow, endRow)
 {
-d_style = style;
+	switch (style) {
+		case XYXY:
+			d_type = Graph::VectXYXY;
+			break;
+		case XYAM:
+			d_type = Graph::VectXYAM;
+			break;
+	}
 pen=QPen(Qt::black, 1, Qt::SolidLine);
 filledArrow=true;
 d_headLength=4;
@@ -50,7 +57,7 @@ d_end_y_m = endCol2;
 
 void VectorCurve::copy(const VectorCurve *vc)
 {
-d_style = vc->d_style;
+d_type = vc->type();
 filledArrow = vc->filledArrow;
 d_headLength = vc->d_headLength;
 d_headAngle = vc->d_headAngle;
@@ -79,7 +86,7 @@ void VectorCurve::draw(QPainter *painter,
 void VectorCurve::drawVector(QPainter *painter,
     const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
 {
-if (d_style == XYAM)
+if (d_type == Graph::VectXYAM)
 {
  for (int i = from; i <= to; i++)
 	{
@@ -235,7 +242,7 @@ QwtDoubleRect VectorCurve::boundingRect() const
 QwtDoubleRect rect = QwtPlotCurve::boundingRect();
 QwtDoubleRect vrect = vectorEnd->boundingRect();
 
-if (d_style == XYXY)
+if (d_type == Graph::VectXYXY)
 	{
 	rect.setTop(QMIN(rect.top(), vrect.top()));
 	rect.setBottom(QMAX(rect.bottom(), vrect.bottom()));
@@ -313,7 +320,7 @@ void VectorCurve::updateColumnNames(const QString& oldName, const QString& newNa
 QString VectorCurve::plotAssociation()
 {
     QString base = d_x_column + "(X)," + title().text() + "(Y)," + d_end_x_a;
-    if (d_style == XYAM)
+    if (d_type == Graph::VectXYAM)
         return base + "(A)," + d_end_y_m + "(M)";
     else
         return base + "(X)," + d_end_y_m + "(Y)";
