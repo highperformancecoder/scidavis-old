@@ -19,7 +19,7 @@
 
 //  Don't forget to change the Doxyfile, the splash screen and the Windows
 //  installer when changing these!
-const int SciDAVis::scidavis_version = 0x000202;
+const int SciDAVis::scidavis_version = 0x000203;
 
 const char * SciDAVis::extra_version = "";
 
@@ -46,15 +46,15 @@ The following people have contributed translations or parts thereof.\n\
 In alphabetical order.\n\
 \n\
 Tilman Benkert[1], Markus Bongard, Tobias Burnus, Rémy Claverie, f0ma, José Antonio Lorenzo Fernández, \
-Daniel Klaer, Peter Landgren, Tomomasa Ohkubo, Mikhail Shevyakov, Mauricio Troviano\n\
+Daniel Klaer, Peter Landgren, Fellype do Nascimento, Tomomasa Ohkubo, Mikhail Shevyakov, Mauricio Troviano\n\
 \n\
 --- Packagers ---\n\
 \n\
 The following people have made installing SciDAVis easier by providing specialized binary packages.\n\
 In alphabetical order.\n\
 \n\
-Burkhard Bunk (Debian), Quentin Denis (SUSE), Yu-Hung Lien (Mac OS X), Eric Tanguy (Fedora), \
-Mauricio Troviano (Windows installer)\n\
+Burkhard Bunk (Debian), Quentin Denis (SUSE), Yu-Hung Lien (Mac OS X), Fellype do Nascimento (Slackware), \
+Eric Tanguy (Fedora), Mauricio Troviano (Windows installer)\n\
 \n\
 --- QtiPlot ---\n\
 \n\
@@ -89,7 +89,7 @@ GSL (http://www.gnu.org/software/gsl/)\n\
 \n\
 ... and many more we just forgot to mention.\n";
 
-const char * SciDAVis::release_date = " 2009-04-19";
+const char * SciDAVis::release_date = " 2009-07-05";
 
 int SciDAVis::version()
 {

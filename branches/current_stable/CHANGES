@@ -161,3 +161,22 @@ Most important changes (since 0.2.1)
 - Python function Table.importASCII() reimplemented, which was missing in
   SciDAVis 0.2.0 and 0.2.1.
 
+=== Release 0.2.3, 2009-07-05 ===
+Most important changes (since 0.2.2)
+- fixed many more bugs, including various crashes
+- performance improvements
+- improved pasting of cells from OpenOffice.org Calc and KSpread into tables
+- Brazilian Portuguese and German translations improved
+- Some build system fixes for building on MacOS X Tiger and detecting lupdate-qt4/lupdate
+- now also compatible with Qwt 5.2.0
+- main window remembers size from the last session instead of always displaying maximized
+- added the following methods to the Python interface:
+    MDIWindow.name()
+	 MDIWindow.setName(string)
+	 Note.text()
+	 Note.setText(string)
+	 Note.executeAll()
+	 Note.setAutoexec(bool)
+	 Note.exportASCII(filename)
+	 Note.importASCII(filename)
+

@@ -28,14 +28,14 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SciDAVis"
-!define PRODUCT_VERSION "0.2.2"
+!define PRODUCT_VERSION "0.2.3"
 !define PRODUCT_WEB_SITE "http://scidavis.sourceforge.net/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\scidavis.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
-!define PYTHON_INSTALLER "python-2.6.1.msi"
-!define PYTHON_URL "http://www.python.org/ftp/python/2.6.1/${PYTHON_INSTALLER}"
+!define PYTHON_INSTALLER "python-2.6.2.msi"
+!define PYTHON_URL "http://www.python.org/ftp/python/2.6.2/${PYTHON_INSTALLER}"
 
 SetCompressor /SOLID lzma
 
