@@ -14854,7 +14854,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/Plot.cpp" line="58"/>
         <source>Y Axis Title</source>
-        <translation>Y-Achsentitle</translation>
+        <translation>Y-Achsentitel</translation>
     </message>
     <message>
         <location filename="../src/Plot.cpp" line="59"/>
@@ -17152,12 +17152,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/SciDAVisAbout.ui" line="49"/>
         <source>SciDAVis XX.XX.XX-betaXX</source>
-        <translation type="unfinished"></translation>
+        <translation>SciDAVis XX.XX.XX-betaXX</translation>
     </message>
     <message>
         <location filename="../src/SciDAVisAbout.ui" line="67"/>
         <source>Released XXXX-XX-XX</source>
-        <translation type="unfinished"></translation>
+        <translation>Herausgegeben XXXX-XX-XX</translation>
     </message>
     <message>
         <location filename="../src/SciDAVisAbout.ui" line="130"/>
