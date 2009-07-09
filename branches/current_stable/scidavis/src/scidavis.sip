@@ -180,6 +180,7 @@ class MyWidget: QWidget /PyName=MDIWindow/
 {
 %TypeHeaderCode
 #include "src/MyWidget.h"
+#include "src/ApplicationWindow.h"
 %End
 public:
   enum CaptionPolicy{Name = 0, Label = 1, Both = 2};
@@ -192,6 +193,10 @@ public:
 
   QString name();
   void setName(const QString& s);
+%MethodCode
+	ApplicationWindow *app = sipscidavis_app();
+	if (app) app->renameWindow(sipCpp, *a0);
+%End
 
   CaptionPolicy captionPolicy();
   void setCaptionPolicy(CaptionPolicy);
