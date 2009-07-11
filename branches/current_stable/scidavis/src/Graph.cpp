@@ -3210,24 +3210,31 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
 		for (int i=0; i<curves; i++)
 		{
 			CurveType type_of_i;
-            int j = w->colIndex(names[i]);
+            int j = w->colIndex(lst[i]);
 				if (j < 0) continue;
             bool ok = false;
             if (w->colPlotDesignation(j) == SciDAVis::xErr || w->colPlotDesignation(j) == SciDAVis::yErr)
 			{
 				type_of_i = ErrorBars;
-				int ycol = w->colY(w->colIndex(names[i]));
+				int ycol = -1;
+				for (int k=curves-1; k >= 0; k--) {
+            		int index = w->colIndex(lst[k]);
+            		if (w->colPlotDesignation(index) == SciDAVis::Y)
+						ycol = index;
+				}
+                if (ycol < 0)
+					ycol = w->colY(w->colIndex(lst[i]));
                 if (ycol < 0)
                     return false;
 
                 if (w->colPlotDesignation(j) == SciDAVis::xErr)
-                    ok = addErrorBars(w->colName(ycol), w, names[i], (int)QwtErrorPlotCurve::Horizontal);
+                    ok = addErrorBars(w->colName(ycol), w, lst[i], (int)QwtErrorPlotCurve::Horizontal);
                 else
-                    ok = addErrorBars(w->colName(ycol), w, names[i]);
+                    ok = addErrorBars(w->colName(ycol), w, lst[i]);
 			}
 			else {
 				type_of_i = (CurveType) style;
-				ok = insertCurve(w, names[i], style, startRow, endRow);
+				ok = insertCurve(w, lst[i], style, startRow, endRow);
 			}
 
             if (ok)
