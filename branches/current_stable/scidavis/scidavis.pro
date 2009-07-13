@@ -18,7 +18,7 @@ INSTALLS        += documentation     # README, INSTALL.html, manual (if present 
 INSTALLS        += translationfiles
 
 ### names of the lupdate and lrelease programs (needed if you want to compile and install the translations automatically)
-### possibly needs to be adapted if you have an usual installation
+### possibly needs to be adapted if you have an unusual installation
 exists(/usr/bin/lupdate-qt4) {
 	# Debian, Ubuntu, Fedora
 	LUPDATE_BIN = lupdate-qt4
