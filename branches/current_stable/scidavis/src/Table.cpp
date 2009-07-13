@@ -1382,7 +1382,7 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 				column(i)->setName(temp->column(i)->name());
 		}
 		for (int i=overwritten_cols; i<preexisting_cols; i++)
-			column(i)->remove();
+			column(overwritten_cols)->remove();
 		String2DoubleFilter * filter = new String2DoubleFilter;
 		for (int i=overwritten_cols; i<temp->columnCount(); i++) {
 			filter->input(0, temp->column(i));
