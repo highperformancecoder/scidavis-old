@@ -48,6 +48,7 @@ class ScreenPickerTool : public QwtPlotPicker, public PlotToolInterface
 	public:
 		ScreenPickerTool(Graph *graph, const QObject *status_target=NULL, const char *status_slot="");
 		virtual ~ScreenPickerTool();
+		virtual RTTI rtti() const { return ScreenPicker; }
 		virtual bool eventFilter(QObject *obj, QEvent *event);
 	signals:
 		/*! Emitted whenever a new message should be presented to the user.

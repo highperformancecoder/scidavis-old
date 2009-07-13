@@ -67,6 +67,7 @@ class LineProfileTool : public QWidget, public PlotToolInterface
 	public:
 		//! Standard constructor.
 		LineProfileTool(Graph *graph, int average_pixels);
+		virtual RTTI rtti() const { return LineProfile; }
 		void calculateLineProfile(const QPoint &start, const QPoint &end);
 
 	signals:

@@ -569,6 +569,9 @@ class Graph: public QWidget
 		 */
 		bool enableRangeSelectors(const QObject *status_target=NULL, const char *status_slot="");
 
+		//! Check wether range selectors are currently enabled.
+		bool rangeSelectorsEnabled() const { return !d_range_selector.isNull(); }
+
 		//! \name Border and Margin
 		//@{
 		void setMargin (int d);

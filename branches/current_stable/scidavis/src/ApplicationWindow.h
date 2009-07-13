@@ -549,7 +549,6 @@ public slots:
 	void showCursor();
 	void showScreenReader();
 	void pickPointerCursor();
-	void disableTools();
 	void pickDataTool( QAction* action );
 
 	void updateLog(const QString& result);

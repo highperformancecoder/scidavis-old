@@ -195,9 +195,10 @@ bool DataPickerTool::keyEventFilter(QKeyEvent *ke)
 			{
 				int n_curves = d_graph->curves();
 				int start = d_graph->curveIndex(d_selected_curve) + 1;
+				QwtPlotCurve *c;
 				for (int i = start; i < start + n_curves; ++i)
-					if (d_graph->curve(i % n_curves)->dataSize() > 0) {
-						setSelection(d_graph->curve(i % n_curves), 0);
+					if ((c=d_graph->curve(i % n_curves))->dataSize() > 0) {
+						setSelection(c, qMin(c->dataSize(), d_selected_point));
 						break;
 					}
 				d_graph->plotWidget()->replot();
@@ -208,9 +209,10 @@ bool DataPickerTool::keyEventFilter(QKeyEvent *ke)
 			{
 				int n_curves = d_graph->curves();
 				int start = d_graph->curveIndex(d_selected_curve) + n_curves - 1;
+				QwtPlotCurve *c;
 				for (int i = start; i > start - n_curves; --i)
-					if (d_graph->curve(i % n_curves)->dataSize() > 0) {
-						setSelection(d_graph->curve(i % n_curves), 0);
+					if ((c=d_graph->curve(i % n_curves))->dataSize() > 0) {
+						setSelection(c, qMin(c->dataSize(), d_selected_point));
 						break;
 					}
 				d_graph->plotWidget()->replot();

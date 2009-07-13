@@ -1195,6 +1195,41 @@ void ApplicationWindow::customToolBars(QWidget* w)
 			matrix_plot_tools->setEnabled (false);
 
 			Graph *g = static_cast<MultiLayer*>(w)->activeGraph();
+			if (g) {
+				dataTools->blockSignals(true);
+				if (g->rangeSelectorsEnabled())
+					btnSelect->setChecked(true);
+				else if (g->zoomOn())
+					btnZoomIn->setChecked(true);
+				else if (g->drawArrow())
+					btnArrow->setChecked(true);
+				else if (g->drawLineActive())
+					btnLine->setChecked(true);
+				else if (g->activeTool() == 0)
+					btnPointer->setChecked(true);
+				else switch (g->activeTool()->rtti()) {
+					case PlotToolInterface::DataPicker:
+						switch (static_cast<DataPickerTool*>(g->activeTool())->mode()) {
+							case DataPickerTool::Display:
+								btnCursor->setChecked(true);
+								break;
+							case DataPickerTool::Move:
+								btnMovePoints->setChecked(true);
+								break;
+							case DataPickerTool::Remove:
+								btnRemovePoints->setChecked(true);
+								break;
+						}
+						break;
+					case PlotToolInterface::ScreenPicker:
+						btnPicker->setChecked(true);
+						break;
+					default:
+						btnPointer->setChecked(true);
+						break;
+				}
+				dataTools->blockSignals(false);
+			}
 			if (g && g->curves() > 0) {
 				plot_tools->setEnabled(true);
 				QwtPlotCurve *c = g->curve(g->curves()-1);
@@ -10184,27 +10219,18 @@ void ApplicationWindow::pickPointerCursor()
 	btnPointer->setChecked(true);
 }
 
-void ApplicationWindow::disableTools()
-{
-	QWidgetList *windows = windowsList();
-	foreach(QWidget *w, *windows)
-	{
-		if (w->inherits("MultiLayer"))
-		{
-			QWidgetList lst= ((MultiLayer *)w)->graphPtrs();
-			foreach(QWidget *widget, lst)
-				((Graph *)widget)->disableTools();
-		}
-	}
-	delete windows;
-}
-
 void ApplicationWindow::pickDataTool( QAction* action )
 {
 	if (!action)
 		return;
 
-	disableTools();
+	MultiLayer *m = qobject_cast<MultiLayer*>(d_workspace->activeWindow());
+	if (!m) return;
+
+	Graph *g = m->activeGraph();
+	if (!g) return;
+
+	g->disableTools();
 
 	if (action == btnCursor)
 		showCursor();

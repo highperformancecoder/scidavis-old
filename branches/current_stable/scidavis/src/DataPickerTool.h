@@ -47,6 +47,8 @@ class DataPickerTool : public QwtPlotPicker, public PlotToolInterface
 		enum Mode { Display, Move, Remove };
 		enum MoveMode {Free, Vertical, Horizontal};
 		DataPickerTool(Graph *graph, ApplicationWindow *app, Mode mode, const QObject *status_target=NULL, const char *status_slot="");
+		virtual RTTI rtti() const { return DataPicker; }
+		Mode mode() const { return d_mode; }
 		virtual ~DataPickerTool();
 		virtual bool eventFilter(QObject *obj, QEvent *event);
 		bool keyEventFilter(QKeyEvent *ke);
