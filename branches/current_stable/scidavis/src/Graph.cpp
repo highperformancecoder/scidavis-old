@@ -3207,7 +3207,7 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
 				lst.prepend(names[i]);
         }
 
-		for (int i=0; i<curves; i++)
+		for (int i=0; i<lst.size(); i++)
 		{
 			CurveType type_of_i;
             int j = w->colIndex(lst[i]);

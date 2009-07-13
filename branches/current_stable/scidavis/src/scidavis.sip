@@ -709,6 +709,24 @@ class QwtPlotCurve
 		QwtPlotCurve(const QwtPlotCurve&);
 };
 
+class QwtPlot {
+%TypeHeaderCode
+#include <qwt/qwt_plot.h>
+%End
+	public:
+  enum Axis 
+  { 
+  	yLeft,
+  	yRight,
+  	xBottom,
+  	xTop,
+  
+  	axisCnt
+  };
+	private:
+  QwtPlot(const QwtPlot&);
+};
+
 class Graph : QWidget /PyName=Layer/
 {
 %TypeHeaderCode

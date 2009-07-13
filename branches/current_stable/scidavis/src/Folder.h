@@ -66,9 +66,15 @@ public:
 
 	QList<MyWidget *> windowsList(){return lstWindows;};
 
-    void addWindow( MyWidget *w ){ lstWindows.append( w );};
-	void removeWindow( MyWidget *w ){ lstWindows.takeAt( lstWindows.indexOf(w) );
-		if (w==d_active_window) d_active_window=0; };
+    void addWindow( MyWidget *w ) {
+		w->setFolder(this);
+		lstWindows.append( w );
+	};
+	void removeWindow( MyWidget *w ){
+		w->setFolder(0);
+		lstWindows.removeAll(w);
+		if (w==d_active_window) d_active_window=0;
+	};
 
 	//! The list of subfolder names, including first generation children only
 	QStringList subfolders();
