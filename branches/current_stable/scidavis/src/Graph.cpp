@@ -3191,21 +3191,21 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
 		plotVectorCurve(w, names, style, startRow, endRow);
 	else
 	{
-		int curves = (int)names.count();
-        int errCurves = 0;
-		QStringList lst = QStringList();
-        for (int i=0; i<curves; i++)
-        {//We rearrange the list so that the error bars are placed at the end
-        	int j = w->colIndex(names[i]);
-			if (j < 0) continue;
-  	        if (w->colPlotDesignation(j) == SciDAVis::xErr || w->colPlotDesignation(j) == SciDAVis::yErr)
-			{
-				errCurves++;
-				lst << names[i];
+		QStringList errorCurves, otherCurves;
+		foreach(QString col, names) {
+			int colIndex = w->colIndex(col);
+			if (colIndex < 0) continue;
+			switch (w->colPlotDesignation(colIndex)) {
+				case SciDAVis::xErr:
+				case SciDAVis::yErr:
+					errorCurves << col;
+					break;
+				default:
+					otherCurves << col;
+					break;
 			}
-			else
-				lst.prepend(names[i]);
-        }
+		}
+		QStringList lst = otherCurves + errorCurves;
 
 		for (int i=0; i<lst.size(); i++)
 		{
@@ -3213,11 +3213,10 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
             int j = w->colIndex(lst[i]);
 				if (j < 0) continue;
             bool ok = false;
-            if (w->colPlotDesignation(j) == SciDAVis::xErr || w->colPlotDesignation(j) == SciDAVis::yErr)
-			{
+			if (i >= otherCurves.size()) {
 				type_of_i = ErrorBars;
 				int ycol = -1;
-				for (int k=curves-1; k >= 0; k--) {
+				for (int k=otherCurves.size()-1; k >= 0; k--) {
             		int index = w->colIndex(lst[k]);
             		if (w->colPlotDesignation(index) == SciDAVis::Y)
 						ycol = index;
@@ -3239,7 +3238,7 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
 
             if (ok)
 			{
-				CurveLayout cl = initCurveLayout(type_of_i, curves - errCurves);
+				CurveLayout cl = initCurveLayout(type_of_i, otherCurves.size());
 				cl.sSize = sSize;
 				cl.lWidth = lWidth;
 				updateCurveLayout(i, &cl);
