@@ -481,8 +481,8 @@ Column *MuParserScript::resolveColumnPath(const QString &path) {
  * - col(arg) with column("arg") if the current table contains a column named "arg" and
  *   with column_(arg) otherwise
  * - col("name", row) with cell("name", row)
- * - col(arg, row) with column("arg", row) if the current table contains a column named "arg" and
- *   with column_(arg, row) otherwise
+ * - col(arg, row) with cell("arg", row) if the current table contains a column named "arg" and
+ *   with cell_(arg, row) otherwise
  * - tablecol("tableName", "columnName") with column("tableName/columnName")
  * - tablecol("tableName", columnIndex) with column__("tableName", columnIndex)
  * - cell(columnIndex, rowIndex) with cell_(columnIndex, rowIndex)
@@ -650,7 +650,26 @@ bool MuParserScript::compile(bool asFunction) {
 	QString intermediate = Code.trimmed(); // pre-processed version of #Code
 
 	// remove comments
-	intermediate.remove(QRegExp("#[^\n]*(\n|$)"));
+	bool inString = false;
+	int commentStart = -1;
+	for (int i=0; i<intermediate.size(); i++)
+		switch (intermediate.at(i).toAscii()) {
+			case '"':
+				if (commentStart < 0) inString = !inString;
+				break;
+			case '#':
+				if (!inString) commentStart = i;
+				break;
+			case '\n':
+				if (commentStart >= 0) {
+					intermediate.remove(commentStart, i-commentStart);
+					i = commentStart;
+					commentStart = -1;
+				}
+				break;
+		}
+	if (commentStart >= 0)
+		intermediate.remove(commentStart, intermediate.size()-commentStart);
 
 	// simplify statement separators
 	intermediate.replace(QRegExp("([;\\n]\\s*)+"),"; ");
