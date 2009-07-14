@@ -915,7 +915,9 @@ void ApplicationWindow::initMainMenu()
 	help->setFont(appFont);
 
 	help->addAction(actionShowHelp);
+#ifdef DYNAMIC_MANUAL_PATH
 	help->addAction(actionChooseHelpFolder);
+#endif
 	help->addSeparator();
 	help->addAction(actionHomePage);
 	help->addAction(actionCheckUpdates);
@@ -4183,41 +4185,26 @@ void ApplicationWindow::readSettings()
 	settings.beginGroup("/Paths");
 	workingDir = settings.value("/WorkingDir", qApp->applicationDirPath()).toString();
 
+#ifdef DYNAMIC_MANUAL_PATH
 #ifdef MANUAL_PATH
 	helpFilePath = settings.value("/HelpFile", MANUAL_PATH "/index.html").toString();
 #elif defined(DOC_PATH)
 	helpFilePath = settings.value("/HelpFile", DOC_PATH "/manual/index.html").toString();
-#elif defined(Q_OS_WIN)
-	helpFilePath = settings.value("/HelpFile", qApp->applicationDirPath()+"/manual/index.html").toString();
 #else
 	QVariant help_file_setting = settings.value("/HelpFile");
 	if (help_file_setting.isValid())
 		helpFilePath = help_file_setting.toString();
-	else {
-		QFileInfo help_file_info;
-		QString help_dir_base = QString("/usr/share/doc/scidavis-%1.%2.%3")
-			.arg((scidavis_version & 0xff0000) >> 16)
-			.arg((scidavis_version & 0x00ff00) >> 8)
-			.arg(scidavis_version & 0x0000ff);
-		help_file_info.setFile(help_dir_base);
-		if (!help_file_info.exists())
-			help_dir_base = "/usr/share/doc/scidavis";
-		QStringList help_dir_suffixes;
-		QString locale = QLocale().name(); // language_country according to ISO 639 and 3166, respectively
-		help_dir_suffixes
-			<< QString("-") + locale
-			<< QString("-") + locale.section('_',0,0)
-			<< QString("-") + appLanguage
-			<< "-en"
-			<< "";
-		foreach (QString suffix, help_dir_suffixes) {
-			help_file_info.setFile(help_dir_base + QString("/manual%1/index.html").arg(suffix));
-			if (help_file_info.exists())
-				break;
-		}
-		// intentionally defaults to /usr/share/doc/scidavis/manual/index.html even if it doesn't exist
-		helpFilePath = help_file_info.absoluteFilePath();
-	}
+	else
+		helpFilePath = guessHelpFolder();
+#endif
+#else // ifdef DYNAMIC_MANUAL_PATH
+#ifdef MANUAL_PATH
+	helpFilePath = MANUAL_PATH "/index.html";
+#elif defined(DOC_PATH)
+	helpFilePath = DOC_PATH "/manual/index.html";
+#else
+	helpFilePath = guessHelpFolder();
+#endif
 #endif
 
 #ifdef Q_OS_WIN
@@ -8237,13 +8224,8 @@ void ApplicationWindow::showHelp()
 				tr("Please indicate the location of the help file!")+"<br>"+
 				tr("The manual can be downloaded from the following internet address:")+
 				"<p><a href = http://sourceforge.net/project/showfiles.php?group_id=199120>http://sourceforge.net/project/showfiles.php?group_id=199120</a></p>");
-		QString fn = QFileDialog::getOpenFileName(QDir::currentDirPath(), "*.html", this );
-		if (!fn.isEmpty())
-		{
-			QFileInfo fi(fn);
-			helpFilePath=fi.absFilePath();
-			saveSettings();
-		}
+		chooseHelpFolder();
+		saveSettings();
 	}
 
 	QFileInfo fi(helpFilePath);
@@ -10721,8 +10703,10 @@ void ApplicationWindow::createActions()
 	actionShowHelp->setShortcut( tr("Ctrl+H") );
 	connect(actionShowHelp, SIGNAL(activated()), this, SLOT(showHelp()));
 
+#ifdef DYNAMIC_MANUAL_PATH
 	actionChooseHelpFolder = new QAction(tr("&Choose Help Folder..."), this);
 	connect(actionChooseHelpFolder, SIGNAL(activated()), this, SLOT(chooseHelpFolder()));
+#endif
 
 	actionRename = new QAction(tr("&Rename Window"), this);
 	connect(actionRename, SIGNAL(activated()), this, SLOT(renameActiveWindow()));
@@ -11187,7 +11171,10 @@ void ApplicationWindow::translateActionsStrings()
 	actionShowHelp->setMenuText(tr("&Help"));
 	actionShowHelp->setShortcut(tr("Ctrl+H"));
 
+#ifdef DYNAMIC_MANUAL_PATH
 	actionChooseHelpFolder->setMenuText(tr("&Choose Help Folder..."));
+#endif
+
 	actionRename->setMenuText(tr("&Rename Window"));
 
 	actionCloseWindow->setMenuText(tr("Close &Window"));
@@ -13694,4 +13681,35 @@ QStringList ApplicationWindow::tableWindows()
 	foreach(AbstractAspect *aspect, tables)
 		result.append(aspect->name());
 	return result;
+}
+
+QString ApplicationWindow::guessHelpFolder()
+{
+#if defined(Q_OS_WIN)
+	return qApp->applicationDirPath()+"/manual/index.html";
+#else
+	QFileInfo help_file_info;
+	QString help_dir_base = QString("/usr/share/doc/scidavis-%1.%2.%3")
+		.arg((SciDAVis::version() & 0xff0000) >> 16)
+		.arg((SciDAVis::version() & 0x00ff00) >> 8)
+		.arg(SciDAVis::version() & 0x0000ff);
+	help_file_info.setFile(help_dir_base);
+	if (!help_file_info.exists())
+		help_dir_base = "/usr/share/doc/scidavis";
+	QStringList help_dir_suffixes;
+	QString locale = QLocale().name(); // language_country according to ISO 639 and 3166, respectively
+	help_dir_suffixes
+		<< QString("-") + locale
+		<< QString("-") + locale.section('_',0,0)
+		<< QString("-") + appLanguage
+		<< "-en"
+		<< "";
+	foreach (QString suffix, help_dir_suffixes) {
+		help_file_info.setFile(help_dir_base + QString("/manual%1/index.html").arg(suffix));
+		if (help_file_info.exists())
+			break;
+	}
+	// intentionally defaults to /usr/share/doc/scidavis/manual/index.html even if it doesn't exist
+	return help_file_info.absoluteFilePath();
+#endif
 }

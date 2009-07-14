@@ -638,6 +638,7 @@ public slots:
 	void showHelp();
 	static void showStandAloneHelp();
 	void chooseHelpFolder();
+	QString guessHelpFolder();
 	void showPlotWizard();
 	void showFitPolynomDialog();
 	void showIntegrationDialog();
@@ -1057,7 +1058,10 @@ private:
     QAction *actionShowExpDecayDialog, *actionShowTwoExpDecayDialog, *actionShowExpDecay3Dialog;
     QAction *actionFitExpGrowth, *actionFitSigmoidal, *actionFitGauss, *actionFitLorentz, *actionShowFitDialog;
     QAction *actionShowAxisDialog, *actionShowTitleDialog;
-    QAction *actionAbout, *actionShowHelp, *actionChooseHelpFolder;
+    QAction *actionAbout, *actionShowHelp;
+#ifdef DYNAMIC_MANUAL_PATH
+   	QAction *actionChooseHelpFolder;
+#endif
     QAction *actionRename, *actionCloseWindow, *actionConvertTable;
     QAction *actionAddColToTable, *actionDeleteLayer, *actionInterpolate;
     QAction *actionResizeActiveWindow, *actionHideActiveWindow;

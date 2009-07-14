@@ -42,6 +42,11 @@ win32: documentation.path = "$$INSTALLBASE"                        # ... on Wino
 ### Usually, the manual will be expected in the "manual" subfolder of "documentation.path" (see above).
 ### You can override this, uncomment and adjust the path behind the '=' in the next line.
 # manual.path = $$INSTALLBASE/share/doc/scidavis/manual
+### Enables choosing of help folder at runtime, instead of relying on the above path only.
+### The downside is that the help folder will be remembered as a configuration option, so a binary
+### package cannot easily update the path for its users.
+### Dynamic selection of the manual path was the only available option up until SciDAVis 0.2.3.
+DEFINES += DYNAMIC_MANUAL_PATH
 ### Important: translationfiles.path will be the directory where scidavis expects
 ### the translation .qm files at runtime. Therefore you need to set it corretly even if 
 ### you do not use this project file to generate the translation files.
