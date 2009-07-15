@@ -35,6 +35,7 @@
 #include <QLineEdit>
 #include <QLayout>
 #include <QSpinBox>
+#include <QDoubleSpinBox>
 #include <QPushButton>
 #include <QLabel>
 #include <QStackedWidget>
@@ -325,26 +326,30 @@ void Plot3DDialog::initGeneralPage()
 
     QGridLayout *gl2 = new QGridLayout();
     gl2->addWidget(new QLabel(tr( "Zoom (%)" )), 0, 0);
-	boxZoom = new QSpinBox();
-    boxZoom->setRange(1, 10000);
+	boxZoom = new QDoubleSpinBox();
+	boxZoom->setMinimum(0);
+	boxZoom->setMaximum(1e15);
     boxZoom->setSingleStep(10);
 
     gl2->addWidget(boxZoom, 0, 1);
     gl2->addWidget(new QLabel(tr( "X Zoom (%)" )), 1, 0);
-	boxXScale = new QSpinBox();
-    boxXScale->setRange(1, 10000);
+	boxXScale = new QDoubleSpinBox();
+	boxXScale->setMinimum(0);
+	boxXScale->setMaximum(1e15);
     boxXScale->setSingleStep(10);
     gl2->addWidget(boxXScale, 1, 1);
 
     gl2->addWidget(new QLabel(tr( "Y Zoom (%)" )), 2, 0);
-	boxYScale = new QSpinBox();
-    boxYScale->setRange(1, 10000);
+	boxYScale = new QDoubleSpinBox();
+	boxYScale->setMinimum(0);
+	boxYScale->setMaximum(1e15);
     boxYScale->setSingleStep(10);
     gl2->addWidget(boxYScale, 2, 1);
 
     gl2->addWidget(new QLabel(tr( "Z Zoom (%)" )), 3, 0);
-	boxZScale = new QSpinBox();
-    boxZScale->setRange(1, 10000);
+	boxZScale = new QDoubleSpinBox();
+	boxZScale->setMinimum(0);
+	boxZScale->setMaximum(1e15);
     boxZScale->setSingleStep(10);
     gl2->addWidget(boxZScale, 3, 1);
     gl2->setRowStretch(4, 1);
@@ -365,10 +370,10 @@ void Plot3DDialog::initGeneralPage()
 	connect( boxMeshLineWidth, SIGNAL(valueChanged(int)), this, SIGNAL(updateMeshLineWidth(int)));
 	connect( boxOrthogonal, SIGNAL(toggled(bool)), this, SIGNAL(setOrtho(bool)));
 	connect( boxLegend, SIGNAL(toggled(bool)), this, SIGNAL(showColorLegend(bool)));
-	connect( boxZoom, SIGNAL(valueChanged(int)), this, SLOT(changeZoom(int)));
-	connect( boxXScale, SIGNAL(valueChanged(int)), this, SLOT(changeZoom(int)));
-	connect( boxYScale, SIGNAL(valueChanged(int)), this, SLOT(changeZoom(int)));
-	connect( boxZScale, SIGNAL(valueChanged(int)), this, SLOT(changeZoom(int)));
+	connect( boxZoom, SIGNAL(valueChanged(double)), this, SLOT(changeZoom(double)));
+	connect( boxXScale, SIGNAL(valueChanged(double)), this, SLOT(changeZoom(double)));
+	connect( boxYScale, SIGNAL(valueChanged(double)), this, SLOT(changeZoom(double)));
+	connect( boxZScale, SIGNAL(valueChanged(double)), this, SLOT(changeZoom(double)));
 	connect( btnNumbersFont, SIGNAL(clicked()), this, SLOT(pickNumbersFont() ) );
 }
 
@@ -756,13 +761,13 @@ void Plot3DDialog::showLegend(bool show)
 	boxLegend->setChecked(show);
 }
 
-void Plot3DDialog::changeZoom(int)
+void Plot3DDialog::changeZoom(double)
 {
 	if (generalDialog->currentWidget() != (QWidget*)general)
 		return;
 
 	emit updateZoom(boxZoom->value()*0.01);
-	emit updateScaling(boxXScale->value()*0.01,boxYScale->value()*0.01,
+	emit updateScaling(boxXScale->value(),boxYScale->value()*0.01,
 			boxZScale->value()*0.01);
 }
 
@@ -970,14 +975,14 @@ void Plot3DDialog::setResolution(int r)
 
 void Plot3DDialog::setZoom(double zoom)
 {
-	boxZoom->setValue(int(zoom*100));
+	boxZoom->setValue(zoom*100);
 }
 
 void Plot3DDialog::setScaling(double xVal, double yVal, double zVal)
 {
-	boxXScale->setValue(int(xVal*100));
-	boxYScale->setValue(int(yVal*100));
-	boxZScale->setValue(int(zVal*100));
+	boxXScale->setValue(xVal*100);
+	boxYScale->setValue(yVal*100);
+	boxZScale->setValue(zVal*100);
 }
 
 void Plot3DDialog::showGeneralTab()

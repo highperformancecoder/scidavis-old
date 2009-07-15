@@ -880,7 +880,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../src/ApplicationWindow.cpp" line="1061"/>
         <location filename="../src/ApplicationWindow.cpp" line="1100"/>
         <source>&amp;Analysis</source>
-        <translation>&amp;Analyse</translation>
+        <translation>Ana&amp;lyse</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="1062"/>
@@ -2675,7 +2675,7 @@ Operation aborted!</source>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="1099"/>
         <source>&amp;Plot</source>
-        <translation>&amp;Diagramm</translation>
+        <translation>D&amp;iagramm</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="1663"/>
@@ -7823,7 +7823,7 @@ Die folgenden Spezialcodes können benutzt werden:
         <location filename="../src/future/table/controltabs.ui" line="169"/>
         <location filename="../src/future/table/controltabs.ui" line="357"/>
         <source>Appl&amp;y</source>
-        <translation>&amp;Anwenden</translation>
+        <translation>A&amp;nwenden</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="108"/>

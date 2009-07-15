@@ -39,6 +39,7 @@ class QListWidget;
 class QPushButton;
 class QRadioButton;
 class QSpinBox;
+class QDoubleSpinBox;
 class QTabWidget;
 class QWidget;
 class QStringList;
@@ -117,7 +118,7 @@ public slots:
 	void showAxisTab();
 	
 	void initPointsOptionsStack();
-	void changeZoom(int);
+	void changeZoom(double);
 	void changeTransparency(int val);
 
 	void showLowerGreek();
@@ -182,7 +183,8 @@ private:
 	QListWidget *axesList, *axesList2;
 	QComboBox *boxType, *boxPointStyle;
 	QLineEdit *boxMajorLength, *boxMinorLength, *boxConesRad;
-	QSpinBox *boxZoom, *boxXScale, *boxYScale, *boxZScale, *boxQuality;
+	QDoubleSpinBox *boxZoom, *boxXScale, *boxYScale, *boxZScale;
+	QSpinBox *boxQuality;
 	QLineEdit *boxSize, *boxBarsRad, *boxCrossRad, *boxCrossLinewidth;
 	QStackedWidget *optionStack;
 	QWidget *dotsPage, *conesPage, *crossPage;
