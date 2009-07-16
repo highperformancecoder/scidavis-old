@@ -123,6 +123,7 @@ MultiLayer::MultiLayer(const QString& label, QWidget* parent, const char* name, 
 	layout->addWidget(canvas, 1);
 	layout->setMargin(0);
 	layout->setSpacing(0);
+	setMinimumHeight(50);
     setGeometry(QRect( 0, 0, graph_width, graph_height ));
 	setFocusPolicy(Qt::StrongFocus);
 }
