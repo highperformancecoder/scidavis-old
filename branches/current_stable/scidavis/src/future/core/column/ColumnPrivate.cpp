@@ -375,9 +375,9 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode)
 		filter->input(0, temp_col);
 		copy(filter->output(0));
 		delete temp_col;
-	}
 
-	if (filter_is_temporary) delete filter;
+		if (filter_is_temporary) delete filter;
+	}
 
 	emit d_owner->modeChanged(d_owner);
 }
