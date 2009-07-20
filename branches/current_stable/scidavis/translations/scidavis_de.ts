@@ -9454,7 +9454,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/Fit.cpp" line="258"/>
         <source> algorithm with tolerance = </source>
-        <translation> Algorithmus mit Tolleranz = </translation>
+        <translation> Algorithmus mit Toleranz = </translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="261"/>
