@@ -221,13 +221,13 @@ const QRect SelectionMoveResizer::handlerRect(QRect rect, Operation op)
 {
 	switch(op) {
 		case Resize_N:
-			return QRect( QPoint(rect.center().x()-handler_size/2, rect.top()),
+			return QRect( QPoint(rect.center().x()-handler_size/2, rect.top()+1),
 					QSize(handler_size,handler_size));
 		case Resize_NE:
-			return QRect( QPoint(rect.right()-handler_size+1, rect.top()),
+			return QRect( QPoint(rect.right()-handler_size+1, rect.top()+1),
 				QSize(handler_size,handler_size));
 		case Resize_E:
-			return QRect( QPoint(rect.right()-handler_size+1, rect.center().y()-handler_size/2),
+			return QRect( QPoint(rect.right()-handler_size+1, rect.center().y()-handler_size/2+1),
 					QSize(handler_size,handler_size));
 		case Resize_SE:
 			return QRect( QPoint(rect.right()-handler_size+1, rect.bottom()-handler_size+1),
@@ -239,10 +239,10 @@ const QRect SelectionMoveResizer::handlerRect(QRect rect, Operation op)
 			return QRect( QPoint(rect.left(),rect.bottom()-handler_size+1),
 					QSize(handler_size,handler_size));
 		case Resize_W:
-			return QRect( QPoint(rect.left(), rect.center().y()-handler_size/2),
+			return QRect( QPoint(rect.left(), rect.center().y()-handler_size/2+1),
 					QSize(handler_size,handler_size));
 		case Resize_NW:
-			return QRect( rect.topLeft(),
+			return QRect( rect.topLeft()+QPoint(0,1),
 					QSize(handler_size,handler_size));
 		default:
 			return QRect( rect.topLeft(), QSize(0,0));

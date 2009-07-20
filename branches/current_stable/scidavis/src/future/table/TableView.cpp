@@ -561,11 +561,13 @@ void TableView::applyType()
 		case SciDAVis::Numeric:
 			foreach(Column* col, list)
 			{
+				col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
 				col->setColumnMode(mode);
 				Double2StringFilter * filter = static_cast<Double2StringFilter*>(col->outputFilter());
 				int digits = ui.digits_box->value(); // setNumericFormat causes digits_box to be modified...
 				filter->setNumericFormat(ui.format_box->itemData(format_index).toChar().toLatin1());
 				filter->setNumDigits(digits);
+				col->endMacro();
 				// TODO: make sure this is done by a signal from the filter to the column on to the table
 	//			d_model->emitColumnChanged(col); 
 				}
@@ -579,9 +581,11 @@ void TableView::applyType()
 		case SciDAVis::DateTime:
 			foreach(Column* col, list)
 			{
+				col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
 				col->setColumnMode(mode);
 				DateTime2StringFilter * filter = static_cast<DateTime2StringFilter*>(col->outputFilter());
 				filter->setFormat(ui.format_box->itemData(format_index).toString());
+				col->endMacro();
 				// TODO: make sure this is done by a signal from the filter to the column on to the table
 	//			d_model->emitColumnChanged(col); 
 			}
