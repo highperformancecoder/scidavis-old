@@ -460,12 +460,14 @@ Do you want to overwrite it?</source>
         <location filename="../src/future/core/AbstractAspect.cpp" line="79"/>
         <source>XML read error: </source>
         <comment>prefix for XML error messages</comment>
+        <translatorcomment>prefijos para mensajes de error XML</translatorcomment>
         <translation>error de lectura XML:</translation>
     </message>
     <message>
         <location filename="../src/future/core/AbstractAspect.cpp" line="80"/>
         <source> (loading failed)</source>
         <comment>postfix for XML error messages</comment>
+        <translatorcomment>posfijos para mensajes de error XML</translatorcomment>
         <translation>(falló la carga)</translation>
     </message>
     <message>
@@ -503,7 +505,7 @@ Do you want to overwrite it?</source>
     <message>
         <location filename="../src/future/core/AbstractAspect.cpp" line="241"/>
         <source>Intended name &quot;%1&quot; diverted to &quot;%2&quot; in order to avoid name collision.</source>
-        <translation>Nonbre intentado  &quot;%1&quot; convertido a &quot;%2&quot; para evitar colisión de nombre.</translation>
+        <translation type="unfinished">Nombre intentado  &quot;%1&quot; convertido a &quot;%2&quot; para evitar colisión de nombre.</translation>
     </message>
     <message>
         <location filename="../src/future/core/AbstractAspect.cpp" line="341"/>
@@ -1165,7 +1167,7 @@ Do you want to overwrite it?</source>
         <location filename="../src/ApplicationWindow.cpp" line="11253"/>
         <location filename="../src/ApplicationWindow.cpp" line="11254"/>
         <source>Mesh &amp; filled Polygons</source>
-        <translation>Mallar polígonos llenos</translation>
+        <translation>Polígonos llenos y mallados</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11255"/>
@@ -4898,17 +4900,17 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
         <location filename="../src/ApplicationWindow.cpp" line="3282"/>
         <location filename="../src/ApplicationWindow.cpp" line="3290"/>
         <source>ASCII Import Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló importación ASCII</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3283"/>
         <source>Numeric data cannot be imported into non-numeric column &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Los datos numéricos no pueden ser importados en columnas no-numéricas &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3291"/>
         <source>Non-numeric data cannot be imported into non-text column &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Los datos no-numéricos no pueden ser importados en columnas no-texto &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3401"/>
@@ -5214,22 +5216,22 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="12253"/>
         <source>Error writing data to disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Error escribiendo datos al disco</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="12254"/>
         <source>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Your data may or may not have ended up in &lt;em&gt;%2&lt;/em&gt; (%3). 					If there already was a version of this project on disk, it has not been touched.&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Sus datos pueden o no haber sido procesados en &lt;em&gt;%2&lt;/em&gt; (%3). 					Si ya había una versión de este proyecto en el disco, éste no ha sido tocado.&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="12265"/>
         <source>Error renaming backup files</source>
-        <translation type="unfinished"></translation>
+        <translation>Error renombrando archivos de resguardo</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="12266"/>
         <source>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Data was written to &lt;em&gt;%2&lt;/em&gt;, but saving the original file as &lt;em&gt;%3&lt;/em&gt;					and moving the new file to &lt;em&gt;%4&lt;/em&gt; failed. In case you wonder why the original file hasn&apos;t					been simply replaced, see here:					&lt;a href=&quot;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&quot;&gt;					http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;%1&lt;br&gt;&lt;br&gt; Los datos fueron escritos a &lt;em&gt;%2&lt;/em&gt;, pero guardando el archivo original como &lt;em&gt;%3&lt;/em&gt;				y moviendo el nuevo archivo a &lt;em&gt;%4&lt;/em&gt; falló. En caso de que ud. quiera saber por qué el archivo simplemente no fue remplazado, vea aquí: 					&lt;a href=&quot;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&quot;&gt;					http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="12289"/>
@@ -5718,27 +5720,27 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3497"/>
         <source>zlib can&apos;t open %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>zlib no puede abrir %1.</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3503"/>
         <source>Can&apos;t create temporary file for writing uncompressed copy of %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede crear un archivo temporario para escribir una copia descomprimida de %1.</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3517"/>
         <source>Error writing to temporary file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Error escribiendo a archivo temporario: %1</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3555"/>
         <source>Opening backup copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Abriendo copia de resguardo</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3556"/>
         <source>The original (corrupt) file is being left untouched, in case you want to try rescuing data manually. If you want to continue working with the automatically restored backup copy, you have to explicitly overwrite the original file.</source>
-        <translation type="unfinished"></translation>
+        <translation>EL archivo original (corrupto) esta siendo dejado sin tocar, in caso de que ud. quiera intentar rescatar los datos manualmente. Si quiere continuar trabajando con la copia restaurada automáticamente, tiene que explicitamente sobreescribir el archivo original. </translation>
     </message>
 </context>
 <context>
@@ -7199,12 +7201,12 @@ The following special codes can be used:
     <message>
         <location filename="../src/ConfigDialog.cpp" line="894"/>
         <source>Automatic (e)</source>
-        <translation type="unfinished"></translation>
+        <translation>Automático (e)</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="895"/>
         <source>Automatic (E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Automático (E)</translation>
     </message>
 </context>
 <context>
@@ -7212,7 +7214,7 @@ The following special codes can be used:
     <message>
         <location filename="../src/future/table/controltabs.ui" line="25"/>
         <source>Control Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengüetas de Control</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="53"/>
@@ -7263,7 +7265,10 @@ The following special codes can be used:
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar nuevo tipo y formato a todas las columnas seleccionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="179"/>
@@ -7276,7 +7281,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select the column type&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccionar tipo de columna&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="211"/>
@@ -7289,7 +7297,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;elegir el formato mostrado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="243"/>
@@ -7302,7 +7313,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Entrar el número de digitos decimales mostrados&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="318"/>
@@ -7310,7 +7324,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Información acerca del tipo y formato seleccionado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="335"/>
@@ -7328,7 +7345,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar la formula a todas las celdas seleccionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="386"/>
@@ -7336,7 +7356,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccionar una columna de referencia para insertar en la formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="396"/>
@@ -7344,7 +7367,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insertar la columna de referencia en la formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="402"/>
@@ -7358,7 +7384,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccione una función para insertar en la formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="425"/>
@@ -7367,7 +7396,11 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Insert the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Insertar la función en la formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -8024,18 +8057,18 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/ExponentialFit.cpp" line="82"/>
         <location filename="../src/ExponentialFit.cpp" line="89"/>
         <source>(amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(amplitud)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="82"/>
         <source>(lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(tiempo de vida)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="82"/>
         <location filename="../src/ExponentialFit.cpp" line="89"/>
         <source>(offset)</source>
-        <translation type="unfinished">(offset)</translation>
+        <translation>(offset)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="87"/>
@@ -10208,18 +10241,20 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/Graph.cpp" line="4044"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
-        <translation type="unfinished">1</translation>
+        <translatorcomment>curva de tabla de datos x nombre de columna </translatorcomment>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="4045"/>
         <source>2</source>
         <comment>curve data table y column name</comment>
-        <translation type="unfinished">2</translation>
+        <translatorcomment>curva de tabla de datos y nombre de columna</translatorcomment>
+        <translation>2</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="4054"/>
         <source>Curve data %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos de curva %1</translation>
     </message>
 </context>
 <context>
@@ -10544,7 +10579,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ImageExportDialog.cpp" line="133"/>
         <source>Ledger 432 x 279 mm</source>
-        <translation type="unfinished"></translation>
+        <translation>Legal 432 x 279 mm</translation>
     </message>
     <message>
         <location filename="../src/ImageExportDialog.cpp" line="134"/>
@@ -10559,7 +10594,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ImageExportDialog.cpp" line="136"/>
         <source>Tabloid 279 x 432 mm</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabloid 279 x 432 mm</translation>
     </message>
     <message>
         <location filename="../src/ImageExportDialog.cpp" line="138"/>
@@ -10854,7 +10889,7 @@ have the same number of rows.</source>
     <message>
         <location filename="../src/ImportASCIIDialog.cpp" line="149"/>
         <source>&amp;Numeric data</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos &amp;Numéricos</translation>
     </message>
 </context>
 <context>
@@ -11838,17 +11873,17 @@ Los límites deben estar dentro del rango de x; si no conoce el máximo (mínimo
     <message>
         <location filename="../src/LineProfileTool.cpp" line="93"/>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="../src/LineProfileTool.cpp" line="94"/>
         <source>y</source>
-        <translation type="unfinished"></translation>
+        <translation>y</translation>
     </message>
     <message>
         <location filename="../src/LineProfileTool.cpp" line="154"/>
         <source>Line profile %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfíl de línea %1</translation>
     </message>
 </context>
 <context>
@@ -11856,12 +11891,12 @@ Los límites deben estar dentro del rango de x; si no conoce el máximo (mínimo
     <message>
         <location filename="../src/PolynomialFit.cpp" line="240"/>
         <source>(y-intercept)</source>
-        <translation type="unfinished"></translation>
+        <translation>(y-interceptar)</translation>
     </message>
     <message>
         <location filename="../src/PolynomialFit.cpp" line="240"/>
         <source>(slope)</source>
-        <translation type="unfinished"></translation>
+        <translation>(pendiente)</translation>
     </message>
     <message>
         <location filename="../src/PolynomialFit.cpp" line="241"/>
@@ -12016,7 +12051,7 @@ Do you want to insert cells?</source>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="25"/>
         <source>Control Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengüetas de control</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="53"/>
@@ -12060,7 +12095,10 @@ Do you want to insert cells?</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar nuevo tipo y formatos a todas las columnas seleccionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="350"/>
@@ -12073,7 +12111,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;elegir el formato de display&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="385"/>
@@ -12086,7 +12127,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ingrese el número de digitos decimales mostrados&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="460"/>
@@ -12094,7 +12138,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Información acerca del tipo y formato seleccionado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="477"/>
@@ -12112,7 +12159,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta nombre=&quot;qrichtext&quot; contenido=&quot;1&quot; /&gt;&lt;style tipo=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body estilo=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p estilo=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar la formula a todas las celdas seleccionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="525"/>
@@ -12120,7 +12170,11 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta nombre=&quot;qrichtext&quot; contenido=&quot;1&quot; /&gt;&lt;style tipo=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body estilo=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p estilo=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccionar una columna de referencia para insertar en la formula
+&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="535"/>
@@ -12128,7 +12182,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insertar la columna de referencia en la formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="541"/>
@@ -12142,7 +12199,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccione una función para insertar en la formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="564"/>
@@ -12150,12 +12210,15 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Inset the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insertar la función en la formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="228"/>
         <source>Last row Y =</source>
-        <translation type="unfinished"></translation>
+        <translation>Última fila Y=</translation>
     </message>
 </context>
 <context>
@@ -12330,7 +12393,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/future/matrix/MatrixView.cpp" line="200"/>
         <source>Show/hide control tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar/ocultar lengüetas de control</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/MatrixView.cpp" line="203"/>
@@ -12355,12 +12418,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/future/matrix/MatrixView.cpp" line="206"/>
         <source>Automatic (e)</source>
-        <translation type="unfinished"></translation>
+        <translation>Automático (e)</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/MatrixView.cpp" line="207"/>
         <source>Automatic (E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Automático (E)</translation>
     </message>
 </context>
 <context>
@@ -12368,19 +12431,19 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/MuParserScript.cpp" line="274"/>
         <source>col() works only on tables!</source>
-        <translation type="unfinished">¡col() funciona sólo en tablas!</translation>
+        <translation>col() funciona sólo sobre tablas!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="277"/>
         <location filename="../src/MuParserScript.cpp" line="312"/>
         <location filename="../src/MuParserScript.cpp" line="354"/>
         <source>There&apos;s no column %1 in table %2!</source>
-        <translation type="unfinished">¡No hay columna llamada %1 en la tabla %2!</translation>
+        <translation>No hay columna llamada %1 en la tabla %2!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="305"/>
         <source>tablecol() works only on tables!</source>
-        <translation type="unfinished">¡tablecol() trabaja sólo sobre tablas!</translation>
+        <translation>tablecol() trabaja sólo sobre tablas!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="308"/>
@@ -12388,44 +12451,44 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/MuParserScript.cpp" line="457"/>
         <location filename="../src/MuParserScript.cpp" line="463"/>
         <source>Couldn&apos;t find a table named %1.</source>
-        <translation type="unfinished">No se pudo hallar la tabla llamada %1.</translation>
+        <translation>No se pudo hallar una tabla llamada %1.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="351"/>
         <location filename="../src/MuParserScript.cpp" line="371"/>
         <source>cell() works only on tables and matrices!</source>
-        <translation type="unfinished">¡cell() trabaja sólo sobre tablas y matrices!</translation>
+        <translation>cell() trabaja sólo sobre tablas y matrices!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="375"/>
         <source>There&apos;s no row %1 in matrix %2!</source>
-        <translation type="unfinished">¡No hay fila %1 en la matriz %2!</translation>
+        <translation>No hay fila %1 en la matriz %2!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="378"/>
         <source>There&apos;s no column %1 in matrix %2!</source>
-        <translation type="unfinished">¡No hay columna llamada %1 en la matriz %2!</translation>
+        <translation>No hay columna llamada %1 en la matriz %2!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="425"/>
         <location filename="../src/MuParserScript.cpp" line="431"/>
         <source>Accessing table values is not (yet) supported in this context.</source>
-        <translation type="unfinished"></translation>
+        <translation>El acceso a valores de tabla no esta (todavía) soportado en este contexto.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="470"/>
         <source>There&apos;s no column named %1 in table %2!</source>
-        <translation type="unfinished">¡No hay columna llamada %1 en la tabla %2!</translation>
+        <translation>No hay columna llamada %1 en la tabla %2!</translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="581"/>
         <source>tablecol: wrong number of arguments (need 2, got %1)</source>
-        <translation type="unfinished">tablecol: número incorrecto de argumentos (necesita 2, obtener %1) </translation>
+        <translation>tablecol: número incorrecto de argumentos (necesita 2, dio %1) </translation>
     </message>
     <message>
         <location filename="../src/MuParserScript.cpp" line="608"/>
         <source>cell: wrong number of arguments (need 2, got %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>cell: número incorrecto de argumentos (necesita 2, dio %1)</translation>
     </message>
 </context>
 <context>
@@ -12593,38 +12656,38 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="117"/>
         <source>(amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(amplitud)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="117"/>
         <source>(center)</source>
-        <translation type="unfinished"></translation>
+        <translation>(centro)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="117"/>
         <source>(width)</source>
-        <translation type="unfinished">(anchura)</translation>
+        <translation>(anchura)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="117"/>
         <location filename="../src/MultiPeakFit.cpp" line="127"/>
         <source>(offset)</source>
-        <translation type="unfinished">(offset)</translation>
+        <translation>(offset)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="123"/>
         <source>(amplitude %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>(amplitud %1)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="124"/>
         <source>(center %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>(centro %1)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="125"/>
         <source>(width %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>(anchura %1)</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="246"/>
@@ -14658,7 +14721,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/future/core/ProjectConfigPage.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulario</translation>
     </message>
     <message>
         <location filename="../src/future/core/ProjectConfigPage.ui" line="21"/>
@@ -14686,12 +14749,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PythonScripting.cpp" line="227"/>
         <source>Failed to export SciDAVis API</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló al exportar API SciDAVis</translation>
     </message>
     <message>
         <location filename="../src/PythonScripting.cpp" line="228"/>
         <source>Accessing SciDAVis functions or objects from Python code won&apos;t work.Probably your version of SIP differs from the one SciDAVis was compiled against;try updating SIP or recompiling SciDAVis.</source>
-        <translation type="unfinished"></translation>
+        <translation>El acceso a las funciones de SciDAVis o a objetos desde codigo Python no funcionará. Probablemente su versión de SIP difiere de la versión con la que SciDAVis fue compilado; trate de actualizar SIP o recompilar SciDAVis</translation>
     </message>
 </context>
 <context>
@@ -16249,7 +16312,7 @@ Do you want to insert cells?</source>
     <message>
         <location filename="../src/Table.cpp" line="1292"/>
         <source>%1: apply formula to column</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: Aplicar formula a columna</translation>
     </message>
 </context>
 <context>
@@ -16606,7 +16669,7 @@ Do you want to insert cells?</source>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="230"/>
         <source>Show/hide control tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar/ocultar lengüetas de control</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="234"/>
@@ -16747,12 +16810,12 @@ valores con punto flotante
     <message>
         <location filename="../src/future/table/TableView.cpp" line="399"/>
         <source>Automatic (e)</source>
-        <translation type="unfinished"></translation>
+        <translation>Automático (e)</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="400"/>
         <source>Automatic (E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Automático (E)</translation>
     </message>
 </context>
 <context>
@@ -16955,37 +17018,37 @@ valores con punto flotante
     <message>
         <location filename="../src/ExponentialFit.cpp" line="245"/>
         <source>(first amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(primer amplitud)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="245"/>
         <source>(first lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(primer tiempo de vida)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="245"/>
         <source>(second amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(segunda amplitud)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(second lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(segundo tiempo de vida)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(third amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(tercer amplitud)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(third lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(tercer tiempo de vida)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(offset)</source>
-        <translation type="unfinished">(offset)</translation>
+        <translation>(offset)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="243"/>
@@ -17026,27 +17089,27 @@ valores con punto flotante
     <message>
         <location filename="../src/ExponentialFit.cpp" line="168"/>
         <source>(first amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(primer amplitud)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="168"/>
         <source>(first lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(primer tiempo de vida)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="168"/>
         <source>(second amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(segunda amplitud)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="169"/>
         <source>(second lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(segundo tiempo de vida)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="169"/>
         <source>(offset)</source>
-        <translation type="unfinished">(offset)</translation>
+        <translation>(offset)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="166"/>
@@ -18965,187 +19028,188 @@ valores con punto flotante
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="587"/>
         <source>Clear Matrix</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar matriz</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="594"/>
         <source>&amp;Go to Cell</source>
-        <translation type="unfinished">Ir a la celda</translation>
+        <translation>&amp;Ir a la celda</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="614"/>
         <source>&amp;Dimensions</source>
         <comment>matrix size</comment>
-        <translation type="unfinished">&amp;Dimensiones</translation>
+        <translatorcomment>tamaño de matriz</translatorcomment>
+        <translation>&amp;Dimensiones</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="617"/>
         <source>Set &amp;Coordinates</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Configurar ejes</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="620"/>
         <source>Set Display &amp;Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar &amp;Formato Mostrado</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="627"/>
         <source>&amp;Insert Empty Columns</source>
-        <translation type="unfinished">&amp;Insertar columna(s) vacía(s)</translation>
+        <translation>&amp;Insertar columna(s) vacía(s)</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="634"/>
         <source>Remo&amp;ve Columns</source>
-        <translation type="unfinished">Remo&amp;ver Columnas</translation>
+        <translation>Remo&amp;ver Columnas</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="641"/>
         <source>Clea&amp;r Columns</source>
-        <translation type="unfinished">Limpia&amp;r Columnas</translation>
+        <translation>Limpia&amp;r Columnas</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="648"/>
         <source>&amp;Add Columns</source>
-        <translation type="unfinished">&amp;Agregar columnas</translation>
+        <translation>&amp;Agregar Columnas</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="656"/>
         <source>&amp;Insert Empty Rows</source>
-        <translation type="unfinished">&amp;Insertar Filas Vacías</translation>
+        <translation>&amp;Insertar Filas Vacías</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="663"/>
         <source>Remo&amp;ve Rows</source>
-        <translation type="unfinished">Remo&amp;ver Filas</translation>
+        <translation>Remo&amp;ver Filas</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="670"/>
         <source>Clea&amp;r Rows</source>
-        <translation type="unfinished">Vacia&amp;r Fila</translation>
+        <translation>Vacia&amp;r Filas</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="677"/>
         <source>&amp;Add Rows</source>
-        <translation type="unfinished">&amp;Agregar Filas</translation>
+        <translation>&amp;Agregar Filas</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="750"/>
         <source>&amp;Matrix</source>
-        <translation type="unfinished">&amp;Matriz</translation>
+        <translation>&amp;Matriz</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="816"/>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="820"/>
         <source>Go to Cell</source>
-        <translation type="unfinished">Ir a la celda</translation>
+        <translation>Ir a la celda</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="816"/>
         <source>Enter column</source>
-        <translation type="unfinished">Insertar columna</translation>
+        <translation>Entrar columna</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="820"/>
         <source>Enter row</source>
-        <translation type="unfinished">Insertar fila</translation>
+        <translation>Entrar fila</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="888"/>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="892"/>
         <source>Set Matrix Dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar dimensiones de matriz</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="888"/>
         <source>Enter number of columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrar número de columnas</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="892"/>
         <source>Enter number of rows</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrar número de filas</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1143"/>
         <source>invalid row or column count</source>
-        <translation type="unfinished">conteo de fila o columna inválido</translation>
+        <translation>inválido conteo de fila o columna</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1174"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">elemento &apos;%1&apos; desconocido</translation>
+        <translation>elemento &apos;%1&apos; desconocido</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1182"/>
         <source>no matrix element found</source>
-        <translation type="unfinished"></translation>
+        <translation>no se halló elemento de matriz</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1195"/>
         <source>invalid or missing numeric format</source>
-        <translation type="unfinished"></translation>
+        <translation>formato numérico inválido o perdido</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1204"/>
         <source>invalid or missing number of displayed digits</source>
-        <translation type="unfinished"></translation>
+        <translation>número de digitos mostrados inválidos o perdidos</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1223"/>
         <source>invalid x start value</source>
-        <translation type="unfinished"></translation>
+        <translation>inválido valor inicial x</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1231"/>
         <source>invalid x end value</source>
-        <translation type="unfinished"></translation>
+        <translation>inválido valor final x</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1239"/>
         <source>invalid y start value</source>
-        <translation type="unfinished"></translation>
+        <translation>inválido valor inicial y</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1247"/>
         <source>invalid y end value</source>
-        <translation type="unfinished"></translation>
+        <translation>inválido valor final y</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1270"/>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1323"/>
         <source>invalid or missing row index</source>
-        <translation type="unfinished">índice de fila invalido ó perdido</translation>
+        <translation>índice de fila invalido ó perdido</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1277"/>
         <source>invalid row height</source>
-        <translation type="unfinished"></translation>
+        <translation>inválida altura de fila</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1294"/>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1329"/>
         <source>invalid or missing column index</source>
-        <translation type="unfinished">índice de columna invalido ó perdido</translation>
+        <translation>índice de columna inválido ó perdido</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1301"/>
         <source>invalid column width</source>
-        <translation type="unfinished">ancho de columna inválido</translation>
+        <translation>inválido ancho de columna</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1337"/>
         <source>invalid cell value</source>
-        <translation type="unfinished"></translation>
+        <translation>inválido valor de celda</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1368"/>
         <source>Hide Controls</source>
-        <translation type="unfinished">Ocultar controles</translation>
+        <translation>Ocultar controles</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1370"/>
         <source>Show Controls</source>
-        <translation type="unfinished">Mostrar controles</translation>
+        <translation>Mostrar controles</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1447"/>
@@ -19352,7 +19416,7 @@ valores con punto flotante
         <location filename="../src/future/table/future_Table.cpp" line="1487"/>
         <location filename="../src/future/table/future_Table.cpp" line="1550"/>
         <source>Fi&amp;ll Selection with</source>
-        <translation type="unfinished"></translation>
+        <translation>L&amp;lenar selección con</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1039"/>
