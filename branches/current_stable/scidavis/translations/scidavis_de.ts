@@ -6228,7 +6228,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
     <message>
         <location filename="../src/AssociationsDialog.cpp" line="76"/>
         <source>&amp;Update curves</source>
-        <translation>K&amp;urve aktualieren</translation>
+        <translation>K&amp;urve aktualisieren</translation>
     </message>
     <message>
         <location filename="../src/AssociationsDialog.cpp" line="313"/>
