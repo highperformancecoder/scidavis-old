@@ -32,7 +32,7 @@
 class QwtHistogram: public QwtBarCurve
 {
 public:
-	QwtHistogram(Table *t, const QString& xColName, const char *name, int startRow, int endRow);
+	QwtHistogram(Table *t, const char *name, int startRow, int endRow);
 
 	void copy(const QwtHistogram *h);
 

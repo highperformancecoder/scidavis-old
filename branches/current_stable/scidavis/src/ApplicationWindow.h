@@ -1008,7 +1008,7 @@ private:
 	//! Check whether a table is valid for a 3D plot and display an appropriate error if not
 	bool validFor3DPlot(Table *table);
 	//! Check whether a table is valid for a 2D plot and display an appropriate error if not
-	bool validFor2DPlot(Table *table);
+	bool validFor2DPlot(Table *table, int type);
 
 	//! Workaround for the new colors introduced in rev 447
 	int convertOldToNewColorIndex(int cindex);

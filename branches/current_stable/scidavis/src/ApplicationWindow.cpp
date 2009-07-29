@@ -1474,7 +1474,7 @@ void ApplicationWindow::plotVectXYXY()
 
 	Table * table = static_cast<Table *>(d_workspace->activeWindow());
 
-	if (!validFor2DPlot(table))
+	if (!validFor2DPlot(table, Graph::VectXYXY))
 		return;
 
 	QStringList s = table->selectedColumns();
@@ -1493,7 +1493,7 @@ void ApplicationWindow::plotVectXYAM()
 
 	Table * table = static_cast<Table *>(d_workspace->activeWindow());
 
-	if (!validFor2DPlot(table))
+	if (!validFor2DPlot(table, Graph::VectXYAM))
 		return;
 
 	QStringList s = table->selectedColumns();
@@ -2201,14 +2201,19 @@ MultiLayer* ApplicationWindow::multilayerPlot(int c, int r, int style)
 		return 0;
 
 	Table* w = (Table*)d_workspace->activeWindow();
-	if (!validFor2DPlot(w))
+	if (!validFor2DPlot(w, style))
 		return 0;
 
-	QStringList list=w->selectedYColumns();
-	if((int)list.count() < 1)
-	{
-		QMessageBox::warning(this, tr("Plot error"), tr("Please select a Y column to plot!"));
-		return 0;
+	QStringList list;
+	switch (style) {
+		case Graph::Histogram:
+		case Graph::Pie:
+		case Graph::Box:
+			list = w->selectedColumns();
+			break;
+		default:
+			list = w->selectedYColumns();
+			break;
 	}
 
 	int curves = (int)list.count();
@@ -9626,6 +9631,20 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 				else if(plotType == Graph::Box) {
 					ag->openBoxDiagram(w, curve, d_file_version);
 					curve_loaded = true;
+				} else if (plotType == Graph::Histogram) {
+					if (d_file_version < 90)
+						curve_loaded = ag->plotHistogram(w, QStringList() << curve[2]);
+					else
+						curve_loaded = ag->plotHistogram(w, QStringList() << curve[2],
+								curve[curve.count()-3].toInt(), curve[curve.count()-2].toInt());
+					if (curve_loaded) {
+						QwtHistogram *h = (QwtHistogram *)ag->curve(curveID);
+						if (d_file_version <= 76)
+							h->setBinning(curve[16].toInt(),curve[17].toDouble(),curve[18].toDouble(),curve[19].toDouble());
+						else
+							h->setBinning(curve[17].toInt(),curve[18].toDouble(),curve[19].toDouble(),curve[20].toDouble());
+						h->loadData();
+					}
 				} else {
 					if (d_file_version < 72)
 						curve_loaded = ag->insertCurve(w, curve[1].toInt(), curve[2], plotType);
@@ -9637,16 +9656,6 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 						int endRow = curve[curve.count()-2].toInt();
 						curve_loaded = ag->insertCurve(w, curve[1], curve[2], plotType, startRow, endRow);
 					}
-				}
-
-				if(curve_loaded && plotType == Graph::Histogram)
-				{
-				    QwtHistogram *h = (QwtHistogram *)ag->curve(curveID);
-					if (d_file_version <= 76)
-                        h->setBinning(curve[16].toInt(),curve[17].toDouble(),curve[18].toDouble(),curve[19].toDouble());
-					else
-						h->setBinning(curve[17].toInt(),curve[18].toDouble(),curve[19].toDouble(),curve[20].toDouble());
-                    h->loadData();
 				}
 
 				if(curve_loaded && (plotType == Graph::VerticalBars || plotType == Graph::HorizontalBars ||
@@ -13574,22 +13583,29 @@ bool ApplicationWindow::validFor3DPlot(Table *table)
 	return true;
 }
 
-bool ApplicationWindow::validFor2DPlot(Table *table)
+bool ApplicationWindow::validFor2DPlot(Table *table, int type)
 {
-	if (table->selectedColumnCount(SciDAVis::Y) < 1)
-  	{
-  		QMessageBox::warning(this, tr("Error"), tr("Please select a Y column to plot!"));
-  	    return false;
-  	}
-  	else if (table->numCols() < 2)
-	{
-		QMessageBox::critical(this, tr("Error"),tr("You need at least two columns for this operation!"));
-		return false;
-	}
-	else if (table->noXColumn())
-	{
-		QMessageBox::critical(this, tr("Error"), tr("Please set a default X column for this table, first!"));
-		return false;
+	switch (type) {
+		case Graph::Histogram:
+		case Graph::Pie:
+		case Graph::Box:
+			if (table->selectedColumnCount() < 1) {
+				QMessageBox::warning(this, tr("Error"), tr("Please select a column to plot!"));
+				return false;
+			}
+			break;
+		default:
+			if (table->selectedColumnCount(SciDAVis::Y) < 1) {
+				QMessageBox::warning(this, tr("Error"), tr("Please select a Y column to plot!"));
+				return false;
+			} else if (table->numCols() < 2) {
+				QMessageBox::critical(this, tr("Error"),tr("You need at least two columns for this operation!"));
+				return false;
+			} else if (table->noXColumn()) {
+				QMessageBox::critical(this, tr("Error"), tr("Please set a default X column for this table, first!"));
+				return false;
+			}
+			break;
 	}
 
 	return true;
@@ -13601,9 +13617,19 @@ void ApplicationWindow::selectPlotType(int type)
 		return;
 
 	Table *table = qobject_cast<Table *>(d_workspace->activeWindow());
-	if (table && validFor2DPlot(table)) {
-		multilayerPlot(table, table->drawableColumnSelection(), (Graph::CurveType)type, 
-				table->firstSelectedRow(), table->lastSelectedRow());
+	if (table && validFor2DPlot(table, type)) {
+		switch (type) {
+			case Graph::Histogram:
+			case Graph::Pie:
+			case Graph::Box:
+				multilayerPlot(table, table->selectedColumns(), (Graph::CurveType)type, 
+						table->firstSelectedRow(), table->lastSelectedRow());
+				break;
+			default:
+				multilayerPlot(table, table->drawableColumnSelection(), (Graph::CurveType)type, 
+						table->firstSelectedRow(), table->lastSelectedRow());
+		break;
+		}
 		return;
 	}
 

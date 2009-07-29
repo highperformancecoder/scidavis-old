@@ -626,6 +626,8 @@ class Graph: public QWidget
 		void plotBoxDiagram(Table *w, const QStringList& names, int startRow = 0, int endRow = -1);
 		//@}
 
+		bool plotHistogram(Table *w, QStringList names, int startRow=0, int endRow=-1);
+
 		void setCurveSymbol(int index, const QwtSymbol& s);
 		void setCurvePen(int index, const QPen& p);
 		void setCurveBrush(int index, const QBrush& b);

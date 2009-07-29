@@ -3168,6 +3168,37 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 	updateScale();
 }
 
+bool Graph::plotHistogram(Table *w, QStringList names, int startRow, int endRow)
+{
+	if (!w) return false;
+	if (endRow < 0 || endRow >= w->numRows())
+		endRow = w->numRows() - 1;
+
+	bool success = false;
+	foreach(QString col, names) {
+		Column *col_ptr = w->column(col);
+		if (!col_ptr || col_ptr->columnMode() != SciDAVis::Numeric) continue;
+
+		QwtHistogram *c = new QwtHistogram(w, col, startRow, endRow);
+		c->loadData();
+		c->setStyle(QwtPlotCurve::UserCurve);
+
+		c_type.resize(++n_curves);
+		c_type[n_curves-1] = Histogram;
+		c_keys.resize(n_curves);
+		c_keys[n_curves-1] = d_plot->insertCurve(c);
+
+		CurveLayout cl = initCurveLayout(Histogram, names.size());
+		updateCurveLayout(n_curves-1, &cl);
+
+		addLegendItem(col);
+		
+		success = true;
+	}
+
+	return success;
+}
+
 void Graph::insertPlotItem(QwtPlotItem *i, int type)
 {
 	c_type.resize(++n_curves);
@@ -3187,6 +3218,8 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
 		plotPie(w, names[0], startRow, endRow);
 	else if (style == Box)
 		plotBoxDiagram(w, names, startRow, endRow);
+	else if (style == Histogram)
+		plotHistogram(w, names, startRow, endRow);
 	else if (style==Graph::VectXYXY || style==Graph::VectXYAM)
 		plotVectorCurve(w, names, style, startRow, endRow);
 	else
@@ -3270,6 +3303,9 @@ bool Graph::insertCurve(Table* w, int xcol, const QString& name, int style)
 bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColName, int style, int startRow, int endRow)
 {
 	if (!w) return false;
+	if (style == Histogram || style == Box || style == Pie)
+		return false;
+
 	Column *x_col_ptr = w->column(xColName);
 	Column *y_col_ptr = w->column(yColName);
 	if (!x_col_ptr || !y_col_ptr)
@@ -3407,11 +3443,6 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 		c = new QwtBarCurve(QwtBarCurve::Horizontal, w, xColName, yColName, startRow, endRow);
 		c->setStyle(QwtPlotCurve::UserCurve);
 	}
-	else if (style == Histogram){
-		c = new QwtHistogram(w, xColName, yColName, startRow, endRow);
-		((QwtHistogram *)c)->initData(Y, size);
-		c->setStyle(QwtPlotCurve::UserCurve);
-	}
 	else
 		c = new DataCurve(w, xColName, yColName, startRow, endRow);
 
@@ -3424,7 +3455,7 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 
 	if (style == HorizontalBars)
 		c->setData(Y.data(), X.data(), size);
-	else if (style != Histogram)
+	else
 		c->setData(X.data(), Y.data(), size);
 
 	if (xColType == Table::Text ){
@@ -4668,7 +4699,7 @@ void Graph::copy(ApplicationWindow *parent, Graph* g)
 			}
 			else if (style == Histogram)
 			{
-				c = new QwtHistogram(cv->table(), cv->xColumnName(), cv->title().text(), cv->startRow(), cv->endRow());
+				c = new QwtHistogram(cv->table(), cv->title().text(), cv->startRow(), cv->endRow());
 				((QwtHistogram *)c)->copy((const QwtHistogram*)cv);
 			}
 			else if (style == VectXYXY || style == VectXYAM)
