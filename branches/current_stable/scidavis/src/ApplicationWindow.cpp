@@ -3346,7 +3346,8 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 				{
 					int missing_columns = temp->columnCount() - table->columnCount(); 
 					for (int col=0; col<missing_columns; col++) {
-						Column * new_col = new Column(tr("new_by_import") + QString::number(col+1), SciDAVis::Text);
+						Column * new_col = new Column(tr("new_by_import") + QString::number(col+1),
+								local_convert_to_numeric ? SciDAVis::Numeric : SciDAVis::Text);
 						new_col->setPlotDesignation(SciDAVis::Y);
 						table->d_future_table->addChild(new_col);
 					}
@@ -3359,6 +3360,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 						Column * dst_col = table->column(col);
 						Q_ASSERT(src_col->dataType() == dst_col->dataType());
 						dst_col->copy(src_col, 0, start_row, src_col->rowCount());
+						if (local_rename_columns) dst_col->setName(src_col->name());
 					}
 					break;
 				}
@@ -3372,6 +3374,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 						Column * dst_col = table->column(col);
 						Q_ASSERT(src_col->dataType() == dst_col->dataType());
 						dst_col->copy(src_col, 0, 0, temp->rowCount());
+						if (local_rename_columns) dst_col->setName(src_col->name());
 					}
 					if (temp->columnCount() > table->columnCount())
 					{
