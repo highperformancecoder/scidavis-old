@@ -46,7 +46,7 @@ The following people have contributed translations or parts thereof.\n\
 In alphabetical order.\n\
 \n\
 Tilman Benkert[1], Markus Bongard, Tobias Burnus, Rémy Claverie, f0ma, José Antonio Lorenzo Fernández, \
-Daniel Klaer, Peter Landgren, Fellype do Nascimento, Tomomasa Ohkubo, Mikhail Shevyakov, Mauricio Troviano\n\
+Pavel Fric, Daniel Klaer, Peter Landgren, Fellype do Nascimento, Tomomasa Ohkubo, Mikhail Shevyakov, Mauricio Troviano\n\
 \n\
 --- Packagers ---\n\
 \n\
