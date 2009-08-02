@@ -711,7 +711,7 @@ class QwtPlotCurve
 
 class QwtPlot {
 %TypeHeaderCode
-#include <qwt/qwt_plot.h>
+#include <qwt_plot.h>
 %End
 	public:
   enum Axis 

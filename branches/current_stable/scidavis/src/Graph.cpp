@@ -70,6 +70,7 @@
 #include <QPrintDialog>
 #include <QImageWriter>
 #include <QFileInfo>
+#include <QRegExp>
 
 #if QT_VERSION >= 0x040300
 	#include <QSvgGenerator>
@@ -3748,20 +3749,22 @@ void Graph::removeLegendItem(int index)
 		return;
 
 	QStringList l = items.filter( "\\c{" + QString::number(index+1) + "}" );
-	items.remove(l[0]);//remove the corresponding legend string
-
-	int cv=0;
-	for (int i=0; i< (int)items.count(); i++)
-	{//set new curves indexes in legend text
-		QString item = (items[i]).trimmed();
-		if (item.startsWith("\\c{", true))
-		{
-			item.remove(0, item.find("}", 0));
-			item.prepend("\\c{"+QString::number(++cv));
-		}
-		items[i]=item;
-	}
+	if (!l.isEmpty())
+		items.remove(l[0]);//remove the corresponding legend string
 	text=items.join ( "\n" ) + "\n";
+
+	QRegExp itemCmd("\\\\c\\{(\\d+)\\}");
+	int pos=0;
+	while ((pos = itemCmd.indexIn(text, pos)) != -1) {
+		int nr = itemCmd.cap(1).toInt();
+		if (nr > index) {
+			QString subst = QString("\\c{") + QString::number(nr-1) + "}";
+			text.replace(pos, itemCmd.matchedLength(), subst);
+			pos += subst.length();
+		} else
+			pos += itemCmd.matchedLength();
+	}
+
 	mrk->setText(text);
 }
 
