@@ -479,12 +479,14 @@ void Table::pasteIntoSelection()
 					if (d_view->formulaModeActive())
 					{
 						col_ptr->setFormula(first_row + r, cell_texts.at(r).at(c));  
+						col_ptr->setInvalid(first_row + r, false);
 					}
 					else
 						col_ptr->asStringColumn()->setTextAt(first_row+r, cell_texts.at(r).at(c));
 				}
 			}
 		}
+		recalculateSelectedCells();
 	}
 	endMacro();
 	RESET_CURSOR;
