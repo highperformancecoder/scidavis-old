@@ -41,7 +41,7 @@
 #include <QTextStream>
 
 ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, const char *name)
-  : QTextEdit(parent, name), scripted(env), d_error(false)
+  : QTextEdit(parent, name), scripted(env), d_error(false), d_changing_fmt(false)
 {
 	myScript = scriptEnv->newScript("", this, name);
 	connect(myScript, SIGNAL(error(const QString&,const QString&,int)), this, SLOT(insertErrorMsg(const QString&)));
