@@ -874,7 +874,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../src/ApplicationWindow.cpp" line="7855"/>
         <location filename="../src/ApplicationWindow.cpp" line="7971"/>
         <source>Fit E&amp;xponential Decay</source>
-        <translation>Přizpůsobit ex&amp;ponenciální pokles</translation>
+        <translation>Umístit ex&amp;ponenciální pokles</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="1061"/>
@@ -1226,7 +1226,7 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="11221"/>
         <location filename="../src/ApplicationWindow.cpp" line="11222"/>
         <source>Box</source>
-        <translation>Bedna</translation>
+        <translation>Krabice</translation>
     </message>
     <message>
         <source>A</source>
@@ -1763,7 +1763,7 @@ Wollen Sie sie überschreiben?</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10991"/>
         <source>Best fit</source>
-        <translation>Nejlepší přizpůsobení</translation>
+        <translation>Nejlepší umístění</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10453"/>
@@ -1838,7 +1838,7 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10484"/>
         <location filename="../src/ApplicationWindow.cpp" line="11016"/>
         <source>&amp;Spline</source>
-        <translation>&amp;Zub</translation>
+        <translation>&amp;Spline</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10492"/>
@@ -2038,13 +2038,13 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10587"/>
         <location filename="../src/ApplicationWindow.cpp" line="11082"/>
         <source>Fit &amp;Linear</source>
-        <translation>&amp;Přímočaré přizpůsobení</translation>
+        <translation>&amp;Přímočaré umístění</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10590"/>
         <location filename="../src/ApplicationWindow.cpp" line="11083"/>
         <source>Fit &amp;Polynomial ...</source>
-        <translation>&amp;Mnohočlenné přizpůsobení...</translation>
+        <translation>&amp;Mnohočlenné umístění..</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10593"/>
@@ -2072,7 +2072,7 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10608"/>
         <location filename="../src/ApplicationWindow.cpp" line="11089"/>
         <source>Fit &amp;Gaussian</source>
-        <translation>&amp;Gaussovo přizpůsobení</translation>
+        <translation>&amp;Gaussovo umístění</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10611"/>
@@ -2520,7 +2520,7 @@ Operation aborted!</source>
         <location filename="../src/ApplicationWindow.cpp" line="10602"/>
         <location filename="../src/ApplicationWindow.cpp" line="11087"/>
         <source>Fit Exponential Gro&amp;wth ...</source>
-        <translation>Přizpůsobit exponenciální &amp;růst...</translation>
+        <translation>Umístit exponenciální &amp;růst...</translation>
     </message>
     <message>
         <source>Column &amp;Options ...</source>
@@ -2670,7 +2670,7 @@ Operation aborted!</source>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="895"/>
         <source>Fit &amp;Multi-peak</source>
-        <translation>Přizpůsobení s &amp;mnohačetnými vrcholy</translation>
+        <translation>Umístění s &amp;mnohačetnými vrcholy</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="1099"/>
@@ -3466,7 +3466,7 @@ Jste si jist, že chcete pokračovat?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10605"/>
         <location filename="../src/ApplicationWindow.cpp" line="11088"/>
         <source>Fit &amp;Boltzmann (Sigmoidal)</source>
-        <translation>&amp;Boltzmannovo přizpůsobení (esovité)</translation>
+        <translation>&amp;Boltzmannovo umístění (esovité)</translation>
     </message>
     <message>
         <source>&amp;Curves ...</source>
@@ -3561,7 +3561,7 @@ Jste si jist, že chcete pokračovat?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10754"/>
         <location filename="../src/ApplicationWindow.cpp" line="11147"/>
         <source>&amp;Box Plot</source>
-        <translation>&amp;Nákres bedny</translation>
+        <translation>&amp;Krabicový nákres</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10758"/>
@@ -4541,7 +4541,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
         <location filename="../src/ApplicationWindow.cpp" line="11305"/>
         <location filename="../src/ApplicationWindow.cpp" line="11306"/>
         <source>Fit frame to window</source>
-        <translation>Přizpůsobit rámeček oknu</translation>
+        <translation>Umístit rámeček do okna</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="283"/>
@@ -4634,7 +4634,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
         <location filename="../src/ApplicationWindow.cpp" line="7863"/>
         <location filename="../src/ApplicationWindow.cpp" line="7979"/>
         <source>Fit &amp;Multi-Peak</source>
-        <translation>Přizpůsobení s &amp;mnohačetnými vrcholy</translation>
+        <translation>Umístění s &amp;mnohačetnými vrcholy</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="1036"/>
@@ -4794,7 +4794,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
         <location filename="../src/ApplicationWindow.cpp" line="10427"/>
         <location filename="../src/ApplicationWindow.cpp" line="10969"/>
         <source>Delete &amp;Fit Tables</source>
-        <translation>&amp;Anpassungstabellen löschen</translation>
+        <translation>&amp;Smazat tabulky umístění</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10430"/>
@@ -4978,7 +4978,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11148"/>
         <source>Box and whiskers plot</source>
-        <translation>Bednový a vousatý nákres</translation>
+        <translation>Krabicový a vousatý nákres</translation>
     </message>
     <message>
         <source>Visit QtiPlot &amp;Forums</source>
@@ -5395,7 +5395,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="872"/>
         <source>&amp;Quick Fit</source>
-        <translation>&amp;Rychlé přizpůsobení</translation>
+        <translation>&amp;Rychlé umístění</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="1060"/>
@@ -7245,7 +7245,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="947"/>
         <source> Spline</source>
-        <translation>Zub</translation>
+        <translation> Spline</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="948"/>
@@ -7584,13 +7584,13 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1002"/>
         <source>Same X as Fitting Data</source>
-        <translation>Stejná hodnota X jako data pro přizpůsobení</translation>
+        <translation>Stejná hodnota X jako data pro umístění</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1005"/>
         <location filename="../src/ConfigDialog.cpp" line="1012"/>
         <source>Display Peak Curves for Multi-peak Fits</source>
-        <translation>Ukazovat vrcholy křivek pro přizpůsobení s více vrcholy</translation>
+        <translation>Ukazovat vrcholy křivek pro umístění s více vrcholy</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1013"/>
@@ -7620,7 +7620,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="789"/>
         <source>Fitting</source>
-        <translation>Přizpůsobení křivek</translation>
+        <translation>Umístění křivek</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="887"/>
@@ -7739,7 +7739,7 @@ Dají se použít následující zvláštní kódy:
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1003"/>
         <source>2 points for linear fits</source>
-        <translation>Dva body pro přímočaré přizpůsobení</translation>
+        <translation>Dva body pro přímočaré umístění</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="780"/>
@@ -8145,7 +8145,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/CurvesDialog.cpp" line="67"/>
         <source> Spline</source>
-        <translation> Zub</translation>
+        <translation> Spline</translation>
     </message>
     <message>
         <location filename="../src/CurvesDialog.cpp" line="68"/>
@@ -8618,7 +8618,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="53"/>
         <source>Exponential Fit of</source>
-        <translation>Exponenciální přizpůsobení</translation>
+        <translation>Exponenciální umístění</translation>
     </message>
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="60"/>
@@ -8628,7 +8628,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="119"/>
         <source>&amp;Fit</source>
-        <translation>&amp;Přizpůsobení</translation>
+        <translation>&amp;Umístění</translation>
     </message>
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="112"/>
@@ -9410,7 +9410,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/Fit.cpp" line="225"/>
         <source>fit of dataset</source>
-        <translation>Přizpůsobení záznamu s údaji</translation>
+        <translation>Umístění záznamu s údaji</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="227"/>
@@ -9526,17 +9526,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/Fit.cpp" line="483"/>
         <source>There are no parameters specified for this fit operation. Operation aborted!</source>
-        <translation>Pro tuto operaci přizpůsobení nejsou stanoveny žádné parametry. Operace zrušena!</translation>
+        <translation>Pro tuto operaci umístění nejsou stanoveny žádné parametry. Operace zrušena!</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="495"/>
         <source>You must specify a valid fit function first. Operation aborted!</source>
-        <translation>Nejprve musíte stanovit platnou funkci přizpůsobení. Operace zrušena!</translation>
+        <translation>Nejprve musíte stanovit platnou funkci umístění. Operace zrušena!</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="616"/>
         <source>Fit</source>
-        <translation>Přizpůsobení</translation>
+        <translation>Umístění</translation>
     </message>
     <message>
         <source> of </source>
@@ -9553,17 +9553,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/Fit.cpp" line="394"/>
         <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
-        <translation>Sloupec %1 má méně bodů než záznam s údaji o přizpůsobení. Vyberte, prosím, jiný sloupec!</translation>
+        <translation>Sloupec %1 má méně bodů než záznam s údaji o umístění. Vyberte, prosím, jiný sloupec!</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="477"/>
         <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
-        <translation>Nestanovil jste platný záznam s údaji pro operaci přizpůsobení. Operace zrušena!</translation>
+        <translation>Nestanovil jste platný záznam s údaji pro operaci umístění. Operace zrušena!</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="489"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
-        <translation>Pro tuto operaci přizpůsobení potřebujete alespoň %1 datových bodů! Operace zrušena!</translation>
+        <translation>Pro tuto operaci umístění potřebujete alespoň %1 datových bodů! Operace zrušena!</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="476"/>
@@ -9571,7 +9571,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/Fit.cpp" line="488"/>
         <location filename="../src/Fit.cpp" line="494"/>
         <source>Fit Error</source>
-        <translation>Chyba při přizpůsobení</translation>
+        <translation>Chyba při umístění</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="231"/>
@@ -9654,7 +9654,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/FitDialog.cpp" line="192"/>
         <source>&amp;Fit</source>
-        <translation>&amp;Přizpůsobit</translation>
+        <translation>&amp;Umístit</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -9706,7 +9706,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/FitDialog.cpp" line="244"/>
         <source>Fit with &amp;built-in function</source>
-        <translation>Přizpůsobení s &amp;vestavěnou funkcí</translation>
+        <translation>Umístění s &amp;vestavěnou funkcí</translation>
     </message>
     <message>
         <location filename="../src/FitDialog.cpp" line="271"/>
@@ -9746,7 +9746,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/FitDialog.cpp" line="298"/>
         <source>&amp;Fit &gt;&gt;</source>
-        <translation>&amp;Přizpůsobit &gt;&gt;</translation>
+        <translation>&amp;Umístit &gt;&gt;</translation>
     </message>
     <message>
         <source>QtiPlot - Input function error</source>
@@ -9867,7 +9867,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
     <message>
         <location filename="../src/FitDialog.cpp" line="190"/>
         <source>&amp;Delete Fit Curves</source>
-        <translation>&amp;Smazat křivky přizpůsobení</translation>
+        <translation>&amp;Smazat křivky umístění</translation>
     </message>
     <message>
         <location filename="../src/FitDialog.cpp" line="262"/>
@@ -9882,7 +9882,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
     <message>
         <location filename="../src/FitDialog.cpp" line="828"/>
         <source>Fit with selected &amp;user function</source>
-        <translation>Přizpůsobit s &amp;uživatelem stanovenou funkcí</translation>
+        <translation>Umístit s &amp;uživatelem stanovenou funkcí</translation>
     </message>
     <message>
         <location filename="../src/FitDialog.cpp" line="835"/>
@@ -9951,7 +9951,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
     <message>
         <location filename="../src/FitDialog.cpp" line="363"/>
         <source>Generated Fit Curve</source>
-        <translation>Vytvořená křivka přizpůsobení</translation>
+        <translation>Vytvořená křivka umístění</translation>
     </message>
     <message>
         <source>Uniform X Function</source>
@@ -10006,7 +10006,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
     <message>
         <location filename="../src/FitDialog.cpp" line="401"/>
         <source>&lt;&lt; &amp;Fit</source>
-        <translation>&lt;&lt; &amp;Přizpůsobit</translation>
+        <translation>&lt;&lt; &amp;Umístit</translation>
     </message>
     <message>
         <location filename="../src/FitDialog.cpp" line="406"/>
@@ -10026,7 +10026,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <location filename="../src/FitDialog.cpp" line="461"/>
         <location filename="../src/FitDialog.cpp" line="483"/>
         <source>Please perform a fit first and try again.</source>
-        <translation>Proveďte, prosím, nejprve přizpůsobení a pak to zkuste znovu.</translation>
+        <translation>Proveďte, prosím, nejprve umístění a pak to zkuste znovu.</translation>
     </message>
     <message>
         <location filename="../src/FitDialog.cpp" line="453"/>
@@ -10091,7 +10091,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
     <message>
         <location filename="../src/FitDialog.cpp" line="358"/>
         <source>Same X as Fitting &amp;Data</source>
-        <translation>Stejné hodnoty X jako &amp;data přizpůsobení</translation>
+        <translation>Stejné hodnoty X jako &amp;data umístění</translation>
     </message>
     <message>
         <location filename="../src/FitDialog.cpp" line="373"/>
@@ -10126,7 +10126,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
     <message>
         <location filename="../src/FitDialog.cpp" line="69"/>
         <source>Fit Wizard</source>
-        <translation>Průvodce přizpůsobením křivky</translation>
+        <translation>Průvodce umístěním křivky</translation>
     </message>
     <message>
         <location filename="../src/FitDialog.cpp" line="543"/>
@@ -12811,7 +12811,7 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/InterpolationDialog.cpp" line="56"/>
         <source>Spline</source>
-        <translation>Zub</translation>
+        <translation>Spline</translation>
     </message>
     <message>
         <location filename="../src/InterpolationDialog.cpp" line="63"/>
@@ -13411,12 +13411,12 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/PolynomialFit.cpp" line="253"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
-        <translation>Pro tuto operaci přizpůsobení potřebujete alespoň %1 datových bodů! Operace zrušena!</translation>
+        <translation>Pro tuto operaci umístění potřebujete alespoň %1 datových bodů! Operace zrušena!</translation>
     </message>
     <message>
         <location filename="../src/PolynomialFit.cpp" line="252"/>
         <source>Fit Error</source>
-        <translation>Chyba při přizpůsobení</translation>
+        <translation>Chyba při umístění</translation>
     </message>
 </context>
 <context>
@@ -14109,12 +14109,12 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/MultiPeakFit.cpp" line="284"/>
         <location filename="../src/MultiPeakFit.cpp" line="299"/>
         <source>Fit</source>
-        <translation>Přizpůsobení</translation>
+        <translation>Umístění</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="300"/>
         <source>fit of</source>
-        <translation>Přizpůsobení </translation>
+        <translation>Umístění</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="352"/>
@@ -14144,12 +14144,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="74"/>
         <source>Gauss Fit</source>
-        <translation>Gaussovo přizpůsobení</translation>
+        <translation>Gaussovo umístění</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="76"/>
         <source>Lorentz Fit</source>
-        <translation>Lorentzovo přizpůsobení</translation>
+        <translation>Lorentzovo umístění</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="117"/>
@@ -14190,7 +14190,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="246"/>
         <source>Fit Error</source>
-        <translation>Chyba při přizpůsobení</translation>
+        <translation>Chyba při umístění</translation>
     </message>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="303"/>
@@ -14541,7 +14541,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/NonLinearFit.cpp" line="77"/>
         <source>You must provide a list containing at least one parameter for this type of fit. Operation aborted!</source>
-        <translation>Musíte poskytnout seznam, který bude obsahovat alespoň jeden parametr pro tento typ přizpůsobení. Operace zrušena!</translation>
+        <translation>Musíte poskytnout seznam, který bude obsahovat alespoň jeden parametr pro tento typ umístění. Operace zrušena!</translation>
     </message>
     <message>
         <source>Input function error</source>
@@ -14550,7 +14550,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/NonLinearFit.cpp" line="76"/>
         <source>Fit Error</source>
-        <translation>Chyba při přizpůsobení</translation>
+        <translation>Chyba při umístění</translation>
     </message>
 </context>
 <context>
@@ -15619,7 +15619,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PlotDialog.cpp" line="482"/>
         <source>Spline</source>
-        <translation>Zub</translation>
+        <translation>Spline</translation>
     </message>
     <message>
         <location filename="../src/PlotDialog.cpp" line="507"/>
@@ -15642,7 +15642,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/PlotDialog.cpp" line="572"/>
         <location filename="../src/PlotDialog.cpp" line="1466"/>
         <source>Box</source>
-        <translation>Bedna</translation>
+        <translation>Krabice</translation>
     </message>
     <message>
         <location filename="../src/PlotDialog.cpp" line="574"/>
@@ -15653,7 +15653,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PlotDialog.cpp" line="578"/>
         <source>No Box</source>
-        <translation>Žádná bedna</translation>
+        <translation>Žádná krabice</translation>
     </message>
     <message>
         <location filename="../src/PlotDialog.cpp" line="579"/>
@@ -15740,7 +15740,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PlotDialog.cpp" line="614"/>
         <source>Box Width</source>
-        <translation>Šířka bedny</translation>
+        <translation>Šířka krabice</translation>
     </message>
     <message>
         <location filename="../src/PlotDialog.cpp" line="620"/>
@@ -16412,19 +16412,19 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PluginFit.cpp" line="76"/>
         <source>The plugin does not implement a %1 method necessary for simplex fitting.</source>
-        <translation>Přídavný modul neprovádí žádnou %1 metodu nezbytnou pro simplexní přizpůsobení.</translation>
+        <translation>Přídavný modul neprovádí žádnou %1 metodu nezbytnou pro simplexní umístění.</translation>
     </message>
     <message>
         <location filename="../src/PluginFit.cpp" line="84"/>
         <location filename="../src/PluginFit.cpp" line="92"/>
         <location filename="../src/PluginFit.cpp" line="100"/>
         <source>The plugin does not implement a %1 method necessary for Levenberg-Marquardt fitting.</source>
-        <translation>Přídavný modul neprovádí žádnou %1 metodu nezbytnou pro Levenberg-Marquardt přizpůsobení.</translation>
+        <translation>Přídavný modul neprovádí žádnou %1 metodu nezbytnou pro Levenberg-Marquardt umístění.</translation>
     </message>
     <message>
         <location filename="../src/PluginFit.cpp" line="56"/>
         <source>Plugin Fit</source>
-        <translation>Přizpůsobení z přídavného modulu</translation>
+        <translation>Umístění z přídavného modulu</translation>
     </message>
     <message>
         <location filename="../src/PluginFit.cpp" line="63"/>
@@ -16449,7 +16449,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="53"/>
         <source>Polynomial Fit of</source>
-        <translation>Mnohočlenné (polynomické) přizpůsobení</translation>
+        <translation>Mnohočlenné (polynomické) umístění</translation>
     </message>
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="58"/>
@@ -16483,7 +16483,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="82"/>
         <source>&amp;Fit</source>
-        <translation>&amp;Přizpůsobení</translation>
+        <translation>&amp;Umístění</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -16531,7 +16531,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="48"/>
         <source>Polynomial Fit Options</source>
-        <translation>Volby pro mnohočlenné přizpůsobení</translation>
+        <translation>Volby pro mnohočlenné umístění</translation>
     </message>
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="109"/>
@@ -16558,12 +16558,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PolynomialFit.cpp" line="138"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
-        <translation>Pro tuto operaci přizpůsobení potřebujete alespoň %1 datových bodů! Operace zrušena!</translation>
+        <translation>Pro tuto operaci umístění potřebujete alespoň %1 datových bodů! Operace zrušena!</translation>
     </message>
     <message>
         <location filename="../src/PolynomialFit.cpp" line="137"/>
         <source>Fit Error</source>
-        <translation>Chyba při přizpůsobení</translation>
+        <translation>Chyba při umístění</translation>
     </message>
 </context>
 <context>
@@ -17613,7 +17613,7 @@ Wollen Sie sie überschreiben?</translation>
     <message>
         <location filename="../src/SigmoidalFit.cpp" line="69"/>
         <source>Boltzmann (Sigmoidal) Fit</source>
-        <translation>Boltzmannovo přizpůsobení (esovité)</translation>
+        <translation>Boltzmannovo umístění (esovité)</translation>
     </message>
 </context>
 <context>
