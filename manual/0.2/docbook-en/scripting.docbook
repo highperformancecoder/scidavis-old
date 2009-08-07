@@ -8,8 +8,19 @@
     <title>muParser</title>
     <indexterm><primary>Scripting</primary><secondary>MuParser</secondary></indexterm>
     <para>The constants _e=e=E and _pi=pi=PI=Pi are defined, as well as the
-		 following operators and functions. muParser is purely a parser for mathematical
-		 expressions and as such does not support executing scripts.</para>
+		 operators and functions listed below. muParser is purely a parser for mathematical
+		 expressions and as such does not support executing complex scripts. However,
+		 you can make formulas easier to read and modify by assigning subexpressions to
+		 variables and inserting comments.
+	 </para>
+	 <para><emphasis>Variable assignments</emphasis> evaluate to the assigned value, so
+		 they can be used in the middle of a formula. They can also stand on a line of
+		 their own, or separated from other parts of the formula by a semicolon (;).
+		 The result of evaluating the last line of a multi-line formula is taken as the
+		 result of the whole formula.
+	 </para>
+	 <para><emphasis>Comments</emphasis> start with a hash mark (#) and run till the end
+		 of the line.</para>
 
     <table frame="sides" pgwide="1" tocentry="1">
       <title>Supported Mathematical Operators</title>
@@ -396,17 +407,53 @@
 				  <entry>In the contex of a matrix, returns the value at row a and column b.
 					  In the context of a table, returns the value at column a and row b (remember that tables use column logic).
 					  Everywhere else, this function is undefined.
+
+					  In the case of tables, the column is specified as a path string; see the
+					  documentation of column() for supported path formats.
 				  </entry>
             </row>
+
+				<row>
+					<entry>cell_(column, row)</entry>
+					<entry>
+						In the context of a table, return the value of a cell specified using 1-based indices.
+						Wherever possible, you should use cell() instead, because inserting/removing/moving
+						columns will break formulas using cell_().
+					</entry>
+				</row>
 
             <row>
               <entry>col(c)</entry>
 
-				  <entry>Only works in the context of a table.
-					  Returns the value at column c and row i (the current row) in the context table.
-					  c can either be the column's number, or its name in doublequotes.
+				  <entry>
+					  Deprecated; use column() or cell() instead.
+					  Note that the user interface still uses col() until a proper language-specific mechanism
+					  is implemented.
 				  </entry>
             </row>
+
+				<row>
+					<entry>column("path")</entry>
+					<entry>
+						In a column formula, returns the value in the given column and current row (i).
+						The column path can either be the name of column in the current table, more
+						generally a relative path to a column in another table (e.g. "../otherTable/col")
+						or an absolute path (i.e., relative to the project root; e.g.
+						"/folder/otherTable/col"). Searching for a table anywhere in the project using
+						"otherTable/col" (without leading slash) is supported for backwards-compatibility
+						reasons, but is strongly discouraged - a future release will drop the requirement
+						of project-wide unique table names, at which point this usage will cease to be
+						well-defined.
+					</entry>
+				</row>
+
+				<row>
+					<entry>column_(index)</entry>
+					<entry>In a column formula, returns the value in the column given by 1-based index
+						and current row (i). You should use column() wherever possible, because inserting/
+						removing/moving columns will break formulas using column_().
+					</entry>
+				</row>
 
             <row>
               <entry>if(e1,e2,e3)</entry>
@@ -418,9 +465,8 @@
             <row>
               <entry>tablecol(t,c)</entry>
 
-				  <entry>Only works in the context of a table.
-					  Returns the value at column c and row i (the current row) in the table t.
-					  t is the table's name in doublequotes, c is either the column's number or its name in doublequotes.
+				  <entry>
+					  Deprecated; use column() instead.
 				  </entry>
             </row>
           </tbody>
