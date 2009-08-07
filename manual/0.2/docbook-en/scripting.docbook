@@ -214,6 +214,14 @@
               J<subscript>n</subscript>(x).</entry>
             </row>
 
+				<row>
+					<entry>bessel_jn_zero(n, s)</entry>
+					<entry>s<superscript>th</superscript> zero of regular cylindrical Bessel function
+						of n<superscript>th</superscript> order,
+						J<subscript>n</subscript>(bessel_jn_zero(n,s))=0
+					</entry>
+				</row>
+
             <row>
               <entry>bessel_y0(x)</entry>
 
@@ -241,6 +249,12 @@
 
               <entry>Computes the Beta Function, B(a,b) =
               Gamma(a)*Gamma(b)/Gamma(a+b) for a &gt; 0 and b &gt; 0.</entry>
+            </row>
+
+            <row>
+              <entry>ceil(x)</entry>
+
+              <entry>ceiling; smallest integer greater or equal to x</entry>
             </row>
 
             <row>
@@ -288,6 +302,12 @@
             </row>
 
             <row>
+              <entry>floor(x)</entry>
+
+              <entry>floor; largest integer less than or equal to x</entry>
+            </row>
+
+            <row>
               <entry>gamma(x)</entry>
 
               <entry>Computes the Gamma function, subject to x not being a
@@ -327,6 +347,26 @@
               <entry>base 2 logarythm of x</entry>
             </row>
 
+				<row>
+					<entry>w0(x)</entry>
+					<entry>Principal branch of Lambert's W function, W<subscript>0</subscript>(x).
+						W<subscript>0</subscript> is defined as a solution to the equation
+						W<subscript>0</subscript>(x)*exp(W<subscript>0</subscript>(x))=x.
+						For x&lt;0, there are tow real-valued branches; this function computes the one where
+						W&gt;-1 for x&lt;0 (compare w1(x)).
+					</entry>
+				</row>
+
+				<row>
+					<entry>w1(x)</entry>
+					<entry>Secondary branch of Lambert's W function, W<subscript>-1</subscript>(x).
+						W<subscript>-1</subscript> is defined as a solution to the equation
+						W<subscript>-1</subscript>(x)*exp(W<subscript>-1</subscript>(x))=x.
+						For x&lt;0, there are tow real-valued branches; this function computes the one where
+						W&lt;-1 for x&lt;0 (compare w0(x)).
+					</entry>
+				</row>
+
             <row>
               <entry>min(x1,x2,x3,...)</entry>
 
@@ -338,6 +378,16 @@
 
               <entry>Maximum of the list of arguments</entry>
             </row>
+
+				<row>
+					<entry>mod(x,y)</entry>
+					<entry>x modulo y; remainder of integer division x/y</entry>
+				</row>
+
+				<row>
+					<entry>pow(x,y)</entry>
+					<entry>x to the power of y, x^y</entry>
+				</row>
 
             <row>
               <entry>rint(x)</entry>
