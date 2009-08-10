@@ -792,9 +792,11 @@ void Table::normalizeColumns(QList< Column* > cols)
 				if (col->valueAt(row) > max)
 					max = col->valueAt(row);
 			}
+			QVector<double> results(col->rowCount());
 			if (max != 0.0) // avoid division by zero
 				for (int row=0; row<col->rowCount(); row++)
-					col->setValueAt(row, col->valueAt(row) / max);
+					results[row] = col->valueAt(row) / max;
+			col->replaceValues(0, results);
 		}
 	}
 	endMacro();
@@ -813,23 +815,28 @@ void Table::normalizeSelection()
 	WAIT_CURSOR;
 	beginMacro(QObject::tr("%1: normalize selection").arg(name()));
 	double max = 0.0;
-	for (int col=d_view->firstSelectedColumn(); col<=d_view->lastSelectedColumn(); col++)
-		if (column(col)->dataType() == SciDAVis::TypeDouble)
-			for (int row=0; row<rowCount(); row++)
-			{
-				if (d_view->isCellSelected(row, col) && column(col)->valueAt(row) > max)
-					max = column(col)->valueAt(row);
-			}
+	foreach(Column *col_ptr, d_view->selectedColumns()) {
+		int col = columnIndex(col_ptr);
+		if (col_ptr->dataType() == SciDAVis::TypeDouble)
+			for (int row=0; row<col_ptr->rowCount(); row++)
+				if (d_view->isCellSelected(row, col) && col_ptr->valueAt(row) > max)
+					max = col_ptr->valueAt(row);
+	}
 
 	if (max != 0.0) // avoid division by zero
 	{
-		for (int col=d_view->firstSelectedColumn(); col<=d_view->lastSelectedColumn(); col++)
-			if (column(col)->dataType() == SciDAVis::TypeDouble)
-				for (int row=0; row<rowCount(); row++)
-				{
+		foreach(Column *col_ptr, d_view->selectedColumns()) {
+			int col = columnIndex(col_ptr);
+			if (col_ptr->dataType() == SciDAVis::TypeDouble) {
+				QVector<double> results(rowCount());
+				for (int row=0; row<col_ptr->rowCount(); row++)
 					if (d_view->isCellSelected(row, col))
-						column(col)->setValueAt(row, column(col)->valueAt(row) / max);
-				}
+						results[row] = col_ptr->valueAt(row) / max;
+					else
+						results[row] = col_ptr->valueAt(row);
+				col_ptr->replaceValues(0, results);
+			}
+		}
 	}
 	endMacro();
 	RESET_CURSOR;
