@@ -232,12 +232,7 @@ double MuParserScript::statementSeparator(double a, double b) {
 /**
  * \brief Implements column() function for tables.
  *
- * \arg \c columnPath Path to the column to read data from.
- *      Currently, only "column" (referring to the named column of the current table) and
- *      "table/column" (referring to the name column of the named table somewhere in the project)
- *      are supported. A future version of SciDAVis will allow table names to be non-unique across
- *      different folders, at which point this argument is planned to be extended to a full path
- *      specification; either absolute (starting with "/") or relative to the current Aspect.
+ * \arg \c columnPath Path to the column to read data from. See resolveColumnPath().
  *
  * The row to read from is determined by the muParser variable "i" set during iteration of a column
  * formula. For explicitly specifying the row, use cell() instead.
