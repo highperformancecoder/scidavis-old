@@ -1415,6 +1415,108 @@ f.covarianceMatrix("cov")
 					 <listitem>Change the column's data type; argument must be one of "Numeric", "Text",
 						 "Month", "Day" or "DateTime".</listitem>
 				 </varlistentry>
+				 <varlistentry>
+					 <term>copy(Column)</term>
+					 <listitem>Copy complete content of other column, which must have the same data type (mode).
+					 Returns a boolean indicating success or failure.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>copy(Column,int,int,int)</term>
+					 <listitem>copy(source, source_start, dest_start, num_rows) copies num_rows values from source,
+						 starting to read at row source_start and to write at row dest_start.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>rowCount()</term>
+					 <listitem>Number of rows in the column.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertRows(int, int)</term>
+					 <listitem>insertRows(before, count) insert count empty rows before row numbered before</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>removeRows(int, int)</term>
+					 <listitem>removeRows(first, count) removes count rows starting with row numbered first</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plotDesignation()</term>
+					 <listitem>Return a string representing the plot designation of the column; one of "noDesignation", "X", "Y", "Z", "xErr" or "yErr".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPlotDesignation(string)</term>
+					 <listitem>Set the plot designation. The argument must be one of "noDesignation", "X", "Y", "Z", "xErr" or "yErr".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>clear()</term>
+					 <listitem>Clear content of all cells in the column, marking them as empty/invalid.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>isInvalid(int)</term>
+					 <listitem>Returns boolean indicating whether the given row is marke as empty/invalid.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>formula(int)</term>
+					 <listentry>Return formula used to compute the cell value in the given row.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFormula(int, string)</term>
+					 <listentry>Sets formula for the given row to string.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>clearFormulas()</term>
+					 <listentry>Discard all formulas associated with cells.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>valueAt(int)</term>
+					 <listentry>Retrieve value of the specified cell, assuming that the column has columnMode() == "Numeric".</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setValueAt(int, double)</term>
+					 <listentry>Set value of specified cell, assuming that the column has columnMode() == "Numeric".</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>replaceValues(int, list of double values)</term>
+					 <listentry>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is one of "Numeric". Compared with setValueAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>textAt(int)</term>
+					 <listentry>Retrieve value of the specified cell, assuming that the column has columnMode() == "Text".</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTextAt(int, string)</term>
+					 <listentry>Set value of specified cell, assuming that the column has columnMode() == "Text".</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>replaceTexts(int, list of strings)</term>
+					 <listentry>Mass-update cells starting at the indicated row, assuming that the column has columnMode() == "Text". Compared with setTextAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>dateAt(int)</term>
+					 <listentry>Retrieve value of the specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setDateAt(int, QDate)</term>
+					 <listentry>Set value of specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>timeAt(int)</term>
+					 <listentry>Retrieve value of the specified cell, assuming that the column has columnMode() == "DateTime".</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTimeAt(int, QTime)</term>
+					 <listentry>Set value of specified cell, assuming that the column has columnMode() == "DateTime".</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>dateTimeAt(int)</term>
+					 <listentry>Retrieve value of the specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setDateTimeAt(int, QDateTime)</term>
+					 <listentry>Set value of specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>replaceDateTimes(int, list of QDateTime values)</term>
+					 <listentry>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is one of "Month", "Day", "DateTime". Compared with setDateTimeAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listentry>
+				 </varlistentry>
 			 </variablelist>
 		 </sect3>
 	 </sect2>
