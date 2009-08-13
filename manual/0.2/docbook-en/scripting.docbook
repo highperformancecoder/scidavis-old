@@ -918,7 +918,7 @@ def f():
       </table>
     </sect2>
 
-    <sect2 id="Python-API">
+    <sect2 id="Python-API-Intro">
       <title>Accessing &appname;'s functions from Python</title>
 
       <para>We will assume that you are using the <link
@@ -1341,6 +1341,83 @@ f.covarianceMatrix("cov")
 	  </programlisting></para>
       </sect3>
     </sect2>
+
+	 <sect2 id="Python-API">
+		 <title>API documentation</title>
+		 <para>Classes mentioned below that start with "Q" belong to Qt and can be used via PyQt.
+			 If you want to know what you can do with such classes (e.g. QIcon or QDateTime), see the
+			 <ulink url="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/classes.html">PyQt
+				 reference documentation</ulink>.
+		 </para>
+		 <sect3><title>class AbstractAspect (inherits QObject)</title>
+			 <para>A base class for content of a project. While currently the only AbstractAspect
+				 accessible to you is Column, a future release will make more extensive usage of this;
+				 probably with some revisions in the design, so only some basic functions are documented
+				 (and supported) for now.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>index()</term>
+					 <listitem>Return the 0-based index of the Aspect in its sibling list.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>name()</term>
+					 <listitem>Return the Aspect's name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setName(string)</term>
+					 <listitem>Change the Aspect's name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>comment()</term>
+					 <listitem>Return comment attached to the Aspect.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setComment(string)</term>
+					 <listitem>Change the comment attached to the Aspect.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>icon()</term>
+					 <listitem>Return the icon (a QIcon) used to designate the Aspect's type; for columns,
+						 this is the data type icon in the table header.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>creationTime()</term>
+					 <listitem>Return point in time the Aspect was created by the user (as a QDateTime).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>remove()</term>
+					 <listitem>Remove Aspect from the project (can be undone using Edit-&gt;Undo menu).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>signal void aspectDescriptionAboutToChange(const AbstractAspect*)</term>
+					 <listitem>Emitted before the description (name or comment) is changed.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>signal void aspectDescriptionChanged(const AbstractAspect*)</term>
+					 <listitem>Emitted after the description (name or comment) has changed.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>signal void aspectAboutToBeRemoved(const AbstractAspect*)</term>
+					 <listitem>Emitted before the Aspect is removed.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Column (inherits AbstractAspect)</title>
+			 <para>Represents a column in a table.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>columnMode()</term>
+					 <listitem>A string designating the data type; one of "Numeric", "Text", "Month",
+						 "Day" or "DateTime".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColumnMode(string)</term>
+					 <listitem>Change the column's data type; argument must be one of "Numeric", "Text",
+						 "Month", "Day" or "DateTime".</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+	 </sect2>
 
     <sect2 id="Python-init">
       <title>The Initialization File</title>
