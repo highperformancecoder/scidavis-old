@@ -41,6 +41,7 @@ class AbstractAspect : QObject
 #include "core/AbstractAspect.h"
 %End
 	public:
+/*
 		AbstractAspect(const QString &name);
 		AbstractAspect * parentAspect() const;
 //		future::Folder * folder();
@@ -52,7 +53,9 @@ class AbstractAspect : QObject
 		AbstractAspect* child(int index) const;
 		int childCount() const;
 		int indexOfChild(const AbstractAspect * child) const;
+		*/
 		int index() const;
+		/*
 		void moveChild(int from, int to);
 		void reparentChild(AbstractAspect *new_parent, AbstractAspect *child, int d_new_index);
 		void reparentChild(AbstractAspect *new_parent, AbstractAspect *child);
@@ -61,13 +64,17 @@ class AbstractAspect : QObject
 //		const Project *project() const;
 //		Project *project();
 		QString path() const;
+		*/
 		QIcon icon() const;
+		/*
 		QMenu *createContextMenu() const;
+		*/
 		QString name() const;
 		QString comment() const;
 		QString captionSpec() const;
 		QDateTime creationTime() const;
 		QString caption() const;
+		/*
 		QUndoStack *undoStack() const;
 		void exec(QUndoCommand *command);
 		void beginMacro(const QString& text);
@@ -77,12 +84,15 @@ class AbstractAspect : QObject
 		static void setGlobalDefault(const QString &key, const QVariant &value);
 //		void save(QXmlStreamWriter *) const;
 //		bool load(XmlStreamReader *);
+		*/
 	public slots:
 		void setName(const QString &value);
 		void setComment(const QString &value);
 		void setCaptionSpec(const QString &value);
 		void remove();
+		/*
 		QString uniqueNameFor(const QString &current_name) const;
+		*/
 	signals:
 		void aspectDescriptionAboutToChange(const AbstractAspect *aspect);
 		void aspectDescriptionChanged(const AbstractAspect *aspect);
@@ -102,11 +112,13 @@ class Column: AbstractAspect
 #include "core/column/Column.h"
 %End
 	public:
+/* will be removed in favour of columMode() - don't encourage anyone to start using it
 		SIP_PYOBJECT dataType() const;
 %MethodCode
 		int mode = sipCpp->dataType();
   		sipRes = PyString_FromString(SciDAVis::enumValueToString(mode, "ColumnDataType"));
 %End
+*/
 		SIP_PYOBJECT columnMode() const;
 %MethodCode
 		int mode = sipCpp->columnMode();
@@ -201,11 +213,19 @@ public:
   CaptionPolicy captionPolicy();
   void setCaptionPolicy(CaptionPolicy);
 
+  // not usable as is - doesn't yield a valid template file,
+  // geometry info has to be supplied by user, doesn't work on graphs (where it's most
+  // interesting)...
+  /*
   virtual SIP_PYOBJECT saveAsTemplate(const QString& );
 %MethodCode
   sipRes = PyString_FromString(sipCpp->saveAsTemplate(*a0));
 %End
+*/
+  // same issues as with saveAsTemplate
+  /*
   virtual void restore(const QStringList& );
+  */
   Folder* folder();
 
   void askOnCloseEvent(bool)/PyName=confirmClose/;
