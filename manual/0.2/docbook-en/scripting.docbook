@@ -1519,6 +1519,43 @@ f.covarianceMatrix("cov")
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
+		 <sect3><title>class MDIWindow (inherits QWidget)</title>
+			 <para>Base class of Table, Matrix, Graph and Note. A redesigned analogue under the name of "Part" (inheriting from AbstractAspect) is under development; it should be possible to provide a backwards-compatible interface, though.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>name()</term>
+					 <listentry>Return the window's name (added in &appname; 0.2.3).</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setName(string)</term>
+					 <listentry>Set window's name. IMPORTANT: This was added in &appname; 0.2.3, but unfortunately is BROKEN in this release. Usable starting with &appname; 0.2.4.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>windowLabel()</term>
+					 <listentry>Returns the comment associated with the window (yes, the confusing name will be fixed in a future release).</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setWindowLabel(string)</term>
+					 <listentry>Set comment associated with the window (yes, the confusing name will be fixed in a future release).</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>captionPolicy()</term>
+					 <listentry>Return caption policy (i.e., what to display in the title bar). One of the integer constants MDIWindow.Name, MDIWindow.Label or MDIWindow.Both.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCaptionPolicy(int)</term>
+					 <listentry>Set caption policy (i.e., what to display in the title bar). Must be one of the integer constants MDIWindow.Name, MDIWindow.Label or MDIWindow.Both.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>folder()</term>
+					 <listentry>Return the folder this window belongs to (an object of class Folder).</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>confirmClose(boolean)</term>
+					 <listentry>Set a flag indicating whether the user should be given the opportunity to cancel removing the window or minimize it instead when trying to close it.</listentry>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
 	 </sect2>
 
     <sect2 id="Python-init">
