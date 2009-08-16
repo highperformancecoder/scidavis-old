@@ -4156,7 +4156,7 @@ void ApplicationWindow::readSettings()
 		temp_locale.setNumberOptions(temp_locale.numberOptions() | QLocale::OmitGroupSeparator);
 	QLocale::setDefault(temp_locale);
 
-	d_decimal_digits = settings.value("/DecimalDigits", 14).toInt();
+	d_decimal_digits = settings.value("/DecimalDigits", 6).toInt();
 	d_default_numeric_format = settings.value("/DefaultNumericFormat", 'g').toChar().toAscii();
 
 	//restore geometry of main window
