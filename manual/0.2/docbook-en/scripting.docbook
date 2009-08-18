@@ -1558,7 +1558,7 @@ f.covarianceMatrix("cov")
 		 </sect3>
 		 <sect3><title>class Table (inherits MDIWindow)</title>
 			 <para>Class of table (spreadsheet) windows.</para>
-			 <variablelist>
+			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>numRows()</term>
 					 <listentry>Returns the number of rows of the table.</listentry>
@@ -1654,6 +1654,88 @@ f.covarianceMatrix("cov")
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
+		 <sect3><title>class Matrix (inherits MDIWindow)</title>
+			 <para>Class of matrix windows.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <item>numRows()</item>
+					 <listentry>Returns the number of rows in the matrix.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>numCols()</item>
+					 <listentry>Returns the number of columns in the matrix.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setNumRows(int)</item>
+					 <listentry>Changes the number of rows in the matrix.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setNumCols(int)</item>
+					 <listentry>Changes the number of columns in the matrix.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setDimensions(int,int)</item>
+					 <listentry>setDimensions(rows, cols) changes the number of rows and columns simultaneously.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>cell(int,int)</item>
+					 <listentry>cell(row,column) returns the content of the indicated cell as a number.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>text(int,int)</item>
+					 <listentry>text(row,column) returns the content of the indicated cell as its textual representation.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setCell(int,int,double)</item>
+					 <listentry>setCell(row,column,value) changes the content of the indicated cell to the indicated numeric value.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setText(int,int,string)</item>
+					 <listentry>setText(row,column,value) interprets the string value according to the numeric format of the matrix
+						 and changes the content of the indicated cell accordingly.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>xStart()</item>
+					 <listentry>Returns logical X coordinate of the first column.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>xEnd()</item>
+					 <listentry>Returns logical X coordinate of the last column.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>yStart()</item>
+					 <listentry>Returns logical Y coordinate of the first row.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>yEnd()</item>
+					 <listentry>Returns logical Y coordinate of the last row.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setCoordinates(double,double,double,double)</item>
+					 <listentry>setCoordinates(x_start, x_end, y_start, y_end) changes the logical
+						 coordinate system associated with the matrix.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setFormula(string)</item>
+					 <listentry>Changes the formula used to (re)calculate cell values of the matrix.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setNumericPrecision(int)</item>
+					 <listentry>Changes the number of decimal digits being displayed.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>transpose()</item>
+					 <listentry>Mirror matrix at main diagonal (aka matrix transposition).</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>invert()</item>
+					 <listentry>Replace the content of the matrix by its inverse (with respect to matrix multiplication).</listentry>
+				 </varlistentry>
+				 <varlistenty>
+					 <item>determinant()</item>
+					 <listentry>Returns determinant of the matrix.</listentry>
+				 </varlistentry>
+			 </variablelist>
 	 </sect2>
 
     <sect2 id="Python-init">
