@@ -476,7 +476,7 @@
               <entry>col(c)</entry>
 
 				  <entry>
-					  Deprecated; use column() or cell() instead.
+					  DEPRECATED; use column() or cell() instead.
 					  Note that the user interface still uses col() until a proper language-specific mechanism
 					  is implemented.
 				  </entry>
@@ -516,7 +516,7 @@
               <entry>tablecol(t,c)</entry>
 
 				  <entry>
-					  Deprecated; use column() instead.
+					  DEPRECATED; use column() instead.
 				  </entry>
             </row>
           </tbody>
@@ -1552,7 +1552,105 @@ f.covarianceMatrix("cov")
 				 </varlistentry>
 				 <varlistentry>
 					 <term>confirmClose(boolean)</term>
-					 <listentry>Set a flag indicating whether the user should be given the opportunity to cancel removing the window or minimize it instead when trying to close it.</listentry>
+					 <listentry>Set a flag indicating whether the user should be given the opportunity to cancel removing the window or minimize it instead when trying to close it. When False, close() will remove the window without asking for confirmation, which is useful for temporary objects created by a script.</listentry>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Table (inherits MDIWindow)</title>
+			 <para>Class of table (spreadsheet) windows.</para>
+			 <variablelist>
+				 <varlistentry>
+					 <term>numRows()</term>
+					 <listentry>Returns the number of rows of the table.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numCols()</term>
+					 <listentry>Returns the number of columns of the table.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setNumRows(int)</term>
+					 <listentry>Sets the number of rows of the table.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setNumCols(int)</term>
+					 <listentry>Sets the number of columns of the table.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>column(string or int)</term>
+					 <listentry>Returns Column indicated by name (preferred) or 0-based index. For the latter form, keep in mind that inserting, removing or moving columns will break scripts which refer to a specific column by index.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>text(string or int, int)</term>
+					 <listentry>DEPRECATED. Use column(col).textAt(row) or str(column(col).valueAt(row)) instead (depending on the column's mode).</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>cell(string or int, int)</term>
+					 <listentry>DEPRECATED. Use column(col).valueAt(row) instead.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setText(string or int, int, string</term>
+					 <listentry>DEPRECATED. Use column(col).setTextAt(row,value) instead.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setCell(string or int, int, double</term>
+					 <listentry>DEPRECATED. Use column(col).setValueAt(row,value) instead.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>colName(int)</item>
+					 <listentry>DEPRECATED. Use column(col).name() instead.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setColName(int,string)</item>
+					 <listentry>DEPRECATED. Use column(col).setName(name) instead.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setComment(int,string)</item>
+					 <listentry>DEPRECATED. Use column(col).setComment(text) instead.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>setCommand(string or int, string)</item>
+					 <listentry>Set formula indicated by first argument to the text given in the second argument.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>notifyChanges()</item>
+					 <listentry>DEPRECATED. Update notifications are now done automatically.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>importASCII(string, string, int, bool, bool, bool)</item>
+					 <listentry>importASCII(file, separator=&quot;\t&quot;, ignored_lines=0, rename_cols=False, strip_spaces=True, simplify_spaces=False)
+						 imports file into this table, skipping ignored_lines lines at the beginning and
+						 splitting the rest into columns according to the given separator and flags.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>exportASCII(string, string, bool, bool)</item>
+					 <listentry>exportASCII(file, separator=&quot;\t&quot;, with_comments=False, selection_only=False)
+						 exports this table to the given file with the column separator given in the second argument;
+						 optionally including column comments and optionally exporting only selected cells.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>normalize(string or int)</item>
+					 <listentry>Normalize specified column to a maximum cell value of one.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>normalize()</item>
+					 <listentry>Normalize table to a maximum cell value of one.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>sortColumn(string or int, int=0)</item>
+					 <listentry>Sort column indicated in the first argument. The second argument selects
+						 the sorting order; 0 means ascending, 1 means descending.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>sort(int=0, int=0, string="")</item>
+					 <listentry>sort(type, order, leading_column) sorts all columns in the table either separately
+						 (type=0) or together (type=1) with the leading column given by name. The second argument selects
+						 the sorting order; 0 means ascending, 1 means descending.</listentry>
+				 </varlistentry>
+				 <varlistentry>
+					 <item>sortColumns(list of strings, int, int, string)</item>
+					 <listentry>sortColumns(columns, type=0, order=0, leading_column="") sorts columns given as a tuple of
+						 names either separately (type=0) or together (type=1) with the leading column given by name.
+						 The third argument selects the sorting order; 0 means ascending, 1 means descending.</listentry>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
