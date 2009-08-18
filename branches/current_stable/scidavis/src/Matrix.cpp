@@ -421,11 +421,18 @@ bool Matrix::recalculate()
 			script->setInt(col+1, "col");
 			script->setDouble(xStart()+col*dx, "x");
 			ret = script->eval();
+			if (!ret.isValid()) {
+				forgetSavedCells();
+				blockSignals(false);
+				emit modifiedWindow(this);
+				QApplication::restoreOverrideCursor();
+				return false;
+			}
 			setCell(row, col, ret.toDouble());
 		}
 	forgetSavedCells();
 
-    this->blockSignals(false);
+	blockSignals(false);
 	emit modifiedWindow(this);
 	QApplication::restoreOverrideCursor();
 	return true;
