@@ -1455,67 +1455,67 @@ f.covarianceMatrix("cov")
 				 </varlistentry>
 				 <varlistentry>
 					 <term>formula(int)</term>
-					 <listentry>Return formula used to compute the cell value in the given row.</listentry>
+					 <listitem>Return formula used to compute the cell value in the given row.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setFormula(int, string)</term>
-					 <listentry>Sets formula for the given row to string.</listentry>
+					 <listitem>Sets formula for the given row to string.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>clearFormulas()</term>
-					 <listentry>Discard all formulas associated with cells.</listentry>
+					 <listitem>Discard all formulas associated with cells.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>valueAt(int)</term>
-					 <listentry>Retrieve value of the specified cell, assuming that the column has columnMode() == "Numeric".</listentry>
+					 <listitem>Retrieve value of the specified cell, assuming that the column has columnMode() == "Numeric".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setValueAt(int, double)</term>
-					 <listentry>Set value of specified cell, assuming that the column has columnMode() == "Numeric".</listentry>
+					 <listitem>Set value of specified cell, assuming that the column has columnMode() == "Numeric".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>replaceValues(int, list of double values)</term>
-					 <listentry>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is one of "Numeric". Compared with setValueAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listentry>
+					 <listitem>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is one of "Numeric". Compared with setValueAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>textAt(int)</term>
-					 <listentry>Retrieve value of the specified cell, assuming that the column has columnMode() == "Text".</listentry>
+					 <listitem>Retrieve value of the specified cell, assuming that the column has columnMode() == "Text".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setTextAt(int, string)</term>
-					 <listentry>Set value of specified cell, assuming that the column has columnMode() == "Text".</listentry>
+					 <listitem>Set value of specified cell, assuming that the column has columnMode() == "Text".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>replaceTexts(int, list of strings)</term>
-					 <listentry>Mass-update cells starting at the indicated row, assuming that the column has columnMode() == "Text". Compared with setTextAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listentry>
+					 <listitem>Mass-update cells starting at the indicated row, assuming that the column has columnMode() == "Text". Compared with setTextAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>dateAt(int)</term>
-					 <listentry>Retrieve value of the specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listentry>
+					 <listitem>Retrieve value of the specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setDateAt(int, QDate)</term>
-					 <listentry>Set value of specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listentry>
+					 <listitem>Set value of specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>timeAt(int)</term>
-					 <listentry>Retrieve value of the specified cell, assuming that the column has columnMode() == "DateTime".</listentry>
+					 <listitem>Retrieve value of the specified cell, assuming that the column has columnMode() == "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setTimeAt(int, QTime)</term>
-					 <listentry>Set value of specified cell, assuming that the column has columnMode() == "DateTime".</listentry>
+					 <listitem>Set value of specified cell, assuming that the column has columnMode() == "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>dateTimeAt(int)</term>
-					 <listentry>Retrieve value of the specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listentry>
+					 <listitem>Retrieve value of the specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setDateTimeAt(int, QDateTime)</term>
-					 <listentry>Set value of specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listentry>
+					 <listitem>Set value of specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>replaceDateTimes(int, list of QDateTime values)</term>
-					 <listentry>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is one of "Month", "Day", "DateTime". Compared with setDateTimeAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listentry>
+					 <listitem>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is one of "Month", "Day", "DateTime". Compared with setDateTimeAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listitem>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
@@ -1524,35 +1524,35 @@ f.covarianceMatrix("cov")
 			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>name()</term>
-					 <listentry>Return the window's name (added in &appname; 0.2.3).</listentry>
+					 <listitem>Return the window's name (added in &appname; 0.2.3).</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setName(string)</term>
-					 <listentry>Set window's name. IMPORTANT: This was added in &appname; 0.2.3, but unfortunately is BROKEN in this release. Usable starting with &appname; 0.2.4.</listentry>
+					 <listitem>Set window's name. IMPORTANT: This was added in &appname; 0.2.3, but unfortunately is BROKEN in this release. Usable starting with &appname; 0.2.4.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>windowLabel()</term>
-					 <listentry>Returns the comment associated with the window (yes, the confusing name will be fixed in a future release).</listentry>
+					 <listitem>Returns the comment associated with the window (yes, the confusing name will be fixed in a future release).</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setWindowLabel(string)</term>
-					 <listentry>Set comment associated with the window (yes, the confusing name will be fixed in a future release).</listentry>
+					 <listitem>Set comment associated with the window (yes, the confusing name will be fixed in a future release).</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>captionPolicy()</term>
-					 <listentry>Return caption policy (i.e., what to display in the title bar). One of the integer constants MDIWindow.Name, MDIWindow.Label or MDIWindow.Both.</listentry>
+					 <listitem>Return caption policy (i.e., what to display in the title bar). One of the integer constants MDIWindow.Name, MDIWindow.Label or MDIWindow.Both.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setCaptionPolicy(int)</term>
-					 <listentry>Set caption policy (i.e., what to display in the title bar). Must be one of the integer constants MDIWindow.Name, MDIWindow.Label or MDIWindow.Both.</listentry>
+					 <listitem>Set caption policy (i.e., what to display in the title bar). Must be one of the integer constants MDIWindow.Name, MDIWindow.Label or MDIWindow.Both.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>folder()</term>
-					 <listentry>Return the folder this window belongs to (an object of class Folder).</listentry>
+					 <listitem>Return the folder this window belongs to (an object of class Folder).</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>confirmClose(boolean)</term>
-					 <listentry>Set a flag indicating whether the user should be given the opportunity to cancel removing the window or minimize it instead when trying to close it. When False, close() will remove the window without asking for confirmation, which is useful for temporary objects created by a script.</listentry>
+					 <listitem>Set a flag indicating whether the user should be given the opportunity to cancel removing the window or minimize it instead when trying to close it. When False, close() will remove the window without asking for confirmation, which is useful for temporary objects created by a script.</listitem>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
@@ -1561,96 +1561,96 @@ f.covarianceMatrix("cov")
 			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>numRows()</term>
-					 <listentry>Returns the number of rows of the table.</listentry>
+					 <listitem>Returns the number of rows of the table.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>numCols()</term>
-					 <listentry>Returns the number of columns of the table.</listentry>
+					 <listitem>Returns the number of columns of the table.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setNumRows(int)</term>
-					 <listentry>Sets the number of rows of the table.</listentry>
+					 <listitem>Sets the number of rows of the table.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setNumCols(int)</term>
-					 <listentry>Sets the number of columns of the table.</listentry>
+					 <listitem>Sets the number of columns of the table.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>column(string or int)</term>
-					 <listentry>Returns Column indicated by name (preferred) or 0-based index. For the latter form, keep in mind that inserting, removing or moving columns will break scripts which refer to a specific column by index.</listentry>
+					 <listitem>Returns Column indicated by name (preferred) or 0-based index. For the latter form, keep in mind that inserting, removing or moving columns will break scripts which refer to a specific column by index.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>text(string or int, int)</term>
-					 <listentry>DEPRECATED. Use column(col).textAt(row) or str(column(col).valueAt(row)) instead (depending on the column's mode).</listentry>
+					 <listitem>DEPRECATED. Use column(col).textAt(row) or str(column(col).valueAt(row)) instead (depending on the column's mode).</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>cell(string or int, int)</term>
-					 <listentry>DEPRECATED. Use column(col).valueAt(row) instead.</listentry>
+					 <listitem>DEPRECATED. Use column(col).valueAt(row) instead.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setText(string or int, int, string</term>
-					 <listentry>DEPRECATED. Use column(col).setTextAt(row,value) instead.</listentry>
+					 <listitem>DEPRECATED. Use column(col).setTextAt(row,value) instead.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setCell(string or int, int, double</term>
-					 <listentry>DEPRECATED. Use column(col).setValueAt(row,value) instead.</listentry>
+					 <term>setCell(string or int, int, double</term>
+					 <listitem>DEPRECATED. Use column(col).setValueAt(row,value) instead.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>colName(int)</item>
-					 <listentry>DEPRECATED. Use column(col).name() instead.</listentry>
+					 <term>colName(int)</term>
+					 <listitem>DEPRECATED. Use column(col).name() instead.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setColName(int,string)</item>
-					 <listentry>DEPRECATED. Use column(col).setName(name) instead.</listentry>
+					 <term>setColName(int,string)</term>
+					 <listitem>DEPRECATED. Use column(col).setName(name) instead.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setComment(int,string)</item>
-					 <listentry>DEPRECATED. Use column(col).setComment(text) instead.</listentry>
+					 <term>setComment(int,string)</term>
+					 <listitem>DEPRECATED. Use column(col).setComment(text) instead.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setCommand(string or int, string)</item>
-					 <listentry>Set formula indicated by first argument to the text given in the second argument.</listentry>
+					 <term>setCommand(string or int, string)</term>
+					 <listitem>Set formula indicated by first argument to the text given in the second argument.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>notifyChanges()</item>
-					 <listentry>DEPRECATED. Update notifications are now done automatically.</listentry>
+					 <term>notifyChanges()</term>
+					 <listitem>DEPRECATED. Update notifications are now done automatically.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>importASCII(string, string, int, bool, bool, bool)</item>
-					 <listentry>importASCII(file, separator=&quot;\t&quot;, ignored_lines=0, rename_cols=False, strip_spaces=True, simplify_spaces=False)
+					 <term>importASCII(string, string, int, bool, bool, bool)</term>
+					 <listitem>importASCII(file, separator=&quot;\t&quot;, ignored_lines=0, rename_cols=False, strip_spaces=True, simplify_spaces=False)
 						 imports file into this table, skipping ignored_lines lines at the beginning and
-						 splitting the rest into columns according to the given separator and flags.</listentry>
+						 splitting the rest into columns according to the given separator and flags.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>exportASCII(string, string, bool, bool)</item>
-					 <listentry>exportASCII(file, separator=&quot;\t&quot;, with_comments=False, selection_only=False)
+					 <term>exportASCII(string, string, bool, bool)</term>
+					 <listitem>exportASCII(file, separator=&quot;\t&quot;, with_comments=False, selection_only=False)
 						 exports this table to the given file with the column separator given in the second argument;
-						 optionally including column comments and optionally exporting only selected cells.</listentry>
+						 optionally including column comments and optionally exporting only selected cells.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>normalize(string or int)</item>
-					 <listentry>Normalize specified column to a maximum cell value of one.</listentry>
+					 <term>normalize(string or int)</term>
+					 <listitem>Normalize specified column to a maximum cell value of one.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>normalize()</item>
-					 <listentry>Normalize table to a maximum cell value of one.</listentry>
+					 <term>normalize()</term>
+					 <listitem>Normalize table to a maximum cell value of one.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>sortColumn(string or int, int=0)</item>
-					 <listentry>Sort column indicated in the first argument. The second argument selects
-						 the sorting order; 0 means ascending, 1 means descending.</listentry>
+					 <term>sortColumn(string or int, int=0)</term>
+					 <listitem>Sort column indicated in the first argument. The second argument selects
+						 the sorting order; 0 means ascending, 1 means descending.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>sort(int=0, int=0, string="")</item>
-					 <listentry>sort(type, order, leading_column) sorts all columns in the table either separately
+					 <term>sort(int=0, int=0, string="")</term>
+					 <listitem>sort(type, order, leading_column) sorts all columns in the table either separately
 						 (type=0) or together (type=1) with the leading column given by name. The second argument selects
-						 the sorting order; 0 means ascending, 1 means descending.</listentry>
+						 the sorting order; 0 means ascending, 1 means descending.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>sortColumns(list of strings, int, int, string)</item>
-					 <listentry>sortColumns(columns, type=0, order=0, leading_column="") sorts columns given as a tuple of
+					 <term>sortColumns(list of strings, int, int, string)</term>
+					 <listitem>sortColumns(columns, type=0, order=0, leading_column="") sorts columns given as a tuple of
 						 names either separately (type=0) or together (type=1) with the leading column given by name.
-						 The third argument selects the sorting order; 0 means ascending, 1 means descending.</listentry>
+						 The third argument selects the sorting order; 0 means ascending, 1 means descending.</listitem>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
@@ -1658,84 +1658,217 @@ f.covarianceMatrix("cov")
 			 <para>Class of matrix windows.</para>
 			 <variablelist spacing="compact">
 				 <varlistentry>
-					 <item>numRows()</item>
-					 <listentry>Returns the number of rows in the matrix.</listentry>
+					 <term>numRows()</term>
+					 <listitem>Returns the number of rows in the matrix.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>numCols()</item>
-					 <listentry>Returns the number of columns in the matrix.</listentry>
+					 <term>numCols()</term>
+					 <listitem>Returns the number of columns in the matrix.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setNumRows(int)</item>
-					 <listentry>Changes the number of rows in the matrix.</listentry>
+					 <term>setNumRows(int)</term>
+					 <listitem>Changes the number of rows in the matrix.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setNumCols(int)</item>
-					 <listentry>Changes the number of columns in the matrix.</listentry>
+					 <term>setNumCols(int)</term>
+					 <listitem>Changes the number of columns in the matrix.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setDimensions(int,int)</item>
-					 <listentry>setDimensions(rows, cols) changes the number of rows and columns simultaneously.</listentry>
+					 <term>setDimensions(int,int)</term>
+					 <listitem>setDimensions(rows, cols) changes the number of rows and columns simultaneously.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>cell(int,int)</item>
-					 <listentry>cell(row,column) returns the content of the indicated cell as a number.</listentry>
+					 <term>cell(int,int)</term>
+					 <listitem>cell(row,column) returns the content of the indicated cell as a number.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>text(int,int)</item>
-					 <listentry>text(row,column) returns the content of the indicated cell as its textual representation.</listentry>
+					 <term>text(int,int)</term>
+					 <listitem>text(row,column) returns the content of the indicated cell as its textual representation.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setCell(int,int,double)</item>
-					 <listentry>setCell(row,column,value) changes the content of the indicated cell to the indicated numeric value.</listentry>
+					 <term>setCell(int,int,double)</term>
+					 <listitem>setCell(row,column,value) changes the content of the indicated cell to the indicated numeric value.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setText(int,int,string)</item>
-					 <listentry>setText(row,column,value) interprets the string value according to the numeric format of the matrix
-						 and changes the content of the indicated cell accordingly.</listentry>
+					 <term>setText(int,int,string)</term>
+					 <listitem>setText(row,column,value) interprets the string value according to the numeric format of the matrix
+						 and changes the content of the indicated cell accordingly.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>xStart()</item>
-					 <listentry>Returns logical X coordinate of the first column.</listentry>
+					 <term>xStart()</term>
+					 <listitem>Returns logical X coordinate of the first column.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>xEnd()</item>
-					 <listentry>Returns logical X coordinate of the last column.</listentry>
+					 <term>xEnd()</term>
+					 <listitem>Returns logical X coordinate of the last column.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>yStart()</item>
-					 <listentry>Returns logical Y coordinate of the first row.</listentry>
+					 <term>yStart()</term>
+					 <listitem>Returns logical Y coordinate of the first row.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>yEnd()</item>
-					 <listentry>Returns logical Y coordinate of the last row.</listentry>
+					 <term>yEnd()</term>
+					 <listitem>Returns logical Y coordinate of the last row.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setCoordinates(double,double,double,double)</item>
-					 <listentry>setCoordinates(x_start, x_end, y_start, y_end) changes the logical
-						 coordinate system associated with the matrix.</listentry>
+					 <term>setCoordinates(double,double,double,double)</term>
+					 <listitem>setCoordinates(x_start, x_end, y_start, y_end) changes the logical
+						 coordinate system associated with the matrix.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setFormula(string)</item>
-					 <listentry>Changes the formula used to (re)calculate cell values of the matrix.</listentry>
+					 <term>setFormula(string)</term>
+					 <listitem>Changes the formula used to (re)calculate cell values of the matrix.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>setNumericPrecision(int)</item>
-					 <listentry>Changes the number of decimal digits being displayed.</listentry>
+					 <term>setNumericPrecision(int)</term>
+					 <listitem>Changes the number of decimal digits being displayed.</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>transpose()</item>
-					 <listentry>Mirror matrix at main diagonal (aka matrix transposition).</listentry>
+					 <term>transpose()</term>
+					 <listitem>Mirror matrix at main diagonal (aka matrix transposition).</listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <item>invert()</item>
-					 <listentry>Replace the content of the matrix by its inverse (with respect to matrix multiplication).</listentry>
+					 <term>invert()</term>
+					 <listitem>Replace the content of the matrix by its inverse (with respect to matrix multiplication).</listitem>
 				 </varlistentry>
-				 <varlistenty>
-					 <item>determinant()</item>
-					 <listentry>Returns determinant of the matrix.</listentry>
+				 <varlistentry>
+					 <term>determinant()</term>
+					 <listitem>Returns determinant of the matrix.</listitem>
 				 </varlistentry>
 			 </variablelist>
+		 </sect3>
+		 <sect3><title>class ArrowMarker</title>
+			 <para>A line or an arrow displayed on a graph.</para>
+			 <programlisting width="80">
+a = ArrowMarker()
+a.setStart(50,200)
+a.setEnd(400,400)
+a.setWidth(2)
+a.drawStartArrow(False)
+a.drawEndArrow(True)
+a.setColor(Qt.green)
+
+l = graph("Graph1").activeLayer()
+l.addArrow(a)
+l.replot()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>ArrowMarker()</term>
+					 <listitem>Creates a new arrow marker. You can then set various attributes (see below) and hand
+						 it to Layer.addArrow().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setStart(double, double)</term>
+					 <listitem>setStart(x,y) sets the line's start point in plot coordinates (i.e., as
+						 displayed on the axes).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setEnd(double,double)</term>
+					 <listitem>setEnd(x,y) sets the line's end point in plot coordinates (i.e., as
+						 displayed on the axes).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setStyle(Qt.PenStyle)</term>
+					 <listitem>Sets pen style used to draw the line and arrow heads. One of Qt.NoPen,
+						 Qt.SolidLine, Qt.DashLine, Qt.DotLine, Qt.DashDotLine, Qt.DashDotDotLine.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(QColor)</term>
+					 <listitem>Sets the line/arrow head color. Most commonly, the argument will be either
+						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
+						 for details) or a RGBA spec in the form QColor(red, green, yellow, alpha) with
+						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setWidth(int)</term>
+					 <listitem>Sets the pen width used to draw line and arrow heads.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>drawStartArrow(bool=True)</term>
+					 <listitem>Sets whether an arrow head is drawn at the line's start.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>drawEndArrow(bool=True)</term>
+					 <listitem>Sets whether an arrow head is drawn at the line's end.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setHeadLength(int)</term>
+					 <listitem>Sets the length of the arrow heads.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setHeadAngle(int)</term>
+					 <listitem>Sets the angle defining the &quot;sharpness&quot; of the arrow heads.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>fillArrowHead(bool)</term>
+					 <listitem>Sets whether arrow heads are to be filled out.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class ImageMarker</title>
+			 <para>An image to be displayed on a graph.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>ImageMarker(string)</term>
+					 <listitem>Creates a new image marker displaying the content of the specified image file.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>fileName()</term>
+					 <listitem>Returns the name of the file the image marker refers to.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>size()</term>
+					 <listitem>Returns the size the image takes up in paint (pixel) coordinates as a QSize.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSize(int,int)</term>
+					 <listitem>Sets the size the image takes up in paint (pixel) coordinates.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCoordinates(double,double,double,double)</term>
+					 <listitem>setCoordinates(left, top, right, bottom) changes position and size of the
+						 image marker in plot coordinates.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Legend</title>
+			 <para>Text boxes displayed on a graph.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>setText(string)</term>
+					 <listitem>Changes the legend's content.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTextColor(QColor)</term>
+					 <listitem>Changes the text color. Most commonly, the argument will be either
+						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
+						 for details) or a RGBA spec in the form QColor(red, green, yellow, alpha) with
+						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFrameStyle(int)</term>
+					 <listitem>Sets the style of frame drawn around the text. 0 for none, 1 for line or
+						 2 for line with shadow.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setBackgroundColor(QColor)</term>
+					 <listitem>Changes the background color. Most commonly, the argument will be either
+						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
+						 for details) or a RGBA spec in the form QColor(red, green, yellow, alpha) with
+						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFont(QFont)</term>
+					 <listitem>Sets the font used to render the text. See QFont documentation for how
+						 to construct a valid argument.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOriginCoord(double,double)</term>
+					 <listitem>setOriginCoord(x,y) sets the position of the top-left corner in plot coordinates.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
 	 </sect2>
 
     <sect2 id="Python-init">
