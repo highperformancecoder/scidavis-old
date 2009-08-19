@@ -103,6 +103,8 @@ class AbstractAspect : QObject
 		void aspectAboutToBeRemoved(const AbstractAspect *parent, int index);
 		void aspectRemoved(const AbstractAspect *parent, int index);
 		void statusInfo(const QString &text);
+	private:
+		AbstractAspect(const AbstractAspect&);
 };
 
 class Column: AbstractAspect
