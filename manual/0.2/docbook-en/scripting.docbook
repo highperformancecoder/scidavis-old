@@ -1869,6 +1869,118 @@ l.replot()
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
+		 <sect3><title>class QwtSymbol</title>
+			 <para>Represents a type of symbol on a scatter plot (ellipse, rectangle etc.) together
+				 with attributes determining parameters like color, size etc. This class is part of the
+				 Qwt library, but exported and documented as part of &appname;'s API for simplicity. Also,
+				 convenience methods for setting outline/fill colors are added on top of Qwt.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>QwtSymbol()</term>
+					 <listitem>Construct new symbol with default settings (= no symbol).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>QwtSymbol(Style, QBrush, QPen, QSize)</term>
+					 <listitem>Construct new symbol, with the four properties set as if given to setStyle(),
+						 setBrush(), setPen() and setSize(), respectively.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(QColor)</term>
+					 <listitem>Simultaneously sets color for filling and drawing the outline. Modifies
+						 pen() and brush(). Note that due to the setColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(int)</term>
+					 <listitem>Convenience overload of setColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutlineColor(QColor)</term>
+					 <listitem>Sets the color used for drawing the outline of the symbol. Modifies pen().
+						 Note that due to the setOutlineColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutlineColor(int)</term>
+					 <listitem>Convenience overload of setOutlineColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFillColor(QColor)</term>
+					 <listitem>Sets the color used for filling the interiour of the symbol. Modifies brush().
+						 Note that due to the setFillColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFillColor(int)</term>
+					 <listitem>Convenience overload of setFillColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>clone()</term>
+					 <listitem>Returns an independent copy of the symbol object.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSize(QSize)</term>
+					 <listitem>Sets size of the symbol in paint (pixel) coordinates.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSize(int,int=-1)</term>
+					 <listitem>setSize(width,height) sets the size of the symbol in paint (pixel) coordinates.
+						 If height=-1 (default), it is set to equalt to width.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setBrush(QBrush)</term>
+					 <listitem>Sets the brush used to fill the interior of the symbol. See PyQt documentation
+						 for how to construct a QBrush.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPen(QPen)</term>
+					 <listitem>Sets the pen used to draw the border of the symbol. See PyQt documentation
+						 for how to construct a QBrush.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setStyle(Style)</term>
+					 <listitem>Sets the type of symbol to draw. The argument needs to be one of the
+						 integer constants
+						 QwtSymbol.NoSymbol, QwtSymbol.Ellipse, QwtSymbol.Rect, QwtSymbol.Diamond,
+						 QwtSymbol.Triangle, QwtSymbol.DTriangle, QwtSymbol.UTriangle, QwtSymbol.LTriangle, 
+						 QwtSymbol.RTriangle, QwtSymbol.Cross, QwtSymbol.XCross, QwtSymbol.HLine,
+						 QwtSymbol.VLine, QwtSymbol.Star1, QwtSymbol.Star2, QwtSymbol.Hexagon.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>brush()</term>
+					 <listitem>Returns the currently set brush (a QBrush) for filling the interiour of the symbol.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>pen()</term>
+					 <listitem>Returns the currently set pen (a QPen) for drawing the border of the symbol.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>size()</term>
+					 <listitem>Returns the currently set size (a QSize) in paint (pixel) coordinates for drawing the symbol.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>style()</term>
+					 <listitem>Returns an integer denoting the currently set type of symbol. See setStyle() for possible
+						 values.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
 	 </sect2>
 
     <sect2 id="Python-init">
