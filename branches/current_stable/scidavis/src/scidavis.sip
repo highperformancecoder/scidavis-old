@@ -483,7 +483,7 @@ public:
     void setCoordinates(double xs, double xe, double ys, double ye);
 
     void setFormula(const QString &s);
-//    bool calculate(int startRow = 0, int endRow = -1, int startCol = 0, int endCol = -1);
+	 bool recalculate();
 
     void setNumericPrecision(int prec);
 
