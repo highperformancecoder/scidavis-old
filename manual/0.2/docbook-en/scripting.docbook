@@ -1344,16 +1344,24 @@ f.covarianceMatrix("cov")
 
 	 <sect2 id="Python-API">
 		 <title>API documentation</title>
-		 <para>Classes mentioned below that start with "Q" belong to Qt and can be used via PyQt.
+		 <para>Classes mentioned below that start with "Q" mostly belong to Qt and can be used via
+			 PyQt (with the exception of classes starting with "Qwt", which belong to Qwt).
 			 If you want to know what you can do with such classes (e.g. QIcon or QDateTime), see the
 			 <ulink url="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/classes.html">PyQt
-				 reference documentation</ulink>.
+				 reference documentation</ulink>. It's also useful to know that you can call any QWidget
+			 method exported by PyQt on instances of MDIWindow (and thus Table, Graph, Matrix and
+			 Note).
 		 </para>
 		 <sect3><title>class AbstractAspect (inherits QObject)</title>
 			 <para>A base class for content of a project. While currently the only AbstractAspect
 				 accessible to you is Column, a future release will make more extensive usage of this;
 				 probably with some revisions in the design, so only some basic functions are documented
 				 (and supported) for now.</para>
+			 <programlisting width="80">
+col = newTable("my-table",2,30).column("1")
+col.setName("abc")
+table("my-table").column("2").remove()
+			 </programlisting>
 			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>index()</term>
@@ -1404,6 +1412,17 @@ f.covarianceMatrix("cov")
 		 </sect3>
 		 <sect3><title>class Column (inherits AbstractAspect)</title>
 			 <para>Represents a column in a table.</para>
+			 <programlisting width="80">
+# basic access
+col = newTable("tabula1",2,20).column("1")
+col.setValueAt(1, 123.0)
+print col.valueAt(1)
+# replacing multiple values at once is more efficient than setting them one at a time
+col.replaceValues(5, [11.2, 12.3, 23.4, 34.5, 45.6])
+dest = table("tabula1").column("2")
+# also, copying from another column can be done in one go:
+dest.copy(col, 5, 2, 10)
+			 </programlisting>
 			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>columnMode()</term>
@@ -1521,6 +1540,14 @@ f.covarianceMatrix("cov")
 		 </sect3>
 		 <sect3><title>class MDIWindow (inherits QWidget)</title>
 			 <para>Base class of Table, Matrix, Graph and Note. A redesigned analogue under the name of "Part" (inheriting from AbstractAspect) is under development; it should be possible to provide a backwards-compatible interface, though.</para>
+			 <programlisting width="80">
+tmp = newTable("temp1", 2, 10)
+tmp.setWindowLabel("a temporary table")
+tmp.setCaptionPolicy(MDIWindow.Label)
+# ...
+tmp.confirmClose(False)
+tmp.close()
+			 </programlisting>
 			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>name()</term>
@@ -1558,6 +1585,13 @@ f.covarianceMatrix("cov")
 		 </sect3>
 		 <sect3><title>class Table (inherits MDIWindow)</title>
 			 <para>Class of table (spreadsheet) windows.</para>
+			 <programlisting width="80">
+tab = newTable("tabula",2,10)
+for j in range(0, tab.numCols()):
+    for i in range(0, tab.numRows()):
+        tab.column(j).setValueAt(i,i*j)	
+tab.normalize()
+			 </programlisting>
 			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>numRows()</term>
@@ -1633,7 +1667,7 @@ f.covarianceMatrix("cov")
 				 </varlistentry>
 				 <varlistentry>
 					 <term>normalize()</term>
-					 <listitem>Normalize table to a maximum cell value of one.</listitem>
+					 <listitem>Normalize all columns in table to a maximum cell value of one.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>sortColumn(string or int, int=0)</term>
@@ -1656,6 +1690,12 @@ f.covarianceMatrix("cov")
 		 </sect3>
 		 <sect3><title>class Matrix (inherits MDIWindow)</title>
 			 <para>Class of matrix windows.</para>
+			 <programlisting width="80">
+mat = newMatrix("mat", 10, 20)
+mat.setCoordinates(100,2000,100,1000)
+mat.setFormula("i*j")
+mat.recalculate()
+			 </programlisting>
 			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>numRows()</term>
@@ -1720,6 +1760,11 @@ f.covarianceMatrix("cov")
 					 <listitem>Changes the formula used to (re)calculate cell values of the matrix.</listitem>
 				 </varlistentry>
 				 <varlistentry>
+					 <term>recalculate()</term>
+					 <listitem>Recalculate all cell values from the currently set formula. Returns boolean
+						 indicating success or failure. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
 					 <term>setNumericPrecision(int)</term>
 					 <listitem>Changes the number of decimal digits being displayed.</listitem>
 				 </varlistentry>
@@ -1740,17 +1785,17 @@ f.covarianceMatrix("cov")
 		 <sect3><title>class ArrowMarker</title>
 			 <para>A line or an arrow displayed on a graph.</para>
 			 <programlisting width="80">
-a = ArrowMarker()
-a.setStart(50,200)
-a.setEnd(400,400)
-a.setWidth(2)
-a.drawStartArrow(False)
-a.drawEndArrow(True)
-a.setColor(Qt.green)
+arrow = ArrowMarker()
+arrow.setStart(50,200)
+arrow.setEnd(400,400)
+arrow.setWidth(2)
+arrow.drawStartArrow(False)
+arrow.drawEndArrow(True)
+arrow.setColor(Qt.green)
 
-l = graph("Graph1").activeLayer()
-l.addArrow(a)
-l.replot()
+layer = newGraph().activeLayer()
+layer.addArrow(arrow)
+layer.replot()
 			 </programlisting>
 			 <variablelist spacing="compact">
 				 <varlistentry>
@@ -1777,7 +1822,7 @@ l.replot()
 					 <term>setColor(QColor)</term>
 					 <listitem>Sets the line/arrow head color. Most commonly, the argument will be either
 						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
-						 for details) or a RGBA spec in the form QColor(red, green, yellow, alpha) with
+						 for details) or a RGBA spec in the form QtGui.QColor(red, green, yellow, alpha) with
 						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
 				 </varlistentry>
 				 <varlistentry>
@@ -1808,6 +1853,12 @@ l.replot()
 		 </sect3>
 		 <sect3><title>class ImageMarker</title>
 			 <para>An image to be displayed on a graph.</para>
+			 <programlisting width="80">
+layer = newGraph().activeLayer()
+image = layer.addImage("/usr/share/icons/hicolor/128x128/apps/scidavis.png")
+image.setCoordinates(200,800,700,300)
+layer.replot()
+          </programlisting>
 			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>ImageMarker(string)</term>
@@ -1834,6 +1885,14 @@ l.replot()
 		 </sect3>
 		 <sect3><title>class Legend</title>
 			 <para>Text boxes displayed on a graph.</para>
+			 <programlisting width="80">
+layer = newGraph().activeLayer()
+legend = layer.newLegend("hello world")
+legend.setBackgroundColor(Qt.green)
+legend.setTextColor(Qt.darkBlue)
+legend.setFont(QtGui.QFont("Arial",14,QtGui.QFont.Bold))
+layer.replot()
+</programlisting>
 			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>setText(string)</term>
@@ -1843,7 +1902,7 @@ l.replot()
 					 <term>setTextColor(QColor)</term>
 					 <listitem>Changes the text color. Most commonly, the argument will be either
 						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
-						 for details) or a RGBA spec in the form QColor(red, green, yellow, alpha) with
+						 for details) or a RGBA spec in the form QtGui.QColor(red, green, yellow, alpha) with
 						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
 				 </varlistentry>
 				 <varlistentry>
@@ -1855,7 +1914,7 @@ l.replot()
 					 <term>setBackgroundColor(QColor)</term>
 					 <listitem>Changes the background color. Most commonly, the argument will be either
 						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
-						 for details) or a RGBA spec in the form QColor(red, green, yellow, alpha) with
+						 for details) or a RGBA spec in the form QtGui.QColor(red, green, yellow, alpha) with
 						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
 				 </varlistentry>
 				 <varlistentry>
@@ -1874,6 +1933,17 @@ l.replot()
 				 with attributes determining parameters like color, size etc. This class is part of the
 				 Qwt library, but exported and documented as part of &appname;'s API for simplicity. Also,
 				 convenience methods for setting outline/fill colors are added on top of Qwt.</para>
+			 <programlisting width="80">
+symbol = QwtSymbol()
+symbol.setStyle(QwtSymbol.Triangle)
+symbol.setOutlineColor(QtGui.QColor(Qt.red))
+symbol.setFillColor(QtGui.QColor(Qt.green))
+symbol.setSize(20)
+# assuming Graph1 exists and contains a plot
+layer = graph("Graph1").activeLayer()
+layer.curve(0).setSymbol(symbol)
+layer.replot()
+			 </programlisting>
 			 <variablelist spacing="compact">
 				 <varlistentry>
 					 <term>QwtSymbol()</term>
@@ -1889,9 +1959,9 @@ l.replot()
 					 <listitem>Simultaneously sets color for filling and drawing the outline. Modifies
 						 pen() and brush(). Note that due to the setColor(int) overload, and unlike other
 						 methods accepting QColor arguments, basic colors need to be explicitly specified
-						 as QColor(Qt.white) etc. instead of just Qt.white.
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
 						 As usual, it's also possible to give an RGBA spec in the form
-						 QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
 						 [0,255] (see QColor for details).</listitem>
 				 </varlistentry>
 				 <varlistentry>
@@ -1904,9 +1974,9 @@ l.replot()
 					 <listitem>Sets the color used for drawing the outline of the symbol. Modifies pen().
 						 Note that due to the setOutlineColor(int) overload, and unlike other
 						 methods accepting QColor arguments, basic colors need to be explicitly specified
-						 as QColor(Qt.white) etc. instead of just Qt.white.
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
 						 As usual, it's also possible to give an RGBA spec in the form
-						 QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
 						 [0,255] (see QColor for details).</listitem>
 				 </varlistentry>
 				 <varlistentry>
@@ -1919,9 +1989,9 @@ l.replot()
 					 <listitem>Sets the color used for filling the interiour of the symbol. Modifies brush().
 						 Note that due to the setFillColor(int) overload, and unlike other
 						 methods accepting QColor arguments, basic colors need to be explicitly specified
-						 as QColor(Qt.white) etc. instead of just Qt.white.
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
 						 As usual, it's also possible to give an RGBA spec in the form
-						 QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
 						 [0,255] (see QColor for details).</listitem>
 				 </varlistentry>
 				 <varlistentry>
