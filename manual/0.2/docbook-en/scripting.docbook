@@ -2020,7 +2020,7 @@ layer.replot()
 				 <varlistentry>
 					 <term>setPen(QPen)</term>
 					 <listitem>Sets the pen used to draw the border of the symbol. See PyQt documentation
-						 for how to construct a QBrush.</listitem>
+						 for how to construct a QPen.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setStyle(Style)</term>
@@ -2048,6 +2048,134 @@ layer.replot()
 					 <term>style()</term>
 					 <listitem>Returns an integer denoting the currently set type of symbol. See setStyle() for possible
 						 values.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class QwtPlotCurve</title>
+			 <para>Represents a curve with symbols and/or lines on a graph.
+				 This class is part of the Qwt library, but exported and documented as part of
+				 &appname;'s API for simplicity. Also, convenience methods for setting outline/fill
+				 colors and fill style are added on top of Qwt.</para>
+			 <programlisting width="80">
+# assuming Graph1 exists and contains a lines plot
+layer = graph("Graph1").activeLayer()
+curve = layer.curve(0)
+curve.setOutlineColor(QtGui.QColor(Qt.red))
+curve.setFillColor(QtGui.QColor(Qt.green))
+curve.setFillStyle(Qt.CrossPattern)
+layer.replot()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>dataSize()</term>
+					 <listitem>Returns the number of points in the curve.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>x(int)</term>
+					 <listitem>Returns X coordinate of indicated point.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>y(int)</term>
+					 <listitem>Returns Y coordinate of indicated point.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>minXValue()</term>
+					 <listitem>Return smallest X value of the curve's points.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>maxXValue()</term>
+					 <listitem>Return largest X value of the curve's points.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>minYValue()</term>
+					 <listitem>Return smallest Y value of the curve's points.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>maxYValue()</term>
+					 <listitem>Return largest Y value of the curve's points.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPen(QPen)</term>
+					 <listitem>Sets the pen used to draw the lines of the curve. See PyQt documentation
+						 for how to construct a QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>pen()</term>
+					 <listitem>Returns the currently set pen (a QPen) for drawing the lines of the curve.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setBrush(QBrush)</term>
+					 <listitem>Sets the brush used to fill the area under the curve. See PyQt documentation
+						 for how to construct a QBrush.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>brush()</term>
+					 <listitem>Returns the currently set brush (a QBrush) for filling the area under the curve.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSymbol(QwtSymbol)</term>
+					 <listitem>Specifies whether and how symbols are drawn. See class QwtSymbol.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>symbol()</term>
+					 <listitem>Returns symbol parameters currently in effect. See class QwtSymbol.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(QColor)</term>
+					 <listitem>Simultaneously sets color for drawing lines and filling the area under the
+						 curve. Modifies
+						 pen() and brush(). Note that due to the setColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(int)</term>
+					 <listitem>Convenience overload of setColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutlineColor(QColor)</term>
+					 <listitem>Sets the color used for drawing the lines of the curve. Modifies pen().
+						 Note that due to the setOutlineColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutlineColor(int)</term>
+					 <listitem>Convenience overload of setOutlineColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFillColor(QColor)</term>
+					 <listitem>Sets the color used for filling the area under the curve. Modifies brush().
+						 Note that due to the setFillColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFillColor(int)</term>
+					 <listitem>Convenience overload of setFillColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFillStyle(Qt.BrushStyle)</term>
+					 <listitem>Set pattern used for filling the area under the curve. Argument must be one of
+						 Qt.SolidPattern, Qt.Dense1Pattern, Qt.Dense2Pattern, Qt.Dense3Pattern, Qt.Dense4Pattern,
+						 Qt.Dense5Pattern, Qt.Dense6Pattern, Qt.Dense7Pattern, Qt.NoBrush, Qt.HorPattern,
+						 Qt.VerPattern, Qt.CrossPattern, Qt.BDiagPattern, Qt.FDiagPattern, Qt.DiagCrossPattern,
+						 Qt.LinearGradientPattern, Qt.RadialGradientPattern, Qt.ConicalGradientPattern.
+						 See PyQt documentation for visual overview and more information.
+					 </listitem>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
