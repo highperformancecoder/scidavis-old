@@ -439,6 +439,7 @@ The active items in the menus depend on the active window in the project. If the
       </imageobject>
     </mediaobject>
   </figure>
+  
   <para>The second tab of the <emphasis>General</emphasis> option set is used to disable the prompting on deleting of objects.</para>
   <informalfigure id="fig-preferences-dialog1b">
     <mediaobject> 
@@ -889,7 +890,7 @@ The active items in the menus depend on the active window in the project. If the
       <informalfigure id="fig-plot-line">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-line.png"/>
+            <imagedata  format="PNG" fileref="pics/plot-lines.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -904,7 +905,7 @@ The active items in the menus depend on the active window in the project. If the
       <informalfigure id="fig-plot-scatter">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-scatter.png"/>
+            <imagedata  format="PNG" fileref="pics/plot-scatter.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -919,7 +920,7 @@ The active items in the menus depend on the active window in the project. If the
       <informalfigure id="fig-plot-linesymbols">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-linesymbols.png"/>
+            <imagedata  format="PNG" fileref="pics/plot-line-symbols.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -941,7 +942,7 @@ The active items in the menus depend on the active window in the project. If the
       <informalfigure id="fig-plot-droplines">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-droplines.png"/>
+            <imagedata  format="PNG" fileref="pics/plot-drop-lines.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -954,7 +955,7 @@ The active items in the menus depend on the active window in the project. If the
       <informalfigure id="fig-plot-spline">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-spline.png"/>
+            <imagedata  format="PNG" fileref="pics/plot-splines.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -967,7 +968,7 @@ The active items in the menus depend on the active window in the project. If the
       <informalfigure id="fig-plot-vert-step">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-vert-step.png"/>
+            <imagedata  format="PNG" fileref="pics/plot-vertical-steps.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -980,7 +981,7 @@ The active items in the menus depend on the active window in the project. If the
       <informalfigure id="fig-plot-hor-step">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-hor-step.png"/>
+            <imagedata  format="PNG" fileref="pics/plot-horizontal-steps.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -997,7 +998,7 @@ The active items in the menus depend on the active window in the project. If the
       <informalfigure id="fig-plot-bars">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-bars.png"/>
+            <imagedata  format="PNG" fileref="pics/plot-vertical-bars.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -1010,7 +1011,7 @@ The active items in the menus depend on the active window in the project. If the
       <informalfigure id="fig-plot-rows">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-rows.png"/>
+            <imagedata  format="PNG" fileref="pics/plot-horizontal-bars.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -1023,7 +1024,7 @@ The active items in the menus depend on the active window in the project. If the
       <informalfigure id="fig-plot-area">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-area.png"/>
+            <imagedata  format="PNG" fileref="pics/plot-area.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -1412,6 +1413,7 @@ The active items in the menus depend on the active window in the project. If the
 <sect1 id="sec-analysis-menu">
   <title>The Analysis Menu</title>
   <para>The commands which are available in this menu are not the same if a table or a plot is selected.</para>
+  
 <!-- ************************************************** -->
 <!--		beginning of menu Analysis		-->
 <!-- ************************************************** -->
@@ -1452,6 +1454,12 @@ The active items in the menus depend on the active window in the project. If the
   <term>&correlate-cmd;</term>
   <listitem>
     <para>Does a cross-correlation of the two columns which are selected. See the <link linkend="sec-correlate">correlate section</link> of the <link linkend="analysis">Analysis chapter</link> for more details.</para>
+  </listitem>
+</varlistentry>
+<varlistentry id="autocorrelate-cmd"> 
+  <term>&correlate-cmd;</term>
+  <listitem>
+    <para>Does a correlation of the selected column with itself. See the <link linkend="sec-correlate">correlate section</link> of the <link linkend="analysis">Analysis chapter</link> for more details.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="convolute-cmd"> 

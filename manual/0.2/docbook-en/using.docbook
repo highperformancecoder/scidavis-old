@@ -206,10 +206,56 @@
 </sect3>
 
 </sect2>
+
+<!--
+*******************************************************************
+
+		Other 2D plots
+		**************
+
+*******************************************************************
+-->
+<sect2 id="sec-other-2d-xy-plot">
+<title>The different types of 2D X-Y plots</title>
+
+<para>Beside the conventional X-Y plots with lines and points, other kinds of plots are available in &appname;. Although the presentation of the data can be very different, they are all based on the use of one column for X values and one column for Y values. Follow the links to the corresponding commands to see a description of these plots.</para>
+
+<para>The first set is available in the subset <emphasis>Special Lines/Symbol</emphasis> of the &plot-menu-lnk;:</para>
+
+<itemizedlist>
+  <listitem>
+    <para>Drop lines plot (&vertical-drop-lines-lnk;)</para>
+  </listitem>
+  <listitem>
+    <para>Scatter plot with a smoothed line connection between the points (&spline-lnk;)</para>
+  </listitem>
+  <listitem>
+    <para>Vertical steps plot (&vertical-steps-lnk;)</para>
+  </listitem>
+  <listitem>
+    <para>Horizontal steps plot (&horizontal-steps-lnk;)</para>
+  </listitem>
+</itemizedlist>
+<para>The other ones are more special plots which can be accessed directly in the &plot-menu-lnk;:</para>
+<itemizedlist>
+  <listitem>
+    <para>Vertical bars plot (&columns-lnk;)</para>
+  </listitem>
+  <listitem>
+    <para>Horizontal bars plot (&rows-lnk;)</para>
+  </listitem>
+  <listitem>
+    <para>Area plot (&area-lnk;)</para>
+  </listitem>
+</itemizedlist>
+
+</sect2>
+
 <!--
 *******************************************************************
 
 		customization of 2D plots
+		*************************
 
 *******************************************************************
 -->
@@ -225,73 +271,87 @@
     <para>The second part of commands can be used to insert additional objects likes arrows, images, text labels, etc. They can be accessed in the &graph-menu-lnk;.</para>
   </listitem>
 </itemizedlist>
+<para>This section will show an overview of the first set of commands. See the &graph-menu-lnk; section for the other commands. There are three main windows which allows to modify the plot:</para>
+<itemizedlist>
+  <listitem>
+    <para>The &format-plot-lnk;, it is entitled "Plot details" and is used to customize the global properties of the plot (background color, etc) and the data series (points shape, line width, etc).</para>
+  </listitem>
+  <listitem>
+    <para>The second one is entitled "General plot options" and contain the commands to format axes (scales, labels, grids, etc), it can be accessed through the &format-scales-lnk;, &format-axes-lnk; and &format-grid-lnk;.</para>
+  </listitem>
+  <listitem>
+    <para>The last one is the &format-title-lnk; which is used to control the properties of the title of the plot.</para>
+  </listitem>
+</itemizedlist>
+<para>All these commands are accessed through the &format-menu-lnk;.</para>
 
-<sect3 id="sec-2d-plot-format-commands">
-<title>Formatting the main objects of the plot</title>
+<sect3 id="sec-plot-details">
+<title>"Plot details" window</title>
 
-<sect4 id="sec-2d-plot-general">
-<title>General options</title>
+<para>This window has two parts, the left one shows a tree view of the main elements of the plot: the layers and the data series which are plotted in each layer. The main dialog is activated by selecting the &format-plot-lnk; from the &format-menu-lnk;. If it is activated by a double click on a curve in the plot, the same dialog will be opened with the corresponding curve selected (see <link linkend="custom-curves-dialog-lines">next section</link> for details). The right section of the window shows the options which are available for the selected entity. If you do some changes, don't forget to click on the <emphasis>Apply</emphasis> button before switching to another entity.</para>
+
+<sect4 id="sec-plot-details-layer">
+<title>Options for the layer</title>
 
 <indexterm>
-  <primary>Plot</primary><secondary>General options</secondary>
+  <primary>Plot details</primary><secondary>Layer options</secondary>
 </indexterm>
-<para>The main dialog is activated by selecting the &format-plot-lnk; from the &format-menu-lnk;. If it is activated by a double click on a curve in the plot, the same dialog will be opened with the corresponding curve selected (see <link linkend="custom-curves-dialog-lines">next section</link> for details). If there are more than one layer in the window, &appname; will select the layer which contain the plot under the mouse pointer.</para>
 
-<figure id="fig-format-layer">
-  <title>The Custom Curves Dialog: curves formatting.</title>
+<para>This dialog can be used to modify the background color of the global plot area (i.e. the layer), the color of the canvas (that is the area in which curves are plotted), and the border of the plot. This border is for the global plot, if you want to add a border to the canvas, you can use the <emphasis>general</emphasis> tag of the &format-axes-lnk;. If the image format use to save the plots support it, you can also control the transparency of these objects through the opacity parameter. The default value is 255 which means no transparency. See the &export-graph-lnk; for details on image formats.</para> 
+
+<figure id="fig-plot-details-layer">
+  <title>The <emphasis>Plot details</emphasis> Dialog: general properties of the layers.</title>
   <mediaobject> 
     <imageobject>
-      <imagedata  format="PNG" fileref="pics/format-layer.png"/>
+      <imagedata  format="PNG" fileref="pics/plot-details-layer.png"/>
     </imageobject>
   </mediaobject>
 </figure>
 
-<para>This dialog can be used to modify the background color of the global plot area (i.e. the layer), the color of the canvas (that is the area in which curves are plotted), and the border of the plot. This border is for the global plot, if you want to add a border to the canvas, you can use the <emphasis>general</emphasis> tag of the &format-axes-lnk;. If the image format use to save the plots support it, you can also control the transparency of these objects (see the &export-graph-lnk; for details on image formats).</para> 
 </sect4>
 
-<sect4 id="custom-curves-dialog-lines">
-<title>Custom curves for lines and scatter plots</title>
+<sect4 id="sec-plot-details-series">
+<title>Custom curves for data series</title>
 
 <indexterm>
-  <primary>Plot</primary><secondary>Options for lines and symbols</secondary>
+  <primary>Plot details</primary><secondary>Options for lines and symbols</secondary>
 </indexterm>
 <para>The commands can be accessed by a double click on a curve, or by using the &format-plot-lnk; and selecting a curve in the window on the left. The right part of the dialog box contains several tabs which depend on the kind of plot that you are using. The left part of the dialog window shows the curves which are plotted in the active layer. All the modifications will be done on the selected curve.</para>
 <!--
 		remark on plot associations buttons
 -->
-<informaltable cellpadding="5" width="80%">
-  <tgroup cols='1'>
-  <tbody>
-    <row>
-      <entry bgcolor="#FFFFC0">
-        <indexterm>
-          <primary>Plot</primary><secondary>Specification of X and Y series</secondary>
-        </indexterm>
-        <para><emphasis>Plot associations</emphasis></para>
-        <para>In this dialog box, beside the customization of data curves, you can change the columns which are used by clicking on the <emphasis>Plot Associations...</emphasis> button. This will open a dialog which can be used to select the columns of the table which are used as X and Y values.</para>
-        <figure id="fig-plot-associations">
-          <title>The Custom Curves Dialog: Plot Associations.</title>
-          <mediaobject> 
-            <imageobject>
-              <imagedata  format="PNG" fileref="pics/plot-associations.png"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
-      </entry>
-    </row>
-  </tbody>
-  </tgroup>
-</informaltable>
+<indexterm>
+  <primary>Plot details</primary><secondary>Specification of X and Y series</secondary>
+</indexterm>
+<para>In this dialog box, beside the customization of data curves, you can change the columns which are used by clicking on the <emphasis>Plot Associations...</emphasis> button. This will open a dialog which can be used to select the columns of the table which are used as X and Y values.</para>
+<figure id="fig-plot-associations">
+   <title>The <emphasis>Plot details</emphasis> Dialog: Plot Associations.</title>
+   <mediaobject> 
+      <imageobject>
+         <imagedata  format="PNG" fileref="pics/plot-associations.png"/>
+      </imageobject>
+   </mediaobject>
+</figure>
 
 <para>The button <emphasis>Worksheet</emphasis> can be used to access to the table which contains the columns selected.</para>
 <para>The dialog presented in figure <xref xrefstyle="select: labelnumber" linkend="fig-format-lines"/> is activated for plots drawn with <emphasis>symbols</emphasis>, <emphasis>line+symbols</emphasis>, <emphasis>lines</emphasis>, <emphasis>vertical drop lines</emphasis>, <emphasis>steps</emphasis> and <emphasis>splines</emphasis>. The first tab labelled <emphasis>axis</emphasis> can be used to select the axis which are used for each curve of the plot: bottom (default) or top for abscissae, and left (default) or right for Y values. Beware that whatever your choice the right and top axis will not be drawn, you need to use the &format-axes-lnk; to obtain a plot in which these axis are shown.</para>
+
+<figure id="fig-format-lines">
+  <title>The <emphasis>Plot details</emphasis> Dialog: Choice of axes.</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/plot-details-axes.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
 <para>The second tab allows to modify the style of the line (color, line style, thickness). The connect button allows to change the style which is used to draw the selected curve (steps, droplines, etc). See the &plot-menu-lnk; to see examples of the different types of plot available.</para>
 
 <figure id="fig-format-lines">
-  <title>The Custom Curves Dialog: Line formatting.</title>
+  <title>The Plot details Dialog: Line formatting.</title>
   <mediaobject> 
     <imageobject>
-      <imagedata  format="PNG" fileref="pics/format-lines.png"/>
+      <imagedata  format="PNG" fileref="pics/plot-details-lines.png"/>
     </imageobject>
   </mediaobject>
 </figure>
@@ -299,10 +359,40 @@
 <para>If you select a style with symbols (scatter or symbol+lines), a last tab can be activated to select the symbol, and to modify the size, the color and the filling color of the symbols.</para>
 
 <figure id="fig-format-symbols">
-  <title>The Custom Curves Dialog: Symbol formatting.</title>
+  <title>The Plot details Dialog: Symbol formatting.</title>
   <mediaobject> 
     <imageobject>
-      <imagedata  format="PNG" fileref="pics/format-symbols.png"/>
+      <imagedata  format="PNG" fileref="pics/plot-details-symbols.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
+<para>When the data are plotted using bars, the <emphasis>Plot details</emphasis> window shows different options. The first tab named <emphasis>Pattern</emphasis> can be used to customize the background and the border lines of the bars.</para>
+
+<figure id="fig-format-pattern">
+  <title>The Plot details Dialog: Pattern formatting for bars.</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/plot-details-pattern.png"/>
+    </imageobject>
+  </mediaobject>
+</figure>
+
+<para>The second tab named <emphasis>Spacing</emphasis> can be used to modify the geometry of the bars:</para>
+<itemizedlist>
+  <listitem>
+    <para>The default width W of the bar is computed from the smallest difference between two successive abscissae, this correspond to a <emphasis>Gap between bars</emphasis> equal to 0 (which is the default value). All bar are drawn with the same width. The Gap is a percentage of this default width: that is, a value of 50 will decrease the width of all the bars by a factor 2.</para>
+  </listitem>
+  <listitem>
+    <para>The bars are placed in order to be centered around each X value, i.e. between x-W/2 and x+W/2; this correspond to an <emphasis>Offset</emphasis> of 0 (default value). The offset is again a percentage of the default width of the bar. For example, a value of 50 will shift the position of the bar by a half of the default width (W/2) and therefore each bar will placed between x and x+W. Negatives values can be used to shift the bars to the left. If inverted axes are used, the direction of the shift remains the same (i.e. positive offset lead to a shift to the right).</para>
+  </listitem>
+</itemizedlist>
+
+<figure id="fig-format-spacing">
+  <title>The Plot details Dialog: Spacing formatting for bars.</title>
+  <mediaobject> 
+    <imageobject>
+      <imagedata  format="PNG" fileref="pics/plot-details-spacing.png"/>
     </imageobject>
   </mediaobject>
 </figure>
@@ -312,6 +402,7 @@
 </sect3>
 
 </sect2>
+
 <!--
 *******************************************************************
 
@@ -320,6 +411,7 @@
 *******************************************************************
 -->
 <sect2 id="sec-default-2d-plot">
+
 <title>Changing default 2D plot options</title>
 <indexterm><primary>Options</primary><secondary>2D plot</secondary></indexterm>
 
@@ -328,7 +420,7 @@
 <sect3 id="sec-preferences-2d-plot">
 <title>Modification of default options</title>
   <indexterm><primary>Plot</primary><secondary>Change default options</secondary></indexterm>
-  <para>In the dialog box which is opened by the &preferences-cmd;, the second set of options is used to customize the default aspect of <emphasis>2D plots</emphasis>.</para>
+  <para>In the dialog box which is opened by the &preferences-cmd;, the third set of options is used to customize the default aspect of <emphasis>2D plots</emphasis>. The first tab is used to set some general options. Most of them are obvious to understand. If <emphasis>autoscaling</emphasis> is set, the scales of the axes will be reset to their default values each time a modification is done on the data series. The <emphasis>scale font</emphasis> option is set by default, in this case the size of the font are modified each time the window size is modified.</para>
   <figure id="fig-preferences-dialog-3a">
     <title>The preferences dialog: 2D plot options.</title>
     <mediaobject>
@@ -369,6 +461,8 @@
     </mediaobject>
   </informalfigure>
  </sect3>
+
+</sect2>
 <!--
 =========================================================================
 
@@ -376,11 +470,9 @@
 		======================
 -->
 
-<sect3 id="sec-template-2d-plot">
+<sect2 id="sec-template-2d-plot">
 <title>Working with templates</title>
 <para></para>
-</sect3>
-
 </sect2>
 
 </sect1>
@@ -396,11 +488,15 @@
 -->
 <sect2 id="sec-pie-plots">
 <title>Pie plots</title>
+  <indexterm>
+    <primary>Plot</primary><secondary>pie-plots</secondary>
+  </indexterm>
 
+<para>A pie plot can be built from two columns in a table, the first column will be considered as text and the second as numbers. By default, each sector of the plot will have one label containing the percentages computed from the Y values. Theses labels can be modified as any other  text label.</para>
 
   <figure id="fig-example-pie">
     <title>An example of pie plot.</title>
-    <mediaobject> 
+    <mediaobject>
       <imageobject>
         <imagedata  format="PNG" fileref="pics/example-pie.png"/>
       </imageobject>
@@ -418,7 +514,7 @@
   <para>The pattern will be used for all segments of the pie, the default value is solid filling. The last field defines the size of the pie in pixels.</para>
   <figure id="fig-format-pie">
     <title>Pie segment formatting.</title>
-    <mediaobject> 
+    <mediaobject>
       <imageobject>
         <imagedata  format="PNG" fileref="pics/format-pie.png"/>
       </imageobject>
@@ -436,6 +532,59 @@
 -->
 <sect2 id="sec-vectors-plots">
 <title>Vectors plots</title>
+  <indexterm>
+    <primary>Plot</primary><secondary>vector-plots</secondary>
+  </indexterm>
+
+  <para>A vector plot can be built from four columns in a table. The two first columns define the position of each arrow in the X-Y drawing area. The two other columns define the length of the arrows, two methods are available for this:</para>
+  <itemizedlist>
+  <listitem>
+    <para><emphasis>Vector-XYXY:</emphasis> the two last columns define the position of the arrow while the two first columns define the origin of the arrow.</para>
+  </listitem>
+  <listitem>
+    <para><emphasis>Vector-XYAM:</emphasis> the two last columns define the angle and the magnitude of the arrow. In this case, the two first columns define the position of the arrow by its origin, its center or its end depending on the options used (see below).</para>
+  </listitem>
+  </itemizedlist>
+
+  <figure id="fig-example-pie">
+    <title>An example of a vector plot (fluid flow around a cylinder in a laminar mode).</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/example-vector.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+<sect3 id="sec-format-vector">
+  <title>Formatting of vector plots</title>
+
+  <indexterm>
+    <primary>Plot</primary><secondary>Options for vector-plots</secondary>
+  </indexterm>
+
+  <para>In the case of a Vector-XYXY plot, the options window allows to modify the shape and size of the arrow head, and also the linestyle used to draw the arrows.</para>
+
+  <figure id="fig-format-vector-xyxy">
+    <title>Vector-XYXY formatting.</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/format-vector-xyxy.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para>In the case of a Vector-XYAM plot, the options are the same as above. In addition, the relative position of the arrow as a function of the X-Y values can be specified.</para>
+
+  <figure id="fig-format-vector-xyam">
+    <title>Vector-XYAM formatting.</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/format-vector-xyam.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+</sect3>
 
 </sect2>
 
@@ -688,18 +837,20 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
   </mediaobject>
 </figure>
 
-<para>You can then customize this plot by opening the <link linkend="sec-customize-3d-plot">Surface plot options dialog</link>. You can modify the axis ranges and parameters, add a title, change the colors of the different items, and modify the aspect ratio of the plot. In addition, you can use the different commands of the &plot3d-toolbar-lnk; to add grids on the walls or to modify the style of the plot. After some modifications, you can obtain the following plot:</para>
-
-<figure id="fig-modified-surface-plot">
-  <title>The 3D surface plot after customizations</title>
-  <mediaobject> 
-    <imageobject>
-      <imagedata  format="PNG" fileref="pics/3D-function-plot-modified.png"/>
-    </imageobject>
-  </mediaobject>
-</figure>
+<para>You can then customize this plot by opening the <link linkend="sec-customize-3d-plot">Surface plot options dialog</link>. You can modify the axis ranges and parameters, add a title, change the colors of the different items, and modify the aspect ratio of the plot. In addition, you can use the different commands of the &plot3d-toolbar-lnk; to add grids on the walls or to modify the style of the plot. After some modifications, you can obtain the plot presented above.</para>
 
 <para>If you want to modify the function itself, you can use the <command>surface...</command> command which can be activated from the context menu with a right click on the 3D plot. This will re-open the <emphasis>define surface function dialog box</emphasis>.</para>
+
+<para>The 3D plotting system uses openGL, therefore these plots can be manipulated with the mouse:</para>
+<itemizedlist>
+  <listitem>
+    <para>by clicking on the left button and moving the mouse, you can change the viewpoint of the plot. You can come back to the default viewpoint by clicking on the &reset-rotation-icon; icon of the &plot3d-toolbar-lnk;.</para>
+  </listitem>
+  <listitem>
+    <para>The ??? can be used to zoom or unzoom the plot. You can come back to the default zoom value by clicking on the &autoscale-icon; icon of the &plot3d-toolbar-lnk;.</para>
+  </listitem>
+</itemizedlist>
+
 </sect2>
 
 <sect2 id="sec-3d-plot-matrix">
@@ -742,8 +893,8 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
 <sect2 id="sec-customize-3d-plot">
 <title>Customization of a 3D plot</title>
 
-  <indexterm><primary>Surface plot</primary><secondary>Coutour curves options</secondary></indexterm>
-  <para>This dialog is activated by double clicking on a contour curve (or on the plotting area) when a 3D plot has been created from a matrix with one of the following commands of the &plot3d-menu-lnk;: &contour-color-lnk;, &contour-lines-lnk; or &gray-scale-lnk;.</para>
+  <indexterm><primary>Surface plot</primary><secondary>Options</secondary></indexterm>
+  <para>A dialog with five tab is activated by double clicking on a contour curve (or on the plotting area) of a 3D plot. It can also be accessed by the commands of the &format-menu-lnk;.</para>
   <figure id="fig-contour-options-1">
     <title>The Contour curves options dialog.</title>
     <mediaobject> 
@@ -752,7 +903,7 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
       </imageobject>
     </mediaobject>
   </figure>
-  <para>The first group of settings <emphasis>Image</emphasis> is checked if you want to have a color or gray level filling of the contour plot. The default gray and color maps are the following: </para>
+  <para>The first group of settings <emphasis>Scales</emphasis> is used to define the scales of the three axis. It works in the same way as scaling of 2D plots.</para>
   <informalfigure id="fig-contour-options-2">
     <mediaobject> 
       <imageobject>
@@ -760,22 +911,16 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
       </imageobject>
     </mediaobject>
   </informalfigure>
-  <informalfigure id="fig-contour-options-3">
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/contour-curve-dialog-3.png"/>
-      </imageobject>
-    </mediaobject>
-  </informalfigure>
-  <para>You can customize this colormap by checking the <emphasis>Custom Colors</emphasis> box. A table with a set of numbers (the Z levels) and the corresponding colors is presented. You can then add or delete new levels for the definition of the colormap, and modify the corresponding Z levels. You are not allowed to modify the first and last levels, which are set to the minimum and maximum Z values. Beware that this is only the definition of the colormap, it won't change the number of contour lines of your plot. An example of classical custom colormap is given here:</para>
-    <informalfigure id="fig-contour-options-4">
+  <para>The second tab <emphasis>Axis</emphasis> is used to define the labels of the three axis. You can also customize the size of the ticks, beware that this size is given in real units. Therefore, it should be chosen in relation to the axis ranges: for example, if you put a length of 1 for the ticks of the X-axis, the length will correspond to a unit of 1 from the Y axis. In the same way, Y and Z ticks are computed in reference to X range.</para>
+  <para>The third tab <emphasis>Title</emphasis> is used to modify the title of the plot. Compared to conventional label dialog box of &appname;, it exhibits some limitations related to the 3D drawing system (no subscripts, superscript, no bold or italic characters). See the &format-title-lnk; for more details.</para>
+     <informalfigure id="fig-contour-options-4">
     <mediaobject> 
       <imageobject>
         <imagedata  format="PNG" fileref="pics/contour-curve-dialog-4.png"/>
       </imageobject>
     </mediaobject>
   </informalfigure>
-  <para>If you want to obtain discrete colors for each level,you must uncheck the <emphasis>Scale Colors</emphasis> checkbox. In this case you must define enough levels in your colormap.</para>
+  <para>The fourth tab <emphasis>Colors</emphasis> is used to modify the color of the different elements. For <emphasis>General</emphasis> and <emphasis>Coordinate System</emphasis> elements, it is a conventional choosing color dialog box. You can also customize the colormap used to draw the data. See the next section for more details on color maps.</para>
     <informalfigure id="fig-contour-options-5">
     <mediaobject> 
       <imageobject>
@@ -783,21 +928,21 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
       </imageobject>
     </mediaobject>
   </informalfigure>
-  <para>The second group of settings is used to customize the contour lines. You can select the number of lines and their color. If you check <emphasis>Use Default Pen</emphasis>, the color of the line will follow the settings defined in the group at the left of the checkbox. If you check <emphasis>Use Color Map</emphasis>, the lines will be colored as a function of the Z levels following the colormap defined in the <emphasis>image</emphasis> setting group.</para>
-  <para>The last group of settings must be checked if you want to have a bar scale on your plot. You can then define its position and width.</para>
+  <para>The last tab <emphasis>General</emphasis> is used to modify some global parameters of the plots. The <emphasis>orthogonal</emphasis> check box allows to change the 3D view from conventional perspective to orthogonal view. It correspond to the &perspective-icon; icon of the &plot3d-toolbar-lnk;. The parameter <emphasis>resolution</emphasis> is 1 by default, it indicates that all data points are used to draw the contour curves. If the line network is too dense, you can increase this parameter: with a value of 2 only 1 value over 2 will be used.</para>
+  <para>By default, the plot use the same graphic scales for the three axes. If the ranges are very different, you can adjust the size of the plot by changing the zoom over the different axes. In the example presented above, X and Y ranges are 10 while Z range is 0.2, then a zoom of 3000% should be used for Z axis if the zooms on X and Y are kept at 100%. You can also use the &autoscale-icon; icon of the &plot3d-toolbar-lnk; to adjust automatically these zoom values.</para>
 
+
+<!--
+*******************************************************************
+
+		Modification of color maps
+
+*******************************************************************
+-->
 <sect3 id="sec-color-schemes">
 <title>Modification of color schemes</title>
 
-  <para>The fourth tab allows to modify the colors used in the different elements of the plot.</para>
-  <informalfigure id="fig-surface-plot-options-4">
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/surface-plot-options-dialog4.png"/>
-      </imageobject>
-    </mediaobject>
-  </informalfigure>
-  <para>The first set of two colors (data min and data max) defines the color scheme which is used to show the Z-values. They are the colors used for the minimum value of Z (Z<subscript>min</subscript>) and the maximum value of Z (Z<subscript>max</subscript>). We can define the colors by their Red, Green and Blue parameters: [R,G,B]. Then, a value Z will be represented by a color defined as a linear interpolation:</para>
+  <para>The two colors (data min and data max) defines the color scheme which is used to show the Z-values. They are the colors used for the minimum value of Z (Z<subscript>min</subscript>) and the maximum value of Z (Z<subscript>max</subscript>). We can define the colors by their Red, Green and Blue parameters: [R,G,B]. Then, a value Z will be represented by a color defined as a linear interpolation:</para>
   <informalequation> 
   <mediaobject>
     <imageobject>
@@ -810,7 +955,7 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
   <informalfigure id="fig-default-color-scheme">
     <mediaobject> 
       <imageobject>
-        <imagedata  format="PNG" fileref="pics/default-color-scheme.png"/>
+        <imagedata  format="PNG" fileref="pics/color-scheme-default.png"/>
       </imageobject>
     </mediaobject>
   </informalfigure>
@@ -839,7 +984,8 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
 -->
 <sect2 id="sec-default-3d-plot">
 <title>Changing default 3D plot options</title>
-  <indexterm><primary>Surface plot</primary><secondary>Change default options</secondary></indexterm>
+  <indexterm><primary>Surface plot</primary><secondary>Default options</secondary></indexterm>
+  <para>Most of the parameters presented in the previous section can be set by default with the &preferences-lnk; of the &edit-menu-lnk;.</para> 
   <figure id="fig-preferences-dialog-4">
     <title>The preferences dialog: 3D plot options.</title>
     <mediaobject>
@@ -852,14 +998,17 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
 
 </sect1>
 <!--
-=============================================================================
+*******************************************************************
 
 		Multilayer plots
-		================
+		****************
+		
+*******************************************************************
 -->
 <sect1 id="sec-multilayer-plots">
 <title>Multilayer Plots</title>
 <indexterm><primary>Multilayers plot</primary></indexterm>
+
 <para>The multilayer windows can contain multiple plots (layers) with different characteristics. Each layer has a corresponding button, which displays a number and is pressed when the layer is the currently active layer. There is only one active layer at a time, and the plot tools (zoom, cursors, drawing tools, delete and move points) can only operate on this layer. Each plot can be made active by clicking on it or on its corresponding button.</para>
 <para>To arrange the layers use the &arrange-layers-lnk;. You can add or remove layers with the &add-layer-lnk; and &remove-layer-lnk; or copy/paste layers from one multilayer window to another. All these functions can be reached via the &graph-menu-lnk;, by using the &plot-toolbar-lnk; or via the context menu (right click in the multilayer window anywhere outside a plot area).</para>
 <para>You can resize and move a layer using the Layer geometry dialog. You can also arrange and resize the plots by hand. A whole plot can be moved by drag and drop: click on the plot and keep the left mouse button pressed.</para>
@@ -875,7 +1024,7 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
   <informalfigure>
     <mediaobject> 
       <imageobject>
-        <imagedata  format="PNG" fileref="pics/multilayer-panel.png"/>
+        <imagedata format="PNG" fileref="pics/multilayer-panel.png"/>
       </imageobject>
     </mediaobject>
   </informalfigure>
@@ -898,7 +1047,7 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
     </mediaobject>
   </informalfigure>
 
-<para>Then, select the plot window and use the &add-layer-lnk; from the &graph-menu-lnk;. This will activate a dialog box. If you choose "Guess" you will obtain a panel with two columns, if you choose "corner" you will obtain two superposed layers, you can then modify these two layers.</para>
+<para>Then, select the plot window and use the &add-layer-lnk; from the &graph-menu-lnk;. This will activate a dialog box. If you choose "Guess" you will obtain a panel with two columns, if you choose "corner" you will obtain two superposed layers. If you want to build a panel with two rows or some other regular matrix of plots, you can use the &arrange-layers-lnk; to convert the plot to a panel.</para>
 
   <informalfigure>
     <mediaobject> 
@@ -908,7 +1057,7 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
     </mediaobject>
   </informalfigure>
 
-<para>If you want to build a panel with two rows, you can use the &arrange-layers-lnk; to convert this panel.</para>
+<para>If you want to build a more complex geometry like plots inserted in another one, you can modify the geometry of each plot with the <emphasis>layer geometry</emphasis> command. This command is accessible with the context menu of the layer and it allows to modify the size and the position of each layer. Beware that by default, the background of the different layers are not transparent. Therefore, you must modify this parameter if you want to have some superposition of plots. This modification can be done with the &format-plot-lnk; of the &format-menu-lnk;.</para>
 
   <informalfigure>
     <mediaobject> 
@@ -918,7 +1067,7 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
     </mediaobject>
   </informalfigure>
 
-<para>Then select the second void plot and use the &add-remove-curve-lnk; to select the Y-values from one of the tables of the project.</para>
+<para>For each layer, you can use the &add-remove-curve-lnk; to select the X and Y values from one of the tables of the project.</para>
 
   <informalfigure>
     <mediaobject> 
@@ -929,14 +1078,6 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
   </informalfigure>
 
 <para>After this, you can customize your plot. At the end, the modifications done on the axis or on the axis labels may have modified the geometry of the two plots. You can synchronize again the two plots by applying again the &arrange-layers-lnk;.</para>
-
-  <informalfigure>
-    <mediaobject> 
-      <imageobject>
-        <imagedata  format="PNG" fileref="pics/multilayer-step-5.png"/>
-      </imageobject>
-    </mediaobject>
-  </informalfigure>
 
 </sect2>
 
