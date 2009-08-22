@@ -1,6 +1,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version='1.0'>
 <xsl:import href="file:////usr/share/xml/docbook/stylesheet/nwalsh/html/chunk.xsl"/>
 
+<xsl:output method="html"
+            encoding="UTF-8"
+            indent="no"/>
+
 	<!-- html.stylesheet
 	The html.stylesheet parameter is either empty, indicating that no 
 	stylesheet LINK tag should be generated in the HTML output, or 
@@ -11,6 +15,9 @@
 	generated for each stylesheet in the order they are listed in the 
 	parameter.
 	-->	
+<xsl:param name="chunker.output.encoding">UTF-8</xsl:param>
+<xsl:param name="chunker.output.indent">yes</xsl:param>
+
 <xsl:param name="html.stylesheet">scidavis.css</xsl:param>
 
 	<!-- css.decoration
@@ -42,12 +49,14 @@
 	<!-- 
 		contrôle de la table des matières
 	-->
+<xsl:param name="chunk.tocs.and.lots" select="0"></xsl:param>
+<xsl:param name="chunk.separate.lots" select="0"></xsl:param>
 <xsl:param name="generate.section.toc.level" select="1"></xsl:param>
-<xsl:param name="toc.max.depth">2</xsl:param>
+<xsl:param name="toc.max.depth">3</xsl:param>
 <xsl:param name="generate.toc">
-appendix  toc,title
-book      toc,title,figures
+book      toc,title,figures,tables
 chapter   toc,title
+appendix  toc,title
 </xsl:param>
 
 	<!-- 
