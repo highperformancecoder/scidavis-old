@@ -171,6 +171,9 @@ div.informalfigure {
 div.equation {
 	text-align:			center;
 }
+div.informalequation {
+	text-align:			center;
+}
 /*
 		tables
 
@@ -221,4 +224,32 @@ div.variablelist DT a:visited {
 */
 span.keycode {
 	color:				#006060; 
+}
+/*
+		Commands
+		this is mainly to remove the effect of the "strong" tag in commands
+*/
+a span strong {
+	color:				#20208F;
+/*	font-style:			normal; */
+	text-decoration:		italic;
+	font-weight:			normal;
+}
+/*
+		table of content
+*/
+dt span.chapter a {
+	font-size:			16px;
+	font-weight:			bold;
+	line-height:			40px
+}
+dt span.appendix a {
+	font-size:			16px;
+	font-weight:			bold;
+	line-height:			40px
+}
+dt span.index a {
+	font-size:			16px;
+	font-weight:			bold;
+	line-height:			40px
 }
