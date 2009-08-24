@@ -1765,7 +1765,7 @@ void Graph::removeLegend()
 	{
 		int index = d_texts.indexOf(legendMarkerID);
 		int texts = d_texts.size();
-		for (int i=index; i<texts; i++)
+		for (int i=index; i<texts-1; i++)
 			d_texts[i]=d_texts[i+1];
 		d_texts.resize(--texts);
 
