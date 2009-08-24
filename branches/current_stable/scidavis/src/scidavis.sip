@@ -830,12 +830,13 @@ public:
   bool insertCurve(Table*, const QString&, int=1, int color=-1) /NoDerived/;
 %MethodCode
 	if (sipCpp->insertCurve(a0, *a1, a2)) {
-		QwtPlotCurve * c = sipCpp->curve(sipCpp->curves()-1);
+		CurveLayout cl = sipCpp->initCurveLayout(a2, 1);
 		if (a3 >= 0) {
-			QPen pen = c->pen();
-			pen.setColor(ColorBox::color(a3));
-			c->setPen(pen);
+			cl.lCol = a3;
+			cl.symCol = a3;
+			cl.fillCol = a3;
 		}
+		sipCpp->updateCurveLayout(sipCpp->curves()-1, &cl);
 		sipRes = true;
 	} else
 		sipRes = false;
@@ -843,12 +844,13 @@ public:
   bool insertCurve(Table*, const QString&, const QString&, int=1, int color=-1);
 %MethodCode
 	if (sipCpp->insertCurve(a0, *a1, *a2, a3)) {
-		QwtPlotCurve * c = sipCpp->curve(sipCpp->curves()-1);
-		if (a3 >= 0) {
-			QPen pen = c->pen();
-			pen.setColor(ColorBox::color(a4));
-			c->setPen(pen);
+		CurveLayout cl = sipCpp->initCurveLayout(a3, 1);
+		if (a4 >= 0) {
+			cl.lCol = a4;
+			cl.symCol = a4;
+			cl.fillCol = a4;
 		}
+		sipCpp->updateCurveLayout(sipCpp->curves()-1, &cl);
 		sipRes = true;
 	} else
 		sipRes = false;
