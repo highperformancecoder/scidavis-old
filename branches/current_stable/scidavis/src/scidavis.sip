@@ -749,6 +749,56 @@ class QwtPlot {
   QwtPlot(const QwtPlot&);
 };
 
+class Grid
+{
+%TypeHeaderCode
+#include "src/Grid.h"
+%End
+	public:
+		void enableX(bool) /PyName=setXMajor/;
+		bool xEnabled() /PyName=xMajor/;
+
+		void enableY(bool) /PyName=setYMajor/;
+		bool yEnabled() /PyName=yMajor/;
+
+		void enableXMin(bool) /PyName=setXMinor/;
+		bool xMinEnabled() /PyName=xMinor/;
+
+		void enableYMin(bool) /PyName=setYMinor/;
+		bool yMinEnabled() /PyName=yMinor/;
+
+		void enableZeroLineX(bool enable = true) /PyName=setXZeroLine/;
+		bool xZeroLineEnabled() /PyName=xZeroLine/;
+
+		void enableZeroLineY(bool enable = true) /PyName=setYZeroLine/;
+		bool yZeroLineEnabled() /PyName=yZeroLine/;
+
+		void setMajPenX(const QPen &p) /PyName=setXMajorPen/;
+		const QPen& majPenX() const /PyName=xMajorPen/;
+
+		void setMinPenX(const QPen &p) /PyName=setXMinorPen/;
+		const QPen& minPenX() const /PyName=xMinorPen/;
+
+		void setMajPenY(const QPen &p) /PyName=setYMajorPen/;
+		const QPen& majPenY() const /PyName=yMajorPen/;
+
+		void setMinPenY(const QPen &p) /PyName=setYMinorPen/;
+		const QPen& minPenY() const /PyName=yMinorPen/;
+
+		void setMajorPen(const QPen &p) /NoDerived/;
+%MethodCode
+	sipCpp->setMajPenX(*a0);
+	sipCpp->setMajPenY(*a0);
+%End
+		void setMinorPen(const QPen &p) /NoDerived/;
+%MethodCode
+	sipCpp->setMinPenX(*a0);
+	sipCpp->setMinPenY(*a0);
+%End
+	private:
+		Grid(const Grid&);
+};
+
 class Graph : QWidget /PyName=Layer/
 {
 %TypeHeaderCode
@@ -836,6 +886,8 @@ public:
 
   void showGrid(int);
   void showGrid();
+  Grid *grid();
+
   void replot();
   void print();
   void exportImage(const QString& fileName, int quality = 100, bool transparent = false);

@@ -82,5 +82,6 @@
 				 $${SIP_DIR}/sipscidavisQwtSymbol.cpp \
 				 $${SIP_DIR}/sipscidavisQwtPlotCurve.cpp \
              $${SIP_DIR}/sipscidavisQwtPlot.cpp \
+				 $${SIP_DIR}/sipscidavisGrid.cpp \
 
 ###############################################################
