@@ -2512,12 +2512,12 @@ layer.replot()
 				 <varlistentry>
 					 <term>setRightTitle(string)</term>
 					 <listitem>Set the title displayed for the right Y axis. The axis title can be
-						 disabled by setting it to an empty string.</listitem>
+						 disabled by setting it to an empty string. Added in &appname; 0.2.4.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setTopTitle(string)</term>
 					 <listitem>Set the title displayed for the top X axis. The axis title can be
-						 disabled by setting it to an empty string.</listitem>
+						 disabled by setting it to an empty string. Added in &appname; 0.2.4.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setAxisNumericFormat(int, int, int=6, string=QString())</term>
@@ -2592,7 +2592,7 @@ layer.replot()
 				 </varlistentry>
 				 <varlistentry>
 					 <term>printDialog()</term>
-					 <listitem>Display dialog for printing out this layer.</listitem>
+					 <listitem>Display dialog for printing out this layer. Added in &appname; 0.2.4.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>exportImage(string, int=100, bool=False)</term>
