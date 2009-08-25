@@ -862,6 +862,8 @@ public:
 	if (app)
 		sipRes = sipCpp->addFunctionCurve(app, FunctionCurve::Normal, QStringList() << *a0, "x",
 				QList<double>() << a1 << a2, a3, *a4);
+	else
+		sipRes = false;
 %End
 	bool insertPolarCurve(const QString &radial, const QString &angular,
 			double from=0, double to=2*M_PI, const QString &parameter="t", int points=100,
@@ -871,6 +873,8 @@ public:
 	if (app)
 		sipRes = sipCpp->addFunctionCurve(app, FunctionCurve::Polar, QStringList() << *a0 << *a1,
 				*a4, QList<double>() << a2 << a3, a5, *a6);
+	else
+		sipRes = false;
 %End
 	bool insertParametricCurve(const QString &x, const QString &y,
 			double from=0, double to=1, const QString &parameter="t", int points=100,
@@ -880,6 +884,8 @@ public:
 	if (app)
 		sipRes = sipCpp->addFunctionCurve(app, FunctionCurve::Parametric, QStringList() << *a0 << *a1,
 				*a4, QList<double>() << a2 << a3, a5, *a6);
+	else
+		sipRes = false;
 %End
 
   void removeCurve(int);
@@ -916,6 +922,8 @@ public:
   void enableAxis(int axis, bool on = true);
   void setXAxisTitle(const QString& text) /PyName=setXTitle/;
   void setYAxisTitle(const QString& text) /PyName=setYTitle/;
+  void setRightAxisTitle(const QString &text) /PyName=setRightTitle/;
+  void setTopAxisTitle(const QString &text) /PyName=setTopTitle/;
 
   void setLabelsNumericFormat(int axis, int format, int = 6, const QString& = QString()) /PyName=setAxisNumericFormat/;
   void setScale(int axis, double start, double end, double step = 0.0,
@@ -931,7 +939,7 @@ public:
   Grid *grid();
 
   void replot();
-  void print();
+  void print() /PyName=printDialog/;
   void exportImage(const QString& fileName, int quality = 100, bool transparent = false);
   void exportVector(const QString& fileName, int res = 0, bool color = true,
                     bool keepAspect = true, QPrinter::PageSize pageSize = QPrinter::Custom);
