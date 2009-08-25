@@ -1884,7 +1884,8 @@ layer.replot()
 			 </variablelist>
 		 </sect3>
 		 <sect3><title>class Legend</title>
-			 <para>Text boxes displayed on a graph.</para>
+			 <para>Text boxes displayed on a graph. While this is also used for legends, a better
+				 (since more general) name would probably be TextMarker.</para>
 			 <programlisting width="80">
 layer = newGraph().activeLayer()
 legend = layer.newLegend("hello world")
@@ -2176,6 +2177,477 @@ layer.replot()
 						 Qt.LinearGradientPattern, Qt.RadialGradientPattern, Qt.ConicalGradientPattern.
 						 See PyQt documentation for visual overview and more information.
 					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Grid</title>
+			 <para>Handles options related to the grid drawn on a Layer. Added in &appname; 0.2.4.</para>
+			 <programlisting width="80">
+layer = newGraph().activeLayer()
+layer.showGrid()
+layer.grid().setMajorPen(QtGui.QColor(Qt.black))
+layer.replot()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>setMajor(bool)</term>
+					 <listitem>Enables/disables drawing of major grid lines for both axes.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXMajor(bool)</term>
+					 <listitem>Enables/disables drawing of major grid lines for X axis.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYMajor(bool)</term>
+					 <listitem>Enables/disables drawing of major grid lines for Y axis.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xMajor()</term>
+					 <listitem>Boolean indicating whether major grid lines for X axis are enabled.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yMajor()</term>
+					 <listitem>Boolean indicating whether major grid lines for Y axis are enabled.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMinor(bool)</term>
+					 <listitem>Enables/disables drawing of minor grid lines for both axes.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXMinor(bool)</term>
+					 <listitem>Enables/disables drawing of minor grid lines for X axis.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYMinor(bool)</term>
+					 <listitem>Enables/disables drawing of minor grid lines for Y axis.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xMinor()</term>
+					 <listitem>Boolean indicating whether minor grid lines for X axis are enabled.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yMinor()</term>
+					 <listitem>Boolean indicating whether minor grid lines for Y axis are enabled.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXZeroLine(bool)</term>
+					 <listitem>Enables/disables drawing of line at X=0.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xZeroLine()</term>
+					 <listitem>Boolean indicating whether a line is drawn at X=0.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYZeroLine(bool)</term>
+					 <listitem>Enables/disables drawing of line at Y=0.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yZeroLine()</term>
+					 <listitem>Boolean indicating whether a line is drawn at Y=0.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMajorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of major grid lines. See PyQt
+						 reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXMajorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of major grid lines for X axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYMajorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of major grid lines for Y axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xMajorPen()</term>
+					 <listitem>Returns QPen used for drawing major grid lines for X axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yMajorPen()</term>
+					 <listitem>Returns QPen used for drawing major grid lines for Y axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMinorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of minor grid lines. See PyQt
+						 reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXMinorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of minor grid lines for X axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYMinorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of minor grid lines for Y axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xMinorPen()</term>
+					 <listitem>Returns QPen used for drawing minor grid lines for X axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yMinorPen()</term>
+					 <listitem>Returns QPen used for drawing minor grid lines for Y axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Layer (inherits QWidget)</title>
+			 <para>A layer on a graph. All elements in a graph are organized in layers, so whenever
+				 you're working with graphs, you're also dealing with layers. Note that many changes
+				 do not show up until you call replot() - if you're changing many options on a complex
+				 layer, this is faster than automatically updating the layer on every change.</para>
+			 <programlisting width="80">
+layer = newGraph().activeLayer()
+layer.setTitle("Murphy Certainty Principle")
+layer.setXTitle("time")
+layer.setYTitle("motivation")
+layer.insertFunctionCurve("1/x", 0, 10)
+layer.setScale(QwtPlot.xBottom, 0, 10)
+layer.setScale(QwtPlot.yLeft, 0, 10)
+layer.setBackgroundColor(QtGui.QColor(18,161,0))
+layer.setCanvasColor(QtGui.QColor(161,120,50))
+layer.curve(0).setPen(QtGui.QPen(Qt.yellow, 3))
+layer.removeLegend()
+layer.replot()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>isPiePlot()</term>
+					 <listitem>Boolean indicating whether this layer is a pie plot. Pie plots are
+						 always on a separate layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>pieLegend()</term>
+					 <listitem>Returns content of legend, assuming this layer is a pie plot.
+						 See isPiePlot().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertCurve(Table, string, int, int)</term>
+					 <listitem>insertCurve(table, column, style=1, color=-1) plots the data of the
+						 specified Y column and the corresponding designated X column, optionally
+						 specifying style and color, and returning a boolean indicating success or
+						 failure. Color is an index in the palette used by &appname;
+						 for automatically assigning colors to new curves. Style is one of the following
+						 codes:
+						 <variablelist spacing="compact">
+							 <varlistentry>
+								 <term>0</term><listitem>Line</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>1</term><listitem>Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>2</term><listitem>Line and Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>3</term><listitem>Columns</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>4</term><listitem>Area</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>5</term><listitem>Pie</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>6</term><listitem>Vertical drop lines</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>7</term><listitem>Splines and Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>8</term><listitem>Vertical steps</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>9</term><listitem>Histogram</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>10</term><listitem>Rows</listitem>
+							 </varlistentry>
+						 </variablelist>
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertCurve(Table, string, string int, int)</term>
+					 <listitem>insertCurve(table, x_column, y_column style=1, color=-1) works like the
+						 other insertCurve() variant above, but allows you to explicitly specify the
+						 X column you want to plot against instead of determining it by designation.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertFunctionCurve(string, double=0, double=1, int=100, string=QtCore.QString())</term>
+					 <listitem>insertFunctionCurve(formula, start, end, points, title) inserts a function
+						 curve specified by formula, which is evaluated using muParser with abscissa "x", and
+						 returns a boolean indicating success or failure.
+						 Optionally, the interval [start,end] for the evaluation, the number of points
+						 where the function will be evaluated and the curve title can be given.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertPolarCurve(string, string, double=0, double=2*pi, string=&quot;t&quot;, int=100,
+						 string=QtCore.QString())</term>
+					 <listitem>insertPolarCurve(radial, angular, start, end, parameter, points, title)
+						 inserts a function curve specified by formulas for the radial and angular
+						 components in polar coordinates, both of which are evaluated using muParser
+						 with given parameter (&quot;t&quot; by default), and returns a boolean indicating
+						 success or failure. Optionally, the interval [start,end]
+						 covered by the free parameter, the number of points where the function will be
+						 evaluated and the curve title can be overridden.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertParametricCurve(string, string, double=0, double=1,
+						 string=&quot;t&quot;, int=100, string=QtCore.QString())</term>
+					 <listitem>insertParametricCurve(x_formula, y_formula, from, to, parameter, points, title)
+						 insert a fucntion curve specified by formulas for the abscissa and ordinate
+						 components in cartesian coordinates, both of which are evaluated using muParser
+						 with given parameter (&quot;t&quot; by default), and returns a boolean indicating
+						 success or failure. Optionally, the interval [start,end]
+						 covered by the free parameter, the number of points where the function will be
+						 evaluated and the curvet title can be overridden.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addErrorBars(string, Table, string, int=1, int=1, int=8,
+						 QColor=QColor(Qt.black), bool=True, bool=True, bool=True)</term>
+					 <listitem>addErrorBars(curve, table, err_col_name, orientation, width, cap_length, color,
+						 through, minus, plus) adds error bars to the curve specified by its name (as
+						 displayed in the add/remove curve dialog and the curves's context menu). Data
+						 for the error bars is taken from the given table and column. Optionally, you can
+						 override the orientation (default is 1 for vertical, 0 means horizontal), the
+						 width of the pen used to draw the error bars, the length of the caps in pixels,
+						 the color of the pen used to draw the error bars, and flags indicating whether
+						 the error bars' line strikes through the underlying curve, and whether the minus
+						 and plus side of the error bars are to be drawn.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>removeCurve(int or string)</term>
+					 <listitem>Remove curve specified by index (in the range [0,numCurves()-1]) or title.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>deleteFitCurves()</term>
+					 <listitem>Remove all curves that show the result of a fit operation.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numCurves()</term>
+					 <listitem>Returns the number of curves plotted on this layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>showCurve(int,bool)</term>
+					 <listitem>Show/hide the curve specified by its index (in the range [0,numCurves()-1]).
+						 Hidden curves are not plotted, but otherwise remain part of the Layer; they keep
+						 their legend item, count as part of numCurves(), can be accessed by curve() etc.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>curve(int or string)</term>
+					 <listitem>Access curve (as QwtPlotCurve instance) specified by its title (as displayed
+						 in the add/remove curves dialog and the curve's context menu) or index (integer
+						 in the range [0,numCurves()-1].</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addArrow(ArrowMarker)</term>
+					 <listitem>Add the indicated arrow/line marker to the layer. See class ArrowMarker.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addImage(ImageMarker or string)</term>
+					 <listitem>Add an image marker to the layer. For convenience, you can simply specify
+						 the path of the file containing the image in place of an ImageMarker object. In
+						 any case, the added ImageMarker is returned.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTitle(string)</term>
+					 <listitem>Change the layer's title string.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newLegend()</term>
+					 <listitem>Return a new, empty Legend (text marker) object after adding it to this
+						 layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newLegend(string)</term>
+					 <listitem>Return a new Legend (text marker) object initialized with the given
+						 string, after adding it to the layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setLegend(string)</term>
+					 <listitem>Set the name of the main legend (i.e., the <emphasis>real</emphasis>
+						 legend, as opposed to other texts placed on the layer).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>legend()</term>
+					 <listitem>Returns the Legend object representing the <emphasis>real</emphasis>
+						 legend, as opposed to other texts placed on the layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>removeLegend()</term>
+					 <listitem>Remove the legend (i.e., the object returned by legend()), if one
+						 currently exists.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addTimeStamap</term>
+					 <listitem>Add a text marker containing the current date and time.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>enableAxis(int,bool)</term>
+					 <listitem>Enable/disable drawing of the indicating axis, which must be one of the
+						 integer constants QwtPlot.yLeft (=0), QwtPlot.yRight (=1), QwtPlot.xBottom (=2)
+						 or QwtPlot.xTop (=3). The descriptive names were added in &appname; 0.2.4; for
+						 prior versions, you need to specify the indicated integer values.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXTitle(string)</term>
+					 <listitem>Set the title displayed for the (bottom) X axis. The axis title can be
+						 disabled by setting it to an empty string.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYTitle(string)</term>
+					 <listitem>Set the title displayed for the (left) Y axis. The axis title can be
+						 disabled by setting it to an empty string.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setRightTitle(string)</term>
+					 <listitem>Set the title displayed for the right Y axis. The axis title can be
+						 disabled by setting it to an empty string.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTopTitle(string)</term>
+					 <listitem>Set the title displayed for the top X axis. The axis title can be
+						 disabled by setting it to an empty string.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAxisNumericFormat(int, int, int=6, string=QString())</term>
+					 <listitem>setAxisNumericFormat(axis, format, precision, formula) sets the numeric
+						 format used for drawing the axis labels on the specified axis (see enableAxis()
+						 for possible arguments). Format must be one of 0 (automatic), 1 (decimal),
+						 2 (scientific) or 3 (superscripts). Precision is the number of digits displayed.
+						 If a formula is given, it is evaluated with muParser for every label and the
+						 result is used in place of the input value for displaying the label.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setScale(int, double, double, double=0, int=5, int=5, int=0, bool=False)</term>
+					 <listitem>setScale(axis, start, end, step, major_ticks, minor_ticks, type, inverted)
+						 sets various options related to the scale of the indicated axis (see enableAxis()
+						 for possible arguments); most notably the start and end values of the displayed
+						 data range. Step indicates the distance between major tick marks (the default of
+						 0 means to automatically determine a sensible value); alternatively, a target
+						 number of major tick marks (and minor tick marks per major tick) can be specified,
+						 but due to limitations of Qwt, this is only taken as a hint, not as a strictly
+						 followed setting. Type is either 0 (linear scale, default) or 1 (logarithmic
+						 scale). The last flag can be set to have the axis inverted, i.e. numbered right
+						 to left or top-down.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMargin(int)</term>
+					 <listitem>Change the margin (i.e., the spacing around the complete content) of the
+						 layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFrame(int=1, QColor=QColor(Qt.black))</term>
+					 <listitem>setFrame(width, color) draws a frame around the complete content (including
+						 margin) of the layer; with the indicated line width and color.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setBackgroundColor(QColor)</term>
+					 <listitem>Changes the background color of the layer. Note that this excludes the
+						 background of the canvas area containing the curves and markers, which is set
+						 separately (see setCanvasColor()). Most commonly, the argument will be either
+						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
+						 for details) or a RGBA spec in the form QtGui.QColor(red, green, yellow, alpha) with
+						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCanvasColor(QColor)</term>
+					 <listitem>Changes the background color of the canvas area containing the curves and
+						 markers. Most commonly, the argument will be either
+						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
+						 for details) or a RGBA spec in the form QtGui.QColor(red, green, yellow, alpha) with
+						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>showGrid(int)</term>
+					 <listitem>Toggle drawing of major and minor grid associated with the given axis.
+						 See enableAxis() for possible arguments.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>showGrid()</term>
+					 <listitem>Toggle drawing of all grid lines.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>grid()</term>
+					 <listitem>Returns the Grid object for this layer, which holds various grid-related
+						 settings. See class Grid.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>replot()</term>
+					 <listitem>Makes sure that any changes you've applied to the layer are displayed on
+						 screen. It is often necessary to call this method after making script-driven
+						 changes to a layer, like changing the style of a curve. It is also a good idea
+						 to call this before export to a file, although it's not technically required for
+						 all file formats.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>printDialog()</term>
+					 <listitem>Display dialog for printing out this layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportImage(string, int=100, bool=False)</term>
+					 <listitem>exportImage(filename, quality, transparent) exports the layer to a bitmap
+						 image format with the indicated quality level, optionally making the background
+						 transparent (if supported by the file format). The file format is determined by
+						 the extension of the indicated file name; the list of supported formats depends
+						 on your installation of Qt and can be viewed by invoking the export dialog from
+						 the GUI and looking through the &quot;file type&quot; box.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportVector(string, int=0, bool=True, bool=True,
+						 QPrinter.PageSize=QtGui.QPrinter.Custom)</term>
+					 <listitem>exportVector(filename, resolution, color, keep_aspect, page_size) exports
+						 the layer to a vector-based file format. You can override the default resolution
+						 (in dpi), toggle printing in color/monochrome, toggle whether to keep the
+						 width/height aspect when rescaling and select a standard page size as described
+						 in the PyQt documentation for QtGui.QPrinter.PageSize.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>export(string)</term>
+					 <listitem>Quickly export layer to the indicated file, without bothering about the
+						 exportImage()/exportVector() distinction and related options. The file format
+						 is determined automatically by looking at the extension of the specfied file
+						 name; supported formats depend on your installation of Qt and can be viewed by
+						 invoking the export dialog from the GUI and looking through the
+						 &quot;file type&quot; box.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>enableAutoscaling(bool=True)</term>
+					 <listitem>Set automatic updating of the scale settings (see setScale()) when data
+						 is added to or changed on the layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setIgnoreResize(bool=True)</term>
+					 <listitem>Sets whether to keep the layer's geometry fixed when resizing its graph.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAutoscaleFonts(bool=True)</term>
+					 <listitem>Sets whether to scale font sizes together with the rest of the layer
+						 when its graph is resized (and resizes aren't ignored, see setIgnoreResize()).
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAntialiasing(bool=True, bool=True)</term>
+					 <listitem>setAntialiasing(antialias, update) specifies whether antialiasing should
+						 be used for drawing elements added to the layer after the call to
+						 setAntialiasing(). If the update flag is True (default), the antialiasing setting
+						 of existing elements is updated as well.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>canvas()</term>
+					 <listitem>Gives access to the QtGui.QWidget acting as a canvas, i.e it contains all
+						 curves and markers on the layer (but not axes and title).</listitem>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
