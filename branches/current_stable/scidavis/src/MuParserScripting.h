@@ -76,7 +76,7 @@ class MuParserScripting: public ScriptingEnv
       double (*fun1)(double);
       double (*fun2)(double,double);
       double (*fun3)(double,double,double);
-      char *description;
+      QString description;
     };
     static const mathFunction math_functions[];
 
