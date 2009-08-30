@@ -2651,6 +2651,117 @@ layer.replot()
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
+		 <sect3><title>class Graph (inherits MDIWindow)</title>
+			 <para>A graph window, consisting of layers, which in turn contain plot curves and markers.
+			 </para>
+			 <programlisting width="80">
+g = newGraph()
+layer1 = g.activeLayer()
+layer2 = g.addLayer()
+g.setMargins(40,40,40,40)
+g.arrangeLayers()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>activeLayer()</term>
+					 <listitem>Returns the Layer currently marked as active (as indicated by the
+						 layer buttons at the top of the graph). If there is only one layer, it is
+						 always the active one.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setActiveLayer(Layer)</term>
+					 <listitem>Make the indicated layer the active one.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numLayers()</term>
+					 <listitem>Returns the total number of layers contained in the graph.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>layer(int)</term>
+					 <listitem>Returns the Layer specified by index (integer in the range
+						 [1,numLayers()]).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addLayer(int=0,int=0,int=0,int=0)</term>
+					 <listitem>addLayer(x,y,width,height) adds a new layer at the given position and
+						 with the given size. Returns the newly created Layer object.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCols(int)</term>
+					 <listitem>Set the number of columns to use when arranging layers automatically.
+						 Doesn't take effect until a re-arrangement is requested by calling
+						 arrangeLayers().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setRows(int)</term>
+					 <listitem>Set the number of rows to use when arranging layers automatically.
+						 Doesn't take effect until a re-arrangement is requested by calling
+						 arrangeLayers().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSpacing(int,int)</term>
+					 <listitem>setSpacing(row_gap, column_gap) sets the spacing to use between
+						 rows and columns when arranging layers automatically.
+						 Doesn't take effect until a re-arrangement is requested by calling
+						 arrangeLayers().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMargins(int,int,int,int)</term>
+					 <listitem>setMargins(left,right,top,bottom) sets the outer margins to use
+						 when arranging layers automatically.
+						 Doesn't take effect until a re-arrangement is requested by calling
+						 arrangeLayers().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setLayerCanvasSize(int, int)</term>
+					 <listitem>setLayerCanvasSize(width,height) Resizes all layers as indicated and
+						 arranges them automatically.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAlignment(int, int)</term>
+					 <listitem>setAlignment(horizontal, vertical) sets the alignement of layers in their
+						 respective columns and rows. Arguments can be 0 For center, 1 for left/top and 2
+						 for right/bottom. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>arrangeLayers(bool)</term>
+					 <listitem>Automatically arranges the layers on the graph, subject to built-in
+						 defaults or settings made previously using setCols(), setRows(), setSpacing(),
+						 setMargins() and setAlignment().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportImage(string, int=100, bool=False)</term>
+					 <listitem>exportImage(filename, quality, transparent) exports the graph to a bitmap
+						 image format with the indicated quality level, optionally making the background
+						 transparent (if supported by the file format). The file format is determined by
+						 the extension of the indicated file name; the list of supported formats depends
+						 on your installation of Qt and can be viewed by invoking the export dialog from
+						 the GUI and looking through the &quot;file type&quot; box.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportVector(string, int=0, bool=True, bool=True,
+						 QPrinter.PageSize=QtGui.QPrinter.Custom)</term>
+					 <listitem>exportVector(filename, resolution, color, keep_aspect, page_size) exports
+						 the graph to a vector-based file format. You can override the default resolution
+						 (in dpi), toggle printing in color/monochrome, toggle whether to keep the
+						 width/height aspect when rescaling and select a standard page size as described
+						 in the PyQt documentation for QtGui.QPrinter.PageSize.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>export(string)</term>
+					 <listitem>Quickly export graph to the indicated file, without bothering about the
+						 exportImage()/exportVector() distinction and related options. The file format
+						 is determined automatically by looking at the extension of the specfied file
+						 name; supported formats depend on your installation of Qt and can be viewed by
+						 invoking the export dialog from the GUI and looking through the
+						 &quot;file type&quot; box.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>printDialog()</term>
+					 <listitem>Display dialog for printing out this layer. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
 	 </sect2>
 
     <sect2 id="Python-init">
