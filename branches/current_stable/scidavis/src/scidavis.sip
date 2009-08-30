@@ -980,11 +980,15 @@ public:
 	sipCpp->setLayerCanvasSize(a0, a1);
 	sipCpp->arrangeLayers(true, true);
 %End
+	// for backwards-compatibility
   void setAlignement (int, int);
+  void setAlignement (int, int) /PyName=setAlignment/;
   void arrangeLayers(bool fit = true) /NoDerived/;
 %MethodCode
 	sipCpp->arrangeLayers(a0, false);
 %End
+	// for backwards-compatibility
+  void arrangeLayers(bool fit, bool user_size);
 
   void exportToFile(const QString& fileName) /PyName=export/;
   void exportImage(const QString& fileName, int quality = 100, bool transparent = false);
