@@ -2762,6 +2762,45 @@ g.arrangeLayers()
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
+		 <sect3><title>class Note (inherits MDIWidget)</title>
+			 <para>A note/script window containing arbitrary text, all or parts of which can be executed
+				 as Python code. Triggering executing of code in a Note currently doesn't work reliably,
+				 but this can essentially be circumvented using exec(str(note.text())).</para>
+			 <programlisting width="80">
+n = newNote()
+n.setText("Hello World")
+n.exportASCII("output.txt")
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>autoexec()</term>
+					 <listitem>Boolean indicating whether the content of Note is automatically executed
+						 when loading the project.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAutoexec(bool)</term>
+					 <listitem>Sets whether to automatically executed the content of the Note when loading
+						 the project.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>text()</term>
+					 <listitem>Returns the content of the note as a QString.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setText(string)</term>
+					 <listitem>Sets the content of the note.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportASCII(string)</term>
+					 <listitem>Writes the content of the note to the indicated file.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>importASCII(string)</term>
+					 <listitem>Prepends the content of the note by the content of the indicated file.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
 	 </sect2>
 
     <sect2 id="Python-init">
