@@ -898,6 +898,12 @@ public:
   void removeCurve(const QString&);
   void deleteFitCurves();
   int curves() /PyName=numCurves/;
+  QList<QwtPlotCurve*> curves() const /NoDerived/;
+%MethodCode
+	sipRes = new QList<QwtPlotCurve*>();
+	for (int i = 0; i<sipCpp->curves(); i++)
+		sipRes->append(sipCpp->curve(i));
+%End
   void showCurve(int index, bool visible=true);
 
   QwtPlotCurve* curve(int index);
@@ -974,6 +980,7 @@ public:
   Graph *activeGraph() /PyName=activeLayer/;
   void setActiveGraph(Graph*) /PyName=setActiveLayer/;
   int layers() /PyName=numLayers/;
+  QWidgetList layerWidgets() const /PyName=layers/;
   Graph* layer(int num);
   Graph* addLayer(int = 0, int = 0, int = 0, int = 0);
 %MethodCode

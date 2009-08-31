@@ -71,6 +71,7 @@ public:
     MultiLayer (const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
 	QWidgetList graphPtrs(){return graphsList;};
 	Graph *layer(int num);
+	QWidgetList layerWidgets() const { return graphsList; }
 	LayerButton* addLayerButton();
 	void copy(ApplicationWindow * parent, MultiLayer* ml);
 
