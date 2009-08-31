@@ -1581,6 +1581,10 @@ tmp.close()
 					 <term>confirmClose(boolean)</term>
 					 <listitem>Set a flag indicating whether the user should be given the opportunity to cancel removing the window or minimize it instead when trying to close it. When False, close() will remove the window without asking for confirmation, which is useful for temporary objects created by a script.</listitem>
 				 </varlistentry>
+				 <varlistentry>
+					 <term>clone()</term>
+					 <listitem>Returns a copy of this window.</listitem>
+				 </varlistentry>
 			 </variablelist>
 		 </sect3>
 		 <sect3><title>class Table (inherits MDIWindow)</title>
@@ -2035,15 +2039,24 @@ layer.replot()
 				 </varlistentry>
 				 <varlistentry>
 					 <term>brush()</term>
-					 <listitem>Returns the currently set brush (a QBrush) for filling the interiour of the symbol.</listitem>
+					 <listitem>Returns the currently set brush (a QBrush) for filling the interiour of the symbol.
+						 Due to a design limitation of Qwt, setting attributes of the brush directly has no effect.
+						 You need to create a copy of the brush, change its attributes and hand it again to setBrush().
+					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>pen()</term>
-					 <listitem>Returns the currently set pen (a QPen) for drawing the border of the symbol.</listitem>
+					 <listitem>Returns the currently set pen (a QPen) for drawing the border of the symbol.
+						 Due to a design limitation of Qwt, setting attributes of the pen directly has no effect.
+						 You need to create a copy of the pen, change its attributes and hand it again to setPen().
+					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>size()</term>
-					 <listitem>Returns the currently set size (a QSize) in paint (pixel) coordinates for drawing the symbol.</listitem>
+					 <listitem>Returns the currently set size (a QSize) in paint (pixel) coordinates for drawing the symbol.
+						 Due to a design limitation of Qwt, setting attributes of the QSize directly has no effect.
+						 You need to create a copy of the size, change its attributes and hand it again to setSize().
+					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>style()</term>
@@ -2103,6 +2116,8 @@ layer.replot()
 				 <varlistentry>
 					 <term>pen()</term>
 					 <listitem>Returns the currently set pen (a QPen) for drawing the lines of the curve.
+						 Due to a design limitation of Qwt, setting attributes of the pen directly has no effect.
+						 You need to create a copy of the pen, change its attributes and hand it again to setPen().
 					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
@@ -2112,7 +2127,10 @@ layer.replot()
 				 </varlistentry>
 				 <varlistentry>
 					 <term>brush()</term>
-					 <listitem>Returns the currently set brush (a QBrush) for filling the area under the curve.</listitem>
+					 <listitem>Returns the currently set brush (a QBrush) for filling the area under the curve.
+						 Due to a design limitation of Qwt, setting attributes of the brush directly has no effect.
+						 You need to create a copy of the brush, change its attributes and hand it again to setBrush().
+					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setSymbol(QwtSymbol)</term>
@@ -2120,7 +2138,10 @@ layer.replot()
 				 </varlistentry>
 				 <varlistentry>
 					 <term>symbol()</term>
-					 <listitem>Returns symbol parameters currently in effect. See class QwtSymbol.</listitem>
+					 <listitem>Returns symbol parameters currently in effect. See class QwtSymbol.
+						 Due to a design limitation of Qwt, setting attributes of the symbol directly has no effect.
+						 You need to create a copy of the symbol, change its attributes and hand it again to setSymbol().
+					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setColor(QColor)</term>
@@ -2449,6 +2470,10 @@ layer.replot()
 						 in the range [0,numCurves()-1].</listitem>
 				 </varlistentry>
 				 <varlistentry>
+					 <term>curves()</term>
+					 <listitem>Returns a list of all curves in the layer. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
 					 <term>addArrow(ArrowMarker)</term>
 					 <listitem>Add the indicated arrow/line marker to the layer. See class ArrowMarker.
 					 </listitem>
@@ -2682,6 +2707,10 @@ g.arrangeLayers()
 						 [1,numLayers()]).</listitem>
 				 </varlistentry>
 				 <varlistentry>
+					 <term>layers()</term>
+					 <listitem>Returns a list of all layers in the graph. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
 					 <term>addLayer(int=0,int=0,int=0,int=0)</term>
 					 <listitem>addLayer(x,y,width,height) adds a new layer at the given position and
 						 with the given size. Returns the newly created Layer object.</listitem>
@@ -2797,6 +2826,209 @@ n.exportASCII("output.txt")
 				 <varlistentry>
 					 <term>importASCII(string)</term>
 					 <listitem>Prepends the content of the note by the content of the indicated file.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class ApplicationWindow (inherits QMainWindow)</title>
+			 <para>Manages the current project. The project from which a piece of Python code is
+				 excecuted is accessible via the module attribute <varname>scidavis.app</varname>.
+				 However, most of the time, this instance is used implicitly via methods copied to the
+				 global namespace by the default scidavisrc.py configuration file.</para>
+			 <programlisting width="80">
+for win in app.windows():
+	print win.name()
+app.activeFolder().save("subproject.sciprj")
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>table(string)</term>
+					 <listitem>Returns the table with the given name, or None if no such table exists.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newTable()</term>
+					 <listitem>Creates a new table with default settings (as if done using the menu) and
+						 returns it.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newTable(string, int=2, int=30)</term>
+					 <listitem>newTable(name, columns, rows) creates a new table with the given name and
+						 (optionally) numbers of columns and rows, and returns it. If the specified name
+						 is already in use, it is changed automatically to a unique name by appending a
+						 number to the requested name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>matrix(string)</term>
+					 <listitem>Returns the matrix with the given name, or None if no such matrix exists.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newMatrix()</term>
+					 <listitem>Creates a new matrix with default settings (as if done using the menu) and
+						 returns it.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newMatrix(string, int=32, int=32)</term>
+					 <listitem>newMatrix(name, rows, columns) creates a new matrix with the given name and
+						 (optionally) numbers of columns and rows, and returns it. If the specified name
+						 is already in use, it is changed automatically to a unique name by appending a
+						 number to the requested name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>graph(string)</term>
+					 <listitem>Returns the graph with the given name, or None if no such graph exists.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newGraph()</term>
+					 <listitem>Creates a new graph containing one empty layer (as if done using the menu) and
+						 returns it.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newGraph(string)</term>
+					 <listitem>newGraph(name) creates a new graph with the given name containing one empty
+						 layer (as if done using the menu) and returns it. If the specified name
+						 is already in use, it is changed automatically to a unique name by appending a
+						 number to the requsted name. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>note(string)</term>
+					 <listitem>Returns the note window with the given name, or None if no such note exists.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newNote()</term>
+					 <listitem>Creates a new empty note and returns it.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newNote(string)</term>
+					 <listitem>newNote(name) creates a new empty note with the given name and returns it.
+						 If the specified name is already in use, it is changed automatically to a unique
+						 name by generating a default name like &quot;Notes1&quot;. This is inconsistent
+						 with newTable(), newMatrix and newGraph() (which generate a unique name by
+						 appending a number to the <emphasis>requested</emphasis> name) and will probably
+						 change in a future release.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plot(Table, string, int=1, int=-1)</term>
+					 <listitem>plot(table, column, style, color) plots the named column of the given
+						 table. A new graph is created containing one layer, to which the curve is
+						 added. The new graph is returned. Optionally, style and color of the curve
+						 can be set, where color is an index in the palette used by &appname;
+						 for automatically assigning colors to new curves and style is one of the
+						 following codes:
+						 <variablelist spacing="compact">
+							 <varlistentry>
+								 <term>0</term><listitem>Line</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>1</term><listitem>Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>2</term><listitem>Line and Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>3</term><listitem>Columns</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>4</term><listitem>Area</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>5</term><listitem>Pie</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>6</term><listitem>Vertical drop lines</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>7</term><listitem>Splines and Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>8</term><listitem>Vertical steps</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>9</term><listitem>Histogram</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>10</term><listitem>Rows</listitem>
+							 </varlistentry>
+						 </variablelist>
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plot(Table, tuple of strings, int=1, int=-1)</term>
+					 <listitem>plot(table, (column1, column2, ...), style, color) works just like the
+						 plot method described above, but plots multiple columns together on the same
+						 layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>importImage(string)</term>
+					 <listitem>Reads an image from the specified file and returns a newly created matrix
+						 containing the gray-scale values (brightness) of the image's pixels.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>importImage()</term>
+					 <listitem>Ask the user to select an image file and imports it to a newly created
+						 matrix as described above. Returns the matrix.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plotContour(Matrix)</term>
+					 <listitem>Makes a contour plot from the given matrix in a newly created graph.
+						 Returns the graph.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plotColorMap(Matrix)</term>
+					 <listitem>Makes a contour plot from the given matrix, filling contour areas with
+						 colors of the default color map. Returns the newly created graph.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plotGrayScale(Matrix)</term>
+					 <listitem>Makes a gray scale plot from the given matrix in a newly created graph.
+						 Returns the graph.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>windows()</term>
+					 <listitem>Returns a list of all MDIWindow instances in the project.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>results</term>
+					 <listitem>The QTextEdit which holds the results log. Can be used to output custom
+						 results from your script, although the recommended way of doing this is to
+						 create a Note and set its text to what you want to output.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>activeFolder()</term>
+					 <listitem>Returns the folder which is currently being displayed.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>rootFolder()</term>
+					 <listitem>Returns the root folder of the project.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>saveFolder(Folder, string)</term>
+					 <listitem>DEPRECATED. &appname; 0.2.4 introduces the new method Folder.save(), which is the
+						 recommended way of saving folders to a new project file; unless you need the
+						 code to run on previous versions.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>renameWindow(MDIWindow, string)</term>
+					 <listitem>DEPRECATED. &appname; 0.2.4 introduces the new method MDIWindow.setName(),
+						 which is the recommended way of renaming windows; unless you need the code to run
+						 on previous versions.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>clone(MDIWindow)</term>
+					 <listitem>DEPRECATED. &appname; 0.2.4 introduces the new method MDIWindow.clone(),
+						 which is the recommended way of cloning windows; unless you need the code to run
+						 on previous versions.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPreferences(Layer)</term>
+					 <listitem>DEPRECATED. Prior to &appname; 0.2.4, it was necessary to call this on a
+						 layer created using Graph.addLayer() if you wanted the layer to be intialized
+						 correctly. This is now done automatically as part of addLayer(); doing so again
+						 doesn't hurt, but is not necessary any more. 
 					 </listitem>
 				 </varlistentry>
 			 </variablelist>
