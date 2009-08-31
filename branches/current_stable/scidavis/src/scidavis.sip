@@ -212,6 +212,12 @@ public:
 	if (app) app->renameWindow(sipCpp, *a0);
 %End
 
+	MyWidget *clone() /NoDerived/;
+%MethodCode
+	ApplicationWindow *app = sipscidavis_app();
+	if (app) sipRes = app->clone(sipCpp);
+%End
+
   CaptionPolicy captionPolicy();
   void setCaptionPolicy(CaptionPolicy);
 
@@ -970,6 +976,11 @@ public:
   int layers() /PyName=numLayers/;
   Graph* layer(int num);
   Graph* addLayer(int = 0, int = 0, int = 0, int = 0);
+%MethodCode
+	sipRes = sipCpp->addLayer(a0, a1, a2, a3);
+	ApplicationWindow *app = sipscidavis_app();
+	if (app) app->setPreferences(sipRes);
+%End
 
   void setCols(int);
   void setRows(int);
@@ -1006,7 +1017,8 @@ class Note: MyWidget
 #include "src/Note.h"
 %End
 public:
-  void execute() const;
+// TODO: Calling execute()/executeAll() from Python currently doesn't work reliably!
+  void execute();
   void executeAll();
   bool autoexec() const;
   void setAutoexec(bool);
@@ -1023,6 +1035,7 @@ class ApplicationWindow: QMainWindow
 %TypeHeaderCode
 #include "src/ApplicationWindow.h"
 #include "src/ColorBox.h"
+#include <qwt_symbol.h>
 %End
 %ConvertToSubClassCode
 // we have to do this to override casting in qt/qobject.sip
@@ -1041,7 +1054,7 @@ public:
   Table* newTable();
   Table* newTable(const QString&, int=2, int=30);
 %MethodCode
-  sipRes = sipCpp->newTable(*a0, a2, a1);
+  sipRes = sipCpp->newTable(a2, a1, *a0);
 %End
   Matrix* matrix(const QString&);
 %MethodCode
@@ -1058,12 +1071,37 @@ public:
     sipRes = sipCpp->projectFolder()->graph(*a0, true);
 %End
   MultiLayer* newGraph();
+  MultiLayer* newGraph(const QString &name);
+%MethodCode
+	// Code copied from ApplicationWindow::newGraph() and modified to actually use the requested
+	// name if it is already unique.
+	if (sipCpp->alreadyUsedName(*a0))
+		sipRes = sipCpp->multilayerPlot(sipCpp->generateUniqueName(*a0));
+	else
+		sipRes = sipCpp->multilayerPlot(*a0);
+	if (sipRes) {
+		Graph *g = sipRes->addLayer();
+		sipCpp->setPreferences(g);
+		g->newLegend();
+		g->setAutoscaleFonts(false);
+		g->setIgnoreResizeEvents(false);
+		sipRes->arrangeLayers(false, false);
+		sipRes->adjustSize();
+		g->setAutoscaleFonts(sipCpp->autoScaleFonts);//restore user defined fonts behaviour
+		g->setIgnoreResizeEvents(!sipCpp->autoResizeLayers);
+		sipCpp->customMenu(sipRes);
+	}
+%End
   Note *note(const QString&);
 %MethodCode
   sipRes = sipCpp->current_folder->note(*a0, false);
   if(!sipRes)
     sipRes = sipCpp->projectFolder()->note(*a0, true);
 %End
+	// TODO: If name is already taken, this chooses a default name like "Notes1",
+	// which is inconsistent with newTable, newMatrix and newGraph. Not changing in
+	// a bugfix release though, since an unexpected change in behaviour may be even
+	// more confusing than the inconsistency.
   Note* newNote(const QString& = QString::null);
   MultiLayer *plot(Table*, SIP_PYTUPLE, int style=1, int color=-1) /NoDerived/;
 %MethodCode
@@ -1084,11 +1122,21 @@ public:
 	  PyErr_Format(PyExc_ValueError, "Invalid table in argument to plot().");
   } else {
     sipRes = sipCpp->multilayerPlot(a0, l, a2);
-    if (a3 >= 0) {
-       QwtPlotCurve * c = sipRes->activeGraph()->curve(0);
-       QPen pen = c->pen();
-       pen.setColor(ColorBox::color(a3));
-       c->setPen(pen);
+    if (sipRes && sipRes->activeGraph() && a3 >= 0) {
+		 for (int c =0; c < sipRes->activeGraph()->curves(); c++) {
+			 QwtPlotCurve *curve = sipRes->activeGraph()->curve(c);
+			 QPen pen = curve->pen();
+			 pen.setColor(ColorBox::color(a3));
+			 curve->setPen(pen);
+			 QwtSymbol symbol = curve->symbol();
+			 pen = symbol.pen();
+			 pen.setColor(ColorBox::color(a3));
+			 symbol.setPen(pen);
+			 QBrush brush = symbol.brush();
+			 brush.setColor(ColorBox::color(a3));
+			 symbol.setBrush(brush);
+			 curve->setSymbol(symbol);
+		 }
     }
   }
 %End
@@ -1106,6 +1154,14 @@ public:
        QPen pen = c->pen();
        pen.setColor(ColorBox::color(a3));
        c->setPen(pen);
+		 QwtSymbol symbol = c->symbol();
+		 pen = symbol.pen();
+		 pen.setColor(ColorBox::color(a3));
+		 symbol.setPen(pen);
+		 QBrush brush = symbol.brush();
+		 brush.setColor(ColorBox::color(a3));
+		 symbol.setBrush(brush);
+		 c->setSymbol(symbol);
     }
   }
 %End
@@ -1130,6 +1186,11 @@ public:
   Folder* projectFolder() /PyName=rootFolder/;
 
   void renameWindow(MyWidget *, const QString &);
+
+  // Prior to SciDAVis 0.2.4, it was necessary to call this on a layer created using
+  // Graph.addLayer() if you wanted the layer to be intialized correctly. This is now
+  // done automatically as part of addLayer(); doing so again doesn't hurt, but is not necessary
+  // any more.
   void setPreferences(Graph*);
 
   MyWidget* clone(MyWidget*);
@@ -1759,6 +1820,13 @@ public:
   Note *note(const QString &name, bool recursive=false);
 
   Folder* rootFolder();
+
+  void save(const QString &filename) /NoDerived/;
+%MethodCode
+	ApplicationWindow *app = sipscidavis_app();
+	if (app)
+		app->saveFolder(sipCpp, *a0);
+%End
 
 private:
   Folder(const Folder&);
