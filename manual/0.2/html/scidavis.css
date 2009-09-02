@@ -1,9 +1,9 @@
 
-body {
-	font-family:			Helvetica, sans-serif;
-	font-size:			14px;
+body{
+	font-family:			Times, serif;
+	font-size:			16px;
 	text-align:			justify;
-	background-color:		#E0E0E0;
+	background-color:		white;
 	margin-right:			10px;
 	margin-left:			10px;
 	margin-top:			5px;
@@ -13,7 +13,7 @@ body {
 		links
 */
 a {
-	font-size:			14px;
+	font-size:			16px;
 }
 a[href] {
 	color:				#4040FF;
@@ -29,6 +29,51 @@ a[href]:visited {
 a[href]:active {
 	color:				red;
 }
+code.email a.email {
+	font-size:			14px;
+}
+/*
+		Navigation header
+*/
+div.navheader {
+	padding-left: 10px ;
+	padding-right: 10px ;
+	color:				#022a63;
+	background: 			#8FAFED url('common/navi_bar.png') repeat-x top;
+}
+div.navheader tr th {
+	color:				#022a63;
+	font-size:			22px;
+}
+div.navheader tr td a[href]:visited {
+	color:				#022a63;
+	font-size:			16px;
+}
+div.navheader tr td a[href]:active {
+	color:				#022a63;
+	font-size:			16px;
+}
+/*
+		Navigation footer
+*/
+div.navfooter {
+	padding-left: 10px ;
+	padding-right: 10px ;
+	color:				#022a63;
+	background: 			#8FAFED url('common/navi_bar.png') repeat-x top;
+}
+div.navfooter tr td {
+	color:				#022a63;
+	font-size:			16px;
+}
+div.navfooter tr td a[href]:visited {
+	color:				#022a63;
+	font-size:			16px;
+}
+div.navfooter tr td a[href]:active {
+	color:				#022a63;
+	font-size:			16px;
+}
 /*
 		title page 
 */
@@ -41,9 +86,10 @@ div.TITLEPAGE {
 div.TITLEPAGE h1.title {
 	margin-left:			0px;
 	margin-right:			0px;
-	padding-left:			300px;
-	padding-bottom:			100px;
-	background-image:		url(common/fond-titre.png) ;
+/*	padding-left:			300px;*/
+	text-align:			center;
+	padding-bottom:			20px;
+	background-image:		url(common/fond-titre-1.png) ;  
 }
 
 div.TITLEPAGE h1.title a {
@@ -108,11 +154,11 @@ div.sect1 h1.sect1 a {
 /*
 		Titles of level 2 sections
 */
-div.sect2 h2.sect2 {
+div.sect2 h2.title {
 	color:				blue;
 	background-color:		#E0E0E0;
 	background-image:		none;
-	text-decoration:		none;
+	text-decoration:		underline;
 	font-size:			16px;
 	padding:			5px;
 	margin-right:			-5px;
@@ -131,23 +177,37 @@ div.sect2 h2.sect2 a {
 		table of content at the beginning of each chapter
 */
 div.TOC {
-	background-color:		#FFFFC0;
-	margin-right:			50px;
-	margin-left:			50px;
-	padding:			5px;
+	background: #8FAFED url('navi_bar.png') repeat-x top;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	margin-left: 150px;
+	margin-right: 150px;
+	padding: 10px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #000000;
 }
 div.TOC dt {
-	font-size:			14px;
+	color:				#022a63;
+	font-weight: bold;
+	font-size:			16px;
 	margin-left:			20px;
 }
 div.TOC a {
-	font-size:			14px;
-	color:				#008080;
+	font-size:			16px;
+	color:				#022a63;
+	font-weight: bold;
 	margin-left:			40px;
 	text-decoration:		none;
 }
 div.TOC a:hover {
-	color:				#800000;
+	font-weight: bold;
+	color:				#022a63;
+	text-decoration:		underline;
+}
+div.TOC a:visited {
+	font-weight: bold;
+	color:				#022a63;
 	text-decoration:		underline;
 }
 /*
@@ -234,6 +294,17 @@ a span strong {
 /*	font-style:			normal; */
 	text-decoration:		italic;
 	font-weight:			normal;
+}
+/*
+		tables
+*/
+div.informaltable table thead tr th {
+	font-weight:			bold;
+	font-size:			14px;
+}
+div.informaltable table tbody tr td {
+	font-weight:			normal;
+	font-size:			14px;
 }
 /*
 		table of content
