@@ -1310,7 +1310,16 @@ bool AxesDialog::updatePlot()
 		else if (format == Graph::Time || format == Graph::Date || format == Graph::DateTime)
 		{
 			QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
-			if ((int)lst.count() >= 2)
+			if (lst.size() < 2 || lst[0].isEmpty()) {
+				lst = QStringList();
+				if (format == Graph::Time)
+					lst << QTime(0,0,0).toString();
+				else if (format == Graph::Date)
+					lst << QDate(1,1,1).toString("YYYY-MM-DD");
+				else
+					lst << QDateTime(QDate(1,1,1), QTime(0,0,0)).toString("YYYY-MM-DDTHH:MM:SS");
+				lst << boxFormat->currentText();
+			} else
 				lst[1] = boxFormat->currentText();
 			formatInfo[axis]  = lst.join(";");
 		}
@@ -1600,7 +1609,17 @@ void AxesDialog::updateTickLabelsList(bool on)
 	else if (type == Graph::Time || type == Graph::Date || type == Graph::DateTime)
 	{
 		QStringList lst = formatInfo[axis].split(";", QString::SkipEmptyParts);
-		lst[1] = boxFormat->currentText();
+		if (lst.size() < 2 || lst[0].isEmpty()) {
+			lst = QStringList();
+			if (type == Graph::Time)
+				lst << QTime(0,0,0).toString();
+			else if (type == Graph::Date)
+				lst << QDate(1,1,1).toString("YYYY-MM-DD");
+			else
+				lst << QDateTime(QDate(1,1,1), QTime(0,0,0)).toString("YYYY-MM-DDTHH:MM:SS");
+			lst << boxFormat->currentText();
+		} else
+			lst[1] = boxFormat->currentText();
 		formatInfo[axis]  = lst.join(";");
 	}
 	else
@@ -1676,7 +1695,17 @@ void AxesDialog::setLabelsNumericFormat(int)
 	else if (type == Graph::Time || type == Graph::Date || type == Graph::DateTime)
 	{
 		QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
-		lst[1] = boxFormat->currentText();
+		if (lst.size() < 2 || lst[0].isEmpty()) {
+			lst = QStringList();
+			if (type == Graph::Time)
+				lst << QTime(0,0,0).toString();
+			else if (type == Graph::Date)
+				lst << QDate(1,1,1).toString("YYYY-MM-DD");
+			else
+				lst << QDateTime(QDate(1,1,1), QTime(0,0,0)).toString("YYYY-MM-DDTHH:MM:SS");
+			lst << boxFormat->currentText();
+		} else
+			lst[1] = boxFormat->currentText();
 		formatInfo[axis]  = lst.join(";");
 	}
 	else
