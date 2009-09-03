@@ -288,7 +288,7 @@
 <sect3 id="sec-plot-details">
 <title>"Plot details" window</title>
 
-<para>This window has two parts, the left one shows a tree view of the main elements of the plot: the layers and the data series which are plotted in each layer. The main dialog is activated by selecting the &format-plot-lnk; from the &format-menu-lnk;. If it is activated by a double click on a curve in the plot, the same dialog will be opened with the corresponding curve selected (see <link linkend="custom-curves-dialog-lines">next section</link> for details). The right section of the window shows the options which are available for the selected entity. If you do some changes, don't forget to click on the <emphasis>Apply</emphasis> button before switching to another entity.</para>
+<para>This window has two parts, the left one shows a tree view of the main elements of the plot: the layers and the data series which are plotted in each layer. The main dialog is activated by selecting the &format-plot-lnk; from the &format-menu-lnk;. If it is activated by a double click on a curve in the plot, the same dialog will be opened with the corresponding curve selected (see <link linkend="sec-plot-details-series">next section</link> for details). The right section of the window shows the options which are available for the selected entity. If you do some changes, don't forget to click on the <emphasis>Apply</emphasis> button before switching to another entity.</para>
 
 <sect4 id="sec-plot-details-layer">
 <title>Options for the layer</title>
@@ -336,7 +336,7 @@
 <para>The button <emphasis>Worksheet</emphasis> can be used to access to the table which contains the columns selected.</para>
 <para>The dialog presented in figure <xref xrefstyle="select: labelnumber" linkend="fig-format-lines"/> is activated for plots drawn with <emphasis>symbols</emphasis>, <emphasis>line+symbols</emphasis>, <emphasis>lines</emphasis>, <emphasis>vertical drop lines</emphasis>, <emphasis>steps</emphasis> and <emphasis>splines</emphasis>. The first tab labelled <emphasis>axis</emphasis> can be used to select the axis which are used for each curve of the plot: bottom (default) or top for abscissae, and left (default) or right for Y values. Beware that whatever your choice the right and top axis will not be drawn, you need to use the &format-axes-lnk; to obtain a plot in which these axis are shown.</para>
 
-<figure id="fig-format-lines">
+<figure id="fig-details-axes">
   <title>The <emphasis>Plot details</emphasis> Dialog: Choice of axes.</title>
   <mediaobject> 
     <imageobject>
@@ -406,7 +406,7 @@
 <!--
 *******************************************************************
 
-		preferences and use of template
+		preferences
 
 *******************************************************************
 -->
@@ -453,6 +453,7 @@
       </imageobject>
     </mediaobject>
   </informalfigure>
+  <para>The last tab allows to modify two parameters for the printing of plots. The first one is used to re-scale the plot in order to fit the chosen paper size, the other one to print crops marks around the plot (for cutting).</para>
   <informalfigure id="fig-preferences-dialog-3e">
     <mediaobject>
       <imageobject>
@@ -471,8 +472,17 @@
 -->
 
 <sect2 id="sec-template-2d-plot">
-<title>Working with templates</title>
-<para></para>
+  <title>Working with templates</title>
+  <para>If you want to build several plots based on the same model, you can use template files. This allows to save geometry of plots, the values, fonts and colors of labels, etc (see &open-template-lnk; for details on the items which are saved).</para>
+  <para>In the following example, the pristine figure is the <link linkend="fig-simple-2dplot-3">simple 2D plot</link> presented above, it was saved as a template and an empty plot was created by the &open-template-cmd;.</para>
+  <informalfigure id="fig-open-template">
+    <mediaobject> 
+      <imageobject>
+        <imagedata  format="PNG" fileref="pics/template1.png"/>
+      </imageobject>
+    </mediaobject>
+  </informalfigure>
+  <para>You just have to add curves with the &add-remove-curve-lnk;, but the style used to draw the curves is not kept in the template.</para>
 </sect2>
 
 </sect1>
@@ -837,17 +847,17 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
   </mediaobject>
 </figure>
 
-<para>You can then customize this plot by opening the <link linkend="sec-customize-3d-plot">Surface plot options dialog</link>. You can modify the axis ranges and parameters, add a title, change the colors of the different items, and modify the aspect ratio of the plot. In addition, you can use the different commands of the &plot3d-toolbar-lnk; to add grids on the walls or to modify the style of the plot. After some modifications, you can obtain the plot presented above.</para>
+<para>You can then customize this plot by opening the <link linkend="sec-customize-3d-plot">Surface plot options dialog</link>. You can modify the axis ranges and parameters, add a title, change the colors of the different items, and modify the aspect ratio of the plot. In addition, you can use the different commands of the &d3-surface-toolbar-lnk; to add grids on the walls or to modify the style of the plot. After some modifications, you can obtain the plot presented above.</para>
 
 <para>If you want to modify the function itself, you can use the <command>surface...</command> command which can be activated from the context menu with a right click on the 3D plot. This will re-open the <emphasis>define surface function dialog box</emphasis>.</para>
 
 <para>The 3D plotting system uses openGL, therefore these plots can be manipulated with the mouse:</para>
 <itemizedlist>
   <listitem>
-    <para>by clicking on the left button and moving the mouse, you can change the viewpoint of the plot. You can come back to the default viewpoint by clicking on the &reset-rotation-icon; icon of the &plot3d-toolbar-lnk;.</para>
+    <para>by clicking on the left button and moving the mouse, you can change the viewpoint of the plot. You can come back to the default viewpoint by clicking on the &reset-rotation-icon; icon of the &d3-surface-toolbar-lnk;.</para>
   </listitem>
   <listitem>
-    <para>The ??? can be used to zoom or unzoom the plot. You can come back to the default zoom value by clicking on the &autoscale-icon; icon of the &plot3d-toolbar-lnk;.</para>
+    <para>The ??? can be used to zoom or unzoom the plot. You can come back to the default zoom value by clicking on the &autoscale-icon; icon of the &d3-surface-toolbar-lnk;.</para>
   </listitem>
 </itemizedlist>
 
@@ -928,8 +938,8 @@ The 3D plots use OpenGL so you can easily rotate, scale and shift them with the 
       </imageobject>
     </mediaobject>
   </informalfigure>
-  <para>The last tab <emphasis>General</emphasis> is used to modify some global parameters of the plots. The <emphasis>orthogonal</emphasis> check box allows to change the 3D view from conventional perspective to orthogonal view. It correspond to the &perspective-icon; icon of the &plot3d-toolbar-lnk;. The parameter <emphasis>resolution</emphasis> is 1 by default, it indicates that all data points are used to draw the contour curves. If the line network is too dense, you can increase this parameter: with a value of 2 only 1 value over 2 will be used.</para>
-  <para>By default, the plot use the same graphic scales for the three axes. If the ranges are very different, you can adjust the size of the plot by changing the zoom over the different axes. In the example presented above, X and Y ranges are 10 while Z range is 0.2, then a zoom of 3000% should be used for Z axis if the zooms on X and Y are kept at 100%. You can also use the &autoscale-icon; icon of the &plot3d-toolbar-lnk; to adjust automatically these zoom values.</para>
+  <para>The last tab <emphasis>General</emphasis> is used to modify some global parameters of the plots. The <emphasis>orthogonal</emphasis> check box allows to change the 3D view from conventional perspective to orthogonal view. It correspond to the &perspective-icon; icon of the &d3-surface-toolbar-lnk;. The parameter <emphasis>resolution</emphasis> is 1 by default, it indicates that all data points are used to draw the contour curves. If the line network is too dense, you can increase this parameter: with a value of 2 only 1 value over 2 will be used.</para>
+  <para>By default, the plot use the same graphic scales for the three axes. If the ranges are very different, you can adjust the size of the plot by changing the zoom over the different axes. In the example presented above, X and Y ranges are 10 while Z range is 0.2, then a zoom of 3000% should be used for Z axis if the zooms on X and Y are kept at 100%. You can also use the &autoscale-icon; icon of the &d3-surface-toolbar-lnk; to adjust automatically these zoom values.</para>
 
 
 <!--

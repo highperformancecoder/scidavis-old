@@ -260,7 +260,7 @@ revision history. (see installation appendix comment) -->
 
   <para>The values which are stored in a matrix can be obtained from a function of the form z=f(i,j) or z=f(x,y) with the &assign-formula-lnk;. They can also be read from a file with the &import-ascii-lnk; which allows to read a file in a table, then the table can be converted to a matrix with the &convert-to-matrix-lnk; of the &matrix-menu-lnk;.</para>
   <para>As in the case of tables, a property tag can be shown or hidden by clicking on the vertical button on the right.</para>
-  <para>Through the &matrix-menu-lnk;, several operations can be done on a matrix like transposition (&transpose-lnk;), mirroring (&mirror-horizontally-lnk; and &mirror-vertically-lnk;), inversion (&invert-lnk;), computation of the determinant (&determinant-lnk;). The data of a matrix can then be used to build a 3D plot with the commands present in the &plot3d-menu-lnk; and in &plot3d-toolbar-lnk;.</para>
+  <para>Through the &matrix-menu-lnk;, several operations can be done on a matrix like transposition (&transpose-lnk;), mirroring (&mirror-horizontally-lnk; and &mirror-vertically-lnk;), inversion (&invert-lnk;), computation of the determinant (&determinant-lnk;). The data of a matrix can then be used to build a 3D plot with the commands present in the &plot3d-menu-lnk; and in &d3-surface-toolbar-lnk;.</para>
 
 </sect2>
 

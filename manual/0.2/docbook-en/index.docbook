@@ -14,7 +14,7 @@
 -->
   <!ENTITY appname "SciDAVis">
   <!ENTITY kappname "&appname;">
-  <!ENTITY version "0.2">
+  <!ENTITY version "0.2.3">
   <!ENTITY kappversion "&version;">
   <!ENTITY kappdirectory "scidavis">
   <!ENTITY kappdownload "http://sourceforge.net/project/scidavis" >

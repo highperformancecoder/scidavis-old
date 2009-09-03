@@ -123,21 +123,7 @@
 <!ENTITY view-menu-lnk '<link linkend="sec-view-menu">View menu</link>'>
   <!ENTITY aff-toolbars-cmd  "<command>Toolbars</command>">
     <!ENTITY aff-toolbars-lnk '<link linkend="aff-toolbars-cmd"><command>Toolbars</command> command</link>'>
-  <!ENTITY aff-toolbar-file-cmd  "<command>Toolbars&rarr;File</command>">
-    <!ENTITY aff-toolbar-file-lnk '<link linkend="aff-toolbar-file-cmd"><command>Toolbars&rarr;File</command> command</link>'>
-  <!ENTITY aff-toolbar-edit-cmd  "<command>Toolbars&rarr;Edit</command>">
-    <!ENTITY aff-toolbar-edit-lnk '<link linkend="aff-toolbar-edit-cmd"><command>Toolbars&rarr;Edit</command> command</link>'>
-  <!ENTITY aff-toolbar-graph-cmd  "<command>Toolbars&rarr;Graph</command>">
-    <!ENTITY aff-toolbar-graph-lnk '<link linkend="aff-toolbar-graph-cmd"><command>Toolbars&rarr;Graph</command> command</link>'>
-  <!ENTITY aff-toolbar-plot-cmd  "<command>Toolbars&rarr;Plot</command>">
-    <!ENTITY aff-toolbar-plot-lnk '<link linkend="aff-toolbar-plot-cmd"><command>Toolbars&rarr;Plot</command> command</link>'>
-  <!ENTITY aff-toolbar-table-cmd  "<command>Toolbars&rarr;Table</command>">
-    <!ENTITY aff-toolbar-table-lnk '<link linkend="aff-toolbar-table-cmd"><command>Toolbars&rarr;Table</command> command</link>'>
-  <!ENTITY aff-toolbar-matrix-plot-cmd  "<command>Toolbars&rarr;Matrix Plot</command>">
-    <!ENTITY aff-toolbar-matrix-plot-lnk '<link linkend="aff-toolbar-matrix-plot-cmd"><command>Toolbars&rarr;Matrix Plot</command> command</link>'>
-  <!ENTITY aff-toolbar-3d-surface-cmd  "<command>Toolbars&rarr;3D surface</command>">
-    <!ENTITY aff-toolbar-3d-surface-lnk '<link linkend="aff-toolbar-3d-surface-cmd"><command>Toolbars&rarr;3D surface</command> command</link>'>
-  <!ENTITY plot-wizard-cmd  "<command>Plot Wizard</command>">
+    <!ENTITY plot-wizard-cmd  "<command>Plot Wizard</command>">
     <!ENTITY plot-wizard-lnk '<link linkend="plot-wizard-cmd"><command>Plot Wizard</command> command</link>'>
     <!ENTITY plot-wizard-key "<keycode>CTRL+ALT+W</keycode>">
     <!ENTITY plot-wizard-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/wizard.png"/></imageobject></inlinemediaobject>'>
@@ -682,7 +668,7 @@
 <!--
                   plot3d toolbar
 -->
-<!ENTITY plot3d-toolbar-lnk '<link linkend="sec-plot3d-toolbar">plot3d toolbar</link>'>
+<!ENTITY d3-surface-toolbar-lnk '<link linkend="sec-3d-surface-toolbar">3D surface toolbar</link>'>
   <!ENTITY toolbar-cmd  "<command>plot3d&rarr;3D surface</command>">
     <!ENTITY toolbar-lnk '<link linkend="toolbar-cmd"><command>plot3d&rarr;3D surface</command> command</link>'>
   <!ENTITY frame-cmd  "<command>Frame</command>">

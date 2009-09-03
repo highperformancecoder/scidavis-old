@@ -13,17 +13,18 @@ The active items in the menus depend on the active window in the project. If the
 <sect1 id="sec-file-menu">
 <title>The File Menu</title>
 
-<para>These commands can also be done by clicking on the <emphasis>New Project</emphasis> icon from the &file-toolbar-lnk;. In order to make this toolbar visible, use the &aff-toolbar-file-lnk; from the &view-menu-lnk;.</para>
+<para>These commands can also be done by clicking on the <emphasis>New Project</emphasis> icon from the &file-toolbar-lnk;. In order to make this toolbar visible, use the &aff-toolbars-lnk; from the &view-menu-lnk;.</para>
 
-<variablelist id="new-cmd">
-<varlistentry> 
+<variablelist>
+<varlistentry id="new-cmd"> 
   <term>File&rarr; New &rarr;</term>
   <listitem>
      <variablelist>
        <varlistentry id="new-project-cmd">
           <term>&new-project-cmd; (&new-project-key;)</term>
           <listitem>
-             <para>Creates a new &appname; project file. If a project is open and saved, it will be closed. If a project is open is not saved, a dialog will be open to ask if the current project has to be saved. The new project will only contain an empty table.</para>
+             <para>Creates a new &appname; project file. The project is the main container of &appname;, it can include tables, plots and notes. These objects can be organized in folders. If a project is open and saved, it will be closed. If a project is open is not saved, a dialog will be open to ask if the current project has to be saved. The new project will only contain an empty table.</para>
+	     <para>These commands can also be done by clicking on the <emphasis>New Project</emphasis> icon from the &file-toolbar-lnk;. In order to make this toolbar visible, use the &aff-toolbars-lnk; from the &view-menu-lnk;.</para>
           </listitem>
        </varlistentry>
        <varlistentry id="new-table-cmd">
@@ -38,14 +39,14 @@ The active items in the menus depend on the active window in the project. If the
                  </imageobject>
                </mediaobject>
              </informalfigure>
-             <para>The properties of each column (format of numbers, width, etc) can be modified by the commands of the &table-menu-lnk;. See the <link linkend="sec-intro-table">table section</link> for more details.</para>
+             <para>The properties of each column (format of numbers, width, etc) can be modified by the commands of the &table-menu-lnk;. See the <link linkend="sec-intro-table">table section</link> for more details. There are then many different ways to insert data inside a table: they can be entered one by one, copied and pasted from another software like a spreadsheet, imported from a text file (see &import-ascii-lnk;), or filled with the result of a function as explained in the section <link linkend="sec-table-function-plot">Filling of a table with the values of a function</link>.</para>
           </listitem>
        </varlistentry>
        <varlistentry id="new-matrix-cmd">
           <term>&new-matrix-cmd; (&new-matrix-key;)</term>
           <listitem>
              <indexterm><primary>Matrix</primary><secondary>Create a new matrix</secondary></indexterm>
-             <para>Creates a new Matrix into the project. The empty matrix will have 32x32 cells, these dimensions can be changed by the &matrix-dimensions-lnk; of the &matrix-menu-lnk;</para>
+             <para>Creates a new Matrix into the project. The empty matrix will have 32x32 cells, these dimensions can be changed by the &matrix-dimensions-lnk; of the &matrix-menu-lnk;. The default coordinates are ranging between 1 and 10 for x and y.</para>
              <informalfigure id="fig-new-matrix">
                <mediaobject> 
                  <imageobject>
@@ -89,6 +90,14 @@ The active items in the menus depend on the active window in the project. If the
           <term>&new-function-plot-cmd; (&new-function-plot-key;)</term>
           <listitem>
              <para>Opens a dialog allowing to create a plot by specifying an analytical function. See the <link linkend="sec-2d-plot-from-function">2D plot section</link> of the tutorial for a general overview of this function.</para>
+             <figure id="fig-new-function-plot-dialog">
+               <title>The &new-function-plot-cmd; dialog box.</title>
+               <mediaobject> 
+                 <imageobject>
+                   <imagedata  format="PNG" fileref="pics/new-function-plot.png"/>
+                 </imageobject>
+               </mediaobject>
+             </figure>
              <para>This function can be defined in cartesian, parametric or polar coordinates, see the &add-function-lnk; for more details.</para>
           </listitem>
        </varlistentry>
@@ -111,11 +120,23 @@ The active items in the menus depend on the active window in the project. If the
     </variablelist>
   </listitem>
 </varlistentry> 
+<!--
+		Opening projects
+-->
 <varlistentry id="open-cmd"> 
   <term>File &rarr; &open-cmd; (&open-key;)</term>
   <listitem>
      <para>Opens an existing &appname; project file (default file extension <emphasis>.&file-ext;</emphasis>). If your project has been save in a compressed format, you must select the <emphasis>.&file-ext;.gz</emphasis> file format.</para>
-     <para>This command can also be used to open projects which have been built with the <emphasis>Origin</emphasis> software (extension <emphasis>.opj</emphasis>).</para>
+     <figure id="fig-open-dialog">
+       <title>The &new-surface-3d-plot-cmd; dialog box.</title>
+       <mediaobject> 
+	 <imageobject>
+	   <imagedata  format="PNG" fileref="pics/open-dialog.png"/>
+         </imageobject>
+       </mediaobject>
+     </figure>
+     <para>This command can also be used to open projects which have been built with the <emphasis>Qtiplot</emphasis> software (extension <emphasis>.qti</emphasis>) if the version used was below 0.9. By clicking on the <emphasis>Advanced</emphasis> button, an additional option appears which allows to insert a project in another as a new folder.</para>
+     <!--<para>This command can also be used to open projects which have been built with the <emphasis>Origin</emphasis> software (extension <emphasis>.opj</emphasis>).</para>-->
   </listitem>
 </varlistentry>
 
@@ -123,7 +144,7 @@ The active items in the menus depend on the active window in the project. If the
   <term>File&rarr; &recent-projects-cmd;</term>
   <listitem>
      <para>Opens a list of the most recently used &appname; project files. You can open one of these files by selecting it from the list. If the file doesn't exist anymore an error message will pop-out and the file will be automatically deleted from the list.</para>
-  </listitem>
+   </listitem>
 </varlistentry> 
 <!--
 		Insertion of images
@@ -132,6 +153,14 @@ The active items in the menus depend on the active window in the project. If the
   <term>File&rarr; &open-image-file-cmd; (&open-image-file-key;)</term>
   <listitem>
      <para>This command loads an image file in a &appname; project. This image can be resized and then inserted in another 2D plot. It is in this case similar to the &add-image-lnk;. This image can also be used to generate an intensity matrix (see the &import-image-lnk;).</para>
+     <figure id="fig-open-image-file">
+       <title>The result of &open-image-file-cmd;.</title>
+       <mediaobject> 
+	 <imageobject>
+	   <imagedata  format="PNG" fileref="pics/open-image-file.png"/>
+         </imageobject>
+       </mediaobject>
+     </figure>
   </listitem>
 </varlistentry>
 <varlistentry id="import-image-cmd"> 
@@ -145,11 +174,11 @@ The active items in the menus depend on the active window in the project. If the
         </imageobject>
       </mediaobject>
     </informalfigure>
-	 <para>This example shows the 3D plot which has been drawn from the matrix obtained with the &appname; logo.</para>
+    <para>This example shows the 3D plot which has been drawn from the matrix obtained with the &appname; logo.</para>
   </listitem>
 </varlistentry>
 <!--
-		export or print plots
+		Saving projects
 -->
 <varlistentry id="save-project-cmd"> 
   <term>File&rarr; &save-project-cmd; (&save-project-key;)</term>
@@ -207,21 +236,7 @@ The active items in the menus depend on the active window in the project. If the
          </tbody>
        </tgroup>
      </informaltable>
-
-<para>In the following example, the first figure is the initial plot saved as a template, and the second one is the empty plot created by the &open-template-cmd;.</para>
-     <informalfigure id="fig-open-template">
-       <mediaobject> 
-         <imageobject>
-           <imagedata  format="PNG" fileref="pics/template2.png"/>
-         </imageobject>
-       </mediaobject>
-       <mediaobject> 
-         <imageobject>
-           <imagedata  format="PNG" fileref="pics/template1.png"/>
-         </imageobject>
-       </mediaobject>
-     </informalfigure>
-     <para>You just have to add curves with the &add-remove-curve-lnk;, but the style used to draw the curves is not kept in the template.</para>
+     <para>You just have to add curves with the &add-remove-curve-lnk;, but the style used to draw the curves is not kept in the template. See the <xref linkend="sec-template-2d-plot"/>.</para>
   </listitem>
 </varlistentry> 
 <varlistentry id="save-as-template-cmd">
@@ -237,6 +252,14 @@ The active items in the menus depend on the active window in the project. If the
   <term>File &rarr; &export-graph-cmd;</term>
   <listitem>
   <para>The plot can be exported into several different image formats. You can define some parameters to customize your image file by checking the <emphasis>advanced options</emphasis> button. Depending on the chosen image format, the available options are not the same.</para>
+    <figure id="fig-export-graph">
+      <title>The &export-graph-current-cmd; dialog.</title>
+       <mediaobject> 
+        <imageobject>
+          <imagedata  format="PNG" fileref="pics/export-graph.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
   <para>For <emphasis>tif, bmp, pbm, jpeg, xbm, pgm, ppm</emphasis> image formats, the quality of the image cannot be controlled, and these formats cannot handle transparency. Therefore, there is no need to check for advanced options.</para>
   <para> For <emphasis>jpeg</emphasis> and <emphasis>png</emphasis>, Image Quality parameter ranges between 0 and 100% and defines the compression ratio. The higher it is, the best the quality is but the larger the file is.</para>
     <informalfigure id="fig-export-graph-bmp">
@@ -249,14 +272,13 @@ The active items in the menus depend on the active window in the project. If the
   <para>For <emphasis>png</emphasis>, <emphasis>tif</emphasis> and <emphasis>xpm</emphasis>, you can choose to use a transparent background.</para>
   <para id="export-to-pdf-cmd">For <emphasis>eps, ps</emphasis> and <emphasis>pdf</emphasis> file format, the option dialog is different. The parameters availables are: the size of the paper which is used to draw the plot, and the orientation of the paper sheet. You can choose to keep or not the aspect ratio of the plot, in the last case it will be adapted to the sheet size and orientation.</para>
   <para>In addition, you can define the resolution. The default value is 84. If you increase this parameter, the quality of the graphic elements will be better (but the overall size of the plot will be unchanged).</para>
-    <figure id="fig-export-graph-eps">
-      <title>The &export-graph-current-cmd; dialog.</title>
+   <informalfigure id="fig-export-graph-eps">
       <mediaobject> 
         <imageobject>
           <imagedata  format="PNG" fileref="pics/export-graph1.png"/>
         </imageobject>
       </mediaobject>
-    </figure>
+    </informalfigure>
   <para>The last format which can be selected is the Scalable Vector Graphic format. With this format, the files can be modified in vector drawing software such as <ulink url="http://www.sodipodi.com/index.php3">Sodipodi</ulink>, <ulink url="http://www.inkscape.org/">Inkscape</ulink> or <ulink url="http://www.openoffice.org/">OpenOffice Draw</ulink>. You can therefore build more complex images from the pristine &appname; plot.</para>
      <variablelist>
        <varlistentry id="export-graph-current-cmd">
@@ -268,7 +290,7 @@ The active items in the menus depend on the active window in the project. If the
        <varlistentry id="export-graph-all-cmd">
          <term> &export-graph-all-cmd; (&export-graph-all-key;)</term>
          <listitem>
-           <para>Here you have the possibility to save all plots of the project under different image formats.</para>
+           <para>Here you have the possibility to save all plots of the project under different image formats. In this case, you must choose a directory for the differents plots. Then one file will be created for each plot, the filename being based on the title of the corresponding window.</para>
          </listitem>
        </varlistentry>
      </variablelist>
@@ -283,18 +305,26 @@ The active items in the menus depend on the active window in the project. If the
   <listitem>
     <para>Prints the active plot. A print dialog is opened where you can select the printer, etc.</para>
     <figure id="fig-print-dialog-1">
-      <title>The &print-cmd; dialog.</title>
+      <title>The basic &print-cmd; dialog.</title>
+      <mediaobject> 
+        <imageobject>
+          <imagedata  format="PNG" fileref="pics/print-dialog-0.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+<para>.</para>
+    <informalfigure id="fig-print-dialog-2">
       <mediaobject> 
         <imageobject>
           <imagedata  format="PNG" fileref="pics/print-dialog-1.png"/>
         </imageobject>
       </mediaobject>
-    </figure>
-<para>If your printer can handle duplex printing and/or color printing, your can select the corresponding options in the options tag of this dialog window.</para>
+    </informalfigure>
+<para>If your printer can handle duplex printing and/or color printing, your can select the corresponding options in the <emphasis>options</emphasis> tag of this dialog window.</para>
     <informalfigure id="fig-print-dialog-2">
       <mediaobject> 
         <imageobject>
-          <imagedata  format="PNG" fileref="pics/print-dialog-2.png"/>
+          <imagedata  format="PNG" fileref="pics/print-dialog-1.png"/>
         </imageobject>
       </mediaobject>
     </informalfigure>
@@ -302,7 +332,7 @@ The active items in the menus depend on the active window in the project. If the
     <informalfigure id="fig-print-dialog-3">
       <mediaobject> 
         <imageobject>
-          <imagedata  format="PNG" fileref="pics/print-dialog-3.png"/>
+          <imagedata  format="PNG" fileref="pics/print-dialog.png"/>
         </imageobject>
       </mediaobject>
     </informalfigure>
@@ -330,13 +360,13 @@ The active items in the menus depend on the active window in the project. If the
       </imageobject>
     </mediaobject>
   </figure>
-     <para>When the options are selected, click on OK and a new dialog will be displayed to choose the file name.</para>
+     <para>When the options are selected, click on OK and a new dialog will be displayed to choose the file name. If you check the <emphasis>all</emphasis> checkbox, the dialog box will ask for a folder and each table will be save in a file named from the title of the table windows.</para>
   </listitem>
 </varlistentry>
 <varlistentry id="import-ascii-cmd">
   <term>File &rarr; &import-ascii-cmd;</term>
   <listitem>
-    <para>The options for the importation of ASCII datas are set by the Import dialog Imports a single ASCII file into the project by creating a new spreadsheet storing the data from the file.</para>
+    <para>Imports one or more ASCII file into the project by creating a new spreadsheet storing the data from the file.</para>
   <figure id="fig-import-ascii">
     <title>The &import-ascii-cmd; dialog.</title>
     <mediaobject> 
@@ -345,8 +375,7 @@ The active items in the menus depend on the active window in the project. If the
       </imageobject>
     </mediaobject>
   </figure>
-    <para>Imports several ASCII files into the project by creating a new spreadsheet for each file. The new spreadsheets are automatically arranged in a cascade style.</para>
-    <para>You can choose to put each data file in a separate table, or join all the data files in one table. Remind that if you choose this last solution, only one column can be selected as X values.</para>
+    <para>You can choose to put each data file in a separate table, or join all the data files in one table. There is no automatic analysis of the data. Therefore, by default, the data will be read as text. If you want to obtain directly numeric values, you can specify it in the <emphasis>numeric data</emphasis> check box. You must then indicate the format of the numbers. The other possibility is to read data as text and then to specify the type and format of the different columns with the <link linkend="sec-intro-table">properties dialog of the tables</link>.</para>
     <para>If you check the <emphasis>Remember the above options</emphasis>, the selected parameters will be used as default values. They will be used if you read an ascii file directly from the command line (see the <link linkend="command-line-options">Command line options</link> section for more details.</para>
   </listitem>
 </varlistentry>
@@ -376,37 +405,39 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="undo-cmd"> 
   <term>Edit &rarr; &undo-cmd; (&undo-key;)</term>
   <listitem>
-     <para>Restores the last modified table at the state it had after the last "Save Project" operation. This command is not available for plot windows.</para>
+     <para>Undo the last command done on tables or matrix. It can also be accessed by clicking on the &undo-icon; icon of the &edit-toolbar-lnk;. The list of commands which are in the stack can be seen with the &undo-redo-history-lnk;.</para>
+     <para>This command is not available for plot windows.</para>
   </listitem>
 </varlistentry> 
 <varlistentry id="redo-cmd"> 
   <term>Edit &rarr; &redo-cmd; (&redo-key;)</term>
   <listitem>
-     <para>Restores the modifications in a table after a "Undo" operation. This function is not available for plot windows.</para>
+     <para>Restores the modifications in a table after a "Undo" operation. It can also be accessed by clicking on the &redo-icon; icon of the &edit-toolbar-lnk;. The list of commands which are in the stack can be seen with the &undo-redo-history-lnk;.</para>
+     <para>This function is not available for plot windows.</para>
   </listitem>
 </varlistentry> 
 <varlistentry id="cut-cmd"> 
   <term>Edit &rarr; &cut-cmd; (&cut-key;)</term>
   <listitem>
-     <para>Copies the current selection to the clipboard and deletes the selection. It currently works for spreadsheets and for 2D plots objects.</para>
+     <para>Copies the current selection to the clipboard and deletes the selection.  It can also be accessed by clicking on the &cut-icon; icon of the &edit-toolbar-lnk;. The command currently works for spreadsheets and for 2D plots objects.</para>
   </listitem>
 </varlistentry> 
 <varlistentry id="copy-cmd"> 
   <term>Edit &rarr; &copy-cmd; (&copy-key;)</term>
   <listitem>
-     <para>Copies the current selection to the clipboard. It currently works for spreadsheets and for 2D plots objects.</para>
+     <para>Copies the current selection to the clipboard. It can also be accessed by clicking on the &copy-icon; icon of the &edit-toolbar-lnk;. The command currently works for spreadsheets and for 2D plots objects.</para>
   </listitem>
 </varlistentry> 
 <varlistentry id="paste-cmd"> 
   <term>Edit &rarr; &paste-cmd; (&paste-key;)</term>
   <listitem>
-     <para>Pastes the content of the clipboard to the active window.</para>
+     <para>Pastes the content of the clipboard to the active window. It can also be accessed by clicking on the &paste-icon; icon of the &edit-toolbar-lnk;. The command currently works for spreadsheets and for 2D plots objects.</para>
   </listitem>
 </varlistentry> 
 <varlistentry id="delete-cmd"> 
   <term>Edit &rarr; &delete-cmd; (&delete-key;)</term>
   <listitem>
-     <para>Cleares the current selection. It currently works for spreadsheets and for 2D plots objects.</para>
+     <para>Cleares the current selection. It can also be accessed by clicking on the &delete-icon; icon of the &edit-toolbar-lnk;. The command currently works for spreadsheets and for 2D plots objects.</para>
   </listitem>
 </varlistentry> 
 <varlistentry id="delete-fit-tables">
@@ -419,7 +450,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="clear-log-information-cmd"> 
   <term>Edit &rarr; &clear-log-information-cmd;</term>
   <listitem>
-     <para>Deletes from the project file all the history information about the analysis operations performed by the user. The <link linkend="sec-intro-log-window">log panel</link> is then empty.</para>
+     <para>Deletes from the project file all the history information about the analysis operations performed by the user (fitting, integrations, etc). The <link linkend="sec-intro-log-window">log panel</link> is then empty. If your project is reload from a file, all the fitting will be done again and the log-panel will be filled.</para>
   </listitem>
 </varlistentry> 
 <!-- ************************************************** -->
@@ -484,50 +515,45 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="aff-toolbars-cmd"> 
   <term>View &rarr; &aff-toolbars-cmd;</term>
   <listitem>
+    <para>There are seven toolbar which can be used to quickly access to the different functions.</para>
     <variablelist>
-      <varlistentry id="aff-toolbar-file-cmd"> 
-         <term>View &rarr; &aff-toolbar-file-cmd;</term>
+      <varlistentry>
          <listitem>
-            <para></para>
+            <para>&file-toolbar-lnk;</para>
          </listitem>
        </varlistentry> 
-      <varlistentry id="aff-toolbar-edit-cmd"> 
-         <term>View &rarr; &aff-toolbar-edit-cmd;</term>
+      <varlistentry>
          <listitem>
-            <para></para>
+            <para>&edit-toolbar-lnk;</para>
          </listitem>
        </varlistentry> 
-      <varlistentry id="aff-toolbar-graph-cmd"> 
-         <term>View &rarr; &aff-toolbar-graph-cmd;</term>
+      <varlistentry>
          <listitem>
-            <para></para>
+            <para>&graph-toolbar-lnk;</para>
          </listitem>
        </varlistentry> 
-      <varlistentry id="aff-toolbar-plot-cmd"> 
-         <term>View &rarr; &aff-toolbar-plot-cmd;</term>
+      <varlistentry>
          <listitem>
-            <para></para>
+            <para>&plot-toolbar-lnk;</para>
          </listitem>
        </varlistentry> 
-      <varlistentry id="aff-toolbar-table-cmd"> 
-         <term>View &rarr; &aff-toolbar-table-cmd;</term>
+      <varlistentry>
          <listitem>
-            <para></para>
+            <para>&table-toolbar-lnk;</para>
          </listitem>
        </varlistentry> 
-      <varlistentry id="aff-toolbar-matrix-plot-cmd"> 
-         <term>View &rarr; &aff-toolbar-matrix-plot-cmd;</term>
+      <varlistentry>
          <listitem>
-            <para></para>
+            <para>&matrix-plot-toolbar-lnk;</para>
          </listitem>
        </varlistentry> 
-      <varlistentry id="aff-toolbar-3d-surface-cmd"> 
-         <term>View &rarr; &aff-toolbar-3d-surface-cmd;</term>
+      <varlistentry>
          <listitem>
-            <para></para>
+            <para>&d3-surface-toolbar-lnk;</para>
          </listitem>
        </varlistentry> 
      </variablelist>
+     <para>In most cases, they are present automatically when necessary.</para>
   </listitem>
 </varlistentry> 
 <varlistentry id="plot-wizard-cmd"> 
@@ -573,7 +599,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="undo-redo-history-cmd"> 
   <term>View &rarr; &undo-redo-history-cmd;</term>
   <listitem>
-    <para></para>
+    <para>This command shows a window which contain all the command which have been done on tables and matrix during the session.</para>
     <figure id="fig-undo-redo-history">
       <title>The undo-redo history.</title>
       <mediaobject> 
@@ -588,7 +614,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="console-cmd"> 
   <term>View &rarr; &console-cmd;</term>
   <listitem>
-    <para></para>
+    <para>.</para>
     <figure id="fig-scripting-console">
       <title>The scripting console.</title>
       <mediaobject> 
@@ -700,8 +726,7 @@ The active items in the menus depend on the active window in the project. If the
       </imageobject>
     </mediaobject>
   </figure>
-  <para>The functions can also be defined in a parametric definition: if <emphasis>t</emphasis> is the parameter, the (x,y) data points are computed by x=f(t) and y=g(t).</para>
-  <para>The first parameter is the name of the parametric variable (here <emphasis>t</emphasis>) followed by the range, the definition of the two functions and the number of data points.</para>
+  <para>The functions can also be defined in a parametric definition: if <emphasis>t</emphasis> is the parameter, the (x,y) data points are computed by x=f(t) and y=g(t). The first parameter is the name of the parametric variable (here <emphasis>t</emphasis>) followed by the range, the definition of the two functions and the number of data points.</para>
   <figure id="add-function-dialog-2">
     <title>The &add-function-cmd; dialog box: parametric coordinates.</title>
     <mediaobject> 
@@ -734,7 +759,7 @@ The active items in the menus depend on the active window in the project. If the
       <title>The &add-text-cmd; dialog box.</title>
       <mediaobject> 
         <imageobject>
-          <imagedata  format="PNG" fileref="pics/add-text-dialog.png"/>
+          <imagedata  format="PNG" fileref="pics/add-text.png"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -816,7 +841,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="automatic-layout-cmd"> 
   <term>Graph &rarr; &automatic-layout-cmd;</term>
   <listitem>
-     <para> </para>
+     <para>Restore the drawind parameters of the layout to its default values (as they are defined in the dialog box of the &arrange-layers-lnk;): margins between the layer and the window border of 5 pixels, layer centered in the window, etc.</para>
   </listitem>
 </varlistentry> 
 <!--			add layer
@@ -825,7 +850,7 @@ The active items in the menus depend on the active window in the project. If the
   <term>Graph &rarr; &add-layer-cmd; (&add-layer-key;)</term>
   <listitem>
   <indexterm><primary>Multilayers plot</primary><secondary>Add a new layer</secondary></indexterm>
-  <para>This dialog is opened when you want to add a new layer on the active plot. If you select <emphasis>Guess</emphasis>, &appname; will divide the window in two columns and put the new layer on the right. If you choose <emphasis>Top-Left Corner</emphasis>, &appname; will create a new layer with the maximum possible size over the existing layer, this layer contains an empty plot. You can then modify the size and position of each layer by selecting it with the layer number buttons  <inlinemediaobject><imageobject><imagedata format="PNG" fileref="pics/layer-button.png"/></imageobject></inlinemediaobject> and selecting the <emphasis>Layer Geometry</emphasis> command from the context menu.</para>
+  <para>This dialog is opened when you want to add a new layer on the active plot. If you select <emphasis>Guess</emphasis>, &appname; will divide the window in two columns and put the new layer on the right. If you choose <emphasis>Top-Left Corner</emphasis>, &appname; will create a new layer with the maximum possible size over the existing layer, this layer contains an empty plot.</para>
   <figure id="fig-add-layer-dialog">
     <title>The &add-layer-cmd; dialog box.</title>
     <mediaobject> 
@@ -834,6 +859,7 @@ The active items in the menus depend on the active window in the project. If the
       </imageobject>
     </mediaobject>
   </figure>
+  <para>You can then modify the size and position of each layer by selecting it with the layer number buttons  <inlinemediaobject><imageobject><imagedata format="PNG" fileref="pics/layer-button.png"/></imageobject></inlinemediaobject> and selecting the <emphasis>Layer Geometry</emphasis> command from the context menu.</para>
   </listitem>
 </varlistentry> 
 <!--			remove layer
@@ -855,7 +881,7 @@ The active items in the menus depend on the active window in the project. If the
       <title>The &arrange-layers-cmd; dialog</title>
       <mediaobject> 
         <imageobject>
-          <imagedata  format="PNG" fileref="pics/arrange-layers-dialog1.png"/>
+          <imagedata  format="PNG" fileref="pics/arrange-layers.png"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -886,7 +912,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="line-cmd"> 
   <term>&line-cmd;</term>
   <listitem>
-    <para>Plots the selected data columns in the active table window using the "Line" style. This command can also be activated by clinking on the &line-icon; icon of the &table-toolbar-lnk;. Once the plot is created, the drawing of the data series can be customized with the <link linkend="custom-curves-dialog-lines">Custom curves dialog</link>.</para>
+    <para>Plots the selected data columns in the active table window using the "Line" style. This command can also be activated by clinking on the &line-icon; icon of the &table-toolbar-lnk;. Once the plot is created, the drawing of the data series can be customized (see <xref linkend="sec-customize-2d-plot"/>).</para>
       <informalfigure id="fig-plot-line">
         <mediaobject> 
           <imageobject>
@@ -901,7 +927,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="scatter-cmd"> 
   <term>&scatter-cmd;</term>
   <listitem>
-    <para>Plots the selected data columns in the active table window using the "Scatter" style. This command can also be activated by clinking on the &scatter-icon; icon of the &table-toolbar-lnk;. Once the plot is created, the drawing of the data series can be customized with the <link linkend="custom-curves-dialog-lines">Custom curves dialog</link>.</para>
+    <para>Plots the selected data columns in the active table window using the "Scatter" style. This command can also be activated by clinking on the &scatter-icon; icon of the &table-toolbar-lnk;. Once the plot is created, the drawing of the data series can be customized (see <xref linkend="sec-customize-2d-plot"/>).</para>
       <informalfigure id="fig-plot-scatter">
         <mediaobject> 
           <imageobject>
@@ -916,7 +942,7 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="line-symbol-cmd"> 
   <term>&line-symbol-cmd;</term>
   <listitem>
-    <para>Plots the selected data columns in the active table window using the "Line + Symbol" style.This command can also be activated by clinking on the &line-symbol-icon; icon of the &table-toolbar-lnk;. Once the plot is created, the drawing of the data series can be customized with the <link linkend="custom-curves-dialog-lines">Custom curves dialog</link>.</para>
+    <para>Plots the selected data columns in the active table window using the "Line + Symbol" style.This command can also be activated by clinking on the &line-symbol-icon; icon of the &table-toolbar-lnk;. Once the plot is created, the drawing of the data series can be customized (see <xref linkend="sec-customize-2d-plot"/>).</para>
       <informalfigure id="fig-plot-linesymbols">
         <mediaobject> 
           <imageobject>
@@ -929,7 +955,7 @@ The active items in the menus depend on the active window in the project. If the
 <!--			special line-symbol
 			*******************			-->
 <varlistentry id="special-line-symbol-cmd"> 
-  <term>&special-line-symbol-cmd; -></term>
+  <term>&special-line-symbol-cmd; &rarr;</term>
   <listitem>
     <para></para>
     <variablelist>
@@ -938,7 +964,7 @@ The active items in the menus depend on the active window in the project. If the
       <varlistentry id="vertical-drop-lines-cmd"> 
 	<term>&vertical-drop-lines-cmd;</term>
 	<listitem>
-	  <para>Plots the selected data columns in the active table window using the "Vertical drop lines" style. Once the plot is created, the drawing of the data series can be customized with the <link linkend="custom-curves-dialog-lines">Custom curves dialog</link>.</para>
+	  <para>Plots the selected data columns in the active table window using the "Vertical drop lines" style. Once the plot is created, the drawing of the data series can be customized (see <xref linkend="sec-customize-2d-plot"/>).</para>
       <informalfigure id="fig-plot-droplines">
         <mediaobject> 
           <imageobject>
@@ -948,10 +974,12 @@ The active items in the menus depend on the active window in the project. If the
       </informalfigure>
 	</listitem>
       </varlistentry> 
+<!--			smoothed lines (splines)
+			************************		-->
       <varlistentry id="spline-cmd"> 
 	<term>&spline-cmd;</term>
 	<listitem>
-	  <para>Plots the selected data columns in the active table window using the "Spline" style. Once the plot is created, the drawing of the data series can be customized with the <link linkend="custom-curves-dialog-lines">Custom curves dialog</link>.</para>
+	  <para>Plots the selected data columns in the active table window using the "Spline" style. Once the plot is created, the drawing of the data series can be customized (see <xref linkend="sec-customize-2d-plot"/>).</para>
       <informalfigure id="fig-plot-spline">
         <mediaobject> 
           <imageobject>
@@ -961,10 +989,12 @@ The active items in the menus depend on the active window in the project. If the
       </informalfigure>
 	</listitem>
       </varlistentry> 
+<!--			vertical steps
+			************************		-->
       <varlistentry id="vertical-steps-cmd"> 
 	<term>&vertical-steps-cmd;</term>
 	<listitem>
-	  <para>Plots the selected data columns in the active table window using the "Vertical Steps" style. Once the plot is created, the drawing of the data series can be customized with the <link linkend="custom-curves-dialog-lines">Custom curves dialog</link>.</para>
+	  <para>Plots the selected data columns in the active table window using the "Vertical Steps" style. Once the plot is created, the drawing of the data series can be customized (see <xref linkend="sec-customize-2d-plot"/>).</para>
       <informalfigure id="fig-plot-vert-step">
         <mediaobject> 
           <imageobject>
@@ -974,10 +1004,12 @@ The active items in the menus depend on the active window in the project. If the
       </informalfigure>
 	</listitem>
       </varlistentry> 
+<!--			horizontal steps
+			************************		-->
       <varlistentry id="horizontal-steps-cmd"> 
 	<term>&horizontal-steps-cmd;</term>
 	<listitem>
-	  <para>Plots the selected data columns in the active table window using the "Horizontal Steps" style. Once the plot is created, the drawing of the data series can be customized with the <link linkend="custom-curves-dialog-lines">Custom curves dialog</link>.</para>
+	  <para>Plots the selected data columns in the active table window using the "Horizontal Steps" style. Once the plot is created, the drawing of the data series can be customized (see <xref linkend="sec-customize-2d-plot"/>).</para>
       <informalfigure id="fig-plot-hor-step">
         <mediaobject> 
           <imageobject>
@@ -991,6 +1023,8 @@ The active items in the menus depend on the active window in the project. If the
 <!--		end of Special Line/Symbol		-->
   </listitem>
 </varlistentry> 
+<!--			columns
+			************************		-->
 <varlistentry id="columns-cmd"> 
   <term>&columns-cmd;</term>
   <listitem>
@@ -1004,6 +1038,8 @@ The active items in the menus depend on the active window in the project. If the
       </informalfigure>
   </listitem>
 </varlistentry> 
+<!--			rows
+			************************		-->
 <varlistentry id="rows-cmd"> 
   <term>&rows-cmd;</term>
   <listitem>
@@ -1017,10 +1053,12 @@ The active items in the menus depend on the active window in the project. If the
       </informalfigure>
   </listitem>
 </varlistentry> 
+<!--			area
+			************************		-->
 <varlistentry id="area-cmd"> 
   <term>&area-cmd;</term>
   <listitem>
-    <para>Plots the selected data columns in the active table window using the "Area" style.</para>
+    <para>Plots the selected data columns in the active table window using the "Area" style, that is a line style with the area under the curve filled.</para>
       <informalfigure id="fig-plot-area">
         <mediaobject> 
           <imageobject>
@@ -1030,14 +1068,16 @@ The active items in the menus depend on the active window in the project. If the
       </informalfigure>
   </listitem>
 </varlistentry>
+<!--			pie
+			************************		-->
 <varlistentry id="pie-cmd">
   <term>&pie-cmd;</term>
   <listitem>
-    <para>Creates a 2D Pie plot of the selected column in the active table window (only one column allowed).</para>
+    <para>Creates a 2D Pie plot of the selected column in the active table window (only one column allowed). See <xref linkend="sec-pie-plots"/> for more details.</para>
       <informalfigure id="fig-plot-pie">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-pie.png"/>
+            <imagedata  format="PNG" fileref="pics/example-pie.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -1046,11 +1086,11 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="vectors-xyxy-cmd">
   <term>&vectors-xyxy-cmd;</term>
   <listitem>
-    <para>Creates a vectors plot of the selected column in the active table window. You must select four columns for this particular type of plot. The two first columns give the coordinates for the starting points of the vectors, the two last columns giving the information regarding the end points.</para>
+    <para>Creates a vectors plot of the selected column in the active table window. You must select four columns for this particular type of plot. The two first columns give the coordinates for the starting points of the vectors, the two last columns giving the information regarding the end points. See <xref linkend="sec-vectors-plots"/> for more details.</para>
       <informalfigure id="fig-plot-vectors">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-vectors.png"/>
+            <imagedata  format="PNG" fileref="pics/example-vectors.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
@@ -1059,21 +1099,21 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="vectors-xyam-cmd">
   <term>&vectors-xyam-cmd;</term>
   <listitem>
-    <para>Creates a vectors plot of the selected column in the active table window. You must select four columns for this particular type of plot. The two first columns give the coordinates for the starting points of the vectors, the two last columns giving the angle (in radians) and the magnitude of the vectors.</para>
+    <para>Creates a vectors plot of the selected column in the active table window. You must select four columns for this particular type of plot. The two first columns give the coordinates for the starting points of the vectors, the two last columns giving the angle (in radians) and the magnitude of the vectors. See <xref linkend="sec-vectors-plots"/> for more details.</para>
   </listitem>
 </varlistentry>
 <!--		end of plot 2d				-->
 
 <!--            beginning of Plot -> Statistical Graphs -->
 <varlistentry>
-  <term>Statistical Graphs -></term>
+  <term>&statistical-graphs-cmd;</term>
   <listitem>
     <para>Statistical plot will not give a direct drawing of the data selected in the table, but they will give a representation of the frequency distribution of the Y-values.</para>
     <variablelist>
       <varlistentry id="box-plot-cmd"> 
 	<term>&box-plot-cmd;</term>
 	<listitem>
-	  <para>Creates a box plot of the selected data columns in the active table window. This type of plot is used to give a graphical representation of the some classical parameters of the frequency distribution such as the mean of data, the min and max values, the position of the 95 and 5 percentiles, etc. The choice of the statistical parameters and the graphical parameters can be modified with the <link linkend="custom-curves-dialog-box">Custom curves dialog</link>.</para>
+	  <para>Creates a box plot of the selected data columns in the active table window. This type of plot is used to give a graphical representation of the some classical parameters of the frequency distribution such as the mean of data, the min and max values, the position of the 95 and 5 percentiles, etc. The choice of the statistical parameters and the graphical parameters can be modified (see <xref linkend="sec-box-plots"/>).</para>
       <informalfigure id="fig-plot-box">
         <mediaobject> 
           <imageobject>
@@ -1086,15 +1126,16 @@ The active items in the menus depend on the active window in the project. If the
       <varlistentry id="histogram-cmd"> 
 	<term>&histogram-cmd;</term>
 	<listitem>
-	  <para>Creates a frequency histograms of the selected data columns in the active table window. The default binning uses 10 steps between the max and the min of Y-values. This can be modified with the <link linkend="custom-curves-dialog-histogram">Custom curves dialog</link>.</para>
+	  <para>Creates a frequency histograms of the selected data columns in the active table window.</para>
       <informalfigure id="fig-plot-histogram">
         <mediaobject> 
           <imageobject>
-            <imagedata  format="PNG" fileref="pics/plot-gallery-histogram.png"/>
+            <imagedata  format="PNG" fileref="pics/example-histogram.png"/>
           </imageobject>
         </mediaobject>
       </informalfigure>
-          <para>With this command, a frequency distribution is computed from your data. If you want to draw an histogram directly from values, use the &bars-cmd;.</para>
+          <para>With this command, a frequency distribution is computed from your data.  The default binning uses 10 steps between the max and the min of Y-values. The parameters used to compute the distribution and the graphical parameters used for the drawing of the columns can be modified (see <xref linkend="sec-histograms"/> for details).</para>
+	  <para>If you want to draw an histogram directly from values, use the &bars-lnk;.</para>
 	</listitem>
       </varlistentry> 
       <varlistentry id="stacked-histogram-cmd"> 
@@ -1110,7 +1151,7 @@ The active items in the menus depend on the active window in the project. If the
 
 <!--             beginning of Plot -> Panel 		-->
 <varlistentry> 
-  <term>Panel -></term>
+  <term>&panel-cmd;</term>
   <listitem>
     <para>These commands can be used to obtain quickly some classical arrangements of multiple plot.</para>
     <variablelist>
@@ -1145,7 +1186,7 @@ The active items in the menus depend on the active window in the project. If the
 
 <!--             beginning of Plot -> Plot 3D ->	-->
 <varlistentry> 
-  <term>Data -> Plot 3D -></term>
+  <term>&plot-3d-cmd;</term>
   <listitem>
     <para></para>
     <variablelist>
@@ -1186,7 +1227,7 @@ The active items in the menus depend on the active window in the project. If the
           </imageobject>
         </mediaobject>
       </informalfigure>
-          <para>With scatter plots, you can choose the kind of graphic item which is used to plot the data points. The example above is done with cross hairs, but you can also select points or cones. This can be done either with the corresponding icons of the &plot3d-toolbar-lnk; (respectively &cross-hairs-icon; &dots-icon; and &cones-icon; for cross-hairs, dots and cones) or with the <link linkend="sec-customize-3d-plot">custom-curves dialog</link>.</para>
+          <para>With scatter plots, you can choose the kind of graphic item which is used to plot the data points. The example above is done with cross hairs, but you can also select points or cones. This can be done either with the corresponding icons of the &d3-surface-toolbar-lnk; (respectively &cross-hairs-icon; &dots-icon; and &cones-icon; for cross-hairs, dots and cones) or with the <link linkend="sec-customize-3d-plot">custom-curves dialog</link>.</para>
 	</listitem>
       </varlistentry> 
       <varlistentry id="trajectory-cmd"> 
