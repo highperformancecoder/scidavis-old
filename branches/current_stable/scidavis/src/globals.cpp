@@ -127,7 +127,7 @@ void SciDAVis::about()
 	text.replace("<br><h1>", "<h1>");
 	text.replace("<br><h2>", "<h2>");
 
-	QDialog *dialog = new QDialog();
+	QDialog *dialog = new QDialog(0, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 	Ui::SciDAVisAbout ui;
 	ui.setupUi(dialog);
 	dialog->setAttribute(Qt::WA_DeleteOnClose);
