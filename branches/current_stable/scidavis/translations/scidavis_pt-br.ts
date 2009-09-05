@@ -6307,32 +6307,32 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
         <translation>As variáveis válidas são &apos;x&apos; para os eixos superior/inferior e &apos;y&apos; para os eixos esquerdo/direito!</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1436"/>
+        <location filename="../src/AxesDialog.cpp" line="1445"/>
         <source>millisec.</source>
         <translation>miliseg.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1437"/>
+        <location filename="../src/AxesDialog.cpp" line="1446"/>
         <source>sec.</source>
         <translation>seg.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1438"/>
+        <location filename="../src/AxesDialog.cpp" line="1447"/>
         <source>min.</source>
         <translation>min.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1439"/>
+        <location filename="../src/AxesDialog.cpp" line="1448"/>
         <source>hours</source>
         <translation>horas</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1444"/>
+        <location filename="../src/AxesDialog.cpp" line="1453"/>
         <source>days</source>
         <translation>dias</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1445"/>
+        <location filename="../src/AxesDialog.cpp" line="1454"/>
         <source>weeks</source>
         <translation>semanas</translation>
     </message>

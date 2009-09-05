@@ -808,7 +808,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../src/ApplicationWindow.cpp" line="676"/>
         <location filename="../src/ApplicationWindow.cpp" line="733"/>
         <source>&amp;Export Graph</source>
-        <translation>&amp;Exportovat obrazec</translation>
+        <translation>&amp;Vyvést obrazec</translation>
     </message>
     <message>
         <source>&amp;Import ASCII</source>
@@ -1698,7 +1698,7 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10494"/>
         <location filename="../src/ApplicationWindow.cpp" line="11042"/>
         <source>E&amp;xport ASCII</source>
-        <translation>&amp;Export ASCII</translation>
+        <translation>&amp;Vyvést jako ASCII</translation>
     </message>
     <message>
         <source>Set import &amp;options</source>
@@ -1847,13 +1847,13 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10561"/>
         <location filename="../src/ApplicationWindow.cpp" line="11095"/>
         <source>&amp;Spline</source>
-        <translation>&amp;Spline</translation>
+        <translation>&amp;Křivka (spline)</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10569"/>
         <location filename="../src/ApplicationWindow.cpp" line="11096"/>
         <source>&amp;Vertical Steps</source>
-        <translation>&amp;Svislé stupně</translation>
+        <translation>&amp;Svislé schody</translation>
     </message>
     <message>
         <source>&amp;Columns</source>
@@ -2869,7 +2869,7 @@ Operation aborted!</source>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="5035"/>
         <source>Save Window As Template</source>
-        <translation>Uložit okno jako šablonu</translation>
+        <translation>Uložit okno jako předlohu</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="5104"/>
@@ -3083,7 +3083,7 @@ Jste si jist, že chcete pokračovat?</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="7426"/>
         <source>&amp;Tile</source>
-        <translation>Jeden &amp;vedle druhého (kachlička)</translation>
+        <translation>Klást jedno &amp;vedle druhého</translation>
     </message>
     <message>
         <source>&amp;Next</source>
@@ -3220,7 +3220,7 @@ Jste si jist, že chcete pokračovat?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="7939"/>
         <location filename="../src/ApplicationWindow.cpp" line="8055"/>
         <source>E&amp;xport</source>
-        <translation>&amp;Export</translation>
+        <translation>&amp;Vyvedení</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="7945"/>
@@ -3819,7 +3819,7 @@ Jste si jist, že chcete pokračovat?</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11010"/>
         <source>&amp;Console</source>
-        <translation>&amp;Konzole - ovládací panel</translation>
+        <translation>&amp;Ovládací panel</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11011"/>
@@ -4421,7 +4421,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
         <location filename="../src/ApplicationWindow.cpp" line="10565"/>
         <location filename="../src/ApplicationWindow.cpp" line="11097"/>
         <source>&amp;Horizontal Steps</source>
-        <translation>&amp;Vodorovné kroky</translation>
+        <translation>&amp;Vodorovné schody</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10472"/>
@@ -4671,7 +4671,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="1038"/>
         <source>Scripting</source>
-        <translation>&amp;Podpora pro skriptování</translation>
+        <translation>&amp;Skriptování</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="1118"/>
@@ -4900,7 +4900,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
         <location filename="../src/ApplicationWindow.cpp" line="10852"/>
         <location filename="../src/ApplicationWindow.cpp" line="11237"/>
         <source>Report a &amp;Bug</source>
-        <translation>Einen &amp;Bug melden</translation>
+        <translation>Ohlásit &amp;chybu</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10855"/>
@@ -4933,7 +4933,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10966"/>
         <source>Open template</source>
-        <translation>Otevřít šablonu</translation>
+        <translation>Otevřít předlohu</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10969"/>
@@ -5050,7 +5050,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11319"/>
         <source>Floor grid</source>
-        <translation>Povrchová mřížka</translation>
+        <translation>Podlahová mřížka</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11327"/>
@@ -5590,7 +5590,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10691"/>
         <location filename="../src/ApplicationWindow.cpp" line="11171"/>
         <source>Fit &amp;Wizard...</source>
-        <translation>&amp;Průvodce přízpůsobením křivek...</translation>
+        <translation>&amp;Průvodce umístěním křivek...</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10710"/>
@@ -6680,32 +6680,32 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
         <translation type="obsolete">Millisek.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1437"/>
+        <location filename="../src/AxesDialog.cpp" line="1446"/>
         <source>sec.</source>
         <translation>sek.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1438"/>
+        <location filename="../src/AxesDialog.cpp" line="1447"/>
         <source>min.</source>
         <translation>min.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1439"/>
+        <location filename="../src/AxesDialog.cpp" line="1448"/>
         <source>hours</source>
         <translation>hodiny</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1444"/>
+        <location filename="../src/AxesDialog.cpp" line="1453"/>
         <source>days</source>
         <translation>dny</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1445"/>
+        <location filename="../src/AxesDialog.cpp" line="1454"/>
         <source>weeks</source>
         <translation>týdny</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1436"/>
+        <location filename="../src/AxesDialog.cpp" line="1445"/>
         <source>millisec.</source>
         <translation>millisek.</translation>
     </message>
@@ -7277,12 +7277,12 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="947"/>
         <source> Spline</source>
-        <translation> Spline</translation>
+        <translation>Křivka (spline)</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="948"/>
         <source> Vertical steps</source>
-        <translation>Svislé kroky</translation>
+        <translation>Svislé schody</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="950"/>
@@ -7667,7 +7667,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="949"/>
         <source> Horizontal steps</source>
-        <translation> Vodorovné kroky</translation>
+        <translation> Vodorovné schody</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="983"/>
@@ -8177,12 +8177,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/CurvesDialog.cpp" line="67"/>
         <source> Spline</source>
-        <translation> Spline</translation>
+        <translation>Křivka (spline)</translation>
     </message>
     <message>
         <location filename="../src/CurvesDialog.cpp" line="68"/>
         <source> Vertical steps</source>
-        <translation> Svislé kroky</translation>
+        <translation> Svislé schody</translation>
     </message>
     <message>
         <location filename="../src/CurvesDialog.cpp" line="70"/>
@@ -8249,7 +8249,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/CurvesDialog.cpp" line="69"/>
         <source> Horizontal steps</source>
-        <translation> Vodorovné kroky</translation>
+        <translation> Vodorovné schody</translation>
     </message>
     <message>
         <location filename="../src/CurvesDialog.cpp" line="61"/>
@@ -8854,7 +8854,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ExportDialog.cpp" line="41"/>
         <source>Export ASCII</source>
-        <translation>Vyvedení jako ASCII</translation>
+        <translation>Vyvést jako ASCII</translation>
     </message>
     <message>
         <location filename="../src/ExportDialog.cpp" line="115"/>
@@ -12857,7 +12857,7 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/InterpolationDialog.cpp" line="56"/>
         <source>Spline</source>
-        <translation>Spline</translation>
+        <translation>Křivka (spline)</translation>
     </message>
     <message>
         <location filename="../src/InterpolationDialog.cpp" line="63"/>
@@ -15957,7 +15957,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PlotDialog.cpp" line="482"/>
         <source>Spline</source>
-        <translation>Spline</translation>
+        <translation>Křivka (spline)</translation>
     </message>
     <message>
         <location filename="../src/PlotDialog.cpp" line="507"/>
@@ -16280,12 +16280,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PlotDialog.cpp" line="480"/>
         <source>Horizontal Steps</source>
-        <translation>Vodorovné kroky</translation>
+        <translation>Vodorovné schody</translation>
     </message>
     <message>
         <location filename="../src/PlotDialog.cpp" line="483"/>
         <source>Vertical Steps</source>
-        <translation>Svislé kroky</translation>
+        <translation>Svislé schody</translation>
     </message>
     <message>
         <location filename="../src/PlotDialog.cpp" line="742"/>
@@ -18597,7 +18597,7 @@ Wollen sie Zellen einfügen?</translation>
     <message>
         <location filename="../src/Table.cpp" line="949"/>
         <source>ASCII Export Error</source>
-        <translation>Chyba vyvedení ASCII</translation>
+        <translation>Chyba při vyvedení do ASCII</translation>
     </message>
     <message>
         <location filename="../src/Table.cpp" line="1056"/>
@@ -18976,7 +18976,7 @@ Wollen sie Zellen einfügen?</translation>
     <message>
         <location filename="../src/TableStatistics.cpp" line="356"/>
         <source>S&amp;et Column(s) As</source>
-        <translation>&amp;Přiřazení nákresu (nastavení sloupce jako)</translation>
+        <translation>&amp;Přiřazení k nákresu: nastavit sloupce jako</translation>
     </message>
 </context>
 <context>
@@ -19700,12 +19700,12 @@ dvojnásobná přesnost
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1370"/>
         <source>Hide Controls</source>
-        <translation>Skrýt ovládací záložky</translation>
+        <translation>Skrýt ovládání</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1372"/>
         <source>Show Controls</source>
-        <translation>Ukázat ovládací záložky</translation>
+        <translation>Ukázat ovládání</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="1449"/>
@@ -19904,7 +19904,7 @@ dvojnásobná přesnost
         <location filename="../src/future/table/future_Table.cpp" line="1001"/>
         <location filename="../src/future/table/future_Table.cpp" line="1518"/>
         <source>S&amp;et Column(s) As</source>
-        <translation>&amp;Přiřazení nákresu (nastavení sloupce jako)</translation>
+        <translation>&amp;Přiřazení k nákresu: nastavit sloupce jako</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1013"/>
@@ -19912,7 +19912,7 @@ dvojnásobná přesnost
         <location filename="../src/future/table/future_Table.cpp" line="1530"/>
         <location filename="../src/future/table/future_Table.cpp" line="1593"/>
         <source>Fi&amp;ll Selection with</source>
-        <translation>Výběr &amp;vyplnit</translation>
+        <translation>Vyplnit &amp;výběr</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1082"/>
@@ -20000,7 +20000,7 @@ dvojnásobná přesnost
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1159"/>
         <source>append a new column to the table</source>
-        <translation>připojit k tabulce nový sloupec</translation>
+        <translation>Připojit k tabulce nový sloupec</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1166"/>
@@ -20233,12 +20233,12 @@ dvojnásobná přesnost
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2215"/>
         <source>Hide Controls</source>
-        <translation>Skrýt ovládací záložky</translation>
+        <translation>Skrýt ovládání</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2217"/>
         <source>Show Controls</source>
-        <translation>Ukázat ovládací záložky</translation>
+        <translation>Ukázat ovládání</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2228"/>

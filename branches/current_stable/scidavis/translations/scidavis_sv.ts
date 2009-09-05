@@ -6031,32 +6031,32 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
         <translation type="unfinished">Giltiga variabler är &apos;x&apos; för topp/botten-axlar och &apos;y&apos; för vänster/höger-axlar!</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1436"/>
+        <location filename="../src/AxesDialog.cpp" line="1445"/>
         <source>millisec.</source>
         <translation type="unfinished">millisek.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1437"/>
+        <location filename="../src/AxesDialog.cpp" line="1446"/>
         <source>sec.</source>
         <translation type="unfinished">sek.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1438"/>
+        <location filename="../src/AxesDialog.cpp" line="1447"/>
         <source>min.</source>
         <translation type="unfinished">min.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1439"/>
+        <location filename="../src/AxesDialog.cpp" line="1448"/>
         <source>hours</source>
         <translation type="unfinished">timmar</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1444"/>
+        <location filename="../src/AxesDialog.cpp" line="1453"/>
         <source>days</source>
         <translation type="unfinished">dagar</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1445"/>
+        <location filename="../src/AxesDialog.cpp" line="1454"/>
         <source>weeks</source>
         <translation type="unfinished">veckor</translation>
     </message>

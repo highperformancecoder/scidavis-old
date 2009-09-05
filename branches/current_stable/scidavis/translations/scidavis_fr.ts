@@ -6192,32 +6192,32 @@ Quelques parties de ce fichier peuvent ne pas être affichés comme attendu.</tr
         <translation type="unfinished">Les variables ne peuvent être que &apos;x&apos; pour les axes supérieur/inférieur et &apos;y&apos; pour les axes latéraux !</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1436"/>
+        <location filename="../src/AxesDialog.cpp" line="1445"/>
         <source>millisec.</source>
         <translation type="unfinished">ms.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1437"/>
+        <location filename="../src/AxesDialog.cpp" line="1446"/>
         <source>sec.</source>
         <translation type="unfinished">sec.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1438"/>
+        <location filename="../src/AxesDialog.cpp" line="1447"/>
         <source>min.</source>
         <translation type="unfinished">min.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1439"/>
+        <location filename="../src/AxesDialog.cpp" line="1448"/>
         <source>hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1444"/>
+        <location filename="../src/AxesDialog.cpp" line="1453"/>
         <source>days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1445"/>
+        <location filename="../src/AxesDialog.cpp" line="1454"/>
         <source>weeks</source>
         <translation type="unfinished"></translation>
     </message>

@@ -6678,32 +6678,32 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="obsolete">Millisek.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1437"/>
+        <location filename="../src/AxesDialog.cpp" line="1446"/>
         <source>sec.</source>
         <translation>Sek.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1438"/>
+        <location filename="../src/AxesDialog.cpp" line="1447"/>
         <source>min.</source>
         <translation>Min.</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1439"/>
+        <location filename="../src/AxesDialog.cpp" line="1448"/>
         <source>hours</source>
         <translation>Stunden</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1444"/>
+        <location filename="../src/AxesDialog.cpp" line="1453"/>
         <source>days</source>
         <translation>Tage</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1445"/>
+        <location filename="../src/AxesDialog.cpp" line="1454"/>
         <source>weeks</source>
         <translation>Wochen</translation>
     </message>
     <message>
-        <location filename="../src/AxesDialog.cpp" line="1436"/>
+        <location filename="../src/AxesDialog.cpp" line="1445"/>
         <source>millisec.</source>
         <translation>Millisek.</translation>
     </message>
