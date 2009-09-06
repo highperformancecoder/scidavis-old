@@ -886,7 +886,7 @@ bool Plot3DDialog::updatePlot()
 QStringList Plot3DDialog::scaleOptions(int axis, double start, double end,
 		const QString& majors, const QString& minors)
 {
-	Q_ASSERT(0 <= axis < scales.size()/5 - 1);
+	Q_ASSERT(0 <= axis); Q_ASSERT(axis < scales.size()/5 - 1);
 	QStringList l;
 	l<<QString::number(start);
 	l<<QString::number(end);
