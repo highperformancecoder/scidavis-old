@@ -165,6 +165,7 @@ void TableView::init()
 
 	connect(ui.type_box, SIGNAL(currentIndexChanged(int)), this, SLOT(updateFormatBox()));
 	connect(ui.format_box, SIGNAL(currentIndexChanged(int)), this, SLOT(updateTypeInfo()));
+	connect(ui.formatLineEdit, SIGNAL(textEdited(const QString)), this, SLOT(handleFormatLineEditChange()));
 	connect(ui.digits_box, SIGNAL(valueChanged(int)), this, SLOT(updateTypeInfo()));
 	connect(ui.previous_column_button, SIGNAL(clicked()), this, SLOT(goToPreviousColumn()));
 	connect(ui.next_column_button, SIGNAL(clicked()), this, SLOT(goToNextColumn()));
@@ -347,6 +348,7 @@ void TableView::setColumnForControlTabs(int col)
 		case SciDAVis::DateTime:
 			{
 				DateTime2StringFilter * filter = static_cast<DateTime2StringFilter*>(col_ptr->outputFilter());
+				ui.formatLineEdit->setText(filter->format());
 				ui.format_box->setCurrentIndex(ui.format_box->findData(filter->format()));
 				break;
 			}
@@ -389,6 +391,7 @@ void TableView::updateFormatBox()
 	if(type_index < 0) return; // should never happen
 	ui.format_box->clear();
 	ui.digits_box->setEnabled(false);
+	ui.formatLineEdit->setEnabled(false);
 	switch(ui.type_box->itemData(type_index).toInt())
 	{
 		case SciDAVis::Numeric:
@@ -443,20 +446,29 @@ void TableView::updateFormatBox()
 					0
 				};
 				int j,i;
-				for(i=0; date_strings[i] != 0; i++)
+				for (i=0; date_strings[i] != 0; i++)
 					ui.format_box->addItem(QString(date_strings[i]), QVariant(date_strings[i]));
-				for(j=0; time_strings[j] != 0; j++)
+				for (j=0; time_strings[j] != 0; j++)
 					ui.format_box->addItem(QString(time_strings[j]), QVariant(time_strings[j]));
-				for(i=0; date_strings[i] != 0; i++)
-					for(j=0; time_strings[j] != 0; j++)
+				for (i=0; date_strings[i] != 0; i++)
+					for (j=0; time_strings[j] != 0; j++)
 						ui.format_box->addItem(QString("%1 %2").arg(date_strings[i]).arg(time_strings[j]), 
 							QVariant(QString(date_strings[i]) + " " + QString(time_strings[j])));
+				ui.formatLineEdit->setEnabled(true);
 				break;
 			}
 		default:
 			ui.format_box->addItem(QString()); // just for savety to have at least one item in any case
 	}
 	ui.format_box->setCurrentIndex(0);
+	ui.digits_box->setVisible(ui.digits_box->isEnabled());
+	ui.digits_label->setVisible(ui.digits_box->isEnabled());
+	ui.formatLineEdit->setVisible(ui.formatLineEdit->isEnabled());
+	ui.format_label2->setVisible(ui.formatLineEdit->isEnabled());
+	if (ui.format_label2->isVisible())
+		ui.format_label->setText(tr("Predefined:"));
+	else
+		ui.format_label->setText(tr("Format:"));
 }
 
 void TableView::updateTypeInfo()
@@ -485,6 +497,7 @@ void TableView::updateTypeInfo()
 				break;
 			case SciDAVis::DateTime:
 				str += tr("Dates and/or times\n");
+				ui.formatLineEdit->setEnabled(true);
 				break;
 		}
 		str += tr("Example: ");
@@ -503,11 +516,42 @@ void TableView::updateTypeInfo()
 				str += QLocale().toString(QDate(1900,1,1), ui.format_box->itemData(format_index).toString());
 				break;
 			case SciDAVis::DateTime:
-				str += QDateTime(QDate(1900,1,1), QTime(23,59,59,999)).toString(ui.format_box->itemData(format_index).toString());
+				ui.formatLineEdit->setText(ui.format_box->itemData(format_index).toString());
+				str += QDateTime(QDate(1900,1,1), QTime(23,59,59,999)).toString(ui.formatLineEdit->text());
 				break;
 		}
+	} else if (format_index == -1 && type_index >= 0 && ui.type_box->itemData(type_index).toInt() == SciDAVis::DateTime) {
+		str += tr("Dates and/or times\n");
+		ui.formatLineEdit->setEnabled(true);
+		str += tr("Example: ");
+		str += QDateTime(QDate(1900,1,1), QTime(23,59,59,999)).toString(ui.formatLineEdit->text());
 	}
+
+
 	ui.type_info->setText(str);
+	ui.digits_box->setVisible(ui.digits_box->isEnabled());
+	ui.digits_label->setVisible(ui.digits_box->isEnabled());
+	ui.formatLineEdit->setVisible(ui.formatLineEdit->isEnabled());
+	ui.format_label2->setVisible(ui.formatLineEdit->isEnabled());
+	if (ui.format_label2->isVisible())
+		ui.format_label->setText(tr("Predefined:"));
+	else
+		ui.format_label->setText(tr("Format:"));
+	}
+
+void TableView::handleFormatLineEditChange() {
+	int type_index = ui.type_box->currentIndex();
+
+	if (type_index >= 0) {
+		int type = ui.type_box->itemData(type_index).toInt();
+		if (type == SciDAVis::DateTime) {
+			QString str = tr("Selected column type:\n");
+			str += tr("Dates and/or times\n");
+			str += tr("Example: ");
+			str += QDateTime(QDate(1900,1,1), QTime(23,59,59,999)).toString(ui.formatLineEdit->text());
+			ui.type_info->setText(str);
+		}
+	}
 }
 
 void TableView::showControlDescriptionTab()
@@ -559,18 +603,15 @@ void TableView::applyType()
 	switch(mode)
 	{
 		case SciDAVis::Numeric:
-			foreach(Column* col, list)
-			{
-				col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
+			foreach(Column* col, list) {
+                col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
 				col->setColumnMode(mode);
 				Double2StringFilter * filter = static_cast<Double2StringFilter*>(col->outputFilter());
 				int digits = ui.digits_box->value(); // setNumericFormat causes digits_box to be modified...
 				filter->setNumericFormat(ui.format_box->itemData(format_index).toChar().toLatin1());
 				filter->setNumDigits(digits);
-				col->endMacro();
-				// TODO: make sure this is done by a signal from the filter to the column on to the table
-	//			d_model->emitColumnChanged(col); 
-				}
+                col->endMacro();
+			}
 			break;
 		case SciDAVis::Text:
 			foreach(Column* col, list)
@@ -579,15 +620,13 @@ void TableView::applyType()
 		case SciDAVis::Month:
 		case SciDAVis::Day:
 		case SciDAVis::DateTime:
-			foreach(Column* col, list)
-			{
-				col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
+			foreach(Column* col, list) {
+                col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
+				QString format = ui.formatLineEdit->text();
 				col->setColumnMode(mode);
 				DateTime2StringFilter * filter = static_cast<DateTime2StringFilter*>(col->outputFilter());
-				filter->setFormat(ui.format_box->itemData(format_index).toString());
-				col->endMacro();
-				// TODO: make sure this is done by a signal from the filter to the column on to the table
-	//			d_model->emitColumnChanged(col); 
+				filter->setFormat(format);
+                col->endMacro();
 			}
 			break;
 	}

@@ -198,6 +198,7 @@ class TableView : public MyWidget
 		void advanceCell();
 		void handleHorizontalSectionMoved(int index, int from, int to);
 		void handleHorizontalHeaderDoubleClicked(int index);
+		void handleFormatLineEditChange();
 		void handleAspectDescriptionChanged(const AbstractAspect * aspect);
 		void handleAspectAdded(const AbstractAspect *aspect);
 		void handleAspectAboutToBeRemoved(const AbstractAspect *aspect, int index);
