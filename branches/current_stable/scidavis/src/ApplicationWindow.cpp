@@ -4379,7 +4379,7 @@ void ApplicationWindow::readSettings()
 	simplify_spaces = settings.value("/SimplifySpaces", false).toBool();
 	d_ASCII_file_filter = settings.value("/AsciiFileTypeFilter", "*").toString();
 	d_ASCII_import_locale = settings.value("/AsciiImportLocale", "C").toString();
-	d_convert_to_numeric = settings.value("/ConvertToNumeric", false).toBool();
+	d_convert_to_numeric = settings.value("/ConvertToNumeric", true).toBool();
 	settings.endGroup(); // Import ASCII
 
     settings.beginGroup("/ExportImage");
