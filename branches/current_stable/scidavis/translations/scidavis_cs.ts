@@ -1381,7 +1381,7 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="11357"/>
         <location filename="../src/ApplicationWindow.cpp" line="11358"/>
         <source>Floor Data Projection</source>
-        <translation>Promítání povrchu dat</translation>
+        <translation>Promítání dat povrchu</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11361"/>
@@ -1909,7 +1909,7 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10598"/>
         <location filename="../src/ApplicationWindow.cpp" line="11118"/>
         <source>&amp;Stacked Histogram</source>
-        <translation>&amp;Vrstvený histogram</translation>
+        <translation>&amp;Naskládaný histogram</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10601"/>
@@ -1933,7 +1933,7 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10610"/>
         <location filename="../src/ApplicationWindow.cpp" line="11122"/>
         <source>&amp;Stacked Layers</source>
-        <translation>&amp;Vrstvené vrstvy</translation>
+        <translation>&amp;Skládané vrstvy</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10613"/>
@@ -2087,7 +2087,7 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10688"/>
         <location filename="../src/ApplicationWindow.cpp" line="11169"/>
         <source>Fit Lorent&amp;zian</source>
-        <translation>Loren&amp;z-Anpassung</translation>
+        <translation>&amp;Lorentzovo umístění</translation>
     </message>
     <message>
         <source>&amp;Non-linear Curve Fit ...</source>
@@ -3220,7 +3220,7 @@ Jste si jist, že chcete pokračovat?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="7939"/>
         <location filename="../src/ApplicationWindow.cpp" line="8055"/>
         <source>E&amp;xport</source>
-        <translation>&amp;Vyvedení</translation>
+        <translation>&amp;Vyvést</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="7945"/>
@@ -5082,7 +5082,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
         <location filename="../src/ApplicationWindow.cpp" line="11359"/>
         <location filename="../src/ApplicationWindow.cpp" line="11360"/>
         <source>Floor data projection</source>
-        <translation>Promítání povrchu dat</translation>
+        <translation>Promítání dat povrchu</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11363"/>
@@ -7601,7 +7601,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="999"/>
         <source>Generated Fit Curve</source>
-        <translation>Generierte Anpassungskurve</translation>
+        <translation>Vytvořená křivka umístění</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1000"/>
@@ -10515,7 +10515,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
     <message>
         <location filename="../src/MultiPeakFit.cpp" line="502"/>
         <source>GaussAmp Fit</source>
-        <translation>GaussAmp-Anpassung</translation>
+        <translation>GaussAmp umístění</translation>
     </message>
 </context>
 <context>
@@ -13371,7 +13371,7 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/LineDialog.cpp" line="168"/>
         <source>Scale Coordinates</source>
-        <translation>Skalenkoordinaten</translation>
+        <translation>Souřadnice stupnice</translation>
     </message>
     <message>
         <location filename="../src/LineDialog.cpp" line="140"/>
@@ -16801,7 +16801,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="64"/>
         <source>Fit curve Xmin</source>
-        <translation>Anpassungskurve min. X</translation>
+        <translation>Křivka umístění min. X</translation>
     </message>
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="65"/>
@@ -16811,17 +16811,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="68"/>
         <source>Fit curve Xmax</source>
-        <translation>Anpassungskurve max. X</translation>
+        <translation>Křivka umístění max. X</translation>
     </message>
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="77"/>
         <source>Show Formula on Graph?</source>
-        <translation>Ukázat vzorec v nákresu?</translation>
+        <translation>Ukázat vzorec v obrazci?</translation>
     </message>
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="82"/>
         <source>&amp;Fit</source>
-        <translation>&amp;Umístění</translation>
+        <translation>&amp;Umístit</translation>
     </message>
     <message>
         <source>&amp;OK</source>
