@@ -41,6 +41,7 @@
 #include "core/datatypes/String2DoubleFilter.h"
 #include "core/datatypes/DateTime2StringFilter.h"
 #include "core/datatypes/String2DateTimeFilter.h"
+#include "core/datatypes/Double2DateTimeFilter.h"
 
 #include <QKeyEvent>
 #include <QtDebug>
@@ -237,8 +238,17 @@ void TableView::retranslateStrings()
 	ui.type_box->addItem(tr("Month names"), QVariant(int(SciDAVis::Month)));
 	ui.type_box->addItem(tr("Day names"), QVariant(int(SciDAVis::Day)));
 	ui.type_box->addItem(tr("Date and time"), QVariant(int(SciDAVis::DateTime)));
-
 	ui.type_box->setCurrentIndex(0);
+
+	ui.date_time_interval->clear();
+	ui.date_time_interval->addItem(tr("years"), int(Double2DateTimeFilter::Year));
+	ui.date_time_interval->addItem(tr("months"), int(Double2DateTimeFilter::Month));
+	ui.date_time_interval->addItem(tr("days"), int(Double2DateTimeFilter::Day));
+	ui.date_time_interval->addItem(tr("hours"), int(Double2DateTimeFilter::Hour));
+	ui.date_time_interval->addItem(tr("minutes"), int(Double2DateTimeFilter::Minute));
+	ui.date_time_interval->addItem(tr("seconds"), int(Double2DateTimeFilter::Second));
+	ui.date_time_interval->addItem(tr("milliseconds"), int(Double2DateTimeFilter::Millisecond));
+	ui.date_time_interval->setCurrentIndex(0);
 
 	// TODO: implement formula stuff
 	//ui.formula_info->document()->setPlainText("not implemented yet");
@@ -341,6 +351,10 @@ void TableView::setColumnForControlTabs(int col)
 				Double2StringFilter * filter = static_cast<Double2StringFilter*>(col_ptr->outputFilter());
 				ui.format_box->setCurrentIndex(ui.format_box->findData(filter->numericFormat()));
 				ui.digits_box->setValue(filter->numDigits());
+				ui.date_time_interval->setVisible(false);
+				ui.date_time_interval_label->setVisible(false);
+				ui.date_time_0->setVisible(false);
+				ui.date_time_0_label->setVisible(false);
 				break;
 			}
 		case SciDAVis::Month:
@@ -353,6 +367,10 @@ void TableView::setColumnForControlTabs(int col)
 				break;
 			}
 		default:
+			ui.date_time_interval->setVisible(false);
+			ui.date_time_interval_label->setVisible(false);
+			ui.date_time_0->setVisible(false);
+			ui.date_time_0_label->setVisible(false);
 			break;
 	}
 	ui.formula_box->setText(col_ptr->formula(0));
@@ -392,6 +410,8 @@ void TableView::updateFormatBox()
 	ui.format_box->clear();
 	ui.digits_box->setEnabled(false);
 	ui.formatLineEdit->setEnabled(false);
+	ui.date_time_interval->setEnabled(false);
+	ui.date_time_0->setEnabled(false);
 	switch(ui.type_box->itemData(type_index).toInt())
 	{
 		case SciDAVis::Numeric:
@@ -455,6 +475,8 @@ void TableView::updateFormatBox()
 						ui.format_box->addItem(QString("%1 %2").arg(date_strings[i]).arg(time_strings[j]), 
 							QVariant(QString(date_strings[i]) + " " + QString(time_strings[j])));
 				ui.formatLineEdit->setEnabled(true);
+				ui.date_time_interval->setEnabled(true);
+				ui.date_time_0->setEnabled(true);
 				break;
 			}
 		default:
@@ -469,6 +491,10 @@ void TableView::updateFormatBox()
 		ui.format_label->setText(tr("Predefined:"));
 	else
 		ui.format_label->setText(tr("Format:"));
+	ui.date_time_interval->setVisible(ui.date_time_interval->isEnabled());
+	ui.date_time_interval_label->setVisible(ui.date_time_interval->isEnabled());
+	ui.date_time_0->setVisible(ui.date_time_0->isEnabled());
+	ui.date_time_0_label->setVisible(ui.date_time_0->isEnabled());
 }
 
 void TableView::updateTypeInfo()
@@ -517,6 +543,7 @@ void TableView::updateTypeInfo()
 				break;
 			case SciDAVis::DateTime:
 				ui.formatLineEdit->setText(ui.format_box->itemData(format_index).toString());
+				ui.date_time_0->setDisplayFormat(ui.format_box->itemData(format_index).toString());
 				str += QDateTime(QDate(1900,1,1), QTime(23,59,59,999)).toString(ui.formatLineEdit->text());
 				break;
 		}
@@ -550,6 +577,7 @@ void TableView::handleFormatLineEditChange() {
 			str += tr("Example: ");
 			str += QDateTime(QDate(1900,1,1), QTime(23,59,59,999)).toString(ui.formatLineEdit->text());
 			ui.type_info->setText(str);
+			ui.date_time_0->setDisplayFormat(ui.formatLineEdit->text());
 		}
 	}
 }
@@ -623,7 +651,15 @@ void TableView::applyType()
 			foreach(Column* col, list) {
                 col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
 				QString format = ui.formatLineEdit->text();
-				col->setColumnMode(mode);
+				if (ui.date_time_interval->isVisible()) {
+					Double2DateTimeFilter::UnitInterval unit = (Double2DateTimeFilter::UnitInterval)
+						ui.date_time_interval->itemData(ui.date_time_interval->currentIndex()).toInt();
+					QDateTime date_time_0 = ui.date_time_0->dateTime();
+					if (!date_time_0.date().isValid())
+						date_time_0.setDate(QDate(-1,12,31));
+					col->setColumnMode(mode, new Double2DateTimeFilter(unit, date_time_0));
+				} else
+					col->setColumnMode(mode);
 				DateTime2StringFilter * filter = static_cast<DateTime2StringFilter*>(col->outputFilter());
 				filter->setFormat(format);
                 col->endMacro();

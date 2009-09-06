@@ -4,9 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2007 by Knut Franke, Tilman Benkert
     Email (use @ for *)  : knut.franke*gmx.de, thzs@gmx.net
-    Description          : Conversion filter double -> QDateTime, interpreting
-                           the input numbers as (fractional) Julian days.
-                           
+    Description          : Conversion filter double -> QDateTime                           
  ***************************************************************************/
 
 /***************************************************************************
@@ -37,26 +35,32 @@
 #include "lib/XmlStreamReader.h"
 #include <QXmlStreamWriter>
 
-//! Conversion filter double -> QDateTime, interpreting the input numbers as (fractional) Julian days.
+/**
+ * \brief Conversion filter double -> QDateTime.
+ *
+ * The equivalence of one unit defaults to a day if nothing else is specified. The default reference
+ * date/time if none is specified, or an invalid one is given, is the noon of January 1st, 4713 BC
+ * as per Julian Day Number convention.
+ */
 class Double2DateTimeFilter : public AbstractSimpleFilter
 {
 	Q_OBJECT
 
 	public:
+		enum UnitInterval { Year, Month, Day, Hour, Minute, Second, Millisecond };
+
+		Double2DateTimeFilter() : m_unit_interval(Day) {};
+		Double2DateTimeFilter(UnitInterval unit, QDateTime date_time_0) :
+			m_unit_interval(unit),
+			m_date_time_0(date_time_0) {};
+
 		virtual QDate dateAt(int row) const {
-			if (!d_inputs.value(0)) return QDate();
-			return QDate::fromJulianDay(qRound(d_inputs.value(0)->valueAt(row)));
+			return dateTimeAt(row).date();
 		}
 		virtual QTime timeAt(int row) const {
-			if (!d_inputs.value(0)) return QTime();
-			double input_value = d_inputs.value(0)->valueAt(row);
-			// we only want the digits behind the dot and 
-			// convert them from fraction of day to milliseconds
-			return QTime(12,0,0,0).addMSecs(int( (input_value - int(input_value)) * 86400000.0 ));
+			return dateTimeAt(row).time();
 		}
-		virtual QDateTime dateTimeAt(int row) const {
-			return QDateTime(dateAt(row), timeAt(row));
-		}
+		virtual QDateTime dateTimeAt(int row) const;
 
 		//! Return the data type of the column
 		virtual SciDAVis::ColumnDataType dataType() const { return SciDAVis::TypeQDateTime; }
@@ -66,6 +70,10 @@ class Double2DateTimeFilter : public AbstractSimpleFilter
 		virtual bool inputAcceptable(int, const AbstractColumn *source) {
 			return source->dataType() == SciDAVis::TypeDouble;
 		}
+
+	private:
+		UnitInterval m_unit_interval;
+		QDateTime m_date_time_0;
 };
 
 #endif // ifndef DOUBLE2DATE_TIME_FILTER_H

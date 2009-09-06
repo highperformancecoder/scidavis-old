@@ -375,6 +375,7 @@ SOURCES += src/future/core/AbstractAspect.cpp \
            src/future/core/datatypes/DateTime2StringFilter.cpp \
            src/future/core/datatypes/String2DateTimeFilter.cpp \
            src/future/core/datatypes/Double2StringFilter.cpp \
+           src/future/core/datatypes/Double2DateTimeFilter.cpp \
            src/future/core/AbstractSimpleFilter.cpp \
            src/future/core/AbstractFilter.cpp \
            src/future/core/ProjectConfigPage.cpp \

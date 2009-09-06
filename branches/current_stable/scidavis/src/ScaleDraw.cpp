@@ -188,7 +188,11 @@ return t_origin.toString ();
 
 QwtText DateScaleDraw::label(double value) const
 {
-QDate t = t_origin.addDays( (int) value );
+QDate t;
+if (t_origin.isValid())
+	t = t_origin.addDays((int) floor(value));
+else
+	t = QDate::fromJulianDay((int) floor(value));
 return QwtText(t.toString ( t_format ));
 }
 
@@ -211,7 +215,7 @@ QString DateTimeScaleDraw::origin()
 QwtText DateTimeScaleDraw::label(double value) const
 {
 	QDate date = QDate::fromJulianDay(qRound(value));
-	QTime time = QTime(12,0,0,0).addMSecs(int( (value - int(value)) * 86400000.0 ));
+	QTime time = QTime(12,0,0,0).addMSecs(int( (value - floor(value)) * 86400000.0 ));
 	QDateTime dt = QDateTime(date, time);
 	return QwtText(dt.toString(d_format));
 }

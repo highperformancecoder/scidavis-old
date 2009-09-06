@@ -87,13 +87,13 @@ Column::~Column()
 	delete d_column_private;
 }
 
-void Column::setColumnMode(SciDAVis::ColumnMode mode)
+void Column::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *conversion_filter)
 {
 	if(mode == columnMode()) return;
 	beginMacro(QObject::tr("%1: change column type").arg(name()));
 	AbstractSimpleFilter * old_input_filter = d_column_private->inputFilter();
 	AbstractSimpleFilter * old_output_filter = outputFilter();
-	exec(new ColumnSetModeCmd(d_column_private, mode));
+	exec(new ColumnSetModeCmd(d_column_private, mode, conversion_filter));
 	if (d_column_private->inputFilter() != old_input_filter) 
 	{
 		removeChild(old_input_filter);

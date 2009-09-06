@@ -111,7 +111,7 @@ class Column : public AbstractColumn
 		 * This sets the column mode and, if
 		 * necessary, converts it to another datatype.
 		 */
-		void setColumnMode(SciDAVis::ColumnMode mode);
+		void setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *conversion_filter=0);
 		//! Copy another column of the same type
 		/**
 		 * This function will return false if the data type

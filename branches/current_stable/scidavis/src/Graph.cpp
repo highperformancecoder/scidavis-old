@@ -798,7 +798,7 @@ void Graph::setLabelsColHeaderFormat(int axis, Table *table) {
 void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInfo)
 {
 	QStringList list = formatInfo.split(";", QString::KeepEmptyParts);
-	if ((int)list.count() < 2 || list[0].isEmpty() || list[1].isEmpty()) {
+	if ((int)list.count() < 2 || list[1].isEmpty()) {
 		QMessageBox::critical(this, tr("Error"), tr("Couldn't change the axis type to the requested format!"));
 		return;
 	}
@@ -806,14 +806,14 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 	switch(type) {
 		case Time:
 			{
-				TimeScaleDraw *sd = new TimeScaleDraw (QTime::fromString (list[0]), list[1]);
+				TimeScaleDraw *sd = new TimeScaleDraw (list[0].isEmpty() ? QTime(12,0,0,0) : QTime::fromString (list[0]), list[1]);
 				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 				d_plot->setAxisScaleDraw (axis, sd);
 				break;
 			}
 		case Date:
 			{
-				DateScaleDraw *sd = new DateScaleDraw (QDate::fromString (list[0], "YYYY-MM-DD"), list[1]);
+				DateScaleDraw *sd = new DateScaleDraw(QDate::fromString(list[0], "YYYY-MM-DD"), list[1]);
 				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 				d_plot->setAxisScaleDraw (axis, sd);
 				break;
@@ -3315,9 +3315,6 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	int xColType = x_col_ptr->columnMode();
 	int yColType = y_col_ptr->columnMode();
 	int row, size=0;
-	QString date_time_fmt;
-	if (xColType == SciDAVis::DateTime || xColType == SciDAVis::Month || xColType == SciDAVis::Day)
-		date_time_fmt = static_cast<DateTime2StringFilter *>(x_col_ptr->outputFilter())->format();
 
 	QTime time0;
 	QDate date0;
@@ -3459,48 +3456,53 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	else
 		c->setData(X.data(), Y.data(), size);
 
-	if (xColType == Table::Text ){
-		if (style == HorizontalBars){
-			setLabelsTextFormat(QwtPlot::yLeft, x_col_ptr, startRow, endRow);
-			// change default for right axis, but don't mess up an existing one
-			if (!d_plot->axisEnabled(QwtPlot::yRight))
-				axesFormatInfo[QwtPlot::yRight] = xColName;
-		}
-		else{
-			setLabelsTextFormat(QwtPlot::xBottom, x_col_ptr, startRow, endRow);
-			// change default for top axis, but don't mess up an existing one
-			if (!d_plot->axisEnabled(QwtPlot::xTop))
-				axesFormatInfo[QwtPlot::xTop] = xColName;
-		}
-	}
-	else if (xColType == Table::Time){
-		QString fmtInfo = time0.toString() + ";" + date_time_fmt;
-		if (style == HorizontalBars)
-			setLabelsDateTimeFormat(QwtPlot::yLeft, Time, fmtInfo);
-		else
-			setLabelsDateTimeFormat(QwtPlot::xBottom, Time, fmtInfo);
-	}
-	else if (xColType == Table::Date ){
-		QString fmtInfo = date0.toString("YYYY-MM-DD") + ";" + date_time_fmt;
-		if (style == HorizontalBars)
-			setLabelsDateTimeFormat(QwtPlot::yLeft, Date, fmtInfo);
-		else
-			setLabelsDateTimeFormat(QwtPlot::xBottom, Date, fmtInfo);
-	}
-	else if (xColType == Table::DateTime ){
-		QString fmtInfo = date_time0.toString("YYYY-MM-DDTHH:MM:SS") + ";" + date_time_fmt;
-		if (style == HorizontalBars)
-			setLabelsDateTimeFormat(QwtPlot::yLeft, DateTime, fmtInfo);
-		else
-			setLabelsDateTimeFormat(QwtPlot::xBottom, DateTime, fmtInfo);
+	QwtPlot::Axis abscissa, ordinate;
+	if (style == HorizontalBars) {
+		abscissa = QwtPlot::yLeft;
+		ordinate = QwtPlot::xBottom;
+	} else {
+		abscissa = QwtPlot::xBottom;
+		ordinate = QwtPlot::yLeft;
 	}
 
-	if (yColType == Table::Text){
-		setLabelsTextFormat(QwtPlot::yLeft, y_col_ptr, startRow, endRow);
-		// change default for right axis, but don't mess up an existing one
-		if (!d_plot->axisEnabled(QwtPlot::yRight))
-			axesFormatInfo[QwtPlot::yRight] = yColName;
-	}
+	switch (xColType) {
+		case Table::Text:
+			setLabelsTextFormat(abscissa, x_col_ptr, startRow, endRow);
+			if (!d_plot->axisEnabled(abscissa+1))
+				axesFormatInfo[abscissa+1] = xColName;
+			break;
+		case Table::Time:
+			setLabelsDateTimeFormat(abscissa, Time,
+					time0.toString() + ";" + static_cast<DateTime2StringFilter *>(x_col_ptr->outputFilter())->format());
+			break;
+		case Table::Date:
+			setLabelsDateTimeFormat(abscissa, Date,
+					date0.toString("YYYY-MM-DD") + ";" + static_cast<DateTime2StringFilter *>(x_col_ptr->outputFilter())->format());
+			break;
+		case Table::DateTime:
+			setLabelsDateTimeFormat(abscissa, DateTime,
+					date_time0.toString("YYYY-MM-DDTHH:MM:SS") + ";" + static_cast<DateTime2StringFilter *>(x_col_ptr->outputFilter())->format());
+			break;
+	};
+
+	switch (yColType) {
+		case Table::Text:
+			setLabelsTextFormat(ordinate, y_col_ptr, startRow, endRow);
+			if (!d_plot->axisEnabled(ordinate+1))
+				axesFormatInfo[ordinate+1] = yColName;
+			break;
+		case Table::Time:
+			setLabelsDateTimeFormat(ordinate, Time,
+					QTime(12,0,0,0).toString() + ";" + static_cast<DateTime2StringFilter *>(y_col_ptr->outputFilter())->format());
+			break;
+		case Table::Date:
+			setLabelsDateTimeFormat(ordinate, Date, ";" + static_cast<DateTime2StringFilter *>(y_col_ptr->outputFilter())->format());
+			break;
+		case Table::DateTime:
+			setLabelsDateTimeFormat(ordinate, DateTime, ";" + static_cast<DateTime2StringFilter *>(y_col_ptr->outputFilter())->format());
+			break;
+	};
+
 
 	addLegendItem(yColName);
 	updatePlot();

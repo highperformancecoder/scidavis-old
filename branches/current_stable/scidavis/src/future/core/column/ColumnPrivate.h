@@ -69,7 +69,7 @@ class Column::Private
 		 * Remark: setting the mode back to undefined (the 
 		 * initial value) is not supported.
 		 */
-		void setColumnMode(SciDAVis::ColumnMode mode);
+		void setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *conversion_filter);
 
 		//! Copy another column of the same type
 		/**

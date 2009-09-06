@@ -44,7 +44,8 @@ class ColumnSetModeCmd : public QUndoCommand
 {
 public:
 	//! Ctor
-	ColumnSetModeCmd(Column::Private * col, SciDAVis::ColumnMode mode, QUndoCommand * parent = 0 );
+	ColumnSetModeCmd(Column::Private * col, SciDAVis::ColumnMode mode,
+			AbstractFilter *conversion_filter, QUndoCommand * parent = 0 );
 	//! Dtor
 	~ColumnSetModeCmd();
 
@@ -84,6 +85,8 @@ private:
 	bool d_undone;
 	//! A status flag
 	bool d_executed;
+	//! Filter to use for converting existing data
+	AbstractFilter *d_conversion_filter;
 };
 ///////////////////////////////////////////////////////////////////////////
 // end of class ColumnSetModeCmd

@@ -196,16 +196,18 @@ Column::Private::~Private()
 	} // switch(d_data_type)
 }
 
-void Column::Private::setColumnMode(SciDAVis::ColumnMode mode)
+void Column::Private::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *filter)
 {
 	if (mode == d_column_mode) return;
 
 	void * old_data = d_data;
 	// remark: the deletion of the old data will be done in the dtor of a command
 
-	AbstractSimpleFilter *filter, *new_in_filter, *new_out_filter;
+	AbstractSimpleFilter *new_in_filter, *new_out_filter;
 	bool filter_is_temporary; // it can also become outputFilter(), which we may not delete here
 	Column* temp_col = 0;
+	if (filter)
+		filter_is_temporary = false;
 
 	emit d_owner->modeAboutToChange(d_owner);
 
@@ -220,25 +222,33 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode)
 				case SciDAVis::Numeric:
 					break;
 				case SciDAVis::Text:
-					filter = outputFilter(); filter_is_temporary = false;
+					if (!filter) {
+						filter = outputFilter(); filter_is_temporary = false;
+					}
 					temp_col = new Column("temp_col", *(static_cast< QVector<double>* >(old_data)), d_validity);
 					d_data = new QStringList();
 					d_data_type = SciDAVis::TypeQString;
 					break;
 				case SciDAVis::DateTime:
-					filter = new Double2DateTimeFilter(); filter_is_temporary = true;
+					if (!filter) {
+						filter = new Double2DateTimeFilter(); filter_is_temporary = true;
+					}
 					temp_col = new Column("temp_col", *(static_cast< QVector<double>* >(old_data)), d_validity);
 					d_data = new QList<QDateTime>();
 					d_data_type = SciDAVis::TypeQDateTime;
 					break;
 				case SciDAVis::Month:
-					filter = new Double2MonthFilter(); filter_is_temporary = true;
+					if (!filter) {
+						filter = new Double2MonthFilter(); filter_is_temporary = true;
+					}
 					temp_col = new Column("temp_col", *(static_cast< QVector<double>* >(old_data)), d_validity);
 					d_data = new QList<QDateTime>();
 					d_data_type = SciDAVis::TypeQDateTime;
 					break;
 				case SciDAVis::Day:
-					filter = new Double2DayOfWeekFilter(); filter_is_temporary = true;
+					if (!filter) {
+						filter = new Double2DayOfWeekFilter(); filter_is_temporary = true;
+					}
 					temp_col = new Column("temp_col", *(static_cast< QVector<double>* >(old_data)), d_validity);
 					d_data = new QList<QDateTime>();
 					d_data_type = SciDAVis::TypeQDateTime;
@@ -252,25 +262,33 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode)
 				case SciDAVis::Text:
 					break;
 				case SciDAVis::Numeric:
-					filter = new String2DoubleFilter(); filter_is_temporary = true;
+					if (!filter) {
+						filter = new String2DoubleFilter(); filter_is_temporary = true;
+					}
 					temp_col = new Column("temp_col", *(static_cast< QStringList* >(old_data)), d_validity);
 					d_data = new QVector<double>();
 					d_data_type = SciDAVis::TypeDouble;
 					break;
 				case SciDAVis::DateTime:
-					filter = new String2DateTimeFilter(); filter_is_temporary = true;
+					if (!filter) {
+						filter = new String2DateTimeFilter(); filter_is_temporary = true;
+					}
 					temp_col = new Column("temp_col", *(static_cast< QStringList* >(old_data)), d_validity);
 					d_data = new QList<QDateTime>();
 					d_data_type = SciDAVis::TypeQDateTime;
 					break;
 				case SciDAVis::Month:
-					filter = new String2MonthFilter(); filter_is_temporary = true;
+					if (!filter) {
+						filter = new String2MonthFilter(); filter_is_temporary = true;
+					}
 					temp_col = new Column("temp_col", *(static_cast< QStringList* >(old_data)), d_validity);
 					d_data = new QList<QDateTime>();
 					d_data_type = SciDAVis::TypeQDateTime;
 					break;
 				case SciDAVis::Day:
-					filter = new String2DayOfWeekFilter(); filter_is_temporary = true;
+					if (!filter) {
+						filter = new String2DayOfWeekFilter(); filter_is_temporary = true;
+					}
 					temp_col = new Column("temp_col", *(static_cast< QStringList* >(old_data)), d_validity);
 					d_data = new QList<QDateTime>();
 					d_data_type = SciDAVis::TypeQDateTime;
@@ -288,19 +306,23 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode)
 				case SciDAVis::DateTime:
 					break;
 				case SciDAVis::Text:
-					filter = outputFilter(); filter_is_temporary = false;
+					if (!filter) {
+						filter = outputFilter(); filter_is_temporary = false;
+					}
 					temp_col = new Column("temp_col", *(static_cast< QList<QDateTime>* >(old_data)), d_validity);
 					d_data = new QStringList();
 					d_data_type = SciDAVis::TypeQString;
 					break;
 				case SciDAVis::Numeric:
-					if (d_column_mode == SciDAVis::Month)
-						filter = new Month2DoubleFilter();
-					else if (d_column_mode == SciDAVis::Day)
-						filter = new DayOfWeek2DoubleFilter();
-					else
-						filter = new DateTime2DoubleFilter();
-					filter_is_temporary = true;
+					if (!filter) {
+						if (d_column_mode == SciDAVis::Month)
+							filter = new Month2DoubleFilter();
+						else if (d_column_mode == SciDAVis::Day)
+							filter = new DayOfWeek2DoubleFilter();
+						else
+							filter = new DateTime2DoubleFilter();
+						filter_is_temporary = true;
+					}
 					temp_col = new Column("temp_col", *(static_cast< QList<QDateTime>* >(old_data)), d_validity);
 					d_data = new QVector<double>();
 					d_data_type = SciDAVis::TypeDouble;

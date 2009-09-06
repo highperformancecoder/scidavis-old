@@ -33,8 +33,9 @@
 ///////////////////////////////////////////////////////////////////////////
 // class ColumnSetModeCmd
 ///////////////////////////////////////////////////////////////////////////
-ColumnSetModeCmd::ColumnSetModeCmd(Column::Private * col, SciDAVis::ColumnMode mode, QUndoCommand * parent )
-: QUndoCommand( parent ), d_col(col), d_mode(mode)
+ColumnSetModeCmd::ColumnSetModeCmd(Column::Private * col, SciDAVis::ColumnMode mode,
+		AbstractFilter *conversion_filter, QUndoCommand * parent )
+: QUndoCommand( parent ), d_col(col), d_mode(mode), d_conversion_filter(conversion_filter)
 {
 	setText(QObject::tr("%1: change column type").arg(col->name()));
 	d_undone = false;
@@ -67,7 +68,8 @@ ColumnSetModeCmd::~ColumnSetModeCmd()
 				delete static_cast< QList<QDateTime>* >(d_old_data);
 		}
 	}
-
+	if (d_conversion_filter)
+		delete d_conversion_filter;
 }
 
 void ColumnSetModeCmd::redo()
@@ -83,7 +85,7 @@ void ColumnSetModeCmd::redo()
 		d_old_validity = d_col->validityAttribute();
 
 		// do the conversion
-		d_col->setColumnMode(d_mode);
+		d_col->setColumnMode(d_mode, d_conversion_filter);
 
 		// save new values
 		d_new_type = d_col->dataType();
