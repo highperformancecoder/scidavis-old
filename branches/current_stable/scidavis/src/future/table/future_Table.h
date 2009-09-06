@@ -265,7 +265,6 @@ class Table : public AbstractPart
 		void insertEmptyColumns();
 		void removeSelectedColumns();
 		void clearSelectedColumns();
-		void clearSelectedRows();
 		void setSelectedColumnsAsX();
 		void setSelectedColumnsAsY();
 		void setSelectedColumnsAsZ();

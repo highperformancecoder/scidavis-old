@@ -903,7 +903,7 @@ void Table::removeSelectedRows()
 	RESET_CURSOR;
 }
 
-void Table::clearSelectedRows()
+void Table::clearSelectedCells()
 {
 	if (!d_view) return;
 	int first = d_view->firstSelectedRow();
@@ -911,7 +911,7 @@ void Table::clearSelectedRows()
 	if( first < 0 ) return;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: clear selected rows(s)").arg(name()));
+	beginMacro(QObject::tr("%1: clear selected cell(s)").arg(name()));
 	QList<Column*> list = d_view->selectedColumns();
 	foreach(Column * col_ptr, list)
 	{
@@ -952,44 +952,6 @@ void Table::addRows()
 	int count = d_view->selectedRowCount(false);
 	beginMacro(QObject::tr("%1: add %2 rows(s)").arg(name()).arg(count));
 	exec(new TableSetNumberOfRowsCmd(d_table_private, rowCount() + count));
-	endMacro();
-	RESET_CURSOR;
-}
-
-void Table::clearSelectedCells()
-{
-	if (!d_view) return;
-	int first = d_view->firstSelectedRow();
-	int last = d_view->lastSelectedRow();
-	if( first < 0 ) return;
-
-	WAIT_CURSOR;
-	beginMacro(tr("%1: clear selected cell(s)").arg(name()));
-	QList<Column*> list = d_view->selectedColumns();
-	foreach(Column * col_ptr, list)
-	{
-		if (d_view->formulaModeActive())
-		{
-			int col = columnIndex(col_ptr);
-			for(int row=last; row>=first; row--)
-				if(d_view->isCellSelected(row, col))
-				{
-					col_ptr->setFormula(row, "");  
-				}
-		}
-		else
-		{
-			int col = columnIndex(col_ptr);
-			for(int row=last; row>=first; row--)
-				if(d_view->isCellSelected(row, col))
-				{
-					if(row == (col_ptr->rowCount()-1) )
-						col_ptr->removeRows(row,1);
-					else if(row < col_ptr->rowCount())
-						col_ptr->asStringColumn()->setTextAt(row, "");
-				}
-		}
-	}
 	endMacro();
 	RESET_CURSOR;
 }
@@ -1361,7 +1323,7 @@ void Table::connectActions()
 	connect(action_edit_description, SIGNAL(triggered()), this, SLOT(editDescriptionOfCurrentColumn()));
 	connect(action_insert_rows, SIGNAL(triggered()), this, SLOT(insertEmptyRows()));
 	connect(action_remove_rows, SIGNAL(triggered()), this, SLOT(removeSelectedRows()));
-	connect(action_clear_rows, SIGNAL(triggered()), this, SLOT(clearSelectedRows()));
+	connect(action_clear_rows, SIGNAL(triggered()), this, SLOT(clearSelectedCells()));
 	connect(action_add_rows, SIGNAL(triggered()), this, SLOT(addRows()));
 	connect(action_statistics_rows, SIGNAL(triggered()), this, SLOT(statisticsOnSelectedRows()));
 }
