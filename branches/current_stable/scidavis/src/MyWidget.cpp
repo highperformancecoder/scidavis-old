@@ -142,7 +142,7 @@ void MyWidget::changeEvent(QEvent *event)
 	    if (((QWindowStateChangeEvent *)event)->oldState() == windowState())
             return;
 
-		else if( windowState() & Qt::WindowMinimized )
+		if( windowState() & Qt::WindowMinimized )
 	    	w_status = Minimized;
 		else if ( windowState() & Qt::WindowMaximized )
 	     	w_status = Maximized;
@@ -151,26 +151,6 @@ void MyWidget::changeEvent(QEvent *event)
     	emit statusChanged (this);
 	}
 	QWidget::changeEvent(event);
-}
-
-void MyWidget::hideEvent(QHideEvent *event)
-{
-	if (isHidden()) { // window is explicitly hidden
-		if (w_status != Hidden) {
-			w_status = Hidden;
-			emit statusChanged(this);
-		}
-	}
-	QWidget::hideEvent(event);
-}
-
-void MyWidget::showEvent(QShowEvent *event)
-{
-	if (isHidden()) { // non-spontaneous
-		w_status = Normal;
-		emit statusChanged(this);
-	}
-	QWidget::showEvent(event);
 }
 
 bool MyWidget::eventFilter(QObject *object, QEvent *e)
