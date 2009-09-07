@@ -73,11 +73,13 @@ QString Integration::logInfo()
 	gsl_interp_accel *acc = gsl_interp_accel_alloc();
 	const gsl_interp_type *method;
 	// The method for interpolation is chosen based on the number of points
-	if(d_n>3)
+	if (d_n < 4)
+		return "";
+	if(d_n == 4)
 		method=gsl_interp_linear;
-	else if(d_n>4)
+	else if(d_n == 5)
 		method=gsl_interp_cspline;
-	else if(d_n>5)
+	else
 		method=gsl_interp_akima;
 
 	// If we have enough points use GSL libraries for interpolation, else use the polint algorithm
