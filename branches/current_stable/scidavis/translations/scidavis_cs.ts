@@ -7579,7 +7579,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="821"/>
         <source>Minor Ticks</source>
-        <translation>Achsennebenmarken</translation>
+        <translation>Vedlejší označení os</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="836"/>
@@ -7638,7 +7638,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1008"/>
         <source>Significant Digits</source>
-        <translation>Signifikante Dezimalstellen</translation>
+        <translation>Statisticky významná desetinná místa</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1009"/>
