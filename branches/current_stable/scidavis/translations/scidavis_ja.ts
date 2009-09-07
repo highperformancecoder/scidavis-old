@@ -5537,55 +5537,55 @@ The following special codes can be used:
 <context>
     <name>ControlTabs</name>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="25"/>
+        <location filename="../src/future/table/controltabs.ui" line="26"/>
         <source>Control Tabs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="53"/>
+        <location filename="../src/future/table/controltabs.ui" line="54"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="61"/>
+        <location filename="../src/future/table/controltabs.ui" line="62"/>
         <source>go to previous column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="64"/>
-        <location filename="../src/future/table/controltabs.ui" line="77"/>
+        <location filename="../src/future/table/controltabs.ui" line="65"/>
+        <location filename="../src/future/table/controltabs.ui" line="78"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="74"/>
+        <location filename="../src/future/table/controltabs.ui" line="75"/>
         <source>go to next column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="87"/>
-        <location filename="../src/future/table/controltabs.ui" line="169"/>
-        <location filename="../src/future/table/controltabs.ui" line="357"/>
+        <location filename="../src/future/table/controltabs.ui" line="88"/>
+        <location filename="../src/future/table/controltabs.ui" line="170"/>
+        <location filename="../src/future/table/controltabs.ui" line="388"/>
         <source>Appl&amp;y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="108"/>
+        <location filename="../src/future/table/controltabs.ui" line="109"/>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="127"/>
+        <location filename="../src/future/table/controltabs.ui" line="128"/>
         <source>Comment:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="151"/>
+        <location filename="../src/future/table/controltabs.ui" line="152"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="163"/>
+        <location filename="../src/future/table/controltabs.ui" line="164"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -5593,12 +5593,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="179"/>
+        <location filename="../src/future/table/controltabs.ui" line="180"/>
         <source>Type:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="201"/>
+        <location filename="../src/future/table/controltabs.ui" line="202"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -5606,12 +5606,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="211"/>
+        <location filename="../src/future/table/controltabs.ui" line="212"/>
+        <location filename="../src/future/table/controltabs.ui" line="244"/>
         <source>Format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="233"/>
+        <location filename="../src/future/table/controltabs.ui" line="234"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -5619,12 +5620,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="243"/>
+        <location filename="../src/future/table/controltabs.ui" line="254"/>
         <source>Decimal Digits:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="253"/>
+        <location filename="../src/future/table/controltabs.ui" line="264"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -5632,7 +5633,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="318"/>
+        <location filename="../src/future/table/controltabs.ui" line="280"/>
+        <source>Numbers are</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/controltabs.ui" line="290"/>
+        <source>since</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/controltabs.ui" line="349"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -5640,17 +5651,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="335"/>
+        <location filename="../src/future/table/controltabs.ui" line="366"/>
         <source>Formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="341"/>
+        <location filename="../src/future/table/controltabs.ui" line="372"/>
         <source>Formula:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="351"/>
+        <location filename="../src/future/table/controltabs.ui" line="382"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -5658,7 +5669,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="386"/>
+        <location filename="../src/future/table/controltabs.ui" line="417"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -5666,7 +5677,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="396"/>
+        <location filename="../src/future/table/controltabs.ui" line="427"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -5674,13 +5685,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="402"/>
-        <location filename="../src/future/table/controltabs.ui" line="432"/>
+        <location filename="../src/future/table/controltabs.ui" line="433"/>
+        <location filename="../src/future/table/controltabs.ui" line="463"/>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="415"/>
+        <location filename="../src/future/table/controltabs.ui" line="446"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -5688,7 +5699,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="425"/>
+        <location filename="../src/future/table/controltabs.ui" line="456"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -7726,96 +7737,96 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="3886"/>
-        <location filename="../src/Graph.cpp" line="3916"/>
+        <location filename="../src/Graph.cpp" line="3888"/>
+        <location filename="../src/Graph.cpp" line="3918"/>
         <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4145"/>
+        <location filename="../src/Graph.cpp" line="4147"/>
         <source>Data set generated from curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4445"/>
+        <location filename="../src/Graph.cpp" line="4447"/>
         <source>The columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4445"/>
+        <location filename="../src/Graph.cpp" line="4447"/>
         <source>are empty and will not be added to the plot!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4449"/>
+        <location filename="../src/Graph.cpp" line="4451"/>
         <source>The column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4449"/>
+        <location filename="../src/Graph.cpp" line="4451"/>
         <source>is empty and will not be added to the plot!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Graph.cpp" line="4455"/>
-        <location filename="../src/Graph.cpp" line="4501"/>
-        <source>&amp;Cut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Graph.cpp" line="4456"/>
-        <location filename="../src/Graph.cpp" line="4502"/>
-        <source>&amp;Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="4457"/>
         <location filename="../src/Graph.cpp" line="4503"/>
-        <source>&amp;Delete</source>
+        <source>&amp;Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Graph.cpp" line="4458"/>
+        <location filename="../src/Graph.cpp" line="4504"/>
+        <source>&amp;Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="4459"/>
-        <location filename="../src/Graph.cpp" line="4508"/>
-        <location filename="../src/Graph.cpp" line="4512"/>
-        <location filename="../src/Graph.cpp" line="4516"/>
-        <location filename="../src/Graph.cpp" line="4520"/>
-        <location filename="../src/Graph.cpp" line="4551"/>
+        <location filename="../src/Graph.cpp" line="4505"/>
+        <source>&amp;Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Graph.cpp" line="4461"/>
+        <location filename="../src/Graph.cpp" line="4510"/>
+        <location filename="../src/Graph.cpp" line="4514"/>
+        <location filename="../src/Graph.cpp" line="4518"/>
+        <location filename="../src/Graph.cpp" line="4522"/>
+        <location filename="../src/Graph.cpp" line="4553"/>
         <source>&amp;Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4533"/>
+        <location filename="../src/Graph.cpp" line="4535"/>
         <source>&amp;Rescale to show all</source>
         <translation type="unfinished">全体表示可能にリサイズ(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4533"/>
+        <location filename="../src/Graph.cpp" line="4535"/>
         <source>Ctrl+Shift+R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4535"/>
+        <location filename="../src/Graph.cpp" line="4537"/>
         <source>&amp;Hide axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4537"/>
+        <location filename="../src/Graph.cpp" line="4539"/>
         <source>&amp;Show grids</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4550"/>
+        <location filename="../src/Graph.cpp" line="4552"/>
         <source>&amp;Scale...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="5273"/>
+        <location filename="../src/Graph.cpp" line="5275"/>
         <source>There are no curves available on this plot!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="5289"/>
+        <location filename="../src/Graph.cpp" line="5291"/>
         <source>There are no curves with more than two points on this plot. Operation aborted!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7829,25 +7840,25 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/Graph.cpp" line="1346"/>
         <location filename="../src/Graph.cpp" line="1364"/>
         <location filename="../src/Graph.cpp" line="1399"/>
-        <location filename="../src/Graph.cpp" line="5288"/>
+        <location filename="../src/Graph.cpp" line="5290"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="3885"/>
-        <location filename="../src/Graph.cpp" line="3915"/>
+        <location filename="../src/Graph.cpp" line="3887"/>
+        <location filename="../src/Graph.cpp" line="3917"/>
         <source>File open error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4444"/>
-        <location filename="../src/Graph.cpp" line="4448"/>
-        <location filename="../src/Graph.cpp" line="5273"/>
+        <location filename="../src/Graph.cpp" line="4446"/>
+        <location filename="../src/Graph.cpp" line="4450"/>
+        <location filename="../src/Graph.cpp" line="5275"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4136"/>
+        <location filename="../src/Graph.cpp" line="4138"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
         <translation type="unfinished"></translation>
@@ -7868,13 +7879,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4137"/>
+        <location filename="../src/Graph.cpp" line="4139"/>
         <source>2</source>
         <comment>curve data table y column name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4146"/>
+        <location filename="../src/Graph.cpp" line="4148"/>
         <source>Curve data %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8568,68 +8579,68 @@ The limits must be within the range of x; If you do not know the maximum (minimu
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="148"/>
+        <location filename="../src/Integration.cpp" line="150"/>
         <source>Plot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="149"/>
+        <location filename="../src/Integration.cpp" line="151"/>
         <source>Numerical integration of</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="149"/>
+        <location filename="../src/Integration.cpp" line="151"/>
         <source>using a %1 order method</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="151"/>
         <location filename="../src/Integration.cpp" line="153"/>
+        <location filename="../src/Integration.cpp" line="155"/>
         <source>Iterations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="157"/>
+        <location filename="../src/Integration.cpp" line="159"/>
         <source>Tolerance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="157"/>
+        <location filename="../src/Integration.cpp" line="159"/>
         <source>max</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="158"/>
+        <location filename="../src/Integration.cpp" line="160"/>
         <source>Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="158"/>
+        <location filename="../src/Integration.cpp" line="160"/>
         <source>from</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="159"/>
+        <location filename="../src/Integration.cpp" line="161"/>
         <source>to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="168"/>
+        <location filename="../src/Integration.cpp" line="170"/>
         <source>Peak at</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="171"/>
+        <location filename="../src/Integration.cpp" line="173"/>
         <source>Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="192"/>
+        <location filename="../src/Integration.cpp" line="194"/>
         <source>Unknown integration method. Valid values must be in the range: 1 (Trapezoidal Method) to 5.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="191"/>
+        <location filename="../src/Integration.cpp" line="193"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11857,7 +11868,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="242"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="244"/>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="141"/>
         <location filename="../src/future/matrix/matrixcommands.cpp" line="125"/>
         <location filename="../src/future/table/future_Table.cpp" line="210"/>
@@ -11865,7 +11876,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="214"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="216"/>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="151"/>
         <location filename="../src/future/matrix/matrixcommands.cpp" line="64"/>
         <location filename="../src/future/table/future_Table.cpp" line="224"/>
@@ -11916,7 +11927,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="421"/>
-        <location filename="../src/future/table/future_Table.cpp" line="914"/>
         <source>%1: clear selected rows(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12022,87 +12032,87 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="93"/>
-        <location filename="../src/future/core/column/columncommands.cpp" line="39"/>
-        <location filename="../src/future/table/TableView.cpp" line="564"/>
-        <location filename="../src/future/table/TableView.cpp" line="584"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="40"/>
+        <location filename="../src/future/table/TableView.cpp" line="635"/>
+        <location filename="../src/future/table/TableView.cpp" line="652"/>
         <source>%1: change column type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="122"/>
-        <location filename="../src/future/core/column/columncommands.cpp" line="169"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="124"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="171"/>
         <source>%1: change cell value(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="291"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="293"/>
         <source>%1: set plot designation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="319"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="321"/>
         <source>%1: clear column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="386"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="388"/>
         <source>%1: mark all cells valid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="419"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="421"/>
         <source>%1: clear masks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="453"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="455"/>
         <source>%1: mark cells invalid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="455"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="457"/>
         <source>%1: mark cells valid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="489"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="491"/>
         <source>%1: mask cells</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="491"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="493"/>
         <source>%1: unmask cells</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="524"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="526"/>
         <source>%1: set cell formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="557"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="559"/>
         <source>%1: clear all formulas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="590"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="592"/>
         <source>%1: set text for row %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="622"/>
-        <location filename="../src/future/core/column/columncommands.cpp" line="654"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="624"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="656"/>
         <source>%1: set value for row %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="686"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="688"/>
         <source>%1: replace the texts for rows %2 to %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="723"/>
-        <location filename="../src/future/core/column/columncommands.cpp" line="760"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="725"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="762"/>
         <source>%1: replace the values for rows %2 to %3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12162,7 +12172,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="830"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1648"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1610"/>
         <source>%1: copy %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12238,6 +12248,11 @@ p, li { white-space: pre-wrap; }
         <source></source>
         <comment>postfix for XML warning messages</comment>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/future_Table.cpp" line="914"/>
+        <source>%1: clear selected cell(s)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13083,151 +13098,203 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TableView</name>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="163"/>
+        <location filename="../src/future/table/TableView.cpp" line="164"/>
         <source>Ctrl+A</source>
         <comment>Table: select all</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="230"/>
+        <location filename="../src/future/table/TableView.cpp" line="232"/>
         <source>Show/hide control tabs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="234"/>
+        <location filename="../src/future/table/TableView.cpp" line="236"/>
         <source>Numeric</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="235"/>
-        <location filename="../src/future/table/TableView.cpp" line="403"/>
+        <location filename="../src/future/table/TableView.cpp" line="237"/>
+        <location filename="../src/future/table/TableView.cpp" line="426"/>
         <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="236"/>
+        <location filename="../src/future/table/TableView.cpp" line="238"/>
         <source>Month names</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="237"/>
+        <location filename="../src/future/table/TableView.cpp" line="239"/>
         <source>Day names</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="238"/>
+        <location filename="../src/future/table/TableView.cpp" line="240"/>
         <source>Date and time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="331"/>
+        <location filename="../src/future/table/TableView.cpp" line="244"/>
+        <source>years</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="245"/>
+        <source>months</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="246"/>
+        <source>days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="247"/>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="248"/>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="249"/>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="250"/>
+        <source>milliseconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="342"/>
         <source>Current column:
 Name: %1
 Position: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="396"/>
+        <location filename="../src/future/table/TableView.cpp" line="419"/>
         <source>Decimal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="397"/>
+        <location filename="../src/future/table/TableView.cpp" line="420"/>
         <source>Scientific (e)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="398"/>
+        <location filename="../src/future/table/TableView.cpp" line="421"/>
         <source>Scientific (E)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="406"/>
-        <location filename="../src/future/table/TableView.cpp" line="412"/>
+        <location filename="../src/future/table/TableView.cpp" line="429"/>
+        <location filename="../src/future/table/TableView.cpp" line="435"/>
         <source>Number without leading zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="407"/>
-        <location filename="../src/future/table/TableView.cpp" line="413"/>
+        <location filename="../src/future/table/TableView.cpp" line="430"/>
+        <location filename="../src/future/table/TableView.cpp" line="436"/>
         <source>Number with leading zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="408"/>
+        <location filename="../src/future/table/TableView.cpp" line="431"/>
         <source>Abbreviated month name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="409"/>
+        <location filename="../src/future/table/TableView.cpp" line="432"/>
         <source>Full month name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="414"/>
+        <location filename="../src/future/table/TableView.cpp" line="437"/>
         <source>Abbreviated day name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="415"/>
+        <location filename="../src/future/table/TableView.cpp" line="438"/>
         <source>Full day name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="467"/>
+        <location filename="../src/future/table/TableView.cpp" line="491"/>
+        <location filename="../src/future/table/TableView.cpp" line="564"/>
+        <source>Predefined:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="493"/>
+        <location filename="../src/future/table/TableView.cpp" line="566"/>
+        <source>Format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="505"/>
+        <location filename="../src/future/table/TableView.cpp" line="575"/>
         <source>Selected column type:
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="474"/>
+        <location filename="../src/future/table/TableView.cpp" line="512"/>
         <source>Double precision
 floating point values
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="478"/>
+        <location filename="../src/future/table/TableView.cpp" line="516"/>
         <source>Text
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="481"/>
+        <location filename="../src/future/table/TableView.cpp" line="519"/>
         <source>Month names
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="484"/>
+        <location filename="../src/future/table/TableView.cpp" line="522"/>
         <source>Days of the week
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="487"/>
+        <location filename="../src/future/table/TableView.cpp" line="525"/>
+        <location filename="../src/future/table/TableView.cpp" line="551"/>
+        <location filename="../src/future/table/TableView.cpp" line="576"/>
         <source>Dates and/or times
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="490"/>
+        <location filename="../src/future/table/TableView.cpp" line="529"/>
+        <location filename="../src/future/table/TableView.cpp" line="553"/>
+        <location filename="../src/future/table/TableView.cpp" line="577"/>
         <source>Example: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="497"/>
+        <location filename="../src/future/table/TableView.cpp" line="536"/>
         <source>Hello world!
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="399"/>
+        <location filename="../src/future/table/TableView.cpp" line="422"/>
         <source>Automatic (e)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="400"/>
+        <location filename="../src/future/table/TableView.cpp" line="423"/>
         <source>Automatic (E)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13906,367 +13973,362 @@ floating point values
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="967"/>
-        <source>%1: clear selected cell(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/future/table/future_Table.cpp" line="999"/>
+        <location filename="../src/future/table/future_Table.cpp" line="961"/>
         <source>&amp;Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1001"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1518"/>
+        <location filename="../src/future/table/future_Table.cpp" line="963"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1480"/>
         <source>S&amp;et Column(s) As</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1013"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1486"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1530"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1593"/>
+        <location filename="../src/future/table/future_Table.cpp" line="975"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1448"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1492"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1555"/>
         <source>Fi&amp;ll Selection with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1082"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1044"/>
         <source>Cu&amp;t</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1085"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1047"/>
         <source>&amp;Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1088"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1050"/>
         <source>Past&amp;e</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1092"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1054"/>
         <source>&amp;Mask</source>
         <comment>mask selection</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1095"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1057"/>
         <source>&amp;Unmask</source>
         <comment>unmask selection</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1102"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1064"/>
         <source>Assign &amp;Formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1103"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1065"/>
         <source>Alt+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1110"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1072"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1117"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1079"/>
         <source>Recalculate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1118"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1080"/>
         <source>Ctrl+Return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1122"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1084"/>
         <source>Row Numbers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1125"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1087"/>
         <source>Random Values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1140"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1102"/>
         <source>F12</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1144"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1106"/>
         <source>Formula Edit Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1151"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1113"/>
         <source>Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1158"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1120"/>
         <source>&amp;Add Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1159"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1121"/>
         <source>append a new column to the table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1166"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1128"/>
         <source>Clear Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1171"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1133"/>
         <source>Clear Masks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1178"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1140"/>
         <source>&amp;Sort Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1185"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1147"/>
         <source>&amp;Go to Cell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1186"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1148"/>
         <source>Ctrl+Alt+G</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1190"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1152"/>
         <source>&amp;Dimensions</source>
         <comment>table size</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1191"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1153"/>
         <source>change the table size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1198"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1160"/>
         <source>&amp;Insert Empty Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1205"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1167"/>
         <source>Remo&amp;ve Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1212"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1174"/>
         <source>Clea&amp;r Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1219"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1181"/>
         <source>&amp;Add Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1223"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1185"/>
         <source>X</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1226"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1188"/>
         <source>Y</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1229"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1191"/>
         <source>Z</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1235"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1197"/>
         <source>X Error</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1242"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1204"/>
         <source>Y Error</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1246"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1208"/>
         <source>None</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1252"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1214"/>
         <source>&amp;Normalize Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1259"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1221"/>
         <source>&amp;Normalize Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1266"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1228"/>
         <source>&amp;Sort Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1270"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1232"/>
         <source>Column Statisti&amp;cs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1271"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1233"/>
         <source>statistics on columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1277"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1239"/>
         <source>Change &amp;Type &amp;&amp; Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1278"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1240"/>
         <source>Ctrl+Alt+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1285"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1247"/>
         <source>Edit Column &amp;Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1293"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1255"/>
         <source>&amp;Insert Empty Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1300"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1262"/>
         <source>Remo&amp;ve Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1307"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1269"/>
         <source>Clea&amp;r Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1314"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1276"/>
         <source>&amp;Add Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1318"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1280"/>
         <source>Row Statisti&amp;cs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1319"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1281"/>
         <source>statistics on rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1608"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1612"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1570"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1574"/>
         <source>Go to Cell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1608"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1570"/>
         <source>Enter column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1612"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1574"/>
         <source>Enter row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1624"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1586"/>
         <source>Set Table Dimensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1639"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1601"/>
         <source>%1: move column %2 from position %3 to %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1774"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1736"/>
         <source>%1: sort column(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2153"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2115"/>
         <source>invalid row or column count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2173"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2135"/>
         <source>Column %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2189"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2151"/>
         <source>unknown element &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2195"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2157"/>
         <source>columns attribute and number of read columns do not match</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2198"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2160"/>
         <source>no table element found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2209"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2171"/>
         <source>Hide Comments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2211"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2173"/>
         <source>Show Comments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2215"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2177"/>
         <source>Hide Controls</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2217"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2179"/>
         <source>Show Controls</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2228"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2190"/>
         <source>invalid or missing column index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2235"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2197"/>
         <source>invalid column width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2272"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2234"/>
         <source>Table</source>
         <translation type="unfinished"></translation>
     </message>

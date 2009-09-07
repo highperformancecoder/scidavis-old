@@ -7825,55 +7825,55 @@ Die folgenden Spezialcodes können benutzt werden:
 <context>
     <name>ControlTabs</name>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="25"/>
+        <location filename="../src/future/table/controltabs.ui" line="26"/>
         <source>Control Tabs</source>
         <translation>Kontrollreiter</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="53"/>
+        <location filename="../src/future/table/controltabs.ui" line="54"/>
         <source>Description</source>
         <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="61"/>
+        <location filename="../src/future/table/controltabs.ui" line="62"/>
         <source>go to previous column</source>
         <translation>gehe zu vorheriger Spalte</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="64"/>
-        <location filename="../src/future/table/controltabs.ui" line="77"/>
+        <location filename="../src/future/table/controltabs.ui" line="65"/>
+        <location filename="../src/future/table/controltabs.ui" line="78"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="74"/>
+        <location filename="../src/future/table/controltabs.ui" line="75"/>
         <source>go to next column</source>
         <translation>gehe zu nächster Spalte</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="87"/>
-        <location filename="../src/future/table/controltabs.ui" line="169"/>
-        <location filename="../src/future/table/controltabs.ui" line="357"/>
+        <location filename="../src/future/table/controltabs.ui" line="88"/>
+        <location filename="../src/future/table/controltabs.ui" line="170"/>
+        <location filename="../src/future/table/controltabs.ui" line="388"/>
         <source>Appl&amp;y</source>
         <translation>A&amp;nwenden</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="108"/>
+        <location filename="../src/future/table/controltabs.ui" line="109"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="127"/>
+        <location filename="../src/future/table/controltabs.ui" line="128"/>
         <source>Comment:</source>
         <translation>Kommentar:</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="151"/>
+        <location filename="../src/future/table/controltabs.ui" line="152"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="163"/>
+        <location filename="../src/future/table/controltabs.ui" line="164"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -7881,12 +7881,12 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Wende neuen Typ und neues Format auf alle ausgewählten Spalten an.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="179"/>
+        <location filename="../src/future/table/controltabs.ui" line="180"/>
         <source>Type:</source>
         <translation>Typ:</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="201"/>
+        <location filename="../src/future/table/controltabs.ui" line="202"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -7894,12 +7894,13 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Wähle den Spaltentyp aus&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="211"/>
+        <location filename="../src/future/table/controltabs.ui" line="212"/>
+        <location filename="../src/future/table/controltabs.ui" line="244"/>
         <source>Format:</source>
         <translation>Format:</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="233"/>
+        <location filename="../src/future/table/controltabs.ui" line="234"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -7907,12 +7908,12 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Wähle das Anzeigeformat aus&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="243"/>
+        <location filename="../src/future/table/controltabs.ui" line="254"/>
         <source>Decimal Digits:</source>
         <translation>Dezimalstellen:</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="253"/>
+        <location filename="../src/future/table/controltabs.ui" line="264"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -7920,7 +7921,17 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Gib die Anzahl der anzuzeigenden Dezimalstellen ein&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="318"/>
+        <location filename="../src/future/table/controltabs.ui" line="280"/>
+        <source>Numbers are</source>
+        <translation>Zahlen sind</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/controltabs.ui" line="290"/>
+        <source>since</source>
+        <translation>seit</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/controltabs.ui" line="349"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -7928,17 +7939,17 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informationen zum ausgewählten Typ und Format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="335"/>
+        <location filename="../src/future/table/controltabs.ui" line="366"/>
         <source>Formula</source>
         <translation>Formel</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="341"/>
+        <location filename="../src/future/table/controltabs.ui" line="372"/>
         <source>Formula:</source>
         <translation>Formel:</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="351"/>
+        <location filename="../src/future/table/controltabs.ui" line="382"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -7946,7 +7957,7 @@ p, li { white-space: pre-wrap; }
         <translation>Wende Formel auf alle ausgewählten Zellen an</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="386"/>
+        <location filename="../src/future/table/controltabs.ui" line="417"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -7954,7 +7965,7 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Wähle eine Spaltenreferenz zum Einfügen in die Formel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="396"/>
+        <location filename="../src/future/table/controltabs.ui" line="427"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -7962,13 +7973,13 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Füge Spaltenreferenz in die Formel ein&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="402"/>
-        <location filename="../src/future/table/controltabs.ui" line="432"/>
+        <location filename="../src/future/table/controltabs.ui" line="433"/>
+        <location filename="../src/future/table/controltabs.ui" line="463"/>
         <source>Add</source>
         <translation>Hinzufügen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="415"/>
+        <location filename="../src/future/table/controltabs.ui" line="446"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -7976,7 +7987,7 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Wähle ein Funktion zum Einfügen in die Formel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/future/table/controltabs.ui" line="425"/>
+        <location filename="../src/future/table/controltabs.ui" line="456"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -10986,55 +10997,55 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Peak %1 ausgewählt! Bewegen Sie den Cursor, wählen Sie durch einen Klick einen Punkt aus und bestätigen Sie durch einen Doppelklick oder &apos;Enter&apos; den nächsten Peak!</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4445"/>
+        <location filename="../src/Graph.cpp" line="4447"/>
         <source>The columns</source>
         <translation>Die Spalten</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4445"/>
+        <location filename="../src/Graph.cpp" line="4447"/>
         <source>are empty and will not be added to the plot!</source>
         <translation>sind leer und werden nicht zum Diagramm hinzugefügt!</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4449"/>
+        <location filename="../src/Graph.cpp" line="4451"/>
         <source>The column</source>
         <translation>Die Spalte</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4449"/>
+        <location filename="../src/Graph.cpp" line="4451"/>
         <source>is empty and will not be added to the plot!</source>
         <translation>ist leer und wird nicht zum Diagramm hinzugefügt!</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4455"/>
-        <location filename="../src/Graph.cpp" line="4501"/>
+        <location filename="../src/Graph.cpp" line="4457"/>
+        <location filename="../src/Graph.cpp" line="4503"/>
         <source>&amp;Cut</source>
         <translation>&amp;Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4456"/>
-        <location filename="../src/Graph.cpp" line="4502"/>
+        <location filename="../src/Graph.cpp" line="4458"/>
+        <location filename="../src/Graph.cpp" line="4504"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopieren</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4457"/>
-        <location filename="../src/Graph.cpp" line="4503"/>
+        <location filename="../src/Graph.cpp" line="4459"/>
+        <location filename="../src/Graph.cpp" line="4505"/>
         <source>&amp;Delete</source>
         <translation>&amp;Löschen</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4459"/>
-        <location filename="../src/Graph.cpp" line="4508"/>
-        <location filename="../src/Graph.cpp" line="4512"/>
-        <location filename="../src/Graph.cpp" line="4516"/>
-        <location filename="../src/Graph.cpp" line="4520"/>
-        <location filename="../src/Graph.cpp" line="4551"/>
+        <location filename="../src/Graph.cpp" line="4461"/>
+        <location filename="../src/Graph.cpp" line="4510"/>
+        <location filename="../src/Graph.cpp" line="4514"/>
+        <location filename="../src/Graph.cpp" line="4518"/>
+        <location filename="../src/Graph.cpp" line="4522"/>
+        <location filename="../src/Graph.cpp" line="4553"/>
         <source>&amp;Properties...</source>
         <translation>&amp;Eigenschaften...</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4533"/>
+        <location filename="../src/Graph.cpp" line="4535"/>
         <source>&amp;Rescale to show all</source>
         <translation>Auf Komplettansicht &amp;reskalierenskalieren</translation>
     </message>
@@ -11043,17 +11054,17 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4535"/>
+        <location filename="../src/Graph.cpp" line="4537"/>
         <source>&amp;Hide axis</source>
         <translation>Achse &amp;verbergen</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4537"/>
+        <location filename="../src/Graph.cpp" line="4539"/>
         <source>&amp;Show grids</source>
         <translation>Gitter &amp;anzeigen</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4550"/>
+        <location filename="../src/Graph.cpp" line="4552"/>
         <source>&amp;Scale...</source>
         <translation>&amp;Skala...</translation>
     </message>
@@ -11276,7 +11287,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Band FFT Filter von</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="5273"/>
+        <location filename="../src/Graph.cpp" line="5275"/>
         <source>There are no curves available on this plot!</source>
         <translation>In diesem Diagramm existieren keine Kurven!</translation>
     </message>
@@ -11285,7 +11296,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">QtiPlot - Fehler</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="5289"/>
+        <location filename="../src/Graph.cpp" line="5291"/>
         <source>There are no curves with more than two points on this plot. Operation aborted!</source>
         <translation>Es gibt keine Kurven mit mehr als 2 Punkten in diesem Diagramm. Operation abgebrochen!</translation>
     </message>
@@ -11314,7 +11325,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Boltzmann (Sigmoidal) Fit von</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4533"/>
+        <location filename="../src/Graph.cpp" line="4535"/>
         <source>Ctrl+Shift+R</source>
         <translation>Ctrl+Shift+R</translation>
     </message>
@@ -11376,8 +11387,8 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="3886"/>
-        <location filename="../src/Graph.cpp" line="3916"/>
+        <location filename="../src/Graph.cpp" line="3888"/>
+        <location filename="../src/Graph.cpp" line="3918"/>
         <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
         <translation>Die Bilddatei: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; existiert nicht mehr!</translation>
     </message>
@@ -11437,7 +11448,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation>F</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4145"/>
+        <location filename="../src/Graph.cpp" line="4147"/>
         <source>Data set generated from curve</source>
         <translation>Aus der Kurve generierter Datensatz</translation>
     </message>
@@ -11455,7 +11466,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <location filename="../src/Graph.cpp" line="1346"/>
         <location filename="../src/Graph.cpp" line="1364"/>
         <location filename="../src/Graph.cpp" line="1399"/>
-        <location filename="../src/Graph.cpp" line="5288"/>
+        <location filename="../src/Graph.cpp" line="5290"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -11475,32 +11486,32 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation>Konnte Format der Achsenbeschriftung nicht auf das angeforderte Format setzen!</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="3885"/>
-        <location filename="../src/Graph.cpp" line="3915"/>
+        <location filename="../src/Graph.cpp" line="3887"/>
+        <location filename="../src/Graph.cpp" line="3917"/>
         <source>File open error</source>
         <translation>Fehler beim Öffnen der Datei</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4444"/>
-        <location filename="../src/Graph.cpp" line="4448"/>
-        <location filename="../src/Graph.cpp" line="5273"/>
+        <location filename="../src/Graph.cpp" line="4446"/>
+        <location filename="../src/Graph.cpp" line="4450"/>
+        <location filename="../src/Graph.cpp" line="5275"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4136"/>
+        <location filename="../src/Graph.cpp" line="4138"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4137"/>
+        <location filename="../src/Graph.cpp" line="4139"/>
         <source>2</source>
         <comment>curve data table y column name</comment>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="../src/Graph.cpp" line="4146"/>
+        <location filename="../src/Graph.cpp" line="4148"/>
         <source>Curve data %1</source>
         <translation>Kurvendaten %1</translation>
     </message>
@@ -12681,58 +12692,58 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
         <translation>Integration</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="148"/>
+        <location filename="../src/Integration.cpp" line="150"/>
         <source>Plot</source>
         <translation>Diagramm</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="149"/>
+        <location filename="../src/Integration.cpp" line="151"/>
         <source>Numerical integration of</source>
         <translation>Numerische Integration von</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="149"/>
+        <location filename="../src/Integration.cpp" line="151"/>
         <source>using a %1 order method</source>
         <translation>mit einer Methode %1. Ordnung</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="151"/>
         <location filename="../src/Integration.cpp" line="153"/>
+        <location filename="../src/Integration.cpp" line="155"/>
         <source>Iterations</source>
         <translation>Iterationen</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="157"/>
+        <location filename="../src/Integration.cpp" line="159"/>
         <source>Tolerance</source>
         <translation>Toleranz</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="157"/>
+        <location filename="../src/Integration.cpp" line="159"/>
         <source>max</source>
         <translation>Max</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="158"/>
+        <location filename="../src/Integration.cpp" line="160"/>
         <source>Points</source>
         <translation>Punkte</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="158"/>
+        <location filename="../src/Integration.cpp" line="160"/>
         <source>from</source>
         <translation>von</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="159"/>
+        <location filename="../src/Integration.cpp" line="161"/>
         <source>to</source>
         <translation>bis</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="168"/>
+        <location filename="../src/Integration.cpp" line="170"/>
         <source>Peak at</source>
         <translation>Scheitelpunkt bei</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="171"/>
+        <location filename="../src/Integration.cpp" line="173"/>
         <source>Area</source>
         <translation>Fläche</translation>
     </message>
@@ -12741,12 +12752,12 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
         <translation type="obsolete">QtiPlot - Fehler</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="192"/>
+        <location filename="../src/Integration.cpp" line="194"/>
         <source>Unknown integration method. Valid values must be in the range: 1 (Trapezoidal Method) to 5.</source>
         <translation>Unbekannte Integrationsmethode. Gültige Werte müssen im Bereich 1 (Trapezoidalmethode) bis 5 liegen.</translation>
     </message>
     <message>
-        <location filename="../src/Integration.cpp" line="191"/>
+        <location filename="../src/Integration.cpp" line="193"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -17030,7 +17041,7 @@ Absolutbetrag von x.</translation>
         <translation>%1: %2 Spalte(n) entfernt</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="242"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="244"/>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="141"/>
         <location filename="../src/future/matrix/matrixcommands.cpp" line="125"/>
         <location filename="../src/future/table/future_Table.cpp" line="210"/>
@@ -17038,7 +17049,7 @@ Absolutbetrag von x.</translation>
         <translation>%1: %2 Zeile(n) entfernt</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="214"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="216"/>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="151"/>
         <location filename="../src/future/matrix/matrixcommands.cpp" line="64"/>
         <location filename="../src/future/table/future_Table.cpp" line="224"/>
@@ -17089,7 +17100,6 @@ Absolutbetrag von x.</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="421"/>
-        <location filename="../src/future/table/future_Table.cpp" line="914"/>
         <source>%1: clear selected rows(s)</source>
         <translation>%1: gewählte Zeile(n) geleert</translation>
     </message>
@@ -17195,87 +17205,87 @@ Absolutbetrag von x.</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="93"/>
-        <location filename="../src/future/core/column/columncommands.cpp" line="39"/>
-        <location filename="../src/future/table/TableView.cpp" line="564"/>
-        <location filename="../src/future/table/TableView.cpp" line="584"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="40"/>
+        <location filename="../src/future/table/TableView.cpp" line="635"/>
+        <location filename="../src/future/table/TableView.cpp" line="652"/>
         <source>%1: change column type</source>
         <translation>%1: Spaltentyp geändert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="122"/>
-        <location filename="../src/future/core/column/columncommands.cpp" line="169"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="124"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="171"/>
         <source>%1: change cell value(s)</source>
         <translation>%1: Zellwert(e) geändert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="291"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="293"/>
         <source>%1: set plot designation</source>
         <translation>%1: Darstellungszuordnung geändert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="319"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="321"/>
         <source>%1: clear column</source>
         <translation>%1: Spalte geleert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="386"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="388"/>
         <source>%1: mark all cells valid</source>
         <translation>%1: Zellen als ungültig markiert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="419"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="421"/>
         <source>%1: clear masks</source>
         <translation>%1: alle Maskierungen entfernt</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="453"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="455"/>
         <source>%1: mark cells invalid</source>
         <translation>%1: Zellen als ungültig markiert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="455"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="457"/>
         <source>%1: mark cells valid</source>
         <translation>%1: Zellen als gültig markiert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="489"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="491"/>
         <source>%1: mask cells</source>
         <translation>%1: Zellen maskiert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="491"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="493"/>
         <source>%1: unmask cells</source>
         <translation>%1: Maskierung entfernt</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="524"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="526"/>
         <source>%1: set cell formula</source>
         <translation>%1: Formel geändert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="557"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="559"/>
         <source>%1: clear all formulas</source>
         <translation>%1: alle Formeln gelöscht</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="590"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="592"/>
         <source>%1: set text for row %2</source>
         <translation>%1: Text in Zeile %2 geändert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="622"/>
-        <location filename="../src/future/core/column/columncommands.cpp" line="654"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="624"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="656"/>
         <source>%1: set value for row %2</source>
         <translation>%1: Wert in Zeile %2 geändert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="686"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="688"/>
         <source>%1: replace the texts for rows %2 to %3</source>
         <translation>%1: Texte in Zeilen %2 bis %3 geändert</translation>
     </message>
     <message>
-        <location filename="../src/future/core/column/columncommands.cpp" line="723"/>
-        <location filename="../src/future/core/column/columncommands.cpp" line="760"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="725"/>
+        <location filename="../src/future/core/column/columncommands.cpp" line="762"/>
         <source>%1: replace the values for rows %2 to %3</source>
         <translation>%1: Werte in Zeilen %2 bis %3 geändert</translation>
     </message>
@@ -17335,7 +17345,7 @@ Absolutbetrag von x.</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/future_Matrix.cpp" line="830"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1648"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1610"/>
         <source>%1: copy %2</source>
         <translation>%1: Daten von %2 kopiert</translation>
     </message>
@@ -17411,6 +17421,11 @@ Absolutbetrag von x.</translation>
         <source></source>
         <comment>postfix for XML warning messages</comment>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/future_Table.cpp" line="914"/>
+        <source>%1: clear selected cell(s)</source>
+        <translation>%1: gewählte Zelle(n) leeren</translation>
     </message>
 </context>
 <context>
@@ -19015,44 +19030,79 @@ Wollen sie Zellen einfügen?</translation>
 <context>
     <name>TableView</name>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="163"/>
+        <location filename="../src/future/table/TableView.cpp" line="164"/>
         <source>Ctrl+A</source>
         <comment>Table: select all</comment>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="230"/>
+        <location filename="../src/future/table/TableView.cpp" line="232"/>
         <source>Show/hide control tabs</source>
         <translation>Zeige/verstecke Kontrollreiter</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="234"/>
+        <location filename="../src/future/table/TableView.cpp" line="236"/>
         <source>Numeric</source>
         <translation>Numerisch</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="235"/>
-        <location filename="../src/future/table/TableView.cpp" line="403"/>
+        <location filename="../src/future/table/TableView.cpp" line="237"/>
+        <location filename="../src/future/table/TableView.cpp" line="426"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="236"/>
+        <location filename="../src/future/table/TableView.cpp" line="238"/>
         <source>Month names</source>
         <translation>Monatsnamen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="237"/>
+        <location filename="../src/future/table/TableView.cpp" line="239"/>
         <source>Day names</source>
         <translation>Wochentage</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="238"/>
+        <location filename="../src/future/table/TableView.cpp" line="240"/>
         <source>Date and time</source>
         <translation>Datum und Uhrzeit</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="331"/>
+        <location filename="../src/future/table/TableView.cpp" line="244"/>
+        <source>years</source>
+        <translation>Jahre</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="245"/>
+        <source>months</source>
+        <translation>Monate</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="246"/>
+        <source>days</source>
+        <translation>Tage</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="247"/>
+        <source>hours</source>
+        <translation>Stunden</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="248"/>
+        <source>minutes</source>
+        <translation>Minuten</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="249"/>
+        <source>seconds</source>
+        <translation>Sekunden</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="250"/>
+        <source>milliseconds</source>
+        <translation>Millisekunden</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="342"/>
         <source>Current column:
 Name: %1
 Position: %2</source>
@@ -19061,61 +19111,74 @@ Name: %1
 Position: %2</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="396"/>
+        <location filename="../src/future/table/TableView.cpp" line="419"/>
         <source>Decimal</source>
         <translation>Dezimal</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="397"/>
+        <location filename="../src/future/table/TableView.cpp" line="420"/>
         <source>Scientific (e)</source>
         <translation>Wissenschaftlich (e)</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="398"/>
+        <location filename="../src/future/table/TableView.cpp" line="421"/>
         <source>Scientific (E)</source>
         <translation>Wissenschaftlich (E)</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="406"/>
-        <location filename="../src/future/table/TableView.cpp" line="412"/>
+        <location filename="../src/future/table/TableView.cpp" line="429"/>
+        <location filename="../src/future/table/TableView.cpp" line="435"/>
         <source>Number without leading zero</source>
         <translation>Zahl ohne führend Null</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="407"/>
-        <location filename="../src/future/table/TableView.cpp" line="413"/>
+        <location filename="../src/future/table/TableView.cpp" line="430"/>
+        <location filename="../src/future/table/TableView.cpp" line="436"/>
         <source>Number with leading zero</source>
         <translation>Zahl mit führender Null</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="408"/>
+        <location filename="../src/future/table/TableView.cpp" line="431"/>
         <source>Abbreviated month name</source>
         <translation>Abgekürzter Monatsname</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="409"/>
+        <location filename="../src/future/table/TableView.cpp" line="432"/>
         <source>Full month name</source>
         <translation>Ausgeschriebener Monatsname</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="414"/>
+        <location filename="../src/future/table/TableView.cpp" line="437"/>
         <source>Abbreviated day name</source>
         <translation>Abgekürzter Wochentag</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="415"/>
+        <location filename="../src/future/table/TableView.cpp" line="438"/>
         <source>Full day name</source>
         <translation>Ausgeschriebener Wochentag</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="467"/>
+        <location filename="../src/future/table/TableView.cpp" line="491"/>
+        <location filename="../src/future/table/TableView.cpp" line="564"/>
+        <source>Predefined:</source>
+        <translation>Vordefiniert:</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="493"/>
+        <location filename="../src/future/table/TableView.cpp" line="566"/>
+        <source>Format:</source>
+        <translation>Format:</translation>
+    </message>
+    <message>
+        <location filename="../src/future/table/TableView.cpp" line="505"/>
+        <location filename="../src/future/table/TableView.cpp" line="575"/>
         <source>Selected column type:
 </source>
         <translation>Ausgewählter Spaltentyp:
 </translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="474"/>
+        <location filename="../src/future/table/TableView.cpp" line="512"/>
         <source>Double precision
 floating point values
 </source>
@@ -19124,52 +19187,56 @@ doppelter Präzision
 </translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="478"/>
+        <location filename="../src/future/table/TableView.cpp" line="516"/>
         <source>Text
 </source>
         <translation>Text
 </translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="481"/>
+        <location filename="../src/future/table/TableView.cpp" line="519"/>
         <source>Month names
 </source>
         <translation>Monatsnamen
 </translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="484"/>
+        <location filename="../src/future/table/TableView.cpp" line="522"/>
         <source>Days of the week
 </source>
         <translation>Wochentage
 </translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="487"/>
+        <location filename="../src/future/table/TableView.cpp" line="525"/>
+        <location filename="../src/future/table/TableView.cpp" line="551"/>
+        <location filename="../src/future/table/TableView.cpp" line="576"/>
         <source>Dates and/or times
 </source>
         <translation>Datum und/oder Uhrzeit
 </translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="490"/>
+        <location filename="../src/future/table/TableView.cpp" line="529"/>
+        <location filename="../src/future/table/TableView.cpp" line="553"/>
+        <location filename="../src/future/table/TableView.cpp" line="577"/>
         <source>Example: </source>
         <translation>Beispiel:</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="497"/>
+        <location filename="../src/future/table/TableView.cpp" line="536"/>
         <source>Hello world!
 </source>
         <translation>Hallo Welt!
 </translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="399"/>
+        <location filename="../src/future/table/TableView.cpp" line="422"/>
         <source>Automatic (e)</source>
         <translation>Automatisch (e)</translation>
     </message>
     <message>
-        <location filename="../src/future/table/TableView.cpp" line="400"/>
+        <location filename="../src/future/table/TableView.cpp" line="423"/>
         <source>Automatic (E)</source>
         <translation>Automatisch (E)</translation>
     </message>
@@ -19924,367 +19991,366 @@ doppelter Präzision
         <translation>%1: Zellen mit Zufallswerten gefüllt</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="967"/>
         <source>%1: clear selected cell(s)</source>
-        <translation>%1: gewählte Zelle(n) geleert</translation>
+        <translation type="obsolete">%1: gewählte Zelle(n) geleert</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="999"/>
+        <location filename="../src/future/table/future_Table.cpp" line="961"/>
         <source>&amp;Table</source>
         <translation>&amp;Tabelle</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1001"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1518"/>
+        <location filename="../src/future/table/future_Table.cpp" line="963"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1480"/>
         <source>S&amp;et Column(s) As</source>
         <translation>Darstellungszuordnung</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1013"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1486"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1530"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1593"/>
+        <location filename="../src/future/table/future_Table.cpp" line="975"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1448"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1492"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1555"/>
         <source>Fi&amp;ll Selection with</source>
         <translation>Auswahl fü&amp;llen mit</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1082"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1044"/>
         <source>Cu&amp;t</source>
         <translation>&amp;Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1085"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1047"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopieren</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1088"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1050"/>
         <source>Past&amp;e</source>
         <translation>&amp;Einfügen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1092"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1054"/>
         <source>&amp;Mask</source>
         <comment>mask selection</comment>
         <translation>&amp;Maskieren</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1095"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1057"/>
         <source>&amp;Unmask</source>
         <comment>unmask selection</comment>
         <translation>&amp;Demaskieren</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1102"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1064"/>
         <source>Assign &amp;Formula</source>
         <translation>&amp;Formel zuweisen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1103"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1065"/>
         <source>Alt+Q</source>
         <translation>Alt+Q</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1110"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1072"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
         <translation>&amp;Leeren</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1117"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1079"/>
         <source>Recalculate</source>
         <translation>Neu berechnen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1118"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1080"/>
         <source>Ctrl+Return</source>
         <translation>Ctrl+Return</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1122"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1084"/>
         <source>Row Numbers</source>
         <translation>Zeilennummern</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1125"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1087"/>
         <source>Random Values</source>
         <translation>Zufallswerte</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1140"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1102"/>
         <source>F12</source>
         <translation>F12</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1144"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1106"/>
         <source>Formula Edit Mode</source>
         <translation>Formeleingabe-Modus</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1151"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1113"/>
         <source>Select All</source>
         <translation>Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1158"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1120"/>
         <source>&amp;Add Column</source>
         <translation>Sp&amp;alte hinzufügen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1159"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1121"/>
         <source>append a new column to the table</source>
         <translation>neue Spalte an Tabelle anfügen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1166"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1128"/>
         <source>Clear Table</source>
         <translation>Tabelle leeren</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1171"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1133"/>
         <source>Clear Masks</source>
         <translation>Maskierungen löschen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1178"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1140"/>
         <source>&amp;Sort Table</source>
         <translation>Ta&amp;belle sortieren</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1185"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1147"/>
         <source>&amp;Go to Cell</source>
         <translation>&amp;Gehe zu Zelle</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1186"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1148"/>
         <source>Ctrl+Alt+G</source>
         <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1190"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1152"/>
         <source>&amp;Dimensions</source>
         <comment>table size</comment>
         <translation>&amp;Abmessungen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1191"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1153"/>
         <source>change the table size</source>
         <translation>Tabellengröße ändern</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1198"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1160"/>
         <source>&amp;Insert Empty Columns</source>
         <translation>Leere Spalten &amp;einfügen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1205"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1167"/>
         <source>Remo&amp;ve Columns</source>
         <translation>Spalten &amp;löschen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1212"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1174"/>
         <source>Clea&amp;r Columns</source>
         <translation>Spalten &amp;leeren</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1219"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1181"/>
         <source>&amp;Add Columns</source>
         <translation>Sp&amp;alten hinzufügen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1223"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1185"/>
         <source>X</source>
         <comment>plot designation</comment>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1226"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1188"/>
         <source>Y</source>
         <comment>plot designation</comment>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1229"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1191"/>
         <source>Z</source>
         <comment>plot designation</comment>
         <translation>Z</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1235"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1197"/>
         <source>X Error</source>
         <comment>plot designation</comment>
         <translation>X-Fehler</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1242"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1204"/>
         <source>Y Error</source>
         <comment>plot designation</comment>
         <translation>Y-Fehler</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1246"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1208"/>
         <source>None</source>
         <comment>plot designation</comment>
         <translation>Keine</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1252"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1214"/>
         <source>&amp;Normalize Columns</source>
         <translation>Spalten &amp;normieren</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1259"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1221"/>
         <source>&amp;Normalize Selection</source>
         <translation>Auswahl &amp;normieren</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1266"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1228"/>
         <source>&amp;Sort Columns</source>
         <translation>Spalten &amp;sortieren</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1270"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1232"/>
         <source>Column Statisti&amp;cs</source>
         <translation>S&amp;paltenstatistik</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1271"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1233"/>
         <source>statistics on columns</source>
         <translation>Spaltenstatistik</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1277"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1239"/>
         <source>Change &amp;Type &amp;&amp; Format</source>
         <translation>Ändere &amp;Typ &amp;&amp; Format</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1278"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1240"/>
         <source>Ctrl+Alt+O</source>
         <translation>Ctrl+Alt+O</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1285"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1247"/>
         <source>Edit Column &amp;Description</source>
         <translation>Bearbeite &amp;Beschreibung der Spalte</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1293"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1255"/>
         <source>&amp;Insert Empty Rows</source>
         <translation>Leere &amp;Zeilen einfügen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1300"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1262"/>
         <source>Remo&amp;ve Rows</source>
         <translation>Zeilen &amp;löschen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1307"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1269"/>
         <source>Clea&amp;r Rows</source>
         <translation>Zeilen&amp;inhalte löschen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1314"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1276"/>
         <source>&amp;Add Rows</source>
         <translation>Zeilen hinzufügen</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1318"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1280"/>
         <source>Row Statisti&amp;cs</source>
         <translation>&amp;Zeilenstatistik</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1319"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1281"/>
         <source>statistics on rows</source>
         <translation>Zeilenstatistik</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1608"/>
-        <location filename="../src/future/table/future_Table.cpp" line="1612"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1570"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1574"/>
         <source>Go to Cell</source>
         <translation>Gehe zu Zelle</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1608"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1570"/>
         <source>Enter column</source>
         <translation>Spalte eingeben</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1612"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1574"/>
         <source>Enter row</source>
         <translation>Zeile eingeben</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1624"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1586"/>
         <source>Set Table Dimensions</source>
         <translation>Tabellengröße ändern</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1639"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1601"/>
         <source>%1: move column %2 from position %3 to %4.</source>
         <translation>%1: Spalte %2 von %3 nach %4 verschoben</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="1774"/>
+        <location filename="../src/future/table/future_Table.cpp" line="1736"/>
         <source>%1: sort column(s)</source>
         <translation>%1: Spalte(n) sortiert</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2153"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2115"/>
         <source>invalid row or column count</source>
         <translation>ungültige Zeilen- oder Spaltenzahl</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2173"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2135"/>
         <source>Column %1</source>
         <translation>Spalte %1</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2189"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2151"/>
         <source>unknown element &apos;%1&apos;</source>
         <translation>unbekanntes Element &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2195"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2157"/>
         <source>columns attribute and number of read columns do not match</source>
         <translation>Spaltenzahl-Attribut und Anzahl gelesener Spalten sind verschieden</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2198"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2160"/>
         <source>no table element found</source>
         <translation>kein Tabelle-Element gefunden</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2209"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2171"/>
         <source>Hide Comments</source>
         <translation>Verstecke Kommentare</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2211"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2173"/>
         <source>Show Comments</source>
         <translation>Zeige Kommentare</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2215"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2177"/>
         <source>Hide Controls</source>
         <translation>Verstecke Kontrollreiter</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2217"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2179"/>
         <source>Show Controls</source>
         <translation>Zeige Kontrollreiter</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2228"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2190"/>
         <source>invalid or missing column index</source>
         <translation>ungültiger oder fehlender Spaltenindex</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2235"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2197"/>
         <source>invalid column width</source>
         <translation>ungültige Spaltenbreite</translation>
     </message>
     <message>
-        <location filename="../src/future/table/future_Table.cpp" line="2272"/>
+        <location filename="../src/future/table/future_Table.cpp" line="2234"/>
         <source>Table</source>
         <translation>Tabelle</translation>
     </message>
