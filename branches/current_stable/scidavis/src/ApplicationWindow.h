@@ -363,6 +363,7 @@ public slots:
 	void importASCII();
 	void importASCII(const QStringList& files, int import_mode, const QString& local_column_separator, int local_ignored_lines,
 		 bool local_rename_columns, bool local_strip_spaces, bool local_simplify_spaces, bool local_convert_to_numeric, QLocale local_numeric_locale);
+	void reimportASCII();
 	void exportAllTables(const QString& sep, bool colNames, bool expSelection);
 	void exportASCII(const QString& tableName, const QString& sep, bool colNames, bool expSelection);
 
@@ -1045,6 +1046,7 @@ private:
 #endif
 
     QAction *actionExportGraph, *actionExportAllGraphs, *actionPrint, *actionPrintAllPlots, *actionShowExportASCIIDialog;
+	QAction *actionReimportASCII;
     QAction *actionExportPDF;
     QAction *actionCloseAllWindows, *actionClearLogInfo, *actionShowPlotWizard, *actionShowConfigureDialog;
     QAction *actionShowCurvesDialog, *actionAddErrorBars, *actionAddFunctionCurve, *actionUnzoom, *actionNewLegend, *actionAddImage, *actionAddText;

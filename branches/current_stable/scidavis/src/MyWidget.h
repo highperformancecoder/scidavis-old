@@ -156,6 +156,8 @@ protected slots:
 protected:
 	//! Catches parent changes (in order to gain access to the title bar)
 	virtual void changeEvent(QEvent *event);
+	virtual void hideEvent(QHideEvent *event);
+	virtual void showEvent(QShowEvent *event);
 	//! Title bar of this MDI window if it currently belongs to a QWorkspace, NULL else
 	QWidget *titleBar;
 

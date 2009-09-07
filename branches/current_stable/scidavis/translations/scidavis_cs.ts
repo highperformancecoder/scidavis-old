@@ -8610,7 +8610,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="64"/>
         <source>First decay time (t1)</source>
-        <translation>První čas rozpadu (t1)</translation>
+        <translation>První čas poklesu (t1)</translation>
     </message>
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="68"/>
@@ -8623,12 +8623,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="73"/>
         <source>Second decay time (t2)</source>
-        <translation>Druhý čas rozpadu (t2)</translation>
+        <translation>Druhý čas poklesu (t2)</translation>
     </message>
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="79"/>
         <source>Third decay time (t3)</source>
-        <translation>Třetí čas rozpadu (t3)</translation>
+        <translation>Třetí čas poklesu (t3)</translation>
     </message>
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="95"/>
@@ -8696,7 +8696,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="62"/>
         <source>Decay time</source>
-        <translation>Čas rozpadu</translation>
+        <translation>Čas poklesu</translation>
     </message>
     <message>
         <location filename="../src/ExpDecayDialog.cpp" line="49"/>
@@ -8736,7 +8736,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ExponentialFit.cpp" line="87"/>
         <source>Exponential decay</source>
-        <translation>Exponenciální rozpad</translation>
+        <translation>Exponenciální pokles</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="89"/>
@@ -19494,7 +19494,7 @@ dvojnásobná přesnost
     <message>
         <location filename="../src/ExponentialFit.cpp" line="243"/>
         <source>Exponential decay</source>
-        <translation>Exponenciální rozpad</translation>
+        <translation>Exponenciální pokles</translation>
     </message>
 </context>
 <context>
@@ -19555,7 +19555,7 @@ dvojnásobná přesnost
     <message>
         <location filename="../src/ExponentialFit.cpp" line="166"/>
         <source>Exponential decay</source>
-        <translation>Exponenciální rozpad</translation>
+        <translation>Exponenciální pokles</translation>
     </message>
 </context>
 <context>

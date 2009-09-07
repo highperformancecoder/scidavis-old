@@ -3275,6 +3275,21 @@ void ApplicationWindow::importASCII()
 			import_dialog->decimalSeparators());
 }
 
+void ApplicationWindow::reimportASCII()
+{
+	Table *table = qobject_cast<Table *>(d_workspace->activeWindow());
+	if (!table) return;
+	importASCII(QStringList() << table->windowLabel(),
+			ImportASCIIDialog::Overwrite,
+			columnSeparator,
+			ignoredLines,
+			renameColumns,
+			strip_spaces,
+			simplify_spaces,
+			d_convert_to_numeric,
+			d_ASCII_import_locale);
+}
+
 void ApplicationWindow::importASCII(const QStringList& files, int import_mode, const QString& local_column_separator, int local_ignored_lines,
 		bool local_rename_columns, bool local_strip_spaces, bool local_simplify_spaces, bool local_convert_to_numeric, QLocale local_numeric_locale)
 {
@@ -7220,7 +7235,8 @@ void ApplicationWindow::updateWindowStatus(MyWidget* w)
 			if (oldMaxWindow != w && oldMaxWindow->status() == MyWidget::Maximized)
 				oldMaxWindow->setStatus(MyWidget::Normal);
 		}
-	}
+	} else if (w->status() == MyWidget::Hidden && !hiddenWindows->contains(w))
+		hiddenWindows->append(w);
 	modifiedProject();
 }
 
@@ -10494,6 +10510,9 @@ void ApplicationWindow::createActions()
 	actionShowExportASCIIDialog = new QAction(tr("E&xport ASCII"), this);
 	connect(actionShowExportASCIIDialog, SIGNAL(activated()), this, SLOT(showExportASCIIDialog()));
 
+	actionReimportASCII = new QAction(tr("Re&import from ASCII file"), this);
+	connect(actionReimportASCII, SIGNAL(activated()), this, SLOT(reimportASCII()));
+
 	actionCloseAllWindows = new QAction(QIcon(QPixmap(":/quit.xpm")), tr("&Quit"), this);
 	actionCloseAllWindows->setShortcut( tr("Ctrl+Q") );
 	connect(actionCloseAllWindows, SIGNAL(activated()), qApp, SLOT(closeAllWindows()));
@@ -11040,6 +11059,7 @@ void ApplicationWindow::translateActionsStrings()
 
 	actionPrintAllPlots->setMenuText(tr("Print All Plo&ts"));
 	actionShowExportASCIIDialog->setMenuText(tr("E&xport ASCII"));
+	actionReimportASCII->setMenuText(tr("Re&import from ASCII file"));
 
 	actionCloseAllWindows->setMenuText(tr("&Quit"));
 	actionCloseAllWindows->setShortcut(tr("Ctrl+Q"));
@@ -12476,9 +12496,7 @@ void ApplicationWindow::setShowWindowsPolicy(int p)
 		{
 			MyWidget *widget = qobject_cast<MyWidget *>(w);
 			if (!widget) continue;
-			hiddenWindows->append(widget);
 			widget->hide();
-			setListView(widget->name(),tr("Hidden"));
 		}
 		delete lst;
 	}
@@ -12602,7 +12620,8 @@ void ApplicationWindow::showAllFolderWindows()
 		lst = ((Folder *)item->folder())->windowsList();
 		foreach(MyWidget *w, lst)
 		{
-			if (w && show_windows_policy == SubFolders)
+			if (!w) continue;
+			if (show_windows_policy == SubFolders)
 			{
 				updateWindowLists(w);
 				switch (w->status())
@@ -12624,8 +12643,13 @@ void ApplicationWindow::showAllFolderWindows()
 						break;
 				}
 			}
-			else
+			else {
+				MyWidget::Status status = w->status();
+				w->blockSignals(true);
 				w->hide();
+				w->setStatus(status);
+				w->blockSignals(false);
+			}
 		}
 
 		item = (FolderListItem *)item->itemBelow();
@@ -12816,8 +12840,13 @@ void ApplicationWindow::folderItemChanged(Q3ListViewItem *it)
 void ApplicationWindow::hideFolderWindows(Folder *f)
 {
 	QList<MyWidget *> lst = f->windowsList();
-	foreach(MyWidget *w, lst)
+	foreach(MyWidget *w, lst) {
+		MyWidget::Status status = w->status();
+		w->blockSignals(true);
 		w->hide();
+		w->setStatus(status);
+		w->blockSignals(false);
+	}
 
 	if ( (f->children()).isEmpty() )
 		return;
@@ -12827,8 +12856,13 @@ void ApplicationWindow::hideFolderWindows(Folder *f)
 	int initial_depth = item->depth();
 	while (item && item->depth() >= initial_depth){
 		lst = item->folder()->windowsList();
-		foreach(MyWidget *w, lst)
+		foreach(MyWidget *w, lst) {
+			MyWidget::Status status = w->status();
+			w->blockSignals(true);
 			w->hide();
+			w->setStatus(status);
+			w->blockSignals(false);
+		}
 		item = (FolderListItem *)item->itemBelow();
 	}
 }
@@ -12895,8 +12929,13 @@ void ApplicationWindow::changeFolder(Folder *newFolder, bool force)
                         else if (w->status() == MyWidget::Minimized)
                             w->showMinimized();
                     }
-				else if (w->isVisible())
-					w->hide();
+					else if (w->isVisible()) {
+						MyWidget::Status status = w->status();
+						w->blockSignals(true);
+						w->hide();
+						w->setStatus(status);
+						w->blockSignals(false);
+					}
                 }
             }
 		item = (FolderListItem *)item->itemBelow();
@@ -13146,7 +13185,6 @@ void ApplicationWindow::dropFolderItems(Q3ListViewItem *dest)
 			if (w)
 			{
 				current_folder->removeWindow(w);
-				w->hide();
 				dest_f->addWindow(w);
 				delete it;
 			}
@@ -13179,7 +13217,6 @@ void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)
 	foreach(MyWidget *w, lst)
 	{
 		src_f->removeWindow(w);
-		w->hide();
 		dest_f->addWindow(w);
 	}
 
@@ -13203,7 +13240,6 @@ void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)
 			foreach(MyWidget *w, lst)
 			{
 				src_f->removeWindow(w);
-				w->hide();
 				dest_f->addWindow(w);
 			}
 
@@ -13462,9 +13498,11 @@ void ApplicationWindow::showWindowMenu(MyWidget * widget)
 	QMenu cm(this);
 	QMenu depend_menu(this);
 
-	if (widget->inherits("Table"))
+	if (widget->inherits("Table")) {
+		if (QFile(widget->windowLabel()).exists())
+			cm.addAction(actionReimportASCII);
 		cm.addAction(actionShowExportASCIIDialog);
-	else if (widget->inherits("Note"))
+	} else if (widget->inherits("Note"))
 		cm.addAction(actionSaveNote);
 	else
 		cm.addAction(actionSaveTemplate);
