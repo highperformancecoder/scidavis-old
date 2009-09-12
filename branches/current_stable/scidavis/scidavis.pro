@@ -95,10 +95,8 @@ unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
 
 unix:LIBS         += -L/usr/lib$${libsuff}
 unix:LIBS         += -lgsl -lgslcblas -lz
-### muparser 1.30 does not compile as a shared lib on Linux
-unix:LIBS         += -L/usr/local/lib$${libsuff}
-unix:LIBS         += /usr/local/lib/libmuparser.a
-unix:INCLUDEPATH  += /usr/local/include
+unix:LIBS         += -lmuparser
+unix:INCLUDEPATH  += /usr/include/muParser
 
 #############################################################################
 ### Link everything dynamically
