@@ -3757,7 +3757,7 @@ ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 		{
 			Folder *parent = (Folder *)app->current_folder->parent();
 			if (!parent)
-				app->current_folder = projectFolder();
+				app->current_folder = app->projectFolder();
 			else
 				app->current_folder = parent;
 		}
@@ -12245,6 +12245,25 @@ void ApplicationWindow::appendProject(const QString& fn)
 	QApplication::restoreOverrideCursor();
 }
 
+QString ApplicationWindow::serializeFolder(Folder *folder, int *windows)
+{
+	QString result;
+	foreach (MyWidget *w, folder->windowsList()) {
+		result += w->saveToString(windowGeometryInfo(w));
+		(*windows)++;
+	}
+	foreach (Folder *subfolder, folder->folders()) {
+		result += "<folder>\t"+QString(subfolder->name())+"\t"+subfolder->birthDate()+"\t"+subfolder->modificationDate();
+		if (subfolder == current_folder)
+			result += "\tcurrent\n";
+		else
+			result += "\n";  // FIXME: Having no 5th string here is not a good idea
+		result += serializeFolder(subfolder, windows);
+		result += "</folder>\n";
+	}
+	return result;
+}
+
 void ApplicationWindow::saveFolder(Folder *folder, const QString& fn)
 {
 	// file saving procedure follows
@@ -12265,54 +12284,8 @@ void ApplicationWindow::saveFolder(Folder *folder, const QString& fn)
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	QList<MyWidget *> lst = folder->windowsList();
 	int windows = 0;
-	QString text;
-	foreach(MyWidget *w, lst)
-	{
-		text += w->saveToString(windowGeometryInfo(w));
-		windows++;
-	}
-
-	FolderListItem *fi = folder->folderListItem();
-	FolderListItem *item = (FolderListItem *)fi->firstChild();
-	int opened_folders = 0;
-	int initial_depth = fi->depth();
-	while (item && item->depth() > initial_depth)
-	{
-		Folder *dir = (Folder *)item->folder();
-		text += "<folder>\t"+QString(dir->name())+"\t"+dir->birthDate()+"\t"+dir->modificationDate();
-		if (dir == current_folder)
-			text += "\tcurrent\n";
-		else
-			text += "\n";  // FIXME: Having no 5th string here is not a good idea
-
-		lst = dir->windowsList();
-		foreach(MyWidget *w, lst)
-		{
-			text += w->saveToString(windowGeometryInfo(w));
-			windows++;
-		}
-
-		if ( (dir->children()).isEmpty() )
-			text += "</folder>\n";
-		else
-			opened_folders++;
-
-		int depth = item->depth();
-		item = (FolderListItem *)item->itemBelow();
-		if (item && item->depth() < depth && item->depth() > initial_depth)
-		{
-			text += "</folder>\n";
-			opened_folders--;
-		}
-		else if (!item)
-		{
-			for (int i = 0; i<opened_folders; i++)
-				text += "</folder>\n";
-			opened_folders = 0;
-		}
-	}
+	QString text = serializeFolder(folder, &windows);
 	text += "<log>\n"+logInfo+"</log>";
 	text.prepend("<windows>\t"+QString::number(windows)+"\n");
 	text.prepend("<scripting-lang>\t"+QString(scriptEnv->name())+"\n");
@@ -13158,6 +13131,7 @@ void ApplicationWindow::dropFolderItems(Q3ListViewItem *dest)
 	folders->setCurrentItem(dest_f->folderListItem());
 	changeFolder(dest_f, true);
 	folders->setFocus();
+	modifiedProject();
 }
 
 void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)

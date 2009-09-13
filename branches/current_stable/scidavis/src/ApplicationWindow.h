@@ -830,6 +830,7 @@ public slots:
 	void saveAsProject();
 	void saveFolderAsProject(Folder *f);
 	void saveFolder(Folder *folder, const QString& fn);
+	QString serializeFolder(Folder *folder, int *windows);
 
 	//!  adds a folder list item to the list view "lv"
 	void addFolderListViewItem(Folder *f);
