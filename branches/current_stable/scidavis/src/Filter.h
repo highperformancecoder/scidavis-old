@@ -89,11 +89,17 @@ class Filter : public QObject
 	protected:
         void init();
 
-        //! Sets x and y to the curve points between start and end. Memory will be allocated with new double[].
-  	    //! Returns the number of points within range == size of x and y arrays.
-  	    virtual int curveData(QwtPlotCurve *c, double start, double end, double **x, double **y);
+        /**
+			* \brief Sets x and y to the curve points between start and end.
+			*
+		   * \returns the number of points within range == size of x and y arrays.
+			* Memory will be allocated with new double[].
+			*/
+		  int curveData(QwtPlotCurve *c, double start, double end, double **x, double **y);
         //! Same as curveData, but sorts the points by their x value.
-        virtual int sortedCurveData(QwtPlotCurve *c, double start, double end, double **x, double **y);
+        int sortedCurveData(QwtPlotCurve *c, double start, double end, double **x, double **y);
+
+		  virtual bool isDataAcceptable();
 
         //! Adds the result curve to the target output plot window. Creates a hidden table and frees the input data from memory.
         QwtPlotCurve* addResultCurve(double *x, double *y);

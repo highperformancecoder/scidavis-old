@@ -97,23 +97,22 @@ void Filter::setDataCurve(int curve, double start, double end)
     else
     	d_n = curveData(d_curve, start, end, &d_x, &d_y);
 
-	if (d_n == -1)
-	{
-		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
-				tr("Several data points have the same x value causing divisions by zero, operation aborted!"));
+	if (!isDataAcceptable()) {
 		d_init_err = true;
-        return;
-	}
-    else if (d_n < d_min_points)
-	{
-		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
-				tr("You need at least %1 points in order to perform this operation!").arg(d_min_points));
-		d_init_err = true;
-        return;
+		return;
 	}
 
     d_from = start;
     d_to = end;
+}
+
+bool Filter::isDataAcceptable() {
+	if (d_n < d_min_points) {
+		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
+				tr("You need at least %1 points in order to perform this operation!").arg(d_min_points));
+		return false;
+	}
+	return true;
 }
 
 int Filter::curveIndex(const QString& curveTitle, Graph *g)
@@ -229,74 +228,61 @@ void Filter::output()
 
 int Filter::sortedCurveData(QwtPlotCurve *c, double start, double end, double **x, double **y)
 {
-    if (!c)
+    if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
         return 0;
-
-    int i_start = 0, i_end = c->dataSize();
-    for (int i = 0; i < i_end; i++)
-  	    if (c->x(i) >= start)
-        {
-  	      i_start = i;
+    
+    // start/end finding only works on nondecreasing data, so sort first
+    int datasize = c->dataSize();
+    double *xtemp = new double[datasize];
+    for (int i = 0; i < datasize; i++) {
+        xtemp[i] = c->x(i);
+    }
+    size_t *p = new size_t[datasize];
+    gsl_sort_index(p, xtemp, 1, datasize);
+    delete[] xtemp;
+    
+    // find indices that, when permuted by the sort result, give start and end
+    int i_start, i_end;
+    for (i_start = 0; i_start < datasize; i_start++)
+  	    if (c->x(p[i_start]) >= start)
           break;
-        }
-    for (int i = i_end-1; i >= 0; i--)
-  	    if (c->x(i) <= end)
-        {
-  	      i_end = i;
+    for (i_end = datasize-1; i_end >= 0; i_end--)
+  	    if (c->x(p[i_end]) <= end)
           break;
-        }
+    
+    // make result arrays
     int n = i_end - i_start + 1;
     (*x) = new double[n];
     (*y) = new double[n];
-    double *xtemp = new double[n];
-    double *ytemp = new double[n];
-
-  	int j=0;
-    for (int i = i_start; i <= i_end; i++)
-    {
-        xtemp[j] = c->x(i);
-        ytemp[j++] = c->y(i);
+    for (int j = 0, i = i_start; i <= i_end; i++, j++) {
+        (*x)[j] = c->x(p[i]);
+        (*y)[j] = c->y(p[i]);
     }
-    size_t *p = new size_t[n];
-    gsl_sort_index(p, xtemp, 1, n);
-    for (int i=0; i<n; i++)
-    {
-        (*x)[i] = xtemp[p[i]];
-  	    (*y)[i] = ytemp[p[i]];
-    }
-    delete[] xtemp;
-    delete[] ytemp;
     delete[] p;
     return n;
 }
 
 int Filter::curveData(QwtPlotCurve *c, double start, double end, double **x, double **y)
 {
-    if (!c)
+    if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
         return 0;
 
+    int datasize = c->dataSize();
     int i_start = 0, i_end = c->dataSize();
-    for (int i = 0; i < i_end; i++)
-  	    if (c->x(i) >= start)
-        {
-  	      i_start = i;
+    for (i_start = 0; i_start < datasize; i_start++)
+  	    if (c->x(i_start) >= start)
           break;
-        }
-    for (int i = i_end-1; i >= 0; i--)
-  	    if (c->x(i) <= end)
-        {
-  	      i_end = i;
+    for (i_end = datasize-1; i_end >= 0; i_end--)
+  	    if (c->x(i_end) <= end)
           break;
-        }
+
     int n = i_end - i_start + 1;
     (*x) = new double[n];
     (*y) = new double[n];
 
-    int j=0;
-    for (int i = i_start; i <= i_end; i++)
-    {
+    for (int j = 0, i = i_start; i <= i_end; i++, j++) {
         (*x)[j] = c->x(i);
-        (*y)[j++] = c->y(i);
+        (*y)[j] = c->y(i);
     }
     return n;
 }

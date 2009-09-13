@@ -29,7 +29,6 @@
  *                                                                         *
  ***************************************************************************/
 #include "Table.h"
-#include "SortDialog.h"
 #include "core/column/Column.h"
 #include "lib/Interval.h"
 #include "table/TableModel.h"

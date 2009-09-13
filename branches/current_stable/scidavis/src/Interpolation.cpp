@@ -131,53 +131,15 @@ void Interpolation::calculateOutputData(double *x, double *y)
 	gsl_interp_accel_free (acc);
 }
 
-int Interpolation::sortedCurveData(QwtPlotCurve *c, double start, double end, double **x, double **y)
+bool Interpolation::isDataAcceptable()
 {
-    if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
-        return 0;
+	// GSL interpolation routines fail with division by zero on such data
+	for (int i=1; i<d_n; i++)
+		if (d_x[i-1] == d_x[i]) {
+			QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
+					tr("Several data points have the same x value causing divisions by zero, operation aborted!"));
+			return false;
+		}
 
-    int i_start = 0, i_end = c->dataSize();
-    for (int i = 0; i < i_end; i++)
-  	    if (c->x(i) > start && i)
-        {
-  	      i_start = i - 1;
-          break;
-        }
-    for (int i = i_end-1; i >= 0; i--)
-  	    if (c->x(i) < end && i < c->dataSize())
-        {
-  	      i_end = i + 1;
-          break;
-        }
-    int n = i_end - i_start + 1;
-    (*x) = new double[n];
-    (*y) = new double[n];
-    double *xtemp = new double[n];
-    double *ytemp = new double[n];
-
-	double pr_x;
-  	int j=0;
-    for (int i = i_start; i <= i_end; i++)
-    {
-        xtemp[j] = c->x(i);
-        if (xtemp[j] == pr_x)
-        {
-            delete (*x);
-            delete (*y);
-            return -1;//this kind of data causes division by zero in GSL interpolation routines
-        }
-        pr_x = xtemp[j];
-        ytemp[j++] = c->y(i);
-    }
-    size_t *p = new size_t[n];
-    gsl_sort_index(p, xtemp, 1, n);
-    for (int i=0; i<n; i++)
-    {
-        (*x)[i] = xtemp[p[i]];
-  	    (*y)[i] = ytemp[p[i]];
-    }
-    delete[] xtemp;
-    delete[] ytemp;
-    delete[] p;
-    return n;
+	return Filter::isDataAcceptable();
 }

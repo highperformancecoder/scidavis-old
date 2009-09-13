@@ -127,7 +127,6 @@ HEADERS  += src/ApplicationWindow.h \
             src/MultiLayer.h\
             src/LayerDialog.h \
             src/IntDialog.h \
-            src/SortDialog.h\
             src/Bar.h \
             src/Cone3D.h \
             src/ConfigDialog.h \
@@ -231,7 +230,6 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/MultiLayer.cpp\
             src/LayerDialog.cpp \
             src/IntDialog.cpp \
-            src/SortDialog.cpp\
             src/Bar.cpp \
             src/Cone3D.cpp \
             src/DataSetDialog.cpp \
@@ -364,6 +362,7 @@ HEADERS += src/future/core/AbstractAspect.h \
            src/future/table/future_SortDialog.h \
            src/future/table/AsciiTableImportFilter.h \
            src/future/core/AbstractImportFilter.h \
+           src/future/core/interfaces.h \
 
 SOURCES += src/future/core/AbstractAspect.cpp \
            src/future/core/AbstractPart.cpp \

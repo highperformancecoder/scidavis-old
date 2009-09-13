@@ -47,7 +47,7 @@
 #include <QComboBox>
 #include <QSpinBox> 
 #include <QScrollArea>
-#include "core/globals.h"
+#include "globals.h"
 #include "ui_matrixcontroltabs.h"
 #include "MyWidget.h"
 

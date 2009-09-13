@@ -33,7 +33,7 @@
 #include "core/ScriptingEngineManager.h"
 #endif
 #include "core/interfaces.h"
-#include "core/globals.h"
+#include "globals.h"
 #include "lib/XmlStreamReader.h"
 #include "core/ProjectConfigPage.h"
 #include <QUndoStack>

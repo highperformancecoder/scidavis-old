@@ -36,7 +36,7 @@
 #include <QDate>
 #include <QTime>
 #include "lib/Interval.h"
-#include "core/globals.h"
+#include "globals.h"
 #include "core/AbstractAspect.h"
 
 class Column;

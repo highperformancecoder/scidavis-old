@@ -52,7 +52,6 @@
 #include <QToolBar>
 #include <QtDebug>
 
-#include "core/AbstractScript.h"
 #include "core/AspectPrivate.h"
 #include "table/TableModel.h"
 #include "table/TableView.h"

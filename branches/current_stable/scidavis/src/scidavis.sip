@@ -110,7 +110,7 @@ class AbstractAspect : QObject
 class Column: AbstractAspect
 {
 %TypeHeaderCode
-#include "core/globals.h"
+#include "globals.h"
 #include "core/column/Column.h"
 %End
 	public:

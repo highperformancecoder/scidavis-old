@@ -30,7 +30,6 @@
  ***************************************************************************/
 #include "matrix/future_Matrix.h"
 #include "Matrix.h"
-#include "core/AbstractScript.h"
 #include "core/future_Folder.h"
 #include "matrixcommands.h"
 #include "lib/ActionManager.h"

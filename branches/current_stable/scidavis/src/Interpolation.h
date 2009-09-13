@@ -46,10 +46,12 @@ public:
     void setMethod(int m);
 	void setMethod(InterpolationMethod m){setMethod((int)m);};
 
+protected:
+	virtual bool isDataAcceptable();
+
 private:
     void init(int m);
     void calculateOutputData(double *x, double *y);
-    int sortedCurveData(QwtPlotCurve *c, double start, double end, double **x, double **y);
 
     //! the interpolation method
     int d_method;
