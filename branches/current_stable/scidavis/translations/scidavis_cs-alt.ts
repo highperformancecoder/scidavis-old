@@ -22,12 +22,12 @@
         <location filename="../src/future/core/AbstractAspect.cpp" line="80"/>
         <source> (non-critical)</source>
         <comment>postfix for XML error messages</comment>
-        <translation type="unfinished"></translation>
+        <translation> (nekritický)</translation>
     </message>
     <message>
         <location filename="../src/future/core/AbstractAspect.cpp" line="89"/>
         <source>aspect name missing or empty</source>
-        <translation type="unfinished"></translation>
+        <translation>název aspektu chybí nebo je prázdný</translation>
     </message>
     <message>
         <location filename="../src/future/core/AbstractAspect.cpp" line="97"/>
@@ -2775,25 +2775,26 @@ Různé části souboru nemusí být zobrazeny korektně.</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="9212"/>
         <source>Error reading matrix from project file</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba načtení matice ze souboru projektu</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="9216"/>
         <location filename="../src/ApplicationWindow.cpp" line="9338"/>
         <source>The following problems occured when loading the project file:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Během načítání projektu ze souboru došlo k následujícím potížím:
+</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="9220"/>
         <location filename="../src/ApplicationWindow.cpp" line="9342"/>
         <source>Project loading partly failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Načítání projektu částečně selhalo</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="9334"/>
         <source>Error reading table from project file</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba načítání tabulky ze souboru projektu</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10386"/>
@@ -3879,7 +3880,7 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
         <location filename="../src/ConfigDialog.cpp" line="1488"/>
         <source>English</source>
         <comment>translate this to the language of the translation file, NOT to the meaning of English!</comment>
-        <translation>Česky_JH</translation>
+        <translation>Čeština vědecká</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10932"/>
@@ -5487,12 +5488,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/future/table/controltabs.ui" line="280"/>
         <source>Numbers are</source>
-        <translation type="unfinished"></translation>
+        <translation>Čísla jsou</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="290"/>
         <source>since</source>
-        <translation type="unfinished"></translation>
+        <translation>od</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="349"/>
@@ -7695,12 +7696,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/Graph.cpp" line="772"/>
         <source>Internal Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnitřní chyba</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="773"/>
         <source>&lt;html&gt;Failed to set axis labels on Graph %1. Maybe you&apos;re trying to open a corrupted project file; or there&apos;s some problem within SciDAVis. Please report this as a bug (together with detailed instructions how to reproduce this message or the corrupted file).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;Selhalo nastavení popisek osy na grafu %1. Možná se pokoušíte otevřít poškozený projekt, nebo je příčinou nějaký problém ve SciDAVisu. Nahlašte prosím tuto chybu (spolu s podrobnými instrukcemi jak znovu získat toto hlášení nebo s poškozeným souborem).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;sledování chyb: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="802"/>
@@ -7714,7 +7715,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/Graph.cpp" line="802"/>
         <source>Couldn&apos;t change the axis type to the requested format!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nemohu změnit typ osy na požadovaný formát!</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="3887"/>
@@ -9429,274 +9430,322 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/MuParserScripting.cpp" line="47"/>
         <source>abs(x):
  Absolute value of x.</source>
-        <translation type="unfinished"></translation>
+        <translation>abs(x):
+ Absolutní hodnota x.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="48"/>
         <source>acos(x):
  Inverse cos function.</source>
-        <translation type="unfinished"></translation>
+        <translation>acos(x):
+ Inverzní funkce cosinu.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="49"/>
         <source>acosh(x):
  Hyperbolic inverse cos function.</source>
-        <translation type="unfinished"></translation>
+        <translation>acosh(x):
+ Hyperbolická inverzní funkce cosinu.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="50"/>
         <source>asin(x):
  Inverse sin function.</source>
-        <translation type="unfinished"></translation>
+        <translation>asin(x):
+ Inverzní funkce sinu.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="51"/>
         <source>asinh(x):
  Hyperbolic inverse sin function.</source>
-        <translation type="unfinished"></translation>
+        <translation>asinh(x):
+ Hyperbolická inverzní funkce sinu.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="52"/>
         <source>atan(x):
  Inverse tan function.</source>
-        <translation type="unfinished"></translation>
+        <translation>atan(x):
+ Inverzní funkce tangentu.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="53"/>
         <source>atanh(x):
   Hyperbolic inverse tan function.</source>
-        <translation type="unfinished"></translation>
+        <translation>atanh(x):
+ Hyperbolická inverzní funkce tangentu.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="54"/>
         <source>avg(x,y,...):
   Mean value of all arguments.</source>
-        <translation type="unfinished"></translation>
+        <translation>avg(x,y,...):
+ Průměrná hodnota všech argumentů.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="55"/>
         <source>bessel_j0(x):
   Regular cylindrical Bessel function of zeroth order, J_0(x).</source>
-        <translation type="unfinished"></translation>
+        <translation>bessel_j0(x):
+  Pravidelná cylindrická Besselova funkce nulového řádu, J_0(x).</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="56"/>
         <source>bessel_j1(x):
   Regular cylindrical Bessel function of first order, J_1(x).</source>
-        <translation type="unfinished"></translation>
+        <translation>bessel_j1(x):
+  Pravidelná cylindrická Besselova funkce prvního řádu, J_1(x).</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="57"/>
         <source>bessel_jn(double x, int n):
  Regular cylindrical Bessel function of order n, J_n(x).</source>
-        <translation type="unfinished"></translation>
+        <translation>bessel_jn(double x, int n):
+ Pravidelná cylindrická Besselova funkce n-tého řádu, J_n(x).</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="58"/>
         <source>bessel_jn_zero(double n, unsigned int s):
  s-th positive zero x_s of regular cylindrical Bessel function of order n, J_n(x_s)=0</source>
-        <translation type="unfinished"></translation>
+        <translation>bessel_jn_zero(double n, unsigned int s):
+ s-th kladná nula x_s pravidelné cylindrické Besselovy funkce n-tého řádu, J_n(x_s)=0</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="59"/>
         <source>bessel_y0(x):
  Irregular cylindrical Bessel function of zeroth order, Y_0(x), for x&gt;0.</source>
-        <translation type="unfinished"></translation>
+        <translation>bessel_y0(x):
+  Nepravidelná cylindrická Besselova funkce nulového řádu, Y_0(x), pro x&gt;0.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="60"/>
         <source>bessel_y1(x):
  Irregular cylindrical Bessel function of first order, Y_1(x), for x&gt;0.</source>
-        <translation type="unfinished"></translation>
+        <translation>bessel_y1(x):
+  Nepravidelná cylindrická Besselova funkce prvního řádu, Y_1(x), pro x&gt;0.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="61"/>
         <source>bessel_yn(double x, int n):
  Irregular cylindrical Bessel function of order n, Y_n(x), for x&gt;0.</source>
-        <translation type="unfinished"></translation>
+        <translation>bessel_yn(double x, int n):
+ Nepravidelná cylindrická Besselova funkce n-tého řádu, Y_n(x), for x&gt;0.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="62"/>
         <source>beta(a,b):
  Computes the Beta Function, B(a,b) = Gamma(a)*Gamma(b)/Gamma(a+b) for a &gt; 0, b &gt; 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>beta(a,b):
+ Vypočte Beta funkci, B(a,b) = Gamma(a)*Gamma(b)/Gamma(a+b) for a &gt; 0, b &gt; 0.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="63"/>
         <source>ceil(x):
  Round to the next larger integer,
  smallest integer larger or equal to x.</source>
-        <translation type="unfinished"></translation>
+        <translation>ceil(x):
+ Zaokrouhlí na nejbližší vyšší celé číslo,
+ nejnižší celé číslo vyšší nebo rovno x.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="64"/>
         <source>cos(x):
  Calculate cosine.</source>
-        <translation type="unfinished"></translation>
+        <translation>cos(x):
+ Vypočte cosinus.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="65"/>
         <source>cosh(x):
  Hyperbolic cos function.</source>
-        <translation type="unfinished"></translation>
+        <translation>cosh(x):
+ Hyperbolická funkce cosinu.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="66"/>
         <source>erf(x):
   The error function.</source>
-        <translation type="unfinished"></translation>
+        <translation>erf(x):
+  Chybová funkce.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="67"/>
         <source>erfc(x):
  Complementary error function erfc(x) = 1 - erf(x).</source>
-        <translation type="unfinished"></translation>
+        <translation>erfc(x):
+ Doplňková chybová funkce erfc(x) = 1 - erf(x).</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="68"/>
         <source>erfz(x):
  The Gaussian probability density function Z(x).</source>
-        <translation type="unfinished"></translation>
+        <translation>erfz(x):
+ Gaussovská pravděpodobnostní funkce hustoty Z(x).</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="69"/>
         <source>erfq(x):
  The upper tail of the Gaussian probability function Q(x).</source>
-        <translation type="unfinished"></translation>
+        <translation>erfq(x):
+ Horní konec (&quot;ocas&quot;) Gaussovské pravděpodobnostní funkce Q(x).</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="70"/>
         <source>exp(x):
  Exponential function: e raised to the power of x.</source>
-        <translation type="unfinished"></translation>
+        <translation>exp(x):
+ Exponenciální funkce: e umocněné na x.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="71"/>
         <source>floor(x):
  Round to the next smaller integer,
  largest integer smaller or equal to x.</source>
-        <translation type="unfinished"></translation>
+        <translation>floor(x):
+ Zaokrouhlí na nejbližší nižší celé číslo,
+ nejvyšší celé číslo nižší nebo rovno x.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="72"/>
         <source>gamma(x):
  Computes the Gamma function, subject to x not being a negative integer.</source>
-        <translation type="unfinished"></translation>
+        <translation>gamma(x):
+ Vypočte funkci Gamma function, za pomínky, že x není záporné celé číslo.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="73"/>
         <source>gammaln(x):
  Computes the logarithm of the Gamma function, subject to x not a being negative integer. For x&lt;0, log(|Gamma(x)|) is returned.</source>
-        <translation type="unfinished"></translation>
+        <translation>gammaln(x):
+ Vypočte logaritmus funkce Gamma, za podmínky, že x není záporné celé číslo. Pro x&lt;0, vrátí log(|Gamma(x)|) .</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="74"/>
         <source>hazard(x):
  Computes the hazard function for the normal distribution h(x) = erfz(x)/erfq(x).</source>
-        <translation type="unfinished"></translation>
+        <translation>hazard(x):
+ Vypočte funkci rizika pro normální rozdělení h(x) = erfz(x)/erfq(x).</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="75"/>
         <source>if(e1, e2, e3):
  if e1 then e2 else e3.</source>
-        <translation type="unfinished"></translation>
+        <translation>if(e1, e2, e3):
+ když e1 pak e2 jinak e3.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="76"/>
         <source>ln(x):
  Calculate natural logarithm log_e.</source>
-        <translation type="unfinished"></translation>
+        <translation>ln(x):
+ Vypočte přirozený logaritmus log_e.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="77"/>
         <source>log(x):
  Calculate decimal logarithm log_10.</source>
-        <translation type="unfinished"></translation>
+        <translation>log(x):
+ Vypočte dekadický logaritmus log_10.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="78"/>
         <source>log10(x):
  Calculate decimal logarithm log_10.</source>
-        <translation type="unfinished"></translation>
+        <translation>log10(x):
+ Vypočte dekadický logaritmus log_10.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="79"/>
         <source>log2(x):
  Calculate binary logarithm log_2.</source>
-        <translation type="unfinished"></translation>
+        <translation>log2(x):
+ Vypočte binární logaritmus log_2.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="80"/>
         <source>min(x,y,...):
  Calculate minimum of all arguments.</source>
-        <translation type="unfinished"></translation>
+        <translation>min(x,y,...):
+ Vypočte minimum ze všech argumentů.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="81"/>
         <source>max(x,y,...):
  Calculate maximum of all arguments.</source>
-        <translation type="unfinished"></translation>
+        <translation>max(x,y,...):
+ Vypočte maximum ze všech argumentů.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="82"/>
         <source>mod(x,y):
  Calculate rest of integer division x/y,
  x modulo y.</source>
-        <translation type="unfinished"></translation>
+        <translation>mod(x,y):
+ Vypočte zbytek celočíselného dělení x/y,
+ x modulo y.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="83"/>
         <source>pow(x,y):
  Raise x to the power of y, x^y.</source>
-        <translation type="unfinished"></translation>
+        <translation>pow(x,y):
+ Umocní x na y, x^y.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="84"/>
         <source>rint(x):
  Round to nearest integer.</source>
-        <translation type="unfinished"></translation>
+        <translation>rint(x):
+ Zaokrouhlí na nejbližší celé číslo.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="85"/>
         <source>sign(x):
  Sign function: -1 if x&lt;0; 1 if x&gt;0.</source>
-        <translation type="unfinished"></translation>
+        <translation>sign(x):
+ Znaménková funkce: -1 if x&lt;0; 1 if x&gt;0.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="86"/>
         <source>sin(x):
  Calculate sine.</source>
-        <translation type="unfinished"></translation>
+        <translation>sin(x):
+ Vypočte sinus.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="87"/>
         <source>sinh(x):
  Hyperbolic sin function.</source>
-        <translation type="unfinished"></translation>
+        <translation>sinh(x):
+ Hyperbolická funkce sinu.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="88"/>
         <source>sqrt(x):
  Square root function.</source>
-        <translation type="unfinished"></translation>
+        <translation>sqrt(x):
+ Odmocnina x.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="89"/>
         <source>sum(x,y,...):
  Calculate sum of all arguments.</source>
-        <translation type="unfinished"></translation>
+        <translation>sum(x,y,...):
+ Vypočte součet všech argumentů.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="90"/>
         <source>tan(x):
  Calculate tangent function.</source>
-        <translation type="unfinished"></translation>
+        <translation>tan(x):
+ Vypočte funkci tangens.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="91"/>
         <source>tanh(x):
  Hyperbolic tan function.</source>
-        <translation type="unfinished"></translation>
+        <translation>tanh(x):
+ Hyperbolická funkce tangens.</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="92"/>
@@ -9704,7 +9753,10 @@ p, li { white-space: pre-wrap; }
  Compute the principal branch of Lambert&apos;s W function, W_0(x).
  W is defined as a solution to the equation W(x)*exp(W(x))=x.
  For x&lt;0, there are two real-valued branches; this function computes the one where W&gt;-1 for x&lt;0 (also see wm1(x)).</source>
-        <translation type="unfinished"></translation>
+        <translation>w0(x):
+ Vypočte hlavní větev Lamberovy W funkce, W_0(x).
+ W je definováno jako řešení rovnice W(x)*exp(W(x))=x.
+ Pro x&lt;0, existují dvě větve reálných čísel; tato funkce vypočte tu, u které W&gt;-1 pro x&lt;0 (také se podívejte na wm1(x)).</translation>
     </message>
     <message>
         <location filename="../src/MuParserScripting.cpp" line="93"/>
@@ -9712,7 +9764,10 @@ p, li { white-space: pre-wrap; }
  Compute the secondary branch of Lambert&apos;s W function, W_{-1}(x).
  W is defined as a solution to the equation W(x)*exp(W(x))=x.
  For x&lt;0, there are two real-valued branches; this function computes the one where W&lt;-1 for x&lt;0. (also see w0(x)).</source>
-        <translation type="unfinished"></translation>
+        <translation>wm1(x):
+ Vypočte druhotnou větev Lambertovy W funkce, W_{-1}(x).
+ W je definováno jako řešení rovnice W(x)*exp(W(x))=x.
+ Pro x&lt;0, existují dvě větve reálných čísel; tato funkce vypočte tu, u které W&lt;-1 for x&lt;0. (také se podívejte na w0(x)).</translation>
     </message>
 </context>
 <context>
@@ -12131,7 +12186,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="914"/>
         <source>%1: clear selected cell(s)</source>
-        <translation type="unfinished">%1: vyčistit vybrané buňky</translation>
+        <translation>%1: vyčistit vybrané buňky</translation>
     </message>
 </context>
 <context>
@@ -12989,37 +13044,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/future/table/TableView.cpp" line="244"/>
         <source>years</source>
-        <translation type="unfinished"></translation>
+        <translation>let</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="245"/>
         <source>months</source>
-        <translation type="unfinished"></translation>
+        <translation>měsíců</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="246"/>
         <source>days</source>
-        <translation type="unfinished">dnů</translation>
+        <translation>dnů</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="247"/>
         <source>hours</source>
-        <translation type="unfinished">hodin</translation>
+        <translation>hodin</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="248"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minut</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="249"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>sekund</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="250"/>
         <source>milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>milisekund</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="342"/>
@@ -13081,13 +13136,13 @@ Pozice: %2</translation>
         <location filename="../src/future/table/TableView.cpp" line="491"/>
         <location filename="../src/future/table/TableView.cpp" line="564"/>
         <source>Predefined:</source>
-        <translation type="unfinished"></translation>
+        <translation>Předdefinovaný:</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="493"/>
         <location filename="../src/future/table/TableView.cpp" line="566"/>
         <source>Format:</source>
-        <translation type="unfinished">Formát:</translation>
+        <translation>Formát:</translation>
     </message>
     <message>
         <location filename="../src/future/table/TableView.cpp" line="505"/>
@@ -13147,7 +13202,7 @@ dvojitá přesnost
         <location filename="../src/future/table/TableView.cpp" line="536"/>
         <source>Hello world!
 </source>
-        <translation>Haló světe!
+        <translation>Ahoj světe!
 </translation>
     </message>
     <message>
