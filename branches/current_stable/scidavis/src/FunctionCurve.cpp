@@ -87,7 +87,8 @@ bool FunctionCurve::loadData(int points)
 	if (!points)
 		points = dataSize();
 
-	double X[points], Y[points];
+	double * X = new double[points];
+	double * Y = new double[points];
 	double step = (d_to - d_from)/(double)(points - 1);
 
 	switch(d_function_type) {
@@ -102,8 +103,11 @@ bool FunctionCurve::loadData(int points)
 					X[i] = x;
 					script->setDouble(x, d_variable.toAscii().constData());
 					QVariant result = script->eval();
-					if (result.type() != QVariant::Double)
+					if (result.type() != QVariant::Double) {
+						delete[] X;
+						delete[] Y;
 						return false;
+					}
 					Y[i] = result.toDouble();
 				}
 				break;
@@ -120,8 +124,11 @@ bool FunctionCurve::loadData(int points)
 					script_y->setDouble(par, d_variable.toAscii().constData());
 					QVariant result_x = script_x->eval();
 					QVariant result_y = script_y->eval();
-					if (result_x.type() != QVariant::Double || result_y.type() != QVariant::Double)
+					if (result_x.type() != QVariant::Double || result_y.type() != QVariant::Double) {
+						delete[] X;
+						delete[] Y;
 						return false;
+					}
 					if (d_function_type == Polar) {
 						X[i] = result_x.toDouble()*cos(result_y.toDouble());
 						Y[i] = result_x.toDouble()*sin(result_y.toDouble());
@@ -135,6 +142,8 @@ bool FunctionCurve::loadData(int points)
 
 	}
 	setData(X, Y, points);
+	delete[] X;
+	delete[] Y;
 	return true;
 }
 
