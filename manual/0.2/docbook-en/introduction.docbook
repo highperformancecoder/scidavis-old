@@ -209,7 +209,7 @@ revision history. (see installation appendix comment) -->
 <para> On the selected columns you can perform various operations: </para>
 <itemizedlist>
   <listitem>
-    <para>Fill with data. You can insert the row numbers (&fill-column-with-row-number-lnk;), random numbers (&fill-column-with-random-values-lnk;), or the result of a function (&assign-formula-lnk;);</para>
+    <para>Fill with data. You can insert the row numbers (&fill-selection-with-row-number-lnk;), random numbers (&fill-selection-with-random-values-lnk;), or the result of a function (&assign-formula-lnk;);</para>
   </listitem>
   <listitem>
     <para>

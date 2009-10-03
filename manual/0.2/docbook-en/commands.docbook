@@ -289,8 +289,8 @@
     <!ENTITY interpolate-lnk '<link linkend="interpolate-cmd"><command>Interpolate</command> command</link>'>
   <!ENTITY fft-on-curves-cmd  "<command>FFT</command>">
     <!ENTITY fft-on-curves-lnk '<link linkend="fft-on-curves-cmd"><command>FFT</command> command</link>'>
-  <!ENTITY fit-cmd  "<command>Quick Fit</command>">
-    <!ENTITY fit-lnk '<link linkend="fit-cmd"><command>Quick Fit</command> command</link>'>
+  <!ENTITY quick-fit-cmd  "<command>Quick Fit</command>">
+    <!ENTITY quick-fit-lnk '<link linkend="quick-fit-cmd"><command>Quick Fit</command> command</link>'>
   <!ENTITY fit-linear-cmd  "<command>Quick Fit&rarr;Fit Linear</command>">
     <!ENTITY fit-linear-lnk '<link linkend="fit-linear-cmd"><command>Quick Fit&rarr;Fit Linear</command> command</link>'>
   <!ENTITY fit-polynomial-cmd  "<command>Quick Fit&rarr;Fit Polynomial</command>">
@@ -340,14 +340,22 @@
     <!ENTITY set-column-as-y-error-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/y_error.png "/></imageobject></inlinemediaobject>'>
   <!ENTITY set-column-as-none-cmd  "<command>Set Column as&rarr;None</command>">
     <!ENTITY set-column-as-none-lnk '<link linkend="set-column-as-none-cmd"><command>Set Column as&rarr;None</command> command</link>'>
-  <!ENTITY fill-column-with-cmd  "<command>Fill Selection With</command>">
-    <!ENTITY fill-column-with-lnk '<link linkend="fill-column-with-cmd"><command>Fill Selection With</command> command</link>'>
-  <!ENTITY fill-column-with-row-number-cmd  "<command>Fill Selection With&rarr;Row Numbers</command>">
-    <!ENTITY fill-column-with-row-number-lnk '<link linkend="fill-column-with-row-number-cmd"><command>Fill Selection With&rarr;Row Numbers</command> command</link>'>
-    <!ENTITY fill-column-with-row-number-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/rowNumbers.png"/></imageobject></inlinemediaobject>'>
-  <!ENTITY fill-column-with-random-values-cmd  "<command>Fill Selection With&rarr;Random Values</command>">
-    <!ENTITY fill-column-with-random-values-lnk '<link linkend="fill-column-with-random-values-cmd"><command>Fill Selection With&rarr;Random Values</command> command</link>'>
-    <!ENTITY fill-column-with-random-values-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/randomNumbers.png"/></imageobject></inlinemediaobject>'>
+  <!ENTITY fill-selection-with-cmd  "<command>Fill Selection With</command>">
+    <!ENTITY fill-selection-with-lnk '<link linkend="fill-selection-with-cmd"><command>Fill Selection With</command> command</link>'>
+  <!ENTITY fill-selection-with-row-number-cmd  "<command>Fill Selection With&rarr;Row Numbers</command>">
+    <!ENTITY fill-selection-with-row-number-lnk '<link linkend="fill-selection-with-row-number-cmd"><command>Fill Selection With&rarr;Row Numbers</command> command</link>'>
+    <!ENTITY fill-selection-with-row-number-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/rowNumbers.png"/></imageobject></inlinemediaobject>'>
+  <!ENTITY fill-selection-with-random-values-cmd  "<command>Fill Selection With&rarr;Random Values</command>">
+    <!ENTITY fill-selection-with-random-values-lnk '<link linkend="fill-selection-with-random-values-cmd"><command>Fill Selection With&rarr;Random Values</command> command</link>'>
+    <!ENTITY fill-selection-with-random-values-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/randomNumbers.png"/></imageobject></inlinemediaobject>'>
+  <!ENTITY formula-edit-mode-cmd  "<command>Formula Edit Mode</command>">
+    <!ENTITY formula-edit-mode-lnk '<link linkend="formula-edit-mode-cmd"><command>Formula Edit Mode</command> command</link>'>
+  <!ENTITY edit-column-description-cmd  "<command>Edit Column Description</command>">
+    <!ENTITY edit-column-description-lnk '<link linkend="edit-column-description-cmd"><command>Edit Column Description</command> command</link>'>
+    <!ENTITY edit-column-description-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/column_description.png "/></imageobject></inlinemediaobject>'>
+  <!ENTITY change-column-format-cmd  "<command>Change Type &amp; Format</command>">
+    <!ENTITY change-column-format-lnk '<link linkend="change-column-format-cmd"><command>Change Type &amp; Format</command> command</link>'>
+    <!ENTITY change-column-format-key "<keycode>CTRL+ALT+O</keycode>">
   <!ENTITY show-comments-cmd  "<command>Show Comments</command>">
     <!ENTITY show-comments-lnk '<link linkend="show-comments-cmd"><command>Show Comments</command> command</link>'>
     <!ENTITY show-comments-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/table_header.png "/></imageobject></inlinemediaobject>'>
@@ -355,7 +363,7 @@
     <!ENTITY hide-controls-lnk '<link linkend="hide-controls-cmd"><command>Hide Controls</command> command</link>'>
     <!ENTITY hide-controls-key "<keycode>F12</keycode>">
     <!ENTITY hide-controls-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/table_options.png "/></imageobject></inlinemediaobject>'>
-  <!ENTITY clear-table-cmd  "<command>Clear Table</command>">
+<!ENTITY clear-table-cmd  "<command>Clear Table</command>">
     <!ENTITY clear-table-lnk '<link linkend="clear-table-cmd"><command>Clear Table</command> command</link>'>
     <!ENTITY clear-table-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/clear_table.png "/></imageobject></inlinemediaobject>'>
   <!ENTITY sort-table-cmd  "<command>Sort Table</command>">
@@ -375,12 +383,6 @@
   <!ENTITY table-dimensions-cmd  "<command>Dimensions</command>">
     <!ENTITY table-dimensions-lnk '<link linkend="table-dimensions-cmd"><command>Dimensions</command> command</link>'>
     <!ENTITY table-dimensions-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/resize.png"/></imageobject></inlinemediaobject>'>
-  <!ENTITY edit-column-description-cmd  "<command>Edit Column Description</command>">
-    <!ENTITY edit-column-description-lnk '<link linkend="edit-column-description-cmd"><command>Edit Column Description</command> command</link>'>
-    <!ENTITY edit-column-description-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/column_description.png "/></imageobject></inlinemediaobject>'>
-  <!ENTITY change-column-format-cmd  "<command>Change Type and Format</command>">
-    <!ENTITY change-column-format-lnk '<link linkend="change-column-format-cmd"><command>Change Type and Format</command> command</link>'>
-    <!ENTITY change-column-format-key "<keycode>CTRL+ALT+O</keycode>">
   <!ENTITY go-to-cell-cmd  "<command>Go To Cell</command>">
     <!ENTITY go-to-cell-lnk '<link linkend="go-to-cell-cmd"><command>Go To Cell</command> command</link>'>
     <!ENTITY go-to-cell-key "<keycode>CTRL+ALT+G</keycode>">
@@ -436,8 +438,8 @@
     <!ENTITY download-manual-lnk '<link linkend="download-manual-cmd"><command>Download Manual</command> command</link>'>
   <!ENTITY translations-cmd  "<command>Translations</command>">
     <!ENTITY translations-lnk '<link linkend="translations-cmd"><command>Translations</command> command</link>'>
-  <!ENTITY technical-support-cmd  "<command>Visit Scidavis Forum</command>">
-    <!ENTITY technical-support-lnk '<link linkend="technical-support-cmd"><command>Visit Scidavis Forum</command> command</link>'>
+  <!ENTITY visit-forum-cmd  "<command>Visit Scidavis Forum</command>">
+    <!ENTITY visit-forum-lnk '<link linkend="visit-forum-cmd"><command>Visit Scidavis Forum</command> command</link>'>
   <!ENTITY report-bug-cmd  "<command>Report a Bug</command>">
     <!ENTITY report-bug-lnk '<link linkend="report-bug-cmd"><command>Report a Bug</command> command</link>'>
   <!ENTITY about-cmd  "<command>About Scidavis</command>">
