@@ -2,6 +2,10 @@
 
 <qandaset defaultlabel='qanda'>
 
+<?dbhtml label-width="5%" ?>
+<?dbhtml toc="0" ?>
+<?dbhtml cellspacing="3px" cellpadding="3px" ?>
+
 <qandaentry>
   <question>
     <para>How can I visualise data from a text file?</para>

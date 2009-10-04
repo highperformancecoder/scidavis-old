@@ -39,6 +39,13 @@ book      toc,title,figures,tables
 chapter   toc,title
 appendix  toc,title
 </xsl:param>
+<!--		should the faq appear in the toc -->
+<xsl:param name="qanda.in.toc" select="1"></xsl:param>
+<xsl:param name="qanda.nested.in.toc" select="0"></xsl:param>
+
+<!--		control of Q & A set				-->
+<xsl:param name="qanda.defaultlabel">none</xsl:param>
+<xsl:param name="qanda.inherit.numeration" select="0"></xsl:param>
 
 <xsl:param name="make.year.ranges" select="0"></xsl:param>
 

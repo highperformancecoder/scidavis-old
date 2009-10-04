@@ -244,6 +244,17 @@ TD P {
 	text-align:			justify;
 }
 /*
+		Q and A sets
+*/
+tr.question p {
+	font-size:			16px;
+	font-weight:			bold;
+	margin-top:			20px;
+}
+tr.answer p {
+	font-size:			16px;
+}
+/*
 		top navigation bar
 */
 div.NAVHEADER th {

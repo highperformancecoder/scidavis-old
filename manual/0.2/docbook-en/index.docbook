@@ -4,11 +4,11 @@
 		Docbook main file for Scidavis Manual
 		*************************************
 
-		updated for Scidavis version 0.20
+		updated for Scidavis version 0.2.3
 
 *************************************************************************
 -->
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "/usr/share/xml/docbook/schema/dtd/4.5/docbookx.dtd" [
 <!--
 		general terms for the application
 -->
