@@ -37,11 +37,11 @@ unix: INSTALLBASE = /usr           # this is what is called "prefix" when using 
 win32: INSTALLBASE = c:/scidavis
 unix: target.path = "$$INSTALLBASE/bin"               # where to install the binary on Linux/MacOS X
 win32: target.path = "$$INSTALLBASE"                  # where to install the exe on Windows
-unix: documentation.path = "$$INSTALLBASE/share/doc/scidavis"      # where to install the documentation files on Linux/MacOS X
+unix: documentation.path = "$$INSTALLBASE/doc/scidavis-0.2.3"      # where to install the documentation files on Linux/MacOS X
 win32: documentation.path = "$$INSTALLBASE"                        # ... on Winodws
 ### Usually, the manual will be expected in the "manual" subfolder of "documentation.path" (see above).
 ### You can override this, uncomment and adjust the path behind the '=' in the next line.
-# manual.path = $$INSTALLBASE/share/doc/scidavis/manual
+# manual.path = $$INSTALLBASE/doc/scidavis-0.2.3/manual
 ### Enables choosing of help folder at runtime, instead of relying on the above path only.
 ### The downside is that the help folder will be remembered as a configuration option, so a binary
 ### package cannot easily update the path for its users.
@@ -93,10 +93,11 @@ unix:LIBS         += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
 unix:INCLUDEPATH  += ../3rdparty/qwt/src
 unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
 
-unix:LIBS         += -L/usr/lib$${libsuff}
+#unix:LIBS         += -L/usr/lib$${libsuff}
 unix:LIBS         += -lgsl -lgslcblas -lz
-unix:LIBS         += -lmuparser
-unix:INCLUDEPATH  += /usr/include/muParser
+#unix:LIBS         += -lmuparser
+unix:INCLUDEPATH  += ../3rdparty/muparser/include
+unix:LIBS	  += ../3rdparty/muparser/lib/libmuparser.a
 
 #############################################################################
 ### Link everything dynamically
