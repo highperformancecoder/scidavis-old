@@ -53,7 +53,6 @@
              $${SIP_DIR}/sipscidavisPythonScript.cpp\
              $${SIP_DIR}/sipscidavisPythonScripting.cpp\
              $${SIP_DIR}/sipscidavisFolder.cpp\
-             $${SIP_DIR}/sipscidavisQList.cpp\
              $${SIP_DIR}/sipscidavisFit.cpp \
              $${SIP_DIR}/sipscidavisExponentialFit.cpp \
              $${SIP_DIR}/sipscidavisTwoExpFit.cpp \
@@ -83,5 +82,16 @@
 				 $${SIP_DIR}/sipscidavisQwtPlotCurve.cpp \
              $${SIP_DIR}/sipscidavisQwtPlot.cpp \
 				 $${SIP_DIR}/sipscidavisGrid.cpp \
+
+exists($${SIP_DIR}/sipscidavisQList.cpp) {
+# SIP < 4.9
+	SOURCES += $${SIP_DIR}/sipscidavisQList.cpp
+} else {
+	SOURCES += \
+			   $${SIP_DIR}/sipscidavisQList0100QDateTime.cpp\
+			   $${SIP_DIR}/sipscidavisQList0101Folder.cpp\
+			   $${SIP_DIR}/sipscidavisQList0101MyWidget.cpp\
+			   $${SIP_DIR}/sipscidavisQList0101QwtPlotCurve.cpp\
+}
 
 ###############################################################
