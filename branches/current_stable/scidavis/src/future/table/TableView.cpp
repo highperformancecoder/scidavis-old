@@ -131,10 +131,7 @@ void TableView::init()
 	d_view_widget->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
 	QHeaderView * v_header = d_view_widget->verticalHeader();
-	// Remark: ResizeToContents works in Qt 4.2.3 but is broken in 4.3.0
-	// Should be fixed in 4.3.1 though, see:
-	// http://trolltech.com/developer/task-tracker/index_html?method=entry&id=165567
-	v_header->setResizeMode(QHeaderView::ResizeToContents);
+	v_header->setResizeMode(QHeaderView::Interactive);
 	v_header->setMovable(false);
 	d_horizontal_header->setResizeMode(QHeaderView::Interactive);
 	d_horizontal_header->setMovable(true);
