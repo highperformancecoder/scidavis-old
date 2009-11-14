@@ -149,17 +149,15 @@ void Correlation::addResultCurve()
 	double x_temp[rows], y_temp[rows];
 	for (int i = 0; i<rows; i++)
 	{
-	    double x = i - n;
-        x_temp[i] = x;
+        x_temp[i] = i - n;
 
-        double y;
         if(i < n)
 			y_temp[i] = d_x[d_n - n + i];
 		else
 			y_temp[i] = d_x[i-n];
 
-		d_table->column(cols)->setValueAt(i, x);
-		d_table->column(cols2)->setValueAt(i, y);
+		d_table->column(cols)->setValueAt(i, x_temp[i]);
+		d_table->column(cols2)->setValueAt(i, y_temp[i]);
 	}
 
 	QStringList l = d_table->colNames().grep(tr("Lag"));
