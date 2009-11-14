@@ -808,7 +808,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../src/ApplicationWindow.cpp" line="676"/>
         <location filename="../src/ApplicationWindow.cpp" line="733"/>
         <source>&amp;Export Graph</source>
-        <translation>&amp;Vyvést obrazec</translation>
+        <translation>&amp;Vyvést nákres</translation>
     </message>
     <message>
         <source>&amp;Import ASCII</source>
@@ -827,7 +827,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="1061"/>
         <source>&amp;Graph</source>
-        <translation>&amp;Obrazec</translation>
+        <translation>&amp;Nákres</translation>
     </message>
     <message>
         <source>&amp;Plot3D</source>
@@ -849,7 +849,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../src/ApplicationWindow.cpp" line="679"/>
         <location filename="../src/ApplicationWindow.cpp" line="992"/>
         <source>Statistical &amp;Graphs</source>
-        <translation>Statistické &amp;obrazce</translation>
+        <translation>Statistické &amp;nákresy</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="680"/>
@@ -1659,7 +1659,7 @@ Wollen Sie sie überschreiben?</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11027"/>
         <source>Export current graph</source>
-        <translation>Vyvést nynější obrazec</translation>
+        <translation>Vyvést nynější nákres</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10480"/>
@@ -1670,7 +1670,7 @@ Wollen Sie sie überschreiben?</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11031"/>
         <source>Export all graphs</source>
-        <translation>Vyvést všechny obrazce</translation>
+        <translation>Vyvést všechny nákresy</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="7943"/>
@@ -1743,7 +1743,7 @@ Wollen Sie sie überschreiben?</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11058"/>
         <source>Add curve to graph</source>
-        <translation>Do obrazce přidat křivku</translation>
+        <translation>Do nákresu přidat křivku</translation>
     </message>
     <message>
         <source>Add &amp;Error Bars</source>
@@ -3311,7 +3311,7 @@ Jste si jist, že chcete pokračovat?</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="8131"/>
         <source>&amp;Copy Graph</source>
-        <translation>&amp;Kopírovat obrazec</translation>
+        <translation>&amp;Kopírovat nákres</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="8132"/>
@@ -3362,7 +3362,7 @@ Jste si jist, že chcete pokračovat?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10367"/>
         <location filename="../src/ApplicationWindow.cpp" line="10927"/>
         <source>New &amp;Graph</source>
-        <translation>Nový &amp;obrazec</translation>
+        <translation>Nový &amp;nákres</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10371"/>
@@ -3985,7 +3985,7 @@ Jste si jist, že chcete pokračovat?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="13009"/>
         <location filename="../src/ApplicationWindow.h" line="494"/>
         <source>Graph</source>
-        <translation>Obrazec</translation>
+        <translation>Nákres</translation>
     </message>
     <message>
         <source>S&amp;cripting</source>
@@ -4033,7 +4033,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="4758"/>
         <source>Choose a directory to export the graphs to</source>
-        <translation>Vybrat adresář, do něhož se budou vyvádět obrazce</translation>
+        <translation>Vybrat adresář, do něhož se budou vyvádět nákresy</translation>
     </message>
     <message>
         <source>Python Source</source>
@@ -4066,12 +4066,12 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="13496"/>
         <source>D&amp;epending Graphs</source>
-        <translation>&amp;Závisející obrazce</translation>
+        <translation>&amp;Závisející nákresy</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="13510"/>
         <source>D&amp;epending 3D Graphs</source>
-        <translation>&amp;Závisející trojrozměrné obrazce</translation>
+        <translation>&amp;Závisející trojrozměrné nákresy</translation>
     </message>
     <message>
         <source>&amp;Graph 3D</source>
@@ -5390,7 +5390,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
         <location filename="../src/ApplicationWindow.cpp" line="12967"/>
         <location filename="../src/ApplicationWindow.cpp" line="13014"/>
         <source>3D Graph</source>
-        <translation>Trojrozměrný obrazec</translation>
+        <translation>Trojrozměrný nákres</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="13134"/>
@@ -5509,7 +5509,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="4794"/>
         <source>There are no plot layers available in window &lt;b&gt;%1&lt;/b&gt;.&lt;br&gt;Graph window not exported!</source>
-        <translation>V tomto okně nejsou dostupné žádné vrstvy nákresu, &lt;b&gt;%1&lt;/b&gt;.&lt;br&gt;Okno s obrazcem nebylo vyvedeno!</translation>
+        <translation>V tomto okně nejsou dostupné žádné vrstvy nákresu, &lt;b&gt;%1&lt;/b&gt;.&lt;br&gt;Okno s nákresem nebylo vyvedeno!</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="4971"/>
@@ -5531,7 +5531,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="5028"/>
         <source>SciDAVis/QtiPlot 2D Graph Template</source>
-        <translation>Předloha dvojrozměrného obrazce pro programy SciDAVis/QtiPlot</translation>
+        <translation>Předloha dvojrozměrného nákresu pro programy SciDAVis/QtiPlot</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="5030"/>
@@ -8219,7 +8219,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/CurvesDialog.cpp" line="85"/>
         <source>Graph contents</source>
-        <translation>Obsah obrazce</translation>
+        <translation>Obsah nákresu</translation>
     </message>
     <message>
         <location filename="../src/CurvesDialog.cpp" line="123"/>
@@ -11486,7 +11486,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
     <message>
         <location filename="../src/Graph.cpp" line="773"/>
         <source>&lt;html&gt;Failed to set axis labels on Graph %1. Maybe you&apos;re trying to open a corrupted project file; or there&apos;s some problem within SciDAVis. Please report this as a bug (together with detailed instructions how to reproduce this message or the corrupted file).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;Nastavení popisů os v obrazci %1 se nepodařilo. Je možné, že se pokoušíte otevřít soubor s projektem, který je poškozen; nebo je nějaký problém ve SciDAVisu . Nahlašte to, prosím, jako chybu (společně s podrobnými údaji o tom, jakým způsobem se dá toto hlášení nebo poškozený soubor vytvořit znovu).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;stopař slídící po chybách: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;Nastavení popisů os v nákresu %1 se nepodařilo. Je možné, že se pokoušíte otevřít soubor s projektem, který je poškozen; nebo je nějaký problém ve SciDAVisu . Nahlašte to, prosím, jako chybu (společně s podrobnými údaji o tom, jakým způsobem se dá toto hlášení nebo poškozený soubor vytvořit znovu).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;stopař slídící po chybách: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="802"/>
@@ -13196,12 +13196,12 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/LayerDialog.cpp" line="231"/>
         <source>The number of columns you&apos;ve entered is greater than the number of graphs (%1)!</source>
-        <translation>Počet sloupců, který jste zadal, je větší než počet obrazců (%1)!</translation>
+        <translation>Počet sloupců, který jste zadal, je větší než počet nákresů (%1)!</translation>
     </message>
     <message>
         <location filename="../src/LayerDialog.cpp" line="239"/>
         <source>The number of rows you&apos;ve entered is greater than the number of graphs (%1)!</source>
-        <translation>Počet řádků, který jste zadal, je větší než počet obrazců (%1)!</translation>
+        <translation>Počet řádků, který jste zadal, je větší než počet nákresů (%1)!</translation>
     </message>
     <message>
         <source>Axes Labels</source>
@@ -13455,7 +13455,7 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/PolynomialFit.cpp" line="241"/>
         <source>Linear Regression</source>
-        <translation>Přímočarý návrat zpět</translation>
+        <translation>Přímočarý obrat (křivky) neboli regrese</translation>
     </message>
     <message>
         <location filename="../src/PolynomialFit.cpp" line="242"/>
@@ -14997,7 +14997,7 @@ největší celé číslo menší nebo rovno x.</translation>
     <message>
         <location filename="../src/OpenProjectDialog.cpp" line="51"/>
         <source>Origin graph</source>
-        <translation>Původní obrazec</translation>
+        <translation>Původní nákres</translation>
     </message>
     <message>
         <location filename="../src/OpenProjectDialog.cpp" line="52"/>
@@ -16882,7 +16882,7 @@ největší celé číslo menší nebo rovno x.</translation>
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="77"/>
         <source>Show Formula on Graph?</source>
-        <translation>Ukázat vzorec v obrazci?</translation>
+        <translation>Ukázat vzorec v nákresu?</translation>
     </message>
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="82"/>
