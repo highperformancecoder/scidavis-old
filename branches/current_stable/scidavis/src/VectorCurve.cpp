@@ -237,50 +237,37 @@ if (filledArrow != fill)
 	filledArrow = fill;
 }
 
-QwtDoubleRect VectorCurve::boundingRect() const
-{
-QwtDoubleRect rect = QwtPlotCurve::boundingRect();
-QwtDoubleRect vrect = vectorEnd->boundingRect();
+QwtDoubleRect VectorCurve::boundingRect() const {
+	QwtDoubleRect rect = QwtPlotCurve::boundingRect();
 
-if (d_type == Graph::VectXYXY)
+	if (d_type == Graph::VectXYXY)
+		rect |= vectorEnd->boundingRect();
+	else
 	{
-	rect.setTop(QMIN(rect.top(), vrect.top()));
-	rect.setBottom(QMAX(rect.bottom(), vrect.bottom()));
-	rect.setLeft(QMIN(rect.left(), vrect.left()));
-	rect.setRight(QMAX(rect.right(), vrect.right()));
-	}
-else
-	{
-	const double angle = vectorEnd->x(0);
-	double mag = vectorEnd->y(0);
-	switch(d_position)
-		{
-		case Tail:
-			rect.setTop(QMIN(rect.top(), rect.top()+mag*sin(angle)));
-			rect.setBottom(QMAX(rect.bottom(), rect.bottom()+mag*sin(angle)));
-			rect.setLeft(QMIN(rect.left(), rect.left()+mag*cos(angle)));
-			rect.setRight(QMAX(rect.right(), rect.right()+mag*cos(angle)));
-		break;
-
-		case Middle:
-			{
-			mag *= 0.5;
-			rect.setTop(QMIN(rect.top(), rect.top() - fabs(mag*sin(angle))));
-			rect.setBottom(QMAX(rect.bottom(), rect.bottom() + fabs(mag*sin(angle))));
-			rect.setLeft(QMIN(rect.left(), rect.left() - fabs(mag*cos(angle))));
-			rect.setRight(QMAX(rect.right(), rect.right() + fabs(mag*cos(angle))));
+		int rows = abs(d_end_row - d_start_row) + 1;
+		for (int i = 0; i < rows; i++) {
+			double x_i = x(i);
+			double y_i = y(i);
+			double angle = vectorEnd->x(i);
+			double mag = vectorEnd->y(i);
+			switch(d_position) {
+				case Tail:
+					rect |= QwtDoubleRect(x_i, y_i, mag*cos(angle), mag*sin(angle)).normalized();
+					break;
+				case Middle:
+					{
+						QwtDoubleRect rect_i(0, 0, fabs(mag*cos(angle)), fabs(mag*sin(angle)));
+						rect_i.moveCenter(QwtDoublePoint(x_i, y_i));
+						rect |= rect_i;
+						break;
+					}
+				case Head:
+					rect |= QwtDoubleRect(x_i, y_i, -mag*cos(angle), -mag*sin(angle)).normalized();
+					break;
 			}
-		break;
-
-		case Head:
-			rect.setTop(QMIN(rect.top(), rect.top() - mag*sin(angle)));
-			rect.setBottom(QMAX(rect.bottom(), rect.bottom() - mag*sin(angle)));
-			rect.setLeft(QMIN(rect.left(), rect.left() - mag*cos(angle)));
-			rect.setRight(QMAX(rect.right(), rect.right() - mag*cos(angle)));
-		break;
 		}
 	}
-return rect;
+	return rect;
 }
 
 void VectorCurve::updateColumnNames(const QString& oldName, const QString& newName, bool updateTableName)
