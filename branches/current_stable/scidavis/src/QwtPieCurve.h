@@ -47,7 +47,7 @@ public slots:
 	void setFirstColor(int index){d_first_color = index;};
 	int firstColor(){return d_first_color;};
 
-	void loadData();
+	virtual bool loadData();
 	void updateBoundingRect();
 
 private:

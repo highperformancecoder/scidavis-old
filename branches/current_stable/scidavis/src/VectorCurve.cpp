@@ -319,11 +319,10 @@ bool VectorCurve::updateData(Table *t, const QString& colName)
 	   (colName != title().text() && d_x_column != colName && d_end_x_a != colName && d_end_y_m != colName))
 		return false;
 
-	loadData();
-	return true;
+	return loadData();
 }
 
-void VectorCurve::loadData()
+bool VectorCurve::loadData()
 {
 	int xcol = d_table->colIndex(d_x_column);
 	int ycol = d_table->colIndex(title().text());
@@ -356,13 +355,15 @@ void VectorCurve::loadData()
 	}
 
 	if (!size)
-		return;
+		return false;
 
     X.resize(size); Y.resize(size); X2.resize(size); Y2.resize(size);
 	setData(X.data(), Y.data(), size);
 	foreach(DataCurve *c, d_error_bars)
         c->setData(X.data(), Y.data(), size);
 	setVectorEnd(X2, Y2);
+
+	return true;
 }
 
 VectorCurve::~VectorCurve()

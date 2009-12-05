@@ -276,73 +276,34 @@ void QwtErrorPlotCurve::setMasterCurve(DataCurve *c)
 	loadData();
 }
 
-void QwtErrorPlotCurve::loadData()
+bool QwtErrorPlotCurve::loadData()
 {
-	if (!d_master_curve)
-		return;
-
+	if (!d_master_curve) return false;
 	Table *mt = d_master_curve->table();
-	if (!mt)
-		return;
+	if (!mt) return false;
+	Column *x = mt->column(d_master_curve->xColumnName());
+	Column *y = mt->column(d_master_curve->title().text());
 
-	int xcol = mt->colIndex(d_master_curve->xColumnName());
-	int ycol = mt->colIndex(d_master_curve->title().text());
+	Column *err = d_table->column(title().text());
 
-	int errcol = d_table->colIndex(title().text());
-	if (xcol<0 || ycol<0 || errcol<0)
-		return;
-
-	Column *x_col_ptr = d_table->column(xcol);
-	Column *y_col_ptr = d_table->column(ycol);
-	Column *err_col_ptr = d_table->column(errcol);
-	int xColType = mt->columnType(xcol);
-	int yColType = mt->columnType(ycol);
-	int errColType = mt->columnType(errcol);
-
-	d_start_row = d_master_curve->startRow();
-	d_end_row = d_master_curve->endRow();
-
-	int endRow = d_end_row;
-	if (d_end_row >= x_col_ptr->rowCount())
-		endRow = x_col_ptr->rowCount() - 1;
-
-	if (d_end_row >= y_col_ptr->rowCount())
-		endRow = y_col_ptr->rowCount() - 1;
-
-	int r = abs(endRow - d_start_row) + 1;
-	QVector<double> X(r), Y(r), err(r);
-    int size = 0;
-
-
-	for (int row = d_start_row; row <= endRow; row++) {
-		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row) && !err_col_ptr->isInvalid(row)) {
-			if (xColType == Table::Text) {
-				QString xval = x_col_ptr->textAt(row);
-				X[size] = (double)(row+1);
-			} else
-				X[size] = x_col_ptr->valueAt(row);
-
-			if (yColType == Table::Text) {
-				QString yval = y_col_ptr->textAt(row);
-				Y[size] = (double)(row+1);
-			} else
-				Y[size] = y_col_ptr->valueAt(row);
-
-			err[size] = err_col_ptr->valueAt(row);
-
-			size++;
-		}
+	if (!x || !y || !err) {
+		remove();
+		return false;
 	}
 
-	if (size == 0)
+	QList< QVector<double> > data = convertData(
+			d_master_curve->type() == Graph::HorizontalBars ? (QList<Column*>() << y << x << err) : (QList<Column*>() << x << y << err),
+			QList<int>() << xAxis() << yAxis() << (type==Horizontal ? xAxis() : yAxis()) );
+
+	if (data.isEmpty() || data[0].size() == 0) {
 		remove();
+		return false;
+	}
 
-    X.resize(size);
-	Y.resize(size);
-	err.resize(size);
+	setData(data[0].data(), data[1].data(), data[0].size());
+	setErrors(data[2]);
 
-	setData(X.data(), Y.data(), size);
-	setErrors(err);
+	return true;
 }
 
 QString QwtErrorPlotCurve::plotAssociation()

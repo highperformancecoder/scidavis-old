@@ -111,7 +111,7 @@ void QwtPieCurve::setBrushStyle(const Qt::BrushStyle& style)
 	setBrush(br);
 }
 
-void QwtPieCurve::loadData()
+bool QwtPieCurve::loadData()
 {
 	QVarLengthArray<double> Y(abs(d_end_row - d_start_row) + 1);
 	int size = 0;
@@ -136,6 +136,8 @@ void QwtPieCurve::loadData()
 	}
 	Y.resize(size);
 	setData(Y.data(), Y.data(), size);
+
+	return true;
 }
 
 void QwtPieCurve::updateBoundingRect()

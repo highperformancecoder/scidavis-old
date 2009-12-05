@@ -54,7 +54,6 @@
 #include "PlotCurve.h"
 #include "ApplicationWindow.h"
 #include "core/column/Column.h"
-#include "core/datatypes/DateTime2StringFilter.h"
 
 #include <QApplication>
 #include <QBitmap>
@@ -3304,145 +3303,25 @@ bool Graph::insertCurve(Table* w, int xcol, const QString& name, int style)
 bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColName, int style, int startRow, int endRow)
 {
 	if (!w) return false;
-	if (style == Histogram || style == Box || style == Pie)
-		return false;
-
-	Column *x_col_ptr = w->column(xColName);
-	Column *y_col_ptr = w->column(yColName);
-	if (!x_col_ptr || !y_col_ptr)
-		return false;
-
-	int xColType = x_col_ptr->columnMode();
-	int yColType = y_col_ptr->columnMode();
-	int row, size=0;
-
-	QTime time0;
-	QDate date0;
-	QDateTime date_time0;
-    QLocale locale;
-
-	if (endRow < 0)
-		endRow = w->numRows() - 1;
-
-	if (endRow >= x_col_ptr->rowCount())
-		endRow = x_col_ptr->rowCount() - 1;
-	if (endRow >= y_col_ptr->rowCount())
-		endRow = y_col_ptr->rowCount() - 1;
-
-	int r = abs(endRow - startRow) + 1;
-    QVector<double> X(r), Y(r);
-	if (xColType == Table::Time){
-		for (row = startRow; row<=endRow; row++ ){
-			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
-				time0 = x_col_ptr->timeAt(row);
-				if (time0.isValid())
-					break;
-			}
-		}
-	}
-	else if (xColType == Table::Date){
-		for (row = startRow; row<=endRow; row++ ){
-			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
-				date0 = x_col_ptr->dateAt(row);
-				if (date0.isValid())
-					break;
-			}
-		}
-	}
-	else if (xColType == Table::DateTime) { 
-		for (row = startRow; row<=endRow; row++ ) {
-			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
-				date_time0 = x_col_ptr->dateTimeAt(row);
-				if (date_time0.isValid())
-					break;
-			}
-		}
-	}
-
-	for (row = startRow; row<=endRow; row++ ) {
-		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
-			if (xColType == Table::Text) {
-				X[size] = (double)(row+1);
-			}
-			else if (xColType == Table::Time) {
-				QTime time = x_col_ptr->timeAt(row);
-				if (time.isValid())
-					X[size] = time0.msecsTo (time);
-				else
-					continue;
-			}
-			else if (xColType == Table::Date) {
-				QDate d = x_col_ptr->dateAt(row);
-				if (d.isValid())
-					X[size] = (double) date0.daysTo(d);
-				else 
-					continue;
-			}
-			else if (xColType == Table::DateTime) {
-				QDateTime dt = x_col_ptr->dateTimeAt(row);
-				if (dt.isValid())
-				{
-					X[size] = double(dt.date().toJulianDay()) +
-						double( -dt.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
-				}
-				else
-					continue;
-			}
-			else
-				X[size] = x_col_ptr->valueAt(row);
-
-			if (yColType == Table::Text) {
-				Y[size] = (double) (row + 1);
-			}
-			else if (yColType == Table::Time) {
-				QTime yval = y_col_ptr->timeAt(row);
-				if (yval.isValid()) {
-					Y[size] = double( -yval.msecsTo(QTime(12,0,0,0)) );
-				}
-				else 
-					Y[size] = 0.0;
-			}
-			else if (yColType == Table::Date) {
-				QDate yval = y_col_ptr->dateAt(row);
-				if (yval.isValid()) {
-					Y[size] = double( yval.toJulianDay() );
-				}
-				else 
-					Y[size] = 0.0;
-			}
-			else if (yColType == Table::DateTime) {
-				QDateTime yval = y_col_ptr->dateTimeAt(row);
-				if (yval.isValid()) {
-					Y[size] = double(yval.date().toJulianDay()) +
-						double( -yval.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
-				}
-				else 
-					Y[size] = 0.0;
-			}
-			else
-				Y[size] = y_col_ptr->valueAt(row);
-
-			size++;
-		}
-	}
-
-	if (!size)
-		return false;
-
-	X.resize(size);
-	Y.resize(size);
-
 	DataCurve *c = 0;
-	if (style == VerticalBars){
-		c = new QwtBarCurve(QwtBarCurve::Vertical, w, xColName, yColName, startRow, endRow);
-		c->setStyle(QwtPlotCurve::UserCurve);
-	}
-	else if (style == HorizontalBars){
-		c = new QwtBarCurve(QwtBarCurve::Horizontal, w, xColName, yColName, startRow, endRow);
-		c->setStyle(QwtPlotCurve::UserCurve);
-	}
-	else
-		c = new DataCurve(w, xColName, yColName, startRow, endRow);
+
+	switch (style) {
+		case Histogram:
+		case Box:
+		case Pie:
+			return false;
+		case VerticalBars:
+			c = new QwtBarCurve(QwtBarCurve::Vertical, w, xColName, yColName, startRow, endRow);
+			c->setStyle(QwtPlotCurve::UserCurve);
+			break;
+		case HorizontalBars:
+			c = new QwtBarCurve(QwtBarCurve::Horizontal, w, xColName, yColName, startRow, endRow);
+			c->setStyle(QwtPlotCurve::UserCurve);
+			break;
+		default:
+			c = new DataCurve(w, xColName, yColName, startRow, endRow);
+			break;
+	};
 
 	c_type.resize(++n_curves);
 	c_type[n_curves-1] = style;
@@ -3451,58 +3330,8 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 
 	c->setPen(QPen(Qt::black,widthLine));
 
-	if (style == HorizontalBars)
-		c->setData(Y.data(), X.data(), size);
-	else
-		c->setData(X.data(), Y.data(), size);
-
-	QwtPlot::Axis abscissa, ordinate;
-	if (style == HorizontalBars) {
-		abscissa = QwtPlot::yLeft;
-		ordinate = QwtPlot::xBottom;
-	} else {
-		abscissa = QwtPlot::xBottom;
-		ordinate = QwtPlot::yLeft;
-	}
-
-	switch (xColType) {
-		case Table::Text:
-			setLabelsTextFormat(abscissa, x_col_ptr, startRow, endRow);
-			if (!d_plot->axisEnabled(abscissa+1))
-				axesFormatInfo[abscissa+1] = xColName;
-			break;
-		case Table::Time:
-			setLabelsDateTimeFormat(abscissa, Time,
-					time0.toString() + ";" + static_cast<DateTime2StringFilter *>(x_col_ptr->outputFilter())->format());
-			break;
-		case Table::Date:
-			setLabelsDateTimeFormat(abscissa, Date,
-					date0.toString("YYYY-MM-DD") + ";" + static_cast<DateTime2StringFilter *>(x_col_ptr->outputFilter())->format());
-			break;
-		case Table::DateTime:
-			setLabelsDateTimeFormat(abscissa, DateTime,
-					date_time0.toString("YYYY-MM-DDTHH:MM:SS") + ";" + static_cast<DateTime2StringFilter *>(x_col_ptr->outputFilter())->format());
-			break;
-	};
-
-	switch (yColType) {
-		case Table::Text:
-			setLabelsTextFormat(ordinate, y_col_ptr, startRow, endRow);
-			if (!d_plot->axisEnabled(ordinate+1))
-				axesFormatInfo[ordinate+1] = yColName;
-			break;
-		case Table::Time:
-			setLabelsDateTimeFormat(ordinate, Time,
-					QTime(12,0,0,0).toString() + ";" + static_cast<DateTime2StringFilter *>(y_col_ptr->outputFilter())->format());
-			break;
-		case Table::Date:
-			setLabelsDateTimeFormat(ordinate, Date, ";" + static_cast<DateTime2StringFilter *>(y_col_ptr->outputFilter())->format());
-			break;
-		case Table::DateTime:
-			setLabelsDateTimeFormat(ordinate, DateTime, ";" + static_cast<DateTime2StringFilter *>(y_col_ptr->outputFilter())->format());
-			break;
-	};
-
+	if (!c->loadData())
+		return false;
 
 	addLegendItem(yColName);
 	updatePlot();

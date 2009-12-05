@@ -44,7 +44,7 @@ public:
 	double end(){return d_end;};
 	double binSize(){return d_bin_size;};
 
-    void loadData();
+    virtual bool loadData();
     void initData(const QVector<double>& Y, int size);
 
     double mean(){return d_mean;};

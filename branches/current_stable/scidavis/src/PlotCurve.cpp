@@ -29,6 +29,7 @@
 #include "PlotCurve.h"
 #include "ScaleDraw.h"
 #include "core/column/Column.h"
+#include "core/datatypes/DateTime2StringFilter.h"
 #include <QDateTime>
 #include <QMessageBox>
 #include <qwt_symbol.h>
@@ -116,190 +117,187 @@ bool DataCurve::updateData(Table *t, const QString& colName)
 	return true;
 }
 
-void DataCurve::loadData()
-{
-	Graph *g = (Graph *)plot()->parent();
-	if (!g)
-		return;
+QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, const QList<int> &axes) const {
+	Graph *g = 0;
+	if (plot())
+		g = static_cast<Graph*>(plot()->parent());
 
-	int xcol = d_table->colIndex(d_x_column);
-	int ycol = d_table->colIndex(title().text());
+	int end_row = d_end_row;
+	// make sure end_row is a valid index for all columns
+	foreach(Column *col, cols)
+		if (end_row >= col->rowCount())
+			end_row = col->rowCount() - 1;
 
-	if (xcol < 0 || ycol < 0){
-		remove();
-		return;
-	}
-	
-	Column *x_col_ptr = d_table->column(xcol);
-	Column *y_col_ptr = d_table->column(ycol);
-	
-	int endRow = d_end_row;
-	if (d_end_row >= x_col_ptr->rowCount())
-		endRow = x_col_ptr->rowCount() - 1;
-
-	if (d_end_row >= y_col_ptr->rowCount())
-		endRow = y_col_ptr->rowCount() - 1;
-
-	int r = abs(endRow - d_start_row) + 1;
-    QVarLengthArray<double> X(r), Y(r);
-	int xColType = d_table->columnType(xcol);
-	int yColType = d_table->columnType(ycol);
-
-	QTime time0;
-	QDate date0;
-	QDateTime date_time0;
-	QString date_time_fmt = d_table->columnFormat(xcol);
-	if (xColType == Table::Time){
-		for (int row = d_start_row; row <= endRow; row++ ) {
-			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
-				time0 = x_col_ptr->timeAt(row);
-				if (time0.isValid())
-					break;
+	// determine rows for which all columns have valid content
+	QList<int> valid_rows;
+	for (int row = d_start_row; row <= end_row; row++) {
+		bool all_valid = true;
+		foreach(Column *col, cols)
+			if (col->isInvalid(row)) {
+				all_valid = false;
+				break;
 			}
-		}
-	} else if (xColType == Table::Date){
-		for (int row = d_start_row; row <= endRow; row++ ){
-			QString xval=d_table->text(row,xcol);
-			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
-				date0 = x_col_ptr->dateAt(row);
-				if (date0.isValid())
-					break;
-			}
-		}
-	} else if (xColType == Table::DateTime){
-		for (int row = d_start_row; row <= endRow; row++ ){
-			QString xval=d_table->text(row,xcol);
-			if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
-				date_time0 = x_col_ptr->dateTimeAt(row);
-				if (date_time0.isValid())
-					break;
-			}
-		}
+		if (all_valid)
+			valid_rows.push_back(row);
 	}
 
-	int size = 0;
-	for (int row = d_start_row; row <= endRow; row++ ) {
-		if (!x_col_ptr->isInvalid(row) && !y_col_ptr->isInvalid(row)) {
-			if (xColType == Table::Text) {
-				X[size] = (double) (row + 1);
-			}
-			else if (xColType == Table::Time) {
-				QTime time = x_col_ptr->timeAt(row);
-				if (time.isValid())
-					X[size] = time0.msecsTo (time);
-				else
-					continue;
-			}
-			else if (xColType == Table::Date) {
-				QDate d = x_col_ptr->dateAt(row);
-				if (d.isValid())
-					X[size] = (double) date0.daysTo(d);
-				else 
-					continue;
-			}
-			else if (xColType == Table::DateTime) {
-				QDateTime dt = x_col_ptr->dateTimeAt(row);
-				if (dt.isValid())
+	// initialize result list
+	QList< QVector<double> > result;
+	for (int i=0; i<cols.size(); i++)
+		result.push_back(QVector<double>(valid_rows.size()));
+
+	// For date and time (but not DateTime) values, numbers are relative to the first valid row's
+	// content. We can't change this easily without breaking backwards compatibility (think of
+	// scale ranges, placement of labels and arrows etc).
+	QList<QDate> reference_dates;
+	QList<QTime> reference_times;
+	for(int i=0; i<cols.size(); i++) {
+		Column *col = cols[i];
+
+		switch (col->columnMode()) {
+			case Table::Time:
 				{
-					X[size] = double(dt.date().toJulianDay()) +
-						double( -dt.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
-				}
-				else
-					continue;
-			}
-			else
-				X[size] = x_col_ptr->valueAt(row);
+					QTime time;
+					QString format;
+					if (g && g->axesType()[axes[i]] == Table::Time) {
+						QStringList lst = g->axisFormatInfo(axes[i]).split(";");
+						time = QTime::fromString(lst[0]);
+						if (lst.size() >= 2) format = lst[1];
+					}
+					if (!time.isValid()) {
+						foreach (int row, valid_rows) {
+							time = col->timeAt(row);
+							if (time.isValid()) break;
+						}
+					}
 
-			if (yColType == Table::Text) {
-				Y[size] = (double) (row + 1);
-			}
-			else if (yColType == Table::Time) {
-				QTime yval = y_col_ptr->timeAt(row);
-				if (yval.isValid()) {
-					Y[size] = double( -yval.msecsTo(QTime(12,0,0,0)) );
-				}
-				else 
-					Y[size] = 0.0;
-			}
-			else if (yColType == Table::Date) {
-				QDate yval = y_col_ptr->dateAt(row);
-				if (yval.isValid()) {
-					Y[size] = double( yval.toJulianDay() );
-				}
-				else 
-					Y[size] = 0.0;
-			}
-			else if (yColType == Table::DateTime) {
-				QDateTime yval = y_col_ptr->dateTimeAt(row);
-				if (yval.isValid()) {
-					Y[size] = double(yval.date().toJulianDay()) +
-						double( -yval.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
-				}
-				else 
-					Y[size] = 0.0;
-			}
-			else
-				Y[size] = y_col_ptr->valueAt(row);
+					if (format.isEmpty())
+						format = static_cast<DateTime2StringFilter *>(col->outputFilter())->format();
 
-			size++;
-		}
+					reference_dates.push_back(QDate());
+					reference_times.push_back(time);
+					if (g)
+						g->setLabelsDateTimeFormat(axes[i], Graph::Time, time.toString() + ";" + format);
+					break;
+				}
+			case Table::Date:
+				{
+					QDate date;
+					QString format;
+
+					if (g && g->axesType()[axes[i]] == Table::Time) {
+						QStringList lst = g->axisFormatInfo(axes[i]).split(";");
+						date = QDate::fromString(lst[0], "YYYY-MM-DD");
+						if (lst.size() >= 2) format = lst[1];
+					}
+
+					if (!date.isValid()) {
+						foreach (int row, valid_rows) {
+							date = col->dateAt(row);
+							if (date.isValid()) break;
+						}
+					}
+
+					if (format.isEmpty())
+						format = static_cast<DateTime2StringFilter *>(col->outputFilter())->format();
+
+					reference_dates.push_back(date);
+					reference_times.push_back(QTime());
+					if (g)
+						g->setLabelsDateTimeFormat(axes[i], Graph::Date, date.toString("YYYY-MM-DD") + ";" + format);
+					break;
+				}
+			case Table::DateTime:
+				{
+					QDateTime datetime;
+					QString format;
+
+					if (g && g->axesType()[axes[i]] == Table::DateTime) {
+						QStringList lst = g->axisFormatInfo(axes[i]).split(";");
+						datetime = QDateTime::fromString(lst[0], "YYYY-MM-DDTHH:MM:SS");
+						if (lst.size() >= 2) format = lst[1];
+					}
+
+					if (!datetime.isValid()) {
+						foreach (int row, valid_rows) {
+							datetime = col->dateTimeAt(row);
+							if (datetime.isValid()) break;
+						}
+					}
+
+					if (format.isEmpty())
+						format = static_cast<DateTime2StringFilter *>(col->outputFilter())->format();
+
+					reference_dates.push_back(QDate());
+					reference_times.push_back(QTime());
+					if (g)
+						g->setLabelsDateTimeFormat(axes[i], Graph::DateTime, datetime.toString("YYYY-MM-DDTHH:MM:SS") + ";" + format);
+					break;
+				}
+			case Table::Text:
+				if (g)
+					g->setLabelsTextFormat(axes[i], col, d_start_row, end_row);
+				reference_dates.push_back(QDate());
+				reference_times.push_back(QTime());
+				break;
+			default:
+				reference_dates.push_back(QDate());
+				reference_times.push_back(QTime());
+				break;
+		};
 	}
 
-    X.resize(size);
-    Y.resize(size);
+	// convert data to numeric representation used for plotting
+	for (int i=0; i<valid_rows.size(); i++)
+		for (int j=0; j<cols.size(); j++)
+			switch (cols[j]->columnMode()) {
+				case Table::Text:
+					result[j][i] = static_cast<double>(valid_rows[i] + 1);
+					break;
+				case Table::Time:
+					result[j][i] = reference_times[j].msecsTo(cols[j]->timeAt(valid_rows[i]));
+					break;
+				case Table::Date:
+					result[j][i] = reference_dates[j].daysTo(cols[j]->dateAt(valid_rows[i]));
+					break;
+				case Table::DateTime:
+					{
+						QDateTime dt = cols[j]->dateTimeAt(valid_rows[i]);
+						result[j][i] = double(dt.date().toJulianDay()) +
+							double( -dt.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
+						break;
+					}
+				default:
+					result[j][i] = cols[j]->valueAt(valid_rows[i]);
+					break;
+			};
 
-	if (!size){
+	return result;
+}
+
+bool DataCurve::loadData()
+{
+	Column *x_col_ptr = d_table->column(d_x_column);
+	Column *y_col_ptr = d_table->column(title().text());
+	if (!x_col_ptr || !y_col_ptr) {
 		remove();
-		return;
-	} else {
-		if (d_type == Graph::HorizontalBars){
-			setData(Y.data(), X.data(), size);
-			foreach(DataCurve *c, d_error_bars)
-                c->setData(Y.data(), X.data(), size);
-		} else {
-			setData(X.data(), Y.data(), size);
-			foreach(DataCurve *c, d_error_bars)
-                c->setData(X.data(), Y.data(), size);
-		}
-
-		if (xColType == Table::Text){
-			g->setLabelsTextFormat(d_type == Graph::HorizontalBars ? QwtPlot::yLeft : QwtPlot::xBottom,
-					x_col_ptr, d_start_row, endRow);
-		} else if (xColType == Table::Time ){
-			if (d_type == Graph::HorizontalBars){
-				QStringList lst = g->axisFormatInfo(QwtPlot::yLeft).split(";");
-				QString fmtInfo = time0.toString() + ";" + lst[1];
-				g->setLabelsDateTimeFormat(QwtPlot::yLeft, Graph::Time, fmtInfo);
-			} else {
-				QStringList lst = g->axisFormatInfo(QwtPlot::xBottom).split(";");
-				QString fmtInfo = time0.toString() + ";" + lst[1];
-				g->setLabelsDateTimeFormat(QwtPlot::xBottom, Graph::Time, fmtInfo);
-			}
-		} else if (xColType == Table::Date ) {
-			if (d_type == Graph::HorizontalBars){
-				QStringList lst = g->axisFormatInfo(QwtPlot::yLeft).split(";");
-				QString fmtInfo = date0.toString("YYYY-MM-DD") + ";" + lst[1];
-				g->setLabelsDateTimeFormat(QwtPlot::yLeft, Graph::Date, fmtInfo);
-			} else {
-				QStringList lst = g->axisFormatInfo(QwtPlot::xBottom).split(";");
-				QString fmtInfo = date0.toString("YYYY-MM-DD") + ";" + lst[1];
-				g->setLabelsDateTimeFormat(QwtPlot::xBottom, Graph::Date, fmtInfo);
-			}
-		} else if (xColType == Table::DateTime ) {
-			if (d_type == Graph::HorizontalBars){
-				QStringList lst = g->axisFormatInfo(QwtPlot::yLeft).split(";");
-				QString fmtInfo = date_time0.toString("YYYY-MM-DDTHH:MM:SS") + ";" + lst[1];
-				g->setLabelsDateTimeFormat(QwtPlot::yLeft, Graph::DateTime, fmtInfo);
-			} else {
-				QStringList lst = g->axisFormatInfo(QwtPlot::xBottom).split(";");
-				QString fmtInfo = date_time0.toString("YYYY-MM-DDTHH:MM:SS") + ";" + lst[1];
-				g->setLabelsDateTimeFormat(QwtPlot::xBottom, Graph::DateTime, fmtInfo);
-			}
-		}
-
-		if (yColType == Table::Text)
-			g->setLabelsTextFormat(QwtPlot::yLeft, y_col_ptr, d_start_row, endRow);
+		return false;
 	}
+	
+	QList< QVector<double> > points = convertData(
+			d_type == Graph::HorizontalBars ? (QList<Column*>() << y_col_ptr << x_col_ptr) : (QList<Column*>() << x_col_ptr << y_col_ptr),
+			QList<int>() << xAxis() << yAxis());
+
+	if (points.isEmpty() || points[0].size() == 0) {
+		remove();
+		return false;
+	}
+
+	setData(points[0].data(), points[1].data(), points[0].size());
+	foreach(DataCurve *c, d_error_bars)
+		c->setData(points[0].data(), points[1].data(), points[0].size());
+
+	return true;
 }
 
 void DataCurve::removeErrorBars(DataCurve *c)
@@ -323,9 +321,9 @@ void DataCurve::clearErrorBars()
 
 void DataCurve::remove()
 {
+	if (!plot()) return;
 	Graph *g = (Graph *)plot()->parent();
-	if (!g)
-		return;
+	if (!g) return;
 
 	g->removeCurve(title().text());
 }

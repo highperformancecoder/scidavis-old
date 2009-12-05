@@ -83,7 +83,7 @@ public:
 	void setPosition(int pos){d_position = pos;};
 
 	bool updateData(Table *t, const QString& colName);
-	void loadData();
+	virtual bool loadData();
 
     QString plotAssociation();
 	void updateColumnNames(const QString& oldName, const QString& newName, bool updateTableName);

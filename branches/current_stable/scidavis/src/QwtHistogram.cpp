@@ -96,7 +96,7 @@ void QwtHistogram::setBinning(bool autoBin, double size, double begin, double en
 	d_end = end;
 }
 
-void QwtHistogram::loadData()
+bool QwtHistogram::loadData()
 {
     int r = abs(d_end_row - d_start_row) + 1;
 	QVarLengthArray<double> Y(r);
@@ -128,7 +128,7 @@ void QwtHistogram::loadData()
 			X[i] = 0;
 		}
 		setData(X, Y.data(), 2);
-		return;
+		return false;
 	}
 
 	int n;
@@ -137,7 +137,7 @@ void QwtHistogram::loadData()
 		n = 10;
 		h = gsl_histogram_alloc (n);
 		if (!h)
-			return;
+			return false;
 
 		gsl_vector *v = gsl_vector_alloc (size);
 		for (int i = 0; i<size; i++ )
@@ -156,7 +156,7 @@ void QwtHistogram::loadData()
 		n = int((d_end - d_begin)/d_bin_size + 1);
 		h = gsl_histogram_alloc (n);
 		if (!h)
-			return;
+			return false;
 
 		double *range = new double[n+2];
 		for (int i = 0; i<= n+1; i++ )
@@ -185,6 +185,8 @@ void QwtHistogram::loadData()
 	d_max = gsl_histogram_max_val(h);
 
 	gsl_histogram_free (h);
+
+	return true;
 }
 
 void QwtHistogram::initData(const QVector<double>& Y, int size)

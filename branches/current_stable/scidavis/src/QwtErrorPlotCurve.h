@@ -83,7 +83,7 @@ public:
     QString plotAssociation();
 
 	bool updateData(Table *t, const QString& colName);
-	void loadData();
+	virtual bool loadData();
 
 private:
 	virtual void draw(QPainter *painter,const QwtScaleMap &xMap,

@@ -75,7 +75,7 @@ public:
 	int whiskersRangeType(){return w_range;};
 	void setWhiskersRange(int type, double coeff);
 
-    void loadData();
+	virtual bool loadData();
 
 private:
 	void draw(QPainter *painter,const QwtScaleMap &xMap,

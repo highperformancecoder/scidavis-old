@@ -329,7 +329,7 @@ QwtDoubleRect BoxCurve::boundingRect() const
 	return rect;
 }
 
-void BoxCurve::loadData()
+bool BoxCurve::loadData()
 {
 	QVector<double> Y(abs(d_end_row - d_start_row) + 1);
     int ycol = d_table->colIndex(title().text());
@@ -358,5 +358,7 @@ void BoxCurve::loadData()
         setData(QwtSingleArrayData(this->x(0), Y, size));
 	} else
 		remove();
+
+	return true;
 }
 
