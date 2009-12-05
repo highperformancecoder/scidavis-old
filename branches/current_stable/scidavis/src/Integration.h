@@ -36,21 +36,30 @@ class Integration : public Filter
 Q_OBJECT
 
 public:
+	enum InterpolationMethod{Linear, Cubic, Akima};
+
 	Integration(ApplicationWindow *parent, Graph *g);
 	Integration(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
 	Integration(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
 
-    int method(){return d_method;};
-    void setMethodOrder(int n);
+    InterpolationMethod method(){return d_method;};
+    void setMethod(InterpolationMethod method) {
+		 InterpolationMethod backup = d_method;
+		 d_method = method;
+		 if (!isDataAcceptable())
+			 d_method = backup;
+	 };
+
+protected:
+	virtual bool isDataAcceptable();
 
 private:
     void init();
-    //!Uses code originally written by Vasileios Gkanis. It needs some more checking.
     QString logInfo();
     void output(){};
 
-    //! the integration method: 1 = trapezoidal, max = 5!
-    int d_method;
+    //! The method for computing the interpolation used for integrating.
+    InterpolationMethod d_method;
 };
 
 #endif

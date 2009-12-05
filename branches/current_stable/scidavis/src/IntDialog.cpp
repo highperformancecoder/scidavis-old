@@ -55,21 +55,12 @@ IntDialog::IntDialog( QWidget* parent, Qt::WFlags fl )
 	boxName = new QComboBox();
 	gl1->addWidget(boxName, 0, 1);
 
-	gl1->addWidget(new QLabel(tr("Order (1 - 5, 1 = Trapezoid Rule)")), 1, 0);
-	boxOrder = new QSpinBox();
-	boxOrder->setRange(1, 5);
-	gl1->addWidget(boxOrder, 1, 1);
-
-	gl1->addWidget(new QLabel(tr("Number of iterations (Max=40)")), 2, 0);
-	boxSteps = new QSpinBox();
-	boxSteps->setRange(2, 40);
-	boxSteps->setValue(40);
-	gl1->addWidget(boxSteps, 2, 1);
-
-	gl1->addWidget(new QLabel(tr("Tolerance")), 3, 0);
-	boxTol = new QLineEdit();
-	boxTol->setText("0.01");
-	gl1->addWidget(boxTol, 3, 1);
+	gl1->addWidget(new QLabel(tr("Interpolation")), 1, 0);
+	boxMethod = new QComboBox();
+	boxMethod->insertItem(tr("Linear"));
+    boxMethod->insertItem(tr("Cubic"));
+    boxMethod->insertItem(tr("Non-rounded Akima"));
+	gl1->addWidget(boxMethod, 1, 1);
 
 	gl1->addWidget(new QLabel(tr("Lower limit")), 4, 0);
 	boxStart = new QLineEdit();
@@ -112,20 +103,6 @@ if (!c || !curvesList.contains(curveName))
 		tr("The curve <b> %1 </b> doesn't exist anymore! Operation aborted!").arg(curveName));
 	boxName->clear();
 	boxName->insertStringList(curvesList);
-	return;
-	}
-
-try
-	{
-	mu::Parser parser;
-	parser.SetExpr(boxTol->text().toAscii().constData());
-	parser.Eval();
-	}
-catch(mu::ParserError &e)
-	{
-	QMessageBox::critical((ApplicationWindow *)parent(),tr("Tolerance value error"),QString::fromStdString(e.GetMsg()));
-	boxTol->clear();
-	boxTol->setFocus();
 	return;
 	}
 
@@ -229,9 +206,7 @@ else
 
 Integration *i = new Integration((ApplicationWindow *)this->parent(), graph, curveName,
                                  boxStart->text().toDouble(), boxEnd->text().toDouble());
-i->setTolerance(boxTol->text().toDouble());
-i->setMaximumIterations(boxSteps->value());
-i->setMethodOrder(boxOrder->value());
+i->setMethod((Integration::InterpolationMethod)boxMethod->currentIndex());
 i->run();
 delete i;
 }

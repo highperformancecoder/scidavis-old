@@ -52,11 +52,9 @@ public:
 	QPushButton* buttonHelp;
     QCheckBox* boxShowFormula;
 	QComboBox* boxName;
-	QSpinBox* boxOrder;
-	QSpinBox* boxSteps;
+	QComboBox* boxMethod;
 	QLineEdit* boxStart;
 	QLineEdit* boxEnd;
-	QLineEdit* boxTol;
 
 public slots:
 	void accept();

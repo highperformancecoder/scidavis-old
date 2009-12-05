@@ -1620,7 +1620,10 @@ public:
   SIPSCIDAVIS_APP(new sipIntegration(app, a0, *a1, a2, a3))
 %End
 
-  void setMethodOrder(int n);
+	enum InterpolationMethod{Linear, Cubic, Akima};
+	InterpolationMethod method();
+    void setMethod(InterpolationMethod method);
+
   bool run();
 };
 

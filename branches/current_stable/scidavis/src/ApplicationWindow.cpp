@@ -82,7 +82,6 @@
 #include "FunctionCurve.h"
 #include "QwtPieCurve.h"
 #include "Spectrogram.h"
-#include "Integration.h"
 #include "Differentiation.h"
 #include "SmoothFilter.h"
 #include "FFTFilter.h"
