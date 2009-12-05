@@ -179,7 +179,7 @@ void LineDialog::initGeometryTab()
     QGridLayout *gl1 = new QGridLayout();
     gl1->addWidget(new QLabel( tr("X")), 0, 0);
     gl1->addWidget(xStartBox, 0, 1);
-    gl1->addWidget(new QLabel(tr("To")), 1, 0);
+    gl1->addWidget(new QLabel(tr("Y")), 1, 0);
     gl1->addWidget(yStartBox, 1, 1);
     gb1->setLayout(gl1);
 
@@ -190,7 +190,7 @@ void LineDialog::initGeometryTab()
     QGridLayout *gl2 = new QGridLayout();
     gl2->addWidget(new QLabel( tr("X")), 0, 0);
     gl2->addWidget(xEndBox, 0, 1);
-    gl2->addWidget(new QLabel(tr("To")), 1, 0);
+    gl2->addWidget(new QLabel(tr("Y")), 1, 0);
     gl2->addWidget(yEndBox, 1, 1);
     gb2->setLayout(gl2);
 
