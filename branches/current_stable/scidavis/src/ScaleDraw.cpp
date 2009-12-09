@@ -36,12 +36,22 @@
 #include <qwt_text.h>
 
 ScaleDraw::ScaleDraw(const QString& s):
+	formula_string (s),
 	d_fmt('g'),
     d_prec(4),
-	formula_string (s),
-	d_majTicks(Out),
-	d_minTicks(Out)
+	d_minTicks(Out),
+	d_majTicks(Out)
 	{};
+
+ScaleDraw::ScaleDraw(const ScaleDraw &other, const QString &s) :
+	QwtScaleDraw(other),
+	formula_string(s),
+	d_minTicks(other.majorTicksStyle()),
+	d_majTicks(other.minorTicksStyle())
+{
+	other.labelFormat(d_fmt, d_prec);
+	invalidateCache();
+}
 
 double ScaleDraw::transformValue(double value) const
 	{

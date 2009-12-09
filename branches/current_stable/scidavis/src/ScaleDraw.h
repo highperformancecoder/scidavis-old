@@ -43,6 +43,7 @@ public:
 	enum TicksStyle{None = 0, Out = 1, Both = 2, In = 3};
 
 	ScaleDraw(const QString& s = QString::null);
+	ScaleDraw(const ScaleDraw &other, const QString &s = QString::null);
 	virtual ~ScaleDraw(){};
 
 	QString formulaString() {return formula_string;};
@@ -58,12 +59,12 @@ public:
 	void labelFormat(char &f, int &prec) const;
 	void setLabelFormat(char f, int prec);
 
-	int labelNumericPrecision(){return d_prec;};
+	int labelNumericPrecision() const { return d_prec; };
 
-	int majorTicksStyle(){return d_majTicks;};
+	int majorTicksStyle() const { return d_majTicks; };
 	void setMajorTicksStyle(TicksStyle type){d_majTicks = type;};
 
-	int minorTicksStyle(){return d_minTicks;};
+	int minorTicksStyle() const { return d_minTicks; };
 	void setMinorTicksStyle(TicksStyle type){d_minTicks = type;};
 
 protected:
@@ -80,12 +81,16 @@ class QwtTextScaleDraw: public ScaleDraw
 {
 public:
 	QwtTextScaleDraw(const QMap<int, QString>& list);
+	QwtTextScaleDraw(const ScaleDraw &other, const QMap<int, QString>& list) :
+		ScaleDraw(other), labels(list)
+	{}
 	~QwtTextScaleDraw(){};
 
 	QwtText label(double value) const;
 
 	QStringList labelsList() { return QStringList(labels.values()); }
 	QMap<int, QString> labelsMap() { return labels; }
+	void setLabelsMap(const QMap<int, QString>& list) { labels = list; }
 private:
 	QMap<int, QString> labels;
 };
@@ -94,6 +99,9 @@ class TimeScaleDraw: public ScaleDraw
 {
 public:
 	TimeScaleDraw(const QTime& t, const QString& format);
+	TimeScaleDraw(const ScaleDraw &other, const QTime& t, const QString& format) :
+		ScaleDraw(other), t_origin(t), t_format(format)
+	{}
 	~TimeScaleDraw(){};
 
 	QString origin();
@@ -110,6 +118,9 @@ class DateScaleDraw: public ScaleDraw
 {
 public:
 	DateScaleDraw(const QDate& t, const QString& format);
+	DateScaleDraw(const ScaleDraw &other, const QDate& t, const QString& format) :
+		ScaleDraw(other), t_origin(t), t_format(format)
+	{}
 	~DateScaleDraw(){};
 
 	QString origin();
@@ -126,6 +137,9 @@ class DateTimeScaleDraw: public ScaleDraw
 {
 public:
 	DateTimeScaleDraw(const QDateTime & origin, const QString & format);
+	DateTimeScaleDraw(const ScaleDraw &other, const QDateTime & origin, const QString & format)
+		: ScaleDraw(other), d_origin(origin), d_format(format)
+	{}
 	~DateTimeScaleDraw(){};
 
 	QString origin();
@@ -144,6 +158,9 @@ public:
 	enum NameFormat{ShortName, LongName, Initial};
 
 	WeekDayScaleDraw(NameFormat format = ShortName);
+	WeekDayScaleDraw(const ScaleDraw &other, NameFormat format = ShortName) :
+		ScaleDraw(other), d_format(format)
+	{}
 	~WeekDayScaleDraw(){};
 
 	NameFormat format() {return d_format;};
@@ -159,6 +176,9 @@ public:
 	enum NameFormat{ShortName, LongName, Initial};
 
 	MonthScaleDraw(NameFormat format = ShortName);
+	MonthScaleDraw(const ScaleDraw &other, NameFormat format = ShortName) :
+		ScaleDraw(other), d_format(format)
+	{}
 	~MonthScaleDraw(){};
 
 	NameFormat format() {return d_format;};
@@ -172,6 +192,11 @@ class QwtSupersciptsScaleDraw: public ScaleDraw
 {
 public:
 	QwtSupersciptsScaleDraw(const QString& s = QString::null);
+	QwtSupersciptsScaleDraw(const ScaleDraw &other, const QString& s = QString::null) :
+		ScaleDraw(other)
+	{
+		setFormulaString(s);
+	}
 	~QwtSupersciptsScaleDraw(){};
 
 	QwtText label(double value) const;
