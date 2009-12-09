@@ -245,6 +245,47 @@ appImports = (
 for name in appImports:
 	setattr(__main__,name,getattr(__main__.scidavis.app,name))
 
+# make Y columns indexable (using lookup in corresponding X column)
+def __column_getitem(self, index):
+  if self.plotDesignation() != "Y":
+    return None
+  x = self.x()
+  for row in range(self.rowCount()):
+      if x.columnMode() == "Numeric":
+          xval = x.valueAt(row)
+      elif x.columnMode() == "Text":
+          xval = x.textAt(row)
+      else:
+          xval = x.dateTimeAt(row)
+      if xval == index:
+          if self.columnMode() == "Numeric":
+              return self.valueAt(row)
+          elif self.columnMode() == "Text":
+              return self.textAt(row)
+          else:
+              return self.dateTimeAt(row)
+__main__.scidavis.Column.__getitem__ = __column_getitem
+
+def __column_setitem(self, index, value):
+  if self.plotDesignation() != "Y":
+    return None
+  x = self.x()
+  for row in range(x.rowCount()):
+      if x.columnMode() == "Numeric":
+          xval = x.valueAt(row)
+      elif x.columnMode() == "Text":
+          xval = x.textAt(row)
+      else:
+          xval = x.dateTimeAt(row)
+      if xval == index:
+          if self.columnMode() == "Numeric":
+              return self.setValueAt(row, value)
+          elif self.columnMode() == "Text":
+              return self.setTextAt(row, value)
+          else:
+              return self.setDateTimeAt(row, value)
+__main__.scidavis.Column.__setitem__ = __column_setitem
+
 # import utility module
 import sys
 sys.path.append(".")

@@ -112,6 +112,7 @@ class Column: AbstractAspect
 %TypeHeaderCode
 #include "globals.h"
 #include "core/column/Column.h"
+#include "table/future_Table.h"
 %End
 	public:
 /* will be removed in favour of columMode() - don't encourage anyone to start using it
@@ -171,6 +172,22 @@ class Column: AbstractAspect
 		double valueAt(int row) const;
 		void setValueAt(int row, double new_value);
 		void replaceValues(int first, const QVector<double>& new_values);
+
+  Column * x() const /NoDerived/;
+%MethodCode
+    future::Table *t = qobject_cast<future::Table *>(sipCpp->parentAspect());
+    if (t)
+        sipRes = t->column(t->colX(t->indexOfChild(sipCpp)));
+%End
+
+  Column * y() const /NoDerived/;
+%MethodCode
+    future::Table *t = qobject_cast<future::Table *>(sipCpp->parentAspect());
+    if (t)
+        sipRes = t->column(t->colY(t->indexOfChild(sipCpp)));
+%End
+
+
 private:
   Column(const Column&);
 };
