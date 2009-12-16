@@ -232,6 +232,7 @@ public slots:
 	//! \name Saving and Restoring
 	//@{
 	virtual QString saveToString(const QString& geometry);
+	void saveToDevice(QIODevice *device, const QString &geometry);
 	QString saveHeader();
 	QString saveComments();
 	QString saveCommands();

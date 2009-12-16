@@ -76,11 +76,19 @@ public:
 		if (w==d_active_window) d_active_window=0;
 	};
 
+	int windowCount(bool recursive = false) const {
+	    int result = lstWindows.size();
+	    if (recursive)
+		foreach (Folder *folder, folders())
+		    result += folder->windowCount(true);
+	    return result;
+	};
+
 	//! The list of subfolder names, including first generation children only
 	QStringList subfolders();
 
 	//! The list of subfolders
-	QList<Folder*> folders();
+	QList<Folder*> folders() const;
 
 	//! Pointer to the subfolder called s
 	Folder* findSubfolder(const QString& s, bool caseSensitive = true, bool partialMatch = false);

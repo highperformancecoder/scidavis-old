@@ -51,6 +51,7 @@
 #include <QShortcut>
 #include <QProgressDialog>
 #include <QFile>
+#include <QTemporaryFile>
 
 Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 			 bool stripSpaces, bool simplifySpaces, bool convertToNumeric, QLocale numericLocale, const QString& label,
@@ -534,6 +535,55 @@ QString Table::saveToString(const QString& geometry)
 	s += geometry + "\n";
 	s +="</table>\n";
 	return s;
+}
+
+void Table::saveToDevice(QIODevice *device, const QString &geometry)
+{
+	QTextStream stream(device);
+	stream.setEncoding(QTextStream::UnicodeUTF8);
+
+	// write start tag
+	stream << "<table>\n";
+	stream.flush();
+
+	// On Windows, writing to a QString has been observed to crash for large tables
+	// (apparently due to excessive memory usage).
+	// => use temporary file if possible
+	QTemporaryFile tmp_file;
+	QString tmp_string;
+	QXmlStreamWriter xml(&tmp_string);
+	if (tmp_file.open())
+		xml.setDevice(&tmp_file);
+	d_future_table->save(&xml);
+
+	// write number of characters of QXmlStreamWriter's output
+	// this is needed in case there are newlines in the XML
+	int xml_chars = 0;
+	if (tmp_file.isOpen()) {
+		tmp_file.seek(0);
+		QTextStream count(&tmp_file);
+		count.setEncoding(QTextStream::UnicodeUTF8);
+		while (!count.atEnd())
+			xml_chars += count.read(1024).length();
+	} else
+		xml_chars = tmp_string.length();
+	stream << xml_chars << "\n";
+	stream.flush();
+
+	// Copy QXmlStreamWriter's output to device
+	if (tmp_file.isOpen()) {
+		tmp_file.seek(0);
+		qint64 bytes_read;
+		char buffer[1024];
+		while ((bytes_read = tmp_file.read(buffer, 1024)) > 0)
+			device->write(buffer, bytes_read);
+	} else
+		stream << tmp_string;
+	stream << "\n";
+
+	// write geometry and end tag
+	stream << geometry << "\n";
+	stream << "</table>\n";
 }
 
 QString Table::saveHeader()

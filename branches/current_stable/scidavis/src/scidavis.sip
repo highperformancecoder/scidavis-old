@@ -1836,7 +1836,7 @@ public:
   QString name();
   QString path();
 
-  QList<Folder*> folders();
+  QList<Folder*> folders() const;
   Folder *findSubfolder(const QString&, bool=true, bool=false)  /PyName=folder/;
   MyWidget* findWindow(const QString&, bool=true, bool=true, bool=false, bool=true);
 

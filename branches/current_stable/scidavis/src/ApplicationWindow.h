@@ -496,7 +496,7 @@ public slots:
 	//! \name Reading from a Project File
 	//@{
 	Matrix* openMatrix(ApplicationWindow* app, const QStringList &flist);
-	Table* openTable(ApplicationWindow* app, const QStringList &flist);
+	Table* openTable(ApplicationWindow* app, QTextStream &stream);
 	TableStatistics* openTableStatistics(const QStringList &flist);
 	Graph3D* openSurfacePlot(ApplicationWindow* app, const QStringList &lst);
 	Graph* openGraph(ApplicationWindow* app, MultiLayer *plot, const QStringList &list);
@@ -830,7 +830,7 @@ public slots:
 	void saveAsProject();
 	void saveFolderAsProject(Folder *f);
 	void saveFolder(Folder *folder, const QString& fn);
-	QString serializeFolder(Folder *folder, int *windows);
+	void rawSaveFolder(Folder *folder, QIODevice *device);
 
 	//!  adds a folder list item to the list view "lv"
 	void addFolderListViewItem(Folder *f);

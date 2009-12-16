@@ -62,7 +62,7 @@ Folder::Folder( Folder *parent, const QString &name )
 	// lstWindows.setAutoDelete( true );
 }
 
-QList<Folder*> Folder::folders()
+QList<Folder*> Folder::folders() const
 {
 	QList<Folder*> lst;
 	foreach(QObject *f, children())

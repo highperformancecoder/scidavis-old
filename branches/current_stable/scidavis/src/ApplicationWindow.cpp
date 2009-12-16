@@ -3697,14 +3697,8 @@ ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 		{
 			title = titleBase + QString::number(++aux)+"/"+QString::number(widgets);
 			progress.setLabelText(title);
-			QStringList lst;
-			while ( s!="</table>" )
-			{
-				s=t.readLine();
-				lst<<s;
-			}
-			lst.pop_back();
-			openTable(app,lst);
+
+			openTable(app, t);
 			progress.setValue(aux);
 		}
 		else if (s.left(17)=="<TableStatistics>")
@@ -9225,10 +9219,17 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 }
 
 // TODO: most of this code belongs into Table
-Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &flist)
+Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 {
 	if (app->d_file_version < 0x000200)
 	{
+		QStringList flist;
+		QString s;
+		while (s != "</table>") {
+			s = stream.readLine();
+			flist << s;
+		}
+		flist.pop_back();
 		QStringList::const_iterator line = flist.begin();
 
 		QStringList list=(*line).split("\t");
@@ -9318,13 +9319,35 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 	}
 	else
 	{
+		QString s = stream.readLine();
+		int length = s.toInt();
+
+		// On Windows, loading large tables to a QString has been observed to crash
+		// (apparently due to excessive memory usage).
+		// => use temporary file if possible
+		QTemporaryFile tmp_file;
+		QString tmp_string;
+		if (tmp_file.open()) {
+			QTextStream tmp(&tmp_file);
+			tmp.setEncoding(QTextStream::UnicodeUTF8);
+			int read = 0;
+			while (length - read >= 1024) {
+				tmp << stream.read(1024);
+				read += 1024;
+			}
+			tmp << stream.read(length - read);
+			tmp.flush();
+			tmp_file.seek(0);
+			stream.readLine(); // skip to next newline
+		} else
+			while (tmp_string.length() < length)
+				tmp_string += '\n' + stream.readLine();
+
+		XmlStreamReader reader(tmp_string);
+		if (tmp_file.isOpen())
+			reader.setDevice(&tmp_file);
+
 		Table* w = app->newTable("table", 1, 1);
-		int length = flist.at(0).toInt();
-		int index = 1;
-		QString xml(flist.at(index++));
-		while (xml.length() < length && index < flist.size())
-			xml += '\n' + flist.at(index++);
-		XmlStreamReader reader(xml);
 		reader.readNext();
 		reader.readNext(); // read the start document
 		if (w->d_future_table->load(&reader) == false)
@@ -9341,7 +9364,11 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, const QStringList &f
 			QMessageBox::warning(this, tr("Project loading partly failed"), msg_text);
 		}
 		w->setBirthDate(w->d_future_table->creationTime().toString(Qt::LocalDate));
-		restoreWindowGeometry(app, w, flist.at(index));
+
+		s = stream.readLine();
+		restoreWindowGeometry(app, w, s);
+
+		s = stream.readLine(); // </table>
 
 		return w;
 	}
@@ -12107,13 +12134,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 			}
 			else if  (s == "<table>")
 			{
-				while ( s!="</table>" )
-				{
-					s=t.readLine();
-					lst<<s;
-				}
-				lst.pop_back();
-				openTable(this,lst);
+				openTable(this, t);
 			}
 			else if  (s == "<matrix>")
 			{
@@ -12244,23 +12265,27 @@ void ApplicationWindow::appendProject(const QString& fn)
 	QApplication::restoreOverrideCursor();
 }
 
-QString ApplicationWindow::serializeFolder(Folder *folder, int *windows)
+void ApplicationWindow::rawSaveFolder(Folder *folder, QIODevice *device)
 {
-	QString result;
-	foreach (MyWidget *w, folder->windowsList()) {
-		result += w->saveToString(windowGeometryInfo(w));
-		(*windows)++;
-	}
-	foreach (Folder *subfolder, folder->folders()) {
-		result += "<folder>\t"+QString(subfolder->name())+"\t"+subfolder->birthDate()+"\t"+subfolder->modificationDate();
-		if (subfolder == current_folder)
-			result += "\tcurrent\n";
-		else
-			result += "\n";  // FIXME: Having no 5th string here is not a good idea
-		result += serializeFolder(subfolder, windows);
-		result += "</folder>\n";
-	}
-	return result;
+    QTextStream stream(device);
+    stream.setEncoding(QTextStream::UnicodeUTF8);
+    foreach (MyWidget *w, folder->windowsList()) {
+	Table *t = qobject_cast<Table*>(w);
+	if (t)
+	    t->saveToDevice(device, windowGeometryInfo(w));
+	else
+	    stream << w->saveToString(windowGeometryInfo(w));
+    }
+    foreach (Folder *subfolder, folder->folders()) {
+	stream << "<folder>\t"+QString(subfolder->name())+"\t"+subfolder->birthDate()+"\t"+subfolder->modificationDate();
+	if (subfolder == current_folder)
+		stream << "\tcurrent\n";
+	else
+		stream << "\n";  // FIXME: Having no 5th string here is not a good idea
+	stream.flush();
+	rawSaveFolder(subfolder, device);
+	stream << "</folder>\n";
+    }
 }
 
 void ApplicationWindow::saveFolder(Folder *folder, const QString& fn)
@@ -12283,16 +12308,14 @@ void ApplicationWindow::saveFolder(Folder *folder, const QString& fn)
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	int windows = 0;
-	QString text = serializeFolder(folder, &windows);
-	text += "<log>\n"+logInfo+"</log>";
-	text.prepend("<windows>\t"+QString::number(windows)+"\n");
-	text.prepend("<scripting-lang>\t"+QString(scriptEnv->name())+"\n");
-	text.prepend(SciDAVis::versionString() + " project file\n");
-
 	QTextStream t( &f );
 	t.setEncoding(QTextStream::UnicodeUTF8);
-	t << text;
+	t << SciDAVis::versionString() + " project file\n";
+	t << "<scripting-lang>\t"+QString(scriptEnv->name())+"\n";
+	t << "<windows>\t"+QString::number(folder->windowCount(true))+"\n";
+	t.flush();
+	rawSaveFolder(folder, &f);
+	t << "<log>\n"+logInfo+"</log>";
 
 	// second part of secure file saving (see comment at the start of this method)
 #ifdef Q_OS_WIN
