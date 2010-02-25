@@ -4,6 +4,7 @@ body {
 	padding:0px;
 	background-color: #FFFFFF;
 	color: #000000;
+	line-height: 1.4;
 }
 
 img {
@@ -203,5 +204,15 @@ h3 { font-size: 1.1em; }
 	margin-left: 160px;
 	margin-right: 160px;
 	padding: 10px;
+}
+
+pre {
+	font-size: 16px;
+	background-color: #d4d2c0;
+}
+
+.no {
+	background-color: #8FAFED;
+	padding: 4px;
 }
 

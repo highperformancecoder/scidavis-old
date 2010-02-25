@@ -1,7 +1,7 @@
 ---
-directoryName: Help
+routed_title: Help
 title: Summary
-inMenu: true;
+in_menu: true;
 ---
 
 h1. What can you find here?
@@ -9,6 +9,12 @@ h1. What can you find here?
 This page aims to give you an overview of where you can find help on using SciDAVis.
 It does not contain help related to contributing to or developing SciDAVis, which
 is "here":../contributing/index.html.
+
+h1. Short Introduction to SciDAVis
+
+Fellype do Nascimento has written a "Brief Introduction to SciDAVis". This is only available in
+Brazilian Portuguese for now:
+"Breve Introdução ao SciDAVis":http://www.ifi.unicamp.br/~fellypen/progs/scidavis/manual-pt_BR/breve_introducao_ao_scidavis-v0_1.pdf
 
 h1. The user's manual
 
@@ -37,14 +43,14 @@ In the future, we hope we can present you a list of user contributed tutorials, 
 example projects here.
 
 
---- to.be.used.when.we.have.a.manual, textile
+--- name:to.be.used.when.we.have.a.manual pipeline:textile
 h1. The user's manual
 
 The first place to go if you want to get started or have questions concerning the usage of SciDAVis
 is the "user's manual":manual/index.html.
 It explains everything from basic techniques over menus and dialogs to advanced usage.
 
---- to.be.used.when.we.have.plugins, textile
+--- name:to.be.used.when.we.have.plugins pipeline:textile
 This page aims to give you an overview of where you can find help on using SciDAVis.
 It does not contain information about using or developing plugins, which you can find
 "here":plugins/index.html, or help related to contributing to or developing SciDAVis, which

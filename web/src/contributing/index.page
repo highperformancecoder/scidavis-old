@@ -1,6 +1,6 @@
 ---
 title: Why and How
-inMenu: true
+in_menu: true
 ---
 
 h1. SciDAVis lives from your contributions
@@ -44,7 +44,7 @@ Some of the above require additional explanations to get you started.
 Please see the submenu to the left for available documents.
 We plan to expand these pages in the future, in order to better help you to help us. :-)
 
---- sidebar, textile
+--- name:sidebar pipeline:textile
 
 h2. Developers:
 

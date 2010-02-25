@@ -1,6 +1,6 @@
 ---
 title: Download
-inMenu: true
+in_menu: true
 ---
 
 h1. Windows
@@ -60,7 +60,7 @@ Information about dependencies and installation instructions can be found
 
 If you don't know how to open scidavis-x.y.z-x86-linux-qt4.4-py2.5.tar.bz2, start a terminal, cd to the directory containing it and enter
 
-{hlblock: {blockName: linux, highlight: plaintext}}
+{coderay:: {lang: plaintext, line_numbers: false}} tar xjvf scidavis-x.y.z-x86-linux-qt4.4-py2.5.tar.bz2 {coderay}
 
 This will create a directory "scidavis-x.y.z-x86-linux" with the binary and some additional files.
 
@@ -101,12 +101,12 @@ To check out the code in development, you need a "Subversion":http://subversion.
 client.
 The latest stable code can be obtained as follows:
 
-{hlblock: {blockName: svncostable, highlight: plaintext}}
+{coderay:: {lang: plaintext, line_numbers: false}} svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/branches/current_stable scidavis {coderay}
 
 The code of the development version (possibly very unstable) can be obtained from the so-called
 'trunk' where the newest features are developed:
 
-{hlblock: {blockName: svnco, highlight: plaintext}}
+{coderay:: {lang: plaintext, line_numbers: false}} svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis {coderay}
 
 At times the development of certain features may be taking place in other branches. Contact the 
 developers about this.
@@ -115,12 +115,3 @@ If you are interested in the development version, we highly recommend contacting
 on the scidavis-contributers mailing list.
 
 After the svn checkout, you proceed as with the source tarballs.
-
---- svncostable, html
-svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/branches/current_stable scidavis
-
---- svnco, html
-svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis
-
---- linux, html
-tar xjvf scidavis-x.y.z-x86-linux-qt4.4-py2.5.tar.bz2

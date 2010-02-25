@@ -1,6 +1,6 @@
 ---
-Title: Credits
-inMenu: true
+title: Credits
+in_menu: true
 ---
 
 h1. Credits
@@ -10,7 +10,7 @@ h2. Developers
 The following people have written parts of the SciDAVis source code, ranging from a few lines to large chunks.
 In alphabetical order.
 
-Tilman Benkert[1], 
+Tilman Benkert[^birthname], 
 Knut Franke
 
 h2. Documentation
@@ -25,7 +25,7 @@ h2. Translations
 The following people have contributed translations or parts thereof.
 In alphabetical order.
 
-Tilman Benkert[1],
+Tilman Benkert[^birthname],
 Markus Bongard,
 Tobias Burnus,
 Rémy Claverie,
@@ -52,7 +52,7 @@ h2. QtiPlot
 
 SciDAVis uses code from QtiPlot, which consisted (at the time of the fork, i.e. QtiPlot 0.9-rc2) of code by the following people:
 
-Tilman Benkert[1],
+Tilman Benkert[^birthname],
 Shen Chen,
 Borries Demeler,
 José Antonio Lorenzo Fernández,
@@ -77,7 +77,7 @@ We also want to acknowledge the people having helped us indirectly by contributi
 fine pieces of software. In no particular order.
 
 "Qt":http://doc.trolltech.com/4.3/credits.html,
-"Qwt":http://qwt.sourceforge.net/#credits,
+"Qwt":http://qwt.sourceforge.net/#credits
 "Qwtplot3D":http://qwtplot3d.sourceforge.net/,
 "muParser":http://muparser.sourceforge.net/,
 "Python":http://www.python.org/,
@@ -90,6 +90,4 @@ fine pieces of software. In no particular order.
 
 ... and many more we just forgot to mention.
 
-<br><br><br>
-<hr>
-fn1. birth name: Tilman H&ouml;ner zu Siederdissen
+[^birthname]: birth name: Tilman H&ouml;ner zu Siederdissen

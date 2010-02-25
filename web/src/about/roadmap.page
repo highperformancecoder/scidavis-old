@@ -1,6 +1,6 @@
 ---
 title: Roadmap
-inMenu: true
+in_menu: true
 ---
 
 h1. Roadmap
@@ -31,7 +31,7 @@ In the following, only x.y.0 releases are discussed. Concurrently to the develop
 next feature release, bugs we get to know about will be fixed and, depending on their
 number and severity, bugfix releases (x.y.z) will be provided.
 
-h1(#0.1.0). 0.1.0: Improved user interface and fixes to project file loading
+h1(#0_1_0). 0.1.0: Improved user interface and fixes to project file loading
 
 Starting point was the QtiPlot codebase somewhere between 0.9-rc2 and 0.9 (Subversion
 revision 621, to be precise).
@@ -52,7 +52,7 @@ Most important changes (since QtiPlot 0.9-rc2):
 * export to eps and pdf without large white borders
 
 
-h1(#0.2.0). 0.2.0: Undo/redo for tables and matrices, UI improvements
+h1(#0_2_0). 0.2.0: Undo/redo for tables and matrices, UI improvements
 
 Plans: Most notably for users, this release will feature multi-level undo/redo
 for changes to tables and matrices. Additionally, the options dialogs for tables and matrices
@@ -88,7 +88,7 @@ of control tabs which make working with column or matrix based data much more co
   new possibilities of date/time manipulation using PyQt/Python scripting
 * many small improvements and bug fixes (including an overhaul of fit weighting introduced in 0.1.4)
 
-h1(#0.3.0). 0.3.0 and beyond: Close cooperation with the LabPlot project
+h1(#0_3_0). 0.3.0 and beyond: Close cooperation with the LabPlot project
 
 Plans: Use a common backend with two frontends, one with full KDE4 integration (called LabPlot 2.x) and one with 
 no KDE depenencies (pure Qt so to say) for easier cross-platform use (called SciDAVis). 
@@ -99,7 +99,7 @@ From the user's point of view, there will still be two different applications. F
 point of view, there may soon be one common code base which allows the choice of the frontend at
 compile time.
 
-h1(#0.3.0). 0.3.0: Aspect-framework/hierarchial project structure, modular structure using Qt's
+h1(#0_3_0). 0.3.0: Aspect-framework/hierarchial project structure, modular structure using Qt's
 plug-in system, XML file format
 
 Plans: Most notably for users, the way the project contents are shown in the project explorer 
@@ -118,7 +118,7 @@ The file format for SciDAVis projects will be replaced by a completely XML based
 allows to use robust XML parsers, much better error handling and easy validity-checking of project files.
 Loading files in the legacy format will continue to be supported as an import function.
 
-h1(#0.5.0). 0.5.0: New visualisation engine
+h1(#0_5_0). 0.5.0: New visualisation engine
 
 Plans: The Qwt library will be replaced by a new engine based on Qt's GraphicsView framework,
 allowing, among other benefits, the use of floating-point linewidths. This will solve
@@ -128,7 +128,7 @@ will be totally independent of the screen resolutions and the size of the plot w
 Custom page sizes for PDF exports will be supported making exported PDF figures ideal
 to use with PdfLaTex.
 
-h1(#0.7.0). 0.7.0: Removal of muParser dependence such that everything can be done in Python, improved plotting
+h1(#0_7_0). 0.7.0: Removal of muParser dependence such that everything can be done in Python, improved plotting
 
 * All muParser-specific parts will be rewritten to also be able to use Python and allow using
 of python defined functions for curve fitting etc.
@@ -137,7 +137,7 @@ of python defined functions for curve fitting etc.
 waterfall plots and maybe other things. 
 * XML for copy and paste
 
-h1(#1.0.0). 1.0.0: Polishing, bug fixing, bring the handbook up-to-date, relaxNG schema
+h1(#1_0_0). 1.0.0: Polishing, bug fixing, bring the handbook up-to-date, relaxNG schema
 
 * Polishing of the new features introduced in the previous versions; bring
 everything in a state that allows minor releases that don't break anything that worked

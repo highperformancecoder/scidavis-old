@@ -1,0 +1,80 @@
+index.page:
+   sort_info: 0
+
+about/:
+   sort_info: 1
+
+download.page:
+   sort_info: 3
+
+help/:
+   sort_info: 4
+
+contributing/:
+   sort_info: 5
+
+contact.page:
+   sort_info: 6
+
+
+about/index.page:
+   sort_info: 1
+
+about/screenshots.page:
+   sort_info: 2
+
+about/features.page:
+   sort_info: 3
+
+about/roadmap.page:
+   sort_info: 4
+
+about/team.page:
+   sort_info: 80
+
+about/credits.page:
+   sort_info: 90
+
+about/license.page:
+   sort_info: 99
+
+
+help/index.page:
+   sort_info: 1
+
+help/manual.page:
+   sort_info: 2
+
+help/forum.page:
+   title: Forum
+
+help/scidavis-users.page:
+   sort_info: 4
+
+
+contributing/index.page:
+   sort_info: 1
+
+contributing/coding.page:
+   sort_info: 2
+
+contributing/documenting.page:
+   sort_info: 3
+
+contributing/packaging.page:
+   sort_info: 4
+
+contributing/translating-doc.page:
+   sort_info: 5
+
+contributing/translating-app.page:
+   sort_info: 6
+
+contributing/plans.page:
+   sort_info: 10
+
+contributing/aspect-framework.page:
+   sort_info: 12
+
+help/forum.page:
+   sort_info: 3

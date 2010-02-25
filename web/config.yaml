@@ -1,2 +1,8 @@
-Misc/SmileyReplacer:
-   emoticonPack: crystal
+# not implemented yet in webgen 0.5
+#Misc/SmileyReplacer:
+#   emoticonPack: crystal
+
+default_processing_pipeline:
+  Page: erb,textile,tags,blocks
+
+tag.coderay.bold_every: 5

@@ -1,7 +1,7 @@
 ---
-directoryName: SciDAVis
+routed_title: SciDAVis
 title: Welcome
-inMenu: true
+in_menu: true
 ---
 
 h1. What is SciDAVis?
@@ -16,7 +16,7 @@ p=. !images/screenshot.png!
 Don't hesitate to "contact us":contact.html if you think you can help us make SciDAVis
 even better for everyone.
 
---- sidebar, textile
+--- name:sidebar pipeline:textile
 
 h2. New to SciDAVis?
 

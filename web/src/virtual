@@ -1,0 +1,22 @@
+about/screenshots.html:
+   url: https://sourceforge.net/project/screenshots.php?group_id=199120
+   title: Screenshots
+   in_menu: true
+   linkAttrs:
+      target: _blank
+
+help/manual.html:
+   url: help/manual/index.html
+   title: Manual
+   in_menu: false
+   linkAttrs:
+      target: _blank
+
+help/forum.html:
+   url: https://sourceforge.net/forum/forum.php?forum_id=708156
+   in_menu: true
+
+help/scidavis-users.html:
+   url: https://lists.sourceforge.net/lists/listinfo/scidavis-users
+   title: Mailinglist
+   in_menu: true

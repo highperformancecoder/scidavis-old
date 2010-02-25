@@ -1,6 +1,6 @@
 ---
 title: Documenting
-inMenu: true
+in_menu: true
 ---
 
 h1(#writing). Writing documentation or tutorials
@@ -17,13 +17,13 @@ h2(#textile). Textile
 
 This is the format used to generate the page you are just reading. Essentially, it boils
 down to marking things like headings, emphasis and links using some simple conventions.
-"This reference":http://hobix.com/textile explains pretty much everything you need to know
+"This reference":http://textile.thresholdstate.com explains pretty much everything you need to know
 in order to start writing. Make sure you save your text as plain text (*.txt) when
 sending it to us.
 
 Here's a short impression of how it looks like:
 
-{hlblock: {blockName: textile, highlight: plaintext}}
+<webgen:block name="textile" />
 
 h2(#markdown). Markdown
 
@@ -68,8 +68,8 @@ h1(#doxygen). Documentation of the internal APIs
 
 Documenting the source code as such (using Doxygen) is covered "here":coding.html#doxygen.
 
---- textile, html
-h1. Introduction
+--- name:textile pipeline:tags
+{coderay:: plaintext}h1. Introduction
 
 This is my tutorial on the topic of foo bar, which is _very_ *important*.
 For some reason that will become clear later in the text, it has to do with "Google":http://google.com.
@@ -87,4 +87,4 @@ h2. An image
 Introducing... the great image I've included:
 
 !great_image.png!
-
+{coderay}

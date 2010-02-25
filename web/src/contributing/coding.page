@@ -1,6 +1,6 @@
 ---
 title: Coding
-inMenu: true
+in_menu: true
 ---
 
 h1. Getting started
@@ -58,13 +58,13 @@ highly welcome. :-)
 
 As an absolute minimum, you should add short descriptions to class and method declarations as follows:
 
-{hlblock: {blockName: doxygen_short, highlight: c}}
+<webgen:block name="doxygen_short" />
 
 Adding some more information is often a good idea, especially when you've put a lot of thought
 into the design of an interface. Writing down what's on your mind is a lot easier for you than it is
 for others (or for yourself half a year later) to re-think everything. Here's how:
 
-{hlblock: {blockName: doxygen_long, highlight: c}}
+<webgen:block name="doxygen_long" />
 
 For more information on the syntax and advanced usage, please refer to the
 "Doxygen manual":http://www.stack.nl/~dimitri/doxygen/manual.html (also available locally after
@@ -87,7 +87,7 @@ Either you have an IDE or graphical diff tool for this, or
 (for Linux, possibly also MacOS X and "cygwin":http://cygwin.com/) you
 do
 
-{hlblock: {blockName: patch_generation, highlight: plaintext}}
+{coderay:: {lang: plaintext, line_numbers: false}} diff -uNr file-or-dir.orig file-or-dir.changed > your.patch {coderay}
 
 in a terminal. This means you have to keep around a copy of the unchanged file or directory.
 It's easier when you're checking out the source from our
@@ -95,18 +95,18 @@ It's easier when you're checking out the source from our
 which has the additional benefit that it contains the changes we made since the last release.
 That is, before you start, you do
 
-{hlblock: {blockName: svnco, highlight: plaintext}}
+{coderay:: {lang: plaintext, line_numbers: false}} svn co https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis {coderay}
 
 then you do your changes, finally generating the patch as follows:
 
-{hlblock: {blockName: patch_generation_svn, highlight: plaintext}}
+{coderay:: {lang: plaintext, line_numbers: false}} svn diff > your.patch {coderay}
 
 If you're planning to contribute on a regular basis and you'd like to join the team,  introduce yourself and your plans on the
 "mailing list":https://lists.sourceforge.net/lists/listinfo/scidavis-contributors or contact project member 
 "directly":http://scidavis.sourceforge.net/contact.html.
 
---- doxygen_short, html
-//! A computer built by pan-dimensional, hyper-intelligent beings known to men as mice.
+--- name:doxygen_short pipeline:tags
+{coderay:: c++}//! A computer built by pan-dimensional, hyper-intelligent beings known to men as mice.
 class DeepThought
 {
 public:
@@ -116,9 +116,10 @@ public:
 		return 42;
 	}
 };
+{coderay}
 
---- doxygen_long, html
-//! A computer built by pan-dimensional, hyper-intelligent beings known to men as mice.
+--- name:doxygen_long pipeline:tags
+{coderay:: c++}//! A computer built by pan-dimensional, hyper-intelligent beings known to men as mice.
 /**
  * Here's where you can elaborate on the usage and design ideas of your class, provide
  * usage examples etc.
@@ -135,12 +136,4 @@ public:
 		return 42;
 	}
 };
-
---- patch_generation, html
-diff -uNr file-or-dir.orig file-or-dir.changed > your.patch
-
---- patch_generation_svn, html
-svn diff > your.patch
-
---- svnco, html
-svn co https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis
+{coderay}

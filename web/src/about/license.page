@@ -1,6 +1,6 @@
 ---
 title: License
-inMenu: true
+in_menu: true
 ---
 
 SciDAVis is <a href="http://www.gnu.org/philosophy/free-sw.html">free software</a>; you can
@@ -17,5 +17,5 @@ GNU General Public License for more details.
 A verbatim copy of the GNU General Public License version 2 is shown below.
 
 <pre>
-{includeFile: {filename: gpl.txt, processOutput: false}}
+{include_file: {filename: src/about/gpl.txt, process_output: false}}
 </pre>
