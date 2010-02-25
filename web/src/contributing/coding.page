@@ -70,6 +70,16 @@ For more information on the syntax and advanced usage, please refer to the
 "Doxygen manual":http://www.stack.nl/~dimitri/doxygen/manual.html (also available locally after
 installing Doxygen).
 
+h2. API documentation
+
+As explained above, we're trying to document the code using "Doxygen":http://www.doxygen.org.
+The API documentation can be read online, both for the
+<a href="../contributing/API/stable/index.html">stable</a> and for the
+<a href="../contributing/API/unstable/index.html">unstable</a> development version. Or you can
+generate them for yourself in several different formats by obtaining the source, going to the
+directory containing the Doxyfile and running Doxygen there. By default, the result will be
+accesible via API/html/index.html.
+
 h1. Before you start
 
 Before seriously starting to work on a large improvement to SciDAVis, you should announce your

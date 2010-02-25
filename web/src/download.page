@@ -103,10 +103,10 @@ The latest stable code can be obtained as follows:
 
 {coderay:: {lang: plaintext, line_numbers: false}} svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/branches/current_stable scidavis {coderay}
 
-The code of the development version (possibly very unstable) can be obtained from the so-called
-'trunk' where the newest features are developed:
+The code of the development version (possibly very unstable) can be obtained from LabPlot's repository,
+where we're working on a common code base:
 
-{coderay:: {lang: plaintext, line_numbers: false}} svn checkout https://scidavis.svn.sourceforge.net/svnroot/scidavis/trunk scidavis {coderay}
+{coderay:: {lang: plaintext, line_numbers: false}} svn checkout https://labplot.svn.sourceforge.net/svnroot/labplot/2.0 scidavis {coderay}
 
 At times the development of certain features may be taking place in other branches. Contact the 
 developers about this.
