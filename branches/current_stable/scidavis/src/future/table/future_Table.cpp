@@ -52,7 +52,6 @@
 #include <QToolBar>
 #include <QtDebug>
 
-#include "core/AspectPrivate.h"
 #include "table/TableModel.h"
 #include "table/TableView.h"
 #include "table/tablecommands.h"
@@ -2462,6 +2461,8 @@ QVariant Table::Private::headerData(int section, Qt::Orientation orientation, in
 {
 	switch(orientation) {
 		case Qt::Horizontal:
+			if (section >= d_columns.size())
+				return QVariant();
 			switch(role) {
 				case Qt::DisplayRole:
 				case Qt::ToolTipRole:
@@ -2472,12 +2473,16 @@ QVariant Table::Private::headerData(int section, Qt::Orientation orientation, in
 				case TableModel::CommentRole:
 					return d_columns.at(section)->comment();
 			}
+			break;
 		case Qt::Vertical:
+			if (section >= d_vertical_header_data.size())
+				return QVariant();
 			switch(role) {
 				case Qt::DisplayRole:
 				case Qt::ToolTipRole:
 					return d_vertical_header_data.at(section);
 			}
+			break;
 	}
 	return QVariant();
 }
