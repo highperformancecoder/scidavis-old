@@ -2290,8 +2290,8 @@ void Table::Private::insertColumns(int before, QList<Column*> cols)
 		d_column_widths.insert(before, Table::defaultColumnWidth());
 	}
 	d_column_count += count;
-	updateHorizontalHeader(before, before+count-1);
 	emit d_owner->columnsInserted(before, cols.count());
+	updateHorizontalHeader(before, before+count-1);
 }
 
 void Table::Private::removeColumns(int first, int count)
@@ -2461,7 +2461,7 @@ QVariant Table::Private::headerData(int section, Qt::Orientation orientation, in
 {
 	switch(orientation) {
 		case Qt::Horizontal:
-			if (section >= d_columns.size())
+			if (section >= d_horizontal_header_data.size())
 				return QVariant();
 			switch(role) {
 				case Qt::DisplayRole:
