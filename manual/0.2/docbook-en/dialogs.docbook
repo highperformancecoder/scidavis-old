@@ -928,7 +928,7 @@
     </mediaobject>
   </informalfigure>
 
-<para>Another way to define colors is to read a colormap from a file. The format of the file is simple: each line defines a color by red, green and blue values as integers between 0 and 255. The numbers should be separated by spaces. You can find several examples of colormaps on the <ulink url="http://sourceforge.net/project/showfiles.php?group_id=78209">QwtPlot3D web site</ulink>.</para>
+  <para>Another way to define colors is to read a colormap from a file. The format of the file is simple: each line defines a color by red, green and blue values as integers between 0 and 255. The numbers should be separated by spaces. The colors defined in this way are distributed equidistantly between minimum and maximum Z value, such that the first reference point is at Z<subscript>min</subscript>, the last reference point at Z<subscript>max</subscript> and each color is applied to all points with Z values between its own reference point (inclusively) and the next one (exclusively). You can find several examples of colormaps on the <ulink url="http://sourceforge.net/project/showfiles.php?group_id=78209">QwtPlot3D web site</ulink> (section misc, file qwtplot3d-colormaps.tgz).</para>
 
 <para>The last tab is used to define some global parameters and the aspect ratio of the plot. The default behaviour is to use the perspective to compute the 3D plot. If you choose to check the <emphasis>Orthogonal</emphasis> check box, the plot will use vertical Z axis whatever the view angle of the plot.</para>
 <indexterm><primary>Surface plot</primary><secondary>Options</secondary></indexterm>
