@@ -1000,7 +1000,7 @@ bool Table::exportASCII(const QString& fname, const QString& separator,
 		return false;
 	}
 
-	QString output_text;
+	QTextStream out( &file );
 	int i,j;
 	int rows = numRows();
 	int cols = numCols();
@@ -1015,7 +1015,7 @@ bool Table::exportASCII(const QString& fname, const QString& separator,
 				selectedCols++;
 		}
 
-		sCols = new int[selectedCols];
+		sCols = new int[selectedCols+1];
 		int temp = 1;
 		for (i=0; i<cols; i++)
 		{
@@ -1039,54 +1039,58 @@ bool Table::exportASCII(const QString& fname, const QString& separator,
 			for (i=1; i<selectedCols; i++)
 			{
 				if (ls.count()>0)
-					output_text += header[sCols[i]] + separator;
+					out << header[sCols[i]] + separator;
 				else
-					output_text += "C"+header[sCols[i]] + separator;
+					out << "C"+header[sCols[i]] + separator;
 			}
 
 			if (ls.count()>0)
-				output_text += header[sCols[selectedCols]] + "\n";
+				out << header[sCols[selectedCols]] + "\n";
 			else
-				output_text += "C" + header[sCols[selectedCols]] + "\n";
+				out << "C" + header[sCols[selectedCols]] + "\n";
 		}
 		else
 		{
 			if (ls.count()>0)
 			{
 				for (j=0; j<cols-1; j++)
-					output_text += header[j]+separator;
-				output_text += header[cols-1]+"\n";
+					out << header[j]+separator;
+				out << header[cols-1]+"\n";
 			}
 			else
 			{
 				for (j=0; j<cols-1; j++)
-					output_text += "C" + header[j] + separator;
-				output_text += "C" + header[cols-1] + "\n";
+					out << "C" + header[j] + separator;
+				out << "C" + header[cols-1] + "\n";
 			}
 		}
 	}// finished writting labels
 
+	QList<Column*> col_ptrs;
+	if (exportSelection) {
+		for (j=1; j<=selectedCols; j++)
+			col_ptrs << column(sCols[j]);
+	} else {
+		for (j=0;j<cols;j++)
+			col_ptrs << column(j);
+		topRow = 0;
+		bottomRow = rows-1;
+	}
+
+	for (i=topRow; i<=bottomRow; i++) {
+		bool first = true;
+		foreach(Column *col, col_ptrs) {
+			if (first)
+				first = false;
+			else
+				out << separator;
+			out << col->asStringColumn()->textAt(i);
+		}
+		out << "\n";
+	}
+
 	if (exportSelection)
-	{
-		for (i=topRow; i<=bottomRow; i++)
-		{
-			for (j=1; j<selectedCols; j++)
-				output_text += text(i, sCols[j]) + separator;
-			output_text += text(i, sCols[selectedCols]) + "\n";
-		}
 		delete[] sCols; //free memory
-	}
-	else
-	{
-		for (i=0;i<rows;i++)
-		{
-			for (j=0;j<cols-1;j++)
-				output_text += text(i,j)+separator;
-			output_text += text(i,cols-1)+"\n";
-		}
-	}
-	QTextStream text_stream( &file );
-	text_stream << output_text;
 	file.close();
 	return true;
 }
