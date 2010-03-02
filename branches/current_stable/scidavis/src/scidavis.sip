@@ -841,6 +841,7 @@ class Graph : QWidget /PyName=Layer/
 #include "src/Legend.h"
 #include "src/ColorBox.h"
 #include "src/FunctionCurve.h"
+#include "src/DataPointPicker.h"
 #include <qwt_plot_canvas.h>
 %End
 public:
@@ -982,6 +983,14 @@ public:
   QWidget * canvas() const /NoDerived/;
 %MethodCode
 	sipRes = sipCpp->d_plot->canvas();
+%End
+
+	QPointF pickPoint() const /NoDerived/;
+%MethodCode
+	ApplicationWindow *app = sipscidavis_app();
+	sipRes = new QPointF();
+	if (app)
+		*sipRes = DataPointPicker(sipCpp, app).pick();
 %End
 
 private:

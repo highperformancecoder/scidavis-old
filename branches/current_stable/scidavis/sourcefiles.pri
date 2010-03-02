@@ -196,6 +196,7 @@ HEADERS  += src/ApplicationWindow.h \
             src/ExtensibleFileDialog.h\
             src/OpenProjectDialog.h\
         src/Grid.h\
+            src/DataPointPicker.h \
 
 ###################### SOURCES ##############################################
 
@@ -301,6 +302,7 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/OpenProjectDialog.cpp\
             src/Grid.cpp\
             src/globals.cpp \
+            src/DataPointPicker.cpp \
 
 ###################### FORMS ##############################################
 FORMS +=   src/SciDAVisAbout.ui
