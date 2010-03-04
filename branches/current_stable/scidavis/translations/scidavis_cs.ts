@@ -2047,7 +2047,7 @@ Wollen Sie sie überschreiben?</translation>
         <location filename="../src/ApplicationWindow.cpp" line="10664"/>
         <location filename="../src/ApplicationWindow.cpp" line="11161"/>
         <source>Fit &amp;Linear</source>
-        <translation>&amp;Přímočaré umístění</translation>
+        <translation>&amp;Lineární umístění</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10667"/>
@@ -6335,7 +6335,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     <message>
         <location filename="../src/AxesDialog.cpp" line="128"/>
         <source>linear</source>
-        <translation>přímočarý</translation>
+        <translation>lineární</translation>
     </message>
     <message>
         <location filename="../src/AxesDialog.cpp" line="129"/>
@@ -7772,7 +7772,7 @@ Dají se použít následující zvláštní kódy:
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1003"/>
         <source>2 points for linear fits</source>
-        <translation>Dva body pro přímočaré umístění</translation>
+        <translation>Dva body pro lineární umístění</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="780"/>
@@ -12800,13 +12800,13 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/Interpolation.cpp" line="57"/>
         <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation>Neznámý způsob interpolace. Platné hodnoty jsou: 0 - přímočará, 1 - trojrozměrná, 2 - Akima.</translation>
+        <translation>Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - trojrozměrná, 2 - Akima.</translation>
     </message>
     <message>
         <location filename="../src/Interpolation.cpp" line="65"/>
         <location filename="../src/Interpolation.cpp" line="66"/>
         <source>Linear</source>
-        <translation>Přímočará</translation>
+        <translation>Lineární</translation>
     </message>
     <message>
         <location filename="../src/Interpolation.cpp" line="65"/>
@@ -12846,7 +12846,7 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/Interpolation.cpp" line="87"/>
         <source>Unknown interpolation method, valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation>Neznámý způsob interpolace. Platné hodnoty jsou: 0 - přímočará, 1 - trojrozměrná, 2 - Akima.</translation>
+        <translation>Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - trojrozměrná, 2 - Akima.</translation>
     </message>
     <message>
         <location filename="../src/Interpolation.cpp" line="56"/>
@@ -12912,7 +12912,7 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/InterpolationDialog.cpp" line="58"/>
         <source>Linear</source>
-        <translation>Přímočará</translation>
+        <translation>Lineární</translation>
     </message>
     <message>
         <location filename="../src/InterpolationDialog.cpp" line="59"/>
@@ -13455,12 +13455,12 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
     <message>
         <location filename="../src/PolynomialFit.cpp" line="241"/>
         <source>Linear Regression</source>
-        <translation>Přímočarý obrat (křivky) neboli regrese</translation>
+        <translation>Lineární regrese</translation>
     </message>
     <message>
         <location filename="../src/PolynomialFit.cpp" line="242"/>
         <source>Linear</source>
-        <translation>Přímočarý</translation>
+        <translation>Lineární</translation>
     </message>
     <message>
         <source>QtiPlot - Fit Error</source>
@@ -14919,12 +14919,12 @@ největší celé číslo menší nebo rovno x.</translation>
     <message>
         <location filename="../src/NonLinearFit.cpp" line="57"/>
         <source>NonLinear</source>
-        <translation>Nepřímočaré</translation>
+        <translation>Nelineární</translation>
     </message>
     <message>
         <location filename="../src/NonLinearFit.cpp" line="63"/>
         <source>Non-linear</source>
-        <translation>Nepřímočaré</translation>
+        <translation>Nelineární</translation>
     </message>
     <message>
         <source>QtiPlot - Input function error</source>
@@ -15348,7 +15348,7 @@ největší celé číslo menší nebo rovno x.</translation>
     <message>
         <location filename="../src/Plot3DDialog.cpp" line="111"/>
         <source>linear</source>
-        <translation>přímočarý</translation>
+        <translation>lineární</translation>
     </message>
     <message>
         <location filename="../src/Plot3DDialog.cpp" line="112"/>
@@ -16858,7 +16858,7 @@ největší celé číslo menší nebo rovno x.</translation>
     <message>
         <location filename="../src/PolynomFitDialog.cpp" line="58"/>
         <source>Order (1 - 9, 1 = linear)</source>
-        <translation>Řád (1 - 9, 1 = přímočaré)</translation>
+        <translation>Řád (1 - 9, 1 = lineární)</translation>
     </message>
     <message>
         <source>Fit curve # pts</source>
