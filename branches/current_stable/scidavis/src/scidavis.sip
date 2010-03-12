@@ -308,7 +308,7 @@ public:
   Column * column(int index) const;
   Column * column(const QString & name) const;
 
-  SIP_PYOBJECT text(SIP_PYOBJECT, int);
+  SIP_PYOBJECT text(SIP_PYOBJECT, int) /Deprecated/;
 %MethodCode
   sipIsErr = 0;
   CHECK_TABLE_COL(a0);
@@ -324,7 +324,7 @@ public:
 		}
 	}
 %End
-  double cell(SIP_PYOBJECT, int);
+  double cell(SIP_PYOBJECT, int) /Deprecated/;
 %MethodCode
   sipIsErr = 0;
   CHECK_TABLE_COL(a0);
@@ -332,7 +332,7 @@ public:
 	if (sipIsErr == 0)
 		sipRes = sipCpp->cell(row, col);
 %End
-  void setText(SIP_PYOBJECT, int, const QString&);
+  void setText(SIP_PYOBJECT, int, const QString&) /Deprecated/;
 %MethodCode
   sipIsErr = 0;
   CHECK_TABLE_COL(a0);
@@ -340,7 +340,7 @@ public:
 	if (sipIsErr == 0)
 		sipCpp->setText(row, col, *a2);
 %End
-  void setCell(SIP_PYOBJECT, int, double);
+  void setCell(SIP_PYOBJECT, int, double) /Deprecated/;
 %MethodCode
   sipIsErr = 0;
   CHECK_TABLE_COL(a0);
@@ -348,7 +348,7 @@ public:
 	if (sipIsErr == 0)
 		sipCpp->setCell(row, col, a2);
 %End
-  SIP_PYOBJECT colName(int);
+  SIP_PYOBJECT colName(int) /Deprecated/;
 %MethodCode
    if (a0 < 1 || a0 > sipCpp->numCols()) {\
 		sipIsErr = 1;\
@@ -356,14 +356,14 @@ public:
 	} else
 		sipRes = PyString_FromString(sipCpp->colLabel(a0-1));
 %End
-  void setColName(SIP_PYOBJECT, const QString&);
+  void setColName(SIP_PYOBJECT, const QString&) /Deprecated/;
 %MethodCode
 	sipIsErr = 0;
    CHECK_TABLE_COL(a0);
 	if (sipIsErr == 0)
 		sipCpp->setColName(col, *a1);
 %End
-  void notifyChanges();
+  void notifyChanges() /Deprecated/;
 
   void importASCII(const QString&, const QString&="\t", int=0, bool=false, bool=true, bool=false, bool=false);
   bool exportASCII(const QString&, const QString&="\t", bool=false, bool=false);
@@ -422,7 +422,7 @@ public:
   }
   sipCpp->d_future_table->sortColumns(lead, cols, a2==0);
 %End
-	void setCommand(SIP_PYOBJECT, const QString&);
+	void setCommand(SIP_PYOBJECT, const QString&) /Deprecated/;
 %MethodCode
   	sipIsErr = 0;
   	CHECK_TABLE_COL(a0);
@@ -430,7 +430,7 @@ public:
 		sipCpp->setCommand(col, *a1);
 %End
 
-	void setComment(SIP_PYOBJECT, const QString&);
+	void setComment(SIP_PYOBJECT, const QString&) /Deprecated/;
 %MethodCode
   	sipIsErr = 0;
   	CHECK_TABLE_COL(a0);
@@ -1215,18 +1215,18 @@ public:
 %MethodCode
   sipRes = sipCpp->current_folder;
 %End
-  void saveFolder(Folder *folder, const QString& fn);
+  void saveFolder(Folder *folder, const QString& fn) /Deprecated/;
   Folder* projectFolder() /PyName=rootFolder/;
 
-  void renameWindow(MyWidget *, const QString &);
+  void renameWindow(MyWidget *, const QString &) /Deprecated/;
 
   // Prior to SciDAVis 0.2.4, it was necessary to call this on a layer created using
   // Graph.addLayer() if you wanted the layer to be intialized correctly. This is now
   // done automatically as part of addLayer(); doing so again doesn't hurt, but is not necessary
   // any more.
-  void setPreferences(Graph*);
+  void setPreferences(Graph*) /Deprecated/;
 
-  MyWidget* clone(MyWidget*);
+  MyWidget* clone(MyWidget*) /Deprecated/;
 
 private:
   ApplicationWindow(const ApplicationWindow&);
@@ -1249,7 +1249,8 @@ public:
   bool setYErrorSource(ErrorSource err, const QString& colName = QString::null);
 
   bool setDataFromCurve(const QString&, Graph*=0);
-  bool setDataFromCurve(const QString&, double, double, Graph*=0);
+
+  bool setDataFromCurve(const QString&, double, double, Graph*=0) /Deprecated/;
 
   void setInterval(double from, double to);
 
@@ -1285,7 +1286,10 @@ delete values;
   void setTolerance(double);
 
   void setColor(int);
-  void setColor(const QString&);
+
+  // inconsistent with other setColor() methods and accepts only colors from the palette,
+  // in contrast to what one would expect
+  void setColor(const QString&) /Deprecated/;
 
   void setOutputPrecision(int);
 
