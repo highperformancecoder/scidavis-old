@@ -70,14 +70,14 @@ bool PythonScript::compile(bool for_eval)
 				PyDict_GetItemString(env()->globalDict(), "__builtins__"));
 		PyObject *ret = PyRun_String(
 				"def col(c,*arg):\n"
-				"\ttry: return self.cell(c,arg[0])\n"
-				"\texcept(IndexError): return self.cell(c,i)\n"
+				"\ttry: return self.column(type(c)==str and c or c-1).valueAt(arg[0]-1)\n"
+				"\texcept(IndexError): return self.column(type(c)==str and c or c-1).valueAt(i-1)\n"
 				"def cell(c,r):\n"
 				"\treturn self.cell(c,r)\n"
 				"def tablecol(t,c):\n"
-				"\treturn self.folder().rootFolder().table(t,True).cell(c,i)\n"
+				"\treturn self.folder().rootFolder().table(t,True).column(type(c)==str and c or c-1).valuetAt(i-1)\n"
 				"def _meth_table_col_(t,c):\n"
-				"\treturn t.cell(c,i)\n"
+				"\treturn t.column(type(c)==str and c or c-1).valueAt(i-1)\n"
 				"self.__class__.col = _meth_table_col_",
 				Py_file_input, localDict, localDict);
 		if (ret)
