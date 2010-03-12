@@ -180,3 +180,52 @@ Most important changes (since 0.2.2)
 	 Note.exportASCII(filename)
 	 Note.importASCII(filename)
 
+=== Release 0.2.4, 2010-03-12 ===
+Most important changes (since 0.2.3)
+- Some parts of the Python API have been marked as deprecated and generate warnings when used. This
+  may be a bit unusual for a bugfix release; on the other hand, they won't be removed any time soon
+  and inserting the deprecation warnings now will give everyone as much time as possible for getting
+  accustomed to the API we're moving towards.
+  Most prominently,
+    Table.cell(column,row) and
+	 Table.setCell(column,row,value)
+  are deprecated in favour of
+    Table.column(column - 1).valueAt(row - 1) and
+    Table.column(column - 1).setValueAt(row - 1, value)
+  (note that the column/row INDICES DIFFER BY ONE!); the same goes for
+    Table.text(c,r) -> Table.column(c - 1).textAt(r - 1) and
+    Table.setText(c,r,text) -> Table.column(c - 1).setTextAt(r - 1,text).
+  This serves multiple purposes. It simplifies the interfaces by grouping all functionality specific
+  to a certain column in the Column class; it allows column objects to be stored and passed around;
+  and it moves from the unconventional 1-based indexing to the more conventional 0-based indexing.
+  Future additions to the API will increasingly make use of the columns-as-objects paradigm.
+- lots of bugfixes, again including crashes
+- fixed compatibility issues with Qt 4.6 and SIP 4.9
+- performance improvements
+- substantially improved support for plots involving date/time data
+- added two Czech translations: a default one by Pavel Fric (feedback requested via
+  http://fripohled.blogspot.com) and an alternative one by Jan Helebrant
+- updated Spanish translation, thanks to Mauricio Troviano; Brazilian Portuguese translation, thanks
+  to Fellyp do Nascimento; and German translation
+- fixed and extended many parts of the API for Python scripts, including the new methods
+    Layer.pickPoint()
+	 MDIWindow.clone()
+	 Folder.save(filename)
+	 newGraph(string)
+	 Layer.printDialog()
+	 Graph.printDialog()
+	 Layer.setRightTitle(string)
+	 Layer.setTopTitle(string)
+	 Layer.grid() # => returns an instance of the new class Grid
+	 Layer.insertFunctionCurve(formula,from=0,to=1,points=100,title="")
+	 Layer.insertPolarCurve(radial_formula,angular_formula,from=0,to=2*pi,parameter="t",points=100,title="")
+	 Layer.insertParametricCurve(x_formal,y_formula,from=0,to=1,parameter="t",points=100,title="")
+	 Matrix.recalculate()
+  the constants QwtPlot.yLeft, QwtPlot.yRight, QwtPlot.xBottom, QwtPlot.xTop for specifying axes
+  and the Grid class
+- multiple graphs can have active tools simultaneously
+- based on user feedback, the default behaviour when importing ASCII files has been changed to
+  interpret the data as numeric (only applies to fresh installations of SciDAVis)
+- automatic resizing of table rows for multi-line cells intentionally dropped, because this seems
+  to be rarely needed and has a huge impact on performance for large tables
+

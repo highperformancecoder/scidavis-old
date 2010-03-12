@@ -19,7 +19,7 @@
 
 //  Don't forget to change the Doxyfile, the splash screen and the Windows
 //  installer when changing these!
-const int SciDAVis::scidavis_version = 0x000203;
+const int SciDAVis::scidavis_version = 0x000204;
 
 const char * SciDAVis::extra_version = "";
 
@@ -90,7 +90,7 @@ GSL (http://www.gnu.org/software/gsl/)\n\
 \n\
 ... and many more we just forgot to mention.\n";
 
-const char * SciDAVis::release_date = " 2009-07-05";
+const char * SciDAVis::release_date = " 2010-03-12";
 
 int SciDAVis::version()
 {
