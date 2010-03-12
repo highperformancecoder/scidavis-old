@@ -35,6 +35,25 @@ Here's how to build the Windows installer for SciDAVis:
 	- from fitPlugins\* -
    plugins\fitRational0.dll
    plugins\fitRational1.dll
+	- from <Python directory>\Lib\site-packages
+	sip.pyd
+   PyQt4\__init__.py
+   PyQt4\__init__.pyc
+   PyQt4\Qt.pyd
+   PyQt4\QtAssistant.pyd
+   PyQt4\QtCore.pyd
+   PyQt4\QtDesigner.pyd
+   PyQt4\QtGui.pyd
+   PyQt4\QtHelp.pyd
+   PyQt4\QtNetwork.pyd
+   PyQt4\QtOpenGL.pyd
+   PyQt4\QtScript.pyd
+   PyQt4\QtSql.pyd
+   PyQt4\QtSvg.pyd
+   PyQt4\QtTest.pyd
+   PyQt4\QtWebKit.pyd
+   PyQt4\QtXml.pyd
+   PyQt4\QtXmlPatterns.pyd
 
 4) Right click on scidavisScriptInstall.nsi and select compile.
 
