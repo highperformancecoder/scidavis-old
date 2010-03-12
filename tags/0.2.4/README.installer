@@ -1,0 +1,59 @@
+Here's how to build the Windows installer for SciDAVis:
+
+1) Build everything as described in INSTALL.html
+
+2) Download and install Nsis from  http://nsis.sourceforge.net/Download
+
+3) Copy the following files into a seperate folder:
+	- from this directory -
+   scidavisScriptInstall.nsi
+   CHANGES.txt (rename CHANGES and convert to DOS format)
+   gpl.txt
+   README.txt (rename README and convert to DOS format)
+	- from .\scidavis -
+   scidavis.exe
+   scidavisrc.py
+   scidavisrc.pyc
+   scidavisUtil.py
+   scidavisUtil.pyc
+	- from .\scidavis\icons -
+   scidavis.ico
+	- from <Qt directory>\bin -
+   mingwm10.dll
+   Qt3Support4.dll
+   QtAssistantClient4.dll
+   QtCore4.dll
+   QtGui4.dll
+   QtNetwork4.dll
+   QtOpenGL4.dll
+   QtSql4.dll
+   QtSvg4.dll
+   QtXml4.dll
+	assistant.exe
+	- from whever you've put QwtPlot3D -
+   qwtplot3d.dll
+	- from fitPlugins\* -
+   plugins\fitRational0.dll
+   plugins\fitRational1.dll
+	- from <Python directory>\Lib\site-packages
+	sip.pyd
+   PyQt4\__init__.py
+   PyQt4\__init__.pyc
+   PyQt4\Qt.pyd
+   PyQt4\QtAssistant.pyd
+   PyQt4\QtCore.pyd
+   PyQt4\QtDesigner.pyd
+   PyQt4\QtGui.pyd
+   PyQt4\QtHelp.pyd
+   PyQt4\QtNetwork.pyd
+   PyQt4\QtOpenGL.pyd
+   PyQt4\QtScript.pyd
+   PyQt4\QtSql.pyd
+   PyQt4\QtSvg.pyd
+   PyQt4\QtTest.pyd
+   PyQt4\QtWebKit.pyd
+   PyQt4\QtXml.pyd
+   PyQt4\QtXmlPatterns.pyd
+
+4) Right click on scidavisScriptInstall.nsi and select compile.
+
