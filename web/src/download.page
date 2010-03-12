@@ -19,49 +19,28 @@ That said, all necessary links and files can be found
 
 h1. Linux
 
-h2. SUSE
+SciDAVis is included in a growing number of Linux distributions. Fedora, Mandriva, Debian (squeeze
+and sid), Ubuntu (starting with 10.04, Lucid Lynx) and PCLinuxOS reportedly allow direct
+installation from their respective package managers.
 
-Thanks to Quentin Denis, packages of the application as well as the manual are available
-"here":http://packman.links2linux.org/package/scidavis. Recently updated by Leon Freitag.
+For other distributions, third-party resources exist such as the
+"Arch Linux package on the AUR":http://aur.archlinux.org/packages.php?ID=19201
+or the unfortunately outdated 
+"Slackware packages":http://www.linuxpackages.net/search_view.php?by=name&name=scidavis
+and
+"openSUSE packages on PackMan":http://packman.links2linux.org/package/scidavis.
 
-h2. Debian
+If your favourite distribution doesn't contain a package yet, there are usually ways to request one
+or roll your own (see the documentation/homepage of the distribution in question).
 
-Thanks to Burkhard Bunk, packages for Debian Etch and Lenny are available
-"here":http://debian.physik.hu-berlin.de.
-
-h2. Fedora
-
-Thanks to Eric Tanguy, SciDAVis is now included in Fedora 8 and the following versions.
-
-h2. Slackware
-
-Fellype do Nascimento provides a
-"package for Slackware 12.2":http://www.linuxpackages.net/search_view.php?by=name&name=scidavis&ver=12.2
-at linuxpackages.net.
-
-h2. Arch Linux
-
-"PKGBUILD on AUR":http://aur.archlinux.org/packages.php?ID=19201 started by
-Olaf Leidinger and currently maintained by Knut Franke.
-
-h2. Ubuntu
-
-A package for Ubuntu "has been requested":https://bugs.launchpad.net/ubuntu/+bug/178364 and can be made from the Debian package source (see above), but so far there's no official maintainer. We've been provided with a build of SciDAVis 0.2.2 for Ubuntu 9.04 64bit by Björn Laurritzen, which we're making available "here":http://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=16022.
-
-h2. PCLinuxOS
-
-SciDAVis is included in PCLinuxOS and can easily be installed using its package manager.
-
-h2. Other distributions
-
-For all distributions that don't have specific packages yet, we offer a universal binary with most dependencies statically linked in.
-Information about dependencies and installation instructions can be found 
+Alternatively, we offer a universal binary with most dependencies statically linked in. Note that
+this approach doesn't integrate as well with the system as a dedicated package, nor can it be
+guaranteed to work in every case. Information about dependencies and installation instructions can
+be found
 "here":http://sourceforge.net/project/platformdownload.php?group_id=199120&sel_platform=13808.
-
-If you don't know how to open scidavis-x.y.z-x86-linux-qt4.4-py2.5.tar.bz2, start a terminal, cd to the directory containing it and enter
-
+If you don't know how to open scidavis-x.y.z-x86-linux-qt4.4-py2.5.tar.bz2: Start a terminal, cd to
+the directory containing it and enter
 {coderay:: {lang: plaintext, line_numbers: false}} tar xjvf scidavis-x.y.z-x86-linux-qt4.4-py2.5.tar.bz2 {coderay}
-
 This will create a directory "scidavis-x.y.z-x86-linux" with the binary and some additional files.
 
 h1. MacOS X
