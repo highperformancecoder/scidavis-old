@@ -308,6 +308,16 @@ public:
   Column * column(int index) const;
   Column * column(const QString & name) const;
 
+  Column * __getitem__(int index) const /NoDerived/;
+%MethodCode
+  sipRes = sipCpp->column(a0);
+%End
+
+  Column * __getitem__(const QString &name) const /NoDerived/;
+%MethodCode
+  sipRes = sipCpp->column(*a0);
+%End
+
   SIP_PYOBJECT text(SIP_PYOBJECT, int) /Deprecated/;
 %MethodCode
   sipIsErr = 0;
