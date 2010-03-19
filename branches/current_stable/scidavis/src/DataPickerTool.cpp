@@ -40,6 +40,7 @@
 #include <qwt_symbol.h>
 #include <qwt_plot_picker.h>
 #include <qwt_plot_curve.h>
+#include <qwt_scale_draw.h>
 #include <QMessageBox>
 #include <QLocale>
 
@@ -396,3 +397,10 @@ void DataPickerTool::moveBy(int dx, int dy)
 	move(d_move_target_pos + QPoint(dx, dy));
 	end(true);
 }
+
+QwtText DataPickerTool::trackerText(const QwtDoublePoint &point) const {
+	return plot()->axisScaleDraw(xAxis())->label(point.x()).text() +
+		", " +
+		plot()->axisScaleDraw(yAxis())->label(point.y()).text();
+}
+

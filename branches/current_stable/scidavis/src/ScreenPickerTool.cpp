@@ -32,6 +32,7 @@
 #include "Graph.h"
 #include "Plot.h"
 #include <qwt_symbol.h>
+#include <qwt_scale_draw.h>
 
 ScreenPickerTool::ScreenPickerTool(Graph *graph, const QObject *status_target, const char *status_slot)
 	: QwtPlotPicker(graph->plotWidget()->canvas()),
@@ -61,9 +62,7 @@ void ScreenPickerTool::append(const QPoint &point)
 //	QwtPlotPicker::append(point);
 
 	QwtDoublePoint pos = invTransform(point);
-	QString info;
-	info.sprintf("x=%g; y=%g", pos.x(), pos.y());
-	emit statusText(info);
+	emit statusText(trackerText(pos).text());
 
 	d_selection_marker.setValue(pos);
 	if (d_selection_marker.plot() == NULL)
@@ -93,5 +92,11 @@ bool ScreenPickerTool::eventFilter(QObject *obj, QEvent *event)
 			break;
 	}
 	return QwtPlotPicker::eventFilter(obj, event);
+}
+
+QwtText ScreenPickerTool::trackerText(const QwtDoublePoint &point) const {
+	return plot()->axisScaleDraw(xAxis())->label(point.x()).text() +
+		", " +
+		plot()->axisScaleDraw(yAxis())->label(point.y()).text();
 }
 

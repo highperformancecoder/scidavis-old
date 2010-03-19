@@ -108,18 +108,33 @@ public:
 	void setLabelsSelected(bool on = true);
 
 protected:
-	//! List of the error bar curves associated to this curve.
-	QList <DataCurve *> d_error_bars;
 	//! The data source table.
 	Table *d_table;
+	//! List of the error bar curves associated to this curve.
+	QList <DataCurve *> d_error_bars;
 	//!\brief The name of the column used for abscissae values.
 	/*
 	 *The column name used for Y values is stored in title().text().
 	 */
 	QString d_x_column;
-
+	//! First row of #d_tabel to be plotted, provided all relevant columns have valid entries.
 	int d_start_row;
+	//! Last row of #d_tabel to be plotted, provided all relevant columns have valid entries.
 	int d_end_row;
+
+private:
+
+	/**
+	 * \brief Mapping of curve indices to row indices in #d_table.
+	 *
+	 * Besides #d_start_row and #d_end_row, this takes into account rows which had invalid entries in
+	 * one of the relevant columns the last time convertData() was called. Usually, changes in
+	 * validity should cause the curve to be updated via updateData(); however, subclasses of
+	 * DataCurve may depend on more columns than X and Y (in particular, this is true of vector
+	 * curves); so DataCurve cannot (within the current architecture) compute this mapping on demand
+	 * and has to store it like this.
+	 */
+	mutable QVector<int> d_index_to_row;
 	bool validCurveType();
 };
 #endif

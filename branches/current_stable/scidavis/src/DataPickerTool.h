@@ -68,6 +68,7 @@ class DataPickerTool : public QwtPlotPicker, public PlotToolInterface
 		virtual bool end(bool ok);
 		void setSelection(QwtPlotCurve *curve, int point_index);
 		void moveBy(int dx, int dy);
+		virtual QwtText trackerText(const QwtDoublePoint &point) const;
 	private:
 		ApplicationWindow *d_app;
 		QwtPlotMarker d_selection_marker;
