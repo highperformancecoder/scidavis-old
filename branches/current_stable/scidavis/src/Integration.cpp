@@ -131,7 +131,7 @@ QString Integration::logInfo()
 	// using GSL to find maximum value of data set
 	gsl_vector *aux = gsl_vector_alloc(d_n);
 	for(int i=0; i < d_n; i++)
-		gsl_vector_set (aux, i, fabs(d_y[i]));
+		gsl_vector_set (aux, i, d_y[i]);
 	int maxID=gsl_vector_max_index (aux);
 	gsl_vector_free (aux);
 
