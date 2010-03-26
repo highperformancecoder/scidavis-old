@@ -10,10 +10,10 @@ DESTDIR = ../
 
 INSTALLS += target
 unix:  target.path = /usr/lib$${libsuff}/scidavis/plugins
-win32: target.path = c:/scidavis/plugins
+win32: target.path = ../../output/plugins
 
-win32:INCLUDEPATH += c:/gsl/include
-win32:LIBS        += c:/gsl/lib/libgsl.a
+win32:INCLUDEPATH += ../../3rdparty/gsl-1.8/include
+win32:LIBS        += ../../3rdparty/gsl-1.8/lib/libgsl.a
 
 unix:LIBS += -L/usr/lib$${libsuff} -lgsl -lgslcblas
 

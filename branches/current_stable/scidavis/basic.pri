@@ -6,11 +6,11 @@ QMAKE_PROJECT_DEPTH = 0
 
 TARGET         = scidavis
 TEMPLATE       = app
-CONFIG        += qt warn_on exceptions opengl thread
+CONFIG        += qt warn_on exceptions opengl thread zlib
 CONFIG        += assistant
 
 DEFINES       += QT_PLUGIN
-DEFINES       += TS_PATH="\\\"$$replace(translationfiles.path," ","\ ")\\\"
+DEFINES       += TS_PATH="\\\"$$replace(translationfiles.runtimepath," ","\ ")\\\"
 DEFINES       += DOC_PATH="\\\"$$replace(documentation.path," ","\ ")\\\"
 !isEmpty( manual.path ) {
 DEFINES       += MANUAL_PATH="\\\"$$replace(manual.path," ","\ ")\\\"

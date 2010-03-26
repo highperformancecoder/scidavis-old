@@ -7,6 +7,12 @@ RESOURCES    +=        appicons.qrc
 RESOURCES    +=        icons.qrc
 RC_FILE      =         scidavis.rc
 
+win32 {
+  win_icon.files = icons/scidavis.ico
+  win_icon.path = "$$INSTALLBASE"
+  INSTALLS += win_icon
+}
+
 ###################### TRANSLATIONS #########################################
 
 TRANSLATIONS    = translations/scidavis_de.ts \

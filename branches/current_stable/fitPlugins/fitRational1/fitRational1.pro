@@ -18,9 +18,9 @@ INSTALLS += target
 # To use this on Linux or Mac OS X, remove
 # the "win32" and prepend '#' to the "LIBS"
 # line in the dynamic linking section.
-win32:INCLUDEPATH       += c:/gsl/include
-win32:LIBS        += c:/gsl/lib/libgsl.a
-win32:LIBS        += c:/gsl/lib/libgslcblas.a
+win32:INCLUDEPATH       += ../../3rdparty/gsl-1.8/include
+win32:LIBS        += ../../3rdparty/gsl-1.8/lib/libgsl.a
+win32:LIBS        += ../../3rdparty/gsl-1.8/lib/libgslcblas.a
 
 # Dynamically link against GSL installed system-wide.
 # This is used as default on unix systems such as
@@ -29,6 +29,6 @@ unix:LIBS += -L/usr/lib$${libsuff} -lgsl -lgslcblas
 
 # where to install the plugins
 unix:target.path=/usr/lib$${libsuff}/scidavis/plugins
-win32: target.path = c:/scidavis/plugins
+win32: target.path = ../../output/plugins
 
 SOURCES += fitRational1.cpp

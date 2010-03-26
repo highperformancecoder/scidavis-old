@@ -34,7 +34,7 @@ linux-g++-64: libsuff = 64
 
 ### where to install
 unix: INSTALLBASE = /usr           # this is what is called "prefix" when using GNU autotools
-win32: INSTALLBASE = c:/scidavis
+win32: INSTALLBASE = ../output
 unix: target.path = "$$INSTALLBASE/bin"               # where to install the binary on Linux/MacOS X
 win32: target.path = "$$INSTALLBASE"                  # where to install the exe on Windows
 unix: documentation.path = "$$INSTALLBASE/share/doc/scidavis"      # where to install the documentation files on Linux/MacOS X
@@ -47,25 +47,43 @@ win32: documentation.path = "$$INSTALLBASE"                        # ... on Wino
 ### package cannot easily update the path for its users.
 ### Dynamic selection of the manual path was the only available option up until SciDAVis 0.2.3.
 DEFINES += DYNAMIC_MANUAL_PATH
-### Important: translationfiles.path will be the directory where scidavis expects
+### Important: translationfiles.runtimepath will be the directory where scidavis expects
 ### the translation .qm files at runtime. Therefore you need to set it corretly even if 
 ### you do not use this project file to generate the translation files.
-unix: translationfiles.path = "$$INSTALLBASE/share/scidavis/translations"
-win32: translationfiles.path = "$$INSTALLBASE/translations"
+unix {
+  translationfiles.path = "$$INSTALLBASE/share/scidavis/translations"
+  translationfiles.runtimepath = "$$translationfiles.path"
+}
+win32 {
+  translationfiles.path = "$$INSTALLBASE/translations"
+  translationfiles.runtimepath = "translations"
+}
 ### Important (if you use Python): the following two paths are where the application will expect 
 ### scidavisrc.py and scidavisUtil.py, respectively. Alternatively you can also put scidavisrc.py 
 ### (or ".scidavis.py") into the users home directory. scidavisUtil.py must be either in the 
 ### directory specified here or somewhere else in the python path (sys.path) where "import" can find it
-unix: pythonconfig.path = /etc						# where scidavisrc.py is installed
-win32: pythonconfig.path = $$INSTALLBASE    
-unix: pythonutils.path = $$INSTALLBASE/share/scidavis        # where the scidavisUtil python modules is installed
-win32: pythonutils.path = $$INSTALLBASE        
+unix {
+  # where scidavisrc.py is installed
+  pythonconfig.path = /etc
+  # where scidavisrc.py is searched for at runtime
+  pythonconfig.runtimepath = "$$pythonconfig.path"
+  # where the scidavisUtil python modules is installed
+  pythonutils.path = $$INSTALLBASE/share/scidavis
+  # where the scidavisUtil python module is searched for at runtime
+  pythonutils.runtimepath = "$$pythonutils.path"
+}
+win32 {
+  pythonconfig.path = "$$INSTALLBASE"
+  pythonconfig.runtimepath = .
+  pythonutils.path = "$$INSTALLBASE"
+  pythonutils.runtimepath = .
+}
 
 ### (remark: muparser.pri and python.pri must be included after defining INSTALLBASE )
 ### building without muParser does not work yet (but will in a future version)
 include( muparser.pri )
 ### comment out the following line to deactivate Python scripting support
-include( python.pri )  
+include( python.pri )
 
 ################### start of liborigin block 
 ############ liborigin support has been discontinued due to the lack 
@@ -94,7 +112,7 @@ unix:INCLUDEPATH  += ../3rdparty/qwt/src
 unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
 
 unix:LIBS         += -L/usr/lib$${libsuff}
-unix:LIBS         += -lgsl -lgslcblas -lz
+unix:LIBS         += -lgsl -lgslcblas
 unix:LIBS         += -lmuparser
 unix:INCLUDEPATH  += /usr/include/muParser
 
@@ -111,8 +129,8 @@ unix:INCLUDEPATH  += /usr/include/muParser
 #unix:INCLUDEPATH  += /usr/include/qwtplot3d
 #unix:LIBS         += -lqwtplot3d
 #unix:LIBS         += -lqwt
-##dynamically link against GSL and zlib installed system-wide
-#unix:LIBS         += -lgsl -lgslcblas -lz -lmuparser
+##dynamically link against GSL and muparser installed system-wide
+#unix:LIBS         += -lgsl -lgslcblas -lmuparser
 
 #############################################################################
 ### Default settings for Windows
@@ -121,18 +139,16 @@ unix:INCLUDEPATH  += /usr/include/muParser
 ### The latter seems to be impossible to link statically on Windows.
 #############################################################################
 
-win32:INCLUDEPATH       += c:/qwtplot3d/include
-win32:INCLUDEPATH       += c:/qwt-5.0.2/include
-win32:INCLUDEPATH       += c:/gsl/include
-win32:INCLUDEPATH       += c:/zlib/include
-win32:INCLUDEPATH       += c:/muparser/include
+win32:INCLUDEPATH       += ../3rdparty/qwtplot3d/include
+win32:INCLUDEPATH       += ../3rdparty/qwt/src
+win32:INCLUDEPATH       += ../3rdparty/gsl-1.8/include
+win32:INCLUDEPATH       += ../3rdparty/muparser/include
 
-win32:LIBS        += c:/qwtplot3d/lib/qwtplot3d.dll
-win32:LIBS        += c:/qwt-5.0.2/lib/libqwt.a
-win32:LIBS        += c:/gsl/lib/libgsl.a
-win32:LIBS        += c:/gsl/lib/libgslcblas.a
-win32:LIBS        += c:/zlib/lib/libz.a
-win32:LIBS        += c:/muparser/lib/libmuparser.a
+win32:LIBS        += ../3rdparty/qwtplot3d/lib/qwtplot3d.dll
+win32:LIBS        += ../3rdparty/qwt/lib/libqwt.a
+win32:LIBS        += ../3rdparty/gsl-1.8/lib/libgsl.a
+win32:LIBS        += ../3rdparty/gsl-1.8/lib/libgslcblas.a
+win32:LIBS        += ../3rdparty/muparser/lib/libmuparser.a
 
 #############################################################################
 ###                    END OF USER-SERVICEABLE PART                       ###
