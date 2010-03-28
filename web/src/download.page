@@ -24,10 +24,9 @@ and sid), Ubuntu (starting with 10.04, Lucid Lynx) and PCLinuxOS reportedly allo
 installation from their respective package managers.
 
 For other distributions, third-party resources exist such as the
-"Arch Linux package on the AUR":http://aur.archlinux.org/packages.php?ID=19201
+"Arch Linux package on the AUR":http://aur.archlinux.org/packages.php?ID=19201 ,
+a "Slackware package":http://www.ifi.unicamp.br/~fellypen/progs/scidavis/
 or the unfortunately outdated 
-"Slackware packages":http://www.linuxpackages.net/search_view.php?by=name&name=scidavis
-and
 "openSUSE packages on PackMan":http://packman.links2linux.org/package/scidavis.
 
 If your favourite distribution doesn't contain a package yet, there are usually ways to request one
