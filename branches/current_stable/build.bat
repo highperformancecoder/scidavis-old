@@ -37,17 +37,17 @@ cd ..\..
 rem =================== BUILD AND INSTALL SCIDAVIS ============================
 qmake scidavis.pro
 mingw32-make
-mingw32-make install
+mingw32-make INSTALL_ROOT=../output install
 
 rem ============ COPY SOME MISSING FILES TO OUTPUT DIRECTORY ==================
-copy /y %QTDIR%\bin\mingwm10.dll output
-copy /y %QTDIR%\bin\Qt3Support4.dll output
+copy /y %QTDIR%\bin\mingwm10.dll           output
+copy /y %QTDIR%\bin\Qt3Support4.dll        output
 copy /y %QTDIR%\bin\QtAssistantClient4.dll output
-copy /y %QTDIR%\bin\QtCore4.dll output
-copy /y %QTDIR%\bin\QtGui4.dll output
-copy /y %QTDIR%\bin\QtNetwork4.dll output
-copy /y %QTDIR%\bin\QtOpenGL4.dll output
-copy /y %QTDIR%\bin\QtSql4.dll output
-copy /y %QTDIR%\bin\QtSvg4.dll output
-copy /y %QTDIR%\bin\QtXml4.dll output
-copy /y %QTDIR%\bin\assistant.exe output
+copy /y %QTDIR%\bin\QtCore4.dll            output
+copy /y %QTDIR%\bin\QtGui4.dll             output
+copy /y %QTDIR%\bin\QtNetwork4.dll         output
+copy /y %QTDIR%\bin\QtOpenGL4.dll          output
+copy /y %QTDIR%\bin\QtSql4.dll             output
+copy /y %QTDIR%\bin\QtSvg4.dll             output
+copy /y %QTDIR%\bin\QtXml4.dll             output
+copy /y %QTDIR%\bin\assistant.exe          output

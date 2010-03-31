@@ -1,24 +1,283 @@
-### General remark: lines prefixed with "unix:" are for Linux/MacOS X/*BSD only, they are ignored on Windows
-###                 lines prefixed with "win32:" are Windows only
+###
+### In most cases, defaults and auto-detection should provide an easy way of
+### building SciDAVis without changing anything in this file (in contrast to
+### prior versions).
+###
+### Windows users are expected to place all dependencies in the 3rdparty folder
+### with default directory names (i.e., with version numbers stripped). In case
+### you already have copies of the libraries installed somewhere, you need to
+### change the paths below in order to use them.
+###
+### On Linux and MacOS X, the default configuration assumes Qwt and QwtPlot3D
+### sources to be unpacked to the 3rdparty folders, with version numbers
+### stripped from the directory names (as on Windows). If you're sure that a
+### system-wide installation of Qwt and QwtPlot3D (e.g. from your distribution's
+### package manager) is compiled against Qt4 (not Qt3), you can use it by
+### executing "qmake PRESET=linux_package" instead of just "qmake" during the
+### build process. Note that this also disables some features which are
+### commonly not needed or even bothersome when integrating SciDAVis in a
+### package manager (user-selectable paths to manual/plugins, checking for new
+### versions on startup).
+### 
+
+################################################################################
+### Choose between common configurations                                       #
+###                                                                            #
+### (currently not applicable on Windows)                                      #
+### Depending on your system and requirements, you may or may not need to      #
+### fine-tune other options below.                                             #
+################################################################################
+
+unix:isEmpty(PRESET) { # allow command-line argument to override settings here
+
+	### Link statically against Qwt and Qwtplot3D in 3rdparty folder
+	### (in order to make sure they're compiled against Qt4, not Qt3).
+	### Intended for Linux users building from source (on possibly somewhat
+	### older systems).
+	PRESET = default_installation
+
+	### Link dynamically against system-wide installed libraries. Intended mainly
+	### for building Linux packages for distributions with Qwt and QwtPlot3D
+	### packages compiled against Qt4 (probably most current ones).
+	#PRESET = linux_package
+
+	### Link statically as much as possible. Qwt, QwtPlot3D and MuParser are
+	### expected to be supplied in the 3rdparty folder. Python, SIP, PyQt and Qt
+	### are linked in dynamically in order to integrate with an existing Python
+	### installation. Intended mainly for building self-contained Linux binaries.
+	### (TODO: Could we include SIP+PyQt+Qt in the self-contained bundle, as done
+	### in the Windows installer?)
+	#PRESET = self_contained
+}
+
+unix:message(Building with preset $$PRESET)
+
+################################################################################
+### What to install                                                            #
+###                                                                            #
+### Comment out anything you want to exclude.                                  #
+################################################################################
+
+### this is the program itself
+INSTALLS        += target
+
+### README, INSTALL.html, manual (if present in the manual subfolder), etc.
+INSTALLS        += documentation
+
+### translations
+INSTALLS        += translationfiles
+
+### icon file (for Windows installer)
+win32:INSTALLS  += win_icon
+
+### Linux Desktop integration
+!contains(PRESET, self_contained) {
+	unix:INSTALLS   += desktop_entry mime_package mime_link icons
+}
+
+################################################################################
+### Where to install                                                           #
+###                                                                            #
+### IMPORTANT: The paths given here specify where SciDAVis will search for     #
+###            the files at runtime. If you want "make install" to place them  #
+###            anywhere else (e.g. in a temporary directory structure used for #
+###            building a package), use "make INSTALL_ROOT=/some/place install"#
+###            and/or copy files to the desired locations by other means.      #
+################################################################################
+
+unix {# Linux / MacOS X
+	contains(PRESET, self_contained) {
+      ### Unless you're trying to build a self-contained bundle, see the
+		### (heavily commented) "else" block below.
+
+		### When installing into a self-contained directory structure (e.g. for
+		### universal Linux binaries), use relative paths at runtime in order to
+		### support relocation.
+		isEmpty(INSTALLBASE): INSTALLBASE = .
+
+		target.path = "$$INSTALLBASE"
+
+		documentation.path = "$$INSTALLBASE/doc"
+		manual.path = "$$INSTALLBASE/manual"
+
+		translationfiles.path = "$$INSTALLBASE/translations"
+
+		pythonconfig.path = "$$INSTALLBASE"
+		pythonutils.path = "$$INSTALLBASE"
+
+		plugins.path = "$$INSTALLBASE/plugins"
+
+	} else {
+
+		### this is what is called "prefix" when using GNU autotools
+		isEmpty(INSTALLBASE): INSTALLBASE = /usr
+
+		### where to put the binary (the application itself)
+		target.path = "$$INSTALLBASE/bin"
+
+		### location of documentation files
+		documentation.path = "$$INSTALLBASE/share/doc/scidavis"
+
+		### Usually, the manual will be expected in the "manual" subfolder of "documentation.path" (see above).
+		### To override this, uncomment the next line and adjust the path behind the '='.
+		#manual.path = "$$INSTALLBASE/share/doc/scidavis/manual"
+
+		### location of translation files (*.qm)
+		translationfiles.path = "$$INSTALLBASE/share/scidavis/translations"
+
+		### Important (if you use Python): the following two paths are where the application will expect 
+		### scidavisrc.py and scidavisUtil.py, respectively. Alternatively you can also put scidavisrc.py 
+		### (or ".scidavis.py") into the users home directory. scidavisUtil.py must be either in the 
+		### directory specified here or somewhere else in the python path (sys.path) where "import" can find it
+
+		### where scidavisrc.py is searched for at runtime
+		pythonconfig.path = "$$INSTALLBASE/../etc"
+		### where the scidavisUtil python module is searched for at runtime
+		pythonutils.path = "$$INSTALLBASE/share/scidavis"
+
+		### where plugins are expected by default
+		plugins.path = "$$INSTALLBASE/lib/scidavis/plugins"
+	}
+}
+
+win32 {# Windows
+	isEmpty(INSTALLBASE): INSTALLBASE = .
+
+	target.path = "$$INSTALLBASE"
+	documentation.path = "$$INSTALLBASE"
+	translationfiles.path = "$$INSTALLBASE/translations"
+	pythonconfig.path = "$$INSTALLBASE"
+	pythonutils.path = "$$INSTALLBASE"
+	plugins.path = "$$INSTALLBASE/fitPlugins"
+}
+
+### 64bit Linux only suffix
+linux-g++-64: libsuff = 64 
+unix:LIBS         += -L/usr/lib$${libsuff}
+
+################################################################################
+### Optional features                                                          #
+################################################################################
 
 ### a console displaying output of scripts; particularly useful on Windows
 ### where running SciDAVis from a terminal is inconvenient
 DEFINES         += SCRIPTING_CONSOLE
+
 ### a dialog for selecting the scripting language on a per-project basis
 DEFINES         += SCRIPTING_DIALOG
 
+!contains(PRESET, linux_package) {
+	### Enables choosing of help folder at runtime, instead of relying on the above path only.
+	### The downside is that the help folder will be remembered as a configuration option, so a binary
+	### package cannot easily update the path for its users.
+	### Dynamic selection of the manual path was the only available option up until SciDAVis 0.2.3.
+	DEFINES += DYNAMIC_MANUAL_PATH
+
+   ### Similar to DYNAMIC_MANUAL_PATH, but for the plugin folder
+	DEFINES += DYNAMIC_PLUGIN_PATH
+
+	### Check for new releases on startup (can be disabled in the preferences).
+	DEFINES += SEARCH_FOR_UPDATES
+
+	### Provide links to manual/translations download in help menu
+	DEFINES += DOWNLOAD_LINKS
+}
+
+### switch inclusion of debugging symbols on/off
 CONFIG          += release
-### use the next line to compile with debugging symbols instead of the line obove
 #CONFIG          += debug
 
-### what to install
-INSTALLS        += target       # this is the program itself
-INSTALLS        += documentation     # README, INSTALL.html, manual (if present in the manual subfolder), etc.
-### Comment out the next line if you do not want automatic compilation and installation of the translations
-INSTALLS        += translationfiles
+### (remark: muparser.pri and python.pri must be included after defining INSTALLBASE )
+### building without muParser does not work yet (but will in a future version)
+include( muparser.pri )
+### comment out the following line to deactivate Python scripting support
+include( python.pri )
 
-### names of the lupdate and lrelease programs (needed if you want to compile and install the translations automatically)
-### possibly needs to be adapted if you have an unusual installation
+
+################################################################################
+### Dependencies                                                               #
+################################################################################
+
+contains(PRESET, default_installation) {
+	### Link statically against Qwt and Qwtplot3D (in order to make sure they
+	### are compiled against Qt4), dynamically against everything else.
+
+	INCLUDEPATH  += ../3rdparty/qwt/src
+	LIBS         += ../3rdparty/qwt/lib/libqwt.a
+
+	INCLUDEPATH  += ../3rdparty/qwtplot3d/include
+	LIBS         += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
+
+	INCLUDEPATH  += /usr/include/muParser
+	LIBS         += -lgsl -lgslcblas
+	LIBS         += -lmuparser
+}
+
+contains(PRESET, linux_package) {
+	### dynamically link against Qwt(3D) installed system-wide
+	### WARNING: make sure they are compiled against >= Qt4.2
+	### Mixing Qt 4.2 and Qt >= 4.3 compiled stuff may also 
+	### cause problems.
+
+	exists(/usr/include/qwt5) {
+		INCLUDEPATH  += /usr/include/qwt5
+	} else {
+		INCLUDEPATH  += /usr/include/qwt
+	}
+	LIBS         += -lqwt
+
+	INCLUDEPATH  += /usr/include/qwtplot3d
+	LIBS         += -lqwtplot3d
+
+	INCLUDEPATH  += /usr/include/muParser
+	LIBS         += -lgsl -lgslcblas
+	LIBS         += -lmuparser
+}
+
+contains(PRESET, self_contained) {
+	### mostly static linking, for self-contained binaries
+
+	INCLUDEPATH  += ../3rdparty/qwt/src
+	LIBS         += ../3rdparty/qwt/lib/libqwt.a
+
+	INCLUDEPATH  += ../3rdparty/qwtplot3d/include
+	LIBS         += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
+
+	INCLUDEPATH  += ../3rdparty/muparser/include
+	LIBS         += ../3rdparty/muparser/lib/libmuparser.a
+
+	LIBS         += /usr/lib/libgsl.a /usr/lib/libgslcblas.a
+}
+
+win32 {
+	### Static linking mostly, except Qt, Python and QwtPlot3D.
+	### The latter seems to be impossible to link statically on Windows.
+
+	isEmpty(LIBPATH): LIBPATH = ../3rdparty
+
+	INCLUDEPATH  += "$${LIBPATH}/qwt/src"
+	LIBS         += "$${LIBPATH}/qwt/lib/libqwt.a"
+
+	INCLUDEPATH  += "$${LIBPATH}/qwtplot3d/include"
+	LIBS         += "$${LIBPATH}/qwtplot3d/lib/qwtplot3d.dll"
+
+	INCLUDEPATH  += "$${LIBPATH}/muparser/include"
+	LIBS         += "$${LIBPATH}/muparser/lib/libmuparser.a"
+
+	INCLUDEPATH  += "$${LIBPATH}/gsl/include"
+	LIBS         += "$${LIBPATH}/gsl/lib/libgsl.a"
+	LIBS         += "$${LIBPATH}/gsl/lib/libgslcblas.a"
+}
+
+
+#############################################################################
+### Names of the lupdate and lrelease programs                              #
+###                                                                         #
+### These are needed if you want to compile and install the translations    #
+### automatically. Possibly needs to be adapted if you have an unusual Qt   #
+### installation.                                                           #
+#############################################################################
+
 exists(/usr/bin/lupdate-qt4) {
 	# Debian, Ubuntu, Fedora
 	LUPDATE_BIN = lupdate-qt4
@@ -28,127 +287,6 @@ exists(/usr/bin/lupdate-qt4) {
 	LUPDATE_BIN = lupdate
 	LRELEASE_BIN = lrelease
 }
-
-### 64 Linux only suffix
-linux-g++-64: libsuff = 64 
-
-### where to install
-unix: INSTALLBASE = /usr           # this is what is called "prefix" when using GNU autotools
-win32: INSTALLBASE = ../output
-unix: target.path = "$$INSTALLBASE/bin"               # where to install the binary on Linux/MacOS X
-win32: target.path = "$$INSTALLBASE"                  # where to install the exe on Windows
-unix: documentation.path = "$$INSTALLBASE/share/doc/scidavis"      # where to install the documentation files on Linux/MacOS X
-win32: documentation.path = "$$INSTALLBASE"                        # ... on Winodws
-### Usually, the manual will be expected in the "manual" subfolder of "documentation.path" (see above).
-### You can override this, uncomment and adjust the path behind the '=' in the next line.
-# manual.path = $$INSTALLBASE/share/doc/scidavis/manual
-### Enables choosing of help folder at runtime, instead of relying on the above path only.
-### The downside is that the help folder will be remembered as a configuration option, so a binary
-### package cannot easily update the path for its users.
-### Dynamic selection of the manual path was the only available option up until SciDAVis 0.2.3.
-DEFINES += DYNAMIC_MANUAL_PATH
-### Important: translationfiles.runtimepath will be the directory where scidavis expects
-### the translation .qm files at runtime. Therefore you need to set it corretly even if 
-### you do not use this project file to generate the translation files.
-unix {
-  translationfiles.path = "$$INSTALLBASE/share/scidavis/translations"
-  translationfiles.runtimepath = "$$translationfiles.path"
-}
-win32 {
-  translationfiles.path = "$$INSTALLBASE/translations"
-  translationfiles.runtimepath = "translations"
-}
-### Important (if you use Python): the following two paths are where the application will expect 
-### scidavisrc.py and scidavisUtil.py, respectively. Alternatively you can also put scidavisrc.py 
-### (or ".scidavis.py") into the users home directory. scidavisUtil.py must be either in the 
-### directory specified here or somewhere else in the python path (sys.path) where "import" can find it
-unix {
-  # where scidavisrc.py is installed
-  pythonconfig.path = /etc
-  # where scidavisrc.py is searched for at runtime
-  pythonconfig.runtimepath = "$$pythonconfig.path"
-  # where the scidavisUtil python modules is installed
-  pythonutils.path = $$INSTALLBASE/share/scidavis
-  # where the scidavisUtil python module is searched for at runtime
-  pythonutils.runtimepath = "$$pythonutils.path"
-}
-win32 {
-  pythonconfig.path = "$$INSTALLBASE"
-  pythonconfig.runtimepath = .
-  pythonutils.path = "$$INSTALLBASE"
-  pythonutils.runtimepath = .
-}
-
-### (remark: muparser.pri and python.pri must be included after defining INSTALLBASE )
-### building without muParser does not work yet (but will in a future version)
-include( muparser.pri )
-### comment out the following line to deactivate Python scripting support
-include( python.pri )
-
-################### start of liborigin block 
-############ liborigin support has been discontinued due to the lack 
-############ of a developer who maintains the Origin import code;
-############ if you are interested in reviving Origin support, please contact 
-############ the SciDAVis developers
-### Note to packagers: If you want to use systemwide installed liborigin
-### instead of the one provided in "3rdparty", uncomment the following 2 lines:
-# CONFIG += dynamic_liborigin
-# LIBS += -lorigin
-### Unfortunately, due to liborigin being in alpha stage, we cannot promise
-### that SciDAVis works with any other version that the one in "3rdparty".
-################### end of liborigin block 
-
-#############################################################################
-### Default settings for Linux / Mac OS X
-#############################################################################
-### Link statically against Qwt and Qwtplot3D (in order to make sure they
-### are compiled against Qt4), dynamically against everything else.
-#############################################################################
-
-unix:INCLUDEPATH  += ../3rdparty/qwtplot3d/include
-unix:LIBS         += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
-
-unix:INCLUDEPATH  += ../3rdparty/qwt/src
-unix:LIBS         += ../3rdparty/qwt/lib/libqwt.a
-
-unix:LIBS         += -L/usr/lib$${libsuff}
-unix:LIBS         += -lgsl -lgslcblas
-unix:LIBS         += -lmuparser
-unix:INCLUDEPATH  += /usr/include/muParser
-
-#############################################################################
-### Link everything dynamically
-#############################################################################
-
-#unix:INCLUDEPATH  += /usr/include/qwt5
-#unix:LIBS         += -L/usr/lib$${libsuff}
-## dynamically link against Qwt(3D) installed system-wide
-## WARNING: make sure they are compiled against >= Qt4.2
-## Mixing Qt 4.2 and Qt >= 4.3 compiled stuff may also 
-## cause problems.
-#unix:INCLUDEPATH  += /usr/include/qwtplot3d
-#unix:LIBS         += -lqwtplot3d
-#unix:LIBS         += -lqwt
-##dynamically link against GSL and muparser installed system-wide
-#unix:LIBS         += -lgsl -lgslcblas -lmuparser
-
-#############################################################################
-### Default settings for Windows
-#############################################################################
-### Static linking mostly, except Qt, Python and QwtPlot3D.
-### The latter seems to be impossible to link statically on Windows.
-#############################################################################
-
-win32:INCLUDEPATH       += ../3rdparty/qwtplot3d/include
-win32:INCLUDEPATH       += ../3rdparty/qwt/src
-win32:INCLUDEPATH       += ../3rdparty/gsl-1.8/include
-win32:INCLUDEPATH       += ../3rdparty/muparser/include
-
-win32:LIBS        += ../3rdparty/qwtplot3d/lib/qwtplot3d.dll
-win32:LIBS        += ../3rdparty/qwt/lib/libqwt.a
-win32:LIBS        += ../3rdparty/gsl-1.8/lib/libgsl.a
-win32:LIBS        += ../3rdparty/gsl-1.8/lib/libgslcblas.a
-win32:LIBS        += ../3rdparty/muparser/lib/libmuparser.a
 
 #############################################################################
 ###                    END OF USER-SERVICEABLE PART                       ###

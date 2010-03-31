@@ -539,9 +539,11 @@ void ConfigDialog::initAppPage()
 	boxMinutes->setEnabled(app->autoSave);
 	topBoxLayout->addWidget( boxMinutes, 4, 1 );
 
+#ifdef SEARCH_FOR_UPDATES
 	boxSearchUpdates = new QCheckBox();
 	boxSearchUpdates->setChecked(app->autoSearchUpdates);
 	topBoxLayout->addWidget( boxSearchUpdates, 5, 0, 1, 2 );
+#endif
 
 	topBoxLayout->setRowStretch( 6, 1 );
 
@@ -882,7 +884,9 @@ void ConfigDialog::languageChange()
 	lblPanelsText->setText(tr("Panels text"));
 	lblPanels->setText(tr("Panels"));
 	boxSave->setText(tr("Save every"));
+#ifdef SEARCH_FOR_UPDATES
 	boxSearchUpdates->setText(tr("Check for new versions at startup"));
+#endif
 	boxMinutes->setSuffix(tr(" minutes"));
 	lblScriptingLanguage->setText(tr("Default scripting language"));
 
@@ -1083,7 +1087,9 @@ void ConfigDialog::apply()
 	app->changeAppFont(appFont);
 	setFont(appFont);
 	app->changeAppStyle(boxStyle->currentText());
+#ifdef SEARCH_FOR_UPDATES
 	app->autoSearchUpdates = boxSearchUpdates->isChecked();
+#endif
 	app->setSaveSettings(boxSave->isChecked(), boxMinutes->value());
 	app->defaultScriptingLang = boxScriptingLanguage->currentText();
 

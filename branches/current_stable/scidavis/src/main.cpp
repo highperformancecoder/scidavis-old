@@ -147,10 +147,12 @@ int main( int argc, char ** argv )
 		mw->newTable();
 		mw->show();
 		mw->savedProject();
+#ifdef SEARCH_FOR_UPDATES
 		if (mw->autoSearchUpdates){
 			mw->autoSearchUpdatesRequest = true;
 			mw->searchForUpdates();
 		}
+#endif
 		mw->parseCommandLineArguments(args);
 	}
 	app.connect( &app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()) );

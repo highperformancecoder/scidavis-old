@@ -309,7 +309,9 @@ void ApplicationWindow::init()
 			this, SLOT(scriptError(const QString&,const QString&,int)));
 	connect(scriptEnv, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
 
+#ifdef SEARCH_FOR_UPDATES
 	connect(&http, SIGNAL(done(bool)), this, SLOT(receivedVersionFile(bool)));
+#endif
 
 	// this has to be done after connecting scriptEnv
 	scriptEnv->initialize();
@@ -330,7 +332,9 @@ void ApplicationWindow::initGlobalConstants()
 	logInfo=QString();
 	savingTimerId=0;
 
+#ifdef SEARCH_FOR_UPDATES
 	autoSearchUpdatesRequest = false;
+#endif
 
 	show_windows_policy = ActiveFolder;
 
@@ -919,9 +923,13 @@ void ApplicationWindow::initMainMenu()
 #endif
 	help->addSeparator();
 	help->addAction(actionHomePage);
+#ifdef SEARCH_FOR_UPDATES
 	help->addAction(actionCheckUpdates);
+#endif
+#ifdef DOWNLOAD_LINKS
 	help->addAction(actionDownloadManual);
 	help->addAction(actionTranslations);
+#endif
 	help->addSeparator();
 	help->addAction(actionHelpForums);
 	help->addAction(actionHelpBugReports);
@@ -4116,7 +4124,9 @@ void ApplicationWindow::readSettings()
 
 	/* ---------------- group General --------------- */
 	settings.beginGroup("/General");
+#ifdef SEARCH_FOR_UPDATES
 	autoSearchUpdates = settings.value("/AutoSearchUpdates", false).toBool();
+#endif
 	appLanguage = settings.value("/Language", QLocale::system().name().section('_',0,0)).toString();
 	show_windows_policy = (ShowWindowsPolicy)settings.value("/ShowWindowsPolicy", ApplicationWindow::ActiveFolder).toInt();
 
@@ -4208,13 +4218,26 @@ void ApplicationWindow::readSettings()
 #endif
 #endif
 
+#ifdef PLUGIN_PATH
+	QString defaultFitPluginsPath = PLUGIN_PATH;
+#else // defined PLUGIN_PATH
 #ifdef Q_OS_WIN
-	fitPluginsPath = settings.value("/FitPlugins", "fitPlugins").toString();
+	QString defaultFitPluginsPath = "fitPlugins";
+#else
+	QString defaultFitPluginsPath = "/usr/lib/scidavis/plugins";
+#endif
+#endif // defined PLUGIN_PATH
+#ifdef DYNAMIC_PLUGIN_PATH
+	fitPluginsPath = settings.value("/FitPlugins", defaultFitPluginsPath).toString();
+#else // defined PLUGIN_PATH
+	fitPluginsPath = defaultFitPluginsPath;
+#endif
+
+#ifdef Q_OS_WIN
 	templatesDir = settings.value("/TemplatesDir", qApp->applicationDirPath()).toString();
 	asciiDirPath = settings.value("/ASCII", qApp->applicationDirPath()).toString();
 	imagesDirPath = settings.value("/Images", qApp->applicationDirPath()).toString();
 #else
-	fitPluginsPath = settings.value("/FitPlugins", "/usr/lib/scidavis/plugins").toString();
 	templatesDir = settings.value("/TemplatesDir", QDir::homePath()).toString();
 	asciiDirPath = settings.value("/ASCII", QDir::homePath()).toString();
 	imagesDirPath = settings.value("/Images", QDir::homePath()).toString();
@@ -4398,7 +4421,9 @@ void ApplicationWindow::saveSettings()
 
 	/* ---------------- group General --------------- */
 	settings.beginGroup("/General");
+#ifdef SEARCH_FOR_UPDATES
 	settings.setValue("/AutoSearchUpdates", autoSearchUpdates);
+#endif
 	settings.setValue("/Language", appLanguage);
 	settings.setValue("/ShowWindowsPolicy", show_windows_policy);
 	settings.setValue("/RecentProjects", recentProjects);
@@ -10866,8 +10891,10 @@ void ApplicationWindow::createActions()
 	actionMultiPeakLorentz = new QAction(tr("&Lorentzian..."), this);
 	connect(actionMultiPeakLorentz, SIGNAL(activated()), this, SLOT(fitMultiPeakLorentz()));
 
+#ifdef SEARCH_FOR_UPDATES
 	actionCheckUpdates = new QAction(tr("Search for &Updates"), this);
 	connect(actionCheckUpdates, SIGNAL(activated()), this, SLOT(searchForUpdates()));
+#endif // defined SEARCH_FOR_UPDATES
 
 	actionHomePage = new QAction(tr("&SciDAVis Homepage"), this);
 	connect(actionHomePage, SIGNAL(activated()), this, SLOT(showHomePage()));
@@ -10878,11 +10905,13 @@ void ApplicationWindow::createActions()
 	actionHelpBugReports = new QAction(tr("Report a &Bug"), this);
 	connect(actionHelpBugReports, SIGNAL(triggered()), this, SLOT(showBugTracker()));
 
+#ifdef DOWNLOAD_LINKS
 	actionDownloadManual = new QAction(tr("Download &Manual"), this);
 	connect(actionDownloadManual, SIGNAL(activated()), this, SLOT(downloadManual()));
 
 	actionTranslations = new QAction(tr("&Translations"), this);
 	connect(actionTranslations, SIGNAL(activated()), this, SLOT(downloadTranslation()));
+#endif
 
 #ifdef SCRIPTING_DIALOG
 	actionScriptingLang = new QAction(tr("Scripting &Language"), this);
@@ -11258,11 +11287,15 @@ void ApplicationWindow::translateActionsStrings()
 	actionMultiPeakGauss->setMenuText(tr("&Gaussian..."));
 	actionMultiPeakLorentz->setMenuText(tr("&Lorentzian..."));
 	actionHomePage->setMenuText(tr("&SciDAVis Homepage"));
+#ifdef SEARCH_FOR_UPDATES
 	actionCheckUpdates->setMenuText(tr("Search for &Updates"));
+#endif
 	actionHelpForums->setText(tr("Visit SciDAVis &Forums"));
 	actionHelpBugReports->setText(tr("Report a &Bug"));
+#ifdef DOWNLOAD_LINKS
 	actionDownloadManual->setMenuText(tr("Download &Manual"));
 	actionTranslations->setMenuText(tr("&Translations"));
+#endif
 
 #ifdef SCRIPTING_DIALOG
 	actionScriptingLang->setMenuText(tr("Scripting &Language"));
@@ -11749,6 +11782,7 @@ void ApplicationWindow::fitMultiPeak(int profile)
 	}
 }
 
+#ifdef DOWNLOAD_LINKS
 void ApplicationWindow::downloadManual()
 {
 	QDesktopServices::openUrl(QUrl("http://sourceforge.net/project/showfiles.php?group_id=199120"));
@@ -11758,6 +11792,7 @@ void ApplicationWindow::downloadTranslation()
 {
 	QDesktopServices::openUrl(QUrl("http://sourceforge.net/project/showfiles.php?group_id=199120"));
 }
+#endif // defined DOWNLOAD_LINKS
 
 void ApplicationWindow::showHomePage()
 {
@@ -13213,6 +13248,8 @@ void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)
 	folders->blockSignals(false);
 }
 
+#ifdef SEARCH_FOR_UPDATES
+
 void ApplicationWindow::searchForUpdates()
 {
     int choice = QMessageBox::question(this, versionString(),
@@ -13269,6 +13306,8 @@ void ApplicationWindow::receivedVersionFile(bool error)
 		autoSearchUpdatesRequest = false;
 	}
 }
+
+#endif // defined SEARCH_FOR_UPDATES
 
 /*!
   Turns 3D animation on or off

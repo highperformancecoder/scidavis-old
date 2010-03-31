@@ -26,6 +26,7 @@ win32:LIBS        += ../../3rdparty/gsl-1.8/lib/libgslcblas.a
 # This is used as default on unix systems such as
 # Linux, Mac OS X and *BSD.
 unix:LIBS += -L/usr/lib$${libsuff} -lgsl -lgslcblas
+#unix:LIBS         += /usr/lib/libgsl.a /usr/lib/libgslcblas.a
 
 # where to install the plugins
 unix:target.path=/usr/lib$${libsuff}/scidavis/plugins

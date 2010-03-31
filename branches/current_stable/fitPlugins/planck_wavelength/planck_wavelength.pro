@@ -17,6 +17,7 @@ win32:LIBS        += ../../3rdparty/gsl-1.8/lib/libgsl.a
 win32:LIBS        += ../../3rdparty/gsl-1.8/lib/libgslcblas.a
 
 unix:LIBS += -L/usr/lib$${libsuff} -lgsl -lgslcblas
+#unix:LIBS         += /usr/lib/libgsl.a /usr/lib/libgslcblas.a
 
 SOURCES = planck_wavelength.c
 

@@ -34,7 +34,9 @@
 #include <QMainWindow>
 #include <Q3ListView>
 #include <Q3Header>
+#ifdef CHECK_FOR_UPDATES
 #include <QHttp>
+#endif
 #include <QFile>
 #include <QSplitter>
 #include <QDesktopServices>
@@ -717,21 +719,25 @@ public slots:
 
 	void updateRecentProjectsList();
 
+#ifdef SEARCH_FOR_UPDATES
 	//!  connected to the done(bool) signal of the http object
 	void receivedVersionFile(bool error);
 	//!  called when the user presses the actionCheckUpdates
 	void searchForUpdates();
+#endif
 
 	//! Open SciDAVis homepage in external browser
 	void showHomePage();
-	//! Open forums page at berliOS in external browser
+	//! Open forums page at SF.net in external browser
 	void showForums();
-	//! Open bug tracking system at berliOS in external browser
+	//! Open bug tracking system at SF.net in external browser
 	void showBugTracker();
+#ifdef DOWNLOAD_LINKS
 	//! Show download page in external browser
 	void downloadManual();
 	//! Show translations page in external browser
 	void downloadTranslation();
+#endif
 
 	void parseCommandLineArguments(const QStringList& args);
 	void createLanguagesList();
@@ -947,7 +953,10 @@ public:
 
 	//! Path to the folder where the last template file was opened/saved
 	QString templatesDir;
-	bool smooth3DMesh, autoScaleFonts, autoResizeLayers, autoSearchUpdates;
+	bool smooth3DMesh, autoScaleFonts, autoResizeLayers;
+#ifdef SEARCH_FOR_UPDATES
+	bool autoSearchUpdates;
+#endif
 	bool confirmCloseTable, confirmCloseMatrix, confirmClosePlot2D, confirmClosePlot3D;
 	bool confirmCloseFolder, confirmCloseNotes;
 	bool canvasFrameOn, titleOn, autoSave, drawBackbones, allAxesOn, autoscale2DPlots, antialiasing2DPlots;
@@ -994,8 +1003,10 @@ public:
 	int plotMenuID, newMenuID, recentMenuID, setAsMenuID, fillMenuID; 
 	int translateMenuID, smoothMenuID, filterMenuID, fitExpMenuID, multiPeakMenuID;
 
+#ifdef SEARCH_FOR_UPDATES
 	//! Equals true if an automatical search for updates was performed on start-up otherwise is set to false;
 	bool autoSearchUpdatesRequest;
+#endif
 
 	//! The scripting language to use for new projects.
 	QString defaultScriptingLang;
@@ -1017,10 +1028,12 @@ private:
 	//! Stores the pointers to the dragged items from the FolderListViews objects
 	QList<Q3ListViewItem *> draggedItems;
 
+#ifdef CHECK_FOR_UPDATES
 	//! Used when checking for new versions
 	QHttp http;
 	//! Used when checking for new versions
 	QBuffer version_buffer;
+#endif
 
 	Graph *lastCopiedLayer;
 	QSplitter *explorerSplitter;
@@ -1079,8 +1092,14 @@ private:
 	QAction *actionLowPassFilter, *actionHighPassFilter, *actionBandPassFilter, *actionBandBlockFilter;
 	QAction *actionConvolute, *actionDeconvolute, *actionCorrelate, *actionAutoCorrelate;
 	QAction *actionTranslateHor, *actionTranslateVert;
-	QAction *actionBoxPlot, *actionMultiPeakGauss, *actionMultiPeakLorentz, *actionCheckUpdates;
-	QAction *actionHomePage, *actionDownloadManual, *actionTranslations;
+	QAction *actionBoxPlot, *actionMultiPeakGauss, *actionMultiPeakLorentz;
+#ifdef SEARCH_FOR_UPDATES
+	QAction *actionCheckUpdates;
+#endif
+	QAction *actionHomePage;
+#ifdef DOWNLOAD_LINKS
+	QAction *actionDownloadManual, *actionTranslations;
+#endif
 	QAction *actionHelpForums, *actionHelpBugReports;
 	QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;
 	QAction *actionNextWindow, *actionPrevWindow;
