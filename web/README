@@ -10,6 +10,7 @@ in all required packages using gem install:
 gem install webgen
 gem install RedCloth
 gem install coderay
+gem install simple-rss
 
 After that, all you have to do is run the command "webgen" from this directory.
 This will produce a new subdirectory "output" containing the generated site.

@@ -50,8 +50,14 @@
 				<%=
 				if $newscontent.nil?
 					require 'open-uri'
-					open('http://sourceforge.net/export/projnews.php?group_id=199120&limit=5&flat=0&show_summaries=1') do |http|
-						$newscontent = http.read
+					require 'simple-rss'
+					feed = SimpleRSS.parse open('http://sourceforge.net/export/rss2_projnews.php?group_id=199120')
+					$newscontent = ""
+					for item in feed.entries do
+						$newscontent += "<p><a href=\"#{item.link}\"><strong>#{item.title}</strong></a><br/>\n"
+						$newscontent += "<small class=\"date\">#{item.pubDate}</small><br/>\n"
+						$newscontent += item.description + "<br/>\n"
+						$newscontent += "<a href=\"#{item.link}\">Read more&raquo;</a></p>"
 					end
 				end
 				$newscontent
