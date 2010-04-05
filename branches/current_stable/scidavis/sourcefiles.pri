@@ -129,7 +129,6 @@ HEADERS  += src/ApplicationWindow.h \
             src/ImageMarker.h \
             src/ImageDialog.h \
             src/fit_gsl.h \
-            src/nrutil.h\
             src/MultiLayer.h\
             src/LayerDialog.h \
             src/IntDialog.h \
@@ -259,7 +258,6 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/RenameWindowDialog.cpp \
             src/MyWidget.cpp\
             src/InterpolationDialog.cpp\
-            src/nrutil.cpp\
             src/fit_gsl.cpp\
             src/SmoothCurveDialog.cpp\
             src/FilterDialog.cpp\

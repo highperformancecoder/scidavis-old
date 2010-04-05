@@ -30,6 +30,7 @@
 #define SMOOTHFILTER_H
 
 #include "Filter.h"
+#include <gsl/gsl_matrix_double.h>
 
 class SmoothFilter : public Filter
 {
@@ -55,17 +56,19 @@ private:
     void smoothFFT(double *x, double *y);
     void smoothAverage(double *x, double *y);
     void smoothSavGol(double *x, double *y);
+    void smoothModifiedSavGol(double *x, double *y);
+	 static int savitzkyGolayCoefficients(int points, int polynom_order, gsl_matrix *h);
 
     //! The smooth method.
     SmoothMethod d_method;
 
-    //! The number of adjacents points used to smooth the data set.
-    int d_smooth_points;
+    //! The number of (right) adjacents points used to smooth the data set.
+    int d_right_points;
 
-    //! The number of left adjacents points used by the Savitky-Golay algorithm.
-    int d_sav_gol_points;
+    //! The number of left adjacents points used by the Savitzky-Golay algorithm.
+    int d_left_points;
 
-    //! Polynomial order in the Savitky-Golay algorithm (see Numerical Receipes in C for details).
+    //! Polynomial order in the Savitzky-Golay algorithm.
     int d_polynom_order;
 };
 
