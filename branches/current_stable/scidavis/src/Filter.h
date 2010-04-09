@@ -86,7 +86,7 @@ class Filter : public QObject
 
         bool error(){return d_init_err;};
 
-	protected:
+	private:
         void init();
 
         /**
@@ -99,6 +99,7 @@ class Filter : public QObject
         //! Same as curveData, but sorts the points by their x value.
         int sortedCurveData(QwtPlotCurve *c, double start, double end, double **x, double **y);
 
+	protected:
 		  virtual bool isDataAcceptable();
 
         //! Adds the result curve to the target output plot window. Creates a hidden table and frees the input data from memory.
