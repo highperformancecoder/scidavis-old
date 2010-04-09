@@ -2935,7 +2935,61 @@ bool Graph::canConvertTo(QwtPlotCurve *c, CurveType type)
 
 void Graph::setCurveType(int curve_index, CurveType type, bool update)
 {
-	if (type == c_type[curve_index]) return;
+	CurveType old_type = static_cast<CurveType>(c_type[curve_index]);
+	// nothing changed
+	if (type == old_type) return;
+	// not all types can be modified cleanly
+	if (type != Line && type != Scatter && type != LineSymbols && type != VerticalBars
+			&& type != Area && type != VerticalDropLines && type != Spline && type != HorizontalSteps
+			&& type != HorizontalBars && type != VerticalSteps)
+		return;
+	if (old_type != Line && old_type != Scatter && old_type != LineSymbols && old_type != VerticalBars
+			&& old_type != Area && old_type != VerticalDropLines && old_type != Spline && old_type != HorizontalSteps
+			&& old_type != HorizontalBars && old_type != VerticalSteps)
+		return;
+
+	if ((type == VerticalBars || type == HorizontalBars)
+			!= (old_type == VerticalBars || old_type == HorizontalBars)) {
+		// bar curves are represented by a different class than the other curve types, which makes
+		// changing from/to horizontal or vertical bars more difficult
+		DataCurve *old_curve = static_cast<DataCurve*>(curve(curve_index));
+		DataCurve *new_curve = 0;
+		switch (type) {
+			case Histogram:
+			case Box:
+			case Pie:
+				return;
+			case VerticalBars:
+				new_curve = new QwtBarCurve(QwtBarCurve::Vertical,
+						old_curve->table(), old_curve->xColumnName(), old_curve->yColumnName(),
+						old_curve->startRow(), old_curve->endRow());
+				new_curve->setStyle(QwtPlotCurve::UserCurve);
+				break;
+			case HorizontalBars:
+				new_curve = new QwtBarCurve(QwtBarCurve::Horizontal,
+						old_curve->table(), old_curve->xColumnName(), old_curve->yColumnName(),
+						old_curve->startRow(), old_curve->endRow());
+				new_curve->setStyle(QwtPlotCurve::UserCurve);
+				break;
+			default:
+				new_curve = new DataCurve(
+						old_curve->table(), old_curve->xColumnName(), old_curve->yColumnName(),
+						old_curve->startRow(), old_curve->endRow());
+				break;
+		}
+
+		old_curve->clearErrorBars();
+		if (int i = d_fit_curves.indexOf(old_curve) >= 0)
+			d_fit_curves.replace(i, new_curve);
+
+		d_plot->removeCurve(c_keys[curve_index]);
+		c_keys[curve_index] = d_plot->insertCurve(new_curve);
+		new_curve->loadData();
+
+		if (d_range_selector && old_curve == d_range_selector->selectedCurve())
+			d_range_selector->setSelectedCurve(new_curve);
+	}
+
 	c_type[curve_index] = type;
 	if (!update) return;
 
