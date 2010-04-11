@@ -460,7 +460,7 @@ Column *MuParserScript::resolveColumnPath(const QString &path) {
 	}
 
 	// finally, look up the column in the table
-	result = table->d_future_table->column(columnName);
+	result = table->d_future_table->column(columnName, false);
 	if (!result)
 		throw mu::Parser::exception_type(qPrintable(tr("There's no column named %1 in table %2!")
 					.arg(columnName).arg(table->d_future_table->path())));
@@ -550,7 +550,7 @@ bool MuParserScript::translateLegacyFunctions(QString &input) {
 				// do escaping of path argument
 				columnArgument.replace("\\","\\\\");
 				columnArgument.replace("/", "\\/");
-			} else if (table && table->d_future_table->column(arguments.at(0))) {
+			} else if (table && table->d_future_table->column(arguments.at(0), false)) {
 				// hack for ambiguous legacy syntax:
 				// col(name) -> column("name"), if name is a column of the current table
 				columnArgument = "\"" + arguments.at(0) + "\"";

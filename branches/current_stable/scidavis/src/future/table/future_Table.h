@@ -146,7 +146,7 @@ class Table : public AbstractPart
 		 * Columns should be addressed by their index. 
 		 * This method is mainly meant to be used in scripts.
 		 */
-		Column* column(const QString & name) const;
+		Column* column(const QString & name, bool legacy_kludge=true) const;
 		int columnIndex(const Column * col) const;
 		//! Set the number of columns
 		void setColumnCount(int new_size);

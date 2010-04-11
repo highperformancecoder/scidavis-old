@@ -131,7 +131,7 @@ Column * Table::column(int index) const
 	return d_table_private->column(index); 
 }
 
-Column * Table::column(const QString & name) const
+Column * Table::column(const QString & name, bool legacy_kludge) const
 { 
 	// TODO for 0.3.0: remove all name concatenation with _ in favor of Column * pointers
 	int pos=name.find("_",false);
@@ -139,7 +139,7 @@ Column * Table::column(const QString & name) const
 	for (int i=0; i<columnCount(); i++)
 	{
 		Column *col = d_table_private->column(i);
-		if (col->name() == name || col->name() == label)
+		if (col->name() == name || (legacy_kludge && col->name() == label))
 			return col;
 	}
 

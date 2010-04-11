@@ -306,7 +306,10 @@ public:
   void setNumRows(int);
   void setNumCols(int);
   Column * column(int index) const;
-  Column * column(const QString & name) const;
+  Column * column(const QString & name) const /NoDerived/;
+%MethodCode
+  sipRes = sipCpp->d_future_table->column(*a0, false);
+%End
 
   Column * __getitem__(int index) const /NoDerived/;
 %MethodCode
