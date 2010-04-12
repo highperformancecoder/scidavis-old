@@ -1,4 +1,4 @@
-<title>Mathematical Expressions and Scripting</title>
+
 <indexterm><primary>Scripting</primary></indexterm>
 
   <para>&appname; supports different interpreters
@@ -1412,13 +1412,21 @@ table("my-table").column("2").remove()
 		 </sect3>
 		 <sect3><title>class Column (inherits AbstractAspect)</title>
 			 <para>Represents a column in a table.</para>
+			 <para>In addition to the valueAt()/setValueAt() interface described below, starting with
+				 &appname; 0.2.4, Y columns support
+				 getting/setting row values via the values in the corresponding X column. This is done
+				 using Python's item access notation for sequence types (as in col["abc"]).</para>
 			 <programlisting width="80">
 # basic access
-col = newTable("tabula1",2,20).column("1")
+tab = newTable("tabula1",2,20)
+col = tab.column("1")
 col.setValueAt(1, 123.0)
 print col.valueAt(1)
 # replacing multiple values at once is more efficient than setting them one at a time
 col.replaceValues(5, [11.2, 12.3, 23.4, 34.5, 45.6])
+# set a value in the second column based on the content of the first one
+# (needs &appname; >= 0.2.4)
+tab.column("2")[23.4] = 46.8
 dest = table("tabula1").column("2")
 # also, copying from another column can be done in one go:
 dest.copy(col, 5, 2, 10)
@@ -1470,7 +1478,7 @@ dest.copy(col, 5, 2, 10)
 				 </varlistentry>
 				 <varlistentry>
 					 <term>isInvalid(int)</term>
-					 <listitem>Returns boolean indicating whether the given row is marke as empty/invalid.</listitem>
+					 <listitem>Returns boolean indicating whether the given row is marked as empty/invalid.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>formula(int)</term>
@@ -1486,11 +1494,11 @@ dest.copy(col, 5, 2, 10)
 				 </varlistentry>
 				 <varlistentry>
 					 <term>valueAt(int)</term>
-					 <listitem>Retrieve value of the specified cell, assuming that the column has columnMode() == "Numeric".</listitem>
+					 <listitem>Retrieve value of the specified cell (given by 0-based index), assuming that the column has columnMode() == "Numeric".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setValueAt(int, double)</term>
-					 <listitem>Set value of specified cell, assuming that the column has columnMode() == "Numeric".</listitem>
+					 <listitem>Set value of specified cell (given by 0-based index), assuming that the column has columnMode() == "Numeric".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>replaceValues(int, list of double values)</term>
@@ -1498,11 +1506,11 @@ dest.copy(col, 5, 2, 10)
 				 </varlistentry>
 				 <varlistentry>
 					 <term>textAt(int)</term>
-					 <listitem>Retrieve value of the specified cell, assuming that the column has columnMode() == "Text".</listitem>
+					 <listitem>Retrieve value of the specified cell (given by 0-based index), assuming that the column has columnMode() == "Text".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setTextAt(int, string)</term>
-					 <listitem>Set value of specified cell, assuming that the column has columnMode() == "Text".</listitem>
+					 <listitem>Set value of specified cell (given by 0-based index), assuming that the column has columnMode() == "Text".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>replaceTexts(int, list of strings)</term>
@@ -1510,31 +1518,39 @@ dest.copy(col, 5, 2, 10)
 				 </varlistentry>
 				 <varlistentry>
 					 <term>dateAt(int)</term>
-					 <listitem>Retrieve value of the specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
+					 <listitem>Retrieve value of the specified cell (given by 0-based index), assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setDateAt(int, QDate)</term>
-					 <listitem>Set value of specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
+					 <listitem>Set value of specified cell (given by 0-based index), assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>timeAt(int)</term>
-					 <listitem>Retrieve value of the specified cell, assuming that the column has columnMode() == "DateTime".</listitem>
+					 <listitem>Retrieve value of the specified cell (given by 0-based index), assuming that the column has columnMode() == "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setTimeAt(int, QTime)</term>
-					 <listitem>Set value of specified cell, assuming that the column has columnMode() == "DateTime".</listitem>
+					 <listitem>Set value of specified cell (given by 0-based index), assuming that the column has columnMode() == "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>dateTimeAt(int)</term>
-					 <listitem>Retrieve value of the specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
+					 <listitem>Retrieve value of the specified cell (given by 0-based index), assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setDateTimeAt(int, QDateTime)</term>
-					 <listitem>Set value of specified cell, assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
+					 <listitem>Set value of specified cell (given by 0-based index), assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>replaceDateTimes(int, list of QDateTime values)</term>
 					 <listitem>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is one of "Month", "Day", "DateTime". Compared with setDateTimeAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>x()</term>
+					 <listitem>Returns the X Column associated with this (Y, xErr or yErr) column.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>y()</term>
+					 <listitem>Returns the Y Column associated with this (xErr or yErr) column, or the first Y column associated with this X column.</listitem>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
@@ -1583,7 +1599,9 @@ tmp.close()
 				 </varlistentry>
 				 <varlistentry>
 					 <term>clone()</term>
-					 <listitem>Returns a copy of this window.</listitem>
+					 <listitem>Returns a copy of this window.
+						 Added in &appname; 0.2.4.
+					 </listitem>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
@@ -1615,23 +1633,32 @@ tab.normalize()
 				 </varlistentry>
 				 <varlistentry>
 					 <term>column(string or int)</term>
-					 <listitem>Returns Column indicated by name (preferred) or 0-based index. For the latter form, keep in mind that inserting, removing or moving columns will break scripts which refer to a specific column by index.</listitem>
+					 <listitem>Returns Column indicated by name (preferred) or 0-based index. For the
+						 latter form, keep in mind that inserting, removing or moving columns will break
+						 scripts which refer to a specific column by index.
+						 Starting with &appname; 0.2.4, columns may also be accessed using the []
+						 operator, i.e. using table("table name")[column name or index].
+					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>text(string or int, int)</term>
-					 <listitem>DEPRECATED. Use column(col).textAt(row) or str(column(col).valueAt(row)) instead (depending on the column's mode).</listitem>
+					 <listitem>DEPRECATED. Use column(col).textAt(row) or str(column(col).valueAt(row)) instead (depending on the column's mode).
+					 CAVEAT: text() indices are 1-based, while column() and textAt() use more conventional 0-based indices!</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>cell(string or int, int)</term>
-					 <listitem>DEPRECATED. Use column(col).valueAt(row) instead.</listitem>
+					 <listitem>DEPRECATED. Use column(col).valueAt(row) instead.
+					 CAVEAT: cell() indices are 1-based, while column() and valueAt() use more conventional 0-based indices!</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setText(string or int, int, string</term>
-					 <listitem>DEPRECATED. Use column(col).setTextAt(row,value) instead.</listitem>
+					 <listitem>DEPRECATED. Use column(col).setTextAt(row,value) instead.
+					 CAVEAT: setText() indices are 1-based, while column() and setTextAt() use more conventional 0-based indices!</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setCell(string or int, int, double</term>
-					 <listitem>DEPRECATED. Use column(col).setValueAt(row,value) instead.</listitem>
+					 <listitem>DEPRECATED. Use column(col).setValueAt(row,value) instead.
+					 CAVEAT: setCell() indices are 1-based, while column() and setValueAt() use more conventional 0-based indices!</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>colName(int)</term>
@@ -2329,6 +2356,7 @@ layer.setTitle("Murphy Certainty Principle")
 layer.setXTitle("time")
 layer.setYTitle("motivation")
 layer.insertFunctionCurve("1/x", 0, 10)
+# the constants QwtPlot.xBottom (=2) and QwtPlot.yLeft (=0) were added in &appname; 0.2.4
 layer.setScale(QwtPlot.xBottom, 0, 10)
 layer.setScale(QwtPlot.yLeft, 0, 10)
 layer.setBackgroundColor(QtGui.QColor(18,161,0))
@@ -2406,7 +2434,9 @@ layer.replot()
 						 curve specified by formula, which is evaluated using muParser with abscissa "x", and
 						 returns a boolean indicating success or failure.
 						 Optionally, the interval [start,end] for the evaluation, the number of points
-						 where the function will be evaluated and the curve title can be given.</listitem>
+						 where the function will be evaluated and the curve title can be given.
+						 Added in &appname; 0.2.4.
+					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>insertPolarCurve(string, string, double=0, double=2*pi, string=&quot;t&quot;, int=100,
@@ -2417,7 +2447,9 @@ layer.replot()
 						 with given parameter (&quot;t&quot; by default), and returns a boolean indicating
 						 success or failure. Optionally, the interval [start,end]
 						 covered by the free parameter, the number of points where the function will be
-						 evaluated and the curve title can be overridden.</listitem>
+						 evaluated and the curve title can be overridden.
+						 Added in &appname; 0.2.4.
+					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>insertParametricCurve(string, string, double=0, double=1,
@@ -2428,7 +2460,9 @@ layer.replot()
 						 with given parameter (&quot;t&quot; by default), and returns a boolean indicating
 						 success or failure. Optionally, the interval [start,end]
 						 covered by the free parameter, the number of points where the function will be
-						 evaluated and the curvet title can be overridden.</listitem>
+						 evaluated and the curvet title can be overridden.
+						 Added in &appname; 0.2.4.
+					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>addErrorBars(string, Table, string, int=1, int=1, int=8,
@@ -2605,7 +2639,7 @@ layer.replot()
 				 <varlistentry>
 					 <term>grid()</term>
 					 <listitem>Returns the Grid object for this layer, which holds various grid-related
-						 settings. See class Grid.</listitem>
+						 settings. See class Grid. Added in &appname; 0.2.4.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>replot()</term>
@@ -2673,6 +2707,14 @@ layer.replot()
 					 <term>canvas()</term>
 					 <listitem>Gives access to the QtGui.QWidget acting as a canvas, i.e it contains all
 						 curves and markers on the layer (but not axes and title).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>pickPoint()</term>
+					 <listitem>Let the user pick a point on a curve (as with the Data Reader tool) and
+						 return the coordinates of the selected point as a QPointF (coordinates can be
+						 extracted from the result using QPointF.x() and QPointF.y()).
+						 Added in &appname; 0.2.4.
+					 </listitem>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
@@ -3002,6 +3044,13 @@ app.activeFolder().save("subproject.sciprj")
 					 <listitem>Returns the folder which is currently being displayed.</listitem>
 				 </varlistentry>
 				 <varlistentry>
+					 <term>setActiveFolder(folder)</term>
+					 <listitem>Given a Folder object, changes the active folder to it.
+						 Since MDIWindows are always added to the active folder, this is necessary for
+						 script-driven creation of objects in specific subfolders. Added in &appname; 0.2.5.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
 					 <term>rootFolder()</term>
 					 <listitem>Returns the root folder of the project.</listitem>
 				 </varlistentry>
@@ -3030,6 +3079,254 @@ app.activeFolder().save("subproject.sciprj")
 						 correctly. This is now done automatically as part of addLayer(); doing so again
 						 doesn't hurt, but is not necessary any more. 
 					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Fit (inherits QObject)</title>
+			 <para>This is the abstract base class of the various models that can be used for
+				 least-squares parameter fitting; in other words, you can only create instances of
+				 subclasses of this class, but the methods described here are common to all of these
+				 classes (ExponentialFit, SigmoidalFit etc.).</para>
+			 <programlisting width="80">
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Fit(ApplicationWindow, Layer, string)</term>
+					 <listitem>Constructor, taking the ApplicationWindow instance to which the Fit will belong,
+						 the Layer containing data to be fitted (and receiving the result curve) and a name
+						 for the fitter. Mainly interesting if you want to implement a custom fitter as a
+						 subclass of Fit.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>fit()</term>
+					 <listitem>Executes the fit (after setting data and parameters). Must be reimplemented by
+						 subclasses.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYErrorSource(ErrorSource, string="")</term>
+					 <listitem>Specify the standard errors of the Y values (compare setDataFromCurve()).
+						 ErrorSource is one of Fit.UnknownErrors (no weighting is done and errors are
+						 estimated from the variance of the input values), Fit.AssociatedErrors (the yErr
+						 column associated with the source column is used), Fit.PoissonErrors (input
+						 values are Poisson distributed, i.e. errors are equal to the square root of the
+						 values) or Fit.CustomErrors (the name of the column containing the errors is
+						 given as the second parameter).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setDataFromCurve(string, Layer)</term>
+					 <listitem>Use the curve (given by name) on the given layer as the fit data.
+						 Returns a boolean indicating success (True) or failure (False).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setDataFromCurve(string, double, double, Layer)</term>
+					 <listitem>DEPRECATED. Use the variant above followed by setInterval() instead.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setInterval(double, double)</term>
+					 <listitem>setInterval(from,to) restricts the X interval of the data points included
+						 in the fit to [from,to].</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>formula()</term>
+					 <listitem>Returns the formula of the fit model (in a format suitable for evaluation
+						 with muParser).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numParameters()</term>
+					 <listitem>Returns the number of free parameters in the fit.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setInitialValue(int, double)</term>
+					 <listitem>setInitialValue(index, value) specifies the initial value for the parameter
+						 given by index.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setInitialValues(sequence)</term>
+					 <listitem>Set initial values of all parameters at once.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>guessInitialValues()</term>
+					 <listitem>Try to determine sensible initial values for the parameters automatically.
+						 Can be reimplemented by subclasses if they want to support this feature;
+						 currently, only SigmoidalFit and MultiPeakFit can do this trick.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAlgorithm(Algorithm)</term>
+					 <listitem>Set the fitting algorithm; one of Fit.ScaledLevenbergMarquardt,
+						 Fit.UnscaledLevenbergMarquardt or Fit.NelderMeadSimplex.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTolerance(double)</term>
+					 <listitem>Set the tolerance up to which the result has to be determined. The Fit
+						 algorithm is iterated until either the desired tolerance or the maximum number of
+						 iterations (see setMaximumIterations()) is reached; in the latter case, it aborts
+						 with a failure notice.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(int)</term>
+					 <listitem>Set the color of the generated fit curve from the palette used by &appname;
+						 for automatically assigning colors to new curves. (Specifying a color by name is
+						 DEPRECATED, because its counter-intuitive behaviour was more likely to cause
+						 trouble than to make things easier.)</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutputPrecision(int)</term>
+					 <listitem>Set the number of decimal places to use when formatting numbers for output
+						 to the results log or to a graph.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>generateFunction(bool, int=100)</term>
+					 <listitem>By default, fit results are pasted into the target graph layer as a function
+						 curve. Calling generateFunction(False, num_points) causes the fit results to be
+						 written into a hidden table (with num_points data points) and plotted from there.
+						 This may be useful if you want to use fit results for further calculations.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMaximumIterations(int)</term>
+					 <listitem>Sets the maximum number of times to iterate the fitting algorithm before
+						 giving up and declaring the fit to have failed.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>showLegend()</term>
+					 <listitem>
+						 Insert information on the fit into the target graph layer.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>legendInfo()</term>
+					 <listitem>
+						 Return the information inserted by showLegend() as a string. Can be overridden by
+						 subclasses in order to customize it.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>scaleErrors(bool)</term>
+					 <listitem>
+						 Set flag indicating whether to multiply standard errors of final parameters by
+						 &chi;<sup>2</sup>/(degrees of freedom). Defaults to False.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>results()</term>
+					 <listitem>
+						 Returns the final parameters as a tuple of floats.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>errors()</term>
+					 <listitem>
+						 Returns standard errors of final parameters as a tuple of floats.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>chiSquare()</term>
+					 <listitem>
+						 Returns the sum of squares of the residuals from the best-fit line.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>parametersTable(string)</term>
+					 <listitem>
+						 Creates a Table with the given name and fills it with the final parameter values.
+						 Returns a reference to the Table window.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>covarianceMatrix(string)</term>
+					 <listitem>
+						 Creates a Matrix with the given name and fills it with the covariance matrix of
+						 the final parameter values. Returns a reference to the Matrix window.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class Folder (inherits QObject)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Folder(name)</term>
+					 <listitem>Construct a new folder with the given name. You can add it as a subfolder
+						 to an existing one using addChild() (see below).
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>windows()</term>
+					 <listitem>
+						 Returns the list of MDIWindows contained in this folder.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>name()</term>
+					 <listitem>Returns the name of this folder (a string).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>path()</term>
+					 <listitem>Returns the absolute path of this folder within its project (a string).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>folders()</term>
+					 <listitem>Returns the list of subfolders.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>folder(string, bool=True, bool=False)</term>
+					 <listitem>
+						 folder(name, case_sensitive, partial_match) returns the first subfolder matching
+						 the given name. A subfolders is considered to match if its name equals the name
+						 argument; if partial_match is True, it is also considered to match if its name
+						 starts with the name argument. Matching can be made case-insensitive by setting
+						 the case_sensitive argument to False.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>findWindow(string, bool=True, bool=True, bool=False, bool=True)</term>
+					 <listitem>findWindow(str, match_name, match_label, case_sensitive, partial_match)
+						 returns the first MDI window whose name (if match_name is True) or label (if
+						 match_label is True) matches the given string. A name or label is considered to
+						 match if it equals the string argument; if partial_match is True, it is also
+						 considered to match if its name starts with the name argument. Matching can be
+						 made case-sensitive by setting the case_sensitive argument to True.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>table(string, bool=False)</term>
+					 <listitem>table(name, recursive) returns the table of the given name in this folder;
+						 if no such table exists and recursive is True, subfolders are searched as well.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>matrix(string, bool=False)</term>
+					 <listitem>matrix(name, recursive) returns the matrix of the given name in this folder;
+						 if no such matrix exists and recursive is True, subfolders are searched as well.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>graph(string, bool=False)</term>
+					 <listitem>graph(name, recursive) returns the graph of the given name in this folder;
+						 if no such graph exists and recursive is True, subfolders are searched as well.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>note(string, bool=False)</term>
+					 <listitem>note(name, recursive) returns the note of the given name in this folder;
+						 if no such note exists and recursive is True, subfolders are searched as well.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>rootFolder()</term>
+					 <listitem>Returns the root folder of the project this folder belongs to.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>save(string)></term>
+					 <listitem>Given a file name, saves the content of this folder as a project file.
+						 Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addChild(folder)</term>
+					 <listitem>Adds another folder as a subfolder to this one.
+						 Added in &appname; 0.2.5.</listitem>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
