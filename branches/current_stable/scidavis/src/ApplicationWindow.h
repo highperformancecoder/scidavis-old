@@ -34,7 +34,7 @@
 #include <QMainWindow>
 #include <Q3ListView>
 #include <Q3Header>
-#ifdef CHECK_FOR_UPDATES
+#ifdef SEARCH_FOR_UPDATES
 #include <QHttp>
 #endif
 #include <QFile>
@@ -1028,7 +1028,7 @@ private:
 	//! Stores the pointers to the dragged items from the FolderListViews objects
 	QList<Q3ListViewItem *> draggedItems;
 
-#ifdef CHECK_FOR_UPDATES
+#ifdef SEARCH_FOR_UPDATES
 	//! Used when checking for new versions
 	QHttp http;
 	//! Used when checking for new versions
