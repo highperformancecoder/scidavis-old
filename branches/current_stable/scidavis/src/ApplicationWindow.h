@@ -783,7 +783,7 @@ public slots:
 	void deactivateFolders();
 
 	//! Changes the current folder
-	void changeFolder(Folder *newFolder, bool force = false);
+	bool changeFolder(Folder *newFolder, bool force = false);
 
 	//! Changes the current folder when the user changes the current item in the QListView "folders"
 	void folderItemChanged(Q3ListViewItem *it);

@@ -1228,6 +1228,8 @@ public:
 %MethodCode
   sipRes = sipCpp->current_folder;
 %End
+  bool changeFolder(Folder *, bool force = false) /PyName=setActiveFolder/;
+
   void saveFolder(Folder *folder, const QString& fn) /Deprecated/;
   Folder* projectFolder() /PyName=rootFolder/;
 

@@ -12863,10 +12863,10 @@ void ApplicationWindow::hideFolderWindows(Folder *f)
 	}
 }
 
-void ApplicationWindow::changeFolder(Folder *newFolder, bool force)
+bool ApplicationWindow::changeFolder(Folder *newFolder, bool force)
 {
 	if (current_folder == newFolder && !force)
-		return;
+		return false;
 
     deactivateFolders();
 	newFolder->folderListItem()->setActive(true);
@@ -12958,6 +12958,8 @@ void ApplicationWindow::changeFolder(Folder *newFolder, bool force)
 
     foreach(MyWidget *w, newFolder->windowsList())
         w->blockSignals(false);
+
+	 return true;
 }
 
 void ApplicationWindow::deactivateFolders()
