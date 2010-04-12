@@ -1856,6 +1856,11 @@ class Folder : QObject
 #include "src/Folder.h"
 %End
 public:
+  Folder(Folder *parent, const QString &name);
+  Folder(const QString &name) /NoDerived/;
+%MethodCode
+	sipCpp = new sipFolder(0, *a0);
+%End
   QList<MyWidget*> windowsList() /PyName=windows/;
 // TODO: implement signal Folder::nameChanged and make it update the project explorer; adjust renaming from GUI accordingly
 //  void setFolderName(const QString&) /PyName=setName/;
@@ -1879,6 +1884,27 @@ public:
 	ApplicationWindow *app = sipscidavis_app();
 	if (app)
 		app->saveFolder(sipCpp, *a0);
+%End
+
+	void addChild(Folder *f /Transfer/) /NoDerived/;
+%MethodCode
+	QString name = a0->objectName();
+	int i = 1;
+	while (sipCpp->subfolders().contains(name))
+		name = a0->objectName() + QString::number(i++);
+	if (a0->parent() == 0) { // adding newly constructed folder
+		a0->setParent(sipCpp);
+		a0->setObjectName(name);
+		ApplicationWindow *app = sipscidavis_app();
+		if (app) {
+			app->addFolderListViewItem(a0);
+			a0->setFolderListItem(new FolderListItem(sipCpp->folderListItem(), a0));
+		}
+	} else { // moving existing folder
+		ApplicationWindow *app = sipscidavis_app();
+		if (app)
+			app->moveFolder(a0->folderListItem(), sipCpp->folderListItem());
+	}
 %End
 
 private:
