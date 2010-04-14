@@ -1,0 +1,96 @@
+leh_header_data
+  describes layers in a window
+
+0x00:0x02    1 short, always 0
+0x02:0x03    1 byte, layer_type:(1f, 5e, 5f, de)
+0x03:0x0F    12 bytes
+0x0F:0x27    3 doubles, xrange (min,max,step)
+0x27:0x2B    1 int, value_size?)
+0x2B:0x2F    2 shorts
+0x2F:0x37    1 double
+0x37:0x3A    3 bytes, always 0x01 0x00 0x00 ?)
+0x3A:0x52    3 doubles, yrange (min,max,step)
+0x52:0x56    4 bytes
+0x56:0x5A    2 shorts, 2nd often 0x40 0x01)
+0x5A:0x62    1 double
+0x62:0x      
+	     
+0x81:0x82    1 byte, ws_heading_options
+0x88:0x89    1 byte, show 1e-5 as 0.0 in dec
+0xA7:0xA8    1 byte, 0x02:backgroud heading on
+0xA8:0xAC    4 byte, color for headings background
+	     
+0xD0:0xD2    2 char, always 'Pd' ?)
+0xD2:0xF7    37 char, label?)
+0xF7:0xF9    1 shorts, Max point per curve)
+0xF9:0x11D   9 int
+0x105:0x109  4 byte, color for headings background
+0x11D:0x129  3 int, always zero?
+0x129:0x12D  1 int
+--- version 8.0
+0x12D:0x135  2 int
+0x135:0x13D  2 int, always zero?
+0x13D:0x145  1 double
+0x145:0x155  4 int
+
+=== Observed values 
+ws_heading_options: 0x81:0x82
+    0x00 column_name
+    0x10 no_column_name 
+    0x20 column_label
+    0x40 multiline_name
+    0x08 background
+    0x04 vertical grid
+    0x02 horizontal grid
+    also OR combinations
+    
+ layer_type 0x02:0x03
+    0x0f (Graphic, empty layer ?)
+    0x1f (Graphic, 
+    0x5f (Graphic, 
+    0x5e (Worksheet,
+    0xde (Matrix,
+
+=== Info from liborigin1, or liborigin2 (>)
+Matrix
+  0x2B no_of_columns (short)
+  0x52 no_of_rows (short)
+  
+Worksheet,Excel 
+  no use
+  
+Graph 
+  0x0F:0x27 xrange (min,max,step) (3 doubles)
+  0x2B:0x2C x-major tics (1 byte)
+  0x37:0x38 x-minor tics (1 byte)
+  0x38:0x39 x-scale      (1 byte)
+  0x3A:0x52 yrange (min,max,step) (3 doubles)
+  0x56:0x57 y-major tics (1 byte)
+  0x62:0x63 y-minor tics (1 byte)
+  0x63:0x64 y-scale      (1 byte)
+  0x71:0x79 clienRect (4 shorts)
+> 0x89:0x8A borderType (1 byte ?)
+> 0x105:0x109  backgroundColor (4 bytes)
+
+
+Color reading (from liborigin2)
+  A color is given by a 4 bytes value
+  color[3] = 0x00
+     color[0] < 0x64 : type=Regular, value=color[0]
+     color[0] >= 0x64:
+        color[2] = 0x00 : type = Indexing
+	         = 0x40 : type = Mapping
+		 = 0x80 : type = RGB
+        column = color[0]-0x64 ( which data-set id is used for index,map,RGB)
+  color[3] = 0x01
+     type = Custom
+     custom[0:2] = color[0:2]
+  color[3] = 0x20
+     type = Increment
+     starting = color[1]
+  color[3] = 0xFF
+     color[0] = 0xFC : type = None
+     color[0] = 0xF7 : type = Automatic
+
+With this definition, a usually observed string 0xfc 0x00 0x00 0xff is a strong
+candidate to be a color value.

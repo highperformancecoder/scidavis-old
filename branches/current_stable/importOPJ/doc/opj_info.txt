@@ -1,0 +1,70 @@
+This is a short and compact description of OPJ files
+
+File:
+   Version                           Parameter_List:
+   Global_Header                        Parameter_Element
+   Dataset_List                         ...
+   Window_List                  
+   Parameter_List                    Parameter_Element:
+   Note_List                            name, value
+   Project_Tree                 
+   Attachment_List                   Note_List:
+                                        Note_Element
+Dataset_List:                           ...
+   Dataset_Element              
+   ...                               Note_Element:
+                                        header
+Dataset_Element:                        label
+   header                               contents
+   data                         
+   mask                              Project_Tree:
+                                        preamble1
+Window_List:                            preamble2
+   Window_Element                       Folder_Tree
+   ...                          
+                                     Folder_Tree:
+Window_Element:                         header
+   header                               name
+   Layer_List                           File_List
+                                        Folder_List
+Layer_List:                      
+   Layer_Element                     File_List:
+   ...                                  num_of_files
+                                        File_Element
+Layer_Element:                          ...  ( up to num_of_files)
+   header                             
+   Sublayer_List                
+   Curve_List                        File_Element:
+   AxisBreak_List                       preamble
+   AxisParameter_List                   data
+   AxisParameter_List                   postamble
+   AxisParameter_List           
+                                     Folder_List:
+Sublayer_List:                          num_of_folders
+   Sublayer_Element                     Folder_Tree
+                                        ...  ( up to num_of_folders)
+Sublayer_Element:                       
+   header                       
+   data1                             Attachment_List:
+   data2                                Attachment_List_1
+   data3                                Attachment_List_2
+                                
+Curve_List:                          Attachment_List_1:
+   Curve_Element                        num_of_attachments_1
+                                        Attachment_Element_1
+Curve_Element:                          ... (up to num_of_attachments_1)
+   header                               
+   data                         
+                                     Attachment_Element_1:
+AxisBreak_List:                         header
+   AxisBreak_Element                    data
+   ...                          
+                                     Attachment_List_2:
+AxisBreak_Element:                      Attachment_Element_2
+   data                                 ... (until EOF)
+                                
+AxisParameter_List:                  Attachment_Element_2:
+   AxisParameter_Element                type_and_size
+                                        header
+AxisParameter_Element:                  data
+   data

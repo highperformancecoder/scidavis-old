@@ -1,0 +1,74 @@
+weh_header_data
+  describes windows (except note windows) in a project
+
+0x00:0x02  1 short, always zero ??
+0x02:0x1B  string (25), window_name
+0x1B:0x23  4 shorts, (left,top,right,bottom) window position
+0x23:0x27  2 shorts, (width, height) window size
+0x27:0x2E  7 bytes, always zero ??
+0x2E:0x32  2 shorts, 
+0x32:0x33  1 byte, window_type
+0x33:0x34  1 byte, (0x08: layout)
+0x34:0x39  5 bytes, always zero?
+0x39:0x45  6 shorts
+0x45:0x4F  10 char, kind of window
+0x4F:0x51  1 short
+0x51:0x57  6 bytes
+0x57:0x5B  2 short
+0x5B:0x67  3 int, always zero?
+0x67:0x6A  2 bytes
+0x69:0x6A  1 byte, window_title_type
+0x6A:0x6B  1 bytes, window_state
+0x6B:0x6F  5 bytes
+0x6F:0x72  3 bytes
+0x72:0x73  1 byte, values:(0x00, 0x02, 0x80))
+0x73:0x83  2 doubles, creation and modification time
+0x83:0x8B  2 int, always zero?
+0x8B:0x9F  10 shorts
+0x9F:0xC3  always zero?
+0xC3:....  var length strings, separated by \n
+
+window_type [0x32:0x33]:
+   normal  maximized  minimized hidden
+                               
+    0x10     0x12     0x11    0x12 Graph
+    0x18                           Layout
+    0x50              0x51    0x52 Worksheet, Excel
+    0x54              0x55    0x56 Matrix
+    in OPJfile.cpp:
+       & 0x01  => window minimized
+       & 0x02  => window maximized
+    
+window_state:
+    0x10   
+    0x12 
+    0x13
+    0x5b
+    0x5c
+    0x5f
+    
+window_title_type [0x69:0x6A]
+    in OPJfile.cpp:
+       & 0x01  => title = label [0xC3:]
+       & 0x02  => title = window name
+       else    => title = Both
+       
+       & 0x08  => hidden window
+       
+=== Info from liborigin1
+Graph
+  0x23:0x27 graph_width, graph_height (2 shorts)
+
+Matrix
+  0x87:0x88 matrix_type (1 byte)
+     1 ImageView
+     2 XY
+
+=== 
+time conversions
+Julian Day Number of Unix Epoch (January 1, 1970)
+    jdn_ue = 2440587.5
+    unixtime = int((juliantime - jdn_ue) * 86400.)
+    julian = ( unixtime / 86400.0 ) + jdn_ue
+    time.strftime('%F %T',time.localtime(unixtime))
+    unixtime = time.mktime(time.strptime('YYYY-MM-DD HH:MM:SS','%Y-%m-%d %H:%M:%S'))

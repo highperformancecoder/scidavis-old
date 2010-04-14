@@ -1,0 +1,42 @@
+Info for axis parameter block. Block size is 0x1E7 (487)  bytes.
+
+f: used in readGraphAxisFormatInfo
+l: used in readGraphAxisTickLabelsInfo
+g: user in readGraphGridInfo
+
+flg 0x0F:0x13  4 bytes, color
+ l  0x13:0x15  1 short, rotation (*10)
+flg 0x15:0x17  1 short, fontsize or thickness (*500)
+   
+ l  0x1A:0x1B  1 byte, fontbold (and more ...)
+ l  0x23:0x25  1 short, dataset_id for labels
+fl  0x25:0x26  1 byte, tick valuetype (and more ...) or type_and_position 2+2+4 bits = minor+major+tpos
+flg 0x26:0x27  1 byte, hidden, but also decimalplaces and value_type_specification
+f   0x2F:0x37  1 double, axis position value for tpos = 2
+f   0x37:0x38  1 byte, axis position value for tpos = 1
+f   0x4A:0x4C  1 short, majorticklength (*10)
+
+in readGraphAxisFormatInfo:
+    0x0F:0x13  4 bytes, color
+    0x15:0x17  1 short, thickness
+    0x25:0x26  1 byte, tick type and position 2+2+4 bits = minor+major+tpos
+    0x26:0x27  1 byte, hidden
+    0x2F:0x36  1 double, axis position value for tpos = 2
+    0x37:0x38  1 byte, axis position value for tpos = 1
+    0x4A:0x4C  1 short, majorticklength (*10)
+    
+in readGraphAxisTickLabelsInfo:
+    0x0F:0x13  4 bytes, color
+    0x13:0x15  1 short, rotation
+    0x15:0x17  1 short, fontsize
+    0x1A:0x1B  1 byte, fontbold (and more ...)
+    0x23:0x25  1 short, column_oid for labels
+    0x25:0x26  1 byte, tick valuetype (and more ...)
+    0x26:0x27  1 byte, hidden, but also decimalplaces and value_type_specification
+
+in readGraphGridInfo:
+    0x0F:0x13  4 bytes, color
+    0x12:0x13  1 byte, style (overlaps with color!)
+    0x26:0x27  1 byte, hidden
+    0x15:0x17  1 short, width (*500)
+
