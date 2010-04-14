@@ -9,8 +9,7 @@ Thanks to Mauricio Troviano, we have an installer for Windows.
 
 The installer contains the necessary Qt dlls, is able to download and install Python 
 and PyQt. The manual is not included due to its
-size and our intention to update it in between releases. Translations are also included but usually
-not completed for the new release yet. Typically, updated translations will be available a few days or weeks after a release.
+size and our intention to update it in between releases.
 Note: The installer is designed for 32bit Windows. It is reported to run on 64bit Windows as well
 as long as the 32bit version of Python is installed.
 
@@ -19,18 +18,22 @@ That said, all necessary links and files can be found
 
 h1. Linux
 
-SciDAVis is included in a growing number of Linux distributions. Fedora, Mandriva, Debian (squeeze
-and sid), Ubuntu (starting with 10.04, Lucid Lynx) and PCLinuxOS reportedly allow direct
-installation from their respective package managers.
+SciDAVis is distributed as part of a growing number of Linux distributions, including the following:
+* "Fedora":http://fedoraproject.org/
+* "Mandriva":http://www.mandriva.com/
+* "Debian":http://www.debian.org (squeeze and sid, not in the stable version yet)
+* "Ubuntu":http://www.ubuntu.com (starting with 10.04, Lucid Lynx)
+* "PCLinuxOS":http://pclinuxos.com/
+* "Zenwalk":http://www.zenwalk.org (snapshot tree, not in the stable version yet)
 
-For other distributions, third-party resources exist such as the
-"Arch Linux package on the AUR":http://aur.archlinux.org/packages.php?ID=19201 ,
-a "Slackware package":http://www.ifi.unicamp.br/~fellypen/progs/scidavis/
-or the unfortunately outdated 
-"openSUSE packages on PackMan":http://packman.links2linux.org/package/scidavis.
+For other distributions, third-party resources exist such as
+* the "Arch Linux package on the AUR":http://aur.archlinux.org/packages.php?ID=19201
+* a "Slackware package":http://www.ifi.unicamp.br/~fellypen/progs/scidavis/
+* the (unfortunately outdated) "openSUSE packages on PackMan":http://packman.links2linux.org/package/scidavis
 
-If your favourite distribution doesn't contain a package yet, there are usually ways to request one
-or roll your own (see the documentation/homepage of the distribution in question).
+If your favourite distribution doesn't contain a package yet, or it is outdated, there are usually
+ways to request one or roll your own (see the documentation/homepage of the distribution in
+question).
 
 Alternatively, we offer a universal binary with most dependencies statically linked in. Note that
 this approach doesn't integrate as well with the system as a dedicated package, nor can it be
