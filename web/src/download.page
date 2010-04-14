@@ -9,7 +9,7 @@ Thanks to Mauricio Troviano, we have an installer for Windows.
 
 The installer contains the necessary Qt dlls, is able to download and install Python 
 and PyQt. The manual is not included due to its
-size and our intention to update it in between releases.
+size and our intention to update it independently of the main releases.
 Note: The installer is designed for 32bit Windows. It is reported to run on 64bit Windows as well
 as long as the 32bit version of Python is installed.
 
