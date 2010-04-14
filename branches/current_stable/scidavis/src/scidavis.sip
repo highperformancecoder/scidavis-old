@@ -1873,7 +1873,10 @@ public:
   Folder *findSubfolder(const QString&, bool=true, bool=false)  /PyName=folder/;
   MyWidget* findWindow(const QString&, bool=true, bool=true, bool=false, bool=true);
 
-  MyWidget *window(const QString &name, const char *cls="MyWidget", bool recursive=false);
+  // undocumented, unsupported method with questionable value; seeing that one has to
+  // know the confusing C++ class names to use it
+  MyWidget *window(const QString &name, const char *cls="MyWidget", bool recursive=false) /Deprecated/;
+
   Table *table(const QString &name, bool recursive=false);
   Matrix *matrix(const QString &name, bool recursive=false);
   MultiLayer *graph(const QString &name, bool recursive=false);
