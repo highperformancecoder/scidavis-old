@@ -3,6 +3,22 @@ title: Coding
 in_menu: true
 ---
 
+h1. Where to start, or: Where's the bleeding edge?
+
+If you've already had a look at our SVN repository, you'll probably be wondering about the age of
+the trunk. The reason is that bleeding-edge development is happening in collaboration with and
+in the repository (directory: 2.0) of "LabPlot":http://www.sourceforge.net/projects/labplot.
+In order to check out the latest version using the SVN command-line client, issue the following
+command:
+{coderay:: {lang: plaintext, line_numbers: false}} svn co https://labplot.svn.sourceforge.net/svnroot/labplot/2.0 scidavis {coderay}
+The collobaration has been featured on "KDE.NEWS (aka The Dot)":http://dot.kde.org/2009/10/16/labplot-and-scidavis-collaborate-future-free-scientific-plotting
+and there's a "Wiki":http://sourceforge.net/apps/mediawiki/labplot/index.php?title=Developer
+with some summaries of our plans and designs.
+
+Our current stable version (i.e. the one from which snapshots are taken for maintenance releases)
+can be checked out out using
+{coderay:: {lang: plaintext, line_numbers: false}} svn co https://scidavis.svn.sourceforge.net/svnroot/scidavis/branches/current_stable scidavis {coderay}
+
 h1. Getting started
 
 If you're already familiar with C++, Qt and Doxygen, you can safely skip this section;
@@ -21,7 +37,7 @@ If you want to learn C++, or you're looking for a reference, here's some links t
 * "C++ Programming Wikibook":http://en.wikibooks.org/wiki/C%2B%2B_Programming
 * "C++ FAQ Lite":http://www.parashift.com/c++-faq-lite
 * "FreeNode ##C++ Wiki":http://jcatki.no-ip.org/fncpp (read this before asking questions on the ##C++ IRC channel)
-* "&lt;/dream-in-code>":http://www.dreamincode.net (tutorials and forums)
+* "&lt;/dream-in-code&gt;":http://www.dreamincode.net (tutorials and forums)
 
 Naturally, we can't list every link for a popular topic like C++.
 Plus, there's lots and lots of books about C++ like ??Thinking in C++?? by Bruce Eckel,
@@ -114,6 +130,8 @@ then you do your changes, finally generating the patch as follows:
 If you're planning to contribute on a regular basis and you'd like to join the team,  introduce yourself and your plans on the
 "mailing list":https://lists.sourceforge.net/lists/listinfo/scidavis-contributors or contact project member 
 "directly":http://scidavis.sourceforge.net/contact.html.
+If you want to participate in the bleeding-edge development, the appropriate place to go is the
+"labplot mailing list":https://lists.sourceforge.net/lists/listinfo/labplot-devel.
 
 --- name:doxygen_short pipeline:tags
 {coderay:: c++}//! A computer built by pan-dimensional, hyper-intelligent beings known to men as mice.
