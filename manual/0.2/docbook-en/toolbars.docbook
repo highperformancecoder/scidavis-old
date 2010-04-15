@@ -436,7 +436,7 @@ The <emphasis>File Toolbar</emphasis> allows to access commands mainly from the 
    <entry>&add-remove-curve-icon;</entry>
    <entry></entry>
    <entry></entry>
-   <entry namest="command" nameend="description" align="center"><emphasis>Access to the curves sub-menu.</emphasis></entry>
+   <entry><emphasis>Access to the curves sub-menu.</emphasis></entry>
   </row>
   <row>
    <entry>&add-remove-curve-icon;</entry>

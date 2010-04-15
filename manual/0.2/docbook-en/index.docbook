@@ -8,7 +8,7 @@
 
 *************************************************************************
 -->
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "/usr/share/xml/docbook/schema/dtd/4.5/docbookx.dtd" [
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "/usr/share/xml/docbook/xml-dtd-4.5/docbookx.dtd" [
 <!--
 		general terms for the application
 -->

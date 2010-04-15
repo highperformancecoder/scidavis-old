@@ -169,7 +169,7 @@
     <!ENTITY spline-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/spline.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY vertical-steps-cmd  "<command>Special Line/Symbol&rarr;Vertical Steps</command>">
     <!ENTITY vertical-steps-lnk '<link linkend="vertical-steps-cmd"><command>Special Line/Symbol&rarr;Vertical Steps</command> command</link>'>
-    <!ENTITY vertical-steps-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/vert_steps.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY vertical-steps-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/vert_steps.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY horizontal-steps-cmd  "<command>Special Line/Symbol&rarr;Horizontal Steps</command>">
     <!ENTITY horizontal-steps-lnk '<link linkend="horizontal-steps-cmd"><command>Special Line/Symbol&rarr;Horizontal Steps</command> command</link>'>
     <!ENTITY horizontal-steps-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/hor_steps.png"/></imageobject></inlinemediaobject>'>
@@ -334,10 +334,10 @@
     <!ENTITY set-column-as-z-lnk '<link linkend="set-column-as-z-cmd"><command>Set Column as&rarr;Z</command> command</link>'>
   <!ENTITY set-column-as-x-error-cmd  "<command>Set Column as&rarr;X Error</command>">
     <!ENTITY set-column-as-x-error-lnk '<link linkend="set-column-as-x-error-cmd"><command>Set Column as&rarr;X Error</command> command</link>'>
-    <!ENTITY set-column-as-x-error-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/x_error.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY set-column-as-x-error-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/x_error.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY set-column-as-y-error-cmd  "<command>Set Column as&rarr;Y Error</command>">
     <!ENTITY set-column-as-y-error-lnk '<link linkend="set-column-as-y-error-cmd"><command>Set Column as&rarr;Y Error</command> command</link>'>
-    <!ENTITY set-column-as-y-error-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/y_error.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY set-column-as-y-error-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/y_error.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY set-column-as-none-cmd  "<command>Set Column as&rarr;None</command>">
     <!ENTITY set-column-as-none-lnk '<link linkend="set-column-as-none-cmd"><command>Set Column as&rarr;None</command> command</link>'>
   <!ENTITY fill-selection-with-cmd  "<command>Fill Selection With</command>">
@@ -352,41 +352,41 @@
     <!ENTITY formula-edit-mode-lnk '<link linkend="formula-edit-mode-cmd"><command>Formula Edit Mode</command> command</link>'>
   <!ENTITY edit-column-description-cmd  "<command>Edit Column Description</command>">
     <!ENTITY edit-column-description-lnk '<link linkend="edit-column-description-cmd"><command>Edit Column Description</command> command</link>'>
-    <!ENTITY edit-column-description-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/column_description.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY edit-column-description-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/column_description.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY change-column-format-cmd  "<command>Change Type &amp; Format</command>">
     <!ENTITY change-column-format-lnk '<link linkend="change-column-format-cmd"><command>Change Type &amp; Format</command> command</link>'>
     <!ENTITY change-column-format-key "<keycode>CTRL+ALT+O</keycode>">
   <!ENTITY show-comments-cmd  "<command>Show Comments</command>">
     <!ENTITY show-comments-lnk '<link linkend="show-comments-cmd"><command>Show Comments</command> command</link>'>
-    <!ENTITY show-comments-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/table_header.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY show-comments-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/table_header.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY hide-controls-cmd  "<command>Hide Controls</command>">
     <!ENTITY hide-controls-lnk '<link linkend="hide-controls-cmd"><command>Hide Controls</command> command</link>'>
     <!ENTITY hide-controls-key "<keycode>F12</keycode>">
-    <!ENTITY hide-controls-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/table_options.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY hide-controls-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/table_options.png"/></imageobject></inlinemediaobject>'>
 <!ENTITY clear-table-cmd  "<command>Clear Table</command>">
     <!ENTITY clear-table-lnk '<link linkend="clear-table-cmd"><command>Clear Table</command> command</link>'>
-    <!ENTITY clear-table-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/clear_table.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY clear-table-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/clear_table.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY sort-table-cmd  "<command>Sort Table</command>">
     <!ENTITY sort-table-lnk '<link linkend="sort-table-cmd"><command>Sort Table</command> command</link>'>
-    <!ENTITY sort-table-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/sort.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY sort-table-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/sort.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY assign-formula-cmd  "<command>Assign Formula</command>">
     <!ENTITY assign-formula-lnk '<link linkend="assign-formula-cmd"><command>Assign Formula</command> command</link>'>
     <!ENTITY assign-formula-key "<keycode>ALT+Q</keycode>">
-    <!ENTITY assign-formula-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/fx.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY assign-formula-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/fx.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY recalculate-cmd  "<command>Recalculate</command>">
     <!ENTITY recalculate-lnk '<link linkend="recalculate-cmd"><command>Recalculate</command> command</link>'>
     <!ENTITY recalculate-key "<keycode>CTRL+Return</keycode>">
-    <!ENTITY recalculate-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/recalculate.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY recalculate-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/recalculate.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY add-column-cmd  "<command>Add Column</command>">
     <!ENTITY add-column-lnk '<link linkend="add-column-cmd"><command>Add Column</command> command</link>'>
-    <!ENTITY add-column-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/add_column.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY add-column-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/add_column.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY table-dimensions-cmd  "<command>Dimensions</command>">
     <!ENTITY table-dimensions-lnk '<link linkend="table-dimensions-cmd"><command>Dimensions</command> command</link>'>
     <!ENTITY table-dimensions-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/resize.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY go-to-cell-cmd  "<command>Go To Cell</command>">
     <!ENTITY go-to-cell-lnk '<link linkend="go-to-cell-cmd"><command>Go To Cell</command> command</link>'>
     <!ENTITY go-to-cell-key "<keycode>CTRL+ALT+G</keycode>">
-    <!ENTITY go-to-cell-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/go_to_cell.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY go-to-cell-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/go_to_cell.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY table-export-ascii-cmd  "<command>Export Ascii</command>">
     <!ENTITY table-export-ascii-lnk '<link linkend="table-export-ascii-cmd"><command>Export Ascii</command> command</link>'>
   <!ENTITY convert-to-matrix-cmd  "<command>Convert to Matrix</command>">
@@ -591,7 +591,7 @@
   <!ENTITY matrix-hide-controls-cmd  "<command>Hide Controls</command>">
     <!ENTITY matrix-hide-controls-lnk '<link linkend="matrix-hide-controls-cmd"><command>Hide Controls</command> command</link>'>
     <!ENTITY matrix-hide-controls-key "<keycode>F12</keycode>">
-    <!ENTITY matrix-hide-controls-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/table_options.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY matrix-hide-controls-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/table_options.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY set-coordinates-cmd  "<command>Set Coordinates</command>">
     <!ENTITY set-coordinates-lnk '<link linkend="set-coordinates-cmd"><command>Set Coordinates</command> command</link>'>
   <!ENTITY matrix-dimensions-cmd  "<command>Dimensions</command>">
@@ -602,14 +602,14 @@
   <!ENTITY matrix-assign-formula-cmd  "<command>Assign Formula</command>">
     <!ENTITY matrix-assign-formula-lnk '<link linkend="matrix-assign-formula-cmd"><command>Assign Formula</command> command</link>'>
     <!ENTITY matrix-assign-formula-key "<keycode>ALT+Q</keycode>">
-    <!ENTITY matrix-assign-formula-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/fx.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY matrix-assign-formula-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/fx.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY matrix-recalculate-cmd  "<command>Recalculate</command>">
     <!ENTITY matrix-recalculate-lnk '<link linkend="matrix-recalculate-cmd"><command>Recalculate</command> command</link>'>
     <!ENTITY matrix-recalculate-key "<keycode>CTRL+Return</keycode>">
     <!ENTITY matrix-recalculate-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/recalculate.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY clear-matrix-cmd  "<command>Clear Matrix</command>">
     <!ENTITY clear-matrix-lnk '<link linkend="clear-matrix-cmd"><command>Clear Matrix</command> command</link>'>
-    <!ENTITY clear-matrix-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/clear_table.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY clear-matrix-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/clear_table.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY transpose-cmd  "<command>Transpose</command>">
     <!ENTITY transpose-lnk '<link linkend="transpose-cmd"><command>Transpose</command> command</link>'>
   <!ENTITY mirror-horizontally-cmd  "<command>Mirror Horizontally</command>">
@@ -621,7 +621,7 @@
   <!ENTITY matrix-go-to-cell-cmd  "<command>Go To Cell</command>">
     <!ENTITY matrix-go-to-cell-lnk '<link linkend="matrix-go-to-cell-cmd"><command>Go To Cell</command> command</link>'>
     <!ENTITY matrix-go-to-cell-key "<keycode>CTRL+ALT+G</keycode>">
-    <!ENTITY matrix-go-to-cell-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/go_to_cell.png "/></imageobject></inlinemediaobject>'>
+    <!ENTITY matrix-go-to-cell-icon '<inlinemediaobject><imageobject><imagedata format="PNG" fileref="icons/16x16/go_to_cell.png"/></imageobject></inlinemediaobject>'>
   <!ENTITY invert-cmd  "<command>Invert</command>">
     <!ENTITY invert-lnk '<link linkend="invert-cmd"><command>Invert</command> command</link>'>
   <!ENTITY determinant-cmd  "<command>Determinant</command>">

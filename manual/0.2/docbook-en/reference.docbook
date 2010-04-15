@@ -321,15 +321,15 @@ The active items in the menus depend on the active window in the project. If the
       </mediaobject>
     </informalfigure>
 <para>If your printer can handle duplex printing and/or color printing, your can select the corresponding options in the <emphasis>options</emphasis> tag of this dialog window.</para>
-    <informalfigure id="fig-print-dialog-2">
+    <informalfigure id="fig-print-dialog-3">
       <mediaobject> 
         <imageobject>
-          <imagedata  format="PNG" fileref="pics/print-dialog-1.png"/>
+          <imagedata  format="PNG" fileref="pics/print-dialog-2.png"/>
         </imageobject>
       </mediaobject>
     </informalfigure>
 <para>The properties button can be used to select the geometrics parameters of the printed output: paper size, margin, etc.</para>
-    <informalfigure id="fig-print-dialog-3">
+    <informalfigure id="fig-print-dialog-4">
       <mediaobject> 
         <imageobject>
           <imagedata  format="PNG" fileref="pics/print-dialog.png"/>
@@ -1569,6 +1569,7 @@ The active items in the menus depend on the active window in the project. If the
   <term>&differentiate-cmd;</term>
   <listitem>
     <para>Creates a new plot displaying the resulting curve of the numerical differentiation. The computation of the derivative is done by centered finite differences over the point before and the point after each data point:</para>
+	 <!-- TODO
 	  <informalequation> 
 	    <mediaobject>
 	      <imageobject>
@@ -1576,6 +1577,7 @@ The active items in the menus depend on the active window in the project. If the
 	      </imageobject>
 	    </mediaobject>
 	  </informalequation>
+	  -->
     <para>This command creates a new table which contains one column for X-values and one column for derivatives of Y-values. It also creates a new plot of the derivative. The numeric differentiation can generate a lot of noise for a given curve, and a smoothing may be necessary before this operation (see &smooth-lnk;).</para>
   </listitem>
 </varlistentry>
@@ -2028,7 +2030,7 @@ The active items in the menus depend on the active window in the project. If the
   <term>&table-export-ascii-cmd;</term>
   <listitem>
     <para>This command can be used to export the selected table to an ascii text file. If you check the option <emphasis>All</emphasis>, you will have to choose a directory in which one text file will be created for each table, the name of the files being the one of the tables.</para>
-    <informalfigure id="fig-export-ascii">
+    <informalfigure id="fig-export-ascii-2">
       <mediaobject> 
         <imageobject>
           <imagedata  format="PNG" fileref="pics/export-ascii.png"/>

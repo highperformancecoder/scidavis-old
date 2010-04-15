@@ -177,7 +177,7 @@ div.sect2 h2.sect2 a {
 		table of content at the beginning of each chapter
 */
 div.TOC {
-	background: #8FAFED url('navi_bar.png') repeat-x top;
+	background: #8FAFED url('common/navi_bar.png') repeat-x top;
 	margin-bottom: 10px;
 	margin-top: 10px;
 	margin-left: 150px;

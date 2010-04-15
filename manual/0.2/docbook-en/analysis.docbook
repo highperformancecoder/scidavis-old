@@ -191,6 +191,7 @@
 <para>This function can be accessed by the &correlate-lnk; of the &analysis-tables-menu-lnk; when a table is selected. The correlation function, also known as the covariance function is used to test the similarity of two signals <emphasis>x(t)</emphasis> and <emphasis>y(t)</emphasis>. It is computed by:</para>
 
 <equation> 
+	<title></title>
   <mediaobject>
     <imageobject>
       <imagedata format="PNG" fileref="equations/equation_covariance.png"/>
@@ -236,6 +237,7 @@
 
 <para>This function can be accessed by the &convolute-lnk; of the &analysis-tables-menu-lnk; when a table is selected. The convolution of two functions <emphasis>f<subscript>1</subscript>(x)</emphasis> and <emphasis>f<subscript>2</subscript>(x)</emphasis> is the function defined  by:</para>
 
+<!-- TODO
 <equation> 
   <mediaobject>
     <imageobject>
@@ -243,6 +245,7 @@
     </imageobject>
   </mediaobject>
 </equation>
+-->
 
 <para><emphasis>f<subscript>1</subscript>(x)</emphasis> is the signal and <emphasis>f<subscript>2</subscript>(x)</emphasis> is the transfer function.</para>
 
@@ -494,7 +497,7 @@
     </mediaobject>
   </figure>
 <para>Then, the fitting is done in the same way as for the other quick-fit commands. For the position of the data points used for the selection of the position of the peaks are just initial guesses for the fitting.</para>
-  <figure id="fig-fit-multipeak">
+  <figure id="fig-fit-multipeak-result">
     <title>The results of a &fit-multipeak-gaussian-cmd;.</title>
     <mediaobject> 
       <imageobject>
@@ -511,7 +514,7 @@
 
 <para>This dialog can be accessed by the &preferences-lnk; of the &edit-menu-lnk;. It allows to modify the way the fitted curves are drawn on the plots and some options for the presentation of the fitted values. If you want to modify some parameters related to the fitting itself, like the tolerance, you have to do it in the <link linkend="sec-non-linear-curve-fit">Fit Wizard</link>.</para>
 
- <figure id="fig-fit-multipeak">
+ <figure id="fig-fit-preference">
     <title>The preference dialog for fitting.</title>
     <mediaobject> 
       <imageobject>

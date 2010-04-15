@@ -23,7 +23,7 @@
     <para>You can have your (X,Y) values in a <link linkend="sec-intro-table">table</link>. You need to select at least one column as X values and one column as Y values. This is specified with the &set-column-as-lnk;. Then you can select the columns and use one command of the &plot-menu-lnk; to plot the data.</para>
   </listitem>
   <listitem>
-    <para>If you want to plot a function, you don't need a table. You can use directly the &new-function-plot-lnk;. This will open the corresponding dialog box and you will be able to define the mathematical expression of your function. In this case, plot can be obtained from functions in cartesian coordinates Y(X), but also in parametered coordinates (X(t),Y(t)), or in angular coordinates r(&thgr;);.</para>
+    <para>If you want to plot a function, you don't need a table. You can use directly the &new-function-plot-lnk;. This will open the corresponding dialog box and you will be able to define the mathematical expression of your function. In this case, plot can be obtained from functions in cartesian coordinates Y(X), but also in parametered coordinates (X(t),Y(t)), or in angular coordinates r(theta);.</para>
   </listitem>
   <listitem>
     <para>The combined way is to define a <link linkend="sec-intro-table">table</link>, and then to fill in the table with the results of functions. This can be done with the &assign-formula-lnk;. Then you can select the columns and use one command of the &plot-menu-lnk; to plot the data.</para>
@@ -152,7 +152,7 @@
   </mediaobject>
 </figure>
 
-<para>Polar coordinate are defined as a radius <emphasis>R</emphasis> and an angle <emphasis>&thgr;</emphasis> (in radian). The coordinates are then obtained by <emphasis>X=R.cos(&thgr;)</emphasis> and <emphasis>Y=R.sin(&thgr;)</emphasis>. You can use a parametric definition: <emphasis>R=f(t)</emphasis> and  <emphasis>&thgr;=f(t)</emphasis>, the range for <emphasis>t</emphasis> and the number of points computed in this range.</para>
+<para>Polar coordinate are defined as a radius <emphasis>R</emphasis> and an angle <emphasis>theta</emphasis> (in radian). The coordinates are then obtained by <emphasis>X=R.cos(theta)</emphasis> and <emphasis>Y=R.sin(theta)</emphasis>. You can use a parametric definition: <emphasis>R=f(t)</emphasis> and  <emphasis>theta=f(t)</emphasis>, the range for <emphasis>t</emphasis> and the number of points computed in this range.</para>
 
 <figure id="fig-direct-function-plot-3">
   <title>Direct plot of a function in polar coordinates.</title>
@@ -556,7 +556,7 @@
   </listitem>
   </itemizedlist>
 
-  <figure id="fig-example-pie">
+  <figure id="fig-example-vector">
     <title>An example of a vector plot (fluid flow around a cylinder in a laminar mode).</title>
     <mediaobject>
       <imageobject>

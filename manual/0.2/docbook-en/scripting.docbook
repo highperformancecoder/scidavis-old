@@ -1,4 +1,4 @@
-
+<title>Scripting</title>
 <indexterm><primary>Scripting</primary></indexterm>
 
   <para>&appname; supports different interpreters
@@ -3205,7 +3205,7 @@ app.activeFolder().save("subproject.sciprj")
 					 <term>scaleErrors(bool)</term>
 					 <listitem>
 						 Set flag indicating whether to multiply standard errors of final parameters by
-						 &chi;<sup>2</sup>/(degrees of freedom). Defaults to False.
+						 &chi;<superscript>2</superscript>/(degrees of freedom). Defaults to False.
 					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
