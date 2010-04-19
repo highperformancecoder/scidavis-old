@@ -149,12 +149,14 @@ FunctionDialog::FunctionDialog( QWidget* parent, Qt::WFlags fl )
 	polarPage->setLayout(gl3);
 	optionStack->addWidget( polarPage );
 
+	buttonApply = new QPushButton(tr("&Apply"));
 	buttonClear = new QPushButton(tr( "Clear Function" ));
 	buttonOk = new QPushButton(tr( "Ok" ));
 	buttonOk->setDefault(true);
 	buttonCancel = new QPushButton(tr( "Close" ));
 
 	QHBoxLayout *hbox2 = new QHBoxLayout();
+	hbox2->addWidget(buttonApply);
 	hbox2->addStretch();
 	hbox2->addWidget(buttonClear);
 	hbox2->addWidget(buttonOk);
@@ -170,6 +172,7 @@ FunctionDialog::FunctionDialog( QWidget* parent, Qt::WFlags fl )
 	setFocusProxy (boxFunction);
 
 	connect( boxType, SIGNAL( activated(int) ), this, SLOT( raiseWidget(int) ) );
+	connect(buttonApply, SIGNAL(clicked()), this, SLOT(apply()));
 	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
 	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 	connect( buttonClear, SIGNAL( clicked() ), this, SLOT(clearList() ) );
@@ -463,23 +466,27 @@ bool FunctionDialog::acceptPolar()
 
 void FunctionDialog::accept()
 {
-	bool ok = true;
+	if (apply())
+		close();
+}
+
+bool FunctionDialog::apply() {
+	bool result = true;
 	switch (boxType->currentIndex())
 	{
 		case 0:
-			ok = acceptFunction();
+			result = acceptFunction();
 			break;
 
 		case 1:
-			ok = acceptParametric();
+			result = acceptParametric();
 			break;
 
 		case 2:
-			ok = acceptPolar();
+			result = acceptPolar();
 			break;
 	}
-	if (ok)
-		close();
+	return result;
 }
 
 void FunctionDialog::insertParamFunctionsList(const QStringList& xList, const QStringList& yList)

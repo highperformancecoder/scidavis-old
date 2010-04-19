@@ -63,6 +63,7 @@ protected:
 	QLineEdit* boxPolarParameter;
     QLineEdit* boxPolarFrom;
     QLineEdit* boxPolarTo;
+	 QPushButton *buttonApply;
     QPushButton* buttonClear;
     QPushButton* buttonCancel;
     QPushButton* buttonOk;
@@ -79,6 +80,7 @@ protected slots:
 	void raiseWidget(int index);
 
 public slots:
+	bool apply();
 	void accept();
 	bool acceptFunction();
 	bool acceptParametric();
