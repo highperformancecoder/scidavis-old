@@ -235,9 +235,12 @@ int SmoothFilter::savitzkyGolayCoefficients(int points, int polynom_order, gsl_m
  * off, zero padding and using the left-/rightmost smoothing polynomial for computing smoothed
  * values near the edges). Zero-padding is a particular bad choice for signals with a distinctly
  * non-zero baseline and cutting off edges makes further computations on the original and smoothed
- * signals more difficult; therefore, we choose to deviate from the user-specified number of
- * left/right adjacent points (by smoothing over a fixed window at the edges) as the least annoying
- * alternative.
+ * signals more difficult; therefore, deviating from the user-specified number of left/right
+ * adjacent points (by smoothing over a fixed window at the edges) would be the least annoying
+ * alternative; if it were not for the fact that previous versions of SciDAVis had a different
+ * behaviour and such a subtle change to the behaviour would be even more annoying, especially
+ * between bugfix releases. TODO: reconsider issue for next minor release (also: would it help
+ * to add an "edge behaviour" option to the UI?)
  */
 void SmoothFilter::smoothSavGol(double *, double *y_inout) {
 	// total number of points in smoothing window
@@ -269,12 +272,21 @@ void SmoothFilter::smoothSavGol(double *, double *y_inout) {
 	QVector<double> result(d_n);
 
 	// near left edge: use interpolation of (points) left-most input values
-	// i.e. we (necessarily) deviate from the specified left/right points to use
+	// i.e. we deviate from the specified left/right points to use
+	/*
 	for (int i=0; i<d_left_points; i++) {
 		double convolution = 0.0;
 		for (int k=0; k<points; k++)
 			convolution += gsl_matrix_get(h, i, k) * y_inout[k];
 		result[i] =  convolution;
+	}
+	*/
+	// legacy behaviour: handle left edge by zero padding
+	for (int i=0; i<d_left_points; i++) {
+		double convolution = 0.0;
+		for (int k=d_left_points-i; k<points; k++)
+			convolution += gsl_matrix_get(h, d_left_points, k) * y_inout[i-d_left_points+k];
+		result[i] = convolution;
 	}
 	// central part: convolve with fixed row of h (as given by number of left points to use)
 	for (int i=d_left_points; i<d_n-d_right_points; i++) {
@@ -284,11 +296,20 @@ void SmoothFilter::smoothSavGol(double *, double *y_inout) {
 		result[i] = convolution;
 	}
 	// near right edge: use interpolation of (points) right-most input values
-	// i.e. we (necessarily) deviate from the specified left/right points to use
+	// i.e. we deviate from the specified left/right points to use
+	/*
 	for (int i=d_n-d_right_points; i<d_n; i++) {
 		double convolution = 0.0;
 		for (int k=0; k<points; k++)
 			convolution += gsl_matrix_get(h, points-d_n+i, k) * y_inout[d_n-points+k];
+		result[i] = convolution;
+	}
+	*/
+	// legacy behaviour: handle right edge by zero padding
+	for (int i=d_n-d_right_points; i<d_n; i++) {
+		double convolution = 0.0;
+		for (int k=0; i-d_left_points+k < d_n; k++)
+			convolution += gsl_matrix_get(h, d_left_points, k) * y_inout[i-d_left_points+k];
 		result[i] = convolution;
 	}
 
