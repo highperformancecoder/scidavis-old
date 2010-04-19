@@ -233,7 +233,7 @@ int SmoothFilter::savitzkyGolayCoefficients(int points, int polynom_order, gsl_m
  *
  * There are at least three possible approaches to handling edges of the data vector (cutting them
  * off, zero padding and using the left-/rightmost smoothing polynomial for computing smoothed
- * values near the edges). Zero-padding is a particular bad choice for signals with a distinctly
+ * values near the edges). Zero-padding is a particularly bad choice for signals with a distinctly
  * non-zero baseline and cutting off edges makes further computations on the original and smoothed
  * signals more difficult; therefore, deviating from the user-specified number of left/right
  * adjacent points (by smoothing over a fixed window at the edges) would be the least annoying
