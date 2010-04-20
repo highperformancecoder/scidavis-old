@@ -1445,7 +1445,7 @@ dest.copy(col, 5, 2, 10)
 				 <varlistentry>
 					 <term>copy(Column)</term>
 					 <listitem>Copy complete content of other column, which must have the same data type (mode).
-					 Returns a boolean indicating success or failure.</listitem>
+					 Returns a boolean indicating success (True) or failure (False).</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>copy(Column,int,int,int)</term>
@@ -1793,7 +1793,7 @@ mat.recalculate()
 				 <varlistentry>
 					 <term>recalculate()</term>
 					 <listitem>Recalculate all cell values from the currently set formula. Returns boolean
-						 indicating success or failure. Added in &appname; 0.2.4.</listitem>
+						 indicating success (True) or failure (False). Added in &appname; 0.2.4.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>setNumericPrecision(int)</term>
@@ -2380,8 +2380,8 @@ layer.replot()
 					 <term>insertCurve(Table, string, int, int)</term>
 					 <listitem>insertCurve(table, column, style=1, color=-1) plots the data of the
 						 specified Y column and the corresponding designated X column, optionally
-						 specifying style and color, and returning a boolean indicating success or
-						 failure. Color is an index in the palette used by &appname;
+						 specifying style and color, and returning a boolean indicating success (True) or
+						 failure (False). Color is an index in the palette used by &appname;
 						 for automatically assigning colors to new curves. Style is one of the following
 						 codes:
 						 <variablelist spacing="compact">
@@ -2432,7 +2432,7 @@ layer.replot()
 					 <term>insertFunctionCurve(string, double=0, double=1, int=100, string=QtCore.QString())</term>
 					 <listitem>insertFunctionCurve(formula, start, end, points, title) inserts a function
 						 curve specified by formula, which is evaluated using muParser with abscissa "x", and
-						 returns a boolean indicating success or failure.
+						 returns a boolean indicating success (True) or failure (False).
 						 Optionally, the interval [start,end] for the evaluation, the number of points
 						 where the function will be evaluated and the curve title can be given.
 						 Added in &appname; 0.2.4.
@@ -3399,7 +3399,7 @@ app.activeFolder().save("subproject.sciprj")
 				 <varlistentry>
 					 <term>bool load(string)</term>
 					 <listitem>load(file_name) tries to load a fit plugin from the indicated file and
-						 returns a boolean indicating success or failure.
+						 returns a boolean indicating success (True) or failure (False).
 					 </listitem>
 				 </varlistentry>
 			 </variablelist>
@@ -3519,6 +3519,292 @@ app.activeFolder().save("subproject.sciprj")
 					 <listitem>LinearFit(layer, curve_name, start, end) works like the
 						 constructor explained above, except that the fit is limited to the X interval
 						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class Filter (inherits QObject)</title>
+			 <para>This is the abstract base class of various analysis operations; in other words, you
+				 can only create instances of
+				 subclasses of this class, but the methods described here are common to all of these
+				 classes (Differentiation, Integration etc.).</para>
+			 <programlisting width="80">
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Filter(ApplicationWindow, Layer, string)</term>
+					 <listitem>Constructor, taking the ApplicationWindow instance to which the Filter will belong,
+						 the Layer containing data to be operated on (and receiving the result curve) and a name
+						 for the filter. Mainly interesting if you want to implement a custom filter as a
+						 subclass of Filter.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutputPoints(integer)</term>
+					 <listitem>Set the number of points to be used for the output curve.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(int)</term>
+					 <listitem>Set the color of the output curve from the palette used by &appname;
+						 for automatically assigning colors to new curves. (Specifying a color by name is
+						 DEPRECATED, because its counter-intuitive behaviour was more likely to cause
+						 trouble than to make things easier.)</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>run()</term>
+					 <listitem>Executes the filter and returns a boolean indicating success (True) or
+						 failure (False).  Depending on the particular filter, this will insert
+						 a new curve into the layer containing the source curve and/or dump some
+						 information in the results log. Also, filters may provide specific methods for
+						 extracting results after they have been run().
+						 This is also the main method to be reimplemented by subclasses.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class Differentiation (inherits Filter)</title>
+			 <para>Running this filter creates a new graph containing the numerical derivative of
+				 the source curve.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Differentiation(Layer, string)</term>
+					 <listitem>Differentiation(layer, curve_name) constructs a new diffentiation filter
+						 on the curve given by layer and curve_name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>Differentiation(Layer, string, float, float)</term>
+					 <listitem>Differentiation(layer, curve_name, from, to) constructs a new
+						 differentiation filter on the subset of points from the curve given by layer and
+						 curve_name which fall into the X range [from,to].</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class Integration (inherits Filter)</title>
+			 <para>Running this filter dumps an integral over the source curve (more precisely,
+				 an interpolation thereof) to the results log and makes it available via result().
+			 </para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Integration(Layer, string)</term>
+					 <listitem>Integration(layer, curve_name) constructs a new integration filter
+						 on the curve given by layer and curve_name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>Integration(Layer, string, float, float)</term>
+					 <listitem>Integration(layer, curve_name, from, to) constructs a new
+						 integration filter on the subset of points from the curve given by layer and
+						 curve_name which fall into the X range [from,to].</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMethod(InterpolationMethod)</term>
+					 <listitem>Sets the method used for interpolating the source data in order to compute
+						 the integral. Valid methods are Integration.Linear (linear interpolation),
+						 Integration.Cubic (cubic interpolation) and Integration.Akima (interpolation using
+						 Akima splines).
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>method()</term>
+					 <listitem>Returns the method used for interpolating the source data in order to
+						 compute the integral. See setMethod() for details.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>result()</term>
+					 <listitem>After the integration filter has been run(), this method can be used to
+						 extract the result (i.e. the "Area" given in the results log).
+						 Added in &appname; 0.2.5.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class Interpolation (inherits Filter)</title>
+			 <para>Inserts an interpolation of the source curve as a new curve into the source layer.
+			 </para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Interpolation(Layer, string)</term>
+					 <listitem>Interpolation(layer, curve_name) constructs a new interpolation filter
+						 on the curve given by layer and curve_name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>Interpolation(Layer, string, float, float)</term>
+					 <listitem>Interpolation(layer, curve_name, from, to) constructs a new
+						 interpolation filter on the subset of points from the curve given by layer and
+						 curve_name which fall into the X range [from,to].</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMethod(InterpolationMethod)</term>
+					 <listitem>Sets the method used for interpolating the source data.
+						 Valid methods are Interpolation.Linear (linear interpolation),
+						 Interpolation.Cubic (cubic interpolation) and Interpolation.Akima (interpolation using
+						 Akima splines).
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class SmoothFilter (inherits Filter)</title>
+			 <para>Inserts a smoothed version of the source curve as a new curve into the source layer.
+			 </para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>SmoothFilter(Layer, string)</term>
+					 <listitem>SmoothFilter(layer, curve_name) constructs a new smoothing filter
+						 on the curve given by layer and curve_name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>SmoothFilter(Layer, string, float, float)</term>
+					 <listitem>SmoothFilter(layer, curve_name, from, to) constructs a new
+						 smoothing filter on the subset of points from the curve given by layer and
+						 curve_name which fall into the X range [from,to].</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMethod(SmoothMethod)</term>
+					 <listitem>Sets the method used for smoothing the source data.
+						 Valid methods are SmoothFilter.SavitzkyGolay (Savitzky-Golay algorithm),
+						 SmoothFilter.FFT (low-pass FFT filter) and SmoothFilter.Average (moving window
+						 average).
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSmoothPoints(integer, integer=0)</term>
+					 <listitem>For Savitzky-Golay smoothing, setSmoothPoints(right_points, left_points)
+						 sets the number of points to the right/left of each point to include in the
+						 smoothing window. For moving window average, the first argument (which must be
+						 even) determines the number of <emphasis>additional</emphasis> points in the
+						 smoothing window (which is always symmetrical argound each data point), i.e.
+						 one less than the total number of points; while the second argument is ignored.
+						 For FFT smoothing, the first number determines the frequency
+						 cutoff, while the second argument is ignored.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPolynomOrder(integer)</term>
+					 <listitem>Set the order of the polynomial used in Savitzky-Golay smoothing. This
+						 is ignored for the other methods.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class FFTFilter (inherits Filter)</title>
+			 <para>Provides FFT-based low pass, high pass, band pass and band block filters.
+				 Inserts a filtered version of the source curve as a new curve into the source layer.
+			 </para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>FFTFilter(Layer, string, FilterType=FFTFilter.LowPass)</term>
+					 <listitem>FFTFilter(layer, curve_name, type) constructs a new filter of indicated
+						 type (see setFilterType() for details) on the curve given by layer and curve_name.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>FFTFilter(Layer, string, float, float, FilterType=FFTFilter.LowPass)</term>
+					 <listitem>FFTFilter(layer, curve_name, from, to, type) constructs a new
+						 filter of indicated type (see setFilterType() for details) on the subset of
+						 points from the curve given by layer and curve_name which fall into the X range
+						 [from,to].</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFilterType(FilterType)</term>
+					 <listitem>Sets the type of filter to use. Valid arguments are FFTFilter.LowPass,
+						 FFTFilter.HighPass, FFTFilter.BandPass and FFTFilter.BandBlock.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCutoff(float)</term>
+					 <listitem>Sets the cutoff frequency of low/high pass filters. The correct filter
+						 type must have been set before calling this method.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setBand(float, float)</term>
+					 <listitem>setBand(low, high) sets the low/high cutoff frequencies of band pass and
+						 band block filters. The correct filter type must have been set before calling
+						 this method.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>enableOffset(boolean=True)</term>
+					 <listitem>Set whether a (DC) offset of the data is to be preserved by band pass and band
+						 block filters (if set to False, band block filters will subtract the offset in
+						 addition to filtering the [low,high] band). Defaults to True.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class FFT (inherits Filter)</title>
+			 <para>Running this filter creates a new graph containing the discrete Fourier transform
+				 (DFT) of the source curve.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>FFT(Layer, string)</term>
+					 <listitem>FFT(layer, curve_name) constructs a new FFT filter
+						 on the curve given by layer and curve_name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>FFT(Table, string, string="")</term>
+					 <listitem>FFT(table, real_col, imaginary_col) constructs a new
+						 FFT filter on the data of column real_col in the given table, optionally with
+						 an imaginary component taken form imaginary_col.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setInverseFFT(boolean=True)</term>
+					 <listitem>If set to True, the inverse fourier transform is computed instead of the
+						 forward one. Defaults to False.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSampling(float)</term>
+					 <listitem>Sets the sampling interval, i.e. the difference between subsequent X
+						 coordinates of the source data.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>normalizeAmplitudes(boolean=True)</term>
+					 <listitem>If set to True, normalize output to a maximum value of 1. Defaults to
+						 True.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>shiftFrequencies(boolean=True)</term>
+					 <listitem>If set to True, the output is shifted along the X axis so as to be centered
+						 around the origin.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class Correlation (inherits Filter)</title>
+			 <para>Running this filter adds correlation data to the source table and makes a plot of
+				 the correlation.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Correlation(Table, string, string)</term>
+					 <listitem>Correlation(table, column1, column2) constructs a new correlation filter
+						 on two columns of a table.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class Convolution (inherits Filter)</title>
+			 <para>Running this filter adds the convolution of two columns to the source table and
+				 makes a plot of the convolution.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Convolution(Table, string, string)</term>
+					 <listitem>Convolution(table, column1, column2) constructs a new convolution filter on two columns of a table.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class Deconvolution (inherits Filter)</title>
+			 <para>Running this filter adds the deconvolution of two columns to the source table and
+				 makes a plot of the deconvolution.</para>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Deconvolution(Table, string, string)</term>
+					 <listitem>Deconvolution(table, column1, column2) constructs a new deconvolution filter on two columns of a table.
+					 </listitem>
 				 </varlistentry>
 			 </variablelist>
 		 </sect3>
