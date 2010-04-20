@@ -1,7 +1,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version='1.0'>
-<xsl:import href="file:////usr/share/xml/docbook/stylesheet/nwalsh/html/chunk.xsl"/>
-
-<xsl:output method="html" encoding="UTF-8" indent="yes"/>
+<xsl:import href="/usr/share/xml/docbook/xsl-stylesheets-1.75.2/html/chunk.xsl"/>
+<xsl:import href="docbook2adp.xsl"/>
 
 <xsl:param name="chunker.output.encoding">UTF-8</xsl:param>
 <xsl:param name="chunker.output.indent">yes</xsl:param>
@@ -12,6 +11,10 @@
 
 <xsl:param name="use.id.as.filename" select="'1'"></xsl:param>
 <xsl:param name="base.dir" select="'html/'"></xsl:param>
+
+<xsl:param name="adp.file">scidavis.adp</xsl:param>
+<xsl:param name="adp.name">scidavis_manual_en</xsl:param>
+<xsl:param name="adp.appicon">./common/scidavis_logo.png</xsl:param>
 <!--
 		control of the index
 -->
