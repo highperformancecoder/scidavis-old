@@ -1545,7 +1545,7 @@ public:
 %MethodCode
   SIPSCIDAVIS_APP(new sipLorentzFit(app, a0, *a1))
 %End
-  LorentzFit(Graph *, const QString&, int, int) /NoDerived/;
+  LorentzFit(Graph *, const QString&, double, double) /NoDerived/;
 %MethodCode
   SIPSCIDAVIS_APP(new sipLorentzFit(app, a0, *a1, a2, a3))
 %End
