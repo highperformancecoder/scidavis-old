@@ -973,7 +973,7 @@ n = f.note(name, recursive=False)
 
         <para>Also, every piece of code is executed in the context of an
 	  object which you can access via the <varname>self</varname> variable. For example,
-        entering <userinput>self.cell("t",i)</userinput> as a column formula
+        entering <userinput>self.column("t").valueAt(i-1)</userinput> as a column formula
         is equivalent to the convenience function
         <userinput>col("t")</userinput>.</para>
       </sect3>
@@ -984,17 +984,17 @@ n = f.note(name, recursive=False)
         <para>We'll assume that you have assigned some table to the variable
         <varname>t</varname>. You can access its numeric cell values with
         <programlisting width="40">
-t.cell(col, row)
+t.column(col).valueAt(row)
 # and
-t.setCell(col, row, value)
+t.column(col).setValueAt(row, value)
 	  </programlisting> Whenever you have to specify a column, you can use either the
         column name (as a string) or the consecutive column number (starting
-        with 1). Row numbers also start with 1, just as they are displayed. If
+        with 0). Row numbers also start with 0. If
         you want to work with arbitrary texts or the textual representations
         of numeric values, you can use <programlisting width="40">
-t.text(col, row)
+t.column(col).textAt(row)
 # and
-t.setText(col, row, string)
+t.column(col).setTextAt(row, string)
 	  </programlisting> The number of columns and rows is accessed via <programlisting
         width="40">
 t.numRows()
@@ -1002,8 +1002,8 @@ t.numCols()
 t.setNumRows(number)
 t.setNumCols(number)
 	  </programlisting> Column names can be read and written with <programlisting width="40">
-t.colName(number)
-t.setColName(col, newName)
+t.column(name).name()
+t.column(name).setName(newName)
 	  </programlisting> Normalize a single or all columns: <programlisting width="40">
 t.normalize(col)
 t.normalize()
@@ -1012,17 +1012,14 @@ t.normalize()
         <varname>ignore</varname> lines at the head of the file. The flags
         should be self-explanatory. <programlisting width="40">
 t.importASCII(file, sep="\t", ignore=0, renameCols=False, stripSpaces=True, simplifySpace=False, newTable=False)
-	  </programlisting> After having changed some table values from a script, you will
-        likely want to update dependent Graphs: <programlisting width="40">
-t.notifyChanges()
-	  </programlisting></para>
+	  </programlisting>
+  </para>
 
         <para>As a simple example, let's set some column values without using
         the dialog. <programlisting width="40">
 t = table("table1")
 for i in range(1, t.numRows()+1):
-	t.setCell(1, i, i**2)
-t.notifyChanges()
+	t.column(0).setValueAt(i-1, i**2)
 	  </programlisting></para>
       </sect3>
 
@@ -1313,8 +1310,6 @@ f.fit()
         <programlisting width="80">
 f.setDataFromCurve(curve)			<lineannotation>change data source</lineannotation>
 f.setDataFromCurve(curve, graph)		<lineannotation>change data source</lineannotation>
-f.setDataFromCurve(curve, from, to)		<lineannotation>change data source</lineannotation>
-f.setDataFromCurve(curve, from, to, graph)	<lineannotation>change data source</lineannotation>
 f.setInterval(from, to)				<lineannotation>change data range</lineannotation>
 f.setInitialValue(number, value)
 f.setInitialValues(value1, ...)
@@ -1502,7 +1497,7 @@ dest.copy(col, 5, 2, 10)
 				 </varlistentry>
 				 <varlistentry>
 					 <term>replaceValues(int, list of double values)</term>
-					 <listitem>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is one of "Numeric". Compared with setValueAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listitem>
+					 <listitem>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is "Numeric". Compared with setValueAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listitem>
 				 </varlistentry>
 				 <varlistentry>
 					 <term>textAt(int)</term>
@@ -2422,8 +2417,8 @@ layer.replot()
 					 </listitem>
 				 </varlistentry>
 				 <varlistentry>
-					 <term>insertCurve(Table, string, string int, int)</term>
-					 <listitem>insertCurve(table, x_column, y_column style=1, color=-1) works like the
+					 <term>insertCurve(Table, string, string, int=1, int=1)</term>
+					 <listitem>insertCurve(table, x_column, y_column, style, color) works like the
 						 other insertCurve() variant above, but allows you to explicitly specify the
 						 X column you want to plot against instead of determining it by designation.
 					 </listitem>
