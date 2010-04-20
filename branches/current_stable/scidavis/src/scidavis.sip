@@ -1576,12 +1576,12 @@ class PolynomialFit : Fit
 %End
 public:
   PolynomialFit(ApplicationWindow * /TransferThis/, Graph *, QString&, int=2, bool=false);
-  PolynomialFit(ApplicationWindow * /TransferThis/, Graph *, QString&, int, int, int=2, bool=false);
+  PolynomialFit(ApplicationWindow * /TransferThis/, Graph *, QString&, double, double, int=2, bool=false);
   PolynomialFit(Graph *, QString&, int=2, bool=false) /NoDerived/;
 %MethodCode
   SIPSCIDAVIS_APP(new sipPolynomialFit(app, a0, *a1, a2, a3))
 %End
-  PolynomialFit(Graph *, QString&, int, int, int=2, bool=false) /NoDerived/;
+  PolynomialFit(Graph *, QString&, double, double, int=2, bool=false) /NoDerived/;
 %MethodCode
   SIPSCIDAVIS_APP(new sipPolynomialFit(app, a0, *a1, a2, a3, a4, a5))
 %End
