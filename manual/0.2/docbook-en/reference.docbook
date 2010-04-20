@@ -1611,29 +1611,62 @@ The active items in the menus depend on the active window in the project. If the
 <varlistentry id="smooth-cmd"> 
   <term>&smooth-cmd;</term>
   <listitem>
-    <para>These commands will generate a new curve by dooing a smoothing ofthe selected curve.</para>
+    <para>These commands will generate a new curve by smoothing the selected curve.</para>
     <variablelist>
 <!--************************************************************************** -->
-      <varlistentry id="savitsky-golay-cmd"> 
-	<term>&savitsky-golay-cmd;</term>
+      <varlistentry id="savitzky-golay-cmd"> 
+	<term>&savitzky-golay-cmd;</term>
 	<listitem>
-	  <para>This command performs a smoothing of the selected curve with the Savitzky-Golay method. The formula used to smooth the curve defined by the points y<subscript>i</subscript>=f(x<subscript>i</subscript>) is:</para>
-	  <informalequation> 
-	    <mediaobject>
-	      <imageobject>
-	        <imagedata format="PNG" fileref="equations/savitzky-golay.png"/>
-	      </imageobject>
-	    </mediaobject>
-	  </informalequation>
-	  <para>The f<subscript>i</subscript> values are computed by fitting the data points to a polynome, they depend on the number of points used for the smoothing of the curve and the order of the polynome. Compared to the moving window average method, the advantage of this smoothing method is that the values of extrema are not truncated. The dialog allows to specify the curve which will be smoothed, the value of the order of the polynome, the number of data points used for the polynomial fit before and after each point and the color used to draw the smoothed curved. A new table will be created to store the data points x<subscript>i</subscript>, z<subscript>i</subscript>.</para>
+		<para>
+			This command performs a smoothing of the selected curve using the Savitzky-Golay method.
+			Compared to moving window average, this has the advantage of preserving more features of the
+			data (such as relative extrema and their width); given that the order of the smoothing
+			polynomial is at least one and that the data is uniformly distributed on the X axis.
+			When using polynomials of order zero (i.e. constants), Savitzky-Golay smoothing is equivalent
+			to moving window average. Higher-order polynomials will preserve more features of the data.
+			If the data is not uniformly distributed (note that &appname; makes
+			no attempt at checking this!), the result may distort features of the original data.
+			A new (hidden) table will be created to store the smoothed data points (x<subscript>i</subscript>,
+			s<subscript>i</subscript>).
+	  </para>
 	  <figure id="fig-smooth-1">
-	    <title>The &savitsky-golay-cmd; dialog.</title>
-	    <mediaobject> 
-	      <imageobject>
-	        <imagedata  format="PNG" fileref="pics/smooth-sg.png"/>
-	      </imageobject>
-	    </mediaobject>
+		  <title>The &savitzky-golay-cmd; dialog.</title>
+		  <mediaobject> 
+			  <imageobject>
+				  <imagedata  format="PNG" fileref="pics/smooth-sg.png"/>
+			  </imageobject>
+		  </mediaobject>
 	  </figure>
+	  <formalpara><title>Mathematical background</title>
+		  The basic idea is to produce a polynomial least-squares fit of each data point plus some points left and right of it, then use the polynomial obtained to compute a "smoothed version" of the data point.
+		  Explicitly carrying out this fit for every data point of a large data set is relatively expensive.
+		  However, as pointed out by Savitzky and Golay
+		  <footnote><para>
+				  A. Savitzky and M.J.E. Golay,
+				  <citetitle pubwork="article">Smoothing and Differentiation of Data by Simplified Least Squares Procedures</citetitle>,
+				  Anal. Chem. 36 (1964) 1627
+				  (note that this article contains numerical errors, which were corrected in subsequent
+				  works by J. Steinier, Y. Termonia, J. Deltour and H.M. Hadden)
+		  </para></footnote>,
+		  for uniformly distributed data, the calculation essentially boils down to a convolution:
+		  <informalequation> 
+			  <mediaobject>
+				  <imageobject>
+					  <imagedata format="PNG" fileref="equations/savitzky-golay.png"/>
+				  </imageobject>
+			  </mediaobject>
+		  </informalequation>
+		  where the w<subscript>j</subscript> depend only on the number of left/right points included
+		  in the smoothing window and the order of the fitted polynomial.
+		  This means that the expensive parts of the calculation scale only with the size of the
+		  smoothing window instead of the size of the entire data set.
+		  Note that near the edges of the data interval, the above formula cannot be applied as-is
+		  and some convention needs to be chosen for calculating smoothed points there. For reasons
+		  of backwards-compatibility, &appname; solves this by effectively zero-padding the data,
+		  which preserves the number of data points but may lead to unexpected results for data with
+		  a non-zero baseline.
+		  Future versions may have different behaviour in this respect.
+	  </formalpara>
 	</listitem>
       </varlistentry>
 <!--************************************************************************** -->
@@ -1669,7 +1702,7 @@ The active items in the menus depend on the active window in the project. If the
 	</listitem>
       </varlistentry>
        <varlistentry> 
-	<term>&moving-window-cmd;</term>
+	<term>&smooth-fft-filter-cmd;</term>
 	<listitem>
 	  <para>This command allow a smoothing based on FFT filtering of data. It can be used when you have noisy curves with a large number of data.</para>
 	  <figure id="fig-smooth-fft">

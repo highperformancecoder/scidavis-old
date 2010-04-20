@@ -269,8 +269,8 @@
     <!ENTITY integrate-lnk '<link linkend="integrate-cmd"><command>Integrate</command> command</link>'>
   <!ENTITY smooth-cmd  "<command>Smooth</command>">
     <!ENTITY smooth-lnk '<link linkend="smooth-cmd"><command>Smooth</command> command</link>'>
-  <!ENTITY savitsky-golay-cmd  "<command>Smooth&rarr;Savitsky-Golay</command>">
-    <!ENTITY savitsky-golay-lnk '<link linkend="savitsky-golay-cmd"><command>Smooth&rarr;Savitsky-Golay</command> command</link>'>
+  <!ENTITY savitzky-golay-cmd  "<command>Smooth&rarr;Savitzky-Golay</command>">
+    <!ENTITY savitzky-golay-lnk '<link linkend="savitzky-golay-cmd"><command>Smooth&rarr;Savitzky-Golay</command> command</link>'>
   <!ENTITY moving-window-cmd  "<command>Smooth&rarr;Moving Window Average</command>">
     <!ENTITY moving-window-lnk '<link linkend="moving-window-cmd"><command>Smooth&rarr;Moving Window Average</command> command</link>'>
   <!ENTITY smooth-fft-filter-cmd  "<command>Smooth&rarr;FFT Filter</command>">
