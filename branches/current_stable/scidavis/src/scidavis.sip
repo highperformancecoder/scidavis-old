@@ -1624,7 +1624,9 @@ public:
   void setOutputPoints(int);
 
   void setColor(int);
-  void setColor(const QString&);
+  // inconsistent with other setColor() methods and accepts only colors from the palette,
+  // in contrast to what one would expect
+  void setColor(const QString&) /Deprecated/;
 
   virtual bool run();
 };
@@ -1670,6 +1672,8 @@ public:
     void setMethod(InterpolationMethod method);
 
   bool run();
+
+  double result();
 };
 
 class Interpolation : Filter

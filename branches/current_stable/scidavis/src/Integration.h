@@ -50,6 +50,8 @@ public:
 			 d_method = backup;
 	 };
 
+	 double result() { return d_result; }
+
 protected:
 	virtual bool isDataAcceptable();
 
@@ -60,6 +62,8 @@ private:
 
     //! The method for computing the interpolation used for integrating.
     InterpolationMethod d_method;
+
+	 double d_result;
 };
 
 #endif

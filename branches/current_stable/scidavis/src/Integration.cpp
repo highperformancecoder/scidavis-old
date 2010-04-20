@@ -63,6 +63,7 @@ void Integration::init()
 	setName(tr("Integration"));
 	d_method = Linear;
 	d_sort_data = true;
+	d_result = NAN;
 }
 
 bool Integration::isDataAcceptable()
@@ -135,11 +136,14 @@ QString Integration::logInfo()
 	int maxID=gsl_vector_max_index (aux);
 	gsl_vector_free (aux);
 
+	// calculate result
+	d_result = gsl_interp_eval_integ(interpolation, d_x, d_y, d_from, d_to, 0);
+
 	logInfo += tr("Peak at") + " x = " + QLocale().toString(d_x[maxID], 'g', prec)+"\t";
 	logInfo += "y = " + QLocale().toString(d_y[maxID], 'g', prec)+"\n";
 
 	logInfo += tr("Area") + "=";
-	logInfo += QLocale().toString(gsl_interp_eval_integ(interpolation, d_x, d_y, d_from, d_to, 0), 'g', prec);
+	logInfo += QLocale().toString(d_result, 'g', prec);
 	logInfo += "\n-------------------------------------------------------------\n";
 
 	gsl_interp_free(interpolation);
