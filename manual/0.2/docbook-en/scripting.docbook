@@ -3243,10 +3243,290 @@ app.activeFolder().save("subproject.sciprj")
 			 </variablelist>
 		 </sect3>
 		 <sect3>
+			 <title>class ExponentialFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>ExponentialFit(Layer, string, boolean=False)</term>
+					 <listitem>ExponentialFit(layer, curve_name, is_growth) constructs an exponential fit for
+						 the curve specified by layer and curve_name. If is_growth is True, the fitted function
+						 is an exponential growth of the form y<subscript>0</subscript>+A*exp(x/t) with A the
+						 amplitude, t the lifetime and y<subscript>0</subscript> the offset. Likewise, if
+						 is_growth is False, an exponential decay of the form
+						 y<subscript>0</subscript>+A*exp(-x/t) is fitted, where t is now the e-folding time.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>ExponentialFit(layer, string, float, float, boolean)</term>
+					 <listitem>ExponentialFit(layer, curve_name, start, end, is_growth) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class TwoExpFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>TwoExpFit(Layer, string)</term>
+					 <listitem>TwoExpFit(layer, curve_name) constructs a double-exponential-decay fit for
+						 the curve specified by layer and curve_name. The function fitted is
+						 y<subscript>0</subscript>+A<subscript>1</subscript>*exp(-x/t<subscript>1</subscript>)+A<subscript>2</subscript>*exp(-x/t<subscript>2</subscript>)
+						 with y<subscript>0</subscript> the offset, A<subscript>1</subscript>,
+						 A<subscript>2</subscript> the amplitudes and t<subscript>1</subscript>,
+						 t<subscript>2</subscript> the lifetimes of the two decays.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>TwoExpFit(layer, string, float, float)</term>
+					 <listitem>TwoExpFit(layer, curve_name, start, end) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class ThreeExpFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>ThreeExpFit(Layer, string)</term>
+					 <listitem>ThreeExpFit(layer, curve_name) constructs a triple-exponential-decay fit for
+						 the curve specified by layer and curve_name. The function fitted is
+						 y<subscript>0</subscript>+A<subscript>1</subscript>*exp(-x/t<subscript>1</subscript>)+A<subscript>2</subscript>*exp(-x/t<subscript>2</subscript>)+A<subscript>3</subscript>*exp(-x/t<subscript>3</subscript>)
+						 with y<subscript>0</subscript> the offset, A<subscript>1</subscript>,
+						 A<subscript>2</subscript>,A<subscript>3</subscript> the amplitudes and t<subscript>1</subscript>,
+						 t<subscript>2</subscript>,t<subscript>3</subscript> the lifetimes of the three decays.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>ThreeExpFit(layer, string, float, float)</term>
+					 <listitem>ThreeExpFit(layer, curve_name, start, end) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class SigmoidalFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>SigmoidalFit(Layer, string)</term>
+					 <listitem>SigmoidalFit(layer, curve_name) constructs a sigmoidal fit for
+						 the curve specified by layer and curve_name. The function fitted is
+						 (A<subscript>1</subscript>-A<subscript>2</subscript>)/(1+exp((x-x<subscript>0</subscript>)/dx)) + A<subscript>2</subscript>
+						 with A<subscript>1</subscript> the initial value, A<subscript>2</subscript> the
+						 final value, x<subscript>0</subscript> the center (inflection point) and dx the
+						 time constant.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>SigmoidalFit(layer, string, float, float)</term>
+					 <listitem>SigmoidalFit(layer, curve_name, start, end) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class GaussAmpFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>GaussAmpFit(Layer, string)</term>
+					 <listitem>GaussAmpFit(layer, curve_name) constructs a Gaussian fit for
+						 the curve specified by layer and curve_name. The function fitted is
+						 y<subscript>0</subscript>+A*exp(-(x-x<subscript>c</subscript>)^2/(2*w^2))
+						 with y<subscript>0</subscript> the offset, A the amplitude (height),
+						 x<subscript>c</subscript> the center (peak position) and w the width.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>GaussAmpFit(layer, string, float, float)</term>
+					 <listitem>GaussAmpFit(layer, curve_name, start, end) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class NonLinearFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>NonLinearFit(Layer, string)</term>
+					 <listitem>NonLinearFit(layer, curve_name) constructs a fit with a
+						 user-specified formula to
+						 the curve specified by layer and curve_name. The function fitted has
+						 to be supplied using setFormula() (in a format suitable for parsing by muParser!)
+						 and the free parameters used need to be specified using setParameters().
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>NonLinearFit(layer, string, float, float)</term>
+					 <listitem>NonLinearFit(layer, curve_name, start, end) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setParameters(string, string, ...)</term>
+					 <listitem>setParameters(p1, p2, ...) gives the names of the parameters to be fitted,
+						 as used in the formula given to setFormula().
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFormula(string)</term>
+					 <listitem>Specifies the function to be fitted, in a format suitable for parsing by
+						 muParser. In particular, this means that exponentiation has to be expressed as
+						 a^b instead of a**b and advanced Python features are not available.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class PluginFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>PluginFit(Layer, string)</term>
+					 <listitem>PluginFit(layer, curve_name) constructs a plugin-based fit for
+						 the curve specified by layer and curve_name. The function fitted is
+						 determined by a fit plugin, which has to be loaded using load() prior
+						 to executing the fit.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>PluginFit(layer, string, float, float)</term>
+					 <listitem>PluginFit(layer, curve_name, start, end) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>bool load(string)</term>
+					 <listitem>load(file_name) tries to load a fit plugin from the indicated file and
+						 returns a boolean indicating success or failure.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class LorentzFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>LorentzFit(Layer, string)</term>
+					 <listitem>LorentzFit(layer, curve_name) constructs a Lorentzian fit for
+						 the curve specified by layer and curve_name. The function fitted is
+						 y<subscript>0</subscript>+2*A/π*w/(4*(x-x<subscript>c</subscript>)^2+w^2)
+						 with y<subscript>0</subscript> the offset, A the amplitude (height),
+						 x<subscript>c</subscript> the center (peak position) and w the width.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>LorentzFit(layer, string, float, float)</term>
+					 <listitem>LorentzFit(layer, curve_name, start, end) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setNumPeaks(integer)</term>
+					 <listitem>Given an integer greater than one, enables multi-peak fitting with the
+						 indicated number of peaks.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numPeaks()</term>
+					 <listitem>Returns the currently set number of peaks for multi-peak fitting.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>enablePeakCurves(boolean)</term>
+					 <listitem>enablePeakCurves(True) enables plotting of curves for the individual
+						 peaks of a multi-peak fit.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPeakCurvesColor(integer)</term>
+					 <listitem>Analogously to Fit.setColor(), this sets the color of the curves plotted
+						 for individual peaks of a multi-peak fit (if enabled using enablePeakCurves()).
+						 The color is set from the palette used by &appname;
+						 for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class GaussFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>GaussFit(Layer, string)</term>
+					 <listitem>GaussFit(layer, curve_name) constructs a Gaussian fit for
+						 the curve specified by layer and curve_name. The function fitted is
+						 y<subscript>0</subscript>+A*sqrt(2/π)/w*exp(-2*((x-x<subscript>c</subscript>)/w)^2)";
+						 with y<subscript>0</subscript> the offset, A the amplitude (height),
+						 x<subscript>c</subscript> the center (peak position) and w the width.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>GaussFit(layer, string, float, float)</term>
+					 <listitem>GaussFit(layer, curve_name, start, end) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setNumPeaks(integer)</term>
+					 <listitem>Given an integer greater than one, enables multi-peak fitting with the
+						 indicated number of peaks.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numPeaks()</term>
+					 <listitem>Returns the currently set number of peaks for multi-peak fitting.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>enablePeakCurves(boolean)</term>
+					 <listitem>enablePeakCurves(True) enables plotting of curves for the individual
+						 peaks of a multi-peak fit.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPeakCurvesColor(integer)</term>
+					 <listitem>Analogously to Fit.setColor(), this sets the color of the curves plotted
+						 for individual peaks of a multi-peak fit (if enabled using enablePeakCurves()).
+						 The color is set from the palette used by &appname;
+						 for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class PolynomialFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>PolynomialFit(Layer, string, int=2)</term>
+					 <listitem>PolynomialFit(layer, curve_name, poly_order) constructs a polynomial fit
+						 of order poly_order for the curve specified by layer and curve_name.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>PolynomialFit(layer, string, float, float, int=2)</term>
+					 <listitem>PolynomialFit(layer, curve_name, start, end, poly_order) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class LinearFit (inherits Fit)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>LinearFit(Layer, string)</term>
+					 <listitem>LinearFit(layer, curve_name, poly_order) constructs a linear fit
+						 for the curve specified by layer and curve_name.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>LinearFit(layer, string, float, float)</term>
+					 <listitem>LinearFit(layer, curve_name, start, end) works like the
+						 constructor explained above, except that the fit is limited to the X interval
+						 [start,end] of the given curve.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
 			 <title>class Folder (inherits QObject)</title>
 			 <variablelist spacing="compact">
 				 <varlistentry>
-					 <term>Folder(name)</term>
+					 <term>Folder(string)</term>
 					 <listitem>Construct a new folder with the given name. You can add it as a subfolder
 						 to an existing one using addChild() (see below).
 					 </listitem>
