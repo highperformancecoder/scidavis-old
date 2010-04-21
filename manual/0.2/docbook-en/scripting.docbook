@@ -70,10 +70,10 @@
 				<userinput>a^b</userinput> does not mean "raise a to the power of b" but
 				rather "bitwise exclusive or of a and b"; Python's power operator is **.
 				Thus: <screen width="40">
-					<userinput>2^3 # read: 10 xor 11 = 01</userinput>
-					<computeroutput>#&gt; 1</computeroutput>
-					<userinput>2**3</userinput>
-					<computeroutput>#&gt; 8</computeroutput>
+<userinput>2^3 # read: 10 xor 11 = 01</userinput>
+<computeroutput>#&gt; 1</computeroutput>
+<userinput>2**3</userinput>
+<computeroutput>#&gt; 8</computeroutput>
 			</screen></para>
 		</sect3>
 
@@ -84,19 +84,18 @@
 				indentation is very important. It is used for grouping (most other
 				languages use either braces or keywords like
 				<userinput>do...end</userinput> for this). For example, executing the
-				following: <programlisting
-					width="40">
-					x=23
-					for i in (1,4,5):
-					x=i**2
-					print(x)
+				following: <programlisting width="40">
+x=23
+for i in (1,4,5):
+	x=i**2
+	print(x)
 				</programlisting> will do what you would expect: it prints out the numbers 1, 16 and
 				25; each on a line of its own. Deleting just a bit of space will change
 				the functionality of your program: <programlisting width="40">
-					x=23
-					for i in (1,4,5):
-					x=i**2
-					print(x)
+x=23
+for i in (1,4,5):
+	x=i**2
+print(x)
 				</programlisting> will print out only one number - no, not 23, but rather 25. This
 				example was designed to also teach you something about variable scoping:
 				There are no block-local variables in Python.</para>
@@ -116,26 +115,24 @@
 
 			<para>The basic syntax for defining a function (for use within one
 				particular note, for example) is <programlisting width="40">
-					def answer():
-					return 42
+def answer():
+	return 42
 				</programlisting> If you want your function to be accessible from the rest of your
-				project, you have to declare it global before the definition: <programlisting
-					width="40">
-					global answer
-					def answer():
-					return 42
+				project, you have to declare it global before the definition: <programlisting width="40">
+global answer
+def answer():
+	return 42
 				</programlisting> You can add your own function to &appname;'s function list. We'll
 				also provide a documentation string that will show up, for example, in
 				the "set column values" dialog: <programlisting width="40">
-					global answer
-					def answer():
-					"Return the answer to the ultimate question about life, the universe and everything."
-					return 42
-					&python-pref;.mathFunctions["answer"] = answer
+global answer
+def answer():
+	"Return the answer to the ultimate question about life, the universe and everything."
+	return 42
+&python-pref;.mathFunctions["answer"] = answer
 				</programlisting> If you want to remove a function from the list,
-				execute <programlisting
-					width="40">
-					del &python-pref;.mathFunctions["answer"]
+				execute <programlisting width="40">
+del &python-pref;.mathFunctions["answer"]
 			</programlisting></para>
 
 			<para>Note that functions have their own local scope. That means that if
@@ -144,15 +141,15 @@
 				the function. However, you can access global variables as usual.</para>
 
 			<para>If-then-else decisions are entered as follows: <programlisting width="40">
-					if x&gt;23:
-					print(x)
-					else:
-					print("The value is too small.")
+if x&gt;23:
+	print(x)
+else:
+	print("The value is too small.")
 			</programlisting></para>
 
 			<para>You can do loops, too: <programlisting width="40">
-					for i in range(1, 11):
-					print(i)
+for i in range(1, 11):
+	print(i)
 				</programlisting> This will print out the numbers between 1 and 10 inclusively (the
 				upper limit does not belong to the range, while the lower limit
 				does).</para>
@@ -172,23 +169,23 @@
 			structures) in a formula, &appname; will assume it to be the body of a
 			function. That is, the following code will not work:
 			<programlisting width="40">
-				a=1
-				a+a
+a=1
+a+a
 			</programlisting>
 			The statement in the first line means that the formula cannot
 			be evaluated as a single expression. Instead, the above code assigns
 			every row in the column the return value of the following function:
 			<programlisting width="40">
-				def f():
-				a=1
-				a+a
+def f():
+	a=1
+	a+a
 			</programlisting>
 			However, since Python does not implicitly interpret expressions as
 			something to return, this evaluates to nothing. The correct way
 			to enter formulas with statements in them is to explicitly return
 			something: <programlisting width="40">
-				a=1
-				return a+a
+a=1
+return a+a
 		</programlisting></para>
 
 		<para>There is a slight catch associated with this strategy. In a Notes
@@ -198,8 +195,8 @@
 			intended, i.e. introducing a shortcut for the elementary charge to be
 			used within the notes window. What actually happens is this: &appname;
 			evaluates the function <programlisting width="40">
-				def f():
-				ee=1.6021773e-19
+def f():
+	ee=1.6021773e-19
 			</programlisting>
 			As mentioned in the Python introduction above, the function f has its
 			own variable scope and (unless it happens to be declared global) the
@@ -407,43 +404,43 @@
 
 			<para>Accessing the objects in your project is straight-forward,
 				<programlisting width="40">
-					t = table("Table1")
-					m = matrix("Matrix1")
-					g = graph("Graph1")
-					n = note("Notes1")
+t = table("Table1")
+m = matrix("Matrix1")
+g = graph("Graph1")
+n = note("Notes1")
 					</programlisting> as is creating new objects: <programlisting width="40">
-					# create an empty table named "tony" with 5 rows and 2 columns:
-					t = newTable("tony", 5, 2)
-					# use defaults
-					t = newTable()
-					# create an empty matrix named "gina" with 42 rows and 23 columns:
-					m = newMatrix("gina", 42, 23)
-					# use defaults
-					m = newMatrix()
-					# create an empty graph window
-					g = newGraph()
-					# create an empty note named "momo"
-					n = newNote("momo")
-					# use defaults
-					n = newNote()
+# create an empty table named "tony" with 5 rows and 2 columns:
+t = newTable("tony", 5, 2)
+# use defaults
+t = newTable()
+# create an empty matrix named "gina" with 42 rows and 23 columns:
+m = newMatrix("gina", 42, 23)
+# use defaults
+m = newMatrix()
+# create an empty graph window
+g = newGraph()
+# create an empty note named "momo"
+n = newNote("momo")
+# use defaults
+n = newNote()
 			</programlisting></para>
 			<para>
 				New objects will always be added to the active folder.
 				The functions table, matrix, graph and note will start searching in the active folder and, failing this, continue with a depth-first recursive search of the project's root folder.
 				In order to access other folders, there are the functions
 				<programlisting width="40">
-					f = activeFolder()
-					# and
-					f = rootFolder()
+f = activeFolder()
+# and
+f = rootFolder()
 				</programlisting>
 				which can be used to access subfolders and windows:
 				<programlisting width="40">
-					f2 = f.folders()[number]
-					f2 = f.folder(name, caseSensitive=True, partialMatch=False)
-					t = f.table(name, recursive=False)
-					m = f.matrix(name, recursive=False)
-					g = f.graph(name, recursive=False)
-					n = f.note(name, recursive=False)
+f2 = f.folders()[number]
+f2 = f.folder(name, caseSensitive=True, partialMatch=False)
+t = f.table(name, recursive=False)
+m = f.matrix(name, recursive=False)
+g = f.graph(name, recursive=False)
+n = f.note(name, recursive=False)
 				</programlisting>
 				If you supply True for the recursive argument, a depth-first recursive search of all subfolders will be performed and the first match returned.</para>
 
@@ -461,42 +458,41 @@
 			<para>We'll assume that you have assigned some table to the variable
 				<varname>t</varname>. You can access its numeric cell values with
 				<programlisting width="40">
-					t.column(col).valueAt(row)
-					# and
-					t.column(col).setValueAt(row, value)
+t.column(col).valueAt(row)
+# and
+t.column(col).setValueAt(row, value)
 				</programlisting> Whenever you have to specify a column, you can use either the
 				column name (as a string) or the consecutive column number (starting
 				with 0). Row numbers also start with 0. If
 				you want to work with arbitrary texts or the textual representations
 				of numeric values, you can use <programlisting width="40">
-					t.column(col).textAt(row)
-					# and
-					t.column(col).setTextAt(row, string)
-					</programlisting> The number of columns and rows is accessed via <programlisting
-					width="40">
-					t.numRows()
-					t.numCols()
-					t.setNumRows(number)
-					t.setNumCols(number)
+t.column(col).textAt(row)
+# and
+t.column(col).setTextAt(row, string)
+					</programlisting> The number of columns and rows is accessed via <programlisting width="40">
+t.numRows()
+t.numCols()
+t.setNumRows(number)
+t.setNumCols(number)
 					</programlisting> Column names can be read and written with <programlisting width="40">
-					t.column(name).name()
-					t.column(name).setName(newName)
+t.column(name).name()
+t.column(name).setName(newName)
 					</programlisting> Normalize a single or all columns: <programlisting width="40">
-					t.normalize(col)
-					t.normalize()
+t.normalize(col)
+t.normalize()
 				</programlisting> Import values from <varname>file</varname>, using
 				<varname>sep</varname> as separator char and ignoring
 				<varname>ignore</varname> lines at the head of the file. The flags
 				should be self-explanatory. <programlisting width="40">
-					t.importASCII(file, sep="\t", ignore=0, renameCols=False, stripSpaces=True, simplifySpace=False, newTable=False)
+t.importASCII(file, sep="\t", ignore=0, renameCols=False, stripSpaces=True, simplifySpace=False, newTable=False)
 				</programlisting>
 			</para>
 
 			<para>As a simple example, let's set some column values without using
 				the dialog. <programlisting width="40">
-					t = table("table1")
-					for i in range(1, t.numRows()+1):
-					t.column(0).setValueAt(i-1, i**2)
+t = table("table1")
+for i in range(1, t.numRows()+1):
+	t.column(0).setValueAt(i-1, i**2)
 			</programlisting></para>
 		</sect3>
 
@@ -506,16 +502,15 @@
 			<para>We'll assume that you have assigned some matrix to the variable
 				<varname>m</varname>. Accessing cell values is very similar to Table,
 				but since Matrix doesn't use column logic, row arguments are specified
-				before columns and obviously you can't use column name. <programlisting
-					width="40">
-					m.cell(row, col)
-					m.setCell(row, col, value)
-					m.text(row, col)
-					m.setText(row, col, string)
+				before columns and obviously you can't use column name. <programlisting width="40">
+m.cell(row, col)
+m.setCell(row, col, value)
+m.text(row, col)
+m.setText(row, col, string)
 					</programlisting> Also like with tables, there's <programlisting width="40">
-					m.numRows()
-					# and
-					m.numCols()
+m.numRows()
+# and
+m.numCols()
 			</programlisting></para>
 		</sect3>
 
@@ -524,7 +519,7 @@
 
 			<para>If you want to create a new Graph window for some data in table
 				table1, you can use the plot command: <programlisting width="40">
-					g = plot(table, column, type)
+g = plot(table, column, type)
 				</programlisting> <varname>type</varname> is a number between 0 and 10 and
 				specifies the desired plot type: <variablelist spacing="compact">
 					<varlistentry>
@@ -617,36 +612,35 @@
 				</variablelist> You can plot more than one column at once by giving
 				a Python tuple (see the <ulink url="http://docs.python.org/tut">Python
 					Tutorial</ulink>) as an argument: <programlisting width="40">
-					g = plot(table("table1"), (2,4,7), 2)
+g = plot(table("table1"), (2,4,7), 2)
 			</programlisting></para>
 
 			<para>If you want to add a curve to an existing Graph window, you have
 				to choose the destination layer. Usually, <programlisting width="40">
-					l = g.activeLayer()
+l = g.activeLayer()
 				</programlisting> will do the trick, but you can also select a layer by its number:
 				<programlisting width="40">
-					l = g.layer(num)
-					</programlisting> You can then add or remove curves to or from this layer: <programlisting
-					width="40">
-					l.insertCurve(table, column, type=1)
-					l.insertCurve(table, Xcolumn, Ycolumn, type=1)
-					l.removeCurve(curveName)
-					l.removeCurve(curveNumber)
-					l.deleteFitCurves()
+l = g.layer(num)
+					</programlisting> You can then add or remove curves to or from this layer: <programlisting width="40">
+l.insertCurve(table, column, type=1)
+l.insertCurve(table, Xcolumn, Ycolumn, type=1)
+l.removeCurve(curveName)
+l.removeCurve(curveNumber)
+l.deleteFitCurves()
 				</programlisting> In case you need the number of curves on a layer, you can get it
 				with <programlisting width="40">
-					l.numCurves()
+l.numCurves()
 			</programlisting></para>
 
 			<para>Layers and whole Graphs can be printed and exported from within
 				Python. Before you do this, you would probably want to change layer and axis
 				titles as well as legend texts: <programlisting width="40">
-					l.setTitle(title)
-					l.setXTitle(Xtitle)
-					l.setYTitle(Ytitle)
-					l.setLegend(text)
+l.setTitle(title)
+l.setXTitle(Xtitle)
+l.setYTitle(Ytitle)
+l.setLegend(text)
 					</programlisting> You can also customize the scales of the different axes using: <programlisting width="40">
-					l.setScale(int axis, double start, double end, double step=0.0, int majorTicks=5, int minorTicks=5, int type=0, bool inverted=False);
+l.setScale(int axis, double start, double end, double step=0.0, int majorTicks=5, int minorTicks=5, int type=0, bool inverted=False);
 				</programlisting>
 				where <varname>axis</varname> is a number between 0 and 3 with the following signification: <variablelist spacing="compact">
 					<varlistentry>
@@ -701,14 +695,14 @@
 				and <varname>step</varname> defines the size of the interval between the major scale ticks. If not specified (default value is 0.0), the step size is calculated automatically.
 				The other flags should be self-explanatory.
 				Now, here is how you can export a layer <programlisting width="40">
-					l.print()
-					l.exportToSVG(filename)
-					l.exportToEPS(filename)
-					l.exportImage(filename, filetype="PNG", quality=100, transparent=False)
+l.print()
+l.exportToSVG(filename)
+l.exportToEPS(filename)
+l.exportImage(filename, filetype="PNG", quality=100, transparent=False)
 					</programlisting> and a graph <programlisting width="40">
-					g.print()
-					g.exportToSVG(filename)
-					g.exportToEPS(filename)
+g.print()
+g.exportToSVG(filename)
+g.exportToEPS(filename)
 			</programlisting></para>
 		</sect3>
 
@@ -718,9 +712,9 @@
 			<para>Assuming you have a Graph named "graph1" with a curve entitled
 				"table1_2" (on its active layer), a minimal Fit example would be:
 				<programlisting width="40">
-					f = GaussFit(graph("graph1").activeLayer(), "table1_2")
-					f.guessInitialValues()
-					f.fit()
+f = GaussFit(graph("graph1").activeLayer(), "table1_2")
+f.guessInitialValues()
+f.fit()
 				</programlisting> This creates a new GaussFit object on the curve, lets it guess
 				the start parameters and does the fit. The following fit types are
 				supported: <itemizedlist>
@@ -763,53 +757,53 @@
 					<listitem>
 						<para>NonLinearFit(layer, curve)</para>
 						<programlisting width="40">
-							f = NonLinearFit(layer, curve)
-							f.setParameters(name1, ...)
-							f.setFormula(formula_string)
+f = NonLinearFit(layer, curve)
+f.setParameters(name1, ...)
+f.setFormula(formula_string)
 						</programlisting>
 					</listitem>
 
 					<listitem>
 						<para>PluginFit(layer, curve)</para>
 						<programlisting width="40">
-							f = PluginFit(layer, curve)
-							f.load(pluginName)
+f = PluginFit(layer, curve)
+f.load(pluginName)
 						</programlisting>
 					</listitem>
 				</itemizedlist> For each of these, you can optionally restrict the X
 				range that will be used for the fit, like in <programlisting width="40">
-					f = LinearFit(graph("graph1").activeLayer(), "table1_2", 2, 7)
-					f.fit()
+f = LinearFit(graph("graph1").activeLayer(), "table1_2", 2, 7)
+f.fit()
 			</programlisting></para>
 
 			<para>After creating the Fit object and before calling its fit()
 				method, you can set a number of parameters that influence the fit:
 				<programlisting width="80">
-					f.setDataFromCurve(curve)			<lineannotation>change data source</lineannotation>
-					f.setDataFromCurve(curve, graph)		<lineannotation>change data source</lineannotation>
-					f.setInterval(from, to)				<lineannotation>change data range</lineannotation>
-					f.setInitialValue(number, value)
-					f.setInitialValues(value1, ...)
-					f.guessInitialValues()
-					f.setAlgorithm(algo) # algo = Fit.ScaledLevenbergMarquardt, Fit.UnscaledLevenbergMarquardt, Fit.NelderMeadSimplex
-					f.setWeightingData(method, colname) # method = Fit.NoWeighting, Fit.Instrumental, Fit.Statistical, Fit.Dataset
-					f.setTolerance(tolerance)
-					f.setOutputPrecision(precision)
-					f.setMaximumIterations(number)
-					f.scaleErrors(yes = True)
-					f.setColor(qt.QColor("green"))			<lineannotation>change the color of the result fit curve to green (default color is red)</lineannotation>
+f.setDataFromCurve(curve)			<lineannotation>change data source</lineannotation>
+f.setDataFromCurve(curve, graph)		<lineannotation>change data source</lineannotation>
+f.setInterval(from, to)				<lineannotation>change data range</lineannotation>
+f.setInitialValue(number, value)
+f.setInitialValues(value1, ...)
+f.guessInitialValues()
+f.setAlgorithm(algo) # algo = Fit.ScaledLevenbergMarquardt, Fit.UnscaledLevenbergMarquardt, Fit.NelderMeadSimplex
+f.setWeightingData(method, colname) # method = Fit.NoWeighting, Fit.Instrumental, Fit.Statistical, Fit.Dataset
+f.setTolerance(tolerance)
+f.setOutputPrecision(precision)
+f.setMaximumIterations(number)
+f.scaleErrors(yes = True)
+f.setColor(qt.QColor("green"))			<lineannotation>change the color of the result fit curve to green (default color is red)</lineannotation>
 			</programlisting></para>
 
 			<para>After you've called fit(), you have a number of possibilities
 				for extracting the results: <programlisting width="40">
-					f.results()
-					f.errors()
-					f.chiSquare()
-					f.rSquare()
-					f.dataSize()
-					f.numParameters()
-					f.parametersTable("params")
-					f.covarianceMatrix("cov")
+f.results()
+f.errors()
+f.chiSquare()
+f.rSquare()
+f.dataSize()
+f.numParameters()
+f.parametersTable("params")
+f.covarianceMatrix("cov")
 			</programlisting></para>
 		</sect3>
 	</sect2>
@@ -833,9 +827,9 @@
 			probably with some revisions in the design, so only some basic functions are documented
 			(and supported) for now.</para>
 		<programlisting width="80">
-			col = newTable("my-table",2,30).column("1")
-			col.setName("abc")
-			table("my-table").column("2").remove()
+col = newTable("my-table",2,30).column("1")
+col.setName("abc")
+table("my-table").column("2").remove()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -892,19 +886,19 @@
 			getting/setting row values via the values in the corresponding X column. This is done
 			using Python's item access notation for sequence types (as in col["abc"]).</para>
 		<programlisting width="80">
-			# basic access
-			tab = newTable("tabula1",2,20)
-			col = tab.column("1")
-			col.setValueAt(1, 123.0)
-			print col.valueAt(1)
-			# replacing multiple values at once is more efficient than setting them one at a time
-			col.replaceValues(5, [11.2, 12.3, 23.4, 34.5, 45.6])
-			# set a value in the second column based on the content of the first one
-			# (needs &appname; >= 0.2.4)
-			tab.column("2")[23.4] = 46.8
-			dest = table("tabula1").column("2")
-			# also, copying from another column can be done in one go:
-			dest.copy(col, 5, 2, 10)
+# basic access
+tab = newTable("tabula1",2,20)
+col = tab.column("1")
+col.setValueAt(1, 123.0)
+print col.valueAt(1)
+# replacing multiple values at once is more efficient than setting them one at a time
+col.replaceValues(5, [11.2, 12.3, 23.4, 34.5, 45.6])
+# set a value in the second column based on the content of the first one
+# (needs &appname; >= 0.2.4)
+tab.column("2")[23.4] = 46.8
+dest = table("tabula1").column("2")
+# also, copying from another column can be done in one go:
+dest.copy(col, 5, 2, 10)
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -1033,12 +1027,12 @@
 		<title>class MDIWindow (inherits QWidget)</title>
 		<para>Base class of Table, Matrix, Graph and Note. A redesigned analogue under the name of "Part" (inheriting from AbstractAspect) is under development; it should be possible to provide a backwards-compatible interface, though.</para>
 		<programlisting width="80">
-			tmp = newTable("temp1", 2, 10)
-			tmp.setWindowLabel("a temporary table")
-			tmp.setCaptionPolicy(MDIWindow.Label)
-			# ...
-			tmp.confirmClose(False)
-			tmp.close()
+tmp = newTable("temp1", 2, 10)
+tmp.setWindowLabel("a temporary table")
+tmp.setCaptionPolicy(MDIWindow.Label)
+# ...
+tmp.confirmClose(False)
+tmp.close()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -1085,11 +1079,11 @@
 		<title>class Table (inherits MDIWindow)</title>
 		<para>Class of table (spreadsheet) windows.</para>
 		<programlisting width="80">
-			tab = newTable("tabula",2,10)
-			for j in range(0, tab.numCols()):
-			for i in range(0, tab.numRows()):
-			tab.column(j).setValueAt(i,i*j)	
-			tab.normalize()
+tab = newTable("tabula",2,10)
+for j in range(0, tab.numCols()):
+	for i in range(0, tab.numRows()):
+		tab.column(j).setValueAt(i,i*j)	
+tab.normalize()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -1200,10 +1194,10 @@
 		<title>class Matrix (inherits MDIWindow)</title>
 		<para>Class of matrix windows.</para>
 		<programlisting width="80">
-			mat = newMatrix("mat", 10, 20)
-			mat.setCoordinates(100,2000,100,1000)
-			mat.setFormula("i*j")
-			mat.recalculate()
+mat = newMatrix("mat", 10, 20)
+mat.setCoordinates(100,2000,100,1000)
+mat.setFormula("i*j")
+mat.recalculate()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -1295,17 +1289,17 @@
 		<title>class ArrowMarker</title>
 		<para>A line or an arrow displayed on a graph.</para>
 		<programlisting width="80">
-			arrow = ArrowMarker()
-			arrow.setStart(50,200)
-			arrow.setEnd(400,400)
-			arrow.setWidth(2)
-			arrow.drawStartArrow(False)
-			arrow.drawEndArrow(True)
-			arrow.setColor(Qt.green)
+arrow = ArrowMarker()
+arrow.setStart(50,200)
+arrow.setEnd(400,400)
+arrow.setWidth(2)
+arrow.drawStartArrow(False)
+arrow.drawEndArrow(True)
+arrow.setColor(Qt.green)
 
-			layer = newGraph().activeLayer()
-			layer.addArrow(arrow)
-			layer.replot()
+layer = newGraph().activeLayer()
+layer.addArrow(arrow)
+layer.replot()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -1365,10 +1359,10 @@
 		<title>class ImageMarker</title>
 		<para>An image to be displayed on a graph.</para>
 		<programlisting width="80">
-			layer = newGraph().activeLayer()
-			image = layer.addImage("/usr/share/icons/hicolor/128x128/apps/scidavis.png")
-			image.setCoordinates(200,800,700,300)
-			layer.replot()
+layer = newGraph().activeLayer()
+image = layer.addImage("/usr/share/icons/hicolor/128x128/apps/scidavis.png")
+image.setCoordinates(200,800,700,300)
+layer.replot()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -1399,12 +1393,12 @@
 		<para>Text boxes displayed on a graph. While this is also used for legends, a better
 			(since more general) name would probably be TextMarker.</para>
 		<programlisting width="80">
-			layer = newGraph().activeLayer()
-			legend = layer.newLegend("hello world")
-			legend.setBackgroundColor(Qt.green)
-			legend.setTextColor(Qt.darkBlue)
-			legend.setFont(QtGui.QFont("Arial",14,QtGui.QFont.Bold))
-			layer.replot()
+layer = newGraph().activeLayer()
+legend = layer.newLegend("hello world")
+legend.setBackgroundColor(Qt.green)
+legend.setTextColor(Qt.darkBlue)
+legend.setFont(QtGui.QFont("Arial",14,QtGui.QFont.Bold))
+layer.replot()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -1448,15 +1442,15 @@
 			Qwt library, but exported and documented as part of &appname;'s API for simplicity. Also,
 			convenience methods for setting outline/fill colors are added on top of Qwt.</para>
 		<programlisting width="80">
-			symbol = QwtSymbol()
-			symbol.setStyle(QwtSymbol.Triangle)
-			symbol.setOutlineColor(QtGui.QColor(Qt.red))
-			symbol.setFillColor(QtGui.QColor(Qt.green))
-			symbol.setSize(20)
-			# assuming Graph1 exists and contains a plot
-			layer = graph("Graph1").activeLayer()
-			layer.curve(0).setSymbol(symbol)
-			layer.replot()
+symbol = QwtSymbol()
+symbol.setStyle(QwtSymbol.Triangle)
+symbol.setOutlineColor(QtGui.QColor(Qt.red))
+symbol.setFillColor(QtGui.QColor(Qt.green))
+symbol.setSize(20)
+# assuming Graph1 exists and contains a plot
+layer = graph("Graph1").activeLayer()
+layer.curve(0).setSymbol(symbol)
+layer.replot()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -1581,13 +1575,13 @@
 			&appname;'s API for simplicity. Also, convenience methods for setting outline/fill
 			colors and fill style are added on top of Qwt.</para>
 		<programlisting width="80">
-			# assuming Graph1 exists and contains a lines plot
-			layer = graph("Graph1").activeLayer()
-			curve = layer.curve(0)
-			curve.setOutlineColor(QtGui.QColor(Qt.red))
-			curve.setFillColor(QtGui.QColor(Qt.green))
-			curve.setFillStyle(Qt.CrossPattern)
-			layer.replot()
+# assuming Graph1 exists and contains a lines plot
+layer = graph("Graph1").activeLayer()
+curve = layer.curve(0)
+curve.setOutlineColor(QtGui.QColor(Qt.red))
+curve.setFillColor(QtGui.QColor(Qt.green))
+curve.setFillStyle(Qt.CrossPattern)
+layer.replot()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -1714,10 +1708,10 @@
 	<sect2><title>class Grid</title>
 		<para>Handles options related to the grid drawn on a Layer. Added in &appname; 0.2.4.</para>
 		<programlisting width="80">
-			layer = newGraph().activeLayer()
-			layer.showGrid()
-			layer.grid().setMajorPen(QtGui.QColor(Qt.black))
-			layer.replot()
+layer = newGraph().activeLayer()
+layer.showGrid()
+layer.grid().setMajorPen(QtGui.QColor(Qt.black))
+layer.replot()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -1835,19 +1829,19 @@
 			do not show up until you call replot() - if you're changing many options on a complex
 			layer, this is faster than automatically updating the layer on every change.</para>
 		<programlisting width="80">
-			layer = newGraph().activeLayer()
-			layer.setTitle("Murphy Certainty Principle")
-			layer.setXTitle("time")
-			layer.setYTitle("motivation")
-			layer.insertFunctionCurve("1/x", 0, 10)
-			# the constants QwtPlot.xBottom (=2) and QwtPlot.yLeft (=0) were added in &appname; 0.2.4
-			layer.setScale(QwtPlot.xBottom, 0, 10)
-			layer.setScale(QwtPlot.yLeft, 0, 10)
-			layer.setBackgroundColor(QtGui.QColor(18,161,0))
-			layer.setCanvasColor(QtGui.QColor(161,120,50))
-			layer.curve(0).setPen(QtGui.QPen(Qt.yellow, 3))
-			layer.removeLegend()
-			layer.replot()
+layer = newGraph().activeLayer()
+layer.setTitle("Murphy Certainty Principle")
+layer.setXTitle("time")
+layer.setYTitle("motivation")
+layer.insertFunctionCurve("1/x", 0, 10)
+# the constants QwtPlot.xBottom (=2) and QwtPlot.yLeft (=0) were added in &appname; 0.2.4
+layer.setScale(QwtPlot.xBottom, 0, 10)
+layer.setScale(QwtPlot.yLeft, 0, 10)
+layer.setBackgroundColor(QtGui.QColor(18,161,0))
+layer.setCanvasColor(QtGui.QColor(161,120,50))
+layer.curve(0).setPen(QtGui.QPen(Qt.yellow, 3))
+layer.removeLegend()
+layer.replot()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2207,11 +2201,11 @@
 		<para>A graph window, consisting of layers, which in turn contain plot curves and markers.
 		</para>
 		<programlisting width="80">
-			g = newGraph()
-			layer1 = g.activeLayer()
-			layer2 = g.addLayer()
-			g.setMargins(40,40,40,40)
-			g.arrangeLayers()
+g = newGraph()
+layer1 = g.activeLayer()
+layer2 = g.addLayer()
+g.setMargins(40,40,40,40)
+g.arrangeLayers()
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2324,9 +2318,9 @@
 			as Python code. Triggering executing of code in a Note currently doesn't work reliably,
 			but this can essentially be circumvented using exec(str(note.text())).</para>
 		<programlisting width="80">
-			n = newNote()
-			n.setText("Hello World")
-			n.exportASCII("output.txt")
+n = newNote()
+n.setText("Hello World")
+n.exportASCII("output.txt")
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2365,9 +2359,9 @@
 			However, most of the time, this instance is used implicitly via methods copied to the
 			global namespace by the default scidavisrc.py configuration file.</para>
 		<programlisting width="80">
-			for win in app.windows():
-			print win.name()
-			app.activeFolder().save("subproject.sciprj")
+for win in app.windows():
+	print win.name()
+app.activeFolder().save("subproject.sciprj")
 		</programlisting>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -3439,10 +3433,10 @@
 			</para>
 
 			<programlisting width="40">
-				import sys 
-				sys.path.append("/etc") 
-				import scidavisrc 
-				# your custom stuff
+import sys 
+sys.path.append("/etc") 
+import scidavisrc 
+# your custom stuff
 			</programlisting>
 		</sect3>
 	</sect2>
