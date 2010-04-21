@@ -109,8 +109,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 						</xsl:variable>
 						<xsl:value-of select="normalize-space($ref.page)"/>#<xsl:call-template name="object.id"/></xsl:attribute>
 					<xsl:value-of select="primary"/>
-					<xsl:if test="secondary">/<xsl:value-of select="secondary"/></xsl:if>
-					<xsl:if test="tertiary">/<xsl:value-of select="tertiary"/></xsl:if>
+					<xsl:if test="secondary">, <xsl:value-of select="secondary"/></xsl:if>
+					<xsl:if test="tertiary">, <xsl:value-of select="tertiary"/></xsl:if>
 				</keyword>
 			</xsl:for-each>
 		</section>

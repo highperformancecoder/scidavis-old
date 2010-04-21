@@ -1,0 +1,535 @@
+<title>Formulas (muParser)</title>
+
+<indexterm><primary>Scripting</primary><secondary>MuParser</secondary></indexterm>
+<indexterm><primary>Formulas</primary></indexterm>
+
+<para>&appname; supports different interpreters
+	for evaluating mathematical expressions (and for executing scripts).
+	This chapter documents the simple mathematical expressions available in
+	projects which are configured to use muParser for evaluation; as well as
+	in a few places which currently cannot be switched to use a different interpreter.
+	Only calculations embedded in notes windows, column and matrix formulas can
+	be switched to use <link linkend="scripting">Python</link>.
+</para>
+
+<sect1 id="sec-muparser-syntax">
+	<title>Basic syntax and constants</title>
+<para>The constants _e=e=E and _pi=pi=PI=Pi are defined, as well as the
+	operators and functions listed below. muParser is purely a parser for mathematical
+	expressions and as such does not support executing complex scripts. However,
+	you can make formulas easier to read and modify by assigning subexpressions to
+	variables and inserting comments.
+</para>
+<para><emphasis>Variable assignments</emphasis> evaluate to the assigned value, so
+	they can be used in the middle of a formula. They can also stand on a line of
+	their own, or separated from other parts of the formula by a semicolon (;).
+	The result of evaluating the last line of a multi-line formula is taken as the
+	result of the whole formula.
+</para>
+<para><emphasis>Comments</emphasis> start with a hash mark (#) and run till the end
+	of the line.</para>
+</sect1>
+
+<sect1 id="sec-muparser-operators">
+	<title>Mathematical Operators</title>
+<table frame="sides" pgwide="1" tocentry="1">
+	<tgroup cols="2">
+		<colspec align="left" colname="name" colwidth="1*" />
+
+		<colspec align="justify" colname="description" colwidth="10*" />
+
+		<thead>
+			<row>
+				<entry>Name</entry>
+
+				<entry>Description</entry>
+			</row>
+		</thead>
+
+		<tbody>
+			<row>
+				<entry>+</entry>
+
+				<entry>Addition</entry>
+			</row>
+
+			<row>
+				<entry>-</entry>
+
+				<entry>Substraction</entry>
+			</row>
+
+			<row>
+				<entry>*</entry>
+
+				<entry>Multiplication</entry>
+			</row>
+
+			<row>
+				<entry>/</entry>
+
+				<entry>Division</entry>
+			</row>
+
+			<row>
+				<entry>^</entry>
+
+				<entry>Exponentiation (raise a to the power of b)</entry>
+			</row>
+
+			<row>
+				<entry>and</entry>
+
+				<entry>logical and (returns 0 or 1)</entry>
+			</row>
+
+			<row>
+				<entry>or</entry>
+
+				<entry>logical or (returns 0 or 1)</entry>
+			</row>
+
+			<row>
+				<entry>xor</entry>
+
+				<entry>logical exclusive or (returns 0 or 1)</entry>
+			</row>
+
+			<row>
+				<entry>&lt;</entry>
+
+				<entry>less then (returns 0 or 1)</entry>
+			</row>
+
+			<row>
+				<entry>&lt;=</entry>
+
+				<entry>less then or equal (returns 0 or 1)</entry>
+			</row>
+
+			<row>
+				<entry>==</entry>
+
+				<entry>equal (returns 0 or 1)</entry>
+			</row>
+
+			<row>
+				<entry>&gt;=</entry>
+
+				<entry>greater then or equal (returns 0 or 1)</entry>
+			</row>
+
+			<row>
+				<entry>&gt;</entry>
+
+				<entry>greater then (returns 0 or 1)</entry>
+			</row>
+
+			<row>
+				<entry>!=</entry>
+
+				<entry>not equal (returns 0 or 1)</entry>
+			</row>
+		</tbody>
+	</tgroup>
+</table>
+</sect1>
+
+<sect1 id="sec-muparser-functions">
+	<title>Mathematical Functions</title>
+<table frame="sides" pgwide="1" tocentry="1">
+	<tgroup cols="2">
+		<colspec align="left" colname="name" colwidth="1*" />
+
+		<colspec align="justify" colname="description" colwidth="10*" />
+
+		<thead>
+			<row>
+				<entry>Name</entry>
+
+				<entry>Description</entry>
+			</row>
+		</thead>
+
+		<tbody>
+			<row>
+				<entry>abs(x)</entry>
+
+				<entry>absolute value of x</entry>
+			</row>
+
+			<row>
+				<entry>acos(x)</entry>
+
+				<entry>inverse cosinus</entry>
+			</row>
+
+			<row>
+				<entry>acosh(x)</entry>
+
+				<entry>inverse hyperbolic cosinus</entry>
+			</row>
+
+			<row>
+				<entry>asin(x)</entry>
+
+				<entry>inverse sinus</entry>
+			</row>
+
+			<row>
+				<entry>asinh(x)</entry>
+
+				<entry>inverse hyperbolic sinus</entry>
+			</row>
+
+			<row>
+				<entry>atan(x)</entry>
+
+				<entry>inverse tangent</entry>
+			</row>
+
+			<row>
+				<entry>atanh(x)</entry>
+
+				<entry>inverse hyperbolic tangent</entry>
+			</row>
+
+			<row>
+				<entry>avg(x1,x2,x3,...)</entry>
+
+				<entry>average value, this command accept a list of arguments
+					separated by commas</entry>
+			</row>
+
+			<row>
+				<entry>bessel_j0(x)</entry>
+
+				<entry>Regular cylindrical Bessel function of zeroth order,
+					J<subscript>0</subscript>(x).</entry>
+			</row>
+
+			<row>
+				<entry>bessel_j1(x)</entry>
+
+				<entry>Regular cylindrical Bessel function of first order,
+					J<subscript>1</subscript>(x).</entry>
+			</row>
+
+			<row>
+				<entry>bessel_jn(x,n)</entry>
+
+				<entry>Regular cylindrical Bessel function of
+					n<superscript>th</superscript> order,
+					J<subscript>n</subscript>(x).</entry>
+			</row>
+
+			<row>
+				<entry>bessel_jn_zero(n, s)</entry>
+				<entry>s<superscript>th</superscript> zero of regular cylindrical Bessel function
+					of n<superscript>th</superscript> order,
+					J<subscript>n</subscript>(bessel_jn_zero(n,s))=0
+				</entry>
+			</row>
+
+			<row>
+				<entry>bessel_y0(x)</entry>
+
+				<entry>Irregular cylindrical Bessel function of zeroth order,
+					Y<subscript>0</subscript>(x) for x&gt;0.</entry>
+			</row>
+
+			<row>
+				<entry>bessel_y1(x)</entry>
+
+				<entry>Irregular cylindrical Bessel function of first order,
+					Y<subscript>1</subscript>(x) for x&gt;0.</entry>
+			</row>
+
+			<row>
+				<entry>bessel_yn(x,n)</entry>
+
+				<entry>Irregular cylindrical Bessel function of
+					n<superscript>th</superscript> order,
+					Y<subscript>n</subscript>(x) for x&gt;0.</entry>
+			</row>
+
+			<row>
+				<entry>beta (a,b)</entry>
+
+				<entry>Computes the Beta Function, B(a,b) =
+					Gamma(a)*Gamma(b)/Gamma(a+b) for a &gt; 0 and b &gt; 0.</entry>
+			</row>
+
+			<row>
+				<entry>ceil(x)</entry>
+
+				<entry>ceiling; smallest integer greater or equal to x</entry>
+			</row>
+
+			<row>
+				<entry>cos(x)</entry>
+
+				<entry>cosinus of x</entry>
+			</row>
+
+			<row>
+				<entry>cosh(x)</entry>
+
+				<entry>hyperbolic cosinus of x</entry>
+			</row>
+
+			<row>
+				<entry>erf(x)</entry>
+
+				<entry>error function of x</entry>
+			</row>
+
+			<row>
+				<entry>erfc(x)</entry>
+
+				<entry>Complementary error function erfc(x) = 1 -
+					erf(x).</entry>
+			</row>
+
+			<row>
+				<entry>erfz(x)</entry>
+
+				<entry>The Gaussian probability density function Z(x).</entry>
+			</row>
+
+			<row>
+				<entry>erfq(x)</entry>
+
+				<entry>The upper tail of the Gaussian probability function
+					Q(x).</entry>
+			</row>
+
+			<row>
+				<entry>exp(x)</entry>
+
+				<entry>Exponential function: e raised to the power of x.</entry>
+			</row>
+
+			<row>
+				<entry>floor(x)</entry>
+
+				<entry>floor; largest integer less than or equal to x</entry>
+			</row>
+
+			<row>
+				<entry>gamma(x)</entry>
+
+				<entry>Computes the Gamma function, subject to x not being a
+					negative integer</entry>
+			</row>
+
+			<row>
+				<entry>gammaln(x)</entry>
+
+				<entry>Computes the logarithm of the Gamma function, subject to
+					x not a being negative integer. For x&lt;0, log(|Gamma(x)|) is
+					returned.</entry>
+			</row>
+
+			<row>
+				<entry>hazard(x)</entry>
+
+				<entry>Computes the hazard function for the normal distribution
+					h(x) = erfz(x)/erfq(x).</entry>
+			</row>
+
+			<row>
+				<entry>ln(x)</entry>
+
+				<entry>natural logarythm of x</entry>
+			</row>
+
+			<row>
+				<entry>log(x)</entry>
+
+				<entry>decimal logarythm of x</entry>
+			</row>
+
+			<row>
+				<entry>log2(x)</entry>
+
+				<entry>base 2 logarythm of x</entry>
+			</row>
+
+			<row>
+				<entry>w0(x)</entry>
+				<entry>Principal branch of Lambert's W function, W<subscript>0</subscript>(x).
+					W<subscript>0</subscript> is defined as a solution to the equation
+					W<subscript>0</subscript>(x)*exp(W<subscript>0</subscript>(x))=x.
+					For x&lt;0, there are tow real-valued branches; this function computes the one where
+					W&gt;-1 for x&lt;0 (compare w1(x)).
+				</entry>
+			</row>
+
+			<row>
+				<entry>w1(x)</entry>
+				<entry>Secondary branch of Lambert's W function, W<subscript>-1</subscript>(x).
+					W<subscript>-1</subscript> is defined as a solution to the equation
+					W<subscript>-1</subscript>(x)*exp(W<subscript>-1</subscript>(x))=x.
+					For x&lt;0, there are tow real-valued branches; this function computes the one where
+					W&lt;-1 for x&lt;0 (compare w0(x)).
+				</entry>
+			</row>
+
+			<row>
+				<entry>min(x1,x2,x3,...)</entry>
+
+				<entry>Minimum of the list of arguments</entry>
+			</row>
+
+			<row>
+				<entry>max(x1,x2,x3,...)</entry>
+
+				<entry>Maximum of the list of arguments</entry>
+			</row>
+
+			<row>
+				<entry>mod(x,y)</entry>
+				<entry>x modulo y; remainder of integer division x/y</entry>
+			</row>
+
+			<row>
+				<entry>pow(x,y)</entry>
+				<entry>x to the power of y, x^y</entry>
+			</row>
+
+			<row>
+				<entry>rint(x)</entry>
+
+				<entry>Round to nearest integer.</entry>
+			</row>
+
+			<row>
+				<entry>sign(x)</entry>
+
+				<entry>Sign function: -1 if x&lt;0; 1 if x&gt;0.</entry>
+			</row>
+
+			<row>
+				<entry>sin(x)</entry>
+
+				<entry>sinus of x</entry>
+			</row>
+
+			<row>
+				<entry>sinh(x)</entry>
+
+				<entry>hyperblic sinus of x</entry>
+			</row>
+
+			<row>
+				<entry>sqrt(x)</entry>
+
+				<entry>square root of x</entry>
+			</row>
+
+			<row>
+				<entry>tan(x)</entry>
+
+				<entry>tangent of x</entry>
+			</row>
+
+			<row>
+				<entry>tanh(x)</entry>
+
+				<entry>hyperbolic tangent of x</entry>
+			</row>
+		</tbody>
+	</tgroup>
+</table>
+</sect1>
+
+<sect1 id="sec-muparser-nonmath">
+	<title>Non-Mathematical Functions</title>
+<table frame="sides" pgwide="1" tocentry="1">
+	<tgroup cols="2">
+		<colspec align="left" colname="name" colwidth="1*" />
+
+		<colspec align="justify" colname="description" colwidth="10*" />
+
+		<thead>
+			<row>
+				<entry>Name</entry>
+
+				<entry>Description</entry>
+			</row>
+		</thead>
+
+		<tbody>
+			<row>
+				<entry>cell(a,b)</entry>
+
+				<entry>In the contex of a matrix, returns the value at row a and column b.
+					In the context of a table, returns the value at column a and row b (remember that tables use column logic).
+					Everywhere else, this function is undefined.
+
+					In the case of tables, the column is specified as a path string; see the
+					documentation of column() for supported path formats.
+				</entry>
+			</row>
+
+			<row>
+				<entry>cell_(column, row)</entry>
+				<entry>
+					In the context of a table, return the value of a cell specified using 1-based indices.
+					Wherever possible, you should use cell() instead, because inserting/removing/moving
+					columns will break formulas using cell_().
+				</entry>
+			</row>
+
+			<row>
+				<entry>col(c)</entry>
+
+				<entry>
+					DEPRECATED; use column() or cell() instead.
+					Note that the user interface still uses col() until a proper language-specific mechanism
+					is implemented.
+				</entry>
+			</row>
+
+			<row>
+				<entry>column("path")</entry>
+				<entry>
+					In a column formula, returns the value in the given column and current row (i).
+					The column path can either be the name of column in the current table, more
+					generally a relative path to a column in another table (e.g. "../otherTable/col")
+					or an absolute path (i.e., relative to the project root; e.g.
+					"/folder/otherTable/col"). Searching for a table anywhere in the project using
+					"otherTable/col" (without leading slash) is supported for backwards-compatibility
+					reasons, but is strongly discouraged - a future release will drop the requirement
+					of project-wide unique table names, at which point this usage will cease to be
+					well-defined.
+				</entry>
+			</row>
+
+			<row>
+				<entry>column_(index)</entry>
+				<entry>In a column formula, returns the value in the column given by 1-based index
+					and current row (i). You should use column() wherever possible, because inserting/
+					removing/moving columns will break formulas using column_().
+				</entry>
+			</row>
+
+			<row>
+				<entry>if(e1,e2,e3)</entry>
+
+				<entry>if e1 is true, e2 is executed else e3 is
+					executed.</entry>
+			</row>
+
+			<row>
+				<entry>tablecol(t,c)</entry>
+
+				<entry>
+					DEPRECATED; use column() instead.
+				</entry>
+			</row>
+		</tbody>
+	</tgroup>
+</table>
+</sect1>

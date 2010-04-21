@@ -4,7 +4,7 @@
 		Docbook main file for Scidavis Manual
 		*************************************
 
-		updated for Scidavis version 0.2.3
+		updated for Scidavis version 0.2.5
 
 *************************************************************************
 -->
@@ -14,7 +14,7 @@
 -->
   <!ENTITY appname "SciDAVis">
   <!ENTITY kappname "&appname;">
-  <!ENTITY version "0.2.3">
+  <!ENTITY version "0.2.5">
   <!ENTITY kappversion "&version;">
   <!ENTITY kappdirectory "scidavis">
   <!ENTITY kappdownload "http://sourceforge.net/project/scidavis" >
@@ -52,6 +52,7 @@
   <!ENTITY toolbars-chapter SYSTEM "toolbars.docbook">
   <!ENTITY dialogs-chapter SYSTEM "dialogs.docbook">
   <!ENTITY analysis-chapter SYSTEM "analysis.docbook">
+  <!ENTITY formulas-chapter SYSTEM "formulas.docbook">
   <!ENTITY scripting-chapter SYSTEM "scripting.docbook">
   <!ENTITY appendix-chapter SYSTEM "appendix.docbook">
   <!ENTITY faq-chapter SYSTEM "faq.docbook">
@@ -122,6 +123,7 @@
 <copyright>
   <year>2008</year>
   <year>2009</year>
+  <year>2010</year>
   <holder>&roger; and &knut;</holder>
 </copyright>
 
@@ -165,6 +167,9 @@
 </chapter>
 <chapter id="analysis">
 &analysis-chapter;
+</chapter>
+<chapter id="formulas">
+&formulas-chapter;
 </chapter>
 <chapter id="scripting">
 &scripting-chapter;

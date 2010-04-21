@@ -126,7 +126,6 @@ If you want to build &appname; from sources, don't forget first to download and 
 <ulink url="http://www.trolltech.com/products/qt/index.html">Qt</ulink>,
 <ulink url="http://qwtplot3d.sourceforge.net/">QwtPlot3D</ulink>,
 <ulink url="http://qwt.sourceforge.net/index.html">Qwt</ulink>,
-<ulink url="http://sourceforge.net/projects/liborigin/">liborigin</ulink>,  
 <ulink url="http://www.zlib.net/">zlib</ulink>,  
 <ulink url="http://muparser.sourceforge.net">muParser</ulink>, and
 <ulink url="http://sources.redhat.com/gsl/">GSL</ulink> libraries. 
@@ -157,13 +156,6 @@ If you want to build &appname; from sources, don't forget first to download and 
   <listitem>
     <para>You also need the <ulink url="http://muparser.sourceforge.net/">muParser</ulink>
 	 library 1.28 or later.</para>
-  </listitem>
-</varlistentry>
-<varlistentry>
-  <term>liborigin</term>
-  <listitem>
-    <para>The latest version of the <ulink url="http://sourceforge.net/projects/liborigin/">liborigin</ulink>
-	 is required for the import of Origin OPJ project files.</para>
   </listitem>
 </varlistentry>
 <varlistentry>

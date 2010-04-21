@@ -68,7 +68,7 @@ The active items in the menus depend on the active window in the project. If the
                  </imageobject>
                </mediaobject>
              </informalfigure>
- 	     <para>This object is also used to store the scripts in python which can be used to perform complex operations with &appname;. See the <link linkend="sec-intro-note">note section</link> and the <link linkend="sec-python">python scripting section</link>for more details. It can also be used as a calculator.</para>
+ 	     <para>This object is also used to store the scripts in python which can be used to perform complex operations with &appname;. See the <link linkend="sec-intro-note">note section</link> and the <link linkend="scripting">python scripting section</link>for more details. It can also be used as a calculator.</para>
           </listitem>
        </varlistentry>
        <varlistentry id="new-graph-cmd">
@@ -716,7 +716,7 @@ The active items in the menus depend on the active window in the project. If the
   <term>Graph &rarr; &add-function-cmd; (&add-function-key;)</term>
   <listitem>
   <indexterm><primary>Plot</primary><secondary>Plot a function</secondary></indexterm>
-  <para>This dialog box is used to add a function curve to the active plot. The function can be built with the common operators: * + / - and ^ for the power. The intrinsic functions available are listed in the <link linkend="sec-muParser">appendix</link>.</para>
+  <para>This dialog box is used to add a function curve to the active plot. The function can be built with the common operators: * + / - and ^ for the power. The intrinsic functions available are listed in the <link linkend="formulas">appendix</link>.</para>
   <para>The most common way to define a function is the classical cartesian coordinate definition y=f(x), this is the defaut option. The two following parameters allow to select the x range used for the plot, and the last one is used for the number of data points that are computed in the X-range.</para>
   <figure id="add-function-dialog-1">
     <title>The &add-function-cmd; dialog box: cartesian coordinates.</title>
@@ -2020,12 +2020,12 @@ The active items in the menus depend on the active window in the project. If the
   <listitem>
     <indexterm><primary>Table</primary><secondary>Columns</secondary><tertiary>Fill with values</tertiary></indexterm>
     <para>This command is used to fill the selected column with the values resulting from a mathematical formula. This command will open the Formula tag in the properties dialog of the selected table. </para>
-    <para>The available mathematical functions (assuming you are using the default scripting language, muParser) are listed in the <xref linkend="sec-muParser"/>. The special function <emphasis>col(x)</emphasis> can be used to access to the values of the column x, where x can be the column's number (as in <emphasis>col(2)</emphasis>) or its name in doublequotes (as in <emphasis>col("time")</emphasis>).
+    <para>The available mathematical functions (assuming you are using the default scripting language, muParser) are listed in the <xref linkend="formulas"/>. The special function <emphasis>col(x)</emphasis> can be used to access to the values of the column x, where x can be the column's number (as in <emphasis>col(2)</emphasis>) or its name in doublequotes (as in <emphasis>col("time")</emphasis>).
     You can also get values from other tables using the function <emphasis>tablecol(t,c)</emphasis>, where t is the table's name in doublequotes and c is the column's number or name in doublequotes (example: <emphasis>tablecol("Table1","time")</emphasis>).</para>
     <para>The variables <code>i</code> and <code>j</code> can be used to access the current row and column numbers.
     Similarly, <code>sr</code> and <code>er</code> represent the selected start and end row, respectively.
     </para>
-    <para>Using Python as scripting language gives you even more possibilities, since you can not only use arbitrary Python code in the function body, but also access other objects within your project. For details, see <xref linkend="sec-python"/>.</para>
+    <para>Using Python as scripting language gives you even more possibilities, since you can not only use arbitrary Python code in the function body, but also access other objects within your project. For details, see <xref linkend="scripting"/>.</para>
     <para>If you make some changes in the table, the values are not computed again. You have to explicitly tell &appname; to recalculate individual cells or whole columns or rows by selecting &recalculate-lnk; from their context menu or pressing &recalculate-key;.</para>
   </listitem>
 </varlistentry>
@@ -2128,7 +2128,7 @@ The active items in the menus depend on the active window in the project. If the
   <listitem>
     <indexterm><primary>Matrix</primary><secondary>Fill with a function</secondary></indexterm>
     <para>This command is just a shortcut to the <emphasis>Formula</emphasis> tab of the properties dialog of the selected matrix. See <xref linkend="sec-intro-matrix"/> for details. </para>
-    <para>You can fill in a matrix with the results of a function z=f(i,j) in which i and j are the row and column numbers. If you have defined X-values and Y-values with the &set-coordinates-lnk; You can use x and y as parameters for the function. The functions can be written on several lines, and the intrinsic functions which are available are listed in the <xref linkend="sec-muParser"/>.</para>
+    <para>You can fill in a matrix with the results of a function z=f(i,j) in which i and j are the row and column numbers. If you have defined X-values and Y-values with the &set-coordinates-lnk; You can use x and y as parameters for the function. The functions can be written on several lines, and the intrinsic functions which are available are listed in the <xref linkend="formulas"/>.</para>
   </listitem>
 </varlistentry>
 
