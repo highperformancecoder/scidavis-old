@@ -3,7 +3,7 @@ and converting them to SciDAVis projects. Only tables and notes are imported at 
 
 Contents:
 
-importOPJ.py  - An import script that can be run through "scidavis -x". It will pop up a dialog
+opj2sciprj.py - An import script that can be run through "scidavis -x". It will pop up a dialog
                 asking for an OPJ file to be imported and write the imported project to
 				    file.opj.sciprj (where file.opj is the name of the file that is imported).
 
