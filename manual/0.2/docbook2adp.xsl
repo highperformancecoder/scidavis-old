@@ -113,6 +113,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 					<xsl:if test="tertiary">, <xsl:value-of select="tertiary"/></xsl:if>
 				</keyword>
 			</xsl:for-each>
+			<xsl:for-each select="sect2"><xsl:call-template name="sect2"/></xsl:for-each>
+		</section>
+	</xsl:template>
+
+	<xsl:template name="sect2" match="sect2" mode="adp">
+		<section>
+			<xsl:attribute name="ref">
+				<xsl:choose>
+					<xsl:when test="ancestor::sect1/preceding-sibling::sect1"><xsl:value-of select="ancestor::sect1/@id"/>.html#<xsl:value-of select="@id"/></xsl:when>
+					<xsl:otherwise><xsl:value-of select="ancestor::sect1/../@id"/>.html#<xsl:value-of select="@id"/></xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			<xsl:attribute name="title"><xsl:value-of select="title"/></xsl:attribute>
 		</section>
 	</xsl:template>
 

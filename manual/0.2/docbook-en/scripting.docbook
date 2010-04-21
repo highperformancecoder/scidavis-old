@@ -11,7 +11,7 @@
 <sect1 id="sec-python-tutorial">
 	<title>Tutorial</title>
 
-	<sect2>
+	<sect2 id="sec-python-starting">
 		<title>Getting Started</title>
 
 		<para>Make sure your current project uses Python as its interpreter by
@@ -59,7 +59,7 @@
 			the language before discussing how to do this.</para>
 	</sect2>
 
-	<sect2>
+	<sect2 id="sec-python-basics">
 		<title>Python Basics</title>
 
 		<sect3>
@@ -159,7 +159,7 @@
 		</sect3>
 	</sect2>
 
-	<sect2>
+	<sect2 id="sec-python-evaluation">
 		<title>Evaluation Reloaded</title>
 
 		<para>As we've already mentioned above, there's a bit more to evaluation
@@ -815,7 +815,7 @@
 	</sect2>
 </sect1>
 
-<sect1 id="Python-reference">
+<sect1 id="sec-python-reference">
 	<title>Reference</title>
 	<para>Classes mentioned below that start with "Q" mostly belong to Qt and can be used via
 		PyQt (with the exception of classes starting with "Qwt", which belong to Qwt).
@@ -826,7 +826,8 @@
 		Note).
 	</para>
 
-	<sect2><title>class AbstractAspect (inherits QObject)</title>
+	<sect2 id="sec-python-abstractaspect">
+		<title>class AbstractAspect (inherits QObject)</title>
 		<para>A base class for content of a project. While currently the only AbstractAspect
 			accessible to you is Column, a future release will make more extensive usage of this;
 			probably with some revisions in the design, so only some basic functions are documented
@@ -884,7 +885,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class Column (inherits AbstractAspect)</title>
+	<sect2 id="sec-python-column"><title>class Column (inherits AbstractAspect)</title>
 		<para>Represents a column in a table.</para>
 		<para>In addition to the valueAt()/setValueAt() interface described below, starting with
 			&appname; 0.2.4, Y columns support
@@ -1028,7 +1029,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class MDIWindow (inherits QWidget)</title>
+	<sect2 id="sec-python-mdiwindow">
+		<title>class MDIWindow (inherits QWidget)</title>
 		<para>Base class of Table, Matrix, Graph and Note. A redesigned analogue under the name of "Part" (inheriting from AbstractAspect) is under development; it should be possible to provide a backwards-compatible interface, though.</para>
 		<programlisting width="80">
 			tmp = newTable("temp1", 2, 10)
@@ -1079,7 +1081,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class Table (inherits MDIWindow)</title>
+	<sect2 id="sec-python-table">
+		<title>class Table (inherits MDIWindow)</title>
 		<para>Class of table (spreadsheet) windows.</para>
 		<programlisting width="80">
 			tab = newTable("tabula",2,10)
@@ -1193,7 +1196,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class Matrix (inherits MDIWindow)</title>
+	<sect2 id="sec-python-matrix">
+		<title>class Matrix (inherits MDIWindow)</title>
 		<para>Class of matrix windows.</para>
 		<programlisting width="80">
 			mat = newMatrix("mat", 10, 20)
@@ -1287,7 +1291,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class ArrowMarker</title>
+	<sect2 id="sec-python-arrowmarker">
+		<title>class ArrowMarker</title>
 		<para>A line or an arrow displayed on a graph.</para>
 		<programlisting width="80">
 			arrow = ArrowMarker()
@@ -1356,7 +1361,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class ImageMarker</title>
+	<sect2 id="sec-python-imagemarker">
+		<title>class ImageMarker</title>
 		<para>An image to be displayed on a graph.</para>
 		<programlisting width="80">
 			layer = newGraph().activeLayer()
@@ -1388,7 +1394,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class Legend</title>
+	<sect2 id="sec-python-legend">
+		<title>class Legend</title>
 		<para>Text boxes displayed on a graph. While this is also used for legends, a better
 			(since more general) name would probably be TextMarker.</para>
 		<programlisting width="80">
@@ -1434,7 +1441,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class QwtSymbol</title>
+	<sect2 id="sec-python-qwtsymbol">
+		<title>class QwtSymbol</title>
 		<para>Represents a type of symbol on a scatter plot (ellipse, rectangle etc.) together
 			with attributes determining parameters like color, size etc. This class is part of the
 			Qwt library, but exported and documented as part of &appname;'s API for simplicity. Also,
@@ -1566,7 +1574,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class QwtPlotCurve</title>
+	<sect2 id="sec-python-qwtplotcurve">
+		<title>class QwtPlotCurve</title>
 		<para>Represents a curve with symbols and/or lines on a graph.
 			This class is part of the Qwt library, but exported and documented as part of
 			&appname;'s API for simplicity. Also, convenience methods for setting outline/fill
@@ -1819,7 +1828,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class Layer (inherits QWidget)</title>
+	<sect2 id="sec-python-layer">
+		<title>class Layer (inherits QWidget)</title>
 		<para>A layer on a graph. All elements in a graph are organized in layers, so whenever
 			you're working with graphs, you're also dealing with layers. Note that many changes
 			do not show up until you call replot() - if you're changing many options on a complex
@@ -2192,7 +2202,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class Graph (inherits MDIWindow)</title>
+	<sect2 id="sec-python-graph">
+		<title>class Graph (inherits MDIWindow)</title>
 		<para>A graph window, consisting of layers, which in turn contain plot curves and markers.
 		</para>
 		<programlisting width="80">
@@ -2307,7 +2318,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class Note (inherits MDIWidget)</title>
+	<sect2 id="sec-python-note">
+		<title>class Note (inherits MDIWidget)</title>
 		<para>A note/script window containing arbitrary text, all or parts of which can be executed
 			as Python code. Triggering executing of code in a Note currently doesn't work reliably,
 			but this can essentially be circumvented using exec(str(note.text())).</para>
@@ -2346,7 +2358,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class ApplicationWindow (inherits QMainWindow)</title>
+	<sect2 id="sec-python-applicationwindow">
+		<title>class ApplicationWindow (inherits QMainWindow)</title>
 		<para>Manages the current project. The project from which a piece of Python code is
 			excecuted is accessible via the module attribute <varname>scidavis.app</varname>.
 			However, most of the time, this instance is used implicitly via methods copied to the
@@ -2556,7 +2569,8 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2><title>class Fit (inherits QObject)</title>
+	<sect2 id="sec-python-fit">
+		<title>class Fit (inherits QObject)</title>
 		<para>This is the abstract base class of the various models that can be used for
 			least-squares parameter fitting; in other words, you can only create instances of
 			subclasses of this class, but the methods described here are common to all of these
@@ -2716,7 +2730,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-exponentialfit">
 		<title>class ExponentialFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2737,7 +2751,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-twoexpfit">
 		<title>class TwoExpFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2758,7 +2772,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-threeexpfit">
 		<title>class ThreeExpFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2779,7 +2793,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-sigmoidalfit">
 		<title>class SigmoidalFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2800,7 +2814,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-gaussampfit">
 		<title>class GaussAmpFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2820,7 +2834,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-nonlinearfit">
 		<title>class NonLinearFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2853,7 +2867,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-pluginfit">
 		<title>class PluginFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2878,7 +2892,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-lorentzfit">
 		<title>class LorentzFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2920,7 +2934,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-gaussfit">
 		<title>class GaussFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2962,7 +2976,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-polynomialfit">
 		<title>class PolynomialFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2979,7 +2993,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-linearfit">
 		<title>class LinearFit (inherits Fit)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
@@ -2996,7 +3010,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-filter">
 		<title>class Filter (inherits QObject)</title>
 		<para>This is the abstract base class of various analysis operations; in other words, you
 			can only create instances of
@@ -3035,7 +3049,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-differentiation">
 		<title>class Differentiation (inherits Filter)</title>
 		<para>Running this filter creates a new graph containing the numerical derivative of
 			the source curve.</para>
@@ -3053,7 +3067,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-integration">
 		<title>class Integration (inherits Filter)</title>
 		<para>Running this filter dumps an integral over the source curve (more precisely,
 			an interpolation thereof) to the results log and makes it available via result().
@@ -3093,7 +3107,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-interpolation">
 		<title>class Interpolation (inherits Filter)</title>
 		<para>Inserts an interpolation of the source curve as a new curve into the source layer.
 		</para>
@@ -3119,7 +3133,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-smoothfilter">
 		<title>class SmoothFilter (inherits Filter)</title>
 		<para>Inserts a smoothed version of the source curve as a new curve into the source layer.
 		</para>
@@ -3162,7 +3176,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-fftfilter">
 		<title>class FFTFilter (inherits Filter)</title>
 		<para>Provides FFT-based low pass, high pass, band pass and band block filters.
 			Inserts a filtered version of the source curve as a new curve into the source layer.
@@ -3207,7 +3221,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-fft">
 		<title>class FFT (inherits Filter)</title>
 		<para>Running this filter creates a new graph containing the discrete Fourier transform
 			(DFT) of the source curve.</para>
@@ -3245,7 +3259,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-correlation">
 		<title>class Correlation (inherits Filter)</title>
 		<para>Running this filter adds correlation data to the source table and makes a plot of
 			the correlation.</para>
@@ -3258,7 +3272,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-convolution">
 		<title>class Convolution (inherits Filter)</title>
 		<para>Running this filter adds the convolution of two columns to the source table and
 			makes a plot of the convolution.</para>
@@ -3270,7 +3284,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-deconvolution">
 		<title>class Deconvolution (inherits Filter)</title>
 		<para>Running this filter adds the deconvolution of two columns to the source table and
 			makes a plot of the deconvolution.</para>
@@ -3282,7 +3296,7 @@
 			</varlistentry>
 		</variablelist>
 	</sect2>
-	<sect2>
+	<sect2 id="sec-python-folder">
 		<title>class Folder (inherits QObject)</title>
 		<variablelist spacing="compact">
 			<varlistentry>
