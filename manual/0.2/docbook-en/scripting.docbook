@@ -1229,6 +1229,16 @@ mat.recalculate()
 				<listitem>text(row,column) returns the content of the indicated cell as its textual representation.</listitem>
 			</varlistentry>
 			<varlistentry>
+				<term>column(int, int, int)</term>
+				<listitem>column(column, first_row, last_row) extracts multiple cell values of a
+					column in one go and returns them as a list. Added in &appname; 0.2.5.</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>row(int, int, int)</term>
+				<listitem>row(row, first_column, last_column) extracts multiple cell values of a
+					row in one go and returns them as a list. Added in &appname; 0.2.5.</listitem>
+			</varlistentry>
+			<varlistentry>
 				<term>setCell(int,int,double)</term>
 				<listitem>setCell(row,column,value) changes the content of the indicated cell to the indicated numeric value.</listitem>
 			</varlistentry>
@@ -1236,6 +1246,20 @@ mat.recalculate()
 				<term>setText(int,int,string)</term>
 				<listitem>setText(row,column,value) interprets the string value according to the numeric format of the matrix
 					and changes the content of the indicated cell accordingly.</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>setColumn(int, int, int, list)</term>
+				<listitem>setColumn(column, first_row, last_row, values) mass-updates multiple
+					cells in a column. This is faster than setting the cell values individually.
+					Added in &appname; 0.2.5.
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>setRow(int, int, int, list)</term>
+				<listitem>setRow(row, first_column, last_column, values) mass-updates multiple
+					cells in a row. This is faster than setting the cell values individually.
+					Added in &appname; 0.2.5.
+				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>xStart()</term>
