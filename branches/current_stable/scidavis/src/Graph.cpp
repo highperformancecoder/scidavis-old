@@ -391,6 +391,7 @@ void Graph::setLabelsNumericFormat(int axis, int format, int prec, const QString
 		d_plot->setAxisScaleDraw (axis, sd);
 	} else {
 		ScaleDraw *sd = new ScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), formula.toAscii().constData());
+		sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 		sd->setScaleDiv(div);
 
 		if (format == Plot::Automatic)
@@ -727,6 +728,7 @@ void Graph::setLabelsDayFormat(int axis, int format)
 	const QwtScaleDiv div = sd_old->scaleDiv ();
 
 	WeekDayScaleDraw *sd = new WeekDayScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), (WeekDayScaleDraw::NameFormat)format);
+	sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 	sd->setScaleDiv(div);
 	d_plot->setAxisScaleDraw (axis, sd);
 }
@@ -740,6 +742,7 @@ void Graph::setLabelsMonthFormat(int axis, int format)
 	const QwtScaleDiv div = sd_old->scaleDiv ();
 
 	MonthScaleDraw *sd = new MonthScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), (MonthScaleDraw::NameFormat)format);
+	sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 	sd->setScaleDiv(div);
 	d_plot->setAxisScaleDraw (axis, sd);
 }
@@ -763,7 +766,9 @@ void Graph::setLabelsTextFormat(int axis, const Column *column, int startRow, in
 	for (int row = startRow; row <= endRow; row++)
 		if (!column->isInvalid(row))
 			list.insert(row+1, column->textAt(row));
-	d_plot->setAxisScaleDraw(axis, new QwtTextScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), list));
+	QwtTextScaleDraw *sd = new QwtTextScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), list);
+	sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
+	d_plot->setAxisScaleDraw(axis, sd);
 }
 
 void Graph::setLabelsTextFormat(int axis, Table *table, const QString& columnName) {
@@ -792,7 +797,9 @@ void Graph::setLabelsColHeaderFormat(int axis, Table *table) {
 	for (int col=0; col < table->columnCount(); col++)
 		if (table->colPlotDesignation(col) == SciDAVis::Y)
 			list.insert(col, table->colLabel(col));
-	d_plot->setAxisScaleDraw(axis, new QwtTextScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), list));
+	QwtTextScaleDraw *sd = new QwtTextScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), list);
+	sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
+	d_plot->setAxisScaleDraw(axis, sd);
 }
 
 void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInfo)
@@ -808,6 +815,7 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 			{
 				TimeScaleDraw *sd = new TimeScaleDraw (*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)),
 						list[0].isEmpty() ? QTime(12,0,0,0) : QTime::fromString (list[0]), list[1]);
+				sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 				d_plot->setAxisScaleDraw (axis, sd);
 				break;
@@ -816,6 +824,7 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 			{
 				DateScaleDraw *sd = new DateScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)),
 						QDate::fromString(list[0], "YYYY-MM-DD"), list[1]);
+				sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 				d_plot->setAxisScaleDraw (axis, sd);
 				break;
@@ -824,6 +833,7 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 			{
 				DateTimeScaleDraw *sd = new DateTimeScaleDraw (*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)),
 						QDateTime::fromString (list[0], "YYYY-MM-DDTHH:MM:SS"), list[1]);
+				sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 				d_plot->setAxisScaleDraw (axis, sd);
 				break;
