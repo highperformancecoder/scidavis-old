@@ -48,6 +48,7 @@ class QAction;
 class AbstractColumn;
 class ActionManager;
 class TableStatistics;
+class TeXTableSettings;
 
 namespace future
 {
@@ -306,6 +307,18 @@ class Table : public AbstractPart
 		*/
 		void showTableViewRowContextMenu(const QPoint& pos);
 
+		//! Open export to TeX dialog 
+                void showTeXTableExportDialog();
+               
+                //! Export to TeX
+                /*
+                 * \param file name
+                 * \param TeX tale settings
+                */  
+                bool export_to_TeX( QString fileName, TeXTableSettings& tex_settings );
+
+                 
+
 	protected:
 		//! Called after a new child has been inserted or added.
 		/**
@@ -397,6 +410,7 @@ class Table : public AbstractPart
 		QAction * action_select_all;
 		QAction * action_add_column;
 		QAction * action_clear_table;
+                QAction * action_export_to_TeX;
 #ifndef LEGACY_CODE_0_2_x
 		QAction * action_clear_masks;
 #endif

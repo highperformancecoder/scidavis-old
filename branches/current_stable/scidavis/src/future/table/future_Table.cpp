@@ -69,6 +69,9 @@
 #include "core/datatypes/String2DateTimeFilter.h"
 #include "core/datatypes/DateTime2DoubleFilter.h"
 #include "core/datatypes/SimpleCopyThroughFilter.h"
+#include "TeXTableExportDialog.h"
+#include "TeXTableSettings.h" 
+
 
 #include "ui_DimensionsDialog.h"
 
@@ -1127,6 +1130,14 @@ void Table::createActions()
 	actionManager()->addAction(action_clear_table, "clear_table"); 
 	delete icon_temp;
 
+	icon_temp = new QIcon();
+	icon_temp->addPixmap(QPixmap(":/16x16/TeX.png"));
+	icon_temp->addPixmap(QPixmap(":/32x32/TeX.png"));
+	action_export_to_TeX = new QAction(*icon_temp, tr("Export to TeX..."), this);
+	actionManager()->addAction(action_export_to_TeX, "export_to_TeX"); 
+	delete icon_temp;
+        
+
 #ifndef LEGACY_CODE_0_2_x
 	action_clear_masks = new QAction(QIcon(QPixmap(":/unmask.xpm")), tr("Clear Masks"), this);
 	actionManager()->addAction(action_clear_masks, "clear_masks"); 
@@ -1297,6 +1308,10 @@ void Table::connectActions()
 	connect(action_select_all, SIGNAL(triggered()), this, SLOT(selectAll()));
 	connect(action_add_column, SIGNAL(triggered()), this, SLOT(addColumn()));
 	connect(action_clear_table, SIGNAL(triggered()), this, SLOT(clear()));
+
+        //Export to TeX
+	connect(action_export_to_TeX, SIGNAL( triggered() ), this, SLOT( showTeXTableExportDialog() ) );
+
 #ifndef LEGACY_CODE_0_2_x
 	connect(action_clear_masks, SIGNAL(triggered()), this, SLOT(clearMasks()));
 #endif
@@ -1350,6 +1365,7 @@ void Table::addActionsToView()
 	d_view->addAction(action_select_all);
 	d_view->addAction(action_add_column);
 	d_view->addAction(action_clear_table);
+	d_view->addAction(action_export_to_TeX);
 #ifndef LEGACY_CODE_0_2_x
 	d_view->addAction(action_clear_masks);
 #endif
@@ -1436,6 +1452,129 @@ void Table::showTableViewRowContextMenu(const QPoint& pos)
 
 	context_menu.exec(pos);
 }
+
+void Table::showTeXTableExportDialog()
+{
+        TeXTableExportDialog export_Dialog;
+
+        export_Dialog.setFileMode(QFileDialog::AnyFile);
+        export_Dialog.setNameFilter("*.tex");
+
+        //Set the default file name by the name of the table
+        export_Dialog.selectFile( name() );
+        
+        export_Dialog.exec();
+
+        if (export_Dialog.result() == QDialog::Accepted)
+         {
+            // Get file name 
+            QString fileName = export_Dialog.selectedFiles().first(); 
+
+            //Add  file extention
+            fileName += export_Dialog.selectedNameFilter().remove( 0, 1 );
+             
+            //Get TeX table settings
+            TeXTableSettings tex_settings = export_Dialog.tex_TableSettings();
+
+            //Export to TeX table
+            export_to_TeX( fileName, tex_settings );
+         }
+
+}
+
+bool Table::export_to_TeX( QString fileName, TeXTableSettings& tex_settings )
+{
+
+    WAIT_CURSOR;
+
+    QFile file( fileName );
+
+	 if (!file.open( QIODevice::WriteOnly ))
+	 {
+		 QApplication::restoreOverrideCursor();
+		 QMessageBox::critical(0, tr("TeX Export Error"),
+				 tr("Could not write to file: <br><h4>%1</h4><p>Please verify that you have the right to write to this location!").arg(fileName));
+		 return false;
+	 }
+
+   
+   QList< Column* > columns_list;  
+   int first_row_index = 0;
+   int last_row_index = 0;
+
+
+   if (d_view->selectedColumnCount() != 0)
+     {
+       //Get selected columns
+       for (int i = 0; i < columnCount(); i++)
+         {
+            if (d_view->isColumnSelected( i )) 
+                columns_list << column( i );  
+         }
+
+       // Get the first and last selected row index 
+       first_row_index = d_view->firstSelectedRow();
+       last_row_index = d_view->lastSelectedRow();
+     }
+   else
+     {
+       //Get all columns 
+       for( int i = 0; i < columnCount(); i++ ) 
+           columns_list << column( i );
+
+       // Get the first and last row index
+       first_row_index = 0;
+       if( rowCount() > 0 ) last_row_index = rowCount()-1;
+       else last_row_index = 0;
+     }     
+
+   // Get the TeX column alignment
+   char cl_alignment = 'c'; 
+   if (tex_settings.columnsAlignment() == ALIGN_LEFT) cl_alignment = 'l';
+   else if (tex_settings.columnsAlignment() == ALIGN_RIGHT) cl_alignment = 'r';
+
+   QTextStream out(&file);
+
+   //Check whether the TeX table should have caption 
+   if (tex_settings.with_caption()) 
+       out << "\\begin{table} \n \\caption{" << name() << "}\n"; 
+
+   //begin tabular with all parameters
+   out << QString("\\begin{tabular}{|*{") + QString().setNum( columns_list.count() ) 
+          + ("}{") + QString(cl_alignment) + QString("|}}\n");
+   out << "\\hline \n";
+
+   //Check if export with table labels
+   if (tex_settings.with_labels())
+     {
+         //Get the columns labes        
+         QStringList columns_labels; 
+         foreach (Column* col, columns_list) columns_labels << col->name();
+         out << columns_labels.join(" & ")  << "\\\\ \\hline \n";
+     }
+
+         
+    //Export TeX table content
+    QStringList str_row;
+    for ( int row_index = first_row_index; row_index < last_row_index+1; row_index++)
+      {
+         str_row.clear(); 
+         foreach( Column* col, columns_list ) 
+           str_row << col->asStringColumn()->textAt( row_index );
+         out << str_row.join(" & ") << " \\\\ \\hline \n "; 
+     }
+
+   out << "\\end{tabular} \n";
+
+   if( tex_settings.with_caption() ) out << "\\end{table} \n";
+   
+   RESET_CURSOR;   
+
+   return true;        
+}
+
+
+
 
 QMenu * Table::createSelectionMenu(QMenu * append_to)
 {
@@ -1527,6 +1666,7 @@ QMenu * Table::createTableMenu(QMenu * append_to)
 	menu->addSeparator();
 	menu->addAction(action_select_all);
 	menu->addAction(action_clear_table);
+        menu->addAction(action_export_to_TeX);
 #ifndef LEGACY_CODE_0_2_x
 	menu->addAction(action_clear_masks);
 	menu->addAction(action_sort_table);

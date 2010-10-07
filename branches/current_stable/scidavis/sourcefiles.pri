@@ -202,6 +202,10 @@ HEADERS  += src/ApplicationWindow.h \
             src/OpenProjectDialog.h\
         src/Grid.h\
             src/DataPointPicker.h \
+            src/TeXTableSettings.h \
+            src/TeXTableSettingsWidget.h \
+            src/TeXTableExportDialog.h \
+
 
 ###################### SOURCES ##############################################
 
@@ -307,6 +311,9 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/Grid.cpp\
             src/globals.cpp \
             src/DataPointPicker.cpp \
+            src/TeXTableSettings.cpp \
+            src/TeXTableSettingsWidget.cpp \
+            src/TeXTableExportDialog.cpp \
 
 ###################### FORMS ##############################################
 FORMS +=   src/SciDAVisAbout.ui
