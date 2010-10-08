@@ -10438,7 +10438,8 @@ void ApplicationWindow::createActions()
 	actionNewSurfacePlot->setShortcut( tr("Ctrl+ALT+Z") );
 	connect(actionNewSurfacePlot, SIGNAL(activated()), this, SLOT(newSurfacePlot()));
 
-	actionOpen = new QAction(QIcon(QPixmap(":/fileopen.xpm")), tr("&Open"), this);
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionOpen = new QAction(QIcon(QPixmap(":/fileopen.xpm")), tr("&Open")+"...", this);
 	actionOpen->setShortcut( tr("Ctrl+O") );
 	connect(actionOpen, SIGNAL(activated()), this, SLOT(open()));
 
@@ -10516,33 +10517,39 @@ void ApplicationWindow::createActions()
 	actionAddLayer->setShortcut( tr("ALT+L") );
 	connect(actionAddLayer, SIGNAL(activated()), this, SLOT(addLayer()));
 
-	actionShowLayerDialog = new QAction(QIcon(QPixmap(":/arrangeLayers.xpm")), tr("Arran&ge Layers"), this);
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionShowLayerDialog = new QAction(QIcon(QPixmap(":/arrangeLayers.xpm")), tr("Arran&ge Layers")+"...", this);
 	actionShowLayerDialog->setShortcut( tr("ALT+A") );
 	connect(actionShowLayerDialog, SIGNAL(activated()), this, SLOT(showLayerDialog()));
 
 	actionAutomaticLayout = new QAction(QIcon(QPixmap(":/auto_layout.xpm")), tr("Automatic Layout"), this);
 	connect(actionAutomaticLayout, SIGNAL(activated()), this, SLOT(autoArrangeLayers()));
 
-	actionExportGraph = new QAction(tr("&Current"), this);
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionExportGraph = new QAction(tr("&Current")+"...", this);
 	actionExportGraph->setShortcut( tr("Alt+G") );
 	connect(actionExportGraph, SIGNAL(activated()), this, SLOT(exportGraph()));
 
-	actionExportAllGraphs = new QAction(tr("&All"), this);
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionExportAllGraphs = new QAction(tr("&All")+"...", this);
 	actionExportAllGraphs->setShortcut( tr("Alt+X") );
 	connect(actionExportAllGraphs, SIGNAL(activated()), this, SLOT(exportAllGraphs()));
 
-    actionExportPDF = new QAction(QIcon(QPixmap(":/pdf.xpm")), tr("&Export PDF"), this);
+	// FIXME: "..." should be added before translating, but this would break translations
+    actionExportPDF = new QAction(QIcon(QPixmap(":/pdf.xpm")), tr("&Export PDF")+"...", this);
 	actionExportPDF->setShortcut( tr("Ctrl+Alt+P") );
 	connect(actionExportPDF, SIGNAL(activated()), this, SLOT(exportPDF()));
 
-	actionPrint = new QAction(QIcon(QPixmap(":/fileprint.xpm")), tr("&Print"), this);
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionPrint = new QAction(QIcon(QPixmap(":/fileprint.xpm")), tr("&Print")+"...", this);
 	actionPrint->setShortcut( tr("Ctrl+P") );
 	connect(actionPrint, SIGNAL(activated()), this, SLOT(print()));
 
 	actionPrintAllPlots = new QAction(tr("Print All Plo&ts"), this);
 	connect(actionPrintAllPlots, SIGNAL(activated()), this, SLOT(printAllPlots()));
 
-	actionShowExportASCIIDialog = new QAction(tr("E&xport ASCII"), this);
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionShowExportASCIIDialog = new QAction(tr("E&xport ASCII")+"...", this);
 	connect(actionShowExportASCIIDialog, SIGNAL(activated()), this, SLOT(showExportASCIIDialog()));
 
 	actionCloseAllWindows = new QAction(QIcon(QPixmap(":/quit.xpm")), tr("&Quit"), this);
@@ -10555,7 +10562,8 @@ void ApplicationWindow::createActions()
 	actionDeleteFitTables = new QAction(QIcon(QPixmap(":/close.xpm")), tr("Delete &Fit Tables"), this);
 	connect(actionDeleteFitTables, SIGNAL(activated()), this, SLOT(deleteFitTables()));
 
-	actionShowPlotWizard = new QAction(QIcon(QPixmap(":/wizard.xpm")), tr("Plot &Wizard"), this);
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionShowPlotWizard = new QAction(QIcon(QPixmap(":/wizard.xpm")), tr("Plot &Wizard")+"...", this);
 	actionShowPlotWizard->setShortcut( tr("Ctrl+Alt+W") );
 	connect(actionShowPlotWizard, SIGNAL(activated()), this, SLOT(showPlotWizard()));
 
@@ -11002,11 +11010,13 @@ void ApplicationWindow::translateActionsStrings()
 	actionNewSurfacePlot->setToolTip(tr("Create a new 3D surface plot"));
 	actionNewSurfacePlot->setShortcut(tr("Ctrl+ALT+Z"));
 
-	actionOpen->setMenuText(tr("&Open"));
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionOpen->setMenuText(tr("&Open")+"...");
 	actionOpen->setShortcut(tr("Ctrl+O"));
 	actionOpen->setToolTip(tr("Open project"));
 
-	actionLoadImage->setMenuText(tr("Open Image &File"));
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionLoadImage->setMenuText(tr("Open Image &File")+"...");
 	actionLoadImage->setShortcut(tr("Ctrl+I"));
 
 	actionImportImage->setMenuText(tr("Import I&mage..."));
@@ -11070,31 +11080,38 @@ void ApplicationWindow::translateActionsStrings()
 	actionAddLayer->setToolTip(tr("Add Layer"));
 	actionAddLayer->setShortcut(tr("ALT+L"));
 
-	actionShowLayerDialog->setMenuText(tr("Arran&ge Layers"));
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionShowLayerDialog->setMenuText(tr("Arran&ge Layers")+"...");
 	actionShowLayerDialog->setToolTip(tr("Arrange Layers"));
 	actionShowLayerDialog->setShortcut(tr("ALT+A"));
 
 	actionAutomaticLayout->setMenuText(tr("Automatic Layout"));
 	actionAutomaticLayout->setToolTip(tr("Automatic Layout"));
 
-	actionExportGraph->setMenuText(tr("&Current"));
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionExportGraph->setMenuText(tr("&Current")+"...");
 	actionExportGraph->setShortcut(tr("Alt+G"));
 	actionExportGraph->setToolTip(tr("Export current graph"));
 
-	actionExportAllGraphs->setMenuText(tr("&All"));
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionExportAllGraphs->setMenuText(tr("&All")+"...");
 	actionExportAllGraphs->setShortcut(tr("Alt+X"));
 	actionExportAllGraphs->setToolTip(tr("Export all graphs"));
 
-    actionExportPDF->setMenuText(tr("&Export PDF"));
+	// FIXME: "..." should be added before translating, but this would break translations
+    actionExportPDF->setMenuText(tr("&Export PDF")+"...");
 	actionExportPDF->setShortcut(tr("Ctrl+Alt+P"));
 	actionExportPDF->setToolTip(tr("Export to PDF"));
 
-	actionPrint->setMenuText(tr("&Print"));
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionPrint->setMenuText(tr("&Print")+"...");
 	actionPrint->setShortcut(tr("Ctrl+P"));
 	actionPrint->setToolTip(tr("Print window"));
 
-	actionPrintAllPlots->setMenuText(tr("Print All Plo&ts"));
-	actionShowExportASCIIDialog->setMenuText(tr("E&xport ASCII"));
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionPrintAllPlots->setMenuText(tr("Print All Plo&ts")+"...");
+	// FIXME: "..." should be added before translating, but this would break translations
+	actionShowExportASCIIDialog->setMenuText(tr("E&xport ASCII")+"...");
 
 	actionCloseAllWindows->setMenuText(tr("&Quit"));
 	actionCloseAllWindows->setShortcut(tr("Ctrl+Q"));
