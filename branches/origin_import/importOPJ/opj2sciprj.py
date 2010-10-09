@@ -43,40 +43,77 @@ except:
       self.confirmClose(False)
       QtCore.QCoreApplication.quit()
 
+def addFolder(opj_folder):
+   " add a folder and its subtree "
+   parent_folder = activeFolder()        # get active Folder
+   sci_folder = Folder(opj_folder.name)  # create new one
+   parent_folder.addChild(sci_folder)    # add it to parent
+   app.setActiveFolder(sci_folder,True)  # make it the active Folder
+   
+   for node in opj_folder.files:
+      addNode(node)                    # add the windows
+
+   for subfolder in opj_folder.folders:  # add subfolders
+      addFolder(subfolder)
+   
+   app.setActiveFolder(parent_folder)    # make parent active again
+   return
+
+
+def addNode(node):
+   " add a window or a note "
+   if node.oid < 0x100000:
+      wd = af.windows[node.oid-1]
+      if wd.w_type_s=='Worksheet':
+         addWorksheet(wd)
+   else:
+      nid = node.oid - 0x100000
+      name = af.notes[nid-1].note_name
+      nt = newNote(name)
+      nt.setText(af.notes[nid-1].note_contents)
+   return
+
+def addWorksheet(wd):
+   tb = newTable(wd.window_name)
+   tb.setNumCols(len(wd.curves))
+   for (i,cv) in enumerate(wd.curves):
+      # set column name
+      tb.column(i).setName(cv.curve_name)
+      # set values
+      ds = af.datasets[cv.curve_oid-1]
+      if ds.data_mode=="Text":
+         tb.column(i).setColumnMode("Text")
+         ds_str = map(str,ds.data_values)
+         tb.column(i).replaceTexts(0, ds_str)
+      elif ds.data_mode=="Numeric":
+         tb.column(i).replaceValues(0, ds.data_values)
+      elif ds.data_mode=="DateTime":
+         tb.column(i).setColumnMode("DateTime")
+         tb.column(i).replaceDateTimes(0, ds.data_values)
+   return 
+
 # use a Dialog to choose the File to be converted
 FilePath = QtGui.QFileDialog.getOpenFileName(app, "Select Input File")
 
+# for the script to work functions defined in it have to go into global namespace
+# similar effect can be achieved by 
+#   setattr(__main__, "addNode", addNode), ...
+global addNode, addFolder, addWorksheet
+# the same for the OPJ file object, used in those functions
+# if we don't close the script, or in case of error, we can use the 
+# scripting facilities of SciDAVis to inspect af, the OPJ file.
+global af
+
 af=opj.open(FilePath)
-# Windows (Worksheets,Matrices,Graphs,...)
-for wd in af.windows:
-   # Worksheets
-   if wd.w_type_s=='Worksheet':
-      tb = newTable(wd.window_name)
-      tb.setNumCols(len(wd.curves))
-      for (i,cv) in enumerate(wd.curves):
-         # set column name
-         tb.column(i).setName(cv.curve_name)
-         # set values
-         ds = af.datasets[cv.curve_oid-1]
-         if ds.data_mode=="Text":
-            tb.column(i).setColumnMode("Text")
-            ds_str = map(str,ds.data_values)
-            tb.column(i).replaceTexts(0, ds_str)
-         elif ds.data_mode=="Numeric":
-            tb.column(i).replaceValues(0, ds.data_values)
-         elif ds.data_mode=="DateTime":
-            tb.column(i).setColumnMode("DateTime")
-            tb.column(i).replaceDateTimes(0, ds.data_values)
-   # Matrices
-   # Functions
-   # Graphs
 
-# Notes
-for nt in af.notes:
-   nw = newNote(nt.note_name)
-   nw.setText(nt.note_contents)
+opj_rf=af.projecttree.root
 
-app.rootFolder().save(FilePath+".sciprj")
+# we will add the OPJ tree as a subfolder of root folder in SciDAVis tree
+# because the name of a Folder cannot be changed via script in SciDAVis
+addFolder(opj_rf)
+
+# save only that subfolder tree
+app.rootFolder().folder(opj_rf.name).save(FilePath+".sciprj")
 
 # or alternatively close the Note window of this script
 self.confirmClose(False)
