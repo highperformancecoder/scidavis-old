@@ -135,7 +135,7 @@ class OPJSubLayer(object):
         elif ("#Polyline" in '#'+self.sublayer_name):
             assert(self.sl_kind==35)
         elif (self.sl_kind==6):
-            self.command[self.sublayer_name]=self.block1_data.partition('\0')[0].strip()            
+            self.command[self.sublayer_name]=self.block1_data.partition('\0')[0].strip()
         else:
             print "Unknown Sublayer name: %s kind %d " % (self.sublayer_name, self.sl_kind)
         return

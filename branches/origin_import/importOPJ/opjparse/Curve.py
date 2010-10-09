@@ -115,8 +115,9 @@ class OPJCurve(object):
         (self.curve_used,) = struct.unpack("<B",cvh_data[0x01:0x02]) # correct??
         (self.curve_oid,) = struct.unpack("<H",cvh_data[0x04:0x06])
         (self.curve_value_type, self.curve_value_type_spec) = struct.unpack("<BB",cvh_data[0x1E:0x20])
+        self.curve_type_s = CurveTypes[self.curve_type]
         # worksheet columns have name
-        if (self.curve_type == 0x10):
+        if (self.curve_type_s == 'W'):
             self.curve_name = cvh_data[0x12:0x24] # 12 char string
             self.curve_name = self.curve_name.partition('\0')[0].strip()
         else: # 

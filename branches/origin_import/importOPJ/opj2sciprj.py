@@ -1,7 +1,7 @@
 #!/usr/bin/scidavis -x
 ############################################################################
 #                                                                          #
-# File                 : importOPJ.py                                      #
+# File                 : opj2sciprj.py                                      #
 # Project              : SciDAVis                                          #
 # Description          : Import script for OPJ files                       #
 # Copyright            : (C) 2010 Miquel Garriga                           #
@@ -26,11 +26,12 @@
 #                                                                          #
 ############################################################################
 
-# usage:  scidavis -x importOPJ.py 
+# usage:  scidavis -x opj2sciprj.py 
 #
 # opjparse has to be in the PYTHONPATH
 
 import opjparse as opj
+# use a Dialog to choose the File to be converted
 FilePath = QtGui.QFileDialog.getOpenFileName(app, "Select Input File")
 
 af=opj.open(FilePath)
@@ -65,5 +66,5 @@ for nt in af.notes:
 
 app.rootFolder().save(FilePath+".sciprj")
 
-# quit does not work, why?
-QtCore.quit()
+self.confirmClose(False)
+self.close()

@@ -24,8 +24,10 @@
 ##    and liborigin2 http://soft.proindependent.com/liborigin2/
 
 import struct
-smalld=-1.23456789e-300
-# 
+smalld=-1.23456789e-300 # indicates empty cells in OPJ files
+
+# values for data_type (bytes 0x16:0x18) observed in OPJ files and 
+# their (presumed) meaning
 OPJDataTypes = {
              0x0001: 'Unknown',
              0x0021: 'Unknown',
@@ -61,7 +63,8 @@ OPJDataTypes = {
              0x7001: 'Unknown',
              0x7121: 'Unknown'
             }
-# we will restrict the modes to Numeric, Text, Month, Day, DateTime, Unknown
+# Scidavis DataMode assigned to each data_value.
+# We will restrict the modes to Numeric, Text, Month, Day, DateTime, Unknown
 DataModes = {
              0x0001: 'Unknown',
              0x0021: 'Unknown',
@@ -136,6 +139,7 @@ class OPJDataSet(object):
         (self.data_type,self.data_type_2) = struct.unpack("<hB",dsh_data[0x16:0x19])
         (self.total_rows,self.first_row,self.used_rows) = struct.unpack("<3i",dsh_data[0x19:0x25])
         
+        # unsigned short data_type, unsigned char data_type_2
         # how are values stored
         self.data_mode = DataModes[self.data_type]
         
@@ -148,7 +152,8 @@ class OPJDataSet(object):
         except struct.error:
             pass
         
-        # now get values
+        # now get values from dse_data
+
         if (dse_data==None): # empty columns, leave data_values empty
             return
         dse_data_size = len(dse_data)
@@ -197,8 +202,9 @@ class OPJDataSet(object):
         
         else:
             print "No code for reading size:",self.value_size
-        
+ 
         self.real_no_rows = self.used_rows
+        # replace empty indicator by None
         self.data_values = [ None if (x==smalld) else x for x in self.data_values]
         
         return 
