@@ -30,7 +30,19 @@
 #
 # opjparse has to be in the PYTHONPATH
 
-import opjparse as opj
+try: 
+   import opjparse as opj
+except:
+   try: # if opjparse is not in PYTHONPATH, use script absolute path to find opjparse
+      import os, sys 
+      sys.path.append(os.path.dirname(os.path.realpath(str(self.name()))))
+      import opjparse as opj
+   except:
+      msg_return = QtGui.QMessageBox(QtGui.QMessageBox.Critical,"Import error",
+         "opjparse is not in PYTHONPATH,\nPlease, check your configuration").exec_()
+      self.confirmClose(False)
+      QtCore.QCoreApplication.quit()
+
 # use a Dialog to choose the File to be converted
 FilePath = QtGui.QFileDialog.getOpenFileName(app, "Select Input File")
 
