@@ -1,0 +1,38 @@
+Every OPJ file starts with a string like 'CPYA adbbb rrr#\n' where
+    'CPYA' is a literal
+    'd'    is either '.' or ',' indicating the locale used for decimal point
+    'a' and 'bbb' are decimal digits indicating file version
+    'rrr' are decimal digits indicating build no. In early version of the 
+          program 'rrr' is missing.
+	  
+The first line is followed by a global header, that from 
+program release 6.1 or later has a double in bytes  [0x1b:0x23]. 
+This double is  (program_release + build_no/10000.),
+e.g., 7.5714 = Release 7.5 build 714
+
+List of file versions tested with this parseopj.
+   The Release classification follows that of liborigin1 
+   Release ???:
+     3,950  
+   Release 4.1:
+     4,130  4.130  4.141
+   Release 6.0:
+     4,2625  4.2625  
+   Release 6.1:
+     4,2635_232  4.2635_232 4.2635_237  
+   Release 7.0:
+     4,2656_220  4.2656_220
+   Release 7.0 SR1:
+     4,2659_301 4.2662_347  4.2662_349
+   Release 7.0 SR2:
+     4.2664_383
+   Release 7.0 SR3:
+     4.2672_475
+   Release 7.0 SR4:
+     4.2673_558  4.2764_623 4.2765_659
+   Release 7.5:
+      4.2766_686  4.2766_689  4.2766_700  4.2766_705  4.2766_706  4.2766_710  
+      4.2766_711  4.2766_712  4,2766_714  4.2766_714  4.2769_765  4,2769_817  
+      4.2769_817  4.2769_870  4,2769_885  4.2769_885
+   Release 8.0: 
+      4.2878_724  4.2881_773
