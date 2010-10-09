@@ -29,37 +29,37 @@ smalld=-1.23456789e-300 # indicates empty cells in OPJ files
 # values for data_type (bytes 0x16:0x18) observed in OPJ files and 
 # their (presumed) meaning
 OPJDataTypes = {
-             0x0001: 'Unknown',
+             0x0001: 'Excel',
              0x0021: 'Unknown',
-             0x0121: 'Unknown',
-             0x0401: 'Unknown',
+             0x0121: 'Unknown', # loose DataSet 
+             0x0401: 'Y Text+Num', 
              0x1001: 'X Numeric',  # version 5.0
              0x1021: 'X Text',     # version 5.0
              0x1031: 'Unknown', 
              0x1121: 'X Text+Num', # version 5.0
-             0x2001: 'Unknown',
+             0x2001: 'Unknown', # loose DataSet
              0x2081: 'Unknown',
-             0x2121: 'Unknown',
-             0x2130: 'Unknown',
-             0x4001: 'Unknown',
+             0x2121: 'Y Text+Num', # other?
+             0x2130: 'Xerr', # also Yerr, see data_type_3 
+             0x4001: 'Disregard',
              0x4021: 'Disregard',
-             0x4121: 'Unknown',
+             0x4121: 'Disregard',
              0x5001: 'X Numeric',
              0x5021: 'X Text',
              0x5121: 'X Text+Num',
              0x6000: 'Z Numeric',
-             0x6001: 'Y Numeric', # also Matrix:double, see data_type_3 
-             0x6003: 'Matrix float',
+             0x6001: 'Y Numeric', # also Matrix:double?, see data_type_3 
+             0x6003: 'Matrix float', # taken from liborigin
              0x6010: 'Xerr Num', # also Yerr
-             0x6020: 'Z Text', # also just label
+             0x6020: 'Label', # also 'Z Text' ?
              0x6021: 'Y Text',
              0x6081: 'Function',
              0x6120: 'Z Text+Num',
              0x6121: 'Y Text+Num',
-             0x6130: 'Xerr Text+Num', # also Yerr
-             0x6801: 'Matrix int',
-             0x6803: 'Matrix short',
-             0x6821: 'Matrix byte',
+             0x6130: 'Xerr Text+Num', # also Yerr?
+             0x6801: 'Matrix int', # taken from liborigin
+             0x6803: 'Matrix short', # taken from liborigin
+             0x6821: 'Matrix byte', # taken from liborigin
              0x7001: 'Unknown',
              0x7121: 'Unknown'
             }
@@ -138,12 +138,17 @@ class OPJDataSet(object):
         # first get parameters from dsh_data
         (self.data_type,self.data_type_2) = struct.unpack("<hB",dsh_data[0x16:0x19])
         # unsigned int total_rows, first_row, used_rows (or is it last_row?)
-        (self.total_rows,self.first_row,self.used_rows) = struct.unpack("<3i",dsh_data[0x19:0x25])
+        (self.total_rows,self.first_row,self.used_rows) = struct.unpack('<3I',dsh_data[0x19:0x25])
         
         # unsigned short data_type, unsigned char data_type_2
         # how are values stored
         self.data_mode = DataModes[self.data_type]
         
+        # doubles
+        (self.unk1d,self.unk2d) = struct.unpack('<dd',dsh_data[0x25:0x35])
+        # int
+        (self.unk1i,self.unk2i) = struct.unpack('<II',dsh_data[0x35:0x3D])
+        #
         (self.value_size,)  = struct.unpack("<B",dsh_data[0x3D:0x3E])
         (self.data_type_u,) = struct.unpack("<B",dsh_data[0x3F:0x40])
         
