@@ -629,6 +629,9 @@ class OPJFile(object):
                     table_data.append(self.datasets[cv.curve_oid-1].data_values)
                 wd.table = zip(*table_data)
                 wd.table_header = table_header
+        self.worksheets = filter(lambda x: x.w_type_s=='Worksheet' , self.windows)
+        self.graphs     = filter(lambda x: x.w_type_s=='Graph' , self.windows)
+        self.matrices   = filter(lambda x: x.w_type_s=='Matrix' , self.windows)
         return
         
     def show(self):
