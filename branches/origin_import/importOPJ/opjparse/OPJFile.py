@@ -587,6 +587,7 @@ def readFile(path):
     if hasattr(this_file,'notes'):
         n_notes = len(this_file.notes)
     print "has %d datasets, %d window(s), and %d note(s)" % (len(this_file.datasets), len(this_file.windows), n_notes)
+    print "windows: %d worksheets, %d matrices, %d graphs" % (len(this_file.worksheets), len(this_file.matrices), len(this_file.graphs))
     print "it is a version %s build %s file" % (this_file.version, this_file.buildno)
     try:
         print "it was written with program version %.1f build %d " %(this_file.program_version, this_file.program_release)

@@ -104,19 +104,26 @@ class OPJDataSet(object):
     
     def show(self):
         print "DataSet: %s" % self.dataset_name
-        print "value_size ",self.value_size
         print "data_type   %5d [0x%04X] %s" % (self.data_type,self.data_type,OPJDataTypes[self.data_type])
+        print "data_type_2 %3d [0x%02X]" % (self.data_type_2,self.data_type_2)
+        print "data_type_u %3d [0x%02X]" % (self.data_type_u,self.data_type_u)
         try: # version <6.1 does not have this
             print "data_type_3 %5d [0x%04X]" % (self.data_type_3,self.data_type_3)
         except AttributeError:
             pass
-        print "data_type_2 %3d [0x%02X]" % (self.data_type_2,self.data_type_2)
-        print "data_type_u %3d [0x%02X]" % (self.data_type_u,self.data_type_u)
         if (self.dt_data==None): return # empty columns, leave data_values empty
-        print "num_rows   ", self.num_rows
-        print "total_rows ", self.total_rows
-        print "first_row  ", self.first_row
-        print "used_rows  ", self.used_rows
+        print "data_block_size:",len(self.dt_data),
+        print "value_size:",self.value_size,
+        print "num_rows:", self.num_rows
+        print "total_rows:", self.total_rows,
+        print "first_row:", self.first_row,
+        print "used_rows:", self.used_rows
+        # unknown parameters
+        print "Unk1d:",self.unk1d,
+        print "Unk2d:",self.unk2d,
+        print "Unk1i:",self.unk1i,
+        print "Unk2i:",self.unk2i
+        # some values
         print "first values ", self.data_values[0:min(2,len(self.data_values))]
         print "last values  ", self.data_values[max(len(self.data_values)-2,0):]
         return
