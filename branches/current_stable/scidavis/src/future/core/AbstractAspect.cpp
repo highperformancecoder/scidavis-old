@@ -238,13 +238,23 @@ void AbstractAspect::setName(const QString &value)
 		return;
 	}
 	if (value == d_aspect_private->name()) return;
+	// Until we get around to completely sanitizing the project file format, we have to remove
+	// characters that can easily break file save/restore.
+	// FIXME: once the project file format is fully XML-based (i.e. able to escape special characters),
+	// this can be removed
+	QString sanitized_value = value;
+	sanitized_value.remove(QChar('\n'));
+	sanitized_value.remove(QChar('\r'));
+	sanitized_value.remove(QChar('\t'));
+	if (sanitized_value != value)
+		info(tr("Tabs and line breaks in object names are currently not supported. They have been removed."));
 	if (d_aspect_private->parent()) {
-		QString new_name = d_aspect_private->parent()->uniqueNameFor(value);
-		if (new_name != value)
-			info(tr("Intended name \"%1\" diverted to \"%2\" in order to avoid name collision.").arg(value).arg(new_name));
+		QString new_name = d_aspect_private->parent()->uniqueNameFor(sanitized_value);
+		if (new_name != sanitized_value)
+			info(tr("Intended name \"%1\" diverted to \"%2\" in order to avoid name collision.").arg(sanitized_value).arg(new_name));
 		exec(new AspectNameChangeCmd(d_aspect_private, new_name));
 	} else
-		exec(new AspectNameChangeCmd(d_aspect_private, value));
+		exec(new AspectNameChangeCmd(d_aspect_private, sanitized_value));
 }
 
 QString AbstractAspect::comment() const
