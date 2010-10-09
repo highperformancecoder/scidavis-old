@@ -603,6 +603,7 @@ class OPJFile(object):
         self.layers = []
         self.sublayers = []
         self.curves = []
+
         for wd in self.windows:
             wd.sublayers = []
             wd.curves = []

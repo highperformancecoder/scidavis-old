@@ -2,9 +2,9 @@ weh_header_data
   describes windows (except note windows) in a project
 
 0x00:0x02  1 short, always zero ??
-0x02:0x1B  string (25), window_name
+0x02:0x1B  string (25),                      window_name
 0x1B:0x23  4 shorts, (left,top,right,bottom) window position
-0x23:0x27  2 shorts, (width, height) window size
+0x23:0x27  2 shorts, (width, height)         window size
 0x27:0x2E  7 bytes, always zero ??
 0x2E:0x32  2 shorts, 
 0x32:0x33  1 byte, window_type
