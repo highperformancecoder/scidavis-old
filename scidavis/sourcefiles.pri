@@ -146,7 +146,6 @@ HEADERS  += src/ApplicationWindow.h \
             src/ColorBox.h \
             src/SymbolBox.h \
             src/PatternBox.h \
-#            src/importOPJ.h\
             src/SymbolDialog.h \
             src/Plot.h \
             src/ColorButton.h \
@@ -253,7 +252,6 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/ColorBox.cpp \
             src/SymbolBox.cpp \
             src/PatternBox.cpp \
-#            src/importOPJ.cpp\
             src/main.cpp \
             src/SymbolDialog.cpp \
             src/Plot.cpp \
@@ -419,18 +417,9 @@ SOURCES += src/future/core/AbstractAspect.cpp \
 SOURCES += ../3rdparty/minigzip/minigzip.c
 
 ###############################################################
-################# Origin Import (liborigin) ###################
+#### Origin OPJ import via liborigin2
 ###############################################################
-
-############ liborigin support has been discontinued due to the lack 
-############ of a developer who maintains the Origin import code;
-############ if you are interested in reviving Origin support, please contact 
-############ the SciDAVis developers
-
-#!dynamic_liborigin{
-#INCLUDEPATH  += ../3rdparty/liborigin
-#
-#HEADERS += ../3rdparty/liborigin/OPJFile.h
-#SOURCES += ../3rdparty/liborigin/OPJFile.cpp
-#}
-
+contains(DEFINES, ORIGIN_IMPORT) {
+	HEADERS += src/importOPJ.h
+	SOURCES += src/importOPJ.cpp
+}
