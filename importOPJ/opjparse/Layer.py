@@ -71,6 +71,8 @@ class OPJLayer(object):
         (self.xmin,self.xmax,self.xstep) = struct.unpack("<ddd",leh_data[0x0F:0x27])
         (self.umin,) = struct.unpack("<d",leh_data[0x2F:0x37])
         (self.ymin,self.ymax,self.ystep) = struct.unpack("<ddd",leh_data[0x3A:0x52])
+        (self.num_rows,) = struct.unpack('<H',leh_data[0x52:0x54])
+        (self.num_cols,) = struct.unpack('<H',leh_data[0x2B:0x2D])
         return
     
 if (__name__ == '__main__'):
