@@ -66,5 +66,6 @@ for nt in af.notes:
 
 app.rootFolder().save(FilePath+".sciprj")
 
+# or alternatively close the Note window of this script
 self.confirmClose(False)
 self.close()

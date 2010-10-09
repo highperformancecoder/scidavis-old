@@ -137,16 +137,20 @@ class OPJDataSet(object):
         
         # first get parameters from dsh_data
         (self.data_type,self.data_type_2) = struct.unpack("<hB",dsh_data[0x16:0x19])
+        # unsigned int total_rows, first_row, used_rows (or is it last_row?)
         (self.total_rows,self.first_row,self.used_rows) = struct.unpack("<3i",dsh_data[0x19:0x25])
         
         # unsigned short data_type, unsigned char data_type_2
         # how are values stored
         self.data_mode = DataModes[self.data_type]
         
+        (self.value_size,)  = struct.unpack("<B",dsh_data[0x3D:0x3E])
         (self.data_type_u,) = struct.unpack("<B",dsh_data[0x3F:0x40])
+        
+        # dataset_name (includes window_name and column_name (for worksheet and excel))
         self.dataset_name = dsh_data[0x58:0x58+25] # 25 char string
         self.dataset_name = self.dataset_name.partition('\0')[0].strip()
-        (self.value_size,)  = struct.unpack("<B",dsh_data[0x3D:0x3E])
+        
         try: # for version 5.0 there are only 0x72 bytes
             (self.data_type_3,) = struct.unpack("<H",dsh_data[0x71:0x73])
         except struct.error:
@@ -203,7 +207,6 @@ class OPJDataSet(object):
         else:
             print "No code for reading size:",self.value_size
  
-        self.real_no_rows = self.used_rows
         # replace empty indicator by None
         self.data_values = [ None if (x==smalld) else x for x in self.data_values]
         
