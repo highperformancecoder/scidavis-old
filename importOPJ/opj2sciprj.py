@@ -146,6 +146,14 @@ def addMatrix(wd):
 # use a Dialog to choose the File to be converted
 FilePath = QtGui.QFileDialog.getOpenFileName(app, "Select Input File")
 
+if FilePath == "": # Cancel pressed
+   self.confirmClose(False)
+   self.close()
+
+# one could choose multiple Files with
+# FilePaths = QtGui.QFileDialog.getOpenFileNames(app, "Select Input File")
+# but we cannot remove a subfolder tree via scripts
+
 # for the script to work functions defined in it have to go into global namespace
 # similar effect can be achieved by 
 #   setattr(__main__, "addNode", addNode), ...
@@ -165,6 +173,11 @@ addFolder(opj_rf)
 
 # save only that subfolder tree
 app.rootFolder().folder(opj_rf.name).save(FilePath+".sciprj")
+
+# close the application. 
+# This command works when executed interactively in a Note window
+# but does not work in a script
+QtCore.QCoreApplication.quit()
 
 # or alternatively close the Note window of this script
 self.confirmClose(False)
