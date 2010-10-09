@@ -1,5 +1,0 @@
-Info for axis break block. 
-
-0x0B:0x2B   4 doubles, from, to, scaleIncrementAfter, position
-0x2B:0x2C   1 byte, logarithmic scale after
-0x2C:0x2D   1 byte, minorTicksAfter
