@@ -735,8 +735,6 @@ public slots:
 #ifdef DOWNLOAD_LINKS
 	//! Show download page in external browser
 	void downloadManual();
-	//! Show translations page in external browser
-	void downloadTranslation();
 #endif
 
 	void parseCommandLineArguments(const QStringList& args);
@@ -1098,7 +1096,7 @@ private:
 #endif
 	QAction *actionHomePage;
 #ifdef DOWNLOAD_LINKS
-	QAction *actionDownloadManual, *actionTranslations;
+	QAction *actionDownloadManual;
 #endif
 	QAction *actionHelpForums, *actionHelpBugReports;
 	QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;

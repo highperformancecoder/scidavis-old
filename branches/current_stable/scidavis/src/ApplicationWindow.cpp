@@ -28,6 +28,13 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
+
+#define HOMEPAGE_URI "http://scidavis.sourceforge.net"
+#define MANUAL_URI "http://sourceforge.net/projects/scidavis/files/SciDAVis%20Documentation/0.1/"
+#define FORUM_URI "http://sourceforge.net/forum/?group_id=199120"
+#define BUGREPORT_URI "http://sourceforge.net/tracker/?group_id=199120&atid=968214"
+#define DOWNLOAD_URI "http://sourceforge.net/projects/scidavis/files/SciDAVis/"
+
 #include "globals.h"
 #include "ApplicationWindow.h"
 #include "CurvesDialog.h"
@@ -8219,7 +8226,7 @@ void ApplicationWindow::showStandAloneHelp()
 	{
 		QMessageBox::critical(0, tr("Help Files Not Found!"),
 				tr("The manual can be downloaded from the following internet address:")+
-				"<p><a href = http://sourceforge.net/project/showfiles.php?group_id=199120>http://sourceforge.net/project/showfiles.php?group_id=199120</a></p>");
+				"<p><a href = \"" MANUAL_URI "\">" MANUAL_URI "</a></p>");
 		exit(0);
 	}
 
@@ -8230,7 +8237,7 @@ void ApplicationWindow::showStandAloneHelp()
 		QMessageBox::critical(0, tr("Help Profile Not Found!"),
 				tr("The assistant could not start because the file <b>%1</b> was not found in the help file directory!").arg("scidavis.adp")+"<br>"+
 				tr("This file is provided with the SciDAVis manual which can be downloaded from the following internet address:")+
-				"<p><a href = http://sourceforge.net/project/showfiles.php?group_id=199120>http://sourceforge.net/project/showfiles.php?group_id=199120</a></p>");
+				"<p><a href = \"" MANUAL_URI "\">" MANUAL_URI "</a></p>");
 		exit(0);
 	}
 
@@ -8249,7 +8256,7 @@ void ApplicationWindow::showHelp()
 		QMessageBox::critical(this,tr("Help Files Not Found!"),
 				tr("Please indicate the location of the help file!")+"<br>"+
 				tr("The manual can be downloaded from the following internet address:")+
-				"<p><a href = http://sourceforge.net/project/showfiles.php?group_id=199120>http://sourceforge.net/project/showfiles.php?group_id=199120</a></p>");
+				"<p><a href = \"" MANUAL_URI "\">" MANUAL_URI "</a></p>");
 		chooseHelpFolder();
 		saveSettings();
 	}
@@ -8261,7 +8268,7 @@ void ApplicationWindow::showHelp()
 		QMessageBox::critical(this,tr("Help Profile Not Found!"),
 				tr("The assistant could not start because the file <b>%1</b> was not found in the help file directory!").arg("scidavis.adp")+"<br>"+
 				tr("This file is provided with the SciDAVis manual which can be downloaded from the following internet address:")+
-				"<p><a href = http://sourceforge.net/project/showfiles.php?group_id=199120>http://sourceforge.net/project/showfiles.php?group_id=199120</a></p>");
+				"<p><a href = \"" MANUAL_URI "\">" MANUAL_URI "</a></p>");
 		return;
 	}
 
@@ -10916,9 +10923,6 @@ void ApplicationWindow::createActions()
 #ifdef DOWNLOAD_LINKS
 	actionDownloadManual = new QAction(tr("Download &Manual"), this);
 	connect(actionDownloadManual, SIGNAL(activated()), this, SLOT(downloadManual()));
-
-	actionTranslations = new QAction(tr("&Translations"), this);
-	connect(actionTranslations, SIGNAL(activated()), this, SLOT(downloadTranslation()));
 #endif
 
 #ifdef SCRIPTING_DIALOG
@@ -11802,28 +11806,23 @@ void ApplicationWindow::fitMultiPeak(int profile)
 #ifdef DOWNLOAD_LINKS
 void ApplicationWindow::downloadManual()
 {
-	QDesktopServices::openUrl(QUrl("http://sourceforge.net/project/showfiles.php?group_id=199120"));
-}
-
-void ApplicationWindow::downloadTranslation()
-{
-	QDesktopServices::openUrl(QUrl("http://sourceforge.net/project/showfiles.php?group_id=199120"));
+	QDesktopServices::openUrl(QUrl(MANUAL_URI));
 }
 #endif // defined DOWNLOAD_LINKS
 
 void ApplicationWindow::showHomePage()
 {
-	QDesktopServices::openUrl(QUrl("http://scidavis.sf.net"));
+	QDesktopServices::openUrl(QUrl(HOMEPAGE_URI));
 }
 
 void ApplicationWindow::showForums()
 {
-	QDesktopServices::openUrl(QUrl("http://sourceforge.net/forum/?group_id=199120"));
+	QDesktopServices::openUrl(QUrl(FORUM_URI));
 }
 
 void ApplicationWindow::showBugTracker()
 {
-	QDesktopServices::openUrl(QUrl("http://sourceforge.net/tracker/?group_id=199120&atid=968214"));
+	QDesktopServices::openUrl(QUrl(BUGREPORT_URI));
 }
 
 void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
@@ -13312,7 +13311,7 @@ void ApplicationWindow::receivedVersionFile(bool error)
 				if(QMessageBox::question(this, tr("Updates Available"),
 							tr("There is a newer version of SciDAVis (%1) available for download. Would you like to download it now?").arg(version_line),
 							QMessageBox::Yes|QMessageBox::Default, QMessageBox::No|QMessageBox::Escape) == QMessageBox::Yes)
-					QDesktopServices::openUrl(QUrl("http://sourceforge.net/project/showfiles.php?group_id=199120"));
+					QDesktopServices::openUrl(QUrl(DOWNLOAD_URI));
 			}
 			else
 			{
