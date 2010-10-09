@@ -86,7 +86,6 @@ class OPJSubLayer(object):
         
         if (self.sublayer_name in ["XB","XT","YL","YR","ZF","ZB","Legend","legend","label"]):
             assert(self.sl_kind==0)
-            self.label = self.block2_data.partition('\0')[0].strip()
         elif (self.sublayer_name in  ["3D","ZCOLORS","3DCOLOR","COLORMAP","SPECTRUM1",
                                       "RADIO","IMAGE1"]):
             assert(self.sl_kind==35)
@@ -138,6 +137,10 @@ class OPJSubLayer(object):
             self.command[self.sublayer_name]=self.block1_data.partition('\0')[0].strip()
         else:
             print "Unknown Sublayer name: %s kind %d " % (self.sublayer_name, self.sl_kind)
+
+        # get value for text-like sublayers
+        if (self.sl_kind==0):
+            self.label = self.block2_data.partition('\0')[0].strip()
         return
     
 if (__name__ == '__main__'):
