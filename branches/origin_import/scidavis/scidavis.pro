@@ -196,6 +196,8 @@ include( muparser.pri )
 ### comment out the following line to deactivate Python scripting support
 include( python.pri )
 
+### support for Origin OPJ import using liborigin2
+DEFINES  += ORIGIN_IMPORT
 
 ################################################################################
 ### Dependencies                                                               #
@@ -214,6 +216,11 @@ contains(PRESET, default_installation) {
 	INCLUDEPATH  += /usr/include/muParser
 	LIBS         += -lgsl -lgslcblas
 	LIBS         += -lmuparser
+
+	contains(DEFINES, ORIGIN_IMPORT) {
+		LIBS += -lorigin2
+		INCLUDEPATH += /usr/include/liborigin2
+	}
 }
 
 contains(PRESET, linux_package) {
@@ -235,6 +242,11 @@ contains(PRESET, linux_package) {
 	INCLUDEPATH  += /usr/include/muParser
 	LIBS         += -lgsl -lgslcblas
 	LIBS         += -lmuparser
+
+	contains(DEFINES, ORIGIN_IMPORT) {
+		LIBS += -lorigin2
+		INCLUDEPATH += /usr/include/liborigin2
+	}
 }
 
 contains(PRESET, self_contained) {
@@ -250,6 +262,11 @@ contains(PRESET, self_contained) {
 	LIBS         += ../3rdparty/muparser/lib/libmuparser.a
 
 	LIBS         += /usr/lib/libgsl.a /usr/lib/libgslcblas.a
+
+	contains(DEFINES, ORIGIN_IMPORT) {
+		LIBS += ../3rdparty/liborigin2/liborigin2.a
+		INCLUDEPATH += ../3rdparty/liborigin2
+	}
 }
 
 win32 {
@@ -270,6 +287,11 @@ win32 {
 	INCLUDEPATH  += "$${LIBPATH}/gsl/include"
 	LIBS         += "$${LIBPATH}/gsl/lib/libgsl.a"
 	LIBS         += "$${LIBPATH}/gsl/lib/libgslcblas.a"
+
+	contains(DEFINES, ORIGIN_IMPORT) {
+		LIBS += "$${LIBPATH}/liborigin2/liborigin2.a"
+		INCLUDEPATH += "$${LIBPATH}/liborigin2"
+	}
 }
 
 

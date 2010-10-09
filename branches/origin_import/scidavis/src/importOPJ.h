@@ -2,8 +2,10 @@
     File                 : importOPJ.h
     Project              : SciDAVis
     --------------------------------------------------------------------
-    Copyright            : (C) 2006-2007 by Ion Vasilief, Alex Kargovsky, Tilman Benkert
-    Email (use @ for *)  : ion_vasilief*yahoo.fr, kargovsky*yumr.phys.msu.su, thzs*gmx.net
+    Copyright            : (C) 2010 Miquel Garriga (gbmiquel*gmail.com)
+    Copyright            : (C) 2006-2007 by Ion Vasilief (ion_vasilief*yahoo.fr)
+    Copyright            : (C) 2006-2007 by Alex Kargovsky (kargovsky*yumr.phys.msu.su)
+    Copyright            : (C) 2006-2007 by Tilman Benkert (thzs*gmx.net)
     Description          : Origin project import class
 
  ***************************************************************************/
@@ -30,8 +32,7 @@
 #define IMPORTOPJ_H
 
 #include "ApplicationWindow.h"
-
-class OPJFile;
+#include <OriginFile.h>
 
 //! Origin project import class
 class ImportOPJ
@@ -39,9 +40,9 @@ class ImportOPJ
 public:
 	ImportOPJ(ApplicationWindow *app, const QString& filename);
 
-	bool importTables (OPJFile opj);
-	bool importGraphs (OPJFile opj);
-	bool importNotes (OPJFile opj);
+	bool importTables (const OriginFile& opj);
+	bool importGraphs (const OriginFile& opj);
+	bool importNotes (const OriginFile& opj);
 	int error(){return parse_error;};
 
 private:

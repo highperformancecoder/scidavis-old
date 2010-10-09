@@ -64,7 +64,7 @@
 #include "DataSetDialog.h"
 #include "IntDialog.h"
 #include "ConfigDialog.h"
-#ifdef REVIVE_OPJ_SUPPERT
+#ifdef ORIGIN_IMPORT
 #include "importOPJ.h"
 #endif
 #include "AssociationsDialog.h"
@@ -3476,7 +3476,7 @@ ApplicationWindow* ApplicationWindow::open(const QString& fn)
 			fn.endsWith(".ogw", Qt::CaseInsensitive) ||
 			fn.endsWith(".ogg", Qt::CaseInsensitive)
 			)
-#ifdef REVIVE_OPJ_SUPPERT
+#ifdef ORIGIN_IMPORT
 		return importOPJ(fn);
 #else
 		{
@@ -11577,7 +11577,7 @@ MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
 	return g;
 }
 
-#ifdef REVIVE_OPJ_SUPPERT
+#ifdef ORIGIN_IMPORT
 ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
 {
     if (filename.endsWith(".opj", Qt::CaseInsensitive) || filename.endsWith(".ogg", Qt::CaseInsensitive))
@@ -11864,7 +11864,7 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 			s += "-m " + tr("or") + " --manual: " + tr("show SciDAVis manual in a standalone window") + "\n";
 			s += "-v " + tr("or") + " --version: " + tr("print SciDAVis version and release date") + "\n";
 			s += "-x " + tr("or") + " --execute: " + tr("execute the script file given as argument") + "\n\n";
-#ifdef REVIVE_OPJ_SUPPERT
+#ifdef ORIGIN_IMPORT
 			s += "'" + tr("file") + "_" + tr("name") + "' " + tr("can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py or ASCII file") + "\n";
 #else
 			s += "'" + tr("file") + "_" + tr("name") + "' " + tr("can be any .sciprj, .sciprj.gz, .qti, qti.gz, .py or ASCII file") + "\n";
@@ -12136,7 +12136,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 
 	if (fn.contains(".opj", Qt::CaseInsensitive) || fn.contains(".ogm", Qt::CaseInsensitive) ||
         fn.contains(".ogw", Qt::CaseInsensitive) || fn.contains(".ogg", Qt::CaseInsensitive))
-#ifdef REVIVE_OPJ_SUPPERT
+#ifdef ORIGIN_IMPORT
 		ImportOPJ(this, fn);
 #else
 		{

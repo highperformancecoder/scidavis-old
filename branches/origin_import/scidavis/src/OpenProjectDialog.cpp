@@ -44,7 +44,7 @@ OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WFlags 
 		<< tr("Compressed SciDAVis project") + " (*.sciprj.gz)"
 		<< tr("QtiPlot project") + " (*.qti)"
 		<< tr("Compressed QtiPlot project") + " (*.qti.gz)"
-#ifdef REVIVE_OPJ_SUPPERT
+#ifdef ORIGIN_IMPORT
 		<< tr("Origin project") + " (*.opj *.OPJ)"
 		<< tr("Origin matrix") + " (*.ogm *.OGM)"
 		<< tr("Origin worksheet") + " (*.ogw *.OGW)"
