@@ -623,14 +623,13 @@ void TableView::applyType()
 	int type_index = ui.type_box->currentIndex();
 	if(format_index < 0 && type_index < 0) return;
 
-	SciDAVis::ColumnMode mode = (SciDAVis::ColumnMode)ui.type_box->itemData(type_index).toInt();
+	SciDAVis::ColumnMode new_mode = (SciDAVis::ColumnMode)ui.type_box->itemData(type_index).toInt();
 	QList<Column*> list = selectedColumns();
-	switch(mode)
-	{
+	switch(new_mode) {
 		case SciDAVis::Numeric:
 			foreach(Column* col, list) {
                 col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
-				col->setColumnMode(mode);
+				col->setColumnMode(new_mode);
 				Double2StringFilter * filter = static_cast<Double2StringFilter*>(col->outputFilter());
 				int digits = ui.digits_box->value(); // setNumericFormat causes digits_box to be modified...
 				filter->setNumericFormat(ui.format_box->itemData(format_index).toChar().toLatin1());
@@ -640,7 +639,7 @@ void TableView::applyType()
 			break;
 		case SciDAVis::Text:
 			foreach(Column* col, list)
-				col->setColumnMode(mode);
+				col->setColumnMode(new_mode);
 			break;
 		case SciDAVis::Month:
 		case SciDAVis::Day:
@@ -648,15 +647,24 @@ void TableView::applyType()
 			foreach(Column* col, list) {
                 col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
 				QString format = ui.formatLineEdit->text();
-				if (ui.date_time_interval->isVisible()) {
-					Double2DateTimeFilter::UnitInterval unit = (Double2DateTimeFilter::UnitInterval)
-						ui.date_time_interval->itemData(ui.date_time_interval->currentIndex()).toInt();
-					QDateTime date_time_0 = ui.date_time_0->dateTime();
-					if (!date_time_0.date().isValid())
-						date_time_0.setDate(QDate(-1,12,31));
-					col->setColumnMode(mode, new Double2DateTimeFilter(unit, date_time_0));
-				} else
-					col->setColumnMode(mode);
+				SciDAVis::ColumnMode old_mode = col->columnMode();
+				AbstractFilter *converter = 0;
+				switch (old_mode) {
+					case SciDAVis::Numeric:
+						if (ui.date_time_interval->isVisible()) {
+							Double2DateTimeFilter::UnitInterval unit = (Double2DateTimeFilter::UnitInterval)
+								ui.date_time_interval->itemData(ui.date_time_interval->currentIndex()).toInt();
+							QDateTime date_time_0 = ui.date_time_0->dateTime();
+							if (!date_time_0.date().isValid())
+								date_time_0.setDate(QDate(-1,12,31));
+							converter = new Double2DateTimeFilter(unit, date_time_0);
+						}
+						break;
+					case SciDAVis::Text:
+						converter = new String2DateTimeFilter(format;
+						break;
+				}
+				col->setColumnMode(new_mode, converter);
 				DateTime2StringFilter * filter = static_cast<DateTime2StringFilter*>(col->outputFilter());
 				filter->setFormat(format);
                 col->endMacro();
