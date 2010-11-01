@@ -661,7 +661,7 @@ void TableView::applyType()
 						}
 						break;
 					case SciDAVis::Text:
-						converter = new String2DateTimeFilter(format;
+						converter = new String2DateTimeFilter(format);
 						break;
 				}
 				col->setColumnMode(new_mode, converter);
