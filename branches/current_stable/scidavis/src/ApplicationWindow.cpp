@@ -935,7 +935,6 @@ void ApplicationWindow::initMainMenu()
 #endif
 #ifdef DOWNLOAD_LINKS
 	help->addAction(actionDownloadManual);
-	help->addAction(actionTranslations);
 #endif
 	help->addSeparator();
 	help->addAction(actionHelpForums);
@@ -11315,7 +11314,6 @@ void ApplicationWindow::translateActionsStrings()
 	actionHelpBugReports->setText(tr("Report a &Bug"));
 #ifdef DOWNLOAD_LINKS
 	actionDownloadManual->setMenuText(tr("Download &Manual"));
-	actionTranslations->setMenuText(tr("&Translations"));
 #endif
 
 #ifdef SCRIPTING_DIALOG
