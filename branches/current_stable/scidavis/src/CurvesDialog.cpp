@@ -169,28 +169,26 @@ void CurvesDialog::showCurveBtn(int)
 	if (!it)
 		return;
 
-    if (it->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
-    {
-        btnEditFunction->setEnabled(false);
-        btnAssociations->setEnabled(false);
-        btnRange->setEnabled(false);
-        return;
-    }
+	bool function = false;
+	bool associations = false;
+	bool range = false;
 
-    PlotCurve *c = (PlotCurve *)it;
-	if (c->type() == Graph::Function)
+	if (it->rtti() != QwtPlotItem::Rtti_PlotSpectrogram)
 	{
-		btnEditFunction->setEnabled(true);
-		btnAssociations->setEnabled(false);
-		btnRange->setEnabled(false);
-		return;
+		PlotCurve *c = (PlotCurve *)it;
+		if (c->type() == Graph::Function)
+			function = true;
+		else
+		{
+			associations = true;
+			if (c->type() != Graph::ErrorBars)
+				range = true;
+		}
 	}
 
-    btnAssociations->setEnabled(true);
-
-    btnRange->setEnabled(true);
-	if (c->type() == Graph::ErrorBars)
-  		btnRange->setEnabled(false);
+	btnEditFunction->setEnabled(function);
+	btnAssociations->setEnabled(associations);
+	btnRange->setEnabled(range);
 }
 
 void CurvesDialog::showCurveRangeDialog()
