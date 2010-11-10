@@ -54,6 +54,19 @@ private slots:
 	void showCurveRangeDialog();
 	void showPlotAssociations();
 	void showFunctionDialog();
+
+	/**
+  Enables ("yes")/disables ("no") the following buttons, which are on the right besides
+  the graph contents list, depending on the selected item in this list:
+
+  <table>
+  <tr>  <td>Selected Item</td><td>btnEditFunction</td>  <td>btnAssociations</td>  <td>btnRange</td> </tr>
+  <tr>  <td>Spectrogram</td>  <td>no</td> <td>no</td> <td>no</td>   </tr>
+  <tr>  <td>Function</td>     <td>yes</td> <td>no</td> <td>no</td>   </tr>
+  <tr>  <td>ErrorBars</td>    <td>no</td> <td>yes</td> <td>no</td>   </tr>
+  <tr>  <td>all others</td>   <td>no</td> <td>yes</td> <td>yes</td>   </tr>
+  </table>
+	*/
 	void showCurveBtn(int);
     void enableAddBtn();
 	void enableRemoveBtn();
