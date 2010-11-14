@@ -5042,7 +5042,7 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11236"/>
         <source>Visit SciDAVis &amp;Forums</source>
-        <translation>Поситить &amp;Форумы SciDAVis</translation>
+        <translation>Посетить &amp;Форумы SciDAVis</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="11763"/>
