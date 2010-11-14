@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="ru">
 <context>
     <name>@default</name>
     <message>
@@ -708,7 +708,8 @@ Do you want to overwrite it?</source>
         <location filename="../src/ApplicationWindow.cpp" line="12955"/>
         <location filename="../src/ApplicationWindow.cpp" line="12999"/>
         <source>Table</source>
-        <translation>Table</translation>
+        <translatorcomment>Не переводить, иначе ломается легенда</translatorcomment>
+        <translation type="unfinished">Table</translation>
     </message>
     <message>
         <source>Data Display</source>
@@ -979,7 +980,8 @@ Do you want to overwrite it?</source>
         <location filename="../src/ApplicationWindow.cpp" line="12951"/>
         <location filename="../src/ApplicationWindow.cpp" line="12994"/>
         <source>Matrix</source>
-        <translation type="unfinished">Matrix</translation>
+        <translatorcomment>Лучше не переводить, это название типа листа</translatorcomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="2823"/>
@@ -3847,6 +3849,7 @@ Are you sure you want to continue?</source>
         <location filename="../src/ApplicationWindow.cpp" line="13009"/>
         <location filename="../src/ApplicationWindow.h" line="494"/>
         <source>Graph</source>
+        <translatorcomment>Не переводить, иначе ломается легенда</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -3870,7 +3873,7 @@ Are you sure you want to continue?</source>
         <location filename="../src/ApplicationWindow.cpp" line="2579"/>
         <location filename="../src/ApplicationWindow.cpp" line="2590"/>
         <source>Notes</source>
-        <translation type="unfinished">Notes</translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3647"/>
@@ -4378,7 +4381,7 @@ Various parts of this file may not be displayed as expected.</source>
         <location filename="../src/ApplicationWindow.cpp" line="7864"/>
         <location filename="../src/ApplicationWindow.cpp" line="7980"/>
         <source>Re&amp;move Pie Curve</source>
-        <translation type="unfinished"></translation>
+        <translation>У&amp;далить круговую диаграмму</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="7914"/>
@@ -4496,7 +4499,7 @@ Various parts of this file may not be displayed as expected.</source>
         <location filename="../src/ApplicationWindow.cpp" line="10501"/>
         <location filename="../src/ApplicationWindow.cpp" line="11047"/>
         <source>Clear &amp;Log Information</source>
-        <translation>Очистить &amp;Лог</translation>
+        <translation>Очистить &amp;Журнал</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10504"/>
@@ -4821,7 +4824,7 @@ Various parts of this file may not be displayed as expected.</source>
         <location filename="../src/ApplicationWindow.cpp" line="3324"/>
         <location filename="../src/ApplicationWindow.cpp" line="3332"/>
         <source>ASCII Import Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт ASCII завершился ошибкой</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="3325"/>
@@ -5640,7 +5643,7 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10457"/>
         <source>Undo/Redo &amp;History</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;История Отмен/Повторов</translation>
     </message>
     <message>
         <location filename="../src/ApplicationWindow.cpp" line="10788"/>
@@ -5689,7 +5692,7 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/future/table/AsciiTableImportFilter.cpp" line="120"/>
         <source>Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Таблица</translation>
     </message>
 </context>
 <context>
@@ -6231,7 +6234,7 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/AxesDialog.cpp" line="359"/>
         <source>Date &amp; Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата и время</translation>
     </message>
 </context>
 <context>
@@ -6272,7 +6275,7 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/ColorBox.cpp" line="96"/>
         <source>magenta</source>
-        <translation>пурпурный</translation>
+        <translation>фуксия</translation>
     </message>
     <message>
         <location filename="../src/ColorBox.cpp" line="100"/>
@@ -6307,7 +6310,7 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/ColorBox.cpp" line="124"/>
         <source>dark cyan</source>
-        <translation>тёмно-голубой</translation>
+        <translation>морской волны</translation>
     </message>
     <message>
         <location filename="../src/ColorBox.cpp" line="144"/>
@@ -6327,17 +6330,17 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/ColorBox.cpp" line="128"/>
         <source>royal</source>
-        <translation type="unfinished"></translation>
+        <translation>ультрамарин</translation>
     </message>
     <message>
         <location filename="../src/ColorBox.cpp" line="132"/>
         <source>orange</source>
-        <translation>ораньжевый</translation>
+        <translation>оранжевый</translation>
     </message>
     <message>
         <location filename="../src/ColorBox.cpp" line="136"/>
         <source>violet</source>
-        <translation>фиалетовый</translation>
+        <translation>сиреневый</translation>
     </message>
     <message>
         <location filename="../src/ColorBox.cpp" line="140"/>
@@ -6352,17 +6355,17 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/ColorBox.cpp" line="156"/>
         <source>light yellow</source>
-        <translation>светло-желтый</translation>
+        <translation>светло-жёлтый</translation>
     </message>
     <message>
         <location filename="../src/ColorBox.cpp" line="160"/>
         <source>light cyan</source>
-        <translation type="unfinished">голубой</translation>
+        <translation>светло-голубой</translation>
     </message>
     <message>
         <location filename="../src/ColorBox.cpp" line="164"/>
         <source>light magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>светло-розовый</translation>
     </message>
 </context>
 <context>
@@ -6418,63 +6421,63 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="382"/>
         <source>column type missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Не установлен тип колонки</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="388"/>
         <source>column type invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Не правильный тип колонки</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="395"/>
         <source>column mode missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат колонки отсутсвует</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="401"/>
         <source>column mode invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Не правильный формат колонки</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="407"/>
         <source>column type or mode invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Не правильный тип или формат колонки</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="417"/>
         <source>column plot designation invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Не правильное обозначение длля построения колонки</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="453"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>неизвестный элемент &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="462"/>
         <source>no column element found</source>
-        <translation type="unfinished"></translation>
+        <translation>не найден элемент колонки</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="497"/>
         <location filename="../src/future/core/column/Column.cpp" line="516"/>
         <source>invalid or missing start or end row</source>
-        <translation type="unfinished"></translation>
+        <translation>не правильный или отсутствующий элемент в начале или конце</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="537"/>
         <source>invalid or missing row type</source>
-        <translation type="unfinished"></translation>
+        <translation>не правильный или не заданный тип ряда</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="545"/>
         <source>invalid or missing row index</source>
-        <translation type="unfinished"></translation>
+        <translation>не правильный или потерянный индекс ряда</translation>
     </message>
     <message>
         <location filename="../src/future/core/column/Column.cpp" line="557"/>
         <source>invalid row value</source>
-        <translation type="unfinished"></translation>
+        <translation>неверное значение в ряду</translation>
     </message>
 </context>
 <context>
@@ -6482,7 +6485,7 @@ Various parts of this file may not be displayed as expected.</source>
     <message>
         <location filename="../src/future/core/column/Column.h" line="325"/>
         <source>as string</source>
-        <translation type="unfinished"></translation>
+        <translation>как строку</translation>
     </message>
 </context>
 <context>
@@ -6991,7 +6994,7 @@ The following special codes can be used:
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1000"/>
         <source>Uniform X Function</source>
-        <translation type="unfinished"></translation>
+        <translation>Равномерное распределение по X</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1001"/>
@@ -7001,7 +7004,7 @@ The following special codes can be used:
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1002"/>
         <source>Same X as Fitting Data</source>
-        <translation>Ось X -- та же, что и у данных приближения</translation>
+        <translation>Значения X, такие же как у приближаемых данных</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="1005"/>
@@ -7080,7 +7083,7 @@ The following special codes can be used:
     <message>
         <location filename="../src/ConfigDialog.cpp" line="903"/>
         <source>default</source>
-        <translation></translation>
+        <translation>по-умолчанию</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="915"/>
@@ -7112,42 +7115,42 @@ The following special codes can be used:
     <message>
         <location filename="../src/ConfigDialog.cpp" line="849"/>
         <source>Print Crop &amp;Marks</source>
-        <translation type="unfinished"></translation>
+        <translation>Печатать маркеры &amp;обрезки страницы</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="889"/>
         <source>Default numeric format</source>
-        <translation type="unfinished"></translation>
+        <translation>Числовой формат по умолчанию</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="891"/>
         <source>Decimal</source>
-        <translation type="unfinished"></translation>
+        <translation>Десятичный</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="892"/>
         <source>Scientific (e)</source>
-        <translation type="unfinished"></translation>
+        <translation>Научный (e)</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="893"/>
         <source>Scientific (E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Научный (E)</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="900"/>
         <source>Default Number of Decimal Digits</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество десятичных знаков</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="894"/>
         <source>Automatic (e)</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматический (e)</translation>
     </message>
     <message>
         <location filename="../src/ConfigDialog.cpp" line="895"/>
         <source>Automatic (E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматический (E)</translation>
     </message>
 </context>
 <context>
@@ -7155,50 +7158,50 @@ The following special codes can be used:
     <message>
         <location filename="../src/future/table/controltabs.ui" line="26"/>
         <source>Control Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Вкладки управления</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="54"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="62"/>
         <source>go to previous column</source>
-        <translation type="unfinished"></translation>
+        <translation>К предыдущей колонке</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="65"/>
         <location filename="../src/future/table/controltabs.ui" line="78"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="75"/>
         <source>go to next column</source>
-        <translation type="unfinished"></translation>
+        <translation>К следующей колонке</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="88"/>
         <location filename="../src/future/table/controltabs.ui" line="170"/>
         <location filename="../src/future/table/controltabs.ui" line="388"/>
         <source>Appl&amp;y</source>
-        <translation type="unfinished"></translation>
+        <translation>Приме&amp;нить</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="109"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="128"/>
         <source>Comment:</source>
-        <translation type="unfinished">Комментарий:</translation>
+        <translation>Комментарий:</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="152"/>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="164"/>
@@ -7206,12 +7209,15 @@ The following special codes can be used:
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Применить новый тип и формат ко всем выбранным колонкам&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="180"/>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип:</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="202"/>
@@ -7219,13 +7225,16 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select the column type&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Выберите тип колонки&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="212"/>
         <location filename="../src/future/table/controltabs.ui" line="244"/>
         <source>Format:</source>
-        <translation type="unfinished">Формат:</translation>
+        <translation>Формат:</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="234"/>
@@ -7233,12 +7242,15 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Выберите формат отображения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="254"/>
         <source>Decimal Digits:</source>
-        <translation type="unfinished"></translation>
+        <translation>Десятичные знаки:</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="264"/>
@@ -7246,17 +7258,20 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Выберите число отображаемых десятичных знаков&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="280"/>
         <source>Numbers are</source>
-        <translation type="unfinished"></translation>
+        <translation>Числа </translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="290"/>
         <source>since</source>
-        <translation type="unfinished"></translation>
+        <translation>Начало</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="349"/>
@@ -7264,17 +7279,20 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Информация о выбранном типе и формате&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="366"/>
         <source>Formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Формула</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="372"/>
         <source>Formula:</source>
-        <translation type="unfinished"></translation>
+        <translation>Формула:</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="382"/>
@@ -7282,7 +7300,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Применить формулу ко всем выбранным колонкам&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="417"/>
@@ -7290,7 +7311,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Выберите ссылку на колонку, для вставки в формулу&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="427"/>
@@ -7298,13 +7322,16 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Вставка ссылки на колонку в формулу&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="433"/>
         <location filename="../src/future/table/controltabs.ui" line="463"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="446"/>
@@ -7312,7 +7339,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Выберите функцию для вставки в формулу&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/future/table/controltabs.ui" line="456"/>
@@ -7321,7 +7351,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Insert the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -7429,7 +7459,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/Correlation.cpp" line="165"/>
         <location filename="../src/Correlation.cpp" line="169"/>
         <source>Lag</source>
-        <translation type="unfinished"></translation>
+        <translation>Задержка</translation>
     </message>
     <message>
         <location filename="../src/Correlation.cpp" line="173"/>
@@ -7753,17 +7783,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/future/table/DimensionsDialog.ui" line="13"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалог</translation>
     </message>
     <message>
         <location filename="../src/future/table/DimensionsDialog.ui" line="21"/>
         <source>Rows</source>
-        <translation type="unfinished">Строк</translation>
+        <translation>Строк</translation>
     </message>
     <message>
         <location filename="../src/future/table/DimensionsDialog.ui" line="39"/>
         <source>Columns</source>
-        <translation type="unfinished">Столбцов</translation>
+        <translation>Столбцов</translation>
     </message>
 </context>
 <context>
@@ -7771,7 +7801,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/future/core/datatypes/Double2StringFilter.cpp" line="51"/>
         <source>missing or invalid format attribute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>не заданы или не правильные параметры формата</translation>
     </message>
 </context>
 <context>
@@ -7974,18 +8004,18 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/ExponentialFit.cpp" line="82"/>
         <location filename="../src/ExponentialFit.cpp" line="89"/>
         <source>(amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(амплитуда)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="82"/>
         <source>(lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(время затухания)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="82"/>
         <location filename="../src/ExponentialFit.cpp" line="89"/>
         <source>(offset)</source>
-        <translation type="unfinished">(смещение)</translation>
+        <translation>(смещение)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="87"/>
@@ -8007,7 +8037,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ExportDialog.cpp" line="45"/>
         <source>Table</source>
-        <translation>Table</translation>
+        <translation>Таблица</translation>
     </message>
     <message>
         <location filename="../src/ExportDialog.cpp" line="50"/>
@@ -8326,7 +8356,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/FFTFilter.cpp" line="53"/>
         <source>Filtered</source>
-        <translation type="unfinished">Filtered</translation>
+        <translation>Отфильтрованный </translation>
     </message>
     <message>
         <source>QtiPlot</source>
@@ -8346,7 +8376,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/FFTFilter.cpp" line="89"/>
         <source>Please enter different values for the band limits.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите различные значения для пределов.</translation>
     </message>
     <message>
         <location filename="../src/FFTFilter.cpp" line="124"/>
@@ -8822,17 +8852,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/Fit.cpp" line="231"/>
         <source>Y standard errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартные отклонения по Y</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="235"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="238"/>
         <source>Associated dataset (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ассоциированный набор данных (%1)</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="241"/>
@@ -8842,12 +8872,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/Fit.cpp" line="363"/>
         <source>The curve %1 has no associated Y error bars.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривой %1 не сопоставлены ошибки по оси Y.</translation>
     </message>
     <message>
         <location filename="../src/Fit.cpp" line="528"/>
         <source>Input function error</source>
-        <translation type="unfinished">Ошибка ввода функции</translation>
+        <translation>Ошибка ввода функции</translation>
     </message>
 </context>
 <context>
@@ -9076,7 +9106,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/FitDialog.cpp" line="335"/>
         <source>&amp;Uniform X Function</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Равномерное распределение по X</translation>
     </message>
     <message>
         <location filename="../src/FitDialog.cpp" line="343"/>
@@ -9348,7 +9378,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/FitDialog.cpp" line="170"/>
         <source>Y Error Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибки по Y</translation>
     </message>
     <message>
         <location filename="../src/FitDialog.cpp" line="172"/>
@@ -9382,7 +9412,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/FunctionCurve.cpp" line="143"/>
         <source>Input function error</source>
-        <translation type="unfinished">Ошибка ввода функции</translation>
+        <translation>Ошибка ввода функции</translation>
     </message>
 </context>
 <context>
@@ -10151,33 +10181,33 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/Graph.cpp" line="4138"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="772"/>
         <source>Internal Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Внутренная Ошибка</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="773"/>
         <source>&lt;html&gt;Failed to set axis labels on Graph %1. Maybe you&apos;re trying to open a corrupted project file; or there&apos;s some problem within SciDAVis. Please report this as a bug (together with detailed instructions how to reproduce this message or the corrupted file).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;Не удалось выставить метки осей на Graph %1. Возможно вы пытаетесь открыть поврежденный файл проекта или внутри SciDAVis проиошла ошибка . Пожалуйста сообщите о ней (с детальным описанием как её повторить или получить такой же сломанный файл).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt; Система отслеживания ошибок: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="802"/>
         <source>Couldn&apos;t change the axis type to the requested format!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не возможно изменить тип оси в выбранный формат!</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="4139"/>
         <source>2</source>
         <comment>curve data table y column name</comment>
-        <translation type="unfinished">2</translation>
+        <translation>2</translation>
     </message>
     <message>
         <location filename="../src/Graph.cpp" line="4148"/>
         <source>Curve data %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные кривой %1</translation>
     </message>
 </context>
 <context>
@@ -10232,7 +10262,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/Graph3D.cpp" line="2007"/>
         <source>Could not print: &lt;h4&gt;</source>
-        <translation type="unfinished">Невозможно напечатать: &lt;h4&gt;</translation>
+        <translation>Невозможно напечатать: &lt;h4&gt;</translation>
     </message>
     <message>
         <source>QtiPlot - Error</source>
@@ -10522,24 +10552,26 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ImageExportDialog.cpp" line="138"/>
         <source>Page size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер страницы</translation>
     </message>
     <message>
         <location filename="../src/ImageExportDialog.cpp" line="144"/>
         <source>Orientation</source>
-        <translation type="unfinished">Ориентация</translation>
+        <translation>Ориентация</translation>
     </message>
     <message>
         <location filename="../src/ImageExportDialog.cpp" line="146"/>
         <source>Portrait</source>
         <comment>page orientation</comment>
-        <translation type="unfinished">Книжная</translation>
+        <translatorcomment>ориентация страницы</translatorcomment>
+        <translation>Книжная</translation>
     </message>
     <message>
         <location filename="../src/ImageExportDialog.cpp" line="147"/>
         <source>Landscape</source>
         <comment>page orientation</comment>
-        <translation type="unfinished">Альбомная</translation>
+        <translatorcomment>ориентация страницы</translatorcomment>
+        <translation>Альбомная</translation>
     </message>
 </context>
 <context>
@@ -10813,7 +10845,7 @@ have the same number of rows.</source>
     <message>
         <location filename="../src/ImportASCIIDialog.cpp" line="149"/>
         <source>&amp;Numeric data</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Числовые данные</translation>
     </message>
 </context>
 <context>
@@ -11786,7 +11818,7 @@ The limits must be within the range of x; If you do not know the maximum (minimu
     <message>
         <location filename="../src/LineProfileTool.cpp" line="154"/>
         <source>Line profile %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Профиль линии %1</translation>
     </message>
 </context>
 <context>
@@ -11794,12 +11826,12 @@ The limits must be within the range of x; If you do not know the maximum (minimu
     <message>
         <location filename="../src/PolynomialFit.cpp" line="240"/>
         <source>(y-intercept)</source>
-        <translation type="unfinished"></translation>
+        <translation>(пересечение с Y)</translation>
     </message>
     <message>
         <location filename="../src/PolynomialFit.cpp" line="240"/>
         <source>(slope)</source>
-        <translation type="unfinished"></translation>
+        <translation>(наклон)</translation>
     </message>
     <message>
         <location filename="../src/PolynomialFit.cpp" line="241"/>
@@ -11926,27 +11958,27 @@ Do you want to insert cells?</source>
     <message>
         <location filename="../src/Matrix.cpp" line="531"/>
         <source>Do you want to hide or delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите скрыть или удалить</translation>
     </message>
     <message>
         <location filename="../src/Matrix.cpp" line="532"/>
         <source>Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location filename="../src/Matrix.cpp" line="532"/>
         <source>Hide</source>
-        <translation type="unfinished">Скрыть</translation>
+        <translation>Скрыть</translation>
     </message>
     <message>
         <location filename="../src/Matrix.cpp" line="724"/>
         <source>Matrix %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Матрица %1</translation>
     </message>
     <message>
         <location filename="../src/Matrix.cpp" line="730"/>
         <source>%1: apply formula to selection</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: применить формулу к выделенной области</translation>
     </message>
 </context>
 <context>
@@ -12033,7 +12065,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="480"/>
         <source>Formula</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Формула</translation>
     </message>
     <message>
         <location filename="../src/future/matrix/matrixcontroltabs.ui" line="486"/>
@@ -14534,7 +14566,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PlotDialog.cpp" line="435"/>
         <source>Print Crop &amp;Marks</source>
-        <translation type="unfinished"></translation>
+        <translation>Печатат&amp;ь границы страницы</translation>
     </message>
 </context>
 <context>
@@ -14896,12 +14928,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/PythonScripting.cpp" line="227"/>
         <source>Failed to export SciDAVis API</source>
-        <translation type="unfinished"></translation>
+        <translation>Не получилось экспортировать SciDAVis API</translation>
     </message>
     <message>
         <location filename="../src/PythonScripting.cpp" line="228"/>
         <source>Accessing SciDAVis functions or objects from Python code won&apos;t work.Probably your version of SIP differs from the one SciDAVis was compiled against;try updating SIP or recompiling SciDAVis.</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступ к фунцкиям или объектам SciDAVis из кода на языке Python не бует работать. Вероятно ваша версия SIP отличается от той, с которой был скомпилирован SciDAVis. Попробуйте обновить SIP или перекомпилировать SciDAVis.</translation>
     </message>
 </context>
 <context>
@@ -16420,7 +16452,7 @@ Do you want to insert cells?</source>
     <message>
         <location filename="../src/Table.cpp" line="950"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;</source>
-        <translation type="unfinished">Невозможно записать в файл: &lt;br&gt;&lt;h4&gt;</translation>
+        <translation>Невозможно записать в файл: &lt;br&gt;&lt;h4&gt;</translation>
     </message>
     <message>
         <location filename="../src/Table.cpp" line="1055"/>
@@ -16439,22 +16471,22 @@ Do you want to insert cells?</source>
     <message>
         <location filename="../src/Table.cpp" line="1056"/>
         <source>Do you want to hide or delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите скрыть или удалить</translation>
     </message>
     <message>
         <location filename="../src/Table.cpp" line="1057"/>
         <source>Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location filename="../src/Table.cpp" line="1057"/>
         <source>Hide</source>
-        <translation type="unfinished">Скрыть</translation>
+        <translation>Скрыть</translation>
     </message>
     <message>
         <location filename="../src/Table.cpp" line="1288"/>
         <source>%1: apply formula to column</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: применить форумулу к колонке</translation>
     </message>
 </context>
 <context>
@@ -16801,7 +16833,7 @@ Do you want to insert cells?</source>
     <message>
         <location filename="../src/TableStatistics.cpp" line="356"/>
         <source>S&amp;et Column(s) As</source>
-        <translation type="unfinished"></translation>
+        <translation>Назначить колонк&amp;у(-ки) в качестве</translation>
     </message>
 </context>
 <context>
@@ -17208,37 +17240,37 @@ floating point values
     <message>
         <location filename="../src/ExponentialFit.cpp" line="245"/>
         <source>(first amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(первая амплитуда)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="245"/>
         <source>(first lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(первое время затухания)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="245"/>
         <source>(second amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(вторая амплитуда)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(second lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(второе время затухания)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(third amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(третья амплитуда)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(third lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(третье время затухания)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="246"/>
         <source>(offset)</source>
-        <translation type="unfinished">(смещение)</translation>
+        <translation>(смещение)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="243"/>
@@ -17279,27 +17311,27 @@ floating point values
     <message>
         <location filename="../src/ExponentialFit.cpp" line="168"/>
         <source>(first amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(первая амплитуда)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="168"/>
         <source>(first lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(первое время затухания)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="168"/>
         <source>(second amplitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>(вторая амплитуда)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="169"/>
         <source>(second lifetime)</source>
-        <translation type="unfinished"></translation>
+        <translation>(второе время затухания)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="169"/>
         <source>(offset)</source>
-        <translation type="unfinished">(смещение)</translation>
+        <translation>(смещение)</translation>
     </message>
     <message>
         <location filename="../src/ExponentialFit.cpp" line="166"/>
@@ -19470,52 +19502,52 @@ floating point values
     <message>
         <location filename="../src/future/table/future_SortDialog.cpp" line="44"/>
         <source>Sorting Options</source>
-        <translation type="unfinished">Опции сортировки</translation>
+        <translation>Опции сортировки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_SortDialog.cpp" line="52"/>
         <source>Sort columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Сортировать колонки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_SortDialog.cpp" line="54"/>
         <source>Separately</source>
-        <translation type="unfinished">Раздельно</translation>
+        <translation>Раздельно</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_SortDialog.cpp" line="55"/>
         <source>Together</source>
-        <translation type="unfinished">Совместно</translation>
+        <translation>Совместно</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_SortDialog.cpp" line="59"/>
         <source>Order</source>
-        <translation type="unfinished">Порядок</translation>
+        <translation>Порядок</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_SortDialog.cpp" line="61"/>
         <source>Ascending</source>
-        <translation type="unfinished">По возрастанию</translation>
+        <translation>По возрастанию</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_SortDialog.cpp" line="62"/>
         <source>Descending</source>
-        <translation type="unfinished">По убыванию</translation>
+        <translation>По убыванию</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_SortDialog.cpp" line="65"/>
         <source>Leading column</source>
-        <translation type="unfinished">Ведущая колонка</translation>
+        <translation>Ведущая колонка</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_SortDialog.cpp" line="70"/>
         <source>&amp;Sort</source>
-        <translation type="unfinished">&amp;Сортировать</translation>
+        <translation>&amp;Сортировать</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_SortDialog.cpp" line="74"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Закрыть</translation>
+        <translation>&amp;Закрыть</translation>
     </message>
 </context>
 <context>
@@ -19558,13 +19590,13 @@ floating point values
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="961"/>
         <source>&amp;Table</source>
-        <translation type="unfinished">&amp;Таблица</translation>
+        <translation>&amp;Таблица</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="963"/>
         <location filename="../src/future/table/future_Table.cpp" line="1480"/>
         <source>S&amp;et Column(s) As</source>
-        <translation type="unfinished"></translation>
+        <translation>Назначить колонк&amp;у(-ки) в качестве</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="975"/>
@@ -19572,348 +19604,352 @@ floating point values
         <location filename="../src/future/table/future_Table.cpp" line="1492"/>
         <location filename="../src/future/table/future_Table.cpp" line="1555"/>
         <source>Fi&amp;ll Selection with</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Заполнить выбранное</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1044"/>
         <source>Cu&amp;t</source>
-        <translation type="unfinished">В&amp;ырезать</translation>
+        <translation>В&amp;ырезать</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1047"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Копировать</translation>
+        <translation>&amp;Копировать</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1050"/>
         <source>Past&amp;e</source>
-        <translation type="unfinished">&amp;Вставить</translation>
+        <translation>&amp;Вставить</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1054"/>
         <source>&amp;Mask</source>
         <comment>mask selection</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>создать маску из выделения</translatorcomment>
+        <translation>&amp;Маска</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1057"/>
         <source>&amp;Unmask</source>
         <comment>unmask selection</comment>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Убрать маску</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1064"/>
         <source>Assign &amp;Formula</source>
-        <translation type="unfinished"></translation>
+        <translation>З&amp;адать формулу</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1065"/>
         <source>Alt+Q</source>
-        <translation type="unfinished">Alt+Q</translation>
+        <translation>Alt+Q</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1072"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
-        <translation type="unfinished">&amp;Очистить</translation>
+        <translation>&amp;Очистить</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1079"/>
         <source>Recalculate</source>
-        <translation type="unfinished">Пересчитать</translation>
+        <translation>Пересчитать</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1080"/>
         <source>Ctrl+Return</source>
-        <translation type="unfinished">Ctrl+Return</translation>
+        <translation>Ctrl+Return</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1084"/>
         <source>Row Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Последовательные числа</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1087"/>
         <source>Random Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Случайные числа</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1102"/>
         <source>F12</source>
-        <translation type="unfinished">F12</translation>
+        <translation>F12</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1106"/>
         <source>Formula Edit Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим редактирования формулы</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1113"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Выделить все</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1120"/>
         <source>&amp;Add Column</source>
-        <translation type="unfinished">&amp;Добавить колонку</translation>
+        <translation>&amp;Добавить колонку</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1121"/>
         <source>append a new column to the table</source>
-        <translation type="unfinished"></translation>
+        <translation>добавить колонку к страница</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1128"/>
         <source>Clear Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить таблицу</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1133"/>
         <source>Clear Masks</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить маски</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1140"/>
         <source>&amp;Sort Table</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отсортировать таблицу</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1147"/>
         <source>&amp;Go to Cell</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Перейти к ячейке</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1148"/>
         <source>Ctrl+Alt+G</source>
-        <translation type="unfinished">Ctrl+Alt+G</translation>
+        <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1152"/>
         <source>&amp;Dimensions</source>
         <comment>table size</comment>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Размерности</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1153"/>
         <source>change the table size</source>
-        <translation type="unfinished"></translation>
+        <translation>изменить размер таблицы</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1160"/>
         <source>&amp;Insert Empty Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Вставить пустые колонки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1167"/>
         <source>Remo&amp;ve Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить &amp;колонки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1174"/>
         <source>Clea&amp;r Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Очистить колонки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1181"/>
         <source>&amp;Add Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Добавить колонки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1185"/>
         <source>X</source>
         <comment>plot designation</comment>
-        <translation type="unfinished">X</translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1188"/>
         <source>Y</source>
         <comment>plot designation</comment>
-        <translation type="unfinished">Y</translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1191"/>
         <source>Z</source>
         <comment>plot designation</comment>
-        <translation type="unfinished">Z</translation>
+        <translation>Z</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1197"/>
         <source>X Error</source>
         <comment>plot designation</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>назначения для построения</translatorcomment>
+        <translation>Ошибка по X</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1204"/>
         <source>Y Error</source>
         <comment>plot designation</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>назначение для построения</translatorcomment>
+        <translation>Ошибка по Y</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1208"/>
         <source>None</source>
         <comment>plot designation</comment>
-        <translation type="unfinished">Никакой(ая)</translation>
+        <translatorcomment>назначение для построения</translatorcomment>
+        <translation>Никакой(ая)</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1214"/>
         <source>&amp;Normalize Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Нормирова&amp;ть колонки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1221"/>
         <source>&amp;Normalize Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Нормирова&amp;ть выделение</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1228"/>
         <source>&amp;Sort Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сортировать колонки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1232"/>
         <source>Column Statisti&amp;cs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Статистика колонок</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1233"/>
         <source>statistics on columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Статистика на колонках</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1239"/>
         <source>Change &amp;Type &amp;&amp; Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить &amp;тип и формат </translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1240"/>
         <source>Ctrl+Alt+O</source>
-        <translation type="unfinished">Ctrl+Alt+O</translation>
+        <translation>Ctrl+Alt+O</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1247"/>
         <source>Edit Column &amp;Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать &amp;описание колонки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1255"/>
         <source>&amp;Insert Empty Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Вставить пустые строки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1262"/>
         <source>Remo&amp;ve Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Удалить строки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1269"/>
         <source>Clea&amp;r Rows</source>
-        <translation type="unfinished">С&amp;тереть строки</translation>
+        <translation>О&amp;чистить строки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1276"/>
         <source>&amp;Add Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Добавить строки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1280"/>
         <source>Row Statisti&amp;cs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Статистика строк</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1281"/>
         <source>statistics on rows</source>
-        <translation type="unfinished"></translation>
+        <translation>статистика на строках</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1570"/>
         <location filename="../src/future/table/future_Table.cpp" line="1574"/>
         <source>Go to Cell</source>
-        <translation type="unfinished">Перейти к ячейке</translation>
+        <translation>Перейти к ячейке</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1570"/>
         <source>Enter column</source>
-        <translation type="unfinished">Введите столбец</translation>
+        <translation>Введите столбец</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1574"/>
         <source>Enter row</source>
-        <translation type="unfinished">Введите строку</translation>
+        <translation>Введите строку</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1586"/>
         <source>Set Table Dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить размеры таблицы</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1601"/>
         <source>%1: move column %2 from position %3 to %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: переместить колонку %2 с позиции %3 на %4.</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="1736"/>
         <source>%1: sort column(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: сортировать колонку(-ки)</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2115"/>
         <source>invalid row or column count</source>
-        <translation type="unfinished"></translation>
+        <translation>неправильное число строк или столбцов</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2135"/>
         <source>Column %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Колонка %1</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2151"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>неизвестный элемент %1</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2157"/>
         <source>columns attribute and number of read columns do not match</source>
-        <translation type="unfinished"></translation>
+        <translation>Аттрибуты колонки и число прочитанных колонок не совпадают</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2160"/>
         <source>no table element found</source>
-        <translation type="unfinished"></translation>
+        <translation>не найден элемент таблицы</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2171"/>
         <source>Hide Comments</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть комментарии</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2173"/>
         <source>Show Comments</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать комментарии</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2177"/>
         <source>Hide Controls</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть элементы управления</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2179"/>
         <source>Show Controls</source>
-        <translation type="unfinished"></translation>
+        <translation>ПОказать элементы управления</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2190"/>
         <source>invalid or missing column index</source>
-        <translation type="unfinished"></translation>
+        <translation>Не правильный или потерянный индекс колонки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2197"/>
         <source>invalid column width</source>
-        <translation type="unfinished"></translation>
+        <translation>Не правильная ширина колонки</translation>
     </message>
     <message>
         <location filename="../src/future/table/future_Table.cpp" line="2234"/>
         <source>Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Таблица</translation>
     </message>
 </context>
 <context>
