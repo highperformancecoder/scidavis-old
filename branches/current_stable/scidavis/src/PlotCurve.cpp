@@ -34,7 +34,7 @@
 #include <QMessageBox>
 #include <qwt_symbol.h>
 
-DataCurve::DataCurve(Table *t, const QString& xColName, const char *name, int startRow, int endRow):
+DataCurve::DataCurve(Table *t, const QString& xColName, const QString &name, int startRow, int endRow):
     PlotCurve(name),
 	d_table(t),
 	d_x_column(xColName),

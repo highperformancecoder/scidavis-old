@@ -37,7 +37,7 @@ class PlotCurve: public QwtPlotCurve
 {
 
 public:
-	PlotCurve(const char *name = 0): QwtPlotCurve(name), d_type(0){};
+	PlotCurve(const QString &name = QString::null): QwtPlotCurve(name), d_type(0){};
 
 	int type() const {return d_type;};
 	void setType(int t){d_type = t;};
@@ -52,7 +52,7 @@ class DataCurve: public PlotCurve
 {
 
 public:
-	DataCurve(Table *t, const QString& xColName, const char *name, int startRow = 0, int endRow = -1);
+	DataCurve(Table *t, const QString& xColName, const QString &name, int startRow = 0, int endRow = -1);
 
 	QString xColumnName(){return d_x_column;};
 	void setXColumnName(const QString& name){d_x_column = name;};
