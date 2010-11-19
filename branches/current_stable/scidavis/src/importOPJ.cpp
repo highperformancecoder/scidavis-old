@@ -333,15 +333,15 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 				break;
 			}
 		}
-	   
+
 
 
 		if(!(spread.hidden || spread.loose) || opj.version() != 7.5){
 			table->showNormal();
 
 			//cascade the tables
-			if (opj.version() >= 6.0) 
-		        {	
+			if (opj.version() >= 6.0)
+		        {
 			   Origin::Rect windowRect;
 			   windowRect = spread.frameRect;
 			   table->parentWidget()->move(QPoint(windowRect.left, windowRect.top));
@@ -355,7 +355,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 
 		}
 	}
- 
+
 
 //Import matrices
 	for(unsigned int s = 0; s < opj.matrixCount(); ++s)
@@ -385,7 +385,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 				if(fabs(val)>0 && fabs(val)<2.0e-300)// empty entry
 					continue;
 
-				Matrix->setCell(i, j, val); // Matrix is the one in Application 
+				Matrix->setCell(i, j, val); // Matrix is the one in Application
 			}
 		}
 
@@ -419,7 +419,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 #if 0
 		int dx=Matrix->verticalHeaderWidth();
 		int dy=Matrix->parentWidget()->frameGeometry().height() - matrix->height();
-#endif	
+#endif
 // TODO
 		int dx = 100;
 		int dy = 100;
@@ -528,7 +528,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 				QString tableName;
 				switch(data[0].toAscii())
 				{
-				case 'T': 
+				case 'T':
 				     {
 					tableName = data.right(data.length()-2);
 					Table* table = mw->table(tableName);
@@ -543,7 +543,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 					}
 					else if(style==Graph::Histogram)
 				        {
-					
+
 						graph->insertCurve(table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
 					}
 					else
@@ -559,7 +559,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 					QList<double> ranges;
 					int s=opj.functionIndex(data.right(data.length()-2).toStdString().c_str());
 					function = opj.function(s);
-					
+
 					int type;
 					if(function.type == Origin::Function::Polar)
 					{
@@ -790,7 +790,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 				graph->setScale(2,layer.xAxis.min,layer.xAxis.max,layer.xAxis.step,layer.xAxis.majorTicks,layer.xAxis.minorTicks,layer.xAxis.scale);
 				graph->setScale(0,layer.yAxis.min,layer.yAxis.max,layer.yAxis.step,layer.yAxis.majorTicks,layer.yAxis.minorTicks,layer.yAxis.scale);
 			}
-		   
+
 			//grid
 			Grid *grid = graph->grid();
 
