@@ -152,8 +152,15 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 				case Origin::Numeric:
 				case Origin::TextNumeric:
 					{
-						for (int i=0; i < std::min((int)column.data.size(), maxrows); ++i)
-							scidavis_column->setValueAt(i, boost::get<double>(column.data[i]));
+						Origin::variant value;
+						double datavalue;
+						for (int i=0; i < std::min((int)column.data.size(), maxrows); ++i) {
+							value = column.data[i];
+							if (value.type() == typeid(double)) {
+								datavalue = boost::get<double>(value);
+								if (datavalue==_ONAN) continue;
+								scidavis_column->setValueAt(i, datavalue);
+							}						}
 						int f;
 						if(column.numericDisplayType == 0)
 						{
