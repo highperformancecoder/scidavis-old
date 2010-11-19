@@ -121,7 +121,8 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 
 			QString name(column.name.c_str());
 			scidavis_column->setName(name.replace(QRegExp(".*_"),""));
-			scidavis_column->setFormula(Interval<int>(0,maxrows), QString(column.command.c_str()));
+			if (column.command.size() > 0)
+				scidavis_column->setFormula(Interval<int>(0,maxrows), QString(column.command.c_str()));
 			scidavis_column->setComment(QString(column.comment.c_str()));
 			table->setColumnWidth(j, (int)column.width*SciDAVis_scaling_factor);
 
