@@ -218,8 +218,8 @@ contains(PRESET, default_installation) {
 	LIBS         += -lmuparser
 
 	contains(DEFINES, ORIGIN_IMPORT) {
-		LIBS += -lorigin2
-		INCLUDEPATH += /usr/include/liborigin2
+		LIBS += -lorigin
+		INCLUDEPATH += /usr/include/liborigin
 	}
 }
 
@@ -244,8 +244,8 @@ contains(PRESET, linux_package) {
 	LIBS         += -lmuparser
 
 	contains(DEFINES, ORIGIN_IMPORT) {
-		LIBS += -lorigin2
-		INCLUDEPATH += /usr/include/liborigin2
+		LIBS += -lorigin
+		INCLUDEPATH += /usr/include/liborigin
 	}
 }
 
@@ -264,8 +264,8 @@ contains(PRESET, self_contained) {
 	LIBS         += /usr/lib/libgsl.a /usr/lib/libgslcblas.a
 
 	contains(DEFINES, ORIGIN_IMPORT) {
-		LIBS += ../3rdparty/liborigin2/liborigin2.a
-		INCLUDEPATH += ../3rdparty/liborigin2
+		LIBS += ../3rdparty/liborigin/build/liborigin.a
+		INCLUDEPATH += ../3rdparty/liborigin ../3rdparty/liborigin/build
 	}
 }
 
@@ -289,8 +289,8 @@ win32 {
 	LIBS         += "$${LIBPATH}/gsl/lib/libgslcblas.a"
 
 	contains(DEFINES, ORIGIN_IMPORT) {
-		LIBS += "$${LIBPATH}/liborigin2/liborigin2.a"
-		INCLUDEPATH += "$${LIBPATH}/liborigin2"
+		LIBS += "$${LIBPATH}/liborigin/build/liborigin.a"
+		INCLUDEPATH += "$${LIBPATH}/liborigin" "$${LIBPATH}/liborigin/build"
 	}
 }
 
