@@ -12868,6 +12868,8 @@ void ApplicationWindow::hideFolderWindows(Folder *f)
 
 	FolderListItem *fi = f->folderListItem();
 	FolderListItem *item = (FolderListItem *)fi->firstChild();
+	if (!item)
+		return;
 	int initial_depth = item->depth();
 	while (item && item->depth() >= initial_depth){
 		lst = item->folder()->windowsList();
@@ -12927,6 +12929,8 @@ bool ApplicationWindow::changeFolder(Folder *newFolder, bool force)
 	if (!(newFolder->children()).isEmpty()){
         FolderListItem *fi = newFolder->folderListItem();
         FolderListItem *item = (FolderListItem *)fi->firstChild();
+			if (!item)
+				return false;
         int initial_depth = item->depth();
         while (item && item->depth() >= initial_depth)
         {//show/hide windows in subfolders
