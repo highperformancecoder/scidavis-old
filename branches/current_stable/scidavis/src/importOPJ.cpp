@@ -43,6 +43,7 @@
 #include "ColorBox.h"
 #include "MultiLayer.h"
 #include "Note.h"
+#include "Folder.h"
 #include "QwtHistogram.h"
 #include "Grid.h"
 
@@ -58,6 +59,13 @@ QString strreverse(const QString &str) //QString reversing
 	return out;
 }
 
+QString posixTimeToString(time_t pt)
+{
+	QDateTime qdt;
+	qdt.setTime_t(pt);
+	return qdt.toString("dd.MM.yyyy hh.mm.ss");
+}
+
 ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
 		mw(app)
 {
@@ -67,7 +75,84 @@ ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
 	importTables(opj);
 	importGraphs(opj);
 	importNotes(opj);
+	if(filename.endsWith(".opj", Qt::CaseInsensitive))
+		createProjectTree(opj);
 	mw->showResults(opj.resultsLogString().c_str(), mw->logWindow->isVisible());
+}
+
+inline uint qHash(const tree<Origin::ProjectNode>::iterator &key)
+{
+	return qHash(key->name.c_str());
+}
+
+bool ImportOPJ::createProjectTree(const OriginFile& opj)
+{
+	const tree<Origin::ProjectNode>* projectTree = opj.project();
+	tree<Origin::ProjectNode>::iterator root = projectTree->begin(projectTree->begin());
+	if(!root.node)
+		return false;
+	FolderListItem* item = (FolderListItem*)mw->folders->firstChild();
+	item->setText(0, root->name.c_str());
+	item->folder()->setName(root->name.c_str());
+	Folder* projectFolder = mw->projectFolder();
+	QHash<tree<Origin::ProjectNode>::iterator, Folder*> parent;
+	parent[root] = projectFolder;
+	for(tree<Origin::ProjectNode>::iterator sib = projectTree->begin(root); sib != projectTree->end(root); ++sib)
+	{
+		if(sib->type == Origin::ProjectNode::Folder){
+			Folder *f = new Folder(parent.value(projectTree->parent(sib)), sib->name.c_str());
+			parent[sib] = f;
+			f->setBirthDate(posixTimeToString(sib->creationDate));
+			f->setModificationDate(posixTimeToString(sib->modificationDate));
+			mw->addFolderListViewItem(f);
+			FolderListItem *fi = new FolderListItem(mw->current_folder->folderListItem(), f);
+			if (fi)
+				f->setFolderListItem(fi);
+		} else {
+			QString name = sib->name.c_str();
+			if(sib->type == Origin::ProjectNode::Note)
+			{
+				QRegExp rx("^@\\((\\S+)\\)$");
+				if(rx.indexIn(name) == 0)
+					name = rx.cap(1);
+			}
+			QString nodetype;
+			switch (sib->type)
+			{
+				case Origin::ProjectNode::SpreadSheet:
+					nodetype = "Table";
+					break;
+				case Origin::ProjectNode::Matrix:
+					nodetype = "Matrix";
+					break;
+				case Origin::ProjectNode::Graph:
+					nodetype = "MultiLayer";
+					break;
+				case Origin::ProjectNode::Graph3D:
+					// there is no Graph3D type yet
+					nodetype = "MultiLayer"; // "Graph3D";
+					break;
+				case Origin::ProjectNode::Note:
+					nodetype = "Note";
+					break;
+				default:
+					nodetype = "Unknown";
+					break;
+			}
+			MyWidget* w = projectFolder->window(name, nodetype);
+			if(w){
+				Folder *f = parent.value(projectTree->parent(sib));
+				if (f){
+					// removeWindow  uses QList.removeAll, so remove w before adding it to its folder
+					projectFolder->removeWindow(w);
+					f->addWindow(w);
+					f->setActiveWindow(w);
+				}
+			}
+		}
+	}
+	mw->changeFolder(projectFolder, true);
+	return true;
 }
 
 int ImportOPJ::translateOrigin2ScidavisLineStyle(int linestyle) {
@@ -160,7 +245,8 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 								datavalue = boost::get<double>(value);
 								if (datavalue==_ONAN) continue;
 								scidavis_column->setValueAt(i, datavalue);
-							}						}
+							}
+						}
 						int f;
 						if(column.numericDisplayType == 0)
 						{

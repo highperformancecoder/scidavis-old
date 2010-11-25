@@ -40,6 +40,7 @@ class ImportOPJ
 public:
 	ImportOPJ(ApplicationWindow *app, const QString& filename);
 
+	bool createProjectTree(const OriginFile& opj);
 	bool importTables (const OriginFile& opj);
 	bool importGraphs (const OriginFile& opj);
 	bool importNotes (const OriginFile& opj);
