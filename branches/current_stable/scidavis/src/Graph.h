@@ -151,7 +151,7 @@ class Graph: public QWidget
 		//! \name Pie Curves
 		//@{
 		//! Returns true if this Graph is a pie plot, false otherwise.
-		bool isPiePlot(){return (c_type.count() == 1 && c_type[0] == Pie);};
+		bool isPiePlot() const {return (c_type.count() == 1 && c_type[0] == Pie);};
 		void plotPie(Table* w,const QString& name, int startRow = 0, int endRow = -1);
 		//! Used when restoring a pie plot from a project file
 		void plotPie(Table* w,const QString& name, const QPen& pen, int brush, int size, int firstColor, int startRow = 0, int endRow = -1, bool visible = true);
@@ -183,7 +183,7 @@ class Graph: public QWidget
 
 		void updateCurvesData(Table* w, const QString& yColName);
 
-		int curves(){return n_curves;};
+		int curves() const {return n_curves;};
 		bool validCurvesDataSize();
 		double selectedXStartValue();
 		double selectedXEndValue();
@@ -193,18 +193,18 @@ class Graph: public QWidget
 		//! Map curve pointer to index.
 		int curveIndex(QwtPlotCurve *c) const;
 		//! map curve title to index
-  	    int curveIndex(const QString &title){return plotItemsList().indexOf(title);}
+  	    int curveIndex(const QString &title) const {return plotItemsList().indexOf(title);}
   	    //! get curve by index
-  	    QwtPlotCurve* curve(int index);
+  	    QwtPlotCurve* curve(int index) const;
   	    //! get curve by name
-  	    QwtPlotCurve* curve(const QString &title){return curve(curveIndex(title));}
+  	    QwtPlotCurve* curve(const QString &title) const {return curve(curveIndex(title));}
 
 		//! Returns the names of all the curves suitable for data analysis, as a string list. The list excludes error bars and spectrograms.
 		QStringList analysableCurvesList();
 		//! Returns the names of all the QwtPlotCurve items on the plot, as a string list
   		QStringList curvesList();
   	    //! Returns the names of all plot items, including spectrograms, as a string list
-  		QStringList plotItemsList();
+  		QStringList plotItemsList() const;
   		 //! get plotted item by index
   	    QwtPlotItem* plotItem(int index);
   	    //! get plot item by index

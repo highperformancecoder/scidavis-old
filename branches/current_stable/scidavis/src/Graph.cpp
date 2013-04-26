@@ -1330,7 +1330,7 @@ QStringList Graph::curvesList()
 return cList;
 }
 
-QStringList Graph::plotItemsList()
+QStringList Graph::plotItemsList() const
 {
   	QStringList cList;
   	QList<int> keys = d_plot->curveKeys();
@@ -2815,7 +2815,7 @@ int Graph::plotItemIndex(QwtPlotItem *it) const
 	return -1;
 }
 
-QwtPlotCurve *Graph::curve(int index)
+QwtPlotCurve *Graph::curve(int index) const
 {
 	if (!n_curves || index >= n_curves || index < 0)
 		return 0;

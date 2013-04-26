@@ -239,9 +239,13 @@ contains(PRESET, linux_package) {
 	INCLUDEPATH  += /usr/include/qwtplot3d
 	LIBS         += -lqwtplot3d
 
+        # to cope with latest Qt
+        INCLUDEPATH  += /usr/include/QtAssistant 
+        LIBS         += -lQtAssistantClient
+
 	INCLUDEPATH  += /usr/include/muParser
-	LIBS         += -lgsl -lgslcblas
-	LIBS         += -lmuparser
+	LIBS         += -lGLU -lgsl -lgslcblas
+	LIBS         += -lmuparser -lz
 
 	contains(DEFINES, ORIGIN_IMPORT) {
 		LIBS += -lorigin

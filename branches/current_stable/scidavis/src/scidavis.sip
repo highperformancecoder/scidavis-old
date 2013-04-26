@@ -1015,7 +1015,7 @@ public:
 	sipRes = sipCpp->d_plot->canvas();
 %End
 
-	QPointF pickPoint() const /NoDerived/;
+	QPointF pickPoint() /NoDerived/;
 %MethodCode
 	ApplicationWindow *app = sipscidavis_app();
 	sipRes = new QPointF();
