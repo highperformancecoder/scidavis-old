@@ -36,7 +36,10 @@
 /*!  \mainpage SciDAVis - Scientific Data Analysis and Visualization - API documentation
 
   \section description Program description:
-SciDAVis is a user-friendly data analysis and visualization program primarily aimed at high-quality plotting of scientific data. It strives to combine an intuitive, easy-to-use graphical user interface with powerful features such as Python scriptability.
+SciDAVis is a user-friendly data analysis and visualization program primarily
+aimed at high-quality plotting of scientific data.
+It strives to combine an intuitive, easy-to-use graphical user
+interface with powerful features such as Python scriptability.
 
  The SciDAVis web page can be found at<br>
  <a href="http://scidavis.sourceforge.net">http://scidavis.sourceforge.net</a><br>
@@ -58,7 +61,7 @@ There is also a section with some notes about \ref future "future plans".
 
   \page future Future Plans
 
-  - Make SciDAVis easier to extend and maintain by modularizing it and add 
+  - Make SciDAVis easier to extend and maintain by modularizing it and add
     generic plug-in support, support for implementing extensions in Python. 
 	For example, ideally it should be possible to implement new plot or marker
     types without modifying existing classes.
@@ -123,32 +126,34 @@ There is also a section with some notes about \ref future "future plans".
   - For indentations, tabs are preferred because they allow everyone to choose the indentation depth for him/herself.
 */
 
-int main( int argc, char ** argv )
+int main(int argc, char **argv)
 {
-    QApplication app( argc, argv );
+    QApplication app(argc, argv);
 
-	QStringList args = app.arguments();
-	args.removeFirst(); // remove application name
+    QStringList args = app.arguments();
+    // Remove application name.
+    args.removeFirst();
 
-	if( (args.count() == 1) && (args[0] == "-m" || args[0] == "--manual") )
-		ApplicationWindow::showStandAloneHelp();
-	else if ( (args.count() == 1) && (args[0] == "-a" || args[0] == "--about") ) {
-		ApplicationWindow::about();
-		exit(0);
-	} else {
-		ApplicationWindow *mw = new ApplicationWindow();
-		mw->applyUserSettings();
-		mw->newTable();
-		mw->show();
-		mw->savedProject();
+    if ((args.count() == 1) && (args[0] == "-m" || args[0] == "--manual")) {
+        ApplicationWindow::showStandAloneHelp();
+    } else if ((args.count() == 1) && (args[0] == "-a" || args[0] == "--about")) {
+        ApplicationWindow::about();
+        exit(0);
+    } else {
+        ApplicationWindow *mw = new ApplicationWindow();
+        mw->applyUserSettings();
+        mw->newTable();
+        mw->show();
+        mw->savedProject();
 #ifdef SEARCH_FOR_UPDATES
-		if (mw->autoSearchUpdates){
-			mw->autoSearchUpdatesRequest = true;
-			mw->searchForUpdates();
-		}
-#endif
-		mw->parseCommandLineArguments(args);
+	if (mw->autoSearchUpdates) {
+            mw->autoSearchUpdatesRequest = true;
+	    mw->searchForUpdates();
 	}
-	app.connect( &app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()) );
-	return app.exec();
+#endif
+	mw->parseCommandLineArguments(args);
+    }
+
+    app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
+    return app.exec();
 }

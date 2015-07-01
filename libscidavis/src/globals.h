@@ -34,6 +34,8 @@
 #include <QObject>
 #include <QString>
 
+#define SCIDAVIS_APP_NAME "SciDAVis"
+
 //! Definition of global constants and enums
 /**
  * This class must not be instanced. All members are static.
@@ -102,6 +104,12 @@ class SciDAVis : public QObject
 
 		//! Show about dialog
 		static void about();
+
+                //! Return the applicaiton name.
+                static QString appName(void);
+
+                //! Return whether to search for updates.
+                static bool searchForUpdates(void);
 
 	private:
 		//  Don't forget to change the Doxyfile when changing these!

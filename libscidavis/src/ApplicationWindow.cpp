@@ -5009,7 +5009,7 @@ bool ApplicationWindow::saveProject()
 	if (compress)
 		file_compress(QFile::encodeName(fn).constData(), "wb9");
 
-	setWindowTitle("SciDAVis - " + projectname);
+	setWindowTitle(SciDAVis::appName() + " - " + projectname);
 	savedProject();
 	actionUndo->setEnabled(false);
 	actionRedo->setEnabled(false);
@@ -6144,7 +6144,7 @@ void ApplicationWindow::removePoints()
 	}
 	else
 	{
-		switch(QMessageBox::warning (this,tr("SciDAVis"),
+         	  switch(QMessageBox::warning (this, SciDAVis::appName(),
 					tr("This will modify the data in the worksheets!\nAre you sure you want to continue?"),
 					tr("Continue"),tr("Cancel"),0,1))
 		{

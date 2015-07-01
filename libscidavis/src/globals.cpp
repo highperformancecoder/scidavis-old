@@ -165,9 +165,23 @@ void SciDAVis::about()
 	dialog->exec();
 }
 
+QString SciDAVis::appName(void)
+{
+    return SCIDAVIS_APP_NAME;
+}
+
+bool SciDAVis::searchForUpdates(void)
+{
+#ifdef SEARCH_FOR_UPDATES
+    return true;
+#else
+    return false;
+#endif
+}
+
 QString SciDAVis::copyrightString()
 {
-	return copyright_string;
+    return copyright_string;
 }
 
 QString SciDAVis::releaseDateString()
