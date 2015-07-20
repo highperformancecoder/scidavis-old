@@ -610,10 +610,10 @@ private:
   Legend(const Legend&);
 };
 
-class QwtSymbol
+class ScidavisQwtSymbol /PyName=QwtSymbol/
 {
 %TypeHeaderCode
-#include <qwt_symbol.h>
+#include <scidavisQwtSymbol.h>
 #include "ColorBox.h"
 %End
 	public:
@@ -638,8 +638,8 @@ class QwtSymbol
         Hexagon
     };
 
-    QwtSymbol();
-    QwtSymbol(Style st, const QBrush &bd, const QPen &pn, const QSize &s);
+    ScidavisQwtSymbol();
+    ScidavisQwtSymbol(Style st, const QBrush &bd, const QPen &pn, const QSize &s);
 
 //    virtual QwtSymbol *clone() const;
 
@@ -731,13 +731,14 @@ class QwtPlotCurve
 		void setBrush(const QBrush &);
 		const QBrush &brush() const;
 
-		void setSymbol(const QwtSymbol &s) /NoDerived/;
+		void setSymbol(const ScidavisQwtSymbol &s) /NoDerived/;
 %MethodCode
         sipscidavis::qwtPlotCurve_setSymbol(*sipCpp,*a0);
 %End
-		const QwtSymbol& symbol() const /NoDerived/;
+		const ScidavisQwtSymbol& symbol() const /NoDerived/;
 %MethodCode
-        sipRes=new QwtSymbol(sipscidavis::qwtPlotCurve_symbol(*sipCpp));
+        const QwtSymbol& s=sipscidavis::qwtPlotCurve_symbol(*sipCpp);
+        sipRes=new ScidavisQwtSymbol(s.style(),s.brush(),s.pen(),s.size());
 %End
 
 	 // convenience methods for scripting

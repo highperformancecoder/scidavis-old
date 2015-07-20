@@ -52,11 +52,19 @@ class Grid : public QwtPlotGrid
 		bool yZeroLineEnabled(){return (mrkY >= 0)?true:false;};
 		void enableZeroLineY(bool enable = true);
 
+#if QWT_VERSION<0x60000
 		void setMajPenX(const QPen &p){	setMajPen(p);};
 		const QPen& majPenX() const {return majPen();};
 
 		void setMinPenX(const QPen &p){	setMinPen(p);};
 		const QPen& minPenX() const {return minPen();};
+#else
+		void setMajPenX(const QPen &p){	setMajorPen(p);};
+		const QPen& majPenX() const {return majorPen();};
+
+		void setMinPenX(const QPen &p){	setMinorPen(p);};
+		const QPen& minPenX() const {return minorPen();};
+#endif
 
 		void setMajPenY(const QPen &p){	if (d_maj_pen_y != p) d_maj_pen_y = p;};
 		const QPen& majPenY() const {return d_maj_pen_y;};

@@ -32,6 +32,19 @@
 #include <qwt_plot_curve.h>
 #include "Table.h"
 
+#include <memory>
+
+#if QWT_VERSION>=0x60000
+template <class T>
+struct QwtSeriesDataVector: public QwtSeriesData<T>, public std::vector<T>
+{
+  size_t size() const {return std::vector<T>::size();}
+  T sample( size_t i ) const {return std::vector<T>::operator[](i);}
+  QRectF boundingRect() const {return qwtBoundingRect(*this,0,size());}
+};
+#endif
+
+
 //! Abstract 2D plot curve class
 class PlotCurve: public QwtPlotCurve
 {
@@ -51,17 +64,17 @@ public:
   }
 #else
   void setData(double x, const QwtArray<double>& y,int size) {
-    QVector<QPointF> data;
+    std::auto_ptr<QwtSeriesDataVector<QPointF> > data(new QwtSeriesDataVector<QPointF>);
     for (int i=0; i<size; ++i)
-      data.push_back(QPointF(x,y[i]));
-    QwtPlotSeriesItem<QPointF>::setData(new QwtPointSeriesData(data));
+      data->push_back(QPointF(x,y[i]));
+    QwtSeriesStore<QPointF>::setData(data.release());
   }
 
   void setData(double* x, double* y,int size) {
-    QVector<QPointF> data;
+    std::auto_ptr<QwtSeriesDataVector<QPointF> > data(new QwtSeriesDataVector<QPointF>);
     for (int i=0; i<size; ++i)
-      data.push_back(QPointF(x[i],y[i]));
-    QwtPlotSeriesItem<QPointF>::setData(new QwtPointSeriesData(data));
+      data->push_back(QPointF(x[i],y[i]));
+    QwtSeriesStore<QPointF>::setData(data.release());
   }
 #endif
 
