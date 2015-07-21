@@ -37,7 +37,8 @@ Spectrogram::Spectrogram():
 	QwtPlotSpectrogram(),
 	color_axis(QwtPlot::yRight),
 	color_map_policy(Default),
-	color_map(new QwtLinearColorMap)
+	color_map(new QwtLinearColorMap),
+        d_matrix(NULL)
 {
 }
 
@@ -46,7 +47,8 @@ Spectrogram::Spectrogram(const Matrix& m):
 	matrixName(m.name()),
 	color_axis(QwtPlot::yRight),
 	color_map_policy(Default),
-	color_map(new QwtLinearColorMap)
+	color_map(new QwtLinearColorMap),
+        d_matrix(NULL)
 {
 #if QWT_VERSION<0x60000
   setData(MatrixData(m));
@@ -64,8 +66,9 @@ for ( double level = data().range().minValue() + step;
 setContourLevels(contourLevels);
 }
 
-void Spectrogram::updateData(const Matrix& m)
+void Spectrogram::updateData(Matrix& m)
 {
+  d_matrix=&m;
 
 QwtPlot *plot = this->plot();
 if (!plot)

@@ -1685,7 +1685,7 @@ void ApplicationWindow::updateMatrixPlots(QWidget *window)
 				for (int i=0; i<g->curves(); i++){
 					Spectrogram *sp = (Spectrogram *)g->plotItem(i);
 					if (sp && sp->rtti() == QwtPlotItem::Rtti_PlotSpectrogram && sp->matrix() == m)
-						sp->updateData(m);
+						sp->updateData(*m);
 				}
 			}
 		}

@@ -1233,19 +1233,26 @@ void Graph::updateSecondaryAxis(int axis)
 		return;
 
 	QwtScaleEngine *se = d_plot->axisScaleEngine(a);
-	const QwtScaleDiv *sd = d_plot->axisScaleDiv(a);
+	const QwtScaleDiv& sd = d_plot->axisScaleDiv(a);
 
 	QwtScaleEngine *sc_engine = 0;
+#if QWT_VERSION<0x060000
 	if (se->transformation()->type() == QwtScaleTransformation::Log10)
 		sc_engine = new QwtLog10ScaleEngine();
 	else if (se->transformation()->type() == QwtScaleTransformation::Linear)
 		sc_engine = new QwtLinearScaleEngine();
+#else
+        if (dynamic_cast<QwtLogTransform*>(se->transformation()))
+          sc_engine = new QwtLogScaleEngine;
+        else if (dynamic_cast<QwtNullTransform*>(se->transformation()))
+          sc_engine = new QwtLinearScaleEngine;
+#endif
 
 	if (se->testAttribute(QwtScaleEngine::Inverted))
 		sc_engine->setAttribute(QwtScaleEngine::Inverted);
 
 	d_plot->setAxisScaleEngine (axis, sc_engine);
-	d_plot->setAxisScaleDiv (axis, *sd);
+	d_plot->setAxisScaleDiv (axis, sd);
 
 	d_user_step[axis] = d_user_step[a];
 
@@ -1274,7 +1281,11 @@ void Graph::setScale(int axis, double start, double end, double step, int majorT
 {
 	QwtScaleEngine *sc_engine = 0;
 	if (type)
-		sc_engine = new QwtLog10ScaleEngine();
+#if QWT_VERSION<0x060000
+		sc_engine = new QwtLogScale10Engine();
+#else
+                sc_engine = new QwtLogScaleEngine();
+#endif
 	else
 		sc_engine = new QwtLinearScaleEngine();
 
@@ -2072,13 +2083,13 @@ void Graph::loadAxesLinewidth(int width)
 QString Graph::saveCanvas()
 {
 	QString s="";
+#if QWT_VERSION<0x60000
 	int w = d_plot->canvas()->lineWidth();
 	if (w>0)
 	{
 		s += "CanvasFrame\t" + QString::number(w)+"\t";
 		s += canvasFrameColor().name()+"\n";
 	}
-#if QWT_VERSION<0x60000
 	s += "CanvasBackground\t" + d_plot->canvasBackground().name()+"\t";
 	s += QString::number(d_plot->canvasBackground().alpha())+"\n";
 #else
@@ -2152,15 +2163,15 @@ QString Graph::saveScale()
 	{
 		s += "scale\t" + QString::number(i)+"\t";
 
-		const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(i);
-		QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
+		const QwtScaleDiv& scDiv=d_plot->axisScaleDiv(i);
+		QwtValueList lst = scDiv.ticks (QwtScaleDiv::MajorTick);
 
 #if QWT_VERSION >= 0x050200
-		s += QString::number(qMin(scDiv->lowerBound(), scDiv->upperBound()), 'g', 15)+"\t";
-		s += QString::number(qMax(scDiv->lowerBound(), scDiv->upperBound()), 'g', 15)+"\t";
+		s += QString::number(qMin(scDiv.lowerBound(), scDiv.upperBound()), 'g', 15)+"\t";
+		s += QString::number(qMax(scDiv.lowerBound(), scDiv.upperBound()), 'g', 15)+"\t";
 #else
-		s += QString::number(qMin(scDiv->lBound(), scDiv->hBound()), 'g', 15)+"\t";
-		s += QString::number(qMax(scDiv->lBound(), scDiv->hBound()), 'g', 15)+"\t";
+		s += QString::number(qMin(scDiv.lBound(), scDiv.hBound()), 'g', 15)+"\t";
+		s += QString::number(qMax(scDiv.lBound(), scDiv.hBound()), 'g', 15)+"\t";
 #endif
 		s += QString::number(d_user_step[i], 'g', 15)+"\t";
 		s += QString::number(d_plot->axisMaxMajor(i))+"\t";
@@ -4907,7 +4918,7 @@ void Graph::setCurveStyle(int index, int s)
 	c->setStyle((QwtPlotCurve::CurveStyle)s);
 }
 
-void Graph::setCurveSymbol(int index, const QwtSymbol& s)
+void Graph::setCurveSymbol(int index, const ScidavisQwtSymbol& s)
 {
 	QwtPlotCurve *c = curve(index);
 	if (!c)
@@ -4916,7 +4927,7 @@ void Graph::setCurveSymbol(int index, const QwtSymbol& s)
 #if QWT_VERSION<0x60000
 	c->setSymbol(s);
 #else
-	c->setSymbol(new QwtSymbol(s));
+	c->setSymbol(new ScidavisQwtSymbol(s));
 #endif
 }
 
@@ -5113,6 +5124,7 @@ void Graph::plotSpectrogram(Matrix *m, CurveType type)
   	    }
 
   	c_keys.resize(++n_curves);
+        // RKS presumably, insertCurve takes ownership
   	c_keys[n_curves-1] = d_plot->insertCurve(d_spectrogram);
 
   	c_type.resize(n_curves);
@@ -5152,7 +5164,7 @@ void Graph::restoreSpectrogram(ApplicationWindow *app, const QStringList& lst)
   	if (!m)
         return;
 
-  	Spectrogram *sp = new Spectrogram(m);
+  	Spectrogram *sp = new Spectrogram(*m);
 
 	c_type.resize(++n_curves);
 	c_type[n_curves-1] = Graph::ColorMap;
@@ -5211,7 +5223,7 @@ void Graph::restoreSpectrogram(ApplicationWindow *app, const QStringList& lst)
                 s = (*(++line)).trimmed();
                 int defaultPen = s.remove("<DefaultPen>").remove("</DefaultPen>").toInt();
                 if (!defaultPen)
-                    sp->setDefaultContourPen(Qt::NoPen);
+                  sp->setDefaultContourPen(QPen(Qt::NoPen));
                 else
                 {
                     s = (*(++line)).trimmed();

@@ -99,6 +99,11 @@ public:
   void print(QPainter *, const QRect &rect, const QwtPlotPrintFilter & = QwtPlotPrintFilter());
 	void updateLayout();
 
+#if QWT_VERSION<0x060000
+  const QwtScaleDiv& axisScaleDiv(int a) {return *QwtPlot::axisScaleDiv(a);}
+#endif
+
+
 protected:
 	void printCanvas(QPainter *painter, const QRect &canvasRect,
    			 const QwtScaleMap map[axisCnt], const QwtPlotPrintFilter &pfilter) const;

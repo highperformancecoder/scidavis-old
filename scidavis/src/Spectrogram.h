@@ -44,12 +44,13 @@ class Spectrogram: public QwtPlotSpectrogram
 public:
   Spectrogram();
   // reference to \a m kept, so don't pass a stack variable
-  Spectrogram(const Matrix& m);
+  Spectrogram(Matrix& m);
 
   enum ColorMapPolicy{GrayScale, Default, Custom};
 
   Spectrogram* copy();
-  //  Matrix * matrix(){return d_matrix;};
+  /// returns a weak reference to the matrix the data was passed in on. 
+  Matrix *matrix(){return d_matrix;};
 
   int levels(){return (int)contourLevels().size() + 1;};
   void setLevelsNumber(int levels);
@@ -66,7 +67,7 @@ public:
   static QwtLinearColorMap& defaultColorMap();
 
   void setCustomColorMap(const std::tr1::shared_ptr<QwtLinearColorMap>& map);
-  void updateData(Matrix *m);
+  void updateData(Matrix& m);
 
   //! Used when saving a project file
   QString saveToString();
@@ -84,6 +85,7 @@ protected:
   ColorMapPolicy color_map_policy;
 
   std::tr1::shared_ptr<QwtLinearColorMap> color_map;
+  Matrix* d_matrix;
 };
 
 
