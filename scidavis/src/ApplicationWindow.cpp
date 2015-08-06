@@ -11563,14 +11563,11 @@ void ApplicationWindow::plotGrayScale()
 	if (!d_workspace->activeWindow()|| !d_workspace->activeWindow()->inherits("Matrix"))
 		return;
 
-	plotSpectrogram((Matrix*)d_workspace->activeWindow(), Graph::GrayMap);
+	plotSpectrogram((Matrix&)*d_workspace->activeWindow(), Graph::GrayMap);
 }
 
-MultiLayer* ApplicationWindow::plotGrayScale(Matrix *m)
+MultiLayer* ApplicationWindow::plotGrayScale(Matrix& m)
 {
-	if (!m)
-		return 0;
-
 	return plotSpectrogram(m, Graph::GrayMap);
 }
 
@@ -11579,14 +11576,11 @@ void ApplicationWindow::plotContour()
 	if (!d_workspace->activeWindow()|| !d_workspace->activeWindow()->inherits("Matrix"))
 		return;
 
-	plotSpectrogram((Matrix*)d_workspace->activeWindow(), Graph::ContourMap);
+	plotSpectrogram((Matrix&)*d_workspace->activeWindow(), Graph::ContourMap);
 }
 
-MultiLayer* ApplicationWindow::plotContour(Matrix *m)
+MultiLayer* ApplicationWindow::plotContour(Matrix& m)
 {
-	if (!m)
-		return 0;
-
 	return plotSpectrogram(m, Graph::ContourMap);
 }
 
@@ -11595,18 +11589,15 @@ void ApplicationWindow::plotColorMap()
 	if (!d_workspace->activeWindow()|| !d_workspace->activeWindow()->inherits("Matrix"))
 		return;
 
-	plotSpectrogram((Matrix*)d_workspace->activeWindow(), Graph::ColorMap);
+	plotSpectrogram((Matrix&)*d_workspace->activeWindow(), Graph::ColorMap);
 }
 
-MultiLayer* ApplicationWindow::plotColorMap(Matrix *m)
+MultiLayer* ApplicationWindow::plotColorMap(Matrix& m)
 {
-	if (!m)
-		return 0;
-
 	return plotSpectrogram(m, Graph::ColorMap);
 }
 
-MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
+MultiLayer* ApplicationWindow::plotSpectrogram(Matrix& m, Graph::CurveType type)
 {
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 

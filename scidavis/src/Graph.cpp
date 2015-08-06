@@ -2178,8 +2178,15 @@ QString Graph::saveScale()
 		s += QString::number(d_plot->axisMaxMinor(i))+"\t";
 
 		const QwtScaleEngine *sc_eng = d_plot->axisScaleEngine(i);
+#if QWT_VERSION < 0x060000
 		QwtScaleTransformation *tr = sc_eng->transformation();
 		s += QString::number((int)tr->type())+"\t";
+#else
+                if (dynamic_cast<QwtLogTransform*>(sc_eng->transformation()))
+                  s += "1\t";
+                else
+                  s += "0\t";
+#endif
 		s += QString::number(sc_eng->testAttribute(QwtScaleEngine::Inverted))+"\n";
 	}
 	return s;
@@ -3533,30 +3540,32 @@ void Graph::updatePlot()
 
 void Graph::updateScale()
 {
-	const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(QwtPlot::xBottom);
-	QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
+  {
+	const QwtScaleDiv& scDiv=d_plot->axisScaleDiv(QwtPlot::xBottom);
+	QwtValueList lst = scDiv.ticks (QwtScaleDiv::MajorTick);
 
 	double step = fabs(lst[1]-lst[0]);
 
 	if (!m_autoscale)
 #if QWT_VERSION >= 0x050200
-		d_plot->setAxisScale (QwtPlot::xBottom, scDiv->lowerBound(), scDiv->upperBound(), step);
+		d_plot->setAxisScale (QwtPlot::xBottom, scDiv.lowerBound(), scDiv.upperBound(), step);
 #else
-		d_plot->setAxisScale (QwtPlot::xBottom, scDiv->lBound(), scDiv->hBound(), step);
+		d_plot->setAxisScale (QwtPlot::xBottom, scDiv.lBound(), scDiv.hBound(), step);
 #endif
+  }
+  {
+	const QwtScaleDiv& scDiv=d_plot->axisScaleDiv(QwtPlot::yLeft);
+	QwtValueList lst = scDiv.ticks (QwtScaleDiv::MajorTick);
 
-	scDiv=d_plot->axisScaleDiv(QwtPlot::yLeft);
-	lst = scDiv->ticks (QwtScaleDiv::MajorTick);
-
-	step = fabs(lst[1]-lst[0]);
+	double step = fabs(lst[1]-lst[0]);
 
 	if (!m_autoscale)
 #if QWT_VERSION >= 0x050200
-		d_plot->setAxisScale (QwtPlot::yLeft, scDiv->lowerBound(), scDiv->upperBound(), step);
+		d_plot->setAxisScale (QwtPlot::yLeft, scDiv.lowerBound(), scDiv.upperBound(), step);
 #else
-		d_plot->setAxisScale (QwtPlot::yLeft, scDiv->lBound(), scDiv->hBound(), step);
+		d_plot->setAxisScale (QwtPlot::yLeft, scDiv.lBound(), scDiv.hBound(), step);
 #endif
-
+  }
 	d_plot->replot();
 	updateMarkersBoundingRect();
 	updateSecondaryAxis(QwtPlot::xTop);
@@ -4704,7 +4713,13 @@ void Graph::copy(ApplicationWindow *parent, Graph* g)
 			c->setPen(cv->pen());
 			c->setBrush(cv->brush());
 			c->setStyle(cv->style());
-			c->setSymbol(cv->symbol());
+                        {
+                          // no clone or copy operation provided, so
+                          // we're going to have to hack it as best we
+                          // can
+                          const QwtSymbol& s=*cv->symbol();
+                          c->setSymbol(new QwtSymbol(s.style(),s.brush(),s.pen(),s.size()));
+                        }
 
 			if (cv->testCurveAttribute (QwtPlotCurve::Fitted))
 				c->setCurveAttribute(QwtPlotCurve::Fitted, true);
@@ -4778,27 +4793,33 @@ void Graph::copy(ApplicationWindow *parent, Graph* g)
 			continue;
 
 		QwtScaleEngine *sc_engine = 0;
+#if QWT_VERSION < 0x060000
 		if (se->transformation()->type() == QwtScaleTransformation::Log10)
 			sc_engine = new QwtLog10ScaleEngine();
 		else if (se->transformation()->type() == QwtScaleTransformation::Linear)
 			sc_engine = new QwtLinearScaleEngine();
-
+#else
+                if (dynamic_cast<QwtLogTransform*>(se->transformation()))
+                  sc_engine = new QwtLogScaleEngine;
+                else
+                  sc_engine = new QwtLinearScaleEngine;
+#endif
 		int majorTicks = plot->axisMaxMajor(i);
   	    int minorTicks = plot->axisMaxMinor(i);
   	    d_plot->setAxisMaxMajor (i, majorTicks);
   	    d_plot->setAxisMaxMinor (i, minorTicks);
 
-		const QwtScaleDiv *sd = plot->axisScaleDiv(i);
-		QwtValueList lst = sd->ticks (QwtScaleDiv::MajorTick);
+		const QwtScaleDiv& sd = plot->axisScaleDiv(i);
+		QwtValueList lst = sd.ticks (QwtScaleDiv::MajorTick);
 
 		d_user_step[i] = g->axisStep(i);
 
 #if QWT_VERSION >= 0x050200
-		QwtScaleDiv div = sc_engine->divideScale (qMin(sd->lowerBound(), sd->upperBound()),
-				qMax(sd->lowerBound(), sd->upperBound()), majorTicks, minorTicks, d_user_step[i]);
+		QwtScaleDiv div = sc_engine->divideScale (qMin(sd.lowerBound(), sd.upperBound()),
+				qMax(sd.lowerBound(), sd.upperBound()), majorTicks, minorTicks, d_user_step[i]);
 #else
-		QwtScaleDiv div = sc_engine->divideScale (qMin(sd->lBound(), sd->hBound()),
-				qMax(sd->lBound(), sd->hBound()), majorTicks, minorTicks, d_user_step[i]);
+		QwtScaleDiv div = sc_engine->divideScale (qMin(sd.lBound(), sd.hBound()),
+				qMax(sd.lBound(), sd.hBound()), majorTicks, minorTicks, d_user_step[i]);
 #endif
 
 		if (se->testAttribute(QwtScaleEngine::Inverted))
@@ -4927,7 +4948,7 @@ void Graph::setCurveSymbol(int index, const ScidavisQwtSymbol& s)
 #if QWT_VERSION<0x60000
 	c->setSymbol(s);
 #else
-	c->setSymbol(new ScidavisQwtSymbol(s));
+	c->setSymbol(makeNewQwtSymbol(s));
 #endif
 }
 
@@ -5104,7 +5125,7 @@ void Graph::deleteFitCurves()
 	d_plot->replot();
 }
 
-void Graph::plotSpectrogram(Matrix *m, CurveType type)
+void Graph::plotSpectrogram(Matrix &m, CurveType type)
 {
 	if (type != GrayMap && type != ColorMap && type != ContourMap)
   		return;
@@ -5142,8 +5163,8 @@ void Graph::plotSpectrogram(Matrix *m, CurveType type)
         //here. Farrrk!!
   	rightAxis->setColorMap(range, const_cast<QwtColorMap*>(d_spectrogram->colorMap()));
 
-  	d_plot->setAxisScale(QwtPlot::xBottom, m->xStart(), m->xEnd());
-  	d_plot->setAxisScale(QwtPlot::yLeft, m->yStart(), m->yEnd());
+  	d_plot->setAxisScale(QwtPlot::xBottom, m.xStart(), m.xEnd());
+  	d_plot->setAxisScale(QwtPlot::yLeft, m.yStart(), m.yEnd());
 
         {
           QwtDoubleInterval range=
@@ -5202,7 +5223,11 @@ void Graph::restoreSpectrogram(ApplicationWindow *app, const QStringList& lst)
                 QStringList l = QStringList::split("\t", s.remove("<Stop>").remove("</Stop>"));
                 colorMap.addColorStop(l[0].toDouble(), QColor(l[1]));
             }
+#if QWT_VERSION<0x60000
             sp->setCustomColorMap(colorMap);
+#else
+            sp->setCustomColorMap(std::tr1::shared_ptr<QwtLinearColorMap>(new QwtLinearColorMap(colorMap));
+#endif
             line++;
         }
         else if (s.contains("<Image>"))

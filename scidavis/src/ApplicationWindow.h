@@ -227,13 +227,13 @@ public slots:
 	void deleteLayer();
 
 	//! Creates a new spectrogram graph
-  	MultiLayer* plotSpectrogram(Matrix *m, Graph::CurveType type);
+  	MultiLayer* plotSpectrogram(Matrix& m, Graph::CurveType type);
   	void plotGrayScale();
-  	MultiLayer* plotGrayScale(Matrix *m);
+  	MultiLayer* plotGrayScale(Matrix& m);
   	void plotContour();
-  	MultiLayer* plotContour(Matrix *m);
+  	MultiLayer* plotContour(Matrix& m);
   	void plotColorMap();
-  	MultiLayer* plotColorMap(Matrix *m);
+  	MultiLayer* plotColorMap(Matrix& m);
 
 	//! Rearrange the layersin order to fit to the size of the plot window
   	void autoArrangeLayers();

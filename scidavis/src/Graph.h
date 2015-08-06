@@ -50,6 +50,7 @@
 #include "AxesDialog.h"
 #include "PlotToolInterface.h"
 #include "core/column/Column.h"
+#include "scidavisQwtSymbol.h"
 
 class QwtPlotCurve;
 class QwtPlotZoomer;
@@ -633,7 +634,7 @@ class Graph: public QWidget
 
 		bool plotHistogram(Table *w, QStringList names, int startRow=0, int endRow=-1);
 
-		void setCurveSymbol(int index, const QwtSymbol& s);
+		void setCurveSymbol(int index, const ScidavisQwtSymbol& s);
 		void setCurvePen(int index, const QPen& p);
 		void setCurveBrush(int index, const QBrush& b);
 		void setCurveStyle(int index, int s);
@@ -683,7 +684,7 @@ class Graph: public QWidget
 		void showScaleDialog();
 
 		//! Add a spectrogram to the graph
-  		void plotSpectrogram(Matrix *m, CurveType type);
+  		void plotSpectrogram(Matrix& m, CurveType type);
 		//! Restores a spectrogram. Used when opening a project file.
   		void restoreSpectrogram(ApplicationWindow *app, const QStringList& lst);
 
