@@ -146,7 +146,8 @@ void Correlation::addResultCurve()
 	d_table->addCol();
 	int n = rows/2;
 
-	double x_temp[rows], y_temp[rows];
+	double *x_temp = new double[rows];
+	double *y_temp = new double[rows];
 	for (int i = 0; i<rows; i++)
 	{
         x_temp[i] = i - n;
@@ -169,12 +170,17 @@ void Correlation::addResultCurve()
 	d_table->setColPlotDesignation(cols, SciDAVis::X);
 
 	MultiLayer *ml = app->newGraph(name() + tr("Plot"));
-	if (!ml)
+	if (!ml) {
+		delete[] x_temp;
+		delete[] y_temp;
         return;
+	}
 
     DataCurve *c = new DataCurve(d_table, d_table->colName(cols), d_table->colName(cols2));
 	c->setData(x_temp, y_temp, rows);
     c->setPen(QPen(ColorBox::color(d_curveColorIndex), 1));
 	ml->activeGraph()->insertPlotItem(c, Graph::Line);
 	ml->activeGraph()->updatePlot();
+	delete[] x_temp;
+	delete[] y_temp;
 }
