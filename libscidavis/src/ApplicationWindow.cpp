@@ -3502,7 +3502,7 @@ ApplicationWindow* ApplicationWindow::open(const QString& fn)
 			fn.endsWith(".ogg", Qt::CaseInsensitive)
 			)
 #ifdef ORIGIN_IMPORT
-		return importOPJ(/*fn*/);
+		return importOPJ(fn);
 #else
 		{
                 QMessageBox::critical(this, tr("File opening error"),  tr("SciDAVis currently does not support Origin import. If you are interested in reviving and maintaining an Origin import filter, contact the developers.").arg(fn));
@@ -11592,7 +11592,7 @@ MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
 	return g;
 }
 
-ApplicationWindow* ApplicationWindow::importOPJ(/*const QString& filename*/)
+ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
 {
 #ifdef ORIGIN_IMPORT
     if (filename.endsWith(".opj", Qt::CaseInsensitive) || filename.endsWith(".ogg", Qt::CaseInsensitive))
