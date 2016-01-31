@@ -80,7 +80,7 @@ class Script : public QObject
 
   public slots:
     //! Compile the Code. Return true if the implementation doesn't support compilation.
-    virtual bool compile(bool for_eval=true);
+    virtual bool compile(/*bool for_eval=true*/);
     //! Evaluate the Code, returning QVariant() on an error / exception.
     virtual QVariant eval();
     //! Execute the Code, returning false on an error / exception.

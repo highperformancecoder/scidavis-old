@@ -137,15 +137,16 @@ void PolynomFitDialog::setGraph(Graph *g)
 	    int index = boxName->findText (selectedCurve);
 		boxName->setCurrentIndex(index);
 	}
-    activateCurve(boxName->currentText());
+    activateCurve(/*boxName->currentText()*/);
 
 	connect (graph, SIGNAL(closedGraph()), this, SLOT(close()));
 	connect (graph, SIGNAL(dataRangeChanged()), this, SLOT(changeDataRange()));
 };
 
-void PolynomFitDialog::activateCurve(const QString& curveName)
+void PolynomFitDialog::activateCurve(/*const QString& curveName*/)
 {
-	double start, end;
+    double start = 0;
+    double end = 0;
 	// int n_points = graph->range(graph->curveIndex(curveName), &start, &end);
 
 	boxStart->setText(QString::number(start, 'g', 15));

@@ -4742,7 +4742,7 @@ void ApplicationWindow::exportGraph()
 		if (plot3D)
 			plot3D->exportVector(file_name, selected_filter.remove("*."));
 		else if (plot2D)
-			plot2D->exportVector(file_name, ied->resolution(), ied->color(), ied->keepAspect(), ied->pageSize(), ied->pageOrientation());
+            plot2D->exportVector(file_name,/* ied->resolution(),*/ ied->color(), ied->keepAspect(), ied->pageSize(), ied->pageOrientation());
 	} else if (selected_filter.contains(".svg")) {
 		if (plot2D)
 			plot2D->exportSVG(file_name);
@@ -4796,7 +4796,7 @@ void ApplicationWindow::exportLayer()
 	}
 
 	if (selected_filter.contains(".eps") || selected_filter.contains(".pdf") || selected_filter.contains(".ps"))
-		g->exportVector(file_name, ied->resolution(), ied->color(), ied->keepAspect(), ied->pageSize(), ied->pageOrientation());
+        g->exportVector(file_name,/*ied->resolution(),*/ ied->color(), ied->keepAspect(), ied->pageSize(), ied->pageOrientation());
 	else if (selected_filter.contains(".svg"))
 		g->exportSVG(file_name);
 	else {
@@ -11591,7 +11591,7 @@ MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
 	return g;
 }
 
-ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
+ApplicationWindow* ApplicationWindow::importOPJ(/*const QString& filename*/)
 {
 #ifdef ORIGIN_IMPORT
     if (filename.endsWith(".opj", Qt::CaseInsensitive) || filename.endsWith(".ogg", Qt::CaseInsensitive))

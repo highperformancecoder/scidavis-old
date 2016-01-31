@@ -51,11 +51,11 @@ public slots:
 	void updateBoundingRect();
 
 private:
-	void draw(QPainter *painter,const QwtScaleMap &xMap,
-		const QwtScaleMap &yMap, int from, int to) const;
+    void draw(QPainter *painter,/*const QwtScaleMap &xMap,
+        const QwtScaleMap &yMap,*/ int from, int to) const;
 
-	void drawPie(QPainter *painter, const QwtScaleMap &xMap,
-		const QwtScaleMap &yMap, int from, int to) const;
+    void drawPie(QPainter *painter,/* const QwtScaleMap &xMap,
+        const QwtScaleMap &yMap,*/ int from, int to) const;
 
 	int d_pie_ray, d_first_color;
 	//! Keeps track of the left side position of the pie bounding rectangle in scale coordinates.

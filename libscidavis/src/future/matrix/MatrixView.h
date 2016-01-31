@@ -176,8 +176,8 @@ class MatrixView : public MyWidget
 #endif
 		void updateFormatTab();
 		void applyFormat();
-		void handleHorizontalSectionResized(int logicalIndex, int oldSize, int newSize); 
-		void handleVerticalSectionResized(int logicalIndex, int oldSize, int newSize); 
+        void handleHorizontalSectionResized(int logicalIndex,/* int oldSize,*/ int newSize);
+        void handleVerticalSectionResized(int logicalIndex,/* int oldSize,*/ int newSize);
 
 	signals:
 		void controlTabBarStatusChanged(bool visible);

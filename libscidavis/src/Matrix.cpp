@@ -64,17 +64,17 @@ Matrix::Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* p
 	: MatrixView(label, parent, name, f), scripted(env)
 {
 	d_future_matrix = new future::Matrix(0, r, c, label);
-	init(r, c);
+    init(/*r, c*/);
 }
 	
-Matrix::Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
+Matrix::Matrix(future::Matrix *future_matrix, ScriptingEnv *env,/* int r, int c,*/ const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
 	: MatrixView(label, parent, name, f), scripted(env)
 {
 	d_future_matrix = future_matrix;
-	init(r, c);
+    init(/*r, c*/);
 }
 
-void Matrix::init(int rows, int cols)
+void Matrix::init(/*int rows, int cols*/)
 {	
 	MatrixView::setMatrix(d_future_matrix);	
 	d_future_matrix->setView(this);	
@@ -722,7 +722,7 @@ Matrix * Matrix::fromImage(const QImage & image, ScriptingEnv *env)
 {
 	future::Matrix * fm = future::Matrix::fromImage(image);
 	if (!fm) return NULL;
-	return new Matrix(fm, env, image.height(), image.width(), tr("Matrix %1").arg(1));
+    return new Matrix(fm, env,/* image.height(), image.width(),*/ tr("Matrix %1").arg(1));
 }
 
 void Matrix::applyFormula()
