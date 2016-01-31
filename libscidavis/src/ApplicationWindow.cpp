@@ -212,6 +212,7 @@ ApplicationWindow::ApplicationWindow()
 
 	setWindowTitle(tr("SciDAVis - untitled"));
     initFonts();
+	
 	QPixmapCache::setCacheLimit(20*QPixmapCache::cacheLimit ());
 
     d_project = new Project();
