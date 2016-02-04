@@ -59,6 +59,7 @@
 #include <QVBoxLayout>
 #include <QListWidget>
 #include <QFontMetrics>
+#include <QSettings>
 
 ConfigDialog::ConfigDialog( QWidget* parent, Qt::WFlags fl )
     : QDialog( parent, fl )
@@ -76,6 +77,9 @@ ConfigDialog::ConfigDialog( QWidget* parent, Qt::WFlags fl )
 	numbersFont = app->plotNumbersFont;
 	legendFont = app->plotLegendFont;
 	titleFont = app->plotTitleFont;
+
+	QPalette pal;
+	pal.setColor(QPalette::Window, app->palette().color(QPalette::Window));
 
 	// create the GUI
 	generalDialog = new QStackedWidget();
@@ -101,10 +105,7 @@ ConfigDialog::ConfigDialog( QWidget* parent, Qt::WFlags fl )
 	fnt.setPointSize(fnt.pointSize() + 3);
 	fnt.setBold(true);
 	lblPageHeader->setFont(fnt);
-	lblPageHeader->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
 
-	QPalette pal = lblPageHeader->palette();
-	pal.setColor( QPalette::Window, app->panelsColor );
 	lblPageHeader->setPalette(pal);
 	lblPageHeader->setAutoFillBackground( true );
 
@@ -214,8 +215,28 @@ void ConfigDialog::initTablesPage()
 	boxTableComments = new QCheckBox();
 	boxTableComments->setChecked(app->d_show_table_comments);
 
+    // Set table row height
+	QHBoxLayout *tableRowHeightLayout = new QHBoxLayout();
+	lblTableRowHeight = new QLabel();
+    lblTableRowHeight->setText(tr("Default Row Height"));
+	tableRowHeightLayout->addWidget(lblTableRowHeight);
+	boxTableRowHeight = new QSpinBox();
+    boxTableRowHeight->setRange(15, 100);
+	tableRowHeightLayout->addWidget(boxTableRowHeight);
+#ifdef Q_OS_MAC
+    QSettings settings(QSettings::IniFormat,QSettings::UserScope,
+                      "SciDAVis", "SciDAVis");
+#else
+    QSettings settings(QSettings::NativeFormat,QSettings::UserScope,
+                       "SciDAVis", "SciDAVis");
+#endif
+    settings.beginGroup("[Table]");
+    boxTableRowHeight->setValue(settings.value("DefaultRowHeight", 20).toInt());
+    settings.endGroup();
+
 	QVBoxLayout * tablesPageLayout = new QVBoxLayout( tables );
 	tablesPageLayout->addWidget(boxTableComments);
+	tablesPageLayout->addLayout(tableRowHeightLayout,1);
 	tablesPageLayout->addLayout(topLayout,1);
 	tablesPageLayout->addWidget(groupBoxTableCol);
 	tablesPageLayout->addWidget(groupBoxTableFonts);
@@ -1179,6 +1200,17 @@ void ConfigDialog::apply()
 	itemsList->setMaximumWidth( itemsList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
 	itemsList->resize(itemsList->maximumWidth(),itemsList->height());
+
+#ifdef Q_OS_MAC
+    QSettings settings(QSettings::IniFormat,QSettings::UserScope,
+                      "SciDAVis", "SciDAVis");
+#else
+    QSettings settings(QSettings::NativeFormat,QSettings::UserScope,
+                       "SciDAVis", "SciDAVis");
+#endif
+    settings.beginGroup("[Table]");
+    settings.setValue("DefaultRowHeight", boxTableRowHeight->value());
+    settings.endGroup();
 }
 
 int ConfigDialog::curveStyle()

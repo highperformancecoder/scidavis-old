@@ -58,6 +58,7 @@
 #include <QGridLayout>
 #include <QScrollArea>
 #include <QMenu>
+#include <QSettings>
 
 #ifndef LEGACY_CODE_0_2_x
 TableView::TableView(future::Table *table)
@@ -94,6 +95,17 @@ void TableView::init()
 	d_main_layout->setContentsMargins(0, 0, 0, 0);
 	
 	d_view_widget = new TableViewWidget(this);
+#ifdef Q_OS_MAC
+    QSettings settings(QSettings::IniFormat,QSettings::UserScope,
+                      "SciDAVis", "SciDAVis");
+#else
+    QSettings settings(QSettings::NativeFormat,QSettings::UserScope,
+                       "SciDAVis", "SciDAVis");
+#endif
+    settings.beginGroup("[Table]");
+    int defaultRowHeight = settings.value("DefaultRowHeight", 20).toInt();
+    settings.endGroup();
+    d_view_widget->verticalHeader()->setDefaultSectionSize(defaultRowHeight);
 	d_view_widget->setModel(d_model);
 	connect(d_view_widget, SIGNAL(advanceCell()), this, SLOT(advanceCell()));
 	d_main_layout->addWidget(d_view_widget);
