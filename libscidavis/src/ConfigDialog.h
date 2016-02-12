@@ -152,6 +152,8 @@ private:
 	QLabel *lblDefaultNumericFormat;
 	QComboBox *boxDefaultNumericFormat;
 	QLabel *boxSeparatorPreview;
+	QLabel *lblTableRowHeight;
+	QSpinBox *boxTableRowHeight;
 	QSpinBox *boxMinutes, *boxLineWidth, *boxFrameWidth, *boxResolution, *boxMargin, *boxPrecision, *boxAppPrecision;
 	QSpinBox *boxCurveLineWidth, *boxSymbolSize, *boxMinTicksLength, *boxMajTicksLength, *generatePointsBox;
 	QSpinBox *boxUndoLimit;
