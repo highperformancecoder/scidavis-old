@@ -3622,7 +3622,7 @@ a primera representa o sinal e a segunda a função resposta!</translation>
     </message>
     <message>
         <source>The assistant could not start because the file &lt;b&gt;%1&lt;/b&gt; was not found in the help file directory!</source>
-        <translation>O assistente não pode ser iniciado porque o arquivo &lt;b&gt;%1&lt;/b&gt; não foi encontrado na pasta de ajuda!</translation>
+        <translation type="obsolete">O assistente não pode ser iniciado porque o arquivo &lt;b&gt;%1&lt;/b&gt; não foi encontrado na pasta de ajuda!</translation>
     </message>
     <message>
         <source>Please indicate the location of the help file!</source>
@@ -4029,7 +4029,7 @@ a primera representa o sinal e a segunda a função resposta!</translation>
     </message>
     <message>
         <source>This file is provided with the SciDAVis manual which can be downloaded from the following internet address:</source>
-        <translation>Este arquivo vem junto com omanual do SciDAVis, o qual pode ser baixado da seguinte localização na internet:</translation>
+        <translation type="obsolete">Este arquivo vem junto com omanual do SciDAVis, o qual pode ser baixado da seguinte localização na internet:</translation>
     </message>
     <message>
         <source>Import image...</source>
@@ -4379,7 +4379,7 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
     </message>
     <message>
         <source>Help Profile Not Found!</source>
-        <translation>Não foi encontrado o perfil de ajuda!</translation>
+        <translation type="obsolete">Não foi encontrado o perfil de ajuda!</translation>
     </message>
     <message>
         <source>Edit function</source>
@@ -4557,6 +4557,18 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
     <message>
         <source>No updates available. You are already running the latest version.</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>unable to open index.html!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;index.html&lt;/b&gt; file cannot be opened</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Lock Toolbars</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5727,6 +5739,10 @@ Os seguintes códigos podem ser usados:
     <message>
         <source>Undo/Redo History limit</source>
         <translation>Desfazer/Refazer - limite de histórico</translation>
+    </message>
+    <message>
+        <source>Default Row Height</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
