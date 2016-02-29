@@ -2,6 +2,8 @@
 Type=Application
 Version=1.0
 Name=SciDAVis
+GenericName=Scientific Data Analysis and Visualization
+GenericName[ru]=Анализ и отображение научных данных
 Comment=Application for scientific data analysis and visualization
 Comment[de]=Programm zur wissenschaftlichen Datenauswertung und Visualisierung
 Comment[fr]=Application d'analyse et de visualisation de données scientifiques
@@ -47,6 +49,5 @@ Icon=scidavis
 Exec=scidavis
 Terminal=false
 MimeType=application/x-sciprj;
-Categories=Graphics;2DGraphics;
+Categories=Qt;Science;DataVisualization;
 X-KDE-SubstituteUID=false
-X-KDE-Username=
