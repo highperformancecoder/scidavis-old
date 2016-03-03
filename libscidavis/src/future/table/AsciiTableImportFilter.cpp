@@ -97,10 +97,10 @@ namespace
   template <> float conv<float>(const QString& x) {return x.toFloat();}
  
   template <class T>
-  struct AP: public std::auto_ptr<T>
+  struct AP: public std::unique_ptr<T>
   {
-    AP(): std::auto_ptr<T>(new T) {}
-    AP(const AP& x): std::auto_ptr<T>(new T(*x)) {}
+    AP(): std::unique_ptr<T>(new T) {}
+    AP(const AP& x): std::unique_ptr<T>(new T(*x)) {}
   };
 
   template <class C>
