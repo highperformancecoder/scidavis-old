@@ -2714,28 +2714,28 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     </message>
     <message>
         <source>SciDAVis currently does not support Origin import. If you are interested in reviving and maintaining an Origin import filter, contact the developers.</source>
-        <translation type="unfinished"></translation>
+        <translation>SciDAVis nyní nepodporuje zavádění ve formátu Origin. Pokud máte zájem o oživení a udržování filtru pro zavedení dat ve formátu Origin, spojte se s vývojáři.</translation>
     </message>
     <message>
         <source>unable to open index.html!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze otevřít index.html!</translation>
     </message>
     <message>
         <source>&lt;b&gt;index.html&lt;/b&gt; file cannot be opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor &lt;b&gt;index.html&lt;/b&gt; nelze otevřít</translation>
     </message>
     <message>
         <source>Del</source>
         <comment>delete key</comment>
-        <translation type="unfinished">Klávesa Delete</translation>
+        <translation>Klávesa Delete</translation>
     </message>
     <message>
         <source>&amp;Lock Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zamknout nástrojové pruhy</translation>
     </message>
     <message>
         <source>No updates available. You are already running the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejsou dostupné žádné aktualizace. Již provozujete nejnovější verzi.</translation>
     </message>
 </context>
 <context>
@@ -3831,21 +3831,21 @@ Dají se použít následující zvláštní kódy:
     </message>
     <message>
         <source>Default Row Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí výška řádku</translation>
     </message>
     <message>
         <source>Undo/Redo History limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Omezení pro počet kroků Zpět/Znovu</translation>
     </message>
     <message>
         <source>Use group separator</source>
         <comment>option: use separator every 3 digits</comment>
-        <translation type="unfinished">Použít oddělovač skupin (každá tři číslicová místa)</translation>
+        <translation>Použít oddělovač skupin (každá tři číslicová místa)</translation>
     </message>
     <message>
         <source>Preview:</source>
         <comment>preview of the decimal separator</comment>
-        <translation type="unfinished">Náhled:</translation>
+        <translation>Náhled:</translation>
     </message>
 </context>
 <context>
@@ -4309,7 +4309,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>of</source>
         <comment>Derivative of</comment>
-        <translation type="unfinished">z</translation>
+        <translation>z</translation>
     </message>
 </context>
 <context>
@@ -5498,7 +5498,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished">&amp;Použít</translation>
+        <translation>&amp;Použít</translation>
     </message>
 </context>
 <context>
@@ -5712,7 +5712,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> not supported</source>
-        <translation type="unfinished"></translation>
+        <translation> nepodporováno</translation>
     </message>
 </context>
 <context>
@@ -5935,12 +5935,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Portrait</source>
         <comment>page orientation</comment>
-        <translation type="unfinished">Formát na výšku</translation>
+        <translation>Formát na výšku</translation>
     </message>
     <message>
         <source>Landscape</source>
         <comment>page orientation</comment>
-        <translation type="unfinished">Formát na šířku</translation>
+        <translation>Formát na šířku</translation>
     </message>
 </context>
 <context>
@@ -6147,16 +6147,16 @@ The following special codes can be used:
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Zaškrtnutím této volby, budou všechny 
+        <translation>Zaškrtnutím této volby, budou všechny 
 mezery odstraněny ze začátků a konců řádků 
-v ASCII souboru.</translation>
+v souboru ASCII.</translation>
     </message>
     <message>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Abyste se vyhnul tomuto problému, měl byste 
+        <translation>Abyste se vyhnul tomuto problému, měl byste 
 přesně určit oddělovač sloupců s pomocí znaků 
 pro TAB(ULÁTOR) a MEZERNÍK.</translation>
     </message>
@@ -6167,11 +6167,11 @@ lines and each sequence of internal
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Zaškrtnutím této volby, budou všechny mezery 
+        <translation>Zaškrtnutím této volby, budou všechny mezery 
 odstraněny ze začátků a konců řádků 
 a každá posloupnost vnitřních prázdných míst 
 (včetně znaku pro TABULÁTOR) bude nahrazena 
-jednoduchou mezerou</translation>
+jednoduchou mezerou.</translation>
     </message>
 </context>
 <context>
@@ -6290,19 +6290,19 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Interpolation</source>
-        <translation type="unfinished">Interpolace</translation>
+        <translation>Interpolace</translation>
     </message>
     <message>
         <source>Linear</source>
-        <translation type="unfinished">Lineární</translation>
+        <translation>Lineární</translation>
     </message>
     <message>
         <source>Cubic</source>
-        <translation type="unfinished">Trojrozměrná</translation>
+        <translation>Kubická</translation>
     </message>
     <message>
         <source>Non-rounded Akima</source>
-        <translation type="unfinished">Ne-kulatá Akima</translation>
+        <translation>Nezaokrouhlená Akima</translation>
     </message>
 </context>
 <context>
@@ -6369,35 +6369,35 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation type="unfinished">Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - trojrozměrná, 2 - Akima.</translation>
+        <translation>Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - kubická, 2 - Akima.</translation>
     </message>
     <message>
         <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
-        <translation type="unfinished">Několik datových bodů má stejnou hodnotu x, což způsobuje dělení nulou. Operace byla zrušena!</translation>
+        <translation>Několik datových bodů má stejnou hodnotu x, což způsobuje dělení nulou. Operace byla zrušena!</translation>
     </message>
     <message>
         <source>Linear</source>
-        <translation type="unfinished">Lineární</translation>
+        <translation>Lineární</translation>
     </message>
     <message>
         <source>Cubic</source>
-        <translation type="unfinished">Trojrozměrná</translation>
+        <translation>Kubická</translation>
     </message>
     <message>
         <source>Akima</source>
-        <translation type="unfinished">Akima</translation>
+        <translation>Akima</translation>
     </message>
     <message>
         <source>You need at least %1 points in order to perform this operation!</source>
-        <translation type="unfinished">Pro provedení této operace potřebujete alespoň %1 bodů!</translation>
+        <translation>Pro provedení této operace potřebujete alespoň %1 bodů!</translation>
     </message>
     <message>
         <source> using </source>
-        <translation type="unfinished"></translation>
+        <translation> pomocí </translation>
     </message>
     <message>
         <source>Interpolation</source>
-        <translation type="unfinished">Interpolace</translation>
+        <translation>Interpolace</translation>
     </message>
 </context>
 <context>
@@ -6412,7 +6412,7 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Cubic</source>
-        <translation>Trojrozměrná</translation>
+        <translation>Kubická</translation>
     </message>
     <message>
         <source>Error</source>
@@ -6428,11 +6428,11 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation>Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - trojrozměrná, 2 - Akima.</translation>
+        <translation>Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - kubická, 2 - Akima.</translation>
     </message>
     <message>
         <source>Unknown interpolation method, valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation>Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - trojrozměrná, 2 - Akima.</translation>
+        <translation>Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - kubická, 2 - Akima.</translation>
     </message>
     <message>
         <source>SciDAVis</source>
@@ -6444,7 +6444,7 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
-        <translation type="unfinished">Několik datových bodů má stejnou hodnotu x, což způsobuje dělení nulou. Operace byla zrušena!</translation>
+        <translation>Několik datových bodů má stejnou hodnotu x, což způsobuje dělení nulou. Operace byla zrušena!</translation>
     </message>
 </context>
 <context>
@@ -6471,7 +6471,7 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Cubic</source>
-        <translation>Trojrozměrná</translation>
+        <translation>Kubická</translation>
     </message>
     <message>
         <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
@@ -6523,7 +6523,7 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Non-rounded Akima</source>
-        <translation>Ne-kulatá Akima</translation>
+        <translation>Nezaokrouhlená Akima</translation>
     </message>
 </context>
 <context>
@@ -9546,22 +9546,22 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     </message>
     <message>
         <source>Tried to smooth over more points (left+right+1=%1) than given as input (%2).</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokus o urovnání více bodů (left+right+1=%1), než bylo zadáno jako vstup (%2).</translation>
     </message>
     <message>
         <source>Internal error in Savitzky-Golay algorithm.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Vnitřní chyba algoritmu Savitzky-Golay.</translation>
     </message>
     <message>
         <source>Internal error in Savitzky-Golay algorithm: QR decomposition failed.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Vnitřní chyba algoritmu Savitzky-Golay. Roztřídění QR selhalo.</translation>
     </message>
     <message>
         <source>Internal error in Savitzky-Golay algorithm: least-squares solution failed.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Vnitřní chyba algoritmu Savitzky-Golay. Roztřídění QR selhalo. Řešení nejmenší-mocnina selhalo.</translation>
     </message>
 </context>
 <context>
@@ -10064,34 +10064,34 @@ dvojnásobná přesnost
     <name>TeXTableExportDialog</name>
     <message>
         <source>TeX table export dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialog pro vyvedení tabulky TeX</translation>
     </message>
 </context>
 <context>
     <name>TeXTableSettingsWidget</name>
     <message>
         <source>Table caption</source>
-        <translation type="unfinished"></translation>
+        <translation>Záhlaví tabulky</translation>
     </message>
     <message>
         <source>Table labes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nápisy v tabulce</translation>
     </message>
     <message>
         <source>TeX table columns alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarovnání sloupců tabulky TeX</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished">Vlevo</translation>
+        <translation>Vlevo</translation>
     </message>
     <message>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Na střed</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished">Vpravo</translation>
+        <translation>Vpravo</translation>
     </message>
 </context>
 <context>
@@ -10190,17 +10190,17 @@ dvojnásobná přesnost
     <message>
         <source>B</source>
         <comment>Button bold</comment>
-        <translation type="unfinished">Tučné</translation>
+        <translation>Tučné</translation>
     </message>
     <message>
         <source>It</source>
         <comment>Button italics</comment>
-        <translation type="unfinished">Kurzíva</translation>
+        <translation>Kurzíva</translation>
     </message>
     <message>
         <source>U</source>
         <comment>Button underline</comment>
-        <translation type="unfinished">Podtržení</translation>
+        <translation>Podtržení</translation>
     </message>
 </context>
 <context>
