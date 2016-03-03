@@ -280,7 +280,7 @@ QString Fit::logFitInfo(double *par, int iterations, int status, const QString& 
 			info += QLocale().toString(sqrt(gsl_matrix_get(covar,i,i)), 'g', d_prec) + "\n";
 	}
 	info += "--------------------------------------------------------------------------------------\n";
-	info += "Chi^2/doF = " + QLocale().toString(chi_2_dof, 'g', d_prec) + "\n";
+	info += "Chi^2 = " + QLocale().toString(chi_2, 'g', d_prec) + "\n";
 
 	info += tr("R^2") + " = " + QLocale().toString(rSquare(), 'g', d_prec) + "\n";
 	info += "---------------------------------------------------------------------------------------\n";
@@ -321,7 +321,7 @@ QString Fit::legendInfo()
 	info += tr("Function") + ": " + d_formula + "\n\n";
 
 	double chi_2_dof = chi_2/(d_n - d_p);
-	info += "Chi^2/doF = " + QLocale().toString(chi_2_dof, 'g', d_prec) + "\n";
+	info += "Chi^2 = " + QLocale().toString(chi_2, 'g', d_prec) + "\n";
 	info += tr("R^2") + " = " + QLocale().toString(rSquare(), 'g', d_prec) + "\n";
 
 	for (int i=0; i<d_p; i++)
