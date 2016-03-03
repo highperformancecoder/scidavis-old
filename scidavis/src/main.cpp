@@ -26,11 +26,14 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#include <QApplication>
-#include <QAction>
 #include "ApplicationWindow.h"
+
+#include <QAction>
+#include <QApplication>
 #include <QSplashScreen>
 #include <QTimer>
+ 
+#include <typeinfo>
 
 // The following stuff is for the doxygen title page
 /*!  \mainpage SciDAVis - Scientific Data Analysis and Visualization - API documentation
@@ -131,17 +134,24 @@ struct Application: public QApplication
   bool notify(QObject* receiver, QEvent* event)
   {
     try
-      {
-        return QApplication::notify(receiver,event);
-      }
+    {
+      return QApplication::notify(receiver,event);
+    } 
     catch (const std::exception& e)
-      {
-        QMessageBox::critical(0,tr("Error"),e.what());
-      }
-    catch (...) // shouldn't happen...
-      {
-        QMessageBox::critical(0,tr("Error"),tr("unknown exception caught"));
-      }
+    {
+      QMessageBox::critical(0,tr("Error!"),tr("Error ") + e.what()
+          + tr(" sending event ") + typeid(*event).name()
+          + tr(" to object ") + qPrintable(receiver->objectName())
+          + " \"" + typeid(*receiver).name() + "\"");
+    }
+    catch (...) // shouldn't happen... 
+    {
+      QMessageBox::critical(0,tr("Error!"),
+          tr("Error <unknown> sending event")
+          + typeid(*event).name() + tr(" to object ")
+          + qPrintable(receiver->objectName())
+          + " \"" + typeid(*receiver).name() + "\"");
+    }
     return false;
   }
 };
