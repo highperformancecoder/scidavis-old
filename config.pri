@@ -275,8 +275,10 @@ contains(PRESET, linux_package) {
 
 	exists(/usr/include/qwt5) {
 		INCLUDEPATH  += /usr/include/qwt5
+		LIBS         += -lqwt5
 	} else {
 		INCLUDEPATH  += /usr/include/qwt$${qwtsuff}
+		LIBS         += -lqwt$${qwtsuff}
 	}
 
         INCLUDEPATH = "$(HOME)/usr/include" $$INCLUDEPATH
@@ -285,7 +287,7 @@ contains(PRESET, linux_package) {
 	INCLUDEPATH  += /usr/include/qwtplot3d
 	LIBS         += -lqwtplot3d$${qwtsuff}
 
-	LIBS         += -lqwt$${qwtsuff} -lz -lGLU 
+	LIBS         += -lz -lGLU 
 
 	INCLUDEPATH  += /usr/include/muParser
 	LIBS         += -lgsl -lgslcblas
