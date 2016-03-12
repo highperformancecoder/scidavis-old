@@ -519,7 +519,6 @@ public slots:
 	void initToolBars();
 	void initPlot3DToolBar();
 	void disableActions();
-	void hideToolbars();
 	void customToolBars(QWidget* w);
 	void customMenu(QWidget* w);
 	void windowActivated(QWidget *w);
