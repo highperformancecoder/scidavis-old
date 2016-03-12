@@ -659,6 +659,7 @@ void ApplicationWindow::lockToolbar(const bool status)
 		file_tools->setMovable(false);
 		edit_tools->setMovable(false);
 		graph_tools->setMovable(false);
+		graph_3D_tools->setMovable(false);
 		plot_tools->setMovable(false);
 		table_tools->setMovable(false);
 		matrix_plot_tools->setMovable(false);
@@ -667,6 +668,7 @@ void ApplicationWindow::lockToolbar(const bool status)
 		file_tools->setMovable(true);
 		edit_tools->setMovable(true);
 		graph_tools->setMovable(true);
+		graph_3D_tools->setMovable(true);
 		plot_tools->setMovable(true);
 		table_tools->setMovable(true);
 		matrix_plot_tools->setMovable(true);
