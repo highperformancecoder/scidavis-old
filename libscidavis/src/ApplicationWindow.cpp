@@ -623,9 +623,9 @@ void ApplicationWindow::initToolBars()
     table_tools->setIconSize( QSize(22,22) );
 	addToolBar( Qt::TopToolBarArea, table_tools );
 
-	graph_tools->hide();
-	table_tools->hide();
-	plot_tools->hide();
+	graph_tools->setEnabled(false);
+	table_tools->setEnabled(false);
+	plot_tools->setEnabled(false);
 
 	d_status_info = new QLabel( this  );
 	d_status_info->setFrameStyle( QFrame::Sunken | QFrame::StyledPanel );
@@ -656,7 +656,7 @@ void ApplicationWindow::initToolBars()
 	actionContourMap->addTo(matrix_plot_tools);
 	actionGrayMap->addTo(matrix_plot_tools);
 
-	matrix_plot_tools->hide();
+	matrix_plot_tools->setEnabled(false);
 }
 
 void ApplicationWindow::lockToolbar(const bool status)
@@ -666,6 +666,7 @@ void ApplicationWindow::lockToolbar(const bool status)
 		file_tools->setMovable(false);
 		edit_tools->setMovable(false);
 		graph_tools->setMovable(false);
+		graph_3D_tools->setMovable(false);
 		plot_tools->setMovable(false);
 		table_tools->setMovable(false);
 		matrix_plot_tools->setMovable(false);
@@ -674,6 +675,7 @@ void ApplicationWindow::lockToolbar(const bool status)
 		file_tools->setMovable(true);
 		edit_tools->setMovable(true);
 		graph_tools->setMovable(true);
+		graph_3D_tools->setMovable(true);
 		plot_tools->setMovable(true);
 		table_tools->setMovable(true);
 		matrix_plot_tools->setMovable(true);
@@ -1214,21 +1216,18 @@ void ApplicationWindow::customToolBars(QWidget* w)
 	if (w)
 	{
 		if (!projectHas3DPlots())
-			graph_3D_tools->hide();
+			graph_3D_tools->setEnabled(false);
 		if (!projectHas2DPlots())
-			graph_tools->hide();
+			graph_tools->setEnabled(false);
 		if (!projectHasMatrices())
-			matrix_plot_tools->hide();
+			matrix_plot_tools->setEnabled(false);
 		if (tableWindows().count()<=0) {
-			table_tools->hide();
-			plot_tools->hide();
+			table_tools->setEnabled(false);
+			plot_tools->setEnabled(false);
 		}
 
 		if (w->inherits("MultiLayer"))
 		{
-			if (graph_tools->isHidden())
-				graph_tools->show();
-
 			graph_tools->setEnabled (true);
 			graph_3D_tools->setEnabled (false);
 			table_tools->setEnabled(false);
@@ -1296,8 +1295,6 @@ void ApplicationWindow::customToolBars(QWidget* w)
 		{
 			table_tools->clear();
 			static_cast<Table *>(w)->d_future_table->fillProjectToolBar(table_tools);
-			if (table_tools->isHidden())
-				table_tools->show();
 			table_tools->setEnabled (true);
 
 			graph_tools->setEnabled (false);
@@ -1324,9 +1321,6 @@ void ApplicationWindow::customToolBars(QWidget* w)
 		}
 		else if (w->inherits("Matrix"))
 		{
-			if (matrix_plot_tools->isHidden())
-				matrix_plot_tools->show();
-
 			graph_tools->setEnabled (false);
 			graph_3D_tools->setEnabled (false);
 			table_tools->setEnabled (false);
@@ -1339,9 +1333,6 @@ void ApplicationWindow::customToolBars(QWidget* w)
 			table_tools->setEnabled (false);
 			plot_tools->setEnabled(false);
 			matrix_plot_tools->setEnabled (false);
-
-			if (graph_3D_tools->isHidden())
-				graph_3D_tools->show();
 
 			Graph3D* plot= (Graph3D*)w;
 			if (plot->plotStyle() == Qwt3D::NOPLOT)
@@ -1361,23 +1352,14 @@ void ApplicationWindow::customToolBars(QWidget* w)
 		}
 
 	}
-	else
-		hideToolbars();
-}
-
-void ApplicationWindow::hideToolbars()
-{
-	graph_3D_tools->hide();
-	graph_tools->hide();
-	table_tools->hide();
-	plot_tools->hide();
-	matrix_plot_tools->hide();
-
-	graph_tools->setEnabled (false);
-	table_tools->setEnabled (false);
-	plot_tools->setEnabled(false);
-	graph_3D_tools->setEnabled (false);
-	matrix_plot_tools->setEnabled (false);
+	else 
+	{
+	  graph_tools->setEnabled (false);
+	  table_tools->setEnabled (false);
+	  plot_tools->setEnabled(false);
+	  graph_3D_tools->setEnabled (false);
+	  matrix_plot_tools->setEnabled (false);
+	}
 }
 
 void ApplicationWindow::plot3DRibbon()
@@ -2089,9 +2071,6 @@ void ApplicationWindow::initPlot3D(Graph3D *plot)
 	plot->setFocus();
 
 	addListViewItem(plot);
-
-	if (!graph_3D_tools->isVisible())
-		graph_3D_tools->show();
 
 	if (!graph_3D_tools->isEnabled())
 		graph_3D_tools->setEnabled(true);
@@ -9026,8 +9005,6 @@ void ApplicationWindow::initPlot3DToolBar()
 	actionAnimate->setToggleAction( true );
 	actionAnimate->setIconSet(QPixmap(":/movie.xpm"));
 	graph_3D_tools->addAction(actionAnimate);
-
-	graph_3D_tools->hide();
 
 	connect(actionAnimate, SIGNAL(toggled(bool)), this, SLOT(toggle3DAnimation(bool)));
 	connect( coord, SIGNAL( triggered( QAction* ) ), this, SLOT( pickCoordSystem( QAction* ) ) );
