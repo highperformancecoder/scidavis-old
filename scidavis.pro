@@ -4,6 +4,14 @@
 # In most cases you don't have to make changes to
 # this file but to the "config.pri" file 
 #################################################
+
+# enable C++11 support
+greaterThan(QT_MAJOR_VERSION, 4){
+  CONFIG += c++11
+} else {
+  QMAKE_CXXFLAGS += -std=c++0x
+}
+
 TEMPLATE = subdirs
 
 # configurations that automatically turn on liborigin - mainly the
