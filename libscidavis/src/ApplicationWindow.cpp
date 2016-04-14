@@ -7611,47 +7611,53 @@ void ApplicationWindow::timerEvent ( QTimerEvent *e)
 		QWidget::timerEvent(e);
 }
 
-void ApplicationWindow::dropEvent( QDropEvent* e )
+void ApplicationWindow::dropEvent(QDropEvent* e)
 {
-	QStringList fileNames;
-	if (Q3UriDrag::decodeLocalFiles(e, fileNames))
-	{
-		QList<QByteArray> lst = QImageReader::supportedImageFormats() << "JPG";
-		QStringList asciiFiles;
+if (e->mimeData()->hasUrls()) {
+    QStringList asciiFiles;
+    QList<QUrl> urls = e->mimeData()->urls();
 
-		for(int i = 0; i<(int)fileNames.count(); i++)
-		{
-			QString fn = fileNames[i];
-			QFileInfo fi (fn);
-			QString ext = fi.extension().toLower();
-			QStringList tempList;
-			QByteArray temp;
-			// convert QList<QByteArray> to QStringList to be able to 'filter'
-			foreach(temp,lst)
-				tempList.append(QString(temp));
-			QStringList l = tempList.filter(ext, Qt::CaseInsensitive);
-			if (l.count()>0)
-				loadImage(fn);
-			else if ( ext == "opj" || ext == "sciprj" || ext == "qti")
-				open(fn);
-			else
-				asciiFiles << fn;
-		}
+    foreach (QUrl url, urls) {
+      QString fileName = url.toLocalFile();
+      QFileInfo fileInfo(fileName);
+      QString ext = fileInfo.extension().toLower();
 
-		importASCII(asciiFiles, ImportASCIIDialog::NewTables, columnSeparator, ignoredLines, renameColumns,
-				strip_spaces, simplify_spaces, d_convert_to_numeric, d_ASCII_import_locale);
-	}
+      if (ext == "sciprj" || ext == "sciprj~" || ext == "sciprj.gz" ||
+          ext == "sciprj.gz~" || ext == "opj" || ext == "qti"|| ext == "qti.gz" ||
+          ext == "ogm"|| ext == "ogw" || ext == "ogg") {
+        open(fileName);
+      } else if (ext == "csv" || ext == "dat" || ext == "txt" || ext == "tsv") {
+        asciiFiles << fileName;
+      } else if (ext == "bmp" || ext == "bw" || ext == "eps" || ext == "epsf" ||
+                 ext == "epsi" || ext == "exr" || ext == "kra" ||
+                 ext == "ora" || ext == "pcx" || ext == "psd" || ext == "ras" ||
+                 ext == "rgb" || ext == "rgba" || ext == "sgi" ||
+                 ext == "tga" || ext == "xcf" || ext == "dds" || ext == "gif" ||
+                 ext == "ico" || ext == "jp2" || ext == "jpeg" ||
+                 ext == "jpg" || ext == "mng" || ext == "pbm" || ext == "pgm" ||
+                 ext == "pic" || ext == "png" || ext == "ppm" || ext == "svg" ||
+                 ext == "svgz" || ext == "tif" || ext == "tiff" ||
+                 ext == "webp" || ext == "xbm" || ext == "xpm" || ext == "xv") {
+        loadImage(fileName);
+      }
+    }
+    if (!asciiFiles.isEmpty()) {
+      importASCII(asciiFiles, ImportASCIIDialog::NewTables, columnSeparator,
+                  ignoredLines, renameColumns, strip_spaces, simplify_spaces,
+                  d_convert_to_numeric, d_ASCII_import_locale);
+    }
+  }
 }
 
-void ApplicationWindow::dragEnterEvent( QDragEnterEvent* e )
+void ApplicationWindow::dragEnterEvent(QDragEnterEvent* e)
 {
-	if (e->source())
-	{
-		e->ignore();
-		return;
-	}
-
-	e->accept(Q3UriDrag::canDecode(e));
+  if (e->source())
+  {
+    e->ignore();
+    return;
+  }
+  (e->mimeData()->hasUrls()) ? e->acceptProposedAction()
+                             : e->ignore();
 }
 
 void ApplicationWindow::closeEvent( QCloseEvent* ce )
