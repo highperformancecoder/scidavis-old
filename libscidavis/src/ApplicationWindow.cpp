@@ -10428,6 +10428,7 @@ void ApplicationWindow::createActions()
 	connect(actionNewGraph, SIGNAL(activated()), this, SLOT(newGraph()));
 
 	actionNewNote = new QAction(QIcon(QPixmap(":/new_note.xpm")), tr("New &Note / Script"), this);
+	actionNewNote->setShortcut( tr("Ctrl+ALT+N") );
 	connect(actionNewNote, SIGNAL(activated()), this, SLOT(newNote()));
 
 	actionNewTable = new QAction(QIcon(QPixmap(":/table.xpm")), tr("New &Table"), this);
@@ -11001,6 +11002,7 @@ void ApplicationWindow::translateActionsStrings()
 	actionNewGraph->setShortcut(tr("Ctrl+G"));
 
 	actionNewNote->setMenuText(tr("New &Note / Script"));
+	actionNewNote->setShortcut( tr("Ctrl+ALT+N") );
 	actionNewNote->setToolTip(tr("Create an empty note / script window"));
 
 	actionNewTable->setMenuText(tr("New &Table"));
