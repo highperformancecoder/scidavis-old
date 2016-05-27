@@ -4570,6 +4570,10 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
         <source>&amp;Lock Toolbars</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+ALT+N</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AsciiTableImportFilter</name>

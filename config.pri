@@ -275,7 +275,11 @@ contains(PRESET, linux_package) {
 
 	exists(/usr/include/qwt5) {
 		INCLUDEPATH  += /usr/include/qwt5
-		LIBS         += -lqwt5
+                exists(/usr/lib*/libqwt5.*) {
+                      LIBS         += -lqwt5
+                } else {
+                      LIBS += -lqwt
+                }
 	} else {
 		INCLUDEPATH  += /usr/include/qwt$${qwtsuff}
 		LIBS         += -lqwt$${qwtsuff}

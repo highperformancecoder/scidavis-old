@@ -2737,6 +2737,10 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
         <source>No updates available. You are already running the latest version.</source>
         <translation>Nejsou dostupné žádné aktualizace. Již provozujete nejnovější verzi.</translation>
     </message>
+    <message>
+        <source>Ctrl+ALT+N</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AsciiTableImportFilter</name>
