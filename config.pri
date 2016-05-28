@@ -343,7 +343,7 @@ mxe {
   DEFINES += CONSOLE
   INCLUDEPATH  += . "$$(HOME)/usr/mxe/include" 
   LIBPATH += "$(HOME)/usr/mxe/lib" "$(HOME)/usr/mxe/lib64"
-  LIBS +=  -mwindows -lqwt -lqwtplot3d -lmuparser -lgsl -lgslcblas  
+  LIBS +=  -mwindows -lqwt -lqwtplot3d -lmuparser -lgsl -lgslcblas ../3rdparty/liborigin/release/liborigin.a
   # Qt libraries specified here to get around a dependency bug in qmake
   LIBS += -lQt3Support -lQtOpenGL -lQtGui -lQtNetwork -lQtCore
   LIBS += -lole32 -loleaut32 -limm32 -lcomdlg32 -luuid 

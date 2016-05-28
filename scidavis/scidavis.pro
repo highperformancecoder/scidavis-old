@@ -26,7 +26,7 @@ INSTALLS        += translationfiles
 ### icon file (for Windows installer)
 win32:INSTALLS  += win_icon
 
-liborigin {
+!mxe liborigin {
   LIBS += ../3rdparty/liborigin/liborigin.a
   POST_TARGETDEPS += ../3rdparty/liborigin/liborigin.a
 }
