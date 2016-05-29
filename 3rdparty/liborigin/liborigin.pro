@@ -6,6 +6,7 @@ include(../../config.pri)
 TEMPLATE = lib
 CONFIG += staticlib
 TARGET = origin
+QMAKE_CLEAN+=${TARGET}
 # following define required to prevent the catastrophic logging when
 # large files are imported
 DEFINES += NO_CODE_GENERATION_FOR_LOG

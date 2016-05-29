@@ -14,6 +14,14 @@ include(../config.pri)
 include( basic.pri )
 python {include( python.pri )}
 
+#QMAKE_CLEAN+=${TARGET}
+# why doesn't the previous line work???
+win32 {
+QMAKE_CLEAN+=scidavis.exe
+} else {
+QMAKE_CLEAN+=scidavis
+}
+
 ### this is the program itself
 INSTALLS        += target
 

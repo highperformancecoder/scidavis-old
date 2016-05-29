@@ -8,6 +8,7 @@ greaterThan(QT_MAJOR_VERSION, 4){
 TEMPLATE=lib
 CONFIG+=staticlib uic
 TARGET=scidavis
+QMAKE_CLEAN+=${TARGET}
 
 include(../config.pri)
 
