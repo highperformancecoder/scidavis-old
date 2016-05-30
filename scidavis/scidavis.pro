@@ -34,9 +34,14 @@ INSTALLS        += translationfiles
 ### icon file (for Windows installer)
 win32:INSTALLS  += win_icon
 
-!mxe liborigin {
+liborigin {
+mxe {
+  LIBS += ../3rdparty/liborigin/release/liborigin.a
+  POST_TARGETDEPS += ../3rdparty/liborigin/release/liborigin.a
+} else {
   LIBS += ../3rdparty/liborigin/liborigin.a
   POST_TARGETDEPS += ../3rdparty/liborigin/liborigin.a
+}
 }
 
 ########### Future code backported from the aspect framework ##################
