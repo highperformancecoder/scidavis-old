@@ -35,6 +35,9 @@ unix:isEmpty(PRESET) { # allow command-line argument to override settings here
 	### Intended for Linux users building from source (on possibly somewhat
 	### older systems).
 	#PRESET = default_installation
+	
+	### Link statically against Qwt in 3rdparty folder
+	#PRESET = new_qwt
 
 	### Link dynamically against system-wide installed libraries. Intended mainly
 	### for building Linux packages for distributions with Qwt and QwtPlot3D
@@ -230,11 +233,11 @@ contains(PRESET, default_installation) {
 	### Link statically against Qwt and Qwtplot3D (in order to make sure they
 	### are compiled against Qt4), dynamically against everything else.
 
-	INCLUDEPATH  += ../3rdparty/qwt/src
-	LIBS         += ../3rdparty/qwt/lib/libqwt.a
+	INCLUDEPATH  += $$PWD/3rdparty/qwt/src
+	LIBS         += $$PWD/3rdparty/qwt/lib/libqwt.a
 
-	INCLUDEPATH  += ../3rdparty/qwtplot3d/include
-	LIBS         += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
+	INCLUDEPATH  += $$PWD/3rdparty/qwtplot3d/include
+	LIBS         += $$PWD/3rdparty/qwtplot3d/lib/libqwtplot3d.a
 
 	INCLUDEPATH  += /usr/include/muParser
 	LIBS         += -lgsl -lgslcblas -lz -lGLU
@@ -288,8 +291,29 @@ contains(PRESET, linux_package) {
         INCLUDEPATH = "$(HOME)/usr/include" $$INCLUDEPATH
         QMAKE_LIBDIR = "$(HOME)/usr/lib" $$QMAKE_LIBDIR
 
-	INCLUDEPATH  += /usr/include/qwtplot3d
+	INCLUDEPATH  += /usr/include/qwtplot3d-qt4
 	LIBS         += -lqwtplot3d$${qwtsuff}
+
+	LIBS         += -lz -lGLU 
+
+	INCLUDEPATH  += /usr/include/muParser
+	LIBS         += -lgsl -lgslcblas
+	LIBS         += -lmuparser 
+
+}
+
+contains(PRESET, new_qwt) {
+	### Link statically against Qwt, dynamically against everything else.
+
+
+        INCLUDEPATH  += $$PWD/3rdparty/qwt/src
+	LIBS         += $$PWD/3rdparty/qwt/lib/libqwt.a 
+        
+        INCLUDEPATH = "$(HOME)/usr/include" $$INCLUDEPATH
+        QMAKE_LIBDIR = "$(HOME)/usr/lib" $$QMAKE_LIBDIR
+
+	INCLUDEPATH  += /usr/include/qwtplot3d-qt4
+	LIBS         += -lqwtplot3d-qt4
 
 	LIBS         += -lz -lGLU 
 
@@ -302,14 +326,14 @@ contains(PRESET, linux_package) {
 contains(PRESET, self_contained) {
 	### mostly static linking, for self-contained binaries
 
-	INCLUDEPATH  += ../3rdparty/qwt/src
-	LIBS         += ../3rdparty/qwt/lib/libqwt.a
+	INCLUDEPATH  += $$PWD/3rdparty/qwt/src
+	LIBS         += $$PWD/3rdparty/qwt/lib/libqwt.a
 
-	INCLUDEPATH  += ../3rdparty/qwtplot3d/include
-	LIBS         += ../3rdparty/qwtplot3d/lib/libqwtplot3d.a
+	INCLUDEPATH  += $$PWD/3rdparty/qwtplot3d/include
+	LIBS         += $$PWD/3rdparty/qwtplot3d/lib/libqwtplot3d.a
 
-	INCLUDEPATH  += ../3rdparty/muparser/include
-	LIBS         += ../3rdparty/muparser/lib/libmuparser.a
+	INCLUDEPATH  += $$PWD/3rdparty/muparser/include
+	LIBS         += $$PWD/3rdparty/muparser/lib/libmuparser.a
 
 	LIBS         += /usr/lib/libgsl.a /usr/lib/libgslcblas.a
 
