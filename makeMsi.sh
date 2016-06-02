@@ -53,7 +53,7 @@ pushd scidavis
 id=0
 fid=0
 # add in plain files
-for i in appicons.qrc icons.qrc scidavis.rc scidavisrc.pyc scidavisUtil.pyc; do
+for i in appicons.qrc icons.qrc scidavis.rc; do
 	if [ ! -d $i ]; then
 	    let fid++
 	    cat >>$scidavisWxs <<EOF
