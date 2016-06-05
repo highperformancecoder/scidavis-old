@@ -245,6 +245,9 @@ contains(PRESET, default_installation) {
 osx_dist {
 	# Uses MacPorts supplied versions of the dependencies
 
+        QMAKE_CXX = g++-mp-4.8
+        QMAKE_LINK = g++-mp-4.8
+
 	INCLUDEPATH  += /opt/local/include
 	INCLUDEPATH  += /opt/local/include/qwt
 
@@ -254,6 +257,7 @@ osx_dist {
 	LIBS         += -lqwtplot3d
 
 	INCLUDEPATH  += /opt/local/include/muParser
+	INCLUDEPATH  += /opt/local/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7/
 	LIBS         += -lgsl -lgslcblas -lz
 	LIBS         += -lmuparser -lpython2.7
 

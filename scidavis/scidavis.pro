@@ -6,7 +6,7 @@ greaterThan(QT_MAJOR_VERSION, 4){
 }
 
 INCLUDEPATH += ../libscidavis ../libscidavis/src 
-LIBS += -L ../libscidavis -lscidavis
+LIBS += -L../libscidavis -lscidavis
 
 POST_TARGETDEPS=../libscidavis/libscidavis.a
 
