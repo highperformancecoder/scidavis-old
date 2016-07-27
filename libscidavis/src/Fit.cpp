@@ -80,8 +80,8 @@ double * Fit::fitGslMultifit(int &iterations, int &status)
 
 	// declare input data
 	struct FitData data = {
-		d_n,
-		d_p,
+          size_t(d_n),
+          size_t(d_p),
 		d_x,
 		d_y,
 		d_y_errors,
@@ -151,8 +151,8 @@ double * Fit::fitGslMultimin(int &iterations, int &status)
 
 	// declare input data
 	struct FitData data = {
-		d_n,
-		d_p,
+          size_t(d_n),
+          size_t(d_p),
 		d_x,
 		d_y,
 		d_y_errors,

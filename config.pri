@@ -245,13 +245,14 @@ contains(PRESET, default_installation) {
 osx_dist {
 	# Uses MacPorts supplied versions of the dependencies
 
-        QMAKE_CXX = g++-mp-4.8
-        QMAKE_LINK = g++-mp-4.8
+        QMAKE_CXX = clang++
+        QMAKE_LINK = clang++
 
+	INCLUDEPATH  += /usr/local/include
 	INCLUDEPATH  += /opt/local/include
 	INCLUDEPATH  += /opt/local/include/qwt
 
-	LIBS         += -L/opt/local/lib -lqwt
+	LIBS         += -L/usr/local/lib -L/opt/local/lib -lqwt
 
 	INCLUDEPATH  += /opt/local/include/qwtplot3d
 	LIBS         += -lqwtplot3d
