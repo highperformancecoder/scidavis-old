@@ -1,5 +1,6 @@
+echo "old version=`git describe`"
 version=$1
-delta=${version##*.[CD]}
+delta=${version##*.}
 # strip any leading 0s from delta
 delta=`echo $delta|sed -e 's/^0*//'`
 branch=${version%%.*}
@@ -23,3 +24,5 @@ done
 # update Doxyversion
 rm -f Doxyversion
 echo "PROJECT_NUMBER=$version" >Doxyversion
+git commit -a -m "Release $1"
+git tag -a -m "" $1
