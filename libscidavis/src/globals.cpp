@@ -49,7 +49,7 @@ const char * SciDAVis::copyright_string = "\
 The following people have written parts of the SciDAVis source code, ranging from a few lines to large chunks.\n\
 In alphabetical order.\n\
 \n\
-Tilman Benkert[1], Knut Franke, Dmitriy Pozitron, Russell Standish\n\
+Tilman Benkert[1], Knut Franke, Arun Narayanankutty, Dmitriy Pozitron, Russell Standish\n\
 \n\
 --- Documentation ---\n\
 \n\
