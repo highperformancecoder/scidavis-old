@@ -302,7 +302,7 @@ PythonScripting::~PythonScripting()
 
 bool PythonScripting::loadInitFile(const QString &path)
 {
-	PyRun_SimpleString("import sys\nsys.path.append('"PYTHON_UTIL_PATH"')"); 
+	PyRun_SimpleString("import sys\nsys.path.append('" PYTHON_UTIL_PATH "')"); 
 	QFileInfo pyFile(path+".py"), pycFile(path+".pyc");
 	bool success = false;
 	if (pycFile.isReadable() && (pycFile.lastModified() >= pyFile.lastModified())) {
