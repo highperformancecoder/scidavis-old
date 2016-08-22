@@ -457,10 +457,9 @@ Do you want to overwrite it?</source>
 <context>
     <name>AbstractAspect</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="79"/>
         <source>XML read error: </source>
         <comment>prefix for XML error messages</comment>
-        <translation type="unfinished">error de lectura XML:</translation>
+        <translation type="obsolete">error de lectura XML:</translation>
     </message>
     <message>
         <source> (loading failed)</source>
@@ -472,99 +471,110 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">nombre de aspecto perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="80"/>
         <source> (non-critical)</source>
         <comment>postfix for XML error messages</comment>
         <translatorcomment>mensajes de error XML para postfix</translatorcomment>
-        <translation type="unfinished">(no crítico)</translation>
+        <translation type="obsolete">(no crítico)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="89"/>
         <source>aspect name missing or empty</source>
-        <translation type="unfinished">Nombre de aspecto perdido o vacío</translation>
+        <translation type="obsolete">Nombre de aspecto perdido o vacío</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="97"/>
         <source>Invalid creation time for &apos;%1&apos;. Using current time.</source>
-        <translation type="unfinished">hora de creación invalida para &apos;%1&apos;. Usando hora actual.</translation>
+        <translation type="obsolete">hora de creación invalida para &apos;%1&apos;. Usando hora actual.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="118"/>
         <source>%1: add %2.</source>
-        <translation type="unfinished">%1: agrega %2.</translation>
+        <translation type="obsolete">%1: agrega %2.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="120"/>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="134"/>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="165"/>
         <source>Renaming &quot;%1&quot; to &quot;%2&quot; in order to avoid name collision.</source>
-        <translation type="unfinished">Renombrando &quot;%1&quot; a &quot;%2&quot; para evitar colisión de nombre.</translation>
+        <translation type="obsolete">Renombrando &quot;%1&quot; a &quot;%2&quot; para evitar colisión de nombre.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="132"/>
         <source>%1: insert %2 at position %3.</source>
-        <translation type="unfinished">%1: inserta %2 en posición %3.</translation>
+        <translation type="obsolete">%1: inserta %2 en posición %3.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="145"/>
         <source>%1: remove %2.</source>
-        <translation type="unfinished">%1: remueve %2.</translation>
+        <translation type="obsolete">%1: remueve %2.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="250"/>
         <source>Tabs and line breaks in object names are currently not supported. They have been removed.</source>
-        <translation type="unfinished">Tabs y saltos de línea en los nombres de objeto no están actualmente soportados. Han sido removidos.</translation>
+        <translation type="obsolete">Tabs y saltos de línea en los nombres de objeto no están actualmente soportados. Han sido removidos.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="254"/>
         <source>Intended name &quot;%1&quot; diverted to &quot;%2&quot; in order to avoid name collision.</source>
-        <translation type="unfinished">Nonbre intentado  &quot;%1&quot; convertido a &quot;%2&quot; para evitar colisión de nombre.</translation>
+        <translation type="obsolete">Nonbre intentado  &quot;%1&quot; convertido a &quot;%2&quot; para evitar colisión de nombre.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="354"/>
         <source>%1: remove all children.</source>
-        <translation type="unfinished">%1: remueve todos los hijos. </translation>
+        <translation type="obsolete">%1: remueve todos los hijos. </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="163"/>
         <source>%1: move %2 to %3.</source>
-        <translation type="unfinished">%1: mueve %2 a %3.</translation>
+        <translation type="obsolete">%1: mueve %2 a %3.</translation>
     </message>
 </context>
 <context>
     <name>AbstractPart</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractPart.cpp" line="51"/>
         <source>&amp;Restore</source>
-        <translation type="unfinished">&amp;Restaurar</translation>
+        <translation type="obsolete">&amp;Restaurar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractPart.cpp" line="56"/>
         <source>Mi&amp;nimize</source>
-        <translation type="unfinished">Mi&amp;nimizar</translation>
+        <translation type="obsolete">Mi&amp;nimizar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractPart.cpp" line="61"/>
         <source>Ma&amp;ximize</source>
-        <translation type="unfinished">Ma&amp;ximizar</translation>
+        <translation type="obsolete">Ma&amp;ximizar</translation>
     </message>
 </context>
 <context>
     <name>AbstractSimpleFilter</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractSimpleFilter.cpp" line="145"/>
         <source>incompatible filter type</source>
-        <translation type="unfinished">tipo de filtro incompatible</translation>
+        <translation type="obsolete">tipo de filtro incompatible</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractSimpleFilter.cpp" line="164"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">elemento &apos;%1&apos; desconocido</translation>
+        <translation type="obsolete">elemento &apos;%1&apos; desconocido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractSimpleFilter.cpp" line="171"/>
         <source>no simple filter element found</source>
-        <translation type="unfinished">no se encontró ningún elemento filtrante simple</translation>
+        <translation type="obsolete">no se encontró ningún elemento filtrante simple</translation>
+    </message>
+</context>
+<context>
+    <name>Application</name>
+    <message>
+        <location filename="../src/main.cpp" line="142"/>
+        <location filename="../src/main.cpp" line="149"/>
+        <source>Error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="142"/>
+        <source>Error </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="143"/>
+        <source> sending event </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="144"/>
+        <location filename="../src/main.cpp" line="151"/>
+        <source> to object </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="150"/>
+        <source>Error &lt;unknown&gt; sending event</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3561,7 +3571,6 @@ Are you sure you want to continue?</source>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11574"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13053"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13099"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="497"/>
         <source>Graph</source>
         <translation type="unfinished">Gráfico</translation>
     </message>
@@ -5801,9 +5810,8 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
 <context>
     <name>AsciiTableImportFilter</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="176"/>
         <source>Table</source>
-        <translation type="unfinished">Tabla</translation>
+        <translation type="obsolete">Tabla</translation>
     </message>
 </context>
 <context>
@@ -6534,73 +6542,59 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
 <context>
     <name>Column</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="377"/>
         <source>column type missing</source>
-        <translation type="unfinished">tipo de columna perdida</translation>
+        <translation type="obsolete">tipo de columna perdida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="383"/>
         <source>column type invalid</source>
-        <translation type="unfinished">tipo de columna perdida</translation>
+        <translation type="obsolete">tipo de columna perdida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="390"/>
         <source>column mode missing</source>
-        <translation type="unfinished">modo de columna perdida</translation>
+        <translation type="obsolete">modo de columna perdida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="396"/>
         <source>column mode invalid</source>
-        <translation type="unfinished">modo de columna invalida</translation>
+        <translation type="obsolete">modo de columna invalida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="402"/>
         <source>column type or mode invalid</source>
-        <translation type="unfinished">tipo ó modo de columna invalida</translation>
+        <translation type="obsolete">tipo ó modo de columna invalida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="412"/>
         <source>column plot designation invalid</source>
-        <translation type="unfinished">designación del diagrama de la columna invalido</translation>
+        <translation type="obsolete">designación del diagrama de la columna invalido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="448"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">elemento &apos;%1&apos; desconocido</translation>
+        <translation type="obsolete">elemento &apos;%1&apos; desconocido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="457"/>
         <source>no column element found</source>
-        <translation type="unfinished">Ningún elemento de columna hallado</translation>
+        <translation type="obsolete">Ningún elemento de columna hallado</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="492"/>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="511"/>
         <source>invalid or missing start or end row</source>
-        <translation type="unfinished">comienzo o final de fila invalido ó perdido</translation>
+        <translation type="obsolete">comienzo o final de fila invalido ó perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="532"/>
         <source>invalid or missing row type</source>
-        <translation type="unfinished">tipo de fila invalido ó perdido</translation>
+        <translation type="obsolete">tipo de fila invalido ó perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="540"/>
         <source>invalid or missing row index</source>
-        <translation type="unfinished">índice de fila invalido ó perdido</translation>
+        <translation type="obsolete">índice de fila invalido ó perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="552"/>
         <source>invalid row value</source>
-        <translation type="unfinished">valor de fila invalido</translation>
+        <translation type="obsolete">valor de fila invalido</translation>
     </message>
 </context>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="335"/>
         <source>as string</source>
-        <translation type="unfinished">como string</translation>
+        <translation type="obsolete">como string</translation>
     </message>
 </context>
 <context>
@@ -7277,202 +7271,170 @@ The following special codes can be used:
 <context>
     <name>ControlTabs</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="26"/>
         <source>Control Tabs</source>
-        <translation type="unfinished">Pestañas de control</translation>
+        <translation type="obsolete">Pestañas de control</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="54"/>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation type="obsolete">Descripción</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="62"/>
         <source>go to previous column</source>
-        <translation type="unfinished">ir a la columna anterior</translation>
+        <translation type="obsolete">ir a la columna anterior</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="65"/>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="78"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="75"/>
         <source>go to next column</source>
-        <translation type="unfinished">ir a la siguiente columna</translation>
+        <translation type="obsolete">ir a la siguiente columna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="88"/>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="170"/>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="388"/>
         <source>Appl&amp;y</source>
-        <translation type="unfinished">&amp;Aplicar</translation>
+        <translation type="obsolete">&amp;Aplicar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="109"/>
         <source>Name:</source>
-        <translation type="unfinished">Nombre: </translation>
+        <translation type="obsolete">Nombre: </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="128"/>
         <source>Comment:</source>
-        <translation type="unfinished">Comentario:</translation>
+        <translation type="obsolete">Comentario:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="152"/>
         <source>Type</source>
-        <translation type="unfinished">Tipo</translation>
+        <translation type="obsolete">Tipo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="164"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplica nuevo tipo y formato a todas las columnas seleccionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="180"/>
         <source>Type:</source>
-        <translation type="unfinished">Tipo:</translation>
+        <translation type="obsolete">Tipo:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="202"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select the column type&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccionar el tipo de columna&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="212"/>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="244"/>
         <source>Format:</source>
-        <translation type="unfinished">Formato:</translation>
+        <translation type="obsolete">Formato:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="234"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Elegir el formato a  mostrar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="254"/>
         <source>Decimal Digits:</source>
-        <translation type="unfinished">Digitos decimales:</translation>
+        <translation type="obsolete">Digitos decimales:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="264"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ingrese el número de digitos decimales a ser mostrado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="280"/>
         <source>Numbers are</source>
-        <translation type="unfinished">Números son</translation>
+        <translation type="obsolete">Números son</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="290"/>
         <source>since</source>
-        <translation type="unfinished">desde</translation>
+        <translation type="obsolete">desde</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="349"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Información acerca del tipo y formato seleccionado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="366"/>
         <source>Formula</source>
-        <translation type="unfinished">Fórmula</translation>
+        <translation type="obsolete">Fórmula</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="372"/>
         <source>Formula:</source>
-        <translation type="unfinished">Fórmula:</translation>
+        <translation type="obsolete">Fórmula:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="382"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar la fórmula a todas las celdas seleccionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="417"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccionar una columna de referencia para insertar en la fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="427"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insertar la columna de referencia en la fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="433"/>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="463"/>
         <source>Add</source>
-        <translation type="unfinished">Agregar</translation>
+        <translation type="obsolete">Agregar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="446"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccionar una función para insertar en la fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="456"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Insert the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -7906,27 +7868,23 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>DimensionsDialog</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/DimensionsDialog.ui" line="13"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogo</translation>
+        <translation type="obsolete">Dialogo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/DimensionsDialog.ui" line="21"/>
         <source>Rows</source>
-        <translation type="unfinished">Filas</translation>
+        <translation type="obsolete">Filas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/DimensionsDialog.ui" line="39"/>
         <source>Columns</source>
-        <translation type="unfinished">Columnas</translation>
+        <translation type="obsolete">Columnas</translation>
     </message>
 </context>
 <context>
     <name>Double2StringFilter</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/datatypes/Double2StringFilter.cpp" line="51"/>
         <source>missing or invalid format attribute(s)</source>
-        <translation type="unfinished">formato de atributo(s) invalido o perdido</translation>
+        <translation type="obsolete">formato de atributo(s) invalido o perdido</translation>
     </message>
 </context>
 <context>
@@ -10312,9 +10270,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Tabla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="609"/>
         <source>F</source>
-        <translation type="unfinished">F</translation>
+        <translation type="obsolete">F</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Graph.cpp" line="811"/>
@@ -12489,172 +12446,147 @@ Do you want to insert cells?</source>
 <context>
     <name>MatrixControlTabs</name>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="25"/>
         <source>Control Tabs</source>
-        <translation type="unfinished">pestañas de control</translation>
+        <translation type="obsolete">pestañas de control</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="53"/>
         <source>Coordinates</source>
-        <translation type="unfinished">Coordenadas</translation>
+        <translation type="obsolete">Coordenadas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="59"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="346"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="502"/>
         <source>Appl&amp;y</source>
-        <translation type="unfinished">&amp;Aplicar</translation>
+        <translation type="obsolete">&amp;Aplicar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="69"/>
         <source>First column X =</source>
-        <translation type="unfinished">Primer columna X =</translation>
+        <translation type="obsolete">Primer columna X =</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="126"/>
         <source>Last column X =</source>
-        <translation type="unfinished">Última columna X =</translation>
+        <translation type="obsolete">Última columna X =</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="180"/>
         <source>First row Y =</source>
-        <translation type="unfinished">Primer fila Y =</translation>
+        <translation type="obsolete">Primer fila Y =</translation>
     </message>
     <message>
         <source>Last row X =</source>
         <translation type="obsolete">Última fila Y =</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="231"/>
         <source>Last row Y =</source>
-        <translation type="unfinished">Última fila Y +</translation>
+        <translation type="obsolete">Última fila Y +</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="328"/>
         <source>Format</source>
-        <translation type="unfinished">Formato</translation>
+        <translation type="obsolete">Formato</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="340"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar nuevo tipo y formato a todas las columnas seleccionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="353"/>
         <source>Format:</source>
-        <translation type="unfinished">Formato:</translation>
+        <translation type="obsolete">Formato:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="375"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Elegir el formato a mostrar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="388"/>
         <source>Decimal Digits:</source>
-        <translation type="unfinished">Digitos decimales:</translation>
+        <translation type="obsolete">Digitos decimales:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="398"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Entrar el número de digitos decimales a mostrar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="463"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Información acerca del tipo y formato seleccionado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="480"/>
         <source>Formula</source>
-        <translation type="unfinished">Fórmula</translation>
+        <translation type="obsolete">Fórmula</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="486"/>
         <source>Formula:</source>
-        <translation type="unfinished">Fórmula:</translation>
+        <translation type="obsolete">Fórmula:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="496"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar la fórmula a todas las celdas seleccionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="528"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccionar una columna de referencia para insertar en la fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="538"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insertar la columna de referencia en la fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="544"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="573"/>
         <source>Add</source>
-        <translation type="unfinished">Agregar</translation>
+        <translation type="obsolete">Agregar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="557"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Seleccionar una función para insertar en la fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="567"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Inset the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insertar una función en la fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -12824,45 +12756,37 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MatrixView</name>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="150"/>
         <source>Ctrl+A</source>
         <comment>Matrix: select all</comment>
-        <translation type="unfinished">Ctrl+A</translation>
+        <translation type="obsolete">Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="200"/>
         <source>Show/hide control tabs</source>
-        <translation type="unfinished">Mostrar/ocultar las pestañas de control</translation>
+        <translation type="obsolete">Mostrar/ocultar las pestañas de control</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="203"/>
         <source>Decimal</source>
-        <translation type="unfinished">Decimal</translation>
+        <translation type="obsolete">Decimal</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="204"/>
         <source>Scientific (e)</source>
-        <translation type="unfinished">Científico (e)</translation>
+        <translation type="obsolete">Científico (e)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="205"/>
         <source>Scientific (E)</source>
-        <translation type="unfinished">Científico (E)</translation>
+        <translation type="obsolete">Científico (E)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="507"/>
         <source>Example: %1</source>
-        <translation type="unfinished">Ejemplo: %1</translation>
+        <translation type="obsolete">Ejemplo: %1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="206"/>
         <source>Automatic (e)</source>
-        <translation type="unfinished">Automático (e)</translation>
+        <translation type="obsolete">Automático (e)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="207"/>
         <source>Automatic (E)</source>
-        <translation type="unfinished">Automático (E)</translation>
+        <translation type="obsolete">Automático (E)</translation>
     </message>
 </context>
 <context>
@@ -15475,57 +15399,47 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
 <context>
     <name>Project</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/Project.cpp" line="76"/>
         <source>Unnamed</source>
-        <translation type="unfinished">Sin nombre</translation>
+        <translation type="obsolete">Sin nombre</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/Project.cpp" line="194"/>
         <source>invalid or missing project version</source>
-        <translation type="unfinished">versión de projecto inválida o perdida</translation>
+        <translation type="obsolete">versión de projecto inválida o perdida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/Project.cpp" line="217"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">elemento &apos;%1&apos; desconocido</translation>
+        <translation type="obsolete">elemento &apos;%1&apos; desconocido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/Project.cpp" line="224"/>
         <source>no scidavis_project element found</source>
-        <translation type="unfinished">ningún elemento de projecto_scidavis hallado</translation>
+        <translation type="obsolete">ningún elemento de projecto_scidavis hallado</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/Project.cpp" line="227"/>
         <source>no valid XML document found</source>
-        <translation type="unfinished">ningún documento XML válido hallado</translation>
+        <translation type="obsolete">ningún documento XML válido hallado</translation>
     </message>
 </context>
 <context>
     <name>ProjectConfigPage</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/ProjectConfigPage.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished">Forma</translation>
+        <translation type="obsolete">Forma</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/ProjectConfigPage.ui" line="21"/>
         <source>By default, show the subwindows ...</source>
-        <translation type="unfinished">Por defecto, mostrar las subventanas ...</translation>
+        <translation type="obsolete">Por defecto, mostrar las subventanas ...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/ProjectConfigPage.ui" line="41"/>
         <source>in the current folder</source>
-        <translation type="unfinished">in la carpera actual</translation>
+        <translation type="obsolete">in la carpera actual</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/ProjectConfigPage.ui" line="46"/>
         <source>in the current folder and its subfolders</source>
-        <translation type="unfinished">en la carpeta actual y en sus subcarpetas</translation>
+        <translation type="obsolete">en la carpeta actual y en sus subcarpetas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/ProjectConfigPage.ui" line="51"/>
         <source>all subwindows in the project</source>
-        <translation type="unfinished">todas las subventanas en el projecto</translation>
+        <translation type="obsolete">todas las subventanas en el projecto</translation>
     </message>
 </context>
 <context>
@@ -15544,132 +15458,88 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="310"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Remover</translation>
+        <translation type="obsolete">&amp;Remover</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="120"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="38"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="180"/>
-        <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="44"/>
         <source>%1: insert %2 column(s)</source>
-        <translation type="unfinished">%1: inserta %2 columna(s)</translation>
+        <translation type="obsolete">%1: inserta %2 columna(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="130"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="90"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="193"/>
-        <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="101"/>
         <source>%1: remove %2 column(s)</source>
-        <translation type="unfinished">%1: remueve %2 columna(s)</translation>
+        <translation type="obsolete">%1: remueve %2 columna(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="244"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="140"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="125"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="213"/>
         <source>%1: remove %2 row(s)</source>
-        <translation type="unfinished">%1: remueve %2 fila(s)</translation>
+        <translation type="obsolete">%1: remueve %2 fila(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="216"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="150"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="64"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="227"/>
         <source>%1: insert %2 row(s)</source>
-        <translation type="unfinished">%1: inserta %2 filas(s)</translation>
+        <translation type="obsolete">%1: inserta %2 filas(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="160"/>
         <source>%1: set matrix size to %2x%3</source>
-        <translation type="unfinished">%1: setear tamaño de la matriz a %2x%3</translation>
+        <translation type="obsolete">%1: setear tamaño de la matriz a %2x%3</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="188"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="160"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="307"/>
         <source>%1: clear</source>
-        <translation type="unfinished">%1: limpiar</translation>
+        <translation type="obsolete">%1: limpiar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="329"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="682"/>
         <source>%1: insert empty column(s)</source>
-        <translation type="unfinished">%1: inserta columna(s) vacía(s)</translation>
+        <translation type="obsolete">%1: inserta columna(s) vacía(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="353"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="709"/>
         <source>%1: remove selected column(s)</source>
-        <translation type="unfinished">%1: remueve las columna(s) seleccionadas</translation>
+        <translation type="obsolete">%1: remueve las columna(s) seleccionadas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="364"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="723"/>
         <source>%1: clear selected column(s)</source>
-        <translation type="unfinished">%1: limpia las columna(s) seleccionada(s)</translation>
+        <translation type="obsolete">%1: limpia las columna(s) seleccionada(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="382"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="884"/>
         <source>%1: insert empty rows(s)</source>
-        <translation type="unfinished">%1: inserta fila(s) vacía(s)</translation>
+        <translation type="obsolete">%1: inserta fila(s) vacía(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="406"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="905"/>
         <source>%1: remove selected rows(s)</source>
-        <translation type="unfinished">%1: remueve fila(s) seleccionada(s)</translation>
+        <translation type="obsolete">%1: remueve fila(s) seleccionada(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="421"/>
         <source>%1: clear selected rows(s)</source>
-        <translation type="unfinished">%1: limpia las fila(s) seleccionada(s)</translation>
+        <translation type="obsolete">%1: limpia las fila(s) seleccionada(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="963"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="959"/>
         <source>%1: add %2 rows(s)</source>
-        <translation type="unfinished">%1: agrega %2 fila(s)</translation>
+        <translation type="obsolete">%1: agrega %2 fila(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="974"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="342"/>
         <source>%1: add %2 column(s)</source>
-        <translation type="unfinished">%1: agrega %2 columna(s)</translation>
+        <translation type="obsolete">%1: agrega %2 columna(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="195"/>
         <source>%1: clear column %2</source>
-        <translation type="unfinished">%1: limpia columna %2</translation>
+        <translation type="obsolete">%1: limpia columna %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="225"/>
         <source>%1: set cell value</source>
-        <translation type="unfinished">%1: set ear valor de celda</translation>
+        <translation type="obsolete">%1: set ear valor de celda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="252"/>
         <source>%1: set matrix coordinates</source>
-        <translation type="unfinished">%1: setear coordenadas de matriz</translation>
+        <translation type="obsolete">%1: setear coordenadas de matriz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/datatypes/Double2StringFilter.cpp" line="78"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="289"/>
         <source>%1: set numeric format to &apos;%2&apos;</source>
-        <translation type="unfinished">%1: setear formato numérico a &apos;%2&apos;</translation>
+        <translation type="obsolete">%1: setear formato numérico a &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/datatypes/Double2StringFilter.cpp" line="100"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="314"/>
         <source>%1: set decimal digits to %2</source>
-        <translation type="unfinished">%1: setear digitos decimales a %2</translation>
+        <translation type="obsolete">%1: setear digitos decimales a %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="339"/>
         <source>%1: set formula</source>
-        <translation type="unfinished">%1: setear fórmula</translation>
+        <translation type="obsolete">%1: setear fórmula</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11853"/>
@@ -15678,267 +15548,203 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
         <translation type="unfinished">Liberado</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/AbstractFilter.cpp" line="121"/>
         <source>In%1</source>
-        <translation type="unfinished">Adentro%1</translation>
+        <translation type="obsolete">Adentro%1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/Project.cpp" line="154"/>
         <source>General</source>
-        <translation type="unfinished">General</translation>
+        <translation type="obsolete">General</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="40"/>
         <source>%1: rename to %2</source>
-        <translation type="unfinished">%1: renombrar a %2</translation>
+        <translation type="obsolete">%1: renombrar a %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="61"/>
         <source>%1: change comment</source>
-        <translation type="unfinished">%1: cambiar comentario</translation>
+        <translation type="obsolete">%1: cambiar comentario</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="82"/>
         <source>%1: change caption</source>
-        <translation type="unfinished">%1: cambiar legenda</translation>
+        <translation type="obsolete">%1: cambiar legenda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="104"/>
         <source>%1: set creation time</source>
-        <translation type="unfinished">%1: setear creación de hora</translation>
+        <translation type="obsolete">%1: setear creación de hora</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="126"/>
         <source>%1: remove %2</source>
-        <translation type="unfinished">%1: remueve %2</translation>
+        <translation type="obsolete">%1: remueve %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="158"/>
         <source>%1: add %2</source>
-        <translation type="unfinished">%1: agrega %2</translation>
+        <translation type="obsolete">%1: agrega %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="172"/>
         <source>%1: move child from position %2 to %3.</source>
-        <translation type="unfinished">%1: mueve hijo desde la posición %2 a la %3.</translation>
+        <translation type="obsolete">%1: mueve hijo desde la posición %2 a la %3.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="201"/>
         <source>%1: move %2 to %3.</source>
-        <translation type="unfinished">%1: mueve %2 a %3.</translation>
+        <translation type="obsolete">%1: mueve %2 a %3.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="88"/>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="40"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="643"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="660"/>
         <source>%1: change column type</source>
-        <translation type="unfinished">%1: cambiar tipo de columna</translation>
+        <translation type="obsolete">%1: cambiar tipo de columna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="124"/>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="171"/>
         <source>%1: change cell value(s)</source>
-        <translation type="unfinished">%1: cambiar valor(es) de celda(s)</translation>
+        <translation type="obsolete">%1: cambiar valor(es) de celda(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="293"/>
         <source>%1: set plot designation</source>
-        <translation type="unfinished">%1: setear designación del gráfico</translation>
+        <translation type="obsolete">%1: setear designación del gráfico</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="321"/>
         <source>%1: clear column</source>
-        <translation type="unfinished">%1: limpiar columna</translation>
+        <translation type="obsolete">%1: limpiar columna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="388"/>
         <source>%1: mark all cells valid</source>
-        <translation type="unfinished">%1: marcar todas las celdas válidas</translation>
+        <translation type="obsolete">%1: marcar todas las celdas válidas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="421"/>
         <source>%1: clear masks</source>
-        <translation type="unfinished">%1: limpiar máscaras</translation>
+        <translation type="obsolete">%1: limpiar máscaras</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="455"/>
         <source>%1: mark cells invalid</source>
-        <translation type="unfinished">%1: marcar todas las celdas inválidas</translation>
+        <translation type="obsolete">%1: marcar todas las celdas inválidas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="457"/>
         <source>%1: mark cells valid</source>
-        <translation type="unfinished">%1: marcar celdas válidas</translation>
+        <translation type="obsolete">%1: marcar celdas válidas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="491"/>
         <source>%1: mask cells</source>
-        <translation type="unfinished">%1: marcar celdas</translation>
+        <translation type="obsolete">%1: marcar celdas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="493"/>
         <source>%1: unmask cells</source>
-        <translation type="unfinished">%1: desenmascarar celdas</translation>
+        <translation type="obsolete">%1: desenmascarar celdas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="526"/>
         <source>%1: set cell formula</source>
-        <translation type="unfinished">%1: setear fórmula de celda</translation>
+        <translation type="obsolete">%1: setear fórmula de celda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="559"/>
         <source>%1: clear all formulas</source>
-        <translation type="unfinished">%1: limpiar todas las fórmulas</translation>
+        <translation type="obsolete">%1: limpiar todas las fórmulas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="592"/>
         <source>%1: set text for row %2</source>
-        <translation type="unfinished">%1: setear texto para fila %2</translation>
+        <translation type="obsolete">%1: setear texto para fila %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="624"/>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="656"/>
         <source>%1: set value for row %2</source>
-        <translation type="unfinished">%1: setear valor para fila %2</translation>
+        <translation type="obsolete">%1: setear valor para fila %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="688"/>
         <source>%1: replace the texts for rows %2 to %3</source>
-        <translation type="unfinished">%1: remplazar los textos para lass filas %2 a %3</translation>
+        <translation type="obsolete">%1: remplazar los textos para lass filas %2 a %3</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="725"/>
-        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="762"/>
         <source>%1: replace the values for rows %2 to %3</source>
-        <translation type="unfinished">%1: remplazar los valores de las filas %2 a %3</translation>
+        <translation type="obsolete">%1: remplazar los valores de las filas %2 a %3</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/datatypes/DateTime2StringFilter.cpp" line="44"/>
-        <location filename="../../libscidavis/src/future/core/datatypes/String2DateTimeFilter.cpp" line="139"/>
         <source>%1: set date-time format to %2</source>
-        <translation type="unfinished">%1: setear formato de fecha-hora a %2</translation>
+        <translation type="obsolete">%1: setear formato de fecha-hora a %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/datatypes/DateTime2StringFilter.cpp" line="46"/>
-        <location filename="../../libscidavis/src/future/core/datatypes/String2DateTimeFilter.cpp" line="141"/>
         <source>set date-time format to %1</source>
-        <translation type="unfinished">setear formato de fecha-hora a %1</translation>
+        <translation type="obsolete">setear formato de fecha-hora a %1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/datatypes/Double2StringFilter.cpp" line="80"/>
         <source>set numeric format to &apos;%1&apos;</source>
-        <translation type="unfinished">setear formato de número a &apos;%1&apos;</translation>
+        <translation type="obsolete">setear formato de número a &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/datatypes/Double2StringFilter.cpp" line="102"/>
         <source>set decimal digits to %1</source>
-        <translation type="unfinished">setear dígitos decimales a %1 </translation>
+        <translation type="obsolete">setear dígitos decimales a %1 </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="64"/>
         <source>XML reader error: </source>
         <comment>prefix for XML error messages</comment>
-        <translation type="unfinished">error de lector XML:</translation>
+        <translation type="obsolete">error de lector XML:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="65"/>
         <source> (loading failed)</source>
         <comment>postfix for XML error messages</comment>
-        <translation type="unfinished">(falló la carga)</translation>
+        <translation type="obsolete">(falló la carga)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="66"/>
         <source>XML reader warning: </source>
         <comment>prefix for XML warning messages</comment>
-        <translation type="unfinished">advertencia de lector XML:</translation>
+        <translation type="obsolete">advertencia de lector XML:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="82"/>
-        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="88"/>
         <source>line %1, column %2: </source>
-        <translation type="unfinished">línea %1, columna %2:</translation>
+        <translation type="obsolete">línea %1, columna %2:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="96"/>
-        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="104"/>
-        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="126"/>
-        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="136"/>
         <source>unexpected end of document</source>
-        <translation type="unfinished">final de documento inesperado</translation>
+        <translation type="obsolete">final de documento inesperado</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="830"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1753"/>
         <source>%1: copy %2</source>
-        <translation type="unfinished">%1: copiar %2</translation>
+        <translation type="obsolete">%1: copiar %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="366"/>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="396"/>
         <source>%1: set cell values</source>
-        <translation type="unfinished">%1: setear valores de celda</translation>
+        <translation type="obsolete">%1: setear valores de celda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="424"/>
         <source>%1: transpose</source>
-        <translation type="unfinished">%1: transponer</translation>
+        <translation type="obsolete">%1: transponer</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="470"/>
         <source>%1: mirror horizontally</source>
-        <translation type="unfinished">%1: reflejar horizontalmente</translation>
+        <translation type="obsolete">%1: reflejar horizontalmente</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="507"/>
         <source>%1: mirror vertically</source>
-        <translation type="unfinished">%1: reflejar verticalmente</translation>
+        <translation type="obsolete">%1: reflejar verticalmente</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.h" line="67"/>
         <source>ASCII table</source>
-        <translation type="unfinished">tabla ASCII</translation>
+        <translation type="obsolete">tabla ASCII</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="240"/>
-        <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="73"/>
         <source>%1: set the number of rows to %2</source>
-        <translation type="unfinished">%1: setar el número de filas a %2</translation>
+        <translation type="obsolete">%1: setar el número de filas a %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="319"/>
         <source>%1: clear all masks</source>
-        <translation type="unfinished">%1: limpiar todas las máscaras</translation>
+        <translation type="obsolete">%1: limpiar todas las máscaras</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="331"/>
         <source>%1: add column</source>
-        <translation type="unfinished">%1: agregar columna</translation>
+        <translation type="obsolete">%1: agregar columna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="745"/>
         <source>%1: set plot designation(s)</source>
-        <translation type="unfinished">%1: setear las designacion(es) del gráfico</translation>
+        <translation type="obsolete">%1: setear las designacion(es) del gráfico</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="790"/>
         <source>%1: normalize column(s)</source>
-        <translation type="unfinished">%1: normalizar la(s) columna(s) </translation>
+        <translation type="obsolete">%1: normalizar la(s) columna(s) </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="822"/>
         <source>%1: normalize selection</source>
-        <translation type="unfinished">%1: normalizar la selección</translation>
+        <translation type="obsolete">%1: normalizar la selección</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="920"/>
         <source>%1: clear selected cell(s)</source>
-        <translation type="unfinished">%1: Limpiar la(s) celda(s) seleccionada(s)</translation>
+        <translation type="obsolete">%1: Limpiar la(s) celda(s) seleccionada(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="128"/>
         <source>%1: move column %2 from position %3 to %4</source>
-        <translation type="unfinished">%1: mover columna %2 desde  la posición %3 a la %4</translation>
+        <translation type="obsolete">%1: mover columna %2 desde  la posición %3 a la %4</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/globals.cpp" line="160"/>
@@ -16045,24 +15851,20 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
 <context>
     <name>SciDAVisAbout</name>
     <message>
-        <location filename="../../libscidavis/src/SciDAVisAbout.ui" line="25"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogo</translation>
+        <translation type="obsolete">Dialogo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SciDAVisAbout.ui" line="49"/>
         <source>SciDAVis XX.XX.XX-betaXX</source>
-        <translation type="unfinished">SciDAVis XX.XX.XX-betaXX</translation>
+        <translation type="obsolete">SciDAVis XX.XX.XX-betaXX</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SciDAVisAbout.ui" line="67"/>
         <source>Released XXXX-XX-XX</source>
-        <translation type="unfinished">Liberado XXXX-XX-XX</translation>
+        <translation type="obsolete">Liberado XXXX-XX-XX</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SciDAVisAbout.ui" line="130"/>
         <source>Close</source>
-        <translation type="unfinished">Cerrar</translation>
+        <translation type="obsolete">Cerrar</translation>
     </message>
 </context>
 <context>
@@ -17696,21 +17498,18 @@ Do you want to insert cells?</source>
 <context>
     <name>TableModel</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableModel.cpp" line="101"/>
         <source>(masked)</source>
-        <translation type="unfinished">(enmascarado)</translation>
+        <translation type="obsolete">(enmascarado)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableModel.cpp" line="103"/>
         <source>invalid cell (ignored in all operations)</source>
         <comment>tooltip string for invalid rows</comment>
-        <translation type="unfinished">celda inválida (ignorada en todas las operaciones)</translation>
+        <translation type="obsolete">celda inválida (ignorada en todas las operaciones)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableModel.cpp" line="112"/>
         <source>-</source>
         <comment>string for invalid rows</comment>
-        <translation type="unfinished">-</translation>
+        <translation type="obsolete">-</translation>
     </message>
 </context>
 <context>
@@ -17810,213 +17609,167 @@ Do you want to insert cells?</source>
 <context>
     <name>TableView</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="173"/>
         <source>Ctrl+A</source>
         <comment>Table: select all</comment>
-        <translation type="unfinished">Ctrl+A</translation>
+        <translation type="obsolete">Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="241"/>
         <source>Show/hide control tabs</source>
-        <translation type="unfinished">Mostrar/ocultar las pestañas de control</translation>
+        <translation type="obsolete">Mostrar/ocultar las pestañas de control</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="245"/>
         <source>Numeric</source>
-        <translation type="unfinished">Numérico</translation>
+        <translation type="obsolete">Numérico</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="246"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="435"/>
         <source>Text</source>
-        <translation type="unfinished">Texto</translation>
+        <translation type="obsolete">Texto</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="247"/>
         <source>Month names</source>
-        <translation type="unfinished">Nombres de meses</translation>
+        <translation type="obsolete">Nombres de meses</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="248"/>
         <source>Day names</source>
-        <translation type="unfinished">Nombres de días</translation>
+        <translation type="obsolete">Nombres de días</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="249"/>
         <source>Date and time</source>
-        <translation type="unfinished">Fecha y hora</translation>
+        <translation type="obsolete">Fecha y hora</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="253"/>
         <source>years</source>
-        <translation type="unfinished">años</translation>
+        <translation type="obsolete">años</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="254"/>
         <source>months</source>
-        <translation type="unfinished">meses</translation>
+        <translation type="obsolete">meses</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="255"/>
         <source>days</source>
-        <translation type="unfinished">días</translation>
+        <translation type="obsolete">días</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="256"/>
         <source>hours</source>
-        <translation type="unfinished">horas</translation>
+        <translation type="obsolete">horas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="257"/>
         <source>minutes</source>
-        <translation type="unfinished">minutos</translation>
+        <translation type="obsolete">minutos</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="258"/>
         <source>seconds</source>
-        <translation type="unfinished">segundos</translation>
+        <translation type="obsolete">segundos</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="259"/>
         <source>milliseconds</source>
-        <translation type="unfinished">milisegundos</translation>
+        <translation type="obsolete">milisegundos</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="351"/>
         <source>Current column:
 Name: %1
 Position: %2</source>
-        <translation type="unfinished">Columna actual: Nombre %1 Posición: %2</translation>
+        <translation type="obsolete">Columna actual: Nombre %1 Posición: %2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="428"/>
         <source>Decimal</source>
-        <translation type="unfinished">Decimal</translation>
+        <translation type="obsolete">Decimal</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="429"/>
         <source>Scientific (e)</source>
-        <translation type="unfinished">Científico (e)</translation>
+        <translation type="obsolete">Científico (e)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="430"/>
         <source>Scientific (E)</source>
-        <translation type="unfinished">Científico (E)</translation>
+        <translation type="obsolete">Científico (E)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="438"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="444"/>
         <source>Number without leading zero</source>
-        <translation type="unfinished">Número sin destacar cero</translation>
+        <translation type="obsolete">Número sin destacar cero</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="439"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="445"/>
         <source>Number with leading zero</source>
-        <translation type="unfinished">número destacando el cero</translation>
+        <translation type="obsolete">número destacando el cero</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="440"/>
         <source>Abbreviated month name</source>
-        <translation type="unfinished">Nombre de mes abreviado</translation>
+        <translation type="obsolete">Nombre de mes abreviado</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="441"/>
         <source>Full month name</source>
-        <translation type="unfinished">Nombre de mes completo</translation>
+        <translation type="obsolete">Nombre de mes completo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="446"/>
         <source>Abbreviated day name</source>
-        <translation type="unfinished">Nombre de día abreviado</translation>
+        <translation type="obsolete">Nombre de día abreviado</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="447"/>
         <source>Full day name</source>
-        <translation type="unfinished">Nombre de día completo</translation>
+        <translation type="obsolete">Nombre de día completo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="500"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="573"/>
         <source>Predefined:</source>
-        <translation type="unfinished">Predefinido:</translation>
+        <translation type="obsolete">Predefinido:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="502"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="575"/>
         <source>Format:</source>
-        <translation type="unfinished">Formato:</translation>
+        <translation type="obsolete">Formato:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="514"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="584"/>
         <source>Selected column type:
 </source>
-        <translation type="unfinished">Tipo de columna seleccionado:
+        <translation type="obsolete">Tipo de columna seleccionado:
 </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="521"/>
         <source>Double precision
 floating point values
 </source>
-        <translation type="unfinished">Precisión doble
+        <translation type="obsolete">Precisión doble
 valores con punto flotante
 </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="525"/>
         <source>Text
 </source>
-        <translation type="unfinished">Texto
+        <translation type="obsolete">Texto
 </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="528"/>
         <source>Month names
 </source>
-        <translation type="unfinished">Nombres de meses
+        <translation type="obsolete">Nombres de meses
 </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="531"/>
         <source>Days of the week
 </source>
-        <translation type="unfinished">Días de la semana
+        <translation type="obsolete">Días de la semana
 </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="534"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="560"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="585"/>
         <source>Dates and/or times
 </source>
-        <translation type="unfinished">Horas y/o fechas
+        <translation type="obsolete">Horas y/o fechas
 </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="538"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="562"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="586"/>
         <source>Example: </source>
-        <translation type="unfinished">Ejemplo:</translation>
+        <translation type="obsolete">Ejemplo:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="545"/>
         <source>Hello world!
 </source>
-        <translation type="unfinished">Hola mundo!
+        <translation type="obsolete">Hola mundo!
 </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="431"/>
         <source>Automatic (e)</source>
-        <translation type="unfinished">Automático (e)</translation>
+        <translation type="obsolete">Automático (e)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="432"/>
         <source>Automatic (E)</source>
-        <translation type="unfinished">Automático (E)</translation>
+        <translation type="obsolete">Automático (E)</translation>
     </message>
 </context>
 <context>
@@ -20184,853 +19937,685 @@ valores con punto flotante
 <context>
     <name>future::Folder</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="113"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">elemento &apos;%1&apos; desconocido</translation>
+        <translation type="obsolete">elemento &apos;%1&apos; desconocido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="120"/>
         <source>no folder element found</source>
-        <translation type="unfinished">No se hallaron elementos de carpeta</translation>
+        <translation type="obsolete">No se hallaron elementos de carpeta</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="135"/>
         <source>Folder %1</source>
-        <translation type="unfinished">Carpeta %1</translation>
+        <translation type="obsolete">Carpeta %1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="146"/>
         <source>Column %1</source>
-        <translation type="unfinished">Columna %1</translation>
+        <translation type="obsolete">Columna %1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="171"/>
         <source>creation of aspect from element &apos;%1&apos; failed</source>
-        <translation type="unfinished">Falló la creación de aspecto desde el elemento &apos;%1&apos; </translation>
+        <translation type="obsolete">Falló la creación de aspecto desde el elemento &apos;%1&apos; </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="179"/>
         <source>no plugin to load element &apos;%1&apos; found</source>
-        <translation type="unfinished">No se encontró plugin para cargar elemento &apos;%1&apos;</translation>
+        <translation type="obsolete">No se encontró plugin para cargar elemento &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
     <name>future::Matrix</name>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="208"/>
         <source>%1: cut selected cell(s)</source>
-        <translation type="unfinished">%1: cortar las celda(s) seleccionadas</translation>
+        <translation type="obsolete">%1: cortar las celda(s) seleccionadas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="255"/>
         <source>%1: paste from clipboard</source>
-        <translation type="unfinished">%1: pegar desde el portapapeles</translation>
+        <translation type="obsolete">%1: pegar desde el portapapeles</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="443"/>
         <source>%1: clear selected cell(s)</source>
-        <translation type="unfinished">%1: limpiar la(s) celdas seleccionadas</translation>
+        <translation type="obsolete">%1: limpiar la(s) celdas seleccionadas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="536"/>
         <source>Cu&amp;t</source>
-        <translation type="unfinished">Cor&amp;tar</translation>
+        <translation type="obsolete">Cor&amp;tar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="539"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Copiar</translation>
+        <translation type="obsolete">&amp;Copiar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="542"/>
         <source>Past&amp;e</source>
-        <translation type="unfinished">P&amp;egar</translation>
+        <translation type="obsolete">P&amp;egar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="548"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
         <translatorcomment>limpiar selección</translatorcomment>
-        <translation type="unfinished">Limpia&amp;r</translation>
+        <translation type="obsolete">Limpia&amp;r</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="556"/>
         <source>Assign &amp;Formula</source>
-        <translation type="unfinished">Asignar &amp;Fórmula</translation>
+        <translation type="obsolete">Asignar &amp;Fórmula</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="564"/>
         <source>Recalculate</source>
-        <translation type="unfinished">Recalcular</translation>
+        <translation type="obsolete">Recalcular</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="580"/>
         <source>Select All</source>
-        <translation type="unfinished">Seleccionar todo</translation>
+        <translation type="obsolete">Seleccionar todo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="587"/>
         <source>Clear Matrix</source>
-        <translation type="unfinished">Limpiar Matriz</translation>
+        <translation type="obsolete">Limpiar Matriz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="594"/>
         <source>&amp;Go to Cell</source>
-        <translation type="unfinished">&amp;Ir a la Celda</translation>
+        <translation type="obsolete">&amp;Ir a la Celda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="614"/>
         <source>&amp;Dimensions</source>
         <comment>matrix size</comment>
         <translatorcomment>tamaño de la matriz</translatorcomment>
-        <translation type="unfinished">&amp;Dimensiones</translation>
+        <translation type="obsolete">&amp;Dimensiones</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="617"/>
         <source>Set &amp;Coordinates</source>
-        <translation type="unfinished">Setear &amp;Coordenadas</translation>
+        <translation type="obsolete">Setear &amp;Coordenadas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="620"/>
         <source>Set Display &amp;Format</source>
-        <translation type="unfinished">Setear &amp;Formato de la pantalla</translation>
+        <translation type="obsolete">Setear &amp;Formato de la pantalla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="627"/>
         <source>&amp;Insert Empty Columns</source>
-        <translation type="unfinished">&amp;Insertar Columnas Vacías</translation>
+        <translation type="obsolete">&amp;Insertar Columnas Vacías</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="634"/>
         <source>Remo&amp;ve Columns</source>
-        <translation type="unfinished">Remo&amp;ver Columnas</translation>
+        <translation type="obsolete">Remo&amp;ver Columnas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="641"/>
         <source>Clea&amp;r Columns</source>
-        <translation type="unfinished">Limpia&amp;r Columnas</translation>
+        <translation type="obsolete">Limpia&amp;r Columnas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="648"/>
         <source>&amp;Add Columns</source>
-        <translation type="unfinished">&amp;Agregar Columnas</translation>
+        <translation type="obsolete">&amp;Agregar Columnas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="656"/>
         <source>&amp;Insert Empty Rows</source>
-        <translation type="unfinished">&amp;Insertar Filas Vacías</translation>
+        <translation type="obsolete">&amp;Insertar Filas Vacías</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="663"/>
         <source>Remo&amp;ve Rows</source>
-        <translation type="unfinished">Remo&amp;ver Filas</translation>
+        <translation type="obsolete">Remo&amp;ver Filas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="670"/>
         <source>Clea&amp;r Rows</source>
-        <translation type="unfinished">Limpia&amp;r Filas</translation>
+        <translation type="obsolete">Limpia&amp;r Filas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="677"/>
         <source>&amp;Add Rows</source>
-        <translation type="unfinished">&amp;Agregar Filas</translation>
+        <translation type="obsolete">&amp;Agregar Filas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="750"/>
         <source>&amp;Matrix</source>
-        <translation type="unfinished">&amp;Matriz</translation>
+        <translation type="obsolete">&amp;Matriz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="816"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="820"/>
         <source>Go to Cell</source>
-        <translation type="unfinished">Ir a la Celda</translation>
+        <translation type="obsolete">Ir a la Celda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="816"/>
         <source>Enter column</source>
-        <translation type="unfinished">Insertar columna</translation>
+        <translation type="obsolete">Insertar columna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="820"/>
         <source>Enter row</source>
-        <translation type="unfinished">Insertar fila</translation>
+        <translation type="obsolete">Insertar fila</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="888"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="892"/>
         <source>Set Matrix Dimensions</source>
-        <translation type="unfinished">Setear Dimensiones de la Matriz</translation>
+        <translation type="obsolete">Setear Dimensiones de la Matriz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="888"/>
         <source>Enter number of columns</source>
-        <translation type="unfinished">Insertar número de columnas</translation>
+        <translation type="obsolete">Insertar número de columnas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="892"/>
         <source>Enter number of rows</source>
-        <translation type="unfinished">Insertar número de filas</translation>
+        <translation type="obsolete">Insertar número de filas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1143"/>
         <source>invalid row or column count</source>
-        <translation type="unfinished">conteo de fila o columna inválido</translation>
+        <translation type="obsolete">conteo de fila o columna inválido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1175"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">elemento &apos;%1&apos; desconocido</translation>
+        <translation type="obsolete">elemento &apos;%1&apos; desconocido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1184"/>
         <source>no matrix element found</source>
-        <translation type="unfinished">no se hallaron elementos de matriz</translation>
+        <translation type="obsolete">no se hallaron elementos de matriz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1197"/>
         <source>invalid or missing numeric format</source>
-        <translation type="unfinished">formato numérico invalido o perdido</translation>
+        <translation type="obsolete">formato numérico invalido o perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1206"/>
         <source>invalid or missing number of displayed digits</source>
-        <translation type="unfinished">número de digitos mostrados inválidos o perdidos</translation>
+        <translation type="obsolete">número de digitos mostrados inválidos o perdidos</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1225"/>
         <source>invalid x start value</source>
-        <translation type="unfinished">valor inicial de x inválido</translation>
+        <translation type="obsolete">valor inicial de x inválido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1233"/>
         <source>invalid x end value</source>
-        <translation type="unfinished">valor final de x inválido</translation>
+        <translation type="obsolete">valor final de x inválido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1241"/>
         <source>invalid y start value</source>
-        <translation type="unfinished">valor inicial de y inválido</translation>
+        <translation type="obsolete">valor inicial de y inválido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1249"/>
         <source>invalid y end value</source>
-        <translation type="unfinished">valor final de y inválido</translation>
+        <translation type="obsolete">valor final de y inválido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1272"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1325"/>
         <source>invalid or missing row index</source>
-        <translation type="unfinished">índice de fila invalido ó perdido</translation>
+        <translation type="obsolete">índice de fila invalido ó perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1279"/>
         <source>invalid row height</source>
-        <translation type="unfinished">altura de fila inválida</translation>
+        <translation type="obsolete">altura de fila inválida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1296"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1331"/>
         <source>invalid or missing column index</source>
-        <translation type="unfinished">índice de columna inválido ó perdido</translation>
+        <translation type="obsolete">índice de columna inválido ó perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1303"/>
         <source>invalid column width</source>
-        <translation type="unfinished">ancho de columna inválido</translation>
+        <translation type="obsolete">ancho de columna inválido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1339"/>
         <source>invalid cell value</source>
-        <translation type="unfinished">valor de celda inválido</translation>
+        <translation type="obsolete">valor de celda inválido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1370"/>
         <source>Hide Controls</source>
-        <translation type="unfinished">Ocultar controles</translation>
+        <translation type="obsolete">Ocultar controles</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1372"/>
         <source>Show Controls</source>
-        <translation type="unfinished">Mostrar Controles</translation>
+        <translation type="obsolete">Mostrar Controles</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1449"/>
         <source>Matrix</source>
-        <translation type="unfinished">Matriz</translation>
+        <translation type="obsolete">Matriz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="557"/>
         <source>Alt+Q</source>
-        <translation type="unfinished">Alt+Q</translation>
+        <translation type="obsolete">Alt+Q</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="565"/>
         <source>Ctrl+Return</source>
-        <translation type="unfinished">Ctrl+Return</translation>
+        <translation type="obsolete">Ctrl+Return</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="573"/>
         <source>F12</source>
-        <translation type="unfinished">F12</translation>
+        <translation type="obsolete">F12</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="595"/>
         <source>Ctrl+Alt+G</source>
-        <translation type="unfinished">Ctrl+Alt+G</translation>
+        <translation type="obsolete">Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="599"/>
         <source>&amp;Transpose</source>
-        <translation type="unfinished">&amp;Transponer</translation>
+        <translation type="obsolete">&amp;Transponer</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="602"/>
         <source>Mirror &amp;Horizontally</source>
-        <translation type="unfinished">Reflejar &amp;Horizontalmente</translation>
+        <translation type="obsolete">Reflejar &amp;Horizontalmente</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="605"/>
         <source>Mirror &amp;Vertically</source>
-        <translation type="unfinished">Reflejar &amp;Verticalmente</translation>
+        <translation type="obsolete">Reflejar &amp;Verticalmente</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="608"/>
         <source>&amp;Import Image</source>
         <comment>import image as matrix</comment>
         <translatorcomment>importar imagen como matriz</translatorcomment>
-        <translation type="unfinished">&amp;Importar imagen</translation>
+        <translation type="obsolete">&amp;Importar imagen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="611"/>
         <source>&amp;Duplicate</source>
         <comment>duplicate matrix</comment>
         <translatorcomment>duplicar matriz</translatorcomment>
-        <translation type="unfinished">&amp;Duplicar</translation>
+        <translation type="obsolete">&amp;Duplicar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="902"/>
         <source>Images</source>
-        <translation type="unfinished">Imágenes</translation>
+        <translation type="obsolete">Imágenes</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="910"/>
         <source>Import image from file</source>
-        <translation type="unfinished">Importar imagen desde archivo</translation>
+        <translation type="obsolete">Importar imagen desde archivo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="926"/>
         <source>Error importing image</source>
-        <translation type="unfinished">Error al importar imagen</translation>
+        <translation type="obsolete">Error al importar imagen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="926"/>
         <source>Import of image &apos;%1&apos; failed</source>
-        <translation type="unfinished">Falló al importar la imagen &apos;%1&apos;</translation>
+        <translation type="obsolete">Falló al importar la imagen &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1425"/>
         <source>%1: apply formula to selection</source>
-        <translation type="unfinished">%1: aplicar fórmula a selección</translation>
+        <translation type="obsolete">%1: aplicar fórmula a selección</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1461"/>
         <source>SciDAVis</source>
-        <translation type="unfinished">SciDAVis</translation>
+        <translation type="obsolete">SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1461"/>
         <source>Import image...</source>
-        <translation type="unfinished">Importar imagen...</translation>
+        <translation type="obsolete">Importar imagen...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1464"/>
         <source>Matrix %1</source>
-        <translation type="unfinished">Matriz %1</translation>
+        <translation type="obsolete">Matriz %1</translation>
     </message>
 </context>
 <context>
     <name>future::SortDialog</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="44"/>
         <source>Sorting Options</source>
-        <translation type="unfinished">Opciones de Ordenamiento</translation>
+        <translation type="obsolete">Opciones de Ordenamiento</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="52"/>
         <source>Sort columns</source>
-        <translation type="unfinished">Ordenar columnas</translation>
+        <translation type="obsolete">Ordenar columnas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="54"/>
         <source>Separately</source>
-        <translation type="unfinished">Separadamente</translation>
+        <translation type="obsolete">Separadamente</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="55"/>
         <source>Together</source>
-        <translation type="unfinished">Juntas</translation>
+        <translation type="obsolete">Juntas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="59"/>
         <source>Order</source>
-        <translation type="unfinished">Orden</translation>
+        <translation type="obsolete">Orden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="61"/>
         <source>Ascending</source>
-        <translation type="unfinished">Ascendente</translation>
+        <translation type="obsolete">Ascendente</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="62"/>
         <source>Descending</source>
-        <translation type="unfinished">Descendente</translation>
+        <translation type="obsolete">Descendente</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="65"/>
         <source>Leading column</source>
-        <translation type="unfinished">Columna principal</translation>
+        <translation type="obsolete">Columna principal</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="70"/>
         <source>&amp;Sort</source>
-        <translation type="unfinished">&amp;Ordenar</translation>
+        <translation type="obsolete">&amp;Ordenar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="74"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Cerrar</translation>
+        <translation type="obsolete">&amp;Cerrar</translation>
     </message>
 </context>
 <context>
     <name>future::Table</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="355"/>
         <source>%1: cut selected cell(s)</source>
-        <translation type="unfinished">%1: cortar las celda(s) seleccionada(s)</translation>
+        <translation type="obsolete">%1: cortar las celda(s) seleccionada(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="417"/>
         <source>%1: paste from clipboard</source>
-        <translation type="unfinished">%1: pegar desde el portapapeles</translation>
+        <translation type="obsolete">%1: pegar desde el portapapeles</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="508"/>
         <source>%1: mask selected cell(s)</source>
-        <translation type="unfinished">%1: enmascarar las celda(s) seleccionada(s)</translation>
+        <translation type="obsolete">%1: enmascarar las celda(s) seleccionada(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="528"/>
         <source>%1: unmask selected cell(s)</source>
-        <translation type="unfinished">%1: desenmascarar la(s) celdas seleccionada(s)</translation>
+        <translation type="obsolete">%1: desenmascarar la(s) celdas seleccionada(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="552"/>
         <source>%1: apply formula to selection</source>
-        <translation type="unfinished">%1: aplicar fórmula a selección</translation>
+        <translation type="obsolete">%1: aplicar fórmula a selección</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="568"/>
         <source>%1: fill cells with row numbers</source>
-        <translation type="unfinished">%1: llenar las celdas con los números de las filas</translation>
+        <translation type="obsolete">%1: llenar las celdas con los números de las filas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="611"/>
         <source>%1: fill cells with random values</source>
-        <translation type="unfinished">%1: llenar las celdas con valores aleatorios</translation>
+        <translation type="obsolete">%1: llenar las celdas con valores aleatorios</translation>
     </message>
     <message>
         <source>%1: clear selected cell(s)</source>
         <translation type="obsolete">%1: limpiar la(s) celda(s) seleccionada(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="967"/>
         <source>&amp;Table</source>
-        <translation type="unfinished">&amp;Tabla</translation>
+        <translation type="obsolete">&amp;Tabla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="969"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1622"/>
         <source>S&amp;et Column(s) As</source>
-        <translation type="unfinished">S&amp;etear Columna(s) Como</translation>
+        <translation type="obsolete">S&amp;etear Columna(s) Como</translation>
     </message>
     <message>
         <source>Fi&amp;ll Selection withi</source>
         <translation type="obsolete">&amp;Llenar selección con</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="981"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1590"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1634"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1698"/>
         <source>Fi&amp;ll Selection with</source>
-        <translation type="unfinished">&amp;Llenar la selección con</translation>
+        <translation type="obsolete">&amp;Llenar la selección con</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1050"/>
         <source>Cu&amp;t</source>
-        <translation type="unfinished">Cor&amp;tar</translation>
+        <translation type="obsolete">Cor&amp;tar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1053"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Copiar</translation>
+        <translation type="obsolete">&amp;Copiar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1056"/>
         <source>Past&amp;e</source>
-        <translation type="unfinished">P&amp;egar</translation>
+        <translation type="obsolete">P&amp;egar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1060"/>
         <source>&amp;Mask</source>
         <comment>mask selection</comment>
         <translatorcomment>selección de la máscara</translatorcomment>
-        <translation type="unfinished">En&amp;mascarar</translation>
+        <translation type="obsolete">En&amp;mascarar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1063"/>
         <source>&amp;Unmask</source>
         <comment>unmask selection</comment>
         <translatorcomment>selección de desenmascarar</translatorcomment>
-        <translation type="unfinished">&amp;Desenmasracar</translation>
+        <translation type="obsolete">&amp;Desenmasracar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1070"/>
         <source>Assign &amp;Formula</source>
-        <translation type="unfinished">Asignar &amp;Fórmula</translation>
+        <translation type="obsolete">Asignar &amp;Fórmula</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1071"/>
         <source>Alt+Q</source>
-        <translation type="unfinished">Alt+Q</translation>
+        <translation type="obsolete">Alt+Q</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1078"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
         <translatorcomment>limpiar selección</translatorcomment>
-        <translation type="unfinished">Limpia&amp;r</translation>
+        <translation type="obsolete">Limpia&amp;r</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1085"/>
         <source>Recalculate</source>
-        <translation type="unfinished">Recalcular</translation>
+        <translation type="obsolete">Recalcular</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1086"/>
         <source>Ctrl+Return</source>
-        <translation type="unfinished">Ctrl+Return</translation>
+        <translation type="obsolete">Ctrl+Return</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1090"/>
         <source>Row Numbers</source>
-        <translation type="unfinished">Números de filas </translation>
+        <translation type="obsolete">Números de filas </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1093"/>
         <source>Random Values</source>
-        <translation type="unfinished">Valores Aleatorios</translation>
+        <translation type="obsolete">Valores Aleatorios</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1108"/>
         <source>F12</source>
-        <translation type="unfinished">F12</translation>
+        <translation type="obsolete">F12</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1112"/>
         <source>Formula Edit Mode</source>
-        <translation type="unfinished">Modo de Edición de Fórmula</translation>
+        <translation type="obsolete">Modo de Edición de Fórmula</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1119"/>
         <source>Select All</source>
-        <translation type="unfinished">Seleccionar Todo</translation>
+        <translation type="obsolete">Seleccionar Todo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1126"/>
         <source>&amp;Add Column</source>
-        <translation type="unfinished">&amp;Agregar Columna</translation>
+        <translation type="obsolete">&amp;Agregar Columna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1127"/>
         <source>append a new column to the table</source>
-        <translation type="unfinished">agregar una nueva columna a la tabla</translation>
+        <translation type="obsolete">agregar una nueva columna a la tabla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1134"/>
         <source>Clear Table</source>
-        <translation type="unfinished">Limpiar Tabla</translation>
+        <translation type="obsolete">Limpiar Tabla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1141"/>
         <source>Export to TeX...</source>
-        <translation type="unfinished">Exportar a TeX...</translation>
+        <translation type="obsolete">Exportar a TeX...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1147"/>
         <source>Clear Masks</source>
-        <translation type="unfinished">Limpiar Máscaras</translation>
+        <translation type="obsolete">Limpiar Máscaras</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1154"/>
         <source>&amp;Sort Table</source>
-        <translation type="unfinished">&amp;Ordenar Tabla</translation>
+        <translation type="obsolete">&amp;Ordenar Tabla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1161"/>
         <source>&amp;Go to Cell</source>
-        <translation type="unfinished">&amp;Ir a la celda</translation>
+        <translation type="obsolete">&amp;Ir a la celda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1162"/>
         <source>Ctrl+Alt+G</source>
-        <translation type="unfinished">Ctrl+Alt+G</translation>
+        <translation type="obsolete">Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1166"/>
         <source>&amp;Dimensions</source>
         <comment>table size</comment>
         <translatorcomment>tamaño de la tabla</translatorcomment>
-        <translation type="unfinished">&amp;Dimensiones</translation>
+        <translation type="obsolete">&amp;Dimensiones</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1167"/>
         <source>change the table size</source>
-        <translation type="unfinished">cambiar el tamaño de la tabla</translation>
+        <translation type="obsolete">cambiar el tamaño de la tabla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1174"/>
         <source>&amp;Insert Empty Columns</source>
-        <translation type="unfinished">&amp;Insertar columna(s) vacía(s)</translation>
+        <translation type="obsolete">&amp;Insertar columna(s) vacía(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1181"/>
         <source>Remo&amp;ve Columns</source>
-        <translation type="unfinished">Remo&amp;ver Columnas</translation>
+        <translation type="obsolete">Remo&amp;ver Columnas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1188"/>
         <source>Clea&amp;r Columns</source>
-        <translation type="unfinished">Limpia&amp;r Columnas</translation>
+        <translation type="obsolete">Limpia&amp;r Columnas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1195"/>
         <source>&amp;Add Columns</source>
-        <translation type="unfinished">&amp;Agregar Columnas</translation>
+        <translation type="obsolete">&amp;Agregar Columnas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1199"/>
         <source>X</source>
         <comment>plot designation</comment>
         <translatorcomment>designación del dibujo</translatorcomment>
-        <translation type="unfinished">X</translation>
+        <translation type="obsolete">X</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1202"/>
         <source>Y</source>
         <comment>plot designation</comment>
         <translatorcomment>designación del dibujo</translatorcomment>
-        <translation type="unfinished">Y</translation>
+        <translation type="obsolete">Y</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1205"/>
         <source>Z</source>
         <comment>plot designation</comment>
         <translatorcomment>designación del dibujo</translatorcomment>
-        <translation type="unfinished">Z</translation>
+        <translation type="obsolete">Z</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1211"/>
         <source>X Error</source>
         <comment>plot designation</comment>
         <translatorcomment>designación de dibujo</translatorcomment>
-        <translation type="unfinished">Error en X</translation>
+        <translation type="obsolete">Error en X</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1218"/>
         <source>Y Error</source>
         <comment>plot designation</comment>
         <translatorcomment>designación de dibujo</translatorcomment>
-        <translation type="unfinished">Error de Y</translation>
+        <translation type="obsolete">Error de Y</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1222"/>
         <source>None</source>
         <comment>plot designation</comment>
         <translatorcomment>designación de dibujo</translatorcomment>
-        <translation type="unfinished">Ninguno</translation>
+        <translation type="obsolete">Ninguno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1228"/>
         <source>&amp;Normalize Columns</source>
-        <translation type="unfinished">&amp;Normalizar la(s) Columna(s) </translation>
+        <translation type="obsolete">&amp;Normalizar la(s) Columna(s) </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1235"/>
         <source>&amp;Normalize Selection</source>
-        <translation type="unfinished">&amp;Normalizar la Selección</translation>
+        <translation type="obsolete">&amp;Normalizar la Selección</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1242"/>
         <source>&amp;Sort Columns</source>
-        <translation type="unfinished">Ordenar Columna&amp;s</translation>
+        <translation type="obsolete">Ordenar Columna&amp;s</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1246"/>
         <source>Column Statisti&amp;cs</source>
-        <translation type="unfinished">Estadísti&amp;ca de Columna</translation>
+        <translation type="obsolete">Estadísti&amp;ca de Columna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1247"/>
         <source>statistics on columns</source>
-        <translation type="unfinished">estadística sobre las columnas</translation>
+        <translation type="obsolete">estadística sobre las columnas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1253"/>
         <source>Change &amp;Type &amp;&amp; Format</source>
-        <translation type="unfinished">Cambiar &amp;Tipo y Formato</translation>
+        <translation type="obsolete">Cambiar &amp;Tipo y Formato</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1254"/>
         <source>Ctrl+Alt+O</source>
-        <translation type="unfinished">Ctrl+Alt+O</translation>
+        <translation type="obsolete">Ctrl+Alt+O</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1261"/>
         <source>Edit Column &amp;Description</source>
-        <translation type="unfinished">Editar &amp;Descripción de Columna</translation>
+        <translation type="obsolete">Editar &amp;Descripción de Columna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1269"/>
         <source>&amp;Insert Empty Rows</source>
-        <translation type="unfinished">&amp;Insertar Filas Vacías</translation>
+        <translation type="obsolete">&amp;Insertar Filas Vacías</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1276"/>
         <source>Remo&amp;ve Rows</source>
-        <translation type="unfinished">Remo&amp;ver Filas</translation>
+        <translation type="obsolete">Remo&amp;ver Filas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1283"/>
         <source>Clea&amp;r Rows</source>
-        <translation type="unfinished">Limpia&amp;r Filas</translation>
+        <translation type="obsolete">Limpia&amp;r Filas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1290"/>
         <source>&amp;Add Rows</source>
-        <translation type="unfinished">&amp;Agregar Filas</translation>
+        <translation type="obsolete">&amp;Agregar Filas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1294"/>
         <source>Row Statisti&amp;cs</source>
-        <translation type="unfinished">Estadísti&amp;ca de Fila</translation>
+        <translation type="obsolete">Estadísti&amp;ca de Fila</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1295"/>
         <source>statistics on rows</source>
-        <translation type="unfinished">estadística sobre filas</translation>
+        <translation type="obsolete">estadística sobre filas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1500"/>
         <source>TeX Export Error</source>
-        <translation type="unfinished">Error de Exportación TeX</translation>
+        <translation type="obsolete">Error de Exportación TeX</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1501"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation type="unfinished">No se pudo escribir en el archivo &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;¡Por favor, verifique que tiene permiso de escritura!</translation>
+        <translation type="obsolete">No se pudo escribir en el archivo &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;¡Por favor, verifique que tiene permiso de escritura!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1713"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1717"/>
         <source>Go to Cell</source>
-        <translation type="unfinished">Ir a la celda</translation>
+        <translation type="obsolete">Ir a la celda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1713"/>
         <source>Enter column</source>
-        <translation type="unfinished">Insertar columna</translation>
+        <translation type="obsolete">Insertar columna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1717"/>
         <source>Enter row</source>
-        <translation type="unfinished">Insertar fila</translation>
+        <translation type="obsolete">Insertar fila</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1729"/>
         <source>Set Table Dimensions</source>
-        <translation type="unfinished">Setear Dimensiones de Tabla</translation>
+        <translation type="obsolete">Setear Dimensiones de Tabla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1744"/>
         <source>%1: move column %2 from position %3 to %4.</source>
-        <translation type="unfinished">%1: mover columna %2 desde  la posición %3 a la %4.</translation>
+        <translation type="obsolete">%1: mover columna %2 desde  la posición %3 a la %4.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1879"/>
         <source>%1: sort column(s)</source>
-        <translation type="unfinished">%1: Ordenar columna(s)</translation>
+        <translation type="obsolete">%1: Ordenar columna(s)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2258"/>
         <source>invalid row or column count</source>
-        <translation type="unfinished">conteo de fila o columna inválido</translation>
+        <translation type="obsolete">conteo de fila o columna inválido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2278"/>
         <source>Column %1</source>
-        <translation type="unfinished">Columna %1</translation>
+        <translation type="obsolete">Columna %1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2294"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">elemento &apos;%1&apos; desconocido</translation>
+        <translation type="obsolete">elemento &apos;%1&apos; desconocido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2300"/>
         <source>columns attribute and number of read columns do not match</source>
-        <translation type="unfinished">el atributo de la columna y número de columnas leídas no son iguales</translation>
+        <translation type="obsolete">el atributo de la columna y número de columnas leídas no son iguales</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2303"/>
         <source>no table element found</source>
-        <translation type="unfinished">No se hallaron elementos de tabla</translation>
+        <translation type="obsolete">No se hallaron elementos de tabla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2314"/>
         <source>Hide Comments</source>
-        <translation type="unfinished">Ocultar Comentarios</translation>
+        <translation type="obsolete">Ocultar Comentarios</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2316"/>
         <source>Show Comments</source>
-        <translation type="unfinished">Mostrar Comentarios</translation>
+        <translation type="obsolete">Mostrar Comentarios</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2320"/>
         <source>Hide Controls</source>
-        <translation type="unfinished">Ocultar Controles</translation>
+        <translation type="obsolete">Ocultar Controles</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2322"/>
         <source>Show Controls</source>
-        <translation type="unfinished">Mostrar Controles</translation>
+        <translation type="obsolete">Mostrar Controles</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2333"/>
         <source>invalid or missing column index</source>
-        <translation type="unfinished">índice de columna invalido ó perdido</translation>
+        <translation type="obsolete">índice de columna invalido ó perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2340"/>
         <source>invalid column width</source>
-        <translation type="unfinished">ancho de columna inválido</translation>
+        <translation type="obsolete">ancho de columna inválido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2377"/>
         <source>Table</source>
-        <translation type="unfinished">Tabla</translation>
+        <translation type="obsolete">Tabla</translation>
     </message>
 </context>
 <context>

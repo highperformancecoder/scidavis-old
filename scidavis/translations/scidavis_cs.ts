@@ -5,27 +5,27 @@
     <name>AbstractAspect</name>
     <message>
         <source>%1: remove %2.</source>
-        <translation type="unfinished">%1: odstranit %2.</translation>
+        <translation type="obsolete">%1: odstranit %2.</translation>
     </message>
     <message>
         <source>Intended name &quot;%1&quot; diverted to &quot;%2&quot; in order to avoid name collision.</source>
-        <translation type="unfinished">Zamýšlený název &quot;%1&quot; se změní na &quot;%2&quot;, z důvodu vyhnutí se střetu názvů.</translation>
+        <translation type="obsolete">Zamýšlený název &quot;%1&quot; se změní na &quot;%2&quot;, z důvodu vyhnutí se střetu názvů.</translation>
     </message>
     <message>
         <source>%1: remove all children.</source>
-        <translation type="unfinished">%1: odstranit všechny potomky.</translation>
+        <translation type="obsolete">%1: odstranit všechny potomky.</translation>
     </message>
     <message>
         <source>%1: move %2 to %3.</source>
-        <translation type="unfinished">%1: přesunout %2 do %3.</translation>
+        <translation type="obsolete">%1: přesunout %2 do %3.</translation>
     </message>
     <message>
         <source>Renaming &quot;%1&quot; to &quot;%2&quot; in order to avoid name collision.</source>
-        <translation type="unfinished">&quot;%1&quot; se přejmenovává na &quot;%2&quot;, z důvodu vyhnutí se střetu názvů.</translation>
+        <translation type="obsolete">&quot;%1&quot; se přejmenovává na &quot;%2&quot;, z důvodu vyhnutí se střetu názvů.</translation>
     </message>
     <message>
         <source>aspect name missing or empty</source>
-        <translation type="unfinished">Název aspektu chybí, nebo je prázdný</translation>
+        <translation type="obsolete">Název aspektu chybí, nebo je prázdný</translation>
     </message>
     <message>
         <source> (non-critical)</source>
@@ -33,11 +33,11 @@
     </message>
     <message>
         <source>%1: add %2.</source>
-        <translation type="unfinished">%1: přidat %2.</translation>
+        <translation type="obsolete">%1: přidat %2.</translation>
     </message>
     <message>
         <source>Invalid creation time for &apos;%1&apos;. Using current time.</source>
-        <translation type="unfinished">Neplatná doba vytvoření pro &apos;%1&apos;. Místo ní se používá současný čas.</translation>
+        <translation type="obsolete">Neplatná doba vytvoření pro &apos;%1&apos;. Místo ní se používá současný čas.</translation>
     </message>
     <message>
         <source>XML read error: </source>
@@ -45,51 +45,70 @@
     </message>
     <message>
         <source>%1: insert %2 at position %3.</source>
-        <translation type="unfinished">%1: vložit %2 v poloze %3.</translation>
+        <translation type="obsolete">%1: vložit %2 v poloze %3.</translation>
     </message>
     <message>
         <source>XML read error: </source>
         <comment>prefix for XML error messages</comment>
-        <translation type="unfinished">Chyba při čtení XML dat:</translation>
+        <translation type="obsolete">Chyba při čtení XML dat:</translation>
     </message>
     <message>
         <source> (non-critical)</source>
         <comment>postfix for XML error messages</comment>
-        <translation type="unfinished">(nekritické)</translation>
-    </message>
-    <message>
-        <source>Tabs and line breaks in object names are currently not supported. They have been removed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">(nekritické)</translation>
     </message>
 </context>
 <context>
     <name>AbstractPart</name>
     <message>
         <source>&amp;Restore</source>
-        <translation type="unfinished">&amp;Obnovit</translation>
+        <translation type="obsolete">&amp;Obnovit</translation>
     </message>
     <message>
         <source>Mi&amp;nimize</source>
-        <translation type="unfinished">&amp;Zmenšit</translation>
+        <translation type="obsolete">&amp;Zmenšit</translation>
     </message>
     <message>
         <source>Ma&amp;ximize</source>
-        <translation type="unfinished">Z&amp;většit</translation>
+        <translation type="obsolete">Z&amp;většit</translation>
     </message>
 </context>
 <context>
     <name>AbstractSimpleFilter</name>
     <message>
         <source>no simple filter element found</source>
-        <translation type="unfinished">Nenalezen žádný prvek typu Jednoduchý filtr</translation>
+        <translation type="obsolete">Nenalezen žádný prvek typu Jednoduchý filtr</translation>
     </message>
     <message>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">neznámý prvek: &apos;%1&apos;</translation>
+        <translation type="obsolete">neznámý prvek: &apos;%1&apos;</translation>
     </message>
     <message>
         <source>incompatible filter type</source>
-        <translation type="unfinished">neslučitelný typ filtru</translation>
+        <translation type="obsolete">neslučitelný typ filtru</translation>
+    </message>
+</context>
+<context>
+    <name>Application</name>
+    <message>
+        <source>Error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> sending event </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> to object </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error &lt;unknown&gt; sending event</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2760,7 +2779,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     <name>AsciiTableImportFilter</name>
     <message>
         <source>Table</source>
-        <translation type="unfinished">Tabulka</translation>
+        <translation type="obsolete">Tabulka</translation>
     </message>
 </context>
 <context>
@@ -3291,58 +3310,58 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     <name>Column</name>
     <message>
         <source>column plot designation invalid</source>
-        <translation type="unfinished">Přiřazení sloupce k nákresu je neplatné</translation>
+        <translation type="obsolete">Přiřazení sloupce k nákresu je neplatné</translation>
     </message>
     <message>
         <source>column mode invalid</source>
-        <translation type="unfinished">Režim sloupce je neplatný</translation>
+        <translation type="obsolete">Režim sloupce je neplatný</translation>
     </message>
     <message>
         <source>column type invalid</source>
-        <translation type="unfinished">Typ sloupce je neplatný</translation>
+        <translation type="obsolete">Typ sloupce je neplatný</translation>
     </message>
     <message>
         <source>invalid or missing start or end row</source>
-        <translation type="unfinished">Neplatný nebo chybějící začátek nebo konec řádku</translation>
+        <translation type="obsolete">Neplatný nebo chybějící začátek nebo konec řádku</translation>
     </message>
     <message>
         <source>invalid or missing row type</source>
-        <translation type="unfinished">Neplatný nebo chybějící typ řádku</translation>
+        <translation type="obsolete">Neplatný nebo chybějící typ řádku</translation>
     </message>
     <message>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">Neznámý prvek: &apos;%1&apos;</translation>
+        <translation type="obsolete">Neznámý prvek: &apos;%1&apos;</translation>
     </message>
     <message>
         <source>no column element found</source>
-        <translation type="unfinished">Ke sloupci nebyl nalezen žádný prvek</translation>
+        <translation type="obsolete">Ke sloupci nebyl nalezen žádný prvek</translation>
     </message>
     <message>
         <source>column type or mode invalid</source>
-        <translation type="unfinished">Typ sloupce nebo režim je neplatný</translation>
+        <translation type="obsolete">Typ sloupce nebo režim je neplatný</translation>
     </message>
     <message>
         <source>invalid row value</source>
-        <translation type="unfinished">Neplatný obsah řádku</translation>
+        <translation type="obsolete">Neplatný obsah řádku</translation>
     </message>
     <message>
         <source>invalid or missing row index</source>
-        <translation type="unfinished">Neplatný nebo chybějící index řádku</translation>
+        <translation type="obsolete">Neplatný nebo chybějící index řádku</translation>
     </message>
     <message>
         <source>column mode missing</source>
-        <translation type="unfinished">Chybí režim sloupce</translation>
+        <translation type="obsolete">Chybí režim sloupce</translation>
     </message>
     <message>
         <source>column type missing</source>
-        <translation type="unfinished">Chybí typ sloupce</translation>
+        <translation type="obsolete">Chybí typ sloupce</translation>
     </message>
 </context>
 <context>
     <name>ColumnStringIO</name>
     <message>
         <source>as string</source>
-        <translation type="unfinished">Jako řetězec</translation>
+        <translation type="obsolete">Jako řetězec</translation>
     </message>
 </context>
 <context>
@@ -3870,42 +3889,42 @@ Dají se použít následující zvláštní kódy:
     <name>ControlTabs</name>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Přidat</translation>
+        <translation type="obsolete">Přidat</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation type="obsolete">Typ</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Název:</translation>
+        <translation type="obsolete">Název:</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Typ:</translation>
+        <translation type="obsolete">Typ:</translation>
     </message>
     <message>
         <source>since</source>
-        <translation type="unfinished">od</translation>
+        <translation type="obsolete">od</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použij nový typ a nový formát na všechny vybrané sloupce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použij nový typ a nový formát na všechny vybrané sloupce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Decimal Digits:</source>
-        <translation type="unfinished">Desetinná místa:</translation>
+        <translation type="obsolete">Desetinná místa:</translation>
     </message>
     <message>
         <source>Control Tabs</source>
-        <translation type="unfinished">Ovládací záložky</translation>
+        <translation type="obsolete">Ovládací záložky</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3913,40 +3932,40 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Insert the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;￼&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Vlož funkci do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;￼&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Vlož funkci do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Appl&amp;y</source>
-        <translation type="unfinished">&amp;Použít</translation>
+        <translation type="obsolete">&amp;Použít</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber funkci pro vložení do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber funkci pro vložení do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select the column type&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber typ sloupce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber typ sloupce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished">Poznámka:</translation>
+        <translation type="obsolete">Poznámka:</translation>
     </message>
     <message>
         <source>Formula:</source>
-        <translation type="unfinished">Vzorec:</translation>
+        <translation type="obsolete">Vzorec:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použij vzorec na všechny vybrané buňky.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -3956,59 +3975,59 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informace o vybraném typu a formátu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informace o vybraném typu a formátu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>go to next column</source>
-        <translation type="unfinished">jít na další sloupec</translation>
+        <translation type="obsolete">jít na další sloupec</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vlož odkaz na sloupec do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vlož odkaz na sloupec do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Popis</translation>
+        <translation type="obsolete">Popis</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zadej počet zobrazených desetinných míst.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zadej počet zobrazených desetinných míst.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber formát zobrazení.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber formát zobrazení.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber odkaz na sloupec pro vložení do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber odkaz na sloupec pro vložení do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Numbers are</source>
-        <translation type="unfinished">Čísla jsou</translation>
+        <translation type="obsolete">Čísla jsou</translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation type="unfinished">Formát:</translation>
+        <translation type="obsolete">Formát:</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Vzorec</translation>
+        <translation type="obsolete">Vzorec</translation>
     </message>
     <message>
         <source>go to previous column</source>
-        <translation type="unfinished">jít na předchozí sloupec</translation>
+        <translation type="obsolete">jít na předchozí sloupec</translation>
     </message>
 </context>
 <context>
@@ -4334,22 +4353,22 @@ p, li { white-space: pre-wrap; }
     <name>DimensionsDialog</name>
     <message>
         <source>Rows</source>
-        <translation type="unfinished">Řádky</translation>
+        <translation type="obsolete">Řádky</translation>
     </message>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation type="obsolete">Dialog</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished">Sloupce</translation>
+        <translation type="obsolete">Sloupce</translation>
     </message>
 </context>
 <context>
     <name>Double2StringFilter</name>
     <message>
         <source>missing or invalid format attribute(s)</source>
-        <translation type="unfinished">chybějící nebo neplatný formát atributů</translation>
+        <translation type="obsolete">chybějící nebo neplatný formát atributů</translation>
     </message>
 </context>
 <context>
@@ -5577,7 +5596,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished">F</translation>
+        <translation type="obsolete">F</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
@@ -6934,129 +6953,129 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     <name>MatrixControlTabs</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Hinzufügen</translation>
+        <translation type="obsolete">Hinzufügen</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použij nový typ a nový formát na všechny vybrané sloupce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použij nový typ a nový formát na všechny vybrané sloupce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Decimal Digits:</source>
-        <translation type="unfinished">Desetinná místa:</translation>
+        <translation type="obsolete">Desetinná místa:</translation>
     </message>
     <message>
         <source>Control Tabs</source>
-        <translation type="unfinished">Ovládací záložky</translation>
+        <translation type="obsolete">Ovládací záložky</translation>
     </message>
     <message>
         <source>First column X =</source>
-        <translation type="unfinished">První sloupec hodnota X =</translation>
+        <translation type="obsolete">První sloupec hodnota X =</translation>
     </message>
     <message>
         <source>Last column X =</source>
-        <translation type="unfinished">Poslední sloupec hodnota X =</translation>
+        <translation type="obsolete">Poslední sloupec hodnota X =</translation>
     </message>
     <message>
         <source>Appl&amp;y</source>
-        <translation type="unfinished">&amp;Použít</translation>
+        <translation type="obsolete">&amp;Použít</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber funkci pro vložení do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber funkci pro vložení do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished">Formát</translation>
+        <translation type="obsolete">Formát</translation>
     </message>
     <message>
         <source>First row Y =</source>
-        <translation type="unfinished">První řádek hodnota X =</translation>
+        <translation type="obsolete">První řádek hodnota X =</translation>
     </message>
     <message>
         <source>Formula:</source>
-        <translation type="unfinished">Vzorec:</translation>
+        <translation type="obsolete">Vzorec:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použij vzorec na vybrané buňky.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použij vzorec na vybrané buňky.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informace k vybranému typu a formátu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informace k vybranému typu a formátu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vlož odkaz na sloupec do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vlož odkaz na sloupec do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zadej počet zobrazených desetinných míst.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zadej počet zobrazených desetinných míst.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber formát zobrazení.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber formát zobrazení.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Coordinates</source>
-        <translation type="unfinished">Souřadnice</translation>
+        <translation type="obsolete">Souřadnice</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber odkaz na sloupec pro vložení do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyber odkaz na sloupec pro vložení do vzorce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation type="unfinished">Formát:</translation>
+        <translation type="obsolete">Formát:</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Vzorec</translation>
+        <translation type="obsolete">Vzorec</translation>
     </message>
     <message>
         <source>Last row Y =</source>
-        <translation type="unfinished">Poslední řádek hodnota Y =</translation>
+        <translation type="obsolete">Poslední řádek hodnota Y =</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Inset the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Funkci vložit do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Funkci vložit do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>MatrixView</name>
     <message>
         <source>Automatic (e)</source>
-        <translation type="unfinished">Automatický (e)</translation>
+        <translation type="obsolete">Automatický (e)</translation>
     </message>
     <message>
         <source>Automatic (E)</source>
-        <translation type="unfinished">Automatický (E)</translation>
+        <translation type="obsolete">Automatický (E)</translation>
     </message>
     <message>
         <source>Ctrl+A</source>
@@ -7064,28 +7083,28 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Scientific (e)</source>
-        <translation type="unfinished">Vědecký (e)</translation>
+        <translation type="obsolete">Vědecký (e)</translation>
     </message>
     <message>
         <source>Scientific (E)</source>
-        <translation type="unfinished">Vědecký (E)</translation>
+        <translation type="obsolete">Vědecký (E)</translation>
     </message>
     <message>
         <source>Example: %1</source>
-        <translation type="unfinished">Příklad: %1</translation>
+        <translation type="obsolete">Příklad: %1</translation>
     </message>
     <message>
         <source>Show/hide control tabs</source>
-        <translation type="unfinished">Ukázat/Skrýt ovládací záložky</translation>
+        <translation type="obsolete">Ukázat/Skrýt ovládací záložky</translation>
     </message>
     <message>
         <source>Decimal</source>
-        <translation type="unfinished">Desetinný</translation>
+        <translation type="obsolete">Desetinný</translation>
     </message>
     <message>
         <source>Ctrl+A</source>
         <comment>Matrix: select all</comment>
-        <translation type="unfinished">Ctrl+A</translation>
+        <translation type="obsolete">Ctrl+A</translation>
     </message>
 </context>
 <context>
@@ -8914,46 +8933,46 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <name>Project</name>
     <message>
         <source>no valid XML document found</source>
-        <translation type="unfinished">nenalezen žádný platný XML dokument</translation>
+        <translation type="obsolete">nenalezen žádný platný XML dokument</translation>
     </message>
     <message>
         <source>no scidavis_project element found</source>
-        <translation type="unfinished">nenalezen žádný prvek scidavis_project</translation>
+        <translation type="obsolete">nenalezen žádný prvek scidavis_project</translation>
     </message>
     <message>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">neznámý prvek: &apos;%1&apos;</translation>
+        <translation type="obsolete">neznámý prvek: &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished">Nepojmenovaný</translation>
+        <translation type="obsolete">Nepojmenovaný</translation>
     </message>
     <message>
         <source>invalid or missing project version</source>
-        <translation type="unfinished">neplatná nebo chybějící verze projektu</translation>
+        <translation type="obsolete">neplatná nebo chybějící verze projektu</translation>
     </message>
 </context>
 <context>
     <name>ProjectConfigPage</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation type="obsolete">Formulář</translation>
     </message>
     <message>
         <source>in the current folder and its subfolders</source>
-        <translation type="unfinished">v nynější složce a jejích podsložkách</translation>
+        <translation type="obsolete">v nynější složce a jejích podsložkách</translation>
     </message>
     <message>
         <source>all subwindows in the project</source>
-        <translation type="unfinished">všechna podokna v projektu</translation>
+        <translation type="obsolete">všechna podokna v projektu</translation>
     </message>
     <message>
         <source>in the current folder</source>
-        <translation type="unfinished">v nynější složce</translation>
+        <translation type="obsolete">v nynější složce</translation>
     </message>
     <message>
         <source>By default, show the subwindows ...</source>
-        <translation type="unfinished">Ve výchozím nastavení ukazovat podokna...</translation>
+        <translation type="obsolete">Ve výchozím nastavení ukazovat podokna...</translation>
     </message>
 </context>
 <context>
@@ -8975,27 +8994,27 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     </message>
     <message>
         <source>In%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation type="obsolete">%1</translation>
     </message>
     <message>
         <source>%1: transpose</source>
-        <translation type="unfinished">%1: převedeno</translation>
+        <translation type="obsolete">%1: převedeno</translation>
     </message>
     <message>
         <source>%1: clear selected rows(s)</source>
-        <translation type="unfinished">%1: vybraný řádek(y) vyprázdněn</translation>
+        <translation type="obsolete">%1: vybraný řádek(y) vyprázdněn</translation>
     </message>
     <message>
         <source>%1: clear column</source>
-        <translation type="unfinished">%1: sloupec vyprázdněn</translation>
+        <translation type="obsolete">%1: sloupec vyprázdněn</translation>
     </message>
     <message>
         <source>%1: clear column %2</source>
-        <translation type="unfinished">%1: sloupec %2 vyprázdněn</translation>
+        <translation type="obsolete">%1: sloupec %2 vyprázdněn</translation>
     </message>
     <message>
         <source>%1: set cell value</source>
-        <translation type="unfinished">%1: obsah buňky změněn</translation>
+        <translation type="obsolete">%1: obsah buňky změněn</translation>
     </message>
     <message>
         <source>About SciDAVis</source>
@@ -9003,39 +9022,39 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     </message>
     <message>
         <source>%1: mirror vertically</source>
-        <translation type="unfinished">%1: zrcadleno svisle</translation>
+        <translation type="obsolete">%1: zrcadleno svisle</translation>
     </message>
     <message>
         <source>%1: rename to %2</source>
-        <translation type="unfinished">%1: přejmenováno na %2</translation>
+        <translation type="obsolete">%1: přejmenováno na %2</translation>
     </message>
     <message>
         <source>%1: set formula</source>
-        <translation type="unfinished">%1: vzorec změněn</translation>
+        <translation type="obsolete">%1: vzorec změněn</translation>
     </message>
     <message>
         <source>%1: mark all cells valid</source>
-        <translation type="unfinished">%1: všechny buňky označeny jako platné</translation>
+        <translation type="obsolete">%1: všechny buňky označeny jako platné</translation>
     </message>
     <message>
         <source>%1: set text for row %2</source>
-        <translation type="unfinished">%1: text v buňce %2 změněn</translation>
+        <translation type="obsolete">%1: text v buňce %2 změněn</translation>
     </message>
     <message>
         <source>%1: replace the values for rows %2 to %3</source>
-        <translation type="unfinished">%1: hodnoty v buňkách %2 do %3 změněny</translation>
+        <translation type="obsolete">%1: hodnoty v buňkách %2 do %3 změněny</translation>
     </message>
     <message>
         <source>%1: insert %2 column(s)</source>
-        <translation type="unfinished">%1: %2 sloupec(e) vložen</translation>
+        <translation type="obsolete">%1: %2 sloupec(e) vložen</translation>
     </message>
     <message>
         <source>%1: add %2 rows(s)</source>
-        <translation type="unfinished">%1: %2 řádek(y) přidán</translation>
+        <translation type="obsolete">%1: %2 řádek(y) přidán</translation>
     </message>
     <message>
         <source>%1: set value for row %2</source>
-        <translation type="unfinished">%1: hodnota v buňce %2 změněna</translation>
+        <translation type="obsolete">%1: hodnota v buňce %2 změněna</translation>
     </message>
     <message>
         <source>XML reader error: </source>
@@ -9043,23 +9062,23 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     </message>
     <message>
         <source>%1: add column</source>
-        <translation type="unfinished">%1: sloupec přidán</translation>
+        <translation type="obsolete">%1: sloupec přidán</translation>
     </message>
     <message>
         <source>%1: mark cells invalid</source>
-        <translation type="unfinished">%1: buňky označeny jako neplatné</translation>
+        <translation type="obsolete">%1: buňky označeny jako neplatné</translation>
     </message>
     <message>
         <source>%1: set matrix coordinates</source>
-        <translation type="unfinished">%1: souřadnice matice změněny</translation>
+        <translation type="obsolete">%1: souřadnice matice změněny</translation>
     </message>
     <message>
         <source>%1: move %2 to %3.</source>
-        <translation type="unfinished">%1: přesun %2 do %3.</translation>
+        <translation type="obsolete">%1: přesun %2 do %3.</translation>
     </message>
     <message>
         <source>%1: change column type</source>
-        <translation type="unfinished">%1: typ sloupce změněn</translation>
+        <translation type="obsolete">%1: typ sloupce změněn</translation>
     </message>
     <message>
         <source>XML reader warning: </source>
@@ -9067,123 +9086,123 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     </message>
     <message>
         <source>%1: change caption</source>
-        <translation type="unfinished">%1: popis změněn</translation>
+        <translation type="obsolete">%1: popis změněn</translation>
     </message>
     <message>
         <source>%1: remove selected rows(s)</source>
-        <translation type="unfinished">%1: odstraněn prázdný řádek(y)</translation>
+        <translation type="obsolete">%1: odstraněn prázdný řádek(y)</translation>
     </message>
     <message>
         <source>%1: set creation time</source>
-        <translation type="unfinished">%1: časový bod vytvoření změněn</translation>
+        <translation type="obsolete">%1: časový bod vytvoření změněn</translation>
     </message>
     <message>
         <source>%1: change cell value(s)</source>
-        <translation type="unfinished">%1: hodnota(y) v buňce změněna</translation>
+        <translation type="obsolete">%1: hodnota(y) v buňce změněna</translation>
     </message>
     <message>
         <source>%1: normalize selection</source>
-        <translation type="unfinished">%1: výběr normalizován</translation>
+        <translation type="obsolete">%1: výběr normalizován</translation>
     </message>
     <message>
         <source>%1: change comment</source>
-        <translation type="unfinished">%1: poznámka změněna</translation>
+        <translation type="obsolete">%1: poznámka změněna</translation>
     </message>
     <message>
         <source>%1: remove %2 row(s)</source>
-        <translation type="unfinished">%1: %2 ) řádek(y) odstraněn</translation>
+        <translation type="obsolete">%1: %2 ) řádek(y) odstraněn</translation>
     </message>
     <message>
         <source>%1: add %2 column(s)</source>
-        <translation type="unfinished">%1: %2 sloupec(e) přidán</translation>
+        <translation type="obsolete">%1: %2 sloupec(e) přidán</translation>
     </message>
     <message>
         <source>%1: normalize column(s)</source>
-        <translation type="unfinished">%1: sloupec(e) normalizován</translation>
+        <translation type="obsolete">%1: sloupec(e) normalizován</translation>
     </message>
     <message>
         <source>%1: set matrix size to %2x%3</source>
-        <translation type="unfinished">%1: rozměry matice nastaveny na %2x%3</translation>
+        <translation type="obsolete">%1: rozměry matice nastaveny na %2x%3</translation>
     </message>
     <message>
         <source>%1: insert empty rows(s)</source>
-        <translation type="unfinished">%1: vložen prázdný řádek(y)</translation>
+        <translation type="obsolete">%1: vložen prázdný řádek(y)</translation>
     </message>
     <message>
         <source>%1: remove selected column(s)</source>
-        <translation type="unfinished">%1: vybraný sloupec(e) odstraněn</translation>
+        <translation type="obsolete">%1: vybraný sloupec(e) odstraněn</translation>
     </message>
     <message>
         <source>%1: clear all formulas</source>
-        <translation type="unfinished">%1: všechny vzorce smazány</translation>
+        <translation type="obsolete">%1: všechny vzorce smazány</translation>
     </message>
     <message>
         <source>%1: add %2</source>
-        <translation type="unfinished">%1: %2 přidán</translation>
+        <translation type="obsolete">%1: %2 přidán</translation>
     </message>
     <message>
         <source>%1: set plot designation</source>
-        <translation type="unfinished">%1: přiřazení k nákresu změněno</translation>
+        <translation type="obsolete">%1: přiřazení k nákresu změněno</translation>
     </message>
     <message>
         <source>%1: replace the texts for rows %2 to %3</source>
-        <translation type="unfinished">%1: texty v buňkách %2 do %3 změněny</translation>
+        <translation type="obsolete">%1: texty v buňkách %2 do %3 změněny</translation>
     </message>
     <message>
         <source>%1: clear masks</source>
-        <translation type="unfinished">%1: maskování odstraněna</translation>
+        <translation type="obsolete">%1: maskování odstraněna</translation>
     </message>
     <message>
         <source>%1: clear selected column(s)</source>
-        <translation type="unfinished">%1: vybraný sloupec(e) vyprázdněn</translation>
+        <translation type="obsolete">%1: vybraný sloupec(e) vyprázdněn</translation>
     </message>
     <message>
         <source>%1: mirror horizontally</source>
-        <translation type="unfinished">%1: zrcadleno vodorovně</translation>
+        <translation type="obsolete">%1: zrcadleno vodorovně</translation>
     </message>
     <message>
         <source>%1: move child from position %2 to %3.</source>
-        <translation type="unfinished">%1: potomek přesunut z %2 do %3.</translation>
+        <translation type="obsolete">%1: potomek přesunut z %2 do %3.</translation>
     </message>
     <message>
         <source>%1: remove %2 column(s)</source>
-        <translation type="unfinished">%1: %2 sloupec(e) odstraněn</translation>
+        <translation type="obsolete">%1: %2 sloupec(e) odstraněn</translation>
     </message>
     <message>
         <source>%1: set the number of rows to %2</source>
-        <translation type="unfinished">%1: počet řádků změněn na %2</translation>
+        <translation type="obsolete">%1: počet řádků změněn na %2</translation>
     </message>
     <message>
         <source>%1: mask cells</source>
-        <translation type="unfinished">%1: buňky maskovány</translation>
+        <translation type="obsolete">%1: buňky maskovány</translation>
     </message>
     <message>
         <source>%1: set cell values</source>
-        <translation type="unfinished">%1: hodnoty buněk změněny</translation>
+        <translation type="obsolete">%1: hodnoty buněk změněny</translation>
     </message>
     <message>
         <source>%1: set date-time format to %2</source>
-        <translation type="unfinished">%1: formát data/přesného času nastaven na %2</translation>
+        <translation type="obsolete">%1: formát data/přesného času nastaven na %2</translation>
     </message>
     <message>
         <source>%1: move column %2 from position %3 to %4</source>
-        <translation type="unfinished">%1: přesunut sloupec %2 z %3 doh %4</translation>
+        <translation type="obsolete">%1: přesunut sloupec %2 z %3 doh %4</translation>
     </message>
     <message>
         <source>%1: copy %2</source>
-        <translation type="unfinished">%1: data z %2 zkopírována</translation>
+        <translation type="obsolete">%1: data z %2 zkopírována</translation>
     </message>
     <message>
         <source>%1: unmask cells</source>
-        <translation type="unfinished">%1: maskování buňek odstraněno</translation>
+        <translation type="obsolete">%1: maskování buňek odstraněno</translation>
     </message>
     <message>
         <source>ASCII table</source>
-        <translation type="unfinished">ASCII tabulka</translation>
+        <translation type="obsolete">ASCII tabulka</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Odstranit</translation>
+        <translation type="obsolete">&amp;Odstranit</translation>
     </message>
     <message>
         <source> (loading failed)</source>
@@ -9191,7 +9210,7 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     </message>
     <message>
         <source>%1: remove %2</source>
-        <translation type="unfinished">%1: %2 odstraněn</translation>
+        <translation type="obsolete">%1: %2 odstraněn</translation>
     </message>
     <message>
         <source>Released</source>
@@ -9199,82 +9218,82 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     </message>
     <message>
         <source>%1: clear</source>
-        <translation type="unfinished">%1: vyprázdnit</translation>
+        <translation type="obsolete">%1: vyprázdnit</translation>
     </message>
     <message>
         <source>%1: insert empty column(s)</source>
-        <translation type="unfinished">%1: vložen prázdný sloupec(e)</translation>
+        <translation type="obsolete">%1: vložen prázdný sloupec(e)</translation>
     </message>
     <message>
         <source>set date-time format to %1</source>
-        <translation type="unfinished">formát data/přesného času nastaven na %1</translation>
+        <translation type="obsolete">formát data/přesného času nastaven na %1</translation>
     </message>
     <message>
         <source>%1: mark cells valid</source>
-        <translation type="unfinished">%1: buňky označeny jako platné</translation>
+        <translation type="obsolete">%1: buňky označeny jako platné</translation>
     </message>
     <message>
         <source>%1: set plot designation(s)</source>
-        <translation type="unfinished">%1: přiřazení k nákresu změněno</translation>
+        <translation type="obsolete">%1: přiřazení k nákresu změněno</translation>
     </message>
     <message>
         <source>set numeric format to &apos;%1&apos;</source>
-        <translation type="unfinished">číselný formát nastaven na &apos;%1&apos;</translation>
+        <translation type="obsolete">číselný formát nastaven na &apos;%1&apos;</translation>
     </message>
     <message>
         <source>unexpected end of document</source>
-        <translation type="unfinished">neočekávaný konec souboru</translation>
+        <translation type="obsolete">neočekávaný konec souboru</translation>
     </message>
     <message>
         <source>%1: clear all masks</source>
-        <translation type="unfinished">%1: všechna maskování odstraněna</translation>
+        <translation type="obsolete">%1: všechna maskování odstraněna</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished">Obecné</translation>
+        <translation type="obsolete">Obecné</translation>
     </message>
     <message>
         <source>line %1, column %2: </source>
-        <translation type="unfinished">řádek %1, sloupec %2:</translation>
+        <translation type="obsolete">řádek %1, sloupec %2:</translation>
     </message>
     <message>
         <source>%1: clear selected cell(s)</source>
-        <translation type="unfinished">%1: vyprázdnit vybranou buňku(y)</translation>
+        <translation type="obsolete">%1: vyprázdnit vybranou buňku(y)</translation>
     </message>
     <message>
         <source>%1: set cell formula</source>
-        <translation type="unfinished">%1: vzorec v buňce změněn</translation>
+        <translation type="obsolete">%1: vzorec v buňce změněn</translation>
     </message>
     <message>
         <source>set decimal digits to %1</source>
-        <translation type="unfinished">počet desetinných míst nastaven na %1</translation>
+        <translation type="obsolete">počet desetinných míst nastaven na %1</translation>
     </message>
     <message>
         <source>%1: set decimal digits to %2</source>
-        <translation type="unfinished">%1: počet desetinných míst nastaven na %2</translation>
+        <translation type="obsolete">%1: počet desetinných míst nastaven na %2</translation>
     </message>
     <message>
         <source>%1: insert %2 row(s)</source>
-        <translation type="unfinished">%1: %2 řádek(y) vložen</translation>
+        <translation type="obsolete">%1: %2 řádek(y) vložen</translation>
     </message>
     <message>
         <source>%1: set numeric format to &apos;%2&apos;</source>
-        <translation type="unfinished">%1: číselný formát nastaven na &apos;%2&apos;</translation>
+        <translation type="obsolete">%1: číselný formát nastaven na &apos;%2&apos;</translation>
     </message>
     <message>
         <source>XML reader error: </source>
         <comment>prefix for XML error messages</comment>
-        <translation type="unfinished">Chyba při čtení z XML dat: </translation>
+        <translation type="obsolete">Chyba při čtení z XML dat: </translation>
     </message>
     <message>
         <source> (loading failed)</source>
         <comment>postfix for XML error messages</comment>
-        <translation type="unfinished"> (otevření se nezdařilo)</translation>
+        <translation type="obsolete"> (otevření se nezdařilo)</translation>
     </message>
     <message>
         <source>XML reader warning: </source>
         <comment>prefix for XML warning messages</comment>
-        <translation type="unfinished">Varování při čtení z XML dat:</translation>
+        <translation type="obsolete">Varování při čtení z XML dat:</translation>
     </message>
 </context>
 <context>
@@ -9343,19 +9362,19 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <name>SciDAVisAbout</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Zavřít</translation>
+        <translation type="obsolete">Zavřít</translation>
     </message>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation type="obsolete">Dialog</translation>
     </message>
     <message>
         <source>Released XXXX-XX-XX</source>
-        <translation type="unfinished">Vydáno XXXX-XX-XX</translation>
+        <translation type="obsolete">Vydáno XXXX-XX-XX</translation>
     </message>
     <message>
         <source>SciDAVis XX.XX.XX-betaXX</source>
-        <translation type="unfinished">SciDAVis XX.XX.XX-betaXX</translation>
+        <translation type="obsolete">SciDAVis XX.XX.XX-betaXX</translation>
     </message>
 </context>
 <context>
@@ -9853,7 +9872,7 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     </message>
     <message>
         <source>(masked)</source>
-        <translation type="unfinished">(maskován)</translation>
+        <translation type="obsolete">(maskován)</translation>
     </message>
     <message>
         <source>invalid cell (ignored in all operations)</source>
@@ -9862,12 +9881,12 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <message>
         <source>invalid cell (ignored in all operations)</source>
         <comment>tooltip string for invalid rows</comment>
-        <translation type="unfinished">neplatná buňka (ve všech operacích nebude brána na vědomí)</translation>
+        <translation type="obsolete">neplatná buňka (ve všech operacích nebude brána na vědomí)</translation>
     </message>
     <message>
         <source>-</source>
         <comment>string for invalid rows</comment>
-        <translation type="unfinished">-</translation>
+        <translation type="obsolete">-</translation>
     </message>
 </context>
 <context>
@@ -9945,65 +9964,65 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <name>TableView</name>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Text</translation>
+        <translation type="obsolete">Text</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished">Dny</translation>
+        <translation type="obsolete">Dny</translation>
     </message>
     <message>
         <source>Text
 </source>
-        <translation type="unfinished">Text
+        <translation type="obsolete">Text
 </translation>
     </message>
     <message>
         <source>Days of the week
 </source>
-        <translation type="unfinished">Dny v týdnu
+        <translation type="obsolete">Dny v týdnu
 </translation>
     </message>
     <message>
         <source>hours</source>
-        <translation type="unfinished">Hodiny</translation>
+        <translation type="obsolete">Hodiny</translation>
     </message>
     <message>
         <source>years</source>
-        <translation type="unfinished">Roky</translation>
+        <translation type="obsolete">Roky</translation>
     </message>
     <message>
         <source>Automatic (e)</source>
-        <translation type="unfinished">Automatický (e)</translation>
+        <translation type="obsolete">Automatický (e)</translation>
     </message>
     <message>
         <source>Automatic (E)</source>
-        <translation type="unfinished">Automatický (E)</translation>
+        <translation type="obsolete">Automatický (E)</translation>
     </message>
     <message>
         <source>Number without leading zero</source>
-        <translation type="unfinished">Číslo bez vedoucí nuly</translation>
+        <translation type="obsolete">Číslo bez vedoucí nuly</translation>
     </message>
     <message>
         <source>Selected column type:
 </source>
-        <translation type="unfinished">Vybraný typ sloupce:
+        <translation type="obsolete">Vybraný typ sloupce:
 </translation>
     </message>
     <message>
         <source>Month names
 </source>
-        <translation type="unfinished">Názvy měsíců
+        <translation type="obsolete">Názvy měsíců
 </translation>
     </message>
     <message>
         <source>minutes</source>
-        <translation type="unfinished">Minuty</translation>
+        <translation type="obsolete">Minuty</translation>
     </message>
     <message>
         <source>Current column:
 Name: %1
 Position: %2</source>
-        <translation type="unfinished">Nynější sloupec:
+        <translation type="obsolete">Nynější sloupec:
 Název: %1
 Poloha: %2</translation>
     </message>
@@ -10014,103 +10033,103 @@ Poloha: %2</translation>
     <message>
         <source>Hello world!
 </source>
-        <translation type="unfinished">Čus!
+        <translation type="obsolete">Čus!
 </translation>
     </message>
     <message>
         <source>Scientific (e)</source>
-        <translation type="unfinished">Vědecký (e)</translation>
+        <translation type="obsolete">Vědecký (e)</translation>
     </message>
     <message>
         <source>Scientific (E)</source>
-        <translation type="unfinished">Vědecký (E)</translation>
+        <translation type="obsolete">Vědecký (E)</translation>
     </message>
     <message>
         <source>Double precision
 floating point values
 </source>
-        <translation type="unfinished">hodnoty s pohyblivou řádovou čárkou
+        <translation type="obsolete">hodnoty s pohyblivou řádovou čárkou
 dvojnásobná přesnost
 </translation>
     </message>
     <message>
         <source>Full day name</source>
-        <translation type="unfinished">Celý název dne v týdnu</translation>
+        <translation type="obsolete">Celý název dne v týdnu</translation>
     </message>
     <message>
         <source>Numeric</source>
-        <translation type="unfinished">Číselný</translation>
+        <translation type="obsolete">Číselný</translation>
     </message>
     <message>
         <source>months</source>
-        <translation type="unfinished">Měsíce</translation>
+        <translation type="obsolete">Měsíce</translation>
     </message>
     <message>
         <source>Full month name</source>
-        <translation type="unfinished">Celý název měsíce</translation>
+        <translation type="obsolete">Celý název měsíce</translation>
     </message>
     <message>
         <source>Example: </source>
-        <translation type="unfinished">Příklad:</translation>
+        <translation type="obsolete">Příklad:</translation>
     </message>
     <message>
         <source>Abbreviated day name</source>
-        <translation type="unfinished">Zkrácený název dne v týdnu</translation>
+        <translation type="obsolete">Zkrácený název dne v týdnu</translation>
     </message>
     <message>
         <source>Abbreviated month name</source>
-        <translation type="unfinished">Zkrácený název měsíce</translation>
+        <translation type="obsolete">Zkrácený název měsíce</translation>
     </message>
     <message>
         <source>Show/hide control tabs</source>
-        <translation type="unfinished">Ukázat/Skrýt ovládací záložky</translation>
+        <translation type="obsolete">Ukázat/Skrýt ovládací záložky</translation>
     </message>
     <message>
         <source>Dates and/or times
 </source>
-        <translation type="unfinished">Datum a/nebo čas
+        <translation type="obsolete">Datum a/nebo čas
 </translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation type="unfinished">Sekundy</translation>
+        <translation type="obsolete">Sekundy</translation>
     </message>
     <message>
         <source>Month names</source>
-        <translation type="unfinished">Názvy měsíců</translation>
+        <translation type="obsolete">Názvy měsíců</translation>
     </message>
     <message>
         <source>Decimal</source>
-        <translation type="unfinished">Desetinný</translation>
+        <translation type="obsolete">Desetinný</translation>
     </message>
     <message>
         <source>Day names</source>
-        <translation type="unfinished">Názvy dnů v týdnu</translation>
+        <translation type="obsolete">Názvy dnů v týdnu</translation>
     </message>
     <message>
         <source>Predefined:</source>
-        <translation type="unfinished">Přednastaveno:</translation>
+        <translation type="obsolete">Přednastaveno:</translation>
     </message>
     <message>
         <source>Number with leading zero</source>
-        <translation type="unfinished">Číslo s vedoucí nulou</translation>
+        <translation type="obsolete">Číslo s vedoucí nulou</translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation type="unfinished">Formát:</translation>
+        <translation type="obsolete">Formát:</translation>
     </message>
     <message>
         <source>Date and time</source>
-        <translation type="unfinished">Datum a čas</translation>
+        <translation type="obsolete">Datum a čas</translation>
     </message>
     <message>
         <source>milliseconds</source>
-        <translation type="unfinished">Millisekundy</translation>
+        <translation type="obsolete">Millisekundy</translation>
     </message>
     <message>
         <source>Ctrl+A</source>
         <comment>Table: select all</comment>
-        <translation type="unfinished">Ctrl+A</translation>
+        <translation type="obsolete">Ctrl+A</translation>
     </message>
 </context>
 <context>
@@ -10341,114 +10360,114 @@ dvojnásobná přesnost
     <name>future::Folder</name>
     <message>
         <source>Folder %1</source>
-        <translation type="unfinished">Složka %1</translation>
+        <translation type="obsolete">Složka %1</translation>
     </message>
     <message>
         <source>Column %1</source>
-        <translation type="unfinished">Sloupec %1</translation>
+        <translation type="obsolete">Sloupec %1</translation>
     </message>
     <message>
         <source>creation of aspect from element &apos;%1&apos; failed</source>
-        <translation type="unfinished">Vytvoření hlediska z prvku &apos;%1&apos; se nezdařilo</translation>
+        <translation type="obsolete">Vytvoření hlediska z prvku &apos;%1&apos; se nezdařilo</translation>
     </message>
     <message>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">neznámý prvek: &apos;%1&apos;</translation>
+        <translation type="obsolete">neznámý prvek: &apos;%1&apos;</translation>
     </message>
     <message>
         <source>no plugin to load element &apos;%1&apos; found</source>
-        <translation type="unfinished">nenalezen žádný přídavný modul pro nahrání prvku &apos;%1&apos;</translation>
+        <translation type="obsolete">nenalezen žádný přídavný modul pro nahrání prvku &apos;%1&apos;</translation>
     </message>
     <message>
         <source>no folder element found</source>
-        <translation type="unfinished">nenalezen žádný prvek složky</translation>
+        <translation type="obsolete">nenalezen žádný prvek složky</translation>
     </message>
 </context>
 <context>
     <name>future::Matrix</name>
     <message>
         <source>F12</source>
-        <translation type="unfinished">F12</translation>
+        <translation type="obsolete">F12</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation type="unfinished">&amp;Vyjmout</translation>
+        <translation type="obsolete">&amp;Vyjmout</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Kopírovat</translation>
+        <translation type="obsolete">&amp;Kopírovat</translation>
     </message>
     <message>
         <source>Alt+Q</source>
-        <translation type="unfinished">Alt+Q</translation>
+        <translation type="obsolete">Alt+Q</translation>
     </message>
     <message>
         <source>invalid x end value</source>
-        <translation type="unfinished">neplatná konečnáí hodnota x</translation>
+        <translation type="obsolete">neplatná konečnáí hodnota x</translation>
     </message>
     <message>
         <source>invalid y end value</source>
-        <translation type="unfinished">neplatná konečnáí hodnota y</translation>
+        <translation type="obsolete">neplatná konečnáí hodnota y</translation>
     </message>
     <message>
         <source>&amp;Insert Empty Rows</source>
-        <translation type="unfinished">Vložit prázdné &amp;řádky</translation>
+        <translation type="obsolete">Vložit prázdné &amp;řádky</translation>
     </message>
     <message>
         <source>invalid x start value</source>
-        <translation type="unfinished">neplatná počáteční hodnota x</translation>
+        <translation type="obsolete">neplatná počáteční hodnota x</translation>
     </message>
     <message>
         <source>Ctrl+Return</source>
-        <translation type="unfinished">Ctrl+Return</translation>
+        <translation type="obsolete">Ctrl+Return</translation>
     </message>
     <message>
         <source>Mirror &amp;Horizontally</source>
-        <translation type="unfinished">Zrcadlit &amp;vodorovně</translation>
+        <translation type="obsolete">Zrcadlit &amp;vodorovně</translation>
     </message>
     <message>
         <source>invalid or missing column index</source>
-        <translation type="unfinished">neplatný nebo chybějící index sloupce</translation>
+        <translation type="obsolete">neplatný nebo chybějící index sloupce</translation>
     </message>
     <message>
         <source>invalid y start value</source>
-        <translation type="unfinished">neplatná počáteční hodnota y</translation>
+        <translation type="obsolete">neplatná počáteční hodnota y</translation>
     </message>
     <message>
         <source>Clear Matrix</source>
-        <translation type="unfinished">Vyprázdnit matici</translation>
+        <translation type="obsolete">Vyprázdnit matici</translation>
     </message>
     <message>
         <source>Enter column</source>
-        <translation type="unfinished">Zadat sloupec</translation>
+        <translation type="obsolete">Zadat sloupec</translation>
     </message>
     <message>
         <source>no matrix element found</source>
-        <translation type="unfinished">nenalezen žádný prvek matice</translation>
+        <translation type="obsolete">nenalezen žádný prvek matice</translation>
     </message>
     <message>
         <source>Enter number of columns</source>
-        <translation type="unfinished">Zadat počet sloupců</translation>
+        <translation type="obsolete">Zadat počet sloupců</translation>
     </message>
     <message>
         <source>Recalculate</source>
-        <translation type="unfinished">Znovu spočítat</translation>
+        <translation type="obsolete">Znovu spočítat</translation>
     </message>
     <message>
         <source>invalid column width</source>
-        <translation type="unfinished">neplatná šířka sloupce</translation>
+        <translation type="obsolete">neplatná šířka sloupce</translation>
     </message>
     <message>
         <source>%1: paste from clipboard</source>
-        <translation type="unfinished">%1: vložit ze schránky</translation>
+        <translation type="obsolete">%1: vložit ze schránky</translation>
     </message>
     <message>
         <source>invalid row or column count</source>
-        <translation type="unfinished">neplatný počet řádků nebo sloupců</translation>
+        <translation type="obsolete">neplatný počet řádků nebo sloupců</translation>
     </message>
     <message>
         <source>Import image...</source>
-        <translation type="unfinished">Zavést obrázek...</translation>
+        <translation type="obsolete">Zavést obrázek...</translation>
     </message>
     <message>
         <source>Clea&amp;r</source>
@@ -10456,35 +10475,35 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>Import image from file</source>
-        <translation type="unfinished">Zavést obrázek ze souboru</translation>
+        <translation type="obsolete">Zavést obrázek ze souboru</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Obrázky</translation>
+        <translation type="obsolete">Obrázky</translation>
     </message>
     <message>
         <source>Matrix</source>
-        <translation type="unfinished">Matice</translation>
+        <translation type="obsolete">Matice</translation>
     </message>
     <message>
         <source>Past&amp;e</source>
-        <translation type="unfinished">&amp;Vložit</translation>
+        <translation type="obsolete">&amp;Vložit</translation>
     </message>
     <message>
         <source>invalid cell value</source>
-        <translation type="unfinished">neplatný obsah buňky</translation>
+        <translation type="obsolete">neplatný obsah buňky</translation>
     </message>
     <message>
         <source>%1: apply formula to selection</source>
-        <translation type="unfinished">%1: použít vzorec na výběr</translation>
+        <translation type="obsolete">%1: použít vzorec na výběr</translation>
     </message>
     <message>
         <source>Assign &amp;Formula</source>
-        <translation type="unfinished">&amp;Přiřadit vzorec</translation>
+        <translation type="obsolete">&amp;Přiřadit vzorec</translation>
     </message>
     <message>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">neznámý prvek: &apos;%1&apos;</translation>
+        <translation type="obsolete">neznámý prvek: &apos;%1&apos;</translation>
     </message>
     <message>
         <source>&amp;Duplicate</source>
@@ -10492,67 +10511,67 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>&amp;Insert Empty Columns</source>
-        <translation type="unfinished">&amp;Vložit prázdné sloupce</translation>
+        <translation type="obsolete">&amp;Vložit prázdné sloupce</translation>
     </message>
     <message>
         <source>&amp;Transpose</source>
-        <translation type="unfinished">&amp;Převést</translation>
+        <translation type="obsolete">&amp;Převést</translation>
     </message>
     <message>
         <source>Set &amp;Coordinates</source>
-        <translation type="unfinished">Nastavit &amp;souřadnice</translation>
+        <translation type="obsolete">Nastavit &amp;souřadnice</translation>
     </message>
     <message>
         <source>Error importing image</source>
-        <translation type="unfinished">Chyba při zavádění obrázku</translation>
+        <translation type="obsolete">Chyba při zavádění obrázku</translation>
     </message>
     <message>
         <source>Set Display &amp;Format</source>
-        <translation type="unfinished">Nastavit &amp;formát zobrazení</translation>
+        <translation type="obsolete">Nastavit &amp;formát zobrazení</translation>
     </message>
     <message>
         <source>SciDAVis</source>
-        <translation type="unfinished">SciDAVis</translation>
+        <translation type="obsolete">SciDAVis</translation>
     </message>
     <message>
         <source>Remo&amp;ve Rows</source>
-        <translation type="unfinished">&amp;Odstranit řádky</translation>
+        <translation type="obsolete">&amp;Odstranit řádky</translation>
     </message>
     <message>
         <source>Enter number of rows</source>
-        <translation type="unfinished">Zadat počet řádků</translation>
+        <translation type="obsolete">Zadat počet řádků</translation>
     </message>
     <message>
         <source>&amp;Add Rows</source>
-        <translation type="unfinished">&amp;Přidat řádky</translation>
+        <translation type="obsolete">&amp;Přidat řádky</translation>
     </message>
     <message>
         <source>Enter row</source>
-        <translation type="unfinished">Zadat řádek</translation>
+        <translation type="obsolete">Zadat řádek</translation>
     </message>
     <message>
         <source>Go to Cell</source>
-        <translation type="unfinished">Jdi na buňku</translation>
+        <translation type="obsolete">Jdi na buňku</translation>
     </message>
     <message>
         <source>&amp;Matrix</source>
-        <translation type="unfinished">&amp;Matice</translation>
+        <translation type="obsolete">&amp;Matice</translation>
     </message>
     <message>
         <source>&amp;Go to Cell</source>
-        <translation type="unfinished">&amp;Jdi na buňku</translation>
+        <translation type="obsolete">&amp;Jdi na buňku</translation>
     </message>
     <message>
         <source>Matrix %1</source>
-        <translation type="unfinished">Matice %1</translation>
+        <translation type="obsolete">Matice %1</translation>
     </message>
     <message>
         <source>Mirror &amp;Vertically</source>
-        <translation type="unfinished">Zrcadlit &amp;svisle</translation>
+        <translation type="obsolete">Zrcadlit &amp;svisle</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished">Vybrat vše</translation>
+        <translation type="obsolete">Vybrat vše</translation>
     </message>
     <message>
         <source>&amp;Dimensions</source>
@@ -10560,23 +10579,23 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>Hide Controls</source>
-        <translation type="unfinished">Skrýt ovládání</translation>
+        <translation type="obsolete">Skrýt ovládání</translation>
     </message>
     <message>
         <source>Clea&amp;r Columns</source>
-        <translation type="unfinished">&amp;Vyprázdnit sloupce</translation>
+        <translation type="obsolete">&amp;Vyprázdnit sloupce</translation>
     </message>
     <message>
         <source>&amp;Add Columns</source>
-        <translation type="unfinished">&amp;Přidat sloupce</translation>
+        <translation type="obsolete">&amp;Přidat sloupce</translation>
     </message>
     <message>
         <source>%1: cut selected cell(s)</source>
-        <translation type="unfinished">%1: vybranou buňku(y) vyjmout</translation>
+        <translation type="obsolete">%1: vybranou buňku(y) vyjmout</translation>
     </message>
     <message>
         <source>Clea&amp;r Rows</source>
-        <translation type="unfinished">Smazat &amp;obsah řádků</translation>
+        <translation type="obsolete">Smazat &amp;obsah řádků</translation>
     </message>
     <message>
         <source>&amp;Import Image</source>
@@ -10584,106 +10603,101 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>invalid or missing number of displayed digits</source>
-        <translation type="unfinished">neplatný nebo chybějící počet zobrazených desetinných míst</translation>
+        <translation type="obsolete">neplatný nebo chybějící počet zobrazených desetinných míst</translation>
     </message>
     <message>
         <source>invalid or missing row index</source>
-        <translation type="unfinished">neplatný nebo chybějící index řádku</translation>
+        <translation type="obsolete">neplatný nebo chybějící index řádku</translation>
     </message>
     <message>
         <source>Show Controls</source>
-        <translation type="unfinished">Ukázat ovládání</translation>
+        <translation type="obsolete">Ukázat ovládání</translation>
     </message>
     <message>
         <source>Remo&amp;ve Columns</source>
-        <translation type="unfinished">&amp;Odstranit sloupce</translation>
+        <translation type="obsolete">&amp;Odstranit sloupce</translation>
     </message>
     <message>
         <source>invalid row height</source>
-        <translation type="unfinished">neplatná výška řádku</translation>
+        <translation type="obsolete">neplatná výška řádku</translation>
     </message>
     <message>
         <source>%1: clear selected cell(s)</source>
-        <translation type="unfinished">%1: vyprázdnit vybranou buňku(y)</translation>
+        <translation type="obsolete">%1: vyprázdnit vybranou buňku(y)</translation>
     </message>
     <message>
         <source>Set Matrix Dimensions</source>
-        <translation type="unfinished">Nastavit rozměry matice</translation>
+        <translation type="obsolete">Nastavit rozměry matice</translation>
     </message>
     <message>
         <source>Import of image &apos;%1&apos; failed</source>
-        <translation type="unfinished">Zavedení obrázku &apos;%1&apos; se nepodařilo</translation>
+        <translation type="obsolete">Zavedení obrázku &apos;%1&apos; se nepodařilo</translation>
     </message>
     <message>
         <source>Ctrl+Alt+G</source>
-        <translation type="unfinished">Ctrl+Alt+G</translation>
+        <translation type="obsolete">Ctrl+Alt+G</translation>
     </message>
     <message>
         <source>invalid or missing numeric format</source>
-        <translation type="unfinished">chybějící nebo neplatný číselný formát</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r</source>
-        <comment>clear selection</comment>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">chybějící nebo neplatný číselný formát</translation>
     </message>
     <message>
         <source>&amp;Import Image</source>
         <comment>import image as matrix</comment>
-        <translation type="unfinished">&amp;Zavést obrázek</translation>
+        <translation type="obsolete">&amp;Zavést obrázek</translation>
     </message>
     <message>
         <source>&amp;Duplicate</source>
         <comment>duplicate matrix</comment>
-        <translation type="unfinished">&amp;Zdvojit</translation>
+        <translation type="obsolete">&amp;Zdvojit</translation>
     </message>
     <message>
         <source>&amp;Dimensions</source>
         <comment>matrix size</comment>
-        <translation type="unfinished">&amp;Rozměry</translation>
+        <translation type="obsolete">&amp;Rozměry</translation>
     </message>
 </context>
 <context>
     <name>future::SortDialog</name>
     <message>
         <source>&amp;Sort</source>
-        <translation type="unfinished">&amp;Seřadit</translation>
+        <translation type="obsolete">&amp;Seřadit</translation>
     </message>
     <message>
         <source>Order</source>
-        <translation type="unfinished">Pořadí</translation>
+        <translation type="obsolete">Pořadí</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Zavřít</translation>
+        <translation type="obsolete">&amp;Zavřít</translation>
     </message>
     <message>
         <source>Together</source>
-        <translation type="unfinished">Dohromady</translation>
+        <translation type="obsolete">Dohromady</translation>
     </message>
     <message>
         <source>Separately</source>
-        <translation type="unfinished">Jednotlivě</translation>
+        <translation type="obsolete">Jednotlivě</translation>
     </message>
     <message>
         <source>Descending</source>
-        <translation type="unfinished">Sestupně</translation>
+        <translation type="obsolete">Sestupně</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation type="unfinished">Vzestupně</translation>
+        <translation type="obsolete">Vzestupně</translation>
     </message>
     <message>
         <source>Leading column</source>
-        <translation type="unfinished">Seřadit podle hlavního sloupce</translation>
+        <translation type="obsolete">Seřadit podle hlavního sloupce</translation>
     </message>
     <message>
         <source>Sort columns</source>
-        <translation type="unfinished">Seřadit sloupce</translation>
+        <translation type="obsolete">Seřadit sloupce</translation>
     </message>
     <message>
         <source>Sorting Options</source>
-        <translation type="unfinished">Volby pro seřazení</translation>
+        <translation type="obsolete">Volby pro seřazení</translation>
     </message>
 </context>
 <context>
@@ -10702,11 +10716,11 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>F12</source>
-        <translation type="unfinished">F12</translation>
+        <translation type="obsolete">F12</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation type="unfinished">&amp;Vyjmout</translation>
+        <translation type="obsolete">&amp;Vyjmout</translation>
     </message>
     <message>
         <source>None</source>
@@ -10714,7 +10728,7 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Kopírovat</translation>
+        <translation type="obsolete">&amp;Kopírovat</translation>
     </message>
     <message>
         <source>&amp;Mask</source>
@@ -10722,99 +10736,99 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>Alt+Q</source>
-        <translation type="unfinished">Alt+Q</translation>
+        <translation type="obsolete">Alt+Q</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation type="unfinished">Tabulka</translation>
+        <translation type="obsolete">Tabulka</translation>
     </message>
     <message>
         <source>&amp;Insert Empty Rows</source>
-        <translation type="unfinished">&amp;Vložit prázdné řádky</translation>
+        <translation type="obsolete">&amp;Vložit prázdné řádky</translation>
     </message>
     <message>
         <source>Change &amp;Type &amp;&amp; Format</source>
-        <translation type="unfinished">Změnit &amp;typ &amp;&amp; formát</translation>
+        <translation type="obsolete">Změnit &amp;typ &amp;&amp; formát</translation>
     </message>
     <message>
         <source>Ctrl+Return</source>
-        <translation type="unfinished">Ctrl+Return</translation>
+        <translation type="obsolete">Ctrl+Return</translation>
     </message>
     <message>
         <source>invalid or missing column index</source>
-        <translation type="unfinished">neplatný nebo chybějící index sloupce</translation>
+        <translation type="obsolete">neplatný nebo chybějící index sloupce</translation>
     </message>
     <message>
         <source>&amp;Normalize Columns</source>
-        <translation type="unfinished">&amp;Normalizovat sloupce</translation>
+        <translation type="obsolete">&amp;Normalizovat sloupce</translation>
     </message>
     <message>
         <source>columns attribute and number of read columns do not match</source>
-        <translation type="unfinished">Atribut číslo sloupců a počet přečtených sloupců se liší</translation>
+        <translation type="obsolete">Atribut číslo sloupců a počet přečtených sloupců se liší</translation>
     </message>
     <message>
         <source>Enter column</source>
-        <translation type="unfinished">Zadat sloupec</translation>
+        <translation type="obsolete">Zadat sloupec</translation>
     </message>
     <message>
         <source>%1: fill cells with random values</source>
-        <translation type="unfinished">%1: buňky vyplněny náhodnými hodnotami</translation>
+        <translation type="obsolete">%1: buňky vyplněny náhodnými hodnotami</translation>
     </message>
     <message>
         <source>&amp;Table</source>
-        <translation type="unfinished">&amp;Tabulka</translation>
+        <translation type="obsolete">&amp;Tabulka</translation>
     </message>
     <message>
         <source>Recalculate</source>
-        <translation type="unfinished">Znovu spočítat</translation>
+        <translation type="obsolete">Znovu spočítat</translation>
     </message>
     <message>
         <source>%1: move column %2 from position %3 to %4.</source>
-        <translation type="unfinished">%1: přesunut sloupec %2 z %3 do %4 verschoben</translation>
+        <translation type="obsolete">%1: přesunut sloupec %2 z %3 do %4 verschoben</translation>
     </message>
     <message>
         <source>invalid column width</source>
-        <translation type="unfinished">neplatná šířka sloupce</translation>
+        <translation type="obsolete">neplatná šířka sloupce</translation>
     </message>
     <message>
         <source>%1: paste from clipboard</source>
-        <translation type="unfinished">%1: vložit ze schránky</translation>
+        <translation type="obsolete">%1: vložit ze schránky</translation>
     </message>
     <message>
         <source>%1: mask selected cell(s)</source>
-        <translation type="unfinished">%1: vybraná buňka(y) maskována</translation>
+        <translation type="obsolete">%1: vybraná buňka(y) maskována</translation>
     </message>
     <message>
         <source>Column %1</source>
-        <translation type="unfinished">Sloupec %1</translation>
+        <translation type="obsolete">Sloupec %1</translation>
     </message>
     <message>
         <source>invalid row or column count</source>
-        <translation type="unfinished">Neplatný počet řádků nebo sloupců</translation>
+        <translation type="obsolete">Neplatný počet řádků nebo sloupců</translation>
     </message>
     <message>
         <source>&amp;Sort Columns</source>
-        <translation type="unfinished">&amp;Seřadit sloupce</translation>
+        <translation type="obsolete">&amp;Seřadit sloupce</translation>
     </message>
     <message>
         <source>Clear Table</source>
-        <translation type="unfinished">Vyprázdnit tabulku</translation>
+        <translation type="obsolete">Vyprázdnit tabulku</translation>
     </message>
     <message>
         <source>Clear Masks</source>
-        <translation type="unfinished">Odstranit maskování</translation>
+        <translation type="obsolete">Odstranit maskování</translation>
     </message>
     <message>
         <source>S&amp;et Column(s) As</source>
-        <translation type="unfinished">&amp;Přiřazení k nákresu: nastavit sloupce jako</translation>
+        <translation type="obsolete">&amp;Přiřazení k nákresu: nastavit sloupce jako</translation>
     </message>
     <message>
         <source>change the table size</source>
-        <translation type="unfinished">Změnit velikost tabulky</translation>
+        <translation type="obsolete">Změnit velikost tabulky</translation>
     </message>
     <message>
         <source>Column Statisti&amp;cs</source>
-        <translation type="unfinished">Statistické údaje ke &amp;sloupcům</translation>
+        <translation type="obsolete">Statistické údaje ke &amp;sloupcům</translation>
     </message>
     <message>
         <source>Clea&amp;r</source>
@@ -10822,79 +10836,79 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>no table element found</source>
-        <translation type="unfinished">nenalezen žádný prvek tabulky</translation>
+        <translation type="obsolete">nenalezen žádný prvek tabulky</translation>
     </message>
     <message>
         <source>&amp;Add Column</source>
-        <translation type="unfinished">&amp;Přidat sloupec</translation>
+        <translation type="obsolete">&amp;Přidat sloupec</translation>
     </message>
     <message>
         <source>&amp;Normalize Selection</source>
-        <translation type="unfinished">&amp;Normalizovat výběr</translation>
+        <translation type="obsolete">&amp;Normalizovat výběr</translation>
     </message>
     <message>
         <source>Edit Column &amp;Description</source>
-        <translation type="unfinished">Upravit &amp;popis sloupce</translation>
+        <translation type="obsolete">Upravit &amp;popis sloupce</translation>
     </message>
     <message>
         <source>Past&amp;e</source>
-        <translation type="unfinished">&amp;Vložit</translation>
+        <translation type="obsolete">&amp;Vložit</translation>
     </message>
     <message>
         <source>Row Numbers</source>
-        <translation type="unfinished">Čísla řádků</translation>
+        <translation type="obsolete">Čísla řádků</translation>
     </message>
     <message>
         <source>Fi&amp;ll Selection with</source>
-        <translation type="unfinished">Vyplnit &amp;výběr</translation>
+        <translation type="obsolete">Vyplnit &amp;výběr</translation>
     </message>
     <message>
         <source>%1: fill cells with row numbers</source>
-        <translation type="unfinished">%1: buňky vyplněny čísly řádků</translation>
+        <translation type="obsolete">%1: buňky vyplněny čísly řádků</translation>
     </message>
     <message>
         <source>Set Table Dimensions</source>
-        <translation type="unfinished">Nastavit velikost tabulky</translation>
+        <translation type="obsolete">Nastavit velikost tabulky</translation>
     </message>
     <message>
         <source>&amp;Sort Table</source>
-        <translation type="unfinished">&amp;Setřídit tabulku</translation>
+        <translation type="obsolete">&amp;Setřídit tabulku</translation>
     </message>
     <message>
         <source>%1: apply formula to selection</source>
-        <translation type="unfinished">%1: vzorec použit na výběr</translation>
+        <translation type="obsolete">%1: vzorec použit na výběr</translation>
     </message>
     <message>
         <source>Assign &amp;Formula</source>
-        <translation type="unfinished">&amp;Přiřadit vzorec</translation>
+        <translation type="obsolete">&amp;Přiřadit vzorec</translation>
     </message>
     <message>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="unfinished">neznámý prvek: &apos;%1&apos;</translation>
+        <translation type="obsolete">neznámý prvek: &apos;%1&apos;</translation>
     </message>
     <message>
         <source>&amp;Insert Empty Columns</source>
-        <translation type="unfinished">&amp;Vložit prázdné sloupce</translation>
+        <translation type="obsolete">&amp;Vložit prázdné sloupce</translation>
     </message>
     <message>
         <source>%1: sort column(s)</source>
-        <translation type="unfinished">%1: sloupec(e) seřazen</translation>
+        <translation type="obsolete">%1: sloupec(e) seřazen</translation>
     </message>
     <message>
         <source>%1: unmask selected cell(s)</source>
-        <translation type="unfinished">%1: vybraná buňka(y) odmaskována</translation>
+        <translation type="obsolete">%1: vybraná buňka(y) odmaskována</translation>
     </message>
     <message>
         <source>statistics on rows</source>
-        <translation type="unfinished">Statistické údaje k řádkům</translation>
+        <translation type="obsolete">Statistické údaje k řádkům</translation>
     </message>
     <message>
         <source>Row Statisti&amp;cs</source>
-        <translation type="unfinished">&amp;Statistické údaje k řádkům</translation>
+        <translation type="obsolete">&amp;Statistické údaje k řádkům</translation>
     </message>
     <message>
         <source>Remo&amp;ve Rows</source>
-        <translation type="unfinished">&amp;Odstranit řádky</translation>
+        <translation type="obsolete">&amp;Odstranit řádky</translation>
     </message>
     <message>
         <source>X Error</source>
@@ -10902,19 +10916,19 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>&amp;Add Rows</source>
-        <translation type="unfinished">&amp;Přidat řádky</translation>
+        <translation type="obsolete">&amp;Přidat řádky</translation>
     </message>
     <message>
         <source>Enter row</source>
-        <translation type="unfinished">Zadat řádek</translation>
+        <translation type="obsolete">Zadat řádek</translation>
     </message>
     <message>
         <source>Go to Cell</source>
-        <translation type="unfinished">Jdi na buňku</translation>
+        <translation type="obsolete">Jdi na buňku</translation>
     </message>
     <message>
         <source>&amp;Go to Cell</source>
-        <translation type="unfinished">&amp;Jdi na buňku</translation>
+        <translation type="obsolete">&amp;Jdi na buňku</translation>
     </message>
     <message>
         <source>Y Error</source>
@@ -10922,7 +10936,7 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished">Vybrat vše</translation>
+        <translation type="obsolete">Vybrat vše</translation>
     </message>
     <message>
         <source>&amp;Unmask</source>
@@ -10930,7 +10944,7 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>Formula Edit Mode</source>
-        <translation type="unfinished">Režim zadávání vzorců</translation>
+        <translation type="obsolete">Režim zadávání vzorců</translation>
     </message>
     <message>
         <source>&amp;Dimensions</source>
@@ -10938,121 +10952,103 @@ dvojnásobná přesnost
     </message>
     <message>
         <source>Hide Controls</source>
-        <translation type="unfinished">Skrýt ovládání</translation>
+        <translation type="obsolete">Skrýt ovládání</translation>
     </message>
     <message>
         <source>statistics on columns</source>
-        <translation type="unfinished">Statistické údaje ke sloupcům</translation>
+        <translation type="obsolete">Statistické údaje ke sloupcům</translation>
     </message>
     <message>
         <source>Hide Comments</source>
-        <translation type="unfinished">Skrýt poznámky</translation>
+        <translation type="obsolete">Skrýt poznámky</translation>
     </message>
     <message>
         <source>Clea&amp;r Columns</source>
-        <translation type="unfinished">&amp;Vyprázdnit sloupce</translation>
+        <translation type="obsolete">&amp;Vyprázdnit sloupce</translation>
     </message>
     <message>
         <source>&amp;Add Columns</source>
-        <translation type="unfinished">&amp;Přidat sloupce</translation>
+        <translation type="obsolete">&amp;Přidat sloupce</translation>
     </message>
     <message>
         <source>%1: cut selected cell(s)</source>
-        <translation type="unfinished">%1: vybranou buňku(y) vyjmout</translation>
+        <translation type="obsolete">%1: vybranou buňku(y) vyjmout</translation>
     </message>
     <message>
         <source>Clea&amp;r Rows</source>
-        <translation type="unfinished">&amp;Smazat obsah řádků</translation>
+        <translation type="obsolete">&amp;Smazat obsah řádků</translation>
     </message>
     <message>
         <source>Random Values</source>
-        <translation type="unfinished">Náhodné hodnoty</translation>
+        <translation type="obsolete">Náhodné hodnoty</translation>
     </message>
     <message>
         <source>append a new column to the table</source>
-        <translation type="unfinished">Připojit k tabulce nový sloupec</translation>
+        <translation type="obsolete">Připojit k tabulce nový sloupec</translation>
     </message>
     <message>
         <source>Show Controls</source>
-        <translation type="unfinished">Ukázat ovládání</translation>
+        <translation type="obsolete">Ukázat ovládání</translation>
     </message>
     <message>
         <source>Show Comments</source>
-        <translation type="unfinished">Ukázat poznámky</translation>
+        <translation type="obsolete">Ukázat poznámky</translation>
     </message>
     <message>
         <source>Remo&amp;ve Columns</source>
-        <translation type="unfinished">&amp;Odstranit sloupce</translation>
+        <translation type="obsolete">&amp;Odstranit sloupce</translation>
     </message>
     <message>
         <source>Ctrl+Alt+G</source>
-        <translation type="unfinished">Ctrl+Alt+G</translation>
+        <translation type="obsolete">Ctrl+Alt+G</translation>
     </message>
     <message>
         <source>Ctrl+Alt+O</source>
-        <translation type="unfinished">Ctrl+Alt+O</translation>
+        <translation type="obsolete">Ctrl+Alt+O</translation>
     </message>
     <message>
         <source>&amp;Mask</source>
         <comment>mask selection</comment>
-        <translation type="unfinished">&amp;Maskovat</translation>
+        <translation type="obsolete">&amp;Maskovat</translation>
     </message>
     <message>
         <source>&amp;Unmask</source>
         <comment>unmask selection</comment>
-        <translation type="unfinished">&amp;Odmaskovat</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r</source>
-        <comment>clear selection</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export to TeX...</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">&amp;Odmaskovat</translation>
     </message>
     <message>
         <source>&amp;Dimensions</source>
         <comment>table size</comment>
-        <translation type="unfinished">&amp;Rozměry</translation>
+        <translation type="obsolete">&amp;Rozměry</translation>
     </message>
     <message>
         <source>X</source>
         <comment>plot designation</comment>
-        <translation type="unfinished">X</translation>
+        <translation type="obsolete">X</translation>
     </message>
     <message>
         <source>Y</source>
         <comment>plot designation</comment>
-        <translation type="unfinished">Y</translation>
+        <translation type="obsolete">Y</translation>
     </message>
     <message>
         <source>Z</source>
         <comment>plot designation</comment>
-        <translation type="unfinished">Z</translation>
+        <translation type="obsolete">Z</translation>
     </message>
     <message>
         <source>X Error</source>
         <comment>plot designation</comment>
-        <translation type="unfinished">Chyba X</translation>
+        <translation type="obsolete">Chyba X</translation>
     </message>
     <message>
         <source>Y Error</source>
         <comment>plot designation</comment>
-        <translation type="unfinished">Chyba Y</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <comment>plot designation</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TeX Export Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Chyba Y</translation>
     </message>
     <message>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation type="unfinished">Nelze zapisovat do souboru: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Ověřte, prosím, že máte oprávnění pro zápis do tohoto umístění!</translation>
+        <translation type="obsolete">Nelze zapisovat do souboru: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Ověřte, prosím, že máte oprávnění pro zápis do tohoto umístění!</translation>
     </message>
 </context>
 </TS>

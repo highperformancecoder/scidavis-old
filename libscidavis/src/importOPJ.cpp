@@ -907,18 +907,18 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 			grid->enableZeroLineY(0);
 
 			vector<Origin::GraphAxisFormat> formats;
-			formats.push_back(layer.yAxis.formatAxis[0]); //bottom
-			formats.push_back(layer.yAxis.formatAxis[1]); //top
-			formats.push_back(layer.xAxis.formatAxis[0]); //left
-			formats.push_back(layer.xAxis.formatAxis[1]); //right
+			formats.push_back(layer.xAxis.formatAxis[0]); //bottom
+			formats.push_back(layer.xAxis.formatAxis[1]); //top
+			formats.push_back(layer.yAxis.formatAxis[0]); //left
+			formats.push_back(layer.yAxis.formatAxis[1]); //right
 			graph->setXAxisTitle(parseOriginText(QString::fromLocal8Bit(formats[0].label.text.c_str())));
 			graph->setYAxisTitle(parseOriginText(QString::fromLocal8Bit(formats[2].label.text.c_str())));
 
 			vector<Origin::GraphAxisTick> ticks;
-			ticks.push_back(layer.yAxis.tickAxis[0]); //bottom
-			ticks.push_back(layer.yAxis.tickAxis[1]); //top
-			ticks.push_back(layer.xAxis.tickAxis[0]); //left
-			ticks.push_back(layer.xAxis.tickAxis[1]); //right
+			ticks.push_back(layer.xAxis.tickAxis[0]); //bottom
+			ticks.push_back(layer.xAxis.tickAxis[1]); //top
+			ticks.push_back(layer.yAxis.tickAxis[0]); //left
+			ticks.push_back(layer.yAxis.tickAxis[1]); //right
 			for(int i=0; i<4; ++i)
 			{
 				QString data(ticks[i].dataName.c_str());
