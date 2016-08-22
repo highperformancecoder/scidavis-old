@@ -42,6 +42,7 @@ win32 {
 
 TRANSLATIONS    = translations/scidavis_de.ts \
                   translations/scidavis_es.ts \
+                  translations/scidavis_nl.ts \
                   translations/scidavis_fr.ts \
                   translations/scidavis_ru.ts \
                   translations/scidavis_ja.ts \
@@ -66,7 +67,7 @@ TRANSLATIONS    = translations/scidavis_de.ts \
 # note the translation files are not writable during AEGIS
 # integration, so we don't want to perform an update then
         tstarget.commands = (! test -w translations/scidavis_de.ts || \
-$$LUPDATE_BIN ../libscidavis/src/*.cpp -ts translations/*.ts) && $$LRELEASE_BIN translations/*.ts
+$$LUPDATE_BIN src/*.cpp ../libscidavis/src/*.cpp -ts translations/*.ts) && $$LRELEASE_BIN translations/*.ts
 
         QMAKE_EXTRA_TARGETS += tstarget
         QMAKE_CLEAN += $$translationfiles.files
