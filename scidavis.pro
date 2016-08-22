@@ -37,3 +37,14 @@ SUBDIRS += fitPlugins/fitRational0\
            fitPlugins/exp_saturation\
            fitPlugins/planck_wavelength\
 }
+
+TRANSLATIONS    = scidavis/translations/scidavis_de.ts \
+                  scidavis/translations/scidavis_es.ts \
+                  scidavis/translations/scidavis_nl.ts \
+                  scidavis/translations/scidavis_fr.ts \
+                  scidavis/translations/scidavis_ru.ts \
+                  scidavis/translations/scidavis_ja.ts \
+                  scidavis/translations/scidavis_sv.ts \
+                  scidavis/translations/scidavis_pt-br.ts \
+                  scidavis/translations/scidavis_cs.ts \
+                  scidavis/translations/scidavis_cs-alt.ts \
