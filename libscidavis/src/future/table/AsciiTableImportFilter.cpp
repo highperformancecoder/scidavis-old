@@ -173,7 +173,7 @@ AbstractAspect * AsciiTableImportFilter::importAspect(QIODevice& input)
     readCols<QStringList>(cols, stream, d_first_row_names_columns);
 
   // renaming will be done by the kernel
-  future::Table * result = new future::Table(0, 0, 0, tr("Table"));
+  future::Table * result = new future::Table(/*0,*/ 0, 0, tr("Table"));
   result->appendColumns(cols);
   return result;
 }

@@ -189,7 +189,7 @@ class TableView : public MyWidget
 		void showControlDescriptionTab();
 		void showControlTypeTab();
 		void showControlFormulaTab();
-		void handleHorizontalSectionResized(int logicalIndex, int oldSize, int newSize); 
+        void handleHorizontalSectionResized(int logicalIndex,/* int oldSize,*/ int newSize);
 		void goToNextColumn();
 		void goToPreviousColumn();
 

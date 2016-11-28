@@ -68,16 +68,16 @@ void Integration::init()
 
 bool Integration::isDataAcceptable()
 {
-	const gsl_interp_type *method_t;
+    // const gsl_interp_type *method_t;
 	switch (d_method) {
 		case Linear:
-			method_t = gsl_interp_linear;
+            //method_t = gsl_interp_linear;
 			break;
 		case Cubic:
-			method_t = gsl_interp_cspline;
+            //method_t = gsl_interp_cspline;
 			break;
 		case Akima:
-			method_t = gsl_interp_akima;
+            //method_t = gsl_interp_akima;
 			break;
 		default:
 			QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),

@@ -195,13 +195,13 @@ void TableView::init()
 
 void TableView::rereadSectionSizes()
 {
-	disconnect(d_horizontal_header, SIGNAL(sectionResized(int, int, int)), this, SLOT(handleHorizontalSectionResized(int, int, int)));
+	disconnect(d_horizontal_header, SIGNAL(sectionResized(int, int, int)), this, SLOT(handleHorizontalSectionResized(int,/* int,*/ int)));
 
 	int cols = d_table->columnCount();
 	for (int i=0; i<cols; i++)
 		d_horizontal_header->resizeSection(i, d_table->columnWidth(i));
 		
-	connect(d_horizontal_header, SIGNAL(sectionResized(int, int, int)), this, SLOT(handleHorizontalSectionResized(int, int, int)));
+	connect(d_horizontal_header, SIGNAL(sectionResized(int, int, int)), this, SLOT(handleHorizontalSectionResized(int,/*int,*/ int)));
 }
 
 void TableView::setColumnWidth(int col, int width) 
@@ -214,7 +214,7 @@ int TableView::columnWidth(int col) const
 	return d_horizontal_header->sectionSize(col);
 }
 
-void TableView::handleHorizontalSectionResized(int logicalIndex, int oldSize, int newSize)
+void TableView::handleHorizontalSectionResized(int logicalIndex,/*int oldSize,*/ int newSize)
 {
 	static bool inside = false;
 	d_table->setColumnWidth(logicalIndex, newSize);

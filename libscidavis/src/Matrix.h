@@ -298,12 +298,12 @@ protected slots:
 
 private:
 	//! Initialize the matrix
-	void init(int rows, int cols);
+    void init(/*int rows, int cols*/);
 
 	//! Stores the matrix data only before the user opens the matrix dialog in order to avoid data loses during number format changes.
 	double **dMatrix;
 
-	Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
+    Matrix(future::Matrix *future_matrix, ScriptingEnv *env,/* int r, int c,*/ const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
 };
 
 #endif

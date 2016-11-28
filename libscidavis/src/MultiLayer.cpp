@@ -664,7 +664,7 @@ void MultiLayer::exportPDF(const QString& fname)
 	exportVector(fname);
 }
 
-void MultiLayer::exportVector(const QString& fileName, int res, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPrinter::Orientation orientation)
+void MultiLayer::exportVector(const QString& fileName,/* int res,*/ bool color, bool keepAspect, QPrinter::PageSize pageSize, QPrinter::Orientation orientation)
 {
 	if ( fileName.isEmpty() ){
 		QMessageBox::critical(this, tr("Error"),

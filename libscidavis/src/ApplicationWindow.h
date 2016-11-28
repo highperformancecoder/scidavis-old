@@ -166,7 +166,7 @@ public slots:
 	 */
 	QFile * openCompressedFile(const QString& fn);
 	ApplicationWindow* openProject(const QString& fn);
-	ApplicationWindow* importOPJ(const QString& filename);
+    ApplicationWindow* importOPJ(const QString& filename);
 	void showHistory();
 
 	/**

@@ -91,7 +91,7 @@ class Table : public AbstractPart
 #ifndef LEGACY_CODE_0_2_x
 		Table(AbstractScriptingEngine *engine, int rows, int columns, const QString &name);
 #else
-		Table(void *engine, int rows, int columns, const QString &name);
+        Table(/*void *engine,*/ int rows, int columns, const QString &name);
 		void setView(TableView * view);
 		friend class ::TableStatistics;
 #endif

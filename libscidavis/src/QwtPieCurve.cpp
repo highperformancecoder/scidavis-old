@@ -50,7 +50,7 @@ QwtPieCurve::QwtPieCurve(Table *t, const char *name, int startRow, int endRow):
 }
 
 void QwtPieCurve::draw(QPainter *painter,
-		const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
+        /*const QwtScaleMap &xMap, const QwtScaleMap &yMap,*/ int from, int to) const
 {
 	if ( !painter || dataSize() <= 0 )
 		return;
@@ -58,11 +58,11 @@ void QwtPieCurve::draw(QPainter *painter,
 	if (to < 0)
 		to = dataSize() - 1;
 
-	drawPie(painter, xMap, yMap, from, to);
+    drawPie(painter,/* xMap, yMap,*/ from, to);
 }
 
 void QwtPieCurve::drawPie(QPainter *painter,
-		const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
+        /*const QwtScaleMap &xMap, const QwtScaleMap &yMap,*/ int from, int to) const
 {
 	// This has to be synced with Graph::plotPie() for now... until we have a clean solution.
 	QRect canvas_rect = plot()->plotLayout()->canvasRect();
