@@ -11949,6 +11949,24 @@ void ApplicationWindow::createLanguagesList()
 
 	qmPath = TS_PATH;
 
+	QString lng; // lang, as en_GB
+	QString slng; // short lang, as en
+	lng = QLocale().name();
+	{
+		if (lng == "C")
+			lng = "en";
+		int i = lng.indexOf(QString("."));
+		if (i >= 0)
+			lng = lng.left(i);
+		i = lng.indexOf(QString("_"));
+		if (i >= 0)
+			slng = lng.left(i);
+		else
+			slng = lng;
+	}
+	if (slng.size() > 2)
+		slng = slng.left(2);
+
 	QDir dir(qmPath);
 	QStringList fileNames = dir.entryList("scidavis_*.qm");
         if (fileNames.size()==0)
@@ -11972,9 +11990,17 @@ void ApplicationWindow::createLanguagesList()
 	if (appLanguage != "en")
 	{
           if (!appTranslator->load("scidavis_" + appLanguage, qmPath))
-            appTranslator->load("scidavis_" + appLanguage);
+            if (!appTranslator->load("scidavis_" + appLanguage))
+              if (!appTranslator->load("scidavis_" + lng, qmPath))
+                if (!appTranslator->load("scidavis_" + lng))
+                  if (!appTranslator->load("scidavis_" + slng, qmPath))
+                   appTranslator->load("scidavis_" + slng);
           if (!qtTranslator->load("qt_" + appLanguage, qmPath+"/qt"))
-            qtTranslator->load("qt_" + appLanguage);
+            if (!qtTranslator->load("qt_" + appLanguage))
+              if (!qtTranslator->load("qt_" + lng, qmPath+"/qt"))
+                if (!qtTranslator->load("qt_" + lng))
+                  if (!qtTranslator->load("qt_" + slng, qmPath+"/qt"))
+                    qtTranslator->load("qt_" + slng);
 	}
 }
 
