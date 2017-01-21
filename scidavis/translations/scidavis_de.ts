@@ -791,8 +791,8 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2493"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2700"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7168"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13045"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13089"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13071"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13115"/>
         <source>Table</source>
         <translation type="unfinished">Tabelle</translation>
     </message>
@@ -964,8 +964,8 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2636"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2637"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9072"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13041"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13084"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13067"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13110"/>
         <source>Matrix</source>
         <translation type="unfinished">Matrix</translation>
     </message>
@@ -1027,7 +1027,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4852"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5464"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13419"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13445"/>
         <source>&amp;Yes</source>
         <translation type="unfinished">&amp;Ja</translation>
     </message>
@@ -1066,7 +1066,7 @@ Do you want to overwrite it?</source>
 Wollen Sie sie überschreiben?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13419"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13445"/>
         <source>&amp;No</source>
         <translation type="unfinished">&amp;Nein</translation>
     </message>
@@ -2434,7 +2434,7 @@ Operation aborted!</source>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1487"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13695"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13721"/>
         <source>Please select a column to plot!</source>
         <translation type="unfinished">Bitte wählen Sie die darzustellende Spalte aus!</translation>
     </message>
@@ -2571,8 +2571,8 @@ Operation aborted!</source>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="236"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12772"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13121"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12798"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13147"/>
         <source>Folder</source>
         <translation type="unfinished">Ordner</translation>
     </message>
@@ -2590,13 +2590,13 @@ Operation aborted!</source>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="263"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="692"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12730"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12772"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13084"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13089"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13094"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13099"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13104"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12756"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12798"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13110"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13115"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13120"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13125"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13130"/>
         <source>Type</source>
         <translation type="unfinished">Typ</translation>
     </message>
@@ -2607,24 +2607,24 @@ Operation aborted!</source>
         <translation type="unfinished">Ansicht</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12736"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12762"/>
         <source>Size</source>
         <translation type="unfinished">Größe</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="265"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="694"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12749"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12753"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12777"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13107"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12775"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12779"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12803"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13133"/>
         <source>Created</source>
         <translation type="unfinished">Erstellt</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="266"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="695"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13079"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13105"/>
         <source>Label</source>
         <translation type="unfinished">Beschriftung</translation>
     </message>
@@ -2716,12 +2716,12 @@ Operation aborted!</source>
         <translation type="unfinished">X-Achsentitel</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13361"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13387"/>
         <source>No updates available. You are already running the latest version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13701"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13727"/>
         <source>Please select a Y column to plot!</source>
         <translation type="unfinished">Bitte eine Y-Spalte zum Plotten auswählen!</translation>
     </message>
@@ -2791,7 +2791,7 @@ Operation aborted!</source>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3453"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4015"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11922"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12113"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12139"/>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; doesn&apos;t exist!</source>
         <translation type="unfinished">Die Datei &lt;b&gt;%1&lt;/b&gt; existiert nicht!</translation>
     </message>
@@ -2889,7 +2889,7 @@ Operation aborted!</source>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5147"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12606"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12632"/>
         <source>Please enter a valid name!</source>
         <translation type="unfinished">Bitte einen gültigen Namen eingeben!</translation>
     </message>
@@ -2902,12 +2902,12 @@ Operation aborted!</source>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5153"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5161"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5170"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12617"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12643"/>
         <source>Please choose another name!</source>
         <translation type="unfinished">Bitte einen anderen Namen wählen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12617"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12643"/>
         <source>Name already exists!</source>
         <translation type="unfinished">Der Name existiert bereits!</translation>
     </message>
@@ -3113,8 +3113,8 @@ Wollen Sie fortfahren?</translation>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7534"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7536"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7538"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12528"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13582"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12554"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13608"/>
         <source>&amp;Properties...</source>
         <translation type="unfinished">&amp;Eigenschaften...</translation>
     </message>
@@ -3125,13 +3125,13 @@ Wollen Sie fortfahren?</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7668"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12811"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12837"/>
         <source>Yes</source>
         <translation type="unfinished">Ja</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7668"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12811"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12837"/>
         <source>No</source>
         <translation type="unfinished">Nein</translation>
     </message>
@@ -3144,13 +3144,13 @@ Wollen Sie fortfahren?</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7765"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12512"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12538"/>
         <source>New &amp;Window</source>
         <translation type="unfinished">Neues &amp;Fenster</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7767"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12515"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12541"/>
         <source>New F&amp;older</source>
         <translation type="unfinished">Neuer &amp;Ordner</translation>
     </message>
@@ -3172,9 +3172,9 @@ Wollen Sie fortfahren?</translation>
         <translation type="obsolete">Abhängig&amp;e 3D Diagramme</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13623"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13641"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13647"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13649"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13667"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13673"/>
         <source>D&amp;epends on</source>
         <translation type="unfinished">Häng&amp;t ab von</translation>
     </message>
@@ -3366,7 +3366,7 @@ Wollen Sie fortfahren?</translation>
         <translation type="unfinished">Minimiert</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12547"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12573"/>
         <source>Hidden</source>
         <translation type="unfinished">Ausgeblendet</translation>
     </message>
@@ -3578,7 +3578,7 @@ Wollen Sie fortfahren?</translation>
         <translation type="obsolete">Z&amp;ufallswerten</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12519"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12545"/>
         <source>&amp;None</source>
         <translation type="unfinished">&amp;Keine</translation>
     </message>
@@ -3894,8 +3894,8 @@ Wollen Sie fortfahren?</translation>
         <translation type="unfinished">Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13049"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13094"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13075"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13120"/>
         <source>Note</source>
         <translation type="unfinished">Notiz</translation>
     </message>
@@ -3995,8 +3995,8 @@ Wollen Sie fortfahren?</translation>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7179"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11504"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11574"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13053"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13099"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13079"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13125"/>
         <source>Graph</source>
         <translation type="unfinished">Grafik</translation>
     </message>
@@ -4076,12 +4076,12 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
         <translation type="unfinished">&amp;Diagramm-Details...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13595"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13621"/>
         <source>D&amp;epending Graphs</source>
         <translation type="unfinished">Abhängig&amp;e Grafiken</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13609"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13635"/>
         <source>D&amp;epending 3D Graphs</source>
         <translation type="unfinished">Abhängig&amp;e 3D-Grafiken</translation>
     </message>
@@ -4183,29 +4183,29 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
         <translation type="obsolete">Kann keine Sicherheitskopie von &lt;b&gt;%1&lt;/b&gt; (nach %2) machen.&lt;br&gt;Falls Sie dies ignorieren, kann es zu &lt;b&gt;Datenverlust&lt;/b&gt; kommen.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12373"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12399"/>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
         <translation type="unfinished">Die Datei &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; wurde im schreibgeschützten Modus geöffnet</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12481"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12507"/>
         <source>&amp;Find...</source>
         <translation type="unfinished">&amp;Suchen...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12483"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12509"/>
         <source>App&amp;end Project...</source>
         <translation type="unfinished">Projekt an&amp;hängen...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12485"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12511"/>
         <source>Save &amp;As Project...</source>
         <translation type="unfinished">Speichere &amp;als Projekt...</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10467"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11039"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12487"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12513"/>
         <source>Save Project &amp;As...</source>
         <translation type="unfinished">Speichere Projekt &amp;als...</translation>
     </message>
@@ -4227,7 +4227,7 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3493"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12163"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12189"/>
         <source>SciDAVis currently does not support Origin import. If you are interested in reviving and maintaining an Origin import filter, contact the developers.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4276,81 +4276,81 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12401"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12427"/>
         <source>Error writing data to disk</source>
         <translation type="unfinished">Fehler beim Schreiben der Daten</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12402"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12428"/>
         <source>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Your data may or may not have ended up in &lt;em&gt;%2&lt;/em&gt; (%3). 					If there already was a version of this project on disk, it has not been touched.&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Ihre Daten sind möglicherweise in &lt;em&gt;%2&lt;/em&gt;, möglicherweise aber auch nicht.(%3) Falls bereits eine Version dieses Projektes auf der Festplatte vorhanden war, wurde sie nicht verändert.&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12420"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12446"/>
         <source>Error renaming backup files</source>
         <translation type="unfinished">Fehler beim Umbenennen der Backup-Dateien</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12421"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12447"/>
         <source>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Data was written to &lt;em&gt;%2&lt;/em&gt;, but saving the original file as &lt;em&gt;%3&lt;/em&gt;					and moving the new file to &lt;em&gt;%4&lt;/em&gt; failed. In case you wonder why the original file hasn&apos;t					been simply replaced, see here:					&lt;a href=&quot;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&quot;&gt;					http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Daten wurden in Datei &lt;em&gt;%2&lt;/em&gt; geschrieben, aber das Sichern der Originaldatei unter &lt;em&gt;%3&lt;/em&gt; und Verschieben der neuen Datei nach &lt;em&gt;%4&lt;/em&gt; ist fehlgeschlagen. Falls Sie sich wundern, warum die Originaldatei nicht einfach ersetzt wurde, finden Sie Hintergrundinformationen unter:
 &lt;a href=&quot;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&quot;&gt;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12492"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12518"/>
         <source>&amp;Show All Windows</source>
         <translation type="unfinished">Alle Fenster &amp;anzeigen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12493"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12519"/>
         <source>&amp;Hide All Windows</source>
         <translation type="unfinished">Alle Fenster a&amp;usblenden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12499"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12525"/>
         <source>&amp;Delete Folder</source>
         <translation type="unfinished">Or&amp;dner löschen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12500"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12526"/>
         <source>&amp;Rename</source>
         <translation type="unfinished">&amp;Umbenennen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12519"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12545"/>
         <source>&amp;Windows in Active Folder</source>
         <translation type="unfinished">Fenster im aktiven &amp;Ordner</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12519"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12545"/>
         <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
         <translation type="unfinished">Fenster im &amp;aktiven Ordner &amp;&amp; Unterordnern</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12526"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12552"/>
         <source>&amp;View Windows</source>
         <translation type="unfinished">Fenster a&amp;nzeigen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12730"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12756"/>
         <source>Project</source>
         <translation type="unfinished">Projekt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12733"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12773"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13106"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12759"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12799"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13132"/>
         <source>Path</source>
         <translation type="unfinished">Pfad</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12736"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12762"/>
         <source>bytes</source>
         <translation type="unfinished">Bytes</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12740"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12774"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12766"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12800"/>
         <source>Contents</source>
         <translation type="unfinished">Inhalt</translation>
     </message>
@@ -4363,19 +4363,19 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
         <translation type="obsolete">Ordner</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12750"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12776"/>
         <source>Modified</source>
         <translation type="unfinished">Geändert</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12755"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12780"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13073"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12781"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12806"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13099"/>
         <source>Properties</source>
         <translation type="unfinished">Eigenschaften</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12790"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12816"/>
         <source>New Folder</source>
         <translation type="unfinished">Neuer Ordner</translation>
     </message>
@@ -4384,12 +4384,12 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
         <translation type="obsolete">QtiPlot - Order löschen?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12810"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12836"/>
         <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
         <translation type="unfinished">Ordner &apos;%1&apos; und alle enthaltenen Fenster löschen?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13108"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13134"/>
         <source>Status</source>
         <translation type="unfinished">Status</translation>
     </message>
@@ -4398,17 +4398,17 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
         <translation type="obsolete">QtiPlot - Keine Übereinstimmung gefunden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13183"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13209"/>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
         <translation type="unfinished">Entschuldigung, keine Übereinstimmung für die Zeichenkette gefunden: &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13204"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13230"/>
         <source>Cannot move an object to itself!</source>
         <translation type="unfinished">Kann das Objekt nicht auf sich selbst bewegen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13210"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13236"/>
         <source>Cannot move a parent folder into a child folder!</source>
         <translation type="unfinished">Kann keinen Ordner in einen seiner Unterordner bewegen!</translation>
     </message>
@@ -4417,7 +4417,7 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
         <translation type="obsolete">Ordnerverschieben übersprungen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13225"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13251"/>
         <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
         <translation type="unfinished">Der Zielordner enthält bereits einen Ordner namens &apos;%1&apos;! Ordner übersprungen!</translation>
     </message>
@@ -4432,7 +4432,7 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
 %2.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13333"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13359"/>
         <source>Error while fetching version file with HTTP: %1.</source>
         <translation type="unfinished">Fehler beim Herunterladen der Versionsdatei über HTTP: %1.</translation>
     </message>
@@ -5223,7 +5223,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="obsolete">QtiPlot - Hilfe</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13418"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13444"/>
         <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
         <translation type="unfinished">Diese Operation löscht alle der Tabelle zugeordneten Daten. Sind Sie sicher?</translation>
     </message>
@@ -5404,30 +5404,30 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="obsolete">QtiPlot - Fehler beim Sichern der Datei</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12444"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12470"/>
         <source>Save project as</source>
         <translation type="unfinished">Projekt speichern als</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12740"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12774"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12766"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12800"/>
         <source>windows</source>
         <translation type="unfinished">Fenster</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12743"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12775"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12769"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12801"/>
         <source>folders</source>
         <translation type="unfinished">Ordner</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13057"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13104"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13083"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13130"/>
         <source>3D Graph</source>
         <translation type="unfinished">3D Grafik</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13224"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13250"/>
         <source>Skipped moving folder</source>
         <translation type="unfinished">Ordnerverschieben übersprungen</translation>
     </message>
@@ -5479,7 +5479,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1477"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13707"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13733"/>
         <source>Please set a default X column for this table, first!</source>
         <translation type="unfinished">Bitte zuerst eine Spalte als Standard X-Spalte der Tabelle auswählen!</translation>
     </message>
@@ -5511,7 +5511,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6177"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7668"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11858"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13224"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13250"/>
         <source>SciDAVis</source>
         <translation type="unfinished">SciDAVis</translation>
     </message>
@@ -5547,13 +5547,13 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5020"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12440"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12466"/>
         <source>SciDAVis project</source>
         <translation type="unfinished">SciDAVis Projekt</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5021"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12441"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12467"/>
         <source>Compressed SciDAVis project</source>
         <translation type="unfinished">Komprimiertes SciDAVis Projekt</translation>
     </message>
@@ -5715,7 +5715,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="unfinished">Sie haben keine Berechtigung, um die Datei &lt;b&gt;%1&lt;/b&gt; zu öffnen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12120"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12146"/>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a SciDAVis or Origin project file!</source>
         <translation type="unfinished">Die Datei &lt;b&gt;%1&lt;/b&gt; ist kein SciDAVis oder Origin Projekt!</translation>
     </message>
@@ -5724,7 +5724,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="obsolete">SciDAVis wird nun versuchen, die nötige Information über die letzte verfügbare Aktualisierung herunter zu laden. Bitte stellen Sie Ihre Firewall so ein, dass SciDAVis auf das Internet zugreifen kann!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13317"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13343"/>
         <source>Do you wish to continue?</source>
         <translation type="unfinished">Wollen Sie wirklich fortfahren?</translation>
     </message>
@@ -5745,23 +5745,23 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="obsolete">Spalte eingeben</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13667"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13704"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13693"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13730"/>
         <source>You need at least two columns for this operation!</source>
         <translation type="unfinished">Es werden mindestens zwei Spalten für diese Operation benötigt!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13672"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13698"/>
         <source>Please select a Z column for this operation!</source>
         <translation type="unfinished">Bitte eine Z-Spalte für diese Operation wählen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13677"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13703"/>
         <source>You need to define a X column first!</source>
         <translation type="unfinished">Sie müssen zuerst eine X-Spalte definieren!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13682"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13708"/>
         <source>You need to define a Y column first!</source>
         <translation type="unfinished">Sie müssen zuerst eine Y-Spalte definieren!</translation>
     </message>
@@ -5820,16 +5820,16 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11847"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11895"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11902"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12606"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12616"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13667"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13672"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13677"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13682"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13695"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13701"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13704"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13707"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12632"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12642"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13693"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13698"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13703"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13708"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13721"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13727"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13730"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13733"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
@@ -5872,7 +5872,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11753"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11785"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11798"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13417"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13443"/>
         <source>Warning</source>
         <translation type="unfinished">Warnung</translation>
     </message>
@@ -5933,9 +5933,9 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11913"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11917"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11921"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12112"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12119"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12163"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12138"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12145"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12189"/>
         <source>File opening error</source>
         <translation type="unfinished">Fehler beim Öffnen der Datei</translation>
     </message>
@@ -6077,27 +6077,27 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="obsolete">Datei Backup Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12372"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12398"/>
         <source>File save error</source>
         <translation type="unfinished">Fehler beim Speichern der Datei</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12809"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12835"/>
         <source>Delete folder?</source>
         <translation type="unfinished">Ordner löschen?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13182"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13208"/>
         <source>No match found</source>
         <translation type="unfinished">Keine Übereinstimmung gefunden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13332"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13358"/>
         <source>HTTP get version file</source>
         <translation type="unfinished">HTTP Versionsdatei herunterladen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13353"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13379"/>
         <source>Updates Available</source>
         <translation type="unfinished">Aktualisierungen verfügbar</translation>
     </message>
@@ -6117,12 +6117,12 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="unfinished">Ein leeres Notiz-/Skriptfenster erstellen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13316"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13342"/>
         <source>SciDAVis will now try to determine whether a new version of SciDAVis is available. Please modify your firewall settings in order to allow SciDAVis to connect to the internet.</source>
         <translation type="unfinished">SciDAVis wird nun versuchen, zu ermitteln, ob einen neue Version von SciDAVis verfügbar ist. Bitte passen Sie Ihre Firewall so an, dass SciDAVis Zugang zum Internet gewährt wird.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13354"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13380"/>
         <source>There is a newer version of SciDAVis (%1) available for download. Would you like to download it now?</source>
         <translation type="unfinished">Eine neuere Version von SciDAVis (%1) ist verfügbar. Wollen Sie sie jetzt herunterladen?</translation>
     </message>
@@ -6131,12 +6131,12 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="obsolete">Keine Updates verfügbar. Sie verwenden bereits die aktuellste Version.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13364"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13390"/>
         <source>Invalid version file</source>
         <translation type="unfinished">Ungültige Versionsdatei</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13365"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13391"/>
         <source>The version file (contents: &quot;%1&quot;) could not be decoded into a valid version number.</source>
         <translation type="unfinished">Die Versionsdatei (Inhalt: &quot;%1&quot;) konnte nicht in eine gültige Versionsnummer umgewandelt werden.</translation>
     </message>
@@ -6186,7 +6186,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="unfinished">kann eine beliebige .sciprj, .sciprj.gz, .qti, qti.gz, .py oder ASCII Datei sein</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13798"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13824"/>
         <source>Undo/Redo History</source>
         <translation type="unfinished">Undo-Liste</translation>
     </message>
@@ -9425,17 +9425,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Bitte einen gültigen Kurvennamen eingeben!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="235"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="236"/>
         <source>Plot</source>
         <translation type="unfinished">Diagramm</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="236"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="237"/>
         <source>fit of dataset</source>
         <translation type="unfinished">Anpassung an den Datensatz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="238"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="239"/>
         <source>using function</source>
         <translation type="unfinished">unter Benutzung der Funktion</translation>
     </message>
@@ -9460,70 +9460,70 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Statistisch</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="255"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="256"/>
         <source>Arbitrary Dataset</source>
         <translation type="unfinished">Beliebiger Datensatz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="263"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="264"/>
         <source>Nelder-Mead Simplex</source>
         <translation type="unfinished">Nelder-Mead Simplex</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="265"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="266"/>
         <source>Unscaled Levenberg-Marquardt</source>
         <translation type="unfinished">Unskalierter Levenberg-Marquardt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="267"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="268"/>
         <source>Scaled Levenberg-Marquardt</source>
         <translation type="unfinished">Skalierter Levenberg-Marquardt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="269"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="270"/>
         <source> algorithm with tolerance = </source>
         <translation type="unfinished"> Algorithmus mit Toleranz = </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="272"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="273"/>
         <source>From x</source>
         <translation type="unfinished">Von x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="272"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="273"/>
         <source>to x</source>
         <translation type="unfinished">bis x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="285"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="325"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="286"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="326"/>
         <source>R^2</source>
         <translation type="unfinished">R^2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="289"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="290"/>
         <source>Iterations</source>
         <translation type="unfinished">Iterationen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="290"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="291"/>
         <source>Status</source>
         <translation type="unfinished">Status</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="320"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="321"/>
         <source>Dataset</source>
         <translation type="unfinished">Datensatz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="321"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="322"/>
         <source>Function</source>
         <translation type="unfinished">Funktion</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="373"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="404"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="424"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="374"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="405"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="425"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
@@ -9532,12 +9532,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Die Kurve %1 hat keine zugeordneten Y-Fehlerbalken. Sie können deshalb keine intrumentelle Gewichtung benutzen. </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="424"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="425"/>
         <source>Parameter</source>
         <translation type="unfinished">Parameter</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="424"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="425"/>
         <source>Value</source>
         <translation type="unfinished">Wert</translation>
     </message>
@@ -9546,17 +9546,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Sie haben keinen Datensatz für die Fit-Operation ausgewählt. Abbruch!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="494"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="495"/>
         <source>There are no parameters specified for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Sie haben keine Parameter für die Anpassungsoperation ausgewählt. Abbruch!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="506"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="507"/>
         <source>You must specify a valid fit function first. Operation aborted!</source>
         <translation type="unfinished">Sie müssen zuerst eine gültige Anpassungsfunktion angeben. Abbruch!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="627"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="628"/>
         <source>Fit</source>
         <translation type="unfinished">Anpassung</translation>
     </message>
@@ -9573,55 +9573,55 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Es werden mindestens %1 Punkte für diese Funktion benötigt. Die Ausführung wurde abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="405"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="406"/>
         <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
         <translation type="unfinished">Die Spalte %1 hat weniger Punkte als der Datensatz der Anpassung. Bitte eine andere Spalte wählen!.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="488"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="489"/>
         <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Sie haben keinen gültigen Datensatz für diese Anpassung ausgewählt. Ausführung abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="501"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Es werden mindestens %1 Datenpunkte für diese Funktion benötigt. Die Ausführung wurde abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="487"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="493"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="499"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="505"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="488"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="494"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="506"/>
         <source>Fit Error</source>
         <translation type="unfinished">Anpassungsfehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="242"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="243"/>
         <source>Y standard errors</source>
         <translation type="unfinished">Y Standardfehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="247"/>
         <source>Unknown</source>
         <translation type="unfinished">Unbekannt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="249"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="250"/>
         <source>Associated dataset (%1)</source>
         <translation type="unfinished">Zugeordneter Datensatz (%1)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="252"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="253"/>
         <source>Statistical (assuming Poisson distribution)</source>
         <translation type="unfinished">Statistisch (Poisson-Verteilung angenommen)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="374"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="375"/>
         <source>The curve %1 has no associated Y error bars.</source>
         <translation type="unfinished">Die Kurve %1 hat keine zugeordneten Y-Fehlerbalken.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="539"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="540"/>
         <source>Input function error</source>
         <translation type="unfinished">Fehler bei der Funktionseingabe</translation>
     </message>
