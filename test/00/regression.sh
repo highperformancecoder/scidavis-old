@@ -34,4 +34,7 @@ cp $here/test/*.opj .
 $here/test/readWriteProject
 if test $? -ne 0; then fail; fi
 
+diff Graph1.svg $here/test/renderedImages/Graph1.svg
+if test $? -ne 0; then fail; fi
+
 pass

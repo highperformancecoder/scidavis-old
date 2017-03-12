@@ -7,7 +7,9 @@ class ReadWriteProjectTest: public ApplicationWindow
 private slots:
   void readWriteProject();
   void largeOriginImport();
-  
+
+  void exportTestProject();
+ 
   void showHelp();
   void chooseHelpFolder();
 };

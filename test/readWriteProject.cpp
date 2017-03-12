@@ -1,5 +1,6 @@
 #include "readWriteProject.h"
 #include "ApplicationWindow.h"
+#include "MultiLayer.h"
 
 #include <iostream>
 #include <memory>
@@ -23,6 +24,16 @@ void ReadWriteProjectTest::readWriteProject()
   app1.reset(open("testProject1.sciprj.gz"));
   QVERIFY(app1.get());
 
+}
+
+void ReadWriteProjectTest::exportTestProject()
+{
+  unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
+  QVERIFY(app.get());
+  unique_ptr<QWidgetList> windows(app->windowsList());
+  for (auto i: *windows)
+    if (auto w=dynamic_cast<MultiLayer*>(i))
+      w->exportSVG(i->windowTitle()+".svg");
 }
 
 // checks that the large file Origin import problem (ticket #238) remains fixed
