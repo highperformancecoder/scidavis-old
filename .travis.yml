@@ -2,7 +2,7 @@ sudo: true
 dist: trusty
 language: cpp
 before_install:
-  - uname -a
+  - cat /etc/os-release
   - wget http://download.opensuse.org/repositories/home:hpcoder1/xUbuntu_14.04/Release.key
   - sudo apt-key add - < Release.key
   - echo 'deb http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_14.04/ /' >/tmp/qwtplot3d.list 
