@@ -174,72 +174,55 @@ namespace Origin
 	// https://stackoverflow.com/questions/35648390/tagged-union-c
 	// https://books.google.de/books?id=PSUNAAAAQBAJ&pg=PA217&lpg=PA217&dq=c%2B%2B+tagged+union+string&source=bl&ots=DqArIieZ8H&sig=k2a6okxxgUuEkLw48hFJChkIG9o&hl=en&sa=X&ved=0ahUKEwjylreR08DUAhWBVRoKHWPSBqE4ChDoAQhUMAg#v=onepage&q=c%2B%2B%20tagged%20union%20string&f=false
 	typedef struct Variant {
-		enum vtype {V_DOUBLE, V_STRING} type;
-		union {
-			double as_double;
-			string as_string;
-		};
+          enum vtype {V_DOUBLE, V_STRING} type=V_DOUBLE;
+          union {
+            double as_double;
+            string as_string;
+          };
 
-		Variant() {
-			type = V_DOUBLE;
-		}
-		Variant(const double d) {
-			if (type == V_STRING)
-				as_string.~string();
-			type = V_DOUBLE;
-			as_double = d;
-			//printf("Variant(d) = %g (check = %g)\n", d, as_double);
-		}
-		Variant(const string& s) {
-			if (type == V_STRING)
-				as_string = s;
-			else {
-				type = V_STRING;
-				new(&as_string) string(s);
-			}
-			//printf("Variant(s) = %s (check = %s)\n", s.c_str(), as_string.c_str());
-		}
+          Variant() {}
+          Variant(const double d): as_double(d) {}
+          Variant(const string& s): type(V_STRING)
+          {new(&as_string) string(s);}
 
-		Variant(const Variant& v) {
-			//printf("Variant(v) type = %d\n", v.type);
-			type = v.type;
-			switch (v.type) {
-			case V_DOUBLE:
-				as_double = v.as_double;
-				break;
-			case V_STRING:
-				new(&as_string) string(v.as_string);
-			}
-		}
+          Variant(const Variant& v): type(v.type) {
+            switch (v.type) {
+            case V_DOUBLE:
+              as_double = v.as_double;
+              break;
+            case V_STRING:
+              new(&as_string) string(v.as_string);
+            }
+          }
 
-		Origin::Variant& operator=(const Origin::Variant& v) {
-			//printf("Variant=() type = %d, new type = %d\n", type, v.type);
-			if (type == V_STRING && v.type == V_STRING) {
-				as_string = v.as_string;
-				return *this;
-			}
+          Origin::Variant& operator=(const Origin::Variant& v) {
+            //printf("Variant=() type = %d, new type = %d\n", type, v.type);
+            if (type == V_STRING && v.type == V_STRING) {
+              as_string = v.as_string;
+              return *this;
+            }
 
-			if (type == V_STRING)
-                          // switching to a double, so clean up old string
-                          as_string.~string();
+            if (type == V_STRING)
+              // switching to a double, so clean up old string
+              as_string.~string();
 
-			switch (v.type) {
-			case V_DOUBLE:
-				as_double = v.as_double;
-				break;
-			case V_STRING:
-                          // switching from double, allocate new string
-                          new(&as_string) string(v.as_string);
-			}
-			type = v.type;
-			return *this;
-		}
+            switch (v.type) {
+            case V_DOUBLE:
+              as_double = v.as_double;
+              break;
+            case V_STRING:
+              // switching from double, allocate new string
+              new(&as_string) string(v.as_string);
+            }
+            type = v.type;
+            return *this;
+          }
 
-		~Variant() {
-			//printf("~Variant()\n");
-			if (type == V_STRING)
-				as_string.~string();
-		}
+          ~Variant() {
+            //printf("~Variant()\n");
+            if (type == V_STRING)
+              as_string.~string();
+          }
 	} variant;
 
 	struct SpreadColumn

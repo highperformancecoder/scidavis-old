@@ -59,6 +59,8 @@ const QColor ColorBox::colors[] = {
   QColor(Qt::darkGray),
 };
 
+const int ColorBox::colors_count=sizeof(colors)/sizeof(colors[0]);
+
 ColorBox::ColorBox(QWidget *parent) : QComboBox(parent)
 {
     setEditable(false);
@@ -203,7 +205,7 @@ int ColorBox::colorIndex(const QColor& c)
 
 QColor ColorBox::color(int colorIndex)
 {
-	if (colorIndex < (int)sizeof(colors))
+	if (colorIndex < colors_count)
 		return colors[colorIndex];
 	else
 		return QColor(Qt::black); // default color is black.

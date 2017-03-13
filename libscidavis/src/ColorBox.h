@@ -61,7 +61,7 @@ protected:
 	//! Internal initialization function
 	void init();
 	//! The number of predefined colors
-	static const int colors_count = 24;
+	static const int colors_count;
 	//! Array containing the 24 predefined colors
 	static const QColor colors[];
 };

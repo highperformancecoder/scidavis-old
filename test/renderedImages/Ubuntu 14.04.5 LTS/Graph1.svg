@@ -533,6 +533,17 @@ font-family="DejaVu Sans" font-size="18.6667" font-weight="700" font-style="norm
 >
 </g>
 
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" transform="matrix(1,0,0,1,0,0)"
+font-family="DejaVu Sans" font-size="18.6667" font-weight="700" font-style="normal" 
+>
+<path vector-effect="none" fill-rule="evenodd" d="M56,33 L487,33 L487,342 L56,342 L56,33"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="DejaVu Sans" font-size="18.6667" font-weight="700" font-style="normal" 
+>
+</g>
+
 <g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
 font-family="Sans Serif" font-size="12" font-weight="400" font-style="normal" 
 >
