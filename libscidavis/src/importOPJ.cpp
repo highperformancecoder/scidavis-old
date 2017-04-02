@@ -35,6 +35,7 @@
 #include "future/core/datatypes/DateTime2StringFilter.h"
 
 #include <QRegExp>
+#include <QApplication>
 #include <QMessageBox>
 #include <QDockWidget>
 #include <QLocale>
@@ -70,14 +71,19 @@ ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
 		mw(app)
 {
 	xoffset=0;
-	OriginFile opj((const char *)filename.toLocal8Bit());
-	parse_error = opj.parse();
-	importTables(opj);
-	importGraphs(opj);
-	importNotes(opj);
-	if(filename.endsWith(".opj", Qt::CaseInsensitive))
-		createProjectTree(opj);
-	mw->showResults(opj.resultsLogString().c_str(), mw->logWindow->isVisible());
+	try {
+		OriginFile opj((const char *)filename.toLocal8Bit());
+		parse_error = opj.parse();
+		importTables(opj);
+		importGraphs(opj);
+		importNotes(opj);
+		if(filename.endsWith(".opj", Qt::CaseInsensitive))
+			createProjectTree(opj);
+		mw->showResults(opj.resultsLogString().c_str(), mw->logWindow->isVisible());
+	} catch(const std::logic_error& er){
+		QApplication::restoreOverrideCursor();
+		QMessageBox::critical(mw, "Origin Project Import Error", QString(er.what()));
+	}
 }
 
 inline uint qHash(const tree<Origin::ProjectNode>::iterator &key)
