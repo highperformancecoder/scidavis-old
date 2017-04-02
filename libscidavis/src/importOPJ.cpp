@@ -487,6 +487,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 						continue;
 
 					Matrix->setCell(i, j, val); // Matrix is the one in Application
+					if (k >= layer.data.size()) break;
 				}
 			}
 
