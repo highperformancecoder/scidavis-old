@@ -28,20 +28,18 @@
  ***************************************************************************/
 
 #include "OriginFile.h"
-#include <cstdio>  // for fprintf
-#include <cstdlib> // for atoi
 #include <fstream>
+#include <string>
 
 OriginFile::OriginFile(const string& fileName)
 :	fileVersion(0)
 {
-	unsigned int ioret;  // return value of io functions
 	ifstream file(fileName.c_str(), ios_base::binary);
 
 	if (!file.is_open())
 	{
-		ioret = fprintf(stderr, "Could not open %s!\n", fileName.c_str());
-		return;
+		cerr <<  "Could not open " << fileName.c_str() << "!" << endl;
+		exit(EXIT_FAILURE);
 	}
 
 #ifndef NO_CODE_GENERATION_FOR_LOG
@@ -49,55 +47,67 @@ OriginFile::OriginFile(const string& fileName)
 	logfile = fopen("./opjfile.log", "w");
 	if (logfile == NULL)
 	{
-		ioret = fprintf(stderr, "Could not open opjfile.log !\n");
-		return;
+		cerr <<  "Could not open opjfile.log !" << endl;
+		exit(EXIT_FAILURE);
 	}
 #endif // NO_CODE_GENERATION_FOR_LOG
 
-	string vers(4, 0);
-	file.seekg(0x7, ios_base::beg);
-	file >> vers;
-	fileVersion = atoi(vers.c_str());
+	string vers;
+	getline(file, vers);
+	unsigned int majorVersion = strtol(vers.substr(5,1).c_str(),0,10);
+	char locale_decpoint = vers[6];
+	(void) locale_decpoint; // supress compiler warning
+	buildVersion = strtol(vers.substr(7).c_str(),0,10);
+	unsigned int buildNumber = strtol(vers.substr(12).c_str(),0,10);
+	(void) buildNumber; // supress compiler warning
 	file.close();
 
-	LOG_PRINT(logfile, "	[version = %d]\n", fileVersion)
+	LOG_PRINT(logfile, "File: %s\n", fileName.c_str())
 
-	buildVersion = fileVersion;
 	// translate version
-	if(fileVersion >= 130 && fileVersion <= 140) // 4.1
+	if (majorVersion==3) {
+		if (buildVersion < 830)
+			fileVersion = 350;
+		else
+			fileVersion = 410;
+	} else if (buildVersion >= 110 && buildVersion <= 141) // 4.1
 		fileVersion = 410;
-	else if(fileVersion == 210) // 5.0
+	else if(buildVersion <= 210) // 5.0
 		fileVersion = 500;
-	else if(fileVersion == 2625) // 6.0
+	else if(buildVersion <= 2623) // 6.0
 		fileVersion = 600;
-	else if(fileVersion == 2627) // 6.0 SR1
+	else if(buildVersion <= 2627) // 6.0 SR1
 		fileVersion = 601;
-	else if(fileVersion == 2630) // 6.0 SR4
+	else if(buildVersion < 2635) // 6.0 SR4
 		fileVersion = 604;
-	else if(fileVersion == 2635) // 6.1
+	else if(buildVersion < 2656) // 6.1
 		fileVersion = 610;
-	else if(fileVersion >= 2656 && fileVersion <= 2664) // 7.0
+	else if(buildVersion < 2659) // 7.0 SR0 (2656-2658)
 		fileVersion = 700;
-	else if(fileVersion == 2672) // 7.0 SR3
+	else if (buildVersion <2664) // 7.0 SR1 (2659-2663)
+		fileVersion = 701;
+	else if (buildVersion <2672) // 7.0 SR2 (2664-2671)
+		fileVersion = 702;
+	else if (buildVersion <2673) // 7.0 SR3 (2672-2672)
 		fileVersion = 703;
-	else if(fileVersion == 2673) // 7.0 E
+	else if(buildVersion <2766) // 7.0 SR4 (2673-2765)
 		fileVersion = 704;
-	else if(fileVersion >= 2766 && fileVersion <= 2769) // 7.5
+	else if (buildVersion <2878) // 7.5 (2766-2877)
 		fileVersion = 750;
-	else if(fileVersion >= 2876 && fileVersion <= 2906) // 8.0
+	else if (buildVersion <2881) // 8.0 SR0 (2878-2880)
 		fileVersion = 800;
-	else if(fileVersion >= 2907) // 8.1
+	else if (buildVersion <2892) // 8.0 SR1,SR2,SR3 (2878-2891)
+		fileVersion = 801;
+	else if (buildVersion <2944) // 8.0 SR4, 8.1 SR1-SR4 (2891-2943)
 		fileVersion = 810;
 	else {
-		LOG_PRINT(logfile, "Found unknown project version %d\n", fileVersion)
-		LOG_PRINT(logfile, "Please contact the authors of liborigin")
-#ifndef NO_CODE_GENERATION_FOR_LOG
-		unsigned int ioret;
-		ioret = fclose(logfile);
-#endif // NO_CODE_GENERATION_FOR_LOG
-		throw std::logic_error("Unknown project version");
+		fileVersion = 850; // 8.5 SR0 and newer (2944-)
+		LOG_PRINT(logfile, "Found project version 8.5 or newer\n")
 	}
-	LOG_PRINT(logfile, "Found project version %.2f\n", fileVersion/100.0)
+
+	if (fileVersion != 850) {
+		LOG_PRINT(logfile, "Found project version %.2f\n", fileVersion/100.0)
+	}
 	// Close logfile, will be reopened in parser routine.
 	// There are ways to keep logfile open and pass it to parser routine,
 	// but I choose to do the same as with 'file', close it and reopen in 'parse'
@@ -105,44 +115,19 @@ OriginFile::OriginFile(const string& fileName)
 #ifndef NO_CODE_GENERATION_FOR_LOG
 	fclose(logfile);
 #endif // NO_CODE_GENERATION_FOR_LOG
-	switch(fileVersion){
-		case 810:
-			parser.reset(createOrigin810Parser(fileName));
-			break;
-		case 800:
-			parser.reset(createOrigin800Parser(fileName));
-			break;
-		case 750:
-			parser.reset(createOrigin750Parser(fileName));
-			break;
-		case 700:
-		case 703:
-		case 704:
-			parser.reset(createOrigin700Parser(fileName));
-			break;
-		case 610:
-			parser.reset(createOrigin610Parser(fileName));
-			break;
-		case 600:
-		case 601:
-		case 604:
-			parser.reset(createOrigin600Parser(fileName));
-			break;
-		default:
-			parser.reset(createOriginDefaultParser(fileName));
-			break;
-	}
+	parser.reset(createOriginAnyParser(fileName));
 }
 
 bool OriginFile::parse()
 {
-	parser->setFileVersion(buildVersion);
+	parser->buildVersion = buildVersion;
+	parser->fileVersion = fileVersion;
 	return parser->parse();
 }
 
 double OriginFile::version() const
 {
-	return fileVersion/100.0;
+	return (parser->fileVersion)/100.0;
 }
 
 const tree<Origin::ProjectNode>* OriginFile::project() const

@@ -7,7 +7,7 @@ It is based on the code at
 	http://sourceforge.net/projects/liborigin
 	http://soft.proindependent.com/liborigin2
 
-AUTHORS:  Stefan Gerlach, Ion Vasilief, Alex Kargovsky
+AUTHORS:  Stefan Gerlach, Ion Vasilief, Alex Kargovsky, Miquel Garriga
 
 DEPENDENCIES: to compile, liborigin (still) depends on
 		BOOST C++ libraries  http://www.boost.org/
@@ -28,6 +28,6 @@ After installing CMake and the BOOST C++ library headers on your system, issue t
 
 ---------------------------------------------------------------------------
 FEATURES :
-	* supports the import of 6.0 - 8.1 projects
+	* supports the import of any project from version 3.5 to latest (2017)
 
 ---------------------------------------------------------------------------

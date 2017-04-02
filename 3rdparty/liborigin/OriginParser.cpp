@@ -28,7 +28,6 @@
 
 #include "OriginParser.h"
 #include <algorithm>
-#include <cstdlib> // for atoi
 #include <boost/algorithm/string.hpp> // for iequals
 
 using namespace boost::algorithm;
@@ -101,9 +100,14 @@ pair<string, string> OriginParser::findDataByIndex(unsigned int index) const
 
 	for(vector<Matrix>::const_iterator it = matrixes.begin(); it != matrixes.end(); ++it)
 	{
-		if(it->index == index)
-			return make_pair("M_" + it->name, it->name);
+		for(vector<MatrixSheet>::const_iterator it1 = it->sheets.begin(); it1 != it->sheets.end(); ++it1)
+		{
+			if(it1->index == index)
+				return make_pair("M_" + it->name, it1->name);
+		}
+
 	}
+
 
 	for(vector<Excel>::const_iterator it = excels.begin(); it != excels.end(); ++it)
 	{
@@ -170,7 +174,7 @@ void OriginParser::convertSpreadToExcel(vector<Origin::SpreadSheet>::size_type s
 		int pos = it->name.find_last_of("@");
 		if(pos != -1)
 		{
-			index = atoi(it->name.substr(pos + 1).c_str()) - 1;
+			index = strtol(it->name.substr(pos + 1).c_str(), 0, 10) - 1;
 			it->name = it->name.substr(0, pos);
 		}
 

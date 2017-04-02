@@ -47,7 +47,6 @@ class OriginParser
 public:
 	virtual ~OriginParser() {};
 	virtual bool parse() = 0;
-	void setFileVersion(unsigned int version){fileVersion = version;};
 
 	vector<Origin::SpreadSheet>::difference_type findSpreadByName(const string& name) const;
 	vector<Origin::Matrix>::difference_type findMatrixByName(const string& name) const;
@@ -73,15 +72,9 @@ public:
 	tree<Origin::ProjectNode> projectTree;
 	string resultsLog;
 	unsigned int windowsCount;
-	unsigned int fileVersion;
+	unsigned int fileVersion, buildVersion;
 };
 
-OriginParser* createOriginDefaultParser(const string& fileName);
-OriginParser* createOrigin600Parser(const string& fileName);
-OriginParser* createOrigin610Parser(const string& fileName);
-OriginParser* createOrigin700Parser(const string& fileName);
-OriginParser* createOrigin750Parser(const string& fileName);
-OriginParser* createOrigin800Parser(const string& fileName);
-OriginParser* createOrigin810Parser(const string& fileName);
+OriginParser* createOriginAnyParser(const string& fileName);
 
 #endif // ORIGIN_PARSER_H
