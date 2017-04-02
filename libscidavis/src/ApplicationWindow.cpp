@@ -3446,7 +3446,8 @@ void ApplicationWindow::open()
 						fn.endsWith(".qti",Qt::CaseInsensitive) || fn.endsWith(".qti~",Qt::CaseInsensitive) ||
 						fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
 						fn.endsWith(".opj",Qt::CaseInsensitive) || fn.endsWith(".ogm",Qt::CaseInsensitive) ||
-						fn.endsWith(".ogw",Qt::CaseInsensitive) || fn.endsWith(".ogg",Qt::CaseInsensitive))
+						fn.endsWith(".ogw",Qt::CaseInsensitive) || fn.endsWith(".ogg",Qt::CaseInsensitive) ||
+						fn.endsWith(".org",Qt::CaseInsensitive))
 				{
 					if (!fi.exists ()){
 						QMessageBox::critical(this, tr("File opening error"),
@@ -3462,7 +3463,8 @@ void ApplicationWindow::open()
 						if (fn.endsWith(".sciprj",Qt::CaseInsensitive) || fn.endsWith(".sciprj~",Qt::CaseInsensitive) ||
 							fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
 							fn.endsWith(".qti",Qt::CaseInsensitive) || fn.endsWith(".qti~",Qt::CaseInsensitive) ||
-                            fn.endsWith(".opj",Qt::CaseInsensitive) || fn.endsWith(".ogg", Qt::CaseInsensitive))
+                            fn.endsWith(".opj",Qt::CaseInsensitive) || fn.endsWith(".ogg", Qt::CaseInsensitive) ||
+                            fn.endsWith(".org",Qt::CaseInsensitive))
                             this->close();
 					}
 				} else {
@@ -3484,7 +3486,8 @@ ApplicationWindow* ApplicationWindow::open(const QString& fn)
 			fn.endsWith(".opj", Qt::CaseInsensitive) ||
 			fn.endsWith(".ogm", Qt::CaseInsensitive) ||
 			fn.endsWith(".ogw", Qt::CaseInsensitive) ||
-			fn.endsWith(".ogg", Qt::CaseInsensitive)
+			fn.endsWith(".ogg", Qt::CaseInsensitive) ||
+			fn.endsWith(".org", Qt::CaseInsensitive)
 			)
 #ifdef ORIGIN_IMPORT
 		return importOPJ(fn);
@@ -3550,7 +3553,8 @@ void ApplicationWindow::openRecentProject()
 		if (a && (fn.endsWith(".sciprj",Qt::CaseInsensitive) || fn.endsWith(".sciprj~",Qt::CaseInsensitive) ||
 			fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
 			fn.endsWith(".qti",Qt::CaseInsensitive) || fn.endsWith(".qti~",Qt::CaseInsensitive) ||
-            fn.endsWith(".opj",Qt::CaseInsensitive) || fn.endsWith(".ogg", Qt::CaseInsensitive)))
+            fn.endsWith(".opj",Qt::CaseInsensitive) || fn.endsWith(".ogg", Qt::CaseInsensitive) ||
+            fn.endsWith(".org",Qt::CaseInsensitive)))
 			this->close();
 	}
 }
@@ -4978,7 +4982,7 @@ bool ApplicationWindow::saveProject()
 {
 	if (projectname == "untitled" || projectname.endsWith(".opj", Qt::CaseInsensitive) ||
 		projectname.endsWith(".ogm", Qt::CaseInsensitive) || projectname.endsWith(".ogw", Qt::CaseInsensitive)
-		|| projectname.endsWith(".ogg", Qt::CaseInsensitive))
+		|| projectname.endsWith(".ogg", Qt::CaseInsensitive) || projectname.endsWith(".org", Qt::CaseInsensitive))
 	{
 		saveProjectAs();
 		return false;
@@ -7624,7 +7628,7 @@ if (e->mimeData()->hasUrls()) {
 
       if (ext == "sciprj" || ext == "sciprj~" || ext == "sciprj.gz" ||
           ext == "sciprj.gz~" || ext == "opj" || ext == "qti"|| ext == "qti.gz" ||
-          ext == "ogm"|| ext == "ogw" || ext == "ogg") {
+          ext == "ogm"|| ext == "ogw" || ext == "ogg" || ext == "org") {
         open(fileName);
       } else if (ext == "csv" || ext == "dat" || ext == "txt" || ext == "tsv") {
         asciiFiles << fileName;
@@ -11586,7 +11590,7 @@ MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
 ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
 {
 #ifdef ORIGIN_IMPORT
-    if (filename.endsWith(".opj", Qt::CaseInsensitive) || filename.endsWith(".ogg", Qt::CaseInsensitive))
+    if (filename.endsWith(".opj", Qt::CaseInsensitive) || filename.endsWith(".ogg", Qt::CaseInsensitive) || filename.endsWith(".org", Qt::CaseInsensitive))
     {
         QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
@@ -11873,7 +11877,7 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 			s += "-v " + tr("or") + " --version: " + tr("print SciDAVis version and release date") + "\n";
 			s += "-x " + tr("or") + " --execute: " + tr("execute the script file given as argument") + "\n\n";
 #ifdef ORIGIN_IMPORT
-			s += "'" + tr("file") + "_" + tr("name") + "' " + tr("can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py or ASCII file") + "\n";
+			s += "'" + tr("file") + "_" + tr("name") + "' " + tr("can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .org, .py or ASCII file") + "\n";
 #else
 			s += "'" + tr("file") + "_" + tr("name") + "' " + tr("can be any .sciprj, .sciprj.gz, .qti, qti.gz, .py or ASCII file") + "\n";
 #endif
@@ -12130,7 +12134,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 	if (fn.contains(".sciprj") ||
 		fn.contains(".qti") || fn.contains(".opj", Qt::CaseInsensitive) ||
 		fn.contains(".ogm", Qt::CaseInsensitive) || fn.contains(".ogw", Qt::CaseInsensitive) ||
-        fn.contains(".ogg", Qt::CaseInsensitive))
+        fn.contains(".ogg", Qt::CaseInsensitive) || fn.contains(".org", Qt::CaseInsensitive))
 	{
 		QFileInfo f(fn);
 		if (!f.exists ())
@@ -12181,7 +12185,8 @@ void ApplicationWindow::appendProject(const QString& fn)
 	current_folder->setFolderListItem(fli);
 
 	if (fn.contains(".opj", Qt::CaseInsensitive) || fn.contains(".ogm", Qt::CaseInsensitive) ||
-        fn.contains(".ogw", Qt::CaseInsensitive) || fn.contains(".ogg", Qt::CaseInsensitive))
+        fn.contains(".ogw", Qt::CaseInsensitive) || fn.contains(".ogg", Qt::CaseInsensitive) ||
+        fn.contains(".org", Qt::CaseInsensitive))
 #ifdef ORIGIN_IMPORT
 		ImportOPJ(this, fn);
 #else
