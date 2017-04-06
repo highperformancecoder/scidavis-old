@@ -29,6 +29,10 @@ possibly also on other platforms like `*`BSD.
 
 See [INSTALL.md](INSTALL.md)
 
+# User Manual
+
+[Manual](https://highperformancecoder.github.io/scidavis-handbook/)
+
 
 # Web site
 
