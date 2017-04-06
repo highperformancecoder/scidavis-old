@@ -1,0 +1,3 @@
+[submodule "scidavis-handbook"]
+	path = scidavis-handbook
+	url = https://github.com/Fellypao/scidavis-handbook.git
