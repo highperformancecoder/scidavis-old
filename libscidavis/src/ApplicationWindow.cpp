@@ -11840,7 +11840,11 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 
 	QString str;
 	bool exec = false;
-	foreach(str, args){
+        int scriptArg=0;
+        //	foreach(str, args){
+        for (int i=0; i<num_args; ++i)
+          {
+            str=args[i];
 		if( (str == "-a" || str == "--about") ||
 				(str == "-m" || str == "--manual") )
 		{
@@ -11896,15 +11900,18 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 						tr("<b> %1 </b>: Wrong locale option or no translation available!").arg(locale));
 		}
 		else if (str.startsWith("--execute") || str.startsWith("-x"))
-			exec = true;
+                    exec = true;
 		else if (str.startsWith("-") || str.startsWith("--"))
 		{
 			QMessageBox::critical(this, tr("Error"),
 			tr("<b> %1 </b> unknown command line option!").arg(str) + "\n" + tr("Type %1 to see the list of the valid options.").arg("'scidavis -h'"));
 		}
+                if (str.startsWith("-")) scriptArg=i; //save last flag
 	}
 
-	QString file_name = args[num_args-1]; // last argument
+        if (scriptArg<num_args-1) scriptArg++;
+	QString file_name = args[scriptArg]; // last argument
+
 	if(file_name.startsWith("-")) return; // no file name given
 
 	if (!file_name.isEmpty()){
