@@ -163,6 +163,7 @@ namespace Origin
 		string comment;
 		int width;
 		unsigned int index;
+		unsigned int colIndex;
 		unsigned int sheet;
 		vector<variant> data;
 
@@ -177,6 +178,7 @@ namespace Origin
 		,	comment("")
 		,	width(8)
 		,	index(_index)
+		,	colIndex(0)
 		,	sheet(0)
 		{};
 	};
@@ -185,14 +187,12 @@ namespace Origin
 	{
 		unsigned int maxRows;
 		bool loose;
-		bool multisheet;
 		unsigned int sheets;
 		vector<SpreadColumn> columns;
 
 		SpreadSheet(const string& _name = "")
 		:	Window(_name)
 		,	loose(true)
-		,	multisheet(false)
 		,	sheets(1)
 		{};
 	};
@@ -211,11 +211,11 @@ namespace Origin
 		};
 	};
 
-	struct Matrix : public Window
+	struct MatrixSheet
 	{
 		enum ViewType {DataView, ImageView};
-		enum HeaderViewType {ColumnRow, XY};
 
+		string name;
 		unsigned short rowCount;
 		unsigned short columnCount;
 		int valueTypeSpecification;
@@ -223,17 +223,15 @@ namespace Origin
 		int decimalPlaces;
 		NumericDisplayType numericDisplayType;
 		string command;
-		int width;
+		unsigned short width;
 		unsigned int index;
-		unsigned int sheets;
 		ViewType view;
-		HeaderViewType header;
 		ColorMap colorMap;
 		vector<double> data;
 		vector<double> coordinates;
 
-		Matrix(const string& _name = "", unsigned int _index = 0)
-		:	Window(_name)
+		MatrixSheet(const string& _name = "", unsigned int _index = 0)
+		:	name(_name)
 		,	valueTypeSpecification(0)
 		,	significantDigits(6)
 		,	decimalPlaces(6)
@@ -241,10 +239,23 @@ namespace Origin
 		,	command("")
 		,	width(8)
 		,	index(_index)
-		,	sheets(1)
 		,	view(DataView)
-		,	header(ColumnRow)
 		{coordinates.push_back(10.0);coordinates.push_back(10.0);coordinates.push_back(1.0);coordinates.push_back(1.0);};
+	};
+
+	struct Matrix : public Window
+	{
+		enum HeaderViewType {ColumnRow, XY};
+
+		unsigned int activeSheet;
+		HeaderViewType header;
+		vector<MatrixSheet> sheets;
+
+		Matrix(const string& _name = "")
+		:	Window(_name)
+		,	activeSheet(0)
+		,	header(ColumnRow)
+		{};
 	};
 
 	struct Function
@@ -420,6 +431,7 @@ namespace Origin
 		double boxCoeff;
 		double whiskersCoeff;
 		bool diamondBox;
+		unsigned char labels;
 	};
 
 	struct GraphCurve
@@ -434,12 +446,15 @@ namespace Origin
 		enum LineStyle {Solid = 0, Dash = 1, Dot = 2, DashDot = 3, DashDotDot = 4, ShortDash = 5, ShortDot = 6, ShortDashDot = 7};
 		enum LineConnect {NoLine = 0, Straight = 1, TwoPointSegment = 2, ThreePointSegment = 3, BSpline = 8, Spline = 9, StepHorizontal = 11, StepVertical = 12, StepHCenter = 13, StepVCenter = 14, Bezier = 15};
 
+		bool hidden;
 		unsigned char type;
 		string dataName;
+		string xDataName;
 		string xColumnName;
 		string yColumnName;
 		string zColumnName;
 		Color lineColor;
+		unsigned char lineTransparency;
 		unsigned char lineStyle;
 		unsigned char lineConnect;
 		unsigned char boxWidth;
@@ -449,6 +464,8 @@ namespace Origin
 		unsigned char fillAreaType;
 		unsigned char fillAreaPattern;
 		Color fillAreaColor;
+		unsigned char fillAreaTransparency;
+		bool fillAreaWithLineTransparency;
 		Color fillAreaPatternColor;
 		double fillAreaPatternWidth;
 		unsigned char fillAreaPatternBorderStyle;
@@ -458,6 +475,7 @@ namespace Origin
 		unsigned short symbolType;
 		Color symbolColor;
 		Color symbolFillColor;
+		unsigned char symbolFillTransparency;
 		double symbolSize;
 		unsigned char symbolThickness;
 		unsigned char pointOffset;
@@ -521,11 +539,12 @@ namespace Origin
 		TextBox label;
 		string prefix;
 		string suffix;
+		string factor;
 	};
 
 	struct GraphAxisTick
 	{
-		bool hidden;
+		bool showMajorLabels;
 		unsigned char color;
 		ValueType valueType;
 		int valueTypeSpecification; 
@@ -543,6 +562,8 @@ namespace Origin
 		enum Scale {Linear = 0, Log10 = 1, Probability = 2, Probit = 3, Reciprocal = 4, OffsetReciprocal = 5, Logit = 6, Ln = 7, Log2 = 8};
 
 		AxisPosition position;
+		bool zeroLine;
+		bool oppositeLine;
 		double min;
 		double max;
 		double step;
@@ -645,6 +666,7 @@ namespace Origin
 
 	struct ColorScale
 	{
+		bool visible;
 		bool reverseOrder;
 		unsigned short labelGap;
 		unsigned short colorBarThickness;
@@ -672,6 +694,7 @@ namespace Origin
 
 		PercentileProperties percentile;
 		ColorScale colorScale;
+		ColorMap colorMap;
 
 		vector<TextBox> texts;
 		vector<TextBox> pieTexts;
@@ -680,20 +703,35 @@ namespace Origin
 		vector<Bitmap> bitmaps;
 		vector<GraphCurve> curves;
 
+		float xAngle;
+		float yAngle;
+		float zAngle;
+
 		float xLength;
 		float yLength;
 		float zLength;
 
-		bool imageProfileTool;
+		int imageProfileTool;
 		double vLine;
 		double hLine;
 
+		bool isWaterfall;
+		int xOffset;
+		int yOffset;
+
+		bool gridOnTop;
+		bool exchangedAxes;
 		bool isXYY3D;
+		bool orthographic3D;
 
 		GraphLayer()
-		:	imageProfileTool(false)
+		:	imageProfileTool(0)
+		,	isWaterfall(false)
+		,	gridOnTop(false)
+		,	exchangedAxes(false)
 		,	isXYY3D(false)
-		{};
+		,	orthographic3D(false)
+		{colorScale.visible = false;};
 
 		//bool threeDimensional;
 		bool is3D() const
@@ -727,11 +765,15 @@ namespace Origin
 		unsigned short height;
 		bool is3D;
 		bool isLayout;
+		bool connectMissingData;
+		string templateName;
 
 		Graph(const string& _name = "")
 		:	Window(_name)
 		,	is3D(false)
 		,	isLayout(false)
+		,	connectMissingData(false)
+		,	templateName("")
 		{};
 	};
 
@@ -751,12 +793,14 @@ namespace Origin
 		string name;
 		time_t creationDate;
 		time_t modificationDate;
+		bool active;
 
-		ProjectNode(const string& _name = "", NodeType _type = Folder, const time_t _creationDate = time(NULL), const time_t _modificationDate = time(NULL))
+		ProjectNode(const string& _name = "", NodeType _type = Folder, const time_t _creationDate = time(NULL), const time_t _modificationDate = time(NULL), bool _active = false)
 		:	type(_type)
 		,	name(_name)
 		,	creationDate(_creationDate)
 		,	modificationDate(_modificationDate)
+		,	active(_active)
 		{};
 	};
 }

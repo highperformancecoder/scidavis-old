@@ -66,7 +66,7 @@ public:
 
 private:
 	unsigned int fileVersion, buildVersion;
-	auto_ptr<OriginParser> parser;
+	unique_ptr<OriginParser> parser;
 };
 
 #endif // ORIGIN_FILE_H

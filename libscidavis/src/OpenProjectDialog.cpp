@@ -49,6 +49,7 @@ OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WFlags 
 		<< tr("Origin matrix") + " (*.ogm *.OGM)"
 		<< tr("Origin worksheet") + " (*.ogw *.OGW)"
 		<< tr("Origin graph") + " (*.ogg *.OGG)"
+		<< tr("Origin 3.5 project") + " (*.org *.ORG)"
 #endif
 		<< tr("Backup files") + " (*.sciprj~)"
 		//<< tr("Python Source") + " (*.py *.PY)"

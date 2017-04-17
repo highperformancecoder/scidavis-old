@@ -1,12 +1,15 @@
 # CMakeLists.txt for liborigin
 cmake_minimum_required(VERSION 2.8)
 
+# c++11 standard
+add_compile_options(-std=c++11)
+
 # boost library headers
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 # library version
-set(LIBORIGIN_VERSION_MAJOR 2)
+set(LIBORIGIN_VERSION_MAJOR 3)
 set(LIBORIGIN_VERSION_MINOR 0)
 set(LIBORIGIN_VERSION_BUGFIX 0)
 
@@ -18,13 +21,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 set (sources
 	OriginFile.cpp
 	OriginParser.cpp
-	OriginDefaultParser.cpp
-	Origin600Parser.cpp
-	Origin610Parser.cpp
-	Origin700Parser.cpp
-	Origin750Parser.cpp
-	Origin800Parser.cpp
-	Origin810Parser.cpp
+	OriginAnyParser.cpp
 	)
 
 # header files for development
@@ -44,7 +41,7 @@ set_target_properties(origin PROPERTIES
 
 # static library
 add_library (origin-static STATIC ${sources})
-set_target_properties(origin-static PROPERTIES OUTPUT_NAME "origin")
+set_target_properties(origin-static PROPERTIES OUTPUT_NAME "origin" POSITION_INDEPENDENT_CODE ON)
 
 # install libraries
 install(TARGETS origin origin-static DESTINATION lib)

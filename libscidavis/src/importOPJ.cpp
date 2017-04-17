@@ -35,6 +35,7 @@
 #include "future/core/datatypes/DateTime2StringFilter.h"
 
 #include <QRegExp>
+#include <QApplication>
 #include <QMessageBox>
 #include <QDockWidget>
 #include <QLocale>
@@ -70,14 +71,19 @@ ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
 		mw(app)
 {
 	xoffset=0;
-	OriginFile opj((const char *)filename.toLocal8Bit());
-	parse_error = opj.parse();
-	importTables(opj);
-	importGraphs(opj);
-	importNotes(opj);
-	if(filename.endsWith(".opj", Qt::CaseInsensitive))
-		createProjectTree(opj);
-	mw->showResults(opj.resultsLogString().c_str(), mw->logWindow->isVisible());
+	try {
+		OriginFile opj((const char *)filename.toLocal8Bit());
+		parse_error = opj.parse();
+		importTables(opj);
+		importGraphs(opj);
+		importNotes(opj);
+		if(filename.endsWith(".opj", Qt::CaseInsensitive))
+			createProjectTree(opj);
+		mw->showResults(opj.resultsLogString().c_str(), mw->logWindow->isVisible());
+	} catch(const std::logic_error& er){
+		QApplication::restoreOverrideCursor();
+		QMessageBox::critical(mw, "Origin Project Import Error", QString(er.what()));
+	}
 }
 
 inline uint qHash(const tree<Origin::ProjectNode>::iterator &key)
@@ -247,7 +253,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 								scidavis_column->setValueAt(i, datavalue);
 							}
 						}
-						int f;
+						int f=0;
 						if(column.numericDisplayType == 0)
 						{
 							f=0;
@@ -455,75 +461,78 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 	for(unsigned int s = 0; s < opj.matrixCount(); ++s)
 	{
 		Origin::Matrix matrix = opj.matrix(s);
-		int columnCount = matrix.columnCount;
-		int rowCount = matrix.rowCount;
-
-		Matrix* Matrix = mw->newMatrix(matrix.name.c_str(), rowCount, columnCount);
-		if (!Matrix)
-			return false;
-
-		Matrix->setWindowLabel(matrix.label.c_str());
-		Matrix->setFormula(matrix.command.c_str());
-		Matrix->setColumnsWidth(matrix.width * SciDAVis_scaling_factor);
+		unsigned int layers = matrix.sheets.size();
+		for(unsigned int l = 0; l < layers; ++l){
+			Origin::MatrixSheet& layer = matrix.sheets[l];
+			int columnCount = layer.columnCount;
+			int rowCount = layer.rowCount;
+			Matrix* Matrix = mw->newMatrix(matrix.name.c_str(), rowCount, columnCount);
+			if (!Matrix)
+				return false;
+			Matrix->setWindowLabel(matrix.label.c_str());
+			Matrix->setFormula(layer.command.c_str());
+			Matrix->setColumnsWidth(layer.width * SciDAVis_scaling_factor);
 // TODO
 #if 0
-		Matrix->table()->blockSignals(true);
+			Matrix->table()->blockSignals(true);
 #endif
-		unsigned int k=0;
-		for (int j=0; j<columnCount; j++)
-		{
-			for (int i=0; i<rowCount; i++)
+			unsigned int k=0;
+			for (int j=0; j<columnCount; j++)
 			{
-				double val = matrix.data[k]; // matrix is the one in Origin file
+				for (int i=0; i<rowCount; i++)
+				{
+					double val = layer.data[k]; // matrix is the one in Origin file
 			        k++;
-				if(fabs(val)>0 && fabs(val)<2.0e-300)// empty entry
-					continue;
+					if(fabs(val)>0 && fabs(val)<2.0e-300)// empty entry
+						continue;
 
-				Matrix->setCell(i, j, val); // Matrix is the one in Application
+					Matrix->setCell(i, j, val); // Matrix is the one in Application
+					if (k >= layer.data.size()) break;
+				}
 			}
-		}
 
-		Matrix->saveCellsToMemory();
+			Matrix->saveCellsToMemory();
 
-		QChar format;
-		int prec = 6;
-		switch(matrix.valueTypeSpecification){
-			case 0: //Decimal 1000
-				format='f';
-				prec = matrix.decimalPlaces;
-				break;
-			case 1: //Scientific
-				format='e';
-				prec = matrix.decimalPlaces;
-				break;
-			case 2: //Engineering
-			case 3: //Decimal 1,000
-				format='g';
-				prec = matrix.significantDigits;
-				break;
-		}
-		Matrix->setNumericFormat(format, prec);
+			QChar format;
+			int prec = 6;
+			switch(layer.valueTypeSpecification){
+				case 0: //Decimal 1000
+					format='f';
+					prec = layer.decimalPlaces;
+					break;
+				case 1: //Scientific
+					format='e';
+					prec = layer.decimalPlaces;
+					break;
+				case 2: //Engineering
+				case 3: //Decimal 1,000
+					format='g';
+					prec = layer.significantDigits;
+					break;
+			}
+			Matrix->setNumericFormat(format, prec);
 // TODO
 #if 0
         Matrix->table()->blockSignals(false);
 #endif
-		Matrix->showNormal();
+			Matrix->showNormal();
 
-		//cascade the matrices
+			//cascade the matrices
 #if 0
-		int dx=Matrix->verticalHeaderWidth();
-		int dy=Matrix->parentWidget()->frameGeometry().height() - matrix->height();
+			int dx=Matrix->verticalHeaderWidth();
+			int dy=Matrix->parentWidget()->frameGeometry().height() - matrix->height();
 #endif
 // TODO
-		int dx = 100;
-		int dy = 100;
-		Matrix->parentWidget()->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
-		visible_count++;
+			int dx = 100;
+			int dy = 100;
+			Matrix->parentWidget()->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
+			visible_count++;
 
+		}
+
+		if(visible_count>0)
+			xoffset++;
 	}
-
-	if(visible_count>0)
-		xoffset++;
 	return true;
 }
 
@@ -585,7 +594,6 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 				graph->newLegend(parseOriginText(QString::fromLocal8Bit(layer.texts[i].text.c_str())));
 			}
 			int auto_color=0;
-			int auto_color1=0;
 			int style=0;
 			for(unsigned int c = 0; c < layer.curves.size(); ++c)
 			{
@@ -990,7 +998,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 
 				graph->showAxis(i, type, tableName, mw->table(tableName), !(formats[i].hidden),
 					tickTypeMap[formats[i].majorTicksType], tickTypeMap[formats[i].minorTicksType],
-					!(ticks[i].hidden),	ColorBox::color(formats[i].color), format, prec,
+					!(ticks[i].showMajorLabels),	ColorBox::color(formats[i].color), format, prec,
 					ticks[i].rotation, 0, "", (ticks[i].color==0xF7 ? ColorBox::color(formats[i].color) : ColorBox::color(ticks[i].color)));
 			}
 
