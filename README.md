@@ -27,7 +27,14 @@ possibly also on other platforms like `*`BSD.
 
 # Installation
 
-See [INSTALL.md](INSTALL.md)
+See [INSTALL.md](INSTALL.md). 
+
+Also consider using a prebuilt package, available for [PC and Mac](https://sourceforge.net/projects/scidavis/files/SciDAVis/) or [Linux](http://software.opensuse.org//download.html?project=home%3Ahpcoder1&package=scidavis).
+
+
+# User Manual
+
+[Manual](https://highperformancecoder.github.io/scidavis-handbook/)
 
 
 # Web site
