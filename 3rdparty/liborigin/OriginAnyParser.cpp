@@ -1261,6 +1261,7 @@ void OriginAnyParser::getWindowProperties(Origin::Window& window, string wde_hea
 
 	if(wde_header_size > 0xC3){
 		window.label = wde_header.substr(0xC3).c_str();
+		window.label = window.label.substr(0,window.label.find("@${"));
 		LOG_PRINT(logfile, "			WINDOW %d LABEL: %s\n", objectIndex, window.label.c_str());
 	}
 
