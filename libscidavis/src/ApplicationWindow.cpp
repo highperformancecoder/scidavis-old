@@ -3480,7 +3480,7 @@ void ApplicationWindow::open()
 	}
 }
 
-ApplicationWindow* ApplicationWindow::open(const QString& fn)
+ApplicationWindow* ApplicationWindow::open(const QString& fn, const QStringList& scriptArgs)
 {
 	if (
 			fn.endsWith(".opj", Qt::CaseInsensitive) ||
@@ -3498,7 +3498,7 @@ ApplicationWindow* ApplicationWindow::open(const QString& fn)
 		}
 #endif
 	else if (fn.endsWith(".py", Qt::CaseInsensitive))
-		return loadScript(fn);
+          return loadScript(fn, scriptArgs);
 	else if (
 			fn.endsWith(".sciprj",Qt::CaseInsensitive) ||
 			fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) ||
@@ -4930,7 +4930,7 @@ QString ApplicationWindow::windowGeometryInfo(MyWidget *w)
         s+="hidden\n";
     else
         s+="\n";
-	return s;
+    return s;
 }
 
 void ApplicationWindow::restoreWindowGeometry(ApplicationWindow *app, MyWidget *w, const QString s)
@@ -7158,78 +7158,78 @@ MyWidget* ApplicationWindow::clone()
 
 MyWidget* ApplicationWindow::clone(MyWidget* w)
 {
-    if (!w)
-        return 0;
+  if (!w)
+    return 0;
 
-	MyWidget* nw = 0;
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  MyWidget* nw = 0;
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	if (w->inherits("MultiLayer")){
-		nw = multilayerPlot(generateUniqueName(tr("Graph")));
-		((MultiLayer *)nw)->copy(this, (MultiLayer *)w);
-	} else if (w->inherits("Table")){
-		Table *t = (Table *)w;
-		QString caption = generateUniqueName(tr("Table"));
-		nw = newTable(caption, t->numRows(), t->numCols());
-		((Table *)nw)->copy(t);
-	} else if (w->inherits("Graph3D")){
-		Graph3D *g = (Graph3D *)w;
-		if (!g->hasData()){
-			QApplication::restoreOverrideCursor();
-			QMessageBox::warning(this, tr("Duplicate error"), tr("Empty 3D surface plots cannot be duplicated!"));
-			return 0;
-		}
+  if (w->inherits("MultiLayer")){
+    nw = multilayerPlot(generateUniqueName(tr("Graph")));
+    ((MultiLayer *)nw)->copy(this, (MultiLayer *)w);
+  } else if (w->inherits("Table")){
+    Table *t = (Table *)w;
+    QString caption = generateUniqueName(tr("Table"));
+    nw = newTable(caption, t->numRows(), t->numCols());
+    ((Table *)nw)->copy(t);
+  } else if (w->inherits("Graph3D")){
+    Graph3D *g = (Graph3D *)w;
+    if (!g->hasData()){
+      QApplication::restoreOverrideCursor();
+      QMessageBox::warning(this, tr("Duplicate error"), tr("Empty 3D surface plots cannot be duplicated!"));
+      return 0;
+    }
 
-		QString caption = generateUniqueName(tr("Graph"));
-		QString s = g->formula();
-		if (g->userFunction())
-			nw = newPlot3D(caption, s, g->xStart(), g->xStop(), g->yStart(), g->yStop(), g->zStart(), g->zStop());
-		else if (s.endsWith("(Z)"))
-			nw = dataPlotXYZ(caption, s, g->xStart(),g->xStop(), g->yStart(),g->yStop(),g->zStart(),g->zStop());
-		else if (s.endsWith("(Y)"))//Ribbon plot
-			nw = dataPlot3D(caption, s, g->xStart(),g->xStop(), g->yStart(),g->yStop(),g->zStart(),g->zStop());
-		else
-			nw = openMatrixPlot3D(caption, s, g->xStart(), g->xStop(), g->yStart(), g->yStop(),g->zStart(),g->zStop());
+    QString caption = generateUniqueName(tr("Graph"));
+    QString s = g->formula();
+    if (g->userFunction())
+      nw = newPlot3D(caption, s, g->xStart(), g->xStop(), g->yStart(), g->yStop(), g->zStart(), g->zStop());
+    else if (s.endsWith("(Z)"))
+      nw = dataPlotXYZ(caption, s, g->xStart(),g->xStop(), g->yStart(),g->yStop(),g->zStart(),g->zStop());
+    else if (s.endsWith("(Y)"))//Ribbon plot
+      nw = dataPlot3D(caption, s, g->xStart(),g->xStop(), g->yStart(),g->yStop(),g->zStart(),g->zStop());
+    else
+      nw = openMatrixPlot3D(caption, s, g->xStart(), g->xStop(), g->yStart(), g->yStop(),g->zStart(),g->zStop());
 
-		if (!nw)
-			return 0;
+    if (!nw)
+      return 0;
 
-		((Graph3D *)nw)->copy(g);
-		customToolBars((QWidget*)nw);
-	} else if (w->inherits("Matrix")){
-		nw = newMatrix(((Matrix *)w)->numRows(), ((Matrix *)w)->numCols());
-    	((Matrix *)nw)->copy((Matrix *)w);
-	} else if (w->inherits("Note")){
-		nw = newNote();
-		if (nw)
-			((Note*)nw)->setText(((Note*)w)->text());
-	}
+    ((Graph3D *)nw)->copy(g);
+    customToolBars((QWidget*)nw);
+  } else if (w->inherits("Matrix")){
+    nw = newMatrix(((Matrix *)w)->numRows(), ((Matrix *)w)->numCols());
+    ((Matrix *)nw)->copy((Matrix *)w);
+  } else if (w->inherits("Note")){
+    nw = newNote();
+    if (nw)
+      ((Note*)nw)->setText(((Note*)w)->text());
+  }
 
-	if (nw){
-		if (w->inherits("MultiLayer")){
-			if (w->status() == MyWidget::Maximized)
-				nw->showMaximized();
-		} else if (w->inherits("Graph3D")){
-			((Graph3D*)nw)->setIgnoreFonts(true);
-			if (w->status() == MyWidget::Maximized){
-				w->showNormal();
-				w->resize(500,400);
-				nw->resize(w->size());
-				nw->showMaximized();
-			} else
-				nw->resize(w->size());
-			((Graph3D*)nw)->setIgnoreFonts(false);
-		} else {
-			nw->resize(w->size());
-			nw->showNormal();
-		}
+  if (nw){
+    if (w->inherits("MultiLayer")){
+      if (w->status() == MyWidget::Maximized)
+        nw->showMaximized();
+    } else if (w->inherits("Graph3D")){
+      ((Graph3D*)nw)->setIgnoreFonts(true);
+      if (w->status() == MyWidget::Maximized){
+        w->showNormal();
+        w->resize(500,400);
+        nw->resize(w->size());
+        nw->showMaximized();
+      } else
+        nw->resize(w->size());
+      ((Graph3D*)nw)->setIgnoreFonts(false);
+    } else {
+      nw->resize(w->size());
+      nw->showNormal();
+    }
 
-		nw->setWindowLabel(w->windowLabel());
-		nw->setCaptionPolicy(w->captionPolicy());
-		setListViewLabel(nw->name(), w->windowLabel());
-	}
-	QApplication::restoreOverrideCursor();
-	return nw;
+    nw->setWindowLabel(w->windowLabel());
+    nw->setCaptionPolicy(w->captionPolicy());
+    setListViewLabel(nw->name(), w->windowLabel());
+  }
+  QApplication::restoreOverrideCursor();
+  return nw;
 }
 
 void ApplicationWindow::undo()
@@ -9063,20 +9063,20 @@ void ApplicationWindow::intensityTable()
 
 Matrix* ApplicationWindow::importImage(const QString& fileName)
 {
-    QImage image(fileName);
-    if (image.isNull())
-        return NULL;
+  QImage image(fileName);
+  if (image.isNull())
+    return NULL;
 
-	Matrix* m = Matrix::fromImage(image, scriptEnv);
-	if (!m) 
-	{
-		QMessageBox::information(0, tr("Error importing image"), tr("Import of image '%1' failed").arg(fileName));
-		return NULL;
-	}
-	QString caption = generateUniqueName(tr("Matrix"));
-	m->setName(caption);
-	d_project->addChild(m->d_future_matrix);
-	return m;
+  Matrix* m = Matrix::fromImage(image, scriptEnv);
+  if (!m) 
+    {
+      QMessageBox::information(0, tr("Error importing image"), tr("Import of image '%1' failed").arg(fileName));
+      return NULL;
+    }
+  QString caption = generateUniqueName(tr("Matrix"));
+  m->setName(caption);
+  d_project->addChild(m->d_future_matrix);
+  return m;
 }
 
 void ApplicationWindow::autoArrangeLayers()
@@ -11683,18 +11683,18 @@ QWidgetList* ApplicationWindow::windowsList()
 
 void ApplicationWindow::updateRecentProjectsList()
 {
-    if (recentProjects.isEmpty())
-        return;
+  if (recentProjects.isEmpty())
+    return;
 
-	while ((int)recentProjects.size() > MaxRecentProjects)
-		recentProjects.pop_back();
+  while ((int)recentProjects.size() > MaxRecentProjects)
+    recentProjects.pop_back();
 
-	foreach(QAction *action, recent->actions())
-		action->deleteLater();
+  foreach(QAction *action, recent->actions())
+    action->deleteLater();
 
-	for (int i = 0; i<(int)recentProjects.size(); i++ )
-		connect(recent->addAction("&" + QString::number(i+1) + " " + recentProjects[i]), SIGNAL(triggered()),
-				this, SLOT(openRecentProject()));
+  for (int i = 0; i<(int)recentProjects.size(); i++ )
+    connect(recent->addAction("&" + QString::number(i+1) + " " + recentProjects[i]), SIGNAL(triggered()),
+            this, SLOT(openRecentProject()));
 }
 
 void ApplicationWindow::translateCurveHor()
@@ -11867,7 +11867,7 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 			#else
 				std::cout << s.toStdString();
 			#endif
-			exit(0);
+                                ::exit(0);
 		}
 		else if (str == "-h" || str == "--help")
 		{
@@ -11891,7 +11891,7 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 			#else
 				std::cout << s.toStdString();
 			#endif
-			exit(0);
+                                ::exit(0);
 		}
 		else if (str.startsWith("--lang=") || str.startsWith("-l="))
 		{
@@ -11916,6 +11916,10 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
         if (scriptArg<num_args-1) scriptArg++;
 	QString file_name = args[scriptArg]; // last argument
 
+        QStringList scriptArgs;
+        for (auto i=scriptArg+1; i<num_args; ++i)
+          scriptArgs<<args[i];
+        
 	if(file_name.startsWith("-")) return; // no file name given
 
 	if (!file_name.isEmpty()){
@@ -11939,9 +11943,9 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 
 		ApplicationWindow *a;
 		if (exec)
-			a = loadScript(file_name, exec);
+                  a = loadScript(file_name, scriptArgs, exec);
 		else
-			a = open(file_name);
+                  a = open(file_name, scriptArgs);
 
 		if (a){
 			a->workingDir = workingDir;
@@ -13546,17 +13550,28 @@ void ApplicationWindow::cascade()
     modifiedProject();
 }
 
-ApplicationWindow * ApplicationWindow::loadScript(const QString& fn, bool execute)
+ ApplicationWindow * ApplicationWindow::loadScript(const QString& fn, const QStringList& args, bool execute)
 {
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 	ApplicationWindow *app= new ApplicationWindow();
 	app->applyUserSettings();
-	if (fn.endsWith(".py", Qt::CaseInsensitive))
-		app->setScriptingLang("Python", false);
+        bool isPython=fn.endsWith(".py", Qt::CaseInsensitive);
+	if (isPython)
+          app->setScriptingLang("Python", false);
 	else
-		app->setScriptingLang("muParser", false);
+          app->setScriptingLang("muParser", false);
 	app->showMaximized();
 	Note *script_note = app->newNote(fn);
+        if (isPython)
+          {
+            // copy any arguments into the sys.argv array
+            script_note->insert("import sys\n");
+            QString prologue="sys.argv=['"+fn+"'";
+            for (auto& a: args)
+              prologue+=",'"+a+"'";
+            prologue+="]\n";
+            script_note->insert(prologue);
+          }
 	script_note->importASCII(fn);
 	QApplication::restoreOverrideCursor();
 	if (execute)

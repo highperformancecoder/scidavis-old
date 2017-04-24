@@ -1108,6 +1108,7 @@ sipClass = sipFindClass(sipCpp->className());
 %End
 
 public:
+ void exit();
   Table* table(const QString&);
 %MethodCode
   sipRes = sipCpp->current_folder->table(*a0, false);

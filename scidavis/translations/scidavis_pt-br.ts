@@ -4166,7 +4166,7 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
     </message>
     <message>
         <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py or ASCII file</source>
-        <translation type="unfinished">pode ser qualquer arquivo .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py ou ASCII</translation>
+        <translation type="obsolete">pode ser qualquer arquivo .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py ou ASCII</translation>
     </message>
     <message>
         <source>SciDAVis - Help</source>
@@ -4595,6 +4595,10 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
     </message>
     <message>
         <source>No updates available. You are already running the latest version.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .org, .py or ASCII file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11132,6 +11136,10 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     <message>
         <source>Open Project</source>
         <translation type="unfinished">Abrir projeto</translation>
+    </message>
+    <message>
+        <source>Origin 3.5 project</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
