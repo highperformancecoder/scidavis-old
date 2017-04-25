@@ -40,6 +40,9 @@
 #include <qwt_plot_curve.h>
 #include "core/column/Column.h"
 
+#include <stdexcept>
+using namespace std;
+
 TranslateCurveTool::TranslateCurveTool(Graph *graph, ApplicationWindow *app, Direction dir, const QObject *status_target, const char *status_slot)
 	: PlotToolInterface(graph),
 	d_dir(dir),
@@ -111,6 +114,8 @@ void TranslateCurveTool::selectDestination(const QwtDoublePoint &point)
 				d = point.x() - d_curve_point.x();
 				break;
 			}
+                default:
+                  throw runtime_error("Invalid direction");
 	}
 	Table *tab = d_app->table(col_name);
 	if (!tab) return;

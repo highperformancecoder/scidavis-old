@@ -214,7 +214,7 @@ int TableView::columnWidth(int col) const
 	return d_horizontal_header->sectionSize(col);
 }
 
-void TableView::handleHorizontalSectionResized(int logicalIndex, int oldSize, int newSize)
+void TableView::handleHorizontalSectionResized(int logicalIndex, int, int newSize)
 {
 	static bool inside = false;
 	d_table->setColumnWidth(logicalIndex, newSize);
@@ -300,12 +300,10 @@ void TableView::toggleControlTabBar()
 		d_hide_button->setArrowType(Qt::LeftArrow);
 }
 
-void TableView::handleHorizontalSectionMoved(int index, int from, int to)
+void TableView::handleHorizontalSectionMoved(int, int from, int to)
 {
 	static bool inside = false;
 	if(inside) return;
-
-	Q_ASSERT(index == from);
 
 	inside = true;
 	d_view_widget->horizontalHeader()->moveSection(to, from);

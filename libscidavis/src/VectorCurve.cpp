@@ -69,18 +69,18 @@ vectorEnd = (QwtArrayData *)vc->vectorEnd->copy();
 void VectorCurve::draw(QPainter *painter,
     const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from, int to) const
 {
-    if ( !painter || dataSize() <= 0 )
-        return;
+  if ( !painter || dataSize() <= 0 )
+    return;
 
-    if (to < 0)
-        to = dataSize() - 1;
+  if (to < 0)
+    to = dataSize() - 1;
 
-	QwtPlotCurve::draw(painter, xMap, yMap, from, to);
+  QwtPlotCurve::draw(painter, xMap, yMap, from, to);
 
-    painter->save();
-    painter->setPen(pen);
-    drawVector(painter, xMap, yMap, from, to);
-    painter->restore();
+  painter->save();
+  painter->setPen(pen);
+  drawVector(painter, xMap, yMap, from, to);
+  painter->restore();
 }
 
 void VectorCurve::drawVector(QPainter *painter,
@@ -95,7 +95,7 @@ if (d_type == Graph::VectXYAM)
 	const double angle = vectorEnd->x(i);
 	const double mag = vectorEnd->y(i);
 
-	int xs, ys, xe, ye;
+	int xs=0, ys=0, xe=0, ye=0;
 	switch(d_position)
 		{
 		case Tail:

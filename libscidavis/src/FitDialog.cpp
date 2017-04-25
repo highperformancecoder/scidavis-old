@@ -640,58 +640,58 @@ void FitDialog::removeUserFunction()
 
 void FitDialog::showFitPage()
 {
-    int param_table_rows = boxParams->rowCount();
+  int param_table_rows = boxParams->rowCount();
 
-	QString par = boxParam->text().simplified();
-	QStringList paramList = par.split(QRegExp("[,;]+[\\s]*"), QString::SkipEmptyParts);
-	int parameters = paramList.count();
-	boxParams->setRowCount(parameters);
-    boxParams->hideColumn(2);
+  QString par = boxParam->text().simplified();
+  QStringList paramList = par.split(QRegExp("[,;]+[\\s]*"), QString::SkipEmptyParts);
+  int parameters = paramList.count();
+  boxParams->setRowCount(parameters);
+  boxParams->hideColumn(2);
 
-	if (parameters > 7)
-		parameters = 7;
-	boxParams->setMinimumHeight(4+(parameters+1)*boxParams->horizontalHeader()->height());
+  if (parameters > 7)
+    parameters = 7;
+  boxParams->setMinimumHeight(4+(parameters+1)*boxParams->horizontalHeader()->height());
 
-    for (int i = param_table_rows; i<paramList.count(); i++)
-	{
-        QTableWidgetItem *it = new QTableWidgetItem(paramList[i]);
-        it->setFlags(Qt::ItemFlags(!Qt::ItemIsEditable));
-        it->setBackground(QBrush(Qt::lightGray));
-        it->setForeground(QBrush(Qt::darkRed));
-        QFont font = it->font();
-        font.setBold(true);
-        it->setFont(font);
-        boxParams->setItem(i, 0, it);
+  for (int i = param_table_rows; i<paramList.count(); i++)
+    {
+      QTableWidgetItem *it = new QTableWidgetItem(paramList[i]);
+      it->setFlags(Qt::ItemFlags(!Qt::ItemIsEditable));
+      it->setBackground(QBrush(Qt::lightGray));
+      it->setForeground(QBrush(Qt::darkRed));
+      QFont font = it->font();
+      font.setBold(true);
+      it->setFont(font);
+      boxParams->setItem(i, 0, it);
 
-        it = new QTableWidgetItem(QLocale().toString(1.0, 'f', boxPrecision->value()));
-        it->setTextAlignment(Qt::AlignRight);
-        boxParams->setItem(i, 1, it);
-	}
-    for (int i = 0; i<paramList.count(); i++)
-        boxParams->item (i, 0)->setText(paramList[i]);
+      it = new QTableWidgetItem(QLocale().toString(1.0, 'f', boxPrecision->value()));
+      it->setTextAlignment(Qt::AlignRight);
+      boxParams->setItem(i, 1, it);
+    }
+  for (int i = 0; i<paramList.count(); i++)
+    boxParams->item (i, 0)->setText(paramList[i]);
 
-	// FIXME: this check is pretty ugly, should be changed to a more elegant way some time
-	if (!boxUseBuiltIn->isChecked() ||
-		(boxUseBuiltIn->isChecked()&& categoryBox->currentRow()!=3 && categoryBox->currentRow()!=1))
-	{
-        boxParams->showColumn(2);
+  // FIXME: this check is pretty ugly, should be changed to a more elegant way some time
+  if (!boxUseBuiltIn->isChecked() ||
+      (boxUseBuiltIn->isChecked()&& categoryBox->currentRow()!=3 && categoryBox->currentRow()!=1))
+    {
+      boxParams->showColumn(2);
 
-		for (int i = 0; i<boxParams->rowCount(); i++ )
-		{
-            QTableWidgetItem *it = new QTableWidgetItem();
-            it->setFlags(Qt::ItemFlags(!Qt::ItemIsEditable));
-            it->setBackground(QBrush(Qt::lightGray));
-            boxParams->setItem(i, 2, it);
+      for (int i = 0; i<boxParams->rowCount(); i++ )
+        {
+          QTableWidgetItem *it = new QTableWidgetItem();
+          it->setFlags(Qt::ItemFlags(!Qt::ItemIsEditable));
+          it->setBackground(QBrush(Qt::lightGray));
+          boxParams->setItem(i, 2, it);
 
-			QCheckBox *cb = new QCheckBox();
-            boxParams->setCellWidget(i, 2, cb);
-		}
-	}
+          QCheckBox *cb = new QCheckBox();
+          boxParams->setCellWidget(i, 2, cb);
+        }
+    }
 
-	boxFunction->setText(editBox->text().simplified());
-	lblFunction->setText(boxName->text() +" (x, " + par + ")");
+  boxFunction->setText(editBox->text().simplified());
+  lblFunction->setText(boxName->text() +" (x, " + par + ")");
 
-	tw->setCurrentWidget (fitPage);
+  tw->setCurrentWidget (fitPage);
 }
 
 void FitDialog::showEditPage()
@@ -941,58 +941,58 @@ void FitDialog::showParseFunctions()
 
 void FitDialog::showExpression(int function)
 {
-    if (function < 0)
-        return;
+  if (function < 0)
+    return;
 
-	if (categoryBox->currentRow() == 2)
-	{
-		explainBox->setText(MyParser::explainFunction(function));
-	}
-	else if (categoryBox->currentRow() == 1)
-	{
-		polynomOrderLabel->show();
-		polynomOrderBox->show();
+  if (categoryBox->currentRow() == 2)
+    {
+      explainBox->setText(MyParser::explainFunction(function));
+    }
+  else if (categoryBox->currentRow() == 1)
+    {
+      polynomOrderLabel->show();
+      polynomOrderBox->show();
 
-		switch(funcBox->currentRow ()) {
-			case 6: // Gauss
-				polynomOrderLabel->setText(tr("Peaks"));
-				explainBox->setText(MultiPeakFit::generateFormula(polynomOrderBox->value(), MultiPeakFit::Gauss));
-				break;
-			case 7: // Lorentz
-				polynomOrderLabel->setText(tr("Peaks"));
-				explainBox->setText(MultiPeakFit::generateFormula(polynomOrderBox->value(), MultiPeakFit::Lorentz));
-				break;
-			case 8: // Polynomial
-				polynomOrderLabel->setText(tr("Polynomial Order"));
-				explainBox->setText(PolynomialFit::generateFormula(polynomOrderBox->value()));
-				break;
-			default:
-				polynomOrderLabel->hide();
-				polynomOrderBox->hide();
-				polynomOrderBox->setValue(1);
-				explainBox->setText(d_built_in_functions[function]);
-		}
-		setFunction(boxUseBuiltIn->isChecked());
-	}
-	else if (categoryBox->currentRow() == 0)
-	{
-		if (d_user_functions.size() > function) {
-			QStringList l = d_user_functions[function].split("=");
-			explainBox->setText(l[1]);
-		} else
-			explainBox->clear();
-		setFunction(boxUseBuiltIn->isChecked());
-	}
-	else if (categoryBox->currentRow() == 3)
-	{
-		if (d_plugin_functions.size() > 0)
-		{
-			explainBox->setText(d_plugin_functions[function]);
-			setFunction(boxUseBuiltIn->isChecked());
-		}
-		else
-			explainBox->clear();
-	}
+      switch(funcBox->currentRow ()) {
+      case 6: // Gauss
+        polynomOrderLabel->setText(tr("Peaks"));
+        explainBox->setText(MultiPeakFit::generateFormula(polynomOrderBox->value(), MultiPeakFit::Gauss));
+        break;
+      case 7: // Lorentz
+        polynomOrderLabel->setText(tr("Peaks"));
+        explainBox->setText(MultiPeakFit::generateFormula(polynomOrderBox->value(), MultiPeakFit::Lorentz));
+        break;
+      case 8: // Polynomial
+        polynomOrderLabel->setText(tr("Polynomial Order"));
+        explainBox->setText(PolynomialFit::generateFormula(polynomOrderBox->value()));
+        break;
+      default:
+        polynomOrderLabel->hide();
+        polynomOrderBox->hide();
+        polynomOrderBox->setValue(1);
+        explainBox->setText(d_built_in_functions[function]);
+      }
+      setFunction(boxUseBuiltIn->isChecked());
+    }
+  else if (categoryBox->currentRow() == 0)
+    {
+      if (d_user_functions.size() > function) {
+        QStringList l = d_user_functions[function].split("=");
+        explainBox->setText(l[1]);
+      } else
+        explainBox->clear();
+      setFunction(boxUseBuiltIn->isChecked());
+    }
+  else if (categoryBox->currentRow() == 3)
+    {
+      if (d_plugin_functions.size() > 0)
+        {
+          explainBox->setText(d_plugin_functions[function]);
+          setFunction(boxUseBuiltIn->isChecked());
+        }
+      else
+        explainBox->clear();
+    }
 }
 
 void FitDialog::pasteExpression()

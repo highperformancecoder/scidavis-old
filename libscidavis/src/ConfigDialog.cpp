@@ -807,243 +807,243 @@ void ConfigDialog::initConfirmationsPage()
 
 void ConfigDialog::languageChange()
 {
-	setWindowTitle( tr( "Preferences" ) );
-	ApplicationWindow *app = (ApplicationWindow *)parentWidget();
+  setWindowTitle( tr( "Preferences" ) );
+  ApplicationWindow *app = (ApplicationWindow *)parentWidget();
 
-	// pages list
-	itemsList->clear();
-	itemsList->addItem( tr( "General" ) );
-	itemsList->addItem( tr( "Tables" ) );
-	itemsList->addItem( tr( "2D Plots" ) );
-	itemsList->addItem( tr( "3D Plots" ) );
-	itemsList->addItem( tr( "Fitting" ) );
-	itemsList->setCurrentRow(0);
-	itemsList->item(0)->setIcon(QIcon(QPixmap(":/general.xpm")));
-	itemsList->item(1)->setIcon(QIcon(QPixmap(":/configTable.xpm")));
-	itemsList->item(2)->setIcon(QIcon(QPixmap(":/config_curves.xpm")));
-	itemsList->item(3)->setIcon(QIcon(QPixmap(":/3dplots.xpm")));
-	itemsList->item(4)->setIcon(QIcon(QPixmap(":/fit.xpm")));
-	itemsList->setIconSize(QSize(32,32));
-	// calculate a sensible width for the items list
-	// (default QListWidget size is 256 which looks too big)
-	QFontMetrics fm(itemsList->font());
-	int width = 32,i;
-	for(i=0 ; i<itemsList->count() ; i++)
-		if( fm.width(itemsList->item(i)->text()) > width)
-			width = fm.width(itemsList->item(i)->text());
-	itemsList->setMaximumWidth( itemsList->iconSize().width() + width + 50 );
-	// resize the list to the maximum width
-	itemsList->resize(itemsList->maximumWidth(),itemsList->height());
+  // pages list
+  itemsList->clear();
+  itemsList->addItem( tr( "General" ) );
+  itemsList->addItem( tr( "Tables" ) );
+  itemsList->addItem( tr( "2D Plots" ) );
+  itemsList->addItem( tr( "3D Plots" ) );
+  itemsList->addItem( tr( "Fitting" ) );
+  itemsList->setCurrentRow(0);
+  itemsList->item(0)->setIcon(QIcon(QPixmap(":/general.xpm")));
+  itemsList->item(1)->setIcon(QIcon(QPixmap(":/configTable.xpm")));
+  itemsList->item(2)->setIcon(QIcon(QPixmap(":/config_curves.xpm")));
+  itemsList->item(3)->setIcon(QIcon(QPixmap(":/3dplots.xpm")));
+  itemsList->item(4)->setIcon(QIcon(QPixmap(":/fit.xpm")));
+  itemsList->setIconSize(QSize(32,32));
+  // calculate a sensible width for the items list
+  // (default QListWidget size is 256 which looks too big)
+  QFontMetrics fm(itemsList->font());
+  int width = 32,i;
+  for(i=0 ; i<itemsList->count() ; i++)
+    if( fm.width(itemsList->item(i)->text()) > width)
+      width = fm.width(itemsList->item(i)->text());
+  itemsList->setMaximumWidth( itemsList->iconSize().width() + width + 50 );
+  // resize the list to the maximum width
+  itemsList->resize(itemsList->maximumWidth(),itemsList->height());
 
-	//plots 2D page
-	plotsTabWidget->setTabText(plotsTabWidget->indexOf(plotOptions), tr("Options"));
-	plotsTabWidget->setTabText(plotsTabWidget->indexOf(curves), tr("Curves"));
-	plotsTabWidget->setTabText(plotsTabWidget->indexOf(plotTicks), tr("Ticks"));
-	plotsTabWidget->setTabText(plotsTabWidget->indexOf(plotFonts), tr("Fonts"));
+  //plots 2D page
+  plotsTabWidget->setTabText(plotsTabWidget->indexOf(plotOptions), tr("Options"));
+  plotsTabWidget->setTabText(plotsTabWidget->indexOf(curves), tr("Curves"));
+  plotsTabWidget->setTabText(plotsTabWidget->indexOf(plotTicks), tr("Ticks"));
+  plotsTabWidget->setTabText(plotsTabWidget->indexOf(plotFonts), tr("Fonts"));
 
-	boxResize->setText(tr("Do not &resize layers when window size changes"));
+  boxResize->setText(tr("Do not &resize layers when window size changes"));
 
-	lblMinTicksLength->setText(tr("Length"));
+  lblMinTicksLength->setText(tr("Length"));
 
-	lblAxesLineWidth->setText(tr("Axes linewidth" ));
-	lblMajTicksLength->setText(tr("Length" ));
-	lblMajTicks->setText(tr("Major Ticks" ));
-	lblMinTicks->setText(tr("Minor Ticks" ));
+  lblAxesLineWidth->setText(tr("Axes linewidth" ));
+  lblMajTicksLength->setText(tr("Length" ));
+  lblMajTicks->setText(tr("Major Ticks" ));
+  lblMinTicks->setText(tr("Minor Ticks" ));
 
-	lblMargin->setText(tr("Margin" ));
-	labelFrameWidth->setText(tr("Frame width" ));
-	boxBackbones->setText(tr("Axes &backbones"));
-	boxFrame->setText(tr("Canvas Fra&me"));
-	boxAllAxes->setText(tr("Sho&w all axes"));
-	boxTitle->setText(tr("Show &Title"));
-	boxScaleFonts->setText(tr("Scale &Fonts"));
-	boxAutoscaling->setText(tr("Auto&scaling"));
-	boxAntialiasing->setText(tr("Antia&liasing"));
+  lblMargin->setText(tr("Margin" ));
+  labelFrameWidth->setText(tr("Frame width" ));
+  boxBackbones->setText(tr("Axes &backbones"));
+  boxFrame->setText(tr("Canvas Fra&me"));
+  boxAllAxes->setText(tr("Sho&w all axes"));
+  boxTitle->setText(tr("Show &Title"));
+  boxScaleFonts->setText(tr("Scale &Fonts"));
+  boxAutoscaling->setText(tr("Auto&scaling"));
+  boxAntialiasing->setText(tr("Antia&liasing"));
 
-	boxMajTicks->clear();
-	boxMajTicks->addItem(tr("None"));
-	boxMajTicks->addItem(tr("Out"));
-	boxMajTicks->addItem(tr("In & Out"));
-	boxMajTicks->addItem(tr("In"));
+  boxMajTicks->clear();
+  boxMajTicks->addItem(tr("None"));
+  boxMajTicks->addItem(tr("Out"));
+  boxMajTicks->addItem(tr("In & Out"));
+  boxMajTicks->addItem(tr("In"));
 
-	boxMinTicks->clear();
-	boxMinTicks->addItem(tr("None"));
-	boxMinTicks->addItem(tr("Out"));
-	boxMinTicks->addItem(tr("In & Out"));
-	boxMinTicks->addItem(tr("In"));
+  boxMinTicks->clear();
+  boxMinTicks->addItem(tr("None"));
+  boxMinTicks->addItem(tr("Out"));
+  boxMinTicks->addItem(tr("In & Out"));
+  boxMinTicks->addItem(tr("In"));
 
-	boxMajTicks->setCurrentIndex(app->majTicksStyle);
-	boxMinTicks->setCurrentIndex(app->minTicksStyle);
+  boxMajTicks->setCurrentIndex(app->majTicksStyle);
+  boxMinTicks->setCurrentIndex(app->minTicksStyle);
 
-	plotsTabWidget->setTabText(plotsTabWidget->indexOf(plotPrint), tr("Print"));
-	boxPrintCropmarks->setText(tr("Print Crop &Marks"));
-	boxScaleLayersOnPrint->setText(tr("&Scale layers to paper size"));
+  plotsTabWidget->setTabText(plotsTabWidget->indexOf(plotPrint), tr("Print"));
+  boxPrintCropmarks->setText(tr("Print Crop &Marks"));
+  boxScaleLayersOnPrint->setText(tr("&Scale layers to paper size"));
 
-	//confirmations page
-	groupBoxConfirm->setTitle(tr("Prompt on closing"));
-	boxFolders->setText(tr("Folders"));
-	boxTables->setText(tr("Tables"));
-	boxPlots3D->setText(tr("3D Plots"));
-	boxPlots2D->setText(tr("2D Plots"));
-	boxMatrices->setText(tr("Matrices"));
-	boxNotes->setText(tr("&Notes"));
+  //confirmations page
+  groupBoxConfirm->setTitle(tr("Prompt on closing"));
+  boxFolders->setText(tr("Folders"));
+  boxTables->setText(tr("Tables"));
+  boxPlots3D->setText(tr("3D Plots"));
+  boxPlots2D->setText(tr("2D Plots"));
+  boxMatrices->setText(tr("Matrices"));
+  boxNotes->setText(tr("&Notes"));
 
-	buttonOk->setText( tr( "&OK" ) );
-	buttonCancel->setText( tr( "&Cancel" ) );
-	buttonApply->setText( tr( "&Apply" ) );
-	buttonTextFont->setText( tr( "&Text Font" ) );
-	buttonHeaderFont->setText( tr( "&Labels Font" ) );
-	buttonAxesFont->setText( tr( "A&xes Labels" ) );
-	buttonNumbersFont->setText( tr( "Axes &Numbers" ) );
-	buttonLegendFont->setText( tr( "&Legend" ) );
-	buttonTitleFont->setText( tr( "T&itle" ) );
+  buttonOk->setText( tr( "&OK" ) );
+  buttonCancel->setText( tr( "&Cancel" ) );
+  buttonApply->setText( tr( "&Apply" ) );
+  buttonTextFont->setText( tr( "&Text Font" ) );
+  buttonHeaderFont->setText( tr( "&Labels Font" ) );
+  buttonAxesFont->setText( tr( "A&xes Labels" ) );
+  buttonNumbersFont->setText( tr( "Axes &Numbers" ) );
+  buttonLegendFont->setText( tr( "&Legend" ) );
+  buttonTitleFont->setText( tr( "T&itle" ) );
 
-	//application page
-	appTabWidget->setTabText(appTabWidget->indexOf(application), tr("Application"));
-	appTabWidget->setTabText(appTabWidget->indexOf(confirm), tr("Confirmations"));
-	appTabWidget->setTabText(appTabWidget->indexOf(appColors), tr("Colors"));
-	appTabWidget->setTabText(appTabWidget->indexOf(numericFormatPage), tr("Numeric Format"));
+  //application page
+  appTabWidget->setTabText(appTabWidget->indexOf(application), tr("Application"));
+  appTabWidget->setTabText(appTabWidget->indexOf(confirm), tr("Confirmations"));
+  appTabWidget->setTabText(appTabWidget->indexOf(appColors), tr("Colors"));
+  appTabWidget->setTabText(appTabWidget->indexOf(numericFormatPage), tr("Numeric Format"));
 
-	lblLanguage->setText(tr("Language"));
-	lblStyle->setText(tr("Style"));
-	lblFonts->setText(tr("Main Font"));
-	fontsBtn->setText(tr("Choose &font"));
-	lblWorkspace->setText(tr("Workspace"));
-	lblPanelsText->setText(tr("Panels text"));
-	lblPanels->setText(tr("Panels"));
-	lblUndoLimit->setText(tr("Undo/Redo History limit"));
-	boxSave->setText(tr("Save every"));
+  lblLanguage->setText(tr("Language"));
+  lblStyle->setText(tr("Style"));
+  lblFonts->setText(tr("Main Font"));
+  fontsBtn->setText(tr("Choose &font"));
+  lblWorkspace->setText(tr("Workspace"));
+  lblPanelsText->setText(tr("Panels text"));
+  lblPanels->setText(tr("Panels"));
+  lblUndoLimit->setText(tr("Undo/Redo History limit"));
+  boxSave->setText(tr("Save every"));
 #ifdef SEARCH_FOR_UPDATES
-	boxSearchUpdates->setText(tr("Check for new versions at startup"));
+  boxSearchUpdates->setText(tr("Check for new versions at startup"));
 #endif
-	boxMinutes->setSuffix(tr(" minutes"));
-	lblScriptingLanguage->setText(tr("Default scripting language"));
+  boxMinutes->setSuffix(tr(" minutes"));
+  lblScriptingLanguage->setText(tr("Default scripting language"));
 
-    lblDefaultNumericFormat->setText(tr("Default numeric format"));
-	boxDefaultNumericFormat->clear();
-	boxDefaultNumericFormat->addItem(tr("Decimal"), QVariant('f'));
-	boxDefaultNumericFormat->addItem(tr("Scientific (e)"), QVariant('e'));
-	boxDefaultNumericFormat->addItem(tr("Scientific (E)"), QVariant('E'));
-	boxDefaultNumericFormat->addItem(tr("Automatic (e)"), QVariant('g'));
-	boxDefaultNumericFormat->addItem(tr("Automatic (E)"), QVariant('G'));
-	int format_index = boxDefaultNumericFormat->findData(app->d_default_numeric_format);
-	boxDefaultNumericFormat->setCurrentIndex(format_index);
+  lblDefaultNumericFormat->setText(tr("Default numeric format"));
+  boxDefaultNumericFormat->clear();
+  boxDefaultNumericFormat->addItem(tr("Decimal"), QVariant('f'));
+  boxDefaultNumericFormat->addItem(tr("Scientific (e)"), QVariant('e'));
+  boxDefaultNumericFormat->addItem(tr("Scientific (E)"), QVariant('E'));
+  boxDefaultNumericFormat->addItem(tr("Automatic (e)"), QVariant('g'));
+  boxDefaultNumericFormat->addItem(tr("Automatic (E)"), QVariant('G'));
+  int format_index = boxDefaultNumericFormat->findData(app->d_default_numeric_format);
+  boxDefaultNumericFormat->setCurrentIndex(format_index);
 
-    boxUseGroupSeparator->setText(tr("Use group separator","option: use separator every 3 digits"));
-	lblAppPrecision->setText(tr("Default Number of Decimal Digits"));
-	lblDecimalSeparator->setText(tr("Decimal Separators"));
-	boxDecimalSeparator->clear();
-	boxDecimalSeparator->addItem(tr("default") + " (" + QLocale::system().toString(1000.0, 'f', 1) +")");
-	boxDecimalSeparator->addItem(QLocale::c().toString(1000.0, 'f', 1));
-	boxDecimalSeparator->addItem(QLocale(QLocale::German).toString(1000.0, 'f', 1));
-	boxDecimalSeparator->addItem(QLocale(QLocale::French).toString(1000.0, 'f', 1));
+  boxUseGroupSeparator->setText(tr("Use group separator","option: use separator every 3 digits"));
+  lblAppPrecision->setText(tr("Default Number of Decimal Digits"));
+  lblDecimalSeparator->setText(tr("Decimal Separators"));
+  boxDecimalSeparator->clear();
+  boxDecimalSeparator->addItem(tr("default") + " (" + QLocale::system().toString(1000.0, 'f', 1) +")");
+  boxDecimalSeparator->addItem(QLocale::c().toString(1000.0, 'f', 1));
+  boxDecimalSeparator->addItem(QLocale(QLocale::German).toString(1000.0, 'f', 1));
+  boxDecimalSeparator->addItem(QLocale(QLocale::French).toString(1000.0, 'f', 1));
 
-    if (QLocale().name() == QLocale::c().name())
-        boxDecimalSeparator->setCurrentIndex(1);
-    else if (QLocale().name() == QLocale(QLocale::German).name())
-        boxDecimalSeparator->setCurrentIndex(2);
-    else if (QLocale().name() == QLocale(QLocale::French).name())
-        boxDecimalSeparator->setCurrentIndex(3);
+  if (QLocale().name() == QLocale::c().name())
+    boxDecimalSeparator->setCurrentIndex(1);
+  else if (QLocale().name() == QLocale(QLocale::German).name())
+    boxDecimalSeparator->setCurrentIndex(2);
+  else if (QLocale().name() == QLocale(QLocale::French).name())
+    boxDecimalSeparator->setCurrentIndex(3);
 
-	boxSeparatorPreview->setText(tr("Preview:","preview of the decimal separator") + " " + QLocale().toString(1000.1234567890123456, 'f', boxAppPrecision->value()) );
+  boxSeparatorPreview->setText(tr("Preview:","preview of the decimal separator") + " " + QLocale().toString(1000.1234567890123456, 'f', boxAppPrecision->value()) );
 
-	//tables page
-	boxTableComments->setText(tr("&Display Comments in Header"));
-	groupBoxTableCol->setTitle(tr("Colors"));
-	lblSeparator->setText(tr("Default Column Separator"));
-	boxSeparator->clear();
-	boxSeparator->addItem(tr("TAB"));
-	boxSeparator->addItem(tr("SPACE"));
-	boxSeparator->addItem(";" + tr("TAB"));
-	boxSeparator->addItem("," + tr("TAB"));
-	boxSeparator->addItem(";" + tr("SPACE"));
-	boxSeparator->addItem("," + tr("SPACE"));
-	boxSeparator->addItem(";");
-	boxSeparator->addItem(",");
-	setColumnSeparator(app->columnSeparator);
+  //tables page
+  boxTableComments->setText(tr("&Display Comments in Header"));
+  groupBoxTableCol->setTitle(tr("Colors"));
+  lblSeparator->setText(tr("Default Column Separator"));
+  boxSeparator->clear();
+  boxSeparator->addItem(tr("TAB"));
+  boxSeparator->addItem(tr("SPACE"));
+  boxSeparator->addItem(";" + tr("TAB"));
+  boxSeparator->addItem("," + tr("TAB"));
+  boxSeparator->addItem(";" + tr("SPACE"));
+  boxSeparator->addItem("," + tr("SPACE"));
+  boxSeparator->addItem(";");
+  boxSeparator->addItem(",");
+  setColumnSeparator(app->columnSeparator);
 
-	lblTableBackground->setText(tr( "Background" ));
-	lblTextColor->setText(tr( "Text" ));
-	lblHeaderColor->setText(tr("Labels"));
-	groupBoxTableFonts->setTitle(tr("Fonts"));
+  lblTableBackground->setText(tr( "Background" ));
+  lblTextColor->setText(tr( "Text" ));
+  lblHeaderColor->setText(tr("Labels"));
+  groupBoxTableFonts->setTitle(tr("Fonts"));
 
-	//curves page
-	lblCurveStyle->setText(tr( "Default curve style" ));
-	lblLineWidth->setText(tr( "Line width" ));
-	lblSymbSize->setText(tr( "Symbol size" ));
+  //curves page
+  lblCurveStyle->setText(tr( "Default curve style" ));
+  lblLineWidth->setText(tr( "Line width" ));
+  lblSymbSize->setText(tr( "Symbol size" ));
 
-	boxCurveStyle->clear();
-	boxCurveStyle->addItem( QPixmap(":/lPlot.xpm"), tr( " Line" ) );
-	boxCurveStyle->addItem( QPixmap(":/pPlot.xpm"), tr( " Scatter" ) );
-	boxCurveStyle->addItem( QPixmap(":/lpPlot.xpm"), tr( " Line + Symbol" ) );
-	boxCurveStyle->addItem( QPixmap(":/dropLines.xpm"), tr( " Vertical drop lines" ) );
-	boxCurveStyle->addItem( QPixmap(":/spline.xpm"), tr( " Spline" ) );
-	boxCurveStyle->addItem( QPixmap(":/vert_steps.xpm"), tr( " Vertical steps" ) );
-	boxCurveStyle->addItem( QPixmap(":/hor_steps.xpm"), tr( " Horizontal steps" ) );
-	boxCurveStyle->addItem( QPixmap(":/area.xpm"), tr( " Area" ) );
-	boxCurveStyle->addItem( QPixmap(":/vertBars.xpm"), tr( " Vertical Bars" ) );
-	boxCurveStyle->addItem( QPixmap(":/hBars.xpm"), tr( " Horizontal Bars" ) );
+  boxCurveStyle->clear();
+  boxCurveStyle->addItem( QPixmap(":/lPlot.xpm"), tr( " Line" ) );
+  boxCurveStyle->addItem( QPixmap(":/pPlot.xpm"), tr( " Scatter" ) );
+  boxCurveStyle->addItem( QPixmap(":/lpPlot.xpm"), tr( " Line + Symbol" ) );
+  boxCurveStyle->addItem( QPixmap(":/dropLines.xpm"), tr( " Vertical drop lines" ) );
+  boxCurveStyle->addItem( QPixmap(":/spline.xpm"), tr( " Spline" ) );
+  boxCurveStyle->addItem( QPixmap(":/vert_steps.xpm"), tr( " Vertical steps" ) );
+  boxCurveStyle->addItem( QPixmap(":/hor_steps.xpm"), tr( " Horizontal steps" ) );
+  boxCurveStyle->addItem( QPixmap(":/area.xpm"), tr( " Area" ) );
+  boxCurveStyle->addItem( QPixmap(":/vertBars.xpm"), tr( " Vertical Bars" ) );
+  boxCurveStyle->addItem( QPixmap(":/hBars.xpm"), tr( " Horizontal Bars" ) );
 
-	int style = app->defaultCurveStyle;
-	if (style == Graph::Line)
-		boxCurveStyle->setCurrentIndex(0);
-	else if (style == Graph::Scatter)
-		boxCurveStyle->setCurrentIndex(1);
-	else if (style == Graph::LineSymbols)
-		boxCurveStyle->setCurrentIndex(2);
-	else if (style == Graph::VerticalDropLines)
-		boxCurveStyle->setCurrentIndex(3);
-	else if (style == Graph::Spline)
-		boxCurveStyle->setCurrentIndex(4);
-	else if (style == Graph::VerticalSteps)
-		boxCurveStyle->setCurrentIndex(5);
-	else if (style == Graph::HorizontalSteps)
-		boxCurveStyle->setCurrentIndex(6);
-	else if (style == Graph::Area)
-		boxCurveStyle->setCurrentIndex(7);
-	else if (style == Graph::VerticalBars)
-		boxCurveStyle->setCurrentIndex(8);
-	else if (style == Graph::HorizontalBars)
-		boxCurveStyle->setCurrentIndex(9);
+  int style = app->defaultCurveStyle;
+  if (style == Graph::Line)
+    boxCurveStyle->setCurrentIndex(0);
+  else if (style == Graph::Scatter)
+    boxCurveStyle->setCurrentIndex(1);
+  else if (style == Graph::LineSymbols)
+    boxCurveStyle->setCurrentIndex(2);
+  else if (style == Graph::VerticalDropLines)
+    boxCurveStyle->setCurrentIndex(3);
+  else if (style == Graph::Spline)
+    boxCurveStyle->setCurrentIndex(4);
+  else if (style == Graph::VerticalSteps)
+    boxCurveStyle->setCurrentIndex(5);
+  else if (style == Graph::HorizontalSteps)
+    boxCurveStyle->setCurrentIndex(6);
+  else if (style == Graph::Area)
+    boxCurveStyle->setCurrentIndex(7);
+  else if (style == Graph::VerticalBars)
+    boxCurveStyle->setCurrentIndex(8);
+  else if (style == Graph::HorizontalBars)
+    boxCurveStyle->setCurrentIndex(9);
 
-	//plots 3D
-	lblResolution->setText(tr("Resolution"));
-	boxResolution->setSpecialValueText( "1 " + tr("(all data shown)") );
-	boxShowLegend->setText(tr( "&Show Legend" ));
-	boxShowProjection->setText(tr( "Show &Projection" ));
-	btnFromColor->setText( tr( "&Data Max" ) );
-	boxSmoothMesh->setText(tr( "Smoot&h Line" ));
-	boxOrthogonal->setText(tr( "O&rthogonal" ));
-	btnLabels->setText( tr( "Lab&els" ) );
-	btnMesh->setText( tr( "Mesh &Line" ) );
-	btnGrid->setText( tr( "&Grid" ) );
-	btnToColor->setText( tr( "Data &Min" ) );
-	btnNumbers->setText( tr( "&Numbers" ) );
-	btnAxes->setText( tr( "A&xes" ) );
-	btnBackground3D->setText( tr( "&Background" ) );
-	groupBox3DCol->setTitle(tr("Colors" ));
-	groupBox3DFonts->setTitle(tr("Fonts" ));
-	btnTitleFnt->setText( tr( "&Title" ) );
-	btnLabelsFnt->setText( tr( "&Axes Labels" ) );
-	btnNumFnt->setText( tr( "&Numbers" ) );
-	boxAutoscale3DPlots->setText( tr( "Autosca&ling" ) );
+  //plots 3D
+  lblResolution->setText(tr("Resolution"));
+  boxResolution->setSpecialValueText( "1 " + tr("(all data shown)") );
+  boxShowLegend->setText(tr( "&Show Legend" ));
+  boxShowProjection->setText(tr( "Show &Projection" ));
+  btnFromColor->setText( tr( "&Data Max" ) );
+  boxSmoothMesh->setText(tr( "Smoot&h Line" ));
+  boxOrthogonal->setText(tr( "O&rthogonal" ));
+  btnLabels->setText( tr( "Lab&els" ) );
+  btnMesh->setText( tr( "Mesh &Line" ) );
+  btnGrid->setText( tr( "&Grid" ) );
+  btnToColor->setText( tr( "Data &Min" ) );
+  btnNumbers->setText( tr( "&Numbers" ) );
+  btnAxes->setText( tr( "A&xes" ) );
+  btnBackground3D->setText( tr( "&Background" ) );
+  groupBox3DCol->setTitle(tr("Colors" ));
+  groupBox3DFonts->setTitle(tr("Fonts" ));
+  btnTitleFnt->setText( tr( "&Title" ) );
+  btnLabelsFnt->setText( tr( "&Axes Labels" ) );
+  btnNumFnt->setText( tr( "&Numbers" ) );
+  boxAutoscale3DPlots->setText( tr( "Autosca&ling" ) );
 
-	//Fitting page
-	groupBoxFittingCurve->setTitle(tr("Generated Fit Curve"));
-	generatePointsBtn->setText(tr("Uniform X Function"));
-	lblPoints->setText( tr("Points") );
-	samePointsBtn->setText( tr( "Same X as Fitting Data" ) );
-	linearFit2PointsBox->setText( tr( "2 points for linear fits" ) );
+  //Fitting page
+  groupBoxFittingCurve->setTitle(tr("Generated Fit Curve"));
+  generatePointsBtn->setText(tr("Uniform X Function"));
+  lblPoints->setText( tr("Points") );
+  samePointsBtn->setText( tr( "Same X as Fitting Data" ) );
+  linearFit2PointsBox->setText( tr( "2 points for linear fits" ) );
 
-	groupBoxMultiPeak->setTitle(tr("Display Peak Curves for Multi-peak Fits"));
+  groupBoxMultiPeak->setTitle(tr("Display Peak Curves for Multi-peak Fits"));
 
-	groupBoxFitParameters->setTitle(tr("Parameters Output"));
-	lblPrecision->setText(tr("Significant Digits"));
-	logBox->setText(tr("Write Parameters to Result Log"));
-	plotLabelBox->setText(tr("Paste Parameters to Plot"));
-	scaleErrorsBox->setText(tr("Scale Errors with sqrt(Chi^2/doF)"));
-	groupBoxMultiPeak->setTitle(tr("Display Peak Curves for Multi-peak Fits"));
-	lblPeaksColor->setText(tr("Peaks Color"));
+  groupBoxFitParameters->setTitle(tr("Parameters Output"));
+  lblPrecision->setText(tr("Significant Digits"));
+  logBox->setText(tr("Write Parameters to Result Log"));
+  plotLabelBox->setText(tr("Paste Parameters to Plot"));
+  scaleErrorsBox->setText(tr("Scale Errors with sqrt(Chi^2/doF)"));
+  groupBoxMultiPeak->setTitle(tr("Display Peak Curves for Multi-peak Fits"));
+  lblPeaksColor->setText(tr("Peaks Color"));
 }
 
 void ConfigDialog::accept()

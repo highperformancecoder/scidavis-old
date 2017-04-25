@@ -171,11 +171,15 @@ void ColorBox::init()
 
 void ColorBox::setColor(const QColor& c)
 {
+  // gcc is being overly picky here. std::find needs a point 1 past the end
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Warray-bounds"
 	const QColor *ite = std::find(colors, colors + sizeof(colors), c);
 	if (ite == colors + sizeof(colors))
 		this->setCurrentIndex(0); // default color is black.
 	else
 		this->setCurrentIndex(ite - colors);
+#pragma GCC diagnostic pop        
 }
 
 QColor ColorBox::color() const
@@ -189,8 +193,12 @@ QColor ColorBox::color() const
 
 int ColorBox::colorIndex(const QColor& c)
 {
+  // gcc is being overly picky here. std::find needs a point 1 past the end
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Warray-bounds"
 	const QColor *ite = std::find(colors, colors + sizeof(colors), c);
 	return (ite - colors);
+#pragma GCC diagnostic pop        
 }
 
 QColor ColorBox::color(int colorIndex)

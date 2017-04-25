@@ -6829,7 +6829,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
 <context>
     <name>CanvasPicker</name>
     <message>
-        <location filename="../../libscidavis/src/CanvasPicker.cpp" line="241"/>
+        <location filename="../../libscidavis/src/CanvasPicker.cpp" line="231"/>
         <source>enter your text here</source>
         <translation type="unfinished">Geben Sie hier Ihren Text ein</translation>
     </message>
@@ -9161,7 +9161,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../libscidavis/src/Filter.cpp" line="83"/>
         <location filename="../../libscidavis/src/Filter.cpp" line="122"/>
-        <location filename="../../libscidavis/src/Filter.cpp" line="215"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
@@ -9198,9 +9197,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Der Farbname &apos;%1&apos; is ungültig, die Standardfarbe (rot) wird stattdessen benutzt!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Filter.cpp" line="216"/>
         <source>You didn&apos;t specify a valid data set for this operation!</source>
-        <translation type="unfinished">Sie haben keinen gültigen Datensatz für diese Operation angegeben!</translation>
+        <translation type="obsolete">Sie haben keinen gültigen Datensatz für diese Operation angegeben!</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Filter.cpp" line="315"/>
@@ -9210,7 +9208,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../libscidavis/src/Filter.cpp" line="83"/>
         <location filename="../../libscidavis/src/Filter.cpp" line="122"/>
-        <location filename="../../libscidavis/src/Filter.cpp" line="215"/>
         <source>SciDAVis</source>
         <translation type="unfinished">SciDAVis</translation>
     </message>
@@ -11011,55 +11008,55 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Peak %1 ausgewählt! Bewegen Sie den Cursor, wählen Sie durch einen Klick einen Punkt aus und bestätigen Sie durch einen Doppelklick oder &apos;Enter&apos; den nächsten Peak!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4317"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4322"/>
         <source>The columns</source>
         <translation type="unfinished">Die Spalten</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4317"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4322"/>
         <source>are empty and will not be added to the plot!</source>
         <translation type="unfinished">sind leer und werden nicht zum Diagramm hinzugefügt!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4321"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4326"/>
         <source>The column</source>
         <translation type="unfinished">Die Spalte</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4321"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4326"/>
         <source>is empty and will not be added to the plot!</source>
         <translation type="unfinished">ist leer und wird nicht zum Diagramm hinzugefügt!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4327"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4373"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4332"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4378"/>
         <source>&amp;Cut</source>
         <translation type="unfinished">&amp;Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4328"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4374"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4333"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4379"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">&amp;Kopieren</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4329"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4375"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4334"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4380"/>
         <source>&amp;Delete</source>
         <translation type="unfinished">&amp;Löschen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4331"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4380"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4384"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4388"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4392"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4423"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4336"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4385"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4389"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4393"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4397"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4428"/>
         <source>&amp;Properties...</source>
         <translation type="unfinished">&amp;Eigenschaften...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4405"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4410"/>
         <source>&amp;Rescale to show all</source>
         <translation type="unfinished">Auf Komplettansicht &amp;reskalierenskalieren</translation>
     </message>
@@ -11068,17 +11065,17 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4407"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4412"/>
         <source>&amp;Hide axis</source>
         <translation type="unfinished">Achse &amp;verbergen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4409"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4414"/>
         <source>&amp;Show grids</source>
         <translation type="unfinished">Gitter &amp;anzeigen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4422"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4427"/>
         <source>&amp;Scale...</source>
         <translation type="unfinished">&amp;Skala...</translation>
     </message>
@@ -11301,7 +11298,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Band FFT Filter von</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5145"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5150"/>
         <source>There are no curves available on this plot!</source>
         <translation type="unfinished">In diesem Diagramm existieren keine Kurven!</translation>
     </message>
@@ -11310,7 +11307,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">QtiPlot - Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5161"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5166"/>
         <source>There are no curves with more than two points on this plot. Operation aborted!</source>
         <translation type="unfinished">Es gibt keine Kurven mit mehr als 2 Punkten in diesem Diagramm. Operation abgebrochen!</translation>
     </message>
@@ -11339,7 +11336,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Boltzmann (Sigmoidal) Fit von</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4405"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4410"/>
         <source>Ctrl+Shift+R</source>
         <translation type="unfinished">Ctrl+Shift+R</translation>
     </message>
@@ -11396,13 +11393,13 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="1743"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="1744"/>
         <source>Title</source>
         <translation type="unfinished">Titel</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="3758"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="3788"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="3759"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="3789"/>
         <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
         <translation type="unfinished">Die Bilddatei: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; existiert nicht mehr!</translation>
     </message>
@@ -11451,8 +11448,8 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Mittelungsglättung von</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="1358"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="1390"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="1359"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="1391"/>
         <source>Please provide a valid file name!</source>
         <translation type="unfinished">Bitte einen gültigen Dateinamen eingeben!</translation>
     </message>
@@ -11461,7 +11458,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">F</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4017"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4018"/>
         <source>Data set generated from curve</source>
         <translation type="unfinished">Aus der Kurve generierter Datensatz</translation>
     </message>
@@ -11470,61 +11467,61 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Tabelle</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="1376"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="1377"/>
         <source>File format not handled, operation aborted!</source>
         <translation type="unfinished">Dateiformat konnte nicht verarbeitet werden, Operation abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="811"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="1358"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="1376"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="1390"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5160"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="812"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="1359"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="1377"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="1391"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5165"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="779"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="780"/>
         <source>Internal Error</source>
         <translation type="unfinished">Interner Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="780"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="781"/>
         <source>&lt;html&gt;Failed to set axis labels on Graph %1. Maybe you&apos;re trying to open a corrupted project file; or there&apos;s some problem within SciDAVis. Please report this as a bug (together with detailed instructions how to reproduce this message or the corrupted file).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;Setzen einer Achensbeschriftung in Graph %1 ist fehlgeschlagen. Möglicherweise versuchen Sie, eine defekte Projektdatei zu öffnen; oder es gibt ein Problem in SciDAVis. Bitte melden Sie dies als einen Fehler (zusammen mit detaillierten Anweisungen wie diese Meldung zu reproduzieren ist, oder mit der defekten Datei).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="811"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="812"/>
         <source>Couldn&apos;t change the axis type to the requested format!</source>
         <translation type="unfinished">Konnte Format der Achsenbeschriftung nicht auf das angeforderte Format setzen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="3757"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="3787"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="3758"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="3788"/>
         <source>File open error</source>
         <translation type="unfinished">Fehler beim Öffnen der Datei</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4316"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4320"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5145"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4321"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4325"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5150"/>
         <source>Warning</source>
         <translation type="unfinished">Warnung</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4008"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4009"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
         <translation type="unfinished">1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4009"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4010"/>
         <source>2</source>
         <comment>curve data table y column name</comment>
         <translation type="unfinished">2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4018"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4019"/>
         <source>Curve data %1</source>
         <translation type="unfinished">Kurvendaten %1</translation>
     </message>
@@ -11564,27 +11561,27 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="182"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="183"/>
         <source>X axis</source>
         <translation type="unfinished">X-Achse</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="189"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="190"/>
         <source>Y axis</source>
         <translation type="unfinished">Y-Achse</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="196"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="197"/>
         <source>Z axis</source>
         <translation type="unfinished">Z-Achse</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2008"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2011"/>
         <source>Could not print: &lt;h4&gt;</source>
         <translation type="unfinished">Konnte nicht drucken: &lt;h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2078"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2081"/>
         <source> not supported</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11593,17 +11590,17 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">QtiPlot - Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2065"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2068"/>
         <source>Please provide a valid file name!</source>
         <translation type="unfinished">Bitte einen gültigen Dateinamen eingeben!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2007"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2010"/>
         <source>IO Error</source>
         <translation type="unfinished">Eingabe/Ausgabe-Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2065"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2068"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
@@ -12720,64 +12717,64 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
 <context>
     <name>Integration</name>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="63"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="66"/>
         <source>Integration</source>
         <translation type="unfinished">Integration</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="83"/>
-        <location filename="../../libscidavis/src/Integration.cpp" line="92"/>
-        <location filename="../../libscidavis/src/Integration.cpp" line="124"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="82"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="91"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="125"/>
         <source>SciDAVis</source>
         <translation type="unfinished">SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="84"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="83"/>
         <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
         <translation type="unfinished">Unbekannte Interpolationsmethode. Gültige Werte sind: 0 - linear, 1 - kubisch, 2 - Akima.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="93"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="92"/>
         <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
         <translation type="unfinished">Mehrere Datenpunkte haben den gleichen X-Wert und erzeugen dadurch Divisionen durch Null, Operation abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="107"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="106"/>
         <source>Linear</source>
         <translation type="unfinished">Linear</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="111"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="110"/>
         <source>Cubic</source>
         <translation type="unfinished">Kubisch</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="115"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="114"/>
         <source>Akima</source>
         <translation type="unfinished">Akima</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="125"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="126"/>
         <source>You need at least %1 points in order to perform this operation!</source>
         <translation type="unfinished">Sie benötigen mindestens %1 Punkte für diese Operation!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="130"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="131"/>
         <source>Plot</source>
         <translation type="unfinished">Diagramm</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="131"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="132"/>
         <source>Numerical integration of</source>
         <translation type="unfinished">Numerische Integration von</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="131"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="132"/>
         <source>Interpolation</source>
         <translation type="unfinished">Interpolation</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="131"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="132"/>
         <source> using </source>
         <translation type="unfinished"></translation>
     </message>
@@ -12798,27 +12795,27 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
         <translation type="obsolete">Max</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="135"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="136"/>
         <source>Points</source>
         <translation type="unfinished">Punkte</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="135"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="136"/>
         <source>from</source>
         <translation type="unfinished">von</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="136"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="137"/>
         <source>to</source>
         <translation type="unfinished">bis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="148"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="149"/>
         <source>Peak at</source>
         <translation type="unfinished">Scheitelpunkt bei</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="151"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="152"/>
         <source>Area</source>
         <translation type="unfinished">Fläche</translation>
     </message>
@@ -12831,9 +12828,9 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
         <translation type="obsolete">Unbekannte Integrationsmethode. Gültige Werte müssen im Bereich 1 (Trapezoidalmethode) bis 5 liegen.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="83"/>
-        <location filename="../../libscidavis/src/Integration.cpp" line="92"/>
-        <location filename="../../libscidavis/src/Integration.cpp" line="124"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="82"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="91"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="125"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
@@ -18821,7 +18818,7 @@ Wollen sie Zellen einfügen?</translation>
         <translation type="obsolete">Die führende Spalte ist leer! Operation abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="999"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1001"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;</source>
         <translation type="unfinished">Konnte nicht in Datei schreiben: &lt;br&gt;&lt;h4&gt;</translation>
     </message>
@@ -18835,7 +18832,7 @@ Wollen sie Zellen einfügen?</translation>
         <translation type="obsolete">Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="998"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1000"/>
         <source>ASCII Export Error</source>
         <translation type="unfinished">ASCII-Export-Fehler</translation>
     </message>
@@ -19964,7 +19961,7 @@ doppelter Präzision
 <context>
     <name>TranslateCurveTool</name>
     <message>
-        <location filename="../../libscidavis/src/TranslateCurveTool.cpp" line="68"/>
+        <location filename="../../libscidavis/src/TranslateCurveTool.cpp" line="71"/>
         <source>Curve selected! Move cursor and click to choose a point and double-click/press &apos;Enter&apos; to finish!</source>
         <translation type="unfinished">Kurve ausgewählt! Bewegen Sie den Cursor, wählen Sie durch einen Klick einen Punkt aus und bestätigen Sie durch einen Doppelklick oder die Eingabetaste!</translation>
     </message>
@@ -19973,18 +19970,18 @@ doppelter Präzision
         <translation type="obsolete">QtiPlot - Warnung</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/TranslateCurveTool.cpp" line="120"/>
+        <location filename="../../libscidavis/src/TranslateCurveTool.cpp" line="125"/>
         <source>This operation cannot be performed on curves plotted from columns having a non-numerical format.</source>
         <translation type="unfinished">Diese Operation kann nicht auf Kurven angewendet werden, die auf Spalten mit nicht-numerischem Format basieren.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/TranslateCurveTool.cpp" line="82"/>
+        <location filename="../../libscidavis/src/TranslateCurveTool.cpp" line="85"/>
         <source>This operation cannot be performed on function curves.</source>
         <translation type="unfinished">Diese Operationi kann nicht für Funktionskurven benutzt werden.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/TranslateCurveTool.cpp" line="81"/>
-        <location filename="../../libscidavis/src/TranslateCurveTool.cpp" line="119"/>
+        <location filename="../../libscidavis/src/TranslateCurveTool.cpp" line="84"/>
+        <location filename="../../libscidavis/src/TranslateCurveTool.cpp" line="124"/>
         <source>Warning</source>
         <translation type="unfinished">Warnung</translation>
     </message>

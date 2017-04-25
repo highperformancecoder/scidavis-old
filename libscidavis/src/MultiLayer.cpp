@@ -664,36 +664,36 @@ void MultiLayer::exportPDF(const QString& fname)
 	exportVector(fname);
 }
 
-void MultiLayer::exportVector(const QString& fileName, int res, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPrinter::Orientation orientation)
+void MultiLayer::exportVector(const QString& fileName, int, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPrinter::Orientation orientation)
 {
-	if ( fileName.isEmpty() ){
-		QMessageBox::critical(this, tr("Error"),
-		tr("Please provide a valid file name!"));
-        return;
-	}
+  if ( fileName.isEmpty() ){
+    QMessageBox::critical(this, tr("Error"),
+                          tr("Please provide a valid file name!"));
+    return;
+  }
 
-	QPrinter printer;
-    printer.setDocName (this->name());
-    printer.setCreator("SciDAVis");
-	printer.setFullPage(true);
-	printer.setOutputFileName(fileName);
-    if (fileName.contains(".eps"))
-    	printer.setOutputFormat(QPrinter::PostScriptFormat);
+  QPrinter printer;
+  printer.setDocName (this->name());
+  printer.setCreator("SciDAVis");
+  printer.setFullPage(true);
+  printer.setOutputFileName(fileName);
+  if (fileName.contains(".eps"))
+    printer.setOutputFormat(QPrinter::PostScriptFormat);
 
-	if (color)
-		printer.setColorMode(QPrinter::Color);
-	else
-		printer.setColorMode(QPrinter::GrayScale);
+  if (color)
+    printer.setColorMode(QPrinter::Color);
+  else
+    printer.setColorMode(QPrinter::GrayScale);
 
-    if (pageSize == QPrinter::Custom)
-	   printer.setPaperSize(canvas->size(), QPrinter::Point);
-    else
+  if (pageSize == QPrinter::Custom)
+    printer.setPaperSize(canvas->size(), QPrinter::Point);
+  else
     {
-        printer.setOrientation(orientation);
-        printer.setPaperSize(pageSize);
+      printer.setOrientation(orientation);
+      printer.setPaperSize(pageSize);
     }
 
-    exportPainter(printer, keepAspect);
+  exportPainter(printer, keepAspect);
 }
 
 void MultiLayer::exportSVG(const QString& fname)

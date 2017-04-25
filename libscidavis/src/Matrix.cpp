@@ -74,7 +74,7 @@ Matrix::Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, c
 	init(r, c);
 }
 
-void Matrix::init(int rows, int cols)
+void Matrix::init(int, int)
 {	
 	MatrixView::setMatrix(d_future_matrix);	
 	d_future_matrix->setView(this);	

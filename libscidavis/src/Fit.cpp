@@ -96,7 +96,7 @@ double * Fit::fitGslMultifit(int &iterations, int &status)
 	f.params = &data;
 
 	// initialize solver
-	const gsl_multifit_fdfsolver_type *T;
+	const gsl_multifit_fdfsolver_type *T=nullptr;
 	switch(d_solver) {
 		case ScaledLevenbergMarquardt:
 			T = gsl_multifit_fdfsolver_lmsder;
@@ -120,7 +120,7 @@ double * Fit::fitGslMultifit(int &iterations, int &status)
 	}
 
 	// grab results
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 		result[i] = gsl_vector_get(s->x, i);
 	gsl_blas_ddot(s->f, s->f, &chi_2);
 #if GSL_MAJOR_VERSION < 2
@@ -185,7 +185,7 @@ double * Fit::fitGslMultimin(int &iterations, int &status)
 	}
 
 	// grab results
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 		result[i] = gsl_vector_get(s_min->x, i);
 	chi_2 = s_min->fval;
 	gsl_matrix *J = gsl_matrix_alloc(d_n, d_p);
@@ -219,7 +219,7 @@ void Fit::setDataCurve(int curve, double start, double end)
 
 void Fit::setInitialGuesses(double *x_init)
 {
-	for (int i = 0; i < d_p; i++)
+	for (unsigned i = 0; i < d_p; i++)
 		gsl_vector_set(d_param_init, i, x_init[i]);
 }
 
@@ -272,7 +272,7 @@ QString Fit::logFitInfo(double *par, int iterations, int status, const QString& 
 
 	info+=tr("From x")+" = "+QLocale().toString(d_x[0], 'g', 15)+" "+tr("to x")+" = "+QLocale().toString(d_x[d_n-1], 'g', 15)+"\n";
 	double chi_2_dof = chi_2/(d_n - d_p);
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 	{
 		info += d_param_names[i]+" "+d_param_explain[i]+" = "+QLocale().toString(par[i], 'g', d_prec) + " +/- ";
 		if (d_scale_errors)
@@ -299,18 +299,18 @@ double Fit::rSquare()
         double mean = 0.0, tss = 0.0, weights_sum = 0.0;
 
         if (d_y_error_source == UnknownErrors) {
-            for (int i=0; i<d_n; i++)
+            for (unsigned i=0; i<d_n; i++)
                 mean += d_y[i];
             mean /= d_n;
-            for (int i=0; i<d_n; i++)
+            for (unsigned i=0; i<d_n; i++)
                 tss += (d_y[i] - mean)*(d_y[i] - mean);
         } else {
-            for (int i=0; i<d_n; i++) {
+            for (unsigned i=0; i<d_n; i++) {
                 mean += d_y[i]/(d_y_errors[i]*d_y_errors[i]);
                 weights_sum += 1.0/(d_y_errors[i]*d_y_errors[i]);
             }
             mean /= weights_sum;
-            for (int i=0; i<d_n; i++)
+            for (unsigned i=0; i<d_n; i++)
                 tss += (d_y[i] - mean)*(d_y[i] - mean)/(d_y_errors[i]*d_y_errors[i]);
 	}
         return 1 - chi_2/tss;
@@ -325,7 +325,7 @@ QString Fit::legendInfo()
 	info += "Chi^2 = " + QLocale().toString(chi_2, 'g', d_prec) + "\n";
 	info += tr("R^2") + " = " + QLocale().toString(rSquare(), 'g', d_prec) + "\n";
 
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 	{
 		info += d_param_names[i] + " = " + QLocale().toString(d_results[i], 'g', d_prec) + " +/- ";
 		if (d_scale_errors)
@@ -346,7 +346,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 				d_y_error_dataset = QString::null;
 				// using 1.0 here is important for correct error estimates,
 				// cmp. Fit::fitGslMultifit and Fit::fitGslMultimin
-				for (int i=0; i<d_n; i++)
+				for (unsigned i=0; i<d_n; i++)
 					d_y_errors[i] = 1.0;
 			}
 			break;
@@ -377,7 +377,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 				}
 				if (er)
 				{
-					for (int j=0; j<d_n; j++)
+					for (unsigned j=0; j<d_n; j++)
 						d_y_errors[j] = er->errorValue(j);
 				}
 			}
@@ -386,7 +386,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 			{
 				d_y_error_dataset = d_curve->title().text();
 
-				for (int i=0; i<d_n; i++)
+				for (unsigned i=0; i<d_n; i++)
 					d_y_errors[i] = sqrt(d_y[i]);
 			}
 			break;
@@ -399,7 +399,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 				if (!t)
 					return false;
 
-				if (t->numRows() < d_n)
+				if (unsigned(t->numRows()) < d_n)
   	            {
 						if (!fail_silently)
 							QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
@@ -410,7 +410,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 				d_y_error_dataset = colName;
 
 				int col = t->colIndex(colName);
-				for (int i=0; i<d_n; i++)
+				for (unsigned i=0; i<d_n; i++)
 					d_y_errors[i] = t->cell(i, col);
 			}
 			break;
@@ -426,7 +426,7 @@ Table* Fit::parametersTable(const QString& tableName)
 	t->column(0)->setColumnMode(SciDAVis::Text);
 	t->column(1)->setColumnMode(SciDAVis::Numeric);
 	t->column(2)->setColumnMode(SciDAVis::Numeric);
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 	{
 		t->column(0)->setTextAt(i, d_param_names[i]);
 		t->column(1)->setValueAt(i, d_results[i]);
@@ -447,9 +447,9 @@ Matrix* Fit::covarianceMatrix(const QString& matrixName)
 {
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	Matrix* m = app->newMatrix(matrixName, d_p, d_p);
-	for (int i = 0; i < d_p; i++)
+	for (unsigned i = 0; i < d_p; i++)
 	{
-		for (int j = 0; j < d_p; j++)
+		for (unsigned j = 0; j < d_p; j++)
 			m->setText(i, j, QLocale().toString(gsl_matrix_get(covar, i, j), 'g', d_prec));
 	}
 	m->showNormal();
@@ -461,7 +461,7 @@ double *Fit::errors()
 	if (!d_result_errors) {
 		d_result_errors = new double[d_p];
 		double chi_2_dof = chi_2/(d_n - d_p);
-		for (int i=0; i<d_p; i++)
+		for (unsigned i=0; i<d_p; i++)
 		{
 			if (d_scale_errors)
 				d_result_errors[i] = sqrt(chi_2_dof*gsl_matrix_get(covar,i,i));
@@ -474,7 +474,7 @@ double *Fit::errors()
 
 void Fit::storeCustomFitResults(double *par)
 {
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 		d_results[i] = par[i];
 }
 
@@ -495,7 +495,7 @@ void Fit::fit()
 				tr("There are no parameters specified for this fit operation. Operation aborted!"));
 		return;
 	}
-	if (d_p > d_n)
+	if (unsigned(d_p) > d_n)
   	{
   		QMessageBox::critical((ApplicationWindow *)parent(), tr("Fit Error"),
   	    tr("You need at least %1 data points for this fit operation. Operation aborted!").arg(d_p));
@@ -543,9 +543,9 @@ void Fit::scriptError(const QString& message,const QString& script_name,int line
 
 int Fit::evaluate_f(const gsl_vector * x, gsl_vector * f)
 {
-    for (int i=0; i<d_p; i++)
+    for (unsigned i=0; i<d_p; i++)
         d_script->setDouble(gsl_vector_get(x,i), d_param_names[i]);
-    for (int j=0; j<d_n; j++) {
+    for (unsigned j=0; j<d_n; j++) {
         d_script->setDouble(d_x[j], "x");
         bool success;
         gsl_vector_set(f, j, (d_script->eval().toDouble(&success)-d_y[j])/d_y_errors[j]);
@@ -558,9 +558,9 @@ int Fit::evaluate_f(const gsl_vector * x, gsl_vector * f)
 double Fit::evaluate_d(const gsl_vector * x)
 {
     double result = 0.0;
-    for (int i=0; i<d_p; i++)
+    for (unsigned i=0; i<d_p; i++)
         d_script->setDouble(gsl_vector_get(x,i), d_param_names[i]);
-    for (int j=0; j<d_n; j++) {
+    for (unsigned j=0; j<d_n; j++) {
         d_script->setDouble(d_x[j], "x");
         bool success;
         result += pow((d_script->eval().toDouble(&success)-d_y[j])/d_y_errors[j], 2);
@@ -591,26 +591,26 @@ double Fit::evaluate_df_helper(double x, void * params)
 
 int Fit::evaluate_df(const gsl_vector *x, gsl_matrix *J)
 {
-    double result, abserr;
-    gsl_function F;
-    F.function = &evaluate_df_helper;
-    DiffData data;
-    F.params = &data;
-    data.script = d_script;
-    data.success = true;
-    for (int i=0; i<d_p; i++)
-        d_script->setDouble(gsl_vector_get(x,i), d_param_names[i]);
-        for (int i=0; i<d_n; i++) {
-        d_script->setDouble(d_x[i], "x");
-        for (int j=0; j<d_p; j++) {
-            data.param = d_param_names[j];
-            gsl_deriv_central(&F, gsl_vector_get(x,j), 1e-8, &result, &abserr);
-            if (!data.success)
-                return GSL_EINVAL;
-            gsl_matrix_set(J, i, j, result/d_y_errors[j]);
-        }
+  double result, abserr;
+  gsl_function F;
+  F.function = &evaluate_df_helper;
+  DiffData data;
+  F.params = &data;
+  data.script = d_script;
+  data.success = true;
+  for (unsigned i=0; i<d_p; i++)
+    d_script->setDouble(gsl_vector_get(x,i), d_param_names[i]);
+  for (unsigned i=0; i<d_n; i++) {
+    d_script->setDouble(d_x[i], "x");
+    for (unsigned j=0; j<d_p; j++) {
+      data.param = d_param_names[j];
+      gsl_deriv_central(&F, gsl_vector_get(x,j), 1e-8, &result, &abserr);
+      if (!data.success)
+        return GSL_EINVAL;
+      gsl_matrix_set(J, i, j, result/d_y_errors[j]);
     }
-    return GSL_SUCCESS;
+  }
+  return GSL_SUCCESS;
 }
 
 void Fit::generateFitCurve(double *par)
@@ -643,7 +643,7 @@ void Fit::insertFitFunctionCurve(const QString& name, double *x, double *y, int 
 	c->setRange(d_x[0], d_x[d_n-1]);
 
 	QString formula;
-	for (int j=0; j<d_p; j++)
+	for (unsigned j=0; j<d_p; j++)
 		formula += QString("%1=%2\n")
 				.arg(d_param_names[j])
 				.arg(d_results[j], 0, 'g', d_prec);

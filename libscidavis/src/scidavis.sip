@@ -1506,7 +1506,7 @@ public:
   QStringList l;
   char *item;
   for (int i=0; i<PyTuple_GET_SIZE(a0); i++)
-    if (item = PyString_AsString(PyTuple_GET_ITEM(a0, i)))
+    if ((item = PyString_AsString(PyTuple_GET_ITEM(a0, i))))
       l << item;
     else
       sipIsErr = 1;

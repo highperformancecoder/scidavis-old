@@ -119,7 +119,7 @@ color_axis = axis;
 // We must switch main and the color scale axes and their respective scales
 int xAxis = this->xAxis();
 int yAxis = this->yAxis();
-int oldMainAxis;
+int oldMainAxis=0;
 if (axis == QwtPlot::xBottom || axis == QwtPlot::xTop)
 	{
 	oldMainAxis = xAxis;

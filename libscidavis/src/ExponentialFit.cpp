@@ -92,7 +92,7 @@ void ExponentialFit::init()
 
 void ExponentialFit::storeCustomFitResults(double *par)
 {
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 		d_results[i] = par[i];
 
 	if (is_exp_growth)
@@ -171,7 +171,7 @@ void TwoExpFit::init()
 
 void TwoExpFit::storeCustomFitResults(double *par)
 {
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 		d_results[i] = par[i];
 
 	d_results[1]=1.0/d_results[1];
@@ -248,7 +248,7 @@ void ThreeExpFit::init()
 
 void ThreeExpFit::storeCustomFitResults(double *par)
 {
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 		d_results[i] = par[i];
 
 	d_results[1]=1.0/d_results[1];

@@ -67,16 +67,6 @@ bool CanvasPicker::eventFilter(QObject *object, QEvent *e)
 
 				const QMouseEvent *me = (const QMouseEvent *)e;
 
-				bool allAxisDisabled = true;
-				for (int i=0; i < QwtPlot::axisCnt; i++)
-				{
-					if (plotWidget->axisEnabled(i))
-					{
-						allAxisDisabled = false;
-						break;
-					}
-				}
-
 				if (me->button()==Qt::LeftButton && (plot()->drawLineActive()))
 				{
 					startLinePoint = me->pos();

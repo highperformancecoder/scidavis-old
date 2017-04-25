@@ -97,13 +97,13 @@ void NonLinearFit::setParametersList(const QStringList& lst)
 	covar = gsl_matrix_alloc (d_p, d_p);
 	d_results = new double[d_p];
 
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 		d_param_explain << "";
 }
 
 void NonLinearFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
-    for (int i=0; i<d_p; i++)
+    for (unsigned i=0; i<d_p; i++)
         d_script->setDouble(par[i], d_param_names[i]);
 
     if (d_gen_function) {

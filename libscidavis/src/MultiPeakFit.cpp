@@ -192,7 +192,7 @@ void MultiPeakFit::guessInitialValues()
 
 void MultiPeakFit::storeCustomFitResults(double *par)
 {
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 		d_results[i] = par[i];
 
 	if (d_profile == Lorentz)

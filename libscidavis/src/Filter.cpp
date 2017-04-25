@@ -118,7 +118,7 @@ void Filter::setDataCurve(int curve, double start, double end)
 }
 
 bool Filter::isDataAcceptable() {
-	if (d_n < d_min_points) {
+  if (d_n < unsigned(d_min_points)) {
 		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
 				tr("You need at least %1 points in order to perform this operation!").arg(d_min_points));
 		return false;
@@ -210,12 +210,12 @@ bool Filter::run()
 	if (d_init_err)
 		return false;
 
-	if (d_n < 0)
-	{
-		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
-				tr("You didn't specify a valid data set for this operation!"));
-		return false;
-	}
+//	if (d_n < 0)
+//	{
+//		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
+//				tr("You didn't specify a valid data set for this operation!"));
+//		return false;
+//	}
 
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 

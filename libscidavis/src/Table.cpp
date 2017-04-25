@@ -52,6 +52,8 @@
 #include <QProgressDialog>
 #include <QFile>
 #include <QTemporaryFile>
+#include <vector>
+using namespace std;
 
 Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 			 bool stripSpaces, bool simplifySpaces, bool convertToNumeric, QLocale numericLocale, const QString& label,
@@ -991,108 +993,106 @@ bool Table::noYColumn()
 bool Table::exportASCII(const QString& fname, const QString& separator,
 		bool withLabels, bool exportSelection)
 {
-	QFile file(fname);
-	if ( !file.open( QIODevice::WriteOnly ) )
-	{
-		QApplication::restoreOverrideCursor();
-		QMessageBox::critical(0, tr("ASCII Export Error"),
-				tr("Could not write to file: <br><h4>"+fname+ "</h4><p>Please verify that you have the right to write to this location!").arg(fname));
-		return false;
-	}
+  QFile file(fname);
+  if ( !file.open( QIODevice::WriteOnly ) )
+    {
+      QApplication::restoreOverrideCursor();
+      QMessageBox::critical(0, tr("ASCII Export Error"),
+                            tr("Could not write to file: <br><h4>"+fname+ "</h4><p>Please verify that you have the right to write to this location!").arg(fname));
+      return false;
+    }
 
-	QTextStream out( &file );
-	int i,j;
-	int rows = numRows();
-	int cols = numCols();
-	int selectedCols = 0;
-	int topRow = 0, bottomRow = 0;
-	int *sCols;
-	if (exportSelection)
-	{
-		for (i=0; i<cols; i++)
-		{
-			if (isColumnSelected(i))
-				selectedCols++;
-		}
+  QTextStream out( &file );
+  int i,j;
+  int rows = numRows();
+  int cols = numCols();
+  int selectedCols = 0;
+  int topRow = 0, bottomRow = 0;
+  vector<int> sCols;
+  if (exportSelection)
+    {
+      for (i=0; i<cols; i++)
+        {
+          if (isColumnSelected(i))
+            selectedCols++;
+        }
 
-		sCols = new int[selectedCols+1];
-		int temp = 1;
-		for (i=0; i<cols; i++)
-		{
-			if (isColumnSelected(i))
-			{
-				sCols[temp] = i;
-				temp++;
-			}
-		}
+      sCols.resize(selectedCols+1);
+      int temp = 1;
+      for (i=0; i<cols; i++)
+        {
+          if (isColumnSelected(i))
+            {
+              sCols[temp] = i;
+              temp++;
+            }
+        }
 
-		topRow = firstSelectedRow();
-		bottomRow = lastSelectedRow();
-	}
+      topRow = firstSelectedRow();
+      bottomRow = lastSelectedRow();
+    }
 
-	if (withLabels)
-	{
-		QStringList header = colNames();
-		QStringList ls = header.filter(QRegExp ("\\D"));
-		if (exportSelection)
-		{
-			for (i=1; i<selectedCols; i++)
-			{
-				if (ls.count()>0)
-					out << header[sCols[i]] + separator;
-				else
-					out << "C"+header[sCols[i]] + separator;
-			}
+  if (withLabels)
+    {
+      QStringList header = colNames();
+      QStringList ls = header.filter(QRegExp ("\\D"));
+      if (exportSelection)
+        {
+          for (i=1; i<selectedCols; i++)
+            {
+              if (ls.count()>0)
+                out << header[sCols[i]] + separator;
+              else
+                out << "C"+header[sCols[i]] + separator;
+            }
 
-			if (ls.count()>0)
-				out << header[sCols[selectedCols]] + "\n";
-			else
-				out << "C" + header[sCols[selectedCols]] + "\n";
-		}
-		else
-		{
-			if (ls.count()>0)
-			{
-				for (j=0; j<cols-1; j++)
-					out << header[j]+separator;
-				out << header[cols-1]+"\n";
-			}
-			else
-			{
-				for (j=0; j<cols-1; j++)
-					out << "C" + header[j] + separator;
-				out << "C" + header[cols-1] + "\n";
-			}
-		}
-	}// finished writting labels
+          if (ls.count()>0)
+            out << header[sCols[selectedCols]] + "\n";
+          else
+            out << "C" + header[sCols[selectedCols]] + "\n";
+        }
+      else
+        {
+          if (ls.count()>0)
+            {
+              for (j=0; j<cols-1; j++)
+                out << header[j]+separator;
+              out << header[cols-1]+"\n";
+            }
+          else
+            {
+              for (j=0; j<cols-1; j++)
+                out << "C" + header[j] + separator;
+              out << "C" + header[cols-1] + "\n";
+            }
+        }
+    }// finished writting labels
 
-	QList<Column*> col_ptrs;
-	if (exportSelection) {
-		for (j=1; j<=selectedCols; j++)
-			col_ptrs << column(sCols[j]);
-	} else {
-		for (j=0;j<cols;j++)
-			col_ptrs << column(j);
-		topRow = 0;
-		bottomRow = rows-1;
-	}
+  QList<Column*> col_ptrs;
+  if (exportSelection) {
+    for (j=1; j<=selectedCols; j++)
+      col_ptrs << column(sCols[j]);
+  } else {
+    for (j=0;j<cols;j++)
+      col_ptrs << column(j);
+    topRow = 0;
+    bottomRow = rows-1;
+  }
 
-	for (i=topRow; i<=bottomRow; i++) {
-		bool first = true;
-		foreach(Column *col, col_ptrs) {
-			if (first)
-				first = false;
-			else
-				out << separator;
-			out << col->asStringColumn()->textAt(i);
-		}
-		out << "\n";
-	}
+  for (i=topRow; i<=bottomRow; i++) {
+    bool first = true;
+    foreach(Column *col, col_ptrs) {
+      if (first)
+        first = false;
+      else
+        out << separator;
+      out << col->asStringColumn()->textAt(i);
+    }
+    out << "\n";
+  }
 
-	if (exportSelection)
-		delete[] sCols; //free memory
-	file.close();
-	return true;
+  file.close();
+  return true;
 }
 
 void Table::customEvent(QEvent *e)

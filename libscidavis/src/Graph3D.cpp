@@ -49,6 +49,7 @@
 #include <gsl/gsl_vector.h>
 #include <fstream>
 #include <stdexcept>
+using namespace std;
 
 UserFunction::UserFunction(const QString& s, SurfacePlot& pw)
 : Function(pw)
@@ -1241,6 +1242,8 @@ void Graph3D::updateScale(int axis,const QStringList& options)
 			targetAxes[3] = &sp->coordinates()->axes[Z4];
 			min = &zMin; max = &zMax;
 			break;
+        default:
+          throw runtime_error("invalid axis");
 	}
 
 	majors = targetAxes[0]->majors();

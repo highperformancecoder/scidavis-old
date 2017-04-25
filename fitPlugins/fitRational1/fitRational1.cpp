@@ -98,7 +98,7 @@ extern "C" MY_EXPORT int function_f (const gsl_vector * x, void *params,
 }
 
 extern "C" MY_EXPORT double function_d (const gsl_vector * x, void *params,
-		gsl_vector * f)
+		gsl_vector *)
 {
 	size_t n = ((struct fitData *)params)->n;
 	double *X = ((struct fitData *)params)->X;

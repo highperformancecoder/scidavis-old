@@ -91,6 +91,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stddef.h>
+using namespace std;
 
 Graph::Graph(QWidget* parent, QString name, Qt::WFlags f)
 : QWidget(parent,f)
@@ -1384,7 +1385,7 @@ void Graph::exportImage(const QString& fileName, int quality)
 	image.save(fileName, 0, quality);
 }
 
-void Graph::exportVector(const QString& fileName, int res, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPrinter::Orientation orientation)
+void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPrinter::Orientation orientation)
 {
 	if ( fileName.isEmpty() ){
 		QMessageBox::critical(this, tr("Error"), tr("Please provide a valid file name!"));
@@ -2985,42 +2986,42 @@ void Graph::setCurveType(int curve_index, CurveType type, bool update)
 
 void Graph::updateCurveLayout(int index, const CurveLayout *cL)
 {
-	DataCurve *c = (DataCurve *)this->curve(index);
-	if (!c)
-		return;
-    if (c_type.isEmpty() || (int)c_type.size() < index)
-        return;
+  DataCurve *c = (DataCurve *)this->curve(index);
+  if (!c)
+    return;
+  if (c_type.isEmpty() || (int)c_type.size() < index)
+    return;
 
-	QPen pen = QPen(ColorBox::color(cL->symCol),cL->penWidth, Qt::SolidLine);
-	if (cL->fillCol != -1)
-		c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType), QBrush(ColorBox::color(cL->fillCol)), pen, QSize(cL->sSize,cL->sSize)));
-	else
-		c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType), QBrush(), pen, QSize(cL->sSize,cL->sSize)));
+  QPen pen = QPen(ColorBox::color(cL->symCol),cL->penWidth, Qt::SolidLine);
+  if (cL->fillCol != -1)
+    c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType), QBrush(ColorBox::color(cL->fillCol)), pen, QSize(cL->sSize,cL->sSize)));
+  else
+    c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType), QBrush(), pen, QSize(cL->sSize,cL->sSize)));
 
-	c->setPen(QPen(ColorBox::color(cL->lCol), cL->lWidth, getPenStyle(cL->lStyle)));
+  c->setPen(QPen(ColorBox::color(cL->lCol), cL->lWidth, getPenStyle(cL->lStyle)));
 
-	int style = c_type[index];
-	if (style == Scatter)
-		c->setStyle(QwtPlotCurve::NoCurve);
-	else if (style == Spline)
-	{
-		c->setStyle(QwtPlotCurve::Lines);
-		c->setCurveAttribute(QwtPlotCurve::Fitted, true);
-	}
-	else if (style == VerticalSteps)
-	{
-		c->setStyle(QwtPlotCurve::Steps);
-		c->setCurveAttribute(QwtPlotCurve::Inverted, true);
-	}
-	else
-		c->setStyle((QwtPlotCurve::CurveStyle)cL->connectType);
+  int style = c_type[index];
+  if (style == Scatter)
+    c->setStyle(QwtPlotCurve::NoCurve);
+  else if (style == Spline)
+    {
+      c->setStyle(QwtPlotCurve::Lines);
+      c->setCurveAttribute(QwtPlotCurve::Fitted, true);
+    }
+  else if (style == VerticalSteps)
+    {
+      c->setStyle(QwtPlotCurve::Steps);
+      c->setCurveAttribute(QwtPlotCurve::Inverted, true);
+    }
+  else
+    c->setStyle((QwtPlotCurve::CurveStyle)cL->connectType);
 
-	QBrush brush = QBrush(ColorBox::color(cL->aCol));
-	if (cL->filledArea)
-		brush.setStyle(getBrushStyle(cL->aStyle));
-	else
-		brush.setStyle(Qt::NoBrush);
-	c->setBrush(brush);
+  QBrush brush = QBrush(ColorBox::color(cL->aCol));
+  if (cL->filledArea)
+    brush.setStyle(getBrushStyle(cL->aStyle));
+  else
+    brush.setStyle(Qt::NoBrush);
+  c->setBrush(brush);
 }
 
 void Graph::updateErrorBars(QwtErrorPlotCurve *er, bool xErr, int width, int cap, const QColor& c,
@@ -3490,15 +3491,15 @@ void Graph::updateScale()
 
 void Graph::setBarsGap(int curve, int gapPercent, int offset)
 {
-	QwtBarCurve *bars = (QwtBarCurve *)this->curve(curve);
-	if (!bars)
-		return;
+  QwtBarCurve *bars = (QwtBarCurve *)this->curve(curve);
+  if (!bars)
+    return;
 
-    if (bars->gap() == gapPercent && bars->offset() == offset)
-        return;
+  if (bars->gap() == gapPercent && bars->offset() == offset)
+    return;
 
-	bars->setGap(gapPercent);
-	bars->setOffset(offset);
+  bars->setGap(gapPercent);
+  bars->setOffset(offset);
 }
 
 void Graph::removePie()
@@ -3914,7 +3915,7 @@ bool Graph::addFunctionCurve(ApplicationWindow *parent, int type, const QStringL
 
 bool Graph::insertFunctionCurve(ApplicationWindow * parent, const QStringList& func_spec, int points, int fileVersion)
 {
-	int type;
+	int type= FunctionCurve::Normal;
 	QStringList formulas;
 	QString var, name = QString::null;
 	QList<double> ranges;
@@ -4226,6 +4227,8 @@ Qt::BrushStyle Graph::getBrushStyle(int style)
 		case 13:
 			brushStyle=Qt::Dense7Pattern;
 			break;
+        default:
+          throw runtime_error("invalid brush style");
 	}
 	return brushStyle;
 }
@@ -4266,13 +4269,15 @@ Qt::PenStyle Graph::getPenStyle(int style)
 		case 4:
 			linePen=Qt::DashDotDotLine;
 			break;
+        default:
+          throw runtime_error("invalid pen style");
 	}
 	return linePen;
 }
 
 Qt::PenStyle Graph::getPenStyle(const QString& s)
 {
-	Qt::PenStyle style;
+	Qt::PenStyle style=Qt::SolidLine;
 	if (s=="SolidLine")
 		style=Qt::SolidLine;
 	else if (s=="DashLine")
@@ -5343,80 +5348,80 @@ int Graph::visibleCurves()
 
 QPrinter::PageSize Graph::minPageSize(const QPrinter& printer, const QRect& r)
 {
-	double x_margin = 0.2/2.54*printer.logicalDpiX(); // 2 mm margins
-	double y_margin = 0.2/2.54*printer.logicalDpiY();
-    double w_mm = 2*x_margin + (double)(r.width())/(double)printer.logicalDpiX() * 25.4;
-    double h_mm = 2*y_margin + (double)(r.height())/(double)printer.logicalDpiY() * 25.4;
+  double x_margin = 0.2/2.54*printer.logicalDpiX(); // 2 mm margins
+  double y_margin = 0.2/2.54*printer.logicalDpiY();
+  double w_mm = 2*x_margin + (double)(r.width())/(double)printer.logicalDpiX() * 25.4;
+  double h_mm = 2*y_margin + (double)(r.height())/(double)printer.logicalDpiY() * 25.4;
 
-    int w, h;
-    if (w_mm/h_mm > 1)
+  int w, h;
+  if (w_mm/h_mm > 1)
     {
-        w = (int)ceil(w_mm);
-        h = (int)ceil(h_mm);
+      w = (int)ceil(w_mm);
+      h = (int)ceil(h_mm);
     }
-    else
+  else
     {
-        h = (int)ceil(w_mm);
-        w = (int)ceil(h_mm);
+      h = (int)ceil(w_mm);
+      w = (int)ceil(h_mm);
     }
 
-	QPrinter::PageSize size = QPrinter::A5;
-	if (w < 45 && h < 32)
-        size =  QPrinter::B10;
-	else if (w < 52 && h < 37)
-        size =  QPrinter::A9;
-    else if (w < 64 && h < 45)
-        size =  QPrinter::B9;
-    else if (w < 74 && h < 52)
-        size =  QPrinter::A8;
-    else if (w < 91 && h < 64)
-        size =  QPrinter::B8;
-    else if (w < 105 && h < 74)
-        size =  QPrinter::A7;
-    else if (w < 128 && h < 91)
-        size =  QPrinter::B7;
-    else if (w < 148 && h < 105)
-        size =  QPrinter::A6;
-    else if (w < 182 && h < 128)
-        size =  QPrinter::B6;
-    else if (w < 210 && h < 148)
-        size =  QPrinter::A5;
-	else if (w < 220 && h < 110)
-        size =  QPrinter::DLE;
-	else if (w < 229 && h < 163)
-        size =  QPrinter::C5E;
-	else if (w < 241 && h < 105)
-        size =  QPrinter::Comm10E;
-    else if (w < 257 && h < 182)
-        size =  QPrinter::B5;
-	else if (w < 279 && h < 216)
-        size =  QPrinter::Letter;
-    else if (w < 297 && h < 210)
-        size =  QPrinter::A4;
-	else if (w < 330 && h < 210)
-        size =  QPrinter::Folio;
-	else if (w < 356 && h < 216)
-        size =  QPrinter::Legal;
-    else if (w < 364 && h < 257)
-        size =  QPrinter::B4;
-    else if (w < 420 && h < 297)
-        size =  QPrinter::A3;
-    else if (w < 515 && h < 364)
-        size =  QPrinter::B3;
-    else if (w < 594 && h < 420)
-        size =  QPrinter::A2;
-    else if (w < 728 && h < 515)
-        size =  QPrinter::B2;
-	else if (w < 841 && h < 594)
-        size =  QPrinter::A1;
-    else if (w < 1030 && h < 728)
-        size =  QPrinter::B1;
-	else if (w < 1189 && h < 841)
-        size =  QPrinter::A0;
-    else if (w < 1456 && h < 1030)
-        size =  QPrinter::B0;
+  QPrinter::PageSize size = QPrinter::A5;
+  if (w < 45 && h < 32)
+    size =  QPrinter::B10;
+  else if (w < 52 && h < 37)
+    size =  QPrinter::A9;
+  else if (w < 64 && h < 45)
+    size =  QPrinter::B9;
+  else if (w < 74 && h < 52)
+    size =  QPrinter::A8;
+  else if (w < 91 && h < 64)
+    size =  QPrinter::B8;
+  else if (w < 105 && h < 74)
+    size =  QPrinter::A7;
+  else if (w < 128 && h < 91)
+    size =  QPrinter::B7;
+  else if (w < 148 && h < 105)
+    size =  QPrinter::A6;
+  else if (w < 182 && h < 128)
+    size =  QPrinter::B6;
+  else if (w < 210 && h < 148)
+    size =  QPrinter::A5;
+  else if (w < 220 && h < 110)
+    size =  QPrinter::DLE;
+  else if (w < 229 && h < 163)
+    size =  QPrinter::C5E;
+  else if (w < 241 && h < 105)
+    size =  QPrinter::Comm10E;
+  else if (w < 257 && h < 182)
+    size =  QPrinter::B5;
+  else if (w < 279 && h < 216)
+    size =  QPrinter::Letter;
+  else if (w < 297 && h < 210)
+    size =  QPrinter::A4;
+  else if (w < 330 && h < 210)
+    size =  QPrinter::Folio;
+  else if (w < 356 && h < 216)
+    size =  QPrinter::Legal;
+  else if (w < 364 && h < 257)
+    size =  QPrinter::B4;
+  else if (w < 420 && h < 297)
+    size =  QPrinter::A3;
+  else if (w < 515 && h < 364)
+    size =  QPrinter::B3;
+  else if (w < 594 && h < 420)
+    size =  QPrinter::A2;
+  else if (w < 728 && h < 515)
+    size =  QPrinter::B2;
+  else if (w < 841 && h < 594)
+    size =  QPrinter::A1;
+  else if (w < 1030 && h < 728)
+    size =  QPrinter::B1;
+  else if (w < 1189 && h < 841)
+    size =  QPrinter::A0;
+  else if (w < 1456 && h < 1030)
+    size =  QPrinter::B0;
 
-	return size;
+  return size;
 }
 
 int Graph::mapToQwtAxis(int axis)

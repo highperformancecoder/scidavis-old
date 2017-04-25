@@ -124,7 +124,7 @@ class Filter : public QObject
 		Table *d_table;
 
 		//! Size of the data arrays
-		int d_n;
+		unsigned d_n;
 
 		//! x data set to be analysed
 		double *d_x;

@@ -4803,7 +4803,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>You didn&apos;t specify a valid data set for this operation!</source>
-        <translation type="unfinished">Pro tuto operaci jste nestanovil platný záznam s údaji!</translation>
+        <translation type="obsolete">Pro tuto operaci jste nestanovil platný záznam s údaji!</translation>
     </message>
     <message>
         <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>

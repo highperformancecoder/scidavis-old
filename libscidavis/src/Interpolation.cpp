@@ -88,7 +88,7 @@ if (m < 0 || m > 2)
         d_init_err = true;
         return;
     }
-int min_points = m + 3;
+unsigned min_points = m + 3;
 if (d_n < min_points)
 	{
 		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
@@ -134,7 +134,7 @@ void Interpolation::calculateOutputData(double *x, double *y)
 bool Interpolation::isDataAcceptable()
 {
 	// GSL interpolation routines fail with division by zero on such data
-	for (int i=1; i<d_n; i++)
+	for (unsigned i=1; i<d_n; i++)
 		if (d_x[i-1] == d_x[i]) {
 			QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
 					tr("Several data points have the same x value causing divisions by zero, operation aborted!"));

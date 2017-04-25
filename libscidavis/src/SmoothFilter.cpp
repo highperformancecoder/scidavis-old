@@ -112,7 +112,7 @@ void SmoothFilter::smoothFFT(double *x, double *y)
 	double lf = df/(double)d_right_points;//frequency cutoff
 	df = 0.5*df/(double)d_n;
 
-    for (int i = 0; i < d_n; i++)
+    for (unsigned i = 0; i < d_n; i++)
 	{
 	   x[i] = d_x[i];
 	   y[i] = i*df > lf ? 0 : y[i];//filtering frequencies
@@ -140,7 +140,7 @@ void SmoothFilter::smoothAverage(double *, double *y)
 
 		s[i] = aux/(double)(2*i+1);
 	}
-	for (int i=p2; i<d_n-p2; i++)
+	for (unsigned i=p2; i<d_n-p2; i++)
 	{
 		aux = 0.0;
 		for (int j=-p2; j<=p2; j++)
@@ -148,17 +148,17 @@ void SmoothFilter::smoothAverage(double *, double *y)
 
 		s[i] = aux/m;
 	}
-	for (int i=d_n-p2; i<d_n-1; i++)
+	for (unsigned i=d_n-p2; i<d_n-1; i++)
 	{
 		aux = 0.0;
-		for (int j=d_n-i-1; j>=i-d_n+1; j--)
+		for (unsigned j=d_n-i-1; j>=i-d_n+1; j--)
 			aux += y[i+j];
 
 		s[i] = aux/(double)(2*(d_n-i-1)+1);
 	}
 	s[d_n-1] = y[d_n-1];
 
-    for (int i = 0; i<d_n; i++)
+    for (unsigned i = 0; i<d_n; i++)
         y[i] = s[i];
 
     delete[] s;
@@ -252,7 +252,7 @@ void SmoothFilter::smoothSavGol(double *, double *y_inout) {
 		return;
 	}
 
-	if (d_n < points) {
+	if (d_n < unsigned(points)) {
 		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
 				tr("Tried to smooth over more points (left+right+1=%1) than given as input (%2).").arg(points).arg(d_n));
 		return;
@@ -289,7 +289,7 @@ void SmoothFilter::smoothSavGol(double *, double *y_inout) {
 		result[i] = convolution;
 	}
 	// central part: convolve with fixed row of h (as given by number of left points to use)
-	for (int i=d_left_points; i<d_n-d_right_points; i++) {
+	for (unsigned i=d_left_points; i<d_n-d_right_points; i++) {
 		double convolution = 0.0;
 		for (int k=0; k<points; k++)
 			convolution += gsl_matrix_get(h, d_left_points, k) * y_inout[i-d_left_points+k];
@@ -306,9 +306,9 @@ void SmoothFilter::smoothSavGol(double *, double *y_inout) {
 	}
 	*/
 	// legacy behaviour: handle right edge by zero padding
-	for (int i=d_n-d_right_points; i<d_n; i++) {
+	for (unsigned i=d_n-d_right_points; i<d_n; i++) {
 		double convolution = 0.0;
-		for (int k=0; i-d_left_points+k < d_n; k++)
+		for (unsigned k=0; i-d_left_points+k < d_n; k++)
 			convolution += gsl_matrix_get(h, d_left_points, k) * y_inout[i-d_left_points+k];
 		result[i] = convolution;
 	}
@@ -353,13 +353,13 @@ void SmoothFilter::smoothModifiedSavGol(double *x_in, double *y_inout)
 	// residual of the (least-squares) approximation (by-product of GSL's algorithm)
 	gsl_vector *residual = gsl_vector_alloc(points);
 
-	for (int target_index = 0; target_index < d_n; target_index++) {
+	for (unsigned target_index = 0; target_index < d_n; target_index++) {
 		int offset = target_index - d_left_points;
 		// use a fixed number of points; near left/right borders, use offset to change
 		// effective number of left/right points considered
-		if (target_index < d_left_points)
+		if (target_index < unsigned(d_left_points))
 			offset += d_left_points - target_index;
-		else if (target_index + d_right_points >= d_n)
+		else if (unsigned(target_index + d_right_points) >= d_n)
 			offset += d_n - 1 - (target_index + d_right_points);
 
 		// fill Vandermonde matrix

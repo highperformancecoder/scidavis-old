@@ -6817,7 +6817,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>You didn&apos;t specify a valid data set for this operation!</source>
-        <translation type="unfinished">Não foi especificado um conjunto de dados válido para esta operação!</translation>
+        <translation type="obsolete">Não foi especificado um conjunto de dados válido para esta operação!</translation>
     </message>
     <message>
         <source>of</source>
