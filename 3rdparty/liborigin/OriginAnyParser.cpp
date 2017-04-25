@@ -950,6 +950,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 	} else {
 		name = col_header.substr(0x58,25).c_str();
 	}
+	string dataset_name = name;
 	string::size_type colpos = name.find_last_of("_");
 
 	if(colpos != string::npos){
@@ -1041,6 +1042,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 		}
 		speadSheets[spread].columns.push_back(SpreadColumn(column_name, dataIndex));
 		speadSheets[spread].columns.back().colIndex = ++col_index;
+		speadSheets[spread].columns.back().dataset_name = dataset_name;
 
 		string::size_type sheetpos = speadSheets[spread].columns.back().name.find_last_of("@");
 		if(sheetpos != string::npos){
@@ -1124,6 +1126,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 			}
 		}
 		LOG_PRINT(logfile, "\n\n")
+		datasets.push_back(speadSheets[spread].columns.back());
 	}
 
 	return true;

@@ -153,6 +153,7 @@ namespace Origin
 		enum ColumnType {X, Y, Z, XErr, YErr, Label, NONE};
 
 		string name;
+		string dataset_name;
 		ColumnType type;
 		ValueType valueType;
 		int valueTypeSpecification;
