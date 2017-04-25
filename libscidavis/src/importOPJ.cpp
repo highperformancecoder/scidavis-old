@@ -666,6 +666,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 				switch(data[0].toAscii())
 				{
 				case 'T':
+				case 'E':
 				     {
 					tableName = data.right(data.length()-2);
 					Table* table = mw->table(tableName);
