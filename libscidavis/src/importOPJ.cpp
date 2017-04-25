@@ -187,17 +187,15 @@ int ImportOPJ::translateOrigin2ScidavisLineStyle(int linestyle) {
 	return scidavisstyle;
 }
 
-bool ImportOPJ::importTables(const OriginFile &opj)
+// spreadsheets can be either in its own window or as a sheet in excels windows
+bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadSheet &spread)
 {
-	int visible_count=0;
+	static int visible_count=0;
 	int SciDAVis_scaling_factor=10; //in Origin width is measured in characters while in SciDAVis - pixels --- need to be accurate
-	for(unsigned int s = 0; s < opj.spreadCount(); ++s)
-        {
-		Origin::SpreadSheet spread = opj.spread(s);
 		int columnCount = spread.columns.size();
 		int maxrows = spread.maxRows;
 		if(!columnCount) //remove tables without cols
-			continue;
+			return false;
 
 		Table *table = mw->newTable(spread.name.c_str(), maxrows, columnCount);
 		if (!table)
@@ -460,6 +458,37 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 			}
 
 		}
+	return true;
+}
+bool ImportOPJ::importTables(const OriginFile &opj)
+{
+	static int visible_count=0;
+	int SciDAVis_scaling_factor=10; //in Origin width is measured in characters while in SciDAVis - pixels --- need to be accurate
+	for(unsigned int s = 0; s < opj.spreadCount(); ++s)
+        {
+		Origin::SpreadSheet spread = opj.spread(s);
+		int columnCount = spread.columns.size();
+		if(!columnCount) //remove tables without cols
+			continue;
+		importSpreadsheet(opj, spread);
+	}
+//Import excels
+	for (unsigned int s = 0; s < opj.excelCount(); ++s)
+		{
+			Origin::Excel excelwb = opj.excel(s);
+			for (unsigned int j = 0; j < excelwb.sheets.size(); ++j) {
+				Origin::SpreadSheet spread = excelwb.sheets[j];
+				int columnCount = spread.columns.size();
+				if(!columnCount) //remove tables without cols
+					continue;
+				spread.name = excelwb.name;
+				// scidavis does not have windows with multiple sheets
+				if (j>0) {
+					spread.name.append("@").append(std::to_string(j+1));
+				}
+				spread.maxRows = excelwb.maxRows;
+				importSpreadsheet(opj, spread);
+			}
 	}
 
 
