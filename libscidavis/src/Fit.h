@@ -139,7 +139,7 @@ class Fit : public Filter, public scripted
 		fit_function_simplex d_fsimplex;
 
 		//! Number of fit parameters
-		int d_p;
+		unsigned d_p;
 
 		//! Initial guesses for the fit parameters 
 		gsl_vector *d_param_init;

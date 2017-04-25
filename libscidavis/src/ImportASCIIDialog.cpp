@@ -44,39 +44,39 @@
 ImportASCIIDialog::ImportASCIIDialog(bool import_mode_enabled, QWidget * parent, bool extended, Qt::WFlags flags )
 : ExtensibleFileDialog(parent, extended, flags )
 {
-	setWindowTitle(tr("Import ASCII File(s)"));
+  setWindowTitle(tr("Import ASCII File(s)"));
 
-	QStringList filters;
-	filters << tr("All files") + " (*)";
-	filters << tr("Text files") + " (*.TXT *.txt)";
-	filters << tr("Data files") + " (*.DAT *.dat)";
-	filters << tr("Comma Separated Values") + " (*.CSV *.csv)";
-	setFilters( filters );
+  QStringList filters;
+  filters << tr("All files") + " (*)";
+  filters << tr("Text files") + " (*.TXT *.txt)";
+  filters << tr("Data files") + " (*.DAT *.dat)";
+  filters << tr("Comma Separated Values") + " (*.CSV *.csv)";
+  setFilters( filters );
 
-	setFileMode( QFileDialog::ExistingFiles );
+  setFileMode( QFileDialog::ExistingFiles );
 
-	initAdvancedOptions();
-	d_import_mode->setEnabled(import_mode_enabled);
-	setExtensionWidget(d_advanced_options);
+  initAdvancedOptions();
+  d_import_mode->setEnabled(import_mode_enabled);
+  setExtensionWidget(d_advanced_options);
 
-	// get rembered option values
-	ApplicationWindow *app = (ApplicationWindow *)parent;
-	d_strip_spaces->setChecked(app->strip_spaces);
-	d_simplify_spaces->setChecked(app->simplify_spaces);
-	d_ignored_lines->setValue(app->ignoredLines);
-	d_rename_columns->setChecked(app->renameColumns);
-	setColumnSeparator(app->columnSeparator);
+  // get rembered option values
+  ApplicationWindow *app = (ApplicationWindow *)parent;
+  d_strip_spaces->setChecked(app->strip_spaces);
+  d_simplify_spaces->setChecked(app->simplify_spaces);
+  d_ignored_lines->setValue(app->ignoredLines);
+  d_rename_columns->setChecked(app->renameColumns);
+  setColumnSeparator(app->columnSeparator);
 		
-	if (app->d_ASCII_import_locale.name() == QLocale::c().name())
-        boxDecimalSeparator->setCurrentIndex(1);
-    else if (app->d_ASCII_import_locale.name() == QLocale(QLocale::German).name())
-        boxDecimalSeparator->setCurrentIndex(2);
-    else if (app->d_ASCII_import_locale.name() == QLocale(QLocale::French).name())
-        boxDecimalSeparator->setCurrentIndex(3);
-	boxDecimalSeparator->setEnabled(app->d_convert_to_numeric);
-	d_convert_to_numeric->setChecked(app->d_convert_to_numeric);
+  if (app->d_ASCII_import_locale.name() == QLocale::c().name())
+    boxDecimalSeparator->setCurrentIndex(1);
+  else if (app->d_ASCII_import_locale.name() == QLocale(QLocale::German).name())
+    boxDecimalSeparator->setCurrentIndex(2);
+  else if (app->d_ASCII_import_locale.name() == QLocale(QLocale::French).name())
+    boxDecimalSeparator->setCurrentIndex(3);
+  boxDecimalSeparator->setEnabled(app->d_convert_to_numeric);
+  d_convert_to_numeric->setChecked(app->d_convert_to_numeric);
 
-	connect(d_import_mode, SIGNAL(currentIndexChanged(int)), this, SLOT(updateImportMode(int)));
+  connect(d_import_mode, SIGNAL(currentIndexChanged(int)), this, SLOT(updateImportMode(int)));
 }
 
 void ImportASCIIDialog::initAdvancedOptions()

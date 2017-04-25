@@ -74,7 +74,7 @@ void Correlation::setDataFromTable(Table *t, const QString& colName1, const QStr
 		delete[] d_y;
 	}
 
-	int rows = d_table->numRows();
+	unsigned rows = d_table->numRows();
 	d_n = 16; // tmp number of points
 	while (d_n < rows)
 		d_n *= 2;
@@ -86,7 +86,7 @@ void Correlation::setDataFromTable(Table *t, const QString& colName1, const QStr
 	{
 		memset( d_x, 0, d_n * sizeof( double ) ); // zero-pad the two arrays...
 		memset( d_y, 0, d_n * sizeof( double ) );
-		for(int i=0; i<rows; i++)
+		for(unsigned i=0; i<rows; i++)
 		{
 			d_x[i] = d_table->cell(i, col1);
 			d_y[i] = d_table->cell(i, col2);
@@ -108,7 +108,7 @@ void Correlation::output()
         gsl_fft_real_radix2_transform( d_y, 1, d_n ) == 0)
 	{
 		// multiply the FFT by its complex conjugate
-		for(int i=0; i<d_n/2; i++ )
+		for(unsigned i=0; i<d_n/2; i++ )
 		{
 			if( i==0 || i==(d_n/2)-1 )
 				d_x[i] *= d_x[i];

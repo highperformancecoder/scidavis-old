@@ -65,7 +65,7 @@ void Differentiation::output()
 	Column *yCol = new Column(tr("2", "differention table y column name"), SciDAVis::Numeric);
 	xCol->setPlotDesignation(SciDAVis::X);
 	yCol->setPlotDesignation(SciDAVis::Y);
-	for (int i = 1; i < d_n-1; i++) {
+	for (unsigned i = 1; i < d_n-1; i++) {
 		xCol->setValueAt(i-1, d_x[i]);
 		yCol->setValueAt(i-1, 0.5*((d_y[i+1]-d_y[i])/(d_x[i+1]-d_x[i]) + (d_y[i]-d_y[i-1])/(d_x[i]-d_x[i-1])));
 	}

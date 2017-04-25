@@ -145,7 +145,11 @@ public:
 	QWidget *lastModified;
 
 public:
-	/*! Generates a new unique name starting with string /param name.
+  /// forcibly exit the application without saving
+  // TODO: do this in a nicer fashion than just calling ::exit()!!!
+  //  void exit() {saved=true; QCoreApplication::quit();}
+  void exit() {::exit(0);}
+  /*! Generates a new unique name starting with string /param name.
 	You can force the output to be a name different from /param name,
 	even if 'name' is not used in the project, by setting /param increment = true (the default)
 	*/
@@ -159,7 +163,8 @@ public slots:
 	//! \name Projects and Project Files
 	//@{
 	void open();
-	ApplicationWindow* open(const QString& fn);
+  /// args are any argument to be passed to fn if a script
+  ApplicationWindow* open(const QString& fn, const QStringList& args=QStringList());
 	//! Returns temporary file ready for reading uncompressed content
 	/**
 	 * Close and delete after you're done with it.
@@ -184,7 +189,8 @@ public slots:
 	 * \param fn is read as a Python script file and loaded in the command script window.
 	 * \param execute specifies if the script should be executed after opening.
 	 */
-	ApplicationWindow * loadScript(const QString& fn, bool execute = false);
+  /// args are any argument to be passed to the script
+	ApplicationWindow * loadScript(const QString& fn, const QStringList& args=QStringList(), bool execute = false);
 
 	QWidgetList * windowsList();
 	void updateWindowLists(MyWidget *w);

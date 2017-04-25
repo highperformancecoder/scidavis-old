@@ -441,7 +441,7 @@ void MatrixView::applyFormat()
 	d_matrix->setDisplayedDigits(digits);
 }
 
-void MatrixView::handleHorizontalSectionResized(int logicalIndex, int oldSize, int newSize)
+void MatrixView::handleHorizontalSectionResized(int logicalIndex, int, int newSize)
 {
 	static bool inside = false;
 	d_matrix->setColumnWidth(logicalIndex, newSize);
@@ -457,7 +457,7 @@ void MatrixView::handleHorizontalSectionResized(int logicalIndex, int oldSize, i
 	inside = false;
 }
 
-void MatrixView::handleVerticalSectionResized(int logicalIndex, int oldSize, int newSize)
+void MatrixView::handleVerticalSectionResized(int logicalIndex, int, int newSize)
 {
 	static bool inside = false;
 	d_matrix->setRowHeight(logicalIndex, newSize);

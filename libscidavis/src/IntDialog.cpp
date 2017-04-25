@@ -230,18 +230,18 @@ void IntDialog::setGraph(Graph *g)
 
 void IntDialog::activateCurve(const QString& curveName)
 {
-    ApplicationWindow *app = (ApplicationWindow *)parent();
-    if(!app)
-        return;
+  ApplicationWindow *app = (ApplicationWindow *)parent();
+  if(!app)
+    return;
 
-	QwtPlotCurve *c = graph->curve(curveName);
-	if (!c)
-		return;
+  QwtPlotCurve *c = graph->curve(curveName);
+  if (!c)
+    return;
 
-	double start, end;
-	graph->range(graph->curveIndex(curveName), &start, &end);
-	boxStart->setText(QString::number(QMIN(start, end), 'g', app->d_decimal_digits));
-	boxEnd->setText(QString::number(QMAX(start, end), 'g', app->d_decimal_digits));
+  double start, end;
+  graph->range(graph->curveIndex(curveName), &start, &end);
+  boxStart->setText(QString::number(QMIN(start, end), 'g', app->d_decimal_digits));
+  boxEnd->setText(QString::number(QMAX(start, end), 'g', app->d_decimal_digits));
 };
 
 void IntDialog::changeDataRange()

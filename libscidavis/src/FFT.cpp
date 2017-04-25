@@ -65,7 +65,7 @@ void FFT::init ()
 
 QList<Column *> FFT::fftCurve()
 {
-    int i, i2;
+    int i2;
 	int n2 = d_n/2;
 	double *amp = new double[d_n];
 	double *result = new double[2*d_n];
@@ -127,7 +127,7 @@ QList<Column *> FFT::fftCurve()
 
 	if (d_shift_order)
 	{
-		for(i=0; i<d_n; i++)
+		for(unsigned i=0; i<d_n; i++)
 		{
 			d_x[i] = (i-n2)*df;
 			int j = i + d_n;
@@ -138,11 +138,11 @@ QList<Column *> FFT::fftCurve()
 	}
 	else
 	{
-		for(i=0; i<d_n; i++)
+		for(unsigned i=0; i<d_n; i++)
 			d_x[i] = i*df;
 	}
 
-	for(i=0;i<d_n;i++)
+	for(unsigned i=0;i<d_n;i++)
 	{
 		i2 = 2*i;
 		double real_part = result[i2];
@@ -159,7 +159,7 @@ QList<Column *> FFT::fftCurve()
 	columns << new Column(tr("Imaginary"), SciDAVis::Numeric);
 	columns << new Column(tr("Amplitude"), SciDAVis::Numeric);
 	columns << new Column(tr("Angle"), SciDAVis::Numeric);
-	for (i=0;i<d_n;i++)
+	for (unsigned i=0;i<d_n;i++)
 	{
 		i2 = 2*i;
 		columns.at(0)->setValueAt(i, d_x[i]);
@@ -330,7 +330,7 @@ void FFT::setDataFromTable(Table *t, const QString& realColName, const QString& 
     if(d_y && d_x)
 	{// zero-pad data array
 		memset( d_y, 0, n2* sizeof( double ) );
-		for(int i=0; i<d_n; i++)
+		for(unsigned i=0; i<d_n; i++)
 		{
 			int i2 = 2*i;
 			d_y[i2] = d_table->cell(i, d_real_col);

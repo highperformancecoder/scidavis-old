@@ -123,7 +123,7 @@ bool PluginFit::load(const QString& pluginName)
 	if (fitExplain)
 		d_param_explain = QString(fitExplain()).split(",", QString::SkipEmptyParts);
 	else
-		for (int i=0; i<d_p; i++)
+		for (unsigned i=0; i<d_p; i++)
 			d_param_explain << "";
 
 	fitFunction = (fitFunc) lib.resolve( "name" );

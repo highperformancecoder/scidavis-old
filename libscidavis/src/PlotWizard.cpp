@@ -138,51 +138,51 @@ QSize PlotWizard::sizeHint() const
 
 void PlotWizard::accept()
 {
-	QStringList curves, curves3D, ribbons;
-	for (int i=0; i < plotAssociations->count(); i++)
-	{
-		QString text = plotAssociations->item(i)->text();
-        if (text.endsWith("(X)"))
+  QStringList curves, curves3D, ribbons;
+  for (int i=0; i < plotAssociations->count(); i++)
+    {
+      QString text = plotAssociations->item(i)->text();
+      if (text.endsWith("(X)"))
         {
-            QMessageBox::critical(this, tr("Error"),
-            tr("Please define a Y column for the following curve") + ":\n\n" + text);
-            return;
+          QMessageBox::critical(this, tr("Error"),
+                                tr("Please define a Y column for the following curve") + ":\n\n" + text);
+          return;
         }
 
-		if ( text.contains("(Z)") )
-		{
-			if ( text.contains("(Y)") && !curves3D.contains(text) )
-				curves3D << text;
-			else if ( !text.contains("(Y)") && !ribbons.contains(text) )
-				ribbons << text;
-		}
-		else if ( text.contains("(xErr)") || text.contains("(yErr)"))
-		{
-			QStringList lst = text.split(",", QString::SkipEmptyParts);
-			lst.pop_back();
-			QString master_curve = lst.join(",");
+      if ( text.contains("(Z)") )
+        {
+          if ( text.contains("(Y)") && !curves3D.contains(text) )
+            curves3D << text;
+          else if ( !text.contains("(Y)") && !ribbons.contains(text) )
+            ribbons << text;
+        }
+      else if ( text.contains("(xErr)") || text.contains("(yErr)"))
+        {
+          QStringList lst = text.split(",", QString::SkipEmptyParts);
+          lst.pop_back();
+          QString master_curve = lst.join(",");
 
-			if (!curves.contains(master_curve))
-				curves.prepend(master_curve);
+          if (!curves.contains(master_curve))
+            curves.prepend(master_curve);
 
-			if (!curves.contains(text))
-				curves << text; //add error bars at the end of the list.
-		}
-		else if (!curves.contains(text))
-			curves.prepend(text);
-	}
+          if (!curves.contains(text))
+            curves << text; //add error bars at the end of the list.
+        }
+      else if (!curves.contains(text))
+        curves.prepend(text);
+    }
 
-	if (curves.count()>0)
-        emit plot(curves);
+  if (curves.count()>0)
+    emit plot(curves);
 
-	 if (curves3D.count()>0)
-		plot3D(curves3D);
+  if (curves3D.count()>0)
+    plot3D(curves3D);
 
-    if (ribbons.count()>0)
-        plot3DRibbon(ribbons);
+  if (ribbons.count()>0)
+    plot3DRibbon(ribbons);
 
-	if(!noCurves())
-		close();
+  if(!noCurves())
+    close();
 }
 
 void PlotWizard::changeColumnsList(const QString &table)
@@ -361,46 +361,46 @@ void PlotWizard::plot3DRibbon(const QStringList& lst)
 
 void PlotWizard::plot3D(const QStringList& lst)
 {
-    ApplicationWindow *app = (ApplicationWindow *)this->parent();
-    if (!app)
-        return;
+  ApplicationWindow *app = (ApplicationWindow *)this->parent();
+  if (!app)
+    return;
 
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-    for (int i=0; i< lst.count(); i++)
+  for (int i=0; i< lst.count(); i++)
     {
-        QString s = lst[i];
-        int pos = s.find(":", 0);
-        QString table_name = s.left(pos) + "_";
-        Table *t = app->table(table_name);
-        if (t)
+      QString s = lst[i];
+      int pos = s.find(":", 0);
+      QString table_name = s.left(pos) + "_";
+      Table *t = app->table(table_name);
+      if (t)
         {
-            int posX = s.find("(", pos);
-            QString xColName = table_name + s.mid(pos+2, posX-pos-2);
+          int posX = s.find("(", pos);
+          QString xColName = table_name + s.mid(pos+2, posX-pos-2);
 
-            posX = s.find(",", posX);
-            int posY = s.find("(", posX);
-            QString yColName = table_name + s.mid(posX+2, posY-posX-2);
+          posX = s.find(",", posX);
+          int posY = s.find("(", posX);
+          QString yColName = table_name + s.mid(posX+2, posY-posX-2);
 
-            posY = s.find(",", posY);
-            int posZ = s.find("(", posY);
-            QString zColName = table_name + s.mid(posY+2, posZ-posY-2);
+          posY = s.find(",", posY);
+          int posZ = s.find("(", posY);
+          QString zColName = table_name + s.mid(posY+2, posZ-posY-2);
 
-            int xCol = t->colIndex(xColName);
-            int yCol = t->colIndex(yColName);
-            int zCol = t->colIndex(zColName);
-            if (xCol >= 0 && yCol >= 0 && zCol >= 0)
+          int xCol = t->colIndex(xColName);
+          int yCol = t->colIndex(yColName);
+          int zCol = t->colIndex(zColName);
+          if (xCol >= 0 && yCol >= 0 && zCol >= 0)
             {
-                Graph3D *g = app->newPlot3D();
-                if (g)
+              Graph3D *g = app->newPlot3D();
+              if (g)
                 {
-                    g->addData(t, xCol, yCol, zCol, 1);
-                    g->update();
+                  g->addData(t, xCol, yCol, zCol, 1);
+                  g->update();
                 }
             }
         }
     }
-	QApplication::restoreOverrideCursor();
+  QApplication::restoreOverrideCursor();
 }
 
 PlotWizard::~PlotWizard()

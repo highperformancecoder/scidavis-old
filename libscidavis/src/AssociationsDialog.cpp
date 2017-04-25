@@ -117,54 +117,54 @@ void AssociationsDialog::updateCurves()
 
 void AssociationsDialog::changePlotAssociation(int curve, const QString& text)
 {
-	DataCurve *c = (DataCurve *)graph->curve(curve); //c_keys[curve]);
-	if (!c)
+  DataCurve *c = (DataCurve *)graph->curve(curve); //c_keys[curve]);
+  if (!c)
+    return;
+
+  if (c->plotAssociation() == text)
+    return;
+
+  QStringList lst = text.split(",", QString::SkipEmptyParts);
+  if (lst.count() == 2)
+    {
+      c->setXColumnName(lst[0].remove("(X)"));
+      c->setTitle(lst[1].remove("(Y)"));
+      c->loadData();
+    }
+  else if (lst.count() == 3)
+    {//curve with error bars
+      QwtErrorPlotCurve *er = (QwtErrorPlotCurve *)c;
+      QString xColName = lst[0].remove("(X)");
+      QString yColName = lst[1].remove("(Y)");
+      QString erColName = lst[2].remove("(xErr)").remove("(yErr)");
+      DataCurve *master_curve = graph->masterCurve(xColName, yColName);
+      if (!master_curve)
         return;
 
-    if (c->plotAssociation() == text)
-        return;
+      int type = QwtErrorPlotCurve::Vertical;
+      if (text.contains("(xErr)"))
+        type = QwtErrorPlotCurve::Horizontal;
+      er->setDirection(type);
+      er->setTitle(erColName);
+      if (master_curve != er->masterCurve())
+        er->setMasterCurve(master_curve);
+      else
+        er->loadData();
+    }
+  else if (lst.count() == 4)
+    {
+      VectorCurve *v = (VectorCurve *)c;
+      v->setXColumnName(lst[0].remove("(X)"));
+      v->setTitle(lst[1].remove("(Y)"));
 
-	QStringList lst = text.split(",", QString::SkipEmptyParts);
-	if (lst.count() == 2)
-	{
-		c->setXColumnName(lst[0].remove("(X)"));
-		c->setTitle(lst[1].remove("(Y)"));
-		c->loadData();
-	}
-	else if (lst.count() == 3)
-	{//curve with error bars
-		QwtErrorPlotCurve *er = (QwtErrorPlotCurve *)c;
-		QString xColName = lst[0].remove("(X)");
-		QString yColName = lst[1].remove("(Y)");
-		QString erColName = lst[2].remove("(xErr)").remove("(yErr)");
-		DataCurve *master_curve = graph->masterCurve(xColName, yColName);
-		if (!master_curve)
-			return;
-
-		int type = QwtErrorPlotCurve::Vertical;
-		if (text.contains("(xErr)"))
-			type = QwtErrorPlotCurve::Horizontal;
-		er->setDirection(type);
-		er->setTitle(erColName);
-		if (master_curve != er->masterCurve())
-			er->setMasterCurve(master_curve);
-		else
-			er->loadData();
-	}
-	else if (lst.count() == 4)
-	{
-		VectorCurve *v = (VectorCurve *)c;
-		v->setXColumnName(lst[0].remove("(X)"));
-		v->setTitle(lst[1].remove("(Y)"));
-
-		QString xEndCol = lst[2].remove("(X)").remove("(A)");
-		QString yEndCol = lst[3].remove("(Y)").remove("(M)");
-		if (v->vectorEndXAColName() != xEndCol || v->vectorEndYMColName() != yEndCol)
-			v->setVectorEnd(xEndCol, yEndCol);
-		else
-			v->loadData();
-	}
-	graph->notifyChanges();
+      QString xEndCol = lst[2].remove("(X)").remove("(A)");
+      QString yEndCol = lst[3].remove("(Y)").remove("(M)");
+      if (v->vectorEndXAColName() != xEndCol || v->vectorEndYMColName() != yEndCol)
+        v->setVectorEnd(xEndCol, yEndCol);
+      else
+        v->loadData();
+    }
+  graph->notifyChanges();
 }
 
 QString AssociationsDialog::plotAssociation(const QString& text)

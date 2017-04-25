@@ -251,9 +251,11 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 	for (int i=0; i<valid_rows.size(); i++)
 		for (int j=0; j<cols.size(); j++)
 			switch (cols[j]->columnMode()) {
-				case Table::Text:
+                        case Table::Text:
 					result[j][i] = static_cast<double>(valid_rows[i] + 1);
 					break;
+                          // TODO: Time and Date need to be removed or otherwise dealt with. There is a comment in globals.h that reads:
+                          // 2 and 3 are skipped to avoid problems with old obsolete values
 				case Table::Time:
 					result[j][i] = reference_times[j].msecsTo(cols[j]->timeAt(valid_rows[i]));
 					break;

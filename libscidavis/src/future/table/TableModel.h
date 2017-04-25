@@ -105,12 +105,12 @@ class TableModel : public QAbstractItemModel
 
 	private:
 		future::Table * d_table;
+		//! Toggle flag for formula mode
+		bool d_formula_mode;
 
 #ifdef LEGACY_CODE_0_2_x
 		bool d_read_only;
 #endif
-		//! Toggle flag for formula mode
-		bool d_formula_mode;
 }; 
 
 #endif

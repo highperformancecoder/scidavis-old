@@ -38,6 +38,9 @@
 #include <gsl/gsl_interp.h>
 #include <gsl/gsl_vector.h>
 
+#include <stdexcept>
+using namespace std;
+
 Integration::Integration(ApplicationWindow *parent, Graph *g)
 : Filter(parent, g)
 {
@@ -68,16 +71,12 @@ void Integration::init()
 
 bool Integration::isDataAcceptable()
 {
-	const gsl_interp_type *method_t;
 	switch (d_method) {
 		case Linear:
-			method_t = gsl_interp_linear;
 			break;
 		case Cubic:
-			method_t = gsl_interp_cspline;
 			break;
 		case Akima:
-			method_t = gsl_interp_akima;
 			break;
 		default:
 			QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
@@ -87,7 +86,7 @@ bool Integration::isDataAcceptable()
 
 	}
 	// GSL interpolation routines fail with division by zero on such data
-	for (int i=1; i<d_n; i++)
+	for (unsigned i=1; i<d_n; i++)
 		if (d_x[i-1] == d_x[i]) {
 			QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
 					tr("Several data points have the same x value causing divisions by zero, operation aborted!"));
@@ -114,6 +113,8 @@ QString Integration::logInfo()
 			method_t = gsl_interp_akima;
 			method_name = tr("Akima");
 			break;
+        default:
+          throw runtime_error("invalid method");
 	}
 
 	gsl_interp *interpolation = gsl_interp_alloc(method_t, d_n);
@@ -137,7 +138,7 @@ QString Integration::logInfo()
 
 	// using GSL to find maximum value of data set
 	gsl_vector *aux = gsl_vector_alloc(d_n);
-	for(int i=0; i < d_n; i++)
+	for(unsigned i=0; i < d_n; i++)
 		gsl_vector_set (aux, i, d_y[i]);
 	int maxID=gsl_vector_max_index (aux);
 	gsl_vector_free (aux);

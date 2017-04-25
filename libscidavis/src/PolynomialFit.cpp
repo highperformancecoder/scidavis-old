@@ -68,7 +68,7 @@ void PolynomialFit::init()
 	d_formula = generateFormula(d_order);
 	d_param_names = generateParameterList(d_order);
 
-	for (int i=0; i<d_p; i++)
+	for (unsigned i=0; i<d_p; i++)
 		d_param_explain << "";
 }
 
@@ -107,7 +107,7 @@ void PolynomialFit::calculateFitCurveData(double *par, double *X, double *Y)
 		{
 			X[i] = X0+i*step;
 			double 	yi = 0.0;
-			for (int j=0; j<d_p;j++)
+			for (unsigned j=0; j<d_p;j++)
 				yi += par[j]*pow(X[i],j);
 
 			Y[i] = yi;
@@ -119,7 +119,7 @@ void PolynomialFit::calculateFitCurveData(double *par, double *X, double *Y)
 		{
 			X[i] = d_x[i];
 			double 	yi = 0.0;
-			for (int j=0; j<d_p;j++)
+			for (unsigned j=0; j<d_p;j++)
 				yi += par[j]*pow(X[i],j);
 
 			Y[i] = yi;
@@ -129,60 +129,60 @@ void PolynomialFit::calculateFitCurveData(double *par, double *X, double *Y)
 
 void PolynomialFit::fit()
 {
-    if (d_init_err)
-        return;
+  if (d_init_err)
+    return;
 
-	if (d_p > d_n)
-  	{
-  		QMessageBox::critical((ApplicationWindow *)parent(), tr("Fit Error"),
-  	    tr("You need at least %1 data points for this fit operation. Operation aborted!").arg(d_p));
-  		return;
-  	}
+  if (unsigned(d_p) > d_n)
+    {
+      QMessageBox::critical((ApplicationWindow *)parent(), tr("Fit Error"),
+                            tr("You need at least %1 data points for this fit operation. Operation aborted!").arg(d_p));
+      return;
+    }
 
-	gsl_matrix *X = gsl_matrix_alloc (d_n, d_p);
-	gsl_vector *c = gsl_vector_alloc (d_p);
+  gsl_matrix *X = gsl_matrix_alloc (d_n, d_p);
+  gsl_vector *c = gsl_vector_alloc (d_p);
 
-	for (int i = 0; i <d_n; i++)
-	{
-		for (int j= 0; j < d_p; j++)
-			gsl_matrix_set (X, i, j, pow(d_x[i],j));
-	}
+  for (unsigned i = 0; i <d_n; i++)
+    {
+      for (unsigned j= 0; j < d_p; j++)
+        gsl_matrix_set (X, i, j, pow(d_x[i],j));
+    }
 
-	gsl_vector_view y = gsl_vector_view_array (d_y, d_n);
+  gsl_vector_view y = gsl_vector_view_array (d_y, d_n);
 
-	gsl_vector * weights = gsl_vector_alloc(d_n);
-	for (int i=0; i<d_n; i++)
-		gsl_vector_set(weights, i, 1.0/pow(d_y_errors[i], 2));
+  gsl_vector * weights = gsl_vector_alloc(d_n);
+  for (unsigned i=0; i<d_n; i++)
+    gsl_vector_set(weights, i, 1.0/pow(d_y_errors[i], 2));
 
-	gsl_multifit_linear_workspace * work = gsl_multifit_linear_alloc (d_n, d_p);
+  gsl_multifit_linear_workspace * work = gsl_multifit_linear_alloc (d_n, d_p);
 
-	if (d_y_error_source == UnknownErrors)
-		gsl_multifit_linear (X, &y.vector, c, covar, &chi_2, work);
-	else
-		gsl_multifit_wlinear (X, weights, &y.vector, c, covar, &chi_2, work);
+  if (d_y_error_source == UnknownErrors)
+    gsl_multifit_linear (X, &y.vector, c, covar, &chi_2, work);
+  else
+    gsl_multifit_wlinear (X, weights, &y.vector, c, covar, &chi_2, work);
 
-	for (int i = 0; i < d_p; i++)
-		d_results[i] = gsl_vector_get(c, i);
+  for (unsigned i = 0; i < d_p; i++)
+    d_results[i] = gsl_vector_get(c, i);
 
-	gsl_multifit_linear_free (work);
-	gsl_matrix_free (X);
-	gsl_vector_free (c);
-	gsl_vector_free(weights);
+  gsl_multifit_linear_free (work);
+  gsl_matrix_free (X);
+  gsl_vector_free (c);
+  gsl_vector_free(weights);
 
-	ApplicationWindow *app = (ApplicationWindow *)parent();
-	if (app->writeFitResultsToLog)
-		app->updateLog(logFitInfo(d_results, 0, 0, d_graph->parentPlotName()));
+  ApplicationWindow *app = (ApplicationWindow *)parent();
+  if (app->writeFitResultsToLog)
+    app->updateLog(logFitInfo(d_results, 0, 0, d_graph->parentPlotName()));
 
-	if (show_legend)
-		showLegend();
+  if (show_legend)
+    showLegend();
 
-	generateFitCurve(d_results);
+  generateFitCurve(d_results);
 }
 
 QString PolynomialFit::legendInfo()
 {
 	QString legend = "Y=" + QLocale().toString(d_results[0], 'g', d_prec);
-	for (int j = 1; j < d_p; j++)
+	for (unsigned j = 1; j < d_p; j++)
 	{
 		double cj = d_results[j];
 		if (cj>0 && !legend.isEmpty())
@@ -244,42 +244,42 @@ void LinearFit::init()
 
 void LinearFit::fit()
 {
-    if (d_init_err)
-        return;
+  if (d_init_err)
+    return;
 
-	if (d_p > d_n)
-  	{
-  		QMessageBox::critical((ApplicationWindow *)parent(), tr("Fit Error"),
-  	    tr("You need at least %1 data points for this fit operation. Operation aborted!").arg(d_p));
-  		return;
-  	}
+  if (d_p > d_n)
+    {
+      QMessageBox::critical((ApplicationWindow *)parent(), tr("Fit Error"),
+                            tr("You need at least %1 data points for this fit operation. Operation aborted!").arg(d_p));
+      return;
+    }
 
-	double c0, c1, cov00, cov01, cov11;
+  double c0, c1, cov00, cov01, cov11;
 
-	double * weights = new double[d_n];
-	for (int i=0; i<d_n; i++)
-		weights[i] = 1.0/pow(d_y_errors[i], 2);
+  double * weights = new double[d_n];
+  for (unsigned i=0; i<d_n; i++)
+    weights[i] = 1.0/pow(d_y_errors[i], 2);
 
-	if (d_y_error_source == UnknownErrors)
-		gsl_fit_linear(d_x, 1, d_y, 1, d_n, &c0, &c1, &cov00, &cov01, &cov11, &chi_2);
-	else
-		gsl_fit_wlinear(d_x, 1, weights, 1, d_y, 1, d_n, &c0, &c1, &cov00, &cov01, &cov11, &chi_2);
+  if (d_y_error_source == UnknownErrors)
+    gsl_fit_linear(d_x, 1, d_y, 1, d_n, &c0, &c1, &cov00, &cov01, &cov11, &chi_2);
+  else
+    gsl_fit_wlinear(d_x, 1, weights, 1, d_y, 1, d_n, &c0, &c1, &cov00, &cov01, &cov11, &chi_2);
 
-	delete[] weights;
+  delete[] weights;
 
-	d_results[0] = c0;
-	d_results[1] = c1;
+  d_results[0] = c0;
+  d_results[1] = c1;
 
-	gsl_matrix_set(covar, 0, 0, cov00);
-	gsl_matrix_set(covar, 0, 1, cov01);
-	gsl_matrix_set(covar, 1, 1, cov11);
-	gsl_matrix_set(covar, 1, 0, cov01);
+  gsl_matrix_set(covar, 0, 0, cov00);
+  gsl_matrix_set(covar, 0, 1, cov01);
+  gsl_matrix_set(covar, 1, 1, cov11);
+  gsl_matrix_set(covar, 1, 0, cov01);
 
-	ApplicationWindow *app = (ApplicationWindow *)parent();
-	if (app->writeFitResultsToLog)
-		app->updateLog(logFitInfo(d_results, 0, 0, d_graph->parentPlotName()));
+  ApplicationWindow *app = (ApplicationWindow *)parent();
+  if (app->writeFitResultsToLog)
+    app->updateLog(logFitInfo(d_results, 0, 0, d_graph->parentPlotName()));
 
-	generateFitCurve(d_results);
+  generateFitCurve(d_results);
 }
 
 void LinearFit::calculateFitCurveData(double *par, double *X, double *Y)

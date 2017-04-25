@@ -48,6 +48,8 @@
 #include <QSettings>
 #include <QtDebug>
 
+#include <stdexcept>
+using namespace std;
 
 Column::Private::Private(Column * owner, SciDAVis::ColumnMode mode)
  : d_owner(owner)
@@ -380,6 +382,8 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *f
 			connect(static_cast<DateTime2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),
 				d_owner, SLOT(notifyDisplayChange()));
 			break;
+        default:
+          throw runtime_error("invalid mode");
 	} // switch(mode)
 
 	d_column_mode = mode;

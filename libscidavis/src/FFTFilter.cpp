@@ -111,7 +111,7 @@ void FFTFilter::calculateOutputData(double *x, double *y)
   double delta=(d_x[d_n-1]-d_x[0])/d_n;
   double xi=d_x[0];
   
-  for (int i=0, j=0; j<d_n && xi<=d_x[d_n-1]; j++)
+  for (unsigned i=0, j=0; j<d_n && xi<=d_x[d_n-1]; j++)
     {
       x[j]=xi;
       if (i<d_n-1)
@@ -147,13 +147,13 @@ void FFTFilter::calculateOutputData(double *x, double *y)
 
     case 2://high pass
       d_explanation += tr("High Pass FFT Filter");
-      for (int i = 0; i < d_n && ((i+1)/2)*df < d_low_freq; i++)
+      for (unsigned i = 0; i < d_n && ((i+1)/2)*df < d_low_freq; i++)
         y[i] = 0;
       break;
 
     case 3://band pass
       d_explanation += tr("Band Pass FFT Filter");
-      for (int i = d_offset ? 1 : 0; i < d_n; i++)
+      for (unsigned i = d_offset ? 1 : 0; i < d_n; i++)
         if ((((i+1)/2)*df <= d_low_freq ) || (((i+1)/2)*df >= d_high_freq ))
           y[i] = 0;
       break;
@@ -164,7 +164,7 @@ void FFTFilter::calculateOutputData(double *x, double *y)
       if(!d_offset)
         y[0] = 0;//substract DC offset
 
-      for (int i = 1; i < d_n; i++)
+      for (unsigned i = 1; i < d_n; i++)
         if ((((i+1)/2)*df > d_low_freq ) && (((i+1)/2)*df < d_high_freq ))
           y[i] = 0;
       break;

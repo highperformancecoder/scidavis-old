@@ -71,7 +71,7 @@ public slots:
 	void execute() { te->execute(); };
 	void executeAll() { te->executeAll(); };
 	void evaluate() { te->evaluate(); };
-
+  void insert(const QString& s) {te->insert(s);}
 private:
 	ScriptEdit *te;
 	bool autoExec;

@@ -1194,7 +1194,7 @@
     </message>
     <message>
         <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py or ASCII file</source>
-        <translation type="unfinished">může být libovolný soubor .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py nebo ASCII</translation>
+        <translation type="obsolete">může být libovolný soubor .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py nebo ASCII</translation>
     </message>
     <message>
         <source>Do you want to add the text on a new layer or on the active layer?</source>
@@ -2772,6 +2772,10 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     </message>
     <message>
         <source>Ctrl+ALT+N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .org, .py or ASCII file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4799,7 +4803,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>You didn&apos;t specify a valid data set for this operation!</source>
-        <translation type="unfinished">Pro tuto operaci jste nestanovil platný záznam s údaji!</translation>
+        <translation type="obsolete">Pro tuto operaci jste nestanovil platný záznam s údaji!</translation>
     </message>
     <message>
         <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
@@ -7727,6 +7731,10 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <message>
         <source>Origin project</source>
         <translation type="unfinished">Původní projekt</translation>
+    </message>
+    <message>
+        <source>Origin 3.5 project</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

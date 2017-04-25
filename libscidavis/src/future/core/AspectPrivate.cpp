@@ -30,6 +30,8 @@
 #include "AspectPrivate.h"
 #include <QRegExp>
 #include <QStringList>
+#include <stdexcept>
+using namespace std;
 
 QSettings * AbstractAspect::Private::g_settings =
 #ifdef Q_OS_MAC
@@ -182,6 +184,8 @@ QString AbstractAspect::Private::caption() const
 						 length = indexOfMatchingBrace(result, pos) - pos + 1;
 						 replacement = d_comment.isEmpty() ? "" : result.mid(pos+3, length-4);
 						 break;
+                default:
+                  throw runtime_error("Invalid magic cap");
 		}
 		result.replace(pos, length, replacement);
 		pos += replacement.size();
