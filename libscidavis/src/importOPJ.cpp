@@ -245,12 +245,17 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 					{
 						Origin::variant value;
 						double datavalue;
+						bool setAsText = false;
 						for (int i=0; i < std::min((int)column.data.size(), maxrows); ++i) {
 							value = column.data[i];
 							if (value.type() == typeid(double)) {
 								datavalue = boost::get<double>(value);
 								if (datavalue==_ONAN) continue;
 								scidavis_column->setValueAt(i, datavalue);
+							} else {
+								if (!setAsText) table->column(j)->setColumnMode(SciDAVis::Text);
+								scidavis_column->setTextAt(i, boost::get<string>(column.data[i]).c_str());
+								setAsText = true;
 							}
 						}
 						int f=0;
@@ -280,9 +285,10 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 						break;
 					}
 			case Origin::Text:
-				for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-					scidavis_column->setTextAt(i, boost::get<string>(column.data[i]).c_str());
 				table->column(j)->setColumnMode(SciDAVis::Text);
+				for (int i=0; i < min((int)column.data.size(), maxrows); ++i) {
+					scidavis_column->setTextAt(i, boost::get<string>(column.data[i]).c_str());
+				}
 				break;
 			case Origin::Date:
 				{
