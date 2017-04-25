@@ -45,6 +45,9 @@ public:
 	bool parse();																		//!< parse Origin file
 	double version() const;																//!< get version of Origin file
 
+	vector<Origin::SpreadColumn>::size_type datasetCount() const;						//!< get number of datasets
+	Origin::SpreadColumn& dataset(vector<Origin::SpreadColumn>::size_type ds) const;	//!< get dataset ds
+
 	vector<Origin::SpreadSheet>::size_type spreadCount() const;							//!< get number of spreadsheets
 	Origin::SpreadSheet& spread(vector<Origin::SpreadSheet>::size_type s) const;		//!< get spreadsheet s
 
@@ -60,6 +63,9 @@ public:
 	
 	vector<Origin::Note>::size_type noteCount() const;									//!< get number of notes
 	Origin::Note& note(vector<Origin::Note>::size_type n) const;						//!< get note n
+
+	vector<Origin::Excel>::size_type excelCount() const;								//!< get number of excels
+	Origin::Excel& excel(vector<Origin::Excel>::size_type e) const;						//!< get excel e
 
 	const tree<Origin::ProjectNode>* project() const;									//!< get project tree
 	string resultsLogString() const;													//!< get Results Log

@@ -63,6 +63,7 @@ protected:
 	int findColumnByName(int spread, const string& name);
 
 public:
+	vector<Origin::SpreadColumn> datasets;
 	vector<Origin::SpreadSheet> speadSheets;
 	vector<Origin::Matrix> matrixes;
 	vector<Origin::Excel> excels;
