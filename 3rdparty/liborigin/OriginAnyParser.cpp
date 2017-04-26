@@ -950,6 +950,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 	} else {
 		name = col_header.substr(0x58,25).c_str();
 	}
+	string dataset_name = name;
 	string::size_type colpos = name.find_last_of("_");
 
 	if(colpos != string::npos){
@@ -1041,6 +1042,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 		}
 		speadSheets[spread].columns.push_back(SpreadColumn(column_name, dataIndex));
 		speadSheets[spread].columns.back().colIndex = ++col_index;
+		speadSheets[spread].columns.back().dataset_name = dataset_name;
 
 		string::size_type sheetpos = speadSheets[spread].columns.back().name.find_last_of("@");
 		if(sheetpos != string::npos){
@@ -1124,6 +1126,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 			}
 		}
 		LOG_PRINT(logfile, "\n\n")
+		datasets.push_back(speadSheets[spread].columns.back());
 	}
 
 	return true;
@@ -1261,6 +1264,7 @@ void OriginAnyParser::getWindowProperties(Origin::Window& window, string wde_hea
 
 	if(wde_header_size > 0xC3){
 		window.label = wde_header.substr(0xC3).c_str();
+		window.label = window.label.substr(0,window.label.find("@${"));
 		LOG_PRINT(logfile, "			WINDOW %d LABEL: %s\n", objectIndex, window.label.c_str());
 	}
 
@@ -1991,7 +1995,12 @@ void OriginAnyParser::getCurveProperties(string cvehd, unsigned int cvehdsz, str
 		unsigned short width = 0;
 		stmp.str(cvehd.substr(0x4A));
 		GET_SHORT(stmp, width)
-		int col_index = findExcelColumnByName(iexcel, ilayer, name);
+		unsigned short dataID = 0;
+		stmp.str(cvehd.substr(0x04));
+		GET_SHORT(stmp, dataID)
+
+		unsigned int isheet = datasets[dataID-1].sheet;
+		int col_index = findExcelColumnByName(iexcel, isheet, name);
 		if (col_index != -1) {
 			SpreadColumn::ColumnType type;
 			switch(c){
@@ -2017,10 +2026,10 @@ void OriginAnyParser::getCurveProperties(string cvehd, unsigned int cvehdsz, str
 					type = SpreadColumn::NONE;
 					break;
 			}
-			excels[iexcel].sheets[ilayer].columns[col_index].type = type;
+			excels[iexcel].sheets[isheet].columns[col_index].type = type;
 			width /= 0xA;
 			if (width == 0) width = 8;
-			excels[iexcel].sheets[ilayer].columns[col_index].width = width;
+			excels[iexcel].sheets[isheet].columns[col_index].width = width;
 
 			unsigned char c1 = cvehd[0x1E];
 			unsigned char c2 = cvehd[0x1F];
@@ -2033,43 +2042,43 @@ void OriginAnyParser::getCurveProperties(string cvehd, unsigned int cvehdsz, str
 				case 0x29: // Text&Numeric - Engeneering
 				case 0x30: // Numeric	   - Dec1,000
 				case 0x39: // Text&Numeric - Dec1,000
-					excels[iexcel].sheets[ilayer].columns[col_index].valueType = (c1%0x10 == 0x9) ? TextNumeric : Numeric;
-					excels[iexcel].sheets[ilayer].columns[col_index].valueTypeSpecification = c1 / 0x10;
+					excels[iexcel].sheets[isheet].columns[col_index].valueType = (c1%0x10 == 0x9) ? TextNumeric : Numeric;
+					excels[iexcel].sheets[isheet].columns[col_index].valueTypeSpecification = c1 / 0x10;
 					if (c2 >= 0x80) {
-						excels[iexcel].sheets[ilayer].columns[col_index].significantDigits = c2 - 0x80;
-						excels[iexcel].sheets[ilayer].columns[col_index].numericDisplayType = SignificantDigits;
+						excels[iexcel].sheets[isheet].columns[col_index].significantDigits = c2 - 0x80;
+						excels[iexcel].sheets[isheet].columns[col_index].numericDisplayType = SignificantDigits;
 					} else if (c2 > 0) {
-						excels[iexcel].sheets[ilayer].columns[col_index].decimalPlaces = c2 - 0x03;
-						excels[iexcel].sheets[ilayer].columns[col_index].numericDisplayType = DecimalPlaces;
+						excels[iexcel].sheets[isheet].columns[col_index].decimalPlaces = c2 - 0x03;
+						excels[iexcel].sheets[isheet].columns[col_index].numericDisplayType = DecimalPlaces;
 					}
 					break;
 				case 0x02: // Time
-					excels[iexcel].sheets[ilayer].columns[col_index].valueType = Time;
-					excels[iexcel].sheets[ilayer].columns[col_index].valueTypeSpecification = c2 - 0x80;
+					excels[iexcel].sheets[isheet].columns[col_index].valueType = Time;
+					excels[iexcel].sheets[isheet].columns[col_index].valueTypeSpecification = c2 - 0x80;
 					break;
 				case 0x03: // Date
-					excels[iexcel].sheets[ilayer].columns[col_index].valueType = Date;
-					excels[iexcel].sheets[ilayer].columns[col_index].valueTypeSpecification = c2 - 0x80;
+					excels[iexcel].sheets[isheet].columns[col_index].valueType = Date;
+					excels[iexcel].sheets[isheet].columns[col_index].valueTypeSpecification = c2 - 0x80;
 					break;
 				case 0x31: // Text
-					excels[iexcel].sheets[ilayer].columns[col_index].valueType = Text;
+					excels[iexcel].sheets[isheet].columns[col_index].valueType = Text;
 					break;
 				case 0x04: // Month
 				case 0x34:
-					excels[iexcel].sheets[ilayer].columns[col_index].valueType = Month;
-					excels[iexcel].sheets[ilayer].columns[col_index].valueTypeSpecification = c2;
+					excels[iexcel].sheets[isheet].columns[col_index].valueType = Month;
+					excels[iexcel].sheets[isheet].columns[col_index].valueTypeSpecification = c2;
 					break;
 				case 0x05: // Day
 				case 0x35:
-					excels[iexcel].sheets[ilayer].columns[col_index].valueType = Day;
-					excels[iexcel].sheets[ilayer].columns[col_index].valueTypeSpecification = c2;
+					excels[iexcel].sheets[isheet].columns[col_index].valueType = Day;
+					excels[iexcel].sheets[isheet].columns[col_index].valueTypeSpecification = c2;
 					break;
 				default: // Text
-					excels[iexcel].sheets[ilayer].columns[col_index].valueType = Text;
+					excels[iexcel].sheets[isheet].columns[col_index].valueType = Text;
 					break;
 			}
 			if (cvedtsz > 0) {
-				excels[iexcel].sheets[ilayer].columns[col_index].comment = cvedt.c_str();
+				excels[iexcel].sheets[isheet].columns[col_index].comment = cvedt.c_str();
 			}
 		}
 

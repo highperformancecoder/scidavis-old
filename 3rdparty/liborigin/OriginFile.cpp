@@ -135,6 +135,16 @@ const tree<Origin::ProjectNode>* OriginFile::project() const
 	return &parser->projectTree;
 }
 
+vector<Origin::SpreadColumn>::size_type OriginFile::datasetCount() const
+{
+	return parser->datasets.size();
+}
+
+Origin::SpreadColumn& OriginFile::dataset(vector<Origin::SpreadColumn>::size_type ds) const
+{
+	return parser->datasets[ds];
+}
+
 vector<Origin::SpreadSheet>::size_type OriginFile::spreadCount() const
 {
 	return parser->speadSheets.size();
@@ -188,6 +198,16 @@ vector<Origin::Note>::size_type OriginFile::noteCount() const
 Origin::Note& OriginFile::note(vector<Origin::Note>::size_type n) const
 {
 	return parser->notes[n];
+}
+
+vector<Origin::Excel>::size_type OriginFile::excelCount() const
+{
+	return parser->excels.size();
+}
+
+Origin::Excel& OriginFile::excel(vector<Origin::Excel>::size_type e) const
+{
+	return parser->excels[e];
 }
 
 string OriginFile::resultsLogString() const

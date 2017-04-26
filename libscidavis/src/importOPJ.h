@@ -44,6 +44,7 @@ public:
 	bool importTables (const OriginFile& opj);
 	bool importGraphs (const OriginFile& opj);
 	bool importNotes (const OriginFile& opj);
+	bool importSpreadsheet(const OriginFile& opj, const Origin::SpreadSheet& spread);
 	int error(){return parse_error;};
 
 private:
