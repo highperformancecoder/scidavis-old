@@ -191,6 +191,7 @@ int ImportOPJ::translateOrigin2ScidavisLineStyle(int linestyle) {
 bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadSheet &spread)
 {
 	static int visible_count=0;
+	QLocale locale = mw->locale();
 	int SciDAVis_scaling_factor=10; //in Origin width is measured in characters while in SciDAVis - pixels --- need to be accurate
 		int columnCount = spread.columns.size();
 		int maxrows = spread.maxRows;
@@ -240,20 +241,33 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 			switch(column.valueType) {
 				case Origin::Numeric:
 				case Origin::TextNumeric:
+				/*
+				A TextNumeric column in Origin is a column whose filled cells contain either a double or a string.
+				In SciDAVis there is no equivalent column type.
+				Set the SciDAVis column type as 'Numeric' or 'Text' depending on the type of first element in column.
+				TODO: Add a "per column" flag, settable at import dialog, to choose between both types.
+				 */
 					{
 						Origin::variant value;
 						double datavalue;
 						bool setAsText = false;
+						table->column(j)->setColumnMode(SciDAVis::Numeric);
 						for (int i=0; i < std::min((int)column.data.size(), maxrows); ++i) {
 							value = column.data[i];
 							if (value.type() == typeid(double)) {
 								datavalue = boost::get<double>(value);
-								if (datavalue==_ONAN) continue;
-								scidavis_column->setValueAt(i, datavalue);
-							} else {
-								if (!setAsText) table->column(j)->setColumnMode(SciDAVis::Text);
+								if (datavalue==_ONAN) continue; // mark for empty cell
+								if (!setAsText) {
+									scidavis_column->setValueAt(i, datavalue);
+								} else { // convert double to string for Text columns
+									scidavis_column->setTextAt(i, locale.toString(datavalue, 'g', 16));
+								}
+							} else { // string
+								if (!setAsText && i==0) {
+									table->column(j)->setColumnMode(SciDAVis::Text);
+									setAsText = true;
+								}
 								scidavis_column->setTextAt(i, boost::get<string>(column.data[i]).c_str());
-								setAsText = true;
 							}
 						}
 						int f=0;
