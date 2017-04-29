@@ -141,19 +141,25 @@ bool ImportOPJ::createProjectTree(const OriginFile& opj)
 				case Origin::ProjectNode::Note:
 					nodetype = "Note";
 					break;
+				case Origin::ProjectNode::Excel:
+					// there is no Excel type yet
+					nodetype = "Table";
+					break;
 				default:
 					nodetype = "Unknown";
 					break;
 			}
 			MyWidget* w = projectFolder->window(name, nodetype);
-			if(w){
+			while (w){ // Origin window names are unique, but we need to loop on all sheets of Excel windows
 				Folder *f = parent.value(projectTree->parent(sib));
 				if (f){
+					if (f==parent[root]) break; // skip windows that go to root folder
 					// removeWindow  uses QList.removeAll, so remove w before adding it to its folder
 					projectFolder->removeWindow(w);
 					f->addWindow(w);
 					f->setActiveWindow(w);
 				}
+				w = projectFolder->window(name, nodetype);
 			}
 		}
 	}

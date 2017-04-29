@@ -162,7 +162,7 @@ MyWidget* Folder::findWindow(const QString& s, bool windowNames, bool labels,
 MyWidget *Folder::window(const QString &name, const char *cls, bool recursive)
 {
 	foreach (MyWidget *w, lstWindows)
-		if (w->inherits(cls) && name == w->name())
+		if (w->inherits(cls) && name == w->name().mid(0,w->name().indexOf("@")))
 			return w;
 	if (!recursive) return NULL;
 	foreach (QObject *f, children())
