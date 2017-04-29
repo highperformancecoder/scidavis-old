@@ -13595,6 +13595,12 @@ QMenu * ApplicationWindow::createToolbarsMenu()
     return menu;
 }
 
+void ApplicationWindow::setStatusBarText(const QString& text)
+{
+	d_status_info->setText(text);
+	QApplication::processEvents(QEventLoop::ExcludeUserInput);
+}
+
 void ApplicationWindow::copyStatusBarText()
 {
 	QApplication::clipboard()->setText(d_status_info->text());
