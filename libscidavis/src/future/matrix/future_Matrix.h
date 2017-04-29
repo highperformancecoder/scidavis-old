@@ -147,6 +147,8 @@ class Matrix : public AbstractPart
 		double cell(int row, int col) const;
 		//! Set the value of the cell
 		void setCell(int row, int col, double value );
+		//! Set the value of all cells
+		void setCells(const QVector<qreal>& data);
 		//! Return the values in the given cells as double vector
 		QVector<qreal> columnCells(int col, int first_row, int last_row);
 		//! Set the values in the given cells from a double vector
@@ -401,6 +403,8 @@ class Matrix::Private
 		double cell(int row, int col) const;
 		//! Set the value in the given cell
 		void setCell(int row, int col, double value);
+		//! Set the value of all cells
+		void setCells(const QVector<qreal>& data);
 		//! Return the values in the given cells as double vector
 		QVector<qreal> columnCells(int col, int first_row, int last_row);
 		//! Set the values in the given cells from a double vector

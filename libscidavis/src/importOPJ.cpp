@@ -531,20 +531,12 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 #if 0
 			Matrix->table()->blockSignals(true);
 #endif
-			unsigned int k=0;
-			for (int j=0; j<columnCount; j++)
-			{
-				for (int i=0; i<rowCount; i++)
-				{
-					double val = layer.data[k]; // matrix is the one in Origin file
-			        k++;
-					if(fabs(val)>0 && fabs(val)<2.0e-300)// empty entry
-						continue;
-
-					Matrix->setCell(i, j, val); // Matrix is the one in Application
-					if (k >= layer.data.size()) break;
-				}
+			QVector<qreal> values;
+			values.resize(rowCount*columnCount);
+			for (int i=0; i<min((int)values.size(),(int)layer.data.size()); i++) {
+				values[i]=layer.data[i];
 			}
+			Matrix->setCells(values);
 
 			Matrix->saveCellsToMemory();
 
@@ -566,6 +558,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 					break;
 			}
 			Matrix->setNumericFormat(format, prec);
+			Matrix->forgetSavedCells();
 // TODO
 #if 0
         Matrix->table()->blockSignals(false);

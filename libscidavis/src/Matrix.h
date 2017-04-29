@@ -157,6 +157,8 @@ public slots:
 	double cell(int row, int col);
 	//! Set the value of the cell
 	void setCell(int row, int col, double value );
+	//! Set the value of all cells
+	void setCells(const QVector<qreal> &);
 
 	/*!
 	 * \brief Return the text format code ('e', 'f', ...)
