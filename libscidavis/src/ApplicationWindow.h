@@ -160,6 +160,8 @@ public slots:
 	void copyStatusBarText();
 	//! Show the context menu for the status bar
 	void showStatusBarContextMenu( const QPoint & pos );
+	//! Set status bar text
+	void setStatusBarText(const QString&);
 	//! \name Projects and Project Files
 	//@{
 	void open();

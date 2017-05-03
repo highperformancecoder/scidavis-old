@@ -881,6 +881,11 @@ void Matrix::setCell(int row, int col, double value)
 	exec(new MatrixSetCellValueCmd(d_matrix_private, row, col, value));
 }
 
+void Matrix::setCells(const QVector<qreal> & data)
+{
+	d_matrix_private->setCells(data);
+}
+
 void Matrix::dimensionsDialog()
 {
 	bool ok;
@@ -1576,6 +1581,17 @@ void Matrix::Private::setCell(int row, int col, double value)
 	d_data[col][row] = value;
 	if (!d_block_change_signals)
 		emit d_owner->dataChanged(row, col, row, col);
+}
+
+void Matrix::Private::setCells(const QVector<qreal>& data)
+{
+	if (rowCount()*columnCount() != data.size()) return;
+	int k=0;
+	for (int i=0; i<columnCount(); i++) {
+		for (int j=0; j<rowCount(); j++) {
+			d_data[i][j]=data[k++];
+		}
+	}
 }
 
 QVector<qreal> Matrix::Private::columnCells(int col, int first_row, int last_row)

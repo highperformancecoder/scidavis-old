@@ -72,11 +72,14 @@ ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
 {
 	xoffset=0;
 	try {
+		mw->setStatusBarText(QString("Import start ..."));
 		OriginFile opj((const char *)filename.toLocal8Bit());
 		parse_error = opj.parse();
+		mw->setStatusBarText(QString("... file parsed. Starting conversion to SciDAVis ..."));
 		importTables(opj);
 		importGraphs(opj);
 		importNotes(opj);
+		mw->setStatusBarText(QString());
 		if(filename.endsWith(".opj", Qt::CaseInsensitive))
 			createProjectTree(opj);
 		mw->showResults(opj.resultsLogString().c_str(), mw->logWindow->isVisible());
@@ -141,19 +144,25 @@ bool ImportOPJ::createProjectTree(const OriginFile& opj)
 				case Origin::ProjectNode::Note:
 					nodetype = "Note";
 					break;
+				case Origin::ProjectNode::Excel:
+					// there is no Excel type yet
+					nodetype = "Table";
+					break;
 				default:
 					nodetype = "Unknown";
 					break;
 			}
 			MyWidget* w = projectFolder->window(name, nodetype);
-			if(w){
+			while (w){ // Origin window names are unique, but we need to loop on all sheets of Excel windows
 				Folder *f = parent.value(projectTree->parent(sib));
 				if (f){
+					if (f==parent[root]) break; // skip windows that go to root folder
 					// removeWindow  uses QList.removeAll, so remove w before adding it to its folder
 					projectFolder->removeWindow(w);
 					f->addWindow(w);
 					f->setActiveWindow(w);
 				}
+				w = projectFolder->window(name, nodetype);
 			}
 		}
 	}
@@ -480,6 +489,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 	int SciDAVis_scaling_factor=10; //in Origin width is measured in characters while in SciDAVis - pixels --- need to be accurate
 	for(unsigned int s = 0; s < opj.spreadCount(); ++s)
         {
+		mw->setStatusBarText(QString("Spreadsheet %1 / %2").arg(s+1).arg(opj.spreadCount()));
 		Origin::SpreadSheet spread = opj.spread(s);
 		int columnCount = spread.columns.size();
 		if(!columnCount) //remove tables without cols
@@ -491,6 +501,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 		{
 			Origin::Excel excelwb = opj.excel(s);
 			for (unsigned int j = 0; j < excelwb.sheets.size(); ++j) {
+				mw->setStatusBarText(QString("Excel %1 / %2, sheet %3 / %4").arg(s+1).arg(opj.excelCount()).arg(j+1).arg(excelwb.sheets.size()));
 				Origin::SpreadSheet spread = excelwb.sheets[j];
 				int columnCount = spread.columns.size();
 				if(!columnCount) //remove tables without cols
@@ -515,6 +526,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 			Origin::MatrixSheet& layer = matrix.sheets[l];
 			int columnCount = layer.columnCount;
 			int rowCount = layer.rowCount;
+			mw->setStatusBarText(QString("Matrix %1 / %2, sheet %3 / %4").arg(s+1).arg(opj.matrixCount()).arg(l+1).arg(layers));
 			Matrix* Matrix = mw->newMatrix(matrix.name.c_str(), rowCount, columnCount);
 			if (!Matrix)
 				return false;
@@ -525,20 +537,12 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 #if 0
 			Matrix->table()->blockSignals(true);
 #endif
-			unsigned int k=0;
-			for (int j=0; j<columnCount; j++)
-			{
-				for (int i=0; i<rowCount; i++)
-				{
-					double val = layer.data[k]; // matrix is the one in Origin file
-			        k++;
-					if(fabs(val)>0 && fabs(val)<2.0e-300)// empty entry
-						continue;
-
-					Matrix->setCell(i, j, val); // Matrix is the one in Application
-					if (k >= layer.data.size()) break;
-				}
+			QVector<qreal> values;
+			values.resize(rowCount*columnCount);
+			for (int i=0; i<min((int)values.size(),(int)layer.data.size()); i++) {
+				values[i]=layer.data[i];
 			}
+			Matrix->setCells(values);
 
 			Matrix->saveCellsToMemory();
 
@@ -560,6 +564,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 					break;
 			}
 			Matrix->setNumericFormat(format, prec);
+			Matrix->forgetSavedCells();
 // TODO
 #if 0
         Matrix->table()->blockSignals(false);
@@ -631,6 +636,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 		unsigned int layers = _graph.layers.size();
 		for(unsigned int l = 0; l < layers; ++l)
 		{
+			mw->setStatusBarText(QString("Graph %1 / %2, layer %3 / %4").arg(g+1).arg(opj.graphCount()).arg(l+1).arg(layers));
 			Origin::GraphLayer& layer = _graph.layers[l];
 			Graph *graph=ml->addLayer();
 			if(!graph)
