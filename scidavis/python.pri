@@ -24,7 +24,7 @@
 
   message("Making PyQt bindings via SIP")
   unix {
-    INCLUDEPATH += $$system(python ../python-includepath.py)
+    INCLUDEPATH += $$system(python-config --includes|sed -e 's/-I//')
     osx_dist {
       DEFINES += PYTHONHOME=/Applications/scidavis.app/Contents/Resources
     } else {
