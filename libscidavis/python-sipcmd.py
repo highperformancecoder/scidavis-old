@@ -29,7 +29,7 @@
 
 import sipconfig
 config = sipconfig.Configuration()
-flags = ["-I ../scidavis -x VendorID -t WS_X11 -x PyQt_NoPrintRangeBug  -x Py_v3 -g"]
+flags = ["-I ../scidavis -x VendorID -t WS_X11 -x PyQt_NoPrintRangeBug -t Qt_4_8_6 -x Py_v3 -g"]
 if config.sip_version >= 0x040a00:
 	# make use of docstring generation feature in SIP >= 4.10
 	flags.append("-o")
