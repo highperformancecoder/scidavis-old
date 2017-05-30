@@ -30,9 +30,19 @@
 import sipconfig
 config = sipconfig.Configuration()
 from PyQt4.QtCore import QT_VERSION_STR
+
+
 import re
-flags = ["-I ../scidavis -x VendorID -t WS_X11 -x PyQt_NoPrintRangeBug -x Py_v3 -g"]
+flags = ["-I ../scidavis"]
+
+try:
+        from PyQt4.pyqtconfig import Configuration
+        sipFlags=Configuration().pyqt_sip_flags
+except:
+        sipFlags="-x VendorID -t WS_X11 -x PyQt_NoPrintRangeBug -x Py_v3 -g -t Qt_"+re.sub('\.','_',QT_VERSION_STR)
+        
+
 if config.sip_version >= 0x040a00:
 	# make use of docstring generation feature in SIP >= 4.10
 	flags.append("-o")
-print " ".join([config.sip_bin, "-I", config.default_sip_dir+"/PyQt4","-t Qt_"+re.sub('\.','_',QT_VERSION_STR)] + flags)
+print " ".join([config.sip_bin, "-I", config.default_sip_dir+"/PyQt4",sipFlags] + flags)
