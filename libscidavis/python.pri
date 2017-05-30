@@ -16,12 +16,12 @@
   SOURCES += src/PythonScript.cpp src/PythonScripting.cpp
 
   unix {
-    INCLUDEPATH += $$system(python ../python-includepath.py)
+    INCLUDEPATH += $$system(python-config --includes|sed -e 's/-I//')
     osx_dist {
       DEFINES += PYTHONHOME=/Applications/scidavis.app/Contents/Resources
     } 
     system(mkdir -p $${SIP_DIR})
-    system($$system(python python-sipcmd.py) -c $${SIP_DIR} src/scidavis.sip)
+    system($$system(python python-sipcmd.py) $$system(python-config --includes) -c $${SIP_DIR}  src/scidavis.sip)
   }
 
   win32 {

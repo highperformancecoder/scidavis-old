@@ -27,10 +27,10 @@
 #                                                                          #
 ############################################################################
 
-from PyQt4 import pyqtconfig
-config = pyqtconfig.Configuration()
-flags = ["-I ../scidavis"]
+import sipconfig
+config = sipconfig.Configuration()
+flags = ["-I ../scidavis -x VendorID -t WS_X11 -x PyQt_NoPrintRangeBug  -x Py_v3 -g"]
 if config.sip_version >= 0x040a00:
 	# make use of docstring generation feature in SIP >= 4.10
 	flags.append("-o")
-print " ".join([config.sip_bin, "-I", config.pyqt_sip_dir, config.pyqt_sip_flags] + flags)
+print " ".join([config.sip_bin, "-I", config.default_sip_dir+"/PyQt4"] + flags)
