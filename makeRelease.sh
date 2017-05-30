@@ -26,10 +26,12 @@ EOF
 
 # also check that all translation files have been included
 for i in scidavis/translations/*.ts; do
-    if aels -terse $i |grep -- \--- >/dev/null; then
+    if git ls-files --error-unmatch >/dev/null; then
+        true;
+    else
         echo "translation $i not checked in"
         exit 1
-        fi
+    fi
 done
 
 # update Doxyversion
