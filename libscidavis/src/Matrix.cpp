@@ -144,6 +144,11 @@ void Matrix::setCell(int row, int col, double value)
 	d_future_matrix->setCell(row, col, value);
 }
 
+void Matrix::setCells(const QVector<qreal> & data)
+{
+	d_future_matrix->setCells(data);
+}
+
 QString Matrix::text(int row, int col)
 {
 	return d_future_matrix->text(row, col);
