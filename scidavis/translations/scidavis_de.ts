@@ -2434,7 +2434,7 @@ Operation aborted!</source>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1487"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13748"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13754"/>
         <source>Please select a column to plot!</source>
         <translation type="unfinished">Bitte wählen Sie die darzustellende Spalte aus!</translation>
     </message>
@@ -2721,7 +2721,7 @@ Operation aborted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13754"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13760"/>
         <source>Please select a Y column to plot!</source>
         <translation type="unfinished">Bitte eine Y-Spalte zum Plotten auswählen!</translation>
     </message>
@@ -3114,7 +3114,7 @@ Wollen Sie fortfahren?</translation>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7540"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7542"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12570"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13635"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13641"/>
         <source>&amp;Properties...</source>
         <translation type="unfinished">&amp;Eigenschaften...</translation>
     </message>
@@ -3172,9 +3172,9 @@ Wollen Sie fortfahren?</translation>
         <translation type="obsolete">Abhängig&amp;e 3D Diagramme</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13676"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13694"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13682"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13700"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13706"/>
         <source>D&amp;epends on</source>
         <translation type="unfinished">Häng&amp;t ab von</translation>
     </message>
@@ -4076,12 +4076,12 @@ Einige Teile der Datei werden eventuell nicht wie erwartet dargestellt.</transla
         <translation type="unfinished">&amp;Diagramm-Details...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13648"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13654"/>
         <source>D&amp;epending Graphs</source>
         <translation type="unfinished">Abhängig&amp;e Grafiken</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13662"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13668"/>
         <source>D&amp;epending 3D Graphs</source>
         <translation type="unfinished">Abhängig&amp;e 3D-Grafiken</translation>
     </message>
@@ -5484,7 +5484,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1477"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13760"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13766"/>
         <source>Please set a default X column for this table, first!</source>
         <translation type="unfinished">Bitte zuerst eine Spalte als Standard X-Spalte der Tabelle auswählen!</translation>
     </message>
@@ -5749,23 +5749,23 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="obsolete">Spalte eingeben</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13720"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13757"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13726"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13763"/>
         <source>You need at least two columns for this operation!</source>
         <translation type="unfinished">Es werden mindestens zwei Spalten für diese Operation benötigt!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13725"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13731"/>
         <source>Please select a Z column for this operation!</source>
         <translation type="unfinished">Bitte eine Z-Spalte für diese Operation wählen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13730"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13736"/>
         <source>You need to define a X column first!</source>
         <translation type="unfinished">Sie müssen zuerst eine X-Spalte definieren!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13735"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13741"/>
         <source>You need to define a Y column first!</source>
         <translation type="unfinished">Sie müssen zuerst eine Y-Spalte definieren!</translation>
     </message>
@@ -5826,14 +5826,14 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11910"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12648"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12658"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13720"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13725"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13730"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13735"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13748"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13726"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13731"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13736"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13741"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13754"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13757"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13760"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13763"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13766"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
@@ -6190,7 +6190,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <translation type="unfinished">kann eine beliebige .sciprj, .sciprj.gz, .qti, qti.gz, .py oder ASCII Datei sein</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13851"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13857"/>
         <source>Undo/Redo History</source>
         <translation type="unfinished">Undo-Liste</translation>
     </message>
@@ -13574,7 +13574,7 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
         <translation type="obsolete">Ja</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="533"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="538"/>
         <source>Cancel</source>
         <translation type="unfinished">Abbrechen</translation>
     </message>
@@ -13583,12 +13583,12 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
         <translation type="obsolete">QtiPlot - Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="305"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="310"/>
         <source>Calculation failed, the matrix is not square!</source>
         <translation type="unfinished">Berechnung nicht möglich, da keine quadratische Matrix vorliegt!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="336"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="341"/>
         <source>Inversion failed, the matrix is not square!</source>
         <translation type="unfinished">Invertierung fehlgeschlagen, da keine quadratische Matrix vorliegt!</translation>
     </message>
@@ -13628,38 +13628,38 @@ Do you want to insert cells?</source>
 Wollen sie Zellen einfügen?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="531"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="536"/>
         <source>SciDAVis</source>
         <translation type="unfinished">SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="304"/>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="335"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="309"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="340"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="532"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="537"/>
         <source>Do you want to hide or delete</source>
         <translation type="unfinished">Wollen Sie ausblenden oder löschen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="533"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="538"/>
         <source>Delete</source>
         <translation type="unfinished">Löschen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="533"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="538"/>
         <source>Hide</source>
         <translation type="unfinished">Ausblenden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="725"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="730"/>
         <source>Matrix %1</source>
         <translation type="unfinished">Matrix %1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="731"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="736"/>
         <source>%1: apply formula to selection</source>
         <translation type="unfinished">%1: Formel auf Auswahl angewendet</translation>
     </message>

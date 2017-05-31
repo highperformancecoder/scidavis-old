@@ -39,7 +39,7 @@ unix:isEmpty(PRESET) { # allow command-line argument to override settings here
 	### Link dynamically against system-wide installed libraries. Intended mainly
 	### for building Linux packages for distributions with Qwt and QwtPlot3D
 	### packages compiled against Qt4 (probably most current ones).
-	PRESET = linux_package
+	!osx_dist {PRESET = linux_package}
 
 	### Link statically as much as possible. Qwt, QwtPlot3D and MuParser are
 	### expected to be supplied in the 3rdparty folder. Python, SIP, PyQt and Qt
