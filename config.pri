@@ -344,10 +344,12 @@ win32: {
 
 # Mingw cross compilation environment on Linux. 
 mxe {
-  QMAKE_CXXFLAGS+=-g
+  # these need to go in CXXFLAGS to ensure they appear before $$QMAKE_INCDIR_QT and $$QMAKE_INCDIR_QT
+  QMAKE_CXXFLAGS+=-g "-I$$QMAKE_INCDIR_QT/qwt5"
+  QMAKE_LFLAGS+="-L$$QMAKE_LIBDIR_QT/qwt5"
   DEFINES += CONSOLE
-  INCLUDEPATH  += . "$$(HOME)/usr/mxe/include" 
-  LIBPATH += "$(HOME)/usr/mxe/lib" "$(HOME)/usr/mxe/lib64"
+  QMAKE_INCDIR  += . "$$(HOME)/usr/mxe/include" 
+  QMAKE_LIBDIR += "$(HOME)/usr/mxe/lib" "$(HOME)/usr/mxe/lib64"
   LIBS +=  -mwindows -lqwt -lqwtplot3d -lmuparser -lgsl -lgslcblas
   # Qt libraries specified here to get around a dependency bug in qmake
   LIBS += -lQt3Support -lQtOpenGL -lQtGui -lQtNetwork -lQtCore
