@@ -66,7 +66,7 @@ MXE_HOME, do
 
 6. Install [WiX](http://wixtoolset.org/)
 
-7. Install Cygwin
+7. Install [Cygwin](https://www.cygwin.com/)
 
 8. Create the install shield from scidavis top level directory
    - start cygwin bash shell
