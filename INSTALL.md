@@ -52,7 +52,8 @@ contains needed packages not in the official mxe fork
 
 2. Install necessary libraries:
    - cd mxe
-   - make boost gsl muparser qwt5_qt4 qwtplot3d
+   - make boost gsl muparser qwt5_qt4 qwtplot3d<br>
+   Note: currently python support is unavailable with MXE.
 
 3. Configure scidavis for MXE. If the location of your MXE dist is
 MXE_HOME, do
