@@ -5,12 +5,12 @@
 ## Generic requirements
 In order to compile SciDAVis, you need to install the following
 libraries. Easiest is to use your package manager to install prebuilt versions.
-- [Qt version 4]
-- [Qwt version 5]
-- [QwtPlot3D]
-- [GSL]
-- [muParser]
-- [zlib]
+- Qt version 4
+- Qwt version 5
+- QwtPlot3D
+- GSL
+- muParser
+- zlib
 
 For the optional Python scripting feature, you also need:
 - Python
@@ -24,13 +24,13 @@ not available, you can compile without (see below)
 
 1. In the top level directory, run qmake:
 
-- qmake
+- qmake<br>
   Configures the minimal build
-- qmake CONFIG+=python CONFIG+=liborigin
+- qmake CONFIG+=python CONFIG+=liborigin<br>
   Configure python scripting and Origin import support
-- qmake CONFIG+=noassistant
+- qmake CONFIG+=noassistant<br>
   compile without QtAssistant (documentation browser)
-- qmake CONFIG+=aegis
+- qmake CONFIG+=aegis<br>
   Build everything, including unit tests
 
 2. type "make qmake" Take careful note of any warning/error messages at this
@@ -106,7 +106,7 @@ executable that will run on older versions of
 MacOSX.](http://www.hpcoders.com.au/blog/?p=100)
 
 4. Install the prerequisites for scidavis.
-  - port install qt4-mac qwt qwtplot3d boost gsl py27-pyqt4 py-pyqwt py27-sip muparser
+  - port install qt4-mac qwt qwtplot3d boost gsl py27-pyqt4 py-pyqwt py27-sip muparser<br>
   Sadly, you may need to do this step multiple times before eveything
   is installed
 
