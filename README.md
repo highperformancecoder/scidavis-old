@@ -50,7 +50,10 @@ The following people have written parts of the SciDAVis source code, ranging fro
 In alphabetical order.
 
 Tilman Benkert[1], 
-Knut Franke
+Knut Franke,
+gbm19,
+Arun Narayanankutty,
+Russell Standish,
 
 ## Documentation
 
