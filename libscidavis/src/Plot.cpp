@@ -43,6 +43,9 @@
 
 #include <QPainter>
 
+#include <iostream>
+using namespace std;
+
 Plot::Plot(QWidget *parent, QString)
 : QwtPlot(parent)
 {
@@ -131,7 +134,7 @@ void Plot::printFrame(QPainter *painter, const QRect &rect) const
 {
 	painter->save();
 
-	int lw = canvas()->lineWidth();
+	int lw = lineWidth();
 	if (lw)
 	{
 		QColor color = palette().color(QPalette::Active, QColorGroup::Foreground);
@@ -154,23 +157,23 @@ void Plot::printFrame(QPainter *painter, const QRect &rect) const
 void Plot::drawItems (QPainter *painter, const QRect &rect,
 			const QwtScaleMap map[axisCnt], const QwtPlotPrintFilter &pfilter) const
 {
-	QwtPlot::drawItems(painter, rect, map, pfilter);
+  QwtPlot::drawItems(painter, rect, map, pfilter);
+    
+  for (int i=0; i<QwtPlot::axisCnt; i++)
+    {
+      if (!axisEnabled(i))
+        continue;
 
-	for (int i=0; i<QwtPlot::axisCnt; i++)
-	{
-		if (!axisEnabled(i))
-			continue;
+      ScaleDraw *sd = (ScaleDraw *) axisScaleDraw (i);
+      int majorTicksType = sd->majorTicksStyle();
+      int minorTicksType = sd->minorTicksStyle();
 
-		ScaleDraw *sd = (ScaleDraw *) axisScaleDraw (i);
-		int majorTicksType = sd->majorTicksStyle();
-		int minorTicksType = sd->minorTicksStyle();
+      bool min = (minorTicksType == ScaleDraw::In || minorTicksType == ScaleDraw::Both);
+      bool maj = (majorTicksType == ScaleDraw::In || majorTicksType == ScaleDraw::Both);
 
-		bool min = (minorTicksType == ScaleDraw::In || minorTicksType == ScaleDraw::Both);
-		bool maj = (majorTicksType == ScaleDraw::In || majorTicksType == ScaleDraw::Both);
-
-		if (min || maj)
-			drawInwardTicks(painter, rect, map[i], i, min, maj);
-	}
+      if (min || maj)
+        drawInwardTicks(painter, rect, map[i], i, min, maj);
+    }
 }
 
 void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
@@ -393,9 +396,9 @@ void Plot::setTickLength (int minLength, int majLength)
 void Plot::print(QPainter *painter, const QRect &plotRect, const QwtPlotPrintFilter &pfilter)
 {
     QwtText t = title();
-	printFrame(painter, plotRect);
-	QwtPlot::print(painter, plotRect, pfilter);
-	setTitle(t);
+    printFrame(painter, plotRect);
+    QwtPlot::print(painter, plotRect, pfilter);
+    setTitle(t);
 }
 
 QwtPlotCurve* Plot::curve(int index)

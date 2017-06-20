@@ -1900,13 +1900,7 @@ QString Graph::saveEnabledAxes()
 
 bool Graph::framed()
 {
-	bool frameOn=false;
-
-	QwtPlotCanvas* canvas=(QwtPlotCanvas*) d_plot->canvas();
-	if (canvas->lineWidth()>0)
-		frameOn=true;
-
-	return frameOn;
+	return d_plot->lineWidth()>0;
 }
 
 QColor Graph::canvasFrameColor()
@@ -1924,34 +1918,34 @@ int Graph::canvasFrameWidth()
 
 void Graph::drawCanvasFrame(const QStringList& frame)
 {
-	QwtPlotCanvas* canvas=(QwtPlotCanvas*) d_plot->canvas();
-	canvas->setLineWidth((frame[1]).toInt());
-
-	QPalette pal = canvas->palette();
+	d_plot->setLineWidth((frame[1]).toInt());
+        if ((frame[1]).toInt())
+          d_plot->setFrameStyle(QFrame::Box);
+        
+	QPalette pal = d_plot->palette();
 	pal.setColor(QPalette::WindowText,QColor(frame[2]));
-	canvas->setPalette(pal);
+	d_plot->setPalette(pal);
 }
 
 void Graph::drawCanvasFrame(bool frameOn, int width, const QColor& color)
 {
-	QwtPlotCanvas* canvas=(QwtPlotCanvas*) d_plot->canvas();
-	QPalette pal = canvas->palette();
+	QPalette pal = d_plot->palette();
 
-	if (frameOn && canvas->lineWidth() == width &&
+	if (frameOn && d_plot->lineWidth() == width &&
 			pal.color(QPalette::Active, QPalette::WindowText) == color)
 		return;
 
 	if (frameOn)
 	{
-		canvas->setLineWidth(width);
-		pal.setColor(QPalette::WindowText,color);
-		canvas->setPalette(pal);
-	}
+          d_plot->setLineWidth(width);
+          pal.setColor(QPalette::WindowText,color);
+          d_plot->setPalette(pal);
+        }
 	else
 	{
-		canvas->setLineWidth(0);
+		d_plot->setLineWidth(0);
 		pal.setColor(QPalette::WindowText,QColor(Qt::black));
-		canvas->setPalette(pal);
+		d_plot->setPalette(pal);
 	}
 	emit modifiedGraph();
 }
@@ -1960,8 +1954,7 @@ void Graph::drawCanvasFrame(bool frameOn, int width)
 {
 	if (frameOn)
 	{
-		QwtPlotCanvas* canvas=(QwtPlotCanvas*) d_plot->canvas();
-		canvas->setLineWidth(width);
+                d_plot->setLineWidth(width);
 	}
 }
 
