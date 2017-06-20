@@ -131,7 +131,7 @@ void Plot::printFrame(QPainter *painter, const QRect &rect) const
 {
 	painter->save();
 
-	int lw = lineWidth();
+	int lw = canvas()->lineWidth();
 	if (lw)
 	{
 		QColor color = palette().color(QPalette::Active, QColorGroup::Foreground);

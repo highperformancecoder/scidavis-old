@@ -1491,15 +1491,14 @@ void Graph::exportSVG(const QString& fname)
 
 void Graph::exportPainter(QPaintDevice& paintDevice, bool keepAspect, QRect rect)
 {
-	QPainter p(&paintDevice);
-    exportPainter(p, keepAspect, rect, QSize(paintDevice.width(), paintDevice.height()));
-	p.end();
+  QPainter p(&paintDevice);
+  exportPainter(p, keepAspect, rect, QSize(paintDevice.width(), paintDevice.height()));
 }
 
 void Graph::exportPainter(QPainter &painter, bool keepAspect, QRect rect, QSize size)
  {
 	if (size == QSize()) size = d_plot->size();
-	if (rect == QRect()) rect = d_plot->rect();
+	if (rect == QRect()) rect = d_plot->plotLayout()->canvasRect();
 	if (keepAspect)
 	{
 		QSize scaled = rect.size();
