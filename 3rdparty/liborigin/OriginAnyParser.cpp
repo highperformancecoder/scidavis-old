@@ -213,7 +213,7 @@ void OriginAnyParser::readFileVersion() {
 	string sFileVersion;
 	getline(file, sFileVersion);
 
-	if ((sFileVersion.substr(0,4) != "CPYA") or (*sFileVersion.rbegin() != '#')) {
+	if ((sFileVersion.substr(0,4) != "CPYA") || (*sFileVersion.rbegin() != '#')) {
 		LOG_PRINT(logfile, "File, is not a valid opj file\n")
 		exit(1);
 	}
@@ -516,7 +516,7 @@ bool OriginAnyParser::readAnnotationElement() {
 	string andt2_data;
 
 	// check for group of annotations
-	if ((ane_data_1_size == 0x5e) and (ane_data_2_size == 0x04)) {
+	if ((ane_data_1_size == 0x5e) && (ane_data_2_size == 0x04)) {
 		unsigned int angroup_size = 0; (void) angroup_size;
 		curpos = file.tellg();
 		LOG_PRINT(logfile, "  Annotation group found at %ld [0x%lX] ...\n", curpos, curpos)
@@ -1072,7 +1072,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 			if(valuesize <= 8)	// Numeric, Time, Date, Month, Day
 			{
 				GET_DOUBLE(stmp, value)
-				if ((i < 5) or (i > (nr-5))) {
+				if ((i < 5) || (i > (nr-5))) {
 					LOG_PRINT(logfile, "%g ", value)
 				} else if (i == 5) {
 					LOG_PRINT(logfile, "... ")
@@ -1086,7 +1086,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 				if(c != 1) //value
 				{
 					GET_DOUBLE(stmp, value);
-					if ((i < 5) or (i > (nr-5))) {
+					if ((i < 5) || (i > (nr-5))) {
 						LOG_PRINT(logfile, "%g ", value)
 					} else if (i == 5) {
 						LOG_PRINT(logfile, "... ")
@@ -1101,7 +1101,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 						svaltmp = string();
 						LOG_PRINT(logfile, "Non printable symbol found, place 1 for i=%d\n", i)
 					}
-					if ((i < 5) or (i > (nr-5))) {
+					if ((i < 5) || (i > (nr-5))) {
 						LOG_PRINT(logfile, "\"%s\" ", svaltmp.c_str())
 					} else if (i == 5) {
 						LOG_PRINT(logfile, "... ")
@@ -1117,7 +1117,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 					svaltmp = string();
 					LOG_PRINT(logfile, "Non printable symbol found, place 2 for i=%d\n", i)
 				}
-				if ((i < 5) or (i > (nr-5))) {
+				if ((i < 5) || (i > (nr-5))) {
 					LOG_PRINT(logfile, "\"%s\" ", svaltmp.c_str())
 				} else if (i == 5) {
 					LOG_PRINT(logfile, "... ")
