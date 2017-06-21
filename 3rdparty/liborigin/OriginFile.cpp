@@ -85,7 +85,7 @@ OriginFile::OriginFile(const string& fileName)
 		fileVersion = 610;
 	else if (buildVersion < 2659) // 7.0 SR0 (2656-2658)
 		fileVersion = 700;
-	else if (buildVersion <2664) // 7.0 SR1 (2659-2663)
+	else if (buildVersion < 2664) // 7.0 SR1 (2659-2663)
 		fileVersion = 701;
 	else if (buildVersion < 2672) // 7.0 SR2 (2664-2671)
 		fileVersion = 702;
@@ -130,10 +130,11 @@ OriginFile::OriginFile(const string& fileName)
 		LOG_PRINT(logfile, "Found project version 2017.1 (9.4.1) or newer\n")
 	}
 
-	if (fileVersion < 920)
+	if (newFileVersion == 0) {
 		LOG_PRINT(logfile, "Found project version %.2f\n", fileVersion/100.0)
-	else if (fileVersion < 941)
+	} else if (fileVersion < 941) {
 		LOG_PRINT(logfile, "Found project version %.1f (%.2f)\n", newFileVersion/10.0, fileVersion/100.0)
+	}
 
 	// Close logfile, will be reopened in parser routine.
 	// There are ways to keep logfile open and pass it to parser routine,
