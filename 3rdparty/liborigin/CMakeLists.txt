@@ -4,10 +4,6 @@ cmake_minimum_required(VERSION 2.8)
 # c++11 standard
 add_compile_options(-std=c++11)
 
-# boost library headers
-find_package(Boost REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})
-
 # library version
 set(LIBORIGIN_VERSION_MAJOR 3)
 set(LIBORIGIN_VERSION_MINOR 0)
