@@ -257,12 +257,11 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 				TODO: Add a "per column" flag, settable at import dialog, to choose between both types.
 				 */
 					{
-						Origin::variant value;
 						double datavalue;
 						bool setAsText = false;
 						table->column(j)->setColumnMode(SciDAVis::Numeric);
 						for (int i=0; i < std::min((int)column.data.size(), maxrows); ++i) {
-							value = column.data[i];
+							Origin::variant value(column.data[i]);
 							if (value.type == Origin::variant::V_DOUBLE) {
 								datavalue = value.as_double;
 								if (datavalue==_ONAN) continue; // mark for empty cell
