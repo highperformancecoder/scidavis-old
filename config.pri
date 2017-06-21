@@ -275,26 +275,32 @@ contains(PRESET, linux_package) {
 	### Mixing Qt 4.2 and Qt >= 4.3 compiled stuff may also 
 	### cause problems.
 
-	### Debian suffix
-	exists(/usr/include/qwt-qt4): qwtsuff = "-qt4"
+	exists(/usr/include/qwt5) {INCLUDEPATH+=/usr/include/qwt5} 
+        exists (/usr/include/qwt-qt4) {INCLUDEPATH+=/usr/include/qwt-qt4}
+	exists(/usr/include/qwt5-qt4) {INCLUDEPATH+=/usr/include/qwt5-qt4}
 
-	exists(/usr/include/qwt5) {
-		INCLUDEPATH  += /usr/include/qwt5
-                exists(/usr/lib*/libqwt5.*) {
-                      LIBS         += -lqwt5
-                } else {
-                      LIBS += -lqwt
-                }
-	} else {
-		INCLUDEPATH  += /usr/include/qwt$${qwtsuff}
-		LIBS         += -lqwt$${qwtsuff}
-	}
+        system (ls /usr/lib*/libqwt5.so) {
+           LIBS+=-lqwt5
+        } else {
+           system (ls /usr/lib*/libqwt5-qt4.so) {
+              LIBS+=-lqwt5-qt4
+           } else {
+             system (ls /usr/lib*/libqwt-qt4.so) {
+               LIBS+=-lqwt-qt4
+             } else {LIBS+=-lqwt}
+           }
+        }
+
+        system (ls /usr/lib*/libqwtplot3d-qt4.so) {
+         LIBS+=-lqwtplot3d-qt4
+        } else {
+         LIBS+=-lqwtplot3d
+        }
 
         INCLUDEPATH = "$(HOME)/usr/include" $$INCLUDEPATH
         QMAKE_LIBDIR = "$(HOME)/usr/lib" $$QMAKE_LIBDIR
 
 	INCLUDEPATH  += /usr/include/qwtplot3d
-	LIBS         += -lqwtplot3d$${qwtsuff}
 
 	LIBS         += -lz -lGLU 
 

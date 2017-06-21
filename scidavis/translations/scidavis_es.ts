@@ -9787,35 +9787,35 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">¡Curva seleccionada! !Mueva el cursor y haga click para elegir un punto y doble click/&apos;Enter&apos; para finalizar¡</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4332"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4378"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4324"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4370"/>
         <source>&amp;Cut</source>
         <translation type="unfinished">&amp;Cortar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4333"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4379"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4325"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4371"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">&amp;Copiar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4334"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4380"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4326"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4372"/>
         <source>&amp;Delete</source>
         <translation type="unfinished">&amp;Eliminar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4336"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4328"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4377"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4381"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="4385"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="4389"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4393"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4397"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4428"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4420"/>
         <source>&amp;Properties...</source>
         <translation type="unfinished">&amp;Propiedades...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4410"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4402"/>
         <source>&amp;Rescale to show all</source>
         <translation type="unfinished">&amp;Reescalar para mostrar todo</translation>
     </message>
@@ -9824,17 +9824,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4412"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4404"/>
         <source>&amp;Hide axis</source>
         <translation type="unfinished">&amp;Ocultar eje</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4414"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4406"/>
         <source>&amp;Show grids</source>
         <translation type="unfinished">Mo&amp;strar mallas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4427"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4419"/>
         <source>&amp;Scale...</source>
         <translation type="unfinished">E&amp;scala...</translation>
     </message>
@@ -9965,7 +9965,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Filtro FFT Bloquea Banda de </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5150"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5142"/>
         <source>There are no curves available on this plot!</source>
         <translation type="unfinished">¡No hay curvas disponibles en este gráfico!</translation>
     </message>
@@ -9974,7 +9974,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Error</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5166"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5158"/>
         <source>There are no curves with more than two points on this plot. Operation aborted!</source>
         <translation type="unfinished">No hay curvas con más de dos puntos en este gráfico. ¡Operación abortada!</translation>
     </message>
@@ -10119,22 +10119,22 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Boltzmann (Sigmoidal) ajuste de </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4322"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4314"/>
         <source>The columns</source>
         <translation type="unfinished">Las columnas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4322"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4314"/>
         <source>are empty and will not be added to the plot!</source>
         <translation type="unfinished">están vacías y no serán añadidas al gráfico!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4326"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4318"/>
         <source>The column</source>
         <translation type="unfinished">La columna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4326"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4318"/>
         <source>is empty and will not be added to the plot!</source>
         <translation type="unfinished">está vacía y no será añadida al gráfico!</translation>
     </message>
@@ -10151,7 +10151,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Derecha</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="1744"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="1743"/>
         <source>Title</source>
         <translation type="unfinished">Título</translation>
     </message>
@@ -10180,8 +10180,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Los índices válidos tienen valores comprendidos entre 0 y %1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="3759"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="3789"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="3751"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="3781"/>
         <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
         <translation type="unfinished">¡El archivo de imagen: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; ya no existe!</translation>
     </message>
@@ -10190,7 +10190,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Error en la fórmula introducida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4410"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4402"/>
         <source>Ctrl+Shift+R</source>
         <translation type="unfinished">Ctrl+Shift+R</translation>
     </message>
@@ -10262,7 +10262,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Formato de archivo no soportado, ¡operación abortada!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4018"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4010"/>
         <source>Data set generated from curve</source>
         <translation type="unfinished">Conjunto de datos generados a partir de la curva </translation>
     </message>
@@ -10279,25 +10279,25 @@ p, li { white-space: pre-wrap; }
         <location filename="../../libscidavis/src/Graph.cpp" line="1359"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="1377"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="1391"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5165"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5157"/>
         <source>Error</source>
         <translation type="unfinished">Error</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="3758"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="3788"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="3750"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="3780"/>
         <source>File open error</source>
         <translation type="unfinished">Error de apertura de archivo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4321"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4325"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5150"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4313"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4317"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5142"/>
         <source>Warning</source>
         <translation type="unfinished">Atención</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4009"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4001"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
         <translation type="unfinished">1</translation>
@@ -10318,13 +10318,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">No se pudo cambiar el tipo de eje al formato requerido!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4010"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4002"/>
         <source>2</source>
         <comment>curve data table y column name</comment>
         <translation type="unfinished">2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="4019"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="4011"/>
         <source>Curve data %1</source>
         <translation type="unfinished">Datos de curva %1</translation>
     </message>
@@ -13797,12 +13797,12 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
 <context>
     <name>Plot</name>
     <message>
-        <location filename="../../libscidavis/src/Plot.cpp" line="58"/>
+        <location filename="../../libscidavis/src/Plot.cpp" line="61"/>
         <source>Y Axis Title</source>
         <translation type="unfinished">título eje Y</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Plot.cpp" line="59"/>
+        <location filename="../../libscidavis/src/Plot.cpp" line="62"/>
         <source>X Axis Title</source>
         <translation type="unfinished">título eje X</translation>
     </message>
