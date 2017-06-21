@@ -1,7 +1,7 @@
 /***************************************************************************
     File                 : OriginObj.h
     --------------------------------------------------------------------
-    Copyright            : (C) 2005-2007 Stefan Gerlach
+    Copyright            : (C) 2005-2007, 2017 Stefan Gerlach
                            (C) 2007-2008 Alex Kargovsky, Ion Vasilief
     Email (use @ for *)  : kargovsky*yumr.phys.msu.su, ion_vasilief*yahoo.fr
     Description          : Origin internal object classes
@@ -43,16 +43,39 @@ using namespace std;
 namespace Origin
 {
 	enum ValueType {Numeric = 0, Text = 1, Time = 2, Date = 3,  Month = 4, Day = 5, ColumnHeading = 6, TickIndexedDataset = 7, TextNumeric = 9, Categorical = 10};
+	// Numeric Format:
+	// 1000 | 1E3 | 1k | 1,000
+	enum NumericFormat {Decimal = 0, Scientific = 1, Engineering = 2, DecimalWithMarks = 3};
+	// Time Format:
+	// hh:mm | hh | hh:mm:ss | hh:mm:ss.zz | hh ap | hh:mm ap | mm:ss
+	// mm:ss.zz | hhmm | hhmmss | hh:mm:ss.zzz
+	enum TimeFormat {TIME_HH_MM = 0, TIME_HH = 1, TIME_HH_MM_SS = 2, TIME_HH_MM_SS_ZZ = 3, TIME_HH_AP = 4, TIME_HH_MM_AP = 5, TIME_MM_SS = 6,
+		TIME_MM_SS_ZZ = 7, TIME_HHMM = 8, TIME_HHMMSS = 9, TIME_HH_MM_SS_ZZZ = 10};
+	// Date Format:
+	// dd/MM/yyyy | dd/MM/yyyy HH:mm | dd/MM/yyyy HH:mm:ss | dd.MM.yyyy | y. (year abbreviation) | MMM d
+	// M/d | d | ddd | First letter of day | yyyy | yy | dd.MM.yyyy hh:mm | dd.MM.yyyy hh:mm:ss
+	// yyMMdd | yyMMdd hh:mm | yyMMdd hh:mm:ss | yyMMdd hhmm | yyMMdd hhmmss | MMM
+	// First letter of month | Quartal | M-d-yyyy (Custom1) | hh:mm:ss.zzzz (Custom2)
+	enum DateFormat {DATE_DD_MM_YYYY = -128, DATE_DD_MM_YYYY_HH_MM = -119, DATE_DD_MM_YYYY_HH_MM_SS = -118, DATE_DDMMYYYY = 0, DATE_Y = 1, DATE_MMM_D = 2,
+		DATE_M_D = 3, DATE_D = 4, DATE_DDD = 5, DATE_DAY_LETTER = 6, DATE_YYYY = 7, DATE_YY = 8, DATE_DDMMYYYY_HH_MM = 9, DATE_DDMMYYYY_HH_MM_SS = 10,
+		DATE_YYMMDD = 11, DATE_YYMMDD_HH_MM = 12, DATE_YYMMDD_HH_MM_SS = 13, DATE_YYMMDD_HHMM = 14, DATE_YYMMDD_HHMMSS = 15, DATE_MMM = 16,
+		DATE_MONTH_LETTER = 17, DATE_Q = 18, DATE_M_D_YYYY = 19, DATE_HH_MM_SS_ZZZZ = 20};
+	// Month Format:
+	//  MMM | MMMM | First letter of month
+	enum MonthFormat {MONTH_MMM = 0, MONTH_MMMM = 1, MONTH_LETTER = 2};
+	// ddd | dddd | First letter of day
+	enum DayOfWeekFormat {DAY_DDD = 0, DAY_DDDD = 1, DAY_LETTER = 2};
+
 	enum NumericDisplayType {DefaultDecimalDigits = 0, DecimalPlaces = 1, SignificantDigits = 2};
 	enum Attach {Frame = 0, Page = 1, Scale = 2};
 	enum BorderType {BlackLine = 0, Shadow = 1, DarkMarble = 2, WhiteOut = 3, BlackOut = 4, None = -1};
-	enum FillPattern {NoFill, BDiagDense, BDiagMedium, BDiagSparse, FDiagDense, FDiagMedium, FDiagSparse, 
-		DiagCrossDense, DiagCrossMedium, DiagCrossSparse, HorizontalDense, HorizontalMedium, HorizontalSparse, 
-		VerticalDense, VerticalMedium, VerticalSparse, CrossDense, CrossMedium, CrossSparse};
+	enum FillPattern {NoFill = 0, BDiagDense = 1, BDiagMedium = 2, BDiagSparse = 3, FDiagDense = 4, FDiagMedium = 5, FDiagSparse = 6,
+		DiagCrossDense = 7, DiagCrossMedium = 8, DiagCrossSparse = 9, HorizontalDense = 10, HorizontalMedium = 11, HorizontalSparse = 12,
+		VerticalDense = 13, VerticalMedium = 14, VerticalSparse = 15, CrossDense = 16, CrossMedium = 17, CrossSparse = 18};
 
 	struct Color
 	{
-		enum ColorType {None, Automatic, Regular, Custom, Increment, Indexing, RGB, Mapping};
+		enum ColorType {None = 0, Automatic = 1, Regular = 2, Custom = 3, Increment = 4, Indexing = 5, RGB = 6, Mapping = 7};
 		enum RegularColor {Black = 0, Red = 1, Green = 2, Blue = 3, Cyan = 4, Magenta = 5, Yellow = 6, DarkYellow = 7, Navy = 8,
 			Purple = 9, Wine = 10, Olive = 11, DarkCyan = 12, Royal=  13, Orange = 14, Violet = 15, Pink = 16, White = 17,
 			LightGray = 18, Gray = 19, LTYellow = 20, LTCyan = 21, LTMagenta = 22, DarkGray = 23/*, Custom = 255*/};
@@ -445,7 +468,8 @@ namespace Origin
 			XYZContour = 243, XYZTriangular = 245, LineSeries = 246, YErrorBar = 254, XYErrorBar = 255, GraphScatter3D = 0x8AF0,
 			GraphTrajectory3D = 0x8AF1, Polar = 0x00020000, SmithChart = 0x00040000, FillArea = 0x00800000};
 		enum LineStyle {Solid = 0, Dash = 1, Dot = 2, DashDot = 3, DashDotDot = 4, ShortDash = 5, ShortDot = 6, ShortDashDot = 7};
-		enum LineConnect {NoLine = 0, Straight = 1, TwoPointSegment = 2, ThreePointSegment = 3, BSpline = 8, Spline = 9, StepHorizontal = 11, StepVertical = 12, StepHCenter = 13, StepVCenter = 14, Bezier = 15};
+		enum LineConnect {NoLine = 0, Straight = 1, TwoPointSegment = 2, ThreePointSegment = 3, BSpline = 8, Spline = 9,
+			StepHorizontal = 11, StepVertical = 12, StepHCenter = 13, StepVCenter = 14, Bezier = 15};
 
 		bool hidden;
 		unsigned char type;
