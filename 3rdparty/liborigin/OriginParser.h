@@ -1,8 +1,8 @@
 /***************************************************************************
     File                 : OriginParser.h
     --------------------------------------------------------------------
-    Copyright            : (C) 2008 Alex Kargovsky
-    Email (use @ for *)  : kargovsky*yumr.phys.msu.su
+    Copyright            : (C) 2008 Alex Kargovsky (kargovsky@yumr.phys.msu.su)
+    Copyright            : (C) 2017 Stefan Gerlach (stefan.gerlach@uni.kn)
     Description          : Origin file parser base class
 
  ***************************************************************************/
@@ -33,10 +33,8 @@
 #include "tree.hh"
 
 #ifndef NO_CODE_GENERATION_FOR_LOG
-#define LOG_PRINT( logfile, args... ) \
-{                                     \
-	int ioret= fprintf(logfile, args); \
-	assert(ioret>0);                   \
+#define LOG_PRINT( logfile, args... ) { 	\
+	fprintf(logfile, args);			\
 }
 #else // !NO_CODE_GENERATION_FOR_LOG
 #define LOG_PRINT( logfile, args... ) {};
