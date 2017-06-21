@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4){
 }
 
 TEMPLATE = app
-TARGET = readWriteProject
+TARGET = unittests
 DEPENDPATH += .
 INCLUDEPATH += . ../libscidavis ../libscidavis/src ../tmp/scidavis ../scidavis
 LIBS += -L ../libscidavis -lscidavis
