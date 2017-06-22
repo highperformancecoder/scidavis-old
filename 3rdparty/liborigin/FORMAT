@@ -3,7 +3,7 @@ Origin 7.5 column value display
 Numeric, Text&Numeric:
 	Decimal:1000            = 0
 	Scientific:1E3          = 1
-	Engeneering:1k          = 2
+	Engineering:1k          = 2
 	Decimal:1,000           = 3
 
 Time:
@@ -24,7 +24,7 @@ Date:
     dd/MM/yyyy HH:mm        = -119
     dd/MM/yyyy HH:mm:ss     = -118
 	dd.MM.yyyy              = 0
-	y.                      = 1  (year abbreviation - for instance, 'Ñƒ.' in russian)
+	y.                      = 1  (year abbreviation - for instance, 'ã.' in russian)
 	MMM d                   = 2
 	M/d                     = 3
 	d                       = 4
