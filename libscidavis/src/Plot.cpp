@@ -174,6 +174,18 @@ void Plot::drawItems (QPainter *painter, const QRect &rect,
       if (min || maj)
         drawInwardTicks(painter, rect, map[i], i, min, maj);
     }
+  if (((Graph *)parent())->axesBackbones())
+    {
+      int apw2 = axesLinewidth()/2;
+      bool clp = painter->hasClipping();
+      painter->save();
+      painter->setPen(QPen(canvas()->palette().color(QPalette::Active, QPalette::WindowText), axesLinewidth(),
+        Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+      painter->setClipping(false);
+      painter->drawRect(rect.adjusted(-(apw2+1), -(apw2+1), apw2, apw2));
+      painter->restore();
+      painter->setClipping(clp);
+    }
 }
 
 void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
