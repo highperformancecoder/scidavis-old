@@ -211,9 +211,9 @@ namespace Origin
 				new(&as_string) string(v.as_string);
 			}
 		}
-/*
+
 		Origin::Variant& operator=(const Origin::Variant& v) {
-			printf("Variant=() type = %d, new type = %d\n", type, v.type);
+			//printf("Variant=() type = %d, new type = %d\n", type, v.type);
 			if (type == V_STRING && v.type == V_STRING) {
 				as_string = v.as_string;
 				return *this;
@@ -227,16 +227,16 @@ namespace Origin
 				as_double = v.as_double;
 				break;
 			case V_STRING:
-				new(&as_string) string(v.as_string);
-				type = v.type;
+				as_string=v.as_string;
 			}
+			type = v.type;
 			return *this;
 		}
-*/
+
 		~Variant() {
-	//		printf("~Variant()\n");
-	//		if (type == V_STRING)
-	//			as_string.~string();
+			//printf("~Variant()\n");
+			if (type == V_STRING)
+				as_string.~string();
 		}
 	} variant;
 
