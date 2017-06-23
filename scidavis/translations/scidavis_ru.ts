@@ -6196,122 +6196,122 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>ColorBox</name>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="74"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="76"/>
         <source>black</source>
         <translation type="unfinished">чёрный</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="80"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="82"/>
         <source>red</source>
         <translation type="unfinished">красный</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="84"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="86"/>
         <source>green</source>
         <translation type="unfinished">зелёный</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="88"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="90"/>
         <source>blue</source>
         <translation type="unfinished">синий</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="92"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="94"/>
         <source>cyan</source>
         <translation type="unfinished">голубой</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="96"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="98"/>
         <source>magenta</source>
         <translation type="unfinished">фуксия</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="100"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="102"/>
         <source>yellow</source>
         <translation type="unfinished">жёлтый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="104"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="106"/>
         <source>dark yellow</source>
         <translation type="unfinished">темно-жёлтый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="108"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="110"/>
         <source>navy</source>
         <translation type="unfinished">тёмно-синий</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="112"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="114"/>
         <source>purple</source>
         <translation type="unfinished">фиолетовый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="116"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="118"/>
         <source>wine</source>
         <translation type="unfinished">бордовый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="120"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="122"/>
         <source>olive</source>
         <translation type="unfinished">оливковый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="124"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="126"/>
         <source>dark cyan</source>
         <translation type="unfinished">морской волны</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="144"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="146"/>
         <source>white</source>
         <translation type="unfinished">белый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="148"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="150"/>
         <source>light gray</source>
         <translation type="unfinished">светло-серый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="168"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="170"/>
         <source>dark gray</source>
         <translation type="unfinished">тёмно-серый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="128"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="130"/>
         <source>royal</source>
         <translation type="unfinished">ультрамарин</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="132"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="134"/>
         <source>orange</source>
         <translation type="unfinished">оранжевый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="136"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="138"/>
         <source>violet</source>
         <translation type="unfinished">сиреневый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="140"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="142"/>
         <source>pink</source>
         <translation type="unfinished">розовый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="152"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="154"/>
         <source>gray</source>
         <translation type="unfinished">серый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="156"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="158"/>
         <source>light yellow</source>
         <translation type="unfinished">светло-жёлтый</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="160"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="162"/>
         <source>light cyan</source>
         <translation type="unfinished">светло-голубой</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ColorBox.cpp" line="164"/>
+        <location filename="../../libscidavis/src/ColorBox.cpp" line="166"/>
         <source>light magenta</source>
         <translation type="unfinished">светло-розовый</translation>
     </message>

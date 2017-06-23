@@ -1,4 +1,4 @@
-#include "readWriteProject.h"
+#include "unittests.h"
 #include "ApplicationWindow.h"
 #include "MultiLayer.h"
 
@@ -12,7 +12,7 @@ extern "C"
 void file_compress(const char  *file, const char  *mode);
 }
 
-void ReadWriteProjectTest::readWriteProject()
+void Unittests::readWriteProject()
 {
   unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
   QVERIFY(app.get());
@@ -26,7 +26,7 @@ void ReadWriteProjectTest::readWriteProject()
 
 }
 
-void ReadWriteProjectTest::exportTestProject()
+void Unittests::exportTestProject()
 {
   unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
   QVERIFY(app.get());
@@ -37,51 +37,10 @@ void ReadWriteProjectTest::exportTestProject()
 }
 
 // checks that the large file Origin import problem (ticket #238) remains fixed
-void ReadWriteProjectTest::largeOriginImport()
+void Unittests::largeOriginImport()
 {
   unique_ptr<ApplicationWindow> app(importOPJ("Histo.opj"));
   QVERIFY(app.get());
 }
 
-// Override showHelp() & chooseHelpFolder() to suppress documentation file 
-// path not found error. Need to fix this later (importance : high)
-void ReadWriteProjectTest::showHelp() {}
-void ReadWriteProjectTest::chooseHelpFolder() {}
-
-QTEST_MAIN(ReadWriteProjectTest);
-
-typedef QMessageBox::StandardButton StandardButton;
-
-// override the QmessageBox static methods to turn a failure messages into throws, and ignore warnings
-StandardButton QMessageBox::information
-(QWidget *, const QString&, const QString& text, StandardButtons,StandardButton) 
-{
-  cerr << text.toStdString() << endl;
-  return QMessageBox::Ok;
-}
-
-StandardButton QMessageBox::question
-(QWidget *, const QString &, const QString& text, StandardButtons, StandardButton)
-{
-  cerr << text.toStdString() << endl;
-  return QMessageBox::Yes;
-}
-
-int QMessageBox::question
-(QWidget *, const QString& ,const QString& text, int, int, int)
-{
-  cerr << text.toStdString() << endl;
-  return QMessageBox::Yes;
-}
-
-StandardButton QMessageBox::warning
-(QWidget *, const QString &, const QString& text, StandardButtons, StandardButton)
-{ 
-  cerr << text.toStdString() << endl;
-  return QMessageBox::Ok;
-}
-     
-StandardButton QMessageBox::critical
-(QWidget *, const QString &, const QString& text, StandardButtons, StandardButton)
-{throw runtime_error(text.toStdString());}
 

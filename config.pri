@@ -365,6 +365,12 @@ mxe {
   LIBS += -lopengl32 -lglu32 
 }
 
+# for converage testing
+gcov {
+   QMAKE_CXXFLAGS+=-fprofile-arcs -ftest-coverage
+   QMAKE_LFLAGS+=-fprofile-arcs -ftest-coverage  
+}
+
 #############################################################################
 ### Names of the lupdate and lrelease programs                              #
 ###                                                                         #
@@ -382,3 +388,4 @@ exists(/usr/bin/lupdate-qt4) {
 	LUPDATE_BIN = lupdate
 	LRELEASE_BIN = lrelease
 }
+

@@ -1,7 +1,7 @@
 #include "ApplicationWindow.h"
 #include <QTest>
 
-class ReadWriteProjectTest: public ApplicationWindow
+class Unittests: public ApplicationWindow
 {
   Q_OBJECT
 private slots:

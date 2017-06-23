@@ -41,8 +41,8 @@ liborigin {
 QT+=testlib
 
 # Input
-HEADERS += readWriteProject.h
-SOURCES += readWriteProject.cpp
+HEADERS += unittests.h
+SOURCES += unittests.cpp applicationWindow.cpp readWriteProject.cpp
 
 ########### Future code backported from the aspect framework ##################
 DEFINES += LEGACY_CODE_0_2_x

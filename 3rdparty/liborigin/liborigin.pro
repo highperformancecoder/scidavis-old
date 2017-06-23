@@ -31,3 +31,9 @@ SOURCES += \
 	OriginFile.cpp\
 	OriginParser.cpp\
 	OriginAnyParser.cpp
+
+# for converage testing
+gcov {
+   QMAKE_CXXFLAGS+=-fprofile-arcs -ftest-coverage
+}
+        
