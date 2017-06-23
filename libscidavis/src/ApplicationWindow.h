@@ -1176,6 +1176,7 @@ private slots:
 
 	void handleAspectAdded(const AbstractAspect * aspect, int index);
 	void handleAspectAboutToBeRemoved(const AbstractAspect * aspect, int index);
+protected:
 	void lockToolbar(const bool status);
 };
 

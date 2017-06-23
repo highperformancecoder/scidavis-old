@@ -9,7 +9,9 @@ private slots:
   void largeOriginImport();
 
   void exportTestProject();
- 
+
+  void lockToolbars();
+  
   void showHelp();
   void chooseHelpFolder();
 };
