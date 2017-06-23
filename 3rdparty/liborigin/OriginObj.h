@@ -220,14 +220,16 @@ namespace Origin
 			}
 
 			if (type == V_STRING)
-				as_string.~string();
+                          // switching to a double, so clean up old string
+                          as_string.~string();
 
 			switch (v.type) {
 			case V_DOUBLE:
 				as_double = v.as_double;
 				break;
 			case V_STRING:
-				as_string=v.as_string;
+                          // switching from double, allocate new string
+                          new(&as_string) string(v.as_string);
 			}
 			type = v.type;
 			return *this;
