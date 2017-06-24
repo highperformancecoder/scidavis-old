@@ -178,12 +178,14 @@ namespace Origin
     enum vtype {V_DOUBLE, V_STRING};
     vtype type() const {return m_type;}
     double as_double() const {return m_double;}
-    const string& as_string() const {return m_string;}
+    const char* as_string() const {return m_string;}
           
     Variant() {}
     Variant(const double d): m_double(d) {}
     Variant(const string& s): m_type(V_STRING)
-    {new(&m_string) string(s);}
+    {
+      asgString(s.c_str());
+    }
 
     Variant(const Variant& v): m_type(v.m_type) {
       switch (v.m_type) {
@@ -191,28 +193,22 @@ namespace Origin
         m_double = v.m_double;
         break;
       case V_STRING:
-        new(&m_string) string(v.m_string);
+        asgString(v.m_string);
+        break;
       }
     }
 
     Origin::Variant& operator=(const Origin::Variant& v) {
-      //printf("Variant=() type = %d, new type = %d\n", type, v.type);
-      if (m_type == V_STRING && v.m_type == V_STRING) {
-        m_string = v.m_string;
-        return *this;
-      }
-
       if (m_type == V_STRING)
-        // switching to a double, so clean up old string
-        m_string.~string();
+        delete [] m_string;
 
       switch (v.m_type) {
       case V_DOUBLE:
         m_double = v.m_double;
         break;
       case V_STRING:
-        // switching from double, allocate new string
-        new(&m_string) string(v.m_string);
+        asgString(v.m_string);
+        break;
       }
       m_type = v.m_type;
       return *this;
@@ -221,14 +217,19 @@ namespace Origin
     ~Variant() {
       //printf("~Variant()\n");
       if (m_type == V_STRING)
-        m_string.~string();
+        delete [] m_string;
     }
   private:
     vtype m_type=V_DOUBLE;
     union {
       double m_double;
-      string m_string;
+      char* m_string;
     };
+    void asgString(const char* x)
+    {
+      m_string=new char[strlen(x)+1];
+      strcpy(m_string,x);
+    }
   } variant;
 
 	struct SpreadColumn

@@ -275,7 +275,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 									table->column(j)->setColumnMode(SciDAVis::Text);
 									setAsText = true;
 								}
-								scidavis_column->setTextAt(i, (column.data[i].as_string()).c_str());
+								scidavis_column->setTextAt(i, column.data[i].as_string());
 							}
 						}
 						int f=0;
@@ -307,7 +307,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 			case Origin::Text:
 				table->column(j)->setColumnMode(SciDAVis::Text);
 				for (int i=0; i < min((int)column.data.size(), maxrows); ++i) {
-                                  scidavis_column->setTextAt(i, (column.data[i].as_string()).c_str());
+                                  scidavis_column->setTextAt(i, column.data[i].as_string());
 				}
 				break;
 			case Origin::Date:
