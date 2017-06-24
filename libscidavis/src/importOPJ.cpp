@@ -262,8 +262,8 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 						table->column(j)->setColumnMode(SciDAVis::Numeric);
 						for (int i=0; i < std::min((int)column.data.size(), maxrows); ++i) {
 							Origin::variant value(column.data[i]);
-							if (value.type == Origin::variant::V_DOUBLE) {
-								datavalue = value.as_double;
+							if (value.type() == Origin::variant::V_DOUBLE) {
+                                                          datavalue = value.as_double();
 								if (datavalue==_ONAN) continue; // mark for empty cell
 								if (!setAsText) {
 									scidavis_column->setValueAt(i, datavalue);
@@ -275,7 +275,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 									table->column(j)->setColumnMode(SciDAVis::Text);
 									setAsText = true;
 								}
-								scidavis_column->setTextAt(i, (column.data[i].as_string).c_str());
+								scidavis_column->setTextAt(i, (column.data[i].as_string()).c_str());
 							}
 						}
 						int f=0;
@@ -307,7 +307,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 			case Origin::Text:
 				table->column(j)->setColumnMode(SciDAVis::Text);
 				for (int i=0; i < min((int)column.data.size(), maxrows); ++i) {
-					scidavis_column->setTextAt(i, (column.data[i].as_string).c_str());
+                                  scidavis_column->setTextAt(i, (column.data[i].as_string()).c_str());
 				}
 				break;
 			case Origin::Date:
@@ -364,7 +364,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 							format="dd.MM.yyyy";
 					}
 					for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-						scidavis_column->setValueAt(i, column.data[i].as_double);
+                                          scidavis_column->setValueAt(i, column.data[i].as_double());
 					table->column(j)->setColumnMode(SciDAVis::DateTime);
 					DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(scidavis_column->outputFilter());
 					filter->setFormat(format);
@@ -408,7 +408,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 							break;
 					}
 					for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-						scidavis_column->setValueAt(i, column.data[i].as_double);
+                                          scidavis_column->setValueAt(i, column.data[i].as_double());
 					table->column(j)->setColumnMode(SciDAVis::DateTime);
 					DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
 					filter->setFormat(format);
@@ -428,7 +428,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 							break;
 					}
 					for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-						scidavis_column->setValueAt(i, column.data[i].as_double);
+                                          scidavis_column->setValueAt(i, column.data[i].as_double());
 					table->column(j)->setColumnMode(SciDAVis::Month);
 					DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
 					filter->setFormat(format);
@@ -449,7 +449,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 							break;
 					}
 					for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-						scidavis_column->setValueAt(i, column.data[i].as_double);
+                                          scidavis_column->setValueAt(i, column.data[i].as_double());
 					table->column(j)->setColumnMode(SciDAVis::Day);
 					DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
 					filter->setFormat(format);
