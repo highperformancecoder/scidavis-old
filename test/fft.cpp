@@ -27,15 +27,6 @@ void Unittests::fft()
   graph.insertCurve(&table,"x","y",Graph::Line);
 
   FFT fft1(this,&table,"y");
-  cout << "----" << endl;
-  for (auto i: *windowsList())
-    {
-      if (auto ml=dynamic_cast<Table*>(i))
-        {
-          cout << string(ml->name()) << endl;
-        }
-    }
-  cout << "----" << endl;
   fft1.run();
   // FFT creates a hidden table, which we need to find.
   Table* table1=nullptr;
@@ -57,7 +48,6 @@ void Unittests::fft()
     if (auto table=dynamic_cast<Table*>(i))
       if (table!=table1)
         {
-          cout << string(table->name()) << endl;
           table2=table;
           break;
         }
@@ -73,10 +63,6 @@ void Unittests::fft()
        auto& col1=*table1->column(c);
        auto& col2=*table2->column(c);
        for (int r=0; r<table1->numRows(); ++r)
-         {
-           cout << r << " " << c << " "<<col1.valueAt(r) << " "<<
-             col2.valueAt(r) << endl;
-           QVERIFY(col1.valueAt(r)==col2.valueAt(r));
-         }
+         QVERIFY(col1.valueAt(r)==col2.valueAt(r));
      }
 }
