@@ -71,7 +71,6 @@ void FFT::init ()
 
 QList<Column *> FFT::fftTable()
 {
-    int i;
 	double *amp = new double[d_n];
 
 	gsl_fft_complex_wavetable *wavetable = gsl_fft_complex_wavetable_alloc (d_n);
@@ -105,7 +104,7 @@ QList<Column *> FFT::fftTable()
 	if (d_shift_order)
 	{
 		int n2 = d_n/2;
-		for(i=0; i<d_n; i++)
+		for(int i=0; i<int(d_n); i++)
 		{
 			d_x[i] = (i-n2)*df;
 			int j = i + d_n;
@@ -116,11 +115,11 @@ QList<Column *> FFT::fftTable()
 	}
 	else
 	{
-		for(i=0; i<d_n; i++)
+		for(size_t i=0; i<d_n; i++)
 			d_x[i] = i*df;
 	}
 
-	for(i=0; i<d_n; i++)
+	for(size_t i=0; i<d_n; i++)
 	{
 		int i2 = 2*i;
 		double a = sqrt(d_y[i2]*d_y[i2] + d_y[i2+1]*d_y[i2+1]);
@@ -133,7 +132,7 @@ QList<Column *> FFT::fftTable()
 	columns << new Column(tr("Imaginary"), SciDAVis::Numeric);
 	columns << new Column(tr("Amplitude"), SciDAVis::Numeric);
 	columns << new Column(tr("Angle"), SciDAVis::Numeric);
-	for (i=0; i<d_n; i++)
+	for (size_t i=0; i<d_n; i++)
 	{
 		int i2 = 2*i;
 		columns.at(0)->setValueAt(i, d_x[i]);
