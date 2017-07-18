@@ -49,7 +49,6 @@ private:
     void output();
     void output(QList<Column *> columns);
 
-    QList<Column *> fftCurve();
     QList<Column *> fftTable();
 
     void setDataFromTable(Table *t, const QString& realColName, const QString& imagColName = QString());

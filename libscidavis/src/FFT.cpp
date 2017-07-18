@@ -69,14 +69,15 @@ void FFT::init ()
 	d_sampling = 1.0;
 }
 
-QList<Column *> FFT::fftCurve()
+QList<Column *> FFT::fftTable()
 {
-    int i2;
-	int n2 = d_n/2;
+    int i;
 	double *amp = new double[d_n];
-	double *result = new double[2*d_n];
 
-	if(!amp || !result)
+	gsl_fft_complex_wavetable *wavetable = gsl_fft_complex_wavetable_alloc (d_n);
+	gsl_fft_complex_workspace *workspace = gsl_fft_complex_workspace_alloc (d_n);
+
+	if(!amp || !wavetable || !workspace)
 	{
 		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
                         tr("Could not allocate memory, operation aborted!"));
@@ -89,133 +90,13 @@ QList<Column *> FFT::fftCurve()
 	QList<Column *> columns;
 	if(!d_inverse)
 	{
-        d_explanation = tr("Forward") + " " + tr("FFT") + " " + tr("of") + " " + d_curve->title().text();
 		columns << new Column(tr("Frequency"), SciDAVis::Numeric);
-
-		gsl_fft_real_workspace *work=gsl_fft_real_workspace_alloc(d_n);
-		gsl_fft_real_wavetable *real=gsl_fft_real_wavetable_alloc(d_n);
-
-		if(!work || !real)
-		{
-			QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
-                        tr("Could not allocate memory, operation aborted!"));
-            d_init_err = true;
-			return QList<Column *>();
-		}
-
-		gsl_fft_real_transform(d_y, 1, d_n, real,work);
-		gsl_fft_halfcomplex_unpack (d_y, result, 1, d_n);
-
-		gsl_fft_real_wavetable_free(real);
-		gsl_fft_real_workspace_free(work);
-	}
-	else
-	{
-        d_explanation = tr("Inverse") + " " + tr("FFT") + " " + tr("of") + " " + d_curve->title().text();
-		columns << new Column(tr("Time"), SciDAVis::Numeric);
-
-		gsl_fft_real_unpack (d_y, result, 1, d_n);
-		gsl_fft_complex_wavetable *wavetable = gsl_fft_complex_wavetable_alloc (d_n);
-		gsl_fft_complex_workspace *workspace = gsl_fft_complex_workspace_alloc (d_n);
-
-		if(!workspace || !wavetable)
-		{
-			QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
-                        tr("Could not allocate memory, operation aborted!"));
-            d_init_err = true;
-			return QList<Column *>();
-		}
-
-		gsl_fft_complex_inverse (result, 1, d_n, wavetable, workspace);
-		gsl_fft_complex_wavetable_free (wavetable);
-		gsl_fft_complex_workspace_free (workspace);
-	}
-
-	if (d_shift_order)
-	{
-		for(unsigned i=0; i<d_n; i++)
-		{
-			d_x[i] = (i-n2)*df;
-			int j = i + d_n;
-			double aux = result[i];
-			result[i] = result[j];
-			result[j] = aux;
-		}
-	}
-	else
-	{
-		for(unsigned i=0; i<d_n; i++)
-			d_x[i] = i*df;
-	}
-
-	for(unsigned i=0;i<d_n;i++)
-	{
-		i2 = 2*i;
-		double real_part = result[i2];
-		double im_part = result[i2+1];
-		double a = sqrt(real_part*real_part + im_part*im_part);
-		amp[i]= a;
-		if (a > aMax)
-			aMax = a;
-	}
-
-        //	ApplicationWindow *app = (ApplicationWindow *)parent();
-
-	columns << new Column(tr("Real"), SciDAVis::Numeric);
-	columns << new Column(tr("Imaginary"), SciDAVis::Numeric);
-	columns << new Column(tr("Amplitude"), SciDAVis::Numeric);
-	columns << new Column(tr("Angle"), SciDAVis::Numeric);
-	for (unsigned i=0;i<d_n;i++)
-	{
-		i2 = 2*i;
-		columns.at(0)->setValueAt(i, d_x[i]);
-		columns.at(1)->setValueAt(i, result[i2]);
-		columns.at(2)->setValueAt(i, result[i2+1]);
-		if (d_normalize)
-			columns.at(3)->setValueAt(i, amp[i]/aMax);
-		else
-			columns.at(3)->setValueAt(i, amp[i]);
-		columns.at(4)->setValueAt(i, atan(result[i2+1]/result[i2]));
-	}
-	delete[] amp;
-	delete[] result;
-	columns.at(0)->setPlotDesignation(SciDAVis::X);
-	columns.at(1)->setPlotDesignation(SciDAVis::Y);
-	columns.at(2)->setPlotDesignation(SciDAVis::Y);
-	columns.at(3)->setPlotDesignation(SciDAVis::Y);
-	columns.at(4)->setPlotDesignation(SciDAVis::Y);
-    return columns;
-}
-
-QList<Column *> FFT::fftTable()
-{
-    int i;
-    int rows = d_n;
-	double *amp = new double[rows];
-
-	gsl_fft_complex_wavetable *wavetable = gsl_fft_complex_wavetable_alloc (rows);
-	gsl_fft_complex_workspace *workspace = gsl_fft_complex_workspace_alloc (rows);
-
-	if(!amp || !wavetable || !workspace)
-	{
-		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
-                        tr("Could not allocate memory, operation aborted!"));
-        d_init_err = true;
-        return QList<Column *>();
-	}
-
-	double df = 1.0/(double)(rows*d_sampling);//frequency sampling
-	double aMax = 0.0;//max amplitude
-	QList<Column *> columns;
-	if(!d_inverse)
-	{
-		columns << new Column(tr("Frequency"), SciDAVis::Numeric);
-		gsl_fft_complex_forward (d_y, 1, rows, wavetable, workspace);
+		gsl_fft_complex_forward (d_y, 1, d_n, wavetable, workspace);
 	}
 	else
 	{
 		columns << new Column(tr("Time"), SciDAVis::Numeric);
-		gsl_fft_complex_inverse (d_y, 1, rows, wavetable, workspace);
+		gsl_fft_complex_inverse (d_y, 1, d_n, wavetable, workspace);
 	}
 
 	gsl_fft_complex_wavetable_free (wavetable);
@@ -223,11 +104,11 @@ QList<Column *> FFT::fftTable()
 
 	if (d_shift_order)
 	{
-		int n2 = rows/2;
-		for(i=0; i<rows; i++)
+		int n2 = d_n/2;
+		for(i=0; i<d_n; i++)
 		{
 			d_x[i] = (i-n2)*df;
-			int j = i + rows;
+			int j = i + d_n;
 			double aux = d_y[i];
 			d_y[i] = d_y[j];
 			d_y[j] = aux;
@@ -235,11 +116,11 @@ QList<Column *> FFT::fftTable()
 	}
 	else
 	{
-		for(i=0; i<rows; i++)
+		for(i=0; i<d_n; i++)
 			d_x[i] = i*df;
 	}
 
-	for(i=0; i<rows; i++)
+	for(i=0; i<d_n; i++)
 	{
 		int i2 = 2*i;
 		double a = sqrt(d_y[i2]*d_y[i2] + d_y[i2+1]*d_y[i2+1]);
@@ -252,7 +133,7 @@ QList<Column *> FFT::fftTable()
 	columns << new Column(tr("Imaginary"), SciDAVis::Numeric);
 	columns << new Column(tr("Amplitude"), SciDAVis::Numeric);
 	columns << new Column(tr("Angle"), SciDAVis::Numeric);
-	for (i=0; i<rows; i++)
+	for (i=0; i<d_n; i++)
 	{
 		int i2 = 2*i;
 		columns.at(0)->setValueAt(i, d_x[i]);
@@ -276,9 +157,6 @@ QList<Column *> FFT::fftTable()
 void FFT::output()
 {
     QList<Column *> columns;
-//    if (d_graph && d_curve)
-//        columns = fftCurve();
-//    else if (d_table)
     if (d_y)
         columns = fftTable();
 
