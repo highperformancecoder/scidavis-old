@@ -14,4 +14,6 @@ private slots:
   
   void showHelp();
   void chooseHelpFolder();
+
+  void fft();
 };

@@ -42,7 +42,7 @@ QT+=testlib
 
 # Input
 HEADERS += unittests.h
-SOURCES += unittests.cpp applicationWindow.cpp readWriteProject.cpp
+SOURCES += unittests.cpp applicationWindow.cpp readWriteProject.cpp fft.cpp
 
 ########### Future code backported from the aspect framework ##################
 DEFINES += LEGACY_CODE_0_2_x

@@ -50,6 +50,12 @@ FFT::FFT(ApplicationWindow *parent, Graph *g, const QString& curveTitle)
 {
 	init();
     setDataFromCurve(curveTitle);
+        // intersperse 0 imaginary components
+    double* tmp=new double[2*d_n];
+    memset(tmp,0,2*d_n*sizeof(double));
+    for (size_t i=0; i<d_n; ++i) tmp[2*i]=d_y[i];
+    delete [] d_y;
+    d_y=tmp;
 }
 
 void FFT::init ()
@@ -184,7 +190,7 @@ QList<Column *> FFT::fftCurve()
 QList<Column *> FFT::fftTable()
 {
     int i;
-	int rows = d_table->numRows();
+    int rows = d_n;
 	double *amp = new double[rows];
 
 	gsl_fft_complex_wavetable *wavetable = gsl_fft_complex_wavetable_alloc (rows);
@@ -270,9 +276,10 @@ QList<Column *> FFT::fftTable()
 void FFT::output()
 {
     QList<Column *> columns;
-    if (d_graph && d_curve)
-        columns = fftCurve();
-    else if (d_table)
+//    if (d_graph && d_curve)
+//        columns = fftCurve();
+//    else if (d_table)
+    if (d_y)
         columns = fftTable();
 
     if (!columns.isEmpty())
