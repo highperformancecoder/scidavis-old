@@ -720,6 +720,12 @@ class QwtPlotCurve
 		double minYValue() const;
 		double maxYValue() const;
 
+		int xAxis() const;
+		void setXAxis(int);
+
+		int yAxis () const;
+		void setYAxis(int);
+
 		void setPen(const QPen &);
 		const QPen &pen() const;
 
@@ -875,6 +881,7 @@ class Graph : QWidget /PyName=Layer/
 #include <qwt_plot_canvas.h>
 %End
 public:
+  enum Axis{Left, Right, Bottom, Top};
   bool isPiePlot();
   SIP_PYOBJECT pieLegendText() /PyName=pieLegend/;
 %MethodCode
@@ -1009,6 +1016,28 @@ public:
   void setIgnoreResizeEvents(bool = true)/PyName=setIgnoreResize/;
   void setAutoscaleFonts(bool = true);
   void setAntialiasing(bool on = true, bool update = true);
+
+    void setCurveAxes(int,int,int);
+%MethodCode
+	sipIsErr = 0;
+	if ((a1 > 3) || (a1 < 2) || (a2 > 1) || (a2 < 0))
+    {
+         sipIsErr=1;
+         PyErr_Format(PyExc_ValueError, "Invalid axis attachment!");\
+    }
+	if (a0>=sipCpp->curves())
+	{
+         sipIsErr=1;
+         PyErr_Format(PyExc_ValueError, "Invalid curve index! is %d, should be less than %d",a0,sipCpp->curves());\
+	}
+	if (sipIsErr == 0)
+	{
+        QwtPlotItem* pItem;
+		pItem = sipCpp->plotItem(a0);
+		pItem->setAxis(a1, a2);
+		sipCpp->setAutoScale();
+	}
+%End
 
   QWidget * canvas() const;
 %MethodCode
