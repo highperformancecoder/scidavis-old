@@ -103,11 +103,15 @@ void BoxCurve::drawBox(QPainter *painter, const QwtScaleMap &xMap,
   const int hbw = box_width/2;
   const int median = yMap.transform(gsl_stats_median_from_sorted_data (dat, 1, size));
   int b_lowerq, b_upperq;
+  double sd = 0;
+  double se = 0;
+  double mean = 0;
   if(w_range == SD || w_range == SE || b_range == SD || b_range == SE)
     {
-      double sd = gsl_stats_sd(dat, 1, size);
-      double se = sd/sqrt((double)size);
-      double mean = gsl_stats_mean(dat, 1, size);
+      sd = gsl_stats_sd(dat, 1, size);
+      se = sd/sqrt((double)size);
+      mean = gsl_stats_mean(dat, 1, size);
+    }
 
       if(b_range == SD)
 	{
@@ -224,7 +228,6 @@ void BoxCurve::drawBox(QPainter *painter, const QwtScaleMap &xMap,
         painter->drawLine(int(px - 0.4*box_width), median, int(px + 0.4*box_width), median);
       else
         painter->drawLine(px - hbw, median, px + hbw, median);
-    }
 }
 
 void BoxCurve::drawSymbols(QPainter *painter, const QwtScaleMap &xMap,
