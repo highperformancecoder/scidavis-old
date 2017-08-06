@@ -61,7 +61,7 @@ unix:message(Building with preset $$PRESET)
 
 ### Linux Desktop integration
 !contains(PRESET, self_contained) {
-	unix:INSTALLS   += desktop_entry mime_package mime_link icons
+	unix:INSTALLS   += desktop_entry mime_package mime_link icons man_page
 }
 
 ################################################################################
@@ -135,6 +135,9 @@ unix {# Linux / MacOS X
 
 	mime_package.files = scidavis/scidavis.xml
 	mime_package.path = "$$INSTALLBASE/share/mime/packages"
+
+	man_page.files = scidavis.1
+	man_page.path = "$$INSTALLBASE/share/man/man1/scidavis.1"
 
 	#deprecated
 	mime_link.files = scidavis/x-sciprj.desktop

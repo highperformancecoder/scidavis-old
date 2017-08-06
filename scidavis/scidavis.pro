@@ -52,6 +52,9 @@ unix {
 	mime_package.files = scidavis.xml
 	mime_package.path = "$$INSTALLBASE/share/mime/packages"
 
+	man_page.files = scidavis.1
+	man_page.path = "$$INSTALLBASE/share/man/man1/scidavis.1"
+
 	#deprecated
 	mime_link.files = x-sciprj.desktop
 	mime_link.path = "$$INSTALLBASE/share/mimelnk/application"
