@@ -26,10 +26,15 @@ rewrite_dylibs()
         fi
     done
     otool -L $target|grep usr/local|cut -f1 -d' '|while read dylib; do
-        cp -f $dylib $MAC_DIST_DIR
-        chmod u+rw $MAC_DIST_DIR/${dylib##*/}
-        rewrite_dylibs $MAC_DIST_DIR/${dylib##*/}
-        install_name_tool -change $dylib @executable_path/${dylib##*/} $target
+        if [ "${dylib##*/}" == "${target##*/}" ]; then 
+            install_name_tool -change $dylib @executable_path/${dylib##*/} $target
+            continue
+        else
+            cp -f $dylib $MAC_DIST_DIR
+            chmod u+rw $MAC_DIST_DIR/${dylib##*/}
+            rewrite_dylibs $MAC_DIST_DIR/${dylib##*/}
+            install_name_tool -change $dylib @executable_path/${dylib##*/} $target
+        fi
     done
 }
 
