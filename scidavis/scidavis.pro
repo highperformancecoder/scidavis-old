@@ -35,8 +35,13 @@ INSTALLS        += translationfiles
 win32:INSTALLS  += win_icon
 
 liborigin {
-  LIBS += ../3rdparty/liborigin/liborigin.a
-  POST_TARGETDEPS += ../3rdparty/liborigin/liborigin.a
+  LIBORIGINDIR=../3rdparty/liborigin
+  win32 {
+    Debug: LIBORIGINDIR=$${LIBORIGINDIR}/debug
+    Release: LIBORIGINDIR=$${LIBORIGINDIR}/release
+  }
+  LIBS += $${LIBORIGINDIR}/liborigin.a
+  POST_TARGETDEPS += $${LIBORIGINDIR}/liborigin.a
 }
 
 ########### Future code backported from the aspect framework ##################

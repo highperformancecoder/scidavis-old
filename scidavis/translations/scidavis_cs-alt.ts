@@ -4,9 +4,10 @@
 <context>
     <name>AbstractAspect</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="79"/>
         <source>XML read error: </source>
         <comment>prefix for XML error messages</comment>
-        <translation type="obsolete">Chyba čtení XML dat:</translation>
+        <translation type="unfinished">Chyba čtení XML dat:</translation>
     </message>
     <message>
         <source> (loading failed)</source>
@@ -18,75 +19,98 @@
         <translation type="obsolete">Chybí název aspektu</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="80"/>
         <source> (non-critical)</source>
         <comment>postfix for XML error messages</comment>
-        <translation type="obsolete"> (nekritický)</translation>
+        <translation type="unfinished"> (nekritický)</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="89"/>
         <source>aspect name missing or empty</source>
-        <translation type="obsolete">název aspektu chybí nebo je prázdný</translation>
+        <translation type="unfinished">název aspektu chybí nebo je prázdný</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="97"/>
         <source>Invalid creation time for &apos;%1&apos;. Using current time.</source>
-        <translation type="obsolete">Neplatný čas vytvoření &apos;%1&apos;. Bude použit aktuální čas.</translation>
+        <translation type="unfinished">Neplatný čas vytvoření &apos;%1&apos;. Bude použit aktuální čas.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="118"/>
         <source>%1: add %2.</source>
-        <translation type="obsolete">%1: přidat %2.</translation>
+        <translation type="unfinished">%1: přidat %2.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="120"/>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="134"/>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="165"/>
         <source>Renaming &quot;%1&quot; to &quot;%2&quot; in order to avoid name collision.</source>
-        <translation type="obsolete">Přejmenovávám&quot;%1&quot;na &quot;%2&quot;, aby se předešlo kolizi názvů.</translation>
+        <translation type="unfinished">Přejmenovávám&quot;%1&quot;na &quot;%2&quot;, aby se předešlo kolizi názvů.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="132"/>
         <source>%1: insert %2 at position %3.</source>
-        <translation type="obsolete">%1: vložit %2 na pozici %3.</translation>
+        <translation type="unfinished">%1: vložit %2 na pozici %3.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="145"/>
         <source>%1: remove %2.</source>
-        <translation type="obsolete">%1: odstranit %2.</translation>
+        <translation type="unfinished">%1: odstranit %2.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="250"/>
+        <source>Tabs and line breaks in object names are currently not supported. They have been removed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="254"/>
         <source>Intended name &quot;%1&quot; diverted to &quot;%2&quot; in order to avoid name collision.</source>
-        <translation type="obsolete">Zamýšlený název &quot;%1&quot; bude změněn na &quot;%2&quot;, aby se předešlo kolizi názvů.</translation>
+        <translation type="unfinished">Zamýšlený název &quot;%1&quot; bude změněn na &quot;%2&quot;, aby se předešlo kolizi názvů.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="354"/>
         <source>%1: remove all children.</source>
-        <translation type="obsolete">%1: odstranit všechny potomky.</translation>
+        <translation type="unfinished">%1: odstranit všechny potomky.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="163"/>
         <source>%1: move %2 to %3.</source>
-        <translation type="obsolete">%1: přesunout %2 do %3.</translation>
+        <translation type="unfinished">%1: přesunout %2 do %3.</translation>
     </message>
 </context>
 <context>
     <name>AbstractPart</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractPart.cpp" line="51"/>
         <source>&amp;Restore</source>
-        <translation type="obsolete">&amp;Obnovit</translation>
+        <translation type="unfinished">&amp;Obnovit</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractPart.cpp" line="56"/>
         <source>Mi&amp;nimize</source>
-        <translation type="obsolete">Mi&amp;nimalizovat</translation>
+        <translation type="unfinished">Mi&amp;nimalizovat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractPart.cpp" line="61"/>
         <source>Ma&amp;ximize</source>
-        <translation type="obsolete">Ma&amp;ximalizovat</translation>
+        <translation type="unfinished">Ma&amp;ximalizovat</translation>
     </message>
 </context>
 <context>
     <name>AbstractSimpleFilter</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractSimpleFilter.cpp" line="145"/>
         <source>incompatible filter type</source>
-        <translation type="obsolete">nekompatibilní typ filtru</translation>
+        <translation type="unfinished">nekompatibilní typ filtru</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractSimpleFilter.cpp" line="164"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="obsolete">neznámý prvek: &apos;%1&apos;</translation>
+        <translation type="unfinished">neznámý prvek: &apos;%1&apos;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractSimpleFilter.cpp" line="171"/>
         <source>no simple filter element found</source>
-        <translation type="obsolete">nenalezen žádný prvek typu Simple Filter</translation>
+        <translation type="unfinished">nenalezen žádný prvek typu Simple Filter</translation>
     </message>
 </context>
 <context>
@@ -2222,6 +2246,7 @@ Chcete pokračovat?</translation>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11578"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13095"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13141"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="505"/>
         <source>Graph</source>
         <translation type="unfinished">Graf</translation>
     </message>
@@ -4021,8 +4046,9 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
 <context>
     <name>AsciiTableImportFilter</name>
     <message>
+        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="176"/>
         <source>Table</source>
-        <translation type="obsolete">Tabulka</translation>
+        <translation type="unfinished">Tabulka</translation>
     </message>
 </context>
 <context>
@@ -4701,59 +4727,73 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
 <context>
     <name>Column</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="377"/>
         <source>column type missing</source>
-        <translation type="obsolete">chybí typ sloupce</translation>
+        <translation type="unfinished">chybí typ sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="383"/>
         <source>column type invalid</source>
-        <translation type="obsolete">neplatný typ sloupce</translation>
+        <translation type="unfinished">neplatný typ sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="390"/>
         <source>column mode missing</source>
-        <translation type="obsolete">chybí režim sloupce</translation>
+        <translation type="unfinished">chybí režim sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="396"/>
         <source>column mode invalid</source>
-        <translation type="obsolete">neplatný režim sloupce</translation>
+        <translation type="unfinished">neplatný režim sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="402"/>
         <source>column type or mode invalid</source>
-        <translation type="obsolete">neplatný typ nebo režim sloupce</translation>
+        <translation type="unfinished">neplatný typ nebo režim sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="412"/>
         <source>column plot designation invalid</source>
-        <translation type="obsolete">neplatné označení sloupce</translation>
+        <translation type="unfinished">neplatné označení sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="448"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="obsolete">neznámý element &apos;%1&apos;</translation>
+        <translation type="unfinished">neznámý element &apos;%1&apos;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="457"/>
         <source>no column element found</source>
-        <translation type="obsolete">nenalezen žádný prvek sloupce</translation>
+        <translation type="unfinished">nenalezen žádný prvek sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="492"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="511"/>
         <source>invalid or missing start or end row</source>
-        <translation type="obsolete">neplatný nebo chybějící začátek/konec řádku</translation>
+        <translation type="unfinished">neplatný nebo chybějící začátek/konec řádku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="532"/>
         <source>invalid or missing row type</source>
-        <translation type="obsolete">neplatný nebo chybějící typ řádku</translation>
+        <translation type="unfinished">neplatný nebo chybějící typ řádku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="540"/>
         <source>invalid or missing row index</source>
-        <translation type="obsolete">neplatný nebo chybějící index řádku</translation>
+        <translation type="unfinished">neplatný nebo chybějící index řádku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="552"/>
         <source>invalid row value</source>
-        <translation type="obsolete">neplatná hodnota řádku</translation>
+        <translation type="unfinished">neplatná hodnota řádku</translation>
     </message>
 </context>
 <context>
     <name>ColumnStringIO</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="335"/>
         <source>as string</source>
-        <translation type="obsolete">jako řetězec</translation>
+        <translation type="unfinished">jako řetězec</translation>
     </message>
 </context>
 <context>
@@ -5418,146 +5458,178 @@ Mohou být použuty následující kódy:
 <context>
     <name>ControlTabs</name>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="26"/>
         <source>Control Tabs</source>
-        <translation type="obsolete">Ovládací prvky</translation>
+        <translation type="unfinished">Ovládací prvky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="54"/>
         <source>Description</source>
-        <translation type="obsolete">Popis</translation>
+        <translation type="unfinished">Popis</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="62"/>
         <source>go to previous column</source>
-        <translation type="obsolete">Jít na předchozí sloupec</translation>
+        <translation type="unfinished">Jít na předchozí sloupec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="65"/>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="78"/>
         <source>...</source>
-        <translation type="obsolete">...</translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="75"/>
         <source>go to next column</source>
-        <translation type="obsolete">Jít na další sloupec</translation>
+        <translation type="unfinished">Jít na další sloupec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="88"/>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="170"/>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="388"/>
         <source>Appl&amp;y</source>
-        <translation type="obsolete">P&amp;oužít</translation>
+        <translation type="unfinished">P&amp;oužít</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="109"/>
         <source>Name:</source>
-        <translation type="obsolete">Název:</translation>
+        <translation type="unfinished">Název:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="128"/>
         <source>Comment:</source>
-        <translation type="obsolete">Komentář:</translation>
+        <translation type="unfinished">Komentář:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="152"/>
         <source>Type</source>
-        <translation type="obsolete">Typ</translation>
+        <translation type="unfinished">Typ</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="164"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použít nový typ a formát na všechny vybrané sloupce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použít nový typ a formát na všechny vybrané sloupce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="180"/>
         <source>Type:</source>
-        <translation type="obsolete">Typ:</translation>
+        <translation type="unfinished">Typ:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="202"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select the column type&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyberte typ sloupce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyberte typ sloupce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="212"/>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="244"/>
         <source>Format:</source>
-        <translation type="obsolete">Formát:</translation>
+        <translation type="unfinished">Formát:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="234"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zvolte formát zobrazení&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zvolte formát zobrazení&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="254"/>
         <source>Decimal Digits:</source>
-        <translation type="obsolete">Desetinná místa:</translation>
+        <translation type="unfinished">Desetinná místa:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="264"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zadejte počet zobrazených desetinných míst&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zadejte počet zobrazených desetinných míst&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="280"/>
         <source>Numbers are</source>
-        <translation type="obsolete">Čísla jsou</translation>
+        <translation type="unfinished">Čísla jsou</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="290"/>
         <source>since</source>
-        <translation type="obsolete">od</translation>
+        <translation type="unfinished">od</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="349"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informace o zvoleném typu a formátu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informace o zvoleném typu a formátu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="366"/>
         <source>Formula</source>
-        <translation type="obsolete">Vzorec</translation>
+        <translation type="unfinished">Vzorec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="372"/>
         <source>Formula:</source>
-        <translation type="obsolete">Vzorec:</translation>
+        <translation type="unfinished">Vzorec:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="382"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použít vzorec na všechny vybrané buňky&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="417"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyberte odkaz na sloupce pro vložení do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyberte odkaz na sloupce pro vložení do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="427"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vložte do vzorce odkaz na sloupec.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vložte do vzorce odkaz na sloupec.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="433"/>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="463"/>
         <source>Add</source>
-        <translation type="obsolete">Přidat</translation>
+        <translation type="unfinished">Přidat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="446"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyberte funkci pro vložení do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vyberte funkci pro vložení do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/controltabs.ui" line="456"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Insert the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;￼&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Vložte funkci do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;￼&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Vložte funkci do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -5963,23 +6035,27 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>DimensionsDialog</name>
     <message>
+        <location filename="../../libscidavis/src/future/table/DimensionsDialog.ui" line="13"/>
         <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
+        <translation type="unfinished">Dialog</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/DimensionsDialog.ui" line="21"/>
         <source>Rows</source>
-        <translation type="obsolete">Řádky</translation>
+        <translation type="unfinished">Řádky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/DimensionsDialog.ui" line="39"/>
         <source>Columns</source>
-        <translation type="obsolete">Sloupce</translation>
+        <translation type="unfinished">Sloupce</translation>
     </message>
 </context>
 <context>
     <name>Double2StringFilter</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/datatypes/Double2StringFilter.cpp" line="51"/>
         <source>missing or invalid format attribute(s)</source>
-        <translation type="obsolete">chybějící nebo neplatný atribut(y) formátu</translation>
+        <translation type="unfinished">chybějící nebo neplatný atribut(y) formátu</translation>
     </message>
 </context>
 <context>
@@ -6265,102 +6341,81 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FFT</name>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="57"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="86"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="108"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="63"/>
         <source>FFT</source>
         <translation type="unfinished">FFT</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="75"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="94"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="117"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="195"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="343"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="81"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="227"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="76"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="95"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="118"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="196"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="344"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="82"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="228"/>
         <source>Could not allocate memory, operation aborted!</source>
         <translation type="unfinished">Nemohu rezervovat dostatek paměti, operace zrušena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="86"/>
         <source>Forward</source>
-        <translation type="unfinished">Další</translation>
+        <translation type="obsolete">Další</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="86"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="108"/>
         <source>of</source>
-        <translation type="unfinished">z</translation>
+        <translation type="obsolete">z</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="87"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="206"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="299"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="92"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="183"/>
         <source>Frequency</source>
         <translation type="unfinished">Frekvence</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="108"/>
         <source>Inverse</source>
-        <translation type="unfinished">Inverzní</translation>
+        <translation type="obsolete">Inverzní</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="109"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="211"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="301"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="97"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="185"/>
         <source>Time</source>
         <translation type="unfinished">Čas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="158"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="245"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="131"/>
         <source>Real</source>
         <translation type="unfinished">Reálná složka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="159"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="246"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="132"/>
         <source>Imaginary</source>
         <translation type="unfinished">Imaginární složka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="160"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="247"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="287"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="303"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="133"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="171"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="187"/>
         <source>Amplitude</source>
         <translation type="unfinished">Amplituda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="161"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="248"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="134"/>
         <source>Angle</source>
         <translation type="unfinished">Úhel</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="299"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="183"/>
         <source>Hz</source>
         <translation type="unfinished">Hz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="301"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="185"/>
         <source>s</source>
         <translation type="unfinished">s</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFT.cpp" line="75"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="94"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="117"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="195"/>
-        <location filename="../../libscidavis/src/FFT.cpp" line="343"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="81"/>
+        <location filename="../../libscidavis/src/FFT.cpp" line="227"/>
         <source>SciDAVis</source>
         <translation type="unfinished">SciDAVis</translation>
     </message>
@@ -7693,8 +7748,9 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Zadejte prosím platný název souboru!</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/Graph.h" line="609"/>
         <source>F</source>
-        <translation type="obsolete">F</translation>
+        <translation type="unfinished">F</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Graph.cpp" line="4010"/>
@@ -9462,155 +9518,188 @@ Limity musí být v rozsahu hodnot X. Pokud neznáte maximální ani minimální
 <context>
     <name>MatrixControlTabs</name>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="25"/>
         <source>Control Tabs</source>
-        <translation type="obsolete">Ovládací prvky</translation>
+        <translation type="unfinished">Ovládací prvky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="53"/>
         <source>Coordinates</source>
-        <translation type="obsolete">Souřadnice</translation>
+        <translation type="unfinished">Souřadnice</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="59"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="346"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="502"/>
         <source>Appl&amp;y</source>
-        <translation type="obsolete">&amp;Použít</translation>
+        <translation type="unfinished">&amp;Použít</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="69"/>
         <source>First column X =</source>
-        <translation type="obsolete">Hodnota X prvního sloupce =</translation>
+        <translation type="unfinished">Hodnota X prvního sloupce =</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="126"/>
         <source>Last column X =</source>
-        <translation type="obsolete">Hodnota X posledního sloupce =</translation>
+        <translation type="unfinished">Hodnota X posledního sloupce =</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="180"/>
         <source>First row Y =</source>
-        <translation type="obsolete">Hodnota Y prvního řádku =</translation>
+        <translation type="unfinished">Hodnota Y prvního řádku =</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="328"/>
         <source>Format</source>
-        <translation type="obsolete">Formát</translation>
+        <translation type="unfinished">Formát</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="340"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použít nový typ a formát na všechny vybrané sloupce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použít nový typ a formát na všechny vybrané sloupce.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="353"/>
         <source>Format:</source>
-        <translation type="obsolete">Formát:</translation>
+        <translation type="unfinished">Formát:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="375"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vybrat formát zobrazení&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vybrat formát zobrazení&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="388"/>
         <source>Decimal Digits:</source>
-        <translation type="obsolete">Desetinná místa:</translation>
+        <translation type="unfinished">Desetinná místa:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="398"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zadejte počet zobrazovaných desetinných míst&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Zadejte počet zobrazovaných desetinných míst&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="463"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informace o vybraném typu a formátu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informace o vybraném typu a formátu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="480"/>
         <source>Formula</source>
-        <translation type="obsolete">Vzorec</translation>
+        <translation type="unfinished">Vzorec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="486"/>
         <source>Formula:</source>
-        <translation type="obsolete">Vzorec:</translation>
+        <translation type="unfinished">Vzorec:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="496"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použít vzorec na všechny vybrané buňky&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Použít vzorec na všechny vybrané buňky&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="528"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vybrat odkaz na sloupec k vložení do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vybrat odkaz na sloupec k vložení do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="538"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vložit odkaz na sloupec do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vložit odkaz na sloupec do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="544"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="573"/>
         <source>Add</source>
-        <translation type="obsolete">Přidat</translation>
+        <translation type="unfinished">Přidat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="557"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vybrat funkci k vložení do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vybrat funkci k vložení do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="567"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Inset the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vložit funkci do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vložit funkci do vzorce&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcontroltabs.ui" line="231"/>
         <source>Last row Y =</source>
-        <translation type="obsolete">Hodnota Y posledního řádku =</translation>
+        <translation type="unfinished">Hodnota Y posledního řádku =</translation>
     </message>
 </context>
 <context>
     <name>MatrixView</name>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="150"/>
         <source>Ctrl+A</source>
         <comment>Matrix: select all</comment>
-        <translation type="obsolete">Ctrl+A</translation>
+        <translation type="unfinished">Ctrl+A</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="200"/>
         <source>Show/hide control tabs</source>
-        <translation type="obsolete">Zobrazit/skrýt ovládací prvky</translation>
+        <translation type="unfinished">Zobrazit/skrýt ovládací prvky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="203"/>
         <source>Decimal</source>
-        <translation type="obsolete">Desetinný</translation>
+        <translation type="unfinished">Desetinný</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="204"/>
         <source>Scientific (e)</source>
-        <translation type="obsolete">Vědecký (e)</translation>
+        <translation type="unfinished">Vědecký (e)</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="205"/>
         <source>Scientific (E)</source>
-        <translation type="obsolete">Vědecký (E)</translation>
+        <translation type="unfinished">Vědecký (E)</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="507"/>
         <source>Example: %1</source>
-        <translation type="obsolete">Příklad: %1</translation>
+        <translation type="unfinished">Příklad: %1</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="206"/>
         <source>Automatic (e)</source>
-        <translation type="obsolete">Automatický (e)</translation>
+        <translation type="unfinished">Automatický (e)</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="207"/>
         <source>Automatic (E)</source>
-        <translation type="obsolete">Automatický (E)</translation>
+        <translation type="unfinished">Automatický (E)</translation>
     </message>
 </context>
 <context>
@@ -11971,47 +12060,57 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Project</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/Project.cpp" line="76"/>
         <source>Unnamed</source>
-        <translation type="obsolete">Nepojmenovaný</translation>
+        <translation type="unfinished">Nepojmenovaný</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/Project.cpp" line="194"/>
         <source>invalid or missing project version</source>
-        <translation type="obsolete">napletná nebo chybějící verze projektu</translation>
+        <translation type="unfinished">napletná nebo chybějící verze projektu</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/Project.cpp" line="217"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="obsolete">neplatný element &apos;%1&apos;</translation>
+        <translation type="unfinished">neplatný element &apos;%1&apos;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/Project.cpp" line="224"/>
         <source>no scidavis_project element found</source>
-        <translation type="obsolete">nenalezen žádný scidavis_project-element</translation>
+        <translation type="unfinished">nenalezen žádný scidavis_project-element</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/Project.cpp" line="227"/>
         <source>no valid XML document found</source>
-        <translation type="obsolete">nenalezen žádný platný XML-dokument</translation>
+        <translation type="unfinished">nenalezen žádný platný XML-dokument</translation>
     </message>
 </context>
 <context>
     <name>ProjectConfigPage</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/ProjectConfigPage.ui" line="13"/>
         <source>Form</source>
-        <translation type="obsolete">Formulář</translation>
+        <translation type="unfinished">Formulář</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/ProjectConfigPage.ui" line="21"/>
         <source>By default, show the subwindows ...</source>
-        <translation type="obsolete">Ve výchozím stavu zobrazovat podokna...</translation>
+        <translation type="unfinished">Ve výchozím stavu zobrazovat podokna...</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/ProjectConfigPage.ui" line="41"/>
         <source>in the current folder</source>
-        <translation type="obsolete">v aktuální složce</translation>
+        <translation type="unfinished">v aktuální složce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/ProjectConfigPage.ui" line="46"/>
         <source>in the current folder and its subfolders</source>
-        <translation type="obsolete">v aktuální složce a jejích podsložkách</translation>
+        <translation type="unfinished">v aktuální složce a jejích podsložkách</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/ProjectConfigPage.ui" line="51"/>
         <source>all subwindows in the project</source>
-        <translation type="obsolete">všechna podokna projektu</translation>
+        <translation type="unfinished">všechna podokna projektu</translation>
     </message>
 </context>
 <context>
@@ -12030,88 +12129,132 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractAspect.cpp" line="310"/>
         <source>&amp;Remove</source>
-        <translation type="obsolete">&amp;Odstranit</translation>
+        <translation type="unfinished">&amp;Odstranit</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="120"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="38"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="180"/>
+        <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="44"/>
         <source>%1: insert %2 column(s)</source>
-        <translation type="obsolete">%1: vložit %2 sloupců</translation>
+        <translation type="unfinished">%1: vložit %2 sloupců</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="130"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="90"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="193"/>
+        <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="101"/>
         <source>%1: remove %2 column(s)</source>
-        <translation type="obsolete">%1: odstranit %2 sloupců</translation>
+        <translation type="unfinished">%1: odstranit %2 sloupců</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="244"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="140"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="125"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="213"/>
         <source>%1: remove %2 row(s)</source>
-        <translation type="obsolete">%1: odstranit %2 řádků</translation>
+        <translation type="unfinished">%1: odstranit %2 řádků</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="216"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="150"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="64"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="227"/>
         <source>%1: insert %2 row(s)</source>
-        <translation type="obsolete">%1: vložit %2 řádků</translation>
+        <translation type="unfinished">%1: vložit %2 řádků</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="160"/>
         <source>%1: set matrix size to %2x%3</source>
-        <translation type="obsolete">%1: nastavit velikost matice na %2x%3</translation>
+        <translation type="unfinished">%1: nastavit velikost matice na %2x%3</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="188"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="160"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="307"/>
         <source>%1: clear</source>
-        <translation type="obsolete">%1: vyčistit</translation>
+        <translation type="unfinished">%1: vyčistit</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="329"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="682"/>
         <source>%1: insert empty column(s)</source>
-        <translation type="obsolete">%1: vložit prázdné sloupce</translation>
+        <translation type="unfinished">%1: vložit prázdné sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="353"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="709"/>
         <source>%1: remove selected column(s)</source>
-        <translation type="obsolete">%1: odstranit vybrané sloupce</translation>
+        <translation type="unfinished">%1: odstranit vybrané sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="364"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="723"/>
         <source>%1: clear selected column(s)</source>
-        <translation type="obsolete">%1: vyčistit vybrané sloupce</translation>
+        <translation type="unfinished">%1: vyčistit vybrané sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="382"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="884"/>
         <source>%1: insert empty rows(s)</source>
-        <translation type="obsolete">%1: vložit prázdné řádky</translation>
+        <translation type="unfinished">%1: vložit prázdné řádky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="406"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="905"/>
         <source>%1: remove selected rows(s)</source>
-        <translation type="obsolete">%1: odstranit vybrané řádky</translation>
+        <translation type="unfinished">%1: odstranit vybrané řádky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="421"/>
         <source>%1: clear selected rows(s)</source>
-        <translation type="obsolete">%1: vyčistit vybrané sloupce</translation>
+        <translation type="unfinished">%1: vyčistit vybrané sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="968"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="960"/>
         <source>%1: add %2 rows(s)</source>
-        <translation type="obsolete">%1: přidat  %2 řádků</translation>
+        <translation type="unfinished">%1: přidat  %2 řádků</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="979"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="342"/>
         <source>%1: add %2 column(s)</source>
-        <translation type="obsolete">%1: přidat  %2 sloupců</translation>
+        <translation type="unfinished">%1: přidat  %2 sloupců</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="195"/>
         <source>%1: clear column %2</source>
-        <translation type="obsolete">%1: vyčistit sloupec %2</translation>
+        <translation type="unfinished">%1: vyčistit sloupec %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="225"/>
         <source>%1: set cell value</source>
-        <translation type="obsolete">%1: nastavit hodnotu buňky</translation>
+        <translation type="unfinished">%1: nastavit hodnotu buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="252"/>
         <source>%1: set matrix coordinates</source>
-        <translation type="obsolete">%1: nastavit souřadnice matice</translation>
+        <translation type="unfinished">%1: nastavit souřadnice matice</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/datatypes/Double2StringFilter.cpp" line="78"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="289"/>
         <source>%1: set numeric format to &apos;%2&apos;</source>
-        <translation type="obsolete">%1: nastavit číselný formát na &apos;%2&apos;</translation>
+        <translation type="unfinished">%1: nastavit číselný formát na &apos;%2&apos;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/datatypes/Double2StringFilter.cpp" line="100"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="314"/>
         <source>%1: set decimal digits to %2</source>
-        <translation type="obsolete">%1: nastavit počet desetinných míst na %2</translation>
+        <translation type="unfinished">%1: nastavit počet desetinných míst na %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="339"/>
         <source>%1: set formula</source>
-        <translation type="obsolete">%1: nastavit vzorec</translation>
+        <translation type="unfinished">%1: nastavit vzorec</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11861"/>
@@ -12120,199 +12263,262 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Vydáno</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/AbstractFilter.cpp" line="121"/>
         <source>In%1</source>
-        <translation type="obsolete">V%1</translation>
+        <translation type="unfinished">V%1</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/Project.cpp" line="154"/>
         <source>General</source>
-        <translation type="obsolete">Obecné</translation>
+        <translation type="unfinished">Obecné</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="40"/>
         <source>%1: rename to %2</source>
-        <translation type="obsolete">%1: přejmenovat na %2</translation>
+        <translation type="unfinished">%1: přejmenovat na %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="61"/>
         <source>%1: change comment</source>
-        <translation type="obsolete">%1: změnit komentář</translation>
+        <translation type="unfinished">%1: změnit komentář</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="82"/>
         <source>%1: change caption</source>
-        <translation type="obsolete">%1: změnit popis</translation>
+        <translation type="unfinished">%1: změnit popis</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="104"/>
         <source>%1: set creation time</source>
-        <translation type="obsolete">%1: nastavit čas vytvoření</translation>
+        <translation type="unfinished">%1: nastavit čas vytvoření</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="126"/>
         <source>%1: remove %2</source>
-        <translation type="obsolete">%1: odstranit %2</translation>
+        <translation type="unfinished">%1: odstranit %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="158"/>
         <source>%1: add %2</source>
-        <translation type="obsolete">%1: přidat %2</translation>
+        <translation type="unfinished">%1: přidat %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="172"/>
         <source>%1: move child from position %2 to %3.</source>
-        <translation type="obsolete">%1: přesunout dceřinný prvek z pozice %2 na %3.</translation>
+        <translation type="unfinished">%1: přesunout dceřinný prvek z pozice %2 na %3.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/aspectcommands.h" line="201"/>
         <source>%1: move %2 to %3.</source>
-        <translation type="obsolete">%1: přesunout %2 na %3.</translation>
+        <translation type="unfinished">%1: přesunout %2 na %3.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="88"/>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="40"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="641"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="658"/>
         <source>%1: change column type</source>
-        <translation type="obsolete">%1: změnit typ sloupce</translation>
+        <translation type="unfinished">%1: změnit typ sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="124"/>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="171"/>
         <source>%1: change cell value(s)</source>
-        <translation type="obsolete">%1: změnit hodnoty buněk</translation>
+        <translation type="unfinished">%1: změnit hodnoty buněk</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="293"/>
         <source>%1: set plot designation</source>
-        <translation type="obsolete">%1: nastavit vzhled grafu</translation>
+        <translation type="unfinished">%1: nastavit vzhled grafu</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="321"/>
         <source>%1: clear column</source>
-        <translation type="obsolete">%1: vyčistit sloupec</translation>
+        <translation type="unfinished">%1: vyčistit sloupec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="388"/>
         <source>%1: mark all cells valid</source>
-        <translation type="obsolete">%1: označit všechny buňky jako platné</translation>
+        <translation type="unfinished">%1: označit všechny buňky jako platné</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="421"/>
         <source>%1: clear masks</source>
-        <translation type="obsolete">%1: odstranit masky</translation>
+        <translation type="unfinished">%1: odstranit masky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="455"/>
         <source>%1: mark cells invalid</source>
-        <translation type="obsolete">%1: označit buňky jako platné</translation>
+        <translation type="unfinished">%1: označit buňky jako platné</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="457"/>
         <source>%1: mark cells valid</source>
-        <translation type="obsolete">%1: označit buňky jako neplatné</translation>
+        <translation type="unfinished">%1: označit buňky jako neplatné</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="491"/>
         <source>%1: mask cells</source>
-        <translation type="obsolete">%1: maskovat buňky</translation>
+        <translation type="unfinished">%1: maskovat buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="493"/>
         <source>%1: unmask cells</source>
-        <translation type="obsolete">%1: odmaskovat buňky</translation>
+        <translation type="unfinished">%1: odmaskovat buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="526"/>
         <source>%1: set cell formula</source>
-        <translation type="obsolete">%1: nastavit vzorec buňky</translation>
+        <translation type="unfinished">%1: nastavit vzorec buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="559"/>
         <source>%1: clear all formulas</source>
-        <translation type="obsolete">%1: smazat všechny vzorce</translation>
+        <translation type="unfinished">%1: smazat všechny vzorce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="592"/>
         <source>%1: set text for row %2</source>
-        <translation type="obsolete">%1: nastavit text pro řádek %2</translation>
+        <translation type="unfinished">%1: nastavit text pro řádek %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="624"/>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="656"/>
         <source>%1: set value for row %2</source>
-        <translation type="obsolete">%1: nastavit hodnotu pro řádek %2</translation>
+        <translation type="unfinished">%1: nastavit hodnotu pro řádek %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="688"/>
         <source>%1: replace the texts for rows %2 to %3</source>
-        <translation type="obsolete">%1: změnit texty v řádcích %2 na %3</translation>
+        <translation type="unfinished">%1: změnit texty v řádcích %2 na %3</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="725"/>
+        <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="762"/>
         <source>%1: replace the values for rows %2 to %3</source>
-        <translation type="obsolete">%1: změnit hodnoty v řádcích %2 na %3</translation>
+        <translation type="unfinished">%1: změnit hodnoty v řádcích %2 na %3</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/datatypes/DateTime2StringFilter.cpp" line="44"/>
+        <location filename="../../libscidavis/src/future/core/datatypes/String2DateTimeFilter.cpp" line="139"/>
         <source>%1: set date-time format to %2</source>
-        <translation type="obsolete">%1: nastavit formát datum-čas na %2</translation>
+        <translation type="unfinished">%1: nastavit formát datum-čas na %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/datatypes/DateTime2StringFilter.cpp" line="46"/>
+        <location filename="../../libscidavis/src/future/core/datatypes/String2DateTimeFilter.cpp" line="141"/>
         <source>set date-time format to %1</source>
-        <translation type="obsolete">Formát datum-čas nastaven na %1</translation>
+        <translation type="unfinished">Formát datum-čas nastaven na %1</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/datatypes/Double2StringFilter.cpp" line="80"/>
         <source>set numeric format to &apos;%1&apos;</source>
-        <translation type="obsolete">Formát čísel nastaven na &apos;%1&apos;</translation>
+        <translation type="unfinished">Formát čísel nastaven na &apos;%1&apos;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/datatypes/Double2StringFilter.cpp" line="102"/>
         <source>set decimal digits to %1</source>
-        <translation type="obsolete">Počet desetinných míst nastaven na %1 </translation>
+        <translation type="unfinished">Počet desetinných míst nastaven na %1 </translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="64"/>
         <source>XML reader error: </source>
         <comment>prefix for XML error messages</comment>
-        <translation type="obsolete">Chyba při čtení XML-dat:</translation>
+        <translation type="unfinished">Chyba při čtení XML-dat:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="65"/>
         <source> (loading failed)</source>
         <comment>postfix for XML error messages</comment>
-        <translation type="obsolete">(načítání selhalo)</translation>
+        <translation type="unfinished">(načítání selhalo)</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="66"/>
         <source>XML reader warning: </source>
         <comment>prefix for XML warning messages</comment>
-        <translation type="obsolete">Varování XML-čtečky:</translation>
+        <translation type="unfinished">Varování XML-čtečky:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="82"/>
+        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="88"/>
         <source>line %1, column %2: </source>
-        <translation type="obsolete">řádek %1, sloupec %2:</translation>
+        <translation type="unfinished">řádek %1, sloupec %2:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="96"/>
+        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="104"/>
+        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="126"/>
+        <location filename="../../libscidavis/src/future/lib/XmlStreamReader.cpp" line="136"/>
         <source>unexpected end of document</source>
-        <translation type="obsolete">neočekávaný konec dokumentu</translation>
+        <translation type="unfinished">neočekávaný konec dokumentu</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="830"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1754"/>
         <source>%1: copy %2</source>
-        <translation type="obsolete">%1: zkopírován %2</translation>
+        <translation type="unfinished">%1: zkopírován %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="366"/>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="396"/>
         <source>%1: set cell values</source>
-        <translation type="obsolete">%1: hodnota buňky změněna</translation>
+        <translation type="unfinished">%1: hodnota buňky změněna</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="424"/>
         <source>%1: transpose</source>
-        <translation type="obsolete">%1: transponováno</translation>
+        <translation type="unfinished">%1: transponováno</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="470"/>
         <source>%1: mirror horizontally</source>
-        <translation type="obsolete">%1: vodorovně zrcadleno</translation>
+        <translation type="unfinished">%1: vodorovně zrcadleno</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="507"/>
         <source>%1: mirror vertically</source>
-        <translation type="obsolete">%1:svisle zrcadleno</translation>
+        <translation type="unfinished">%1:svisle zrcadleno</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.h" line="67"/>
         <source>ASCII table</source>
-        <translation type="obsolete">ASCII-tabulka</translation>
+        <translation type="unfinished">ASCII-tabulka</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="240"/>
+        <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="73"/>
         <source>%1: set the number of rows to %2</source>
-        <translation type="obsolete">%1: počet řádků nastaven na %2</translation>
+        <translation type="unfinished">%1: počet řádků nastaven na %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="319"/>
         <source>%1: clear all masks</source>
-        <translation type="obsolete">%1: všechny masky odstraněny</translation>
+        <translation type="unfinished">%1: všechny masky odstraněny</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="331"/>
         <source>%1: add column</source>
-        <translation type="obsolete">%1: přidán sloupec</translation>
+        <translation type="unfinished">%1: přidán sloupec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="745"/>
         <source>%1: set plot designation(s)</source>
-        <translation type="obsolete">%1: vzhled grafu změněn</translation>
+        <translation type="unfinished">%1: vzhled grafu změněn</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="790"/>
         <source>%1: normalize column(s)</source>
-        <translation type="obsolete">%1: sloupce normalizovány</translation>
+        <translation type="unfinished">%1: sloupce normalizovány</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="822"/>
         <source>%1: normalize selection</source>
-        <translation type="obsolete">%1: výběr.normalizován</translation>
+        <translation type="unfinished">%1: výběr.normalizován</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="128"/>
         <source>%1: move column %2 from position %3 to %4</source>
-        <translation type="obsolete">%1: sloupec %2 přesunut z pozice %3 na %4</translation>
+        <translation type="unfinished">%1: sloupec %2 přesunut z pozice %3 na %4</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/globals.cpp" line="160"/>
@@ -12326,8 +12532,9 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="921"/>
         <source>%1: clear selected cell(s)</source>
-        <translation type="obsolete">%1: vyčistit vybrané buňky</translation>
+        <translation type="unfinished">%1: vyčistit vybrané buňky</translation>
     </message>
 </context>
 <context>
@@ -12411,20 +12618,24 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>SciDAVisAbout</name>
     <message>
+        <location filename="../../libscidavis/src/SciDAVisAbout.ui" line="25"/>
         <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
+        <translation type="unfinished">Dialog</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/SciDAVisAbout.ui" line="49"/>
         <source>SciDAVis XX.XX.XX-betaXX</source>
-        <translation type="obsolete">SciDAVis XX.XX.XX-betaXX</translation>
+        <translation type="unfinished">SciDAVis XX.XX.XX-betaXX</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/SciDAVisAbout.ui" line="67"/>
         <source>Released XXXX-XX-XX</source>
-        <translation type="obsolete">Vydáno XXXX-XX-XX</translation>
+        <translation type="unfinished">Vydáno XXXX-XX-XX</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/SciDAVisAbout.ui" line="130"/>
         <source>Close</source>
-        <translation type="obsolete">Zavřít</translation>
+        <translation type="unfinished">Zavřít</translation>
     </message>
 </context>
 <context>
@@ -13322,20 +13533,36 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>TableConfigPage</name>
+    <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="13"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulář</translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="19"/>
+        <source>TODO</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TableModel</name>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableModel.cpp" line="101"/>
         <source>(masked)</source>
-        <translation type="obsolete">(maskovaný)</translation>
+        <translation type="unfinished">(maskovaný)</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableModel.cpp" line="103"/>
         <source>invalid cell (ignored in all operations)</source>
         <comment>tooltip string for invalid rows</comment>
-        <translation type="obsolete">neplatná buňka (bude ignorována ve všech operacích)</translation>
+        <translation type="unfinished">neplatná buňka (bude ignorována ve všech operacích)</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableModel.cpp" line="112"/>
         <source>-</source>
         <comment>string for invalid rows</comment>
-        <translation type="obsolete">-</translation>
+        <translation type="unfinished">-</translation>
     </message>
 </context>
 <context>
@@ -13435,169 +13662,215 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TableView</name>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="173"/>
         <source>Ctrl+A</source>
         <comment>Table: select all</comment>
-        <translation type="obsolete">Ctrl+A</translation>
+        <translation type="unfinished">Ctrl+A</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="241"/>
         <source>Show/hide control tabs</source>
-        <translation type="obsolete">Zobrazit/skrýt ovládací prvky</translation>
+        <translation type="unfinished">Zobrazit/skrýt ovládací prvky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="245"/>
         <source>Numeric</source>
-        <translation type="obsolete">Číslo</translation>
+        <translation type="unfinished">Číslo</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="246"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="433"/>
         <source>Text</source>
-        <translation type="obsolete">Text</translation>
+        <translation type="unfinished">Text</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="247"/>
         <source>Month names</source>
-        <translation type="obsolete">Název měsíce</translation>
+        <translation type="unfinished">Název měsíce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="248"/>
         <source>Day names</source>
-        <translation type="obsolete">Název dne</translation>
+        <translation type="unfinished">Název dne</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="249"/>
         <source>Date and time</source>
-        <translation type="obsolete">Datum a čas</translation>
+        <translation type="unfinished">Datum a čas</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="253"/>
         <source>years</source>
-        <translation type="obsolete">let</translation>
+        <translation type="unfinished">let</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="254"/>
         <source>months</source>
-        <translation type="obsolete">měsíců</translation>
+        <translation type="unfinished">měsíců</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="255"/>
         <source>days</source>
-        <translation type="obsolete">dnů</translation>
+        <translation type="unfinished">dnů</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="256"/>
         <source>hours</source>
-        <translation type="obsolete">hodin</translation>
+        <translation type="unfinished">hodin</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="257"/>
         <source>minutes</source>
-        <translation type="obsolete">minut</translation>
+        <translation type="unfinished">minut</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="258"/>
         <source>seconds</source>
-        <translation type="obsolete">sekund</translation>
+        <translation type="unfinished">sekund</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="259"/>
         <source>milliseconds</source>
-        <translation type="obsolete">milisekund</translation>
+        <translation type="unfinished">milisekund</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="349"/>
         <source>Current column:
 Name: %1
 Position: %2</source>
-        <translation type="obsolete">Aktuální sloupec:
+        <translation type="unfinished">Aktuální sloupec:
 Název: %1
 Pozice: %2</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="426"/>
         <source>Decimal</source>
-        <translation type="obsolete">Desetinné číslo</translation>
+        <translation type="unfinished">Desetinné číslo</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="427"/>
         <source>Scientific (e)</source>
-        <translation type="obsolete">Vědecký (e)</translation>
+        <translation type="unfinished">Vědecký (e)</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="428"/>
         <source>Scientific (E)</source>
-        <translation type="obsolete">Vědecký (E)</translation>
+        <translation type="unfinished">Vědecký (E)</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="436"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="442"/>
         <source>Number without leading zero</source>
-        <translation type="obsolete">Číslo bez uvozující nuly</translation>
+        <translation type="unfinished">Číslo bez uvozující nuly</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="437"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="443"/>
         <source>Number with leading zero</source>
-        <translation type="obsolete">Číslo s uvozující nulou</translation>
+        <translation type="unfinished">Číslo s uvozující nulou</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="438"/>
         <source>Abbreviated month name</source>
-        <translation type="obsolete">Zkratka názvu měsíce</translation>
+        <translation type="unfinished">Zkratka názvu měsíce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="439"/>
         <source>Full month name</source>
-        <translation type="obsolete">Celý název měsíce</translation>
+        <translation type="unfinished">Celý název měsíce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="444"/>
         <source>Abbreviated day name</source>
-        <translation type="obsolete">Zkratka názvu dne</translation>
+        <translation type="unfinished">Zkratka názvu dne</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="445"/>
         <source>Full day name</source>
-        <translation type="obsolete">Celý název dne</translation>
+        <translation type="unfinished">Celý název dne</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="498"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="571"/>
         <source>Predefined:</source>
-        <translation type="obsolete">Předdefinovaný:</translation>
+        <translation type="unfinished">Předdefinovaný:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="500"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="573"/>
         <source>Format:</source>
-        <translation type="obsolete">Formát:</translation>
+        <translation type="unfinished">Formát:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="512"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="582"/>
         <source>Selected column type:
 </source>
-        <translation type="obsolete">Typ vybraného sloupce:
+        <translation type="unfinished">Typ vybraného sloupce:
 </translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="519"/>
         <source>Double precision
 floating point values
 </source>
-        <translation type="obsolete">Pohyblivá řádová čárka
+        <translation type="unfinished">Pohyblivá řádová čárka
 dvojitá přesnost
 </translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="523"/>
         <source>Text
 </source>
-        <translation type="obsolete">Text
+        <translation type="unfinished">Text
 </translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="526"/>
         <source>Month names
 </source>
-        <translation type="obsolete">Název měsíce
+        <translation type="unfinished">Název měsíce
 </translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="529"/>
         <source>Days of the week
 </source>
-        <translation type="obsolete">Dny týdnu
+        <translation type="unfinished">Dny týdnu
 </translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="532"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="558"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="583"/>
         <source>Dates and/or times
 </source>
-        <translation type="obsolete">Data a/nebor časy
+        <translation type="unfinished">Data a/nebor časy
 </translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="536"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="560"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="584"/>
         <source>Example: </source>
-        <translation type="obsolete">Příklad:</translation>
+        <translation type="unfinished">Příklad:</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="543"/>
         <source>Hello world!
 </source>
-        <translation type="obsolete">Ahoj světe!
+        <translation type="unfinished">Ahoj světe!
 </translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="429"/>
         <source>Automatic (e)</source>
-        <translation type="obsolete">Automatický (e)</translation>
+        <translation type="unfinished">Automatický (e)</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="430"/>
         <source>Automatic (E)</source>
-        <translation type="obsolete">Automatický (E)</translation>
+        <translation type="unfinished">Automatický (E)</translation>
     </message>
 </context>
 <context>
@@ -13863,659 +14136,835 @@ dvojitá přesnost
 <context>
     <name>future::Folder</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="113"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="obsolete">neznámý prvek &apos;%1&apos;</translation>
+        <translation type="unfinished">neznámý prvek &apos;%1&apos;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="120"/>
         <source>no folder element found</source>
-        <translation type="obsolete">nenalezen žádný prvek složky</translation>
+        <translation type="unfinished">nenalezen žádný prvek složky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="135"/>
         <source>Folder %1</source>
-        <translation type="obsolete">Složka %1</translation>
+        <translation type="unfinished">Složka %1</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="146"/>
         <source>Column %1</source>
-        <translation type="obsolete">Sloupec %1</translation>
+        <translation type="unfinished">Sloupec %1</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="171"/>
         <source>creation of aspect from element &apos;%1&apos; failed</source>
-        <translation type="obsolete">vytvoření aspektu z prvkut &apos;%1&apos; selhalo</translation>
+        <translation type="unfinished">vytvoření aspektu z prvkut &apos;%1&apos; selhalo</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/core/future_Folder.cpp" line="179"/>
         <source>no plugin to load element &apos;%1&apos; found</source>
-        <translation type="obsolete">nenalezen plugin k načtení prvku &apos;%1&apos;</translation>
+        <translation type="unfinished">nenalezen plugin k načtení prvku &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
     <name>future::Matrix</name>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="208"/>
         <source>%1: cut selected cell(s)</source>
-        <translation type="obsolete">%1: vyjmout vybrané buňky</translation>
+        <translation type="unfinished">%1: vyjmout vybrané buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="255"/>
         <source>%1: paste from clipboard</source>
-        <translation type="obsolete">%1:vložit ze schránky</translation>
+        <translation type="unfinished">%1:vložit ze schránky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="443"/>
         <source>%1: clear selected cell(s)</source>
-        <translation type="obsolete">%1: vyčistit vybrané buňky</translation>
+        <translation type="unfinished">%1: vyčistit vybrané buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="536"/>
         <source>Cu&amp;t</source>
-        <translation type="obsolete">&amp;Vyjmout</translation>
+        <translation type="unfinished">&amp;Vyjmout</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="539"/>
         <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Kopírovat</translation>
+        <translation type="unfinished">&amp;Kopírovat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="542"/>
         <source>Past&amp;e</source>
-        <translation type="obsolete">&amp;Vložit</translation>
+        <translation type="unfinished">&amp;Vložit</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="548"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
-        <translation type="obsolete">&amp;Vyčistit</translation>
+        <translation type="unfinished">&amp;Vyčistit</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="556"/>
         <source>Assign &amp;Formula</source>
-        <translation type="obsolete">&amp;Přiřadit vzorec</translation>
+        <translation type="unfinished">&amp;Přiřadit vzorec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="564"/>
         <source>Recalculate</source>
-        <translation type="obsolete">Přepočítat</translation>
+        <translation type="unfinished">Přepočítat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="580"/>
         <source>Select All</source>
-        <translation type="obsolete">Vybrat vše</translation>
+        <translation type="unfinished">Vybrat vše</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="587"/>
         <source>Clear Matrix</source>
-        <translation type="obsolete">Vyčistit matici</translation>
+        <translation type="unfinished">Vyčistit matici</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="594"/>
         <source>&amp;Go to Cell</source>
-        <translation type="obsolete">&amp;Jít na buňku</translation>
+        <translation type="unfinished">&amp;Jít na buňku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="614"/>
         <source>&amp;Dimensions</source>
         <comment>matrix size</comment>
-        <translation type="obsolete">&amp;Rozměry</translation>
+        <translation type="unfinished">&amp;Rozměry</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="617"/>
         <source>Set &amp;Coordinates</source>
-        <translation type="obsolete">Nastavit  &amp;souřadnice</translation>
+        <translation type="unfinished">Nastavit  &amp;souřadnice</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="620"/>
         <source>Set Display &amp;Format</source>
-        <translation type="obsolete">Nastavit formát &amp;zobrazení</translation>
+        <translation type="unfinished">Nastavit formát &amp;zobrazení</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="627"/>
         <source>&amp;Insert Empty Columns</source>
-        <translation type="obsolete">Vložit prázdné &amp;sloupce</translation>
+        <translation type="unfinished">Vložit prázdné &amp;sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="634"/>
         <source>Remo&amp;ve Columns</source>
-        <translation type="obsolete">Odstranit &amp;sloupce</translation>
+        <translation type="unfinished">Odstranit &amp;sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="641"/>
         <source>Clea&amp;r Columns</source>
-        <translation type="obsolete">Vyčistit &amp;sloupce</translation>
+        <translation type="unfinished">Vyčistit &amp;sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="648"/>
         <source>&amp;Add Columns</source>
-        <translation type="obsolete">Př&amp;idat sloupce</translation>
+        <translation type="unfinished">Př&amp;idat sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="656"/>
         <source>&amp;Insert Empty Rows</source>
-        <translation type="obsolete">Vložit &amp;prázdné řádky</translation>
+        <translation type="unfinished">Vložit &amp;prázdné řádky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="663"/>
         <source>Remo&amp;ve Rows</source>
-        <translation type="obsolete">Odstranit &amp;řádky</translation>
+        <translation type="unfinished">Odstranit &amp;řádky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="670"/>
         <source>Clea&amp;r Rows</source>
-        <translation type="obsolete">Vyči&amp;stit řádky</translation>
+        <translation type="unfinished">Vyči&amp;stit řádky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="677"/>
         <source>&amp;Add Rows</source>
-        <translation type="obsolete">&amp;Přidat řádky</translation>
+        <translation type="unfinished">&amp;Přidat řádky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="750"/>
         <source>&amp;Matrix</source>
-        <translation type="obsolete">&amp;Matice</translation>
+        <translation type="unfinished">&amp;Matice</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="816"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="820"/>
         <source>Go to Cell</source>
-        <translation type="obsolete">Jít na buňku</translation>
+        <translation type="unfinished">Jít na buňku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="816"/>
         <source>Enter column</source>
-        <translation type="obsolete">Vložit sloupec</translation>
+        <translation type="unfinished">Vložit sloupec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="820"/>
         <source>Enter row</source>
-        <translation type="obsolete">Vložit řádek</translation>
+        <translation type="unfinished">Vložit řádek</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="893"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="897"/>
         <source>Set Matrix Dimensions</source>
-        <translation type="obsolete">Nastavit rozměry matice</translation>
+        <translation type="unfinished">Nastavit rozměry matice</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="893"/>
         <source>Enter number of columns</source>
-        <translation type="obsolete">Zadejte počet sloupců</translation>
+        <translation type="unfinished">Zadejte počet sloupců</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="897"/>
         <source>Enter number of rows</source>
-        <translation type="obsolete">Zadejte počet řádků</translation>
+        <translation type="unfinished">Zadejte počet řádků</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1148"/>
         <source>invalid row or column count</source>
-        <translation type="obsolete">neplatný počet řádků nebo sloupců</translation>
+        <translation type="unfinished">neplatný počet řádků nebo sloupců</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1180"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="obsolete">neplatný prvek &apos;%1&apos;</translation>
+        <translation type="unfinished">neplatný prvek &apos;%1&apos;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1189"/>
         <source>no matrix element found</source>
-        <translation type="obsolete">nenalezen žádný prvek matice</translation>
+        <translation type="unfinished">nenalezen žádný prvek matice</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1202"/>
         <source>invalid or missing numeric format</source>
-        <translation type="obsolete">neplatný nebo chybějící číselný formát</translation>
+        <translation type="unfinished">neplatný nebo chybějící číselný formát</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1211"/>
         <source>invalid or missing number of displayed digits</source>
-        <translation type="obsolete">neplatný nebo chybějící počet zobrazených destinných míst</translation>
+        <translation type="unfinished">neplatný nebo chybějící počet zobrazených destinných míst</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1230"/>
         <source>invalid x start value</source>
-        <translation type="obsolete">neplatná počáteční hodnota X</translation>
+        <translation type="unfinished">neplatná počáteční hodnota X</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1238"/>
         <source>invalid x end value</source>
-        <translation type="obsolete">neplatná koncová hodnota X</translation>
+        <translation type="unfinished">neplatná koncová hodnota X</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1246"/>
         <source>invalid y start value</source>
-        <translation type="obsolete">neplatná počáteční hodnota Y</translation>
+        <translation type="unfinished">neplatná počáteční hodnota Y</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1254"/>
         <source>invalid y end value</source>
-        <translation type="obsolete">neplatná koncová hodnota Y</translation>
+        <translation type="unfinished">neplatná koncová hodnota Y</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1277"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1330"/>
         <source>invalid or missing row index</source>
-        <translation type="obsolete">neplatný nebo chybějící index řádku</translation>
+        <translation type="unfinished">neplatný nebo chybějící index řádku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1284"/>
         <source>invalid row height</source>
-        <translation type="obsolete">neplatná výška řádku</translation>
+        <translation type="unfinished">neplatná výška řádku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1301"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1336"/>
         <source>invalid or missing column index</source>
-        <translation type="obsolete">neplatný nebo chybějící index sloupce</translation>
+        <translation type="unfinished">neplatný nebo chybějící index sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1308"/>
         <source>invalid column width</source>
-        <translation type="obsolete">neplatná šířka sloupce</translation>
+        <translation type="unfinished">neplatná šířka sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1344"/>
         <source>invalid cell value</source>
-        <translation type="obsolete">neplatná hodnota buňky</translation>
+        <translation type="unfinished">neplatná hodnota buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1375"/>
         <source>Hide Controls</source>
-        <translation type="obsolete">Skrýt ovládání</translation>
+        <translation type="unfinished">Skrýt ovládání</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1377"/>
         <source>Show Controls</source>
-        <translation type="obsolete">Zobrazit ovládání</translation>
+        <translation type="unfinished">Zobrazit ovládání</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1454"/>
         <source>Matrix</source>
-        <translation type="obsolete">Matice</translation>
+        <translation type="unfinished">Matice</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="557"/>
         <source>Alt+Q</source>
-        <translation type="obsolete">Alt+Q</translation>
+        <translation type="unfinished">Alt+Q</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="565"/>
         <source>Ctrl+Return</source>
-        <translation type="obsolete">Ctrl+Return</translation>
+        <translation type="unfinished">Ctrl+Return</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="573"/>
         <source>F12</source>
-        <translation type="obsolete">F12</translation>
+        <translation type="unfinished">F12</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="595"/>
         <source>Ctrl+Alt+G</source>
-        <translation type="obsolete">Ctrl+Alt+G</translation>
+        <translation type="unfinished">Ctrl+Alt+G</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="599"/>
         <source>&amp;Transpose</source>
-        <translation type="obsolete">&amp;Transponovat</translation>
+        <translation type="unfinished">&amp;Transponovat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="602"/>
         <source>Mirror &amp;Horizontally</source>
-        <translation type="obsolete">&amp;Zrcadlit vodorovně</translation>
+        <translation type="unfinished">&amp;Zrcadlit vodorovně</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="605"/>
         <source>Mirror &amp;Vertically</source>
-        <translation type="obsolete">&amp;Zrcadlit svisle</translation>
+        <translation type="unfinished">&amp;Zrcadlit svisle</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="608"/>
         <source>&amp;Import Image</source>
         <comment>import image as matrix</comment>
-        <translation type="obsolete">Importovat &amp;obrázek</translation>
+        <translation type="unfinished">Importovat &amp;obrázek</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="611"/>
         <source>&amp;Duplicate</source>
         <comment>duplicate matrix</comment>
-        <translation type="obsolete">&amp;Duplikovat</translation>
+        <translation type="unfinished">&amp;Duplikovat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="907"/>
         <source>Images</source>
-        <translation type="obsolete">Obrázky</translation>
+        <translation type="unfinished">Obrázky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="915"/>
         <source>Import image from file</source>
-        <translation type="obsolete">Importovat obrázek ze souboru</translation>
+        <translation type="unfinished">Importovat obrázek ze souboru</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="931"/>
         <source>Error importing image</source>
-        <translation type="obsolete">Chyba při importu obrázku</translation>
+        <translation type="unfinished">Chyba při importu obrázku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="931"/>
         <source>Import of image &apos;%1&apos; failed</source>
-        <translation type="obsolete">Import obrázku &apos;%1&apos;selhal</translation>
+        <translation type="unfinished">Import obrázku &apos;%1&apos;selhal</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1430"/>
         <source>%1: apply formula to selection</source>
-        <translation type="obsolete">%1: použít vzorec na výběr</translation>
+        <translation type="unfinished">%1: použít vzorec na výběr</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1466"/>
         <source>SciDAVis</source>
-        <translation type="obsolete">SciDAVis</translation>
+        <translation type="unfinished">SciDAVis</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1466"/>
         <source>Import image...</source>
-        <translation type="obsolete">Importovat obrázek...</translation>
+        <translation type="unfinished">Importovat obrázek...</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1469"/>
         <source>Matrix %1</source>
-        <translation type="obsolete">Matice %1</translation>
+        <translation type="unfinished">Matice %1</translation>
     </message>
 </context>
 <context>
     <name>future::SortDialog</name>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="44"/>
         <source>Sorting Options</source>
-        <translation type="obsolete">Možnosti třídění</translation>
+        <translation type="unfinished">Možnosti třídění</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="52"/>
         <source>Sort columns</source>
-        <translation type="obsolete">Třídit sloupce</translation>
+        <translation type="unfinished">Třídit sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="54"/>
         <source>Separately</source>
-        <translation type="obsolete">Zvlášť</translation>
+        <translation type="unfinished">Zvlášť</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="55"/>
         <source>Together</source>
-        <translation type="obsolete">Dohromady</translation>
+        <translation type="unfinished">Dohromady</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="59"/>
         <source>Order</source>
-        <translation type="obsolete">Pořadí</translation>
+        <translation type="unfinished">Pořadí</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="61"/>
         <source>Ascending</source>
-        <translation type="obsolete">Vzestupně</translation>
+        <translation type="unfinished">Vzestupně</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="62"/>
         <source>Descending</source>
-        <translation type="obsolete">Sestupně</translation>
+        <translation type="unfinished">Sestupně</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="65"/>
         <source>Leading column</source>
-        <translation type="obsolete">Třídit podle</translation>
+        <translation type="unfinished">Třídit podle</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="70"/>
         <source>&amp;Sort</source>
-        <translation type="obsolete">&amp;Třídit</translation>
+        <translation type="unfinished">&amp;Třídit</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_SortDialog.cpp" line="74"/>
         <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Zavřít</translation>
+        <translation type="unfinished">&amp;Zavřít</translation>
     </message>
 </context>
 <context>
     <name>future::Table</name>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="355"/>
         <source>%1: cut selected cell(s)</source>
-        <translation type="obsolete">%1: vyjmout vybrané buňky</translation>
+        <translation type="unfinished">%1: vyjmout vybrané buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="417"/>
         <source>%1: paste from clipboard</source>
-        <translation type="obsolete">%1: vložit ze schránky</translation>
+        <translation type="unfinished">%1: vložit ze schránky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="508"/>
         <source>%1: mask selected cell(s)</source>
-        <translation type="obsolete">%1: maskovat vybrané buňky</translation>
+        <translation type="unfinished">%1: maskovat vybrané buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="528"/>
         <source>%1: unmask selected cell(s)</source>
-        <translation type="obsolete">%1: demaskovat vybrané buňky</translation>
+        <translation type="unfinished">%1: demaskovat vybrané buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="552"/>
         <source>%1: apply formula to selection</source>
-        <translation type="obsolete">%1: použít vzorec na výběr</translation>
+        <translation type="unfinished">%1: použít vzorec na výběr</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="568"/>
         <source>%1: fill cells with row numbers</source>
-        <translation type="obsolete">%1: vyplnit buňky čísly řádků</translation>
+        <translation type="unfinished">%1: vyplnit buňky čísly řádků</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="611"/>
         <source>%1: fill cells with random values</source>
-        <translation type="obsolete">%1: vyplnit buňky náhodnými čísly</translation>
+        <translation type="unfinished">%1: vyplnit buňky náhodnými čísly</translation>
     </message>
     <message>
         <source>%1: clear selected cell(s)</source>
         <translation type="obsolete">%1: vyčistit vybrané buňky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="968"/>
         <source>&amp;Table</source>
-        <translation type="obsolete">&amp;Tabulka</translation>
+        <translation type="unfinished">&amp;Tabulka</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="970"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1623"/>
         <source>S&amp;et Column(s) As</source>
-        <translation type="obsolete">N&amp;astavit sloupce jako</translation>
+        <translation type="unfinished">N&amp;astavit sloupce jako</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="982"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1591"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1635"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1699"/>
         <source>Fi&amp;ll Selection with</source>
-        <translation type="obsolete">Vyplnit &amp;výběr</translation>
+        <translation type="unfinished">Vyplnit &amp;výběr</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1051"/>
         <source>Cu&amp;t</source>
-        <translation type="obsolete">&amp;Vyjmout</translation>
+        <translation type="unfinished">&amp;Vyjmout</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1054"/>
         <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Kopírovat</translation>
+        <translation type="unfinished">&amp;Kopírovat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1057"/>
         <source>Past&amp;e</source>
-        <translation type="obsolete">&amp;Vložit</translation>
+        <translation type="unfinished">&amp;Vložit</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1061"/>
         <source>&amp;Mask</source>
         <comment>mask selection</comment>
-        <translation type="obsolete">&amp;Maskovat</translation>
+        <translation type="unfinished">&amp;Maskovat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1064"/>
         <source>&amp;Unmask</source>
         <comment>unmask selection</comment>
-        <translation type="obsolete">&amp;Odmaskovat</translation>
+        <translation type="unfinished">&amp;Odmaskovat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1071"/>
         <source>Assign &amp;Formula</source>
-        <translation type="obsolete">&amp;Přiřadit vzorec</translation>
+        <translation type="unfinished">&amp;Přiřadit vzorec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1072"/>
         <source>Alt+Q</source>
-        <translation type="obsolete">Alt+Q</translation>
+        <translation type="unfinished">Alt+Q</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1079"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
-        <translation type="obsolete">&amp;Vyčistit</translation>
+        <translation type="unfinished">&amp;Vyčistit</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1086"/>
         <source>Recalculate</source>
-        <translation type="obsolete">Přepočítat</translation>
+        <translation type="unfinished">Přepočítat</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1087"/>
         <source>Ctrl+Return</source>
-        <translation type="obsolete">Ctrl+Return</translation>
+        <translation type="unfinished">Ctrl+Return</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1091"/>
         <source>Row Numbers</source>
-        <translation type="obsolete">Čísly řádků</translation>
+        <translation type="unfinished">Čísly řádků</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1094"/>
         <source>Random Values</source>
-        <translation type="obsolete">Náhodnými hodnotami</translation>
+        <translation type="unfinished">Náhodnými hodnotami</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1109"/>
         <source>F12</source>
-        <translation type="obsolete">F12</translation>
+        <translation type="unfinished">F12</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1113"/>
         <source>Formula Edit Mode</source>
-        <translation type="obsolete">Režim úpravy vzorce</translation>
+        <translation type="unfinished">Režim úpravy vzorce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1120"/>
         <source>Select All</source>
-        <translation type="obsolete">Vybrat vše</translation>
+        <translation type="unfinished">Vybrat vše</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1127"/>
         <source>&amp;Add Column</source>
-        <translation type="obsolete">&amp;Přidat sloupec</translation>
+        <translation type="unfinished">&amp;Přidat sloupec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1128"/>
         <source>append a new column to the table</source>
-        <translation type="obsolete">připojit k tabulce nový sloupec</translation>
+        <translation type="unfinished">připojit k tabulce nový sloupec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1135"/>
         <source>Clear Table</source>
-        <translation type="obsolete">Smazat obsah tabulky</translation>
+        <translation type="unfinished">Smazat obsah tabulky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1142"/>
+        <source>Export to TeX...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1148"/>
         <source>Clear Masks</source>
-        <translation type="obsolete">Smazat masky</translation>
+        <translation type="unfinished">Smazat masky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1155"/>
         <source>&amp;Sort Table</source>
-        <translation type="obsolete">&amp;Třidit tabulku</translation>
+        <translation type="unfinished">&amp;Třidit tabulku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1162"/>
         <source>&amp;Go to Cell</source>
-        <translation type="obsolete">&amp;Jít na buňku</translation>
+        <translation type="unfinished">&amp;Jít na buňku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1163"/>
         <source>Ctrl+Alt+G</source>
-        <translation type="obsolete">Ctrl+Alt+G</translation>
+        <translation type="unfinished">Ctrl+Alt+G</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1167"/>
         <source>&amp;Dimensions</source>
         <comment>table size</comment>
-        <translation type="obsolete">&amp;Rozměry</translation>
+        <translation type="unfinished">&amp;Rozměry</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1168"/>
         <source>change the table size</source>
-        <translation type="obsolete">Změnit velikost tabulky</translation>
+        <translation type="unfinished">Změnit velikost tabulky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1175"/>
         <source>&amp;Insert Empty Columns</source>
-        <translation type="obsolete">&amp;Vložit prázdné sloupce</translation>
+        <translation type="unfinished">&amp;Vložit prázdné sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1182"/>
         <source>Remo&amp;ve Columns</source>
-        <translation type="obsolete">Odstranit &amp;sloupce</translation>
+        <translation type="unfinished">Odstranit &amp;sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1189"/>
         <source>Clea&amp;r Columns</source>
-        <translation type="obsolete">Smazat obsah &amp;sloupců</translation>
+        <translation type="unfinished">Smazat obsah &amp;sloupců</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1196"/>
         <source>&amp;Add Columns</source>
-        <translation type="obsolete">&amp;/Přidat sloupce</translation>
+        <translation type="unfinished">&amp;/Přidat sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1200"/>
         <source>X</source>
         <comment>plot designation</comment>
-        <translation type="obsolete">X</translation>
+        <translation type="unfinished">X</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1203"/>
         <source>Y</source>
         <comment>plot designation</comment>
-        <translation type="obsolete">Y</translation>
+        <translation type="unfinished">Y</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1206"/>
         <source>Z</source>
         <comment>plot designation</comment>
-        <translation type="obsolete">Z</translation>
+        <translation type="unfinished">Z</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1212"/>
         <source>X Error</source>
         <comment>plot designation</comment>
-        <translation type="obsolete">X-chyba</translation>
+        <translation type="unfinished">X-chyba</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1219"/>
         <source>Y Error</source>
         <comment>plot designation</comment>
-        <translation type="obsolete">Y-chyba</translation>
+        <translation type="unfinished">Y-chyba</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1223"/>
         <source>None</source>
         <comment>plot designation</comment>
-        <translation type="obsolete">Žádné</translation>
+        <translation type="unfinished">Žádné</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1229"/>
         <source>&amp;Normalize Columns</source>
-        <translation type="obsolete">Normalizovat &amp;sloupce</translation>
+        <translation type="unfinished">Normalizovat &amp;sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1236"/>
         <source>&amp;Normalize Selection</source>
-        <translation type="obsolete">Normalizovat &amp;výběr</translation>
+        <translation type="unfinished">Normalizovat &amp;výběr</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1243"/>
         <source>&amp;Sort Columns</source>
-        <translation type="obsolete">&amp;Třídit sloupce</translation>
+        <translation type="unfinished">&amp;Třídit sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1247"/>
         <source>Column Statisti&amp;cs</source>
-        <translation type="obsolete">S&amp;tatistika sloupců</translation>
+        <translation type="unfinished">S&amp;tatistika sloupců</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1248"/>
         <source>statistics on columns</source>
-        <translation type="obsolete">Statistika ve sloupcích</translation>
+        <translation type="unfinished">Statistika ve sloupcích</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1254"/>
         <source>Change &amp;Type &amp;&amp; Format</source>
-        <translation type="obsolete">Změnit &amp;formát &amp;&amp; typ</translation>
+        <translation type="unfinished">Změnit &amp;formát &amp;&amp; typ</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1255"/>
         <source>Ctrl+Alt+O</source>
-        <translation type="obsolete">Ctrl+Alt+O</translation>
+        <translation type="unfinished">Ctrl+Alt+O</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1262"/>
         <source>Edit Column &amp;Description</source>
-        <translation type="obsolete">Upravit &amp;popis sloupce</translation>
+        <translation type="unfinished">Upravit &amp;popis sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1270"/>
         <source>&amp;Insert Empty Rows</source>
-        <translation type="obsolete">Vložit prázdné &amp;řádky</translation>
+        <translation type="unfinished">Vložit prázdné &amp;řádky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1277"/>
         <source>Remo&amp;ve Rows</source>
-        <translation type="obsolete">Odstranit &amp;řádky</translation>
+        <translation type="unfinished">Odstranit &amp;řádky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1284"/>
         <source>Clea&amp;r Rows</source>
-        <translation type="obsolete">Smazat &amp;obsah řádků</translation>
+        <translation type="unfinished">Smazat &amp;obsah řádků</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1291"/>
         <source>&amp;Add Rows</source>
-        <translation type="obsolete">&amp;Přidat řádky</translation>
+        <translation type="unfinished">&amp;Přidat řádky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1295"/>
         <source>Row Statisti&amp;cs</source>
-        <translation type="obsolete">&amp;Statistika řádků</translation>
+        <translation type="unfinished">&amp;Statistika řádků</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1296"/>
         <source>statistics on rows</source>
-        <translation type="obsolete">Statisitka v řádcích</translation>
+        <translation type="unfinished">Statisitka v řádcích</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1501"/>
+        <source>TeX Export Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1502"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation type="obsolete">Nemohu zapisovat do souboru: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Prosím zkontrolujte zda máte práva k zápisu!</translation>
+        <translation type="unfinished">Nemohu zapisovat do souboru: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Prosím zkontrolujte zda máte práva k zápisu!</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1714"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1718"/>
         <source>Go to Cell</source>
-        <translation type="obsolete">Jít na buňku</translation>
+        <translation type="unfinished">Jít na buňku</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1714"/>
         <source>Enter column</source>
-        <translation type="obsolete">Zadat sloupec</translation>
+        <translation type="unfinished">Zadat sloupec</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1718"/>
         <source>Enter row</source>
-        <translation type="obsolete">Zadat řádek</translation>
+        <translation type="unfinished">Zadat řádek</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1730"/>
         <source>Set Table Dimensions</source>
-        <translation type="obsolete">Nastavit rozměry tabulky</translation>
+        <translation type="unfinished">Nastavit rozměry tabulky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1745"/>
         <source>%1: move column %2 from position %3 to %4.</source>
-        <translation type="obsolete">%1: přesunout sloupec %2 z pozice %3 na %4.</translation>
+        <translation type="unfinished">%1: přesunout sloupec %2 z pozice %3 na %4.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1880"/>
         <source>%1: sort column(s)</source>
-        <translation type="obsolete">%1: Řadit sloupce</translation>
+        <translation type="unfinished">%1: Řadit sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2259"/>
         <source>invalid row or column count</source>
-        <translation type="obsolete">neplatný počet řádků nebo sloupců</translation>
+        <translation type="unfinished">neplatný počet řádků nebo sloupců</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2279"/>
         <source>Column %1</source>
-        <translation type="obsolete">Sloupec %1</translation>
+        <translation type="unfinished">Sloupec %1</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2295"/>
         <source>unknown element &apos;%1&apos;</source>
-        <translation type="obsolete">neznámý prvek &apos;%1&apos;</translation>
+        <translation type="unfinished">neznámý prvek &apos;%1&apos;</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2301"/>
         <source>columns attribute and number of read columns do not match</source>
-        <translation type="obsolete">Atribut sloupců a počet čtených sloupců nesouhlasí</translation>
+        <translation type="unfinished">Atribut sloupců a počet čtených sloupců nesouhlasí</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2304"/>
         <source>no table element found</source>
-        <translation type="obsolete">Nenalezen žádný atribut prvku tabulky</translation>
+        <translation type="unfinished">Nenalezen žádný atribut prvku tabulky</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2315"/>
         <source>Hide Comments</source>
-        <translation type="obsolete">Skrýt komentáře</translation>
+        <translation type="unfinished">Skrýt komentáře</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2317"/>
         <source>Show Comments</source>
-        <translation type="obsolete">Zobrazit komentáře</translation>
+        <translation type="unfinished">Zobrazit komentáře</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2321"/>
         <source>Hide Controls</source>
-        <translation type="obsolete">Skrýt ovládání</translation>
+        <translation type="unfinished">Skrýt ovládání</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2323"/>
         <source>Show Controls</source>
-        <translation type="obsolete">Zobrazit ovládání</translation>
+        <translation type="unfinished">Zobrazit ovládání</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2334"/>
         <source>invalid or missing column index</source>
-        <translation type="obsolete">neplatný nebo chybějící index sloupců</translation>
+        <translation type="unfinished">neplatný nebo chybějící index sloupců</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2341"/>
         <source>invalid column width</source>
-        <translation type="obsolete">neplatná šířka sloupce</translation>
+        <translation type="unfinished">neplatná šířka sloupce</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2378"/>
         <source>Table</source>
-        <translation type="obsolete">Tabulka</translation>
+        <translation type="unfinished">Tabulka</translation>
     </message>
 </context>
 </TS>
