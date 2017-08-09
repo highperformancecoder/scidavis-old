@@ -14,27 +14,22 @@ rewrite_dylibs()
     echo "rewrite_dylibs $target"
     otool -L $target|grep opt/local|cut -f1 -d' '|while read dylib; do
         # avoid infinite loops
-        if [ "${dylib##*/}" == "${target##*/}" ]; then 
-            install_name_tool -change $dylib @executable_path/${dylib##*/} $target
-            continue
-        else
+        if [ "${dylib##*/}" != "${target##*/}" ]; then 
             cp -f $dylib $MAC_DIST_DIR
             chmod u+rw $MAC_DIST_DIR/${dylib##*/}
             rewrite_dylibs $MAC_DIST_DIR/${dylib##*/}
             echo "install_name_tool -change $dylib @executable_path/${dylib##*/} $target"
-            install_name_tool -change $dylib @executable_path/${dylib##*/} $target
         fi
+        install_name_tool -change $dylib @executable_path/${dylib##*/} $target
     done
     otool -L $target|grep usr/local|cut -f1 -d' '|while read dylib; do
-        if [ "${dylib##*/}" == "${target##*/}" ]; then 
-            install_name_tool -change $dylib @executable_path/${dylib##*/} $target
-            continue
-        else
+        # avoid infinite loops
+        if [ "${dylib##*/}" != "${target##*/}" ]; then 
             cp -f $dylib $MAC_DIST_DIR
             chmod u+rw $MAC_DIST_DIR/${dylib##*/}
             rewrite_dylibs $MAC_DIST_DIR/${dylib##*/}
-            install_name_tool -change $dylib @executable_path/${dylib##*/} $target
         fi
+        install_name_tool -change $dylib @executable_path/${dylib##*/} $target
     done
 }
 
