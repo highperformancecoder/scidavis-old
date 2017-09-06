@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017 Russell Standish <hpcoder _at_ hpcoders.com.au> -->
+<component type="desktop-application">
+  <id>scidavis</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>SciDAVis</name>
+  <summary>Application for scientific data analysis and visualization</summary>
+
+  <description>
+    <p>
+    SciDAVis is a free interactive application aimed at data analysis and publication-quality plotting. It combines a shallow learning curve and an intuitive, easy-to-use graphical user interface with powerful features such as scriptability and extensibility. SciDAVis runs on GNU/Linux, Windows and MacOS X; possibly also on other platforms like *BSD, although this is untested.
+    </p>
+    <p>
+    SciDAVis is similar in its field of application to proprietary Windows applications like Origin and SigmaPlot as well as free applications like QtiPlot, Labplot and Gnuplot.
+    </p>
+    <p>
+    What sets SciDAVis apart from the above is its emphasis on providing a friendly and open environment (in the software as well as the project) for new and experienced users alike. Particularly, this means that we will try to provide good documentation on all levels, ranging from user’s manual over tutorials down to and including documentation of the internal APIs We encourage users to share their experiences on our forums and on our mailing lists.
+    </p>
+    <p>
+    More information, including screenshots, reviews, current contributors can be found on the SourceForge project webpage.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">scidavis.desktop</launchable>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>A 3D plot</caption>
+      <image>https://alexpl.fedorapeople.org/AppData/SciDAVis/screens/Screen1.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://alexpl.fedorapeople.org/AppData/SciDAVis/screens/Screen2.png</image>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">http://scidavis.sourceforge.net/</url>
+
+  <provides>
+    <binary>scidavis</binary>
+  </provides>
+
+  <releases>
+    <release version="1.21" date="2017-08-09">
+      <description>
+        <ul>
+          <li>Fix up the change to liborigin paths in mxe builds</li>
+          <li>Fix infinite loop in mkMacDist</li>
+          <li>DRY out mkMacDist</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+</component>
