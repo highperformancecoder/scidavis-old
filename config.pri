@@ -137,7 +137,7 @@ unix {# Linux / MacOS X
 	mime_package.path = "$$INSTALLBASE/share/mime/packages"
 
 	man_page.files = scidavis.1
-	man_page.path = "$$INSTALLBASE/share/man/man1/scidavis.1"
+	man_page.path = "$$INSTALLBASE/share/man/man1"
 
 	#deprecated
 	mime_link.files = scidavis/x-sciprj.desktop
