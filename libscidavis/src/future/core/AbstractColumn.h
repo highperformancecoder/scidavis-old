@@ -273,7 +273,7 @@ class AbstractColumn : public AbstractAspect
 		/**
 		 * Use this only when dataType() is double
 		 */
-		virtual void replaceValues(int first, const QVector<double>& new_values) { Q_UNUSED(first) Q_UNUSED(new_values) };
+		virtual void replaceValues(int first, const QVector<qreal>& new_values) { Q_UNUSED(first) Q_UNUSED(new_values) };
 		//@}
 
 	signals: 

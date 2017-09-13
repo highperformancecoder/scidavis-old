@@ -171,7 +171,7 @@ class Column: AbstractAspect
 		void replaceDateTimes(int first, const QList<QDateTime>& new_values);
 		double valueAt(int row) const;
 		void setValueAt(int row, double new_value);
-		void replaceValues(int first, const QVector<double>& new_values);
+		void replaceValues(int first, const QVector<qreal>& new_values);
 
   Column * x() const;
 %MethodCode
@@ -516,7 +516,7 @@ public:
 %MethodCode
 	sipRes = new QVector<qreal>(sipCpp->d_future_matrix->columnCells(a0, a1, a2));
 %End
-	void setColumn(int col, int first_row, const QVector<double> &values);
+	void setColumn(int col, int first_row, const QVector<qreal> &values);
 %MethodCode
 	sipCpp->d_future_matrix->setColumnCells(a0, a1, a1+a2->size()-1, *a2);
 %End
@@ -524,7 +524,7 @@ public:
 %MethodCode
 	sipRes = new QVector<qreal>(sipCpp->d_future_matrix->rowCells(a0, a1, a2));
 %End
-	void setRow(int row, int first_column, const QVector<double> & values);
+	void setRow(int row, int first_column, const QVector<qreal> & values);
 %MethodCode
 	sipCpp->d_future_matrix->setRowCells(a0, a1, a1+a2->size()-1, *a2);
 %End
