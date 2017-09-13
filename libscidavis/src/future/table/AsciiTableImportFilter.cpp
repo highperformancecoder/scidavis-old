@@ -93,9 +93,8 @@ namespace
 
   template <class C> C conv(const QString& x);
   template <> QString conv<QString>(const QString& x) {return x;}
-  template <> double conv<double>(const QString& x) {return x.toDouble();}
-  //  template <> float conv<float>(const QString& x) {return x.toFloat();}
- 
+  template <> qreal conv<qreal>(const QString& x) {return (qreal)(x.toDouble());}
+
   template <class T>
   struct AP: public std::unique_ptr<T>
   {
