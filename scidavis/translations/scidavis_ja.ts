@@ -4169,7 +4169,7 @@ Are you sure you want to continue?</source>
 <context>
     <name>AsciiTableImportFilter</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="176"/>
+        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="175"/>
         <source>Table</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7883,7 +7883,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="609"/>
+        <location filename="../../libscidavis/src/Graph.h" line="610"/>
         <source>F</source>
         <translation type="unfinished"></translation>
     </message>

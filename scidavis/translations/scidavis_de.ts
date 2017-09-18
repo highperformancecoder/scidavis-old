@@ -6248,7 +6248,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
 <context>
     <name>AsciiTableImportFilter</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="176"/>
+        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="175"/>
         <source>Table</source>
         <translation type="unfinished">Tabelle</translation>
     </message>
@@ -11509,7 +11509,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="unfinished">Bitte einen gültigen Dateinamen eingeben!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="609"/>
+        <location filename="../../libscidavis/src/Graph.h" line="610"/>
         <source>F</source>
         <translation type="unfinished">F</translation>
     </message>

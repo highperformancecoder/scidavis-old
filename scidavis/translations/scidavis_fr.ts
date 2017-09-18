@@ -5783,7 +5783,7 @@ Le fichier de version (contenu: &quot;%1&quot;) ne peut être décodé dans un n
 <context>
     <name>AsciiTableImportFilter</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="176"/>
+        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="175"/>
         <source>Table</source>
         <translation type="unfinished">Table</translation>
     </message>
@@ -10170,7 +10170,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Table</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="609"/>
+        <location filename="../../libscidavis/src/Graph.h" line="610"/>
         <source>F</source>
         <translation type="unfinished">F</translation>
     </message>

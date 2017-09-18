@@ -34,7 +34,7 @@ DEFINES       += MANUAL_PATH="\\\"$$replace(manual.path," ","\\ ")\\\""
 QT            += opengl qt3support network svg xml
 
 MOC_DIR        = ../tmp/scidavis
-OBJECTS_DIR    = ../tmp/scidavis
+OBJECTS_DIR    = ../tmp/libscidavis
 DESTDIR        = ./
 
 include( sourcefiles.pri )

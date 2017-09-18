@@ -20,7 +20,7 @@ POST_TARGETDEPS=../libscidavis/libscidavis.a
 CONFIG        += qt warn_on exceptions opengl thread zlib
 QT            += opengl qt3support network svg xml
 MOC_DIR        = ../tmp/scidavis
-OBJECTS_DIR    = ../tmp/scidavis
+OBJECTS_DIR    = ../tmp/test
 
 include(../config.pri)
 python {

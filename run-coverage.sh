@@ -3,11 +3,11 @@ qmake CONFIG+=gcov CONFIG+=aegis
 make qmake
 make clean
 make -j4
-lcov -i -c -b . -d . --no-external -o lcovi.info
 for i in test/00/*; do
     sh $i
 done
-lcov -c -b . -d .  --no-external -o lcovt.info
+lcov --rc "geninfo_adjust_src_path=tmp/" -i -c -d . --no-external -o lcovi.info
+lcov --rc "geninfo_adjust_src_path=tmp/" -c -d .  --no-external -o lcovt.info
 rm lcov.info
 lcov -a lcovi.info -a lcovt.info -o lcov.info
-genhtml -o coverage lcov.info
+genhtml --ignore-errors source -o coverage lcov.info

@@ -5743,7 +5743,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>AsciiTableImportFilter</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="176"/>
+        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="175"/>
         <source>Table</source>
         <translation type="unfinished">Таблица</translation>
     </message>
@@ -10250,7 +10250,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Данные кривой %1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="609"/>
+        <location filename="../../libscidavis/src/Graph.h" line="610"/>
         <source>F</source>
         <translation type="unfinished"></translation>
     </message>
