@@ -23,8 +23,9 @@ void Unittests::readWriteProject()
   file_compress("testProject1.sciprj", "wb9");
   app1.reset(open("testProject1.sciprj.gz"));
   QVERIFY(app1.get());
-
 }
+
+
 
 void Unittests::exportTestProject()
 {
@@ -34,6 +35,13 @@ void Unittests::exportTestProject()
   for (auto i: *windows)
     if (auto w=dynamic_cast<MultiLayer*>(i))
       w->exportSVG(i->windowTitle()+".svg");
+
+  app.reset(open("3dplot.sciprj"));
+  windows.reset(app->windowsList());
+  for (auto i: *windows)
+    if (auto w=dynamic_cast<MyWidget*>(i))
+      w->exportPDF("3dplot.pdf");
+
 }
 
 // checks that the large file Origin import problem (ticket #238) remains fixed

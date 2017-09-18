@@ -41,5 +41,7 @@ fi
 
 diff Graph1.svg $here/test/renderedImages/"${PRETTY_NAME}"/Graph1.svg
 if test $? -ne 0; then fail; fi
+diff 3dplot.pdf $here/test/renderedImages/"${PRETTY_NAME}"/3dplot.pdf
+if test $? -ne 0; then fail; fi
 
 pass
