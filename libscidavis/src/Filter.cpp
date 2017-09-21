@@ -235,6 +235,8 @@ void Filter::output()
     calculateOutputData(X, Y);
 
 	addResultCurve(X, Y);
+	delete[] X;
+	delete[] Y;
 }
 
 int Filter::sortedCurveData(QwtPlotCurve *c, double start, double end, double **x, double **y)
@@ -321,8 +323,6 @@ QwtPlotCurve* Filter::addResultCurve(double *x, double *y)
 	d_graph->insertPlotItem(c, Graph::Line);
     d_graph->updatePlot();
 
-    delete[] x;
-	delete[] y;
 	return (QwtPlotCurve*)c;
 }
 
