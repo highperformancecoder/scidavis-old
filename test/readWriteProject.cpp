@@ -1,8 +1,11 @@
 #include "unittests.h"
 #include "ApplicationWindow.h"
 #include "MultiLayer.h"
+#include "Graph3D.h"
+#include "testPaintDevice.h"
 
 #include <iostream>
+#include <fstream>
 #include <memory>
 #include <stdexcept>
 using namespace std;
@@ -25,23 +28,25 @@ void Unittests::readWriteProject()
   QVERIFY(app1.get());
 }
 
-
-
 void Unittests::exportTestProject()
 {
-  unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
-  QVERIFY(app.get());
-  unique_ptr<QWidgetList> windows(app->windowsList());
-  for (auto i: *windows)
-    if (auto w=dynamic_cast<MultiLayer*>(i))
-      w->exportSVG(i->windowTitle()+".svg");
-
-  app.reset(open("3dplot.sciprj"));
-  windows.reset(app->windowsList());
-  for (auto i: *windows)
-    if (auto w=dynamic_cast<MyWidget*>(i))
-      w->exportPDF("3dplot.pdf");
-
+  {
+    unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
+    QVERIFY(app.get());
+    unique_ptr<QWidgetList> windows(app->windowsList());
+    for (auto i: *windows)
+      if (auto w=dynamic_cast<MultiLayer*>(i))
+          w->exportImage(i->windowTitle()+".png");
+  }
+  
+  {
+    unique_ptr<ApplicationWindow> app(open("3dplot.sciprj"));
+    QVERIFY(app.get());
+    unique_ptr<QWidgetList> windows(app->windowsList());
+    for (auto i: *windows)
+      if (auto w=dynamic_cast<Graph3D*>(i))
+          w->exportImage("3dplot.png");
+  }
 }
 
 // checks that the large file Origin import problem (ticket #238) remains fixed
