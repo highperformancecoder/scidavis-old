@@ -57,6 +57,7 @@ protected:
 
 private:
     void init();
+    double trapezoid();
     QString logInfo();
     void output(){};
 

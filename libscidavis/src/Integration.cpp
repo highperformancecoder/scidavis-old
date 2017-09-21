@@ -69,6 +69,27 @@ void Integration::init()
 	d_result = NAN;
 }
 
+double Integration::trapezoid()
+{
+	double sum = 0.0;
+	double *result = (double *)malloc(d_n*sizeof(double));
+	int size = d_n - 1;
+	for(int i=0; i < size; i++){
+		int j = i + 1;
+		if (result)
+            result[i] = sum;
+		sum += 0.5*(d_y[j] + d_y[i])*(d_x[j] - d_x[i]);
+	}
+
+    if (result){
+        result[size] = sum;
+        d_points = d_n;
+        addResultCurve(d_x, result);
+        free(result);
+    }
+    return sum;
+}
+
 bool Integration::isDataAcceptable()
 {
 	switch (d_method) {
@@ -152,6 +173,8 @@ QString Integration::logInfo()
 	logInfo += tr("Area") + "=";
 	logInfo += QLocale().toString(d_result, 'g', prec);
 	logInfo += "\n-------------------------------------------------------------\n";
+	// use trapezoid rule to get the integral curve and plot it
+	trapezoid();
 
 	gsl_interp_free(interpolation);
 
