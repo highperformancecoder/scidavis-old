@@ -3,6 +3,9 @@
 #include "MultiLayer.h"
 #include "Graph3D.h"
 #include "testPaintDevice.h"
+#include "Note.h"
+#include "near.h"
+#include <QWorkspace>
 
 #include <iostream>
 #include <fstream>
@@ -56,4 +59,33 @@ void Unittests::largeOriginImport()
   QVERIFY(app.get());
 }
 
+void Unittests::convertMatrix()
+{
+  unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
+  QVERIFY(app.get());
+  unique_ptr<QWidgetList> windows(app->windowsList());
+  for (auto i: *windows)
+    if (auto table=dynamic_cast<Table*>(i))
+      {
+        QVERIFY(table->name()=="Table1");
+        QCOMPARE(table->numRows(),30);
+        QCOMPARE(table->numCols(),2);
+        app->activateWindow(table);
+        QVERIFY(table==app->d_workspace->activeWindow());
+        app->convertTableToMatrix();
+        // active window should switch to a matrix
+        Matrix* matrix=dynamic_cast<Matrix*>(app->d_workspace->activeWindow());
+        QVERIFY(matrix);
+        QCOMPARE(matrix->numRows(),table->numRows());
+        QCOMPARE(matrix->numCols(),table->numCols());
+        for (int r=0; r<matrix->numRows(); ++r)
+          for (int c=0; c<matrix->numCols(); ++c)
+            QVERIFY(near(matrix->cell(r,c),table->cell(r,c),1e-5));
+      }
+}
 
+void Unittests::note()
+{
+  Note& note=*newNote();
+  activateWindow(&note);
+}

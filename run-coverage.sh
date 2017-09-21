@@ -1,8 +1,8 @@
 # runs the coverage test, building HTML display of test-covered code
-qmake CONFIG+=gcov CONFIG+=aegis
-make qmake
-make clean
-make -j4
+#qmake CONFIG+=gcov CONFIG+=aegis
+#make qmake
+#make clean
+#make -j4
 for i in test/00/*; do
     sh $i
 done

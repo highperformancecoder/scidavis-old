@@ -9,7 +9,9 @@ private slots:
   void largeOriginImport();
 
   void exportTestProject();
-
+  void convertMatrix();
+  void note();
+  
   void lockToolbars();
   
   void showHelp();

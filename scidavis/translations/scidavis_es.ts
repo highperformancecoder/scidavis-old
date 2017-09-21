@@ -8599,7 +8599,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">¡No especificó un conjunto de datos válidos para esta operación!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Filter.cpp" line="315"/>
+        <location filename="../../libscidavis/src/Filter.cpp" line="317"/>
         <source>of</source>
         <translation type="unfinished">de </translation>
     </message>
@@ -8620,13 +8620,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Error de nombre de color</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Filter.cpp" line="305"/>
+        <location filename="../../libscidavis/src/Filter.cpp" line="307"/>
         <source>1</source>
         <comment>filter table x column name</comment>
         <translation type="unfinished">1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Filter.cpp" line="306"/>
+        <location filename="../../libscidavis/src/Filter.cpp" line="308"/>
         <source>2</source>
         <comment>filter table y column name</comment>
         <translation type="unfinished">2</translation>
@@ -11356,59 +11356,59 @@ Los límites deben estar dentro del rango de x; si no conoce el máximo (mínimo
         <translation type="unfinished">Integración</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="82"/>
-        <location filename="../../libscidavis/src/Integration.cpp" line="91"/>
-        <location filename="../../libscidavis/src/Integration.cpp" line="125"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="103"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="112"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="146"/>
         <source>SciDAVis</source>
         <translation type="unfinished">SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="83"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="104"/>
         <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
         <translation type="unfinished">Metodo de interpolación desconocido. Los valores válidos son: 0 - Lineal, 1 - Cúbico, 2 - Akima.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="92"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="113"/>
         <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
         <translation type="unfinished">¡Varios puntos tienen el mismo valor de x causando división por cero, operación abortada!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="106"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="127"/>
         <source>Linear</source>
         <translation type="unfinished">Lineal</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="110"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="131"/>
         <source>Cubic</source>
         <translation type="unfinished">Cúbica</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="114"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="135"/>
         <source>Akima</source>
         <translation type="unfinished">Akima</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="126"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="147"/>
         <source>You need at least %1 points in order to perform this operation!</source>
         <translation type="unfinished">¡Necesita al menos %1 puntos para realizar esta operación!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="131"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="152"/>
         <source>Plot</source>
         <translation type="unfinished">Gráfico</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="132"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="153"/>
         <source>Numerical integration of</source>
         <translation type="unfinished">Integración numérica de</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="132"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="153"/>
         <source> using </source>
         <translation type="unfinished">usando</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="132"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="153"/>
         <source>Interpolation</source>
         <translation type="unfinished">Interpolación</translation>
     </message>
@@ -11429,27 +11429,27 @@ Los límites deben estar dentro del rango de x; si no conoce el máximo (mínimo
         <translation type="obsolete">max</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="136"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="157"/>
         <source>Points</source>
         <translation type="unfinished">Puntos</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="136"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="157"/>
         <source>from</source>
         <translation type="unfinished">desde</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="137"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="158"/>
         <source>to</source>
         <translation type="unfinished">a</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="149"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="170"/>
         <source>Peak at</source>
         <translation type="unfinished">Pico en </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="152"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="173"/>
         <source>Area</source>
         <translation type="unfinished">Area</translation>
     </message>
@@ -11462,9 +11462,9 @@ Los límites deben estar dentro del rango de x; si no conoce el máximo (mínimo
         <translation type="obsolete">Metodo de integración desconocido. Los valores válidos deben estar en el rango: 1 (metodo del trapecio) al 5.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="82"/>
-        <location filename="../../libscidavis/src/Integration.cpp" line="91"/>
-        <location filename="../../libscidavis/src/Integration.cpp" line="125"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="103"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="112"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="146"/>
         <source>Error</source>
         <translation type="unfinished">Error</translation>
     </message>
