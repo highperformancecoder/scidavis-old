@@ -36,7 +36,7 @@ void Unittests::exportTestProject()
     unique_ptr<QWidgetList> windows(app->windowsList());
     for (auto i: *windows)
       if (auto w=dynamic_cast<MultiLayer*>(i))
-          w->exportImage(i->windowTitle()+".png");
+          w->exportSVG(i->windowTitle()+".svg");
   }
   
   {

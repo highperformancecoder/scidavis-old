@@ -39,8 +39,7 @@ if [ -f /etc/os-release ]; then
     . /etc/os-release
 fi
 
-#diff Graph1.png $here/test/renderedImages/"${PRETTY_NAME}"/Graph1.svg
-diff Graph1.png $here/test/renderedImages/Graph1.png
+diff Graph1.svg $here/test/renderedImages/"${PRETTY_NAME}"/Graph1.svg
 if test $? -ne 0; then fail; fi
 # unfortunately, this test fails, as OpenGL rendering appears to be
 # non-deterministic.
