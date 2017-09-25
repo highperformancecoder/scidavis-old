@@ -71,23 +71,20 @@ void Integration::init()
 
 double Integration::trapezoid()
 {
-	double sum = 0.0;
-	double *result = (double *)malloc(d_n*sizeof(double));
-	int size = d_n - 1;
-	for(int i=0; i < size; i++){
-		int j = i + 1;
-		if (result)
-            result[i] = sum;
-		sum += 0.5*(d_y[j] + d_y[i])*(d_x[j] - d_x[i]);
-	}
+  double sum = 0.0;
+  vector<double> result;
+  result.reserve(d_n);
+  int size = d_n - 1;
+  for(int i=0; i < size; i++){
+    int j = i + 1;
+    result.push_back(sum);
+    sum += 0.5*(d_y[j] + d_y[i])*(d_x[j] - d_x[i]);
+  }
 
-    if (result){
-        result[size] = sum;
-        d_points = d_n;
-        addResultCurve(d_x, result);
-        free(result);
-    }
-    return sum;
+  result.push_back(sum);
+  d_points = d_n;
+  addResultCurve(d_x, &result[0]);
+  return sum;
 }
 
 bool Integration::isDataAcceptable()

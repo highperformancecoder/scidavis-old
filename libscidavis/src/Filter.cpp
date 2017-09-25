@@ -228,15 +228,13 @@ bool Filter::run()
 
 void Filter::output()
 {
-    double *X = new double[d_points];
-    double *Y = new double[d_points];
+  vector<double> X(d_points);
+  vector<double> Y(d_points);
 
     //do the data analysis
-    calculateOutputData(X, Y);
+    calculateOutputData(&X[0], &Y[0]);
 
-	addResultCurve(X, Y);
-	delete[] X;
-	delete[] Y;
+    addResultCurve(&X[0], &Y[0]);
 }
 
 int Filter::sortedCurveData(QwtPlotCurve *c, double start, double end, double **x, double **y)
@@ -246,13 +244,12 @@ int Filter::sortedCurveData(QwtPlotCurve *c, double start, double end, double **
     
     // start/end finding only works on nondecreasing data, so sort first
     int datasize = c->dataSize();
-    double *xtemp = new double[datasize];
+    vector<double> xtemp;
     for (int i = 0; i < datasize; i++) {
-        xtemp[i] = c->x(i);
+      xtemp.push_back(c->x(i));
     }
-    size_t *p = new size_t[datasize];
-    gsl_sort_index(p, xtemp, 1, datasize);
-    delete[] xtemp;
+    vector<size_t> p(datasize);
+    gsl_sort_index(&p[0], &xtemp[0], 1, datasize);
     
     // find indices that, when permuted by the sort result, give start and end
     int i_start, i_end;
@@ -265,13 +262,13 @@ int Filter::sortedCurveData(QwtPlotCurve *c, double start, double end, double **
     
     // make result arrays
     int n = i_end - i_start + 1;
+    // TODO refactor caller code to make this mroe RAII.
     (*x) = new double[n];
     (*y) = new double[n];
     for (int j = 0, i = i_start; i <= i_end; i++, j++) {
         (*x)[j] = c->x(p[i]);
         (*y)[j] = c->y(p[i]);
     }
-    delete[] p;
     return n;
 }
 
@@ -290,6 +287,7 @@ int Filter::curveData(QwtPlotCurve *c, double start, double end, double **x, dou
           break;
 
     int n = i_end - i_start + 1;
+    // TODO refactor caller code to make this mroe RAII.
     (*x) = new double[n];
     (*y) = new double[n];
 
