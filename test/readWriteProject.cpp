@@ -48,7 +48,7 @@ void Unittests::exportTestProject()
     unique_ptr<QWidgetList> windows(app->windowsList());
     for (auto i: *windows)
       if (auto w=dynamic_cast<Graph3D*>(i))
-          w->exportImage("3dplot.png");
+          w->exportImage(i->windowTitle()+".png");
   }
 }
 

@@ -11,6 +11,8 @@ private slots:
   void exportTestProject();
   void convertMatrix();
   void note();
+
+  void plot3d();
   
   void lockToolbars();
   
