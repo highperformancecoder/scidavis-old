@@ -16,12 +16,14 @@ void Unittests::chooseHelpFolder() {}
 QTEST_MAIN(Unittests);
 
 typedef QMessageBox::StandardButton StandardButton;
+unsigned Unittests::numInfos=0, Unittests::numWarnings=0;
 
 // override the QmessageBox static methods to turn a failure messages into throws, and ignore warnings
 StandardButton QMessageBox::information
 (QWidget *, const QString&, const QString& text, StandardButtons,StandardButton) 
 {
   cerr << text.toStdString() << endl;
+  Unittests::numInfos++;
   return QMessageBox::Ok;
 }
 
@@ -43,6 +45,7 @@ StandardButton QMessageBox::warning
 (QWidget *, const QString &, const QString& text, StandardButtons, StandardButton)
 { 
   cerr << text.toStdString() << endl;
+  Unittests::numWarnings++;
   return QMessageBox::Ok;
 }
      

@@ -4,6 +4,7 @@
 class Unittests: public ApplicationWindow
 {
   Q_OBJECT
+
 private slots:
   void readWriteProject();
   void largeOriginImport();
@@ -20,4 +21,7 @@ private slots:
   void chooseHelpFolder();
 
   void fft();
+  
+public:
+  static unsigned numInfos, numWarnings;
 };

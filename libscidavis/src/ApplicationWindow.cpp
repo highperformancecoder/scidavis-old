@@ -1407,11 +1407,13 @@ void ApplicationWindow::plot3DBars()
 	if (w->inherits("Table"))
 	{
 		Table *table = static_cast<Table *>(w);
-		if (!validFor3DPlot(table))
-			return;
 
 		if(table->selectedColumns().count() == 1)
-			dataPlotXYZ(table, table->colName(table->firstSelectedColumn()), Graph3D::Bars);
+                  {
+                    if (!validFor3DPlot(table))
+                      return;
+                    dataPlotXYZ(table, table->colName(table->firstSelectedColumn()), Graph3D::Bars);
+                  }
 		else
 			QMessageBox::warning(this, tr("Plot error"),tr("You must select exactly one column for plotting!"));
 	}
@@ -1428,11 +1430,13 @@ void ApplicationWindow::plot3DScatter()
 	if (w->inherits("Table"))
 	{
 		Table *table = static_cast<Table *>(w);
-		if (!validFor3DPlot(table))
-			return;
 
 		if(table->selectedColumns().count() == 1)
-			dataPlotXYZ(table, table->colName(table->firstSelectedColumn()), Graph3D::Scatter);
+                  {
+                    if (!validFor3DPlot(table))
+                      return;
+                    dataPlotXYZ(table, table->colName(table->firstSelectedColumn()), Graph3D::Scatter);
+                  }
 		else
 			QMessageBox::warning(this, tr("Plot error"),tr("You must select exactly one column for plotting!"));
 	}
@@ -1449,11 +1453,13 @@ void ApplicationWindow::plot3DTrajectory()
 	if (w->inherits("Table"))
 	{
 		Table *table = static_cast<Table *>(w);
-		if (!validFor3DPlot(table))
-			return;
 
 		if(table->selectedColumns().count() == 1)
-			dataPlotXYZ(table, table->colName(table->firstSelectedColumn()), Graph3D::Trajectory);
+                  {
+                    if (!validFor3DPlot(table))
+                      return;
+                    dataPlotXYZ(table, table->colName(table->firstSelectedColumn()), Graph3D::Trajectory);
+                  }
 		else
 			QMessageBox::warning(this, tr("Plot error"),tr("You must select exactly one column for plotting!"));
 	}
