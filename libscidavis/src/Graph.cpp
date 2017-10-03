@@ -1498,7 +1498,7 @@ void Graph::exportPainter(QPaintDevice& paintDevice, bool keepAspect, QRect rect
 void Graph::exportPainter(QPainter &painter, bool keepAspect, QRect rect, QSize size)
  {
 	if (size == QSize()) size = d_plot->size();
-	if (rect == QRect()) rect = d_plot->plotLayout()->canvasRect();
+	if (rect == QRect()) rect = QRect(QPoint(0,0),size);
 	if (keepAspect)
 	{
 		QSize scaled = rect.size();
