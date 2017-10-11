@@ -10783,9 +10783,8 @@ sera remplacé par un seul espace.</translation>
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Avertissement: la vérification de cette option conduit
-à la colonne se chevauchant si les colonnes
-du fichier ASCII n&apos;ont pas le même nombre de rangées</translation>
+        <translation>Avertissement : cocher cette option implique le chevauchement des colonnes si les colonnes
+du fichier ASCII n&apos;ont pas le même nombre de lignes.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="149"/>
@@ -10800,61 +10799,61 @@ du fichier ASCII n&apos;ont pas le même nombre de rangées</translation>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="154"/>
         <source>default</source>
-        <translation type="unfinished">défault</translation>
+        <translation>défaut</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="162"/>
         <source>Re&amp;member the above options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Se souvenir des options ci-dessus</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="164"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aide</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="220"/>
         <source>The column separator can be customized. The following special codes can be used:
 \t for a TAB character 
 \s for a SPACE</source>
-        <translation type="unfinished">Le séparateur de colonne peut être personnalisé. Les codes spéciaux suivant peuvent être utilisés :
+        <translation>Le séparateur de colonne peut être personnalisé. Les codes spéciaux suivant peuvent être utilisés :
 \t pour une tabulation
 \s pour une espace</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="221"/>
         <source>The separator must not contain the following characters: 0-9eE.+-</source>
-        <translation type="unfinished">Le séparateur ne doit pas contenir un des caractères suivant : 0-9eE.+-</translation>
+        <translation>Le séparateur ne doit pas contenir un des caractères suivant : 0-9eE.+-</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="222"/>
         <source>Remove white spaces from line ends</source>
-        <translation type="unfinished">Supprimer les espaces de fin de lignes</translation>
+        <translation>Supprimer les espaces de fin de ligne</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="223"/>
         <source>By checking this option all white spaces will be removed from the beginning and the end of the lines in the ASCII file.</source>
-        <translation type="unfinished">En validant cette option, toutes les espaces du fichier ASCII seront supprimées.</translation>
+        <translation>En cochant cette option, toutes les espaces du fichier ASCII seront supprimées.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="224"/>
         <source>Simplify white spaces</source>
-        <translation type="unfinished">Simplifier les espaces</translation>
+        <translation>Simplifier les espaces</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="225"/>
         <source>By checking this option each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.</source>
-        <translation type="unfinished">En validant cette option, toutes les espaces (y compris les tabulations) seront remplacées par une espace unique.</translation>
+        <translation>En cochant cette option, toutes les espaces (y compris les tabulations) seront remplacées par une espace unique.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="226"/>
         <source>By checking this option all white spaces will be removed from the beginning and the end of the lines and each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.</source>
-        <translation type="unfinished">En validant cette option, toutes les espaces du fichier seront supprimées et les tabulations seront remplacées par une espace unique.</translation>
+        <translation type="unfinished">En cochant cette option, toutes les espaces du fichier seront supprimées et les tabulations seront remplacées par une espace unique.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="228"/>
         <source>Warning: using these two last options leads to column overlaping if the columns in the ASCII file don&apos;t have the same number of rows.</source>
-        <translation type="unfinished">Attention : Utiliser ces deux dernières options entrainera le recouvrement de colonnes si les colonnes du fichier ASCII n&apos;ont pas le même nombre de rangées.</translation>
+        <translation>Attention  : Utiliser ces deux dernières options entrainera le recouvrement de colonnes si les colonnes du fichier ASCII n&apos;ont pas le même nombre de lignes.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="229"/>
@@ -11189,22 +11188,22 @@ Les limites doivent être dans la gamme de x ; Si vous ne connaissez pas la vale
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="101"/>
         <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation type="unfinished"></translation>
+        <translation>Méthode d&apos;interpolation inconnue. Les valeurs valides sont : 0 - Linéaire, 1 - Cubique, 2 - Akima.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="110"/>
         <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Plusieurs points de données ont la même valeur x provoquant des divisions par zéro, opération annulée !</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="124"/>
         <source>Linear</source>
-        <translation type="unfinished"></translation>
+        <translation>Linéaire</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="128"/>
         <source>Cubic</source>
-        <translation type="unfinished">Cubique</translation>
+        <translation>Cubique</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="132"/>
@@ -11214,7 +11213,7 @@ Les limites doivent être dans la gamme de x ; Si vous ne connaissez pas la vale
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="144"/>
         <source>You need at least %1 points in order to perform this operation!</source>
-        <translation type="unfinished">Vous avez besoin d&apos;au moins% 1 points pour effectuer cette opération!</translation>
+        <translation>Vous avez besoin d&apos;au moins% 1 points pour effectuer cette opération !</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="149"/>
@@ -11224,12 +11223,12 @@ Les limites doivent être dans la gamme de x ; Si vous ne connaissez pas la vale
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="150"/>
         <source>Numerical integration of</source>
-        <translation type="unfinished"></translation>
+        <translation>Intégration numérique de</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="150"/>
         <source> using </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> utilisant </translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="150"/>
@@ -11239,12 +11238,12 @@ Les limites doivent être dans la gamme de x ; Si vous ne connaissez pas la vale
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="154"/>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dots</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="154"/>
         <source>from</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">depuis</translation>
     </message>
     <message>
         <source>Iterations</source>
@@ -11262,19 +11261,19 @@ Les limites doivent être dans la gamme de x ; Si vous ne connaissez pas la vale
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="167"/>
         <source>Peak at</source>
-        <translation type="unfinished"></translation>
+        <translation>Pic à</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="170"/>
         <source>Area</source>
-        <translation type="unfinished"> Aire</translation>
+        <translation>Aire</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Integration.cpp" line="100"/>
         <location filename="../../libscidavis/src/Integration.cpp" line="109"/>
         <location filename="../../libscidavis/src/Integration.cpp" line="143"/>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
 </context>
 <context>
@@ -11289,25 +11288,25 @@ Les limites doivent être dans la gamme de x ; Si vous ne connaissez pas la vale
         <location filename="../../libscidavis/src/Interpolation.cpp" line="94"/>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="139"/>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="57"/>
         <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Méthode d&apos;interpolation inconnue. Les valeurs valides sont : 0 - Linéaire, 1 - Cubique, 2 - Akima.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="65"/>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="66"/>
         <source>Linear</source>
-        <translation type="unfinished"></translation>
+        <translation>Linéaire</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="65"/>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="69"/>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="73"/>
         <source>Int</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entier</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="66"/>
@@ -11320,7 +11319,7 @@ Les limites doivent être dans la gamme de x ; Si vous ne connaissez pas la vale
         <location filename="../../libscidavis/src/Interpolation.cpp" line="69"/>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="70"/>
         <source>Cubic</source>
-        <translation type="unfinished">Cubique</translation>
+        <translation>Cubique</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="73"/>
@@ -11331,24 +11330,24 @@ Les limites doivent être dans la gamme de x ; Si vous ne connaissez pas la vale
     <message>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="87"/>
         <source>Unknown interpolation method, valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation type="unfinished"></translation>
+        <translation>Méthode d&apos;interpolation inconnue. Les valeurs valides sont : 0 - Linéaire, 1 - Cubique, 2 - Akima.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="95"/>
         <source>You need at least %1 points in order to perform this operation!</source>
-        <translation type="unfinished">Vous avez besoin d&apos;au moins% 1 points pour effectuer cette opération!</translation>
+        <translation>Vous avez besoin d&apos;au moins %1 points pour effectuer cette opération !</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="140"/>
         <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Plusieurs points de données ont la même valeur en x provoquant des divisions par zéro, opération annulée !</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="56"/>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="94"/>
         <location filename="../../libscidavis/src/Interpolation.cpp" line="139"/>
         <source>SciDAVis</source>
-        <translation type="unfinished">SciDAVis</translation>
+        <translation>SciDAVis</translation>
     </message>
 </context>
 <context>
