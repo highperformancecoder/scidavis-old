@@ -43,6 +43,7 @@ PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *c
 : Script(env, code, context, name)
 {
 	PyCode = NULL;
+	PyGILState_STATE state = PyGILState_Ensure();
 	// Old: All scripts share a global namespace, and module top-level has its own nonstandard local namespace
 	modLocalDict = PyDict_New();
 	// A bit of a hack, but we need either IndexError or len() from __builtins__.
@@ -71,6 +72,7 @@ PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *c
 	else
 		PyErr_Print();
 	// "self" is unique to each script, so they can't all run in the __main__ namespace
+	PyGILState_Release(state);
 	setQObject(Context, "self");
 }
 
