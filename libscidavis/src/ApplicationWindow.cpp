@@ -158,6 +158,8 @@
 #include <zlib.h>
 
 #include <iostream>
+#include <memory>
+using namespace std;
 
 #ifdef Q_OS_WIN
 #include <io.h> // for _commit()
@@ -3488,36 +3490,36 @@ void ApplicationWindow::open()
 
 ApplicationWindow* ApplicationWindow::open(const QString& fn, const QStringList& scriptArgs)
 {
-	if (
-			fn.endsWith(".opj", Qt::CaseInsensitive) ||
-			fn.endsWith(".ogm", Qt::CaseInsensitive) ||
-			fn.endsWith(".ogw", Qt::CaseInsensitive) ||
-			fn.endsWith(".ogg", Qt::CaseInsensitive) ||
-			fn.endsWith(".org", Qt::CaseInsensitive)
-			)
+  if (
+      fn.endsWith(".opj", Qt::CaseInsensitive) ||
+      fn.endsWith(".ogm", Qt::CaseInsensitive) ||
+      fn.endsWith(".ogw", Qt::CaseInsensitive) ||
+      fn.endsWith(".ogg", Qt::CaseInsensitive) ||
+      fn.endsWith(".org", Qt::CaseInsensitive)
+      )
 #ifdef ORIGIN_IMPORT
-		return importOPJ(fn);
+    return importOPJ(fn);
 #else
-		{
-                QMessageBox::critical(this, tr("File opening error"),  tr("SciDAVis currently does not support Origin import. If you are interested in reviving and maintaining an Origin import filter, contact the developers.").arg(fn));
-				return 0;
-		}
+  {
+    QMessageBox::critical(this, tr("File opening error"),  tr("SciDAVis currently does not support Origin import. If you are interested in reviving and maintaining an Origin import filter, contact the developers.").arg(fn));
+    return 0;
+  }
 #endif
-	else if (fn.endsWith(".py", Qt::CaseInsensitive))
-          return loadScript(fn, scriptArgs);
-	else if (
-			fn.endsWith(".sciprj",Qt::CaseInsensitive) ||
-			fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) ||
-			fn.endsWith(".qti",Qt::CaseInsensitive) ||
-			fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
-			fn.endsWith(".sciprj~",Qt::CaseInsensitive) ||
-			fn.endsWith(".sciprj.gz~",Qt::CaseInsensitive) ||
-			fn.endsWith(".qti~",Qt::CaseInsensitive) ||
-			fn.endsWith(".qti.gz~",Qt::CaseInsensitive)
-			)
-		return openProject(fn);
-	else
-		return plotFile(fn);
+  else if (fn.endsWith(".py", Qt::CaseInsensitive))
+    return loadScript(fn, scriptArgs);
+  else if (
+           fn.endsWith(".sciprj",Qt::CaseInsensitive) ||
+           fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) ||
+           fn.endsWith(".qti",Qt::CaseInsensitive) ||
+           fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
+           fn.endsWith(".sciprj~",Qt::CaseInsensitive) ||
+           fn.endsWith(".sciprj.gz~",Qt::CaseInsensitive) ||
+           fn.endsWith(".qti~",Qt::CaseInsensitive) ||
+           fn.endsWith(".qti.gz~",Qt::CaseInsensitive)
+           )
+    return openProject(fn);
+  else
+    return plotFile(fn);
 }
 
 void ApplicationWindow::openRecentProject()
@@ -3605,326 +3607,332 @@ QFile * ApplicationWindow::openCompressedFile(const QString& fn)
 	return file;
 }
 
+bool ApplicationWindow::loadProject(const QString& fn)
+{
+  unique_ptr<QFile> file;
+
+  if (fn.endsWith(".gz", Qt::CaseInsensitive) || fn.endsWith(".gz~", Qt::CaseInsensitive)) {
+    file.reset(openCompressedFile(fn));
+    if (!file) return false;
+  } else {
+    file.reset(new QFile(fn));
+    if (!file->open(QIODevice::ReadOnly))
+      {
+        QMessageBox::critical(this, tr("File opening error"),  file->errorString());
+        return false;
+      }
+  }
+
+  QTextStream t(file.get());
+  t.setEncoding(QTextStream::UnicodeUTF8);
+  QString s;
+  QStringList list;
+
+  s = t.readLine();
+  list = s.split(QRegExp("\\s"), QString::SkipEmptyParts);
+  if (list.count() < 2 || (list[0] != "SciDAVis" && list[0] != "QtiPlot")) {
+    if (QFile::exists(fn + "~")) {
+      int choice = QMessageBox::question(this, tr("File opening error"),
+                                         tr("The file <b>%1</b> is corrupted, but there exists a backup copy.<br>Do you want to open the backup instead?").arg(fn),
+                                         QMessageBox::Yes|QMessageBox::Default, QMessageBox::No|QMessageBox::Escape);
+      if (choice == QMessageBox::Yes) {
+        QMessageBox::information(this, tr("Opening backup copy"),
+                                 tr("The original (corrupt) file is being left untouched, in case you want to "\
+                                    "try rescuing data manually. If you want to continue working with the "\
+                                    "automatically restored backup copy, you have to explicitly overwrite the "\
+                                    "original file."));
+        return loadProject(fn + "~");
+      }
+    }
+    QMessageBox::critical(this, tr("File opening error"),  tr("The file <b>%1</b> is not a valid project file.").arg(fn));
+    return false;
+  }
+
+  QStringList vl = list[1].split(".", QString::SkipEmptyParts);
+  if(
+     fn.endsWith(".qti",Qt::CaseInsensitive) ||
+     fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
+     fn.endsWith(".qti~",Qt::CaseInsensitive) ||
+     fn.endsWith(".qti.gz~",Qt::CaseInsensitive)
+     ) {
+    d_file_version = 100*(vl[0]).toInt()+10*(vl[1]).toInt()+(vl[2]).toInt();
+    if(d_file_version > 90) {
+      QMessageBox::critical(this, tr("File opening error"),
+                            tr("SciDAVis does not support QtiPlot project files from versions later than 0.9.0.").arg(fn));
+      return 0;
+    }
+  } else 
+    d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
+
+  applyUserSettings();
+  projectname = fn;
+  d_file_version = d_file_version;
+  setWindowTitle(tr("SciDAVis") + " - " + fn);
+
+  QFileInfo fi(fn);
+  QString baseName = fi.fileName();
+
+  if (d_file_version < 73)
+    t.readLine();
+
+  s = t.readLine();
+  list=s.split("\t", QString::SkipEmptyParts);
+  if (list[0] == "<scripting-lang>")
+    {
+      if (!setScriptingLang(list[1], true))
+        QMessageBox::warning(this, tr("File opening error"),
+                             tr("The file \"%1\" was created using \"%2\" as scripting language.\n\n"\
+                                "Initializing support for this language FAILED; I'm using \"%3\" instead.\n"\
+                                "Various parts of this file may not be displayed as expected.")\
+                             .arg(fn).arg(list[1]).arg(scriptEnv->name()));
+
+      s = t.readLine();
+      list=s.split("\t", QString::SkipEmptyParts);
+    }
+  int aux=0,widgets=list[1].toInt();
+
+  QString titleBase = tr("Window") + ": ";
+  QString title = titleBase + "1/"+QString::number(widgets)+"  ";
+
+  QProgressDialog progress(this);
+  progress.setWindowModality(Qt::WindowModal);
+  progress.setRange(0, widgets);
+  progress.setMinimumWidth(width()/2);
+  progress.setWindowTitle(tr("Opening file") + ": " + baseName);
+  progress.setLabelText(title);
+  progress.setActiveWindow();
+
+  Folder *cf = projectFolder();
+  folders->blockSignals (true);
+  blockSignals (true);
+  //rename project folder item
+  FolderListItem *item = (FolderListItem *)folders->firstChild();
+  item->setText(0, fi.baseName());
+  item->folder()->setName(fi.baseName());
+
+  //process tables and matrix information
+  while ( !t.atEnd() && !progress.wasCanceled())
+    {
+      s = t.readLine(4096); // workaround for safely reading very big lines
+      list.clear();
+      if  (s.left(8) == "<folder>")
+        {
+          list = s.split("\t");
+          Folder *f = new Folder(current_folder, list[1]);
+          f->setBirthDate(list[2]);
+          f->setModificationDate(list[3]);
+          if(list.count() > 4)
+            if (list[4] == "current")
+              cf = f;
+
+          FolderListItem *fli = new FolderListItem(current_folder->folderListItem(), f);
+          fli->setText(0, list[1]);
+          f->setFolderListItem(fli);
+
+          current_folder = f;
+        }
+      else if  (s == "<table>")
+        {
+          title = titleBase + QString::number(++aux)+"/"+QString::number(widgets);
+          progress.setLabelText(title);
+
+          openTable(this, t);
+          progress.setValue(aux);
+        }
+      else if (s.left(17)=="<TableStatistics>")
+        {
+          QStringList lst;
+          while ( s!="</TableStatistics>" )
+            {
+              s=t.readLine();
+              lst<<s;
+            }
+          lst.pop_back();
+          openTableStatistics(lst);
+        }
+      else if  (s == "<matrix>")
+        {
+          title= titleBase + QString::number(++aux)+"/"+QString::number(widgets);
+          progress.setLabelText(title);
+          QStringList lst;
+          while ( s != "</matrix>" )
+            {
+              s=t.readLine();
+              lst<<s;
+            }
+          lst.pop_back();
+          openMatrix(this, lst);
+          progress.setValue(aux);
+        }
+      else if  (s == "<note>")
+        {
+          title= titleBase + QString::number(++aux)+"/"+QString::number(widgets);
+          progress.setLabelText(title);
+          for (int i=0; i<3; i++)
+            {
+              s = t.readLine();
+              list << s;
+            }
+          Note* m = openNote(this,list);
+          QStringList cont;
+          while ( s != "</note>" )
+            {
+              s=t.readLine();
+              cont << s;
+            }
+          cont.pop_back();
+          m->restore(cont);
+          progress.setValue(aux);
+        }
+      else if  (s == "</folder>")
+        {
+          Folder *parent = (Folder *)current_folder->parent();
+          if (!parent)
+            current_folder = projectFolder();
+          else
+            current_folder = parent;
+        }
+    }
+
+  if (progress.wasCanceled())
+    {
+      saved = true;
+      close();
+      return 0;
+    }
+
+  //process the rest
+  t.seek(0);
+
+  MultiLayer *plot=0;
+  while ( !t.atEnd() && !progress.wasCanceled())
+    {
+      s = t.readLine(4096); // workaround for safely reading very big lines
+      if  (s.left(8) == "<folder>")
+        {
+          list = s.split("\t");
+          current_folder = current_folder->findSubfolder(list[1]);
+        }
+      else if  (s == "<multiLayer>")
+        {//process multilayers information
+          title = titleBase + QString::number(++aux)+"/"+QString::number(widgets);
+          progress.setLabelText(title);
+
+          s=t.readLine();
+          QStringList graph=s.split("\t");
+          QString caption=graph[0];
+          plot = multilayerPlot(caption);
+          plot->setCols(graph[1].toInt());
+          plot->setRows(graph[2].toInt());
+
+          setListViewDate(caption, graph[3]);
+          plot->setBirthDate(graph[3]);
+
+          restoreWindowGeometry(this, plot, t.readLine());
+          plot->blockSignals(true);
+
+          if (d_file_version > 71)
+            {
+              QStringList lst=t.readLine().split("\t");
+              plot->setWindowLabel(lst[1]);
+              setListViewLabel(plot->name(),lst[1]);
+              plot->setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
+            }
+          if (d_file_version > 83)
+            {
+              QStringList lst=t.readLine().split("\t", QString::SkipEmptyParts);
+              plot->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
+              lst=t.readLine().split("\t", QString::SkipEmptyParts);
+              plot->setSpacing(lst[1].toInt(),lst[2].toInt());
+              lst=t.readLine().split("\t", QString::SkipEmptyParts);
+              plot->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
+              lst=t.readLine().split("\t", QString::SkipEmptyParts);
+              plot->setAlignement(lst[1].toInt(),lst[2].toInt());
+            }
+
+          while ( s!="</multiLayer>" )
+            {//open layers
+              s = t.readLine();
+              if (s.left(7)=="<graph>")
+                {
+                  list.clear();
+                  while ( s!="</graph>" )
+                    {
+                      s=t.readLine();
+                      list<<s;
+                    }
+                  openGraph(this, plot, list);
+                }
+            }
+          plot->blockSignals(false);
+          progress.setValue(aux);
+        }
+      else if  (s == "<SurfacePlot>")
+        {//process 3D plots information
+          list.clear();
+          title = titleBase + QString::number(++aux)+"/"+QString::number(widgets);
+          progress.setLabelText(title);
+          while ( s!="</SurfacePlot>" )
+            {
+              s=t.readLine();
+              list<<s;
+            }
+          openSurfacePlot(this,list);
+          progress.setValue(aux);
+        }
+      else if  (s == "</folder>")
+        {
+          Folder *parent = (Folder *)current_folder->parent();
+          if (!parent)
+            current_folder = projectFolder();
+          else
+            current_folder = parent;
+        }
+      else if  (s.left(5)=="<log>")
+        {//process analysis information
+          s = t.readLine();
+          while ( s != "</log>" )
+            {
+              logInfo+= s+"\n";
+              s = t.readLine();
+            }
+          results->setText(logInfo);
+        }
+    }
+
+  if (progress.wasCanceled())
+    {
+      saved = true;
+      close();
+      return false;
+    }
+
+  logInfo=logInfo.remove ("</log>\n", false);
+
+  folders->setCurrentItem(cf->folderListItem());
+  folders->blockSignals (false);
+  //change folder to user defined current folder
+  changeFolder(cf, true);
+
+  blockSignals (false);
+  renamedTables.clear();
+
+  show();
+  executeNotes();
+  savedProject();
+
+  recentProjects.remove(fn);
+  recentProjects.push_front(fn);
+  updateRecentProjectsList();
+
+  return true;
+}
+
+
 ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 {
-	QFile * file;
-
-	if (fn.endsWith(".gz", Qt::CaseInsensitive) || fn.endsWith(".gz~", Qt::CaseInsensitive)) {
-		file = openCompressedFile(fn);
-		if (!file) return 0;
-	} else {
-		file = new QFile(fn);
-		file->open(QIODevice::ReadOnly);
-	}
-
-	QTextStream t(file);
-	t.setEncoding(QTextStream::UnicodeUTF8);
-	QString s;
-	QStringList list;
-
-	s = t.readLine();
-	list = s.split(QRegExp("\\s"), QString::SkipEmptyParts);
-	if (list.count() < 2 || (list[0] != "SciDAVis" && list[0] != "QtiPlot")) {
-		file->close(); delete file;
-		if (QFile::exists(fn + "~")) {
-			int choice = QMessageBox::question(this, tr("File opening error"),
-					tr("The file <b>%1</b> is corrupted, but there exists a backup copy.<br>Do you want to open the backup instead?").arg(fn),
-					QMessageBox::Yes|QMessageBox::Default, QMessageBox::No|QMessageBox::Escape);
-			if (choice == QMessageBox::Yes) {
-				QMessageBox::information(this, tr("Opening backup copy"),
-						tr("The original (corrupt) file is being left untouched, in case you want to "\
-							"try rescuing data manually. If you want to continue working with the "\
-							"automatically restored backup copy, you have to explicitly overwrite the "\
-							"original file."));
-				return openProject(fn + "~");
-			}
-		}
-		QMessageBox::critical(this, tr("File opening error"),  tr("The file <b>%1</b> is not a valid project file.").arg(fn));
-		return 0;
-	}
-
-	QStringList vl = list[1].split(".", QString::SkipEmptyParts);
-	if(
-			fn.endsWith(".qti",Qt::CaseInsensitive) ||
-			fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
-			fn.endsWith(".qti~",Qt::CaseInsensitive) ||
-			fn.endsWith(".qti.gz~",Qt::CaseInsensitive)
-	  ) {
-		d_file_version = 100*(vl[0]).toInt()+10*(vl[1]).toInt()+(vl[2]).toInt();
-		if(d_file_version > 90) {
-			file->close(); delete file;
-			QMessageBox::critical(this, tr("File opening error"),
-					tr("SciDAVis does not support QtiPlot project files from versions later than 0.9.0.").arg(fn));
-			return 0;
-		}
-	} else 
-		d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
-
-	ApplicationWindow *app = new ApplicationWindow();
-	app->applyUserSettings();
-	app->projectname = fn;
-	app->d_file_version = d_file_version;
-	app->setWindowTitle(tr("SciDAVis") + " - " + fn);
-
-	QFileInfo fi(fn);
-	QString baseName = fi.fileName();
-
-	if (d_file_version < 73)
-		t.readLine();
-
-	s = t.readLine();
-	list=s.split("\t", QString::SkipEmptyParts);
-	if (list[0] == "<scripting-lang>")
-	{
-		if (!app->setScriptingLang(list[1], true))
-			QMessageBox::warning(app, tr("File opening error"),
-					tr("The file \"%1\" was created using \"%2\" as scripting language.\n\n"\
-						"Initializing support for this language FAILED; I'm using \"%3\" instead.\n"\
-						"Various parts of this file may not be displayed as expected.")\
-					.arg(fn).arg(list[1]).arg(scriptEnv->name()));
-
-		s = t.readLine();
-		list=s.split("\t", QString::SkipEmptyParts);
-	}
-	int aux=0,widgets=list[1].toInt();
-
-	QString titleBase = tr("Window") + ": ";
-	QString title = titleBase + "1/"+QString::number(widgets)+"  ";
-
-	QProgressDialog progress(this);
-	progress.setWindowModality(Qt::WindowModal);
-	progress.setRange(0, widgets);
-	progress.setMinimumWidth(app->width()/2);
-	progress.setWindowTitle(tr("Opening file") + ": " + baseName);
-	progress.setLabelText(title);
-	progress.setActiveWindow();
-
-	Folder *cf = app->projectFolder();
-	app->folders->blockSignals (true);
-	app->blockSignals (true);
-	//rename project folder item
-	FolderListItem *item = (FolderListItem *)app->folders->firstChild();
-	item->setText(0, fi.baseName());
-	item->folder()->setName(fi.baseName());
-
-	//process tables and matrix information
-	while ( !t.atEnd() && !progress.wasCanceled())
-	{
-		s = t.readLine(4096); // workaround for safely reading very big lines
-		list.clear();
-		if  (s.left(8) == "<folder>")
-		{
-			list = s.split("\t");
-			Folder *f = new Folder(app->current_folder, list[1]);
-			f->setBirthDate(list[2]);
-			f->setModificationDate(list[3]);
-			if(list.count() > 4)
-				if (list[4] == "current")
-					cf = f;
-
-			FolderListItem *fli = new FolderListItem(app->current_folder->folderListItem(), f);
-			fli->setText(0, list[1]);
-			f->setFolderListItem(fli);
-
-			app->current_folder = f;
-		}
-		else if  (s == "<table>")
-		{
-			title = titleBase + QString::number(++aux)+"/"+QString::number(widgets);
-			progress.setLabelText(title);
-
-			openTable(app, t);
-			progress.setValue(aux);
-		}
-		else if (s.left(17)=="<TableStatistics>")
-		{
-			QStringList lst;
-			while ( s!="</TableStatistics>" )
-			{
-				s=t.readLine();
-				lst<<s;
-			}
-			lst.pop_back();
-			app->openTableStatistics(lst);
-		}
-		else if  (s == "<matrix>")
-		{
-			title= titleBase + QString::number(++aux)+"/"+QString::number(widgets);
-			progress.setLabelText(title);
-			QStringList lst;
-			while ( s != "</matrix>" )
-			{
-				s=t.readLine();
-				lst<<s;
-			}
-			lst.pop_back();
-			openMatrix(app, lst);
-			progress.setValue(aux);
-		}
-		else if  (s == "<note>")
-		{
-			title= titleBase + QString::number(++aux)+"/"+QString::number(widgets);
-			progress.setLabelText(title);
-			for (int i=0; i<3; i++)
-			{
-				s = t.readLine();
-				list << s;
-			}
-			Note* m = openNote(app,list);
-			QStringList cont;
-			while ( s != "</note>" )
-			{
-				s=t.readLine();
-				cont << s;
-			}
-			cont.pop_back();
-			m->restore(cont);
-			progress.setValue(aux);
-		}
-		else if  (s == "</folder>")
-		{
-			Folder *parent = (Folder *)app->current_folder->parent();
-			if (!parent)
-				app->current_folder = app->projectFolder();
-			else
-				app->current_folder = parent;
-		}
-	}
-
-	if (progress.wasCanceled())
-	{
-		file->close(); delete file;
-		app->saved = true;
-		app->close();
-		return 0;
-	}
-
-	//process the rest
-	t.seek(0);
-
-	MultiLayer *plot=0;
-	while ( !t.atEnd() && !progress.wasCanceled())
-	{
-		s = t.readLine(4096); // workaround for safely reading very big lines
-		if  (s.left(8) == "<folder>")
-		{
-			list = s.split("\t");
-			app->current_folder = app->current_folder->findSubfolder(list[1]);
-		}
-		else if  (s == "<multiLayer>")
-		{//process multilayers information
-			title = titleBase + QString::number(++aux)+"/"+QString::number(widgets);
-			progress.setLabelText(title);
-
-			s=t.readLine();
-			QStringList graph=s.split("\t");
-			QString caption=graph[0];
-			plot = app->multilayerPlot(caption);
-			plot->setCols(graph[1].toInt());
-			plot->setRows(graph[2].toInt());
-
-			app->setListViewDate(caption, graph[3]);
-			plot->setBirthDate(graph[3]);
-
-			restoreWindowGeometry(app, plot, t.readLine());
-			plot->blockSignals(true);
-
-			if (d_file_version > 71)
-			{
-				QStringList lst=t.readLine().split("\t");
-				plot->setWindowLabel(lst[1]);
-				app->setListViewLabel(plot->name(),lst[1]);
-				plot->setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
-			}
-			if (d_file_version > 83)
-			{
-				QStringList lst=t.readLine().split("\t", QString::SkipEmptyParts);
-				plot->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
-				lst=t.readLine().split("\t", QString::SkipEmptyParts);
-				plot->setSpacing(lst[1].toInt(),lst[2].toInt());
-				lst=t.readLine().split("\t", QString::SkipEmptyParts);
-				plot->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
-				lst=t.readLine().split("\t", QString::SkipEmptyParts);
-				plot->setAlignement(lst[1].toInt(),lst[2].toInt());
-			}
-
-			while ( s!="</multiLayer>" )
-			{//open layers
-				s = t.readLine();
-				if (s.left(7)=="<graph>")
-				{
-					list.clear();
-					while ( s!="</graph>" )
-					{
-						s=t.readLine();
-						list<<s;
-					}
-					openGraph(app, plot, list);
-				}
-			}
-			plot->blockSignals(false);
-			progress.setValue(aux);
-		}
-		else if  (s == "<SurfacePlot>")
-		{//process 3D plots information
-			list.clear();
-			title = titleBase + QString::number(++aux)+"/"+QString::number(widgets);
-			progress.setLabelText(title);
-			while ( s!="</SurfacePlot>" )
-			{
-				s=t.readLine();
-				list<<s;
-			}
-			openSurfacePlot(app,list);
-			progress.setValue(aux);
-		}
-		else if  (s == "</folder>")
-		{
-			Folder *parent = (Folder *)app->current_folder->parent();
-			if (!parent)
-				app->current_folder = projectFolder();
-			else
-				app->current_folder = parent;
-		}
-		else if  (s.left(5)=="<log>")
-		{//process analysis information
-			s = t.readLine();
-			while ( s != "</log>" )
-			{
-				app->logInfo+= s+"\n";
-				s = t.readLine();
-			}
-			app->results->setText(app->logInfo);
-		}
-	}
-	file->close(); delete file;
-
-	if (progress.wasCanceled())
-	{
-		app->saved = true;
-		app->close();
-		return 0;
-	}
-
-	app->logInfo=app->logInfo.remove ("</log>\n", false);
-
-	app->folders->setCurrentItem(cf->folderListItem());
-	app->folders->blockSignals (false);
-	//change folder to user defined current folder
-	app->changeFolder(cf, true);
-
-	app->blockSignals (false);
-	app->renamedTables.clear();
-
-	app->show();
-	app->executeNotes();
-	app->savedProject();
-
-	app->recentProjects.remove(fn);
-	app->recentProjects.push_front(fn);
-	app->updateRecentProjectsList();
-
-	return app;
+  unique_ptr<ApplicationWindow> app(new ApplicationWindow);
+  return app->loadProject(fn)? app.release(): nullptr;
 }
 
 void ApplicationWindow::executeNotes()
@@ -4826,7 +4834,7 @@ void ApplicationWindow::exportAllGraphs()
 
 	QString output_dir = ied->selectedFiles()[0];
 	QString file_suffix = ied->selectedFilter();
-	file_suffix.toLower();
+	file_suffix=file_suffix.toLower();
 	file_suffix.remove("*");
 
 	QWidgetList *windows = windowsList();
@@ -4862,6 +4870,8 @@ void ApplicationWindow::exportAllGraphs()
 							"Do you want to overwrite it?") .arg(file_name), tr("&Yes"), tr("&All"), tr("&Cancel"), 0, 1)) {
 				case 1:
 					confirm_overwrite = false;
+					QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+                                        break;
 				case 0:
 					QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 					break;
