@@ -3959,14 +3959,14 @@ void ApplicationWindow::scriptPrint(const QString &text)
 #endif
 }
 
-bool ApplicationWindow::setScriptingLang(const QString &lang, bool force)
+bool ApplicationWindow::setScriptingLang(const QString &lang, bool force, bool batch)
 {
 	if (!force && lang == scriptEnv->name()) return true;
 	if (lang.isEmpty()) return false;
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	ScriptingEnv *newEnv = ScriptingLangManager::newEnv(lang, this);
+	ScriptingEnv *newEnv = ScriptingLangManager::newEnv(lang.toStdString(), this, batch);
 	if (!newEnv) {
 		QApplication::restoreOverrideCursor();
 		return false;
@@ -13573,9 +13573,9 @@ void ApplicationWindow::cascade()
 	app->applyUserSettings();
         bool isPython=fn.endsWith(".py", Qt::CaseInsensitive);
 	if (isPython)
-          app->setScriptingLang("Python", false);
+          app->setScriptingLangForBatch("Python");
 	else
-          app->setScriptingLang("muParser", false);
+          app->setScriptingLangForBatch("muParser");
 	app->showMaximized();
 	Note *script_note = app->newNote(fn);
         if (isPython)
@@ -13591,7 +13591,16 @@ void ApplicationWindow::cascade()
 	script_note->importASCII(fn);
 	QApplication::restoreOverrideCursor();
 	if (execute)
-		script_note->executeAll();
+          {
+            // we need to disable the redirect of stdio, as this is batch processing
+            Script* script=nullptr;
+            if (auto scriptEdit=script_note->findChild<ScriptEdit*>())
+              if (script=scriptEdit->findChild<Script*>())
+                script->batchMode=true;
+            script_note->executeAll();
+            if (script)
+              script->batchMode=false;
+          }
 	return app;
 }
 

@@ -281,20 +281,26 @@ bool PythonScript::exec()
 
 void PythonScript::beginStdoutRedirect()
 {
+  if (!batchMode)
+    {
 	stdoutSave = PyDict_GetItemString(env()->sysDict(), "stdout");
 	Py_XINCREF(stdoutSave);
 	stderrSave = PyDict_GetItemString(env()->sysDict(), "stderr");
 	Py_XINCREF(stderrSave);
 	env()->setQObject(this, "stdout", env()->sysDict());
 	env()->setQObject(this, "stderr", env()->sysDict());
+    }
 }
 
 void PythonScript::endStdoutRedirect()
 {
+  if (!batchMode)
+    {
 	PyDict_SetItemString(env()->sysDict(), "stdout", stdoutSave);
 	Py_XDECREF(stdoutSave);
 	PyDict_SetItemString(env()->sysDict(), "stderr", stderrSave);
 	Py_XDECREF(stderrSave);
+    }
 }
 
 bool PythonScript::setQObject(QObject *val, const char *name)

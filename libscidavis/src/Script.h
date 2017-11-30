@@ -55,7 +55,7 @@ class Script : public QObject
 
   public:
     Script(ScriptingEnv *env, const QString &code, QObject *context=0, const QString &name="<input>")
-      : Env(env), Code(code), Name(name), compiled(notCompiled)
+      : QObject(context), Env(env), Code(code), Name(name), compiled(notCompiled)
       { Env->incref(); Context = context; EmitErrors=true; }
     ~Script() { Env->decref(); }
 
@@ -77,6 +77,9 @@ class Script : public QObject
     void setName(const QString &name) { Name = name; compiled = notCompiled; }
     //! Set whether errors / exceptions are to be emitted or silently ignored
     void setEmitErrors(bool yes) { EmitErrors = yes; }
+  
+  /// true if running in batch - don't redirect stdio
+  bool batchMode=false;
 
   public slots:
     //! Compile the Code. Return true if the implementation doesn't support compilation.
@@ -115,22 +118,14 @@ class ScriptingLangManager
 {
   public:
     //! Return an instance of the first implementation we can find.
-    static ScriptingEnv *newEnv(ApplicationWindow *parent);
+  static ScriptingEnv *newEnv(ApplicationWindow *parent);
     //! Return an instance of the implementation specified by name, NULL on failure.
-    static ScriptingEnv *newEnv(const char *name, ApplicationWindow *parent);
+  static ScriptingEnv *newEnv(const std::string& name, ApplicationWindow *parent, bool batch=false);
     //! Return the names of available implementations.
     static QStringList languages();
     //! Return the number of available implementations.
     static int numLanguages();
 
-  private:
-    typedef ScriptingEnv*(*ScriptingEnvConstructor)(ApplicationWindow*);
-    typedef struct {
-      const char *name;
-      ScriptingEnvConstructor constructor;
-    } ScriptingLang;
-//! global registry of available languages
-    static ScriptingLang langs[];
 };
 
 //! notify an object that it should update its scripting environment (see class scripted)

@@ -1,3 +1,4 @@
+print "hello"
 app.loadProject("integration_with_python-crash.sciprj")
 upper_limit = 30
 g=graph("Graph1")

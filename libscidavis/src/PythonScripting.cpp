@@ -175,8 +175,8 @@ QString PythonScripting::errorMsg()
 	return msg;
 }
 
-PythonScripting::PythonScripting(ApplicationWindow *parent)
-	: ScriptingEnv(parent, langName)
+PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
+  : ScriptingEnv(parent, langName), batch(batch)
 {
   PyObject *mainmod=NULL, *scidavismod=NULL, *sysmod=NULL;
   math = NULL;
@@ -265,28 +265,30 @@ PythonScripting::PythonScripting(ApplicationWindow *parent)
 
 bool PythonScripting::initialize()
 {
-	if (!d_initialized) return false;
-//	PyEval_AcquireLock();
+  if (!d_initialized) return false;
+  //	PyEval_AcquireLock();
 
-	// Redirect output to the print(const QString&) signal.
-	// Also see method write(const QString&) and Python documentation on
-	// sys.stdout and sys.stderr.
-	setQObject(this, "stdout", sys);
-	setQObject(this, "stderr", sys);
-
-	bool initialized;
-	initialized = loadInitFile(QDir::homeDirPath()+"/scidavisrc");
-	if(!initialized) initialized = loadInitFile(QDir::homeDirPath()+"/.scidavisrc");
+  if (!batch)
+    {
+      // Redirect output to the print(const QString&) signal.
+      // Also see method write(const QString&) and Python documentation on
+      // sys.stdout and sys.stderr.
+      setQObject(this, "stdout", sys);
+      setQObject(this, "stderr", sys);
+    }
+  bool initialized;
+  initialized = loadInitFile(QDir::homeDirPath()+"/scidavisrc");
+  if(!initialized) initialized = loadInitFile(QDir::homeDirPath()+"/.scidavisrc");
 #ifdef PYTHON_CONFIG_PATH 
-	if(!initialized) initialized = loadInitFile(PYTHON_CONFIG_PATH"/scidavisrc");
-	if(!initialized) initialized = loadInitFile(PYTHON_CONFIG_PATH"/.scidavisrc");
+  if(!initialized) initialized = loadInitFile(PYTHON_CONFIG_PATH"/scidavisrc");
+  if(!initialized) initialized = loadInitFile(PYTHON_CONFIG_PATH"/.scidavisrc");
 #endif
-	if(!initialized) initialized = loadInitFile(QDir::rootDirPath()+"etc/scidavisrc");
-	if(!initialized) initialized = loadInitFile(QCoreApplication::instance()->applicationDirPath()+"/scidavisrc");
-	if(!initialized) initialized = loadInitFile("scidavisrc");
+  if(!initialized) initialized = loadInitFile(QDir::rootDirPath()+"etc/scidavisrc");
+  if(!initialized) initialized = loadInitFile(QCoreApplication::instance()->applicationDirPath()+"/scidavisrc");
+  if(!initialized) initialized = loadInitFile("scidavisrc");
 
-//	PyEval_ReleaseLock();
-	return true;
+  //	PyEval_ReleaseLock();
+  return true;
 }
 
 PythonScripting::~PythonScripting()

@@ -40,38 +40,46 @@
 #include "PythonScripting.h"
 #endif
 
-ScriptingLangManager::ScriptingLang ScriptingLangManager::langs[] = {
+namespace
+{
+  const char* langs[]={
 #ifdef SCRIPTING_MUPARSER
-	{ MuParserScripting::langName, MuParserScripting::constructor },
+    MuParserScripting::langName,
 #endif
 #ifdef SCRIPTING_PYTHON
-	{ PythonScripting::langName, PythonScripting::constructor },
+    PythonScripting::langName,
 #endif
-	{ NULL, NULL }
-};
+    nullptr
+  };
+}
 
 ScriptingEnv *ScriptingLangManager::newEnv(ApplicationWindow *parent)
 {
-	if (!langs[0].constructor)
-		return NULL;
-	else
-		return langs[0].constructor(parent);
+  if (!langs[0])
+    return nullptr;
+  else
+    return newEnv(langs[0],parent);
 }
 
-ScriptingEnv *ScriptingLangManager::newEnv(const char *name, ApplicationWindow *parent)
+ScriptingEnv *ScriptingLangManager::newEnv(const std::string& name, ApplicationWindow *parent, bool batch)
 {
-	for (ScriptingLang *i = langs; i->constructor; i++)
-		if (!strcmp(name, i->name))
-			return i->constructor(parent);
-	return NULL;
+#ifdef SCRIPTING_MUPARSER
+  if (name==MuParserScripting::langName)
+    return new MuParserScripting(parent);
+#endif
+#ifdef SCRIPTING_PYTHON
+  if (name==PythonScripting::langName)
+    return new PythonScripting(parent, batch);
+#endif
+  return nullptr;
 }
 
 QStringList ScriptingLangManager::languages()
 {
-	QStringList l;
-	for (ScriptingLang *i = langs; i->constructor; i++)
-		l << i->name;
-	return l;
+  QStringList l;
+  for (auto i = langs; i; i++)
+    l << *i;
+  return l;
 }
 
 bool Script::compile(bool)
