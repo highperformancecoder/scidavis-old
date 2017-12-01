@@ -145,16 +145,14 @@ public:
   QWidget *lastModified;
 
 public:
-  /// forcibly exit the application without saving
-  // TODO: do this in a nicer fashion than just calling ::exit()!!!
-  //  void exit() {saved=true; QCoreApplication::quit();}
-  void exit() {::exit(0);}
   /*! Generates a new unique name starting with string /param name.
     You can force the output to be a name different from /param name,
     even if 'name' is not used in the project, by setting /param increment = true (the default)
   */
   QString generateUniqueName(const QString& name, bool increment = true);
 
+  bool batchMode() const {return m_batch;} ///< running a python batch script
+                                                                        
 public slots:
   //! Copy the status bar text to the clipboard
   void copyStatusBarText();
@@ -1025,6 +1023,8 @@ public:
   QString qmPath;
 
 private:
+  bool m_batch;
+  
   //! Show a context menu for the widget
   void showWindowMenu(MyWidget * widget);
   //! Create a menu for toggeling the toolbars

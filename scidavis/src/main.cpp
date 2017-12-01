@@ -167,7 +167,7 @@ int main( int argc, char ** argv )
 		ApplicationWindow::about();
 		exit(0);
 	} else {
-		ApplicationWindow *mw = new ApplicationWindow();
+          ApplicationWindow* mw=new ApplicationWindow;
 		mw->applyUserSettings();
 		mw->newTable();
 		mw->activateWindow();

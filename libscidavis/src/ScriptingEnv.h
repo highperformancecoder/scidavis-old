@@ -63,7 +63,7 @@ class ScriptingEnv : public QObject
     virtual bool isRunning() const { return false; }
     
     //! Instantiate the Script subclass matching the ScriptEnv subclass.
-    virtual Script *newScript(const QString&, QObject*, const QString&) { return 0; }
+  virtual Script *newScript(const QString&, QObject*, const QString&)=0;
       
     //! If an exception / error occured, return a nicely formated stack backtrace.
     virtual QString stackTraceString() { return QString::null; }
@@ -77,6 +77,8 @@ class ScriptingEnv : public QObject
     //! Construct a filter expression from fileExtension(), suitable for QFileDialog.
     const QString fileFilter() const;
 
+  virtual void redirectStdIO() {}
+  
 //    virtual QSyntaxHighlighter syntaxHighlighter(QTextEdit *textEdit) const;
 
   public slots:

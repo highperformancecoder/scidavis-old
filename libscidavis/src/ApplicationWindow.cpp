@@ -3664,7 +3664,6 @@ bool ApplicationWindow::loadProject(const QString& fn)
   } else 
     d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
 
-  applyUserSettings();
   projectname = fn;
   d_file_version = d_file_version;
   setWindowTitle(tr("SciDAVis") + " - " + fn);
@@ -3694,7 +3693,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
   QString titleBase = tr("Window") + ": ";
   QString title = titleBase + "1/"+QString::number(widgets)+"  ";
 
-  QProgressDialog progress(this);
+  QProgressDialog progress;/*(this);*/
   progress.setWindowModality(Qt::WindowModal);
   progress.setRange(0, widgets);
   progress.setMinimumWidth(width()/2);
@@ -3932,6 +3931,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
 ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 {
   unique_ptr<ApplicationWindow> app(new ApplicationWindow);
+  app->applyUserSettings();
   return app->loadProject(fn)? app.release(): nullptr;
 }
 
@@ -3977,15 +3977,13 @@ bool ApplicationWindow::setScriptingLang(const QString &lang, bool force, bool b
 	connect(newEnv, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
 	if (!newEnv->initialize())
 	{
-		delete newEnv;
 		QApplication::restoreOverrideCursor();
 		return false;
 	}
 
 	// notify everyone who might be interested
-	ScriptingChangeEvent *sce = new ScriptingChangeEvent(newEnv);
-	QApplication::sendEvent(this, sce);
-	delete sce;
+	ScriptingChangeEvent sce(newEnv);
+	QApplication::sendEvent(this, &sce);
 
 	foreach(QObject *i, findChildren<QWidget*>())
 		QApplication::postEvent(i, new ScriptingChangeEvent(newEnv));
@@ -13597,6 +13595,7 @@ void ApplicationWindow::cascade()
             if (auto scriptEdit=script_note->findChild<ScriptEdit*>())
               if (script=scriptEdit->findChild<Script*>())
                 script->batchMode=true;
+            m_batch=true;
             script_note->executeAll();
             if (script)
               script->batchMode=false;

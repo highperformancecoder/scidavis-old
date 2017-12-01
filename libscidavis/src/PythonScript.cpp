@@ -294,7 +294,7 @@ void PythonScript::beginStdoutRedirect()
 
 void PythonScript::endStdoutRedirect()
 {
-  if (!batchMode)
+  if (!batchMode && env())
     {
 	PyDict_SetItemString(env()->sysDict(), "stdout", stdoutSave);
 	Py_XDECREF(stdoutSave);

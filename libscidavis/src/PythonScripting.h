@@ -47,6 +47,7 @@ public:
   ~PythonScripting();
   static ScriptingEnv *constructor(ApplicationWindow *parent, bool batch=false) { return new PythonScripting(parent, batch); }
   bool initialize();
+  void redirectStdIO() override;
 
   void write(const QString &text) { emit print(text); }
 
@@ -98,7 +99,6 @@ private:
   PyObject *globals;		// PyDict of global environment
   PyObject *math;		// PyDict of math functions
   PyObject *sys;		// PyDict of sys module
-  bool batch=false; // running in batch mode
 };
 
 #endif
