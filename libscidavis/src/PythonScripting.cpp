@@ -277,14 +277,14 @@ bool PythonScripting::initialize()
   if (!d_initialized) return false;
   //	PyEval_AcquireLock();
 
-//  if (!d_parent->batchMode())
-//    {
-//      // Redirect output to the print(const QString&) signal.
-//      // Also see method write(const QString&) and Python documentation on
-//      // sys.stdout and sys.stderr.
-//      setQObject(this, "stdout", sys);
-//      setQObject(this, "stderr", sys);
-//    }
+  if (!d_parent->batchMode())
+    {
+      // Redirect output to the print(const QString&) signal.
+      // Also see method write(const QString&) and Python documentation on
+      // sys.stdout and sys.stderr.
+      setQObject(this, "stdout", sys);
+      setQObject(this, "stderr", sys);
+    }
   bool initialized;
   initialized = loadInitFile(QDir::homeDirPath()+"/scidavisrc");
   if(!initialized) initialized = loadInitFile(QDir::homeDirPath()+"/.scidavisrc");

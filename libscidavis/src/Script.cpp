@@ -77,7 +77,7 @@ ScriptingEnv *ScriptingLangManager::newEnv(const std::string& name, ApplicationW
 QStringList ScriptingLangManager::languages()
 {
   QStringList l;
-  for (auto i = langs; i; i++)
+  for (auto i = langs; *i; i++)
     l << *i;
   return l;
 }

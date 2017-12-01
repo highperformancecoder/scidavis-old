@@ -13570,6 +13570,7 @@ void ApplicationWindow::cascade()
 	ApplicationWindow *app= new ApplicationWindow();
 	app->applyUserSettings();
         bool isPython=fn.endsWith(".py", Qt::CaseInsensitive);
+        app->m_batch=true;
 	if (isPython)
           app->setScriptingLangForBatch("Python");
 	else
@@ -13593,13 +13594,13 @@ void ApplicationWindow::cascade()
             // we need to disable the redirect of stdio, as this is batch processing
             Script* script=nullptr;
             if (auto scriptEdit=script_note->findChild<ScriptEdit*>())
-              if (script=scriptEdit->findChild<Script*>())
+              if ((script=scriptEdit->findChild<Script*>()))
                 script->batchMode=true;
-            m_batch=true;
             script_note->executeAll();
             if (script)
               script->batchMode=false;
           }
+        app->m_batch=false;
 	return app;
 }
 

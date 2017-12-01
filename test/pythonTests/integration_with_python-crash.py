@@ -1,6 +1,4 @@
-print "hello"
 app.loadProject("integration_with_python-crash.sciprj")
-print "after load project"
 lower_limit = 0
 upper_limit = 30
 g=graph("Graph1")
