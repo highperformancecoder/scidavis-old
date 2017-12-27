@@ -29,10 +29,14 @@
 #define GET_DOUBLE(iss, ovalue) {iss.read(reinterpret_cast<char *>(&ovalue), 8);};
 
 OriginAnyParser::OriginAnyParser(const string& fileName)
-:	file(fileName.c_str(),ios::binary)
-{
-	objectIndex = 0;
-	parseError = 0;
+:	file(fileName.c_str(),ios::binary),
+	objectIndex(0),
+	parseError(0),
+	ispread(-1),
+	imatrix(-1),
+	iexcel(-1),
+	igraph(-1),
+	ilayer(-1) {
 }
 
 bool OriginAnyParser::parse() {
