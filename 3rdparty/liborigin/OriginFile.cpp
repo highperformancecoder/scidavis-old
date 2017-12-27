@@ -42,7 +42,7 @@ OriginFile::OriginFile(const string& fileName)
 		exit(EXIT_FAILURE);
 	}
 
-#ifndef NO_CODE_GENERATION_FOR_LOG
+#ifdef GENERATE_CODE_FOR_LOG
 	FILE *logfile = NULL;
 	logfile = fopen("./opjfile.log", "w");
 	if (logfile == NULL)
@@ -50,7 +50,7 @@ OriginFile::OriginFile(const string& fileName)
 		cerr <<  "Could not open opjfile.log !" << endl;
 		exit(EXIT_FAILURE);
 	}
-#endif // NO_CODE_GENERATION_FOR_LOG
+#endif // GENERATE_CODE_FOR_LOG
 
 	string vers;
 	getline(file, vers);
@@ -140,9 +140,9 @@ OriginFile::OriginFile(const string& fileName)
 	// There are ways to keep logfile open and pass it to parser routine,
 	// but I choose to do the same as with 'file', close it and reopen in 'parse'
 	// routines.
-#ifndef NO_CODE_GENERATION_FOR_LOG
+#ifdef GENERATE_CODE_FOR_LOG
 	fclose(logfile);
-#endif // NO_CODE_GENERATION_FOR_LOG
+#endif // GENERATE_CODE_FOR_LOG
 	parser.reset(createOriginAnyParser(fileName));
 }
 

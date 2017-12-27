@@ -39,6 +39,15 @@ set_target_properties(origin PROPERTIES
 add_library (origin-static STATIC ${sources})
 set_target_properties(origin-static PROPERTIES OUTPUT_NAME "origin" POSITION_INDEPENDENT_CODE ON)
 
+# inform on log setting
+if (DEFINED GENERATE_CODE_FOR_LOG)
+    message("File parsing will be logged.")
+    target_compile_definitions(origin PRIVATE GENERATE_CODE_FOR_LOG=${GENERATE_CODE_FOR_LOG})
+    target_compile_definitions(origin-static PRIVATE GENERATE_CODE_FOR_LOG=${GENERATE_CODE_FOR_LOG})
+else()
+    message("File parsing will NOT be logged. Define GENERATE_CODE_FOR_LOG to activate logging.")
+endif ()
+
 # install libraries
 install(TARGETS origin origin-static DESTINATION lib)
 

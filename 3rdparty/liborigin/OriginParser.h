@@ -32,13 +32,13 @@
 #include "OriginObj.h"
 #include "tree.hh"
 
-#ifndef NO_CODE_GENERATION_FOR_LOG
+#ifdef GENERATE_CODE_FOR_LOG
 #define LOG_PRINT( logfile, args... ) { 	\
 	fprintf(logfile, args);			\
 }
-#else // !NO_CODE_GENERATION_FOR_LOG
+#else // !GENERATE_CODE_FOR_LOG
 #define LOG_PRINT( logfile, args... ) {};
-#endif // NO_CODE_GENERATION_FOR_LOG
+#endif // GENERATE_CODE_FOR_LOG
 
 class OriginParser
 {
