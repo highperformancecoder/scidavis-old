@@ -223,7 +223,7 @@ namespace Origin
 	private:
 		vtype m_type=V_DOUBLE;
 		union {
-			double m_double;
+			double m_double=0.;
 			char* m_string;
 		};
 		void asgString(const char* x)
