@@ -38,7 +38,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	if (argc < 2) {
-          cout << "Usage : ./opj2dat [--check-only] <file.opj>" << endl;
+		cout << "Usage : ./opj2dat [--check-only] <file.opj>" << endl;
 		return -1;
 	}
 
@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
 						Origin::variant value(spread.columns[j].data[i]);
 						double v=0.;
 						if (value.type() == Origin::variant::V_DOUBLE) {
-                                                  v = value.as_double();
+												v = value.as_double();
 							if (v != _ONAN) {
 								outf << v << "; ";
 							} else {
@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
 							}
 						}
 						if (value.type() == Origin::variant::V_STRING) {
-                                                  outf << value.as_string() << "; ";
+												outf << value.as_string() << "; ";
 						}
 					} else {
 						outf << "; ";

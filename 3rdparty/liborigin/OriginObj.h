@@ -170,67 +170,68 @@ namespace Origin
 	};
 
 	// Variant type with boost-free functions
+	// see https://github.com/highperformancecoder/scidavis/commit/7c6e07dfad80dbe190af29ffa8a56c82a8aa9180
 	// see https://www.ojdip.net/2013/10/implementing-a-variant-type-in-cpp/
 	// https://stackoverflow.com/questions/35648390/tagged-union-c
 	// https://books.google.de/books?id=PSUNAAAAQBAJ&pg=PA217&lpg=PA217&dq=c%2B%2B+tagged+union+string&source=bl&ots=DqArIieZ8H&sig=k2a6okxxgUuEkLw48hFJChkIG9o&hl=en&sa=X&ved=0ahUKEwjylreR08DUAhWBVRoKHWPSBqE4ChDoAQhUMAg#v=onepage&q=c%2B%2B%20tagged%20union%20string&f=false
-  typedef class Variant {
-  public:
-    enum vtype {V_DOUBLE, V_STRING};
-    vtype type() const {return m_type;}
-    double as_double() const {return m_double;}
-    const char* as_string() const {return m_string;}
-          
-    Variant() {}
-    Variant(const double d): m_double(d) {}
-    Variant(const string& s): m_type(V_STRING)
-    {
-      asgString(s.c_str());
-    }
+	typedef class Variant {
+	public:
+		enum vtype {V_DOUBLE, V_STRING};
+		vtype type() const {return m_type;}
+		double as_double() const {return m_double;}
+		const char* as_string() const {return m_string;}
 
-    Variant(const Variant& v): m_type(v.m_type) {
-      switch (v.m_type) {
-      case V_DOUBLE:
-        m_double = v.m_double;
-        break;
-      case V_STRING:
-        asgString(v.m_string);
-        break;
-      }
-    }
+		Variant() {}
+		Variant(const double d): m_double(d) {}
+		Variant(const string& s): m_type(V_STRING)
+		{
+			asgString(s.c_str());
+		}
 
-    Origin::Variant& operator=(const Origin::Variant& v) {
-      if (m_type == V_STRING)
-        delete [] m_string;
+		Variant(const Variant& v): m_type(v.m_type) {
+			switch (v.m_type) {
+			case V_DOUBLE:
+				m_double = v.m_double;
+				break;
+			case V_STRING:
+				asgString(v.m_string);
+				break;
+			}
+		}
 
-      switch (v.m_type) {
-      case V_DOUBLE:
-        m_double = v.m_double;
-        break;
-      case V_STRING:
-        asgString(v.m_string);
-        break;
-      }
-      m_type = v.m_type;
-      return *this;
-    }
+		Origin::Variant& operator=(const Origin::Variant& v) {
+			if (m_type == V_STRING)
+				delete [] m_string;
 
-    ~Variant() {
-      //printf("~Variant()\n");
-      if (m_type == V_STRING)
-        delete [] m_string;
-    }
-  private:
-    vtype m_type=V_DOUBLE;
-    union {
-      double m_double;
-      char* m_string;
-    };
-    void asgString(const char* x)
-    {
-      m_string=new char[strlen(x)+1];
-      strcpy(m_string,x);
-    }
-  } variant;
+			switch (v.m_type) {
+			case V_DOUBLE:
+				m_double = v.m_double;
+				break;
+			case V_STRING:
+				asgString(v.m_string);
+				break;
+			}
+			m_type = v.m_type;
+			return *this;
+		}
+
+		~Variant() {
+			//printf("~Variant()\n");
+			if (m_type == V_STRING)
+				delete [] m_string;
+		}
+	private:
+		vtype m_type=V_DOUBLE;
+		union {
+			double m_double;
+			char* m_string;
+		};
+		void asgString(const char* x)
+		{
+			m_string=new char[strlen(x)+1];
+			strcpy(m_string,x);
+		}
+	} variant;
 
 	struct SpreadColumn
 	{
