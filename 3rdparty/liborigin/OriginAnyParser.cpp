@@ -223,11 +223,15 @@ void OriginAnyParser::readFileVersion() {
 	string sFileVersion;
 	getline(file, sFileVersion);
 
-	if (sFileVersion.substr(0,4) != "CPYA") {
-		LOG_PRINT(logfile, "File, is not a valid opj file\n")
-		parseError = 2;
-		return;
+	if ((sFileVersion.substr(0,4) != "CPYA")) {
+		LOG_PRINT(logfile, "File, is not a valid OPJ file\n")
+		if ((sFileVersion.substr(0,5) != "CPYUA")) {
+			LOG_PRINT(logfile, "File, is not a valid OPJU file\n")
+			parseError = 2;
+			return;
+		}
 	}
+
 	if (*sFileVersion.rbegin() != '#') parseError = 1;
 	LOG_PRINT(logfile, "File version string: %s\n", sFileVersion.c_str())
 }
