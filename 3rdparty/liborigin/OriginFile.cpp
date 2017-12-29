@@ -42,7 +42,7 @@ OriginFile::OriginFile(const string& fileName)
 		exit(EXIT_FAILURE);
 	}
 
-#ifndef NO_CODE_GENERATION_FOR_LOG
+#ifdef GENERATE_CODE_FOR_LOG
 	FILE *logfile = NULL;
 	logfile = fopen("./opjfile.log", "w");
 	if (logfile == NULL)
@@ -50,7 +50,7 @@ OriginFile::OriginFile(const string& fileName)
 		cerr <<  "Could not open opjfile.log !" << endl;
 		exit(EXIT_FAILURE);
 	}
-#endif // NO_CODE_GENERATION_FOR_LOG
+#endif // GENERATE_CODE_FOR_LOG
 
 	string vers;
 	getline(file, vers);
@@ -66,7 +66,7 @@ OriginFile::OriginFile(const string& fileName)
 
 	// translate version
 	unsigned int newFileVersion = 0;
-	if (majorVersion==3) {
+	if (majorVersion == 3) {
 		if (buildVersion < 830)
 			fileVersion = 350;
 		else
@@ -120,14 +120,20 @@ OriginFile::OriginFile(const string& fileName)
 	} else if (buildVersion < 3172) { // 2016.1 (9.3.1), 2016.2 (9.3.2) SR1, SR2
 		fileVersion = 931;
 		newFileVersion = 20161;
-	} else if (buildVersion < 3225) { // 2017.0 (9.4.0) SR0
+	} else if (buildVersion < 3225) { // 2017.0 (9.4.0.220) SR0 3224
 		fileVersion = 940;
 		newFileVersion = 20170;
-	} else {
-		// 2017.1 (9.4.1) SR1 or newer
+	} else if (buildVersion < 3228) { // 2017.1 (9.4.1.354), 2017.2 (9.4.2.380) SR1, SR2 3227
 		fileVersion = 941;
 		newFileVersion = 20171;
-		LOG_PRINT(logfile, "Found project version 2017.1 (9.4.1) or newer\n")
+	} else if (buildVersion < 3269) { // 2018.0 (9.5.0.193) SR0 3268
+		fileVersion = 950;
+		newFileVersion = 20180;
+	} else {
+		// > 2018.0
+		fileVersion = 951;
+		newFileVersion = 20181;
+		LOG_PRINT(logfile, "Found project version 2018.1 (9.5.1) or newer\n")
 	}
 
 	if (newFileVersion == 0) {
@@ -140,9 +146,9 @@ OriginFile::OriginFile(const string& fileName)
 	// There are ways to keep logfile open and pass it to parser routine,
 	// but I choose to do the same as with 'file', close it and reopen in 'parse'
 	// routines.
-#ifndef NO_CODE_GENERATION_FOR_LOG
+#ifdef GENERATE_CODE_FOR_LOG
 	fclose(logfile);
-#endif // NO_CODE_GENERATION_FOR_LOG
+#endif // GENERATE_CODE_FOR_LOG
 	parser.reset(createOriginAnyParser(fileName));
 }
 

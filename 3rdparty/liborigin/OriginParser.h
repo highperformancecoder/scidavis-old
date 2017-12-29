@@ -32,13 +32,23 @@
 #include "OriginObj.h"
 #include "tree.hh"
 
-#ifndef NO_CODE_GENERATION_FOR_LOG
-#define LOG_PRINT( logfile, args... ) { 	\
-	fprintf(logfile, args);			\
-}
-#else // !NO_CODE_GENERATION_FOR_LOG
+#ifdef GENERATE_CODE_FOR_LOG
+
+#ifdef HAVE_WINDOWS
+#define LOG_PRINT( logfile, ... ) { fprintf(logfile, __VA_ARGS__); }
+#else	// NOT WINDOWS
+#define LOG_PRINT( logfile, args... ) { fprintf(logfile, args); }
+#endif
+
+#else // !GENERATE_CODE_FOR_LOG
+
+#ifdef HAVE_WINDOWS
+#define LOG_PRINT( logfile, ... ) {};
+#else	// NOT WINDOWS
 #define LOG_PRINT( logfile, args... ) {};
-#endif // NO_CODE_GENERATION_FOR_LOG
+#endif
+
+#endif
 
 class OriginParser
 {

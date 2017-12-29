@@ -15,9 +15,9 @@ versionconfig.input = config.h.in
 versionconfig.output = config.h
 QMAKE_SUBSTITUTES += versionconfig
 
-# following define required to prevent the catastrophic logging when
-# large files are imported
-DEFINES += NO_CODE_GENERATION_FOR_LOG
+# logging of parse process is disabled by default
+# to enable it uncomment following line
+# DEFINES += GENERATE_CODE_FOR_LOG
 QMAKE_CXXFLAGS += -std=c++11
 
 HEADERS  += \

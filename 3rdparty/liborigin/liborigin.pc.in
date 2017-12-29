@@ -1,0 +1,12 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@CMAKE_INSTALL_PREFIX@/lib@LIB_SUFFIX@
+includedir=@CMAKE_INSTALL_PREFIX@/include
+
+Name: liborigin
+Description: Library for reading OriginLab files
+Version: @LIBORIGIN_VERSION_MAJOR@.@LIBORIGIN_VERSION_MINOR@.@LIBORIGIN_VERSION_BUGFIX@
+
+Requires:
+Libs: -L${libdir} -lorigin
+Cflags: -I${includedir}/liborigin

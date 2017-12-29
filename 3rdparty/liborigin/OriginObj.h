@@ -170,67 +170,68 @@ namespace Origin
 	};
 
 	// Variant type with boost-free functions
+	// see https://github.com/highperformancecoder/scidavis/commit/7c6e07dfad80dbe190af29ffa8a56c82a8aa9180
 	// see https://www.ojdip.net/2013/10/implementing-a-variant-type-in-cpp/
 	// https://stackoverflow.com/questions/35648390/tagged-union-c
 	// https://books.google.de/books?id=PSUNAAAAQBAJ&pg=PA217&lpg=PA217&dq=c%2B%2B+tagged+union+string&source=bl&ots=DqArIieZ8H&sig=k2a6okxxgUuEkLw48hFJChkIG9o&hl=en&sa=X&ved=0ahUKEwjylreR08DUAhWBVRoKHWPSBqE4ChDoAQhUMAg#v=onepage&q=c%2B%2B%20tagged%20union%20string&f=false
-  typedef class Variant {
-  public:
-    enum vtype {V_DOUBLE, V_STRING};
-    vtype type() const {return m_type;}
-    double as_double() const {return m_double;}
-    const char* as_string() const {return m_string;}
-          
-    Variant() {}
-    Variant(const double d): m_double(d) {}
-    Variant(const string& s): m_type(V_STRING)
-    {
-      asgString(s.c_str());
-    }
+	typedef class Variant {
+	public:
+		enum vtype {V_DOUBLE, V_STRING};
+		vtype type() const {return m_type;}
+		double as_double() const {return m_double;}
+		const char* as_string() const {return m_string;}
 
-    Variant(const Variant& v): m_type(v.m_type) {
-      switch (v.m_type) {
-      case V_DOUBLE:
-        m_double = v.m_double;
-        break;
-      case V_STRING:
-        asgString(v.m_string);
-        break;
-      }
-    }
+		Variant() {}
+		Variant(const double d): m_double(d) {}
+		Variant(const string& s): m_type(V_STRING)
+		{
+			asgString(s.c_str());
+		}
 
-    Origin::Variant& operator=(const Origin::Variant& v) {
-      if (m_type == V_STRING)
-        delete [] m_string;
+		Variant(const Variant& v): m_type(v.m_type) {
+			switch (v.m_type) {
+			case V_DOUBLE:
+				m_double = v.m_double;
+				break;
+			case V_STRING:
+				asgString(v.m_string);
+				break;
+			}
+		}
 
-      switch (v.m_type) {
-      case V_DOUBLE:
-        m_double = v.m_double;
-        break;
-      case V_STRING:
-        asgString(v.m_string);
-        break;
-      }
-      m_type = v.m_type;
-      return *this;
-    }
+		Origin::Variant& operator=(const Origin::Variant& v) {
+			if (m_type == V_STRING)
+				delete [] m_string;
 
-    ~Variant() {
-      //printf("~Variant()\n");
-      if (m_type == V_STRING)
-        delete [] m_string;
-    }
-  private:
-    vtype m_type=V_DOUBLE;
-    union {
-      double m_double;
-      char* m_string;
-    };
-    void asgString(const char* x)
-    {
-      m_string=new char[strlen(x)+1];
-      strcpy(m_string,x);
-    }
-  } variant;
+			switch (v.m_type) {
+			case V_DOUBLE:
+				m_double = v.m_double;
+				break;
+			case V_STRING:
+				asgString(v.m_string);
+				break;
+			}
+			m_type = v.m_type;
+			return *this;
+		}
+
+		~Variant() {
+			//printf("~Variant()\n");
+			if (m_type == V_STRING)
+				delete [] m_string;
+		}
+	private:
+		vtype m_type=V_DOUBLE;
+		union {
+			double m_double=0.;
+			char* m_string;
+		};
+		void asgString(const char* x)
+		{
+			m_string=new char[strlen(x)+1];
+			strcpy(m_string,x);
+		}
+	} variant;
 
 	struct SpreadColumn
 	{
@@ -521,13 +522,14 @@ namespace Origin
 
 	struct GraphCurve
 	{
-		enum Plot {Line = 200, Scatter=201, LineSymbol=202, Column = 203, Area = 204, HiLoClose = 205, Box = 206,
+		enum Plot {Scatter3D = 101, Surface3D = 103, Vector3D = 183, ScatterAndErrorBar3D = 184, TernaryContour = 185,
+			PolarXrYTheta = 186, SmithChart = 191, Polar = 192, BubbleIndexed = 193, BubbleColorMapped = 194,
+			Line = 200, Scatter=201, LineSymbol=202, Column = 203, Area = 204, HiLoClose = 205, Box = 206,
 			ColumnFloat = 207, Vector = 208, PlotDot = 209, Wall3D = 210, Ribbon3D = 211, Bar3D = 212, ColumnStack = 213,
 			AreaStack = 214, Bar = 215, BarStack = 216, FlowVector = 218, Histogram = 219, MatrixImage = 220, Pie = 225,
 			Contour = 226, Unknown = 230, ErrorBar = 231, TextPlot = 232, XErrorBar = 233, SurfaceColorMap = 236,
 			SurfaceColorFill = 237, SurfaceWireframe = 238, SurfaceBars = 239, Line3D = 240, Text3D = 241, Mesh3D = 242,
-			XYZContour = 243, XYZTriangular = 245, LineSeries = 246, YErrorBar = 254, XYErrorBar = 255, GraphScatter3D = 0x8AF0,
-			GraphTrajectory3D = 0x8AF1, Polar = 0x00020000, SmithChart = 0x00040000, FillArea = 0x00800000};
+			XYZContour = 243, XYZTriangular = 245, LineSeries = 246, YErrorBar = 254, XYErrorBar = 255};
 		enum LineStyle {Solid = 0, Dash = 1, Dot = 2, DashDot = 3, DashDotDot = 4, ShortDash = 5, ShortDot = 6, ShortDashDot = 7};
 		enum LineConnect {NoLine = 0, Straight = 1, TwoPointSegment = 2, ThreePointSegment = 3, BSpline = 8, Spline = 9,
 			StepHorizontal = 11, StepVertical = 12, StepHCenter = 13, StepVCenter = 14, Bezier = 15};
@@ -824,8 +826,22 @@ namespace Origin
 		{
 			for (vector<GraphCurve>::const_iterator it = curves.begin(); it != curves.end(); ++it)
 			{
-				if (it->type == GraphCurve::Line3D) return true;
-				if (it->type == GraphCurve::Mesh3D) return true;
+				switch (it->type)
+				{
+					case GraphCurve::Scatter3D:
+					case GraphCurve::Surface3D:
+					case GraphCurve::Vector3D:
+					case GraphCurve::ScatterAndErrorBar3D:
+					case GraphCurve::TernaryContour:
+					case GraphCurve::Line3D:
+					case GraphCurve::Mesh3D:
+					case GraphCurve::XYZContour:
+					case GraphCurve::XYZTriangular:
+						return true;
+						break;
+					default:
+						break;
+				}
 			}
 		return false;
 		}
