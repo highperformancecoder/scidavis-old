@@ -40,6 +40,8 @@
 #include <QPaintDevice>
 #include <QVBoxLayout>
 #include <QPrintDialog>
+#include <iostream>
+using namespace std;
 
 Note::Note(ScriptingEnv *env, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
 				: MyWidget(label, parent, name, f)
@@ -53,7 +55,9 @@ autoExec = false;
 QDateTime dt = QDateTime::currentDateTime ();
 setBirthDate(dt.toString(Qt::LocalDate));
 
+ cout << "b4 new ScriptEdit"<<endl;
 te = new ScriptEdit(env, this, name());
+ cout << "after new ScriptEdit"<<endl;
 te->setContext(this);
 QVBoxLayout* hlayout = new QVBoxLayout(this,0,0, "hlayout1");
 hlayout->addWidget(te);

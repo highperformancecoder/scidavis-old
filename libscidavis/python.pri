@@ -27,8 +27,10 @@
   win32 {
   mxe {
      DEFINES += SIP_STATIC_MODULE
-    system($$system(python python-sipcmd.py) -c $${SIP_DIR} src/scidavis.sip)
-  } else {
+     SIP="$$replace(QMAKE_QMAKE,qmake-qt4,sip)" -x VendorID -t WS_X11 -x PyQt_NoPrintRangeBug -x Py_v3 -g -t Qt_$$replace(QT_VERSION,\.,_) -I "$$MXE_BASE"/share/sip/PyQt4 -I ../scidavis -o -c $${SIP_DIR} src/scidavis.sip
+     message($$SIP)
+     system($$SIP)
+} else {
     INCLUDEPATH += $$system(call ../python-includepath.py)
     # TODO: fix the command below (only really necessary if SIP_DIR != MOC/OBJECTS_DIR)
     system($$system(call python-sipcmd.py) -c $${SIP_DIR} src/scidavis.sip)

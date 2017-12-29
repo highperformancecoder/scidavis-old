@@ -24,7 +24,7 @@
 
   message("Making PyQt bindings via SIP")
   unix {
-    INCLUDEPATH += $$system(python-config --includes|sed -e 's/-I//')
+  INCLUDEPATH += $$system(python-config --includes|sed -e 's/-I//')
     osx_dist {
       DEFINES += PYTHONHOME=/Applications/scidavis.app/Contents/Resources
     } else {
@@ -40,8 +40,7 @@
   win32 {
   mxe {
      DEFINES += SIP_STATIC_MODULE
-#    QMAKE_LIBPATH += "$$(HOME)/usr/mxe/PyQt4/"
-    LIBS += -L"$$(HOME)/usr/mxe/PyQt4/" -lPyQtCore -lPyQtGui -lqpygui -lqpycore -lsip -lpython27
+    LIBS += -lQt_s -lQtCore_s -lQtGui_s -lsip -lpython2.7
   } else {
     INCLUDEPATH += $$system(call ../python-includepath.py)
     LIBS        += $$system(call ../python-libs-win.py)

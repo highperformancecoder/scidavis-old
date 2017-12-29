@@ -37,6 +37,7 @@
 #include <traceback.h>
 
 #include <iostream>
+using namespace std;
 
 #define str(x) xstr(x)
 #define xstr(x) #x
@@ -61,11 +62,19 @@ typedef struct _traceback {
 #include <QDateTime>
 #include <QCoreApplication>
 
+#ifdef _WIN32
+#include <windows.h>
+static char pythonHome[MAX_PATH];
+#endif
+
 // includes sip.h, which undefines Qt's "slots" macro since SIP 4.6
 #include "sipAPIscidavis.h"
 extern "C" 
 {
+  void initerrno();
+  void initmath();
   void initsip();
+  void initQt();
   void initQtCore();
   void initQtGui();
   void initscidavis();
@@ -182,9 +191,11 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
   math = NULL;
   sys = NULL;
   d_initialized = false;
+  cout << "b4 Py_IsInitialized()" << endl;
   if (Py_IsInitialized())
     {
       //		PyEval_AcquireLock();
+      cout << "b4 PyImport_ImportModule(__main__)" << endl;
       mainmod = PyImport_ImportModule("__main__");
       if (!mainmod)
         {
@@ -192,27 +203,60 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
           //			PyEval_ReleaseLock();
           return;
         }
+      cout << "b4 PyModule_GetDict" << endl;
       globals = PyModule_GetDict(mainmod);
+      cout << "b4 Py_DECREF(mainmod)" << endl;
       Py_DECREF(mainmod);
     } else {
     // if we need to bundle Python libraries with the executable,
     // specify the library location here
-#ifdef PYTHONHOME
+    cout << "WIN32="<<_WIN32<< endl;
+#if defined(PYTHONHOME)
+    cout << "Py_SetPythonHome" << endl;
     Py_SetPythonHome(str(PYTHONHOME));
+#elif defined(_WIN32)
+    // look in the executables directory
+    GetModuleFileNameA( NULL, pythonHome, MAX_PATH );
+    cout << "pythonhome="<<pythonHome<<endl;
+    *strrchr(pythonHome,'\\')='\0'; // trim of exe name
+    cout << "pythonhome="<<pythonHome<<endl;
+    Py_SetPythonHome(pythonHome);
 #endif
     //		PyEval_InitThreads ();
+      cout << "Py_Initialize" << endl;
+      puts("just b4 Py_Initialize");
+      cout << "updated..."<<endl;
+#ifdef _WIN32
+      Py_NoSiteFlag=1;
+#endif
     Py_Initialize ();
     if (!Py_IsInitialized ())
       return;
 
-
+    PyRun_SimpleString("print 'hello from scidavis'\n");
+    int r=PyRun_SimpleString("import sys; print sys.path\n");
+    cout << "PyRun_SimpleString retruned "<<r<< endl;
+    
 #ifdef SIP_STATIC_MODULE
+    initerrno();
+    initmath();
+    cout << "msg: "<<errorMsg().toStdString() << endl;
+      cout << "initsip" << endl;
     initsip();
+    initQt();
+    cout << "msg: "<<errorMsg().toStdString() << endl;
+      cout << "initQtCore" << endl;
     initQtCore();
+    PyRun_SimpleString("import sys; print sys.modules\n");
+    cout << "msg: "<<errorMsg().toStdString() << endl;
+      cout << "initQtGui" << endl;
     initQtGui();
+    cout << "msg: "<<errorMsg().toStdString() << endl;
 #endif
+      cout << "initscidavis" << endl;
     initscidavis();
 
+      cout << "PyImport_AddModule(__main__)" << endl;
     mainmod = PyImport_AddModule("__main__");
     if (!mainmod)
       {
@@ -220,6 +264,7 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
         PyErr_Print();
         return;
       }
+      cout << "PyModule_GetDict(mainmod)" << endl;
     globals = PyModule_GetDict(mainmod);
   }
 
@@ -229,16 +274,21 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
       //		PyEval_ReleaseLock();
       return;
     }
+      cout << "Py_INCREF(globals)" << endl;
   Py_INCREF(globals);
 
+      cout << "PyDict_New" << endl;
   math = PyDict_New();
   if (!math)
     PyErr_Print();
 
+      cout << "PyImport_ImportModule(scidavis)" << endl;
   scidavismod = PyImport_ImportModule("scidavis");
   if (scidavismod)
     {
+      cout << "PyDict_SetItemString" << endl;
       PyDict_SetItemString(globals, "scidavis", scidavismod);
+      cout << "PyModule_GetDict(scidavismod)" << endl;
       PyObject *scidavisDict = PyModule_GetDict(scidavismod);
       if (!setQObject(d_parent, "app", scidavisDict))
         QMessageBox::warning
@@ -246,21 +296,27 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
            tr("Accessing SciDAVis functions or objects from Python code won't work." 
               "Probably your version of SIP differs from the one SciDAVis was compiled against;" 
               "try updating SIP or recompiling SciDAVis."));
+      cout << "PyDict_SetItemString(scidavisDict" << endl;
       PyDict_SetItemString(scidavisDict, "mathFunctions", math);
+      cout << "Py_DECREF(scidavismod)" << endl;
       Py_DECREF(scidavismod);
     } else
     PyErr_Print();
 
+      cout << "PyImport_ImportModule(sys)" << endl;
   sysmod = PyImport_ImportModule("sys");
   if (sysmod)
     {
+      cout << "PyModule_GetDict(sysmod)" << endl;
       sys = PyModule_GetDict(sysmod);
+      cout << "Py_INCREF(sys)" << endl;
       Py_INCREF(sys);
     } else
     PyErr_Print();
 
   //	PyEval_ReleaseLock();
   d_initialized = true;
+  cout << "exiting PythonScripting::PythonScripting"<<endl;
 }
 
 void PythonScripting::redirectStdIO()
@@ -296,6 +352,7 @@ bool PythonScripting::initialize()
   if(!initialized) initialized = loadInitFile(QCoreApplication::instance()->applicationDirPath()+"/scidavisrc");
   if(!initialized) initialized = loadInitFile("scidavisrc");
 
+  if (PyErr_Occurred()) cout << errorMsg().toStdString() << endl;
   //	PyEval_ReleaseLock();
   return true;
 }
@@ -370,25 +427,33 @@ bool PythonScripting::isRunning() const
 
 bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
 {
+  cout << "in PythonScripting::setQObject"<<endl;
 	if(!val) return false;
 	PyObject *pyobj=NULL;
 
 	PyGILState_STATE state = PyGILState_Ensure();
 
+        cout << "b4 sipFindType "<<val->className()<<endl;
+        cout << "b4 sipAPI_scidavis="<<sipAPI_scidavis<<endl;
         //sipWrapperType * klass = sipFindClass(val->className());
         const sipTypeDef* klass=sipFindType(val->className());
 	if (!klass) return false;
         //pyobj = sipConvertFromInstance(val, klass, NULL);
+        cout << "b4 sipConvertFromType "<<val->className()<<endl;
 	pyobj = sipConvertFromType(val, klass, NULL);
 	if (!pyobj) return false;
 
+        cout << "b4 PyDict_SetItemString "<<val->className()<<endl;
 	if (dict)
 		PyDict_SetItemString(dict,name,pyobj);
 	else
 		PyDict_SetItemString(globals,name,pyobj);
+        cout << "b4 Py_DECREF "<<val->className()<<endl;
 	Py_DECREF(pyobj);
 
+        cout << "b4 PyGILState_Release "<<val->className()<<endl;
 	PyGILState_Release(state);
+        cout <<"returnng from PythonScripting::setQObject"<<endl;
 	return true;
 }
 

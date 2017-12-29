@@ -2604,12 +2604,16 @@ void ApplicationWindow::removeDependentTableStatistics(const AbstractAspect *asp
  */
 Note* ApplicationWindow::newNote(const QString& caption)
 {
-	Note* m = new Note(scriptEnv, "", d_workspace);
+  cout << "in newNote"<<endl;
+  Note* m = new Note(scriptEnv, "", d_workspace);
+  cout << "b4 initNote"<<endl;
 	if (caption.isEmpty())
 		initNote(m, generateUniqueName(tr("Notes")));
 	else
 		initNote(m, caption);
+  cout << "b4 showNormal"<<endl;
 	m->showNormal();
+  cout << "return from newNote"<<endl;
 	return m;
 }
 
@@ -3966,29 +3970,36 @@ bool ApplicationWindow::setScriptingLang(const QString &lang, bool force, bool b
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+        cout << "b4 newEnv"<<endl;
 	ScriptingEnv *newEnv = ScriptingLangManager::newEnv(lang.toStdString(), this, batch);
 	if (!newEnv) {
 		QApplication::restoreOverrideCursor();
 		return false;
 	}
+        cout << "after newEnv"<<endl;
 
 	connect(newEnv, SIGNAL(error(const QString&,const QString&,int)),
 			this, SLOT(scriptError(const QString&,const QString&,int)));
 	connect(newEnv, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
+        cout << "connected"<<endl;
 	if (!newEnv->initialize())
 	{
 		QApplication::restoreOverrideCursor();
 		return false;
 	}
+        cout << "initialised"<<endl;
 
 	// notify everyone who might be interested
 	ScriptingChangeEvent sce(newEnv);
+        cout << "sending event"<<endl;
 	QApplication::sendEvent(this, &sce);
 
 	foreach(QObject *i, findChildren<QWidget*>())
 		QApplication::postEvent(i, new ScriptingChangeEvent(newEnv));
 
+        cout << "after events sent"<<endl;
 	QApplication::restoreOverrideCursor();
+        cout << "cursor restored"<<endl;
 
 	return true;
 }
@@ -13566,17 +13577,22 @@ void ApplicationWindow::cascade()
 
  ApplicationWindow * ApplicationWindow::loadScript(const QString& fn, const QStringList& args, bool execute)
 {
+  cout << "in loadScript"<<endl;
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 	ApplicationWindow *app= new ApplicationWindow();
 	app->applyUserSettings();
         bool isPython=fn.endsWith(".py", Qt::CaseInsensitive);
         app->m_batch=true;
+        cout <<"calling setScriptingLangForBatch"<<endl;
 	if (isPython)
           app->setScriptingLangForBatch("Python");
 	else
           app->setScriptingLangForBatch("muParser");
+        cout <<"after setScriptingLangForBatch"<<endl;
 	app->showMaximized();
+        cout <<"after showMaximized"<<endl;
 	Note *script_note = app->newNote(fn);
+        cout <<"after newNote"<<endl;
         if (isPython)
           {
             // copy any arguments into the sys.argv array
@@ -13587,7 +13603,9 @@ void ApplicationWindow::cascade()
             prologue+="]\n";
             script_note->insert(prologue);
           }
+        cout <<"after insert prologue"<<endl;
 	script_note->importASCII(fn);
+        cout <<"after file imported"<<endl;
 	QApplication::restoreOverrideCursor();
 	if (execute)
           {
@@ -13596,7 +13614,9 @@ void ApplicationWindow::cascade()
             if (auto scriptEdit=script_note->findChild<ScriptEdit*>())
               if ((script=scriptEdit->findChild<Script*>()))
                 script->batchMode=true;
+        cout <<"executing"<<endl;
             script_note->executeAll();
+        cout <<"executed"<<endl;
             if (script)
               script->batchMode=false;
           }

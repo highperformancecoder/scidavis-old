@@ -39,11 +39,15 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QTextStream>
+#include <iostream>
+using namespace std;
 
 ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, QString name)
   : QTextEdit(parent, name), scripted(env), d_error(false), d_changing_fmt(false)
 {
+  cout << "in ScriptEdit()"<<endl;
 	myScript = scriptEnv->newScript("", this, name);
+        cout << "after newScript"<<endl;
 	connect(myScript, SIGNAL(error(const QString&,const QString&,int)), this, SLOT(insertErrorMsg(const QString&)));
 	connect(myScript, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
 

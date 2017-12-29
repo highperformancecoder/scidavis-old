@@ -38,23 +38,30 @@
 
 #include <QObject>
 #include <QVariant>
+#include <iostream>
+using namespace std;
 
 PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *context, const QString &name)
-: Script(env, code, context, name)
+  : Script(env, code, context, name)
 {
-	PyCode = NULL;
-	PyGILState_STATE state = PyGILState_Ensure();
-	// Old: All scripts share a global namespace, and module top-level has its own nonstandard local namespace
+  cout << "in PythonScript()"<<endl;
+                               PyCode = NULL;
+                               PyGILState_STATE state = PyGILState_Ensure();
+                               // Old: All scripts share a global namespace, and module top-level has its own nonstandard local namespace
+                               cout << "b4 PyDict_New"<<endl;
 	modLocalDict = PyDict_New();
 	// A bit of a hack, but we need either IndexError or len() from __builtins__.
+                               cout << "b4 PyDict_SetItemString"<<endl;
 	PyDict_SetItemString(modLocalDict, "__builtins__",
 			     PyDict_GetItemString(this->env()->globalDict(), "__builtins__"));
 	// New: Each script gets its own copy of the global namespace.
 	// it is passed as both globals and locals, so top-level assignments are global to this script.
+                               cout << "b4 PyDict_Copy"<<endl;
 	modGlobalDict = PyDict_Copy(this->env()->globalDict());
 	// To read and write program-wide globals, we provide "globals"
 	// e.g. ">>> globals.remote_ctl_server = server"
 	PyObject *ret;
+                               cout << "b4 PyRun_String"<<endl;
 	ret = PyRun_String(
 			   "import __main__\n"
 			   "globals = __main__",
@@ -63,6 +70,7 @@ PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *c
 		Py_DECREF(ret);
 	else
 		PyErr_Print();
+                               cout << "b4 PyRun_String2"<<endl;
 	ret = PyRun_String(
 			   "import __main__\n"
 			   "globals = __main__",
@@ -72,8 +80,11 @@ PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *c
 	else
 		PyErr_Print();
 	// "self" is unique to each script, so they can't all run in the __main__ namespace
+                               cout << "b4 PyGILState_Release"<<endl;
 	PyGILState_Release(state);
+                               cout << "b4 setQObject"<<endl;
 	setQObject(Context, "self");
+  cout << "return from PythonScript()"<<endl;
 }
 
 PythonScript::~PythonScript()

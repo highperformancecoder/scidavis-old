@@ -222,7 +222,7 @@ DEFINES  += ORIGIN_IMPORT
 }
 
 ### python support
-osx_dist|aegis {
+mxe|osx_dist|aegis {
 CONFIG+=python
 }
 
@@ -357,12 +357,17 @@ win32: {
 # Mingw cross compilation environment on Linux. 
 mxe {
   # these need to go in CXXFLAGS to ensure they appear before $$QMAKE_INCDIR_QT and $$QMAKE_INCDIR_QT
-  QMAKE_CXXFLAGS+=-g "-I$$QMAKE_INCDIR_QT/qwt5"
+  MXE_BASE="$$QMAKE_INCDIR_QT"/../..
+  QMAKE_CXXFLAGS+=-g -fpermissive "-I$$QMAKE_INCDIR_QT/qwt5"
   QMAKE_LFLAGS+="-L$$QMAKE_LIBDIR_QT/qwt5"
-  DEFINES += CONSOLE
+  # DEFINES += CONSOLE
+  # is there a cleaner way of finding the python headers?
+  QMAKE_INCDIR  += "$$MXE_BASE"/include/python2.7
+  QMAKE_LIBDIR  += "$$MXE_BASE"/lib/python2.7/site-packages/PyQt4
   QMAKE_INCDIR  += . "$$(HOME)/usr/mxe/include" 
   QMAKE_LIBDIR += "$(HOME)/usr/mxe/lib" "$(HOME)/usr/mxe/lib64"
-  LIBS +=  -mwindows -lqwt -lqwtplot3d -lmuparser -lgsl -lgslcblas
+  #LIBS +=  -mwindows -lqwt -lqwtplot3d -lmuparser -lgsl -lgslcblas
+  LIBS +=  -lqwt -lqwtplot3d -lmuparser -lgsl -lgslcblas
   # Qt libraries specified here to get around a dependency bug in qmake
   LIBS += -lQt3Support -lQtOpenGL -lQtGui -lQtNetwork -lQtCore
   LIBS += -lole32 -loleaut32 -limm32 -lcomdlg32 -luuid 
