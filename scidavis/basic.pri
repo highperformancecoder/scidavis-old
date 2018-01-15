@@ -63,7 +63,7 @@ TRANSLATIONS    = translations/scidavis_de.ts \
                              translations/scidavis_cs-alt.qm \
 
         unix: tstarget.target = translations/scidavis_de.qm
-        win32: tstarget.target = translations\scidavis_de.qm
+        win32: tstarget.target = translations/scidavis_de.qm
 # note the translation files are not writable during AEGIS
 # integration, so we don't want to perform an update then
         tstarget.commands = (! test -w translations/scidavis_de.ts || \

@@ -337,20 +337,20 @@ win32: {
 	### Static linking mostly, except Qt, Python and QwtPlot3D.
 	### The latter seems to be impossible to link statically on Windows.
 
-	isEmpty(LIBPATH): LIBPATH = ../3rdparty
+	isEmpty(QMAKE_LIBDIR): QMAKE_LIBDIR = ../3rdparty
 
-	INCLUDEPATH  += "$${LIBPATH}/qwt/src"
-	LIBS         += "$${LIBPATH}/qwt/lib/libqwt.a"
+	INCLUDEPATH  += "$${QMAKE_LIBDIR}/qwt/src"
+	LIBS         += "$${QMAKE_LIBDIR}/qwt/lib/libqwt.a"
 
-	INCLUDEPATH  += "$${LIBPATH}/qwtplot3d/include"
-	LIBS         += "$${LIBPATH}/qwtplot3d/lib/qwtplot3d.dll"
+	INCLUDEPATH  += "$${QMAKE_LIBDIR}/qwtplot3d/include"
+	LIBS         += "$${QMAKE_LIBDIR}/qwtplot3d/lib/qwtplot3d.dll"
 
-	INCLUDEPATH  += "$${LIBPATH}/muparser/include"
-	LIBS         += "$${LIBPATH}/muparser/lib/libmuparser.a"
+	INCLUDEPATH  += "$${QMAKE_LIBDIR}/muparser/include"
+	LIBS         += "$${QMAKE_LIBDIR}/muparser/lib/libmuparser.a"
 
-	INCLUDEPATH  += "$${LIBPATH}/gsl/include"
-	LIBS         += "$${LIBPATH}/gsl/lib/libgsl.a"
-	LIBS         += "$${LIBPATH}/gsl/lib/libgslcblas.a"
+	INCLUDEPATH  += "$${QMAKE_LIBDIR}/gsl/include"
+	LIBS         += "$${QMAKE_LIBDIR}/gsl/lib/libgsl.a"
+	LIBS         += "$${QMAKE_LIBDIR}/gsl/lib/libgslcblas.a"
   }
 }
 
