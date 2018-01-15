@@ -14974,12 +14974,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PythonScripting</name>
     <message>
-        <location filename="../../libscidavis/src/PythonScripting.cpp" line="282"/>
+        <location filename="../../libscidavis/src/PythonScripting.cpp" line="294"/>
         <source>Failed to export SciDAVis API</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PythonScripting.cpp" line="283"/>
+        <location filename="../../libscidavis/src/PythonScripting.cpp" line="295"/>
         <source>Accessing SciDAVis functions or objects from Python code won&apos;t work.Probably your version of SIP differs from the one SciDAVis was compiled against;try updating SIP or recompiling SciDAVis.</source>
         <translation type="unfinished"></translation>
     </message>

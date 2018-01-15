@@ -210,7 +210,6 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
     } else {
     // if we need to bundle Python libraries with the executable,
     // specify the library location here
-    cout << "WIN32="<<_WIN32<< endl;
 #if defined(PYTHONHOME)
     cout << "Py_SetPythonHome" << endl;
     Py_SetPythonHome(str(PYTHONHOME));

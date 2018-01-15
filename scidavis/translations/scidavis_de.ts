@@ -17381,12 +17381,12 @@ Absolutbetrag von x.</translation>
 <context>
     <name>PythonScripting</name>
     <message>
-        <location filename="../../libscidavis/src/PythonScripting.cpp" line="282"/>
+        <location filename="../../libscidavis/src/PythonScripting.cpp" line="294"/>
         <source>Failed to export SciDAVis API</source>
         <translation type="unfinished">Konnte SciDAVis-API nicht exportieren</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PythonScripting.cpp" line="283"/>
+        <location filename="../../libscidavis/src/PythonScripting.cpp" line="295"/>
         <source>Accessing SciDAVis functions or objects from Python code won&apos;t work.Probably your version of SIP differs from the one SciDAVis was compiled against;try updating SIP or recompiling SciDAVis.</source>
         <translation type="unfinished">Zugriff auf SciDAVis’ Funktionen und Objekte wird nicht möglich sein. Wahrscheinlich ist eine andere Version von SIP installiert als diejenige, die für die Kompilierung von SciDAVis verwendet wurde; Aktualisierung von SIP oder Neukompilierung von SciDAVis könnte das Problem beheben.</translation>
     </message>

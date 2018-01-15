@@ -15547,12 +15547,12 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
 <context>
     <name>PythonScripting</name>
     <message>
-        <location filename="../../libscidavis/src/PythonScripting.cpp" line="282"/>
+        <location filename="../../libscidavis/src/PythonScripting.cpp" line="294"/>
         <source>Failed to export SciDAVis API</source>
         <translation type="unfinished">Falló al exportar SciDAVis API</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PythonScripting.cpp" line="283"/>
+        <location filename="../../libscidavis/src/PythonScripting.cpp" line="295"/>
         <source>Accessing SciDAVis functions or objects from Python code won&apos;t work.Probably your version of SIP differs from the one SciDAVis was compiled against;try updating SIP or recompiling SciDAVis.</source>
         <translation type="unfinished">El acceso a funciones SciDAVis u objetos desde código Python no trabaja. Probablemente su versión de SIP difiere de la versión usada para compilar SciDAVis; trate de actualizar SIP o recompilar SciDAVis.</translation>
     </message>
