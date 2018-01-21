@@ -185,7 +185,7 @@ void OriginParser::convertSpreadToExcel(vector<Origin::SpreadSheet>::size_type s
 	for(vector<SpreadColumn>::iterator it = spreadSheets[spread].columns.begin(); it != spreadSheets[spread].columns.end(); ++it)
 	{
 		unsigned int index = 0;
-		int pos = it->name.find_last_of("@");
+		int pos = (int)(it->name.find_last_of("@"));
 		if(pos != -1)
 		{
 			index = strtol(it->name.substr(pos + 1).c_str(), 0, 10) - 1;
@@ -203,7 +203,7 @@ void OriginParser::convertSpreadToExcel(vector<Origin::SpreadSheet>::size_type s
 
 int OriginParser::findColumnByName(int spread, const string& name)
 {
-	unsigned int columns = spreadSheets[spread].columns.size();
+	size_t columns = spreadSheets[spread].columns.size();
 	for (unsigned int i = 0; i < columns; i++){
 		string colName = spreadSheets[spread].columns[i].name;
 		if (colName.size() >= 11)

@@ -367,7 +367,7 @@ bool OriginAnyParser::readWindowElement() {
 	} else {
 		LOG_PRINT(logfile, "\n  Window is a Graph\n")
 		graphs.push_back(Graph(name));
-		igraph = graphs.size()-1;
+		igraph = (int)graphs.size()-1;
 		getWindowProperties(graphs[igraph], wde_header, wde_header_size);
 	}
 
@@ -996,10 +996,10 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 	LOG_PRINT(logfile, "  signature %d [0x%X], valuesize %d size %d ", signature, signature, valuesize, col_data_size)
 
 
-	unsigned int current_col = 1;//, nr = 0, nbytes = 0;
+	size_t current_col = 1;//, nr = 0, nbytes = 0;
 	static unsigned int col_index = 0;
 	unsigned int current_sheet = 0;
-	int spread = 0;
+	vector<Origin::SpreadSheet>::difference_type spread = 0;
 
 	if (column_name.empty()) { // Matrix or function
 		if (data_type == 0x6081) { // Function
@@ -1025,7 +1025,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 			LOG_PRINT(logfile, ". Range [%g : %g], number of points: %d\n", f.begin, f.end, f.totalPoints);
 
 		} else { // Matrix
-			int mIndex = -1;
+			vector<Origin::Matrix>::difference_type mIndex = -1;
 			string::size_type pos = name.find_first_of("@");
 			if (pos != string::npos){
 				string sheetName = name;
@@ -1152,7 +1152,7 @@ bool OriginAnyParser::getColumnInfoAndData(string col_header, unsigned int col_h
 	return true;
 }
 
-void OriginAnyParser::getMatrixValues(string col_data, unsigned int col_data_size, short data_type, char data_type_u, char valuesize, int mIndex) {
+void OriginAnyParser::getMatrixValues(string col_data, unsigned int col_data_size, short data_type, char data_type_u, char valuesize, vector<Origin::Matrix>::difference_type mIndex) {
 	if (matrixes.empty())
 		return;
 
@@ -1160,7 +1160,7 @@ void OriginAnyParser::getMatrixValues(string col_data, unsigned int col_data_siz
 	stmp.str(col_data);
 
 	if (mIndex < 0)
-		mIndex = matrixes.size() - 1;
+		mIndex = (vector<Origin::Matrix>::difference_type)matrixes.size() - 1;
 
 	unsigned int size = col_data_size/valuesize;
 	bool logValues = true;
@@ -1463,7 +1463,7 @@ void OriginAnyParser::getAnnotationProperties(string anhd, unsigned int anhdsz, 
 	if (ispread != -1) {
 
 		string sec_name = anhd.substr(0x46,41).c_str();
-		int col_index = findColumnByName(ispread, sec_name);
+		int col_index = findColumnByName((int)ispread, sec_name);
 		if (col_index != -1){ //check if it is a formula
 			spreadSheets[ispread].columns[col_index].command = andt1.c_str();
 			LOG_PRINT(logfile, "				Column: %s has formula: %s\n", sec_name.c_str(), spreadSheets[ispread].columns[col_index].command.c_str())
@@ -1494,7 +1494,7 @@ void OriginAnyParser::getAnnotationProperties(string anhd, unsigned int anhdsz, 
 	} else if (iexcel != -1) {
 
 		string sec_name = anhd.substr(0x46,41).c_str();
-		int col_index = findExcelColumnByName(iexcel, ilayer, sec_name);
+		vector<Origin::SpreadColumn>::difference_type col_index = findExcelColumnByName(iexcel, ilayer, sec_name);
 		if (col_index != -1){ //check if it is a formula
 			excels[iexcel].sheets[ilayer].columns[col_index].command = andt1.c_str();
 		}
@@ -1903,7 +1903,7 @@ void OriginAnyParser::getCurveProperties(string cvehd, unsigned int cvehdsz, str
 			stmp.str(cvehd.substr(0x4A));
 			GET_SHORT(stmp, width)
 		}
-		int col_index = findColumnByName(ispread, name);
+		int col_index = findColumnByName((int)ispread, name);
 		if (col_index != -1) {
 			if (spreadSheets[ispread].columns[col_index].name != name)
 				spreadSheets[ispread].columns[col_index].name = name;
@@ -2023,7 +2023,7 @@ void OriginAnyParser::getCurveProperties(string cvehd, unsigned int cvehdsz, str
 		GET_SHORT(stmp, dataID)
 
 		unsigned int isheet = datasets[dataID-1].sheet;
-		int col_index = findExcelColumnByName(iexcel, isheet, name);
+		vector<Origin::SpreadColumn>::difference_type col_index = findExcelColumnByName(iexcel, isheet, name);
 		if (col_index != -1) {
 			SpreadColumn::ColumnType type;
 			switch(c){
@@ -2703,6 +2703,7 @@ void OriginAnyParser::getAxisParameterProperties(string apdata, unsigned int apd
 }
 
 void OriginAnyParser::getNoteProperties(string nwehd, unsigned int nwehdsz, string nwelb, unsigned int nwelbsz, string nwect, unsigned int nwectsz) {
+	LOG_PRINT(logfile, "OriginAnyParser::getNoteProperties()");
 	istringstream stmp;
 	(void) nwehdsz; (void) nwelbsz; (void) nwectsz;
 
@@ -2724,7 +2725,7 @@ void OriginAnyParser::getNoteProperties(string nwehd, unsigned int nwehdsz, stri
 	// ResultsLog note window has left, top, right, bottom all zero.
 	// All other parameters are also zero, except "name" and "text".
 	if (!rect.bottom || !rect.right) {
-		resultsLog = nwect.c_str();
+		resultsLog = nwect;
 		return;
 	}
 	unsigned char state = nwehd[0x18];
@@ -2741,6 +2742,7 @@ void OriginAnyParser::getNoteProperties(string nwehd, unsigned int nwehdsz, stri
 	GET_INT(stmp, labellen)
 
 	notes.push_back(Note(name));
+	LOG_PRINT(logfile,"notes: %d\n", (int)notes.size());
 	notes.back().objectID = objectIndex;
 	++objectIndex;
 
@@ -2902,6 +2904,7 @@ void OriginAnyParser::getZcolorsMap(ColorMap& colorMap, string cmapdata, unsigne
 }
 
 void OriginAnyParser::getProjectLeafProperties(tree<ProjectNode>::iterator current_folder, string ptldt, unsigned int ptldtsz) {
+	LOG_PRINT(logfile,"OriginAnyParser::getProjectLeafProperties()\n");
 	istringstream stmp;
 	(void) ptldtsz;
 
@@ -2910,7 +2913,9 @@ void OriginAnyParser::getProjectLeafProperties(tree<ProjectNode>::iterator curre
 	GET_INT(stmp, file_type);
 	GET_INT(stmp, file_object_id);
 
+	LOG_PRINT(logfile,"file_type=%d file_object_id=%d\n",file_type,file_object_id);
 	if (file_type == 0x100000) { // Note window
+		LOG_PRINT(logfile,"notes.size()=%d\n",(int)notes.size());
 		if ((file_object_id <= notes.size()) && (notes.size()>0)) {
 			projectTree.append_child(current_folder, ProjectNode(notes[file_object_id].name, ProjectNode::Note));
 		}
@@ -2937,7 +2942,7 @@ void OriginAnyParser::getProjectFolderProperties(tree<ProjectNode>::iterator cur
 }
 
 void OriginAnyParser::outputProjectTree() {
-	unsigned int windowsCount = spreadSheets.size()+matrixes.size()+excels.size()+graphs.size()+notes.size();
+	size_t windowsCount = spreadSheets.size()+matrixes.size()+excels.size()+graphs.size()+notes.size();
 
 	cout << "Project has " << windowsCount << " windows." << endl;
 	cout << "Origin project Tree" << endl;

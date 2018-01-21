@@ -55,7 +55,7 @@ protected:
 	void readProjectLeaf(tree<ProjectNode>::iterator);
 	void readAttachmentList();
 	bool getColumnInfoAndData(string, unsigned int, string, unsigned int);
-	void getMatrixValues(string, unsigned int, short, char, char, int);
+	void getMatrixValues(string, unsigned int, short, char, char, vector<Origin::Matrix>::difference_type);
 	void getWindowProperties(Origin::Window&, string, unsigned int);
 	void getLayerProperties(string, unsigned int);
 	Origin::Color getColor(string);
@@ -81,8 +81,10 @@ protected:
 
 	unsigned long d_file_size;
 	unsigned int objectIndex, parseError;
-	int ispread, imatrix, iexcel, igraph;
-	int ilayer;
+	vector<Origin::SpreadSheet>::difference_type ispread;
+	vector<Origin::Matrix>::difference_type imatrix;
+	vector<Origin::Excel>::difference_type iexcel;
+	int igraph, ilayer;
 };
 
 #endif // ORIGIN_ANY_PARSER_H
