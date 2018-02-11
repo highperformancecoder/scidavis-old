@@ -66,6 +66,7 @@ protected:
 	vector<Origin::SpreadColumn>::difference_type findExcelColumnByName(vector<Origin::Excel>::size_type excel, vector<Origin::SpreadSheet>::size_type sheet, const string& name) const;
 	pair<string, string> findDataByIndex(unsigned int index) const;
 	pair<Origin::ProjectNode::NodeType, string> findObjectByIndex(unsigned int index) const;
+	pair<Origin::ProjectNode::NodeType, Origin::Window> findWindowObjectByIndex(unsigned int index) const;
 	void convertSpreadToExcel(vector<Origin::SpreadSheet>::size_type spread);
 
 	int findColumnByName(int spread, const string& name);
