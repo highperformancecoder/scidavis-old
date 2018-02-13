@@ -61,7 +61,7 @@ class ScriptEdit: public QTextEdit, public scripted
 
   public slots:
     void execute();
-    void executeAll();
+    bool executeAll();
     void evaluate();
     void print();
     void exportPDF(const QString& fileName);

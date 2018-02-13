@@ -39,6 +39,9 @@
 #include <QObject>
 #include <QVariant>
 
+#include <iostream>
+using namespace std;
+
 PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *context, const QString &name)
 : Script(env, code, context, name)
 {
@@ -275,7 +278,11 @@ bool PythonScript::exec()
 		Py_DECREF(pyret);
 		return true;
 	}
-	emit_error(env()->errorMsg(), 0);
+        if (batchMode)
+          cerr << env()->errorMsg().toStdString() << endl;
+        else
+          emit_error(env()->errorMsg(), 0);
+        
 	return false;
 }
 

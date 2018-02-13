@@ -78,7 +78,7 @@ class ScriptingEnv : public QObject
     const QString fileFilter() const;
 
   virtual void redirectStdIO() {}
-  
+
 //    virtual QSyntaxHighlighter syntaxHighlighter(QTextEdit *textEdit) const;
 
   public slots:

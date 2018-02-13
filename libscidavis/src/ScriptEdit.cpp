@@ -243,14 +243,14 @@ void ScriptEdit::execute()
 	d_error = false;
 }
 
-void ScriptEdit::executeAll()
+bool ScriptEdit::executeAll()
 {
 	QString fname = "<%1>";
 	fname = fname.arg(name());
 	myScript->setName(fname);
 	myScript->setCode(text());
 	printCursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-	myScript->exec();
+	return myScript->exec();
 }
 
 void ScriptEdit::evaluate()

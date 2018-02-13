@@ -69,7 +69,7 @@ public slots:
 	QString exportASCII(const QString &file=QString::null) { return te->exportASCII(file); };
 	QString importASCII(const QString &file=QString::null) { return te->importASCII(file); };
 	void execute() { te->execute(); };
-	void executeAll() { te->executeAll(); };
+	bool executeAll() {return te->executeAll(); };
 	void evaluate() { te->evaluate(); };
   void insert(const QString& s) {te->insert(s);}
 private:
