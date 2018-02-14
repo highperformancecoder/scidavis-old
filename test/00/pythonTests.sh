@@ -36,4 +36,11 @@ for i in *.py; do
     if test $? -ne 0; then fail; fi
 done
 
+if [ -z "$TRAVIS" ]; then
+    for i in *.png; do
+        diff $i $here/test/renderedImages/$i
+        if test $? -ne 0; then fail; fi
+    done
+fi
+
 pass

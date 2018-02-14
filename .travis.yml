@@ -54,4 +54,5 @@ script:
   - make
   - Xvfb :0 &
   - export DISPLAY=:0
+  - export TRAVIS=1
   - for i in test/00/*; do if sh $i; then true; else exit 1; fi; done

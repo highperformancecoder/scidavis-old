@@ -80,7 +80,6 @@ class Script : public QObject
   
   /// true if running in batch - don't redirect stdio
   bool batchMode=false;
-  bool exceptionThrown() const {return Env->exceptionThrown();}
   
   public slots:
     //! Compile the Code. Return true if the implementation doesn't support compilation.
