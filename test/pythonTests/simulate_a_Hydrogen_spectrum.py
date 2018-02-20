@@ -3,6 +3,7 @@
 import numpy as np #importing numpy
 
 global np #define np as global in order to be able to use it inside loops
+np.random.seed(1)
 
 PI=np.pi
 dp=0.003 #noise's stddev
