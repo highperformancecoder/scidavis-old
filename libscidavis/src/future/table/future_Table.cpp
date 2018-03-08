@@ -473,23 +473,46 @@ void Table::pasteIntoSelection()
 
 		rows = last_row - first_row + 1;
 		cols = last_col - first_col + 1;
-		for(int r=0; r<rows && r<input_row_count; r++)
+		if (d_view->formulaModeActive())
 		{
-			for(int c=0; c<cols && c<input_col_count; c++)
+			for(int r=0; r<rows && r<input_row_count; r++)
 			{
-				if(d_view->isCellSelected(first_row + r, first_col + c) && (c < cell_texts.at(r).count()) )
+				for(int c=0; c<cols && c<input_col_count; c++)
 				{
-					Column * col_ptr = d_table_private->column(first_col + c);
-					if (d_view->formulaModeActive())
+					if(d_view->isCellSelected(first_row + r, first_col + c) && (c < cell_texts.at(r).count()) )
 					{
+						Column * col_ptr = d_table_private->column(first_col + c);
 						col_ptr->setFormula(first_row + r, cell_texts.at(r).at(c));  
 						col_ptr->setInvalid(first_row + r, false);
 					}
-					else
-						col_ptr->asStringColumn()->setTextAt(first_row+r, cell_texts.at(r).at(c));
 				}
 			}
 		}
+		else
+		{
+			QList< QStringList > cols_texts;
+			// transpose clipboard data to use replaceTexts
+			for (int c=0; c<input_col_count; c++)
+			{
+				QStringList cur_column;
+				for (int r=0; r<input_row_count; r++)
+				{
+					if (c < cell_texts.at(r).size()) {
+						cur_column << cell_texts.at(r).at(c);
+					} else {
+						cur_column << QString();
+					}
+				}
+				cols_texts << cur_column;
+			}
+
+			for (int c=0; c<cols && c<input_col_count; c++)
+			{
+				Column * col_ptr = d_table_private->column(first_col + c);
+				col_ptr->asStringColumn()->replaceTexts(first_row, cols_texts.at(c));
+			}
+		}
+
 		recalculateSelectedCells();
 	}
 	endMacro();
