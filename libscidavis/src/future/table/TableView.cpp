@@ -799,6 +799,28 @@ IntervalAttribute<bool> TableView::selectedRows(bool full) {
 	return result;
 }
 
+bool TableView::hasMultiSelection()
+{
+	QModelIndexList indexes = d_view_widget->selectionModel()->selectedIndexes();
+	if (indexes.size() < 2)
+		return false;
+
+	QModelIndex index;
+	int minrow = indexes.at(0).row();
+	int maxrow = minrow;
+	int mincol = indexes.at(0).column();
+	int maxcol = mincol;
+	foreach (index, indexes)
+	{
+		minrow = std::min(minrow, index.row());
+		maxrow = std::max(maxrow, index.row());
+		mincol = std::min(mincol, index.column());
+		maxcol = std::max(maxcol, index.column());
+	}
+	int spanned = (maxrow-minrow+1)*(maxcol-mincol+1);
+	return (spanned > d_view_widget->selectionModel()->selectedIndexes().size());
+}
+
 bool TableView::isCellSelected(int row, int col)
 {
 	if(row < 0 || col < 0 || row >= d_table->rowCount() || col >= d_table->columnCount()) return false;

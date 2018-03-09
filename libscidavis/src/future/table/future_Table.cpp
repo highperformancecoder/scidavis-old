@@ -473,7 +473,7 @@ void Table::pasteIntoSelection()
 
 		rows = last_row - first_row + 1;
 		cols = last_col - first_col + 1;
-		if (d_view->formulaModeActive())
+		if ((d_view->formulaModeActive()) || (d_view->hasMultiSelection()))
 		{
 			for(int r=0; r<rows && r<input_row_count; r++)
 			{
@@ -509,7 +509,7 @@ void Table::pasteIntoSelection()
 			for (int c=0; c<cols && c<input_col_count; c++)
 			{
 				Column * col_ptr = d_table_private->column(first_col + c);
-				col_ptr->asStringColumn()->replaceTexts(first_row, cols_texts.at(c));
+				col_ptr->asStringColumn()->replaceTexts(first_row, cols_texts.at(c).mid(0,rows));
 			}
 		}
 
