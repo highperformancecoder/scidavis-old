@@ -164,6 +164,8 @@ class TableView : public MyWidget
 		int lastSelectedRow(bool full = false);
 		//! Get the complete set of selected rows.
 		IntervalAttribute<bool> selectedRows(bool full = false);
+		//! Return whether multiple regions are selected
+		bool hasMultiSelection();
 		//! Return whether a cell is selected
 		bool isCellSelected(int row, int col);
 		//! Select/Deselect a cell
