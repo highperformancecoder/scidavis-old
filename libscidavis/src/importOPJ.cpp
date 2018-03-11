@@ -693,7 +693,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 						break;
 					if(style==Graph::ErrorBars)
 					{
-						int flags=_curve.symbolType;
+						int flags=_curve.symbolShape;
 						graph->addErrorBars(QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()),
 							((flags&0x10)==0x10?0:1), ceil(_curve.lineWidth), ceil(_curve.symbolSize), QColor(Qt::black),
 							(flags&0x40)==0x40, (flags&2)==2, (flags&1)==1);
@@ -746,7 +746,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 				if((style==Graph::Scatter||style==Graph::LineSymbols)&&color==0xF7)//0xF7 -Automatic color
 					color=auto_color++;
 				cl.symCol=color;
-				switch(_curve.symbolType&0xFF)
+				switch(_curve.symbolShape)
 				{
 				case 0: //NoSymbol
 					cl.sType=0;
@@ -799,7 +799,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 					cl.sType=0;
 				}
 
-				switch(_curve.symbolType>>8)
+				switch(_curve.symbolInterior)
 				{
 				case 0:
 					cl.fillCol=color;
