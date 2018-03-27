@@ -90,13 +90,13 @@ CurvesDialog::CurvesDialog( QWidget* parent, Qt::WFlags fl )
 
     QVBoxLayout* vl1 = new QVBoxLayout();
 	btnAdd = new QPushButton();
-	btnAdd->setPixmap( QPixmap(":/next.xpm") );
+	btnAdd->setIcon( QIcon(QPixmap(":/next.xpm")) );
 	btnAdd->setFixedWidth (35);
 	btnAdd->setFixedHeight (30);
     vl1->addWidget(btnAdd);
 
 	btnRemove = new QPushButton();
-	btnRemove->setPixmap( QPixmap(":/prev.xpm") );
+	btnRemove->setIcon( QIcon(QPixmap(":/prev.xpm")) );
 	btnRemove->setFixedWidth (35);
 	btnRemove->setFixedHeight(30);
     vl1->addWidget(btnRemove);

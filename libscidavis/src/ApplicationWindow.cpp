@@ -6062,16 +6062,16 @@ void ApplicationWindow::zoomIn()
 		QMessageBox::warning(this, tr("Warning"),
 				tr("<h4>There are no plot layers available in this window.</h4>"
 					"<p><h4>Please add a layer and try again!</h4>"));
-		btnPointer->setOn(true);
+		btnPointer->setChecked(true);
 		return;
 	}
 
 	if ((Graph*)plot->activeGraph()->isPiePlot())
 	{
-		if (btnZoomIn->isOn())
+		if (btnZoomIn->isChecked())
 			QMessageBox::warning(this,tr("Warning"),
 					tr("This functionality is not available for pie plots!"));
-		btnPointer->setOn(true);
+		btnPointer->setChecked(true);
 		return;
 	}
 
@@ -6094,7 +6094,7 @@ void ApplicationWindow::zoomOut()
 		return;
 
 	((Graph*)plot->activeGraph())->zoomOut();
-	btnPointer->setOn(true);
+	btnPointer->setChecked(true);
 }
 
 void ApplicationWindow::setAutoScale()
@@ -9228,7 +9228,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 			}
 			if (t.elapsed() > 1000)
 			{
-				QApplication::processEvents(QEventLoop::ExcludeUserInput);
+				QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 				t.start();
 			}
 		}
@@ -9356,7 +9356,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 			}
 			if (t.elapsed() > 1000)
 			{
-				QApplication::processEvents(QEventLoop::ExcludeUserInput);
+				QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 				t.start();
 			}
 		}
@@ -13622,7 +13622,7 @@ QMenu * ApplicationWindow::createToolbarsMenu()
 void ApplicationWindow::setStatusBarText(const QString& text)
 {
 	d_status_info->setText(text);
-	QApplication::processEvents(QEventLoop::ExcludeUserInput);
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 }
 
 void ApplicationWindow::copyStatusBarText()
