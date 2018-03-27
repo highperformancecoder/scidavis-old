@@ -125,7 +125,7 @@ bool ImportOPJ::createProjectTree(const OriginFile& opj)
 				if(rx.indexIn(name) == 0)
 					name = rx.cap(1);
 			}
-			QString nodetype;
+			const char* nodetype;
 			switch (sib->type)
 			{
 				case Origin::ProjectNode::SpreadSheet:

@@ -318,8 +318,8 @@ bool PythonScripting::loadInitFile(const QString &path)
 	bool success = false;
 	if (pycFile.isReadable() && (pycFile.lastModified() >= pyFile.lastModified())) {
 		// if we have a recent pycFile, use it
-		FILE *f = fopen(pycFile.filePath(), "rb");
-		success = PyRun_SimpleFileEx(f, pycFile.filePath(), false) == 0;
+		FILE *f = fopen(pycFile.filePath().toLocal8Bit(), "rb");
+		success = PyRun_SimpleFileEx(f, pycFile.filePath().toLocal8Bit(), false) == 0;
 		fclose(f);
 	} else if (pyFile.isReadable() && pyFile.exists()) {
 		// try to compile pyFile to pycFile
@@ -328,8 +328,8 @@ bool PythonScripting::loadInitFile(const QString &path)
 			PyObject *compile = PyDict_GetItemString(PyModule_GetDict(compileModule), "compile");
 			if (compile) {
 				PyObject *tmp = PyObject_CallFunctionObjArgs(compile,
-						PyString_FromString(pyFile.filePath()),
-						PyString_FromString(pycFile.filePath()),
+						PyString_FromString(pyFile.filePath().toLocal8Bit()),
+						PyString_FromString(pycFile.filePath().toLocal8Bit()),
 						NULL);
 				if (tmp)
 					Py_DECREF(tmp);
@@ -343,8 +343,8 @@ bool PythonScripting::loadInitFile(const QString &path)
 		pycFile.refresh();
 		if (pycFile.isReadable() && (pycFile.lastModified() >= pyFile.lastModified())) {
 			// run the newly compiled pycFile
-			FILE *f = fopen(pycFile.filePath(), "rb");
-			success = PyRun_SimpleFileEx(f, pycFile.filePath(), false) == 0;
+			FILE *f = fopen(pycFile.filePath().toLocal8Bit(), "rb");
+			success = PyRun_SimpleFileEx(f, pycFile.filePath().toLocal8Bit(), false) == 0;
 			fclose(f);
 		} else {
 			// fallback: just run pyFile
@@ -434,7 +434,7 @@ const QStringList PythonScripting::mathFunctions() const
 
 const QString PythonScripting::mathFunctionDoc(const QString &name) const
 {
-	PyObject *mathf = PyDict_GetItemString(math,name); // borrowed
+	PyObject *mathf = PyDict_GetItemString(math,name.toLocal8Bit()); // borrowed
 	if (!mathf) return "";
 	PyObject *pydocstr = PyObject_GetAttrString(mathf, "__doc__"); // new
 	QString qdocstr = PyString_AsString(pydocstr);
