@@ -367,7 +367,7 @@ void ApplicationWindow::applyUserSettings()
 	updateAppFonts();
 	setScriptingLang(defaultScriptingLang);
 
-	d_workspace->setPaletteBackgroundColor (workspaceColor);
+	d_workspace->setBackground (workspaceColor);
 
 	QPalette cg;
 	cg.setColor(QPalette::Base, QColor(panelsColor));
@@ -10417,7 +10417,7 @@ void ApplicationWindow::setAppColors(const QColor& wc,const QColor& pc,const QCo
 	if (workspaceColor != wc)
 	{
 		workspaceColor = wc;
-		d_workspace->setPaletteBackgroundColor (wc);
+		d_workspace->setBackground (wc);
 	}
 
 	if (panelsColor == pc && panelsTextColor == tpc)

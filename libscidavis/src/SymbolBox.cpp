@@ -68,7 +68,7 @@ void SymbolBox::init()
 	icon.fill ( QColor (Qt::gray) );
 	const QRect r= QRect(0, 0, 14, 14);
 	QPainter p(&icon);
-	p.setBackgroundColor(QColor(Qt::gray));
+	p.setBackground(QColor(Qt::gray));
 	QwtSymbol symb;
 	p.setBrush(QBrush(QColor(Qt::white)));
 

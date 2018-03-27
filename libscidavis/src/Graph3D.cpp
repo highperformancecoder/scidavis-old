@@ -1999,7 +1999,7 @@ void Graph3D::print()
 		if (IO::save (sp,"scidavis.png","PNG"))
 		{
 			QPixmap p;
-			p.load ("scidavis.png","PNG", QPixmap::Color );
+			p.load ("scidavis.png","PNG", Qt::ColorOnly );
 
 			QPainter paint(&printer);
 			paint.drawPixmap(QPoint(0,0),p);
@@ -2035,7 +2035,7 @@ void Graph3D::exportImage(const QString& fileName, int quality, bool transparent
 
 		QColor background = QColor (Qt::white);
 		QRgb backgroundPixel = background.rgb ();
-		QImage image = pic.convertToImage();
+		QImage image = pic.toImage();
 		for (int y=0; y<image.height(); y++)
 		{
 			for ( int x=0; x<image.width(); x++ )
