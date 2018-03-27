@@ -40,6 +40,7 @@
 #include <QPushButton>
 #include <QRegExp>
 #include <QMessageBox>
+#include <QCloseEvent>
 
 ImportASCIIDialog::ImportASCIIDialog(bool import_mode_enabled, QWidget * parent, bool extended, Qt::WFlags flags )
 : ExtensibleFileDialog(parent, extended, flags )

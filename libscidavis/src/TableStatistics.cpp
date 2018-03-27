@@ -37,6 +37,7 @@
 
 #include <QList>
 #include <QMenu>
+#include <QContextMenuEvent>
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_statistics.h>
 

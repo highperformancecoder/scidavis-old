@@ -43,6 +43,8 @@
 #include <qwt_scale_draw.h>
 #include <QMessageBox>
 #include <QLocale>
+#include <QKeyEvent>
+#include <QMouseEvent>
 
 DataPickerTool::DataPickerTool(Graph *graph, ApplicationWindow *app, Mode mode, const QObject *status_target, const char *status_slot) :
 	QwtPlotPicker(graph->plotWidget()->canvas()),

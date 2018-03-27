@@ -38,6 +38,7 @@
 #include <QImage>
 #include <QMessageBox>
 #include <QPainter>
+#include <QMouseEvent>
 #include <qwt_plot_canvas.h>
 
 LineProfileTool::LineProfileTool(Graph *graph, int average_pixels)

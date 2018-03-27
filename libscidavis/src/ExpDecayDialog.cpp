@@ -40,6 +40,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QCloseEvent>
 
 	ExpDecayDialog::ExpDecayDialog(int type, QWidget* parent, Qt::WFlags fl )
 : QDialog( parent, fl )

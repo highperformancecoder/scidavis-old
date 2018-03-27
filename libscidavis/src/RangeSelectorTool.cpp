@@ -37,6 +37,7 @@
 #include <QPoint>
 #include <QMessageBox>
 #include <QEvent>
+#include <QKeyEvent>
 #include <QLocale>
 
 RangeSelectorTool::RangeSelectorTool(Graph *graph, const QObject *status_target, const char *status_slot)

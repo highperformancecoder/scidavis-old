@@ -38,6 +38,7 @@
 #include <QPainter>
 #include <QPicture>
 #include <QClipboard>
+#include <QMouseEvent>
 
 #if QT_VERSION >= 0x040300
 	#include <QSvgGenerator>
@@ -1035,11 +1036,11 @@ void MultiLayer::wheelEvent ( QWheelEvent * e )
 			}
 		}
 	}
-	if(resize && (e->state()==Qt::AltButton || e->state()==Qt::ControlButton || e->state()==Qt::ShiftButton))
+	if(resize && (e->modifiers()==Qt::AltModifier || e->modifiers()==Qt::ControlModifier || e->modifiers()==Qt::ShiftModifier))
 	{
 		intSize=resize_graph->plotWidget()->size();
 		// If alt is pressed then change the width
-		if(e->state()==Qt::AltButton)
+		if(e->modifiers()==Qt::AltModifier)
 		{
 			if(e->delta()>0)
 			{
@@ -1051,7 +1052,7 @@ void MultiLayer::wheelEvent ( QWheelEvent * e )
 			}
 		}
 		// If crt is pressed then changed the height
-		else if(e->state()==Qt::ControlButton)
+		else if(e->modifiers()==Qt::ControlModifier)
 		{
 			if(e->delta()>0)
 			{
@@ -1063,7 +1064,7 @@ void MultiLayer::wheelEvent ( QWheelEvent * e )
 			}
 		}
 		// If shift is pressed then resize
-		else if(e->state()==Qt::ShiftButton)
+		else if(e->modifiers()==Qt::ShiftModifier)
 		{
 			if(e->delta()>0)
 			{
@@ -1250,7 +1251,7 @@ void MultiLayer::setLayersNumber(int n)
 			if (gr == active_graph)
 			{
 				LayerButton *button=(LayerButton *)buttonsList.at(j);
-				button->setOn(TRUE);
+				button->setOn(true);
 				break;
 			}
 		}

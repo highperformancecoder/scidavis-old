@@ -46,6 +46,7 @@
 #include <QApplication>
 #include <QPainter>
 #include <QEvent>
+#include <QCloseEvent>
 #include <QLayout>
 #include <QPrintDialog>
 #include <QLocale>
