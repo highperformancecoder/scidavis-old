@@ -152,6 +152,7 @@
 #include <QUndoStack>
 #include <QTemporaryFile>
 #include <QDebug>
+#include <QTextCodec>
 
 #include <zlib.h>
 
@@ -3622,7 +3623,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
   }
 
   QTextStream t(file.get());
-  t.setEncoding(QTextStream::UnicodeUTF8);
+  t.setCodec(QTextCodec::codecForName("UTF-8"));
   QString s;
   QStringList list;
 
@@ -4031,7 +4032,7 @@ void ApplicationWindow::openTemplate()
 			}
 			QFile f(fn);
 			QTextStream t(&f);
-			t.setEncoding(QTextStream::UnicodeUTF8);
+			t.setCodec(QTextCodec::codecForName("UTF-8"));
 			f.open(QIODevice::ReadOnly);
 			QStringList l=t.readLine().split(QRegExp("\\s"), QString::SkipEmptyParts);
 			QString fileType=l[0];
@@ -5114,7 +5115,7 @@ void ApplicationWindow::saveAsTemplate()
 		QString text = SciDAVis::schemaVersion() + " template file\n";
 		text += w->saveAsTemplate(windowGeometryInfo(w));
 		QTextStream t( &f );
-		t.setEncoding(QTextStream::UnicodeUTF8);
+		t.setCodec(QTextCodec::codecForName("UTF-8"));
 		t << text;
 		f.close();
 		QApplication::restoreOverrideCursor();
@@ -9375,7 +9376,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 		QString tmp_string;
 		if (tmp_file.open()) {
 			QTextStream tmp(&tmp_file);
-			tmp.setEncoding(QTextStream::UnicodeUTF8);
+			tmp.setCodec(QTextCodec::codecForName("UTF-8"));
 			int read = 0;
 			while (length - read >= 1024) {
 				tmp << stream.read(1024);
@@ -12221,7 +12222,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 	else
 	{
 		QTextStream t(file);
-		t.setEncoding(QTextStream::UnicodeUTF8);
+		t.setCodec(QTextCodec::codecForName("UTF-8"));
 
 		QString s = t.readLine();
 		lst = s.split(QRegExp("\\s"), QString::SkipEmptyParts);
@@ -12393,7 +12394,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 void ApplicationWindow::rawSaveFolder(Folder *folder, QIODevice *device)
 {
     QTextStream stream(device);
-    stream.setEncoding(QTextStream::UnicodeUTF8);
+    stream.setCodec(QTextCodec::codecForName("UTF-8"));
     foreach (MyWidget *w, folder->windowsList()) {
 	Table *t = qobject_cast<Table*>(w);
 	if (t)
@@ -12434,7 +12435,7 @@ void ApplicationWindow::saveFolder(Folder *folder, const QString& fn)
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
 	QTextStream t( &f );
-	t.setEncoding(QTextStream::UnicodeUTF8);
+	t.setCodec(QTextCodec::codecForName("UTF-8"));
 	t << SciDAVis::schemaVersion() + " project file\n";
 	t << "<scripting-lang>\t"+QString(scriptEnv->name())+"\n";
 	t << "<windows>\t"+QString::number(folder->windowCount(true))+"\n";
@@ -13373,7 +13374,7 @@ void ApplicationWindow::searchForUpdates()
 
     if (choice == QMessageBox::Yes)
     {
-        version_buffer.open(IO_WriteOnly);
+        version_buffer.open(QIODevice::WriteOnly);
         http.setHost("scidavis.sourceforge.net");
         http.get("/current_version.txt", &version_buffer);
     }
@@ -13390,10 +13391,10 @@ void ApplicationWindow::receivedVersionFile(bool error)
 
 	version_buffer.close();
 
-	if (version_buffer.open(IO_ReadOnly))
+	if (version_buffer.open(QIODevice::ReadOnly))
 	{
 		QTextStream t( &version_buffer );
-		t.setEncoding(QTextStream::UnicodeUTF8);
+		t.setCodec(QTextCodec::codecForName("UTF-8"));
 		QString version_line = t.readLine();
 		version_buffer.close();
 

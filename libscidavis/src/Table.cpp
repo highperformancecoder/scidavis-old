@@ -41,6 +41,7 @@
 #include <QMessageBox>
 #include <QDateTime>
 #include <QTextStream>
+#include <QTextCodec>
 #include <QClipboard>
 #include <QApplication>
 #include <QPainter>
@@ -542,7 +543,7 @@ QString Table::saveToString(const QString& geometry)
 void Table::saveToDevice(QIODevice *device, const QString &geometry)
 {
 	QTextStream stream(device);
-	stream.setEncoding(QTextStream::UnicodeUTF8);
+	stream.setCodec(QTextCodec::codecForName("UTF-8"));
 
 	// write start tag
 	stream << "<table>\n";
@@ -564,7 +565,7 @@ void Table::saveToDevice(QIODevice *device, const QString &geometry)
 	if (tmp_file.isOpen()) {
 		tmp_file.seek(0);
 		QTextStream count(&tmp_file);
-		count.setEncoding(QTextStream::UnicodeUTF8);
+		count.setCodec(QTextCodec::codecForName("UTF-8"));
 		while (!count.atEnd())
 			xml_chars += count.read(1024).length();
 	} else

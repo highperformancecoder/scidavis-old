@@ -39,6 +39,8 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QTextStream>
+#include <QTextCodec>
+#include <QTextBlock>
 
 ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, QString name)
   : QTextEdit(parent), scripted(env), d_error(false), d_changing_fmt(false)
@@ -326,12 +328,12 @@ QString ScriptEdit::importASCII(const QString &filename)
 		f = filename;
 	if (f.isEmpty()) return QString::null;
 	QFile file(f);
-	if (!file.open(IO_ReadOnly)){
+	if (!file.open(QIODevice::ReadOnly)){
 		QMessageBox::critical(this, tr("Error Opening File"), tr("Could not open file \"%1\" for reading.").arg(f));
 		return QString::null;
 	}
 	QTextStream s(&file);
-	s.setEncoding(QTextStream::UnicodeUTF8);
+	s.setCodec(QTextCodec::codecForName("UTF-8"));
 	while (!s.atEnd())
 		insertPlainText(s.readLine()+"\n");
 	file.close();
@@ -363,14 +365,14 @@ QString ScriptEdit::exportASCII(const QString &filename)
 		}
 
 		QFile f(fn);
-		if (!f.open(IO_WriteOnly)){
+		if (!f.open(QIODevice::WriteOnly)){
 			QMessageBox::critical(0, tr("File Save Error"),
 						tr("Could not write to file: <br><h4> %1 </h4><p>Please verify that you have the right to write to this location!").arg(fn));
 			return QString::null;
 		}
 			
 		QTextStream t( &f );
-		t.setEncoding(QTextStream::UnicodeUTF8);
+		t.setCodec(QTextCodec::codecForName("UTF-8"));
 		t << toPlainText();
 		f.close();
 	}
