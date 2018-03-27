@@ -275,13 +275,13 @@ void AxesDialog::initGridPage()
 	rightLayout->addWidget( new QLabel(tr( "Axes" )), 4, 0 );
 
 	boxGridXAxis = new QComboBox();
-	boxGridXAxis->insertItem(tr("Bottom"));
-	boxGridXAxis->insertItem(tr("Top"));
+	boxGridXAxis->addItem(tr("Bottom"));
+	boxGridXAxis->addItem(tr("Top"));
 	rightLayout->addWidget( boxGridXAxis, 4, 1);
 
 	boxGridYAxis = new QComboBox();
-	boxGridYAxis->insertItem(tr("Left"));
-	boxGridYAxis->insertItem(tr("Right"));
+	boxGridYAxis->addItem(tr("Left"));
+	boxGridYAxis->addItem(tr("Right"));
 	rightLayout->addWidget( boxGridYAxis, 4, 2);
 
 	rightLayout->addWidget( new QLabel(tr( "Additional lines" )), 5, 0);
@@ -685,10 +685,10 @@ void AxesDialog::showAxisFormatOptions(int format)
 		case Graph::Numeric:
 			label2->show();
 			boxFormat->show();
-			boxFormat->insertItem(tr( "Automatic" ) );
-			boxFormat->insertItem(tr( "Decimal: 100.0" ) );
-			boxFormat->insertItem(tr( "Scientific: 1e2" ) );
-			boxFormat->insertItem(tr( "Scientific: 10^2" ) );
+			boxFormat->addItem(tr( "Automatic" ) );
+			boxFormat->addItem(tr( "Decimal: 100.0" ) );
+			boxFormat->addItem(tr( "Scientific: 1e2" ) );
+			boxFormat->addItem(tr( "Scientific: 10^2" ) );
 			boxFormat->setCurrentIndex(d_graph->plotWidget()->axisLabelFormat(axis));
 
 			label3->show();
@@ -708,9 +708,9 @@ void AxesDialog::showAxisFormatOptions(int format)
 				int day = (QDate::currentDate()).dayOfWeek();
 				label2->show();
 				boxFormat->show();
-				boxFormat->insertItem(QDate::shortDayName(day));
-				boxFormat->insertItem(QDate::longDayName(day));
-				boxFormat->insertItem((QDate::shortDayName(day)).left(1));
+				boxFormat->addItem(QDate::shortDayName(day));
+				boxFormat->addItem(QDate::longDayName(day));
+				boxFormat->addItem((QDate::shortDayName(day)).left(1));
 				boxFormat->setCurrentIndex (formatInfo[axis].toInt());
 			}
 			break;
@@ -720,9 +720,9 @@ void AxesDialog::showAxisFormatOptions(int format)
 				int month = (QDate::currentDate()).month();
 				label2->show();
 				boxFormat->show();
-				boxFormat->insertItem(QDate::shortMonthName(month));
-				boxFormat->insertItem(QDate::longMonthName(month));
-				boxFormat->insertItem((QDate::shortMonthName(month)).left(1));
+				boxFormat->addItem(QDate::shortMonthName(month));
+				boxFormat->addItem(QDate::longMonthName(month));
+				boxFormat->addItem((QDate::shortMonthName(month)).left(1));
 				boxFormat->setCurrentIndex (formatInfo[axis].toInt());
 			}
 			break;
@@ -736,23 +736,23 @@ void AxesDialog::showAxisFormatOptions(int format)
 				QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
 				if (lst.count() == 2)
 				{
-					boxFormat->insertItem(lst[1]);
-					boxFormat->setCurrentText(lst[1]);
+					boxFormat->addItem(lst[1]);
+					boxFormat->setItemText(boxFormat->currentIndex(), lst[1]);
 				}
 
-				boxFormat->insertItem("h");
-				boxFormat->insertItem("h ap");
-				boxFormat->insertItem("h AP");
-				boxFormat->insertItem("h:mm");
-				boxFormat->insertItem("h:mm ap");
-				boxFormat->insertItem("hh:mm");
-				boxFormat->insertItem("h:mm:ss");
-				boxFormat->insertItem("h:mm:ss.zzz");
-				boxFormat->insertItem("mm:ss");
-				boxFormat->insertItem("mm:ss.zzz");
-				boxFormat->insertItem("hmm");
-				boxFormat->insertItem("hmmss");
-				boxFormat->insertItem("hhmmss");
+				boxFormat->addItem("h");
+				boxFormat->addItem("h ap");
+				boxFormat->addItem("h AP");
+				boxFormat->addItem("h:mm");
+				boxFormat->addItem("h:mm ap");
+				boxFormat->addItem("hh:mm");
+				boxFormat->addItem("h:mm:ss");
+				boxFormat->addItem("h:mm:ss.zzz");
+				boxFormat->addItem("mm:ss");
+				boxFormat->addItem("mm:ss.zzz");
+				boxFormat->addItem("hmm");
+				boxFormat->addItem("hmmss");
+				boxFormat->addItem("hhmmss");
 			}
 			break;
 
@@ -765,13 +765,13 @@ void AxesDialog::showAxisFormatOptions(int format)
 				QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
 				if (lst.count() == 2)
 				{
-					boxFormat->insertItem(lst[1]);
-					boxFormat->setCurrentText(lst[1]);
+					boxFormat->addItem(lst[1]);
+					boxFormat->setItemText(boxFormat->currentIndex(), lst[1]);
 				}
-				boxFormat->insertItem("yyyy-MM-dd");
-				boxFormat->insertItem("dd.MM.yyyy");
-				boxFormat->insertItem("ddd MMMM d yy");
-				boxFormat->insertItem("dd/MM/yyyy");
+				boxFormat->addItem("yyyy-MM-dd");
+				boxFormat->addItem("dd.MM.yyyy");
+				boxFormat->addItem("ddd MMMM d yy");
+				boxFormat->addItem("dd/MM/yyyy");
 			}
 			break;
 
@@ -784,8 +784,8 @@ void AxesDialog::showAxisFormatOptions(int format)
 				QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
 				if (lst.count() == 2)
 				{
-					boxFormat->insertItem(lst[1]);
-					boxFormat->setCurrentText(lst[1]);
+					boxFormat->addItem(lst[1]);
+					boxFormat->setItemText(boxFormat->currentIndex(), lst[1]);
 				}
 
 				const char * date_strings[] = {
@@ -825,7 +825,7 @@ void AxesDialog::showAxisFormatOptions(int format)
 			{
 				labelTable->show();
 				if (tablesList.contains(formatInfo[axis]))
-					boxTableName->setCurrentText(formatInfo[axis]);
+					boxTableName->setItemText(boxTableName->currentIndex(), formatInfo[axis]);
 				boxTableName->show();
 			}
 			break;
@@ -834,7 +834,7 @@ void AxesDialog::showAxisFormatOptions(int format)
 
 void AxesDialog::insertColList(const QStringList& cols)
 {
-	boxColName-> insertStringList(cols);
+	boxColName-> addItems(cols);
 }
 
 void AxesDialog::showAxis()
@@ -1367,9 +1367,9 @@ void AxesDialog::setGraph(Graph *g)
 	Plot *p = d_graph->plotWidget();
 
 	tablesList = app->tableWindows();
-	boxTableName->insertStringList(tablesList);
+	boxTableName->addItems(tablesList);
 
-	boxColName-> insertStringList(app->columnsList());
+	boxColName-> addItems(app->columnsList());
 
 	xAxisOn = p->axisEnabled(QwtPlot::xBottom);
 	yAxisOn = p->axisEnabled(QwtPlot::yLeft);
@@ -1442,16 +1442,16 @@ void AxesDialog::updateScale()
 	if (axesType[a] == Graph::Time)
 	{
 		boxUnit->show();
-		boxUnit->insertItem(tr("millisec."));
-		boxUnit->insertItem(tr("sec."));
-		boxUnit->insertItem(tr("min."));
-		boxUnit->insertItem(tr("hours"));
+		boxUnit->addItem(tr("millisec."));
+		boxUnit->addItem(tr("sec."));
+		boxUnit->addItem(tr("min."));
+		boxUnit->addItem(tr("hours"));
 	}
 	else if (axesType[a] == Graph::Date)
 	{
 		boxUnit->show();
-		boxUnit->insertItem(tr("days"));
-		boxUnit->insertItem(tr("weeks"));
+		boxUnit->addItem(tr("days"));
+		boxUnit->addItem(tr("weeks"));
 	}
 
 	if (d_graph->axisStep(a) != 0.0)
@@ -1537,7 +1537,7 @@ void AxesDialog::setAxisType(int)
 	showAxisFormatOptions(boxAxisType->findData(type));
 
 	if (type == Graph::Txt)
-		boxColName->setCurrentText(formatInfo[a]);
+		boxColName->setItemText(boxColName->currentIndex(), formatInfo[a]);
 }
 
 void AxesDialog::setBaselineDist(int)

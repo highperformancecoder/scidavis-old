@@ -49,17 +49,17 @@ IntDialog::IntDialog( QWidget* parent, Qt::WFlags fl )
 	setWindowTitle(tr("Integration Options"));
 	setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
 
-    QGroupBox *gb1 = new QGroupBox();
-    QGridLayout *gl1 = new QGridLayout(gb1);
+	QGroupBox *gb1 = new QGroupBox();
+	QGridLayout *gl1 = new QGridLayout(gb1);
 	gl1->addWidget(new QLabel(tr("Integration of")), 0, 0);
 	boxName = new QComboBox();
 	gl1->addWidget(boxName, 0, 1);
 
 	gl1->addWidget(new QLabel(tr("Interpolation")), 1, 0);
 	boxMethod = new QComboBox();
-	boxMethod->insertItem(tr("Linear"));
-    boxMethod->insertItem(tr("Cubic"));
-    boxMethod->insertItem(tr("Non-rounded Akima"));
+	boxMethod->addItem(tr("Linear"));
+	boxMethod->addItem(tr("Cubic"));
+	boxMethod->addItem(tr("Non-rounded Akima"));
 	gl1->addWidget(boxMethod, 1, 1);
 
 	gl1->addWidget(new QLabel(tr("Lower limit")), 4, 0);
@@ -69,27 +69,27 @@ IntDialog::IntDialog( QWidget* parent, Qt::WFlags fl )
 	gl1->addWidget(new QLabel(tr("Upper limit")), 5, 0);
 	boxEnd = new QLineEdit();
 	gl1->addWidget(boxEnd, 5, 1);
-    gl1->setRowStretch(6, 1);
+	gl1->setRowStretch(6, 1);
 
 	buttonOk = new QPushButton(tr( "&Integrate" ));
-    buttonOk->setDefault( true );
+	buttonOk->setDefault( true );
 	buttonHelp = new QPushButton(tr("&Help"));
-    buttonCancel = new QPushButton(tr("&Close" ));
+	buttonCancel = new QPushButton(tr("&Close" ));
 
 	QVBoxLayout *vl = new QVBoxLayout();
- 	vl->addWidget(buttonOk);
-    vl->addWidget(buttonHelp);
+	vl->addWidget(buttonOk);
+	vl->addWidget(buttonHelp);
 	vl->addWidget(buttonCancel);
-    vl->addStretch();
+	vl->addStretch();
 
-    QHBoxLayout *hb = new QHBoxLayout(this);
-    hb->addWidget(gb1);
-    hb->addLayout(vl);
+	QHBoxLayout *hb = new QHBoxLayout(this);
+	hb->addWidget(gb1);
+	hb->addLayout(vl);
 
-    connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
-    connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-    connect( buttonHelp, SIGNAL(clicked()),this, SLOT(help()));
-    connect( boxName, SIGNAL( activated(const QString&) ), this, SLOT(activateCurve(const QString&)));
+	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
+	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+	connect( buttonHelp, SIGNAL(clicked()),this, SLOT(help()));
+	connect( boxName, SIGNAL( activated(const QString&) ), this, SLOT(activateCurve(const QString&)));
 }
 
 void IntDialog::accept()
@@ -102,7 +102,7 @@ if (!c || !curvesList.contains(curveName))
 	QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") +" - "+ tr("Warning"),
 		tr("The curve <b> %1 </b> doesn't exist anymore! Operation aborted!").arg(curveName));
 	boxName->clear();
-	boxName->insertStringList(curvesList);
+	boxName->addItems(curvesList);
 	return;
 	}
 
@@ -214,7 +214,7 @@ delete i;
 void IntDialog::setGraph(Graph *g)
 {
     graph = g;
-    boxName->insertStringList (g->analysableCurvesList());
+    boxName->addItems(g->analysableCurvesList());
 
     QString selectedCurve = g->selectedCurveTitle();
 	if(!selectedCurve.isEmpty())

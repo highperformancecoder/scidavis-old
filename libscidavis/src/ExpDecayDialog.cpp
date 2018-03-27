@@ -231,7 +231,7 @@ void ExpDecayDialog::fit()
 
   	if (fitter->setDataFromCurve(boxName->currentText(), boxStart->text().toDouble(), c->maxXValue()))
 	{
-		fitter->setColor(boxColor->currentItem());
+		fitter->setColor(boxColor->currentIndex());
 		fitter->scaleErrors(app->fit_scale_errors);
         fitter->setOutputPrecision(app->fit_output_precision);
 		fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);

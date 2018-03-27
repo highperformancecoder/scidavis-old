@@ -135,7 +135,7 @@ emit clearFunctionsList();
 
 void SurfaceDialog::setFunction(const QString& s)
 {
-boxFunction->setCurrentText(s);
+boxFunction->setItemText(boxFunction->currentIndex(), s);
 }
 
 void SurfaceDialog::setLimits(double xs, double xe, double ys, double ye, double zs, double ze)
@@ -275,7 +275,7 @@ if (!error)
 
 void SurfaceDialog::insertFunctionsList(const QStringList& list)
 {
-boxFunction->insertStringList (list, 1);
+boxFunction->insertItems(1, list);
 }
 
 SurfaceDialog::~SurfaceDialog()

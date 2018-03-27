@@ -790,12 +790,12 @@ bool Plot3DDialog::updatePlot()
 
 	if (generalDialog->currentWidget()==(QWidget*)points)
 	{
-		if (boxPointStyle->currentItem() == 0)
+		if (boxPointStyle->currentIndex() == 0)
 			emit updatePoints(boxSize->text().toDouble(), boxSmooth->isChecked());
-		else if (boxPointStyle->currentItem() == 1)
+		else if (boxPointStyle->currentIndex() == 1)
 			emit updateCross(boxCrossRad->text().toDouble(), boxCrossLinewidth->text().toDouble(),
 					boxCrossSmooth->isChecked(), boxBoxed->isChecked());
-		else if (boxPointStyle->currentItem() == 2)
+		else if (boxPointStyle->currentIndex() == 2)
 			emit updateCones(boxConesRad->text().toDouble(), boxQuality->value());
 	}
 
@@ -892,7 +892,7 @@ QStringList Plot3DDialog::scaleOptions(int axis, double start, double end,
 	l<<QString::number(end);
 	l<<majors;
 	l<<minors;
-	l<<QString::number(boxType->currentItem());
+	l<<QString::number(boxType->currentIndex());
 
 	for (int i=0;i<5;i++)
 		scales[5*axis+i]=l[i];

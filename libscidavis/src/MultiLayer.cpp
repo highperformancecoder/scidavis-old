@@ -843,7 +843,7 @@ void MultiLayer::printAllLayers(QPainter *painter)
 	}
 	if (d_print_cropmarks)
     {
-		cr.addCoords(-1, -1, 2, 2);
+		cr.adjust(-1, -1, 2, 2);
     	painter->save();
 		painter->setPen(QPen(QColor(Qt::black), 0.5, Qt::DashLine));
 		painter->drawLine(paperRect.left(), cr.top(), paperRect.right(), cr.top());
@@ -1146,7 +1146,7 @@ void MultiLayer::mousePressEvent ( QMouseEvent * e )
 	while (i!=graphsList.begin()) {
 		--i;
 		QRect igeo = (*i)->frameGeometry();
-		igeo.addCoords(-margin, -margin, margin, margin);
+		igeo.adjust(-margin, -margin, margin, margin);
 		if (igeo.contains(pos)) {
 			if (e->modifiers() & Qt::ShiftModifier) {
 				if (d_layers_selector)

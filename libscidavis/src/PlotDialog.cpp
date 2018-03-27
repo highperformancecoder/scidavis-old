@@ -382,11 +382,11 @@ void PlotDialog::initPiePage()
 
 	gl1->addWidget(new QLabel(tr( "Style" )), 1, 0);
 	boxPieLineStyle = new QComboBox();
-	boxPieLineStyle->insertItem("_____");
-	boxPieLineStyle->insertItem("- - -");
-	boxPieLineStyle->insertItem(".....");
-	boxPieLineStyle->insertItem("_._._");
-	boxPieLineStyle->insertItem("_.._..");
+	boxPieLineStyle->addItem("_____");
+	boxPieLineStyle->addItem("- - -");
+	boxPieLineStyle->addItem(".....");
+	boxPieLineStyle->addItem("_._._");
+	boxPieLineStyle->addItem("_.._..");
 	gl1->addWidget(boxPieLineStyle);
 
 	gl1->addWidget(new QLabel(tr( "Width")), 2, 0);
@@ -1465,7 +1465,7 @@ int PlotDialog::setPlotType(CurveTreeItem *item)
 		else if (curveType == Graph::Box)
 			boxPlotType->addItem( tr( "Box" ) );
 		else if (curveType == Graph::ColorMap || curveType == Graph::GrayMap || curveType == Graph::ContourMap)
-  	    	boxPlotType->insertItem(tr("Contour") + " / " + tr("Image"));
+		boxPlotType->addItem(tr("Contour") + " / " + tr("Image"));
 		else
 		{
 			boxPlotType->addItem( tr( "Line" ) );
@@ -1740,12 +1740,12 @@ void PlotDialog::updateEndPointColumns(const QString& text)
 	}
 
 	xEndBox->clear();
-	xEndBox->insertStringList(list);
-	xEndBox->setCurrentText(table + "_" + cols[2].remove("(X)").remove("(A)"));
+	xEndBox->addItems(list);
+	xEndBox->setItemText(xEndBox->currentIndex(), table + "_" + cols[2].remove("(X)").remove("(A)"));
 
 	yEndBox->clear();
-	yEndBox->insertStringList(list);
-	yEndBox->setCurrentText(table + "_" + cols[3].remove("(Y)").remove("(M)"));
+	yEndBox->addItems(list);
+	yEndBox->setItemText(yEndBox->currentIndex(), table + "_" + cols[3].remove("(Y)").remove("(M)"));
 }
 
 bool PlotDialog::acceptParams()
@@ -1819,7 +1819,7 @@ bool PlotDialog::acceptParams()
         sp->setDefaultContourPen(Qt::NoPen);
       else
         sp->setDefaultContourPen(QPen(levelsColorBox->color(), contourWidthBox->value(),
-                                      Graph::getPenStyle(boxContourStyle->currentItem())));
+                                      Graph::getPenStyle(boxContourStyle->currentIndex())));
 
       sp->setDisplayMode(QwtPlotSpectrogram::ContourMode, levelsGroupBox->isChecked());
       sp->setDisplayMode(QwtPlotSpectrogram::ImageMode, imageGroupBox->isChecked());
@@ -1837,7 +1837,7 @@ bool PlotDialog::acceptParams()
       else
         sp->setCustomColorMap(colorMapEditor->colorMap());
 
-      sp->showColorScale((QwtPlot::Axis)colorScaleBox->currentItem(), axisScaleBox->isChecked());
+      sp->showColorScale((QwtPlot::Axis)colorScaleBox->currentIndex(), axisScaleBox->isChecked());
       sp->setColorBarWidth(colorScaleWidthBox->value());
 
       //Update axes page

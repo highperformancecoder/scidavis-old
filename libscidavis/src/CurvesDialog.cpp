@@ -438,7 +438,7 @@ void CurvesDialog::enableRemoveBtn()
 int CurvesDialog::curveStyle()
 {
 	int style = 0;
-	switch (boxStyle->currentItem())
+	switch (boxStyle->currentIndex())
 	{
 		case 0:
 			style = Graph::Line;

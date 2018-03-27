@@ -1460,7 +1460,7 @@ void Graph::print()
         if (d_print_cropmarks)
         {
 			QRect cr = plotRect; // cropmarks rectangle
-			cr.addCoords(-1, -1, 2, 2);
+			cr.adjust(-1, -1, 2, 2);
             paint.save();
             paint.setPen(QPen(QColor(Qt::black), 0.5, Qt::DashLine));
             paint.drawLine(paperRect.left(), cr.top(), paperRect.right(), cr.top());
@@ -4109,25 +4109,25 @@ void Graph::scaleFonts(double factor)
 	{
 		Legend* mrk = (Legend*) d_plot->marker(d_texts[i]);
 		QFont font = mrk->font();
-		font.setPointSizeF(factor*font.pointSizeFloat());
+		font.setPointSizeF(factor*font.pointSizeF());
 		mrk->setFont(font);
 	}
 	for (int i = 0; i<QwtPlot::axisCnt; i++)
 	{
 		QFont font = axisFont(i);
-		font.setPointSizeF(factor*font.pointSizeFloat());
+		font.setPointSizeF(factor*font.pointSizeF());
 		d_plot->setAxisFont(i, font);
 
 		QwtText title = d_plot->axisTitle(i);
 		font = title.font();
-		font.setPointSizeF(factor*font.pointSizeFloat());
+		font.setPointSizeF(factor*font.pointSizeF());
 		title.setFont(font);
 		d_plot->setAxisTitle(i, title);
 	}
 
 	QwtText title = d_plot->title();
 	QFont font = title.font();
-	font.setPointSizeF(factor*font.pointSizeFloat());
+	font.setPointSizeF(factor*font.pointSizeF());
 	title.setFont(font);
 	d_plot->setTitle(title);
 

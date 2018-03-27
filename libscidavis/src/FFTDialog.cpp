@@ -174,7 +174,7 @@ void FFTDialog::accept()
 void FFTDialog::setGraph(Graph *g)
 {
 	graph = g;
-	boxName->insertStringList (g->analysableCurvesList());
+	boxName->addItems (g->analysableCurvesList());
 	activateCurve(boxName->currentText());
 };
 
@@ -201,9 +201,9 @@ void FFTDialog::setTable(Table *t)
 {
 	d_table = t;
 	QStringList l = t->columnsList();
-	boxName->insertStringList (l);
-	boxReal->insertStringList (l);
-	boxImaginary->insertStringList (l);
+	boxName->addItems (l);
+	boxReal->addItems (l);
+	boxImaginary->addItems (l);
 
 	int xcol = t->firstXCol();
 	if (xcol >= 0)
@@ -219,13 +219,13 @@ void FFTDialog::setTable(Table *t)
 	int selected = (int)l.size();
 	if (!selected)
 	{
-		boxReal->setCurrentText(QString());
-		boxImaginary->setCurrentText(QString());
+		boxReal->setItemText(boxReal->currentIndex(), QString());
+		boxImaginary->setItemText(boxImaginary->currentIndex(), QString());
 	}
 	else if (selected == 1)
 	{
 		boxReal->setCurrentIndex(t->colIndex(l[0]));
-		boxImaginary->setCurrentText(QString());
+		boxImaginary->setItemText(boxImaginary->currentIndex(), QString());
 	}
 	else
 	{
