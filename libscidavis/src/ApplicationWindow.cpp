@@ -348,6 +348,13 @@ ApplicationWindow::ApplicationWindow()
 	// this has to be done after connecting scriptEnv
 	scriptEnv->initialize();
 
+	lv->setDragEnabled(true);
+	lv->setAcceptDrops(true);
+	lv->setDefaultDropAction(Qt::MoveAction);
+	folders->setDragEnabled(true);
+	folders->setAcceptDrops(true);
+	folders->setDefaultDropAction(Qt::MoveAction);
+
 	connect(d_project->undoStack(), SIGNAL(canUndoChanged(bool)), actionUndo, SLOT(setEnabled(bool)));
 	connect(d_project->undoStack(), SIGNAL(canRedoChanged(bool)), actionRedo, SLOT(setEnabled(bool)));
 }

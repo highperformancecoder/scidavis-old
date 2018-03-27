@@ -220,12 +220,12 @@ public slots:
 protected:
 	void startDrag();
 
-    void contentsDropEvent( QDropEvent *e );
-    void contentsMouseMoveEvent( QMouseEvent *e );
-    void contentsMousePressEvent( QMouseEvent *e );
-	void contentsMouseDoubleClickEvent( QMouseEvent* e );
+    void dropEvent( QDropEvent *e );
+    void mouseMoveEvent( QMouseEvent *e );
+    void mousePressEvent( QMouseEvent *e );
+	void mouseDoubleClickEvent( QMouseEvent* e );
 	void keyPressEvent ( QKeyEvent * e );
-    void contentsMouseReleaseEvent( QMouseEvent *){mousePressed = false;};
+    void mouseReleaseEvent( QMouseEvent *){mousePressed = false;};
 	void enterEvent(QEvent *){mousePressed = false;};
 
 signals:

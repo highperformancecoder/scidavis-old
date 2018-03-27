@@ -261,6 +261,7 @@ FolderListView::FolderListView( QWidget *parent, const QString name )
     setObjectName(name.toLocal8Bit());
     setAcceptDrops( true );
     viewport()->setAcceptDrops( true );
+    setDropIndicatorShown(true);
 }
 
 void FolderListView::startDrag()
@@ -294,17 +295,27 @@ while (*it)
 	}
 
 emit dragItems(lst);
-drag->exec();
+	drag->setMimeData(mimeData(lst));
+	drag->exec();
 }
 
-void FolderListView::contentsDropEvent( QDropEvent *e )
+void FolderListView::dropEvent( QDropEvent *e )
 {
 QTreeWidgetItem *dest = itemAt( e->pos() );
 if ( dest && dest->type() == FolderListItem::FolderType)
+{
+	if (dropIndicatorPosition() != QAbstractItemView::OnItem)
 	{
-	emit dropItems(dest);
-	e->accept();
+		e->ignore();
+	}
+	else
+	{
+		emit dropItems(dest);
+		e->accept();
+		this->setState(QAbstractItemView::NoState); // hack to clear DraggingState
     }
+    mousePressed = false;
+}
 else
 	e->ignore();
 }
@@ -353,7 +364,7 @@ else
 	QTreeWidget::keyPressEvent ( e );
 }
 
-void FolderListView::contentsMouseDoubleClickEvent( QMouseEvent* e )
+void FolderListView::mouseDoubleClickEvent( QMouseEvent* e )
 {
 	if (isRenaming())
 		{
@@ -364,26 +375,17 @@ void FolderListView::contentsMouseDoubleClickEvent( QMouseEvent* e )
 	QTreeWidget::mouseDoubleClickEvent( e );
 }
 
-void FolderListView::contentsMousePressEvent( QMouseEvent* e )
+void FolderListView::mousePressEvent( QMouseEvent* e )
 {
-QTreeWidget::mousePressEvent(e);
-if (e->button() != Qt::LeftButton) return;
-QPoint p(e->pos()); // Q3CHECK  contentsToViewport( e->pos() ) );
-QTreeWidgetItem *i = itemAt( p );
-
-if ( i )
-		{// if the user clicked into the root decoration of the item, don't try to start a drag!
-		// Q3CHECK if ( p.x() > header()->cellPos( header()->mapToActual( 0 ) ) +
-		// 	treeStepSize() * ( i->depth() + ( rootIsDecorated() ? 1 : 0) ) + itemMargin() ||
-		// 	p.x() < header()->cellPos( header()->mapToActual( 0 ) ) )
-		// 	{
-			presspos = e->pos();
-	    	mousePressed = true;
-		//	}
-    	}
+	QTreeWidget::mousePressEvent(e);
+	if (e->button() == Qt::LeftButton)
+	{
+		presspos = e->pos();
+		mousePressed = true;
+	}
 }
 
-void FolderListView::contentsMouseMoveEvent( QMouseEvent* e )
+void FolderListView::mouseMoveEvent( QMouseEvent* e )
 {
 if ( mousePressed && ( presspos - e->pos() ).manhattanLength() > QApplication::startDragDistance() )
 	{
@@ -412,7 +414,7 @@ WindowListItem::WindowListItem( QTreeWidget *parent, MyWidget *w )
     myWindow = w;
 	this->treeWidget()->setCurrentItem(this,0, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
 
-	setFlags(flags() | Qt::ItemIsDragEnabled);
+	setFlags((flags() | Qt::ItemIsDragEnabled) & ~Qt::ItemIsDropEnabled);
 }
 
 void WindowListItem::setData( int column, int role, const QVariant& value)
