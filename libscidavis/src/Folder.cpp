@@ -247,8 +247,9 @@ int FolderListItem::depth()
  *****************************************************************************/
 
 FolderListView::FolderListView( QWidget *parent, const QString name )
-	: QTreeWidget( parent, name.toLocal8Bit().constData() ), mousePressed( false )
+	: QTreeWidget( parent ), mousePressed( false )
 {
+    setObjectName(name.toLocal8Bit());
     setAcceptDrops( true );
     viewport()->setAcceptDrops( true );
 }
@@ -315,7 +316,7 @@ if (!item) {
 if (item->type() == FolderListItem::FolderType &&
 	(e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return))
 	{
-	emit doubleClicked(item);
+	emit itemDoubleClicked(item,0);
 	e->accept();
 	}
 else if (e->key() == Qt::Key_F2)

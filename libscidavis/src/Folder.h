@@ -204,6 +204,7 @@ public:
 
 public slots:
 	void adjustColumns();
+	bool isRenaming() { return state() == QAbstractItemView::EditingState; };
 
 protected:
 	void startDrag();
