@@ -457,7 +457,7 @@ void Plot3DDialog::showLowerGreek()
 	greekLetters->setAttribute(Qt::WA_DeleteOnClose);
 	connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 	greekLetters->show();
-	greekLetters->setActiveWindow();
+	greekLetters->activateWindow();
 }
 
 void Plot3DDialog::showUpperGreek()
@@ -466,7 +466,7 @@ void Plot3DDialog::showUpperGreek()
 	greekLetters->setAttribute(Qt::WA_DeleteOnClose);
 	connect(greekLetters, SIGNAL(addLetter(const QString&)), this, SLOT(addSymbol(const QString&)));
 	greekLetters->show();
-	greekLetters->setActiveWindow();
+	greekLetters->activateWindow();
 }
 
 void Plot3DDialog::addSymbol(const QString& letter)

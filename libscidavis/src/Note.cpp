@@ -55,7 +55,7 @@ setBirthDate(dt.toString(Qt::LocalDate));
 
 te = new ScriptEdit(env, this, name());
 te->setContext(this);
-QVBoxLayout* hlayout = new QVBoxLayout(this,0,0, "hlayout1");
+QVBoxLayout* hlayout = new QVBoxLayout(this);
 hlayout->addWidget(te);
 
 setGeometry(0, 0, 500, 200);
@@ -98,8 +98,8 @@ void Note::restore(const QStringList& data)
 void Note::setAutoexec(bool exec)
 {
   autoExec = exec;
+  QPalette palette=QPalette();
   if (autoExec)
-    te->setPaletteBackgroundColor(QColor(255,239,185));
-  else
-    te->unsetPalette();
+    palette.setColor(te->backgroundRole(), QColor(255,239,185));
+  te->setPalette(palette);
 }

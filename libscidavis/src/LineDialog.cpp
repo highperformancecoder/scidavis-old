@@ -306,9 +306,9 @@ else if (style==Qt::DashDotDotLine)
 void LineDialog::enableHeadTab()
 {
 if (startBox->isChecked() || endBox->isChecked())
-	tw->setTabEnabled (head, true);
+	tw->setTabEnabled (tw->indexOf(head), true);
 else
-	tw->setTabEnabled (head, false);
+	tw->setTabEnabled (tw->indexOf(head), false);
 }
 
 void LineDialog::pickColor()

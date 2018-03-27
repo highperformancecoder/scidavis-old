@@ -3698,7 +3698,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
   progress.setMinimumWidth(width()/2);
   progress.setWindowTitle(tr("Opening file") + ": " + baseName);
   progress.setLabelText(title);
-  progress.setActiveWindow();
+  progress.activateWindow();
 
   Folder *cf = projectFolder();
   folders->blockSignals (true);
@@ -3996,7 +3996,7 @@ void ApplicationWindow::showScriptingLangDialog()
 {
 	ScriptingLangDialog* d = new ScriptingLangDialog(scriptEnv,this);
 	d->showNormal();
-	d->setActiveWindow();
+	d->activateWindow();
 }
 
 void ApplicationWindow::restartScriptingEnv()
@@ -8404,7 +8404,7 @@ FunctionDialog* ApplicationWindow::functionDialog()
 	fd->insertParamFunctionsList(xFunctions, yFunctions);
 	fd->insertPolarFunctionsList(rFunctions, thetaFunctions);
 	fd->show();
-	fd->setActiveWindow();
+	fd->activateWindow();
 	return fd;
 }
 
@@ -13568,7 +13568,7 @@ void ApplicationWindow::cascade()
     int y = 0;
 
     foreach (QWidget *w, windows){
-        w->setActiveWindow();
+        w->activateWindow();
         w->showNormal();
         ((MyWidget *)w)->setStatus(MyWidget::Normal);
         updateWindowStatus((MyWidget *)w);

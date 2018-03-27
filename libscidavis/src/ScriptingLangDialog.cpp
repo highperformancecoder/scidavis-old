@@ -38,7 +38,7 @@
 ScriptingLangDialog::ScriptingLangDialog(ScriptingEnv *env, ApplicationWindow *parent, Qt::WFlags fl )
 : QDialog(parent, fl), scripted(env)
 {
-	setCaption(tr("Select scripting language"));
+	setWindowTitle(tr("Select scripting language"));
 
 	langList = new QListWidget(this);
 

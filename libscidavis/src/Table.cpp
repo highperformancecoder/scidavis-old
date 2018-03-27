@@ -184,12 +184,16 @@ void Table::handleRowChange()
 
 void Table::setBackgroundColor(const QColor& col)
 {
-	d_view_widget->setPaletteBackgroundColor( col );
+	QPalette palette;
+	palette.setColor(QPalette::Window, col);
+	d_view_widget->setPalette(palette);
 }
 
 void Table::setTextColor(const QColor& col)
 {
-	d_view_widget->setPaletteForegroundColor(col);
+	QPalette palette;
+	palette.setColor(QPalette::WindowText, col);
+	d_view_widget->setPalette(palette);
 }
 
 void Table::setTextFont(const QFont& fnt)
@@ -199,7 +203,9 @@ void Table::setTextFont(const QFont& fnt)
 
 void Table::setHeaderColor(const QColor& col)
 {
-	d_view_widget->horizontalHeader()->setPaletteForegroundColor (col);
+	QPalette palette;
+	palette.setColor(QPalette::WindowText, col);
+	d_view_widget->horizontalHeader()->setPalette(palette);
 }
 
 void Table::setHeaderFont(const QFont& fnt)
