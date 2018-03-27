@@ -7507,7 +7507,7 @@ void ApplicationWindow::windowsMenuAboutToShow()
 		{
 			MyWidget *widget = qobject_cast<MyWidget *>(windows.at(i));
 			if (!widget) continue;
-			QAction *actId = windowsMenuID->addAction(widget->name(),
+			QAction *actId = windowsMenu->addAction(widget->name(),
 					this, SLOT( windowsMenuActivated( bool ) ) );
 			actId->setData(i); // Q3CHECK windowsMenu->setItemParameter( id, i );
 			actId->setChecked(d_workspace->activeWindow() == windows.at(i)); // Q3CHECK windowsMenu->setItemChecked( id, d_workspace->activeWindow() == windows.at(i) );
@@ -7520,7 +7520,7 @@ void ApplicationWindow::windowsMenuAboutToShow()
 		{
 			MyWidget *widget = qobject_cast<MyWidget *>(windows.at(i));
 			if (!widget) continue;
-			QAction *actId = windowsMenuID->addAction(widget->name(),
+			QAction *actId = windowsMenu->addAction(widget->name(),
 					this, SLOT( windowsMenuActivated( bool ) ) );
 			actId->setData(i); // Q3CHECK windowsMenu->setItemParameter( id, i );
 			actId->setChecked(d_workspace->activeWindow() == windows.at(i)); // Q3CHECK windowsMenu->setItemChecked( id, d_workspace->activeWindow() == windows.at(i) );
@@ -7772,15 +7772,15 @@ void ApplicationWindow::showListViewSelectionMenu(const QPoint &p)
 
 void ApplicationWindow::showListViewPopupMenu(const QPoint &p)
 {
-	cm = new QMenu(this);
+	QMenu cm(this);
 
-	window = cm->addMenu(tr("New &Window"));
-	window.addAction(actionNewTable);
-	window.addAction(actionNewMatrix);
-	window.addAction(actionNewNote);
-	window.addAction(actionNewGraph);
-	window.addAction(actionNewFunctionPlot);
-	window.addAction(actionNewSurfacePlot);
+	QMenu* window = cm.addMenu(tr("New &Window"));
+	window->addAction(actionNewTable);
+	window->addAction(actionNewMatrix);
+	window->addAction(actionNewNote);
+	window->addAction(actionNewGraph);
+	window->addAction(actionNewFunctionPlot);
+	window->addAction(actionNewSurfacePlot);
 
 	cm.addAction(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
 	cm.addSeparator();
@@ -7916,19 +7916,9 @@ void ApplicationWindow::showGraphContextMenu()
 	{
 		MultiLayer *plot=(MultiLayer*)w;
 		QMenu cm(this);
-		QMenu exports(this);
-		QMenu copy(this);
-		QMenu prints(this);
-		QMenu calcul(this);
-		QMenu smooth(this);
-		QMenu filter(this);
-		QMenu decay(this);
-		QMenu translate(this);
-		QMenu multiPeakMenu(this);
+		QMenu* calcul = cm.addMenu(tr("Anal&yze"));
 
 		Graph* ag = (Graph*)plot->activeGraph();
-		&calcul = cm.addMenu(tr("Anal&yze"));
-
 		if (ag->isPiePlot())
 			cm.addAction(tr("Re&move Pie Curve"),ag, SLOT(removePie()));
 		else
@@ -7941,50 +7931,50 @@ void ApplicationWindow::showGraphContextMenu()
 			cm.addAction(actionShowCurvesDialog);
 			cm.addAction(actionAddFunctionCurve);
 
-			&translate = calcul.addMenu(tr("&Translate"));
-			translate.addAction(actionTranslateVert);
-			translate.addAction(actionTranslateHor);
-			calcul.addSeparator();
+			QMenu* translate = calcul->addMenu(tr("&Translate"));
+			translate->addAction(actionTranslateVert);
+			translate->addAction(actionTranslateHor);
+			calcul->addSeparator();
 
-			calcul.addAction(actionDifferentiate);
-			calcul.addAction(actionShowIntDialog);
-			calcul.addSeparator();
+			calcul->addAction(actionDifferentiate);
+			calcul->addAction(actionShowIntDialog);
+			calcul->addSeparator();
 
-			&smooth = calcul.addMenu(tr("&Smooth"));
-			smooth.addAction(actionSmoothSavGol);
-			smooth.addAction(actionSmoothFFT);
-			smooth.addAction(actionSmoothAverage);
+			QMenu* smooth = calcul->addMenu(tr("&Smooth"));
+			smooth->addAction(actionSmoothSavGol);
+			smooth->addAction(actionSmoothFFT);
+			smooth->addAction(actionSmoothAverage);
 
-			&filter = calcul.addMenu(tr("&FFT Filter"));
-			filter.addAction(actionLowPassFilter);
-			filter.addAction(actionHighPassFilter);
-			filter.addAction(actionBandPassFilter);
-			filter.addAction(actionBandBlockFilter);
+			QMenu* filter = calcul->addMenu(tr("&FFT Filter"));
+			filter->addAction(actionLowPassFilter);
+			filter->addAction(actionHighPassFilter);
+			filter->addAction(actionBandPassFilter);
+			filter->addAction(actionBandBlockFilter);
 
-			calcul.addSeparator();
-			calcul.addAction(actionInterpolate);
-			calcul.addAction(actionFFT);
-			calcul.addSeparator();
-			calcul.addAction(actionFitLinear);
-			calcul.addAction(actionShowFitPolynomDialog);
-			calcul.addSeparator();
+			calcul->addSeparator();
+			calcul->addAction(actionInterpolate);
+			calcul->addAction(actionFFT);
+			calcul->addSeparator();
+			calcul->addAction(actionFitLinear);
+			calcul->addAction(actionShowFitPolynomDialog);
+			calcul->addSeparator();
 
-			&decay = calcul.addMenu(tr("Fit E&xponential Decay"));
-			decay.addAction(actionShowExpDecayDialog);
-			decay.addAction(actionShowTwoExpDecayDialog);
-			decay.addAction(actionShowExpDecay3Dialog);
+			QMenu *decay = calcul->addMenu(tr("Fit E&xponential Decay"));
+			decay->addAction(actionShowExpDecayDialog);
+			decay->addAction(actionShowTwoExpDecayDialog);
+			decay->addAction(actionShowExpDecay3Dialog);
 
-			calcul.addAction(actionFitExpGrowth);
-			calcul.addAction(actionFitSigmoidal);
-			calcul.addAction(actionFitGauss);
-			calcul.addAction(actionFitLorentz);
+			calcul->addAction(actionFitExpGrowth);
+			calcul->addAction(actionFitSigmoidal);
+			calcul->addAction(actionFitGauss);
+			calcul->addAction(actionFitLorentz);
 
-			&multiPeakMenu = calcul.addMenu(tr("Fit &Multi-Peak"));
-			multiPeakMenu.addAction(actionMultiPeakGauss);
-			multiPeakMenu.addAction(actionMultiPeakLorentz);
+			QMenu* multiPeakMenu = calcul->addMenu(tr("Fit &Multi-Peak"));
+			multiPeakMenu->addAction(actionMultiPeakGauss);
+			multiPeakMenu->addAction(actionMultiPeakLorentz);
 
-			calcul.addSeparator();
-			calcul.addAction(actionShowFitDialog);
+			calcul->addSeparator();
+			calcul->addAction(actionShowFitDialog);
 		}
 
 		if (copiedLayer)
@@ -8003,19 +7993,19 @@ void ApplicationWindow::showGraphContextMenu()
                 cm.addAction(IconLoader::load("edit-paste"),tr("&Paste Image"),plot, SIGNAL(pasteMarker()));
 		}
 		cm.addSeparator();
-		&copy = cm.addMenu(tr("&Copy"));
-		copy.setIcon(IconLoader::load("edit-copy"));
-		copy.addAction(tr("&Layer"), this, SLOT(copyActiveLayer()));
-		copy.addAction(tr("&Window"),plot, SLOT(copyAllLayers()));
+		QMenu* copy = cm.addMenu(tr("&Copy"));
+		copy->setIcon(IconLoader::load("edit-copy"));
+		copy->addAction(tr("&Layer"), this, SLOT(copyActiveLayer()));
+		copy->addAction(tr("&Window"),plot, SLOT(copyAllLayers()));
 
-		&exports = cm.addMenu(tr("E&xport"));
-		exports.addAction(tr("&Layer"), this, SLOT(exportLayer()));
-		exports.addAction(tr("&Window"), this, SLOT(exportGraph()));
+		QMenu* exports = cm.addMenu(tr("E&xport"));
+		exports->addAction(tr("&Layer"), this, SLOT(exportLayer()));
+		exports->addAction(tr("&Window"), this, SLOT(exportGraph()));
 
-		&prints = cm.addMenu(tr("&Print"));
-		prints.setIcon(QPixmap(":/fileprint.xpm"));
-		prints.addAction(tr("&Layer"), plot, SLOT(printActiveLayer()));
-		prints.addAction(tr("&Window"),plot, SLOT(print()));
+		QMenu* prints = cm.addMenu(tr("&Print"));
+		prints->setIcon(QPixmap(":/fileprint.xpm"));
+		prints->addAction(tr("&Layer"), plot, SLOT(printActiveLayer()));
+		prints->addAction(tr("&Window"),plot, SLOT(print()));
 
 		cm.addSeparator();
 		cm.addAction(QPixmap(":/resize.xpm"), tr("&Geometry..."), plot, SIGNAL(showGeometryDialog()));
@@ -8036,15 +8026,6 @@ void ApplicationWindow::showLayerButtonContextMenu()
 	{
 		MultiLayer *plot=(MultiLayer*)w;
 		QMenu cm(this);
-		QMenu exports(this);
-		QMenu copy(this);
-		QMenu prints(this);
-		QMenu calcul(this);
-		QMenu smooth(this);
-		QMenu filter(this);
-		QMenu decay(this);
-		QMenu translate(this);
-		QMenu multiPeakMenu(this);
 
 		Graph* ag = (Graph*)plot->activeGraph();
 
@@ -8064,52 +8045,52 @@ void ApplicationWindow::showLayerButtonContextMenu()
 			cm.addAction(actionShowCurvesDialog);
 			cm.addAction(actionAddFunctionCurve);
 
-			&calcul = cm.addMenu(tr("Anal&yze"));
+			QMenu* calcul = cm.addMenu(tr("Anal&yze"));
 
-			&translate = calcul.addMenu(tr("&Translate"));
-			translate.addAction(actionTranslateVert);
-			translate.addAction(actionTranslateHor);
-			calcul.addSeparator();
+			QMenu* translate = calcul->addMenu(tr("&Translate"));
+			translate->addAction(actionTranslateVert);
+			translate->addAction(actionTranslateHor);
+			calcul->addSeparator();
 
-			calcul.addAction(actionDifferentiate);
-			calcul.addAction(actionShowIntDialog);
-			calcul.addSeparator();
+			calcul->addAction(actionDifferentiate);
+			calcul->addAction(actionShowIntDialog);
+			calcul->addSeparator();
 
-			&smooth = calcul.addMenu(tr("&Smooth"));
-			smooth.addAction(actionSmoothSavGol);
-			smooth.addAction(actionSmoothFFT);
-			smooth.addAction(actionSmoothAverage);
+			QMenu* smooth = calcul->addMenu(tr("&Smooth"));
+			smooth->addAction(actionSmoothSavGol);
+			smooth->addAction(actionSmoothFFT);
+			smooth->addAction(actionSmoothAverage);
 
-			&filter = calcul.addMenu(tr("&FFT Filter"));
-			filter.addAction(actionLowPassFilter);
-			filter.addAction(actionHighPassFilter);
-			filter.addAction(actionBandPassFilter);
-			filter.addAction(actionBandBlockFilter);
+			QMenu* filter = calcul->addMenu(tr("&FFT Filter"));
+			filter->addAction(actionLowPassFilter);
+			filter->addAction(actionHighPassFilter);
+			filter->addAction(actionBandPassFilter);
+			filter->addAction(actionBandBlockFilter);
 
-			calcul.addSeparator();
-			calcul.addAction(actionInterpolate);
-			calcul.addAction(actionFFT);
-			calcul.addSeparator();
-			calcul.addAction(actionFitLinear);
-			calcul.addAction(actionShowFitPolynomDialog);
-			calcul.addSeparator();
+			calcul->addSeparator();
+			calcul->addAction(actionInterpolate);
+			calcul->addAction(actionFFT);
+			calcul->addSeparator();
+			calcul->addAction(actionFitLinear);
+			calcul->addAction(actionShowFitPolynomDialog);
+			calcul->addSeparator();
 
-			&decay = calcul.addMenu(tr("Fit E&xponential Decay"));
-			decay.addAction(actionShowExpDecayDialog);
-			decay.addAction(actionShowTwoExpDecayDialog);
-			decay.addAction(actionShowExpDecay3Dialog);
+			QMenu* decay = calcul->addMenu(tr("Fit E&xponential Decay"));
+			decay->addAction(actionShowExpDecayDialog);
+			decay->addAction(actionShowTwoExpDecayDialog);
+			decay->addAction(actionShowExpDecay3Dialog);
 
-			calcul.addAction(actionFitExpGrowth);
-			calcul.addAction(actionFitSigmoidal);
-			calcul.addAction(actionFitGauss);
-			calcul.addAction(actionFitLorentz);
+			calcul->addAction(actionFitExpGrowth);
+			calcul->addAction(actionFitSigmoidal);
+			calcul->addAction(actionFitGauss);
+			calcul->addAction(actionFitLorentz);
 
-			&multiPeakMenu = calcul.addMenu(tr("Fit &Multi-Peak"));
-			multiPeakMenu.addAction(actionMultiPeakGauss);
-			multiPeakMenu.addAction(actionMultiPeakLorentz);
+			QMenu* multiPeakMenu = calcul->addMenu(tr("Fit &Multi-Peak"));
+			multiPeakMenu->addAction(actionMultiPeakGauss);
+			multiPeakMenu->addAction(actionMultiPeakLorentz);
 
-			calcul.addSeparator();
-			calcul.addAction(actionShowFitDialog);
+			calcul->addSeparator();
+			calcul->addAction(actionShowFitDialog);
 		}
 
 		if (copiedLayer)
@@ -8129,19 +8110,19 @@ void ApplicationWindow::showLayerButtonContextMenu()
 		}
 		cm.addSeparator();
 
-		&copy = cm.addMenu(tr("&Copy"));
-		copy.setIcon(IconLoader::load("edit-copy"));
-		copy.addAction(tr("&Layer"), this, SLOT(copyActiveLayer()));
-		copy.addAction(tr("&Window"),plot, SLOT(copyAllLayers()));
+		QMenu* copy = cm.addMenu(tr("&Copy"));
+		copy->setIcon(IconLoader::load("edit-copy"));
+		copy->addAction(tr("&Layer"), this, SLOT(copyActiveLayer()));
+		copy->addAction(tr("&Window"),plot, SLOT(copyAllLayers()));
 
-		&exports = cm.addMenu(tr("E&xport"));
-		exports.addAction(tr("&Layer"), this, SLOT(exportLayer()));
-		exports.addAction(tr("&Window"), this, SLOT(exportGraph()));
+		QMenu* exports = cm.addMenu(tr("E&xport"));
+		exports->addAction(tr("&Layer"), this, SLOT(exportLayer()));
+		exports->addAction(tr("&Window"), this, SLOT(exportGraph()));
 
-		&prints = cm.addMenu(tr("&Print"));
-		prints.setIcon(QPixmap(":/fileprint.xpm"));
-		prints.addAction(tr("&Layer"), plot, SLOT(printActiveLayer()));
-		prints.addAction(tr("&Window"),plot, SLOT(print()));
+		QMenu* prints = cm.addMenu(tr("&Print"));
+		prints->setIcon(QPixmap(":/fileprint.xpm"));
+		prints->addAction(tr("&Layer"), plot, SLOT(printActiveLayer()));
+		prints->addAction(tr("&Window"),plot, SLOT(print()));
 
 		cm.addSeparator();
 		cm.addAction(QPixmap(":/resize.xpm"), tr("&Geometry..."), plot, SIGNAL(showGeometryDialog()));
@@ -8160,7 +8141,6 @@ void ApplicationWindow::showWindowContextMenu()
 		return;
 
 	QMenu cm(this);
-	QMenu plot3D(this);
 	if (w->inherits("MultiLayer"))
 	{
 		MultiLayer *g=(MultiLayer*)w;
@@ -8194,10 +8174,10 @@ void ApplicationWindow::showWindowContextMenu()
 		Graph3D *g=(Graph3D*)w;
 		if (!g->hasData())
 		{
-			&plot3D = cm.addMenu(tr("3D &Plot"));
-			plot3D.addAction(actionAdd3DData);
-			plot3D.addAction(tr("&Matrix..."), this, SLOT(add3DMatrixPlot()));
-			plot3D.addAction(actionEditSurfacePlot);
+			QMenu* plot3D = cm.addMenu(tr("3D &Plot"));
+			plot3D->addAction(actionAdd3DData);
+			plot3D->addAction(tr("&Matrix..."), this, SLOT(add3DMatrixPlot()));
+			plot3D->addAction(actionEditSurfacePlot);
 		}
 		else
 		{
@@ -12548,8 +12528,6 @@ void ApplicationWindow::showFolderPopupMenu(QTreeWidgetItem *it, const QPoint &p
 		return;
 
 	QMenu cm(this);
-	QMenu window(this);
-	QMenu viewWindowsMenu(this);
 
 	cm.addAction(tr("&Find..."), this, SLOT(showFindDialogue()));
 	cm.addSeparator();
@@ -12576,24 +12554,24 @@ void ApplicationWindow::showFolderPopupMenu(QTreeWidgetItem *it, const QPoint &p
 
 	if (fromFolders)
 	{
-		&window = cm.addMenu(tr("New &Window"));
-		window.addAction(actionNewTable);
-		window.addAction(actionNewMatrix);
-		window.addAction(actionNewNote);
-		window.addAction(actionNewGraph);
-		window.addAction(actionNewFunctionPlot);
-		window.addAction(actionNewSurfacePlot);
+		QMenu* window = cm.addMenu(tr("New &Window"));
+		window->addAction(actionNewTable);
+		window->addAction(actionNewMatrix);
+		window->addAction(actionNewNote);
+		window->addAction(actionNewGraph);
+		window->addAction(actionNewFunctionPlot);
+		window->addAction(actionNewSurfacePlot);
 	}
 
 	cm.addAction(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
 	cm.addSeparator();
 
-	&viewWindowsMenu = cm.addMenu(tr("&View Windows"));
+	QMenu* viewWindowsMenu = cm.addMenu(tr("&View Windows"));
 	QStringList lst;
 	lst << tr("&None") << tr("&Windows in Active Folder") << tr("Windows in &Active Folder && Subfolders");
 	for (int i = 0; i < 3; ++i)
 	{
-		QAction *actId = viewWindowsMenu.addAction(lst[i],this, SLOT( setShowWindowsPolicy( int ) ) );
+		QAction *actId = viewWindowsMenu->addAction(lst[i],this, SLOT( setShowWindowsPolicy( int ) ) );
 		actId->setData(i); // Q3CHECK viewWindowsMenu.setItemParameter( id, i );
 		actId->setChecked(show_windows_policy == i); // Q3CHECK viewWindowsMenu.setItemChecked( id, show_windows_policy == i );
 	}
