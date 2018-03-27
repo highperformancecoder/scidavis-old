@@ -429,7 +429,7 @@ public slots:
   void renameActiveWindow();
 
   //!  Called when the user presses F2 and an item is selected in lv.
-  void renameWindow(QTreeWidgetItem *item, int);
+  void renameWindow(QTreeWidgetItem *item, int, const QString &);
 
   //!  Checks weather the new window name is valid and modifies the name.
   bool renameWindow(MyWidget *w, const QString &text);
@@ -808,10 +808,10 @@ public slots:
   void startRenameFolder();
 
   //!  starts renaming the selected folder by creating a built-in text editor
-  void startRenameFolder(QTreeWidgetItem *item);
+  void startRenameFolder(QTreeWidgetItem *item, int);
 
   //!  checks weather the new folder name is valid and modifies the name
-  void renameFolder(QTreeWidgetItem *it, int col);
+  void renameFolder(QTreeWidgetItem *it, int col, const QString&);
 
   //!  forces showing all windows in the current folder and subfolders, depending on the user's viewing policy
   void showAllFolderWindows();

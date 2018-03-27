@@ -242,11 +242,12 @@ int FolderListItem::depth()
 
 void FolderListItem::setData( int column, int role, const QVariant& value)
 {
-    if (role == Qt::EditRole)
-    {
-        emit this->folderListView()->itemRenamed(this, column, value.toString());
-    }
-    QTreeWidgetItem::setData( column, role, value);
+	if ((role == Qt::EditRole) && (column == 0) && (value != this->text(0)))
+	{// data should be accepted or rejected on slot connected to this signal
+		emit this->folderListView()->itemRenamed(this, column, value.toString());
+	} else {
+		QTreeWidgetItem::setData( column, role, value);
+	}
 }
 /*****************************************************************************
  *
@@ -409,15 +410,18 @@ WindowListItem::WindowListItem( QTreeWidget *parent, MyWidget *w )
     : QTreeWidgetItem( parent, WindowListItem::WindowType )
 {
     myWindow = w;
+	this->treeWidget()->setCurrentItem(this,0, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
 
 	setFlags(flags() | Qt::ItemIsDragEnabled);
 }
 
 void WindowListItem::setData( int column, int role, const QVariant& value)
 {
-    if (role == Qt::EditRole)
-    {
-        emit this->folderListView()->itemRenamed(this, column, value.toString());
-    }
-    QTreeWidgetItem::setData( column, role, value);
+	if (role == Qt::EditRole)
+	{// data should be accepted or rejected on slot connected to this signal
+		if (column == 0)
+			emit this->folderListView()->itemRenamed(this, column, value.toString());
+	} else {
+		QTreeWidgetItem::setData( column, role, value);
+	}
 }

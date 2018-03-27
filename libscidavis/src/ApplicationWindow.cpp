@@ -243,8 +243,8 @@ ApplicationWindow::ApplicationWindow()
 	folders->setSelectionMode(QTreeWidget::SingleSelection);
 	// Q3CHECK folders->setDefaultRenameAction(QTreeWidget::Accept);
 
-	connect(folders, SIGNAL(currentChanged(QTreeWidgetItem *)),
-			this, SLOT(folderItemChanged(QTreeWidgetItem *)));
+	connect(folders, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
+			this, SLOT(folderItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)));
 	connect(folders, SIGNAL(itemRenamed(QTreeWidgetItem *, int, const QString &)),
 			this, SLOT(renameFolder(QTreeWidgetItem *, int, const QString &)));
 	connect(folders, SIGNAL(customContextMenuRequested(const QPoint &)),
@@ -253,13 +253,14 @@ ApplicationWindow::ApplicationWindow()
 			this, SLOT(dragFolderItems(QList<QTreeWidgetItem *>)));
 	connect(folders, SIGNAL(dropItems(QTreeWidgetItem *)),
 			this, SLOT(dropFolderItems(QTreeWidgetItem *)));
-	connect(folders, SIGNAL(renameItem(QTreeWidgetItem *)),
-			this, SLOT(startRenameFolder(QTreeWidgetItem *)));
+	connect(folders, SIGNAL(renameItem(QTreeWidgetItem *, int)),
+			this, SLOT(startRenameFolder(QTreeWidgetItem *, int)));
 	connect(folders, SIGNAL(addFolderItem()), this, SLOT(addFolder()));
 	connect(folders, SIGNAL(deleteSelection()), this, SLOT(deleteSelectedItems()));
 
     FolderListItem *fli = new FolderListItem(folders, current_folder);
 	current_folder->setFolderListItem(fli);
+	folders->setCurrentItem(fli);
 	fli->setExpanded( true );
 
 	lv->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -316,16 +317,16 @@ ApplicationWindow::ApplicationWindow()
 
 	connect(this, SIGNAL(modified()),this, SLOT(modifiedProject()));
 	connect(d_workspace, SIGNAL(windowActivated (QWidget*)),this, SLOT(windowActivated(QWidget*)));
-	connect(lv, SIGNAL(doubleClicked(QTreeWidgetItem *)),
-			this, SLOT(folderItemDoubleClicked(QTreeWidgetItem *)));
+	connect(lv, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)),
+			this, SLOT(folderItemDoubleClicked(QTreeWidgetItem *, int)));
 	connect(lv, SIGNAL(customContextMenuRequested(const QPoint &)),
 			this, SLOT(showWindowPopupMenu(const QPoint &)));
 	connect(lv, SIGNAL(dragItems(QList<QTreeWidgetItem *>)),
 			this, SLOT(dragFolderItems(QList<QTreeWidgetItem *>)));
 	connect(lv, SIGNAL(dropItems(QTreeWidgetItem *)),
 			this, SLOT(dropFolderItems(QTreeWidgetItem *)));
-	connect(lv, SIGNAL(renameItem(QTreeWidgetItem *)),
-			this, SLOT(startRenameFolder(QTreeWidgetItem *)));
+	connect(lv, SIGNAL(renameItem(QTreeWidgetItem *, int)),
+			this, SLOT(startRenameFolder(QTreeWidgetItem *, int)));
 	connect(lv, SIGNAL(addFolderItem()), this, SLOT(addFolder()));
 	connect(lv, SIGNAL(deleteSelection()), this, SLOT(deleteSelectedItems()));
 	connect(lv, SIGNAL(itemRenamed(QTreeWidgetItem *, int, const QString &)),
@@ -5133,22 +5134,17 @@ void ApplicationWindow::renameActiveWindow()
 	rwd->exec();
 }
 
-void ApplicationWindow::renameWindow(QTreeWidgetItem *item, int)
+void ApplicationWindow::renameWindow(QTreeWidgetItem *item, int, const QString &text)
 {
 	if (!item)
 		return;
-	QString text = item->text(0);
 
 	MyWidget *w = ((WindowListItem *)item)->window();
 	if (!w || text == w->name())
 		return;
 
-	while(!renameWindow(w, text))
-	{
-		item->setFlags(item->flags() | Qt::ItemIsEditable);
-		item->treeWidget()->editItem(item, 0); // Q3CHECK item->startRename (0);
-		return;
-	}
+	QString oldname = w->name();
+	renameWindow(w, text);
 }
 
 bool ApplicationWindow::renameWindow(MyWidget *w, const QString &text)
@@ -12645,48 +12641,53 @@ void ApplicationWindow::startRenameFolder()
 	if (!fi)
 		return;
 
-	disconnect(folders, SIGNAL(currentChanged(QTreeWidgetItem *)), this, SLOT(folderItemChanged(QTreeWidgetItem *)));
+	disconnect(folders, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
+		this, SLOT(folderItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)));
 	fi->setFlags(fi->flags() | Qt::ItemIsEditable);
-	fi->treeWidget()->editItem(0); // Q3CHECK fi->startRename (0);
+	fi->treeWidget()->editItem(fi, 0); // Q3CHECK fi->startRename (0);
 }
 
-void ApplicationWindow::startRenameFolder(QTreeWidgetItem *item)
+void ApplicationWindow::startRenameFolder(QTreeWidgetItem *item, int column)
 {
 	if (!item || item == folders->topLevelItem(0))
 		return;
 
 	if (item->treeWidget() == lv && item->type() == FolderListItem::FolderType)
 	{
-        disconnect(folders, SIGNAL(currentChanged(QTreeWidgetItem *)), this, SLOT(folderItemChanged(QTreeWidgetItem *)));
+		disconnect(folders, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *, QTreeWidgetItem *)),
+			this, SLOT(folderItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)));
 		current_folder = ((FolderListItem *)item)->folder();
 		FolderListItem *it = current_folder->folderListItem();
+		it->treeWidget()->setCurrentItem(it,0);
 		it->setFlags(it->flags() | Qt::ItemIsEditable);
-		it->treeWidget()->editItem(0); // Q3CHECK it->startRename (0);
+		it->treeWidget()->editItem(it, column); // Q3CHECK it->startRename (0);
 	}
 	else
 	{
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
-		item->treeWidget()->editItem(0); // Q3CHECK item->startRename (0);
+		item->treeWidget()->editItem(item, 0); // Q3CHECK item->startRename (0);
+		item->setFlags(item->flags() & ~Qt::ItemIsEditable);
 	}
 }
 
-void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col)
+void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString& text)
 {
 	Q_UNUSED(col)
 
 		if (!it)
 			return;
-	QString text = it->text(0);
+
+	if (it->text(0) == text)
+		return;
 
 	Folder *parent = (Folder *)current_folder->parent();
 	if (!parent)//the parent folder is the project folder (it always exists)
 		parent = projectFolder();
 
-	while(text.isEmpty())
+	if (text.isEmpty())
 	{
 		QMessageBox::critical(this,tr("Error"), tr("Please enter a valid name!"));
 		it->setFlags(it->flags() | Qt::ItemIsEditable);
-		it->treeWidget()->editItem(it, 0); // Q3CHECK it->startRename (0);
 		return;
 	}
 
@@ -12698,14 +12699,16 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col)
 				tr("Name already exists!")+"\n"+tr("Please choose another name!"));
 
 		it->setFlags(it->flags() | Qt::ItemIsEditable);
+		it->setText(0, current_folder->name());
 		it->treeWidget()->editItem(it, 0); // Q3CHECK it->startRename (0);
 		return;
 	}
 
 	current_folder->setName(text);
+	it->setText(0,text);
 	it->setFlags(it->flags() & ~Qt::ItemIsEditable);
-	connect(folders, SIGNAL(currentChanged(QTreeWidgetItem *)),
-			this, SLOT(folderItemChanged(QTreeWidgetItem *)));
+	connect(folders, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
+			this, SLOT(folderItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)));
 	folders->setCurrentItem(parent->folderListItem());//update the list views
 }
 
@@ -12885,7 +12888,8 @@ void ApplicationWindow::addFolder()
 	{
 		f->setFolderListItem(fi);
 		fi->setFlags(fi->flags() | Qt::ItemIsEditable);
-		fi->treeWidget()->editItem(0); // Q3CHECK fi->startRename(0);
+		fi->treeWidget()->setCurrentItem(fi,0);
+		fi->treeWidget()->editItem(fi, 0); // Q3CHECK fi->startRename(0);
 	}
 }
 
@@ -12894,7 +12898,9 @@ bool ApplicationWindow::deleteFolder(Folder *f)
 	if (confirmCloseFolder && QMessageBox::information(this, tr("Delete folder?"),
 				tr("Delete folder '%1' and all the windows it contains?").arg(f->name()),
 				tr("Yes"), tr("No"), 0, 0))
+	{
 		return false;
+	}
 	else
 	{
 		FolderListItem *fi = f->folderListItem();
@@ -12980,6 +12986,9 @@ void ApplicationWindow::folderItemChanged(QTreeWidgetItem *current, QTreeWidgetI
 	Q_UNUSED(previous)
 
 	if (!current)
+		return;
+
+	if (current == previous)
 		return;
 
 	current->setExpanded(true);
