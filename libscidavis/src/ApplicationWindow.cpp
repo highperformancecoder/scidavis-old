@@ -153,6 +153,7 @@
 #include <QTemporaryFile>
 #include <QDebug>
 #include <QTextCodec>
+#include <QScrollBar>
 
 #include <zlib.h>
 
@@ -212,6 +213,7 @@ ApplicationWindow::ApplicationWindow()
 
 {
     setAttribute(Qt::WA_DeleteOnClose);
+    //QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
 
 	setWindowTitle(tr("SciDAVis - untitled"));
 
@@ -233,15 +235,18 @@ ApplicationWindow::ApplicationWindow()
 	explorerWindow->setMinimumHeight(150);
 	addDockWidget( Qt::BottomDockWidgetArea, explorerWindow );
 
+	folders->setObjectName("folders");
+	folders->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	folders->setContextMenuPolicy(Qt::CustomContextMenu);
 
 	folders->header()->setClickable( false );
-	folders->setHeaderLabel( tr("Folder") );
+	folders->setHeaderLabels(QStringList() << tr("Folder") << QString() );
 	folders->setRootIsDecorated( true );
-	folders->header()->setStretchLastSection(true);
+	folders->setColumnWidth(1,0); // helps autoScroll
+	folders->hideColumn(1); // helps autoScroll
+	folders->header()->setResizeMode(QHeaderView::ResizeToContents);
 	folders->header()->hide();
 	folders->setSelectionMode(QTreeWidget::SingleSelection);
-	// Q3CHECK folders->setDefaultRenameAction(QTreeWidget::Accept);
 
 	connect(folders, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
 			this, SLOT(folderItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)));
@@ -263,12 +268,13 @@ ApplicationWindow::ApplicationWindow()
 	folders->setCurrentItem(fli);
 	fli->setExpanded( true );
 
+	lv->setObjectName("lv");
+	lv->setRootIsDecorated(false);
 	lv->setContextMenuPolicy(Qt::CustomContextMenu);
 	lv->setHeaderLabels(QStringList() << tr("Name") << tr("Type") << tr("View") << tr("Created") << tr("Label"));
 	lv->header()->setStretchLastSection(true);
 	lv->setMinimumHeight(80);
 	lv->setSelectionMode(QTreeWidget::ExtendedSelection);
-	// Q3CHECK lv->setDefaultRenameAction(QTreeWidget::Accept);
 
 	explorerSplitter->addWidget(folders);
 	explorerSplitter->addWidget(lv);
@@ -12709,6 +12715,7 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString
 	it->setFlags(it->flags() & ~Qt::ItemIsEditable);
 	connect(folders, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
 			this, SLOT(folderItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)));
+	folders->scrollToItem(parent->folderListItem(), QAbstractItemView::EnsureVisible);
 	folders->setCurrentItem(parent->folderListItem());//update the list views
 }
 
@@ -12890,6 +12897,7 @@ void ApplicationWindow::addFolder()
 		fi->setFlags(fi->flags() | Qt::ItemIsEditable);
 		fi->treeWidget()->setCurrentItem(fi,0);
 		fi->treeWidget()->editItem(fi, 0); // Q3CHECK fi->startRename(0);
+		fi->treeWidget()->resizeColumnToContents(0);
 	}
 }
 
@@ -12993,6 +13001,7 @@ void ApplicationWindow::folderItemChanged(QTreeWidgetItem *current, QTreeWidgetI
 
 	current->setExpanded(true);
 	changeFolder (((FolderListItem *)current)->folder());
+	folders->scrollToItem(folders->currentItem(), QAbstractItemView::EnsureVisible);
 	folders->setFocus();
 }
 
