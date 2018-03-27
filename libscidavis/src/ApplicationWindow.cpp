@@ -1534,35 +1534,35 @@ void ApplicationWindow::plotVectXYAM()
 
 void ApplicationWindow::renameListViewItem(const QString& oldName,const QString& newName)
 {
-	QTreeWidgetItem *it=lv->findItems (oldName, Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
+	QTreeWidgetItem *it=lv->findItems (oldName, Qt::MatchExactly | Qt::MatchCaseSensitive ).value(0);
 	if (it)
 		it->setText(0,newName);
 }
 
 void ApplicationWindow::setListViewLabel(const QString& caption,const QString& label)
 {
-	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
+	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).value(0);
 	if (it)
 		it->setText(5,label);
 }
 
 void ApplicationWindow::setListViewDate(const QString& caption,const QString& date)
 {
-	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
+	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).value(0);
 	if (it)
 		it->setText(4,date);
 }
 
 void ApplicationWindow::setListView(const QString& caption,const QString& view)
 {
-	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
+	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).value(0);
 	if (it)
 		it->setText(2,view);
 }
 
 QString ApplicationWindow::listViewDate(const QString& caption)
 {
-	QTreeWidgetItem *it=lv->findItems (caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
+	QTreeWidgetItem *it=lv->findItems (caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).value(0);
 	if (it)
 		return it->text(4);
 	else
