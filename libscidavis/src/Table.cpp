@@ -1000,7 +1000,7 @@ bool Table::exportASCII(const QString& fname, const QString& separator,
     {
       QApplication::restoreOverrideCursor();
       QMessageBox::critical(0, tr("ASCII Export Error"),
-                            tr("Could not write to file: <br><h4>"+fname+ "</h4><p>Please verify that you have the right to write to this location!").arg(fname));
+                            tr("Could not write to file: <br><h4>")+fname+tr("</h4><p>Please verify that you have the right to write to this location!"));
       return false;
     }
 

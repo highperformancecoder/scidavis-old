@@ -2010,7 +2010,7 @@ void Graph3D::print()
 		}
 		else
 			QMessageBox::about(0,tr("IO Error"),
-					tr("Could not print: <h4>" + QString(name()) + "</h4>."));
+					tr("Could not print: <h4>") + QString(name()) + "</h4>.");
 	}
 }
 
