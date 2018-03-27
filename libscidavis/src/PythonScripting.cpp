@@ -286,13 +286,13 @@ bool PythonScripting::initialize()
       setQObject(this, "stderr", sys);
     }
   bool initialized;
-  initialized = loadInitFile(QDir::homeDirPath()+"/scidavisrc");
-  if(!initialized) initialized = loadInitFile(QDir::homeDirPath()+"/.scidavisrc");
+  initialized = loadInitFile(QDir::homePath()+"/scidavisrc");
+  if(!initialized) initialized = loadInitFile(QDir::homePath()+"/.scidavisrc");
 #ifdef PYTHON_CONFIG_PATH 
   if(!initialized) initialized = loadInitFile(PYTHON_CONFIG_PATH"/scidavisrc");
   if(!initialized) initialized = loadInitFile(PYTHON_CONFIG_PATH"/.scidavisrc");
 #endif
-  if(!initialized) initialized = loadInitFile(QDir::rootDirPath()+"etc/scidavisrc");
+  if(!initialized) initialized = loadInitFile(QDir::rootPath()+"etc/scidavisrc");
   if(!initialized) initialized = loadInitFile(QCoreApplication::instance()->applicationDirPath()+"/scidavisrc");
   if(!initialized) initialized = loadInitFile("scidavisrc");
 

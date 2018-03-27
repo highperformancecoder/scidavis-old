@@ -321,7 +321,7 @@ QString ScriptEdit::importASCII(const QString &filename)
 
 	QString f;
 	if (filename.isEmpty())
-		f = QFileDialog::getOpenFileName(name(),  filter, this, 0, tr("Import Text From File"));
+		f = QFileDialog::getOpenFileName(this, tr("Import Text From File"), QString(), filter, 0);
 	else
 		f = filename;
 	if (f.isEmpty()) return QString::null;
@@ -347,8 +347,8 @@ QString ScriptEdit::exportASCII(const QString &filename)
 	QString selectedFilter;
 	QString fn;
 	if (filename.isEmpty())
-		fn = QFileDialog::getSaveFileName(name(), filter, this, 0,
-				tr("Save Text to File"), &selectedFilter, false);
+		fn = QFileDialog::getSaveFileName(this, tr("Save Text to File"), QString(), filter,
+				&selectedFilter, QFileDialog::DontResolveSymlinks);
 	else
 		fn = filename;
 		

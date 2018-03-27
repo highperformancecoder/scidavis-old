@@ -564,7 +564,7 @@ void Plot3DDialog::setLabelsDistance(int dist)
 
 void Plot3DDialog::pickDataColorMap()
 {
-QString fn = QFileDialog::getOpenFileName(d_plot->colorMap(), tr("Colormap files") + " (*.map *.MAP)", this);
+QString fn = QFileDialog::getOpenFileName(this, QString(), d_plot->colorMap(), tr("Colormap files") + " (*.map *.MAP)");
 if (!fn.isEmpty())
    emit setDataColorMap(fn);
 }

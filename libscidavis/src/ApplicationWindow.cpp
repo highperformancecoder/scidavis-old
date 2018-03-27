@@ -2099,7 +2099,7 @@ Matrix* ApplicationWindow::importImage()
 	QString fn = QFileDialog::getOpenFileName(this, tr("Import image from file"), imagesDirPath, filter);
 	if ( !fn.isEmpty() ){
 		QFileInfo fi(fn);
-		imagesDirPath = fi.dirPath(true);
+		imagesDirPath = fi.absolutePath();
 		return importImage(fn);
 	}
 	else return 0;
@@ -2120,7 +2120,7 @@ void ApplicationWindow::loadImage()
 	if ( !fn.isEmpty() ){
 		loadImage(fn);
 		QFileInfo fi(fn);
-		imagesDirPath = fi.dirPath(true);
+		imagesDirPath = fi.absolutePath();
 	}
 }
 
@@ -3275,7 +3275,7 @@ ApplicationWindow * ApplicationWindow::plotFile(const QString& fn)
 void ApplicationWindow::importASCII()
 {
 	ImportASCIIDialog *import_dialog = new ImportASCIIDialog(d_workspace->activeWindow() && d_workspace->activeWindow()->inherits("Table"), this, d_extended_import_ASCII_dialog);
-	import_dialog->setDir(asciiDirPath);
+	import_dialog->setDirectory(asciiDirPath);
 	import_dialog->selectFilter(d_ASCII_file_filter);
 	if (import_dialog->exec() != QDialog::Accepted)
 		return;
@@ -3440,7 +3440,7 @@ void ApplicationWindow::open()
 
 				if (projectname != "untitled"){
 					QFileInfo fi(projectname);
-					QString pn = fi.absFilePath();
+					QString pn = fi.absolutePath();
 					if (fn == pn){
 						QMessageBox::warning(this, tr("File opening error"),
 								tr("The file: <b>%1</b> is the current file!").arg(fn));
@@ -3543,7 +3543,7 @@ void ApplicationWindow::openRecentProject()
 	if (projectname != "untitled")
 	{
 		QFileInfo fi(projectname);
-		QString pn = fi.absFilePath();
+		QString pn = fi.absolutePath();
 		if (fn == pn)
 		{
 			QMessageBox::warning(this, tr("File opening error"),
@@ -4019,7 +4019,7 @@ void ApplicationWindow::openTemplate()
 	if (!fn.isEmpty())
 	{
 		QFileInfo fi(fn);
-		templatesDir = fi.dirPath(true);
+		templatesDir = fi.absolutePath();
 		if (fn.contains(".qmt",Qt::CaseSensitive) || fn.contains(".qpt",Qt::CaseSensitive) ||
 				fn.contains(".qtt",Qt::CaseSensitive) || fn.contains(".qst",Qt::CaseSensitive))
 		{
@@ -4716,7 +4716,7 @@ void ApplicationWindow::exportGraph()
 		return;
 
 	ImageExportDialog *ied = new ImageExportDialog(this, plot2D!=NULL, d_extended_export_dialog);
-	ied->setDir(workingDir);
+	ied->setDirectory(workingDir);
     ied->selectFilter(d_image_export_filter);
 	if ( ied->exec() != QDialog::Accepted )
 		return;
@@ -4773,7 +4773,7 @@ void ApplicationWindow::exportLayer()
 		return;
 
 	ImageExportDialog *ied = new ImageExportDialog(this, g!=NULL, d_extended_export_dialog);
-	ied->setDir(workingDir);
+	ied->setDirectory(workingDir);
 	ied->selectFilter(d_image_export_filter);
 	if ( ied->exec() != QDialog::Accepted )
 		return;
@@ -4817,7 +4817,7 @@ void ApplicationWindow::exportAllGraphs()
 	ied->setLabelText(QFileDialog::FileType, tr("Output format:"));
 	ied->setLabelText(QFileDialog::FileName, tr("Directory:"));
 
-	ied->setDir(workingDir);
+	ied->setDirectory(workingDir);
     ied->selectFilter(d_image_export_filter);
 
 	if ( ied->exec() != QDialog::Accepted )
@@ -5041,7 +5041,7 @@ void ApplicationWindow::saveProjectAs()
 	if ( !fn.isEmpty() )
 	{
 		QFileInfo fi(fn);
-		workingDir = fi.dirPath(true);
+		workingDir = fi.absolutePath();
 		QString baseName = fi.fileName();
 		if (!baseName.endsWith(".sciprj") && !baseName.endsWith(".sciprj.gz"))
 		{
@@ -5095,7 +5095,7 @@ void ApplicationWindow::saveAsTemplate()
 	if ( !fn.isEmpty() )
 	{
 		QFileInfo fi(fn);
-		workingDir = fi.dirPath(true);
+		workingDir = fi.absolutePath();
 		QString baseName = fi.fileName();
 		if (!baseName.contains("."))
 		{
@@ -5521,7 +5521,7 @@ void ApplicationWindow::exportASCII(const QString& tableName, const QString& sep
 		if (baseName.contains(".")==0)
 			fname.append(selectedFilter.remove("*"));
 
-		asciiDirPath = fi.dirPath(true);
+		asciiDirPath = fi.absolutePath();
 
 		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 		t->exportASCII(fname, sep, colNames, expSelection);
@@ -6228,7 +6228,7 @@ void ApplicationWindow::exportPDF()
 		if (!baseName.contains("."))
 			fname.append(".pdf");
 
-        workingDir = fi.dirPath(true);
+        workingDir = fi.absolutePath();
 
         QFile f(fname);
         if ( !f.open( QIODevice::WriteOnly ) )
@@ -6791,7 +6791,7 @@ void ApplicationWindow::addImage()
 	QString fn = QFileDialog::getOpenFileName(this, tr("Insert image from file"), imagesDirPath, filter);
 	if ( !fn.isEmpty() ){
 		QFileInfo fi(fn);
-		imagesDirPath = fi.dirPath(true);
+		imagesDirPath = fi.absolutePath();
 
 		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 		g->addImage(fn);
@@ -7636,7 +7636,7 @@ if (e->mimeData()->hasUrls()) {
     foreach (QUrl url, urls) {
       QString fileName = url.toLocalFile();
       QFileInfo fileInfo(fileName);
-      QString ext = fileInfo.extension().toLower();
+      QString ext = fileInfo.completeSuffix().toLower();
 
       if (ext == "sciprj" || ext == "sciprj~" || ext == "sciprj.gz" ||
           ext == "sciprj.gz~" || ext == "opj" || ext == "qti"|| ext == "qti.gz" ||
@@ -11950,7 +11950,7 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 			return;
 		}
 
-		workingDir = fi.dirPath(true);
+		workingDir = fi.absolutePath();
 		saveSettings();//the recent projects must be saved
 
 		ApplicationWindow *a;
@@ -11995,14 +11995,14 @@ void ApplicationWindow::createLanguagesList()
 		slng = slng.left(2);
 
 	QDir dir(qmPath);
-	QStringList fileNames = dir.entryList("scidavis_*.qm");
+	QStringList fileNames = dir.entryList(QStringList("scidavis_*.qm"));
         if (fileNames.size()==0)
           {
             // fall back to looking in the executable's directory
             qmPath = QFileInfo(QCoreApplication::applicationFilePath()).path()+
               "/translations";
             dir.setPath(qmPath);
-            fileNames = dir.entryList("scidavis_*.qm");
+            fileNames = dir.entryList(QStringList("scidavis_*.qm"));
           }
         for (int i=0; i < (int)fileNames.size(); i++)
           {
@@ -12152,7 +12152,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 	QFile * file;
 
 	QFileInfo fi(fn);
-	workingDir = fi.dirPath(true);
+	workingDir = fi.absolutePath();
 
 	if (fn.contains(".sciprj") ||
 		fn.contains(".qti") || fn.contains(".opj", Qt::CaseInsensitive) ||
@@ -12498,7 +12498,7 @@ void ApplicationWindow::saveFolderAsProject(Folder *f)
 	QString fn = QFileDialog::getSaveFileName(this, tr("Save project as"), workingDir, filter, &selectedFilter);
 	if ( !fn.isEmpty() ){
 		QFileInfo fi(fn);
-		workingDir = fi.dirPath(true);
+		workingDir = fi.absolutePath();
 		QString baseName = fi.fileName();
 		if (!baseName.endsWith(".sciprj") && !baseName.endsWith(".sciprj.gz"))
 		{

@@ -860,8 +860,8 @@ void FitDialog::showFunctionsList(int category)
 void FitDialog::choosePluginsFolder()
 {
 	ApplicationWindow *app = (ApplicationWindow *)this->parent();
-	QString dir = QFileDialog::getExistingDirectory(QDir::currentDirPath(), this, "get directory",
-			tr("Choose the plugins folder"), true, true);
+	QString dir = QFileDialog::getExistingDirectory(this, tr("Choose the plugins folder"),
+			 QDir::currentPath(), QFileDialog::ShowDirsOnly);
 	if (!dir.isEmpty())
 	{
 		d_plugin_files_list.clear();
