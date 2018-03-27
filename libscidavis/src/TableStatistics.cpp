@@ -303,7 +303,7 @@ void TableStatistics::removeCol(const QString &col)
 	for (int c=0; c < d_targets.size(); c++)
 		if (col == QString(d_base->name())+"_"+text(c, 0))
 		{
-			d_targets.remove(d_targets.at(c));
+			d_targets.removeAll(d_targets.at(c));
 			d_future_table->removeRows(c,1);
 			return;
 		}

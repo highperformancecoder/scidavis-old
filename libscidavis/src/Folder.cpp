@@ -117,13 +117,16 @@ Folder* Folder::findSubfolder(const QString& s, bool caseSensitive, bool partial
 MyWidget* Folder::findWindow(const QString& s, bool windowNames, bool labels,
 							 bool caseSensitive, bool partialMatch)
 {
+	Qt::CaseSensitivity cs = Qt::CaseSensitive;
+	if (!caseSensitive)
+		cs = Qt::CaseInsensitive;
 	MyWidget* w;
 	foreach(w,lstWindows)
 	{
 		if (windowNames)
 		{
 			QString name = w->name();
-			if (partialMatch && name.startsWith(s, caseSensitive))
+			if (partialMatch && name.startsWith(s, cs))
 				return w;
 			else if (caseSensitive && name == s)
 				return w;
@@ -138,7 +141,7 @@ MyWidget* Folder::findWindow(const QString& s, bool windowNames, bool labels,
 		if (labels)
 		{
 			QString label = w->windowLabel();
-			if (partialMatch && label.startsWith(s, caseSensitive))
+			if (partialMatch && label.startsWith(s, cs))
 				return w;
 			else if (caseSensitive && label == s)
 				return w;

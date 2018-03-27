@@ -1060,7 +1060,7 @@ void ConfigDialog::apply()
 
 	// tables page
 	QString sep = boxSeparator->currentText();
-	sep.replace(tr("TAB"), "\t", false);
+	sep.replace(tr("TAB"), "\t", Qt::CaseInsensitive);
 	sep.replace("\\t", "\t");
 	sep.replace(tr("SPACE"), " ");
 	sep.replace("\\s", " ");

@@ -589,7 +589,7 @@ void Graph3D::updateData(Table* table)
 	int xCol=table->colIndex(xColName);
 	int yCol=table->colIndex(yColName);
 
-	if (name.contains("(Z)",true))
+	if (name.contains("(Z)",Qt::CaseSensitive))
 	{
 		pos=name.indexOf(",",posX);
 		posX=name.indexOf("(",pos);
@@ -901,7 +901,7 @@ void Graph3D::setTickLengths(const QStringList& lst)
 	double majorl,minorl;
 	QStringList tick_length = lst;
 	if (int(lst.count()) > 6)
-		tick_length.remove(tick_length.first());
+		tick_length.removeAll(tick_length.first());
 
 	majorl=tick_length[0].toDouble();
 	minorl=tick_length[1].toDouble();
@@ -1313,7 +1313,7 @@ void Graph3D::updateScales(double xl, double xr, double yl, double yr, double zl
 		QString yColName=name.mid(pos+1,posX-pos-1);
 		int yCol=worksheet->colIndex(yColName);
 
-		if (name.endsWith("(Z)",true))
+		if (name.endsWith("(Z)",Qt::CaseSensitive))
 		{
 			pos=name.indexOf(",",posX);
 			posX=name.indexOf("(",pos);
@@ -1322,7 +1322,7 @@ void Graph3D::updateScales(double xl, double xr, double yl, double yr, double zl
 
 			updateScales(xl, xr, yl, yr, zl, zr, xCol, yCol, zCol);
 		}
-		else if (name.endsWith("(Y)",true))
+		else if (name.endsWith("(Y)",Qt::CaseSensitive))
 			updateScales(xl, xr, yl, yr, zl, zr, xCol, yCol);
 	}
 

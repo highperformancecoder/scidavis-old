@@ -161,7 +161,7 @@ void Correlation::addResultCurve()
 		d_table->column(cols2)->setValueAt(i, y_temp[i]);
 	}
 
-	QStringList l = d_table->colNames().grep(tr("Lag"));
+	QStringList l = d_table->colNames().filter(tr("Lag"));
 	QString id = QString::number((int)l.size()+1);
 	QString label = name() + id;
 

@@ -365,7 +365,7 @@ void Graph::setAxesBaseline(const QList<int> &lst)
 
 void Graph::setAxesBaseline(QStringList &lst)
 {
-	lst.remove(lst.first());
+	lst.removeAll(lst.first());
 	for (int i = 0; i<QwtPlot::axisCnt; i++)
 	{
 		QwtScaleWidget *scale = (QwtScaleWidget *)d_plot->axisWidget(i);
@@ -3615,7 +3615,7 @@ void Graph::removeLegendItem(int index)
 
 	QStringList l = items.filter( "\\c{" + QString::number(index+1) + "}" );
 	if (!l.isEmpty())
-		items.remove(l[0]);//remove the corresponding legend string
+		items.removeAll(l[0]);//remove the corresponding legend string
 	text=items.join ( "\n" ) + "\n";
 
 	QRegExp itemCmd("\\\\c\\{(\\d+)\\}");
@@ -3639,7 +3639,7 @@ void Graph::addLegendItem(const QString& colName)
 		Legend* mrk=(Legend*) d_plot->marker(legendMarkerID);
 		if (mrk){
 			QString text = mrk->text();
-			if (text.endsWith ( "\n", true ) )
+			if (text.endsWith ( "\n", Qt::CaseSensitive ) )
 				text.append("\\c{"+QString::number(curves())+"}"+colName+"\n");
 			else
 				text.append("\n\\c{"+QString::number(curves())+"}"+colName+"\n");
@@ -5075,7 +5075,7 @@ void Graph::restoreSpectrogram(ApplicationWindow *app, const QStringList& lst)
             for (int i = 0; i < stops; i++)
             {
                 s = (*(++line)).trimmed();
-                QStringList l = QStringList::split("\t", s.remove("<Stop>").remove("</Stop>"));
+                QStringList l = s.remove("<Stop>").remove("</Stop>").split("\t");
                 colorMap.addColorStop(l[0].toDouble(), QColor(l[1]));
             }
             sp->setCustomColorMap(colorMap);

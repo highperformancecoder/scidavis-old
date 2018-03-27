@@ -332,7 +332,7 @@ QChar sign = s[0];
 
 s.remove (sign);
 
-while (l>1 && s.startsWith ("0", false))
+while (l>1 && s.startsWith ("0", Qt::CaseInsensitive))
 	{
 	s.remove ( 0, 1 );
 	l = s.length();

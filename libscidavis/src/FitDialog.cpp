@@ -616,13 +616,13 @@ void FitDialog::removeUserFunction()
 		explainBox->setText(QString());
 
 		int index = d_user_function_names.indexOf(name);
-		d_user_function_names.remove(name);
+		d_user_function_names.removeAll(name);
 
 		QString f = d_user_functions[index];
-		d_user_functions.remove(f);
+		d_user_functions.removeAll(f);
 
 		f = d_user_function_params[index];
-		d_user_function_params.remove(f);
+		d_user_function_params.removeAll(f);
 
 		funcBox->clear();
 		funcBox->addItems (d_user_function_names);
@@ -790,10 +790,10 @@ void FitDialog::addUserFunctions(const QStringList& list)
 		{
             d_user_functions << s;
 
-            int pos1 = s.find("(", 0);
+            int pos1 = s.indexOf("(", 0);
             d_user_function_names << s.left(pos1);
 
-            int pos2 = s.find(")", pos1);
+            int pos2 = s.indexOf(")", pos1);
             d_user_function_params << s.mid(pos1+4, pos2-pos1-4);
 		}
 	}
@@ -1000,7 +1000,7 @@ void FitDialog::pasteExpression()
 	QString f = explainBox->text();
 	if (categoryBox->currentRow() == 2)
 	{//basic parser function
-		f = f.left(f.find("(", 0)+1);
+		f = f.left(f.indexOf("(", 0)+1);
 		if (editBox->hasSelectedText())
 		{
 			QString markedText=editBox->selectedText();

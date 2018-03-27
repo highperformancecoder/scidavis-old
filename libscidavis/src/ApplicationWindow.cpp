@@ -1582,7 +1582,7 @@ void ApplicationWindow::updateTableNames(const QString& oldName, const QString& 
 		else if (w->inherits("Graph3D"))
 		{
 			QString name = ((Graph3D*)w)->formula();
-			if (name.contains(oldName,true))
+			if (name.contains(oldName,Qt::CaseSensitive))
 			{
 				name.replace(oldName,newName);
 				((Graph3D*)w)->setPlotAssociation(name);
@@ -1879,7 +1879,7 @@ Graph3D* ApplicationWindow::newPlot3D(const QString& formula, double xl, double 
 
 void ApplicationWindow::updateSurfaceFuncList(const QString& s)
 {
-	surfaceFunc.remove(s);
+	surfaceFunc.removeAll(s);
 	surfaceFunc.push_front(s);
 	while ((int)surfaceFunc.size() > 10)
 		surfaceFunc.pop_back();
@@ -1928,18 +1928,18 @@ Graph3D* ApplicationWindow::dataPlot3D(Table* table, const QString& colName)
 Graph3D* ApplicationWindow::dataPlot3D(const QString& caption,const QString& formula,
 		double xl, double xr, double yl, double yr, double zl, double zr)
 {
-	int pos=formula.find("_",0);
+	int pos=formula.indexOf("_",0);
 	QString wCaption=formula.left(pos);
 
 	Table* w=table(wCaption);
 	if (!w)
 		return 0;
 
-	int posX=formula.find("(",pos);
+	int posX=formula.indexOf("(",pos);
 	QString xCol=formula.mid(pos+1,posX-pos-1);
 
-	pos=formula.find(",",posX);
-	posX=formula.find("(",pos);
+	pos=formula.indexOf(",",posX);
+	posX=formula.indexOf("(",pos);
 	QString yCol=formula.mid(pos+1,posX-pos-1);
 
 	Graph3D *plot = new Graph3D("", d_workspace, 0);
@@ -2006,23 +2006,23 @@ Graph3D* ApplicationWindow::dataPlotXYZ(Table* table, const QString& zColName, i
 Graph3D* ApplicationWindow::dataPlotXYZ(const QString& caption,const QString& formula,
 		double xl, double xr, double yl, double yr, double zl, double zr)
 {
-	int pos=formula.find("_",0);
+	int pos=formula.indexOf("_",0);
 	QString wCaption=formula.left(pos);
 
 	Table* w=table(wCaption);
 	if (!w)
 		return 0;
 
-	int posX=formula.find("(X)",pos);
+	int posX=formula.indexOf("(X)",pos);
 	QString xColName=formula.mid(pos+1,posX-pos-1);
 
-	pos=formula.find(",",posX);
+	pos=formula.indexOf(",",posX);
 
-	posX=formula.find("(Y)",pos);
+	posX=formula.indexOf("(Y)",pos);
 	QString yColName=formula.mid(pos+1,posX-pos-1);
 
-	pos=formula.find(",",posX);
-	posX=formula.find("(Z)",pos);
+	pos=formula.indexOf(",",posX);
+	posX=formula.indexOf("(Z)",pos);
 	QString zColName=formula.mid(pos+1,posX-pos-1);
 
 	int xCol=w->colIndex(xColName);
@@ -2316,31 +2316,31 @@ MultiLayer* ApplicationWindow::multilayerPlot(const QStringList& colList)
 	for (int i=0; i<curves; i++)
 	{
 		QString s = colList[i];
-		int pos = s.find(":", 0);
+		int pos = s.indexOf(":", 0);
 		QString caption = s.left(pos) + "_";
 		Table *w = (Table *)table(caption);
 
-		int posX = s.find("(X)", pos);
+		int posX = s.indexOf("(X)", pos);
 		QString xColName = caption+s.mid(pos+2, posX-pos-2);
 		int xCol=w->colIndex(xColName);
 
-		posX = s.find(",", posX);
-		int posY = s.find("(Y)", posX);
+		posX = s.indexOf(",", posX);
+		int posY = s.indexOf("(Y)", posX);
 		QString yColName = caption+s.mid(posX+2, posY-posX-2);
 
 		if (s.contains("(yErr)") || s.contains("(xErr)"))
 		{
-			posY = s.find(",", posY);
+			posY = s.indexOf(",", posY);
 			int posErr, errType;
 			if (s.contains("(yErr)"))
 			{
 				errType = QwtErrorPlotCurve::Vertical;
-				posErr = s.find("(yErr)", posY);
+				posErr = s.indexOf("(yErr)", posY);
 			}
 			else
 			{
 				errType = QwtErrorPlotCurve::Horizontal;
-				posErr = s.find("(xErr)",posY);
+				posErr = s.indexOf("(xErr)",posY);
 			}
 
 			QString errColName = caption+s.mid(posY+2, posErr-posY-2);
@@ -2786,7 +2786,7 @@ QWidget* ApplicationWindow::window(const QString& name)
 
 Table* ApplicationWindow::table(const QString& name)
 {
-	int pos = name.find("_", 0);
+	int pos = name.indexOf("_", 0);
 	QString caption = name.left(pos);
 
 	QList<QWidget*> *lst = windowsList();
@@ -3525,7 +3525,7 @@ void ApplicationWindow::openRecentProject()
 	QAction *trigger = qobject_cast<QAction*>(sender());
 	if (!trigger) return;
 	QString fn = trigger->text();
-	int pos = fn.find(" ",0);
+	int pos = fn.indexOf(" ",0);
 	fn = fn.right(fn.length()-pos-1);
 
 	QFile f(fn);
@@ -3535,7 +3535,7 @@ void ApplicationWindow::openRecentProject()
 				tr("The file: <b> %1 </b> <p>does not exist anymore!"
 					"<p>It will be removed from the list.").arg(fn));
 
-		recentProjects.remove(fn);
+		recentProjects.removeAll(fn);
         updateRecentProjectsList();
 		return;
 	}
@@ -3904,7 +3904,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
       return false;
     }
 
-  logInfo=logInfo.remove ("</log>\n", false);
+  logInfo=logInfo.remove ("</log>\n", Qt::CaseInsensitive);
 
   folders->setCurrentItem(cf->folderListItem());
   folders->blockSignals (false);
@@ -3918,7 +3918,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
   executeNotes();
   savedProject();
 
-  recentProjects.remove(fn);
+  recentProjects.removeAll(fn);
   recentProjects.push_front(fn);
   updateRecentProjectsList();
 
@@ -4020,8 +4020,8 @@ void ApplicationWindow::openTemplate()
 	{
 		QFileInfo fi(fn);
 		templatesDir = fi.dirPath(true);
-		if (fn.contains(".qmt",true) || fn.contains(".qpt",true) ||
-				fn.contains(".qtt",true) || fn.contains(".qst",true))
+		if (fn.contains(".qmt",Qt::CaseSensitive) || fn.contains(".qpt",Qt::CaseSensitive) ||
+				fn.contains(".qtt",Qt::CaseSensitive) || fn.contains(".qst",Qt::CaseSensitive))
 		{
 			if (!fi.exists())
 			{
@@ -5053,7 +5053,7 @@ void ApplicationWindow::saveProjectAs()
 
 		if (saveProject())
 		{
-			recentProjects.remove(fn);
+			recentProjects.removeAll(fn);
 			recentProjects.push_front(fn);
 			updateRecentProjectsList();
 
@@ -7870,14 +7870,14 @@ QStringList ApplicationWindow::dependingPlots(const QString& name)
 			{
 				Graph *g = (Graph *)widget;
 				onPlot = g->curvesList();
-				onPlot = onPlot.grep(name, true);
+				onPlot = onPlot.filter(name, Qt::CaseSensitive);
 				if (onPlot.count() > 0 && plots.contains(w->name()) <= 0 )
 					plots << w->name();
 			}
 		}
 		else if (w->inherits("Graph3D"))
 		{
-			if ((((Graph3D*)w)->formula()).contains(name,TRUE) && plots.contains(w->name())<=0)
+			if ((((Graph3D*)w)->formula()).contains(name,Qt::CaseSensitive) && plots.contains(w->name())<=0)
 				plots << w->name();
 		}
 	}
@@ -8416,10 +8416,10 @@ void ApplicationWindow::updateFunctionLists(int type, QStringList &formulas)
 	int maxListSize = 10;
 	if (type == 2)
 	{
-		rFunctions.remove(formulas[0]);
+		rFunctions.removeAll(formulas[0]);
 		rFunctions.push_front(formulas[0]);
 
-		thetaFunctions.remove(formulas[1]);
+		thetaFunctions.removeAll(formulas[1]);
 		thetaFunctions.push_front(formulas[1]);
 
 		while ((int)rFunctions.size() > maxListSize)
@@ -8429,10 +8429,10 @@ void ApplicationWindow::updateFunctionLists(int type, QStringList &formulas)
 	}
 	else if (type == 1)
 	{
-		xFunctions.remove(formulas[0]);
+		xFunctions.removeAll(formulas[0]);
 		xFunctions.push_front(formulas[0]);
 
-		yFunctions.remove(formulas[1]);
+		yFunctions.removeAll(formulas[1]);
 		yFunctions.push_front(formulas[1]);
 
 		while ((int)xFunctions.size() > maxListSize)
@@ -9565,7 +9565,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains ("AxesNumberColors"))
 		{
-			QStringList fList=QStringList::split ("\t",s,TRUE);
+			QStringList fList=s.split("\t", QString::KeepEmptyParts);
 			fList.pop_front();
 			ag->setAxesNumColors(fList);
 		}
@@ -9583,7 +9583,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			QStringList curve=s.split("\t");
 			if (!app->renamedTables.isEmpty())
 			{
-				QString caption = (curve[1]).left((curve[1]).find("_",0));
+				QString caption = (curve[1]).left((curve[1]).indexOf("_",0));
 				if (app->renamedTables.contains(caption))
 				{//modify the name of the curve according to the new table name
 					int index = app->renamedTables.indexOf(caption);
@@ -9622,7 +9622,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                     {
                       if (!app->renamedTables.isEmpty())
                         {
-                          QString caption = (curve[2]).left((curve[2]).find("_",0));
+                          QString caption = (curve[2]).left((curve[2]).indexOf("_",0));
 
                           if (app->renamedTables.contains(caption))
                             {//modify the name of the curve according to the new table name
@@ -9936,7 +9936,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		else if (s.contains ("AxesFormulas"))
 		{
 			QStringList fList=s.split("\t");
-			fList.remove(fList.first());
+			fList.removeAll(fList.first());
 			ag->setAxesFormulas(fList);
 		}
 		else if (s.startsWith("<AxisFormula "))
@@ -9985,22 +9985,22 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains ("Legend"))
 		{// version <= 0.8.9
-			QStringList fList=QStringList::split ("\t",s, true);
+			QStringList fList=s.split("\t", QString::KeepEmptyParts);
 			ag->insertLegend(fList, d_file_version);
 		}
 		else if (s.startsWith ("<legend>") && s.endsWith ("</legend>"))
 		{
-			QStringList fList=QStringList::split ("\t", s.remove("</legend>"), true);
+			QStringList fList=s.remove("</legend>").split("\t", QString::KeepEmptyParts);
 			ag->insertLegend(fList, d_file_version);
 		}
 		else if (s.contains ("textMarker"))
 		{// version <= 0.8.9
-			QStringList fList=QStringList::split ("\t",s, true);
+			QStringList fList=s.split("\t", QString::KeepEmptyParts);
 			ag->insertTextMarker(fList, d_file_version);
 		}
 		else if (s.startsWith ("<text>") && s.endsWith ("</text>"))
 		{
-			QStringList fList=QStringList::split ("\t", s.remove("</text>"), true);
+			QStringList fList=s.remove("</text>").split("\t", QString::KeepEmptyParts);
 			ag->insertTextMarker(fList, d_file_version);
 		}
 		else if (s.contains ("lineMarker"))
@@ -10092,13 +10092,13 @@ Graph3D* ApplicationWindow::openSurfacePlot(ApplicationWindow* app, const QStrin
 	fList=lst[2].split("\t", QString::SkipEmptyParts);
 	Graph3D *plot=0;
 
-	if (fList[1].endsWith("(Y)",true))//Ribbon plot
+	if (fList[1].endsWith("(Y)",Qt::CaseSensitive))//Ribbon plot
 		plot=app->dataPlot3D(caption, fList[1],fList[2].toDouble(),fList[3].toDouble(),
 				fList[4].toDouble(),fList[5].toDouble(),fList[6].toDouble(),fList[7].toDouble());
-	else if (fList[1].contains("(Z)",true) > 0)
+	else if (fList[1].contains("(Z)",Qt::CaseSensitive) > 0)
 		plot=app->dataPlotXYZ(caption, fList[1], fList[2].toDouble(),fList[3].toDouble(),
 				fList[4].toDouble(),fList[5].toDouble(),fList[6].toDouble(),fList[7].toDouble());
-	else if (fList[1].startsWith("matrix<",true) && fList[1].endsWith(">",false))
+	else if (fList[1].startsWith("matrix<",Qt::CaseSensitive) && fList[1].endsWith(">",Qt::CaseInsensitive))
 		plot=app->openMatrixPlot3D(caption, fList[1], fList[2].toDouble(),fList[3].toDouble(),
 				fList[4].toDouble(),fList[5].toDouble(),fList[6].toDouble(),fList[7].toDouble());
 	else
@@ -11494,7 +11494,7 @@ Graph3D * ApplicationWindow::openMatrixPlot3D(const QString& caption, const QStr
 		double xl,double xr,double yl,double yr,double zl,double zr)
 {
 	QString name = matrix_name;
-	name.remove("matrix<", true);
+	name.remove("matrix<", Qt::CaseSensitive);
 	name.remove(">");
 	Matrix* m = matrix(name);
 	if (!m)
@@ -11611,7 +11611,7 @@ ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
         app->setWindowTitle("SciDAVis - " + filename);
         app->showMaximized();
         app->projectname = filename;
-        app->recentProjects.remove(filename);
+        app->recentProjects.removeAll(filename);
         app->recentProjects.push_front(filename);
         app->updateRecentProjectsList();
 
@@ -11623,7 +11623,7 @@ ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
     else if (filename.endsWith(".ogm", Qt::CaseInsensitive) || filename.endsWith(".ogw", Qt::CaseInsensitive))
     {
 		ImportOPJ(this, filename);
-        recentProjects.remove(filename);
+        recentProjects.removeAll(filename);
         recentProjects.push_front(filename);
         updateRecentProjectsList();
         return this;
@@ -11907,7 +11907,7 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
 		}
 		else if (str.startsWith("--lang=") || str.startsWith("-l="))
 		{
-			QString locale = str.mid(str.find('=')+1);
+			QString locale = str.mid(str.indexOf('=')+1);
 			if (locales.contains(locale))
 				switchToLanguage(locale);
 
@@ -12007,8 +12007,8 @@ void ApplicationWindow::createLanguagesList()
         for (int i=0; i < (int)fileNames.size(); i++)
           {
             QString locale = fileNames[i];
-            locale = locale.mid(locale.find('_')+1);
-            locale.truncate(locale.find('.'));
+            locale = locale.mid(locale.indexOf('_')+1);
+            locale.truncate(locale.indexOf('.'));
             locales.push_back(locale);
           }
 	locales.push_back("en");
@@ -12182,7 +12182,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 		file->open(QIODevice::ReadOnly);
 	}
 
-    recentProjects.remove(fn);
+    recentProjects.removeAll(fn);
     recentProjects.push_front(fn);
     updateRecentProjectsList();
 
@@ -12664,7 +12664,7 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString
 	}
 
 	QStringList lst = parent->subfolders();
-	lst.remove(current_folder->name());
+	lst.removeAll(current_folder->name());
 	while(lst.contains(text))
 	{
 		QMessageBox::critical(this,tr("Error"),
@@ -12842,7 +12842,7 @@ void ApplicationWindow::addFolder()
 {
 	QStringList lst = current_folder->subfolders();
 	QString name =  tr("New Folder");
-	lst = lst.grep( name );
+	lst = lst.filter( name );
 	if (!lst.isEmpty())
 		name += " ("+ QString::number(lst.size()+1)+")";
 

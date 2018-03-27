@@ -2040,11 +2040,11 @@ bool PlotDialog::validInput()
 	to = to.remove(".");
 	step = step.remove(".");
 
-	int pos=from.find("-",0);
+	int pos=from.indexOf("-",0);
 	if(pos==0)
 		from=from.replace(pos,1,"");
 
-	pos=to.find("-",0);
+	pos=to.indexOf("-",0);
 	if(pos==0)
 		to=to.replace(pos,1,"");
 
