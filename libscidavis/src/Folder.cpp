@@ -192,8 +192,7 @@ FolderListItem::FolderListItem( QTreeWidget *parent, Folder *f )
     setText( 0, f->name() );
 	setExpanded( true );
 	setActive( true );
-	setDragEnabled ( true );
-	setDropEnabled ( true );
+	setFlags(flags() | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled);
 }
 
 FolderListItem::FolderListItem( FolderListItem *parent, Folder *f )
@@ -263,7 +262,7 @@ if (!item)
 if (item == topLevelItem(0) && item->treeWidget()->rootIsDecorated())
 	return;//it's the project folder so we don't want the user to move it
 
-viewportToContents( viewport()->mapFromGlobal( QCursor::pos() ) );
+// Q3CHECK viewportToContents( viewport()->mapFromGlobal( QCursor::pos() ) );
 
 QPixmap pix;
 if (item->type() == FolderListItem::FolderType)
@@ -285,12 +284,12 @@ while (*it)
 	}
 
 emit dragItems(lst);
-drag->drag();
+drag->exec();
 }
 
 void FolderListView::contentsDropEvent( QDropEvent *e )
 {
-QTreeWidgetItem *dest = itemAt( contentsToViewport(e->pos()) );
+QTreeWidgetItem *dest = itemAt( e->pos() );
 if ( dest && dest->type() == FolderListItem::FolderType)
 	{
 	emit dropItems(dest);
@@ -325,9 +324,9 @@ else if (e->key() == Qt::Key_F2)
 		emit renameItem(item);
 	e->accept();
 	}
-else if(e->key() == Qt::Key_A && e->state() == Qt::ControlModifier)
+else if(e->key() == Qt::Key_A && e->modifiers() == Qt::ControlModifier)
 	{
-	selectAll(true);
+	selectAll();
 	e->accept();
 	}
 else if(e->key() == Qt::Key_F7)
@@ -352,25 +351,25 @@ void FolderListView::contentsMouseDoubleClickEvent( QMouseEvent* e )
 		return;
 		}
 
-	QTreeWidget::contentsMouseDoubleClickEvent( e );
+	QTreeWidget::mouseDoubleClickEvent( e );
 }
 
 void FolderListView::contentsMousePressEvent( QMouseEvent* e )
 {
-QTreeWidget::contentsMousePressEvent(e);
+QTreeWidget::mousePressEvent(e);
 if (e->button() != Qt::LeftButton) return;
-QPoint p( contentsToViewport( e->pos() ) );
+QPoint p(e->pos()); // Q3CHECK  contentsToViewport( e->pos() ) );
 QTreeWidgetItem *i = itemAt( p );
 
 if ( i )
 		{// if the user clicked into the root decoration of the item, don't try to start a drag!
-		if ( p.x() > header()->cellPos( header()->mapToActual( 0 ) ) +
-			treeStepSize() * ( i->depth() + ( rootIsDecorated() ? 1 : 0) ) + itemMargin() ||
-			p.x() < header()->cellPos( header()->mapToActual( 0 ) ) )
-			{
+		// Q3CHECK if ( p.x() > header()->cellPos( header()->mapToActual( 0 ) ) +
+		// 	treeStepSize() * ( i->depth() + ( rootIsDecorated() ? 1 : 0) ) + itemMargin() ||
+		// 	p.x() < header()->cellPos( header()->mapToActual( 0 ) ) )
+		// 	{
 			presspos = e->pos();
 	    	mousePressed = true;
-			}
+		//	}
     	}
 }
 
@@ -379,7 +378,7 @@ void FolderListView::contentsMouseMoveEvent( QMouseEvent* e )
 if ( mousePressed && ( presspos - e->pos() ).manhattanLength() > QApplication::startDragDistance() )
 	{
 	mousePressed = false;
-	QTreeWidgetItem *item = itemAt( contentsToViewport(presspos) );
+	QTreeWidgetItem *item = itemAt( presspos ); // Q3CHECK contentsToViewport(presspos) );
 	if ( item )
 		startDrag();
     }
@@ -402,5 +401,5 @@ WindowListItem::WindowListItem( QTreeWidget *parent, MyWidget *w )
 {
     myWindow = w;
 
-	setDragEnabled ( true );
+	setFlags(flags() | Qt::ItemIsDragEnabled);
 }
