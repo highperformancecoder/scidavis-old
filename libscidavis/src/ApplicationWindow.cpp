@@ -233,13 +233,13 @@ ApplicationWindow::ApplicationWindow()
 	explorerWindow->setMinimumHeight(150);
 	addDockWidget( Qt::BottomDockWidgetArea, explorerWindow );
 
-	folders->header()->setClickEnabled( false );
-	folders->addColumn( tr("Folder") );
+	folders->header()->setClickable( false );
+	folders->setHeaderLabel( tr("Folder") );
 	folders->setRootIsDecorated( true );
-	folders->setResizeMode(QTreeWidget::LastColumn);
+	folders->header()->setStretchLastSection(true);
 	folders->header()->hide();
-	folders->setSelectionMode(QTreeWidget::Single);
-	folders->setDefaultRenameAction(QTreeWidget::Accept);
+	folders->setSelectionMode(QTreeWidget::SingleSelection);
+	// Q3CHECK folders->setDefaultRenameAction(QTreeWidget::Accept);
 
 	connect(folders, SIGNAL(currentChanged(QTreeWidgetItem *)),
 			this, SLOT(folderItemChanged(QTreeWidgetItem *)));
@@ -260,15 +260,11 @@ ApplicationWindow::ApplicationWindow()
 	current_folder->setFolderListItem(fli);
 	fli->setExpanded( true );
 
-	lv->addColumn (tr("Name"),-1 );
-	lv->addColumn (tr("Type"),-1 );
-	lv->addColumn (tr("View"),-1 );
-	lv->addColumn (tr("Created"),-1);
-	lv->addColumn (tr("Label"),-1);
-	lv->setResizeMode(QTreeWidget::LastColumn);
+	lv->setHeaderLabels(QStringList() << tr("Name") << tr("Type") << tr("View") << tr("Created") << tr("Label"));
+	lv->header()->setStretchLastSection(true);
 	lv->setMinimumHeight(80);
-	lv->setSelectionMode(QTreeWidget::Extended);
-	lv->setDefaultRenameAction(QTreeWidget::Accept);
+	lv->setSelectionMode(QTreeWidget::ExtendedSelection);
+	// Q3CHECK lv->setDefaultRenameAction(QTreeWidget::Accept);
 
 	explorerSplitter->addWidget(folders);
 	explorerSplitter->addWidget(lv);

@@ -373,8 +373,8 @@ if ( mousePressed && ( presspos - e->pos() ).manhattanLength() > QApplication::s
 
 void FolderListView::adjustColumns()
 {
-for (int i=0; i < columns (); i++)
-	adjustColumn(i);
+for (int i=0; i < columnCount (); i++)
+	resizeColumnToContents(i);
 }
 
 /*****************************************************************************
