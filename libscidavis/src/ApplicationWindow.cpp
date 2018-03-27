@@ -9059,9 +9059,9 @@ void ApplicationWindow::pixelLineProfile()
 		return;
 
 	bool ok;
-	int res = QInputDialog::getInteger(
+	int res = QInputDialog::getInteger(this,
 			tr("Set the number of pixels to average"), tr("Number of averaged pixels"),1, 1, 2000, 2,
-			&ok, this );
+			&ok);
 	if ( !ok )
 		return;
 
@@ -11828,8 +11828,8 @@ void ApplicationWindow::fitMultiPeak(int profile)
 	else
 	{
 		bool ok;
-		int peaks = QInputDialog::getInteger(tr("Enter the number of peaks"),
-				tr("Peaks"), 2, 2, 1000000, 1, &ok, this);
+		int peaks = QInputDialog::getInteger(this, tr("Enter the number of peaks"),
+				tr("Peaks"), 2, 2, 1000000, 1, &ok);
 		if (ok && peaks)
 		{
 			g->setActiveTool(new MultiPeakFitTool(g, this, (MultiPeakFit::PeakProfile)profile, peaks, d_status_info, SLOT(setText(const QString&))));
