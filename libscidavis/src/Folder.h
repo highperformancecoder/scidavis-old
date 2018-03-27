@@ -44,6 +44,7 @@
 #include "MyWidget.h"
 
 class FolderListItem;
+class FolderListView;
 class Table;
 class Matrix;
 class MultiLayer;
@@ -153,8 +154,11 @@ class WindowListItem : public QTreeWidgetItem
 public:
     WindowListItem( QTreeWidget *parent, MyWidget *w );
     static const int WindowType = QTreeWidgetItem::UserType+2;
+    void setData(int, int, const QVariant&);
 
     MyWidget *window() { return myWindow; };
+
+    FolderListView* folderListView() { return (FolderListView*)treeWidget(); };
 
 protected:
     MyWidget *myWindow;
@@ -175,9 +179,13 @@ public:
 	static const int FolderType = QTreeWidgetItem::UserType+1;
 
 	void setActive( bool o );
+	void setData(int, int, const QVariant&);
 
     Folder *folder() { return myFolder; };
 	int depth();
+
+	FolderListView* folderListView() { return (FolderListView*)treeWidget(); };
+
 
 	//! Checks weather the folder item is a grandchild of the source folder
 	/**
@@ -198,6 +206,9 @@ protected:
 class FolderListView : public QTreeWidget
 {
     Q_OBJECT
+
+	friend class FolderListItem;
+	friend class WindowListItem;
 
 public:
 	FolderListView(QWidget *parent = 0, const QString name = QString() );
@@ -220,7 +231,8 @@ protected:
 signals:
 	void dragItems(QList<QTreeWidgetItem *> items);
 	void dropItems(QTreeWidgetItem *dest);
-	void renameItem(QTreeWidgetItem *item);
+	void renameItem(QTreeWidgetItem *item, int);
+	void itemRenamed(QTreeWidgetItem *item, int, const QString&);
 	void addFolderItem();
 	void deleteSelection();
 

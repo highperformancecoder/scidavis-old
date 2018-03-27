@@ -240,6 +240,14 @@ int FolderListItem::depth()
 	return c;
 }
 
+void FolderListItem::setData( int column, int role, const QVariant& value)
+{
+    if (role == Qt::EditRole)
+    {
+        emit this->folderListView()->itemRenamed(this, column, value.toString());
+    }
+    QTreeWidgetItem::setData( column, role, value);
+}
 /*****************************************************************************
  *
  * Class FolderListView
@@ -322,7 +330,7 @@ if (item->type() == FolderListItem::FolderType &&
 else if (e->key() == Qt::Key_F2)
 	{
 	if (item)
-		emit renameItem(item);
+		emit renameItem(item,0);
 	e->accept();
 	}
 else if(e->key() == Qt::Key_A && e->modifiers() == Qt::ControlModifier)
@@ -403,4 +411,13 @@ WindowListItem::WindowListItem( QTreeWidget *parent, MyWidget *w )
     myWindow = w;
 
 	setFlags(flags() | Qt::ItemIsDragEnabled);
+}
+
+void WindowListItem::setData( int column, int role, const QVariant& value)
+{
+    if (role == Qt::EditRole)
+    {
+        emit this->folderListView()->itemRenamed(this, column, value.toString());
+    }
+    QTreeWidgetItem::setData( column, role, value);
 }
