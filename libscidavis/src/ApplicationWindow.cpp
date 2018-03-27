@@ -5142,7 +5142,7 @@ void ApplicationWindow::renameWindow(QTreeWidgetItem *item, int, const QString &
 	while(!renameWindow(w, text))
 	{
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
-		item->startRename (0);
+		item->treeWidget()->editItem(item, 0); // Q3CHECK item->startRename (0);
 		return;
 	}
 }
@@ -12618,7 +12618,7 @@ void ApplicationWindow::startRenameFolder()
 
 	disconnect(folders, SIGNAL(currentChanged(QTreeWidgetItem *)), this, SLOT(folderItemChanged(QTreeWidgetItem *)));
 	fi->setFlags(fi->flags() | Qt::ItemIsEditable);
-	fi->startRename (0);
+	fi->treeWidget()->editItem(0); // Q3CHECK fi->startRename (0);
 }
 
 void ApplicationWindow::startRenameFolder(QTreeWidgetItem *item)
@@ -12632,12 +12632,12 @@ void ApplicationWindow::startRenameFolder(QTreeWidgetItem *item)
 		current_folder = ((FolderListItem *)item)->folder();
 		FolderListItem *it = current_folder->folderListItem();
 		it->setFlags(it->flags() | Qt::ItemIsEditable);
-		it->startRename (0);
+		it->treeWidget()->editItem(0); // Q3CHECK it->startRename (0);
 	}
 	else
 	{
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
-		item->startRename (0);
+		item->treeWidget()->editItem(0); // Q3CHECK item->startRename (0);
 	}
 }
 
@@ -12656,7 +12656,7 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString
 	{
 		QMessageBox::critical(this,tr("Error"), tr("Please enter a valid name!"));
 		it->setFlags(it->flags() | Qt::ItemIsEditable);
-		it->startRename (0);
+		it->treeWidget()->editItem(it, 0); // Q3CHECK it->startRename (0);
 		return;
 	}
 
@@ -12668,7 +12668,7 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString
 				tr("Name already exists!")+"\n"+tr("Please choose another name!"));
 
 		it->setFlags(it->flags() | Qt::ItemIsEditable);
-		it->startRename (0);
+		it->treeWidget()->editItem(it, 0); // Q3CHECK it->startRename (0);
 		return;
 	}
 
@@ -12855,7 +12855,7 @@ void ApplicationWindow::addFolder()
 	{
 		f->setFolderListItem(fi);
 		fi->setFlags(fi->flags() | Qt::ItemIsEditable);
-		fi->startRename(0);
+		fi->treeWidget()->editItem(0); // Q3CHECK fi->startRename(0);
 	}
 }
 
