@@ -240,8 +240,8 @@ void IntDialog::activateCurve(const QString& curveName)
 
   double start, end;
   graph->range(graph->curveIndex(curveName), &start, &end);
-  boxStart->setText(QString::number(QMIN(start, end), 'g', app->d_decimal_digits));
-  boxEnd->setText(QString::number(QMAX(start, end), 'g', app->d_decimal_digits));
+  boxStart->setText(QString::number(qMin(start, end), 'g', app->d_decimal_digits));
+  boxEnd->setText(QString::number(qMax(start, end), 'g', app->d_decimal_digits));
 };
 
 void IntDialog::changeDataRange()
@@ -252,8 +252,8 @@ if(!app)
 
 double start = graph->selectedXStartValue();
 double end = graph->selectedXEndValue();
-boxStart->setText(QString::number(QMIN(start, end), 'g', app->d_decimal_digits));
-boxEnd->setText(QString::number(QMAX(start, end), 'g', app->d_decimal_digits));
+boxStart->setText(QString::number(qMin(start, end), 'g', app->d_decimal_digits));
+boxEnd->setText(QString::number(qMax(start, end), 'g', app->d_decimal_digits));
 }
 
 void IntDialog::help()

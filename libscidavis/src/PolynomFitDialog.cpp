@@ -156,6 +156,6 @@ void PolynomFitDialog::changeDataRange()
 {
 	double start = graph->selectedXStartValue();
 	double end = graph->selectedXEndValue();
-	boxStart->setText(QString::number(QMIN(start, end), 'g', 15));
-	boxEnd->setText(QString::number(QMAX(start, end), 'g', 15));
+	boxStart->setText(QString::number(qMin(start, end), 'g', 15));
+	boxEnd->setText(QString::number(qMax(start, end), 'g', 15));
 }

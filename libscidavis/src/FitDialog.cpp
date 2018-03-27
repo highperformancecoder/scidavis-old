@@ -532,8 +532,8 @@ void FitDialog::activateCurve(const QString& curveName)
 
 	double start, end;
     d_graph->range(d_graph->curveIndex(curveName), &start, &end);
-    boxFrom->setText(QLocale().toString(QMIN(start, end), 'g', 15));
-    boxTo->setText(QLocale().toString(QMAX(start, end), 'g', 15));
+    boxFrom->setText(QLocale().toString(qMin(start, end), 'g', 15));
+    boxTo->setText(QLocale().toString(qMax(start, end), 'g', 15));
 };
 
 void FitDialog::saveUserFunction()
@@ -1315,8 +1315,8 @@ void FitDialog::changeDataRange()
 {
 	double start = d_graph->selectedXStartValue();
 	double end = d_graph->selectedXEndValue();
-	boxFrom->setText(QString::number(QMIN(start, end), 'g', 15));
-	boxTo->setText(QString::number(QMAX(start, end), 'g', 15));
+	boxFrom->setText(QString::number(qMin(start, end), 'g', 15));
+	boxTo->setText(QString::number(qMax(start, end), 'g', 15));
 }
 
 void FitDialog::setSrcTables(QWidgetList* tables)

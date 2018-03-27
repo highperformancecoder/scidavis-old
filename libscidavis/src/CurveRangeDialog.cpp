@@ -85,7 +85,7 @@ void CurveRangeDialog::accept()
 
 	int start = boxStart->value() - 1;
 	int end = boxEnd->value() - 1;
-	d_curve->setRowRange(QMIN(start, end), QMAX(start, end));
+	d_curve->setRowRange(qMin(start, end), qMax(start, end));
 	d_graph->updatePlot();
 	d_graph->notifyChanges();
 	close();
@@ -104,8 +104,8 @@ void CurveRangeDialog::setCurveToModify(Graph *g, int curve)
     Table *t = d_curve->table();
 	if (t)
 	{
-		boxStart->setMaxValue(t->numRows());
-		boxEnd->setMaxValue(t->numRows());
+		boxStart->setMaximum(t->numRows());
+		boxEnd->setMaximum(t->numRows());
 	}
 
 	boxName->setText(d_curve->title().text());

@@ -619,7 +619,7 @@ void AxesDialog::changeMajorTicksLength (int majLength)
 		return;
 
 	d_graph->changeTicksLength(boxMinorTicksLength->value(), majLength);
-	boxMinorTicksLength->setMaxValue(majLength);
+	boxMinorTicksLength->setMaximum(majLength);
 }
 
 void AxesDialog::drawAxesBackbones(bool draw)
@@ -1428,11 +1428,11 @@ void AxesDialog::updateScale()
 	int a = Graph::mapToQwtAxis(axis);
 	const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(a);
 #if QWT_VERSION >= 0x050200
-	boxStart->setText(QString::number(QMIN(scDiv->lowerBound(), scDiv->upperBound())));
-	boxEnd->setText(QString::number(QMAX(scDiv->lowerBound(), scDiv->upperBound())));
+	boxStart->setText(QString::number(qMin(scDiv->lowerBound(), scDiv->upperBound())));
+	boxEnd->setText(QString::number(qMax(scDiv->lowerBound(), scDiv->upperBound())));
 #else
-	boxStart->setText(QString::number(QMIN(scDiv->lBound(), scDiv->hBound())));
-	boxEnd->setText(QString::number(QMAX(scDiv->lBound(), scDiv->hBound())));
+	boxStart->setText(QString::number(qMin(scDiv->lBound(), scDiv->hBound())));
+	boxEnd->setText(QString::number(qMax(scDiv->lBound(), scDiv->hBound())));
 #endif
 
 	QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
