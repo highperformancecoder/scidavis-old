@@ -128,7 +128,7 @@ void RenameWindowDialog::accept()
 {
 	QString name = window->name();
 	QString text = boxNameLine->text().remove("=").remove(QRegExp("\\s"));
-	QString label = boxLabelEdit->text();
+	QString label = boxLabelEdit->toPlainText();
 
 	MyWidget::CaptionPolicy policy = getCaptionPolicy();
 	if (text == name && label == window->windowLabel() && window->captionPolicy() == policy)

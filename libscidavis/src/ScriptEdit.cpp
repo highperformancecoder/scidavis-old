@@ -41,16 +41,16 @@
 #include <QTextStream>
 
 ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, QString name)
-  : QTextEdit(parent, name), scripted(env), d_error(false), d_changing_fmt(false)
+  : QTextEdit(parent), scripted(env), d_error(false), d_changing_fmt(false)
 {
+	setObjectName(name);
 	myScript = scriptEnv->newScript("", this, name);
 	connect(myScript, SIGNAL(error(const QString&,const QString&,int)), this, SLOT(insertErrorMsg(const QString&)));
 	connect(myScript, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
 
 	setLineWrapMode(NoWrap);
-	setTextFormat(Qt::PlainText);
 	setAcceptRichText (false);
-	setFamily("Monospace");
+	setFontFamily("Monospace");
 
 	d_fmt_default.setBackground(palette().brush(QPalette::Base));
 	d_fmt_success.setBackground(QBrush(QColor(128, 255, 128)));
@@ -248,7 +248,7 @@ bool ScriptEdit::executeAll()
 	QString fname = "<%1>";
 	fname = fname.arg(name());
 	myScript->setName(fname);
-	myScript->setCode(text());
+	myScript->setCode(toPlainText());
 	printCursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
 	return myScript->exec();
 }
@@ -333,7 +333,7 @@ QString ScriptEdit::importASCII(const QString &filename)
 	QTextStream s(&file);
 	s.setEncoding(QTextStream::UnicodeUTF8);
 	while (!s.atEnd())
-		insert(s.readLine()+"\n");
+		insertPlainText(s.readLine()+"\n");
 	file.close();
 	return f;
 }
@@ -371,7 +371,7 @@ QString ScriptEdit::exportASCII(const QString &filename)
 			
 		QTextStream t( &f );
 		t.setEncoding(QTextStream::UnicodeUTF8);
-		t << text();
+		t << toPlainText();
 		f.close();
 	}
 	return fn;

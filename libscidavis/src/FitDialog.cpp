@@ -283,7 +283,7 @@ void FitDialog::initEditPage()
     gb->setLayout(gl2);
 
 	editBox = new QTextEdit();
-	editBox->setTextFormat(Qt::PlainText);
+	editBox->setAcceptRichText(false);
 	editBox->setFocus();
 
     QVBoxLayout *vbox1 = new QVBoxLayout();
@@ -538,7 +538,7 @@ void FitDialog::activateCurve(const QString& curveName)
 
 void FitDialog::saveUserFunction()
 {
-	if (editBox->text().isEmpty())
+	if (editBox->toPlainText().isEmpty())
 	{
 		QMessageBox::critical(this, tr("Input function error"), tr("Please enter a valid function!"));
 		editBox->setFocus();
@@ -567,7 +567,7 @@ void FitDialog::saveUserFunction()
 		editBox->setFocus();
 		return;
 	}
-	if (editBox->text().contains(boxName->text()))
+	if (editBox->toPlainText().contains(boxName->text()))
 	{
 		QMessageBox::critical(this, tr("Input function error"),
 				tr("You can't define functions recursevely!"));
@@ -576,7 +576,7 @@ void FitDialog::saveUserFunction()
 	}
 
 	QString name = boxName->text();
-	QString f = name + "(x, " + boxParam->text() + ")=" + editBox->text().remove("\n");
+	QString f = name + "(x, " + boxParam->text() + ")=" + editBox->toPlainText().remove("\n");
 
 	if (d_user_function_names.contains(name))
 	{
@@ -688,7 +688,7 @@ void FitDialog::showFitPage()
         }
     }
 
-  boxFunction->setText(editBox->text().simplified());
+  boxFunction->setText(editBox->toPlainText().simplified());
   lblFunction->setText(boxName->text() +" (x, " + par + ")");
 
   tw->setCurrentWidget (fitPage);
@@ -717,7 +717,7 @@ void FitDialog::setFunction(bool ok)
 	if (ok)
 	{
 		boxName->setText(funcBox->currentItem()->text());
-		editBox->setText(explainBox->text());
+		editBox->setText(explainBox->toPlainText());
 
 		if (categoryBox->currentRow() == 0 && d_user_function_params.size() > 0)
 			boxParam->setText(d_user_function_params[funcBox->currentRow ()]);
@@ -997,20 +997,20 @@ void FitDialog::showExpression(int function)
 
 void FitDialog::pasteExpression()
 {
-	QString f = explainBox->text();
+	QString f = explainBox->toPlainText();
 	if (categoryBox->currentRow() == 2)
 	{//basic parser function
 		f = f.left(f.indexOf("(", 0)+1);
-		if (editBox->hasSelectedText())
+		if (editBox->textCursor().hasSelection())
 		{
-			QString markedText=editBox->selectedText();
-			editBox->insert(f+markedText+")");
+			QString markedText=editBox->textCursor().selectedText();
+			editBox->insertPlainText(f+markedText+")");
 		}
 		else
-			editBox->insert(f+")");
+			editBox->insertPlainText(f+")");
 	}
 	else
-		editBox->insert(f);
+		editBox->insertPlainText(f);
 
 	editBox->setFocus();
 }
@@ -1019,7 +1019,7 @@ void FitDialog::pasteFunctionName()
 {
 	if (!funcBox->currentItem())
 		return;
-	editBox->insert(funcBox->currentItem()->text());
+	editBox->insertPlainText(funcBox->currentItem()->text());
 	editBox->setFocus();
 }
 
@@ -1120,7 +1120,7 @@ void FitDialog::accept()
 	do {
 		found_uf = false;
 		for (i=0; i<d_user_function_names.count(); i++)
-			if (boxFunction->text().contains(d_user_function_names[i])) {
+			if (boxFunction->toPlainText().contains(d_user_function_names[i])) {
 				QStringList l = d_user_functions[i].split("=");
 				formula += QString("%1=%2\n")
 						.arg(d_user_function_names[i])
@@ -1128,7 +1128,7 @@ void FitDialog::accept()
 				found_uf = true;
 			}
 	} while (found_uf);
-	formula += boxFunction->text();
+	formula += boxFunction->toPlainText();
 
 	// define variables for builtin functions used in formula
 	for (i=0; i<d_built_in_function_names.count(); i++)

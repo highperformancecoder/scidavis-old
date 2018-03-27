@@ -74,7 +74,7 @@ s+= QString(name()) + "\t" + birthDate() + "\n";
 s+= info;
 s+= "WindowLabel\t" + windowLabel() + "\t" + QString::number(captionPolicy()) + "\n";
 s+= "AutoExec\t" + QString(autoExec ? "1" : "0") + "\n";
-s+= "<content>\n"+te->text().trimmed()+"\n</content>";
+s+= "<content>\n"+te->toPlainText().trimmed()+"\n</content>";
 s+="\n</note>\n";
 return s;
 }

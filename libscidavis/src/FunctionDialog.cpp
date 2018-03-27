@@ -301,7 +301,7 @@ bool FunctionDialog::acceptFunction()
 		return false;
 	}
 
-	QString formula = boxFunction->text().replace(QChar::ParagraphSeparator,"\n");
+	QString formula = boxFunction->toPlainText().replace(QChar::ParagraphSeparator,"\n");
 
 	// Collecting all the information
 	int type = boxType->currentIndex();

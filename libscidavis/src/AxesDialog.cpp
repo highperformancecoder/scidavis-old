@@ -393,7 +393,7 @@ void AxesDialog::initAxesPage()
 	labelBoxLayout->setSpacing(2);
 
 	boxTitle = new QTextEdit();
-	boxTitle->setTextFormat(Qt::PlainText);
+	boxTitle->setAcceptRichText(false);
 	QFontMetrics metrics(this->font());
 	boxTitle->setMaximumHeight(3*metrics.height());
 	labelBoxLayout->addWidget(boxTitle);
@@ -502,7 +502,7 @@ void AxesDialog::initAxesPage()
 	rightBoxLayout->addWidget( boxShowFormula, 6, 0 );
 
 	boxFormula = new QTextEdit();
-	boxFormula->setTextFormat(Qt::PlainText);
+	boxFormula->setAcceptRichText(false);
 	boxFormula->setMaximumHeight(3*metrics.height());
 	boxFormula->hide();
 	rightBoxLayout->addWidget( boxFormula, 6, 1 );
@@ -900,7 +900,7 @@ void AxesDialog::showAxis()
 		userFormat=false;
 	boxPrecision->setEnabled(labels && ok && userFormat);
 
-	QString formula =  boxFormula->text();
+	QString formula =  boxFormula->toPlainText();
 	if (!boxShowFormula->isChecked())
 		formula = QString();
 
@@ -1169,10 +1169,10 @@ void AxesDialog::changeBaselineDist(int baseline)
 	int axis=mapToQwtAxisId();
 	axesBaseline[axis] = baseline;
 
-	if (d_graph->axisTitle(axis) != boxTitle->text())
-		d_graph->setAxisTitle(axis, boxTitle->text());
+	if (d_graph->axisTitle(axis) != boxTitle->toPlainText())
+		d_graph->setAxisTitle(axis, boxTitle->toPlainText());
 
-	QString formula =  boxFormula->text();
+	QString formula =  boxFormula->toPlainText();
 	if (!boxShowFormula->isChecked())
 		formula = QString();
 	showAxis(axis, currentSelectedAxisType(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
@@ -1286,7 +1286,7 @@ bool AxesDialog::updatePlot()
 		{
 			if (boxShowFormula->isChecked())
 			{
-				QString formula = boxFormula->text().toLower();
+				QString formula = boxFormula->toPlainText().toLower();
 				try
 				{
 					double value = 1.0;
@@ -1330,15 +1330,15 @@ bool AxesDialog::updatePlot()
 		else
 			formatInfo[axis] = boxColName->currentText();
 
-		if (d_graph->axisTitle(axis) != boxTitle->text())
-			d_graph->setAxisTitle(axis, boxTitle->text());
+		if (d_graph->axisTitle(axis) != boxTitle->toPlainText())
+			d_graph->setAxisTitle(axis, boxTitle->toPlainText());
 
 		if (axis == QwtPlot::xBottom)
 			xBottomLabelsRotation=boxAngle->value();
 		else if (axis == QwtPlot::xTop)
 			xTopLabelsRotation=boxAngle->value();
 
-		QString formula = boxFormula->text();
+		QString formula = boxFormula->toPlainText();
 		if (!boxShowFormula->isChecked())
 			formula = QString();
 		showAxis(axis, format, formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
@@ -1502,7 +1502,7 @@ void AxesDialog::pickAxisColor()
 	boxAxisColor->setColor ( c ) ;
 
 	int axis=mapToQwtAxisId();
-	QString formula =  boxFormula->text();
+	QString formula =  boxFormula->toPlainText();
 	if (!boxShowFormula->isChecked())
 		formula = QString();
 
@@ -1519,7 +1519,7 @@ void AxesDialog::pickAxisNumColor()
 
 	boxAxisNumColor->setColor ( c ) ;
 	int axis=mapToQwtAxisId();
-	QString formula = boxFormula->text();
+	QString formula = boxFormula->toPlainText();
 	if (!boxShowFormula->isChecked())
 		formula = QString::null;
 
@@ -1561,7 +1561,7 @@ void AxesDialog::updateMajTicksType(int)
 		return;
 
 	majTicks[axis]=type;
-	QString formula =  boxFormula->text();
+	QString formula =  boxFormula->toPlainText();
 	if (!boxShowFormula->isChecked())
 		formula = QString();
 
@@ -1578,7 +1578,7 @@ void AxesDialog::updateMinTicksType(int)
 		return;
 
 	minTicks[axis]=type;
-	QString formula =  boxFormula->text();
+	QString formula =  boxFormula->toPlainText();
 
 	if (!boxShowFormula->isChecked())
 		formula = QString();
@@ -1625,7 +1625,7 @@ void AxesDialog::updateTickLabelsList(bool on)
 	else
 		formatInfo[axis] = boxColName->currentText();
 
-	QString formula = boxFormula->text();
+	QString formula = boxFormula->toPlainText();
 	if (!boxShowFormula->isChecked())
 		formula = QString();
 
@@ -1711,7 +1711,7 @@ void AxesDialog::setLabelsNumericFormat(int)
 	else
 		formatInfo[axis] = boxColName->currentText();
 
-	QString formula =  boxFormula->text();
+	QString formula =  boxFormula->toPlainText();
 	if (!boxShowFormula->isChecked())
 		formula = QString();
 
