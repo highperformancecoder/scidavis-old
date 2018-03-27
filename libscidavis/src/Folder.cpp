@@ -190,7 +190,7 @@ FolderListItem::FolderListItem( QTreeWidget *parent, Folder *f )
     myFolder = f;
 
     setText( 0, f->name() );
-	setOpen( true );
+	setExpanded( true );
 	setActive( true );
 	setDragEnabled ( true );
 	setDropEnabled ( true );
@@ -202,7 +202,7 @@ FolderListItem::FolderListItem( FolderListItem *parent, Folder *f )
     myFolder = f;
 
     setText( 0, f->name() );
-	setOpen( true );
+	setExpanded( true );
 	setActive( true );
 }
 
@@ -248,7 +248,7 @@ QTreeWidgetItem *item = currentItem();
 if (!item)
 	return;
 
-if (item == firstChild() && item->treeWidget()->rootIsDecorated())
+if (item == topLevelItem(0) && item->treeWidget()->rootIsDecorated())
 	return;//it's the project folder so we don't want the user to move it
 
 viewportToContents( viewport()->mapFromGlobal( QCursor::pos() ) );
@@ -263,7 +263,7 @@ QDrag *drag = new QDrag(viewport());
 drag->setPixmap(pix, QPoint(pix.width()/2, pix.height()/2 ) );
 
 QList<QTreeWidgetItem *> lst;
-for (item = firstChild(); item; item = item->itemBelow())
+for (item = topLevelItem(0); item; item = item->itemBelow())
 	{
 	if (item->isSelected())
 		lst.append(item);

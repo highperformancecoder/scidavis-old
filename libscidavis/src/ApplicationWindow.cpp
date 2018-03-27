@@ -258,7 +258,7 @@ ApplicationWindow::ApplicationWindow()
 
     FolderListItem *fli = new FolderListItem(folders, current_folder);
 	current_folder->setFolderListItem(fli);
-	fli->setOpen( true );
+	fli->setExpanded( true );
 
 	lv->addColumn (tr("Name"),-1 );
 	lv->addColumn (tr("Type"),-1 );
@@ -1534,35 +1534,35 @@ void ApplicationWindow::plotVectXYAM()
 
 void ApplicationWindow::renameListViewItem(const QString& oldName,const QString& newName)
 {
-	QTreeWidgetItem *it=lv->findItem (oldName,0, QTreeWidget::ExactMatch | Qt::CaseSensitive );
+	QTreeWidgetItem *it=lv->findItems (oldName, Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
 	if (it)
 		it->setText(0,newName);
 }
 
 void ApplicationWindow::setListViewLabel(const QString& caption,const QString& label)
 {
-	QTreeWidgetItem *it=lv->findItem ( caption, 0, QTreeWidget::ExactMatch | Qt::CaseSensitive );
+	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
 	if (it)
 		it->setText(5,label);
 }
 
 void ApplicationWindow::setListViewDate(const QString& caption,const QString& date)
 {
-	QTreeWidgetItem *it=lv->findItem ( caption, 0, QTreeWidget::ExactMatch | Qt::CaseSensitive );
+	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
 	if (it)
 		it->setText(4,date);
 }
 
 void ApplicationWindow::setListView(const QString& caption,const QString& view)
 {
-	QTreeWidgetItem *it=lv->findItem ( caption,0, QTreeWidget::ExactMatch | Qt::CaseSensitive );
+	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
 	if (it)
 		it->setText(2,view);
 }
 
 QString ApplicationWindow::listViewDate(const QString& caption)
 {
-	QTreeWidgetItem *it=lv->findItem (caption,0, QTreeWidget::ExactMatch | Qt::CaseSensitive );
+	QTreeWidgetItem *it=lv->findItems (caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
 	if (it)
 		return it->text(4);
 	else
@@ -3704,7 +3704,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
   folders->blockSignals (true);
   blockSignals (true);
   //rename project folder item
-  FolderListItem *item = (FolderListItem *)folders->firstChild();
+  FolderListItem *item = (FolderListItem *)folders->topLevelItem(0);
   item->setText(0, fi.baseName());
   item->folder()->setName(fi.baseName());
 
@@ -4988,7 +4988,7 @@ void ApplicationWindow::restoreWindowGeometry(ApplicationWindow *app, MyWidget *
 
 Folder* ApplicationWindow::projectFolder()
 {
-	return ((FolderListItem *)folders->firstChild())->folder();
+	return ((FolderListItem *)folders->topLevelItem(0))->folder();
 }
 
 bool ApplicationWindow::saveProject()
@@ -5060,7 +5060,7 @@ void ApplicationWindow::saveProjectAs()
 
 			QFileInfo fi(fn);
 			QString baseName = fi.baseName();
-			FolderListItem *item = (FolderListItem *)folders->firstChild();
+			FolderListItem *item = (FolderListItem *)folders->topLevelItem(0);
 			item->setText(0, baseName);
 			item->folder()->setName(baseName);
 		}
@@ -7459,7 +7459,7 @@ void ApplicationWindow::closeWindow(MyWidget* window)
 	window->folder()->removeWindow(window);
 
 	//update list view in project explorer
-	QTreeWidgetItem *it=lv->findItem (window->name(), 0, QTreeWidget::ExactMatch|QTreeWidget::CaseSensitive);
+	QTreeWidgetItem *it=lv->findItems (window->name(), Qt::MatchExactly | Qt::MatchCaseSensitive).at(0);
 	if (it)
 		lv->takeItem(it);
 
@@ -7734,7 +7734,7 @@ void ApplicationWindow::customEvent(QEvent *e)
 
 void ApplicationWindow::deleteSelectedItems()
 {
-	if (folders->hasFocus() && folders->currentItem() != folders->firstChild())
+	if (folders->hasFocus() && folders->currentItem() != folders->topLevelItem(0))
 	{//we never allow the user to delete the project folder item
 		deleteFolder();
 		return;
@@ -7742,7 +7742,7 @@ void ApplicationWindow::deleteSelectedItems()
 
 	QTreeWidgetItem *item;
 	QList<QTreeWidgetItem *> lst;
-	for (item = lv->firstChild(); item; item = item->nextSibling())
+	for (item = lv->topLevelItem(0); item; item = item->nextSibling())
 	{
 		if (item->isSelected())
 			lst.append(item);
@@ -7801,7 +7801,7 @@ void ApplicationWindow::showWindowPopupMenu(QTreeWidgetItem *it, const QPoint &p
 
 	QTreeWidgetItem *item;
 	int selected = 0;
-	for (item = lv->firstChild(); item; item = item->nextSibling())
+	for (item = lv->topLevelItem(0); item; item = item->nextSibling())
 	{
 		if (item->isSelected())
 			selected++;
@@ -7835,7 +7835,7 @@ void ApplicationWindow::showTable(const QString& curve)
 	w->deselectAll();
 	w->setCellsSelected(0, colIndex, w->d_future_table->rowCount()-1, colIndex);
 	w->showMaximized();
-	QTreeWidgetItem *it=lv->findItem (w->name(), 0, QTreeWidget::ExactMatch | Qt::CaseSensitive );
+	QTreeWidgetItem *it=lv->findItems (w->name(), Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
 	if (it)
 		it->setText(2,tr("Maximized"));
 	emit modified();
@@ -12623,7 +12623,7 @@ void ApplicationWindow::startRenameFolder()
 
 void ApplicationWindow::startRenameFolder(QTreeWidgetItem *item)
 {
-	if (!item || item == folders->firstChild())
+	if (!item || item == folders->topLevelItem(0))
 		return;
 
 	if (item->treeWidget() == lv && item->rtti() == FolderListItem::RTTI)
@@ -12712,7 +12712,7 @@ void ApplicationWindow::showAllFolderWindows()
 		return;
 
 	FolderListItem *fi = current_folder->folderListItem();
-	FolderListItem *item = (FolderListItem *)fi->firstChild();
+	FolderListItem *item = (FolderListItem *)fi->child(0);
 	int initial_depth = item->depth();
 	while (item && item->depth() >= initial_depth)
 	{// show/hide windows in all subfolders
@@ -12761,7 +12761,7 @@ void ApplicationWindow::hideAllFolderWindows()
 	if (show_windows_policy == SubFolders)
 	{
 		FolderListItem *fi = current_folder->folderListItem();
-		FolderListItem *item = (FolderListItem *)fi->firstChild();
+		FolderListItem *item = (FolderListItem *)fi->child(0);
 		int initial_depth = item->depth();
 		while (item && item->depth() >= initial_depth)
 		{
@@ -12868,7 +12868,7 @@ bool ApplicationWindow::deleteFolder(Folder *f)
             closeWindow(w);
 
 		if ( !(f->children()).isEmpty() ){
-			FolderListItem *item = (FolderListItem *)fi->firstChild();
+			FolderListItem *item = (FolderListItem *)fi->child(0);
 			int initial_depth = item->depth();
 			while (item && item->depth() >= initial_depth){
 			    Folder *subFolder = (Folder *)item->folder();
@@ -12943,7 +12943,7 @@ void ApplicationWindow::folderItemChanged(QTreeWidgetItem *it)
 	if (!it)
 		return;
 
-	it->setOpen(true);
+	it->setExpanded(true);
 	changeFolder (((FolderListItem *)it)->folder());
 	folders->setFocus();
 }
@@ -12958,7 +12958,7 @@ void ApplicationWindow::hideFolderWindows(Folder *f)
 		return;
 
 	FolderListItem *fi = f->folderListItem();
-	FolderListItem *item = (FolderListItem *)fi->firstChild();
+	FolderListItem *item = (FolderListItem *)fi->child(0);
 	if (!item)
 		return;
 	int initial_depth = item->depth();
@@ -13019,7 +13019,7 @@ bool ApplicationWindow::changeFolder(Folder *newFolder, bool force)
 
 	if (!(newFolder->children()).isEmpty()){
         FolderListItem *fi = newFolder->folderListItem();
-        FolderListItem *item = (FolderListItem *)fi->firstChild();
+        FolderListItem *item = (FolderListItem *)fi->child(0);
 			if (!item)
 				return false;
         int initial_depth = item->depth();
@@ -13073,7 +13073,7 @@ bool ApplicationWindow::changeFolder(Folder *newFolder, bool force)
 
 void ApplicationWindow::deactivateFolders()
 {
-	FolderListItem *item = (FolderListItem *)folders->firstChild();
+	FolderListItem *item = (FolderListItem *)folders->topLevelItem(0);
 	while (item)
 	{
 		item->setActive(false);
@@ -13188,7 +13188,7 @@ void ApplicationWindow::find(const QString& s, bool windowNames, bool labels,
 
 		if (subfolders)
 		{
-			FolderListItem *item = (FolderListItem *)folders->currentItem()->firstChild();
+			FolderListItem *item = (FolderListItem *)folders->currentItem()->child(0);
 			while (item)
 			{
 				Folder *f = item->folder();
@@ -13215,7 +13215,7 @@ void ApplicationWindow::find(const QString& s, bool windowNames, bool labels,
 
 		if (subfolders)
 		{
-			FolderListItem *item = (FolderListItem *)folders->currentItem()->firstChild();
+			FolderListItem *item = (FolderListItem *)folders->currentItem()->child(0);
 			while (item)
 			{
 				Folder *f = item->folder()->findSubfolder(s, caseSensitive, partialMatch);
@@ -13327,7 +13327,7 @@ void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)
 
 	if ( !(src_f->children()).isEmpty() )
 	{
-		FolderListItem *item = (FolderListItem *)src->firstChild();
+		FolderListItem *item = (FolderListItem *)src->child(0);
 		int initial_depth = item->depth();
 		while (item && item->depth() >= initial_depth)
 		{
