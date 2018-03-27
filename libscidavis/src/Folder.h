@@ -152,6 +152,7 @@ class WindowListItem : public QTreeWidgetItem
 {
 public:
     WindowListItem( QTreeWidget *parent, MyWidget *w );
+    static const int WindowType = QTreeWidgetItem::UserType+2;
 
     MyWidget *window() { return myWindow; };
 
@@ -171,11 +172,9 @@ public:
     FolderListItem( QTreeWidget *parent, Folder *f );
     FolderListItem( FolderListItem *parent, Folder *f );
 
-	enum {RTTI = 1001};
+	static const int FolderType = QTreeWidgetItem::UserType+1;
 
 	void setActive( bool o );
-
-	virtual int rtti() const {return (int)RTTI;};
 
     Folder *folder() { return myFolder; };
 

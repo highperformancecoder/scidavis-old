@@ -7358,7 +7358,7 @@ void ApplicationWindow::activateWindow(MyWidget *w)
 
 void ApplicationWindow::maximizeWindow(QTreeWidgetItem * lbi)
 {
-	if (!lbi || lbi->rtti() == FolderListItem::RTTI)
+	if (!lbi || lbi->type() == FolderListItem::FolderType)
 		return;
 
 	MyWidget *w = ((WindowListItem*)lbi)->window();
@@ -7747,7 +7747,7 @@ void ApplicationWindow::deleteSelectedItems()
 	folders->blockSignals(true);
 	foreach(item, lst)
 	{
-		if (item->rtti() == FolderListItem::RTTI)
+		if (item->type() == FolderListItem::FolderType)
 		{
 			Folder *f = ((FolderListItem *)item)->folder();
 			if (deleteFolder(f))
@@ -7809,7 +7809,7 @@ void ApplicationWindow::showWindowPopupMenu(QTreeWidgetItem *it, const QPoint &p
 		}
 	}
 
-	if (it->rtti() == FolderListItem::RTTI)
+	if (it->type() == FolderListItem::FolderType)
 	{
 		current_folder = ((FolderListItem *)it)->folder();
 		showFolderPopupMenu(it, p, false);
@@ -12622,7 +12622,7 @@ void ApplicationWindow::startRenameFolder(QTreeWidgetItem *item)
 	if (!item || item == folders->topLevelItem(0))
 		return;
 
-	if (item->treeWidget() == lv && item->rtti() == FolderListItem::RTTI)
+	if (item->treeWidget() == lv && item->type() == FolderListItem::FolderType)
 	{
         disconnect(folders, SIGNAL(currentChanged(QTreeWidgetItem *)), this, SLOT(folderItemChanged(QTreeWidgetItem *)));
 		current_folder = ((FolderListItem *)item)->folder();
@@ -12912,12 +12912,12 @@ void ApplicationWindow::folderItemDoubleClicked(QTreeWidgetItem *it)
 	if (!it)
 		return;
 
-	if (it->rtti() == FolderListItem::RTTI)
+	if (it->type() == FolderListItem::FolderType)
 	{
 		FolderListItem *item = ((FolderListItem *)it)->folder()->folderListItem();
 		folders->setCurrentItem(item);
 	}
-	else if (it->rtti() == WindowListItem::RTTI)
+	else if (it->type() == WindowListItem::WindowType)
 	{
 		MyWidget *w = ((WindowListItem*)it)->window();
 		if (!w)
@@ -13242,7 +13242,7 @@ void ApplicationWindow::dropFolderItems(QTreeWidgetItem *dest)
 
 	foreach(it, draggedItems)
 	{
-		if (it->rtti() == FolderListItem::RTTI)
+		if (it->type() == FolderListItem::FolderType)
 		{
 			Folder *f = ((FolderListItem *)it)->folder();
 			FolderListItem *src = f->folderListItem();

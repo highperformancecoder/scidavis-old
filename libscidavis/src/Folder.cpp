@@ -254,7 +254,7 @@ if (item == topLevelItem(0) && item->treeWidget()->rootIsDecorated())
 viewportToContents( viewport()->mapFromGlobal( QCursor::pos() ) );
 
 QPixmap pix;
-if (item->rtti() == FolderListItem::RTTI)
+if (item->type() == FolderListItem::FolderType)
 	pix = QPixmap(":/folder_closed.xpm");
 else
 	pix = item->icon(0).pixmap(QSize());
@@ -277,7 +277,7 @@ drag->drag();
 void FolderListView::contentsDropEvent( QDropEvent *e )
 {
 QTreeWidgetItem *dest = itemAt( contentsToViewport(e->pos()) );
-if ( dest && dest->rtti() == FolderListItem::RTTI)
+if ( dest && dest->type() == FolderListItem::FolderType)
 	{
 	emit dropItems(dest);
 	e->accept();
@@ -299,7 +299,7 @@ if (!item) {
 	return;
 }
 
-if (item->rtti() == FolderListItem::RTTI &&
+if (item->type() == FolderListItem::FolderType &&
 	(e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return))
 	{
 	emit doubleClicked(item);
