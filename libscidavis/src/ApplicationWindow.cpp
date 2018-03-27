@@ -5130,10 +5130,11 @@ void ApplicationWindow::renameActiveWindow()
 	rwd->exec();
 }
 
-void ApplicationWindow::renameWindow(QTreeWidgetItem *item, int, const QString &text)
+void ApplicationWindow::renameWindow(QTreeWidgetItem *item, int)
 {
 	if (!item)
 		return;
+	QString text = item->text(0);
 
 	MyWidget *w = ((WindowListItem *)item)->window();
 	if (!w || text == w->name())
@@ -7457,7 +7458,7 @@ void ApplicationWindow::closeWindow(MyWidget* window)
 	//update list view in project explorer
 	QTreeWidgetItem *it=lv->findItems (window->name(), Qt::MatchExactly | Qt::MatchCaseSensitive).at(0);
 	if (it)
-		lv->takeItem(it);
+		lv->takeTopLevelItem(lv->indexOfTopLevelItem(it));
 
 	if (window->inherits("Matrix"))
 		window->setParent(0);
@@ -7563,8 +7564,15 @@ void ApplicationWindow::showMoreWindows()
 		explorerWindow->show();
 }
 
-void ApplicationWindow::windowsMenuActivated( int id )
+void ApplicationWindow::windowsMenuActivated( bool checked )
 {
+	Q_UNUSED(checked)
+
+	QAction* act = qobject_cast<QAction *>(sender());
+	if (!act)
+		return;
+	int id = act->data().toInt();
+
 	QList<QWidget*> windows = d_workspace->windowList();
 	MyWidget* w = qobject_cast<MyWidget *>(windows.at(id));
 	if ( w )
@@ -7785,10 +7793,12 @@ void ApplicationWindow::showListViewPopupMenu(const QPoint &p)
 	cm.exec(p);
 }
 
-void ApplicationWindow::showWindowPopupMenu(QTreeWidgetItem *it, const QPoint &p, int)
+void ApplicationWindow::showWindowPopupMenu(const QPoint &p)
 {
 	if (folders->isRenaming())
 		return;
+
+	QTreeWidgetItem *it = lv->itemAt(p);
 
 	if (!it)
 	{
@@ -7814,7 +7824,7 @@ void ApplicationWindow::showWindowPopupMenu(QTreeWidgetItem *it, const QPoint &p
 	if (it->type() == FolderListItem::FolderType)
 	{
 		current_folder = ((FolderListItem *)it)->folder();
-		showFolderPopupMenu(it, p, false);
+		showFolderPopupMenu(p, false);
 		return;
 	}
 
@@ -12517,13 +12527,19 @@ void ApplicationWindow::saveFolderAsProject(Folder *f)
 	}
 }
 
-void ApplicationWindow::showFolderPopupMenu(QTreeWidgetItem *it, const QPoint &p, int)
+void ApplicationWindow::showFolderPopupMenu(const QPoint &p)
 {
-	showFolderPopupMenu(it, p, true);
+	showFolderPopupMenu(p, true);
 }
 
-void ApplicationWindow::showFolderPopupMenu(QTreeWidgetItem *it, const QPoint &p, bool fromFolders)
+void ApplicationWindow::showFolderPopupMenu(const QPoint &p, bool fromFolders)
 {
+	QTreeWidgetItem* it;
+	if (fromFolders)
+		it = folders->itemAt(p);
+	else
+		it = lv->itemAt(p);
+
 	if (!it || folders->isRenaming())
 		return;
 
@@ -12641,12 +12657,13 @@ void ApplicationWindow::startRenameFolder(QTreeWidgetItem *item)
 	}
 }
 
-void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString &text)
+void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col)
 {
 	Q_UNUSED(col)
 
 		if (!it)
 			return;
+	QString text = it->text(0);
 
 	Folder *parent = (Folder *)current_folder->parent();
 	if (!parent)//the parent folder is the project folder (it always exists)
@@ -12917,8 +12934,9 @@ void ApplicationWindow::deleteFolder()
 	folders->setFocus();
 }
 
-void ApplicationWindow::folderItemDoubleClicked(QTreeWidgetItem *it)
+void ApplicationWindow::folderItemDoubleClicked(QTreeWidgetItem *it, int column)
 {
+	Q_UNUSED(column)
 	if (!it)
 		return;
 
@@ -12944,13 +12962,15 @@ void ApplicationWindow::folderItemDoubleClicked(QTreeWidgetItem *it)
 	}
 }
 
-void ApplicationWindow::folderItemChanged(QTreeWidgetItem *it)
+void ApplicationWindow::folderItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
-	if (!it)
+	Q_UNUSED(previous)
+
+	if (!current)
 		return;
 
-	it->setExpanded(true);
-	changeFolder (((FolderListItem *)it)->folder());
+	current->setExpanded(true);
+	changeFolder (((FolderListItem *)current)->folder());
 	folders->setFocus();
 }
 
