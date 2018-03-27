@@ -847,7 +847,7 @@ public slots:
   void addListViewItem(MyWidget *w);
 
   //!  hides or shows windows in the current folder and changes the view windows policy
-  void setShowWindowsPolicy(int p);
+  void setShowWindowsPolicy(bool);
 
   //!  returns a pointer to the root project folder
   Folder* projectFolder();

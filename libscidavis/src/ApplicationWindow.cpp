@@ -233,6 +233,8 @@ ApplicationWindow::ApplicationWindow()
 	explorerWindow->setMinimumHeight(150);
 	addDockWidget( Qt::BottomDockWidgetArea, explorerWindow );
 
+	folders->setContextMenuPolicy(Qt::CustomContextMenu);
+
 	folders->header()->setClickable( false );
 	folders->setHeaderLabel( tr("Folder") );
 	folders->setRootIsDecorated( true );
@@ -245,8 +247,8 @@ ApplicationWindow::ApplicationWindow()
 			this, SLOT(folderItemChanged(QTreeWidgetItem *)));
 	connect(folders, SIGNAL(itemRenamed(QTreeWidgetItem *, int, const QString &)),
 			this, SLOT(renameFolder(QTreeWidgetItem *, int, const QString &)));
-	connect(folders, SIGNAL(contextMenuRequested(QTreeWidgetItem *, const QPoint &, int)),
-			this, SLOT(showFolderPopupMenu(QTreeWidgetItem *, const QPoint &, int)));
+	connect(folders, SIGNAL(customContextMenuRequested(const QPoint &)),
+			this, SLOT(showFolderPopupMenu(const QPoint &)));
 	connect(folders, SIGNAL(dragItems(QList<QTreeWidgetItem *>)),
 			this, SLOT(dragFolderItems(QList<QTreeWidgetItem *>)));
 	connect(folders, SIGNAL(dropItems(QTreeWidgetItem *)),
@@ -260,6 +262,7 @@ ApplicationWindow::ApplicationWindow()
 	current_folder->setFolderListItem(fli);
 	fli->setExpanded( true );
 
+	lv->setContextMenuPolicy(Qt::CustomContextMenu);
 	lv->setHeaderLabels(QStringList() << tr("Name") << tr("Type") << tr("View") << tr("Created") << tr("Label"));
 	lv->header()->setStretchLastSection(true);
 	lv->setMinimumHeight(80);
@@ -315,8 +318,8 @@ ApplicationWindow::ApplicationWindow()
 	connect(d_workspace, SIGNAL(windowActivated (QWidget*)),this, SLOT(windowActivated(QWidget*)));
 	connect(lv, SIGNAL(doubleClicked(QTreeWidgetItem *)),
 			this, SLOT(folderItemDoubleClicked(QTreeWidgetItem *)));
-	connect(lv, SIGNAL(contextMenuRequested(QTreeWidgetItem *, const QPoint &, int)),
-			this, SLOT(showWindowPopupMenu(QTreeWidgetItem *, const QPoint &, int)));
+	connect(lv, SIGNAL(customContextMenuRequested(const QPoint &)),
+			this, SLOT(showWindowPopupMenu(const QPoint &)));
 	connect(lv, SIGNAL(dragItems(QList<QTreeWidgetItem *>)),
 			this, SLOT(dragFolderItems(QList<QTreeWidgetItem *>)));
 	connect(lv, SIGNAL(dropItems(QTreeWidgetItem *)),
@@ -7507,6 +7510,7 @@ void ApplicationWindow::windowsMenuAboutToShow()
 			QAction *actId = windowsMenu->addAction(widget->name(),
 					this, SLOT( windowsMenuActivated( bool ) ) );
 			actId->setData(i); // Q3CHECK windowsMenu->setItemParameter( id, i );
+			actId->setCheckable(true);
 			actId->setChecked(d_workspace->activeWindow() == windows.at(i)); // Q3CHECK windowsMenu->setItemChecked( id, d_workspace->activeWindow() == windows.at(i) );
 		}
 	}
@@ -7520,6 +7524,7 @@ void ApplicationWindow::windowsMenuAboutToShow()
 			QAction *actId = windowsMenu->addAction(widget->name(),
 					this, SLOT( windowsMenuActivated( bool ) ) );
 			actId->setData(i); // Q3CHECK windowsMenu->setItemParameter( id, i );
+			actId->setCheckable(true);
 			actId->setChecked(d_workspace->activeWindow() == windows.at(i)); // Q3CHECK windowsMenu->setItemChecked( id, d_workspace->activeWindow() == windows.at(i) );
 		}
 		windowsMenu->addSeparator();
@@ -7790,7 +7795,7 @@ void ApplicationWindow::showListViewPopupMenu(const QPoint &p)
 	cm.addAction(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
 	cm.addSeparator();
 	cm.addAction(tr("Auto &Column Width"), lv, SLOT(adjustColumns()));
-	cm.exec(p);
+	cm.exec(lv->viewport()->mapToGlobal(p));
 }
 
 void ApplicationWindow::showWindowPopupMenu(const QPoint &p)
@@ -12587,17 +12592,25 @@ void ApplicationWindow::showFolderPopupMenu(const QPoint &p, bool fromFolders)
 	lst << tr("&None") << tr("&Windows in Active Folder") << tr("Windows in &Active Folder && Subfolders");
 	for (int i = 0; i < 3; ++i)
 	{
-		QAction *actId = viewWindowsMenu->addAction(lst[i],this, SLOT( setShowWindowsPolicy( int ) ) );
+		QAction *actId = viewWindowsMenu->addAction(lst[i],this, SLOT( setShowWindowsPolicy( bool ) ) );
 		actId->setData(i); // Q3CHECK viewWindowsMenu.setItemParameter( id, i );
+		actId->setCheckable(true);
 		actId->setChecked(show_windows_policy == i); // Q3CHECK viewWindowsMenu.setItemChecked( id, show_windows_policy == i );
 	}
 	cm.addSeparator();
 	cm.addAction(tr("&Properties..."), this, SLOT(folderProperties()));
-	cm.exec(p);
+	cm.exec(it->treeWidget()->mapToGlobal(p));
 }
 
-void ApplicationWindow::setShowWindowsPolicy(int p)
+void ApplicationWindow::setShowWindowsPolicy(bool checked)
 {
+	Q_UNUSED(checked)
+
+	QAction* act = qobject_cast<QAction *>(sender());
+	if (!act)
+		return;
+	int p = act->data().toInt();
+
 	if (show_windows_policy == (ShowWindowsPolicy)p)
 		return;
 
