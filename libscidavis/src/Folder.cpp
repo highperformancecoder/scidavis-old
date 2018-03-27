@@ -185,7 +185,7 @@ Folder* Folder::rootFolder()
  *****************************************************************************/
 
 FolderListItem::FolderListItem( QTreeWidget *parent, Folder *f )
-    : QTreeWidgetItem( parent )
+    : QTreeWidgetItem( parent, FolderListItem::FolderType )
 {
     myFolder = f;
 
@@ -196,7 +196,7 @@ FolderListItem::FolderListItem( QTreeWidget *parent, Folder *f )
 }
 
 FolderListItem::FolderListItem( FolderListItem *parent, Folder *f )
-    : QTreeWidgetItem( parent )
+    : QTreeWidgetItem( parent, FolderListItem::FolderType )
 {
     myFolder = f;
 
@@ -406,7 +406,7 @@ for (int i=0; i < columnCount (); i++)
  *****************************************************************************/
 
 WindowListItem::WindowListItem( QTreeWidget *parent, MyWidget *w )
-    : QTreeWidgetItem( parent )
+    : QTreeWidgetItem( parent, WindowListItem::WindowType )
 {
     myWindow = w;
 
