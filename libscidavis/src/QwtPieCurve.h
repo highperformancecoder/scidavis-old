@@ -33,7 +33,7 @@
 class QwtPieCurve: public DataCurve
 {
 public:
-	QwtPieCurve(Table *t, const char *name, int startRow, int endRow);
+	QwtPieCurve(Table *t, const QString& name, int startRow, int endRow);
 
 public slots:
 	QColor color(int i) const;

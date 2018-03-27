@@ -38,8 +38,8 @@ class QwtErrorPlotCurve: public DataCurve
 public:
 	enum Orientation{Horizontal = 0, Vertical = 1};
 
-	QwtErrorPlotCurve(int orientation, Table *t, const char *name);
-	QwtErrorPlotCurve(Table *t, const char *name);
+	QwtErrorPlotCurve(int orientation, Table *t, const QString& name);
+	QwtErrorPlotCurve(Table *t, const QString& name);
 
 	void copy(const QwtErrorPlotCurve *e);
 

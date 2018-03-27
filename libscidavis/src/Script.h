@@ -90,9 +90,9 @@ class Script : public QObject
     virtual bool exec();
 
     // local variables
-    virtual bool setQObject(const QObject*, const char*) { return false; }
-    virtual bool setInt(int, const char*) { return false; }
-    virtual bool setDouble(double, const char*) { return false; }
+    virtual bool setQObject(const QObject*, const QString&) { return false; }
+    virtual bool setInt(int, const QString&) { return false; }
+    virtual bool setDouble(double, const QString&) { return false; }
 
   signals:
     //! This is emitted whenever the code to be executed by exec() and eval() is changed.

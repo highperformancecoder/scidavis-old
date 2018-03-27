@@ -29,7 +29,7 @@
 #include "QwtBarCurve.h"
 #include <QPainter>
 
-QwtBarCurve::QwtBarCurve(BarStyle style, Table *t, const QString& xColName, const char *name, int startRow, int endRow):
+QwtBarCurve::QwtBarCurve(BarStyle style, Table *t, const QString& xColName, const QString& name, int startRow, int endRow):
     DataCurve(t, xColName, name, startRow, endRow)
 {
 bar_offset=0;
