@@ -95,7 +95,7 @@ SmoothCurveDialog::SmoothCurveDialog(int method, QWidget* parent, Qt::WFlags fl 
 		gl1->addWidget(boxColor, 2, 1);
         gl1->setRowStretch(3, 1);
 		}
-    gl1->setColStretch(2, 1);
+    gl1->setColumnStretch(2, 1);
 
 	btnSmooth = new QPushButton(tr( "&Smooth" ));
     btnSmooth->setDefault(true);

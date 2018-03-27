@@ -126,8 +126,8 @@ void ScriptEdit::contextMenuEvent(QContextMenuEvent *e)
 	{
 		Note *sp = (Note*) parent();
 		QAction *actionAutoexec = new QAction( tr("Auto&exec"), menu );
-		actionAutoexec->setToggleAction(true);
-		actionAutoexec->setOn(sp->autoexec());
+		actionAutoexec->setCheckable(true);
+		actionAutoexec->setChecked(sp->autoexec());
 		connect(actionAutoexec, SIGNAL(toggled(bool)), sp, SLOT(setAutoexec(bool)));
 		menu->addAction(actionAutoexec);
 	}

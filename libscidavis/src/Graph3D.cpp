@@ -36,6 +36,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QPrinter>
+#include <QPrintDialog>
 #include <QClipboard>
 #include <QPixmap>
 #include <QBitmap>
@@ -1992,7 +1993,8 @@ void Graph3D::print()
 	printer.setColorMode (QPrinter::Color);
 	printer.setFullPage(false);
 
-	if (printer.setup())
+	QPrintDialog dialog(&printer, this);
+	if (dialog.exec())
 	{
 		if (IO::save (sp,"scidavis.png","PNG"))
 		{

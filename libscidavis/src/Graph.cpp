@@ -4397,7 +4397,6 @@ void Graph::showAxisContextMenu(int axis)
 	selectedAxis = axis;
 
 	QMenu menu(this);
-	menu.setCheckable(true);
 	menu.addAction(QPixmap(":/unzoom.xpm"), tr("&Rescale to show all"), this, SLOT(setAutoScale()), tr("Ctrl+Shift+R"));
 	menu.addSeparator();
 	menu.addAction(tr("&Hide axis"), this, SLOT(hideSelectedAxis()));

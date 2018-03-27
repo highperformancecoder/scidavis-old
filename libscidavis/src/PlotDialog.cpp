@@ -1140,14 +1140,14 @@ void PlotDialog::contextMenuEvent(QContextMenuEvent *e)
 	if (rect.contains(pos))
 	{
 	   QMenu contextMenu(this);
-	   contextMenu.insertItem(tr("&Delete"), this, SLOT(removeSelectedCurve()));
+	   contextMenu.addAction(tr("&Delete"), this, SLOT(removeSelectedCurve()));
 
 	   if (it->rtti() == QwtPlotItem::Rtti_PlotCurve)
 	   {
             if (((PlotCurve *)it)->type() == Graph::Function)
-                contextMenu.insertItem(tr("&Edit..."), this, SLOT(editCurve()));
+                contextMenu.addAction(tr("&Edit..."), this, SLOT(editCurve()));
             else
-                contextMenu.insertItem(tr("&Plot Associations..."), this, SLOT(editCurve()));
+                contextMenu.addAction(tr("&Plot Associations..."), this, SLOT(editCurve()));
 	   }
 	   contextMenu.exec(QCursor::pos());
     }
