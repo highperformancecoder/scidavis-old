@@ -30,8 +30,8 @@
 #define FOLDER_H
 
 #include <qobject.h>
-#include <q3listview.h>
-#include <q3iconview.h>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 //Added by qt3to4:
 #include <QDragEnterEvent>
 #include <QMouseEvent>
@@ -40,7 +40,6 @@
 #include <QKeyEvent>
 #include <QEvent>
 #include <QDropEvent>
-#include <Q3PtrList>
 
 #include "MyWidget.h"
 
@@ -54,7 +53,6 @@ class QDragEnterEvent;
 class QDragMoveEvent;
 class QDragLeaveEvent;
 class QDropEvent;
-class Q3DragObject;
 
 //! Folder for the project explorer
 class Folder : public QObject
@@ -150,10 +148,10 @@ protected:
  *
  *****************************************************************************/
 //! Windows list item class
-class WindowListItem : public Q3ListViewItem
+class WindowListItem : public QTreeWidgetItem
 {
 public:
-    WindowListItem( Q3ListView *parent, MyWidget *w );
+    WindowListItem( QTreeWidget *parent, MyWidget *w );
 
     MyWidget *window() { return myWindow; };
 
@@ -167,10 +165,10 @@ protected:
  *
  *****************************************************************************/
 //! Folders list item class
-class FolderListItem : public Q3ListViewItem
+class FolderListItem : public QTreeWidgetItem
 {
 public:
-    FolderListItem( Q3ListView *parent, Folder *f );
+    FolderListItem( QTreeWidget *parent, Folder *f );
     FolderListItem( FolderListItem *parent, Folder *f );
 
 	enum {RTTI = 1001};
@@ -197,7 +195,7 @@ protected:
  *
  *****************************************************************************/
 //! Folder list view class
-class FolderListView : public Q3ListView
+class FolderListView : public QTreeWidget
 {
     Q_OBJECT
 
@@ -219,9 +217,9 @@ protected:
 	void enterEvent(QEvent *){mousePressed = false;};
 
 signals:
-	void dragItems(QList<Q3ListViewItem *> items);
-	void dropItems(Q3ListViewItem *dest);
-	void renameItem(Q3ListViewItem *item);
+	void dragItems(QList<QTreeWidgetItem *> items);
+	void dropItems(QTreeWidgetItem *dest);
+	void renameItem(QTreeWidgetItem *item);
 	void addFolderItem();
 	void deleteSelection();
 
