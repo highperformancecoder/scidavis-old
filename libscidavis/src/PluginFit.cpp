@@ -67,7 +67,6 @@ bool PluginFit::load(const QString& pluginName)
 
 	setObjectName(pluginName);
 	QLibrary lib(pluginName);
-	lib.setAutoUnload(false);
 
 	d_fsimplex = (fit_function_simplex) lib.resolve( "function_d" );
 	if (!d_fsimplex)

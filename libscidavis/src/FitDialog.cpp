@@ -908,7 +908,7 @@ void FitDialog::loadPlugins()
 			d_plugin_function_names << QString(name());
 			d_plugin_functions << QString(function());
 			d_plugin_params << QString(params());
-			d_plugin_files_list << lib.library();
+			d_plugin_files_list << lib.fileName();
 		}
 	}
 }
