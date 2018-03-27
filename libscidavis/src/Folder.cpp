@@ -229,6 +229,18 @@ while (parent)
 return false;
 }
 
+int FolderListItem::depth()
+{
+	int c = 0;
+	FolderListItem *parent = (FolderListItem *)this->parent();
+	while (parent)
+		{
+		c++;
+		parent = (FolderListItem *)parent->parent();
+		}
+	return c;
+}
+
 /*****************************************************************************
  *
  * Class FolderListView

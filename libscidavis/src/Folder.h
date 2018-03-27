@@ -177,6 +177,7 @@ public:
 	void setActive( bool o );
 
     Folder *folder() { return myFolder; };
+	int depth();
 
 	//! Checks weather the folder item is a grandchild of the source folder
 	/**
