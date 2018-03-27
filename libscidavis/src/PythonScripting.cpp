@@ -178,6 +178,7 @@ QString PythonScripting::errorMsg()
 PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
   : ScriptingEnv(parent, langName)
 {
+  Q_UNUSED(batch)
   PyObject *mainmod=NULL, *scidavismod=NULL, *sysmod=NULL;
   math = NULL;
   sys = NULL;
@@ -376,7 +377,7 @@ bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
 	PyGILState_STATE state = PyGILState_Ensure();
 
         //sipWrapperType * klass = sipFindClass(val->className());
-        const sipTypeDef* klass=sipFindType(val->className());
+        const sipTypeDef* klass=sipFindType(val->metaObject()->className());
 	if (!klass) return false;
         //pyobj = sipConvertFromInstance(val, klass, NULL);
 	pyobj = sipConvertFromType(val, klass, NULL);

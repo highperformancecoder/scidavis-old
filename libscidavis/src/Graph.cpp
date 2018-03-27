@@ -4929,7 +4929,7 @@ void Graph::setArrowDefaults(int lineWidth,  const QColor& c, Qt::PenStyle style
 QString Graph::parentPlotName()
 {
 	QWidget *w = (QWidget *)parent()->parent();
-	return QString(w->name());
+	return QString(w->objectName());
 }
 
 void Graph::guessUniqueCurveLayout(int& colorIndex, int& symbolIndex)

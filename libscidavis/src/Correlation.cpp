@@ -163,13 +163,13 @@ void Correlation::addResultCurve()
 
 	QStringList l = d_table->colNames().filter(tr("Lag"));
 	QString id = QString::number((int)l.size()+1);
-	QString label = name() + id;
+	QString label = objectName() + id;
 
 	d_table->setColName(cols, tr("Lag") + id);
 	d_table->setColName(cols2, label);
 	d_table->setColPlotDesignation(cols, SciDAVis::X);
 
-	MultiLayer *ml = app->newGraph(name() + tr("Plot"));
+	MultiLayer *ml = app->newGraph(objectName() + tr("Plot"));
 	if (!ml)
         return;
 

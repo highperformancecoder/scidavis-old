@@ -95,7 +95,7 @@ void ScriptEdit::customEvent(QEvent *e)
 	{
 		scriptingChangeEvent((ScriptingChangeEvent*)e);
 		myScript->deleteLater();
-		myScript = scriptEnv->newScript("", this, name());
+		myScript = scriptEnv->newScript("", this, objectName());
 		connect(myScript, SIGNAL(error(const QString&,const QString&,int)), this, SLOT(insertErrorMsg(const QString&)));
 		connect(myScript, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
 	}
@@ -224,7 +224,7 @@ void ScriptEdit::handleContentsChange(int position, int, int)
 void ScriptEdit::execute()
 {
 	QString fname = "<%1:%2>";
-	fname = fname.arg(name());
+	fname = fname.arg(objectName());
 	QTextCursor codeCursor = textCursor();
 	if (codeCursor.selectedText().isEmpty()){
 		codeCursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
@@ -249,7 +249,7 @@ void ScriptEdit::execute()
 bool ScriptEdit::executeAll()
 {
 	QString fname = "<%1>";
-	fname = fname.arg(name());
+	fname = fname.arg(objectName());
 	myScript->setName(fname);
 	myScript->setCode(toPlainText());
 	printCursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
@@ -259,7 +259,7 @@ bool ScriptEdit::executeAll()
 void ScriptEdit::evaluate()
 {
 	QString fname = "<%1:%2>";
-	fname = fname.arg(name());
+	fname = fname.arg(objectName());
 	QTextCursor codeCursor = textCursor();
 	if (codeCursor.selectedText().isEmpty()){
 		codeCursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);

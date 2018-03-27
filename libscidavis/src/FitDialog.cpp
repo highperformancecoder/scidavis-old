@@ -1208,7 +1208,7 @@ void FitDialog::accept()
         d_fitter->setMaximumIterations(boxPoints->value());
         d_fitter->scaleErrors(scaleErrorsBox->isChecked());
 
-        if (d_fitter->name() == tr("MultiPeak") && ((MultiPeakFit *)d_fitter)->peaks() > 1)
+        if (d_fitter->objectName() == tr("MultiPeak") && ((MultiPeakFit *)d_fitter)->peaks() > 1)
         {
             ((MultiPeakFit *)d_fitter)->enablePeakCurves(app->generatePeakCurves);
             ((MultiPeakFit *)d_fitter)->setPeakCurvesColor(app->peakCurvesColor);
@@ -1331,7 +1331,7 @@ void FitDialog::setSrcTables(QWidgetList* tables)
 	d_src_table = tables;
 	tableNamesBox->clear();
 	foreach(QWidget *i, *d_src_table)
-		tableNamesBox->addItem(i->name());
+		tableNamesBox->addItem(i->objectName());
 
 	tableNamesBox->setCurrentIndex(tableNamesBox->findText(boxCurve->currentText().split("_", QString::SkipEmptyParts)[0]));
 	selectSrcTable(tableNamesBox->currentIndex());
