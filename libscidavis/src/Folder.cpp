@@ -209,9 +209,9 @@ FolderListItem::FolderListItem( FolderListItem *parent, Folder *f )
 void FolderListItem::setActive( bool o )
 {
     if ( o )
-		setPixmap(0, QPixmap(":/folder_open.xpm") );
+		setIcon(0, QIcon(QPixmap(":/folder_open.xpm")) );
     else
-		setPixmap(0, QPixmap(":/folder_closed.xpm") );
+		setIcon(0, QIcon(QPixmap(":/folder_closed.xpm")) );
 
 	setSelected(o);
 }
@@ -257,10 +257,11 @@ QPixmap pix;
 if (item->rtti() == FolderListItem::RTTI)
 	pix = QPixmap(":/folder_closed.xpm");
 else
-	pix = *item->pixmap (0);
+	pix = item->icon(0).pixmap(QSize());
 
 QDrag *drag = new QDrag(viewport());
-drag->setPixmap(pix, QPoint(pix.width()/2, pix.height()/2 ) );
+drag->setPixmap(pix);
+drag->setHotSpot(QPoint(pix.width()/2, pix.height()/2 ) );
 
 QList<QTreeWidgetItem *> lst;
 for (item = topLevelItem(0); item; item = item->itemBelow())

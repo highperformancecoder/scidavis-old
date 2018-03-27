@@ -13088,23 +13088,23 @@ void ApplicationWindow::addListViewItem(MyWidget *w)
 
 	WindowListItem* it = new WindowListItem(lv, w);
 	if (w->inherits("Matrix")){
-		it->setPixmap(0, QPixmap(":/matrix.xpm"));
+		it->setIcon(0, QIcon(QPixmap(":/matrix.xpm")));
 		it->setText(1, tr("Matrix"));
 	}
 	else if (w->inherits("Table")){
-		it->setPixmap(0, QPixmap(":/worksheet.xpm"));
+		it->setIcon(0, QIcon(QPixmap(":/worksheet.xpm")));
 		it->setText(1, tr("Table"));
 	}
 	else if (w->inherits("Note")){
-		it->setPixmap(0, QPixmap(":/note.xpm"));
+		it->setIcon(0, QIcon(QPixmap(":/note.xpm")));
 		it->setText(1, tr("Note"));
 	}
 	else if (w->inherits("MultiLayer")){
-		it->setPixmap(0, QPixmap(":/graph.xpm"));
+		it->setIcon(0, QIcon(QPixmap(":/graph.xpm")));
 		it->setText(1, tr("Graph"));
 	}
 	else if (w->inherits("Graph3D")){
-		it->setPixmap(0, QPixmap(":/trajectory.xpm"));
+		it->setIcon(0, QIcon(QPixmap(":/trajectory.xpm")));
 		it->setText(1, tr("3D Graph"));
 	}
 
