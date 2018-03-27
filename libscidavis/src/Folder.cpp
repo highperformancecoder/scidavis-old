@@ -276,10 +276,12 @@ drag->setPixmap(pix);
 drag->setHotSpot(QPoint(pix.width()/2, pix.height()/2 ) );
 
 QList<QTreeWidgetItem *> lst;
-for (item = topLevelItem(0); item; item = item->itemBelow())
+QTreeWidgetItemIterator it(this);
+while (*it)
 	{
-	if (item->isSelected())
-		lst.append(item);
+	if ((*it)->isSelected())
+		lst.append(*it);
+	it++;
 	}
 
 emit dragItems(lst);

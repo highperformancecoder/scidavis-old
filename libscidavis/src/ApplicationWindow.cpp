@@ -7738,10 +7738,11 @@ void ApplicationWindow::deleteSelectedItems()
 
 	QTreeWidgetItem *item;
 	QList<QTreeWidgetItem *> lst;
-	for (item = lv->topLevelItem(0); item; item = item->nextSibling())
+	QTreeWidgetItemIterator it(lv);
+	while (*it)
 	{
-		if (item->isSelected())
-			lst.append(item);
+		if ((*it)->isSelected())
+			lst.append((*it));
 	}
 
 	folders->blockSignals(true);
@@ -7795,11 +7796,11 @@ void ApplicationWindow::showWindowPopupMenu(QTreeWidgetItem *it, const QPoint &p
 		return;
 	}
 
-	QTreeWidgetItem *item;
 	int selected = 0;
-	for (item = lv->topLevelItem(0); item; item = item->nextSibling())
+	QTreeWidgetItemIterator itv(lv);
+	while (*itv)
 	{
-		if (item->isSelected())
+		if ((*itv)->isSelected())
 			selected++;
 
 		if (selected>1)
@@ -7807,6 +7808,7 @@ void ApplicationWindow::showWindowPopupMenu(QTreeWidgetItem *it, const QPoint &p
 			showListViewSelectionMenu(p);
 			return;
 		}
+		itv++;
 	}
 
 	if (it->type() == FolderListItem::FolderType)
@@ -11674,11 +11676,13 @@ QWidgetList* ApplicationWindow::windowsList()
     Folder *project_folder = projectFolder();
 	FolderListItem *item = project_folder->folderListItem();
 	int initial_depth = item->depth();
+	QTreeWidgetItemIterator it(item);
 	while (item && item->depth() >= initial_depth){
 		QList<MyWidget *> folderWindows = item->folder()->windowsList();
 		foreach(MyWidget *w, folderWindows)
 			lst->append(w);
-		item = (FolderListItem *)item->itemBelow();
+		it++;
+		item = (FolderListItem *)(*it);
 	}
 
 	foreach(QWidget *w, *hiddenWindows)
@@ -12710,6 +12714,7 @@ void ApplicationWindow::showAllFolderWindows()
 	FolderListItem *fi = current_folder->folderListItem();
 	FolderListItem *item = (FolderListItem *)fi->child(0);
 	int initial_depth = item->depth();
+	QTreeWidgetItemIterator it(item);
 	while (item && item->depth() >= initial_depth)
 	{// show/hide windows in all subfolders
 		lst = ((Folder *)item->folder())->windowsList();
@@ -12741,7 +12746,8 @@ void ApplicationWindow::showAllFolderWindows()
 				w->hide();
 		}
 
-		item = (FolderListItem *)item->itemBelow();
+		it++;
+		item = (FolderListItem *)(*it);
 	}
 }
 
@@ -12759,13 +12765,15 @@ void ApplicationWindow::hideAllFolderWindows()
 		FolderListItem *fi = current_folder->folderListItem();
 		FolderListItem *item = (FolderListItem *)fi->child(0);
 		int initial_depth = item->depth();
+		QTreeWidgetItemIterator it(item);
 		while (item && item->depth() >= initial_depth)
 		{
 			lst = item->folder()->windowsList();
 			foreach(MyWidget *w, lst)
 				hideWindow(w);
 
-			item = (FolderListItem *)item->itemBelow();
+			it++;
+			item = (FolderListItem *)(*it);
 		}
 	}
 }
@@ -12866,6 +12874,7 @@ bool ApplicationWindow::deleteFolder(Folder *f)
 		if ( !(f->children()).isEmpty() ){
 			FolderListItem *item = (FolderListItem *)fi->child(0);
 			int initial_depth = item->depth();
+			QTreeWidgetItemIterator it(item);
 			while (item && item->depth() >= initial_depth){
 			    Folder *subFolder = (Folder *)item->folder();
 			    if (subFolder){
@@ -12876,7 +12885,8 @@ bool ApplicationWindow::deleteFolder(Folder *f)
                     }
 
                     FolderListItem *old_item = item;
-                    item = (FolderListItem *)item->itemBelow();
+                    it++;
+                    item = (FolderListItem *)(*it);
                     delete subFolder;
                     delete old_item;
 			    }
@@ -12958,11 +12968,13 @@ void ApplicationWindow::hideFolderWindows(Folder *f)
 	if (!item)
 		return;
 	int initial_depth = item->depth();
+	QTreeWidgetItemIterator it(item);
 	while (item && item->depth() >= initial_depth){
 		lst = item->folder()->windowsList();
 		foreach(MyWidget *w, lst)
 			w->hide();
-		item = (FolderListItem *)item->itemBelow();
+		it++;
+		item = (FolderListItem *)(*it);
 	}
 }
 
@@ -13019,6 +13031,7 @@ bool ApplicationWindow::changeFolder(Folder *newFolder, bool force)
 			if (!item)
 				return false;
         int initial_depth = item->depth();
+        QTreeWidgetItemIterator it(item);
         while (item && item->depth() >= initial_depth)
         {//show/hide windows in subfolders
             lst = ((Folder *)item->folder())->windowsList();
@@ -13034,7 +13047,8 @@ bool ApplicationWindow::changeFolder(Folder *newFolder, bool force)
 					w->hide();
                 }
             }
-		item = (FolderListItem *)item->itemBelow();
+            it++;
+            item = (FolderListItem *)(*it);
         }
 	}
 
@@ -13069,11 +13083,11 @@ bool ApplicationWindow::changeFolder(Folder *newFolder, bool force)
 
 void ApplicationWindow::deactivateFolders()
 {
-	FolderListItem *item = (FolderListItem *)folders->topLevelItem(0);
-	while (item)
+	QTreeWidgetItemIterator it(folders);
+	while (*it)
 	{
-		item->setActive(false);
-		item = (FolderListItem *)item->itemBelow();
+		((FolderListItem *)(*it))->setActive(false);
+		it++;
 	}
 }
 
@@ -13185,6 +13199,7 @@ void ApplicationWindow::find(const QString& s, bool windowNames, bool labels,
 		if (subfolders)
 		{
 			FolderListItem *item = (FolderListItem *)folders->currentItem()->child(0);
+			QTreeWidgetItemIterator it(item);
 			while (item)
 			{
 				Folder *f = item->folder();
@@ -13195,7 +13210,8 @@ void ApplicationWindow::find(const QString& s, bool windowNames, bool labels,
 					activateWindow(w);
 					return;
 				}
-				item = (FolderListItem *)item->itemBelow();
+				it++;
+				item = (FolderListItem *)(*it);
 			}
 		}
 	}
@@ -13212,6 +13228,7 @@ void ApplicationWindow::find(const QString& s, bool windowNames, bool labels,
 		if (subfolders)
 		{
 			FolderListItem *item = (FolderListItem *)folders->currentItem()->child(0);
+			QTreeWidgetItemIterator it(item);
 			while (item)
 			{
 				Folder *f = item->folder()->findSubfolder(s, caseSensitive, partialMatch);
@@ -13221,7 +13238,8 @@ void ApplicationWindow::find(const QString& s, bool windowNames, bool labels,
 					return;
 				}
 
-				item = (FolderListItem *)item->itemBelow();
+				it++;
+				item = (FolderListItem *)(*it);
 			}
 		}
 	}
@@ -13325,6 +13343,7 @@ void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)
 	{
 		FolderListItem *item = (FolderListItem *)src->child(0);
 		int initial_depth = item->depth();
+		QTreeWidgetItemIterator it(item);
 		while (item && item->depth() >= initial_depth)
 		{
 			src_f = (Folder *)item->folder();
@@ -13345,7 +13364,8 @@ void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)
 				dest_f->addWindow(w);
 			}
 
-			item = (FolderListItem *)item->itemBelow();
+			it++;
+			item = (FolderListItem *)(*it);
 		}
 	}
 
