@@ -3678,7 +3678,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
                              tr("The file \"%1\" was created using \"%2\" as scripting language.\n\n"\
                                 "Initializing support for this language FAILED; I'm using \"%3\" instead.\n"\
                                 "Various parts of this file may not be displayed as expected.")\
-                             .arg(fn).arg(list[1]).arg(scriptEnv->name()));
+                             .arg(fn).arg(list[1]).arg(scriptEnv->objectName()));
 
       s = t.readLine();
       list=s.split("\t", QString::SkipEmptyParts);
@@ -3956,7 +3956,7 @@ void ApplicationWindow::scriptPrint(const QString &text)
 
 bool ApplicationWindow::setScriptingLang(const QString &lang, bool force, bool batch)
 {
-	if (!force && lang == scriptEnv->name()) return true;
+	if (!force && lang == scriptEnv->objectName()) return true;
 	if (lang.isEmpty()) return false;
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -3997,11 +3997,11 @@ void ApplicationWindow::showScriptingLangDialog()
 
 void ApplicationWindow::restartScriptingEnv()
 {
-	if (setScriptingLang(scriptEnv->name(), true))
+	if (setScriptingLang(scriptEnv->objectName(), true))
 		executeNotes();
 	else
 		QMessageBox::critical(this, tr("Scripting Error"),
-				tr("Scripting language \"%1\" failed to initialize.").arg(scriptEnv->name()));
+				tr("Scripting language \"%1\" failed to initialize.").arg(scriptEnv->objectName()));
 }
 
 //TODO: rewrite the template system
@@ -12446,7 +12446,7 @@ void ApplicationWindow::saveFolder(Folder *folder, const QString& fn)
 	QTextStream t( &f );
 	t.setCodec(QTextCodec::codecForName("UTF-8"));
 	t << SciDAVis::schemaVersion() + " project file\n";
-	t << "<scripting-lang>\t"+QString(scriptEnv->name())+"\n";
+	t << "<scripting-lang>\t"+QString(scriptEnv->objectName())+"\n";
 	t << "<windows>\t"+QString::number(folder->windowCount(true))+"\n";
 	t.flush();
 	rawSaveFolder(folder, &f);

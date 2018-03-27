@@ -119,13 +119,13 @@ class Column: AbstractAspect
 		SIP_PYOBJECT dataType() const;
 %MethodCode
 		int mode = sipCpp->dataType();
-  		sipRes = PyString_FromString(SciDAVis::enumValueToString(mode, "ColumnDataType"));
+		sipRes = PyString_FromString(SciDAVis::enumValueToString(mode, "ColumnDataType").toUtf8().constData());
 %End
 */
 		SIP_PYOBJECT columnMode() const;
 %MethodCode
 		int mode = sipCpp->columnMode();
-  		sipRes = PyString_FromString(SciDAVis::enumValueToString(mode, "ColumnMode"));
+		sipRes = PyString_FromString(SciDAVis::enumValueToString(mode, "ColumnMode").toUtf8().constData());
 %End
 		void setColumnMode(QString mode);
 %MethodCode
@@ -141,7 +141,7 @@ class Column: AbstractAspect
 		SIP_PYOBJECT plotDesignation() const;
 %MethodCode
 		int pd = sipCpp->plotDesignation();
-  		sipRes = PyString_FromString(SciDAVis::enumValueToString(pd, "PlotDesignation"));
+		sipRes = PyString_FromString(SciDAVis::enumValueToString(pd, "PlotDesignation").toUtf8().constData());
 %End
 		void setPlotDesignation(QString pd);
 %MethodCode
@@ -218,7 +218,7 @@ public:
 
   SIP_PYOBJECT windowLabel();
 %MethodCode
-  sipRes = PyString_FromString(sipCpp->windowLabel());
+  sipRes = PyString_FromString(sipCpp->windowLabel().toUtf8().constData());
 %End
   void setWindowLabel(const QString&);
 
@@ -244,7 +244,7 @@ public:
   /*
   virtual SIP_PYOBJECT saveAsTemplate(const QString& );
 %MethodCode
-  sipRes = PyString_FromString(sipCpp->saveAsTemplate(*a0));
+  sipRes = PyString_FromString(sipCpp->saveAsTemplate(*a0).toUtf8().constData());
 %End
 */
   // same issues as with saveAsTemplate
@@ -272,7 +272,7 @@ class Table: MyWidget
       col = (int)PyInt_AsLong(arg) - 1;\
 		if (col < 0 || col >= sipCpp->numCols()) {\
 			sipIsErr = 1;\
-			PyErr_Format(PyExc_ValueError, "There's no column %d in table %s!", col+1, sipCpp->name().toAscii().constData());\
+			PyErr_Format(PyExc_ValueError, "There's no column %d in table %s!", col+1, sipCpp->objectName().toUtf8().constData());\
 		}\
 	 } else {\
       PyObject *tmp = PyObject_Str(arg);\
@@ -284,7 +284,7 @@ class Table: MyWidget
 			if (col < 0) {\
 				sipIsErr = 1;\
 				PyErr_Format(PyExc_ValueError, "There's no column named %s in table %s!", PyString_AsString(tmp),\
-						sipCpp->name().toAscii().constData());\
+						sipCpp->objectName().toUtf8().constData());\
 				Py_DECREF(tmp);\
 			}\
 		}\
@@ -293,7 +293,7 @@ class Table: MyWidget
    int row = arg-1;\
 	if (row < 0 || row >= sipCpp->numRows()) {\
 		sipIsErr = 1;\
-		PyErr_Format(PyExc_ValueError, "There's no row %d in table %s!", row+1, sipCpp->name().toAscii().constData());\
+		PyErr_Format(PyExc_ValueError, "There's no row %d in table %s!", row+1, sipCpp->objectName().toUtf8().constData());\
 	}
 
 %End
@@ -327,7 +327,7 @@ public:
   CHECK_TABLE_COL(a0);
   CHECK_TABLE_ROW(a1);
   if (sipIsErr == 0) {
-		PyObject *encstr = PyString_FromString(sipCpp->text(row, col).utf8());
+		PyObject *encstr = PyString_FromString(sipCpp->text(row, col).toUtf8().constData());
 		if (encstr) {
 			sipRes = PyUnicode_FromEncodedObject(encstr, "utf8", 0);
 			Py_DECREF(encstr);
@@ -367,7 +367,7 @@ public:
 		sipIsErr = 1;\
 		PyErr_SetString(PyExc_ValueError, "Invalid column argument");\
 	} else
-		sipRes = PyString_FromString(sipCpp->colLabel(a0-1));
+		sipRes = PyString_FromString(sipCpp->colLabel(a0-1).toUtf8().constData());
 %End
   void setColName(SIP_PYOBJECT, const QString&) /Deprecated/;
 %MethodCode
@@ -463,13 +463,13 @@ class Matrix: MyWidget
 	int col = arg-1;\
    if (col < 0 || col >= sipCpp->numCols()) {\
 		sipIsErr = 1;\
-		PyErr_Format(PyExc_ValueError, "There's no column %d in matrix %s!", col+1, sipCpp->name().toAscii().constData());\
+		PyErr_Format(PyExc_ValueError, "There's no column %d in matrix %s!", col+1, sipCpp->objectName().toUtf8().constData());\
 	}
 #define CHECK_MATRIX_ROW(arg)\
    int row = arg-1;\
 	if (row < 0 || row >= sipCpp->numRows()) {\
 		sipIsErr = 1;\
-		PyErr_Format(PyExc_ValueError, "There's no row %d in matrix %s!", row+1, sipCpp->name().toAscii().constData());\
+		PyErr_Format(PyExc_ValueError, "There's no row %d in matrix %s!", row+1, sipCpp->objectName().toUtf8().constData());\
 	}
 %End
 public:
@@ -485,7 +485,7 @@ public:
 	CHECK_MATRIX_ROW(a0);
 	CHECK_MATRIX_COL(a1);
 	if (sipIsErr == 0)
-		sipRes = PyString_FromString(sipCpp->text(row, col));
+		sipRes = PyString_FromString(sipCpp->text(row, col).toUtf8().constData());
 %End
   double cell(int, int);
 %MethodCode
@@ -885,7 +885,7 @@ public:
   bool isPiePlot();
   SIP_PYOBJECT pieLegendText() /PyName=pieLegend/;
 %MethodCode
-  sipRes = PyString_FromString(sipCpp->pieLegendText());
+  sipRes = PyString_FromString(sipCpp->pieLegendText().toUtf8().constData());
 %End
 
   bool insertCurve(Table*, const QString&, int=1, int color=-1);
@@ -1133,7 +1133,7 @@ class ApplicationWindow: QMainWindow
 // we have to do this to override casting in qt/qobject.sip
 // without this, app.windows() returns Tables as QWidgets (strangely, Notes
 // are returned correctly in any case)
-sipClass = sipFindClass(sipCpp->className());
+sipType = sipFindType(sipCpp->metaObject()->className());
 %End
 
 public:
