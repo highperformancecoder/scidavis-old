@@ -84,7 +84,7 @@ Plot::Plot(QWidget *parent, QString)
 
             //...same for axis color
             QPalette pal = scale->palette();
-            pal.setColor(QColorGroup::Foreground, QColor(Qt::black));
+            pal.setColor(QPalette::WindowText, QColor(Qt::black));
             scale->setPalette(pal);
 
 			ScaleDraw *sd = new ScaleDraw();
@@ -105,7 +105,7 @@ Plot::Plot(QWidget *parent, QString)
 	plCanvas->setFocusIndicator(QwtPlotCanvas::ItemFocusIndicator);
 	plCanvas->setFocus();
 	plCanvas->setFrameShadow(QwtPlot::Plain);
-	plCanvas->setCursor(Qt::arrowCursor);
+	plCanvas->setCursor(Qt::ArrowCursor);
 	plCanvas->setLineWidth(0);
 	plCanvas->setPaintAttribute(QwtPlotCanvas::PaintCached, false);
 	plCanvas->setPaintAttribute(QwtPlotCanvas::PaintPacked, false);
@@ -113,9 +113,10 @@ Plot::Plot(QWidget *parent, QString)
     QColor background = QColor(Qt::white);
     background.setAlpha(255);
 
-	QColorGroup cg;
-    cg.setColor(QColorGroup::Window, background);
-    setPalette(QPalette(cg, cg, cg));
+	QPalette cg;
+    cg.setColor(QPalette::Window, background);
+    setPalette(cg);
+
     setAutoFillBackground(true);
 
 	setCanvasBackground (background);
@@ -127,7 +128,7 @@ Plot::Plot(QWidget *parent, QString)
 
 QColor Plot::frameColor()
 {
-	return palette().color(QPalette::Active, QColorGroup::Foreground);
+	return palette().color(QPalette::Active, QPalette::WindowText);
 }
 
 void Plot::printFrame(QPainter *painter, const QRect &rect) const
@@ -137,7 +138,7 @@ void Plot::printFrame(QPainter *painter, const QRect &rect) const
 	int lw = lineWidth();
 	if (lw)
 	{
-		QColor color = palette().color(QPalette::Active, QColorGroup::Foreground);
+		QColor color = palette().color(QPalette::Active, QPalette::WindowText);
 		painter->setPen (QPen(color, lw, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin));
 	}
 	else
@@ -197,7 +198,7 @@ void Plot::drawInwardTicks(QPainter *painter, const QRect &rect,
 	int y2=rect.bottom();
 
 	QPalette pal=axisWidget(axis)->palette();
-	QColor color=pal.color(QPalette::Active, QColorGroup::Foreground);
+	QColor color=pal.color(QPalette::Active, QPalette::WindowText);
 
 	painter->save();
 	painter->setPen(QPen(color, axesLinewidth(), Qt::SolidLine));

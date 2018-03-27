@@ -4157,7 +4157,6 @@ void Graph::setFrame (int width, const QColor& color)
 
 void Graph::setBackgroundColor(const QColor& color)
 {
-    QColorGroup cg;
 	QPalette p = d_plot->palette();
 	p.setColor(QPalette::Window, color);
     d_plot->setPalette(p);

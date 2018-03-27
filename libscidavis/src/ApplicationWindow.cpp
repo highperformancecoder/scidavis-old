@@ -369,19 +369,19 @@ void ApplicationWindow::applyUserSettings()
 
 	d_workspace->setPaletteBackgroundColor (workspaceColor);
 
-	QColorGroup cg;
-	cg.setColor(QColorGroup::Base, QColor(panelsColor) );
-	qApp->setPalette(QPalette(cg, cg, cg));
+	QPalette cg;
+	cg.setColor(QPalette::Base, QColor(panelsColor));
+	qApp->setPalette(cg);
 
-	cg.setColor(QColorGroup::Text, QColor(panelsTextColor) );
-	cg.setColor(QColorGroup::WindowText, QColor(panelsTextColor) );
-	cg.setColor(QColorGroup::HighlightedText, QColor(panelsTextColor) );
-	lv->setPalette(QPalette(cg, cg, cg));
-	results->setPalette(QPalette(cg, cg, cg));
+	cg.setColor(QPalette::Text, QColor(panelsTextColor) );
+	cg.setColor(QPalette::WindowText, QColor(panelsTextColor) );
+	cg.setColor(QPalette::HighlightedText, QColor(panelsTextColor) );
+	lv->setPalette(cg);
+	results->setPalette(cg);
 
-	cg.setColor(QColorGroup::Text, QColor(Qt::green) );
-	cg.setColor(QColorGroup::HighlightedText, QColor(Qt::darkGreen) );
-	cg.setColor(QColorGroup::Base, QColor(Qt::black) );
+	cg.setColor(QPalette::Text, QColor(Qt::green) );
+	cg.setColor(QPalette::HighlightedText, QColor(Qt::darkGreen) );
+	cg.setColor(QPalette::Base, QColor(Qt::black) );
 }
 
 void ApplicationWindow::initToolBars()
@@ -2073,7 +2073,7 @@ void ApplicationWindow::initPlot3D(Graph3D *plot)
 	d_workspace->addWindow(plot);
 	connectSurfacePlot(plot);
 
-	plot->setIcon(QPixmap(":/trajectory.xpm"));
+	plot->setWindowIcon(QPixmap(":/trajectory.xpm"));
 	plot->show();
 	plot->setFocus();
 
@@ -2379,7 +2379,7 @@ void ApplicationWindow::initBareMultilayerPlot(MultiLayer* g, const QString& nam
 
 	g->setWindowTitle(label);
 	g->setName(label);
-	g->setIcon(QPixmap(":/graph.xpm"));
+	g->setWindowIcon(QPixmap(":/graph.xpm"));
 	g->setScaleLayersOnPrint(d_scale_plots_on_print);
 	g->printCropmarks(d_print_cropmarks);
 
@@ -2414,10 +2414,10 @@ void ApplicationWindow::customizeTables(const QColor& bgColor,const QColor& text
 
 void ApplicationWindow::customTable(Table* w)
 {
-	QColorGroup cg;
-	cg.setColor(QColorGroup::Base, QColor(tableBkgdColor));
-	cg.setColor(QColorGroup::Text, QColor(tableTextColor));
-	w->setPalette(QPalette(cg, cg, cg));
+	QPalette cg;
+	cg.setColor(QPalette::Base, QColor(tableBkgdColor));
+	cg.setColor(QPalette::Text, QColor(tableTextColor));
+	w->setPalette(cg);
 
 	w->setHeaderColor (tableHeaderColor);
 	w->setTextFont(tableTextFont);
@@ -2549,7 +2549,7 @@ Table* ApplicationWindow::newHiddenTable(const QString& name, const QString& lab
 
 void ApplicationWindow::initTable(Table* w)
 {
-	w->setIcon( QPixmap(":/worksheet.xpm") );
+	w->setWindowIcon( QPixmap(":/worksheet.xpm") );
 	current_folder->addWindow(w);
 	w->setFolder(current_folder);
 	d_workspace->addWindow(w);
@@ -2620,7 +2620,7 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 
 	m->setWindowTitle(name);
 	m->setName(name);
-	m->setIcon( QPixmap(":/note.xpm") );
+	m->setWindowIcon( QPixmap(":/note.xpm") );
 	m->askOnCloseEvent(confirmCloseNotes);
 	m->setFolder(current_folder);
 
@@ -2718,7 +2718,7 @@ Table* ApplicationWindow::convertMatrixToTable()
 
 void ApplicationWindow::initMatrix(Matrix* m)
 {
-	m->setIcon( QPixmap(":/matrix.xpm") );
+	m->setWindowIcon( QPixmap(":/matrix.xpm") );
 	m->askOnCloseEvent(confirmCloseMatrix);
 	m->setNumericFormat(d_default_numeric_format, d_decimal_digits);
 	m->setFolder(current_folder);
@@ -6864,7 +6864,7 @@ void ApplicationWindow::showImageDialog()
 		id->setAttribute(Qt::WA_DeleteOnClose);
 		connect (id, SIGNAL(setGeometry(int, int, int, int)),
 				g, SLOT(updateImageMarker(int, int, int, int)));
-		id->setIcon(QPixmap(":/appicon"));
+		id->setWindowIcon(QPixmap(":/appicon"));
 		id->setOrigin(im->origin());
 		id->setSize(im->size());
 		id->exec();
@@ -6902,7 +6902,7 @@ void ApplicationWindow::showPlotGeometryDialog()
 		ImageDialog *id=new ImageDialog(this);
 		id->setAttribute(Qt::WA_DeleteOnClose);
 		connect (id, SIGNAL(setGeometry(int,int,int,int)), plot, SLOT(setGraphGeometry(int,int,int,int)));
-		id->setIcon(QPixmap(":/appicon"));
+		id->setWindowIcon(QPixmap(":/appicon"));
 		id->setWindowTitle(tr("Layer Geometry"));
 		id->setOrigin(g->pos());
 		id->setSize(g->plotWidget()->size());
@@ -6927,7 +6927,7 @@ void ApplicationWindow::showTextDialog()
 		connect (td,SIGNAL(values(const QString&,int,int,const QFont&, const QColor&, const QColor&)),
 				g,SLOT(updateTextMarker(const QString&,int,int,const QFont&, const QColor&, const QColor&)));
 
-		td->setIcon(QPixmap(":/appicon"));
+		td->setWindowIcon(QPixmap(":/appicon"));
 		td->setText(m->text());
 		td->setFont(m->font());
 		td->setTextColor(m->textColor());
@@ -10407,15 +10407,15 @@ void ApplicationWindow::setAppColors(const QColor& wc,const QColor& pc,const QCo
 	panelsColor = pc;
 	panelsTextColor = tpc;
 
-	QColorGroup cg;
-	cg.setColor(QColorGroup::Base, QColor(panelsColor) );
-	qApp->setPalette(QPalette(cg, cg, cg));
+	QPalette cg;
+	cg.setColor(QPalette::Base, QColor(panelsColor));
+	qApp->setPalette(cg);
 
-	cg.setColor(QColorGroup::Text, QColor(panelsTextColor) );
-	cg.setColor(QColorGroup::WindowText, QColor(panelsTextColor) );
-	cg.setColor(QColorGroup::HighlightedText, QColor(panelsTextColor) );
-	lv->setPalette(QPalette(cg, cg, cg));
-	results->setPalette(QPalette(cg, cg, cg));
+	cg.setColor(QPalette::Text, QColor(panelsTextColor) );
+	cg.setColor(QPalette::WindowText, QColor(panelsTextColor) );
+	cg.setColor(QPalette::HighlightedText, QColor(panelsTextColor) );
+	lv->setPalette(cg);
+	results->setPalette(cg);
 }
 
 void ApplicationWindow::setPlot3DOptions()

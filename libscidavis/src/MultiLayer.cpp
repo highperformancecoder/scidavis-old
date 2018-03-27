@@ -734,7 +734,7 @@ void MultiLayer::exportPainter(QPainter &painter, bool keepAspect, QRect rect, Q
                  (double)size.height()/(double)rect.height()
                  );
 
-	 painter.fillRect(rect, backgroundBrush()); // FIXME workaround for background
+	 painter.fillRect(rect, backgroundRole()); // FIXME workaround for background
 
     for (int i=0; i<(int)graphsList.count(); i++)
 	{
