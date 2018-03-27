@@ -685,11 +685,11 @@ void ApplicationWindow::insertTranslatedStrings()
 	if (projectname == "untitled")
 		setWindowTitle(tr("SciDAVis - untitled"));
 
-	lv->setColumnText (0, tr("Name"));
-	lv->setColumnText (1, tr("Type"));
-	lv->setColumnText (2, tr("View"));
-	lv->setColumnText (3, tr("Created"));
-	lv->setColumnText (4, tr("Label"));
+	lv->headerItem()->setText (0, tr("Name"));
+	lv->headerItem()->setText (1, tr("Type"));
+	lv->headerItem()->setText (2, tr("View"));
+	lv->headerItem()->setText (3, tr("Created"));
+	lv->headerItem()->setText (4, tr("Label"));
 
 	explorerWindow->setWindowTitle(tr("Project Explorer"));
 	logWindow->setWindowTitle(tr("Results Log"));
@@ -5141,7 +5141,7 @@ void ApplicationWindow::renameWindow(QTreeWidgetItem *item, int, const QString &
 
 	while(!renameWindow(w, text))
 	{
-		item->setRenameEnabled (0, true);
+		item->setFlags(item->flags() | Qt::ItemIsEditable);
 		item->startRename (0);
 		return;
 	}
@@ -12613,7 +12613,7 @@ void ApplicationWindow::startRenameFolder()
 		return;
 
 	disconnect(folders, SIGNAL(currentChanged(QTreeWidgetItem *)), this, SLOT(folderItemChanged(QTreeWidgetItem *)));
-	fi->setRenameEnabled (0, true);
+	fi->setFlags(fi->flags() | Qt::ItemIsEditable);
 	fi->startRename (0);
 }
 
@@ -12627,12 +12627,12 @@ void ApplicationWindow::startRenameFolder(QTreeWidgetItem *item)
         disconnect(folders, SIGNAL(currentChanged(QTreeWidgetItem *)), this, SLOT(folderItemChanged(QTreeWidgetItem *)));
 		current_folder = ((FolderListItem *)item)->folder();
 		FolderListItem *it = current_folder->folderListItem();
-		it->setRenameEnabled (0, true);
+		it->setFlags(it->flags() | Qt::ItemIsEditable);
 		it->startRename (0);
 	}
 	else
 	{
-		item->setRenameEnabled (0, true);
+		item->setFlags(item->flags() | Qt::ItemIsEditable);
 		item->startRename (0);
 	}
 }
@@ -12651,7 +12651,7 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString
 	while(text.isEmpty())
 	{
 		QMessageBox::critical(this,tr("Error"), tr("Please enter a valid name!"));
-		it->setRenameEnabled (0, true);
+		it->setFlags(it->flags() | Qt::ItemIsEditable);
 		it->startRename (0);
 		return;
 	}
@@ -12663,13 +12663,13 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString
 		QMessageBox::critical(this,tr("Error"),
 				tr("Name already exists!")+"\n"+tr("Please choose another name!"));
 
-		it->setRenameEnabled (0, true);
+		it->setFlags(it->flags() | Qt::ItemIsEditable);
 		it->startRename (0);
 		return;
 	}
 
 	current_folder->setName(text);
-	it->setRenameEnabled (0, false);
+	it->setFlags(it->flags() & ~Qt::ItemIsEditable);
 	connect(folders, SIGNAL(currentChanged(QTreeWidgetItem *)),
 			this, SLOT(folderItemChanged(QTreeWidgetItem *)));
 	folders->setCurrentItem(parent->folderListItem());//update the list views
@@ -12846,7 +12846,7 @@ void ApplicationWindow::addFolder()
 	if (fi)
 	{
 		f->setFolderListItem(fi);
-		fi->setRenameEnabled (0, true);
+		fi->setFlags(fi->flags() | Qt::ItemIsEditable);
 		fi->startRename(0);
 	}
 }
