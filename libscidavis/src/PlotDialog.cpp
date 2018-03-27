@@ -559,7 +559,7 @@ void PlotDialog::initSymbolsPage()
 	QHBoxLayout* hl = new QHBoxLayout(symbolPage);
 	hl->addWidget(gb);
 
-	privateTabWidget->insertTab(symbolPage, tr( "Symbol" ));
+	privateTabWidget->addTab(symbolPage, tr( "Symbol" ));
 
 	connect(boxSymbolColor, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(boxSymbolStyle, SIGNAL(activated(int)), this, SLOT(acceptParams()));
@@ -662,7 +662,7 @@ void PlotDialog::initBoxPage()
 	QHBoxLayout* hl = new QHBoxLayout(boxPage);
 	hl->addLayout(vl1);
 	hl->addLayout(vl2);
-    privateTabWidget->insertTab(boxPage, tr( "Box/Whiskers" ) );
+    privateTabWidget->addTab(boxPage, tr( "Box/Whiskers" ) );
 
 	connect(boxType, SIGNAL(activated(int)), this, SLOT(setBoxType(int)));
 	connect(boxRange, SIGNAL(activated(int)), this, SLOT(setBoxRangeType(int)));
@@ -722,7 +722,7 @@ void PlotDialog::initPercentilePage()
 	QHBoxLayout* hl = new QHBoxLayout(percentilePage);
 	hl->addWidget(gb1);
 	hl->addWidget(gb2);
-    privateTabWidget->insertTab(percentilePage, tr( "Percentile" ) );
+    privateTabWidget->addTab(percentilePage, tr( "Percentile" ) );
 
 	connect(boxMeanStyle, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(boxMinStyle, SIGNAL(activated(int)), this, SLOT(acceptParams()));
@@ -831,7 +831,7 @@ void PlotDialog::initSpectrogramPage()
   	vl2->addWidget(axisScaleBox);
     vl2->addStretch();
 
-  	privateTabWidget->insertTab(spectrogramPage, tr("Contour") + " / " + tr("Image"));
+	privateTabWidget->addTab(spectrogramPage, tr("Contour") + " / " + tr("Image"));
 }
 
 void PlotDialog::fillBoxSymbols()
@@ -895,7 +895,7 @@ void PlotDialog::initErrorsPage()
 	QHBoxLayout* hl = new QHBoxLayout(errorsPage);
 	hl->addWidget(gb1);
 	hl->addWidget(gb2);
-    privateTabWidget->insertTab( errorsPage, tr( "Error Bars" ) );
+    privateTabWidget->addTab( errorsPage, tr( "Error Bars" ) );
 
 	connect(colorBox, SIGNAL(clicked()), this, SLOT(pickErrorBarsColor()));
 	connect(xBox, SIGNAL(clicked()), this, SLOT(changeErrorBarsType()));
@@ -931,7 +931,7 @@ void PlotDialog::initHistogramPage()
 	vl->addWidget(GroupBoxH);
     vl->addStretch();
 
-    privateTabWidget->insertTab( histogramPage, tr( "Histogram Data" ) );
+    privateTabWidget->addTab( histogramPage, tr( "Histogram Data" ) );
 
 	connect(automaticBox, SIGNAL(clicked()), this, SLOT(setAutomaticBinning()));
 	connect(buttonStatistics, SIGNAL(clicked()), this, SLOT(showStatistics() ) );
@@ -954,7 +954,7 @@ void PlotDialog::initSpacingPage()
     gl->addWidget(offsetBox, 1, 1);
     gl->setRowStretch (2, 1);
 
-	privateTabWidget->insertTab( spacingPage, tr( "Spacing" ));
+	privateTabWidget->addTab( spacingPage, tr( "Spacing" ));
 }
 
 void PlotDialog::initVectPage()
@@ -1015,7 +1015,7 @@ void PlotDialog::initVectPage()
     hl->addLayout(vl1);
     hl->addWidget(GroupBoxVectEnd);
 
-	privateTabWidget->insertTab( vectPage, tr( "Vector" ) );
+	privateTabWidget->addTab( vectPage, tr( "Vector" ) );
 }
 
 void PlotDialog::setMultiLayer(MultiLayer *ml)
