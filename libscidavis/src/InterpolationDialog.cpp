@@ -46,7 +46,7 @@ InterpolationDialog::InterpolationDialog( QWidget* parent, Qt::WFlags fl )
 {
 	setWindowTitle(tr("Interpolation Options"));
 
-    QGroupBox *gb1 = new QGroupBox();
+	QGroupBox *gb1 = new QGroupBox();
 	QGridLayout *gl1 = new QGridLayout(gb1);
 	gl1->addWidget(new QLabel(tr("Make curve from")), 0, 0);
 
@@ -55,9 +55,9 @@ InterpolationDialog::InterpolationDialog( QWidget* parent, Qt::WFlags fl )
 
 	gl1->addWidget(new QLabel(tr("Spline")), 1, 0);
 	boxMethod = new QComboBox();
-	boxMethod->insertItem(tr("Linear"));
-    boxMethod->insertItem(tr("Cubic"));
-    boxMethod->insertItem(tr("Non-rounded Akima"));
+	boxMethod->addItem(tr("Linear"));
+	boxMethod->addItem(tr("Cubic"));
+	boxMethod->addItem(tr("Non-rounded Akima"));
 	gl1->addWidget(boxMethod, 1, 1);
 
 	gl1->addWidget(new QLabel(tr("Points")), 2, 0);
@@ -84,21 +84,21 @@ InterpolationDialog::InterpolationDialog( QWidget* parent, Qt::WFlags fl )
 	gl1->setRowStretch(6, 1);
 
 	buttonFit = new QPushButton(tr( "&Make" ));
-    buttonFit->setDefault( true );
-    buttonCancel = new QPushButton(tr( "&Close" ));
+	buttonFit->setDefault( true );
+	buttonCancel = new QPushButton(tr( "&Close" ));
 
 	QVBoxLayout *vl = new QVBoxLayout();
- 	vl->addWidget(buttonFit);
+	vl->addWidget(buttonFit);
 	vl->addWidget(buttonCancel);
-    vl->addStretch();
+	vl->addStretch();
 
-    QHBoxLayout *hb = new QHBoxLayout(this);
-    hb->addWidget(gb1);
-    hb->addLayout(vl);
+	QHBoxLayout *hb = new QHBoxLayout(this);
+	hb->addWidget(gb1);
+	hb->addLayout(vl);
 
 	connect( boxName, SIGNAL(activated(const QString&)), this, SLOT( activateCurve(const QString&)));
 	connect( buttonFit, SIGNAL( clicked() ), this, SLOT( interpolate() ) );
-    connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 }
 
 void InterpolationDialog::interpolate()
@@ -186,8 +186,8 @@ void InterpolationDialog::activateCurve(const QString& curveName)
 
   double start, end;
   graph->range(graph->curveIndex(curveName), &start, &end);
-  boxStart->setText(QString::number(QMIN(start, end), 'g', app->d_decimal_digits));
-  boxEnd->setText(QString::number(QMAX(start, end), 'g', app->d_decimal_digits));
+  boxStart->setText(QString::number(qMin(start, end), 'g', app->d_decimal_digits));
+  boxEnd->setText(QString::number(qMax(start, end), 'g', app->d_decimal_digits));
 };
 
 void InterpolationDialog::changeDataRange()
@@ -198,6 +198,6 @@ if(!app)
 
 double start = graph->selectedXStartValue();
 double end = graph->selectedXEndValue();
-boxStart->setText(QString::number(QMIN(start, end), 'g', app->d_decimal_digits));
-boxEnd->setText(QString::number(QMAX(start, end), 'g', app->d_decimal_digits));
+boxStart->setText(QString::number(qMin(start, end), 'g', app->d_decimal_digits));
+boxEnd->setText(QString::number(qMax(start, end), 'g', app->d_decimal_digits));
 }

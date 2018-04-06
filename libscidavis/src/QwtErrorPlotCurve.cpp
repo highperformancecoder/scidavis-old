@@ -36,7 +36,7 @@
 #include <QPainter>
 #include <QLocale>
 
-QwtErrorPlotCurve::QwtErrorPlotCurve(int orientation, Table *t, const char *name):
+QwtErrorPlotCurve::QwtErrorPlotCurve(int orientation, Table *t, const QString& name):
 	DataCurve(t, QString(), name),
 	d_master_curve(NULL)
 {
@@ -48,7 +48,7 @@ QwtErrorPlotCurve::QwtErrorPlotCurve(int orientation, Table *t, const char *name
 	setType(Graph::ErrorBars);
 }
 
-QwtErrorPlotCurve::QwtErrorPlotCurve(Table *t, const char *name):
+QwtErrorPlotCurve::QwtErrorPlotCurve(Table *t, const QString& name):
 	DataCurve(t, QString(), name),
 	d_master_curve(NULL)
 {
@@ -252,10 +252,10 @@ QwtDoubleRect QwtErrorPlotCurve::boundingRect() const
 	QwtDoubleRect minrect = erMin->boundingRect();
 	QwtDoubleRect maxrect = erMax->boundingRect();
 
-	rect.setTop(QMIN(minrect.top(), maxrect.top()));
-	rect.setBottom(QMAX(minrect.bottom(), maxrect.bottom()));
-	rect.setLeft(QMIN(minrect.left(), maxrect.left()));
-	rect.setRight(QMAX(minrect.right(), maxrect.right()));
+	rect.setTop(qMin(minrect.top(), maxrect.top()));
+	rect.setBottom(qMax(minrect.bottom(), maxrect.bottom()));
+	rect.setLeft(qMin(minrect.left(), maxrect.left()));
+	rect.setRight(qMax(minrect.right(), maxrect.right()));
 
 	delete erMin;
 	delete erMax;

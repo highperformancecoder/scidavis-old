@@ -34,7 +34,7 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_histogram.h>
 
-QwtHistogram::QwtHistogram(Table *t, const char *name, int startRow, int endRow):
+QwtHistogram::QwtHistogram(Table *t, const QString& name, int startRow, int endRow):
 	QwtBarCurve(QwtBarCurve::Vertical, t, "dummy", name, startRow, endRow)
 {
 	d_autoBin = true;

@@ -39,7 +39,7 @@
 #include <QMessageBox>
 
 ColorMapEditor::ColorMapEditor(QWidget* parent)
-  : QWidget(parent, 0, 0),
+  : QWidget(parent),
     color_map(QwtLinearColorMap()),
     min_val(0), 
     max_val(1)

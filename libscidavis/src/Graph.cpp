@@ -365,7 +365,7 @@ void Graph::setAxesBaseline(const QList<int> &lst)
 
 void Graph::setAxesBaseline(QStringList &lst)
 {
-	lst.remove(lst.first());
+	lst.removeAll(lst.first());
 	for (int i = 0; i<QwtPlot::axisCnt; i++)
 	{
 		QwtScaleWidget *scale = (QwtScaleWidget *)d_plot->axisWidget(i);
@@ -1460,7 +1460,7 @@ void Graph::print()
         if (d_print_cropmarks)
         {
 			QRect cr = plotRect; // cropmarks rectangle
-			cr.addCoords(-1, -1, 2, 2);
+			cr.adjust(-1, -1, 2, 2);
             paint.save();
             paint.setPen(QPen(QColor(Qt::black), 0.5, Qt::DashLine));
             paint.drawLine(paperRect.left(), cr.top(), paperRect.right(), cr.top());
@@ -3615,7 +3615,7 @@ void Graph::removeLegendItem(int index)
 
 	QStringList l = items.filter( "\\c{" + QString::number(index+1) + "}" );
 	if (!l.isEmpty())
-		items.remove(l[0]);//remove the corresponding legend string
+		items.removeAll(l[0]);//remove the corresponding legend string
 	text=items.join ( "\n" ) + "\n";
 
 	QRegExp itemCmd("\\\\c\\{(\\d+)\\}");
@@ -3639,7 +3639,7 @@ void Graph::addLegendItem(const QString& colName)
 		Legend* mrk=(Legend*) d_plot->marker(legendMarkerID);
 		if (mrk){
 			QString text = mrk->text();
-			if (text.endsWith ( "\n", true ) )
+			if (text.endsWith ( "\n", Qt::CaseSensitive ) )
 				text.append("\\c{"+QString::number(curves())+"}"+colName+"\n");
 			else
 				text.append("\n\\c{"+QString::number(curves())+"}"+colName+"\n");
@@ -4109,25 +4109,25 @@ void Graph::scaleFonts(double factor)
 	{
 		Legend* mrk = (Legend*) d_plot->marker(d_texts[i]);
 		QFont font = mrk->font();
-		font.setPointSizeF(factor*font.pointSizeFloat());
+		font.setPointSizeF(factor*font.pointSizeF());
 		mrk->setFont(font);
 	}
 	for (int i = 0; i<QwtPlot::axisCnt; i++)
 	{
 		QFont font = axisFont(i);
-		font.setPointSizeF(factor*font.pointSizeFloat());
+		font.setPointSizeF(factor*font.pointSizeF());
 		d_plot->setAxisFont(i, font);
 
 		QwtText title = d_plot->axisTitle(i);
 		font = title.font();
-		font.setPointSizeF(factor*font.pointSizeFloat());
+		font.setPointSizeF(factor*font.pointSizeF());
 		title.setFont(font);
 		d_plot->setAxisTitle(i, title);
 	}
 
 	QwtText title = d_plot->title();
 	QFont font = title.font();
-	font.setPointSizeF(factor*font.pointSizeFloat());
+	font.setPointSizeF(factor*font.pointSizeF());
 	title.setFont(font);
 	d_plot->setTitle(title);
 
@@ -4157,7 +4157,6 @@ void Graph::setFrame (int width, const QColor& color)
 
 void Graph::setBackgroundColor(const QColor& color)
 {
-    QColorGroup cg;
 	QPalette p = d_plot->palette();
 	p.setColor(QPalette::Window, color);
     d_plot->setPalette(p);
@@ -4398,7 +4397,6 @@ void Graph::showAxisContextMenu(int axis)
 	selectedAxis = axis;
 
 	QMenu menu(this);
-	menu.setCheckable(true);
 	menu.addAction(QPixmap(":/unzoom.xpm"), tr("&Rescale to show all"), this, SLOT(setAutoScale()), tr("Ctrl+Shift+R"));
 	menu.addSeparator();
 	menu.addAction(tr("&Hide axis"), this, SLOT(hideSelectedAxis()));
@@ -4931,7 +4929,7 @@ void Graph::setArrowDefaults(int lineWidth,  const QColor& c, Qt::PenStyle style
 QString Graph::parentPlotName()
 {
 	QWidget *w = (QWidget *)parent()->parent();
-	return QString(w->name());
+	return QString(w->objectName());
 }
 
 void Graph::guessUniqueCurveLayout(int& colorIndex, int& symbolIndex)
@@ -5075,7 +5073,7 @@ void Graph::restoreSpectrogram(ApplicationWindow *app, const QStringList& lst)
             for (int i = 0; i < stops; i++)
             {
                 s = (*(++line)).trimmed();
-                QStringList l = QStringList::split("\t", s.remove("<Stop>").remove("</Stop>"));
+                QStringList l = s.remove("<Stop>").remove("</Stop>").split("\t");
                 colorMap.addColorStop(l[0].toDouble(), QColor(l[1]));
             }
             sp->setCustomColorMap(colorMap);

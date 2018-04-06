@@ -178,6 +178,7 @@ QString PythonScripting::errorMsg()
 PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
   : ScriptingEnv(parent, langName)
 {
+  Q_UNUSED(batch)
   PyObject *mainmod=NULL, *scidavismod=NULL, *sysmod=NULL;
   math = NULL;
   sys = NULL;
@@ -286,13 +287,13 @@ bool PythonScripting::initialize()
       setQObject(this, "stderr", sys);
     }
   bool initialized;
-  initialized = loadInitFile(QDir::homeDirPath()+"/scidavisrc");
-  if(!initialized) initialized = loadInitFile(QDir::homeDirPath()+"/.scidavisrc");
+  initialized = loadInitFile(QDir::homePath()+"/scidavisrc");
+  if(!initialized) initialized = loadInitFile(QDir::homePath()+"/.scidavisrc");
 #ifdef PYTHON_CONFIG_PATH 
   if(!initialized) initialized = loadInitFile(PYTHON_CONFIG_PATH"/scidavisrc");
   if(!initialized) initialized = loadInitFile(PYTHON_CONFIG_PATH"/.scidavisrc");
 #endif
-  if(!initialized) initialized = loadInitFile(QDir::rootDirPath()+"etc/scidavisrc");
+  if(!initialized) initialized = loadInitFile(QDir::rootPath()+"etc/scidavisrc");
   if(!initialized) initialized = loadInitFile(QCoreApplication::instance()->applicationDirPath()+"/scidavisrc");
   if(!initialized) initialized = loadInitFile("scidavisrc");
 
@@ -318,8 +319,8 @@ bool PythonScripting::loadInitFile(const QString &path)
 	bool success = false;
 	if (pycFile.isReadable() && (pycFile.lastModified() >= pyFile.lastModified())) {
 		// if we have a recent pycFile, use it
-		FILE *f = fopen(pycFile.filePath(), "rb");
-		success = PyRun_SimpleFileEx(f, pycFile.filePath(), false) == 0;
+		FILE *f = fopen(pycFile.filePath().toLocal8Bit(), "rb");
+		success = PyRun_SimpleFileEx(f, pycFile.filePath().toLocal8Bit(), false) == 0;
 		fclose(f);
 	} else if (pyFile.isReadable() && pyFile.exists()) {
 		// try to compile pyFile to pycFile
@@ -328,8 +329,8 @@ bool PythonScripting::loadInitFile(const QString &path)
 			PyObject *compile = PyDict_GetItemString(PyModule_GetDict(compileModule), "compile");
 			if (compile) {
 				PyObject *tmp = PyObject_CallFunctionObjArgs(compile,
-						PyString_FromString(pyFile.filePath()),
-						PyString_FromString(pycFile.filePath()),
+						PyString_FromString(pyFile.filePath().toLocal8Bit()),
+						PyString_FromString(pycFile.filePath().toLocal8Bit()),
 						NULL);
 				if (tmp)
 					Py_DECREF(tmp);
@@ -343,8 +344,8 @@ bool PythonScripting::loadInitFile(const QString &path)
 		pycFile.refresh();
 		if (pycFile.isReadable() && (pycFile.lastModified() >= pyFile.lastModified())) {
 			// run the newly compiled pycFile
-			FILE *f = fopen(pycFile.filePath(), "rb");
-			success = PyRun_SimpleFileEx(f, pycFile.filePath(), false) == 0;
+			FILE *f = fopen(pycFile.filePath().toLocal8Bit(), "rb");
+			success = PyRun_SimpleFileEx(f, pycFile.filePath().toLocal8Bit(), false) == 0;
 			fclose(f);
 		} else {
 			// fallback: just run pyFile
@@ -376,7 +377,7 @@ bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
 	PyGILState_STATE state = PyGILState_Ensure();
 
         //sipWrapperType * klass = sipFindClass(val->className());
-        const sipTypeDef* klass=sipFindType(val->className());
+        const sipTypeDef* klass=sipFindType(val->metaObject()->className());
 	if (!klass) return false;
         //pyobj = sipConvertFromInstance(val, klass, NULL);
 	pyobj = sipConvertFromType(val, klass, NULL);
@@ -434,7 +435,7 @@ const QStringList PythonScripting::mathFunctions() const
 
 const QString PythonScripting::mathFunctionDoc(const QString &name) const
 {
-	PyObject *mathf = PyDict_GetItemString(math,name); // borrowed
+	PyObject *mathf = PyDict_GetItemString(math,name.toLocal8Bit()); // borrowed
 	if (!mathf) return "";
 	PyObject *pydocstr = PyObject_GetAttrString(mathf, "__doc__"); // new
 	QString qdocstr = PyString_AsString(pydocstr);

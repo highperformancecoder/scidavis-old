@@ -217,8 +217,8 @@ void FunctionDialog::setCurveToModify(Graph *g, int curve)
 		optionStack->setCurrentIndex(2);
 		boxType->setCurrentIndex(2);
 
-		boxPolarRadius->setCurrentText(formulas[0]);
-		boxPolarTheta->setCurrentText(formulas[1]);
+		boxPolarRadius->setItemText(boxPolarRadius->currentIndex(), formulas[0]);
+		boxPolarTheta->setItemText(boxPolarTheta->currentIndex(), formulas[1]);
 		boxPolarParameter->setText(c->variable());
 		boxPolarFrom->setText(QString::number(c->startRange(), 'g', 15));
 		boxPolarTo->setText(QString::number(c->endRange(), 'g', 15));
@@ -229,8 +229,8 @@ void FunctionDialog::setCurveToModify(Graph *g, int curve)
 		boxType->setCurrentIndex(1);
 		optionStack->setCurrentIndex(1);
 
-		boxXFunction->setCurrentText(formulas[0]);
-		boxYFunction->setCurrentText(formulas[1]);
+		boxXFunction->setItemText(boxXFunction->currentIndex(), formulas[0]);
+		boxYFunction->setItemText(boxYFunction->currentIndex(), formulas[1]);
 		boxParameter->setText(c->variable());
 		boxParFrom->setText(QString::number(c->startRange(), 'g', 15));
 		boxParTo->setText(QString::number(c->endRange(), 'g', 15));
@@ -240,7 +240,7 @@ void FunctionDialog::setCurveToModify(Graph *g, int curve)
 
 void FunctionDialog::clearList()
 {
-	int type=boxType->currentItem();
+	int type=boxType->currentIndex();
 	switch (type)
 	{
 		case 0:
@@ -301,10 +301,10 @@ bool FunctionDialog::acceptFunction()
 		return false;
 	}
 
-	QString formula = boxFunction->text().replace(QChar::ParagraphSeparator,"\n");
+	QString formula = boxFunction->toPlainText().replace(QChar::ParagraphSeparator,"\n");
 
 	// Collecting all the information
-	int type = boxType->currentItem();
+	int type = boxType->currentIndex();
 	QStringList formulas;
 	QList<double> ranges;
 	formulas+=formula;
@@ -371,7 +371,7 @@ bool FunctionDialog::acceptParametric()
 	QString yformula=boxYFunction->currentText().replace(QChar::ParagraphSeparator,"\n");
 
 	// Collecting all the information
-	int type = boxType->currentItem();
+	int type = boxType->currentIndex();
 	QStringList formulas;
 	QList<double> ranges;
 	formulas+=xformula;
@@ -439,7 +439,7 @@ bool FunctionDialog::acceptPolar()
 	QString tformula=boxPolarTheta->currentText().replace(QChar::ParagraphSeparator,"\n");
 
 	// Collecting all the information
-	int type = boxType->currentItem();
+	int type = boxType->currentIndex();
 	QStringList formulas;
 	QList<double> ranges;
 	formulas+=rformula;

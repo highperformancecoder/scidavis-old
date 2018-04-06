@@ -62,7 +62,7 @@ public slots:
 	void modifiedNote();
 
 	// ScriptEdit methods
-	QString text() { return te->text(); };
+	QString text() { return te->toPlainText(); };
 	void setText(const QString &s) { te->setText(s); };
 	void print() { te->print(); };
 	void exportPDF(const QString& fileName){te->exportPDF(fileName);};
@@ -71,7 +71,7 @@ public slots:
 	void execute() { te->execute(); };
 	bool executeAll() {return te->executeAll(); };
 	void evaluate() { te->evaluate(); };
-  void insert(const QString& s) {te->insert(s);}
+  void insert(const QString& s) {te->insertPlainText(s);}
 private:
 	ScriptEdit *te;
 	bool autoExec;

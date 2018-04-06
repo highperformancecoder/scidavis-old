@@ -273,14 +273,14 @@ void Legend::drawSymbols(QPainter *p, const QRect& rect,
 		    QString aux;
 		    if (titles[i].contains("\\c{"))
 		    {//SciDAVis symbol specification
-                int pos=titles[i].find("{",0);
-                int pos2=titles[i].find("}",pos);
+                int pos=titles[i].indexOf("{",0);
+                int pos2=titles[i].indexOf("}",pos);
                 aux=titles[i].mid(pos+1,pos2-pos-1);
 		    }
 		    else if (titles[i].contains("\\l("))
 		    {//Origin project legend
-		        int pos=titles[i].find("(",0);
-                int pos2=titles[i].find(")",pos);
+		        int pos=titles[i].indexOf("(",0);
+                int pos2=titles[i].indexOf(")",pos);
                 aux=titles[i].mid(pos+1,pos2-pos-1);
             }
 
@@ -326,8 +326,8 @@ void Legend::drawSymbols(QPainter *p, const QRect& rect,
 		}
 		else if (titles[i].contains("\\p{"))
 		{
-			int pos=titles[i].find("{",0);
-			int pos2=titles[i].find("}",pos);
+			int pos=titles[i].indexOf("{",0);
+			int pos2=titles[i].indexOf("}",pos);
 			QString aux=titles[i].mid(pos+1,pos2-pos-1);
 
 			int id=aux.toInt();
@@ -448,12 +448,12 @@ int Legend::symbolsMaxLineLength() const
 		if (titles[i].contains("\\c{") && (int)cvs.size()>0){
 		    QString aux;
 		    if (titles[i].contains("\\c{")){//SciDAVis symbol specification
-                int pos=titles[i].find("{", 0);
-                int pos2=titles[i].find("}", pos);
+                int pos=titles[i].indexOf("{", 0);
+                int pos2=titles[i].indexOf("}", pos);
                 aux=titles[i].mid(pos+1, pos2-pos-1);
 		    } else if (titles[i].contains("\\l(")){//Origin project legend
-		        int pos=titles[i].find("(", 0);
-                int pos2=titles[i].find(")", pos);
+		        int pos=titles[i].indexOf("(", 0);
+                int pos2=titles[i].indexOf(")", pos);
                 aux=titles[i].mid(pos+1, pos2-pos-1);
             }
 
@@ -483,15 +483,15 @@ QString Legend::parse(const QString& str) const
 {
     QString s = str;
     if (s.contains("\\c{") || s.contains("\\p{") || s.contains("\\l(")){
-        int pos = s.find("}",0);
+        int pos = s.indexOf("}",0);
         if (s.contains("\\l("))
-            pos = s.find(")",0);
+            pos = s.indexOf(")",0);
         s = s.right(s.length()-pos-1);
     }
 
     if (s.contains("%(")){//curve name specification
-        int pos = s.find("%(",0);
-        int pos2 = s.find(")",pos);
+        int pos = s.indexOf("%(",0);
+        int pos2 = s.indexOf(")",pos);
         int cv = s.mid(pos+2, pos2-pos-2).toInt() - 1;
         if (cv >= 0){
 			Graph *g = (Graph *)d_plot->parent();

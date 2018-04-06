@@ -106,6 +106,6 @@ const QString MuParserScripting::mathFunctionDoc (const QString &name) const
 {
   for (const mathFunction *i=math_functions; i->name; i++)
     if (name==i->name)
-      return tr(i->description);
+      return tr(i->description.toLocal8Bit());
   return QString::null;
 }

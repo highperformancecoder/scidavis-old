@@ -102,4 +102,4 @@ void TestPaintDevice::PaintEngine::drawTextItem(const QPointF& p, const QTextIte
 {out<<"drawTextItem("<<p<<",\""<<t<<"\")\n";}
 
 void TestPaintDevice::PaintEngine::drawTiledPixmap(const QRectF&r, const QPixmap&pm, const QPointF&p)
-{out<<"drawTiledPixmap("<<r<<","<<pm<<","<<p<<")\n";}
+{out<<"drawTiledPixmap("<<r<<","<<pm.toImage()<<","<<p<<")\n";}

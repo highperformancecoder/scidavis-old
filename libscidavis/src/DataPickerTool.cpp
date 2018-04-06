@@ -43,6 +43,8 @@
 #include <qwt_scale_draw.h>
 #include <QMessageBox>
 #include <QLocale>
+#include <QKeyEvent>
+#include <QMouseEvent>
 
 DataPickerTool::DataPickerTool(Graph *graph, ApplicationWindow *app, Mode mode, const QObject *status_target, const char *status_slot) :
 	QwtPlotPicker(graph->plotWidget()->canvas()),
@@ -60,7 +62,7 @@ DataPickerTool::DataPickerTool(Graph *graph, ApplicationWindow *app, Mode mode, 
 	setTrackerMode(QwtPicker::AlwaysOn);
 	if (d_mode == Move) {
 		setSelectionFlags(QwtPicker::PointSelection | QwtPicker::DragSelection);
-		d_graph->plotWidget()->canvas()->setCursor(Qt::pointingHandCursor);
+		d_graph->plotWidget()->canvas()->setCursor(Qt::PointingHandCursor);
 	} else {
 		setSelectionFlags(QwtPicker::PointSelection | QwtPicker::ClickSelection);
 		d_graph->plotWidget()->canvas()->setCursor(QCursor(QPixmap(":/vizor.xpm"), -1, -1));

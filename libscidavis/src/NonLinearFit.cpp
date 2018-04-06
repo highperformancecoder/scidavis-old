@@ -104,7 +104,7 @@ void NonLinearFit::setParametersList(const QStringList& lst)
 void NonLinearFit::calculateFitCurveData(double *par, double *X, double *Y)
 {
     for (unsigned i=0; i<d_p; i++)
-        d_script->setDouble(par[i], d_param_names[i]);
+        d_script->setDouble(par[i], d_param_names[i].toUtf8());
 
     if (d_gen_function) {
         double X0 = d_x[0];

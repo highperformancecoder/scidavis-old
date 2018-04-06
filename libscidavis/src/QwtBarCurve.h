@@ -37,7 +37,7 @@ class QwtBarCurve: public DataCurve
 {
 public:
 	enum BarStyle{Vertical = 0, Horizontal = 1};
-	QwtBarCurve(BarStyle style, Table *t, const QString& xColName, const char *name, int startRow, int endRow);
+	QwtBarCurve(BarStyle style, Table *t, const QString& xColName, const QString& name, int startRow, int endRow);
 
 	void copy(const QwtBarCurve *b);
 

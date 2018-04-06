@@ -38,7 +38,7 @@
 
 #include <qwt_plot_layout.h>
 
-QwtPieCurve::QwtPieCurve(Table *t, const char *name, int startRow, int endRow):
+QwtPieCurve::QwtPieCurve(Table *t, const QString& name, int startRow, int endRow):
 	DataCurve(t, QString(), name, startRow, endRow)
 {
 	d_pie_ray = 100;

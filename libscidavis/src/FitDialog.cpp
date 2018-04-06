@@ -283,7 +283,7 @@ void FitDialog::initEditPage()
     gb->setLayout(gl2);
 
 	editBox = new QTextEdit();
-	editBox->setTextFormat(Qt::PlainText);
+	editBox->setAcceptRichText(false);
 	editBox->setFocus();
 
     QVBoxLayout *vbox1 = new QVBoxLayout();
@@ -532,13 +532,13 @@ void FitDialog::activateCurve(const QString& curveName)
 
 	double start, end;
     d_graph->range(d_graph->curveIndex(curveName), &start, &end);
-    boxFrom->setText(QLocale().toString(QMIN(start, end), 'g', 15));
-    boxTo->setText(QLocale().toString(QMAX(start, end), 'g', 15));
+    boxFrom->setText(QLocale().toString(qMin(start, end), 'g', 15));
+    boxTo->setText(QLocale().toString(qMax(start, end), 'g', 15));
 };
 
 void FitDialog::saveUserFunction()
 {
-	if (editBox->text().isEmpty())
+	if (editBox->toPlainText().isEmpty())
 	{
 		QMessageBox::critical(this, tr("Input function error"), tr("Please enter a valid function!"));
 		editBox->setFocus();
@@ -567,7 +567,7 @@ void FitDialog::saveUserFunction()
 		editBox->setFocus();
 		return;
 	}
-	if (editBox->text().contains(boxName->text()))
+	if (editBox->toPlainText().contains(boxName->text()))
 	{
 		QMessageBox::critical(this, tr("Input function error"),
 				tr("You can't define functions recursevely!"));
@@ -576,7 +576,7 @@ void FitDialog::saveUserFunction()
 	}
 
 	QString name = boxName->text();
-	QString f = name + "(x, " + boxParam->text() + ")=" + editBox->text().remove("\n");
+	QString f = name + "(x, " + boxParam->text() + ")=" + editBox->toPlainText().remove("\n");
 
 	if (d_user_function_names.contains(name))
 	{
@@ -616,13 +616,13 @@ void FitDialog::removeUserFunction()
 		explainBox->setText(QString());
 
 		int index = d_user_function_names.indexOf(name);
-		d_user_function_names.remove(name);
+		d_user_function_names.removeAll(name);
 
 		QString f = d_user_functions[index];
-		d_user_functions.remove(f);
+		d_user_functions.removeAll(f);
 
 		f = d_user_function_params[index];
-		d_user_function_params.remove(f);
+		d_user_function_params.removeAll(f);
 
 		funcBox->clear();
 		funcBox->addItems (d_user_function_names);
@@ -688,7 +688,7 @@ void FitDialog::showFitPage()
         }
     }
 
-  boxFunction->setText(editBox->text().simplified());
+  boxFunction->setText(editBox->toPlainText().simplified());
   lblFunction->setText(boxName->text() +" (x, " + par + ")");
 
   tw->setCurrentWidget (fitPage);
@@ -717,7 +717,7 @@ void FitDialog::setFunction(bool ok)
 	if (ok)
 	{
 		boxName->setText(funcBox->currentItem()->text());
-		editBox->setText(explainBox->text());
+		editBox->setText(explainBox->toPlainText());
 
 		if (categoryBox->currentRow() == 0 && d_user_function_params.size() > 0)
 			boxParam->setText(d_user_function_params[funcBox->currentRow ()]);
@@ -790,10 +790,10 @@ void FitDialog::addUserFunctions(const QStringList& list)
 		{
             d_user_functions << s;
 
-            int pos1 = s.find("(", 0);
+            int pos1 = s.indexOf("(", 0);
             d_user_function_names << s.left(pos1);
 
-            int pos2 = s.find(")", pos1);
+            int pos2 = s.indexOf(")", pos1);
             d_user_function_params << s.mid(pos1+4, pos2-pos1-4);
 		}
 	}
@@ -860,8 +860,8 @@ void FitDialog::showFunctionsList(int category)
 void FitDialog::choosePluginsFolder()
 {
 	ApplicationWindow *app = (ApplicationWindow *)this->parent();
-	QString dir = QFileDialog::getExistingDirectory(QDir::currentDirPath(), this, "get directory",
-			tr("Choose the plugins folder"), true, true);
+	QString dir = QFileDialog::getExistingDirectory(this, tr("Choose the plugins folder"),
+			 QDir::currentPath(), QFileDialog::ShowDirsOnly);
 	if (!dir.isEmpty())
 	{
 		d_plugin_files_list.clear();
@@ -908,7 +908,7 @@ void FitDialog::loadPlugins()
 			d_plugin_function_names << QString(name());
 			d_plugin_functions << QString(function());
 			d_plugin_params << QString(params());
-			d_plugin_files_list << lib.library();
+			d_plugin_files_list << lib.fileName();
 		}
 	}
 }
@@ -997,20 +997,20 @@ void FitDialog::showExpression(int function)
 
 void FitDialog::pasteExpression()
 {
-	QString f = explainBox->text();
+	QString f = explainBox->toPlainText();
 	if (categoryBox->currentRow() == 2)
 	{//basic parser function
-		f = f.left(f.find("(", 0)+1);
-		if (editBox->hasSelectedText())
+		f = f.left(f.indexOf("(", 0)+1);
+		if (editBox->textCursor().hasSelection())
 		{
-			QString markedText=editBox->selectedText();
-			editBox->insert(f+markedText+")");
+			QString markedText=editBox->textCursor().selectedText();
+			editBox->insertPlainText(f+markedText+")");
 		}
 		else
-			editBox->insert(f+")");
+			editBox->insertPlainText(f+")");
 	}
 	else
-		editBox->insert(f);
+		editBox->insertPlainText(f);
 
 	editBox->setFocus();
 }
@@ -1019,7 +1019,7 @@ void FitDialog::pasteFunctionName()
 {
 	if (!funcBox->currentItem())
 		return;
-	editBox->insert(funcBox->currentItem()->text());
+	editBox->insertPlainText(funcBox->currentItem()->text());
 	editBox->setFocus();
 }
 
@@ -1120,7 +1120,7 @@ void FitDialog::accept()
 	do {
 		found_uf = false;
 		for (i=0; i<d_user_function_names.count(); i++)
-			if (boxFunction->text().contains(d_user_function_names[i])) {
+			if (boxFunction->toPlainText().contains(d_user_function_names[i])) {
 				QStringList l = d_user_functions[i].split("=");
 				formula += QString("%1=%2\n")
 						.arg(d_user_function_names[i])
@@ -1128,7 +1128,7 @@ void FitDialog::accept()
 				found_uf = true;
 			}
 	} while (found_uf);
-	formula += boxFunction->text();
+	formula += boxFunction->toPlainText();
 
 	// define variables for builtin functions used in formula
 	for (i=0; i<d_built_in_function_names.count(); i++)
@@ -1208,7 +1208,7 @@ void FitDialog::accept()
         d_fitter->setMaximumIterations(boxPoints->value());
         d_fitter->scaleErrors(scaleErrorsBox->isChecked());
 
-        if (d_fitter->name() == tr("MultiPeak") && ((MultiPeakFit *)d_fitter)->peaks() > 1)
+        if (d_fitter->objectName() == tr("MultiPeak") && ((MultiPeakFit *)d_fitter)->peaks() > 1)
         {
             ((MultiPeakFit *)d_fitter)->enablePeakCurves(app->generatePeakCurves);
             ((MultiPeakFit *)d_fitter)->setPeakCurvesColor(app->peakCurvesColor);
@@ -1315,8 +1315,8 @@ void FitDialog::changeDataRange()
 {
 	double start = d_graph->selectedXStartValue();
 	double end = d_graph->selectedXEndValue();
-	boxFrom->setText(QString::number(QMIN(start, end), 'g', 15));
-	boxTo->setText(QString::number(QMAX(start, end), 'g', 15));
+	boxFrom->setText(QString::number(qMin(start, end), 'g', 15));
+	boxTo->setText(QString::number(qMax(start, end), 'g', 15));
 }
 
 void FitDialog::setSrcTables(QWidgetList* tables)
@@ -1331,7 +1331,7 @@ void FitDialog::setSrcTables(QWidgetList* tables)
 	d_src_table = tables;
 	tableNamesBox->clear();
 	foreach(QWidget *i, *d_src_table)
-		tableNamesBox->addItem(i->name());
+		tableNamesBox->addItem(i->objectName());
 
 	tableNamesBox->setCurrentIndex(tableNamesBox->findText(boxCurve->currentText().split("_", QString::SkipEmptyParts)[0]));
 	selectSrcTable(tableNamesBox->currentIndex());

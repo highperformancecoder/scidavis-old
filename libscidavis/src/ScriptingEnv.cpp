@@ -41,8 +41,9 @@
 #endif
 
 	ScriptingEnv::ScriptingEnv(ApplicationWindow *parent, const char *langName)
-: QObject(0, langName), d_parent(parent)
+: QObject(0), d_parent(parent)
 {
+	setObjectName(langName);
 	d_initialized=false;
 	d_refcount=0;
 }
@@ -53,7 +54,7 @@ const QString ScriptingEnv::fileFilter() const
 	if (extensions.isEmpty())
 		return "";
 	else
-		return tr("%1 Source (*.%2);;").arg(name()).arg(extensions.join(" *."));
+		return tr("%1 Source (*.%2);;").arg(objectName()).arg(extensions.join(" *."));
 }
 
 void ScriptingEnv::incref()

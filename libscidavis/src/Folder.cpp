@@ -38,17 +38,11 @@
 #include <qevent.h>
 #include <qpoint.h>
 #include <qmessagebox.h>
-#include <q3dragobject.h>
 #include <qmime.h>
-#include <q3strlist.h>
 #include <qstringlist.h>
-#include <q3header.h>
 #include <qapplication.h>
-#include <q3dragobject.h>
-#include <q3iconview.h>
 #include <qcursor.h>
 //Added by qt3to4:
-#include <Q3PtrList>
 #include <QKeyEvent>
 #include <QDropEvent>
 #include <QMouseEvent>
@@ -123,13 +117,16 @@ Folder* Folder::findSubfolder(const QString& s, bool caseSensitive, bool partial
 MyWidget* Folder::findWindow(const QString& s, bool windowNames, bool labels,
 							 bool caseSensitive, bool partialMatch)
 {
+	Qt::CaseSensitivity cs = Qt::CaseSensitive;
+	if (!caseSensitive)
+		cs = Qt::CaseInsensitive;
 	MyWidget* w;
 	foreach(w,lstWindows)
 	{
 		if (windowNames)
 		{
 			QString name = w->name();
-			if (partialMatch && name.startsWith(s, caseSensitive))
+			if (partialMatch && name.startsWith(s, cs))
 				return w;
 			else if (caseSensitive && name == s)
 				return w;
@@ -144,7 +141,7 @@ MyWidget* Folder::findWindow(const QString& s, bool windowNames, bool labels,
 		if (labels)
 		{
 			QString label = w->windowLabel();
-			if (partialMatch && label.startsWith(s, caseSensitive))
+			if (partialMatch && label.startsWith(s, cs))
 				return w;
 			else if (caseSensitive && label == s)
 				return w;
@@ -187,34 +184,33 @@ Folder* Folder::rootFolder()
  *
  *****************************************************************************/
 
-FolderListItem::FolderListItem( Q3ListView *parent, Folder *f )
-    : Q3ListViewItem( parent )
+FolderListItem::FolderListItem( QTreeWidget *parent, Folder *f )
+    : QTreeWidgetItem( parent, FolderListItem::FolderType )
 {
     myFolder = f;
 
     setText( 0, f->name() );
-	setOpen( true );
+	setExpanded( true );
 	setActive( true );
-	setDragEnabled ( true );
-	setDropEnabled ( true );
+	setFlags(flags() | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled);
 }
 
 FolderListItem::FolderListItem( FolderListItem *parent, Folder *f )
-    : Q3ListViewItem( parent )
+    : QTreeWidgetItem( parent, FolderListItem::FolderType )
 {
     myFolder = f;
 
     setText( 0, f->name() );
-	setOpen( true );
+	setExpanded( true );
 	setActive( true );
 }
 
 void FolderListItem::setActive( bool o )
 {
     if ( o )
-		setPixmap(0, QPixmap(":/folder_open.xpm") );
+		setIcon(0, QIcon(QPixmap(":/folder_open.xpm")) );
     else
-		setPixmap(0, QPixmap(":/folder_closed.xpm") );
+		setIcon(0, QIcon(QPixmap(":/folder_closed.xpm")) );
 
 	setSelected(o);
 }
@@ -232,6 +228,27 @@ while (parent)
 return false;
 }
 
+int FolderListItem::depth()
+{
+	int c = 0;
+	FolderListItem *parent = (FolderListItem *)this->parent();
+	while (parent)
+		{
+		c++;
+		parent = (FolderListItem *)parent->parent();
+		}
+	return c;
+}
+
+void FolderListItem::setData( int column, int role, const QVariant& value)
+{
+	if ((role == Qt::EditRole) && (column == 0) && (value != this->text(0)))
+	{// data should be accepted or rejected on slot connected to this signal
+		emit this->folderListView()->itemRenamed(this, column, value.toString());
+	} else {
+		QTreeWidgetItem::setData( column, role, value);
+	}
+}
 /*****************************************************************************
  *
  * Class FolderListView
@@ -239,51 +256,66 @@ return false;
  *****************************************************************************/
 
 FolderListView::FolderListView( QWidget *parent, const QString name )
-	: Q3ListView( parent, name.toLocal8Bit().constData() ), mousePressed( false )
+	: QTreeWidget( parent ), mousePressed( false )
 {
+    setObjectName(name.toLocal8Bit());
     setAcceptDrops( true );
     viewport()->setAcceptDrops( true );
+    setDropIndicatorShown(true);
 }
 
 void FolderListView::startDrag()
 {
-Q3ListViewItem *item = currentItem();
+QTreeWidgetItem *item = currentItem();
 if (!item)
 	return;
 
-if (item == firstChild() && item->listView()->rootIsDecorated())
+if (item == topLevelItem(0) && item->treeWidget()->rootIsDecorated())
 	return;//it's the project folder so we don't want the user to move it
 
-viewportToContents( viewport()->mapFromGlobal( QCursor::pos() ) );
+// Q3CHECK viewportToContents( viewport()->mapFromGlobal( QCursor::pos() ) );
 
 QPixmap pix;
-if (item->rtti() == FolderListItem::RTTI)
+if (item->type() == FolderListItem::FolderType)
 	pix = QPixmap(":/folder_closed.xpm");
 else
-	pix = *item->pixmap (0);
+	pix = item->icon(0).pixmap(QSize());
 
-Q3IconDrag *drag = new Q3IconDrag(viewport());
-drag->setPixmap(pix, QPoint(pix.width()/2, pix.height()/2 ) );
+QDrag *drag = new QDrag(viewport());
+drag->setPixmap(pix);
+drag->setHotSpot(QPoint(pix.width()/2, pix.height()/2 ) );
 
-QList<Q3ListViewItem *> lst;
-for (item = firstChild(); item; item = item->itemBelow())
+QList<QTreeWidgetItem *> lst;
+QTreeWidgetItemIterator it(this);
+while (*it)
 	{
-	if (item->isSelected())
-		lst.append(item);
+	if ((*it)->isSelected())
+		lst.append(*it);
+	it++;
 	}
 
 emit dragItems(lst);
-drag->drag();
+	drag->setMimeData(mimeData(lst));
+	drag->exec();
 }
 
-void FolderListView::contentsDropEvent( QDropEvent *e )
+void FolderListView::dropEvent( QDropEvent *e )
 {
-Q3ListViewItem *dest = itemAt( contentsToViewport(e->pos()) );
-if ( dest && dest->rtti() == FolderListItem::RTTI)
+QTreeWidgetItem *dest = itemAt( e->pos() );
+if ( dest && dest->type() == FolderListItem::FolderType)
+{
+	if (dropIndicatorPosition() != QAbstractItemView::OnItem)
 	{
-	emit dropItems(dest);
-	e->accept();
+		e->ignore();
+	}
+	else
+	{
+		emit dropItems(dest);
+		e->accept();
+		this->setState(QAbstractItemView::NoState); // hack to clear DraggingState
     }
+    mousePressed = false;
+}
 else
 	e->ignore();
 }
@@ -295,27 +327,27 @@ if (isRenaming())
 	e->ignore();
 	return;
 	}
-Q3ListViewItem *item = currentItem();
+QTreeWidgetItem *item = currentItem();
 if (!item) {
-	Q3ListView::keyPressEvent ( e );
+	QTreeWidget::keyPressEvent ( e );
 	return;
 }
 
-if (item->rtti() == FolderListItem::RTTI &&
+if (item->type() == FolderListItem::FolderType &&
 	(e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return))
 	{
-	emit doubleClicked(item);
+	emit itemDoubleClicked(item,0);
 	e->accept();
 	}
 else if (e->key() == Qt::Key_F2)
 	{
 	if (item)
-		emit renameItem(item);
+		emit renameItem(item,0);
 	e->accept();
 	}
-else if(e->key() == Qt::Key_A && e->state() == Qt::ControlModifier)
+else if(e->key() == Qt::Key_A && e->modifiers() == Qt::ControlModifier)
 	{
-	selectAll(true);
+	selectAll();
 	e->accept();
 	}
 else if(e->key() == Qt::Key_F7)
@@ -329,10 +361,10 @@ else if(e->key() == Qt::Key_F8)
 	e->accept();
 	}
 else
-	Q3ListView::keyPressEvent ( e );
+	QTreeWidget::keyPressEvent ( e );
 }
 
-void FolderListView::contentsMouseDoubleClickEvent( QMouseEvent* e )
+void FolderListView::mouseDoubleClickEvent( QMouseEvent* e )
 {
 	if (isRenaming())
 		{
@@ -340,34 +372,25 @@ void FolderListView::contentsMouseDoubleClickEvent( QMouseEvent* e )
 		return;
 		}
 
-	Q3ListView::contentsMouseDoubleClickEvent( e );
+	QTreeWidget::mouseDoubleClickEvent( e );
 }
 
-void FolderListView::contentsMousePressEvent( QMouseEvent* e )
+void FolderListView::mousePressEvent( QMouseEvent* e )
 {
-Q3ListView::contentsMousePressEvent(e);
-if (e->button() != Qt::LeftButton) return;
-QPoint p( contentsToViewport( e->pos() ) );
-Q3ListViewItem *i = itemAt( p );
-
-if ( i )
-		{// if the user clicked into the root decoration of the item, don't try to start a drag!
-		if ( p.x() > header()->cellPos( header()->mapToActual( 0 ) ) +
-			treeStepSize() * ( i->depth() + ( rootIsDecorated() ? 1 : 0) ) + itemMargin() ||
-			p.x() < header()->cellPos( header()->mapToActual( 0 ) ) )
-			{
-			presspos = e->pos();
-	    	mousePressed = true;
-			}
-    	}
+	QTreeWidget::mousePressEvent(e);
+	if (e->button() == Qt::LeftButton)
+	{
+		presspos = e->pos();
+		mousePressed = true;
+	}
 }
 
-void FolderListView::contentsMouseMoveEvent( QMouseEvent* e )
+void FolderListView::mouseMoveEvent( QMouseEvent* e )
 {
 if ( mousePressed && ( presspos - e->pos() ).manhattanLength() > QApplication::startDragDistance() )
 	{
 	mousePressed = false;
-	Q3ListViewItem *item = itemAt( contentsToViewport(presspos) );
+	QTreeWidgetItem *item = itemAt( presspos ); // Q3CHECK contentsToViewport(presspos) );
 	if ( item )
 		startDrag();
     }
@@ -375,8 +398,8 @@ if ( mousePressed && ( presspos - e->pos() ).manhattanLength() > QApplication::s
 
 void FolderListView::adjustColumns()
 {
-for (int i=0; i < columns (); i++)
-	adjustColumn(i);
+for (int i=0; i < columnCount (); i++)
+	resizeColumnToContents(i);
 }
 
 /*****************************************************************************
@@ -385,10 +408,22 @@ for (int i=0; i < columns (); i++)
  *
  *****************************************************************************/
 
-WindowListItem::WindowListItem( Q3ListView *parent, MyWidget *w )
-    : Q3ListViewItem( parent )
+WindowListItem::WindowListItem( QTreeWidget *parent, MyWidget *w )
+    : QTreeWidgetItem( parent, WindowListItem::WindowType )
 {
     myWindow = w;
+	this->treeWidget()->setCurrentItem(this,0, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
 
-	setDragEnabled ( true );
+	setFlags((flags() | Qt::ItemIsDragEnabled) & ~Qt::ItemIsDropEnabled);
+}
+
+void WindowListItem::setData( int column, int role, const QVariant& value)
+{
+	if (role == Qt::EditRole)
+	{// data should be accepted or rejected on slot connected to this signal
+		if (column == 0)
+			emit this->folderListView()->itemRenamed(this, column, value.toString());
+	} else {
+		QTreeWidgetItem::setData( column, role, value);
+	}
 }

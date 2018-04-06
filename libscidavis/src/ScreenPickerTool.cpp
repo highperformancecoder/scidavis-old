@@ -33,6 +33,7 @@
 #include "Plot.h"
 #include <qwt_symbol.h>
 #include <qwt_scale_draw.h>
+#include <QKeyEvent>
 
 ScreenPickerTool::ScreenPickerTool(Graph *graph, const QObject *status_target, const char *status_slot)
 	: QwtPlotPicker(graph->plotWidget()->canvas()),

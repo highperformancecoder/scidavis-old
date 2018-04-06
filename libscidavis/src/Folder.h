@@ -30,8 +30,8 @@
 #define FOLDER_H
 
 #include <qobject.h>
-#include <q3listview.h>
-#include <q3iconview.h>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 //Added by qt3to4:
 #include <QDragEnterEvent>
 #include <QMouseEvent>
@@ -40,11 +40,11 @@
 #include <QKeyEvent>
 #include <QEvent>
 #include <QDropEvent>
-#include <Q3PtrList>
 
 #include "MyWidget.h"
 
 class FolderListItem;
+class FolderListView;
 class Table;
 class Matrix;
 class MultiLayer;
@@ -54,7 +54,6 @@ class QDragEnterEvent;
 class QDragMoveEvent;
 class QDragLeaveEvent;
 class QDropEvent;
-class Q3DragObject;
 
 //! Folder for the project explorer
 class Folder : public QObject
@@ -150,12 +149,16 @@ protected:
  *
  *****************************************************************************/
 //! Windows list item class
-class WindowListItem : public Q3ListViewItem
+class WindowListItem : public QTreeWidgetItem
 {
 public:
-    WindowListItem( Q3ListView *parent, MyWidget *w );
+    WindowListItem( QTreeWidget *parent, MyWidget *w );
+    static const int WindowType = QTreeWidgetItem::UserType+2;
+    void setData(int, int, const QVariant&);
 
     MyWidget *window() { return myWindow; };
+
+    FolderListView* folderListView() { return (FolderListView*)treeWidget(); };
 
 protected:
     MyWidget *myWindow;
@@ -167,19 +170,22 @@ protected:
  *
  *****************************************************************************/
 //! Folders list item class
-class FolderListItem : public Q3ListViewItem
+class FolderListItem : public QTreeWidgetItem
 {
 public:
-    FolderListItem( Q3ListView *parent, Folder *f );
+    FolderListItem( QTreeWidget *parent, Folder *f );
     FolderListItem( FolderListItem *parent, Folder *f );
 
-	enum {RTTI = 1001};
+	static const int FolderType = QTreeWidgetItem::UserType+1;
 
 	void setActive( bool o );
-
-	virtual int rtti() const {return (int)RTTI;};
+	void setData(int, int, const QVariant&);
 
     Folder *folder() { return myFolder; };
+	int depth();
+
+	FolderListView* folderListView() { return (FolderListView*)treeWidget(); };
+
 
 	//! Checks weather the folder item is a grandchild of the source folder
 	/**
@@ -197,31 +203,36 @@ protected:
  *
  *****************************************************************************/
 //! Folder list view class
-class FolderListView : public Q3ListView
+class FolderListView : public QTreeWidget
 {
     Q_OBJECT
+
+	friend class FolderListItem;
+	friend class WindowListItem;
 
 public:
 	FolderListView(QWidget *parent = 0, const QString name = QString() );
 
 public slots:
 	void adjustColumns();
+	bool isRenaming() { return state() == QAbstractItemView::EditingState; };
 
 protected:
 	void startDrag();
 
-    void contentsDropEvent( QDropEvent *e );
-    void contentsMouseMoveEvent( QMouseEvent *e );
-    void contentsMousePressEvent( QMouseEvent *e );
-	void contentsMouseDoubleClickEvent( QMouseEvent* e );
+    void dropEvent( QDropEvent *e );
+    void mouseMoveEvent( QMouseEvent *e );
+    void mousePressEvent( QMouseEvent *e );
+	void mouseDoubleClickEvent( QMouseEvent* e );
 	void keyPressEvent ( QKeyEvent * e );
-    void contentsMouseReleaseEvent( QMouseEvent *){mousePressed = false;};
+    void mouseReleaseEvent( QMouseEvent *){mousePressed = false;};
 	void enterEvent(QEvent *){mousePressed = false;};
 
 signals:
-	void dragItems(QList<Q3ListViewItem *> items);
-	void dropItems(Q3ListViewItem *dest);
-	void renameItem(Q3ListViewItem *item);
+	void dragItems(QList<QTreeWidgetItem *> items);
+	void dropItems(QTreeWidgetItem *dest);
+	void renameItem(QTreeWidgetItem *item, int);
+	void itemRenamed(QTreeWidgetItem *item, int, const QString&);
 	void addFolderItem();
 	void deleteSelection();
 

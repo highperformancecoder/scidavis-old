@@ -546,7 +546,7 @@ void ConfigDialog::initAppPage()
 	topBoxLayout->addWidget( lblScriptingLanguage, 3, 0 );
 	boxScriptingLanguage = new QComboBox();
 	QStringList llist = ScriptingLangManager::languages();
-	boxScriptingLanguage->insertStringList(llist);
+	boxScriptingLanguage->addItems(llist);
 	boxScriptingLanguage->setCurrentIndex(llist.indexOf(app->defaultScriptingLang));
 	topBoxLayout->addWidget( boxScriptingLanguage, 3, 1 );
 
@@ -1060,7 +1060,7 @@ void ConfigDialog::apply()
 
 	// tables page
 	QString sep = boxSeparator->currentText();
-	sep.replace(tr("TAB"), "\t", false);
+	sep.replace(tr("TAB"), "\t", Qt::CaseInsensitive);
 	sep.replace("\\t", "\t");
 	sep.replace(tr("SPACE"), " ");
 	sep.replace("\\s", " ");
@@ -1092,8 +1092,8 @@ void ConfigDialog::apply()
 	// 2D plots page: ticks tab
 	app->majTicksLength = boxMajTicksLength->value();
 	app->minTicksLength = boxMinTicksLength->value();
-	app->majTicksStyle = boxMajTicks->currentItem();
-	app->minTicksStyle = boxMinTicks->currentItem();
+	app->majTicksStyle = boxMajTicks->currentIndex();
+	app->minTicksStyle = boxMinTicks->currentIndex();
 	// 2D plots page: fonts tab
 	app->plotAxesFont=axesFont;
 	app->plotNumbersFont=numbersFont;
@@ -1216,7 +1216,7 @@ void ConfigDialog::apply()
 int ConfigDialog::curveStyle()
 {
 	int style = 0;
-	switch (boxCurveStyle->currentItem())
+	switch (boxCurveStyle->currentIndex())
 	{
 		case 0:
 			style = Graph::Line;

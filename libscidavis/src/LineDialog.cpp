@@ -64,22 +64,22 @@ LineDialog::LineDialog( ArrowMarker *line, QWidget* parent, Qt::WFlags fl )
 
 	gl1->addWidget(new QLabel(tr("Line type")), 1, 0);
     styleBox = new QComboBox();
-	styleBox->insertItem("_____");
-	styleBox->insertItem("- - -");
-	styleBox->insertItem(".....");
-	styleBox->insertItem("_._._");
-	styleBox->insertItem("_.._..");
+	styleBox->addItem("_____");
+	styleBox->addItem("- - -");
+	styleBox->addItem(".....");
+	styleBox->addItem("_._._");
+	styleBox->addItem("_.._..");
 	gl1->addWidget(styleBox, 1, 1);
 
 	setLineStyle(lm->style());
 
 	gl1->addWidget(new QLabel(tr("Line width")), 2, 0);
     widthBox = new QComboBox();
-	widthBox->insertItem( tr( "1" ) );
-    widthBox->insertItem( tr( "2" ) );
-    widthBox->insertItem( tr( "3" ) );
-    widthBox->insertItem( tr( "4" ) );
-    widthBox->insertItem( tr( "5" ) );
+	widthBox->addItem( tr( "1" ) );
+    widthBox->addItem( tr( "2" ) );
+    widthBox->addItem( tr( "3" ) );
+    widthBox->addItem( tr( "4" ) );
+    widthBox->addItem( tr( "5" ) );
 	widthBox->setEditable (true);
 	widthBox->setCurrentIndex(0);
 	widthBox->setEditText(QString::number(lm->width()));
@@ -165,8 +165,8 @@ LineDialog::LineDialog( ArrowMarker *line, QWidget* parent, Qt::WFlags fl )
 void LineDialog::initGeometryTab()
 {
 	unitBox = new QComboBox();
-	unitBox->insertItem(tr("Scale Coordinates"));
-	unitBox->insertItem(tr("Pixels"));
+	unitBox->addItem(tr("Scale Coordinates"));
+	unitBox->addItem(tr("Pixels"));
 
 	QBoxLayout *bl1 = new QBoxLayout (QBoxLayout::LeftToRight);
 	bl1->addWidget(new QLabel(tr( "Unit" )));
@@ -255,7 +255,7 @@ void LineDialog::apply()
 {
 if (tw->currentWidget()==(QWidget *)options)
 	{
-	lm->setStyle(Graph::getPenStyle(styleBox->currentItem()));
+	lm->setStyle(Graph::getPenStyle(styleBox->currentIndex()));
 	lm->setColor(colorBox->color());
 	lm->setWidth(widthBox->currentText().toInt());
 	lm->drawEndArrow(endBox->isChecked());
@@ -273,7 +273,7 @@ else if (tw->currentWidget()==(QWidget *)head)
 		lm->fillArrowHead( filledBox->isChecked() );
 	}
 else if (tw->currentWidget()==(QWidget *)geometry)
-	setCoordinates(unitBox->currentItem());
+	setCoordinates(unitBox->currentIndex());
 
 QwtPlot *plot = lm->plot();
 Graph *g = (Graph *)plot->parent();
@@ -306,9 +306,9 @@ else if (style==Qt::DashDotDotLine)
 void LineDialog::enableHeadTab()
 {
 if (startBox->isChecked() || endBox->isChecked())
-	tw->setTabEnabled (head, true);
+	tw->setTabEnabled (tw->indexOf(head), true);
 else
-	tw->setTabEnabled (head, false);
+	tw->setTabEnabled (tw->indexOf(head), false);
 }
 
 void LineDialog::pickColor()
@@ -327,7 +327,7 @@ if (!app)
 	return;
 
 app->setArrowDefaultSettings(widthBox->currentText().toInt(), colorBox->color(),
-							Graph::getPenStyle(styleBox->currentItem()),
+							Graph::getPenStyle(styleBox->currentIndex()),
 							boxHeadLength->value(), boxHeadAngle->value(), filledBox->isChecked());
 }
 

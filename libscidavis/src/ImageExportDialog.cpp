@@ -40,6 +40,7 @@
 #include <QPrinter>
 #include <QLabel>
 #include <QComboBox>
+#include <QCloseEvent>
 
 ImageExportDialog::ImageExportDialog(QWidget * parent, bool vector_options, bool extended, Qt::WFlags flags)
 	: ExtensibleFileDialog( parent, extended, flags )
