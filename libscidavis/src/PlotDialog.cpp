@@ -500,16 +500,16 @@ void PlotDialog::initLinePage()
 	gl1->addWidget(boxLineWidth, 2, 1);
 
 	gl1->addWidget(new QLabel(tr( "Color" )), 3, 0);
-	boxLineColor = new ColorBox();
-	gl1->addWidget(boxLineColor, 3, 1);
+    boxLineColor = new ColorButton();
+    gl1->addWidget(boxLineColor, 3, 1);
     gl1->setRowStretch (4, 1);
 
 	fillGroupBox = new QGroupBox(tr( "Fill area under curve" ));
 	fillGroupBox->setCheckable(true);
 	QGridLayout *gl2 = new QGridLayout(fillGroupBox);
     gl2->addWidget(new QLabel(tr( "Fill color" )), 0, 0);
-	boxAreaColor = new ColorBox();
-	gl2->addWidget(boxAreaColor, 0, 1);
+    boxAreaColor = new ColorButton();
+    gl2->addWidget(boxAreaColor, 0, 1);
 	gl2->addWidget(new QLabel(tr( "Pattern" )), 1, 0);
 	boxPattern = new PatternBox();
 	gl2->addWidget(boxPattern, 1, 1);
@@ -521,10 +521,10 @@ void PlotDialog::initLinePage()
 	hlayout->addWidget(fillGroupBox);
 	privateTabWidget->addTab( linePage, tr( "Line" ) );
 
-	connect(boxLineColor, SIGNAL(activated(int)), this, SLOT(acceptParams()));
+    connect(boxLineColor, SIGNAL(clicked()), this, SLOT(pickBoxLineColor()));
 	connect(boxConnect, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(boxLineStyle, SIGNAL(activated(int)), this, SLOT(acceptParams()));
-	connect(boxAreaColor, SIGNAL(activated(int)), this, SLOT(acceptParams()));
+    connect(boxAreaColor, SIGNAL(clicked()), this, SLOT(pickBoxAreaColor()));
 	connect(boxPattern, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(fillGroupBox, SIGNAL(toggled(bool)), this, SLOT(showAreaColor(bool)));
 	connect(fillGroupBox, SIGNAL(clicked()), this, SLOT(acceptParams()));
@@ -1241,6 +1241,24 @@ void PlotDialog::changeErrorBarsType()
   graph->updateErrorBars((QwtErrorPlotCurve *)item->plotItem(), xBox->isChecked(), widthBox->currentText().toInt(),
                          capBox->currentText().toInt(), colorBox->color(), plusBox->isChecked(), minusBox->isChecked(),
                          throughBox->isChecked());
+}
+
+void PlotDialog::pickBoxLineColor()
+{
+    QColor color = QColorDialog::getColor(boxLineColor->color(), this);
+    if ( !color.isValid() || color == boxLineColor->color() )
+        return;
+
+    boxLineColor->setColor(color);
+}
+
+void PlotDialog::pickBoxAreaColor()
+{
+    QColor color = QColorDialog::getColor(boxAreaColor->color(), this);
+    if ( !color.isValid() || color == boxAreaColor->color() )
+        return;
+
+    boxAreaColor->setColor(color);
 }
 
 void PlotDialog::pickErrorBarsColor()
