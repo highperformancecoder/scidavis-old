@@ -22,3 +22,11 @@ void Unittests::lockToolbars()
       QVERIFY(tb->isMovable());
  
 }
+
+void Unittests::basicWindowTests()
+{
+  auto t=newTable();
+  QVERIFY(t->name()!="xxx");
+  renameWindow(t,"xxx");
+  QVERIFY(t->name()=="xxx");
+}

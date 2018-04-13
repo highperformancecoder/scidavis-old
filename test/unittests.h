@@ -20,6 +20,8 @@ private slots:
   void showHelp();
   void chooseHelpFolder();
 
+  void basicWindowTests();
+  
   void fft();
   
 public:

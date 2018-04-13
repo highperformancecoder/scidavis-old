@@ -15,6 +15,7 @@
   HEADERS += src/PythonScript.h src/PythonScripting.h
   SOURCES += src/PythonScript.cpp src/PythonScripting.cpp
 
+  message("Making PyQt bindings via SIP")
   unix {
     INCLUDEPATH += $$system(python-config --includes|sed -e 's/-I//')
     osx_dist {
