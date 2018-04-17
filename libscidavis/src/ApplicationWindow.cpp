@@ -1561,15 +1561,6 @@ void ApplicationWindow::setListView(const QString& caption,const QString& view)
 		it->setText(2,view);
 }
 
-QString ApplicationWindow::listViewDate(const QString& caption)
-{
-	Q3ListViewItem *it=lv->findItem (caption,0, Q3ListView::ExactMatch | Qt::CaseSensitive );
-	if (it)
-		return it->text(4);
-	else
-		return "";
-}
-
 void ApplicationWindow::updateTableNames(const QString& oldName, const QString& newName)
 {
 	QWidgetList *windows = windowsList();
