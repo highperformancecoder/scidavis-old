@@ -431,7 +431,6 @@ public slots:
   //!  Checks weather the new window name is valid and modifies the name.
   bool renameWindow(MyWidget *w, const QString &text);
 
-  void maximizeWindow(Q3ListViewItem * lbi);
   void maximizeWindow();
   void minimizeWindow();
   //! Changes the geometry of the active MDI window

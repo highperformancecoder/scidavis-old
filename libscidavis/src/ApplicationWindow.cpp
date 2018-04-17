@@ -7333,20 +7333,6 @@ void ApplicationWindow::activateWindow(MyWidget *w)
 	emit modified();
 }
 
-void ApplicationWindow::maximizeWindow(Q3ListViewItem * lbi)
-{
-	if (!lbi || lbi->rtti() == FolderListItem::RTTI)
-		return;
-
-	MyWidget *w = ((WindowListItem*)lbi)->window();
-	if (!w)
-		return;
-
-	w->setMaximized();
-	updateWindowLists(w);
-	emit modified();
-}
-
 void ApplicationWindow::maximizeWindow()
 {
 	MyWidget *w = qobject_cast<MyWidget *>(d_workspace->activeWindow());
