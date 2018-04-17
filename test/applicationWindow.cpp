@@ -41,3 +41,22 @@ void Unittests::basicWindowTests()
   QVERIFY(t->name()=="xxx");
 
 }
+
+void Unittests::deleteSelectedItems()
+{
+  auto t=newTable();
+  bool found=false;
+  unique_ptr<QWidgetList> windows(windowsList());
+  for (auto i: *windows)
+    if (t==i) found=true;
+  QVERIFY(found);
+
+  addListViewItem(t);
+  ApplicationWindow::deleteSelectedItems();
+  found=false;
+  windows.reset(windowsList());
+  for (auto i: *windows)
+    if (t==i) found=true;
+  QVERIFY(found);
+
+}

@@ -21,6 +21,7 @@ private slots:
   void chooseHelpFolder();
 
   void basicWindowTests();
+  void deleteSelectedItems();
   
   void fft();
   
