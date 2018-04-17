@@ -53,7 +53,9 @@ void Unittests::deleteSelectedItems()
   QVERIFY(found);
 
   addListViewItem(t);
-  lv->selectAll(true);
+  for (auto item=lv->firstChild(); item; item=item->nextSibling())
+    if (dynamic_cast<WindowListItem*>(item)->window()==t)
+      item->setSelected(true);
   t->askOnCloseEvent(false);
   ApplicationWindow::deleteSelectedItems();
   found=false;
