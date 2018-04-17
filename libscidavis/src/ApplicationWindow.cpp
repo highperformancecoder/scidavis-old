@@ -7722,42 +7722,39 @@ void ApplicationWindow::deleteSelectedItems()
 	folders->blockSignals(false);
 }
 
-void ApplicationWindow::showListViewSelectionMenu(const QPoint &p)
+QMenu* ApplicationWindow::showListViewSelectionMenuImpl()
 {
-	QMenu cm(this);
-	cm.insertItem(tr("&Delete Selection"), this, SLOT(deleteSelectedItems()), Qt::Key_F8);
-	cm.exec(p);
+	QMenu* cm=new QMenu(this);
+	cm->insertItem(tr("&Delete Selection"), this, SLOT(deleteSelectedItems()), Qt::Key_F8);
+	return cm;
 }
 
-void ApplicationWindow::showListViewPopupMenu(const QPoint &p)
+QMenu* ApplicationWindow::showListViewPopupMenuImpl()
 {
-	QMenu cm(this);
-	QMenu window(this);
+	QMenu* cm=new QMenu(this);
+	QMenu* window=new QMenu(this);
 
-	window.addAction(actionNewTable);
-	window.addAction(actionNewMatrix);
-	window.addAction(actionNewNote);
-	window.addAction(actionNewGraph);
-	window.addAction(actionNewFunctionPlot);
-	window.addAction(actionNewSurfacePlot);
-	cm.insertItem(tr("New &Window"), &window);
+	window->addAction(actionNewTable);
+	window->addAction(actionNewMatrix);
+	window->addAction(actionNewNote);
+	window->addAction(actionNewGraph);
+	window->addAction(actionNewFunctionPlot);
+	window->addAction(actionNewSurfacePlot);
+	cm->insertItem(tr("New &Window"), window);
 
-	cm.insertItem(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
-	cm.addSeparator();
-	cm.insertItem(tr("Auto &Column Width"), lv, SLOT(adjustColumns()));
-	cm.exec(p);
+	cm->insertItem(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
+	cm->addSeparator();
+	cm->insertItem(tr("Auto &Column Width"), lv, SLOT(adjustColumns()));
+	return cm;
 }
 
-void ApplicationWindow::showWindowPopupMenu(Q3ListViewItem *it, const QPoint &p, int)
+QMenu* ApplicationWindow::showWindowPopupMenuImpl(Q3ListViewItem *it)
 {
 	if (folders->isRenaming())
-		return;
+          return nullptr;
 
 	if (!it)
-	{
-		showListViewPopupMenu(p);
-		return;
-	}
+          return showListViewPopupMenuImpl();
 
 	Q3ListViewItem *item;
 	int selected = 0;
@@ -7767,21 +7764,18 @@ void ApplicationWindow::showWindowPopupMenu(Q3ListViewItem *it, const QPoint &p,
 			selected++;
 
 		if (selected>1)
-		{
-			showListViewSelectionMenu(p);
-			return;
-		}
+                  return showListViewSelectionMenuImpl();
 	}
 
 	if (it->rtti() == FolderListItem::RTTI)
 	{
 		current_folder = ((FolderListItem *)it)->folder();
-		showFolderPopupMenu(it, p, false);
-		return;
+		return showFolderPopupMenuImpl(it, false);
 	}
 
 	MyWidget *w= ((WindowListItem *)it)->window();
-	if (w) showWindowMenu(w);
+	if (w) return showWindowMenuImpl(w);
+        return nullptr;
 }
 
 void ApplicationWindow::showTable(const QString& curve)
@@ -12484,65 +12478,65 @@ void ApplicationWindow::showFolderPopupMenu(Q3ListViewItem *it, const QPoint &p,
 	showFolderPopupMenu(it, p, true);
 }
 
-void ApplicationWindow::showFolderPopupMenu(Q3ListViewItem *it, const QPoint &p, bool fromFolders)
+QMenu*ApplicationWindow::showFolderPopupMenuImpl(Q3ListViewItem *it, bool fromFolders)
 {
 	if (!it || folders->isRenaming())
-		return;
+		return nullptr;
 
-	QMenu cm(this);
-	QMenu window(this);
-	QMenu viewWindowsMenu(this);
-	viewWindowsMenu.setCheckable ( true );
+	QMenu* cm=new QMenu(this);
+	QMenu* window=new QMenu(this);
+	QMenu* viewWindowsMenu=new QMenu(this);
+	viewWindowsMenu->setCheckable ( true );
 
-	cm.insertItem(tr("&Find..."), this, SLOT(showFindDialogue()));
-	cm.addSeparator();
-	cm.insertItem(tr("App&end Project..."), this, SLOT(appendProject()));
+	cm->insertItem(tr("&Find..."), this, SLOT(showFindDialogue()));
+	cm->addSeparator();
+	cm->insertItem(tr("App&end Project..."), this, SLOT(appendProject()));
 	if (((FolderListItem *)it)->folder()->parent())
-		cm.insertItem(tr("Save &As Project..."), this, SLOT(saveAsProject()));
+		cm->insertItem(tr("Save &As Project..."), this, SLOT(saveAsProject()));
 	else
-		cm.insertItem(tr("Save Project &As..."), this, SLOT(saveProjectAs()));
-	cm.addSeparator();
+		cm->insertItem(tr("Save Project &As..."), this, SLOT(saveProjectAs()));
+	cm->addSeparator();
 
 	if (fromFolders && show_windows_policy != HideAll)
 	{
-		cm.insertItem(tr("&Show All Windows"), this, SLOT(showAllFolderWindows()));
-		cm.insertItem(tr("&Hide All Windows"), this, SLOT(hideAllFolderWindows()));
-		cm.addSeparator();
+		cm->insertItem(tr("&Show All Windows"), this, SLOT(showAllFolderWindows()));
+		cm->insertItem(tr("&Hide All Windows"), this, SLOT(hideAllFolderWindows()));
+		cm->addSeparator();
 	}
 
 	if (((FolderListItem *)it)->folder()->parent())
 	{
-		cm.insertItem(QPixmap(":/close.xpm"), tr("&Delete Folder"), this, SLOT(deleteFolder()), Qt::Key_F8);
-		cm.insertItem(tr("&Rename"), this, SLOT(startRenameFolder()), Qt::Key_F2);
-		cm.addSeparator();
+		cm->insertItem(QPixmap(":/close.xpm"), tr("&Delete Folder"), this, SLOT(deleteFolder()), Qt::Key_F8);
+		cm->insertItem(tr("&Rename"), this, SLOT(startRenameFolder()), Qt::Key_F2);
+		cm->addSeparator();
 	}
 
 	if (fromFolders)
 	{
-		window.addAction(actionNewTable);
-		window.addAction(actionNewMatrix);
-		window.addAction(actionNewNote);
-		window.addAction(actionNewGraph);
-		window.addAction(actionNewFunctionPlot);
-		window.addAction(actionNewSurfacePlot);
-		cm.insertItem(tr("New &Window"), &window);
+		window->addAction(actionNewTable);
+		window->addAction(actionNewMatrix);
+		window->addAction(actionNewNote);
+		window->addAction(actionNewGraph);
+		window->addAction(actionNewFunctionPlot);
+		window->addAction(actionNewSurfacePlot);
+		cm->insertItem(tr("New &Window"), window);
 	}
 
-	cm.insertItem(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
-	cm.addSeparator();
+	cm->insertItem(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
+	cm->addSeparator();
 
 	QStringList lst;
 	lst << tr("&None") << tr("&Windows in Active Folder") << tr("Windows in &Active Folder && Subfolders");
 	for (int i = 0; i < 3; ++i)
 	{
-		int id = viewWindowsMenu.insertItem(lst[i],this, SLOT( setShowWindowsPolicy( int ) ) );
-		viewWindowsMenu.setItemParameter( id, i );
-		viewWindowsMenu.setItemChecked( id, show_windows_policy == i );
+		int id = viewWindowsMenu->insertItem(lst[i],this, SLOT( setShowWindowsPolicy( int ) ) );
+		viewWindowsMenu->setItemParameter( id, i );
+		viewWindowsMenu->setItemChecked( id, show_windows_policy == i );
 	}
-	cm.insertItem(tr("&View Windows"), &viewWindowsMenu);
-	cm.addSeparator();
-	cm.insertItem(tr("&Properties..."), this, SLOT(folderProperties()));
-	cm.exec(p);
+	cm->insertItem(tr("&View Windows"), viewWindowsMenu);
+	cm->addSeparator();
+	cm->insertItem(tr("&Properties..."), this, SLOT(folderProperties()));
+	return cm;
 }
 
 void ApplicationWindow::setShowWindowsPolicy(int p)
@@ -13598,32 +13592,32 @@ void ApplicationWindow::showStatusBarContextMenu( const QPoint & pos )
 	cm.exec(d_status_info->mapToGlobal(pos));
 }
 
-void ApplicationWindow::showWindowMenu(MyWidget * widget)
+QMenu* ApplicationWindow::showWindowMenuImpl(MyWidget * widget)
 {
 	d_workspace->setActiveWindow(widget); // FIXME not user-friendly, but can't be simply removed
 
-	QMenu cm(this);
-	QMenu depend_menu(this);
+	QMenu* cm=new QMenu(this);
+	QMenu* depend_menu=new QMenu(this);
 
 	if (widget->inherits("Table"))
-		cm.addAction(actionShowExportASCIIDialog);
+		cm->addAction(actionShowExportASCIIDialog);
 	else if (widget->inherits("Note"))
-		cm.addAction(actionSaveNote);
+		cm->addAction(actionSaveNote);
 	else
-		cm.addAction(actionSaveTemplate);
-	cm.addAction(actionPrint);
-	cm.addAction(actionCopyWindow);
-	cm.addSeparator();
-	cm.addAction(actionRename);
-	cm.addAction(actionCloseWindow);
+		cm->addAction(actionSaveTemplate);
+	cm->addAction(actionPrint);
+	cm->addAction(actionCopyWindow);
+	cm->addSeparator();
+	cm->addAction(actionRename);
+	cm->addAction(actionCloseWindow);
 	if (!hidden(widget))
-		cm.addAction(actionHideActiveWindow);
-	cm.addAction(actionActivateWindow);
-	cm.addAction(actionMinimizeWindow);
-	cm.addAction(actionMaximizeWindow);
-	cm.addAction(actionResizeWindow);
-	cm.addSeparator();
-	cm.addAction(tr("&Properties..."), this, SLOT(windowProperties()));
+		cm->addAction(actionHideActiveWindow);
+	cm->addAction(actionActivateWindow);
+	cm->addAction(actionMinimizeWindow);
+	cm->addAction(actionMaximizeWindow);
+	cm->addAction(actionResizeWindow);
+	cm->addSeparator();
+	cm->addAction(tr("&Properties..."), this, SLOT(windowProperties()));
 
 	int n;
 	if (widget->inherits("Table"))
@@ -13632,12 +13626,12 @@ void ApplicationWindow::showWindowMenu(MyWidget * widget)
 		n = graphs.count();
 		if (n > 0)
 		{
-			cm.addSeparator();
+			cm->addSeparator();
 			for (int i=0; i<n; i++)
-				depend_menu.addAction(graphs[i], this, SLOT(setActiveWindowFromAction()));
+				depend_menu->addAction(graphs[i], this, SLOT(setActiveWindowFromAction()));
 
-			depend_menu.setTitle(tr("D&epending Graphs"));
-			cm.addMenu(&depend_menu);
+			depend_menu->setTitle(tr("D&epending Graphs"));
+			cm->addMenu(depend_menu);
 		}
 	}
 	else if (widget->inherits("Matrix"))
@@ -13646,12 +13640,12 @@ void ApplicationWindow::showWindowMenu(MyWidget * widget)
 		n = graphs.count();
 		if (n > 0)
 		{
-			cm.addSeparator();
+			cm->addSeparator();
 			for (int i=0; i<n; i++)
-				depend_menu.addAction(graphs[i], this, SLOT(setActiveWindowFromAction()));
+				depend_menu->addAction(graphs[i], this, SLOT(setActiveWindowFromAction()));
 
-			depend_menu.setTitle(tr("D&epending 3D Graphs"));
-			cm.addMenu(&depend_menu);
+			depend_menu->setTitle(tr("D&epending 3D Graphs"));
+			cm->addMenu(depend_menu);
 		}
 	}
 	else if (widget->inherits("MultiLayer"))
@@ -13660,12 +13654,12 @@ void ApplicationWindow::showWindowMenu(MyWidget * widget)
 		n = tbls.count();
 		if (n > 0)
 		{
-			cm.addSeparator();
+			cm->addSeparator();
 			for (int i=0; i<n; i++)
-				depend_menu.addAction(tbls[i], this, SLOT(setActiveWindowFromAction()));
+				depend_menu->addAction(tbls[i], this, SLOT(setActiveWindowFromAction()));
 
-			depend_menu.setTitle(tr("D&epends on"));
-			cm.addMenu(&depend_menu);
+			depend_menu->setTitle(tr("D&epends on"));
+			cm->addMenu(depend_menu);
 		}
 	}
 	else if (widget->inherits("Graph3D"))
@@ -13675,26 +13669,26 @@ void ApplicationWindow::showWindowMenu(MyWidget * widget)
 		QString formula = sp->formula();
 		if (!formula.isEmpty())
 		{
-			cm.addSeparator();
+			cm->addSeparator();
 			if (formula.contains("_"))
 			{
 				QStringList tl = formula.split("_", QString::SkipEmptyParts);
 
-				depend_menu.addAction(tl[0], this, SLOT(setActiveWindowFromAction()));
+				depend_menu->addAction(tl[0], this, SLOT(setActiveWindowFromAction()));
 
-				depend_menu.setTitle(tr("D&epends on"));
-				cm.addMenu(&depend_menu);
+				depend_menu->setTitle(tr("D&epends on"));
+				cm->addMenu(depend_menu);
 			}
 			else if (m)
 			{
-				depend_menu.addAction(m->name(), this, SLOT(setActiveWindowFromAction()));
-				depend_menu.setTitle(tr("D&epends on"));
-				cm.addMenu(&depend_menu);
+				depend_menu->addAction(m->name(), this, SLOT(setActiveWindowFromAction()));
+				depend_menu->setTitle(tr("D&epends on"));
+				cm->addMenu(depend_menu);
 			}
 		}
 	}
 
-	cm.exec(QCursor::pos());
+	return cm;
 }
 
 void ApplicationWindow::setActiveWindowFromAction()

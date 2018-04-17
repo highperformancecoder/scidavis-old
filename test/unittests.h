@@ -22,7 +22,8 @@ private slots:
 
   void basicWindowTests();
   void deleteSelectedItems();
-  
+  void showWindowPopupMenu();
+
   void fft();
   
 public:

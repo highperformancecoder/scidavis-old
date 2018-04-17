@@ -63,3 +63,21 @@ void Unittests::deleteSelectedItems()
   QVERIFY(!found);
 
 }
+
+void Unittests::showWindowPopupMenu()
+{
+  auto t=newTable();
+  addListViewItem(t);
+
+  // TODO add some more items like folder views etc to this test
+  for (auto item=lv->firstChild(); item; item=item->nextSibling())
+    if (dynamic_cast<WindowListItem*>(item)->window()==t)
+      {
+        auto m1=showWindowPopupMenuImpl(item);
+        auto m2=showWindowMenuImpl(t);
+        QVERIFY(m1->actions().size());
+        QVERIFY(m1->actions().size()==m2->actions().size());
+        QVERIFY(m1->contentsRect()==m2->contentsRect());
+      }
+  
+}

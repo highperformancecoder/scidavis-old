@@ -42,6 +42,7 @@
 #include <QDesktopServices>
 #include <QBuffer>
 #include <QLocale>
+#include <QMenu>
 
 #include "Table.h"
 #include "ScriptingEnv.h"
@@ -630,13 +631,19 @@ public slots:
   void showCurvePlotDialog();
   void showCurveWorksheet();
   void showCurveWorksheet(Graph *g, int curveIndex);
-  void showWindowPopupMenu(Q3ListViewItem *it, const QPoint &p, int);
+  /// @return the menu item, which is owned by this. May be null
+  QMenu* showWindowPopupMenuImpl(Q3ListViewItem *it);
+  void showWindowPopupMenu(Q3ListViewItem *it, const QPoint &p, int)
+  {auto m=showWindowPopupMenuImpl(it); if (m) m->exec(p);}
 
   //! Connected to the context menu signal from lv; it's called when there are several items selected in the list
-  void showListViewSelectionMenu(const QPoint &p);
+  QMenu* showListViewSelectionMenuImpl();
+  void showListViewSelectionMenu(const QPoint &p)
+  {showListViewSelectionMenuImpl()->exec(p);}
 
   //! Connected to the context menu signal from lv; it's called when there are no items selected in the list
-  void showListViewPopupMenu(const QPoint &p);
+  QMenu* showListViewPopupMenuImpl();
+  void showListViewPopupMenu(const QPoint &p) {showListViewPopupMenuImpl()->exec(p);}
 
   void showMoreWindows();
   void showMarkerPopupMenu();
@@ -794,7 +801,9 @@ public slots:
    * \param fromFolders: true means that the user clicked right mouse buttom on an item from QListView "folders"
    *					   false means that the user clicked right mouse buttom on an item from QListView "lv"
    */
-  void showFolderPopupMenu(Q3ListViewItem *it, const QPoint &p, bool fromFolders);
+  QMenu* showFolderPopupMenuImpl(Q3ListViewItem *it, bool fromFolders);
+  void showFolderPopupMenu(Q3ListViewItem *it, const QPoint &p, bool fromFolders)
+  {showFolderPopupMenuImpl(it,fromFolders)->exec(p);}
 
   //!  connected to the SIGNAL contextMenuRequested from the list views
   void showFolderPopupMenu(Q3ListViewItem *it, const QPoint &p, int);
@@ -1017,11 +1026,14 @@ public:
   /// location of translation resources
   QString qmPath;
 
+protected:
+  //! Show a context menu for the widget
+  QMenu* showWindowMenuImpl(MyWidget * widget);
+  void showWindowMenu(MyWidget * widget) {showWindowMenuImpl(widget)->exec(QCursor::pos());}
+  
 private:
   bool m_batch;
   
-  //! Show a context menu for the widget
-  void showWindowMenu(MyWidget * widget);
   //! Create a menu for toggeling the toolbars
   QMenu *createToolbarsMenu();
 
