@@ -12806,12 +12806,9 @@ void ApplicationWindow::addFolder()
 	addFolderListViewItem(f);
 
 	FolderListItem *fi = new FolderListItem(current_folder->folderListItem(), f);
-	if (fi)
-	{
-		f->setFolderListItem(fi);
-		fi->setRenameEnabled (0, true);
-		fi->startRename(0);
-	}
+        f->setFolderListItem(fi);
+        fi->setRenameEnabled (0, true);
+        fi->startRename(0);
 }
 
 bool ApplicationWindow::deleteFolder(Folder *f)

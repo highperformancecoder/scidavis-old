@@ -68,18 +68,56 @@ void Unittests::deleteSelectedItems()
 
 void Unittests::showWindowPopupMenu()
 {
+  // test null argument, should pop up the listview menu
+  {
+    auto m1=showWindowPopupMenuImpl(nullptr);
+    auto m2=showListViewPopupMenuImpl();
+    QVERIFY(m1->actions().size());
+    QVERIFY(m1->actions().size()==m2->actions().size());
+    QVERIFY(m1->contentsRect()==m2->contentsRect());
+  }
+
+  // add a table, and check it pops up the window menu
   auto t=newTable();
   addListViewItem(t);
 
   // TODO add some more items like folder views etc to this test
   for (auto item=lv->firstChild(); item; item=item->nextSibling())
-    if (dynamic_cast<WindowListItem*>(item)->window()==t)
+    if (auto wli=dynamic_cast<WindowListItem*>(item))
+      if (wli->window()==t)
+        {
+          auto m1=showWindowPopupMenuImpl(item);
+          auto m2=showWindowMenuImpl(t);
+          QVERIFY(m1->actions().size());
+          QVERIFY(m1->actions().size()==m2->actions().size());
+          QVERIFY(m1->contentsRect()==m2->contentsRect());
+        }
+
+  // finally, check multi-selections
+  lv->selectAll(true);
+  {
+    auto m1=showWindowPopupMenuImpl(lv->firstChild());
+    QVERIFY(m1);
+    auto m2=showListViewSelectionMenuImpl();
+    QVERIFY(m2);
+    QVERIFY(m1->actions().size());
+    QVERIFY(m1->actions().size()==m2->actions().size());
+    QVERIFY(m1->contentsRect()==m2->contentsRect());
+  }
+  lv->clearSelection();
+
+  // check behaviour on folders
+  QVERIFY(lv->firstChild());
+  addFolderListViewItem(new Folder(current_folder, "ImAFolder"));
+  QVERIFY(lv->firstChild());
+  for (auto item=lv->firstChild(); item; item=item->nextSibling())
+    if (dynamic_cast<FolderListItem*>(item))
       {
-        auto m1=showWindowPopupMenuImpl(item);
-        auto m2=showWindowMenuImpl(t);
-        QVERIFY(m1->actions().size());
-        QVERIFY(m1->actions().size()==m2->actions().size());
-        QVERIFY(m1->contentsRect()==m2->contentsRect());
-      }
-  
+          auto m1=showWindowPopupMenuImpl(item);
+          auto m2=showFolderPopupMenuImpl(item, false);
+          QVERIFY(m1->actions().size());
+          QVERIFY(m1->actions().size()==m2->actions().size());
+          QVERIFY(m1->contentsRect()==m2->contentsRect());
+        }
+
 }
