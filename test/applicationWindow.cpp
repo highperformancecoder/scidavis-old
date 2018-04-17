@@ -1,6 +1,7 @@
 #include "unittests.h"
 #include "ApplicationWindow.h"
 #include "RenameWindowDialog.h"
+#include "Folder.h"
 #include <QTest>
 #include <QToolBar>
 #include <iostream>
@@ -52,11 +53,13 @@ void Unittests::deleteSelectedItems()
   QVERIFY(found);
 
   addListViewItem(t);
+  lv->selectAll(true);
+  t->askOnCloseEvent(false);
   ApplicationWindow::deleteSelectedItems();
   found=false;
   windows.reset(windowsList());
   for (auto i: *windows)
-    if (t==i) found=true;
-  QVERIFY(found);
+    if (t==i) found=false;
+  QVERIFY(!found);
 
 }
