@@ -1,7 +1,9 @@
 #include "unittests.h"
 #include "ApplicationWindow.h"
+#include "RenameWindowDialog.h"
 #include <QTest>
 #include <QToolBar>
+#include <iostream>
 using namespace std;
 
 void Unittests::lockToolbars()
@@ -29,4 +31,13 @@ void Unittests::basicWindowTests()
   QVERIFY(t->name()!="xxx");
   renameWindow(t,"xxx");
   QVERIFY(t->name()=="xxx");
+
+  // test the renameWindowDialog
+  auto rwd=new RenameWindowDialog(this);
+  rwd->setWidget(t);
+  renameWindow(t,"yyy");
+  QVERIFY(t->name()!="xxx");
+  rwd->accept(); // should change the window title back
+  QVERIFY(t->name()=="xxx");
+
 }
