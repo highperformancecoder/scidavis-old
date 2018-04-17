@@ -5126,23 +5126,6 @@ void ApplicationWindow::renameActiveWindow()
 	rwd->exec();
 }
 
-void ApplicationWindow::renameWindow(Q3ListViewItem *item, int, const QString &text)
-{
-	if (!item)
-		return;
-
-	MyWidget *w = ((WindowListItem *)item)->window();
-	if (!w || text == w->name())
-		return;
-
-	while(!renameWindow(w, text))
-	{
-		item->setRenameEnabled (0, true);
-		item->startRename (0);
-		return;
-	}
-}
-
 bool ApplicationWindow::renameWindow(MyWidget *w, const QString &text)
 {
 	if (!w)
