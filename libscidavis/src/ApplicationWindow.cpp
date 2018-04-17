@@ -5994,23 +5994,22 @@ void ApplicationWindow::removeCurve()
 
 void ApplicationWindow::showCurveWorksheet(Graph *g, int curveIndex)
 {
-	if (!g)
-		return;
+  if (!g)
+    return;
 
-    const QwtPlotItem *it = g->plotItem(curveIndex);
-	if (!it)
-		return;
+  QwtPlotItem *it = g->plotItem(curveIndex);
+  if (!it)
+    return;
 
-	if (it->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
-	{
-		Spectrogram *sp = (Spectrogram *)it;
-		if (sp->matrix())
-			sp->matrix()->showMaximized();
-	}
-	else if (((PlotCurve *)it)->type() == Graph::Function)
-		g->createTable((PlotCurve *)it);
-    else
-		showTable(it->title().text());
+  if (auto sp=dynamic_cast<Spectrogram*>(it))
+    {
+      if (sp->matrix())
+        sp->matrix()->showMaximized();
+    }
+  else if (((PlotCurve *)it)->type() == Graph::Function)
+    g->createTable((PlotCurve *)it);
+  else
+    showTable(it->title().text());
 }
 
 void ApplicationWindow::showCurveWorksheet()
@@ -7767,14 +7766,15 @@ QMenu* ApplicationWindow::showWindowPopupMenuImpl(Q3ListViewItem *it)
                   return showListViewSelectionMenuImpl();
 	}
 
-	if (it->rtti() == FolderListItem::RTTI)
+	if (auto fl = dynamic_cast<FolderListItem*>(it))
 	{
-		current_folder = ((FolderListItem *)it)->folder();
-		return showFolderPopupMenuImpl(it, false);
+          current_folder = fl->folder();
+          return showFolderPopupMenuImpl(it, false);
 	}
 
-	MyWidget *w= ((WindowListItem *)it)->window();
-	if (w) return showWindowMenuImpl(w);
+        if (auto wli=dynamic_cast<WindowListItem*>(it))
+          if (auto w=wli->window())
+            return showWindowMenuImpl(w);
         return nullptr;
 }
 
