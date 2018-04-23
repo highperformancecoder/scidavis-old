@@ -45,6 +45,9 @@
 #include <QComboBox>
 #include <QLayout>
 
+#include <memory>
+using namespace std;
+
 FFTDialog::FFTDialog(int type, QWidget* parent, Qt::WFlags fl )
 : QDialog( parent, fl )
 {
@@ -132,43 +135,45 @@ FFTDialog::FFTDialog(int type, QWidget* parent, Qt::WFlags fl )
 
 void FFTDialog::accept()
 {
-	double sampling;
-	try
-	{
-		MyParser parser;
-		parser.SetExpr(boxSampling->text().toAscii().constData());
-		sampling=parser.Eval();
-	}
-	catch(mu::ParserError &e)
-	{
-		QMessageBox::critical(this, tr("Sampling value error"), QString::fromStdString(e.GetMsg()));
-		boxSampling->setFocus();
-		return;
-	}
+  double sampling;
+  try
+    {
+      MyParser parser;
+      parser.SetExpr(boxSampling->text().toAscii().constData());
+      sampling=parser.Eval();
+    }
+  catch(mu::ParserError &e)
+    {
+      QMessageBox::critical(this, tr("Sampling value error"), QString::fromStdString(e.GetMsg()));
+      boxSampling->setFocus();
+      return;
+    }
 
-	ApplicationWindow *app = (ApplicationWindow *)parent();
-    FFT *fft;
-	if (graph)
-	{
-        fft = new FFT(app, graph, boxName->currentText());
-	}
-	else if (d_table)
-	{
-		if (boxReal->currentText().isEmpty())
-		{
-			QMessageBox::critical(this, tr("Error"), tr("Please choose a column for the real part of the data!"));
-			boxReal->setFocus();
-			return;
-		}
-        fft = new FFT(app, d_table, boxReal->currentText(), boxImaginary->currentText());
-	}
-    fft->setInverseFFT(backwardBtn->isChecked());
-    fft->setSampling(sampling);
-    fft->normalizeAmplitudes(boxNormalize->isChecked());
-    fft->shiftFrequencies(boxOrder->isChecked());
-    fft->run();
-    delete fft;
-	close();
+  ApplicationWindow *app = (ApplicationWindow *)parent();
+  unique_ptr<FFT> fft;
+  if (graph)
+    {
+      fft.reset(new FFT(app, graph, boxName->currentText()));
+    }
+  else if (d_table)
+    {
+      if (boxReal->currentText().isEmpty())
+        {
+          QMessageBox::critical(this, tr("Error"), tr("Please choose a column for the real part of the data!"));
+          boxReal->setFocus();
+          return;
+        }
+      fft.reset(new FFT(app, d_table, boxReal->currentText(), boxImaginary->currentText()));
+    }
+  if (fft)
+    {
+      fft->setInverseFFT(backwardBtn->isChecked());
+      fft->setSampling(sampling);
+      fft->normalizeAmplitudes(boxNormalize->isChecked());
+      fft->shiftFrequencies(boxOrder->isChecked());
+      fft->run();
+    }
+  close();
 }
 
 void FFTDialog::setGraph(Graph *g)
