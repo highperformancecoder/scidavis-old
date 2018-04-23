@@ -57,6 +57,9 @@
 
 #include <gsl/gsl_vector.h>
 
+#include <iostream>
+using namespace std;
+
 LayerButton::LayerButton(const QString& text, QWidget* parent)
 : QPushButton(text, parent)
 {
@@ -92,7 +95,7 @@ MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name
 	pal.setColor(QPalette::Inactive, QPalette::Window, QColor(Qt::white));
 	pal.setColor(QPalette::Disabled, QPalette::Window, QColor(Qt::white));
 	setPalette(pal);
-
+        
 	QDateTime dt = QDateTime::currentDateTime ();
 	setBirthDate(dt.toString(Qt::LocalDate));
 
@@ -734,15 +737,15 @@ void MultiLayer::exportPainter(QPainter &painter, bool keepAspect, QRect rect, Q
                  (double)size.height()/(double)rect.height()
                  );
 
-	 painter.fillRect(rect, backgroundRole()); // FIXME workaround for background
+     painter.fillRect(rect, palette().brush(backgroundRole()));
 
-    for (int i=0; i<(int)graphsList.count(); i++)
+     for (int i=0; i<(int)graphsList.count(); i++)
 	{
 		Graph *gr = (Graph *)graphsList.at(i);
 		Plot *myPlot = (Plot *)gr->plotWidget();
 
 		QPoint pos = QPoint(gr->pos().x(), gr->pos().y());
-        gr->exportPainter(painter, false, QRect(pos, myPlot->size()));
+                gr->exportPainter(painter, false, QRect(pos, myPlot->size()));
 	}
  }
 

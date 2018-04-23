@@ -26,11 +26,12 @@ void Unittests::fft()
   Graph graph;
   graph.insertCurve(&table,"x","y",Graph::Line);
 
-  FFT fft1(this,&table,"y");
+  ApplicationWindow app;
+  FFT fft1(&app,&table,"y");
   fft1.run();
   // FFT creates a hidden table, which we need to find.
   Table* table1=nullptr;
-  for (auto i: *windowsList())
+  for (auto i: *app.windowsList())
     if (auto t=dynamic_cast<Table*>(i))
       {
         table1=t;
@@ -41,10 +42,10 @@ void Unittests::fft()
 
   QVERIFY(table1);
 
-  FFT fft2(this,&graph,"y");
+  FFT fft2(&app,&graph,"y");
   fft2.run();
   Table* table2=nullptr;
-  for (auto i: *windowsList())
+  for (auto i: *app.windowsList())
     if (auto table=dynamic_cast<Table*>(i))
       if (table!=table1)
         {

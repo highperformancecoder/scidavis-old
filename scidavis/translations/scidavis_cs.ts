@@ -9875,6 +9875,10 @@ nejmenší celé číslo větší nebo rovno x.</translation>
         <source>%1: apply formula to column</source>
         <translation type="unfinished">%1: vzorec použit na sloupec</translation>
     </message>
+    <message>
+        <source>&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableConfigPage</name>

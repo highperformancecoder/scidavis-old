@@ -1573,15 +1573,6 @@ void ApplicationWindow::setListView(const QString& caption,const QString& view)
 		it->setText(2,view);
 }
 
-QString ApplicationWindow::listViewDate(const QString& caption)
-{
-	QTreeWidgetItem *it=lv->findItems (caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).value(0);
-	if (it)
-		return it->text(4);
-	else
-		return "";
-}
-
 void ApplicationWindow::updateTableNames(const QString& oldName, const QString& newName)
 {
 	QWidgetList *windows = windowsList();
@@ -5147,19 +5138,6 @@ void ApplicationWindow::renameActiveWindow()
 	rwd->exec();
 }
 
-void ApplicationWindow::renameWindow(QTreeWidgetItem *item, int, const QString &text)
-{
-	if (!item)
-		return;
-
-	MyWidget *w = ((WindowListItem *)item)->window();
-	if (!w || text == w->name())
-		return;
-
-	QString oldname = w->name();
-	renameWindow(w, text);
-}
-
 bool ApplicationWindow::renameWindow(MyWidget *w, const QString &text)
 {
 	if (!w)
@@ -6028,23 +6006,22 @@ void ApplicationWindow::removeCurve()
 
 void ApplicationWindow::showCurveWorksheet(Graph *g, int curveIndex)
 {
-	if (!g)
-		return;
+  if (!g)
+    return;
 
-    const QwtPlotItem *it = g->plotItem(curveIndex);
-	if (!it)
-		return;
+  QwtPlotItem *it = g->plotItem(curveIndex);
+  if (!it)
+    return;
 
-	if (it->rtti() == QwtPlotItem::Rtti_PlotSpectrogram)
-	{
-		Spectrogram *sp = (Spectrogram *)it;
-		if (sp->matrix())
-			sp->matrix()->showMaximized();
-	}
-	else if (((PlotCurve *)it)->type() == Graph::Function)
-		g->createTable((PlotCurve *)it);
-    else
-		showTable(it->title().text());
+  if (auto sp=dynamic_cast<Spectrogram*>(it))
+    {
+      if (sp->matrix())
+        sp->matrix()->showMaximized();
+    }
+  else if (((PlotCurve *)it)->type() == Graph::Function)
+    g->createTable((PlotCurve *)it);
+  else
+    showTable(it->title().text());
 }
 
 void ApplicationWindow::showCurveWorksheet()
@@ -7366,20 +7343,6 @@ void ApplicationWindow::activateWindow(MyWidget *w)
 	emit modified();
 }
 
-void ApplicationWindow::maximizeWindow(QTreeWidgetItem * lbi)
-{
-	if (!lbi || lbi->type() == FolderListItem::FolderType)
-		return;
-
-	MyWidget *w = ((WindowListItem*)lbi)->window();
-	if (!w)
-		return;
-
-	w->setMaximized();
-	updateWindowLists(w);
-	emit modified();
-}
-
 void ApplicationWindow::maximizeWindow()
 {
 	MyWidget *w = qobject_cast<MyWidget *>(d_workspace->activeWindow());
@@ -7755,17 +7718,15 @@ void ApplicationWindow::deleteSelectedItems()
 		return;
 	}
 
-	QTreeWidgetItem *item;
 	QList<QTreeWidgetItem *> lst;
-	QTreeWidgetItemIterator it(lv);
-	while (*it)
+	for (QTreeWidgetItemIterator it(lv); *it; it++)
 	{
 		if ((*it)->isSelected())
 			lst.append((*it));
 	}
 
 	folders->blockSignals(true);
-	foreach(item, lst)
+	for (auto item: lst)
 	{
 		if (item->type() == FolderListItem::FolderType)
 		{
@@ -7779,43 +7740,44 @@ void ApplicationWindow::deleteSelectedItems()
 	folders->blockSignals(false);
 }
 
-void ApplicationWindow::showListViewSelectionMenu(const QPoint &p)
+QMenu* ApplicationWindow::showListViewSelectionMenuImpl()
 {
-	QMenu cm(this);
-	cm.addAction(tr("&Delete Selection"), this, SLOT(deleteSelectedItems()), Qt::Key_F8);
-	cm.exec(p);
+	QMenu* cm=new QMenu(this);
+	cm->addAction(tr("&Delete Selection"), this, SLOT(deleteSelectedItems()), Qt::Key_F8);
+	return cm;
 }
 
-void ApplicationWindow::showListViewPopupMenu(const QPoint &p)
+QMenu* ApplicationWindow::showListViewPopupMenuImpl()
 {
-	QMenu cm(this);
+	QMenu* cm=new QMenu(this);
+	QMenu* window = cm->addMenu(tr("New &Window"));
 
-	QMenu* window = cm.addMenu(tr("New &Window"));
 	window->addAction(actionNewTable);
 	window->addAction(actionNewMatrix);
 	window->addAction(actionNewNote);
 	window->addAction(actionNewGraph);
 	window->addAction(actionNewFunctionPlot);
 	window->addAction(actionNewSurfacePlot);
-
-	cm.addAction(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
-	cm.addSeparator();
-	cm.addAction(tr("Auto &Column Width"), lv, SLOT(adjustColumns()));
-	cm.exec(lv->viewport()->mapToGlobal(p));
+	cm->addAction(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
+	cm->addSeparator();
+	cm->addAction(tr("Auto &Column Width"), lv, SLOT(adjustColumns()));
+	return cm;
 }
 
-void ApplicationWindow::showWindowPopupMenu(const QPoint &p)
+  void ApplicationWindow::showWindowPopupMenu(const QPoint &p)
+  {
+    if (auto m=showWindowPopupMenuImpl(lv->itemAt(p)))
+      m->exec(p);
+  }
+
+
+QMenu* ApplicationWindow::showWindowPopupMenuImpl(QTreeWidgetItem *it)
 {
 	if (folders->isRenaming())
-		return;
-
-	QTreeWidgetItem *it = lv->itemAt(p);
+          return nullptr;
 
 	if (!it)
-	{
-		showListViewPopupMenu(p);
-		return;
-	}
+          return showListViewPopupMenuImpl();
 
 	int selected = 0;
 	QTreeWidgetItemIterator itv(lv);
@@ -7825,22 +7787,20 @@ void ApplicationWindow::showWindowPopupMenu(const QPoint &p)
 			selected++;
 
 		if (selected>1)
-		{
-			showListViewSelectionMenu(p);
-			return;
-		}
+                  return showListViewSelectionMenuImpl();
 		itv++;
 	}
 
-	if (it->type() == FolderListItem::FolderType)
+	if (auto fl = dynamic_cast<FolderListItem*>(it))
 	{
-		current_folder = ((FolderListItem *)it)->folder();
-		showFolderPopupMenu(p, false);
-		return;
+          current_folder = fl->folder();
+          return showFolderPopupMenuImpl(fl, false);
 	}
 
-	MyWidget *w= ((WindowListItem *)it)->window();
-	if (w) showWindowMenu(w);
+        if (auto wli=dynamic_cast<WindowListItem*>(it))
+          if (auto w=wli->window())
+            return showWindowMenuImpl(w);
+        return nullptr;
 }
 
 void ApplicationWindow::showTable(const QString& curve)
@@ -12538,50 +12498,48 @@ void ApplicationWindow::saveFolderAsProject(Folder *f)
 	}
 }
 
-void ApplicationWindow::showFolderPopupMenu(const QPoint &p)
-{
-	showFolderPopupMenu(p, true);
-}
-
 void ApplicationWindow::showFolderPopupMenu(const QPoint &p, bool fromFolders)
 {
-	QTreeWidgetItem* it;
-	if (fromFolders)
-		it = folders->itemAt(p);
-	else
-		it = lv->itemAt(p);
+  if (fromFolders)
+    showFolderPopupMenuImpl(folders->itemAt(p), fromFolders)->exec(p);
+  else
+    showFolderPopupMenuImpl(lv->itemAt(p), fromFolders)->exec(p);
+}
 
+
+
+QMenu*ApplicationWindow::showFolderPopupMenuImpl(QTreeWidgetItem* it, bool fromFolders)
+{
 	if (!it || folders->isRenaming())
-		return;
+		return nullptr;
 
-	QMenu cm(this);
-
-	cm.addAction(tr("&Find..."), this, SLOT(showFindDialogue()));
-	cm.addSeparator();
-	cm.addAction(tr("App&end Project..."), this, SLOT(appendProject()));
+	QMenu* cm=new QMenu(this);
+	cm->addAction(tr("&Find..."), this, SLOT(showFindDialogue()));
+	cm->addSeparator();
+	cm->addAction(tr("App&end Project..."), this, SLOT(appendProject()));
 	if (((FolderListItem *)it)->folder()->parent())
-		cm.addAction(tr("Save &As Project..."), this, SLOT(saveAsProject()));
+		cm->addAction(tr("Save &As Project..."), this, SLOT(saveAsProject()));
 	else
-		cm.addAction(tr("Save Project &As..."), this, SLOT(saveProjectAs()));
-	cm.addSeparator();
+		cm->addAction(tr("Save Project &As..."), this, SLOT(saveProjectAs()));
+	cm->addSeparator();
 
 	if (fromFolders && show_windows_policy != HideAll)
 	{
-		cm.addAction(tr("&Show All Windows"), this, SLOT(showAllFolderWindows()));
-		cm.addAction(tr("&Hide All Windows"), this, SLOT(hideAllFolderWindows()));
-		cm.addSeparator();
+		cm->addAction(tr("&Show All Windows"), this, SLOT(showAllFolderWindows()));
+		cm->addAction(tr("&Hide All Windows"), this, SLOT(hideAllFolderWindows()));
+		cm->addSeparator();
 	}
 
 	if (((FolderListItem *)it)->folder()->parent())
 	{
-		cm.addAction(QPixmap(":/close.xpm"), tr("&Delete Folder"), this, SLOT(deleteFolder()), Qt::Key_F8);
-		cm.addAction(tr("&Rename"), this, SLOT(startRenameFolder()), Qt::Key_F2);
-		cm.addSeparator();
+		cm->addAction(QPixmap(":/close.xpm"), tr("&Delete Folder"), this, SLOT(deleteFolder()), Qt::Key_F8);
+		cm->addAction(tr("&Rename"), this, SLOT(startRenameFolder()), Qt::Key_F2);
+		cm->addSeparator();
 	}
 
 	if (fromFolders)
 	{
-		QMenu* window = cm.addMenu(tr("New &Window"));
+		QMenu* window = cm->addMenu(tr("New &Window"));
 		window->addAction(actionNewTable);
 		window->addAction(actionNewMatrix);
 		window->addAction(actionNewNote);
@@ -12590,10 +12548,10 @@ void ApplicationWindow::showFolderPopupMenu(const QPoint &p, bool fromFolders)
 		window->addAction(actionNewSurfacePlot);
 	}
 
-	cm.addAction(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
-	cm.addSeparator();
+	cm->addAction(QPixmap(":/newfolder.xpm"), tr("New F&older"), this, SLOT(addFolder()), Qt::Key_F7);
+	cm->addSeparator();
 
-	QMenu* viewWindowsMenu = cm.addMenu(tr("&View Windows"));
+	QMenu* viewWindowsMenu = cm->addMenu(tr("&View Windows"));
 	QStringList lst;
 	lst << tr("&None") << tr("&Windows in Active Folder") << tr("Windows in &Active Folder && Subfolders");
 	for (int i = 0; i < 3; ++i)
@@ -12603,9 +12561,9 @@ void ApplicationWindow::showFolderPopupMenu(const QPoint &p, bool fromFolders)
 		actId->setCheckable(true);
 		actId->setChecked(show_windows_policy == i); // Q3CHECK viewWindowsMenu.setItemChecked( id, show_windows_policy == i );
 	}
-	cm.addSeparator();
-	cm.addAction(tr("&Properties..."), this, SLOT(folderProperties()));
-	cm.exec(it->treeWidget()->mapToGlobal(p));
+	cm->addSeparator();
+	cm->addAction(tr("&Properties..."), this, SLOT(folderProperties()));
+	return cm;
 }
 
 void ApplicationWindow::setShowWindowsPolicy(bool checked)
@@ -12895,56 +12853,53 @@ void ApplicationWindow::addFolder()
 	addFolderListViewItem(f);
 
 	FolderListItem *fi = new FolderListItem(current_folder->folderListItem(), f);
-	if (fi)
-	{
-		f->setFolderListItem(fi);
-		fi->setFlags(fi->flags() | Qt::ItemIsEditable);
-		fi->treeWidget()->setCurrentItem(fi,0);
-		fi->treeWidget()->editItem(fi, 0); // Q3CHECK fi->startRename(0);
-		fi->treeWidget()->resizeColumnToContents(0);
-	}
+        f->setFolderListItem(fi);
+        fi->setFlags(fi->flags() | Qt::ItemIsEditable);
+        fi->treeWidget()->setCurrentItem(fi,0);
+        fi->treeWidget()->editItem(fi, 0); // Q3CHECK fi->startRename(0);
+        fi->treeWidget()->resizeColumnToContents(0);
 }
 
 bool ApplicationWindow::deleteFolder(Folder *f)
 {
-	if (confirmCloseFolder && QMessageBox::information(this, tr("Delete folder?"),
-				tr("Delete folder '%1' and all the windows it contains?").arg(f->name()),
-				tr("Yes"), tr("No"), 0, 0))
-	{
-		return false;
-	}
-	else
-	{
-		FolderListItem *fi = f->folderListItem();
-		foreach(MyWidget *w, f->windowsList())
-            closeWindow(w);
+  if (confirmCloseFolder && QMessageBox::information(this, tr("Delete folder?"),
+                                                     tr("Delete folder '%1' and all the windows it contains?").arg(f->name()),
+                                                     tr("Yes"), tr("No"), 0, 0))
+    {
+      return false;
+    }
+  else
+    {
+      FolderListItem *fi = f->folderListItem();
+      foreach(MyWidget *w, f->windowsList())
+        closeWindow(w);
 
-		if ( !(f->children()).isEmpty() ){
-			FolderListItem *item = (FolderListItem *)fi->child(0);
-			int initial_depth = item->depth();
-			QTreeWidgetItemIterator it(item);
-			while (item && item->depth() >= initial_depth){
-			    Folder *subFolder = (Folder *)item->folder();
-			    if (subFolder){
-                    foreach(MyWidget *w, subFolder->windowsList()){
-                        removeWindowFromLists(w);
-                        subFolder->removeWindow(w);
-                        delete w;
-                    }
+      if ( !(f->children()).isEmpty() ){
+        FolderListItem *item = (FolderListItem *)fi->child(0);
+        int initial_depth = item->depth();
+        QTreeWidgetItemIterator it(item);
+        while (item && item->depth() >= initial_depth){
+          Folder *subFolder = (Folder *)item->folder();
+          if (subFolder){
+            foreach(MyWidget *w, subFolder->windowsList()){
+              removeWindowFromLists(w);
+              subFolder->removeWindow(w);
+              delete w;
+            }
 
-                    FolderListItem *old_item = item;
-                    it++;
-                    item = (FolderListItem *)(*it);
-                    delete subFolder;
-                    delete old_item;
-			    }
-			}
-		}
+            FolderListItem *old_item = item;
+            it++;
+            item = (FolderListItem *)(*it);
+            delete subFolder;
+            delete old_item;
+          }
+        }
+      }
 
-		delete f;
-		delete fi;
-		return true;
-	}
+      delete f;
+      delete fi;
+      return true;
+    }
 }
 
 void ApplicationWindow::deleteFolder()
@@ -13704,32 +13659,32 @@ void ApplicationWindow::showStatusBarContextMenu( const QPoint & pos )
 	cm.exec(d_status_info->mapToGlobal(pos));
 }
 
-void ApplicationWindow::showWindowMenu(MyWidget * widget)
+QMenu* ApplicationWindow::showWindowMenuImpl(MyWidget * widget)
 {
 	d_workspace->setActiveWindow(widget); // FIXME not user-friendly, but can't be simply removed
 
-	QMenu cm(this);
-	QMenu depend_menu(this);
+	QMenu* cm=new QMenu(this);
+	QMenu* depend_menu=new QMenu(this);
 
 	if (widget->inherits("Table"))
-		cm.addAction(actionShowExportASCIIDialog);
+		cm->addAction(actionShowExportASCIIDialog);
 	else if (widget->inherits("Note"))
-		cm.addAction(actionSaveNote);
+		cm->addAction(actionSaveNote);
 	else
-		cm.addAction(actionSaveTemplate);
-	cm.addAction(actionPrint);
-	cm.addAction(actionCopyWindow);
-	cm.addSeparator();
-	cm.addAction(actionRename);
-	cm.addAction(actionCloseWindow);
+		cm->addAction(actionSaveTemplate);
+	cm->addAction(actionPrint);
+	cm->addAction(actionCopyWindow);
+	cm->addSeparator();
+	cm->addAction(actionRename);
+	cm->addAction(actionCloseWindow);
 	if (!hidden(widget))
-		cm.addAction(actionHideActiveWindow);
-	cm.addAction(actionActivateWindow);
-	cm.addAction(actionMinimizeWindow);
-	cm.addAction(actionMaximizeWindow);
-	cm.addAction(actionResizeWindow);
-	cm.addSeparator();
-	cm.addAction(tr("&Properties..."), this, SLOT(windowProperties()));
+		cm->addAction(actionHideActiveWindow);
+	cm->addAction(actionActivateWindow);
+	cm->addAction(actionMinimizeWindow);
+	cm->addAction(actionMaximizeWindow);
+	cm->addAction(actionResizeWindow);
+	cm->addSeparator();
+	cm->addAction(tr("&Properties..."), this, SLOT(windowProperties()));
 
 	int n;
 	if (widget->inherits("Table"))
@@ -13738,12 +13693,12 @@ void ApplicationWindow::showWindowMenu(MyWidget * widget)
 		n = graphs.count();
 		if (n > 0)
 		{
-			cm.addSeparator();
+			cm->addSeparator();
 			for (int i=0; i<n; i++)
-				depend_menu.addAction(graphs[i], this, SLOT(setActiveWindowFromAction()));
+				depend_menu->addAction(graphs[i], this, SLOT(setActiveWindowFromAction()));
 
-			depend_menu.setTitle(tr("D&epending Graphs"));
-			cm.addMenu(&depend_menu);
+			depend_menu->setTitle(tr("D&epending Graphs"));
+			cm->addMenu(depend_menu);
 		}
 	}
 	else if (widget->inherits("Matrix"))
@@ -13752,12 +13707,12 @@ void ApplicationWindow::showWindowMenu(MyWidget * widget)
 		n = graphs.count();
 		if (n > 0)
 		{
-			cm.addSeparator();
+			cm->addSeparator();
 			for (int i=0; i<n; i++)
-				depend_menu.addAction(graphs[i], this, SLOT(setActiveWindowFromAction()));
+				depend_menu->addAction(graphs[i], this, SLOT(setActiveWindowFromAction()));
 
-			depend_menu.setTitle(tr("D&epending 3D Graphs"));
-			cm.addMenu(&depend_menu);
+			depend_menu->setTitle(tr("D&epending 3D Graphs"));
+			cm->addMenu(depend_menu);
 		}
 	}
 	else if (widget->inherits("MultiLayer"))
@@ -13766,12 +13721,12 @@ void ApplicationWindow::showWindowMenu(MyWidget * widget)
 		n = tbls.count();
 		if (n > 0)
 		{
-			cm.addSeparator();
+			cm->addSeparator();
 			for (int i=0; i<n; i++)
-				depend_menu.addAction(tbls[i], this, SLOT(setActiveWindowFromAction()));
+				depend_menu->addAction(tbls[i], this, SLOT(setActiveWindowFromAction()));
 
-			depend_menu.setTitle(tr("D&epends on"));
-			cm.addMenu(&depend_menu);
+			depend_menu->setTitle(tr("D&epends on"));
+			cm->addMenu(depend_menu);
 		}
 	}
 	else if (widget->inherits("Graph3D"))
@@ -13781,26 +13736,26 @@ void ApplicationWindow::showWindowMenu(MyWidget * widget)
 		QString formula = sp->formula();
 		if (!formula.isEmpty())
 		{
-			cm.addSeparator();
+			cm->addSeparator();
 			if (formula.contains("_"))
 			{
 				QStringList tl = formula.split("_", QString::SkipEmptyParts);
 
-				depend_menu.addAction(tl[0], this, SLOT(setActiveWindowFromAction()));
+				depend_menu->addAction(tl[0], this, SLOT(setActiveWindowFromAction()));
 
-				depend_menu.setTitle(tr("D&epends on"));
-				cm.addMenu(&depend_menu);
+				depend_menu->setTitle(tr("D&epends on"));
+				cm->addMenu(depend_menu);
 			}
 			else if (m)
 			{
-				depend_menu.addAction(m->name(), this, SLOT(setActiveWindowFromAction()));
-				depend_menu.setTitle(tr("D&epends on"));
-				cm.addMenu(&depend_menu);
+				depend_menu->addAction(m->name(), this, SLOT(setActiveWindowFromAction()));
+				depend_menu->setTitle(tr("D&epends on"));
+				cm->addMenu(depend_menu);
 			}
 		}
 	}
 
-	cm.exec(QCursor::pos());
+	return cm;
 }
 
 void ApplicationWindow::setActiveWindowFromAction()

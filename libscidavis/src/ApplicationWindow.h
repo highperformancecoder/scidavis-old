@@ -42,6 +42,7 @@
 #include <QDesktopServices>
 #include <QBuffer>
 #include <QLocale>
+#include <QMenu>
 
 #include "Table.h"
 #include "ScriptingEnv.h"
@@ -427,14 +428,9 @@ public slots:
   MyWidget* clone();
   MyWidget* clone(MyWidget*);
   void renameActiveWindow();
-
-  //!  Called when the user presses F2 and an item is selected in lv.
-  void renameWindow(QTreeWidgetItem *item, int, const QString &);
-
   //!  Checks weather the new window name is valid and modifies the name.
   bool renameWindow(MyWidget *w, const QString &text);
 
-  void maximizeWindow(QTreeWidgetItem * lbi);
   void maximizeWindow();
   void minimizeWindow();
   //! Changes the geometry of the active MDI window
@@ -481,7 +477,6 @@ public slots:
   void setListView(const QString& caption,const QString& view);
   void renameListViewItem(const QString& oldName,const QString& newName);
   void setListViewDate(const QString& caption,const QString& date);
-  QString listViewDate(const QString& caption);
   void setListViewLabel(const QString& caption,const QString& label);
   //@}
 
@@ -635,13 +630,18 @@ public slots:
   void showCurvePlotDialog();
   void showCurveWorksheet();
   void showCurveWorksheet(Graph *g, int curveIndex);
+  /// @return the menu item, which is owned by this. May be null
+  QMenu* showWindowPopupMenuImpl(QTreeWidgetItem *it);
   void showWindowPopupMenu(const QPoint &p);
 
   //! Connected to the context menu signal from lv; it's called when there are several items selected in the list
-  void showListViewSelectionMenu(const QPoint &p);
+  QMenu* showListViewSelectionMenuImpl();
+  void showListViewSelectionMenu(const QPoint &p)
+  {showListViewSelectionMenuImpl()->exec(p);}
 
   //! Connected to the context menu signal from lv; it's called when there are no items selected in the list
-  void showListViewPopupMenu(const QPoint &p);
+  QMenu* showListViewPopupMenuImpl();
+  void showListViewPopupMenu(const QPoint &p) {showListViewPopupMenuImpl()->exec(p);}
 
   void showMoreWindows();
   void showMarkerPopupMenu();
@@ -799,10 +799,9 @@ public slots:
    * \param fromFolders: true means that the user clicked right mouse buttom on an item from QListView "folders"
    *					   false means that the user clicked right mouse buttom on an item from QListView "lv"
    */
-  void showFolderPopupMenu(const QPoint &p, bool fromFolders);
-
+  QMenu* showFolderPopupMenuImpl(QTreeWidgetItem*, bool fromFolders);
   //!  connected to the SIGNAL contextMenuRequested from the list views
-  void showFolderPopupMenu(const QPoint &p);
+  void showFolderPopupMenu(const QPoint &p, bool fromFolders=true);
 
   //!  starts renaming the selected folder by creating a built-in text editor
   void startRenameFolder();
@@ -1022,11 +1021,14 @@ public:
   /// location of translation resources
   QString qmPath;
 
+protected:
+  //! Show a context menu for the widget
+  QMenu* showWindowMenuImpl(MyWidget * widget);
+  void showWindowMenu(MyWidget * widget) {showWindowMenuImpl(widget)->exec(QCursor::pos());}
+  
 private:
   bool m_batch;
   
-  //! Show a context menu for the widget
-  void showWindowMenu(MyWidget * widget);
   //! Create a menu for toggeling the toolbars
   QMenu *createToolbarsMenu();
 

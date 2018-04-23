@@ -13195,6 +13195,10 @@ Gostaria de inserir células?</translation>
         <source>Table</source>
         <translation type="obsolete">Tabela</translation>
     </message>
+    <message>
+        <source>&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableConfigPage</name>

@@ -20,6 +20,10 @@ private slots:
   void showHelp();
   void chooseHelpFolder();
 
+  void basicWindowTests();
+  void deleteSelectedItems();
+  void showWindowPopupMenu();
+
   void fft();
   
 public:
