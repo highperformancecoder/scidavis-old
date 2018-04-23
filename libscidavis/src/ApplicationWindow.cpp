@@ -5138,6 +5138,14 @@ void ApplicationWindow::renameActiveWindow()
 	rwd->exec();
 }
 
+void ApplicationWindow::renameWindow(QTreeWidgetItem *item, int, const QString &text)
+{
+  if (auto wli=dynamic_cast<WindowListItem*>(item))
+    if (auto w=wli->window())
+      if (text!=w->name())
+        renameWindow(w, text);
+}
+
 bool ApplicationWindow::renameWindow(MyWidget *w, const QString &text)
 {
 	if (!w)
