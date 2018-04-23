@@ -6296,11 +6296,10 @@ void ApplicationWindow::printAllPlots()
 	printer.setColorMode (QPrinter::Color);
 	printer.setFullPage(true);
 
-	QWidgetList *windows = windowsList();
+	unique_ptr<QWidgetList> windows( windowsList());
 
 	int plots = 0;
-	QWidget *w = 0;
-	foreach(w, *windows)
+	for (auto w: *windows)
 	{
 		if (w->inherits("MultiLayer"))
 			plots++;
@@ -6310,18 +6309,16 @@ void ApplicationWindow::printAllPlots()
 	dialog.setMinMax (0, plots);
 	if (dialog.exec())
 	{
-		QPainter *paint = new QPainter (&printer);
+		QPainter paint(&printer);
 
 		printer.setFromTo (0, plots);
 
-		foreach(w, *windows)
+		for (auto w: *windows)
 		{
 			if (w->inherits("MultiLayer") && printer.newPage())
-				((MultiLayer*)w)->printAllLayers(paint);
+				((MultiLayer*)w)->printAllLayers(&paint);
 		}
-		paint->end();
-		delete paint;
-		delete windows;
+		paint.end();
 	}
 }
 
