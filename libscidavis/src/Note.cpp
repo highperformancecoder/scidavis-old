@@ -98,7 +98,7 @@ void Note::restore(const QStringList& data)
 void Note::setAutoexec(bool exec)
 {
   autoExec = exec;
-  QPalette palette=QPalette();
+  QPalette palette;
   if (autoExec)
     palette.setColor(te->backgroundRole(), QColor(255,239,185));
   te->setPalette(palette);
