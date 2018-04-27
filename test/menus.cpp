@@ -22,20 +22,40 @@ struct MenuActions: map<QString,const QMenu*>
 
 void Unittests::menus()
 {
-  // this is poisoned by other running tests, so instantiate a fresh
-  // ApplicationWindow
-  ApplicationWindow app;
-  for (auto& l: app.locales)
-    {
-      app.switchToLanguage(l);
-      ofstream of("defaultMenus_"+l+".menudat");
-      MenuActions menuActions;
-      menuActions.parseQObject(&app);
-      for (auto& i: menuActions)
-        for (auto j: i.second->actions())
-          of << i.first <<":"<<j->text()<<"|"<<
-            j->iconText()<<"|"<<j->statusTip()<<"|"<<
-            j->toolTip()<<"|"<<j->isVisible()<<"|"<<
-            j->whatsThis()<<endl;
-    }
+  {
+    // this is poisoned by other running tests, so instantiate a fresh
+    // ApplicationWindow
+    ApplicationWindow app;
+    for (auto& l: app.locales)
+      {
+        app.switchToLanguage(l);
+        ofstream of("defaultMenus_"+l+".menudat");
+        MenuActions menuActions;
+        menuActions.parseQObject(&app);
+        for (auto& i: menuActions)
+          for (auto j: i.second->actions())
+            of << i.first <<":"<<j->text()<<"|"<<
+              j->iconText()<<"|"<<j->statusTip()<<"|"<<
+              j->toolTip()<<"|"<<j->isVisible()<<"|"<<
+              j->whatsThis()<<endl;
+      }
+  }
+
+  {
+    unique_ptr<ApplicationWindow> appWithGraph(open("testProject.sciprj"));
+    appWithGraph->showCurveContextMenu(0);
+    for (auto& l: appWithGraph->locales)
+      {
+        appWithGraph->switchToLanguage(l);
+        ofstream of("appWithGraph_"+l+".menudat");
+        MenuActions menuActions;
+        menuActions.parseQObject(appWithGraph.get());
+        for (auto& i: menuActions)
+          for (auto j: i.second->actions())
+            of << i.first <<":"<<j->text()<<"|"<<
+              j->iconText()<<"|"<<j->statusTip()<<"|"<<
+              j->toolTip()<<"|"<<j->isVisible()<<"|"<<
+              j->whatsThis()<<endl;
+      }
+  }
 }
