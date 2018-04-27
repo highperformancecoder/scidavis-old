@@ -32,7 +32,8 @@
 #include <QApplication>
 #include <QSplashScreen>
 #include <QTimer>
- 
+#include <QSettings>
+
 #include <typeinfo>
 
 // The following stuff is for the doxygen title page
@@ -158,9 +159,16 @@ struct Application: public QApplication
 
 int main( int argc, char ** argv )
 {
+
+#ifdef Q_OS_MAC // Mac
+    QSettings::setDefaultFormat(QSettings::IniFormat);
+#endif
+    QCoreApplication::setOrganizationName("SciDAVis");
+    QCoreApplication::setApplicationName("SciDAVis");
+
     Application app( argc, argv );
 
-	QStringList args = app.arguments();
+    QStringList args = app.arguments();
 	args.removeFirst(); // remove application name
 
 	if ( (args.count() == 1) && (args[0] == "-a" || args[0] == "--about") ) {

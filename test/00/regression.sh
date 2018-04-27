@@ -48,4 +48,10 @@ fi
 #diff 3dplot.pdf $here/test/renderedImages/3dplot.pdf
 #if test $? -ne 0; then fail; fi
 
+for i in *.menudat; do
+    diff -q $i $here/test/menuData/$i;
+    if test $? -ne 0; then fail; fi
+done
+
+
 pass

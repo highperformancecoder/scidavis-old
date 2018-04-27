@@ -25,7 +25,8 @@ private slots:
   void showWindowPopupMenu();
 
   void fft();
-  
+
+  void menus();
 public:
   static unsigned numInfos, numWarnings;
 };
