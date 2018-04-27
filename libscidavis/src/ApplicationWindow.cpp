@@ -7522,33 +7522,33 @@ void ApplicationWindow::windowsMenuAboutToShow()
 	}
 }
 
-void ApplicationWindow::showMarkerPopupMenu()
+QMenu* ApplicationWindow::showMarkerPopupMenuImpl()
 {
 	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("MultiLayer"))
-		return;
+		return nullptr;
 
 	Graph* g = ((MultiLayer*)d_workspace->activeWindow())->activeGraph();
-	QMenu markerMenu(this);
+	auto markerMenu=new QMenu(this);
 
 	if (g->imageMarkerSelected())
 	{
-		markerMenu.addAction(QPixmap(":/pixelProfile.xpm"),tr("&View Pixel Line profile"),this, SLOT(pixelLineProfile()));
-		markerMenu.addAction(tr("&Intensity Matrix"),this, SLOT(intensityTable()));
-		markerMenu.addSeparator();
+		markerMenu->addAction(QPixmap(":/pixelProfile.xpm"),tr("&View Pixel Line profile"),this, SLOT(pixelLineProfile()));
+		markerMenu->addAction(tr("&Intensity Matrix"),this, SLOT(intensityTable()));
+		markerMenu->addSeparator();
 	}
 
-	markerMenu.addAction(IconLoader::load("edit-cut"),tr("&Cut"),this, SLOT(cutSelection()));
-	markerMenu.addAction(IconLoader::load("edit-copy"), tr("&Copy"),this, SLOT(copySelection()));
-	markerMenu.addAction(QPixmap(":/erase.xpm"), tr("&Delete"),this, SLOT(clearSelection()));
-	markerMenu.addSeparator();
+	markerMenu->addAction(IconLoader::load("edit-cut"),tr("&Cut"),this, SLOT(cutSelection()));
+	markerMenu->addAction(IconLoader::load("edit-copy"), tr("&Copy"),this, SLOT(copySelection()));
+	markerMenu->addAction(QPixmap(":/erase.xpm"), tr("&Delete"),this, SLOT(clearSelection()));
+	markerMenu->addSeparator();
 	if (g->arrowMarkerSelected())
-		markerMenu.addAction(tr("&Properties..."),this, SLOT(showLineDialog()));
+		markerMenu->addAction(tr("&Properties..."),this, SLOT(showLineDialog()));
 	else if (g->imageMarkerSelected())
-		markerMenu.addAction(tr("&Properties..."),this, SLOT(showImageDialog()));
+		markerMenu->addAction(tr("&Properties..."),this, SLOT(showImageDialog()));
 	else
-		markerMenu.addAction(tr("&Properties..."),this, SLOT(showTextDialog()));
+		markerMenu->addAction(tr("&Properties..."),this, SLOT(showTextDialog()));
 
-	markerMenu.exec(QCursor::pos());
+	return markerMenu;
 }
 
 void ApplicationWindow::showMoreWindows()

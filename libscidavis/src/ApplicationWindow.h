@@ -650,7 +650,9 @@ public slots:
   void showListViewPopupMenu(const QPoint &p) {showListViewPopupMenuImpl()->exec(p);}
 
   void showMoreWindows();
-  void showMarkerPopupMenu();
+  QMenu* showMarkerPopupMenuImpl();
+  void showMarkerPopupMenu()
+  {auto m=showMarkerPopupMenuImpl(); if (m) m->exec(QCursor::pos());}
   void showPlotWizard();
   void showFitPolynomDialog();
   void showIntegrationDialog();
