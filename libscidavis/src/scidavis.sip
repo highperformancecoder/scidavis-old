@@ -1141,7 +1141,8 @@ public:
 %MethodCode
   ::exit(a0);
 %End
- 
+  void switchToLanguage(const QString& locale);
+
   Table* table(const QString&);
 %MethodCode
   sipRes = sipCpp->current_folder->table(*a0, false);
