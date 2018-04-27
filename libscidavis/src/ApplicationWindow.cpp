@@ -4159,11 +4159,7 @@ void ApplicationWindow::openTemplate()
 
 void ApplicationWindow::readSettings()
 {
-#ifdef Q_OS_MAC // Mac
-	QSettings settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-#else
-	QSettings settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-#endif
+  QSettings settings;
 
 	/* ---------------- group General --------------- */
 	settings.beginGroup("/General");

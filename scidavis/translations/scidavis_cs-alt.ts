@@ -146,1207 +146,1207 @@
 <context>
     <name>ApplicationWindow</name>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="393"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="707"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="394"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="708"/>
         <source>File</source>
         <translation type="unfinished">Soubor</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="572"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="705"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="573"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="706"/>
         <source>Plot</source>
         <translation type="unfinished">Graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11314"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11332"/>
         <source>Pointer</source>
         <translation type="unfinished">Kurzor</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11330"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11348"/>
         <source>Select data range</source>
         <translation type="unfinished">Zvolit rozsah dat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11337"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11355"/>
         <source>Move data points</source>
         <translation type="unfinished">Přesunout datové body</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11341"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11359"/>
         <source>Remove data points</source>
         <translation type="unfinished">Odstranit datové body</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11353"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11371"/>
         <source>Draw line</source>
         <translation type="unfinished">Nakreslit čáru</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="623"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="704"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2480"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2492"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2699"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7159"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13052"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13096"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="624"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="705"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2481"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2493"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2700"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7177"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13070"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13114"/>
         <source>Table</source>
         <translation type="unfinished">Tabulka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1077"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1078"/>
         <source>&amp;File</source>
         <translation type="unfinished">&amp;Soubor</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="712"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="746"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="713"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="747"/>
         <source>&amp;New</source>
         <translation type="unfinished">&amp;Nový</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="714"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="771"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="715"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="772"/>
         <source>&amp;Export Graph</source>
         <translation type="unfinished">&amp;Exportovat graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1078"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1079"/>
         <source>&amp;Edit</source>
         <translation type="unfinished">&amp;Upravit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1079"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1080"/>
         <source>&amp;View</source>
         <translation type="unfinished">&amp;Pohled</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1103"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1104"/>
         <source>&amp;Graph</source>
         <translation type="unfinished">&amp;Graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1169"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5832"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1170"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5850"/>
         <source>&amp;Matrix</source>
         <translation type="unfinished">&amp;Matice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="716"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1018"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="717"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1019"/>
         <source>Special Line/Symb&amp;ol</source>
         <translation type="unfinished">Speciální čára/symb&amp;ol</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="717"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1034"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="718"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1035"/>
         <source>Statistical &amp;Graphs</source>
         <translation type="unfinished">Statistické&amp; grafy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="718"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1040"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="719"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1041"/>
         <source>Pa&amp;nel</source>
         <translation type="unfinished">Pa&amp;nel</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="724"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="923"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7925"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8041"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="725"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="924"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7943"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8059"/>
         <source>Fit E&amp;xponential Decay</source>
         <translation type="unfinished">Proložit e&amp;xponenciálním poklesem</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1105"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1144"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1106"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1145"/>
         <source>&amp;Analysis</source>
         <translation type="unfinished">Ana&amp;lýza</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1106"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1126"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1107"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1127"/>
         <source>For&amp;mat</source>
         <translation type="unfinished">For&amp;mát</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1190"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1191"/>
         <source>&amp;Windows</source>
         <translation type="unfinished">&amp;Okna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1195"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10758"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11238"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1196"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10776"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11256"/>
         <source>&amp;Help</source>
         <translation type="unfinished">&amp;Nápověda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1709"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8268"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1710"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8286"/>
         <source>&lt;h4&gt;There are no tables available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a table and try again!&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;V tomto projektu nejsou žádné tabulky.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Vytvořte prosím tabulku a zkuste znovu.&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1745"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1782"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2635"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1746"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1783"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2636"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9044"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13048"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13091"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2637"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9062"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13066"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13109"/>
         <source>Matrix</source>
         <translation type="unfinished">Matice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7539"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7557"/>
         <source>Normal</source>
         <translation type="unfinished">Normální</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2844"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5227"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6037"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6104"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6149"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6572"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6629"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6660"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6679"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6720"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6748"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6786"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6810"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8356"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11678"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11713"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11758"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2845"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5245"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6055"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6122"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6167"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6590"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6647"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6678"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6697"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6738"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6766"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6804"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6828"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8374"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11696"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11731"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11776"/>
         <source>&lt;h4&gt;There are no plot layers available in this window.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please add a layer and try again!&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;V okně nejsou k dispozici žádné vrstvy s grafy.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Přidejte vrstvu a zkuste znovu.&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2888"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2935"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2889"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2936"/>
         <source>This feature is not available for user defined function curves!</source>
         <translation type="unfinished">Tato funkce není dostupná pro uživatelsky definované křivkyfunkcí!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4702"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4703"/>
         <source>&lt;h4&gt;There are no plot layers available in this window!&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;V tomto okně nejsou k dispozici žádné vrstvy s grafy!&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4858"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5455"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4859"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5473"/>
         <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists. Do you want to overwrite it?</source>
         <translation type="unfinished">Soubor nazvaný &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;již existuje. Chcete ho přepsat?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4859"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5456"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13426"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4860"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5474"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13444"/>
         <source>&amp;Yes</source>
         <translation type="unfinished">&amp;Ano</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4859"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5456"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10519"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11080"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4860"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5474"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10537"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11098"/>
         <source>&amp;All</source>
         <translation type="unfinished">&amp;Vše</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4859"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5456"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6708"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9070"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4860"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5474"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6726"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9088"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished">&amp;Zrušit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13426"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13444"/>
         <source>&amp;No</source>
         <translation type="unfinished">&amp;Ne</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5730"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5748"/>
         <source>Not available for empty 3D surface plots!</source>
         <translation type="unfinished">Není k dispozici pro prázdné 3D povrchové grafy!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6083"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6194"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6229"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6101"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6212"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6247"/>
         <source>&lt;h4&gt;There are no plot layers available in this window.&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;V okně nejsou k dispozici žádné vrstvy s grafy.&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6544"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6562"/>
         <source>Sorry, there are no results to display!</source>
         <translation type="unfinished">Žádné výsledky k zobrazen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6707"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6725"/>
         <source>Do you want to add the text on a new layer or on the active layer?</source>
         <translation type="unfinished">Chcete přidat text do nové vrstvy nebo do aktivní vrstvy?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6708"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6726"/>
         <source>On &amp;New Layer</source>
         <translation type="unfinished">Do &amp;nové vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6708"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6726"/>
         <source>On &amp;Active Layer</source>
         <translation type="unfinished">Do &amp;aktivní vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7139"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7157"/>
         <source>There are no windows available in this project!</source>
         <translation type="unfinished">V projektu nejsou k dispozici žádná okna!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7502"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7520"/>
         <source>&amp;Intensity Matrix</source>
         <translation type="unfinished">&amp;Intenzitní matice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7506"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7524"/>
         <source>&amp;Cut</source>
         <translation type="unfinished">&amp;Vyjmout</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7507"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7957"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8073"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8163"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7525"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7975"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8091"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8181"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">&amp;Kopírovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7508"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10935"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10958"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7526"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10953"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10976"/>
         <source>&amp;Delete</source>
         <translation type="unfinished">&amp;Smazat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10793"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10796"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10799"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11258"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11259"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11260"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10811"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10814"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10817"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11276"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11277"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11278"/>
         <source>&amp;Properties</source>
         <translation type="unfinished">&amp;Vlastnosti</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7523"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7541"/>
         <source>Please use the project explorer to select a window!</source>
         <translation type="unfinished">Použijte prosím průzkumníka projektu k vybrání okna!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8215"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8233"/>
         <source>There is no file called &lt;b&gt;index.html&lt;/b&gt; in this folder.&lt;br&gt;Please choose another folder!</source>
         <translation type="unfinished">Soubor nazvaný &lt;b&gt;index.html&lt;/b&gt; ve složce nenalezen.&lt;br&gt;Zvolte prosím jinou složku!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11359"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11360"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11361"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11362"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11377"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11378"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11379"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11380"/>
         <source>Box</source>
         <translation type="unfinished">Krabice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11363"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11365"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11366"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11381"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11383"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11384"/>
         <source>Frame</source>
         <translation type="unfinished">Rám</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11364"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11382"/>
         <source>&amp;Frame</source>
         <translation type="unfinished">&amp;Rám</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11367"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11368"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11385"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11386"/>
         <source>No Axes</source>
         <translation type="unfinished">Žádné osy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11379"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11380"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11381"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11382"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11397"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11398"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11399"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11400"/>
         <source>Wireframe</source>
         <translation type="unfinished">Drátový model</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11383"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11384"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11401"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11402"/>
         <source>Hidden Line</source>
         <translation type="unfinished">Skryté čáry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11389"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11390"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11407"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11408"/>
         <source>Polygon only</source>
         <translation type="unfinished">Jen polygony</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11393"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11394"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11411"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11412"/>
         <source>Mesh &amp; filled Polygons</source>
         <translation type="unfinished">Síť &amp; vyplněné polygony</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11395"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11396"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11397"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11398"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11413"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11414"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11415"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11416"/>
         <source>Dots</source>
         <translation type="unfinished">Body</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11399"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11400"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11401"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11402"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11417"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11418"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11419"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11420"/>
         <source>Bars</source>
         <translation type="unfinished">Sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11403"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11404"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11405"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11406"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11421"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11422"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11423"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11424"/>
         <source>Cones</source>
         <translation type="unfinished">Kužely</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11415"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11416"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11433"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11434"/>
         <source>Floor Data Projection</source>
         <translatorcomment>otázka je, jek to přeložit - &quot;podlaha&quot; se mi zdálo divné</translatorcomment>
         <translation type="unfinished">Půdorysné zobrazení dat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11419"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11420"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11437"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11438"/>
         <source>Floor Isolines</source>
         <translation type="unfinished">Půdorysné izolinie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11423"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11424"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11441"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11442"/>
         <source>Empty Floor</source>
         <translation type="unfinished">Prázdný půdorys</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9070"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9088"/>
         <source>&amp;Guess</source>
         <translation type="unfinished">&amp;Odhadnout</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9070"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9088"/>
         <source>&amp;Top-left corner</source>
         <translation type="unfinished">&amp;Horní levý roh</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10394"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10968"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10412"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10986"/>
         <source>New &amp;Project</source>
         <translation type="unfinished">Nový &amp;Projekt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10395"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10970"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10413"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10988"/>
         <source>Ctrl+N</source>
         <translation type="unfinished">Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10406"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10980"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10424"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10998"/>
         <source>New &amp;Table</source>
         <translation type="unfinished">Nová &amp;Tabulka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10407"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10981"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10425"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10999"/>
         <source>Ctrl+T</source>
         <translation type="unfinished">Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10410"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10984"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10428"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11002"/>
         <source>New &amp;Matrix</source>
         <translation type="unfinished">Nová &amp;matice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10986"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11004"/>
         <source>New matrix</source>
         <translation type="unfinished">Nová matice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10414"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10988"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10432"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11006"/>
         <source>New &amp;Function Plot</source>
         <translation type="unfinished">Nový &amp;graf funkce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10415"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10990"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10433"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11008"/>
         <source>Ctrl+F</source>
         <translation type="unfinished">Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10455"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11025"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10473"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11043"/>
         <source>Ctrl+Z</source>
         <translation type="unfinished">Ctrl+Z</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10423"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10997"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10441"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11015"/>
         <source>&amp;Open</source>
         <translation type="unfinished">&amp;Otevřít</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10424"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10998"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10442"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11016"/>
         <source>Ctrl+O</source>
         <translation type="unfinished">Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10999"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11017"/>
         <source>Open project</source>
         <translation type="unfinished">Otevřít projekt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10428"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11003"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10446"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11021"/>
         <source>Ctrl+I</source>
         <translation type="unfinished">Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10434"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11007"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10452"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11025"/>
         <source>&amp;Save Project</source>
         <translation type="unfinished">Uložit &amp;projekt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10435"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11009"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10453"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11027"/>
         <source>Ctrl+S</source>
         <translation type="unfinished">Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10454"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11023"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10472"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11041"/>
         <source>&amp;Undo</source>
         <translation type="unfinished">&amp;Zpět</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10459"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11027"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10477"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11045"/>
         <source>&amp;Redo</source>
         <translation type="unfinished">&amp;Znovu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10460"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11029"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10478"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11047"/>
         <source>Ctrl+R</source>
         <translation type="unfinished">Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10464"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11031"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10482"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11049"/>
         <source>&amp;Duplicate</source>
         <translation type="unfinished">&amp;Duplikovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11032"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11050"/>
         <source>Duplicate window</source>
         <translation type="unfinished">Duplikovat okno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10468"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11036"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10486"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11054"/>
         <source>Ctrl+X</source>
         <translation type="unfinished">Ctrl+X</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10472"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11040"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10490"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11058"/>
         <source>Ctrl+C</source>
         <translation type="unfinished">Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10476"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11044"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10494"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11062"/>
         <source>Ctrl+V</source>
         <translation type="unfinished">Ctrl+V</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10489"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11051"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10507"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11069"/>
         <source>Ctrl+E</source>
         <translation type="unfinished">Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11052"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11070"/>
         <source>Show project explorer</source>
         <translation type="unfinished">Zobrazit průzkumníka projektu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11054"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11072"/>
         <source>Results &amp;Log</source>
         <translation type="unfinished">Výpis-&amp;výsledků</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10501"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11062"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10519"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11080"/>
         <source>Add La&amp;yer</source>
         <translation type="unfinished">&amp;Přidat vrstvu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10514"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11075"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10532"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11093"/>
         <source>&amp;Current</source>
         <translation type="unfinished">&amp;Aktuální</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10399"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10974"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10417"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10992"/>
         <source>Ctrl+G</source>
         <translation type="unfinished">Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11077"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11095"/>
         <source>Export current graph</source>
         <translation type="unfinished">Exportovat aktuální graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10520"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11081"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10538"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11099"/>
         <source>Alt+X</source>
         <translation type="unfinished">Alt+X</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11082"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11100"/>
         <source>Export all graphs</source>
         <translation type="unfinished">Exportovat všechny grafy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7965"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8081"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10529"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11090"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7983"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8099"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10547"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11108"/>
         <source>&amp;Print</source>
         <translation type="unfinished">&amp;Tisknout</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10530"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11091"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10548"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11109"/>
         <source>Ctrl+P</source>
         <translation type="unfinished">Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10537"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11097"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10555"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11115"/>
         <source>E&amp;xport ASCII</source>
         <translation type="unfinished">E&amp;xportovat ASCII</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10540"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11099"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10558"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11117"/>
         <source>&amp;Quit</source>
         <translation type="unfinished">&amp;Konec</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10541"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11100"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10559"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11118"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished">Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10552"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11106"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10570"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11124"/>
         <source>Ctrl+Alt+W</source>
         <translation type="unfinished">Ctrl+Alt+R</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10555"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11109"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10573"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11127"/>
         <source>&amp;Preferences...</source>
         <translation type="unfinished">&amp;Nastavení...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11113"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11131"/>
         <source>Add curve to graph</source>
         <translation type="unfinished">Přidat do grafu křivku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10563"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11117"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10581"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11135"/>
         <source>Ctrl+B</source>
         <translation type="unfinished">Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10567"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11121"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10585"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11139"/>
         <source>Ctrl+Alt+F</source>
         <translation type="unfinished">Ctrl+Alt+F</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11125"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11143"/>
         <source>Best fit</source>
         <translation type="unfinished">Nejlepší přizpůsobení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10574"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11127"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10592"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11145"/>
         <source>New &amp;Legend</source>
         <translation type="unfinished">Nová &amp;legenda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10575"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11128"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10593"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11146"/>
         <source>Ctrl+L</source>
         <translation type="unfinished">Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11129"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11147"/>
         <source>Add new legend</source>
         <translation type="unfinished">Přidat novou legendu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10582"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11135"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10600"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11153"/>
         <source>Add &amp;Image</source>
         <translation type="unfinished">Přidat &amp;obrázek</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="493"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11343"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="494"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11361"/>
         <source>Add &amp;Text</source>
         <translation type="unfinished">Přidat&amp; text</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10589"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11139"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10607"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11157"/>
         <source>&amp;Line</source>
         <translation type="unfinished">&amp;Čára</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10593"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10663"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11142"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11185"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10611"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10681"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11160"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11203"/>
         <source>&amp;Scatter</source>
         <translation type="unfinished">&amp;Body</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10597"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11145"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10615"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11163"/>
         <source>Line + S&amp;ymbol</source>
         <translation type="unfinished">Čára + S&amp;ymbol</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10605"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11150"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10623"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11168"/>
         <source>&amp;Spline</source>
         <translation type="unfinished">&amp;Spline</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10613"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11151"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10631"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11169"/>
         <source>&amp;Vertical Steps</source>
         <translation type="unfinished">&amp;Vertikální kroky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11155"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11173"/>
         <source>Plot with vertical bars</source>
         <translation type="unfinished">Graf se svislými sloupci</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11158"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11176"/>
         <source>Plot with horizontal bars</source>
         <translation type="unfinished">Graf s vodorovnými sloupci</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10625"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11160"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10643"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11178"/>
         <source>&amp;Area</source>
         <translation type="unfinished">&amp;Plocha</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11161"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11179"/>
         <source>Plot area</source>
         <translation type="unfinished">Plocha grafu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10629"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11163"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10647"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11181"/>
         <source>&amp;Pie</source>
         <translation type="unfinished">&amp;Koláčový graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11164"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11182"/>
         <source>Plot pie</source>
         <translation type="unfinished">Vytvořit koláčový graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10638"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11172"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10656"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11190"/>
         <source>&amp;Histogram</source>
         <translation type="unfinished">&amp;Histogram</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10642"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11173"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10660"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11191"/>
         <source>&amp;Stacked Histogram</source>
         <translation type="unfinished">&amp;Skládaný histogram</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10645"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11174"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10663"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11192"/>
         <source>&amp;Vertical 2 Layers</source>
         <translation type="unfinished">2 &amp;svislé vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10648"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11175"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10666"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11193"/>
         <source>&amp;Horizontal 2 Layers</source>
         <translation type="unfinished">2 &amp;vodorovné vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10651"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11176"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10669"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11194"/>
         <source>&amp;4 Layers</source>
         <translation type="unfinished">&amp;4 vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10654"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11177"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10672"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11195"/>
         <source>&amp;Stacked Layers</source>
         <translation type="unfinished">&amp;Skládané vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10657"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11179"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10675"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11197"/>
         <source>&amp;Ribbon</source>
         <translation type="unfinished">&amp;Stuha</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10660"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11182"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10678"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11200"/>
         <source>&amp;Bars</source>
         <translation type="unfinished">&amp;Sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10666"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11188"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10684"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11206"/>
         <source>&amp;Trajectory</source>
         <translation type="unfinished">&amp;Trajektorie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10411"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10985"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10429"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11003"/>
         <source>Ctrl+M</source>
         <translation type="unfinished">Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10775"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11251"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10793"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11269"/>
         <source>Alt+R</source>
         <translation type="unfinished">Alt+R</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10669"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11200"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10687"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11218"/>
         <source>Statistics on &amp;Columns</source>
         <translation type="unfinished">&amp;Statistika ve sloupcích</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11201"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11219"/>
         <source>Selected columns statistics</source>
         <translation type="unfinished">Statistika pro vybrané sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10672"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11203"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10690"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11221"/>
         <source>Statistics on &amp;Rows</source>
         <translation type="unfinished">&amp;Statistika v řádcích</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11204"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11222"/>
         <source>Selected rows statistics</source>
         <translation type="unfinished">Statistika pro vybrané řádky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10675"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11205"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10693"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11223"/>
         <source>&amp;Integrate ...</source>
         <translation type="unfinished">&amp;Integrovat ...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10705"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11215"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10723"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11233"/>
         <source>&amp;Differentiate</source>
         <translation type="unfinished">&amp;Derivovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10708"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11216"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10726"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11234"/>
         <source>Fit &amp;Linear</source>
         <translation type="unfinished">&amp;Lineární proložení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10711"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11217"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10729"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11235"/>
         <source>Fit &amp;Polynomial ...</source>
         <translation type="unfinished">&amp;Polynomiální proložení ...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10714"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11218"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10732"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11236"/>
         <source>&amp;First Order ...</source>
         <translation type="unfinished">&amp;Prvého řádu...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10717"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11219"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10735"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11237"/>
         <source>&amp;Second Order ...</source>
         <translation type="unfinished">&amp;Druhého řádu...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10720"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11220"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10738"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11238"/>
         <source>&amp;Third Order ...</source>
         <translation type="unfinished">&amp;Třetího řádu...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10729"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11223"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10747"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11241"/>
         <source>Fit &amp;Gaussian</source>
         <translation type="unfinished">&amp;Gaussovské proložení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10732"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11224"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10750"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11242"/>
         <source>Fit Lorent&amp;zian</source>
         <translation type="unfinished">Loren&amp;zovské proložení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10736"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11227"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10754"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11245"/>
         <source>Ctrl+Y</source>
         <translation type="unfinished">Ctrl+Y</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10739"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11229"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10757"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11247"/>
         <source>&amp;Plot ...</source>
         <translation type="unfinished">&amp;Graf ...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10751"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11233"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10769"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11251"/>
         <source>&amp;Title ...</source>
         <translation type="unfinished">&amp;Název ...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10755"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11236"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10773"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11254"/>
         <source>F1</source>
         <translation type="unfinished">F1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10759"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11239"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10777"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11257"/>
         <source>Ctrl+H</source>
         <translation type="unfinished">Ctrl+H</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10767"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11245"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10785"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11263"/>
         <source>&amp;Rename Window</source>
         <translation type="unfinished">&amp;Přejmenovat okno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7458"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10770"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11247"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7476"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10788"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11265"/>
         <source>Close &amp;Window</source>
         <translation type="unfinished">&amp;Zavřít okno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10771"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11248"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10789"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11266"/>
         <source>Ctrl+W</source>
         <translation type="unfinished">Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10778"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11253"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10796"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11271"/>
         <source>Window &amp;Geometry...</source>
         <translation type="unfinished">Geometrie&amp; okna...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7456"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10781"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11254"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7474"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10799"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11272"/>
         <source>&amp;Hide Window</source>
         <translation type="unfinished">Skrýt &amp;okno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7487"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10784"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7505"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10802"/>
         <source>More windows...</source>
         <translation type="unfinished">Více oken...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10802"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11261"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10820"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11279"/>
         <source>&amp;Activate Window</source>
         <translation type="unfinished">Aktivovatr &amp;okno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10805"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11262"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10823"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11280"/>
         <source>Mi&amp;nimize Window</source>
         <translation type="unfinished">Minimalizovat ok&amp;no</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10808"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11263"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10826"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11281"/>
         <source>Ma&amp;ximize Window</source>
         <translation type="unfinished">Maximalizovat ok&amp;no</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10811"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11264"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10829"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11282"/>
         <source>Re&amp;size Window...</source>
         <translation type="unfinished">Změ&amp;nit velikost okna...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10814"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11265"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10832"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11283"/>
         <source>&amp;Print Window</source>
         <translation type="unfinished">Vytisknout &amp;okno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10826"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11269"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10844"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11287"/>
         <source>&amp;Invert</source>
         <translation type="unfinished">&amp;Invertovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10829"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11270"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10847"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11288"/>
         <source>&amp;Determinant</source>
         <translation type="unfinished">&amp;Determinate</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10838"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11273"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10856"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11291"/>
         <source>3D &amp;Wire Frame</source>
         <translation type="unfinished">3D-&amp;drátový model</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10841"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11274"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10859"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11292"/>
         <source>3D &amp;Hidden Line</source>
         <translation type="unfinished">3D &amp;skryté čáry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10844"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11275"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10862"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11293"/>
         <source>3D &amp;Polygons</source>
         <translation type="unfinished">3D-&amp;Polygony</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10847"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11276"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10865"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11294"/>
         <source>3D Wire &amp;Surface</source>
         <translation type="unfinished">3D-drátový-&amp;povrch</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2855"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6605"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2856"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6623"/>
         <source>There are no curves available on this plot!</source>
         <translation type="unfinished">V grafu nejsou k dispozici žádné křivky!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11313"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11331"/>
         <source>Disable &amp;tools</source>
         <translation type="unfinished">Deaktivovat nástro&amp;je</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="545"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11325"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="546"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11343"/>
         <source>CTRL+D</source>
         <translation type="unfinished">Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11326"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11344"/>
         <source>Data reader</source>
         <translation type="unfinished">Čtečka dat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="552"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11329"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="553"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11347"/>
         <source>ALT+S</source>
         <translation type="unfinished">ALT+S</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11333"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11351"/>
         <source>Screen reader</source>
         <translation type="unfinished">Čtečka obrazovky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="558"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11335"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="559"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11353"/>
         <source>&amp;Move Data Points...</source>
         <translation type="unfinished">Přesunout datové &amp;body...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="564"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11339"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="565"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11357"/>
         <source>Remove &amp;Bad Data Points...</source>
         <translation type="unfinished">Odstranit chybné &amp;datové body...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="565"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11340"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="566"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11358"/>
         <source>Alt+B</source>
         <translation type="unfinished">Alt+B</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="494"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11345"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="495"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11363"/>
         <source>ALT+T</source>
         <translation type="unfinished">ALT+T</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="508"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11352"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="509"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11370"/>
         <source>CTRL+ALT+L</source>
         <translation type="unfinished">Ctrl+ALT+L</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1156"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1157"/>
         <source>&amp;Table</source>
         <translation type="unfinished">&amp;Tabulka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1380"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1420"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1443"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1466"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1480"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1381"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1421"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1444"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1467"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1481"/>
         <source>You must select exactly one column for plotting!</source>
         <translation type="unfinished">Pro tento graf musíte zvolit přesně jeden sloupec!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1495"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13730"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1496"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13748"/>
         <source>Please select a column to plot!</source>
         <translation type="unfinished">Zvolte prosím sloupec k vykreslení do grafu!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5434"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5452"/>
         <source>Choose a directory to export the tables to</source>
         <translation type="unfinished">Vyberte prosím cílovou složku pro export tabulek</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6593"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6611"/>
         <source>There are no plot layers available in this window!</source>
         <translation type="unfinished">V tomto okně nejsou dostupné žádné vrstvy s grafy!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2861"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5238"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6047"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6120"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6163"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6612"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6638"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11691"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11726"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11771"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2862"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5256"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6065"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6138"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6181"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6630"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6656"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11709"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11744"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11789"/>
         <source>This functionality is not available for pie plots!</source>
         <translation type="unfinished">Tato funkce není dostupná pro koláčové grafy!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6857"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6875"/>
         <source>There are no plot layers available in this window.</source>
         <translation type="unfinished">V tomto okně nejsou dostupné žádné vrstvy s grafy.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10502"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11064"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10520"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11082"/>
         <source>ALT+L</source>
         <translation type="unfinished">ALT+L</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10506"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11067"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10524"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11085"/>
         <source>Arran&amp;ge Layers</source>
         <translation type="unfinished">Uspořádat &amp;vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10507"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11069"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10525"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11087"/>
         <source>ALT+A</source>
         <translation type="unfinished">ALT+A</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10533"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11095"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10551"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11113"/>
         <source>Print All Plo&amp;ts</source>
         <translation type="unfinished">Vytisknout všechny gra&amp;fy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10559"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11112"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10577"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11130"/>
         <source>ALT+C</source>
         <translation type="unfinished">ALT+C</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10583"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11137"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10601"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11155"/>
         <source>ALT+I</source>
         <translation type="unfinished">ALT+I</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10678"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11206"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10696"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11224"/>
         <source>Inte&amp;rpolate ...</source>
         <translation type="unfinished">Inte&amp;rpolovat...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10723"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11221"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10741"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11239"/>
         <source>Fit Exponential Gro&amp;wth ...</source>
         <translation type="unfinished">Proložit exponenciálním &amp;nárůstem ...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10774"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11250"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10792"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11268"/>
         <source>&amp;Remove Layer</source>
         <translation type="unfinished">Odstranit &amp;vrstvu</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="238"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12782"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13128"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12800"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13146"/>
         <source>Folder</source>
         <translation type="unfinished">Složka</translation>
     </message>
@@ -1357,668 +1357,668 @@
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="264"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="693"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="694"/>
         <source>Name</source>
         <translation type="unfinished">Název</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="265"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="694"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12740"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12782"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13091"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13096"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13101"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13106"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13111"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="695"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12758"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12800"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13109"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13114"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13119"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13124"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13129"/>
         <source>Type</source>
         <translation type="unfinished">Typ</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="266"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="695"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="696"/>
         <source>View</source>
         <translation type="unfinished">Pohled</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12746"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12764"/>
         <source>Size</source>
         <translation type="unfinished">Velikost</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="267"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="696"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12759"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12763"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12787"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13114"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="697"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12777"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12781"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12805"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13132"/>
         <source>Created</source>
         <translation type="unfinished">Vytvořeno</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="268"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="697"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13086"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="698"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13104"/>
         <source>Label</source>
         <translation type="unfinished">Popiska</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="431"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="708"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="432"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="709"/>
         <source>Edit</source>
         <translation type="unfinished">Upravit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="559"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11336"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="560"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11354"/>
         <source>Ctrl+ALT+M</source>
         <translation type="unfinished">Ctrl+Alt+M</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="232"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="699"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="700"/>
         <source>Project Explorer</source>
         <translation type="unfinished">Průzkumník projektu</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="281"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="700"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="701"/>
         <source>Results Log</source>
         <translation type="unfinished">Výpis výsledků</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="721"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="882"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7899"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8015"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="722"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="883"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7917"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8033"/>
         <source>&amp;Translate</source>
         <translation type="unfinished">&amp;Přemístit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="722"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="895"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7908"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8024"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="723"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="896"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7926"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8042"/>
         <source>&amp;Smooth</source>
         <translation type="unfinished">&amp;Vyhladit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="934"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="935"/>
         <source>Fit &amp;Multi-peak</source>
         <translation type="unfinished">Proložit křivkou s &amp;více vrcholy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1143"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1144"/>
         <source>&amp;Plot</source>
         <translation type="unfinished">&amp;Graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1719"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1720"/>
         <source>There are no available columns with plot designation set to Z!</source>
         <translation type="unfinished">Nejsou tu žádné sloupce nastavené jako sloupce-Z pro graf!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2155"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5358"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2156"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5376"/>
         <source>Y Axis Title</source>
         <translation type="unfinished">Popis osy Y</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2156"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5333"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2157"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5351"/>
         <source>X Axis Title</source>
         <translation type="unfinished">Popis osy X</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13736"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13754"/>
         <source>Please select a Y column to plot!</source>
         <translation type="unfinished">Zvolte prosím sloupec Y pro vykreslení do grafu!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2464"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2465"/>
         <source>pixels</source>
         <translation type="unfinished">pixely</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2465"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2466"/>
         <source>pixel intensity (a.u.)</source>
         <translation type="unfinished">intenzita pixelu (a.u.)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2510"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2511"/>
         <source>The table &apos;%1&apos; already exists. It has been renamed &apos;%2&apos;.</source>
         <translation type="unfinished">Tabulka &apos;%1&apos; již existuje. Byla přejmenována na &apos;%2&apos;t.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2663"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2664"/>
         <source>Determinant of </source>
         <translation type="unfinished">Determinant</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2943"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2944"/>
         <source>The selected columns have different numbers of rows!</source>
         <translation type="unfinished">Vybrané sliupce mají rozdílný počet řádků!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3627"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3628"/>
         <source>The file &lt;b&gt;%1&lt;/b&gt; is corrupted, but there exists a backup copy.&lt;br&gt;Do you want to open the backup instead?</source>
         <translation type="unfinished">Soubor &lt;b&gt;%1&lt;/b&gt; je porušený, ale existuje záložní kopie.&lt;br&gt;Chcete načíst data ze záložní kopie?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3453"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4022"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11905"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12122"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3454"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4023"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11923"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12140"/>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; doesn&apos;t exist!</source>
         <translation type="unfinished">Soubor &lt;b&gt;%1&lt;/b&gt; neexistuje!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3439"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3440"/>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is the current file!</source>
         <translation type="unfinished">Soubor &lt;b&gt;%1&lt;/b&gt; je aktuální soubor!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3528"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3529"/>
         <source>The file: &lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;does not exist anymore!&lt;p&gt;It will be removed from the list.</source>
         <translation type="unfinished">Soubor &lt;b&gt; %1 &lt;/b&gt; &lt;p&gt; neexistuje!&lt;p&gt;Bude odstraněn ze seznamu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4730"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4787"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5103"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4731"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4788"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5104"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
         <translation type="unfinished">Nemohu zapisovat do souboru: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Prosím zkontrolujte zda máte práva k zápisu!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4875"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4876"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
         <translation type="unfinished">Nemohu zapisovat do souboru: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Prosím zkontrolujte zda máte práva k zápisu!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5033"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5034"/>
         <source>Save Project As</source>
         <translation type="unfinished">Uložit projekt jako</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5087"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5088"/>
         <source>Save Window As Template</source>
         <translation type="unfinished">Uložit okno jako šablonu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5139"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12616"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5157"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12634"/>
         <source>Please enter a valid name!</source>
         <translation type="unfinished">Zadejte prosím platný název!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5144"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5162"/>
         <source>The name you chose is not valid: only letters and digits are allowed!</source>
         <translation type="unfinished">Zadaný název není platný, povelena jsou jen čísla a písmena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5145"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5153"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5162"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12627"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5163"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5171"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5180"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12645"/>
         <source>Please choose another name!</source>
         <translation type="unfinished">Zvolte prosím jiný název!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12627"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12645"/>
         <source>Name already exists!</source>
         <translation type="unfinished">Název již existuje!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5162"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5180"/>
         <source>The table name must be different from the names of its columns!</source>
         <translation type="unfinished">Název tabulky se musí lišit od názvů jejích sloupců!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5492"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6198"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5510"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6216"/>
         <source>Choose a filename to save under</source>
         <translation type="unfinished">Zvojte název souboru k uložení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5596"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5614"/>
         <source>Please select a column first!</source>
         <translation type="unfinished">Nejdřív prosímvyberte jeden sloupec!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8162"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8180"/>
         <source>Cu&amp;t</source>
         <translation type="unfinished">&amp;Vyjmout</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8176"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8194"/>
         <source>Clea&amp;r</source>
         <translation type="unfinished">&amp;Vyčistit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10635"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11166"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10653"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11184"/>
         <source>Vectors &amp;XYXY</source>
         <translation type="unfinished">Vektory &amp;XYXY</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5830"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10926"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10957"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5848"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10944"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10975"/>
         <source>&amp;Worksheet</source>
         <translation type="unfinished">&amp;Pracovní list</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6127"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6169"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6145"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6187"/>
         <source>This will modify the data in the worksheets!
 Are you sure you want to continue?</source>
         <translation type="unfinished">Toto změní data v pracovní listech!
 Chcete pokračovat?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6128"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6170"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6146"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6188"/>
         <source>Continue</source>
         <translation type="unfinished">Pokračovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6128"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6170"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7646"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6146"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6188"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7664"/>
         <source>Cancel</source>
         <translation type="unfinished">Zrušit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7446"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7464"/>
         <source>&amp;Cascade</source>
         <translation type="unfinished">&amp;Kaskáda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7447"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7465"/>
         <source>&amp;Tile</source>
         <translation type="unfinished">&amp;Dlaždice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7511"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7513"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7515"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12538"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13617"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7529"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7531"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7533"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12556"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13635"/>
         <source>&amp;Properties...</source>
         <translation type="unfinished">&amp;&apos;Vlastnosti...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7644"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7662"/>
         <source>Save changes to project: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; ?</source>
         <translation type="unfinished">Uložit změny v projektu &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; ?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7645"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12818"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7663"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12836"/>
         <source>Yes</source>
         <translation type="unfinished">Ano</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7645"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12818"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7663"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12836"/>
         <source>No</source>
         <translation type="unfinished">Ne</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7727"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10479"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11046"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7745"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10497"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11064"/>
         <source>&amp;Delete Selection</source>
         <translation type="unfinished">Smazat &amp;výběr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7742"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12522"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7760"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12540"/>
         <source>New &amp;Window</source>
         <translation type="unfinished">Nové &amp;okno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7744"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12525"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7762"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12543"/>
         <source>New F&amp;older</source>
         <translation type="unfinished">Nová &amp;složka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7746"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7764"/>
         <source>Auto &amp;Column Width</source>
         <translation type="unfinished">Automatická šířka &amp;sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13658"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13676"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13682"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13694"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13700"/>
         <source>D&amp;epends on</source>
         <translation type="unfinished">Zá&amp;visí na</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4956"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7794"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4957"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7812"/>
         <source>Maximized</source>
         <translation type="unfinished">Maximalizovaný</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7955"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7959"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7963"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8071"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8075"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8079"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7973"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7977"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7981"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8089"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8093"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8097"/>
         <source>&amp;Layer</source>
         <translation type="unfinished">&amp;Ebene</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7956"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7960"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7964"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8072"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8076"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8080"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7974"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7978"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7982"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8090"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8094"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8098"/>
         <source>&amp;Window</source>
         <translation type="unfinished">&amp;Fenster</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7961"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8077"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7979"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8095"/>
         <source>E&amp;xport</source>
         <translation type="unfinished">E&amp;xportieren</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7967"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8083"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7985"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8101"/>
         <source>&amp;Geometry...</source>
         <translation type="unfinished">&amp;Geometrie...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7968"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8084"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7986"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8102"/>
         <source>P&amp;roperties...</source>
         <translation type="unfinished">&amp;Eigenschaften...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7970"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8086"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7988"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8104"/>
         <source>&amp;Delete Layer</source>
         <translation type="unfinished">Ebene &amp;löschen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7942"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8058"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8105"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7960"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8076"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8123"/>
         <source>&amp;Paste Layer</source>
         <translation type="unfinished">Ko&amp;pierte Ebene einfügen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8122"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8140"/>
         <source>&amp;Copy Page</source>
         <translation type="unfinished">Kopírovat &amp;stránku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8123"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8141"/>
         <source>E&amp;xport Page</source>
         <translation type="unfinished">E&amp;xportovat stránku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8164"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8182"/>
         <source>&amp;Paste</source>
         <translation type="unfinished">V&amp;ložit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8166"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8184"/>
         <source>&amp;Insert Row</source>
         <translation type="unfinished">&amp;vložit řádek</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8170"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8188"/>
         <source>&amp;Delete Rows</source>
         <translation type="unfinished">Smazat &amp;řádky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8135"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8153"/>
         <source>&amp;Matrix...</source>
         <translation type="unfinished">&amp;Matice...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8141"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8159"/>
         <source>Choose &amp;Data Set...</source>
         <translation type="unfinished">Vyberte &amp;dataset...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8143"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8161"/>
         <source>Choose &amp;Matrix...</source>
         <translation type="unfinished">Vyberte &amp;matici...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8146"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8164"/>
         <source>C&amp;lear</source>
         <translation type="unfinished">&amp;Vyčistit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8153"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8171"/>
         <source>&amp;Copy Graph</source>
         <translation type="unfinished">Kopírovat &amp;graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8154"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8172"/>
         <source>&amp;Export</source>
         <translation type="unfinished">&amp;Exportovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8167"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8185"/>
         <source>&amp;Insert Column</source>
         <translation type="unfinished">Vložit &amp;sloupec</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8174"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8192"/>
         <source>&amp;Delete Columns</source>
         <translation type="unfinished">Smazat &amp;sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4951"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4952"/>
         <source>Minimized</source>
         <translation type="unfinished">Minimalizovaný</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12557"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12575"/>
         <source>Hidden</source>
         <translation type="unfinished">Skrytý</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10398"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10972"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10416"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10990"/>
         <source>New &amp;Graph</source>
         <translation type="unfinished">Nový &amp;graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10402"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10976"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10420"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10994"/>
         <source>New &amp;Note / Script</source>
         <translation type="unfinished">Nová &amp;poznámka / Script</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10419"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10994"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10437"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11012"/>
         <source>Ctrl+ALT+Z</source>
         <translation type="unfinished">Ctrl+Alt+Z</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10442"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10460"/>
         <source>Open Temp&amp;late...</source>
         <translation type="unfinished">Načíst &amp;šablonu...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10558"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11111"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10576"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11129"/>
         <source>Add/Remove &amp;Curve...</source>
         <translation type="unfinished">&amp;Přidat/Odstranit křivku...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10562"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11115"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10580"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11133"/>
         <source>Add &amp;Error Bars...</source>
         <translation type="unfinished">&amp;Přidat chybové úsečky...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10566"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11119"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10584"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11137"/>
         <source>Add &amp;Function...</source>
         <translation type="unfinished">&amp;Přidat funkci...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10579"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11132"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10597"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11150"/>
         <source>Ctrl+ALT+T</source>
         <translation type="unfinished">Ctrl+Alt+T</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10632"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11169"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10650"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11187"/>
         <source>Vectors XY&amp;AM</source>
         <translation type="unfinished">Vektory XY&amp;AM</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10681"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11207"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10699"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11225"/>
         <source>&amp;Low Pass...</source>
         <translation type="unfinished">&amp;Nízký průchod...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10684"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11208"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10702"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11226"/>
         <source>&amp;High Pass...</source>
         <translation type="unfinished">&amp;Vysoký průchod...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10687"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11209"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10705"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11227"/>
         <source>&amp;Band Pass...</source>
         <translation type="unfinished">&amp;Pásmový průchodBandpass...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10690"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11210"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10708"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11228"/>
         <source>&amp;Band Block...</source>
         <translation type="unfinished">&amp;Blokace pásma...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10693"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11211"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10711"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11229"/>
         <source>&amp;FFT...</source>
         <translation type="unfinished">&amp;FFT...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10696"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11212"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10714"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11230"/>
         <source>&amp;Savitzky-Golay...</source>
         <translation type="unfinished">&amp;Savitzky-Golay...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10699"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11213"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10717"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11231"/>
         <source>&amp;FFT Filter...</source>
         <translation type="unfinished">&amp;FFT Filtr...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10702"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11214"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10720"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11232"/>
         <source>Moving Window &amp;Average...</source>
         <translation type="unfinished">P&amp;ohyblivý okenní průměr...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10726"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11222"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10744"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11240"/>
         <source>Fit &amp;Boltzmann (Sigmoidal)</source>
         <translation type="unfinished">&amp;Proložení Boltzmannem (Sigmoidální)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10742"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11230"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10760"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11248"/>
         <source>&amp;Scales...</source>
         <translation type="unfinished">&amp;Měřítka...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10745"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11231"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10763"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11249"/>
         <source>&amp;Axes...</source>
         <translation type="unfinished">&amp;Osy...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10748"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11232"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10766"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11250"/>
         <source>&amp;Grid ...</source>
         <translation type="unfinished">&amp;Mřížka...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10820"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11267"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10838"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11285"/>
         <source>&amp;Surface...</source>
         <translation type="unfinished">&amp;Povrch...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10823"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11268"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10841"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11286"/>
         <source>&amp;Data Set...</source>
         <translation type="unfinished">&amp;Dataset...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10859"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11277"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10877"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11295"/>
         <source>Co&amp;rrelate</source>
         <translation type="unfinished">Ko&amp;relovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10865"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11279"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10883"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11297"/>
         <source>&amp;Convolute</source>
         <translation type="unfinished">&amp;Skládat (konvoluce)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10868"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11280"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10886"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11298"/>
         <source>&amp;Deconvolute</source>
         <translation type="unfinished">&amp;Rozvinout (dekonvoluce)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10871"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11281"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10889"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11299"/>
         <source>&amp;Horizontal</source>
         <translation type="unfinished">&amp;Vodorovně</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10874"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11282"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10892"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11300"/>
         <source>&amp;Vertical</source>
         <translation type="unfinished">&amp;Svisle</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11852"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11870"/>
         <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .org, .py or ASCII file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12529"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12547"/>
         <source>&amp;None</source>
         <translation type="unfinished">&amp;Žádné</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10877"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11284"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10895"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11302"/>
         <source>&amp;Box Plot</source>
         <translation type="unfinished">&amp;Krabicový graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10881"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11287"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10899"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11305"/>
         <source>&amp;Gaussian...</source>
         <translation type="unfinished">&amp;Gauss...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10884"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11288"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10902"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11306"/>
         <source>&amp;Lorentzian...</source>
         <translation type="unfinished">&amp;Lorentz...</translation>
     </message>
@@ -2027,242 +2027,242 @@ Chcete pokračovat?</translation>
         <translation type="obsolete">&amp;Překlady</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10969"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10987"/>
         <source>Open a new project</source>
         <translation type="unfinished">Otevřít nový projekt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10973"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10991"/>
         <source>Create an empty 2D plot</source>
         <translation type="unfinished">Vytvořit prázdný 2D graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10989"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11007"/>
         <source>Create a new 2D function plot</source>
         <translation type="unfinished">Vytvořit 2D graf funkce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10993"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11011"/>
         <source>Create a new 3D surface plot</source>
         <translation type="unfinished">Vytvořit nový 3D povrchový graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11013"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11031"/>
         <source>Open Te&amp;mplate...</source>
         <translation type="unfinished">&amp;Otevřít šablonu...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11024"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11042"/>
         <source>Undo changes</source>
         <translation type="unfinished">Vrátit zpět změny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11028"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11046"/>
         <source>Redo changes</source>
         <translation type="unfinished">Znovu změny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11035"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11053"/>
         <source>Cut selection</source>
         <translation type="unfinished">Vyjmout výběr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11039"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11057"/>
         <source>Copy selection</source>
         <translation type="unfinished">Kopírovat výběr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11043"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11061"/>
         <source>Paste selection</source>
         <translation type="unfinished">Vložit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11047"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11065"/>
         <source>Delete selection</source>
         <translation type="unfinished">Smazat výběr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11092"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11110"/>
         <source>Print window</source>
         <translation type="unfinished">Vytisknout okno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11167"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11185"/>
         <source>Vectors XYXY</source>
         <translation type="unfinished">Vektory XYXY</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11170"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11188"/>
         <source>Vectors XYAM</source>
         <translation type="unfinished">Vektory XYAM</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11778"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11796"/>
         <source>Peaks</source>
         <translation type="unfinished">Píky</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="291"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="702"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="703"/>
         <source>Scripting Console</source>
         <translation type="unfinished">Skriptovací konzole</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="500"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11347"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="501"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11365"/>
         <source>Draw &amp;Arrow</source>
         <translation type="unfinished">&amp;Nakreslit šipku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="501"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11348"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="502"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11366"/>
         <source>CTRL+ALT+A</source>
         <translation type="unfinished">Ctrl+Alt+A</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="507"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11351"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="508"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11369"/>
         <source>Draw &amp;Line</source>
         <translation type="unfinished">&amp;Nakreslit čáru</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2084"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2104"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6758"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2085"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2105"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6776"/>
         <source>Images</source>
         <translation type="unfinished">Obrázky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7166"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7184"/>
         <source>Empty 3D surface plots cannot be duplicated!</source>
         <translation type="unfinished">Prázdné 3D povrchové grafy nemohou být duplikovány!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10515"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11076"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10533"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11094"/>
         <source>Alt+G</source>
         <translation type="unfinished">Alt+G</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10571"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11124"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10589"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11142"/>
         <source>Ctrl+Shift+R</source>
         <translation type="unfinished">Ctrl+Shift+R</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10888"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11291"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10906"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11309"/>
         <source>Search for &amp;Updates</source>
         <translation type="unfinished">Zkontrolovat &amp;aktualizace</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11058"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11076"/>
         <source>&amp;Console</source>
         <translation type="unfinished">&amp;Konzole</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11059"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11077"/>
         <source>Show Scripting console</source>
         <translation type="unfinished">Zobrazit skript. konzoli</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11349"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11367"/>
         <source>Draw arrow</source>
         <translation type="unfinished">Nakreslit šipku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3684"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3685"/>
         <source>Window</source>
         <translation type="unfinished">Okno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="520"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11316"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="521"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11334"/>
         <source>&amp;Zoom In</source>
         <translation type="unfinished">&amp;Přiblížit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="521"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11317"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="522"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11335"/>
         <source>Ctrl++</source>
         <translation type="unfinished">Ctrl++</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11320"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11338"/>
         <source>Zoom &amp;Out</source>
         <translation type="unfinished">&amp;Oddálit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="528"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11321"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="529"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11339"/>
         <source>Ctrl+-</source>
         <translation type="unfinished">Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13056"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13101"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13074"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13119"/>
         <source>Note</source>
         <translation type="unfinished">Poznámka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5615"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5633"/>
         <source>Please select a row first!</source>
         <translation type="unfinished">Vyberte prosím nejdřív řádek!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11318"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11336"/>
         <source>Zoom In</source>
         <translation type="unfinished">Přiblížit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11322"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11340"/>
         <source>Zoom Out</source>
         <translation type="unfinished">Oddálit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9011"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9029"/>
         <source>Number of averaged pixels</source>
         <translation type="unfinished">Počet zprůměrovaných pixelů</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="443"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="706"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1856"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1892"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1904"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1945"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1958"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1978"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2032"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2124"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2202"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2241"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2352"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2364"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4077"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7155"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7170"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11476"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11546"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13060"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13106"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="502"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="444"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="707"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1857"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1893"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1905"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1946"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1959"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1979"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2033"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2125"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2203"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2242"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2353"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2365"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4078"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7173"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7188"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11494"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11564"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13078"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13124"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="504"/>
         <source>Graph</source>
         <translation type="unfinished">Graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1777"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1778"/>
         <source>&lt;h4&gt;There are no matrices available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;V projektu nejsou k dispozici žádné matice.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Vytvořte prosím matici a zkuste znovu!&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2600"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2611"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2601"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2612"/>
         <source>Notes</source>
         <translation type="unfinished">Poznámky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3674"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3675"/>
         <source>The file &quot;%1&quot; was created using &quot;%2&quot; as scripting language.
 
 Initializing support for this language FAILED; I&apos;m using &quot;%3&quot; instead.
@@ -2272,387 +2272,387 @@ Inicializace tohoto jazyka SELHALO; namísto toho se použije &quot;%3&quot; .
 Různé části souboru nemusí být zobrazeny korektně.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4000"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4001"/>
         <source>Scripting language &quot;%1&quot; failed to initialize.</source>
         <translation type="unfinished">Skriptovací  jazyk &quot;%1&quot; nemohl být inicializován.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4806"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4807"/>
         <source>Choose a directory to export the graphs to</source>
         <translation type="unfinished">Vyberte cílovou složku pro export grafů</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10947"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10959"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10965"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10977"/>
         <source>&amp;Edit Function...</source>
         <translation type="unfinished">Upravit &amp;funkci...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10923"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10956"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10941"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10974"/>
         <source>&amp;Plot details...</source>
         <translation type="unfinished">&amp;Detaily grafu...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13630"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13648"/>
         <source>D&amp;epending Graphs</source>
         <translation type="unfinished">Závislé&amp; grafy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13644"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13662"/>
         <source>D&amp;epending 3D Graphs</source>
         <translation type="unfinished">Závislé&amp; 3D-Grafy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10921"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11311"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10939"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11329"/>
         <source>Ctrl+Return</source>
         <translation type="unfinished">Ctrl+Return</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10914"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11304"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10932"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11322"/>
         <source>E&amp;xecute</source>
         <translation type="unfinished">&amp;Spustit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10915"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11305"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10933"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11323"/>
         <source>Ctrl+J</source>
         <translation type="unfinished">Ctrl+J</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10917"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11307"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10935"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11325"/>
         <source>Execute &amp;All</source>
         <translation type="unfinished">S&amp;pustit vše</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10918"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11308"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10936"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11326"/>
         <source>Ctrl+Shift+J</source>
         <translation type="unfinished">Ctrl+Shift+J</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10920"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11310"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10938"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11328"/>
         <source>&amp;Evaluate Expression</source>
         <translation type="unfinished">&amp;Ověřit výraz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11872"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11890"/>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
         <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt;: Chybná lokalizacel (locale) nebo není dostupný překlad!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12383"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12401"/>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
         <translation type="unfinished">Soubor &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; byl otevřen v režimu pouze pro čtení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12491"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12509"/>
         <source>&amp;Find...</source>
         <translation type="unfinished">&amp;Hledat...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12493"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12511"/>
         <source>App&amp;end Project...</source>
         <translation type="unfinished">Připojit &amp;projekt...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12495"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12513"/>
         <source>Save &amp;As Project...</source>
         <translation type="unfinished">Uložit jak &amp;projekt...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10439"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11011"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12497"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10457"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11029"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12515"/>
         <source>Save Project &amp;As...</source>
         <translation type="unfinished">Uložit projekt &amp;jako...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3346"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3354"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3347"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3355"/>
         <source>ASCII Import Failed</source>
         <translation type="unfinished">ASCII-Import selhal</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3347"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3348"/>
         <source>Numeric data cannot be imported into non-numeric column &quot;%1&quot;.</source>
         <translation type="unfinished">Číselná data nemohou být importována do nečíselného sloupce &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3355"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3356"/>
         <source>Non-numeric data cannot be imported into non-text column &quot;%1&quot;.</source>
         <translation type="unfinished">Nečíselná data nemohou být importována do ne-textového sloupce &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12411"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12429"/>
         <source>Error writing data to disk</source>
         <translation type="unfinished">Chyba při zápisu dat na disk</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12412"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12430"/>
         <source>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Your data may or may not have ended up in &lt;em&gt;%2&lt;/em&gt; (%3). 					If there already was a version of this project on disk, it has not been touched.&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Vaše data mohla ale také nemusela skončit v&lt;em&gt;%2&lt;/em&gt;.(%3) Pokud na disku již byla verze tohoto projektu, pak nebyla změněna.&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12430"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12448"/>
         <source>Error renaming backup files</source>
         <translation type="unfinished">Chyba při přejmenování zálohovacích dat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12431"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12449"/>
         <source>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Data was written to &lt;em&gt;%2&lt;/em&gt;, but saving the original file as &lt;em&gt;%3&lt;/em&gt;					and moving the new file to &lt;em&gt;%4&lt;/em&gt; failed. In case you wonder why the original file hasn&apos;t					been simply replaced, see here:					&lt;a href=&quot;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&quot;&gt;					http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Data byla zapsána do souborui &lt;em&gt;%2&lt;/em&gt;, ale uložení původního soubor jako &lt;em&gt;%3&lt;/em&gt; a přesun nového souboru do &lt;em&gt;%4&lt;/em&gt; selhalo. Pokud vás zajímá, proč nebyl původní soubor prostě nahrazen, informace najdete na:
 &lt;a href=&quot;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&quot;&gt;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12502"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12520"/>
         <source>&amp;Show All Windows</source>
         <translation type="unfinished">Zobrazit &amp;všechna okna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12503"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12521"/>
         <source>&amp;Hide All Windows</source>
         <translation type="unfinished">Skrýt &amp;všechna okna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12509"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12527"/>
         <source>&amp;Delete Folder</source>
         <translation type="unfinished">&amp;Smazat složku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12510"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12528"/>
         <source>&amp;Rename</source>
         <translation type="unfinished">&amp;Přejmenovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12529"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12547"/>
         <source>&amp;Windows in Active Folder</source>
         <translation type="unfinished">Okna v aktivní &amp;složce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12529"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12547"/>
         <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
         <translation type="unfinished">Okna v &amp;aktivní složce &amp;&amp; podsložkách</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12536"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12554"/>
         <source>&amp;View Windows</source>
         <translation type="unfinished">Zobrazit &amp;okna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12740"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12758"/>
         <source>Project</source>
         <translation type="unfinished">Projekt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12743"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12783"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13113"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12761"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12801"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13131"/>
         <source>Path</source>
         <translation type="unfinished">Cesta</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12746"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12764"/>
         <source>bytes</source>
         <translation type="unfinished">bajtů</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12750"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12784"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12768"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12802"/>
         <source>Contents</source>
         <translation type="unfinished">Obsah</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12760"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12778"/>
         <source>Modified</source>
         <translation type="unfinished">Změněn</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12765"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12790"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13080"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12783"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12808"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13098"/>
         <source>Properties</source>
         <translation type="unfinished">Vlastnosti</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12800"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12818"/>
         <source>New Folder</source>
         <translation type="unfinished">Nová složka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12817"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12835"/>
         <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
         <translation type="unfinished">Smazat složku &apos;%1&apos; a všechny okna,která obsahuje?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13115"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13133"/>
         <source>Status</source>
         <translation type="unfinished">Status</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13190"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13208"/>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
         <translation type="unfinished">Promiňte, pro řetězec: &apos;%1&apos; nenalezena žádná shoda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13211"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13229"/>
         <source>Cannot move an object to itself!</source>
         <translation type="unfinished">Nemohu přesunout objekt sám do sebe!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13217"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13235"/>
         <source>Cannot move a parent folder into a child folder!</source>
         <translation type="unfinished">Nemohu přesunout mateřskou složku do dceřinné!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13232"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13250"/>
         <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
         <translation type="unfinished">Cílová složka už obsahuje složku nazvanou &apos;%1&apos;! Složka přeskočena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13340"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13358"/>
         <source>Error while fetching version file with HTTP: %1.</source>
         <translation type="unfinished">Chyba při zjišťování verze přesr HTTP: %1.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10609"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11152"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10627"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11170"/>
         <source>&amp;Horizontal Steps</source>
         <translation type="unfinished">&amp;Vodorovné kroky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10510"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11071"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11072"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10528"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11089"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11090"/>
         <source>Automatic Layout</source>
         <translation type="unfinished">Automatické rozvržení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11063"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11081"/>
         <source>Add Layer</source>
         <translation type="unfinished">Přidat vrstvu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11068"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11086"/>
         <source>Arrange Layers</source>
         <translation type="unfinished">Uspořádat vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11116"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11134"/>
         <source>Add Error Bars...</source>
         <translation type="unfinished">Přidat chybové úsečky...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11120"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11138"/>
         <source>Add Function...</source>
         <translation type="unfinished">Přidat funkci...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11136"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11154"/>
         <source>Add Image</source>
         <translation type="unfinished">Přidat obrázek</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11344"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11362"/>
         <source>Add Text</source>
         <translation type="unfinished">Přidat text</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11428"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11429"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11430"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11431"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11446"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11447"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11448"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11449"/>
         <source>Animation</source>
         <translation type="unfinished">Animace</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="641"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="709"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="642"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="710"/>
         <source>Matrix Plot</source>
         <translation type="unfinished">Maticový diagram</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3543"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3544"/>
         <source>The file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; is the current file!</source>
         <translation type="unfinished">Soubor &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; je aktuálním souborem!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5152"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5170"/>
         <source>Name &lt;b&gt;%1&lt;/b&gt; already exists!</source>
         <translation type="unfinished">Název &lt;b&gt;%1&lt;/b&gt; již existuje!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5154"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5172"/>
         <source>Warning: for internal consistency reasons the underscore character is replaced with a minus sign.</source>
         <translation type="unfinished">Varování: Z důvodů zajištění vnitřní konzistence bude podtržítko nahrazeno znaménkem mínus.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11021"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11039"/>
         <source>Ctrl+K</source>
         <translation type="unfinished">Ctrl+K</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10850"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10868"/>
         <source>Contour - &amp;Color Fill</source>
         <translation type="unfinished">&amp;Kontury - Barevná výplň</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10853"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11194"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10871"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11212"/>
         <source>Contour &amp;Lines</source>
         <translation type="unfinished">&amp;Vrstevnice (kontury)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10856"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11197"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10874"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11215"/>
         <source>&amp;Gray Scale Map</source>
         <translation type="unfinished">&amp;Mapa ve stupních šedi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11191"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11209"/>
         <source>Contour + &amp;Color Fill</source>
         <translation type="unfinished">&amp;Vrstevnice + barevná výplň</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11192"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11210"/>
         <source>Contour Lines + Color Fill</source>
         <translation type="unfinished">Vrstevnice + barevná výplň</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11195"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11213"/>
         <source>Contour Lines</source>
         <translation type="unfinished">Vrstevnice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11198"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11216"/>
         <source>Gray Scale Map</source>
         <translation type="unfinished">Mapa ve stupních šedi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11433"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11434"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11435"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11436"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11451"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11452"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11453"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11454"/>
         <source>Enable perspective</source>
         <translation type="unfinished">Zapnout perspektivu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11438"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11439"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11440"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11441"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11456"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11457"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11458"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11459"/>
         <source>Reset rotation</source>
         <translation type="unfinished">Resetovat rotaci</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11443"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11444"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11445"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11446"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11461"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11462"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11463"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11464"/>
         <source>Fit frame to window</source>
         <translation type="unfinished">Přizpůsobit rám oknu</translation>
     </message>
@@ -2663,7 +2663,7 @@ Různé části souboru nemusí být zobrazeny korektně.</translation>
         <translation type="unfinished">&amp;Další</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="313"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="314"/>
         <source>F5</source>
         <comment>next window shortcut</comment>
         <translation type="unfinished">F5</translation>
@@ -2675,126 +2675,126 @@ Různé části souboru nemusí být zobrazeny korektně.</translation>
         <translation type="unfinished">&amp;Předchozí</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="316"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="317"/>
         <source>F6</source>
         <comment>previous window shortcut</comment>
         <translation type="unfinished">F6</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="451"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="452"/>
         <source>Disable &amp;Tools</source>
         <translation type="unfinished">Vypnout &amp;nástroje</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="527"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="528"/>
         <source>&amp;Zoom Out</source>
         <translation type="unfinished">&amp;Oddálit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="544"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11324"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="545"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11342"/>
         <source>&amp;Data Reader</source>
         <translation type="unfinished">&amp;Čtečka dat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="551"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11328"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="552"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11346"/>
         <source>&amp;Select Data Range</source>
         <translation type="unfinished">&amp;Zvolte rozsah dat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="538"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11332"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="539"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11350"/>
         <source>S&amp;creen Reader</source>
         <translation type="unfinished">&amp;Čtečka obrazovky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="710"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8836"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="711"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8854"/>
         <source>3D Surface</source>
         <translation type="unfinished">3D-povrch</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="713"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="751"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="714"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="752"/>
         <source>&amp;Recent Projects</source>
         <translation type="unfinished">&amp;Naposled otevřené projekty</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="719"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1050"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="720"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1051"/>
         <source>3&amp;D Plot</source>
         <translation type="unfinished">3&amp;D-graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="723"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="903"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7914"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8030"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="724"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="904"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7932"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8048"/>
         <source>&amp;FFT Filter</source>
         <translation type="unfinished">&amp;FFT Filtr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="725"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7933"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8049"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="726"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7951"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8067"/>
         <source>Fit &amp;Multi-Peak</source>
         <translation type="unfinished">Proložení křivkou s &amp;více vrcholy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1080"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1081"/>
         <source>Scripting</source>
         <translation type="unfinished">Skriptování</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1160"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8133"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1161"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8151"/>
         <source>3D &amp;Plot</source>
         <translation type="unfinished">3D-&amp;graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10601"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11148"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10619"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11166"/>
         <source>Vertical &amp;Drop Lines</source>
         <translation type="unfinished">Svislé &amp;čáry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7501"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7519"/>
         <source>&amp;View Pixel Line profile</source>
         <translation type="unfinished">Zobrazit &amp;profil čáry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7886"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8002"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7904"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8020"/>
         <source>Re&amp;move Pie Curve</source>
         <translation type="unfinished">&amp;Odstranit koláčový graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7936"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8052"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7954"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8070"/>
         <source>Anal&amp;yze</source>
         <translation type="unfinished">Anal&amp;yzovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7948"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8064"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7966"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8082"/>
         <source>&amp;Paste Text</source>
         <translation type="unfinished">Vlo&amp;žit text</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7950"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8066"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7968"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8084"/>
         <source>&amp;Paste Line/Arrow</source>
         <translation type="unfinished">Vlo&amp;žit nakopírovanou čáru/šipku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7952"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8068"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7970"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8086"/>
         <source>&amp;Paste Image</source>
         <translation type="unfinished">Vlo&amp;žit nakopírovaný obrázek</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8231"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8249"/>
         <source>The manual can be downloaded from the following internet address:</source>
         <translation type="unfinished">&apos;Manuál lze stáhnout z internetu nanásledující adrese:</translation>
     </message>
@@ -2803,672 +2803,672 @@ Různé části souboru nemusí být zobrazeny korektně.</translation>
         <translation type="obsolete">Asistent nemohl být spuštěn protože soubor &lt;b&gt;%1&lt;/b&gt; nebyla nalezena ve složce nápovědy!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8230"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8248"/>
         <source>Please indicate the location of the help file!</source>
         <translation type="unfinished">Nastavte prosím umístění souborů nápovědy!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8247"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8265"/>
         <source>unable to open index.html!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8248"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8266"/>
         <source>&lt;b&gt;index.html&lt;/b&gt; file cannot be opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9207"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9225"/>
         <source>Error reading matrix from project file</source>
         <translation type="unfinished">Chyba načtení matice ze souboru projektu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9211"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9362"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9229"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9380"/>
         <source>The following problems occured when loading the project file:
 </source>
         <translation type="unfinished">Během načítání projektu ze souboru došlo k následujícím potížím:
 </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9215"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9366"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9233"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9384"/>
         <source>Project loading partly failed</source>
         <translation type="unfinished">Načítání projektu částečně selhalo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9358"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9376"/>
         <source>Error reading table from project file</source>
         <translation type="unfinished">Chyba načítání tabulky ze souboru projektu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10403"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10977"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10421"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10995"/>
         <source>Ctrl+ALT+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10418"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10992"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10436"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11010"/>
         <source>New 3D &amp;Surface Plot</source>
         <translation type="unfinished">Nový &amp;3D-povrchový graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10427"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11002"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10445"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11020"/>
         <source>Open Image &amp;File</source>
         <translation type="unfinished">Otevřít obrázek &amp;ze souboru</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10431"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11005"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10449"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11023"/>
         <source>Import I&amp;mage...</source>
         <translation type="unfinished">I&amp;mportovat obrázek...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10445"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11016"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10463"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11034"/>
         <source>Save As &amp;Template...</source>
         <translation type="unfinished">Uložit jako &amp;šablonu...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10448"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10466"/>
         <source>Save Note As...</source>
         <translation type="unfinished">Uložit poznámku jako...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10467"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11034"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10485"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11052"/>
         <source>Cu&amp;t Selection</source>
         <translation type="unfinished">Vyjmout vý&amp;běr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10471"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11038"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10489"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11056"/>
         <source>&amp;Copy Selection</source>
         <translation type="unfinished">Kopírovat vý&amp;běr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10475"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11042"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10493"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11060"/>
         <source>&amp;Paste Selection</source>
         <translation type="unfinished">Vložit vý&amp;běr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10480"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11048"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10498"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11066"/>
         <source>Del</source>
         <comment>delete key</comment>
         <translation type="unfinished">Del</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10483"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10501"/>
         <source>&amp;Lock Toolbars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10544"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11102"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10562"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11120"/>
         <source>Clear &amp;Log Information</source>
         <translation type="unfinished">Smazat všechny výpisy &amp;(logy)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10547"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11103"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10565"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11121"/>
         <source>Delete &amp;Fit Tables</source>
         <translation type="unfinished">&amp;Smazat prokládací tabulky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10551"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11105"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10569"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11123"/>
         <source>Plot &amp;Wizard</source>
         <translation type="unfinished">&amp;Asistent grafu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10570"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11123"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10588"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11141"/>
         <source>&amp;Rescale to Show All</source>
         <translation type="unfinished">Změnit měřítko na kompletní &amp;pohled</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10578"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11131"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10596"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11149"/>
         <source>Add Time Stamp</source>
         <translation type="unfinished">Přidat časovou značku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10763"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11242"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10781"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11260"/>
         <source>&amp;Choose Help Folder...</source>
         <translation type="unfinished">&amp;Zvolte prosím složku s nápovědou...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10787"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11256"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10805"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11274"/>
         <source>&amp;View Pixel Line Profile</source>
         <translation type="unfinished">Zobrazit &amp;profil čáry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10790"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11257"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10808"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11275"/>
         <source>&amp;Intensity Table</source>
         <translation type="unfinished">&amp;Tabulka intenzity</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10817"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11266"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10835"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11284"/>
         <source>&amp;Layer Geometry</source>
         <translation type="unfinished">&amp;Geometrie vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10835"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11272"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10853"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11290"/>
         <source>Convert to &amp;Matrix</source>
         <translation type="unfinished">Převést&amp; na matici</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10898"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11294"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10916"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11312"/>
         <source>Report a &amp;Bug</source>
         <translation type="unfinished">Nahlásit &amp;chybu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10902"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11296"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10920"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11314"/>
         <source>Download &amp;Manual</source>
         <translation type="unfinished">&amp;Stáhnout manuál</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10982"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11000"/>
         <source>New table</source>
         <translation type="unfinished">Nová tabulka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11008"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11026"/>
         <source>Save project</source>
         <translation type="unfinished">Uložit projekt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11014"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11032"/>
         <source>Open template</source>
         <translation type="unfinished">Otevřít šablonu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11017"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11035"/>
         <source>Save window as template</source>
         <translation type="unfinished">Uložit okno jako šablonu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11050"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11068"/>
         <source>Project &amp;Explorer</source>
         <translation type="unfinished">Průzkumník &amp;projektu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11055"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11073"/>
         <source>Show analysis results</source>
         <translation type="unfinished">Zobrazit výsledky analýzy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11133"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11151"/>
         <source>Date &amp; time </source>
         <translation type="unfinished">Datum &amp; čas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11140"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11158"/>
         <source>Plot as line</source>
         <translation type="unfinished">Vykreslit jako čáru</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11143"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11161"/>
         <source>Plot as symbols</source>
         <translation type="unfinished">Vykreslit jako symboly</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11146"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11164"/>
         <source>Plot as line + symbols</source>
         <translation type="unfinished">Vykreslit jako čáru a symboly</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11180"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11198"/>
         <source>Plot 3D ribbon</source>
         <translation type="unfinished">Vykreslit 3D-stuhu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11183"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11201"/>
         <source>Plot 3D bars</source>
         <translation type="unfinished">Vykreslit 3D-sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11186"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11204"/>
         <source>Plot 3D scatter</source>
         <translation type="unfinished">Vykreslit 3D-body</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11189"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11207"/>
         <source>Plot 3D trajectory</source>
         <translation type="unfinished">Vykreslit 3D-trajektorie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11255"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11273"/>
         <source>More Windows...</source>
         <translation type="unfinished">Víc oken...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11285"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11303"/>
         <source>Box and whiskers plot</source>
         <translation type="unfinished">Graf &quot;Krabička s fousy&quot;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11369"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11370"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11387"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11388"/>
         <source>No axes</source>
         <translation type="unfinished">Žádné osy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11372"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11390"/>
         <source>Front grid</source>
         <translation type="unfinished">Přední mřížka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11373"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11391"/>
         <source>Back grid</source>
         <translation type="unfinished">Zadní mřížka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11374"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11392"/>
         <source>Right grid</source>
         <translation type="unfinished">Pravá mřížka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11375"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11393"/>
         <source>Left grid</source>
         <translation type="unfinished">Levá mřížka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11376"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11394"/>
         <source>Ceiling grid</source>
         <translation type="unfinished">Stropní mřížka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11377"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11395"/>
         <source>Floor grid</source>
         <translation type="unfinished">Podlahová mřížka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11385"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11386"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11403"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11404"/>
         <source>Hidden line</source>
         <translation type="unfinished">Skryté čáry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11387"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11388"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11405"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11406"/>
         <source>Polygon Only</source>
         <translation type="unfinished">Jen polygony</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11391"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11392"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11409"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11410"/>
         <source>Mesh &amp; Filled Polygons</source>
         <translation type="unfinished">Síť &amp; vyplněné polygony</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11407"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11408"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11409"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11410"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11425"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11426"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11427"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11428"/>
         <source>Crosshairs</source>
         <translation type="unfinished">Nitkové kříže</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11417"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11418"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11435"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11436"/>
         <source>Floor data projection</source>
         <translation type="unfinished">Půdorysná projekce dat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11421"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11422"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11439"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11440"/>
         <source>Floor isolines</source>
         <translation type="unfinished">Půdorysné vrstevnice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11425"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11426"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11443"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11444"/>
         <source>Empty floor</source>
         <translation type="unfinished">Prázdné dno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1723"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1733"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1724"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1734"/>
         <source>Column</source>
         <translation type="unfinished">Sloupec</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3941"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3942"/>
         <source>Script Error</source>
         <translation type="unfinished">Chyba skriptu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4114"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4115"/>
         <source>Table1</source>
         <translation type="unfinished">Tabulka1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10169"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10187"/>
         <source>Curve</source>
         <translation type="unfinished">Křivka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5553"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5571"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5589"/>
         <source>Please select two columns for this operation:
  the first represents the signal and the second the response function!</source>
         <translation type="unfinished">Pro tuto operaci vyberte prosím dva sloupce:
 první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5517"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5535"/>
         <source>Please select two columns for this operation!</source>
         <translation type="unfinished">Pro tuto operaci vyberte prosím dva sloupce!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5535"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5553"/>
         <source>Please select exactly one columns for this operation!</source>
         <translation type="unfinished">Pro tuto operaci vyberte prosím přesně jeden sloupec!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6212"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6230"/>
         <source>Could not write to file: &lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location or that the file is not being used by another application!</source>
         <translation type="unfinished">Nemohu zapisovat do souboru: &lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Ověřte si prosím, že máte práva k zápisu do dané složky a že soubor není zrovna používán jinou aplikací! </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10524"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11085"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10542"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11103"/>
         <source>&amp;Export PDF</source>
         <translation type="unfinished">&amp;Exportovat do PDF</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10525"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11086"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10543"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11104"/>
         <source>Ctrl+Alt+P</source>
         <translation type="unfinished">Ctrl+Alt+P</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10862"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11278"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10880"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11296"/>
         <source>&amp;Autocorrelate</source>
         <translation type="unfinished">&amp;Autokorelovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11087"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11105"/>
         <source>Export to PDF</source>
         <translation type="unfinished">Exportovat do PDF</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13425"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13443"/>
         <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
         <translation type="unfinished">Tato operace smaže všechna data spojená s tabulkou. Jste si jistý?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10929"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10962"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10947"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10980"/>
         <source>&amp;Reset to Full Range</source>
         <translation type="unfinished">Obnovit na plný &amp;rozsah</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10932"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10963"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10950"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10981"/>
         <source>Edit &amp;Range...</source>
         <translation type="unfinished">U&amp;pravit rozsah...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10938"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10964"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10956"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10982"/>
         <source>&amp;Hide</source>
         <translation type="unfinished">S&amp;krýt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10941"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10965"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10959"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10983"/>
         <source>Hide &amp;Other Curves</source>
         <translation type="unfinished">Skrýt ostatní &amp;křivky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10944"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10966"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10962"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10984"/>
         <source>&amp;Show All Curves</source>
         <translation type="unfinished">&amp;Zobrazit všechny křivky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11824"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11842"/>
         <source>&lt;b&gt; %1 &lt;/b&gt;: This command line option must be used without other arguments!</source>
         <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt;: Tato volba příkazové řádky musí být použita bez dalších argumentů!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11834"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11852"/>
         <source>Version</source>
         <translation type="unfinished">Verze</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11842"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11860"/>
         <source>Usage</source>
         <translation type="unfinished">Použití</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11843"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11861"/>
         <source>options</source>
         <translation type="unfinished">Možnosti</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11843"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11852"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11854"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11861"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11870"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11872"/>
         <source>file</source>
         <translation type="unfinished">soubor</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11843"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11852"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11854"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11861"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11870"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11872"/>
         <source>name</source>
         <translation type="unfinished">název</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11844"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11862"/>
         <source>Valid options are</source>
         <translation type="unfinished">Platné možnosti jsou</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11845"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11846"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11847"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11848"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11849"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11850"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11863"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11864"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11865"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11866"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11867"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11868"/>
         <source>or</source>
         <translation type="unfinished">nebo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11845"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11863"/>
         <source>show about dialog and exit</source>
         <translation type="unfinished">zobrazit dialog O aplikaci a zavřít</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11846"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11864"/>
         <source>show command line options</source>
         <translation type="unfinished">zobrazit volby příkazové řádky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11879"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11897"/>
         <source>&lt;b&gt; %1 &lt;/b&gt; unknown command line option!</source>
         <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt;: neznámá volba příkazové řádky!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11879"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11897"/>
         <source>Type %1 to see the list of the valid options.</source>
         <translation type="unfinished">Zadejte %1 pro zobrazení výpisu platných voleb.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12454"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12472"/>
         <source>Save project as</source>
         <translation type="unfinished">Uložit projekt jako</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12750"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12784"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12768"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12802"/>
         <source>windows</source>
         <translation type="unfinished">okna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12753"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12785"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12771"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12803"/>
         <source>folders</source>
         <translation type="unfinished">složky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13064"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13111"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13082"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13129"/>
         <source>3D Graph</source>
         <translation type="unfinished">3D Graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13231"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13249"/>
         <source>Skipped moving folder</source>
         <translation type="unfinished">Přeskočen přesun složky</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="217"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="691"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="692"/>
         <source>SciDAVis - untitled</source>
         <translation type="unfinished">SciDAVis - bezejmenný</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="811"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11107"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="812"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11125"/>
         <source>Toolbars</source>
         <translation type="unfinished">Panely nástrojů</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="911"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="912"/>
         <source>&amp;Quick Fit</source>
         <translation type="unfinished">&amp;Rychlé proložení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1104"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1105"/>
         <source>&amp;Tools</source>
         <translation type="unfinished">&amp;Nástroje</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1485"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13742"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1486"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13760"/>
         <source>Please set a default X column for this table, first!</source>
         <translation type="unfinished">Zvolte nejdřív prosím výchozí X-sloupec pro tuto tabulku!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1514"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1533"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1515"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1534"/>
         <source>Please select four columns for this operation!</source>
         <translation type="unfinished">Zvolte prosím čtyři sloupce pro tuto operaci!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3471"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3638"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3472"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3639"/>
         <source>The file &lt;b&gt;%1&lt;/b&gt; is not a valid project file.</source>
         <translation type="unfinished">Soubor &lt;b&gt;%1&lt;/b&gt; není platný soubor projektui.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3652"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3653"/>
         <source>SciDAVis does not support QtiPlot project files from versions later than 0.9.0.</source>
         <translation type="unfinished">SciDAVis nepodporuje projekty QtiPlotu od verze 0.9.0 výše.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3660"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3941"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6126"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6168"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7645"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11834"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13231"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3661"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3942"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6144"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6186"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7663"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11852"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13249"/>
         <source>SciDAVis</source>
         <translation type="unfinished">SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4034"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4035"/>
         <source>The file: &lt;b&gt; %1 &lt;/b&gt; was not created using SciDAVis!</source>
         <translation type="unfinished">Soubor &lt;b&gt; %1 &lt;/b&gt; nebyl vytvořen programem SciDAVis!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4043"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4044"/>
         <source>SciDAVis does not support QtiPlot template files from versions later than 0.9.0.</source>
         <translation type="unfinished">SciDAVis nepodporuje šablony QtiPlotu od verze 0.9.0 výše.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4154"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4155"/>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a SciDAVis template file!</source>
         <translation type="unfinished">Soubor &lt;b&gt;%1&lt;/b&gt; není šablonou programu SciDAVis!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4810"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4811"/>
         <source>Output format:</source>
         <translation type="unfinished">Výstupní formát:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4811"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4812"/>
         <source>Directory:</source>
         <translation type="unfinished">Složka:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4842"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4843"/>
         <source>There are no plot layers available in window &lt;b&gt;%1&lt;/b&gt;.&lt;br&gt;Graph window not exported!</source>
         <translation type="unfinished">V okně nejsou k dispozici žádné vrstvy s grafy &lt;b&gt;%1&lt;/b&gt;.&lt;br&gt;Okno grafu nebylo vyexportováno!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5029"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12450"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5030"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12468"/>
         <source>SciDAVis project</source>
         <translation type="unfinished">SciDAVis Projekt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5030"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12451"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5031"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12469"/>
         <source>Compressed SciDAVis project</source>
         <translation type="unfinished">Komprimovaný SciDAVis projekt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5078"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5079"/>
         <source>SciDAVis/QtiPlot Matrix Template</source>
         <translation type="unfinished">SciDAVis/QtiPlot šablona matice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5080"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5081"/>
         <source>SciDAVis/QtiPlot 2D Graph Template</source>
         <translation type="unfinished">SciDAVis/QtiPlot šablona 2D grafu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5082"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5083"/>
         <source>SciDAVis/QtiPlot Table Template</source>
         <translation type="unfinished">SciDAVis/QtiPlot šablona tabulky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5084"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5085"/>
         <source>SciDAVis/QtiPlot 3D Surface Template</source>
         <translation type="unfinished">SciDAVis/QtiPlot šablona 3D povrchového grafu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10617"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11154"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10635"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11172"/>
         <source>&amp;Vertical Bars</source>
         <translation type="unfinished">&amp;Svislé sloupečky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10621"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11157"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10639"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11175"/>
         <source>&amp;Horizontal Bars</source>
         <translation type="unfinished">&amp;Vodorovné sloupečky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8204"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8222"/>
         <source>Choose the location of the SciDAVis help folder!</source>
         <translation type="unfinished">Zadejte umístění složky s nápovědou SciDAVisu!</translation>
     </message>
@@ -3477,86 +3477,86 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
         <translation type="obsolete">Tento soubor je dáván k dispozici spolu s manuálem  SciDAVis, který lze stáhnout z následující adresy z internetu:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9069"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9087"/>
         <source>Do you want SciDAVis to guess the best position for the new layer?
  Warning: this will rearrange existing layers!</source>
         <translation type="unfinished">Chcete aby SciDAVis určil nejlepší umístění nové vrstvy?
  Varování: tato funkce zěmní uspořádání stávajících vrstev!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10451"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11019"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10469"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11037"/>
         <source>&amp;Import ASCII...</source>
         <translation type="unfinished">&amp;Importovat ASCII...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10735"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11226"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10753"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11244"/>
         <source>Fit &amp;Wizard...</source>
         <translation type="unfinished">Asistent prokládání &amp;dat křivkou...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10754"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11235"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10772"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11253"/>
         <source>&amp;About SciDAVis</source>
         <translation type="unfinished">O&amp; SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10892"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11289"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10910"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11307"/>
         <source>&amp;SciDAVis Homepage</source>
         <translation type="unfinished">&amp;Domovská stránka SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10895"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10913"/>
         <source>SciDAVis &amp;Forums</source>
         <translation type="unfinished">SciDAVis &amp; - diskuzní fóra</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10907"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11300"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10925"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11318"/>
         <source>Scripting &amp;Language</source>
         <translation type="unfinished">S&amp;kriptovací jazyk</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10911"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11302"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10929"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11320"/>
         <source>&amp;Restart Scripting</source>
         <translation type="unfinished">R&amp;estartovat skriptování</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10950"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10960"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10968"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10978"/>
         <source>&amp;Copy status bar text</source>
         <translation type="unfinished">&amp;Kopírovat text ze stavového řádku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11020"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11038"/>
         <source>Import data file(s)</source>
         <translation type="unfinished">Importovat data</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11293"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11311"/>
         <source>Visit SciDAVis &amp;Forums</source>
         <translation type="unfinished">Navštívit fóra &amp;SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11847"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11865"/>
         <source>start SciDAVis in language</source>
         <translation type="unfinished">spouštět SciDAVis v jazyce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11848"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11866"/>
         <source>show SciDAVis manual in a standalone window</source>
         <translation type="unfinished">Zobrazit manuál SciDAVisu v samostatném okně</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11849"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11867"/>
         <source>print SciDAVis version and release date</source>
         <translation type="unfinished">Vytisknout verzi SciDAVis a datum vydání</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11850"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11868"/>
         <source>execute the script file given as argument</source>
         <translation type="unfinished">spustit soubor skriptu zadaný jako argument</translation>
     </message>
@@ -3565,327 +3565,327 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
         <translation type="obsolete">může být jakékoliv .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py nebo ASCII soubory</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11858"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11876"/>
         <source>SciDAVis - Help</source>
         <translation type="unfinished">SciDAVis - Nápověda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11897"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11915"/>
         <source>&lt;b&gt;%1&lt;/b&gt; is a directory, please specify a file name!</source>
         <translation type="unfinished">&lt;b&gt;%1&lt;/b&gt;je složka, zadejte prosím název souboru!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11901"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11919"/>
         <source>You don&apos;t have the permission to open this file: &lt;b&gt;%1&lt;/b&gt;</source>
         <translation type="unfinished">Nemáte oprávnění otevřít soubor: &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12129"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12147"/>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a SciDAVis or Origin project file!</source>
         <translation type="unfinished">Soubor &lt;b&gt;%1&lt;/b&gt; není ani SciDAVis ani Origin projekt!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13324"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13342"/>
         <source>Do you wish to continue?</source>
         <translation type="unfinished">Chcete pokračovat?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13368"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13386"/>
         <source>No updates available. You are already running the latest version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13702"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13739"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13720"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13757"/>
         <source>You need at least two columns for this operation!</source>
         <translation type="unfinished">Pro tuto operaci potřebujete alespoň dva sloupce!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13707"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13725"/>
         <source>Please select a Z column for this operation!</source>
         <translation type="unfinished">Vyberte prosím Z-sloupec pro tuto operaci!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13712"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13730"/>
         <source>You need to define a X column first!</source>
         <translation type="unfinished">Nejdřív musíte definovat X-sloupec!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13717"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13735"/>
         <source>You need to define a Y column first!</source>
         <translation type="unfinished">Nejdřív musíte definovat Y-sloupec!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="411"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="412"/>
         <source>New Aspect</source>
         <translation type="unfinished">Nový aspekt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="465"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="466"/>
         <source>Manage layers</source>
         <translation type="unfinished">Spravovat vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="478"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="479"/>
         <source>Add curves / error bars</source>
         <translation type="unfinished">Přidat křivky / chybové úsečky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="490"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="491"/>
         <source>Enrichments</source>
         <translation type="unfinished">Dekorace</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="582"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="583"/>
         <source>Lines and/or symbols</source>
         <translation type="unfinished">Čáry a/nebo symboly</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1380"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1420"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1443"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1466"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1479"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1381"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1421"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1444"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1467"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1480"/>
         <source>Plot error</source>
         <translation type="unfinished">Chyba grafu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1485"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1495"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1514"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1533"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2934"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2942"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2952"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5139"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5143"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5152"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1486"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1496"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1515"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1534"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2935"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2943"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2953"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5157"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5161"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5226"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5237"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5517"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5170"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5179"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5244"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5255"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5535"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5553"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5571"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11823"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11871"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11878"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12616"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12626"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13702"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13707"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13712"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13717"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5589"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11841"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11889"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11896"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12634"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12644"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13720"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13725"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13730"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13736"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13739"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13742"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13735"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13748"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13754"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13757"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13760"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1708"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1718"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1776"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2843"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2855"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2861"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4841"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5729"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6036"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6046"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6082"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6103"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6119"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6148"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6162"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6193"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6228"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6571"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6592"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6604"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6611"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6628"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6637"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6659"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6678"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6719"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6747"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6785"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6809"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6856"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8267"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8355"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11677"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11690"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11712"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11725"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11757"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11770"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13424"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1709"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1719"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1777"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2844"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2856"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2862"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4842"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5747"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6054"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6064"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6100"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6121"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6137"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6166"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6180"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6211"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6246"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6589"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6610"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6622"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6629"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6646"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6655"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6677"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6696"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6737"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6765"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6803"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6827"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6874"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8285"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8373"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11695"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11708"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11730"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11743"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11775"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11788"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13442"/>
         <source>Warning</source>
         <translation type="unfinished">Varování</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1726"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1737"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1727"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1738"/>
         <source>Choose data set</source>
         <translation type="unfinished">Vyberte dataset</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1749"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1786"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1750"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1787"/>
         <source>Choose matrix to plot</source>
         <translation type="unfinished">Vyberte matici k vykreslení grafu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2092"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2093"/>
         <source>Import image from file</source>
         <translation type="unfinished">Importovat obrázek ze souboru</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2112"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2113"/>
         <source>Load image from file</source>
         <translation type="unfinished">Načíst obrázek ze souboru</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2509"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2510"/>
         <source>Renamed Window</source>
         <translation type="unfinished">Přejmenované okno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2887"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2888"/>
         <source>Error bars error</source>
         <translation type="unfinished">Chyba chybových úseček</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3438"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3452"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3470"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3495"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3542"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3569"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3575"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3583"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3589"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3612"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3626"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3638"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3651"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3673"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4021"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4033"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4043"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4153"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11896"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11900"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11904"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12121"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12128"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12173"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3439"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3453"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3471"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3496"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3543"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3570"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3576"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3584"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3590"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3613"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3627"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3639"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3652"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3674"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4022"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4034"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4044"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4154"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11914"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11918"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11922"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12139"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12146"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12191"/>
         <source>File opening error</source>
         <translation type="unfinished">Chyba při otevírání souboru</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3495"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12173"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3496"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12191"/>
         <source>SciDAVis currently does not support Origin import. If you are interested in reviving and maintaining an Origin import filter, contact the developers.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3527"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3528"/>
         <source>File Open Error</source>
         <translation type="unfinished">Chyba při otevírání souboru</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3691"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3692"/>
         <source>Opening file</source>
         <translation type="unfinished">Otvírám soubor</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3999"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4000"/>
         <source>Scripting Error</source>
         <translation type="unfinished">Chyba skriptu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4011"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4012"/>
         <source>Open Template File</source>
         <translation type="unfinished">Otevřít šablonu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4701"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4729"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4786"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4874"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5102"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6211"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4702"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4730"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4787"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4875"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5103"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6229"/>
         <source>Export Error</source>
         <translation type="unfinished">Chyba exportu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4857"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5454"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4858"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5472"/>
         <source>Overwrite file?</source>
         <translation type="unfinished">Přepsat soubor?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5383"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5401"/>
         <source>Right Axis Title</source>
         <translation type="unfinished">Titulek pravé osy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5408"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5426"/>
         <source>Top Axis Title</source>
         <translation type="unfinished">Titulek horní osy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5595"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5613"/>
         <source>Column selection error</source>
         <translation type="unfinished">Chyba výběru sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5614"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5632"/>
         <source>Row selection error</source>
         <translation type="unfinished">Chyba výběru řádku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6706"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6724"/>
         <source>Add new layer?</source>
         <translation type="unfinished">Přidat novou vrstvu?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6766"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6784"/>
         <source>Insert image from file</source>
         <translation type="unfinished">Vložit obrázek ze souboru</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6880"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6898"/>
         <source>Layer Geometry</source>
         <translation type="unfinished">Geometrie vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7138"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7156"/>
         <source>Duplicate window error</source>
         <translation type="unfinished">Chyba duplikace okna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7166"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7184"/>
         <source>Duplicate error</source>
         <translation type="unfinished">Chyba duplikace</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7285"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7303"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7321"/>
         <source>Window Geometry</source>
         <translation type="unfinished">Geometrie okna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8214"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8232"/>
         <source>index.html File Not Found!</source>
         <translation type="unfinished">index.html nenalezen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8229"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8247"/>
         <source>Help Files Not Found!</source>
         <translation type="unfinished">Soubory nápovědy nenalezeny!</translation>
     </message>
@@ -3894,47 +3894,47 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
         <translation type="obsolete">Profil nápovědy nenalezen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8329"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="8347"/>
         <source>Edit function</source>
         <translation type="unfinished">Upravit funkci</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9011"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9029"/>
         <source>Set the number of pixels to average</source>
         <translation type="unfinished">Nastavit počet pixelů k zprůměrování</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9068"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9086"/>
         <source>Guess best origin for the new layer?</source>
         <translation type="unfinished">Určit nejlepší původ pro novou vrstvu?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11777"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11795"/>
         <source>Enter the number of peaks</source>
         <translation type="unfinished">Zadat počet vrcholů (píků)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12382"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12400"/>
         <source>File save error</source>
         <translation type="unfinished">Chyba ukládání dat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12816"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12834"/>
         <source>Delete folder?</source>
         <translation type="unfinished">Smazat složku?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13189"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13207"/>
         <source>No match found</source>
         <translation type="unfinished">Nenalezena žádná shoda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13339"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13357"/>
         <source>HTTP get version file</source>
         <translation type="unfinished">HTTP získat soubor o verzi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13360"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13378"/>
         <source>Updates Available</source>
         <translation type="unfinished">Jsou dostupné aktualizace</translation>
     </message>
@@ -3945,17 +3945,17 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
         <translation type="unfinished">Čeština vědecká</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10978"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10996"/>
         <source>Create an empty note / script window</source>
         <translation type="unfinished">Vytvořit prázdnou poznámku-/okno skriptu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13323"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13341"/>
         <source>SciDAVis will now try to determine whether a new version of SciDAVis is available. Please modify your firewall settings in order to allow SciDAVis to connect to the internet.</source>
         <translation type="unfinished">SciDAVis se nyní pokusí zjistit, zda není k dispozici novější verze. Nastavte prosím svůj firewall tak, aby měl SciDAVis povoleno připojit se k internetu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13361"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13379"/>
         <source>There is a newer version of SciDAVis (%1) available for download. Would you like to download it now?</source>
         <translation type="unfinished">K dispozici je nová verze SciDAVisu (%1). Chcete ji nyní stáhnout?</translation>
     </message>
@@ -3964,22 +3964,22 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
         <translation type="obsolete">Žádné aktualizace k dispozici. Používáte zatím nejaktuálnější verzi.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13371"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13389"/>
         <source>Invalid version file</source>
         <translation type="unfinished">Neplatný soubor verze</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13372"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13390"/>
         <source>The version file (contents: &quot;%1&quot;) could not be decoded into a valid version number.</source>
         <translation type="unfinished">Soubor verze (obsaht: &quot;%1&quot;) nemohl být dekódován do platné číslo verze.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2953"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2954"/>
         <source>You can only define error bars for numeric columns.</source>
         <translation type="unfinished">Můžete pouze definovat chybové úsečky pro číselné sloupce.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3372"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3373"/>
         <source>new_by_import</source>
         <translation type="unfinished">nový_z_importu</translation>
     </message>
@@ -3988,58 +3988,58 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
         <translation type="obsolete">SciDAVis nepodporuje import souborů Origin. Pokud Vás zajímá možnost vývoje importního filtru pro soubory Origin, kontaktujte prosím vývojáře SciDAVisu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9041"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9059"/>
         <source>Error importing image</source>
         <translation type="unfinished">Chyba importu obrázku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9041"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9059"/>
         <source>Import of image &apos;%1&apos; failed</source>
         <translation type="unfinished">Import obrázku &apos;%1&apos; selhal</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10494"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10512"/>
         <source>Undo/Redo &amp;History</source>
         <translation type="unfinished">Historie Zpět/&amp;Znovu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10832"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11271"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="10850"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11289"/>
         <source>&amp;Convert to Table</source>
         <translation type="unfinished">Převést na  &amp;tabulku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11854"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11872"/>
         <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .py or ASCII file</source>
         <translation type="unfinished">může být jakýkoliv .sciprj, .sciprj.gz, .qti, qti.gz, .py nebo ASCII soubor</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13833"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13851"/>
         <source>Undo/Redo History</source>
         <translation type="unfinished">Historie Zpět/Znovu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3569"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3570"/>
         <source>zlib can&apos;t open %1.</source>
         <translation type="unfinished">zlib nemůže otevřít %1.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3575"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3576"/>
         <source>Can&apos;t create temporary file for writing uncompressed copy of %1.</source>
         <translation type="unfinished">Nemohu vytvořit dočasný soubor pro zápis nekomprimované kopie %1.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3589"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3590"/>
         <source>Error writing to temporary file: %1</source>
         <translation type="unfinished">Chyba při zápisu do dočasného souborui: %1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3630"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3631"/>
         <source>Opening backup copy</source>
         <translation type="unfinished">Otvírám záložní kopii</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3631"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="3632"/>
         <source>The original (corrupt) file is being left untouched, in case you want to try rescuing data manually. If you want to continue working with the automatically restored backup copy, you have to explicitly overwrite the original file.</source>
         <translation type="unfinished">Původní (porušený) soubor byl ponechán nedotčen pro případ, že byste chtěli obnovit data manuálně. Pokud chcete pokračovat v práci s automaticky obnovenou kopií, musíte explicitně přepsat původní soubor.</translation>
     </message>
@@ -12258,7 +12258,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">%1: nastavit vzorec</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11829"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11847"/>
         <location filename="../../libscidavis/src/globals.cpp" line="162"/>
         <source>Released</source>
         <translation type="unfinished">Vydáno</translation>
