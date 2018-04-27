@@ -1,0 +1,158 @@
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
+&FFT filtr:&Nízké posunutí...|Nízké posunutí||Nízké posunutí|1|
+&FFT filtr:&Vysoké posunutí...|Vysoké posunutí||Vysoké posunutí|1|
+&FFT filtr:&Pásmové posunutí...|Pásmové posunutí||Pásmové posunutí|1|
+&FFT filtr:&Pásmovou závoru...|Pásmovou závoru||Pásmovou závoru|1|
+&Formát:&Nákres...|Nákres||Nákres|1|
+&Formát:||||1|
+&Formát:&Stupnice...|Stupnice||Stupnice|1|
+&Formát:&Osy...|Osy||Osy|1|
+&Formát:||||1|
+&Formát:&M?í?ka...|M?í?ka||M?í?ka|1|
+&Formát:&Název...|Název||Název|1|
+&Naposledy otev?ené projekty:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
+&Nový:Nový &projekt|Nový projekt||Otev?ít nový projekt|1|
+&Nový:Nová &tabulka|Nová tabulka||Nová tabulka|1|
+&Nový:Nová &matice|Nová matice||Nová matice|1|
+&Nový:Nová &poznámka/Skript|Nová poznámka/Skript||Vytvo?it prázdné okno pro poznámky/skripty|1|
+&Nový:Nový &nákres|Nový nákres||Vytvo?it prázdný dvojrozm?rný nákres|1|
+&Nový:Nový &nákres funkce|Nový nákres funkce||Vytvo?it nový dvojrozm?rný nákres funkce|1|
+&Nový:Nový trojrozm?rný &nákres povrchu|Nový trojrozm?rný nákres povrchu||Vytvo?it nový trojrozm?rný nákres povrchu|1|
+&Nákres:P?idat/Odstranit &k?ivku...|P?idat/Odstranit k?ivku||Do nákresu p?idat k?ivku|1|
+&Nákres:P?idat &pruhy s chybami...|P?idat pruhy s chybami||P?idat pruhy s chybami...|1|
+&Nákres:P?idat &funkci...|P?idat funkci||P?idat funkci...|1|
+&Nákres:||||1|
+&Nákres:P?idat &text|P?idat text||P?idat text|1|
+&Nákres:Nakreslit &?ipku|Nakreslit ?ipku||Nakreslit ?ipku|1|
+&Nákres:Nakreslit &?áru|Nakreslit ?áru||Nakreslit ?áru|1|
+&Nákres:P?idat ozna?ení ?asu|P?idat ozna?ení ?asu||Datum & ?as|1|
+&Nákres:P?idat &obrázek|P?idat obrázek||P?idat obrázek|1|
+&Nákres:Nová &vysv?tlivka|Nová vysv?tlivka||P?idat novou vysv?tlivku|1|
+&Nákres:||||1|
+&Nákres:Automatické rozvr?ení|Automatické rozvr?ení||Automatické rozvr?ení|1|
+&Nákres:P?idat &vrstvu|P?idat vrstvu||P?idat vrstvu|1|
+&Nákres:&Odstranit vrstvu|Odstranit vrstvu||Odstranit vrstvu|1|
+&Nákres:&Uspo?ádat vrstvy...|Uspo?ádat vrstvy||Uspo?ádat vrstvy|1|
+&Nápov?da:&Nápov?da|Nápov?da||Nápov?da|1|
+&Nápov?da:||||1|
+&Nápov?da:&Domovská stránka programu SciDAVis|Domovská stránka programu SciDAVis||Domovská stránka programu SciDAVis|1|
+&Nápov?da:||||1|
+&Nápov?da:Nav?tívit &fóra programu SciDAVis|Nav?tívit fóra programu SciDAVis||Nav?tívit fóra programu SciDAVis|1|
+&Nápov?da:Ohlásit &chybu|Ohlásit chybu||Ohlásit chybu|1|
+&Nápov?da:||||1|
+&Nápov?da:&O programu SciDAVis|O programu SciDAVis||O programu SciDAVis|1|
+&Nástroje:Zakázat &nástroje|Zakázat nástroje||Ukazovátko|1|
+&Nástroje:&P?iblí?it|P?iblí?it||P?iblí?it|1|
+&Nástroje:&Oddálit|Oddálit||Oddálit|1|
+&Nástroje:&Zm?nit m??ítko na Ukázat v?e|Zm?nit m??ítko na Ukázat v?e||Nejlep?í umíst?ní|1|
+&Nástroje:||||1|
+&Nástroje:?&te?ka obrazovky|?te?ka obrazovky||?te?ka obrazovky|1|
+&Nástroje:&?te?ka dat|?te?ka dat||?te?ka dat|1|
+&Nástroje:&Vybrat rozsah dat|Vybrat rozsah dat||Vybrat rozsah dat|1|
+&Nástroje:||||1|
+&Nástroje:&P?esunout datové body...|P?esunout datové body||P?esunout datové body|1|
+&Nástroje:Odstranit &?patné datové body...|Odstranit ?patné datové body||Odstranit datové body|1|
+&Pohled:Nástrojové li?ty|Nástrojové li?ty||Nástrojové li?ty|1|
+&Pohled:&Lock Toolbars|Lock Toolbars||Lock Toolbars|1|
+&Pohled:||||1|
+&Pohled:Pr?vodce &nákresem|Pr?vodce nákresem||Pr?vodce nákresem|1|
+&Pohled:&Pr?zkumník projektu|Pr?zkumník projektu||Ukázat pr?zkumníka projektu|1|
+&Pohled:Zápis &výsledk?|Zápis výsledk?||Ukázat výsledky výpo?t?|1|
+&Pohled:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
+&Pohled:&Ovládací panel|Ovládací panel||Ukázat skriptovací konzoli|1|
+&P?elo?it:&Svisle|Svisle||Svisle|1|
+&P?elo?it:&Vodorovn?|Vodorovn?||Vodorovn?|1|
+&Quick Fit:&Lineární umíst?ní|Lineární umíst?ní||Lineární umíst?ní|1|
+&Quick Fit:&Mnoho?lenné umíst?ní..|Mnoho?lenné umíst?ní..||Mnoho?lenné umíst?ní..|1|
+&Quick Fit:||||1|
+&Quick Fit:Fit E&xponential Decay|Fit Exponential Decay||Fit Exponential Decay|1|
+&Quick Fit:Umístit exponenciální &r?st...|Umístit exponenciální r?st||Umístit exponenciální r?st|1|
+&Quick Fit:&Boltzmannovo umíst?ní (esovité)|Boltzmannovo umíst?ní (esovité)||Boltzmannovo umíst?ní (esovité)|1|
+&Quick Fit:&Gaussovo umíst?ní|Gaussovo umíst?ní||Gaussovo umíst?ní|1|
+&Quick Fit:&Lorentzovo umíst?ní|Lorentzovo umíst?ní||Lorentzovo umíst?ní|1|
+&Quick Fit:Fit &Multi-peak|Fit Multi-peak||Fit Multi-peak|1|
+&Quick Fit:||||1|
+&Rozbor:&P?elo?it|P?elo?it||P?elo?it|1|
+&Rozbor:||||1|
+&Rozbor:&Diferencovat|Diferencovat||Diferencovat|1|
+&Rozbor:&Za?lenit...|Za?lenit||Za?lenit|1|
+&Rozbor:||||1|
+&Rozbor:&Vyhladit|Vyhladit||Vyhladit|1|
+&Rozbor:&FFT filtr|FFT filtr||FFT filtr|1|
+&Rozbor:||||1|
+&Rozbor:&Interpolovat...|Interpolovat||Interpolovat|1|
+&Rozbor:&FFT...|FFT||FFT|1|
+&Rozbor:||||1|
+&Rozbor:&Quick Fit|Quick Fit||Quick Fit|1|
+&Rozbor:&Pr?vodce umíst?ním k?ivek...|Pr?vodce umíst?ním k?ivek||Pr?vodce umíst?ním k?ivek|1|
+&Skriptování:Skriptovací &jazyk|Skriptovací jazyk||Skriptovací jazyk|1|
+&Skriptování:&Spustit podporu skriptování znovu|Spustit podporu skriptování znovu||Spustit podporu skriptování znovu|1|
+&Soubor:&Nový|Nový||Nový|1|
+&Soubor:&Otev?ít...|Otev?ít||Otev?ít projekt|1|
+&Soubor:&Naposledy otev?ené projekty|Naposledy otev?ené projekty||Naposledy otev?ené projekty|1|
+&Soubor:||||1|
+&Soubor:Otev?ít soubor s &obrázkem...|Otev?ít soubor s obrázkem||Otev?ít soubor s obrázkem|1|
+&Soubor:Zavést &obrázek...|Zavést obrázek||Zavést obrázek|1|
+&Soubor:||||1|
+&Soubor:&Ulo?it projekt|Ulo?it projekt||Ulo?it projekt|1|
+&Soubor:Ulo?it projekt &jako...|Ulo?it projekt jako||Ulo?it projekt jako|1|
+&Soubor:||||1|
+&Soubor:Otev?ít p?ed&lohu...|Otev?ít p?edlohu||Otev?ít p?edlohu|1|
+&Soubor:Ulo?it jako &p?edlohu...|Ulo?it jako p?edlohu||Ulo?it okno jako p?edlohu|1|
+&Soubor:||||1|
+&Soubor:&Vyvést nákres|Vyvést nákres||Vyvést nákres|1|
+&Soubor:&Tisk...|Tisk||Tisk okna|1|
+&Soubor:Tisk v?ech ná&kres?...|Tisk v?ech nákres?||Tisk v?ech nákres?|1|
+&Soubor:||||1|
+&Soubor:&Vyvést jako ASCII...|Vyvést jako ASCII||Vyvést jako ASCII|1|
+&Soubor:&Zavedení ASCII...|Zavedení ASCII||Zavést soubor(y) s daty|1|
+&Soubor:||||1|
+&Soubor:&Ukon?it|Ukon?it||Ukon?it|1|
+&Trojrozm?rný nákres:&Stuha|Stuha||Nakreslit trojrozm?rnou stuhu|1|
+&Trojrozm?rný nákres:&Pruhy|Pruhy||Nakreslit trojrozm?rné pruhy|1|
+&Trojrozm?rný nákres:&Body|Body||Nakreslit trojrozm?rné body|1|
+&Trojrozm?rný nákres:&Dráha|Dráha||Nakreslit trojrozm?rnou dráhu|1|
+&Vyhladit:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
+&Vyhladit:Klouzající &okenní pr?m?r...|Klouzající okenní pr?m?r||Klouzající okenní pr?m?r|1|
+&Vyhladit:&FFT filtr...|FFT filtr||FFT filtr|1|
+&Vyvést nákres:&Nyn?j?í...|Nyn?j?í||Vyvést nyn?j?í nákres|1|
+&Vyvést nákres:&V?e...|V?e||Vyvést v?echny nákresy|1|
+&Úpravy:&Zp?t|Zp?t||Zm?ny vrátit zp?t|1|
+&Úpravy:&Znovu|Znovu||Zm?ny provést znovu|1|
+&Úpravy:||||1|
+&Úpravy:Vyj&mout výb?r|Vyjmout výb?r||Vyjmout výb?r|1|
+&Úpravy:&Kopírovat výb?r|Kopírovat výb?r||Kopírovat výb?r|1|
+&Úpravy:&Vlo?it výb?r|Vlo?it výb?r||Vlo?it výb?r|1|
+&Úpravy:&Smazat výb?r|Smazat výb?r||Smazat výb?r|1|
+&Úpravy:||||1|
+&Úpravy:&Smazat tabulky umíst?ní|Smazat tabulky umíst?ní||Smazat tabulky umíst?ní|1|
+&Úpravy:Smazat v?echny informace v &zápisu|Smazat v?echny informace v zápisu||Smazat v?echny informace v zápisu|1|
+&Úpravy:||||1|
+&Úpravy:&Nastavení...|Nastavení||Nastavení|1|
+Fit &Multi-peak:&Gauss?v...|Gauss?v||Gauss?v|1|
+Fit &Multi-peak:&Lorentz?v...|Lorentz?v||Lorentz?v|1|
+Fit E&xponential Decay:&První ?ád...|První ?ád||První ?ád|1|
+Fit E&xponential Decay:&Druhý ?ád...|Druhý ?ád||Druhý ?ád|1|
+Fit E&xponential Decay:&T?etí ?ád...|T?etí ?ád||T?etí ?ád|1|
+Nástrojové li?ty:Soubor|Soubor||Soubor|1|
+Nástrojové li?ty:Upravit|Upravit||Upravit|1|
+Nástrojové li?ty:Nákres|Nákres||Nákres|1|
+Nástrojové li?ty:Nákres|Nákres||Nákres|1|
+Nástrojové li?ty:Tabulka|Tabulka||Tabulka|1|
+Nástrojové li?ty:Nákres matice|Nákres matice||Nákres matice|1|
+Nástrojové li?ty:Nákres trojrozm?rného povrchu|Nákres trojrozm?rného povrchu||Nákres trojrozm?rného povrchu|1|
+Pa&nel:&Dv? svislé vrstvy|Dv? svislé vrstvy||Dv? svislé vrstvy|1|
+Pa&nel:Dv? vodo&rovné vrstvy|Dv? vodorovné vrstvy||Dv? vodorovné vrstvy|1|
+Pa&nel:&?ty?i vrstvy|?ty?i vrstvy||?ty?i vrstvy|1|
+Pa&nel:&Skládané vrstvy|Skládané vrstvy||Skládané vrstvy|1|
+Statistické &nákresy:&Krabicový nákres|Krabicový nákres||Krabicový a vousatý nákres|1|
+Statistické &nákresy:&Histogram|Histogram||Histogram|1|
+Statistické &nákresy:&Naskládaný histogram|Naskládaný histogram||Naskládaný histogram|1|
+Zvlá?tní ?ára/Symb&ol:Svislé &?áry|Svislé ?áry||Svislé ?áry|1|
+Zvlá?tní ?ára/Symb&ol:&K?ivka (spline)|K?ivka (spline)||K?ivka (spline)|1|
+Zvlá?tní ?ára/Symb&ol:&Svislé schody|Svislé schody||Svislé schody|1|
+Zvlá?tní ?ára/Symb&ol:&Vodorovné schody|Vodorovné schody||Vodorovné schody|1|
