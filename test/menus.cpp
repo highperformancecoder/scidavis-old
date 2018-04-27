@@ -1,4 +1,5 @@
 #include "unittests.h"
+#include "MultiLayer.h"
 #include <map>
 #include <string>
 #include <fstream>
@@ -43,7 +44,11 @@ void Unittests::menus()
 
   {
     unique_ptr<ApplicationWindow> appWithGraph(open("testProject.sciprj"));
-    appWithGraph->showCurveContextMenu(0);
+    // find graph
+    unique_ptr<QWidgetList> windows(appWithGraph->windowsList());
+    for (auto& i: *windows)
+      if (auto ml=dynamic_cast<MultiLayer*>(i))
+        appWithGraph->showCurveContextMenuImpl(ml->activeGraph()->curveKey(0));
     for (auto& l: appWithGraph->locales)
       {
         appWithGraph->switchToLanguage(l);
