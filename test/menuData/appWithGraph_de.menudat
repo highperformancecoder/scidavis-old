@@ -1,0 +1,158 @@
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
+&Ansicht:Toolbars|Toolbars||Toolbars|1|
+&Ansicht:&Lock Toolbars|Lock Toolbars||Lock Toolbars|1|
+&Ansicht:||||1|
+&Ansicht:Diagramm-&Assistent|Diagramm-Assistent||Diagramm-Assistent|1|
+&Ansicht:Projekt&explorer|Projektexplorer||Projektexplorer anzeigen|1|
+&Ansicht:Ergebnis-&Log|Ergebnis-Log||Berechnungsergebnis anzeigen|1|
+&Ansicht:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
+&Ansicht:&Konsole|Konsole||Skriptkonsole anzeigen|1|
+&Datei:&Neu|Neu||Neu|1|
+&Datei:Ö&ffnen...|Öffnen||Projekt öffnen|1|
+&Datei:&Zuletzt geöffnete Projekte|Zuletzt geöffnete Projekte||Zuletzt geöffnete Projekte|1|
+&Datei:||||1|
+&Datei:Bilddatei ö&ffnen...|Bilddatei öffnen||Bilddatei öffnen|1|
+&Datei:Bild i&mportieren...|Bild importieren||Bild importieren|1|
+&Datei:||||1|
+&Datei:Projekt &speichern|Projekt speichern||Projekt speichern|1|
+&Datei:Speichere Projekt &als...|Speichere Projekt als||Speichere Projekt als|1|
+&Datei:||||1|
+&Datei:&Vorlage öffnen...|Vorlage öffnen||Vorlage öffnen|1|
+&Datei:Als &Vorlage speichern...|Als Vorlage speichern||Fenster als Vorlage speichern|1|
+&Datei:||||1|
+&Datei:Grafik &exportieren|Grafik exportieren||Grafik exportieren|1|
+&Datei:&Drucken...|Drucken||Fenster drucken|1|
+&Datei:Alle Grafiken aus&drucken...|Alle Grafiken ausdrucken||Alle Grafiken ausdrucken|1|
+&Datei:||||1|
+&Datei:ASCII-E&xport...|ASCII-Export||ASCII-Export|1|
+&Datei:ASCII-&Import...|ASCII-Import||Datendatei(en) importieren|1|
+&Datei:||||1|
+&Datei:&Beenden|Beenden||Beenden|1|
+&FFT Filter:&Tiefpass...|Tiefpass||Tiefpass|1|
+&FFT Filter:&Hochpass...|Hochpass||Hochpass|1|
+&FFT Filter:&Bandpass...|Bandpass||Bandpass|1|
+&FFT Filter:&Bandfilter...|Bandfilter||Bandfilter|1|
+&Feld:2 &vertikale Ebenen|2 vertikale Ebenen||2 vertikale Ebenen|1|
+&Feld:2 &horizontale Ebenen|2 horizontale Ebenen||2 horizontale Ebenen|1|
+&Feld:&4 Ebenen|4 Ebenen||4 Ebenen|1|
+&Feld:Ge&stapelte Ebenen|Gestapelte Ebenen||Gestapelte Ebenen|1|
+&Glätten:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
+&Glätten:&Gleitender Fensterdurchschnitt...|Gleitender Fensterdurchschnitt||Gleitender Fensterdurchschnitt|1|
+&Glätten:&FFT Filter...|FFT Filter||FFT Filter|1|
+&Grafik:&Kurve hinzufügen/entfernen...|Kurve hinzufügen/entfernen||Kurve zu Grafik hinzufügen|1|
+&Grafik:F&ehlerbalken hinzufügen...|Fehlerbalken hinzufügen||Fehlerbalken hinzufügen...|1|
+&Grafik:&Funktion hinzufügen...|Funktion hinzufügen||Funktion hinzufügen...|1|
+&Grafik:||||1|
+&Grafik:&Text hinzufügen|Text hinzufügen||Text hinzufügen|1|
+&Grafik:&Pfeil zeichnen|Pfeil zeichnen||Pfeil zeichnen|1|
+&Grafik:&Linie zeichnen|Linie zeichnen||Linien zeichnen|1|
+&Grafik:Zeitstempel hinzufügen|Zeitstempel hinzufügen||Datum & Zeit |1|
+&Grafik:Bild h&inzufügen|Bild hinzufügen||Bild hinzufügen|1|
+&Grafik:Neue &Legende|Neue Legende||Neue Legende hinzufügen|1|
+&Grafik:||||1|
+&Grafik:Automatisches Layout|Automatisches Layout||Automatisches Layout|1|
+&Grafik:&Ebene hinzufügen|Ebene hinzufügen||Ebene hinzufügen|1|
+&Grafik:Ebene &entfernen|Ebene entfernen||Ebene entfernen|1|
+&Grafik:Ebenen &anordnen...|Ebenen anordnen||Ebenen anordnen|1|
+&Hilfe:&Hilfe|Hilfe||Hilfe|1|
+&Hilfe:||||1|
+&Hilfe:&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
+&Hilfe:||||1|
+&Hilfe:SciDAVis &Foren besuchen|SciDAVis Foren besuchen||SciDAVis Foren besuchen|1|
+&Hilfe:Einen &Bug melden|Einen Bug melden||Einen Bug melden|1|
+&Hilfe:||||1|
+&Hilfe:Ü&ber SciDAVis|Über SciDAVis||Über SciDAVis|1|
+&Neu:Neues &Projekt|Neues Projekt||Ein neues Projekt öffnen|1|
+&Neu:Neue &Tabelle|Neue Tabelle||Neue Tabelle|1|
+&Neu:Neue &Matrix|Neue Matrix||Neue Matrix|1|
+&Neu:Neue &Notiz / Script|Neue Notiz / Script||Ein leeres Notiz-/Skriptfenster erstellen|1|
+&Neu:Neue &Grafik|Neue Grafik||Ein leeres 2D Diagramm erstellen|1|
+&Neu:Neues &Funktionsdiagramm|Neues Funktionsdiagramm||Eine neue 2D Funktion darstellen|1|
+&Neu:Neues &3D-Oberflächendiagramm|Neues 3D-Oberflächendiagramm||Ein neues 3D Oberflächendiagramm erstellen|1|
+&Quick Fit:&Lineare Anpassung|Lineare Anpassung||Lineare Anpassung|1|
+&Quick Fit:&Polynomiale Anpassung...|Polynomiale Anpassung||Polynomiale Anpassung|1|
+&Quick Fit:||||1|
+&Quick Fit:Fit E&xponential Decay|Fit Exponential Decay||Fit Exponential Decay|1|
+&Quick Fit: Exponentielles &Wachstum anpassen...|Exponentielles Wachstum anpassen||Exponentielles Wachstum anpassen|1|
+&Quick Fit:&Boltzmann-Anpassung (Sigmoidal)|Boltzmann-Anpassung (Sigmoidal)||Boltzmann-Anpassung (Sigmoidal)|1|
+&Quick Fit:&Gauss-Anpassung|Gauss-Anpassung||Gauss-Anpassung|1|
+&Quick Fit:Loren&z-Anpassung|Lorenz-Anpassung||Lorenz-Anpassung|1|
+&Quick Fit:Fit &Multi-peak|Fit Multi-peak||Fit Multi-peak|1|
+&Quick Fit:||||1|
+&Verschieben:&Vertikal|Vertikal||Vertikal|1|
+&Verschieben:&Horizontal|Horizontal||Horizontal|1|
+&Werkzeuge:Werkzeuge deak&tivieren|Werkzeuge deaktivieren||Mauszeiger|1|
+&Werkzeuge:Rein&zoomen|Reinzoomen||Reinzoomen|1|
+&Werkzeuge:Herausz&oomen|Herauszoomen||Herauszoomen|1|
+&Werkzeuge:Auf Komplettansicht &reskalieren|Auf Komplettansicht reskalieren||Beste Anpassung|1|
+&Werkzeuge:||||1|
+&Werkzeuge:&Bildschirmleser|Bildschirmleser||Bildschirmleser|1|
+&Werkzeuge:&Datenleser|Datenleser||Datenleser|1|
+&Werkzeuge:Datenbereich au&swählen|Datenbereich auswählen||Datenbereich setzen|1|
+&Werkzeuge:||||1|
+&Werkzeuge:Datenpunkte &verschieben...|Datenpunkte verschieben||Datenpunkte verschieben|1|
+&Werkzeuge:Datenausreißer &entfernen...|Datenausreißer entfernen||Datenpunkte löschen|1|
+&Zuletzt geöffnete Projekte:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
+3&D-Diagramm:&Band|Band||3D-Band zeichnen|1|
+3&D-Diagramm:&Balken|Balken||3D-Balken zeichnen|1|
+3&D-Diagramm:&Punkte|Punkte||3D-Punkte zeichnen|1|
+3&D-Diagramm:&Trajektorie|Trajektorie||3D-Trajektorie zeichnen|1|
+Ana&lyse:&Verschieben|Verschieben||Verschieben|1|
+Ana&lyse:||||1|
+Ana&lyse:&Differenzieren|Differenzieren||Differenzieren|1|
+Ana&lyse:&Integrieren ...|Integrieren||Integrieren|1|
+Ana&lyse:||||1|
+Ana&lyse:&Glätten|Glätten||Glätten|1|
+Ana&lyse:&FFT Filter|FFT Filter||FFT Filter|1|
+Ana&lyse:||||1|
+Ana&lyse:Inte&rpolieren...|Interpolieren||Interpolieren|1|
+Ana&lyse:&FFT...|FFT||FFT|1|
+Ana&lyse:||||1|
+Ana&lyse:&Quick Fit|Quick Fit||Quick Fit|1|
+Ana&lyse:Kurvenanpassungs&assistent...|Kurvenanpassungsassistent||Kurvenanpassungsassistent|1|
+B&earbeiten:&Rückgängig|Rückgängig||Änderungen rückgängig machen|1|
+B&earbeiten:Wiede&rholen|Wiederholen||Wiederherstellen|1|
+B&earbeiten:||||1|
+B&earbeiten:Auswahl ausschnei&den|Auswahl ausschneiden||Auswahl ausschneiden|1|
+B&earbeiten:Auswahl &kopieren|Auswahl kopieren||Auswahl kopieren|1|
+B&earbeiten:Auswahl ein&fügen|Auswahl einfügen||Einfügen|1|
+B&earbeiten:Auswahl &löschen|Auswahl löschen||Auswahl löschen|1|
+B&earbeiten:||||1|
+B&earbeiten:&Anpassungstabellen löschen|Anpassungstabellen löschen||Anpassungstabellen löschen|1|
+B&earbeiten:Alle &Log-Einträge löschen|Alle Log-Einträge löschen||Alle Log-Einträge löschen|1|
+B&earbeiten:||||1|
+B&earbeiten:&Einstellungen...|Einstellungen||Einstellungen|1|
+Fit &Multi-peak:&Gauss...|Gauss||Gauss|1|
+Fit &Multi-peak:&Lorentz...|Lorentz||Lorentz|1|
+Fit E&xponential Decay:&Erster Ordnung...|Erster Ordnung||Erster Ordnung|1|
+Fit E&xponential Decay:&Zweiter Ordnung...|Zweiter Ordnung||Zweiter Ordnung|1|
+Fit E&xponential Decay:&Dritter Ordnung...|Dritter Ordnung||Dritter Ordnung|1|
+For&mat:&Diagramm ...|Diagramm||Diagramm|1|
+For&mat:||||1|
+For&mat:&Skalen...|Skalen||Skalen|1|
+For&mat:&Achsen...|Achsen||Achsen|1|
+For&mat:||||1|
+For&mat:&Gitter...|Gitter||Gitter|1|
+For&mat:&Titel ...|Titel||Titel|1|
+Grafik &exportieren:&Aktuelle...|Aktuelle||Aktuelle Grafik exportieren|1|
+Grafik &exportieren:&Alle...|Alle||Alle Grafiken exportieren|1|
+Skriptunterstützung:S&kriptsprache|Skriptsprache||Skriptsprache|1|
+Skriptunterstützung:Sk&riptunterstützung neu starten|Skriptunterstützung neu starten||Skriptunterstützung neu starten|1|
+Spezielle Linie/Symb&ol:Vertikale &Linien|Vertikale Linien||Vertikale Linien|1|
+Spezielle Linie/Symb&ol:&Spline|Spline||Spline|1|
+Spezielle Linie/Symb&ol:&Vertikale Schritte|Vertikale Schritte||Vertikale Schritte|1|
+Spezielle Linie/Symb&ol:&Horizontale Schritte|Horizontale Schritte||Horizontale Schritte|1|
+Statistische &Diagramme:&Boxdiagramm|Boxdiagramm||Box-and-Whiskers-Diagramm|1|
+Statistische &Diagramme:&Histogramm|Histogramm||Histogramm|1|
+Statistische &Diagramme:ge&stapeltes Histogramm|gestapeltes Histogramm||gestapeltes Histogramm|1|
+Toolbars:Datei|Datei||Datei|1|
+Toolbars:Bearbeiten|Bearbeiten||Bearbeiten|1|
+Toolbars:Grafik|Grafik||Grafik|1|
+Toolbars:Diagramm|Diagramm||Diagramm|1|
+Toolbars:Tabelle|Tabelle||Tabelle|1|
+Toolbars:Matrix-Diagramm|Matrix-Diagramm||Matrix-Diagramm|1|
+Toolbars:3D-Oberflächendiagramm|3D-Oberflächendiagramm||3D-Oberflächendiagramm|1|

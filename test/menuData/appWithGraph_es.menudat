@@ -1,0 +1,158 @@
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
+ Línea/Símb&olo especial: Líneas  &verticales|Líneas  verticales||Líneas  verticales|1|
+ Línea/Símb&olo especial:&Suavizado|Suavizado||Suavizado|1|
+ Línea/Símb&olo especial:Escalones &verticales|Escalones verticales||Escalones verticales|1|
+ Línea/Símb&olo especial:Escalones &horizontales|Escalones horizontales||Escalones horizontales|1|
+&Análisis:&Traducir|Traducir||Traducir|1|
+&Análisis:||||1|
+&Análisis:&Derivar|Derivar||Derivar|1|
+&Análisis:&Integrar ...|Integrar||Integrar|1|
+&Análisis:||||1|
+&Análisis:&Suavizar|Suavizar||Suavizar|1|
+&Análisis:Filtro &FFT|Filtro FFT||Filtro FFT|1|
+&Análisis:||||1|
+&Análisis:Inte&rpolar...|Interpolar||Interpolar|1|
+&Análisis:&FFT...|FFT||FFT|1|
+&Análisis:||||1|
+&Análisis:&Quick Fit|Quick Fit||Quick Fit|1|
+&Análisis:Asistente de a&juste...|Asistente de ajuste||Asistente de ajuste|1|
+&Archivo:&Nuevo|Nuevo||Nuevo|1|
+&Archivo:&Abrir...|Abrir||Abrir proyecto|1|
+&Archivo:&Proyectos recientes|Proyectos recientes||Proyectos recientes|1|
+&Archivo:||||1|
+&Archivo:&Abrir archivo de imagen...|Abrir archivo de imagen||Abrir archivo de imagen|1|
+&Archivo:Importar i&magen...|Importar imagen||Importar imagen|1|
+&Archivo:||||1|
+&Archivo:&Guardar proyecto|Guardar proyecto||Guardar proyecto|1|
+&Archivo:Guard&ar proyecto como...|Guardar proyecto como||Guardar proyecto como|1|
+&Archivo:||||1|
+&Archivo:Abrir pla&ntilla...|Abrir plantilla||Abrir plantilla|1|
+&Archivo:Guardar como plan&tilla...|Guardar como plantilla||Guardar ventana como plantilla|1|
+&Archivo:||||1|
+&Archivo:&Exportar gráfico|Exportar gráfico||Exportar gráfico|1|
+&Archivo:Im&primir...|Imprimir||Imprimir ventana|1|
+&Archivo:Imprimir &todos los gráficos...|Imprimir todos los gráficos||Imprimir todos los gráficos|1|
+&Archivo:||||1|
+&Archivo:E&xportar ASCII...|Exportar ASCII||Exportar ASCII|1|
+&Archivo:&Importar ASCII...|Importar ASCII||Importar archivo(s) de datos|1|
+&Archivo:||||1|
+&Archivo:&Quitar|Quitar||Quitar|1|
+&Editar:&Deshacer|Deshacer||Deshacer cambios|1|
+&Editar:&Rehacer|Rehacer||Rehacer cambios|1|
+&Editar:||||1|
+&Editar:Cor&tar selección|Cortar selección||Cortar selección|1|
+&Editar:&Copiar selección|Copiar selección||Copiar selección|1|
+&Editar:&Pegar selección|Pegar selección||Pegar selección|1|
+&Editar:&Borrar selección|Borrar selección||Borrar selección|1|
+&Editar:||||1|
+&Editar:Borrar tablas de a&juste|Borrar tablas de ajuste||Borrar tablas de ajuste|1|
+&Editar:Borrar información de&l registro|Borrar información del registro||Borrar información del registro|1|
+&Editar:||||1|
+&Editar:&Preferencias...|Preferencias||Preferencias|1|
+&Exportar gráfico:A&ctual...|Actual||Exportar gráfico actual|1|
+&Exportar gráfico:&Todo...|Todo||Exportar todos los gráficos|1|
+&Gráfico:Agregar/quitar &curva...|Agregar/quitar curva||Agregar curva al gráfico|1|
+&Gráfico:Agregar barras de &error...|Agregar barras de error||Agregar barras de error...|1|
+&Gráfico:Añadir &función...|Añadir función||Agregar función...|1|
+&Gráfico:||||1|
+&Gráfico:Agregar &texto|Agregar texto||Agregar texto|1|
+&Gráfico:Dibuj&ar flecha|Dibujar flecha||Dibujar flecha|1|
+&Gráfico:Dibujar &línea|Dibujar línea||Dibujar línea|1|
+&Gráfico:Agregar sello de tiempo|Agregar sello de tiempo||Fecha y hora|1|
+&Gráfico:Agregar &imagen|Agregar imagen||Agregar imagen|1|
+&Gráfico:Nueva &leyenda|Nueva leyenda||Agregar nueva leyenda|1|
+&Gráfico:||||1|
+&Gráfico:Organización automática|Organización automática||Organización automática|1|
+&Gráfico:Agregar &capa|Agregar capa||Agregar capa|1|
+&Gráfico:Quita&r capa|Quitar capa||Quitar capa|1|
+&Gráfico:Or&ganizar capas...|Organizar capas||Organizar capas|1|
+&Gráficos estadísticos:Gráfico de &caja|Gráfico de caja||Gráfico de cajas y bigotes|1|
+&Gráficos estadísticos:&Histograma|Histograma||Histograma|1|
+&Gráficos estadísticos:Hi&stograma apilado|Histograma apilado||Histograma apilado|1|
+&Herramientas:Desactivar herramien&tas|Desactivar herramientas||Puntero|1|
+&Herramientas:Aumentar &zoom|Aumentar zoom||Aumentar zoom|1|
+&Herramientas:Ale&jar|Alejar||Disminuir zoom|1|
+&Herramientas:&Reescalar para mostrar todo|Reescalar para mostrar todo||Reescalar para mostrar todo|1|
+&Herramientas:||||1|
+&Herramientas:Lector de &pantalla|Lector de pantalla||Lector de pantalla|1|
+&Herramientas:Lector de &datos|Lector de datos||Lector de datos|1|
+&Herramientas:&Seleccionar rango de datos|Seleccionar rango de datos||Seleccionar rango de datos|1|
+&Herramientas:||||1|
+&Herramientas:&Mover puntos ...|Mover puntos||Mover puntos|1|
+&Herramientas:Quitar puntos &malos ...|Quitar puntos malos||Eliminar puntos|1|
+&Nuevo:Nuevo &proyecto|Nuevo proyecto||Abrir un nuevo proyecto|1|
+&Nuevo:Nueva &tabla|Nueva tabla||Nueva tabla|1|
+&Nuevo:Nueva &matriz|Nueva matriz||Nueva matriz|1|
+&Nuevo:Nueva &nota / script|Nueva nota / script||Crear una ventana de notas/programación vacía|1|
+&Nuevo:Nuevo &gráfico|Nuevo gráfico||Crear un gráfico 2D vacío|1|
+&Nuevo:Nuevo gráfico de &función|Nuevo gráfico de función||Crear nuevo gráfico de función 2D|1|
+&Nuevo:Nueva &superficie 3D|Nueva superficie 3D||Crear nuevo gráfico 3D|1|
+&Proyectos recientes:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
+&Quick Fit:Ajuste &lineal|Ajuste lineal||Ajuste lineal|1|
+&Quick Fit:Ajuste &polinomial ...|Ajuste polinomial||Ajuste polinomial|1|
+&Quick Fit:||||1|
+&Quick Fit:Fit E&xponential Decay|Fit Exponential Decay||Fit Exponential Decay|1|
+&Quick Fit:Ajustar a crecimiento e&xponencial...|Ajustar a crecimiento exponencial||Ajustar a crecimiento exponencial|1|
+&Quick Fit:Ajustar &Boltzmann (Sigmoidal)|Ajustar Boltzmann (Sigmoidal)||Ajustar Boltzmann (Sigmoidal)|1|
+&Quick Fit:Ajuste &Gaussiano|Ajuste Gaussiano||Ajuste Gaussiano|1|
+&Quick Fit:Ajuste Loren&ziano|Ajuste Lorenziano||Ajuste Lorenziano|1|
+&Quick Fit:Fit &Multi-peak|Fit Multi-peak||Fit Multi-peak|1|
+&Quick Fit:||||1|
+&Suavizar:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
+&Suavizar:Promedio de vent&ana móvil...|Promedio de ventana móvil||Promedio de ventana móvil|1|
+&Suavizar:Filtro &FFT...|Filtro FFT||Filtro FFT|1|
+&Traducir:&Vertical|Vertical||Vertical|1|
+&Traducir:&Horizontal|Horizontal||Horizontal|1|
+&Ver:Barras de herramientas|Barras de herramientas||Barras de herramientas|1|
+&Ver:&Lock Toolbars|Lock Toolbars||Lock Toolbars|1|
+&Ver:||||1|
+&Ver:Asistente de grá&fico|Asistente de gráfico||Asistente de gráfico|1|
+&Ver:&Explorador de proyecto|Explorador de proyecto||Mostrar explorador de proyecto|1|
+&Ver:Registro de resu&ltados|Registro de resultados||Mostrar resultados del análisis|1|
+&Ver:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
+&Ver:&Consola|Consola||Mostrar consola de programación|1|
+A&yuda:A&yuda|Ayuda||Ayuda|1|
+A&yuda:||||1|
+A&yuda:Sitio &web de SciDAVis|Sitio web de SciDAVis||Sitio web de SciDAVis|1|
+A&yuda:||||1|
+A&yuda:Visite los &foros de SciDAVis|Visite los foros de SciDAVis||Visite los foros de SciDAVis|1|
+A&yuda:&Reportar un error del programa|Reportar un error del programa||Reportar un error del programa|1|
+A&yuda:||||1|
+A&yuda:&Acerca de SciDAVis|Acerca de SciDAVis||Acerca de SciDAVis|1|
+Barras de herramientas:Archivo|Archivo||Archivo|1|
+Barras de herramientas:Editar|Editar||Editar|1|
+Barras de herramientas:Gráfico|Gráfico||Gráfico|1|
+Barras de herramientas:Gráfica|Gráfica||Gráfica|1|
+Barras de herramientas:Tabla|Tabla||Tabla|1|
+Barras de herramientas:Gráfico de matriz|Gráfico de matriz||Gráfico de matriz|1|
+Barras de herramientas:Superficie 3D|Superficie 3D||Superficie 3D|1|
+Filtro &FFT:Pasa &bajo...|Pasa bajo||Pasa bajo|1|
+Filtro &FFT:Pasa &Alto...|Pasa Alto||Pasa Alto|1|
+Filtro &FFT:Pasa &Banda...|Pasa Banda||Pasa Banda|1|
+Filtro &FFT:Bloquear &Banda...|Bloquear Banda||Bloquear Banda|1|
+Fit &Multi-peak:&Gaussiana...|Gaussiana||Gaussiana|1|
+Fit &Multi-peak:&Lorentziana...|Lorentziana||Lorentziana|1|
+Fit E&xponential Decay:&Primer orden ...|Primer orden||Primer orden|1|
+Fit E&xponential Decay:&Segundo orden ...|Segundo orden||Segundo orden|1|
+Fit E&xponential Decay:&Tercer orden ...|Tercer orden||Tercer orden|1|
+For&mato:&Dibujar ...|Dibujar||Dibujar|1|
+For&mato:||||1|
+For&mato:E&scalas...|Escalas||Escalas|1|
+For&mato:&Ejes...|Ejes||Ejes|1|
+For&mato:||||1|
+For&mato:&Malla ...|Malla||Malla|1|
+For&mato:&Título ...|Título||Título|1|
+Gráfico 3&D:&Cinta|Cinta||Gráfico cinta 3D|1|
+Gráfico 3&D:&Barras|Barras||Gráfico barras 3D|1|
+Gráfico 3&D:&Símbolos|Símbolos||Gráfico símbolos 3D|1|
+Gráfico 3&D:&Trayectoria|Trayectoria||Gráfico trayectoria 3D|1|
+Pa&nel:&2 capas &verticales|2 capas verticales||2 capas verticales|1|
+Pa&nel:2 capas &horizontales|2 capas horizontales||2 capas horizontales|1|
+Pa&nel:&4 capas|4 capas||4 capas|1|
+Pa&nel:&Capas apiladas|Capas apiladas||Capas apiladas|1|
+Programación:&Lenguaje de programación|Lenguaje de programación||Lenguaje de programación|1|
+Programación:&Reiniciar programación|Reiniciar programación||Reiniciar programación|1|

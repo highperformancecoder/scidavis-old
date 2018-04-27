@@ -1,0 +1,158 @@
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
+&Exportovat graf:&Aktuální...|Aktuální||Exportovat aktuální graf|1|
+&Exportovat graf:&V?e...|V?e||Exportovat v?echny grafy|1|
+&FFT Filtr:&Nízký pr?chod...|Nízký pr?chod||Nízký pr?chod|1|
+&FFT Filtr:&Vysoký pr?chod...|Vysoký pr?chod||Vysoký pr?chod|1|
+&FFT Filtr:&Pásmový pr?chodBandpass...|Pásmový pr?chodBandpass||Pásmový pr?chodBandpass|1|
+&FFT Filtr:&Blokace pásma...|Blokace pásma||Blokace pásma|1|
+&Graf:&P?idat/Odstranit k?ivku...|P?idat/Odstranit k?ivku||P?idat do grafu k?ivku|1|
+&Graf:&P?idat chybové úse?ky...|P?idat chybové úse?ky||P?idat chybové úse?ky...|1|
+&Graf:&P?idat funkci...|P?idat funkci||P?idat funkci...|1|
+&Graf:||||1|
+&Graf:P?idat& text|P?idat text||P?idat text|1|
+&Graf:&Nakreslit ?ipku|Nakreslit ?ipku||Nakreslit ?ipku|1|
+&Graf:&Nakreslit ?áru|Nakreslit ?áru||Nakreslit ?áru|1|
+&Graf:P?idat ?asovou zna?ku|P?idat ?asovou zna?ku||Datum & ?as|1|
+&Graf:P?idat &obrázek|P?idat obrázek||P?idat obrázek|1|
+&Graf:Nová &legenda|Nová legenda||P?idat novou legendu|1|
+&Graf:||||1|
+&Graf:Automatické rozvr?ení|Automatické rozvr?ení||Automatické rozvr?ení|1|
+&Graf:&P?idat vrstvu|P?idat vrstvu||P?idat vrstvu|1|
+&Graf:Odstranit &vrstvu|Odstranit vrstvu||Odstranit vrstvu|1|
+&Graf:Uspo?ádat &vrstvy...|Uspo?ádat vrstvy||Uspo?ádat vrstvy|1|
+&Naposled otev?ené projekty:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
+&Nový:Nový &Projekt|Nový Projekt||Otev?ít nový projekt|1|
+&Nový:Nová &Tabulka|Nová Tabulka||Nová tabulka|1|
+&Nový:Nová &matice|Nová matice||Nová matice|1|
+&Nový:Nová &poznámka / Script|Nová poznámka / Script||Vytvo?it prázdnou poznámku-/okno skriptu|1|
+&Nový:Nový &graf|Nový graf||Vytvo?it prázdný 2D graf|1|
+&Nový:Nový &graf funkce|Nový graf funkce||Vytvo?it 2D graf funkce|1|
+&Nový:Nový &3D-povrchový graf|Nový 3D-povrchový graf||Vytvo?it nový 3D povrchový graf|1|
+&Nápov?da:&Nápov?da|Nápov?da||Nápov?da|1|
+&Nápov?da:||||1|
+&Nápov?da:&Domovská stránka SciDAVis|Domovská stránka SciDAVis||Domovská stránka SciDAVis|1|
+&Nápov?da:||||1|
+&Nápov?da:Nav?tívit fóra &SciDAVis|Nav?tívit fóra SciDAVis||Nav?tívit fóra SciDAVis|1|
+&Nápov?da:Nahlásit &chybu|Nahlásit chybu||Nahlásit chybu|1|
+&Nápov?da:||||1|
+&Nápov?da:O& SciDAVis|O SciDAVis||O SciDAVis|1|
+&Nástroje:Deaktivovat nástro&je|Deaktivovat nástroje||Kurzor|1|
+&Nástroje:&P?iblí?it|P?iblí?it||P?iblí?it|1|
+&Nástroje:&Oddálit|Oddálit||Oddálit|1|
+&Nástroje:Zm?nit m??ítko na kompletní &pohled|Zm?nit m??ítko na kompletní pohled||Nejlep?í p?izp?sobení|1|
+&Nástroje:||||1|
+&Nástroje:&?te?ka obrazovky|?te?ka obrazovky||?te?ka obrazovky|1|
+&Nástroje:&?te?ka dat|?te?ka dat||?te?ka dat|1|
+&Nástroje:&Zvolte rozsah dat|Zvolte rozsah dat||Zvolit rozsah dat|1|
+&Nástroje:||||1|
+&Nástroje:P?esunout datové &body...|P?esunout datové body||P?esunout datové body|1|
+&Nástroje:Odstranit chybné &datové body...|Odstranit chybné datové body||Odstranit datové body|1|
+&Pohled:Panely nástroj?|Panely nástroj?||Panely nástroj?|1|
+&Pohled:&Lock Toolbars|Lock Toolbars||Lock Toolbars|1|
+&Pohled:||||1|
+&Pohled:&Asistent grafu|Asistent grafu||Asistent grafu|1|
+&Pohled:Pr?zkumník &projektu|Pr?zkumník projektu||Zobrazit pr?zkumníka projektu|1|
+&Pohled:Výpis-&výsledk?|Výpis-výsledk?||Zobrazit výsledky analýzy|1|
+&Pohled:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
+&Pohled:&Konzole|Konzole||Zobrazit skript. konzoli|1|
+&P?emístit:&Svisle|Svisle||Svisle|1|
+&P?emístit:&Vodorovn?|Vodorovn?||Vodorovn?|1|
+&Quick Fit:&Lineární prolo?ení|Lineární prolo?ení||Lineární prolo?ení|1|
+&Quick Fit:&Polynomiální prolo?ení ...|Polynomiální prolo?ení||Polynomiální prolo?ení|1|
+&Quick Fit:||||1|
+&Quick Fit:Fit E&xponential Decay|Fit Exponential Decay||Fit Exponential Decay|1|
+&Quick Fit:Prolo?it exponenciálním &nár?stem ...|Prolo?it exponenciálním nár?stem||Prolo?it exponenciálním nár?stem|1|
+&Quick Fit:&Prolo?ení Boltzmannem (Sigmoidální)|Prolo?ení Boltzmannem (Sigmoidální)||Prolo?ení Boltzmannem (Sigmoidální)|1|
+&Quick Fit:&Gaussovské prolo?ení|Gaussovské prolo?ení||Gaussovské prolo?ení|1|
+&Quick Fit:Loren&zovské prolo?ení|Lorenzovské prolo?ení||Lorenzovské prolo?ení|1|
+&Quick Fit:Fit &Multi-peak|Fit Multi-peak||Fit Multi-peak|1|
+&Quick Fit:||||1|
+&Soubor:&Nový|Nový||Nový|1|
+&Soubor:&Otev?ít...|Otev?ít||Otev?ít projekt|1|
+&Soubor:&Naposled otev?ené projekty|Naposled otev?ené projekty||Naposled otev?ené projekty|1|
+&Soubor:||||1|
+&Soubor:Otev?ít obrázek &ze souboru...|Otev?ít obrázek ze souboru||Otev?ít obrázek ze souboru|1|
+&Soubor:I&mportovat obrázek...|Importovat obrázek||Importovat obrázek|1|
+&Soubor:||||1|
+&Soubor:Ulo?it &projekt|Ulo?it projekt||Ulo?it projekt|1|
+&Soubor:Ulo?it projekt &jako...|Ulo?it projekt jako||Ulo?it projekt jako|1|
+&Soubor:||||1|
+&Soubor:&Otev?ít ?ablonu...|Otev?ít ?ablonu||Otev?ít ?ablonu|1|
+&Soubor:Ulo?it jako &?ablonu...|Ulo?it jako ?ablonu||Ulo?it okno jako ?ablonu|1|
+&Soubor:||||1|
+&Soubor:&Exportovat graf|Exportovat graf||Exportovat graf|1|
+&Soubor:&Tisknout...|Tisknout||Vytisknout okno|1|
+&Soubor:Vytisknout v?echny gra&fy...|Vytisknout v?echny grafy||Vytisknout v?echny grafy|1|
+&Soubor:||||1|
+&Soubor:E&xportovat ASCII...|Exportovat ASCII||Exportovat ASCII|1|
+&Soubor:&Importovat ASCII...|Importovat ASCII||Importovat data|1|
+&Soubor:||||1|
+&Soubor:&Konec|Konec||Konec|1|
+&Upravit:&Zp?t|Zp?t||Vrátit zp?t zm?ny|1|
+&Upravit:&Znovu|Znovu||Znovu zm?ny|1|
+&Upravit:||||1|
+&Upravit:Vyjmout vý&b?r|Vyjmout výb?r||Vyjmout výb?r|1|
+&Upravit:Kopírovat vý&b?r|Kopírovat výb?r||Kopírovat výb?r|1|
+&Upravit:Vlo?it vý&b?r|Vlo?it výb?r||Vlo?it|1|
+&Upravit:Smazat &výb?r|Smazat výb?r||Smazat výb?r|1|
+&Upravit:||||1|
+&Upravit:&Smazat prokládací tabulky|Smazat prokládací tabulky||Smazat prokládací tabulky|1|
+&Upravit:Smazat v?echny výpisy &(logy)|Smazat v?echny výpisy (logy)||Smazat v?echny výpisy (logy)|1|
+&Upravit:||||1|
+&Upravit:&Nastavení...|Nastavení||Nastavení|1|
+&Vyhladit:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
+&Vyhladit:P&ohyblivý okenní pr?m?r...|Pohyblivý okenní pr?m?r||Pohyblivý okenní pr?m?r|1|
+&Vyhladit:&FFT Filtr...|FFT Filtr||FFT Filtr|1|
+3&D-graf:&Stuha|Stuha||Vykreslit 3D-stuhu|1|
+3&D-graf:&Sloupce|Sloupce||Vykreslit 3D-sloupce|1|
+3&D-graf:&Body|Body||Vykreslit 3D-body|1|
+3&D-graf:&Trajektorie|Trajektorie||Vykreslit 3D-trajektorie|1|
+Ana&lýza:&P?emístit|P?emístit||P?emístit|1|
+Ana&lýza:||||1|
+Ana&lýza:&Derivovat|Derivovat||Derivovat|1|
+Ana&lýza:&Integrovat ...|Integrovat||Integrovat|1|
+Ana&lýza:||||1|
+Ana&lýza:&Vyhladit|Vyhladit||Vyhladit|1|
+Ana&lýza:&FFT Filtr|FFT Filtr||FFT Filtr|1|
+Ana&lýza:||||1|
+Ana&lýza:Inte&rpolovat...|Interpolovat||Interpolovat|1|
+Ana&lýza:&FFT...|FFT||FFT|1|
+Ana&lýza:||||1|
+Ana&lýza:&Quick Fit|Quick Fit||Quick Fit|1|
+Ana&lýza:Asistent prokládání &dat k?ivkou...|Asistent prokládání dat k?ivkou||Asistent prokládání dat k?ivkou|1|
+Fit &Multi-peak:&Gauss...|Gauss||Gauss|1|
+Fit &Multi-peak:&Lorentz...|Lorentz||Lorentz|1|
+Fit E&xponential Decay:&Prvého ?ádu...|Prvého ?ádu||Prvého ?ádu|1|
+Fit E&xponential Decay:&Druhého ?ádu...|Druhého ?ádu||Druhého ?ádu|1|
+Fit E&xponential Decay:&T?etího ?ádu...|T?etího ?ádu||T?etího ?ádu|1|
+For&mát:&Graf ...|Graf||Graf|1|
+For&mát:||||1|
+For&mát:&M??ítka...|M??ítka||M??ítka|1|
+For&mát:&Osy...|Osy||Osy|1|
+For&mát:||||1|
+For&mát:&M?í?ka...|M?í?ka||M?í?ka|1|
+For&mát:&Název ...|Název||Název|1|
+Pa&nel:2 &svislé vrstvy|2 svislé vrstvy||2 svislé vrstvy|1|
+Pa&nel:2 &vodorovné vrstvy|2 vodorovné vrstvy||2 vodorovné vrstvy|1|
+Pa&nel:&4 vrstvy|4 vrstvy||4 vrstvy|1|
+Pa&nel:&Skládané vrstvy|Skládané vrstvy||Skládané vrstvy|1|
+Panely nástroj?:Soubor|Soubor||Soubor|1|
+Panely nástroj?:Upravit|Upravit||Upravit|1|
+Panely nástroj?:Graf|Graf||Graf|1|
+Panely nástroj?:Graf|Graf||Graf|1|
+Panely nástroj?:Tabulka|Tabulka||Tabulka|1|
+Panely nástroj?:Maticový diagram|Maticový diagram||Maticový diagram|1|
+Panely nástroj?:3D-povrch|3D-povrch||3D-povrch|1|
+Skriptování:S&kriptovací jazyk|Skriptovací jazyk||Skriptovací jazyk|1|
+Skriptování:R&estartovat skriptování|Restartovat skriptování||Restartovat skriptování|1|
+Speciální ?ára/symb&ol:Svislé &?áry|Svislé ?áry||Svislé ?áry|1|
+Speciální ?ára/symb&ol:&Spline|Spline||Spline|1|
+Speciální ?ára/symb&ol:&Vertikální kroky|Vertikální kroky||Vertikální kroky|1|
+Speciální ?ára/symb&ol:&Vodorovné kroky|Vodorovné kroky||Vodorovné kroky|1|
+Statistické& grafy:&Krabicový graf|Krabicový graf||Graf "Krabi?ka s fousy"|1|
+Statistické& grafy:&Histogram|Histogram||Histogram|1|
+Statistické& grafy:&Skládaný histogram|Skládaný histogram||Skládaný histogram|1|
