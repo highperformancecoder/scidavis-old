@@ -2,6 +2,8 @@
 # Interpolation is not documented in the SciDAVis manual
 import random
 
+app.switchToLanguage("en")
+
 global f1
 def f1(x):
  a1 = 5.0
