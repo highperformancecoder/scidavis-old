@@ -49,6 +49,7 @@ void Unittests::menus()
     for (auto& i: *windows)
       if (auto ml=dynamic_cast<MultiLayer*>(i))
         appWithGraph->showCurveContextMenuImpl(ml->activeGraph()->curveKey(0));
+    appWithGraph->showMarkerPopupMenuImpl();
     for (auto& l: appWithGraph->locales)
       {
         appWithGraph->switchToLanguage(l);
