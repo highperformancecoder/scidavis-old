@@ -32,7 +32,7 @@ trap "fail" 1 2 3 15
 cp $here/test/pythonTests/* .
 for i in *.py; do
     echo $i
-    $here/scidavis/scidavis -x $i
+    $here/scidavis/scidavis -l=en -x $i
     if test $? -ne 0; then fail; fi
 done
 
