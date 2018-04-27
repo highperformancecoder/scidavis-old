@@ -630,7 +630,9 @@ public slots:
   void showLayerButtonContextMenu();
   void showWindowContextMenu();
   void showWindowTitleBarMenu();
-  void showCurveContextMenu(int curveKey);
+  QMenu* showCurveContextMenuImpl(int);
+  void showCurveContextMenu(int curveKey)
+  {auto m=showCurveContextMenuImpl(curveKey); if (m) m->exec(QCursor::pos());}
   void showCurvePlotDialog();
   void showCurveWorksheet();
   void showCurveWorksheet(Graph *g, int curveIndex);

@@ -5879,72 +5879,72 @@ void ApplicationWindow::showCurvePlotDialog()
 	showPlotDialog(actionShowCurvePlotDialog->data().toInt());
 }
 
-void ApplicationWindow::showCurveContextMenu(int curveKey)
+QMenu* ApplicationWindow::showCurveContextMenuImpl(int curveKey)
 {
 	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("MultiLayer"))
-		return;
+		return nullptr;
 
 	Graph *g = ((MultiLayer*)d_workspace->activeWindow())->activeGraph();
 	DataCurve *c = (DataCurve *)g->curve(g->curveIndex(curveKey));
 	if (!c || !c->isVisible())
-		return;
+		return nullptr;
 
-	QMenu curveMenu(this);
-	curveMenu.addAction(c->title().text(), this, SLOT(showCurvePlotDialog()));
-	curveMenu.addSeparator();
+	auto curveMenu=new QMenu(this);
+	curveMenu->addAction(c->title().text(), this, SLOT(showCurvePlotDialog()));
+	curveMenu->addSeparator();
 
-	curveMenu.addAction(actionHideCurve);
+	curveMenu->addAction(actionHideCurve);
 	actionHideCurve->setData(curveKey);
 
     if (g->visibleCurves() > 1 && c->type() == Graph::Function)
     {
-        curveMenu.addAction(actionHideOtherCurves);
+        curveMenu->addAction(actionHideOtherCurves);
         actionHideOtherCurves->setData(curveKey);
     }
     else if (c->type() != Graph::Function)
     {
         if ((g->visibleCurves() - c->errorBarsList().count()) > 1)
         {
-            curveMenu.addAction(actionHideOtherCurves);
+            curveMenu->addAction(actionHideOtherCurves);
             actionHideOtherCurves->setData(curveKey);
         }
     }
 
 	if (g->visibleCurves() != g->curves())
-		curveMenu.addAction(actionShowAllCurves);
-	curveMenu.addSeparator();
+		curveMenu->addAction(actionShowAllCurves);
+	curveMenu->addSeparator();
 
 	if (c->type() == Graph::Function)
 	{
-		curveMenu.addAction(actionEditFunction);
+		curveMenu->addAction(actionEditFunction);
 		actionEditFunction->setData(curveKey);
 	}
 	else if (c->type() != Graph::ErrorBars)
 	{
-		curveMenu.addAction(actionEditCurveRange);
+		curveMenu->addAction(actionEditCurveRange);
 		actionEditCurveRange->setData(curveKey);
 
-		curveMenu.addAction(actionCurveFullRange);
+		curveMenu->addAction(actionCurveFullRange);
 		if (c->isFullRange())
 			actionCurveFullRange->setDisabled(true);
 		else
 			actionCurveFullRange->setEnabled(true);
 		actionCurveFullRange->setData(curveKey);
 
-		curveMenu.addSeparator();
+		curveMenu->addSeparator();
 	}
 
-	curveMenu.addAction(actionShowCurveWorksheet);
+	curveMenu->addAction(actionShowCurveWorksheet);
 	actionShowCurveWorksheet->setData(curveKey);
 
-	curveMenu.addAction(actionShowCurvePlotDialog);
+	curveMenu->addAction(actionShowCurvePlotDialog);
 	actionShowCurvePlotDialog->setData(curveKey);
 
-	curveMenu.addSeparator();
+	curveMenu->addSeparator();
 
-	curveMenu.addAction(actionRemoveCurve);
+	curveMenu->addAction(actionRemoveCurve);
 	actionRemoveCurve->setData(curveKey);
-	curveMenu.exec(QCursor::pos());
+        return curveMenu;
 }
 
 void ApplicationWindow::showAllCurves()
