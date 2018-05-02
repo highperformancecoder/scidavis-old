@@ -33,41 +33,41 @@
 
 class PolynomialFit : public Fit
 {
-	Q_OBJECT
+  Q_OBJECT
 
-	public:
-		PolynomialFit(ApplicationWindow *parent, Graph *g, int order = 2, bool legend = false);
-		PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, int order = 2, bool legend = false);
-		PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, double start, double end, int order = 2, bool legend = false);
+public:
+  PolynomialFit(ApplicationWindow *parent, Graph *g, int order = 2, bool legend = false);
+  PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, int order = 2, bool legend = false);
+  PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, double start, double end, int order = 2, bool legend = false);
 
-		virtual QString legendInfo();
-		void fit();
+  QString legendInfo() override;
+  void fit() override;
 
-		static QString generateFormula(int order);
-		static QStringList generateParameterList(int order);
+  static QString generateFormula(int order);
+  static QStringList generateParameterList(int order);
 
-	private:
-		void init();
-		void calculateFitCurveData(double *par, double *X, double *Y);
+private:
+  void init();
+  void calculateFitCurveData(const std::vector<double>&, double *, double *) override;
 
-		int d_order;
-		bool show_legend;
+  int d_order;
+  bool show_legend;
 };
 
 class LinearFit : public Fit
 {
-	Q_OBJECT
+  Q_OBJECT
 
-	public:
-		LinearFit(ApplicationWindow *parent, Graph *g);
-		LinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-		LinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+public:
+  LinearFit(ApplicationWindow *parent, Graph *g);
+  LinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+  LinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
 
-		void fit();
+  void fit() override;
 
-	private:
-		void init();
-		void calculateFitCurveData(double *par, double *X, double *Y);
+private:
+  void init();
+  void calculateFitCurveData(const std::vector<double>&, double *, double *) override;
 };
 #endif
 

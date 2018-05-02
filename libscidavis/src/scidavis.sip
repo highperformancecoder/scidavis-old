@@ -1372,12 +1372,11 @@ delete values;
 
   SIP_PYTUPLE results();
 %MethodCode
-double *results = sipCpp->results();
-int size=sipCpp->numParameters();
-sipRes = PyTuple_New(size);
+auto& results = sipCpp->results();
+sipRes = PyTuple_New(results.size());
 if(sipRes)
 {
-  for(int i=0; i<size; i++)
+  for(size_t i=0; i<results.size(); i++)
     PyTuple_SET_ITEM(sipRes, i, PyFloat_FromDouble(results[i]));
 } else
   sipIsErr = 1;
@@ -1385,12 +1384,11 @@ if(sipRes)
 
   SIP_PYTUPLE errors();
 %MethodCode
-double *errors = sipCpp->errors();
-int size=sipCpp->numParameters();
-sipRes = PyTuple_New(size);
+auto& errors = sipCpp->errors();
+sipRes = PyTuple_New(errors.size());
 if(sipRes)
 {
-  for(int i=0; i<size; i++)
+  for(size_t i=0; i<errors.size(); i++)
     PyTuple_SET_ITEM(sipRes, i, PyFloat_FromDouble(errors[i]));
 } else
   sipIsErr = 1;

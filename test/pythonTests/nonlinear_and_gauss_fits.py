@@ -1,5 +1,6 @@
 # Script to test non-linear and Gaussian fits
 import random
+random.seed(1)
 from math import *
 
 global gaussian_curve

@@ -31,6 +31,7 @@
 #include "fit_gsl.h"
 
 #include <QMessageBox>
+using namespace std;
 
 	NonLinearFit::NonLinearFit(ApplicationWindow *parent, Graph *g)
 : Fit(parent, g)
@@ -86,7 +87,6 @@ void NonLinearFit::setParametersList(const QStringList& lst)
 	{//free previously allocated memory
 		gsl_vector_free(d_param_init);
 		gsl_matrix_free (covar);
-		delete[] d_results;
 	}
 
 	d_p = (int)lst.count();
@@ -95,13 +95,13 @@ void NonLinearFit::setParametersList(const QStringList& lst)
 	gsl_vector_set_all (d_param_init, 1.0);
 
 	covar = gsl_matrix_alloc (d_p, d_p);
-	d_results = new double[d_p];
+	d_results.resize(d_p);
 
 	for (unsigned i=0; i<d_p; i++)
 		d_param_explain << "";
 }
 
-void NonLinearFit::calculateFitCurveData(double *par, double *X, double *Y)
+void NonLinearFit::calculateFitCurveData(const vector<double>& par, double *X, double *Y)
 {
     for (unsigned i=0; i<d_p; i++)
         d_script->setDouble(par[i], d_param_names[i].toUtf8());

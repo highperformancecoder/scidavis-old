@@ -2,7 +2,7 @@
 import random
 from math import *
 
-global gaussian_curve
+random.seed(1)
 def twoExponential_curve(x):
     return exp(-0.1*x)+0.5*exp(0.4*x)
 

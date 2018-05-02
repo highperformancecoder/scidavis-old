@@ -238,7 +238,7 @@ void ExpDecayDialog::fit()
 		fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);
 		fitter->fit();
 
-		double *results = fitter->results();
+		auto& results = fitter->results();
 		boxFirst->setText(QString::number(results[1], 'g', precision));
 		if (slopes < 2)
 		{

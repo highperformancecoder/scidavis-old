@@ -47,6 +47,8 @@
 #include <QDateTime>
 #include <QLocale>
 
+using namespace std;
+
 Fit::Fit( ApplicationWindow *parent, Graph *g, QString name)
 : Filter( parent, g, name),
 scripted(ScriptingLangManager::newEnv("muParser", parent))
@@ -64,9 +66,6 @@ scripted(ScriptingLangManager::newEnv("muParser", parent))
 	d_explanation = QString::null;
 	d_y_error_source = UnknownErrors;
 	d_y_error_dataset = QString::null;
-	is_non_linear = true;
-	d_results = 0;
-	d_result_errors = 0;
 	d_prec = parent->fit_output_precision;
 	d_init_err = false;
 	chi_2 = -1;
@@ -74,9 +73,9 @@ scripted(ScriptingLangManager::newEnv("muParser", parent))
 	d_sort_data = true;
 }
 
-double * Fit::fitGslMultifit(int &iterations, int &status)
+vector<double> Fit::fitGslMultifit(int &iterations, int &status)
 {
-	double * result = new double[d_p];
+  vector<double> result(d_p);
 
 	// declare input data
 	struct FitData data = {
@@ -84,7 +83,7 @@ double * Fit::fitGslMultifit(int &iterations, int &status)
           size_t(d_p),
 		d_x,
 		d_y,
-		d_y_errors,
+		&d_y_errors[0],
 		this
 	};
 	gsl_multifit_function_fdf f;
@@ -146,9 +145,9 @@ double * Fit::fitGslMultifit(int &iterations, int &status)
 	return result;
 }
 
-double * Fit::fitGslMultimin(int &iterations, int &status)
+vector<double> Fit::fitGslMultimin(int &iterations, int &status)
 {
-	double * result = new double[d_p];
+  vector<double> result(d_p);
 
 	// declare input data
 	struct FitData data = {
@@ -156,7 +155,7 @@ double * Fit::fitGslMultimin(int &iterations, int &status)
           size_t(d_p),
 		d_x,
 		d_y,
-		d_y_errors,
+		&d_y_errors[0],
 		this
 	};
 	gsl_multimin_function f;
@@ -207,14 +206,11 @@ double * Fit::fitGslMultimin(int &iterations, int &status)
 
 void Fit::setDataCurve(int curve, double start, double end)
 {
-    if (d_n > 0)
-		delete[] d_y_errors;
-
     Filter::setDataCurve(curve, start, end);
 
-    d_y_errors = new double[d_n];
-	 if (!setYErrorSource(AssociatedErrors, QString::null, true))
-		 setYErrorSource(UnknownErrors);
+    d_y_errors.resize(d_n);
+    if (!setYErrorSource(AssociatedErrors, QString::null, true))
+      setYErrorSource(UnknownErrors);
 }
 
 void Fit::setInitialGuesses(double *x_init)
@@ -230,7 +226,7 @@ void Fit::generateFunction(bool yes, int points)
 		d_points = points;
 }
 
-QString Fit::logFitInfo(double *par, int iterations, int status, const QString& plotName)
+QString Fit::logFitInfo(const vector<double>& par, int iterations, int status, const QString& plotName)
 {
 	QDateTime dt = QDateTime::currentDateTime ();
 	QString info = "[" + dt.toString(Qt::LocalDate)+ "\t" + tr("Plot")+ ": ''" + plotName+ "'']\n";
@@ -456,26 +452,20 @@ Matrix* Fit::covarianceMatrix(const QString& matrixName)
 	return m;
 }
 
-double *Fit::errors()
+const vector<double>& Fit::errors()
 {
-	if (!d_result_errors) {
-		d_result_errors = new double[d_p];
-		double chi_2_dof = chi_2/(d_n - d_p);
-		for (unsigned i=0; i<d_p; i++)
-		{
-			if (d_scale_errors)
-				d_result_errors[i] = sqrt(chi_2_dof*gsl_matrix_get(covar,i,i));
-			else
-				d_result_errors[i] = sqrt(gsl_matrix_get(covar,i,i));
-		}
-	}
-	return d_result_errors;
-}
-
-void Fit::storeCustomFitResults(double *par)
-{
-	for (unsigned i=0; i<d_p; i++)
-		d_results[i] = par[i];
+  if (d_result_errors.empty()) {
+    d_result_errors.resize(d_p);
+    double chi_2_dof = chi_2/(d_n - d_p);
+    for (unsigned i=0; i<d_p; i++)
+      {
+        if (d_scale_errors)
+          d_result_errors[i] = sqrt(chi_2_dof*gsl_matrix_get(covar,i,i));
+        else
+          d_result_errors[i] = sqrt(gsl_matrix_get(covar,i,i));
+      }
+  }
+  return d_result_errors;
 }
 
 void Fit::fit()
@@ -511,9 +501,9 @@ void Fit::fit()
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
 	int status, iterations;
-	double *par;
-	d_script = scriptEnv->newScript(d_formula, this, metaObject()->className());
-	connect(d_script, SIGNAL(error(const QString&,const QString&,int)),
+	vector<double> par;
+	d_script.reset(scriptEnv->newScript(d_formula, this, metaObject()->className()));
+	connect(d_script.get(), SIGNAL(error(const QString&,const QString&,int)),
 			this, SLOT(scriptError(const QString&,const QString&,int)));
 
 	if(d_solver == NelderMeadSimplex)
@@ -524,9 +514,6 @@ void Fit::fit()
 	storeCustomFitResults(par);
 	if (status == GSL_SUCCESS)
 		generateFitCurve(par);
-
-	delete[] par;
-	delete d_script;
 
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	if (app->writeFitResultsToLog)
@@ -597,7 +584,7 @@ int Fit::evaluate_df(const gsl_vector *x, gsl_matrix *J)
   F.function = &evaluate_df_helper;
   DiffData data;
   F.params = &data;
-  data.script = d_script;
+  data.script = d_script.get();
   data.success = true;
   for (unsigned i=0; i<d_p; i++)
     d_script->setDouble(gsl_vector_get(x,i), d_param_names[i].toUtf8());
@@ -614,7 +601,7 @@ int Fit::evaluate_df(const gsl_vector *x, gsl_matrix *J)
   return GSL_SUCCESS;
 }
 
-void Fit::generateFitCurve(double *par)
+void Fit::generateFitCurve(const vector<double>& par)
 {
 	if (!d_gen_function)
 		d_points = d_n;
@@ -663,7 +650,5 @@ Fit::~Fit()
 	if (is_non_linear)
 		gsl_vector_free(d_param_init);
 
-	if (d_results) delete[] d_results;
-	if (d_result_errors) delete[] d_result_errors;
 	gsl_matrix_free (covar);
 }

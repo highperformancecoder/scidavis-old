@@ -1215,7 +1215,7 @@ void FitDialog::accept()
         }
 
         d_fitter->fit();
-        double *res = d_fitter->results();
+        auto res = d_fitter->results();
         if (!boxParams->isColumnHidden(2))
         {
             int j = 0;

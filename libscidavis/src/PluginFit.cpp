@@ -30,6 +30,7 @@
 
 #include <QLibrary>
 #include <QMessageBox>
+using namespace std;
 
 	PluginFit::PluginFit(ApplicationWindow *parent, Graph *g)
 : Fit(parent, g)
@@ -113,7 +114,7 @@ bool PluginFit::load(const QString& pluginName)
         d_min_points = d_p;
 		d_param_init = gsl_vector_alloc(d_p);
 		covar = gsl_matrix_alloc (d_p, d_p);
-		d_results = new double[d_p];
+		d_results.resize(d_p);
 	}
 	else
 		return false;
@@ -137,7 +138,7 @@ bool PluginFit::load(const QString& pluginName)
 	return true;
 }
 
-void PluginFit::calculateFitCurveData(double *par, double *X, double *Y)
+void PluginFit::calculateFitCurveData(const vector<double>& par, double *X, double *Y)
 {
 	if (d_gen_function)
 	{
@@ -146,7 +147,8 @@ void PluginFit::calculateFitCurveData(double *par, double *X, double *Y)
 		for (int i=0; i<d_points; i++)
 		{
 			X[i] = X0+i*step;
-			Y[i]= f_eval(X[i], par);
+                        // TODO: f_eval's signature should have const double*
+			Y[i]= f_eval(X[i], const_cast<double*>(&par[0]));
 		}
 	}
 	else
@@ -154,7 +156,8 @@ void PluginFit::calculateFitCurveData(double *par, double *X, double *Y)
 		for (int i=0; i<d_points; i++)
 		{
 			X[i] = d_x[i];
-			Y[i]= f_eval(X[i], par);
+                        // TODO second par should be const double*
+			Y[i]= f_eval(X[i], const_cast<double*>(&par[0]));
 		}
 	}
 }
