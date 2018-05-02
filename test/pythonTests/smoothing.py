@@ -3,13 +3,13 @@
 
 import random
 
+global f1
 def f1(x):
  a1 = 5.0
  a2 = -10.0
  a3 = 10.0
  b1 = 2.0
  return ((a1+a2*x+a3*x**2-b1/x**3)/1000.0)
-global f1
 
 dp=0.5 #noise's stddev
 
