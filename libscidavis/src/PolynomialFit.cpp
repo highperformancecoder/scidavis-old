@@ -33,6 +33,7 @@
 
 #include <gsl/gsl_multifit.h>
 #include <gsl/gsl_fit.h>
+using namespace std;
 
 	PolynomialFit::PolynomialFit(ApplicationWindow *parent, Graph *g, int order, bool legend)
 : Fit(parent, g), d_order(order), show_legend(legend)
@@ -63,7 +64,7 @@ void PolynomialFit::init()
     d_min_points = d_p;
 
 	covar = gsl_matrix_alloc (d_p, d_p);
-	d_results = new double[d_p];
+	d_results.resize(d_p);
 
 	d_formula = generateFormula(d_order);
 	d_param_names = generateParameterList(d_order);
@@ -97,7 +98,7 @@ QStringList PolynomialFit::generateParameterList(int order)
 	return lst;
 }
 
-void PolynomialFit::calculateFitCurveData(double *par, double *X, double *Y)
+void PolynomialFit::calculateFitCurveData(const vector<double>& par, double *X, double *Y)
 {
 	if (d_gen_function)
 	{
@@ -232,7 +233,7 @@ void LinearFit::init()
     d_min_points = d_p;
 
 	covar = gsl_matrix_alloc (d_p, d_p);
-	d_results = new double[d_p];
+	d_results.resize(d_p);
 
 	is_non_linear = false;
 	d_formula = "A*x+B";
@@ -282,7 +283,7 @@ void LinearFit::fit()
   generateFitCurve(d_results);
 }
 
-void LinearFit::calculateFitCurveData(double *par, double *X, double *Y)
+void LinearFit::calculateFitCurveData(const vector<double>& par, double *X, double *Y)
 {
 	if (d_gen_function)
 	{

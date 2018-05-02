@@ -5,6 +5,7 @@
 ## subsection: "class Column (inherits AbstractAspect)"
 
 import random
+random.seed(1)
 
 nCols = 3
 nRows = 20

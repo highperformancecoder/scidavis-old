@@ -6208,34 +6208,34 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ExponentialFit</name>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="80"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="82"/>
         <source>Exponential growth</source>
         <translation type="unfinished">Exponenciální nárůst</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="82"/>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="89"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="84"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="91"/>
         <source>(amplitude)</source>
         <translation type="unfinished">(amplituda)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="82"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="84"/>
         <source>(lifetime)</source>
         <translation type="unfinished">(doba trvání)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="82"/>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="89"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="84"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="91"/>
         <source>(offset)</source>
         <translation type="unfinished">(posun)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="87"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="89"/>
         <source>Exponential decay</source>
         <translation type="unfinished">Exponenciální pokles</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="89"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="91"/>
         <source>(e-folding time)</source>
         <translation type="unfinished">(doba e-skládání)</translation>
     </message>
@@ -6424,78 +6424,78 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FFTDialog</name>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="70"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="73"/>
         <source>Curve</source>
         <translation type="unfinished">Křivka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="72"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="75"/>
         <source>Sampling</source>
         <translation type="unfinished">Vzorkování</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="80"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="83"/>
         <source>Real</source>
         <translation type="unfinished">Reálná složka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="84"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="87"/>
         <source>Imaginary</source>
         <translation type="unfinished">Imaginární složka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="88"/>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="93"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="91"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="96"/>
         <source>Sampling Interval</source>
         <translation type="unfinished">Vzorkovací interval</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="99"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="102"/>
         <source>&amp;Normalize Amplitude</source>
         <translation type="unfinished">Normalizovat &amp;amplitudu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="102"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="105"/>
         <source>&amp;Shift Results</source>
         <translation type="unfinished">&amp;Posunout výsledky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="59"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="62"/>
         <source>&amp;Inverse</source>
         <translation type="unfinished">&amp;Invertovat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="57"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="60"/>
         <source>&amp;Forward</source>
         <translation type="unfinished">&amp;Další</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="112"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="115"/>
         <source>&amp;OK</source>
         <translation type="unfinished">&amp;OK</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="114"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="117"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Zavřít</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="159"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="162"/>
         <source>Please choose a column for the real part of the data!</source>
         <translation type="unfinished">Vyberte prosím sloupec s reálnou složkou dat!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="51"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="54"/>
         <source>FFT Options</source>
         <translation type="unfinished">FFT-Možnosti</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="144"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="147"/>
         <source>Sampling value error</source>
         <translation type="unfinished">Vzorkovací interval</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="159"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="162"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
@@ -6791,163 +6791,163 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Fit</name>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="236"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="232"/>
         <source>Plot</source>
         <translation type="unfinished">Graf</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="237"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="233"/>
         <source>fit of dataset</source>
         <translation type="unfinished">Proložení dat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="239"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="235"/>
         <source>using function</source>
         <translation type="unfinished">s použitím funkce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="256"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="252"/>
         <source>Arbitrary Dataset</source>
         <translation type="unfinished">Libovolný dataset</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="264"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="260"/>
         <source>Nelder-Mead Simplex</source>
         <translation type="unfinished">Nelder-Mead Simplex</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="266"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="262"/>
         <source>Unscaled Levenberg-Marquardt</source>
         <translation type="unfinished">Neškálovaný Levenberg-Marquardt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="268"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="264"/>
         <source>Scaled Levenberg-Marquardt</source>
         <translation type="unfinished">Škálovaný Levenberg-Marquardt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="270"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="266"/>
         <source> algorithm with tolerance = </source>
         <translation type="unfinished"> algoritmus s tolerancí = </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="273"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="269"/>
         <source>From x</source>
         <translation type="unfinished">Od x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="273"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="269"/>
         <source>to x</source>
         <translation type="unfinished">do x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="286"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="326"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="282"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="322"/>
         <source>R^2</source>
         <translation type="unfinished">R^2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="290"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="286"/>
         <source>Iterations</source>
         <translation type="unfinished">Iterací</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="291"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="287"/>
         <source>Status</source>
         <translation type="unfinished">Stav</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="321"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="317"/>
         <source>Dataset</source>
         <translation type="unfinished">Dataset</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="322"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="318"/>
         <source>Function</source>
         <translation type="unfinished">Funkce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="374"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="405"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="425"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="370"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="401"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="421"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="425"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="421"/>
         <source>Parameter</source>
         <translation type="unfinished">Parametr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="425"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="421"/>
         <source>Value</source>
         <translation type="unfinished">Hodnota</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="495"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="485"/>
         <source>There are no parameters specified for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Pro prokládací operaci nebyly specifikovány parametry. Operace zrušena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="507"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="497"/>
         <source>You must specify a valid fit function first. Operation aborted!</source>
         <translation type="unfinished">Musíte nejdříve zadat platnou prokládací funkci. Operace zrušena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="628"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="615"/>
         <source>Fit</source>
         <translation type="unfinished">Proložení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="406"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="402"/>
         <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
         <translation type="unfinished">Sloupec %1 má méně bodů než prokládaný dataset. Zvolte prosím jiný sloupec!.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="489"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="479"/>
         <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Nespecifikovali jste platný dataset pro tuto prokládací operaci. Operace zrušena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="501"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="491"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Potřebujete nejméně %1 datových bodů pro tuto operaci. Operace bude zrušena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="488"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="494"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="500"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="506"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="478"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="484"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="490"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="496"/>
         <source>Fit Error</source>
         <translation type="unfinished">Chyba prokládání</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="243"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="239"/>
         <source>Y standard errors</source>
         <translation type="unfinished">Y Standardní chyby</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="247"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="243"/>
         <source>Unknown</source>
         <translation type="unfinished">Neznámý</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="250"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="246"/>
         <source>Associated dataset (%1)</source>
         <translation type="unfinished">Přidělený dataset (%1)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="253"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="249"/>
         <source>Statistical (assuming Poisson distribution)</source>
         <translation type="unfinished">Statistický (předpokládáno Poissonovo rozdělení)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="375"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="371"/>
         <source>The curve %1 has no associated Y error bars.</source>
         <translation type="unfinished">Křivka %1 nemá přidělené žádné Y-chybové úsečky.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="540"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="527"/>
         <source>Input function error</source>
         <translation type="unfinished">Chyba zadání funkce</translation>
     </message>
@@ -7588,27 +7588,27 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>GaussAmpFit</name>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="499"/>
         <source>(offset)</source>
         <translation type="unfinished">(posun)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="499"/>
         <source>(height)</source>
         <translation type="unfinished">(výška)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="499"/>
         <source>(center)</source>
         <translation type="unfinished">(střed)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="499"/>
         <source>(width)</source>
         <translation type="unfinished">(šířka)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="502"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="501"/>
         <source>GaussAmp Fit</source>
         <translation type="unfinished">GaussAmp-proložení</translation>
     </message>
@@ -7616,32 +7616,32 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>GaussFit</name>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="436"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="457"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="435"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="456"/>
         <source>Gauss</source>
         <translation type="unfinished">Gauss</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="437"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="458"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="436"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="457"/>
         <source>(area)</source>
         <translation type="unfinished">(plocha)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="437"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="458"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="436"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="457"/>
         <source>(center)</source>
         <translation type="unfinished">(střed)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="437"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="458"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="436"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="457"/>
         <source>(width)</source>
         <translation type="unfinished">(šířka)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="437"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="458"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="436"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="457"/>
         <source>(offset)</source>
         <translation type="unfinished">(offset)</translation>
     </message>
@@ -9204,32 +9204,32 @@ Limity musí být v rozsahu hodnot X. Pokud neznáte maximální ani minimální
 <context>
     <name>LinearFit</name>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="240"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="241"/>
         <source>(y-intercept)</source>
         <translation type="unfinished">(y-vzdálenost os)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="240"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="241"/>
         <source>(slope)</source>
         <translation type="unfinished">(sklon)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="241"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="242"/>
         <source>Linear Regression</source>
         <translation type="unfinished">Lineární regrese</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="242"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="243"/>
         <source>Linear</source>
         <translation type="unfinished">Lineární</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="253"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="254"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Potřebujete nejméně %1 datových bodů pro toto proložení. Operace zrušena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="252"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="253"/>
         <source>Fit Error</source>
         <translation type="unfinished">Chyba proložení</translation>
     </message>
@@ -9237,27 +9237,27 @@ Limity musí být v rozsahu hodnot X. Pokud neznáte maximální ani minimální
 <context>
     <name>LorentzFit</name>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="422"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="421"/>
         <source>Lorentz</source>
         <translation type="unfinished">Lorentz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="423"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="422"/>
         <source>(area)</source>
         <translation type="unfinished">(plocha)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="423"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="422"/>
         <source>(center)</source>
         <translation type="unfinished">(střed)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="423"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="422"/>
         <source>(width)</source>
         <translation type="unfinished">(šířka)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="423"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="422"/>
         <source>(offset)</source>
         <translation type="unfinished">(posun)</translation>
     </message>
@@ -10168,71 +10168,71 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MultiPeakFit</name>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="43"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="45"/>
         <source>MultiPeak</source>
         <translation type="unfinished">Více vrcholů</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="78"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="79"/>
         <source>multi-peak</source>
         <translation type="unfinished">více vrcholů</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="211"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="214"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="374"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="210"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="213"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="373"/>
         <source>Peak</source>
         <translation type="unfinished">Vrchol</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="245"/>
         <source>Could not allocate enough memory for the fit curves!</source>
         <translation type="unfinished">Nemohu rezervovat dostatek paměti k proložení dat!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="282"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="284"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="299"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="281"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="283"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="298"/>
         <source>Fit</source>
         <translation type="unfinished">Proložení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="300"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="299"/>
         <source>fit of</source>
         <translation type="unfinished">proložení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="352"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="351"/>
         <source>peak</source>
         <translation type="unfinished">vrchol</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="374"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="373"/>
         <source>Area</source>
         <translation type="unfinished">Plocha</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="375"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="374"/>
         <source>Center</source>
         <translation type="unfinished">Střed</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="375"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="374"/>
         <source>Width</source>
         <translation type="unfinished">Šířka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="375"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="374"/>
         <source>Height</source>
         <translation type="unfinished">Výška</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="74"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="75"/>
         <source>Gauss Fit</source>
         <translation type="unfinished">Gaussovské proložení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="76"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="77"/>
         <source>Lorentz Fit</source>
         <translation type="unfinished">Lorentzovo proložení</translation>
     </message>
@@ -10273,23 +10273,23 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">(šířka %1)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="245"/>
         <source>Fit Error</source>
         <translation type="unfinished">Chyba proložení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="303"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="302"/>
         <source>1</source>
         <comment>multipeak fit table first column name</comment>
         <translation type="unfinished">1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="305"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="304"/>
         <source>peak%1</source>
         <translation type="unfinished">vrchol%1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="306"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="305"/>
         <source>2</source>
         <comment>multipeak fit table last column name</comment>
         <translation type="unfinished">2</translation>
@@ -10359,22 +10359,22 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>NonLinearFit</name>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="57"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="58"/>
         <source>NonLinear</source>
         <translation type="unfinished">Nelineární</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="63"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="64"/>
         <source>Non-linear</source>
         <translation type="unfinished">Nelineární</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="77"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="78"/>
         <source>You must provide a list containing at least one parameter for this type of fit. Operation aborted!</source>
         <translation type="unfinished">Musíte zadat aspoň jeden parametr pro tento typ prokládání dat. Operace zrušena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="76"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="77"/>
         <source>Fit Error</source>
         <translation type="unfinished">Chyba prokládání</translation>
     </message>
@@ -11937,37 +11937,37 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PluginFit</name>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="64"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="65"/>
         <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
         <translation type="unfinished">Soubor zásuvného modulu &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;nenalezen. Operace zrušena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="76"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="77"/>
         <source>The plugin does not implement a %1 method necessary for simplex fitting.</source>
         <translation type="unfinished">Tento zásuvný modul nedisponuje metodou %1, nezbytnou pro simplexové proložení.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="84"/>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="92"/>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="100"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="85"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="93"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="101"/>
         <source>The plugin does not implement a %1 method necessary for Levenberg-Marquardt fitting.</source>
         <translation type="unfinished">Tento zásuvný modul nedisponuje metodou %1, nezbytnou pro Levenberg-Marquardtovo proložení.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="56"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="57"/>
         <source>Plugin Fit</source>
         <translation type="unfinished">Proložení pomocí zásuvného modulu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="63"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="64"/>
         <source>File not found</source>
         <translation type="unfinished">Soubor nenalezen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="75"/>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="83"/>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="91"/>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="99"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="76"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="84"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="92"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="100"/>
         <source>Plugin Error</source>
         <translation type="unfinished">Chyba zásuvného modulu</translation>
     </message>
@@ -12038,22 +12038,22 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PolynomialFit</name>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="59"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="60"/>
         <source>Poly</source>
         <translation type="unfinished">Polynom</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="61"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="62"/>
         <source>Polynomial</source>
         <translation type="unfinished">Polynomiální</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="138"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="139"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Potřebujete minimálně %1 datových bodů pro toto proložení. Operace zrušena!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="137"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="138"/>
         <source>Fit Error</source>
         <translation type="unfinished">Chyba proložení</translation>
     </message>
@@ -12786,27 +12786,27 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>SigmoidalFit</name>
     <message>
-        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="67"/>
+        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="70"/>
         <source>(init value)</source>
         <translation type="unfinished">(počáteční hodnota)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="67"/>
+        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="70"/>
         <source>(final value)</source>
         <translation type="unfinished">(konečná hodnota)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="67"/>
+        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="70"/>
         <source>(center)</source>
         <translation type="unfinished">(střed)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="67"/>
+        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="70"/>
         <source>(time constant)</source>
         <translation type="unfinished">(časová konstanta)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="69"/>
+        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="72"/>
         <source>Boltzmann (Sigmoidal) Fit</source>
         <translation type="unfinished">Boltzmannovo (Sigmoidální) proložení</translation>
     </message>
@@ -14037,42 +14037,42 @@ dvojitá přesnost
 <context>
     <name>ThreeExpFit</name>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="245"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
         <source>(first amplitude)</source>
         <translation type="unfinished">(první apmlituda)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="245"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
         <source>(first lifetime)</source>
         <translation type="unfinished">(první doba trvání)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="245"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
         <source>(second amplitude)</source>
         <translation type="unfinished">(druhá amplituda)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="247"/>
         <source>(second lifetime)</source>
         <translation type="unfinished">(druhá doba trvání)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="247"/>
         <source>(third amplitude)</source>
         <translation type="unfinished">(třetí amplituda)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="247"/>
         <source>(third lifetime)</source>
         <translation type="unfinished">(třetí doba trvání)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="247"/>
         <source>(offset)</source>
         <translation type="unfinished">(posun)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="243"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="244"/>
         <source>Exponential decay</source>
         <translation type="unfinished">Exponenciální pokles</translation>
     </message>
@@ -14104,32 +14104,32 @@ dvojitá přesnost
 <context>
     <name>TwoExpFit</name>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="168"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="170"/>
         <source>(first amplitude)</source>
         <translation type="unfinished">(první amplituda)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="168"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="170"/>
         <source>(first lifetime)</source>
         <translation type="unfinished">(první doba trvání)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="168"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="170"/>
         <source>(second amplitude)</source>
         <translation type="unfinished">(druhá amplituda)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="169"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="171"/>
         <source>(second lifetime)</source>
         <translation type="unfinished">(druhá doba trvání)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="169"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="171"/>
         <source>(offset)</source>
         <translation type="unfinished">(posun)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="166"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="168"/>
         <source>Exponential decay</source>
         <translation type="unfinished">Exponenciální pokles</translation>
     </message>

@@ -8775,34 +8775,34 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ExponentialFit</name>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="80"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="82"/>
         <source>Exponential growth</source>
         <translation type="unfinished">Exponentielles Wachstum</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="82"/>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="89"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="84"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="91"/>
         <source>(amplitude)</source>
         <translation type="unfinished">(Amplitude)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="82"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="84"/>
         <source>(lifetime)</source>
         <translation type="unfinished">(Lebensdauer)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="82"/>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="89"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="84"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="91"/>
         <source>(offset)</source>
         <translation type="unfinished">(Offset)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="87"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="89"/>
         <source>Exponential decay</source>
         <translation type="unfinished">Exponentielles Abklingen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="89"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="91"/>
         <source>(e-folding time)</source>
         <translation type="unfinished">(Ver-e-fachungs-Zeit)</translation>
     </message>
@@ -9043,58 +9043,58 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - FFT Optionen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="70"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="73"/>
         <source>Curve</source>
         <translation type="unfinished">Kurve</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="72"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="75"/>
         <source>Sampling</source>
         <translation type="unfinished">Sampling</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="80"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="83"/>
         <source>Real</source>
         <translation type="unfinished">Realteil</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="84"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="87"/>
         <source>Imaginary</source>
         <translation type="unfinished">Imaginärteil</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="88"/>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="93"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="91"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="96"/>
         <source>Sampling Interval</source>
         <translation type="unfinished">Sampling-Interval</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="99"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="102"/>
         <source>&amp;Normalize Amplitude</source>
         <translation type="unfinished">Amplitude &amp;normieren</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="102"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="105"/>
         <source>&amp;Shift Results</source>
         <translation type="unfinished">Ergebnisse ver&amp;schieben</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="59"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="62"/>
         <source>&amp;Inverse</source>
         <translation type="unfinished">&amp;Invertieren</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="57"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="60"/>
         <source>&amp;Forward</source>
         <translation type="unfinished">&amp;Weiter</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="112"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="115"/>
         <source>&amp;OK</source>
         <translation type="unfinished">&amp;OK</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="114"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="117"/>
         <source>&amp;Close</source>
         <translation type="unfinished">S&amp;chließen</translation>
     </message>
@@ -9107,7 +9107,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="159"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="162"/>
         <source>Please choose a column for the real part of the data!</source>
         <translation type="unfinished">Bitte eine Spalte für den Realteil der Daten auswählen!</translation>
     </message>
@@ -9124,17 +9124,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Amplitude</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="51"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="54"/>
         <source>FFT Options</source>
         <translation type="unfinished">FFT-Optionen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="144"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="147"/>
         <source>Sampling value error</source>
         <translation type="unfinished">Sampling-Interval</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/FFTDialog.cpp" line="159"/>
+        <location filename="../../libscidavis/src/FFTDialog.cpp" line="162"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
@@ -9482,17 +9482,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Bitte einen gültigen Kurvennamen eingeben!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="236"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="232"/>
         <source>Plot</source>
         <translation type="unfinished">Diagramm</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="237"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="233"/>
         <source>fit of dataset</source>
         <translation type="unfinished">Anpassung an den Datensatz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="239"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="235"/>
         <source>using function</source>
         <translation type="unfinished">unter Benutzung der Funktion</translation>
     </message>
@@ -9517,70 +9517,70 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Statistisch</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="256"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="252"/>
         <source>Arbitrary Dataset</source>
         <translation type="unfinished">Beliebiger Datensatz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="264"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="260"/>
         <source>Nelder-Mead Simplex</source>
         <translation type="unfinished">Nelder-Mead Simplex</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="266"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="262"/>
         <source>Unscaled Levenberg-Marquardt</source>
         <translation type="unfinished">Unskalierter Levenberg-Marquardt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="268"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="264"/>
         <source>Scaled Levenberg-Marquardt</source>
         <translation type="unfinished">Skalierter Levenberg-Marquardt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="270"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="266"/>
         <source> algorithm with tolerance = </source>
         <translation type="unfinished"> Algorithmus mit Toleranz = </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="273"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="269"/>
         <source>From x</source>
         <translation type="unfinished">Von x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="273"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="269"/>
         <source>to x</source>
         <translation type="unfinished">bis x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="286"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="326"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="282"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="322"/>
         <source>R^2</source>
         <translation type="unfinished">R^2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="290"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="286"/>
         <source>Iterations</source>
         <translation type="unfinished">Iterationen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="291"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="287"/>
         <source>Status</source>
         <translation type="unfinished">Status</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="321"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="317"/>
         <source>Dataset</source>
         <translation type="unfinished">Datensatz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="322"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="318"/>
         <source>Function</source>
         <translation type="unfinished">Funktion</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="374"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="405"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="425"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="370"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="401"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="421"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
@@ -9589,12 +9589,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Die Kurve %1 hat keine zugeordneten Y-Fehlerbalken. Sie können deshalb keine intrumentelle Gewichtung benutzen. </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="425"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="421"/>
         <source>Parameter</source>
         <translation type="unfinished">Parameter</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="425"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="421"/>
         <source>Value</source>
         <translation type="unfinished">Wert</translation>
     </message>
@@ -9603,17 +9603,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Sie haben keinen Datensatz für die Fit-Operation ausgewählt. Abbruch!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="495"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="485"/>
         <source>There are no parameters specified for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Sie haben keine Parameter für die Anpassungsoperation ausgewählt. Abbruch!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="507"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="497"/>
         <source>You must specify a valid fit function first. Operation aborted!</source>
         <translation type="unfinished">Sie müssen zuerst eine gültige Anpassungsfunktion angeben. Abbruch!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="628"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="615"/>
         <source>Fit</source>
         <translation type="unfinished">Anpassung</translation>
     </message>
@@ -9630,55 +9630,55 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Es werden mindestens %1 Punkte für diese Funktion benötigt. Die Ausführung wurde abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="406"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="402"/>
         <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
         <translation type="unfinished">Die Spalte %1 hat weniger Punkte als der Datensatz der Anpassung. Bitte eine andere Spalte wählen!.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="489"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="479"/>
         <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Sie haben keinen gültigen Datensatz für diese Anpassung ausgewählt. Ausführung abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="501"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="491"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Es werden mindestens %1 Datenpunkte für diese Funktion benötigt. Die Ausführung wurde abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="488"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="494"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="500"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="506"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="478"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="484"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="490"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="496"/>
         <source>Fit Error</source>
         <translation type="unfinished">Anpassungsfehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="243"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="239"/>
         <source>Y standard errors</source>
         <translation type="unfinished">Y Standardfehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="247"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="243"/>
         <source>Unknown</source>
         <translation type="unfinished">Unbekannt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="250"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="246"/>
         <source>Associated dataset (%1)</source>
         <translation type="unfinished">Zugeordneter Datensatz (%1)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="253"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="249"/>
         <source>Statistical (assuming Poisson distribution)</source>
         <translation type="unfinished">Statistisch (Poisson-Verteilung angenommen)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="375"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="371"/>
         <source>The curve %1 has no associated Y error bars.</source>
         <translation type="unfinished">Die Kurve %1 hat keine zugeordneten Y-Fehlerbalken.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="540"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="527"/>
         <source>Input function error</source>
         <translation type="unfinished">Fehler bei der Funktionseingabe</translation>
     </message>
@@ -10560,22 +10560,22 @@ die Reihenfolge der Parameter ist wichtig!</translation>
 <context>
     <name>GaussAmpFit</name>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="499"/>
         <source>(offset)</source>
         <translation type="unfinished">(Offset)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="499"/>
         <source>(height)</source>
         <translation type="unfinished">(Höhe)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="499"/>
         <source>(center)</source>
         <translation type="unfinished">(Mitte)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="499"/>
         <source>(width)</source>
         <translation type="unfinished">(Breite)</translation>
     </message>
@@ -10584,7 +10584,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">GaussAmp</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="502"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="501"/>
         <source>GaussAmp Fit</source>
         <translation type="unfinished">GaussAmp-Anpassung</translation>
     </message>
@@ -10592,32 +10592,32 @@ die Reihenfolge der Parameter ist wichtig!</translation>
 <context>
     <name>GaussFit</name>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="436"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="457"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="435"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="456"/>
         <source>Gauss</source>
         <translation type="unfinished">Gauß</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="437"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="458"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="436"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="457"/>
         <source>(area)</source>
         <translation type="unfinished">(Fläche)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="437"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="458"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="436"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="457"/>
         <source>(center)</source>
         <translation type="unfinished">(Mitte)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="437"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="458"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="436"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="457"/>
         <source>(width)</source>
         <translation type="unfinished">(Breite)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="437"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="458"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="436"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="457"/>
         <source>(offset)</source>
         <translation type="unfinished">(Offset)</translation>
     </message>
@@ -13558,22 +13558,22 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
 <context>
     <name>LinearFit</name>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="240"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="241"/>
         <source>(y-intercept)</source>
         <translation type="unfinished">(y-Achsenabschnitt)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="240"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="241"/>
         <source>(slope)</source>
         <translation type="unfinished">(Steigung)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="241"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="242"/>
         <source>Linear Regression</source>
         <translation type="unfinished">Lineare Regression</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="242"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="243"/>
         <source>Linear</source>
         <translation type="unfinished">Linear</translation>
     </message>
@@ -13582,12 +13582,12 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
         <translation type="obsolete">QtiPlot - Fit-Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="253"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="254"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Es werden mindestens %1 Datenpunkte für diese Anpassungsfunktion benötigt. Die Ausführung wurde abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="252"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="253"/>
         <source>Fit Error</source>
         <translation type="unfinished">Anpassungsfehler</translation>
     </message>
@@ -13595,27 +13595,27 @@ Die Grenzen müssen innerhalb des X-Bereichs sein. Fall diese Werte nicht bekann
 <context>
     <name>LorentzFit</name>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="422"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="421"/>
         <source>Lorentz</source>
         <translation type="unfinished">Lorentz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="423"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="422"/>
         <source>(area)</source>
         <translation type="unfinished">(Fläche)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="423"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="422"/>
         <source>(center)</source>
         <translation type="unfinished">(Mitte)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="423"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="422"/>
         <source>(width)</source>
         <translation type="unfinished">(Breite)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="423"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="422"/>
         <source>(offset)</source>
         <translation type="unfinished">(Offset)</translation>
     </message>
@@ -14822,7 +14822,7 @@ Absolutbetrag von x.</translation>
 <context>
     <name>MultiPeakFit</name>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="43"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="45"/>
         <source>MultiPeak</source>
         <translation type="unfinished">Mehrere Scheitelpunkte</translation>
     </message>
@@ -14835,14 +14835,14 @@ Absolutbetrag von x.</translation>
         <translation type="obsolete">Lorentz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="78"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="79"/>
         <source>multi-peak</source>
         <translation type="unfinished">Mehrere Scheitelpunkte</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="211"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="214"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="374"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="210"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="213"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="373"/>
         <source>Peak</source>
         <translation type="unfinished">Scheitelpunkt</translation>
     </message>
@@ -14851,54 +14851,54 @@ Absolutbetrag von x.</translation>
         <translation type="obsolete">QtiPlot - Fit-Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="245"/>
         <source>Could not allocate enough memory for the fit curves!</source>
         <translation type="unfinished">Konnte nicht genug Speicher für Anpassungskurven reservieren!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="282"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="284"/>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="299"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="281"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="283"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="298"/>
         <source>Fit</source>
         <translation type="unfinished">Anpassung</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="300"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="299"/>
         <source>fit of</source>
         <translation type="unfinished">Anpassung an</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="352"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="351"/>
         <source>peak</source>
         <translation type="unfinished">Scheitelpunkt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="374"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="373"/>
         <source>Area</source>
         <translation type="unfinished">Fläche</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="375"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="374"/>
         <source>Center</source>
         <translation type="unfinished">Mitte</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="375"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="374"/>
         <source>Width</source>
         <translation type="unfinished">Breite</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="375"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="374"/>
         <source>Height</source>
         <translation type="unfinished">Höhe</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="74"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="75"/>
         <source>Gauss Fit</source>
         <translation type="unfinished">Gauß-Anpassung</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="76"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="77"/>
         <source>Lorentz Fit</source>
         <translation type="unfinished">Lorentz-Anpassung</translation>
     </message>
@@ -14939,23 +14939,23 @@ Absolutbetrag von x.</translation>
         <translation type="unfinished">(Breite %1)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="245"/>
         <source>Fit Error</source>
         <translation type="unfinished">Anpassungsfehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="303"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="302"/>
         <source>1</source>
         <comment>multipeak fit table first column name</comment>
         <translation type="unfinished">1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="305"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="304"/>
         <source>peak%1</source>
         <translation type="unfinished">Scheitelpunkt%1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="306"/>
+        <location filename="../../libscidavis/src/MultiPeakFit.cpp" line="305"/>
         <source>2</source>
         <comment>multipeak fit table last column name</comment>
         <translation type="unfinished">2</translation>
@@ -15264,12 +15264,12 @@ Absolutbetrag von x.</translation>
 <context>
     <name>NonLinearFit</name>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="57"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="58"/>
         <source>NonLinear</source>
         <translation type="unfinished">Nichtlinear</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="63"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="64"/>
         <source>Non-linear</source>
         <translation type="unfinished">Nichtlinear</translation>
     </message>
@@ -15290,7 +15290,7 @@ Absolutbetrag von x.</translation>
         <translation type="obsolete">Es wurden keine Parameter für diese Anpassungsoperation ausgewählt. Bitte zuerst eine Liste von Parameters angeben!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="77"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="78"/>
         <source>You must provide a list containing at least one parameter for this type of fit. Operation aborted!</source>
         <translation type="unfinished">Sie müssen mindestens einen Parameter für diesen Typ von Anpassung angeben. Abbruch!</translation>
     </message>
@@ -15299,7 +15299,7 @@ Absolutbetrag von x.</translation>
         <translation type="obsolete">Fehler bei der Funktionseingabe</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="76"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="77"/>
         <source>Fit Error</source>
         <translation type="unfinished">Anpassungsfehler</translation>
     </message>
@@ -17157,7 +17157,7 @@ Absolutbetrag von x.</translation>
         <translation type="obsolete">QtiPlot - Datei nicht gefunden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="64"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="65"/>
         <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
         <translation type="unfinished">Plugindatei &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;nicht gefunden. Operation abgebrochen!</translation>
     </message>
@@ -17166,32 +17166,32 @@ Absolutbetrag von x.</translation>
         <translation type="obsolete">QtiPlot - Plugin-Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="76"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="77"/>
         <source>The plugin does not implement a %1 method necessary for simplex fitting.</source>
         <translation type="unfinished">Dieses Plugin implementiert keine %1 Methode, die für Simplex-Anpassungen benötigt wird.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="84"/>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="92"/>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="100"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="85"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="93"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="101"/>
         <source>The plugin does not implement a %1 method necessary for Levenberg-Marquardt fitting.</source>
         <translation type="unfinished">Dieses Plugin implementiert keine %1 Methode, die für Levenberg-Marquardt-Anpassungen benötigt wird.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="56"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="57"/>
         <source>Plugin Fit</source>
         <translation type="unfinished">Anpassung aus Plugin</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="63"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="64"/>
         <source>File not found</source>
         <translation type="unfinished">Datei nicht gefunden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="75"/>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="83"/>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="91"/>
-        <location filename="../../libscidavis/src/PluginFit.cpp" line="99"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="76"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="84"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="92"/>
+        <location filename="../../libscidavis/src/PluginFit.cpp" line="100"/>
         <source>Plugin Error</source>
         <translation type="unfinished">Plugin-Fehler</translation>
     </message>
@@ -17298,12 +17298,12 @@ Absolutbetrag von x.</translation>
 <context>
     <name>PolynomialFit</name>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="59"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="60"/>
         <source>Poly</source>
         <translation type="unfinished">Polynom</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="61"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="62"/>
         <source>Polynomial</source>
         <translation type="unfinished">Polynomiell</translation>
     </message>
@@ -17312,12 +17312,12 @@ Absolutbetrag von x.</translation>
         <translation type="obsolete">QtiPlot - Fit-Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="138"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="139"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Es werden mindestens %1 Datenpunkte für diese Anpassungsfunktion benötigt. Die Ausführung wurde abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="137"/>
+        <location filename="../../libscidavis/src/PolynomialFit.cpp" line="138"/>
         <source>Fit Error</source>
         <translation type="unfinished">Anpassungsfehler</translation>
     </message>
@@ -18349,22 +18349,22 @@ Wollen Sie sie überschreiben?</translation>
 <context>
     <name>SigmoidalFit</name>
     <message>
-        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="67"/>
+        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="70"/>
         <source>(init value)</source>
         <translation type="unfinished">(Anfangswert)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="67"/>
+        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="70"/>
         <source>(final value)</source>
         <translation type="unfinished">(Endwert)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="67"/>
+        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="70"/>
         <source>(center)</source>
         <translation type="unfinished">(Mitte)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="67"/>
+        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="70"/>
         <source>(time constant)</source>
         <translation type="unfinished">(Zeitkonstante)</translation>
     </message>
@@ -18373,7 +18373,7 @@ Wollen Sie sie überschreiben?</translation>
         <translation type="obsolete">Boltzmann (Sigmoidal)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="69"/>
+        <location filename="../../libscidavis/src/SigmoidalFit.cpp" line="72"/>
         <source>Boltzmann (Sigmoidal) Fit</source>
         <translation type="unfinished">Boltzmann-Anpassung (Sigmoidal)</translation>
     </message>
@@ -20192,42 +20192,42 @@ doppelter Präzision
 <context>
     <name>ThreeExpFit</name>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="245"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
         <source>(first amplitude)</source>
         <translation type="unfinished">(erste Amplitude)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="245"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
         <source>(first lifetime)</source>
         <translation type="unfinished">(erste Lebensdauer)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="245"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
         <source>(second amplitude)</source>
         <translation type="unfinished">(zweite Amplitude)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="247"/>
         <source>(second lifetime)</source>
         <translation type="unfinished">(zweite Lebensdauer)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="247"/>
         <source>(third amplitude)</source>
         <translation type="unfinished">(dritte Amplitude)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="247"/>
         <source>(third lifetime)</source>
         <translation type="unfinished">(dritte Lebensdauer)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="246"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="247"/>
         <source>(offset)</source>
         <translation type="unfinished">(Offset)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="243"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="244"/>
         <source>Exponential decay</source>
         <translation type="unfinished">Exponentielles Abklingen</translation>
     </message>
@@ -20263,32 +20263,32 @@ doppelter Präzision
 <context>
     <name>TwoExpFit</name>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="168"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="170"/>
         <source>(first amplitude)</source>
         <translation type="unfinished">(erste Amplitude)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="168"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="170"/>
         <source>(first lifetime)</source>
         <translation type="unfinished">(erste Lebensdauer)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="168"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="170"/>
         <source>(second amplitude)</source>
         <translation type="unfinished">(zweite Amplitude)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="169"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="171"/>
         <source>(second lifetime)</source>
         <translation type="unfinished">(zweite Lebensdauer)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="169"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="171"/>
         <source>(offset)</source>
         <translation type="unfinished">(Offset)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="166"/>
+        <location filename="../../libscidavis/src/ExponentialFit.cpp" line="168"/>
         <source>Exponential decay</source>
         <translation type="unfinished">Exponentielles Abklingen</translation>
     </message>

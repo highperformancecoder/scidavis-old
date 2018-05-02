@@ -33,45 +33,45 @@
 
 class MultiPeakFit : public Fit
 {
-	Q_OBJECT
+  Q_OBJECT
 
-	public:		
-		enum PeakProfile{Gauss, Lorentz};
-		MultiPeakFit(ApplicationWindow *parent, Graph *g = 0, PeakProfile profile = Gauss, int peaks = 1);
+public:		
+  enum PeakProfile{Gauss, Lorentz};
+  MultiPeakFit(ApplicationWindow *parent, Graph *g = 0, PeakProfile profile = Gauss, int peaks = 1);
 
-		int peaks(){return d_peaks;};
-		void setNumPeaks(int n);
+  int peaks(){return d_peaks;};
+  void setNumPeaks(int n);
 
-		void enablePeakCurves(bool on){generate_peak_curves = on;};
-		void setPeakCurvesColor(int colorIndex){d_peaks_color = colorIndex;};
+  void enablePeakCurves(bool on){generate_peak_curves = on;};
+  void setPeakCurvesColor(int colorIndex){d_peaks_color = colorIndex;};
 
-		static QString generateFormula(int order, PeakProfile profile);
-		static QStringList generateParameterList(int order);
-		static QStringList generateExplanationList(int order);
+  static QString generateFormula(int order, PeakProfile profile);
+  static QStringList generateParameterList(int order);
+  static QStringList generateExplanationList(int order);
 
-	private:
-		QString logFitInfo(double *par, int iterations, int status, const QString& plotName);
-		void generateFitCurve(double *par);
-		static QString peakFormula(int peakIndex, PeakProfile profile);
-		//! Inserts a peak function curve into the plot 
-		void insertPeakFunctionCurve(double *x, double *y, int peak);
-		void storeCustomFitResults(double *par);
-
-		//! Used by the GaussFit and LorentzFit derived classes to calculate initial values for the parameters 
-protected:
-		void guessInitialValues();
 private:
-		//! Number of peaks
-		int d_peaks;
+  QString logFitInfo(const std::vector<double>&, int, int, const QString&) override;
+  void generateFitCurve(const std::vector<double>&) override;
+  static QString peakFormula(int peakIndex, PeakProfile profile);
+  //! Inserts a peak function curve into the plot 
+  void insertPeakFunctionCurve(double *x, double *y, int peak);
+  void storeCustomFitResults(const std::vector<double>&) override;
 
-		//! Tells weather the peak curves should be displayed together with the best line fit.
-		bool generate_peak_curves;
+  //! Used by the GaussFit and LorentzFit derived classes to calculate initial values for the parameters 
+protected:
+  void guessInitialValues() override;
+private:
+  //! Number of peaks
+  int d_peaks;
 
-		//! Color index for the peak curves
-		int d_peaks_color;
+  //! Tells weather the peak curves should be displayed together with the best line fit.
+  bool generate_peak_curves;
 
-		//! The peak profile
-		PeakProfile d_profile;
+  //! Color index for the peak curves
+  int d_peaks_color;
+
+  //! The peak profile
+  PeakProfile d_profile;
 };
 
 class LorentzFit : public MultiPeakFit
@@ -102,15 +102,15 @@ class GaussFit : public MultiPeakFit
 
 class GaussAmpFit : public Fit
 {
-	Q_OBJECT
+  Q_OBJECT
 
-	public:
-		GaussAmpFit(ApplicationWindow *parent, Graph *g);
-		GaussAmpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-		GaussAmpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+public:
+  GaussAmpFit(ApplicationWindow *parent, Graph *g);
+  GaussAmpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+  GaussAmpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
 
-	private:
-		void init();
-		void calculateFitCurveData(double *par, double *X, double *Y);
+private:
+  void init();
+  void calculateFitCurveData(const std::vector<double>&, double *, double *) override;
 };
 #endif

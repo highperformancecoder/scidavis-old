@@ -28,6 +28,8 @@
  ***************************************************************************/
 #include "ExponentialFit.h"
 #include "fit_gsl.h"
+using namespace std;
+#include <assert.h>
 
 /*****************************************************************************
  *
@@ -71,7 +73,7 @@ void ExponentialFit::init()
 	gsl_vector_set_all (d_param_init, 1.0);
 
 	covar = gsl_matrix_alloc (d_p, d_p);
-	d_results = new double[d_p];
+	d_results.resize(d_p);
 	d_param_names << "A" << "t" << "y0";
 
 	if (is_exp_growth)
@@ -90,18 +92,18 @@ void ExponentialFit::init()
 	}
 }
 
-void ExponentialFit::storeCustomFitResults(double *par)
+void ExponentialFit::storeCustomFitResults(const vector<double>& par)
 {
-	for (unsigned i=0; i<d_p; i++)
-		d_results[i] = par[i];
-
-	if (is_exp_growth)
-		d_results[1]=-1.0/d_results[1];
-	else
-		d_results[1]=1.0/d_results[1];
+  d_results = par;
+  assert(d_results.size()>=2);
+  
+  if (is_exp_growth)
+    d_results[1]=-1.0/d_results[1];
+  else
+    d_results[1]=1.0/d_results[1];
 }
 
-void ExponentialFit::calculateFitCurveData(double *par, double *X, double *Y)
+void ExponentialFit::calculateFitCurveData(const vector<double>& par, double *X, double *Y)
 {
 	if (d_gen_function)
 	{
@@ -161,7 +163,7 @@ void TwoExpFit::init()
 	d_param_init = gsl_vector_alloc(d_p);
 	gsl_vector_set_all (d_param_init, 1.0);
 	covar = gsl_matrix_alloc (d_p, d_p);
-	d_results = new double[d_p];
+	d_results.resize(d_p);
 	d_param_names << "A1" << "t1" << "A2" << "t2" << "y0";
 	d_explanation = tr("Exponential decay");
 	d_formula = "A1*exp(-x/t1)+A2*exp(-x/t2)+y0";
@@ -169,16 +171,15 @@ void TwoExpFit::init()
 		<< tr("(second lifetime)") << tr("(offset)");
 }
 
-void TwoExpFit::storeCustomFitResults(double *par)
+void TwoExpFit::storeCustomFitResults(const vector<double>& par)
 {
-	for (unsigned i=0; i<d_p; i++)
-		d_results[i] = par[i];
-
-	d_results[1]=1.0/d_results[1];
-	d_results[3]=1.0/d_results[3];
+  d_results = par;
+  assert(d_results.size()>3);
+  d_results[1]=1.0/d_results[1];
+  d_results[3]=1.0/d_results[3];
 }
 
-void TwoExpFit::calculateFitCurveData(double *par, double *X, double *Y)
+void TwoExpFit::calculateFitCurveData(const vector<double>& par, double *X, double *Y)
 {
 	if (d_gen_function)
 	{
@@ -238,7 +239,7 @@ void ThreeExpFit::init()
 	d_param_init = gsl_vector_alloc(d_p);
 	gsl_vector_set_all (d_param_init, 1.0);
 	covar = gsl_matrix_alloc (d_p, d_p);
-	d_results = new double[d_p];
+	d_results.resize(d_p);
 	d_param_names << "A1" << "t1" << "A2" << "t2" << "A3" << "t3" << "y0";
 	d_explanation = tr("Exponential decay");
 	d_formula = "A1*exp(-x/t1)+A2*exp(-x/t2)+A3*exp(-x/t3)+y0";
@@ -246,17 +247,16 @@ void ThreeExpFit::init()
 		<< tr("(second lifetime)") << tr("(third amplitude)") << tr("(third lifetime)") << tr("(offset)");
 }
 
-void ThreeExpFit::storeCustomFitResults(double *par)
+void ThreeExpFit::storeCustomFitResults(const vector<double>& par)
 {
-	for (unsigned i=0; i<d_p; i++)
-		d_results[i] = par[i];
-
-	d_results[1]=1.0/d_results[1];
-	d_results[3]=1.0/d_results[3];
-	d_results[5]=1.0/d_results[5];
+  d_results = par;
+  assert(d_results.size()>5);
+  d_results[1]=1.0/d_results[1];
+  d_results[3]=1.0/d_results[3];
+  d_results[5]=1.0/d_results[5];
 }
 
-void ThreeExpFit::calculateFitCurveData(double *par, double *X, double *Y)
+void ThreeExpFit::calculateFitCurveData(const vector<double>& par, double *X, double *Y)
 {
 	if (d_gen_function)
 	{
