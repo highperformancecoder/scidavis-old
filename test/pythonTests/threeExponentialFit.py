@@ -29,6 +29,7 @@ t1.confirmClose(False)
 f1=ThreeExpFit(l1,curve1)
 f1.setInitialValues(.8,.5,0.4,-.2,1.1,0,1)
 f1.fit()
+print f1.rSquare()
 assert f1.rSquare() > 0.99,"f1.rSquare() >= 0.99"
 assert f1.formula()=="A1*exp(-x/t1)+A2*exp(-x/t2)+A3*exp(-x/t3)+y0",f1.formula()
 
