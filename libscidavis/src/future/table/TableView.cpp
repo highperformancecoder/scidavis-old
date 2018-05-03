@@ -654,9 +654,13 @@ void TableView::applyType()
 		case SciDAVis::Month:
 		case SciDAVis::Day:
 		case SciDAVis::DateTime:
+			QString format;
+			if (ui.formatLineEdit->isEnabled())
+				format = ui.formatLineEdit->text();
+			else
+				format = ui.format_box->itemData(format_index).toString();
 			foreach(Column* col, list) {
                 col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
-				QString format = ui.formatLineEdit->text();
 				SciDAVis::ColumnMode old_mode = col->columnMode();
 				AbstractFilter *converter = 0;
 				switch (old_mode) {
