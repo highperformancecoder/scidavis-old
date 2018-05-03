@@ -113,6 +113,7 @@ class Column: AbstractAspect
 #include "globals.h"
 #include "core/column/Column.h"
 #include "table/future_Table.h"
+#include "core/datatypes/DateTime2StringFilter.h"
 %End
 	public:
 /* will be removed in favour of columMode() - don't encourage anyone to start using it
@@ -138,6 +139,22 @@ class Column: AbstractAspect
 		int rowCount() const;
 		void insertRows(int before, int count);
 		void removeRows(int first, int count);
+		SIP_PYOBJECT columnFormat() const;
+%MethodCode
+		QString filterformat=QString();
+		if (auto filter = dynamic_cast<DateTime2StringFilter*>(sipCpp->outputFilter()))
+		{
+			filterformat = filter->format();
+		}
+		sipRes = PyString_FromString(filterformat.toUtf8().constData());
+%End
+		void setColumnFormat(QString cformat);
+%MethodCode
+		if (auto filter = dynamic_cast<DateTime2StringFilter*>(sipCpp->outputFilter()))
+		{
+			filter->setFormat(*a0);
+		}
+%End
 		SIP_PYOBJECT plotDesignation() const;
 %MethodCode
 		int pd = sipCpp->plotDesignation();
