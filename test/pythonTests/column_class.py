@@ -30,13 +30,27 @@ for i in range(0,len(colModes)-1):
 assert c3.columnMode() == colModes[-1]
 c3.setColumnMode(colModes[0])
 
-# Commands rowCount, insertRows and removeRows are not working (tested in version 1.22):
-# rowCount always returns 0, insertRows and removeRows don't add or remove any row.
-# Of course it makes sense because if one try to change the number of rows of a column, the other
-# rows on the table must also be changed. Moreover, these commands are already given by t.numRows
-# and t.setNumRows...
-# This suggests that the mentioned column commands can be removed from scidavis.sip (and from 
-# the manual too) in the future.
+# rowCount() is the largest row index of filled cells in a column
+# numRows() is the number of rows in table, never smaller than maximum of all rowCount's
+assert c1.rowCount() == 0
+assert t.numRows() == 20
+
+# in an empty Table, insertRows works only at the column top
+c1.insertRows(0,8)
+assert c1.rowCount() == 8
+assert t.numRows() == 20
+
+c1.removeRows(3,3)
+assert c1.rowCount() == 5
+assert t.numRows() == 20
+
+# set a value in row beyond rowCount
+c1.setValueAt(12,3.5e-4)
+assert c1.rowCount() == 13
+
+c1.insertRows(11,18)
+assert c1.valueAt(30) == 3.5e-4
+assert t.numRows() == 31
 
 # fill c1 with row random values
 for j in range(1,nRows+1):
@@ -57,8 +71,9 @@ assert c2.plotDesignation() == "Y"
 c3.setPlotDesignation("yErr")
 assert c3.plotDesignation() == "yErr"
 
-for i in range(0,nRows+1):
+for i in range(0,nRows):
   assert c1.isInvalid(i) == False
+assert c1.isInvalid(nRows) == True
 for l in range(0,10):
 # print c3.isInvalid(l)
   assert c3.isInvalid(l) == True
@@ -94,18 +109,108 @@ assert c3.textAt(1) == "b"
 v2 = ["q","w","e","r","t"]
 c3.replaceTexts(2,v2)
 for l in range(2,2+len(v2)-1):
-  assert c3.textAt(l) == v2[l-2] 
+  assert c3.textAt(l) == v2[l-2]
 
-# I don't know how to test the following column commands:
-# setDateAt(int, QDate)
-# timeAt(int)
-# setTimeAt(int, QTime)
-# dateTimeAt(int)
-# setDateTimeAt(int, QDateTime)
+# add three columns
+t.addColumns(3)
+colNames = [str(t.column(i).name()) for i in range(t.numCols())]
+assert colNames == ["1", "col2", "3", "2", "4", "5"]
+
+# check that you get same column either by name or by index
+c4 = t.column("2")
+c4b = t.column(3) # index is base 0
+assert c4 == c4b
+
+# set column 4 as X (X2).
+c4.setPlotDesignation("X")
+c5 = t.column("4")
+c5.setPlotDesignation("Y")
+c6 = t.column("5")
+c6.setPlotDesignation("Y")
+
+
+# DateTime data
+c4.setColumnMode("DateTime")
+dt1 = QtCore.QDateTime(2018,5,4,10,12,23,300)
+for i in range(16):
+    c4.setDateTimeAt(i,dt1)
+    dt1 = dt1.addSecs(60*60*6) # add 6 hours
+
+# print(c4.columnFormat())
+assert c4.columnFormat() == "yyyy-MM-dd hh:mm:ss.zzz"
+c4.setColumnFormat('yyyy-MM-dd hh:mm')
+assert t.columnFormat(3) == c4.columnFormat()
+
+# print(c4.dateTimeAt(8))
+assert c4.dateTimeAt(8).toString(QtCore.Qt.ISODate) == "2018-05-06T10:12:23"
+
+# check rowCount insertRows
+assert c4.rowCount() == 16
+
+# 16+3 < 31
+c4.insertRows(3,3)
+assert t.numRows() == 31
+assert c4.rowCount() == 19
+
+# 19+15 > 31
+c4.insertRows(10,15)
+assert c4.rowCount() == 34
+assert t.numRows() == 34
+assert c1.rowCount() == 31
+
+# Date data
+c5.setColumnMode("Month")
+dt1 = QtCore.QDate(2018,5,4)
+assert c5.columnFormat() == "MMMM"
+
+c5.setDateAt(2,QtCore.QDate(2018,11,20))
+c5.setDateAt(3,QtCore.QDate(2018,5,4))
+# possible formats for 'Month': ['M', 'MM', 'MMM', 'MMMM']
+c5.setColumnFormat("MMM")
+assert c5.dateAt(2).toString(QtCore.Qt.ISODate) == "2018-11-20"
+
+c6.setColumnMode("Day")
+# print(c6.columnMode())
+assert c6.columnMode() == "Day"
+# possible formats for 'Day': ['d', 'dd', 'ddd', 'dddd']
+# print(c6.columnFormat())
+assert c6.columnFormat() == "dddd"
+c6.setColumnFormat('ddd')
+
+c6.setDateAt(2,QtCore.QDate(2018,11,20))
+c6.setDateAt(3,QtCore.QDate(2018,5,4))
+dt1 = QtCore.QDateTime(2018,5,4,10,12,23,300)
+c6.setTimeAt(3,dt1.time())
+c6.setTimeAt(4,dt1.addSecs(45).time())
+
+assert c6.timeAt(3).toString() == "10:12:23"
+assert c6.timeAt(4).toString() == "10:13:08"
+
 # replaceDateTimes(int, list of QDateTime values)
+dt1 = QtCore.QDateTime(2018,6,4,10,12,23,300)
+dtlist = []
 
-# the last two commands of column class:
+for i in range(8):
+    dtlist.append(dt1)
+    dt1 = dt1.addSecs(60*60) # add 1 hour
+
+# only valid values are replaced
+c4.replaceDateTimes(21,dtlist)
+
 # x() and y()
-# will return something like <scidavis.Column object at 0x7fb09993b938>
-# Then I'll not thest them..
+# check that X-column of column("3") is column("1")
+assert c3.x() == c1
+# check that X-column of column("4") is column("2")
+assert c5.x() == c4
+
+# look for Y-column of column("4")
+print("column(4).y().name: "+c4.y().name())
+print("Column 4, named '"+c4.name()+"' is a '"+c4.plotDesignation()+"' column, whose 'y' is named '"+
+    c4.y().name()+"' and is a '"+c4.y().plotDesignation()+"' column.")
+
+# same for column("1")
+print("column(3).x().name: "+c3.x().name())
+print("Column 3, named '"+c3.name()+"' is a '"+c3.plotDesignation()+"' column, whose 'x' is named '"+
+    c3.x().name()+"' and is a '"+c3.x().plotDesignation()+"' column.")
+
 app.exit()
