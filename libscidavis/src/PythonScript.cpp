@@ -226,8 +226,8 @@ QVariant PythonScript::eval()
 	/* numeric types */
 	else if (PyFloat_Check(pyret))
 		qret = QVariant(PyFloat_AS_DOUBLE(pyret));
-	else if (PyInt_Check(pyret))
-		qret = QVariant((qlonglong)PyInt_AS_LONG(pyret));
+	else if (PYLong_Check(pyret))
+		qret = QVariant((qlonglong)PYLong_AsLong(pyret));
 	else if (PyLong_Check(pyret))
 		qret = QVariant((qlonglong)PyLong_AsLongLong(pyret));
 	else if (PyNumber_Check(pyret))

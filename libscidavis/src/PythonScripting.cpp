@@ -148,7 +148,7 @@ QString PythonScripting::errorMsg()
 		QString text = toString(PyObject_GetAttrString(value, "text"), true);
 		msg.append(text + "\n");
 		PyObject *offset = PyObject_GetAttrString(value, "offset");
-		for (int i=0; i<(PyInt_AsLong(offset)-1); i++)
+		for (int i=0; i<(PYLong_AsLong(offset)-1); i++)
 			if (text[i] == '\t')
 				msg.append("\t");
 			else
