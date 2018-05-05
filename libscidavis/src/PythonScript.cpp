@@ -190,7 +190,10 @@ bool PythonScript::compile(bool for_eval)
 	if (!success)
 	{
 		compiled = compileErr;
-		emit_error(env()->errorMsg(), 0);
+		if (batchMode)
+			cerr << env()->errorMsg().toStdString() << endl;
+		else
+			emit_error(env()->errorMsg(), 0);
 	} else
 		compiled = isCompiled;
 	return success;

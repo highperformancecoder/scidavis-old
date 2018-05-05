@@ -3944,9 +3944,9 @@ void ApplicationWindow::scriptError(const QString &message, const QString &scrip
 void ApplicationWindow::scriptPrint(const QString &text)
 {
 #ifdef SCRIPTING_CONSOLE
-	if(!text.trimmed().isEmpty()) console->append(text);
+	if(!text.isEmpty()) console->insertPlainText(text);
 #else
-	printf(text.toAscii().constData());
+	printf(text.toUtf8().constData());
 #endif
 }
 
