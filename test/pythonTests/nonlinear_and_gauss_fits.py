@@ -34,7 +34,7 @@ t1.confirmClose(False)
 f1=GaussFit(l1,curve1) #Gauss fit
 f1.setInitialValues(11,49.1,11,1) #*
 f1.fit()
-print f1.chiSquare()
+print(f1.chiSquare())
 #assert f1.chiSquare() < 1e-4,"f1.chiSquare() >=1e-4"
 assert f1.rSquare() > 0.99,"f1.rSquare() >= 0.99"
 
