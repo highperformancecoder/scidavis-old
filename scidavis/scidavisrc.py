@@ -28,6 +28,7 @@
 #                                                                          #
 ############################################################################
 
+from __future__ import print_function
 import __main__
 
 def import_to_global(modname, attrs=None, math=False):
@@ -321,7 +322,7 @@ import sys
 sys.path.append(".")
 try:
 	import_to_global("scidavisUtil")
-	print "scidavisUtil successfully imported"
+	print("scidavisUtil successfully imported")
 except(ImportError): 
-	print "failed to import scidavisUtil"
+	print("failed to import scidavisUtil")
 
