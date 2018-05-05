@@ -105,7 +105,7 @@ PyObject *PythonScripting::eval(const QString &code, PyObject *argDict, const ch
 	else
 		args = globals;
 	PyObject *ret=NULL;
-	PyObject *co = Py_CompileString(code.toAscii().constData(), name, Py_eval_input);
+	PyObject *co = Py_CompileString(code.toUtf8().constData(), name, Py_eval_input);
 	if (co)
 	{
 		ret = PyEval_EvalCode(PYCodeObject_cast co, globals, args);
@@ -122,7 +122,7 @@ bool PythonScripting::exec (const QString &code, PyObject *argDict, const char *
 	else
 		args = globals;
 	PyObject *tmp = NULL;
-	PyObject *co = Py_CompileString(code.toAscii().constData(), name, Py_file_input);
+	PyObject *co = Py_CompileString(code.toUtf8().constData(), name, Py_file_input);
 	if (co)
 	{
 		tmp = PyEval_EvalCode(PYCodeObject_cast co, globals, args);
