@@ -173,7 +173,7 @@ bool PythonScript::compile(bool for_eval)
 		if (PyCode)
 		{
 			PyObject *tmp = PyDict_New();
-			Py_XDECREF(PyEval_EvalCode((PyCodeObject*)PyCode, topLevelLocal, tmp));
+			Py_XDECREF(PyEval_EvalCode(PYCodeObject_cast PyCode, topLevelLocal, tmp));
 			Py_DECREF(PyCode);
 			PyCode = PyDict_GetItemString(tmp,"__doit__");
 			Py_XINCREF(PyCode);
@@ -211,7 +211,7 @@ QVariant PythonScript::eval()
 		pyret = PyObject_Call(PyCode, empty_tuple, topLevelLocal);
 		Py_DECREF(empty_tuple);
 	} else
-		pyret = PyEval_EvalCode((PyCodeObject*)PyCode, topLevelGlobal, topLevelLocal);
+		pyret = PyEval_EvalCode(PYCodeObject_cast PyCode, topLevelGlobal, topLevelLocal);
 	endStdoutRedirect();
 	if (!pyret)
 	{
@@ -285,7 +285,7 @@ bool PythonScript::exec()
 		pyret = PyObject_Call(PyCode,empty_tuple,topLevelLocal);
 		Py_DECREF(empty_tuple);
 	} else
-		pyret = PyEval_EvalCode((PyCodeObject*)PyCode, topLevelGlobal, topLevelLocal);
+		pyret = PyEval_EvalCode(PYCodeObject_cast PyCode, topLevelGlobal, topLevelLocal);
 	endStdoutRedirect();
 	if (pyret) {
 		Py_DECREF(pyret);
