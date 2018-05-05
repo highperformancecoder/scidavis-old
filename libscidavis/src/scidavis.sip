@@ -35,6 +35,21 @@
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 
+%ModuleHeaderCode
+#if PY_MAJOR_VERSION >= 3
+#define PYSTRING_AsString   PyUnicode_AsUTF8
+#define PYSTRING_FromString PyUnicode_FromString
+#define PYLong_Check        PyLong_Check
+#define PYLong_AsLong       PyLong_AsLong
+#else
+#define PYSTRING_AsString   PyString_AsString
+#define PYSTRING_FromString PyString_FromString
+#define PYLong_Check        PyInt_Check
+#define PYLong_AsLong       PyInt_AsLong
+#endif
+%End
+
+
 class AbstractAspect : QObject
 {
 %TypeHeaderCode

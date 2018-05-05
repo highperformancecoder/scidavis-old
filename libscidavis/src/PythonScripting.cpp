@@ -65,10 +65,21 @@ typedef struct _traceback {
 #include "sipAPIscidavis.h"
 extern "C" 
 {
+#if PY_MAJOR_VERSION < 3
   void initsip();
   void initQtCore();
   void initQtGui();
   void initscidavis();
+#define PYSTRING_AsString   PyString_AsString
+#define PYSTRING_FromString PyString_FromString
+#define PYLong_AsLong       PyInt_AsLong
+#define PYCodeObject_cast   (PyCodeObject*)
+#else
+#define PYSTRING_AsString   PyUnicode_AsUTF8
+#define PYSTRING_FromString PyUnicode_FromString
+#define PYLong_AsLong       PyLong_AsLong
+#define PYCodeObject_cast
+#endif
 }
 
 const char* PythonScripting::langName = "Python";
