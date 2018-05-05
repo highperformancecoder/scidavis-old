@@ -721,6 +721,23 @@ void ApplicationWindow::insertTranslatedStrings()
 	matrix_plot_tools->setWindowTitle(tr("Matrix Plot"));
 	graph_3D_tools->setWindowTitle(tr("3D Surface"));
 
+	file->setTitle(tr("&File"));
+	edit->setTitle(tr("&Edit"));
+	view->setTitle(tr("&View"));
+	scriptingMenu->setTitle(tr("Scripting"));
+	graph->setTitle(tr("&Graph"));
+	plot3DMenu->setTitle(tr("3D &Plot"));
+	matrixMenu->setTitle(tr("&Matrix"));
+	tableMenu->setTitle(tr("&Table"));
+	plot2D->setTitle(tr("&Plot"));
+	dataMenu->setTitle(tr("&Analysis"));
+	plotDataMenu->setTitle(tr("&Tools"));
+	calcul->setTitle(tr("&Analysis"));
+	d_quick_fit_menu->setTitle(tr("&Quick Fit"));
+	format->setTitle(tr("For&mat"));
+	windowsMenu->setTitle(tr("&Windows"));
+	help->setTitle(tr("&Help"));
+
 	type->setTitle(tr("&New"));
 	recent->setTitle(tr("&Recent Projects"));
 	exportPlot->setTitle(tr("&Export Graph"));
