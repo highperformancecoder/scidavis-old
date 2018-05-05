@@ -7792,7 +7792,7 @@ QMenu* ApplicationWindow::showListViewPopupMenuImpl()
   void ApplicationWindow::showWindowPopupMenu(const QPoint &p)
   {
     if (auto m=showWindowPopupMenuImpl(lv->itemAt(p)))
-      m->exec(p);
+      m->exec(lv->mapToGlobal(p)+QPoint(0,lv->header()->height()));
   }
 
 
@@ -12526,9 +12526,9 @@ void ApplicationWindow::saveFolderAsProject(Folder *f)
 void ApplicationWindow::showFolderPopupMenu(const QPoint &p, bool fromFolders)
 {
   if (fromFolders)
-    showFolderPopupMenuImpl(folders->itemAt(p), fromFolders)->exec(p);
+    showFolderPopupMenuImpl(folders->itemAt(p), fromFolders)->exec(folders->mapToGlobal(p));
   else
-    showFolderPopupMenuImpl(lv->itemAt(p), fromFolders)->exec(p);
+    showFolderPopupMenuImpl(lv->itemAt(p), fromFolders)->exec(lv->mapToGlobal(p));
 }
 
 
