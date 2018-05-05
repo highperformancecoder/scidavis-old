@@ -244,8 +244,16 @@ QVariant PythonScript::eval()
 	// could handle advanced types (such as PyList->QList) here if needed
 	/* fallback: try to convert to (unicode) string */
 	if(!qret.isValid()) {
+#if PY_MAJOR_VERSION >= 3
+		PyObject *pystring = PyObject_Str(pyret);
+#else
 		PyObject *pystring = PyObject_Unicode(pyret);
+#endif
 		if (pystring) {
+#if PY_MAJOR_VERSION >= 3
+			qret = QVariant(QString(PYSTRING_AsString(pystring)));
+			Py_DECREF(pystring);
+#else
 			PyObject *asUTF8 = PyUnicode_EncodeUTF8(PyUnicode_AS_UNICODE(pystring), PyUnicode_GET_DATA_SIZE(pystring), 0);
 			Py_DECREF(pystring);
 			if (asUTF8) {
@@ -255,6 +263,7 @@ QVariant PythonScript::eval()
 				qret = QVariant(QString(PyString_AS_STRING(pystring)));
 				Py_DECREF(pystring);
 			}
+#endif
 		}
 	}
 
