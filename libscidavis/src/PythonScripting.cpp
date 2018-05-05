@@ -91,7 +91,7 @@ QString PythonScripting::toString(PyObject *object, bool decref)
 	PyObject *repr = PyObject_Str(object);
 	if (decref) Py_DECREF(object);
 	if (!repr) return "";
-	ret = PyString_AsString(repr);
+	ret = PYSTRING_AsString(repr);
 	Py_DECREF(repr);
 	return ret;
 }
@@ -173,9 +173,9 @@ QString PythonScripting::errorMsg()
 		while (excit && (PyObject*)excit != Py_None)
 		{
 			frame = excit->tb_frame;
-			msg.append("at ").append(PyString_AsString(frame->f_code->co_filename));
+			msg.append("at ").append(PYSTRING_AsString(frame->f_code->co_filename));
 			msg.append(":").append(QString::number(excit->tb_lineno));
-			if (frame->f_code->co_name && *(fname = PyString_AsString(frame->f_code->co_name)) != '?')
+			if (frame->f_code->co_name && *(fname = PYSTRING_AsString(frame->f_code->co_name)) != '?')
 				msg.append(" in ").append(fname);
 			msg.append("\n");
 			excit = excit->tb_next;
@@ -340,8 +340,8 @@ bool PythonScripting::loadInitFile(const QString &path)
 			PyObject *compile = PyDict_GetItemString(PyModule_GetDict(compileModule), "compile");
 			if (compile) {
 				PyObject *tmp = PyObject_CallFunctionObjArgs(compile,
-						PyString_FromString(pyFile.filePath().toLocal8Bit()),
-						PyString_FromString(pycFile.filePath().toLocal8Bit()),
+						PYSTRING_FromString(pyFile.filePath().toUtf8().constData()),
+						PYSTRING_FromString(pycFile.filePath().toUtf8().constData()),
 						NULL);
 				if (tmp)
 					Py_DECREF(tmp);
@@ -439,7 +439,7 @@ const QStringList PythonScripting::mathFunctions() const
 #endif
 	while(PyDict_Next(math, &i, &key, &value))
 		if (PyCallable_Check(value))
-			flist << PyString_AsString(key);
+			flist << PYSTRING_AsString(key);
 	flist.sort();
 	return flist;
 }
@@ -449,7 +449,7 @@ const QString PythonScripting::mathFunctionDoc(const QString &name) const
 	PyObject *mathf = PyDict_GetItemString(math,name.toLocal8Bit()); // borrowed
 	if (!mathf) return "";
 	PyObject *pydocstr = PyObject_GetAttrString(mathf, "__doc__"); // new
-	QString qdocstr = PyString_AsString(pydocstr);
+	QString qdocstr = PYSTRING_AsString(pydocstr);
 	Py_XDECREF(pydocstr);
 	return qdocstr;
 }
