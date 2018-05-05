@@ -164,7 +164,7 @@ bool PythonScript::compile(bool for_eval)
 #endif
 		QString signature = "";
 		while(PyDict_Next(topLevelLocal, &i, &key, &value))
-			signature.append(PyString_AsString(key)).append(",");
+			signature.append(PYSTRING_AsString(key)).append(",");
 		signature.truncate(signature.length()-1);
 		QString fdef = "def __doit__("+signature+"):\n";
 		fdef.append(Code);
@@ -325,21 +325,21 @@ void PythonScript::endStdoutRedirect()
 
 bool PythonScript::setQObject(QObject *val, const char *name)
 {
-	if (!PyDict_Contains(modLocalDict, PyString_FromString(name)))
+	if (!PyDict_Contains(modLocalDict, PYSTRING_FromString(name)))
 		compiled = notCompiled;
 	return (env()->setQObject(val, name, modLocalDict) && env()->setQObject(val, name, modGlobalDict));
 }
 
 bool PythonScript::setInt(int val, const char *name)
 {
-	if (!PyDict_Contains(modLocalDict, PyString_FromString(name)))
+	if (!PyDict_Contains(modLocalDict, PYSTRING_FromString(name)))
 		compiled = notCompiled;
 	return (env()->setInt(val, name, modLocalDict) && env()->setInt(val, name, modGlobalDict));
 }
 
 bool PythonScript::setDouble(double val, const char *name)
 {
-	if (!PyDict_Contains(modLocalDict, PyString_FromString(name)))
+	if (!PyDict_Contains(modLocalDict, PYSTRING_FromString(name)))
 		compiled = notCompiled;
 	return (env()->setDouble(val, name, modLocalDict) && env()->setDouble(val, name, modGlobalDict));
 }
