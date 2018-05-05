@@ -3532,7 +3532,7 @@ void Graph::removeCurves(const QString& s)
         if (((PlotCurve *)it)->type() == Function)
             continue;
 
-        if(((DataCurve *)it)->plotAssociation().contains(s))
+        if(((DataCurve *)it)->plotAssociation().contains(QRegExp("\b"+s+"\b")))
             removeCurve(i);
 	}
 	d_plot->replot();
