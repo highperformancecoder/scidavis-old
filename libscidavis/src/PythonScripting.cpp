@@ -75,6 +75,7 @@ extern "C"
 #define PYLong_AsLong       PyInt_AsLong
 #define PYCodeObject_cast   (PyCodeObject*)
 #else
+  PyMODINIT_FUNC PyInit_scidavis(void);
 #define PYSTRING_AsString   PyUnicode_AsUTF8
 #define PYSTRING_FromString PyUnicode_FromString
 #define PYLong_AsLong       PyLong_AsLong
@@ -212,18 +213,22 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
     Py_SetPythonHome(str(PYTHONHOME));
 #endif
     //		PyEval_InitThreads ();
+#if PY_MAJOR_VERSION >= 3
+    PyImport_AppendInittab("scidavis", &PyInit_scidavis);
+#endif
     Py_Initialize ();
     if (!Py_IsInitialized ())
       return;
 
 
+#if PY_MAJOR_VERSION < 3
 #ifdef SIP_STATIC_MODULE
     initsip();
     initQtCore();
     initQtGui();
 #endif
     initscidavis();
-
+#endif
     mainmod = PyImport_AddModule("__main__");
     if (!mainmod)
       {
