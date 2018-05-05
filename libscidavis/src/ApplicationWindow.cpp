@@ -7839,7 +7839,7 @@ QStringList ApplicationWindow::dependingPlots(const QString& name)
 			{
 				Graph *g = (Graph *)widget;
 				onPlot = g->curvesList();
-				onPlot = onPlot.grep(name, true);
+				onPlot = onPlot.filter(QRegExp("^"+name+"_.*"));
 				if (onPlot.count() > 0 && plots.contains(w->name()) <= 0 )
 					plots << w->name();
 			}
