@@ -23,15 +23,20 @@
   DEFINES += SCRIPTING_PYTHON
 
   message("Making PyQt bindings via SIP")
+  PYTHONBIN = $$(PYTHON)
+  isEmpty( PYTHONBIN ) {
+    PYTHONBIN = python
+  }
+
   unix {
-    INCLUDEPATH += $$system(python-config --includes|sed -e 's/-I//')
+    INCLUDEPATH += $$system($$PYTHONBIN-config --includes|sed -e 's/-I//')
     osx_dist {
       DEFINES += PYTHONHOME=/Applications/scidavis.app/Contents/Resources
     } else {
       macx {
         LIBS += -framework Python
       } else {
-        LIBS += $$system(python -c "\"from distutils import sysconfig; print '-lpython'+sysconfig.get_config_var('VERSION')\"")
+        LIBS += $$system($$PYTHONBIN -c "\"from distutils import sysconfig;import sys; sys.stdout.write('-lpython'+sysconfig.get_config_var('VERSION')+(sysconfig.get_config_var('ABIFLAGS') or ''))\"")
       }
     }     
     LIBS        += -lm

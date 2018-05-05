@@ -16,19 +16,24 @@
   SOURCES += src/PythonScript.cpp src/PythonScripting.cpp
 
   message("Making PyQt bindings via SIP")
+  PYTHONBIN = $$(PYTHON)
+  isEmpty( PYTHONBIN ) {
+    PYTHONBIN = python
+  }
+
   unix {
-    INCLUDEPATH += $$system(python-config --includes|sed -e 's/-I//')
+    INCLUDEPATH += $$system($$PYTHONBIN-config --includes|sed -e 's/-I//')
     osx_dist {
       DEFINES += PYTHONHOME=/Applications/scidavis.app/Contents/Resources
     } 
     system(mkdir -p $${SIP_DIR})
-    system($$system(python python-sipcmd.py) $$system(python-config --includes) -c $${SIP_DIR}  src/scidavis.sip)
+    system($$system($$PYTHONBIN python-sipcmd.py) $$system($$PYTHONBIN-config --includes) -c $${SIP_DIR}  src/scidavis.sip)
   }
 
   win32 {
   mxe {
      DEFINES += SIP_STATIC_MODULE
-    system($$system(python python-sipcmd.py) -c $${SIP_DIR} src/scidavis.sip)
+    system($$system($$PYTHONBIN python-sipcmd.py) -c $${SIP_DIR} src/scidavis.sip)
   } else {
     INCLUDEPATH += $$system(call ../python-includepath.py)
     # TODO: fix the command below (only really necessary if SIP_DIR != MOC/OBJECTS_DIR)
