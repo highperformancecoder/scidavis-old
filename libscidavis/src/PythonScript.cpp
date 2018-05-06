@@ -40,6 +40,19 @@
 #include <QVariant>
 
 #include <iostream>
+#if PY_MAJOR_VERSION >= 3
+#define PYSTRING_AsString   PyUnicode_AsUTF8
+#define PYSTRING_FromString PyUnicode_FromString
+#define PYLong_Check        PyLong_Check
+#define PYLong_AsLong       PyLong_AsLong
+#define PYCodeObject_cast
+#else
+#define PYSTRING_AsString   PyString_AsString
+#define PYSTRING_FromString PyString_FromString
+#define PYLong_Check        PyInt_Check
+#define PYLong_AsLong       PyInt_AsLong
+#define PYCodeObject_cast   (PyCodeObject*)
+#endif
 using namespace std;
 
 PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *context, const QString &name)
@@ -131,7 +144,7 @@ bool PythonScript::compile(bool for_eval)
 	bool success=false;
 	Py_XDECREF(PyCode);
 	// Simplest case: Code is a single expression
-	PyCode = Py_CompileString(Code.toAscii().constData(), Name, Py_eval_input);
+	PyCode = Py_CompileString(Code.toUtf8().constData(), Name, Py_eval_input);
 	if (PyCode) {
 		success = true;
 	} else if (for_eval) {
@@ -151,7 +164,7 @@ bool PythonScript::compile(bool for_eval)
 #endif
 		QString signature = "";
 		while(PyDict_Next(topLevelLocal, &i, &key, &value))
-			signature.append(PyString_AsString(key)).append(",");
+			signature.append(PYSTRING_AsString(key)).append(",");
 		signature.truncate(signature.length()-1);
 		QString fdef = "def __doit__("+signature+"):\n";
 		fdef.append(Code);
@@ -160,7 +173,7 @@ bool PythonScript::compile(bool for_eval)
 		if (PyCode)
 		{
 			PyObject *tmp = PyDict_New();
-			Py_XDECREF(PyEval_EvalCode((PyCodeObject*)PyCode, topLevelLocal, tmp));
+			Py_XDECREF(PyEval_EvalCode(PYCodeObject_cast PyCode, topLevelLocal, tmp));
 			Py_DECREF(PyCode);
 			PyCode = PyDict_GetItemString(tmp,"__doit__");
 			Py_XINCREF(PyCode);
@@ -171,13 +184,16 @@ bool PythonScript::compile(bool for_eval)
 		// Code contains statements (or errors), but we do not need to get
 		// a return value.
 		PyErr_Clear(); // silently ignore errors
-		PyCode = Py_CompileString(Code.toAscii().constData(), Name, Py_file_input);
+		PyCode = Py_CompileString(Code.toUtf8().constData(), Name, Py_file_input);
 		success = PyCode != NULL;
 	}
 	if (!success)
 	{
 		compiled = compileErr;
-		emit_error(env()->errorMsg(), 0);
+		if (batchMode)
+			cerr << env()->errorMsg().toStdString() << endl;
+		else
+			emit_error(env()->errorMsg(), 0);
 	} else
 		compiled = isCompiled;
 	return success;
@@ -198,7 +214,7 @@ QVariant PythonScript::eval()
 		pyret = PyObject_Call(PyCode, empty_tuple, topLevelLocal);
 		Py_DECREF(empty_tuple);
 	} else
-		pyret = PyEval_EvalCode((PyCodeObject*)PyCode, topLevelGlobal, topLevelLocal);
+		pyret = PyEval_EvalCode(PYCodeObject_cast PyCode, topLevelGlobal, topLevelLocal);
 	endStdoutRedirect();
 	if (!pyret)
 	{
@@ -213,8 +229,8 @@ QVariant PythonScript::eval()
 	/* numeric types */
 	else if (PyFloat_Check(pyret))
 		qret = QVariant(PyFloat_AS_DOUBLE(pyret));
-	else if (PyInt_Check(pyret))
-		qret = QVariant((qlonglong)PyInt_AS_LONG(pyret));
+	else if (PYLong_Check(pyret))
+		qret = QVariant((qlonglong)PYLong_AsLong(pyret));
 	else if (PyLong_Check(pyret))
 		qret = QVariant((qlonglong)PyLong_AsLongLong(pyret));
 	else if (PyNumber_Check(pyret))
@@ -231,8 +247,16 @@ QVariant PythonScript::eval()
 	// could handle advanced types (such as PyList->QList) here if needed
 	/* fallback: try to convert to (unicode) string */
 	if(!qret.isValid()) {
+#if PY_MAJOR_VERSION >= 3
+		PyObject *pystring = PyObject_Str(pyret);
+#else
 		PyObject *pystring = PyObject_Unicode(pyret);
+#endif
 		if (pystring) {
+#if PY_MAJOR_VERSION >= 3
+			qret = QVariant(QString(PYSTRING_AsString(pystring)));
+			Py_DECREF(pystring);
+#else
 			PyObject *asUTF8 = PyUnicode_EncodeUTF8(PyUnicode_AS_UNICODE(pystring), PyUnicode_GET_DATA_SIZE(pystring), 0);
 			Py_DECREF(pystring);
 			if (asUTF8) {
@@ -242,6 +266,7 @@ QVariant PythonScript::eval()
 				qret = QVariant(QString(PyString_AS_STRING(pystring)));
 				Py_DECREF(pystring);
 			}
+#endif
 		}
 	}
 
@@ -272,7 +297,7 @@ bool PythonScript::exec()
 		pyret = PyObject_Call(PyCode,empty_tuple,topLevelLocal);
 		Py_DECREF(empty_tuple);
 	} else
-		pyret = PyEval_EvalCode((PyCodeObject*)PyCode, topLevelGlobal, topLevelLocal);
+		pyret = PyEval_EvalCode(PYCodeObject_cast PyCode, topLevelGlobal, topLevelLocal);
 	endStdoutRedirect();
 	if (pyret) {
 		Py_DECREF(pyret);
@@ -312,21 +337,21 @@ void PythonScript::endStdoutRedirect()
 
 bool PythonScript::setQObject(QObject *val, const char *name)
 {
-	if (!PyDict_Contains(modLocalDict, PyString_FromString(name)))
+	if (!PyDict_Contains(modLocalDict, PYSTRING_FromString(name)))
 		compiled = notCompiled;
 	return (env()->setQObject(val, name, modLocalDict) && env()->setQObject(val, name, modGlobalDict));
 }
 
 bool PythonScript::setInt(int val, const char *name)
 {
-	if (!PyDict_Contains(modLocalDict, PyString_FromString(name)))
+	if (!PyDict_Contains(modLocalDict, PYSTRING_FromString(name)))
 		compiled = notCompiled;
 	return (env()->setInt(val, name, modLocalDict) && env()->setInt(val, name, modGlobalDict));
 }
 
 bool PythonScript::setDouble(double val, const char *name)
 {
-	if (!PyDict_Contains(modLocalDict, PyString_FromString(name)))
+	if (!PyDict_Contains(modLocalDict, PYSTRING_FromString(name)))
 		compiled = notCompiled;
 	return (env()->setDouble(val, name, modLocalDict) && env()->setDouble(val, name, modGlobalDict));
 }

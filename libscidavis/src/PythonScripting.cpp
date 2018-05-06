@@ -65,10 +65,22 @@ typedef struct _traceback {
 #include "sipAPIscidavis.h"
 extern "C" 
 {
+#if PY_MAJOR_VERSION < 3
   void initsip();
   void initQtCore();
   void initQtGui();
   void initscidavis();
+#define PYSTRING_AsString   PyString_AsString
+#define PYSTRING_FromString PyString_FromString
+#define PYLong_AsLong       PyInt_AsLong
+#define PYCodeObject_cast   (PyCodeObject*)
+#else
+  PyMODINIT_FUNC PyInit_scidavis(void);
+#define PYSTRING_AsString   PyUnicode_AsUTF8
+#define PYSTRING_FromString PyUnicode_FromString
+#define PYLong_AsLong       PyLong_AsLong
+#define PYCodeObject_cast
+#endif
 }
 
 const char* PythonScripting::langName = "Python";
@@ -80,7 +92,7 @@ QString PythonScripting::toString(PyObject *object, bool decref)
 	PyObject *repr = PyObject_Str(object);
 	if (decref) Py_DECREF(object);
 	if (!repr) return "";
-	ret = PyString_AsString(repr);
+	ret = PYSTRING_AsString(repr);
 	Py_DECREF(repr);
 	return ret;
 }
@@ -93,10 +105,10 @@ PyObject *PythonScripting::eval(const QString &code, PyObject *argDict, const ch
 	else
 		args = globals;
 	PyObject *ret=NULL;
-	PyObject *co = Py_CompileString(code.toAscii().constData(), name, Py_eval_input);
+	PyObject *co = Py_CompileString(code.toUtf8().constData(), name, Py_eval_input);
 	if (co)
 	{
-		ret = PyEval_EvalCode((PyCodeObject*)co, globals, args);
+		ret = PyEval_EvalCode(PYCodeObject_cast co, globals, args);
 		Py_DECREF(co);
 	}
 	return ret;
@@ -110,10 +122,10 @@ bool PythonScripting::exec (const QString &code, PyObject *argDict, const char *
 	else
 		args = globals;
 	PyObject *tmp = NULL;
-	PyObject *co = Py_CompileString(code.toAscii().constData(), name, Py_file_input);
+	PyObject *co = Py_CompileString(code.toUtf8().constData(), name, Py_file_input);
 	if (co)
 	{
-		tmp = PyEval_EvalCode((PyCodeObject*)co, globals, args);
+		tmp = PyEval_EvalCode(PYCodeObject_cast co, globals, args);
 		Py_DECREF(co);
 	}
 	if (!tmp) return false;
@@ -137,7 +149,7 @@ QString PythonScripting::errorMsg()
 		QString text = toString(PyObject_GetAttrString(value, "text"), true);
 		msg.append(text + "\n");
 		PyObject *offset = PyObject_GetAttrString(value, "offset");
-		for (int i=0; i<(PyInt_AsLong(offset)-1); i++)
+		for (int i=0; i<(PYLong_AsLong(offset)-1); i++)
 			if (text[i] == '\t')
 				msg.append("\t");
 			else
@@ -162,9 +174,9 @@ QString PythonScripting::errorMsg()
 		while (excit && (PyObject*)excit != Py_None)
 		{
 			frame = excit->tb_frame;
-			msg.append("at ").append(PyString_AsString(frame->f_code->co_filename));
+			msg.append("at ").append(PYSTRING_AsString(frame->f_code->co_filename));
 			msg.append(":").append(QString::number(excit->tb_lineno));
-			if (frame->f_code->co_name && *(fname = PyString_AsString(frame->f_code->co_name)) != '?')
+			if (frame->f_code->co_name && *(fname = PYSTRING_AsString(frame->f_code->co_name)) != '?')
 				msg.append(" in ").append(fname);
 			msg.append("\n");
 			excit = excit->tb_next;
@@ -201,18 +213,22 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
     Py_SetPythonHome(str(PYTHONHOME));
 #endif
     //		PyEval_InitThreads ();
+#if PY_MAJOR_VERSION >= 3
+    PyImport_AppendInittab("scidavis", &PyInit_scidavis);
+#endif
     Py_Initialize ();
     if (!Py_IsInitialized ())
       return;
 
 
+#if PY_MAJOR_VERSION < 3
 #ifdef SIP_STATIC_MODULE
     initsip();
     initQtCore();
     initQtGui();
 #endif
     initscidavis();
-
+#endif
     mainmod = PyImport_AddModule("__main__");
     if (!mainmod)
       {
@@ -328,8 +344,8 @@ bool PythonScripting::loadInitFile(const QString &path)
 			PyObject *compile = PyDict_GetItemString(PyModule_GetDict(compileModule), "compile");
 			if (compile) {
 				PyObject *tmp = PyObject_CallFunctionObjArgs(compile,
-						PyString_FromString(pyFile.filePath()),
-						PyString_FromString(pycFile.filePath()),
+						PYSTRING_FromString(pyFile.filePath().toUtf8().constData()),
+						PYSTRING_FromString(pycFile.filePath().toUtf8().constData()),
 						NULL);
 				if (tmp)
 					Py_DECREF(tmp);
@@ -427,7 +443,7 @@ const QStringList PythonScripting::mathFunctions() const
 #endif
 	while(PyDict_Next(math, &i, &key, &value))
 		if (PyCallable_Check(value))
-			flist << PyString_AsString(key);
+			flist << PYSTRING_AsString(key);
 	flist.sort();
 	return flist;
 }
@@ -437,7 +453,7 @@ const QString PythonScripting::mathFunctionDoc(const QString &name) const
 	PyObject *mathf = PyDict_GetItemString(math,name); // borrowed
 	if (!mathf) return "";
 	PyObject *pydocstr = PyObject_GetAttrString(mathf, "__doc__"); // new
-	QString qdocstr = PyString_AsString(pydocstr);
+	QString qdocstr = PYSTRING_AsString(pydocstr);
 	Py_XDECREF(pydocstr);
 	return qdocstr;
 }

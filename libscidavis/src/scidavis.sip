@@ -35,6 +35,21 @@
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 
+%ModuleHeaderCode
+#if PY_MAJOR_VERSION >= 3
+#define PYSTRING_AsString   PyUnicode_AsUTF8
+#define PYSTRING_FromString PyUnicode_FromString
+#define PYLong_Check        PyLong_Check
+#define PYLong_AsLong       PyLong_AsLong
+#else
+#define PYSTRING_AsString   PyString_AsString
+#define PYSTRING_FromString PyString_FromString
+#define PYLong_Check        PyInt_Check
+#define PYLong_AsLong       PyInt_AsLong
+#endif
+%End
+
+
 class AbstractAspect : QObject
 {
 %TypeHeaderCode
@@ -120,13 +135,13 @@ class Column: AbstractAspect
 		SIP_PYOBJECT dataType() const;
 %MethodCode
 		int mode = sipCpp->dataType();
-  		sipRes = PyString_FromString(SciDAVis::enumValueToString(mode, "ColumnDataType"));
+		sipRes = PYSTRING_FromString(SciDAVis::enumValueToString(mode, "ColumnDataType").toUtf8().constData());
 %End
 */
 		SIP_PYOBJECT columnMode() const;
 %MethodCode
 		int mode = sipCpp->columnMode();
-  		sipRes = PyString_FromString(SciDAVis::enumValueToString(mode, "ColumnMode"));
+		sipRes = PYSTRING_FromString(SciDAVis::enumValueToString(mode, "ColumnMode").toUtf8().constData());
 %End
 		void setColumnMode(QString mode);
 %MethodCode
@@ -146,7 +161,7 @@ class Column: AbstractAspect
 		{
 			filterformat = filter->format();
 		}
-		sipRes = PyString_FromString(filterformat.toUtf8().constData());
+		sipRes = PYSTRING_FromString(filterformat.toUtf8().constData());
 %End
 		void setColumnFormat(QString cformat);
 %MethodCode
@@ -158,7 +173,7 @@ class Column: AbstractAspect
 		SIP_PYOBJECT plotDesignation() const;
 %MethodCode
 		int pd = sipCpp->plotDesignation();
-  		sipRes = PyString_FromString(SciDAVis::enumValueToString(pd, "PlotDesignation"));
+		sipRes = PYSTRING_FromString(SciDAVis::enumValueToString(pd, "PlotDesignation").toUtf8().constData());
 %End
 		void setPlotDesignation(QString pd);
 %MethodCode
@@ -235,7 +250,7 @@ public:
 
   SIP_PYOBJECT windowLabel();
 %MethodCode
-  sipRes = PyString_FromString(sipCpp->windowLabel());
+  sipRes = PYSTRING_FromString(sipCpp->windowLabel().toUtf8().constData());
 %End
   void setWindowLabel(const QString&);
 
@@ -261,7 +276,7 @@ public:
   /*
   virtual SIP_PYOBJECT saveAsTemplate(const QString& );
 %MethodCode
-  sipRes = PyString_FromString(sipCpp->saveAsTemplate(*a0));
+  sipRes = PYSTRING_FromString(sipCpp->saveAsTemplate(*a0).toUtf8().constData());
 %End
 */
   // same issues as with saveAsTemplate
@@ -285,8 +300,8 @@ class Table: MyWidget
 
 #define CHECK_TABLE_COL(arg)\
     int col;\
-    if (PyInt_Check(arg)) {\
-      col = (int)PyInt_AsLong(arg) - 1;\
+    if (PYLong_Check(arg)) {\
+      col = (int)PYLong_AsLong(arg) - 1;\
 		if (col < 0 || col >= sipCpp->numCols()) {\
 			sipIsErr = 1;\
 			PyErr_Format(PyExc_ValueError, "There's no column %d in table %s!", col+1, sipCpp->name().toAscii().constData());\
@@ -297,10 +312,10 @@ class Table: MyWidget
 			sipIsErr = 1;\
 			PyErr_Format(PyExc_TypeError, "Column argument must be either int or string.");\
 		} else {\
-			col = sipCpp->colNames().indexOf(PyString_AsString(tmp));\
+			col = sipCpp->colNames().indexOf(PYSTRING_AsString(tmp));\
 			if (col < 0) {\
 				sipIsErr = 1;\
-				PyErr_Format(PyExc_ValueError, "There's no column named %s in table %s!", PyString_AsString(tmp),\
+				PyErr_Format(PyExc_ValueError, "There's no column named %s in table %s!", PYSTRING_AsString(tmp),\
 						sipCpp->name().toAscii().constData());\
 				Py_DECREF(tmp);\
 			}\
@@ -344,12 +359,8 @@ public:
   CHECK_TABLE_COL(a0);
   CHECK_TABLE_ROW(a1);
   if (sipIsErr == 0) {
-		PyObject *encstr = PyString_FromString(sipCpp->text(row, col).utf8());
-		if (encstr) {
-			sipRes = PyUnicode_FromEncodedObject(encstr, "utf8", 0);
-			Py_DECREF(encstr);
-		} else {
-			sipRes = NULL;
+		sipRes = PYSTRING_FromString(sipCpp->text(row, col).toUtf8().constData());
+		if (!sipRes) {
 			sipIsErr = 1;
 		}
 	}
@@ -384,7 +395,7 @@ public:
 		sipIsErr = 1;\
 		PyErr_SetString(PyExc_ValueError, "Invalid column argument");\
 	} else
-		sipRes = PyString_FromString(sipCpp->colLabel(a0-1));
+		sipRes = PYSTRING_FromString(sipCpp->colLabel(a0-1).toUtf8().constData());
 %End
   void setColName(SIP_PYOBJECT, const QString&) /Deprecated/;
 %MethodCode
@@ -443,7 +454,7 @@ public:
   for (int i=0; i<n; i++) {
 	  PyObject *str = PyObject_Str(PyTuple_GET_ITEM(a0,i));
 	  if (str) {
-		  cols << sipCpp->column(PyString_AsString(str));
+		  cols << sipCpp->column(PYSTRING_AsString(str));
 		  Py_DECREF(str);
 	  } else {
 		  sipIsErr = 1;
@@ -502,7 +513,7 @@ public:
 	CHECK_MATRIX_ROW(a0);
 	CHECK_MATRIX_COL(a1);
 	if (sipIsErr == 0)
-		sipRes = PyString_FromString(sipCpp->text(row, col));
+		sipRes = PYSTRING_FromString(sipCpp->text(row, col).toUtf8().constData());
 %End
   double cell(int, int);
 %MethodCode
@@ -902,7 +913,7 @@ public:
   bool isPiePlot();
   SIP_PYOBJECT pieLegendText() /PyName=pieLegend/;
 %MethodCode
-  sipRes = PyString_FromString(sipCpp->pieLegendText());
+  sipRes = PYSTRING_FromString(sipCpp->pieLegendText().toUtf8().constData());
 %End
 
   bool insertCurve(Table*, const QString&, int=1, int color=-1);
@@ -1225,7 +1236,7 @@ public:
   for (int i=0; i<n; i++) {
     PyObject *str = PyObject_Str(PyTuple_GET_ITEM(a1,i));
     if (str) {
-      l << PyString_AsString(str);
+      l << PYSTRING_AsString(str);
 		Py_DECREF(str);
 	 } else {
       sipIsErr = 1;
@@ -1555,7 +1566,7 @@ public:
   QStringList l;
   char *item;
   for (int i=0; i<PyTuple_GET_SIZE(a0); i++)
-    if ((item = PyString_AsString(PyTuple_GET_ITEM(a0, i))))
+    if ((item = PYSTRING_AsString(PyTuple_GET_ITEM(a0, i))))
       l << item;
     else
       sipIsErr = 1;

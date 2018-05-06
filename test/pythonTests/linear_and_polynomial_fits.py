@@ -1,3 +1,4 @@
+# coding: utf-8
 # Script to test linear and polynomial fits
 
 import random
@@ -31,6 +32,6 @@ f2=PolynomialFit(l1,curve1,5) #polynomial fit of degree 5
 f2.setColor("blue")
 f2.fit()
 
-print "#","linear coef. =",f1.results()[0]," ± ",f1.errors()[0],"\n# angular coef. =",f1.results()[1]," ± ",f1.errors()[1]
+print("#","linear coef. =",f1.results()[0]," ± ",f1.errors()[0],"\n# angular coef. =",f1.results()[1]," ± ",f1.errors()[1])
 g1.exportImage("linearAndPolyFits.png")
 app.exit()
