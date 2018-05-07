@@ -30,7 +30,9 @@ void Unittests::menus()
     for (auto& l: app.locales)
       {
         app.switchToLanguage(l);
-        ofstream of("defaultMenus_"+l+".menudat");
+        // ofstream needs a const char* for filename argument
+        // qt4 without qt3support does not implicitly convert from QString to const char*
+        ofstream of(("defaultMenus_"+l+".menudat").toUtf8().constData());
         MenuActions menuActions;
         menuActions.parseQObject(&app);
         for (auto& i: menuActions)
@@ -53,7 +55,8 @@ void Unittests::menus()
     for (auto& l: appWithGraph->locales)
       {
         appWithGraph->switchToLanguage(l);
-        ofstream of("appWithGraph_"+l+".menudat");
+        // alternative way of getting const char*
+        ofstream of(l.prepend("appWithGraph").append(".menudat").toStdString().c_str());
         MenuActions menuActions;
         menuActions.parseQObject(appWithGraph.get());
         for (auto& i: menuActions)
