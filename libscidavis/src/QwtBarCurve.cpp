@@ -65,13 +65,24 @@ void QwtBarCurve::draw(QPainter *painter,
     painter->setPen(QwtPlotCurve::pen());
     painter->setBrush(QwtPlotCurve::brush());
 
-    int dx, dy, ref;
+    int dx, dy, ref1, ref2;
 	double bar_width = 0;
 
-    if (bar_style == Vertical)
-       ref= yMap.transform(1e-100); //smalest positive value for log scales
-    else
-       ref= xMap.transform(1e-100);
+    if (bar_style == Vertical){
+       ref1= yMap.transform(1e-100); //smallest positive value for log scales
+       ref2=ref1;
+       if (yMap.transform(yMap.s1()) < ref1)
+            ref1 = yMap.transform(yMap.s1());
+       if (yMap.transform(yMap.s2()) > ref2)
+            ref2 = yMap.transform(yMap.s2());
+    } else {
+       ref1= xMap.transform(1e-100);
+       ref2=ref1;
+       if (xMap.transform(xMap.s1()) > ref1)
+            ref1 = xMap.transform(xMap.s1());
+       if (xMap.transform(xMap.s2()) < ref2)
+            ref2 = xMap.transform(xMap.s2());
+    }
 
 	if (bar_style == Vertical)
 	{
@@ -106,16 +117,16 @@ void QwtBarCurve::draw(QPainter *painter,
 		if (bar_style == Vertical)
 		{
 			if (y(i) < 0)
-				painter->drawRect(px-half_width, ref, bw1, (py-ref));
+				painter->drawRect(px-half_width, ref2, bw1, (py-ref2));
 			else
-				painter->drawRect(px-half_width, py, bw1, (ref-py+1));
+				painter->drawRect(px-half_width, py, bw1, (ref1-py+1));
 		}
 		else
 		{
 			if (x(i) < 0)
-				painter->drawRect(px, py-half_width, (ref-px), bw1);
+				painter->drawRect(px, py-half_width, (ref2-px), bw1);
 			else
-				painter->drawRect(ref, py-half_width, (px-ref), bw1);
+				painter->drawRect(ref1, py-half_width, (px-ref1), bw1);
 		}
 	}
 	painter->restore();
