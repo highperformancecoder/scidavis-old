@@ -55,8 +55,12 @@ void Unittests::menus()
     for (auto& l: appWithGraph->locales)
       {
         appWithGraph->switchToLanguage(l);
+<<<<<<< HEAD
         // alternative way of getting const char*
         ofstream of(l.prepend("appWithGraph").append(".menudat").toStdString().c_str());
+=======
+        ofstream of("appWithGraph_"+l+".menudat");
+>>>>>>> master
         MenuActions menuActions;
         menuActions.parseQObject(appWithGraph.get());
         for (auto& i: menuActions)

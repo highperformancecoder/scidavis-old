@@ -21,6 +21,12 @@
     More information, including screenshots, reviews, current contributors can be found on the SourceForge project webpage.
     </p>
   </description>
+  
+  <categories>
+    <category>Science</category>
+    <category>DataVisualization</category>
+    <category>NumericalAnalysis</category>
+  </categories>
 
   <launchable type="desktop-id">scidavis.desktop</launchable>
 
