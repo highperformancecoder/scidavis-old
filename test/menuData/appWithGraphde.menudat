@@ -1,5 +1,8 @@
-:Vektoren &XYXY|Vektoren XYXY||Vektoren XYXY|1|
-:Verktoren XY&AM|Verktoren XYAM||Vektoren XYAM|1|
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
 &Ansicht:Toolbars|Toolbars||Toolbars|1|
 &Ansicht:&Lock Toolbars|Lock Toolbars||Lock Toolbars|1|
 &Ansicht:||||1|
@@ -93,6 +96,7 @@
 &Werkzeuge:||||1|
 &Werkzeuge:Datenpunkte &verschieben...|Datenpunkte verschieben||Datenpunkte verschieben|1|
 &Werkzeuge:Datenausreißer &entfernen...|Datenausreißer entfernen||Datenpunkte löschen|1|
+&Zuletzt geöffnete Projekte:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
 3&D-Diagramm:&Band|Band||3D-Band zeichnen|1|
 3&D-Diagramm:&Balken|Balken||3D-Balken zeichnen|1|
 3&D-Diagramm:&Punkte|Punkte||3D-Punkte zeichnen|1|
@@ -154,6 +158,13 @@ D&iagramm:3&D-Diagramm|3D-Diagramm||3D-Diagramm|1|
 E&ponentiellen Abfall anpassen:&Erster Ordnung...|Erster Ordnung||Erster Ordnung|1|
 E&ponentiellen Abfall anpassen:&Zweiter Ordnung...|Zweiter Ordnung||Zweiter Ordnung|1|
 E&ponentiellen Abfall anpassen:&Dritter Ordnung...|Dritter Ordnung||Dritter Ordnung|1|
+For&mat:&Diagramm ...|Diagramm||Diagramm|1|
+For&mat:||||1|
+For&mat:&Skalen...|Skalen||Skalen|1|
+For&mat:&Achsen...|Achsen||Achsen|1|
+For&mat:||||1|
+For&mat:&Gitter...|Gitter||Gitter|1|
+For&mat:&Titel ...|Titel||Titel|1|
 Grafik &exportieren:&Aktuelle...|Aktuelle||Aktuelle Grafik exportieren|1|
 Grafik &exportieren:&Alle...|Alle||Alle Grafiken exportieren|1|
 Skriptunterstützung:S&kriptsprache|Skriptsprache||Skriptsprache|1|

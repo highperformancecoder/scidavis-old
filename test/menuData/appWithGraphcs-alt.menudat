@@ -1,5 +1,8 @@
-:Vektory &XYXY|Vektory XYXY||Vektory XYXY|1|
-:Vektory XY&AM|Vektory XYAM||Vektory XYAM|1|
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
 &Exportovat graf:&Aktuální...|Aktuální||Exportovat aktuální graf|1|
 &Exportovat graf:&V?e...|V?e||Exportovat v?echny grafy|1|
 &FFT Filtr:&Nízký pr?chod...|Nízký pr?chod||Nízký pr?chod|1|
@@ -22,6 +25,7 @@
 &Graf:Pa&nel|Panel||Panel|1|
 &Graf:||||1|
 &Graf:3&D-graf|3D-graf||3D-graf|1|
+&Naposled otev?ené projekty:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
 &Nový:Nový &Projekt|Nový Projekt||Otev?ít nový projekt|1|
 &Nový:Nová &Tabulka|Nová Tabulka||Nová tabulka|1|
 &Nový:Nová &matice|Nová matice||Nová matice|1|
@@ -132,6 +136,13 @@ Ana&lýza:&FFT...|FFT||FFT|1|
 Ana&lýza:||||1|
 Ana&lýza:&Rychlé prolo?ení|Rychlé prolo?ení||Rychlé prolo?ení|1|
 Ana&lýza:Asistent prokládání &dat k?ivkou...|Asistent prokládání dat k?ivkou||Asistent prokládání dat k?ivkou|1|
+For&mát:&Graf ...|Graf||Graf|1|
+For&mát:||||1|
+For&mát:&M??ítka...|M??ítka||M??ítka|1|
+For&mát:&Osy...|Osy||Osy|1|
+For&mát:||||1|
+For&mát:&M?í?ka...|M?í?ka||M?í?ka|1|
+For&mát:&Název ...|Název||Název|1|
 Pa&nel:2 &svislé vrstvy|2 svislé vrstvy||2 svislé vrstvy|1|
 Pa&nel:2 &vodorovné vrstvy|2 vodorovné vrstvy||2 vodorovné vrstvy|1|
 Pa&nel:&4 vrstvy|4 vrstvy||4 vrstvy|1|

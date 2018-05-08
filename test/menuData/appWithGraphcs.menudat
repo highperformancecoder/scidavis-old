@@ -1,9 +1,20 @@
-:Vektory &XYXY|Vektory XYXY||Vektory XYXY|1|
-:Vektory XY&AM|Vektory XYAM||Vektory XYAM|1|
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
 &FFT filtr:&Nízké posunutí...|Nízké posunutí||Nízké posunutí|1|
 &FFT filtr:&Vysoké posunutí...|Vysoké posunutí||Vysoké posunutí|1|
 &FFT filtr:&Pásmové posunutí...|Pásmové posunutí||Pásmové posunutí|1|
 &FFT filtr:&Pásmovou závoru...|Pásmovou závoru||Pásmovou závoru|1|
+&Formát:&Nákres...|Nákres||Nákres|1|
+&Formát:||||1|
+&Formát:&Stupnice...|Stupnice||Stupnice|1|
+&Formát:&Osy...|Osy||Osy|1|
+&Formát:||||1|
+&Formát:&M?í?ka...|M?í?ka||M?í?ka|1|
+&Formát:&Název...|Název||Název|1|
+&Naposledy otev?ené projekty:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
 &Nový:Nový &projekt|Nový projekt||Otev?ít nový projekt|1|
 &Nový:Nová &tabulka|Nová tabulka||Nová tabulka|1|
 &Nový:Nová &matice|Nová matice||Nová matice|1|

@@ -1,5 +1,8 @@
-:Vectores &XYXY|Vectores XYXY||Vectores XYXY|1|
-:Vectores XY&AM|Vectores XYAM||Vectores XYAM|1|
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
  Línea/Símb&olo especial: Líneas  &verticales|Líneas  verticales||Líneas  verticales|1|
  Línea/Símb&olo especial:&Suavizado|Suavizado||Suavizado|1|
  Línea/Símb&olo especial:Escalones &verticales|Escalones verticales||Escalones verticales|1|
@@ -100,6 +103,7 @@
 &Nuevo:Nuevo &gráfico|Nuevo gráfico||Crear un gráfico 2D vacío|1|
 &Nuevo:Nuevo gráfico de &función|Nuevo gráfico de función||Crear nuevo gráfico de función 2D|1|
 &Nuevo:Nueva &superficie 3D|Nueva superficie 3D||Crear nuevo gráfico 3D|1|
+&Proyectos recientes:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
 &Suavizar:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
 &Suavizar:Promedio de vent&ana móvil...|Promedio de ventana móvil||Promedio de ventana móvil|1|
 &Suavizar:Filtro &FFT...|Filtro FFT||Filtro FFT|1|
@@ -147,6 +151,13 @@ Filtro &FFT:Pasa &bajo...|Pasa bajo||Pasa bajo|1|
 Filtro &FFT:Pasa &Alto...|Pasa Alto||Pasa Alto|1|
 Filtro &FFT:Pasa &Banda...|Pasa Banda||Pasa Banda|1|
 Filtro &FFT:Bloquear &Banda...|Bloquear Banda||Bloquear Banda|1|
+For&mato:&Dibujar ...|Dibujar||Dibujar|1|
+For&mato:||||1|
+For&mato:E&scalas...|Escalas||Escalas|1|
+For&mato:&Ejes...|Ejes||Ejes|1|
+For&mato:||||1|
+For&mato:&Malla ...|Malla||Malla|1|
+For&mato:&Título ...|Título||Título|1|
 Gráfico 3&D:&Cinta|Cinta||Gráfico cinta 3D|1|
 Gráfico 3&D:&Barras|Barras||Gráfico barras 3D|1|
 Gráfico 3&D:&Símbolos|Símbolos||Gráfico símbolos 3D|1|

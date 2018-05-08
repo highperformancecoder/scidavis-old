@@ -1,5 +1,8 @@
-:Vektorer &XYXY|Vektorer XYXY||Vektorer XYXY|1|
-:Vektorer XYA&M|Vektorer XYAM||Vektorer XYAM|1|
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
 &Arkiv:&Ny|Ny||Ny|1|
 &Arkiv:&Öppna...|Öppna||Öppna projekt|1|
 &Arkiv:&Recent Projects|Recent Projects||Recent Projects|1|
@@ -81,6 +84,7 @@
 &Quick Fit:Anpassa Lorent&ziskt|Anpassa Lorentziskt||Anpassa Lorentziskt|1|
 &Quick Fit:Fit &Multi-Peak|Fit Multi-Peak||Fit Multi-Peak|1|
 &Quick Fit:||||1|
+&Recent Projects:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
 &Redigera:&Ångra|Ångra||Ångra ändringar|1|
 &Redigera:Gö&r om|Gör om||Gör om ändringar|1|
 &Redigera:||||1|
@@ -152,6 +156,13 @@ Dia&gram:&Tag bort lager|Tag bort lager||Tag bort lager|1|
 Dia&gram:Arran&gera lager...|Arrangera lager||Arrangera lager|1|
 Fit &Multi-Peak:&Gaussiskt...|Gaussiskt||Gaussiskt|1|
 Fit &Multi-Peak:&Lorentziskt...|Lorentziskt||Lorentziskt|1|
+For&mat::&Diagram ...|Diagram||Diagram|1|
+For&mat::||||1|
+For&mat::&Skalor...|Skalor||Skalor|1|
+For&mat::&Axlar...|Axlar||Axlar|1|
+For&mat::||||1|
+For&mat::&Rutnät...|Rutnät||Rutnät|1|
+For&mat::&Titel ...|Titel||Titel|1|
 Pa&nel:&Vertikalt 2 lager|Vertikalt 2 lager||Vertikalt 2 lager|1|
 Pa&nel:&Horisontellt 2 lager|Horisontellt 2 lager||Horisontellt 2 lager|1|
 Pa&nel:&4 Lager|4 Lager||4 Lager|1|

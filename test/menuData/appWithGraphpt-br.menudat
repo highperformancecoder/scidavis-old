@@ -1,5 +1,8 @@
-:Vetores &XYXY|Vetores XYXY||Vetores XYXY|1|
-:Vetores XY&AM|Vetores XYAM||Vetores XYAM|1|
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
  Linha/Símb&olo especial:&Linhas verticais gotejadas|Linhas verticais gotejadas||Linhas verticais gotejadas|1|
  Linha/Símb&olo especial:&Suavizado|Suavizado||Suavizado|1|
  Linha/Símb&olo especial:Espaçamentos &verticais|Espaçamentos verticais||Espaçamentos verticais|1|
@@ -147,10 +150,18 @@ Filtro FF&T:Passa &baixa...|Passa baixa||Passa baixa|1|
 Filtro FF&T:Passa &alta...|Passa alta||Passa alta|1|
 Filtro FF&T:Passa ba&nda...|Passa banda||Passa banda|1|
 Filtro FF&T:B&loqueia banda...|Bloqueia banda||Bloqueia banda|1|
+For&matar:&Gráfico ...|Gráfico||Gráfico|1|
+For&matar:||||1|
+For&matar:E&scalas...|Escalas||Escalas|1|
+For&matar:&Eixos...|Eixos||Eixos|1|
+For&matar:||||1|
+For&matar:G&rade ...|Grade||Grade|1|
+For&matar:&Título ...|Título||Título|1|
 Gráfico &3D:&Fita|Fita||Gráfico fita 3D|1|
 Gráfico &3D:&Barras|Barras||Gráfico barras 3D|1|
 Gráfico &3D:&Dispersão|Dispersão||Gráfico dispersão 3D|1|
 Gráfico &3D:&Trajetória|Trajetória||Gráfico trajetória 3D|1|
+P&rojetos recentes:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
 Pai&nel:2 camadas &verticais|2 camadas verticais||2 camadas verticais|1|
 Pai&nel:2 camadas &horizontais|2 camadas horizontais||2 camadas horizontais|1|
 Pai&nel:&4 camadas|4 camadas||4 camadas|1|

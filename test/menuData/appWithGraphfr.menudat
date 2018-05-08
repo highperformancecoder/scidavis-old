@@ -1,5 +1,8 @@
-:Vecteurs &XYXY|Vecteurs XYXY||Vecteurs XYXY|1|
-:Vecteurs XY&AM|Vecteurs XYAM||Vecteurs XYAM|1|
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
 &Aide:&Aide|Aide||Aide|1|
 &Aide:||||1|
 &Aide:Page d'accueil &SciDAVis|Page d'accueil SciDAVis||Page d'accueil SciDAVis|1|
@@ -116,6 +119,13 @@ Filtre &FFT:Passe ba&s...|Passe bas||Passe bas|1|
 Filtre &FFT:Passe &haut...|Passe haut||Passe haut|1|
 Filtre &FFT:Passe &bande...|Passe bande||Passe bande|1|
 Filtre &FFT:Réjecteur...|Réjecteur||Réjecteur|1|
+For&mat:&Graphique...|Graphique||Graphique|1|
+For&mat:||||1|
+For&mat:Echelle&s...|Echelles||Echelles|1|
+For&mat:&Axes...|Axes||Axes|1|
+For&mat:||||1|
+For&mat:&Grille...|Grille||Grille|1|
+For&mat:&Titre...|Titre||Titre|1|
 Graphique 3&D:&Rubans|Rubans||Grapher un rubans 3D|1|
 Graphique 3&D:&Barres|Barres||Grapher avec barres 3D|1|
 Graphique 3&D:&Nuage|Nuage||Nuage 3D|1|
@@ -149,6 +159,7 @@ Pa&nneau:&Colonne de 2 calques|Colonne de 2 calques||Colonne de 2 calques|1|
 Pa&nneau:&Rangée de 2 calques|Rangée de 2 calques||Rangée de 2 calques|1|
 Pa&nneau:Tableau de &4 calques|Tableau de 4 calques||Tableau de 4 calques|1|
 Pa&nneau:&Calques empilés|Calques empilés||Calques empilés|1|
+Projets &Récents:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
 S'adapter &Multi-Pic:&Gaussienne...|Gaussienne||Gaussienne|1|
 S'adapter &Multi-Pic:&Lorentzienne...|Lorentzienne||Lorentzienne|1|
 Scripting:&Langue de Scripting|Langue de Scripting||Langue de Scripting|1|

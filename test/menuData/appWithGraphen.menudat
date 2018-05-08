@@ -1,5 +1,8 @@
-:Vectors &XYXY|Vectors XYXY||Vectors XYXY|1|
-:Vectors XY&AM|Vectors XYAM||Vectors XYAM|1|
+:&Cut|Cut||Cut|1|
+:&Copy|Copy||Copy|1|
+:&Delete|Delete||Delete|1|
+:||||1|
+:&Properties...|Properties||Properties|1|
 &Analysis:&Translate|Translate||Translate|1|
 &Analysis:||||1|
 &Analysis:&Differentiate|Differentiate||Differentiate|1|
@@ -108,6 +111,7 @@
 &Quick Fit:Fit Lorent&zian|Fit Lorentzian||Fit Lorentzian|1|
 &Quick Fit:Fit &Multi-Peak|Fit Multi-Peak||Fit Multi-Peak|1|
 &Quick Fit:||||1|
+&Recent Projects:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
 &Smooth:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
 &Smooth:Moving Window &Average...|Moving Window Average||Moving Window Average|1|
 &Smooth:&FFT Filter...|FFT Filter||FFT Filter|1|
@@ -152,6 +156,13 @@ Fit &Multi-Peak:&Lorentzian...|Lorentzian||Lorentzian|1|
 Fit E&xponential Decay:&First Order ...|First Order||First Order|1|
 Fit E&xponential Decay:&Second Order ...|Second Order||Second Order|1|
 Fit E&xponential Decay:&Third Order ...|Third Order||Third Order|1|
+For&mat:&Plot ...|Plot||Plot|1|
+For&mat:||||1|
+For&mat:&Scales...|Scales||Scales|1|
+For&mat:&Axes...|Axes||Axes|1|
+For&mat:||||1|
+For&mat:&Grid ...|Grid||Grid|1|
+For&mat:&Title ...|Title||Title|1|
 Pa&nel:&Vertical 2 Layers|Vertical 2 Layers||Vertical 2 Layers|1|
 Pa&nel:&Horizontal 2 Layers|Horizontal 2 Layers||Horizontal 2 Layers|1|
 Pa&nel:&4 Layers|4 Layers||4 Layers|1|
