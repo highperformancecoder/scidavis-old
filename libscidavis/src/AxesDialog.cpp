@@ -1465,8 +1465,8 @@ void AxesDialog::updateScale()
 	Plot *d_plot = d_graph->plotWidget();
 	int a = Graph::mapToQwtAxis(axis);
 	const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(a);
-	double astart = min(scDiv->lowerBound(), scDiv->upperBound());
-	double aend = max(scDiv->lowerBound(), scDiv->upperBound());
+	double astart = std::min(scDiv->lowerBound(), scDiv->upperBound());
+	double aend = std::max(scDiv->lowerBound(), scDiv->upperBound());
 	double astep = d_graph->axisStep(a);
 
 	switch (axesType[a])
