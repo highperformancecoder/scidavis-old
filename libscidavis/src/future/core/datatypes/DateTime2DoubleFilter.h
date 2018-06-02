@@ -46,8 +46,8 @@ class DateTime2DoubleFilter : public AbstractSimpleFilter
 		virtual double valueAt(int row) const {
 			if (!d_inputs.value(0)) return 0;
 			QDateTime input_value = d_inputs.value(0)->dateTimeAt(row);
-			return double(input_value.date().toJulianDay()) +
-				double( -input_value.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
+			// 2440587.5 is julian date for unix epoch (1970-01-01T00:00:00)
+			return input_value.toMSecsSinceEpoch()/86400000.0 + 2440587.5;
 		}
 
 		//! Return the data type of the column

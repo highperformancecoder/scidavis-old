@@ -224,9 +224,7 @@ QString DateTimeScaleDraw::origin()
 
 QwtText DateTimeScaleDraw::label(double value) const
 {
-	QDate date = QDate::fromJulianDay(qRound(value));
-	QTime time = QTime(12,0,0,0).addMSecs(int( (value - floor(value)) * 86400000.0 ));
-	QDateTime dt = QDateTime(date, time);
+	QDateTime dt = QDateTime::fromMSecsSinceEpoch(round((value-2440587.5)*86400000.));
 	return QwtText(dt.toString(d_format));
 }
 

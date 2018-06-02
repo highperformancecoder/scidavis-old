@@ -187,7 +187,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 
 					if (g && g->axesType()[axes[i]] == Table::Time) {
 						QStringList lst = g->axisFormatInfo(axes[i]).split(";");
-						date = QDate::fromString(lst[0], "YYYY-MM-DD");
+						date = QDate::fromString(lst[0], "yyyy-MM-dd");
 						if (lst.size() >= 2) format = lst[1];
 					}
 
@@ -204,7 +204,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 					reference_dates.push_back(date);
 					reference_times.push_back(QTime());
 					if (g)
-						g->setLabelsDateTimeFormat(axes[i], Graph::Date, date.toString("YYYY-MM-DD") + ";" + format);
+						g->setLabelsDateTimeFormat(axes[i], Graph::Date, date.toString("yyyy-MM-dd") + ";" + format);
 					break;
 				}
 			case Table::DateTime:
@@ -214,7 +214,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 
 					if (g && g->axesType()[axes[i]] == Table::DateTime) {
 						QStringList lst = g->axisFormatInfo(axes[i]).split(";");
-						datetime = QDateTime::fromString(lst[0], "YYYY-MM-DDTHH:MM:SS");
+						datetime = QDateTime::fromString(lst[0], "yyyy-MM-ddThh:mm:ss");
 						if (lst.size() >= 2) format = lst[1];
 					}
 
@@ -231,7 +231,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 					reference_dates.push_back(QDate());
 					reference_times.push_back(QTime());
 					if (g)
-						g->setLabelsDateTimeFormat(axes[i], Graph::DateTime, datetime.toString("YYYY-MM-DDTHH:MM:SS") + ";" + format);
+						g->setLabelsDateTimeFormat(axes[i], Graph::DateTime, datetime.toString("yyyy-MM-ddThh:mm:ss") + ";" + format);
 					break;
 				}
 			case Table::Text:
@@ -265,8 +265,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 				case Table::DateTime:
 					{
 						QDateTime dt = cols[j]->dateTimeAt(valid_rows[i]);
-						result[j][i] = double(dt.date().toJulianDay()) +
-							double( -dt.time().msecsTo(QTime(12,0,0,0)) ) / 86400000.0;
+						result[j][i] = dt.toMSecsSinceEpoch()/86400000.+2440587.5;
 						break;
 					}
 				default:

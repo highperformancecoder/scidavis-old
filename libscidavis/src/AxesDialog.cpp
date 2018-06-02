@@ -1188,6 +1188,21 @@ bool AxesDialog::updatePlot()
 		QString to=boxEnd->text().toLower();
 		QString step=boxStep->text().toLower();
 		int a = Graph::mapToQwtAxis(axesList->currentRow());
+		switch (axesType[a])
+		{
+			case Graph::Time:
+			case Graph::Date:
+			case Graph::DateTime:
+			{
+					QDateTime qdt = QDateTime::fromString(from, "yyyy-MM-dd hh:mm:ss");
+					from = QString::number(qdt.toMSecsSinceEpoch()/86400000.+2440587.5,'f',16);
+					qdt = QDateTime::fromString(to, "yyyy-MM-dd hh:mm:ss");
+					to = QString::number(qdt.toMSecsSinceEpoch()/86400000.+2440587.5,'f',16);
+					break;
+			}
+			default: {}
+		}
+
 		double start, end, stp = 0;
 		try
 		{
@@ -1263,6 +1278,29 @@ bool AxesDialog::updatePlot()
 						break;
 				}
 			}
+			else if (axesType[a] == Graph::DateTime)
+			{
+				switch (boxUnit->currentIndex())
+				{
+					case 0: // milliseconds
+						stp *= 1./86400000.;
+						break;
+					case 1:
+						stp *= 1./86400.;
+						break;
+					case 2:
+						stp *= 1./1440.;
+						break;
+					case 3:
+						stp *= 1./24.;
+						break;
+					case 4:
+						break;
+					case 5:
+						stp *= 7;
+						break;
+				}
+			}
 		}
 
 		d_graph->setScale(a, start, end, stp, boxMajorValue->value(), boxMinorValue->currentText().toInt(),
@@ -1315,9 +1353,9 @@ bool AxesDialog::updatePlot()
 				if (format == Graph::Time)
 					lst << QTime(0,0,0).toString();
 				else if (format == Graph::Date)
-					lst << QDate(1,1,1).toString("YYYY-MM-DD");
+					lst << QDate(1900,1,1).toString("yyyy-MM-dd");
 				else
-					lst << QDateTime(QDate(1,1,1), QTime(0,0,0)).toString("YYYY-MM-DDTHH:MM:SS");
+					lst << QDateTime(QDate(1900,1,1), QTime(0,0,0)).toString("yyyy-MM-ddThh:mm:ss");
 				lst << boxFormat->currentText();
 			} else
 				lst[1] = boxFormat->currentText();
@@ -1427,13 +1465,28 @@ void AxesDialog::updateScale()
 	Plot *d_plot = d_graph->plotWidget();
 	int a = Graph::mapToQwtAxis(axis);
 	const QwtScaleDiv *scDiv=d_plot->axisScaleDiv(a);
-#if QWT_VERSION >= 0x050200
-	boxStart->setText(QString::number(qMin(scDiv->lowerBound(), scDiv->upperBound())));
-	boxEnd->setText(QString::number(qMax(scDiv->lowerBound(), scDiv->upperBound())));
-#else
-	boxStart->setText(QString::number(qMin(scDiv->lBound(), scDiv->hBound())));
-	boxEnd->setText(QString::number(qMax(scDiv->lBound(), scDiv->hBound())));
-#endif
+	double astart = min(scDiv->lowerBound(), scDiv->upperBound());
+	double aend = max(scDiv->lowerBound(), scDiv->upperBound());
+	double astep = d_graph->axisStep(a);
+
+	switch (axesType[a])
+	{
+		case Graph::Time:
+		case Graph::Date:
+		case Graph::DateTime:
+		{
+			QDateTime qdt=QDateTime::fromMSecsSinceEpoch(round((astart-2440587.5)*86400000.));
+			boxStart->setText(qdt.toString("yyyy-MM-dd hh:mm:ss"));
+			qdt=QDateTime::fromMSecsSinceEpoch(round((aend-2440587.5)*86400000.));
+			boxEnd->setText(qdt.toString("yyyy-MM-dd hh:mm:ss"));
+			break;
+		}
+		default:
+		{
+			boxStart->setText(QString::number(astart));
+			boxEnd->setText(QString::number(aend));
+		}
+	}
 
 	QwtValueList lst = scDiv->ticks (QwtScaleDiv::MajorTick);
 	boxStep->setText(QString::number(d_graph->axisStep(a)));
@@ -1453,12 +1506,42 @@ void AxesDialog::updateScale()
 		boxUnit->addItem(tr("days"));
 		boxUnit->addItem(tr("weeks"));
 	}
+	else if (axesType[a] == Graph::DateTime)
+	{
+		boxUnit->show();
+		boxUnit->addItem(tr("millisec."));
+		boxUnit->addItem(tr("sec."));
+		boxUnit->addItem(tr("min."));
+		boxUnit->addItem(tr("hours"));
+		boxUnit->addItem(tr("days"));
+		boxUnit->addItem(tr("weeks"));
+		boxUnit->setCurrentIndex(4); // days
+	}
 
 	if (d_graph->axisStep(a) != 0.0)
 	{
 		btnStep->setChecked(true);
 		boxStep->setEnabled(true);
 		boxUnit->setEnabled(true);
+		if (axesType[a] == Graph::DateTime)
+		{
+			if (abs(astep*24.-round(astep*24.)) < 1e-6*astep)
+			{
+				astep *= 24;
+				boxUnit->setCurrentIndex(3); // hours
+			}
+			else if (abs(astep*1440.-round(astep*1440.)) < 1e-6*astep)
+			{
+				astep *= 1440.;
+				boxUnit->setCurrentIndex(2); // minutes
+			}
+			else if (abs(astep*86400.-round(astep*86400.)) < 1e-6*astep)
+			{
+				astep *= 86400.;
+				boxUnit->setCurrentIndex(1); // seconds
+			}
+			boxStep->setText(QString::number(astep));
+		}
 
 		btnMajor->setChecked(false);
 		boxMajorValue->setEnabled(false);
@@ -1614,9 +1697,9 @@ void AxesDialog::updateTickLabelsList(bool on)
 			if (type == Graph::Time)
 				lst << QTime(0,0,0).toString();
 			else if (type == Graph::Date)
-				lst << QDate(1,1,1).toString("YYYY-MM-DD");
+				lst << QDate(1900,1,1).toString("yyyy-MM-dd");
 			else
-				lst << QDateTime(QDate(1,1,1), QTime(0,0,0)).toString("YYYY-MM-DDTHH:MM:SS");
+				lst << QDateTime(QDate(1900,1,1), QTime(0,0,0)).toString("yyyy-MM-ddThh:mm:ss");
 			lst << boxFormat->currentText();
 		} else
 			lst[1] = boxFormat->currentText();
@@ -1700,9 +1783,9 @@ void AxesDialog::setLabelsNumericFormat(int)
 			if (type == Graph::Time)
 				lst << QTime(0,0,0).toString();
 			else if (type == Graph::Date)
-				lst << QDate(1,1,1).toString("YYYY-MM-DD");
+				lst << QDate(1900,1,1).toString("yyyy-MM-dd");
 			else
-				lst << QDateTime(QDate(1,1,1), QTime(0,0,0)).toString("YYYY-MM-DDTHH:MM:SS");
+				lst << QDateTime(QDate(1900,1,1), QTime(0,0,0)).toString("yyyy-MM-ddThh:mm:ss");
 			lst << boxFormat->currentText();
 		} else
 			lst[1] = boxFormat->currentText();
