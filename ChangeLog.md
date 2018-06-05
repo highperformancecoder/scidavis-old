@@ -1,5 +1,12 @@
 # SciDAVis changelog
 
+=== Release 1.23 - 2018-06-04 ===
+- Bug fix release;
+- added Python 3 support
+- dropped Qt3 support
+- Russian translation updated
+- Origin import support updated
+
 # The events below are more for historical reference than for recording changes in SciDAVis
 
 # Changelog between versions 1.D1 and 1.22
