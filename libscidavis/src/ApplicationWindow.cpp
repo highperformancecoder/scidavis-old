@@ -9634,7 +9634,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 
                       CurveLayout cl;
                       cl.connectType=curve[4].toInt();
-                      cl.lCol=curve[5].toInt();
+                      cl.lCol=curve[5].toUInt();
                       if (d_file_version <= 89)
                         cl.lCol = convertOldToNewColorIndex(cl.lCol);
                       cl.lStyle=curve[6].toInt();
@@ -9645,14 +9645,20 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                       else
                         cl.sType=curve[9].toInt();
 
-                      cl.symCol=curve[10].toInt();
+                      cl.symCol=curve[10].toUInt();
                       if (d_file_version <= 89)
                         cl.symCol = convertOldToNewColorIndex(cl.symCol);
-                      cl.fillCol=curve[11].toInt();
+                      if (curve[11]=="-1")
+                        cl.symbolFill = false;
+                      else
+                      {
+                        cl.symbolFill = true;
+                        cl.fillCol=curve[11].toUInt();
+                      }
                       if (d_file_version <= 89)
                         cl.fillCol = convertOldToNewColorIndex(cl.fillCol);
                       cl.filledArea=curve[12].toInt();
-                      cl.aCol=curve[13].toInt();
+                      cl.aCol=curve[13].toUInt();
                       if (d_file_version <= 89)
                         cl.aCol = convertOldToNewColorIndex(cl.aCol);
                       cl.aStyle=curve[14].toInt();
@@ -9768,15 +9774,21 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			QStringList curve = s.split("\t");
 			CurveLayout cl;
 			cl.connectType=curve[6].toInt();
-			cl.lCol=curve[7].toInt();
+			cl.lCol=curve[7].toUInt();
 			cl.lStyle=curve[8].toInt();
 			cl.lWidth=curve[9].toInt();
 			cl.sSize=curve[10].toInt();
 			cl.sType=curve[11].toInt();
-			cl.symCol=curve[12].toInt();
-			cl.fillCol=curve[13].toInt();
+			cl.symCol=curve[12].toUInt();
+			if (curve[13]=="-1")
+				cl.symbolFill = false;
+			else
+			{
+				cl.symbolFill = true;
+				cl.fillCol=curve[13].toUInt();
+			}
 			cl.filledArea=curve[14].toInt();
-			cl.aCol=curve[15].toInt();
+			cl.aCol=curve[15].toUInt();
 			cl.aStyle=curve[16].toInt();
 			int current_index = 17;
 			if(curve.count() < 16)
@@ -13571,7 +13583,7 @@ QString ApplicationWindow::versionString()
 }
 
 
-int ApplicationWindow::convertOldToNewColorIndex(int cindex)
+unsigned int ApplicationWindow::convertOldToNewColorIndex(unsigned int cindex)
 {
 	if( (cindex == 13) || (cindex == 14) ) // white and light gray
 		return cindex + 4;

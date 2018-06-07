@@ -48,9 +48,9 @@ public:
 	QColor color() const;
 		
 	//! Return the index for a given color
-	static int colorIndex(const QColor& c);
+	static unsigned int colorIndex(const QColor& c);
 	//! Return the color at index 'colorindex'
-	static QColor color(int colorIndex);
+	static QColor color(unsigned int colorIndex);
     //! Returns TRUE if the color is included in the color box, otherwise returns FALSE.
     static bool isValidColor(const QColor& color);
 	//! Returns the number of predefined colors

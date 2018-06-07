@@ -94,9 +94,11 @@ class PlotDialog : public QDialog
 
 		void removeSelectedCurve();
 
-        //line plots
-        void pickBoxLineColor();
-        void pickBoxAreaColor();
+		//line plots
+		void pickBoxLineColor();
+		void pickBoxAreaColor();
+		void pickBoxSymbolColor();
+		void pickBoxFillColor();
 
 		/******* error bars options **************/
 		void pickErrorBarsColor();
@@ -187,7 +189,7 @@ class PlotDialog : public QDialog
         ColorButton* boxLineColor, *boxAreaColor;
 		QWidget* symbolPage;
 		QSpinBox* boxSymbolSize;
-		ColorBox* boxSymbolColor,*boxFillColor;
+		ColorButton* boxSymbolColor,*boxFillColor;
 		SymbolBox* boxSymbolStyle;
 		PatternBox *boxPattern;
 		QTabWidget* privateTabWidget;
