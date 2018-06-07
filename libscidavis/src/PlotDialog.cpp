@@ -544,11 +544,11 @@ void PlotDialog::initSymbolsPage()
     gl->addWidget(boxSymbolSize, 1, 1);
 	boxFillSymbol = new QCheckBox( tr( "Fill Color" ));
     gl->addWidget(boxFillSymbol, 2, 0);
-	boxFillColor = new ColorBox();
-    gl->addWidget(boxFillColor, 2, 1);
-    gl->addWidget(new QLabel(tr( "Edge Color" )), 3, 0);
-	boxSymbolColor = new ColorBox();
-    gl->addWidget(boxSymbolColor, 3, 1);
+	boxFillColor = new ColorButton();
+	gl->addWidget(boxFillColor, 2, 1);
+	gl->addWidget(new QLabel(tr( "Edge Color" )), 3, 0);
+	boxSymbolColor = new ColorButton();
+	gl->addWidget(boxSymbolColor, 3, 1);
     gl->addWidget(new QLabel(tr( "Edge Width" )), 4, 0);
 	boxPenWidth = new QSpinBox();
     boxPenWidth->setRange(1, 100);
@@ -561,9 +561,9 @@ void PlotDialog::initSymbolsPage()
 
 	privateTabWidget->addTab(symbolPage, tr( "Symbol" ));
 
-	connect(boxSymbolColor, SIGNAL(activated(int)), this, SLOT(acceptParams()));
+	connect(boxSymbolColor, SIGNAL(clicked()), this, SLOT(pickBoxSymbolColor()));
 	connect(boxSymbolStyle, SIGNAL(activated(int)), this, SLOT(acceptParams()));
-	connect(boxFillColor, SIGNAL(activated(int)), this, SLOT(acceptParams()));
+	connect(boxFillColor, SIGNAL(clicked()), this, SLOT(pickBoxFillColor()));
 	connect(boxFillSymbol, SIGNAL(clicked()), this, SLOT(fillSymbols()));
 }
 
@@ -1259,6 +1259,24 @@ void PlotDialog::pickBoxAreaColor()
         return;
 
     boxAreaColor->setColor(color);
+}
+
+void PlotDialog::pickBoxSymbolColor()
+{
+    QColor color = QColorDialog::getColor(boxSymbolColor->color(), this);
+    if ( !color.isValid() || color == boxSymbolColor->color() )
+        return;
+
+    boxSymbolColor->setColor(color);
+}
+
+void PlotDialog::pickBoxFillColor()
+{
+    QColor color = QColorDialog::getColor(boxFillColor->color(), this);
+    if ( !color.isValid() || color == boxFillColor->color() )
+        return;
+
+    boxFillColor->setColor(color);
 }
 
 void PlotDialog::pickErrorBarsColor()

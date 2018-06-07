@@ -72,8 +72,9 @@ typedef struct{
   int filledArea;  //!< flag: toggles area filling under curve
   unsigned int aCol; //!< curve area color
   int aStyle;      //!< area filling style
-  int symCol;      //!< symbol outline color
-  int fillCol;     //!< symbol fill color
+  unsigned int symCol; //!< symbol outline color
+  bool symbolFill; //!< flag: toggles symbol filling
+  unsigned int fillCol; //!< symbol fill color
   int penWidth;    //!< symbol outline width
   int sSize;       //!< symbol size
   int sType;       //!< symbol type (shape)

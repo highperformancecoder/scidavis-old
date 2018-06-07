@@ -9645,10 +9645,16 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                       else
                         cl.sType=curve[9].toInt();
 
-                      cl.symCol=curve[10].toInt();
+                      cl.symCol=curve[10].toUInt();
                       if (d_file_version <= 89)
                         cl.symCol = convertOldToNewColorIndex(cl.symCol);
-                      cl.fillCol=curve[11].toInt();
+                      if (curve[11]=="-1")
+                        cl.symbolFill = false;
+                      else
+                      {
+                        cl.symbolFill = true;
+                        cl.fillCol=curve[11].toUInt();
+                      }
                       if (d_file_version <= 89)
                         cl.fillCol = convertOldToNewColorIndex(cl.fillCol);
                       cl.filledArea=curve[12].toInt();
@@ -9773,8 +9779,14 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			cl.lWidth=curve[9].toInt();
 			cl.sSize=curve[10].toInt();
 			cl.sType=curve[11].toInt();
-			cl.symCol=curve[12].toInt();
-			cl.fillCol=curve[13].toInt();
+			cl.symCol=curve[12].toUInt();
+			if (curve[13]=="-1")
+				cl.symbolFill = false;
+			else
+			{
+				cl.symbolFill = true;
+				cl.fillCol=curve[13].toUInt();
+			}
 			cl.filledArea=curve[14].toInt();
 			cl.aCol=curve[15].toUInt();
 			cl.aStyle=curve[16].toInt();
