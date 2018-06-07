@@ -42,10 +42,14 @@ def import_to_global(modname, attrs=None, math=False):
 		mod = getattr(mod, submod)
 	if attrs==None: attrs=dir(mod)
 	for name in attrs:
-		f = getattr(mod, name)
-		setattr(__main__, name, f)
-		# make functions available in SciDAVis' math function list
-		if math and callable(f): __main__.scidavis.mathFunctions[name] = f
+		try:
+			f = getattr(mod, name)
+			setattr(__main__, name, f)
+			# make functions available in SciDAVis' math function list
+			if math and callable(f): __main__.scidavis.mathFunctions[name] = f
+		except AttributeError:
+			# ignore non available (or renamed) functions
+			pass
 
 # Import standard math functions and constants into global namespace.
 import_to_global("math", None, True)
@@ -154,11 +158,10 @@ try:
 		# Derivatives of Bessel Functions
 		"jvp", "yvp", "kvp", "ivp", "h1vp", "h2vp",
 		# Spherical Bessel Functions
-		## if scipy version is < 1.0.0
-		#"sph_jn", "sph_yn", "sph_jnyn", "sph_in", "sph_kn", "sph_inkn",
-		## else
-		#"spherical_jn", "spherical_yn", "spherical_in", "spherical_kn",
-		### removing SBFs for a while, until someone finds a way for these two options to coexist
+		# scipy version < 1.0.0
+		"sph_jn", "sph_yn", "sph_jnyn", "sph_in", "sph_kn", "sph_inkn",
+		# scipy version >= 1.0.0
+		"spherical_jn", "spherical_yn", "spherical_in", "spherical_kn",
 		# Ricatti-Bessel Functions
 		"riccati_jn", "riccati_yn",
 		# Struve Functions
