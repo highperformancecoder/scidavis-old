@@ -189,7 +189,7 @@ QColor ColorBox::color() const
 		return QColor(Qt::black); // default color is black.
 }
 
-int ColorBox::colorIndex(const QColor& c)
+unsigned int ColorBox::colorIndex(const QColor& c)
 {
 	const QColor *ite = std::find(std::begin(colors), std::end(colors), c);
 	if (ite->isValid())
@@ -198,12 +198,18 @@ int ColorBox::colorIndex(const QColor& c)
 		return c.rgba();
 }
 
-QColor ColorBox::color(int colorIndex)
+QColor ColorBox::color(unsigned int colorIndex)
 {
 	if (colorIndex < colors_count)
 		return colors[colorIndex];
 	else
-		return QColor(Qt::black); // default color is black.
+	{
+		QColor qc = QColor::fromRgba(colorIndex);
+		if (qc.isValid())
+			return qc;
+		else
+			return QColor(Qt::black); // default color is black.
+	}
 }
 
 bool ColorBox::isValidColor(const QColor& color)

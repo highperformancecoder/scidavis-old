@@ -1046,7 +1046,7 @@ private:
   bool validFor2DPlot(Table *table, int type);
 
   //! Workaround for the new colors introduced in rev 447
-  int convertOldToNewColorIndex(int cindex);
+  unsigned int convertOldToNewColorIndex(unsigned int cindex);
 
   //! Stores the pointers to the dragged items from the FolderListViews objects
   QList<QTreeWidgetItem *> draggedItems;

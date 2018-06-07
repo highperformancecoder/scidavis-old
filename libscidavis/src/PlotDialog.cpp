@@ -500,16 +500,16 @@ void PlotDialog::initLinePage()
 	gl1->addWidget(boxLineWidth, 2, 1);
 
 	gl1->addWidget(new QLabel(tr( "Color" )), 3, 0);
-    boxLineColor = new ColorButton();
-    gl1->addWidget(boxLineColor, 3, 1);
-    gl1->setRowStretch (4, 1);
+	boxLineColor = new ColorButton();
+	gl1->addWidget(boxLineColor, 3, 1);
+	gl1->setRowStretch (4, 1);
 
 	fillGroupBox = new QGroupBox(tr( "Fill area under curve" ));
 	fillGroupBox->setCheckable(true);
 	QGridLayout *gl2 = new QGridLayout(fillGroupBox);
-    gl2->addWidget(new QLabel(tr( "Fill color" )), 0, 0);
-    boxAreaColor = new ColorButton();
-    gl2->addWidget(boxAreaColor, 0, 1);
+	gl2->addWidget(new QLabel(tr( "Fill color" )), 0, 0);
+	boxAreaColor = new ColorButton();
+	gl2->addWidget(boxAreaColor, 0, 1);
 	gl2->addWidget(new QLabel(tr( "Pattern" )), 1, 0);
 	boxPattern = new PatternBox();
 	gl2->addWidget(boxPattern, 1, 1);
