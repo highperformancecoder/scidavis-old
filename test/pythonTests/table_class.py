@@ -113,4 +113,18 @@ t3.sortColumns((1,3),0,1,"2") #sort columns 1 and 3, separately, descending
 assert t3.cell(1,1) >= t3.cell(1,2)
 assert t3.cell(3,1) >= t3.cell(3,2)
 
+# test massive table creation and removal
+ntables = 15
+createlist = list(range(1,ntables))
+closelist = createlist[:]
+random.shuffle(closelist)
+
+for i in createlist:
+ t=newTable("Table" + str(i))
+
+for j in closelist:
+ t=table("Table" + str(j))
+ t.confirmClose(False)
+ t.close()
+
 app.exit()

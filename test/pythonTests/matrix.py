@@ -58,4 +58,19 @@ M.setNumericPrecision(2)
 m1.setNumericPrecision(3)
 # there isn't a command to check if setNumericPrecision() works - visual check only -> OK
 
+# test massive matrix creation and removal
+import random
+nmatrices = 20
+createlist = list(range(1,nmatrices))
+closelist = createlist[:]
+random.shuffle(closelist)
+
+for i in createlist:
+ m=newMatrix("Matrix" + str(i))
+
+for j in closelist:
+ m=matrix("Matrix" + str(j))
+ m.confirmClose(False)
+ m.close()
+
 app.exit()
