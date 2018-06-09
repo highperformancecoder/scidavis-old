@@ -86,7 +86,7 @@ Matrix::Matrix()
 
 Matrix::~Matrix()
 {
-	delete d_view;
+	// delete d_view;
 }
 
 void Matrix::setView(MatrixView * view)
