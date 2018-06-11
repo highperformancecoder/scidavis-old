@@ -77,7 +77,7 @@ Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ign
 	{
 		d_future_table = static_cast<future::Table *>(filter.importAspect(file));
 		if (!d_future_table)
-			d_future_table = new future::Table(0, 0, 0, label);
+			d_future_table = new future::Table(0, 0, label);
 		else
 			d_future_table->setName(label);
 	}
@@ -88,14 +88,13 @@ Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ign
 Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
 	: TableView(label, parent, name,f), scripted(env)
 {
-	d_future_table = new future::Table(0, r, c, label);
+	d_future_table = new future::Table(r, c, label);
 	init();
 }
 
 void Table::init()
 {
 	TableView::setTable(d_future_table);	
-	d_future_table->setView(this);	
 
 	birthdate = d_future_table->creationTime().toString(Qt::LocalDate);
 

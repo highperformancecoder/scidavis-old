@@ -86,6 +86,7 @@ void TableView::setTable(future::Table * table)
 	d_table = table;
 	d_model = new TableModel(table);
 	init();
+        d_table->setView(this);
 }
 
 void TableView::init()

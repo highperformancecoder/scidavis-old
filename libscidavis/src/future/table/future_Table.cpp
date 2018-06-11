@@ -90,7 +90,7 @@ int Table::default_column_width = 120;
 Table::Table(AbstractScriptingEngine *engine, int rows, int columns, const QString& name)
 	: AbstractPart(name), d_plot_menu(0), scripted(engine), d_table_private(*this)
 #else
-Table::Table(void *, int rows, int columns, const QString& name)
+Table::Table(int rows, int columns, const QString& name)
   : AbstractPart(name), d_plot_menu(0), d_table_private(*this)
 #endif
 {

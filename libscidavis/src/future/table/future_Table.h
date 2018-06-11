@@ -49,6 +49,7 @@ class AbstractColumn;
 class ActionManager;
 class TableStatistics;
 class TeXTableSettings;
+class Table;
 
 namespace future
 {
@@ -83,7 +84,10 @@ class Table : public AbstractPart
 #endif
 {
   Q_OBJECT
-
+  // only called by ::Table::init()
+  void setView(TableView * view);
+  friend ::TableView;
+  
 public:
   class Private; // This could also be private, but then all commands need to be friend classes
   friend class Private;
@@ -91,8 +95,7 @@ public:
 #ifndef LEGACY_CODE_0_2_x
   Table(AbstractScriptingEngine *engine, int rows, int columns, const QString &name);
 #else
-  Table(void *engine, int rows, int columns, const QString &name);
-  void setView(TableView * view);
+  Table(int rows, int columns, const QString &name);
   friend class ::TableStatistics;
 #endif
   virtual ~Table();
