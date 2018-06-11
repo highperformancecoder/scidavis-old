@@ -50,15 +50,14 @@
 class TableInsertColumnsCmd : public QUndoCommand
 {
 public:
-	TableInsertColumnsCmd( future::Table::Private * private_obj, int before, QList<Column*> cols, QUndoCommand * parent = 0 );
-	~TableInsertColumnsCmd();
+	TableInsertColumnsCmd( future::Table::Private& private_obj, int before, QList<Column*> cols, QUndoCommand * parent = 0 );
 
-	virtual void redo();
-	virtual void undo();
+	void redo() override;
+	void undo() override;
 
 private:
 	//! The private object to modify
-	future::Table::Private * d_private_obj;
+	future::Table::Private& d_private_obj;
 	//! Column to insert before
 	int d_before;
 	//! The new columns
@@ -79,15 +78,14 @@ private:
 class TableSetNumberOfRowsCmd : public QUndoCommand
 {
 public:
-	TableSetNumberOfRowsCmd( future::Table::Private * private_obj, int rows, QUndoCommand * parent = 0 );
-	~TableSetNumberOfRowsCmd();
+	TableSetNumberOfRowsCmd( future::Table::Private& private_obj, int rows, QUndoCommand * parent = 0 );
 
-	virtual void redo();
-	virtual void undo();
+	void redo() override;
+	void undo() override;
 
 private:
 	//! The private object to modify
-	future::Table::Private * d_private_obj;
+	future::Table::Private& d_private_obj;
 	//! Number of rows
 	int d_rows;
 	//! Number of rows before
@@ -105,15 +103,14 @@ private:
 class TableRemoveColumnsCmd : public QUndoCommand
 {
 public:
-	TableRemoveColumnsCmd( future::Table::Private * private_obj, int first, int count, QList<Column*> cols, QUndoCommand * parent = 0 );
-	~TableRemoveColumnsCmd();
+	TableRemoveColumnsCmd( future::Table::Private& private_obj, int first, int count, QList<Column*> cols, QUndoCommand * parent = 0 );
 
-	virtual void redo();
-	virtual void undo();
+	void redo() override;
+	void undo() override;
 
 private:
 	//! The private object to modify
-	future::Table::Private * d_private_obj;
+	future::Table::Private& d_private_obj;
 	//! The first column
 	int d_first;
 	//! The number of columns to be removed
@@ -133,15 +130,14 @@ private:
 class TableMoveColumnCmd : public QUndoCommand
 {
 public:
-	TableMoveColumnCmd( future::Table::Private * private_obj, int from, int to, QUndoCommand * parent = 0 );
-	~TableMoveColumnCmd();
+	TableMoveColumnCmd( future::Table::Private& private_obj, int from, int to, QUndoCommand * parent = 0 );
 
-	virtual void redo();
-	virtual void undo();
+	void redo() override;
+	void undo() override;
 
 private:
 	//! The private object to modify
-	future::Table::Private * d_private_obj;
+	future::Table::Private& d_private_obj;
 	//! The old column index
 	int d_from;
 	//! The new column index
