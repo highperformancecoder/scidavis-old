@@ -2551,7 +2551,7 @@ Table* ApplicationWindow::newTable(int r, int c, const QString& name, const QStr
 
 Table* ApplicationWindow::newTable(const QString& name, const QString& legend, QList<Column *> columns)
 {
-	Table* w = new Table(scriptEnv, 0, 0, legend, 0, 0);
+	Table* w = new Table(scriptEnv, 0, 0, legend, d_workspace, 0);
 	w->d_future_table->appendColumns(columns);
 	w->setName(name);
 	d_project->addChild(w->d_future_table);
@@ -2560,12 +2560,9 @@ Table* ApplicationWindow::newTable(const QString& name, const QString& legend, Q
 
 Table* ApplicationWindow::newHiddenTable(const QString& name, const QString& label, QList<Column *> columns)
 {
-	Table* w = new Table(scriptEnv, 0, 0, label, 0, 0);
-	w->d_future_table->appendColumns(columns);
-	w->setName(name);
-	d_project->addChild(w->d_future_table);
-	hideWindow(w);
-	return w;
+  auto w=newTable(name,label,columns);
+  hideWindow(w);
+  return w;
 }
 
 void ApplicationWindow::initTable(Table* w)

@@ -11,45 +11,46 @@ using namespace std;
 
 void Unittests::fft()
 {
-  Table table(scriptEnv,30,2,"");
-  table.setColName(0,"x");
-  table.setColName(1,"y");
+  ApplicationWindow app;
+  auto table=app.newTable("",30,2);
+  table->setColName(0,"x");
+  table->setColName(1,"y");
   
-  auto& colX=*table.column(0);
-  auto& colY=*table.column(1);
-  for (int r=0; r<table.numRows(); ++r)
+  auto& colX=*table->column(0);
+  auto& colY=*table->column(1);
+  for (int r=0; r<table->numRows(); ++r)
     {
       colX.setValueAt(r,r);
       colY.setValueAt(r,sin(r));
     }
 
-  Graph graph;
-  graph.insertCurve(&table,"x","y",Graph::Line);
+  auto graph=new Graph(&app);
+  graph->insertCurve(table,"x","y",Graph::Line);
 
-  ApplicationWindow app;
-  FFT fft1(&app,&table,"y");
-  fft1.run();
+  auto fft1=new FFT(&app,table,"y");
+  fft1->run();
   // FFT creates a hidden table, which we need to find.
   Table* table1=nullptr;
   for (auto i: *app.windowsList())
     if (auto t=dynamic_cast<Table*>(i))
-      {
-        table1=t;
-        break;
-      }
+      if (t!=table)
+        {
+          table1=t;
+          break;
+        }
 
   
 
   QVERIFY(table1);
 
-  FFT fft2(&app,&graph,"y");
-  fft2.run();
+  auto fft2=new FFT(&app,graph,"y");
+  fft2->run();
   Table* table2=nullptr;
   for (auto i: *app.windowsList())
-    if (auto table=dynamic_cast<Table*>(i))
-      if (table!=table1)
+    if (auto t=dynamic_cast<Table*>(i))
+      if (t!=table && t!=table1)
         {
-          table2=table;
+          table2=t;
           break;
         }
 

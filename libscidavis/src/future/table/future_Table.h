@@ -38,6 +38,7 @@
 #include "globals.h"
 #include <QList>
 #include <QStringList>
+#include <QPointer>
 
 class TableView;
 class QUndoStack;
@@ -446,7 +447,7 @@ class Table : public AbstractPart
 		QAction * action_statistics_rows;
 		//@}
 
-		TableView *d_view;
+  QPointer<TableView> d_view;
 		Private *d_table_private;
 };
 

@@ -49,6 +49,7 @@
 #include <QScrollArea>
 #include "ui_controltabs.h"
 #include <QtDebug>
+#include <QPointer>
 #include "globals.h"
 #include "MyWidget.h"
 #include "lib/IntervalAttribute.h"
@@ -234,7 +235,7 @@ class TableView : public MyWidget
 		QToolButton * d_hide_button;
 		QHBoxLayout * d_main_layout;
 		TableDoubleHeaderView * d_horizontal_header;
-		future::Table * d_table;
+  QPointer<future::Table> d_table;
 
 		//! Initialization
 		void init();

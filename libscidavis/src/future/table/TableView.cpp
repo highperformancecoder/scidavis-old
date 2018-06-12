@@ -197,10 +197,13 @@ void TableView::rereadSectionSizes()
 {
 	disconnect(d_horizontal_header, SIGNAL(sectionResized(int, int, int)), this, SLOT(handleHorizontalSectionResized(int, int, int)));
 
-	int cols = d_table->columnCount();
-	for (int i=0; i<cols; i++)
+        if (d_table)
+          {
+            int cols = d_table->columnCount();
+            for (int i=0; i<cols; i++)
 		d_horizontal_header->resizeSection(i, d_table->columnWidth(i));
-		
+          }
+        
 	connect(d_horizontal_header, SIGNAL(sectionResized(int, int, int)), this, SLOT(handleHorizontalSectionResized(int, int, int)));
 }
 
@@ -217,14 +220,17 @@ int TableView::columnWidth(int col) const
 void TableView::handleHorizontalSectionResized(int logicalIndex, int, int newSize)
 {
 	static bool inside = false;
-	d_table->setColumnWidth(logicalIndex, newSize);
-	if (inside) return;
-	inside = true;
+        if (d_table)
+          {
+            d_table->setColumnWidth(logicalIndex, newSize);
+            if (inside) return;
+            inside = true;
 
-	int cols = d_table->columnCount();
-	for (int i=0; i<cols; i++)
-		if(isColumnSelected(i, true)) 
-			d_horizontal_header->resizeSection(i, newSize);
+            int cols = d_table->columnCount();
+            for (int i=0; i<cols; i++)
+              if(isColumnSelected(i, true)) 
+                d_horizontal_header->resizeSection(i, newSize);
+          }
 
 	inside = false;
 }
@@ -265,13 +271,16 @@ void TableView::retranslateStrings()
 	
 void TableView::advanceCell()
 {
-	QModelIndex idx = d_view_widget->currentIndex();
-    if(idx.row()+1 >= d_table->rowCount())
+  if (d_table)
+    {
+      QModelIndex idx = d_view_widget->currentIndex();
+      if(idx.row()+1 >= d_table->rowCount())
 	{
-		int new_size = d_table->rowCount()+1;
-		d_table->setRowCount(new_size);
+          int new_size = d_table->rowCount()+1;
+          d_table->setRowCount(new_size);
 	}
-	d_view_widget->setCurrentIndex(idx.sibling(idx.row()+1, idx.column()));
+      d_view_widget->setCurrentIndex(idx.sibling(idx.row()+1, idx.column()));
+    }
 }
 
 void TableView::goToCell(int row, int col)
@@ -308,7 +317,8 @@ void TableView::handleHorizontalSectionMoved(int, int from, int to)
 	inside = true;
 	d_view_widget->horizontalHeader()->moveSection(to, from);
 	inside = false;
-	d_table->moveColumn(from, to);
+        if (d_table)
+          d_table->moveColumn(from, to);
 }
 
 void TableView::handleHorizontalHeaderDoubleClicked(int index)
@@ -337,14 +347,16 @@ void TableView::currentColumnChanged(const QModelIndex & current, const QModelIn
 {
 	Q_UNUSED(previous);
 	int col = current.column();	
-	if(col < 0 || col >= d_table->columnCount()) return;
+	if(col < 0 || d_table && col >= d_table->columnCount()) return;
 	setColumnForControlTabs(col);
 }
 
 void TableView::setColumnForControlTabs(int col)
 {
-	if(col < 0 || col >= d_table->columnCount()) return;
-	Column *col_ptr = d_table->column(col);
+  if (d_table)
+    {
+      if(col < 0 || col >= d_table->columnCount()) return;
+      Column *col_ptr = d_table->column(col);
 
 	QString str = tr("Current column:\nName: %1\nPosition: %2")\
 		.arg(col_ptr->name()).arg(col+1);
@@ -381,21 +393,29 @@ void TableView::setColumnForControlTabs(int col)
 			break;
 	}
 	ui.formula_box->setText(col_ptr->formula(0));
+
+    }
 }
 
 void TableView::handleAspectDescriptionChanged(const AbstractAspect * aspect)
 {
-	const Column * col = qobject_cast<const Column*>(aspect);
-	if (!col || col->parentAspect() != static_cast<AbstractAspect*>(d_table))
-		return;
-	ui.add_reference_combobox->setItemText(d_table->columnIndex(col), "col(\"" + col->name() + "\")");
+  if (d_table)
+    {
+      const Column * col = qobject_cast<const Column*>(aspect);
+      if (!col || col->parentAspect() != static_cast<AbstractAspect*>(d_table))
+        return;
+      ui.add_reference_combobox->setItemText(d_table->columnIndex(col), "col(\"" + col->name() + "\")");
+    }
 }
 
 void TableView::handleAspectAdded(const AbstractAspect *aspect) {
-	const Column * col = qobject_cast<const Column*>(aspect);
-	if (!col || col->parentAspect() != static_cast<AbstractAspect*>(d_table))
-		return;
-	ui.add_reference_combobox->insertItem(d_table->indexOfChild(aspect), "col(\"" + col->name() + "\")");
+  if (d_table)
+    {
+      const Column * col = qobject_cast<const Column*>(aspect);
+      if (!col || col->parentAspect() != static_cast<AbstractAspect*>(d_table))
+        return;
+      ui.add_reference_combobox->insertItem(d_table->indexOfChild(aspect), "col(\"" + col->name() + "\")");
+    }
 }
 
 void TableView::handleAspectAboutToBeRemoved(const AbstractAspect *parent, int index) {
@@ -617,7 +637,7 @@ void TableView::applyDescription()
 {
 	QItemSelectionModel * sel_model = d_view_widget->selectionModel();
 	int index = sel_model->currentIndex().column();
-	if(index >= 0)
+	if(d_table && index >= 0)
 	{
 		// changing the name triggers an update of the UI, which also resets the content of the
 		// comment box => need to cache it so name and comment can be changed simultaneously
@@ -703,19 +723,24 @@ void TableView::handleHeaderDataChanged(Qt::Orientation orientation, int first, 
 int TableView::selectedColumnCount(bool full)
 {
 	int count = 0;
-	int cols = d_table->columnCount();
-	for (int i=0; i<cols; i++)
-		if(isColumnSelected(i, full)) count++;
+        if (d_table)
+          {
+            int cols = d_table->columnCount();
+            for (int i=0; i<cols; i++)
+              if(isColumnSelected(i, full)) count++;
+          }
 	return count;
 }
 
 int TableView::selectedColumnCount(SciDAVis::PlotDesignation pd)
 {
 	int count = 0;
-	int cols = d_table->columnCount();
-	for(int i=0; i<cols; i++)
-		if( isColumnSelected(i, false) && (d_table->column(i)->plotDesignation() == pd) ) count++;
-
+        if (d_table)
+          {
+            int cols = d_table->columnCount();
+            for(int i=0; i<cols; i++)
+              if( isColumnSelected(i, false) && (d_table->column(i)->plotDesignation() == pd) ) count++;
+          }
 	return count;
 }
 
@@ -730,19 +755,24 @@ bool TableView::isColumnSelected(int col, bool full)
 QList<Column*> TableView::selectedColumns(bool full)
 {
 	QList<Column*> list;
-	int cols = d_table->columnCount();
-	for (int i=0; i<cols; i++)
-		if(isColumnSelected(i, full)) list << d_table->column(i);
-
+        if (d_table)
+          {
+            int cols = d_table->columnCount();
+            for (int i=0; i<cols; i++)
+              if(isColumnSelected(i, full)) list << d_table->column(i);
+          }
 	return list;
 }
 
 int TableView::selectedRowCount(bool full)
 {
 	int count = 0;
-	int rows = d_table->rowCount();
-	for (int i=0; i<rows; i++)
-		if(isRowSelected(i, full)) count++;
+        if (d_table)
+          {
+            int rows = d_table->rowCount();
+            for (int i=0; i<rows; i++)
+              if(isRowSelected(i, full)) count++;
+          }
 	return count;
 }
 
@@ -756,50 +786,63 @@ bool TableView::isRowSelected(int row, bool full)
 
 int TableView::firstSelectedColumn(bool full)
 {
-	int cols = d_table->columnCount();
-	for (int i=0; i<cols; i++)
+  if (d_table)
+    {
+      int cols = d_table->columnCount();
+      for (int i=0; i<cols; i++)
 	{
-		if(isColumnSelected(i, full))
-			return i;
+          if(isColumnSelected(i, full))
+            return i;
 	}
-	return -1;
+    }
+  return -1;
 }
 
 int TableView::lastSelectedColumn(bool full)
 {
-	int cols = d_table->columnCount();
-	for(int i=cols-1; i>=0; i--)
-		if(isColumnSelected(i, full)) return i;
-
-	return -2;
+  if (d_table)
+    {
+      int cols = d_table->columnCount();
+      for(int i=cols-1; i>=0; i--)
+        if(isColumnSelected(i, full)) return i;
+    }
+  return -2;
 }
 
 int TableView::firstSelectedRow(bool full)
 {
-	int rows = d_table->rowCount();
-	for (int i=0; i<rows; i++)
+  if (d_table)
+    {
+      int rows = d_table->rowCount();
+      for (int i=0; i<rows; i++)
 	{
-		if(isRowSelected(i, full))
-			return i;
+          if(isRowSelected(i, full))
+            return i;
 	}
-	return -1;
+    }
+  return -1;
 }
 
 int TableView::lastSelectedRow(bool full)
 {
-	int rows = d_table->rowCount();
-	for(int i=rows-1; i>=0; i--)
-		if(isRowSelected(i, full)) return i;
-
-	return -2;
+  if (d_table)
+    {
+      int rows = d_table->rowCount();
+      for(int i=rows-1; i>=0; i--)
+        if(isRowSelected(i, full)) return i;
+    }
+  return -2;
 }
 
 IntervalAttribute<bool> TableView::selectedRows(bool full) {
 	IntervalAttribute<bool> result;
-	int rows = d_table->rowCount();
-	for (int i=0; i<rows; i++)
-		if (isRowSelected(i, full))
-			result.setValue(i, true);
+        if (d_table)
+          {
+            int rows = d_table->rowCount();
+            for (int i=0; i<rows; i++)
+              if (isRowSelected(i, full))
+                result.setValue(i, true);
+          }
 	return result;
 }
 
@@ -827,7 +870,7 @@ bool TableView::hasMultiSelection()
 
 bool TableView::isCellSelected(int row, int col)
 {
-	if(row < 0 || col < 0 || row >= d_table->rowCount() || col >= d_table->columnCount()) return false;
+	if(!d_table || row < 0 || col < 0 || row >= d_table->rowCount() || col >= d_table->columnCount()) return false;
 
 	return d_view_widget->selectionModel()->isSelected(d_model->index(row, col));
 }
@@ -865,7 +908,7 @@ bool TableView::eventFilter(QObject * watched, QEvent * event)
 {
 	QHeaderView * v_header = d_view_widget->verticalHeader();
 
-	if (event->type() == QEvent::ContextMenu) 
+	if (d_table && event->type() == QEvent::ContextMenu) 
 	{
 		QContextMenuEvent *cm_event = static_cast<QContextMenuEvent *>(event);
 		QPoint global_pos = cm_event->globalPos();
@@ -904,7 +947,7 @@ void TableView::activateFormulaMode(bool on)
 
 void TableView::goToNextColumn()
 {
-	if (d_table->columnCount() == 0) return;
+	if (!d_table || d_table->columnCount() == 0) return;
 
 	QModelIndex idx = d_view_widget->currentIndex();
 	int col = idx.column()+1;
@@ -915,7 +958,7 @@ void TableView::goToNextColumn()
 
 void TableView::goToPreviousColumn()
 {
-	if (d_table->columnCount() == 0) return;
+	if (!d_table || d_table->columnCount() == 0) return;
 
 	QModelIndex idx = d_view_widget->currentIndex();
 	int col = idx.column()-1;

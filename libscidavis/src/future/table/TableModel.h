@@ -35,6 +35,7 @@
 #include <QStringList>
 #include "core/AbstractFilter.h"
 #include <QColor>
+#include <QPointer>
 
 class Column;
 namespace future{ class Table; }
@@ -104,7 +105,7 @@ class TableModel : public QAbstractItemModel
 		//@}
 
 	private:
-		future::Table * d_table;
+  QPointer<future::Table> d_table;
 		//! Toggle flag for formula mode
 		bool d_formula_mode;
 

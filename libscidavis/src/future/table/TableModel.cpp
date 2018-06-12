@@ -84,7 +84,7 @@ Qt::ItemFlags TableModel::flags(const QModelIndex & index ) const
 
 QVariant TableModel::data(const QModelIndex &index, int role) const
 {
-	if( !index.isValid() )
+	if( !index.isValid() || !d_table )
 		return QVariant();
 	
 	int row = index.row();
@@ -135,24 +135,22 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 
 QVariant TableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-	return d_table->headerData(section, orientation, role);
+  return d_table? d_table->headerData(section, orientation, role): QVariant();
 }
 
-int TableModel::rowCount(const QModelIndex &parent) const
+int TableModel::rowCount(const QModelIndex &) const
 {
-	Q_UNUSED(parent)
-	return d_table->rowCount();
+  return d_table? d_table->rowCount(): 0;
 }
 
-int TableModel::columnCount(const QModelIndex & parent) const
+int TableModel::columnCount(const QModelIndex &) const
 {
-	Q_UNUSED(parent)
-	return d_table->columnCount();
+  return d_table? d_table->columnCount(): 0;
 }
 
 bool TableModel::setData(const QModelIndex & index, const QVariant & value, int role)
 {
-	if (!index.isValid())
+	if (!index.isValid() || !d_table)
 		return false;
 
 	int row = index.row();
@@ -184,10 +182,9 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
 	return false;
 }
 
-QModelIndex TableModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex TableModel::index(int row, int column, const QModelIndex &) const
 {
-	Q_UNUSED(parent)
-	return createIndex(row, column);
+  return createIndex(row, column);
 }
 
 QModelIndex TableModel::parent(const QModelIndex & child) const
@@ -253,5 +250,5 @@ void TableModel::handleDataChanged(int top, int left, int bottom, int right)
 
 Column * TableModel::column(int index)
 {
-	return d_table->column(index);
+  return d_table? d_table->column(index): nullptr;
 }

@@ -177,13 +177,16 @@ void MatrixView::rereadSectionSizes()
 	disconnect(v_header, SIGNAL(sectionResized(int, int, int)), this, SLOT(handleVerticalSectionResized(int, int, int)));
 	disconnect(h_header, SIGNAL(sectionResized(int, int, int)), this, SLOT(handleHorizontalSectionResized(int, int, int)));
 
-	int cols = d_matrix->columnCount();
-	for (int i=0; i<cols; i++)
-		h_header->resizeSection(i, d_matrix->columnWidth(i));
-	int rows = d_matrix->rowCount();
-	for (int i=0; i<rows; i++)
-		v_header->resizeSection(i, d_matrix->rowHeight(i));
-		
+        if (d_matrix)
+          {
+            int cols = d_matrix->columnCount();
+            for (int i=0; i<cols; i++)
+              h_header->resizeSection(i, d_matrix->columnWidth(i));
+            int rows = d_matrix->rowCount();
+            for (int i=0; i<rows; i++)
+              v_header->resizeSection(i, d_matrix->rowHeight(i));
+          }
+        
 	connect(v_header, SIGNAL(sectionResized(int, int, int)), this, SLOT(handleVerticalSectionResized(int, int, int)));
 	connect(h_header, SIGNAL(sectionResized(int, int, int)), this, SLOT(handleHorizontalSectionResized(int, int, int)));
 }
@@ -209,9 +212,12 @@ void MatrixView::retranslateStrings()
 	
 void MatrixView::advanceCell()
 {
-	QModelIndex idx = d_view_widget->currentIndex();
-    if(idx.row()+1 < d_matrix->rowCount())
-		d_view_widget->setCurrentIndex(idx.sibling(idx.row()+1, idx.column()));
+  if (d_matrix)
+    {
+      QModelIndex idx = d_view_widget->currentIndex();
+      if(idx.row()+1 < d_matrix->rowCount())
+        d_view_widget->setCurrentIndex(idx.sibling(idx.row()+1, idx.column()));
+    }
 }
 
 void MatrixView::goToCell(int row, int col)
@@ -238,11 +244,14 @@ void MatrixView::toggleControlTabBar()
 
 int MatrixView::selectedColumnCount(bool full)
 {
-	int count = 0;
-	int cols = d_matrix->columnCount();
-	for (int i=0; i<cols; i++)
-		if(isColumnSelected(i, full)) count++;
-	return count;
+  int count = 0;
+  if (d_matrix)
+    {
+      int cols = d_matrix->columnCount();
+      for (int i=0; i<cols; i++)
+        if(isColumnSelected(i, full)) count++;
+    }
+  return count;
 }
 
 bool MatrixView::isColumnSelected(int col, bool full)
@@ -255,11 +264,14 @@ bool MatrixView::isColumnSelected(int col, bool full)
 
 int MatrixView::selectedRowCount(bool full)
 {
-	int count = 0;
-	int rows = d_matrix->rowCount();
-	for (int i=0; i<rows; i++)
-		if(isRowSelected(i, full)) count++;
-	return count;
+  int count = 0;
+  if (d_matrix)
+    {
+      int rows = d_matrix->rowCount();
+      for (int i=0; i<rows; i++)
+        if(isRowSelected(i, full)) count++;
+    }
+  return count;
 }
 
 bool MatrixView::isRowSelected(int row, bool full)
@@ -272,49 +284,63 @@ bool MatrixView::isRowSelected(int row, bool full)
 
 int MatrixView::firstSelectedColumn(bool full)
 {
-	int cols = d_matrix->columnCount();
-	for (int i=0; i<cols; i++)
+  if (d_matrix)
+    {
+      int cols = d_matrix->columnCount();
+      for (int i=0; i<cols; i++)
 	{
-		if(isColumnSelected(i, full))
-			return i;
+          if(isColumnSelected(i, full))
+            return i;
 	}
-	return -1;
+    }
+  return -1;
 }
 
 int MatrixView::lastSelectedColumn(bool full)
 {
-	int cols = d_matrix->columnCount();
-	for(int i=cols-1; i>=0; i--)
-		if(isColumnSelected(i, full)) return i;
-
-	return -2;
+  if (d_matrix)
+    {
+      int cols = d_matrix->columnCount();
+      for(int i=cols-1; i>=0; i--)
+        if(isColumnSelected(i, full)) return i;
+    }
+  return -2;
 }
 
 int MatrixView::firstSelectedRow(bool full)
 {
-	int rows = d_matrix->rowCount();
-	for (int i=0; i<rows; i++)
+  if (d_matrix)
+    {
+      int rows = d_matrix->rowCount();
+      for (int i=0; i<rows; i++)
 	{
-		if(isRowSelected(i, full))
-			return i;
+          if(isRowSelected(i, full))
+            return i;
 	}
-	return -1;
+    }
+  return -1;
 }
 
 int MatrixView::lastSelectedRow(bool full)
 {
-	int rows = d_matrix->rowCount();
-	for(int i=rows-1; i>=0; i--)
-		if(isRowSelected(i, full)) return i;
-
-	return -2;
+  if (d_matrix)
+    {
+      int rows = d_matrix->rowCount();
+      for(int i=rows-1; i>=0; i--)
+        if(isRowSelected(i, full)) return i;
+    }
+  return -2;
 }
 
 bool MatrixView::isCellSelected(int row, int col)
 {
-	if(row < 0 || col < 0 || row >= d_matrix->rowCount() || col >= d_matrix->columnCount()) return false;
+  
+  if(d_matrix &&
+     (row < 0 || col < 0 ||
+      row >= d_matrix->rowCount() || col >= d_matrix->columnCount()))
+    return false;
 
-	return d_view_widget->selectionModel()->isSelected(d_model->index(row, col));
+  return d_view_widget->selectionModel()->isSelected(d_model->index(row, col));
 }
 
 void MatrixView::setCellSelected(int row, int col)
@@ -346,27 +372,25 @@ void MatrixView::getCurrentCell(int * row, int * col)
 
 bool MatrixView::eventFilter(QObject * watched, QEvent * event)
 {
-	QHeaderView * v_header = d_view_widget->verticalHeader();
-	QHeaderView * h_header = d_view_widget->horizontalHeader();
+  QHeaderView * v_header = d_view_widget->verticalHeader();
+  QHeaderView * h_header = d_view_widget->horizontalHeader();
 
-	if (event->type() == QEvent::ContextMenu) 
-	{
-		QContextMenuEvent *cm_event = static_cast<QContextMenuEvent *>(event);
-		QPoint global_pos = cm_event->globalPos();
-		if(watched == v_header)	
-			d_matrix->showMatrixViewRowContextMenu(global_pos);
-		else if(watched == h_header)
-			d_matrix->showMatrixViewColumnContextMenu(global_pos);
-		else if(watched == d_view_widget)
-			d_matrix->showMatrixViewContextMenu(global_pos);
-		else
-			return MyWidget::eventFilter(watched, event);
-			
-		event->accept();
-		return true;
-	} 
-	else 
-			return MyWidget::eventFilter(watched, event);
+  if (d_matrix && event->type() == QEvent::ContextMenu) 
+    {
+      QContextMenuEvent *cm_event = static_cast<QContextMenuEvent *>(event);
+      QPoint global_pos = cm_event->globalPos();
+      if (watched == v_header)	
+        d_matrix->showMatrixViewRowContextMenu(global_pos);
+      else if (watched == h_header)
+        d_matrix->showMatrixViewColumnContextMenu(global_pos);
+      else if (watched == d_view_widget)
+        d_matrix->showMatrixViewContextMenu(global_pos);
+      else
+        return MyWidget::eventFilter(watched, event);
+      event->accept();
+      return true;
+    }
+  return MyWidget::eventFilter(watched, event);
 }
 	
 void MatrixView::showControlCoordinatesTab()
@@ -398,8 +422,9 @@ void MatrixView::showControlFormulaTab()
 
 void MatrixView::applyCoordinates()
 {
-	d_matrix->setCoordinates(ui.first_col_spinbox->value(), ui.last_col_spinbox->value(), 
-			ui.first_row_spinbox->value(), ui.last_row_spinbox->value());
+  if (d_matrix)
+    d_matrix->setCoordinates(ui.first_col_spinbox->value(), ui.last_col_spinbox->value(), 
+                             ui.first_row_spinbox->value(), ui.last_row_spinbox->value());
 }
 
 void MatrixView::updateCoordinatesTab()
@@ -412,33 +437,41 @@ void MatrixView::updateCoordinatesTab()
 
 void MatrixView::updateFormulaTab()
 {
+  if (d_matrix)
 	ui.formula_box->setPlainText(d_matrix->formula());
 }
 
 #ifndef LEGACY_CODE_0_2_x
 void MatrixView::applyFormula()
 {
+  if (d_matrix)
 	d_matrix->setFormula(ui.formula_box->toPlainText());
 }
 #endif
 
 void MatrixView::updateFormatTab()
 {
-	ui.digits_box->setValue(d_matrix->displayedDigits());
-	int format_index = ui.format_box->findData(d_matrix->numericFormat());
-	ui.format_box->setCurrentIndex(format_index);
+  if (d_matrix)
+    {
+      ui.digits_box->setValue(d_matrix->displayedDigits());
+      int format_index = ui.format_box->findData(d_matrix->numericFormat());
+      ui.format_box->setCurrentIndex(format_index);
+    }
 }
 
 void MatrixView::applyFormat()
 {
-	int digits = ui.digits_box->value();
-	int format_index = ui.format_box->currentIndex();
-	if (format_index >= 0)
+  if (d_matrix)
+    {
+      int digits = ui.digits_box->value();
+      int format_index = ui.format_box->currentIndex();
+      if (format_index >= 0)
 	{
-		char format = ui.format_box->itemData(format_index).toChar().toLatin1();
-		d_matrix->setNumericFormat(format);
+          char format = ui.format_box->itemData(format_index).toChar().toLatin1();
+          d_matrix->setNumericFormat(format);
 	}
-	d_matrix->setDisplayedDigits(digits);
+      d_matrix->setDisplayedDigits(digits);
+    }
 }
 
 void MatrixView::handleHorizontalSectionResized(int logicalIndex, int, int newSize)
