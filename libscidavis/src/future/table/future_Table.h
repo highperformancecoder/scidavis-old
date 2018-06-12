@@ -38,6 +38,7 @@
 #include "globals.h"
 #include <QList>
 #include <QStringList>
+#include <QPointer>
 
 class TableView;
 class QUndoStack;
@@ -84,9 +85,6 @@ class Table : public AbstractPart
 #endif
 {
   Q_OBJECT
-  // only called by ::Table::init()
-  void setView(TableView * view);
-  friend ::TableView;
   
 public:
   class Private; // This could also be private, but then all commands need to be friend classes
@@ -99,6 +97,9 @@ public:
   friend class ::TableStatistics;
 #endif
   virtual ~Table();
+
+  /// set's the view attribute. Ownership not passed to this
+  void setView(TableView * view);
 
   //! Return an icon to be used for decorating my views.
   virtual QIcon icon() const;
@@ -449,7 +450,7 @@ private:
   QAction * action_statistics_rows;
   //@}
 
-  TableView *d_view;
+  QPointer<TableView> d_view;
 
   /**
      This private class manages column based data (i.e., 1D vector based 

@@ -38,6 +38,8 @@
 #include "matrix/MatrixView.h"
 #include "lib/macros.h"
 
+#include <QPointer>
+
 class QContextMenuEvent;
 class QEvent;
 class ActionManager;
@@ -343,7 +345,7 @@ class Matrix : public AbstractPart
 		QAction * action_add_rows;
 		//@}
 
-		MatrixView *d_view;
+  QPointer<MatrixView> d_view;
 		Private *d_matrix_private;
 };
 

@@ -123,9 +123,7 @@ Table::Table()
 }
 
 Table::~Table()
-{
-	delete d_view;
-}
+{}
 
 Column * Table::column(int index) const
 { 
@@ -149,24 +147,23 @@ Column * Table::column(const QString & name, bool legacy_kludge) const
 
 void Table::setView(TableView * view)
 {
-	d_view = view;
-	addActionsToView();
-	d_view->showComments(d_default_comment_visibility);
+  if (view && !view->parent())
+    static_cast<QObject*>(view)->setParent(this);  // ensure view has an owner
+  d_view = view;
+  addActionsToView();
+  if (d_view)
+    d_view->showComments(d_default_comment_visibility);
 }
 
 QWidget *Table::view()
 {
 #ifndef LEGACY_CODE_0_2_x
-	if (!d_view)
-	{
-		d_view = new TableView(this); 
-		addActionsToView();
-		d_view->showComments(d_default_comment_visibility);
-	}
+  if (!d_view)
+    setView(new TableView(this));
 #else
-	Q_ASSERT(d_view != NULL);
+       Q_ASSERT(d_view != NULL);
 #endif
-	return d_view;
+  return d_view;
 }
 
 void Table::insertColumns(int before, QList<Column*> new_cols)

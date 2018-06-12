@@ -35,6 +35,7 @@
 #include <QDateTime>
 #include <QHash>
 #include <QMap>
+#include <QPointer>
 
 #include "Graph.h"
 #include "MyWidget.h"
@@ -51,7 +52,7 @@ class Table: public TableView, public scripted
     Q_OBJECT
 
 public:
-	future::Table *d_future_table;
+  QPointer<future::Table> d_future_table;
 
 	enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5, DateTime = 6}; // TODO: remove this in favor of SciDAVis::columnMode
 
@@ -63,19 +64,22 @@ public:
 	//! Sets the number of significant digits
 	void setNumericPrecision(int prec);
 
-	//! Return the window name
-	virtual QString name() { return d_future_table->name();} 
-	//! Set the window name
-	virtual void setName(const QString& s) { d_future_table->setName(s); }
-	//! Return the window label
-	virtual QString windowLabel() { return d_future_table->comment(); }
-	//! Set the window label
-	virtual void setWindowLabel(const QString& s) { d_future_table->setComment(s); updateCaption(); }
+  //! Return the window name
+  virtual QString name() { return d_future_table? d_future_table->name(): QString();} 
+  //! Set the window name
+  virtual void setName(const QString& s) { if (d_future_table) d_future_table->setName(s); }
+  //! Return the window label
+  virtual QString windowLabel() { return d_future_table? d_future_table->comment(): QString(); }
+  //! Set the window label
+  virtual void setWindowLabel(const QString& s) { if (d_future_table) d_future_table->setComment(s); updateCaption(); }
 	//! Set the caption policy
 	void setCaptionPolicy(CaptionPolicy policy) 
-	{ 
-		caption_policy = policy; updateCaption(); 
-		switch (policy)
+	{
+          if (d_future_table)
+            {
+              caption_policy = policy;
+              updateCaption(); 
+              switch (policy)
 		{
 			case Name:
 				d_future_table->setCaptionSpec("%n");
@@ -87,12 +91,14 @@ public:
 				d_future_table->setCaptionSpec("%n%C{ - }%c");
 				break;
 		}
+            }
 	}
 	//! Set the creation date
 	virtual void setBirthDate(const QString& s)
 	{
 		birthdate = s;
-		d_future_table->importV0x0001XXCreationTime(s);
+                if (d_future_table) 
+                  d_future_table->importV0x0001XXCreationTime(s);
 	}
 
 	void closeEvent( QCloseEvent *);
@@ -112,14 +118,14 @@ public slots:
 	void handleColumnsRemoved(int,int);
 
 	//! Return column number 'index'
-	Column* column(int index) const { return d_future_table->column(index); }
+  Column* column(int index) const { return d_future_table? d_future_table->column(index): nullptr; }
 	//! Return the column determined by the given name
 	/**
 	 * This method should not be used unless absolutely necessary. 
 	 * Columns should be addressed by their index. 
 	 * This method is mainly meant to be used in scripts.
 	 */
-	Column* column(const QString & name) const { return d_future_table->column(name); }
+  Column* column(const QString & name) const { return d_future_table? d_future_table->column(name): nullptr; }
 
 	//! Return the value of the cell as a double
 	/**

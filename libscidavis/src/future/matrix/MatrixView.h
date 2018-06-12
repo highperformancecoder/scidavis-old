@@ -47,6 +47,7 @@
 #include <QComboBox>
 #include <QSpinBox> 
 #include <QScrollArea>
+#include <QPointer>
 #include "globals.h"
 #include "ui_matrixcontroltabs.h"
 #include "MyWidget.h"
@@ -205,7 +206,7 @@ class MatrixView : public MyWidget
 		//! Button to toogle the visibility of #d_tool_box
 		QToolButton * d_hide_button;
 		QHBoxLayout * d_main_layout;
-		future::Matrix * d_matrix;
+  QPointer<future::Matrix> d_matrix;
 
 		//! Initialization
 		void init();
