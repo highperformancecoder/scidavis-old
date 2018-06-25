@@ -14939,17 +14939,17 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="216"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="152"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="150"/>
         <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="64"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="220"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="218"/>
         <source>%1: insert %2 row(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="244"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="142"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="140"/>
         <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="125"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="206"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="204"/>
         <source>%1: remove %2 row(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15092,83 +15092,83 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="122"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="120"/>
         <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="38"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="173"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="171"/>
         <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="44"/>
         <source>%1: insert %2 column(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="132"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="130"/>
         <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="90"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="186"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="184"/>
         <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="93"/>
         <source>%1: remove %2 column(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="162"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="160"/>
         <source>%1: set matrix size to %2x%3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="190"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="188"/>
         <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="160"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="300"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="298"/>
         <source>%1: clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="331"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="698"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="329"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="696"/>
         <source>%1: insert empty column(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="355"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="725"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="353"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="723"/>
         <source>%1: remove selected column(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="366"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="739"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="364"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="737"/>
         <source>%1: clear selected column(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="384"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="900"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="382"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="898"/>
         <source>%1: insert empty rows(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="408"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="921"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="406"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="919"/>
         <source>%1: remove selected rows(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="423"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="421"/>
         <source>%1: clear selected rows(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="832"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1770"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="830"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1768"/>
         <source>%1: copy %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="970"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="976"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="968"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="974"/>
         <source>%1: add %2 rows(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="981"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="335"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="979"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="333"/>
         <source>%1: add %2 column(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15219,38 +15219,38 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="233"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="231"/>
         <location filename="../../libscidavis/src/future/table/tablecommands.cpp" line="69"/>
         <source>%1: set the number of rows to %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="312"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="310"/>
         <source>%1: clear all masks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="324"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="322"/>
         <source>%1: add column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="761"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="759"/>
         <source>%1: set plot designation(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="806"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="804"/>
         <source>%1: normalize column(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="838"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="836"/>
         <source>%1: normalize selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="937"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="935"/>
         <source>%1: clear selected cell(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19085,330 +19085,330 @@ floating point values
 <context>
     <name>future::Matrix</name>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="538"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="536"/>
         <source>Cu&amp;t</source>
         <translation type="unfinished">Klipp u&amp;t</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="541"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="539"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">&amp;Kopiera</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="544"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="542"/>
         <source>Past&amp;e</source>
         <translation type="unfinished">Klistra &amp;in</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="550"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="548"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
         <translation type="unfinished">&amp;Rensa</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="566"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="564"/>
         <source>Recalculate</source>
         <translation type="unfinished">Räkna om</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="672"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="670"/>
         <source>Clea&amp;r Rows</source>
         <translation type="unfinished">&amp;Rensa rader</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="752"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="750"/>
         <source>&amp;Matrix</source>
         <translation type="unfinished">&amp;Matris</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="917"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="915"/>
         <source>Import image from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="933"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="931"/>
         <source>Error importing image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="933"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="931"/>
         <source>Import of image &apos;%1&apos; failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1150"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1148"/>
         <source>invalid row or column count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1182"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1180"/>
         <source>unknown element &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1191"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1189"/>
         <source>no matrix element found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1204"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1202"/>
         <source>invalid or missing numeric format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1213"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1211"/>
         <source>invalid or missing number of displayed digits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1232"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1230"/>
         <source>invalid x start value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1240"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1238"/>
         <source>invalid x end value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1248"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1246"/>
         <source>invalid y start value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1256"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1254"/>
         <source>invalid y end value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1279"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1332"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1277"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1330"/>
         <source>invalid or missing row index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1286"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1284"/>
         <source>invalid row height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1303"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1338"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1301"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1336"/>
         <source>invalid or missing column index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1310"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1308"/>
         <source>invalid column width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1346"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1344"/>
         <source>invalid cell value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1377"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1375"/>
         <source>Hide Controls</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1379"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1377"/>
         <source>Show Controls</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1432"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1430"/>
         <source>%1: apply formula to selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1456"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1454"/>
         <source>Matrix</source>
         <translation type="unfinished">Matris</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="559"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="557"/>
         <source>Alt+Q</source>
         <translation type="unfinished">Alt+Q</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="210"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="208"/>
         <source>%1: cut selected cell(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="257"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="255"/>
         <source>%1: paste from clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="445"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="443"/>
         <source>%1: clear selected cell(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="558"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="556"/>
         <source>Assign &amp;Formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="567"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="565"/>
         <source>Ctrl+Return</source>
         <translation type="unfinished">Ctrl+vagnretur</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="575"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="573"/>
         <source>F12</source>
         <translation type="unfinished">F12</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="582"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="580"/>
         <source>Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="589"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="587"/>
         <source>Clear Matrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="596"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="594"/>
         <source>&amp;Go to Cell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="597"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="595"/>
         <source>Ctrl+Alt+G</source>
         <translation type="unfinished">Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="601"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="599"/>
         <source>&amp;Transpose</source>
         <translation type="unfinished">&amp;Transponera</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="604"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="602"/>
         <source>Mirror &amp;Horizontally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="607"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="605"/>
         <source>Mirror &amp;Vertically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="610"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="608"/>
         <source>&amp;Import Image</source>
         <comment>import image as matrix</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="613"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="611"/>
         <source>&amp;Duplicate</source>
         <comment>duplicate matrix</comment>
         <translation type="unfinished">D&amp;uplicera</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="616"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="614"/>
         <source>&amp;Dimensions</source>
         <comment>matrix size</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="619"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="617"/>
         <source>Set &amp;Coordinates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="622"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="620"/>
         <source>Set Display &amp;Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="629"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="627"/>
         <source>&amp;Insert Empty Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="636"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="634"/>
         <source>Remo&amp;ve Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="643"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="641"/>
         <source>Clea&amp;r Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="650"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="648"/>
         <source>&amp;Add Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="658"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="656"/>
         <source>&amp;Insert Empty Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="665"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="663"/>
         <source>Remo&amp;ve Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="679"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="677"/>
         <source>&amp;Add Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="818"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="822"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="816"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="820"/>
         <source>Go to Cell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="818"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="816"/>
         <source>Enter column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="822"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="820"/>
         <source>Enter row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="895"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="899"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="893"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="897"/>
         <source>Set Matrix Dimensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="895"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="893"/>
         <source>Enter number of columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="899"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="897"/>
         <source>Enter number of rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="909"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="907"/>
         <source>Images</source>
         <translation type="unfinished">Bilder</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1468"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1466"/>
         <source>SciDAVis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1468"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1466"/>
         <source>Import image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1471"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="1469"/>
         <source>Matrix %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19469,412 +19469,412 @@ floating point values
 <context>
     <name>future::Table</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="348"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="346"/>
         <source>%1: cut selected cell(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="410"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="408"/>
         <source>%1: paste from clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="524"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="522"/>
         <source>%1: mask selected cell(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="544"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="542"/>
         <source>%1: unmask selected cell(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="568"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="566"/>
         <source>%1: apply formula to selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="584"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="582"/>
         <source>%1: fill cells with row numbers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="627"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="625"/>
         <source>%1: fill cells with random values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="984"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="982"/>
         <source>&amp;Table</source>
         <translation type="unfinished">&amp;Tabell</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="986"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1639"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="984"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1637"/>
         <source>S&amp;et Column(s) As</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="998"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1607"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1651"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1715"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="996"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1605"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1649"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1713"/>
         <source>Fi&amp;ll Selection with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1067"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1065"/>
         <source>Cu&amp;t</source>
         <translation type="unfinished">Klipp u&amp;t</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1070"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1068"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">&amp;Kopiera</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1073"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1071"/>
         <source>Past&amp;e</source>
         <translation type="unfinished">Klistra &amp;in</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1077"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1075"/>
         <source>&amp;Mask</source>
         <comment>mask selection</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1080"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1078"/>
         <source>&amp;Unmask</source>
         <comment>unmask selection</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1087"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1085"/>
         <source>Assign &amp;Formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1088"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1086"/>
         <source>Alt+Q</source>
         <translation type="unfinished">Alt+Q</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1095"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1093"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
         <translation type="unfinished">&amp;Rensa</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1102"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1100"/>
         <source>Recalculate</source>
         <translation type="unfinished">Räkna om</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1103"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1101"/>
         <source>Ctrl+Return</source>
         <translation type="unfinished">Ctrl+vagnretur</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1107"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1105"/>
         <source>Row Numbers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1110"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1108"/>
         <source>Random Values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1125"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1123"/>
         <source>F12</source>
         <translation type="unfinished">F12</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1129"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1127"/>
         <source>Formula Edit Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1136"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1134"/>
         <source>Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1143"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1141"/>
         <source>&amp;Add Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1144"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1142"/>
         <source>append a new column to the table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1151"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1149"/>
         <source>Clear Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1158"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1156"/>
         <source>Export to TeX...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1164"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1162"/>
         <source>Clear Masks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1171"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1169"/>
         <source>&amp;Sort Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1178"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1176"/>
         <source>&amp;Go to Cell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1179"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1177"/>
         <source>Ctrl+Alt+G</source>
         <translation type="unfinished">Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1183"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1181"/>
         <source>&amp;Dimensions</source>
         <comment>table size</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1184"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1182"/>
         <source>change the table size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1191"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1189"/>
         <source>&amp;Insert Empty Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1198"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1196"/>
         <source>Remo&amp;ve Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1205"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1203"/>
         <source>Clea&amp;r Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1212"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1210"/>
         <source>&amp;Add Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1216"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1214"/>
         <source>X</source>
         <comment>plot designation</comment>
         <translation type="unfinished">X</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1219"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1217"/>
         <source>Y</source>
         <comment>plot designation</comment>
         <translation type="unfinished">Y</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1222"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1220"/>
         <source>Z</source>
         <comment>plot designation</comment>
         <translation type="unfinished">Z</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1228"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1226"/>
         <source>X Error</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1235"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1233"/>
         <source>Y Error</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1239"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1237"/>
         <source>None</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1245"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1243"/>
         <source>&amp;Normalize Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1252"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1250"/>
         <source>&amp;Normalize Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1259"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1257"/>
         <source>&amp;Sort Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1263"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1261"/>
         <source>Column Statisti&amp;cs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1264"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1262"/>
         <source>statistics on columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1270"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1268"/>
         <source>Change &amp;Type &amp;&amp; Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1271"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1269"/>
         <source>Ctrl+Alt+O</source>
         <translation type="unfinished">Ctrl+Alt+O</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1278"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1276"/>
         <source>Edit Column &amp;Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1286"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1284"/>
         <source>&amp;Insert Empty Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1293"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1291"/>
         <source>Remo&amp;ve Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1300"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1298"/>
         <source>Clea&amp;r Rows</source>
         <translation type="unfinished">&amp;Rensa rader</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1307"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1305"/>
         <source>&amp;Add Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1311"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1309"/>
         <source>Row Statisti&amp;cs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1312"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1310"/>
         <source>statistics on rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1517"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1515"/>
         <source>TeX Export Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1518"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1516"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
         <translation type="unfinished">Kunde inte skriva till filen: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Verifiera att du har rättighet att skriva på denna plats!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1730"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1734"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1728"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1732"/>
         <source>Go to Cell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1730"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1728"/>
         <source>Enter column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1734"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1732"/>
         <source>Enter row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1746"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1744"/>
         <source>Set Table Dimensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1761"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1759"/>
         <source>%1: move column %2 from position %3 to %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1896"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="1894"/>
         <source>%1: sort column(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2275"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2273"/>
         <source>invalid row or column count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2295"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2293"/>
         <source>Column %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2311"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2309"/>
         <source>unknown element &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2317"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2315"/>
         <source>columns attribute and number of read columns do not match</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2320"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2318"/>
         <source>no table element found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2331"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2329"/>
         <source>Hide Comments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2333"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2331"/>
         <source>Show Comments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2337"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2335"/>
         <source>Hide Controls</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2339"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2337"/>
         <source>Show Controls</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2350"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2348"/>
         <source>invalid or missing column index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2357"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2355"/>
         <source>invalid column width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2394"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="2392"/>
         <source>Table</source>
         <translation type="unfinished">Tabell</translation>
     </message>

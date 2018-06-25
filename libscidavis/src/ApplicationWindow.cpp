@@ -13569,6 +13569,7 @@ ApplicationWindow::~ApplicationWindow()
 
 	delete hiddenWindows;
 	delete outWindows;
+        delete d_workspace;
 	delete d_project;
 
 	QApplication::clipboard()->clear(QClipboard::Clipboard);

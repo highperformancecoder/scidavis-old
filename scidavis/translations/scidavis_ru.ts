@@ -15121,9 +15121,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+45"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="+152"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="+150"/>
         <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="+64"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="+220"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="+218"/>
         <source>%1: insert %2 row(s)</source>
         <translation type="unfinished"></translation>
     </message>
