@@ -28,6 +28,7 @@ before_install:
   - sudo apt-get install -y xvfb
   - sudo apt-get install -y python-numpy
   - sudo apt-get install -y libunittest++-dev
+  - sudo apt-get install -y libboost-regex-dev
   # this needs fixing!
   - sudo ln -sf /usr/include/qwtplot3d-qt4 /usr/include/qwtplot3d
 #addons:
