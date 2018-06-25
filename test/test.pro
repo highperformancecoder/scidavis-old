@@ -13,7 +13,7 @@ TEMPLATE = app
 TARGET = unittests
 DEPENDPATH += .
 INCLUDEPATH += . ../libscidavis ../libscidavis/src ../tmp/scidavis ../scidavis
-LIBS += -L ../libscidavis -lscidavis
+LIBS += -L ../libscidavis -lscidavis -lUnitTest++ -lboost_regex
 
 POST_TARGETDEPS=../libscidavis/libscidavis.a
 
@@ -43,11 +43,10 @@ liborigin {
   POST_TARGETDEPS += ../3rdparty/liborigin/liborigin.a
 }
 
-QT+=testlib
 
 # Input
-HEADERS += unittests.h
-SOURCES += unittests.cpp applicationWindow.cpp readWriteProject.cpp fft.cpp testPaintDevice.cpp 3dplot.cpp menus.cpp
+#HEADERS += unittests.h
+SOURCES += main.cpp applicationWindow.cpp readWriteProject.cpp fft.cpp testPaintDevice.cpp 3dplot.cpp menus.cpp
 
 ########### Future code backported from the aspect framework ##################
 DEFINES += LEGACY_CODE_0_2_x

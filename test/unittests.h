@@ -1,5 +1,4 @@
 #include "ApplicationWindow.h"
-#include <QTest>
 
 class Unittests: public ApplicationWindow
 {

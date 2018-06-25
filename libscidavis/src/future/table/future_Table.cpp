@@ -147,8 +147,6 @@ Column * Table::column(const QString & name, bool legacy_kludge) const
 
 void Table::setView(TableView * view)
 {
-  if (view && !view->parent())
-    static_cast<QObject*>(view)->setParent(this);  // ensure view has an owner
   d_view = view;
   addActionsToView();
   if (d_view)

@@ -91,10 +91,10 @@ Matrix::~Matrix()
 
 void Matrix::setView(MatrixView * view)
 {
-	d_view = view; 
-	addActionsToView();
-	connect(d_view, SIGNAL(controlTabBarStatusChanged(bool)), this, SLOT(adjustTabBarAction(bool)));
-	adjustTabBarAction(true);
+  d_view = view; 
+  addActionsToView();
+  connect(d_view, SIGNAL(controlTabBarStatusChanged(bool)), this, SLOT(adjustTabBarAction(bool)));
+  adjustTabBarAction(true);
 }
 
 QWidget *Matrix::view()

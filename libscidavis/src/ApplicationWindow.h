@@ -992,7 +992,7 @@ public:
   bool renameColumns, copiedLayer, strip_spaces, simplify_spaces;
   QStringList recentProjects;
   QStringList tableWindows();
-  bool saved, showPlot3DProjection, showPlot3DLegend, orthogonal3DPlots, autoscale3DPlots;
+  bool saved, showPlot3DProjection, showPlot3DLegend, orthogonal3DPlots=false, autoscale3DPlots;
   QStringList plot3DColors, locales;
   QStringList functions; //user-defined functions;
   QStringList xFunctions, yFunctions, rFunctions,thetaFunctions; // user functions for parametric and polar plots

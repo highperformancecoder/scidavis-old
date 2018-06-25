@@ -199,288 +199,288 @@ int ImportOPJ::translateOrigin2ScidavisLineStyle(int linestyle) {
 // spreadsheets can be either in its own window or as a sheet in excels windows
 bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadSheet &spread)
 {
-	static int visible_count=0;
-	QLocale locale = mw->locale();
-	int SciDAVis_scaling_factor=10; //in Origin width is measured in characters while in SciDAVis - pixels --- need to be accurate
-		int columnCount = spread.columns.size();
-		int maxrows = spread.maxRows;
-		if(!columnCount) //remove tables without cols
-			return false;
+  static int visible_count=0;
+  QLocale locale = mw->locale();
+  int SciDAVis_scaling_factor=10; //in Origin width is measured in characters while in SciDAVis - pixels --- need to be accurate
+  int columnCount = spread.columns.size();
+  int maxrows = spread.maxRows;
+  if(!columnCount) //remove tables without cols
+    return false;
 
-		Table *table = mw->newTable(spread.name.c_str(), maxrows, columnCount);
-		if (!table)
-			return false;
-		if (spread.hidden || spread.loose)
-			mw->hideWindow(table);
+  Table *table = mw->newTable(spread.name.c_str(), maxrows, columnCount);
+  if (!table)
+    return false;
+  if (spread.hidden || spread.loose)
+    mw->hideWindow(table);
 
-		table->setWindowLabel(spread.label.c_str());
-		for(int j = 0; j < columnCount; ++j){
-			Origin::SpreadColumn column = spread.columns[j];
-			Column *scidavis_column = table->column(j);
+  table->setWindowLabel(spread.label.c_str());
+  for(int j = 0; j < columnCount; ++j){
+    Origin::SpreadColumn column = spread.columns[j];
+    Column *scidavis_column = table->column(j);
 
-			QString name(column.name.c_str());
-			scidavis_column->setName(name.replace(QRegExp(".*_"),""));
-			if (column.command.size() > 0)
-				scidavis_column->setFormula(Interval<int>(0,maxrows), QString(column.command.c_str()));
-			scidavis_column->setComment(QString(column.comment.c_str()));
-			table->setColumnWidth(j, (int)column.width*SciDAVis_scaling_factor);
+    QString name(column.name.c_str());
+    scidavis_column->setName(name.replace(QRegExp(".*_"),""));
+    if (column.command.size() > 0)
+      scidavis_column->setFormula(Interval<int>(0,maxrows), QString(column.command.c_str()));
+    scidavis_column->setComment(QString(column.comment.c_str()));
+    table->setColumnWidth(j, (int)column.width*SciDAVis_scaling_factor);
 
-			switch(column.type){
-				case Origin::SpreadColumn::X:
-					table->setColPlotDesignation(j, SciDAVis::X);
-					break;
-				case Origin::SpreadColumn::Y:
-					table->setColPlotDesignation(j, SciDAVis::Y);
-					break;
-				case Origin::SpreadColumn::Z:
-					table->setColPlotDesignation(j, SciDAVis::Z);
-					break;
-				case Origin::SpreadColumn::XErr:
-					table->setColPlotDesignation(j, SciDAVis::xErr);
-					break;
-				case Origin::SpreadColumn::YErr:
-					table->setColPlotDesignation(j, SciDAVis::yErr);
-					break;
-				case Origin::SpreadColumn::Label:
-				default:
-					table->setColPlotDesignation(j, SciDAVis::noDesignation);
-			}
+    switch(column.type){
+    case Origin::SpreadColumn::X:
+      table->setColPlotDesignation(j, SciDAVis::X);
+      break;
+    case Origin::SpreadColumn::Y:
+      table->setColPlotDesignation(j, SciDAVis::Y);
+      break;
+    case Origin::SpreadColumn::Z:
+      table->setColPlotDesignation(j, SciDAVis::Z);
+      break;
+    case Origin::SpreadColumn::XErr:
+      table->setColPlotDesignation(j, SciDAVis::xErr);
+      break;
+    case Origin::SpreadColumn::YErr:
+      table->setColPlotDesignation(j, SciDAVis::yErr);
+      break;
+    case Origin::SpreadColumn::Label:
+    default:
+      table->setColPlotDesignation(j, SciDAVis::noDesignation);
+    }
 
-			QString format;
-			switch(column.valueType) {
-				case Origin::Numeric:
-				case Origin::TextNumeric:
-				/*
-				A TextNumeric column in Origin is a column whose filled cells contain either a double or a string.
-				In SciDAVis there is no equivalent column type.
-				Set the SciDAVis column type as 'Numeric' or 'Text' depending on the type of first element in column.
-				TODO: Add a "per column" flag, settable at import dialog, to choose between both types.
-				 */
-					{
-						double datavalue;
-						bool setAsText = false;
-						table->column(j)->setColumnMode(SciDAVis::Numeric);
-						for (int i=0; i < std::min((int)column.data.size(), maxrows); ++i) {
-							Origin::variant value(column.data[i]);
-							if (value.type() == Origin::variant::V_DOUBLE) {
-                                                          datavalue = value.as_double();
-								if (datavalue==_ONAN) continue; // mark for empty cell
-								if (!setAsText) {
-									scidavis_column->setValueAt(i, datavalue);
-								} else { // convert double to string for Text columns
-									scidavis_column->setTextAt(i, locale.toString(datavalue, 'g', 16));
-								}
-							} else { // string
-								if (!setAsText && i==0) {
-									table->column(j)->setColumnMode(SciDAVis::Text);
-									setAsText = true;
-								}
-								scidavis_column->setTextAt(i, column.data[i].as_string());
-							}
-						}
-						int f=0;
-						if(column.numericDisplayType == 0)
-						{
-							f=0;
-						}
-						else
-						{
-							switch(column.valueTypeSpecification)
-							{
-								case 0: //Decimal 1000
-									f=1;
-									break;
-								case 1: //Scientific
-									f=2;
-									break;
-								case 2: //Engeneering
-								case 3: //Decimal 1,000
-									f=0;
-									break;
-							}
-							Double2StringFilter *filter = static_cast<Double2StringFilter*>(table->column(j)->outputFilter());
-							filter->setNumericFormat(f);
-							filter->setNumDigits(column.decimalPlaces);
-						}
-						break;
-					}
-			case Origin::Text:
-				table->column(j)->setColumnMode(SciDAVis::Text);
-				for (int i=0; i < min((int)column.data.size(), maxrows); ++i) {
-                                  scidavis_column->setTextAt(i, column.data[i].as_string());
-				}
-				break;
-			case Origin::Date:
-				{
-					switch(column.valueTypeSpecification) {
-						case -128:
-							format="dd/MM/yyyy";
-							break;
-						case -119:
-							format="dd/MM/yyyy HH:mm";
-							break;
-						case -118:
-							format="dd/MM/yyyy HH:mm:ss";
-							break;
-						case 0:
-						case 9:
-						case 10:
-							format="dd.MM.yyyy";
-							break;
-						case 2:
-							format="MMM d";
-							break;
-						case 3:
-							format="M/d";
-							break;
-						case 4:
-							format="d";
-							break;
-						case 5:
-						case 6:
-							format="ddd";
-							break;
-						case 7:
-							format="yyyy";
-							break;
-						case 8:
-							format="yy";
-							break;
-						case 11:
-						case 12:
-						case 13:
-						case 14:
-						case 15:
-							format="yyMMdd";
-							break;
-						case 16:
-						case 17:
-							format="MMM";
-							break;
-						case 19:
-							format="M-d-yyyy";
-							break;
-						default:
-							format="dd.MM.yyyy";
-					}
-					for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-                                          scidavis_column->setValueAt(i, column.data[i].as_double());
-					table->column(j)->setColumnMode(SciDAVis::DateTime);
-					DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(scidavis_column->outputFilter());
-					filter->setFormat(format);
-					break;
-				}
-			case Origin::Time:
-				{
-					switch(column.valueTypeSpecification + 128) {
-						case 0:
-							format="hh:mm";
-							break;
-						case 1:
-							format="hh";
-							break;
-						case 2:
-							format="hh:mm:ss";
-							break;
-						case 3:
-							format="hh:mm:ss.zzz";
-							break;
-						case 4:
-							format="hh ap";
-							break;
-						case 5:
-							format="hh:mm ap";
-							break;
-						case 6:
-							format="mm:ss";
-							break;
-						case 7:
-							format="mm:ss.zzz";
-							break;
-						case 8:
-							format="hhmm";
-							break;
-						case 9:
-							format="hhmmss";
-							break;
-						case 10:
-							format="hh:mm:ss.zzz";
-							break;
-					}
-					for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-                                          scidavis_column->setValueAt(i, column.data[i].as_double());
-					table->column(j)->setColumnMode(SciDAVis::DateTime);
-					DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
-					filter->setFormat(format);
-					break;
-				}
-			case Origin::Month:
-				{
-					switch(column.valueTypeSpecification) {
-						case 0:
-							format = "MMM";
-							break;
-						case 1:
-							format = "MMMM";
-							break;
-						case 2:
-							format = "M";
-							break;
-					}
-					for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-                                          scidavis_column->setValueAt(i, column.data[i].as_double());
-					table->column(j)->setColumnMode(SciDAVis::Month);
-					DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
-					filter->setFormat(format);
-					break;
-				}
-			case Origin::Day:
-				{
-					switch(column.valueTypeSpecification)
-					{
-						case 0:
-							format = "ddd";
-							break;
-						case 1:
-							format = "dddd";
-							break;
-						case 2:
-							format = "d";
-							break;
-					}
-					for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-                                          scidavis_column->setValueAt(i, column.data[i].as_double());
-					table->column(j)->setColumnMode(SciDAVis::Day);
-					DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
-					filter->setFormat(format);
-					break;
-				}
-			default:
-				break;
-			}
-		}
+    QString format;
+    switch(column.valueType) {
+    case Origin::Numeric:
+    case Origin::TextNumeric:
+      /*
+        A TextNumeric column in Origin is a column whose filled cells contain either a double or a string.
+        In SciDAVis there is no equivalent column type.
+        Set the SciDAVis column type as 'Numeric' or 'Text' depending on the type of first element in column.
+        TODO: Add a "per column" flag, settable at import dialog, to choose between both types.
+      */
+      {
+        double datavalue;
+        bool setAsText = false;
+        table->column(j)->setColumnMode(SciDAVis::Numeric);
+        for (int i=0; i < std::min((int)column.data.size(), maxrows); ++i) {
+          Origin::variant value(column.data[i]);
+          if (value.type() == Origin::variant::V_DOUBLE) {
+            datavalue = value.as_double();
+            if (datavalue==_ONAN) continue; // mark for empty cell
+            if (!setAsText) {
+              scidavis_column->setValueAt(i, datavalue);
+            } else { // convert double to string for Text columns
+              scidavis_column->setTextAt(i, locale.toString(datavalue, 'g', 16));
+            }
+          } else { // string
+            if (!setAsText && i==0) {
+              table->column(j)->setColumnMode(SciDAVis::Text);
+              setAsText = true;
+            }
+            scidavis_column->setTextAt(i, column.data[i].as_string());
+          }
+        }
+        int f=0;
+        if(column.numericDisplayType == 0)
+          {
+            f=0;
+          }
+        else
+          {
+            switch(column.valueTypeSpecification)
+              {
+              case 0: //Decimal 1000
+                f=1;
+                break;
+              case 1: //Scientific
+                f=2;
+                break;
+              case 2: //Engeneering
+              case 3: //Decimal 1,000
+                f=0;
+                break;
+              }
+            Double2StringFilter *filter = static_cast<Double2StringFilter*>(table->column(j)->outputFilter());
+            filter->setNumericFormat(f);
+            filter->setNumDigits(column.decimalPlaces);
+          }
+        break;
+      }
+    case Origin::Text:
+      table->column(j)->setColumnMode(SciDAVis::Text);
+      for (int i=0; i < min((int)column.data.size(), maxrows); ++i) {
+        scidavis_column->setTextAt(i, column.data[i].as_string());
+      }
+      break;
+    case Origin::Date:
+      {
+        switch(column.valueTypeSpecification) {
+        case -128:
+          format="dd/MM/yyyy";
+          break;
+        case -119:
+          format="dd/MM/yyyy HH:mm";
+          break;
+        case -118:
+          format="dd/MM/yyyy HH:mm:ss";
+          break;
+        case 0:
+        case 9:
+        case 10:
+          format="dd.MM.yyyy";
+          break;
+        case 2:
+          format="MMM d";
+          break;
+        case 3:
+          format="M/d";
+          break;
+        case 4:
+          format="d";
+          break;
+        case 5:
+        case 6:
+          format="ddd";
+          break;
+        case 7:
+          format="yyyy";
+          break;
+        case 8:
+          format="yy";
+          break;
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+          format="yyMMdd";
+          break;
+        case 16:
+        case 17:
+          format="MMM";
+          break;
+        case 19:
+          format="M-d-yyyy";
+          break;
+        default:
+          format="dd.MM.yyyy";
+        }
+        for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
+          scidavis_column->setValueAt(i, column.data[i].as_double());
+        table->column(j)->setColumnMode(SciDAVis::DateTime);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(scidavis_column->outputFilter());
+        filter->setFormat(format);
+        break;
+      }
+    case Origin::Time:
+      {
+        switch(column.valueTypeSpecification + 128) {
+        case 0:
+          format="hh:mm";
+          break;
+        case 1:
+          format="hh";
+          break;
+        case 2:
+          format="hh:mm:ss";
+          break;
+        case 3:
+          format="hh:mm:ss.zzz";
+          break;
+        case 4:
+          format="hh ap";
+          break;
+        case 5:
+          format="hh:mm ap";
+          break;
+        case 6:
+          format="mm:ss";
+          break;
+        case 7:
+          format="mm:ss.zzz";
+          break;
+        case 8:
+          format="hhmm";
+          break;
+        case 9:
+          format="hhmmss";
+          break;
+        case 10:
+          format="hh:mm:ss.zzz";
+          break;
+        }
+        for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
+          scidavis_column->setValueAt(i, column.data[i].as_double());
+        table->column(j)->setColumnMode(SciDAVis::DateTime);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
+        filter->setFormat(format);
+        break;
+      }
+    case Origin::Month:
+      {
+        switch(column.valueTypeSpecification) {
+        case 0:
+          format = "MMM";
+          break;
+        case 1:
+          format = "MMMM";
+          break;
+        case 2:
+          format = "M";
+          break;
+        }
+        for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
+          scidavis_column->setValueAt(i, column.data[i].as_double());
+        table->column(j)->setColumnMode(SciDAVis::Month);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
+        filter->setFormat(format);
+        break;
+      }
+    case Origin::Day:
+      {
+        switch(column.valueTypeSpecification)
+          {
+          case 0:
+            format = "ddd";
+            break;
+          case 1:
+            format = "dddd";
+            break;
+          case 2:
+            format = "d";
+            break;
+          }
+        for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
+          scidavis_column->setValueAt(i, column.data[i].as_double());
+        table->column(j)->setColumnMode(SciDAVis::Day);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
+        filter->setFormat(format);
+        break;
+      }
+    default:
+      break;
+    }
+  }
 
 
 
-		if(!(spread.hidden || spread.loose) || opj.version() != 7.5){
-			table->showNormal();
+  if(!(spread.hidden || spread.loose) || opj.version() != 7.5){
+    table->showNormal();
 
-			//cascade the tables
-			if (opj.version() >= 6.0)
-		        {
-			   Origin::Rect windowRect;
-			   windowRect = spread.frameRect;
-			   table->parentWidget()->move(QPoint(windowRect.left, windowRect.top));
-			}
-			else {
-				int dx = table->verticalHeaderWidth();
-			        int dy=table->parentWidget()->frameGeometry().height() - table->height();
-			        table->parentWidget()->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
-			   	visible_count++;
-			}
+    //cascade the tables
+    if (opj.version() >= 6.0)
+      {
+        Origin::Rect windowRect;
+        windowRect = spread.frameRect;
+        table->parentWidget()->move(QPoint(windowRect.left, windowRect.top));
+      }
+    else {
+      int dx = table->verticalHeaderWidth();
+      int dy=table->parentWidget()->frameGeometry().height() - table->height();
+      table->parentWidget()->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
+      visible_count++;
+    }
 
-		}
-	return true;
+  }
+  return true;
 }
 bool ImportOPJ::importTables(const OriginFile &opj)
 {
@@ -526,7 +526,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 			int columnCount = layer.columnCount;
 			int rowCount = layer.rowCount;
 			mw->setStatusBarText(QString("Matrix %1 / %2, sheet %3 / %4").arg(s+1).arg(opj.matrixCount()).arg(l+1).arg(layers));
-			Matrix* Matrix = mw->newMatrix(matrix.name.c_str(), rowCount, columnCount);
+			Matrix* Matrix=mw->newMatrix(matrix.name.c_str(), rowCount, columnCount);
 			if (!Matrix)
 				return false;
 			Matrix->setWindowLabel(matrix.label.c_str());
