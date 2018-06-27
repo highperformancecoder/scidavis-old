@@ -112,6 +112,7 @@ Graph::Graph(QWidget* parent, QString name, Qt::WFlags f)
 	drawAxesBackbone = true;
 	m_autoscale = true;
 	autoScaleFonts = false;
+	hidden_size = QSize();
 	d_antialiasing = true;
 	d_scale_on_print = true;
 	d_print_cropmarks = false;
@@ -4085,15 +4086,24 @@ void Graph::updateMarkersBoundingRect()
 	}
 	d_plot->replot();
 }
+void Graph::hideEvent(QHideEvent *e)
+{
+	Q_UNUSED(e);
+	hidden_size = size();
+}
 
 void Graph::resizeEvent ( QResizeEvent *e )
 {
-	if (ignoreResize || !this->isVisible())
+	if (ignoreResize)
+		return;
+	QSize oldSize=e->oldSize();
+	if (!this->isVisible() || !oldSize.isValid())
+		oldSize = hidden_size;
+	if (!oldSize.isValid())
 		return;
 
 	if (autoScaleFonts)
 	{
-		QSize oldSize=e->oldSize();
 		QSize size=e->size();
 
 		double ratio=(double)size.height()/(double)oldSize.height();

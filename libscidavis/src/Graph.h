@@ -641,6 +641,7 @@ public slots:
 		bool ignoresResizeEvents(){return ignoreResize;};
 		void setIgnoreResizeEvents(bool ok){ignoreResize=ok;};
 		void resizeEvent(QResizeEvent *e);
+		void hideEvent(QHideEvent *e);
 		void scaleFonts(double factor);
 		//@}
 
@@ -729,6 +730,7 @@ signals:
 		//! Render hint for plot items.
 		bool d_antialiasing;
 		bool autoScaleFonts;
+		QSize hidden_size;
 		bool d_scale_on_print, d_print_cropmarks;
 		int selectedAxis;
 		QStringList axesFormulas;
