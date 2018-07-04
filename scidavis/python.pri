@@ -7,12 +7,18 @@
   INSTALLS += pythonutils
   pythonutils.files += scidavisUtil.py scidavisUtil.pyc
 
+  message("Making PyQt bindings via SIP")
+  PYTHONBIN = $$(PYTHON)
+  isEmpty( PYTHONBIN ) {
+    PYTHONBIN = python
+  }
+
   compiledScidavisrc.target = scidavisrc.pyc
   compiledScidavisrc.depends = scidavisrc.py
-  compiledScidavisrc.commands = python -m py_compile scidavisrc.py
+  compiledScidavisrc.commands = $$PYTHONBIN -m py_compile scidavisrc.py
   compiledScidavisUtil.target = scidavisUtil.pyc
   compiledScidavisUtil.depends = scidavisUtil.py
-  compiledScidavisUtil.commands = python -m py_compile scidavisUtil.py
+  compiledScidavisUtil.commands = $$PYTHONBIN -m py_compile scidavisUtil.py
   QMAKE_EXTRA_TARGETS += compiledScidavisrc compiledScidavisUtil
   PRE_TARGETDEPS += scidavisrc.pyc scidavisUtil.pyc
 
@@ -21,12 +27,6 @@
   SIP_DIR = ../tmp/scidavis
 
   DEFINES += SCRIPTING_PYTHON
-
-  message("Making PyQt bindings via SIP")
-  PYTHONBIN = $$(PYTHON)
-  isEmpty( PYTHONBIN ) {
-    PYTHONBIN = python
-  }
 
   unix {
     INCLUDEPATH += $$system($$PYTHONBIN-config --includes|sed -e 's/-I//')

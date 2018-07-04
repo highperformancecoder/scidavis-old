@@ -70,15 +70,15 @@ extern "C"
   void initQtCore();
   void initQtGui();
   void initscidavis();
-#define PYSTRING_AsString   PyString_AsString
-#define PYSTRING_FromString PyString_FromString
-#define PYLong_AsLong       PyInt_AsLong
-#define PYCodeObject_cast   (PyCodeObject*)
+#define PYUNICODE_AsUTF8     PyString_AsString
+#define PYUNICODE_FromString PyString_FromString
+#define PYLong_AsLong        PyInt_AsLong
+#define PYCodeObject_cast    (PyCodeObject*)
 #else
   PyMODINIT_FUNC PyInit_scidavis(void);
-#define PYSTRING_AsString   PyUnicode_AsUTF8
-#define PYSTRING_FromString PyUnicode_FromString
-#define PYLong_AsLong       PyLong_AsLong
+#define PYUNICODE_AsUTF8     PyUnicode_AsUTF8
+#define PYUNICODE_FromString PyUnicode_FromString
+#define PYLong_AsLong        PyLong_AsLong
 #define PYCodeObject_cast
 #endif
 }
@@ -92,7 +92,7 @@ QString PythonScripting::toString(PyObject *object, bool decref)
 	PyObject *repr = PyObject_Str(object);
 	if (decref) Py_DECREF(object);
 	if (!repr) return "";
-	ret = PYSTRING_AsString(repr);
+	ret = PYUNICODE_AsUTF8(repr);
 	Py_DECREF(repr);
 	return ret;
 }
@@ -138,7 +138,7 @@ QString PythonScripting::errorMsg()
 	PyObject *exception=0, *value=0, *traceback=0;
 	PyTracebackObject *excit=0;
 	PyFrameObject *frame;
-	char *fname;
+	const char *fname;
 	QString msg;
 	if (!PyErr_Occurred()) return "";
 
@@ -174,9 +174,9 @@ QString PythonScripting::errorMsg()
 		while (excit && (PyObject*)excit != Py_None)
 		{
 			frame = excit->tb_frame;
-			msg.append("at ").append(PYSTRING_AsString(frame->f_code->co_filename));
+			msg.append("at ").append(PYUNICODE_AsUTF8(frame->f_code->co_filename));
 			msg.append(":").append(QString::number(excit->tb_lineno));
-			if (frame->f_code->co_name && *(fname = PYSTRING_AsString(frame->f_code->co_name)) != '?')
+			if (frame->f_code->co_name && *(fname = PYUNICODE_AsUTF8(frame->f_code->co_name)) != '?')
 				msg.append(" in ").append(fname);
 			msg.append("\n");
 			excit = excit->tb_next;
@@ -345,8 +345,8 @@ bool PythonScripting::loadInitFile(const QString &path)
 			PyObject *compile = PyDict_GetItemString(PyModule_GetDict(compileModule), "compile");
 			if (compile) {
 				PyObject *tmp = PyObject_CallFunctionObjArgs(compile,
-						PYSTRING_FromString(pyFile.filePath().toUtf8().constData()),
-						PYSTRING_FromString(pycFile.filePath().toUtf8().constData()),
+						PYUNICODE_FromString(pyFile.filePath().toUtf8().constData()),
+						PYUNICODE_FromString(pycFile.filePath().toUtf8().constData()),
 						NULL);
 				if (tmp)
 					Py_DECREF(tmp);
@@ -444,7 +444,7 @@ const QStringList PythonScripting::mathFunctions() const
 #endif
 	while(PyDict_Next(math, &i, &key, &value))
 		if (PyCallable_Check(value))
-			flist << PYSTRING_AsString(key);
+			flist << PYUNICODE_AsUTF8(key);
 	flist.sort();
 	return flist;
 }
@@ -454,7 +454,7 @@ const QString PythonScripting::mathFunctionDoc(const QString &name) const
 	PyObject *mathf = PyDict_GetItemString(math,name.toLocal8Bit()); // borrowed
 	if (!mathf) return "";
 	PyObject *pydocstr = PyObject_GetAttrString(mathf, "__doc__"); // new
-	QString qdocstr = PYSTRING_AsString(pydocstr);
+	QString qdocstr = PYUNICODE_AsUTF8(pydocstr);
 	Py_XDECREF(pydocstr);
 	return qdocstr;
 }
