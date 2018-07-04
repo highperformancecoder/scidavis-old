@@ -1564,7 +1564,7 @@ public:
   void setParametersList(...) /PyName=setParameters/;
 %MethodCode
   QStringList l;
-  char *item;
+  const char *item;
   for (int i=0; i<PyTuple_GET_SIZE(a0); i++)
     if ((item = PYSTRING_AsString(PyTuple_GET_ITEM(a0, i))))
       l << item;

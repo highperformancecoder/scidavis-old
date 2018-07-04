@@ -138,7 +138,7 @@ QString PythonScripting::errorMsg()
 	PyObject *exception=0, *value=0, *traceback=0;
 	PyTracebackObject *excit=0;
 	PyFrameObject *frame;
-	char *fname;
+	const char *fname;
 	QString msg;
 	if (!PyErr_Occurred()) return "";
 
