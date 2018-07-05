@@ -85,6 +85,13 @@ cat >scidavis/scidavis.app/Contents/Info.plist <<EOF
 </plist>
 EOF
 
-echo scidavis-$version.pkg
-pkgbuild --root scidavis/scidavis.app --install-location /Applications/scidavis.app --identifier SciDAVis scidavis-$version.pkg
+codesign -s "Developer ID Application" --deep --force scidavis/scidavis.app
+if [ $? -ne 0 ]; then
+    echo "try running this script on the Mac GUI desktop, not ssh shell"
+fi
+productbuild --root scidavis/scidavis.app /Applications/scidavis.app scidavis.pkg
+productsign --sign "Developer ID Installer" scidavis.pkg scidavis-$version.pkg
+if [ $? -ne 0 ]; then
+    echo "try running this script on the Mac GUI desktop, not ssh shell"
+fi
 
