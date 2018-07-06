@@ -450,7 +450,7 @@ void Table::pasteIntoSelection()
 				QList<Column*> cols;
 				for(int i=0; i<last_col+1-columnCount(); i++)
 				{
-					Column * new_col = new Column(QString::number(i+1), SciDAVis::Text);
+					Column * new_col = new Column(QString::number(i+1), SciDAVis::Numeric);
 					new_col->setPlotDesignation(SciDAVis::Y);
 					cols << new_col;
 				}
