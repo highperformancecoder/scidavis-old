@@ -37,5 +37,6 @@ done
 # update Doxyversion
 rm -f Doxyversion
 echo "PROJECT_NUMBER=$version" >Doxyversion
+echo "$1" >doc/version.tex
 git commit -a -m "Release $1"
 git tag -a -m "" $1

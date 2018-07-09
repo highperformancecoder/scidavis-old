@@ -1,0 +1,3429 @@
+<title>Scripting</title>
+<indexterm><primary>Scripting</primary></indexterm>
+
+  <para>&appname; supports different interpreters
+  for evaluating mathematical expressions and for executing scripts.</para>
+
+  <sect1 id="sec-muParser">
+    <title>muParser</title>
+    <indexterm><primary>Scripting</primary><secondary>MuParser</secondary></indexterm>
+    <para>The constants _e=e=E and _pi=pi=PI=Pi are defined, as well as the
+		 operators and functions listed below. muParser is purely a parser for mathematical
+		 expressions and as such does not support executing complex scripts. However,
+		 you can make formulas easier to read and modify by assigning sub-expressions to
+		 variables and inserting comments.
+	 </para>
+	 <para><emphasis>Variable assignments</emphasis> evaluate to the assigned value, so
+		 they can be used in the middle of a formula. They can also stand on a line of
+		 their own, or separated from other parts of the formula by a semicolon (;).
+		 The result of evaluating the last line of a multi-line formula is taken as the
+		 result of the whole formula.
+	 </para>
+	 <para><emphasis>Comments</emphasis> start with a hash mark (#) and run till the end
+		 of the line.</para>
+	 <para>It is important to note that the muParser commands listed in this section are 
+		intended to be used to work inside the <emphasis>Formula</emphasis> tab of 
+		a <emphasis>Table</emphasis>, i.e. most of them will not work as a 
+		<emphasis>script</emphasis> in a <emphasis>Note</emphasis>. Of course, if
+		one try to execute something like 'a=cos(pi*pi)' in a <emphasis>Note</emphasis>, 
+		it will run without errors, but the 'a' value will not be known by the user.
+	 </para>
+
+    <table frame="sides" pgwide="1" tocentry="1">
+      <title>Supported Mathematical Operators</title>
+
+      <tgroup cols="2">
+        <colspec align="left" colname="name" colwidth="1*" />
+
+        <colspec align="justify" colname="description" colwidth="10*" />
+
+        <thead>
+          <row>
+            <entry>Name</entry>
+
+            <entry>Description</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>+</entry>
+
+            <entry>Addition</entry>
+          </row>
+
+          <row>
+            <entry>-</entry>
+
+            <entry>Subtraction</entry>
+          </row>
+
+          <row>
+            <entry>*</entry>
+
+            <entry>Multiplication</entry>
+          </row>
+
+          <row>
+            <entry>/</entry>
+
+            <entry>Division</entry>
+          </row>
+
+          <row>
+            <entry>^</entry>
+
+            <entry>Exponentiation (raise a to the power of b)</entry>
+          </row>
+
+          <row>
+            <entry>and</entry>
+
+            <entry>logical and (returns 0 or 1) - works only if SciDAVis is built using muParser 1.x versions</entry>
+          </row>
+
+          <row>
+            <entry>&amp;&amp;</entry>
+
+            <entry>logical and (returns 0 or 1) - works only if SciDAVis is built using muParser &gt;= 2.0.0</entry>
+          </row>
+
+          <row>
+            <entry>or</entry>
+
+            <entry>logical or (returns 0 or 1) - works only if SciDAVis is built using muParser 1.x versions</entry>
+          </row>
+
+          <row>
+            <entry>||</entry>
+
+            <entry>logical or (returns 0 or 1) - works only if SciDAVis is built using muParser &gt;= 2.0.0</entry>
+          </row>
+
+          <row>
+            <entry>xor</entry>
+
+	    <entry>logical exclusive or (returns 0 or 1) - works only if SciDAVis is built using muParser 1.x versions; there are no equivalent operator for muParser &gt;= 2.0.0</entry>
+          </row>
+
+          <row>
+            <entry>&lt;</entry>
+
+            <entry>less then (returns 0 or 1)</entry>
+          </row>
+
+          <row>
+            <entry>&lt;=</entry>
+
+            <entry>less then or equal (returns 0 or 1)</entry>
+          </row>
+
+          <row>
+            <entry>==</entry>
+
+            <entry>equal (returns 0 or 1)</entry>
+          </row>
+
+          <row>
+            <entry>&gt;=</entry>
+
+            <entry>greater then or equal (returns 0 or 1)</entry>
+          </row>
+
+          <row>
+            <entry>&gt;</entry>
+
+            <entry>greater then (returns 0 or 1)</entry>
+          </row>
+
+          <row>
+            <entry>!=</entry>
+
+            <entry>not equal (returns 0 or 1)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+      <table frame="sides" pgwide="1" tocentry="1">
+        <title>Mathematical Functions</title>
+
+        <tgroup cols="2">
+          <colspec align="left" colname="name" colwidth="1*" />
+
+          <colspec align="justify" colname="description" colwidth="10*" />
+
+          <thead>
+            <row>
+              <entry>Name</entry>
+
+              <entry>Description</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>abs(x)</entry>
+
+              <entry>absolute value of x</entry>
+            </row>
+
+            <row>
+              <entry>acos(x)</entry>
+
+              <entry>inverse cosine</entry>
+            </row>
+
+            <row>
+              <entry>acosh(x)</entry>
+
+              <entry>inverse hyperbolic cosine</entry>
+            </row>
+
+            <row>
+              <entry>asin(x)</entry>
+
+              <entry>inverse sine</entry>
+            </row>
+
+            <row>
+              <entry>asinh(x)</entry>
+
+              <entry>inverse hyperbolic sine</entry>
+            </row>
+
+            <row>
+              <entry>atan(x)</entry>
+
+              <entry>inverse tangent</entry>
+            </row>
+
+            <row>
+              <entry>atanh(x)</entry>
+
+              <entry>inverse hyperbolic tangent</entry>
+            </row>
+
+            <row>
+              <entry>avg(x1,x2,x3,...)</entry>
+
+              <entry>average value, this command accept a list of arguments
+              separated by commas</entry>
+            </row>
+
+            <row>
+              <entry>bessel_j0(x)</entry>
+
+              <entry>Regular cylindrical Bessel function of zeroth order,
+              J<subscript>0</subscript>(x).</entry>
+            </row>
+
+            <row>
+              <entry>bessel_j1(x)</entry>
+
+              <entry>Regular cylindrical Bessel function of first order,
+              J<subscript>1</subscript>(x).</entry>
+            </row>
+
+            <row>
+              <entry>bessel_jn(x,n)</entry>
+
+              <entry>Regular cylindrical Bessel function of
+              n<superscript>th</superscript> order,
+              J<subscript>n</subscript>(x).</entry>
+            </row>
+
+				<row>
+					<entry>bessel_jn_zero(n, s)</entry>
+					<entry>s<superscript>th</superscript> zero of regular cylindrical Bessel function
+						of n<superscript>th</superscript> order,
+						J<subscript>n</subscript>(bessel_jn_zero(n,s))=0
+					</entry>
+				</row>
+
+            <row>
+              <entry>bessel_y0(x)</entry>
+
+              <entry>Irregular cylindrical Bessel function of zeroth order,
+              Y<subscript>0</subscript>(x) for x&gt;0.</entry>
+            </row>
+
+            <row>
+              <entry>bessel_y1(x)</entry>
+
+              <entry>Irregular cylindrical Bessel function of first order,
+              Y<subscript>1</subscript>(x) for x&gt;0.</entry>
+            </row>
+
+            <row>
+              <entry>bessel_yn(x,n)</entry>
+
+              <entry>Irregular cylindrical Bessel function of
+              n<superscript>th</superscript> order,
+              Y<subscript>n</subscript>(x) for x&gt;0.</entry>
+            </row>
+
+            <row>
+              <entry>beta (a,b)</entry>
+
+              <entry>Computes the Beta Function, B(a,b) =
+              Gamma(a)*Gamma(b)/Gamma(a+b) for a &gt; 0 and b &gt; 0.</entry>
+            </row>
+
+            <row>
+              <entry>ceil(x)</entry>
+
+              <entry>ceiling; smallest integer greater or equal to x</entry>
+            </row>
+
+            <row>
+              <entry>cos(x)</entry>
+
+              <entry>cosine of x</entry>
+            </row>
+
+            <row>
+              <entry>cosh(x)</entry>
+
+              <entry>hyperbolic cosine of x</entry>
+            </row>
+
+            <row>
+              <entry>erf(x)</entry>
+
+              <entry>error function of x</entry>
+            </row>
+
+            <row>
+              <entry>erfc(x)</entry>
+
+              <entry>Complementary error function erfc(x) = 1 -
+              erf(x).</entry>
+            </row>
+
+            <row>
+              <entry>erfz(x)</entry>
+
+              <entry>The Gaussian probability density function Z(x).</entry>
+            </row>
+
+            <row>
+              <entry>erfq(x)</entry>
+
+              <entry>The upper tail of the Gaussian probability function
+              Q(x).</entry>
+            </row>
+
+            <row>
+              <entry>exp(x)</entry>
+
+              <entry>Exponential function: e raised to the power of x.</entry>
+            </row>
+
+            <row>
+              <entry>floor(x)</entry>
+
+              <entry>floor; largest integer less than or equal to x</entry>
+            </row>
+
+            <row>
+              <entry>gamma(x)</entry>
+
+              <entry>Computes the Gamma function, subject to x not being a
+              negative integer</entry>
+            </row>
+
+            <row>
+              <entry>gammaln(x)</entry>
+
+              <entry>Computes the logarithm of the Gamma function, subject to
+              x not a being negative integer. For x&lt;0, log(|Gamma(x)|) is
+              returned.</entry>
+            </row>
+
+            <row>
+              <entry>hazard(x)</entry>
+
+              <entry>Computes the hazard function for the normal distribution
+              h(x) = erfz(x)/erfq(x).</entry>
+            </row>
+
+            <row>
+              <entry>ln(x)</entry>
+
+              <entry>natural logarithm of x</entry>
+            </row>
+
+            <row>
+              <entry>log(x)</entry>
+
+              <entry>decimal logarithm of x</entry>
+            </row>
+
+            <row>
+              <entry>log2(x)</entry>
+
+              <entry>base 2 logarithm of x</entry>
+            </row>
+
+				<row>
+					<entry>w0(x)</entry>
+					<entry>Principal branch of Lambert's W function, W<subscript>0</subscript>(x).
+						W<subscript>0</subscript> is defined as a solution to the equation
+						W<subscript>0</subscript>(x)*exp(W<subscript>0</subscript>(x))=x.
+						For x&lt;0, there are tow real-valued branches; this function computes the one where
+						W&gt;-1 for x&lt;0 (compare w1(x)).
+					</entry>
+				</row>
+
+				<row>
+					<entry>w1(x)</entry>
+					<entry>Secondary branch of Lambert's W function, W<subscript>-1</subscript>(x).
+						W<subscript>-1</subscript> is defined as a solution to the equation
+						W<subscript>-1</subscript>(x)*exp(W<subscript>-1</subscript>(x))=x.
+						For x&lt;0, there are tow real-valued branches; this function computes the one where
+						W&lt;-1 for x&lt;0 (compare w0(x)).
+					</entry>
+				</row>
+
+            <row>
+              <entry>min(x1,x2,x3,...)</entry>
+
+              <entry>Minimum of the list of arguments</entry>
+            </row>
+
+            <row>
+              <entry>max(x1,x2,x3,...)</entry>
+
+              <entry>Maximum of the list of arguments</entry>
+            </row>
+
+				<row>
+					<entry>mod(x,y)</entry>
+					<entry>x modulo y; remainder of integer division x/y</entry>
+				</row>
+
+				<row>
+					<entry>pow(x,y)</entry>
+					<entry>x to the power of y, x^y</entry>
+				</row>
+
+            <row>
+              <entry>rint(x)</entry>
+
+              <entry>Round to nearest integer.</entry>
+            </row>
+
+            <row>
+              <entry>sign(x)</entry>
+
+              <entry>Sign function: -1 if x&lt;0; 1 if x&gt;0.</entry>
+            </row>
+
+            <row>
+              <entry>sin(x)</entry>
+
+              <entry>sine of x</entry>
+            </row>
+
+            <row>
+              <entry>sinh(x)</entry>
+
+              <entry>hyperbolic sine of x</entry>
+            </row>
+
+            <row>
+              <entry>sqrt(x)</entry>
+
+              <entry>square root of x</entry>
+            </row>
+
+            <row>
+              <entry>tan(x)</entry>
+
+              <entry>tangent of x</entry>
+            </row>
+
+            <row>
+              <entry>tanh(x)</entry>
+
+              <entry>hyperbolic tangent of x</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table frame="sides" pgwide="1" tocentry="1">
+        <title>Non-Mathematical Functions</title>
+
+        <tgroup cols="2">
+          <colspec align="left" colname="name" colwidth="1*" />
+
+          <colspec align="justify" colname="description" colwidth="10*" />
+
+          <thead>
+            <row>
+              <entry>Name</entry>
+
+              <entry>Description</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>cell(a,b)</entry>
+
+				  <entry>In the context of a matrix, returns the value at row a and column b.
+					  In the context of a table, returns the value at column a and row b (remember that tables use column logic).
+					  Everywhere else, this function is undefined.
+
+					  In the case of tables, the column is specified as a path string; see the
+					  documentation of column() for supported path formats.
+				  </entry>
+            </row>
+
+				<row>
+					<entry>cell_(column, row)</entry>
+					<entry>
+						In the context of a table, return the value of a cell specified using 1-based indexes.
+						Wherever possible, you should use cell() instead, because inserting/removing/moving
+						columns will break formulas using cell_().
+					</entry>
+				</row>
+
+            <row>
+              <entry>col(c)</entry>
+
+				  <entry>
+					  DEPRECATED; use column() or cell() instead.
+					  Note that the user interface still uses col() until a proper language-specific mechanism
+					  is implemented.
+				  </entry>
+            </row>
+
+				<row>
+					<entry>column("path")</entry>
+					<entry>
+						In a column formula, returns the value in the given column and current row (i).
+						The column path can either be the name of column in the current table, more
+						generally a relative path to a column in another table (e.g. "../otherTable/col")
+						or an absolute path (i.e., relative to the project root; e.g.
+						"/folder/otherTable/col"). Searching for a table anywhere in the project using
+						"otherTable/col" (without leading slash) is supported for backwards-compatibility
+						reasons, but is strongly discouraged - a future release will drop the requirement
+						of project-wide unique table names, at which point this usage will cease to be
+						well-defined.
+					</entry>
+				</row>
+
+				<row>
+					<entry>column_(index)</entry>
+					<entry>In a column formula, returns the value in the column given by 1-based index
+						and current row (i). You should use column() wherever possible, because inserting/
+						removing/moving columns will break formulas using column_().
+					</entry>
+				</row>
+
+            <row>
+              <entry>if(e1,e2,e3)</entry>
+
+              <entry>if e1 is true, e2 is executed else e3 is
+		executed (works only if SciDAVis is built using muParser 1.x versions).</entry>
+            </row>
+
+	    <row>
+              <entry>e1?e2:e3</entry>
+
+              <entry>if e1 is true, e2 is executed else e3 is
+		executed (C++ style syntax; works only if SciDAVis is built using muParser &gt;= 2.0.0).</entry>
+            </row>
+	    
+            <row>
+              <entry>tablecol(t,c)</entry>
+
+				  <entry>
+					  DEPRECATED; use column() instead.
+				  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+  </sect1>
+
+  <sect1 id="sec-python">
+    <title>Python</title>
+    <indexterm><primary>Scripting</primary><secondary>Python</secondary></indexterm>
+
+    <para>This module provides bindings to the <ulink
+    url="https://www.python.org">Python</ulink> programming language. Basic
+    usage in the context of &appname; will be discussed below, but for more
+    in-depth information on the language itself, please refer to its excellent
+    <ulink url="https://www.python.org/doc">documentation</ulink>.</para>
+
+    <sect2>
+		 <title>Getting Started</title>
+
+		 <para>Make sure your current project uses Python as its interpreter by
+			 selecting the menu point Scripting->Scripting Language and
+			 double-clicking on "Python" in the resulting dialog (if the dialog
+			 appears, but does not contain the "Python" item, your installation
+			 of &appname; has been compiled without Python support).
+			 Next, open a Notes window and enter
+			 <userinput>print "Hello World!"</userinput>. Position the cursor
+			 anywhere on this line and press Ctrl+J, or select "Execute" from
+			 the context menu. The string "Hello World!" should appear below the
+			 line you entered. Congratulations, you've made contact with Python!
+			 You can also enter more complex code fragments, such as function or
+			 class definitions, in which case you have to select the whole code
+			 block before executing it.</para>
+
+		 <para>You can also use Notes windows as a handy calculator. Enter a
+			 mathematical expression on a line of its own - say,
+			 <userinput>5*sin(pi/2)</userinput>. Press Ctr+Enter, or select
+			 "Evaluate" from the context menu. You are rewarded by a new line,
+			 stating (to general astonishment), that the result of evaluating
+			 your expression is <computeroutput>#&gt; 5</computeroutput>. If
+			 you have <ulink url="https://www.scipy.org">SciPy</ulink> and/or
+			 <ulink url="http://pygsl.sourceforge.net">PyGSL</ulink> installed, you
+			 will have immediate access to a huge number of interesting
+			 functions, browseable via the sub-menu "Functions" of the context
+			 menu. Pressing Shift+F1 while in this menu will give you a short
+			 description of the current function. The advantage of only
+			 executing/evaluating single lines or selections on request is that
+			 you can freely mix text and calculations within a Notes window.</para>
+
+		 <para>Another particularly handy place for using Python code are
+			 column formulas. These work just like evaluating expressions
+			 in Note windows, with the additional advantage of some pre-defined
+			 variables: i (the row currently being computed), j (the column
+			 number), sr (start row), er (end row) and self (the table to which the
+			 column being computed belongs; see below for what you can do with it).
+		 </para>
+
+		 <para>If you are already familiar with Python, you might ask yourself at
+			 this point if you can use more complicated column formulas than just
+			 single expressions (for instance, if:/else: decisions based on the
+			 current row number). The answer is: yes, you can. For the benefit of
+			 those not familiar with Python, we will give a short introduction to
+			 the language before discussing how to do this.</para>
+	 </sect2>
+
+    <sect2>
+      <title>Python Basics</title>
+
+		<sect3>
+			<title>Expressions</title>
+
+			<para>Mathematical expressions work largely as expected. However,
+				there's one caveat, especially when switching from muParser:
+				<userinput>a^b</userinput> does not mean "raise a to the power of b" but
+				rather "bitwise exclusive or of a and b"; Python's power operator is **.
+				Thus: <screen width="40">
+<userinput>2^3 # read: 10 xor 11 = 01</userinput>
+<computeroutput>#&gt; 1</computeroutput>
+<userinput>2**3</userinput>
+<computeroutput>#&gt; 8</computeroutput>
+			</screen></para>
+		</sect3>
+
+		<sect3>
+			<title>Statements</title>
+
+			<para>One thing you have to know when working with Python is that
+				indentation is very important. It is used for grouping (most other
+				languages use either braces or keywords like
+				<userinput>do...end</userinput> for this). For example, executing the
+				following: <programlisting
+					width="40">
+x=23
+for i in (1,4,5):
+	x=i**2
+	print(x)
+				</programlisting> will do what you would expect: it prints out the numbers 1, 16 and
+				25; each on a line of its own. Deleting just a bit of space will change
+				the functionality of your program: <programlisting width="40">
+x=23
+for i in (1,4,5):
+	x=i**2
+print(x)
+			</programlisting> will print out only one number - no, not 23, but rather 25. This
+				example was designed to also teach you something about variable scoping:
+				There are no block-local variables in Python.</para>
+
+				<para>There are two different variable scopes to be aware of: local and
+				global variables. Unless specified otherwise, variables are local to the
+				context in which they were defined. Thus, the variable
+				<varname>x</varname> can have three different values in, say, two
+				different Note windows and a column formula. Global variables on the
+				other hand can be accessed from everywhere within your project. A
+				variable <varname>x</varname> is declared global by executing the
+				statement <userinput>global x</userinput>. You have to do this before
+				assigning a value to <varname>x</varname>, but you have to do it only
+				once within the project (no need to "import" the variable before using
+				it). Note that there is a slight twist to these rules when you
+				define your own functions.</para>
+
+				<para>The basic syntax for defining a function (for use within one
+				particular note, for example) is <programlisting width="40">
+def answer():
+	return 42
+			</programlisting> If you want your function to be accessible from the rest of your
+				project, you have to declare it global before the definition: <programlisting
+      width="40">
+global answer
+def answer():
+	return 42
+			</programlisting> You can add your own function to &appname;'s function list. We'll
+				also provide a documentation string that will show up, for example, in
+				the "set column values" dialog: <programlisting width="40">
+global answer
+def answer():
+	"Return the answer to the ultimate question about life, the universe and everything."
+	return 42
+&python-pref;.mathFunctions["answer"] = answer
+			</programlisting> If you want to remove a function from the list,
+			execute <programlisting
+      width="40">
+del &python-pref;.mathFunctions["answer"]
+	</programlisting></para>
+
+				<para>Note that functions have their own local scope. That means that if
+				you enter a function definition in a Notes window, you will not be able to
+				access (neither reading nor writing) Notes-local variables from within
+				the function. However, you can access global variables as usual.</para>
+
+				<para>If-then-else decisions are entered as follows: <programlisting width="40">
+if x&gt;23:
+	print(x)
+else:
+	print("The value is too small.")
+			</programlisting></para>
+
+				<para>You can do loops, too: <programlisting width="40">
+		for i in range(1, 11):
+			print(i)
+			</programlisting> This will print out the numbers between 1 and 10 inclusively (the
+				upper limit does not belong to the range, while the lower limit
+				does).</para>
+		</sect3>
+		<sect3>
+		    <title>Hints on Python 2 vs Python 3 usage</title>
+		      <para>In version 1.23 of &appname; it was added Python 3 support for scripting. Then, in addition to the differences between Python version 2 and 3 <ulink
+    url="https://docs.python.org/3.0/whatsnew/3.0.html">listed here</ulink>, there are some small tips for users that use non-ASCII characters in python scripts.</para>
+		      <para>When &appname; is built against Python 3, it is required to specify the character encoding in the scripting note (at the beginning, preferably) using: <programlisting width="40">
+		# coding=&lt;encoding name&gt; </programlisting> E. g.: to use the UTF-8 character encoding, add <programlisting width="40">
+		# coding=utf8 </programlisting> to the note.</para>
+	    <para>When &appname; is built against Python 2, it is required to specify the character encoding <emphasis>each time</emphasis> you use a non-ASCII character inside a command in the following way: <programlisting width="40">
+		command(unicode("&lt;string to be used&gt;","utf8")) </programlisting> Some examples are:</para>
+	      <para>- To use the print statement:<programlisting width="40">
+		print(unicode("&lt;string to be used&gt;","utf8"))  </programlisting>
+	      - To modify X axis title on a graph:<programlisting width="40">
+		g = graph("Graph1")
+		l = g.activeLayer()
+		l.setXTitle(unicode("&lt;desired X title&gt;","utf8"))</programlisting>
+	      - To access a graph whose window name has a non-ASCII character:<programlisting width="40">
+		g = graph(unicode("&lt;literal window name&gt;","utf8"))  </programlisting></para>
+		</sect3>
+		</sect2>
+
+		<sect2>
+			<title>Evaluation Reloaded</title>
+
+			<para>As we've already mentioned above, there's a bit more to evaluation
+				than just expressions. Note that Python itself can indeed only
+				evaluate expressions; the following describes a feature of &appname;
+				added on top of Python in order to support more interesting column
+				formulas.</para>
+
+			<para>If you use statements (e.g. variable assignments or control
+				structures) in a formula, &appname; will assume it to be the body of a
+				function. That is, the following code will not work:
+				<programlisting width="40">
+a=1
+a+a
+</programlisting>
+				The statement in the first line means that the formula cannot
+				be evaluated as a single expression. Instead, the above code assigns
+				every row in the column the return value of the following function:
+				<programlisting width="40">
+def f():
+	a=1
+	a+a
+</programlisting>
+				However, since Python does not implicitly interpret expressions as
+				something to return, this evaluates to nothing. The correct way
+				to enter formulas with statements in them is to explicitly return
+				something: <programlisting width="40">
+a=1
+return a+a
+</programlisting></para>
+
+		<para>There is a slight catch associated with this strategy. In a Notes
+			window, &appname; will allow you to <emphasis>evaluate</emphasis>
+			variable assignments like <userinput>ee=1.6021773e-19</userinput>
+			without complaining - but this will not lead to the result presumably
+			intended, i.e. introducing a shortcut for the elementary charge to be
+			used within the notes window. What actually happens is this: &appname;
+			evaluates the function <programlisting width="40">
+def f():
+	ee=1.6021773e-19
+</programlisting>
+			As mentioned in the Python introduction above, the function f has its
+			own variable scope and (unless it happens to be declared global) the
+			variable ee will only be visible within this scope (instead of the
+			Notes window's scope). The solution is simple: always
+			<emphasis>execute</emphasis> things like assignments and function
+			definitions, never <emphasis>evaluate</emphasis> them.</para>
+	 </sect2>
+
+    <sect2 id="Python-functions">
+      <title>Mathematical Functions</title>
+    <indexterm><primary>Scripting</primary><secondary>Python</secondary><tertiary>Mathematical functions</tertiary></indexterm>
+
+      <para>Python comes with some basic mathematical functions that are
+      automatically imported (if you use the <link
+      linkend="Python-init">initialization file</link> shipped with &appname;).
+      Along with them, the constants e (Euler's number) and pi (the one and
+      only) are defined. Many, many more functions can be obtained by installing
+		<ulink url="https://www.scipy.org">SciPy</ulink> and/or
+		<ulink url="http://pygsl.sourceforge.net">PyGSL</ulink>.</para>
+
+      <table frame="sides" pgwide="1" tocentry="1">
+        <title>Supported Mathematical Functions</title>
+
+        <tgroup cols="2">
+          <colspec align="left" colname="name" colwidth="1*" />
+
+          <colspec align="justify" colname="description" colwidth="10*" />
+
+          <thead>
+            <row>
+              <entry>Name</entry>
+
+              <entry>Description</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>acos(x)</entry>
+
+              <entry>inverse cosine</entry>
+            </row>
+
+            <row>
+              <entry>asin(x)</entry>
+
+              <entry>inverse sine</entry>
+            </row>
+
+            <row>
+              <entry>atan(x)</entry>
+
+              <entry>inverse tangent</entry>
+            </row>
+
+            <row>
+              <entry>atan2(y,x)</entry>
+
+              <entry>equivalent to atan(y/x), but more efficient</entry>
+            </row>
+
+            <row>
+              <entry>ceil(x)</entry>
+
+              <entry>ceiling; smallest integer greater or equal to x</entry>
+            </row>
+
+            <row>
+              <entry>cos(x)</entry>
+
+              <entry>cosine of x</entry>
+            </row>
+
+            <row>
+              <entry>cosh(x)</entry>
+
+              <entry>hyperbolic cosine of x</entry>
+            </row>
+
+            <row>
+              <entry>degrees(x)</entry>
+
+              <entry>convert angle from radians to degrees</entry>
+            </row>
+
+            <row>
+              <entry>exp(x)</entry>
+
+              <entry>Exponential function: e raised to the power of x.</entry>
+            </row>
+
+            <row>
+              <entry>fabs(x)</entry>
+
+              <entry>absolute value of x</entry>
+            </row>
+
+            <row>
+              <entry>floor(x)</entry>
+
+              <entry>largest integer smaller or equal to x</entry>
+            </row>
+
+            <row>
+              <entry>fmod(x,y)</entry>
+
+              <entry>remainder of integer division x/y</entry>
+            </row>
+
+            <row>
+              <entry>frexp(x)</entry>
+
+              <entry>Returns the tuple (mantissa,exponent) such that
+              x=mantissa*(2**exponent) where exponent is an integer and 0.5
+              &lt;=abs(m)&lt;1.0</entry>
+            </row>
+
+            <row>
+              <entry>hypot(x,y)</entry>
+
+              <entry>equivalent to sqrt(x*x+y*y)</entry>
+            </row>
+
+            <row>
+              <entry>ldexp(x,y)</entry>
+
+              <entry>equivalent to x*(2**y)</entry>
+            </row>
+
+            <row>
+              <entry>log(x)</entry>
+
+              <entry>natural (base e) logarithm of x</entry>
+            </row>
+
+            <row>
+              <entry>log10(x)</entry>
+
+              <entry>decimal (base 10) logarithm of x</entry>
+            </row>
+
+            <row>
+              <entry>modf(x)</entry>
+
+              <entry>return fractional and integer part of x as a
+              tuple</entry>
+            </row>
+
+            <row>
+              <entry>pow(x,y)</entry>
+
+              <entry>x to the power of y; equivalent to x**y</entry>
+            </row>
+
+            <row>
+              <entry>radians(x)</entry>
+
+              <entry>convert angle from degrees to radians</entry>
+            </row>
+
+            <row>
+              <entry>sin(x)</entry>
+
+              <entry>sine of x</entry>
+            </row>
+
+            <row>
+              <entry>sinh(x)</entry>
+
+              <entry>hyperbolic sine of x</entry>
+            </row>
+
+            <row>
+              <entry>sqrt(x)</entry>
+
+              <entry>square root of x</entry>
+            </row>
+
+            <row>
+              <entry>tan(x)</entry>
+
+              <entry>tangent of x</entry>
+            </row>
+
+            <row>
+              <entry>tanh(x)</entry>
+
+              <entry>hyperbolic tangent of x</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </sect2>
+
+    <sect2 id="Python-API-Intro">
+      <title>Accessing &appname;'s functions from Python</title>
+
+      <para>We will assume that you are using the <link
+      linkend="Python-init">initialization file</link> shipped with
+      &appname;.</para>
+
+      <sect3>
+        <title>Establishing contact</title>
+
+        <para>Accessing the objects in your project is straight-forward,
+        <programlisting width="40">
+t = table("Table1")
+m = matrix("Matrix1")
+g = graph("Graph1")
+n = note("Notes1")
+	  </programlisting> as is creating new objects: <programlisting width="40">
+# create an empty table named "tony" with 5 rows and 2 columns:
+t = newTable("tony", 5, 2)
+# use defaults
+t = newTable()
+# create an empty matrix named "gina" with 42 rows and 23 columns:
+m = newMatrix("gina", 42, 23)
+# use defaults
+m = newMatrix()
+# create an empty graph window
+g = newGraph()
+# create an empty note named "momo"
+n = newNote("momo")
+# use defaults
+n = newNote()
+	  </programlisting></para>
+	  <para>
+	    New objects will always be added to the active folder.
+	    The functions table, matrix, graph and note will start searching in the active folder and, failing this, continue with a depth-first recursive search of the project's root folder.
+	    In order to access other folders, there are the functions
+	    <programlisting width="40">
+f = activeFolder()
+# and
+f = rootFolder()
+</programlisting>
+	    which can be used to access subfolders and windows:
+	    <programlisting width="40">
+f2 = f.folders()[number]
+f2 = f.folder(name, caseSensitive=True, partialMatch=False)
+t = f.table(name, recursive=False)
+m = f.matrix(name, recursive=False)
+g = f.graph(name, recursive=False)
+n = f.note(name, recursive=False)
+</programlisting>
+            If you supply True for the recursive argument, a depth-first recursive search of all sub-folders will be performed and the first match returned.</para>
+
+
+        <para>Also, every piece of code is executed in the context of an
+	  object which you can access via the <varname>self</varname> variable. For example,
+        entering <userinput>self.cell("t",i)</userinput> as a column formula
+        is equivalent to the convenience function
+        <userinput>col("t")</userinput>.</para>
+      </sect3>
+
+      <sect3>
+        <title>Working with Tables</title>
+
+        <para>We'll assume that you have assigned some table to the variable
+        <varname>t</varname>. You can access its numeric cell values with
+        <programlisting width="40">
+t.cell(col, row)
+# and
+t.setCell(col, row, value)
+	  </programlisting> Whenever you have to specify a column, you can use either the
+        column name (as a string) or the consecutive column number (starting
+        with 1). Row numbers also start with 1, just as they are displayed. If
+        you want to work with arbitrary texts or the textual representations
+        of numeric values, you can use <programlisting width="40">
+t.text(col, row)
+# and
+t.setText(col, row, string)
+	  </programlisting> The number of columns and rows is accessed via <programlisting
+        width="40">
+t.numRows()
+t.numCols()
+t.setNumRows(number)
+t.setNumCols(number)
+	  </programlisting> Column names can be read and written with <programlisting width="40">
+t.colName(number)
+t.setColName(col, newName)
+	  </programlisting> Normalize a single or all columns: <programlisting width="40">
+t.normalize(col)
+t.normalize()
+	  </programlisting> Import values from <varname>file</varname>, using
+        <varname>sep</varname> as separator char and ignoring
+        <varname>ignore</varname> lines at the head of the file. The flags
+        should be self-explanatory. <programlisting width="40">
+t.importASCII(file, sep="\t", ignore=0, renameCols=False, stripSpaces=True, simplifySpace=False, newTable=False)
+	  </programlisting> After having changed some table values from a script, you will
+        likely want to update dependent Graphs: <programlisting width="40">
+t.notifyChanges()
+	  </programlisting></para>
+
+        <para>As a simple example, let's set some column values without using
+        the dialog. <programlisting width="40">
+t = table("table1")
+for i in range(1, t.numRows()+1):
+	t.setCell(1, i, i**2)
+t.notifyChanges()
+	  </programlisting></para>
+      </sect3>
+
+      <sect3>
+        <title>Working with Matrices</title>
+
+        <para>We'll assume that you have assigned some matrix to the variable
+        <varname>m</varname>. Accessing cell values is very similar to Table,
+        but since Matrix doesn't use column logic, row arguments are specified
+        before columns and obviously you can't use column name. <programlisting
+        width="40">
+m.cell(row, col)
+m.setCell(row, col, value)
+m.text(row, col)
+m.setText(row, col, string)
+	  </programlisting> Also like with tables, there's <programlisting width="40">
+m.numRows()
+# and
+m.numCols()
+	  </programlisting></para>
+      </sect3>
+
+      <sect3>
+        <title>Plotting and Working with Graphs</title>
+
+        <para>If you want to create a new Graph window for some data in table
+        table1, you can use the plot command: <programlisting width="40">
+g = plot(table, column, type)
+	  </programlisting> <varname>type</varname> is a number between 0 and 10 and
+        specifies the desired plot type: <variablelist spacing="compact">
+            <varlistentry>
+              <term>0.</term>
+
+              <listitem>
+                <para>Line</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>1.</term>
+
+              <listitem>
+                <para>Symbols</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>2.</term>
+
+              <listitem>
+                <para>Line and Symbols</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>3.</term>
+
+              <listitem>
+                <para>Columns</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>4.</term>
+
+              <listitem>
+                <para>Area</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>5.</term>
+
+              <listitem>
+                <para>Pie</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>6.</term>
+
+              <listitem>
+                <para>Vertical drop lines</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>7.</term>
+
+              <listitem>
+                <para>Splines and Symbols</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>8.</term>
+
+              <listitem>
+                <para>Vertical steps</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>9.</term>
+
+              <listitem>
+                <para>Histogram</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>10.</term>
+
+              <listitem>
+                <para>Rows</para>
+              </listitem>
+            </varlistentry>
+          </variablelist> You can plot more than one column at once by giving
+        a Python tuple (see the <ulink url="https://docs.python.org/3/tutorial/index.html">Python
+        Tutorial</ulink>) as an argument: <programlisting width="40">
+g = plot(table("table1"), (2,4,7), 2)
+	  </programlisting></para>
+
+        <para>If you want to add a curve to an existing Graph window, you have
+        to choose the destination layer. Usually, <programlisting width="40">
+l = g.activeLayer()
+	  </programlisting> will do the trick, but you can also select a layer by its number:
+        <programlisting width="40">
+l = g.layer(num)
+	  </programlisting> You can then add or remove curves to or from this layer: <programlisting
+        width="40">
+l.insertCurve(table, column, type=1)
+l.insertCurve(table, Xcolumn, Ycolumn, type=1)
+l.removeCurve(curveName)
+l.removeCurve(curveNumber)
+l.deleteFitCurves()
+	  </programlisting> In case you need the number of curves on a layer, you can get it
+        with <programlisting width="40">
+l.numCurves()
+	  </programlisting></para>
+
+      <para>Use the following functions to change the axis attachment of a curve:
+	<programlisting width="40">
+
+c = l.curve(number)
+l.setCurveAxes(number, x-axis, y-axis)
+c.setXAxis(x-axis)
+c.setYAxis(y-axis)
+	  </programlisting> where <varname>number</varname> is curve's index, <varname>x-axis</varname> is either <varname>Layer.Bottom</varname> or <varname>Layer.Top</varname> and <varname>y-axis</varname> is either <varname>Layer.Left</varname> or <varname>Layer.Right</varname> <programlisting width="40">
+l.setCurveAxes(0, Layer.Top, Layer.Right)  # modify the first curve in the layer (curve index is 0)
+c.setXAxis(Layer.Bottom)
+c.setYAxis(Layer.Right)  # attach curve c to the right Y axis
+	</programlisting></para>
+      
+        <para>Layers and whole Graphs can be printed and exported from within
+        Python. Before you do this, you would probably want to change layer and axis
+        titles as well as legend texts: <programlisting width="40">
+l.setTitle(title)
+l.setXTitle(Xtitle)
+l.setYTitle(Ytitle)
+l.setLegend(text)
+	  </programlisting> You can also customize the scales of the different axes using: <programlisting width="40">
+l.setScale(int axis, double start, double end, double step=0.0, int majorTicks=5, int minorTicks=5, int type=0, bool inverted=False);
+</programlisting>
+	  where <varname>axis</varname> is one of <varname>Layer.Left</varname>, <varname>Layer.Right</varname>, <varname>Layer.Bottom</varname>, <varname>Layer.Top</varname>,
+type specifies the desired scale type: <varname>0</varname> for <varname>Linear</varname> or <varname>1</varname> for <varname>Log10</varname>
+and <varname>step</varname> defines the size of the interval between the major scale ticks. If not specified (default value is 0.0), the step size is calculated automatically. The other flags should be self-explanatory.</para>
+	  <para>Now, here is how you can export a layer <programlisting width="40">
+l.print()
+l.exportToSVG(filename)
+l.exportToEPS(filename)
+l.exportImage(filename, filetype="PNG", quality=100, transparent=False)
+	  </programlisting> and a graph <programlisting width="40">
+g.print()
+g.exportToSVG(filename)
+g.exportToEPS(filename)
+	  </programlisting></para>
+      </sect3>
+
+      <sect3>
+        <title>Fitting</title>
+
+        <para>Assuming you have a Graph named "graph1" with a curve entitled
+        "table1_2" (on its active layer), a minimal Fit example would be:
+        <programlisting width="40">
+f = GaussFit(graph("graph1").activeLayer(), "table1_2")
+f.guessInitialValues()
+f.fit()
+	  </programlisting> This creates a new GaussFit object on the curve, lets it guess
+        the start parameters and does the fit. The following fit types are
+        supported: <itemizedlist>
+            <listitem>
+              <para>LinearFit(layer, curve)</para>
+            </listitem>
+
+            <listitem>
+              <para>PolynomialFit(layer, curve, degree=2, legend=False)</para>
+            </listitem>
+
+            <listitem>
+              <para>ExponentialFit(layer, curve, growth=False)</para>
+            </listitem>
+
+            <listitem>
+              <para>TwoExpFit(layer, curve)</para>
+            </listitem>
+
+            <listitem>
+              <para>ThreeExpFit(layer, curve)</para>
+            </listitem>
+
+            <listitem>
+              <para>GaussFit(layer, curve)</para>
+            </listitem>
+
+            <listitem>
+              <para>GaussAmpFit(layer, curve)</para>
+            </listitem>
+
+            <listitem>
+              <para>LorentzFit(layer,curve)</para>
+            </listitem>
+
+            <listitem>
+              <para>SigmoidalFit(layer, curve)</para>
+            </listitem>
+
+            <listitem>
+              <para>NonLinearFit(layer, curve)</para>
+		    <programlisting width="40">
+f = NonLinearFit(layer, curve)
+f.setParameters(name1, ...)
+f.setFormula(formula_string)
+		    </programlisting>
+            </listitem>
+
+            <listitem>
+		    <para>PluginFit(layer, curve)</para>
+		    <programlisting width="40">
+f = PluginFit(layer, curve)
+f.load(pluginName)
+		    </programlisting>
+            </listitem>
+          </itemizedlist> For each of these, you can optionally restrict the X
+        range that will be used for the fit, like in <programlisting width="40">
+f = LinearFit(graph("graph1").activeLayer(), "table1_2", 2, 7)
+f.fit()
+	  </programlisting></para>
+
+        <para>After creating the Fit object and before calling its fit()
+        method, you can set a number of parameters that influence the fit:
+        <programlisting width="80">
+f.setDataFromCurve(curve)			<lineannotation>change data source</lineannotation>
+f.setDataFromCurve(curve, graph)		<lineannotation>change data source</lineannotation>
+f.setDataFromCurve(curve, from, to)		<lineannotation>change data source</lineannotation>
+f.setDataFromCurve(curve, from, to, graph)	<lineannotation>change data source</lineannotation>
+f.setInterval(from, to)				<lineannotation>change data range</lineannotation>
+f.setInitialValue(number, value)
+f.setInitialValues(value1, ...)
+f.guessInitialValues()
+f.setAlgorithm(algo) # algo = Fit.ScaledLevenbergMarquardt, Fit.UnscaledLevenbergMarquardt, Fit.NelderMeadSimplex
+<!-- f.setWeightingData(method, colname) # method = Fit.NoWeighting, Fit.Instrumental, Fit.Statistical, Fit.Dataset -->
+<!-- setWeightingData was replaced by setYErrorSource at some version -->
+f.setYErrorSource(ErrorSource, colname) # ErrorSource can be: 0 / Fit.UnknownErrors, 1 / Fit.AssociatedErrors,
+2 / Fit.PoissonErrors, or 3 / Fit.CustomErrors
+f.setTolerance(tolerance)
+f.setOutputPrecision(precision)
+f.setMaximumIterations(number)
+f.scaleErrors(yes = True)
+f.setColor(qt.QColor("green"))			<lineannotation>change the color of the result fit curve to green (default color is red)</lineannotation>
+	  </programlisting></para>
+
+        <para>After you've called fit(), you have a number of possibilities
+        for extracting the results: <programlisting width="40">
+f.results()
+f.errors()
+f.chiSquare()
+f.rSquare()
+f.dataSize()
+f.numParameters()
+f.parametersTable("params")
+f.covarianceMatrix("cov")
+	  </programlisting></para>
+      </sect3>
+    </sect2>
+
+	 <sect2 id="Python-API">
+		 <title>API documentation</title>
+		 <para>Classes mentioned below that start with "Q" mostly belong to Qt and can be used via
+			 PyQt (with the exception of classes starting with "Qwt", which belong to Qwt).
+			 If you want to know what you can do with such classes (e.g. QIcon or QDateTime), see the
+			 <ulink url="http://pyqt.sourceforge.net/Docs/PyQt4/classes.html">PyQt
+				 reference documentation</ulink>. It's also useful to know that you can call any QWidget
+			 method exported by PyQt on instances of MDIWindow (and thus Table, Graph, Matrix and
+			 Note).
+		 </para>
+		 <sect3><title>class AbstractAspect (inherits QObject)</title>
+			 <para>A base class for content of a project. While currently the only AbstractAspect
+				 accessible to you is Column, a future release will make more extensive usage of this;
+				 probably with some revisions in the design, so only some basic functions are documented
+				 (and supported) for now.</para>
+			 <programlisting width="80">
+col = newTable("my-table",2,30).column("1")
+col.setName("abc")
+table("my-table").column("2").remove()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>index()</term>
+					 <listitem>Return the 0-based index of the Aspect in its sibling list.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>name()</term>
+					 <listitem>Return the Aspect's name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setName(string)</term>
+					 <listitem>Change the Aspect's name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>comment()</term>
+					 <listitem>Return comment attached to the Aspect.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setComment(string)</term>
+					 <listitem>Change the comment attached to the Aspect.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>icon()</term>
+					 <listitem>Return the icon (a QIcon) used to designate the Aspect's type; for columns,
+						 this is the data type icon in the table header.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>creationTime()</term>
+					 <listitem>Return point in time the Aspect was created by the user (as a QDateTime).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>remove()</term>
+					 <listitem>Remove Aspect from the project (can be undone using Edit-&gt;Undo menu).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>signal void aspectDescriptionAboutToChange(const AbstractAspect*)</term>
+					 <listitem>Emitted before the description (name or comment) is changed.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>signal void aspectDescriptionChanged(const AbstractAspect*)</term>
+					 <listitem>Emitted after the description (name or comment) has changed.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>signal void aspectAboutToBeRemoved(const AbstractAspect*)</term>
+					 <listitem>Emitted before the Aspect is removed.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Column (inherits AbstractAspect)</title>
+			 <para>Represents a column in a table.</para>
+			 <para>In addition to the valueAt()/setValueAt() interface described below, starting with
+				 &appname; 0.2.4, Y columns support
+				 getting/setting row values via the values in the corresponding X column. This is done
+				 using Python's item access notation for sequence types (as in col["abc"]).</para>
+			 <programlisting width="80">
+# basic access
+tab = newTable("tabula1",2,20)
+col = tab.column("1")
+col.setValueAt(1, 123.0)
+print col.valueAt(1)
+# replacing multiple values at once is more efficient than setting them one at a time
+col.replaceValues(5, [11.2, 12.3, 23.4, 34.5, 45.6])
+# set a value in the second column based on the content of the first one
+# (needs &appname; >= 0.2.4)
+tab.column("2")[23.4] = 46.8
+dest = table("tabula1").column("2")
+# also, copying from another column can be done in one go:
+dest.copy(col, 5, 2, 10)
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>columnMode()</term>
+					 <listitem>A string designating the data type; one of "Numeric", "Text", "Month",
+						 "Day" or "DateTime".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColumnMode(string)</term>
+					 <listitem>Change the column's data type; argument must be one of "Numeric", "Text",
+						 "Month", "Day" or "DateTime".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>copy(Column)</term>
+					 <listitem>Copy complete content of other column, which must have the same data type (mode).
+					 Returns a boolean indicating success or failure.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>copy(Column,int,int,int)</term>
+					 <listitem>copy(source, source_start, dest_start, num_rows) copies num_rows values from source,
+						 starting to read at row source_start and to write at row dest_start.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>rowCount()</term>
+					 <listitem>Number of rows in the column.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertRows(int, int)</term>
+					 <listitem>insertRows(before, count) insert count empty rows before row numbered before</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>removeRows(int, int)</term>
+					 <listitem>removeRows(first, count) removes count rows starting with row numbered first</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plotDesignation()</term>
+					 <listitem>Return a string representing the plot designation of the column; one of "noDesignation", "X", "Y", "Z", "xErr" or "yErr".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPlotDesignation(string)</term>
+					 <listitem>Set the plot designation. The argument must be one of "noDesignation", "X", "Y", "Z", "xErr" or "yErr".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>clear()</term>
+					 <listitem>Clear content of all cells in the column, marking them as empty/invalid.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>isInvalid(int)</term>
+					 <listitem>Returns boolean indicating whether the given row is marked as empty/invalid.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>formula(int)</term>
+					 <listitem>Return formula used to compute the cell value in the given row.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFormula(int, string)</term>
+					 <listitem>Sets formula for the given row to string.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>clearFormulas()</term>
+					 <listitem>Discard all formulas associated with cells.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>valueAt(int)</term>
+					 <listitem>Retrieve value of the specified cell (given by 0-based index), assuming that the column has columnMode() == "Numeric".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setValueAt(int, double)</term>
+					 <listitem>Set value of specified cell (given by 0-based index), assuming that the column has columnMode() == "Numeric".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>replaceValues(int, list of double values)</term>
+					 <listitem>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is one of "Numeric". Compared with setValueAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>textAt(int)</term>
+					 <listitem>Retrieve value of the specified cell (given by 0-based index), assuming that the column has columnMode() == "Text".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTextAt(int, string)</term>
+					 <listitem>Set value of specified cell (given by 0-based index), assuming that the column has columnMode() == "Text".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>replaceTexts(int, list of strings)</term>
+					 <listitem>Mass-update cells starting at the indicated row, assuming that the column has columnMode() == "Text". Compared with setTextAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>dateAt(int)</term>
+					 <listitem>Retrieve value of the specified cell (given by 0-based index), assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setDateAt(int, QDate)</term>
+					 <listitem>Set value of specified cell (given by 0-based index), assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>timeAt(int)</term>
+					 <listitem>Retrieve value of the specified cell (given by 0-based index), assuming that the column has columnMode() == "DateTime".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTimeAt(int, QTime)</term>
+					 <listitem>Set value of specified cell (given by 0-based index), assuming that the column has columnMode() == "DateTime".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>dateTimeAt(int)</term>
+					 <listitem>Retrieve value of the specified cell (given by 0-based index), assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setDateTimeAt(int, QDateTime)</term>
+					 <listitem>Set value of specified cell (given by 0-based index), assuming that the column's columnMode() is one of "Month", "Day", "DateTime".</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>replaceDateTimes(int, list of QDateTime values)</term>
+					 <listitem>Mass-update cells starting at the indicated row, assuming that the column's columnMode() is one of "Month", "Day", "DateTime". Compared with setDateTimeAt(), this has the advantage of being much more efficient; particularly if the column has dependant plots.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>x()</term>
+					 <listitem>Returns the X Column associated with this (Y, xErr or yErr) column.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>y()</term>
+					 <listitem>Returns the Y Column associated with this (xErr or yErr) column, or the first Y column associated with this X column.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class MDIWindow (inherits QWidget)</title>
+			 <para>Base class of Table, Matrix, Graph and Note. A redesigned analogue under the name of "Part" (inheriting from AbstractAspect) is under development; it should be possible to provide a backwards-compatible interface, though.</para>
+			 <programlisting width="80">
+tmp = newTable("temp1", 2, 10)
+tmp.setWindowLabel("a temporary table")
+tmp.setCaptionPolicy(MDIWindow.Label)
+# ...
+tmp.confirmClose(False)
+tmp.close()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>name()</term>
+					 <listitem>Return the window's name (added in &appname; 0.2.3).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setName(string)</term>
+					 <listitem>Set window's name. IMPORTANT: This was added in &appname; 0.2.3, but unfortunately is BROKEN in this release. Usable starting with &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>windowLabel()</term>
+					 <listitem>Returns the comment associated with the window (yes, the confusing name will be fixed in a future release).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setWindowLabel(string)</term>
+					 <listitem>Set comment associated with the window (yes, the confusing name will be fixed in a future release).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>captionPolicy()</term>
+					 <listitem>Return caption policy (i.e., what to display in the title bar). One of the integer constants MDIWindow.Name, MDIWindow.Label or MDIWindow.Both.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCaptionPolicy(int)</term>
+					 <listitem>Set caption policy (i.e., what to display in the title bar). Must be one of the integer constants MDIWindow.Name, MDIWindow.Label or MDIWindow.Both.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>folder()</term>
+					 <listitem>Return the folder this window belongs to (an object of class Folder).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>confirmClose(boolean)</term>
+					 <listitem>Set a flag indicating whether the user should be given the opportunity to cancel removing the window or minimize it instead when trying to close it. When False, close() will remove the window without asking for confirmation, which is useful for temporary objects created by a script.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>clone()</term>
+					 <listitem>Returns a copy of this window.
+						 Added in &appname; 0.2.4.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Table (inherits MDIWindow)</title>
+			 <para>Class of table (spreadsheet) windows.</para>
+			 <programlisting width="80">
+tab = newTable("tabula",2,10)
+for j in range(0, tab.numCols()):
+    for i in range(0, tab.numRows()):
+        tab.column(j).setValueAt(i,i*j)	
+tab.normalize()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>numRows()</term>
+					 <listitem>Returns the number of rows of the table.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numCols()</term>
+					 <listitem>Returns the number of columns of the table.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setNumRows(int)</term>
+					 <listitem>Sets the number of rows of the table.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setNumCols(int)</term>
+					 <listitem>Sets the number of columns of the table.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>column(string or int)</term>
+					 <listitem>Returns Column indicated by name (preferred) or 0-based index. For the
+						 latter form, keep in mind that inserting, removing or moving columns will break
+						 scripts which refer to a specific column by index.
+						 Starting with &appname; 0.2.4, columns may also be accessed using the []
+						 operator, i.e. using table("table name")[column name or index].
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>text(string or int, int)</term>
+					 <listitem>DEPRECATED. Use column(col).textAt(row) or str(column(col).valueAt(row)) instead (depending on the column's mode).
+					 CAVEAT: text() indexes are 1-based, while column() and textAt() use more conventional 0-based indexes!</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>cell(string or int, int)</term>
+					 <listitem>DEPRECATED. Use column(col).valueAt(row) instead.
+					 CAVEAT: cell() indexes are 1-based, while column() and valueAt() use more conventional 0-based indexes!</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setText(string or int, int, string</term>
+					 <listitem>DEPRECATED. Use column(col).setTextAt(row,value) instead.
+					 CAVEAT: setText() indexes are 1-based, while column() and setTextAt() use more conventional 0-based indexes!</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCell(string or int, int, double</term>
+					 <listitem>DEPRECATED. Use column(col).setValueAt(row,value) instead.
+					 CAVEAT: setCell() indexes are 1-based, while column() and setValueAt() use more conventional 0-based indexes!</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>colName(int)</term>
+					 <listitem>DEPRECATED. Use column(col).name() instead.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColName(int,string)</term>
+					 <listitem>DEPRECATED. Use column(col).setName(name) instead.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setComment(int,string)</term>
+					 <listitem>DEPRECATED. Use column(col).setComment(text) instead.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCommand(string or int, string)</term>
+					 <listitem>Set formula indicated by first argument to the text given in the second argument.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>notifyChanges()</term>
+					 <listitem>DEPRECATED. Update notifications are now done automatically.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>importASCII(string, string, int, bool, bool, bool)</term>
+					 <listitem>importASCII(file, separator=&quot;\t&quot;, ignored_lines=0, rename_cols=False, strip_spaces=True, simplify_spaces=False)
+						 imports file into this table, skipping ignored_lines lines at the beginning and
+						 splitting the rest into columns according to the given separator and flags.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportASCII(string, string, bool, bool)</term>
+					 <listitem>exportASCII(file, separator=&quot;\t&quot;, with_comments=False, selection_only=False)
+						 exports this table to the given file with the column separator given in the second argument;
+						 optionally including column comments and optionally exporting only selected cells.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>normalize(string or int)</term>
+					 <listitem>Normalize specified column to a maximum cell value of one.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>normalize()</term>
+					 <listitem>Normalize all columns in table to a maximum cell value of one.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>sortColumn(string or int, int=0)</term>
+					 <listitem>Sort column indicated in the first argument. The second argument selects
+						 the sorting order; 0 means ascending, 1 means descending.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>sort(int=0, int=0, string="")</term>
+					 <listitem>sort(type, order, leading_column) sorts all columns in the table either separately
+						 (type=0) or together (type=1) with the leading column given by name. The second argument selects
+						 the sorting order; 0 means ascending, 1 means descending.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>sortColumns(list of strings, int, int, string)</term>
+					 <listitem>sortColumns(columns, type=0, order=0, leading_column="") sorts columns given as a tuple of
+						 names either separately (type=0) or together (type=1) with the leading column given by name.
+						 The third argument selects the sorting order; 0 means ascending, 1 means descending.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Matrix (inherits MDIWindow)</title>
+			 <para>Class of matrix windows.</para>
+			 <programlisting width="80">
+mat = newMatrix("mat", 10, 20)
+mat.setCoordinates(100,2000,100,1000)
+mat.setFormula("i*j")
+mat.recalculate()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>numRows()</term>
+					 <listitem>Returns the number of rows in the matrix.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numCols()</term>
+					 <listitem>Returns the number of columns in the matrix.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setNumRows(int)</term>
+					 <listitem>Changes the number of rows in the matrix.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setNumCols(int)</term>
+					 <listitem>Changes the number of columns in the matrix.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setDimensions(int,int)</term>
+					 <listitem>setDimensions(rows, cols) changes the number of rows and columns simultaneously.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>cell(int,int)</term>
+					 <listitem>cell(row,column) returns the content of the indicated cell as a number.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>text(int,int)</term>
+					 <listitem>text(row,column) returns the content of the indicated cell as its textual representation.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCell(int,int,double)</term>
+					 <listitem>setCell(row,column,value) changes the content of the indicated cell to the indicated numeric value.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setText(int,int,string)</term>
+					 <listitem>setText(row,column,value) interprets the string value according to the numeric format of the matrix
+						 and changes the content of the indicated cell accordingly.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xStart()</term>
+					 <listitem>Returns logical X coordinate of the first column.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xEnd()</term>
+					 <listitem>Returns logical X coordinate of the last column.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yStart()</term>
+					 <listitem>Returns logical Y coordinate of the first row.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yEnd()</term>
+					 <listitem>Returns logical Y coordinate of the last row.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCoordinates(double,double,double,double)</term>
+					 <listitem>setCoordinates(x_start, x_end, y_start, y_end) changes the logical
+						 coordinate system associated with the matrix.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFormula(string)</term>
+					 <listitem>Changes the formula used to (re)calculate cell values of the matrix.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>recalculate()</term>
+					 <listitem>Recalculate all cell values from the currently set formula. Returns boolean
+						 indicating success or failure. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setNumericPrecision(int)</term>
+					 <listitem>Changes the number of decimal digits being displayed.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>transpose()</term>
+					 <listitem>Mirror matrix at main diagonal (aka matrix transposition).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>invert()</term>
+					 <listitem>Replace the content of the matrix by its inverse (with respect to matrix multiplication).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>determinant()</term>
+					 <listitem>Returns determinant of the matrix.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class ArrowMarker</title>
+			 <para>A line or an arrow displayed on a graph.</para>
+			 <programlisting width="80">
+arrow = ArrowMarker()
+arrow.setStart(50,200)
+arrow.setEnd(400,400)
+arrow.setWidth(2)
+arrow.drawStartArrow(False)
+arrow.drawEndArrow(True)
+arrow.setColor(Qt.green)
+
+layer = newGraph().activeLayer()
+layer.addArrow(arrow)
+layer.replot()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>ArrowMarker()</term>
+					 <listitem>Creates a new arrow marker. You can then set various attributes (see below) and hand
+						 it to Layer.addArrow().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setStart(double, double)</term>
+					 <listitem>setStart(x,y) sets the line's start point in plot coordinates (i.e., as
+						 displayed on the axes).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setEnd(double,double)</term>
+					 <listitem>setEnd(x,y) sets the line's end point in plot coordinates (i.e., as
+						 displayed on the axes).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setStyle(Qt.PenStyle)</term>
+					 <listitem>Sets pen style used to draw the line and arrow heads. One of Qt.NoPen,
+						 Qt.SolidLine, Qt.DashLine, Qt.DotLine, Qt.DashDotLine, Qt.DashDotDotLine.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(QColor)</term>
+					 <listitem>Sets the line/arrow head color. Most commonly, the argument will be either
+						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
+						 for details) or a RGBA spec in the form QtGui.QColor(red, green, yellow, alpha) with
+						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setWidth(int)</term>
+					 <listitem>Sets the pen width used to draw line and arrow heads.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>drawStartArrow(bool=True)</term>
+					 <listitem>Sets whether an arrow head is drawn at the line's start.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>drawEndArrow(bool=True)</term>
+					 <listitem>Sets whether an arrow head is drawn at the line's end.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setHeadLength(int)</term>
+					 <listitem>Sets the length of the arrow heads.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setHeadAngle(int)</term>
+					 <listitem>Sets the angle defining the &quot;sharpness&quot; of the arrow heads.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>fillArrowHead(bool)</term>
+					 <listitem>Sets whether arrow heads are to be filled out.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class ImageMarker</title>
+			 <para>An image to be displayed on a graph.</para>
+			 <programlisting width="80">
+layer = newGraph().activeLayer()
+image = layer.addImage("/usr/share/icons/hicolor/128x128/apps/scidavis.png")
+image.setCoordinates(200,800,700,300)
+layer.replot()
+          </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>ImageMarker(string)</term>
+					 <listitem>Creates a new image marker displaying the content of the specified image file.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>fileName()</term>
+					 <listitem>Returns the name of the file the image marker refers to.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>size()</term>
+					 <listitem>Returns the size the image takes up in paint (pixel) coordinates as a QSize.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSize(int,int)</term>
+					 <listitem>Sets the size the image takes up in paint (pixel) coordinates.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCoordinates(double,double,double,double)</term>
+					 <listitem>setCoordinates(left, top, right, bottom) changes position and size of the
+						 image marker in plot coordinates.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Legend</title>
+			 <para>Text boxes displayed on a graph. While this is also used for legends, a better
+				 (since more general) name would probably be TextMarker.</para>
+			 <programlisting width="80">
+layer = newGraph().activeLayer()
+legend = layer.newLegend("hello world")
+legend.setBackgroundColor(Qt.green)
+legend.setTextColor(Qt.darkBlue)
+legend.setFont(QtGui.QFont("Arial",14,QtGui.QFont.Bold))
+layer.replot()
+</programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>setText(string)</term>
+					 <listitem>Changes the legend's content.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTextColor(QColor)</term>
+					 <listitem>Changes the text color. Most commonly, the argument will be either
+						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
+						 for details) or a RGBA spec in the form QtGui.QColor(red, green, yellow, alpha) with
+						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFrameStyle(int)</term>
+					 <listitem>Sets the style of frame drawn around the text. 0 for none, 1 for line or
+						 2 for line with shadow.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setBackgroundColor(QColor)</term>
+					 <listitem>Changes the background color. Most commonly, the argument will be either
+						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
+						 for details) or a RGBA spec in the form QtGui.QColor(red, green, yellow, alpha) with
+						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFont(QFont)</term>
+					 <listitem>Sets the font used to render the text. See QFont documentation for how
+						 to construct a valid argument.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOriginCoord(double,double)</term>
+					 <listitem>setOriginCoord(x,y) sets the position of the top-left corner in plot coordinates.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class QwtSymbol</title>
+			 <para>Represents a type of symbol on a scatter plot (ellipse, rectangle etc.) together
+				 with attributes determining parameters like color, size etc. This class is part of the
+				 Qwt library, but exported and documented as part of &appname;'s API for simplicity. Also,
+				 convenience methods for setting outline/fill colors are added on top of Qwt.</para>
+			 <programlisting width="80">
+symbol = QwtSymbol()
+symbol.setStyle(QwtSymbol.Triangle)
+symbol.setOutlineColor(QtGui.QColor(Qt.red))
+symbol.setFillColor(QtGui.QColor(Qt.green))
+symbol.setSize(20)
+# assuming Graph1 exists and contains a plot
+layer = graph("Graph1").activeLayer()
+layer.curve(0).setSymbol(symbol)
+layer.replot()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>QwtSymbol()</term>
+					 <listitem>Construct new symbol with default settings (= no symbol).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>QwtSymbol(Style, QBrush, QPen, QSize)</term>
+					 <listitem>Construct new symbol, with the four properties set as if given to setStyle(),
+						 setBrush(), setPen() and setSize(), respectively.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(QColor)</term>
+					 <listitem>Simultaneously sets color for filling and drawing the outline. Modifies
+						 pen() and brush(). Note that due to the setColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(int)</term>
+					 <listitem>Convenience overload of setColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutlineColor(QColor)</term>
+					 <listitem>Sets the color used for drawing the outline of the symbol. Modifies pen().
+						 Note that due to the setOutlineColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutlineColor(int)</term>
+					 <listitem>Convenience overload of setOutlineColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFillColor(QColor)</term>
+					 <listitem>Sets the color used for filling the interior of the symbol. Modifies brush().
+						 Note that due to the setFillColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFillColor(int)</term>
+					 <listitem>Convenience overload of setFillColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>clone()</term>
+					 <listitem>Returns an independent copy of the symbol object.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSize(QSize)</term>
+					 <listitem>Sets size of the symbol in paint (pixel) coordinates.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSize(int,int=-1)</term>
+					 <listitem>setSize(width,height) sets the size of the symbol in paint (pixel) coordinates.
+						 If height=-1 (default), it is set to equal to width.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setBrush(QBrush)</term>
+					 <listitem>Sets the brush used to fill the interior of the symbol. See PyQt documentation
+						 for how to construct a QBrush.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPen(QPen)</term>
+					 <listitem>Sets the pen used to draw the border of the symbol. See PyQt documentation
+						 for how to construct a QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setStyle(Style)</term>
+					 <listitem>Sets the type of symbol to draw. The argument needs to be one of the
+						 integer constants
+						 QwtSymbol.NoSymbol, QwtSymbol.Ellipse, QwtSymbol.Rect, QwtSymbol.Diamond,
+						 QwtSymbol.Triangle, QwtSymbol.DTriangle, QwtSymbol.UTriangle, QwtSymbol.LTriangle, 
+						 QwtSymbol.RTriangle, QwtSymbol.Cross, QwtSymbol.XCross, QwtSymbol.HLine,
+						 QwtSymbol.VLine, QwtSymbol.Star1, QwtSymbol.Star2, QwtSymbol.Hexagon.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>brush()</term>
+					 <listitem>Returns the currently set brush (a QBrush) for filling the interior of the symbol.
+						 Due to a design limitation of Qwt, setting attributes of the brush directly has no effect.
+						 You need to create a copy of the brush, change its attributes and hand it again to setBrush().
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>pen()</term>
+					 <listitem>Returns the currently set pen (a QPen) for drawing the border of the symbol.
+						 Due to a design limitation of Qwt, setting attributes of the pen directly has no effect.
+						 You need to create a copy of the pen, change its attributes and hand it again to setPen().
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>size()</term>
+					 <listitem>Returns the currently set size (a QSize) in paint (pixel) coordinates for drawing the symbol.
+						 Due to a design limitation of Qwt, setting attributes of the QSize directly has no effect.
+						 You need to create a copy of the size, change its attributes and hand it again to setSize().
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>style()</term>
+					 <listitem>Returns an integer denoting the currently set type of symbol. See setStyle() for possible
+						 values.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class QwtPlotCurve</title>
+			 <para>Represents a curve with symbols and/or lines on a graph.
+				 This class is part of the Qwt library, but exported and documented as part of
+				 &appname;'s API for simplicity. Also, convenience methods for setting outline/fill
+				 colors and fill style are added on top of Qwt.</para>
+			 <programlisting width="80">
+# assuming Graph1 exists and contains a lines plot
+layer = graph("Graph1").activeLayer()
+curve = layer.curve(0)
+curve.setOutlineColor(QtGui.QColor(Qt.red))
+curve.setFillColor(QtGui.QColor(Qt.green))
+curve.setFillStyle(Qt.CrossPattern)
+layer.replot()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>dataSize()</term>
+					 <listitem>Returns the number of points in the curve.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>x(int)</term>
+					 <listitem>Returns X coordinate of indicated point.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>y(int)</term>
+					 <listitem>Returns Y coordinate of indicated point.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>minXValue()</term>
+					 <listitem>Return smallest X value of the curve's points.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>maxXValue()</term>
+					 <listitem>Return largest X value of the curve's points.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>minYValue()</term>
+					 <listitem>Return smallest Y value of the curve's points.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>maxYValue()</term>
+					 <listitem>Return largest Y value of the curve's points.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXAxis(x-axis)</term>
+					 <listitem>Set the x-axis to which the curve is attached. x-axis is Layer.Bottom or Layer.Top.</listitem>
+					 <listitem>See also: setCurveAxes.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYAxis(y-axis)</term>
+					 <listitem>Set the x-axis to which the curve is attached. y-axis is Layer.Left or Layer.Right.</listitem>
+					 <listitem>See also: setCurveAxes.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPen(QPen)</term>
+					 <listitem>Sets the pen used to draw the lines of the curve. See PyQt documentation
+						 for how to construct a QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>pen()</term>
+					 <listitem>Returns the currently set pen (a QPen) for drawing the lines of the curve.
+						 Due to a design limitation of Qwt, setting attributes of the pen directly has no effect.
+						 You need to create a copy of the pen, change its attributes and hand it again to setPen().
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setBrush(QBrush)</term>
+					 <listitem>Sets the brush used to fill the area under the curve. See PyQt documentation
+						 for how to construct a QBrush.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>brush()</term>
+					 <listitem>Returns the currently set brush (a QBrush) for filling the area under the curve.
+						 Due to a design limitation of Qwt, setting attributes of the brush directly has no effect.
+						 You need to create a copy of the brush, change its attributes and hand it again to setBrush().
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSymbol(QwtSymbol)</term>
+					 <listitem>Specifies whether and how symbols are drawn. See class QwtSymbol.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>symbol()</term>
+					 <listitem>Returns symbol parameters currently in effect. See class QwtSymbol.
+						 Due to a design limitation of Qwt, setting attributes of the symbol directly has no effect.
+						 You need to create a copy of the symbol, change its attributes and hand it again to setSymbol().
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(QColor)</term>
+					 <listitem>Simultaneously sets color for drawing lines and filling the area under the
+						 curve. Modifies
+						 pen() and brush(). Note that due to the setColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(int)</term>
+					 <listitem>Convenience overload of setColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutlineColor(QColor)</term>
+					 <listitem>Sets the color used for drawing the lines of the curve. Modifies pen().
+						 Note that due to the setOutlineColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutlineColor(int)</term>
+					 <listitem>Convenience overload of setOutlineColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFillColor(QColor)</term>
+					 <listitem>Sets the color used for filling the area under the curve. Modifies brush().
+						 Note that due to the setFillColor(int) overload, and unlike other
+						 methods accepting QColor arguments, basic colors need to be explicitly specified
+						 as QtGui.QColor(Qt.white) etc. instead of just Qt.white.
+						 As usual, it's also possible to give an RGBA spec in the form
+						 QtGui.QColor(red, green, yellow, alpha) with channels given as integers in the range
+						 [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFillColor(int)</term>
+					 <listitem>Convenience overload of setFillColor(QColor) choosing the color to be set from
+						 the palette used by &appname; for automatically assigning colors to new curves.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFillStyle(Qt.BrushStyle)</term>
+					 <listitem>Set pattern used for filling the area under the curve. Argument must be one of
+						 Qt.SolidPattern, Qt.Dense1Pattern, Qt.Dense2Pattern, Qt.Dense3Pattern, Qt.Dense4Pattern,
+						 Qt.Dense5Pattern, Qt.Dense6Pattern, Qt.Dense7Pattern, Qt.NoBrush, Qt.HorPattern,
+						 Qt.VerPattern, Qt.CrossPattern, Qt.BDiagPattern, Qt.FDiagPattern, Qt.DiagCrossPattern,
+						 Qt.LinearGradientPattern, Qt.RadialGradientPattern, Qt.ConicalGradientPattern.
+						 See PyQt documentation for visual overview and more information.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Grid</title>
+			 <para>Handles options related to the grid drawn on a Layer. Added in &appname; 0.2.4.</para>
+			 <programlisting width="80">
+layer = newGraph().activeLayer()
+layer.showGrid()
+layer.grid().setMajorPen(QtGui.QColor(Qt.black))
+layer.replot()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>setMajor(bool)</term>
+					 <listitem>Enables/disables drawing of major grid lines for both axes.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXMajor(bool)</term>
+					 <listitem>Enables/disables drawing of major grid lines for X axis.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYMajor(bool)</term>
+					 <listitem>Enables/disables drawing of major grid lines for Y axis.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xMajor()</term>
+					 <listitem>Boolean indicating whether major grid lines for X axis are enabled.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yMajor()</term>
+					 <listitem>Boolean indicating whether major grid lines for Y axis are enabled.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMinor(bool)</term>
+					 <listitem>Enables/disables drawing of minor grid lines for both axes.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXMinor(bool)</term>
+					 <listitem>Enables/disables drawing of minor grid lines for X axis.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYMinor(bool)</term>
+					 <listitem>Enables/disables drawing of minor grid lines for Y axis.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xMinor()</term>
+					 <listitem>Boolean indicating whether minor grid lines for X axis are enabled.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yMinor()</term>
+					 <listitem>Boolean indicating whether minor grid lines for Y axis are enabled.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXZeroLine(bool)</term>
+					 <listitem>Enables/disables drawing of line at X=0.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xZeroLine()</term>
+					 <listitem>Boolean indicating whether a line is drawn at X=0.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYZeroLine(bool)</term>
+					 <listitem>Enables/disables drawing of line at Y=0.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yZeroLine()</term>
+					 <listitem>Boolean indicating whether a line is drawn at Y=0.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMajorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of major grid lines. See PyQt
+						 reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXMajorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of major grid lines for X axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYMajorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of major grid lines for Y axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xMajorPen()</term>
+					 <listitem>Returns QPen used for drawing major grid lines for X axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yMajorPen()</term>
+					 <listitem>Returns QPen used for drawing major grid lines for Y axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMinorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of minor grid lines. See PyQt
+						 reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXMinorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of minor grid lines for X axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYMinorPen(QPen)</term>
+					 <listitem>Sets color, line width, line style etc. of minor grid lines for Y axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>xMinorPen()</term>
+					 <listitem>Returns QPen used for drawing minor grid lines for X axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>yMinorPen()</term>
+					 <listitem>Returns QPen used for drawing minor grid lines for Y axis.
+						 See PyQt reference for class QPen.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Layer (inherits QWidget)</title>
+			 <para>A layer on a graph. All elements in a graph are organized in layers, so whenever
+				 you're working with graphs, you're also dealing with layers. Note that many changes
+				 do not show up until you call replot() - if you're changing many options on a complex
+				 layer, this is faster than automatically updating the layer on every change.</para>
+			 <programlisting width="80">
+layer = newGraph().activeLayer()
+layer.setTitle("Murphy Certainty Principle")
+layer.setXTitle("time")
+layer.setYTitle("motivation")
+layer.insertFunctionCurve("1/x", 0, 10)
+# the constants QwtPlot.xBottom (=2) and QwtPlot.yLeft (=0) were added in &appname; 0.2.4
+layer.setScale(QwtPlot.xBottom, 0, 10)
+layer.setScale(QwtPlot.yLeft, 0, 10)
+layer.setBackgroundColor(QtGui.QColor(18,161,0))
+layer.setCanvasColor(QtGui.QColor(161,120,50))
+layer.curve(0).setPen(QtGui.QPen(Qt.yellow, 3))
+layer.removeLegend()
+layer.replot()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>isPiePlot()</term>
+					 <listitem>Boolean indicating whether this layer is a pie plot. Pie plots are
+						 always on a separate layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>pieLegend()</term>
+					 <listitem>Returns content of legend, assuming this layer is a pie plot.
+						 See isPiePlot().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertCurve(Table, string, int, int)</term>
+					 <listitem>insertCurve(table, column, style=1, color=-1) plots the data of the
+						 specified Y column and the corresponding designated X column, optionally
+						 specifying style and color, and returning a boolean indicating success or
+						 failure. Color is an index in the palette used by &appname;
+						 for automatically assigning colors to new curves. Style is one of the following
+						 codes:
+						 <variablelist spacing="compact">
+							 <varlistentry>
+								 <term>0</term><listitem>Line</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>1</term><listitem>Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>2</term><listitem>Line and Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>3</term><listitem>Columns</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>4</term><listitem>Area</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>5</term><listitem>Pie</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>6</term><listitem>Vertical drop lines</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>7</term><listitem>Splines and Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>8</term><listitem>Vertical steps</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>9</term><listitem>Histogram</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>10</term><listitem>Rows</listitem>
+							 </varlistentry>
+						 </variablelist>
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertCurve(Table, string, string int, int)</term>
+					 <listitem>insertCurve(table, x_column, y_column style=1, color=-1) works like the
+						 other insertCurve() variant above, but allows you to explicitly specify the
+						 X column you want to plot against instead of determining it by designation.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertFunctionCurve(string, double=0, double=1, int=100, string=QtCore.QString())</term>
+					 <listitem>insertFunctionCurve(formula, start, end, points, title) inserts a function
+						 curve specified by formula, which is evaluated using muParser with abscissa "x", and
+						 returns a boolean indicating success or failure.
+						 Optionally, the interval [start,end] for the evaluation, the number of points
+						 where the function will be evaluated and the curve title can be given.
+						 Added in &appname; 0.2.4.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertPolarCurve(string, string, double=0, double=2*pi, string=&quot;t&quot;, int=100,
+						 string=QtCore.QString())</term>
+					 <listitem>insertPolarCurve(radial, angular, start, end, parameter, points, title)
+						 inserts a function curve specified by formulas for the radial and angular
+						 components in polar coordinates, both of which are evaluated using muParser
+						 with given parameter (&quot;t&quot; by default), and returns a boolean indicating
+						 success or failure. Optionally, the interval [start,end]
+						 covered by the free parameter, the number of points where the function will be
+						 evaluated and the curve title can be overridden.
+						 Added in &appname; 0.2.4.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>insertParametricCurve(string, string, double=0, double=1,
+						 string=&quot;t&quot;, int=100, string=QtCore.QString())</term>
+					 <listitem>insertParametricCurve(x_formula, y_formula, from, to, parameter, points, title)
+						 insert a function curve specified by formulas for the abscissa and ordinate
+						 components in cartesian coordinates, both of which are evaluated using muParser
+						 with given parameter (&quot;t&quot; by default), and returns a boolean indicating
+						 success or failure. Optionally, the interval [start,end]
+						 covered by the free parameter, the number of points where the function will be
+						 evaluated and the curve title can be overridden.
+						 Added in &appname; 0.2.4.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addErrorBars(string, Table, string, int=1, int=1, int=8,
+						 QColor=QColor(Qt.black), bool=True, bool=True, bool=True)</term>
+					 <listitem>addErrorBars(curve, table, err_col_name, orientation, width, cap_length, color,
+						 through, minus, plus) adds error bars to the curve specified by its name (as
+						 displayed in the add/remove curve dialog and the curves' context menu). Data
+						 for the error bars is taken from the given table and column. Optionally, you can
+						 override the orientation (default is 1 for vertical, 0 means horizontal), the
+						 width of the pen used to draw the error bars, the length of the caps in pixels,
+						 the color of the pen used to draw the error bars, and flags indicating whether
+						 the error bars' line strikes through the underlying curve, and whether the minus
+						 and plus side of the error bars are to be drawn.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>removeCurve(int or string)</term>
+					 <listitem>Remove curve specified by index (in the range [0,numCurves()-1]) or title.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>deleteFitCurves()</term>
+					 <listitem>Remove all curves that show the result of a fit operation.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numCurves()</term>
+					 <listitem>Returns the number of curves plotted on this layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>showCurve(int,bool)</term>
+					 <listitem>Show/hide the curve specified by its index (in the range [0,numCurves()-1]).
+						 Hidden curves are not plotted, but otherwise remain part of the Layer; they keep
+						 their legend item, count as part of numCurves(), can be accessed by curve() etc.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>curve(int or string)</term>
+					 <listitem>Access curve (as QwtPlotCurve instance) specified by its title (as displayed
+						 in the add/remove curves dialog and the curve's context menu) or index (integer
+						 in the range [0,numCurves()-1].</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>curves()</term>
+					 <listitem>Returns a list of all curves in the layer. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addArrow(ArrowMarker)</term>
+					 <listitem>Add the indicated arrow/line marker to the layer. See class ArrowMarker.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addImage(ImageMarker or string)</term>
+					 <listitem>Add an image marker to the layer. For convenience, you can simply specify
+						 the path of the file containing the image in place of an ImageMarker object. In
+						 any case, the added ImageMarker is returned.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTitle(string)</term>
+					 <listitem>Change the layer's title string.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newLegend()</term>
+					 <listitem>Return a new, empty Legend (text marker) object after adding it to this
+						 layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newLegend(string)</term>
+					 <listitem>Return a new Legend (text marker) object initialized with the given
+						 string, after adding it to the layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setLegend(string)</term>
+					 <listitem>Set the name of the main legend (i.e., the <emphasis>real</emphasis>
+						 legend, as opposed to other texts placed on the layer).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>legend()</term>
+					 <listitem>Returns the Legend object representing the <emphasis>real</emphasis>
+						 legend, as opposed to other texts placed on the layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>removeLegend()</term>
+					 <listitem>Remove the legend (i.e., the object returned by legend()), if one
+						 currently exists.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addTimeStamp</term>
+					 <listitem>Add a text marker containing the current date and time.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>enableAxis(int,bool)</term>
+					 <listitem>Enable/disable drawing of the indicating axis, which must be one of the
+						 integer constants QwtPlot.yLeft (=0), QwtPlot.yRight (=1), QwtPlot.xBottom (=2)
+						 or QwtPlot.xTop (=3). The descriptive names were added in &appname; 0.2.4; for
+						 prior versions, you need to specify the indicated integer values.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setXTitle(string)</term>
+					 <listitem>Set the title displayed for the (bottom) X axis. The axis title can be
+						 disabled by setting it to an empty string.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYTitle(string)</term>
+					 <listitem>Set the title displayed for the (left) Y axis. The axis title can be
+						 disabled by setting it to an empty string.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setRightTitle(string)</term>
+					 <listitem>Set the title displayed for the right Y axis. The axis title can be
+						 disabled by setting it to an empty string. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTopTitle(string)</term>
+					 <listitem>Set the title displayed for the top X axis. The axis title can be
+						 disabled by setting it to an empty string. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAxisNumericFormat(int, int, int=6, string=QString())</term>
+					 <listitem>setAxisNumericFormat(axis, format, precision, formula) sets the numeric
+						 format used for drawing the axis labels on the specified axis (see enableAxis()
+						 for possible arguments). Format must be one of 0 (automatic), 1 (decimal),
+						 2 (scientific) or 3 (superscripts). Precision is the number of digits displayed.
+						 If a formula is given, it is evaluated with muParser for every label and the
+						 result is used in place of the input value for displaying the label.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setScale(int, double, double, double=0, int=5, int=5, int=0, bool=False)</term>
+					 <listitem>setScale(axis, start, end, step, major_ticks, minor_ticks, type, inverted)
+						 sets various options related to the scale of the indicated axis (see enableAxis()
+						 for possible arguments); most notably the start and end values of the displayed
+						 data range. Step indicates the distance between major tick marks (the default of
+						 0 means to automatically determine a sensible value); alternatively, a target
+						 number of major tick marks (and minor tick marks per major tick) can be specified,
+						 but due to limitations of Qwt, this is only taken as a hint, not as a strictly
+						 followed setting. Type is either 0 (linear scale, default) or 1 (logarithmic
+						 scale). The last flag can be set to have the axis inverted, i.e. numbered right
+						 to left or top-down.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMargin(int)</term>
+					 <listitem>Change the margin (i.e., the spacing around the complete content) of the
+						 layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setFrame(int=1, QColor=QColor(Qt.black))</term>
+					 <listitem>setFrame(width, color) draws a frame around the complete content (including
+						 margin) of the layer; with the indicated line width and color.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setBackgroundColor(QColor)</term>
+					 <listitem>Changes the background color of the layer. Note that this excludes the
+						 background of the canvas area containing the curves and markers, which is set
+						 separately (see setCanvasColor()). Most commonly, the argument will be either
+						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
+						 for details) or a RGBA spec in the form QtGui.QColor(red, green, yellow, alpha) with
+						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCanvasColor(QColor)</term>
+					 <listitem>Changes the background color of the canvas area containing the curves and
+						 markers. Most commonly, the argument will be either
+						 a basic color (Qt.white, Qt.black, Qt.red, Qt.darkRed etc. - see Qt.GlobalColor
+						 for details) or a RGBA spec in the form QtGui.QColor(red, green, yellow, alpha) with
+						 channels given as integers in the range [0,255] (see QColor for details).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>showGrid(int)</term>
+					 <listitem>Toggle drawing of major and minor grid associated with the given axis.
+						 See enableAxis() for possible arguments.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>showGrid()</term>
+					 <listitem>Toggle drawing of all grid lines.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>grid()</term>
+					 <listitem>Returns the Grid object for this layer, which holds various grid-related
+						 settings. See class Grid. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>replot()</term>
+					 <listitem>Makes sure that any changes you've applied to the layer are displayed on
+						 screen. It is often necessary to call this method after making script-driven
+						 changes to a layer, like changing the style of a curve. It is also a good idea
+						 to call this before export to a file, although it's not technically required for
+						 all file formats.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>printDialog()</term>
+					 <listitem>Display dialog for printing out this layer. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportImage(string, int=100, bool=False)</term>
+					 <listitem>exportImage(filename, quality, transparent) exports the layer to a bitmap
+						 image format with the indicated quality level, optionally making the background
+						 transparent (if supported by the file format). The file format is determined by
+						 the extension of the indicated file name; the list of supported formats depends
+						 on your installation of Qt and can be viewed by invoking the export dialog from
+						 the GUI and looking through the &quot;file type&quot; box.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportVector(string, int=0, bool=True, bool=True,
+						 QPrinter.PageSize=QtGui.QPrinter.Custom)</term>
+					 <listitem>exportVector(filename, resolution, color, keep_aspect, page_size) exports
+						 the layer to a vector-based file format. You can override the default resolution
+						 (in dpi), toggle printing in color/monochrome, toggle whether to keep the
+						 width/height aspect when rescaling and select a standard page size as described
+						 in the PyQt documentation for QtGui.QPrinter.PageSize.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>export(string)</term>
+					 <listitem>Quickly export layer to the indicated file, without bothering about the
+						 exportImage()/exportVector() distinction and related options. The file format
+						 is determined automatically by looking at the extension of the specified file
+						 name; supported formats depend on your installation of Qt and can be viewed by
+						 invoking the export dialog from the GUI and looking through the
+						 &quot;file type&quot; box.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>enableAutoscaling(bool=True)</term>
+					 <listitem>Set automatic updating of the scale settings (see setScale()) when data
+						 is added to or changed on the layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setIgnoreResize(bool=True)</term>
+					 <listitem>Sets whether to keep the layer's geometry fixed when resizing its graph.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAutoscaleFonts(bool=True)</term>
+					 <listitem>Sets whether to scale font sizes together with the rest of the layer
+						 when its graph is resized (and resizes aren't ignored, see setIgnoreResize()).
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAntialiasing(bool=True, bool=True)</term>
+					 <listitem>setAntialiasing(antialias, update) specifies whether antialiasing should
+						 be used for drawing elements added to the layer after the call to
+						 setAntialiasing(). If the update flag is True (default), the antialiasing setting
+						 of existing elements is updated as well.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCurveAxes(number, x-axis, y-axis)</term>
+					 <listitem>Note: when using this method the involved axes are autoscaled.</listitem>
+					 <listitem>See also: setXAxis, setYAxis</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>canvas()</term>
+					 <listitem>Gives access to the QtGui.QWidget acting as a canvas, i.e it contains all
+						 curves and markers on the layer (but not axes and title).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>pickPoint()</term>
+					 <listitem>Let the user pick a point on a curve (as with the Data Reader tool) and
+						 return the coordinates of the selected point as a QPointF (coordinates can be
+						 extracted from the result using QPointF.x() and QPointF.y()).
+						 Added in &appname; 0.2.4.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Graph (inherits MDIWindow)</title>
+			 <para>A graph window, consisting of layers, which in turn contain plot curves and markers.
+			 </para>
+			 <programlisting width="80">
+g = newGraph()
+layer1 = g.activeLayer()
+layer2 = g.addLayer()
+g.setMargins(40,40,40,40)
+g.arrangeLayers()
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>activeLayer()</term>
+					 <listitem>Returns the Layer currently marked as active (as indicated by the
+						 layer buttons at the top of the graph). If there is only one layer, it is
+						 always the active one.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setActiveLayer(Layer)</term>
+					 <listitem>Make the indicated layer the active one.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numLayers()</term>
+					 <listitem>Returns the total number of layers contained in the graph.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>layer(int)</term>
+					 <listitem>Returns the Layer specified by index (integer in the range
+						 [1,numLayers()]).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>layers()</term>
+					 <listitem>Returns a list of all layers in the graph. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addLayer(int=0,int=0,int=0,int=0)</term>
+					 <listitem>addLayer(x,y,width,height) adds a new layer at the given position and
+						 with the given size. Returns the newly created Layer object.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setCols(int)</term>
+					 <listitem>Set the number of columns to use when arranging layers automatically.
+						 Doesn't take effect until a re-arrangement is requested by calling
+						 arrangeLayers().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setRows(int)</term>
+					 <listitem>Set the number of rows to use when arranging layers automatically.
+						 Doesn't take effect until a re-arrangement is requested by calling
+						 arrangeLayers().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setSpacing(int,int)</term>
+					 <listitem>setSpacing(row_gap, column_gap) sets the spacing to use between
+						 rows and columns when arranging layers automatically.
+						 Doesn't take effect until a re-arrangement is requested by calling
+						 arrangeLayers().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMargins(int,int,int,int)</term>
+					 <listitem>setMargins(left,right,top,bottom) sets the outer margins to use
+						 when arranging layers automatically.
+						 Doesn't take effect until a re-arrangement is requested by calling
+						 arrangeLayers().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setLayerCanvasSize(int, int)</term>
+					 <listitem>setLayerCanvasSize(width,height) Resizes all layers as indicated and
+						 arranges them automatically.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAlignment(int, int)</term>
+					 <listitem>setAlignment(horizontal, vertical) sets the alignement of layers in their
+						 respective columns and rows. Arguments can be 0 For center, 1 for left/top and 2
+						 for right/bottom. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>arrangeLayers(bool)</term>
+					 <listitem>Automatically arranges the layers on the graph, subject to built-in
+						 defaults or settings made previously using setCols(), setRows(), setSpacing(),
+						 setMargins() and setAlignment().</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportImage(string, int=100, bool=False)</term>
+					 <listitem>exportImage(filename, quality, transparent) exports the graph to a bitmap
+						 image format with the indicated quality level, optionally making the background
+						 transparent (if supported by the file format). The file format is determined by
+						 the extension of the indicated file name; the list of supported formats depends
+						 on your installation of Qt and can be viewed by invoking the export dialog from
+						 the GUI and looking through the &quot;file type&quot; box.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportVector(string, int=0, bool=True, bool=True,
+						 QPrinter.PageSize=QtGui.QPrinter.Custom)</term>
+					 <listitem>exportVector(filename, resolution, color, keep_aspect, page_size) exports
+						 the graph to a vector-based file format. You can override the default resolution
+						 (in dpi), toggle printing in color/monochrome, toggle whether to keep the
+						 width/height aspect when rescaling and select a standard page size as described
+						 in the PyQt documentation for QtGui.QPrinter.PageSize.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>export(string)</term>
+					 <listitem>Quickly export graph to the indicated file, without bothering about the
+						 exportImage()/exportVector() distinction and related options. The file format
+						 is determined automatically by looking at the extension of the specified file
+						 name; supported formats depend on your installation of Qt and can be viewed by
+						 invoking the export dialog from the GUI and looking through the
+						 &quot;file type&quot; box.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>printDialog()</term>
+					 <listitem>Display dialog for printing out this layer. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Note (inherits MDIWidget)</title>
+			 <para>A note/script window containing arbitrary text, all or parts of which can be executed
+				 as Python code. Triggering executing of code in a Note currently doesn't work reliably,
+				 but this can essentially be circumvented using exec(str(note.text())).</para>
+			 <programlisting width="80">
+n = newNote()
+n.setText("Hello World")
+n.exportASCII("output.txt")
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>autoexec()</term>
+					 <listitem>Boolean indicating whether the content of Note is automatically executed
+						 when loading the project.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAutoexec(bool)</term>
+					 <listitem>Sets whether to automatically executed the content of the Note when loading
+						 the project.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>text()</term>
+					 <listitem>Returns the content of the note as a QString.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setText(string)</term>
+					 <listitem>Sets the content of the note.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>exportASCII(string)</term>
+					 <listitem>Writes the content of the note to the indicated file.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>importASCII(string)</term>
+					 <listitem>Prepends the content of the note by the content of the indicated file.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class ApplicationWindow (inherits QMainWindow)</title>
+			 <para>Manages the current project. The project from which a piece of Python code is
+				 executed is accessible via the module attribute <varname>scidavis.app</varname>.
+				 However, most of the time, this instance is used implicitly via methods copied to the
+				 global namespace by the default scidavisrc.py configuration file.</para>
+			 <programlisting width="80">
+for win in app.windows():
+	print win.name()
+app.activeFolder().save("subproject.sciprj")
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>table(string)</term>
+					 <listitem>Returns the table with the given name, or None if no such table exists.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newTable()</term>
+					 <listitem>Creates a new table with default settings (as if done using the menu) and
+						 returns it.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newTable(string, int=2, int=30)</term>
+					 <listitem>newTable(name, columns, rows) creates a new table with the given name and
+						 (optionally) numbers of columns and rows, and returns it. If the specified name
+						 is already in use, it is changed automatically to a unique name by appending a
+						 number to the requested name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>matrix(string)</term>
+					 <listitem>Returns the matrix with the given name, or None if no such matrix exists.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newMatrix()</term>
+					 <listitem>Creates a new matrix with default settings (as if done using the menu) and
+						 returns it.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newMatrix(string, int=32, int=32)</term>
+					 <listitem>newMatrix(name, rows, columns) creates a new matrix with the given name and
+						 (optionally) numbers of columns and rows, and returns it. If the specified name
+						 is already in use, it is changed automatically to a unique name by appending a
+						 number to the requested name.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>graph(string)</term>
+					 <listitem>Returns the graph with the given name, or None if no such graph exists.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newGraph()</term>
+					 <listitem>Creates a new graph containing one empty layer (as if done using the menu) and
+						 returns it.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newGraph(string)</term>
+					 <listitem>newGraph(name) creates a new graph with the given name containing one empty
+						 layer (as if done using the menu) and returns it. If the specified name
+						 is already in use, it is changed automatically to a unique name by appending a
+						 number to the requsted name. Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>note(string)</term>
+					 <listitem>Returns the note window with the given name, or None if no such note exists.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newNote()</term>
+					 <listitem>Creates a new empty note and returns it.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>newNote(string)</term>
+					 <listitem>newNote(name) creates a new empty note with the given name and returns it.
+						 If the specified name is already in use, it is changed automatically to a unique
+						 name by generating a default name like &quot;Notes1&quot;. This is inconsistent
+						 with newTable(), newMatrix and newGraph() (which generate a unique name by
+						 appending a number to the <emphasis>requested</emphasis> name) and will probably
+						 change in a future release.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plot(Table, string, int=1, int=-1)</term>
+					 <listitem>plot(table, column, style, color) plots the named column of the given
+						 table. A new graph is created containing one layer, to which the curve is
+						 added. The new graph is returned. Optionally, style and color of the curve
+						 can be set, where color is an index in the palette used by &appname;
+						 for automatically assigning colors to new curves and style is one of the
+						 following codes:
+						 <variablelist spacing="compact">
+							 <varlistentry>
+								 <term>0</term><listitem>Line</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>1</term><listitem>Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>2</term><listitem>Line and Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>3</term><listitem>Columns</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>4</term><listitem>Area</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>5</term><listitem>Pie</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>6</term><listitem>Vertical drop lines</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>7</term><listitem>Splines and Symbols</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>8</term><listitem>Vertical steps</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>9</term><listitem>Histogram</listitem>
+							 </varlistentry>
+							 <varlistentry>
+								 <term>10</term><listitem>Rows</listitem>
+							 </varlistentry>
+						 </variablelist>
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plot(Table, tuple of strings, int=1, int=-1)</term>
+					 <listitem>plot(table, (column1, column2, ...), style, color) works just like the
+						 plot method described above, but plots multiple columns together on the same
+						 layer.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>importImage(string)</term>
+					 <listitem>Reads an image from the specified file and returns a newly created matrix
+						 containing the gray-scale values (brightness) of the image's pixels.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>importImage()</term>
+					 <listitem>Ask the user to select an image file and imports it to a newly created
+						 matrix as described above. Returns the matrix.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plotContour(Matrix)</term>
+					 <listitem>Makes a contour plot from the given matrix in a newly created graph.
+						 Returns the graph.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plotColorMap(Matrix)</term>
+					 <listitem>Makes a contour plot from the given matrix, filling contour areas with
+						 colors of the default color map. Returns the newly created graph.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>plotGrayScale(Matrix)</term>
+					 <listitem>Makes a gray scale plot from the given matrix in a newly created graph.
+						 Returns the graph.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>windows()</term>
+					 <listitem>Returns a list of all MDIWindow instances in the project.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>results</term>
+					 <listitem>The QTextEdit which holds the results log. Can be used to output custom
+						 results from your script, although the recommended way of doing this is to
+						 create a Note and set its text to what you want to output.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>activeFolder()</term>
+					 <listitem>Returns the folder which is currently being displayed.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setActiveFolder(folder)</term>
+					 <listitem>Given a Folder object, changes the active folder to it.
+						 Since MDIWindows are always added to the active folder, this is necessary for
+						 script-driven creation of objects in specific sub-folders. Added in &appname; 0.2.5.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>rootFolder()</term>
+					 <listitem>Returns the root folder of the project.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>saveFolder(Folder, string)</term>
+					 <listitem>DEPRECATED. &appname; 0.2.4 introduces the new method Folder.save(), which is the
+						 recommended way of saving folders to a new project file; unless you need the
+						 code to run on previous versions.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>renameWindow(MDIWindow, string)</term>
+					 <listitem>DEPRECATED. &appname; 0.2.4 introduces the new method MDIWindow.setName(),
+						 which is the recommended way of renaming windows; unless you need the code to run
+						 on previous versions.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>clone(MDIWindow)</term>
+					 <listitem>DEPRECATED. &appname; 0.2.4 introduces the new method MDIWindow.clone(),
+						 which is the recommended way of cloning windows; unless you need the code to run
+						 on previous versions.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setPreferences(Layer)</term>
+					 <listitem>DEPRECATED. Prior to &appname; 0.2.4, it was necessary to call this on a
+						 layer created using Graph.addLayer() if you wanted the layer to be initialized
+						 correctly. This is now done automatically as part of addLayer(); doing so again
+						 doesn't hurt, but is not necessary any more. 
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3><title>class Fit (inherits QObject)</title>
+			 <para>This is the abstract base class of the various models that can be used for
+				 least-squares parameter fitting; in other words, you can only create instances of
+				 subclasses of this class, but the methods described here are common to all of these
+				 classes (ExponentialFit, SigmoidalFit etc.).</para>
+			 <programlisting width="80">
+			 </programlisting>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Fit(ApplicationWindow, Layer, string)</term>
+					 <listitem>Constructor, taking the ApplicationWindow instance to which the Fit will belong,
+						 the Layer containing data to be fitted (and receiving the result curve) and a name
+						 for the fitter. Mainly interesting if you want to implement a custom fitter as a
+						 subclass of Fit.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>fit()</term>
+					 <listitem>Executes the fit (after setting data and parameters). Must be reimplemented by
+						 subclasses.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setYErrorSource(ErrorSource, string="")</term>
+					 <listitem>Specify the standard errors of the Y values (compare setDataFromCurve()).
+						 ErrorSource is one of Fit.UnknownErrors (no weighting is done and errors are
+						 estimated from the variance of the input values), Fit.AssociatedErrors (the yErr
+						 column associated with the source column is used), Fit.PoissonErrors (input
+						 values are Poisson distributed, i.e. errors are equal to the square root of the
+						 values) or Fit.CustomErrors (the name of the column containing the errors is
+						 given as the second parameter).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setDataFromCurve(string, Layer)</term>
+					 <listitem>Use the curve (given by name) on the given layer as the fit data.
+						 Returns a boolean indicating success (True) or failure (False).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setDataFromCurve(string, double, double, Layer)</term>
+					 <listitem>DEPRECATED. Use the variant above followed by setInterval() instead.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setInterval(double, double)</term>
+					 <listitem>setInterval(from,to) restricts the X interval of the data points included
+						 in the fit to [from,to].</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>formula()</term>
+					 <listitem>Returns the formula of the fit model (in a format suitable for evaluation
+						 with muParser).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>numParameters()</term>
+					 <listitem>Returns the number of free parameters in the fit.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setInitialValue(int, double)</term>
+					 <listitem>setInitialValue(index, value) specifies the initial value for the parameter
+						 given by index.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setInitialValues(sequence)</term>
+					 <listitem>Set initial values of all parameters at once.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>guessInitialValues()</term>
+					 <listitem>Try to determine sensible initial values for the parameters automatically.
+						 Can be reimplemented by subclasses if they want to support this feature;
+						 currently, only SigmoidalFit and MultiPeakFit can do this trick.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setAlgorithm(Algorithm)</term>
+					 <listitem>Set the fitting algorithm; one of Fit.ScaledLevenbergMarquardt,
+						 Fit.UnscaledLevenbergMarquardt or Fit.NelderMeadSimplex.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setTolerance(double)</term>
+					 <listitem>Set the tolerance up to which the result has to be determined. The Fit
+						 algorithm is iterated until either the desired tolerance or the maximum number of
+						 iterations (see setMaximumIterations()) is reached; in the latter case, it aborts
+						 with a failure notice.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setColor(int)</term>
+					 <listitem>Set the color of the generated fit curve from the palette used by &appname;
+						 for automatically assigning colors to new curves. (Specifying a color by name is
+						 DEPRECATED, because its counter-intuitive behaviour was more likely to cause
+						 trouble than to make things easier.)</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setOutputPrecision(int)</term>
+					 <listitem>Set the number of decimal places to use when formatting numbers for output
+						 to the results log or to a graph.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>generateFunction(bool, int=100)</term>
+					 <listitem>By default, fit results are pasted into the target graph layer as a function
+						 curve. Calling generateFunction(False, num_points) causes the fit results to be
+						 written into a hidden table (with num_points data points) and plotted from there.
+						 This may be useful if you want to use fit results for further calculations.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>setMaximumIterations(int)</term>
+					 <listitem>Sets the maximum number of times to iterate the fitting algorithm before
+						 giving up and declaring the fit to have failed.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>showLegend()</term>
+					 <listitem>
+						 Insert information on the fit into the target graph layer.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>legendInfo()</term>
+					 <listitem>
+						 Return the information inserted by showLegend() as a string. Can be overridden by
+						 subclasses in order to customize it.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>scaleErrors(bool)</term>
+					 <listitem>
+						 Set flag indicating whether to multiply standard errors of final parameters by
+						 &chi;<superscript>2</superscript>/(degrees of freedom). Defaults to False.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>results()</term>
+					 <listitem>
+						 Returns the final parameters as a tuple of floats.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>errors()</term>
+					 <listitem>
+						 Returns standard errors of final parameters as a tuple of floats.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>chiSquare()</term>
+					 <listitem>
+						 Returns the sum of squares of the residuals from the best-fit line.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>rSquare()</term>
+					 <listitem>
+						 Returns the coefficient of determination of the best-fit line.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>parametersTable(string)</term>
+					 <listitem>
+						 Creates a Table with the given name and fills it with the final parameter values.
+						 Returns a reference to the Table window.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>covarianceMatrix(string)</term>
+					 <listitem>
+						 Creates a Matrix with the given name and fills it with the covariance matrix of
+						 the final parameter values. Returns a reference to the Matrix window.
+					 </listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+		 <sect3>
+			 <title>class Folder (inherits QObject)</title>
+			 <variablelist spacing="compact">
+				 <varlistentry>
+					 <term>Folder(name)</term>
+					 <listitem>Construct a new folder with the given name. You can add it as a subfolder
+						 to an existing one using addChild() (see below).
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>windows()</term>
+					 <listitem>
+						 Returns the list of MDIWindows contained in this folder.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>name()</term>
+					 <listitem>Returns the name of this folder (a string).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>path()</term>
+					 <listitem>Returns the absolute path of this folder within its project (a string).</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>folders()</term>
+					 <listitem>Returns the list of sub-folders.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>folder(string, bool=True, bool=False)</term>
+					 <listitem>
+						 folder(name, case_sensitive, partial_match) returns the first subfolder matching
+						 the given name. A subfolders is considered to match if its name equals the name
+						 argument; if partial_match is True, it is also considered to match if its name
+						 starts with the name argument. Matching can be made case-insensitive by setting
+						 the case_sensitive argument to False.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>findWindow(string, bool=True, bool=True, bool=False, bool=True)</term>
+					 <listitem>findWindow(str, match_name, match_label, case_sensitive, partial_match)
+						 returns the first MDI window whose name (if match_name is True) or label (if
+						 match_label is True) matches the given string. A name or label is considered to
+						 match if it equals the string argument; if partial_match is True, it is also
+						 considered to match if its name starts with the name argument. Matching can be
+						 made case-sensitive by setting the case_sensitive argument to True.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>table(string, bool=False)</term>
+					 <listitem>table(name, recursive) returns the table of the given name in this folder;
+						 if no such table exists and recursive is True, sub-folders are searched as well.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>matrix(string, bool=False)</term>
+					 <listitem>matrix(name, recursive) returns the matrix of the given name in this folder;
+						 if no such matrix exists and recursive is True, sub-folders are searched as well.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>graph(string, bool=False)</term>
+					 <listitem>graph(name, recursive) returns the graph of the given name in this folder;
+						 if no such graph exists and recursive is True, sub-folders are searched as well.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>note(string, bool=False)</term>
+					 <listitem>note(name, recursive) returns the note of the given name in this folder;
+						 if no such note exists and recursive is True, sub-folders are searched as well.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>rootFolder()</term>
+					 <listitem>Returns the root folder of the project this folder belongs to.
+					 </listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>save(string)></term>
+					 <listitem>Given a file name, saves the content of this folder as a project file.
+						 Added in &appname; 0.2.4.</listitem>
+				 </varlistentry>
+				 <varlistentry>
+					 <term>addChild(folder)</term>
+					 <listitem>Adds another folder as a sub-folders to this one.
+						 Added in &appname; 0.2.5.</listitem>
+				 </varlistentry>
+			 </variablelist>
+		 </sect3>
+	 </sect2>
+
+    <sect2 id="Python-init">
+      <title>The Initialization File</title>
+
+      <para>This file allows you to customize the Python environment, import
+      modules and define functions and classes that will be available in all
+      of your projects. The default initialization file shipped with &appname;
+      imports Python's <link linkend="Python-functions">standard math
+      functions</link> as well as special functions from <ulink
+		url="https://www.scipy.org">SciPy</ulink> and <ulink
+		url="http://pygsl.sourceforge.net">PyGSL</ulink>(if available). Also, it
+      creates some handy shortcuts, like
+      <userinput>table("table1")</userinput> for
+      <userinput>&python-pref;.app.table("table1")</userinput>.</para>
+
+      <para>When activating Python support, &appname; searches the following
+      places, executing the first file it can find:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>~/.&python-rc;[c]</para>
+        </listitem>
+
+        <listitem>
+          <para>/etc/&python-rc;[c]</para>
+        </listitem>
+
+        <listitem>
+          <para>./&python-rc;[c]</para>
+        </listitem>
+      </orderedlist>
+
+      <para>Files ending in .pyc are compiled versions of the .py source files
+      and therefore load a bit faster. The compiled version will be used if
+      the source file is older or nonexistent. Otherwise, &appname; will try to
+      compile the source file (if you've got write permissions for the output
+      file).</para>
+
+		<sect3>
+			<title>Recommended approach to per-user configuration</title>
+
+			<para>
+				In order to give you full control over the process of setting up the
+				Python environment within &appname;, a per-user configuration file
+				(.&python-rc;) will supersede any system-wide configuration file. That
+				is, GSL and SciPy functions as well as many &appname;-specific
+				functions (like table(), newTable(), plot(), etc.) will be missing,
+				unless you explicitly import them into the global namespace. In order
+				to keep the overview over their customizations and profit from updates
+				to the global configuration files (e.g. with new versions of
+				&appname;), most users will want to import the global configuration
+				file from within their custom one. Here's how to do this:
+			</para>
+
+			<programlisting width="40">
+import sys 
+sys.path.append("/etc") 
+import scidavisrc 
+# your custom stuff
+</programlisting>
+		</sect3>
+    </sect2>
+
+  </sect1>

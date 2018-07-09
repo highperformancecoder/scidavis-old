@@ -1,0 +1,161 @@
+%
+%		Docbook main file for Scidavis Manual
+%		*************************************
+%
+%		updated for SciDAVis version >= 1.23 ***
+%
+%*************************************************************************
+\documentclass{report}
+\usepackage{html}
+\usepackage{makeidx}
+\makeindex
+\includeonly{introduction}
+%<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "/usr/share/xml/docbook/xml-dtd-4.5/docbookx.dtd" [
+%<!--
+%		general terms for the application
+%-->
+%  <!ENTITY appname "SciDAVis">
+%  <!ENTITY kappname "&appname;">
+%  <!ENTITY version "1.23">
+%
+%  <!ENTITY kappversion "&version;">
+%  <!ENTITY kappdirectory "scidavis">
+%  <!ENTITY kappdownload "https://sourceforge.net/projects/scidavis/" >
+%  <!ENTITY kappsourcedev "https://github.com/highperformancecoder/scidavis" >
+%  <!ENTITY pic-dir "pics/" >
+%  <!ENTITY file-ext "sciprj" >
+%<!--
+%		for python scripting...
+%-->
+%  <!ENTITY python-rc "scidavisrc.py" >
+%  <!ENTITY python-pref "sci" >
+%<!--
+%		miscellaneous...
+%-->
+%  <!ENTITY % addindex "IGNORE">
+%  <!ENTITY % English "INCLUDE">
+%  <!ENTITY ion "Ion Vasilief">
+%  <!ENTITY email-ion "ion_vasilief@yahoo.fr">
+%  <!ENTITY roger "Roger Gadiou">
+%  <!ENTITY email-roger "Roger.Gadiou@orange.fr">
+%  <!ENTITY tilman "Tilman Hoener zu Siederdissen">
+%  <!ENTITY email-tilman "thzs@gmx.net">
+%  <!ENTITY knut "Knut Franke">
+%  <!ENTITY email-knut "Knut.Franke@gmx.de">
+%  <!ENTITY fellype "Fellype do Nascimento">
+%  <!ENTITY email-fellype "fellypao@yahoo.com.br">
+%  <!ENTITY russell "Russell Standish">
+%  <!ENTITY email-russell "hpcoder@hpcoders.com.au">
+%  <!ENTITY dimitry "Dmitriy Pozitron">
+%  <!ENTITY email-dimitry "dpozitron@users.sf.net">
+%  <!ENTITY arun "Arun Narayanankutty">
+%  <!ENTITY email-arun "narunlifescienc@users.sf.net">
+%  <!ENTITY gbm "Miquel Garriga">
+%  <!ENTITY email-gbm "gbmiquel@users.sf.net">
+%  <!ENTITY alxpl "Alexander Ploumistos">
+%  <!ENTITY email-alxpl "alxpl@users.sf.net">
+%  <!ENTITY homepage "&kappdownload;">
+%  <!ENTITY gitpage "&kappsourcedev;">
+%  <!ENTITY xml  "<acronym>XML</acronym>">
+%  <!ENTITY xslt "<acronym>XSLT</acronym>">
+%  <!ENTITY html "<acronym>HTML</acronym>">
+%  <!ENTITY css  "<acronym>CSS</acronym>">
+%<!--
+%		the chapters of the book
+%-->
+%  <!ENTITY using-chapter SYSTEM "using.docbook">
+%  <!ENTITY introduction-chapter SYSTEM "introduction.docbook">
+%  <!ENTITY reference-chapter SYSTEM "reference.docbook">
+%  <!ENTITY toolbars-chapter SYSTEM "toolbars.docbook">
+%  <!ENTITY dialogs-chapter SYSTEM "dialogs.docbook">
+%  <!ENTITY analysis-chapter SYSTEM "analysis.docbook">
+%  <!ENTITY scripting-chapter SYSTEM "scripting.docbook">
+%  <!ENTITY appendix-chapter SYSTEM "appendix.docbook">
+%  <!ENTITY faq-chapter SYSTEM "faq.docbook">
+%<!--
+%	entities for commands are in a separated file
+%	which is created by the create-command-entities script
+%-->
+%  <!ENTITY % commands-entities SYSTEM "commands.docbook">
+%  %commands-entities;
+%<!--
+%	some entities for variable or parameters often used
+%-->
+%  <!ENTITY ymin "<emphasis>Y<subscript>min</subscript></emphasis>">
+%  <!ENTITY ymax "<emphasis>Y<subscript>max</subscript></emphasis>">
+%  <!ENTITY ymean "<emphasis>Y<subscript>mean</subscript></emphasis>">
+%  <!ENTITY xmin "<emphasis>X<subscript>min</subscript></emphasis>">
+%  <!ENTITY xmax "<emphasis>X<subscript>max</subscript></emphasis>">
+%  <!ENTITY xmean "<emphasis>X<subscript>mean</subscript></emphasis>">
+%]
+%>
+
+\def\SciDaVis{SciDAVis}
+\date{May 2018}
+
+\title{The \SciDaVis{} Handbook}
+\author{
+    Ion Vasilief \and Roger Gadiou \and Knut Franke \and Fellype
+    Nascimento \and Miquel Garriga \and Russell Standish}
+
+\begin{document}
+\maketitle
+
+\noindent Version: \input{version}\\
+
+\noindent
+\copyright 2001--2005 Ion Vasilief\\
+\copyright 2006--2007 Roger Gadiou, Knut Franke and Ion Vasilief\\
+\copyright 2008--2010 Roger Gadiou and Knut Franke\\
+\copyright 2017 Fellype do Nascimento and Miquel Garriga\\
+\copyright 2018 Fellype do Nascimento and Russell Standish\\
+
+\begin{quote}
+{\em Legal notice:} Permission is granted to copy, distribute and/or
+modify this document under the terms of the \htmlref{GNU Free
+  Documentation License}{fdl}, Version 1.1 or any later version
+published by the Free Software Foundation; with no Invariant Sections,
+with no Front-Cover Texts, and with no Back-Cover Texts.
+\end{quote}
+
+\begin{abstract}
+  This document is a handbook for using \SciDaVis, a program for two-
+  and three-dimensional graphical presentation of data sets and for
+  data analysis. It is updated for version %\input{version}
+  and newer. This
+  manual is organized in several chapters:
+
+  \begin{itemize}
+    \item The \htmlref{first one}{introduction} describes the main concepts and terms which are used in \SciDaVis.
+    \item The \htmlref{second}{using} and \htmlref{third}{analysis}
+      chapters build a tutorial on how to obtain plots from different
+      data sets, and to perform mathematical and statistical analysis
+      of data and curves. They are the ones you need to read first to
+      understand the basics of \SciDaVis and to be able to work with it.
+    \item The next chapter describe some specific possibilities of \SciDaVis, that is the \htmlref{scripting}{scripting}.
+    \item The two last chapters are descriptions of all the
+      \htmlref{commands}{reference} and \htmlref{toolbars}{toolbars}
+      used in \SciDaVis. These chapters are the reference manual of
+      \SciDaVis.
+  \end{itemize}
+\end{abstract}
+
+%<keywordset>
+%  <keyword>Qt</keyword>
+%  <keyword>&appname;</keyword>
+%  <keyword>Data</keyword>
+%  <keyword>Analysis</keyword>
+%  <keyword>Plotting</keyword>
+%</keywordset>
+
+  
+\include{introduction}
+\include{using}
+\include{analysis}
+\include{scripting}
+\include{reference}
+\include{toolbars}
+\include{appendix}
+\include{faq}
+\printindex
+\end{document}
