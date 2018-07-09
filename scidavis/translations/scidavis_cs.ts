@@ -93,29 +93,6 @@
     </message>
 </context>
 <context>
-    <name>Application</name>
-    <message>
-        <source>Error!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> sending event </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> to object </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error &lt;unknown&gt; sending event</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ApplicationWindow</name>
     <message>
         <source>F1</source>
@@ -9884,11 +9861,7 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <name>TableConfigPage</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
-    </message>
-    <message>
-        <source>TODO</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Formulář</translation>
     </message>
 </context>
 <context>
