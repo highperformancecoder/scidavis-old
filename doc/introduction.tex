@@ -135,162 +135,226 @@ Valid options are:
 \item \verb+-x+ or \verb+--execute+: execute the script file given as argument
 \end{itemize}
 
-%
-%</sect1>
-%<!--
 %**************************************************************************
 %
 %			General concepts and terms
 %
 %**************************************************************************
-%-->
-%<sect1 id="general-concepts">
-%<title>General Concepts and Terms</title>
-%
-%<para>Several plots and all the data related to these plots can be save in a <emphasis>project</emphasis> file, the project is therefore the main container of &appname;. The following screenshot gives an example of a typical session. This example shows the <link linkend="sec-intro-log-window">log panel</link> at the top of the workspace, the <link linkend="sec-intro-project-explorer">project explorer</link> at the bottom, a <link linkend="sec-intro-table">table</link> and a <link linkend="sec-intro-plot-window">plot window</link> are shown while other are docked or hidden.</para>
-%
-%<figure id="fig-scidavis-session">
-%  <title>A typical &appname; session</title>
-%  <mediaobject>
-%    <imageobject>
-%      <imagedata  format="PNG" fileref="pics/scidavis-session.png"/>
-%    </imageobject>
-%  </mediaobject>
-%</figure>
-%
-%<para>There are numerous commands available in &appname; depending on the element which is selected. Therefore, the main menu bar changes when you select a particular element of the project. Moreover, you can access to the set of commands relevant of an element by activating the context menu with the right button of the mouse.</para>
-%<para>In a project, the objects which can be used are:</para>
-%
-%<variablelist>
-%  <varlistentry>
-%    <term><link linkend="sec-intro-table">Tables</link></term>
-%    <listitem>
-%      <indexterm><primary>Table</primary></indexterm>
-%      <para>A table is a spreadsheet which can be used to store the datas you are entering. It can also be used to do some calculations and statistical analysis of datas. In each table, columns can be labelled as X-values or Y-values for 2D-plotting, or Z-values if you plan to build a 3D-plot. In addition, columns can be labelled as errors on X or on Y values (see &set-column-as-lnk;).</para>
-%      <para>A table can be created by the &new-table-lnk;. Then there are several ways to fill the table with your data. If you want to read a table from an ASCII file, you can import the data from the file to a table with the &import-ascii-lnk;. You can also enter each value from the keyboard, or copy and paste from another spreadsheet software. The last way to enter your data is to fill the table with the results of a mathematical function (&assign-formula-lnk; from the &table-menu-lnk;)</para>
-%    </listitem>
-%  </varlistentry>
-%  <varlistentry>
-%    <term><link linkend="sec-intro-matrix">Matrix</link></term>
-%    <listitem>
-%      <indexterm><primary>Matrix</primary></indexterm>
-%      <para>A matrix is a special table which is used to store the data points for surface 3D plots. It contains Z-values and doesn't include any column or row which could be designed as X-values or Y-values. Nevertheless, you can specify the X-values and the Y-values with the &set-coordinates-lnk; command from the &matrix-menu-lnk;.</para>
-%      <para>A matrix can be created by the &new-matrix-lnk;. If you want to read a matrix from an ASCII file, you can import the data of the file to a table with the &import-ascii-lnk; and then convert this table to a matrix with the &convert-to-matrix-lnk;. In the same way as for tables, you can also fill matrix with the results of a function z=f(i,j) in which i and j are row and column numbers, or z=f(x,y). (see &assign-formula-lnk; from the &matrix-menu-lnk;)</para>
-%    </listitem>
-%  </varlistentry>
-%  <varlistentry>
-%    <term><link linkend="sec-intro-plot-window">A Graph</link></term>
-%    <listitem>
-%      <indexterm><primary>Plot</primary></indexterm>
-%      <para>A graph can contain one or several plots. Each of these plots is contained in a different <emphasis>layer</emphasis>, these layers can be arranged in many ways to build matrix of plots.</para>
-%      <para>A new layer can be added to an existing graph with the &add-layer-lnk; from the &graph-menu-lnk;. you can also remove an existing layer with the &remove-layer-lnk;, but if you remove a layer, the plot will be deleted. You can also copy a layer from one graph to another, or copy an existing graph into another, the window will be added as a new layer (see the section on <link linkend="sec-multilayer-plots">Multilayer Plots</link> for more details).</para> 
-%      <para>Plots can be created in several ways. You can select data in tables or matrix and build a plot, or create new plots from functions of one or two variables (see sections <link linkend="sec-2d-plots">2D plots</link> and <link linkend="sec-3d-plots">3D plots</link>).</para>
-%    </listitem>
-%  </varlistentry>
-%  <varlistentry>
-%    <term><link linkend="sec-intro-note">A Note</link></term>
-%    <listitem>
-%      <para>This window is a text container which can simply be used to insert comments into a project. This object is nevertheless far more powerfull than that: it can be used as a calculator, for executing single commands and for writing scripts (see the <link linkend="scripting">Scripting section</link> for more details).</para>
-%    </listitem>
-%  </varlistentry>
-%  <varlistentry>
-%    <term><link linkend="sec-intro-log-window">The Log Window</link></term>
-%    <listitem>
-%      <para>This window is used to store the results of all the calculations which have been done. If this window is not visible, you can find it with the <link linkend="sec-intro-project-explorer">Project Explorer</link> or with the &results-log-lnk;.</para>
-%      <para>The text in the log window is also saved in the project file, so that when you load a previously saved project, the results-log panel is re-filled with the results of the calculations.</para>
-%    </listitem>
-%  </varlistentry>
-%  <varlistentry>
-%    <term><link linkend="sec-intro-project-explorer">The Project Explorer</link></term>
-%    <listitem>
-%      <para>This window is used to list all the windows contained in a projet. The Project Explorer is opened by the &project-explorer-lnk;, and gives a quick access to all elements of a project, hidden or visibles. It can be used to do some operations on the windows related to these items such as hidding a window, renaming windows, etc.</para>
-%      <para>A project file can include several independant projects. In this case, the containers of each project are stored in different folders.</para>
-%    </listitem>
-%  </varlistentry>
-%</variablelist>
-%
-%<!--
+
+\section{General Concepts and Terms}\label{general-concepts}
+Several plots and all the data related to these plots can be save in a
+{\em project} file, the project is therefore the main container of
+\SciDaVis. The following screenshot gives an example of a typical
+session. This example shows the \htmlref{log
+  panel}{sec-intro-log-window} at the top of the workspace, the
+\htmlref{project explorer}{sec-intro-project-explorer} at the bottom,
+a \htmlref{table}{sec-intro-table} and a \htmlref{plot
+  window}{sec-intro-plot-window} are shown while other are docked or
+hidden.
+
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/scidavis-session.png}}
+  \caption{A typical \SciDaVis{} session}
+  \label{fig-scidavis-session}
+\end{figure}
+
+There are numerous commands available in \SciDaVis{} depending on the
+element which is selected. Therefore, the main menu bar changes when
+you select a particular element of the project. Moreover, you can
+access to the set of commands relevant of an element by activating the
+context menu with the right button of the mouse.
+
+In a project, the objects which can be used are:
+
+\begin{description}
+  \item[Tables]\index{Table}
+    A table is a spreadsheet which can be used to store the datas you are entering. It can also be used to do some calculations and statistical analysis of datas. In each table, columns can be labelled as X-values or Y-values for 2D-plotting, or Z-values if you plan to build a 3D-plot. In addition, columns can be labelled as errors on X or on Y values (see \htmlref{Set Column as command}{set-column-as-lnk}).
+
+    A table can be created by the \htmlref{New $\rightarrow$ New Table
+      command}{new-table-lnk}. Then there are several ways to fill the
+    table with your data. If you want to read a table from an ASCII
+    file, you can import the data from the file to a table with the
+    \htmlref{Import ASCII command}{import-ascii-lnk}. You can also
+    enter each value from the keyboard, or copy and paste from another
+    spreadsheet program. The last way to enter your data is to fill
+    the table with the results of a mathematical function
+    (\htmlref{Assign Formula command}{assign-formula-lnk} from the
+    \htmlref{Table menu}{table-menu-lnk})
+    
+    \item[Matrix]\label{sec-intro-matrix}\index{Matrix} A matrix is a
+      special table which is used to store the data points for surface
+      3D plots. It contains Z-values and doesn't include any column or
+      row which could be designated as X-values or
+      Y-values. Nevertheless, you can specify the X-values and the
+      Y-values with the \htmlref{Set Coordinates
+        command}{set-coordinates-lnk} from the \htmlref{Matrix
+        menu}{matrix-menu-lnk}.
+
+      A matrix can be created by the \htmlref{New$\rightarrow$ New
+        Matrix command}{new-matrix-lnk}. If you want to read a matrix
+      from an ASCII file, you can import the data of the file to a
+      table with the \htmlref{Import ASCII command}{import-ascii-lnk}
+      and then convert this table to a matrix with the \htmlref{Conver
+        to Matrix command}{convert-to-matrix-lnk}. In the same way as
+      for tables, you can also fill matrix with the results of a
+      function z=f(i,j) in which i and j are row and column numbers,
+      or z=f(x,y). (see \htmlref{Assign Formula
+        command}{assign-formula-lnk} from the \htmlref{Matrix
+        menu}{matrix-menu-lnk})
+
+    \item[A Graph]\label{sec-intro-plot-window}\index{Plot} A graph
+      can contain one or several plots. Each of these plots is
+      contained in a different {\em layer}, these layers can be
+      arranged in many ways to build matrix of plots.
+
+      A new layer can be added to an existing graph with the
+      \htmlref{Add Layer command}{add-layer-lnk} from the
+      \htmlref{Graph menu}{graph-menu-lnk}. you can also remove an
+      existing layer with the \htmlref{Remove Layer
+        command}{remove-layer-lnk}, but if you remove a layer, the
+      plot will be deleted. You can also copy a layer from one graph
+      to another, or copy an existing graph into another, the window
+      will be added as a new layer (see the section on
+      \htmlref{Multilayer Plots}{sec-multilayer-plots} for more
+      details).
+
+      Plots can be created in several ways. You can select data in
+      tables or matrix and build a plot, or create new plots from
+      functions of one or two variables (see sections \htmlref{2D
+        plots}{sec-2d-plots} and \htmlref{3D plots}{sec-3d-plots}).
+
+    \item[A Note]\label{sec-intro-note} This window is a text
+      container which can simply be used to insert comments into a
+      project. This object is nevertheless far more powerfull than
+      that: it can be used as a calculator, for executing single
+      commands and for writing scripts (see the \htmlref{Scripting
+        section}{scripting} for more details).
+      
+    \item[The Log Window]\label{sec-intro-log-window}
+      This window is used to store the results of all the calculations
+      which have been done. If this window is not visible, you can
+      find it with the \htmlref{Project
+        Explorer}{sec-intro-project-explorer} or with the
+      \htmlref{Result Log command}{results-log-lnk}.
+      
+      The text in the log window is also saved in the project file, so
+      that when you load a previously saved project, the results-log
+      panel is re-filled with the results of the calculations.
+
+    \item[The Project Explorer]\label{sec-intro-project-explorer}
+      This window is used to list all the windows contained in a
+      project. The Project Explorer is opened by the \htmlref{Project
+        Explorer command}{project-explorer-lnk}, and gives a quick
+      access to all elements of a project, hidden or visibles. It can
+      be used to do some operations on the windows related to these
+      items such as hidding a window, renaming windows, etc.
+      
+      A project file can include several independant projects. In this case,
+      the containers of each project are stored in different folders.
+
+\end{description}
 %		General description of a table
 %		==============================
-%-->
-%<sect2 id="sec-intro-table">
-%<title>Tables</title>
-%
-%<indexterm>
-%  <primary>Table</primary>
-%</indexterm>
-%
-%<para>The table is the main part of &appname; when working with data. For controlling and converting data the spreadsheet contains a highly customizable table: all colors and font preferences can be set using the &preferences-lnk; of the &edit-menu-lnk;. You can resize a table in terms of rows and columns using the &table-dimensions-lnk; command of the &table-menu-lnk;. On the left side of the table, the button can be used to develop the properties tags. This allows to customize the main parameters of the table.</para>
-%
-%<figure id="fig-the-table">
-%  <title>A &appname; table with the properties dialog developped and the type tag selected.</title>
-%  <mediaobject>
-%    <imageobject>
-%      <imagedata  format="PNG" fileref="pics/table.png"/>
-%    </imageobject>
-%  </mediaobject>
-%</figure>
-%
-%<para>In a spreadsheet, columns can have the following flags: X, Y, Z, X-error, Y-error or can be simple columns without any special flag. The X columns are abscissae columns while the Y columns are ordinates columns used when creating a 2D plot from data. The X-error and Y-error columns can be used in order to add error bars to 2D plots. These flags can be changed using the &set-column-as-lnk;.</para>
-%
-%<indexterm>
-%  <primary>Table</primary><secondary>Number format</secondary>
-%</indexterm>
-%<para>The tag which is selected in figure <xref xrefstyle="select: labelnumber" linkend="fig-the-table"/> is used to assign a type to columns: numeric, text, date or time. The format used to display the data can then be chosen, the format in tables is not used for plots (use the &format-axes-lnk; to define display format for axes labels).</para>
-%
-%<figure id="fig-the-table_2">
-%  <title>The two other tags of the properties dialog of &appname; tables.</title>
-%  <mediaobject>
-%    <imageobject>
-%      <imagedata  format="PNG" fileref="pics/table_tag_1_3.png"/>
-%    </imageobject>
-%  </mediaobject>
-%</figure>
-%
-%<indexterm>
-%  <primary>Table</primary><secondary>Labels</secondary>
-%</indexterm>
-%<para>Every column of the table has a label, this can be defined in the description tag (figure <xref xrefstyle="select: labelnumber" linkend="fig-the-table_2"/>). This label will be used by default in plots for curve selection and legend display. You can use complex labels with spaces and special characters like "Vol (cc/g)" if needed. This command can also be reached by the &edit-column-description-lnk; of the &table-menu-lnk;.</para>
-%
-%<indexterm>
-%  <primary>Table</primary><secondary>Assign formula</secondary>
-%</indexterm>
-%<para>The last tag of the properties dialog correspond to the command &assign-formula-lnk; of the &table-menu-lnk; (figure <xref xrefstyle="select: labelnumber" linkend="fig-the-table_2"/>). It is used to fill the column with the result of a mathematic expression. Refer to the &assign-formula-lnk; for more details.</para>
-%
-%<para> You can select all the columns of the spreadsheet (<keycode>Ctrl+A</keycode>) or only some of them by clicking on the column label while keeping the <keycode>Ctrl</keycode> key pressed, or by moving the mouse over the column label. This also allows you to deselect columns.</para>
-%
-%<para> On the selected columns you can perform various operations: </para>
-%<itemizedlist>
-%  <listitem>
-%    <para>Fill with data. You can insert the row numbers (&fill-selection-with-row-number-lnk;), random numbers (&fill-selection-with-random-values-lnk;), or the result of a function (&assign-formula-lnk;);</para>
-%  </listitem>
-%  <listitem>
-%    <para>
-%    <indexterm>
-%      <primary>table</primary><secondary>normalize columns</secondary>
-%    </indexterm>
-%    normalize columns with the <command>Normalize Columns</command> command of the context menu;</para>
-%  </listitem>
-%  <listitem>
-%    <para>
-%    <indexterm>
-%      <primary>table</primary><secondary>sort columns</secondary>
-%     </indexterm>
-%    sort columns with the &sort-table-lnk; of the &table-menu-lnk; or with the <command>sort column</command> command of the context menu;</para>
-%  </listitem>
-%  <listitem>
-%    <para>compute statistical data on columns and rows with the &statistics-on-columns-lnk; and &statistics-on-rows-lnk; of the &analysis-tables-menu-lnk;;</para>
-%  </listitem>
-%  <listitem>
-%    <para>build a plot from selected columns with the <command>plot</command> command of the context menu or with the commands of the &plot-menu-lnk;.</para>
-%  </listitem>
-%</itemizedlist>
-%<para>All these functions can be reached by right clicking when a column is selected. Most of them can also be reached by using the &table-menu-lnk;.</para>
-%
-%<para>You can cut, copy and paste data between spreadsheets or between a spreadsheet and another application (Excel, Gnumeric, OpenOffice Calc, etc).</para>
-%
-%<para>You can import single or multiple ASCII files using the &import-ascii-lnk; from the &file-menu-lnk;. This will create one or more new tables. You can also export the data from the spreadsheet to a text file using the &export-ascii-lnk;.</para>
-%
+
+\subsection{Tables}\label{sec-intro-table}
+\index{Table}
+
+The table is the main part of \SciDaVis{} when working with data. For
+controlling and converting data the spreadsheet contains a highly
+customizable table: all colors and font preferences can be set using
+the \htmlref{Preferences command}{preferences-lnk} of the \htmlref{Edit
+  menu}{edit-menu-lnk}. You can resize a table
+in terms of rows and columns using the \htmlref{Dimensions command}{table-dimensions-lnk} command
+of the \htmlref{Table menu}{table-menu-lnk}. On the left side of the table, the button can
+be used to develop the properties tags. This allows to customize the
+main parameters of the table.
+
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/table.png}}
+  \caption{A \SciDaVis{} table with the properties dialog developped
+    and the type tag selected.}
+  \label{fig-the-table}
+\end{figure}
+
+In a spreadsheet, columns can have the following flags: X, Y, Z,
+X-error, Y-error or can be simple columns without any special
+flag. The X columns are abscissae columns while the Y columns are
+ordinates columns used when creating a 2D plot from data. The X-error
+and Y-error columns can be used in order to add error bars to 2D
+plots. These flags can be changed using the \htmlref{Set Column as
+  command}{set-column-as-lnk}.
+
+\index{Table!Number format}
+
+The tag which is selected in figure \ref{fig-the-table} is used to
+assign a type to columns: numeric, text, date or time. The format used
+to display the data can then be chosen, the format in tables is not
+used for plots (use the \htmlref{Axes command}{format-axes-lnk} to
+define display format for axes labels).
+
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/table_tag_1_3.png}}
+  \caption{The two other tags of the properties dialog of \SciDaVis{} tables.}
+  \label{fig-the-table_2}
+\end{figure}
+
+\index{Table!Labels}
+
+Every column of the table has a label, this can be defined in the
+description tag (figure \ref{fig-the-table_2}). This label will be
+used by default in plots for curve selection and legend display. You
+can use complex labels with spaces and special characters like ``Vol
+(cc/g)" if needed. This command can also be reached by the
+\htmlref{Edit Column Description command}{edit-column-description-lnk}
+of the \htmlref{Table menu}{table-menu-lnk}.
+
+\index{Table!Assign formula}
+
+The last tag of the properties dialog correspond to the command
+\htmlref{Assign Formula command}{assign-formula-lnk} of the
+\htmlref{Table menu}{table-menu-lnk} (figure \ref{fig-the-table_2}). It is used to fill the column with the result of a mathematic expression. Refer to the \htmlref{Assign Formula command}{assign-formula-lnk} for more details.
+
+You can select all the columns of the spreadsheet (\verb|Ctrl+A|) or
+only some of them by clicking on the column label while keeping the
+\verb+Ctrl+ key pressed, or by moving the mouse over the column
+label. This also allows you to deselect columns.
+
+On the selected columns you can perform various operations:
+
+\begin{itemize}
+\item Fill with data. You can insert the row numbers (\htmlref{Fill
+  Selection With$\rightarrow$Row Numbers
+  command}{fill-selection-with-row-number-lnk}), random numbers
+  (\htmlref{Fill Selection With$\rightarrow$Random
+  Values}{fill-selection-with-random-values-lnk}), or the result of a
+  function (\htmlref{Assign Formula command}{assign-formula-lnk});
+\item\index{table!normalize columns} normalize columns with the \verb+Normalize Columns+ command of the context menu;
+\item\index{table!sort columns}  sort columns with the \htmlref{Sort
+  Table command}{sort-table-lnk} of the \htmlref{Table
+  menu}{table-menu-lnk} or with the \verb+sort column+ command of the
+  context menu;
+\item compute statistical data on columns and rows with the
+  \htmlref{Statistics on Columns command}{statistics-on-columns-lnk}
+  and \htmlref{Statistics on Rows command}{statistics-on-rows-lnk}
+  of the \htmlref{Analysis-tables menu}{analysis-tables-menu-lnk};
+\item build a plot from selected columns with the \verb+plot+ command
+  of the context menu or with the commands of the \htmlref{Plot menu}{plot-menu-lnk}.
+\end{itemize}
+
+All these functions can be reached by right clicking when a column is
+selected. Most of them can also be reached by using the \htmlref{Table
+  menu}{table-menu-lnk}.
+
+You can cut, copy and paste data between spreadsheets or between a
+spreadsheet and another application (Excel, Gnumeric, OpenOffice Calc,
+etc).
+  
+You can import single or multiple ASCII files using the
+\htmlref{Import ASCII command}{import-ascii-lnk} from the
+\htmlref{File menu}{file-menu-lnk}. This will create one or more new
+tables. You can also export the data from the spreadsheet to a text
+file using the \htmlref{Export ASCII command}{export-ascii-lnk}.
+
 %</sect2>
 %<!--
 %		General description of a matrix
