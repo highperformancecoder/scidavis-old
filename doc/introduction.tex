@@ -181,7 +181,7 @@ In a project, the objects which can be used are:
     (\htmlref{Assign Formula command}{assign-formula-lnk} from the
     \htmlref{Table menu}{table-menu-lnk})
     
-    \item[Matrix]\label{sec-intro-matrix}\index{Matrix} A matrix is a
+    \item[Matrix]\index{Matrix} A matrix is a
       special table which is used to store the data points for surface
       3D plots. It contains Z-values and doesn't include any column or
       row which could be designated as X-values or
@@ -197,12 +197,12 @@ In a project, the objects which can be used are:
       and then convert this table to a matrix with the \htmlref{Conver
         to Matrix command}{convert-to-matrix-lnk}. In the same way as
       for tables, you can also fill matrix with the results of a
-      function z=f(i,j) in which i and j are row and column numbers,
-      or z=f(x,y). (see \htmlref{Assign Formula
+      function $z=f(i,j)$ in which $i$ and $j$ are row and column numbers,
+      or $z=f(x,y)$. (see \htmlref{Assign Formula
         command}{assign-formula-lnk} from the \htmlref{Matrix
         menu}{matrix-menu-lnk})
 
-    \item[A Graph]\label{sec-intro-plot-window}\index{Plot} A graph
+    \item[A Graph]\index{Plot} A graph
       can contain one or several plots. Each of these plots is
       contained in a different {\em layer}, these layers can be
       arranged in many ways to build matrix of plots.
@@ -247,7 +247,7 @@ In a project, the objects which can be used are:
         Explorer command}{project-explorer-lnk}, and gives a quick
       access to all elements of a project, hidden or visibles. It can
       be used to do some operations on the windows related to these
-      items such as hidding a window, renaming windows, etc.
+      items such as hiding a window, renaming windows, etc.
       
       A project file can include several independant projects. In this case,
       the containers of each project are stored in different folders.
@@ -355,29 +355,51 @@ You can import single or multiple ASCII files using the
 tables. You can also export the data from the spreadsheet to a text
 file using the \htmlref{Export ASCII command}{export-ascii-lnk}.
 
-%</sect2>
-%<!--
 %		General description of a matrix
 %		===============================
-%-->
-%<sect2 id="sec-intro-matrix">
-%  <title>Matrix</title>
-%  <indexterm><primary>Matrix</primary></indexterm>
-%  <para>The matrix is a special table which is used for data which depends on two variables. This special table is used to store data for 3D-plots. The difference between a table and a matrix is that there is that columns are assigned to the abscissae x while rows define abscissae y.</para>
-%  <para>The defaut size of a matrix is 32x32 cells. You can modify this size with the &matrix-dimensions-lnk;. Column and row numbers are named i and j respectively, ranging from 1 to the size of the matrix. You can specify an X-scale and an Y-scale with the &set-coordinates-lnk;, this define values of x and y for columns and rows (figure <xref xrefstyle="select: labelnumber" linkend="fig-matrix"/>).</para>
-%
-%<figure id="fig-matrix">
-%  <title>The &appname; matrix</title>
-%  <mediaobject>
-%    <imageobject>
-%      <imagedata  format="PNG" fileref="pics/matrix.png"/>
-%    </imageobject>
-%  </mediaobject>
-%</figure>
-%
-%  <para>The values which are stored in a matrix can be obtained from a function of the form z=f(i,j) or z=f(x,y) with the &assign-formula-lnk;. They can also be read from a file with the &import-ascii-lnk; which allows to read a file in a table, then the table can be converted to a matrix with the &convert-to-matrix-lnk; of the &matrix-menu-lnk;.</para>
-%  <para>As in the case of tables, a property tag can be shown or hidden by clicking on the vertical button on the right.</para>
-%  <para>Through the &matrix-menu-lnk;, several operations can be done on a matrix like transposition (&transpose-lnk;), mirroring (&mirror-horizontally-lnk; and &mirror-vertically-lnk;), inversion (&invert-lnk;), computation of the determinant (&determinant-lnk;). The data of a matrix can then be used to build a 3D plot with the commands present in the &plot3d-menu-lnk; and in &d3-surface-toolbar-lnk;.</para>
+\subsection{Matrix}\label{sec-intro-matrix}\index{Matrix}
+
+The matrix is a special table which is used for data which depends on
+two variables. This special table is used to store data for
+3D-plots. The difference between a table and a matrix is that there is
+that columns are assigned to the abscissae x while rows define
+abscissae y.
+
+The defaut size of a matrix is $32\times32$ cells. You can modify this size
+with the \htmlref{Dimensions command}{matrix-dimensions-lnk}. Column and row numbers are named $i$
+and $j$ respectively, ranging from 1 to the size of the matrix. You can
+specify an X-scale and an Y-scale with the \htmlref{Set Coordonates command}{set-coordinates-lnk}, this
+define values of $x$ and $y$ for columns and rows (figure
+\ref{fig-matrix}).
+
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/matrix.png}}
+  \caption{The \SciDaVis{} matrix.}
+  \label{fig-matrix}
+\end{figure}
+
+
+The values which are stored in a matrix can be obtained from a
+function of the form $z=f(i,j)$ or $z=f(x,y)$ with the \htmlref{Assign
+  Formula command}{assign-formula-lnk}. They can also be read from a
+file with the \htmlref{Import ASCII command}{import-ascii-lnk} which
+inserts the file data into a table, and then the table can be
+converted to a matrix with the \htmlref{Convert to Matrix
+  command}{convert-to-matrix-lnk} of the \htmlref{Matrix
+  menu}{matrix-menu-lnk}.
+
+As in the case of tables, a property tag can be shown or hidden by
+clicking on the vertical button on the right.
+
+Through the \htmlref{Matrix menu}{matrix-menu-lnk}, several operations can be done on a
+matrix like transposition (\htmlref{Transpose command}{transpose-lnk}), mirroring
+(\htmlref{Mirror Horizontally command}{mirror-horizontally-lnk} and
+\htmlref{Mirror Vertically command}{mirror-vertically-lnk}), inversion
+(\htmlref{Invert command}{invert-lnk}), computation of the determinant
+(\htmlref{Determinant}{determinant-lnk}). The data of a matrix can then be used to build a
+3D plot with the commands present in the \htmlref{plot3d menu}{plot3d-menu-lnk} and in
+the \htmlref{3D surface toolbar}{d3-surface-toolbar-lnk}.
+
 %
 %</sect2>
 %
@@ -385,40 +407,51 @@ file using the \htmlref{Export ASCII command}{export-ascii-lnk}.
 %		General description of a plot window
 %		====================================
 %-->
-%<sect2 id="sec-intro-plot-window">
-%<title>Plot Window</title>
-%
-%<indexterm><primary>Plot</primary></indexterm>
-%<indexterm><primary>Plot</primary><secondary>Layer</secondary></indexterm>
-%
-%<para>The plot window is the one in which the graphic is plotted. The main container of the plot window is the layer. You can have several layers in a plot, which may be arranged as you want. Each layer can contain a plot, or another item like a label.</para>
-%<para>Each new plot can be inserted in a new layer of this plot window, it has its own geometry and graphic properties (background color, frame, etc). The figure <xref xrefstyle="select: labelnumber" linkend="fig-plot-window"/> shows a graph with two layers which have different geometries. Inside a layer, the area in which the curves are plotted is the <emphasis>canvas</emphasis>.</para>
-%
-%<figure id="fig-plot-window">
-%  <title>An example of &appname; 2D graph with 2 layers.</title>
-%  <mediaobject>
-%    <imageobject>
-%      <imagedata  format="PNG" fileref="pics/plot-window.png"/>
-%    </imageobject>
-%  </mediaobject>
-%</figure>
-%
-%<para>Each layer can be activated by clicking on the corresponding gray button  <inlinemediaobject><imageobject><imagedata format="PNG" fileref="pics/layer-button.png"/></imageobject></inlinemediaobject> in the top-left corner of the window. The elements which can be accessed by a double click in a layer are:</para>
+
+\subsection{Plot Window}\label{sec-intro-plot-window}\index{Plot}\index{Plot!Layer}
+
+The plot window is the one in which the graphic is plotted. The main
+container of the plot window is the layer. You can have several layers
+in a plot, which may be arranged as you want. Each layer can contain a
+plot, or another item like a label.
+
+Each new plot can be inserted in a new layer of this plot window, it
+has its own geometry and graphic properties (background color, frame,
+etc). The figure \ref{fig-plot-window} shows a graph with two layers
+which have different geometries. Inside a layer, the area in which the
+curves are plotted is the {\em canvas}.
+
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/plot-window.png}}
+  \caption{An example of \SciDaVis{} 2D graph with 2 layers.}
+  \label{fig-plot-window}
+\end{figure}
+
+Each layer can be activated by clicking on the corresponding gray
+button  \resizebox{!}{1em}{\includegraphics{pics/layer-button.png}} in
+the top-left corner of the window. The elements which can be accessed
+by a double click in a layer are:
+
 %
 %<itemizedlist>
 %<listitem>
-%<para>the graph itself: this will open the <link linkend="
-%format-plot-cmd">Plot details</link> dialog box. You can then change the way the curves are plotted.</para>
-%</listitem>
-%<listitem>
-%<para>The axes or the axes labels: this will open the <link linkend="format-axes-cmd">General Plot Options Dialog</link>. It is used to customize the axes, the numbers and labels of the axes, and the grid.</para>
-%</listitem>
-%<listitem>
-%<para>Any other text item: this will open the <link linkend="sec-adding-text">Text Dialog</link> which allows to customize the font of the label and the frame in which it is drawn.</para>
-%</listitem>
-%</itemizedlist>
-%
-%<para>All these functions can be reached through the &format-menu-lnk;.</para>
+\begin{itemize}
+\item the graph itself: this will open the \htmlref{Plot
+  details}{format-plot-cmd} dialog box. You can then change the way
+  the curves are plotted.
+  
+\item The axes or the axes labels: this will open the \htmlref{General
+  Plot Options Dialog}{format-axes-cmd}. It is used to customize the
+  axes, the numbers and labels of the axes, and the grid.
+  
+\item Any other text item: this will open the \htmlref{Text
+  Dialog}{sec-adding-text} which allows to customize the font of the
+  label and the frame in which it is drawn.
+\end{itemize}
+
+All these functions can be reached through the \htmlref{Format
+  menu}{format-menu-lnk}.
+
 %</sect2>
 %
 %<!--
