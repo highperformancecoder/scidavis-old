@@ -498,12 +498,12 @@ void Table::pasteIntoSelection()
 			}
 
 			// regular expression for numeric data
-			QRegExp floatorintrx = QRegExp("^(([-+]?\\d*\\.\\d+([eE][-+]?\\d+)?)|([-+]?\\d+([eE][-+]?\\d+)?))$");
+			QRegExp floatorintrx = QRegExp("^[-+]?(?=.*\\d)\\d*\\.?\\d*([eE][-+]?\\d+)?$");
 			for (int c=0; c<cols && c<input_col_count; c++)
 			{
 				Column * col_ptr = d_table_private.column(first_col + c);
-				if (cols_texts.at(c).size() != cols_texts.at(c).filter(floatorintrx).size()) {
-					if (col_ptr->columnMode() == SciDAVis::Numeric)
+				if (col_ptr->columnMode() == SciDAVis::Numeric) {
+					if (cols_texts.at(c).size() != cols_texts.at(c).filter(floatorintrx).size())
 						col_ptr->setColumnMode(SciDAVis::Text);
 				}
 				col_ptr->asStringColumn()->replaceTexts(first_row, cols_texts.at(c).mid(0,rows));
