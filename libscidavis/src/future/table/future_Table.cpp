@@ -498,7 +498,7 @@ void Table::pasteIntoSelection()
 			}
 
 			// regular expression for numeric data
-			QRegExp floatorintrx = QRegExp("^[-+]?(?=.*\\d)\\d*\\.?\\d*([eE][-+]?\\d+)?$");
+			QRegExp floatorintrx = QRegExp("^[-+]?(?=[^eE]*\\d)\\d*\\.?\\d*([eE][-+]?\\d+)?$");
 			for (int c=0; c<cols && c<input_col_count; c++)
 			{
 				Column * col_ptr = d_table_private.column(first_col + c);
