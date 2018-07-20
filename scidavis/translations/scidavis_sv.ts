@@ -554,6 +554,36 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
     </message>
 </context>
 <context>
+    <name>Application</name>
+    <message>
+        <location filename="../src/main.cpp" line="143"/>
+        <location filename="../src/main.cpp" line="150"/>
+        <source>Error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="143"/>
+        <source>Error </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="144"/>
+        <source> sending event </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="145"/>
+        <location filename="../src/main.cpp" line="152"/>
+        <source> to object </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="151"/>
+        <source>Error &lt;unknown&gt; sending event</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ApplicationWindow</name>
     <message>
         <source>QtiPlot - Error</source>
@@ -8629,6 +8659,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/Fit.cpp" line="402"/>
+        <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../libscidavis/src/Fit.cpp" line="478"/>
         <location filename="../../libscidavis/src/Fit.cpp" line="484"/>
         <location filename="../../libscidavis/src/Fit.cpp" line="490"/>
@@ -8697,9 +8732,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Du behöver minst %1 punkter för att genomföra denna åtgärd. Åtgärden avbruten!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="402"/>
         <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
-        <translation type="unfinished">Kolumnen %1 har färre punkter än den anpassade datamängden. Välj en annan kolumn!.</translation>
+        <translation type="obsolete">Kolumnen %1 har färre punkter än den anpassade datamängden. Välj en annan kolumn!.</translation>
     </message>
 </context>
 <context>
@@ -9240,9 +9274,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FunctionDialog</name>
     <message>
-        <location filename="../../libscidavis/src/FunctionDialog.cpp" line="187"/>
         <source>Clear list</source>
-        <translation type="unfinished">Rensa lista</translation>
+        <translation type="obsolete">Rensa lista</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/FunctionDialog.cpp" line="153"/>
@@ -9297,6 +9330,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../../libscidavis/src/FunctionDialog.cpp" line="105"/>
         <source>y = </source>
         <translation type="unfinished">y= </translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/FunctionDialog.cpp" line="187"/>
+        <source>Clear List</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/FunctionDialog.cpp" line="279"/>
@@ -16445,6 +16483,19 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
     <message>
         <source>Table</source>
         <translation type="obsolete">Tabell</translation>
+    </message>
+</context>
+<context>
+    <name>TableConfigPage</name>
+    <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="13"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="19"/>
+        <source>TODO</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

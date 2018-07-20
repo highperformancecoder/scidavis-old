@@ -564,24 +564,31 @@ Voulez-vous l&apos;écraser ?</translation>
 <context>
     <name>Application</name>
     <message>
+        <location filename="../src/main.cpp" line="143"/>
+        <location filename="../src/main.cpp" line="150"/>
         <source>Error!</source>
-        <translation type="obsolete">Erreur !</translation>
+        <translation type="unfinished">Erreur !</translation>
     </message>
     <message>
+        <location filename="../src/main.cpp" line="143"/>
         <source>Error </source>
-        <translation type="obsolete">Erreur </translation>
+        <translation type="unfinished">Erreur </translation>
     </message>
     <message>
+        <location filename="../src/main.cpp" line="144"/>
         <source> sending event </source>
-        <translation type="obsolete">envoi d&apos;événement</translation>
+        <translation type="unfinished">envoi d&apos;événement</translation>
     </message>
     <message>
+        <location filename="../src/main.cpp" line="145"/>
+        <location filename="../src/main.cpp" line="152"/>
         <source> to object </source>
-        <translation type="obsolete">à l&apos;objet</translation>
+        <translation type="unfinished">à l&apos;objet</translation>
     </message>
     <message>
+        <location filename="../src/main.cpp" line="151"/>
         <source>Error &lt;unknown&gt; sending event</source>
-        <translation type="obsolete">Erreur &lt;inconnu&gt; à l&apos;envoi événement</translation>
+        <translation type="unfinished">Erreur &lt;inconnu&gt; à l&apos;envoi événement</translation>
     </message>
 </context>
 <context>
@@ -8855,6 +8862,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">La courbe% 1 n&apos;a pas de barres d&apos;erreur Y associées.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/Fit.cpp" line="402"/>
+        <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The curve %1 has no associated Y error bars. You cannot use instrumental weighting method.</source>
         <translation type="obsolete">La courbe %1 n&apos;a pas de barres d&apos;erreurs asociées en Y. Vous ne pouvez pas .</translation>
     </message>
@@ -8905,9 +8917,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Il faut au moins %1 points pour réaliser cette opération ! Opération annulée !</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="402"/>
         <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
-        <translation type="unfinished">La colonne %1 possède moins de points que les données ajustées. Veuillez choisir une autre colonne !.</translation>
+        <translation type="obsolete">La colonne %1 possède moins de points que les données ajustées. Veuillez choisir une autre colonne !.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Fit.cpp" line="478"/>
@@ -9438,9 +9449,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FunctionDialog</name>
     <message>
-        <location filename="../../libscidavis/src/FunctionDialog.cpp" line="187"/>
         <source>Clear list</source>
-        <translation type="unfinished">Effacer la liste</translation>
+        <translation type="obsolete">Effacer la liste</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/FunctionDialog.cpp" line="153"/>
@@ -9495,6 +9505,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../../libscidavis/src/FunctionDialog.cpp" line="105"/>
         <source>y = </source>
         <translation type="unfinished">y = </translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/FunctionDialog.cpp" line="187"/>
+        <source>Clear List</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/FunctionDialog.cpp" line="298"/>
@@ -16613,6 +16628,19 @@ La première représente le signal et la seconde la réponse de la fonction !</t
     <message>
         <source>Table</source>
         <translation type="obsolete">Table</translation>
+    </message>
+</context>
+<context>
+    <name>TableConfigPage</name>
+    <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="13"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="19"/>
+        <source>TODO</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

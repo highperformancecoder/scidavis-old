@@ -93,6 +93,29 @@
     </message>
 </context>
 <context>
+    <name>Application</name>
+    <message>
+        <source>Error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> sending event </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> to object </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error &lt;unknown&gt; sending event</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ApplicationWindow</name>
     <message>
         <source>F1</source>
@@ -4975,7 +4998,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
-        <translation type="unfinished">Sloupec %1 má méně bodů než záznam s údaji o umístění. Vyberte, prosím, jiný sloupec!</translation>
+        <translation type="obsolete">Sloupec %1 má méně bodů než záznam s údaji o umístění. Vyberte, prosím, jiný sloupec!</translation>
     </message>
     <message>
         <source>Associated dataset (%1)</source>
@@ -5056,6 +5079,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Input function error</source>
         <translation type="unfinished">Chyba při zadání funkce</translation>
+    </message>
+    <message>
+        <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5492,7 +5519,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Clear list</source>
-        <translation type="unfinished">Vyprázdnit seznam</translation>
+        <translation type="obsolete">Vyprázdnit seznam</translation>
     </message>
     <message>
         <source>Parameter</source>
@@ -5521,6 +5548,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>&amp;Apply</source>
         <translation type="unfinished">&amp;Použít</translation>
+    </message>
+    <message>
+        <source>Clear List</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9861,7 +9892,11 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <name>TableConfigPage</name>
     <message>
         <source>Form</source>
-        <translation type="obsolete">Formulář</translation>
+        <translation type="unfinished">Formulář</translation>
+    </message>
+    <message>
+        <source>TODO</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

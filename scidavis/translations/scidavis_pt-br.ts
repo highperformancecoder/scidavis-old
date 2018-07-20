@@ -470,23 +470,23 @@ Deseja sobrescrevê-lo?</translation>
     <name>Application</name>
     <message>
         <source>Error!</source>
-        <translation type="obsolete">Erro!</translation>
+        <translation type="unfinished">Erro!</translation>
     </message>
     <message>
         <source>Error </source>
-        <translation type="obsolete">Erro</translation>
+        <translation type="unfinished">Erro</translation>
     </message>
     <message>
         <source> sending event </source>
-        <translation type="obsolete"> enviando evento </translation>
+        <translation type="unfinished"> enviando evento </translation>
     </message>
     <message>
         <source> to object </source>
-        <translation type="obsolete"> para objeto </translation>
+        <translation type="unfinished"> para objeto </translation>
     </message>
     <message>
         <source>Error &lt;unknown&gt; sending event</source>
-        <translation type="obsolete">Erro &lt;unknown&gt; enviando evento</translation>
+        <translation type="unfinished">Erro &lt;unknown&gt; enviando evento</translation>
     </message>
 </context>
 <context>
@@ -6615,7 +6615,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
-        <translation type="unfinished">A coluna %1 possui menos pontos que o conjunto de dados ajustado. Por favor, escolha outra coluna!.</translation>
+        <translation type="obsolete">A coluna %1 possui menos pontos que o conjunto de dados ajustado. Por favor, escolha outra coluna!.</translation>
     </message>
     <message>
         <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
@@ -6652,6 +6652,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Input function error</source>
         <translation type="unfinished">Erro na função fornecida</translation>
+    </message>
+    <message>
+        <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7083,7 +7087,7 @@ p, li { white-space: pre-wrap; }
     <name>FunctionDialog</name>
     <message>
         <source>Clear list</source>
-        <translation type="unfinished">Limpar lista</translation>
+        <translation type="obsolete">Limpar lista</translation>
     </message>
     <message>
         <source>Clear Function</source>
@@ -7184,6 +7188,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Input error</source>
         <translation type="unfinished">Erro de entrada</translation>
+    </message>
+    <message>
+        <source>Clear List</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13203,7 +13211,11 @@ Gostaria de inserir células?</translation>
     <name>TableConfigPage</name>
     <message>
         <source>Form</source>
-        <translation type="obsolete">A partir de</translation>
+        <translation type="unfinished">A partir de</translation>
+    </message>
+    <message>
+        <source>TODO</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

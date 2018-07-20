@@ -568,6 +568,36 @@ Do you want to overwrite it?</source>
     </message>
 </context>
 <context>
+    <name>Application</name>
+    <message>
+        <location filename="../src/main.cpp" line="143"/>
+        <location filename="../src/main.cpp" line="150"/>
+        <source>Error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="143"/>
+        <source>Error </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="144"/>
+        <source> sending event </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="145"/>
+        <location filename="../src/main.cpp" line="152"/>
+        <source> to object </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="151"/>
+        <source>Error &lt;unknown&gt; sending event</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ApplicationWindow</name>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="405"/>
@@ -8956,9 +8986,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">¡Necesita al menos %1 puntos para realizar esta operación! ¡Operación abortada!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="402"/>
         <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
-        <translation type="unfinished">La columna %1 tiene menos puntos que el conjunto de datos ajustado. ¡Por favor, escoja otra columna!.</translation>
+        <translation type="obsolete">La columna %1 tiene menos puntos que el conjunto de datos ajustado. ¡Por favor, escoja otra columna!.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Fit.cpp" line="479"/>
@@ -9002,6 +9031,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../../libscidavis/src/Fit.cpp" line="371"/>
         <source>The curve %1 has no associated Y error bars.</source>
         <translation type="unfinished">La curva %1 no tiene asociada barras de error Y.</translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/Fit.cpp" line="402"/>
+        <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/Fit.cpp" line="527"/>
@@ -9579,9 +9613,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FunctionDialog</name>
     <message>
-        <location filename="../../libscidavis/src/FunctionDialog.cpp" line="187"/>
         <source>Clear list</source>
-        <translation type="unfinished">Borrar lista</translation>
+        <translation type="obsolete">Borrar lista</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/FunctionDialog.cpp" line="153"/>
@@ -9719,6 +9752,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../../libscidavis/src/FunctionDialog.cpp" line="49"/>
         <source>Add function curve</source>
         <translation type="unfinished">Agregar curva de función</translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/FunctionDialog.cpp" line="187"/>
+        <source>Clear List</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/FunctionDialog.cpp" line="279"/>
@@ -17479,8 +17517,14 @@ Do you want to insert cells?</source>
 <context>
     <name>TableConfigPage</name>
     <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="13"/>
         <source>Form</source>
-        <translation type="obsolete">Forma</translation>
+        <translation type="unfinished">Forma</translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="19"/>
+        <source>TODO</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

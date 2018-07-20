@@ -105,6 +105,36 @@
     </message>
 </context>
 <context>
+    <name>Application</name>
+    <message>
+        <location filename="../src/main.cpp" line="143"/>
+        <location filename="../src/main.cpp" line="150"/>
+        <source>Error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="143"/>
+        <source>Error </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="144"/>
+        <source> sending event </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="145"/>
+        <location filename="../src/main.cpp" line="152"/>
+        <source> to object </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="151"/>
+        <source>Error &lt;unknown&gt; sending event</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ApplicationWindow</name>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="194"/>
@@ -6817,7 +6847,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../../libscidavis/src/Fit.cpp" line="402"/>
-        <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
+        <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7443,7 +7473,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../../libscidavis/src/FunctionDialog.cpp" line="187"/>
-        <source>Clear list</source>
+        <source>Clear List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12784,6 +12814,19 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../libscidavis/src/Table.cpp" line="1394"/>
         <source>%1: apply formula to column</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TableConfigPage</name>
+    <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="13"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="19"/>
+        <source>TODO</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

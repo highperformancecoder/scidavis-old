@@ -552,6 +552,36 @@ Do you want to overwrite it?</source>
     </message>
 </context>
 <context>
+    <name>Application</name>
+    <message>
+        <location filename="../src/main.cpp" line="+143"/>
+        <location line="+7"/>
+        <source>Error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <source>Error </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source> sending event </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+7"/>
+        <source> to object </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Error &lt;unknown&gt; sending event</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ApplicationWindow</name>
     <message>
         <source>QtiPlot - Error</source>
@@ -8780,7 +8810,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location line="+195"/>
+        <location line="-19"/>
+        <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+214"/>
         <source>Fit</source>
         <translation type="unfinished">Приближение</translation>
     </message>
@@ -8825,12 +8860,11 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Для выполнения этой операции необходимо как минимум %1 точки(ек)! Операция прервана!</translation>
     </message>
     <message>
-        <location line="-95"/>
         <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
-        <translation type="unfinished">Колонка %1 содержит меньше точек, чем обрабатываемый набор данных. Пожалуйста выберите другую колонку!.</translation>
+        <translation type="obsolete">Колонка %1 содержит меньше точек, чем обрабатываемый набор данных. Пожалуйста выберите другую колонку!.</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="-18"/>
         <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Вы не указали допустимый набор данных для этой операции. Операция прервана!</translation>
     </message>
@@ -9421,12 +9455,11 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FunctionDialog</name>
     <message>
-        <location filename="../../libscidavis/src/FunctionDialog.cpp" line="+187"/>
         <source>Clear list</source>
-        <translation type="unfinished">Очистить список</translation>
+        <translation type="obsolete">Очистить список</translation>
     </message>
     <message>
-        <location line="-34"/>
+        <location filename="../../libscidavis/src/FunctionDialog.cpp" line="+153"/>
         <location line="+36"/>
         <source>Clear Function</source>
         <translation type="unfinished">Очистить функцию</translation>
@@ -9563,7 +9596,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Добавить кривую функции</translation>
     </message>
     <message>
-        <location line="+230"/>
+        <location line="+138"/>
+        <source>Clear List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+92"/>
         <location line="+65"/>
         <location line="+68"/>
         <source>Start limit error</source>
@@ -16594,6 +16632,19 @@ Do you want to insert cells?</source>
         <location line="-355"/>
         <source>ASCII Export Error</source>
         <translation type="unfinished">Ошибка экспорта в ASCII</translation>
+    </message>
+</context>
+<context>
+    <name>TableConfigPage</name>
+    <message>
+        <location filename="../../libscidavis/src/future/table/TableConfigPage.ui" line="+13"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>TODO</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
