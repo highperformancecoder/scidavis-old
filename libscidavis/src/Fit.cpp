@@ -399,7 +399,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
   	            {
 						if (!fail_silently)
 							QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
-									tr("The column %1 has less points than the fitted data set. Please choose another column!.").arg(colName));
+									tr("The column %1 has less points than the fitted data set. Please choose another column!").arg(colName));
   	                return false;
   	            }
 

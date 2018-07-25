@@ -184,7 +184,7 @@ FunctionDialog::FunctionDialog( QWidget* parent, Qt::WFlags fl )
 void FunctionDialog::raiseWidget(int index)
 {
 	if (index)
-		buttonClear->setText( tr( "Clear list" ) );
+		buttonClear->setText( tr( "Clear List" ) );
 	else
 		buttonClear->setText( tr( "Clear Function" ) );
 
