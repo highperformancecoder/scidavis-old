@@ -48,3 +48,4 @@ TRANSLATIONS    = scidavis/translations/scidavis_de.ts \
                   scidavis/translations/scidavis_pt-br.ts \
                   scidavis/translations/scidavis_cs.ts \
                   scidavis/translations/scidavis_cs-alt.ts \
+                  scidavis/translations/scidavis_pl.ts \
