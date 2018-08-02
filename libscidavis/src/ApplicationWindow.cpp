@@ -12530,10 +12530,19 @@ void ApplicationWindow::saveFolderAsProject(Folder *f)
 
 void ApplicationWindow::showFolderPopupMenu(const QPoint &p, bool fromFolders)
 {
+  QMenu* cm = nullptr;
   if (fromFolders)
-    showFolderPopupMenuImpl(folders->itemAt(p), fromFolders)->exec(folders->mapToGlobal(p));
+  {
+    cm = showFolderPopupMenuImpl(folders->itemAt(p), fromFolders);
+    if (cm)
+      cm->exec(folders->mapToGlobal(p));
+  }
   else
-    showFolderPopupMenuImpl(lv->itemAt(p), fromFolders)->exec(lv->mapToGlobal(p));
+  {
+    cm = showFolderPopupMenuImpl(lv->itemAt(p), fromFolders);
+    if (cm)
+      cm->exec(lv->mapToGlobal(p));
+  }
 }
 
 
