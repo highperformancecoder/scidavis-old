@@ -44,7 +44,7 @@
 #include <QApplication>
 #include <QMessageBox>
 
-AssociationsDialog::AssociationsDialog( QWidget* parent, Qt::WFlags fl )
+AssociationsDialog::AssociationsDialog( QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl ), graph(0)
 {
     setWindowTitle( tr( "Plot Associations" ) );

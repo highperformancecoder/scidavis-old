@@ -41,7 +41,7 @@
 #include <QComboBox>
 #include <QLayout>
 
-InterpolationDialog::InterpolationDialog( QWidget* parent, Qt::WFlags fl )
+InterpolationDialog::InterpolationDialog( QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
 {
 	setWindowTitle(tr("Interpolation Options"));

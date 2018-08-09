@@ -84,7 +84,7 @@ UserFunction::~UserFunction()
 {
 }
 
-	Graph3D::Graph3D(const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
+	Graph3D::Graph3D(const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 : MyWidget(label,parent,name,f)
 {
 	initPlot();

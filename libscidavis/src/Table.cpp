@@ -60,7 +60,7 @@ using namespace std;
 
 Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 			 bool stripSpaces, bool simplifySpaces, bool convertToNumeric, QLocale numericLocale, const QString& label,
-			 QWidget* parent, const char* name, Qt::WFlags f)
+			 QWidget* parent, const char* name, Qt::WindowFlags f)
 	: TableView(label, parent, name,f), scripted(env)
 {
 
@@ -86,7 +86,7 @@ Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ign
 	init();
 }
 
-Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
+Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 	: TableView(label, parent, name,f), scripted(env)
 {
 	d_future_table = new future::Table(r, c, label);

@@ -42,7 +42,7 @@
 #include <QComboBox>
 #include <QCloseEvent>
 
-	ExpDecayDialog::ExpDecayDialog(int type, QWidget* parent, Qt::WFlags fl )
+	ExpDecayDialog::ExpDecayDialog(int type, QWidget* parent, Qt::WindowFlags fl )
 : QDialog( parent, fl )
 {
 	slopes = type;

@@ -38,7 +38,7 @@
 #include <QLabel>
 #include <QSpinBox>
 
-CurveRangeDialog::CurveRangeDialog(QWidget* parent, Qt::WFlags fl )
+CurveRangeDialog::CurveRangeDialog(QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
 {
 	setWindowTitle(tr("Plot range"));

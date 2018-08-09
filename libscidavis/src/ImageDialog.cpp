@@ -32,7 +32,7 @@
 #include <QGroupBox>
 #include <QLabel>
 
-ImageDialog::ImageDialog( QWidget* parent, Qt::WFlags fl )
+ImageDialog::ImageDialog( QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
 {
 	setWindowTitle( tr( "Image Geometry" ) );

@@ -49,7 +49,7 @@
 
 #include <QMessageBox>
 
-CurvesDialog::CurvesDialog( QWidget* parent, Qt::WFlags fl )
+CurvesDialog::CurvesDialog( QWidget* parent, Qt::WindowFlags fl )
 : QDialog( parent, fl )
 {
 	setWindowTitle( tr( "Add/Remove curves" ) );

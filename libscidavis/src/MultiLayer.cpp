@@ -84,7 +84,7 @@ void LayerButton::mouseDoubleClickEvent ( QMouseEvent * )
 	emit showCurvesDialog();
 }
 
-MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name, Qt::WFlags f)
+MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name, Qt::WindowFlags f)
 : MyWidget(label,parent,name,f)
 {
 	if ( name.isEmpty() )

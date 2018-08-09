@@ -42,7 +42,7 @@
 #include <QComboBox>
 #include <QCloseEvent>
 
-ImageExportDialog::ImageExportDialog(QWidget * parent, bool vector_options, bool extended, Qt::WFlags flags)
+ImageExportDialog::ImageExportDialog(QWidget * parent, bool vector_options, bool extended, Qt::WindowFlags flags)
 	: ExtensibleFileDialog( parent, extended, flags )
 {
 	setWindowTitle( tr( "Choose a filename to save under" ) );

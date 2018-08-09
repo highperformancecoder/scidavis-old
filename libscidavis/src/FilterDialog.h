@@ -44,7 +44,7 @@ class FilterDialog : public QDialog
     Q_OBJECT
 
 public:
-    FilterDialog(int type, QWidget* parent = 0, Qt::WFlags fl = 0 );
+    FilterDialog(int type, QWidget* parent = 0, Qt::WindowFlags fl = 0 );
     ~FilterDialog(){};
 
 	QPushButton* buttonFilter;

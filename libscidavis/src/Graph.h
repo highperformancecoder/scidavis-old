@@ -117,7 +117,7 @@ class Graph: public QWidget
 	Q_OBJECT
 
 	public:
-		Graph (QWidget* parent=0, QString name=QString(), Qt::WFlags f=0);
+		Graph (QWidget* parent=0, QString name=QString(), Qt::WindowFlags f=0);
 		~Graph();
 
 		enum Axis{Left, Right, Bottom, Top};

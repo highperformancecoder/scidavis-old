@@ -40,7 +40,7 @@
 #include <QFrame>
 #include <QGroupBox>
 
-FindDialog::FindDialog( QWidget* parent, Qt::WFlags fl )
+FindDialog::FindDialog( QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
 {
 	setWindowTitle (tr("SciDAVis") + " - " + tr("Find"));

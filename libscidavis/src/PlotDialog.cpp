@@ -66,7 +66,7 @@
 #include <QMenu>
 #include <QDateTime>
 
-PlotDialog::PlotDialog(bool showExtended, QWidget* parent, Qt::WFlags fl )
+PlotDialog::PlotDialog(bool showExtended, QWidget* parent, Qt::WindowFlags fl )
 : QDialog(parent, fl),
   d_ml(0)
 {

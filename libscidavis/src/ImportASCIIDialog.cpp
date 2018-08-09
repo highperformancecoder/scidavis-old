@@ -42,7 +42,7 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 
-ImportASCIIDialog::ImportASCIIDialog(bool import_mode_enabled, QWidget * parent, bool extended, Qt::WFlags flags )
+ImportASCIIDialog::ImportASCIIDialog(bool import_mode_enabled, QWidget * parent, bool extended, Qt::WindowFlags flags )
 : ExtensibleFileDialog(parent, extended, flags )
 {
   setWindowTitle(tr("Import ASCII File(s)"));

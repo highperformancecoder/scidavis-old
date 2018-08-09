@@ -60,14 +60,14 @@
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_math.h>
 
-Matrix::Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
+Matrix::Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 	: MatrixView(label, parent, name, f), scripted(env)
 {
 	d_future_matrix = new future::Matrix(0, r, c, label);
 	init(r, c);
 }
 	
-Matrix::Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
+Matrix::Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 	: MatrixView(label, parent, name, f), scripted(env)
 {
 	d_future_matrix = future_matrix;

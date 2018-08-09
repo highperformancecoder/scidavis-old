@@ -40,7 +40,7 @@
 #include <QFont>
 #include <QMessageBox>
 
-LayerDialog::LayerDialog( QWidget* parent, Qt::WFlags fl )
+LayerDialog::LayerDialog( QWidget* parent, Qt::WindowFlags fl )
 : QDialog( parent, fl )
 {
 	setWindowTitle(tr( "Arrange Layers" ));

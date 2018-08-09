@@ -43,7 +43,7 @@
 #include <QWidget>
 #include <QMessageBox>
 
-FunctionDialog::FunctionDialog( QWidget* parent, Qt::WFlags fl )
+FunctionDialog::FunctionDialog( QWidget* parent, Qt::WindowFlags fl )
 : QDialog( parent, fl )
 {
 	setWindowTitle( tr( "Add function curve" ) );

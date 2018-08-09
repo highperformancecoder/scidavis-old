@@ -61,7 +61,7 @@
 #include <QFontMetrics>
 #include <QSettings>
 
-ConfigDialog::ConfigDialog( QWidget* parent, Qt::WFlags fl )
+ConfigDialog::ConfigDialog( QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
 {
 	// get current values from app window

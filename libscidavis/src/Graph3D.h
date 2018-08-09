@@ -58,7 +58,7 @@ class Graph3D: public MyWidget
 	Q_OBJECT
 
 public:
-	Graph3D (const QString& label, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
+	Graph3D (const QString& label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
 	~Graph3D();
 
 	enum PlotType{Scatter=0, Trajectory = 1, Bars = 2};
