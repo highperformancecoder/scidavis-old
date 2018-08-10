@@ -115,6 +115,7 @@ QVariant MatrixModel::headerData(int section, Qt::Orientation orientation, int r
 					result += QString(")");
 					return QVariant(result);
 			}
+			break;
 		case Qt::Vertical:
 			switch(role) 
 			{

@@ -101,9 +101,11 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 					postfix = " " + tr("(masked)");
 				if(col_ptr->isInvalid(row))
 					return QVariant(tr("invalid cell (ignored in all operations)","tooltip string for invalid rows") + postfix);
+				break;
 		case Qt::EditRole:
 				if(!d_formula_mode && col_ptr->isInvalid(row))
 					return QVariant();
+				break;
 		case Qt::DisplayRole:
 			{
 				if(d_formula_mode)
