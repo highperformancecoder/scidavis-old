@@ -8493,7 +8493,7 @@ void ApplicationWindow::setFramed3DPlot()
 	if (d_workspace->activeWindow() && d_workspace->activeWindow()->inherits("Graph3D"))
 	{
 		((Graph3D*)d_workspace->activeWindow())->setFramed();
-		actionShowAxisDialog->setEnabled(TRUE);
+		actionShowAxisDialog->setEnabled(true);
 	}
 }
 
@@ -8502,7 +8502,7 @@ void ApplicationWindow::setBoxed3DPlot()
 	if (d_workspace->activeWindow() && d_workspace->activeWindow()->inherits("Graph3D"))
 	{
 		((Graph3D*)d_workspace->activeWindow())->setBoxed();
-		actionShowAxisDialog->setEnabled(TRUE);
+		actionShowAxisDialog->setEnabled(true);
 	}
 }
 
@@ -10199,7 +10199,7 @@ void ApplicationWindow::copyActiveLayer()
 	if (!d_workspace->activeWindow() || !d_workspace->activeWindow()->inherits("MultiLayer"))
 		return;
 
-	copiedLayer=TRUE;
+	copiedLayer=true;
 
 	Graph *g = ((MultiLayer *)d_workspace->activeWindow())->activeGraph();
 	delete lastCopiedLayer;

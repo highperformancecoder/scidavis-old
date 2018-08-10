@@ -48,7 +48,7 @@ Legend::Legend(Plot *plot):
 	d_angle(0)
 {
 	d_text = new QwtText(QString::null, QwtText::RichText);
-	d_text->setFont(QFont("Arial",12, QFont::Normal, FALSE));
+	d_text->setFont(QFont("Arial",12, QFont::Normal, false));
 	d_text->setRenderFlags(Qt::AlignTop|Qt::AlignLeft);
 	d_text->setBackgroundBrush(QBrush(Qt::NoBrush));
 	d_text->setColor(Qt::black);

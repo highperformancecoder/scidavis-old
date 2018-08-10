@@ -374,7 +374,7 @@ public slots:
 		QVector<int> lineMarkerKeys(){return d_lines;};
 
 		//!Draws a line/arrow depending on the value of "arrow"
-		void drawLine(bool on, bool arrow = FALSE);
+		void drawLine(bool on, bool arrow = false);
 		bool drawArrow(){return drawArrowOn;};
 		bool drawLineActive(){return drawLineOn;};
 
