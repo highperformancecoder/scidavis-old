@@ -168,7 +168,6 @@ FunctionDialog::FunctionDialog( QWidget* parent, Qt::WindowFlags fl )
 	vbox1->addLayout(hbox2);
 
 	setLayout(vbox1);
-	languageChange();
 	setFocusProxy (boxFunction);
 
 	connect( boxType, SIGNAL( activated(int) ), this, SLOT( raiseWidget(int) ) );
