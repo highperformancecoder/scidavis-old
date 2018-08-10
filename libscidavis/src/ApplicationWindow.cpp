@@ -10354,7 +10354,7 @@ void ApplicationWindow::connectMultilayerPlot(MultiLayer *g)
 	connect (g,SIGNAL(showCurveContextMenu(int)), this, SLOT(showCurveContextMenu(int)));
 	connect (g,SIGNAL(showWindowContextMenu()),this,SLOT(showWindowContextMenu()));
 	connect (g,SIGNAL(showCurvesDialog()),this,SLOT(showCurvesDialog()));
-	connect (g,SIGNAL(drawLineEnded(bool)), btnPointer, SLOT(setOn(bool)));
+	connect (g,SIGNAL(drawLineEnded(bool)), btnPointer, SLOT(setChecked(bool)));
 	connect (g,SIGNAL(drawTextOff()),this, SLOT(disableAddText()));
 	connect (g,SIGNAL(showXAxisTitleDialog()),this,SLOT(showXAxisTitleDialog()));
 	connect (g,SIGNAL(showYAxisTitleDialog()),this,SLOT(showYAxisTitleDialog()));
@@ -13668,7 +13668,7 @@ void ApplicationWindow::cascade()
 QMenu * ApplicationWindow::createToolbarsMenu()
 {
     QMenu *menu = 0;
-    QList<QToolBar *> toolbars = qFindChildren<QToolBar *>(this);
+    QList<QToolBar *> toolbars = this->findChildren<QToolBar *>();
     if (toolbars.size())
 	{
         menu = new QMenu(this);
