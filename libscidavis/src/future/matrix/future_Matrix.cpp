@@ -813,11 +813,11 @@ void Matrix::goToCell()
 	if (!d_view) return;
 	bool ok;
 
-	int col = QInputDialog::getInteger(0, tr("Go to Cell"), tr("Enter column"),
+	int col = QInputDialog::getInt(0, tr("Go to Cell"), tr("Enter column"),
 			1, 1, columnCount(), 1, &ok);
 	if ( !ok ) return;
 
-	int row = QInputDialog::getInteger(0, tr("Go to Cell"), tr("Enter row"),
+	int row = QInputDialog::getInt(0, tr("Go to Cell"), tr("Enter row"),
 			1, 1, rowCount(), 1, &ok);
 	if ( !ok ) return;
 
@@ -890,11 +890,11 @@ void Matrix::dimensionsDialog()
 {
 	bool ok;
 
-	int cols = QInputDialog::getInteger(0, tr("Set Matrix Dimensions"), tr("Enter number of columns"),
+	int cols = QInputDialog::getInt(0, tr("Set Matrix Dimensions"), tr("Enter number of columns"),
 			columnCount(), 1, 1e9, 1, &ok);
 	if ( !ok ) return;
 
-	int rows = QInputDialog::getInteger(0, tr("Set Matrix Dimensions"), tr("Enter number of rows"),
+	int rows = QInputDialog::getInt(0, tr("Set Matrix Dimensions"), tr("Enter number of rows"),
 			rowCount(), 1, 1e9, 1, &ok);
 	if ( !ok ) return;
 	

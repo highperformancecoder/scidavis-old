@@ -9048,7 +9048,7 @@ void ApplicationWindow::pixelLineProfile()
 		return;
 
 	bool ok;
-	int res = QInputDialog::getInteger(this,
+	int res = QInputDialog::getInt(this,
 			tr("Set the number of pixels to average"), tr("Number of averaged pixels"),1, 1, 2000, 2,
 			&ok);
 	if ( !ok )
@@ -11829,7 +11829,7 @@ void ApplicationWindow::fitMultiPeak(int profile)
 	else
 	{
 		bool ok;
-		int peaks = QInputDialog::getInteger(this, tr("Enter the number of peaks"),
+		int peaks = QInputDialog::getInt(this, tr("Enter the number of peaks"),
 				tr("Peaks"), 2, 2, 1000000, 1, &ok);
 		if (ok && peaks)
 		{
