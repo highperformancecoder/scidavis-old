@@ -7496,9 +7496,9 @@ void ApplicationWindow::windowsMenuAboutToShow()
 			if (!widget) continue;
 			QAction *actId = windowsMenu->addAction(widget->name(),
 					this, SLOT( windowsMenuActivated( bool ) ) );
-			actId->setData(i); // Q3CHECK windowsMenu->setItemParameter( id, i );
+			actId->setData(i);
 			actId->setCheckable(true);
-			actId->setChecked(d_workspace->activeWindow() == windows.at(i)); // Q3CHECK windowsMenu->setItemChecked( id, d_workspace->activeWindow() == windows.at(i) );
+			actId->setChecked(d_workspace->activeWindow() == windows.at(i));
 		}
 	}
 	else if (n>=10)
@@ -7510,9 +7510,9 @@ void ApplicationWindow::windowsMenuAboutToShow()
 			if (!widget) continue;
 			QAction *actId = windowsMenu->addAction(widget->name(),
 					this, SLOT( windowsMenuActivated( bool ) ) );
-			actId->setData(i); // Q3CHECK windowsMenu->setItemParameter( id, i );
+			actId->setData(i);
 			actId->setCheckable(true);
-			actId->setChecked(d_workspace->activeWindow() == windows.at(i)); // Q3CHECK windowsMenu->setItemChecked( id, d_workspace->activeWindow() == windows.at(i) );
+			actId->setChecked(d_workspace->activeWindow() == windows.at(i));
 		}
 		windowsMenu->addSeparator();
 		windowsMenu->addAction(tr("More windows..."),this, SLOT(showMoreWindows()));
@@ -12596,9 +12596,9 @@ QMenu*ApplicationWindow::showFolderPopupMenuImpl(QTreeWidgetItem* it, bool fromF
 	for (int i = 0; i < 3; ++i)
 	{
 		QAction *actId = viewWindowsMenu->addAction(lst[i],this, SLOT( setShowWindowsPolicy( bool ) ) );
-		actId->setData(i); // Q3CHECK viewWindowsMenu.setItemParameter( id, i );
+		actId->setData(i);
 		actId->setCheckable(true);
-		actId->setChecked(show_windows_policy == i); // Q3CHECK viewWindowsMenu.setItemChecked( id, show_windows_policy == i );
+		actId->setChecked(show_windows_policy == i);
 	}
 	cm->addSeparator();
 	cm->addAction(tr("&Properties..."), this, SLOT(folderProperties()));
@@ -12651,7 +12651,7 @@ void ApplicationWindow::startRenameFolder()
 	disconnect(folders, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
 		this, SLOT(folderItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)));
 	fi->setFlags(fi->flags() | Qt::ItemIsEditable);
-	fi->treeWidget()->editItem(fi, 0); // Q3CHECK fi->startRename (0);
+	fi->treeWidget()->editItem(fi, 0);
 }
 
 void ApplicationWindow::startRenameFolder(QTreeWidgetItem *item, int column)
@@ -12667,12 +12667,12 @@ void ApplicationWindow::startRenameFolder(QTreeWidgetItem *item, int column)
 		FolderListItem *it = current_folder->folderListItem();
 		it->treeWidget()->setCurrentItem(it,0);
 		it->setFlags(it->flags() | Qt::ItemIsEditable);
-		it->treeWidget()->editItem(it, column); // Q3CHECK it->startRename (0);
+		it->treeWidget()->editItem(it, column);
 	}
 	else
 	{
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
-		item->treeWidget()->editItem(item, 0); // Q3CHECK item->startRename (0);
+		item->treeWidget()->editItem(item, 0);
 		item->setFlags(item->flags() & ~Qt::ItemIsEditable);
 	}
 }
@@ -12707,7 +12707,7 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString
 
 		it->setFlags(it->flags() | Qt::ItemIsEditable);
 		it->setText(0, current_folder->name());
-		it->treeWidget()->editItem(it, 0); // Q3CHECK it->startRename (0);
+		it->treeWidget()->editItem(it, 0);
 		return;
 	}
 
@@ -12895,7 +12895,7 @@ void ApplicationWindow::addFolder()
         f->setFolderListItem(fi);
         fi->setFlags(fi->flags() | Qt::ItemIsEditable);
         fi->treeWidget()->setCurrentItem(fi,0);
-        fi->treeWidget()->editItem(fi, 0); // Q3CHECK fi->startRename(0);
+        fi->treeWidget()->editItem(fi, 0);
         fi->treeWidget()->resizeColumnToContents(0);
 }
 

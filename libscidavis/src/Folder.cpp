@@ -273,8 +273,6 @@ if (!item)
 if (item == topLevelItem(0) && item->treeWidget()->rootIsDecorated())
 	return;//it's the project folder so we don't want the user to move it
 
-// Q3CHECK viewportToContents( viewport()->mapFromGlobal( QCursor::pos() ) );
-
 QPixmap pix;
 if (item->type() == FolderListItem::FolderType)
 	pix = QPixmap(":/folder_closed.xpm");
@@ -390,7 +388,7 @@ void FolderListView::mouseMoveEvent( QMouseEvent* e )
 if ( mousePressed && ( presspos - e->pos() ).manhattanLength() > QApplication::startDragDistance() )
 	{
 	mousePressed = false;
-	QTreeWidgetItem *item = itemAt( presspos ); // Q3CHECK contentsToViewport(presspos) );
+	QTreeWidgetItem *item = itemAt( presspos );
 	if ( item )
 		startDrag();
     }
