@@ -35,7 +35,8 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #ifdef SEARCH_FOR_UPDATES
-#include <QHttp>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 #endif
 #include <QFile>
 #include <QSplitter>
@@ -732,8 +733,8 @@ public slots:
   void updateRecentProjectsList();
 
 #ifdef SEARCH_FOR_UPDATES
-  //!  connected to the done(bool) signal of the http object
-  void receivedVersionFile(bool error);
+  //!  connected to the finished(QNetworkReply*) signal of the http object
+  void receivedVersionFile(QNetworkReply*);
   //!  called when the user presses the actionCheckUpdates
   void searchForUpdates();
 #endif
@@ -1055,9 +1056,9 @@ private:
 
 #ifdef SEARCH_FOR_UPDATES
   //! Used when checking for new versions
-  QHttp http;
+  QNetworkAccessManager http;
   //! Used when checking for new versions
-  QBuffer version_buffer;
+  QByteArray version_buffer;
 #endif
 
   Graph *lastCopiedLayer;

@@ -342,7 +342,7 @@ ApplicationWindow::ApplicationWindow()
 	connect(scriptEnv, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
 
 #ifdef SEARCH_FOR_UPDATES
-	connect(&http, SIGNAL(done(bool)), this, SLOT(receivedVersionFile(bool)));
+	connect(&http, SIGNAL(finished(QNetworkReply*)), this, SLOT(receivedVersionFile(QNetworkReply*)));
 #endif
 
 	// this has to be done after connecting scriptEnv
@@ -13435,39 +13435,50 @@ void ApplicationWindow::searchForUpdates()
 
     if (choice == QMessageBox::Yes)
     {
-        version_buffer.open(QIODevice::WriteOnly);
-        http.setHost("scidavis.sourceforge.net");
-        http.get("/current_version.txt", &version_buffer);
+        // http.get(QNetworkRequest(QUrl("http://scidavis.sourceforge.net/current_version.txt")));
+        http.get(QNetworkRequest(QUrl("https://raw.githubusercontent.com/highperformancecoder/scidavis/master/libscidavis/src/version.cpp")));
     }
 }
 
-void ApplicationWindow::receivedVersionFile(bool error)
+void ApplicationWindow::receivedVersionFile(QNetworkReply* netreply)
 {
-	if (error)
+	if (netreply->error() != QNetworkReply::NoError)
 	{
 		QMessageBox::warning(this, tr("HTTP get version file"),
-				tr("Error while fetching version file with HTTP: %1.").arg(http.errorString()));
+				tr("Error while fetching version file with HTTP: %1.").arg(netreply->error()));
 		return;
 	}
 
-	version_buffer.close();
+	version_buffer = netreply->readAll();
 
-	if (version_buffer.open(QIODevice::ReadOnly))
+	if ( version_buffer.size() > 0 )
 	{
-		QTextStream t( &version_buffer );
+		QString available_versionString = QString();
+		int available_version = 0;
+		bool intok = false;
+		QTextStream t( version_buffer );
 		t.setCodec(QTextCodec::codecForName("UTF-8"));
-		QString version_line = t.readLine();
-		version_buffer.close();
+		QStringList version_lines = t.readAll().split('\n');
 
-		QStringList list = version_line.split(".");
-		if(list.count() > 2)
+		if (version_lines.count() == 1)
 		{
-			int available_version = (list.at(0).toInt() << 16) + (list.at(1).toInt() << 8) + list.at(2).toInt();
+			QStringList list = version_lines.at(0).split(".");
+			if(list.count() > 2)
+				available_version = (list.at(0).toInt() << 16) + (list.at(1).toInt() << 8) + list.at(2).toInt(&intok);
+			available_versionString = version_lines.at(0);
+		}
+		else if (version_lines.count()>2)
+		{
+			available_version = version_lines.at(1).split('=').at(1).split(';').at(0).toInt(&intok);
+			available_versionString = version_lines.at(2).split('=').at(1).split('"').at(1);
+		}
 
+		if (intok)
+		{
 			if (available_version > SciDAVis::version())
 			{
 				if(QMessageBox::question(this, tr("Updates Available"),
-							tr("There is a newer version of SciDAVis (%1) available for download. Would you like to download it now?").arg(version_line),
+							tr("There is a newer version of SciDAVis (%1) available for download. Would you like to download it now?").arg(available_versionString),
 							QMessageBox::Yes|QMessageBox::Default, QMessageBox::No|QMessageBox::Escape) == QMessageBox::Yes)
 					QDesktopServices::openUrl(QUrl(DOWNLOAD_URI));
 			}
@@ -13478,7 +13489,7 @@ void ApplicationWindow::receivedVersionFile(bool error)
 			}
 		}
 		else QMessageBox::information(this, tr("Invalid version file"),
-						tr("The version file (contents: \"%1\") could not be decoded into a valid version number.").arg(version_line));
+						tr("The version file (contents: \"%1\") could not be decoded into a valid version number.").arg(version_lines.join("\n")));
 		autoSearchUpdatesRequest = false;
 	}
 }
