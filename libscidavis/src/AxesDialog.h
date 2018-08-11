@@ -188,7 +188,7 @@ public slots:
 	int exec();
 
 private slots:
-	void pageChanged ( QWidget *page);
+	void pageChanged ( int );
 
 protected:
 	void showAxis(int, int, const QString&, bool, int, int, bool,
