@@ -37,7 +37,7 @@
 
 namespace future{
 
-SortDialog::SortDialog( QWidget* parent, Qt::WFlags fl )
+SortDialog::SortDialog( QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
 {
     setWindowIcon(qApp->windowIcon());

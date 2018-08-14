@@ -93,7 +93,7 @@
 #include <stddef.h>
 using namespace std;
 
-Graph::Graph(QWidget* parent, QString name, Qt::WFlags f)
+Graph::Graph(QWidget* parent, QString name, Qt::WindowFlags f)
 : QWidget(parent,f)
 {
 	if ( name.isEmpty() )

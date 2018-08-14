@@ -63,7 +63,7 @@
 
 #define CONFS(string) QString::number(QLocale().toDouble(string),'g',boxPrecision->value())
 
-FitDialog::FitDialog( QWidget* parent, Qt::WFlags fl )
+FitDialog::FitDialog( QWidget* parent, Qt::WindowFlags fl )
 : QDialog( parent, fl )
 {
 	setWindowTitle(tr("Fit Wizard"));

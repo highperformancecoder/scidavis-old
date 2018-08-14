@@ -43,7 +43,7 @@ class SortDialog : public QDialog
 	Q_OBJECT
 
 	public:
-		SortDialog( QWidget* parent = 0, Qt::WFlags fl = 0 );
+		SortDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
 		void setColumnsList(QList<Column*> list);
 
 		enum { Separately=0, Together=1 };

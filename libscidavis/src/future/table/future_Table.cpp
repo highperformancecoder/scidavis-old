@@ -1731,11 +1731,11 @@ void Table::goToCell()
 	if (!d_view) return;
 	bool ok;
 
-	int col = QInputDialog::getInteger(0, tr("Go to Cell"), tr("Enter column"),
+	int col = QInputDialog::getInt(0, tr("Go to Cell"), tr("Enter column"),
 			1, 1, columnCount(), 1, &ok);
 	if ( !ok ) return;
 
-	int row = QInputDialog::getInteger(0, tr("Go to Cell"), tr("Enter row"),
+	int row = QInputDialog::getInt(0, tr("Go to Cell"), tr("Enter row"),
 			1, 1, rowCount(), 1, &ok);
 	if ( !ok ) return;
 

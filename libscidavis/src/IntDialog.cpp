@@ -43,7 +43,7 @@
 #include <QComboBox>
 #include <QLayout>
 
-IntDialog::IntDialog( QWidget* parent, Qt::WFlags fl )
+IntDialog::IntDialog( QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
 {
 	setWindowTitle(tr("Integration Options"));

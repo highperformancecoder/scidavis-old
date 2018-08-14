@@ -34,7 +34,7 @@
 #include <QHBoxLayout>
 #include <QButtonGroup>
 
-SymbolDialog::SymbolDialog(CharSet charSet, QWidget* parent, Qt::WFlags fl )
+SymbolDialog::SymbolDialog(CharSet charSet, QWidget* parent, Qt::WindowFlags fl )
 : QDialog( parent, fl )
 {
 	setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );

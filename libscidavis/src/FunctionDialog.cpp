@@ -43,7 +43,7 @@
 #include <QWidget>
 #include <QMessageBox>
 
-FunctionDialog::FunctionDialog( QWidget* parent, Qt::WFlags fl )
+FunctionDialog::FunctionDialog( QWidget* parent, Qt::WindowFlags fl )
 : QDialog( parent, fl )
 {
 	setWindowTitle( tr( "Add function curve" ) );
@@ -168,7 +168,6 @@ FunctionDialog::FunctionDialog( QWidget* parent, Qt::WFlags fl )
 	vbox1->addLayout(hbox2);
 
 	setLayout(vbox1);
-	languageChange();
 	setFocusProxy (boxFunction);
 
 	connect( boxType, SIGNAL( activated(int) ), this, SLOT( raiseWidget(int) ) );

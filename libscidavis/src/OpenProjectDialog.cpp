@@ -35,7 +35,7 @@
 #include <QPushButton>
 #include <QCloseEvent>
 
-OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WFlags flags)
+OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WindowFlags flags)
 	: ExtensibleFileDialog(parent, extended, flags)
 {
 	setWindowTitle(tr("Open Project"));
@@ -55,7 +55,7 @@ OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WFlags 
 		<< tr("Backup files") + " (*.sciprj~)"
 		//<< tr("Python Source") + " (*.py *.PY)"
 		<< tr("All files") + " (*)";
-	setFilters(filters);
+	setNameFilters(filters);
 
 	QWidget *advanced_options = new QWidget();
 	QHBoxLayout *advanced_layout = new QHBoxLayout();
@@ -77,7 +77,7 @@ OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WFlags 
 		connect(combo_boxes[1], SIGNAL(currentIndexChanged ( const QString & )),
 				this, SLOT(updateAdvancedOptions ( const QString & )));
 #endif
-	updateAdvancedOptions(selectedFilter());
+	updateAdvancedOptions(selectedNameFilter());
 }
 
 void OpenProjectDialog::updateAdvancedOptions (const QString & filter)

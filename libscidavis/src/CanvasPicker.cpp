@@ -231,7 +231,7 @@ void CanvasPicker::drawTextMarker(const QPoint& point)
 	mrkT.setBackgroundColor(plot()->textMarkerDefaultBackground());
 	mrkT.setText(tr("enter your text here"));
 	plot()->insertTextMarker(&mrkT);
-	plot()->drawText(FALSE);
+	plot()->drawText(false);
 	emit drawTextOff();
 }
 

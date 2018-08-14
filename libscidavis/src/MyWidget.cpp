@@ -39,7 +39,7 @@
 #include <QIcon>
 #include <QtDebug>
 
-MyWidget::MyWidget(const QString& label, QWidget * parent, const QString name, Qt::WFlags f):
+MyWidget::MyWidget(const QString& label, QWidget * parent, const QString name, Qt::WindowFlags f):
 	QWidget (parent, f)
 {
 	w_label = label;

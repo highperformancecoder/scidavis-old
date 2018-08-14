@@ -84,7 +84,7 @@ void LayerButton::mouseDoubleClickEvent ( QMouseEvent * )
 	emit showCurvesDialog();
 }
 
-MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name, Qt::WFlags f)
+MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name, Qt::WindowFlags f)
 : MyWidget(label,parent,name,f)
 {
 	if ( name.isEmpty() )
@@ -927,7 +927,7 @@ void MultiLayer::addTextLayer(int f, const QFont& font,
 	defaultTextMarkerColor = textCol;
 	defaultTextMarkerBackground = backgroundCol;
 
-	addTextOn=TRUE;
+	addTextOn=true;
 	QApplication::setOverrideCursor(Qt::IBeamCursor);
 	canvas->grabMouse();
 }
@@ -1035,7 +1035,7 @@ void MultiLayer::wheelEvent ( QWheelEvent * e )
 			if(yMouse>aux.y() && yMouse<(aux.y()+intSize.height()))
 			{
 				resize_graph=gr;
-				resize=TRUE;
+				resize=true;
 			}
 		}
 	}

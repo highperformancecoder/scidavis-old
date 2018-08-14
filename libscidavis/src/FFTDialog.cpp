@@ -48,7 +48,7 @@
 #include <memory>
 using namespace std;
 
-FFTDialog::FFTDialog(int type, QWidget* parent, Qt::WFlags fl )
+FFTDialog::FFTDialog(int type, QWidget* parent, Qt::WindowFlags fl )
 : QDialog( parent, fl )
 {
 	setWindowTitle(tr("FFT Options"));

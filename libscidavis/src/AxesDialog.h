@@ -67,7 +67,7 @@ public:
 	 * \param parent parent widget
 	 * \param fl window flags
 	 */
-    AxesDialog( QWidget* parent = 0, Qt::WFlags fl = 0 );
+    AxesDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
 	//! Destructor
     ~AxesDialog(){};
 
@@ -188,7 +188,7 @@ public slots:
 	int exec();
 
 private slots:
-	void pageChanged ( QWidget *page);
+	void pageChanged ( int );
 
 protected:
 	void showAxis(int, int, const QString&, bool, int, int, bool,

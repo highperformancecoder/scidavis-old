@@ -44,7 +44,7 @@
 #include <QWidget>
 
 
-ErrDialog::ErrDialog( QWidget* parent, Qt::WFlags fl )
+ErrDialog::ErrDialog( QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
 {
     setFocusPolicy( Qt::StrongFocus );

@@ -39,7 +39,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
-DataSetDialog::DataSetDialog( const QString& text, QWidget* parent,  Qt::WFlags fl )
+DataSetDialog::DataSetDialog( const QString& text, QWidget* parent,  Qt::WindowFlags fl )
 : QDialog( parent, fl )
 {
 	setWindowTitle(tr("Select data set"));

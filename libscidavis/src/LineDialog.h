@@ -47,7 +47,7 @@ class LineDialog : public QDialog
     Q_OBJECT
 
 public:
-    LineDialog(ArrowMarker *line, QWidget* parent = 0, Qt::WFlags fl = 0);
+    LineDialog(ArrowMarker *line, QWidget* parent = 0, Qt::WindowFlags fl = 0);
 
     enum Unit{ScaleCoordinates, Pixels};
 
@@ -56,7 +56,7 @@ public:
 	void setCoordinates(int unit);
 
 public slots:
-	void enableButtonDefault(QWidget *w);
+	void enableButtonDefault(int);
 	void setDefaultValues();
 	void displayCoordinates(int unit);
 	void setLineStyle(Qt::PenStyle style);

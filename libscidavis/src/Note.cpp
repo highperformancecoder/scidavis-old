@@ -41,7 +41,7 @@
 #include <QVBoxLayout>
 #include <QPrintDialog>
 
-Note::Note(ScriptingEnv *env, const QString& label, QWidget* parent, const char* name, Qt::WFlags f)
+Note::Note(ScriptingEnv *env, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 				: MyWidget(label, parent, name, f)
 {
 init(env);	

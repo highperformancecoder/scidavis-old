@@ -38,7 +38,7 @@
 #include <QLineEdit>
 #include <QComboBox>
 
-SurfaceDialog::SurfaceDialog( QWidget* parent, Qt::WFlags fl )
+SurfaceDialog::SurfaceDialog( QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
 {
 	setWindowTitle(tr("Define surface plot"));

@@ -42,7 +42,7 @@
 #include <QComboBox>
 #include <QCloseEvent>
 
-ImageExportDialog::ImageExportDialog(QWidget * parent, bool vector_options, bool extended, Qt::WFlags flags)
+ImageExportDialog::ImageExportDialog(QWidget * parent, bool vector_options, bool extended, Qt::WindowFlags flags)
 	: ExtensibleFileDialog( parent, extended, flags )
 {
 	setWindowTitle( tr( "Choose a filename to save under" ) );
@@ -61,7 +61,7 @@ ImageExportDialog::ImageExportDialog(QWidget * parent, bool vector_options, bool
 		filters << "*."+list[i].toLower();
 
 	filters.sort();
-	setFilters(filters);
+	setNameFilters(filters);
 	setFileMode( QFileDialog::AnyFile );
 
 	initAdvancedOptions();
@@ -77,7 +77,7 @@ ImageExportDialog::ImageExportDialog(QWidget * parent, bool vector_options, bool
 		connect(combo_boxes[1], SIGNAL(currentIndexChanged ( const QString & )),
 				this, SLOT(updateAdvancedOptions ( const QString & )));
 #endif
-	updateAdvancedOptions(selectedFilter());
+	updateAdvancedOptions(selectedNameFilter());
 }
 
 void ImageExportDialog::initAdvancedOptions()
@@ -190,7 +190,7 @@ void ImageExportDialog::closeEvent(QCloseEvent* e)
 	ApplicationWindow *app = (ApplicationWindow *)this->parent();
 	if (app){
 		app->d_extended_export_dialog = this->isExtended();
-		app->d_image_export_filter = this->selectedFilter();
+		app->d_image_export_filter = this->selectedNameFilter();
         app->d_export_quality = d_quality->value();
 
         app->d_export_resolution = d_resolution->value();
@@ -263,6 +263,6 @@ void ImageExportDialog::setOrientation(QPrinter::Orientation orientation)
 
 void ImageExportDialog::selectFilter(const QString & filter)
 {
-	QFileDialog::selectFilter(filter);
+	QFileDialog::selectNameFilter(filter);
 	updateAdvancedOptions(filter);
 }

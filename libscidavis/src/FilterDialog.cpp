@@ -41,7 +41,7 @@
 #include <QLineEdit>
 #include <QComboBox>
 
-FilterDialog::FilterDialog(int type, QWidget* parent, Qt::WFlags fl )
+FilterDialog::FilterDialog(int type, QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
 {
 	setWindowTitle(tr("Filter options"));
