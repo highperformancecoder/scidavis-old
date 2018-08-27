@@ -223,14 +223,14 @@ In a project, the objects which can be used are:
       functions of one or two variables (see sections \htmlref{2D
         plots}{sec-2d-plots} and \htmlref{3D plots}{sec-3d-plots}).
 
-    \item[A Note]\label{sec-intro-note} This window is a text
+    \item[A Note] This window is a text
       container which can simply be used to insert comments into a
       project. This object is nevertheless far more powerfull than
       that: it can be used as a calculator, for executing single
       commands and for writing scripts (see the \htmlref{Scripting
         section}{scripting} for more details).
       
-    \item[The Log Window]\label{sec-intro-log-window}
+    \item[The Log Window]
       This window is used to store the results of all the calculations
       which have been done. If this window is not visible, you can
       find it with the \htmlref{Project
@@ -241,7 +241,7 @@ In a project, the objects which can be used are:
       that when you load a previously saved project, the results-log
       panel is re-filled with the results of the calculations.
 
-    \item[The Project Explorer]\label{sec-intro-project-explorer}
+    \item[The Project Explorer]
       This window is used to list all the windows contained in a
       project. The Project Explorer is opened by the \htmlref{Project
         Explorer command}{project-explorer-lnk}, and gives a quick
@@ -452,104 +452,113 @@ by a double click in a layer are:
 All these functions can be reached through the \htmlref{Format
   menu}{format-menu-lnk}.
 
-%</sect2>
-%
 %<!--
 %		General description of a note
 %		=============================
 %-->
-%<sect2 id="sec-intro-note">
-%<title>Note</title>
-%
-%<indexterm><primary>Note</primary></indexterm>
-%<para>A note can simply be used to insert text (comments, notes, etc) into a project, but is really far more powerfull than that. It can be used as a calculator, for executing single commands and for writing scripts.</para>
-%
-%<figure id="fig-note-window">
-%  <title>The &appname; Note Window</title>
-%  <mediaobject>
-%    <imageobject>
-%      <imagedata  format="PNG" fileref="pics/new-note1.png"/>
-%    </imageobject>
-%  </mediaobject>
-%</figure>
-%
-%<para>You can also change the text input method. <emphasis>Simple Composing Input Method</emphasis> is the standard method to enter text in QT applications. <emphasis>Xim</emphasis> is the X input method, it is the legacy system of the X window environment to support localized text input. The default choice is the second one, it allows to enter special characters and accents from your localised environment.</para>
-%
-%<indexterm>
-%  <primary>Calculator</primary><see>Note</see>
-%</indexterm>
-%
-%<para>The second use of notes is calculator. The evaluation of mathematical expressions and execution of code is done via a note's context menu, the Scripting menu or the convenient keyboard shortcuts. In figure <xref xrefstyle="select: labelnumber" linkend="fig-note-window-1"/>, it is shown that you just need to place the cursor on an expression and use the <keycode>Ctrl-Return</keycode> command to evaluate the expression.</para>
-%
-%<figure id="fig-note-window-1">
-%  <title>The &appname; Note Window used as a calculator</title>
-%  <mediaobject>
-%    <imageobject>
-%      <imagedata  format="PNG" fileref="pics/new-note2.png"/>
-%    </imageobject>
-%  </mediaobject>
-%</figure>
-%
-%<para>you can define variables and refer to them to build complex expressions, but you must evaluate each line with the <keycode>Ctrl-Return</keycode> command to fill the variable with its value. All variable are private to the note in which it is defined, and you can't refer to it in another note. With a right click, you access to the context menu which contains the list of all available mathematical functions.</para>
-%
-%<para>For information on expression syntax, supported mathematical functions and how to write scripts, see the <link linkend="scripting">scripting section</link>.</para>
-%
-%</sect2>
-%
+\subsection{Note}\label{sec-intro-note}
+\index{Note}
+A note can simply be used to insert text (comments, notes, etc) into a
+project, but is really far more powerfull than that. It can be used as
+a calculator, for executing single commands and for writing scripts.
+
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/new-note1.png}}
+  \caption{The \SciDaVis{} Note Window.}
+  \label{fig-note-window}
+\end{figure}
+
+You can also change the text input method. {\em Simple Composing
+Input Method} is the standard method to enter text in QT
+applications. {\em Xim} is the X input method, it is
+the legacy system of the X window environment to support localized
+text input. The default choice is the second one, it allows to enter
+special characters and accents from your localised environment.
+
+\index{Calculator}
+The second use of notes is calculator. The evaluation of mathematical
+expressions and execution of code is done via a note's context menu,
+the Scripting menu or the convenient keyboard shortcuts. In figure
+\ref{fig-note-window-1},
+it is shown that you just need to place the cursor on an expression
+and use the {\tt Ctrl-Return} command to evaluate the
+expression.
+
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/new-note2.png}}
+  \caption{The \SciDaVis{} Note Window used as a calculator.}
+  \label{fig-note-window-1}
+\end{figure}
+
+you can define variables and refer to them to build complex
+expressions, but you must evaluate each line with the
+{\tt Ctrl-Return} command to fill the variable with its
+value. All variable are private to the note in which it is defined,
+and you can't refer to it in another note. With a right click, you
+access to the context menu which contains the list of all available
+mathematical functions.
+
+For information on expression syntax, supported mathematical functions and how to write scripts, see the \htmlref{scripting section}{scripting}.
 %<!--
 %		General description of the log window
 %		=====================================
 %-->
-%<sect2 id="sec-intro-log-window">
-%<title>Log Window</title>
-%<indexterm>
-%  <primary>Log Window</primary>
-%</indexterm>
-%<indexterm>
-%  <primary>Analysis</primary><secondary>Results</secondary>
-%</indexterm>
-%
-%<para>This window keeps a history of all analysis which have been done in the project. This panel contains the results of all the correlations, fittings, etc. It can be shown or hidden with the &results-log-lnk; of the &view-menu-lnk;.</para>
-%
-%<figure id="fig-log-window">
-%  <title>The &appname; Log window with the information related to a fit on a curve</title>
-%  <mediaobject>
-%    <imageobject>
-%      <imagedata  format="PNG" fileref="pics/log-window.png"/>
-%    </imageobject>
-%  </mediaobject>
-%</figure>
-%<para>You can clear the content of the log window with the command &clear-log-information-lnk; of the &edit-menu-lnk;. If you load a project for which some analysis has been done, the computations will be done again and the log window will be filled with the results.</para>
-%
-%</sect2>
-%
+\subsection{Log Window}\label{sec-intro-log-window}
+
+\index{Log Window}
+\index{Analysis!Results}
+
+This window keeps a history of all analysis which have been done in
+the project. This panel contains the results of all the correlations,
+fittings, etc. It can be shown or hidden with the \htmlref{Results Log
+  command}{results-log-lnk} of the \htmlref{View menu}{view-menu-lnk}.
+
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/log-window.png}}
+  \caption{The \SciDaVis{} Log window with the information related to a fit on a curve.}
+  \label{fig-log-window}
+\end{figure}
+
+
+You can clear the content of the log window with the command
+\htmlref{Clear Log Information command}{clear-log-information-lnk} of
+the \htmlref{Edit menu}{edit-menu-lnk}. If you load a project for
+which some analysis has been done, the computations will be done again
+and the log window will be filled with the results.
 %<!--
 %		General description of the project explorer
 %		===========================================
 %-->
-%<sect2 id="sec-intro-project-explorer">
-%<title>The Project Explorer</title>
-%<indexterm>
-%  <primary>Project Explorer</primary>
-%</indexterm>
-%
-%<para>The project explorer can be opened/closed using the &project-explorer-lnk; from the &view-menu-lnk; or by clicking on the &project-explorer-icon; in the <link linkend="sec-file-toolbar">file toolbar</link>.</para>
-%
-%<figure id="fig-project-explorer">
-%  <title>The &appname; Project Explorer</title>
-%  <mediaobject>
-%    <imageobject>
-%      <imagedata  format="PNG" fileref="pics/explorer1.png"/>
-%    </imageobject>
-%  </mediaobject>
-%</figure>
-%
-%<para>It gives an overview of the structure of a project and allows the user to perform various operations on the windows (tables and plots) in the workspace: hiding, minimazing, closing, renaming, printing, etc... These functions can be reached via the context menu, by right-clicking on an item in the explorer.</para>
-%<para>By double-clicking on an item, the corresponding window is shown maximized in the workspace, even if it was hidden before.</para>
-%<para>You can organize the differents objects in folders. When selecting a folder, the default policy is that only the objects contained in it will be showed in the workspace window. You can also display all the objects in the subfolders if you change this policy with the "View Windows" command to "Windows in Active Folder and Subfolders".</para>
-%
-%</sect2>
-%
-%</sect1>
+
+\subsection{The Project Explorer}\label{sec-intro-project-explorer}
+\index{Project Explorer}
+
+The project explorer can be opened/closed using the \htmlref{Project
+  Explorer command}{project-explorer-lnk} from the \htmlref{View
+  menu}{view-menu-lnk} or by clicking on the \htmlref{Project Explorer
+  icon}{project-explorer-icon} in the \htmlref{file toolbar}{sec-file-toolbar}.
+
+
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/explorer1.png}}
+  \caption{The \SciDaVis{} Project Explorer.}
+  \label{fig-project-explorer}
+\end{figure}
+
+
+It gives an overview of the structure of a project and allows the user
+to perform various operations on the windows (tables and plots) in the
+workspace: hiding, minimazing, closing, renaming, printing,
+etc\ldots{} These functions can be reached via the context menu, by
+right-clicking on an item in the explorer.
+
+By double-clicking on an item, the corresponding window is shown
+maximized in the workspace, even if it was hidden before.
+
+You can organize the differents objects in folders. When selecting a
+folder, the default policy is that only the objects contained in it
+will be showed in the workspace window. You can also display all the
+objects in the subfolders if you change this policy with the ``View
+Windows'' command to ``Windows in Active Folder and Subfolders''.
 
 
