@@ -129,12 +129,14 @@ namespace
     while (stream)
       {
         row = stream.readRow();
-        for (i=0; i<row.size() && i<dataSize; ++i)
-          *data[i] << conv<typename C::value_type>(row[i]);
-        // some rows might have too few columns (re-use value of i from above loop)
-        for (; i<dataSize; ++i) {
-          invalid_cells[i].setValue(data[i]->size(), true);
-          *data[i] << conv<typename C::value_type>("");
+        if (stream || (row != QStringList(""))) {
+            for (i=0; i<row.size() && i<dataSize; ++i)
+              *data[i] << conv<typename C::value_type>(row[i]);
+            // some rows might have too few columns (re-use value of i from above loop)
+            for (; i<dataSize; ++i) {
+              invalid_cells[i].setValue(data[i]->size(), true);
+              *data[i] << conv<typename C::value_type>("");
+            }
         }
       }
 
