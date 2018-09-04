@@ -105,7 +105,8 @@ void Graph3D::initPlot()
     connect(d_timer, SIGNAL(timeout()), this, SLOT(rotate()) );
 	ignoreFonts = false;
 
-	sp = new SurfacePlot(this);
+	QWidget* d_main_widget = new QWidget();
+	sp = new SurfacePlot(d_main_widget);
 	sp->resize(500,400);
 	sp->installEventFilter(this);
 	sp->setRotation(30,0,15);
@@ -164,6 +165,7 @@ void Graph3D::initPlot()
 	conesQuality = 32; conesRad = 0.5;
 
 	style_ = NOPLOT;
+	this->setWidget(d_main_widget);
 	initCoord();
 
 	connect(sp,SIGNAL(rotationChanged(double, double, double)),this,SLOT(rotationChanged(double, double, double)));

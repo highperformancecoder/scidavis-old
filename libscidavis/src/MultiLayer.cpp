@@ -120,11 +120,14 @@ MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name
 	canvas = new QWidget();
 	canvas->installEventFilter(this);
 
-	QVBoxLayout* layout = new QVBoxLayout(this);
+	QWidget* d_main_widget = new QWidget();
+	QVBoxLayout* layout = new QVBoxLayout();
+	d_main_widget->setLayout(layout);
 	layout->addLayout(hbox);
 	layout->addWidget(canvas, 1);
 	layout->setMargin(0);
 	layout->setSpacing(0);
+	this->setWidget(d_main_widget);
 	setMinimumHeight(50);
     setGeometry(QRect( 0, 0, graph_width, graph_height ));
 	setFocusPolicy(Qt::StrongFocus);

@@ -55,8 +55,7 @@ setBirthDate(dt.toString(Qt::LocalDate));
 
 te = new ScriptEdit(env, this, name());
 te->setContext(this);
-QVBoxLayout* hlayout = new QVBoxLayout(this);
-hlayout->addWidget(te);
+this->setWidget(te);
 
 setGeometry(0, 0, 500, 200);
 connect(te, SIGNAL(textChanged()), this, SLOT(modifiedNote()));

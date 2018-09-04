@@ -91,7 +91,9 @@ void TableView::setTable(future::Table * table)
 
 void TableView::init()
 {
-	d_main_layout = new QHBoxLayout(this);
+	QWidget* d_main_widget = new QWidget();
+	d_main_layout = new QHBoxLayout();
+	d_main_widget->setLayout(d_main_layout);
 	d_main_layout->setSpacing(0);
 	d_main_layout->setContentsMargins(0, 0, 0, 0);
 	
@@ -168,6 +170,7 @@ void TableView::init()
 	connect(d_table, SIGNAL(aspectAboutToBeRemoved(const AbstractAspect*,int)),
 			this, SLOT(handleAspectAboutToBeRemoved(const AbstractAspect*,int)));
 
+	this->setWidget(d_main_widget);
 	rereadSectionSizes();
 	
 	// keyboard shortcuts

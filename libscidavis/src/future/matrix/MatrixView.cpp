@@ -83,7 +83,9 @@ void MatrixView::setMatrix(future::Matrix * matrix)
 
 void MatrixView::init()
 {
-	d_main_layout = new QHBoxLayout(this);
+	QWidget* d_main_widget = new QWidget();
+	d_main_layout = new QHBoxLayout();
+	d_main_widget->setLayout(d_main_layout);
 	d_main_layout->setSpacing(0);
 	d_main_layout->setContentsMargins(0, 0, 0, 0);
 	
@@ -143,6 +145,7 @@ void MatrixView::init()
 	h_header->installEventFilter(this);
 	d_view_widget->installEventFilter(this);
 
+	this->setWidget(d_main_widget);
 	rereadSectionSizes();
 
 #ifndef LEGACY_CODE_0_2_x
