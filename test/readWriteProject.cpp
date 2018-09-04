@@ -69,7 +69,7 @@ SUITE(ReadWriteProject)
   TEST_FIXTURE(ApplicationWindow, note)
     {
       Note& note=*newNote();
-      activateWindow(&note);
+      activateSubWindow(&note);
     }
   TEST_FIXTURE(ApplicationWindow, convertMatrix)
     {
@@ -82,7 +82,7 @@ SUITE(ReadWriteProject)
         CHECK(table->name()=="Table1");
         CHECK_EQUAL(30, table->numRows());
         CHECK_EQUAL(2, table->numCols());
-        app->activateWindow(table);
+        app->activateSubWindow(table);
         CHECK(table==app->d_workspace->activeSubWindow());
         app->convertTableToMatrix();
         // active window should switch to a matrix

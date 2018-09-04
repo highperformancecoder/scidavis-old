@@ -452,8 +452,8 @@ public slots:
 
   void hideWindow(MyWidget* window);
   void hideActiveWindow();
-  void activateWindow();
-  void activateWindow(MyWidget *);
+  void activateSubWindow();
+  void activateSubWindow(MyWidget *);
   void printWindow();
   //@}
 

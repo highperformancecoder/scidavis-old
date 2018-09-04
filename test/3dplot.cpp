@@ -29,7 +29,7 @@ SUITE(Plot3d)
       for (auto i: windows)
         if ((table=dynamic_cast<Table*>(i)))
           break;
-      app->activateWindow(table);
+      app->activateSubWindow(table);
       table->deselectAll();
       
       // if nothing is selected, we should get a warning
@@ -40,14 +40,14 @@ SUITE(Plot3d)
       // more than one column selected should generate a warning
       table->setCellsSelected(0,1,30,2,true);
       CHECK_EQUAL(table->selectedColumns().count(),2);
-      app->activateWindow(table);
+      app->activateSubWindow(table);
       app->plot3DRibbon();
       CHECK_EQUAL(numWarnings,prevWarnings+2);
   
   
       table->deselectAll();
       table->setCellsSelected(0,2,30,2,true);
-      app->activateWindow(table);
+      app->activateSubWindow(table);
       app->plot3DRibbon();
       windows=app->windowsList();
       // should be one new Graph3D window, so find it
@@ -66,14 +66,14 @@ SUITE(Plot3d)
       table->deselectAll();
       table->setCellsSelected(0,1,30,2,true);
       CHECK_EQUAL(2, table->selectedColumns().count());
-      app->activateWindow(table);
+      app->activateSubWindow(table);
       app->plot3DBars();
       CHECK_EQUAL(prevWarnings+3, numWarnings);
   
   
       table->deselectAll();
       table->setCellsSelected(0,2,30,2,true);
-      app->activateWindow(table);
+      app->activateSubWindow(table);
       app->plot3DBars();
       windows=app->windowsList();
       // should be one new Graph3D window, so find it
@@ -92,14 +92,14 @@ SUITE(Plot3d)
       table->deselectAll();
       table->setCellsSelected(0,1,30,2,true);
       CHECK_EQUAL(2,table->selectedColumns().count());
-      app->activateWindow(table);
+      app->activateSubWindow(table);
       app->plot3DScatter();
       CHECK_EQUAL(prevWarnings+4, numWarnings);
   
   
       table->deselectAll();
       table->setCellsSelected(0,2,30,2,true);
-      app->activateWindow(table);
+      app->activateSubWindow(table);
       app->plot3DScatter();
       windows=app->windowsList();
       // should be one new Graph3D window, so find it
@@ -118,14 +118,14 @@ SUITE(Plot3d)
       table->deselectAll();
       table->setCellsSelected(0,1,30,2,true);
       CHECK_EQUAL(2,table->selectedColumns().count());
-      app->activateWindow(table);
+      app->activateSubWindow(table);
       app->plot3DTrajectory();
       CHECK_EQUAL(prevWarnings+5,numWarnings);
   
   
       table->deselectAll();
       table->setCellsSelected(0,2,30,2,true);
-      app->activateWindow(table);
+      app->activateSubWindow(table);
       app->plot3DTrajectory();
       windows=app->windowsList();
       // should be one new Graph3D window, so find it

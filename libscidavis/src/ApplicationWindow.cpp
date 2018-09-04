@@ -7314,16 +7314,16 @@ void ApplicationWindow::setWindowGeometry(int x, int y, int w, int h)
 	d_workspace->activeSubWindow()->setGeometry(x, y, w, h);
 }
 
-void ApplicationWindow::activateWindow()
+void ApplicationWindow::activateSubWindow()
 {
         setWindowState(Qt::WindowActive);
         raise();
         show();
 	WindowListItem *it = (WindowListItem *)lv->currentItem();
-	activateWindow(it->window());
+	activateSubWindow(it->window());
 }
 
-void ApplicationWindow::activateWindow(MyWidget *w)
+void ApplicationWindow::activateSubWindow(MyWidget *w)
 {
 	if (!w)
 		return;
@@ -9385,6 +9385,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 
 		s = stream.readLine(); // </table>
 
+		activateSubWindow(w);
 		return w;
 	}
 }
@@ -10824,7 +10825,7 @@ void ApplicationWindow::createActions()
 	connect(actionShowTextDialog, SIGNAL(triggered()), this, SLOT(showTextDialog()));
 
 	actionActivateWindow = new QAction(tr("&Activate Window"), this);
-	connect(actionActivateWindow, SIGNAL(triggered()), this, SLOT(activateWindow()));
+	connect(actionActivateWindow, SIGNAL(triggered()), this, SLOT(activateSubWindow()));
 
 	actionMinimizeWindow = new QAction(tr("Mi&nimize Window"), this);
 	connect(actionMinimizeWindow, SIGNAL(triggered()), this, SLOT(minimizeWindow()));
@@ -12938,7 +12939,7 @@ void ApplicationWindow::folderItemDoubleClicked(QTreeWidgetItem *it, int column)
 		if (!w)
 			return;
 		if (d_workspace->activeSubWindow() != w)
-			activateWindow(w);
+			activateSubWindow(w);
 		else
 		{
 			if (!w->isMaximized())
@@ -13203,7 +13204,7 @@ void ApplicationWindow::find(const QString& s, bool windowNames, bool labels,
 		MyWidget *w = current_folder->findWindow(s,windowNames,labels,caseSensitive,partialMatch);
 		if (w)
 		{
-			activateWindow(w);
+			activateSubWindow(w);
 			return;
 		}
 
@@ -13218,7 +13219,7 @@ void ApplicationWindow::find(const QString& s, bool windowNames, bool labels,
 				if (w)
 				{
 					folders->setCurrentItem(f->folderListItem());
-					activateWindow(w);
+					activateSubWindow(w);
 					return;
 				}
 				it++;
@@ -13774,7 +13775,7 @@ void ApplicationWindow::setActiveWindowFromAction()
 {
 	QAction *action = qobject_cast<QAction *>(sender());
 	if (action)
-		activateWindow( qobject_cast<MyWidget *>(window(action->text())) );
+		activateSubWindow( qobject_cast<MyWidget *>(window(action->text())) );
 }
 
 bool ApplicationWindow::validFor3DPlot(Table *table)
