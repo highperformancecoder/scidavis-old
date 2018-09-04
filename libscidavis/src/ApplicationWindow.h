@@ -144,7 +144,7 @@ public:
   QToolButton *btnResults;
   QList<MyWidget*> *hiddenWindows;
   QList<MyWidget*> *outWindows;
-  QWidget *lastModified;
+  MyWidget* lastModified;
 
 public:
   /*! Generates a new unique name starting with string /param name.
@@ -283,7 +283,7 @@ public slots:
   void newSurfacePlot();
   void editSurfacePlot();
   void remove3DMatrixPlots(Matrix *m);
-  void updateMatrixPlots(QWidget *);
+  void updateMatrixPlots(MyWidget *);
   void add3DData();
   void change3DData();
   void change3DData(const QString& colName);
@@ -414,7 +414,7 @@ public slots:
   void exportAllGraphs();
   void exportPDF();
   void print();
-  void print(QWidget* w);
+  void print(MyWidget* w);
   void printAllPlots();
   //@}
 
@@ -466,7 +466,7 @@ public slots:
   void removeCurves(const QString& name);
   QStringList dependingPlots(const QString& caption);
   QStringList depending3DPlots(Matrix *m);
-  QStringList multilayerDependencies(QWidget *w);
+  QStringList multilayerDependencies(MyWidget *w);
 
   void saveAsTemplate();
   void openTemplate();
@@ -529,8 +529,8 @@ public slots:
   void initToolBars();
   void initPlot3DToolBar();
   void disableActions();
-  void customToolBars(QWidget* w);
-  void customMenu(QWidget* w);
+  void customToolBars(MyWidget* w);
+  void customMenu(MyWidget* w);
   void windowActivated(QMdiSubWindow *w);
   //@}
 
@@ -726,7 +726,7 @@ public slots:
   void pickPlotStyle( QAction* action );
   void pickCoordSystem( QAction* action);
   void pickFloorStyle( QAction* action);
-  void custom3DActions(QWidget *w);
+  void custom3DActions(MyWidget *w);
   void custom3DGrids(int grids);
   //@}
 
@@ -761,7 +761,7 @@ public slots:
   bool projectHasMatrices();
 
   //! Returns a pointer to the window named "name"
-  QWidget* window(const QString& name);
+  MyWidget* window(const QString& name);
 
   //! Returns a list with the names of all the matrices in the project
   QStringList matrixNames();

@@ -755,7 +755,7 @@ void ApplicationWindow::insertTranslatedStrings()
 	multiPeakMenu->setTitle(tr("Fit &Multi-Peak"));
 
 	translateActionsStrings();
-	customMenu(d_workspace->activeSubWindow());
+	customMenu((MyWidget*)(d_workspace->activeSubWindow()));
 }
 
 void ApplicationWindow::initMainMenu()
@@ -1101,7 +1101,7 @@ void ApplicationWindow::initTableAnalysisMenu()
 	dataMenu->addAction(actionShowFitDialog);
 }
 
-void ApplicationWindow::customMenu(QWidget* w)
+void ApplicationWindow::customMenu(MyWidget* w)
 {
 	menuBar()->clear();
 	menuBar()->addMenu(file);
@@ -1243,7 +1243,7 @@ void ApplicationWindow::disableActions()
 	actionClearSelection->setEnabled(false);
 }
 
-void ApplicationWindow::customToolBars(QWidget* w)
+void ApplicationWindow::customToolBars(MyWidget* w)
 {
 	if (w)
 	{
@@ -1432,7 +1432,7 @@ void ApplicationWindow::plot3DWireSurface()
 
 void ApplicationWindow::plot3DBars()
 {
-	QWidget* w = d_workspace->activeSubWindow();
+	MyWidget* w = (MyWidget*)d_workspace->activeSubWindow();
 	if (!w)
 		return;
 
@@ -1455,7 +1455,7 @@ void ApplicationWindow::plot3DBars()
 
 void ApplicationWindow::plot3DScatter()
 {
-	QWidget* w = d_workspace->activeSubWindow();
+	MyWidget* w = (MyWidget*)d_workspace->activeSubWindow();
 	if (!w)
 		return;
 
@@ -1478,7 +1478,7 @@ void ApplicationWindow::plot3DScatter()
 
 void ApplicationWindow::plot3DTrajectory()
 {
-	QWidget* w = d_workspace->activeSubWindow();
+	MyWidget* w = (MyWidget*)d_workspace->activeSubWindow();
 	if (!w)
 		return;
 
@@ -1698,7 +1698,7 @@ void ApplicationWindow::remove3DMatrixPlots(Matrix *m)
 	QApplication::restoreOverrideCursor();
 }
 
-void ApplicationWindow::updateMatrixPlots(QWidget *window)
+void ApplicationWindow::updateMatrixPlots(MyWidget *window)
 {
 	Matrix *m = (Matrix *)window;
 	if (!m)
@@ -2099,8 +2099,8 @@ void ApplicationWindow::initPlot3D(Graph3D *plot)
 	if (!graph_3D_tools->isEnabled())
 		graph_3D_tools->setEnabled(true);
 
-	customMenu((QWidget*)plot);
-	customToolBars((QWidget*)plot);
+	customMenu(plot);
+	customToolBars(plot);
 }
 
 Matrix* ApplicationWindow::importImage()
@@ -2781,20 +2781,17 @@ Matrix* ApplicationWindow::convertTableToMatrix()
 	return w;
 }
 
-QWidget* ApplicationWindow::window(const QString& name)
+MyWidget* ApplicationWindow::window(const QString& name)
 {
-	QWidget* w = 0;
+	MyWidget* widget = 0;
 	QList<MyWidget*> windows = windowsList();
 	for (int i = 0; i < windows.count();i++ )
 	{
-		MyWidget *widget = qobject_cast<MyWidget *>(windows.at(i));
+		widget = windows.at(i);
 		if (widget && widget->name() == name)
-		{
-			w = windows.at(i);
-			break;
-		}
+			return widget;
 	}
-	return  w;
+	return widget;
 }
 
 Table* ApplicationWindow::table(const QString& name)
@@ -2838,8 +2835,8 @@ void ApplicationWindow::windowActivated(QMdiSubWindow *w)
 	if (!w || !w->inherits("MyWidget"))
 		return;
 
-	customToolBars(w);
-	customMenu(w);
+	customToolBars((MyWidget*)w);
+	customMenu((MyWidget*)w);
 
 	Folder *f = ((MyWidget *)w)->folder();
 	if (f)
@@ -4153,8 +4150,8 @@ void ApplicationWindow::openTemplate()
 					w->setNormal();
 					break;
 				}
-				customMenu((QWidget*)w);
-				customToolBars((QWidget*)w);
+				customMenu((MyWidget*)w);
+				customToolBars((MyWidget*)w);
 			}
 			QApplication::restoreOverrideCursor();
 		}
@@ -5646,7 +5643,7 @@ void ApplicationWindow::plotStackedHistograms()
 
 void ApplicationWindow::showGeneralPlotDialog()
 {
-	QWidget* plot = d_workspace->activeSubWindow();
+	MyWidget* plot = (MyWidget*)d_workspace->activeSubWindow();
 	if (!plot)
 		return;
 
@@ -6225,7 +6222,7 @@ void ApplicationWindow::exportPDF()
 	}
 }
 
-void ApplicationWindow::print(QWidget* w)
+void ApplicationWindow::print(MyWidget* w)
 {
 	if (w->inherits("MultiLayer") && ((MultiLayer*)w)->isEmpty())
 	{
@@ -6234,13 +6231,13 @@ void ApplicationWindow::print(QWidget* w)
 		return;
 	}
 
-	((MyWidget*)w)->print();
+	w->print();
 }
 
 //print active window
 void ApplicationWindow::print()
 {
-	QWidget* w = d_workspace->activeSubWindow();
+	MyWidget* w = (MyWidget*)(d_workspace->activeSubWindow());
 	if (!w)
 		return;
 
@@ -7185,7 +7182,7 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
       return 0;
 
     ((Graph3D *)nw)->copy(g);
-    customToolBars((QWidget*)nw);
+    customToolBars((MyWidget*)nw);
   } else if (w->inherits("Matrix")){
     nw = newMatrix(((Matrix *)w)->numRows(), ((Matrix *)w)->numCols());
     ((Matrix *)nw)->copy((Matrix *)w);
@@ -7856,7 +7853,7 @@ QStringList ApplicationWindow::dependingPlots(const QString& name)
 	return plots;
 }
 
-QStringList ApplicationWindow::multilayerDependencies(QWidget *w)
+QStringList ApplicationWindow::multilayerDependencies(MyWidget *w)
 {
 	QStringList tables;
 	MultiLayer *g=(MultiLayer*)w;
@@ -8673,7 +8670,7 @@ void ApplicationWindow::pickFloorStyle( QAction* action )
 	emit modified();
 }
 
-void ApplicationWindow::custom3DActions(QWidget *w)
+void ApplicationWindow::custom3DActions(MyWidget *w)
 {
 	if (w && w->inherits("Graph3D"))
 	{
@@ -10312,7 +10309,7 @@ void ApplicationWindow::connectSurfacePlot(Graph3D *plot)
 	connect (plot,SIGNAL(hiddenWindow(MyWidget*)),this, SLOT(hideWindow(MyWidget*)));
 	connect (plot,SIGNAL(statusChanged(MyWidget*)),this, SLOT(updateWindowStatus(MyWidget*)));
 	connect (plot,SIGNAL(modified()),this, SIGNAL(modified()));
-	connect (plot,SIGNAL(custom3DActions(QWidget*)),this, SLOT(custom3DActions(QWidget*)));
+	connect (plot,SIGNAL(custom3DActions(MyWidget*)),this, SLOT(custom3DActions(MyWidget*)));
 
 	plot->askOnCloseEvent(confirmClosePlot3D);
 }

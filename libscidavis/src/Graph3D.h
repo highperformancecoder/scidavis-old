@@ -355,7 +355,7 @@ signals:
 	void showContextMenu();
 	void showOptionsDialog();
 	void modified();
-	void custom3DActions(QWidget*);
+	void custom3DActions(MyWidget*);
 
 private:
 	Qwt3D::Triple** allocateData(int columns, int rows);
