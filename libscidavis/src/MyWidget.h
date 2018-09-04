@@ -31,7 +31,7 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include <QWidget>
+#include <QMdiSubWindow>
 class QEvent;
 class QCloseEvent;
 class QString;
@@ -48,7 +48,7 @@ class Folder;
  *
  * \sa Folder, ApplicationWindow
  */
-class MyWidget: public QWidget
+class MyWidget: public QMdiSubWindow
 {
 	Q_OBJECT
 

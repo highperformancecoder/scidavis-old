@@ -4,7 +4,7 @@
 #include "testPaintDevice.h"
 #include "Note.h"
 #include "near.h"
-#include <QWorkspace>
+#include <QMdiArea>
 
 #include <iostream>
 #include <fstream>
@@ -83,10 +83,10 @@ SUITE(ReadWriteProject)
         CHECK_EQUAL(30, table->numRows());
         CHECK_EQUAL(2, table->numCols());
         app->activateWindow(table);
-        CHECK(table==app->d_workspace->activeWindow());
+        CHECK(table==app->d_workspace->activeSubWindow());
         app->convertTableToMatrix();
         // active window should switch to a matrix
-        Matrix* matrix=dynamic_cast<Matrix*>(app->d_workspace->activeWindow());
+        Matrix* matrix=dynamic_cast<Matrix*>(app->d_workspace->activeSubWindow());
         CHECK(matrix);
         CHECK_EQUAL(matrix->numRows(),table->numRows());
         CHECK_EQUAL(matrix->numCols(),table->numCols());

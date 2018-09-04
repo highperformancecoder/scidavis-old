@@ -58,7 +58,7 @@ class QTranslator;
 class QDockWidget;
 class QAction;
 class QActionGroup;
-class QWorkspace;
+class QMdiArea;
 class QLineEdit;
 class QTranslator;
 class QToolButton;
@@ -137,7 +137,7 @@ public:
   QDockWidget *consoleWindow;
   QTextEdit *console;
 #endif
-  QWorkspace* d_workspace;
+  QMdiArea* d_workspace;
   QToolBar *file_tools, *graph_tools, *table_tools, *plot_tools, *graph_3D_tools, *edit_tools, *matrix_plot_tools;
   FolderListView *lv;
   FolderListView *folders;
@@ -531,7 +531,7 @@ public slots:
   void disableActions();
   void customToolBars(QWidget* w);
   void customMenu(QWidget* w);
-  void windowActivated(QWidget *w);
+  void windowActivated(QMdiSubWindow *w);
   //@}
 
   //! \name Table Tools

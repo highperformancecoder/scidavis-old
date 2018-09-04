@@ -4,7 +4,7 @@
 #include "testPaintDevice.h"
 #include "Note.h"
 #include "near.h"
-#include <QWorkspace>
+#include <QMdiArea>
 
 #include <iostream>
 #include <fstream>

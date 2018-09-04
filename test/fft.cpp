@@ -1,7 +1,7 @@
 #include "ApplicationWindow.h"
 #include "FFT.h"
 #include "MultiLayer.h"
-#include <QWorkspace>
+#include <QMdiArea>
 #include <iostream>
 using namespace std;
 
