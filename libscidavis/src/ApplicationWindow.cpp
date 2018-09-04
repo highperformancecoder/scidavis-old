@@ -3344,11 +3344,11 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 			if (i==0) 
 			{
 				dx = w->verticalHeaderWidth();
-				dy = w->parentWidget()->frameGeometry().height() - w->height();
-				w->parentWidget()->move(QPoint(0,0));
+				dy = w->frameGeometry().height() - w->height();
+				w->move(QPoint(0,0));
 			} 
 			else
-				w->parentWidget()->move(QPoint(i*dx,i*dy));
+				w->move(QPoint(i*dx,i*dy));
 
 		}
 		modifiedProject();
@@ -4941,11 +4941,11 @@ QString ApplicationWindow::windowGeometryInfo(MyWidget *w)
         s+="0\t0\t500\t400\t";
     else
     {
-        QPoint p = w->parentWidget()->pos();// store position
+        QPoint p = w->pos();// store position
         s+=QString::number(p.x())+"\t";
         s+=QString::number(p.y())+"\t";
-        s+=QString::number(w->parentWidget()->frameGeometry().width())+"\t";
-        s+=QString::number(w->parentWidget()->frameGeometry().height())+"\t";
+        s+=QString::number(w->frameGeometry().width())+"\t";
+        s+=QString::number(w->frameGeometry().height())+"\t";
     }
 
     if (w->status() == MyWidget::Minimized)
@@ -4969,7 +4969,7 @@ void ApplicationWindow::restoreWindowGeometry(ApplicationWindow *app, MyWidget *
 	{
 	    QStringList lst = s.split("\t");
 	    if (lst.count() > 4)
-            w->parentWidget()->setGeometry(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
+            w->setGeometry(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
 		w->setStatus(MyWidget::Minimized);
 		app->setListView(caption, tr("Minimized"));
 	}
@@ -4981,7 +4981,7 @@ void ApplicationWindow::restoreWindowGeometry(ApplicationWindow *app, MyWidget *
 	else
 	{
 		QStringList lst = s.split("\t");
-		w->parentWidget()->setGeometry(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
+		w->setGeometry(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
 		w->setStatus(MyWidget::Normal);
 
         if (lst.count() > 5)
@@ -7313,8 +7313,8 @@ void ApplicationWindow::resizeActiveWindow()
 	connect (id, SIGNAL(setGeometry(int,int,int,int)), this, SLOT(setWindowGeometry(int,int,int,int)));
 
 	id->setWindowTitle(tr("Window Geometry"));
-	id->setOrigin(w->parentWidget()->pos());
-	id->setSize(w->parentWidget()->size());
+	id->setOrigin(w->pos());
+	id->setSize(w->size());
 	id->exec();
 }
 
@@ -7331,14 +7331,14 @@ void ApplicationWindow::resizeWindow()
 	connect (id, SIGNAL(setGeometry(int,int,int,int)), this, SLOT(setWindowGeometry(int,int,int,int)));
 
 	id->setWindowTitle(tr("Window Geometry"));
-	id->setOrigin(w->parentWidget()->pos());
-	id->setSize(w->parentWidget()->size());
+	id->setOrigin(w->pos());
+	id->setSize(w->size());
 	id->exec();
 }
 
 void ApplicationWindow::setWindowGeometry(int x, int y, int w, int h)
 {
-	d_workspace->activeSubWindow()->parentWidget()->setGeometry(x, y, w, h);
+	d_workspace->activeSubWindow()->setGeometry(x, y, w, h);
 }
 
 void ApplicationWindow::activateWindow()
@@ -13629,7 +13629,7 @@ void ApplicationWindow::cascade()
         ((MyWidget *)w)->setStatus(MyWidget::Normal);
         updateWindowStatus((MyWidget *)w);
 
-        w->parentWidget()->setGeometry(x, y, w->width(), w->height());
+        w->setGeometry(x, y, w->width(), w->height());
         w->raise();
         x += xoffset;
         y += yoffset;

@@ -470,12 +470,12 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
       {
         Origin::Rect windowRect;
         windowRect = spread.frameRect;
-        table->parentWidget()->move(QPoint(windowRect.left, windowRect.top));
+        table->move(QPoint(windowRect.left, windowRect.top));
       }
     else {
       int dx = table->verticalHeaderWidth();
-      int dy=table->parentWidget()->frameGeometry().height() - table->height();
-      table->parentWidget()->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
+      int dy=table->frameGeometry().height() - table->height();
+      table->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
       visible_count++;
     }
 
@@ -573,12 +573,12 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 			//cascade the matrices
 #if 0
 			int dx=Matrix->verticalHeaderWidth();
-			int dy=Matrix->parentWidget()->frameGeometry().height() - matrix->height();
+			int dy=Matrix->frameGeometry().height() - matrix->height();
 #endif
 // TODO
 			int dx = 100;
 			int dy = 100;
-			Matrix->parentWidget()->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
+			Matrix->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
 			visible_count++;
 
 		}
@@ -609,8 +609,8 @@ bool ImportOPJ::importNotes(const OriginFile &opj)
 
 		//cascade the notes
 		int dx=20;
-		int dy=note->parentWidget()->frameGeometry().height() - note->height();
-		note->parentWidget()->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
+		int dy=note->frameGeometry().height() - note->height();
+		note->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
 		visible_count++;
 	}
 	if(visible_count>0)
@@ -1065,8 +1065,8 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 		if(!_graph.hidden)
 		{
 			int dx=20;
-			int dy=ml->parentWidget()->frameGeometry().height() - ml->height();
-			ml->parentWidget()->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
+			int dy=ml->frameGeometry().height() - ml->height();
+			ml->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
 			visible_count++;
 			ml->show();
 			ml->arrangeLayers(true,true);
