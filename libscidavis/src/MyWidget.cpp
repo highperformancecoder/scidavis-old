@@ -46,7 +46,6 @@ MyWidget::MyWidget(const QString& label, QWidget * parent, const QString name, Q
 	caption_policy = Both;
 	askOnClose = true;
 	w_status = Normal;
-	titleBar = NULL;
 	setObjectName(QString(name));
 }
 
@@ -127,48 +126,12 @@ QString MyWidget::aspect()
 	return s;
 }
 
-// Modifying the title bar menu is somewhat more complicated in Qt4.
-// Apart from the trivial change in how we intercept the reparenting,
-// in Qt4 the title bar doesn't exist yet at this point.
-// Thus, we now also have to intercept the creation of the title bar
-// in MyWidget::eventFilter.
-void MyWidget::changeEvent(QEvent *event)
+void MyWidget::contextMenuEvent(QContextMenuEvent *e)
 {
-	if (event->type() == QEvent::ParentChange) {
-		titleBar = 0;
-		if (parent()) parent()->installEventFilter(this);
-	}
-	else if (!isHidden() && event->type() == QEvent::WindowStateChange) {
-	    if (((QWindowStateChangeEvent *)event)->oldState() == windowState())
-            return;
-
-		if( windowState() & Qt::WindowMinimized )
-	    	w_status = Minimized;
-		else if ( windowState() & Qt::WindowMaximized )
-	     	w_status = Maximized;
-		else
-	    	w_status = Normal;
-    	emit statusChanged (this);
-	}
-	QWidget::changeEvent(event);
-}
-
-bool MyWidget::eventFilter(QObject *object, QEvent *e)
-{
-	QWidget *tmp;
-	if (e->type()==QEvent::ContextMenu && object == titleBar)
-	{
+	if (!this->widget()->geometry().contains(e->pos())) {
 		emit showTitleBarMenu();
-		((QContextMenuEvent*)e)->accept();
-		return true;
-	} 
-	else if (e->type()==QEvent::ChildAdded && object == parent() && (tmp = qobject_cast<QWidget *>(((QChildEvent*)e)->child()))) 
-	{
-		(titleBar = tmp)->installEventFilter(this);
-		parent()->removeEventFilter(this);
-		return true;
+		e->accept();
 	}
-	return false;
 }
 
 void MyWidget::setStatus(Status s)

@@ -121,8 +121,8 @@ public:
 	void closeEvent( QCloseEvent *);
 	//! Toggle the "ask on close" flag
 	void askOnCloseEvent(bool ask){askOnClose = ask;};
-	//! Filters other object's events (customizes title bar's context menu)
-	bool eventFilter(QObject *object, QEvent *e);
+	//! Customizes title bar's context menu)
+	void contextMenuEvent(QContextMenuEvent *e);
 
 	//! Returns the pointer to the parent folder of the window
 	Folder* folder(){return parentFolder;};
@@ -154,11 +154,6 @@ protected slots:
 	void updateCaption();
 
 protected:
-	//! Catches parent changes (in order to gain access to the title bar)
-	virtual void changeEvent(QEvent *event);
-	//! Title bar of this MDI window if it currently belongs to a QWorkspace, NULL else
-	QWidget *titleBar;
-
 	//!Pointer to the parent folder of the window
 	Folder *parentFolder;
 	//! The window label

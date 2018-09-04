@@ -973,12 +973,6 @@ bool MultiLayer::eventFilter(QObject *object, QEvent *e)
 	{
 		resizeLayers((const QResizeEvent *)e);
 	}
-	else if (e->type()==QEvent::ContextMenu && object == titleBar)
-	{
-		emit showTitleBarMenu();
-		((QContextMenuEvent*)e)->accept();
-		return true;
-	}
 	return MyWidget::eventFilter(object, e);
 }
 
@@ -1146,8 +1140,17 @@ QString MultiLayer::saveAsTemplate(const QString& geometryInfo)
 
 void MultiLayer::mousePressEvent ( QMouseEvent * e )
 {
+	if (!this->widget()->geometry().contains(e->pos())) { // event.pos is in titlebar
+		if (e->button() == Qt::RightButton) {
+			emit showTitleBarMenu();
+			e->accept();
+		} else {
+			MyWidget::mousePressEvent(e);
+		}
+		return;
+	}
 	int margin = 5;
-	QPoint pos = canvas->mapFromParent(e->pos());
+	QPoint pos = canvas->mapFrom(this,e->pos());
 	// iterate backwards, so layers on top are preferred for selection
 	QList<QWidget*>::iterator i = graphsList.end();
 	while (i!=graphsList.begin()) {

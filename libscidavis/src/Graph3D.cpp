@@ -1697,26 +1697,28 @@ void Graph3D::scaleFonts(double factor)
 
 void Graph3D::resizeEvent ( QResizeEvent *e)
 {
-	QSize size=e->size();
-
 	sp->makeCurrent();
-	sp->resize(size);
+	sp->resize(e->size());
 
 	if (!ignoreFonts && this->isVisible())
 	{
-		QSize oldSize=e->oldSize();
-		double ratio=(double)size.height()/(double)oldSize.height();
+		double ratio=(double)e->size().height()/(double)e->oldSize().height();
 		scaleFonts(ratio);
 	}
 
 	sp->updateGL();
 	emit resizedWindow(this);
 	emit modified();
+	QMdiSubWindow::resizeEvent(e);
 }
 
 void Graph3D::contextMenuEvent(QContextMenuEvent *e)
 {
-	emit showContextMenu();
+	if (widget()->geometry().contains(e->pos())) {
+		emit showContextMenu();
+	} else {
+		emit showTitleBarMenu();
+	}
 	e->accept();
 }
 
