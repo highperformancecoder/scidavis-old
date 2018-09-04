@@ -46,8 +46,8 @@ SUITE(Menus)
     {
       unique_ptr<ApplicationWindow> appWithGraph(open("testProject.sciprj"));
       // find graph
-      unique_ptr<QWidgetList> windows(appWithGraph->windowsList());
-      for (auto& i: *windows)
+      QList<MyWidget*> windows = appWithGraph->windowsList();
+      for (auto& i: windows)
         if (auto ml=dynamic_cast<MultiLayer*>(i))
           appWithGraph->showCurveContextMenuImpl(ml->activeGraph()->curveKey(0));
       appWithGraph->showMarkerPopupMenuImpl();

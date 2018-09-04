@@ -29,6 +29,7 @@
 #ifndef ASSOCIATIONSDIALOG_H
 #define ASSOCIATIONSDIALOG_H
 
+#include "MyWidget.h"
 #include <QDialog>
 
 class QLabel;
@@ -48,7 +49,7 @@ public:
     AssociationsDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
     ~AssociationsDialog();
 
-    void initTablesList(QWidgetList* lst, int curve);
+    void initTablesList(QList<MyWidget*>* lst, int curve);
 	void setGraph(Graph *g);
 
 private slots:
@@ -65,7 +66,7 @@ private:
     Table *findTable(int index);
     bool eventFilter(QObject *object, QEvent *e);
 
-	QWidgetList* tables;
+	QList<MyWidget*>* tables;
 	Table *active_table;
 	Graph *graph;
 	QStringList plotAssociationsList;

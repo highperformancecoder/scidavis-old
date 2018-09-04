@@ -48,8 +48,8 @@ SUITE(ApplicationWindow)
     {
       auto t=newTable();
       bool found=false;
-      unique_ptr<QWidgetList> windows(windowsList());
-      for (auto i: *windows)
+      QList<MyWidget*> windows = windowsList();
+      for (auto i: windows)
         if (t==i) found=true;
       CHECK(found);
 
@@ -60,8 +60,8 @@ SUITE(ApplicationWindow)
       t->askOnCloseEvent(false);
       ApplicationWindow::deleteSelectedItems();
       found=false;
-      windows.reset(windowsList());
-      for (auto i: *windows)
+      windows=windowsList();
+      for (auto i: windows)
         if (t==i) found=false;
       CHECK(!found);
     }

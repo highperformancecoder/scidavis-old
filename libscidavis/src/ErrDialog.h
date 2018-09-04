@@ -29,6 +29,7 @@
 #ifndef ERRDIALOG_H
 #define ERRDIALOG_H
 
+#include "MyWidget.h"
 #include <QDialog>
 #include <QList>
 class QLabel;
@@ -68,7 +69,7 @@ private:
     QRadioButton* yErrBox;
 	QPushButton* buttonAdd;
     QPushButton* buttonCancel;
-	QList<QWidget*> *srcTables;
+	QList<MyWidget*> *srcTables;
 
 protected slots:
 	//! Set all string in the current language
@@ -80,7 +81,7 @@ public slots:
 	//! Supply the dialog with a curves list
 	void setCurveNames(const QStringList& names);
 	//! Supply the dialog with a tables list
-	void setSrcTables(QWidgetList* tables);
+	void setSrcTables(QList<MyWidget*>* tables);
 	//! Select a table
 	void selectSrcTable(int tabnr);
 

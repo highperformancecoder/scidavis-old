@@ -239,7 +239,7 @@ private:
   ScriptEdit(ScriptEdit&);
 };
 
-class MyWidget: QWidget /PyName=MDIWindow/
+class MyWidget: QMdiSubWindow /PyName=MDIWindow/
 {
 %TypeHeaderCode
 #include "src/MyWidget.h"
@@ -1298,7 +1298,7 @@ public:
 	MultiLayer* plotColorMap(Matrix*);
 	MultiLayer* plotGrayScale(Matrix*);
 
-  QWidgetList *windowsList() /PyName=windows/;
+  QList<MyWidget*> windowsList() /PyName=windows/;
 
   QTextEdit *results;
 //  QTextEdit *console;

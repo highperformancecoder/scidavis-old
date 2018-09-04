@@ -40,8 +40,8 @@ SUITE(ReadWriteProject)
       {
         unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
         CHECK(app.get());
-        unique_ptr<QWidgetList> windows(app->windowsList());
-        for (auto i: *windows)
+        QList<MyWidget*> windows = app->windowsList();
+        for (auto i: windows)
           if (auto w=dynamic_cast<MultiLayer*>(i))
             {
               w->exportSVG(i->windowTitle()+".svg");
@@ -52,8 +52,8 @@ SUITE(ReadWriteProject)
       {
         unique_ptr<ApplicationWindow> app(open("3dplot.sciprj"));
         CHECK(app.get());
-        unique_ptr<QWidgetList> windows(app->windowsList());
-        for (auto i: *windows)
+        QList<MyWidget*> windows = app->windowsList();
+        for (auto i: windows)
           if (auto w=dynamic_cast<Graph3D*>(i))
             w->exportImage(i->windowTitle()+".png");
       }
@@ -75,8 +75,8 @@ SUITE(ReadWriteProject)
     {
       unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
       CHECK(app.get());
-      unique_ptr<QWidgetList> windows(app->windowsList());
-      for (auto i: *windows)
+      QList<MyWidget*> windows = app->windowsList();
+      for (auto i: windows)
         if (auto table=dynamic_cast<Table*>(i))
           {
         CHECK(table->name()=="Table1");

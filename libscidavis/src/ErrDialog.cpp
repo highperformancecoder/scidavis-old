@@ -142,12 +142,12 @@ void ErrDialog::setCurveNames(const QStringList& names)
 	nameLabel->addItems(names);
 }
 
-void ErrDialog::setSrcTables(QWidgetList* tables)
+void ErrDialog::setSrcTables(QList<MyWidget*>* tables)
 {
 	srcTables = tables;
 	tableNamesBox->clear();
 
-	QList<QWidget *>::const_iterator i;
+	QList<MyWidget *>::const_iterator i;
     for (i = srcTables->begin(); i != srcTables->end(); i++)
 		tableNamesBox->addItem((*i)->objectName());
 

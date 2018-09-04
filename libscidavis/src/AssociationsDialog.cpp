@@ -180,7 +180,7 @@ for (int i=1; i < (int)cols.count(); i++ )
 return s;
 }
 
-void AssociationsDialog::initTablesList(QWidgetList* lst, int curve)
+void AssociationsDialog::initTablesList(QList<MyWidget*>* lst, int curve)
 {
 tables = lst;
 active_table = 0;

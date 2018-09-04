@@ -31,7 +31,7 @@ SUITE(FFT)
       fft1->run();
       // FFT creates a hidden table, which we need to find.
       Table* table1=nullptr;
-      for (auto i: *windowsList())
+      for (auto i: windowsList())
         if (auto t=dynamic_cast<Table*>(i))
           if (t!=table)
             {
@@ -46,7 +46,7 @@ SUITE(FFT)
       auto fft2=new FFT(this,graph,"y");
       fft2->run();
       Table* table2=nullptr;
-      for (auto i: *windowsList())
+      for (auto i: windowsList())
         if (auto t=dynamic_cast<Table*>(i))
           if (t!=table && t!=table1)
             {

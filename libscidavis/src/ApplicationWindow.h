@@ -142,8 +142,8 @@ public:
   FolderListView *lv;
   FolderListView *folders;
   QToolButton *btnResults;
-  QWidgetList *hiddenWindows;
-  QWidgetList *outWindows;
+  QList<MyWidget*> *hiddenWindows;
+  QList<MyWidget*> *outWindows;
   QWidget *lastModified;
 
 public:
@@ -197,7 +197,7 @@ public slots:
   /// args are any argument to be passed to the script
   ApplicationWindow * loadScript(const QString& fn, const QStringList& args=QStringList(), bool execute = false);
 
-  QWidgetList * windowsList();
+  QList<MyWidget *> windowsList();
   void updateWindowLists(MyWidget *w);
   /*!
     Arranges all the visible project windows in a cascade pattern.
@@ -212,7 +212,7 @@ public slots:
   //! Set the project status to saved (not modified)
   void savedProject();
   //! Set the project status to modified and save 'w' as the last modified widget
-  void modifiedProject(QWidget *w);
+  void modifiedProject(MyWidget *w);
   //@}
 
   //! \name Settings
@@ -364,7 +364,7 @@ public slots:
   Table* newHiddenTable(const QString& name, const QString& label, QList<Column *> columns);
   Table* table(const QString& name);
   Table* convertMatrixToTable();
-  QWidgetList* tableList();
+  QList<MyWidget*>* tableList();
 
   void connectTable(Table* w);
   void newWrksheetPlot(const QString& name,const QString& label, QList<Column *> columns);
@@ -443,7 +443,7 @@ public slots:
 
   void updateWindowStatus(MyWidget* );
 
-  bool hidden(QWidget* window);
+  bool hidden(MyWidget* window);
   void closeActiveWindow();
   void closeWindow(MyWidget* window);
 

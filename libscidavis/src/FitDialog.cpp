@@ -1319,7 +1319,7 @@ void FitDialog::changeDataRange()
 	boxTo->setText(QString::number(qMax(start, end), 'g', 15));
 }
 
-void FitDialog::setSrcTables(QWidgetList* tables)
+void FitDialog::setSrcTables(QList<MyWidget*>* tables)
 {
 	if (tables->isEmpty())
 	{

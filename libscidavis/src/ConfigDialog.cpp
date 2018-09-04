@@ -1102,8 +1102,8 @@ void ConfigDialog::apply()
 	// 2D plots page: print tab
 	app->d_print_cropmarks = boxPrintCropmarks->isChecked();
 	app->d_scale_plots_on_print = boxScaleLayersOnPrint->isChecked();
-	QWidgetList *windows = app->windowsList();
-	foreach(QWidget *w, *windows)
+	QList<MyWidget*> windows = app->windowsList();
+	foreach(MyWidget *w, windows)
 	{
 		if (w->inherits("MultiLayer"))
 		{
@@ -1111,7 +1111,6 @@ void ConfigDialog::apply()
 			((MultiLayer*)w)->printCropmarks(boxPrintCropmarks->isChecked());
 		}
 	}
-	delete windows;
 	// general page: application tab
 	app->changeAppFont(appFont);
 	setFont(appFont);

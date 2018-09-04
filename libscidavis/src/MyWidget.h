@@ -142,8 +142,8 @@ signals:
 	void closedWindow(MyWidget *);
 	//! Emitted when the window was hidden
 	void hiddenWindow(MyWidget *);
-	void modifiedWindow(QWidget *);
-	void resizedWindow(QWidget *);
+	void modifiedWindow(MyWidget *);
+	void resizedWindow(MyWidget *);
 	//! Emitted when the window status changed
 	void statusChanged(MyWidget *);
 	//! Emitted when the title bar recieves a QContextMenuEvent

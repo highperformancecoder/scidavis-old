@@ -120,7 +120,7 @@ public slots:
 	void fitBuiltInFunction(const QString& function, double* initVal);
 
 	//! Populate the list of tables containing data displayed in the corresponding graph
-	void setSrcTables(QWidgetList* tables);
+	void setSrcTables(QList<MyWidget*>* tables);
 	//! Select a table from the source tables list
 	void selectSrcTable(int tabnr);
 	//! Enable/disable widgets for selection of custom error source.
@@ -152,7 +152,7 @@ private:
 	QStringList d_user_functions, d_user_function_names, d_user_function_params;
 	QStringList d_built_in_function_names, d_built_in_functions;
 	QStringList d_plugin_function_names, d_plugin_functions, d_plugin_files_list, d_plugin_params;
-	QWidgetList *d_src_table;
+	QList<MyWidget*> *d_src_table;
 
     QCheckBox* boxUseBuiltIn;
 	QStackedWidget* tw;
