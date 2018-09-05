@@ -394,6 +394,21 @@ if ( mousePressed && ( presspos - e->pos() ).manhattanLength() > QApplication::s
     }
 }
 
+void FolderListView::mouseReleaseEvent( QMouseEvent* e )
+{
+	QTreeWidget::mouseReleaseEvent(e);
+	QTreeWidgetItem *item = itemAt( presspos );
+	if ( item && mousePressed )
+	{
+		if (item->type() == WindowListItem::WindowType)
+		{
+			MyWidget* w = ((WindowListItem *)item)->window();
+			w->mdiArea()->setActiveSubWindow(w);
+		}
+	}
+	mousePressed = false;
+}
+
 void FolderListView::adjustColumns()
 {
 for (int i=0; i < columnCount (); i++)

@@ -40,6 +40,7 @@
 #include <QKeyEvent>
 #include <QEvent>
 #include <QDropEvent>
+#include <QMdiArea>
 
 #include "MyWidget.h"
 
@@ -225,7 +226,7 @@ protected:
     void mousePressEvent( QMouseEvent *e );
 	void mouseDoubleClickEvent( QMouseEvent* e );
 	void keyPressEvent ( QKeyEvent * e );
-    void mouseReleaseEvent( QMouseEvent *){mousePressed = false;};
+    void mouseReleaseEvent( QMouseEvent * e);
 	void enterEvent(QEvent *){mousePressed = false;};
 
 signals:
