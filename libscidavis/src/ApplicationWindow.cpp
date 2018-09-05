@@ -3658,7 +3658,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
     if(d_file_version > 90) {
       QMessageBox::critical(this, tr("File opening error"),
                             tr("SciDAVis does not support QtiPlot project files from versions later than 0.9.0.").arg(fn));
-      return 0;
+      return false;
     }
   } else 
     d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
@@ -3792,11 +3792,12 @@ bool ApplicationWindow::loadProject(const QString& fn)
         }
     }
 
+
   if (progress.wasCanceled())
     {
       saved = true;
       close();
-      return 0;
+      return false;
     }
 
   //process the rest
@@ -13341,7 +13342,7 @@ void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)
 	copy_item->setText(0, src_f->name());
 	dest_f->setFolderListItem(copy_item);
 
-	QList<MyWidget *> lst = QList<MyWidget *>(src_f->windowsList());
+	QList<MyWidget *> lst = src_f->windowsList();
 	foreach(MyWidget *w, lst)
 	{
 		src_f->removeWindow(w);
