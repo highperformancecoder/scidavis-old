@@ -308,7 +308,8 @@ ApplicationWindow::ApplicationWindow()
 	initPlot3DToolBar();
 	initMainMenu();
 
-	d_workspace->setScrollBarsEnabled(true);
+	d_workspace->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+	d_workspace->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	setCentralWidget(d_workspace);
 	setAcceptDrops(true);
 
