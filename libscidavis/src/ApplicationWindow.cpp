@@ -317,13 +317,13 @@ ApplicationWindow::ApplicationWindow()
 	insertTranslatedStrings();
 
 	actionNextWindow->setShortcut( tr("F5","next window shortcut") );
-	connect(actionNextWindow, SIGNAL(triggered()), d_workspace, SLOT(activateNextWindow()));
+	connect(actionNextWindow, SIGNAL(triggered()), d_workspace, SLOT(activateNextSubWindow()));
 
 	actionPrevWindow->setShortcut( tr("F6","previous window shortcut") );
-	connect(actionPrevWindow, SIGNAL(triggered()), d_workspace, SLOT(activatePreviousWindow()));
+	connect(actionPrevWindow, SIGNAL(triggered()), d_workspace, SLOT(activatePreviousSubWindow()));
 
 	connect(this, SIGNAL(modified()),this, SLOT(modifiedProject()));
-	connect(d_workspace, SIGNAL(windowActivated (QWidget*)),this, SLOT(windowActivated(QWidget*)));
+	connect(d_workspace, SIGNAL(subWindowActivated (QMdiSubWindow*)),this, SLOT(windowActivated(QMdiSubWindow*)));
 	connect(lv, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)),
 			this, SLOT(folderItemDoubleClicked(QTreeWidgetItem *, int)));
 	connect(lv, SIGNAL(customContextMenuRequested(const QPoint &)),
@@ -3420,7 +3420,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 
 	table->setWindowLabel(files.join("; "));
 	table->notifyChanges();
-	emit modifiedProject(table);
+	modifiedProject(table);
 	modifiedProject();
 }
 
@@ -7443,8 +7443,8 @@ void ApplicationWindow::windowsMenuAboutToShow()
 		return;
 
 	windowsMenu->clear();
-	windowsMenu->addAction(tr("&Cascade"), this, SLOT(cascade() ) );
-	windowsMenu->addAction(tr("&Tile"), d_workspace, SLOT(tile() ) );
+	windowsMenu->addAction(tr("&Cascade"), d_workspace, SLOT(cascadeSubWindows() ) );
+	windowsMenu->addAction(tr("&Tile"), d_workspace, SLOT(tileSubWindows() ) );
 	windowsMenu->addSeparator();
 	windowsMenu->addAction(actionNextWindow);
 	windowsMenu->addAction(actionPrevWindow);
