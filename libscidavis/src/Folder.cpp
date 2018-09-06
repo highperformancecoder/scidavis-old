@@ -400,9 +400,9 @@ void FolderListView::mouseReleaseEvent( QMouseEvent* e )
 	QTreeWidgetItem *item = itemAt( presspos );
 	if ( item && mousePressed )
 	{
-		if (item->type() == WindowListItem::WindowType)
+		if (auto wli = dynamic_cast<WindowListItem*>(item))
 		{
-			MyWidget* w = ((WindowListItem *)item)->window();
+			MyWidget* w = wli->window();
 			w->mdiArea()->setActiveSubWindow(w);
 		}
 	}
