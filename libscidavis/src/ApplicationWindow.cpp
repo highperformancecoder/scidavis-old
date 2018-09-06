@@ -3864,6 +3864,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
                 }
             }
           plot->blockSignals(false);
+          activateSubWindow(plot);
           progress.setValue(aux);
         }
       else if  (s == "<SurfacePlot>")
@@ -9228,6 +9229,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 		}
 		restoreWindowGeometry(app, w, flist.at(index));
 
+		activateSubWindow(w);
 		return w;
 	}
 }
