@@ -37,6 +37,30 @@
 &Smooth:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
 &Smooth:Moving Window &Average...|Moving Window Average||Moving Window Average|1|
 &Smooth:&FFT Filter...|FFT Filter||FFT Filter|1|
+&Table:S&et Column(s) As|Set Column(s) As||Set Column(s) As|1|
+&Table:||||1|
+&Table:Fi&ll Selection with|Fill Selection with||Fill Selection with|1|
+&Table:||||1|
+&Table:Show/Hide comments|Show/Hide comments||Show/Hide comments|1|
+&Table:Show/Hide Controls|Show/Hide Controls||Show/Hide Controls|1|
+&Table:Mode Édition de formule|Mode Édition de formule||Mode Édition de formule|1|
+&Table:Edit Column &Description|Edit Column Description||Edit Column Description|1|
+&Table:Change &Type && Format|Change Type & Format||Change Type & Format|1|
+&Table:||||1|
+&Table:Vider le tableau|Vider le tableau||Vider le tableau|1|
+&Table:&Trier le tableau|Trier le tableau||Trier le tableau|1|
+&Table:||||1|
+&Table:Assigner une &Formule|Assigner une Formule||Assigner une Formule|1|
+&Table:Recalculer|Recalculer||Recalculer|1|
+&Table:||||1|
+&Table:&Ajouter une colonne|Ajouter une colonne||append a new column to the table|1|
+&Table:&Dimensions|Dimensions||change the table size|1|
+&Table:||||1|
+&Table:&Aller à la cellule|Aller à la cellule||Aller à la cellule|1|
+&Table:||||1|
+&Table:E&xport ASCII...|Export ASCII||Export ASCII|1|
+&Table:||||1|
+&Table:Convert to &Matrix|Convert to Matrix||Convert to Matrix|1|
 &Tools:Disable &tools|Disable tools||Pointer|1|
 &Tools:&Zoom In|Zoom In||Zoom In|1|
 &Tools:Zoom &Out|Zoom Out||Zoom Out|1|
@@ -126,8 +150,11 @@ Toolbars:3D Surface|3D Surface||3D Surface|1|
 ??????(&M):&Grid ...|Grid||Grid|1|
 ??????(&M):????...(&T)|????(T)||????(T)|1|
 ???(&H):???(&H)|???(H)||???(H)|1|
+???(&H):&Choose Help Folder...|Choose Help Folder||Choose Help Folder|1|
 ???(&H):||||1|
 ???(&H):&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
+???(&H):Search for &Updates|Search for Updates||Search for Updates|1|
+???(&H):Download &Manual|Download Manual||Download Manual|1|
 ???(&H):||||1|
 ???(&H):Visit SciDAVis &Forums|Visit SciDAVis Forums||Visit SciDAVis Forums|1|
 ???(&H):Report a &Bug|Report a Bug||Report a Bug|1|

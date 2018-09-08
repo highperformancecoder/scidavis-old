@@ -34,8 +34,11 @@
 &Nový:Nový &graf funkce|Nový graf funkce||Vytvo?it 2D graf funkce|1|
 &Nový:Nový &3D-povrchový graf|Nový 3D-povrchový graf||Vytvo?it nový 3D povrchový graf|1|
 &Nápov?da:&Nápov?da|Nápov?da||Nápov?da|1|
+&Nápov?da:&Zvolte prosím slo?ku s nápov?dou...|Zvolte prosím slo?ku s nápov?dou||Zvolte prosím slo?ku s nápov?dou|1|
 &Nápov?da:||||1|
 &Nápov?da:&Domovská stránka SciDAVis|Domovská stránka SciDAVis||Domovská stránka SciDAVis|1|
+&Nápov?da:Zkontrolovat &aktualizace|Zkontrolovat aktualizace||Zkontrolovat aktualizace|1|
+&Nápov?da:&Stáhnout manuál|Stáhnout manuál||Stáhnout manuál|1|
 &Nápov?da:||||1|
 &Nápov?da:Nav?tívit fóra &SciDAVis|Nav?tívit fóra SciDAVis||Nav?tívit fóra SciDAVis|1|
 &Nápov?da:Nahlásit &chybu|Nahlásit chybu||Nahlásit chybu|1|
@@ -93,6 +96,30 @@
 &Soubor:&Importovat ASCII...|Importovat ASCII||Importovat data|1|
 &Soubor:||||1|
 &Soubor:&Konec|Konec||Konec|1|
+&Tabulka:N&astavit sloupce jako|Nastavit sloupce jako||Nastavit sloupce jako|1|
+&Tabulka:||||1|
+&Tabulka:Vyplnit &výb?r|Vyplnit výb?r||Vyplnit výb?r|1|
+&Tabulka:||||1|
+&Tabulka:Show/Hide comments|Show/Hide comments||Show/Hide comments|1|
+&Tabulka:Show/Hide Controls|Show/Hide Controls||Show/Hide Controls|1|
+&Tabulka:Re?im zadávání vzorc?|Re?im zadávání vzorc?||Re?im zadávání vzorc?|1|
+&Tabulka:Upravit &popis sloupce|Upravit popis sloupce||Upravit popis sloupce|1|
+&Tabulka:Zm?nit &typ && formát|Zm?nit typ & formát||Zm?nit typ & formát|1|
+&Tabulka:||||1|
+&Tabulka:Vyprázdnit tabulku|Vyprázdnit tabulku||Vyprázdnit tabulku|1|
+&Tabulka:&Set?ídit tabulku|Set?ídit tabulku||Set?ídit tabulku|1|
+&Tabulka:||||1|
+&Tabulka:&P?i?adit vzorec|P?i?adit vzorec||P?i?adit vzorec|1|
+&Tabulka:Znovu spo?ítat|Znovu spo?ítat||Znovu spo?ítat|1|
+&Tabulka:||||1|
+&Tabulka:&P?idat sloupec|P?idat sloupec||append a new column to the table|1|
+&Tabulka:&Rozm?ry|Rozm?ry||change the table size|1|
+&Tabulka:||||1|
+&Tabulka:&Jdi na bu?ku|Jdi na bu?ku||Jdi na bu?ku|1|
+&Tabulka:||||1|
+&Tabulka:E&xportovat ASCII...|Exportovat ASCII||Exportovat ASCII|1|
+&Tabulka:||||1|
+&Tabulka:P?evést& na matici|P?evést na matici||P?evést na matici|1|
 &Upravit:&Zp?t|Zp?t||Vrátit zp?t zm?ny|1|
 &Upravit:&Znovu|Znovu||Znovu zm?ny|1|
 &Upravit:||||1|

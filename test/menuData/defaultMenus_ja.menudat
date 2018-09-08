@@ -63,8 +63,6 @@
 3D &Plot:&Gray Scale Map|Gray Scale Map||Gray Scale Map|1|
 Fit &Multi-Peak:&Gaussian...|Gaussian||Gaussian|1|
 Fit &Multi-Peak:&Lorentzian...|Lorentzian||Lorentzian|1|
-Scripting:Scripting &Language|Scripting Language||Scripting Language|1|
-Scripting:&Restart Scripting|Restart Scripting||Restart Scripting|1|
 Toolbars:File|File||File|1|
 Toolbars:Edit|Edit||Edit|1|
 Toolbars:Graph|Graph||Graph|1|
@@ -115,8 +113,11 @@ Toolbars:3D Surface|3D Surface||3D Surface|1|
 ????(&F):||||1|
 ????(&F):??(&Q)|??(Q)||??(Q)|1|
 ???(&H):???(&H)|???(H)||???(H)|1|
+???(&H):&Choose Help Folder...|Choose Help Folder||Choose Help Folder|1|
 ???(&H):||||1|
 ???(&H):&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
+???(&H):Search for &Updates|Search for Updates||Search for Updates|1|
+???(&H):Download &Manual|Download Manual||Download Manual|1|
 ???(&H):||||1|
 ???(&H):Visit SciDAVis &Forums|Visit SciDAVis Forums||Visit SciDAVis Forums|1|
 ???(&H):Report a &Bug|Report a Bug||Report a Bug|1|

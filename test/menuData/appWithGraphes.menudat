@@ -107,6 +107,30 @@
 &Suavizar:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
 &Suavizar:Promedio de vent&ana móvil...|Promedio de ventana móvil||Promedio de ventana móvil|1|
 &Suavizar:Filtro &FFT...|Filtro FFT||Filtro FFT|1|
+&Tabla:S&etear Columna(s) Como|Setear Columna(s) Como||Setear Columna(s) Como|1|
+&Tabla:||||1|
+&Tabla:&Llenar la selección con|Llenar la selección con||Llenar la selección con|1|
+&Tabla:||||1|
+&Tabla:Show/Hide comments|Show/Hide comments||Show/Hide comments|1|
+&Tabla:Show/Hide Controls|Show/Hide Controls||Show/Hide Controls|1|
+&Tabla:Modo de Edición de Fórmula|Modo de Edición de Fórmula||Modo de Edición de Fórmula|1|
+&Tabla:Editar &Descripción de Columna|Editar Descripción de Columna||Editar Descripción de Columna|1|
+&Tabla:Cambiar &Tipo y Formato|Cambiar Tipo y Formato||Cambiar Tipo y Formato|1|
+&Tabla:||||1|
+&Tabla:Limpiar Tabla|Limpiar Tabla||Limpiar Tabla|1|
+&Tabla:&Ordenar Tabla|Ordenar Tabla||Ordenar Tabla|1|
+&Tabla:||||1|
+&Tabla:Asignar &Fórmula|Asignar Fórmula||Asignar Fórmula|1|
+&Tabla:Recalcular|Recalcular||Recalcular|1|
+&Tabla:||||1|
+&Tabla:&Agregar Columna|Agregar Columna||append a new column to the table|1|
+&Tabla:&Dimensiones|Dimensiones||change the table size|1|
+&Tabla:||||1|
+&Tabla:&Ir a la celda|Ir a la celda||Ir a la celda|1|
+&Tabla:||||1|
+&Tabla:E&xportar ASCII...|Exportar ASCII||Exportar ASCII|1|
+&Tabla:||||1|
+&Tabla:Convertir en &matriz|Convertir en matriz||Convertir en matriz|1|
 &Traducir:&Vertical|Vertical||Vertical|1|
 &Traducir:&Horizontal|Horizontal||Horizontal|1|
 &Ver:Barras de herramientas|Barras de herramientas||Barras de herramientas|1|
@@ -118,8 +142,11 @@
 &Ver:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
 &Ver:&Consola|Consola||Mostrar consola de programación|1|
 A&yuda:A&yuda|Ayuda||Ayuda|1|
+A&yuda:Elegir &carpeta de ayuda ...|Elegir carpeta de ayuda||Elegir carpeta de ayuda|1|
 A&yuda:||||1|
 A&yuda:Sitio &web de SciDAVis|Sitio web de SciDAVis||Sitio web de SciDAVis|1|
+A&yuda:B&uscar actualizaciones|Buscar actualizaciones||Buscar actualizaciones|1|
+A&yuda:Descargar el &manual|Descargar el manual||Descargar el manual|1|
 A&yuda:||||1|
 A&yuda:Visite los &foros de SciDAVis|Visite los foros de SciDAVis||Visite los foros de SciDAVis|1|
 A&yuda:&Reportar un error del programa|Reportar un error del programa||Reportar un error del programa|1|

@@ -28,8 +28,11 @@
 &Nákres:||||1|
 &Nákres:&Trojrozm?rný nákres|Trojrozm?rný nákres||Trojrozm?rný nákres|1|
 &Nápov?da:&Nápov?da|Nápov?da||Nápov?da|1|
+&Nápov?da:&Vybrat slo?ku s nápov?dou...|Vybrat slo?ku s nápov?dou||Vybrat slo?ku s nápov?dou|1|
 &Nápov?da:||||1|
 &Nápov?da:&Domovská stránka programu SciDAVis|Domovská stránka programu SciDAVis||Domovská stránka programu SciDAVis|1|
+&Nápov?da:Hledat &aktualizace|Hledat aktualizace||Hledat aktualizace|1|
+&Nápov?da:Stáhnout &p?íru?ku|Stáhnout p?íru?ku||Stáhnout p?íru?ku|1|
 &Nápov?da:||||1|
 &Nápov?da:Nav?tívit &fóra programu SciDAVis|Nav?tívit fóra programu SciDAVis||Nav?tívit fóra programu SciDAVis|1|
 &Nápov?da:Ohlásit &chybu|Ohlásit chybu||Ohlásit chybu|1|
@@ -79,8 +82,6 @@
 &Rychlé umíst?ní:&Lorentzovo umíst?ní|Lorentzovo umíst?ní||Lorentzovo umíst?ní|1|
 &Rychlé umíst?ní:Umíst?ní s &mnoha?etnými vrcholy|Umíst?ní s mnoha?etnými vrcholy||Umíst?ní s mnoha?etnými vrcholy|1|
 &Rychlé umíst?ní:||||1|
-&Skriptování:Skriptovací &jazyk|Skriptovací jazyk||Skriptovací jazyk|1|
-&Skriptování:&Spustit podporu skriptování znovu|Spustit podporu skriptování znovu||Spustit podporu skriptování znovu|1|
 &Soubor:&Nový|Nový||Nový|1|
 &Soubor:&Otev?ít...|Otev?ít||Otev?ít projekt|1|
 &Soubor:&Naposledy otev?ené projekty|Naposledy otev?ené projekty||Naposledy otev?ené projekty|1|

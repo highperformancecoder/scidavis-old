@@ -56,8 +56,11 @@
 &Grafik:Ebene &entfernen|Ebene entfernen||Ebene entfernen|1|
 &Grafik:Ebenen &anordnen...|Ebenen anordnen||Ebenen anordnen|1|
 &Hilfe:&Hilfe|Hilfe||Hilfe|1|
+&Hilfe:&Bitte wählen Sie den Hilfe-Ordner aus...|Bitte wählen Sie den Hilfe-Ordner aus||Bitte wählen Sie den Hilfe-Ordner aus|1|
 &Hilfe:||||1|
 &Hilfe:&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
+&Hilfe:Nach &Update suchen|Nach Update suchen||Nach Update suchen|1|
+&Hilfe:&Handbuch herunterladen|Handbuch herunterladen||Handbuch herunterladen|1|
 &Hilfe:||||1|
 &Hilfe:SciDAVis &Foren besuchen|SciDAVis Foren besuchen||SciDAVis Foren besuchen|1|
 &Hilfe:Einen &Bug melden|Einen Bug melden||Einen Bug melden|1|
@@ -156,8 +159,6 @@ E&ponentiellen Abfall anpassen:&Zweiter Ordnung...|Zweiter Ordnung||Zweiter Ordn
 E&ponentiellen Abfall anpassen:&Dritter Ordnung...|Dritter Ordnung||Dritter Ordnung|1|
 Grafik &exportieren:&Aktuelle...|Aktuelle||Aktuelle Grafik exportieren|1|
 Grafik &exportieren:&Alle...|Alle||Alle Grafiken exportieren|1|
-Skriptunterstützung:S&kriptsprache|Skriptsprache||Skriptsprache|1|
-Skriptunterstützung:Sk&riptunterstützung neu starten|Skriptunterstützung neu starten||Skriptunterstützung neu starten|1|
 Spezielle Linie/Symb&ol:Vertikale &Linien|Vertikale Linien||Vertikale Linien|1|
 Spezielle Linie/Symb&ol:&Spline|Spline||Spline|1|
 Spezielle Linie/Symb&ol:&Vertikale Schritte|Vertikale Schritte||Vertikale Schritte|1|

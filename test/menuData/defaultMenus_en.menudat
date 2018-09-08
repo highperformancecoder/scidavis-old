@@ -68,8 +68,11 @@
 &Graph:&Remove Layer|Remove Layer||Remove Layer|1|
 &Graph:Arran&ge Layers...|Arrange Layers||Arrange Layers|1|
 &Help:&Help|Help||Help|1|
+&Help:&Choose Help Folder...|Choose Help Folder||Choose Help Folder|1|
 &Help:||||1|
 &Help:&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
+&Help:Search for &Updates|Search for Updates||Search for Updates|1|
+&Help:Download &Manual|Download Manual||Download Manual|1|
 &Help:||||1|
 &Help:Visit SciDAVis &Forums|Visit SciDAVis Forums||Visit SciDAVis Forums|1|
 &Help:Report a &Bug|Report a Bug||Report a Bug|1|
@@ -156,8 +159,6 @@ Pa&nel:&Vertical 2 Layers|Vertical 2 Layers||Vertical 2 Layers|1|
 Pa&nel:&Horizontal 2 Layers|Horizontal 2 Layers||Horizontal 2 Layers|1|
 Pa&nel:&4 Layers|4 Layers||4 Layers|1|
 Pa&nel:&Stacked Layers|Stacked Layers||Stacked Layers|1|
-Scripting:Scripting &Language|Scripting Language||Scripting Language|1|
-Scripting:&Restart Scripting|Restart Scripting||Restart Scripting|1|
 Special Line/Symb&ol:Vertical &Drop Lines|Vertical Drop Lines||Vertical Drop Lines|1|
 Special Line/Symb&ol:&Spline|Spline||Spline|1|
 Special Line/Symb&ol:&Vertical Steps|Vertical Steps||Vertical Steps|1|

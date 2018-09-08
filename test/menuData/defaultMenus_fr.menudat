@@ -1,8 +1,11 @@
 :Vecteurs &XYXY|Vecteurs XYXY||Vecteurs XYXY|1|
 :Vecteurs XY&AM|Vecteurs XYAM||Vecteurs XYAM|1|
 &Aide:&Aide|Aide||Aide|1|
+&Aide:&Choisissez Aide dossier ...|Choisissez Aide dossier||Choisissez Aide dossier|1|
 &Aide:||||1|
 &Aide:Page d'accueil &SciDAVis|Page d'accueil SciDAVis||Page d'accueil SciDAVis|1|
+&Aide:Recherche de mises à jour|Recherche de mises à jour||Recherche de mises à jour|1|
+&Aide:Télécharger le &Manuel|Télécharger le Manuel||Télécharger le Manuel|1|
 &Aide:||||1|
 &Aide:Vister les &Forums SciDAVis|Vister les Forums SciDAVis||Vister les Forums SciDAVis|1|
 &Aide:Rapporter un &Bug|Rapporter un Bug||Rapporter un Bug|1|
@@ -151,8 +154,6 @@ Pa&nneau:Tableau de &4 calques|Tableau de 4 calques||Tableau de 4 calques|1|
 Pa&nneau:&Calques empilés|Calques empilés||Calques empilés|1|
 S'adapter &Multi-Pic:&Gaussienne...|Gaussienne||Gaussienne|1|
 S'adapter &Multi-Pic:&Lorentzienne...|Lorentzienne||Lorentzienne|1|
-Scripting:&Langue de Scripting|Langue de Scripting||Langue de Scripting|1|
-Scripting:&Recommencer Scripting|Recommencer Scripting||Recommencer Scripting|1|
 Trait/Symb&ole spécial:Lignes verticales et baisse (&D)|Lignes verticales et baisse (D)||Lignes verticales et baisse (D)|1|
 Trait/Symb&ole spécial:&Spline|Spline||Spline|1|
 Trait/Symb&ole spécial:Marches &verticales|Marches verticales||Marches verticales|1|

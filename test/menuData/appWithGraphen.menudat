@@ -71,8 +71,11 @@
 &Graph:&Remove Layer|Remove Layer||Remove Layer|1|
 &Graph:Arran&ge Layers...|Arrange Layers||Arrange Layers|1|
 &Help:&Help|Help||Help|1|
+&Help:&Choose Help Folder...|Choose Help Folder||Choose Help Folder|1|
 &Help:||||1|
 &Help:&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
+&Help:Search for &Updates|Search for Updates||Search for Updates|1|
+&Help:Download &Manual|Download Manual||Download Manual|1|
 &Help:||||1|
 &Help:Visit SciDAVis &Forums|Visit SciDAVis Forums||Visit SciDAVis Forums|1|
 &Help:Report a &Bug|Report a Bug||Report a Bug|1|
@@ -115,6 +118,30 @@
 &Smooth:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
 &Smooth:Moving Window &Average...|Moving Window Average||Moving Window Average|1|
 &Smooth:&FFT Filter...|FFT Filter||FFT Filter|1|
+&Table:S&et Column(s) As|Set Column(s) As||Set Column(s) As|1|
+&Table:||||1|
+&Table:Fi&ll Selection with|Fill Selection with||Fill Selection with|1|
+&Table:||||1|
+&Table:Show/Hide comments|Show/Hide comments||Show/Hide comments|1|
+&Table:Show/Hide Controls|Show/Hide Controls||Show/Hide Controls|1|
+&Table:Formula Edit Mode|Formula Edit Mode||Formula Edit Mode|1|
+&Table:Edit Column &Description|Edit Column Description||Edit Column Description|1|
+&Table:Change &Type && Format|Change Type & Format||Change Type & Format|1|
+&Table:||||1|
+&Table:Clear Table|Clear Table||Clear Table|1|
+&Table:&Sort Table|Sort Table||Sort Table|1|
+&Table:||||1|
+&Table:Assign &Formula|Assign Formula||Assign Formula|1|
+&Table:Recalculate|Recalculate||Recalculate|1|
+&Table:||||1|
+&Table:&Add Column|Add Column||append a new column to the table|1|
+&Table:&Dimensions|Dimensions||change the table size|1|
+&Table:||||1|
+&Table:&Go to Cell|Go to Cell||Go to Cell|1|
+&Table:||||1|
+&Table:E&xport ASCII...|Export ASCII||Export ASCII|1|
+&Table:||||1|
+&Table:Convert to &Matrix|Convert to Matrix||Convert to Matrix|1|
 &Tools:Disable &tools|Disable tools||Pointer|1|
 &Tools:&Zoom In|Zoom In||Zoom In|1|
 &Tools:Zoom &Out|Zoom Out||Zoom Out|1|

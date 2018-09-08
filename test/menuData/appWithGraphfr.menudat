@@ -4,8 +4,11 @@
 :||||1|
 :&Properties...|Properties||Properties|1|
 &Aide:&Aide|Aide||Aide|1|
+&Aide:&Choisissez Aide dossier ...|Choisissez Aide dossier||Choisissez Aide dossier|1|
 &Aide:||||1|
 &Aide:Page d'accueil &SciDAVis|Page d'accueil SciDAVis||Page d'accueil SciDAVis|1|
+&Aide:Recherche de mises à jour|Recherche de mises à jour||Recherche de mises à jour|1|
+&Aide:Télécharger le &Manuel|Télécharger le Manuel||Télécharger le Manuel|1|
 &Aide:||||1|
 &Aide:Vister les &Forums SciDAVis|Vister les Forums SciDAVis||Vister les Forums SciDAVis|1|
 &Aide:Rapporter un &Bug|Rapporter un Bug||Rapporter un Bug|1|
@@ -82,6 +85,30 @@
 &Nouveau:Graphe|Graphe||Créer un graphe 2D vide|1|
 &Nouveau:Nouvelle &Fonction de Graphe|Nouvelle Fonction de Graphe||Créer un nouveau graphe de fonction 2D|1|
 &Nouveau:Nouvelle graphique &Surface 3D|Nouvelle graphique Surface 3D||Créer un nouveau graphe 3D|1|
+&Table:D&éfinir colonne(s) comme|Définir colonne(s) comme||Définir colonne(s) comme|1|
+&Table:||||1|
+&Table:Remp&lir la sélection avec|Remplir la sélection avec||Remplir la sélection avec|1|
+&Table:||||1|
+&Table:Show/Hide comments|Show/Hide comments||Show/Hide comments|1|
+&Table:Show/Hide Controls|Show/Hide Controls||Show/Hide Controls|1|
+&Table:Mode Édition de formule|Mode Édition de formule||Mode Édition de formule|1|
+&Table:Edit Column &Description|Edit Column Description||Edit Column Description|1|
+&Table:Change &Type && Format|Change Type & Format||Change Type & Format|1|
+&Table:||||1|
+&Table:Vider le tableau|Vider le tableau||Vider le tableau|1|
+&Table:&Trier le tableau|Trier le tableau||Trier le tableau|1|
+&Table:||||1|
+&Table:Assigner une &Formule|Assigner une Formule||Assigner une Formule|1|
+&Table:Recalculer|Recalculer||Recalculer|1|
+&Table:||||1|
+&Table:&Ajouter une colonne|Ajouter une colonne||append a new column to the table|1|
+&Table:&Dimensions|Dimensions||change the table size|1|
+&Table:||||1|
+&Table:&Aller à la cellule|Aller à la cellule||Aller à la cellule|1|
+&Table:||||1|
+&Table:E&xporter en ASCII...|Exporter en ASCII||Exporter en ASCII|1|
+&Table:||||1|
+&Table:Convertir en &Matrice|Convertir en Matrice||Convertir en Matrice|1|
 &Translation:&Verticale|Verticale||Verticale|1|
 &Translation:&Horizontale|Horizontale||Horizontale|1|
 A&nalyse:&Translation|Translation||Translation|1|

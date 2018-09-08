@@ -54,8 +54,11 @@
 &Förskju&t:&Vertikal|Vertikal||Vertikal|1|
 &Förskju&t:&Horisontell|Horisontell||Horisontell|1|
 &Hjälp:&Hjälp|Hjälp||Hjälp|1|
+&Hjälp:&Choose Help Folder...|Choose Help Folder||Choose Help Folder|1|
 &Hjälp:||||1|
 &Hjälp:&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
+&Hjälp:Leta efter &uppdateringar|Leta efter uppdateringar||Leta efter uppdateringar|1|
+&Hjälp:Download &Manual|Download Manual||Download Manual|1|
 &Hjälp:||||1|
 &Hjälp:Visit SciDAVis &Forums|Visit SciDAVis Forums||Visit SciDAVis Forums|1|
 &Hjälp:Report a &Bug|Report a Bug||Report a Bug|1|
@@ -156,8 +159,6 @@ Pa&nel:&Vertikalt 2 lager|Vertikalt 2 lager||Vertikalt 2 lager|1|
 Pa&nel:&Horisontellt 2 lager|Horisontellt 2 lager||Horisontellt 2 lager|1|
 Pa&nel:&4 Lager|4 Lager||4 Lager|1|
 Pa&nel:&Staplade lager|Staplade lager||Staplade lager|1|
-Scripting:Scripting &Language|Scripting Language||Scripting Language|1|
-Scripting:&Restart Scripting|Restart Scripting||Restart Scripting|1|
 Statistiska dia&gram:&Låddiagram|Låddiagram||Box and whiskers plot|1|
 Statistiska dia&gram:&Histogram|Histogram||Histogram|1|
 Statistiska dia&gram:&Staplade histogram|Staplade histogram||Staplade histogram|1|

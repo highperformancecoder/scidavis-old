@@ -39,8 +39,11 @@
 &Nákres:||||1|
 &Nákres:&Trojrozm?rný nákres|Trojrozm?rný nákres||Trojrozm?rný nákres|1|
 &Nápov?da:&Nápov?da|Nápov?da||Nápov?da|1|
+&Nápov?da:&Vybrat slo?ku s nápov?dou...|Vybrat slo?ku s nápov?dou||Vybrat slo?ku s nápov?dou|1|
 &Nápov?da:||||1|
 &Nápov?da:&Domovská stránka programu SciDAVis|Domovská stránka programu SciDAVis||Domovská stránka programu SciDAVis|1|
+&Nápov?da:Hledat &aktualizace|Hledat aktualizace||Hledat aktualizace|1|
+&Nápov?da:Stáhnout &p?íru?ku|Stáhnout p?íru?ku||Stáhnout p?íru?ku|1|
 &Nápov?da:||||1|
 &Nápov?da:Nav?tívit &fóra programu SciDAVis|Nav?tívit fóra programu SciDAVis||Nav?tívit fóra programu SciDAVis|1|
 &Nápov?da:Ohlásit &chybu|Ohlásit chybu||Ohlásit chybu|1|
@@ -113,6 +116,30 @@
 &Soubor:&Zavedení ASCII...|Zavedení ASCII||Zavést soubor(y) s daty|1|
 &Soubor:||||1|
 &Soubor:&Ukon?it|Ukon?it||Ukon?it|1|
+&Tabulka:&P?i?azení k nákresu: nastavit sloupce jako|P?i?azení k nákresu: nastavit sloupce jako||P?i?azení k nákresu: nastavit sloupce jako|1|
+&Tabulka:||||1|
+&Tabulka:Vyplnit &výb?r|Vyplnit výb?r||Vyplnit výb?r|1|
+&Tabulka:||||1|
+&Tabulka:Show/Hide comments|Show/Hide comments||Show/Hide comments|1|
+&Tabulka:Show/Hide Controls|Show/Hide Controls||Show/Hide Controls|1|
+&Tabulka:Re?im zadávání vzorc?|Re?im zadávání vzorc?||Re?im zadávání vzorc?|1|
+&Tabulka:Upravit &popis sloupce|Upravit popis sloupce||Upravit popis sloupce|1|
+&Tabulka:Zm?nit &typ && formát|Zm?nit typ & formát||Zm?nit typ & formát|1|
+&Tabulka:||||1|
+&Tabulka:Vyprázdnit tabulku|Vyprázdnit tabulku||Vyprázdnit tabulku|1|
+&Tabulka:&Set?ídit tabulku|Set?ídit tabulku||Set?ídit tabulku|1|
+&Tabulka:||||1|
+&Tabulka:&P?i?adit vzorec|P?i?adit vzorec||P?i?adit vzorec|1|
+&Tabulka:Znovu spo?ítat|Znovu spo?ítat||Znovu spo?ítat|1|
+&Tabulka:||||1|
+&Tabulka:&P?idat sloupec|P?idat sloupec||append a new column to the table|1|
+&Tabulka:&Rozm?ry|Rozm?ry||change the table size|1|
+&Tabulka:||||1|
+&Tabulka:&Jdi na bu?ku|Jdi na bu?ku||Jdi na bu?ku|1|
+&Tabulka:||||1|
+&Tabulka:&Vyvést jako ASCII...|Vyvést jako ASCII||Vyvést jako ASCII|1|
+&Tabulka:||||1|
+&Tabulka:P?evést na &matici|P?evést na matici||P?evést na matici|1|
 &Trojrozm?rný nákres:&Stuha|Stuha||Nakreslit trojrozm?rnou stuhu|1|
 &Trojrozm?rný nákres:&Pruhy|Pruhy||Nakreslit trojrozm?rné pruhy|1|
 &Trojrozm?rný nákres:&Body|Body||Nakreslit trojrozm?rné body|1|

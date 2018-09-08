@@ -114,8 +114,11 @@
 &Ver:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
 &Ver:&Consola|Consola||Mostrar consola de programación|1|
 A&yuda:A&yuda|Ayuda||Ayuda|1|
+A&yuda:Elegir &carpeta de ayuda ...|Elegir carpeta de ayuda||Elegir carpeta de ayuda|1|
 A&yuda:||||1|
 A&yuda:Sitio &web de SciDAVis|Sitio web de SciDAVis||Sitio web de SciDAVis|1|
+A&yuda:B&uscar actualizaciones|Buscar actualizaciones||Buscar actualizaciones|1|
+A&yuda:Descargar el &manual|Descargar el manual||Descargar el manual|1|
 A&yuda:||||1|
 A&yuda:Visite los &foros de SciDAVis|Visite los foros de SciDAVis||Visite los foros de SciDAVis|1|
 A&yuda:&Reportar un error del programa|Reportar un error del programa||Reportar un error del programa|1|
@@ -155,5 +158,3 @@ Pa&nel:&2 capas &verticales|2 capas verticales||2 capas verticales|1|
 Pa&nel:2 capas &horizontales|2 capas horizontales||2 capas horizontales|1|
 Pa&nel:&4 capas|4 capas||4 capas|1|
 Pa&nel:&Capas apiladas|Capas apiladas||Capas apiladas|1|
-Programación:&Lenguaje de programación|Lenguaje de programación||Lenguaje de programación|1|
-Programación:&Reiniciar programación|Reiniciar programación||Reiniciar programación|1|

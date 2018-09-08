@@ -59,8 +59,11 @@
 &Grafik:Ebene &entfernen|Ebene entfernen||Ebene entfernen|1|
 &Grafik:Ebenen &anordnen...|Ebenen anordnen||Ebenen anordnen|1|
 &Hilfe:&Hilfe|Hilfe||Hilfe|1|
+&Hilfe:&Bitte wählen Sie den Hilfe-Ordner aus...|Bitte wählen Sie den Hilfe-Ordner aus||Bitte wählen Sie den Hilfe-Ordner aus|1|
 &Hilfe:||||1|
 &Hilfe:&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
+&Hilfe:Nach &Update suchen|Nach Update suchen||Nach Update suchen|1|
+&Hilfe:&Handbuch herunterladen|Handbuch herunterladen||Handbuch herunterladen|1|
 &Hilfe:||||1|
 &Hilfe:SciDAVis &Foren besuchen|SciDAVis Foren besuchen||SciDAVis Foren besuchen|1|
 &Hilfe:Einen &Bug melden|Einen Bug melden||Einen Bug melden|1|
@@ -83,6 +86,30 @@
 &Schnellanpassung:Loren&z-Anpassung|Lorenz-Anpassung||Lorenz-Anpassung|1|
 &Schnellanpassung:Anpassung mit &mehreren Scheitelpunkten|Anpassung mit mehreren Scheitelpunkten||Anpassung mit mehreren Scheitelpunkten|1|
 &Schnellanpassung:||||1|
+&Tabelle:Darstellungszuordnung|Darstellungszuordnung||Darstellungszuordnung|1|
+&Tabelle:||||1|
+&Tabelle:Auswahl fü&llen mit|Auswahl füllen mit||Auswahl füllen mit|1|
+&Tabelle:||||1|
+&Tabelle:Show/Hide comments|Show/Hide comments||Show/Hide comments|1|
+&Tabelle:Show/Hide Controls|Show/Hide Controls||Show/Hide Controls|1|
+&Tabelle:Formeleingabe-Modus|Formeleingabe-Modus||Formeleingabe-Modus|1|
+&Tabelle:Bearbeite &Beschreibung der Spalte|Bearbeite Beschreibung der Spalte||Bearbeite Beschreibung der Spalte|1|
+&Tabelle:Ändere &Typ && Format|Ändere Typ & Format||Ändere Typ & Format|1|
+&Tabelle:||||1|
+&Tabelle:Tabelle leeren|Tabelle leeren||Tabelle leeren|1|
+&Tabelle:Ta&belle sortieren|Tabelle sortieren||Tabelle sortieren|1|
+&Tabelle:||||1|
+&Tabelle:&Formel zuweisen|Formel zuweisen||Formel zuweisen|1|
+&Tabelle:Neu berechnen|Neu berechnen||Neu berechnen|1|
+&Tabelle:||||1|
+&Tabelle:Sp&alte hinzufügen|Spalte hinzufügen||append a new column to the table|1|
+&Tabelle:&Abmessungen|Abmessungen||change the table size|1|
+&Tabelle:||||1|
+&Tabelle:&Gehe zu Zelle|Gehe zu Zelle||Gehe zu Zelle|1|
+&Tabelle:||||1|
+&Tabelle:ASCII-E&xport...|ASCII-Export||ASCII-Export|1|
+&Tabelle:||||1|
+&Tabelle:In &Matrix konvertieren|In Matrix konvertieren||In Matrix konvertieren|1|
 &Verschieben:&Vertikal|Vertikal||Vertikal|1|
 &Verschieben:&Horizontal|Horizontal||Horizontal|1|
 &Werkzeuge:Werkzeuge deak&tivieren|Werkzeuge deaktivieren||Mauszeiger|1|

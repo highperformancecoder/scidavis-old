@@ -57,8 +57,11 @@
 &Förskju&t:&Vertikal|Vertikal||Vertikal|1|
 &Förskju&t:&Horisontell|Horisontell||Horisontell|1|
 &Hjälp:&Hjälp|Hjälp||Hjälp|1|
+&Hjälp:&Choose Help Folder...|Choose Help Folder||Choose Help Folder|1|
 &Hjälp:||||1|
 &Hjälp:&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
+&Hjälp:Leta efter &uppdateringar|Leta efter uppdateringar||Leta efter uppdateringar|1|
+&Hjälp:Download &Manual|Download Manual||Download Manual|1|
 &Hjälp:||||1|
 &Hjälp:Visit SciDAVis &Forums|Visit SciDAVis Forums||Visit SciDAVis Forums|1|
 &Hjälp:Report a &Bug|Report a Bug||Report a Bug|1|
@@ -97,6 +100,30 @@
 &Redigera:Clear &Log Information|Clear Log Information||Clear Log Information|1|
 &Redigera:||||1|
 &Redigera:&Inställningar...|Inställningar||Inställningar|1|
+&Tabell:S&et Column(s) As|Set Column(s) As||Set Column(s) As|1|
+&Tabell:||||1|
+&Tabell:Fi&ll Selection with|Fill Selection with||Fill Selection with|1|
+&Tabell:||||1|
+&Tabell:Show/Hide comments|Show/Hide comments||Show/Hide comments|1|
+&Tabell:Show/Hide Controls|Show/Hide Controls||Show/Hide Controls|1|
+&Tabell:Formula Edit Mode|Formula Edit Mode||Formula Edit Mode|1|
+&Tabell:Edit Column &Description|Edit Column Description||Edit Column Description|1|
+&Tabell:Change &Type && Format|Change Type & Format||Change Type & Format|1|
+&Tabell:||||1|
+&Tabell:Clear Table|Clear Table||Clear Table|1|
+&Tabell:&Sort Table|Sort Table||Sort Table|1|
+&Tabell:||||1|
+&Tabell:Assign &Formula|Assign Formula||Assign Formula|1|
+&Tabell:???????????|???????????||???????????|1|
+&Tabell:||||1|
+&Tabell:&???????? ???????|???????? ???????||append a new column to the table|1|
+&Tabell:&Dimensions|Dimensions||change the table size|1|
+&Tabell:||||1|
+&Tabell:&Go to Cell|Go to Cell||Go to Cell|1|
+&Tabell:||||1|
+&Tabell:Ex&portera ASCII...|Exportera ASCII||Exportera ASCII|1|
+&Tabell:||||1|
+&Tabell:Convert to &Matrix|Convert to Matrix||Convert to Matrix|1|
 &Tools:Stäng av verk&tyg|Stäng av verktyg||Pekare|1|
 &Tools:&Zooma in|Zooma in||Zooma in|1|
 &Tools:Z&ooma ut|Zooma ut||Zooma ut|1|
