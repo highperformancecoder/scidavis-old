@@ -1025,6 +1025,8 @@ bool Table::fillProjectMenu(QMenu * menu)
 	menu->addAction(action_dimensions_dialog);
 	menu->addSeparator();
 	menu->addAction(action_go_to_cell);
+	if (action_edit_description->text() != tr("Edit Column &Description"))
+		translateActionsStrings();
 
 	return true;
 
@@ -1421,6 +1423,51 @@ void Table::addActionsToView()
 	d_view->addAction(action_statistics_rows);
 }
 
+void Table::translateActionsStrings()
+{
+	action_cut_selection->setText(tr("Cu&t"));
+	action_copy_selection->setText(tr("&Copy"));
+	action_paste_into_selection->setText(tr("Past&e"));
+#ifndef LEGACY_CODE_0_2_x
+	action_mask_selection->setText(tr("&Mask","mask selection"));
+	action_unmask_selection->setText(tr("&Unmask","unmask selection"));
+	action_clear_masks->setText(tr("Clear Masks"));
+#endif
+	action_set_formula->setText(tr("Assign &Formula"));
+	action_clear_selection->setText(tr("Clea&r","clear selection"));
+	action_recalculate->setText(tr("Recalculate"));
+	action_fill_row_numbers->setText(tr("Row Numbers"));
+	action_fill_random->setText(tr("Random Values"));
+	action_formula_mode->setText(tr("Formula Edit Mode"));
+	action_select_all->setText(tr("Select All"));
+	action_add_column->setText(tr("&Add Column"));
+	action_clear_table->setText(tr("Clear Table"));
+	action_export_to_TeX->setText(tr("Export to TeX..."));
+	action_sort_table->setText(tr("&Sort Table"));
+	action_go_to_cell->setText(tr("&Go to Cell"));
+	action_dimensions_dialog->setText(tr("&Dimensions", "table size"));
+	action_insert_columns->setText(tr("&Insert Empty Columns"));
+	action_remove_columns->setText(tr("Remo&ve Columns"));
+	action_clear_columns->setText(tr("Clea&r Columns"));
+	action_add_columns->setText(tr("&Add Columns"));
+	action_set_as_x->setText(tr("X","plot designation"));
+	action_set_as_y->setText(tr("Y","plot designation"));
+	action_set_as_z->setText(tr("Z","plot designation"));
+	action_set_as_xerr->setText(tr("X Error","plot designation"));
+	action_set_as_yerr->setText(tr("Y Error","plot designation"));
+	action_set_as_none->setText(tr("None","plot designation"));
+	action_normalize_columns->setText(tr("&Normalize Columns"));
+	action_normalize_selection->setText(tr("&Normalize Selection"));
+	action_sort_columns->setText(tr("&Sort Columns"));
+	action_statistics_columns->setText(tr("Column Statisti&cs"));
+	action_type_format->setText(tr("Change &Type && Format"));
+	action_edit_description->setText(tr("Edit Column &Description"));
+	action_insert_rows->setText(tr("&Insert Empty Rows"));
+	action_remove_rows->setText(tr("Remo&ve Rows"));
+	action_clear_rows->setText(tr("Clea&r Rows"));
+	action_add_rows->setText(tr("&Add Rows"));
+	action_statistics_rows->setText(tr("Row Statisti&cs"));
+}
 void Table::showTableViewContextMenu(const QPoint& pos)
 {
 	if (!d_view) return;

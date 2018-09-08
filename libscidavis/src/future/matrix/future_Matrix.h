@@ -292,6 +292,7 @@ class Matrix : public AbstractPart
 		void createActions();
 		void connectActions();
 		void addActionsToView();
+		void translateActionsStrings();
 
 		//! Read XML display element
 		bool readDisplayElement(XmlStreamReader * reader);

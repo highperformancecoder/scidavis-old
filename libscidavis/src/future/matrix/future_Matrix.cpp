@@ -744,6 +744,36 @@ void Matrix::addActionsToView()
 	d_view->addAction(action_add_rows);
 }
 
+void Matrix::translateActionsStrings()
+{
+	action_cut_selection->setText(tr("Cu&t"));
+	action_copy_selection->setText(tr("&Copy"));
+	action_paste_into_selection->setText(tr("Past&e"));
+	action_clear_selection->setText(tr("Clea&r","clear selection"));
+	action_set_formula->setText(tr("Assign &Formula"));
+	action_recalculate->setText(tr("Recalculate"));
+	action_select_all->setText(tr("Select All"));
+	action_clear_matrix->setText(tr("Clear Matrix"));
+	action_go_to_cell->setText(tr("&Go to Cell"));
+	action_transpose->setText(tr("&Transpose"));
+	action_mirror_horizontally->setText(tr("Mirror &Horizontally"));
+	action_mirror_vertically->setText(tr("Mirror &Vertically"));
+	action_import_image->setText(tr("&Import Image", "import image as matrix"));
+#ifndef LEGACY_CODE_0_2_x
+	action_duplicate->setText(tr("&Duplicate", "duplicate matrix"));
+#endif
+	action_dimensions_dialog->setText(tr("&Dimensions", "matrix size"));
+	action_edit_coordinates->setText(tr("Set &Coordinates"));
+	action_edit_format->setText(tr("Set Display &Format"));
+	action_insert_columns->setText(tr("&Insert Empty Columns"));
+	action_remove_columns->setText(tr("Remo&ve Columns"));
+	action_clear_columns->setText(tr("Clea&r Columns"));
+	action_add_columns->setText(tr("&Add Columns"));
+	action_insert_rows->setText(tr("&Insert Empty Rows"));
+	action_remove_rows->setText(tr("Remo&ve Rows"));
+	action_clear_rows->setText(tr("Clea&r Rows"));
+	action_add_rows->setText(tr("&Add Rows"));
+}
 
 bool Matrix::fillProjectMenu(QMenu * menu)
 {
@@ -769,6 +799,11 @@ bool Matrix::fillProjectMenu(QMenu * menu)
 	menu->addAction(action_import_image);
 	menu->addSeparator();
 	menu->addAction(action_go_to_cell);
+	if (action_clear_matrix->text() != tr("Clear Matrix"))
+	{
+		translateActionsStrings();
+		adjustTabBarAction(d_view->isControlTabBarVisible());
+	}
 
 	return true;
 

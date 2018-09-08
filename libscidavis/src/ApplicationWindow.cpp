@@ -756,7 +756,8 @@ void ApplicationWindow::insertTranslatedStrings()
 	multiPeakMenu->setTitle(tr("Fit &Multi-Peak"));
 
 	translateActionsStrings();
-	customMenu((MyWidget*)(d_workspace->activeSubWindow()));
+	for (auto w: windowsList())
+		customMenu(w);
 }
 
 void ApplicationWindow::initMainMenu()
@@ -11369,6 +11370,9 @@ void ApplicationWindow::translateActionsStrings()
 	actionAddText->setText(tr("Add &Text"));
 	actionAddText->setToolTip(tr("Add Text"));
 	actionAddText->setShortcut(tr("ALT+T"));
+
+	actionNextWindow->setText(tr("&Next","next window"));
+	actionPrevWindow->setText(tr("&Previous","previous window"));
 
 	btnArrow->setText(tr("Draw &Arrow"));
 	btnArrow->setShortcut(tr("CTRL+ALT+A"));

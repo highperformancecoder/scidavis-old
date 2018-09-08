@@ -388,6 +388,7 @@ private:
   void createActions();
   void connectActions();
   void addActionsToView();
+  void translateActionsStrings();
   QMenu * d_plot_menu;
   static bool d_default_comment_visibility;
 
