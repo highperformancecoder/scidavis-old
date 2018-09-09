@@ -150,11 +150,8 @@ Toolbars:3D Surface|3D Surface||3D Surface|1|
 ??????(&M):&Grid ...|Grid||Grid|1|
 ??????(&M):????...(&T)|????(T)||????(T)|1|
 ???(&H):???(&H)|???(H)||???(H)|1|
-???(&H):&Choose Help Folder...|Choose Help Folder||Choose Help Folder|1|
 ???(&H):||||1|
 ???(&H):&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
-???(&H):Search for &Updates|Search for Updates||Search for Updates|1|
-???(&H):Download &Manual|Download Manual||Download Manual|1|
 ???(&H):||||1|
 ???(&H):Visit SciDAVis &Forums|Visit SciDAVis Forums||Visit SciDAVis Forums|1|
 ???(&H):Report a &Bug|Report a Bug||Report a Bug|1|
