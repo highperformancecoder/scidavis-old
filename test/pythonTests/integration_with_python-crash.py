@@ -1,6 +1,6 @@
 app.loadProject("integration_with_python-crash.sciprj")
-lower_limit = 0
-upper_limit = 30
+lower_limit = 0.
+upper_limit = 30.
 g=graph("Graph1")
 curveName="Table1_2"
 integral = Integration(g.activeLayer(),curveName,lower_limit,upper_limit)
