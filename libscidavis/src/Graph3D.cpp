@@ -70,7 +70,7 @@ double UserFunction::operator()(double x, double y)
 		parser.DefineVar("x", &x);
 		parser.DefineVar("y", &y);
 
-		parser.SetExpr((const std::string)formula.toAscii().constData());
+		parser.SetExpr((const std::string)formula.toUtf8().constData());
 		result=parser.Eval();
 	}
 	catch(mu::ParserError &e)

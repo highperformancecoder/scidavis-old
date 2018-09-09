@@ -316,7 +316,7 @@ class Table: MyWidget
 			if (col < 0) {\
 				sipIsErr = 1;\
 				PyErr_Format(PyExc_ValueError, "There's no column named %s in table %s!", PYUNICODE_AsUTF8(tmp),\
-						sipCpp->name().toAscii().constData());\
+						sipCpp->name().toUtf8().constData());\
 				Py_DECREF(tmp);\
 			}\
 		}\

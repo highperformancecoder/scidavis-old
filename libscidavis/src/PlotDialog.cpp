@@ -2091,7 +2091,7 @@ bool PlotDialog::validInput()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr((histogramBeginBox->text()).toAscii().constData());
+			parser.SetExpr((histogramBeginBox->text()).toUtf8().constData());
 			start=parser.Eval();
 		}
 		catch(mu::ParserError &e)
@@ -2110,7 +2110,7 @@ bool PlotDialog::validInput()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr((histogramEndBox->text()).toAscii().constData());
+			parser.SetExpr((histogramEndBox->text()).toUtf8().constData());
 			end=parser.Eval();
 		}
 		catch(mu::ParserError &e)
@@ -2136,7 +2136,7 @@ bool PlotDialog::validInput()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr((binSizeBox->text()).toAscii().constData());
+			parser.SetExpr((binSizeBox->text()).toUtf8().constData());
 			stp=parser.Eval();
 		}
 		catch(mu::ParserError &e)

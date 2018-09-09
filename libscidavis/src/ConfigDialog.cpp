@@ -1145,7 +1145,7 @@ void ConfigDialog::apply()
 	int currentBoxIndex = boxDefaultNumericFormat->currentIndex();
 	if (currentBoxIndex > -1)
 	{
-		app->d_default_numeric_format = boxDefaultNumericFormat->itemData(currentBoxIndex).toChar().toAscii();
+		app->d_default_numeric_format = boxDefaultNumericFormat->itemData(currentBoxIndex).toChar().toLatin1();
 	}
 
     if(boxUseGroupSeparator->isChecked())

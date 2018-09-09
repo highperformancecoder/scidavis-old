@@ -4212,7 +4212,7 @@ void ApplicationWindow::readSettings()
 	QLocale::setDefault(temp_locale);
 
 	d_decimal_digits = settings.value("/DecimalDigits", 6).toInt();
-	d_default_numeric_format = settings.value("/DefaultNumericFormat", 'g').toChar().toAscii();
+	d_default_numeric_format = settings.value("/DefaultNumericFormat", 'g').toChar().toLatin1();
 
 	//restore geometry of main window
 	restoreGeometry(settings.value("/ProjectWindow/Geometry").toByteArray());

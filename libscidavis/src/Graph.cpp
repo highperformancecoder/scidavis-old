@@ -389,12 +389,12 @@ void Graph::setLabelsNumericFormat(int axis, int format, int prec, const QString
 	const QwtScaleDiv div = sd_old->scaleDiv ();
 
 	if (format == Plot::Superscripts){
-		QwtSupersciptsScaleDraw *sd = new QwtSupersciptsScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), formula.toAscii().constData());
+		QwtSupersciptsScaleDraw *sd = new QwtSupersciptsScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), formula.toUtf8().constData());
 		sd->setLabelFormat('s', prec);
 		sd->setScaleDiv(div);
 		d_plot->setAxisScaleDraw (axis, sd);
 	} else {
-		ScaleDraw *sd = new ScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), formula.toAscii().constData());
+		ScaleDraw *sd = new ScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), formula.toUtf8().constData());
 		sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 		sd->setScaleDiv(div);
 

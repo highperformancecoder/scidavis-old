@@ -682,7 +682,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 					continue;
 				}
 				QString tableName;
-				switch(data[0].toAscii())
+				switch(data[0].toLatin1())
 				{
 				case 'T':
 				case 'E':

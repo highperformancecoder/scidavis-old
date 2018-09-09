@@ -71,7 +71,7 @@ Column::Private::Private(Column * owner, SciDAVis::ColumnMode mode)
 #endif
 				settings.beginGroup("/General");
 				static_cast<Double2StringFilter *>(d_output_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
-				static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toAscii());
+				static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
 			}
 #endif
 			connect(static_cast<Double2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
@@ -141,7 +141,7 @@ Column::Private::Private(Column * owner, SciDAVis::ColumnDataType type, SciDAVis
 #endif
 				settings.beginGroup("/General");
 				static_cast<Double2StringFilter *>(d_output_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
-				static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toAscii());
+				static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
 			}
 #endif
 			connect(static_cast<Double2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
@@ -352,7 +352,7 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *f
 #endif
 				settings.beginGroup("/General");
 				static_cast<Double2StringFilter *>(new_out_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
-				static_cast<Double2StringFilter *>(new_out_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toAscii());
+				static_cast<Double2StringFilter *>(new_out_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
 			}
 #endif
 			connect(static_cast<Double2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),

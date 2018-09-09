@@ -175,7 +175,7 @@ QString AbstractAspect::Private::caption() const
 	for(int pos=magic.indexIn(result, 0); pos >= 0; pos=magic.indexIn(result, pos)) {
 		QString replacement;
 		int length;
-		switch(magic.cap(1).at(0).toAscii()) {
+		switch(magic.cap(1).at(0).toLatin1()) {
 			case '%': replacement = "%"; length=2; break;
 			case 'n': replacement = d_name; length=2; break;
 			case 'c': replacement = d_comment; length=2; break;

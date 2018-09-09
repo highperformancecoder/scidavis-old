@@ -1046,7 +1046,7 @@ void FitDialog::accept()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(CONFS(from).toAscii().constData());
+		parser.SetExpr(CONFS(from).toUtf8().constData());
 		start=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -1059,7 +1059,7 @@ void FitDialog::accept()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(CONFS(to).toAscii().constData());
+		parser.SetExpr(CONFS(to).toUtf8().constData());
 		end=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -1080,7 +1080,7 @@ void FitDialog::accept()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(CONFS(tolerance).toAscii().constData());
+		parser.SetExpr(CONFS(tolerance).toUtf8().constData());
 		eps=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -1298,7 +1298,7 @@ bool FitDialog::validInitialValues()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr(CONFS(boxParams->item(i,1)->text()).toAscii().constData());
+			parser.SetExpr(CONFS(boxParams->item(i,1)->text()).toUtf8().constData());
 			parser.Eval();
 		}
 		catch (mu::ParserError &e)

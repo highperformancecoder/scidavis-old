@@ -257,7 +257,7 @@ void Matrix::setNumericFormat(const QChar& f, int prec)
 	if (d_future_matrix->numericFormat() == f && d_future_matrix->displayedDigits() == prec)
 		return;
 
-	d_future_matrix->setNumericFormat(f.toAscii());
+	d_future_matrix->setNumericFormat(f.toLatin1());
 	d_future_matrix->setDisplayedDigits(prec);
 
 	emit modifiedWindow(this);
@@ -265,7 +265,7 @@ void Matrix::setNumericFormat(const QChar& f, int prec)
 
 void Matrix::setTextFormat(const QChar &format, int precision)
 {
-	d_future_matrix->setNumericFormat(format.toAscii());
+	d_future_matrix->setNumericFormat(format.toLatin1());
 	d_future_matrix->setDisplayedDigits(precision);
 }
 

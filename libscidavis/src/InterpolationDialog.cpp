@@ -118,7 +118,7 @@ double from, to;
 try
 	{
 	MyParser parser;
-	parser.SetExpr(boxStart->text().replace(",", ".").toAscii().constData());
+	parser.SetExpr(boxStart->text().replace(",", ".").toUtf8().constData());
 	from = parser.Eval();
 	}
 catch(mu::ParserError &e)
@@ -131,7 +131,7 @@ catch(mu::ParserError &e)
 try
 	{
 	MyParser parser;
-	parser.SetExpr(boxEnd->text().replace(",", ".").toAscii().constData());
+	parser.SetExpr(boxEnd->text().replace(",", ".").toUtf8().constData());
 	to = parser.Eval();
 	}
 catch(mu::ParserError &e)
