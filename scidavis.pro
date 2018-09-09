@@ -6,7 +6,7 @@
 #################################################
 
 # enable C++11 support
-greaterThan(QT_MAJOR_VERSION, 4){
+greaterThan(QT_MAJOR_VERSION, 3){
   CONFIG += c++11
 } else {
   QMAKE_CXXFLAGS += -std=c++0x
