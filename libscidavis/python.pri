@@ -22,7 +22,7 @@
   }
 
   unix {
-    INCLUDEPATH += $$system($$PYTHONBIN-config --includes|sed -e 's/-I//')
+    INCLUDEPATH += $$system($$PYTHONBIN-config --includes|sed -e 's/-I//g')
     osx_dist {
       DEFINES += PYTHONHOME=/Applications/scidavis.app/Contents/Resources
     } 
