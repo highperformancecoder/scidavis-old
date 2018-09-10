@@ -55,14 +55,15 @@ def import_to_global(modname, attrs=None, math=False):
 import_to_global("math", None, True)
 
 # make Qt API available (it gets imported in any case by the scidavis module)
-global QtGui
-from PyQt4 import QtGui
-
-global QtCore
-from PyQt4 import QtCore
-
-global Qt
-from PyQt4.QtCore import Qt
+global QtGui, QtCore, Qt
+if (scidavis.app.qtVersion() >= 0x050000):
+	global QtWidgets
+	from PyQt5 import QtGui, QtWidgets, QtCore
+	from PyQt5.QtCore import Qt
+else:
+	from PyQt4 import QtGui, QtCore
+	from PyQt4.QtCore import Qt
+print("Using Qt", QtCore.QT_VERSION_STR)
 
 # import SciDAVis' classes to the global namespace (particularly useful for fits)
 for name in dir(__main__.scidavis):
