@@ -47,10 +47,16 @@ ColorMapEditor::ColorMapEditor(QWidget* parent)
 table = new QTableWidget();
 table->setColumnCount(2);
 table->setSelectionMode(QAbstractItemView::SingleSelection);
-table->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 table->verticalHeader()->hide();		
+#if QT_VERSION >= 0x050000
+table->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+table->horizontalHeader()->setSectionsClickable( false );
+table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+#else
+table->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 table->horizontalHeader()->setClickable( false );
 table->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+#endif
 table->viewport()->setMouseTracking(true);
 table->viewport()->installEventFilter(this);
 table->setHorizontalHeaderLabels(QStringList() << tr("Level") << tr("Color"));

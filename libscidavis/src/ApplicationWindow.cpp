@@ -241,12 +241,17 @@ ApplicationWindow::ApplicationWindow()
 	folders->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	folders->setContextMenuPolicy(Qt::CustomContextMenu);
 
-	folders->header()->setClickable( false );
 	folders->setHeaderLabels(QStringList() << tr("Folder") << QString() );
 	folders->setRootIsDecorated( true );
 	folders->setColumnWidth(1,0); // helps autoScroll
 	folders->hideColumn(1); // helps autoScroll
+#if QT_VERSION >= 0x050000
+	folders->header()->setSectionsClickable( false );
+	folders->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
+	folders->header()->setClickable( false );
 	folders->header()->setResizeMode(QHeaderView::ResizeToContents);
+#endif
 	folders->header()->hide();
 	folders->setSelectionMode(QTreeWidget::SingleSelection);
 

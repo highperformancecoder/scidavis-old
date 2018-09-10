@@ -114,13 +114,21 @@ void FitDialog::initFitPage()
 
 	boxParams = new QTableWidget();
     boxParams->setColumnCount(3);
+#if QT_VERSION >= 0x050000
+    boxParams->horizontalHeader()->setSectionsClickable(false);
+    boxParams->horizontalHeader()->setSectionResizeMode (0, QHeaderView::ResizeToContents);
+    boxParams->horizontalHeader()->setSectionResizeMode (1, QHeaderView::Stretch);
+    boxParams->horizontalHeader()->setSectionResizeMode (2, QHeaderView::ResizeToContents);
+    boxParams->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
     boxParams->horizontalHeader()->setClickable(false);
     boxParams->horizontalHeader()->setResizeMode (0, QHeaderView::ResizeToContents);
     boxParams->horizontalHeader()->setResizeMode (1, QHeaderView::Stretch);
     boxParams->horizontalHeader()->setResizeMode (2, QHeaderView::ResizeToContents);
+    boxParams->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+#endif
     QStringList header = QStringList() << tr("Parameter") << tr("Value") << tr("Constant");
     boxParams->setHorizontalHeaderLabels(header);
-    boxParams->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
     boxParams->verticalHeader()->hide();
     gl1->addWidget(boxParams, 3, 1);
 
