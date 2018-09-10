@@ -19,6 +19,7 @@ POST_TARGETDEPS=../libscidavis/libscidavis.a
 
 CONFIG        += qt warn_on exceptions opengl thread zlib
 QT            += opengl network svg xml
+equals(QT_MAJOR_VERSION, 5) { QT += printsupport }
 MOC_DIR        = ../tmp/scidavis
 OBJECTS_DIR    = ../tmp/test
 

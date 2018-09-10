@@ -1399,7 +1399,16 @@ void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspe
 
     printer.setOutputFileName(fileName);
     if (fileName.contains(".eps"))
-    	printer.setOutputFormat(QPrinter::PostScriptFormat);
+    {
+#if QT_VERSION >= 0x050000
+        QMessageBox::warning(this, tr("Warning"),
+            tr("Output in postscript format is not available for Qt5, using PDF"));
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setOutputFileName(fileName+".pdf");
+#else
+        printer.setOutputFormat(QPrinter::PostScriptFormat);
+#endif
+	}
 
     if (color)
 		printer.setColorMode(QPrinter::Color);
