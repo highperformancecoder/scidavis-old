@@ -1576,14 +1576,14 @@ void ApplicationWindow::setListViewLabel(const QString& caption,const QString& l
 {
 	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).value(0);
 	if (it)
-		it->setText(5,label);
+		it->setText(4,label);
 }
 
 void ApplicationWindow::setListViewDate(const QString& caption,const QString& date)
 {
 	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).value(0);
 	if (it)
-		it->setText(4,date);
+		it->setText(3,date);
 }
 
 void ApplicationWindow::setListView(const QString& caption,const QString& view)
