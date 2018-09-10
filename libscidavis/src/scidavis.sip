@@ -35,6 +35,11 @@
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 
+%If (Qt_5_0_0 -)
+%Import QtWidgets/QtWidgetsmod.sip
+%Import QtPrintSupport/QtPrintSupportmod.sip
+%End
+
 %ModuleHeaderCode
 #if PY_MAJOR_VERSION >= 3
 #define PYUNICODE_AsUTF8     PyUnicode_AsUTF8
