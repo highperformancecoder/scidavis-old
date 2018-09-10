@@ -155,6 +155,7 @@
 #include <QDebug>
 #include <QTextCodec>
 #include <QScrollBar>
+#include <QMimeData>
 
 #include <zlib.h>
 

@@ -38,6 +38,10 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtDebug>
+#include <QMenu>
+#include <QInputDialog>
+#include <QFileDialog>
+#include <QProgressDialog>
 
 #include <stdlib.h>
 #include <math.h>

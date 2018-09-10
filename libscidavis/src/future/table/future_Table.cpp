@@ -51,6 +51,7 @@
 #include <QClipboard>
 #include <QToolBar>
 #include <QtDebug>
+#include <QMimeData>
 
 #include "table/TableModel.h"
 #include "table/TableView.h"
