@@ -114,13 +114,21 @@ void FitDialog::initFitPage()
 
 	boxParams = new QTableWidget();
     boxParams->setColumnCount(3);
+#if QT_VERSION >= 0x050000
+    boxParams->horizontalHeader()->setSectionsClickable(false);
+    boxParams->horizontalHeader()->setSectionResizeMode (0, QHeaderView::ResizeToContents);
+    boxParams->horizontalHeader()->setSectionResizeMode (1, QHeaderView::Stretch);
+    boxParams->horizontalHeader()->setSectionResizeMode (2, QHeaderView::ResizeToContents);
+    boxParams->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
     boxParams->horizontalHeader()->setClickable(false);
     boxParams->horizontalHeader()->setResizeMode (0, QHeaderView::ResizeToContents);
     boxParams->horizontalHeader()->setResizeMode (1, QHeaderView::Stretch);
     boxParams->horizontalHeader()->setResizeMode (2, QHeaderView::ResizeToContents);
+    boxParams->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+#endif
     QStringList header = QStringList() << tr("Parameter") << tr("Value") << tr("Constant");
     boxParams->setHorizontalHeaderLabels(header);
-    boxParams->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
     boxParams->verticalHeader()->hide();
     gl1->addWidget(boxParams, 3, 1);
 
@@ -1046,7 +1054,7 @@ void FitDialog::accept()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(CONFS(from).toAscii().constData());
+		parser.SetExpr(CONFS(from).toUtf8().constData());
 		start=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -1059,7 +1067,7 @@ void FitDialog::accept()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(CONFS(to).toAscii().constData());
+		parser.SetExpr(CONFS(to).toUtf8().constData());
 		end=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -1080,7 +1088,7 @@ void FitDialog::accept()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(CONFS(tolerance).toAscii().constData());
+		parser.SetExpr(CONFS(tolerance).toUtf8().constData());
 		eps=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -1298,7 +1306,7 @@ bool FitDialog::validInitialValues()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr(CONFS(boxParams->item(i,1)->text()).toAscii().constData());
+			parser.SetExpr(CONFS(boxParams->item(i,1)->text()).toUtf8().constData());
 			parser.Eval();
 		}
 		catch (mu::ParserError &e)

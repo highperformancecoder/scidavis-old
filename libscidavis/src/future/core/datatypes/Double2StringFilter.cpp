@@ -51,7 +51,7 @@ bool Double2StringFilter::load(XmlStreamReader * reader)
 			reader->raiseError(tr("missing or invalid format attribute(s)"));
 		else
 		{
-			setNumericFormat( format_str.at(0).toAscii() );
+			setNumericFormat( format_str.at(0).toLatin1() );
 			setNumDigits( digits );
 		}
 	}

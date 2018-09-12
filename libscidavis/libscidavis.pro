@@ -1,14 +1,12 @@
 # enable C++11 support
-greaterThan(QT_MAJOR_VERSION, 4){
-  CONFIG += c++11
-} else {
-  QMAKE_CXXFLAGS += -std=c++0x
-}
+equals(QT_MAJOR_VERSION, 5) { CONFIG += c++11 }
+equals(QT_MAJOR_VERSION, 4) { QMAKE_CXXFLAGS += -std=c++11 }
+equals(QT_MAJOR_VERSION, 3) { QMAKE_CXXFLAGS += -std=c++0x }
 
 TEMPLATE=lib
 CONFIG+=staticlib uic
 TARGET=scidavis
-QMAKE_CLEAN+=${TARGET}
+QMAKE_CLEAN += $$TARGET
 
 include(../config.pri)
 
@@ -31,7 +29,9 @@ DEFINES       += MANUAL_PATH="\\\"$$replace(manual.path," ","\\ ")\\\""
 !mxe {
      win32:DEFINES += QT_DLL QT_THREAD_SUPPORT
 }
+
 QT            += opengl network svg xml
+equals(QT_MAJOR_VERSION, 5) { QT += printsupport }
 
 MOC_DIR        = ../tmp/scidavis
 OBJECTS_DIR    = ../tmp/libscidavis

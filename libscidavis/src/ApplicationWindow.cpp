@@ -155,6 +155,7 @@
 #include <QDebug>
 #include <QTextCodec>
 #include <QScrollBar>
+#include <QMimeData>
 
 #include <zlib.h>
 
@@ -240,12 +241,17 @@ ApplicationWindow::ApplicationWindow()
 	folders->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	folders->setContextMenuPolicy(Qt::CustomContextMenu);
 
-	folders->header()->setClickable( false );
 	folders->setHeaderLabels(QStringList() << tr("Folder") << QString() );
 	folders->setRootIsDecorated( true );
 	folders->setColumnWidth(1,0); // helps autoScroll
 	folders->hideColumn(1); // helps autoScroll
+#if QT_VERSION >= 0x050000
+	folders->header()->setSectionsClickable( false );
+	folders->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
+	folders->header()->setClickable( false );
 	folders->header()->setResizeMode(QHeaderView::ResizeToContents);
+#endif
 	folders->header()->hide();
 	folders->setSelectionMode(QTreeWidget::SingleSelection);
 
@@ -1576,14 +1582,14 @@ void ApplicationWindow::setListViewLabel(const QString& caption,const QString& l
 {
 	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).value(0);
 	if (it)
-		it->setText(5,label);
+		it->setText(4,label);
 }
 
 void ApplicationWindow::setListViewDate(const QString& caption,const QString& date)
 {
 	QTreeWidgetItem *it=lv->findItems ( caption, Qt::MatchExactly | Qt::MatchCaseSensitive ).value(0);
 	if (it)
-		it->setText(4,date);
+		it->setText(3,date);
 }
 
 void ApplicationWindow::setListView(const QString& caption,const QString& view)
@@ -4212,7 +4218,7 @@ void ApplicationWindow::readSettings()
 	QLocale::setDefault(temp_locale);
 
 	d_decimal_digits = settings.value("/DecimalDigits", 6).toInt();
-	d_default_numeric_format = settings.value("/DefaultNumericFormat", 'g').toChar().toAscii();
+	d_default_numeric_format = settings.value("/DefaultNumericFormat", 'g').toChar().toLatin1();
 
 	//restore geometry of main window
 	restoreGeometry(settings.value("/ProjectWindow/Geometry").toByteArray());

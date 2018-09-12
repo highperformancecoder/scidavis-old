@@ -38,6 +38,10 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtDebug>
+#include <QMenu>
+#include <QInputDialog>
+#include <QFileDialog>
+#include <QProgressDialog>
 
 #include <stdlib.h>
 #include <math.h>
@@ -1237,7 +1241,7 @@ bool Matrix::readDisplayElement(XmlStreamReader * reader)
 		reader->raiseError(tr("invalid or missing numeric format"));
 		return false;
 	}
-	setNumericFormat(str.at(0).toAscii());
+	setNumericFormat(str.at(0).toLatin1());
 	
 	bool ok;
 	int digits = reader->readAttributeInt("displayed_digits", &ok);

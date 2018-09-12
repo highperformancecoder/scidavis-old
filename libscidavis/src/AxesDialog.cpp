@@ -1207,7 +1207,7 @@ bool AxesDialog::updatePlot()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr(from.toAscii().constData());
+			parser.SetExpr(from.toUtf8().constData());
 			start=parser.Eval();
 		}
 		catch(mu::ParserError &e)
@@ -1219,7 +1219,7 @@ bool AxesDialog::updatePlot()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr(to.toAscii().constData());
+			parser.SetExpr(to.toUtf8().constData());
 			end=parser.Eval();
 		}
 		catch(mu::ParserError &e)
@@ -1233,7 +1233,7 @@ bool AxesDialog::updatePlot()
 			try
 			{
 				MyParser parser;
-				parser.SetExpr(step.toAscii().constData());
+				parser.SetExpr(step.toUtf8().constData());
 				stp=parser.Eval();
 			}
 			catch(mu::ParserError &e)
@@ -1333,7 +1333,7 @@ bool AxesDialog::updatePlot()
 						parser.DefineVar("x", &value);
 					else if (formula.contains("y"))
 						parser.DefineVar("y", &value);
-					parser.SetExpr(formula.toAscii().constData());
+					parser.SetExpr(formula.toUtf8().constData());
 					parser.Eval();
 				}
 				catch(mu::ParserError &e)

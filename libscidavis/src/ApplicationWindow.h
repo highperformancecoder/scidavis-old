@@ -461,6 +461,7 @@ public slots:
   static void about();
   //! Return a version string ("SciDAVis x.y.z")
   static QString versionString();
+  static int qtVersion() {return QT_VERSION;}
   void windowsMenuAboutToShow();
   void windowsMenuActivated( bool );
   void removeCurves(const QString& name);

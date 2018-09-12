@@ -3,11 +3,9 @@
 ######################################################################
 
 # enable C++11 support
-greaterThan(QT_MAJOR_VERSION, 4){
-  CONFIG += c++11
-} else {
-  QMAKE_CXXFLAGS += -std=c++0x
-}
+equals(QT_MAJOR_VERSION, 5) { CONFIG += c++11 }
+equals(QT_MAJOR_VERSION, 4) { QMAKE_CXXFLAGS += -std=c++11 }
+equals(QT_MAJOR_VERSION, 3) { QMAKE_CXXFLAGS += -std=c++0x }
 
 TEMPLATE = app
 TARGET = unittests
@@ -19,6 +17,7 @@ POST_TARGETDEPS=../libscidavis/libscidavis.a
 
 CONFIG        += qt warn_on exceptions opengl thread zlib
 QT            += opengl network svg xml
+equals(QT_MAJOR_VERSION, 5) { QT += printsupport }
 MOC_DIR        = ../tmp/scidavis
 OBJECTS_DIR    = ../tmp/test
 

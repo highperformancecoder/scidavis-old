@@ -22,18 +22,18 @@
   }
 
   unix {
-    INCLUDEPATH += $$system($$PYTHONBIN-config --includes|sed -e 's/-I//')
+    INCLUDEPATH += $$system($$PYTHONBIN-config --includes|sed -e 's/-I//g')
     osx_dist {
       DEFINES += PYTHONHOME=/Applications/scidavis.app/Contents/Resources
     } 
     system(mkdir -p $${SIP_DIR})
-    system($$system($$PYTHONBIN python-sipcmd.py) $$system($$PYTHONBIN-config --includes) -c $${SIP_DIR}  src/scidavis.sip)
+    system($$system($$PYTHONBIN python-sipcmd.py PyQt$$QT_MAJOR_VERSION) $$system($$PYTHONBIN-config --includes) -c $${SIP_DIR}  src/scidavis.sip)
   }
 
   win32 {
   mxe {
      DEFINES += SIP_STATIC_MODULE
-    system($$system($$PYTHONBIN python-sipcmd.py) -c $${SIP_DIR} src/scidavis.sip)
+    system($$system($$PYTHONBIN python-sipcmd.py PyQt$$QT_MAJOR_VERSION) -c $${SIP_DIR} src/scidavis.sip)
   } else {
     INCLUDEPATH += $$system(call ../python-includepath.py)
     # TODO: fix the command below (only really necessary if SIP_DIR != MOC/OBJECTS_DIR)

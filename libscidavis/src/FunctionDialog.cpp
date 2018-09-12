@@ -270,7 +270,7 @@ bool FunctionDialog::acceptFunction()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(from.toAscii().constData());
+		parser.SetExpr(from.toUtf8().constData());
 		start=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -282,7 +282,7 @@ bool FunctionDialog::acceptFunction()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(to.toAscii().constData());
+		parser.SetExpr(to.toUtf8().constData());
 		end=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -335,7 +335,7 @@ bool FunctionDialog::acceptParametric()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(from.toAscii().constData());
+		parser.SetExpr(from.toUtf8().constData());
 		start=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -348,7 +348,7 @@ bool FunctionDialog::acceptParametric()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(to.toAscii().constData());
+		parser.SetExpr(to.toUtf8().constData());
 		end=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -403,7 +403,7 @@ bool FunctionDialog::acceptPolar()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(from.toAscii().constData());
+		parser.SetExpr(from.toUtf8().constData());
 		start=parser.Eval();
 	}
 	catch(mu::ParserError &e)
@@ -416,7 +416,7 @@ bool FunctionDialog::acceptPolar()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(to.toAscii().constData());
+		parser.SetExpr(to.toUtf8().constData());
 		end=parser.Eval();
 	}
 	catch(mu::ParserError &e)

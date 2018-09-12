@@ -61,10 +61,17 @@ AssociationsDialog::AssociationsDialog( QWidget* parent, Qt::WindowFlags fl )
     vl->addLayout(hbox1);
 
 	table = new QTableWidget(3, 5);
+	table->verticalHeader()->hide();
+#if QT_VERSION >= 0x050000
+	table->horizontalHeader()->setSectionsClickable( false );
+	table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	table->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
 	table->horizontalHeader()->setClickable( false );
 	table->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
-	table->verticalHeader()->hide();
 	table->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+#endif
+
 	table->setMaximumHeight(8*table->rowHeight(0));
 	table->setHorizontalHeaderLabels(QStringList() << tr("Column") << tr("X") << tr("Y") << tr("xErr") << tr("yErr"));
     vl->addWidget(table);

@@ -34,6 +34,9 @@ try:
 except IndexError:
     pyqt = 'PyQt4'
 
+if (pyqt not in ['PyQt4','PyQt5']):
+    pyqt = 'PyQt4'
+
 try:
     exec("from "+pyqt+".QtCore import PYQT_CONFIGURATION")
 except ImportError:

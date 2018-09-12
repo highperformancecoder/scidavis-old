@@ -400,7 +400,7 @@ Column *MuParserScript::resolveColumnPath(const QString &path) {
 	QStringList pathComponents;
 	QString current;
 	for (int i=0; i<path.size(); ++i)
-		switch(path.at(i).toAscii()) {
+		switch(path.at(i).toLatin1()) {
 			case '/':
 				pathComponents << current;
 				current.clear();
@@ -502,7 +502,7 @@ bool MuParserScript::translateLegacyFunctions(QString &input) {
 		for (int i = functionStart+legacyFunction.matchedLength(), parenthesisLevel = 1;
 				parenthesisLevel > 0 && i < input.size();
 				i++) {
-			switch (input.at(i).toAscii()) {
+			switch (input.at(i).toLatin1()) {
 				case '"':
 					currentArgument += '"';
 					for (i++; i < input.size() && input.at(i) != QChar('"'); i++)
@@ -651,7 +651,7 @@ bool MuParserScript::compile(bool asFunction) {
 	bool inString = false;
 	int commentStart = -1;
 	for (int i=0; i<intermediate.size(); i++)
-		switch (intermediate.at(i).toAscii()) {
+		switch (intermediate.at(i).toLatin1()) {
 			case '"':
 				if (commentStart < 0) inString = !inString;
 				break;

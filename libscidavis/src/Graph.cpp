@@ -389,12 +389,12 @@ void Graph::setLabelsNumericFormat(int axis, int format, int prec, const QString
 	const QwtScaleDiv div = sd_old->scaleDiv ();
 
 	if (format == Plot::Superscripts){
-		QwtSupersciptsScaleDraw *sd = new QwtSupersciptsScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), formula.toAscii().constData());
+		QwtSupersciptsScaleDraw *sd = new QwtSupersciptsScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), formula.toUtf8().constData());
 		sd->setLabelFormat('s', prec);
 		sd->setScaleDiv(div);
 		d_plot->setAxisScaleDraw (axis, sd);
 	} else {
-		ScaleDraw *sd = new ScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), formula.toAscii().constData());
+		ScaleDraw *sd = new ScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), formula.toUtf8().constData());
 		sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 		sd->setScaleDiv(div);
 
@@ -1399,7 +1399,16 @@ void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspe
 
     printer.setOutputFileName(fileName);
     if (fileName.contains(".eps"))
-    	printer.setOutputFormat(QPrinter::PostScriptFormat);
+    {
+#if QT_VERSION >= 0x050000
+        QMessageBox::warning(this, tr("Warning"),
+            tr("Output in postscript format is not available for Qt5, using PDF"));
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setOutputFileName(fileName+".pdf");
+#else
+        printer.setOutputFormat(QPrinter::PostScriptFormat);
+#endif
+	}
 
     if (color)
 		printer.setColorMode(QPrinter::Color);

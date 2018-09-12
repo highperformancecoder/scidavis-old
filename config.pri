@@ -281,9 +281,19 @@ contains(PRESET, linux_package) {
 	### Mixing Qt 4.2 and Qt >= 4.3 compiled stuff may also 
 	### cause problems.
 
-	exists(/usr/include/qwt5) {INCLUDEPATH+=/usr/include/qwt5} 
+    equals(QT_MAJOR_VERSION, 5) {
+        exists(/usr/include/qwt5-qt5) {INCLUDEPATH+=/usr/include/qwt5-qt5}
+
+        system (ls /usr/lib*/libqwt5-qt5.so) {
+            LIBS+=-lqwt5-qt5
+        }
+        system (ls /usr/lib*/libqwtplot3d-qt5.so) {
+         LIBS+=-lqwtplot3d-qt5
+        }
+    } else {
+        exists(/usr/include/qwt5) {INCLUDEPATH+=/usr/include/qwt5}
         exists (/usr/include/qwt-qt4) {INCLUDEPATH+=/usr/include/qwt-qt4}
-	exists(/usr/include/qwt5-qt4) {INCLUDEPATH+=/usr/include/qwt5-qt4}
+        exists(/usr/include/qwt5-qt4) {INCLUDEPATH+=/usr/include/qwt5-qt4}
 
         system (ls /usr/lib*/libqwt5.so) {
            LIBS+=-lqwt5
@@ -302,6 +312,7 @@ contains(PRESET, linux_package) {
         } else {
          LIBS+=-lqwtplot3d
         }
+    }
 
         INCLUDEPATH = "$(HOME)/usr/include" $$INCLUDEPATH
         QMAKE_LIBDIR = "$(HOME)/usr/lib" $$QMAKE_LIBDIR

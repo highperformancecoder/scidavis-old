@@ -114,7 +114,11 @@ void TableView::init()
 	d_main_layout->addWidget(d_view_widget);
 	
 	d_horizontal_header = new TableDoubleHeaderView();
+#if QT_VERSION >= 0x050000
+    d_horizontal_header->setSectionsClickable(true);
+#else
     d_horizontal_header->setClickable(true);
+#endif
     d_horizontal_header->setHighlightSections(true);
 	d_view_widget->setHorizontalHeader(d_horizontal_header);
 
@@ -146,10 +150,17 @@ void TableView::init()
 	d_view_widget->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
 	QHeaderView * v_header = d_view_widget->verticalHeader();
+#if QT_VERSION >= 0x050000
+	v_header->setSectionResizeMode(QHeaderView::Interactive);
+	v_header->setSectionsMovable(false);
+	d_horizontal_header->setSectionResizeMode(QHeaderView::Interactive);
+	d_horizontal_header->setSectionsMovable(true);
+#else
 	v_header->setResizeMode(QHeaderView::Interactive);
 	v_header->setMovable(false);
 	d_horizontal_header->setResizeMode(QHeaderView::Interactive);
 	d_horizontal_header->setMovable(true);
+#endif
 	connect(d_horizontal_header, SIGNAL(sectionMoved(int,int,int)), this, SLOT(handleHorizontalSectionMoved(int,int,int)));
 	connect(d_horizontal_header, SIGNAL(sectionDoubleClicked(int)), this, SLOT(handleHorizontalHeaderDoubleClicked(int)));
 	

@@ -134,10 +134,17 @@ void MatrixView::init()
 
 	QHeaderView * h_header = d_view_widget->horizontalHeader();
 	QHeaderView * v_header = d_view_widget->verticalHeader();
+#if QT_VERSION >= 0x050000
+	v_header->setSectionResizeMode(QHeaderView::Interactive);
+	h_header->setSectionResizeMode(QHeaderView::Interactive);
+	v_header->setSectionsMovable(false);
+	h_header->setSectionsMovable(false);
+#else
 	v_header->setResizeMode(QHeaderView::Interactive);
 	h_header->setResizeMode(QHeaderView::Interactive);
 	v_header->setMovable(false);
 	h_header->setMovable(false);
+#endif
 	v_header->setDefaultSectionSize(future::Matrix::defaultRowHeight());
 	h_header->setDefaultSectionSize(future::Matrix::defaultColumnWidth());
 

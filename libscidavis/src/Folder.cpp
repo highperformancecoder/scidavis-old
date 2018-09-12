@@ -38,7 +38,6 @@
 #include <qevent.h>
 #include <qpoint.h>
 #include <qmessagebox.h>
-#include <qmime.h>
 #include <qstringlist.h>
 #include <qapplication.h>
 #include <qcursor.h>
@@ -46,6 +45,7 @@
 #include <QKeyEvent>
 #include <QDropEvent>
 #include <QMouseEvent>
+#include <QDrag>
 
 Folder::Folder( Folder *parent, const QString &name )
 	: QObject(parent), d_active_window(0)

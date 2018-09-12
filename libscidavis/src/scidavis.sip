@@ -35,6 +35,11 @@
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 
+%If (Qt_5_0_0 -)
+%Import QtWidgets/QtWidgetsmod.sip
+%Import QtPrintSupport/QtPrintSupportmod.sip
+%End
+
 %ModuleHeaderCode
 #if PY_MAJOR_VERSION >= 3
 #define PYUNICODE_AsUTF8     PyUnicode_AsUTF8
@@ -316,7 +321,7 @@ class Table: MyWidget
 			if (col < 0) {\
 				sipIsErr = 1;\
 				PyErr_Format(PyExc_ValueError, "There's no column named %s in table %s!", PYUNICODE_AsUTF8(tmp),\
-						sipCpp->name().toAscii().constData());\
+						sipCpp->name().toUtf8().constData());\
 				Py_DECREF(tmp);\
 			}\
 		}\

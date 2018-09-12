@@ -101,7 +101,7 @@ bool FunctionCurve::loadData(int points)
 				double x;
 				for (i=0, x=d_from; i<points; i++, x+=step) {
 					X[i] = x;
-					script->setDouble(x, d_variable.toAscii().constData());
+					script->setDouble(x, d_variable.toUtf8().constData());
 					QVariant result = script->eval();
 					if (result.type() != QVariant::Double) {
 						delete[] X;
@@ -120,8 +120,8 @@ bool FunctionCurve::loadData(int points)
 				int i;
 				double par;
 				for (i=0, par=d_from; i<points; i++, par+=step) {
-					script_x->setDouble(par, d_variable.toAscii().constData());
-					script_y->setDouble(par, d_variable.toAscii().constData());
+					script_x->setDouble(par, d_variable.toUtf8().constData());
+					script_y->setDouble(par, d_variable.toUtf8().constData());
 					QVariant result_x = script_x->eval();
 					QVariant result_y = script_y->eval();
 					if (result_x.type() != QVariant::Double || result_y.type() != QVariant::Double) {

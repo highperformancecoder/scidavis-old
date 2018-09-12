@@ -127,7 +127,7 @@ else
 	try
 		{
 		MyParser parser;
-		parser.SetExpr((boxStart->text()).toAscii().constData());
+		parser.SetExpr((boxStart->text()).toUtf8().constData());
 		start=parser.Eval();
 
 		if(start<minx)
@@ -173,7 +173,7 @@ else
 	try
 		{
 		MyParser parser;
-		parser.SetExpr((boxEnd->text()).toAscii().constData());
+		parser.SetExpr((boxEnd->text()).toUtf8().constData());
 		stop = parser.Eval();
 		if(stop > maxx)
 			{
