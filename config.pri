@@ -282,7 +282,8 @@ contains(PRESET, linux_package) {
 	### cause problems.
 
     equals(QT_MAJOR_VERSION, 5) {
-        exists(/usr/include/qwt5-qt5) {INCLUDEPATH+=/usr/include/qwt5-qt5}
+        exists(/usr/include/qt5/qwt5-qt5)      {INCLUDEPATH+=/usr/include/qt5/qwt5-qt5}
+        exists(/usr/include/qt5/qwtplot3d-qt5) {INCLUDEPATH+=/usr/include/qt5/qwtplot3d-qt5}
 
         system (ls /usr/lib*/libqwt5-qt5.so) {
             LIBS+=-lqwt5-qt5
@@ -294,6 +295,7 @@ contains(PRESET, linux_package) {
         exists(/usr/include/qwt5) {INCLUDEPATH+=/usr/include/qwt5}
         exists (/usr/include/qwt-qt4) {INCLUDEPATH+=/usr/include/qwt-qt4}
         exists(/usr/include/qwt5-qt4) {INCLUDEPATH+=/usr/include/qwt5-qt4}
+        INCLUDEPATH  += /usr/include/qwtplot3d
 
         system (ls /usr/lib*/libqwt5.so) {
            LIBS+=-lqwt5
@@ -317,7 +319,6 @@ contains(PRESET, linux_package) {
         INCLUDEPATH = "$(HOME)/usr/include" $$INCLUDEPATH
         QMAKE_LIBDIR = "$(HOME)/usr/lib" $$QMAKE_LIBDIR
 
-	INCLUDEPATH  += /usr/include/qwtplot3d
 
 	LIBS         += -lz -lGLU 
 
