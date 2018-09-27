@@ -2093,9 +2093,9 @@ void ApplicationWindow::customPlot3D(Graph3D *plot)
 
 void ApplicationWindow::initPlot3D(Graph3D *plot)
 {
+	d_workspace->addSubWindow(plot);
 	current_folder->addWindow(plot);
 	plot->setFolder(current_folder);
-	d_workspace->addSubWindow(plot);
 	connectSurfacePlot(plot);
 
 	plot->setWindowIcon(QPixmap(":/trajectory.xpm"));
@@ -2225,14 +2225,14 @@ MultiLayer* ApplicationWindow::multilayerPlot(Table* w, const QStringList& colLi
 	MultiLayer* g = new MultiLayer("", d_workspace, 0);
 	g->setAttribute(Qt::WA_DeleteOnClose);
 
+	initMultilayerPlot(g, generateUniqueName(tr("Graph")));
+
 	Graph *ag = g->addLayer();
 	if (!ag)
 		return 0;
 
 	setPreferences(ag);
 	ag->insertCurvesList(w, colList, style, defaultCurveLineWidth, defaultSymbolSize, startRow, endRow);
-
-	initMultilayerPlot(g, generateUniqueName(tr("Graph")));
 
 	polishGraph(ag, style);
 	ag->newLegend();
@@ -2271,7 +2271,9 @@ MultiLayer* ApplicationWindow::multilayerPlot(int c, int r, int style)
 
 	MultiLayer* g = new MultiLayer("", d_workspace, 0);
 	g->setAttribute(Qt::WA_DeleteOnClose);
+
 	initMultilayerPlot(g, generateUniqueName(tr("Graph")));
+
 	int layers = c*r;
 	if (curves<layers)
 	{
@@ -2328,6 +2330,9 @@ MultiLayer* ApplicationWindow::multilayerPlot(const QStringList& colList)
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 	MultiLayer* g = new MultiLayer("", d_workspace, 0);
 	g->setAttribute(Qt::WA_DeleteOnClose);
+
+	initMultilayerPlot(g, generateUniqueName(tr("Graph")));
+
 	Graph *ag = g->addLayer();
 	setPreferences(ag);
 	polishGraph(ag, defaultCurveStyle);
@@ -2382,7 +2387,6 @@ MultiLayer* ApplicationWindow::multilayerPlot(const QStringList& colList)
 	}
 	ag->newLegend();
 	ag->updatePlot();
-    initMultilayerPlot(g, generateUniqueName(tr("Graph")));
     g->arrangeLayers(true, false);
 	customMenu(g);
 	emit modified();
@@ -2396,10 +2400,6 @@ void ApplicationWindow::initBareMultilayerPlot(MultiLayer* g, const QString& nam
 	while(alreadyUsedName(label))
 		label = generateUniqueName(tr("Graph"));
 
-	current_folder->addWindow(g);
-	g->setFolder(current_folder);
-
-	d_workspace->addSubWindow(g);
 	connectMultilayerPlot(g);
 
 	g->setWindowTitle(label);
@@ -2408,6 +2408,9 @@ void ApplicationWindow::initBareMultilayerPlot(MultiLayer* g, const QString& nam
 	g->setScaleLayersOnPrint(d_scale_plots_on_print);
 	g->printCropmarks(d_print_cropmarks);
 
+	d_workspace->addSubWindow(g);
+	current_folder->addWindow(g);
+	g->setFolder(current_folder);
 	addListViewItem(g);
 }
 
@@ -2570,10 +2573,10 @@ Table* ApplicationWindow::newHiddenTable(const QString& name, const QString& lab
 
 void ApplicationWindow::initTable(Table* w)
 {
+	d_workspace->addSubWindow(w);
 	w->setWindowIcon( QPixmap(":/worksheet.xpm") );
 	current_folder->addWindow(w);
 	w->setFolder(current_folder);
-	d_workspace->addSubWindow(w);
 	addListViewItem(w);
 	w->showNormal();
 
@@ -2639,6 +2642,7 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 	while(name.isEmpty() || alreadyUsedName(name))
 		name = generateUniqueName(tr("Notes"));
 
+	d_workspace->addSubWindow(m);
 	m->setWindowTitle(name);
 	m->setName(name);
 	m->setWindowIcon( QPixmap(":/note.xpm") );
@@ -2646,7 +2650,6 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 	m->setFolder(current_folder);
 
 	current_folder->addWindow(m);
-	d_workspace->addSubWindow(m);
 	addListViewItem(m);
 
 	connect(m, SIGNAL(modifiedWindow(MyWidget*)), this, SLOT(modifiedProject(MyWidget*)));
@@ -2739,6 +2742,7 @@ Table* ApplicationWindow::convertMatrixToTable()
 
 void ApplicationWindow::initMatrix(Matrix* m)
 {
+	d_workspace->addSubWindow(m);
 	m->setWindowIcon( QPixmap(":/matrix.xpm") );
 	m->askOnCloseEvent(confirmCloseMatrix);
 	m->setNumericFormat(d_default_numeric_format, d_decimal_digits);
@@ -2746,7 +2750,6 @@ void ApplicationWindow::initMatrix(Matrix* m)
 	
 	current_folder->addWindow(m);
 	m->setFolder(current_folder);
-	d_workspace->addSubWindow(m);
 	addListViewItem(m);
 	m->showNormal();
 

@@ -226,7 +226,7 @@ protected:
     void mousePressEvent( QMouseEvent *e );
 	void mouseDoubleClickEvent( QMouseEvent* e );
 	void keyPressEvent ( QKeyEvent * e );
-    void mouseReleaseEvent( QMouseEvent * e);
+    void mouseReleaseEvent( QMouseEvent *){mousePressed = false;};
 	void enterEvent(QEvent *){mousePressed = false;};
 
 signals:
