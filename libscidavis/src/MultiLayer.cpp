@@ -90,12 +90,6 @@ MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name
 	if ( name.isEmpty() )
 		setObjectName( "multilayer plot" );
 
-	QPalette pal = palette();
-	pal.setColor(QPalette::Active, QPalette::Window, QColor(Qt::white));
-	pal.setColor(QPalette::Inactive, QPalette::Window, QColor(Qt::white));
-	pal.setColor(QPalette::Disabled, QPalette::Window, QColor(Qt::white));
-	setPalette(pal);
-        
 	QDateTime dt = QDateTime::currentDateTime ();
 	setBirthDate(dt.toString(Qt::LocalDate));
 
@@ -128,6 +122,13 @@ MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name
 	layout->setMargin(0);
 	layout->setSpacing(0);
 	this->setWidget(d_main_widget);
+
+	d_main_widget->setAutoFillBackground(true);
+	d_main_widget->setBackgroundRole(QPalette::Window);
+	QPalette pal = palette();
+	pal.setColor(QPalette::Window, QColor(Qt::white));
+	d_main_widget->setPalette(pal);
+
 	setMinimumHeight(50);
     setGeometry(QRect( 0, 0, graph_width, graph_height ));
 	setFocusPolicy(Qt::StrongFocus);
