@@ -126,6 +126,22 @@ QString MyWidget::aspect()
 	return s;
 }
 
+void MyWidget::changeEvent(QEvent *event)
+{
+	if (!isHidden() && event->type() == QEvent::WindowStateChange) {
+		if (((QWindowStateChangeEvent *)event)->oldState() == windowState())
+			return;
+		if( windowState() & Qt::WindowMinimized )
+			w_status = Minimized;
+		else if ( windowState() & Qt::WindowMaximized )
+			w_status = Maximized;
+		else
+			w_status = Normal;
+		emit statusChanged (this);
+	}
+	QMdiSubWindow::changeEvent(event);
+}
+
 void MyWidget::contextMenuEvent(QContextMenuEvent *e)
 {
 	if (!this->widget()->geometry().contains(e->pos())) {

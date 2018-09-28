@@ -154,6 +154,7 @@ protected slots:
 	void updateCaption();
 
 protected:
+	virtual void changeEvent(QEvent *event);
 	//!Pointer to the parent folder of the window
 	Folder *parentFolder;
 	//! The window label
