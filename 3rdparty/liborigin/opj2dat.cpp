@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 
-	cout << "opj2dat " << LIBORIGIN_VERSION_STRING << ", Copyright (C) 2008 Stefan Gerlach, 2017 Miquel Garriga" << endl;
+	cout << "opj2dat " << liboriginVersionString() << ", Copyright (C) 2008 Stefan Gerlach, 2017 Miquel Garriga" << endl;
 
 	if (string(argv[1]) == "-v")
 		return 0;
