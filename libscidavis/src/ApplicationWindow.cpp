@@ -215,7 +215,7 @@ ApplicationWindow::ApplicationWindow()
 
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    //QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
+    QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
 
 	setWindowTitle(tr("SciDAVis - untitled"));
 
