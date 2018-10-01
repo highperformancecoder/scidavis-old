@@ -27,6 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "config.h"
 #include "OriginFile.h"
 #include <fstream>
 #include <string>
@@ -43,9 +44,9 @@ OriginFile::OriginFile(const string& fileName)
 	}
 
 #ifdef GENERATE_CODE_FOR_LOG
-	FILE *logfile = NULL;
+	FILE *logfile = nullptr;
 	logfile = fopen("./opjfile.log", "w");
-	if (logfile == NULL)
+	if (logfile == nullptr)
 	{
 		cerr <<  "Could not open opjfile.log !" << endl;
 		exit(EXIT_FAILURE);
@@ -54,12 +55,10 @@ OriginFile::OriginFile(const string& fileName)
 
 	string vers;
 	getline(file, vers);
-	unsigned int majorVersion = strtol(vers.substr(5,1).c_str(),0,10);
-	char locale_decpoint = vers[6];
-	(void) locale_decpoint; // supress compiler warning
-	buildVersion = strtol(vers.substr(7).c_str(),0,10);
-	unsigned int buildNumber = strtol(vers.substr(12).c_str(),0,10);
-	(void) buildNumber; // supress compiler warning
+	long majorVersion = strtol(vers.substr(5,1).c_str(),nullptr,10);
+	//char locale_decpoint = vers[6];
+	buildVersion = strtol(vers.substr(7).c_str(),nullptr,10);
+	//long buildNumber = strtol(vers.substr(12).c_str(),0,10);
 	file.close();
 
 	LOG_PRINT(logfile, "File: %s\n", fileName.c_str())
@@ -126,14 +125,17 @@ OriginFile::OriginFile(const string& fileName)
 	} else if (buildVersion < 3228) { // 2017.1 (9.4.1.354), 2017.2 (9.4.2.380) SR1, SR2 3227
 		fileVersion = 941;
 		newFileVersion = 20171;
-	} else if (buildVersion < 3269) { // 2018.0 (9.5.0.193) SR0 3268
+	} else if (buildVersion < 3269) { // 2018.0 (9.5.0.193), 2018.1 (9.5.1.195) SR0, SR1 3268
 		fileVersion = 950;
 		newFileVersion = 20180;
+	} else if (buildVersion < 3296) { // 2018b.0 (9.5.5.409) SR0, SR1 3295
+		fileVersion = 955;
+		newFileVersion = 20185;
 	} else {
-		// > 2018.0
-		fileVersion = 951;
-		newFileVersion = 20181;
-		LOG_PRINT(logfile, "Found project version 2018.1 (9.5.1) or newer\n")
+		// > 2018bSR0
+		fileVersion = 956;
+		newFileVersion = 20186;
+		LOG_PRINT(logfile, "Found project version 2018b.1 (9.5.6) or newer\n")
 	}
 
 	if (newFileVersion == 0) {
@@ -204,7 +206,7 @@ vector<Origin::Function>::size_type OriginFile::functionCount() const
 	return parser->functions.size();
 }
 
-vector<Origin::Function>::size_type OriginFile::functionIndex(const string& name) const
+vector<Origin::Function>::difference_type OriginFile::functionIndex(const string& name) const
 {
 	return parser->findFunctionByName(name);
 }
@@ -248,3 +250,13 @@ string OriginFile::resultsLogString() const
 {
 	return parser->resultsLog;
 }
+
+string liboriginVersionString() { return LIBORIGIN_VERSION_STRING; }
+
+unsigned int liboriginVersion() { return LIBORIGIN_VERSION; }
+
+unsigned int liboriginVersionMajor() { return LIBORIGIN_VERSION_MAJOR; }
+
+unsigned int liboriginVersionMinor() { return LIBORIGIN_VERSION_MINOR; }
+
+unsigned int liboriginVersionBugfix() { return LIBORIGIN_VERSION_BUGFIX; }

@@ -32,8 +32,8 @@ using namespace Origin;
 class OriginAnyParser : public OriginParser
 {
 public:
-	OriginAnyParser(const string& fileName);
-	bool parse();
+	explicit OriginAnyParser(const string& fileName);
+	bool parse() override;
 
 protected:
 	unsigned int readObjectSize();
@@ -54,20 +54,20 @@ protected:
 	unsigned int readFolderTree(tree<ProjectNode>::iterator, unsigned int);
 	void readProjectLeaf(tree<ProjectNode>::iterator);
 	void readAttachmentList();
-	bool getColumnInfoAndData(string, unsigned int, string, unsigned int);
-	void getMatrixValues(string, unsigned int, short, char, char, int);
-	void getWindowProperties(Origin::Window&, string, unsigned int);
-	void getLayerProperties(string, unsigned int);
-	Origin::Color getColor(string);
-	void getAnnotationProperties(string, unsigned int, string, unsigned int, string, unsigned int, string, unsigned int);
-	void getCurveProperties(string, unsigned int, string, unsigned int);
-	void getAxisBreakProperties(string, unsigned int);
-	void getAxisParameterProperties(string, unsigned int, int);
-	void getNoteProperties(string, unsigned int, string, unsigned int, string, unsigned int);
-	void getColorMap(ColorMap&, string, unsigned int);
-	void getZcolorsMap(ColorMap&, string, unsigned int);
-	void getProjectLeafProperties(tree<ProjectNode>::iterator, string, unsigned int);
-	void getProjectFolderProperties(tree<ProjectNode>::iterator, string, unsigned int);
+	bool getColumnInfoAndData(const string&, unsigned int, const string&, unsigned int);
+	void getMatrixValues(const string&, unsigned int, short, char, char, vector<Origin::Matrix>::difference_type);
+	void getWindowProperties(Origin::Window&, const string&, unsigned int);
+	void getLayerProperties(const string&, unsigned int);
+	Origin::Color getColor(const string&);
+	void getAnnotationProperties(const string&, unsigned int, const string&, unsigned int, const string&, unsigned int, const string&, unsigned int);
+	void getCurveProperties(const string&, unsigned int, const string&, unsigned int);
+	void getAxisBreakProperties(const string&, unsigned int);
+	void getAxisParameterProperties(const string&, unsigned int, int);
+	void getNoteProperties(const string&, unsigned int, const string&, unsigned int, const string&, unsigned int);
+	void getColorMap(ColorMap&, const string&, unsigned int);
+	void getZcolorsMap(ColorMap&, const string&, unsigned int);
+	void getProjectLeafProperties(tree<ProjectNode>::iterator, const string&, unsigned int);
+	void getProjectFolderProperties(tree<ProjectNode>::iterator, const string&, unsigned int);
 	void outputProjectTree();
 
 	inline time_t doubleToPosixTime(double jdt)
@@ -79,10 +79,13 @@ protected:
 	iendianfstream file;
 	FILE *logfile;
 
-	unsigned long d_file_size;
+	streamsize d_file_size;
+	streamoff curpos;
 	unsigned int objectIndex, parseError;
-	int ispread, imatrix, iexcel, igraph;
-	int ilayer;
+	vector<Origin::SpreadSheet>::difference_type ispread;
+	vector<Origin::Matrix>::difference_type imatrix;
+	vector<Origin::Excel>::difference_type iexcel;
+	int igraph, ilayer;
 };
 
 #endif // ORIGIN_ANY_PARSER_H

@@ -22,7 +22,6 @@ set (sources
 
 # header files for development
 set (devel-headers
-	${CMAKE_CURRENT_BINARY_DIR}/config.h
 	OriginObj.h
 	OriginFile.h
 	OriginParser.h

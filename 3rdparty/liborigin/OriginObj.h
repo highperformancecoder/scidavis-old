@@ -72,13 +72,14 @@ namespace Origin
 	enum FillPattern {NoFill = 0, BDiagDense = 1, BDiagMedium = 2, BDiagSparse = 3, FDiagDense = 4, FDiagMedium = 5, FDiagSparse = 6,
 		DiagCrossDense = 7, DiagCrossMedium = 8, DiagCrossSparse = 9, HorizontalDense = 10, HorizontalMedium = 11, HorizontalSparse = 12,
 		VerticalDense = 13, VerticalMedium = 14, VerticalSparse = 15, CrossDense = 16, CrossMedium = 17, CrossSparse = 18};
+	enum ColorGradientDirection {NoGradient = 0, TopLeft = 1, Left = 2, BottomLeft = 3, Top = 4, Center = 5, Bottom = 6, TopRight = 7, Right = 8, BottomRight = 9};
 
 	struct Color
 	{
 		enum ColorType {None = 0, Automatic = 1, Regular = 2, Custom = 3, Increment = 4, Indexing = 5, RGB = 6, Mapping = 7};
 		enum RegularColor {Black = 0, Red = 1, Green = 2, Blue = 3, Cyan = 4, Magenta = 5, Yellow = 6, DarkYellow = 7, Navy = 8,
 			Purple = 9, Wine = 10, Olive = 11, DarkCyan = 12, Royal=  13, Orange = 14, Violet = 15, Pink = 16, White = 17,
-			LightGray = 18, Gray = 19, LTYellow = 20, LTCyan = 21, LTMagenta = 22, DarkGray = 23/*, Custom = 255*/};
+			LightGray = 18, Gray = 19, LTYellow = 20, LTCyan = 21, LTMagenta = 22, DarkGray = 23, SpecialV7Axis = 0xF7/*, Custom = 255*/};
 
 		ColorType type;
 		union
@@ -158,6 +159,9 @@ namespace Origin
 		Rect frameRect;
 		time_t creationDate;
 		time_t modificationDate;
+		ColorGradientDirection windowBackgroundColorGradient;
+		Color windowBackgroundColorBase;
+		Color windowBackgroundColorEnd;
 
 		Window(const string& _name= "", const string& _label = "", bool _hidden = false)
 		:	name(_name)
@@ -166,6 +170,11 @@ namespace Origin
 		,	hidden(_hidden)
 		,	state(Normal)
 		,	title(Both)
+		,	creationDate(0)
+		,	modificationDate(0)
+		,	windowBackgroundColorGradient(NoGradient)
+		,	windowBackgroundColorBase({Color::Regular, {Color::White}})
+		,	windowBackgroundColorEnd({Color::Regular, {Color::White}})
 		{};
 	};
 
@@ -251,10 +260,14 @@ namespace Origin
 		unsigned int index;
 		unsigned int colIndex;
 		unsigned int sheet;
+		unsigned int numRows;
+		unsigned int beginRow;
+		unsigned int endRow;
 		vector<variant> data;
 
 		SpreadColumn(const string& _name = "", unsigned int _index = 0)
 		:	name(_name)
+		,	type(ColumnType::Y)
 		,	valueType(Numeric)
 		,	valueTypeSpecification(0)
 		,	significantDigits(6)
@@ -266,6 +279,9 @@ namespace Origin
 		,	index(_index)
 		,	colIndex(0)
 		,	sheet(0)
+		,	numRows(0)
+		,	beginRow(0)
+		,	endRow(0)
 		{};
 	};
 
@@ -278,6 +294,7 @@ namespace Origin
 
 		SpreadSheet(const string& _name = "")
 		:	Window(_name)
+		,	maxRows(30)
 		,	loose(true)
 		,	sheets(1)
 		{};
@@ -318,6 +335,8 @@ namespace Origin
 
 		MatrixSheet(const string& _name = "", unsigned int _index = 0)
 		:	name(_name)
+		,	rowCount(8)
+		,	columnCount(8)
 		,	valueTypeSpecification(0)
 		,	significantDigits(6)
 		,	decimalPlaces(6)
@@ -381,9 +400,15 @@ namespace Origin
 
 		TextBox(const string& _text = "")
 		:	text(_text)
+		,	color({Color::Regular, {Color::Black}})
+		,	fontSize(20)
+		,	rotation(0)
+		,	tab(8)
+		,	borderType(BlackLine)
+		,	attach(Frame)
 		{};
 
-		TextBox(const string& _text, const Rect& _clientRect, const Color& _color, unsigned short _fontSize, int _rotation, int _tab, BorderType _borderType, Attach _attach)
+		TextBox(const string& _text, Rect _clientRect, Color _color, unsigned short _fontSize, int _rotation, int _tab, BorderType _borderType, Attach _attach)
 		:	text(_text)
 		,	clientRect(_clientRect)
 		,	color(_color)
@@ -405,7 +430,7 @@ namespace Origin
 		unsigned short horizontalOffset;
 		unsigned long displacedSectionCount; // maximum - 32 sections
 		unsigned short displacement;
-		
+
 		//labels
 		bool formatAutomatic;
 		bool formatValues;
@@ -415,12 +440,20 @@ namespace Origin
 		unsigned short distance;
 
 		PieProperties()
-		:	clockwiseRotation(false)
+		:	viewAngle(33)
+		,	thickness(33)
+		,	clockwiseRotation(false)
+		,	rotation(33)
+		,	radius(70)
+		,	horizontalOffset(0)
+		,	displacedSectionCount(0)
+		,	displacement(25)
 		,	formatAutomatic(false)
 		,	formatValues(false)
 		,	formatPercentages(false)
 		,	formatCategories(false)
 		,	positionAssociate(false)
+		,	distance(25)
 		{};
 	};
 
@@ -430,7 +463,7 @@ namespace Origin
 
 		Color color;
 		double width;
-		unsigned short arrowLenght;
+		unsigned short arrowLength;
 		unsigned char arrowAngle;
 		bool arrowClosed;
 		string endXColumnName;
@@ -444,7 +477,11 @@ namespace Origin
 		int constMagnitude;
 
 		VectorProperties()
-		:	arrowClosed(false)
+		:	color({Color::Regular, {Color::Black}})
+		,	width(2.0)
+		,	arrowLength(45)
+		,	arrowAngle(30)
+		,	arrowClosed(false)
 		,	position(Tail)
 		,	multiplier(1.0)
 		,	constAngle(0)
@@ -518,6 +555,22 @@ namespace Origin
 		double whiskersCoeff;
 		bool diamondBox;
 		unsigned char labels;
+		PercentileProperties()
+		:	maxSymbolType(1)
+		,	p99SymbolType(2)
+		,	meanSymbolType(3)
+		,	p1SymbolType(4)
+		,	minSymbolType(5)
+		,	symbolColor({Color::Regular, {Color::Black}})
+		,	symbolFillColor({Color::Regular, {Color::White}})
+		,	symbolSize(5)
+		,	boxRange(25)
+		,	whiskersRange(5)
+		,	boxCoeff(1.0)
+		,	whiskersCoeff(1.5)
+		,	diamondBox(true)
+		,	labels(0)
+		{};
 	};
 
 	struct GraphCurve
@@ -560,7 +613,8 @@ namespace Origin
 		Color fillAreaPatternBorderColor;
 		double fillAreaPatternBorderWidth;
 
-		unsigned short symbolType;
+		unsigned char symbolInterior;
+		unsigned char symbolShape;
 		Color symbolColor;
 		Color symbolFillColor;
 		unsigned char symbolFillTransparency;
@@ -603,6 +657,14 @@ namespace Origin
 
 		GraphAxisBreak()
 		:	show(false)
+		,	log10(false)
+		,	from(4.)
+		,	to(6.)
+		,	position(50.)
+		,	scaleIncrementBefore(5)
+		,	scaleIncrementAfter(5)
+		,	minorTicksBefore(1)
+		,	minorTicksAfter(1)
 		{};
 	};
 
@@ -635,7 +697,7 @@ namespace Origin
 		bool showMajorLabels;
 		unsigned char color;
 		ValueType valueType;
-		int valueTypeSpecification; 
+		int valueTypeSpecification;
 		int decimalPlaces;
 		unsigned short fontSize;
 		bool fontBold;
@@ -682,6 +744,15 @@ namespace Origin
 
 		Figure(FigureType _type = Rectangle)
 		:	type(_type)
+		,	attach(Frame)
+		,	color({Color::Regular, {Color::Black}})
+		,	style(0)
+		,	width(1.0)
+		,	fillAreaColor({Color::Regular, {Color::LightGray}})
+		,	fillAreaPattern(FillPattern::NoFill)
+		,	fillAreaPatternColor({Color::Regular, {Color::Black}})
+		,	fillAreaPatternWidth(1)
+		,	useBorderColor(false)
 		{
 		};
 	};
@@ -724,10 +795,11 @@ namespace Origin
 		unsigned char* data;
 
 		Bitmap(const string& _name = "")
-		:	size(0)
+		:	attach(Frame)
+		,	size(0)
 		,	windowName(_name)
-		,	borderType(Origin::None)
-		,	data(0)
+		,	borderType(BlackLine)
+		,	data(nullptr)
 		{
 		};
 
@@ -737,6 +809,7 @@ namespace Origin
 		,	size(bitmap.size)
 		,	windowName(bitmap.windowName)
 		,	borderType(bitmap.borderType)
+		,	data(nullptr)
 		{
 			if(size > 0)
 			{
@@ -759,6 +832,13 @@ namespace Origin
 		unsigned short labelGap;
 		unsigned short colorBarThickness;
 		Color labelsColor;
+		ColorScale()
+		:	visible(true)
+		,	reverseOrder(false)
+		,	labelGap(5)
+		,	colorBarThickness(3)
+		,	labelsColor({Color::Regular, {Color::Black}})
+		{};
 	};
 
 	struct GraphLayer
@@ -813,8 +893,23 @@ namespace Origin
 		bool orthographic3D;
 
 		GraphLayer()
-		:	imageProfileTool(0)
+		:	backgroundColor({Color::Regular, {Color::White}})
+		,	borderType(BlackLine)
+		,	histogramBin(0.5)
+		,	histogramBegin(0.0)
+		,	histogramEnd(10.0)
+		,	xAngle(0)
+		,	yAngle(0)
+		,	zAngle(0)
+		,	xLength(10)
+		,	yLength(10)
+		,	zLength(10)
+		,	imageProfileTool(0)
+		,	vLine(0.0)
+		,	hLine(0.0)
 		,	isWaterfall(false)
+		,	xOffset(10)
+		,	yOffset(10)
 		,	gridOnTop(false)
 		,	exchangedAxes(false)
 		,	isXYY3D(false)
@@ -838,7 +933,6 @@ namespace Origin
 					case GraphCurve::XYZContour:
 					case GraphCurve::XYZTriangular:
 						return true;
-						break;
 					default:
 						break;
 				}
@@ -872,6 +966,8 @@ namespace Origin
 
 		Graph(const string& _name = "")
 		:	Window(_name)
+		,	width(400)
+		,	height(300)
 		,	is3D(false)
 		,	isLayout(false)
 		,	connectMissingData(false)
@@ -897,7 +993,7 @@ namespace Origin
 		time_t modificationDate;
 		bool active;
 
-		ProjectNode(const string& _name = "", NodeType _type = Folder, const time_t _creationDate = time(NULL), const time_t _modificationDate = time(NULL), bool _active = false)
+		ProjectNode(const string& _name = "", NodeType _type = Folder, const time_t _creationDate = time(nullptr), const time_t _modificationDate = time(nullptr), bool _active = false)
 		:	type(_type)
 		,	name(_name)
 		,	creationDate(_creationDate)
