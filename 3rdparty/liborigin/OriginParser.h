@@ -33,21 +33,9 @@
 #include "tree.hh"
 
 #ifdef GENERATE_CODE_FOR_LOG
-
-#ifdef HAVE_WINDOWS
 #define LOG_PRINT( logfile, ... ) { fprintf(logfile, __VA_ARGS__); }
-#else	// NOT WINDOWS
-#define LOG_PRINT( logfile, args... ) { fprintf(logfile, args); }
-#endif
-
 #else // !GENERATE_CODE_FOR_LOG
-
-#ifdef HAVE_WINDOWS
 #define LOG_PRINT( logfile, ... ) {};
-#else	// NOT WINDOWS
-#define LOG_PRINT( logfile, args... ) {};
-#endif
-
 #endif
 
 class OriginParser
