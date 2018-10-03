@@ -18,7 +18,16 @@ mxe|osx_dist {CONFIG += liborigin}
 aegis|gcov {CONFIG += liborigin test python}
 
 # liborigin must come first, if it exists
-liborigin {SUBDIRS = 3rdparty/liborigin}
+liborigin {
+    packagesExist(liborigin) {
+        message(liborigin: using system library)
+        CONFIG += link_pkgconfig
+        PKGCONFIG += liborigin
+    } else {
+        message(liborigin: using own code)
+        SUBDIRS = 3rdparty/liborigin
+    }
+}
 
 SUBDIRS += libscidavis scidavis 
 
