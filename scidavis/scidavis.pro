@@ -27,13 +27,18 @@ INSTALLS        += translationfiles
 win32:INSTALLS  += win_icon
 
 liborigin {
-  LIBORIGINDIR=../3rdparty/liborigin
-  win32 {
-    Debug: LIBORIGINDIR=$${LIBORIGINDIR}/debug
-    Release: LIBORIGINDIR=$${LIBORIGINDIR}/release
+  !packagesExist(liborigin) | !contains(PRESET, linux_package) {
+    LIBORIGINDIR=../3rdparty/liborigin
+    win32 {
+      Debug: LIBORIGINDIR=$${LIBORIGINDIR}/debug
+      Release: LIBORIGINDIR=$${LIBORIGINDIR}/release
+    }
+    LIBS += $${LIBORIGINDIR}/liborigin.a
+    POST_TARGETDEPS += $${LIBORIGINDIR}/liborigin.a
+  } else {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += liborigin
   }
-  LIBS += $${LIBORIGINDIR}/liborigin.a
-  POST_TARGETDEPS += $${LIBORIGINDIR}/liborigin.a
 }
 
 ########### Future code backported from the aspect framework ##################

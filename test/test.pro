@@ -38,8 +38,13 @@ python {
 }
 
 liborigin {
-  LIBS += ../3rdparty/liborigin/liborigin.a
-  POST_TARGETDEPS += ../3rdparty/liborigin/liborigin.a
+  !packagesExist(liborigin) | !contains(PRESET, linux_package) {
+    LIBS += ../3rdparty/liborigin/liborigin.a
+    POST_TARGETDEPS += ../3rdparty/liborigin/liborigin.a
+  } else {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += liborigin
+  }
 }
 
 

@@ -13,7 +13,12 @@ include(../config.pri)
 INCLUDEPATH += ../scidavis
 
 liborigin {
-  INCLUDEPATH += ../3rdparty/liborigin
+  !packagesExist(liborigin) | !contains(PRESET, linux_package) {
+    INCLUDEPATH += ../3rdparty/liborigin
+  } else {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += liborigin
+  }
 }
 
 CONFIG        += qt warn_on exceptions opengl thread zlib
