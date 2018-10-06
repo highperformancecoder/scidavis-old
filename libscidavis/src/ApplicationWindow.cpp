@@ -215,7 +215,7 @@ ApplicationWindow::ApplicationWindow()
 
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    //QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
+    QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
 
 	setWindowTitle(tr("SciDAVis - untitled"));
 
@@ -2852,8 +2852,6 @@ void ApplicationWindow::windowActivated(QMdiSubWindow *w)
 	Folder *f = ((MyWidget *)w)->folder();
 	if (f)
         f->setActiveWindow((MyWidget *)w);
-
-	emit modified();
 }
 
 void ApplicationWindow::addErrorBars()
@@ -7266,7 +7264,6 @@ void ApplicationWindow::updateWindowStatus(MyWidget* w)
 				oldMaxWindow->setStatus(MyWidget::Normal);
 		}
 	}
-	modifiedProject();
 }
 
 void ApplicationWindow::hideActiveWindow()

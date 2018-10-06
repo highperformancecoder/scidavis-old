@@ -3293,10 +3293,11 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
 			if (i >= otherCurves.size()) {
 				type_of_i = ErrorBars;
 				int ycol = -1;
-				for (int k=otherCurves.size()-1; k >= 0; k--) {
-            		int index = w->colIndex(lst[k]);
-            		if (w->colPlotDesignation(index) == SciDAVis::Y)
-						ycol = index;
+				for (int k=j-1; k >= 0; k--) {
+					if (w->colPlotDesignation(k) == SciDAVis::Y) {
+						ycol = k;
+						break;
+					}
 				}
                 if (ycol < 0)
 					ycol = w->colY(w->colIndex(lst[i]));
