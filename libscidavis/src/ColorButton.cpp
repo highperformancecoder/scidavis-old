@@ -34,6 +34,35 @@
 #include <QHBoxLayout>
 #include <QFrame>
 
+const QColor ColorButton::colors[] = {
+  QColor(Qt::black),
+  QColor(Qt::red),
+  QColor(Qt::green),
+  QColor(Qt::blue),
+  QColor(Qt::cyan),
+  QColor(Qt::magenta),
+  QColor(Qt::yellow),
+  QColor(Qt::darkYellow),
+  QColor(Qt::darkBlue),
+  QColor(Qt::darkMagenta),
+  QColor(Qt::darkRed),
+  QColor(Qt::darkGreen),
+  QColor(Qt::darkCyan),
+  QColor("#0000A0"),
+  QColor("#FF8000"),
+  QColor("#8000FF"),
+  QColor("#FF0080"),
+  QColor(Qt::white),
+  QColor(Qt::lightGray),
+  QColor(Qt::gray),
+  QColor("#FFFF80"),
+  QColor("#80FFFF"),
+  QColor("#FF80FF"),
+  QColor(Qt::darkGray),
+};
+
+const int ColorButton::colors_count=sizeof(colors)/sizeof(colors[0]);
+
 ColorButton::ColorButton(QWidget *parent) : QWidget(parent)
 {
 	init();
@@ -41,6 +70,13 @@ ColorButton::ColorButton(QWidget *parent) : QWidget(parent)
 
 void ColorButton::init()
 {
+	for (int i=0; i<8; i++)
+	{
+		for (int j=0; j<3; j++)
+		{
+			QColorDialog::setStandardColor(6*i+j,   colors[i+8*j].rgb());
+		}
+	}
 	const int btn_size = 28;
 	selectButton = new QPushButton(QPixmap(":/palette.xpm"), QString(), this);
 	selectButton->setMinimumWidth(btn_size);
