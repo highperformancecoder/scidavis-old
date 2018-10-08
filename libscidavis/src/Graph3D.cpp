@@ -30,6 +30,7 @@
 #include "Bar.h"
 #include "Cone3D.h"
 #include "MyParser.h"
+#include "ColorButton.h"
 #include "core/column/Column.h"
 
 #include <QApplication>
@@ -2531,21 +2532,21 @@ QString Graph3D::saveToString(const QString& geometry)
 
 	s+="title\t";
 	s+=title+"\t";
-	s+=titleCol.name()+"\t";
+	s+=COLORNAME(titleCol)+"\t";
 	s+=titleFnt.family()+"\t";
 	s+=QString::number(titleFnt.pointSize())+"\t";
 	s+=QString::number(titleFnt.weight())+"\t";
 	s+=QString::number(titleFnt.italic())+"\n";
 
 	s+="colors\t";
-	s+=meshCol.name()+"\t";
-	s+=axesCol.name()+"\t";
-	s+=numCol.name()+"\t";
-	s+=labelsCol.name()+"\t";
-	s+=bgCol.name()+"\t";
-	s+=gridCol.name()+"\t";
-	s+=fromColor.name()+"\t";
-	s+=toColor.name()+"\t";
+	s+=COLORNAME(meshCol)+"\t";
+	s+=COLORNAME(axesCol)+"\t";
+	s+=COLORNAME(numCol)+"\t";
+	s+=COLORNAME(labelsCol)+"\t";
+	s+=COLORNAME(bgCol)+"\t";
+	s+=COLORNAME(gridCol)+"\t";
+	s+=COLORNAME(fromColor)+"\t";
+	s+=COLORNAME(toColor)+"\t";
 	s+=QString::number(alpha) + "\t" + color_map + "\n";
 
 	s+="axesLabels\t";

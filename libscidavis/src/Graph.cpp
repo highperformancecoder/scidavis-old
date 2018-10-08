@@ -657,8 +657,8 @@ void Graph::showAxis(int axis, int type, const QString& formatInfo, Table *table
 	if (d_plot->axisEnabled (axis) == axisOn &&
 			majTicksTypeList[axis] == majTicksType &&
 			minTicksTypeList[axis] == minTicksType &&
-			axesColors()[axis] == c.name() &&
-            axesNumColors()[axis] == labelsColor.name() &&
+			axesColors()[axis] == COLORNAME(c) &&
+			axesNumColors()[axis] == COLORNAME(labelsColor) &&
 			prec == d_plot->axisLabelPrecision (axis) &&
 			format == d_plot->axisLabelFormat (axis) &&
 			labelsRotation(axis) == rotation &&
@@ -975,8 +975,8 @@ QString Graph::saveAxesColors()
 	int i;
 	for (i=0;i<4;i++)
     {
-		colors<<QColor(Qt::black).name();
-        numColors<<QColor(Qt::black).name();
+		colors << COLORNAME(QColor(Qt::black));
+        numColors << COLORNAME(QColor(Qt::black));
     }
 
 	for (i=0;i<4;i++)
@@ -985,8 +985,8 @@ QString Graph::saveAxesColors()
 		if (scale)
 		{
 			pal=scale->palette();
-			colors[i]=pal.color(QPalette::Active, QPalette::WindowText).name();
-            numColors[i]=pal.color(QPalette::Active, QPalette::Text).name();
+			colors[i]=COLORNAME(pal.color(QPalette::Active, QPalette::WindowText));
+			numColors[i]=COLORNAME(pal.color(QPalette::Active, QPalette::Text));
 		}
 	}
 	s+=colors.join ("\t")+"\n";
@@ -1000,7 +1000,7 @@ QStringList Graph::axesColors()
 	QPalette pal;
 	int i;
 	for (i=0;i<4;i++)
-		colors<<QColor(Qt::black).name();
+		colors << COLORNAME(QColor(Qt::black));
 
 	for (i=0;i<4;i++)
 	{
@@ -1008,7 +1008,7 @@ QStringList Graph::axesColors()
 		if (scale)
 		{
 			pal=scale->palette();
-			colors[i]=pal.color(QPalette::Active, QPalette::WindowText).name();
+			colors[i]=COLORNAME(pal.color(QPalette::Active, QPalette::WindowText));
 		}
 	}
 	return colors;
@@ -1038,7 +1038,7 @@ QStringList Graph::axesNumColors()
   	QPalette pal;
   	int i;
   	for (i=0;i<4;i++)
-  	     colors << QColor(Qt::black).name();
+		colors << COLORNAME(QColor(Qt::black));
 
   	for (i=0;i<4;i++)
   	{
@@ -1046,7 +1046,7 @@ QStringList Graph::axesNumColors()
   	     if (scale)
   	     {
   	         pal=scale->palette();
-  	         colors[i]=pal.color(QPalette::Active, QPalette::Text).name();
+			colors[i]=COLORNAME(pal.color(QPalette::Active, QPalette::Text));
   	     }
   	}
   	return colors;
@@ -2042,9 +2042,9 @@ QString Graph::saveCanvas()
 	if (w>0)
 	{
 		s += "CanvasFrame\t" + QString::number(w)+"\t";
-		s += canvasFrameColor().name()+"\n";
+		s += COLORNAME(canvasFrameColor())+"\n";
 	}
-	s += "CanvasBackground\t" + d_plot->canvasBackground().name()+"\t";
+	s += "CanvasBackground\t" + COLORNAME(d_plot->canvasBackground())+"\t";
 	s += QString::number(d_plot->canvasBackground().alpha())+"\n";
 	return s;
 }
@@ -2209,7 +2209,7 @@ QString Graph::saveAxesTitleColors()
 		else
 			c=QColor(Qt::black);
 
-		s+=c.name()+"\t";
+		s+=COLORNAME(c)+"\t";
 	}
 	return s+"\n";
 }
@@ -2218,7 +2218,7 @@ QString Graph::saveTitle()
 {
 	QString s="PlotTitle\t";
 	s += d_plot->title().text().replace("\n", "<br>")+"\t";
-	s += d_plot->title().color().name()+"\t";
+	s += COLORNAME(d_plot->title().color())+"\t";
 	s += QString::number(d_plot->title().renderFlags())+"\n";
 	return s;
 }
@@ -2281,7 +2281,7 @@ QString Graph::savePieCurveLayout()
 	QPen pen=pieCurve->pen();
 
 	s+=QString::number(pen.width())+"\t";
-	s+=pen.color().name()+"\t";
+	s+=COLORNAME(pen.color())+"\t";
 	s+=penStyleName(pen.style()) + "\t";
 
 	Qt::BrushStyle pattern=pieCurve->pattern();
@@ -2379,7 +2379,7 @@ QString Graph::saveCurveLayout(int index)
 	else if(style == VectXYXY || style == VectXYAM)
 	{
 		VectorCurve *v = (VectorCurve*)c;
-		s+=v->color().name()+"\t";
+		s+=COLORNAME(v->color())+"\t";
 		s+=QString::number(v->width())+"\t";
 		s+=QString::number(v->headLength())+"\t";
 		s+=QString::number(v->headAngle())+"\t";
@@ -2465,7 +2465,7 @@ QString Graph::saveCurves()
   	            s += er->title().text() + "\t";
   	            s += QString::number(er->width())+"\t";
   	            s += QString::number(er->capLength())+"\t";
-  	            s += er->color().name()+"\t";
+                s += COLORNAME(er->color())+"\t";
   	            s += QString::number(er->throughSymbol())+"\t";
   	            s += QString::number(er->plusSide())+"\t";
   	            s += QString::number(er->minusSide())+"\n";
@@ -2716,7 +2716,7 @@ QString Graph::saveMarkers()
 		s+=(QString::number(ep.y(), 'g', 15))+"\t";
 
 		s+=QString::number(mrkL->width())+"\t";
-		s+=mrkL->color().name()+"\t";
+		s+=COLORNAME(mrkL->color())+"\t";
 		s+=penStyleName(mrkL->style())+"\t";
 		s+=QString::number(mrkL->hasEndArrow())+"\t";
 		s+=QString::number(mrkL->hasStartArrow())+"\t";
@@ -2743,10 +2743,10 @@ QString Graph::saveMarkers()
 		s+=QString::number(f.italic())+"\t";
 		s+=QString::number(f.underline())+"\t";
 		s+=QString::number(f.strikeOut())+"\t";
-		s+=mrk->textColor().name()+"\t";
+		s+=COLORNAME(mrk->textColor())+"\t";
 		s+=QString::number(mrk->frameStyle())+"\t";
 		s+=QString::number(mrk->angle())+"\t";
-		s+=mrk->backgroundColor().name()+"\t";
+		s+=COLORNAME(mrk->backgroundColor())+"\t";
 		s+=QString::number(mrk->backgroundColor().alpha())+"\t";
 
 		QStringList textList=mrk->text().split("\n", QString::KeepEmptyParts);
@@ -4032,10 +4032,10 @@ QString Graph::saveToString(bool saveAsTemplate)
 	s+=QString::number(this->frameGeometry().height())+"\n";
 	s+=saveTitle();
 	s+="<Antialiasing>" + QString::number(d_antialiasing) + "</Antialiasing>\n";
-	s+="Background\t" + d_plot->paletteBackgroundColor().name() + "\t";
+	s+="Background\t" + COLORNAME(d_plot->paletteBackgroundColor()) + "\t";
 	s+=QString::number(d_plot->paletteBackgroundColor().alpha()) + "\n";
 	s+="Margin\t"+QString::number(d_plot->margin())+"\n";
-	s+="Border\t"+QString::number(d_plot->lineWidth())+"\t"+d_plot->frameColor().name()+"\n";
+	s+="Border\t"+QString::number(d_plot->lineWidth())+"\t"+COLORNAME(d_plot->frameColor())+"\n";
 	s+=grid()->saveToString();
 	s+=saveEnabledAxes();
 	s+="AxesTitles\t"+saveScaleTitles();

@@ -257,19 +257,19 @@ QString Grid::saveToString()
 	s += QString::number(yEnabled())+"\t";
 	s += QString::number(yMinEnabled())+"\t";
 
-	s += majPenX().color().name()+"\t";
+	s += COLORNAME(majPenX().color())+"\t";
 	s += QString::number(majPenX().style() - 1)+"\t";
 	s += QString::number(majPenX().width())+"\t";
 
-	s += minPenX().color().name()+"\t";
+	s += COLORNAME(minPenX().color())+"\t";
 	s += QString::number(minPenX().style() - 1)+"\t";
 	s += QString::number(minPenX().width())+"\t";
 
-    s += majPenY().color().name()+"\t";
+	s += COLORNAME(majPenY().color())+"\t";
 	s += QString::number(majPenY().style() - 1)+"\t";
 	s += QString::number(majPenY().width())+"\t";
 
-	s += minPenY().color().name()+"\t";
+	s += COLORNAME(minPenY().color())+"\t";
 	s += QString::number(minPenY().style() - 1)+"\t";
 	s += QString::number(minPenY().width())+"\t";
 
