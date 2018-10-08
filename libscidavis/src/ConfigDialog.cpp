@@ -32,7 +32,6 @@
 #include "Graph.h"
 #include "Matrix.h"
 #include "ColorButton.h"
-#include "ColorBox.h"
 
 #include <QLocale>
 #include <QPushButton>
@@ -697,8 +696,8 @@ void ConfigDialog::initFittingPage()
 
 	lblPeaksColor = new QLabel();
 	multiPeakLayout->addWidget(lblPeaksColor);
-	boxPeaksColor = new ColorBox(0);
-	boxPeaksColor->setCurrentIndex(app->peakCurvesColor);
+	boxPeaksColor = new ColorButton();
+	boxPeaksColor->setColor(app->peakCurvesColor);
 	multiPeakLayout->addWidget(boxPeaksColor);
 
 	groupBoxFitParameters = new QGroupBox();
@@ -1184,7 +1183,7 @@ void ConfigDialog::apply()
 	app->fitPoints = generatePointsBox->value();
 	app->generateUniformFitPoints = generatePointsBtn->isChecked();
 	app->generatePeakCurves = groupBoxMultiPeak->isChecked();
-	app->peakCurvesColor = boxPeaksColor->currentIndex();
+	app->peakCurvesColor = boxPeaksColor->colorIndex(boxPeaksColor->color());
 	app->fit_scale_errors = scaleErrorsBox->isChecked();
 	app->d_2_linear_fit_points = linearFit2PointsBox->isChecked();
 	app->saveSettings();

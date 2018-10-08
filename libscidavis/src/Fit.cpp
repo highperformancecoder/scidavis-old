@@ -33,7 +33,7 @@
 #include "QwtErrorPlotCurve.h"
 #include "Legend.h"
 #include "FunctionCurve.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "Script.h"
 #include "core/column/Column.h"
 
@@ -626,7 +626,7 @@ void Fit::insertFitFunctionCurve(const QString& name, double *x, double *y, int 
 {
     QString title = d_graph->generateFunctionName(name);
 	FunctionCurve *c = new FunctionCurve((ApplicationWindow *)parent(), FunctionCurve::Normal, title);
-	c->setPen(QPen(ColorBox::color(d_curveColorIndex), penWidth));
+	c->setPen(QPen(ColorButton::color(d_curveColorIndex), penWidth));
 	c->setData(x, y, d_points);
 	c->setRange(d_x[0], d_x[d_n-1]);
 

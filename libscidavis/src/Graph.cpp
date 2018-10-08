@@ -44,7 +44,7 @@
 #include "QwtHistogram.h"
 #include "VectorCurve.h"
 #include "ScaleDraw.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "PatternBox.h"
 #include "SymbolBox.h"
 #include "FunctionCurve.h"
@@ -2339,23 +2339,23 @@ QString Graph::saveCurveLayout(int index)
 			s+="6\t";
 		else
 			s+=QString::number(c->style())+"\t";
-		s+=QString::number(ColorBox::colorIndex(c->pen().color()))+"\t";
+		s+=QString::number(ColorButton::colorIndex(c->pen().color()))+"\t";
 		s+=QString::number(c->pen().style()-1)+"\t";
 		s+=QString::number(c->pen().width())+"\t";
 
 		const QwtSymbol symbol = c->symbol();
 		s+=QString::number(symbol.size().width())+"\t";
 		s+=QString::number(SymbolBox::symbolIndex(symbol.style()))+"\t";
-		s+=QString::number(ColorBox::colorIndex(symbol.pen().color()))+"\t";
+		s+=QString::number(ColorButton::colorIndex(symbol.pen().color()))+"\t";
 		if (symbol.brush().style() != Qt::NoBrush)
-			s+=QString::number(ColorBox::colorIndex(symbol.brush().color()))+"\t";
+			s+=QString::number(ColorButton::colorIndex(symbol.brush().color()))+"\t";
 		else
 			s+=QString::number(-1)+"\t";
 
 		bool filled = c->brush().style() == Qt::NoBrush ? false : true;
 		s+=QString::number(filled)+"\t";
 
-		s+=QString::number(ColorBox::colorIndex(c->brush().color()))+"\t";
+		s+=QString::number(ColorButton::colorIndex(c->brush().color()))+"\t";
 		s+=QString::number(PatternBox::patternIndex(c->brush().style()))+"\t";
 		if (style <= LineSymbols || style == Box)
 			s+=QString::number(symbol.pen().width())+"\t";
@@ -2994,13 +2994,13 @@ void Graph::updateCurveLayout(int index, const CurveLayout *cL)
   if (c_type.isEmpty() || (int)c_type.size() < index)
     return;
 
-  QPen pen = QPen(ColorBox::color(cL->symCol),cL->penWidth, Qt::SolidLine);
+  QPen pen = QPen(ColorButton::color(cL->symCol),cL->penWidth, Qt::SolidLine);
   if (cL->symbolFill)
-    c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType), QBrush(ColorBox::color(cL->fillCol)), pen, QSize(cL->sSize,cL->sSize)));
+    c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType), QBrush(ColorButton::color(cL->fillCol)), pen, QSize(cL->sSize,cL->sSize)));
   else
     c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType), QBrush(), pen, QSize(cL->sSize,cL->sSize)));
 
-  c->setPen(QPen(ColorBox::color(cL->lCol), cL->lWidth, getPenStyle(cL->lStyle)));
+  c->setPen(QPen(ColorButton::color(cL->lCol), cL->lWidth, getPenStyle(cL->lStyle)));
 
   int style = c_type[index];
   if (style == Scatter)
@@ -3018,7 +3018,7 @@ void Graph::updateCurveLayout(int index, const CurveLayout *cL)
   else
     c->setStyle((QwtPlotCurve::CurveStyle)cL->connectType);
 
-  QBrush brush = QBrush(ColorBox::color(cL->aCol));
+  QBrush brush = QBrush(ColorButton::color(cL->aCol));
   if (cL->filledArea)
     brush.setStyle(getBrushStyle(cL->aStyle));
   else
@@ -4781,8 +4781,8 @@ void Graph::plotBoxDiagram(Table *w, const QStringList& names, int startRow, int
         c_type.resize(n_curves);
         c_type[n_curves-1] = Box;
 
-        c->setPen(QPen(ColorBox::color(j), 1));
-        c->setSymbol(QwtSymbol(QwtSymbol::NoSymbol, QBrush(), QPen(ColorBox::color(j), 1), QSize(7,7)));
+        c->setPen(QPen(ColorButton::color(j), 1));
+        c->setSymbol(QwtSymbol(QwtSymbol::NoSymbol, QBrush(), QPen(ColorButton::color(j), 1), QSize(7,7)));
 	}
 
 	Legend* mrk=(Legend*) d_plot->marker(legendMarkerID);
@@ -4964,7 +4964,7 @@ void Graph::guessUniqueCurveLayout(int& colorIndex, int& symbolIndex)
 		DataCurve *master_curve = er->masterCurve();
 		if (master_curve)
 		{
-			colorIndex = ColorBox::colorIndex(master_curve->pen().color());
+			colorIndex = ColorButton::colorIndex(master_curve->pen().color());
 			return;
 		}
 	}
@@ -4974,7 +4974,7 @@ void Graph::guessUniqueCurveLayout(int& colorIndex, int& symbolIndex)
 		const QwtPlotCurve *c = curve(i);
 		if (c && c->rtti() == QwtPlotItem::Rtti_PlotCurve)
 		{
-			int index = ColorBox::colorIndex(c->pen().color());
+			int index = ColorButton::colorIndex(c->pen().color());
 			if (index > colorIndex)
 				colorIndex = index;
 

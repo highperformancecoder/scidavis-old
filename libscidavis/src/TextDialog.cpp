@@ -129,9 +129,9 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WindowFlags fl )
 		// add background button
 		topLayout->addWidget( backgroundBtn, 4, 1 );	
 
-		connect(backgroundBtn, SIGNAL(clicked()), this, SLOT(pickBackgroundColor()));
 		connect(boxBackgroundTransparency, SIGNAL(valueChanged(int)), 
 				this, SLOT(updateTransparency(int)));
+		connect(backgroundBtn, SIGNAL(changed(const QColor&)), this, SLOT(pickBackgroundColor(const QColor&)));
 
 		buttonDefault = new QPushButton( tr( "Set As &Default" ) );
 		topLayout->addWidget( buttonDefault, 3, 3 );
@@ -178,7 +178,6 @@ TextDialog::TextDialog(TextType type, QWidget* parent, Qt::WindowFlags fl )
 	setLayout( mainLayout );
 
 	// signals and slots connections
-	connect( colorBtn, SIGNAL( clicked() ), this, SLOT( pickTextColor() ) );
 	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
 	connect( buttonApply, SIGNAL( clicked() ), this, SLOT( apply() ) );
 	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -307,31 +306,11 @@ void TextDialog::setTextColor(QColor c)
 	colorBtn->setColor(c);
 }
 
-void TextDialog::pickTextColor()
-{
-	QColor c = QColorDialog::getColor( colorBtn->color(), this);
-	if ( !c.isValid() || c ==  colorBtn->color() )
-		return;
-
-	colorBtn->setColor ( c ) ;
-}
-
 void TextDialog::setBackgroundColor(QColor c)
 {
 	boxBackgroundTransparency->setValue(c.alpha());
 	backgroundBtn->setEnabled(c.alpha());
-	c.setAlpha(255);
-	
 	backgroundBtn->setColor(c);
-}
-
-void TextDialog::pickBackgroundColor()
-{
-	QColor c = QColorDialog::getColor( backgroundBtn->color(), this);
-	if ( !c.isValid() || c ==  backgroundBtn->color() )
-		return;
-
-	backgroundBtn->setColor ( c ) ;
 }
 
 void TextDialog::setFont(const QFont & fnt)
@@ -341,5 +320,19 @@ void TextDialog::setFont(const QFont & fnt)
 
 void TextDialog::updateTransparency(int alpha)
 {
-backgroundBtn->setEnabled(alpha);
+	if (alpha != backgroundBtn->color().alpha())
+	{
+		QColor c = backgroundBtn->color();
+		c.setAlpha(alpha);
+		backgroundBtn->setColor(c);
+	}
+	backgroundBtn->setEnabled(alpha);
+}
+
+void TextDialog::pickBackgroundColor(const QColor& c)
+{
+	if (c.alpha() != boxBackgroundTransparency->value())
+	{
+		boxBackgroundTransparency->setValue(c.alpha());
+	}
 }

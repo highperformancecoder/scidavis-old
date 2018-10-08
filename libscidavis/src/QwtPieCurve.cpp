@@ -27,7 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "QwtPieCurve.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "Table.h"
 #include "core/column/Column.h"
 
@@ -97,8 +97,8 @@ void QwtPieCurve::drawPie(QPainter *painter,
 
 QColor QwtPieCurve::color(int i) const
 {
-	int index=(d_first_color+i) % ColorBox::numPredefinedColors();
-	return ColorBox::color(index);
+	int index=(d_first_color+i) % ColorButton::numPredefinedColors();
+	return ColorButton::color(index);
 }
 
 void QwtPieCurve::setBrushStyle(const Qt::BrushStyle& style)

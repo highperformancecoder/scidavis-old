@@ -28,7 +28,6 @@
  ***************************************************************************/
 #include "ApplicationWindow.h"
 #include "PlotDialog.h"
-#include "ColorBox.h"
 #include "ColorButton.h"
 #include "PatternBox.h"
 #include "SymbolBox.h"
@@ -59,7 +58,6 @@
 #include <QFileDialog>
 #include <QGroupBox>
 #include <QFontDialog>
-#include <QColorDialog>
 #include <QShortcut>
 #include <QKeySequence>
 #include <QDoubleSpinBox>
@@ -364,9 +362,9 @@ void PlotDialog::initLayerPage()
 	connect(boxCanvasTransparency, SIGNAL(valueChanged(int)), this, SLOT(updateCanvasTransparency(int)));
 	connect(boxAntialiasing, SIGNAL(toggled(bool)), this, SLOT(updateAntialiasing(bool)));
 	connect(boxMargin, SIGNAL(valueChanged (int)), this, SLOT(changeMargin(int)));
-	connect(boxBorderColor, SIGNAL(clicked()), this, SLOT(pickBorderColor()));
-	connect(boxBackgroundColor, SIGNAL(clicked()), this, SLOT(pickBackgroundColor()));
-	connect(boxCanvasColor, SIGNAL(clicked()), this, SLOT(pickCanvasColor()));
+	connect(boxBorderColor, SIGNAL(changed(const QColor &)), this, SLOT(pickBorderColor(const QColor &)));
+	connect(boxBackgroundColor, SIGNAL(changed(const QColor &)), this, SLOT(pickBackgroundColor(const QColor &)));
+	connect(boxCanvasColor, SIGNAL(changed(const QColor &)), this, SLOT(pickCanvasColor(const QColor &)));
 	connect(boxBorderWidth,SIGNAL(valueChanged (int)), this, SLOT(updateBorder(int)));
 }
 
@@ -377,7 +375,7 @@ void PlotDialog::initPiePage()
 	QGridLayout *gl1 = new QGridLayout();
 	gl1->addWidget(new QLabel( tr( "Color" )), 0, 0);
 
-	boxPieLineColor = new ColorBox();
+	boxPieLineColor = new ColorButton();
 	gl1->addWidget(boxPieLineColor, 0, 1);
 
 	gl1->addWidget(new QLabel(tr( "Style" )), 1, 0);
@@ -400,7 +398,7 @@ void PlotDialog::initPiePage()
 	QGridLayout *gl2 = new QGridLayout();
 	gl2->addWidget(new QLabel( tr( "First color" )), 0, 0);
 
-	boxFirstColor = new ColorBox();
+	boxFirstColor = new ColorButton();
 	gl2->addWidget(boxFirstColor, 0, 1);
 
 	gl2->addWidget(new QLabel( tr( "Pattern" )), 1, 0);
@@ -521,10 +519,8 @@ void PlotDialog::initLinePage()
 	hlayout->addWidget(fillGroupBox);
 	privateTabWidget->addTab( linePage, tr( "Line" ) );
 
-    connect(boxLineColor, SIGNAL(clicked()), this, SLOT(pickBoxLineColor()));
 	connect(boxConnect, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(boxLineStyle, SIGNAL(activated(int)), this, SLOT(acceptParams()));
-    connect(boxAreaColor, SIGNAL(clicked()), this, SLOT(pickBoxAreaColor()));
 	connect(boxPattern, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(fillGroupBox, SIGNAL(toggled(bool)), this, SLOT(showAreaColor(bool)));
 	connect(fillGroupBox, SIGNAL(clicked()), this, SLOT(acceptParams()));
@@ -561,9 +557,7 @@ void PlotDialog::initSymbolsPage()
 
 	privateTabWidget->addTab(symbolPage, tr( "Symbol" ));
 
-	connect(boxSymbolColor, SIGNAL(clicked()), this, SLOT(pickBoxSymbolColor()));
 	connect(boxSymbolStyle, SIGNAL(activated(int)), this, SLOT(acceptParams()));
-	connect(boxFillColor, SIGNAL(clicked()), this, SLOT(pickBoxFillColor()));
 	connect(boxFillSymbol, SIGNAL(clicked()), this, SLOT(fillSymbols()));
 }
 
@@ -705,11 +699,11 @@ void PlotDialog::initPercentilePage()
 
     boxFillSymbols = new QCheckBox(tr( "Fill Color" ));
     gl2->addWidget(boxFillSymbols, 1, 0);
-	boxPercFillColor = new ColorBox();
+	boxPercFillColor = new ColorButton();
     gl2->addWidget(boxPercFillColor, 1, 1);
 
     gl2->addWidget(new QLabel(tr( "Edge Color" )), 2, 0);
-	boxEdgeColor = new ColorBox();
+	boxEdgeColor = new ColorButton();
     gl2->addWidget(boxEdgeColor, 2, 1);
 
     gl2->addWidget(new QLabel(tr( "Edge Width" )), 3, 0);
@@ -730,8 +724,6 @@ void PlotDialog::initPercentilePage()
 	connect(box99Style, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(box1Style, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(box1Style, SIGNAL(activated(int)), this, SLOT(acceptParams()));
-	connect(boxEdgeColor, SIGNAL(activated(int)), this, SLOT(acceptParams()));
-	connect(boxPercFillColor, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(boxFillSymbols, SIGNAL(clicked()), this, SLOT(fillBoxSymbols()));
 }
 
@@ -804,8 +796,6 @@ void PlotDialog::initSpectrogramPage()
   	boxContourStyle->addItem("_.._..");
     gl1->addWidget(boxContourStyle, 2, 1);
     hl2->addWidget(defaultPenBox);
-
-  	connect(levelsColorBox, SIGNAL(clicked()), this, SLOT(pickContourLinesColor()));
 
   	axisScaleBox = new QGroupBox(tr( "Color Bar Scale" ));
   	axisScaleBox->setCheckable (true);
@@ -897,7 +887,6 @@ void PlotDialog::initErrorsPage()
 	hl->addWidget(gb2);
     privateTabWidget->addTab( errorsPage, tr( "Error Bars" ) );
 
-	connect(colorBox, SIGNAL(clicked()), this, SLOT(pickErrorBarsColor()));
 	connect(xBox, SIGNAL(clicked()), this, SLOT(changeErrorBarsType()));
 	connect(plusBox, SIGNAL(clicked()), this, SLOT(changeErrorBarsPlus()));
 	connect(minusBox, SIGNAL(clicked()), this, SLOT(changeErrorBarsMinus()));
@@ -962,7 +951,7 @@ void PlotDialog::initVectPage()
     QGroupBox *gb1 = new QGroupBox();
     QGridLayout *gl1 = new QGridLayout(gb1);
     gl1->addWidget(new QLabel(tr( "Color" )), 0, 0);
-	vectColorBox = new ColorBox();
+	vectColorBox = new ColorButton();
     gl1->addWidget(vectColorBox, 0, 1);
     gl1->addWidget(new QLabel(tr( "Line Width" )), 1, 0);
 	vectWidthBox = new QSpinBox();
@@ -1243,50 +1232,8 @@ void PlotDialog::changeErrorBarsType()
                          throughBox->isChecked());
 }
 
-void PlotDialog::pickBoxLineColor()
+void PlotDialog::pickErrorBarsColor(const QColor& color)
 {
-    QColor color = QColorDialog::getColor(boxLineColor->color(), this);
-    if ( !color.isValid() || color == boxLineColor->color() )
-        return;
-
-    boxLineColor->setColor(color);
-}
-
-void PlotDialog::pickBoxAreaColor()
-{
-    QColor color = QColorDialog::getColor(boxAreaColor->color(), this);
-    if ( !color.isValid() || color == boxAreaColor->color() )
-        return;
-
-    boxAreaColor->setColor(color);
-}
-
-void PlotDialog::pickBoxSymbolColor()
-{
-    QColor color = QColorDialog::getColor(boxSymbolColor->color(), this);
-    if ( !color.isValid() || color == boxSymbolColor->color() )
-        return;
-
-    boxSymbolColor->setColor(color);
-}
-
-void PlotDialog::pickBoxFillColor()
-{
-    QColor color = QColorDialog::getColor(boxFillColor->color(), this);
-    if ( !color.isValid() || color == boxFillColor->color() )
-        return;
-
-    boxFillColor->setColor(color);
-}
-
-void PlotDialog::pickErrorBarsColor()
-{
-  QColor color = QColorDialog::getColor(colorBox->color(), this);
-  if ( !color.isValid() || color == colorBox->color() )
-    return;
-
-  colorBox->setColor (color);
-
   CurveTreeItem *item = (CurveTreeItem *)listBox->currentItem();
   if (!item)
     return;
@@ -1559,13 +1506,11 @@ void PlotDialog::setActiveLayer(LayerItem *item)
   QColor c = p->paletteBackgroundColor();
   boxBackgroundTransparency->setValue(c.alpha());
   boxBackgroundColor->setEnabled(c.alpha());
-  c.setAlpha(255);
   boxBackgroundColor->setColor(c);
 
   c = p->canvasBackground();
   boxCanvasTransparency->setValue(c.alpha());
   boxCanvasColor->setEnabled(c.alpha());
-  c.setAlpha(255);
   boxCanvasColor->setColor(c);
 
   boxAntialiasing->setChecked(g->antialiasing());
@@ -1597,7 +1542,7 @@ void PlotDialog::setActiveCurve(CurveTreeItem *item)
       boxPieLineWidth->setValue(pie->pen().width());
       boxPieLineColor->setColor(pie->pen().color());
       setPiePenStyle(pie->pen().style());
-      boxFirstColor->setCurrentIndex(pie->firstColor());
+      boxFirstColor->setColor(pie->firstColor());
       return;
     }
 
@@ -1994,7 +1939,7 @@ bool PlotDialog::acceptParams()
                        Graph::getPenStyle(boxPieLineStyle->currentIndex())));
       pie->setRay(boxRadius->value());
       pie->setBrushStyle(boxPiePattern->getSelectedPattern());
-      pie->setFirstColor(boxFirstColor->currentIndex());
+      pie->setFirstColor(boxFirstColor->colorIndex(boxFirstColor->color()));
     }
   else if (privateTabWidget->currentWidget() == percentilePage)
     {
@@ -2302,15 +2247,6 @@ void PlotDialog::showDefaultContourLinesBox(bool)
   		defaultPenBox->show();
 }
 
-void PlotDialog::pickContourLinesColor()
-{
-  	QColor color = QColorDialog::getColor(levelsColorBox->color(), this);
-  	if ( !color.isValid() || color == levelsColorBox->color() )
-  		return;
-
-  	levelsColorBox->setColor(color);
-}
-
 void PlotDialog::updateTreeWidgetItem(QTreeWidgetItem *item)
 {
     if (item->type() != QTreeWidgetItem::Type)
@@ -2325,6 +2261,12 @@ void PlotDialog::updateTreeWidgetItem(QTreeWidgetItem *item)
 void PlotDialog::updateBackgroundTransparency(int alpha)
 {
 	boxBackgroundColor->setEnabled(alpha);
+	if (alpha != boxBackgroundColor->color().alpha())
+	{
+		QColor c = boxBackgroundColor->color();
+		c.setAlpha(alpha);
+		boxBackgroundColor->setColor(c);
+	}
 
 	if (boxAll->isChecked())
 	{
@@ -2358,6 +2300,12 @@ void PlotDialog::updateBackgroundTransparency(int alpha)
 void PlotDialog::updateCanvasTransparency(int alpha)
 {
     boxCanvasColor->setEnabled(alpha);
+	if (alpha != boxCanvasColor->color().alpha())
+	{
+		QColor c = boxCanvasColor->color();
+		c.setAlpha(alpha);
+		boxCanvasColor->setColor(c);
+	}
 
 	if (boxAll->isChecked())
 	{
@@ -2388,14 +2336,13 @@ void PlotDialog::updateCanvasTransparency(int alpha)
 	}
 }
 
-void PlotDialog::pickCanvasColor()
+void PlotDialog::pickCanvasColor(const QColor& c)
 {
-	QColor c = QColorDialog::getColor(boxCanvasColor->color(), this);
-    if ( !c.isValid() || c == boxCanvasColor->color() )
-			return;
-
-	boxCanvasColor->setColor ( c ) ;
-
+	QColor color = c;
+	if (c.alpha() != boxCanvasTransparency->value())
+	{
+		boxCanvasTransparency->setValue(c.alpha());
+	}
 	if (boxAll->isChecked())
 	{
 		QWidgetList allPlots = d_ml->graphPtrs();
@@ -2404,8 +2351,8 @@ void PlotDialog::pickCanvasColor()
 			Graph* g=(Graph*)allPlots.at(i);
 			if (g)
 			{
-				c.setAlpha(boxCanvasTransparency->value());
-				g->setCanvasBackground(c);
+				color.setAlpha(boxCanvasTransparency->value());
+				g->setCanvasBackground(color);
 				g->replot();
 			}
 		}
@@ -2418,21 +2365,20 @@ void PlotDialog::pickCanvasColor()
         Graph *g = item->graph();
 		if (g)
 		{
-			c.setAlpha(boxCanvasTransparency->value());
-			g->setCanvasBackground(c);
+			color.setAlpha(boxCanvasTransparency->value());
+			g->setCanvasBackground(color);
 			g->replot();
 		}
 	}
 }
 
-void PlotDialog::pickBackgroundColor()
+void PlotDialog::pickBackgroundColor(const QColor& c)
 {
-	QColor c = QColorDialog::getColor(boxBackgroundColor->color(), this);
-    if ( !c.isValid() || c == boxBackgroundColor->color() )
-			return;
-
-	boxBackgroundColor->setColor ( c ) ;
-
+	QColor color = c;
+	if (c.alpha() != boxBackgroundTransparency->value())
+	{
+		boxBackgroundTransparency->setValue(c.alpha());
+	}
 	if (boxAll->isChecked())
 	{
 		QWidgetList allPlots = d_ml->graphPtrs();
@@ -2441,8 +2387,8 @@ void PlotDialog::pickBackgroundColor()
 			Graph* g=(Graph*)allPlots.at(i);
 			if (g)
 			{
-				c.setAlpha(boxBackgroundTransparency->value());
-				g->setBackgroundColor(c);
+				color.setAlpha(boxBackgroundTransparency->value());
+				g->setBackgroundColor(color);
 				g->replot();
 			}
 		}
@@ -2455,21 +2401,15 @@ void PlotDialog::pickBackgroundColor()
         Graph *g = item->graph();
 		if (g)
 		{
-			c.setAlpha(boxBackgroundTransparency->value());
-			g->setBackgroundColor(c);
+			color.setAlpha(boxBackgroundTransparency->value());
+			g->setBackgroundColor(color);
 			g->replot();
 		}
 	}
 }
 
-void PlotDialog::pickBorderColor()
+void PlotDialog::pickBorderColor(const QColor& c)
 {
-	QColor c = QColorDialog::getColor(boxBorderColor->color(), this);
-	if ( !c.isValid() || c == boxBorderColor->color() )
-		return;
-
-	boxBorderColor->setColor ( c ) ;
-
 	if (boxAll->isChecked())
 	{
 		QWidgetList allPlots = d_ml->graphPtrs();

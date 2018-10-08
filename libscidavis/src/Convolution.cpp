@@ -30,7 +30,7 @@
 #include "MultiLayer.h"
 #include "Plot.h"
 #include "PlotCurve.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "core/column/Column.h"
 
 #include <QMessageBox>
@@ -162,7 +162,7 @@ void Convolution::addResultCurve()
 
   DataCurve *c = new DataCurve(d_table, d_table->colName(cols), d_table->colName(cols2));
   c->setData(x_temp, d_x, d_n);
-  c->setPen(QPen(ColorBox::color(d_curveColorIndex), 1));
+  c->setPen(QPen(ColorButton::color(d_curveColorIndex), 1));
   ml->activeGraph()->insertPlotItem(c, Graph::Line);
   ml->activeGraph()->updatePlot();
 }

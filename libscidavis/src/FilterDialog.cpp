@@ -29,7 +29,7 @@
 #include "FilterDialog.h"
 #include "Graph.h"
 #include "MyParser.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "FFTFilter.h"
 
 #include <QGroupBox>
@@ -63,8 +63,8 @@ FilterDialog::FilterDialog(int type, QWidget* parent, Qt::WindowFlags fl )
 	boxStart->setText(tr("0"));
 	gl1->addWidget(boxStart, 1, 1);
 
-	boxColor = new ColorBox();
-	boxColor->setColor(QColor(Qt::red));
+	btnColor = new ColorButton();
+	btnColor->setColor(QColor(Qt::red));
 	if (type >= FFTFilter::BandPass)
 		{
 	    gl1->addWidget(new QLabel(tr("High Frequency (Hz)")), 2, 0);
@@ -82,13 +82,13 @@ FilterDialog::FilterDialog(int type, QWidget* parent, Qt::WindowFlags fl )
 		gl1->addWidget(boxOffset, 3, 1);
 
 		gl1->addWidget(new QLabel(tr("Color")), 4, 0);
-		gl1->addWidget(boxColor, 4, 1);
+		gl1->addWidget(btnColor, 4, 1);
         gl1->setRowStretch(5, 1);
 		}
     else
         {
         gl1->addWidget(new QLabel(tr("Color")), 2, 0);
-		gl1->addWidget(boxColor, 2, 1);
+		gl1->addWidget(btnColor, 2, 1);
         gl1->setRowStretch(3, 1);
         }
 
@@ -179,7 +179,7 @@ else if (filter_type == FFTFilter::BandBlock)
 else
     f->setCutoff(from);
 
-f->setColor(boxColor->currentIndex());
+f->setColor(ColorButton::colorIndex(btnColor->color()));
 f->run();
 delete f;
 }

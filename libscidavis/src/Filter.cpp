@@ -28,7 +28,7 @@
  ***************************************************************************/
 #include "Filter.h"
 #include "Legend.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "Table.h"
 #include "FunctionCurve.h"
 #include "PlotCurve.h"
@@ -182,7 +182,7 @@ void Filter::setColor(const QString& colorName)
         c = QColor(Qt::green);
     else if (colorName == "darkYellow")
         c = QColor(Qt::darkYellow);
-    if (!ColorBox::isValidColor(c))
+    if (!ColorButton::isValidColor(c))
     {
         QMessageBox::critical((ApplicationWindow *)parent(), tr("Color Name Error"),
 				tr("The color name '%1' is not valid, a default color (red) will be used instead!").arg(colorName));
@@ -190,7 +190,7 @@ void Filter::setColor(const QString& colorName)
         return;
     }
 
-	d_curveColorIndex = ColorBox::colorIndex(c);
+	d_curveColorIndex = ColorButton::colorIndex(c);
 }
 
 void Filter::showLegend()
@@ -317,7 +317,7 @@ QwtPlotCurve* Filter::addResultCurve(double *x, double *y)
 
 	DataCurve *c = new DataCurve(t, tableName + "_" + xCol->name(), tableName + "_" + yCol->name());
 	c->setData(x, y, d_points);
-    c->setPen(QPen(ColorBox::color(d_curveColorIndex), 1));
+    c->setPen(QPen(ColorButton::color(d_curveColorIndex), 1));
 	d_graph->insertPlotItem(c, Graph::Line);
     d_graph->updatePlot();
 

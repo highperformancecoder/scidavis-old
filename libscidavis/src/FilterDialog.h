@@ -36,7 +36,7 @@ class QLineEdit;
 class QComboBox;
 class QCheckBox;
 class Graph;
-class ColorBox;
+class ColorButton;
 	
 //! Filter options dialog
 class FilterDialog : public QDialog
@@ -53,7 +53,7 @@ public:
 	QCheckBox* boxOffset;
 	QLineEdit* boxStart;
 	QLineEdit* boxEnd;
-	ColorBox* boxColor;
+	ColorButton* btnColor;
 
 public slots:
 	void setGraph(Graph *g);

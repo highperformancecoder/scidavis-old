@@ -35,7 +35,7 @@ class QPushButton;
 class QComboBox;
 class QSpinBox;
 class Graph;
-class ColorBox;
+class ColorButton;
 
 //! Smoothing options dialog
 class SmoothCurveDialog : public QDialog
@@ -50,7 +50,7 @@ public:
 	QPushButton* buttonCancel;
 	QComboBox* boxName;
 	QSpinBox *boxPointsLeft, *boxPointsRight, *boxOrder;
-	ColorBox* boxColor;
+	ColorButton* btnColor;
 
 public slots:
 	void setGraph(Graph *g);

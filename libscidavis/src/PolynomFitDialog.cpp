@@ -28,7 +28,7 @@
  ***************************************************************************/
 #include "PolynomFitDialog.h"
 #include "Graph.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "ApplicationWindow.h"
 #include "PolynomialFit.h"
 
@@ -70,9 +70,9 @@ PolynomFitDialog::PolynomFitDialog( QWidget* parent, Qt::WindowFlags fl )
     gl1->addWidget(boxEnd, 3, 1);
 
     gl1->addWidget(new QLabel( tr("Color")), 4, 0);
-	boxColor = new ColorBox();
-	boxColor->setColor(QColor(Qt::red));
-    gl1->addWidget(boxColor, 4, 1);
+	btnColor = new ColorButton();
+	btnColor->setColor(QColor(Qt::red));
+	gl1->addWidget(btnColor, 4, 1);
 
 	boxShowFormula = new QCheckBox(tr( "Show Formula on Graph?" ));
 	boxShowFormula->setChecked( false );
@@ -115,7 +115,7 @@ void PolynomFitDialog::fit()
     PolynomialFit *fitter = new PolynomialFit(app, graph, boxOrder->value(), boxShowFormula->isChecked());
     if (fitter->setDataFromCurve(curveName, boxStart->text().toDouble(), boxEnd->text().toDouble()))
     {
-        fitter->setColor(boxColor->currentIndex());
+        fitter->setColor(ColorButton::colorIndex(btnColor->color()));
         fitter->scaleErrors(app->fit_scale_errors);
         fitter->setOutputPrecision(app->fit_output_precision);
 		fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);

@@ -95,7 +95,7 @@
 #include "Convolution.h"
 #include "Correlation.h"
 #include "CurveRangeDialog.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "QwtHistogram.h"
 #include "OpenProjectDialog.h"
 #include "IconLoader.h"
@@ -9676,7 +9676,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                               if (d_file_version <= 77)
                                 {
                                   int temp_index = convertOldToNewColorIndex(curve[15].toInt());
-                                  ag->updateVectorsLayout(curveID, ColorBox::color(temp_index), curve[16].toInt(), curve[17].toInt(),
+                                  ag->updateVectorsLayout(curveID, ColorButton::color(temp_index), curve[16].toInt(), curve[17].toInt(),
                                                           curve[18].toInt(), curve[19].toInt(), 0, curve[20], curve[21]);
                                 }
                               else

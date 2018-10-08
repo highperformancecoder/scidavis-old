@@ -52,6 +52,14 @@ public:
 	void setColor(const QColor& c);
 	//! Get the color of the display part
 	QColor color() const;
+	//! Return the index for a given color
+	static unsigned int colorIndex(const QColor& c);
+	//! Return the color at index 'colorindex'
+	static QColor color(unsigned int colorIndex);
+	//! Returns TRUE if the color is included in the color box, otherwise returns FALSE.
+	static bool isValidColor(const QColor& color);
+	//! Returns the number of predefined colors
+	static int numPredefinedColors();
 	QSize sizeHint() const;
 
 private:
@@ -61,10 +69,18 @@ private:
 signals:
 	//! Signal clicked: This is emitted when the selection button is clicked
 	void clicked();
+	void changed(const QColor &);
 
 protected:
 	//! Initialize the widget (called from constructor)
 	void init();
+	//! The number of predefined colors
+	static const int colors_count;
+	//! Array containing the 24 predefined colors
+	static const QColor colors[];
+
+private slots:
+	void pickColor();
 
 private:
 	int btn_size;

@@ -29,7 +29,7 @@
 #include "Plot.h"
 #include "Graph.h"
 #include "Grid.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 
 #include <qwt_plot_canvas.h>
 #include <qwt_painter.h>
@@ -144,8 +144,8 @@ void Grid::load(const QStringList& grid)
         xAxis = grid[19].toInt();
         yAxis = grid[20].toInt();
 	} else { // older versions of QtiPlot (<= 0.9rc3)
-		majPenX = QPen(ColorBox::color(grid[5].toInt()), grid[7].toInt(), Graph::getPenStyle(grid[6].toInt()));
-		minPenX = QPen(ColorBox::color(grid[8].toInt()), grid[10].toInt(), Graph::getPenStyle(grid[9].toInt()));
+		majPenX = QPen(ColorButton::color(grid[5].toInt()), grid[7].toInt(), Graph::getPenStyle(grid[6].toInt()));
+		minPenX = QPen(ColorButton::color(grid[8].toInt()), grid[10].toInt(), Graph::getPenStyle(grid[9].toInt()));
 		majPenY = majPenX;
 		minPenY = minPenX;
 

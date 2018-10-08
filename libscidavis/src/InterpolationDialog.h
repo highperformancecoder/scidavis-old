@@ -36,7 +36,7 @@ class QLineEdit;
 class QComboBox;
 class QSpinBox;
 class Graph;
-class ColorBox;
+class ColorButton;
 
 //! Interpolation options dialog
 class InterpolationDialog : public QDialog
@@ -54,7 +54,7 @@ public:
 	QSpinBox* boxPoints;
 	QLineEdit* boxStart;
 	QLineEdit* boxEnd;
-	ColorBox* boxColor;
+	ColorButton* btnColor;
 
 public slots:
 	void activateCurve(const QString& curveName);

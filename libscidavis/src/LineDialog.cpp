@@ -44,7 +44,6 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QComboBox>
-#include <QColorDialog>
 #include <QTabWidget>
 
 LineDialog::LineDialog( ArrowMarker *line, QWidget* parent, Qt::WindowFlags fl )
@@ -155,7 +154,6 @@ LineDialog::LineDialog( ArrowMarker *line, QWidget* parent, Qt::WindowFlags fl )
 
 	enableHeadTab();
 
-	connect( colorBox, SIGNAL( clicked() ), this, SLOT(pickColor() ) );
 	connect( btnOk, SIGNAL( clicked() ), this, SLOT(accept() ) );
 	connect( btnApply, SIGNAL( clicked() ), this, SLOT(apply() ) );
 	connect( tw, SIGNAL(currentChanged (int)), this, SLOT(enableButtonDefault(int)));
@@ -309,15 +307,6 @@ if (startBox->isChecked() || endBox->isChecked())
 	tw->setTabEnabled (tw->indexOf(head), true);
 else
 	tw->setTabEnabled (tw->indexOf(head), false);
-}
-
-void LineDialog::pickColor()
-{
-QColor c = QColorDialog::getColor(colorBox->color(), this);
-if ( !c.isValid() || c == colorBox->color() )
-	return;
-
-colorBox->setColor ( c ) ;
 }
 
 void LineDialog::setDefaultValues()

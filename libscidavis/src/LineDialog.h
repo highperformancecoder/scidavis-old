@@ -60,7 +60,6 @@ public slots:
 	void setDefaultValues();
 	void displayCoordinates(int unit);
 	void setLineStyle(Qt::PenStyle style);
-	void pickColor();
 	void accept();
 	void apply();
 

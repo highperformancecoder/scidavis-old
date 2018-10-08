@@ -37,7 +37,7 @@ class QPushButton;
 class QLineEdit;
 class QComboBox;
 class Graph;
-class ColorBox;
+class ColorButton;
 
 //! Fit polynomial dialog
 class PolynomFitDialog : public QDialog
@@ -63,7 +63,7 @@ private:
 	QSpinBox* boxOrder;
 	QLineEdit* boxStart;
 	QLineEdit* boxEnd;
-	ColorBox* boxColor;
+	ColorButton* btnColor;
 };
 
 #endif

@@ -43,7 +43,6 @@ class QLabel;
 class QRadioButton;
 class QListWidget;
 class ColorButton;
-class ColorBox;
 
 #ifndef TS_PATH
 #define TS_PATH (qApp->applicationDirPath() + "/translations")
@@ -171,7 +170,7 @@ private:
 	QGroupBox *groupBoxFittingCurve, *groupBoxFitParameters;
 	QRadioButton *samePointsBtn, *generatePointsBtn;
     QGroupBox *groupBoxMultiPeak;
-	ColorBox *boxPeaksColor;
+	ColorButton *boxPeaksColor;
 	QLabel *lblScriptingLanguage;
 	QComboBox *boxScriptingLanguage;
 	QCheckBox *boxAntialiasing, *boxAutoscale3DPlots, *boxTableComments;

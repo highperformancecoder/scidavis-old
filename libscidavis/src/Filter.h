@@ -61,7 +61,7 @@ class Filter : public QObject
 		void setTolerance(double eps){d_tolerance = eps;};
 
 		//! Sets the color of the output fit curve.
-		void setColor(int colorId){d_curveColorIndex = colorId;};
+		void setColor(unsigned int colorId){d_curveColorIndex = colorId;};
 
         //! Sets the color of the output fit curve. Provided for convenience. To be used in scripts only!
         void setColor(const QString& colorName);
@@ -139,7 +139,7 @@ class Filter : public QObject
 		int d_points;
 
 		//! Color index of the result curve
-		int d_curveColorIndex;
+		unsigned int d_curveColorIndex;
 
 		//! Maximum number of iterations per fit
 		int d_max_iterations;

@@ -29,7 +29,7 @@
 #include "SmoothCurveDialog.h"
 #include "Graph.h"
 #include "MyParser.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "SmoothFilter.h"
 
 #include <QGroupBox>
@@ -55,8 +55,8 @@ SmoothCurveDialog::SmoothCurveDialog(int method, QWidget* parent, Qt::WindowFlag
     boxName = new QComboBox();
 	gl1->addWidget(boxName, 0, 1);
 
-	boxColor = new ColorBox();
-	boxColor->setColor(QColor(Qt::red));
+	btnColor = new ColorButton();
+	btnColor->setColor(QColor(Qt::red));
 
 	if (method == SmoothFilter::SavitzkyGolay)
 		{
@@ -79,7 +79,7 @@ SmoothCurveDialog::SmoothCurveDialog(int method, QWidget* parent, Qt::WindowFlag
 		gl1->addWidget(boxPointsRight, 3, 1);
 
 		gl1->addWidget(new QLabel(tr("Color")), 4, 0);
-		gl1->addWidget(boxColor, 4, 1);
+		gl1->addWidget(btnColor, 4, 1);
         gl1->setRowStretch(5, 1);
 		}
 	else
@@ -92,7 +92,7 @@ SmoothCurveDialog::SmoothCurveDialog(int method, QWidget* parent, Qt::WindowFlag
 		gl1->addWidget(boxPointsLeft, 1, 1);
 
 		gl1->addWidget(new QLabel(tr("Color")), 2, 0);
-		gl1->addWidget(boxColor, 2, 1);
+		gl1->addWidget(btnColor, 2, 1);
         gl1->setRowStretch(3, 1);
 		}
     gl1->setColumnStretch(2, 1);
@@ -127,7 +127,7 @@ void SmoothCurveDialog::smooth()
     else
         sf->setSmoothPoints(boxPointsLeft->value());
 
-    sf->setColor(boxColor->currentIndex());
+    sf->setColor(ColorButton::colorIndex(btnColor->color()));
     sf->run();
     delete sf;
 }
