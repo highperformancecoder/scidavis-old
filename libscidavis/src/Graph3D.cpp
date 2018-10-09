@@ -44,8 +44,8 @@
 #include <QCursor>
 #include <QImageWriter>
 
-#include <qwtplot3d/qwt3d_io_gl2ps.h>
-#include <qwtplot3d/qwt3d_coordsys.h>
+#include <qwt3d_io_gl2ps.h>
+#include <qwt3d_coordsys.h>
 
 #include <gsl/gsl_vector.h>
 #include <fstream>
