@@ -59,6 +59,31 @@ const QColor ColorButton::colors[] = {
   QColor("#80FFFF"),
   QColor("#FF80FF"),
   QColor(Qt::darkGray),
+  // additional colors from figure 6 in doi:10.1016/j.csda.2008.11.033
+  QColor("#023fa5"),
+  QColor("#4a6fe3"),
+  QColor("#11c638"),
+  QColor("#0fcfc0"),
+  QColor("#8e063b"),
+  QColor("#d33f6a"),
+  QColor("#ef9708"),
+  QColor("#f79cd4"),
+  QColor("#7d87b9"),
+  QColor("#8595e1"),
+  QColor("#8dd593"),
+  QColor("#9cded6"),
+  QColor("#bb7784"),
+  QColor("#e07b91"),
+  QColor("#f0b98d"),
+  QColor("#f6c4e1"),
+  QColor("#bec1d4"),
+  QColor("#b5bbe3"),
+  QColor("#c6dec7"),
+  QColor("#d5eae7"),
+  QColor("#d6bcc0"),
+  QColor("#e6afb9"),
+  QColor("#ead3c6"),
+  QColor("#f3e1eb"),
 };
 
 const unsigned int ColorButton::colors_count=sizeof(colors)/sizeof(colors[0]);
@@ -70,11 +95,14 @@ ColorButton::ColorButton(QWidget *parent) : QWidget(parent)
 
 void ColorButton::init()
 {
+	// QColorDialog has 48 basic colors in a 6x8 grid. Using:
+	//   for (int i=0; i < colors_count; i++) {QColorDialog::setStandardColor(i, colors[i].rgb());};
+	// arranges the colors in columns of 6. Instead arrange them in rows of 8 colors each.
 	for (int i=0; i<8; i++)
 	{
-		for (int j=0; j<3; j++)
+		for (int j=0; j<6; j++)
 		{
-			QColorDialog::setStandardColor(6*i+j,   colors[i+8*j].rgb());
+			QColorDialog::setStandardColor(j+6*i, colors[i+8*j].rgb());
 		}
 	}
 	const int btn_size = 28;
