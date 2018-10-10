@@ -36,9 +36,9 @@ class QHBoxLayout;
 class QFrame;
 
 #if QT_VERSION >= 0x050000
-#define COLORNAME( c ) c.name(QColor::HexArgb)
+static inline QString COLORNAME( QColor c ) { return c.name(QColor::HexArgb); }
 #else
-#define COLORNAME( c ) ('#'+QString::number(c.rgba(),16))
+static inline QString COLORNAME( QColor c ) { return ('#'+QString::number(c.rgba(),16)); }
 #endif
 
 //! A button used for color selection
