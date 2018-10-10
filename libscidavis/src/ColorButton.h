@@ -75,7 +75,7 @@ private:
 signals:
 	//! Signal clicked: This is emitted when the selection button is clicked
 	void clicked();
-	void changed(const QColor &);
+	void changed(QColor);
 
 protected:
 	//! Initialize the widget (called from constructor)

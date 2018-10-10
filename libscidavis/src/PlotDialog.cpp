@@ -362,9 +362,9 @@ void PlotDialog::initLayerPage()
 	connect(boxCanvasTransparency, SIGNAL(valueChanged(int)), this, SLOT(updateCanvasTransparency(int)));
 	connect(boxAntialiasing, SIGNAL(toggled(bool)), this, SLOT(updateAntialiasing(bool)));
 	connect(boxMargin, SIGNAL(valueChanged (int)), this, SLOT(changeMargin(int)));
-	connect(boxBorderColor, SIGNAL(changed(const QColor &)), this, SLOT(pickBorderColor(const QColor &)));
-	connect(boxBackgroundColor, SIGNAL(changed(const QColor &)), this, SLOT(pickBackgroundColor(const QColor &)));
-	connect(boxCanvasColor, SIGNAL(changed(const QColor &)), this, SLOT(pickCanvasColor(const QColor &)));
+	connect(boxBorderColor, SIGNAL(changed(QColor)), this, SLOT(pickBorderColor(QColor)));
+	connect(boxBackgroundColor, SIGNAL(changed(QColor)), this, SLOT(pickBackgroundColor(QColor)));
+	connect(boxCanvasColor, SIGNAL(changed(QColor)), this, SLOT(pickCanvasColor(QColor)));
 	connect(boxBorderWidth,SIGNAL(valueChanged (int)), this, SLOT(updateBorder(int)));
 }
 
@@ -891,6 +891,7 @@ void PlotDialog::initErrorsPage()
 	connect(plusBox, SIGNAL(clicked()), this, SLOT(changeErrorBarsPlus()));
 	connect(minusBox, SIGNAL(clicked()), this, SLOT(changeErrorBarsMinus()));
 	connect(throughBox, SIGNAL(clicked()), this, SLOT(changeErrorBarsThrough()));
+	connect(colorBox, SIGNAL(changed(QColor)), this, SLOT(pickErrorBarsColor(QColor)));
 }
 
 void PlotDialog::initHistogramPage()
@@ -1232,7 +1233,7 @@ void PlotDialog::changeErrorBarsType()
                          throughBox->isChecked());
 }
 
-void PlotDialog::pickErrorBarsColor(const QColor& color)
+void PlotDialog::pickErrorBarsColor(QColor color)
 {
   CurveTreeItem *item = (CurveTreeItem *)listBox->currentItem();
   if (!item)
@@ -1662,10 +1663,10 @@ void PlotDialog::setActiveCurve(CurveTreeItem *item)
           xBox->setChecked(err->xErrors());
           widthBox->setEditText(QString::number(err->width()));
           capBox->setEditText(QString::number(err->capLength()));
-          colorBox->setColor(err->color());
           throughBox->setChecked(err->throughSymbol());
           plusBox->setChecked(err->plusSide());
           minusBox->setChecked(err->minusSide());
+          colorBox->setColor(err->color());
         }
     }
 
@@ -2336,9 +2337,8 @@ void PlotDialog::updateCanvasTransparency(int alpha)
 	}
 }
 
-void PlotDialog::pickCanvasColor(const QColor& c)
+void PlotDialog::pickCanvasColor(QColor c)
 {
-	QColor color = c;
 	if (c.alpha() != boxCanvasTransparency->value())
 	{
 		boxCanvasTransparency->setValue(c.alpha());
@@ -2351,8 +2351,8 @@ void PlotDialog::pickCanvasColor(const QColor& c)
 			Graph* g=(Graph*)allPlots.at(i);
 			if (g)
 			{
-				color.setAlpha(boxCanvasTransparency->value());
-				g->setCanvasBackground(color);
+				c.setAlpha(boxCanvasTransparency->value());
+				g->setCanvasBackground(c);
 				g->replot();
 			}
 		}
@@ -2365,16 +2365,15 @@ void PlotDialog::pickCanvasColor(const QColor& c)
         Graph *g = item->graph();
 		if (g)
 		{
-			color.setAlpha(boxCanvasTransparency->value());
-			g->setCanvasBackground(color);
+			c.setAlpha(boxCanvasTransparency->value());
+			g->setCanvasBackground(c);
 			g->replot();
 		}
 	}
 }
 
-void PlotDialog::pickBackgroundColor(const QColor& c)
+void PlotDialog::pickBackgroundColor(QColor c)
 {
-	QColor color = c;
 	if (c.alpha() != boxBackgroundTransparency->value())
 	{
 		boxBackgroundTransparency->setValue(c.alpha());
@@ -2387,8 +2386,8 @@ void PlotDialog::pickBackgroundColor(const QColor& c)
 			Graph* g=(Graph*)allPlots.at(i);
 			if (g)
 			{
-				color.setAlpha(boxBackgroundTransparency->value());
-				g->setBackgroundColor(color);
+				c.setAlpha(boxBackgroundTransparency->value());
+				g->setBackgroundColor(c);
 				g->replot();
 			}
 		}
@@ -2401,14 +2400,14 @@ void PlotDialog::pickBackgroundColor(const QColor& c)
         Graph *g = item->graph();
 		if (g)
 		{
-			color.setAlpha(boxBackgroundTransparency->value());
-			g->setBackgroundColor(color);
+			c.setAlpha(boxBackgroundTransparency->value());
+			g->setBackgroundColor(c);
 			g->replot();
 		}
 	}
 }
 
-void PlotDialog::pickBorderColor(const QColor& c)
+void PlotDialog::pickBorderColor(QColor c)
 {
 	if (boxAll->isChecked())
 	{

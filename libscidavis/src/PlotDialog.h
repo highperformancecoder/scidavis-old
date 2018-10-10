@@ -94,7 +94,7 @@ class PlotDialog : public QDialog
 		void removeSelectedCurve();
 
 		/******* error bars options **************/
-		void pickErrorBarsColor(const QColor &);
+		void pickErrorBarsColor(QColor);
 		void changeErrorBarsType();
 		void changeErrorBarsPlus();
 		void changeErrorBarsMinus();
@@ -123,9 +123,9 @@ class PlotDialog : public QDialog
 		void updateCanvasTransparency(int alpha);
 		void updateAntialiasing(bool on);
 		void updateBorder(int width);
-		void pickBackgroundColor(const QColor &);
-		void pickCanvasColor(const QColor &);
-		void pickBorderColor(const QColor &);
+		void pickBackgroundColor(QColor);
+		void pickCanvasColor(QColor);
+		void pickBorderColor(QColor);
 		void changeMargin(int);
 		void setTitlesFont();
 		void setAxesLabelsFont();
