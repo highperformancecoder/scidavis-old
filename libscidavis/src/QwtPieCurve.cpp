@@ -97,7 +97,7 @@ void QwtPieCurve::drawPie(QPainter *painter,
 
 QColor QwtPieCurve::color(int i) const
 {
-	int index=(d_first_color+i) % ColorButton::numPredefinedColors();
+	int index=(d_first_color+i) % ColorButton::colors_count;
 	return ColorButton::color(index);
 }
 

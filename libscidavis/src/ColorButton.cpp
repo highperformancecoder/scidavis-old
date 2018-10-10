@@ -61,7 +61,7 @@ const QColor ColorButton::colors[] = {
   QColor(Qt::darkGray),
 };
 
-const int ColorButton::colors_count=sizeof(colors)/sizeof(colors[0]);
+const unsigned int ColorButton::colors_count=sizeof(colors)/sizeof(colors[0]);
 
 ColorButton::ColorButton(QWidget *parent) : QWidget(parent)
 {
@@ -141,11 +141,6 @@ bool ColorButton::isValidColor(const QColor& c)
 {
 	const QColor *ite = std::find(std::begin(colors), std::end(colors), c);
 	return (ite->isValid());
-}
-
-int ColorButton::numPredefinedColors()
-{
-	return colors_count;
 }
 
 QSize ColorButton::sizeHint () const

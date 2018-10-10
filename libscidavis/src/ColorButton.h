@@ -64,8 +64,8 @@ public:
 	static QColor color(unsigned int colorIndex);
 	//! Returns TRUE if the color is included in the color box, otherwise returns FALSE.
 	static bool isValidColor(const QColor& color);
-	//! Returns the number of predefined colors
-	static int numPredefinedColors();
+	//! The number of predefined colors
+	static const unsigned int colors_count;
 	QSize sizeHint() const;
 
 private:
@@ -80,8 +80,6 @@ signals:
 protected:
 	//! Initialize the widget (called from constructor)
 	void init();
-	//! The number of predefined colors
-	static const int colors_count;
 	//! Array containing the 24 predefined colors
 	static const QColor colors[];
 

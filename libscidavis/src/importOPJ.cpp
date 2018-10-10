@@ -820,7 +820,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 				}
 
 				cl.lWidth = _curve.lineWidth;
-				color=_curve.lineColor.regular % ColorButton::numPredefinedColors();
+				color=_curve.lineColor.regular % ColorButton::colors_count;
 				cl.lCol = (_curve.lineColor.type==Origin::Color::Automatic?0:color); //0xF7 -Automatic color
 				int linestyle=_curve.lineStyle;
 				cl.filledArea=(_curve.fillArea || style==Graph::VerticalBars || style==Graph::HorizontalBars || style==Graph::Histogram || style == Graph::Pie || style == Graph::Box) ? 1 : 0;
