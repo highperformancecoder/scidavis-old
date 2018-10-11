@@ -145,7 +145,7 @@ QColor ColorButton::color() const
 unsigned int ColorButton::colorIndex(const QColor& c)
 {
 	const QColor *ite = std::find(std::begin(colors), std::end(colors), c);
-	if (ite->isValid())
+	if (ite!=std::end(colors) && ite->isValid())
 		return (ite - colors);
 	else
 		return c.rgba();
@@ -168,7 +168,7 @@ QColor ColorButton::color(unsigned int colorIndex)
 bool ColorButton::isValidColor(const QColor& c)
 {
 	const QColor *ite = std::find(std::begin(colors), std::end(colors), c);
-	return (ite->isValid());
+	return (ite!=std::end(colors) && ite->isValid());
 }
 
 QSize ColorButton::sizeHint () const
