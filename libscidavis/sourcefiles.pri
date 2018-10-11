@@ -50,7 +50,6 @@ HEADERS  += src/ApplicationWindow.h \
             src/Matrix.h \
             src/DataSetDialog.h \
             src/MyParser.h \
-            src/ColorBox.h \
             src/SymbolBox.h \
             src/PatternBox.h \
             src/SymbolDialog.h \
@@ -157,7 +156,6 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/VectorCurve.cpp \
             src/Matrix.cpp \
             src/MyParser.cpp\
-            src/ColorBox.cpp \
             src/SymbolBox.cpp \
             src/PatternBox.cpp \
             src/SymbolDialog.cpp \
