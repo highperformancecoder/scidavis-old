@@ -2339,23 +2339,23 @@ QString Graph::saveCurveLayout(int index)
 			s+="6\t";
 		else
 			s+=QString::number(c->style())+"\t";
-		s+=QString::number(ColorButton::colorIndex(c->pen().color()))+"\t";
+		s+=COLORNAME(c->pen().color())+"\t";
 		s+=QString::number(c->pen().style()-1)+"\t";
 		s+=QString::number(c->pen().width())+"\t";
 
 		const QwtSymbol symbol = c->symbol();
 		s+=QString::number(symbol.size().width())+"\t";
 		s+=QString::number(SymbolBox::symbolIndex(symbol.style()))+"\t";
-		s+=QString::number(ColorButton::colorIndex(symbol.pen().color()))+"\t";
+		s+=COLORNAME(symbol.pen().color())+"\t";
 		if (symbol.brush().style() != Qt::NoBrush)
-			s+=QString::number(ColorButton::colorIndex(symbol.brush().color()))+"\t";
+			s+=COLORNAME(symbol.brush().color())+"\t";
 		else
 			s+=QString::number(-1)+"\t";
 
 		bool filled = c->brush().style() == Qt::NoBrush ? false : true;
 		s+=QString::number(filled)+"\t";
 
-		s+=QString::number(ColorButton::colorIndex(c->brush().color()))+"\t";
+		s+=COLORNAME(c->brush().color())+"\t";
 		s+=QString::number(PatternBox::patternIndex(c->brush().style()))+"\t";
 		if (style <= LineSymbols || style == Box)
 			s+=QString::number(symbol.pen().width())+"\t";
