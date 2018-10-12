@@ -127,7 +127,7 @@ void SmoothCurveDialog::smooth()
     else
         sf->setSmoothPoints(boxPointsLeft->value());
 
-    sf->setColor(ColorButton::colorIndex(btnColor->color()));
+    sf->setColor(btnColor->color());
     sf->run();
     delete sf;
 }

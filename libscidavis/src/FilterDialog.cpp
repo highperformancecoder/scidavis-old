@@ -179,7 +179,7 @@ else if (filter_type == FFTFilter::BandBlock)
 else
     f->setCutoff(from);
 
-f->setColor(ColorButton::colorIndex(btnColor->color()));
+f->setColor(btnColor->color());
 f->run();
 delete f;
 }

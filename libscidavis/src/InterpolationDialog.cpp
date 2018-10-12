@@ -151,7 +151,7 @@ if (from >= to)
 Interpolation *i = new Interpolation((ApplicationWindow *)this->parent(), graph, curve,
                                       from, to, boxMethod->currentIndex());
 i->setOutputPoints(boxPoints->value());
-i->setColor(ColorButton::colorIndex(btnColor->color()));
+i->setColor(btnColor->color());
 i->run();
 delete i;
 }

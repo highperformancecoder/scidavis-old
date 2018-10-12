@@ -62,7 +62,7 @@ Filter::Filter( ApplicationWindow *parent, Table *t, QString name)
 void Filter::init()
 {
 	d_n = 0;
-	d_curveColorIndex = 1;
+	d_curveColor = ColorButton::color(1);
 	d_tolerance = 1e-4;
 	d_points = 100;
 	d_max_iterations = 1000;
@@ -186,11 +186,11 @@ void Filter::setColor(const QString& colorName)
     {
         QMessageBox::critical((ApplicationWindow *)parent(), tr("Color Name Error"),
 				tr("The color name '%1' is not valid, a default color (red) will be used instead!").arg(colorName));
-        d_curveColorIndex = 1;
+        d_curveColor = ColorButton::color(1);
         return;
     }
 
-	d_curveColorIndex = ColorButton::colorIndex(c);
+	d_curveColor = c;
 }
 
 void Filter::showLegend()
@@ -317,7 +317,7 @@ QwtPlotCurve* Filter::addResultCurve(double *x, double *y)
 
 	DataCurve *c = new DataCurve(t, tableName + "_" + xCol->name(), tableName + "_" + yCol->name());
 	c->setData(x, y, d_points);
-    c->setPen(QPen(ColorButton::color(d_curveColorIndex), 1));
+    c->setPen(QPen(d_curveColor, 1));
 	d_graph->insertPlotItem(c, Graph::Line);
     d_graph->updatePlot();
 

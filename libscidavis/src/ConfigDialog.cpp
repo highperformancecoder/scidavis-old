@@ -1183,7 +1183,7 @@ void ConfigDialog::apply()
 	app->fitPoints = generatePointsBox->value();
 	app->generateUniformFitPoints = generatePointsBtn->isChecked();
 	app->generatePeakCurves = groupBoxMultiPeak->isChecked();
-	app->peakCurvesColor = boxPeaksColor->colorIndex(boxPeaksColor->color());
+	app->peakCurvesColor = boxPeaksColor->color();
 	app->fit_scale_errors = scaleErrorsBox->isChecked();
 	app->d_2_linear_fit_points = linearFit2PointsBox->isChecked();
 	app->saveSettings();

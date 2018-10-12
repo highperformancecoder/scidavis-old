@@ -55,7 +55,7 @@ scripted(ScriptingLangManager::newEnv("muParser", parent))
 {
 	d_p = 0;
 	d_n = 0;
-	d_curveColorIndex = 1;
+	d_curveColor = ColorButton::color(1);
 	d_solver = ScaledLevenbergMarquardt;
 	d_tolerance = 1e-4;
 	d_gen_function = true;
@@ -626,7 +626,7 @@ void Fit::insertFitFunctionCurve(const QString& name, double *x, double *y, int 
 {
     QString title = d_graph->generateFunctionName(name);
 	FunctionCurve *c = new FunctionCurve((ApplicationWindow *)parent(), FunctionCurve::Normal, title);
-	c->setPen(QPen(ColorButton::color(d_curveColorIndex), penWidth));
+	c->setPen(QPen(d_curveColor, penWidth));
 	c->setData(x, y, d_points);
 	c->setRange(d_x[0], d_x[d_n-1]);
 

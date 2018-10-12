@@ -1211,7 +1211,7 @@ void FitDialog::accept()
 
         d_fitter->setTolerance (eps);
         d_fitter->setAlgorithm((Fit::Algorithm)boxAlgorithm->currentIndex());
-        d_fitter->setColor(ColorButton::colorIndex(btnColor->color()));
+        d_fitter->setColor(btnColor->color());
         d_fitter->generateFunction(generatePointsBtn->isChecked(), generatePointsBox->value());
         d_fitter->setMaximumIterations(boxPoints->value());
         d_fitter->scaleErrors(scaleErrorsBox->isChecked());

@@ -4419,7 +4419,7 @@ void ApplicationWindow::readSettings()
 	generateUniformFitPoints = settings.value("/GenerateFunction", true).toBool();
 	fitPoints = settings.value("/Points", 100).toInt();
 	generatePeakCurves = settings.value("/GeneratePeakCurves", true).toBool();
-	peakCurvesColor = settings.value("/PeaksColor", 2).toInt();//green color
+	peakCurvesColor = settings.value("/PeaksColor", "#00ff00").value<QColor>();//green color
 	fit_scale_errors = settings.value("/ScaleErrors", false).toBool();
 	d_2_linear_fit_points = settings.value("/TwoPointsLinearFit", true).toBool();
 	settings.endGroup(); // Fitting

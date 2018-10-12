@@ -175,7 +175,7 @@ void Correlation::addResultCurve()
 
     DataCurve *c = new DataCurve(d_table, d_table->colName(cols), d_table->colName(cols2));
 	c->setData(&x_temp[0], &y_temp[0], rows);
-    c->setPen(QPen(ColorButton::color(d_curveColorIndex), 1));
+    c->setPen(QPen(d_curveColor, 1));
 	ml->activeGraph()->insertPlotItem(c, Graph::Line);
 	ml->activeGraph()->updatePlot();
 }

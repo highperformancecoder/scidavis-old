@@ -115,7 +115,7 @@ void PolynomFitDialog::fit()
     PolynomialFit *fitter = new PolynomialFit(app, graph, boxOrder->value(), boxShowFormula->isChecked());
     if (fitter->setDataFromCurve(curveName, boxStart->text().toDouble(), boxEnd->text().toDouble()))
     {
-        fitter->setColor(ColorButton::colorIndex(btnColor->color()));
+        fitter->setColor(btnColor->color());
         fitter->scaleErrors(app->fit_scale_errors);
         fitter->setOutputPrecision(app->fit_output_precision);
 		fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);
