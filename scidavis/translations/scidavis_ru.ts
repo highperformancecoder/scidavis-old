@@ -596,16 +596,16 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;: Неизвестный параметр командной строки или указанный файл не существует!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="+274"/>
-        <location line="+431"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="+281"/>
+        <location line="+432"/>
         <source>Name</source>
         <translation type="unfinished">Имя</translation>
     </message>
     <message>
-        <location line="-431"/>
-        <location line="+432"/>
-        <location line="+12120"/>
-        <location line="+42"/>
+        <location line="-432"/>
+        <location line="+433"/>
+        <location line="+12088"/>
+        <location line="+40"/>
         <location line="+326"/>
         <location line="+5"/>
         <location line="+5"/>
@@ -615,20 +615,20 @@ Do you want to overwrite it?</source>
         <translation type="unfinished">Тип</translation>
     </message>
     <message>
-        <location line="-12940"/>
-        <location line="+433"/>
+        <location line="-12907"/>
+        <location line="+434"/>
         <source>View</source>
         <translation type="unfinished">Вид</translation>
     </message>
     <message>
-        <location line="+12125"/>
+        <location line="+12093"/>
         <source>Size</source>
         <translation type="unfinished">Размер</translation>
     </message>
     <message>
-        <location line="-12558"/>
-        <location line="+434"/>
-        <location line="+12137"/>
+        <location line="-12527"/>
+        <location line="+435"/>
+        <location line="+12103"/>
         <location line="+4"/>
         <location line="+24"/>
         <location line="+344"/>
@@ -636,20 +636,20 @@ Do you want to overwrite it?</source>
         <translation type="unfinished">Создан</translation>
     </message>
     <message>
-        <location line="-12943"/>
-        <location line="+435"/>
-        <location line="+12480"/>
+        <location line="-12910"/>
+        <location line="+436"/>
+        <location line="+12446"/>
         <source>Label</source>
         <translation type="unfinished">Метка</translation>
     </message>
     <message>
-        <location line="-12784"/>
+        <location line="-12750"/>
         <location line="+314"/>
         <source>File</source>
         <translation type="unfinished">Файл</translation>
     </message>
     <message>
-        <location line="+10647"/>
+        <location line="+10619"/>
         <source>Disable &amp;tools</source>
         <translation type="unfinished">Отключить &amp;инструменты</translation>
     </message>
@@ -662,8 +662,8 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&amp;Идентификатор данных</translation>
     </message>
     <message>
-        <location line="-10809"/>
-        <location line="+10821"/>
+        <location line="-10781"/>
+        <location line="+10793"/>
         <source>CTRL+D</source>
         <translation type="unfinished">CTRL+D</translation>
     </message>
@@ -672,8 +672,8 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&amp;Выбор диапазона данных</translation>
     </message>
     <message>
-        <location line="-10814"/>
-        <location line="+10818"/>
+        <location line="-10786"/>
+        <location line="+10790"/>
         <source>ALT+S</source>
         <translation type="unfinished">ALT+S</translation>
     </message>
@@ -682,8 +682,8 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">Чтение &amp;экрана</translation>
     </message>
     <message>
-        <location line="-10812"/>
-        <location line="+10818"/>
+        <location line="-10784"/>
+        <location line="+10790"/>
         <source>&amp;Move Data Points...</source>
         <translation type="unfinished">&amp;Переместить данные...</translation>
     </message>
@@ -694,26 +694,26 @@ Do you want to overwrite it?</source>
         <translation type="unfinished">Ctrl+M</translation>
     </message>
     <message>
-        <location line="-10462"/>
-        <location line="+10816"/>
+        <location line="-10434"/>
+        <location line="+10788"/>
         <source>Remove &amp;Bad Data Points...</source>
         <translation type="unfinished">Удалить &amp;ошибочные данные...</translation>
     </message>
     <message>
-        <location line="-10815"/>
-        <location line="+10816"/>
+        <location line="-10787"/>
+        <location line="+10788"/>
         <source>Alt+B</source>
         <translation type="unfinished">Alt+B</translation>
     </message>
     <message>
-        <location line="-10888"/>
-        <location line="+10891"/>
+        <location line="-10860"/>
+        <location line="+10863"/>
         <source>Add &amp;Text</source>
         <translation type="unfinished">Добавить &amp;текст</translation>
     </message>
     <message>
-        <location line="-10890"/>
-        <location line="+10892"/>
+        <location line="-10862"/>
+        <location line="+10864"/>
         <source>ALT+T</source>
         <translation type="unfinished">ALT+T</translation>
     </message>
@@ -722,19 +722,19 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">Нарисовать &amp;стрелку/линию</translation>
     </message>
     <message>
-        <location line="-10878"/>
-        <location line="+10885"/>
+        <location line="-10850"/>
+        <location line="+10860"/>
         <source>CTRL+ALT+L</source>
         <translation type="unfinished">CTRL+ALT+L</translation>
     </message>
     <message>
-        <location line="-10770"/>
+        <location line="-10745"/>
         <location line="+81"/>
-        <location line="+1793"/>
+        <location line="+1791"/>
         <location line="+12"/>
         <location line="+204"/>
-        <location line="+4463"/>
-        <location line="+5967"/>
+        <location line="+4439"/>
+        <location line="+5959"/>
         <location line="+44"/>
         <source>Table</source>
         <translation type="unfinished">Table</translation>
@@ -760,8 +760,8 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">3D Поверхность</translation>
     </message>
     <message>
-        <location line="-12458"/>
-        <location line="+25"/>
+        <location line="-12424"/>
+        <location line="+26"/>
         <source>&amp;New</source>
         <translation type="unfinished">&amp;Новый</translation>
     </message>
@@ -770,8 +770,8 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&amp;Недавние проекты</translation>
     </message>
     <message>
-        <location line="-23"/>
-        <location line="+53"/>
+        <location line="-24"/>
+        <location line="+54"/>
         <source>&amp;Export Graph</source>
         <translation type="unfinished">&amp;Экспортировать график</translation>
     </message>
@@ -780,38 +780,38 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&amp;Импортировать из ASCII</translation>
     </message>
     <message>
-        <location line="-72"/>
-        <location line="+39"/>
+        <location line="-73"/>
+        <location line="+40"/>
         <source>&amp;File</source>
         <translation type="unfinished">&amp;Файл</translation>
     </message>
     <message>
-        <location line="-38"/>
-        <location line="+89"/>
+        <location line="-39"/>
+        <location line="+90"/>
         <source>&amp;Edit</source>
         <translation type="unfinished">&amp;Правка</translation>
     </message>
     <message>
-        <location line="-88"/>
-        <location line="+110"/>
+        <location line="-89"/>
+        <location line="+111"/>
         <source>&amp;View</source>
         <translation type="unfinished">&amp;Вид</translation>
     </message>
     <message>
-        <location line="-91"/>
-        <location line="+294"/>
+        <location line="-92"/>
+        <location line="+295"/>
         <source>Special Line/Symb&amp;ol</source>
         <translation type="unfinished">Специальная линия/симв&amp;ол</translation>
     </message>
     <message>
-        <location line="-293"/>
-        <location line="+311"/>
+        <location line="-294"/>
+        <location line="+312"/>
         <source>Statistical &amp;Graphs</source>
         <translation type="unfinished">Статистические &amp;диаграммы</translation>
     </message>
     <message>
-        <location line="-310"/>
-        <location line="+316"/>
+        <location line="-311"/>
+        <location line="+317"/>
         <source>Pa&amp;nel</source>
         <translation type="unfinished">Па&amp;нель</translation>
     </message>
@@ -820,8 +820,8 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">3&amp;D диаграмма</translation>
     </message>
     <message>
-        <location line="-335"/>
-        <location line="+126"/>
+        <location line="-336"/>
+        <location line="+127"/>
         <source>&amp;Graph</source>
         <translation type="unfinished">&amp;График</translation>
     </message>
@@ -830,15 +830,15 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">3D&amp;График</translation>
     </message>
     <message>
-        <location line="-124"/>
-        <location line="+166"/>
-        <location line="+4966"/>
+        <location line="-125"/>
+        <location line="+167"/>
+        <location line="+4939"/>
         <source>&amp;Matrix</source>
         <translation type="unfinished">&amp;Матрица</translation>
     </message>
     <message>
-        <location line="-5130"/>
-        <location line="+301"/>
+        <location line="-5104"/>
+        <location line="+302"/>
         <source>&amp;Plot</source>
         <translation type="unfinished">&amp;График</translation>
     </message>
@@ -847,9 +847,9 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&amp;Нормализация</translation>
     </message>
     <message>
-        <location line="-300"/>
+        <location line="-301"/>
         <location line="+2"/>
-        <location line="+173"/>
+        <location line="+174"/>
         <location line="+177"/>
         <source>&amp;Analysis</source>
         <translation type="unfinished">&amp;Анализ</translation>
@@ -863,8 +863,8 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&amp;Заполнить колонки</translation>
     </message>
     <message>
-        <location line="-354"/>
-        <location line="+169"/>
+        <location line="-355"/>
+        <location line="+170"/>
         <source>&amp;Table</source>
         <translation type="unfinished">&amp;Таблица</translation>
     </message>
@@ -873,17 +873,17 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&amp;Данные</translation>
     </message>
     <message>
-        <location line="-150"/>
-        <location line="+160"/>
-        <location line="+7021"/>
+        <location line="-151"/>
+        <location line="+161"/>
+        <location line="+6991"/>
         <location line="+116"/>
         <source>&amp;Translate</source>
         <translation type="unfinished">&amp;Транслировать</translation>
     </message>
     <message>
-        <location line="-7296"/>
-        <location line="+170"/>
-        <location line="+7019"/>
+        <location line="-7267"/>
+        <location line="+171"/>
+        <location line="+6989"/>
         <location line="+116"/>
         <source>&amp;Smooth</source>
         <translation type="unfinished">&amp;Сглаживание</translation>
@@ -893,34 +893,34 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&amp;БПФ фильтр</translation>
     </message>
     <message>
-        <location line="-7303"/>
-        <location line="+194"/>
-        <location line="+7012"/>
+        <location line="-7274"/>
+        <location line="+195"/>
+        <location line="+6982"/>
         <location line="+116"/>
         <source>Fit E&amp;xponential Decay</source>
         <translation type="unfinished">&amp;Экспоненциальное затухание</translation>
     </message>
     <message>
-        <location line="-7117"/>
+        <location line="-7087"/>
         <source>Fit &amp;Multi-peak</source>
         <translation type="unfinished">Мульти&amp;пиковое приближение</translation>
     </message>
     <message>
-        <location line="-221"/>
-        <location line="+233"/>
+        <location line="-222"/>
+        <location line="+234"/>
         <source>For&amp;mat</source>
         <translation type="unfinished">Фор&amp;мат</translation>
     </message>
     <message>
-        <location line="-232"/>
-        <location line="+240"/>
+        <location line="-233"/>
+        <location line="+241"/>
         <source>&amp;Windows</source>
         <translation type="unfinished">&amp;Окна</translation>
     </message>
     <message>
-        <location line="-239"/>
-        <location line="+245"/>
-        <location line="+9827"/>
+        <location line="-240"/>
+        <location line="+246"/>
+        <location line="+9798"/>
         <location line="+480"/>
         <source>&amp;Help</source>
         <translation type="unfinished">&amp;Помощь</translation>
@@ -934,7 +934,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">QtiPlot - Ошибка отображения</translation>
     </message>
     <message>
-        <location line="-9882"/>
+        <location line="-9853"/>
         <location line="+40"/>
         <location line="+23"/>
         <location line="+23"/>
@@ -951,8 +951,8 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">Эта операция не может применяться к кривым построеным на основе не цифровых данных.</translation>
     </message>
     <message>
-        <location line="+229"/>
-        <location line="+6571"/>
+        <location line="+224"/>
+        <location line="+6546"/>
         <source>&lt;h4&gt;There are no tables available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a table and try again!&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;В этом проекте нет ни одной доступной таблицы.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Пожалуйста создайте таблицу и попробуйте ещё раз!&lt;/h4&gt;</translation>
     </message>
@@ -981,7 +981,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">Отображение Функции в виде 3D</translation>
     </message>
     <message>
-        <location line="-732"/>
+        <location line="-730"/>
         <source>Normal</source>
         <translation type="unfinished">Нормальный</translation>
     </message>
@@ -994,42 +994,42 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">QtiPlot - Загрузить изображение из файла</translation>
     </message>
     <message>
-        <location line="-5393"/>
-        <location line="+3204"/>
+        <location line="-5370"/>
+        <location line="+3185"/>
         <source>Y Axis Title</source>
         <translation type="unfinished">Заголовок оси Y</translation>
     </message>
     <message>
-        <location line="-3203"/>
-        <location line="+3178"/>
+        <location line="-3184"/>
+        <location line="+3159"/>
         <source>X Axis Title</source>
         <translation type="unfinished">Заголовок оси X</translation>
     </message>
     <message>
-        <location line="+8125"/>
+        <location line="+8114"/>
         <source>No updates available. You are already running the latest version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+369"/>
+        <location line="+368"/>
         <source>Please select a Y column to plot!</source>
         <translation type="unfinished">Пожалуйста выберите колонку Y для отображения!</translation>
     </message>
     <message>
-        <location line="-12083"/>
+        <location line="-12052"/>
         <location line="+37"/>
-        <location line="+850"/>
+        <location line="+852"/>
         <location line="+1"/>
-        <location line="+6423"/>
-        <location line="+4066"/>
+        <location line="+6396"/>
+        <location line="+4061"/>
         <location line="+43"/>
         <source>Matrix</source>
         <translation type="unfinished">Матрица</translation>
     </message>
     <message>
-        <location line="-10324"/>
-        <location line="+2387"/>
-        <location line="+810"/>
+        <location line="-10302"/>
+        <location line="+2378"/>
+        <location line="+805"/>
         <location line="+67"/>
         <location line="+45"/>
         <location line="+422"/>
@@ -1040,17 +1040,17 @@ Do you want to overwrite it?</source>
         <location line="+28"/>
         <location line="+38"/>
         <location line="+24"/>
-        <location line="+1558"/>
-        <location line="+3336"/>
+        <location line="+1555"/>
+        <location line="+3339"/>
         <location line="+35"/>
         <location line="+45"/>
         <source>&lt;h4&gt;There are no plot layers available in this window.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please add a layer and try again!&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;В этом окне нет ни одного доступного графического слоя.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Пожалуйста добавьте графический слой и попробуйте ещё раз!&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location line="-8926"/>
-        <location line="+2381"/>
-        <location line="+809"/>
+        <location line="-8912"/>
+        <location line="+2372"/>
+        <location line="+804"/>
         <location line="+73"/>
         <location line="+43"/>
         <location line="+448"/>
@@ -1066,7 +1066,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">QtiPlot - Ошибка круговой диаграммы</translation>
     </message>
     <message>
-        <location line="-8912"/>
+        <location line="-8898"/>
         <location line="+47"/>
         <source>This feature is not available for user defined function curves!</source>
         <translation type="unfinished">Эта функция недоступна для кривых, определённых пользователем!</translation>
@@ -1097,15 +1097,15 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">QtiPlot - Открыть проект</translation>
     </message>
     <message>
-        <location line="+496"/>
+        <location line="+490"/>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is the current file!</source>
         <translation type="unfinished">Файл: &lt;b&gt;%1&lt;/b&gt; является текущим файлом!</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location line="+569"/>
-        <location line="+7912"/>
-        <location line="+217"/>
+        <location line="+571"/>
+        <location line="+7902"/>
+        <location line="+213"/>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; doesn&apos;t exist!</source>
         <translation type="unfinished">Файл: &lt;b&gt;%1&lt;/b&gt; не существует!</translation>
     </message>
@@ -1118,7 +1118,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">QtiPlot - Ошибка при открытии файла</translation>
     </message>
     <message>
-        <location line="-8623"/>
+        <location line="-8611"/>
         <source>The file: &lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;does not exist anymore!&lt;p&gt;It will be removed from the list.</source>
         <translation type="unfinished">Файл:  &lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;больше не существует!&lt;p&gt;Он будет удалён из списка.</translation>
     </message>
@@ -1127,7 +1127,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">Файл: &lt;b&gt;%1&lt;/b&gt; является текущим файлом!</translation>
     </message>
     <message>
-        <location line="+1170"/>
+        <location line="+1172"/>
         <source>&lt;h4&gt;There are no plot layers available in this window!&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;В данном окне отсутствуют доступные графические слои!&lt;/h4&gt;</translation>
     </message>
@@ -1137,14 +1137,14 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <location line="+156"/>
-        <location line="+605"/>
+        <location line="+596"/>
         <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists. Do you want to overwrite it?</source>
         <translation type="unfinished">Файл с именем: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;уже существует. Вы хотите перезаписать его?</translation>
     </message>
     <message>
-        <location line="-604"/>
-        <location line="+605"/>
-        <location line="+8060"/>
+        <location line="-595"/>
+        <location line="+596"/>
+        <location line="+8050"/>
         <source>&amp;Yes</source>
         <translation type="unfinished">&amp;Да</translation>
     </message>
@@ -1158,30 +1158,30 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">QtiPlot - Ошибка при экспортировании</translation>
     </message>
     <message>
-        <location line="-8794"/>
+        <location line="-8775"/>
         <location line="+57"/>
-        <location line="+316"/>
+        <location line="+313"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
         <translation type="unfinished">Невозможно выполнить запись в файл: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Пожалуйста, проверьте, есть ли у Вас права на запись в данное место!</translation>
     </message>
     <message>
-        <location line="-244"/>
-        <location line="+605"/>
-        <location line="+5086"/>
+        <location line="-241"/>
+        <location line="+596"/>
+        <location line="+5083"/>
         <location line="+561"/>
         <source>&amp;All</source>
         <translation type="unfinished">&amp;Все</translation>
     </message>
     <message>
-        <location line="-6252"/>
-        <location line="+605"/>
-        <location line="+1251"/>
-        <location line="+2374"/>
+        <location line="-6240"/>
+        <location line="+596"/>
+        <location line="+1250"/>
+        <location line="+2371"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished">&amp;Отмена</translation>
     </message>
     <message>
-        <location line="-4214"/>
+        <location line="-4202"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
         <translation type="unfinished">Невозможно выполнить записать в файл: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Пожалуйста, проверьте, есть ли у Вас права на запись в данное место!</translation>
     </message>
@@ -1199,12 +1199,12 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">Файл с именем: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;уже существует. Вы хотите перезаписать его?</translation>
     </message>
     <message>
-        <location line="+567"/>
+        <location line="+561"/>
         <source>Choose a directory to export the tables to</source>
         <translation type="unfinished">Выберите каталог, в который будет экспортирована таблица</translation>
     </message>
     <message>
-        <location line="+58"/>
+        <location line="+55"/>
         <location line="+706"/>
         <source>Choose a filename to save under</source>
         <translation type="unfinished">Выберите имя файла для сохранения</translation>
@@ -1235,7 +1235,7 @@ Do you want to overwrite it?</source>
         <translation type="unfinished">Пожалуйста выберите сначала колонку!</translation>
     </message>
     <message>
-        <location line="+5016"/>
+        <location line="+5014"/>
         <location line="+550"/>
         <source>&amp;Line</source>
         <translation type="unfinished">&amp;Линия</translation>
@@ -1311,13 +1311,13 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&amp;Фигурные гистограммы</translation>
     </message>
     <message>
-        <location line="-3022"/>
+        <location line="-3023"/>
         <source>Cu&amp;t</source>
         <translation type="unfinished">В&amp;ырезать</translation>
     </message>
     <message>
-        <location line="-665"/>
-        <location line="+455"/>
+        <location line="-663"/>
+        <location line="+453"/>
         <location line="+117"/>
         <location line="+94"/>
         <source>&amp;Copy</source>
@@ -1353,8 +1353,8 @@ Do you want to overwrite it?</source>
         <translation type="unfinished">&amp;Очистить</translation>
     </message>
     <message>
-        <location line="-678"/>
-        <location line="+3449"/>
+        <location line="-676"/>
+        <location line="+3448"/>
         <location line="+23"/>
         <source>&amp;Delete</source>
         <translation type="unfinished">&amp;Удалить</translation>
@@ -1414,7 +1414,7 @@ Do you want to overwrite it?</source>
         <translation type="unfinished">&amp;Упакованные(Stacked) слои</translation>
     </message>
     <message>
-        <location line="-3025"/>
+        <location line="-3026"/>
         <source>&amp;Paste</source>
         <translation type="unfinished">&amp;Вставить</translation>
     </message>
@@ -1427,13 +1427,13 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&amp;Удалить строку</translation>
     </message>
     <message>
-        <location line="-2445"/>
+        <location line="-2442"/>
         <source>Not available for empty 3D surface plots!</source>
         <translation type="unfinished">Не доступно для пустых 3D поверхностей!</translation>
     </message>
     <message>
         <location line="+100"/>
-        <location line="+5119"/>
+        <location line="+5117"/>
         <location line="+31"/>
         <source>&amp;Worksheet</source>
         <translation type="unfinished">Рабочая &amp;таблица</translation>
@@ -1447,7 +1447,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">В активном слое нет кривых!</translation>
     </message>
     <message>
-        <location line="-4853"/>
+        <location line="-4851"/>
         <location line="+42"/>
         <source>This will modify the data in the worksheets!
 Are you sure you want to continue?</source>
@@ -1462,20 +1462,20 @@ Are you sure you want to continue?</source>
     <message>
         <location line="-42"/>
         <location line="+42"/>
-        <location line="+1484"/>
+        <location line="+1483"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>
     <message>
-        <location line="-1571"/>
+        <location line="-1570"/>
         <location line="+111"/>
         <location line="+35"/>
         <source>&lt;h4&gt;There are no plot layers available in this window.&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;В данном окне нет доступнух слоёв.&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location line="-3378"/>
-        <location line="+3753"/>
+        <location line="-3364"/>
+        <location line="+3739"/>
         <source>There are no curves available on this plot!</source>
         <translation type="unfinished">На данном графике нет доступных кривых!</translation>
     </message>
@@ -1551,18 +1551,18 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">QtiPlot - Геометрия окна</translation>
     </message>
     <message>
-        <location line="+5462"/>
+        <location line="+5457"/>
         <source>Hidden</source>
         <translation type="unfinished">Скрытый</translation>
     </message>
     <message>
-        <location line="-7652"/>
-        <location line="+2859"/>
+        <location line="-7640"/>
+        <location line="+2851"/>
         <source>Maximized</source>
         <translation type="unfinished">Развёрнутый</translation>
     </message>
     <message>
-        <location line="-2864"/>
+        <location line="-2856"/>
         <source>Minimized</source>
         <translation type="unfinished">Свёрнутый</translation>
     </message>
@@ -1571,7 +1571,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">О программе QtiPlot</translation>
     </message>
     <message>
-        <location line="+2502"/>
+        <location line="+2494"/>
         <source>&amp;Cascade</source>
         <translation type="unfinished">&amp;Каскад</translation>
     </message>
@@ -1589,7 +1589,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">&amp;Предыдущее</translation>
     </message>
     <message>
-        <location line="+3041"/>
+        <location line="+3040"/>
         <location line="+567"/>
         <source>&amp;Duplicate</source>
         <translation type="unfinished">&amp;Дублировать</translation>
@@ -1601,22 +1601,22 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">&amp;Геометрия окна...</translation>
     </message>
     <message>
-        <location line="-3821"/>
-        <location line="+3349"/>
+        <location line="-3820"/>
+        <location line="+3348"/>
         <location line="+473"/>
         <source>&amp;Hide Window</source>
         <translation type="unfinished">&amp;Скрыть окно</translation>
     </message>
     <message>
-        <location line="-3820"/>
-        <location line="+3336"/>
+        <location line="-3819"/>
+        <location line="+3335"/>
         <location line="+477"/>
         <source>Close &amp;Window</source>
         <translation type="unfinished">Закрыть &amp;окно</translation>
     </message>
     <message>
-        <location line="-3782"/>
-        <location line="+3319"/>
+        <location line="-3781"/>
+        <location line="+3318"/>
         <source>More windows...</source>
         <translation type="unfinished">Больше окон...</translation>
     </message>
@@ -1625,7 +1625,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">&amp;Отобразить профиль точечной линии</translation>
     </message>
     <message>
-        <location line="-3304"/>
+        <location line="-3303"/>
         <source>&amp;Intensity Matrix</source>
         <translation type="unfinished">Матрица &amp;интенсивности</translation>
     </message>
@@ -1638,13 +1638,13 @@ Are you sure you want to continue?</source>
         <location line="+5"/>
         <location line="+2"/>
         <location line="+2"/>
-        <location line="+5058"/>
-        <location line="+1134"/>
+        <location line="+5055"/>
+        <location line="+1129"/>
         <source>&amp;Properties...</source>
         <translation type="unfinished">&amp;Свойства...</translation>
     </message>
     <message>
-        <location line="-6184"/>
+        <location line="-6176"/>
         <source>Please use the project explorer to select a window!</source>
         <translation type="unfinished">Пожалуйста, используйте проводник проекта для выбора окна!</translation>
     </message>
@@ -1655,13 +1655,13 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <location line="+1"/>
-        <location line="+5223"/>
+        <location line="+5216"/>
         <source>Yes</source>
         <translation type="unfinished">Да</translation>
     </message>
     <message>
-        <location line="-5223"/>
-        <location line="+5223"/>
+        <location line="-5216"/>
+        <location line="+5216"/>
         <source>No</source>
         <translation type="unfinished">Нет</translation>
     </message>
@@ -1670,7 +1670,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">&amp;Удалить окно</translation>
     </message>
     <message>
-        <location line="-2086"/>
+        <location line="-2080"/>
         <location line="+478"/>
         <source>&amp;Rename Window</source>
         <translation type="unfinished">&amp;Переименовать окно</translation>
@@ -1684,7 +1684,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">З&amp;ависимые 3D графики</translation>
     </message>
     <message>
-        <location line="+2481"/>
+        <location line="+2474"/>
         <location line="+18"/>
         <location line="+6"/>
         <source>D&amp;epends on</source>
@@ -1719,7 +1719,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">&amp;Вставить изображение</translation>
     </message>
     <message>
-        <location line="-5808"/>
+        <location line="-5802"/>
         <location line="+4"/>
         <location line="+5"/>
         <location line="+108"/>
@@ -1747,13 +1747,13 @@ Are you sure you want to continue?</source>
     <message>
         <location line="-113"/>
         <location line="+117"/>
-        <location line="+2463"/>
+        <location line="+2464"/>
         <location line="+561"/>
         <source>&amp;Print</source>
         <translation type="unfinished">&amp;Печать</translation>
     </message>
     <message>
-        <location line="-3135"/>
+        <location line="-3136"/>
         <location line="+117"/>
         <source>&amp;Geometry...</source>
         <translation type="unfinished">&amp;Геометрия...</translation>
@@ -1896,7 +1896,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Кривая:</translation>
     </message>
     <message>
-        <location line="+1336"/>
+        <location line="+1337"/>
         <location line="+574"/>
         <source>New &amp;Project</source>
         <translation type="unfinished">Новый &amp;проект</translation>
@@ -2669,12 +2669,12 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">&amp;Случайными значениями</translation>
     </message>
     <message>
-        <location line="+1260"/>
+        <location line="+1258"/>
         <source>&amp;None</source>
         <translation type="unfinished">&amp;Никакой(ая)</translation>
     </message>
     <message>
-        <location line="-1665"/>
+        <location line="-1663"/>
         <location line="+407"/>
         <source>&amp;Box Plot</source>
         <translation type="unfinished">&amp;Ящичковая диаграмма</translation>
@@ -2922,7 +2922,7 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">Удаление данных</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+15"/>
         <source>Draw line</source>
         <translation type="unfinished">Нарисовать линию</translation>
     </message>
@@ -3073,7 +3073,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">QtiPlot - Задайте число вершин</translation>
     </message>
     <message>
-        <location line="+356"/>
+        <location line="+355"/>
         <source>Peaks</source>
         <translation type="unfinished">Вершины</translation>
     </message>
@@ -3086,31 +3086,31 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Русский</translation>
     </message>
     <message>
-        <location line="-11390"/>
+        <location line="-11364"/>
         <location line="+277"/>
         <source>Edit</source>
         <translation type="unfinished">Правка</translation>
     </message>
     <message>
         <location line="-149"/>
-        <location line="+10818"/>
+        <location line="+10790"/>
         <source>Ctrl+ALT+M</source>
         <translation type="unfinished">Ctrl+ALT+M</translation>
     </message>
     <message>
-        <location line="-11156"/>
-        <location line="+478"/>
+        <location line="-11134"/>
+        <location line="+484"/>
         <source>Project Explorer</source>
         <translation type="unfinished">Обозреватель проекта</translation>
     </message>
     <message>
-        <location line="-425"/>
-        <location line="+426"/>
+        <location line="-426"/>
+        <location line="+427"/>
         <source>Results Log</source>
         <translation type="unfinished">Журнал результатов</translation>
     </message>
     <message>
-        <location line="+1036"/>
+        <location line="+1032"/>
         <source>There are no available columns with plot designation set to Z!</source>
         <translation type="unfinished">Не доступна ни одна колонка обозначенная как колонка Z!</translation>
     </message>
@@ -3119,13 +3119,13 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Отобразить в виде 3D</translation>
     </message>
     <message>
-        <location line="+11411"/>
+        <location line="+11381"/>
         <location line="+45"/>
         <source>Note</source>
         <translation type="unfinished">Заметка</translation>
     </message>
     <message>
-        <location line="-10515"/>
+        <location line="-10483"/>
         <source>Determinant of </source>
         <translation type="unfinished">Определитель</translation>
     </message>
@@ -3134,7 +3134,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">QtiPlot - ошибка при открытии файла</translation>
     </message>
     <message>
-        <location line="+964"/>
+        <location line="+948"/>
         <source>The file &lt;b&gt;%1&lt;/b&gt; is corrupted, but there exists a backup copy.&lt;br&gt;Do you want to open the backup instead?</source>
         <translation type="unfinished">Файл &lt;b&gt;%1&lt;/b&gt; повреждён, но существует резервная копия.&lt;br&gt;Хотите ли вы вместо оригинала открыть резервную копию?</translation>
     </message>
@@ -3187,12 +3187,12 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Невозможно создать резервную копию &lt;b&gt;%1&lt;/b&gt; (в %2).&lt;br&gt;Если вы проигнорируете эту ситуацию, то рискуете &lt;b&gt;потерять данные&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location line="+8785"/>
+        <location line="+8773"/>
         <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
         <translation type="unfinished">Файл: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; открыт в режиме &quot;только чтение&quot;</translation>
     </message>
     <message>
-        <location line="-7383"/>
+        <location line="-7372"/>
         <source>Save Project As</source>
         <translation type="unfinished">Сохранить проект как</translation>
     </message>
@@ -3238,7 +3238,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">В активном слое кривые отсутствуют!</translation>
     </message>
     <message>
-        <location line="+3098"/>
+        <location line="+3088"/>
         <source>&amp;Insert Row</source>
         <translation type="unfinished">&amp;Вставить строку</translation>
     </message>
@@ -3253,7 +3253,7 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">&amp;Удалить столбцы</translation>
     </message>
     <message>
-        <location line="+2236"/>
+        <location line="+2237"/>
         <location line="+574"/>
         <source>New &amp;Graph</source>
         <translation type="unfinished">Новый &amp;график</translation>
@@ -3383,7 +3383,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Нет, больше не беспокоить!</translation>
     </message>
     <message>
-        <location line="+704"/>
+        <location line="+706"/>
         <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
         <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt;: Неправильный параметр локализации или перевод отсутствует!</translation>
     </message>
@@ -3392,19 +3392,19 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Программа QtiPlot не имеет справки, вызываемой из командной строки. Для того, чтобы скачать руководство пользователя для QtiPlot, пожалуйста посетите:&lt;br&gt;&lt;br&gt;&lt;font color = blue&gt; http://soft.proindependent.com/help.html&lt;/font&gt;</translation>
     </message>
     <message>
-        <location line="-11684"/>
-        <location line="+12625"/>
+        <location line="-11665"/>
+        <location line="+12598"/>
         <location line="+363"/>
         <source>Folder</source>
         <translation type="unfinished">Папка</translation>
     </message>
     <message>
-        <location line="-13037"/>
+        <location line="-13009"/>
         <source>UNTITLED</source>
         <translation type="unfinished">БЕЗЫМЯННЫЙ</translation>
     </message>
     <message>
-        <location line="+2299"/>
+        <location line="+2303"/>
         <source>pixels</source>
         <translation type="unfinished">точки</translation>
     </message>
@@ -3423,13 +3423,13 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Матрица &apos;%1&apos; уже существует. Она была переименована в &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location line="+2630"/>
-        <location line="+7527"/>
+        <location line="+2613"/>
+        <location line="+7514"/>
         <source>Please enter a valid name!</source>
         <translation type="unfinished">Пожалуйста введите корректное название!</translation>
     </message>
     <message>
-        <location line="-7522"/>
+        <location line="-7509"/>
         <source>The name you chose is not valid: only letters and digits are allowed!</source>
         <translation type="unfinished">Вы выбрали некорректное название: допускается использовать только буквы и цифры!</translation>
     </message>
@@ -3437,7 +3437,7 @@ Are you sure you want to continue?</source>
         <location line="+1"/>
         <location line="+8"/>
         <location line="+9"/>
-        <location line="+7514"/>
+        <location line="+7501"/>
         <source>Please choose another name!</source>
         <translation type="unfinished">Пожалуйста выберите другое имя!</translation>
     </message>
@@ -3447,31 +3447,31 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">Имя уже существует!</translation>
     </message>
     <message>
-        <location line="-7514"/>
+        <location line="-7501"/>
         <source>The table name must be different from the names of its columns!</source>
         <translation type="unfinished">Название таблицы должно отличаться от названий столбцов!</translation>
     </message>
     <message>
-        <location line="+2572"/>
-        <location line="+2768"/>
+        <location line="+2564"/>
+        <location line="+2767"/>
         <location line="+567"/>
         <source>&amp;Delete Selection</source>
         <translation type="unfinished">&amp;Удалить выделенное</translation>
     </message>
     <message>
-        <location line="-3328"/>
-        <location line="+4810"/>
+        <location line="-3327"/>
+        <location line="+4807"/>
         <source>New &amp;Window</source>
         <translation type="unfinished">&amp;Новое окно</translation>
     </message>
     <message>
-        <location line="-4802"/>
-        <location line="+4811"/>
+        <location line="-4799"/>
+        <location line="+4808"/>
         <source>New F&amp;older</source>
         <translation type="unfinished">Новая &amp;папка</translation>
     </message>
     <message>
-        <location line="-4809"/>
+        <location line="-4806"/>
         <source>Auto &amp;Column Width</source>
         <translation type="unfinished">&amp;Автоматический выбор ширины колонок</translation>
     </message>
@@ -3488,7 +3488,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Извините, QtiPlot не удалось запустить выбранный по умолчанию обозреватель WWW. Пожалуйста, запустите его вручную и введите следующий адрес.</translation>
     </message>
     <message>
-        <location line="+4775"/>
+        <location line="+4772"/>
         <source>&amp;Find...</source>
         <translation type="unfinished">&amp;Найти...</translation>
     </message>
@@ -3503,20 +3503,20 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">Сохр&amp;анить как проект...</translation>
     </message>
     <message>
-        <location line="-2068"/>
+        <location line="-2066"/>
         <location line="+572"/>
-        <location line="+1498"/>
+        <location line="+1496"/>
         <source>Save Project &amp;As...</source>
         <translation type="unfinished">Сохранить проект &amp;как...</translation>
     </message>
     <message>
-        <location line="-1677"/>
+        <location line="-1675"/>
         <location line="+439"/>
         <source>&amp;Convert to Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+583"/>
+        <location line="+585"/>
         <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .org, .py or ASCII file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3526,7 +3526,7 @@ Are you sure you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+658"/>
+        <location line="+654"/>
         <source>&amp;Show All Windows</source>
         <translation type="unfinished">Показать &amp;все окна</translation>
     </message>
@@ -3561,25 +3561,25 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">П&amp;росмотр окон</translation>
     </message>
     <message>
-        <location line="+233"/>
+        <location line="+231"/>
         <source>Project</source>
         <translation type="unfinished">Проект</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+40"/>
+        <location line="+38"/>
         <location line="+347"/>
         <source>Path</source>
         <translation type="unfinished">Путь</translation>
     </message>
     <message>
-        <location line="-384"/>
+        <location line="-382"/>
         <source>bytes</source>
         <translation type="unfinished">байт</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location line="+34"/>
+        <location line="+3"/>
+        <location line="+33"/>
         <source>Contents</source>
         <translation type="unfinished">Содержимое</translation>
     </message>
@@ -3646,14 +3646,14 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">Папка назначения уже содержит вложенную папку с названнием &apos;%1&apos;! Папка будет пропущена!</translation>
     </message>
     <message>
-        <location line="-13043"/>
-        <location line="+418"/>
+        <location line="-13010"/>
+        <location line="+419"/>
         <source>Scripting Console</source>
         <translation type="unfinished">Консоль команд</translation>
     </message>
     <message>
         <location line="-182"/>
-        <location line="+10837"/>
+        <location line="+10809"/>
         <source>&amp;Zoom In</source>
         <translation type="unfinished">&amp;Приблизить</translation>
     </message>
@@ -3663,20 +3663,20 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">&amp;Отодвинуть</translation>
     </message>
     <message>
-        <location line="-10861"/>
-        <location line="+10888"/>
+        <location line="-10833"/>
+        <location line="+10863"/>
         <source>Draw &amp;Arrow</source>
         <translation type="unfinished">Нарисовать &amp;стрелку</translation>
     </message>
     <message>
-        <location line="-10887"/>
-        <location line="+10888"/>
+        <location line="-10862"/>
+        <location line="+10863"/>
         <source>CTRL+ALT+A</source>
         <translation type="unfinished">CTRL+ALT+A</translation>
     </message>
     <message>
-        <location line="-10882"/>
-        <location line="+10885"/>
+        <location line="-10857"/>
+        <location line="+10860"/>
         <source>Draw &amp;Line</source>
         <translation type="unfinished">Нарисовать &amp;линию</translation>
     </message>
@@ -3701,7 +3701,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">QtiPlot - импорт файла ASCII</translation>
     </message>
     <message>
-        <location line="-7694"/>
+        <location line="-7687"/>
         <source>Window</source>
         <translation type="unfinished">Окно</translation>
     </message>
@@ -3710,7 +3710,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">QtiPlot - Ошибка выделения строки</translation>
     </message>
     <message>
-        <location line="+1935"/>
+        <location line="+1927"/>
         <source>Please select a row first!</source>
         <translation type="unfinished">Пожалуйста выберите сначала строку!</translation>
     </message>
@@ -3743,9 +3743,9 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Укажите точку для отображения информации!</translation>
     </message>
     <message>
-        <location line="-3532"/>
+        <location line="-3510"/>
         <location line="+20"/>
-        <location line="+4654"/>
+        <location line="+4632"/>
         <source>Images</source>
         <translation type="unfinished">Изображения</translation>
     </message>
@@ -3763,7 +3763,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">QtiPlot - Укажите число точек для усреднения</translation>
     </message>
     <message>
-        <location line="+1857"/>
+        <location line="+1854"/>
         <source>Number of averaged pixels</source>
         <translation type="unfinished">Число усреднённых точек</translation>
     </message>
@@ -3772,7 +3772,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">&amp;Консоль для написание скриптов</translation>
     </message>
     <message>
-        <location line="+1516"/>
+        <location line="+1517"/>
         <location line="+561"/>
         <source>Alt+G</source>
         <translation type="unfinished">Alt+G</translation>
@@ -3830,7 +3830,7 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">Отодвинуть</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+30"/>
         <source>Draw arrow</source>
         <translation type="unfinished">Нарисовать стрелку</translation>
     </message>
@@ -3839,7 +3839,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">QtiPlot - получить файла версии через HTTP</translation>
     </message>
     <message>
-        <location line="+2046"/>
+        <location line="+2037"/>
         <source>Error while fetching version file with HTTP: %1.</source>
         <translation type="unfinished">Ошибка при получении файла версии с помощью HTTP: %1.</translation>
     </message>
@@ -3874,7 +3874,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Написание с&amp;криптов</translation>
     </message>
     <message>
-        <location line="-11642"/>
+        <location line="-11612"/>
         <source>&lt;h4&gt;There are no matrices available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;В этом проекте матрицы недоступны.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Пожалуйста, создайте матницу и попробуйте ещё раз!&lt;/h4&gt;</translation>
     </message>
@@ -3883,13 +3883,13 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">QtiPlot - переименованное окно</translation>
     </message>
     <message>
-        <location line="+820"/>
+        <location line="+822"/>
         <location line="+11"/>
         <source>Notes</source>
         <translation type="unfinished">Заметки</translation>
     </message>
     <message>
-        <location line="+1063"/>
+        <location line="+1047"/>
         <source>The file &quot;%1&quot; was created using &quot;%2&quot; as scripting language.
 
 Initializing support for this language FAILED; I&apos;m using &quot;%3&quot; instead.
@@ -3903,7 +3903,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">QtiPlot - ошибка выполнения скрипта</translation>
     </message>
     <message>
-        <location line="+326"/>
+        <location line="+328"/>
         <source>Scripting language &quot;%1&quot; failed to initialize.</source>
         <translation type="unfinished">Ошибка инициализации скриптового языка &quot;%1&quot;</translation>
     </message>
@@ -3933,7 +3933,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Шаблон двумерного графика QtiPlot</translation>
     </message>
     <message>
-        <location line="+6172"/>
+        <location line="+6160"/>
         <location line="+12"/>
         <source>&amp;Edit Function...</source>
         <translation type="unfinished">&amp;Править функцию...</translation>
@@ -3945,7 +3945,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Детали &amp;построения...</translation>
     </message>
     <message>
-        <location line="+2742"/>
+        <location line="+2735"/>
         <source>D&amp;epending Graphs</source>
         <translation type="unfinished">&amp;Связанные графики</translation>
     </message>
@@ -3975,7 +3975,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Ctrl+Alt+O</translation>
     </message>
     <message>
-        <location line="-2791"/>
+        <location line="-2784"/>
         <location line="+390"/>
         <source>Ctrl+Return</source>
         <translation type="unfinished">Ctrl+Return</translation>
@@ -4047,7 +4047,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">3D График</translation>
     </message>
     <message>
-        <location line="+2182"/>
+        <location line="+2175"/>
         <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
         <translation type="unfinished">Все содержимое и все данные связанные с таблицей будет удалены. Вы уверены?</translation>
     </message>
@@ -4068,7 +4068,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">QtiPlot - Скрипт-Окно</translation>
     </message>
     <message>
-        <location line="-2883"/>
+        <location line="-2876"/>
         <location line="+543"/>
         <source>&amp;Horizontal Steps</source>
         <translation type="unfinished">&amp;Горизонтальных Шагов</translation>
@@ -4085,7 +4085,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Скрипт-Окно</translation>
     </message>
     <message>
-        <location line="+356"/>
+        <location line="+359"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -4093,18 +4093,18 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Анимация</translation>
     </message>
     <message>
-        <location line="-10831"/>
+        <location line="-10806"/>
         <location line="+68"/>
         <source>Matrix Plot</source>
         <translation type="unfinished">График матрицы</translation>
     </message>
     <message>
-        <location line="+2848"/>
+        <location line="+2830"/>
         <source>The file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; is the current file!</source>
         <translation type="unfinished">Файл:: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; является текущим файлом!</translation>
     </message>
     <message>
-        <location line="+1613"/>
+        <location line="+1612"/>
         <source>Name &lt;b&gt;%1&lt;/b&gt; already exists!</source>
         <translation type="unfinished">Имя &lt;b&gt;%1&lt;/b&gt; уже существует!</translation>
     </message>
@@ -4122,7 +4122,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Нельзя запустить помощника так как в каталоге помощи не найден файл &lt;b&gt;%1&lt;/b&gt;!&lt;p&gt;Этот файл поставляется вместе с руководством QtiPlot которое можно скачать по следующему интернет адресу: &lt;/p&gt;&lt;p&gt;&lt;font color=blue&gt;&apos;http://soft.proindependent.com/manuals.html&apos;&lt;/font&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location line="+5890"/>
+        <location line="+5881"/>
         <source>Ctrl+K</source>
         <translation type="unfinished">Ctrl+K</translation>
     </message>
@@ -4202,7 +4202,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Добавить текст</translation>
     </message>
     <message>
-        <location line="+89"/>
+        <location line="+92"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -4226,25 +4226,27 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Совместить фрейм с окном</translation>
     </message>
     <message>
-        <location line="-11289"/>
+        <location line="-11270"/>
+        <location line="+11168"/>
         <source>&amp;Next</source>
         <comment>next window</comment>
         <translation type="unfinished">&amp;Следующее</translation>
     </message>
     <message>
-        <location line="+108"/>
+        <location line="-11054"/>
         <source>F5</source>
         <comment>next window shortcut</comment>
         <translation type="unfinished">F5</translation>
     </message>
     <message>
-        <location line="-106"/>
+        <location line="-112"/>
+        <location line="+11167"/>
         <source>&amp;Previous</source>
         <comment>previous window</comment>
         <translation type="unfinished">&amp;Предыдущее</translation>
     </message>
     <message>
-        <location line="+109"/>
+        <location line="-11052"/>
         <source>F6</source>
         <comment>previous window shortcut</comment>
         <translation type="unfinished">F6</translation>
@@ -4261,37 +4263,37 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <location line="+17"/>
-        <location line="+10821"/>
+        <location line="+10793"/>
         <source>&amp;Data Reader</source>
         <translation type="unfinished">Сч&amp;итывание данных</translation>
     </message>
     <message>
-        <location line="-10814"/>
-        <location line="+10818"/>
+        <location line="-10786"/>
+        <location line="+10790"/>
         <source>&amp;Select Data Range</source>
         <translation type="unfinished">В&amp;ыделить диапазон данных</translation>
     </message>
     <message>
-        <location line="-10831"/>
-        <location line="+10835"/>
+        <location line="-10803"/>
+        <location line="+10807"/>
         <source>S&amp;creen Reader</source>
         <translation type="unfinished">С&amp;читывание с экрана</translation>
     </message>
     <message>
-        <location line="-10663"/>
-        <location line="+8155"/>
+        <location line="-10635"/>
+        <location line="+8126"/>
         <source>3D Surface</source>
         <translation type="unfinished">3D Поверхность</translation>
     </message>
     <message>
-        <location line="-8135"/>
-        <location line="+36"/>
+        <location line="-8106"/>
+        <location line="+37"/>
         <source>&amp;Recent Projects</source>
         <translation type="unfinished">Неда&amp;вние проекты</translation>
     </message>
     <message>
-        <location line="-30"/>
-        <location line="+324"/>
+        <location line="-31"/>
+        <location line="+325"/>
         <source>3&amp;D Plot</source>
         <translation type="unfinished">3&amp;D График</translation>
     </message>
@@ -4304,41 +4306,41 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">&amp;Заполнить колонки</translation>
     </message>
     <message>
-        <location line="-320"/>
-        <location line="+175"/>
-        <location line="+7018"/>
+        <location line="-321"/>
+        <location line="+176"/>
+        <location line="+6988"/>
         <location line="+116"/>
         <source>&amp;FFT Filter</source>
         <translation type="unfinished">&amp;БПФ-фильтр</translation>
     </message>
     <message>
-        <location line="-7307"/>
-        <location line="+7215"/>
+        <location line="-7278"/>
+        <location line="+7186"/>
         <location line="+116"/>
         <source>Fit &amp;Multi-Peak</source>
         <translation type="unfinished">Мульти&amp;пиковое приближение</translation>
     </message>
     <message>
-        <location line="-7358"/>
-        <location line="+247"/>
+        <location line="-7329"/>
+        <location line="+248"/>
         <source>Scripting</source>
         <translation type="unfinished">Скрипты</translation>
     </message>
     <message>
-        <location line="-245"/>
-        <location line="+147"/>
-        <location line="+7298"/>
+        <location line="-246"/>
+        <location line="+148"/>
+        <location line="+7268"/>
         <source>3D &amp;Plot</source>
         <translation type="unfinished">3&amp;D График</translation>
     </message>
     <message>
-        <location line="-6422"/>
+        <location line="-6397"/>
         <location line="+10"/>
         <source>Column</source>
         <translation type="unfinished">Столбец</translation>
     </message>
     <message>
-        <location line="+2205"/>
+        <location line="+2193"/>
         <source>Script Error</source>
         <translation type="unfinished">Ошибка скрипта</translation>
     </message>
@@ -4348,7 +4350,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Table1</translation>
     </message>
     <message>
-        <location line="+1407"/>
+        <location line="+1397"/>
         <source>Please select two columns for this operation!</source>
         <translation type="unfinished">Пожалуйста выберите две колонки для выполнения этой операции!</translation>
     </message>
@@ -4366,7 +4368,7 @@ Various parts of this file may not be displayed as expected.</source>
 первая представляет сигнал, а вторая - функцию-отклик!</translation>
     </message>
     <message>
-        <location line="+5053"/>
+        <location line="+5051"/>
         <location line="+547"/>
         <source>Vertical &amp;Drop Lines</source>
         <translation type="unfinished">Вертикально п&amp;адающие линии</translation>
@@ -4384,7 +4386,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">&amp;Добавить колонку</translation>
     </message>
     <message>
-        <location line="-4959"/>
+        <location line="-4957"/>
         <source>Could not write to file: &lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location or that the file is not being used by another application!</source>
         <translation type="unfinished">Невозможно записать файл: &lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Пожалйста убедитесь, что вы имеете права на запись в него, что он не используется другим приложением!</translation>
     </message>
@@ -4393,7 +4395,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Дата релиза</translation>
     </message>
     <message>
-        <location line="+1678"/>
+        <location line="+1675"/>
         <location line="+114"/>
         <source>Re&amp;move Pie Curve</source>
         <translation type="unfinished">У&amp;далить круговую диаграмму</translation>
@@ -4437,12 +4439,12 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Пожалуйста укажите расположение файла справки!</translation>
     </message>
     <message>
-        <location line="+1951"/>
+        <location line="+1953"/>
         <source>Curve</source>
         <translation type="unfinished">Кривая</translation>
     </message>
     <message>
-        <location line="+249"/>
+        <location line="+248"/>
         <location line="+574"/>
         <source>New 3D &amp;Surface Plot</source>
         <translation type="unfinished">Новый график 3D по&amp;верхности</translation>
@@ -4707,7 +4709,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Диаграмма типа &quot;ящик с усами&quot;</translation>
     </message>
     <message>
-        <location line="+84"/>
+        <location line="+87"/>
         <location line="+1"/>
         <source>No axes</source>
         <translation type="unfinished">Без осей координат</translation>
@@ -4787,43 +4789,43 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Пустое основание</translation>
     </message>
     <message>
-        <location line="-10640"/>
-        <location line="+10321"/>
+        <location line="-10614"/>
+        <location line="+10292"/>
         <source>Toolbars</source>
         <translation type="unfinished">Панель инструментов</translation>
     </message>
     <message>
-        <location line="-10424"/>
-        <location line="+204"/>
+        <location line="-10396"/>
+        <location line="+205"/>
         <source>&amp;Quick Fit</source>
         <translation type="unfinished">Быстрое при&amp;ближение</translation>
     </message>
     <message>
-        <location line="-206"/>
-        <location line="+277"/>
+        <location line="-207"/>
+        <location line="+278"/>
         <source>&amp;Tools</source>
         <translation type="unfinished">&amp;Инструменты</translation>
     </message>
     <message>
         <location line="+503"/>
-        <location line="+12349"/>
+        <location line="+12313"/>
         <source>Please set a default X column for this table, first!</source>
         <translation type="unfinished">Пожалуйста установите сначала колонку X по умолчанию для данной таблицы!</translation>
     </message>
     <message>
-        <location line="-12339"/>
-        <location line="+12327"/>
+        <location line="-12303"/>
+        <location line="+12291"/>
         <source>Please select a column to plot!</source>
         <translation type="unfinished">Пожалуйста выберите колонку для отображения!</translation>
     </message>
     <message>
-        <location line="-12308"/>
+        <location line="-12272"/>
         <location line="+19"/>
         <source>Please select four columns for this operation!</source>
         <translation type="unfinished">Пожалуйста выберите четыре колонки для выполнения этой операции!</translation>
     </message>
     <message>
-        <location line="+1935"/>
+        <location line="+1916"/>
         <location line="+167"/>
         <source>The file &lt;b&gt;%1&lt;/b&gt; is not a valid project file.</source>
         <translation type="unfinished">Файл &lt;b&gt;%1&lt;/b&gt; не является корректным файлом проекта.</translation>
@@ -4834,7 +4836,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">SciDAVis не поддерживает файлы проектов более ранних чем 0.9.0 версий QtiPlot.</translation>
     </message>
     <message>
-        <location line="+382"/>
+        <location line="+384"/>
         <source>The file: &lt;b&gt; %1 &lt;/b&gt; was not created using SciDAVis!</source>
         <translation type="unfinished">Файл: &lt;b&gt;%1&lt;/b&gt; создан не SciDAVis!</translation>
     </message>
@@ -4864,19 +4866,19 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">В окне нет доступных слоев с постороениями &lt;b&gt;%1&lt;/b&gt;.&lt;br&gt;Окно графика не экспортировано!</translation>
     </message>
     <message>
-        <location line="+187"/>
-        <location line="+7454"/>
+        <location line="+184"/>
+        <location line="+7443"/>
         <source>SciDAVis project</source>
         <translation type="unfinished">Проект SciDAVis</translation>
     </message>
     <message>
-        <location line="-7453"/>
-        <location line="+7454"/>
+        <location line="-7442"/>
+        <location line="+7443"/>
         <source>Compressed SciDAVis project</source>
         <translation type="unfinished">Сжатый проект SciDAVis</translation>
     </message>
     <message>
-        <location line="-7406"/>
+        <location line="-7395"/>
         <source>SciDAVis/QtiPlot Matrix Template</source>
         <translation type="unfinished">Шаблон матрицы SciDAVis/QtiPlot</translation>
     </message>
@@ -4896,7 +4898,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Шаблон 3D поверхности SciDAVis/QtiPlot</translation>
     </message>
     <message>
-        <location line="+3182"/>
+        <location line="+3172"/>
         <source>unable to open index.html!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4922,14 +4924,14 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <location line="+4"/>
-        <location line="+151"/>
+        <location line="+152"/>
         <source>The following problems occured when loading the project file:
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-147"/>
-        <location line="+151"/>
+        <location line="-148"/>
+        <location line="+152"/>
         <source>Project loading partly failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4977,12 +4979,12 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">О SciDAVis</translation>
     </message>
     <message>
-        <location line="-3678"/>
+        <location line="-3677"/>
         <source>&amp;View Pixel Line profile</source>
         <translation type="unfinished">&amp;Показать профиль линии</translation>
     </message>
     <message>
-        <location line="+713"/>
+        <location line="+711"/>
         <source>Choose the location of the SciDAVis help folder!</source>
         <translation type="unfinished">Выберите расположение папки помощи SciDAVis!</translation>
     </message>
@@ -5002,7 +5004,7 @@ Various parts of this file may not be displayed as expected.</source>
 Предуприждение: это может изменить предидущие слои!</translation>
     </message>
     <message>
-        <location line="+1394"/>
+        <location line="+1395"/>
         <location line="+568"/>
         <source>&amp;Import ASCII...</source>
         <translation type="unfinished">Им&amp;порт ASCII...</translation>
@@ -5063,7 +5065,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Поситить &amp;Форумы SciDAVis</translation>
     </message>
     <message>
-        <location line="+533"/>
+        <location line="+535"/>
         <source>&lt;b&gt; %1 &lt;/b&gt;: This command line option must be used without other arguments!</source>
         <translation type="unfinished">&lt;b&gt; %1 &lt;/b&gt;: Эта опция коммандрой строки должна использоваться без аргументов!</translation>
     </message>
@@ -5171,7 +5173,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Вы не имеете прав для открытия этого файла:  &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="+228"/>
+        <location line="+224"/>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a SciDAVis or Origin project file!</source>
         <translation type="unfinished">Файл: &lt;b&gt;%1&lt;/b&gt; не является файлом проекта SciDAVis или Origin!</translation>
     </message>
@@ -5201,8 +5203,8 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Сохранить проект как</translation>
     </message>
     <message>
-        <location line="+327"/>
-        <location line="+34"/>
+        <location line="+324"/>
+        <location line="+33"/>
         <source>windows</source>
         <translation type="unfinished">окна</translation>
     </message>
@@ -5246,7 +5248,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Введите столбец</translation>
     </message>
     <message>
-        <location line="+390"/>
+        <location line="+389"/>
         <location line="+37"/>
         <source>You need at least two columns for this operation!</source>
         <translation type="unfinished">Для выполнения этой операции необходимо как минимум две колонки!</translation>
@@ -5267,20 +5269,20 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Сначала необходимо задать колонку Y!</translation>
     </message>
     <message>
-        <location line="-13415"/>
+        <location line="-13380"/>
         <source>New Aspect</source>
         <translation type="unfinished">Новый ракурс</translation>
     </message>
     <message>
-        <location line="-205"/>
-        <location line="+485"/>
+        <location line="-211"/>
+        <location line="+491"/>
         <source>SciDAVis - untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-248"/>
         <location line="+263"/>
-        <location line="+1167"/>
+        <location line="+1163"/>
         <location line="+36"/>
         <location line="+12"/>
         <location line="+41"/>
@@ -5288,23 +5290,23 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+20"/>
         <location line="+54"/>
         <location line="+92"/>
-        <location line="+78"/>
-        <location line="+39"/>
-        <location line="+111"/>
-        <location line="+12"/>
-        <location line="+1710"/>
-        <location line="+3081"/>
+        <location line="+71"/>
+        <location line="+47"/>
+        <location line="+59"/>
+        <location line="+67"/>
+        <location line="+1694"/>
+        <location line="+3071"/>
         <location line="+15"/>
-        <location line="+4330"/>
+        <location line="+4331"/>
         <location line="+70"/>
-        <location line="+1564"/>
+        <location line="+1555"/>
         <location line="+46"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="+506"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="+507"/>
         <source>Graph</source>
         <translation type="unfinished">График</translation>
     </message>
     <message>
-        <location line="-12732"/>
+        <location line="-12698"/>
         <source>Manage layers</source>
         <translation type="unfinished">Управление слоями</translation>
     </message>
@@ -5320,18 +5322,18 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <location line="+31"/>
-        <location line="+10837"/>
+        <location line="+10809"/>
         <source>Ctrl++</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-10830"/>
-        <location line="+10834"/>
+        <location line="-10802"/>
+        <location line="+10806"/>
         <source>Ctrl+-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-10790"/>
+        <location line="-10762"/>
         <location line="+133"/>
         <source>Plot</source>
         <translation type="unfinished"></translation>
@@ -5342,7 +5344,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Линии и/или отметки</translation>
     </message>
     <message>
-        <location line="+815"/>
+        <location line="+816"/>
         <location line="+40"/>
         <location line="+23"/>
         <location line="+23"/>
@@ -5355,25 +5357,25 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+10"/>
         <location line="+19"/>
         <location line="+19"/>
-        <location line="+1398"/>
+        <location line="+1385"/>
         <location line="+8"/>
         <location line="+10"/>
-        <location line="+2191"/>
+        <location line="+2184"/>
         <location line="+4"/>
         <location line="+9"/>
         <location line="+9"/>
-        <location line="+65"/>
+        <location line="+63"/>
         <location line="+11"/>
-        <location line="+280"/>
+        <location line="+275"/>
         <location line="+18"/>
         <location line="+18"/>
         <location line="+18"/>
         <location line="+6277"/>
         <location line="+48"/>
         <location line="+7"/>
-        <location line="+763"/>
+        <location line="+757"/>
         <location line="+9"/>
-        <location line="+1118"/>
+        <location line="+1115"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+5"/>
@@ -5385,14 +5387,14 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location line="-12126"/>
+        <location line="-12095"/>
         <location line="+10"/>
         <location line="+58"/>
-        <location line="+1064"/>
+        <location line="+1056"/>
         <location line="+12"/>
         <location line="+6"/>
-        <location line="+1976"/>
-        <location line="+896"/>
+        <location line="+1972"/>
+        <location line="+886"/>
         <location line="+307"/>
         <location line="+10"/>
         <location line="+36"/>
@@ -5415,20 +5417,20 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+38"/>
         <location line="+24"/>
         <location line="+47"/>
-        <location line="+1423"/>
+        <location line="+1420"/>
         <location line="+88"/>
-        <location line="+3336"/>
+        <location line="+3339"/>
         <location line="+13"/>
         <location line="+22"/>
         <location line="+13"/>
         <location line="+32"/>
         <location line="+13"/>
-        <location line="+1719"/>
+        <location line="+1710"/>
         <source>Warning</source>
         <translation type="unfinished">Предупреждение</translation>
     </message>
     <message>
-        <location line="-11789"/>
+        <location line="-11758"/>
         <location line="+11"/>
         <source>Choose data set</source>
         <translation type="unfinished">Выберите набор данных</translation>
@@ -5450,12 +5452,12 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Загрузить изображение из файла</translation>
     </message>
     <message>
-        <location line="+397"/>
+        <location line="+399"/>
         <source>Renamed Window</source>
         <translation type="unfinished">Переименованное окно</translation>
     </message>
     <message>
-        <location line="+375"/>
+        <location line="+365"/>
         <source>Error bars error</source>
         <translation type="unfinished">Ошибка столбиков ошибки</translation>
     </message>
@@ -5465,7 +5467,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+393"/>
+        <location line="+387"/>
         <location line="+8"/>
         <source>ASCII Import Failed</source>
         <translation type="unfinished"></translation>
@@ -5500,27 +5502,27 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+12"/>
         <location line="+13"/>
         <location line="+22"/>
-        <location line="+348"/>
+        <location line="+350"/>
         <location line="+12"/>
         <location line="+10"/>
         <location line="+110"/>
-        <location line="+7772"/>
+        <location line="+7762"/>
         <location line="+4"/>
         <location line="+4"/>
-        <location line="+217"/>
+        <location line="+213"/>
         <location line="+7"/>
         <location line="+45"/>
         <source>File opening error</source>
         <translation type="unfinished">Ошибка открытия файла</translation>
     </message>
     <message>
-        <location line="-8707"/>
-        <location line="+8707"/>
+        <location line="-8695"/>
+        <location line="+8695"/>
         <source>SciDAVis currently does not support Origin import. If you are interested in reviving and maintaining an Origin import filter, contact the developers.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-8675"/>
+        <location line="-8663"/>
         <source>File Open Error</source>
         <translation type="unfinished">Ошибка открытия файла</translation>
     </message>
@@ -5551,22 +5553,22 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <location line="+29"/>
-        <location line="+281"/>
-        <location line="+2189"/>
+        <location line="+283"/>
+        <location line="+2179"/>
         <location line="+42"/>
-        <location line="+1485"/>
-        <location line="+4206"/>
-        <location line="+1449"/>
+        <location line="+1484"/>
+        <location line="+4207"/>
+        <location line="+1441"/>
         <source>SciDAVis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-9621"/>
+        <location line="-9605"/>
         <source>Opening file</source>
         <translation type="unfinished">Открытие файла</translation>
     </message>
     <message>
-        <location line="+308"/>
+        <location line="+310"/>
         <source>Scripting Error</source>
         <translation type="unfinished">Ошибка скрипта</translation>
     </message>
@@ -5579,20 +5581,20 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+686"/>
         <location line="+28"/>
         <location line="+57"/>
-        <location line="+88"/>
-        <location line="+228"/>
-        <location line="+1117"/>
+        <location line="+87"/>
+        <location line="+226"/>
+        <location line="+1110"/>
         <source>Export Error</source>
         <translation type="unfinished">Ошибка экспорта</translation>
     </message>
     <message>
-        <location line="-1362"/>
-        <location line="+605"/>
+        <location line="-1352"/>
+        <location line="+596"/>
         <source>Overwrite file?</source>
         <translation type="unfinished">Перезаписать файл?</translation>
     </message>
     <message>
-        <location line="-71"/>
+        <location line="-69"/>
         <source>Right Axis Title</source>
         <translation type="unfinished">Заголовок правой оси</translation>
     </message>
@@ -5602,7 +5604,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Загаловок верхней оси</translation>
     </message>
     <message>
-        <location line="+8516"/>
+        <location line="+8504"/>
         <source>Undo/Redo History</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5615,7 +5617,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Введите номер столбца</translation>
     </message>
     <message>
-        <location line="-8329"/>
+        <location line="-8320"/>
         <source>Column selection error</source>
         <translation type="unfinished">Ошибка выбора столбца</translation>
     </message>
@@ -5650,13 +5652,13 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Ошибка дубликата</translation>
     </message>
     <message>
-        <location line="+119"/>
+        <location line="+118"/>
         <location line="+18"/>
         <source>Window Geometry</source>
         <translation type="unfinished">Геометрия окна</translation>
     </message>
     <message>
-        <location line="+923"/>
+        <location line="+921"/>
         <source>index.html File Not Found!</source>
         <translation type="unfinished">Файл index.html не найден!</translation>
     </message>
@@ -5685,7 +5687,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Предложить лучший источник для нового слоя?</translation>
     </message>
     <message>
-        <location line="+2723"/>
+        <location line="+2726"/>
         <source>Enter the number of peaks</source>
         <translation type="unfinished">Введите число пиков</translation>
     </message>
@@ -5694,12 +5696,12 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Ошибка резервной копии</translation>
     </message>
     <message>
-        <location line="+605"/>
+        <location line="+601"/>
         <source>File save error</source>
         <translation type="unfinished">Ошибка сохранения файла</translation>
     </message>
     <message>
-        <location line="+467"/>
+        <location line="+463"/>
         <source>Delete folder?</source>
         <translation type="unfinished">Удалить папку?</translation>
     </message>
@@ -5719,18 +5721,18 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Обновления доступны</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="+1535"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="+1534"/>
         <source>English</source>
         <comment>translate this to the language of the translation file, NOT to the meaning of English!</comment>
         <translation type="unfinished">Русский</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="-2449"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="-2443"/>
         <source>Create an empty note / script window</source>
         <translation type="unfinished">Созать пустое окно заметки / скрипта</translation>
     </message>
     <message>
-        <location line="+2401"/>
+        <location line="+2395"/>
         <source>SciDAVis will now try to determine whether a new version of SciDAVis is available. Please modify your firewall settings in order to allow SciDAVis to connect to the internet.</source>
         <translation type="unfinished">SciDAVis пытается проверить, доступна ли более новой версии SciDAVis. Пожалуйста настройте ваш firewall, чтобы разрешить SciDAVis подключаться к интернету.</translation>
     </message>
@@ -5761,7 +5763,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>AsciiTableImportFilter</name>
     <message>
-        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="+175"/>
+        <location filename="../../libscidavis/src/future/table/AsciiTableImportFilter.cpp" line="+177"/>
         <source>Table</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5778,7 +5780,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Таблица данных:</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+19"/>
         <source>Column</source>
         <translation type="unfinished">Столбец</translation>
     </message>
@@ -5841,7 +5843,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Модуль</translation>
     </message>
     <message>
-        <location line="-264"/>
+        <location line="-271"/>
         <source>Plot Associations</source>
         <translation type="unfinished">Ассоциации графика</translation>
     </message>
@@ -6448,7 +6450,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>ColorMapEditor</name>
     <message>
-        <location filename="../../libscidavis/src/ColorMapEditor.cpp" line="+56"/>
+        <location filename="../../libscidavis/src/ColorMapEditor.cpp" line="+62"/>
         <source>Level</source>
         <translation type="unfinished">Уровень</translation>
     </message>
@@ -6568,7 +6570,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>ConfigDialog</name>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="-1357"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="-1356"/>
         <source>The column separator can be customized. 
 The following special codes can be used:
 \t for a TAB character 
@@ -7209,13 +7211,13 @@ The following special codes can be used:
     </message>
     <message>
         <location line="+16"/>
-        <location line="+642"/>
+        <location line="+641"/>
         <source>Preview:</source>
         <comment>preview of the decimal separator</comment>
         <translation type="unfinished">Пример:</translation>
     </message>
     <message>
-        <location line="-639"/>
+        <location line="-638"/>
         <source>&amp;Display Comments in Header</source>
         <translation type="unfinished">Показывать коментарии в &amp;заголовке</translation>
     </message>
@@ -8191,7 +8193,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ExtensibleFileDialog</name>
     <message>
-        <location filename="../../libscidavis/src/ExtensibleFileDialog.cpp" line="+38"/>
+        <location filename="../../libscidavis/src/ExtensibleFileDialog.cpp" line="+43"/>
         <source>&lt;&lt; &amp;Advanced</source>
         <translation type="unfinished">&lt;&lt; Д&amp;ополнительно</translation>
     </message>
@@ -8926,17 +8928,17 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+3"/>
-        <location line="+124"/>
+        <location line="+132"/>
         <source>Function</source>
         <translation type="unfinished">Функция</translation>
     </message>
     <message>
-        <location line="-114"/>
+        <location line="-122"/>
         <source>Initial guesses</source>
         <translation type="unfinished">Начальные оценки</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+17"/>
         <source>Parameter</source>
         <translation type="unfinished">Параметр</translation>
     </message>
@@ -8951,7 +8953,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Константа</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+5"/>
         <source>Algorithm</source>
         <translation type="unfinished">Алгоритм</translation>
     </message>
@@ -9359,12 +9361,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Вы можете использовать точку как десятичный  разделитель в формулах.</translation>
     </message>
     <message>
-        <location line="-1258"/>
+        <location line="-1266"/>
         <source>Fit Wizard</source>
         <translation type="unfinished">Мастер приближения</translation>
     </message>
     <message>
-        <location line="+384"/>
+        <location line="+392"/>
         <location line="+7"/>
         <location line="+15"/>
         <location line="+7"/>
@@ -9729,7 +9731,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3189"/>
+        <location line="+592"/>
+        <source>Output in postscript format is not available for Qt5, using PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2607"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
         <translation type="unfinished">1</translation>
@@ -10101,7 +10108,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">По правому краю</translation>
     </message>
     <message>
-        <location line="-2583"/>
+        <location line="-2584"/>
         <source>Title</source>
         <translation type="unfinished">Заголовок</translation>
     </message>
@@ -10118,7 +10125,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Ошибка перемещения данных</translation>
     </message>
     <message>
-        <location line="+2008"/>
+        <location line="+2009"/>
         <location line="+30"/>
         <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
         <translation type="unfinished">Файл изображения: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;больше не существует!</translation>
@@ -10209,7 +10216,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">усреднённое сглаживание</translation>
     </message>
     <message>
-        <location line="-3050"/>
+        <location line="-3060"/>
         <location line="+32"/>
         <source>Please provide a valid file name!</source>
         <translation type="unfinished">Пожалуйста укажите корректное имя файла!</translation>
@@ -10220,7 +10227,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Формат файла не обработан, операция прервана!</translation>
     </message>
     <message>
-        <location line="+2633"/>
+        <location line="+2643"/>
         <source>Data set generated from curve</source>
         <translation type="unfinished">Набор данный постноенный по кривой</translation>
     </message>
@@ -10229,11 +10236,11 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Table</translation>
     </message>
     <message>
-        <location line="-3198"/>
+        <location line="-3208"/>
         <location line="+547"/>
         <location line="+18"/>
         <location line="+14"/>
-        <location line="+3773"/>
+        <location line="+3783"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
@@ -10244,7 +10251,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Ошибка открытия файла</translation>
     </message>
     <message>
-        <location line="+541"/>
+        <location line="-2387"/>
+        <location line="+2928"/>
         <location line="+4"/>
         <location line="+824"/>
         <source>Warning</source>
@@ -10291,7 +10299,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="+184"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="+186"/>
         <source>X axis</source>
         <translation type="unfinished">Ось X</translation>
     </message>
@@ -10306,7 +10314,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Ось Z</translation>
     </message>
     <message>
-        <location line="+1815"/>
+        <location line="+1817"/>
         <source>Could not print: &lt;h4&gt;</source>
         <translation type="unfinished">Невозможно напечатать: &lt;h4&gt;</translation>
     </message>
@@ -12398,7 +12406,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MatrixView</name>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="+150"/>
+        <location filename="../../libscidavis/src/future/matrix/MatrixView.cpp" line="+160"/>
         <source>Ctrl+A</source>
         <comment>Matrix: select all</comment>
         <translation type="unfinished"></translation>
@@ -12811,7 +12819,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Вы хотите, чтобы QtiPlot перегруппировал оставшиеся слои?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MultiLayer.cpp" line="+289"/>
+        <location filename="../../libscidavis/src/MultiLayer.cpp" line="+293"/>
         <source>&amp;Yes</source>
         <translation type="unfinished">&amp;Да</translation>
     </message>
@@ -12826,6 +12834,16 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">&amp;Отмена</translation>
     </message>
     <message>
+        <location line="+398"/>
+        <source>Warning</source>
+        <translation type="unfinished">Предупреждение</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Output in postscript format is not available for Qt5, using PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>QtiPlot - Error: arranging layers failed!</source>
         <translation type="obsolete">QtiPlot - Ошибка: неудача при группировки слоёв!</translation>
     </message>
@@ -12834,7 +12852,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">В данном окне отсутствует свободное пространство.&lt;p&gt;Вы можете его свернуть и воспользоваться фукцией автоматической перегруппировки слоёв!&lt;/p&gt;</translation>
     </message>
     <message>
-        <location line="+658"/>
+        <location line="+268"/>
         <source>enter your text here</source>
         <translation type="unfinished">вводите свой текст здесь</translation>
     </message>
@@ -12847,7 +12865,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Ошибка</translation>
     </message>
     <message>
-        <location line="-310"/>
+        <location line="-319"/>
         <location line="+38"/>
         <source>Please provide a valid file name!</source>
         <translation type="unfinished">Пожалуйста укажите корректное имя файла!</translation>
@@ -13037,7 +13055,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MyWidget.cpp" line="+81"/>
+        <location filename="../../libscidavis/src/MyWidget.cpp" line="+80"/>
         <source>SciDAVis</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15058,7 +15076,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="-1608"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="-1600"/>
         <location filename="../../libscidavis/src/globals.cpp" line="+162"/>
         <source>Released</source>
         <translation type="unfinished">Дата релиза</translation>
@@ -15126,7 +15144,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="-464"/>
         <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="+40"/>
-        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="+662"/>
+        <location filename="../../libscidavis/src/future/table/TableView.cpp" line="+676"/>
         <location line="+22"/>
         <source>%1: change column type</source>
         <translation type="unfinished"></translation>
@@ -15139,9 +15157,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+45"/>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="+150"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="+154"/>
         <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="+64"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="+218"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="+219"/>
         <source>%1: insert %2 row(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15355,14 +15373,14 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+409"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="+849"/>
+        <location line="+444"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="+896"/>
         <source>%1: copy %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+138"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="-794"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="-841"/>
         <source>%1: add %2 rows(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19368,7 +19386,7 @@ floating point values
 <context>
     <name>future::Matrix</name>
     <message>
-        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="-771"/>
+        <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="-806"/>
         <source>%1: cut selected cell(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19384,42 +19402,48 @@ floating point values
     </message>
     <message>
         <location line="+93"/>
+        <location line="+213"/>
         <source>Cu&amp;t</source>
         <translation type="unfinished">В&amp;ырезать</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-210"/>
+        <location line="+211"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">&amp;Копировать</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-208"/>
+        <location line="+209"/>
         <source>Past&amp;e</source>
         <translation type="unfinished">&amp;Вставить</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="-203"/>
+        <location line="+204"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
         <translation type="unfinished">&amp;Очистить</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="-196"/>
+        <location line="+197"/>
         <source>Assign &amp;Formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-196"/>
         <source>Alt+Q</source>
         <translation type="unfinished">Alt+Q</translation>
     </message>
     <message>
         <location line="+7"/>
+        <location line="+190"/>
         <source>Recalculate</source>
         <translation type="unfinished">Пересчитать</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-189"/>
         <source>Ctrl+Return</source>
         <translation type="unfinished">Ctrl+Return</translation>
     </message>
@@ -19430,114 +19454,134 @@ floating point values
     </message>
     <message>
         <location line="+7"/>
+        <location line="+175"/>
         <source>Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-168"/>
+        <location line="+169"/>
+        <location line="+46"/>
         <source>Clear Matrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-208"/>
+        <location line="+163"/>
         <source>&amp;Go to Cell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-162"/>
         <source>Ctrl+Alt+G</source>
         <translation type="unfinished">Ctrl+Alt+G</translation>
     </message>
     <message>
         <location line="+4"/>
+        <location line="+159"/>
         <source>&amp;Transpose</source>
         <translation type="unfinished">&amp;Транспонировать</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-156"/>
+        <location line="+157"/>
         <source>Mirror &amp;Horizontally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-154"/>
+        <location line="+155"/>
         <source>Mirror &amp;Vertically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-152"/>
+        <location line="+153"/>
         <source>&amp;Import Image</source>
         <comment>import image as matrix</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-150"/>
+        <location line="+152"/>
         <source>&amp;Duplicate</source>
         <comment>duplicate matrix</comment>
         <translation type="unfinished">&amp;Дублировать</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-149"/>
+        <location line="+151"/>
         <source>&amp;Dimensions</source>
         <comment>matrix size</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-148"/>
+        <location line="+149"/>
         <source>Set &amp;Coordinates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-146"/>
+        <location line="+147"/>
         <source>Set Display &amp;Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-140"/>
+        <location line="+141"/>
         <source>&amp;Insert Empty Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-134"/>
+        <location line="+135"/>
         <source>Remo&amp;ve Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-128"/>
+        <location line="+129"/>
         <source>Clea&amp;r Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-122"/>
+        <location line="+123"/>
         <source>&amp;Add Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="-115"/>
+        <location line="+116"/>
         <source>&amp;Insert Empty Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-109"/>
+        <location line="+110"/>
         <source>Remo&amp;ve Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-103"/>
+        <location line="+104"/>
         <source>Clea&amp;r Rows</source>
         <translation type="unfinished">С&amp;тереть строки</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-97"/>
+        <location line="+98"/>
         <source>&amp;Add Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+73"/>
+        <location line="+5"/>
         <source>&amp;Matrix</source>
         <translation type="unfinished">&amp;Матрица</translation>
     </message>
     <message>
-        <location line="+66"/>
+        <location line="+71"/>
         <location line="+4"/>
         <source>Go to Cell</source>
         <translation type="unfinished">Перейти к ячейке</translation>
@@ -19793,275 +19837,316 @@ floating point values
     </message>
     <message>
         <location line="+2"/>
-        <location line="+653"/>
+        <location line="+700"/>
         <source>S&amp;et Column(s) As</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-641"/>
-        <location line="+609"/>
+        <location line="-688"/>
+        <location line="+656"/>
         <location line="+44"/>
         <location line="+64"/>
         <source>Fi&amp;ll Selection with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-648"/>
+        <location line="-693"/>
+        <location line="+355"/>
         <source>Cu&amp;t</source>
         <translation type="unfinished">В&amp;ырезать</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-352"/>
+        <location line="+353"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">&amp;Копировать</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-350"/>
+        <location line="+351"/>
         <source>Past&amp;e</source>
         <translation type="unfinished">&amp;Вставить</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-347"/>
+        <location line="+349"/>
         <source>&amp;Mask</source>
         <comment>mask selection</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-346"/>
+        <location line="+347"/>
         <source>&amp;Unmask</source>
         <comment>unmask selection</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-340"/>
+        <location line="+343"/>
         <source>Assign &amp;Formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-342"/>
         <source>Alt+Q</source>
         <translation type="unfinished">Alt+Q</translation>
     </message>
     <message>
         <location line="+7"/>
+        <location line="+336"/>
         <source>Clea&amp;r</source>
         <comment>clear selection</comment>
         <translation type="unfinished">&amp;Очистить</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-329"/>
+        <location line="+330"/>
         <source>Recalculate</source>
         <translation type="unfinished">Пересчитать</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-329"/>
         <source>Ctrl+Return</source>
         <translation type="unfinished">Ctrl+Return</translation>
     </message>
     <message>
         <location line="+4"/>
+        <location line="+326"/>
         <source>Row Numbers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-323"/>
+        <location line="+324"/>
         <source>Random Values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="-309"/>
         <source>F12</source>
         <translation type="unfinished">F12</translation>
     </message>
     <message>
         <location line="+4"/>
+        <location line="+306"/>
         <source>Formula Edit Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-299"/>
+        <location line="+300"/>
         <source>Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-293"/>
+        <location line="+294"/>
         <source>&amp;Add Column</source>
         <translation type="unfinished">&amp;Добавить колонку</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-293"/>
         <source>append a new column to the table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
+        <location line="+287"/>
         <source>Clear Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-280"/>
+        <location line="+281"/>
         <source>Export to TeX...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="-275"/>
+        <location line="+264"/>
         <source>Clear Masks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-257"/>
+        <location line="+269"/>
         <source>&amp;Sort Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-262"/>
+        <location line="+263"/>
         <source>&amp;Go to Cell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-262"/>
         <source>Ctrl+Alt+G</source>
         <translation type="unfinished">Ctrl+Alt+G</translation>
     </message>
     <message>
         <location line="+4"/>
+        <location line="+259"/>
         <source>&amp;Dimensions</source>
         <comment>table size</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-258"/>
         <source>change the table size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
+        <location line="+252"/>
         <source>&amp;Insert Empty Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-245"/>
+        <location line="+246"/>
         <source>Remo&amp;ve Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-239"/>
+        <location line="+240"/>
         <source>Clea&amp;r Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-233"/>
+        <location line="+234"/>
         <source>&amp;Add Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-230"/>
+        <location line="+231"/>
         <source>X</source>
         <comment>plot designation</comment>
         <translation type="unfinished">X</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-228"/>
+        <location line="+229"/>
         <source>Y</source>
         <comment>plot designation</comment>
         <translation type="unfinished">Y</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-226"/>
+        <location line="+227"/>
         <source>Z</source>
         <comment>plot designation</comment>
         <translation type="unfinished">Z</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="-221"/>
+        <location line="+222"/>
         <source>X Error</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-215"/>
+        <location line="+216"/>
         <source>Y Error</source>
         <comment>plot designation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-212"/>
+        <location line="+213"/>
         <source>None</source>
         <comment>plot designation</comment>
         <translation type="unfinished">Никакой(ая)</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="-207"/>
+        <location line="+208"/>
         <source>&amp;Normalize Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-201"/>
+        <location line="+202"/>
         <source>&amp;Normalize Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-195"/>
+        <location line="+196"/>
         <source>&amp;Sort Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-192"/>
+        <location line="+193"/>
         <source>Column Statisti&amp;cs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-192"/>
         <source>statistics on columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
+        <location line="+187"/>
         <source>Change &amp;Type &amp;&amp; Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-186"/>
         <source>Ctrl+Alt+O</source>
         <translation type="unfinished">Ctrl+Alt+O</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-249"/>
+        <location line="+256"/>
+        <location line="+180"/>
         <source>Edit Column &amp;Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="-172"/>
+        <location line="+173"/>
         <source>&amp;Insert Empty Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-166"/>
+        <location line="+167"/>
         <source>Remo&amp;ve Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-160"/>
+        <location line="+161"/>
         <source>Clea&amp;r Rows</source>
         <translation type="unfinished">С&amp;тереть строки</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-154"/>
+        <location line="+155"/>
         <source>&amp;Add Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-151"/>
+        <location line="+152"/>
         <source>Row Statisti&amp;cs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-151"/>
         <source>statistics on rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+205"/>
+        <location line="+250"/>
         <source>TeX Export Error</source>
         <translation type="unfinished"></translation>
     </message>

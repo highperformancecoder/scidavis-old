@@ -7718,6 +7718,10 @@ p, li { white-space: pre-wrap; }
         <source>Couldn&apos;t change the axis type to the requested format!</source>
         <translation type="unfinished">Não foi possível alterar o tipo de eixo para o formato solicitado!</translation>
     </message>
+    <message>
+        <source>Output in postscript format is not available for Qt5, using PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Graph3D</name>
@@ -10063,6 +10067,14 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     <message>
         <source>Error</source>
         <translation type="unfinished">Erro</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Atenção</translation>
+    </message>
+    <message>
+        <source>Output in postscript format is not available for Qt5, using PDF</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

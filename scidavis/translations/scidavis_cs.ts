@@ -5732,6 +5732,10 @@ p, li { white-space: pre-wrap; }
         <comment>curve data table y column name</comment>
         <translation type="unfinished">2</translation>
     </message>
+    <message>
+        <source>Output in postscript format is not available for Qt5, using PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Graph3D</name>
@@ -7506,6 +7510,14 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <message>
         <source>enter your text here</source>
         <translation type="unfinished">Zde zadejte svůj text</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Varování</translation>
+    </message>
+    <message>
+        <source>Output in postscript format is not available for Qt5, using PDF</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
