@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="en_US">
 <context>
     <name>AbstractAspect</name>
     <message>
@@ -4181,7 +4181,7 @@ Are you sure you want to continue?</source>
         <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1534"/>
         <source>English</source>
         <comment>translate this to the language of the translation file, NOT to the meaning of English!</comment>
-        <translation type="unfinished"></translation>
+        <translation>日本の</translation>
     </message>
 </context>
 <context>

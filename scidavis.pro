@@ -47,7 +47,6 @@ SUBDIRS += fitPlugins/fitRational0\
 
 TRANSLATIONS    = scidavis/translations/scidavis_de.ts \
                   scidavis/translations/scidavis_es.ts \
-                  scidavis/translations/scidavis_nl.ts \
                   scidavis/translations/scidavis_fr.ts \
                   scidavis/translations/scidavis_ru.ts \
                   scidavis/translations/scidavis_ja.ts \
