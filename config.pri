@@ -372,7 +372,7 @@ mxe {
   QMAKE_CXXFLAGS+=-g "-I$$QMAKE_INCDIR_QT/qwt5"
   QMAKE_LFLAGS+="-L$$QMAKE_LIBDIR_QT/qwt5"
   DEFINES += CONSOLE
-  QMAKE_INCDIR  += . "$$(HOME)/usr/mxe/include" 
+  QMAKE_INCDIR  += . "$$(HOME)/usr/mxe/include" "$$QMAKE_INCDIR_QT/../../include/qwtplot3d"
   QMAKE_LIBDIR += "$(HOME)/usr/mxe/lib" "$(HOME)/usr/mxe/lib64"
   LIBS +=  -mwindows -lqwt -lqwtplot3d -lmuparser -lgsl -lgslcblas
   # Qt libraries specified here to get around a dependency bug in qmake
