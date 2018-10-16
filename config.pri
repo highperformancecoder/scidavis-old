@@ -257,6 +257,7 @@ osx_dist {
 	INCLUDEPATH  += /usr/local/include
 	INCLUDEPATH  += /opt/local/include
 	INCLUDEPATH  += /opt/local/include/qwt
+	INCLUDEPATH  += /opt/local/include/qwtplot3d
 
 	LIBS         += -L/usr/local/lib -L/opt/local/lib -lqwt
 
