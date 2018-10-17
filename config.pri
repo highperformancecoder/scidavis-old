@@ -295,7 +295,8 @@ contains(PRESET, linux_package) {
         exists(/usr/include/qwt5) {INCLUDEPATH+=/usr/include/qwt5}
         exists (/usr/include/qwt-qt4) {INCLUDEPATH+=/usr/include/qwt-qt4}
         exists(/usr/include/qwt5-qt4) {INCLUDEPATH+=/usr/include/qwt5-qt4}
-        INCLUDEPATH  += /usr/include/qwtplot3d
+        exists(/usr/include/qt5/qwtplot3d-qt4) {INCLUDEPATH+=/usr/include/qwtplot3d-qt4} #debianish
+        else {INCLUDEPATH  += /usr/include/qwtplot3d} #standard
 
         system (ls /usr/lib*/libqwt5.so) {
            LIBS+=-lqwt5
