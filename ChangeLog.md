@@ -1,4 +1,10 @@
-# SciDAVis changelog
+# SciDAVis changelog (main changes)
+
+=== Release 1.24 ===
+- added support for Qt 5.x;
+- liborigin updated;
+- some bugs were fixed;
+- color picker for symbol edge and fill colors was enhanced
 
 === Release 1.23 - 2018-06-04 ===
 - Bug fix release;
