@@ -29,7 +29,7 @@
 #include "FitDialog.h"
 #include "MyParser.h"
 #include "ApplicationWindow.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "Fit.h"
 #include "MultiPeakFit.h"
 #include "ExponentialFit.h"
@@ -140,9 +140,9 @@ void FitDialog::initFitPage()
     gl1->addWidget(boxAlgorithm, 4, 1);
 
 	gl1->addWidget(new QLabel( tr("Color")), 5, 0);
-	boxColor = new ColorBox();
-	boxColor->setColor(QColor(Qt::red));
-    gl1->addWidget(boxColor, 5, 1);
+	btnColor = new ColorButton();
+	btnColor->setColor(QColor(Qt::red));
+	gl1->addWidget(btnColor, 5, 1);
 
     QGroupBox *gb1 = new QGroupBox();
     gb1->setLayout(gl1);
@@ -1211,7 +1211,7 @@ void FitDialog::accept()
 
         d_fitter->setTolerance (eps);
         d_fitter->setAlgorithm((Fit::Algorithm)boxAlgorithm->currentIndex());
-        d_fitter->setColor(boxColor->currentIndex());
+        d_fitter->setColor(btnColor->color());
         d_fitter->generateFunction(generatePointsBtn->isChecked(), generatePointsBox->value());
         d_fitter->setMaximumIterations(boxPoints->value());
         d_fitter->scaleErrors(scaleErrorsBox->isChecked());
@@ -1397,4 +1397,3 @@ void FitDialog::resetFunction()
 	boxParam->clear();
 	editBox->clear();
 }
-

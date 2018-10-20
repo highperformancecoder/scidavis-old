@@ -29,7 +29,7 @@
 #include "FFT.h"
 #include "MultiLayer.h"
 #include "Plot.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "core/column/Column.h"
 
 #include <QMessageBox>
@@ -175,7 +175,7 @@ void FFT::output(QList<Column *> columns)
 	Graph* g = ml->activeGraph();
 	if ( g )
 	{
-		g->setCurvePen(0, QPen(ColorBox::color(d_curveColorIndex), 1));
+		g->setCurvePen(0, QPen(d_curveColor, 1));
 
         Plot* plot = g->plotWidget();
 		plot->setTitle(QString());

@@ -647,7 +647,7 @@ class QwtSymbol
 {
 %TypeHeaderCode
 #include <qwt_symbol.h>
-#include "ColorBox.h"
+#include "ColorButton.h"
 %End
 	public:
     enum Style 
@@ -703,10 +703,10 @@ class QwtSymbol
 	 void setColor(int color);
 %MethodCode
 	QPen pen = sipCpp->pen();
-	pen.setColor(ColorBox::color(a0));
+	pen.setColor(ColorButton::color(a0));
 	sipCpp->setPen(pen);
 	QBrush brush = sipCpp->brush();
-	brush.setColor(ColorBox::color(a0));
+	brush.setColor(ColorButton::color(a0));
 	sipCpp->setBrush(brush);
 %End
 	 void setOutlineColor(const QColor& color);
@@ -718,7 +718,7 @@ class QwtSymbol
 	 void setOutlineColor(int color);
 %MethodCode
 	QPen pen = sipCpp->pen();
-	pen.setColor(ColorBox::color(a0));
+	pen.setColor(ColorButton::color(a0));
 	sipCpp->setPen(pen);
 %End
 	 void setFillColor(const QColor& color);
@@ -730,7 +730,7 @@ class QwtSymbol
 	 void setFillColor(int color);
 %MethodCode
 	QBrush brush = sipCpp->brush();
-	brush.setColor(ColorBox::color(a0));
+	brush.setColor(ColorButton::color(a0));
 	sipCpp->setBrush(brush);
 %End
 
@@ -782,10 +782,10 @@ class QwtPlotCurve
 	 void setColor(int color);
 %MethodCode
 	QPen pen = sipCpp->pen();
-	pen.setColor(ColorBox::color(a0));
+	pen.setColor(ColorButton::color(a0));
 	sipCpp->setPen(pen);
 	QBrush brush = sipCpp->brush();
-	brush.setColor(ColorBox::color(a0));
+	brush.setColor(ColorButton::color(a0));
 	sipCpp->setBrush(brush);
 %End
 	 void setOutlineColor(const QColor& color);
@@ -797,7 +797,7 @@ class QwtPlotCurve
 	 void setOutlineColor(int color);
 %MethodCode
 	QPen pen = sipCpp->pen();
-	pen.setColor(ColorBox::color(a0));
+	pen.setColor(ColorButton::color(a0));
 	sipCpp->setPen(pen);
 %End
 	 void setFillColor(const QColor& color);
@@ -809,7 +809,7 @@ class QwtPlotCurve
 	 void setFillColor(int color);
 %MethodCode
 	QBrush brush = sipCpp->brush();
-	brush.setColor(ColorBox::color(a0));
+	brush.setColor(ColorButton::color(a0));
 	sipCpp->setBrush(brush);
 %End
 	 void setFillStyle(Qt::BrushStyle style);
@@ -908,7 +908,7 @@ class Graph : QWidget /PyName=Layer/
 %TypeHeaderCode
 #include "src/Graph.h"
 #include "src/Legend.h"
-#include "src/ColorBox.h"
+#include "src/ColorButton.h"
 #include "src/FunctionCurve.h"
 #include "src/DataPointPicker.h"
 #include <qwt_plot_canvas.h>
@@ -1159,7 +1159,7 @@ class ApplicationWindow: QMainWindow
 {
 %TypeHeaderCode
 #include "src/ApplicationWindow.h"
-#include "src/ColorBox.h"
+#include "src/ColorButton.h"
 #include <qwt_symbol.h>
 %End
 %ConvertToSubClassCode
@@ -1257,14 +1257,14 @@ public:
 		 for (int c =0; c < sipRes->activeGraph()->curves(); c++) {
 			 QwtPlotCurve *curve = sipRes->activeGraph()->curve(c);
 			 QPen pen = curve->pen();
-			 pen.setColor(ColorBox::color(a3));
+			 pen.setColor(ColorButton::color(a3));
 			 curve->setPen(pen);
 			 QwtSymbol symbol = curve->symbol();
 			 pen = symbol.pen();
-			 pen.setColor(ColorBox::color(a3));
+			 pen.setColor(ColorButton::color(a3));
 			 symbol.setPen(pen);
 			 QBrush brush = symbol.brush();
-			 brush.setColor(ColorBox::color(a3));
+			 brush.setColor(ColorButton::color(a3));
 			 symbol.setBrush(brush);
 			 curve->setSymbol(symbol);
 		 }
@@ -1283,14 +1283,14 @@ public:
     if (a3 >= 0) {
        QwtPlotCurve * c = sipRes->activeGraph()->curve(0);
        QPen pen = c->pen();
-       pen.setColor(ColorBox::color(a3));
+       pen.setColor(ColorButton::color(a3));
        c->setPen(pen);
 		 QwtSymbol symbol = c->symbol();
 		 pen = symbol.pen();
-		 pen.setColor(ColorBox::color(a3));
+		 pen.setColor(ColorButton::color(a3));
 		 symbol.setPen(pen);
 		 QBrush brush = symbol.brush();
-		 brush.setColor(ColorBox::color(a3));
+		 brush.setColor(ColorButton::color(a3));
 		 symbol.setBrush(brush);
 		 c->setSymbol(symbol);
     }

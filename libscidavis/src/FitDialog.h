@@ -44,7 +44,7 @@ class QSpinBox;
 class QLabel;
 class QRadioButton;
 class QLineEdit;
-class ColorBox;
+class ColorButton;
 class Fit;
 
 //! Fit Wizard
@@ -179,7 +179,7 @@ private:
 	QLabel *lblFunction, *lblPoints, *polynomOrderLabel;
 	QPushButton *btnAddFunc, *btnDelFunc, *btnContinue, *btnApply;
 	QPushButton *buttonEdit, *btnAddTxt, *btnAddName, *btnDeleteFitCurves;
-	ColorBox* boxColor;
+	ColorButton* btnColor;
 	QComboBox *boxYErrorSource, *tableNamesBox, *colNamesBox;
 	QRadioButton *generatePointsBtn, *samePointsBtn;
 	QPushButton *btnParamTable, *btnCovMatrix;

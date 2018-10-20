@@ -50,7 +50,6 @@ class QTreeWidget;
 
 class LayerItem;
 class CurveTreeItem;
-class ColorBox;
 class PatternBox;
 class ColorButton;
 class MultiLayer;
@@ -94,14 +93,8 @@ class PlotDialog : public QDialog
 
 		void removeSelectedCurve();
 
-		//line plots
-		void pickBoxLineColor();
-		void pickBoxAreaColor();
-		void pickBoxSymbolColor();
-		void pickBoxFillColor();
-
 		/******* error bars options **************/
-		void pickErrorBarsColor();
+		void pickErrorBarsColor(QColor);
 		void changeErrorBarsType();
 		void changeErrorBarsPlus();
 		void changeErrorBarsMinus();
@@ -120,7 +113,6 @@ class PlotDialog : public QDialog
 		void setWhiskersRange(int index);
 
 		//spectrograms
-		void pickContourLinesColor();
 		void showDefaultContourLinesBox(bool show);
 		void showColorMapEditor(bool show);
 
@@ -131,9 +123,9 @@ class PlotDialog : public QDialog
 		void updateCanvasTransparency(int alpha);
 		void updateAntialiasing(bool on);
 		void updateBorder(int width);
-		void pickBackgroundColor();
-		void pickCanvasColor();
-		void pickBorderColor();
+		void pickBackgroundColor(QColor);
+		void pickCanvasColor(QColor);
+		void pickBorderColor(QColor);
 		void changeMargin(int);
 		void setTitlesFont();
 		void setAxesLabelsFont();
@@ -174,7 +166,7 @@ class PlotDialog : public QDialog
 		ColorButton *boxBorderColor, *boxBackgroundColor, *boxCanvasColor;
 		QSpinBox *boxBackgroundTransparency, *boxCanvasTransparency, *boxBorderWidth, *boxMargin;
 		QSpinBox *boxRadius, *boxPieLineWidth;
-		ColorBox *boxFirstColor, *boxPieLineColor;
+		ColorButton *boxFirstColor, *boxPieLineColor;
 		PatternBox *boxPiePattern;
 		QComboBox* boxPieLineStyle;
 
@@ -186,7 +178,7 @@ class PlotDialog : public QDialog
 		QComboBox* boxConnect;
 		QComboBox* boxLineStyle;
 		QSpinBox* boxLineWidth, *boxPenWidth;
-        ColorButton* boxLineColor, *boxAreaColor;
+		ColorButton* boxLineColor, *boxAreaColor;
 		QWidget* symbolPage;
 		QSpinBox* boxSymbolSize;
 		ColorButton* boxSymbolColor,*boxFillColor;
@@ -199,7 +191,7 @@ class PlotDialog : public QDialog
 		QCheckBox* minusBox;
 		QCheckBox* xBox;
 		ColorButton *colorBox, *levelsColorBox;
-		ColorBox* vectColorBox;
+		ColorButton* vectColorBox;
 		QComboBox* widthBox;
 		QComboBox* capBox;
 		QCheckBox* throughBox;
@@ -216,7 +208,7 @@ class PlotDialog : public QDialog
 		QCheckBox *filledHeadBox;
 		QSpinBox *boxCoef, *boxWhiskersCoef;
 		QCheckBox *boxFillSymbols, *boxFillSymbol;
-		ColorBox *boxPercFillColor, *boxEdgeColor;
+		ColorButton *boxPercFillColor, *boxEdgeColor;
 		QLabel 	*whiskerCoeffLabel, *whiskerRangeLabel, *boxCoeffLabel;
 		QLabel *boxRangeLabel, *whiskerCntLabel, *boxCntLabel;
 		QGroupBox *GroupBoxVectEnd;

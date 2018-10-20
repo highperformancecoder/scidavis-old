@@ -95,7 +95,7 @@
 #include "Convolution.h"
 #include "Correlation.h"
 #include "CurveRangeDialog.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "QwtHistogram.h"
 #include "OpenProjectDialog.h"
 #include "IconLoader.h"
@@ -4246,10 +4246,10 @@ void ApplicationWindow::readSettings()
 	settings.endGroup(); // Dialogs
 
 	settings.beginGroup("/Colors");
-	workspaceColor = settings.value("/Workspace","darkGray").value<QColor>();
+	workspaceColor = QColor(settings.value("/Workspace","darkGray").toString());
 	// see http://doc.trolltech.com/4.2/qvariant.html for instructions on qcolor <-> qvariant conversion
-	panelsColor = settings.value("/Panels","#ffffff").value<QColor>();
-	panelsTextColor = settings.value("/PanelsText","#000000").value<QColor>();
+	panelsColor = QColor(settings.value("/Panels","#ffffff").toString());
+	panelsTextColor = QColor(settings.value("/PanelsText","#000000").toString());
 	settings.endGroup(); // Colors
 
 	settings.beginGroup("/Paths");
@@ -4316,9 +4316,9 @@ void ApplicationWindow::readSettings()
 	}
 
 	settings.beginGroup("/Colors");
-	tableBkgdColor = settings.value("/Background","#ffffff").value<QColor>();
-	tableTextColor = settings.value("/Text","#000000").value<QColor>();
-	tableHeaderColor = settings.value("/Header","#000000").value<QColor>();
+	tableBkgdColor = QColor(settings.value("/Background","#ffffff").toString());
+	tableTextColor = QColor(settings.value("/Text","#000000").toString());
+	tableHeaderColor = QColor(settings.value("/Header","#000000").toString());
 	settings.endGroup(); // Colors
 	settings.endGroup();
 	/* --------------- end group Tables ------------------------ */
@@ -4365,14 +4365,14 @@ void ApplicationWindow::readSettings()
 
 	settings.beginGroup("/Legend");
 	legendFrameStyle = settings.value("/FrameStyle", Legend::Line).toInt();
-	legendTextColor = settings.value("/TextColor", "#000000").value<QColor>(); //default color Qt::black
-	legendBackground = settings.value("/BackgroundColor", "#ffffff").value<QColor>(); //default color Qt::white
+	legendTextColor = QColor(settings.value("/TextColor", "#000000").toString()); //default color Qt::black
+	legendBackground = QColor(settings.value("/BackgroundColor", "#ffffff").toString()); //default color Qt::white
 	legendBackground.setAlpha(settings.value("/Transparency", 0).toInt()); // transparent by default;
 	settings.endGroup(); // Legend
 
 	settings.beginGroup("/Arrows");
 	defaultArrowLineWidth = settings.value("/Width", 1).toInt();
-	defaultArrowColor = settings.value("/Color", "#000000").value<QColor>();//default color Qt::black
+	defaultArrowColor = QColor(settings.value("/Color", "#000000").toString());//default color Qt::black
 	defaultArrowHeadLength = settings.value("/HeadLength", 4).toInt();
 	defaultArrowHeadAngle = settings.value("/HeadAngle", 45).toInt();
 	defaultArrowHeadFill = settings.value("/HeadFill", true).toBool();
@@ -4399,14 +4399,14 @@ void ApplicationWindow::readSettings()
 	}
 
 	settings.beginGroup("/Colors");
-	plot3DColors << QColor(settings.value("/MaxData", "blue").value<QColor>()).name();
-	plot3DColors << QColor(settings.value("/Labels", "#000000").value<QColor>()).name();
-	plot3DColors << QColor(settings.value("/Mesh", "#000000").value<QColor>()).name();
-	plot3DColors << QColor(settings.value("/Grid", "#000000").value<QColor>()).name();
-	plot3DColors << QColor(settings.value("/MinData", "red").value<QColor>()).name();
-	plot3DColors << QColor(settings.value("/Numbers", "#000000").value<QColor>()).name();
-	plot3DColors << QColor(settings.value("/Axes", "#000000").value<QColor>()).name();
-	plot3DColors << QColor(settings.value("/Background", "#ffffff").value<QColor>()).name();
+	plot3DColors << settings.value("/MaxData", "blue").toString();
+	plot3DColors << settings.value("/Labels", "#000000").toString();
+	plot3DColors << settings.value("/Mesh", "#000000").toString();
+	plot3DColors << settings.value("/Grid", "#000000").toString();
+	plot3DColors << settings.value("/MinData", "red").toString();
+	plot3DColors << settings.value("/Numbers", "#000000").toString();
+	plot3DColors << settings.value("/Axes", "#000000").toString();
+	plot3DColors << settings.value("/Background", "#ffffff").toString();
 	settings.endGroup(); // Colors
 	settings.endGroup();
 	/* ----------------- end group 3D Plots --------------------------- */
@@ -4419,7 +4419,7 @@ void ApplicationWindow::readSettings()
 	generateUniformFitPoints = settings.value("/GenerateFunction", true).toBool();
 	fitPoints = settings.value("/Points", 100).toInt();
 	generatePeakCurves = settings.value("/GeneratePeakCurves", true).toBool();
-	peakCurvesColor = settings.value("/PeaksColor", 2).toInt();//green color
+	peakCurvesColor = QColor(settings.value("/PeaksColor", "#00ff00").toString());//green color
 	fit_scale_errors = settings.value("/ScaleErrors", false).toBool();
 	d_2_linear_fit_points = settings.value("/TwoPointsLinearFit", true).toBool();
 	settings.endGroup(); // Fitting
@@ -4499,9 +4499,9 @@ void ApplicationWindow::saveSettings()
 	settings.endGroup(); // Dialogs
 
 	settings.beginGroup("/Colors");
-	settings.setValue("/Workspace", workspaceColor);
-	settings.setValue("/Panels", panelsColor);
-	settings.setValue("/PanelsText", panelsTextColor);
+	settings.setValue("/Workspace", COLORNAME(workspaceColor));
+	settings.setValue("/Panels", COLORNAME(panelsColor));
+	settings.setValue("/PanelsText", COLORNAME(panelsTextColor));
 	settings.endGroup(); // Colors
 
 	settings.beginGroup("/Paths");
@@ -4551,9 +4551,9 @@ void ApplicationWindow::saveSettings()
 	settings.setValue("/Fonts", tableFonts);
 
 	settings.beginGroup("/Colors");
-	settings.setValue("/Background", tableBkgdColor);
-	settings.setValue("/Text", tableTextColor);
-	settings.setValue("/Header", tableHeaderColor);
+	settings.setValue("/Background", COLORNAME(tableBkgdColor));
+	settings.setValue("/Text", COLORNAME(tableTextColor));
+	settings.setValue("/Header", COLORNAME(tableHeaderColor));
 	settings.endGroup(); // Colors
 	settings.endGroup();
 	/* ----------------- end group Tables ---------- */
@@ -4610,14 +4610,14 @@ void ApplicationWindow::saveSettings()
 
 	settings.beginGroup("/Legend");
 	settings.setValue("/FrameStyle", legendFrameStyle);
-	settings.setValue("/TextColor", legendTextColor);
-	settings.setValue("/BackgroundColor", legendBackground);
+	settings.setValue("/TextColor", COLORNAME(legendTextColor));
+	settings.setValue("/BackgroundColor", COLORNAME(legendBackground));
 	settings.setValue("/Transparency", legendBackground.alpha());
 	settings.endGroup(); // Legend
 
 	settings.beginGroup("/Arrows");
 	settings.setValue("/Width", defaultArrowLineWidth);
-	settings.setValue("/Color", defaultArrowColor.name());
+	settings.setValue("/Color", COLORNAME(defaultArrowColor));
 	settings.setValue("/HeadLength", defaultArrowHeadLength);
 	settings.setValue("/HeadAngle", defaultArrowHeadAngle);
 	settings.setValue("/HeadFill", defaultArrowHeadFill);
@@ -4670,7 +4670,7 @@ void ApplicationWindow::saveSettings()
 	settings.setValue("/GenerateFunction", generateUniformFitPoints);
 	settings.setValue("/Points", fitPoints);
 	settings.setValue("/GeneratePeakCurves", generatePeakCurves);
-	settings.setValue("/PeaksColor", peakCurvesColor);
+	settings.setValue("/PeaksColor", COLORNAME(peakCurvesColor));
 	settings.setValue("/ScaleErrors", fit_scale_errors);
 	settings.setValue("/TwoPointsLinearFit", d_2_linear_fit_points);
 	settings.endGroup(); // Fitting
@@ -9676,7 +9676,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                               if (d_file_version <= 77)
                                 {
                                   int temp_index = convertOldToNewColorIndex(curve[15].toInt());
-                                  ag->updateVectorsLayout(curveID, ColorBox::color(temp_index), curve[16].toInt(), curve[17].toInt(),
+                                  ag->updateVectorsLayout(curveID, ColorButton::color(temp_index), curve[16].toInt(), curve[17].toInt(),
                                                           curve[18].toInt(), curve[19].toInt(), 0, curve[20], curve[21]);
                                 }
                               else

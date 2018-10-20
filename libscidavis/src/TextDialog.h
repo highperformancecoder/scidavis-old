@@ -100,10 +100,6 @@ public slots:
 private slots:
 	//! Let the user select another font
 	void customFont();
-	//! Let the user pick the background color
-	void pickBackgroundColor();
-	//! Let the user pick the text color
-	void pickTextColor();
 	//! Accept changes and close dialog
 	void accept();
 	//! Apply changes
@@ -111,6 +107,7 @@ private slots:
 	void setDefaultValues();
 
 	void updateTransparency(int alpha);
+	void pickBackgroundColor(const QColor&);
 
 signals:
 	//! Emit all current values

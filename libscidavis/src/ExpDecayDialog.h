@@ -36,7 +36,7 @@ class QLineEdit;
 class QComboBox;
 class QLabel;
 class Graph;
-class ColorBox;
+class ColorButton;
 class Fit;
 
 //! Fit exponential decay dialog
@@ -78,7 +78,7 @@ private:
 	QLineEdit* boxStart;
 	QLineEdit* boxYOffset;
 	QLabel* thirdLabel, *dampingLabel;
-	ColorBox* boxColor;
+	ColorButton* btnColor;
 };
 
 #endif

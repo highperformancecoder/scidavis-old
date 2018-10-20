@@ -41,7 +41,7 @@
 #include <QLocale>
 #include <QDate>
 #include "Matrix.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "MultiLayer.h"
 #include "Note.h"
 #include "Folder.h"
@@ -820,7 +820,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 				}
 
 				cl.lWidth = _curve.lineWidth;
-				color=_curve.lineColor.regular % ColorBox::numPredefinedColors();
+				color=_curve.lineColor.regular % ColorButton::colors_count;
 				cl.lCol = (_curve.lineColor.type==Origin::Color::Automatic?0:color); //0xF7 -Automatic color
 				int linestyle=_curve.lineStyle;
 				cl.filledArea=(_curve.fillArea || style==Graph::VerticalBars || style==Graph::HorizontalBars || style==Graph::Histogram || style == Graph::Pie || style == Graph::Box) ? 1 : 0;
@@ -956,13 +956,13 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 			grid->enableY(!layer.yAxis.majorGrid.hidden);
 			grid->enableYMin(!layer.yAxis.minorGrid.hidden);
 
-			grid->setMajPenX(QPen(ColorBox::color(layer.xAxis.majorGrid.color), ceil(layer.xAxis.majorGrid.width),
+			grid->setMajPenX(QPen(ColorButton::color(layer.xAxis.majorGrid.color), ceil(layer.xAxis.majorGrid.width),
 							Graph::getPenStyle(translateOrigin2ScidavisLineStyle((Origin::GraphCurve::LineStyle)layer.xAxis.majorGrid.style))));
-			grid->setMinPenX(QPen(ColorBox::color(layer.xAxis.minorGrid.color), ceil(layer.xAxis.minorGrid.width),
+			grid->setMinPenX(QPen(ColorButton::color(layer.xAxis.minorGrid.color), ceil(layer.xAxis.minorGrid.width),
 						        Graph::getPenStyle(translateOrigin2ScidavisLineStyle((Origin::GraphCurve::LineStyle)layer.xAxis.minorGrid.style))));
-			grid->setMajPenY(QPen(ColorBox::color(layer.yAxis.majorGrid.color), ceil(layer.yAxis.majorGrid.width),
+			grid->setMajPenY(QPen(ColorButton::color(layer.yAxis.majorGrid.color), ceil(layer.yAxis.majorGrid.width),
 							Graph::getPenStyle(translateOrigin2ScidavisLineStyle((Origin::GraphCurve::LineStyle)layer.yAxis.majorGrid.style))));
-			grid->setMinPenY(QPen(ColorBox::color(layer.yAxis.minorGrid.color), ceil(layer.yAxis.minorGrid.width),
+			grid->setMinPenY(QPen(ColorButton::color(layer.yAxis.minorGrid.color), ceil(layer.yAxis.minorGrid.width),
 							Graph::getPenStyle(translateOrigin2ScidavisLineStyle((Origin::GraphCurve::LineStyle)layer.yAxis.minorGrid.style))));
 
 			grid->setAxis(2, 0);
@@ -1053,8 +1053,8 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 
 				graph->showAxis(i, type, tableName, mw->table(tableName), !(formats[i].hidden),
 					tickTypeMap[formats[i].majorTicksType], tickTypeMap[formats[i].minorTicksType],
-					!(ticks[i].showMajorLabels),	ColorBox::color(formats[i].color), format, prec,
-					ticks[i].rotation, 0, "", (ticks[i].color==0xF7 ? ColorBox::color(formats[i].color) : ColorBox::color(ticks[i].color)));
+					!(ticks[i].showMajorLabels),	ColorButton::color(formats[i].color), format, prec,
+					ticks[i].rotation, 0, "", (ticks[i].color==0xF7 ? ColorButton::color(formats[i].color) : ColorButton::color(ticks[i].color)));
 			}
 
 

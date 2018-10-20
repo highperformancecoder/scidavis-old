@@ -931,7 +931,7 @@ public:
   bool d_extended_open_dialog;
   bool generateUniformFitPoints;
   bool generatePeakCurves;
-  int peakCurvesColor;
+  QColor peakCurvesColor;
   //! User defined size for the Add/Remove curves dialog
   QSize d_add_curves_dialog_size;
 

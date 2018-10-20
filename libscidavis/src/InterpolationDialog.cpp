@@ -29,7 +29,7 @@
 #include "InterpolationDialog.h"
 #include "Graph.h"
 #include "MyParser.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "Interpolation.h"
 
 #include <QGroupBox>
@@ -78,9 +78,9 @@ InterpolationDialog::InterpolationDialog( QWidget* parent, Qt::WindowFlags fl )
 
 	gl1->addWidget(new QLabel(tr("Color")), 5, 0);
 
-	boxColor = new ColorBox();
-	boxColor->setColor(QColor(Qt::red));
-	gl1->addWidget(boxColor, 5, 1);
+	btnColor = new ColorButton();
+	btnColor->setColor(QColor(Qt::red));
+	gl1->addWidget(btnColor, 5, 1);
 	gl1->setRowStretch(6, 1);
 
 	buttonFit = new QPushButton(tr( "&Make" ));
@@ -151,7 +151,7 @@ if (from >= to)
 Interpolation *i = new Interpolation((ApplicationWindow *)this->parent(), graph, curve,
                                       from, to, boxMethod->currentIndex());
 i->setOutputPoints(boxPoints->value());
-i->setColor(boxColor->currentIndex());
+i->setColor(btnColor->color());
 i->run();
 delete i;
 }

@@ -29,6 +29,7 @@
 #ifndef MULTIPEAKFIT_H
 #define MULTIPEAKFIT_H
 
+#include <QColor>
 #include "Fit.h"
 
 class MultiPeakFit : public Fit
@@ -43,7 +44,7 @@ public:
   void setNumPeaks(int n);
 
   void enablePeakCurves(bool on){generate_peak_curves = on;};
-  void setPeakCurvesColor(int colorIndex){d_peaks_color = colorIndex;};
+  void setPeakCurvesColor(QColor color){d_peaks_color = color;};
 
   static QString generateFormula(int order, PeakProfile profile);
   static QStringList generateParameterList(int order);
@@ -68,7 +69,7 @@ private:
   bool generate_peak_curves;
 
   //! Color index for the peak curves
-  int d_peaks_color;
+  QColor d_peaks_color;
 
   //! The peak profile
   PeakProfile d_profile;

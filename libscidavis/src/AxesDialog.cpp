@@ -29,7 +29,6 @@
 #include "ApplicationWindow.h"
 #include "AxesDialog.h"
 #include "TextDialog.h"
-#include "ColorBox.h"
 #include "Graph.h"
 #include "Grid.h"
 #include "Plot.h"
@@ -233,10 +232,10 @@ void AxesDialog::initGridPage()
 
 	rightLayout->addWidget( new QLabel(tr( "Line Color" )), 1, 0 );
 
-	boxColorMajor = new ColorBox(0);
+	boxColorMajor = new ColorButton();
 	rightLayout->addWidget( boxColorMajor, 1, 1);
 
-	boxColorMinor = new ColorBox(0);
+	boxColorMinor = new ColorButton();
 	boxColorMinor->setDisabled(true);
 	rightLayout->addWidget( boxColorMinor, 1, 2);
 
@@ -1050,17 +1049,17 @@ void AxesDialog::updateGrid()
     grid->enableX(boxMajorGrid->isChecked());
     grid->enableXMin(boxMinorGrid->isChecked());
 
-    grid->setMajPenX(QPen(ColorBox::color(boxColorMajor->currentIndex()), boxWidthMajor->value(),
+    grid->setMajPenX(QPen(boxColorMajor->color(), boxWidthMajor->value(),
                           Graph::getPenStyle(boxTypeMajor->currentIndex())));
-    grid->setMinPenX(QPen(ColorBox::color(boxColorMinor->currentIndex()), boxWidthMinor->value(),
+    grid->setMinPenX(QPen(boxColorMinor->color(), boxWidthMinor->value(),
                           Graph::getPenStyle(boxTypeMinor->currentIndex())));
   } else {
     grid->enableY(boxMajorGrid->isChecked());
     grid->enableYMin(boxMinorGrid->isChecked());
 
-    grid->setMajPenY(QPen(ColorBox::color(boxColorMajor->currentIndex()), boxWidthMajor->value(),
+    grid->setMajPenY(QPen(boxColorMajor->color(), boxWidthMajor->value(),
                           Graph::getPenStyle(boxTypeMajor->currentIndex())));
-    grid->setMinPenY(QPen(ColorBox::color(boxColorMinor->currentIndex()), boxWidthMinor->value(),
+    grid->setMinPenY(QPen(boxColorMinor->color(), boxWidthMinor->value(),
                           Graph::getPenStyle(boxTypeMinor->currentIndex())));
   }
 

@@ -28,7 +28,7 @@
  ***************************************************************************/
 #include "ExpDecayDialog.h"
 #include "Graph.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 #include "ApplicationWindow.h"
 #include "Fit.h"
 #include "ExponentialFit.h"
@@ -111,9 +111,9 @@
 	gl1->addWidget(boxStart, 5, 1);
 
 	gl1->addWidget(new QLabel(tr("Color")), 6, 0 );
-	boxColor = new ColorBox();
-	boxColor->setColor(QColor(Qt::red));
-	gl1->addWidget(boxColor, 6, 1);
+	btnColor = new ColorButton();
+	btnColor->setColor(QColor(Qt::red));
+	gl1->addWidget(btnColor, 6, 1);
 
 	gb1->setLayout(gl1);
 
@@ -232,7 +232,7 @@ void ExpDecayDialog::fit()
 
   	if (fitter->setDataFromCurve(boxName->currentText(), boxStart->text().toDouble(), c->maxXValue()))
 	{
-		fitter->setColor(boxColor->currentIndex());
+		fitter->setColor(btnColor->color());
 		fitter->scaleErrors(app->fit_scale_errors);
         fitter->setOutputPrecision(app->fit_output_precision);
 		fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);

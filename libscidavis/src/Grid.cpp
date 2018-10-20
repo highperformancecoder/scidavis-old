@@ -29,7 +29,7 @@
 #include "Plot.h"
 #include "Graph.h"
 #include "Grid.h"
-#include "ColorBox.h"
+#include "ColorButton.h"
 
 #include <qwt_plot_canvas.h>
 #include <qwt_painter.h>
@@ -144,8 +144,8 @@ void Grid::load(const QStringList& grid)
         xAxis = grid[19].toInt();
         yAxis = grid[20].toInt();
 	} else { // older versions of QtiPlot (<= 0.9rc3)
-		majPenX = QPen(ColorBox::color(grid[5].toInt()), grid[7].toInt(), Graph::getPenStyle(grid[6].toInt()));
-		minPenX = QPen(ColorBox::color(grid[8].toInt()), grid[10].toInt(), Graph::getPenStyle(grid[9].toInt()));
+		majPenX = QPen(ColorButton::color(grid[5].toInt()), grid[7].toInt(), Graph::getPenStyle(grid[6].toInt()));
+		minPenX = QPen(ColorButton::color(grid[8].toInt()), grid[10].toInt(), Graph::getPenStyle(grid[9].toInt()));
 		majPenY = majPenX;
 		minPenY = minPenX;
 
@@ -257,19 +257,19 @@ QString Grid::saveToString()
 	s += QString::number(yEnabled())+"\t";
 	s += QString::number(yMinEnabled())+"\t";
 
-	s += majPenX().color().name()+"\t";
+	s += COLORNAME(majPenX().color())+"\t";
 	s += QString::number(majPenX().style() - 1)+"\t";
 	s += QString::number(majPenX().width())+"\t";
 
-	s += minPenX().color().name()+"\t";
+	s += COLORNAME(minPenX().color())+"\t";
 	s += QString::number(minPenX().style() - 1)+"\t";
 	s += QString::number(minPenX().width())+"\t";
 
-    s += majPenY().color().name()+"\t";
+	s += COLORNAME(majPenY().color())+"\t";
 	s += QString::number(majPenY().style() - 1)+"\t";
 	s += QString::number(majPenY().width())+"\t";
 
-	s += minPenY().color().name()+"\t";
+	s += COLORNAME(minPenY().color())+"\t";
 	s += QString::number(minPenY().style() - 1)+"\t";
 	s += QString::number(minPenY().width())+"\t";
 

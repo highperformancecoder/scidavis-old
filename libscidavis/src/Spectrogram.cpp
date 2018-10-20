@@ -27,6 +27,7 @@
  ***************************************************************************/
 
 #include "Spectrogram.h"
+#include "ColorButton.h"
 #include <math.h>
 #include <qpen.h>
 #include <qmessagebox.h>
@@ -256,15 +257,15 @@ else
 	{
 	s += "\t<ColorMap>\n";
 	s += "\t\t<Mode>" + QString::number(color_map.mode()) + "</Mode>\n";
-	s += "\t\t<MinColor>" + color_map.color1().name() + "</MinColor>\n";
-	s += "\t\t<MaxColor>" + color_map.color2().name() + "</MaxColor>\n";
+	s += "\t\t<MinColor>" + COLORNAME(color_map.color1()) + "</MinColor>\n";
+	s += "\t\t<MaxColor>" + COLORNAME(color_map.color2()) + "</MaxColor>\n";
 	QwtArray <double> colors = color_map.colorStops();
 	int stops = (int)colors.size();
 	s += "\t\t<ColorStops>" + QString::number(stops - 2) + "</ColorStops>\n";
 	for (int i = 1; i < stops - 1; i++)
 		{
 		s += "\t\t<Stop>" + QString::number(colors[i]) + "\t";
-		s += QColor(color_map.rgb(QwtDoubleInterval(0,1), colors[i])).name();
+		s += COLORNAME(QColor(color_map.rgb(QwtDoubleInterval(0,1), colors[i])));
 		s += "</Stop>\n";
 		}
 	s += "\t</ColorMap>\n";
@@ -280,7 +281,7 @@ if (contourLines)
 	s += "\t\t<DefaultPen>"+QString::number(defaultPen)+"</DefaultPen>\n";
 	if (defaultPen)
 		{
-		s += "\t\t\t<PenColor>"+defaultContourPen().color().name()+"</PenColor>\n";
+		s += "\t\t\t<PenColor>"+COLORNAME(defaultContourPen().color())+"</PenColor>\n";
 		s += "\t\t\t<PenWidth>"+QString::number(defaultContourPen().width())+"</PenWidth>\n";
 		s += "\t\t\t<PenStyle>"+QString::number(defaultContourPen().style() - 1)+"</PenStyle>\n";
 		}
