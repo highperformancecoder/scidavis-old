@@ -95,14 +95,14 @@ ColorButton::ColorButton(QWidget *parent) : QWidget(parent)
 
 void ColorButton::init()
 {
-	// QColorDialog has 48 basic colors in a 6x8 grid. Using:
-	//   for (int i=0; i < colors_count; i++) {QColorDialog::setStandardColor(i, colors[i].rgb());};
-	// arranges the colors in columns of 6. Instead arrange them in rows of 8 colors each.
-	for (int i=0; i<8; i++)
+  // transpose colors in the 6x8 basic colour grid.
+  constexpr int rows=8, cols=6;
+  static_assert(rows*cols <= sizeof(colors)/sizeof(colors[0]),"");
+  for (int i=0; i<rows; i++)
 	{
-		for (int j=0; j<6; j++)
+		for (int j=0; j<cols; j++)
 		{
-			QColorDialog::setStandardColor(j+6*i, colors[i+8*j].rgb());
+			QColorDialog::setStandardColor(j+cols*i, colors[i+rows*j].rgb());
 		}
 	}
 	const int btn_size = 28;

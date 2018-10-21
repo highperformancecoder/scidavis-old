@@ -96,7 +96,13 @@ options, you obtain the plot shown in figure
   \label{fig-simple-2dplot-2}
 \end{figure}
 
-%<para>You can now customize your plot with the commands of the &format-menu-lnk;. By double clicking on the data points, you open the &format-plot-lnk; dialog which is used to modify the symbols. Then a double-click on the axes opens the &format-axes-lnk; dialog, and you can change the scales, the fonts for the axes labels, etc. You can also add grid lines on X or Y axes (&format-grid-lnk;), etc. Finally, a double click on each text item (X title, Y title, plot title) allows to change the text and the presentation of these elements. See the <link linkend="sec-customize-2d-plot">customize section</link> for more details. An example of the final plot is shown in figure <xref xrefstyle="select: labelnumber" linkend="fig-simple-2dplot-3"/>.</para>
+You can now customize your plot with the commands of the
+\htmlref{Format menu}{format-menu-lnk}. By double clicking on the data
+points, you open the \htmlref{Format plot}{format-plot-lnk} dialog
+which is used to modify the symbols. Then a double-click on the axes
+opens the \htmlref{Format Axes}{format-axes-lnk} dialog, and you can
+change the scales, the fonts for the axes labels, etc. You can also
+add grid lines on $X$ or $Y$ axes (\htmlref{Format Grid}{format-grid-lnk}), etc. Finally, a double click on each text item ($X$ title, $Y$ title, plot title) allows to change the text and the presentation of these elements. See the \htmlref{customize section}{sec-customize-2d-plot} for more details. An example of the final plot is shown in figure \ref{fig-simple-2dplot-3}.
 %
 %<figure id="fig-simple-2dplot-3">
 %  <title>A simple 2D plot: the plot finished.</title>
@@ -106,14 +112,30 @@ options, you obtain the plot shown in figure
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%<para>Finally, you have to save your project in a '.&file-ext;' file with the &save-project-lnk; from the &file-menu-lnk; or with the &save-project-key; or with the &save-project-icon; icon from the &file-toolbar-lnk;. Depending on your application, you can export your plot to a standard image file with the command  &export-graph-current-lnk; from the &file-menu-lnk; (or with the &export-graph-current-key; keycode).
-%</para>
-%
-%<indexterm>
-%  <primary>Plot</primary><secondary>secondary axis</secondary>
-%</indexterm>
-%<para>There are several types of plots which can be built from a table. They are presented in the &plot-menu-lnk;. One important feature is that it is possible to use up to four axis for the data. For example, create a new table, modify its dimension to 4 columns and 7 rows. Then select the third column and set it as X with the &set-column-as-lnk; from the &table-menu-lnk;; you can then enter the values of two series (X1,Y1) and (X2,Y2) as show in the figure <xref xrefstyle="select: labelnumber" linkend="fig-two-axes-plot"/>.</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{tutorial/simple-2dplot-3.png}}
+  \caption{A simple 2D plot: the plot finished.}
+  \label{fig-simple-2dplot-3}
+\end{figure}
+
+Finally, you have to save your project in a '.sciprj' file with the
+\htmlref{Save Project}{save-project-lnk} from the \htmlref{File
+  menu}{file-menu-lnk} or with \html{CTRL+S}{save-project-key} or with
+the \icon{filesave.png} icon from the \htmlref{File
+  toolbar}. Depending on your application, you can export your plot to
+a standard image file with the command  \htmlref{Export
+  Graph$\rightarrow$Current command}{export-graph-current-lnk} from
+the \htmlref{File menu}{file-menu-lnk} (or with the \htmlref{CTRL+G}{export-graph-current-key} keycode).
+
+\index{Plot!secondary axis}
+
+There are several types of plots which can be built from a table. They
+are presented in the \htmlref{Plot menu}{plot-menu-lnk}. One important
+feature is that it is possible to use up to four axis for the
+data. For example, create a new table, modify its dimension to 4
+columns and 7 rows. Then select the third column and set it as $X$
+with the \htmlref{Set Column as command}{set-column-as-lnk} from the
+\htmlref{Table menu}{table-menu-lnk}; you can then enter the values of two series $(X1,Y1)$ and $(X2,Y2)$ as shown in the figure \ref{fig-two-axes-plot}.
 %
 %<figure id="fig-two-axes-plot">
 %  <title>A table with two series of values (X1,Y1) and (X2,Y2).</title>
@@ -123,8 +145,21 @@ options, you obtain the plot shown in figure
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%<para>To build the plot, select the two Y column (select Y1, and the select Y2 with CTRL key), use the &plot-menu-lnk;. You obtain a simple plot with two axes, then use the &format-plot-lnk;. In the left window, select the data serie for which you want to change the axes, click on the <emphasis>axis</emphasis> tag and define the axes you want to use. After this, the plot is modified but the new axes are not shown. Use the &format-axes-lnk;, select the new axes and click on the <emphasis>show</emphasis> checkbox. You can then customize your plot in order to obtain the result presented in figure <xref xrefstyle="select: labelnumber" linkend="fig-two-axes-plot-1"/>.</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{tutorial/2axes-2dplot-1.png}}
+  \caption{A table with two series of values $(X1,Y1)$ and $(X2,Y2)$.}
+  \label{fig-two-axes-plot}
+\end{figure}
+
+To build the plot, select the two $Y$ columns (select $Y1$, and then
+select $Y2$ with CTRL key), use the \htmlref{Plot
+  menu}{plot-menu-lnk}. You obtain a simple plot with two axes, then
+use the \htmlref{Format Plot}{format-plot-lnk}. In the left window,
+select the data serie for which you want to change the axes, click on
+the {\em axis} tag and define the axes you want to use. After this,
+the plot is modified but the new axes are not shown. Use the
+\htmlref{Format Axes command}{format-axes-lnk}, select the new axes
+and click on the {\em show} checkbox. You can then customize your plot in order to obtain the result presented in figure \ref{fig-two-axes-plot-1}.
 %
 %<figure id="fig-two-axes-plot-1">
 %  <title>A 2D plot with two Y and two X axis.</title>
