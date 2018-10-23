@@ -4246,10 +4246,10 @@ void ApplicationWindow::readSettings()
 	settings.endGroup(); // Dialogs
 
 	settings.beginGroup("/Colors");
-	workspaceColor = QColor(settings.value("/Workspace","darkGray").toString());
+	workspaceColor = QColor(COLORVALUE(settings.value("/Workspace","darkGray").toString()));
 	// see http://doc.trolltech.com/4.2/qvariant.html for instructions on qcolor <-> qvariant conversion
-	panelsColor = QColor(settings.value("/Panels","#ffffff").toString());
-	panelsTextColor = QColor(settings.value("/PanelsText","#000000").toString());
+	panelsColor = QColor(COLORVALUE(settings.value("/Panels","#ffffffff").toString()));
+	panelsTextColor = QColor(COLORVALUE(settings.value("/PanelsText","#ff000000").toString()));
 	settings.endGroup(); // Colors
 
 	settings.beginGroup("/Paths");
@@ -4316,9 +4316,9 @@ void ApplicationWindow::readSettings()
 	}
 
 	settings.beginGroup("/Colors");
-	tableBkgdColor = QColor(settings.value("/Background","#ffffff").toString());
-	tableTextColor = QColor(settings.value("/Text","#000000").toString());
-	tableHeaderColor = QColor(settings.value("/Header","#000000").toString());
+	tableBkgdColor = QColor(COLORVALUE(settings.value("/Background","#ffffffff").toString()));
+	tableTextColor = QColor(COLORVALUE(settings.value("/Text","#ff000000").toString()));
+	tableHeaderColor = QColor(COLORVALUE(settings.value("/Header","#ff000000").toString()));
 	settings.endGroup(); // Colors
 	settings.endGroup();
 	/* --------------- end group Tables ------------------------ */
@@ -4365,14 +4365,14 @@ void ApplicationWindow::readSettings()
 
 	settings.beginGroup("/Legend");
 	legendFrameStyle = settings.value("/FrameStyle", Legend::Line).toInt();
-	legendTextColor = QColor(settings.value("/TextColor", "#000000").toString()); //default color Qt::black
-	legendBackground = QColor(settings.value("/BackgroundColor", "#ffffff").toString()); //default color Qt::white
+	legendTextColor = QColor(COLORVALUE(settings.value("/TextColor", "#ff000000").toString())); //default color Qt::black
+	legendBackground = QColor(COLORVALUE(settings.value("/BackgroundColor", "#ffffffff").toString())); //default color Qt::white
 	legendBackground.setAlpha(settings.value("/Transparency", 0).toInt()); // transparent by default;
 	settings.endGroup(); // Legend
 
 	settings.beginGroup("/Arrows");
 	defaultArrowLineWidth = settings.value("/Width", 1).toInt();
-	defaultArrowColor = QColor(settings.value("/Color", "#000000").toString());//default color Qt::black
+	defaultArrowColor = QColor(COLORVALUE(settings.value("/Color", "#ff000000").toString()));//default color Qt::black
 	defaultArrowHeadLength = settings.value("/HeadLength", 4).toInt();
 	defaultArrowHeadAngle = settings.value("/HeadAngle", 45).toInt();
 	defaultArrowHeadFill = settings.value("/HeadFill", true).toBool();
@@ -4419,7 +4419,7 @@ void ApplicationWindow::readSettings()
 	generateUniformFitPoints = settings.value("/GenerateFunction", true).toBool();
 	fitPoints = settings.value("/Points", 100).toInt();
 	generatePeakCurves = settings.value("/GeneratePeakCurves", true).toBool();
-	peakCurvesColor = QColor(settings.value("/PeaksColor", "#00ff00").toString());//green color
+	peakCurvesColor = QColor(COLORVALUE(settings.value("/PeaksColor", "#ff00ff00").toString()));//green color
 	fit_scale_errors = settings.value("/ScaleErrors", false).toBool();
 	d_2_linear_fit_points = settings.value("/TwoPointsLinearFit", true).toBool();
 	settings.endGroup(); // Fitting
