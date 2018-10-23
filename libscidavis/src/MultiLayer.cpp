@@ -750,7 +750,7 @@ void MultiLayer::exportPainter(QPainter &painter, bool keepAspect, QRect rect, Q
                  (double)size.height()/(double)rect.height()
                  );
 
-     painter.fillRect(rect, palette().brush(backgroundRole()));
+     painter.fillRect(rect, widget()->palette().brush(backgroundRole()));
 
      for (int i=0; i<(int)graphsList.count(); i++)
 	{
