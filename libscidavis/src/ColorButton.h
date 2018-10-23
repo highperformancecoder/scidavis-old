@@ -37,8 +37,10 @@ class QFrame;
 
 #if QT_VERSION >= 0x050000
 static inline QString COLORNAME( QColor c ) { return c.name(QColor::HexArgb); }
+static inline QString COLORVALUE( QString s ) { return s; }
 #else
 static inline QString COLORNAME( QColor c ) { return ('#'+QString::number(c.rgba(),16)); }
+static inline QString COLORVALUE( QString s ) { if ((s[0]=='#') && (s.size()==9)) return s.remove(1,2); else return s; }
 #endif
 
 //! A button used for color selection
