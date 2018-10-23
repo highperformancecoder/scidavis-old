@@ -2480,6 +2480,8 @@ void ApplicationWindow::setPreferences(Graph* g)
 	g->setArrowDefaults(defaultArrowLineWidth, defaultArrowColor, defaultArrowLineStyle,
 			defaultArrowHeadLength, defaultArrowHeadAngle, defaultArrowHeadFill);
 	g->initTitle(titleOn, plotTitleFont);
+	if (autoScaleFonts)
+		g->scaleFonts(1.055555);
 	g->drawCanvasFrame(canvasFrameOn, canvasFrameWidth);
 	g->plotWidget()->setMargin(defaultPlotMargin);
 	g->enableAutoscaling(autoscale2DPlots);
