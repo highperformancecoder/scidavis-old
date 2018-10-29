@@ -3893,7 +3893,7 @@ bool Graph::addFunctionCurve(ApplicationWindow *parent, int type, const QStringL
 	else
 		name = generateFunctionName();
 
-	FunctionCurve *c = new FunctionCurve(parent, (const FunctionCurve::FunctionType)type, name);
+	FunctionCurve *c = new FunctionCurve(parent, (FunctionCurve::FunctionType)type, name);
 	c->setPen(QPen(QColor(Qt::black), widthLine));
 	c->setRange(ranges[0], ranges[1]);
 	c->setFormulas(formulas);

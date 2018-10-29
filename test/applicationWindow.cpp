@@ -54,7 +54,7 @@ SUITE(ApplicationWindow)
       CHECK(found);
 
       addListViewItem(t);
-      for (QTreeWidgetItemIterator item(lv); *item; item++)
+      for (QTreeWidgetItemIterator item(&lv); *item; item++)
         if (dynamic_cast<WindowListItem*>(*item)->window()==t)
           (*item)->setSelected(true);
       t->askOnCloseEvent(false);
@@ -82,7 +82,7 @@ SUITE(ApplicationWindow)
       addListViewItem(t);
 
       // TODO add some more items like folder views etc to this test
-      for (QTreeWidgetItemIterator item(lv); *item; item++)
+      for (QTreeWidgetItemIterator item(&lv); *item; item++)
         if (auto wli=dynamic_cast<WindowListItem*>(*item))
           if (wli->window()==t)
             {
@@ -94,10 +94,10 @@ SUITE(ApplicationWindow)
             }
 
       // finally, check multi-selections
-      for (QTreeWidgetItemIterator item(lv); *item; item++)
+      for (QTreeWidgetItemIterator item(&lv); *item; item++)
         (*item)->setSelected(true);
       {
-        auto m1=showWindowPopupMenuImpl(lv->topLevelItem(0));
+        auto m1=showWindowPopupMenuImpl(lv.topLevelItem(0));
         CHECK(m1);
         auto m2=showListViewSelectionMenuImpl();
         CHECK(m2);
@@ -105,13 +105,13 @@ SUITE(ApplicationWindow)
         CHECK(m1->actions().size()==m2->actions().size());
         CHECK(m1->contentsRect()==m2->contentsRect());
       }
-      lv->clearSelection();
+      lv.clearSelection();
 
       // check behaviour on folders
-  CHECK(lv->topLevelItem(0));
-  addFolderListViewItem(new Folder(current_folder, "ImAFolder"));
-  CHECK(lv->topLevelItem(0));
-  for (QTreeWidgetItemIterator item(lv); *item; item++)
+  CHECK(lv.topLevelItem(0));
+  addFolderListViewItem(&current_folder->addChild<Folder>("ImAFolder"));
+  CHECK(lv.topLevelItem(0));
+  for (QTreeWidgetItemIterator item(&lv); *item; item++)
     if (auto fli=dynamic_cast<FolderListItem*>(*item))
       {
           auto m1=showWindowPopupMenuImpl(fli);

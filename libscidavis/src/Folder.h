@@ -43,6 +43,7 @@
 #include <QMdiArea>
 
 #include "MyWidget.h"
+#include "SciDAVisObject.h"
 
 class FolderListItem;
 class FolderListView;
@@ -57,12 +58,12 @@ class QDragLeaveEvent;
 class QDropEvent;
 
 //! Folder for the project explorer
-class Folder : public QObject
+class Folder : public SciDAVisObject<QObject>
 {
     Q_OBJECT
 
 public:
-    Folder( Folder *parent, const QString &name );
+    Folder(const QString &name );
 
 	QList<MyWidget *> windowsList(){return lstWindows;};
 
@@ -204,7 +205,7 @@ protected:
  *
  *****************************************************************************/
 //! Folder list view class
-class FolderListView : public QTreeWidget
+class FolderListView : public SciDAVisObject<QTreeWidget>
 {
     Q_OBJECT
 
@@ -212,7 +213,7 @@ class FolderListView : public QTreeWidget
 	friend class WindowListItem;
 
 public:
-	FolderListView(QWidget *parent = 0, const QString name = QString() );
+	FolderListView(const QString& name = QString() );
 
 public slots:
 	void adjustColumns();

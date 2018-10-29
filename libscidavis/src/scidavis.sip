@@ -1305,7 +1305,7 @@ public:
 
   QList<MyWidget*> windowsList() /PyName=windows/;
 
-  QTextEdit *results;
+  QTextEdit* results;
 //  QTextEdit *console;
 
   // folders
@@ -1948,11 +1948,10 @@ class Folder : QObject
 #include "src/Folder.h"
 %End
 public:
-  Folder(Folder *parent, const QString &name);
-  Folder(const QString &name) /NoDerived/;
-%MethodCode
-	sipCpp = new sipFolder(0, *a0);
-%End
+  Folder(const QString &name); // /NoDerived/;
+//%MethodCode
+//	sipCpp = new sipFolder(*a0);
+//%End
   QList<MyWidget*> windowsList() /PyName=windows/;
 // TODO: implement signal Folder::nameChanged and make it update the project explorer; adjust renaming from GUI accordingly
 //  void setFolderName(const QString&) /PyName=setName/;

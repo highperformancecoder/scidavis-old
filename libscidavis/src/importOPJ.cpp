@@ -82,7 +82,7 @@ ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
 		mw->setStatusBarText(QString());
 		if(filename.endsWith(".opj", Qt::CaseInsensitive))
 			createProjectTree(opj);
-		mw->showResults(opj.resultsLogString().c_str(), mw->logWindow->isVisible());
+		mw->showResults(opj.resultsLogString().c_str(), mw->logWindow.isVisible());
 	} catch(const std::logic_error& er){
 		QApplication::restoreOverrideCursor();
 		QMessageBox::critical(mw, "Origin Project Import Error", QString(er.what()));
@@ -100,7 +100,7 @@ bool ImportOPJ::createProjectTree(const OriginFile& opj)
 	tree<Origin::ProjectNode>::iterator root = projectTree->begin(projectTree->begin());
 	if(!root.node)
 		return false;
-	FolderListItem* item = (FolderListItem*)mw->folders->topLevelItem(0);
+	FolderListItem* item = (FolderListItem*)mw->folders.topLevelItem(0);
 	item->setText(0, root->name.c_str());
 	item->folder()->setName(root->name.c_str());
 	Folder* projectFolder = mw->projectFolder();
@@ -108,63 +108,62 @@ bool ImportOPJ::createProjectTree(const OriginFile& opj)
 	parent[root] = projectFolder;
 	for(tree<Origin::ProjectNode>::iterator sib = projectTree->begin(root); sib != projectTree->end(root); ++sib)
 	{
-		if(sib->type == Origin::ProjectNode::Folder){
-			Folder *f = new Folder(parent.value(projectTree->parent(sib)), sib->name.c_str());
-			parent[sib] = f;
-			f->setBirthDate(posixTimeToString(sib->creationDate));
-			f->setModificationDate(posixTimeToString(sib->modificationDate));
-			mw->addFolderListViewItem(f);
-			FolderListItem *fi = new FolderListItem(mw->current_folder->folderListItem(), f);
-			if (fi)
-				f->setFolderListItem(fi);
-		} else {
-			QString name = sib->name.c_str();
-			if(sib->type == Origin::ProjectNode::Note)
-			{
-				QRegExp rx("^@\\((\\S+)\\)$");
-				if(rx.indexIn(name) == 0)
-					name = rx.cap(1);
-			}
-			const char* nodetype;
-			switch (sib->type)
-			{
-				case Origin::ProjectNode::SpreadSheet:
-					nodetype = "Table";
-					break;
-				case Origin::ProjectNode::Matrix:
-					nodetype = "Matrix";
-					break;
-				case Origin::ProjectNode::Graph:
-					nodetype = "MultiLayer";
-					break;
-				case Origin::ProjectNode::Graph3D:
-					// there is no Graph3D type yet
-					nodetype = "MultiLayer"; // "Graph3D";
-					break;
-				case Origin::ProjectNode::Note:
-					nodetype = "Note";
-					break;
-				case Origin::ProjectNode::Excel:
-					// there is no Excel type yet
-					nodetype = "Table";
-					break;
-				default:
-					nodetype = "Unknown";
-					break;
-			}
-			MyWidget* w = projectFolder->window(name, nodetype);
-			while (w){ // Origin window names are unique, but we need to loop on all sheets of Excel windows
-				Folder *f = parent.value(projectTree->parent(sib));
-				if (f){
-					if (f==parent[root]) break; // skip windows that go to root folder
-					// removeWindow  uses QList.removeAll, so remove w before adding it to its folder
-					projectFolder->removeWindow(w);
-					f->addWindow(w);
-					f->setActiveWindow(w);
-				}
-				w = projectFolder->window(name, nodetype);
-			}
-		}
+          if(sib->type == Origin::ProjectNode::Folder){
+            
+            Folder& f = parent.value(projectTree->parent(sib))->addChild<Folder>(sib->name.c_str());
+            parent[sib] = &f;
+            f.setBirthDate(posixTimeToString(sib->creationDate));
+            f.setModificationDate(posixTimeToString(sib->modificationDate));
+            mw->addFolderListViewItem(&f);
+            f.setFolderListItem(new FolderListItem(mw->current_folder->folderListItem(), &f));
+          } else {
+            QString name = sib->name.c_str();
+            if(sib->type == Origin::ProjectNode::Note)
+              {
+                QRegExp rx("^@\\((\\S+)\\)$");
+                if(rx.indexIn(name) == 0)
+                  name = rx.cap(1);
+              }
+            const char* nodetype;
+            switch (sib->type)
+              {
+              case Origin::ProjectNode::SpreadSheet:
+                nodetype = "Table";
+                break;
+              case Origin::ProjectNode::Matrix:
+                nodetype = "Matrix";
+                break;
+              case Origin::ProjectNode::Graph:
+                nodetype = "MultiLayer";
+                break;
+              case Origin::ProjectNode::Graph3D:
+                // there is no Graph3D type yet
+                nodetype = "MultiLayer"; // "Graph3D";
+                break;
+              case Origin::ProjectNode::Note:
+                nodetype = "Note";
+                break;
+              case Origin::ProjectNode::Excel:
+                // there is no Excel type yet
+                nodetype = "Table";
+                break;
+              default:
+                nodetype = "Unknown";
+                break;
+              }
+            MyWidget* w = projectFolder->window(name, nodetype);
+            while (w){ // Origin window names are unique, but we need to loop on all sheets of Excel windows
+              Folder *f = parent.value(projectTree->parent(sib));
+              if (f){
+                if (f==parent[root]) break; // skip windows that go to root folder
+                // removeWindow  uses QList.removeAll, so remove w before adding it to its folder
+                projectFolder->removeWindow(w);
+                f->addWindow(w);
+                f->setActiveWindow(w);
+              }
+              w = projectFolder->window(name, nodetype);
+            }
+          }
 	}
 	mw->changeFolder(projectFolder, true);
 	return true;

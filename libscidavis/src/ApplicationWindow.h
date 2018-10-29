@@ -44,7 +44,10 @@
 #include <QBuffer>
 #include <QLocale>
 #include <QMenu>
+#include <QDockWidget>
+#include <QMdiArea>
 
+#include "Folder.h"
 #include "Table.h"
 #include "ScriptingEnv.h"
 #include "Script.h"
@@ -56,10 +59,8 @@ class QDropEvent;
 class QTimerEvent;
 class QDragEnterEvent;
 class QTranslator;
-class QDockWidget;
 class QAction;
 class QActionGroup;
-class QMdiArea;
 class QLineEdit;
 class QTranslator;
 class QToolButton;
@@ -78,9 +79,6 @@ class Graph3D;
 class Note;
 class MultiLayer;
 class FunctionDialog;
-class Folder;
-class FolderListItem;
-class FolderListView;
 class Plot3DDialog;
 class MyWidget;
 class TableStatistics;
@@ -131,20 +129,21 @@ public:
   enum ShowWindowsPolicy{HideAll, ActiveFolder, SubFolders};
 
   QTranslator *appTranslator, *qtTranslator;
-  QDockWidget *logWindow;
-  QDockWidget *explorerWindow;
-  QTextEdit *results;
+  QDockWidget logWindow;
+  QDockWidget explorerWindow;
+  // TODO - convert to a statically owned member, but SIP currently requires it to be pointer
+  QTextEdit* results{new QTextEdit(&logWindow)};
 #ifdef SCRIPTING_CONSOLE
-  QDockWidget *consoleWindow;
-  QTextEdit *console;
+  QDockWidget consoleWindow;
+  QTextEdit console;
 #endif
-  QMdiArea* d_workspace;
+  QMdiArea d_workspace;
   QToolBar *file_tools, *graph_tools, *table_tools, *plot_tools, *graph_3D_tools, *edit_tools, *matrix_plot_tools;
-  FolderListView *lv;
-  FolderListView *folders;
+  FolderListView lv;
+  FolderListView folders;
   QToolButton *btnResults;
-  QList<MyWidget*> *hiddenWindows;
-  QList<MyWidget*> *outWindows;
+  QList<MyWidget*> hiddenWindows;
+  QList<MyWidget*> outWindows;
   MyWidget* lastModified;
 
 public:

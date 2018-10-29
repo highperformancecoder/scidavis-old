@@ -83,10 +83,10 @@ SUITE(ReadWriteProject)
         CHECK_EQUAL(30, table->numRows());
         CHECK_EQUAL(2, table->numCols());
         app->activateSubWindow(table);
-        CHECK(table==app->d_workspace->activeSubWindow());
+        CHECK(table==app->d_workspace.activeSubWindow());
         app->convertTableToMatrix();
         // active window should switch to a matrix
-        Matrix* matrix=dynamic_cast<Matrix*>(app->d_workspace->activeSubWindow());
+        Matrix* matrix=dynamic_cast<Matrix*>(app->d_workspace.activeSubWindow());
         CHECK(matrix);
         CHECK_EQUAL(matrix->numRows(),table->numRows());
         CHECK_EQUAL(matrix->numCols(),table->numCols());

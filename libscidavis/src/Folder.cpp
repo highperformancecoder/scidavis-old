@@ -47,8 +47,8 @@
 #include <QMouseEvent>
 #include <QDrag>
 
-Folder::Folder( Folder *parent, const QString &name )
-	: QObject(parent), d_active_window(0)
+Folder::Folder(const QString &name )
+	: d_active_window(0)
 {
 	QObject::setObjectName(name);
 	birthdate = QDateTime::currentDateTime ().toString(Qt::LocalDate);
@@ -255,8 +255,8 @@ void FolderListItem::setData( int column, int role, const QVariant& value)
  *
  *****************************************************************************/
 
-FolderListView::FolderListView( QWidget *parent, const QString name )
-	: QTreeWidget( parent ), mousePressed( false )
+FolderListView::FolderListView(const QString& name )
+	: mousePressed( false )
 {
     setObjectName(name.toLocal8Bit());
     setAcceptDrops( true );
