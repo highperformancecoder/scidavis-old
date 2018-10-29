@@ -177,8 +177,7 @@ void file_compress(const char  *file, const char  *mode);
 }
 
 ApplicationWindow::ApplicationWindow()
-    : QMainWindow(),
-      scripted(ScriptingLangManager::newEnv(this)),
+    : scripted(ScriptingLangManager::newEnv(this)),
       logWindow(new QDockWidget(this)),
       explorerWindow(new QDockWidget(this)),
       results(new QTextEdit(logWindow)),
@@ -5664,8 +5663,8 @@ void ApplicationWindow::showGeneralPlotDialog()
 		showPlotDialog();
 	else if (plot->inherits("Graph3D"))
 	{
-	    QDialog* gd = showScaleDialog();
-		((Plot3DDialog*)gd)->showGeneralTab();
+          if (auto gd = dynamic_cast<Plot3DDialog*>(showScaleDialog()))
+            gd->showGeneralTab();
 	}
 }
 
@@ -5675,18 +5674,20 @@ void ApplicationWindow::showAxisDialog()
 	if (!plot)
 		return;
 
-	QDialog* gd = showScaleDialog();
-	if (gd && plot->inherits("MultiLayer") && ((MultiLayer*)plot)->layers())
-		((AxesDialog*)gd)->showAxesPage();
-	else if (gd && plot->inherits("Graph3D"))
-		((Plot3DDialog*)gd)->showAxisTab();
+	if (plot->inherits("MultiLayer") && ((MultiLayer*)plot)->layers())
+          {
+            if (auto gd=dynamic_cast<AxesDialog*>(showScaleDialog()))
+              gd->showAxesPage();
+          }
+	else if (plot->inherits("Graph3D"))
+          if (auto gd=dynamic_cast<Plot3DDialog*>(showScaleDialog()))
+		gd->showAxisTab();
 }
 
 void ApplicationWindow::showGridDialog()
 {
-	AxesDialog* gd = (AxesDialog*)showScaleDialog();
-	if (gd)
-		gd->showGridPage();
+  if (auto gd=dynamic_cast<AxesDialog*>(showScaleDialog()))
+      gd->showGridPage();
 }
 
 QDialog* ApplicationWindow::showScaleDialog()
@@ -5701,10 +5702,10 @@ QDialog* ApplicationWindow::showScaleDialog()
 			return 0;
 
 		Graph* g = ((MultiLayer*)w)->activeGraph();
-		AxesDialog* ad = new AxesDialog(this);
-		ad->setGraph(g);
-		ad->exec();
-		return ad;
+		auto& ad = addChild<AxesDialog>();
+		ad.setGraph(g);
+		ad.exec();
+		return &ad;
 	}
 	else if (w->inherits("Graph3D"))
 		return showPlot3dDialog();

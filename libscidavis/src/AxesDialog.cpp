@@ -62,8 +62,9 @@
 #define M_PI	3.141592653589793238462643
 #endif
 
-AxesDialog::AxesDialog( QWidget* parent, Qt::WindowFlags fl )
-: QDialog( parent, fl )
+AxesDialog::AxesDialog( /*QWidget* parent,*/ Qt::WindowFlags fl )
+  : SciDAVisObject<QDialog>( nullptr, fl ),
+    generalDialog(addChild<QTabWidget>())
 {
 	QPixmap image4( ":/image4.xpm" );
 	QPixmap image5( ":/image5.xpm" );
@@ -71,14 +72,12 @@ AxesDialog::AxesDialog( QWidget* parent, Qt::WindowFlags fl )
 	QPixmap image7( ":/image7.xpm" );
 	setWindowTitle( tr( "General Plot Options" ) );
 
-	generalDialog = new QTabWidget();
-
 	initScalesPage();
 	initGridPage();
 	initAxesPage();
 	initFramePage();
 
-	QHBoxLayout * bottomButtons = new QHBoxLayout();
+	auto bottomButtons = new QHBoxLayout();
 	bottomButtons->addStretch();
 
 	buttonApply = new QPushButton();
@@ -95,7 +94,7 @@ AxesDialog::AxesDialog( QWidget* parent, Qt::WindowFlags fl )
 	bottomButtons->addWidget( buttonCancel );
 
 	QVBoxLayout * mainLayout = new QVBoxLayout(this);
-	mainLayout->addWidget(generalDialog);
+	mainLayout->addWidget(&generalDialog);
 	mainLayout->addLayout(bottomButtons);
 
 	lastPage = scalesPage;
@@ -103,7 +102,7 @@ AxesDialog::AxesDialog( QWidget* parent, Qt::WindowFlags fl )
 	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
 	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 	connect( buttonApply, SIGNAL( clicked() ), this, SLOT(updatePlot() ) );
-	connect( generalDialog, SIGNAL( currentChanged ( int ) ),
+	connect( &generalDialog, SIGNAL( currentChanged ( int ) ),
 			this, SLOT(pageChanged ( int ) ) );
 }
 
@@ -202,7 +201,7 @@ void AxesDialog::initScalesPage()
 	mainLayout->addWidget(middleBox);
 	mainLayout->addWidget(rightBox);
 
-	generalDialog->addTab(scalesPage, tr( "Scale" ));
+	generalDialog.addTab(scalesPage, tr( "Scale" ));
 
 	connect(btnInvert,SIGNAL(clicked()), this, SLOT(updatePlot()));
 	connect(axesList,SIGNAL(currentRowChanged(int)), this, SLOT(updateScale()));
@@ -321,7 +320,7 @@ void AxesDialog::initGridPage()
 	mainLayout2->addWidget(axesGridList);
 	mainLayout2->addWidget(rightBox);
 
-	generalDialog->addTab( gridPage, tr( "Grid" ) );
+	generalDialog.addTab( gridPage, tr( "Grid" ) );
 
 	//grid page slot connections
     connect(axesGridList, SIGNAL(currentRowChanged(int)), this, SLOT(showGridOptions(int)));
@@ -516,7 +515,7 @@ void AxesDialog::initAxesPage()
 	mainLayout3->addWidget( axesTitlesList );
 	mainLayout3->addLayout( rightLayout );
 
-	generalDialog->addTab( axesPage, tr( "Axis" ) );
+	generalDialog.addTab( axesPage, tr( "Axis" ) );
 
 	connect(buttonLabelFont, SIGNAL(clicked()), this, SLOT(customAxisLabelFont()));
 
@@ -592,7 +591,7 @@ void AxesDialog::initFramePage()
 	mainLayout->addWidget(boxFramed);
 	mainLayout->addWidget(boxAxes);
 
-	generalDialog->addTab(frame, tr( "General" ) );
+	generalDialog.addTab(frame, tr( "General" ) );
 
 	connect(boxFrameColor, SIGNAL(clicked()), this, SLOT(pickCanvasFrameColor()));
 	connect(boxBackbones, SIGNAL(toggled(bool)), this, SLOT(drawAxesBackbones(bool)));
@@ -605,7 +604,7 @@ void AxesDialog::initFramePage()
 
 void AxesDialog::changeMinorTicksLength (int minLength)
 {
-	if (generalDialog->currentWidget() != frame)
+	if (generalDialog.currentWidget() != frame)
 		return;
 
 	d_graph->changeTicksLength(minLength, boxMajorTicksLength->value());
@@ -614,7 +613,7 @@ void AxesDialog::changeMinorTicksLength (int minLength)
 
 void AxesDialog::changeMajorTicksLength (int majLength)
 {
-	if (generalDialog->currentWidget() != frame)
+	if (generalDialog.currentWidget() != frame)
 		return;
 
 	d_graph->changeTicksLength(boxMinorTicksLength->value(), majLength);
@@ -623,7 +622,7 @@ void AxesDialog::changeMajorTicksLength (int majLength)
 
 void AxesDialog::drawAxesBackbones(bool draw)
 {
-	if (generalDialog->currentWidget() != frame)
+	if (generalDialog.currentWidget() != frame)
 		return;
 
 	d_graph->drawAxesBackbones(draw);
@@ -631,7 +630,7 @@ void AxesDialog::drawAxesBackbones(bool draw)
 
 void AxesDialog::changeAxesLinewidth(int width)
 {
-	if (generalDialog->currentWidget() != frame)
+	if (generalDialog.currentWidget() != frame)
 		return;
 
 	d_graph->setAxesLinewidth(width);
@@ -639,7 +638,7 @@ void AxesDialog::changeAxesLinewidth(int width)
 
 void AxesDialog::drawFrame(bool framed)
 {
-	if (generalDialog->currentWidget() != frame)
+	if (generalDialog.currentWidget() != frame)
 		return;
 
 	d_graph->drawCanvasFrame(framed, boxFrameWidth->value(), boxFrameColor->color());
@@ -647,7 +646,7 @@ void AxesDialog::drawFrame(bool framed)
 
 void AxesDialog::updateFrame(int width)
 {
-	if (generalDialog->currentWidget() != frame)
+	if (generalDialog.currentWidget() != frame)
 		return;
 
 	d_graph->drawCanvasFrame(boxFramed->isChecked(), width, boxFrameColor->color());
@@ -1038,7 +1037,7 @@ void AxesDialog::minorGridEnabled(bool on)
 
 void AxesDialog::updateGrid()
 {
-  if (generalDialog->currentWidget() != gridPage)
+  if (generalDialog.currentWidget() != gridPage)
     return;
 
   Grid *grid = (Grid *)d_graph->plotWidget()->grid();
@@ -1181,7 +1180,7 @@ void AxesDialog::changeBaselineDist(int baseline)
 
 bool AxesDialog::updatePlot()
 {
-	if (generalDialog->currentWidget()==(QWidget*)scalesPage)
+	if (generalDialog.currentWidget()==(QWidget*)scalesPage)
 	{
 		QString from=boxStart->text().toLower();
 		QString to=boxEnd->text().toLower();
@@ -1306,11 +1305,11 @@ bool AxesDialog::updatePlot()
 				boxScaleType->currentIndex(), btnInvert->isChecked());
 		d_graph->notifyChanges();
 	}
-	else if (generalDialog->currentWidget()==gridPage)
+	else if (generalDialog.currentWidget()==gridPage)
 	{
 		updateGrid();
 	}
-	else if (generalDialog->currentWidget()==(QWidget*)axesPage)
+	else if (generalDialog.currentWidget()==(QWidget*)axesPage)
 	{
 		int axis=mapToQwtAxisId();
 		int format = currentSelectedAxisType();
@@ -1382,7 +1381,7 @@ bool AxesDialog::updatePlot()
 				boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentIndex(),
 				boxPrecision->value(), boxAngle->value(), baseline, formula, boxAxisNumColor->color());
 	}
-	else if (generalDialog->currentWidget()==(QWidget*)frame)
+	else if (generalDialog.currentWidget()==(QWidget*)frame)
 	{
 		d_graph->setAxesLinewidth(boxAxesLinewidth->value());
 		d_graph->changeTicksLength(boxMinorTicksLength->value(), boxMajorTicksLength->value());
@@ -1734,22 +1733,22 @@ void AxesDialog::setCurrentScale(int axisPos)
 			axis = 2;
 			break;
 	}
-	if (generalDialog->currentWidget()==(QWidget*)scalesPage)
+	if (generalDialog.currentWidget()==(QWidget*)scalesPage)
 		axesList->setCurrentRow(axis);
-	else if (generalDialog->currentWidget()==(QWidget*)axesPage)
+	else if (generalDialog.currentWidget()==(QWidget*)axesPage)
 		axesTitlesList->setCurrentRow(axis);
 }
 
 void AxesDialog::showAxesPage()
 {
-	if (generalDialog->currentWidget()!=(QWidget*)axesPage)
-		generalDialog->setCurrentWidget(axesPage);
+	if (generalDialog.currentWidget()!=(QWidget*)axesPage)
+		generalDialog.setCurrentWidget(axesPage);
 }
 
 void AxesDialog::showGridPage()
 {
-	if (generalDialog->currentWidget()!=(QWidget*)gridPage)
-		generalDialog->setCurrentWidget(gridPage);
+	if (generalDialog.currentWidget()!=(QWidget*)gridPage)
+		generalDialog.setCurrentWidget(gridPage);
 }
 
 void AxesDialog::setLabelsNumericFormat(int)
@@ -1855,7 +1854,7 @@ void AxesDialog::updateLabelsFormat(int)
 
 void AxesDialog::showGeneralPage()
 {
-	generalDialog->setCurrentIndex(generalDialog->indexOf(frame));
+	generalDialog.setCurrentIndex(generalDialog.indexOf(frame));
 }
 
 void AxesDialog::showFormulaBox()
@@ -1878,7 +1877,7 @@ void AxesDialog::customAxisLabelFont()
 
 void AxesDialog::pageChanged ( int page )
 {
-	QWidget* pageWidget = generalDialog->widget(page);
+	QWidget* pageWidget = generalDialog.widget(page);
 	if (lastPage == scalesPage && pageWidget == axesPage)
 	{
 		axesTitlesList->setCurrentRow(axesList->currentRow());

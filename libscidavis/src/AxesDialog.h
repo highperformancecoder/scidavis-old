@@ -34,6 +34,7 @@
 #include <QList>
 #include <QVector>
 #include <QTextEdit>
+#include "SciDAVisObject.h"
 
 class QListWidget;
 class QListWidgetItem;
@@ -56,7 +57,7 @@ class TextFormatButtons;
 /**
  * Remark: Don't use this dialog as a non modal dialog!
  */
-class AxesDialog : public QDialog
+class AxesDialog : public SciDAVisObject<QDialog>
 {
     Q_OBJECT
 
@@ -66,7 +67,7 @@ public:
 	 * \param parent parent widget
 	 * \param fl window flags
 	 */
-    AxesDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+  AxesDialog( /*QWidget* parent = 0*/ Qt::WindowFlags fl = 0 );
 	//! Destructor
     ~AxesDialog(){};
 
@@ -87,7 +88,7 @@ protected:
     QPushButton* buttonApply;
     QPushButton* buttonOk;
     QPushButton* buttonCancel;
-    QTabWidget* generalDialog;
+    QTabWidget& generalDialog;
     QWidget* scalesPage;
     QLineEdit* boxEnd;
     QLineEdit* boxStart;

@@ -48,6 +48,7 @@
 #include "Table.h"
 #include "ScriptingEnv.h"
 #include "Script.h"
+#include "SciDAVisObject.h"
 
 class QPixmap;
 class QCloseEvent;
@@ -119,7 +120,7 @@ class AbstractAspect;
  * in ApplicationWindow after the above reorganizations. Think about whether a Model/View approach can be
  * used for Project/ProjectExplorer.
  */
-class ApplicationWindow: public QMainWindow, public scripted
+class ApplicationWindow: public SciDAVisObject<QMainWindow>, public scripted
 {
   Q_OBJECT
 public:
