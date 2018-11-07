@@ -327,8 +327,8 @@ void AxesDialog::initGridPage()
 
 	connect(boxMajorGrid,SIGNAL(toggled(bool)), this, SLOT(majorGridEnabled(bool)));
 	connect(boxMinorGrid,SIGNAL(toggled(bool)), this, SLOT(minorGridEnabled(bool)));
-	connect(boxColorMajor,SIGNAL(activated(int)),this, SLOT(updateGrid()));
-	connect(boxColorMinor,SIGNAL(activated(int)),this, SLOT(updateGrid()));
+	connect(boxColorMajor,SIGNAL(changed(QColor)),this, SLOT(updateGrid()));
+	connect(boxColorMinor,SIGNAL(changed(QColor)),this, SLOT(updateGrid()));
 	connect(boxTypeMajor,SIGNAL(activated(int)),this, SLOT(updateGrid()));
 	connect(boxTypeMinor,SIGNAL(activated(int)),this, SLOT(updateGrid()));
 	connect(boxWidthMajor,SIGNAL(valueChanged (int)),this, SLOT(updateGrid()));

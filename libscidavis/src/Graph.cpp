@@ -947,7 +947,7 @@ void Graph::setAxesNumColors(const QStringList& colors)
   	     if (scale)
   	     {
   	         QPalette pal = scale->palette();
-  	         pal.setColor(QPalette::Text, QColor(colors[i]));
+            pal.setColor(QPalette::Text, QColor(COLORVALUE(colors[i])));
   	         scale->setPalette(pal);
   	     }
   	}
@@ -961,7 +961,7 @@ void Graph::setAxesColors(const QStringList& colors)
 		if (scale)
 		{
 			QPalette pal =scale->palette();
-			pal.setColor(QPalette::WindowText,QColor(colors[i]));
+			pal.setColor(QPalette::WindowText,QColor(COLORVALUE(colors[i])));
 			scale->setPalette(pal);
 		}
 	}
