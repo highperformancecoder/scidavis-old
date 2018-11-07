@@ -2071,10 +2071,10 @@ Graph3D* ApplicationWindow::dataPlotXYZ(const QString& caption,const QString& fo
 
 void ApplicationWindow::customPlot3D(Graph3D *plot)
 {
-	plot->setDataColors(QColor(plot3DColors[4]), QColor(plot3DColors[0]));
-	plot->updateColors(QColor(plot3DColors[2]), QColor(plot3DColors[6]),
-			QColor(plot3DColors[5]), QColor(plot3DColors[1]),
-			QColor(plot3DColors[7]), QColor(plot3DColors[3]));
+	plot->setDataColors(QColor(COLORVALUE(plot3DColors[4])), QColor(COLORVALUE(plot3DColors[0])));
+	plot->updateColors(QColor(COLORVALUE(plot3DColors[2])), QColor(COLORVALUE(plot3DColors[6])),
+			QColor(COLORVALUE(plot3DColors[5])), QColor(COLORVALUE(plot3DColors[1])),
+			QColor(COLORVALUE(plot3DColors[7])), QColor(COLORVALUE(plot3DColors[3])));
 
 	plot->setResolution(plot3DResolution);
 	plot->showColorLegend(showPlot3DLegend);
@@ -9482,7 +9482,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		else if (s.left(10) == "Background")
 		{
 			QStringList fList = s.split("\t");
-			QColor c = QColor(fList[1]);
+			QColor c = QColor(COLORVALUE(fList[1]));
 			if (fList.count() == 3)
 				c.setAlpha(fList[2].toInt());
 			ag->setBackgroundColor(c);
@@ -9495,7 +9495,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		else if (s.contains ("Border"))
 		{
 			QStringList fList=s.split("\t");
-			ag->setFrame(fList[1].toInt(), QColor(fList[2]));
+			ag->setFrame(fList[1].toInt(), QColor(COLORVALUE(fList[2])));
 		}
 		else if (s.contains ("EnabledAxes"))
 		{
@@ -9572,7 +9572,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 					curve.replaceInStrings(caption+"_", newCaption+"_");
 				}
 			}
-			QPen pen = QPen(QColor(curve[3]),curve[2].toInt(),Graph::getPenStyle(curve[4]));
+			QPen pen = QPen(QColor(COLORVALUE(curve[3])),curve[2].toInt(),Graph::getPenStyle(curve[4]));
 
 			Table *table = app->table(curve[1]);
 			if (table)
@@ -9828,7 +9828,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			if (w && errTable)
 			{
 				ag->addErrorBars(curve[2], curve[3], errTable, curve[4], curve[1].toInt(),
-						curve[5].toInt(), curve[6].toInt(), QColor(curve[7]),
+						curve[5].toInt(), curve[6].toInt(), QColor(COLORVALUE(curve[7])),
 						curve[8].toInt(), curve[10].toInt(), curve[9].toInt());
 			}
 			curveID++;
@@ -9875,7 +9875,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		{
 			QStringList fList=s.split("\t");
 			ag->setTitle(fList[1]);
-			ag->setTitleColor(QColor(fList[2]));
+			ag->setTitleColor(QColor(COLORVALUE(fList[2])));
 			ag->setTitleAlignment(fList[3].toInt());
 		}
 		else if (s.contains ("TitleFont"))
@@ -9971,7 +9971,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		else if (s.contains ("CanvasBackground"))
 		{
 			QStringList list = s.split("\t");
-			QColor c = QColor(list[1]);
+			QColor c = QColor(COLORVALUE(list[1]));
 			if (list.count() == 3)
 				c.setAlpha(list[2].toInt());
 			ag->setCanvasBackground(c);
