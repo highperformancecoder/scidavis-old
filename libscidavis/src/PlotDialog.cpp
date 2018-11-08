@@ -29,6 +29,7 @@
 #include "ApplicationWindow.h"
 #include "PlotDialog.h"
 #include "ColorButton.h"
+#include "PenWidget.h"
 #include "PatternBox.h"
 #include "SymbolBox.h"
 #include "Table.h"
@@ -457,6 +458,7 @@ void PlotDialog::initAxesPage()
 	boxYAxis->addItem(tr("Right"));
 	gl->addWidget(boxYAxis, 1, 1);
     gl->setRowStretch (2, 1);
+    gl->setColumnStretch(2,1);
 
 	axesPage = new QWidget();
 	QHBoxLayout* hlayout = new QHBoxLayout(axesPage);
@@ -481,26 +483,8 @@ void PlotDialog::initLinePage()
 	boxConnect->addItem(tr("Vertical Steps"));
 	gl1->addWidget(boxConnect, 0, 1);
 
-	gl1->addWidget(new QLabel(tr( "Style" )), 1, 0);
-	boxLineStyle = new QComboBox();
-	boxLineStyle->setEditable(false);
-	boxLineStyle->addItem("_____");
-	boxLineStyle->addItem("_ _ _");
-	boxLineStyle->addItem(".....");
-	boxLineStyle->addItem("_._._");
-	boxLineStyle->addItem("_.._..");
-	gl1->addWidget(boxLineStyle, 1, 1);
-
-	gl1->addWidget(new QLabel(tr( "Width" )), 2, 0);
-	boxLineWidth = new QSpinBox();
-	boxLineWidth->setMinimum( 1 );
-	boxLineWidth->setValue( 1 );
-	gl1->addWidget(boxLineWidth, 2, 1);
-
-	gl1->addWidget(new QLabel(tr( "Color" )), 3, 0);
-	boxLineColor = new ColorButton();
-	gl1->addWidget(boxLineColor, 3, 1);
-	gl1->setRowStretch (4, 1);
+	penWidget = new PenWidget(this,QPen());
+	gl1->addWidget(penWidget, 1, 0, 1, 2);
 
 	fillGroupBox = new QGroupBox(tr( "Fill area under curve" ));
 	fillGroupBox->setCheckable(true);
@@ -520,7 +504,7 @@ void PlotDialog::initLinePage()
 	privateTabWidget->addTab( linePage, tr( "Line" ) );
 
 	connect(boxConnect, SIGNAL(activated(int)), this, SLOT(acceptParams()));
-	connect(boxLineStyle, SIGNAL(activated(int)), this, SLOT(acceptParams()));
+	connect(penWidget, SIGNAL(penChanged(QPen)), this, SLOT(acceptParams()));
 	connect(boxPattern, SIGNAL(activated(int)), this, SLOT(acceptParams()));
 	connect(fillGroupBox, SIGNAL(toggled(bool)), this, SLOT(showAreaColor(bool)));
 	connect(fillGroupBox, SIGNAL(clicked()), this, SLOT(acceptParams()));
@@ -550,6 +534,7 @@ void PlotDialog::initSymbolsPage()
     boxPenWidth->setRange(1, 100);
     gl->addWidget(boxPenWidth, 4, 1);
     gl->setRowStretch (5, 1);
+    gl->setColumnStretch(2,1);
 
     symbolPage = new QWidget();
 	QHBoxLayout* hl = new QHBoxLayout(symbolPage);
@@ -1597,9 +1582,7 @@ void PlotDialog::setActiveCurve(CurveTreeItem *item)
     style = 6;
   boxConnect->setCurrentIndex(style);
 
-  setPenStyle(c->pen().style());
-  boxLineColor->setColor(c->pen().color());
-  boxLineWidth->setValue(c->pen().width());
+  penWidget->setPen(c->pen());
   fillGroupBox->blockSignals(true);
   fillGroupBox->setChecked(c->brush().style() != Qt::NoBrush );
   fillGroupBox->blockSignals(false);
@@ -1837,9 +1820,8 @@ bool PlotDialog::acceptParams()
         if (!fillGroupBox->isChecked())
           br = QBrush();
         graph->setCurveBrush(index, br);
-        QPen pen = QPen(boxLineColor->color(),boxLineWidth->value(),Graph::getPenStyle(boxLineStyle->currentIndex()));
         QwtPlotCurve *curve = (QwtPlotCurve *)plotItem;
-        curve->setPen(pen);
+        curve->setPen(penWidget->pen());
       }
     }
   else if (privateTabWidget->currentWidget()==symbolPage)
@@ -2117,30 +2099,6 @@ void PlotDialog::setPiePenStyle(const Qt::PenStyle& style)
 		boxPieLineStyle->setCurrentIndex(3);
 	if(style == Qt::DashDotDotLine)
 		boxPieLineStyle->setCurrentIndex(4);
-}
-
-void PlotDialog::setPenStyle(Qt::PenStyle style)
-{
-	switch (style)
-	{
-		case Qt::SolidLine:
-			boxLineStyle->setCurrentIndex(0);
-			break;
-		case Qt::DashLine:
-			boxLineStyle->setCurrentIndex(1);
-			break;
-		case Qt::DotLine:
-			boxLineStyle->setCurrentIndex(2);
-			break;
-		case Qt::DashDotLine:
-			boxLineStyle->setCurrentIndex(3);
-			break;
-		case Qt::DashDotDotLine:
-			boxLineStyle->setCurrentIndex(4);
-			break;
-		default:
-			break;
-	}
 }
 
 void PlotDialog::setBoxType(int index)

@@ -390,7 +390,7 @@ public slots:
   void setGraphDefaultSettings(bool autoscale,bool scaleFonts,bool resizeLayers,bool antialiasing);
   void setLegendDefaultSettings(int frame, const QFont& font,
                                 const QColor& textCol, const QColor& backgroundCol);
-  void setArrowDefaultSettings(int lineWidth,  const QColor& c, Qt::PenStyle style,
+  void setArrowDefaultSettings(const QPen& pen,
                                int headLength, int headAngle, bool fillHead);
   void plotPie();
   void plotVectXYXY();

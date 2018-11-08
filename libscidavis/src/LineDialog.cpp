@@ -29,6 +29,7 @@
 #include "LineDialog.h"
 #include "ColorButton.h"
 #include "ArrowMarker.h"
+#include "PenWidget.h"
 #include "Graph.h"
 #include "Plot.h"
 #include "ApplicationWindow.h"
@@ -54,45 +55,21 @@ LineDialog::LineDialog( ArrowMarker *line, QWidget* parent, Qt::WindowFlags fl )
 	lm = line;
 
 	QGroupBox *gb1 = new QGroupBox();
-    QGridLayout *gl1 = new QGridLayout();
+	QGridLayout *gl1 = new QGridLayout();
 
-    gl1->addWidget(new QLabel(tr("Color")), 0, 0);
-	colorBox = new ColorButton();
-	colorBox->setColor(lm->color());
-	gl1->addWidget(colorBox, 0, 1);
-
-	gl1->addWidget(new QLabel(tr("Line type")), 1, 0);
-    styleBox = new QComboBox();
-	styleBox->addItem("_____");
-	styleBox->addItem("- - -");
-	styleBox->addItem(".....");
-	styleBox->addItem("_._._");
-	styleBox->addItem("_.._..");
-	gl1->addWidget(styleBox, 1, 1);
-
-	setLineStyle(lm->style());
-
-	gl1->addWidget(new QLabel(tr("Line width")), 2, 0);
-    widthBox = new QComboBox();
-	widthBox->addItem( tr( "1" ) );
-    widthBox->addItem( tr( "2" ) );
-    widthBox->addItem( tr( "3" ) );
-    widthBox->addItem( tr( "4" ) );
-    widthBox->addItem( tr( "5" ) );
-	widthBox->setEditable (true);
-	widthBox->setCurrentIndex(0);
-	widthBox->setEditText(QString::number(lm->width()));
-	gl1->addWidget(widthBox, 2, 1);
+	penWidget = new PenWidget(this,lm->linePen());
+	penWidget->setPen(lm->linePen());
+	gl1->addWidget(penWidget, 0, 0, 1, 2);
 
 	startBox = new QCheckBox();
     startBox->setText( tr( "Arrow at &start" ) );
 	startBox->setChecked(lm->hasStartArrow());
-	gl1->addWidget(startBox, 3, 0);
+	gl1->addWidget(startBox, 1, 0, Qt::AlignTop);
 
 	endBox = new QCheckBox();
     endBox->setText( tr( "Arrow at &end" ) );
 	endBox->setChecked(lm->hasEndArrow());
-	gl1->addWidget(endBox, 3, 1);
+	gl1->addWidget(endBox, 1, 1, Qt::AlignTop);
 
 	gb1->setLayout(gl1);
 
@@ -253,11 +230,9 @@ void LineDialog::apply()
 {
 if (tw->currentWidget()==(QWidget *)options)
 	{
-	lm->setStyle(Graph::getPenStyle(styleBox->currentIndex()));
-	lm->setColor(colorBox->color());
-	lm->setWidth(widthBox->currentText().toInt());
 	lm->drawEndArrow(endBox->isChecked());
 	lm->drawStartArrow(startBox->isChecked());
+	lm->setLinePen(penWidget->pen());
 	}
 else if (tw->currentWidget()==(QWidget *)head)
 	{
@@ -287,20 +262,6 @@ apply();
 close();
 }
 
-void LineDialog::setLineStyle(Qt::PenStyle style)
-{
-if (style==Qt::SolidLine)
-	styleBox->setCurrentIndex(0);
-else if (style==Qt::DashLine)
-	styleBox->setCurrentIndex(1);
-else if (style==Qt::DotLine)
-	styleBox->setCurrentIndex(2);
-else if (style==Qt::DashDotLine)
-	styleBox->setCurrentIndex(3);
-else if (style==Qt::DashDotDotLine)
-	styleBox->setCurrentIndex(4);
-}
-
 void LineDialog::enableHeadTab()
 {
 if (startBox->isChecked() || endBox->isChecked())
@@ -315,8 +276,7 @@ ApplicationWindow *app = (ApplicationWindow *)this->parent();
 if (!app)
 	return;
 
-app->setArrowDefaultSettings(widthBox->currentText().toInt(), colorBox->color(),
-							Graph::getPenStyle(styleBox->currentIndex()),
+app->setArrowDefaultSettings(penWidget->pen(),
 							boxHeadLength->value(), boxHeadAngle->value(), filledBox->isChecked());
 }
 

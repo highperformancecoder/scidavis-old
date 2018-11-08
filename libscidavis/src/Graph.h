@@ -69,6 +69,9 @@ typedef struct{
   unsigned int lCol; //!< line color
   int lWidth;      //!< line width
   int lStyle;      //!< line style
+  int lCapStyle=0;   //!< line CapStyle
+  int lJoinStyle=0x40;  //!< line JoinStyle
+  QString lCustomDash;
   int filledArea;  //!< flag: toggles area filling under curve
   unsigned int aCol; //!< curve area color
   int aStyle;      //!< area filling style

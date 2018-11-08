@@ -78,6 +78,10 @@ public:
 	void setStyle(Qt::PenStyle s);
 	//! The pen style of the arrow line
 	Qt::PenStyle style(){return linePen().style ();};
+	void setCapStyle(Qt::PenCapStyle c);
+	Qt::PenCapStyle capStyle(){return linePen().capStyle();};
+	void setJoinStyle(Qt::PenJoinStyle);
+	Qt::PenJoinStyle joinStyle(){return linePen().joinStyle();};
 
 	//! Specifies weather the start arrow should be drawn
 	void drawStartArrow(bool on = true){d_start_arrow = on;};
@@ -143,6 +147,9 @@ private:
 
 	//! Length of the arrow head
 	int d_head_length;
+
+	//! Custom dash pattern
+	QString d_custom_dash;
 
 	//! Pixel coordinates of the start point
 	QPoint d_start;
