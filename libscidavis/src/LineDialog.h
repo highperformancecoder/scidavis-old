@@ -40,6 +40,7 @@ class QSpinBox;
 class QLineEdit;
 class ColorButton;
 class ArrowMarker;
+class PenWidget;
 
 //! Line options dialog
 class LineDialog : public QDialog
@@ -59,16 +60,13 @@ public slots:
 	void enableButtonDefault(int);
 	void setDefaultValues();
 	void displayCoordinates(int unit);
-	void setLineStyle(Qt::PenStyle style);
 	void accept();
 	void apply();
 
 private:
 	ArrowMarker *lm;
 
-    ColorButton* colorBox;
-    QComboBox* styleBox;
-    QComboBox* widthBox;
+    PenWidget* penWidget;
 	QComboBox* unitBox;
     QPushButton* btnOk;
     QPushButton* btnApply;

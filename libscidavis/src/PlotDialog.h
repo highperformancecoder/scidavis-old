@@ -52,6 +52,7 @@ class LayerItem;
 class CurveTreeItem;
 class PatternBox;
 class ColorButton;
+class PenWidget;
 class MultiLayer;
 class SymbolBox;
 class ColorMapEditor;
@@ -104,7 +105,6 @@ class PlotDialog : public QDialog
 		bool validInput();
 		void showPlotAssociations(QTreeWidgetItem *item, int);
 
-		void setPenStyle(Qt::PenStyle style);
 		void setPiePenStyle(const Qt::PenStyle& style);
 
 		//box plots
@@ -176,9 +176,9 @@ class PlotDialog : public QDialog
 		QComboBox* boxPlotType;
 		QWidget* linePage;
 		QComboBox* boxConnect;
-		QComboBox* boxLineStyle;
-		QSpinBox* boxLineWidth, *boxPenWidth;
-		ColorButton* boxLineColor, *boxAreaColor;
+		PenWidget* penWidget;
+		QSpinBox* boxPenWidth;
+		ColorButton* boxAreaColor;
 		QWidget* symbolPage;
 		QSpinBox* boxSymbolSize;
 		ColorButton* boxSymbolColor,*boxFillColor;

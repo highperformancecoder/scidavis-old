@@ -2359,6 +2359,13 @@ QString Graph::saveCurveLayout(int index)
 		s+=QString::number(PatternBox::patternIndex(c->brush().style()))+"\t";
 		if (style <= LineSymbols || style == Box)
 			s+=QString::number(symbol.pen().width())+"\t";
+		// extension for custom dash pattern
+		s+=QString::number(static_cast<int>(c->pen().capStyle()))+"\t";
+		s+=QString::number(static_cast<int>(c->pen().joinStyle()))+"\t";
+		QStringList customDash;
+		for (auto v: c->pen().dashPattern())
+			customDash << QString::number(v);
+		s+=customDash.join(" ")+"\t";
 	}
 
 	if(style == VerticalBars||style == HorizontalBars||style == Histogram)
@@ -2630,6 +2637,17 @@ void Graph::addArrow(QStringList list, int fileVersion)
 		mrk->setHeadAngle(list[11].toInt());
 		mrk->fillArrowHead(list[12]=="1");
 	}
+	if (list.count()>13)
+	{
+		mrk->setCapStyle(static_cast<Qt::PenCapStyle>(list[13].toInt()));
+		mrk->setJoinStyle(static_cast<Qt::PenJoinStyle>(list[14].toInt()));
+		QVector<qreal> customDash;
+		for (auto v: list[15].split(" ")) customDash << v.toDouble();
+		QPen pen = mrk->linePen();
+		if (mrk->style()==Qt::CustomDashLine)
+			pen.setDashPattern(customDash);
+		mrk->setLinePen(pen);
+	}
 }
 
 void Graph::addArrow(ArrowMarker* mrk)
@@ -2722,7 +2740,14 @@ QString Graph::saveMarkers()
 		s+=QString::number(mrkL->hasStartArrow())+"\t";
 		s+=QString::number(mrkL->headLength())+"\t";
 		s+=QString::number(mrkL->headAngle())+"\t";
-		s+=QString::number(mrkL->filledArrowHead())+"</line>\n";
+		s+=QString::number(mrkL->filledArrowHead())+"\t";
+		s+=QString::number(static_cast<int>(mrkL->capStyle()))+"\t";
+		s+=QString::number(static_cast<int>(mrkL->joinStyle()))+"\t";
+		QStringList customDash;
+		for (auto v: mrkL->linePen().dashPattern())
+			customDash << QString::number(v);
+		s+=customDash.join(" ");
+		s+="</line>\n";
 	}
 
 	for (int i=0; i<t; i++)
@@ -3000,7 +3025,16 @@ void Graph::updateCurveLayout(int index, const CurveLayout *cL)
   else
     c->setSymbol(QwtSymbol(SymbolBox::style(cL->sType), QBrush(), pen, QSize(cL->sSize,cL->sSize)));
 
-  c->setPen(QPen(ColorButton::color(cL->lCol), cL->lWidth, getPenStyle(cL->lStyle)));
+  // custom dash pattern
+  pen = QPen(ColorButton::color(cL->lCol), cL->lWidth, getPenStyle(cL->lStyle));
+  pen.setCapStyle(static_cast<Qt::PenCapStyle>(cL->lCapStyle));
+  pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(cL->lJoinStyle));
+  QVector<qreal> customDash;
+  for (auto v: (cL->lCustomDash).split(" ", QString::SkipEmptyParts))
+    customDash << v.toDouble();
+  if (pen.style()==Qt::CustomDashLine)
+    pen.setDashPattern(customDash);
+  c->setPen(pen);
 
   int style = c_type[index];
   if (style == Scatter)
@@ -4256,6 +4290,8 @@ QString Graph::penStyleName(Qt::PenStyle style)
 		return "DashDotLine";
 	else if (style==Qt::DashDotDotLine)
 		return "DashDotDotLine";
+	else if (style==Qt::CustomDashLine)
+		return "CustomDashLine";
 	else
 		return "SolidLine";
 }
@@ -4280,6 +4316,9 @@ Qt::PenStyle Graph::getPenStyle(int style)
 		case 4:
 			linePen=Qt::DashDotDotLine;
 			break;
+		case 5:
+			linePen=Qt::CustomDashLine;
+			break;
         default:
           throw runtime_error("invalid pen style");
 	}
@@ -4299,6 +4338,8 @@ Qt::PenStyle Graph::getPenStyle(const QString& s)
 		style=Qt::DashDotLine;
 	else if (s=="DashDotDotLine")
 		style=Qt::DashDotDotLine;
+	else if (s=="CustomDashLine")
+		style=Qt::CustomDashLine;
 	return style;
 }
 

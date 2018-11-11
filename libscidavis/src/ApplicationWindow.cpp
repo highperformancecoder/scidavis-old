@@ -3233,20 +3233,20 @@ void ApplicationWindow::setLegendDefaultSettings(int frame, const QFont& font,
 	saveSettings();
 }
 
-void ApplicationWindow::setArrowDefaultSettings(int lineWidth,  const QColor& c, Qt::PenStyle style,
+void ApplicationWindow::setArrowDefaultSettings(const QPen& pen,
 		int headLength, int headAngle, bool fillHead)
 {
-	if (defaultArrowLineWidth == lineWidth &&
-			defaultArrowColor == c &&
-			defaultArrowLineStyle == style &&
+	if (defaultArrowLineWidth == pen.width() &&
+			defaultArrowColor == pen.color() &&
+			defaultArrowLineStyle == pen.style() &&
 			defaultArrowHeadLength == headLength &&
 			defaultArrowHeadAngle == headAngle &&
 			defaultArrowHeadFill == fillHead)
 		return;
 
-	defaultArrowLineWidth = lineWidth;
-	defaultArrowColor = c;
-	defaultArrowLineStyle = style;
+	defaultArrowLineWidth = pen.width();
+	defaultArrowColor = pen.color();
+	defaultArrowLineStyle = pen.style();
 	defaultArrowHeadLength = headLength;
 	defaultArrowHeadAngle = headAngle;
 	defaultArrowHeadFill = fillHead;
@@ -9598,7 +9598,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		else if (s.left(6)=="curve\t")
 		{
                   bool curve_loaded = false; // Graph::insertCurve may fail
-                  QStringList curve = s.split("\t", QString::SkipEmptyParts);
+                  QStringList curve = s.split("\t", QString::KeepEmptyParts);
                   if (curve.count()>14)
                     {
                       if (!app->renamedTables.isEmpty())
@@ -9651,6 +9651,10 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                         cl.penWidth = curve[15].toInt();
                       else
                         cl.penWidth = cl.lWidth;
+                      // custom dash pattern
+                      cl.lCapStyle = curve[16].toInt();
+                      cl.lJoinStyle = curve[17].toInt();
+                      cl.lCustomDash = curve[18];
 
                       Table *w = app->table(curve[2]);
                       if (w)

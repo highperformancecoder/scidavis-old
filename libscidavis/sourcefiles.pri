@@ -110,7 +110,7 @@ HEADERS  += src/ApplicationWindow.h \
             src/TeXTableSettings.h \
             src/TeXTableSettingsWidget.h \
             src/TeXTableExportDialog.h \
-
+            src/PenWidget.h
 
 ###################### SOURCES ##############################################
 
@@ -218,6 +218,7 @@ SOURCES  += src/ApplicationWindow.cpp \
             src/TeXTableSettingsWidget.cpp \
             src/TeXTableExportDialog.cpp \
             src/version.cpp \
+            src/PenWidget.cpp
 
 ###################### FORMS ##############################################
 FORMS +=   src/SciDAVisAbout.ui

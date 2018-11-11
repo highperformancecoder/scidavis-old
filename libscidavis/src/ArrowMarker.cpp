@@ -223,6 +223,26 @@ pen.setStyle(style);
 setLinePen(pen);
 }
 
+void ArrowMarker::setCapStyle(Qt::PenCapStyle style)
+{
+if (linePen().capStyle() == style)
+	return;
+
+QPen pen = linePen();
+pen.setCapStyle(style);
+setLinePen(pen);
+}
+
+void ArrowMarker::setJoinStyle(Qt::PenJoinStyle style)
+{
+if (linePen().joinStyle() == style)
+	return;
+
+QPen pen = linePen();
+pen.setJoinStyle(style);
+setLinePen(pen);
+}
+
 void ArrowMarker::setHeadLength(int l)
 {
 if (d_head_length == l)
