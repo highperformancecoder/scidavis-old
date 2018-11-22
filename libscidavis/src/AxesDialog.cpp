@@ -62,8 +62,7 @@
 #define M_PI	3.141592653589793238462643
 #endif
 
-AxesDialog::AxesDialog( QWidget* parent, Qt::WindowFlags fl )
-  : QDialog(parent,fl) //SciDAVisObject<QDialog>( nullptr, fl )
+AxesDialog::AxesDialog()
 {
 	QPixmap image4( ":/image4.xpm" );
 	QPixmap image5( ":/image5.xpm" );

@@ -4271,427 +4271,427 @@ Are you sure you want to continue?</source>
 <context>
     <name>AxesDialog</name>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="72"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="71"/>
         <source>General Plot Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="83"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="82"/>
         <source>&amp;Apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="87"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="86"/>
         <source>&amp;OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="92"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="91"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="116"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="114"/>
         <source>From</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="120"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="118"/>
         <source>To</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="124"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="419"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="122"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="417"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="126"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="124"/>
         <source>linear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="127"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="125"/>
         <source>logarithmic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="132"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="130"/>
         <source>Inverted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="144"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="142"/>
         <source>Step</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="157"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="433"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="155"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="431"/>
         <source>Major Ticks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="164"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="442"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="162"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="440"/>
         <source>Minor Ticks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="180"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="276"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="361"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="178"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="274"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="359"/>
         <source>Bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="181"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="281"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="362"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="179"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="279"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="360"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="182"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="277"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="363"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="180"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="275"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="361"/>
         <source>Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="183"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="282"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="364"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="181"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="280"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="362"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="204"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="202"/>
         <source>Scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="223"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="221"/>
         <source>Major Grids</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="228"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="226"/>
         <source>Minor Grids</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="232"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="230"/>
         <source>Line Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="241"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="239"/>
         <source>Line Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="260"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="258"/>
         <source>Thickness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="273"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="567"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="271"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="565"/>
         <source>Axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="285"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="283"/>
         <source>Additional lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="288"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="286"/>
         <source>X=0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="293"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="291"/>
         <source>Y=0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="303"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="301"/>
         <source>Horizontal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="304"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="302"/>
         <source>Vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="323"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="321"/>
         <source>Grid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="351"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="349"/>
         <source>Numeric</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="352"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="350"/>
         <source>Text from table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="353"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="351"/>
         <source>Day of the week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="354"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="352"/>
         <source>Month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="355"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="353"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="356"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="354"/>
         <source>Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="357"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="355"/>
         <source>Date &amp; Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="358"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="356"/>
         <source>Column Headings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="383"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="381"/>
         <source>Show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="387"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="385"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="402"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="400"/>
         <source>&amp;Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="423"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="421"/>
         <source>Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="426"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="424"/>
         <source>Axis &amp;Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="429"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="495"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="556"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="427"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="493"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="554"/>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="434"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="443"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="435"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="444"/>
+        <source>Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="436"/>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="445"/>
-        <source>None</source>
+        <source>In &amp; Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="437"/>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="446"/>
-        <source>Out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="438"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="447"/>
-        <source>In &amp; Out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="439"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="448"/>
         <source>In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="451"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="449"/>
         <source>Stand-off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="456"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="454"/>
         <source>Show Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="463"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="461"/>
         <source>Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="469"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="467"/>
         <source>Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="475"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="473"/>
         <source>Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="482"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="480"/>
         <source>Precision</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="488"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="486"/>
         <source>Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="499"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="497"/>
         <source>For&amp;mula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="518"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="516"/>
         <source>Axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="552"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="550"/>
         <source>Canvas frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="560"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="558"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="570"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="568"/>
         <source>Draw backbones</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="573"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="571"/>
         <source>Line Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="578"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="576"/>
         <source>Major ticks length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="583"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="581"/>
         <source>Minor ticks length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="594"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="592"/>
         <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="686"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="684"/>
         <source>Automatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="687"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="685"/>
         <source>Decimal: 100.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="688"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="686"/>
         <source>Scientific: 1e2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="689"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="687"/>
         <source>Scientific: 10^2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1213"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1211"/>
         <source>Start limit error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1225"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1223"/>
         <source>End limit error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1239"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1246"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1237"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1244"/>
         <source>Step input error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1246"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1244"/>
         <source>Please enter a positive step value!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1339"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1337"/>
         <source>Formula input error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1340"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1338"/>
         <source>Valid variables are &apos;x&apos; for Top/Bottom axes and &apos;y&apos; for Left/Right axes!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1494"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1508"/>
+        <source>millisec.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1495"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1509"/>
+        <source>sec.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="1496"/>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="1510"/>
-        <source>millisec.</source>
+        <source>min.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="1497"/>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="1511"/>
-        <source>sec.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1498"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1512"/>
-        <source>min.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1499"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1513"/>
         <source>hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1504"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1514"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1502"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1512"/>
         <source>days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1505"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1515"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1503"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1513"/>
         <source>weeks</source>
         <translation type="unfinished"></translation>
     </message>

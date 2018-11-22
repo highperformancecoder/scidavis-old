@@ -5855,7 +5855,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">QtiPlot - Общие параметы отображения графика</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="+83"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="+82"/>
         <source>&amp;Apply</source>
         <translation type="unfinished">&amp;Применить</translation>
     </message>
@@ -5870,7 +5870,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">О&amp;тмена</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+23"/>
         <source>From</source>
         <translation type="unfinished">От</translation>
     </message>
@@ -6290,12 +6290,12 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">недели</translation>
     </message>
     <message>
-        <location line="-1443"/>
+        <location line="-1442"/>
         <source>General Plot Options</source>
         <translation type="unfinished">Основные опции построения</translation>
     </message>
     <message>
-        <location line="+1141"/>
+        <location line="+1140"/>
         <source>Start limit error</source>
         <translation type="unfinished">Ошибка начальной границы</translation>
     </message>
