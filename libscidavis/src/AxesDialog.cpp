@@ -62,9 +62,8 @@
 #define M_PI	3.141592653589793238462643
 #endif
 
-AxesDialog::AxesDialog( /*QWidget* parent,*/ Qt::WindowFlags fl )
-  : SciDAVisObject<QDialog>( nullptr, fl ),
-    generalDialog(addChild<QTabWidget>())
+AxesDialog::AxesDialog( QWidget* parent, Qt::WindowFlags fl )
+  : QDialog(parent,fl) //SciDAVisObject<QDialog>( nullptr, fl )
 {
 	QPixmap image4( ":/image4.xpm" );
 	QPixmap image5( ":/image5.xpm" );
@@ -93,10 +92,10 @@ AxesDialog::AxesDialog( /*QWidget* parent,*/ Qt::WindowFlags fl )
 	buttonCancel->setText( tr( "&Cancel" ) );
 	bottomButtons->addWidget( buttonCancel );
 
-	QVBoxLayout * mainLayout = new QVBoxLayout(this);
+	QVBoxLayout* mainLayout = new QVBoxLayout(this);
 	mainLayout->addWidget(&generalDialog);
 	mainLayout->addLayout(bottomButtons);
-
+        
 	lastPage = scalesPage;
 
 	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );

@@ -6,6 +6,12 @@
 template <class Base>
 class SciDAVisObject: public Base
 {
+  void setParent(QObject* child, QObject* parent)
+  {child->setParent(parent);}
+  // overload that preserves the default window flags
+  void setParent(QWidget* child, QWidget* parent)
+  {child->setParent(parent,child->windowFlags());}
+  
 public:
   template <class... A>
   SciDAVisObject(A... args): Base(std::forward<A>(args)...) {}
@@ -14,7 +20,7 @@ public:
   template <class T, class... A>
   T& addChild(A... args) {
     T* child=new T(std::forward<A>(args)...);
-    child->setParent(this);
+    setParent(child,this);
     return *child;
   }
 };

@@ -6738,23 +6738,23 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     <name>LineDialog</name>
     <message>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation type="obsolete">1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished">2</translation>
+        <translation type="obsolete">2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished">3</translation>
+        <translation type="obsolete">3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished">4</translation>
+        <translation type="obsolete">4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished">5</translation>
+        <translation type="obsolete">5</translation>
     </message>
     <message>
         <source>X</source>
@@ -6778,7 +6778,7 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="obsolete">Barva</translation>
     </message>
     <message>
         <source>Arrow at &amp;end</source>
@@ -6794,7 +6794,7 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Line type</source>
-        <translation type="unfinished">Druh čáry</translation>
+        <translation type="obsolete">Druh čáry</translation>
     </message>
     <message>
         <source>Length</source>
@@ -6814,7 +6814,7 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Line width</source>
-        <translation type="unfinished">Šířka čáry</translation>
+        <translation type="obsolete">Šířka čáry</translation>
     </message>
     <message>
         <source>Opti&amp;ons</source>
@@ -7818,6 +7818,73 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <message>
         <source>FDiagonal</source>
         <translation type="unfinished">FÚhlopříčný</translation>
+    </message>
+</context>
+<context>
+    <name>PenWidget</name>
+    <message>
+        <source>1</source>
+        <translation type="unfinished">1</translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished">2</translation>
+    </message>
+    <message>
+        <source>3</source>
+        <translation type="unfinished">3</translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished">4</translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation type="unfinished">5</translation>
+    </message>
+    <message>
+        <source>Dash pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Round</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Square</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bevel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Miter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished">Barva</translation>
+    </message>
+    <message>
+        <source>Line type</source>
+        <translation type="unfinished">Druh čáry</translation>
+    </message>
+    <message>
+        <source>Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cap style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Join style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
