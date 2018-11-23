@@ -183,7 +183,8 @@ void Plot::drawItems (QPainter *painter, const QRect &rect,
       painter->setPen(QPen(canvas()->palette().color(QPalette::Active, QPalette::WindowText), axesLinewidth(),
         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
       painter->setClipping(false);
-      painter->drawRect(rect.adjusted(-(apw2+1), -(apw2+1), apw2, apw2));
+      if (pfilter.options() & QwtPlotPrintFilter::PrintFrameWithScales)
+        painter->drawRect(rect.adjusted(-(apw2+1), -(apw2+1), apw2, apw2));
       painter->restore();
       painter->setClipping(clp);
     }
