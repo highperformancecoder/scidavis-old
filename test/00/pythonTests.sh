@@ -30,6 +30,7 @@ trap "fail" 1 2 3 15
 
 # insert test commands here
 cp $here/test/pythonTests/* .
+cp $here/scidavis-logo.png .
 for i in *.py; do
     echo $i
     $here/scidavis/scidavis -l=en -x $i
