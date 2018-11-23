@@ -51,7 +51,7 @@ In alphabetical order.
 
 Tilman Benkert[1], 
 Knut Franke,
-gbm19,
+Miquel Garriga,
 Arun Narayanankutty,
 Russell Standish,
 
