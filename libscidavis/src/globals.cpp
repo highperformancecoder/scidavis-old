@@ -27,7 +27,11 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifdef SCRIPTING_PYTHON
+#include <Python.h>
+#endif
 #include "globals.h"
+#include "qwt_global.h"
 #include <QMessageBox>
 #include <QIcon>
 #include <QObject>
@@ -159,7 +163,14 @@ void SciDAVis::about()
 	dialog->setAttribute(Qt::WA_DeleteOnClose);
 	dialog->setWindowTitle(QObject::tr("About SciDAVis"));
 	ui.version_label->setText(versionString() + extraVersion());
-	ui.release_date_label->setText(QObject::tr("Released") + ": " + QString(SciDAVis::release_date));
+	ui.release_date_label->setText(
+		QString("Qt: ")+QT_VERSION_STR+". Qwt: "+QWT_VERSION_STR
+#ifdef SCRIPTING_PYTHON
+		". Python: "+PY_VERSION
+#else
+		+". No python"
+#endif
+	+QObject::tr("\nReleased") + ": " + QString(SciDAVis::release_date));
 	ui.credits_box->setHtml(text);
 
 	dialog->exec();
