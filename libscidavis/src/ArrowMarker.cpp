@@ -245,9 +245,6 @@ setLinePen(pen);
 
 void ArrowMarker::setHeadLength(int l)
 {
-if (d_head_length == l)
-	return;
-
 d_head_length=l;
 }
 
