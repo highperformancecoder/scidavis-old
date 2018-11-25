@@ -253,25 +253,16 @@ d_head_length=l;
 
 void ArrowMarker::setHeadAngle(int a)
 {
-if (d_head_angle == a)
-	return;
-
 d_head_angle=a;
 }
 
 void ArrowMarker::fillArrowHead(bool fill)
 {
-if (d_fill_head == fill)
-	return;
-
 d_fill_head=fill;
 }
 
 void ArrowMarker::setStartPoint(const QPoint& p)
 {
-if (d_start == p)
-	return;
-
 d_start = p;
 
 if (!plot())
@@ -283,9 +274,6 @@ d_rect.setTop(plot()->invTransform(yAxis(), p.y()));
 
 void ArrowMarker::setEndPoint(const QPoint& p)
 {
-if (d_end == p)
-	return;
-
 d_end = p;
 
 if (!plot())
