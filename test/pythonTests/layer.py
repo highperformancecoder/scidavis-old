@@ -1,3 +1,4 @@
+import math
 # test pie plots first
 table=newTable("t1",2,4)
 table.column(0).replaceValues(0,[15,15,40,30])
