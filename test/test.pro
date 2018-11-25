@@ -50,7 +50,7 @@ liborigin {
 
 # Input
 #HEADERS += unittests.h
-SOURCES += main.cpp applicationWindow.cpp readWriteProject.cpp fft.cpp testPaintDevice.cpp 3dplot.cpp menus.cpp
+SOURCES += main.cpp applicationWindow.cpp readWriteProject.cpp fft.cpp testPaintDevice.cpp 3dplot.cpp menus.cpp arrowMarker.cpp
 
 ########### Future code backported from the aspect framework ##################
 DEFINES += LEGACY_CODE_0_2_x
