@@ -39,6 +39,7 @@ done
 
 if [ -z "$TRAVIS" ]; then
     for i in *.png; do
+        if [ $i=scidavis-logo.png ]; then continue; fi
         diff $i $here/test/renderedImages/$i
         if test $? -ne 0; then fail; fi
     done
