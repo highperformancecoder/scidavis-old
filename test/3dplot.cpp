@@ -3,7 +3,6 @@
 #include "Graph3D.h"
 #include "testPaintDevice.h"
 #include "Note.h"
-#include "near.h"
 #include <QMdiArea>
 
 #include <iostream>

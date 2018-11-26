@@ -9394,6 +9394,11 @@ nejmenší celé číslo větší nebo rovno x.</translation>
         <comment>prefix for XML warning messages</comment>
         <translation type="unfinished">Varování při čtení z XML dat:</translation>
     </message>
+    <message>
+        <source>
+Released</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSelectorTool</name>

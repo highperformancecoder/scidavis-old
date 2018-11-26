@@ -12379,7 +12379,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11873"/>
-        <location filename="../../libscidavis/src/globals.cpp" line="162"/>
         <source>Released</source>
         <translation type="unfinished">Vydáno</translation>
     </message>
@@ -12642,9 +12641,15 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">%1: sloupec %2 přesunut z pozice %3 na %4</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="160"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="164"/>
         <source>About SciDAVis</source>
         <translation type="unfinished">O SciDAVisu</translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/globals.cpp" line="173"/>
+        <source>
+Released</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/future/lib/XmlStreamReader.cpp" line="67"/>

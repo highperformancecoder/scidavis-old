@@ -15150,7 +15150,6 @@ p, li { white-space: pre-wrap; }
     <name>QObject</name>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="-1600"/>
-        <location filename="../../libscidavis/src/globals.cpp" line="+162"/>
         <source>Released</source>
         <translation type="unfinished">Дата релиза</translation>
     </message>
@@ -15160,9 +15159,15 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">&amp;Удалить</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="-2"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="+164"/>
         <source>About SciDAVis</source>
         <translation type="unfinished">О SciDAVis</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>
+Released</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/future/core/AbstractFilter.cpp" line="+121"/>

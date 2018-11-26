@@ -12081,6 +12081,11 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <source>%1: clear selected cell(s)</source>
         <translation type="unfinished">%1: limpar célula(s) selecionada(s)</translation>
     </message>
+    <message>
+        <source>
+Released</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSelectorTool</name>

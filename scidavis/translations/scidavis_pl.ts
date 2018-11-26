@@ -11961,7 +11961,6 @@ p, li { white-space: pre-wrap; }
     <name>QObject</name>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11873"/>
-        <location filename="../../libscidavis/src/globals.cpp" line="162"/>
         <source>Released</source>
         <translation>Wydany</translation>
     </message>
@@ -12357,9 +12356,15 @@ p, li { white-space: pre-wrap; }
         <translation>%1: przemieść kolumnę %2 z położenia %3 do %4.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="160"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="164"/>
         <source>About SciDAVis</source>
         <translation>O Programie SciDAVis</translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/globals.cpp" line="173"/>
+        <source>
+Released</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
