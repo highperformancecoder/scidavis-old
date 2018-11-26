@@ -6,7 +6,7 @@
 using namespace std;
 
 #include <UnitTest++/UnitTest++.h>
-#include "qstringStream.h"
+#include "utils.h"
 
 struct MenuActions: map<QString,const QMenu*>
 {

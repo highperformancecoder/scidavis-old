@@ -3,11 +3,10 @@
 #include "MultiLayer.h"
 #include <iostream>
 #include <thread>
-#include <unistd.h>
 using namespace std;
 
 #include <UnitTest++/UnitTest++.h>
-#include "qstringStream.h"
+#include "utils.h"
 
 static double sqr(double x) {return x*x;}
 
@@ -91,16 +90,8 @@ SUITE(ArrowMarker)
       }
       // double clicking should open dialog. Send a return (closing the dialog) on a separate thread
       QMouseEvent dblClick(QEvent::MouseButtonDblClick,{0,0},Qt::LeftButton,Qt::LeftButton,Qt::NoModifier);
-      std::thread thd([]()
-                      {
-                        sleep(1);
-                        // find any top level dialog box, and send it a return event
-                        for (auto i: QApplication::topLevelWidgets())
-                          if (auto w=dynamic_cast<QDialog*>(i))
-                            QApplication::postEvent(w,new QKeyEvent(QKeyEvent::KeyPress,Qt::Key_Return,Qt::NoModifier));
-                      });
+      CloseDialog cd;
       CHECK(arrow.eventFilter(nullptr,&dblClick));
-      thd.join(); // warning potential deadlock if the test fails
     }
 
   

@@ -6,7 +6,7 @@
 using namespace std;
 
 #include <UnitTest++/UnitTest++.h>
-#include "qstringStream.h"
+#include "utils.h"
 
 SUITE(ApplicationWindow)
 {
