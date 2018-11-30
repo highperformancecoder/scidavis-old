@@ -94,13 +94,13 @@ assert pen.style()==Qt.CustomDashLine
 
 brush=curve.brush()
 brush.setColor(Qt.red)
-brush.setMatrix(QtGui.QMatrix(0,1,0,1,10,10))
+brush.setTransform(QtGui.QTransform(0,1,0,1,10,10))
 brush.setStyle(Qt.BDiagPattern)
 curve.setBrush(brush)
 assert curve.brush()==brush
 brush=curve.brush()
 assert brush.color()==Qt.red
-assert brush.matrix()==QtGui.QMatrix(0,1,0,1,10,10)
+assert brush.transform()==QtGui.QTransform(0,1,0,1,10,10)
 assert brush.style()==Qt.BDiagPattern
 
 curve.setOutlineColor(Qt.blue)
