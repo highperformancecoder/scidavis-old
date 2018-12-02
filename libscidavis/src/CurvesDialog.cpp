@@ -212,10 +212,15 @@ void CurvesDialog::showPlotAssociations()
 		curve = 0;
 
     ApplicationWindow *app = (ApplicationWindow *)this->parent();
+#if QT_VERSION >= 0x050000
     close();
+#endif
 
     if (app)
         app->showPlotAssociations(curve);
+#if QT_VERSION < 0x050000
+    close();
+#endif
 }
 
 void CurvesDialog::showFunctionDialog()
