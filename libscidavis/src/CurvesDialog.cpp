@@ -193,15 +193,15 @@ void CurvesDialog::showCurveBtn(int)
 
 void CurvesDialog::showCurveRangeDialog()
 {
-	int curve = contents->currentRow();
-	if (curve < 0)
-		curve = 0;
+  int curve = contents->currentRow();
+  if (curve < 0)
+    curve = 0;
 
-    ApplicationWindow *app = (ApplicationWindow *)this->parent();
-    if (app)
+  ApplicationWindow *app = dynamic_cast<ApplicationWindow*>(this->parent());
+  if (app)
     {
-		app->showCurveRangeDialog(d_graph, curve);
-		updateCurveRange();
+      app->showCurveRangeDialog(d_graph, curve);
+      updateCurveRange();
     }
 }
 
