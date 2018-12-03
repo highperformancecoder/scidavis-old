@@ -1,3 +1,4 @@
+import math
 graph=newGraph()
 layer1=graph.activeLayer()
 layer2=graph.addLayer()
