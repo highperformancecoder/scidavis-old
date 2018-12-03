@@ -1,0 +1,8 @@
+mat=app.importImage("blueGroper.jpg")
+g1=plotContour(mat)
+g1.export("groperContour.png")
+g2=plotColorMap(mat)
+g2.export("groperCMap.png")
+g3=plotGrayScale(mat)
+g3.export("groperGS.png")
+app.exit()
