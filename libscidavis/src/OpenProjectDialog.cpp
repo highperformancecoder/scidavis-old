@@ -29,6 +29,7 @@
 
 #include "OpenProjectDialog.h"
 #include "ApplicationWindow.h"
+#include <classdesc_epilogue.h>
 
 #include <QHBoxLayout>
 #include <QLabel>

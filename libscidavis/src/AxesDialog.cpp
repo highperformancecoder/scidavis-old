@@ -35,6 +35,7 @@
 #include "MyParser.h"
 #include "ColorButton.h"
 #include "TextFormatButtons.h"
+#include <classdesc_epilogue.h>
 
 #include <QColorDialog>
 #include <QCheckBox>

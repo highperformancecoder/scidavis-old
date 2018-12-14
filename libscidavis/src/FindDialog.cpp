@@ -29,6 +29,7 @@
 #include "FindDialog.h"
 #include "ApplicationWindow.h"
 #include "Folder.h"
+#include <classdesc_epilogue.h>
 
 #include <QPushButton>
 #include <QCheckBox>

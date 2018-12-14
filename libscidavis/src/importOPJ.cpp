@@ -33,6 +33,7 @@
 
 #include "future/core/datatypes/Double2StringFilter.h"
 #include "future/core/datatypes/DateTime2StringFilter.h"
+#include <classdesc_epilogue.h>
 
 #include <QRegExp>
 #include <QApplication>

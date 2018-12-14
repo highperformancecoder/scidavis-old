@@ -36,6 +36,7 @@
 #include "ColorButton.h"
 #include "Script.h"
 #include "core/column/Column.h"
+#include <classdesc_epilogue.h>
 
 #include <gsl/gsl_statistics.h>
 #include <gsl/gsl_blas.h>

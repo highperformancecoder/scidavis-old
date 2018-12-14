@@ -35,6 +35,7 @@
 #include "PythonScript.h"
 #include "PythonScripting.h"
 #include "ApplicationWindow.h"
+#include <classdesc_epilogue.h>
 
 #include <QObject>
 #include <QVariant>

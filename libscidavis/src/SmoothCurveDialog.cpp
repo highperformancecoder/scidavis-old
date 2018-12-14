@@ -31,6 +31,7 @@
 #include "MyParser.h"
 #include "ColorButton.h"
 #include "SmoothFilter.h"
+#include <classdesc_epilogue.h>
 
 #include <QGroupBox>
 #include <QSpinBox>

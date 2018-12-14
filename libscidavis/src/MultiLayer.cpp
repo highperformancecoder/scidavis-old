@@ -54,6 +54,7 @@
 #include "Plot.h"
 #include "Legend.h"
 #include "SelectionMoveResizer.h"
+#include <classdesc_epilogue.h>
 
 #include <gsl/gsl_vector.h>
 

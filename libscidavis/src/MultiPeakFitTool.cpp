@@ -32,6 +32,8 @@
 #include "ApplicationWindow.h"
 #include "DataPickerTool.h"
 #include "Plot.h"
+#include <classdesc_epilogue.h>
+
 #include <qwt_plot_curve.h>
 #include <QApplication>
 

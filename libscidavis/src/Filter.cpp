@@ -33,6 +33,7 @@
 #include "FunctionCurve.h"
 #include "PlotCurve.h"
 #include "core/column/Column.h"
+#include <classdesc_epilogue.h>
 
 #include <QApplication>
 #include <QMessageBox>

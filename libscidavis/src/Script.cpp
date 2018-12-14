@@ -28,6 +28,7 @@
  ***************************************************************************/
 #include "ScriptingEnv.h"
 #include "Script.h"
+#include <classdesc_epilogue.h>
 
 #include <string.h>
 

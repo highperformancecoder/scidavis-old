@@ -33,6 +33,7 @@
 #include "Graph.h"
 #include "Plot.h"
 #include "ApplicationWindow.h"
+#include <classdesc_epilogue.h>
 
 #include <qwt_plot.h>
 

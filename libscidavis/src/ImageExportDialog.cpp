@@ -31,6 +31,7 @@
  ***************************************************************************/
 #include "ImageExportDialog.h"
 #include "ApplicationWindow.h"
+#include <classdesc_epilogue.h>
 
 #include <QStackedWidget>
 #include <QImageWriter>

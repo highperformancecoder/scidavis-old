@@ -110,6 +110,7 @@
 #include "TranslateCurveTool.h"
 #include "MultiPeakFitTool.h"
 #include "LineProfileTool.h"
+#include <classdesc_epilogue.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11823,12 +11824,12 @@ void ApplicationWindow::fitMultiPeak(int profile)
 	}
 }
 
-#ifdef DOWNLOAD_LINKS
 void ApplicationWindow::downloadManual()
 {
+#ifdef DOWNLOAD_LINKS
 	QDesktopServices::openUrl(QUrl(MANUAL_URI));
-}
 #endif // defined DOWNLOAD_LINKS
+}
 
 void ApplicationWindow::showHomePage()
 {
@@ -13401,10 +13402,10 @@ void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)
 	folders.blockSignals(false);
 }
 
-#ifdef SEARCH_FOR_UPDATES
 
 void ApplicationWindow::searchForUpdates()
 {
+#ifdef SEARCH_FOR_UPDATES
     int choice = QMessageBox::question(this, versionString(),
 					tr("SciDAVis will now try to determine whether a new version of SciDAVis is available. Please modify your firewall settings in order to allow SciDAVis to connect to the internet.") + "\n" +
 					tr("Do you wish to continue?"),
@@ -13415,8 +13416,10 @@ void ApplicationWindow::searchForUpdates()
         // http.get(QNetworkRequest(QUrl("http://scidavis.sourceforge.net/current_version.txt")));
         http.get(QNetworkRequest(QUrl("https://raw.githubusercontent.com/highperformancecoder/scidavis/master/libscidavis/src/version.cpp")));
     }
+#endif
 }
 
+#ifdef SEARCH_FOR_UPDATES
 void ApplicationWindow::receivedVersionFile(QNetworkReply* netreply)
 {
 	if (netreply->error() != QNetworkReply::NoError)
@@ -13470,8 +13473,10 @@ void ApplicationWindow::receivedVersionFile(QNetworkReply* netreply)
 		autoSearchUpdatesRequest = false;
 	}
 }
-
+#else
+void ApplicationWindow::receivedVersionFile(QNetworkReply*){}
 #endif // defined SEARCH_FOR_UPDATES
+
 
 /*!
   Turns 3D animation on or off

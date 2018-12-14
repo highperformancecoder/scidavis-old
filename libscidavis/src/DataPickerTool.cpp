@@ -36,6 +36,7 @@
 #include "QwtErrorPlotCurve.h"
 #include "ApplicationWindow.h"
 #include "core/column/Column.h"
+#include <classdesc_epilogue.h>
 
 #include <qwt_symbol.h>
 #include <qwt_plot_picker.h>

@@ -34,10 +34,8 @@
 #include <QMainWindow>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
-#ifdef SEARCH_FOR_UPDATES
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#endif
 #include <QFile>
 #include <QSplitter>
 #include <QDesktopServices>
@@ -733,12 +731,10 @@ public slots:
 
   void updateRecentProjectsList();
 
-#ifdef SEARCH_FOR_UPDATES
   //!  connected to the finished(QNetworkReply*) signal of the http object
   void receivedVersionFile(QNetworkReply*);
   //!  called when the user presses the actionCheckUpdates
   void searchForUpdates();
-#endif
 
   //! Open SciDAVis homepage in external browser
   void showHomePage();
@@ -746,10 +742,8 @@ public slots:
   void showForums();
   //! Open bug tracking system at SF.net in external browser
   void showBugTracker();
-#ifdef DOWNLOAD_LINKS
-  //! Show download page in external browser
+ //! Show download page in external browser
   void downloadManual();
-#endif
 
   void parseCommandLineArguments(const QStringList& args);
   void createLanguagesList();
@@ -971,9 +965,7 @@ public:
   //! Path to the folder where the last template file was opened/saved
   QString templatesDir;
   bool smooth3DMesh, autoScaleFonts, autoResizeLayers;
-#ifdef SEARCH_FOR_UPDATES
   bool autoSearchUpdates;
-#endif
   bool confirmCloseTable, confirmCloseMatrix, confirmClosePlot2D, confirmClosePlot3D;
   bool confirmCloseFolder, confirmCloseNotes;
   bool canvasFrameOn, titleOn, autoSave, drawBackbones, allAxesOn, autoscale2DPlots, antialiasing2DPlots;
@@ -1021,10 +1013,8 @@ public:
   int plotMenuID, newMenuID, recentMenuID, setAsMenuID, fillMenuID; 
   int translateMenuID, smoothMenuID, filterMenuID, fitExpMenuID, multiPeakMenuID;
 
-#ifdef SEARCH_FOR_UPDATES
   //! Equals true if an automatical search for updates was performed on start-up otherwise is set to false;
   bool autoSearchUpdatesRequest;
-#endif
 
   //! The scripting language to use for new projects.
   QString defaultScriptingLang;
@@ -1055,12 +1045,10 @@ private:
     
   QString helpFilePath;
 
-#ifdef SEARCH_FOR_UPDATES
   //! Used when checking for new versions
   QNetworkAccessManager http;
   //! Used when checking for new versions
   QByteArray version_buffer;
-#endif
 
   Graph *lastCopiedLayer;
   QSplitter *explorerSplitter;
@@ -1082,9 +1070,7 @@ private:
   QAction *locktoolbar;
   QAction *actionShowExplorer, *actionShowLog, *actionAddLayer, *actionShowLayerDialog, *actionAutomaticLayout;
   QAction *actionShowHistory;
-#ifdef SCRIPTING_CONSOLE
   QAction *actionShowConsole;
-#endif
 
   QAction *actionExportGraph, *actionExportAllGraphs, *actionPrint, *actionPrintAllPlots, *actionShowExportASCIIDialog;
   QAction *actionExportPDF;
@@ -1102,9 +1088,7 @@ private:
   QAction *actionShowAxisDialog, *actionShowTitleDialog;
   QAction *actionAbout;
   QAction *actionShowHelp;
-#ifdef DYNAMIC_MANUAL_PATH
   QAction *actionChooseHelpFolder;
-#endif
   QAction *actionRename, *actionCloseWindow, *actionConvertTable;
   QAction *actionAddColToTable, *actionDeleteLayer, *actionInterpolate;
   QAction *actionResizeActiveWindow, *actionHideActiveWindow;
@@ -1122,13 +1106,9 @@ private:
   QAction *actionConvolute, *actionDeconvolute, *actionCorrelate, *actionAutoCorrelate;
   QAction *actionTranslateHor, *actionTranslateVert;
   QAction *actionBoxPlot, *actionMultiPeakGauss, *actionMultiPeakLorentz;
-#ifdef SEARCH_FOR_UPDATES
   QAction *actionCheckUpdates;
-#endif
   QAction *actionHomePage;
-#ifdef DOWNLOAD_LINKS
   QAction *actionDownloadManual;
-#endif
   QAction *actionHelpForums;
   QAction *actionHelpBugReports;
   QAction *actionShowPlotDialog, *actionShowScaleDialog, *actionOpenTemplate, *actionSaveTemplate;

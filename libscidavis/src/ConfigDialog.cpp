@@ -32,6 +32,7 @@
 #include "Graph.h"
 #include "Matrix.h"
 #include "ColorButton.h"
+#include <classdesc_epilogue.h>
 
 #include <QLocale>
 #include <QPushButton>

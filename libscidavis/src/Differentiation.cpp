@@ -30,6 +30,7 @@
 #include "MultiLayer.h"
 #include "Legend.h"
 #include "core/column/Column.h"
+#include <classdesc_epilogue.h>
 
 #include <QLocale>
 

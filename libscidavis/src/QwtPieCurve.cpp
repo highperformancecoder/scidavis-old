@@ -30,6 +30,7 @@
 #include "ColorButton.h"
 #include "Table.h"
 #include "core/column/Column.h"
+#include <classdesc_epilogue.h>
 
 #include <QPaintDevice>
 #include <QPainter>

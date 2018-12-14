@@ -40,6 +40,7 @@
 #include "ArrowMarker.h"
 #include "ImageMarker.h"
 #include "PlotEnrichement.h"
+#include <classdesc_epilogue.h>
 
 SelectionMoveResizer::SelectionMoveResizer(Legend *target)
 	: QWidget(target->plot()->canvas())

@@ -29,6 +29,7 @@
 #include "NonLinearFit.h"
 #include "MyParser.h"
 #include "fit_gsl.h"
+#include <classdesc_epilogue.h>
 
 #include <QMessageBox>
 using namespace std;

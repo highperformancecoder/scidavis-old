@@ -31,6 +31,7 @@
  ***************************************************************************/
 #include "ScriptEdit.h"
 #include "Note.h"
+#include <classdesc_epilogue.h>
 
 #include <QAction>
 #include <QMenu>

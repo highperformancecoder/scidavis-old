@@ -43,6 +43,7 @@
 #include "QwtPieCurve.h"
 #include "ColorMapEditor.h"
 #include "core/column/Column.h"
+#include <classdesc_epilogue.h>
 
 #include <QTreeWidget>
 #include <QLineEdit>

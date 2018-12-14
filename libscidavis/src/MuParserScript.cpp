@@ -36,6 +36,8 @@
 #include "Table.h"
 #include "Matrix.h"
 #include "Folder.h"
+#include <classdesc_epilogue.h>
+
 #include <math.h>
 #include <QtCore/QByteArray>
 #include <QtCore/QRegExp>

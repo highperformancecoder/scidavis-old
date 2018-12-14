@@ -31,6 +31,7 @@
 #include "MyParser.h"
 #include "ColorButton.h"
 #include "Interpolation.h"
+#include <classdesc_epilogue.h>
 
 #include <QGroupBox>
 #include <QSpinBox>

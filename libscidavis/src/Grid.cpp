@@ -30,6 +30,7 @@
 #include "Graph.h"
 #include "Grid.h"
 #include "ColorButton.h"
+#include <classdesc_epilogue.h>
 
 #include <qwt_plot_canvas.h>
 #include <qwt_painter.h>

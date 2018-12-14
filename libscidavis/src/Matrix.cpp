@@ -31,6 +31,7 @@
 #include "Matrix.h"
 #include "future/matrix/MatrixView.h"
 #include "ScriptEdit.h"
+#include <classdesc_epilogue.h>
 
 #include <QtGlobal>
 #include <QTextStream>

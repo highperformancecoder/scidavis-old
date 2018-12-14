@@ -31,6 +31,7 @@
 #include "MyParser.h"
 #include "ColorButton.h"
 #include "FFTFilter.h"
+#include <classdesc_epilogue.h>
 
 #include <QGroupBox>
 #include <QCheckBox>

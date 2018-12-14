@@ -30,6 +30,7 @@
 #include "DataPointPicker.h"
 #include "Graph.h"
 #include "DataPickerTool.h"
+#include <classdesc_epilogue.h>
 
 /**
  * \class DataPointPicker

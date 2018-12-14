@@ -32,6 +32,7 @@
 #include "ImageMarker.h"
 #include "Legend.h"
 #include "ArrowMarker.h"
+#include <classdesc_epilogue.h>
 
 #include <QVector>
 #include <QMouseEvent>

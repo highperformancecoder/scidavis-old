@@ -39,6 +39,7 @@
 #include "SigmoidalFit.h"
 #include "Matrix.h"
 #include <muParserError.h>
+#include <classdesc_epilogue.h>
 
 #include <QListWidget>
 #include <QTableWidget>

@@ -34,6 +34,7 @@
 #include "table/TableDoubleHeaderView.h"
 #include "core/column/Column.h"
 #include "core/datatypes/Double2StringFilter.h"
+#include <classdesc_epilogue.h>
 
 #include <QList>
 #include <QMenu>

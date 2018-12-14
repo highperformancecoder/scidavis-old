@@ -34,6 +34,7 @@
 #include "MuParserScripting.h"
 #include "Table.h"
 #include "Matrix.h"
+#include <classdesc_epilogue.h>
 
 #include <qstringlist.h>
 

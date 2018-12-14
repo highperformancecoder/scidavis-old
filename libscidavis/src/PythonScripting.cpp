@@ -38,9 +38,6 @@
 
 #include <iostream>
 
-#define str(x) xstr(x)
-#define xstr(x) #x
-
 #if PY_VERSION_HEX < 0x020400A1
 typedef struct _traceback {
 	PyObject_HEAD
@@ -54,6 +51,9 @@ typedef struct _traceback {
 #include "PythonScript.h"
 #include "PythonScripting.h"
 #include "ApplicationWindow.h"
+#include "ApplicationWindow.cd"
+#include "Script.h"
+#include <classdesc_epilogue.h>
 
 #include <QObject>
 #include <QStringList>
@@ -62,7 +62,7 @@ typedef struct _traceback {
 #include <QCoreApplication>
 
 // includes sip.h, which undefines Qt's "slots" macro since SIP 4.6
-#include "sipAPIscidavis.h"
+//#include "sipAPIscidavis.h"
 extern "C" 
 {
 #if PY_MAJOR_VERSION < 3
@@ -84,6 +84,12 @@ extern "C"
 }
 
 const char* PythonScripting::langName = "Python";
+
+BOOST_PYTHON_MODULE(scidavis)
+{
+  classdesc::python_t p;
+  classdesc::python<ApplicationWindow>(p,"");
+}
 
 QString PythonScripting::toString(PyObject *object, bool decref)
 {
@@ -387,25 +393,25 @@ bool PythonScripting::isRunning() const
 
 bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
 {
-	if(!val) return false;
-	PyObject *pyobj=NULL;
-
-	PyGILState_STATE state = PyGILState_Ensure();
-
-        //sipWrapperType * klass = sipFindClass(val->className());
-        const sipTypeDef* klass=sipFindType(val->metaObject()->className());
-	if (!klass) return false;
-        //pyobj = sipConvertFromInstance(val, klass, NULL);
-	pyobj = sipConvertFromType(val, klass, NULL);
-	if (!pyobj) return false;
-
-	if (dict)
-		PyDict_SetItemString(dict,name,pyobj);
-	else
-		PyDict_SetItemString(globals,name,pyobj);
-	Py_DECREF(pyobj);
-
-	PyGILState_Release(state);
+//	if(!val) return false;
+//	PyObject *pyobj=NULL;
+//
+//	PyGILState_STATE state = PyGILState_Ensure();
+//
+//        //sipWrapperType * klass = sipFindClass(val->className());
+//        const sipTypeDef* klass=sipFindType(val->metaObject()->className());
+//	if (!klass) return false;
+//        //pyobj = sipConvertFromInstance(val, klass, NULL);
+//	pyobj = sipConvertFromType(val, klass, NULL);
+//	if (!pyobj) return false;
+//
+//	if (dict)
+//		PyDict_SetItemString(dict,name,pyobj);
+//	else
+//		PyDict_SetItemString(globals,name,pyobj);
+//	Py_DECREF(pyobj);
+//
+//	PyGILState_Release(state);
 	return true;
 }
 

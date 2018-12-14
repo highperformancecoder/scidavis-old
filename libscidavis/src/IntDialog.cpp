@@ -33,6 +33,7 @@
 #include "Integration.h"
 #include "FunctionCurve.h"
 #include "Differentiation.h"
+#include <classdesc_epilogue.h>
 
 #include <QGroupBox>
 #include <QSpinBox>

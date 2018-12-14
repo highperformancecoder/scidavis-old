@@ -28,6 +28,7 @@
 
 #include "Spectrogram.h"
 #include "ColorButton.h"
+#include <classdesc_epilogue.h>
 #include <math.h>
 #include <qpen.h>
 #include <qmessagebox.h>

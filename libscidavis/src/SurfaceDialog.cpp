@@ -29,6 +29,7 @@
 #include "SurfaceDialog.h"
 #include "MyParser.h"
 #include "ApplicationWindow.h"
+#include <classdesc_epilogue.h>
 
 #include <QMessageBox>
 #include <QLayout>

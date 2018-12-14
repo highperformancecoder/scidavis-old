@@ -30,6 +30,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "Folder.h"
+#include <classdesc_epilogue.h>
 
 #include <qobject.h>
 #include <qdatetime.h>

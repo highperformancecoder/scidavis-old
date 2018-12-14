@@ -34,6 +34,7 @@
 #include "Table.h"
 #include "Plot.h"
 #include "FFT.h"
+#include <classdesc_epilogue.h>
 
 #include <QRadioButton>
 #include <QGroupBox>

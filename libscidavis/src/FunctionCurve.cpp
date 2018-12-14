@@ -27,6 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "FunctionCurve.h"
+#include <classdesc_epilogue.h>
 
 #include <QMessageBox>
 

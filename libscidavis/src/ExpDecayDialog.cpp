@@ -32,6 +32,7 @@
 #include "ApplicationWindow.h"
 #include "Fit.h"
 #include "ExponentialFit.h"
+#include <classdesc_epilogue.h>
 
 #include <QMessageBox>
 #include <QLayout>

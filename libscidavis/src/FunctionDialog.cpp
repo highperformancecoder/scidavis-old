@@ -30,6 +30,7 @@
 #include "MyParser.h"
 #include "ApplicationWindow.h"
 #include "FunctionCurve.h"
+#include <classdesc_epilogue.h>
 
 #include <QTextEdit>
 #include <QLineEdit>

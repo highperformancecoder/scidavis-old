@@ -29,6 +29,7 @@
 #include "RenameWindowDialog.h"
 #include "ApplicationWindow.h"
 #include "Table.h"
+#include <classdesc_epilogue.h>
 
 #include <QPushButton>
 #include <QGroupBox>

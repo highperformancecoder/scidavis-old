@@ -32,6 +32,7 @@
 #include "ScaleDraw.h"
 #include "Spectrogram.h"
 #include "PlotCurve.h"
+#include <classdesc_epilogue.h>
 
 #include <qwt_plot.h>
 #include <qwt_painter.h>

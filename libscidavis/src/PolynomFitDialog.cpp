@@ -31,6 +31,7 @@
 #include "ColorButton.h"
 #include "ApplicationWindow.h"
 #include "PolynomialFit.h"
+#include <classdesc_epilogue.h>
 
 #include <QSpinBox>
 #include <QCheckBox>

@@ -37,6 +37,7 @@
 #include "core/datatypes/DateTime2StringFilter.h"
 #include "table/AsciiTableImportFilter.h"
 #include "ScriptEdit.h"
+#include <classdesc_epilogue.h>
 
 #include <QMessageBox>
 #include <QDateTime>

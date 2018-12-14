@@ -33,6 +33,7 @@
 #include "ImageMarker.h"
 #include "ArrowMarker.h"
 #include "Graph.h"
+#include <classdesc_epilogue.h>
 
 #include <QPoint>
 #include <QImage>

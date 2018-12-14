@@ -29,6 +29,7 @@
 #include "Integration.h"
 #include "MultiLayer.h"
 #include "Legend.h"
+#include <classdesc_epilogue.h>
 
 #include <QMessageBox>
 #include <QDateTime>

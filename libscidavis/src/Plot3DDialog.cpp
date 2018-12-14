@@ -30,6 +30,7 @@
 #include "TextDialog.h"
 #include "MyParser.h"
 #include "SymbolDialog.h"
+#include <classdesc_epilogue.h>
 
 #include <QListWidget>
 #include <QLineEdit>

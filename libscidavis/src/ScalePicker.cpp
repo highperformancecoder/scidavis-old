@@ -30,6 +30,7 @@
 #include "ScaleDraw.h"
 #include "Plot.h"
 #include "Graph.h"
+#include <classdesc_epilogue.h>
 
 #include <qwt_plot.h>
 #include <qwt_scale_widget.h>

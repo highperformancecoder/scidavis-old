@@ -30,6 +30,7 @@
 #include "ScaleDraw.h"
 #include "core/column/Column.h"
 #include "core/datatypes/DateTime2StringFilter.h"
+#include <classdesc_epilogue.h>
 #include <QDateTime>
 #include <QMessageBox>
 #include <qwt_symbol.h>

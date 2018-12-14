@@ -34,6 +34,7 @@
 #include <QMessageBox>
 #include <QLocale>
 #include "core/column/Column.h"
+#include <classdesc_epilogue.h>
 
 #include <gsl/gsl_fft_halfcomplex.h>
 #include <vector>

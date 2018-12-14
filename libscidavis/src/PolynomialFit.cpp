@@ -27,6 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "PolynomialFit.h"
+#include <classdesc_epilogue.h>
 
 #include <QMessageBox>
 #include <QLocale>

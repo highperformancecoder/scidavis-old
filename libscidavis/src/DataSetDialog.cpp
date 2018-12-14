@@ -29,6 +29,7 @@
 #include "DataSetDialog.h"
 #include "ApplicationWindow.h"
 #include "Graph.h"
+#include <classdesc_epilogue.h>
 
 #include <QPushButton>
 #include <QCheckBox>

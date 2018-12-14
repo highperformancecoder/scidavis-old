@@ -27,6 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "Interpolation.h"
+#include <classdesc_epilogue.h>
 
 #include <QMessageBox>
 

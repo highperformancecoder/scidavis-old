@@ -30,6 +30,7 @@
 #include "PlotCurve.h"
 #include "Graph.h"
 #include "Table.h"
+#include <classdesc_epilogue.h>
 
 #include <QGroupBox>
 #include <QMessageBox>

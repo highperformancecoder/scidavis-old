@@ -32,6 +32,7 @@
 #include "PlotCurve.h"
 #include "QwtErrorPlotCurve.h"
 #include "VectorCurve.h"
+#include <classdesc_epilogue.h>
 
 #include <QLabel>
 #include <QListWidget>

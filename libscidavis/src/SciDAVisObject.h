@@ -1,5 +1,7 @@
 #ifndef SCIDAVISOBJECT_H
 #define SCIDAVISOBJECT_H
+#include <python_base.h>
+
 /**
    Generic base class for Qt based classes in SciDAVis
 **/
@@ -24,5 +26,12 @@ public:
     return *child;
   }
 };
+
+namespace classdesc_access
+{
+  template <class B>
+  struct access_python<SciDAVisObject<B>>:
+    public classdesc::NullDescriptor<classdesc::python_t> {};
+}
 
 #endif

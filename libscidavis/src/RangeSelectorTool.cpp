@@ -32,6 +32,7 @@
 #include "Graph.h"
 #include "Plot.h"
 #include "PlotCurve.h"
+#include <classdesc_epilogue.h>
 
 #include <qwt_symbol.h>
 #include <QPoint>

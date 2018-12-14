@@ -28,6 +28,8 @@
  ***************************************************************************/
 #include "ExponentialFit.h"
 #include "fit_gsl.h"
+#include <classdesc_epilogue.h>
+
 using namespace std;
 #include <assert.h>
 

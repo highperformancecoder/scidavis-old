@@ -29,6 +29,7 @@
 #include "Legend.h"
 #include "QwtPieCurve.h"
 #include "VectorCurve.h"
+#include <classdesc_epilogue.h>
 
 #include <QPainter>
 #include <QPolygon>

@@ -39,6 +39,7 @@
 #include <QLocale>
 #include <qwt_plot_curve.h>
 #include "core/column/Column.h"
+#include <classdesc_epilogue.h>
 
 #include <stdexcept>
 using namespace std;

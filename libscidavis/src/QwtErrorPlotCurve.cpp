@@ -29,6 +29,7 @@
 #include "QwtErrorPlotCurve.h"
 #include "QwtBarCurve.h"
 #include "core/column/Column.h"
+#include <classdesc_epilogue.h>
 
 #include <qwt_painter.h>
 #include <qwt_symbol.h>

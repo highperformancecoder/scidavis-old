@@ -29,6 +29,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "SmoothFilter.h"
+#include <classdesc_epilogue.h>
 
 #include <QApplication>
 #include <QMessageBox>

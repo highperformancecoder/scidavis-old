@@ -27,6 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "PluginFit.h"
+#include <classdesc_epilogue.h>
 
 #include <QLibrary>
 #include <QMessageBox>

@@ -29,6 +29,7 @@
  ***************************************************************************/
 #include "ScriptingLangDialog.h"
 #include "ApplicationWindow.h"
+#include <classdesc_epilogue.h>
 
 #include <QListWidget>
 #include <QPushButton>
