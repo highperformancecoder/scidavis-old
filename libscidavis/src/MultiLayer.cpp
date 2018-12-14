@@ -108,6 +108,10 @@ MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name
 
 	layerButtonsBox = new QHBoxLayout();
 	QHBoxLayout *hbox = new QHBoxLayout();
+	// add a zero width widget to reserve space for the layer's buttons
+	QWidget* strut = new QWidget();
+	strut->setFixedSize(0,LayerButton::btnSize());
+	hbox->addWidget(strut);
 	hbox->addLayout(layerButtonsBox);
 	hbox->addStretch();
 
@@ -175,11 +179,6 @@ Graph* MultiLayer::addLayer(int x, int y, int width, int height)
 	g->show();
 	connectLayer(g);
 	return g;
-}
-
-void MultiLayer::adjustSize()
-{
-    canvas->resize(size().width(), size().height() - LayerButton::btnSize());
 }
 
 void MultiLayer::activateGraph(LayerButton* button)

@@ -131,7 +131,6 @@ public slots:
 
 	QSize arrangeLayers(bool userSize);
 	void arrangeLayers(bool fit, bool userSize);
-    void adjustSize();
 
 	int getRows(){return rows;};
 	void setRows(int r);

@@ -2209,7 +2209,6 @@ MultiLayer* ApplicationWindow::newGraph(const QString& caption)
         g->setAutoscaleFonts(false);
         g->setIgnoreResizeEvents(false);
         ml->arrangeLayers(false, false);
-        ml->adjustSize();
         g->setAutoscaleFonts(autoScaleFonts);//restore user defined fonts behaviour
         g->setIgnoreResizeEvents(!autoResizeLayers);
         customMenu(ml);
@@ -2311,7 +2310,6 @@ MultiLayer* ApplicationWindow::multilayerPlot(int c, int r, int style)
 	g->setRows(r);
 	g->setCols(c);
 	g->arrangeLayers(false, false);
-    g->adjustSize();
     QWidgetList lst = g->graphPtrs();
 	foreach(QWidget *widget, lst)
     {
@@ -2479,8 +2477,6 @@ void ApplicationWindow::setPreferences(Graph* g)
 	g->setArrowDefaults(defaultArrowLineWidth, defaultArrowColor, defaultArrowLineStyle,
 			defaultArrowHeadLength, defaultArrowHeadAngle, defaultArrowHeadFill);
 	g->initTitle(titleOn, plotTitleFont);
-	if (autoScaleFonts)
-		g->scaleFonts(1.055555);
 	g->drawCanvasFrame(canvasFrameOn, canvasFrameWidth);
 	g->plotWidget()->setMargin(defaultPlotMargin);
 	g->enableAutoscaling(autoscale2DPlots);
