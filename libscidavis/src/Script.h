@@ -109,7 +109,7 @@ class Script : public QObject
   enum compileStatus { notCompiled, isCompiled, compileErr };
     compileStatus compiled;
     bool EmitErrors;
-
+ 
     void emit_error(const QString & message, int lineNumber)
       { if(EmitErrors) emit error(message, Name, lineNumber); }
 };
@@ -156,6 +156,5 @@ class scripted
     ScriptingEnv *scriptEnv;
 };
 
-#include "Script.cd"
 #endif
 

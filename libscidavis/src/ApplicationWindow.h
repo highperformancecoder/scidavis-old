@@ -84,6 +84,9 @@ class CurveRangeDialog;
 class Project;
 class AbstractAspect;
 
+using std::unique_ptr;
+using std::shared_ptr;
+
 #ifndef TS_PATH
 #define TS_PATH (qApp->applicationDirPath() + "/translations")
 #endif
@@ -152,7 +155,31 @@ public:
   QString generateUniqueName(const QString& name, bool increment = true);
 
   bool batchMode() const {return m_batch;} ///< running a python batch script
-                                                                        
+
+private slots:
+  /// args are any argument to be passed to fn if a script
+  ApplicationWindow* open(const QString& fn, const QStringList& args=QStringList());
+  ApplicationWindow* importOPJ(const QString& filename);
+  ApplicationWindow* openProject(const QString& fn);
+  //! Returns temporary file ready for reading uncompressed content
+  shared_ptr<QFile> openCompressedFile(const QString& fn);
+  /**
+   * \brief Create a new project from a script file.
+   *
+   * \param fn is read as a Python script file and loaded in the command script window.
+   * \param execute specifies if the script should be executed after opening.
+   */
+  /// args are any argument to be passed to the script
+  ApplicationWindow* loadScript(const QString& fn, const QStringList& args=QStringList(), bool execute = false);
+  /**
+   * \brief Create a new project from a data file.
+   *
+   * \param fn is read as a data file with the default column separator (as set by the user)
+   * and inserted as a table into a new, empty project.
+   * This table is then plotted with the Graph::LineSymbols style.
+   */
+  ApplicationWindow* plotFile(const QString& fn);
+
 public slots:
   //! Copy the status bar text to the clipboard
   void copyStatusBarText();
@@ -163,37 +190,10 @@ public slots:
   //! \name Projects and Project Files
   //@{
   void open();
-  /// args are any argument to be passed to fn if a script
-  ApplicationWindow* open(const QString& fn, const QStringList& args=QStringList());
-  //! Returns temporary file ready for reading uncompressed content
-  /**
-   * Close and delete after you're done with it.
-   */
-  QFile * openCompressedFile(const QString& fn);
-  ApplicationWindow* openProject(const QString& fn);
   ///* load project file \a into this
   ///* @return true if project load successful
   bool loadProject(const QString& fn);
-  ApplicationWindow* importOPJ(const QString& filename);
   void showHistory();
-
-  /**
-   * \brief Create a new project from a data file.
-   *
-   * \param fn is read as a data file with the default column separator (as set by the user)
-   * and inserted as a table into a new, empty project.
-   * This table is then plotted with the Graph::LineSymbols style.
-   */
-  ApplicationWindow * plotFile(const QString& fn);
-
-  /**
-   * \brief Create a new project from a script file.
-   *
-   * \param fn is read as a Python script file and loaded in the command script window.
-   * \param execute specifies if the script should be executed after opening.
-   */
-  /// args are any argument to be passed to the script
-  ApplicationWindow * loadScript(const QString& fn, const QStringList& args=QStringList(), bool execute = false);
 
   QList<MyWidget *> windowsList();
   void updateWindowLists(MyWidget *w);
@@ -630,27 +630,41 @@ public slots:
   void showLayerButtonContextMenu();
   void showWindowContextMenu();
   void showWindowTitleBarMenu();
+
+protected:
   QMenu* showCurveContextMenuImpl(int);
+  /// @return the menu item, which is owned by this. May be null
+  QMenu* showWindowPopupMenuImpl(QTreeWidgetItem *it);
+  //! Connected to the context menu signal from lv; it's called when there are several items selected in the list
+  QMenu* showListViewSelectionMenuImpl();
+  //! Connected to the context menu signal from lv; it's called when there are no items selected in the list
+  QMenu* showListViewPopupMenuImpl();
+  QMenu* showMarkerPopupMenuImpl();
+  //!  creates and opens the context menu of a folder list view item
+  /**
+   * \param it list view item
+   * \param p mouse global position
+   * \param fromFolders: true means that the user clicked right mouse buttom on an item from QListView "folders"
+   *					   false means that the user clicked right mouse buttom on an item from QListView "lv"
+   */
+  QMenu* showFolderPopupMenuImpl(QTreeWidgetItem*, bool fromFolders);
+  //! Returns a to the current folder in the project
+  Folder* currentFolder(){return current_folder;};
+
+public:
   void showCurveContextMenu(int curveKey)
   {auto m=showCurveContextMenuImpl(curveKey); if (m) m->exec(QCursor::pos());}
   void showCurvePlotDialog();
   void showCurveWorksheet();
   void showCurveWorksheet(Graph *g, int curveIndex);
-  /// @return the menu item, which is owned by this. May be null
-  QMenu* showWindowPopupMenuImpl(QTreeWidgetItem *it);
   void showWindowPopupMenu(const QPoint &p);
 
-  //! Connected to the context menu signal from lv; it's called when there are several items selected in the list
-  QMenu* showListViewSelectionMenuImpl();
   void showListViewSelectionMenu(const QPoint &p)
   {showListViewSelectionMenuImpl()->exec(p);}
 
-  //! Connected to the context menu signal from lv; it's called when there are no items selected in the list
-  QMenu* showListViewPopupMenuImpl();
   void showListViewPopupMenu(const QPoint &p) {showListViewPopupMenuImpl()->exec(p);}
 
   void showMoreWindows();
-  QMenu* showMarkerPopupMenuImpl();
   void showMarkerPopupMenu()
   {auto m=showMarkerPopupMenuImpl(); if (m) m->exec(QCursor::pos());}
   void showPlotWizard();
@@ -772,8 +786,6 @@ public slots:
 
   //! \name Folders
   //@{
-  //! Returns a to the current folder in the project
-  Folder* currentFolder(){return current_folder;};
   //! Adds a new folder to the project
   void addFolder();
   //! Deletes the current folder
@@ -796,14 +808,6 @@ public slots:
   //! Changes the current folder when the user double-clicks on a folder item in the QListView "lv"
   void folderItemDoubleClicked(QTreeWidgetItem *it, int column);
 
-  //!  creates and opens the context menu of a folder list view item
-  /**
-   * \param it list view item
-   * \param p mouse global position
-   * \param fromFolders: true means that the user clicked right mouse buttom on an item from QListView "folders"
-   *					   false means that the user clicked right mouse buttom on an item from QListView "lv"
-   */
-  QMenu* showFolderPopupMenuImpl(QTreeWidgetItem*, bool fromFolders);
   //!  connected to the SIGNAL contextMenuRequested from the list views
   void showFolderPopupMenu(const QPoint &p, bool fromFolders=true);
 
@@ -852,8 +856,8 @@ public slots:
   //!  hides or shows windows in the current folder and changes the view windows policy
   void setShowWindowsPolicy(bool);
 
-  //!  returns a pointer to the root project folder
-  Folder* projectFolder();
+  //!  returns the root project folder
+  Folder& projectFolder();
 
   //!  used by the findDialog
   void find(const QString& s, bool windowNames, bool labels, bool folderNames,

@@ -53,6 +53,92 @@ typedef struct _traceback {
 #include "ApplicationWindow.h"
 #include "ApplicationWindow.cd"
 #include "Script.h"
+#include "Script.cd"
+#include "Folder.cd"
+
+namespace classdesc_access
+{
+//  template <class B>
+//  struct access_python<SciDAVisObject<B>>:
+//    public classdesc::NullDescriptor<classdesc::python_t> {};
+
+//  template <class T>
+//  struct access_python<T,typename classdesc::enable_if<classdesc::is_base_of<QObject,T>, void>::T>
+//    : public classdesc::NullDescriptor<classdesc::python_t> {};
+  
+//  template <>
+//  struct access_python<QLocale>:
+//    public classdesc::NullDescriptor<classdesc::python_t> {};
+//  
+//  template <>
+//  struct access_python<QDockWidget>:
+//    public classdesc::NullDescriptor<classdesc::python_t> {};
+//
+//  template <>
+//  struct access_python<QTextEdit>:
+//    public classdesc::NullDescriptor<classdesc::python_t> {};
+//
+  template <>
+  struct access_python<QString>:
+    public classdesc::NullDescriptor<classdesc::python_t> {};
+//  template <>
+//  struct access_python<QColor>:
+//    public classdesc::NullDescriptor<classdesc::python_t> {};
+  template <class T>
+  struct access_python<QList<T>>:
+    public classdesc::NullDescriptor<classdesc::python_t> {};
+//  template <>
+//  struct access_python<QMdiArea>:
+//    public classdesc::NullDescriptor<classdesc::python_t> {};
+  template <>
+  struct access_python<QStringList>:
+    public classdesc::NullDescriptor<classdesc::python_t> {};
+//  template <>
+//  struct access_python<QSize>:
+//    public classdesc::NullDescriptor<classdesc::python_t> {};
+//  template <>
+//  struct access_python<QFont>:
+//    public classdesc::NullDescriptor<classdesc::python_t> {};
+//  template <>
+//  struct access_python<QPoint>:
+//    public classdesc::NullDescriptor<classdesc::python_t> {};
+}
+
+namespace classdesc
+{
+  // Use Qt's MOC system for reflection on Qt objects
+  template <class T>
+  typename enable_if<is_base_of<QObject,T>, string>::T
+  mocTypeName() {return T::staticMetaObject.className();}
+
+#define DEF_TYPENAME(X)                         \
+  template <> struct tn<X>                      \
+  {                                             \
+    static string name() {return #X;}           \
+  };
+  
+  DEF_TYPENAME(QString);
+  DEF_TYPENAME(QLocale);
+  DEF_TYPENAME(QColor);
+  DEF_TYPENAME(QSize);
+  DEF_TYPENAME(QFont);
+  DEF_TYPENAME(QPoint);
+  DEF_TYPENAME(QStringList);
+
+  template <class T> struct tn<QList<T>>
+  {
+    static string name() {return "QList<"+typeName<T>()+">";}
+  };
+
+
+  template <class T> struct tn
+  {
+    static string name() {return mocTypeName<T>();}
+  };
+
+
+}
+
 #include <classdesc_epilogue.h>
 
 #include <QObject>

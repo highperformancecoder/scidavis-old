@@ -1,6 +1,5 @@
 #ifndef SCIDAVISOBJECT_H
 #define SCIDAVISOBJECT_H
-#include <python_base.h>
 
 /**
    Generic base class for Qt based classes in SciDAVis
@@ -17,6 +16,12 @@ class SciDAVisObject: public Base
 public:
   template <class... A>
   SciDAVisObject(A... args): Base(std::forward<A>(args)...) {}
+
+  // QObjects are not copiable, but because the copy constructor has
+  // probably hidden in a private section rather than deleted,
+  // explicitly delete this here so that the python descriptor can
+  // handle noncopiable objects correctly.
+  SciDAVisObject(const SciDAVisObject&)=delete;
   
   /// generic factory function to add a child object, to avoid bare pointers
   template <class T, class... A>
@@ -26,12 +31,5 @@ public:
     return *child;
   }
 };
-
-namespace classdesc_access
-{
-  template <class B>
-  struct access_python<SciDAVisObject<B>>:
-    public classdesc::NullDescriptor<classdesc::python_t> {};
-}
 
 #endif

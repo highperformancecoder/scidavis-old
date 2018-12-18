@@ -525,7 +525,7 @@ void CurvesDialog::showCurrentFolder(bool currentFolder)
 	available->clear();
 
     if (currentFolder){
-    	Folder *f = app->currentFolder();
+    	Folder *f = app->current_folder;
 		if (f){
 			QStringList columns;
 			foreach (QWidget *w, f->windowsList()){

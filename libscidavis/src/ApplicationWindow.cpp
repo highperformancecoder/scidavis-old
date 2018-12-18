@@ -3264,7 +3264,7 @@ void ApplicationWindow::setArrowDefaultSettings(const QPen& pen,
 	saveSettings();
 }
 
-ApplicationWindow * ApplicationWindow::plotFile(const QString& fn)
+ApplicationWindow* ApplicationWindow::plotFile(const QString& fn)
 {
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 	ApplicationWindow *app= new ApplicationWindow();
@@ -3276,7 +3276,7 @@ ApplicationWindow * ApplicationWindow::plotFile(const QString& fn)
 	t->setCaptionPolicy(MyWidget::Both);
 	app->multilayerPlot(t, t->YColumns(),Graph::LineSymbols);
 	QApplication::restoreOverrideCursor();
-	return 0;
+	return app;
 }
 
 void ApplicationWindow::importASCII()
@@ -3470,8 +3470,8 @@ void ApplicationWindow::open()
 
 					saveSettings();//the recent projects must be saved
 
-					ApplicationWindow *a = open (fn);
-					if (a){
+					ApplicationWindow* a = open (fn);
+                                        if (a){
 						a->workingDir = workingDir;
 						if (fn.endsWith(".sciprj",Qt::CaseInsensitive) || fn.endsWith(".sciprj~",Qt::CaseInsensitive) ||
 							fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
@@ -3479,7 +3479,7 @@ void ApplicationWindow::open()
                             fn.endsWith(".opj",Qt::CaseInsensitive) || fn.endsWith(".ogg", Qt::CaseInsensitive) ||
                             fn.endsWith(".org",Qt::CaseInsensitive))
                             this->close();
-					}
+                                        }
 				} else {
 					QMessageBox::critical(this,tr("File opening error"),
 							tr("The file <b>%1</b> is not a valid project file.").arg(fn));
@@ -3562,8 +3562,8 @@ void ApplicationWindow::openRecentProject()
 	if (!fn.isEmpty())
 	{
 		saveSettings();//the recent projects must be saved
-		ApplicationWindow * a = open (fn);
-		if (a && (fn.endsWith(".sciprj",Qt::CaseInsensitive) || fn.endsWith(".sciprj~",Qt::CaseInsensitive) ||
+		open (fn);
+		if ((fn.endsWith(".sciprj",Qt::CaseInsensitive) || fn.endsWith(".sciprj~",Qt::CaseInsensitive) ||
 			fn.endsWith(".sciprj.gz",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
 			fn.endsWith(".qti",Qt::CaseInsensitive) || fn.endsWith(".qti~",Qt::CaseInsensitive) ||
             fn.endsWith(".opj",Qt::CaseInsensitive) || fn.endsWith(".ogg", Qt::CaseInsensitive) ||
@@ -3572,9 +3572,8 @@ void ApplicationWindow::openRecentProject()
 	}
 }
 
-QFile * ApplicationWindow::openCompressedFile(const QString& fn)
+shared_ptr<QFile> ApplicationWindow::openCompressedFile(const QString& fn)
 {
-	QTemporaryFile * file;
 	char buf[16384];
 	int len, err;
 
@@ -3583,7 +3582,7 @@ QFile * ApplicationWindow::openCompressedFile(const QString& fn)
 		QMessageBox::critical(this, tr("File opening error"), tr("zlib can't open %1.").arg(fn));
 		return 0;
 	}
-	file = new QTemporaryFile();
+	shared_ptr<QTemporaryFile> file(new QTemporaryFile());
 	if (!file || !file->open()) {
 		gzclose(in);
 		QMessageBox::critical(this, tr("File opening error"), tr("Can't create temporary file for writing uncompressed copy of %1.").arg(fn));
@@ -3596,13 +3595,13 @@ QFile * ApplicationWindow::openCompressedFile(const QString& fn)
 		if (len < 0) {
 			QMessageBox::critical(this, tr("File opening error"), gzerror(in, &err));
 			gzclose(in);
-			file->close(); delete file;
+			file->close();
 			return 0;
 		}
 		if (file->write(buf, len) != len) {
 			QMessageBox::critical(this, tr("File opening error"), tr("Error writing to temporary file: %1").arg(file->errorString()));
 			gzclose(in);
-			file->close(); delete file;
+			file->close();
 			return 0;
 		}
 	}
@@ -3614,10 +3613,10 @@ QFile * ApplicationWindow::openCompressedFile(const QString& fn)
 
 bool ApplicationWindow::loadProject(const QString& fn)
 {
-  unique_ptr<QFile> file;
+  shared_ptr<QFile> file;
 
   if (fn.endsWith(".gz", Qt::CaseInsensitive) || fn.endsWith(".gz~", Qt::CaseInsensitive)) {
-    file.reset(openCompressedFile(fn));
+    file=openCompressedFile(fn);
     if (!file) return false;
   } else {
     file.reset(new QFile(fn));
@@ -3706,7 +3705,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
   progress.setLabelText(title);
   progress.activateWindow();
 
-  Folder *cf = projectFolder();
+  Folder* cf = &projectFolder();
   folders.blockSignals (true);
   blockSignals (true);
   //rename project folder item
@@ -3792,7 +3791,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
         {
           Folder *parent = (Folder *)current_folder->parent();
           if (!parent)
-            current_folder = projectFolder();
+            current_folder = &projectFolder();
           else
             current_folder = parent;
         }
@@ -3890,7 +3889,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
         {
           Folder *parent = (Folder *)current_folder->parent();
           if (!parent)
-            current_folder = projectFolder();
+            current_folder = &projectFolder();
           else
             current_folder = parent;
         }
@@ -3937,6 +3936,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
 
 ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 {
+  // what happens to this object???
   unique_ptr<ApplicationWindow> app(new ApplicationWindow);
   app->applyUserSettings();
   return app->loadProject(fn)? app.release(): nullptr;
@@ -3944,7 +3944,7 @@ ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 
 void ApplicationWindow::executeNotes()
 {
-	QList<MyWidget *> lst = projectFolder()->windowsList();
+	QList<MyWidget *> lst = projectFolder().windowsList();
 	foreach(MyWidget *widget, lst)
 		if (widget->inherits("Note") && ((Note*)widget)->autoexec())
 			((Note*)widget)->executeAll();
@@ -4987,9 +4987,10 @@ void ApplicationWindow::restoreWindowGeometry(ApplicationWindow *app, MyWidget *
 	w->blockSignals (false);
 }
 
-Folder* ApplicationWindow::projectFolder()
+Folder& ApplicationWindow::projectFolder()
 {
-	return ((FolderListItem *)folders.topLevelItem(0))->folder();
+  assert(((FolderListItem *)folders.topLevelItem(0))->folder());
+  return *((FolderListItem *)folders.topLevelItem(0))->folder();
 }
 
 bool ApplicationWindow::saveProject()
@@ -5010,7 +5011,7 @@ bool ApplicationWindow::saveProject()
 		compress = true;
 	}
 
-	saveFolder(projectFolder(), fn);
+	saveFolder(&projectFolder(), fn);
 
 	if (compress)
 		file_compress(QFile::encodeName(fn).constData(), "wb9");
@@ -11670,8 +11671,8 @@ QList<MyWidget*> ApplicationWindow::windowsList()
 {
 	QList<MyWidget*> lst = QList<MyWidget *>();
 
-    Folder *project_folder = projectFolder();
-	FolderListItem *item = project_folder->folderListItem();
+    Folder& project_folder = projectFolder();
+	FolderListItem *item = project_folder.folderListItem();
 	int initial_depth = item->depth();
 	QTreeWidgetItemIterator it(item);
 	while (item && item->depth() >= initial_depth){
@@ -12142,7 +12143,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 	if (fn.isEmpty())
 		return;
 
-	QFile * file;
+	shared_ptr<QFile> file;
 
 	QFileInfo fi(fn);
 	workingDir = fi.absolutePath();
@@ -12171,7 +12172,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 		file = openCompressedFile(fn);
 		if (!file) return;
 	} else {
-		file = new QFile(fn);
+          file.reset(new QFile(fn));
 		file->open(QIODevice::ReadOnly);
 	}
 
@@ -12213,166 +12214,166 @@ void ApplicationWindow::appendProject(const QString& fn)
 #endif
 	else
 	{
-		QTextStream t(file);
-		t.setCodec(QTextCodec::codecForName("UTF-8"));
+          QTextStream t(file.get());
+          t.setCodec(QTextCodec::codecForName("UTF-8"));
 
-		QString s = t.readLine();
-		lst = s.split(QRegExp("\\s"), QString::SkipEmptyParts);
-		QString version = lst[1];
-		lst = version.split(".", QString::SkipEmptyParts);
-		if(fn.endsWith(".qti",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive) )
-			d_file_version = 100*(lst[0]).toInt()+10*(lst[1]).toInt()+(lst[2]).toInt();
-		else 
-			d_file_version = ((lst[0]).toInt() << 16) + ((lst[1]).toInt() << 8) + (lst[2]).toInt();
+          QString s = t.readLine();
+          lst = s.split(QRegExp("\\s"), QString::SkipEmptyParts);
+          QString version = lst[1];
+          lst = version.split(".", QString::SkipEmptyParts);
+          if(fn.endsWith(".qti",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive) )
+            d_file_version = 100*(lst[0]).toInt()+10*(lst[1]).toInt()+(lst[2]).toInt();
+          else 
+            d_file_version = ((lst[0]).toInt() << 16) + ((lst[1]).toInt() << 8) + (lst[2]).toInt();
 
-		t.readLine();
-		if (d_file_version < 73)
-			t.readLine();
+          t.readLine();
+          if (d_file_version < 73)
+            t.readLine();
 
-		//process tables and matrix information
-		while ( !t.atEnd())
-		{
-			s = t.readLine(4096); // workaround for safely reading very big lines
-			lst.clear();
-			if  (s.left(8) == "<folder>")
-			{
-				lst = s.split("\t");
-				Folder& f = current_folder->addChild<Folder>(lst[1]);
-				f.setBirthDate(lst[2]);
-				f.setModificationDate(lst[3]);
-				if(lst.count() > 4)
-					if (lst[4] == "current")
-						cf = &f;
+          //process tables and matrix information
+          while ( !t.atEnd())
+            {
+              s = t.readLine(4096); // workaround for safely reading very big lines
+              lst.clear();
+              if  (s.left(8) == "<folder>")
+                {
+                  lst = s.split("\t");
+                  Folder& f = current_folder->addChild<Folder>(lst[1]);
+                  f.setBirthDate(lst[2]);
+                  f.setModificationDate(lst[3]);
+                  if(lst.count() > 4)
+                    if (lst[4] == "current")
+                      cf = &f;
 
-				FolderListItem *fli = new FolderListItem(current_folder->folderListItem(), &f);
-				fli->setText(0, lst[1]);
-				f.setFolderListItem(fli);
+                  FolderListItem *fli = new FolderListItem(current_folder->folderListItem(), &f);
+                  fli->setText(0, lst[1]);
+                  f.setFolderListItem(fli);
 
-				current_folder = &f;
-			}
-			else if  (s == "<table>")
-			{
-				openTable(this, t);
-			}
-			else if  (s == "<matrix>")
-			{
-				while ( s != "</matrix>" )
-				{
-					s=t.readLine();
-					lst<<s;
-				}
-				lst.pop_back();
-				openMatrix(this, lst);
-			}
-			else if  (s == "<note>")
-			{
-				for (int i=0; i<3; i++)
-				{
-					s = t.readLine();
-					lst << s;
-				}
-				Note* m = openNote(this, lst);
-				QStringList cont;
-				while ( s != "</note>" )
-				{
-					s=t.readLine();
-					cont << s;
-				}
-				cont.pop_back();
-				m->restore(cont);
-			}
-			else if  (s == "</folder>")
-			{
-				Folder *parent = (Folder *)current_folder->parent();
-				if (!parent)
-					current_folder = projectFolder();
-				else
-					current_folder = parent;
-			}
-		}
+                  current_folder = &f;
+                }
+              else if  (s == "<table>")
+                {
+                  openTable(this, t);
+                }
+              else if  (s == "<matrix>")
+                {
+                  while ( s != "</matrix>" )
+                    {
+                      s=t.readLine();
+                      lst<<s;
+                    }
+                  lst.pop_back();
+                  openMatrix(this, lst);
+                }
+              else if  (s == "<note>")
+                {
+                  for (int i=0; i<3; i++)
+                    {
+                      s = t.readLine();
+                      lst << s;
+                    }
+                  Note* m = openNote(this, lst);
+                  QStringList cont;
+                  while ( s != "</note>" )
+                    {
+                      s=t.readLine();
+                      cont << s;
+                    }
+                  cont.pop_back();
+                  m->restore(cont);
+                }
+              else if  (s == "</folder>")
+                {
+                  Folder *parent = (Folder *)current_folder->parent();
+                  if (!parent)
+                    current_folder = &projectFolder();
+                  else
+                    current_folder = parent;
+                }
+            }
 
-		//process the rest
-		t.seek(0);
+          //process the rest
+          t.seek(0);
 
-		MultiLayer *plot=0;
-		while ( !t.atEnd())
-		{
-			s=t.readLine(4096); // workaround for safely reading very big lines
-			if  (s.left(8) == "<folder>")
-			{
-				lst = s.split("\t");
-				current_folder = current_folder->findSubfolder(lst[1]);
-			}
-			else if  (s == "<multiLayer>")
-			{//process multilayers information
-				s=t.readLine();
-				QStringList graph=s.split("\t");
-				QString caption=graph[0];
-				plot=multilayerPlot(caption);
-				plot->setCols(graph[1].toInt());
-				plot->setRows(graph[2].toInt());
-				setListViewDate(caption, graph[3]);
-				plot->setBirthDate(graph[3]);
-				plot->blockSignals(true);
+          MultiLayer *plot=0;
+          while ( !t.atEnd())
+            {
+              s=t.readLine(4096); // workaround for safely reading very big lines
+              if  (s.left(8) == "<folder>")
+                {
+                  lst = s.split("\t");
+                  current_folder = current_folder->findSubfolder(lst[1]);
+                }
+              else if  (s == "<multiLayer>")
+                {//process multilayers information
+                  s=t.readLine();
+                  QStringList graph=s.split("\t");
+                  QString caption=graph[0];
+                  plot=multilayerPlot(caption);
+                  plot->setCols(graph[1].toInt());
+                  plot->setRows(graph[2].toInt());
+                  setListViewDate(caption, graph[3]);
+                  plot->setBirthDate(graph[3]);
+                  plot->blockSignals(true);
 
-				restoreWindowGeometry(this, plot, t.readLine());
+                  restoreWindowGeometry(this, plot, t.readLine());
 
-				if (d_file_version > 71)
-				{
-					QStringList lst=t.readLine().split("\t");
-					plot->setWindowLabel(lst[1]);
-					setListViewLabel(plot->name(),lst[1]);
-					plot->setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
-				}
+                  if (d_file_version > 71)
+                    {
+                      QStringList lst=t.readLine().split("\t");
+                      plot->setWindowLabel(lst[1]);
+                      setListViewLabel(plot->name(),lst[1]);
+                      plot->setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
+                    }
 
-				if (d_file_version > 83)
-				{
-					QStringList lst=t.readLine().split("\t", QString::SkipEmptyParts);
-					plot->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
-					lst=t.readLine().split("\t", QString::SkipEmptyParts);
-					plot->setSpacing(lst[1].toInt(),lst[2].toInt());
-					lst=t.readLine().split("\t", QString::SkipEmptyParts);
-					plot->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
-					lst=t.readLine().split("\t", QString::SkipEmptyParts);
-					plot->setAlignement(lst[1].toInt(),lst[2].toInt());
-				}
+                  if (d_file_version > 83)
+                    {
+                      QStringList lst=t.readLine().split("\t", QString::SkipEmptyParts);
+                      plot->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
+                      lst=t.readLine().split("\t", QString::SkipEmptyParts);
+                      plot->setSpacing(lst[1].toInt(),lst[2].toInt());
+                      lst=t.readLine().split("\t", QString::SkipEmptyParts);
+                      plot->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
+                      lst=t.readLine().split("\t", QString::SkipEmptyParts);
+                      plot->setAlignement(lst[1].toInt(),lst[2].toInt());
+                    }
 
-				while ( s!="</multiLayer>" )
-				{//open layers
-					s=t.readLine();
-					if (s.left(7)=="<graph>")
-					{
-						lst.clear();
-						while ( s!="</graph>" )
-						{
-							s=t.readLine();
-							lst<<s;
-						}
-						openGraph(this, plot, lst);
-					}
-				}
-				plot->blockSignals(false);
-			}
-			else if  (s == "<SurfacePlot>")
-			{//process 3D plots information
-				lst.clear();
-				while ( s!="</SurfacePlot>" )
-				{
-					s=t.readLine();
-					lst<<s;
-				}
-				openSurfacePlot(this,lst);
-			}
-			else if  (s == "</folder>")
-			{
-				Folder *parent = (Folder *)current_folder->parent();
-				if (!parent)
-					current_folder = projectFolder();
-				else
-					current_folder = parent;
-			}
-		}
-		file->close(); delete file;
+                  while ( s!="</multiLayer>" )
+                    {//open layers
+                      s=t.readLine();
+                      if (s.left(7)=="<graph>")
+                        {
+                          lst.clear();
+                          while ( s!="</graph>" )
+                            {
+                              s=t.readLine();
+                              lst<<s;
+                            }
+                          openGraph(this, plot, lst);
+                        }
+                    }
+                  plot->blockSignals(false);
+                }
+              else if  (s == "<SurfacePlot>")
+                {//process 3D plots information
+                  lst.clear();
+                  while ( s!="</SurfacePlot>" )
+                    {
+                      s=t.readLine();
+                      lst<<s;
+                    }
+                  openSurfacePlot(this,lst);
+                }
+              else if  (s == "</folder>")
+                {
+                  Folder *parent = (Folder *)current_folder->parent();
+                  if (!parent)
+                    current_folder = &projectFolder();
+                  else
+                    current_folder = parent;
+                }
+            }
+          file->close(); 
 	}
 
 	folders.blockSignals (false);
@@ -12669,7 +12670,7 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString
 
 	Folder *parent = (Folder *)current_folder->parent();
 	if (!parent)//the parent folder is the project folder (it always exists)
-		parent = projectFolder();
+		parent = &projectFolder();
 
 	if (text.isEmpty())
 	{
@@ -12923,7 +12924,7 @@ void ApplicationWindow::deleteFolder()
 {
 	Folder *parent = (Folder *)current_folder->parent();
 	if (!parent)
-		parent = projectFolder();
+		parent = &projectFolder();
 
 	folders.blockSignals(true);
 
@@ -13307,7 +13308,7 @@ void ApplicationWindow::dropFolderItems(QTreeWidgetItem *dest)
 
 			Folder *parent = (Folder *)f->parent();
 			if (!parent)
-				parent = projectFolder();
+				parent = &projectFolder();
 			if (dest_f == parent)
 				return;
 

@@ -104,9 +104,9 @@ bool ImportOPJ::createProjectTree(const OriginFile& opj)
 	FolderListItem* item = (FolderListItem*)mw->folders.topLevelItem(0);
 	item->setText(0, root->name.c_str());
 	item->folder()->setName(root->name.c_str());
-	Folder* projectFolder = mw->projectFolder();
+	Folder& projectFolder = mw->projectFolder();
 	QHash<tree<Origin::ProjectNode>::iterator, Folder*> parent;
-	parent[root] = projectFolder;
+	parent[root] = &projectFolder;
 	for(tree<Origin::ProjectNode>::iterator sib = projectTree->begin(root); sib != projectTree->end(root); ++sib)
 	{
           if(sib->type == Origin::ProjectNode::Folder){
@@ -152,21 +152,21 @@ bool ImportOPJ::createProjectTree(const OriginFile& opj)
                 nodetype = "Unknown";
                 break;
               }
-            MyWidget* w = projectFolder->window(name, nodetype);
+            MyWidget* w = projectFolder.window(name, nodetype);
             while (w){ // Origin window names are unique, but we need to loop on all sheets of Excel windows
               Folder *f = parent.value(projectTree->parent(sib));
               if (f){
                 if (f==parent[root]) break; // skip windows that go to root folder
                 // removeWindow  uses QList.removeAll, so remove w before adding it to its folder
-                projectFolder->removeWindow(w);
+                projectFolder.removeWindow(w);
                 f->addWindow(w);
                 f->setActiveWindow(w);
               }
-              w = projectFolder->window(name, nodetype);
+              w = projectFolder.window(name, nodetype);
             }
           }
 	}
-	mw->changeFolder(projectFolder, true);
+	mw->changeFolder(&projectFolder, true);
 	return true;
 }
 
