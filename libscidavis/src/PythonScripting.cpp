@@ -54,6 +54,7 @@ typedef struct _traceback {
 #include "ApplicationWindow.cd"
 #include "Script.h"
 #include "Script.cd"
+#include "Folder.h"
 #include "Folder.cd"
 #include "Matrix.h"
 #include "Matrix.cd"
@@ -61,6 +62,12 @@ typedef struct _traceback {
 #include "Note.cd"
 #include "MyWidget.h"
 #include "MyWidget.cd"
+#include "MyWidget.h"
+#include "Graph3D.h"
+#include "MultiLayer.h"
+
+#include <QTranslator>
+#include <QToolBar>
 
 namespace classdesc_access
 {
