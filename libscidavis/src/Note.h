@@ -42,39 +42,39 @@ class ScriptingEnv;
  */
 class Note: public MyWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
+  Note() {}
+  Note(ScriptingEnv *env, const QString& label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
+  ~Note(){};
 
-	Note(ScriptingEnv *env, const QString& label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
-	~Note(){};
 
-
-	void init(ScriptingEnv *env);
+  void init(ScriptingEnv *env);
 
 public slots:
-	QString saveToString(const QString &info);
-	void restore(const QStringList&);
+  QString saveToString(const QString &info);
+  void restore(const QStringList&);
 
-	QTextEdit* textWidget(){return (QTextEdit*)te;};
-	bool autoexec() const { return autoExec; }
-	void setAutoexec(bool);
-	void modifiedNote();
+  QTextEdit* textWidget(){return (QTextEdit*)te;};
+  bool autoexec() const { return autoExec; }
+  void setAutoexec(bool);
+  void modifiedNote();
 
-	// ScriptEdit methods
-	QString text() { return te->toPlainText(); };
-	void setText(const QString &s) { te->setText(s); };
-	void print() { te->print(); };
-	void exportPDF(const QString& fileName){te->exportPDF(fileName);};
-	QString exportASCII(const QString &file=QString::null) { return te->exportASCII(file); };
-	QString importASCII(const QString &file=QString::null) { return te->importASCII(file); };
-	void execute() { te->execute(); };
-	bool executeAll() {return te->executeAll(); };
-	void evaluate() { te->evaluate(); };
+  // ScriptEdit methods
+  QString text() { return te->toPlainText(); };
+  void setText(const QString &s) { te->setText(s); };
+  void print() { te->print(); };
+  void exportPDF(const QString& fileName){te->exportPDF(fileName);};
+  QString exportASCII(const QString &file=QString::null) { return te->exportASCII(file); };
+  QString importASCII(const QString &file=QString::null) { return te->importASCII(file); };
+  void execute() { te->execute(); };
+  bool executeAll() {return te->executeAll(); };
+  void evaluate() { te->evaluate(); };
   void insert(const QString& s) {te->insertPlainText(s);}
 private:
-	ScriptEdit *te;
-	bool autoExec;
+  ScriptEdit *te=nullptr;
+  bool autoExec;
 };
 
 #endif

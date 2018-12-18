@@ -63,7 +63,7 @@ class Folder : public SciDAVisObject<QObject>
     Q_OBJECT
 
 public:
-    Folder(const QString &name );
+    Folder(const QString &name="");
 
 	QList<MyWidget *> windowsList(){return lstWindows;};
 

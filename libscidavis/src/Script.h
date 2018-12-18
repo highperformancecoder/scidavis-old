@@ -149,7 +149,7 @@ class ScriptingChangeEvent : public QEvent
 class scripted
 {
   public:
-   scripted(ScriptingEnv* env);
+   scripted(ScriptingEnv* env=nullptr);
    ~scripted();
    void scriptingChangeEvent(ScriptingChangeEvent*);
   protected:

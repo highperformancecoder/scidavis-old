@@ -296,68 +296,72 @@ void MultiPeakFit::generateFitCurve(const vector<double>& par)
 	}
 	else
 	{
-		QString tableName = app->generateUniqueName(tr("Fit"));
-		QString label = d_explanation + " " + tr("fit of") + " " + d_curve->title().text();
+          QString tableName = app->generateUniqueName(tr("Fit"));
+          QString label = d_explanation + " " + tr("fit of") + " " + d_curve->title().text();
 
-		QList<Column *> columns;
-		columns << new Column(tr("1", "multipeak fit table first column name"), SciDAVis::Numeric);
-		for (i = 0; i<peaks_aux; i++)
-			columns << new Column(tr("peak%1").arg(QString::number(i+1)), SciDAVis::Numeric);
-		columns << new Column(tr("2", "multipeak fit table last column name"), SciDAVis::Numeric);
-		Table *t = app->newHiddenTable(tableName, label, columns);
+          QList<Column *> columns;
+          columns << new Column(tr("1", "multipeak fit table first column name"), SciDAVis::Numeric);
+          for (i = 0; i<peaks_aux; i++)
+            columns << new Column(tr("peak%1").arg(QString::number(i+1)), SciDAVis::Numeric);
+          columns << new Column(tr("2", "multipeak fit table last column name"), SciDAVis::Numeric);
+          try
+            {
+              Table& t = app->newHiddenTable(tableName, label, columns);
 
-		for (i = 0; i<d_points; i++)
+              for (i = 0; i<d_points; i++)
 		{
-			X[i] = d_x[i];
-			columns.at(0)->setValueAt(i, X[i]);
+                  X[i] = d_x[i];
+                  columns.at(0)->setValueAt(i, X[i]);
 
-			double yi=0;
-			for (j=0; j<d_peaks; j++)
-			{
-				double diff = X[i] - par[3*j + 1];
-				double w = par[3*j + 2];
-				double y_aux = 0;
-				if (d_profile == Gauss)
-					y_aux += sqrt(M_2_PI)*par[3*j]/w*exp(-2*diff*diff/(w*w));
-				else
-					y_aux += par[3*j]*w/(4*diff*diff+w*w);
+                  double yi=0;
+                  for (j=0; j<d_peaks; j++)
+                    {
+                      double diff = X[i] - par[3*j + 1];
+                      double w = par[3*j + 2];
+                      double y_aux = 0;
+                      if (d_profile == Gauss)
+                        y_aux += sqrt(M_2_PI)*par[3*j]/w*exp(-2*diff*diff/(w*w));
+                      else
+                        y_aux += par[3*j]*w/(4*diff*diff+w*w);
 
-				yi += y_aux;
-				y_aux += par[d_p - 1];
-				columns.at(j+1)->setValueAt(i, y_aux);
-				gsl_matrix_set(m, i, j, y_aux);
-			}
-			Y[i] = yi + par[d_p - 1];//add offset
-			if (d_peaks > 1)
-				columns.at(d_peaks+1)->setValueAt(i, Y[i]);
+                      yi += y_aux;
+                      y_aux += par[d_p - 1];
+                      columns.at(j+1)->setValueAt(i, y_aux);
+                      gsl_matrix_set(m, i, j, y_aux);
+                    }
+                  Y[i] = yi + par[d_p - 1];//add offset
+                  if (d_peaks > 1)
+                    columns.at(d_peaks+1)->setValueAt(i, Y[i]);
 		}
 
-		label = tableName + "_2";
-		DataCurve *c = new DataCurve(t, tableName + "_" + columns.at(0)->name(), label);
-		if (d_peaks > 1)
-			c->setPen(QPen(d_curveColor, 2));
-		else
-			c->setPen(QPen(d_curveColor, 1));
-		c->setData(X, Y, d_points);
-		d_graph->insertPlotItem(c, Graph::Line);
-		d_graph->addFitCurve(c);
+              label = tableName + "_2";
+              DataCurve *c = new DataCurve(&t, tableName + "_" + columns.at(0)->name(), label);
+              if (d_peaks > 1)
+                c->setPen(QPen(d_curveColor, 2));
+              else
+                c->setPen(QPen(d_curveColor, 1));
+              c->setData(X, Y, d_points);
+              d_graph->insertPlotItem(c, Graph::Line);
+              d_graph->addFitCurve(c);
 
-		if (generate_peak_curves)
+              if (generate_peak_curves)
 		{
-			for (i=0; i<peaks_aux; i++)
-			{//add the peak curves
-				for (j=0; j<d_points; j++)
-					Y[j] = gsl_matrix_get (m, j, i);
+                  for (i=0; i<peaks_aux; i++)
+                    {//add the peak curves
+                      for (j=0; j<d_points; j++)
+                        Y[j] = gsl_matrix_get (m, j, i);
 
-				label = tableName + "_" + tr("peak") + QString::number(i+1);
-				c = new DataCurve(t, tableName + "_" + columns.at(0)->name(), label);
-				c->setPen(QPen(d_peaks_color, 1));
-				c->setData(X, Y, d_points);
-				d_graph->insertPlotItem(c, Graph::Line);
-				d_graph->addFitCurve(c);
-			}
+                      label = tableName + "_" + tr("peak") + QString::number(i+1);
+                      c = new DataCurve(&t, tableName + "_" + columns.at(0)->name(), label);
+                      c->setPen(QPen(d_peaks_color, 1));
+                      c->setData(X, Y, d_points);
+                      d_graph->insertPlotItem(c, Graph::Line);
+                      d_graph->addFitCurve(c);
+                    }
 		}
-	}
+            }
+          catch (NoSuchObject&) {}
+        }
 	d_graph->replot();
 
 	delete[] X;

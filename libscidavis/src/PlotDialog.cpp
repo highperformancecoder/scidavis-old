@@ -1074,25 +1074,24 @@ void PlotDialog::showStatistics()
     return;
 
   QString tableName = app->generateUniqueName(tr("Bins"));
-  Table *t = app->newTable(h->dataSize(), 4, tableName, tr("Histogram and Probabilities for") + " " + h->title().text());
-  if (t)
-    {
-      double h_sum = 0.0;
-      for (int i = 0; i<h->dataSize(); i++ )
-        h_sum += h->y(i);
+  Table& t = app->newTable(h->dataSize(), 4, tableName, tr("Histogram and Probabilities for") + " " + h->title().text());
+  {
+    double h_sum = 0.0;
+    for (int i = 0; i<h->dataSize(); i++ )
+      h_sum += h->y(i);
 
-      double sum = 0.0;
-      for (int i = 0; i<h->dataSize(); i++ )
-        {
-          sum += h->y(i);
-          t->column(0)->setValueAt(i, h->x(i));
-          t->column(1)->setValueAt(i, h->y(i));
-          t->column(2)->setValueAt(i, sum);
-          t->column(3)->setValueAt(i, sum/h_sum*100);
-        }
-      t->setHeader(QStringList() << tr("Bins") << tr("Quantity") << tr("Sum") << tr("Percent"));
-      t->showMaximized();
-    }
+    double sum = 0.0;
+    for (int i = 0; i<h->dataSize(); i++ )
+      {
+        sum += h->y(i);
+        t.column(0)->setValueAt(i, h->x(i));
+        t.column(1)->setValueAt(i, h->y(i));
+        t.column(2)->setValueAt(i, sum);
+        t.column(3)->setValueAt(i, sum/h_sum*100);
+      }
+    t.setHeader(QStringList() << tr("Bins") << tr("Quantity") << tr("Sum") << tr("Percent"));
+    t.showMaximized();
+  }
 
   QDateTime dt = QDateTime::currentDateTime();
   QString info = dt.toString(Qt::LocalDate)+"\t"+tr("Histogram and Probabilities for") + " " + h->title().text()+"\n";
@@ -1888,13 +1887,10 @@ bool PlotDialog::acceptParams()
 
       QString xEndCol = xEndBox->currentText();
       QString yEndCol = yEndBox->currentText();
-      Table* w = app->table(xEndCol);
-      if (!w)
-        return false;
 
       graph->updateVectorsLayout(index, vectColorBox->color(), vectWidthBox->value(),
-                                 headLengthBox->value(), headAngleBox->value(),
-                                 filledHeadBox->isChecked(), vectPosBox->currentIndex(), xEndCol, yEndCol);
+                                     headLengthBox->value(), headAngleBox->value(),
+                                     filledHeadBox->isChecked(), vectPosBox->currentIndex(), xEndCol, yEndCol);
 
       QString text = item->text(0);
       QStringList t = text.split(": ", QString::SkipEmptyParts);

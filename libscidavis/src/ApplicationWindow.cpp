@@ -1793,11 +1793,16 @@ void ApplicationWindow::change3DMatrix(const QString& matrix_name)
 	if ( d_workspace.activeSubWindow() && d_workspace.activeSubWindow()->inherits("Graph3D"))
 	{
 		Graph3D* g = (Graph3D*)d_workspace.activeSubWindow();
-		Matrix *m = matrix(matrix_name);
-		if (m && g)
-			g->changeMatrix(m);
-
-		emit modified();
+                try
+                  {
+                    Matrix& m = matrix(matrix_name);
+                    if (g)
+                      {
+			g->changeMatrix(&m);
+                        emit modified();
+                      }
+                  }
+                catch (NoSuchObject&){}
 	}
 }
 
@@ -1825,8 +1830,12 @@ void ApplicationWindow::insert3DMatrixPlot(const QString& matrix_name)
 {
 	if ( d_workspace.activeSubWindow() && d_workspace.activeSubWindow()->inherits("Graph3D"))
 	{
-		((Graph3D*)d_workspace.activeSubWindow())->addMatrixData(matrix(matrix_name));
+          try
+            {
+		((Graph3D*)d_workspace.activeSubWindow())->addMatrixData(&matrix(matrix_name));
 		emit modified();
+            }
+          catch (NoSuchObject&) {}
 	}
 }
 
@@ -1834,8 +1843,12 @@ void ApplicationWindow::insertNew3DData(const QString& colName)
 {
 	if ( d_workspace.activeSubWindow() && d_workspace.activeSubWindow()->inherits("Graph3D"))
 	{
-		((Graph3D*)d_workspace.activeSubWindow())->insertNewData(table(colName),colName);
+          try
+            {
+		((Graph3D*)d_workspace.activeSubWindow())->insertNewData(&table(colName),colName);
 		emit modified();
+            }
+          catch (NoSuchObject&) {}
 	}
 }
 
@@ -1843,8 +1856,12 @@ void ApplicationWindow::change3DData(const QString& colName)
 {
 	if ( d_workspace.activeSubWindow() && d_workspace.activeSubWindow()->inherits("Graph3D"))
 	{
-		((Graph3D*)d_workspace.activeSubWindow())->changeDataColumn(table(colName),colName);
+          try
+            {
+		((Graph3D*)d_workspace.activeSubWindow())->changeDataColumn(&table(colName),colName);
 		emit modified();
+            }
+          catch (NoSuchObject&) {}
 	}
 }
 
@@ -1883,7 +1900,7 @@ void ApplicationWindow::newSurfacePlot()
 	sd->exec();
 }
 
-Graph3D* ApplicationWindow::newPlot3D(const QString& formula, double xl, double xr,
+Graph3D& ApplicationWindow::newPlot3D(const QString& formula, double xl, double xr,
 		double yl, double yr, double zl, double zr)
 {
 	QString label = generateUniqueName(tr("Graph"));
@@ -1900,7 +1917,7 @@ Graph3D* ApplicationWindow::newPlot3D(const QString& formula, double xl, double 
 	initPlot3D(plot);
 
 	emit modified();
-	return plot;
+	return *plot;
 }
 
 void ApplicationWindow::updateSurfaceFuncList(const QString& s)
@@ -1911,7 +1928,7 @@ void ApplicationWindow::updateSurfaceFuncList(const QString& s)
 		surfaceFunc.pop_back();
 }
 
-Graph3D* ApplicationWindow::newPlot3D(const QString& caption,const QString& formula,
+Graph3D& ApplicationWindow::newPlot3D(const QString& caption,const QString& formula,
 		double xl, double xr,double yl, double yr,
 		double zl, double zr)
 {
@@ -1927,7 +1944,7 @@ Graph3D* ApplicationWindow::newPlot3D(const QString& caption,const QString& form
 	plot->setWindowTitle(label);
 	plot->setName(label);
 	initPlot3D(plot);
-	return plot;
+	return *plot;
 }
 
 Graph3D* ApplicationWindow::dataPlot3D(Table* table, const QString& colName)
@@ -1954,37 +1971,40 @@ Graph3D* ApplicationWindow::dataPlot3D(Table* table, const QString& colName)
 Graph3D* ApplicationWindow::dataPlot3D(const QString& caption,const QString& formula,
 		double xl, double xr, double yl, double yr, double zl, double zr)
 {
-	int pos=formula.indexOf("_",0);
-	QString wCaption=formula.left(pos);
+  int pos=formula.indexOf("_",0);
+  QString wCaption=formula.left(pos);
 
-	Table* w=table(wCaption);
-	if (!w)
-		return 0;
+  try
+    {
+      Table& w=table(wCaption);
 
-	int posX=formula.indexOf("(",pos);
-	QString xCol=formula.mid(pos+1,posX-pos-1);
+      int posX=formula.indexOf("(",pos);
+      QString xCol=formula.mid(pos+1,posX-pos-1);
 
-	pos=formula.indexOf(",",posX);
-	posX=formula.indexOf("(",pos);
-	QString yCol=formula.mid(pos+1,posX-pos-1);
+      pos=formula.indexOf(",",posX);
+      posX=formula.indexOf("(",pos);
+      QString yCol=formula.mid(pos+1,posX-pos-1);
 
-	Graph3D *plot = new Graph3D("", &d_workspace, 0);
-	plot->setAttribute(Qt::WA_DeleteOnClose);
-	plot->addData(w, xCol, yCol, xl, xr, yl, yr, zl, zr);
-	plot->update();
+      Graph3D *plot = new Graph3D("", &d_workspace, 0);
+      plot->setAttribute(Qt::WA_DeleteOnClose);
+      plot->addData(&w, xCol, yCol, xl, xr, yl, yr, zl, zr);
+      plot->update();
 
-	QString label=caption;
-	while(alreadyUsedName(label))
-		label = generateUniqueName(tr("Graph"));
+      QString label=caption;
+      while(alreadyUsedName(label))
+        label = generateUniqueName(tr("Graph"));
 
-	plot->setWindowTitle(label);
-	plot->setName(label);
-	initPlot3D(plot);
+      plot->setWindowTitle(label);
+      plot->setName(label);
+      initPlot3D(plot);
 
-	return plot;
+      return plot;
+    }
+  catch (NoSuchObject&)
+    {return nullptr;}
 }
 
-Graph3D* ApplicationWindow::newPlot3D()
+Graph3D& ApplicationWindow::newPlot3D()
 {
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
@@ -2001,7 +2021,7 @@ Graph3D* ApplicationWindow::newPlot3D()
 
 	emit modified();
 	QApplication::restoreOverrideCursor();
-	return plot;
+	return *plot;
 }
 
 Graph3D* ApplicationWindow::dataPlotXYZ(Table* table, const QString& zColName, int type)
@@ -2032,42 +2052,45 @@ Graph3D* ApplicationWindow::dataPlotXYZ(Table* table, const QString& zColName, i
 Graph3D* ApplicationWindow::dataPlotXYZ(const QString& caption,const QString& formula,
 		double xl, double xr, double yl, double yr, double zl, double zr)
 {
-	int pos=formula.indexOf("_",0);
-	QString wCaption=formula.left(pos);
+  int pos=formula.indexOf("_",0);
+  QString wCaption=formula.left(pos);
 
-	Table* w=table(wCaption);
-	if (!w)
-		return 0;
+  try
+    {
+      Table& w=table(wCaption);
 
-	int posX=formula.indexOf("(X)",pos);
-	QString xColName=formula.mid(pos+1,posX-pos-1);
+      int posX=formula.indexOf("(X)",pos);
+      QString xColName=formula.mid(pos+1,posX-pos-1);
 
-	pos=formula.indexOf(",",posX);
+      pos=formula.indexOf(",",posX);
 
-	posX=formula.indexOf("(Y)",pos);
-	QString yColName=formula.mid(pos+1,posX-pos-1);
+      posX=formula.indexOf("(Y)",pos);
+      QString yColName=formula.mid(pos+1,posX-pos-1);
 
-	pos=formula.indexOf(",",posX);
-	posX=formula.indexOf("(Z)",pos);
-	QString zColName=formula.mid(pos+1,posX-pos-1);
+      pos=formula.indexOf(",",posX);
+      posX=formula.indexOf("(Z)",pos);
+      QString zColName=formula.mid(pos+1,posX-pos-1);
 
-	int xCol=w->colIndex(xColName);
-	int yCol=w->colIndex(yColName);
-	int zCol=w->colIndex(zColName);
+      int xCol=w.colIndex(xColName);
+      int yCol=w.colIndex(yColName);
+      int zCol=w.colIndex(zColName);
 
-	Graph3D *plot=new Graph3D("", &d_workspace, 0);
-	plot->setAttribute(Qt::WA_DeleteOnClose);
-	plot->addData(w, xCol, yCol, zCol, xl, xr, yl, yr, zl, zr);
-	plot->update();
+      Graph3D *plot=new Graph3D("", &d_workspace, 0);
+      plot->setAttribute(Qt::WA_DeleteOnClose);
+      plot->addData(&w, xCol, yCol, zCol, xl, xr, yl, yr, zl, zr);
+      plot->update();
 
-	QString label = caption;
-	if(alreadyUsedName(label))
-		label = generateUniqueName(tr("Graph"));
+      QString label = caption;
+      if(alreadyUsedName(label))
+        label = generateUniqueName(tr("Graph"));
 
-	plot->setWindowTitle(label);
-	plot->setName(label);
-	initPlot3D(plot);
-	return plot;
+      plot->setWindowTitle(label);
+      plot->setName(label);
+      initPlot3D(plot);
+      return plot;
+    }
+  catch (NoSuchObject&)
+    {return nullptr;}
 }
 
 void ApplicationWindow::customPlot3D(Graph3D *plot)
@@ -2325,71 +2348,75 @@ MultiLayer* ApplicationWindow::multilayerPlot(int c, int r, int style)
 
 MultiLayer* ApplicationWindow::multilayerPlot(const QStringList& colList)
 {//used when plotting from wizard
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-	MultiLayer* g = new MultiLayer("", &d_workspace, 0);
-	g->setAttribute(Qt::WA_DeleteOnClose);
+  QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+  MultiLayer* g = new MultiLayer("", &d_workspace, 0);
+  g->setAttribute(Qt::WA_DeleteOnClose);
 
-	initMultilayerPlot(g, generateUniqueName(tr("Graph")));
+  initMultilayerPlot(g, generateUniqueName(tr("Graph")));
 
-	Graph *ag = g->addLayer();
-	setPreferences(ag);
-	polishGraph(ag, defaultCurveStyle);
-	int curves = (int)colList.count();
-	int errorBars = 0;
-	for (int i=0; i<curves; i++)
-	{
-		if (colList[i].contains("(yErr)") || colList[i].contains("(xErr)"))
-			errorBars++;
-	}
+  Graph *ag = g->addLayer();
+  setPreferences(ag);
+  polishGraph(ag, defaultCurveStyle);
+  int curves = (int)colList.count();
+  int errorBars = 0;
+  for (int i=0; i<curves; i++)
+    {
+      if (colList[i].contains("(yErr)") || colList[i].contains("(xErr)"))
+        errorBars++;
+    }
 
-	for (int i=0; i<curves; i++)
-	{
-		QString s = colList[i];
-		int pos = s.indexOf(":", 0);
-		QString caption = s.left(pos) + "_";
-		Table *w = (Table *)table(caption);
+  for (int i=0; i<curves; i++)
+    {
+      QString s = colList[i];
+      int pos = s.indexOf(":", 0);
+      QString caption = s.left(pos) + "_";
+      try
+        {
+          Table& w = table(caption);
 
-		int posX = s.indexOf("(X)", pos);
-		QString xColName = caption+s.mid(pos+2, posX-pos-2);
-		int xCol=w->colIndex(xColName);
+          int posX = s.indexOf("(X)", pos);
+          QString xColName = caption+s.mid(pos+2, posX-pos-2);
+          int xCol=w.colIndex(xColName);
 
-		posX = s.indexOf(",", posX);
-		int posY = s.indexOf("(Y)", posX);
-		QString yColName = caption+s.mid(posX+2, posY-posX-2);
+          posX = s.indexOf(",", posX);
+          int posY = s.indexOf("(Y)", posX);
+          QString yColName = caption+s.mid(posX+2, posY-posX-2);
 
-		if (s.contains("(yErr)") || s.contains("(xErr)"))
-		{
-			posY = s.indexOf(",", posY);
-			int posErr, errType;
-			if (s.contains("(yErr)"))
-			{
-				errType = QwtErrorPlotCurve::Vertical;
-				posErr = s.indexOf("(yErr)", posY);
-			}
-			else
-			{
-				errType = QwtErrorPlotCurve::Horizontal;
-				posErr = s.indexOf("(xErr)",posY);
-			}
+          if (s.contains("(yErr)") || s.contains("(xErr)"))
+            {
+              posY = s.indexOf(",", posY);
+              int posErr, errType;
+              if (s.contains("(yErr)"))
+                {
+                  errType = QwtErrorPlotCurve::Vertical;
+                  posErr = s.indexOf("(yErr)", posY);
+                }
+              else
+                {
+                  errType = QwtErrorPlotCurve::Horizontal;
+                  posErr = s.indexOf("(xErr)",posY);
+                }
 
-			QString errColName = caption+s.mid(posY+2, posErr-posY-2);
-			ag->addErrorBars(xColName, yColName, w, errColName, errType);
-		}
-		else
-            ag->insertCurve(w, xCol, yColName, defaultCurveStyle);
+              QString errColName = caption+s.mid(posY+2, posErr-posY-2);
+              ag->addErrorBars(xColName, yColName, &w, errColName, errType);
+            }
+          else
+            ag->insertCurve(&w, xCol, yColName, defaultCurveStyle);
 
-        CurveLayout cl = ag->initCurveLayout(defaultCurveStyle, curves - errorBars);
-        cl.lWidth = defaultCurveLineWidth;
-        cl.sSize = defaultSymbolSize;
-        ag->updateCurveLayout(i, &cl);
-	}
-	ag->newLegend();
-	ag->updatePlot();
-    g->arrangeLayers(true, false);
-	customMenu(g);
-	emit modified();
-	QApplication::restoreOverrideCursor();
-	return g;
+          CurveLayout cl = ag->initCurveLayout(defaultCurveStyle, curves - errorBars);
+          cl.lWidth = defaultCurveLineWidth;
+          cl.sSize = defaultSymbolSize;
+          ag->updateCurveLayout(i, &cl);
+        }
+      catch (NoSuchObject&) {}
+    }
+  ag->newLegend();
+  ag->updatePlot();
+  g->arrangeLayers(true, false);
+  customMenu(g);
+  emit modified();
+  QApplication::restoreOverrideCursor();
+  return g;
 }
 
 void ApplicationWindow::initBareMultilayerPlot(MultiLayer* g, const QString& name)
@@ -2488,8 +2515,8 @@ void ApplicationWindow::setPreferences(Graph* g)
 
 void ApplicationWindow::newWrksheetPlot(const QString& name,const QString& label, QList<Column *> columns)
 {
-	Table* w = newTable(name, label, columns);
-	MultiLayer* plot=multilayerPlot(w, QStringList(QString(w->name())+"_intensity"), 0);
+	Table& w = newTable(name, label, columns);
+	MultiLayer* plot=multilayerPlot(&w, QStringList(QString(w.name())+"_intensity"), 0);
 	Graph *g=(Graph*)plot->activeGraph();
 	if (g)
 	{
@@ -2502,10 +2529,11 @@ void ApplicationWindow::newWrksheetPlot(const QString& name,const QString& label
 /*
  *used when importing an ASCII file
  */
-Table* ApplicationWindow::newTable(const QString& fname, const QString &sep,
+Table& ApplicationWindow::newTable(const QString& fname, const QString &sep,
 		int lines, bool renameCols, bool stripSpaces,
 		bool simplifySpaces, bool convertToNumeric, QLocale numericLocale)
 {
+  assert(scriptEnv);
 	Table* w = new Table(scriptEnv, fname, sep, lines, renameCols, stripSpaces,
 			simplifySpaces, convertToNumeric, numericLocale, fname, &d_workspace, 0, 0);
 	if (w)
@@ -2513,25 +2541,26 @@ Table* ApplicationWindow::newTable(const QString& fname, const QString &sep,
 		w->setName(generateUniqueName(tr("Table")));
 		d_project->addChild(w->d_future_table);
 	}
-	return w;
+	return *w;
 }
 
 /*
  *creates a new empty table
  */
-Table* ApplicationWindow::newTable()
+Table& ApplicationWindow::newTable()
 {
 	Table* w = new Table(scriptEnv, 30, 2, "", &d_workspace, 0);
 	w->setName(generateUniqueName(tr("Table")));
 	d_project->addChild(w->d_future_table);
-	return w;
+	return *w;
 }
 
 /*
  *used when opening a project file
  */
-Table* ApplicationWindow::newTable(const QString& caption, int r, int c)
+Table& ApplicationWindow::newTable(const QString& caption, int r, int c)
 {
+  assert(scriptEnv);
 	Table* w = new Table(scriptEnv, r, c, "", &d_workspace, 0);
 	w->setName(caption);
 	d_project->addChild(w->d_future_table);
@@ -2542,30 +2571,32 @@ Table* ApplicationWindow::newTable(const QString& caption, int r, int c)
 		QMessageBox:: warning(this, tr("Renamed Window"),
 				tr("The table '%1' already exists. It has been renamed '%2'.").arg(caption).arg(w->name()));
 	}
-	return w;
+	return *w;
 }
 
-Table* ApplicationWindow::newTable(int r, int c, const QString& name, const QString& legend)
+Table& ApplicationWindow::newTable(int r, int c, const QString& name, const QString& legend)
 {
+  assert(scriptEnv);
 	Table* w = new Table(scriptEnv, r, c, legend, &d_workspace, 0);
 	w->setName(name);
 	d_project->addChild(w->d_future_table);
-	return w;
+	return *w;
 }
 
-Table* ApplicationWindow::newTable(const QString& name, const QString& legend, QList<Column *> columns)
+Table& ApplicationWindow::newTable(const QString& name, const QString& legend, QList<Column *> columns)
 {
+  assert(scriptEnv);
 	Table* w = new Table(scriptEnv, 0, 0, legend, &d_workspace, 0);
 	w->d_future_table->appendColumns(columns);
 	w->setName(name);
 	d_project->addChild(w->d_future_table);
-	return w;
+	return *w;
 }
 
-Table* ApplicationWindow::newHiddenTable(const QString& name, const QString& label, QList<Column *> columns)
+Table& ApplicationWindow::newHiddenTable(const QString& name, const QString& label, QList<Column *> columns)
 {
-  auto w=newTable(name,label,columns);
-  hideWindow(w);
+  auto& w=newTable(name,label,columns);
+  hideWindow(&w);
   return w;
 }
 
@@ -2623,7 +2654,7 @@ void ApplicationWindow::removeDependentTableStatistics(const AbstractAspect *asp
 /*
  *creates a new empty note window
  */
-Note* ApplicationWindow::newNote(const QString& caption)
+Note& ApplicationWindow::newNote(const QString& caption)
 {
 	Note* m = new Note(scriptEnv, "", &d_workspace);
 	if (caption.isEmpty())
@@ -2631,7 +2662,7 @@ Note* ApplicationWindow::newNote(const QString& caption)
 	else
 		initNote(m, caption);
 	m->showNormal();
-	return m;
+	return *m;
 }
 
 void ApplicationWindow::initNote(Note* m, const QString& caption)
@@ -2659,17 +2690,17 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 	emit modified();
 }
 
-Matrix* ApplicationWindow::newMatrix(int rows, int columns)
+Matrix& ApplicationWindow::newMatrix(int rows, int columns)
 {
 	Matrix* m = new Matrix(scriptEnv, rows, columns, "", 0, 0);
 	QString caption = generateUniqueName(tr("Matrix"));
 	while(alreadyUsedName(caption)) { caption = generateUniqueName(tr("Matrix")); }
 	m->setName(caption);
 	d_project->addChild(m->d_future_matrix);
-	return m;
+	return *m;
 }
 
-Matrix* ApplicationWindow::newMatrix(const QString& caption, int r, int c)
+Matrix& ApplicationWindow::newMatrix(const QString& caption, int r, int c)
 {
 	Matrix* w = new Matrix(scriptEnv, r, c, "", 0 ,0);
 	QString name = caption;
@@ -2679,7 +2710,7 @@ Matrix* ApplicationWindow::newMatrix(const QString& caption, int r, int c)
 	if (w->name() != caption)//the matrix was renamed
 		renamedTables << caption << w->name();
 
-	return w;
+	return *w;
 }
 
 void ApplicationWindow::matrixDeterminant()
@@ -2803,23 +2834,19 @@ MyWidget* ApplicationWindow::window(const QString& name)
 	return widget;
 }
 
-Table* ApplicationWindow::table(const QString& name)
+Table& ApplicationWindow::table(const QString& name)
 {
 	int pos = name.indexOf("_", 0);
 	QString caption = name.left(pos);
 
-	QList<MyWidget*> lst = windowsList();
-	foreach(MyWidget *w, lst)
-	{
-		if (w->inherits("Table") && static_cast<Table *>(w)->name() == caption)
-		{
-			return (Table*)w;
-		}
-	}
-	return  0;
+	for(MyWidget *w: windowsList())
+          if (auto t=dynamic_cast<Table*>(w))
+            if (t->name() == caption)
+              return *t;
+	throw NoSuchObject();
 }
 
-Matrix* ApplicationWindow::matrix(const QString& name)
+Matrix& ApplicationWindow::matrix(const QString& name)
 {
 	QString caption = name;
 	if (!renamedTables.isEmpty() && renamedTables.contains(caption))
@@ -2830,13 +2857,10 @@ Matrix* ApplicationWindow::matrix(const QString& name)
 
 	QList<MyWidget*> lst = windowsList();
 	foreach(MyWidget *w, lst)
-	{
-		if (w->inherits("Matrix") && static_cast<Matrix *>(w)->name() == caption)
-		{
-			return (Matrix*)w;
-		}
-	}
-	return  0;
+          if (auto m=dynamic_cast<Matrix*>(w))
+            if (m->name() == caption)
+              return *m;
+	throw NoSuchObject();
 }
 
 void ApplicationWindow::windowActivated(QMdiSubWindow *w)
@@ -2894,96 +2918,104 @@ void ApplicationWindow::addErrorBars()
 
 void ApplicationWindow::defineErrorBars(const QString& name, int type, const QString& percent, int direction)
 {
-    if (!d_workspace.activeSubWindow() || !d_workspace.activeSubWindow()->inherits("MultiLayer"))
-		return;
+  if (!d_workspace.activeSubWindow() || !d_workspace.activeSubWindow()->inherits("MultiLayer"))
+    return;
 
-	Graph* g = ((MultiLayer*)d_workspace.activeSubWindow())->activeGraph();
-	if (!g)
-		return;
+  Graph* g = ((MultiLayer*)d_workspace.activeSubWindow())->activeGraph();
+  if (!g)
+    return;
 
-	Table *w = table(name);
-	if (!w)
-	{ //user defined function
-		QMessageBox::critical(this,tr("Error bars error"),
-				tr("This feature is not available for user defined function curves!"));
-		return;
-	}
+  try
+    {
+      Table& w = table(name);
 
-	DataCurve *master_curve = (DataCurve *)g->curve(name);
-	QString xColName = master_curve->xColumnName();
-	if (xColName.isEmpty())
-		return;
+      DataCurve *master_curve = (DataCurve *)g->curve(name);
+      QString xColName = master_curve->xColumnName();
+      if (xColName.isEmpty())
+        return;
 
-	Column * errors = new Column("1", SciDAVis::Numeric);
-	Column * data;
-	if (direction == QwtErrorPlotCurve::Horizontal) {
-		errors->setPlotDesignation(SciDAVis::xErr);
-		data = w->d_future_table->column(xColName);
-	} else {
-		errors->setPlotDesignation(SciDAVis::yErr);
-		data = w->d_future_table->column(name);
-	}
-	if (!data) return;
+      Column * errors = new Column("1", SciDAVis::Numeric);
+      Column * data;
+      if (direction == QwtErrorPlotCurve::Horizontal) {
+        errors->setPlotDesignation(SciDAVis::xErr);
+        data = w.d_future_table->column(xColName);
+      } else {
+        errors->setPlotDesignation(SciDAVis::yErr);
+        data = w.d_future_table->column(name);
+      }
+      if (!data) return;
 
-	int rows = data->rowCount();
-	if (type==0) {
-		double fraction = percent.toDouble()/100.0;
-		for (int i=0; i<rows; i++)
-			errors->setValueAt(i, data->valueAt(i)*fraction);
-	} else if (type==1) {
-		double average=0.0;
-		double dev=0.0;
-		for (int i=0; i<rows; i++)
-			average += data->valueAt(i);
-		average /= rows;
-		for (int i=0; i<rows; i++)
-			dev += pow(data->valueAt(i)-average, 2);
-		dev = sqrt(dev/rows);
-		for (int i=0; i<rows; i++)
-			errors->setValueAt(i, dev);
-	}
-	w->d_future_table->addChild(errors);
-	g->addErrorBars(xColName, name, w, errors->name(), direction);
+      int rows = data->rowCount();
+      if (type==0) {
+        double fraction = percent.toDouble()/100.0;
+        for (int i=0; i<rows; i++)
+          errors->setValueAt(i, data->valueAt(i)*fraction);
+      } else if (type==1) {
+        double average=0.0;
+        double dev=0.0;
+        for (int i=0; i<rows; i++)
+          average += data->valueAt(i);
+        average /= rows;
+        for (int i=0; i<rows; i++)
+          dev += pow(data->valueAt(i)-average, 2);
+        dev = sqrt(dev/rows);
+        for (int i=0; i<rows; i++)
+          errors->setValueAt(i, dev);
+      }
+      w.d_future_table->addChild(errors);
+      g->addErrorBars(xColName, name, &w, errors->name(), direction);
+    }
+  catch (NoSuchObject&)
+    { //user defined function
+      QMessageBox::critical(this,tr("Error bars error"),
+                            tr("This feature is not available for user defined function curves!"));
+      return;
+    }
+
 }
 
 void ApplicationWindow::defineErrorBars(const QString& curveName, const QString& errColumnName, int direction)
 {
-	Table *w=table(curveName);
-	if (!w)
-	{//user defined function --> no worksheet available
-		QMessageBox::critical(this,tr("Error"),
-				tr("This feature is not available for user defined function curves!"));
-		return;
-	}
+  try
+    {
+      Table& w=table(curveName);
 
-	Table *errTable=table(errColumnName);
-	if (w->numRows() != errTable->numRows())
+      Table& errTable=table(errColumnName);
+      if (w.numRows() != errTable.numRows())
 	{
-		QMessageBox::critical(this,tr("Error"),
+          QMessageBox::critical(this,tr("Error"),
 				tr("The selected columns have different numbers of rows!"));
 
-		addErrorBars();
-		return;
+          addErrorBars();
+          return;
 	}
 
-	int errCol=errTable->colIndex(errColumnName);
-	if (errTable->d_future_table->column(errCol)->dataType() != SciDAVis::TypeDouble)
+      int errCol=errTable.colIndex(errColumnName);
+      if (errTable.d_future_table->column(errCol)->dataType() != SciDAVis::TypeDouble)
 	{
-		QMessageBox::critical(this,tr("Error"),
+          QMessageBox::critical(this,tr("Error"),
 				tr("You can only define error bars for numeric columns."));
-		addErrorBars();
-		return;
+          addErrorBars();
+          return;
 	}
 
-	if (!d_workspace.activeSubWindow() || !d_workspace.activeSubWindow()->inherits("MultiLayer"))
-		return;
+      if (!d_workspace.activeSubWindow() || !d_workspace.activeSubWindow()->inherits("MultiLayer"))
+        return;
 
-	Graph* g = ((MultiLayer*)d_workspace.activeSubWindow())->activeGraph();
-	if (!g)
-		return;
+      Graph* g = ((MultiLayer*)d_workspace.activeSubWindow())->activeGraph();
+      if (!g)
+        return;
 
-	g->addErrorBars(curveName, errTable, errColumnName, direction);
-	emit modified();
+      g->addErrorBars(curveName, &errTable, errColumnName, direction);
+      emit modified();
+    }
+  catch (NoSuchObject&)
+    {//user defined function --> no worksheet available
+      QMessageBox::critical(this,tr("Error"),
+                            tr("This feature is not available for user defined function curves!"));
+      return;
+    }
+
 }
 
 void ApplicationWindow::removeCurves(const QString& name)
@@ -3271,10 +3303,10 @@ ApplicationWindow* ApplicationWindow::plotFile(const QString& fn)
 	app->applyUserSettings();
 	app->showMaximized();
 
-	Table* t = app->newTable(fn, app->columnSeparator, 0, true, app->strip_spaces,
+	Table& t = app->newTable(fn, app->columnSeparator, 0, true, app->strip_spaces,
 			app->simplify_spaces, app->d_convert_to_numeric, app->d_ASCII_import_locale);
-	t->setCaptionPolicy(MyWidget::Both);
-	app->multilayerPlot(t, t->YColumns(),Graph::LineSymbols);
+	t.setCaptionPolicy(MyWidget::Both);
+	app->multilayerPlot(&t, t.YColumns(),Graph::LineSymbols);
 	QApplication::restoreOverrideCursor();
 	return app;
 }
@@ -3323,19 +3355,18 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 		sorted_files.sort();
 		for (int i=0; i<sorted_files.size(); i++)
 		{
-			Table *w = newTable(sorted_files[i], local_column_separator, local_ignored_lines,
+			Table& w = newTable(sorted_files[i], local_column_separator, local_ignored_lines,
 					local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric, local_numeric_locale);
-			if (!w) continue;
-			w->setCaptionPolicy(MyWidget::Both);
-			setListViewLabel(w->name(), sorted_files[i]);
+			w.setCaptionPolicy(MyWidget::Both);
+			setListViewLabel(w.name(), sorted_files[i]);
 			if (i==0) 
 			{
-				dx = w->verticalHeaderWidth();
-				dy = w->frameGeometry().height() - w->height();
-				w->move(QPoint(0,0));
+				dx = w.verticalHeaderWidth();
+				dy = w.frameGeometry().height() - w.height();
+				w.move(QPoint(0,0));
 			} 
 			else
-				w->move(QPoint(i*dx,i*dy));
+				w.move(QPoint(i*dx,i*dy));
 
 		}
 		modifiedProject();
@@ -4019,158 +4050,158 @@ void ApplicationWindow::restartScriptingEnv()
 //TODO: rewrite the template system
 void ApplicationWindow::openTemplate()
 {
-	QString filter = "SciDAVis/QtiPlot 2D Graph Template (*.qpt);;";
-	filter += "SciDAVis/QtiPlot 3D Surface Template (*.qst);;";
-	filter += "SciDAVis/QtiPlot Table Template (*.qtt);;";
-	filter += "SciDAVis/QtiPlot Matrix Template (*.qmt)";
+  QString filter = "SciDAVis/QtiPlot 2D Graph Template (*.qpt);;";
+  filter += "SciDAVis/QtiPlot 3D Surface Template (*.qst);;";
+  filter += "SciDAVis/QtiPlot Table Template (*.qtt);;";
+  filter += "SciDAVis/QtiPlot Matrix Template (*.qmt)";
 
-	QString fn = QFileDialog::getOpenFileName(this, tr("Open Template File"), templatesDir, filter);
-	if (!fn.isEmpty())
-	{
-		QFileInfo fi(fn);
-		templatesDir = fi.absolutePath();
-		if (fn.contains(".qmt",Qt::CaseSensitive) || fn.contains(".qpt",Qt::CaseSensitive) ||
-				fn.contains(".qtt",Qt::CaseSensitive) || fn.contains(".qst",Qt::CaseSensitive))
-		{
-			if (!fi.exists())
-			{
-				QMessageBox::critical(this, tr("File opening error"),
-						tr("The file: <b>%1</b> doesn't exist!").arg(fn));
-				return;
-			}
-			QFile f(fn);
-			QTextStream t(&f);
-			t.setCodec(QTextCodec::codecForName("UTF-8"));
-			f.open(QIODevice::ReadOnly);
-			QStringList l=t.readLine().split(QRegExp("\\s"), QString::SkipEmptyParts);
-			QString fileType=l[0];
-			if( (fileType != "SciDAVis") && (fileType != "QtiPlot") )
-			{
-				QMessageBox::critical(this,tr("File opening error"),
-						tr("The file: <b> %1 </b> was not created using SciDAVis!").arg(fn));
-				return;
-			}
-			QStringList vl = l[1].split(".", QString::SkipEmptyParts);
-			if( fileType == "QtiPlot" )
-			{
-				d_file_version = 100*(vl[0]).toInt()+10*(vl[1]).toInt()+(vl[2]).toInt();
-				if(d_file_version > 90)
-				{
-					QMessageBox::critical(this, tr("File opening error"),  tr("SciDAVis does not support QtiPlot template files from versions later than 0.9.0.").arg(fn));
-					return;
-				}
-			}
-			else 
-				d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
+  QString fn = QFileDialog::getOpenFileName(this, tr("Open Template File"), templatesDir, filter);
+  if (!fn.isEmpty())
+    {
+      QFileInfo fi(fn);
+      templatesDir = fi.absolutePath();
+      if (fn.contains(".qmt",Qt::CaseSensitive) || fn.contains(".qpt",Qt::CaseSensitive) ||
+          fn.contains(".qtt",Qt::CaseSensitive) || fn.contains(".qst",Qt::CaseSensitive))
+        {
+          if (!fi.exists())
+            {
+              QMessageBox::critical(this, tr("File opening error"),
+                                    tr("The file: <b>%1</b> doesn't exist!").arg(fn));
+              return;
+            }
+          QFile f(fn);
+          QTextStream t(&f);
+          t.setCodec(QTextCodec::codecForName("UTF-8"));
+          f.open(QIODevice::ReadOnly);
+          QStringList l=t.readLine().split(QRegExp("\\s"), QString::SkipEmptyParts);
+          QString fileType=l[0];
+          if( (fileType != "SciDAVis") && (fileType != "QtiPlot") )
+            {
+              QMessageBox::critical(this,tr("File opening error"),
+                                    tr("The file: <b> %1 </b> was not created using SciDAVis!").arg(fn));
+              return;
+            }
+          QStringList vl = l[1].split(".", QString::SkipEmptyParts);
+          if( fileType == "QtiPlot" )
+            {
+              d_file_version = 100*(vl[0]).toInt()+10*(vl[1]).toInt()+(vl[2]).toInt();
+              if(d_file_version > 90)
+                {
+                  QMessageBox::critical(this, tr("File opening error"),  tr("SciDAVis does not support QtiPlot template files from versions later than 0.9.0.").arg(fn));
+                  return;
+                }
+            }
+          else 
+            d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
 
-			QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+          QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-			MyWidget *w = 0;
-			QString templateType;
-			t>>templateType;
+          MyWidget *w = 0;
+          QString templateType;
+          t>>templateType;
 
-			if (templateType == "<SurfacePlot>")
-			{
-				t.skipWhiteSpace();
-				QStringList lst;
-				while (!t.atEnd())
-					lst << t.readLine();
-				w = openSurfacePlot(this,lst);
-				if (w)
-					((Graph3D *)w)->clearData();
-			}
-			else
-			{
-				int rows, cols;
-				t>>rows; t>>cols;
-				t.skipWhiteSpace();
-				QString geometry = t.readLine();
+          if (templateType == "<SurfacePlot>")
+            {
+              t.skipWhiteSpace();
+              QStringList lst;
+              while (!t.atEnd())
+                lst << t.readLine();
+              w = openSurfacePlot(this,lst);
+              if (w)
+                ((Graph3D *)w)->clearData();
+            }
+          else
+            {
+              int rows, cols;
+              t>>rows; t>>cols;
+              t.skipWhiteSpace();
+              QString geometry = t.readLine();
 
-				if (templateType == "<multiLayer>")
-				{ // FIXME: workarounds for template
-					w = new MultiLayer("", &d_workspace, 0);
-					w->setAttribute(Qt::WA_DeleteOnClose);
-					QString label = generateUniqueName(tr("Graph"));
-					initBareMultilayerPlot((MultiLayer*)w, label.replace(QRegExp("_"),"-"));
-					if (w)
-					{
-						((MultiLayer*)w)->setCols(cols);
-						((MultiLayer*)w)->setRows(rows);
-						restoreWindowGeometry(this, w, geometry);
-						if (d_file_version > 83)
-						{
-							QStringList lst=t.readLine().split("\t", QString::SkipEmptyParts);
-							((MultiLayer*)w)->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
-							lst=t.readLine().split("\t", QString::SkipEmptyParts);
-							((MultiLayer*)w)->setSpacing(lst[1].toInt(),lst[2].toInt());
-							lst=t.readLine().split("\t", QString::SkipEmptyParts);
-							((MultiLayer*)w)->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
-							lst=t.readLine().split("\t", QString::SkipEmptyParts);
-							((MultiLayer*)w)->setAlignement(lst[1].toInt(),lst[2].toInt());
-						}
-						while (!t.atEnd())
-						{//open layers
-							QString s=t.readLine();
-							if (s.left(7)=="<graph>")
-							{
-								QStringList lst;
-								while ( s!="</graph>" )
-								{
-									s = t.readLine();
-									lst << s;
-								}
-								openGraph(this, (MultiLayer*)w, lst);
-							}
-						}
-					}
-				}
-				else
-				{
-					if (templateType == "<table>")
-						w = newTable(tr("Table1"), rows, cols);
-					else if (templateType == "<matrix>")
-						w = newMatrix(rows, cols);
-					if (w)
-					{
-						QStringList lst;
-						while (!t.atEnd())
-							lst << t.readLine();
-						w->restore(lst);
-						restoreWindowGeometry(this, w, geometry);
-					}
-				}
-			}
+              if (templateType == "<multiLayer>")
+                { // FIXME: workarounds for template
+                  w = new MultiLayer("", &d_workspace, 0);
+                  w->setAttribute(Qt::WA_DeleteOnClose);
+                  QString label = generateUniqueName(tr("Graph"));
+                  initBareMultilayerPlot((MultiLayer*)w, label.replace(QRegExp("_"),"-"));
+                  if (w)
+                    {
+                      ((MultiLayer*)w)->setCols(cols);
+                      ((MultiLayer*)w)->setRows(rows);
+                      restoreWindowGeometry(this, w, geometry);
+                      if (d_file_version > 83)
+                        {
+                          QStringList lst=t.readLine().split("\t", QString::SkipEmptyParts);
+                          ((MultiLayer*)w)->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
+                          lst=t.readLine().split("\t", QString::SkipEmptyParts);
+                          ((MultiLayer*)w)->setSpacing(lst[1].toInt(),lst[2].toInt());
+                          lst=t.readLine().split("\t", QString::SkipEmptyParts);
+                          ((MultiLayer*)w)->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
+                          lst=t.readLine().split("\t", QString::SkipEmptyParts);
+                          ((MultiLayer*)w)->setAlignement(lst[1].toInt(),lst[2].toInt());
+                        }
+                      while (!t.atEnd())
+                        {//open layers
+                          QString s=t.readLine();
+                          if (s.left(7)=="<graph>")
+                            {
+                              QStringList lst;
+                              while ( s!="</graph>" )
+                                {
+                                  s = t.readLine();
+                                  lst << s;
+                                }
+                              openGraph(this, (MultiLayer*)w, lst);
+                            }
+                        }
+                    }
+                }
+              else
+                {
+                  if (templateType == "<table>")
+                    w = &newTable(tr("Table1"), rows, cols);
+                  else if (templateType == "<matrix>")
+                    w = &newMatrix(rows, cols);
+                  if (w)
+                    {
+                      QStringList lst;
+                      while (!t.atEnd())
+                        lst << t.readLine();
+                      w->restore(lst);
+                      restoreWindowGeometry(this, w, geometry);
+                    }
+                }
+            }
 
-			f.close();
-			if (w)
-			{
-				switch (w->status())
-				{
-				case MyWidget::Maximized :
-					w->setMaximized();
-					break;
-				case MyWidget::Minimized :
-					w->setMinimized();
-					break;
-				case MyWidget::Hidden :
-					w->setHidden();
-					break;
-				case MyWidget::Normal :
-					w->setNormal();
-					break;
-				}
-				customMenu((MyWidget*)w);
-				customToolBars((MyWidget*)w);
-			}
-			QApplication::restoreOverrideCursor();
-		}
-		else
-		{
-			QMessageBox::critical(this,tr("File opening error"),
-					tr("The file: <b>%1</b> is not a SciDAVis template file!").arg(fn));
-			return;
-		}
-	}
+          f.close();
+          if (w)
+            {
+              switch (w->status())
+                {
+                case MyWidget::Maximized :
+                  w->setMaximized();
+                  break;
+                case MyWidget::Minimized :
+                  w->setMinimized();
+                  break;
+                case MyWidget::Hidden :
+                  w->setHidden();
+                  break;
+                case MyWidget::Normal :
+                  w->setNormal();
+                  break;
+                }
+              customMenu((MyWidget*)w);
+              customToolBars((MyWidget*)w);
+            }
+          QApplication::restoreOverrideCursor();
+        }
+      else
+        {
+          QMessageBox::critical(this,tr("File opening error"),
+                                tr("The file: <b>%1</b> is not a SciDAVis template file!").arg(fn));
+          return;
+        }
+    }
 }
 
 void ApplicationWindow::readSettings()
@@ -5495,9 +5526,9 @@ void ApplicationWindow::exportAllTables(const QString& sep, bool colNames, bool 
 void ApplicationWindow::exportASCII(const QString& tableName, const QString& sep,
 		bool colNames, bool expSelection)
 {
-	Table* t = table(tableName);
-	if (!t)
-		return;
+  try
+    {
+  Table& t = table(tableName);
 
 	QString selectedFilter;
 	QString fname = QFileDialog::getSaveFileName(this, tr("Choose a filename to save under"), asciiDirPath, "*.txt;;*.csv;;*.dat;;*.DAT", &selectedFilter);
@@ -5511,9 +5542,11 @@ void ApplicationWindow::exportASCII(const QString& tableName, const QString& sep
 		asciiDirPath = fi.absolutePath();
 
 		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-		t->exportASCII(fname, sep, colNames, expSelection);
+		t.exportASCII(fname, sep, colNames, expSelection);
 		QApplication::restoreOverrideCursor();
 	}
+    }
+  catch (NoSuchObject&) {}
 }
 
 void ApplicationWindow::correlate()
@@ -7169,7 +7202,7 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
   } else if (w->inherits("Table")){
     Table *t = (Table *)w;
     QString caption = generateUniqueName(tr("Table"));
-    nw = newTable(caption, t->numRows(), t->numCols());
+    nw = &newTable(caption, t->numRows(), t->numCols());
     ((Table *)nw)->copy(t);
   } else if (w->inherits("Graph3D")){
     Graph3D *g = (Graph3D *)w;
@@ -7182,7 +7215,7 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
     QString caption = generateUniqueName(tr("Graph"));
     QString s = g->formula();
     if (g->userFunction())
-      nw = newPlot3D(caption, s, g->xStart(), g->xStop(), g->yStart(), g->yStop(), g->zStart(), g->zStop());
+      nw = &newPlot3D(caption, s, g->xStart(), g->xStop(), g->yStart(), g->yStop(), g->zStart(), g->zStop());
     else if (s.endsWith("(Z)"))
       nw = dataPlotXYZ(caption, s, g->xStart(),g->xStop(), g->yStart(),g->yStop(),g->zStart(),g->zStop());
     else if (s.endsWith("(Y)"))//Ribbon plot
@@ -7196,10 +7229,10 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
     ((Graph3D *)nw)->copy(g);
     customToolBars((MyWidget*)nw);
   } else if (w->inherits("Matrix")){
-    nw = newMatrix(((Matrix *)w)->numRows(), ((Matrix *)w)->numCols());
+    nw = &newMatrix(((Matrix *)w)->numRows(), ((Matrix *)w)->numCols());
     ((Matrix *)nw)->copy((Matrix *)w);
   } else if (w->inherits("Note")){
-    nw = newNote();
+    nw = &newNote();
     if (nw)
       ((Note*)nw)->setText(((Note*)w)->text());
   }
@@ -7805,19 +7838,21 @@ QMenu* ApplicationWindow::showWindowPopupMenuImpl(QTreeWidgetItem *it)
 
 void ApplicationWindow::showTable(const QString& curve)
 {
-	Table* w=table(curve);
-	if (!w)
-		return;
+  try
+    {
+      Table& w=table(curve);
 
-	updateWindowLists(w);
-	int colIndex = w->colIndex(curve);
-	w->deselectAll();
-	w->setCellsSelected(0, colIndex, w->d_future_table->rowCount()-1, colIndex);
-	w->showMaximized();
-	QTreeWidgetItem *it=lv.findItems (w->name(), Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
-	if (it)
-		it->setText(2,tr("Maximized"));
-	emit modified();
+      updateWindowLists(&w);
+      int colIndex = w.colIndex(curve);
+      w.deselectAll();
+      w.setCellsSelected(0, colIndex, w.d_future_table->rowCount()-1, colIndex);
+      w.showMaximized();
+      QTreeWidgetItem *it=lv.findItems (w.name(), Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
+      if (it)
+        it->setText(2,tr("Maximized"));
+      emit modified();
+    }
+  catch (NoSuchObject&) {}
 }
 
 QStringList ApplicationWindow::depending3DPlots(Matrix *m)
@@ -8316,16 +8351,16 @@ void ApplicationWindow::showCurveRangeDialog()
 	showCurveRangeDialog(g, g->curveIndex(curveKey));
 }
 
-CurveRangeDialog* ApplicationWindow::showCurveRangeDialog(Graph *g, int curve)
+CurveRangeDialog& ApplicationWindow::showCurveRangeDialog(Graph *g, int curve)
 {
 	if (!g)
-		return 0;
+          throw std::invalid_argument("no graph");
 
 	CurveRangeDialog* crd = new CurveRangeDialog(this);
 	crd->setAttribute(Qt::WA_DeleteOnClose);
 	crd->setCurveToModify(g, curve);
 	crd->show();
-	return crd;
+	return *crd;
 }
 
 void ApplicationWindow::showFunctionDialog()
@@ -9119,19 +9154,19 @@ Note* ApplicationWindow::openNote(ApplicationWindow* app, const QStringList &fli
 {
 	QStringList lst=flist[0].split("\t", QString::SkipEmptyParts);
 	QString caption = lst[0];
-	Note* w = app->newNote(caption);
+	Note& w = app->newNote(caption);
 	if (lst.count() == 2)
 	{
 		app->setListViewDate(caption, lst[1]);
-		w->setBirthDate(lst[1]);
+		w.setBirthDate(lst[1]);
 	}
-	restoreWindowGeometry(app, w, flist[1]);
+	restoreWindowGeometry(app, &w, flist[1]);
 
 	lst=flist[2].split("\t");
-	w->setWindowLabel(lst[1]);
-	w->setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
-	app->setListViewLabel(w->name(), lst[1]);
-	return w;
+	w.setWindowLabel(lst[1]);
+	w.setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
+	app->setListViewLabel(w.name(), lst[1]);
+	return &w;
 }
 
 // TODO: most of this code belongs into matrix
@@ -9146,36 +9181,36 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 		int rows = list[1].toInt();
 		int cols = list[2].toInt();
 
-		Matrix* w = app->newMatrix(caption, rows, cols);
+		Matrix& w = app->newMatrix(caption, rows, cols);
 		app->setListViewDate(caption,list[3]);
-		w->setBirthDate(list[3]);
+		w.setBirthDate(list[3]);
 
 		for (line++; line!=flist.end(); line++)
 		{
 			QStringList fields = (*line).split("\t");
 			if (fields[0] == "geometry") {
-				restoreWindowGeometry(app, w, *line);
+				restoreWindowGeometry(app, &w, *line);
 			} else if (fields[0] == "ColWidth") {
-				w->setColumnsWidth(fields[1].toInt());
+				w.setColumnsWidth(fields[1].toInt());
 			} else if (fields[0] == "Formula") {
-				w->setFormula(fields[1]);
+				w.setFormula(fields[1]);
 			} else if (fields[0] == "<formula>") {
 				QString formula;
 				for (line++; line!=flist.end() && *line != "</formula>"; line++)
 					formula += *line + "\n";
 				formula.truncate(formula.length()-1);
-				w->setFormula(formula);
+				w.setFormula(formula);
 			} else if (fields[0] == "TextFormat") {
 				if (fields[1] == "f")
-					w->setTextFormat('f', fields[2].toInt());
+					w.setTextFormat('f', fields[2].toInt());
 				else
-					w->setTextFormat('e', fields[2].toInt());
+					w.setTextFormat('e', fields[2].toInt());
 			} else if (fields[0] == "WindowLabel") { // d_file_version > 71
-				w->setWindowLabel(fields[1]);
-				w->setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
-				app->setListViewLabel(w->name(), fields[1]);
+				w.setWindowLabel(fields[1]);
+				w.setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
+				app->setListViewLabel(w.name(), fields[1]);
 			} else if (fields[0] == "Coordinates") { // d_file_version > 81
-				w->setCoordinates(fields[1].toDouble(), fields[2].toDouble(), fields[3].toDouble(), fields[4].toDouble());
+				w.setCoordinates(fields[1].toDouble(), fields[2].toDouble(), fields[3].toDouble(), fields[4].toDouble());
 			} else // <data> or values
 				break;
 		}
@@ -9196,11 +9231,11 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 					continue;
 
 				if (d_file_version < 90)
-					w->setCell(row, col, QLocale::c().toDouble(cell));
+					w.setCell(row, col, QLocale::c().toDouble(cell));
 				else if (d_file_version >= 0x000100)
-					w->setCell(row, col, QLocale().toDouble(cell));
+					w.setCell(row, col, QLocale().toDouble(cell));
 				else
-					w->setText(row, col, cell);
+					w.setText(row, col, cell);
 			}
 			if (t.elapsed() > 1000)
 			{
@@ -9209,11 +9244,11 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 			}
 		}
 
-		return w;
+		return &w;
 	}
 	else
 	{
-		Matrix* w = app->newMatrix("matrix", 1, 1);
+		Matrix& w = app->newMatrix("matrix", 1, 1);
 		int length = flist.at(0).toInt();
 		int index = 1;
 		QString xml(flist.at(index++));
@@ -9222,7 +9257,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 		XmlStreamReader reader(xml);
 		reader.readNext();
 		reader.readNext(); // read the start document
-		if (w->d_future_matrix->load(&reader) == false)
+		if (w.d_future_matrix->load(&reader) == false)
 		{
 			QString msg_text = reader.errorString();
 			QMessageBox::critical(this, tr("Error reading matrix from project file"), msg_text);
@@ -9235,10 +9270,10 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 				msg_text += str + "\n";
 			QMessageBox::warning(this, tr("Project loading partly failed"), msg_text);
 		}
-		restoreWindowGeometry(app, w, flist.at(index));
+		restoreWindowGeometry(app, &w, flist.at(index));
 
-		activateSubWindow(w);
-		return w;
+		activateSubWindow(&w);
+		return &w;
 	}
 }
 
@@ -9261,30 +9296,30 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 		int rows = list[1].toInt();
 		int cols = list[2].toInt();
 
-		Table* w = app->newTable(caption, rows, cols);
+		Table& w = app->newTable(caption, rows, cols);
 		app->setListViewDate(caption, list[3]);
-		w->setBirthDate(list[3]);
+		w.setBirthDate(list[3]);
 
 		for (line++; line!=flist.end(); line++)
 		{
 			QStringList fields = (*line).split("\t");
 			if (fields[0] == "geometry" || fields[0] == "tgeometry") {
-				restoreWindowGeometry(app, w, *line);
+				restoreWindowGeometry(app, &w, *line);
 			} else if (fields[0] == "header") {
 				fields.pop_front();
 				if (d_file_version >= 78)
-					w->importV0x0001XXHeader(fields);
+					w.importV0x0001XXHeader(fields);
 				else
 				{
-					w->setColPlotDesignation(list[4].toInt(), SciDAVis::X);
-					w->setColPlotDesignation(list[6].toInt(), SciDAVis::Y);
-					w->setHeader(fields);
+					w.setColPlotDesignation(list[4].toInt(), SciDAVis::X);
+					w.setColPlotDesignation(list[6].toInt(), SciDAVis::Y);
+					w.setHeader(fields);
 				}
 			} else if (fields[0] == "ColWidth") {
 				fields.pop_front();
-				w->setColWidths(fields);
+				w.setColWidths(fields);
 			} else if (fields[0] == "com") { // legacy code
-				w->setCommands(*line);
+				w.setCommands(*line);
 			} else if (fields[0] == "<com>") {
 				for (line++; line!=flist.end() && *line != "</com>"; line++)
 				{
@@ -9293,18 +9328,18 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 					for (line++; line!=flist.end() && *line != "</col>"; line++)
 						formula += *line + "\n";
 					formula.truncate(formula.length()-1);
-					w->setCommand(col,formula);
+					w.setCommand(col,formula);
 				}
 			} else if (fields[0] == "ColType") { // d_file_version > 65
 				fields.pop_front();
-				w->setColumnTypes(fields);
+				w.setColumnTypes(fields);
 			} else if (fields[0] == "Comments") { // d_file_version > 71
 				fields.pop_front();
-				w->setColComments(fields);
+				w.setColComments(fields);
 			} else if (fields[0] == "WindowLabel") { // d_file_version > 71
-				w->setWindowLabel(fields[1]);
-				w->setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
-				app->setListViewLabel(w->name(), fields[1]);
+				w.setWindowLabel(fields[1]);
+				w.setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
+				app->setListViewLabel(w.name(), fields[1]);
 			} else // <data> or values
 				break;
 		}
@@ -9323,12 +9358,12 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 					if (cell.isEmpty())
 						continue;
 
-					if (d_file_version < 90 && w->columnType(col) == SciDAVis::Numeric)
-						w->setCell(row, col, QLocale::c().toDouble(cell.replace(",", ".")));
-					else if (d_file_version >= 0x000100 && w->columnType(col) == SciDAVis::Numeric)
-						w->setCell(row, col, QLocale().toDouble(cell));
+					if (d_file_version < 90 && w.columnType(col) == SciDAVis::Numeric)
+						w.setCell(row, col, QLocale::c().toDouble(cell.replace(",", ".")));
+					else if (d_file_version >= 0x000100 && w.columnType(col) == SciDAVis::Numeric)
+						w.setCell(row, col, QLocale().toDouble(cell));
 					else
-						w->setText(row, col, cell);
+						w.setText(row, col, cell);
 				}
 			}
 			if (t.elapsed() > 1000)
@@ -9339,7 +9374,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 		}
 		QApplication::restoreOverrideCursor();
 
-		return w;
+		return &w;
 	}
 	else
 	{
@@ -9371,10 +9406,10 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 		if (tmp_file.isOpen())
 			reader.setDevice(&tmp_file);
 
-		Table* w = app->newTable("table", 1, 1);
+		Table& w = app->newTable("table", 1, 1);
 		reader.readNext();
 		reader.readNext(); // read the start document
-		if (w->d_future_table->load(&reader) == false)
+		if (w.d_future_table->load(&reader) == false)
 		{
 			QString msg_text = reader.errorString();
 			QMessageBox::critical(this, tr("Error reading table from project file"), msg_text);
@@ -9387,78 +9422,83 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 				msg_text += str + "\n";
 			QMessageBox::warning(this, tr("Project loading partly failed"), msg_text);
 		}
-		w->setBirthDate(w->d_future_table->creationTime().toString(Qt::LocalDate));
+		w.setBirthDate(w.d_future_table->creationTime().toString(Qt::LocalDate));
 
 		s = stream.readLine();
-		restoreWindowGeometry(app, w, s);
+		restoreWindowGeometry(app, &w, s);
 
 		s = stream.readLine(); // </table>
 
-		activateSubWindow(w);
-		return w;
+		activateSubWindow(&w);
+		return &w;
 	}
 }
 
 TableStatistics* ApplicationWindow::openTableStatistics(const QStringList &flist)
 {
-	QStringList::const_iterator line = flist.begin();
+  try
+    {
+      QStringList::const_iterator line = flist.begin();
 
-	QStringList list=(*line++).split("\t");
-	QString caption=list[0];
+      QStringList list=(*line++).split("\t");
+      QString caption=list[0];
 
-	QList<int> targets;
-	for (int i=1; i <= (*line).count('\t'); i++)
-		targets << (*line).section('\t',i,i).toInt();
+      QList<int> targets;
+      for (int i=1; i <= (*line).count('\t'); i++)
+        targets << (*line).section('\t',i,i).toInt();
 
-	TableStatistics* w = newTableStatistics(table(list[1]),
-			list[2]=="row" ? TableStatistics::StatRow : TableStatistics::StatColumn, targets, caption);
+      TableStatistics* w = newTableStatistics(&table(list[1]),
+                                              list[2]=="row" ? TableStatistics::StatRow : TableStatistics::StatColumn, targets, caption);
 
-	setListViewDate(caption,list[3]);
-	w->setBirthDate(list[3]);
+      setListViewDate(caption,list[3]);
+      w->setBirthDate(list[3]);
 
-	for (line++; line!=flist.end(); line++)
+      for (line++; line!=flist.end(); line++)
 	{
-		QStringList fields = (*line).split("\t");
-		if (fields[0] == "geometry"){
-			restoreWindowGeometry(this, w, *line);}
-		else if (fields[0] == "header") {
-			fields.pop_front();
-			if (d_file_version >= 78)
-				w->importV0x0001XXHeader(fields);
-			else
-			{
-				w->setColPlotDesignation(list[4].toInt(), SciDAVis::X);
-				w->setColPlotDesignation(list[6].toInt(), SciDAVis::Y);
-				w->setHeader(fields);
-			}
-		} else if (fields[0] == "ColWidth") {
-			fields.pop_front();
-			w->setColWidths(fields);
-		} else if (fields[0] == "com") { // legacy code
-			w->setCommands(*line);
-		} else if (fields[0] == "<com>") {
-			for (line++; line!=flist.end() && *line != "</com>"; line++)
-			{
-				int col = (*line).mid(9,(*line).length()-11).toInt();
-				QString formula;
-				for (line++; line!=flist.end() && *line != "</col>"; line++)
-					formula += *line + "\n";
-				formula.truncate(formula.length()-1);
-				w->setCommand(col,formula);
-			}
-		} else if (fields[0] == "ColType") { // d_file_version > 65
-			fields.pop_front();
-			w->setColumnTypes(fields);
-		} else if (fields[0] == "Comments") { // d_file_version > 71
-			fields.pop_front();
-			w->setColComments(fields);
-		} else if (fields[0] == "WindowLabel") { // d_file_version > 71
-			w->setWindowLabel(fields[1]);
-			w->setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
-			setListViewLabel(w->name(), fields[1]);
-		}
+          QStringList fields = (*line).split("\t");
+          if (fields[0] == "geometry"){
+            restoreWindowGeometry(this, w, *line);}
+          else if (fields[0] == "header") {
+            fields.pop_front();
+            if (d_file_version >= 78)
+              w->importV0x0001XXHeader(fields);
+            else
+              {
+                w->setColPlotDesignation(list[4].toInt(), SciDAVis::X);
+                w->setColPlotDesignation(list[6].toInt(), SciDAVis::Y);
+                w->setHeader(fields);
+              }
+          } else if (fields[0] == "ColWidth") {
+            fields.pop_front();
+            w->setColWidths(fields);
+          } else if (fields[0] == "com") { // legacy code
+            w->setCommands(*line);
+          } else if (fields[0] == "<com>") {
+            for (line++; line!=flist.end() && *line != "</com>"; line++)
+              {
+                int col = (*line).mid(9,(*line).length()-11).toInt();
+                QString formula;
+                for (line++; line!=flist.end() && *line != "</col>"; line++)
+                  formula += *line + "\n";
+                formula.truncate(formula.length()-1);
+                w->setCommand(col,formula);
+              }
+          } else if (fields[0] == "ColType") { // d_file_version > 65
+            fields.pop_front();
+            w->setColumnTypes(fields);
+          } else if (fields[0] == "Comments") { // d_file_version > 71
+            fields.pop_front();
+            w->setColComments(fields);
+          } else if (fields[0] == "WindowLabel") { // d_file_version > 71
+            w->setWindowLabel(fields[1]);
+            w->setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
+            setListViewLabel(w->name(), fields[1]);
+          }
 	}
-	return w;
+      return w;
+    }
+  catch (NoSuchObject&)
+    {return nullptr;}
 }
 
 Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
@@ -9572,26 +9612,27 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			}
 			QPen pen = QPen(QColor(COLORVALUE(curve[3])),curve[2].toInt(),Graph::getPenStyle(curve[4]));
 
-			Table *table = app->table(curve[1]);
-			if (table)
+			try
 			{
-				int startRow = 0;
-				int endRow = table->numRows() - 1;
-				int first_color = curve[7].toInt();
-				bool visible = true;
-				if (d_file_version >= 90)
-				{
-					startRow = curve[8].toInt();
-					endRow = curve[9].toInt();
-					visible = ((curve.last() == "1") ? true : false);
-				}
+                          Table& table = app->table(curve[1]);
+                          int startRow = 0;
+                          int endRow = table.numRows() - 1;
+                          int first_color = curve[7].toInt();
+                          bool visible = true;
+                          if (d_file_version >= 90)
+                            {
+                              startRow = curve[8].toInt();
+                              endRow = curve[9].toInt();
+                              visible = ((curve.last() == "1") ? true : false);
+                            }
 
-				if (d_file_version <= 89)
-					first_color = convertOldToNewColorIndex(first_color);
+                          if (d_file_version <= 89)
+                            first_color = convertOldToNewColorIndex(first_color);
 
-				ag->plotPie(table, curve[1], pen, curve[5].toInt(),
-					curve[6].toInt(), first_color, startRow, endRow, visible);
+                          ag->plotPie(&table, curve[1], pen, curve[5].toInt(),
+                                      curve[6].toInt(), first_color, startRow, endRow, visible);
 			}
+                        catch (NoSuchObject&) {}
 		}
 		else if (s.left(6)=="curve\t")
 		{
@@ -9654,16 +9695,16 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                       cl.lJoinStyle = curve[17].toInt();
                       cl.lCustomDash = curve[18];
 
-                      Table *w = app->table(curve[2]);
-                      if (w)
+                      try
                         {
+                          Table& w = app->table(curve[2]);
                           int plotType = curve[3].toInt();
                           if(curve.count()>21 && (plotType == Graph::VectXYXY || plotType == Graph::VectXYAM))
                             {
                               QStringList colsList;
                               colsList<<curve[2]; colsList<<curve[20]; colsList<<curve[21];
                               if (d_file_version < 72)
-                                colsList.prepend(w->colName(curve[1].toInt()));
+                                colsList.prepend(w.colName(curve[1].toInt()));
                               else
                                 colsList.prepend(curve[1]);
 
@@ -9675,7 +9716,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                                   endRow = curve[curve.count()-2].toInt();
                                 }
 
-                              ag->plotVectorCurve(w, colsList, plotType, startRow, endRow);
+                              ag->plotVectorCurve(&w, colsList, plotType, startRow, endRow);
                               curve_loaded = true;
 
                               if (d_file_version <= 77)
@@ -9695,13 +9736,13 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                                 }
                             }
                           else if(plotType == Graph::Box) {
-                            ag->openBoxDiagram(w, curve, d_file_version);
+                            ag->openBoxDiagram(&w, curve, d_file_version);
                             curve_loaded = true;
                           } else if (plotType == Graph::Histogram && curve.count()>19) {
                             if (d_file_version < 90)
-                              curve_loaded = ag->plotHistogram(w, QStringList() << curve[2]);
+                              curve_loaded = ag->plotHistogram(&w, QStringList() << curve[2]);
                             else
-                              curve_loaded = ag->plotHistogram(w, QStringList() << curve[2],
+                              curve_loaded = ag->plotHistogram(&w, QStringList() << curve[2],
                                                                curve[curve.count()-3].toInt(), curve[curve.count()-2].toInt());
                             if (curve_loaded) {
                               QwtHistogram *h = (QwtHistogram *)ag->curve(curveID);
@@ -9713,14 +9754,14 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                             }
                           } else {
                             if (d_file_version < 72)
-                              curve_loaded = ag->insertCurve(w, curve[1].toInt(), curve[2], plotType);
+                              curve_loaded = ag->insertCurve(&w, curve[1].toInt(), curve[2], plotType);
                             else if (d_file_version < 90)
-                              curve_loaded = ag->insertCurve(w, curve[1], curve[2], plotType);
+                              curve_loaded = ag->insertCurve(&w, curve[1], curve[2], plotType);
                             else
                               {
                                 int startRow = curve[curve.count()-3].toInt();
                                 int endRow = curve[curve.count()-2].toInt();
-                                curve_loaded = ag->insertCurve(w, curve[1], curve[2], plotType, startRow, endRow);
+                                curve_loaded = ag->insertCurve(&w, curve[1], curve[2], plotType, startRow, endRow);
                               }
                           }
 
@@ -9749,6 +9790,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                                 }
                             }
                         }
+                      catch (NoSuchObject&) {}
                       if (curve_loaded) curveID++;
                     }
 		}
@@ -9825,14 +9867,14 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		else if (s.contains ("ErrorBars"))
 		{
 			QStringList curve = s.split("\t", QString::SkipEmptyParts);
-			Table *w = app->table(curve[3]);
-			Table *errTable = app->table(curve[4]);
-			if (w && errTable)
+                        try
 			{
-				ag->addErrorBars(curve[2], curve[3], errTable, curve[4], curve[1].toInt(),
-						curve[5].toInt(), curve[6].toInt(), QColor(COLORVALUE(curve[7])),
-						curve[8].toInt(), curve[10].toInt(), curve[9].toInt());
+                          Table& errTable = app->table(curve[4]);
+                          ag->addErrorBars(curve[2], curve[3], &errTable, curve[4], curve[1].toInt(),
+                                           curve[5].toInt(), curve[6].toInt(), QColor(COLORVALUE(curve[7])),
+                                           curve[8].toInt(), curve[10].toInt(), curve[9].toInt());
 			}
+                        catch (NoSuchObject&) {}
 			curveID++;
 		}
 		else if (s == "<spectrogram>")
@@ -10015,49 +10057,61 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains("AxisType"))
 		{
-			QStringList fList=s.split("\t");
-			if (fList.size() >= 5)
-				for (int i=0; i<4; i++) {
-					QStringList lst = fList[i+1].split(";", QString::SkipEmptyParts);
-					if (lst.size() < 2) continue;
-					int format = lst[0].toInt();
-					switch(format) {
-						case Graph::Day:
-							ag->setLabelsDayFormat(i, lst[1].toInt());
-							break;
-						case Graph::Month:
-							ag->setLabelsMonthFormat(i, lst[1].toInt());
-							break;
-						case Graph::Time:
-						case Graph::Date:
-						case Graph::DateTime:
-							ag->setLabelsDateTimeFormat(i, format, lst[1]+";"+lst[2]);
-							break;
-						case Graph::Txt:
-							ag->setLabelsTextFormat(i, app->table(lst[1]), lst[1]);
-							break;
-						case Graph::ColHeader:
-							ag->setLabelsColHeaderFormat(i, app->table(lst[1]));
-							break;
-					}
-				}
+                  QStringList fList=s.split("\t");
+                  if (fList.size() >= 5)
+                    for (int i=0; i<4; i++) {
+                      QStringList lst = fList[i+1].split(";", QString::SkipEmptyParts);
+                      if (lst.size() < 2) continue;
+                      int format = lst[0].toInt();
+                      switch(format) {
+                      case Graph::Day:
+                        ag->setLabelsDayFormat(i, lst[1].toInt());
+                        break;
+                      case Graph::Month:
+                        ag->setLabelsMonthFormat(i, lst[1].toInt());
+                        break;
+                      case Graph::Time:
+                      case Graph::Date:
+                      case Graph::DateTime:
+                        ag->setLabelsDateTimeFormat(i, format, lst[1]+";"+lst[2]);
+                        break;
+                      case Graph::Txt:
+                        try
+                          {
+                            ag->setLabelsTextFormat(i, &app->table(lst[1]), lst[1]);
+                          }
+                        catch (NoSuchObject&) {}
+                        break;
+                      case Graph::ColHeader:
+                        try
+                          {
+                            ag->setLabelsColHeaderFormat(i, &app->table(lst[1]));
+                          }
+                        catch (NoSuchObject&) {}
+                        break;
+                      }
+                    }
 		}
 		else if (d_file_version < 69 && s.contains ("AxesTickLabelsCol"))
 		{
-			QStringList fList = s.split("\t");
-			if (fList.size() >= 5) {
-				QList<int> axesTypes = ag->axesType();
-				for (int i=0; i<4; i++) {
-					switch(axesTypes[i]) {
-						case Graph::Txt:
-							ag->setLabelsTextFormat(i, app->table(fList[i+1]), fList[i+1]);
-							break;
-						case Graph::ColHeader:
-							ag->setLabelsColHeaderFormat(i, app->table(fList[i+1]));
-							break;
-					}
-				}
-			}
+                  QStringList fList = s.split("\t");
+                  if (fList.size() >= 5) {
+                    QList<int> axesTypes = ag->axesType();
+                    for (int i=0; i<4; i++) {
+                      try
+                        {
+                          switch(axesTypes[i]) {
+                          case Graph::Txt:
+                            ag->setLabelsTextFormat(i, &app->table(fList[i+1]), fList[i+1]);
+                            break;
+                          case Graph::ColHeader:
+                            ag->setLabelsColHeaderFormat(i, &app->table(fList[i+1]));
+                            break;
+                          }
+                        }
+                      catch (NoSuchObject&) {}
+                    }
+                  }
 		}
 	}
 	ag->replot();
@@ -10097,7 +10151,7 @@ Graph3D* ApplicationWindow::openSurfacePlot(ApplicationWindow* app, const QStrin
 		plot=app->openMatrixPlot3D(caption, fList[1], fList[2].toDouble(),fList[3].toDouble(),
 				fList[4].toDouble(),fList[5].toDouble(),fList[6].toDouble(),fList[7].toDouble());
 	else
-		plot=app->newPlot3D(caption, fList[1],fList[2].toDouble(),fList[3].toDouble(),
+		plot=&app->newPlot3D(caption, fList[1],fList[2].toDouble(),fList[3].toDouble(),
 				fList[4].toDouble(),fList[5].toDouble(),
 				fList[6].toDouble(),fList[7].toDouble());
 
@@ -11490,22 +11544,24 @@ void ApplicationWindow::translateActionsStrings()
 Graph3D * ApplicationWindow::openMatrixPlot3D(const QString& caption, const QString& matrix_name,
 		double xl,double xr,double yl,double yr,double zl,double zr)
 {
-	QString name = matrix_name;
-	name.remove("matrix<", Qt::CaseSensitive);
-	name.remove(">");
-	Matrix* m = matrix(name);
-	if (!m)
-		return 0;
+  QString name = matrix_name;
+  name.remove("matrix<", Qt::CaseSensitive);
+  name.remove(">");
+  try
+    {
+      Matrix& m = matrix(name);
 
-	Graph3D *plot = new Graph3D("", &d_workspace, 0, 0);
-	plot->setAttribute(Qt::WA_DeleteOnClose);
-	plot->setWindowTitle(caption);
-	plot->setName(caption);
-	plot->addMatrixData(m, xl, xr, yl, yr, zl, zr);
-	plot->update();
+      Graph3D *plot = new Graph3D("", &d_workspace, 0, 0);
+      plot->setAttribute(Qt::WA_DeleteOnClose);
+      plot->setWindowTitle(caption);
+      plot->setName(caption);
+      plot->addMatrixData(&m, xl, xr, yl, yr, zl, zr);
+      plot->update();
 
-	initPlot3D(plot);
-	return plot;
+      initPlot3D(plot);
+      return plot;
+    }
+  catch (NoSuchObject&) {return nullptr;}
 }
 
 void ApplicationWindow::plot3DMatrix(int style)
@@ -13625,27 +13681,27 @@ void ApplicationWindow::cascade()
 	else
           app->setScriptingLangForBatch("muParser");
 	app->showMaximized();
-	Note *script_note = app->newNote(fn);
+	Note& script_note = app->newNote(fn);
         if (isPython)
           {
             // copy any arguments into the sys.argv array
-            script_note->insert("import sys\n");
+            script_note.insert("import sys\n");
             QString prologue="sys.argv=['"+fn+"'";
             for (auto& a: args)
               prologue+=",'"+a+"'";
             prologue+="]\n";
-            script_note->insert(prologue);
+            script_note.insert(prologue);
           }
-	script_note->importASCII(fn);
+	script_note.importASCII(fn);
 	QApplication::restoreOverrideCursor();
 	if (execute)
           {
             // we need to disable the redirect of stdio, as this is batch processing
             Script* script=nullptr;
-            if (auto scriptEdit=script_note->findChild<ScriptEdit*>())
+            if (auto scriptEdit=script_note.findChild<ScriptEdit*>())
               if ((script=scriptEdit->findChild<Script*>()))
                 script->batchMode=true;
-            if (!script_note->executeAll()) exit(1);
+            if (!script_note.executeAll()) exit(1);
             if (script)
               script->batchMode=false;
           }

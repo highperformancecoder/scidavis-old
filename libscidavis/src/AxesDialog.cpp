@@ -1921,15 +1921,19 @@ void AxesDialog::showAxis(int axis, int type, const QString& labelsColName, bool
 	ApplicationWindow *app = qobject_cast<ApplicationWindow *>(parent());
 	if (!app)
 		return;
-	
-	Table *w = app->table(labelsColName);
-	if ((type == Graph::Txt || type == Graph::ColHeader) && !w)
-		return;
 
-	if (!d_graph)
-		return;
-	d_graph->showAxis(axis, type, labelsColName, w, axisOn, majTicksType, minTicksType, labelsOn,
-			c, format, prec, rotation, baselineDist, formula, labelsColor);
+        try
+          {
+            Table& w = app->table(labelsColName);
+            if ((type == Graph::Txt || type == Graph::ColHeader))
+              return;
+
+            if (!d_graph)
+              return;
+            d_graph->showAxis(axis, type, labelsColName, &w, axisOn, majTicksType, minTicksType, labelsOn,
+                              c, format, prec, rotation, baselineDist, formula, labelsColor);
+          }
+        catch (NoSuchObject&) {}
 }
 
 int AxesDialog::currentSelectedAxisType()

@@ -74,68 +74,71 @@ void TranslateCurveTool::selectCurvePoint(QwtPlotCurve *curve, int point_index)
 
 void TranslateCurveTool::selectDestination(const QwtDoublePoint &point)
 {
-	delete d_sub_tool;
-	if (!d_selected_curve)
-		return;
+  delete d_sub_tool;
+  if (!d_selected_curve)
+    return;
 
-	// Phase 3: execute the translation
+  // Phase 3: execute the translation
 
-	if(((PlotCurve *)d_selected_curve)->type() == Graph::Function){
-	    if (d_dir == Horizontal){
-            QMessageBox::warning(d_graph, tr("Warning"),
-            tr("This operation cannot be performed on function curves."));
-        } else {
-            FunctionCurve *func = (FunctionCurve *)d_selected_curve;
-            if (func->functionType() == FunctionCurve::Normal){
-                QString formula = func->formulas().first();
-                double d = point.y() - d_curve_point.y();
-                if (d > 0)
-                    func->setFormula(formula + "+" + QString::number(d, 'g', 15));
-                else
-                    func->setFormula(formula + QString::number(d, 'g', 15));
-                func->loadData();
-            }
-        }
-	    d_graph->setActiveTool(NULL);
-	    return;
+  if(((PlotCurve *)d_selected_curve)->type() == Graph::Function){
+    if (d_dir == Horizontal){
+      QMessageBox::warning(d_graph, tr("Warning"),
+                           tr("This operation cannot be performed on function curves."));
     } else {
-    	DataCurve *c = (DataCurve *)d_selected_curve;
-		double d;
-		QString col_name;
-		switch(d_dir) {
-			case Vertical:
-			{
-				col_name = c->title().text();
-				d = point.y() - d_curve_point.y();
-				break;
-			}
-			case Horizontal:
-			{
-				col_name = c->xColumnName();
-				d = point.x() - d_curve_point.x();
-				break;
-			}
-                default:
-                  throw runtime_error("Invalid direction");
-	}
-	Table *tab = d_app->table(col_name);
-	if (!tab) return;
-	int col = tab->colIndex(col_name);
-	if (tab->columnType(col) != SciDAVis::Numeric) {
-		QMessageBox::warning(d_graph, tr("Warning"),
-				tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
-		return;
+      FunctionCurve *func = (FunctionCurve *)d_selected_curve;
+      if (func->functionType() == FunctionCurve::Normal){
+        QString formula = func->formulas().first();
+        double d = point.y() - d_curve_point.y();
+        if (d > 0)
+          func->setFormula(formula + "+" + QString::number(d, 'g', 15));
+        else
+          func->setFormula(formula + QString::number(d, 'g', 15));
+        func->loadData();
+      }
+    }
+    d_graph->setActiveTool(NULL);
+    return;
+  } else {
+    DataCurve *c = (DataCurve *)d_selected_curve;
+    double d;
+    QString col_name;
+    switch(d_dir) {
+    case Vertical:
+      {
+        col_name = c->title().text();
+        d = point.y() - d_curve_point.y();
+        break;
+      }
+    case Horizontal:
+      {
+        col_name = c->xColumnName();
+        d = point.x() - d_curve_point.x();
+        break;
+      }
+    default:
+      throw runtime_error("Invalid direction");
+    }
+    try
+      {
+        Table& tab = d_app->table(col_name);
+	int col = tab.colIndex(col_name);
+	if (tab.columnType(col) != SciDAVis::Numeric) {
+          QMessageBox::warning(d_graph, tr("Warning"),
+                               tr("This operation cannot be performed on curves plotted from columns having a non-numerical format."));
+          return;
 	}
 
 	int row_start = c->tableRow(0);
-    int row_end = row_start + c->dataSize();
+        int row_end = row_start + c->dataSize();
 	for (int i=row_start; i<row_end; i++){
-		if (!tab->column(col)->isInvalid(i))
-			tab->column(col)->setValueAt(i, (d_dir==Horizontal ? d_selected_curve->x(i) : d_selected_curve->y(i)) + d);
+          if (!tab.column(col)->isInvalid(i))
+            tab.column(col)->setValueAt(i, (d_dir==Horizontal ? d_selected_curve->x(i) : d_selected_curve->y(i)) + d);
 	}
-	d_app->updateCurves(tab, col_name);
+	d_app->updateCurves(&tab, col_name);
 	d_app->modifiedProject();
 	d_graph->setActiveTool(NULL);
 	// attention: I'm now deleted. Maybe there is a cleaner solution...*/
-    }
+      }
+    catch (NoSuchObject&) {}
+  }
 }

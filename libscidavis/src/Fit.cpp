@@ -389,26 +389,28 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 			break;
 		case CustomErrors:
 			{//d_y_errors are equal to the values of the arbitrary dataset
-				if (colName.isEmpty())
-					return false;
+                          if (colName.isEmpty())
+                            return false;
 
-				Table* t = ((ApplicationWindow *)parent())->table(colName);
-				if (!t)
-					return false;
+                          try
+                            {
+                              Table& t = ((ApplicationWindow *)parent())->table(colName);
 
-				if (unsigned(t->numRows()) < d_n)
-  	            {
-						if (!fail_silently)
-							QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
-									tr("The column %1 has less points than the fitted data set. Please choose another column!").arg(colName));
-  	                return false;
-  	            }
+                              if (unsigned(t.numRows()) < d_n)
+                                {
+                                  if (!fail_silently)
+                                    QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
+                                                          tr("The column %1 has less points than the fitted data set. Please choose another column!").arg(colName));
+                                  return false;
+                                }
 
-				d_y_error_dataset = colName;
+                              d_y_error_dataset = colName;
 
-				int col = t->colIndex(colName);
-				for (unsigned i=0; i<d_n; i++)
-					d_y_errors[i] = t->cell(i, col);
+                              int col = t.colIndex(colName);
+                              for (unsigned i=0; i<d_n; i++)
+                                d_y_errors[i] = t.cell(i, col);
+                            }
+                          catch (NoSuchObject&) {return false;}
 			}
 			break;
 	}
@@ -418,39 +420,39 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 Table* Fit::parametersTable(const QString& tableName)
 {
 	ApplicationWindow *app = (ApplicationWindow *)parent();
-	Table *t = app->newTable(tableName, d_p, 3);
-	t->setHeader(QStringList() << tr("Parameter") << tr("Value") << tr ("Error"));
-	t->column(0)->setColumnMode(SciDAVis::Text);
-	t->column(1)->setColumnMode(SciDAVis::Numeric);
-	t->column(2)->setColumnMode(SciDAVis::Numeric);
+	Table& t = app->newTable(tableName, d_p, 3);
+	t.setHeader(QStringList() << tr("Parameter") << tr("Value") << tr ("Error"));
+	t.column(0)->setColumnMode(SciDAVis::Text);
+	t.column(1)->setColumnMode(SciDAVis::Numeric);
+	t.column(2)->setColumnMode(SciDAVis::Numeric);
 	for (unsigned i=0; i<d_p; i++)
 	{
-		t->column(0)->setTextAt(i, d_param_names[i]);
-		t->column(1)->setValueAt(i, d_results[i]);
-		t->column(2)->setValueAt(i, sqrt(gsl_matrix_get(covar,i,i)));
+		t.column(0)->setTextAt(i, d_param_names[i]);
+		t.column(1)->setValueAt(i, d_results[i]);
+		t.column(2)->setValueAt(i, sqrt(gsl_matrix_get(covar,i,i)));
 	}
 
-	t->column(2)->setPlotDesignation(SciDAVis::yErr);
+	t.column(2)->setPlotDesignation(SciDAVis::yErr);
 // TODO: replace or remove this
 #if 0
 	for (int j=0; j<3; j++)
-		t->table()->adjustColumn(j);
+		t.table()->adjustColumn(j);
 #endif
-	t->showNormal();
-	return t;
+	t.showNormal();
+	return &t;
 }
 
 Matrix* Fit::covarianceMatrix(const QString& matrixName)
 {
-	ApplicationWindow *app = (ApplicationWindow *)parent();
-	Matrix* m = app->newMatrix(matrixName, d_p, d_p);
-	for (unsigned i = 0; i < d_p; i++)
-	{
-		for (unsigned j = 0; j < d_p; j++)
-			m->setText(i, j, QLocale().toString(gsl_matrix_get(covar, i, j), 'g', d_prec));
-	}
-	m->showNormal();
-	return m;
+  ApplicationWindow *app = (ApplicationWindow *)parent();
+  Matrix& m = app->newMatrix(matrixName, d_p, d_p);
+  for (unsigned i = 0; i < d_p; i++)
+    {
+      for (unsigned j = 0; j < d_p; j++)
+        m.setText(i, j, QLocale().toString(gsl_matrix_get(covar, i, j), 'g', d_prec));
+    }
+  m.showNormal();
+  return &m;
 }
 
 const vector<double>& Fit::errors()

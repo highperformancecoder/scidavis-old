@@ -91,6 +91,12 @@ using std::shared_ptr;
 #define TS_PATH (qApp->applicationDirPath() + "/translations")
 #endif
 
+// thrown in the event an object reference cannot be returned
+struct NoSuchObject: public std::exception
+{
+  const char* what() const noexcept override {return "No such object";}
+};
+
 /**
  * \brief SciDAVis's main window.
  *
@@ -179,6 +185,44 @@ private slots:
    * This table is then plotted with the Graph::LineSymbols style.
    */
   ApplicationWindow* plotFile(const QString& fn);
+  MyWidget* clone();
+  MyWidget* clone(MyWidget*);
+  //! \name 3D Data Plots
+  //@{
+  Graph3D* openMatrixPlot3D(const QString& caption, const QString& matrix_name,
+                            double xl,double xr,double yl,double yr,double zl,double zr);
+  Graph3D* dataPlot3D(Table* table,const QString& colName);
+  Graph3D* dataPlotXYZ(Table* table,const QString& zColName, int type);
+  Graph3D* dataPlot3D(const QString& caption,const QString& formula,
+                      double xl, double xr, double yl, double yr, double zl, double zr);
+  Graph3D* dataPlotXYZ(const QString& caption,const QString& formula,
+                       double xl, double xr, double yl, double yr, double zl, double zr);
+  //@}
+  MultiLayer* plotSpectrogram(Matrix *m, Graph::CurveType type);
+  MultiLayer* plotGrayScale(Matrix *m);
+  MultiLayer* plotContour(Matrix *m);
+  MultiLayer* plotColorMap(Matrix *m);
+  FunctionDialog* functionDialog();
+  //! Creates a new empty matrix
+  Matrix* convertTableToMatrix();
+  Table* convertMatrixToTable();
+  QList<MyWidget*>* tableList();
+  Matrix* importImage();
+  Matrix* importImage(const QString& fn);
+  Matrix* openMatrix(ApplicationWindow* app, const QStringList &flist);
+  Table* openTable(ApplicationWindow* app, QTextStream &stream);
+  TableStatistics* openTableStatistics(const QStringList &flist);
+  Graph3D* openSurfacePlot(ApplicationWindow* app, const QStringList &lst);
+  Graph* openGraph(ApplicationWindow* app, MultiLayer *plot, const QStringList &list);
+
+  QDialog* showScaleDialog();
+  QDialog* showPlot3dDialog();
+  AxesDialog* showScalePageFromAxisDialog(int axisPos);
+  AxesDialog* showAxisPageFromAxisDialog(int axisPos);
+  //! Returns a pointer to the window named "name"
+  MyWidget* window(const QString& name);
+  //! Creates a new empty note window
+  Note* openNote(ApplicationWindow* app, const QStringList &flist);
 
 public slots:
   //! Copy the status bar text to the clipboard
@@ -238,13 +282,9 @@ public slots:
   void deleteLayer();
 
   //! Creates a new spectrogram graph
-  MultiLayer* plotSpectrogram(Matrix *m, Graph::CurveType type);
   void plotGrayScale();
-  MultiLayer* plotGrayScale(Matrix *m);
   void plotContour();
-  MultiLayer* plotContour(Matrix *m);
   void plotColorMap();
-  MultiLayer* plotColorMap(Matrix *m);
 
   //! Rearrange the layersin order to fit to the size of the plot window
   void autoArrangeLayers();
@@ -258,24 +298,13 @@ public slots:
   void plotStackedHistograms();
   //@}
 
-  //! \name 3D Data Plots
-  //@{
-  Graph3D* openMatrixPlot3D(const QString& caption, const QString& matrix_name,
-                            double xl,double xr,double yl,double yr,double zl,double zr);
-  Graph3D* dataPlot3D(Table* table,const QString& colName);
-  Graph3D* dataPlotXYZ(Table* table,const QString& zColName, int type);
-  Graph3D* dataPlot3D(const QString& caption,const QString& formula,
-                      double xl, double xr, double yl, double yr, double zl, double zr);
-  Graph3D* dataPlotXYZ(const QString& caption,const QString& formula,
-                       double xl, double xr, double yl, double yr, double zl, double zr);
-  //@}
 
   //! \name Surface Plots
   //@{
-  Graph3D* newPlot3D();
-  Graph3D* newPlot3D(const QString& formula, double xl, double xr,
+  Graph3D& newPlot3D();
+  Graph3D& newPlot3D(const QString& formula, double xl, double xr,
                      double yl, double yr, double zl, double zr);
-  Graph3D* newPlot3D(const QString& caption,const QString& formula,
+  Graph3D& newPlot3D(const QString& caption,const QString& formula,
                      double xl, double xr,double yl, double yr, double zl, double zr);
   void connectSurfacePlot(Graph3D *plot);
   void newSurfacePlot();
@@ -311,7 +340,6 @@ public slots:
   //@{
   bool newFunctionPlot(int type,QStringList &formulas, const QString& var,QList<double> &ranges, int points);
 
-  FunctionDialog* functionDialog();
   void showFunctionDialog();
   void showFunctionDialog(Graph * g, int curve);
   void addFunctionCurve();
@@ -327,12 +355,11 @@ public slots:
 
   //! \name Matrices
   //@{
-  //! Creates a new empty matrix
-  Matrix* newMatrix(int rows = 32, int columns = 32);
+  /// @throws NoSuchObject if no such matrix exists
+  Matrix& matrix(const QString& name);
+  Matrix& newMatrix(int rows = 32, int columns = 32);
   //! To be used when opening a project file only!
-  Matrix* newMatrix(const QString& caption, int r, int c);
-  Matrix* matrix(const QString& name);
-  Matrix* convertTableToMatrix();
+  Matrix& newMatrix(const QString& caption, int r, int c);
   void initMatrix(Matrix* m);
   void invertMatrix();
   void matrixDeterminant();
@@ -341,15 +368,15 @@ public slots:
   //! \name Tables
   //@{
   //! Creates an empty table
-  Table* newTable();
+  Table& newTable();
   //! Used when importing an ASCII file
-  Table* newTable(const QString& fname, const QString &sep, int lines,
+  Table& newTable(const QString& fname, const QString &sep, int lines,
                   bool renameCols, bool stripSpaces, bool simplifySpaces,
                   bool convertToNumeric, QLocale numericLocale);
   //! Used when loading a table from a project file
-  Table* newTable(const QString& caption,int r, int c);
-  Table* newTable(int r, int c, const QString& name = QString(),const QString& legend = QString());
-  Table* newTable(const QString& name, const QString& legend, QList<Column *> columns);
+  Table& newTable(const QString& caption,int r, int c);
+  Table& newTable(int r, int c, const QString& name = QString(),const QString& legend = QString());
+  Table& newTable(const QString& name, const QString& legend, QList<Column *> columns);
   /**
    * \brief Create a Table which is initially hidden; used to return the result of an analysis operation.
    *
@@ -359,10 +386,8 @@ public slots:
    * \param c number of columns
    * \param text tab/newline - seperated initial content; may be empty
    */
-  Table* newHiddenTable(const QString& name, const QString& label, QList<Column *> columns);
-  Table* table(const QString& name);
-  Table* convertMatrixToTable();
-  QList<MyWidget*>* tableList();
+  Table& newHiddenTable(const QString& name, const QString& label, QList<Column *> columns);
+  Table& table(const QString& name);
 
   void connectTable(Table* w);
   void newWrksheetPlot(const QString& name,const QString& label, QList<Column *> columns);
@@ -401,8 +426,6 @@ public slots:
   void pixelLineProfile();
   void loadImage();
   void loadImage(const QString& fn);
-  Matrix* importImage();
-  Matrix* importImage(const QString& fn);
   //@}
 
   //! \name Export and Print
@@ -424,8 +447,6 @@ public slots:
 
   //! \name MDI Windows
   //@{
-  MyWidget* clone();
-  MyWidget* clone(MyWidget*);
   void renameActiveWindow();
 
   //!  Called when the user presses F2 and an item is selected in lv.
@@ -506,12 +527,6 @@ public slots:
 
   //! \name Reading from a Project File
   //@{
-  Matrix* openMatrix(ApplicationWindow* app, const QStringList &flist);
-  Table* openTable(ApplicationWindow* app, QTextStream &stream);
-  TableStatistics* openTableStatistics(const QStringList &flist);
-  Graph3D* openSurfacePlot(ApplicationWindow* app, const QStringList &lst);
-  Graph* openGraph(ApplicationWindow* app, MultiLayer *plot, const QStringList &list);
-
   void openRecentProject();
   //@}
 
@@ -603,10 +618,6 @@ public slots:
   void showFindDialogue();
   //! Show plot style dialog for the active MultiLayer / activeGraph / specified curve or the activeGraph options dialog if no curve is specified (curveKey = -1).
   void showPlotDialog(int curveKey = -1);
-  QDialog* showScaleDialog();
-  QDialog* showPlot3dDialog();
-  AxesDialog* showScalePageFromAxisDialog(int axisPos);
-  AxesDialog* showAxisPageFromAxisDialog(int axisPos);
   void showAxisDialog();
   void showGridDialog();
   void showGeneralPlotDialog();
@@ -618,7 +629,7 @@ public slots:
   void showExportASCIIDialog();
   void showCurvesDialog();
   void showCurveRangeDialog();
-  CurveRangeDialog* showCurveRangeDialog(Graph *g, int curve);
+  CurveRangeDialog& showCurveRangeDialog(Graph *g, int curve);
   void showPlotAssociations(int curve);
 
   void showXAxisTitleDialog();
@@ -769,17 +780,13 @@ public:
   bool projectHas3DPlots();
   bool projectHasMatrices();
 
-  //! Returns a pointer to the window named "name"
-  MyWidget* window(const QString& name);
 
   //! Returns a list with the names of all the matrices in the project
   QStringList matrixNames();
 
   //! \name Notes
   //@{
-  //! Creates a new empty note window
-  Note* newNote(const QString& caption = QString());
-  Note* openNote(ApplicationWindow* app, const QStringList &flist);
+  Note& newNote(const QString& caption = QString());
   void initNote(Note* m, const QString& caption);
   void saveNoteAs();
   //@}

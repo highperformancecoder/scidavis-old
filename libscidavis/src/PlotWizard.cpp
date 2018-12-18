@@ -339,9 +339,9 @@ void PlotWizard::plot3DRibbon(const QStringList& lst)
         QString s = lst[i];
         int pos = s.indexOf(":", 0);
         QString table_name = s.left(pos) + "_";
-        Table *t = app->table(table_name);
-        if (t)
-        {
+        try
+          {
+            Table& t = app->table(table_name);
             int posX = s.indexOf("(", pos);
             QString xColName = table_name + s.mid(pos+2, posX-pos-2);
 
@@ -349,13 +349,11 @@ void PlotWizard::plot3DRibbon(const QStringList& lst)
             int posY = s.indexOf("(", posX);
             QString yColName = table_name + s.mid(posX+2, posY-posX-2);
 
-            Graph3D *g = app->newPlot3D();
-            if (g)
-            {
-                g->addData(t, xColName, yColName);
-                g->update();
-            }
-        }
+            Graph3D& g = app->newPlot3D();
+            g.addData(&t, xColName, yColName);
+            g.update();
+          }
+        catch (NoSuchObject&) {}
     }
     QApplication::restoreOverrideCursor();
 }
@@ -373,9 +371,9 @@ void PlotWizard::plot3D(const QStringList& lst)
       QString s = lst[i];
       int pos = s.indexOf(":", 0);
       QString table_name = s.left(pos) + "_";
-      Table *t = app->table(table_name);
-      if (t)
+      try
         {
+          Table& t = app->table(table_name);
           int posX = s.indexOf("(", pos);
           QString xColName = table_name + s.mid(pos+2, posX-pos-2);
 
@@ -387,19 +385,17 @@ void PlotWizard::plot3D(const QStringList& lst)
           int posZ = s.indexOf("(", posY);
           QString zColName = table_name + s.mid(posY+2, posZ-posY-2);
 
-          int xCol = t->colIndex(xColName);
-          int yCol = t->colIndex(yColName);
-          int zCol = t->colIndex(zColName);
+          int xCol = t.colIndex(xColName);
+          int yCol = t.colIndex(yColName);
+          int zCol = t.colIndex(zColName);
           if (xCol >= 0 && yCol >= 0 && zCol >= 0)
             {
-              Graph3D *g = app->newPlot3D();
-              if (g)
-                {
-                  g->addData(t, xCol, yCol, zCol, 1);
-                  g->update();
-                }
+              Graph3D& g = app->newPlot3D();
+              g.addData(&t, xCol, yCol, zCol, 1);
+              g.update();
             }
         }
+      catch (NoSuchObject&) {}
     }
   QApplication::restoreOverrideCursor();
 }

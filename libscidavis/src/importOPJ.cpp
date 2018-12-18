@@ -207,43 +207,41 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
   if(!columnCount) //remove tables without cols
     return false;
 
-  Table *table = mw->newTable(spread.name.c_str(), maxrows, columnCount);
-  if (!table)
-    return false;
+  Table& table = mw->newTable(spread.name.c_str(), maxrows, columnCount);
   if (spread.hidden || spread.loose)
-    mw->hideWindow(table);
+    mw->hideWindow(&table);
 
-  table->setWindowLabel(spread.label.c_str());
+  table.setWindowLabel(spread.label.c_str());
   for(int j = 0; j < columnCount; ++j){
     Origin::SpreadColumn column = spread.columns[j];
-    Column *scidavis_column = table->column(j);
+    Column *scidavis_column = table.column(j);
 
     QString name(column.name.c_str());
     scidavis_column->setName(name.replace(QRegExp(".*_"),""));
     if (column.command.size() > 0)
       scidavis_column->setFormula(Interval<int>(0,maxrows), QString(column.command.c_str()));
     scidavis_column->setComment(QString(column.comment.c_str()));
-    table->setColumnWidth(j, (int)column.width*SciDAVis_scaling_factor);
+    table.setColumnWidth(j, (int)column.width*SciDAVis_scaling_factor);
 
     switch(column.type){
     case Origin::SpreadColumn::X:
-      table->setColPlotDesignation(j, SciDAVis::X);
+      table.setColPlotDesignation(j, SciDAVis::X);
       break;
     case Origin::SpreadColumn::Y:
-      table->setColPlotDesignation(j, SciDAVis::Y);
+      table.setColPlotDesignation(j, SciDAVis::Y);
       break;
     case Origin::SpreadColumn::Z:
-      table->setColPlotDesignation(j, SciDAVis::Z);
+      table.setColPlotDesignation(j, SciDAVis::Z);
       break;
     case Origin::SpreadColumn::XErr:
-      table->setColPlotDesignation(j, SciDAVis::xErr);
+      table.setColPlotDesignation(j, SciDAVis::xErr);
       break;
     case Origin::SpreadColumn::YErr:
-      table->setColPlotDesignation(j, SciDAVis::yErr);
+      table.setColPlotDesignation(j, SciDAVis::yErr);
       break;
     case Origin::SpreadColumn::Label:
     default:
-      table->setColPlotDesignation(j, SciDAVis::noDesignation);
+      table.setColPlotDesignation(j, SciDAVis::noDesignation);
     }
 
     QString format;
@@ -259,7 +257,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
       {
         double datavalue;
         bool setAsText = false;
-        table->column(j)->setColumnMode(SciDAVis::Numeric);
+        table.column(j)->setColumnMode(SciDAVis::Numeric);
         for (int i=0; i < std::min((int)column.data.size(), maxrows); ++i) {
           Origin::variant value(column.data[i]);
           if (value.type() == Origin::variant::V_DOUBLE) {
@@ -272,7 +270,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
             }
           } else { // string
             if (!setAsText && i==0) {
-              table->column(j)->setColumnMode(SciDAVis::Text);
+              table.column(j)->setColumnMode(SciDAVis::Text);
               setAsText = true;
             }
             scidavis_column->setTextAt(i, column.data[i].as_string());
@@ -298,14 +296,14 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
                 f=0;
                 break;
               }
-            Double2StringFilter *filter = static_cast<Double2StringFilter*>(table->column(j)->outputFilter());
+            Double2StringFilter *filter = static_cast<Double2StringFilter*>(table.column(j)->outputFilter());
             filter->setNumericFormat(f);
             filter->setNumDigits(column.decimalPlaces);
           }
         break;
       }
     case Origin::Text:
-      table->column(j)->setColumnMode(SciDAVis::Text);
+      table.column(j)->setColumnMode(SciDAVis::Text);
       for (int i=0; i < min((int)column.data.size(), maxrows); ++i) {
         scidavis_column->setTextAt(i, column.data[i].as_string());
       }
@@ -365,7 +363,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
         }
         for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
           scidavis_column->setValueAt(i, column.data[i].as_double());
-        table->column(j)->setColumnMode(SciDAVis::DateTime);
+        table.column(j)->setColumnMode(SciDAVis::DateTime);
         DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(scidavis_column->outputFilter());
         filter->setFormat(format);
         break;
@@ -409,8 +407,8 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
         }
         for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
           scidavis_column->setValueAt(i, column.data[i].as_double());
-        table->column(j)->setColumnMode(SciDAVis::DateTime);
-        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
+        table.column(j)->setColumnMode(SciDAVis::DateTime);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table.column(j)->outputFilter());
         filter->setFormat(format);
         break;
       }
@@ -429,8 +427,8 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
         }
         for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
           scidavis_column->setValueAt(i, column.data[i].as_double());
-        table->column(j)->setColumnMode(SciDAVis::Month);
-        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
+        table.column(j)->setColumnMode(SciDAVis::Month);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table.column(j)->outputFilter());
         filter->setFormat(format);
         break;
       }
@@ -450,8 +448,8 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
           }
         for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
           scidavis_column->setValueAt(i, column.data[i].as_double());
-        table->column(j)->setColumnMode(SciDAVis::Day);
-        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table->column(j)->outputFilter());
+        table.column(j)->setColumnMode(SciDAVis::Day);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table.column(j)->outputFilter());
         filter->setFormat(format);
         break;
       }
@@ -463,19 +461,19 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
 
 
   if(!(spread.hidden || spread.loose) || opj.version() != 7.5){
-    table->showNormal();
+    table.showNormal();
 
     //cascade the tables
     if (opj.version() >= 6.0)
       {
         Origin::Rect windowRect;
         windowRect = spread.frameRect;
-        table->move(QPoint(windowRect.left, windowRect.top));
+        table.move(QPoint(windowRect.left, windowRect.top));
       }
     else {
-      int dx = table->verticalHeaderWidth();
-      int dy=table->frameGeometry().height() - table->height();
-      table->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
+      int dx = table.verticalHeaderWidth();
+      int dy=table.frameGeometry().height() - table.height();
+      table.move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
       visible_count++;
     }
 
@@ -526,24 +524,22 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 			int columnCount = layer.columnCount;
 			int rowCount = layer.rowCount;
 			mw->setStatusBarText(QString("Matrix %1 / %2, sheet %3 / %4").arg(s+1).arg(opj.matrixCount()).arg(l+1).arg(layers));
-			Matrix* Matrix=mw->newMatrix(matrix.name.c_str(), rowCount, columnCount);
-			if (!Matrix)
-				return false;
-			Matrix->setWindowLabel(matrix.label.c_str());
-			Matrix->setFormula(layer.command.c_str());
-			Matrix->setColumnsWidth(layer.width * SciDAVis_scaling_factor);
+			Matrix& Matrix=mw->newMatrix(matrix.name.c_str(), rowCount, columnCount);
+			Matrix.setWindowLabel(matrix.label.c_str());
+			Matrix.setFormula(layer.command.c_str());
+			Matrix.setColumnsWidth(layer.width * SciDAVis_scaling_factor);
 // TODO
 #if 0
-			Matrix->table()->blockSignals(true);
+			Matrix.table()->blockSignals(true);
 #endif
 			QVector<qreal> values;
 			values.resize(rowCount*columnCount);
 			for (int i=0; i<min((int)values.size(),(int)layer.data.size()); i++) {
 				values[i]=layer.data[i];
 			}
-			Matrix->setCells(values);
+			Matrix.setCells(values);
 
-			Matrix->saveCellsToMemory();
+			Matrix.saveCellsToMemory();
 
 			QChar format;
 			int prec = 6;
@@ -562,23 +558,23 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 					prec = layer.significantDigits;
 					break;
 			}
-			Matrix->setNumericFormat(format, prec);
-			Matrix->forgetSavedCells();
+			Matrix.setNumericFormat(format, prec);
+			Matrix.forgetSavedCells();
 // TODO
 #if 0
-        Matrix->table()->blockSignals(false);
+        Matrix.table()->blockSignals(false);
 #endif
-			Matrix->showNormal();
+			Matrix.showNormal();
 
 			//cascade the matrices
 #if 0
-			int dx=Matrix->verticalHeaderWidth();
-			int dy=Matrix->frameGeometry().height() - matrix->height();
+			int dx=Matrix.verticalHeaderWidth();
+			int dy=Matrix.frameGeometry().height() - matrix->height();
 #endif
 // TODO
 			int dx = 100;
 			int dy = 100;
-			Matrix->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
+			Matrix.move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
 			visible_count++;
 
 		}
@@ -601,16 +597,14 @@ bool ImportOPJ::importNotes(const OriginFile &opj)
 		{
 			name=name.mid(2,name.length()-3);
 		}
-		Note *note = mw->newNote(name);
-		if(!note)
-			return false;
-		note->setWindowLabel(_note.label.c_str());
-		note->setText(QString(_note.text.c_str()));
+		Note& note = mw->newNote(name);
+		note.setWindowLabel(_note.label.c_str());
+		note.setText(QString(_note.text.c_str()));
 
 		//cascade the notes
 		int dx=20;
-		int dy=note->frameGeometry().height() - note->height();
-		note->move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
+		int dy=note.frameGeometry().height() - note.height();
+		note.move(QPoint(visible_count*dx+xoffset*OBJECTXOFFSET,visible_count*dy));
 		visible_count++;
 	}
 	if(visible_count>0)
@@ -686,29 +680,29 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 				{
 				case 'T':
 				case 'E':
-				     {
-					tableName = data.right(data.length()-2);
-					Table* table = mw->table(tableName);
-					if (!table)
-						break;
-					if(style==Graph::ErrorBars)
+                                  try
+                                    {
+                                      tableName = data.right(data.length()-2);
+                                      Table& table = mw->table(tableName);
+                                      if(style==Graph::ErrorBars)
 					{
-						int flags=_curve.symbolShape;
-						graph->addErrorBars(QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()),
-							((flags&0x10)==0x10?0:1), ceil(_curve.lineWidth), ceil(_curve.symbolSize), QColor(Qt::black),
-							(flags&0x40)==0x40, (flags&2)==2, (flags&1)==1);
+                                          int flags=_curve.symbolShape;
+                                          graph->addErrorBars(QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), &table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()),
+                                                              ((flags&0x10)==0x10?0:1), ceil(_curve.lineWidth), ceil(_curve.symbolSize), QColor(Qt::black),
+                                                              (flags&0x40)==0x40, (flags&2)==2, (flags&1)==1);
 					}
-					else if(style==Graph::Histogram)
+                                      else if(style==Graph::Histogram)
 				        {
 
-						graph->insertCurve(table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
+                                          graph->insertCurve(&table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
 					}
-					else
+                                      else
 				        {
-						graph->insertCurve(table, QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
+                                          graph->insertCurve(&table, QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
 					}
-					break;
-				     }
+                                    }
+                                  catch (NoSuchObject&) {}
+                                  break;
 				case 'F':
 				     {
 					Origin::Function function;
@@ -1051,10 +1045,14 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 					prec=2;
 				}
 
-				graph->showAxis(i, type, tableName, mw->table(tableName), !(formats[i].hidden),
-					tickTypeMap[formats[i].majorTicksType], tickTypeMap[formats[i].minorTicksType],
-					!(ticks[i].showMajorLabels),	ColorButton::color(formats[i].color), format, prec,
-					ticks[i].rotation, 0, "", (ticks[i].color==0xF7 ? ColorButton::color(formats[i].color) : ColorButton::color(ticks[i].color)));
+                                try
+                                  {
+                                    graph->showAxis(i, type, tableName, &mw->table(tableName), !(formats[i].hidden),
+                                                    tickTypeMap[formats[i].majorTicksType], tickTypeMap[formats[i].minorTicksType],
+                                                    !(ticks[i].showMajorLabels),	ColorButton::color(formats[i].color), format, prec,
+                                                    ticks[i].rotation, 0, "", (ticks[i].color==0xF7 ? ColorButton::color(formats[i].color) : ColorButton::color(ticks[i].color)));
+                                  }
+                                catch (NoSuchObject&) {}
 			}
 
 

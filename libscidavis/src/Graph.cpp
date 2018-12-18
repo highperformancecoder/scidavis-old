@@ -5093,106 +5093,108 @@ void Graph::plotSpectrogram(Matrix *m, CurveType type)
 
 void Graph::restoreSpectrogram(ApplicationWindow *app, const QStringList& lst)
 {
-  	QStringList::const_iterator line = lst.begin();
-  	QString s = (*line).trimmed();
-  	QString matrixName = s.remove("<matrix>").remove("</matrix>");
-  	Matrix *m = app->matrix(matrixName);
-  	if (!m)
-        return;
-
-  	Spectrogram *sp = new Spectrogram(m);
-
-	c_type.resize(++n_curves);
-	c_type[n_curves-1] = Graph::ColorMap;
-	c_keys.resize(n_curves);
-	c_keys[n_curves-1] = d_plot->insertCurve(sp);
-
-  	for (line++; line != lst.end(); line++)
+  QStringList::const_iterator line = lst.begin();
+  QString s = (*line).trimmed();
+  QString matrixName = s.remove("<matrix>").remove("</matrix>");
+  try
     {
-        QString s = *line;
-        if (s.contains("<ColorPolicy>"))
+      Matrix& m = app->matrix(matrixName);
+
+      Spectrogram *sp = new Spectrogram(&m);
+
+      c_type.resize(++n_curves);
+      c_type[n_curves-1] = Graph::ColorMap;
+      c_keys.resize(n_curves);
+      c_keys[n_curves-1] = d_plot->insertCurve(sp);
+
+      for (line++; line != lst.end(); line++)
         {
-            int color_policy = s.remove("<ColorPolicy>").remove("</ColorPolicy>").trimmed().toInt();
-            if (color_policy == Spectrogram::GrayScale)
+          QString s = *line;
+          if (s.contains("<ColorPolicy>"))
+            {
+              int color_policy = s.remove("<ColorPolicy>").remove("</ColorPolicy>").trimmed().toInt();
+              if (color_policy == Spectrogram::GrayScale)
                 sp->setGrayScale();
-            else if (color_policy == Spectrogram::Default)
+              else if (color_policy == Spectrogram::Default)
                 sp->setDefaultColorMap();
-        }
-        else if (s.contains("<ColorMap>"))
-        {
-            s = *(++line);
-            int mode = s.remove("<Mode>").remove("</Mode>").trimmed().toInt();
-            s = *(++line);
-            QColor color1 = QColor(s.remove("<MinColor>").remove("</MinColor>").trimmed());
-            s = *(++line);
-            QColor color2 = QColor(s.remove("<MaxColor>").remove("</MaxColor>").trimmed());
-
-            QwtLinearColorMap colorMap = QwtLinearColorMap(color1, color2);
-            colorMap.setMode((QwtLinearColorMap::Mode)mode);
-
-            s = *(++line);
-            int stops = s.remove("<ColorStops>").remove("</ColorStops>").trimmed().toInt();
-            for (int i = 0; i < stops; i++)
-            {
-                s = (*(++line)).trimmed();
-                QStringList l = s.remove("<Stop>").remove("</Stop>").split("\t");
-                colorMap.addColorStop(l[0].toDouble(), QColor(l[1]));
             }
-            sp->setCustomColorMap(colorMap);
-            line++;
-        }
-        else if (s.contains("<Image>"))
-        {
-            int mode = s.remove("<Image>").remove("</Image>").trimmed().toInt();
-            sp->setDisplayMode(QwtPlotSpectrogram::ImageMode, mode);
-        }
-        else if (s.contains("<ContourLines>"))
-        {
-            int contours = s.remove("<ContourLines>").remove("</ContourLines>").trimmed().toInt();
-            sp->setDisplayMode(QwtPlotSpectrogram::ContourMode, contours);
-            if (contours)
+          else if (s.contains("<ColorMap>"))
             {
-                s = (*(++line)).trimmed();
-                int levels = s.remove("<Levels>").remove("</Levels>").toInt();
-                sp->setLevelsNumber(levels);
+              s = *(++line);
+              int mode = s.remove("<Mode>").remove("</Mode>").trimmed().toInt();
+              s = *(++line);
+              QColor color1 = QColor(s.remove("<MinColor>").remove("</MinColor>").trimmed());
+              s = *(++line);
+              QColor color2 = QColor(s.remove("<MaxColor>").remove("</MaxColor>").trimmed());
 
-                s = (*(++line)).trimmed();
-                int defaultPen = s.remove("<DefaultPen>").remove("</DefaultPen>").toInt();
-                if (!defaultPen)
-                    sp->setDefaultContourPen(Qt::NoPen);
-                else
+              QwtLinearColorMap colorMap = QwtLinearColorMap(color1, color2);
+              colorMap.setMode((QwtLinearColorMap::Mode)mode);
+
+              s = *(++line);
+              int stops = s.remove("<ColorStops>").remove("</ColorStops>").trimmed().toInt();
+              for (int i = 0; i < stops; i++)
                 {
-                    s = (*(++line)).trimmed();
-                    QColor c = QColor(s.remove("<PenColor>").remove("</PenColor>"));
-                    s = (*(++line)).trimmed();
-                    int width = s.remove("<PenWidth>").remove("</PenWidth>").toInt();
-                    s = (*(++line)).trimmed();
-                    int style = s.remove("<PenStyle>").remove("</PenStyle>").toInt();
-                    sp->setDefaultContourPen(QPen(c, width, Graph::getPenStyle(style)));
+                  s = (*(++line)).trimmed();
+                  QStringList l = s.remove("<Stop>").remove("</Stop>").split("\t");
+                  colorMap.addColorStop(l[0].toDouble(), QColor(l[1]));
+                }
+              sp->setCustomColorMap(colorMap);
+              line++;
+            }
+          else if (s.contains("<Image>"))
+            {
+              int mode = s.remove("<Image>").remove("</Image>").trimmed().toInt();
+              sp->setDisplayMode(QwtPlotSpectrogram::ImageMode, mode);
+            }
+          else if (s.contains("<ContourLines>"))
+            {
+              int contours = s.remove("<ContourLines>").remove("</ContourLines>").trimmed().toInt();
+              sp->setDisplayMode(QwtPlotSpectrogram::ContourMode, contours);
+              if (contours)
+                {
+                  s = (*(++line)).trimmed();
+                  int levels = s.remove("<Levels>").remove("</Levels>").toInt();
+                  sp->setLevelsNumber(levels);
+
+                  s = (*(++line)).trimmed();
+                  int defaultPen = s.remove("<DefaultPen>").remove("</DefaultPen>").toInt();
+                  if (!defaultPen)
+                    sp->setDefaultContourPen(Qt::NoPen);
+                  else
+                    {
+                      s = (*(++line)).trimmed();
+                      QColor c = QColor(s.remove("<PenColor>").remove("</PenColor>"));
+                      s = (*(++line)).trimmed();
+                      int width = s.remove("<PenWidth>").remove("</PenWidth>").toInt();
+                      s = (*(++line)).trimmed();
+                      int style = s.remove("<PenStyle>").remove("</PenStyle>").toInt();
+                      sp->setDefaultContourPen(QPen(c, width, Graph::getPenStyle(style)));
+                    }
                 }
             }
-        }
-        else if (s.contains("<ColorBar>"))
-        {
-            s = *(++line);
-            int color_axis = s.remove("<axis>").remove("</axis>").trimmed().toInt();
-            s = *(++line);
-            int width = s.remove("<width>").remove("</width>").trimmed().toInt();
-
-            QwtScaleWidget *colorAxis = d_plot->axisWidget(color_axis);
-            if (colorAxis)
+          else if (s.contains("<ColorBar>"))
             {
-                colorAxis->setColorBarWidth(width);
-                colorAxis->setColorBarEnabled(true);
+              s = *(++line);
+              int color_axis = s.remove("<axis>").remove("</axis>").trimmed().toInt();
+              s = *(++line);
+              int width = s.remove("<width>").remove("</width>").trimmed().toInt();
+
+              QwtScaleWidget *colorAxis = d_plot->axisWidget(color_axis);
+              if (colorAxis)
+                {
+                  colorAxis->setColorBarWidth(width);
+                  colorAxis->setColorBarEnabled(true);
+                }
+              line++;
             }
-            line++;
-        }
-		else if (s.contains("<Visible>"))
-        {
-            int on = s.remove("<Visible>").remove("</Visible>").trimmed().toInt();
-            sp->setVisible(on);
+          else if (s.contains("<Visible>"))
+            {
+              int on = s.remove("<Visible>").remove("</Visible>").trimmed().toInt();
+              sp->setVisible(on);
+            }
         }
     }
+  catch (NoSuchObject&) {}
 }
 
 bool Graph::validCurvesDataSize() const

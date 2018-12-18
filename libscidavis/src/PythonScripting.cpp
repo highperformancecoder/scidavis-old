@@ -55,6 +55,12 @@ typedef struct _traceback {
 #include "Script.h"
 #include "Script.cd"
 #include "Folder.cd"
+#include "Matrix.h"
+#include "Matrix.cd"
+#include "Note.h"
+#include "Note.cd"
+#include "MyWidget.h"
+#include "MyWidget.cd"
 
 namespace classdesc_access
 {
@@ -124,6 +130,8 @@ namespace classdesc
   DEF_TYPENAME(QFont);
   DEF_TYPENAME(QPoint);
   DEF_TYPENAME(QStringList);
+  DEF_TYPENAME(QChar);
+  DEF_TYPENAME(QRectF);
 
   template <class T> struct tn<QList<T>>
   {

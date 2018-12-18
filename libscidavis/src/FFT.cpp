@@ -168,8 +168,8 @@ void FFT::output(QList<Column *> columns)
 {
     ApplicationWindow *app = (ApplicationWindow *)parent();
     QString tableName = app->generateUniqueName(objectName());
-    Table *t = app->newHiddenTable(tableName, d_explanation, columns);
-	MultiLayer *ml = app->multilayerPlot(t, QStringList() << tableName + "_" + tr("Amplitude"), 0);
+    Table& t = app->newHiddenTable(tableName, d_explanation, columns);
+	MultiLayer *ml = app->multilayerPlot(&t, QStringList() << tableName + "_" + tr("Amplitude"), 0);
    	if (!ml)
 		return;
 

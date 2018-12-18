@@ -338,80 +338,88 @@ void CurvesDialog::addCurves()
 
 bool CurvesDialog::addCurve(const QString& name)
 {
-    ApplicationWindow *app = (ApplicationWindow *)this->parent();
-    if (!app)
-        return false;
+  ApplicationWindow *app = (ApplicationWindow *)this->parent();
+  if (!app)
+    return false;
 
-    QStringList matrices = app->matrixNames();
-    if (matrices.contains(name))
+  QStringList matrices = app->matrixNames();
+  if (matrices.contains(name))
     {
-        Matrix *m = app->matrix(name);
-        if (!m)
-            return false;
-
-        switch (boxMatrixStyle->currentIndex())
+      try
         {
-            case 0:
-                d_graph->plotSpectrogram(m, Graph::ColorMap);
-            break;
-            case 1:
-                d_graph->plotSpectrogram(m, Graph::ContourMap);
-            break;
-            case 2:
-                d_graph->plotSpectrogram(m, Graph::GrayMap);
-            break;
-        }
+          Matrix& m = app->matrix(name);
 
-        contents->addItem(name);
-		return true;
+          switch (boxMatrixStyle->currentIndex())
+            {
+            case 0:
+              d_graph->plotSpectrogram(&m, Graph::ColorMap);
+              break;
+            case 1:
+              d_graph->plotSpectrogram(&m, Graph::ContourMap);
+              break;
+            case 2:
+              d_graph->plotSpectrogram(&m, Graph::GrayMap);
+              break;
+            }
+
+          contents->addItem(name);
+          return true;
+        }
+      catch (NoSuchObject&)
+        {return false;}
+          
     }
 
-	int style = curveStyle();
-	Table* t = app->table(name);
-	if (t && d_graph->insertCurve(t, name, style))
-	{
-		CurveLayout cl = Graph::initCurveLayout();
-		int color, symbol;
-		d_graph->guessUniqueCurveLayout(color, symbol);
+  int style = curveStyle();
+  try
+    {
+      Table& t = app->table(name);
+      if (d_graph->insertCurve(&t, name, style))
+        {
+          CurveLayout cl = Graph::initCurveLayout();
+          int color, symbol;
+          d_graph->guessUniqueCurveLayout(color, symbol);
 
-		cl.lCol = color;
-		cl.symCol = color;
-		cl.fillCol = color;
-		cl.lWidth = app->defaultCurveLineWidth;
-		cl.sSize = app->defaultSymbolSize;
-		cl.sType = symbol;
+          cl.lCol = color;
+          cl.symCol = color;
+          cl.fillCol = color;
+          cl.lWidth = app->defaultCurveLineWidth;
+          cl.sSize = app->defaultSymbolSize;
+          cl.sType = symbol;
 
-		if (style == Graph::Line)
-			cl.sType = 0;
-		else if (style==Graph::VerticalBars || style==Graph::HorizontalBars )
-		{
-			cl.filledArea=1;
-			cl.lCol=0;
-			cl.aCol=color;
-			cl.sType = 0;
-		}
-		else if (style==Graph::Area )
-		{
-			cl.filledArea=1;
-			cl.aCol=color;
-			cl.sType = 0;
-		}
-		else if (style == Graph::VerticalDropLines)
-			cl.connectType=2;
-		else if (style == Graph::VerticalSteps || style == Graph::HorizontalSteps)
-		{
-			cl.connectType=3;
-			cl.sType = 0;
-		}
-		else if (style == Graph::Spline)
-			cl.connectType=5;
+          if (style == Graph::Line)
+            cl.sType = 0;
+          else if (style==Graph::VerticalBars || style==Graph::HorizontalBars )
+            {
+              cl.filledArea=1;
+              cl.lCol=0;
+              cl.aCol=color;
+              cl.sType = 0;
+            }
+          else if (style==Graph::Area )
+            {
+              cl.filledArea=1;
+              cl.aCol=color;
+              cl.sType = 0;
+            }
+          else if (style == Graph::VerticalDropLines)
+            cl.connectType=2;
+          else if (style == Graph::VerticalSteps || style == Graph::HorizontalSteps)
+            {
+              cl.connectType=3;
+              cl.sType = 0;
+            }
+          else if (style == Graph::Spline)
+            cl.connectType=5;
 
-		d_graph->updateCurveLayout(d_graph->curves() - 1, &cl);
+          d_graph->updateCurveLayout(d_graph->curves() - 1, &cl);
 
-		contents->addItem(name);
-		return true;
-	}
-	return false;
+          contents->addItem(name);
+          return true;
+        }
+    }
+  catch (NoSuchObject&) {}
+  return false;
 }
 
 void CurvesDialog::removeCurves()
