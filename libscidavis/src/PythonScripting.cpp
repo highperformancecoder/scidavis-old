@@ -53,21 +53,21 @@ typedef struct _traceback {
 
 #include "ApplicationWindow.h"
 #include "ApplicationWindow.cd"
-#include "Script.h"
-#include "Script.cd"
 #include "Folder.h"
 #include "Folder.cd"
+#include "Graph.h"
+#include "Graph.cd"
+#include "Graph3D.h"
 #include "Matrix.h"
 #include "Matrix.cd"
-#include "Note.h"
-#include "Note.cd"
+#include "MultiLayer.h"
 #include "MyWidget.h"
 #include "MyWidget.cd"
-#include "MyWidget.h"
-#include "Graph3D.h"
-#include "MultiLayer.h"
-
+#include "Note.h"
+#include "Note.cd"
 #include "QtEnums.cd"
+#include "Script.h"
+#include "Script.cd"
 
 #include <QTranslator>
 #include <QToolBar>

@@ -19,7 +19,7 @@ CONFIG        += qt warn_on exceptions opengl thread zlib
 QT            += opengl network svg xml
 equals(QT_MAJOR_VERSION, 5) { QT += printsupport }
 MOC_DIR        = ../tmp/scidavis
-OBJECTS_DIR    = ../tmp/test
+\OBJECTS_DIR    = ../tmp/test
 
 include(../config.pri)
 python {
@@ -32,6 +32,7 @@ python {
         macx {
         LIBS += -framework Python
       } else {
+        LIBS+=$$system($$PYTHONBIN ../scidavis/findBoostPythonLib.py)
         LIBS += $$system($$PYTHONBIN -c "\"from distutils import sysconfig;import sys; sys.stdout.write('-lpython'+sysconfig.get_config_var('VERSION')+(sysconfig.get_config_var('ABIFLAGS') or ''))\"")
       }
   }

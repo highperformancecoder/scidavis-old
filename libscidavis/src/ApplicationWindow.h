@@ -163,7 +163,7 @@ public:
 
   bool batchMode() const {return m_batch;} ///< running a python batch script
 
-private slots:
+public slots:
   /// args are any argument to be passed to fn if a script
   ApplicationWindow* open(const QString& fn, const QStringList& args=QStringList());
   ApplicationWindow* importOPJ(const QString& filename);
@@ -643,7 +643,6 @@ public slots:
   void showWindowContextMenu();
   void showWindowTitleBarMenu();
 
-protected:
   QMenu* showCurveContextMenuImpl(int);
   /// @return the menu item, which is owned by this. May be null
   QMenu* showWindowPopupMenuImpl(QTreeWidgetItem *it);

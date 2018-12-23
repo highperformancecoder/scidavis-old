@@ -30,39 +30,39 @@ SUITE(ApplicationWindow)
 
   TEST_FIXTURE(ApplicationWindow, basicWindowTests)
     {
-      auto t=newTable();
-      CHECK(t->name()!="xxx");
-      renameWindow(t,"xxx");
-      CHECK_EQUAL("xxx", t->name());
+      auto& t=newTable();
+      CHECK(t.name()!="xxx");
+      renameWindow(&t,"xxx");
+      CHECK_EQUAL("xxx", t.name());
       
       // test the renameWindowDialog
       auto rwd=new RenameWindowDialog(this);
-      rwd->setWidget(t);
-      renameWindow(t,"yyy");
-      CHECK(t->name()!="xxx");
+      rwd->setWidget(&t);
+      renameWindow(&t,"yyy");
+      CHECK(t.name()!="xxx");
       rwd->accept(); // should change the window title back
-      CHECK_EQUAL("xxx", t->name());
+      CHECK_EQUAL("xxx", t.name());
     }
 
   TEST_FIXTURE(ApplicationWindow, deleteSelectedItems)
     {
-      auto t=newTable();
+      auto& t=newTable();
       bool found=false;
       QList<MyWidget*> windows = windowsList();
       for (auto i: windows)
-        if (t==i) found=true;
+        if (&t==i) found=true;
       CHECK(found);
 
-      addListViewItem(t);
+      addListViewItem(&t);
       for (QTreeWidgetItemIterator item(&lv); *item; item++)
-        if (dynamic_cast<WindowListItem*>(*item)->window()==t)
+        if (dynamic_cast<WindowListItem*>(*item)->window()==&t)
           (*item)->setSelected(true);
-      t->askOnCloseEvent(false);
+      t.askOnCloseEvent(false);
       ApplicationWindow::deleteSelectedItems();
       found=false;
       windows=windowsList();
       for (auto i: windows)
-        if (t==i) found=false;
+        if (&t==i) found=false;
       CHECK(!found);
     }
 
@@ -78,16 +78,16 @@ SUITE(ApplicationWindow)
       }
 
       // add a table, and check it pops up the window menu
-      auto t=newTable();
-      addListViewItem(t);
+      auto& t=newTable();
+      addListViewItem(&t);
 
       // TODO add some more items like folder views etc to this test
       for (QTreeWidgetItemIterator item(&lv); *item; item++)
         if (auto wli=dynamic_cast<WindowListItem*>(*item))
-          if (wli->window()==t)
+          if (wli->window()==&t)
             {
               auto m1=showWindowPopupMenuImpl(wli);
-              auto m2=showWindowMenuImpl(t);
+              auto m2=showWindowMenuImpl(&t);
               CHECK(m1->actions().size());
               CHECK(m1->actions().size()==m2->actions().size());
               CHECK(m1->contentsRect()==m2->contentsRect());

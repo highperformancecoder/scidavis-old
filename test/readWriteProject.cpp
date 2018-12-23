@@ -25,7 +25,7 @@ SUITE(ReadWriteProject)
     {
       unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
       CHECK(app.get());
-      app->saveFolder(app->projectFolder(), "testProject1.sciprj");
+      app->saveFolder(&app->projectFolder(), "testProject1.sciprj");
       unique_ptr<ApplicationWindow> app1(open("testProject1.sciprj"));
       // TODO check that app1 is the same as app?
       CHECK(app1.get());
@@ -67,7 +67,7 @@ SUITE(ReadWriteProject)
 
   TEST_FIXTURE(ApplicationWindow, note)
     {
-      Note& note=*newNote();
+      Note& note=newNote();
       activateSubWindow(&note);
     }
   TEST_FIXTURE(ApplicationWindow, convertMatrix)

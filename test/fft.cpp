@@ -12,28 +12,28 @@ SUITE(FFT)
 {
   TEST_FIXTURE(ApplicationWindow, fft)
     {
-      auto table=newTable("1",30,2);
-      table->setColName(0,"x");
-      table->setColName(1,"y");
+      auto& table=newTable("1",30,2);
+      table.setColName(0,"x");
+      table.setColName(1,"y");
   
-      auto& colX=*table->column(0);
-      auto& colY=*table->column(1);
-      for (int r=0; r<table->numRows(); ++r)
+      auto& colX=*table.column(0);
+      auto& colY=*table.column(1);
+      for (int r=0; r<table.numRows(); ++r)
         {
           colX.setValueAt(r,r);
           colY.setValueAt(r,sin(r));
         }
 
       auto graph=new Graph(this);
-      graph->insertCurve(table,"x","y",Graph::Line);
+      graph->insertCurve(&table,"x","y",Graph::Line);
 
-      auto fft1=new FFT(this,table,"y");
+      auto fft1=new FFT(this,&table,"y");
       fft1->run();
       // FFT creates a hidden table, which we need to find.
       Table* table1=nullptr;
       for (auto i: windowsList())
         if (auto t=dynamic_cast<Table*>(i))
-          if (t!=table)
+          if (t!=&table)
             {
               table1=t;
               break;
@@ -48,7 +48,7 @@ SUITE(FFT)
       Table* table2=nullptr;
       for (auto i: windowsList())
         if (auto t=dynamic_cast<Table*>(i))
-          if (t!=table && t!=table1)
+          if (t!=&table && t!=table1)
             {
               table2=t;
               break;
