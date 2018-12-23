@@ -10,7 +10,16 @@ POST_TARGETDEPS=../libscidavis/libscidavis.a
 
 include(../config.pri)
 include( basic.pri )
-python {include( python.pri )}
+python {
+  PYTHONBIN = $$(PYTHON)
+  isEmpty( PYTHONBIN ) {
+    PYTHONBIN = python
+  }
+  unix: {
+        LIBS+=$$system($$PYTHONBIN findBoostPythonLib.py)
+        LIBS+=$$system($$PYTHONBIN-config --libs)
+  }
+}
 
 QMAKE_CLEAN += $$TARGET
 

@@ -27,6 +27,9 @@
   isEmpty( PYTHONBIN ) {
     PYTHONBIN = python
   }
+  PYTHON_VERSION=$$system($${PYTHONBIN} --version|cut -f2 -d' '|cut -f1 -d.)
+
+  LIBS+=-lboost_python-p2_7
 
   unix {
     INCLUDEPATH += $$system($$PYTHONBIN-config --includes|sed -e 's/-I//g')
