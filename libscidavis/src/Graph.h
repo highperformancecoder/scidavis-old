@@ -40,6 +40,7 @@
 #include <qwt_plot_marker.h>
 #include <qwt_plot_curve.h>
 
+#include "QtEnums.h"
 #include "Plot.h"
 #include "Table.h"
 #include "AxesDialog.h"
@@ -345,7 +346,7 @@ public slots:
 		void setCopiedMarkerEnds(const QPoint& start, const QPoint& end);
 		void setCopiedTextOptions(int bkg, const QString& text, const QFont& font,
 				const QColor& color, const QColor& bkgColor);
-		void setCopiedArrowOptions(int width, Qt::PenStyle style, const QColor& color,
+		void setCopiedArrowOptions(int width, QtPenStyle style, const QColor& color,
 				bool start, bool end, int headLength, int headAngle, bool filledHead);
 		void setCopiedImageName(const QString& fn){auxMrkFileName=fn;};
 		QRect copiedMarkerRect(){return QRect(auxMrkStart, auxMrkEnd);};
@@ -381,14 +382,14 @@ public slots:
 		bool drawArrow(){return drawArrowOn;};
 		bool drawLineActive(){return drawLineOn;};
 
-		Qt::PenStyle arrowLineDefaultStyle(){return defaultArrowLineStyle;};
+		QtPenStyle arrowLineDefaultStyle(){return defaultArrowLineStyle;};
 		bool arrowHeadDefaultFill(){return defaultArrowHeadFill;};
 		int arrowDefaultWidth(){return defaultArrowLineWidth;};
 		int arrowHeadDefaultLength(){return defaultArrowHeadLength;};
 		int arrowHeadDefaultAngle(){return defaultArrowHeadAngle;};
 		QColor arrowDefaultColor(){return defaultArrowColor;};
 
-		void setArrowDefaults(int lineWidth,  const QColor& c, Qt::PenStyle style,
+		void setArrowDefaults(int lineWidth,  const QColor& c, QtPenStyle style,
 				int headLength, int headAngle, bool fillHead);
         bool arrowMarkerSelected();
 		//@}
@@ -657,9 +658,9 @@ public slots:
 		void setAutoscaleFonts(bool yes){autoScaleFonts = yes;};
 
 		static int obsoleteSymbolStyle(int type);
-		static QString penStyleName(Qt::PenStyle style);
-		static Qt::PenStyle getPenStyle(const QString& s);
-		static Qt::PenStyle getPenStyle(int style);
+		static QString penStyleName(QtPenStyle style);
+		static QtPenStyle getPenStyle(const QString& s);
+		static QtPenStyle getPenStyle(int style);
 		static Qt::BrushStyle getBrushStyle(int style);
 		static void showPlotErrorMessage(QWidget *parent, const QStringList& emptyColumns);
 		static QPrinter::PageSize minPageSize(const QPrinter& printer, const QRect& r);
@@ -760,7 +761,7 @@ signals:
 		QFont auxMrkFont, defaultMarkerFont;
 		QColor auxMrkColor, auxMrkBkgColor;
 		QPoint auxMrkStart, auxMrkEnd;
-		Qt::PenStyle auxMrkStyle;
+		QtPenStyle auxMrkStyle;
 		QString auxMrkFileName, auxMrkText;
 
 		int n_curves;
@@ -777,7 +778,7 @@ signals:
 		QColor defaultArrowColor;
 		int defaultArrowLineWidth, defaultArrowHeadLength, defaultArrowHeadAngle;
 		bool defaultArrowHeadFill;
-		Qt::PenStyle defaultArrowLineStyle;
+		QtPenStyle defaultArrowLineStyle;
 
 		//! The markers selected for move/resize operations or NULL if none are selected.
 		QPointer<SelectionMoveResizer> d_markers_selector;

@@ -45,6 +45,7 @@
 #include <QDockWidget>
 #include <QMdiArea>
 
+#include "QtEnums.h"
 #include "Folder.h"
 #include "Table.h"
 #include "ScriptingEnv.h"
@@ -984,7 +985,7 @@ public:
   QColor legendBackground, legendTextColor, defaultArrowColor;
   int defaultArrowLineWidth, defaultArrowHeadLength, defaultArrowHeadAngle;
   bool defaultArrowHeadFill;
-  Qt::PenStyle defaultArrowLineStyle;
+  QtPenStyle defaultArrowLineStyle;
   int majTicksLength, minTicksLength, defaultPlotMargin;
   int defaultCurveStyle, defaultCurveLineWidth, defaultSymbolSize;
   int undoLimit;
@@ -1014,7 +1015,7 @@ public:
   QFont auxMrkFont;
   QColor auxMrkColor, auxMrkBkgColor;
   QPoint auxMrkStart,auxMrkEnd;
-  Qt::PenStyle auxMrkStyle;
+  QtPenStyle auxMrkStyle;
   QString auxMrkFileName;
   int auxMrkBkg,auxMrkWidth;
   //@}

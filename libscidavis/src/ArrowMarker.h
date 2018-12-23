@@ -29,6 +29,7 @@
 #ifndef ARROWMARKER_H
 #define ARROWMARKER_H
 
+#include "QtEnums.h"
 #include "PlotEnrichement.h"
 
 /*!\brief Draws lines and arrows on a QwtPlot.
@@ -75,13 +76,13 @@ public:
 	int width(){return linePen().width();};
 
 	//! Sets the pen style for the arrow line
-	void setStyle(Qt::PenStyle s);
+	void setStyle(QtPenStyle s);
 	//! The pen style of the arrow line
-	Qt::PenStyle style(){return linePen().style ();};
+	QtPenStyle style(){return linePen().style ();};
 	void setCapStyle(Qt::PenCapStyle c);
-	Qt::PenCapStyle capStyle(){return linePen().capStyle();};
+	QtPenCapStyle capStyle(){return linePen().capStyle();};
 	void setJoinStyle(Qt::PenJoinStyle);
-	Qt::PenJoinStyle joinStyle(){return linePen().joinStyle();};
+  Qt::PenJoinStyle joinStyle(){return linePen().joinStyle();};
 
 	//! Specifies weather the start arrow should be drawn
 	void drawStartArrow(bool on = true){d_start_arrow = on;};

@@ -1699,7 +1699,7 @@ void Graph::setCopiedTextOptions(int bkg, const QString& text, const QFont& font
 	auxMrkBkgColor = bkgColor;
 }
 
-void Graph::setCopiedArrowOptions(int width, Qt::PenStyle style, const QColor& color,
+void Graph::setCopiedArrowOptions(int width, QtPenStyle style, const QColor& color,
 		bool start, bool end, int headLength,
 		int headAngle, bool filledHead)
 {
@@ -4279,7 +4279,7 @@ Qt::BrushStyle Graph::getBrushStyle(int style)
 	return brushStyle;
 }
 
-QString Graph::penStyleName(Qt::PenStyle style)
+QString Graph::penStyleName(QtPenStyle style)
 {
 	if (style==Qt::SolidLine)
 		return "SolidLine";
@@ -4297,7 +4297,7 @@ QString Graph::penStyleName(Qt::PenStyle style)
 		return "SolidLine";
 }
 
-Qt::PenStyle Graph::getPenStyle(int style)
+QtPenStyle Graph::getPenStyle(int style)
 {
 	Qt::PenStyle linePen;
 	switch (style)
@@ -4326,7 +4326,7 @@ Qt::PenStyle Graph::getPenStyle(int style)
 	return linePen;
 }
 
-Qt::PenStyle Graph::getPenStyle(const QString& s)
+QtPenStyle Graph::getPenStyle(const QString& s)
 {
 	Qt::PenStyle style=Qt::SolidLine;
 	if (s=="SolidLine")
@@ -4977,7 +4977,7 @@ void Graph::setTextMarkerDefaults(int f, const QFont& font,
 	defaultTextMarkerBackground = backgroundCol;
 }
 
-void Graph::setArrowDefaults(int lineWidth,  const QColor& c, Qt::PenStyle style,
+void Graph::setArrowDefaults(int lineWidth,  const QColor& c, QtPenStyle style,
 		int headLength, int headAngle, bool fillHead)
 {
 	defaultArrowLineWidth = lineWidth;

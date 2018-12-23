@@ -50,6 +50,7 @@ typedef struct _traceback {
 
 #include "PythonScript.h"
 #include "PythonScripting.h"
+
 #include "ApplicationWindow.h"
 #include "ApplicationWindow.cd"
 #include "Script.h"
@@ -65,6 +66,8 @@ typedef struct _traceback {
 #include "MyWidget.h"
 #include "Graph3D.h"
 #include "MultiLayer.h"
+
+#include "QtEnums.cd"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -115,10 +118,26 @@ namespace classdesc_access
 //  template <>
 //  struct access_python<QPoint>:
 //    public classdesc::NullDescriptor<classdesc::python_t> {};
+
+  template <class E, class Q>
+  struct access_python<QtEnumWrapper<E,Q>>
+  {
+    template <class C> 
+    void type(classdesc::python_t& targ, const classdesc::string& desc)
+    {
+      targ.addEnum<C>(desc,&QtEnumWrapper<E,Q>::value);
+    }
+  };
 }
 
 namespace classdesc
 {
+  template <class E, class Q>
+  struct tn<QtEnumWrapper<E,Q>>
+  {
+    static string name() {return typeName<E>();}
+  };
+  
   // Use Qt's MOC system for reflection on Qt objects
   template <class T>
   typename enable_if<is_base_of<QObject,T>, string>::T

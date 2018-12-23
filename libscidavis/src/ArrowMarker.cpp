@@ -213,7 +213,7 @@ pen.setWidth (w);
 setLinePen(pen);
 }
 
-void ArrowMarker::setStyle(Qt::PenStyle style)
+void ArrowMarker::setStyle(QtPenStyle style)
 {
 if (linePen().style() == style)
 	return;
