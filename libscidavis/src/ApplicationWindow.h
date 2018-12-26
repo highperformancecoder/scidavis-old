@@ -164,6 +164,49 @@ public:
   bool batchMode() const {return m_batch;} ///< running a python batch script
 
 public slots:
+  //! Changes the current folder when the user changes the current item in the QListView "folders"
+  void folderItemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous);
+  //!  checks whether the new folder name is valid and modifies the name
+  void renameFolder(QTreeWidgetItem *it, int col, const QString&);
+
+  //!  connected to the SIGNAL contextMenuRequested from the list views
+  void showFolderPopupMenu(const QPoint &p, bool fromFolders=true);
+
+  //!  initializes the list of items dragged by the user
+  void dragFolderItems(QList<QTreeWidgetItem *> items){draggedItems = items;};
+
+  //!  Drop the objects in the list draggedItems to the folder of the destination item
+  void dropFolderItems(QTreeWidgetItem *dest);
+
+  //!  starts renaming the selected folder by creating a built-in text editor
+  void startRenameFolder();
+
+//  //!  starts renaming the selected folder by creating a built-in text editor
+  void startRenameFolder(QTreeWidgetItem *item, int);
+
+  //! Adds a new folder to the project
+  void addFolder();
+  //! Deletes the currently selected items from the list view #lv.
+  void deleteSelectedItems();
+
+  Note& newNote(const QString& caption = QString());
+  void saveNoteAs();
+  void showLayerDialog();
+  void showPlotWizard();
+  void showPreferencesDialog();
+  void showRowStatistics();
+  void showColStatistics();
+  void showIntegrationDialog();
+  void showInterpolationDialog();
+  void lowPassFilterDialog();
+  void highPassFilterDialog();
+  void bandPassFilterDialog();
+  void bandBlockFilterDialog();
+  void showFFTDialog();
+  void showSmoothSavGolDialog();
+  void showSmoothFFTDialog();
+  void showSmoothAverageDialog();
+
   /// args are any argument to be passed to fn if a script
   ApplicationWindow* open(const QString& fn, const QStringList& args=QStringList());
   ApplicationWindow* importOPJ(const QString& filename);
@@ -662,7 +705,7 @@ public slots:
   //! Returns a to the current folder in the project
   Folder* currentFolder(){return current_folder;};
 
-public:
+public slots:
   void showCurveContextMenu(int curveKey)
   {auto m=showCurveContextMenuImpl(curveKey); if (m) m->exec(QCursor::pos());}
   void showCurvePlotDialog();
@@ -678,32 +721,17 @@ public:
   void showMoreWindows();
   void showMarkerPopupMenu()
   {auto m=showMarkerPopupMenuImpl(); if (m) m->exec(QCursor::pos());}
-  void showPlotWizard();
   void showFitPolynomDialog();
-  void showIntegrationDialog();
-  void showInterpolationDialog();
   void showExpGrowthDialog();
   void showExpDecayDialog();
   void showExpDecayDialog(int type);
   void showTwoExpDecayDialog();
   void showExpDecay3Dialog();
-  void showRowStatistics();
-  void showColStatistics();
   void showFitDialog();
   void showImageDialog();
   void showPlotGeometryDialog();
-  void showLayerDialog();
-  void showPreferencesDialog();
-  void showSmoothSavGolDialog();
-  void showSmoothFFTDialog();
-  void showSmoothAverageDialog();
   void showSmoothDialog(int m);
   void showFilterDialog(int filter);
-  void lowPassFilterDialog();
-  void highPassFilterDialog();
-  void bandPassFilterDialog();
-  void bandBlockFilterDialog();
-  void showFFTDialog();
   //@}
 
   void translateCurveHor();
@@ -786,23 +814,16 @@ public:
 
   //! \name Notes
   //@{
-  Note& newNote(const QString& caption = QString());
   void initNote(Note* m, const QString& caption);
-  void saveNoteAs();
   //@}
 
   //! \name Folders
   //@{
-  //! Adds a new folder to the project
-  void addFolder();
   //! Deletes the current folder
   void deleteFolder();
 
   //! Ask confirmation from user, deletes the folder f if user confirms and returns true, otherwise returns false;
   bool deleteFolder(Folder *f);
-
-  //! Deletes the currently selected items from the list view #lv.
-  void deleteSelectedItems();
 
   //! Sets all items in the folders list view to be deactivated
   void deactivateFolders();
@@ -810,22 +831,8 @@ public:
   //! Changes the current folder
   bool changeFolder(Folder *newFolder, bool force = false);
 
-  //! Changes the current folder when the user changes the current item in the QListView "folders"
-  void folderItemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous);
   //! Changes the current folder when the user double-clicks on a folder item in the QListView "lv"
   void folderItemDoubleClicked(QTreeWidgetItem *it, int column);
-
-  //!  connected to the SIGNAL contextMenuRequested from the list views
-  void showFolderPopupMenu(const QPoint &p, bool fromFolders=true);
-
-  //!  starts renaming the selected folder by creating a built-in text editor
-  void startRenameFolder();
-
-//  //!  starts renaming the selected folder by creating a built-in text editor
-  void startRenameFolder(QTreeWidgetItem *item, int);
-
-  //!  checks whether the new folder name is valid and modifies the name
-  void renameFolder(QTreeWidgetItem *it, int col, const QString&);
 
   //!  forces showing all windows in the current folder and subfolders, depending on the user's viewing policy
   void showAllFolderWindows();
@@ -869,12 +876,6 @@ public:
   //!  used by the findDialog
   void find(const QString& s, bool windowNames, bool labels, bool folderNames,
             bool caseSensitive, bool partialMatch, bool subfolders);
-
-  //!  initializes the list of items dragged by the user
-  void dragFolderItems(QList<QTreeWidgetItem *> items){draggedItems = items;};
-
-  //!  Drop the objects in the list draggedItems to the folder of the destination item
-  void dropFolderItems(QTreeWidgetItem *dest);
 
   //!  moves a folder item to another
   /**

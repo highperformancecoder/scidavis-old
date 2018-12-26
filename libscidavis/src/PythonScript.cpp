@@ -103,7 +103,8 @@ PythonScript::~PythonScript()
 void PythonScript::setContext(QObject *context)
 {
 	Script::setContext(context);
-	setQObject(Context, "self");
+        // TODO
+        //	setQObject(Context, "self");
 }
 
 bool PythonScript::compile(bool for_eval)

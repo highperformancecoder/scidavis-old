@@ -114,6 +114,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #include <QFileDialog>
 #include <QInputDialog>

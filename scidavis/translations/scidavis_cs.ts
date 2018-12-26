@@ -9078,11 +9078,11 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <name>PythonScripting</name>
     <message>
         <source>Accessing SciDAVis functions or objects from Python code won&apos;t work.Probably your version of SIP differs from the one SciDAVis was compiled against;try updating SIP or recompiling SciDAVis.</source>
-        <translation type="unfinished">Přístup k funkcím a objektům z pythonovského kódu u programu SciDAVis není možný. Pravděpodobně je nainstalována jiná verze SIP než ta, která byla použita při sestavení programu SciDAVis; Aktualizace SIP nebo nové sestavení programu SciDAVis by problém odstranilo.</translation>
+        <translation type="obsolete">Přístup k funkcím a objektům z pythonovského kódu u programu SciDAVis není možný. Pravděpodobně je nainstalována jiná verze SIP než ta, která byla použita při sestavení programu SciDAVis; Aktualizace SIP nebo nové sestavení programu SciDAVis by problém odstranilo.</translation>
     </message>
     <message>
         <source>Failed to export SciDAVis API</source>
-        <translation type="unfinished">Nepodařilo se vyvést SciDAVis-API</translation>
+        <translation type="obsolete">Nepodařilo se vyvést SciDAVis-API</translation>
     </message>
 </context>
 <context>

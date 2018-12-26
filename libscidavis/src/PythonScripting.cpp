@@ -72,52 +72,24 @@ typedef struct _traceback {
 #include <QTranslator>
 #include <QToolBar>
 
+using namespace std;
+using boost::python::object;
+using boost::python::exec;
+using boost::python::import;
+
 namespace classdesc_access
 {
-//  template <class B>
-//  struct access_python<SciDAVisObject<B>>:
-//    public classdesc::NullDescriptor<classdesc::python_t> {};
-
-//  template <class T>
-//  struct access_python<T,typename classdesc::enable_if<classdesc::is_base_of<QObject,T>, void>::T>
-//    : public classdesc::NullDescriptor<classdesc::python_t> {};
-  
-//  template <>
-//  struct access_python<QLocale>:
-//    public classdesc::NullDescriptor<classdesc::python_t> {};
-//  
-//  template <>
-//  struct access_python<QDockWidget>:
-//    public classdesc::NullDescriptor<classdesc::python_t> {};
-//
-//  template <>
-//  struct access_python<QTextEdit>:
-//    public classdesc::NullDescriptor<classdesc::python_t> {};
-//
   template <>
   struct access_python<QString>:
     public classdesc::NullDescriptor<classdesc::python_t> {};
-//  template <>
-//  struct access_python<QColor>:
-//    public classdesc::NullDescriptor<classdesc::python_t> {};
+
   template <class T>
   struct access_python<QList<T>>:
     public classdesc::NullDescriptor<classdesc::python_t> {};
-//  template <>
-//  struct access_python<QMdiArea>:
-//    public classdesc::NullDescriptor<classdesc::python_t> {};
+
   template <>
   struct access_python<QStringList>:
     public classdesc::NullDescriptor<classdesc::python_t> {};
-//  template <>
-//  struct access_python<QSize>:
-//    public classdesc::NullDescriptor<classdesc::python_t> {};
-//  template <>
-//  struct access_python<QFont>:
-//    public classdesc::NullDescriptor<classdesc::python_t> {};
-//  template <>
-//  struct access_python<QPoint>:
-//    public classdesc::NullDescriptor<classdesc::python_t> {};
 
   template <class E, class Q>
   struct access_python<QtEnumWrapper<E,Q>>
@@ -181,34 +153,50 @@ namespace classdesc
 #include <QDateTime>
 #include <QCoreApplication>
 
-// includes sip.h, which undefines Qt's "slots" macro since SIP 4.6
-//#include "sipAPIscidavis.h"
-extern "C" 
-{
+//// includes sip.h, which undefines Qt's "slots" macro since SIP 4.6
+////#include "sipAPIscidavis.h"
+//extern "C" 
+//{
 #if PY_MAJOR_VERSION < 3
-  void initsip();
-  void initQtCore();
-  void initQtGui();
-  void initscidavis();
+//  void initsip();
+//  void initQtCore();
+//  void initQtGui();
+//  void initscidavis();
 #define PYUNICODE_AsUTF8     PyString_AsString
 #define PYUNICODE_FromString PyString_FromString
 #define PYLong_AsLong        PyInt_AsLong
 #define PYCodeObject_cast    (PyCodeObject*)
 #else
-  PyMODINIT_FUNC PyInit_scidavis(void);
+//  PyMODINIT_FUNC PyInit_scidavis(void);
 #define PYUNICODE_AsUTF8     PyUnicode_AsUTF8
 #define PYUNICODE_FromString PyUnicode_FromString
 #define PYLong_AsLong        PyLong_AsLong
 #define PYCodeObject_cast
 #endif
-}
+//}
 
 const char* PythonScripting::langName = "Python";
+
+namespace
+{
+  ApplicationWindow* the_app=nullptr;
+  ApplicationWindow& app()
+  {
+    cout << "in app "<<the_app<<endl;
+    if (the_app)
+      return *the_app;
+    else
+      throw std::runtime_error("Uninitialised app reference");
+  }
+}
 
 BOOST_PYTHON_MODULE(scidavis)
 {
   classdesc::python_t p;
   classdesc::python<ApplicationWindow>(p,"");
+  //classdesc::python<ApplicationWindowRefPythonWrapper>(p,"");
+  boost::python::def("appInstance",&app,
+                     boost::python::return_value_policy<boost::python::reference_existing_object>());
 }
 
 QString PythonScripting::toString(PyObject *object, bool decref)
@@ -316,7 +304,37 @@ QString PythonScripting::errorMsg()
 PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
   : ScriptingEnv(parent, langName)
 {
-  Q_UNUSED(batch)
+  Q_UNUSED(batch);
+
+  the_app=parent;
+  
+  Py_Initialize ();
+  if (!Py_IsInitialized ())
+    return;
+  boost::python::import("sys");
+  boost::python::import("math");
+  cout << "importing scidavis"<<endl;
+  initscidavis();
+  auto scidavis=boost::python::import("scidavis");
+  //  cout << (boost::python::extract<string>(scidavis.attr("__name__"))) <<endl;
+  cout << "after scidavis imported"<<endl;
+  auto main=boost::python::import("__main__");
+  boost::python::object global(main.attr("__dict__"));
+  boost::python::exec("print('hello')");
+  try
+    {
+      boost::python::exec("import sys;print(sys.__dict__)",global,global);
+      boost::python::exec("import scidavis; print(scidavis.__dict__)",global,global);
+    }
+  catch (...)
+    {
+      PyErr_Print();
+    }
+  cout << "after print"<<endl; 
+//  d_initialized = true;
+//  return;
+
+  
   PyObject *mainmod=NULL, *scidavismod=NULL, *sysmod=NULL;
   math = NULL;
   sys = NULL;
@@ -343,19 +361,17 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
 #if PY_MAJOR_VERSION >= 3
     PyImport_AppendInittab("scidavis", &PyInit_scidavis);
 #endif
-    Py_Initialize ();
-    if (!Py_IsInitialized ())
-      return;
 
 
-#if PY_MAJOR_VERSION < 3
-#ifdef SIP_STATIC_MODULE
-    initsip();
-    initQtCore();
-    initQtGui();
-#endif
+//#if PY_MAJOR_VERSION < 3
+//#ifdef SIP_STATIC_MODULE
+//    initsip();
+//    initQtCore();
+//    initQtGui();
+//#endif
     initscidavis();
-#endif
+
+    //#endif
     mainmod = PyImport_AddModule("__main__");
     if (!mainmod)
       {
@@ -456,6 +472,7 @@ PythonScripting::~PythonScripting()
 
 bool PythonScripting::loadInitFile(const QString &path)
 {
+  return true;
 	PyRun_SimpleString("import sys\nsys.path.append('" PYTHON_UTIL_PATH "')"); 
 	QFileInfo pyFile(path+".py"), pycFile(path+".pyc");
 	bool success = false;

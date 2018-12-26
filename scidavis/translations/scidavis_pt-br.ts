@@ -11782,11 +11782,11 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     <name>PythonScripting</name>
     <message>
         <source>Failed to export SciDAVis API</source>
-        <translation>Falha ao exportar a API do SciDAVis</translation>
+        <translation type="obsolete">Falha ao exportar a API do SciDAVis</translation>
     </message>
     <message>
         <source>Accessing SciDAVis functions or objects from Python code won&apos;t work.Probably your version of SIP differs from the one SciDAVis was compiled against;try updating SIP or recompiling SciDAVis.</source>
-        <translation>O acesso aos objetos e funções do SciDAVis via código em Python não funcionará. Provavelmente sua versão do SIP é diferente da versão com a qual o SciDAVis foi compilado; tente atualizar o SIP ou recompilar o SciDAVis.</translation>
+        <translation type="obsolete">O acesso aos objetos e funções do SciDAVis via código em Python não funcionará. Provavelmente sua versão do SIP é diferente da versão com a qual o SciDAVis foi compilado; tente atualizar o SIP ou recompilar o SciDAVis.</translation>
     </message>
 </context>
 <context>
