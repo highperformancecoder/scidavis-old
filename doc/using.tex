@@ -160,6 +160,8 @@ the {\em axis} tag and define the axes you want to use. After this,
 the plot is modified but the new axes are not shown. Use the
 \htmlref{Format Axes command}{format-axes-lnk}, select the new axes
 and click on the {\em show} checkbox. You can then customize your plot in order to obtain the result presented in figure \ref{fig-two-axes-plot-1}.
+
+
 %
 %<figure id="fig-two-axes-plot-1">
 %  <title>A 2D plot with two Y and two X axis.</title>
@@ -169,29 +171,38 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%<para>In addition to the customization which has been already described, four arrows were added with the &draw-arrow-lnk;.</para>
-%
-%</sect2>
-%<!--
-%======================================================================
-%
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{tutorial/2axes-2dplot-2.png}}
+  \caption{A 2D plot with two Y and two X axis.}
+  \label{fig-two-axes-plot-1}
+\end{figure}
+
+In addition to the customization which has been already described,
+four arrows were added with the \htmlref{Draw arrow}{draw-arrow-lnk}.
+
+
 %		how to obtain a 2D plot from a function
-%
-%-->
-%<sect2 id="sec-2d-plot-from-function">
-%<title>2D plot from function.</title>
-%<indexterm>
-%  <primary>Plot</primary><secondary>Create from function</secondary>
-%</indexterm>
-%<para>There are two ways to obtain such a plot: you can plot directly a function or fill a table with the values calculated from this function before doing a plot in the classical way.</para>
-%
-%<sect3>
-%<title>Direct plot of a function.</title>
-%
-%<para>If you just want to plot a function, you can use the &new-function-plot-lnk; from the &file-menu-lnk; or with the &new-function-plot-key; or with the &new-function-plot-icon; icon from the &file-toolbar-lnk;.</para>
-%
-%<para>You can then enter the expression of your mathematical function, the X range used for the plot, and the number of points used in this X range. See the &add-function-lnk; for details.</para>
+\subsection{2D plot from function.}
+\label{sec-2d-plot-from-function}
+\index{Plot!Create from function}
+
+There are two ways to obtain such a plot: you can plot directly a
+function or fill a table with the values calculated from this function
+before doing a plot in the classical way.
+
+\subsubsection{Direct plot of a function.}
+
+If you just want to plot a function, you can use the
+\htmlref{New Function Plot}{new-function-plot-lnk} from the
+\htmlref{File Menu}{file-menu-lnk} or with the
+\htmlref{New Function Plot Key}{new-function-plot-key} or with the
+\htmlref{New Function Plot}{new-function-plot-icon} icon from
+the \htmlref{File toolbar}{file-toolbar-lnk}.
+
+You can then enter the expression of your mathematical function, the $X$
+range used for the plot, and the number of points used in this $X$
+range. See the \htmlref{Add Function}{add-function-lnk} for details.
+
 %
 %<figure id="fig-direct-function-plot-1">
 %  <title>Direct plot of a function.</title>
