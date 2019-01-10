@@ -3991,6 +3991,7 @@ void ApplicationWindow::scriptError(const QString &message, const QString &scrip
 
 void ApplicationWindow::scriptPrint(const QString &text)
 {
+  std::cout<<"in scriptPrint "<<text.toStdString()<<std::endl;
 #ifdef SCRIPTING_CONSOLE
 	if(!text.isEmpty()) console.insertPlainText(text);
 #else

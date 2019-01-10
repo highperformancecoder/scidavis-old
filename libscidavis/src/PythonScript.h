@@ -30,7 +30,7 @@
 #define PYTHON_SCRIPT_H
 
 #include "Script.h"
-
+#include <boost/python.hpp>
 class QString;
 class QObject;
 
@@ -46,13 +46,13 @@ public:
   PythonScript(PythonScripting *env, const QString &code, QObject *context=0, const QString &name="<input>");
   ~PythonScript();
 
-  void write(const QString &text) { emit print(text); }
+  void write(const char* text) { emit print(text); }
 
 public slots:
   bool compile(bool for_eval=true);
   QVariant eval();
   bool exec();
-  bool setQObject(QObject *val, const char *name);
+  //  bool setQObject(QObject *val, const char *name);
   bool setInt(int val, const char* name);
   bool setDouble(double val, const char* name);
   void setContext(QObject *context);
@@ -62,7 +62,9 @@ private:
   void beginStdoutRedirect();
   void endStdoutRedirect();
 
-  PyObject *PyCode, *modLocalDict, *modGlobalDict, *stdoutSave, *stderrSave;
+  boost::python::dict modLocalDict, modGlobalDict;
+  boost::python::object stdoutSave, stderrSave;
+  PyObject *PyCode;
   bool isFunction, hasOldGlobals;
 };
 

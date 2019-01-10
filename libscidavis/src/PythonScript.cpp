@@ -30,7 +30,8 @@
 #ifdef _POSIX_C_SOURCE
 #undef _POSIX_C_SOURCE
 #endif
-#include <Python.h>
+#include <boost/python.hpp>
+namespace py=boost::python;
 
 #include "PythonScript.h"
 #include "PythonScripting.h"
@@ -59,45 +60,53 @@ using namespace std;
 PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *context, const QString &name)
 : Script(env, code, context, name)
 {
-	PyCode = NULL;
-	PyGILState_STATE state = PyGILState_Ensure();
-	// Old: All scripts share a global namespace, and module top-level has its own nonstandard local namespace
-	modLocalDict = PyDict_New();
-	// A bit of a hack, but we need either IndexError or len() from __builtins__.
-	PyDict_SetItemString(modLocalDict, "__builtins__",
-			     PyDict_GetItemString(this->env()->globalDict(), "__builtins__"));
-	// New: Each script gets its own copy of the global namespace.
-	// it is passed as both globals and locals, so top-level assignments are global to this script.
-	modGlobalDict = PyDict_Copy(this->env()->globalDict());
-	// To read and write program-wide globals, we provide "globals"
-	// e.g. ">>> globals.remote_ctl_server = server"
-	PyObject *ret;
-	ret = PyRun_String(
-			   "import __main__\n"
-			   "globals = __main__",
-			   Py_file_input, modLocalDict, modLocalDict);
-	if (ret)
-		Py_DECREF(ret);
-	else
-		PyErr_Print();
-	ret = PyRun_String(
-			   "import __main__\n"
-			   "globals = __main__",
-			   Py_file_input, modGlobalDict, modGlobalDict);
-	if (ret)
-		Py_DECREF(ret);
-	else
-		PyErr_Print();
-	// "self" is unique to each script, so they can't all run in the __main__ namespace
-	PyGILState_Release(state);
-	setQObject(Context, "self");
+  modLocalDict.update(py::import("__main__").attr("__dict__"));
+  modGlobalDict.update(modLocalDict);
+  if (!py::exec(
+           "import __main__\n"
+           "globals = __main__",
+           modGlobalDict, modLocalDict))
+    PyErr_Print();
+  // TODO expose context as self
+  PyCode = NULL;
+//	PyGILState_STATE state = PyGILState_Ensure();
+//	// Old: All scripts share a global namespace, and module top-level has its own nonstandard local namespace
+//	modLocalDict = PyDict_New();
+//	// A bit of a hack, but we need either IndexError or len() from __builtins__.
+//	PyDict_SetItemString(modLocalDict, "__builtins__",
+//			     PyDict_GetItemString(this->env()->globalDict(), "__builtins__"));
+//	// New: Each script gets its own copy of the global namespace.
+//	// it is passed as both globals and locals, so top-level assignments are global to this script.
+//	modGlobalDict = PyDict_Copy(this->env()->globalDict());
+//	// To read and write program-wide globals, we provide "globals"
+//	// e.g. ">>> globals.remote_ctl_server = server"
+//	PyObject *ret;
+//	ret = PyRun_String(
+//			   "import __main__\n"
+//			   "globals = __main__",
+//			   Py_file_input, modLocalDict, modLocalDict);
+//	if (ret)
+//		Py_DECREF(ret);
+//	else
+//		PyErr_Print();
+//	ret = PyRun_String(
+//			   "import __main__\n"
+//			   "globals = __main__",
+//			   Py_file_input, modGlobalDict, modGlobalDict);
+//	if (ret)
+//		Py_DECREF(ret);
+//	else
+//		PyErr_Print();
+//	// "self" is unique to each script, so they can't all run in the __main__ namespace
+//	PyGILState_Release(state);
+//	setQObject(Context, "self");
 }
 
 PythonScript::~PythonScript()
 {
-	Py_DECREF(modLocalDict);
-	Py_DECREF(modGlobalDict);
-	Py_XDECREF(PyCode);
+//	Py_DECREF(modLocalDict);
+//	Py_DECREF(modGlobalDict);
+  Py_XDECREF(PyCode);
 }
 
 void PythonScript::setContext(QObject *context)
@@ -110,7 +119,7 @@ void PythonScript::setContext(QObject *context)
 bool PythonScript::compile(bool for_eval)
 {
 	hasOldGlobals = Code.contains("\nglobal ") || (0 == Code.indexOf("global "));
-	PyObject *topLevelLocal = hasOldGlobals ? modLocalDict : modGlobalDict;
+	auto topLevelLocal = hasOldGlobals ? modLocalDict.ptr() : modGlobalDict.ptr();
 
 	// Support for the convenient col() and cell() functions.
 	// This can't be done anywhere else, because we need access to the local
@@ -207,8 +216,8 @@ QVariant PythonScript::eval()
 	if (!isFunction) compiled = notCompiled;
 	if (compiled != isCompiled && !compile(true))
 		return QVariant();
-	PyObject *topLevelGlobal = hasOldGlobals ? env()->globalDict() : modGlobalDict;
-	PyObject *topLevelLocal = hasOldGlobals ? modLocalDict : modGlobalDict;
+	PyObject *topLevelGlobal = hasOldGlobals ? modDict("__main__").ptr() : modGlobalDict.ptr();
+	PyObject *topLevelLocal = hasOldGlobals ? modLocalDict.ptr() : modGlobalDict.ptr();
 	PyObject *pyret;
 	beginStdoutRedirect();
 	if (PyCallable_Check(PyCode))
@@ -286,8 +295,8 @@ bool PythonScript::exec()
 	if (isFunction) compiled = notCompiled;
 	if (compiled != Script::isCompiled && !compile(false))
 		return false;
-	PyObject *topLevelGlobal = hasOldGlobals ? env()->globalDict() : modGlobalDict;
-	PyObject *topLevelLocal = hasOldGlobals ? modLocalDict : modGlobalDict;
+	PyObject *topLevelGlobal = hasOldGlobals ? modDict("__main__").ptr() : modGlobalDict.ptr();
+	PyObject *topLevelLocal = hasOldGlobals ? modLocalDict.ptr() : modGlobalDict.ptr();
 	PyObject *pyret;
 	beginStdoutRedirect();
 	if (PyCallable_Check(PyCode))
@@ -318,12 +327,13 @@ void PythonScript::beginStdoutRedirect()
 {
   if (!batchMode)
     {
-	stdoutSave = PyDict_GetItemString(env()->sysDict(), "stdout");
-	Py_XINCREF(stdoutSave);
-	stderrSave = PyDict_GetItemString(env()->sysDict(), "stderr");
-	Py_XINCREF(stderrSave);
-	env()->setQObject(this, "stdout", env()->sysDict());
-	env()->setQObject(this, "stderr", env()->sysDict());
+      auto sys=modDict("sys");
+      stdoutSave = sys["stdout"];
+      stderrSave = sys["stderr"];
+//      
+//	Py_XINCREF(stderrSave);
+//	env()->setQObject(boost::python::object(*this), "stdout", env()->sysDict());
+//	env()->setQObject(boost::python::object(*this), "stderr", env()->sysDict());
     }
 }
 
@@ -331,31 +341,35 @@ void PythonScript::endStdoutRedirect()
 {
   if (!batchMode && env())
     {
-	PyDict_SetItemString(env()->sysDict(), "stdout", stdoutSave);
-	Py_XDECREF(stdoutSave);
-	PyDict_SetItemString(env()->sysDict(), "stderr", stderrSave);
-	Py_XDECREF(stderrSave);
+      auto sys=modDict("sys");
+      sys["stdout"]=stdoutSave;
+      sys["stderr"]=stderrSave;
+//
+//      PyDict_SetItemString(env()->sysDict(), "stdout", stdoutSave);
+//	Py_XDECREF(stdoutSave);
+//	PyDict_SetItemString(env()->sysDict(), "stderr", stderrSave);
+//	Py_XDECREF(stderrSave);
     }
 }
 
-bool PythonScript::setQObject(QObject *val, const char *name)
-{
-	if (!PyDict_Contains(modLocalDict, PYUNICODE_FromString(name)))
-		compiled = notCompiled;
-	return (env()->setQObject(val, name, modLocalDict) && env()->setQObject(val, name, modGlobalDict));
-}
+//bool PythonScript::setQObject(const boost::python::object& val, const char *name)
+//{
+//	if (!PyDict_Contains(modLocalDict, PYUNICODE_FromString(name)))
+//		compiled = notCompiled;
+//	return (env()->setQObject(val, name, modLocalDict) && env()->setQObject(val, name, modGlobalDict));
+//}
 
 bool PythonScript::setInt(int val, const char *name)
 {
-	if (!PyDict_Contains(modLocalDict, PYUNICODE_FromString(name)))
+  if (!PyDict_Contains(modLocalDict.ptr(), PYUNICODE_FromString(name)))
 		compiled = notCompiled;
-	return (env()->setInt(val, name, modLocalDict) && env()->setInt(val, name, modGlobalDict));
+  return (env()->setInt(val, name, modLocalDict.ptr()) && env()->setInt(val, name, modGlobalDict.ptr()));
 }
 
 bool PythonScript::setDouble(double val, const char *name)
 {
-	if (!PyDict_Contains(modLocalDict, PYUNICODE_FromString(name)))
+  if (!PyDict_Contains(modLocalDict.ptr(), PYUNICODE_FromString(name)))
 		compiled = notCompiled;
-	return (env()->setDouble(val, name, modLocalDict) && env()->setDouble(val, name, modGlobalDict));
+  return (env()->setDouble(val, name, modLocalDict.ptr()) && env()->setDouble(val, name, modGlobalDict.ptr()));
 }
 

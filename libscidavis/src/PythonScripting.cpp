@@ -48,8 +48,10 @@ typedef struct _traceback {
 } PyTracebackObject;
 #endif
 
+#include <python_base.h>
 #include "PythonScript.h"
 #include "PythonScripting.h"
+#include "PythonScripting.cd"
 
 #include "ApplicationWindow.h"
 #include "ApplicationWindow.cd"
@@ -80,8 +82,16 @@ using boost::python::import;
 namespace classdesc_access
 {
   template <>
-  struct access_python<QString>:
-    public classdesc::NullDescriptor<classdesc::python_t> {};
+  struct access_python<QString>
+  {
+    template <class C> 
+    void type(classdesc::python_t& targ, const classdesc::string&)
+    {
+      auto& c=targ.getClass<C>();
+      if (!c.completed)
+        c.def("__str__",&QString::toStdString);
+    }
+  };
 
   template <class T>
   struct access_python<QList<T>>:
@@ -153,50 +163,25 @@ namespace classdesc
 #include <QDateTime>
 #include <QCoreApplication>
 
-//// includes sip.h, which undefines Qt's "slots" macro since SIP 4.6
-////#include "sipAPIscidavis.h"
-//extern "C" 
-//{
 #if PY_MAJOR_VERSION < 3
-//  void initsip();
-//  void initQtCore();
-//  void initQtGui();
-//  void initscidavis();
 #define PYUNICODE_AsUTF8     PyString_AsString
 #define PYUNICODE_FromString PyString_FromString
 #define PYLong_AsLong        PyInt_AsLong
 #define PYCodeObject_cast    (PyCodeObject*)
 #else
-//  PyMODINIT_FUNC PyInit_scidavis(void);
 #define PYUNICODE_AsUTF8     PyUnicode_AsUTF8
 #define PYUNICODE_FromString PyUnicode_FromString
 #define PYLong_AsLong        PyLong_AsLong
 #define PYCodeObject_cast
 #endif
-//}
 
 const char* PythonScripting::langName = "Python";
-
-namespace
-{
-  ApplicationWindow* the_app=nullptr;
-  ApplicationWindow& app()
-  {
-    cout << "in app "<<the_app<<endl;
-    if (the_app)
-      return *the_app;
-    else
-      throw std::runtime_error("Uninitialised app reference");
-  }
-}
 
 BOOST_PYTHON_MODULE(scidavis)
 {
   classdesc::python_t p;
   classdesc::python<ApplicationWindow>(p,"");
-  //classdesc::python<ApplicationWindowRefPythonWrapper>(p,"");
-  boost::python::def("appInstance",&app,
-                     boost::python::return_value_policy<boost::python::reference_existing_object>());
+  classdesc::python<PythonScripting>(p,"");
 }
 
 QString PythonScripting::toString(PyObject *object, bool decref)
@@ -306,34 +291,11 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
 {
   Q_UNUSED(batch);
 
-  the_app=parent;
-  
   Py_Initialize ();
   if (!Py_IsInitialized ())
     return;
-  boost::python::import("sys");
-  boost::python::import("math");
-  cout << "importing scidavis"<<endl;
   initscidavis();
-  auto scidavis=boost::python::import("scidavis");
-  //  cout << (boost::python::extract<string>(scidavis.attr("__name__"))) <<endl;
-  cout << "after scidavis imported"<<endl;
-  auto main=boost::python::import("__main__");
-  boost::python::object global(main.attr("__dict__"));
-  boost::python::exec("print('hello')");
-  try
-    {
-      boost::python::exec("import sys;print(sys.__dict__)",global,global);
-      boost::python::exec("import scidavis; print(scidavis.__dict__)",global,global);
-    }
-  catch (...)
-    {
-      PyErr_Print();
-    }
-  cout << "after print"<<endl; 
-//  d_initialized = true;
-//  return;
-
+  classdesc::addPythonObject("app",*parent);
   
   PyObject *mainmod=NULL, *scidavismod=NULL, *sysmod=NULL;
   math = NULL;
@@ -363,15 +325,6 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
 #endif
 
 
-//#if PY_MAJOR_VERSION < 3
-//#ifdef SIP_STATIC_MODULE
-//    initsip();
-//    initQtCore();
-//    initQtGui();
-//#endif
-    initscidavis();
-
-    //#endif
     mainmod = PyImport_AddModule("__main__");
     if (!mainmod)
       {
@@ -394,21 +347,21 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
   if (!math)
     PyErr_Print();
 
-  scidavismod = PyImport_ImportModule("scidavis");
-  if (scidavismod)
-    {
-      PyDict_SetItemString(globals, "scidavis", scidavismod);
-      PyObject *scidavisDict = PyModule_GetDict(scidavismod);
-      if (!setQObject(d_parent, "app", scidavisDict))
-        QMessageBox::warning
-          (d_parent, tr("Failed to export SciDAVis API"),
-           tr("Accessing SciDAVis functions or objects from Python code won't work." 
-              "Probably your version of SIP differs from the one SciDAVis was compiled against;" 
-              "try updating SIP or recompiling SciDAVis."));
-      PyDict_SetItemString(scidavisDict, "mathFunctions", math);
-      Py_DECREF(scidavismod);
-    } else
-    PyErr_Print();
+//  scidavismod = PyImport_ImportModule("scidavis");
+//  if (scidavismod)
+//    {
+//      PyDict_SetItemString(globals, "scidavis", scidavismod);
+//      PyObject *scidavisDict = PyModule_GetDict(scidavismod);
+//      if (!setQObject(d_parent, "app", scidavisDict))
+//        QMessageBox::warning
+//          (d_parent, tr("Failed to export SciDAVis API"),
+//           tr("Accessing SciDAVis functions or objects from Python code won't work." 
+//              "Probably your version of SIP differs from the one SciDAVis was compiled against;" 
+//              "try updating SIP or recompiling SciDAVis."));
+//      PyDict_SetItemString(scidavisDict, "mathFunctions", math);
+//      Py_DECREF(scidavismod);
+//    } else
+//    PyErr_Print();
 
   sysmod = PyImport_ImportModule("sys");
   if (sysmod)
@@ -427,8 +380,10 @@ void PythonScripting::redirectStdIO()
   // Redirect output to the print(const QString&) signal.
   // Also see method write(const QString&) and Python documentation on
   // sys.stdout and sys.stderr.
-  setQObject(this, "stdout", sys);
-  setQObject(this, "stderr", sys);
+  classdesc::addPythonObject("sys.stdout",*this);
+  classdesc::addPythonObject("sys.stderr",*this);
+//  setQObject(this, "stdout", sys);
+//  setQObject(this, "stderr", sys);
 }
 
 bool PythonScripting::initialize()
@@ -441,8 +396,10 @@ bool PythonScripting::initialize()
       // Redirect output to the print(const QString&) signal.
       // Also see method write(const QString&) and Python documentation on
       // sys.stdout and sys.stderr.
-      setQObject(this, "stdout", sys);
-      setQObject(this, "stderr", sys);
+      classdesc::addPythonObject("sys.stdout",*this);
+      classdesc::addPythonObject("sys.stderr",*this);
+//      setQObject(this, "stdout", sys);
+//      setQObject(this, "stderr", sys);
     }
   bool initialized;
   initialized = loadInitFile(QDir::homePath()+"/scidavisrc");
@@ -528,7 +485,7 @@ bool PythonScripting::isRunning() const
 	return Py_IsInitialized();
 }
 
-bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
+bool PythonScripting::setQObject(boost::python::object val, const char *name, PyObject *dict)
 {
 //	if(!val) return false;
 //	PyObject *pyobj=NULL;
@@ -542,10 +499,12 @@ bool PythonScripting::setQObject(QObject *val, const char *name, PyObject *dict)
 //	pyobj = sipConvertFromType(val, klass, NULL);
 //	if (!pyobj) return false;
 //
+//  
 //	if (dict)
-//		PyDict_SetItemString(dict,name,pyobj);
+//		PyDict_SetItemString(dict,name,&val);
 //	else
-//		PyDict_SetItemString(globals,name,pyobj);
+//		PyDict_SetItemString(globals,name,&val);
+//        
 //	Py_DECREF(pyobj);
 //
 //	PyGILState_Release(state);
@@ -576,7 +535,7 @@ bool PythonScripting::setDouble(double val, const char *name, PyObject *dict)
 	return true;
 }
 
-const QStringList PythonScripting::mathFunctions() const
+QStringList PythonScripting::mathFunctions() const
 {
 	QStringList flist;
 	PyObject *key, *value;
@@ -592,7 +551,7 @@ const QStringList PythonScripting::mathFunctions() const
 	return flist;
 }
 
-const QString PythonScripting::mathFunctionDoc(const QString &name) const
+QString PythonScripting::mathFunctionDoc(const QString &name) const
 {
 	PyObject *mathf = PyDict_GetItemString(math,name.toLocal8Bit()); // borrowed
 	if (!mathf) return "";
@@ -602,7 +561,7 @@ const QString PythonScripting::mathFunctionDoc(const QString &name) const
 	return qdocstr;
 }
 
-const QStringList PythonScripting::fileExtensions() const
+QStringList PythonScripting::fileExtensions() const
 {
 	QStringList extensions;
 	extensions << "py" << "PY";

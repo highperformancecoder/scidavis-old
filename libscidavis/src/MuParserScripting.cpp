@@ -95,7 +95,7 @@ const MuParserScripting::mathFunction MuParserScripting::math_functions[] = {
   {0,0,NULL,NULL,NULL,0}
 };
   
-const QStringList MuParserScripting::mathFunctions() const
+QStringList MuParserScripting::mathFunctions() const
 {
   QStringList l;
   for (const mathFunction *i=math_functions; i->name; i++)
@@ -103,7 +103,7 @@ const QStringList MuParserScripting::mathFunctions() const
   return l;
 }
 
-const QString MuParserScripting::mathFunctionDoc (const QString &name) const
+QString MuParserScripting::mathFunctionDoc (const QString &name) const
 {
   for (const mathFunction *i=math_functions; i->name; i++)
     if (name==i->name)

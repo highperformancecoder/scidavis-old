@@ -31,11 +31,18 @@
 
 #include "ScriptingEnv.h"
 #include "PythonScript.h"
+#include <boost/python.hpp>
+namespace py=boost::python;
 
 class QObject;
 class QString;
 
 typedef struct _object PyObject;
+
+inline py::dict modDict(const char* mod) {
+  using namespace py;
+  return extract<dict>(import(mod).attr("__dict__"))();
+}
 
 class PythonScripting: public ScriptingEnv
 {
@@ -43,6 +50,7 @@ class PythonScripting: public ScriptingEnv
   
 public:
   static const char *langName;
+  PythonScripting() {}
   PythonScripting(ApplicationWindow *parent, bool batch=false);
   ~PythonScripting();
   static ScriptingEnv *constructor(ApplicationWindow *parent, bool batch=false) { return new PythonScripting(parent, batch); }
@@ -81,24 +89,26 @@ public:
     return new PythonScript(this, code, context, name);
   }
 
-  bool setQObject(QObject*, const char*, PyObject *dict);
-  bool setQObject(QObject *val, const char *name) { return setQObject(val,name,NULL); }
+  bool setQObject(boost::python::object, const char*, PyObject *dict);
+  bool setQObject(const boost::python::object& val, const char *name)
+  { return setQObject(val,name,NULL); }
   bool setInt(int, const char*, PyObject *dict=NULL);
   bool setDouble(double, const char*, PyObject *dict=NULL);
 
-  const QStringList mathFunctions() const;
-  const QString mathFunctionDoc (const QString &name) const;
-  const QStringList fileExtensions() const;
+  QStringList mathFunctions() const override;
+  QString mathFunctionDoc (const QString &name) const override;
+  QStringList fileExtensions() const override;
 
-  PyObject *globalDict() { return globals; }
-  PyObject *sysDict() { return sys; }
-
+//  PyObject *globalDict() { return globals; }
+//  PyObject *sysDict() { return sys; }
+  
+  
 private:
   bool loadInitFile(const QString &path);
 
-  PyObject *globals;		// PyDict of global environment
-  PyObject *math;		// PyDict of math functions
-  PyObject *sys;		// PyDict of sys module
+  PyObject *globals=nullptr;		// PyDict of global environment
+  PyObject *math=nullptr;		// PyDict of math functions
+  PyObject *sys=nullptr;		// PyDict of sys module
 };
 
 #endif
