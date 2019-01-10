@@ -57,7 +57,7 @@ public:
   bool initialize();
   void redirectStdIO() override;
 
-  void write(const QString &text) { emit print(text); }
+  void write(const char* text) { emit print(text); }
 
   //! like str(object) in Python
   /**

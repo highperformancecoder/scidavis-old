@@ -50,6 +50,7 @@ typedef struct _traceback {
 
 #include <python_base.h>
 #include "PythonScript.h"
+#include "PythonScript.cd"
 #include "PythonScripting.h"
 #include "PythonScripting.cd"
 
@@ -140,6 +141,7 @@ namespace classdesc
   DEF_TYPENAME(QStringList);
   DEF_TYPENAME(QChar);
   DEF_TYPENAME(QRectF);
+  DEF_TYPENAME(QVariant);
 
   template <class T> struct tn<QList<T>>
   {
@@ -182,6 +184,7 @@ BOOST_PYTHON_MODULE(scidavis)
   classdesc::python_t p;
   classdesc::python<ApplicationWindow>(p,"");
   classdesc::python<PythonScripting>(p,"");
+  classdesc::python<PythonScript>(p,"");
 }
 
 QString PythonScripting::toString(PyObject *object, bool decref)
@@ -382,8 +385,6 @@ void PythonScripting::redirectStdIO()
   // sys.stdout and sys.stderr.
   classdesc::addPythonObject("sys.stdout",*this);
   classdesc::addPythonObject("sys.stderr",*this);
-//  setQObject(this, "stdout", sys);
-//  setQObject(this, "stderr", sys);
 }
 
 bool PythonScripting::initialize()
@@ -391,16 +392,8 @@ bool PythonScripting::initialize()
   if (!d_initialized) return false;
   //	PyEval_AcquireLock();
 
-  if (!d_parent->batchMode())
-    {
-      // Redirect output to the print(const QString&) signal.
-      // Also see method write(const QString&) and Python documentation on
-      // sys.stdout and sys.stderr.
-      classdesc::addPythonObject("sys.stdout",*this);
-      classdesc::addPythonObject("sys.stderr",*this);
-//      setQObject(this, "stdout", sys);
-//      setQObject(this, "stderr", sys);
-    }
+  if (!d_parent->batchMode()) redirectStdIO();
+
   bool initialized;
   initialized = loadInitFile(QDir::homePath()+"/scidavisrc");
   if(!initialized) initialized = loadInitFile(QDir::homePath()+"/.scidavisrc");

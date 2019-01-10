@@ -134,6 +134,8 @@ public:
   ApplicationWindow(const QStringList& l);
   ~ApplicationWindow();
 
+  void exit() {::exit(0);}
+
   enum ShowWindowsPolicy{HideAll, ActiveFolder, SubFolders};
 
   QTranslator *appTranslator, *qtTranslator;

@@ -60,15 +60,16 @@ using namespace std;
 PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *context, const QString &name)
 : Script(env, code, context, name)
 {
-  modLocalDict.update(py::import("__main__").attr("__dict__"));
+  modLocalDict.update(modDict("__main__"));
   modGlobalDict.update(modLocalDict);
   if (!py::exec(
            "import __main__\n"
            "globals = __main__",
            modGlobalDict, modLocalDict))
     PyErr_Print();
+
   // TODO expose context as self
-  PyCode = NULL;
+  //  PyCode = NULL;
 //	PyGILState_STATE state = PyGILState_Ensure();
 //	// Old: All scripts share a global namespace, and module top-level has its own nonstandard local namespace
 //	modLocalDict = PyDict_New();
@@ -330,10 +331,8 @@ void PythonScript::beginStdoutRedirect()
       auto sys=modDict("sys");
       stdoutSave = sys["stdout"];
       stderrSave = sys["stderr"];
-//      
-//	Py_XINCREF(stderrSave);
-//	env()->setQObject(boost::python::object(*this), "stdout", env()->sysDict());
-//	env()->setQObject(boost::python::object(*this), "stderr", env()->sysDict());
+      sys["stdout"]=py::ptr(this);
+      sys["stderr"]=py::ptr(this);
     }
 }
 
@@ -344,11 +343,6 @@ void PythonScript::endStdoutRedirect()
       auto sys=modDict("sys");
       sys["stdout"]=stdoutSave;
       sys["stderr"]=stderrSave;
-//
-//      PyDict_SetItemString(env()->sysDict(), "stdout", stdoutSave);
-//	Py_XDECREF(stdoutSave);
-//	PyDict_SetItemString(env()->sysDict(), "stderr", stderrSave);
-//	Py_XDECREF(stderrSave);
     }
 }
 

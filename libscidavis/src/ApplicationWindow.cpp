@@ -13703,7 +13703,7 @@ void ApplicationWindow::cascade()
             if (auto scriptEdit=script_note.findChild<ScriptEdit*>())
               if ((script=scriptEdit->findChild<Script*>()))
                 script->batchMode=true;
-            if (!script_note.executeAll()) exit(1);
+            if (!script_note.executeAll()) ::exit(1);
             if (script)
               script->batchMode=false;
           }
